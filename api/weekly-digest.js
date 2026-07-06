@@ -84,7 +84,10 @@ async function supaFetch(path, { method = 'GET', body, headers = {} } = {}) {
     body: body ? JSON.stringify(body) : undefined,
   });
   if (!res.ok) throw new Error(`Supabase ${method} ${path} -> ${res.status} ${await res.text()}`);
-  return res.status === 204 ? null : res.json();
+  // Certaines écritures (upsert avec return=minimal) renvoient un corps vide —
+  // res.json() planterait dessus. On lit le texte et on ne parse que s'il y en a.
+  const text = await res.text();
+  return text ? JSON.parse(text) : null;
 }
 
 async function getAllUserEmails() {
@@ -155,7 +158,7 @@ export default async function handler(req, res) {
     if (upsertRows.length) {
       await supaFetch('/rest/v1/bill_state?on_conflict=bill_id', {
         method: 'POST',
-        headers: { Prefer: 'resolution=merge-duplicates' },
+        headers: { Prefer: 'resolution=merge-duplicates,return=minimal' },
         body: upsertRows,
       });
     }
