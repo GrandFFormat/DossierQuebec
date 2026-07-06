@@ -4159,6 +4159,29 @@ async function toggleFollowDepute(id){
   renderDeputes(kw);
 }
 
+// Suivi des projets de loi — même mécanique que ministres/députés (localStorage
+// pour les visiteurs anonymes, Supabase pour les comptes). Sert de fondation
+// aux alertes courriel : la liste de qui suit quoi est ce qui permet, plus tard,
+// d'envoyer un digest hebdomadaire aux bonnes personnes. Clé = l'id stable du
+// projet de loi (bills[].id), stocké comme texte côté Supabase.
+let followedBills = {};
+async function loadFollowedBills(){
+  try{
+    const res = await window.storage.get('followed-bills');
+    followedBills = res ? JSON.parse(res.value) : {};
+  }catch(e){ followedBills = {}; }
+}
+async function toggleFollowBill(billId){
+  followedBills[billId] = !followedBills[billId];
+  if(currentUser){
+    await upsertFollow('bill', String(billId), followedBills[billId]);
+  } else {
+    try{ await window.storage.set('followed-bills', JSON.stringify(followedBills)); }catch(e){}
+  }
+  renderBills();
+  renderApercuBills();
+}
+
 /* ---------------- COMPTES (Supabase) ---------------- */
 // Auth par lien magique (courriel) — voir scripts/supabase-schema.sql pour la
 // table `follows` et ses règles de sécurité (chaque compte ne voit que ses
@@ -4198,9 +4221,11 @@ async function loadFollowsFromSupabase(){
   if(error){ console.error(error); return; }
   followed = {};
   followedDeputes = {};
+  followedBills = {};
   for(const row of (data || [])){
     if(row.person_type === 'minister') followed[row.person_key] = true;
-    else followedDeputes[row.person_key] = true;
+    else if(row.person_type === 'depute') followedDeputes[row.person_key] = true;
+    else if(row.person_type === 'bill') followedBills[row.person_key] = true;
   }
 }
 
@@ -4297,6 +4322,8 @@ async function initAuth(){
     const kw = document.getElementById('searchMinistres')?.value || '';
     renderMinistres(kw);
     renderDeputes(kw);
+    renderBills();
+    renderApercuBills();
   });
 }
 
@@ -5146,6 +5173,8 @@ function billCard(b, ctx){
   const noSponsorLabel = isEn ? 'Not specified' : 'Non précisé';
   const party = sponsorParty(b.sponsor);
   const partyBadge = party ? `<span class="depute-party" style="background:${partyColors[party]}22; color:${partyColors[party]}">${party}</span>` : '';
+  const isFollowed = !!followedBills[b.id];
+  const followBtn = `<button class="follow-btn ${isFollowed?'on':''}" onclick="event.stopPropagation(); toggleFollowBill(${b.id})">${isFollowed ? t('btn.following') : t('btn.follow')}</button>`;
   return `
     <div class="bill" onclick="toggleBillSummary('${domId}', event)">
       <div class="head">
@@ -5155,9 +5184,10 @@ function billCard(b, ctx){
           <div class="last-activity">${lastActivityLabel} : <b>${lastActivityValue}</b>${note ? ` — ${note}` : ''}</div>
           <div class="meta">${sponsorLabel} : ${b.sponsor || noSponsorLabel} · ${presentedOnLabel} ${presentedOnValue}</div>
         </div>
-        <div style="display:flex; align-items:center; gap:6px; flex:none;">
+        <div style="display:flex; align-items:center; gap:6px; flex:none; flex-wrap:wrap; justify-content:flex-end;">
           ${partyBadge}
           <span class="status-pill ${statusClass(b.status)}">${statusLabel(b.status)}</span>
+          ${followBtn}
         </div>
       </div>
       <div class="stepper">
@@ -5553,6 +5583,7 @@ function sortRoadmapItems(){
   await loadIntroState();
   await loadFontZoom();
   await loadFollowedDeputes();
+  await loadFollowedBills();
   await initAuth();
   renderHemicycle();
   sortRoadmapItems();
