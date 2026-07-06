@@ -28,7 +28,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import * as cheerio from 'cheerio';
 
 const PAGE_URL = 'https://www.quebec.ca/premiere-ministre/equipe/conseil-des-ministres';
-const HTML_PATH = 'veille-assnat.html';
+const HTML_PATH = 'index.html';
 const OUT_PATH = 'data/ministers.json';
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
 const START_MARKER = '/* MINISTERS_DATA_START';

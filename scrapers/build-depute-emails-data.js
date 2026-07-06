@@ -1,11 +1,11 @@
-// Injecte data/deputes-contacts.json dans veille-assnat.html, entre les marqueurs
+// Injecte data/deputes-contacts.json dans index.html, entre les marqueurs
 // DEPUTE_EMAILS_START / DEPUTE_EMAILS_END, sous forme d'une table de correspondance
 // nom-normalisé -> courriel (utilisée par findDeputeEmail() dans la page).
 
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const IN_PATH = 'data/deputes-contacts.json';
-const HTML_PATH = 'veille-assnat.html';
+const HTML_PATH = 'index.html';
 const START_MARKER = '/* DEPUTE_EMAILS_START';
 const END_MARKER = '/* DEPUTE_EMAILS_END */';
 

@@ -1,10 +1,10 @@
-// Injecte data/deputes.json dans veille-assnat.html, entre les marqueurs
+// Injecte data/deputes.json dans index.html, entre les marqueurs
 // DEPUTES_DATA_START / DEPUTES_DATA_END (le tableau `deputesRaw`).
 
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const IN_PATH = 'data/deputes.json';
-const HTML_PATH = 'veille-assnat.html';
+const HTML_PATH = 'index.html';
 const START_MARKER = '/* DEPUTES_DATA_START';
 const END_MARKER = '/* DEPUTES_DATA_END */';
 

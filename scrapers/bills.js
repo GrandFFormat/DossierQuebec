@@ -33,7 +33,7 @@ import { parse } from 'csv-parse/sync';
 const CSV_URL = 'https://www.donneesquebec.ca/recherche/dataset/2bde70f9-15ff-455b-b3ea-c6e229b24074/resource/93c74b8c-51d1-49e6-9ab9-1f8d96dbd735/download/projets-de-loi.csv';
 const OUT_PATH = 'data/bills.json';
 
-// Ordre des 5 grandes étapes affichées dans le prototype (veille-assnat.html, `steps`).
+// Ordre des 5 grandes étapes affichées dans le prototype (index.html, `steps`).
 // `depot_commission_consultation` n'a pas d'étape dédiée dans ce modèle à 5 cases :
 // elle se produit après la présentation et avant l'adoption du principe, donc elle
 // reste rattachée à l'étape 1 tant que le principe n'est pas adopté.

@@ -1,6 +1,6 @@
 // Fusionne data/votes.json (scrapers/votes.js) avec data/bills.json pour
 // résoudre le rapprochement vote -> projet de loi, puis injecte le résultat
-// dans veille-assnat.html entre les marqueurs VOTES_DATA_START/END.
+// dans index.html entre les marqueurs VOTES_DATA_START/END.
 //
 // Rapprochement : le numéro de projet de loi seul n'est pas unique (voir
 // bills.js — un numéro comme "PL 24" ou "PL 95" est réutilisé d'une session
@@ -20,7 +20,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 
 const VOTES_PATH = 'data/votes.json';
 const BILLS_PATH = 'data/bills.json';
-const HTML_PATH = 'veille-assnat.html';
+const HTML_PATH = 'index.html';
 const START_MARKER = '/* VOTES_DATA_START */';
 const END_MARKER = '/* VOTES_DATA_END */';
 

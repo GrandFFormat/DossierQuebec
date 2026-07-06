@@ -1,4 +1,4 @@
-// Injecte data/bills.json directement dans veille-assnat.html, entre les marqueurs
+// Injecte data/bills.json directement dans index.html, entre les marqueurs
 // BILLS_DATA_START / BILLS_DATA_END. Le prototype reste un fichier HTML unique et
 // autonome — ouvrable en double-cliquant, sans serveur ni fetch() (un <script src>
 // séparé pouvait ne pas se charger selon comment le fichier était ouvert).
@@ -20,7 +20,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const IN_PATH = 'data/bills.json';
-const HTML_PATH = 'veille-assnat.html';
+const HTML_PATH = 'index.html';
 const START_MARKER = '/* BILLS_DATA_START';
 const END_MARKER = '/* BILLS_DATA_END */';
 
