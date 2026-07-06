@@ -954,7 +954,7 @@
       <div class="roadmap-status now" data-i18n="rm.status.now">Déjà là</div>
       <div class="roadmap-body">
         <h4 data-i18n="rm.18.h">Demander des explications sur un projet de loi (+ éventuelle pétition)</h4>
-        <p data-i18n="rm.18.p">Fait : dans l'onglet Projets de loi, toute personne connectée peut demander des explications sur un projet de loi actif — jamais un projet déjà sanctionné, toujours vérifié contre les vraies données (jamais de numéro inventé). Une demande par personne par projet, grâce aux comptes utilisateurs (empêche le bourrage). Le vrai décompte n'est visible que par les comptes admin désignés — jamais public pour l'instant. <b style="color:var(--ink)">Limite réelle du système officiel :</b> une pétition à l'Assemblée nationale doit être déposée par un député, qui peut refuser de la présenter — donc la suite (trouver un·e élu·e prêt·e à la parrainer, publication Facebook, dépôt de la pétition) reste un processus manuel, pas automatisé. <b style="color:var(--ink)">À surveiller de près :</b> même risque que le système de notation des ministres écarté plus haut — les chiffres sont affichés bruts, sans interprétation, jamais comme un jugement, pour rester fidèle à la règle « jamais de verdict sur de vraies personnes ».</p>
+        <p data-i18n="rm.18.p">Fait : dans l'onglet Projets de loi, toute personne connectée peut demander des explications sur un projet de loi actif — jamais un projet déjà sanctionné, toujours vérifié contre les vraies données (jamais de numéro inventé). Une demande par personne par projet, grâce aux comptes utilisateurs (empêche le bourrage). <b style="color:var(--ink)">Limite anti-troll :</b> maximum 10 demandes par compte par mois, appliquée par une règle de sécurité côté serveur (impossible à contourner depuis le navigateur) — évite qu'un seul compte inonde le système en signalant tous les projets de loi d'un coup. Le vrai décompte n'est visible que par les comptes admin désignés — jamais public pour l'instant. <b style="color:var(--ink)">Limite réelle du système officiel :</b> une pétition à l'Assemblée nationale doit être déposée par un député, qui peut refuser de la présenter — donc la suite (trouver un·e élu·e prêt·e à la parrainer, publication Facebook, dépôt de la pétition) reste un processus manuel, pas automatisé. <b style="color:var(--ink)">À surveiller de près :</b> même risque que le système de notation des ministres écarté plus haut — les chiffres sont affichés bruts, sans interprétation, jamais comme un jugement, pour rester fidèle à la règle « jamais de verdict sur de vraies personnes ».</p>
       </div>
     </div>
     <div class="roadmap-item">
@@ -1375,7 +1375,7 @@ const translations = {
     'rm.16.h':"Synced follows across devices",
     'rm.16.p':"Once accounts are in place, \u201cFollow a minister\u201d and votes will be saved to your account instead of your browser — fixing both current limits at once.",
     'rm.18.h':"Ask for an explanation on a bill (+ possible petition)",
-    'rm.18.p':"Done: in the Bills tab, any signed-in person can ask for an explanation on an active bill — never one already enacted, always verified against real data (never a made-up number). One request per person per bill, thanks to user accounts (prevents stuffing). The real count is only visible to designated admin accounts — not public for now. <b style=\"color:var(--ink)\">Real limit of the official system:</b> a petition to the National Assembly must be tabled by an MNA, who can refuse to present it — so what comes next (finding an MNA willing to sponsor it, a Facebook post, tabling the petition) stays a manual process, not automated. <b style=\"color:var(--ink)\">Watch closely:</b> same risk as the minister rating system dropped above — the numbers are shown raw, without interpretation, never as a judgment, to stay true to the ‘never a verdict on real people’ rule.",
+    'rm.18.p':"Done: in the Bills tab, any signed-in person can ask for an explanation on an active bill — never one already enacted, always verified against real data (never a made-up number). One request per person per bill, thanks to user accounts (prevents stuffing). <b style=\"color:var(--ink)\">Anti-troll limit:</b> a maximum of 10 requests per account per month, enforced by a server-side security rule (can't be bypassed from the browser) — stops one account from flooding the system by flagging every bill at once. The real count is only visible to designated admin accounts — not public for now. <b style=\"color:var(--ink)\">Real limit of the official system:</b> a petition to the National Assembly must be tabled by an MNA, who can refuse to present it — so what comes next (finding an MNA willing to sponsor it, a Facebook post, tabling the petition) stays a manual process, not automated. <b style=\"color:var(--ink)\">Watch closely:</b> same risk as the minister rating system dropped above — the numbers are shown raw, without interpretation, never as a judgment, to stay true to the ‘never a verdict on real people’ rule.",
     'rm.17.h':"English version of the site",
     'rm.17.p':"Done: the \u201cEnglish\u201d button (top of the site) translates the whole interface, plus the detailed content — bills, ministers, votes, glossary, petitions, roadmap. The official titles for Bills 1, 7, and 13 come from the real English pages on assnat.qc.ca; the other titles and summaries are my own translation, not yet checked word-for-word against the official site.",
   }
@@ -4301,22 +4301,49 @@ async function initAuth(){
 // numéro entré est toujours vérifié contre les vraies données `bills` avant
 // d'accepter la demande — jamais de projet de loi deviné ou inventé.
 
-function renderFlagBox(){
+const FLAG_MONTHLY_LIMIT = 10; // même limite appliquée côté serveur (RLS) — voir scripts/supabase-schema-flags.sql
+
+async function checkMonthlyFlagCount(){
+  if(!currentUser) return 0;
+  const thirtyDaysAgo = new Date(Date.now() - 30*24*60*60*1000).toISOString();
+  const { count, error } = await supabaseClient.from('bill_flags')
+    .select('id', { count: 'exact', head: true })
+    .eq('user_id', currentUser.id)
+    .gte('created_at', thirtyDaysAgo);
+  if(error){ console.error('checkMonthlyFlagCount failed:', error); return 0; }
+  return count ?? 0;
+}
+
+async function renderFlagBox(){
   const box = document.getElementById('flagBox');
   if(!box) return;
   const isEn = currentLang === 'en';
   if(!currentUser){
     box.innerHTML = `
       <div class="account-note">${isEn
-        ? "Sign in (Account tab) to ask a bill's sponsor for an explanation. At 1,000 requests for the same bill, a public post goes up — hoping an MNA agrees to open a petition."
-        : "Connecte-toi (onglet Compte) pour demander des explications sur un projet de loi. À 1000 demandes pour un même projet, une publication publique sera faite — dans l'espoir qu'un·e élu·e accepte d'ouvrir une pétition."}</div>
+        ? `Sign in (Account tab) to ask a bill's sponsor for an explanation (up to ${FLAG_MONTHLY_LIMIT} requests per month, to prevent abuse). At 1,000 requests for the same bill, a public post goes up — hoping an MNA agrees to open a petition.`
+        : `Connecte-toi (onglet Compte) pour demander des explications sur un projet de loi (jusqu'à ${FLAG_MONTHLY_LIMIT} demandes par mois, pour éviter les abus). À 1000 demandes pour un même projet, une publication publique sera faite — dans l'espoir qu'un·e élu·e accepte d'ouvrir une pétition.`}</div>
     `;
     return;
   }
+
+  // Vérifié côté navigateur pour un message clair — la vraie limite est
+  // appliquée par une règle de sécurité côté serveur, impossible à contourner.
+  const usedThisMonth = await checkMonthlyFlagCount();
+  if(usedThisMonth >= FLAG_MONTHLY_LIMIT){
+    box.innerHTML = `
+      <div class="account-note">${isEn
+        ? `You've reached your limit of ${FLAG_MONTHLY_LIMIT} requests this month. Come back later to ask about another bill.`
+        : `Tu as atteint ta limite de ${FLAG_MONTHLY_LIMIT} demandes ce mois-ci. Reviens plus tard pour demander des explications sur un autre projet de loi.`}</div>
+    `;
+    return;
+  }
+
+  const remaining = FLAG_MONTHLY_LIMIT - usedThisMonth;
   box.innerHTML = `
     <div class="account-note">${isEn
-      ? "Enter the number of an active bill (not yet enacted) to ask its sponsor for an explanation. At 1,000 requests for the same bill, a public Facebook post goes up — hoping an MNA agrees to open a petition."
-      : "Entre le numéro d'un projet de loi actif (pas encore sanctionné) pour demander des explications à son parrain. À 1000 demandes pour un même projet, une publication publique sera faite sur Facebook — dans l'espoir qu'un·e élu·e accepte d'ouvrir une pétition."}</div>
+      ? `Enter the number of an active bill (not yet enacted) to ask its sponsor for an explanation. At 1,000 requests for the same bill, a public Facebook post goes up — hoping an MNA agrees to open a petition. (${remaining} of ${FLAG_MONTHLY_LIMIT} requests left this month.)`
+      : `Entre le numéro d'un projet de loi actif (pas encore sanctionné) pour demander des explications à son parrain. À 1000 demandes pour un même projet, une publication publique sera faite sur Facebook — dans l'espoir qu'un·e élu·e accepte d'ouvrir une pétition. (${remaining} demande${remaining>1?'s':''} sur ${FLAG_MONTHLY_LIMIT} restante${remaining>1?'s':''} ce mois-ci.)`}</div>
     <div class="account-row" style="margin-top:10px;">
       <input type="text" id="flagBillNumberInput" inputmode="numeric" placeholder="${isEn ? 'Bill number (e.g. 24)' : 'Numéro du projet de loi (ex. 24)'}" oninput="checkBillNumberInput()">
       <button class="account-btn" id="flagSubmitBtn" onclick="submitBillFlag()" disabled>${isEn ? 'Ask for an explanation' : 'Demander des explications'}</button>
@@ -4366,14 +4393,19 @@ async function submitBillFlag(){
   if(error){
     if(error.code === '23505'){
       preview.textContent = isEn ? "You've already asked for an explanation on this bill." : "Tu as déjà demandé des explications sur ce projet de loi.";
-    } else {
-      console.error('bill flag insert error:', error);
-      preview.textContent = isEn ? 'Something went wrong. Try again.' : 'Une erreur est survenue. Réessaie.';
       btn.disabled = false;
+    } else {
+      // Inclut le cas où la limite mensuelle est atteinte (refusée par la
+      // règle de sécurité côté serveur) — on ne devine pas le message précis,
+      // on relaisse renderFlagBox() vérifier le vrai décompte et l'afficher.
+      console.error('bill flag insert error:', error);
+      await renderFlagBox();
+      return;
     }
   } else {
     preview.textContent = isEn ? '✓ Request recorded. Thanks!' : '✓ Demande enregistrée. Merci !';
     input.value = '';
+    setTimeout(renderFlagBox, 1200);
   }
 }
 
