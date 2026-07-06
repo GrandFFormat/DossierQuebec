@@ -49,7 +49,7 @@
     border-bottom:1px solid var(--line);
     padding-bottom:22px;
   }
-  .brand{display:flex;align-items:center;gap:14px;}
+  .brand{display:flex;align-items:center;gap:14px;cursor:pointer;}
   .brand-mark{
     width:40px;height:40px;flex:none;
     border:1.5px solid var(--ink);
@@ -568,7 +568,7 @@
 <body>
 
 <header class="top">
-  <div class="brand">
+  <div class="brand" onclick="goToTab('apercu')" role="button" tabindex="0" aria-label="Retour à l'aperçu">
     <div class="brand-mark">
       <svg viewBox="0 0 40 40"><path d="M9 12 L16 12 L19 16 L31 16 L31 30 L9 30 Z" stroke="#16213E" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" fill="none"/><rect x="13" y="22.5" width="14" height="1.8" rx="0.9" fill="#A9782E"/></svg>
     </div>
@@ -5320,15 +5320,20 @@ function toggleNominalGroup(domId, voteId, group){
 }
 
 /* ---------------- NAV ---------------- */
+function goToTab(viewName){
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.view === viewName));
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+viewName).classList.add('active');
+  closeMobileMenu();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
 document.querySelectorAll('nav.tabs button').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-    document.getElementById('view-'+btn.dataset.view).classList.add('active');
-    closeMobileMenu();
-    window.scrollTo({top:0, behavior:'smooth'});
-  });
+  btn.addEventListener('click', ()=> goToTab(btn.dataset.view));
+});
+
+document.querySelector('.brand').addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); goToTab('apercu'); }
 });
 
 function openMobileMenu(){
