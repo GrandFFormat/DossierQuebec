@@ -10,3 +10,12 @@ create table public.bill_state (
 );
 
 alter table public.bill_state enable row level security;
+
+-- La fonction planifiée (api/weekly-digest.js) utilise la clé secrète Supabase,
+-- qui agit comme le rôle `service_role` (contourne RLS). Mais « contourner RLS »
+-- ne donne pas les privilèges de base sur la table : il faut les accorder
+-- explicitement, sinon 403 « permission denied ». Elle lit/écrit bill_state, et
+-- lit follows + bill_flags pour savoir qui alerter.
+grant select, insert, update, delete on public.bill_state to service_role;
+grant select on public.follows to service_role;
+grant select on public.bill_flags to service_role;
