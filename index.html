@@ -4159,16 +4159,22 @@ let currentUser = null;
 
 async function upsertFollow(personType, personKey, isFollowed){
   if(!currentUser) return;
+  // Supabase ne "throw" pas pour une erreur de requête (RLS refusée, etc.) —
+  // elle revient dans `error` sur la réponse normale. Le try/catch seul ne
+  // suffit donc pas : il faut vérifier `error` explicitement, sinon un échec
+  // silencieux laisse croire que le suivi a été enregistré alors que non.
   try{
+    let error;
     if(isFollowed){
-      await supabaseClient.from('follows').upsert(
+      ({ error } = await supabaseClient.from('follows').upsert(
         { user_id: currentUser.id, person_type: personType, person_key: personKey },
         { onConflict: 'user_id,person_type,person_key' }
-      );
+      ));
     } else {
-      await supabaseClient.from('follows').delete()
-        .eq('user_id', currentUser.id).eq('person_type', personType).eq('person_key', personKey);
+      ({ error } = await supabaseClient.from('follows').delete()
+        .eq('user_id', currentUser.id).eq('person_type', personType).eq('person_key', personKey));
     }
+    if(error) console.error('Supabase follow sync error:', error);
   }catch(e){ console.error('Supabase follow sync failed:', e); }
 }
 
