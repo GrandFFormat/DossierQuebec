@@ -13,7 +13,7 @@ const MIME = {
 };
 
 createServer(async (req, res) => {
-  const path = req.url === '/' ? '/veille-assnat.html' : req.url.split('?')[0];
+  const path = req.url === '/' ? '/index.html' : req.url.split('?')[0];
   try {
     const filePath = join(ROOT, decodeURIComponent(path));
     const data = await readFile(filePath);

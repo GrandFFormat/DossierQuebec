@@ -4,7 +4,7 @@
 // fetch — même page déjà utilisée par depute-emails.js pour les courriels).
 // Contrairement au courriel (voir depute-emails.js), la région administrative
 // n'est PAS dans ce tableau — seulement nom, circonscription et parti. On la
-// préserve donc depuis le tableau `deputesRaw` déjà présent dans veille-assnat.html
+// préserve donc depuis le tableau `deputesRaw` déjà présent dans index.html
 // (assignation géographique stable : une circonscription ne change pas de région
 // d'une élection à l'autre, contrairement au nom du député ou à son parti).
 //
@@ -16,7 +16,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import * as cheerio from 'cheerio';
 
 const INDEX_URL = 'https://www.assnat.qc.ca/fr/deputes/index.html';
-const HTML_PATH = 'veille-assnat.html';
+const HTML_PATH = 'index.html';
 const OUT_PATH = 'data/deputes.json';
 const USER_AGENT = 'veille-assnat-scraper/0.1 (projet citoyen independant, usage non commercial)';
 const START_MARKER = '/* DEPUTES_DATA_START';
@@ -32,7 +32,7 @@ const PARTY_CODES = {
   'Indépendante': 'IND',
 };
 
-// Même logique que norm() dans veille-assnat.html — insensible aux accents/casse,
+// Même logique que norm() dans index.html — insensible aux accents/casse,
 // pour tolérer les petites incohérences de graphie entre les pages assnat.qc.ca
 // (ex. "Etienne Grandmont" sans accent sur une page, "Étienne Grandmont" ailleurs).
 function foldName(name) {

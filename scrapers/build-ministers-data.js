@@ -1,10 +1,10 @@
-// Injecte data/ministers.json dans veille-assnat.html, entre les marqueurs
+// Injecte data/ministers.json dans index.html, entre les marqueurs
 // MINISTERS_DATA_START / MINISTERS_DATA_END (le tableau `ministers`).
 
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const IN_PATH = 'data/ministers.json';
-const HTML_PATH = 'veille-assnat.html';
+const HTML_PATH = 'index.html';
 const START_MARKER = '/* MINISTERS_DATA_START';
 const END_MARKER = '/* MINISTERS_DATA_END */';
 
