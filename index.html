@@ -407,7 +407,7 @@
     background:var(--card); margin-bottom:20px;
   }
   .account-box .account-row{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
-  .account-box input[type="email"]{
+  .account-box input[type="email"], .account-box input[type="text"]{
     font-family:'Inter',sans-serif; font-size:13px; border:1px solid var(--line);
     background:var(--paper); padding:9px 12px; border-radius:var(--radius); color:var(--ink);
     flex:1 1 220px; min-width:180px;
@@ -776,6 +776,9 @@
         <div class="step-filters" id="stepFilters"></div>
       </div>
     </div>
+
+    <div class="account-box" id="flagBox"></div>
+
     <div id="billsList"></div>
   </section>
 
@@ -1406,6 +1409,7 @@ function applyLanguage(){
   updateMotionsToggleLabel();
   updateMinistresSortLabel();
   renderAccountBox();
+  renderFlagBox();
   renderComparateurSelects();
   renderComparateurTable();
   renderBills();
@@ -4267,6 +4271,7 @@ async function initAuth(){
     console.error('initAuth failed:', e);
   }finally{
     renderAccountBox();
+    renderFlagBox();
   }
 
   supabaseClient.auth.onAuthStateChange(async (event, newSession) => {
@@ -4277,11 +4282,94 @@ async function initAuth(){
       console.error('onAuthStateChange failed:', e);
     }finally{
       renderAccountBox();
+      renderFlagBox();
     }
     const kw = document.getElementById('searchMinistres')?.value || '';
     renderMinistres(kw);
     renderDeputes(kw);
   });
+}
+
+/* ---------------- DEMANDES D'EXPLICATIONS (bill_flags) ---------------- */
+// Voir scripts/supabase-schema-flags.sql. Contrainte unique côté base de
+// données : un compte ne peut demander qu'une fois par projet de loi. Le
+// numéro entré est toujours vérifié contre les vraies données `bills` avant
+// d'accepter la demande — jamais de projet de loi deviné ou inventé.
+
+function renderFlagBox(){
+  const box = document.getElementById('flagBox');
+  if(!box) return;
+  const isEn = currentLang === 'en';
+  if(!currentUser){
+    box.innerHTML = `
+      <div class="account-note">${isEn
+        ? "Sign in (Account tab) to ask a bill's sponsor for an explanation. At 1,000 requests for the same bill, a public post goes up — hoping an MNA agrees to open a petition."
+        : "Connecte-toi (onglet Compte) pour demander des explications sur un projet de loi. À 1000 demandes pour un même projet, une publication publique sera faite — dans l'espoir qu'un·e élu·e accepte d'ouvrir une pétition."}</div>
+    `;
+    return;
+  }
+  box.innerHTML = `
+    <div class="account-note">${isEn
+      ? "Enter the number of an active bill (not yet enacted) to ask its sponsor for an explanation. At 1,000 requests for the same bill, a public Facebook post goes up — hoping an MNA agrees to open a petition."
+      : "Entre le numéro d'un projet de loi actif (pas encore sanctionné) pour demander des explications à son parrain. À 1000 demandes pour un même projet, une publication publique sera faite sur Facebook — dans l'espoir qu'un·e élu·e accepte d'ouvrir une pétition."}</div>
+    <div class="account-row" style="margin-top:10px;">
+      <input type="text" id="flagBillNumberInput" inputmode="numeric" placeholder="${isEn ? 'Bill number (e.g. 24)' : 'Numéro du projet de loi (ex. 24)'}" oninput="checkBillNumberInput()">
+      <button class="account-btn" id="flagSubmitBtn" onclick="submitBillFlag()" disabled>${isEn ? 'Ask for an explanation' : 'Demander des explications'}</button>
+    </div>
+    <div class="account-note" id="flagPreview"></div>
+  `;
+}
+
+function checkBillNumberInput(){
+  const input = document.getElementById('flagBillNumberInput');
+  const preview = document.getElementById('flagPreview');
+  const btn = document.getElementById('flagSubmitBtn');
+  if(!input || !preview || !btn) return;
+  const isEn = currentLang === 'en';
+  const num = parseInt(input.value, 10);
+  if(!input.value.trim() || Number.isNaN(num)){
+    preview.textContent = '';
+    btn.disabled = true;
+    delete btn.dataset.billId;
+    return;
+  }
+  const candidates = bills.filter(b => b.num === num && b.status !== 'sanctionne');
+  if(candidates.length === 1){
+    const b = candidates[0];
+    preview.textContent = (isEn ? 'Bill found: ' : 'Projet de loi trouvé : ') + (isEn ? (b.titleEn || b.title) : b.title);
+    btn.disabled = false;
+    btn.dataset.billId = b.id;
+  } else {
+    preview.textContent = isEn
+      ? 'No active (not yet enacted) bill found with this number.'
+      : 'Aucun projet de loi actif (pas encore sanctionné) trouvé avec ce numéro.';
+    btn.disabled = true;
+    delete btn.dataset.billId;
+  }
+}
+
+async function submitBillFlag(){
+  const btn = document.getElementById('flagSubmitBtn');
+  const preview = document.getElementById('flagPreview');
+  const input = document.getElementById('flagBillNumberInput');
+  if(!btn || !preview || !input || !currentUser) return;
+  const isEn = currentLang === 'en';
+  const billId = Number(btn.dataset.billId);
+  if(!billId) return;
+  btn.disabled = true;
+  const { error } = await supabaseClient.from('bill_flags').insert({ user_id: currentUser.id, bill_id: billId });
+  if(error){
+    if(error.code === '23505'){
+      preview.textContent = isEn ? "You've already asked for an explanation on this bill." : "Tu as déjà demandé des explications sur ce projet de loi.";
+    } else {
+      console.error('bill flag insert error:', error);
+      preview.textContent = isEn ? 'Something went wrong. Try again.' : 'Une erreur est survenue. Réessaie.';
+      btn.disabled = false;
+    }
+  } else {
+    preview.textContent = isEn ? '✓ Request recorded. Thanks!' : '✓ Demande enregistrée. Merci !';
+    input.value = '';
+  }
 }
 
 /* ---------------- RENDER ---------------- */
@@ -5393,6 +5481,7 @@ function sortRoadmapItems(){
   updateMotionsToggleLabel();
   updateMinistresSortLabel();
   renderAccountBox();
+  renderFlagBox();
   renderComparateurSelects();
   renderComparateurTable();
   renderBills();
