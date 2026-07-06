@@ -18,6 +18,14 @@
 //   PUBLIC_SITE_URL              ex. https://dossierquebec.com (pour les liens du courriel)
 
 import { parse } from 'csv-parse/sync';
+import crypto from 'node:crypto';
+
+// Jeton signé pour le lien « Se désabonner » — voir api/unsubscribe.js, qui le
+// vérifie avec le même secret. Impossible à forger sans CRON_SECRET.
+function unsubscribeToken(userId) {
+  const sig = crypto.createHmac('sha256', process.env.CRON_SECRET).update(userId).digest('hex');
+  return `${userId}.${sig}`;
+}
 
 const CSV_URL = 'https://www.donneesquebec.ca/recherche/dataset/2bde70f9-15ff-455b-b3ea-c6e229b24074/resource/93c74b8c-51d1-49e6-9ab9-1f8d96dbd735/download/projets-de-loi.csv';
 
@@ -112,7 +120,7 @@ async function sendEmail(to, subject, html) {
   return res.json();
 }
 
-function digestHtml(changes, siteUrl) {
+function digestHtml(changes, siteUrl, unsubUrl) {
   const rows = changes.map((c) =>
     `<li style="margin-bottom:10px;"><b>Projet de loi n° ${c.num}</b> — ${c.title}<br>` +
     `<span style="color:#5C6270;">Nouvelle étape : ${STEP_LABEL[c.step] || c.step}</span></li>`
@@ -124,6 +132,7 @@ function digestHtml(changes, siteUrl) {
       <ul style="padding-left:18px;">${rows}</ul>
       <p style="font-size:13px; color:#5C6270;">Vous recevez ce courriel parce que vous suivez ces projets de loi sur DossierQuébec.
       Gérez vos suivis sur <a href="${siteUrl}" style="color:#A9782E;">${siteUrl}</a>.</p>
+      <p style="font-size:12px; color:#8891A8;"><a href="${unsubUrl}" style="color:#8891A8;">Se désabonner de ces courriels</a></p>
     </div>`;
 }
 
@@ -186,18 +195,23 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true, changed: changed.size, emailsSent: 0 });
     }
 
-    // 6. Courriels des utilisateurs.
+    // 6. Retirer les personnes désabonnées (voir api/unsubscribe.js).
+    const optedOut = new Set((await supaFetch('/rest/v1/email_optout?select=user_id')).map((r) => r.user_id));
+
+    // 7. Courriels des utilisateurs.
     const emailById = await getAllUserEmails();
     const siteUrl = process.env.PUBLIC_SITE_URL || 'https://dossierquebec.com';
 
-    // 7. Un courriel par personne.
+    // 8. Un courriel par personne (sauf désabonnées), avec lien de désabonnement.
     let sent = 0;
     for (const [uid, billIdSet] of userBills) {
+      if (optedOut.has(uid)) continue;
       const email = emailById.get(uid);
       if (!email) continue;
       const list = [...billIdSet].map((id) => changed.get(id)).filter(Boolean);
       if (list.length === 0) continue;
-      await sendEmail(email, 'DossierQuébec — résumé de la semaine', digestHtml(list, siteUrl));
+      const unsubUrl = `${siteUrl}/api/unsubscribe?token=${encodeURIComponent(unsubscribeToken(uid))}`;
+      await sendEmail(email, 'DossierQuébec — résumé de la semaine', digestHtml(list, siteUrl, unsubUrl));
       sent++;
     }
 
