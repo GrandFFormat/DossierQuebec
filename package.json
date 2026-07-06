@@ -1,0 +1,30 @@
+{
+  "name": "veille-assnat",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Scrapers pour la veille citoyenne de l'Assemblée nationale du Québec",
+  "type": "module",
+  "scripts": {
+    "scrape:bills": "node scrapers/bills.js",
+    "scrape:bill-details": "node scrapers/bill-details.js",
+    "scrape:bill-summaries": "node --env-file=api.env scrapers/bill-summaries.js",
+    "build:frontend": "node scrapers/build-frontend-data.js",
+    "scrape:depute-emails": "node scrapers/depute-emails.js",
+    "build:depute-emails": "node scrapers/build-depute-emails-data.js",
+    "scrape:deputes": "node scrapers/deputes.js",
+    "build:deputes": "node scrapers/build-deputes-data.js",
+    "scrape:votes": "node scrapers/votes.js",
+    "build:votes": "node scrapers/build-votes-data.js",
+    "scrape:ministers": "node scrapers/ministers.js",
+    "build:ministers": "node scrapers/build-ministers-data.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.68.0",
+    "cheerio": "^1.0.0",
+    "csv-parse": "^5.6.0",
+    "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "playwright": "^1.61.1"
+  }
+}
