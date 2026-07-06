@@ -1414,8 +1414,11 @@ function applyLanguage(){
   renderApercuPetitions();
   renderNews();
   document.querySelectorAll('.snooze-pill').forEach(pill=>{
+    // La pastille de l'intro compacte (#introCompact) n'a pas de <span> imbriqué
+    // comme les autres — sans ce repli, ça plantait ici et bloquait tout le
+    // reste du chargement de la page (y compris l'authentification).
     const isCollapsed = pill.classList.contains('snoozed');
-    const labelSpan = pill.querySelector('span');
+    const labelSpan = pill.querySelector('span') || pill;
     labelSpan.textContent = isCollapsed ? (currentLang==='en' ? '😴 Show' : '😴 Afficher') : (currentLang==='en' ? '😴 Collapse' : '😴 Réduire');
   });
 }
