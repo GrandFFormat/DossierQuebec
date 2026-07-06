@@ -401,6 +401,25 @@
     background:var(--paper-2); font-size:12.5px; color:var(--slate); line-height:1.55; margin-top:14px;
   }
   .info-box b{color:var(--ink);}
+  .account-box{
+    border:1px solid var(--line); border-radius:var(--radius); padding:18px 20px;
+    background:var(--card); margin-bottom:20px;
+  }
+  .account-box .account-row{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+  .account-box input[type="email"]{
+    font-family:'Inter',sans-serif; font-size:13px; border:1px solid var(--line);
+    background:var(--paper); padding:9px 12px; border-radius:var(--radius); color:var(--ink);
+    flex:1 1 220px; min-width:180px;
+  }
+  .account-box .account-btn{
+    font-family:'Inter',sans-serif; font-weight:600; font-size:12.5px;
+    background:var(--ink); color:#fff; border:none; cursor:pointer;
+    padding:9px 16px; border-radius:var(--radius); flex:none;
+  }
+  .account-box .account-btn:hover{background:var(--gold);}
+  .account-box .account-btn:disabled{background:var(--slate); cursor:default; opacity:0.7;}
+  .account-box .account-note{font-size:12px; color:var(--slate); margin-top:8px;}
+  .account-box .account-email{font-weight:600; color:var(--ink);}
 
   .issue-form{display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap;}
   .issue-form input{flex:1; min-width:220px;}
@@ -781,6 +800,8 @@
   <section class="view" id="view-compte">
     <div class="section-head"><div><h2 data-i18n="h.compte">Comptes, suivi synchronisé et abonnement — feuille de route</h2></div></div>
 
+    <div class="account-box" id="accountBox"></div>
+
     <div class="roadmap-item">
       <div class="roadmap-status now" data-i18n="rm.status.now">Déjà là</div>
       <div class="roadmap-body">
@@ -1123,6 +1144,7 @@
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
 </button>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 /* ---------------- I18N ---------------- */
 const translations = {
@@ -1382,6 +1404,7 @@ function applyLanguage(){
   updateSortToggleLabel();
   updateMotionsToggleLabel();
   updateMinistresSortLabel();
+  renderAccountBox();
   renderComparateurSelects();
   renderComparateurTable();
   renderBills();
@@ -4088,7 +4111,11 @@ async function loadFollowed(){
 }
 async function toggleFollow(name){
   followed[name] = !followed[name];
-  try{ await window.storage.set('followed-ministers', JSON.stringify(followed)); }catch(e){}
+  if(currentUser){
+    await upsertFollow('minister', name, followed[name]);
+  } else {
+    try{ await window.storage.set('followed-ministers', JSON.stringify(followed)); }catch(e){}
+  }
   // En vue combinée (voir toggleMinistresSort), un ministre peut être affiché
   // dans la même grille qu'un·e député·e — les deux fonctions de rendu doivent
   // donc rafraîchir ensemble, peu importe qui a déclenché le suivi.
@@ -4106,10 +4133,145 @@ async function loadFollowedDeputes(){
 }
 async function toggleFollowDepute(id){
   followedDeputes[id] = !followedDeputes[id];
-  try{ await window.storage.set('followed-deputes', JSON.stringify(followedDeputes)); }catch(e){}
+  if(currentUser){
+    await upsertFollow('depute', id, followedDeputes[id]);
+  } else {
+    try{ await window.storage.set('followed-deputes', JSON.stringify(followedDeputes)); }catch(e){}
+  }
   const kw = document.getElementById('searchMinistres').value;
   renderMinistres(kw);
   renderDeputes(kw);
+}
+
+/* ---------------- COMPTES (Supabase) ---------------- */
+// Auth par lien magique (courriel) — voir scripts/supabase-schema.sql pour la
+// table `follows` et ses règles de sécurité (chaque compte ne voit que ses
+// propres suivis). Tant que personne n'est connecté, le suivi reste dans
+// localStorage comme avant (comportement inchangé pour les visiteurs anonymes).
+const supabaseClient = supabase.createClient(
+  'https://wfgcqftgtmptfutrbujz.supabase.co',
+  'sb_publishable_CutVYEz29QYUV3tCDsAhSQ_RvZUQ3G6'
+);
+let currentUser = null;
+
+async function upsertFollow(personType, personKey, isFollowed){
+  if(!currentUser) return;
+  try{
+    if(isFollowed){
+      await supabaseClient.from('follows').upsert(
+        { user_id: currentUser.id, person_type: personType, person_key: personKey },
+        { onConflict: 'user_id,person_type,person_key' }
+      );
+    } else {
+      await supabaseClient.from('follows').delete()
+        .eq('user_id', currentUser.id).eq('person_type', personType).eq('person_key', personKey);
+    }
+  }catch(e){ console.error('Supabase follow sync failed:', e); }
+}
+
+async function loadFollowsFromSupabase(){
+  if(!currentUser) return;
+  const { data, error } = await supabaseClient.from('follows')
+    .select('person_type, person_key').eq('user_id', currentUser.id);
+  if(error){ console.error(error); return; }
+  followed = {};
+  followedDeputes = {};
+  for(const row of (data || [])){
+    if(row.person_type === 'minister') followed[row.person_key] = true;
+    else followedDeputes[row.person_key] = true;
+  }
+}
+
+async function signInWithMagicLink(email){
+  const { error } = await supabaseClient.auth.signInWithOtp({
+    email,
+    options: { emailRedirectTo: window.location.origin + window.location.pathname }
+  });
+  return error;
+}
+
+async function signOutUser(){
+  await supabaseClient.auth.signOut();
+}
+
+async function handleMagicLinkClick(){
+  const input = document.getElementById('accountEmailInput');
+  const note = document.getElementById('accountStatusNote');
+  const btn = document.getElementById('magicLinkBtn');
+  const isEn = currentLang === 'en';
+  const email = input ? input.value.trim() : '';
+  if(!email || !note || !btn) return;
+  // Désactivé tout de suite pour éviter les clics multiples (donc plusieurs
+  // courriels envoyés) pendant que la requête est en cours.
+  btn.disabled = true;
+  note.textContent = isEn ? 'Sending…' : 'Envoi en cours…';
+  const error = await signInWithMagicLink(email);
+  if(error){
+    btn.disabled = false;
+    if(error.code === 'over_email_send_rate_limit'){
+      note.textContent = isEn
+        ? 'A link was already sent recently — check your inbox, or wait a bit before trying again.'
+        : 'Un lien a déjà été envoyé récemment — vérifie ta boîte courriel, ou attends un peu avant de réessayer.';
+    } else {
+      note.textContent = isEn ? 'Something went wrong. Try again.' : 'Une erreur est survenue. Réessaie.';
+    }
+  } else {
+    btn.textContent = isEn ? '✓ Link sent' : '✓ Lien envoyé';
+    note.textContent = isEn ? `Check your inbox (${email}) for the sign-in link.` : `Vérifie ta boîte courriel (${email}) pour le lien de connexion.`;
+  }
+}
+
+function renderAccountBox(){
+  const box = document.getElementById('accountBox');
+  if(!box) return;
+  const isEn = currentLang === 'en';
+  if(currentUser){
+    const displayName = (currentUser.email || '').split('@')[0] || currentUser.email;
+    box.innerHTML = `
+      <div class="account-row">
+        <span>${isEn ? 'Signed in as' : 'Connecté·e comme'} <span class="account-email">${displayName}</span></span>
+        <button class="account-btn" onclick="signOutUser()">${isEn ? 'Sign out' : 'Se déconnecter'}</button>
+      </div>
+      <div class="account-note">${isEn ? 'Your followed ministers and MNAs are now synced to your account, across devices.' : 'Les ministres et député·e·s que tu suis sont maintenant synchronisés à ton compte, entre tous tes appareils.'}</div>
+    `;
+  } else {
+    box.innerHTML = `
+      <div class="account-row">
+        <input type="email" id="accountEmailInput" placeholder="${isEn ? 'Your email' : 'Ton courriel'}">
+        <button class="account-btn" id="magicLinkBtn" onclick="handleMagicLinkClick()">${isEn ? 'Send magic link' : 'Envoyer un lien de connexion'}</button>
+      </div>
+      <div class="account-note" id="accountStatusNote">${isEn ? 'Sign in to sync your followed ministers and MNAs across devices.' : 'Connecte-toi pour synchroniser les ministres et député·e·s que tu suis entre tes appareils.'}</div>
+    `;
+  }
+}
+
+async function initAuth(){
+  // `renderAccountBox()` est toujours appelé dans un `finally` — si le
+  // chargement des suivis échoue (réseau, etc.), la barre de compte doit
+  // quand même s'afficher plutôt que de rester vide.
+  try{
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    currentUser = session?.user ?? null;
+    if(currentUser) await loadFollowsFromSupabase();
+  }catch(e){
+    console.error('initAuth failed:', e);
+  }finally{
+    renderAccountBox();
+  }
+
+  supabaseClient.auth.onAuthStateChange(async (event, newSession) => {
+    try{
+      currentUser = newSession?.user ?? null;
+      if(currentUser) await loadFollowsFromSupabase();
+    }catch(e){
+      console.error('onAuthStateChange failed:', e);
+    }finally{
+      renderAccountBox();
+    }
+    const kw = document.getElementById('searchMinistres')?.value || '';
+    renderMinistres(kw);
+    renderDeputes(kw);
+  });
 }
 
 /* ---------------- RENDER ---------------- */
@@ -5206,6 +5368,7 @@ function sortRoadmapItems(){
   await loadIntroState();
   await loadFontZoom();
   await loadFollowedDeputes();
+  await initAuth();
   renderHemicycle();
   sortRoadmapItems();
   renderMinistres();
@@ -5214,6 +5377,7 @@ function sortRoadmapItems(){
   updateSortToggleLabel();
   updateMotionsToggleLabel();
   updateMinistresSortLabel();
+  renderAccountBox();
   renderComparateurSelects();
   renderComparateurTable();
   renderBills();
