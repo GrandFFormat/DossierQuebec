@@ -882,10 +882,10 @@
       </div>
     </div>
     <div class="roadmap-item">
-      <div class="roadmap-status later" data-i18n="rm.status.later">À faire</div>
+      <div class="roadmap-status now" data-i18n="rm.status.now">Déjà là</div>
       <div class="roadmap-body">
         <h4 data-i18n="rm.8.h">Alertes automatiques (courriel)</h4>
-        <p data-i18n="rm.8.p">Être averti quand un ministre suivi vote, ou qu'un projet de loi suivi change de statut. Dépend des comptes utilisateurs — logique une fois cette étape franchie, pas un chantier à part.</p>
+        <p data-i18n="rm.8.p">Fait : un digest hebdomadaire par courriel. Suivez un projet de loi (bouton « Suivre »), ou demandez-en des explications, et vous recevez un résumé quand il change d'étape — un seul courriel par semaine, jamais un par changement, pour éviter la fatigue. Envoyé par une tâche planifiée dans le nuage (Vercel), qui relit Données Québec chaque semaine et n'écrit qu'aux personnes concernées. Vous ne recevez que ce que vous suivez ; arrêtez quand vous voulez en retirant le suivi.</p>
       </div>
     </div>
     <div class="roadmap-item">
@@ -1363,7 +1363,7 @@ const translations = {
     'rm.7.h':"Detailed calendar of upcoming sittings, day by day",
     'rm.7.p':"Currently, the What's New tab only shows the general rules of the parliamentary calendar (when the Assembly generally sits), not a precise schedule of upcoming sittings and committees. Same technical wall as the vote registry: the official calendar page loads its content via JavaScript.",
     'rm.8.h':"Automatic alerts (email)",
-    'rm.8.p':"Get notified when a followed minister votes, or a followed bill changes status. Depends on user accounts — a natural next step once that's in place, not a separate project.",
+    'rm.8.p':"Done: a weekly email digest. Follow a bill (“Follow” button) or ask for an explanation on it, and you'll get a summary when it changes stage — one email a week, never one per change, to avoid fatigue. Sent by a scheduled cloud job (Vercel) that re-reads Données Québec each week and only writes to the people concerned. You only get what you follow; stop anytime by unfollowing.",
     'rm.9.h':"Search expanded to bills' full text",
     'rm.9.p':"The current keyword search looks through titles and the AI summaries generated from the full text (see the item above), but not the full text itself. A very specific word that only appears in the bill's actual text (not in the summary) won't surface anything yet. Indexing the full text for search is a separate project from the summary itself.",
     'rm.10.h':"Minister rating system (report card by issue)",
