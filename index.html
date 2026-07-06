@@ -5187,10 +5187,11 @@ function billCard(b, ctx){
   const party = sponsorParty(b.sponsor);
   const partyBadge = party ? `<span class="depute-party" style="background:${partyColors[party]}22; color:${partyColors[party]}">${party}</span>` : '';
   const isFollowed = !!followedBills[b.id];
-  // Le suivi (et les alertes courriel) n'a de sens que sur un projet de loi
-  // encore actif — un projet sanctionné ou « sur la glace » ne changera plus
-  // d'étape, donc pas de bouton « Suivre » pour ne rien promettre de faux.
-  const canFollow = b.status === 'encours';
+  // Le suivi (et les alertes courriel) est caché sur les projets sanctionnés :
+  // ils sont finaux, ne changeront plus d'étape, donc rien à suivre. Gardé sur
+  // les « sur la glace » (laissés de côté) : un projet dormant pourrait être
+  // réactivé, auquel cas la personne qui le suit voudra être avertie.
+  const canFollow = b.status !== 'sanctionne';
   const followHint = isEn ? 'Email only when it changes stage' : 'Courriel seulement s\'il change d\'étape';
   const followRow = canFollow ? `<div class="bill-follow-row">
     <span class="follow-hint">${followHint}</span>
