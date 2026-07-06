@@ -215,6 +215,8 @@
     padding:6px 10px; border-radius:20px; cursor:pointer;
   }
   .follow-btn.on{background:var(--ink); color:var(--paper-2); border-color:var(--ink);}
+  .bill-follow-row{display:flex; align-items:center; justify-content:flex-end; gap:10px; flex-wrap:wrap; margin-top:12px;}
+  .follow-hint{font-size:11px; color:var(--slate); text-align:right;}
   .vp-note{font-size:10.5px; color:var(--slate); background:var(--paper-2); border-radius:20px; padding:4px 9px; font-family:'IBM Plex Mono',monospace;}
 
   /* ---------- BILLS ---------- */
@@ -5185,7 +5187,11 @@ function billCard(b, ctx){
   const party = sponsorParty(b.sponsor);
   const partyBadge = party ? `<span class="depute-party" style="background:${partyColors[party]}22; color:${partyColors[party]}">${party}</span>` : '';
   const isFollowed = !!followedBills[b.id];
-  const followBtn = `<button class="follow-btn ${isFollowed?'on':''}" onclick="event.stopPropagation(); toggleFollowBill(${b.id})">${isFollowed ? t('btn.following') : t('btn.follow')}</button>`;
+  const followHint = isEn ? 'Email only when it changes stage' : 'Courriel seulement s\'il change d\'étape';
+  const followRow = `<div class="bill-follow-row">
+    <span class="follow-hint">${followHint}</span>
+    <button class="follow-btn ${isFollowed?'on':''}" onclick="event.stopPropagation(); toggleFollowBill(${b.id})">${isFollowed ? t('btn.following') : t('btn.follow')}</button>
+  </div>`;
   return `
     <div class="bill" onclick="toggleBillSummary('${domId}', event)">
       <div class="head">
@@ -5198,9 +5204,9 @@ function billCard(b, ctx){
         <div style="display:flex; align-items:center; gap:6px; flex:none; flex-wrap:wrap; justify-content:flex-end;">
           ${partyBadge}
           <span class="status-pill ${statusClass(b.status)}">${statusLabel(b.status)}</span>
-          ${followBtn}
         </div>
       </div>
+      ${followRow}
       <div class="stepper">
         ${steps.map((s,i)=>`<div class="step ${i<b.step-1?'done':''} ${i===b.step-1?'current':''}"></div>`).join('')}
       </div>
