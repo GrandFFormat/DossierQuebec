@@ -831,10 +831,10 @@
       </div>
     </div>
     <div class="roadmap-item">
-      <div class="roadmap-status next" data-i18n="rm.status.next">Prochaine étape</div>
+      <div class="roadmap-status now" data-i18n="rm.status.now">Déjà là</div>
       <div class="roadmap-body">
         <h4 data-i18n="rm.3.h">Comptes utilisateurs (courriel ou Google)</h4>
-        <p data-i18n="rm.3.p">Ça prend un vrai système d'authentification (p. ex. Supabase Auth ou Clerk) — pas juste un formulaire : gestion sécurisée des mots de passe, récupération de compte, etc. C'est un chantier technique standard, pas besoin de tout coder à la main, mais ça doit être hébergé en continu, contrairement à cette maquette.</p>
+        <p data-i18n="rm.3.p">Fait : connexion par lien magique (courriel) via Supabase Auth — pas de mot de passe à gérer. Le suivi des ministres/député·e·s se synchronise maintenant entre appareils pour les personnes connectées (table `follows`, protégée par des règles de sécurité — chacun·e ne voit que ses propres suivis). Les visiteur·euse·s non connecté·e·s gardent le suivi local dans leur navigateur, comme avant.</p>
       </div>
     </div>
     <div class="roadmap-item">
@@ -1330,7 +1330,7 @@ const translations = {
     'rm.2.r4':"<b style=\"color:var(--ink)\">Worth remembering:</b> the National Assembly already has its own official e-petition system, which obliges a minister to respond publicly — a channel with real weight, unlike this barometer.",
     'rm.2.link':"See the real petition system on assnat.qc.ca →",
     'rm.3.h':"User accounts (email or Google)",
-    'rm.3.p':"This needs a real authentication system (e.g. Supabase Auth or Clerk) — not just a form: secure password handling, account recovery, etc. It's a standard technical project, no need to code it all by hand, but it has to be hosted continuously, unlike this prototype.",
+    'rm.3.p':"Done: magic-link (email) sign-in via Supabase Auth — no password to manage. Followed ministers and MNAs now sync across devices for signed-in visitors (a `follows` table, protected by security rules — each person only sees their own follows). Signed-out visitors keep local, browser-only follows, as before.",
     'rm.4.h':"Voluntary donations to support the project",
     'rm.4.p':"Decision already made: no advertising on this site, a “support the project” model with a voluntary donation (Stripe). <b style=\"color:var(--ink)\">Underway:</b> a sole proprietorship registration has been submitted to the Quebec business registrar (waiting on the business number, usually 24-72 business hours after payment). Once received: opening a Stripe account, then a simple Stripe payment link (“Customers choose what to pay”, open amount) — no server needed for this step, just a button pointing to that link. No automatic recurring donation for now (needs a different setup, worth revisiting later if useful). Below the 30,000 dollars/year threshold, no GST/QST registration is required.",
     'rm.5.h':"Ministers' career history",
