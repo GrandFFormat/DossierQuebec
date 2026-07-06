@@ -10,9 +10,20 @@ create table public.bill_flags (
 
 alter table public.bill_flags enable row level security;
 
+-- Limite anti-troll : max 10 demandes par compte par période de 30 jours,
+-- appliquée ici (pas juste côté navigateur) pour qu'elle ne puisse pas être
+-- contournée. Empêche un seul compte d'inonder le système en signalant tous
+-- les projets de loi d'un coup.
 create policy "insert own flag"
   on public.bill_flags for insert
-  with check (auth.uid() = user_id);
+  with check (
+    auth.uid() = user_id
+    and (
+      select count(*) from public.bill_flags
+      where user_id = auth.uid()
+        and created_at > now() - interval '30 days'
+    ) < 10
+  );
 
 create policy "select own flag"
   on public.bill_flags for select
