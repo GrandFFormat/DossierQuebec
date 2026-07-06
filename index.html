@@ -806,6 +806,8 @@
 
     <div class="account-box" id="accountBox"></div>
 
+    <div id="adminFlagCounts"></div>
+
     <div class="roadmap-item">
       <div class="roadmap-status now" data-i18n="rm.status.now">Déjà là</div>
       <div class="roadmap-body">
@@ -1410,6 +1412,7 @@ function applyLanguage(){
   updateMinistresSortLabel();
   renderAccountBox();
   renderFlagBox();
+  renderAdminFlagCounts();
   renderComparateurSelects();
   renderComparateurTable();
   renderBills();
@@ -4272,6 +4275,7 @@ async function initAuth(){
   }finally{
     renderAccountBox();
     renderFlagBox();
+    renderAdminFlagCounts();
   }
 
   supabaseClient.auth.onAuthStateChange(async (event, newSession) => {
@@ -4283,6 +4287,7 @@ async function initAuth(){
     }finally{
       renderAccountBox();
       renderFlagBox();
+      renderAdminFlagCounts();
     }
     const kw = document.getElementById('searchMinistres')?.value || '';
     renderMinistres(kw);
@@ -4370,6 +4375,46 @@ async function submitBillFlag(){
     preview.textContent = isEn ? '✓ Request recorded. Thanks!' : '✓ Demande enregistrée. Merci !';
     input.value = '';
   }
+}
+
+// Réservé aux comptes listés dans la table `admins` (voir
+// scripts/supabase-schema-flags.sql) — les vrais chiffres de demandes par
+// projet de loi, rien d'autre que ça. Compté côté navigateur à partir des
+// lignes que la politique de sécurité autorise un·e admin à voir en entier
+// (tout le monde d'autre ne voit que ses propres demandes).
+async function checkIsAdmin(){
+  if(!currentUser) return false;
+  const { data, error } = await supabaseClient.from('admins').select('user_id').eq('user_id', currentUser.id).maybeSingle();
+  if(error){ console.error('checkIsAdmin failed:', error); return false; }
+  return !!data;
+}
+
+async function renderAdminFlagCounts(){
+  const container = document.getElementById('adminFlagCounts');
+  if(!container) return;
+  const isAdmin = await checkIsAdmin();
+  if(!isAdmin){ container.innerHTML = ''; return; }
+
+  const { data, error } = await supabaseClient.from('bill_flags').select('bill_id');
+  if(error){ console.error('renderAdminFlagCounts failed:', error); container.innerHTML = ''; return; }
+
+  const isEn = currentLang === 'en';
+  const counts = {};
+  for(const row of (data || [])) counts[row.bill_id] = (counts[row.bill_id] || 0) + 1;
+  const entries = Object.entries(counts).sort((a,b) => b[1] - a[1]);
+
+  const rowsHtml = entries.length ? entries.map(([billId, count]) => {
+    const bill = bills.find(b => b.id === Number(billId));
+    const title = bill ? (isEn ? (bill.titleEn || bill.title) : bill.title) : `#${billId}`;
+    return `<div class="account-row"><span>${title}</span><b>${count} / 1000</b></div>`;
+  }).join('') : `<div class="account-note">${isEn ? 'No requests yet.' : 'Aucune demande pour l\'instant.'}</div>`;
+
+  container.innerHTML = `
+    <div class="account-box">
+      <div class="account-note" style="margin-bottom:10px;"><b>${isEn ? 'Explanation requests (admin only)' : "Demandes d'explications (réservé aux admins)"}</b></div>
+      ${rowsHtml}
+    </div>
+  `;
 }
 
 /* ---------------- RENDER ---------------- */
@@ -5482,6 +5527,7 @@ function sortRoadmapItems(){
   updateMinistresSortLabel();
   renderAccountBox();
   renderFlagBox();
+  renderAdminFlagCounts();
   renderComparateurSelects();
   renderComparateurTable();
   renderBills();
