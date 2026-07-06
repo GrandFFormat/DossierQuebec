@@ -4292,7 +4292,7 @@ function renderAccountBox(){
         <span>${isEn ? 'Signed in as' : 'Connecté·e comme'} <span class="account-email">${displayName}</span></span>
         <button class="account-btn" onclick="signOutUser()">${isEn ? 'Sign out' : 'Se déconnecter'}</button>
       </div>
-      <div class="account-note">${isEn ? 'Your followed ministers and MNAs are now synced to your account, across devices.' : 'Les ministres et député·e·s que vous suivez sont maintenant synchronisés à votre compte, entre tous vos appareils.'}</div>
+      <div class="account-note">${isEn ? 'The ministers, MNAs, and bills you follow are now synced to your account, across devices.' : 'Les ministres, député·e·s et projets de loi que vous suivez sont maintenant synchronisés à votre compte, entre tous vos appareils.'}</div>
     `;
   } else {
     box.innerHTML = `
@@ -4300,7 +4300,7 @@ function renderAccountBox(){
         <input type="email" id="accountEmailInput" placeholder="${isEn ? 'Your email' : 'Votre courriel'}">
         <button class="account-btn" id="magicLinkBtn" onclick="handleMagicLinkClick()">${isEn ? 'Send magic link' : 'Envoyer un lien de connexion'}</button>
       </div>
-      <div class="account-note" id="accountStatusNote">${isEn ? 'Sign in to sync your followed ministers and MNAs across devices.' : 'Connectez-vous pour synchroniser les ministres et député·e·s que vous suivez entre vos appareils.'}</div>
+      <div class="account-note" id="accountStatusNote">${isEn ? 'Sign in to sync the ministers, MNAs, and bills you follow across devices.' : 'Connectez-vous pour synchroniser les ministres, député·e·s et projets de loi que vous suivez entre vos appareils.'}</div>
     `;
   }
 }
