@@ -526,6 +526,14 @@
     padding:8px 14px; cursor:pointer; flex:none;
   }
   .lang-toggle:hover{background:var(--paper-2);}
+  .fb-link{
+    display:inline-flex; align-items:center; justify-content:center; flex:none;
+    width:36px; height:36px; border-radius:50%;
+    background:var(--card); color:var(--ink); border:1px solid var(--line);
+    text-decoration:none;
+  }
+  .fb-link svg{width:18px; height:18px;}
+  .fb-link:hover{background:#1877F2; color:#fff; border-color:#1877F2;}
 
   .translation-notice{
     display:none; background:var(--gold-soft); color:#7a5a1e; border:1px solid var(--gold);
@@ -587,6 +595,9 @@
     <span id="fontPct">100%</span>
     <button id="fontPlus" aria-label="Agrandir le texte">A+</button>
   </div>
+  <a class="fb-link" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook" title="DossierQuébec sur Facebook">
+    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07Z"/></svg>
+  </a>
   <button class="lang-toggle" id="langToggle">English</button>
   <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">
     <span></span><span></span><span></span>
