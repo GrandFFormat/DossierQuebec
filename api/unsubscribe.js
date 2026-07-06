@@ -36,7 +36,10 @@ async function optOut(userId) {
       apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
       Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
       'Content-Type': 'application/json',
-      Prefer: 'resolution=merge-duplicates,return=minimal',
+      // ignore-duplicates : si la personne est déjà désabonnée, ne rien faire.
+      // Génère INSERT ... ON CONFLICT DO NOTHING, qui n'exige que le privilège
+      // INSERT (contrairement à merge-duplicates qui exigerait aussi UPDATE).
+      Prefer: 'resolution=ignore-duplicates,return=minimal',
     },
     body: JSON.stringify([{ user_id: userId }]),
   });
