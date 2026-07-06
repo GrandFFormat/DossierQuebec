@@ -5187,11 +5187,15 @@ function billCard(b, ctx){
   const party = sponsorParty(b.sponsor);
   const partyBadge = party ? `<span class="depute-party" style="background:${partyColors[party]}22; color:${partyColors[party]}">${party}</span>` : '';
   const isFollowed = !!followedBills[b.id];
+  // Le suivi (et les alertes courriel) n'a de sens que sur un projet de loi
+  // encore actif — un projet sanctionné ou « sur la glace » ne changera plus
+  // d'étape, donc pas de bouton « Suivre » pour ne rien promettre de faux.
+  const canFollow = b.status === 'encours';
   const followHint = isEn ? 'Email only when it changes stage' : 'Courriel seulement s\'il change d\'étape';
-  const followRow = `<div class="bill-follow-row">
+  const followRow = canFollow ? `<div class="bill-follow-row">
     <span class="follow-hint">${followHint}</span>
     <button class="follow-btn ${isFollowed?'on':''}" onclick="event.stopPropagation(); toggleFollowBill(${b.id})">${isFollowed ? t('btn.following') : t('btn.follow')}</button>
-  </div>`;
+  </div>` : '';
   return `
     <div class="bill" onclick="toggleBillSummary('${domId}', event)">
       <div class="head">
