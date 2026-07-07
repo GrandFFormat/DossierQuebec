@@ -618,14 +618,13 @@
     <div class="quick-nav" id="quickNav">
       <span class="quick-nav-label" data-i18n="quicknav.label">Aller à :</span>
       <a data-jump="sec-mission" data-i18n="quicknav.mission">Notre mission</a>
-      <a data-jump="sec-composition" data-i18n="quicknav.composition">Composition</a>
       <a data-jump="sec-projets-recents" data-i18n="quicknav.projets">Projets de loi</a>
       <a data-jump="sec-quoideneuf" data-i18n="quicknav.quoideneuf">Quoi de neuf</a>
       <a data-jump="sec-petitions" data-i18n="quicknav.petitions">Pétitions</a>
     </div>
 
     <div class="intro-compact" id="introCompact" onclick="toggleIntro()">
-      <span data-i18n="intro.compact.text">Site citoyen indépendant · Notre mission · Composition de l'Assemblée</span>
+      <span data-i18n="intro.compact.text">Site citoyen indépendant · Notre mission</span>
       <span class="snooze-pill" data-i18n="intro.show">😴 Afficher</span>
     </div>
 
@@ -656,18 +655,6 @@
           </div>
         </div>
         <p data-i18n="mission.p">Le site officiel de l'Assemblée nationale est la source la plus fiable qui existe, et ce site ne cherche jamais à la remplacer — seulement à la rendre plus facile à suivre pour quelqu'un qui n'a pas de temps à perdre dans des menus de procédure parlementaire.</p>
-      </div>
-
-      <div class="section-head" id="sec-composition">
-        <div>
-          <h2 data-i18n="h.composition">Composition de l'Assemblée</h2>
-          <div class="sub" data-i18n="apercu.composition.sub">125 sièges — répartition par groupe parlementaire (43e législature)</div>
-        </div>
-      </div>
-
-      <div class="hemicycle-wrap">
-        <svg id="hemicycleSvg" width="420" height="230" viewBox="0 0 420 230"></svg>
-        <div class="hemicycle-legend" id="hemicycleLegend"></div>
       </div>
     </div>
 
@@ -725,9 +712,22 @@
 
     <div class="quick-nav">
       <span class="quick-nav-label" data-i18n="quicknav.label">Aller à :</span>
+      <a data-jump="sec-composition" data-i18n="quicknav.composition">Composition</a>
       <a data-jump="ministresTitle" data-i18n="quicknav.ministres">Conseil des ministres</a>
       <a data-jump="deputesTitle" data-i18n="quicknav.deputes">Reste de l'Assemblée</a>
       <a data-jump="sec-comparateur" data-i18n="quicknav.comparateur">Comparateur</a>
+    </div>
+
+    <div class="section-head" id="sec-composition">
+      <div>
+        <h2 data-i18n="h.composition">Composition de l'Assemblée</h2>
+        <div class="sub" data-i18n="apercu.composition.sub">125 sièges — répartition par groupe parlementaire (43e législature)</div>
+      </div>
+    </div>
+
+    <div class="hemicycle-wrap">
+      <svg id="hemicycleSvg" width="420" height="230" viewBox="0 0 420 230"></svg>
+      <div class="hemicycle-legend" id="hemicycleLegend"></div>
     </div>
 
     <div class="role-group-title" id="combinedTitle" style="display:none;"></div>
@@ -1319,7 +1319,7 @@ const translations = {
     'mission.site.1':"Organizes everything by person: one profile, all their files",
     'mission.site.2':"Translates the jargon into plain language (see the Glossary)",
     'mission.site.3':"Lets you follow what affects you, with no judgment or verdict",
-    'intro.compact.text':"Independent citizen-run site · Our mission · Composition of the Assembly",
+    'intro.compact.text':"Independent citizen-run site · Our mission",
     'intro.show':"😴 Show",
     'intro.hide':"😴 Collapse",
     // Roadmap statuses
