@@ -532,12 +532,6 @@
   }
   .lang-toggle:hover{background:var(--paper-2);}
 
-  .translation-notice{
-    display:none; background:var(--gold-soft); color:#7a5a1e; border:1px solid var(--gold);
-    border-radius:var(--radius); padding:10px 16px; font-size:12.5px; margin-bottom:20px;
-  }
-  body.lang-en .translation-notice{display:block;}
-
   /* ---------- HAMBURGER (mobile) ---------- */
   .hamburger{
     display:none; flex:none; width:36px; height:36px;
@@ -609,8 +603,6 @@
 </nav>
 
 <div class="app">
-
-  <div class="translation-notice" data-i18n="notice.partial">Interface translated. Detailed content below (bill summaries, role descriptions, roadmap notes) is still French-only — see "Where this data comes from" for the translation task on the roadmap.</div>
 
   <!-- APERÇU -->
   <section class="view active" id="view-apercu">
@@ -1165,7 +1157,6 @@ const translations = {
     'nav.votes':"Votes",'nav.quoideneuf':"Quoi de neuf",'nav.compte':"Compte & à propos",'nav.trouve':"Trouvez votre député",
     'nav.lexique':"Lexique",'nav.personnes':"Qui gravite autour",'nav.petitions':"Pétitions",'nav.apropos':"D'où viennent ces données",
     'stat.ministres':"Ministres",'stat.projets':"Projets de loi",'stat.votes':"Votes enregistrés",
-    'notice.partial':'', // hidden in French
     'h.composition':"Composition de l'Assemblée",
     'h.billsrecent':"Projets de loi récemment actifs",
     'h.ministres':"Ministres et député·e·s",
@@ -1198,7 +1189,6 @@ const translations = {
     'nav.votes':"Votes",'nav.quoideneuf':"What's new",'nav.compte':"Account & about",'nav.trouve':"Find your MNA",
     'nav.lexique':"Glossary",'nav.personnes':"Who's involved",'nav.petitions':"Petitions",'nav.apropos':"Where this data comes from",
     'stat.ministres':"Ministers",'stat.projets':"Bills",'stat.votes':"Votes recorded",
-    'notice.partial':'Interface translated. Detailed content below (bill summaries, role descriptions, roadmap notes) is still French-only — see "Where this data comes from" for the translation task on the roadmap.',
     'h.composition':"Composition of the Assembly",
     'h.billsrecent':"Recently active bills",
     'h.ministres':"Ministers and MNAs",
@@ -1398,7 +1388,6 @@ function applyLanguage(){
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key = el.getAttribute('data-i18n');
     if(!i18nOriginals.has(el)) i18nOriginals.set(el, el.innerHTML);
-    if(key === 'notice.partial' && currentLang==='fr'){ el.textContent=''; return; }
     const entry = translations[currentLang] && translations[currentLang][key];
     el.innerHTML = (entry !== undefined) ? entry : i18nOriginals.get(el);
   });
