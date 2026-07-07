@@ -634,16 +634,9 @@
         <span class="snooze-pill" id="introToggle" onclick="toggleIntro()"><span data-i18n="intro.hide">😴 Réduire</span></span>
       </div>
 
-      <div class="banner">
-        <div>
-          <h2 data-i18n="h.apercu.title">Prototype — 43e législature, gouvernement Fréchette</h2>
-          <p data-i18n="apercu.banner.p">Ceci est une maquette fonctionnelle bâtie avec de vraies données publiques de l'Assemblée nationale du Québec et de Données Québec : le Conseil des ministres en poste, l'état réel d'une sélection de projets de loi et les résultats de votes nominaux tenus en Chambre. Pour devenir un site en continu, il reste à brancher un backend qui synchronise automatiquement ces sources — voir l'onglet « D'où viennent ces données ».</p>
-        </div>
-        <span class="badge" data-i18n="apercu.banner.badge">Données à jour : juin 2026</span>
-      </div>
-
       <div class="mission-box" id="sec-mission">
         <h2 data-i18n="mission.h">Notre mission — en quoi ce n'est pas juste une copie du site de l'Assemblée nationale</h2>
+        <p data-i18n="mission.intro"><b>Ceci est une maquette fonctionnelle bâtie avec de vraies données publiques de l'Assemblée nationale du Québec et de Données Québec.</b></p>
         <p data-i18n="mission.p">Le site officiel de l'Assemblée nationale est la source la plus fiable qui existe, et ce site ne cherche jamais à la remplacer — seulement à la rendre plus facile à suivre pour quelqu'un qui n'a pas de temps à perdre dans des menus de procédure parlementaire.</p>
         <div class="compare">
           <div class="compare-col">
@@ -1320,6 +1313,7 @@ const translations = {
     'quicknav.comparateur':"Comparator",
     'snooze.label':"😴 Collapse",
     'mission.h':"Our mission — why this isn't just a copy of the National Assembly's website",
+    'mission.intro':"<b>This is a working prototype built with real public data from the Assemblée nationale du Québec and Données Québec.</b>",
     'mission.p':"The National Assembly's official site is the most reliable source that exists, and this site never tries to replace it — only to make it easier to follow for someone who doesn't have time to dig through parliamentary procedure menus.",
     'mission.assnat.tag':"What assnat.qc.ca does",
     'mission.assnat.1':"Organizes everything by official document",
@@ -1395,13 +1389,18 @@ let currentLang = 'fr';
 
 function t(key){ return (translations[currentLang] && translations[currentLang][key]) || key; }
 
+// Mémorise le HTML français d'origine de chaque élément traduit, une seule fois.
+// Sans ça, un aller-retour FR→EN→FR laissait en anglais tout élément qui n'a
+// pas d'entrée française explicite (le français venait du HTML inline, écrasé
+// par l'anglais et jamais restauré). On restaure maintenant cet original.
+const i18nOriginals = new WeakMap();
 function applyLanguage(){
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key = el.getAttribute('data-i18n');
+    if(!i18nOriginals.has(el)) i18nOriginals.set(el, el.innerHTML);
     if(key === 'notice.partial' && currentLang==='fr'){ el.textContent=''; return; }
     const entry = translations[currentLang] && translations[currentLang][key];
-    if(entry !== undefined){ el.innerHTML = entry; }
-    // else: leave the element's original French markup untouched (no fr entry needed for every key)
+    el.innerHTML = (entry !== undefined) ? entry : i18nOriginals.get(el);
   });
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
     const key = el.getAttribute('data-i18n-placeholder');
