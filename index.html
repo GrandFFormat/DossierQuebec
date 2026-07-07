@@ -705,7 +705,7 @@
     </div>
     <div id="body-petitions">
     <div id="apercuPetitions"></div>
-    <div class="info-box" data-i18n="pet.info">Chaque pétition ci-dessus est reproduite telle quelle depuis la liste officielle de l'Assemblée nationale, avec un lien direct vers la page où la signer. Le nombre de signatures affiché est celui relevé au moment de la construction de cette maquette — pour le nombre exact et à jour, ou pour signer, utilise le lien « Voir et signer sur assnat.qc.ca » de chaque carte.</div>
+    <div class="info-box" data-i18n="pet.info">Chaque pétition ci-dessus est reproduite telle quelle depuis la liste officielle de l'Assemblée nationale, avec un lien direct vers la page où la signer. Le nombre de signatures affiché est celui relevé au moment de la dernière mise à jour — pour le nombre exact et à jour, ou pour signer, utilise le lien « Voir et signer sur assnat.qc.ca » de chaque carte.</div>
     </div>
   </section>
 
@@ -738,7 +738,7 @@
 
     <div class="role-group-title" id="deputesTitle" data-i18n="min.restTitle">Le reste de l'Assemblée — tous les partis, 125 sièges au total</div>
     <div class="grid" id="deputesList"></div>
-    <div class="info-box" id="deputesInfoBox" data-i18n="trouve.info">Ces 125 entrées viennent directement de la liste officielle des députés en fonction de l'Assemblée nationale. Certains sièges peuvent changer entre deux mises à jour (démission, élection partielle) — cette liste est une photo prise au moment de la construction du prototype, pas un flux automatiquement à jour.</div>
+    <div class="info-box" id="deputesInfoBox" data-i18n="trouve.info">Ces 125 entrées viennent directement de la liste officielle des députés en fonction de l'Assemblée nationale. Certains sièges peuvent changer entre deux mises à jour (démission, élection partielle) — cette liste est une photo prise au moment de la dernière mise à jour, pas un flux automatiquement à jour.</div>
     <div class="info-box"><b data-i18n="min.follow.b">À propos du bouton « Suivre »</b> — <span data-i18n="min.follow.text">vos choix sont enregistrés dans votre navigateur (stockage propre à cet artefact) et vous suivront si vous rouvrez cette page. Aucune donnée n'est partagée avec quiconque.</span></div>
 
     <div class="section-head" id="sec-comparateur">
@@ -1134,7 +1134,7 @@
 </div>
 
 <footer>
-  <span id="footerLeft">Prototype non officiel — données publiques, Assemblée nationale du Québec &amp; Données Québec.</span>
+  <span id="footerLeft">Site non officiel — données publiques, Assemblée nationale du Québec &amp; Données Québec.</span>
   <span class="footer-right-group">
     <a class="footer-gh" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook">
       <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07Z"/></svg>
@@ -1162,7 +1162,6 @@ const translations = {
     'nav.lexique':"Lexique",'nav.personnes':"Qui gravite autour",'nav.petitions':"Pétitions",'nav.apropos':"D'où viennent ces données",
     'stat.ministres':"Ministres",'stat.projets':"Projets de loi",'stat.votes':"Votes enregistrés",
     'notice.partial':'', // hidden in French
-    'h.apercu.title':"Prototype — 43e législature, gouvernement Fréchette",
     'h.composition':"Composition de l'Assemblée",
     'h.billsrecent':"Projets de loi récemment actifs",
     'h.ministres':"Ministres et député·e·s",
@@ -1186,7 +1185,7 @@ const translations = {
     'btn.follow':"+ Suivre",'btn.following':"✓ Suivi",
     'btn.viewSummary':"+ Voir le résumé",'btn.hideSummary':"− Masquer le résumé",
     'btn.viewFull':"Voir le texte complet sur assnat.qc.ca →",
-    'footer.left':"Prototype non officiel — données publiques, Assemblée nationale du Québec & Données Québec.",
+    'footer.left':"Site non officiel — données publiques, Assemblée nationale du Québec & Données Québec.",
     'footer.right':"Construit avec Claude",
     'footer.source':"Code source",
   },
@@ -1196,7 +1195,6 @@ const translations = {
     'nav.lexique':"Glossary",'nav.personnes':"Who's involved",'nav.petitions':"Petitions",'nav.apropos':"Where this data comes from",
     'stat.ministres':"Ministers",'stat.projets':"Bills",'stat.votes':"Votes recorded",
     'notice.partial':'Interface translated. Detailed content below (bill summaries, role descriptions, roadmap notes) is still French-only — see "Where this data comes from" for the translation task on the roadmap.',
-    'h.apercu.title':"Prototype — 43rd legislature, Fréchette government",
     'h.composition':"Composition of the Assembly",
     'h.billsrecent':"Recently active bills",
     'h.ministres':"Ministers and MNAs",
@@ -1226,7 +1224,7 @@ const translations = {
     'btn.follow':"+ Follow",'btn.following':"✓ Following",
     'btn.viewSummary':"+ View summary",'btn.hideSummary':"− Hide summary",
     'btn.viewFull':"View full text on assnat.qc.ca →",
-    'footer.left':"Unofficial prototype — public data, Assemblée nationale du Québec & Données Québec.",
+    'footer.left':"Unofficial site — public data, Assemblée nationale du Québec & Données Québec.",
     'footer.right':"Built with Claude",
     'footer.source':"Source code",
 
@@ -1246,7 +1244,7 @@ const translations = {
     'votes.info.text':"— the National Assembly publishes each MNA's name for every recorded vote in its official vote registry. The by-MNA breakdown above (“View names by MNA” button) comes from that official registry, not an estimate. The party shown next to each name is the one on record at the time of the vote — it may differ from an MNA's current party if they have since changed allegiance.",
     // Find your MNA
     'trouve.sub':"125 ridings — full list, real National Assembly data",
-    'trouve.info':"These 125 entries come directly from the official list of sitting MNAs at the National Assembly. Some seats may change between updates (resignation, by-election) — this list is a snapshot taken while building the prototype, not an automatically updated feed.",
+    'trouve.info':"These 125 entries come directly from the official list of sitting MNAs at the National Assembly. Some seats may change between updates (resignation, by-election) — this list is a snapshot taken at the last update, not an automatically updated feed.",
     // What's new / calendar
     'cal.status':"\u25CF Proceedings adjourned since June 12, 2026",
     'cal.title':"Sitting calendar",
@@ -1285,7 +1283,7 @@ const translations = {
     'pers.info':"These people hold official public functions and are appointed through a legally defined process — that's what makes the information above public. That doesn't mean everything about them becomes public: I stick to their official function here, as with the rest of the site.",
     // Petitions
     'pet.sub':"Real e-petitions currently open for signature — recorded June 23, 2026",
-    'pet.info':"Each petition above is reproduced as-is from the National Assembly's official list, with a direct link to the page where you can sign it. The signature count shown is the one recorded while building this prototype — for the exact, current count, or to sign, use the \u201cView and sign on assnat.qc.ca\u201d link on each card.",
+    'pet.info':"Each petition above is reproduced as-is from the National Assembly's official list, with a direct link to the page where you can sign it. The signature count shown is the one recorded at the last update — for the exact, current count, or to sign, use the \u201cView and sign on assnat.qc.ca\u201d link on each card.",
     // Where this data comes from
     'apropos.sources.h':"Public sources used here",
     'apropos.sources.p':"<b style=\"color:var(--ink)\">Bills</b> — Données Québec, the National Assembly's official dataset, updated in real time.<br><b style=\"color:var(--ink)\">Bill details</b> (sponsor, current stage, full text as PDF) — assnat.qc.ca, each bill's individual page.<br><b style=\"color:var(--ink)\">Bill summaries</b> — generated by artificial intelligence (Claude API) from the official full text as introduced; every summary is labelled as such on the site.<br><b style=\"color:var(--ink)\">Vote registry</b> — assnat.qc.ca, the detail page of every recorded vote across the 3 sessions of the 43rd Legislature, including each MNA's name and party.<br><b style=\"color:var(--ink)\">Cabinet</b> — quebec.ca, the official Council of Ministers page, scraped live.<br><b style=\"color:var(--ink)\">MNAs and official emails</b> — assnat.qc.ca, the official list of sitting MNAs.<br><b style=\"color:var(--ink)\">Petitions</b> — assnat.qc.ca, the official list of open petitions.<br><b style=\"color:var(--ink)\">Attendance (%)</b> — computed from the vote registry above (see the glossary definition); no external source.",
@@ -1293,8 +1291,6 @@ const translations = {
     'apropos.missing.p':"1. <b style=\"color:var(--ink)\">A backend that queries these sources automatically</b> (e.g. a scheduled task that re-reads the vote registry and the bill feed every day) and writes them to a real database.<br>2. <b style=\"color:var(--ink)\">Hosting</b> for this backend and database (e.g. Vercel + Supabase/Postgres, or a classic Node server).<br>3. <b style=\"color:var(--ink)\">The by-MNA vote detail</b>, to be extracted from the official registry — the single biggest missing piece for fully answering \u201cwho voted for what.\u201d<br>4. <b style=\"color:var(--ink)\">An attendance proxy</b>: the Assembly doesn't publish attendance as such; the best public indicator is an MNA's participation rate in recorded votes (the method used by media outlets such as Radio-Canada and The Canadian Press).",
     'apropos.claude.p':"I can write this backend and help you deploy it when you're ready — this is exactly the kind of project where <b style=\"color:var(--ink)\">Claude Code</b> is especially useful, because it can work directly inside a repository, run sync scripts, and iterate on deployment with you.",
     // Overview page
-    'apercu.banner.p':"This is a working prototype built with real public data from the Assemblée nationale du Québec and Données Québec: the sitting Cabinet, the real status of a selection of bills, and the results of recorded votes held in the Chamber. To become a live, continuously updated site, a backend still needs to be connected to sync these sources automatically — see the \u201cWhere this data comes from\u201d tab.",
-    'apercu.banner.badge':"Data current as of: June 2026",
     'apercu.composition.sub':"125 seats — breakdown by parliamentary group (43rd Legislature)",
     'apercu.recent.sub':"Click the \u201cBills\u201d tab for the full list",
     'h.petitionsrecent':"Petitions open right now",
