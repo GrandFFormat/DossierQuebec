@@ -5521,20 +5521,7 @@ function renderVotes(keyword){
           <span class="votes-hint">${whoLabel}</span>
         </div>
         <div id="${wrapId}-compact">
-          <div class="tally">
-            <div class="tally-row">
-              <span class="tally-label" style="color:var(--green)"><b>${v.totals.pour}</b> ${pourLabel}</span>
-              <span class="tally-breakdown">${partyBreakdownHtml(v.nominal.pour)}</span>
-            </div>
-            <div class="tally-row">
-              <span class="tally-label" style="color:var(--red)"><b>${v.totals.contre}</b> ${contreLabel}</span>
-              <span class="tally-breakdown">${partyBreakdownHtml(v.nominal.contre)}</span>
-            </div>
-            <div class="tally-row">
-              <span class="tally-label" style="color:var(--slate)"><b>${v.totals.abstentions}</b> ${abstLabel}</span>
-              <span class="tally-breakdown">${partyBreakdownHtml(v.nominal.abstentions)}</span>
-            </div>
-          </div>
+          <div class="vote-compact-row"><b style="color:var(--green)">${v.totals.pour}</b> ${pourLabel} · <b style="color:var(--red)">${v.totals.contre}</b> ${contreLabel} · <b style="color:var(--slate)">${v.totals.abstentions}</b> ${abstLabel}</div>
         </div>
         <div id="${wrapId}-detailed" style="display:none">
           <div class="tally">
