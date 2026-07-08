@@ -49,14 +49,28 @@
     border-bottom:1px solid var(--line);
     padding-bottom:22px;
   }
-  .brand{display:flex;align-items:center;gap:14px;cursor:pointer;}
+  .brand{display:flex;align-items:center;gap:14px;}
+  .brand-text{cursor:pointer;}
   .brand-mark{
     width:40px;height:40px;flex:none;
-    border:1.5px solid var(--ink);
     border-radius:50%;
     position:relative;
+    perspective:220px;
+    cursor:pointer;
   }
   .brand-mark svg{position:absolute;inset:0;}
+  /* Logo à deux faces qui flippe : avant = Québec (cercle bleu poudre + dossier
+     blanc), arrière = Canada (cercle rouge + dossier blanc). Indique qu'on peut
+     sauter au site fédéral en cliquant. */
+  .flip-inner{position:absolute;inset:0;transform-style:preserve-3d;animation:brandFlip 6s ease-in-out infinite;}
+  .flip-face{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+  .flip-back{transform:rotateY(180deg);}
+  @keyframes brandFlip{
+    0%,42%   {transform:rotateY(0deg);}
+    58%,92%  {transform:rotateY(180deg);}
+    100%     {transform:rotateY(360deg);}
+  }
+  @media (prefers-reduced-motion: reduce){ .flip-inner{animation:none;} }
   .brand-text h1{
     font-family:'Fraunces',serif;
     font-weight:600;
@@ -575,11 +589,18 @@
 <body>
 
 <header class="top">
-  <div class="brand" onclick="goToTab('apercu')" role="button" tabindex="0" aria-label="Retour à l'aperçu">
-    <!-- Emplacement de l'ancien logo (dossier dans un cercle) — retiré ; réservé
-         pour un futur accès au site fédéral (DossierCanada). Le style .brand-mark
-         reste défini dans le CSS pour être réutilisé ici plus tard. -->
-    <div class="brand-text">
+  <div class="brand">
+    <div class="brand-mark" id="brandFlip" role="button" tabindex="0" title="Sauter au site fédéral (DossierCanada) — à venir" aria-label="Site fédéral (DossierCanada) — à venir" onclick="goToFederal(event)">
+      <div class="flip-inner">
+        <div class="flip-face flip-front">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#9DC3E6"/><path d="M9 12 L16 12 L19 16 L31 16 L31 30 L9 30 Z" fill="#fff"/></svg>
+        </div>
+        <div class="flip-face flip-back">
+          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#D52B1E"/><path d="M9 12 L16 12 L19 16 L31 16 L31 30 L9 30 Z" fill="#fff"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="brand-text" role="button" tabindex="0" aria-label="Retour à l'aperçu" onclick="goToTab('apercu')">
       <h1>DossierQuébec</h1>
       <p>Qui siège, qui légifère, qui vote quoi</p>
     </div>
@@ -5597,9 +5618,22 @@ document.querySelectorAll('nav.tabs button').forEach(btn=>{
   btn.addEventListener('click', ()=> goToTab(btn.dataset.view));
 });
 
-document.querySelector('.brand').addEventListener('keydown', (e)=>{
+document.querySelector('.brand-text').addEventListener('keydown', (e)=>{
   if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); goToTab('apercu'); }
 });
+document.querySelector('.brand-mark').addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); goToFederal(e); }
+});
+
+// Le logo (dossier bleu poudre QC ↔ rouge Canada) mène au site fédéral.
+// PLACEHOLDER : DossierCanada n'est pas encore en ligne. Quand il le sera,
+// remplacer le corps par : window.location.href = 'https://<domaine-federal>';
+function goToFederal(evt){
+  if(evt) evt.stopPropagation();
+  alert(currentLang === 'en'
+    ? 'Federal site (DossierCanada) — coming soon 🍁'
+    : 'Site fédéral (DossierCanada) — à venir 🍁');
+}
 
 function openMobileMenu(){
   document.querySelector('nav.tabs').classList.add('open');
