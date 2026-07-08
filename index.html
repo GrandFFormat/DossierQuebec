@@ -678,6 +678,7 @@
       <a data-jump="sec-projets-recents" data-i18n="quicknav.projets">Projets de loi</a>
       <a data-jump="sec-quoideneuf" data-i18n="quicknav.quoideneuf">Quoi de neuf</a>
       <a data-jump="sec-petitions" data-i18n="quicknav.petitions">Pétitions</a>
+      <a data-jump="sec-apropos-moi" data-i18n="quicknav.creator">Le mot du créateur</a>
     </div>
 
     <div class="intro-compact" id="introCompact" onclick="toggleIntro()">
@@ -750,6 +751,18 @@
     <div id="body-petitions">
     <div id="apercuPetitions"></div>
     <div class="info-box" data-i18n="pet.info">Chaque pétition ci-dessus est reproduite telle quelle depuis la liste officielle de l'Assemblée nationale, avec un lien direct vers la page où la signer. Le nombre de signatures affiché est celui relevé au moment de la dernière mise à jour — pour le nombre exact et à jour, ou pour signer, utilise le lien « Voir et signer sur assnat.qc.ca » de chaque carte.</div>
+    </div>
+
+    <div class="section-head" id="sec-apropos-moi">
+      <div>
+        <h2 data-i18n="creator.h">Le mot du créateur</h2>
+        <div class="sub" data-i18n="creator.sub">Qui je suis et pourquoi j'ai bâti ce site</div>
+      </div>
+    </div>
+    <div class="mission-box">
+      <p data-i18n="creator.p1">Bonjour ! Je m'appelle <b>[ton nom]</b>. [Présente-toi : ce que tu fais, ton parcours, ton lien avec le Québec ou avec la vie citoyenne.]</p>
+      <p data-i18n="creator.p2">J'ai bâti DossierQuébec parce que [raconte ton idée : le déclic, le problème que tu voulais régler, ce que tu espères que le site apporte aux gens.]</p>
+      <p style="margin-top:14px; font-style:italic; color:var(--gold); font-weight:600;" data-i18n="creator.sign">— [Ton nom]</p>
     </div>
   </section>
 
@@ -1357,6 +1370,11 @@ const translations = {
     // Overview page
     'apercu.composition.sub':"125 seats — breakdown by parliamentary group (43rd Legislature)",
     'apercu.recent.sub':"↓ Click anywhere in the white square to see the summary ↓",
+    'creator.h':"A word from the creator",
+    'creator.sub':"Who I am and why I built this site",
+    'creator.p1':"Hi! My name is <b>[your name]</b>. [Introduce yourself: what you do, your background, your connection to Quebec or to civic life.]",
+    'creator.p2':"I built DossierQuébec because [tell your story: the spark, the problem you wanted to solve, what you hope the site brings to people.]",
+    'creator.sign':"— [Your name]",
     'h.petitionsrecent':"Petitions open right now",
     'apercu.petitions.sub':"Click the \u201cPetitions\u201d tab for the full list",
     'quicknav.label':"Jump to:",
@@ -1365,6 +1383,7 @@ const translations = {
     'quicknav.projets':"Bills",
     'quicknav.quoideneuf':"What's new",
     'quicknav.petitions':"Petitions",
+    'quicknav.creator':"A word from the creator",
     'quicknav.personnes':"Who's involved",
     'quicknav.lexiqueitem':"Glossary",
     'quicknav.apropos':"Where this data comes from",
