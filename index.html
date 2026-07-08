@@ -5496,6 +5496,8 @@ function renderVotes(keyword){
     const bill = v.billId ? bills.find(b=>b.id===v.billId) : null;
     const title = bill ? (isEn ? (bill.titleEn||bill.title) : bill.title) : v.subject;
     const domId = 'nominal-' + v.id;
+    const wrapId = `votecard-${v.id}`;
+    const whoLabel = isEn ? 'who voted what' : 'qui a voté quoi';
     const numLine = (v.billNum ? `${billLabel} ${v.billNum} — ` : '') + (v.stage ? v.stage + ' — ' : '') + v.date;
     const sponsorParty_ = bill && bill.sponsor ? sponsorParty(bill.sponsor) : null;
     const sponsorBadge = sponsorParty_ ? `<span class="depute-party" style="background:${partyColors[sponsorParty_]}22; color:${partyColors[sponsorParty_]}">${sponsorParty_}</span>` : '';
@@ -5514,26 +5516,48 @@ function renderVotes(keyword){
           <div class="seg contre" style="width:${total?(v.totals.contre/total*100).toFixed(1):0}%"></div>
           <div class="seg abst" style="width:${total?(v.totals.abstentions/total*100).toFixed(1):0}%"></div>
         </div>
-        <div class="tally">
-          <div class="tally-row">
-            <span class="tally-plus" onclick="event.stopPropagation(); toggleNominalGroup('${domId}','${v.id}','pour')" id="plus-${domId}-pour">+</span>
-            <span class="tally-label" style="color:var(--green)"><b>${v.totals.pour}</b> ${pourLabel}</span>
-            <span class="tally-breakdown">${partyBreakdownHtml(v.nominal.pour)}</span>
-          </div>
-          <div class="tally-row">
-            <span class="tally-plus" onclick="event.stopPropagation(); toggleNominalGroup('${domId}','${v.id}','contre')" id="plus-${domId}-contre">+</span>
-            <span class="tally-label" style="color:var(--red)"><b>${v.totals.contre}</b> ${contreLabel}</span>
-            <span class="tally-breakdown">${partyBreakdownHtml(v.nominal.contre)}</span>
-          </div>
-          <div class="tally-row">
-            <span class="tally-plus" onclick="event.stopPropagation(); toggleNominalGroup('${domId}','${v.id}','abstentions')" id="plus-${domId}-abstentions">+</span>
-            <span class="tally-label" style="color:var(--slate)"><b>${v.totals.abstentions}</b> ${abstLabel}</span>
-            <span class="tally-breakdown">${partyBreakdownHtml(v.nominal.abstentions)}</span>
+        <div class="votes-title" style="margin-top:10px;">
+          <span class="tally-plus" id="plus-${wrapId}" onclick="event.stopPropagation(); toggleBillVotes('${wrapId}')">+</span>
+          <span class="votes-hint">${whoLabel}</span>
+        </div>
+        <div id="${wrapId}-compact">
+          <div class="tally">
+            <div class="tally-row">
+              <span class="tally-label" style="color:var(--green)"><b>${v.totals.pour}</b> ${pourLabel}</span>
+              <span class="tally-breakdown">${partyBreakdownHtml(v.nominal.pour)}</span>
+            </div>
+            <div class="tally-row">
+              <span class="tally-label" style="color:var(--red)"><b>${v.totals.contre}</b> ${contreLabel}</span>
+              <span class="tally-breakdown">${partyBreakdownHtml(v.nominal.contre)}</span>
+            </div>
+            <div class="tally-row">
+              <span class="tally-label" style="color:var(--slate)"><b>${v.totals.abstentions}</b> ${abstLabel}</span>
+              <span class="tally-breakdown">${partyBreakdownHtml(v.nominal.abstentions)}</span>
+            </div>
           </div>
         </div>
-        <div class="nominal-detail" id="${domId}-pour"></div>
-        <div class="nominal-detail" id="${domId}-contre"></div>
-        <div class="nominal-detail" id="${domId}-abstentions"></div>
+        <div id="${wrapId}-detailed" style="display:none">
+          <div class="tally">
+            <div class="tally-row">
+              <span class="tally-plus" onclick="event.stopPropagation(); toggleNominalGroup('${domId}','${v.id}','pour')" id="plus-${domId}-pour">+</span>
+              <span class="tally-label" style="color:var(--green)"><b>${v.totals.pour}</b> ${pourLabel}</span>
+              <span class="tally-breakdown">${partyBreakdownHtml(v.nominal.pour)}</span>
+            </div>
+            <div class="tally-row">
+              <span class="tally-plus" onclick="event.stopPropagation(); toggleNominalGroup('${domId}','${v.id}','contre')" id="plus-${domId}-contre">+</span>
+              <span class="tally-label" style="color:var(--red)"><b>${v.totals.contre}</b> ${contreLabel}</span>
+              <span class="tally-breakdown">${partyBreakdownHtml(v.nominal.contre)}</span>
+            </div>
+            <div class="tally-row">
+              <span class="tally-plus" onclick="event.stopPropagation(); toggleNominalGroup('${domId}','${v.id}','abstentions')" id="plus-${domId}-abstentions">+</span>
+              <span class="tally-label" style="color:var(--slate)"><b>${v.totals.abstentions}</b> ${abstLabel}</span>
+              <span class="tally-breakdown">${partyBreakdownHtml(v.nominal.abstentions)}</span>
+            </div>
+          </div>
+          <div class="nominal-detail" id="${domId}-pour"></div>
+          <div class="nominal-detail" id="${domId}-contre"></div>
+          <div class="nominal-detail" id="${domId}-abstentions"></div>
+        </div>
         <div class="expand-hint" id="hint-summary-${domId}">${t('btn.viewSummary')}</div>
         <div class="bill-summary" id="summary-${domId}">
           ${bill && bill.summary ? (isEn ? (bill.summaryEn||bill.summary) : bill.summary) : `<p>${v.subject}</p>`}
