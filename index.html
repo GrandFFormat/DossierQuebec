@@ -5170,9 +5170,9 @@ function billCard(b, ctx){
   const url = isEn ? (b.urlEn||b.url) : b.url;
   const billLabel = isEn ? 'BILL NO.' : 'PROJET DE LOI N°';
   const sponsorLabel = isEn ? 'Sponsor' : 'Parrain';
-  const pourLabel = isEn ? 'Yeas' : 'Pour';
-  const contreLabel = isEn ? 'Nays' : 'Contre';
-  const abstLabel = isEn ? 'Abst.' : 'Abst.';
+  const pourLabel = isEn ? 'yeas' : 'pour';
+  const contreLabel = isEn ? 'nays' : 'contre';
+  const abstLabel = isEn ? 'abstentions' : 'abstention';
   const srcNote = isEn ? "Summary written from the official title and public documents — not an excerpt of the bill's text." : "Résumé rédigé à partir du titre officiel et des documents publics — pas un extrait du texte de loi.";
   const lastActivityLabel = isEn ? 'Last activity' : 'Dernière activité';
   const lastActivityValue = b.lastActivity ? b.lastActivity : (isEn ? 'not confirmed' : 'non confirmée');
@@ -5220,7 +5220,7 @@ function billCard(b, ctx){
 
         // 1) Vue compacte (par défaut) — une ligne par vote, AUCUN +
         const compact = relatedVotes.map(v=>`
-        <div class="vote-compact-row">${v.date}${v.stage ? ' · <b>' + v.stage + '</b>' : ''} · <b>${v.totals.pour}</b> ${pourLabel} / <b>${v.totals.contre}</b> ${contreLabel} / <b>${v.totals.abstentions}</b> ${abstLabel}</div>`).join('');
+        <div class="vote-compact-row">${v.date}${v.stage ? ' · <b>' + v.stage + '</b>' : ''} · <b style="color:var(--green)">${v.totals.pour}</b> ${pourLabel} · <b style="color:var(--red)">${v.totals.contre}</b> ${contreLabel} · <b style="color:var(--slate)">${v.totals.abstentions}</b> ${abstLabel}</div>`).join('');
 
         // 2) Vue détaillée = EXACTEMENT le rendu d'avant (les + par ligne qui
         //    appellent toggleNominalGroup + les .nominal-detail), juste masquée.
