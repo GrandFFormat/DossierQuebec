@@ -1,0 +1,64 @@
+# Rafraîchissement quotidien et automatique des données de DossierQuébec.
+#
+# Chaque matin : relance tous les scrapers + builds (npm run refresh), puis, s'il
+# y a un changement, committe et pousse. Le push sur `master` déclenche le
+# redéploiement automatique du site sur Vercel — donc un nouveau projet de loi ou
+# un nouveau vote apparu la veille se retrouve en ligne sans intervention.
+#
+# Clé API des résumés IA : à ajouter dans le dépôt sous
+#   Settings > Secrets and variables > Actions > New repository secret
+#   Nom : ANTHROPIC_API_KEY
+# Sans ce secret, tout tourne quand même : l'étape des résumés est « best effort »
+# (voir scripts/refresh.js) — seuls les résumés des nouveaux projets sont sautés.
+
+name: Rafraîchissement quotidien des données
+
+on:
+  schedule:
+    # 08:00 UTC = ~03:00–04:00 au Québec. Tous les jours.
+    - cron: '0 8 * * *'
+  workflow_dispatch: {} # permet aussi de lancer à la main (bouton « Run workflow »)
+
+# Nécessaire pour que le job puisse committer et pousser les données mises à jour.
+permissions:
+  contents: write
+
+# Deux exécutions ne doivent pas se marcher dessus.
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # --omit=dev : les scrapers n'utilisent que les dependencies (cheerio,
+      # csv-parse, pdf-parse, @anthropic-ai/sdk). Playwright (devDependency) n'est
+      # pas nécessaire — aucun scraper n'a besoin de navigateur.
+      - name: Installer les dépendances
+        run: npm ci --omit=dev
+
+      - name: Rafraîchir toutes les données
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: npm run refresh
+
+      - name: Committer et pousser s'il y a des changements
+        run: |
+          git config user.name "dossierquebec-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Aucun changement — rien à committer."
+          else
+            git commit -m "Rafraîchissement auto des données ($(date -u +%Y-%m-%d))"
+            git push
+          fi

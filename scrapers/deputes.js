@@ -59,7 +59,11 @@ function loadExistingRegions() {
     throw new Error(`Marqueurs DEPUTES_DATA_START/END introuvables dans ${HTML_PATH}`);
   }
   const block = html.slice(startIdx, endIdx);
-  const rows = [...block.matchAll(/\["([^"]+)","([^"]+)","([^"]+)","([^"]+)"\]/g)];
+  // Tolère des champs supplémentaires après le parti (ex. l'assnatId numérique
+  // ajouté en 5e position) : on ne capture que les 4 premiers (nom, circ, région,
+  // parti) puis on accepte soit « ] » soit « , … ». Sans ce « [,\]] », l'ajout de
+  // l'assnatId cassait le report des régions -> toutes nulles au scrape suivant.
+  const rows = [...block.matchAll(/\["([^"]+)","([^"]+)","([^"]+)","([^"]+)"[,\]]/g)];
   const regionByName = new Map();
   for (const [, name, , region] of rows) regionByName.set(foldName(name), region);
   return regionByName;

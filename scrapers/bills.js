@@ -27,7 +27,7 @@
 //                         cours de route (fait vérifiable dans les données,
 //                         pas une supposition).
 
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { parse } from 'csv-parse/sync';
 
 const CSV_URL = 'https://www.donneesquebec.ca/recherche/dataset/2bde70f9-15ff-455b-b3ea-c6e229b24074/resource/93c74b8c-51d1-49e6-9ab9-1f8d96dbd735/download/projets-de-loi.csv';
@@ -164,10 +164,47 @@ function buildBills(rows) {
   return bills;
 }
 
+// Champs d'enrichissement obtenus par d'AUTRES étapes (bill-details, bill-summaries)
+// ou saisis à la main (traductions EN). On les préserve d'un run à l'autre : le CSV
+// ne les contient pas, et sans ça un rafraîchissement quotidien effacerait les
+// résumés IA (API payante) et referait tout chaque jour. Les champs venant du CSV
+// (statut, étape, note, dernière activité, titre) sont toujours repris à neuf.
+const PRESERVE_FIELDS = [
+  'sponsor', 'presentationPdfUrl',
+  'summary', 'summaryEn', 'summaryAiGenerated', 'summarySource', 'summaryGeneratedAt',
+  'titleEn',
+];
+
+function mergePreviousEnrichment(bills) {
+  if (!existsSync(OUT_PATH)) return;
+  let prev;
+  try {
+    prev = JSON.parse(readFileSync(OUT_PATH, 'utf-8'));
+  } catch (err) {
+    console.warn(`Ancien ${OUT_PATH} illisible (${err.message}) — reconstruction complète, sans fusion.`);
+    return;
+  }
+  const prevById = new Map((prev.bills || []).map((b) => [b.id, b]));
+  let carried = 0;
+  for (const bill of bills) {
+    const old = prevById.get(bill.id); // clé stable = id (jamais num, réutilisé)
+    if (!old) continue;
+    for (const key of PRESERVE_FIELDS) {
+      if ((bill[key] === null || bill[key] === undefined) && old[key] !== null && old[key] !== undefined) {
+        bill[key] = old[key];
+        if (key === 'summary') carried++;
+      }
+    }
+  }
+  console.log(`Fusion : ${carried} résumés existants préservés (pas de re-génération inutile).`);
+}
+
 async function main() {
   const csv = await fetchCsv();
   const rows = parse(csv, { columns: true, skip_empty_lines: true });
   const bills = buildBills(rows);
+
+  mergePreviousEnrichment(bills);
 
   mkdirSync('data', { recursive: true });
   writeFileSync(

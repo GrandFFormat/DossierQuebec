@@ -5,9 +5,10 @@
   "description": "Scrapers pour la veille citoyenne de l'Assemblée nationale du Québec",
   "type": "module",
   "scripts": {
+    "refresh": "node scripts/refresh.js",
     "scrape:bills": "node scrapers/bills.js",
     "scrape:bill-details": "node scrapers/bill-details.js",
-    "scrape:bill-summaries": "node --env-file=api.env scrapers/bill-summaries.js",
+    "scrape:bill-summaries": "node --env-file-if-exists=api.env scrapers/bill-summaries.js",
     "build:frontend": "node scrapers/build-frontend-data.js",
     "scrape:depute-emails": "node scrapers/depute-emails.js",
     "build:depute-emails": "node scrapers/build-depute-emails-data.js",

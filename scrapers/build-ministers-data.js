@@ -28,7 +28,11 @@ function main() {
 
   const block = `${START_MARKER} — généré automatiquement par scrapers/build-ministers-data.js\n   à partir de data/ministers.json (voir scrapers/ministers.js). Scrapé en direct\n   depuis quebec.ca/premiere-ministre/equipe/conseil-des-ministres. Ne pas éditer\n   ce bloc à la main. */\nconst ministers = [\n${rows}\n];\n`;
 
-  const updated = html.slice(0, startIdx) + block + html.slice(endIdx + END_MARKER.length);
+  // `html.slice(endIdx)` (et non endIdx + END_MARKER.length) : on CONSERVE le
+  // marqueur END, sinon on le supprimerait et la prochaine exécution planterait
+  // (« marqueurs introuvables »). Le bloc écrit ne réinclut donc pas le END —
+  // c'est celui de l'HTML existant qui est gardé. Même patron que build-deputes-data.js.
+  const updated = html.slice(0, startIdx) + block + html.slice(endIdx);
   writeFileSync(HTML_PATH, updated);
   console.log(`${data.ministers.length} ministres injectés dans ${HTML_PATH}`);
 }
