@@ -4295,8 +4295,17 @@ const bills = [
 ];
 /* BILLS_DATA_END */
 
-const steps = ['Présentation','Adoption du principe','Étude détaillée','Prise en considération','Adoption / Sanction'];
-const stepsEn = ['Introduction','Passage in principle','Clause-by-clause review','Report stage','Passage / Assent'];
+// Stepper simplifié à 3 étapes pour l'affichage. Les données gardent la pleine
+// granularité officielle (b.step de 1 à 5, régénéré chaque jour par les scrapers) ;
+// displayStep() replie « Adoption du principe » (2) et « Prise en considération » (4)
+// dans « Étude détaillée » — assez précis pour un lecteur pressé, et le détail réel
+// reste visible dans la note de chaque carte (« Adoption du principe le … »).
+const steps = ['Présentation','Étude détaillée','Adoption / Sanction'];
+const stepsEn = ['Introduction','Detailed study','Passage / Assent'];
+function displayStep(step){
+  if(step === null || step === undefined) return step;
+  return step <= 1 ? 1 : (step >= 5 ? 3 : 2);
+}
 
 // Votes réels du registre des votes de l'Assemblée nationale (43e législature,
 // sessions 1 à 3) — voir scrapers/votes.js pour le scraper et
@@ -5421,7 +5430,7 @@ function billCard(b, ctx){
       </div>
       ${followRow}
       <div class="stepper">
-        ${steps.map((s,i)=>`<div class="step ${i<b.step-1?'done':''} ${i===b.step-1?'current':''}"></div>`).join('')}
+        ${steps.map((s,i)=>`<div class="step ${i<displayStep(b.step)-1?'done':''} ${i===displayStep(b.step)-1?'current':''}"></div>`).join('')}
       </div>
       <div class="stepper-labels">${(isEn?stepsEn:steps).map(s=>`<span>${s}</span>`).join('')}</div>
       ${relatedVotes.length ? (()=>{
@@ -5589,7 +5598,7 @@ function renderBills(keyword){
   const kw = norm(keyword);
   const list = bills.filter(b => {
     const statusOk = !billsStatusFilter || b.status === billsStatusFilter;
-    const stepOk = billsStepFilter === null || b.step === billsStepFilter;
+    const stepOk = billsStepFilter === null || displayStep(b.step) === billsStepFilter;
     const summaryText = (b.summary||'').replace(/<[^>]+>/g, ' ');
     const haystack = norm([b.title, summaryText, b.note, b.sponsor, 'projet de loi n° ' + b.num].join(' '));
     const kwOk = !kw || haystack.includes(kw);
