@@ -5671,14 +5671,17 @@ function goToFederal(evt){
     : 'Site fédéral (DossierCanada) — à venir 🍁');
 }
 
-// Accroche du logo : un seul aller-retour. Flip vers le rouge (Canada) à 1 s,
-// retour au bleu (Québec) à 3 s, puis plus aucun flip. Respecte prefers-reduced-motion.
+// Animation du logo : accroche puis flip continu. Flip vers le rouge (Canada) à
+// 1 s, retour au bleu (Québec) à 5 s, puis il continue de flipper toutes les 10 s
+// (alternance QC/Canada). Respecte prefers-reduced-motion.
 (function(){
   const inner = document.querySelector('.brand-mark .flip-inner');
   if(!inner) return;
   if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  setTimeout(()=>{ inner.style.transform = 'rotateY(180deg)'; }, 1000); // -> Canada (rouge)
-  setTimeout(()=>{ inner.style.transform = 'rotateY(360deg)'; }, 5000); // -> Québec (bleu), fin
+  let angle = 0;
+  const flip = () => { angle += 180; inner.style.transform = 'rotateY(' + angle + 'deg)'; };
+  setTimeout(flip, 1000);                                       // 1 s : -> rouge (Canada)
+  setTimeout(() => { flip(); setInterval(flip, 10000); }, 5000); // 5 s : -> bleu, puis flip aux 10 s
 })();
 
 function openMobileMenu(){
