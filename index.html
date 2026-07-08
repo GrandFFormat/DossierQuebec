@@ -289,6 +289,13 @@
 
   .nominal-detail{display:none; margin-top:10px; padding-top:10px; border-top:1px dashed var(--line);}
   .nominal-detail.open{display:block;}
+
+  /* Section « Votes enregistrés » dans une carte de projet de loi : liste
+     compacte par défaut, un seul + en haut qui bascule vers le détail nominatif. */
+  .votes-section{margin-top:12px; padding-top:12px; border-top:1px dashed var(--line);}
+  .votes-title{display:flex; align-items:center; gap:8px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; color:var(--ink); margin-bottom:8px;}
+  .votes-title .votes-hint{font-weight:400; color:var(--slate); font-size:11px;}
+  .vote-compact-row{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink); padding:3px 0; line-height:1.5;}
   .nominal-party-group{margin-bottom:10px;}
   .nominal-party-group:last-child{margin-bottom:0;}
   .nominal-party-header{font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; margin-bottom:6px;}
@@ -5204,9 +5211,22 @@ function billCard(b, ctx){
         ${steps.map((s,i)=>`<div class="step ${i<b.step-1?'done':''} ${i===b.step-1?'current':''}"></div>`).join('')}
       </div>
       <div class="stepper-labels">${(isEn?stepsEn:steps).map(s=>`<span>${s}</span>`).join('')}</div>
-      ${relatedVotes.map(v=>{
-        const voteDomId = `billvote-${ctx}-${b.id}-${v.id}`;
-        return `
+      ${relatedVotes.length ? (()=>{
+        // id unique par carte (préfixé par ctx + id du projet : la même carte
+        // peut apparaître à deux endroits — aperçu ET onglet — sans collision).
+        const wrapId = `billvotes-${ctx}-${b.id}`;
+        const votesTitle = isEn ? 'Recorded votes' : 'Votes enregistrés';
+        const whoLabel = isEn ? 'who voted what' : 'qui a voté quoi';
+
+        // 1) Vue compacte (par défaut) — une ligne par vote, AUCUN +
+        const compact = relatedVotes.map(v=>`
+        <div class="vote-compact-row">${v.date}${v.stage ? ' · <b>' + v.stage + '</b>' : ''} · <b>${v.totals.pour}</b> ${pourLabel} / <b>${v.totals.contre}</b> ${contreLabel} / <b>${v.totals.abstentions}</b> ${abstLabel}</div>`).join('');
+
+        // 2) Vue détaillée = EXACTEMENT le rendu d'avant (les + par ligne qui
+        //    appellent toggleNominalGroup + les .nominal-detail), juste masquée.
+        const detailed = relatedVotes.map(v=>{
+          const voteDomId = `billvote-${ctx}-${b.id}-${v.id}`;
+          return `
         <div class="vote-inline-block">
           <div class="vote-inline-date">${v.stage ? v.stage + ' — ' : ''}${v.date}</div>
           <div class="tally">
@@ -5229,8 +5249,19 @@ function billCard(b, ctx){
           <div class="nominal-detail" id="${voteDomId}-pour"></div>
           <div class="nominal-detail" id="${voteDomId}-contre"></div>
           <div class="nominal-detail" id="${voteDomId}-abstentions"></div>
+        </div>`;}).join('');
+
+        // 3) Conteneur : titre + UN seul + en haut, puis les deux vues.
+        return `
+      <div class="votes-section">
+        <div class="votes-title">${votesTitle}
+          <span class="tally-plus" id="plus-${wrapId}" onclick="event.stopPropagation(); toggleBillVotes('${wrapId}')">+</span>
+          <span class="votes-hint">${whoLabel}</span>
         </div>
-      `;}).join('')}
+        <div id="${wrapId}-compact">${compact}</div>
+        <div id="${wrapId}-detailed" style="display:none">${detailed}</div>
+      </div>`;
+      })() : ''}
       <div class="expand-hint" id="hint-${domId}">${t('btn.viewSummary')}</div>
       <div class="bill-summary" id="${domId}">
         ${summary}
@@ -5247,6 +5278,19 @@ function toggleBillSummary(domId, evt){
   const hint = document.getElementById('hint-'+domId);
   const isOpen = el.classList.toggle('open');
   hint.textContent = isOpen ? t('btn.hideSummary') : t('btn.viewSummary');
+}
+
+// Bascule la section « votes enregistrés » d'une carte entre la vue compacte
+// (une ligne par vote) et la vue détaillée (détail nominatif, les + par ligne).
+function toggleBillVotes(id){
+  const compact  = document.getElementById(id + '-compact');
+  const detailed = document.getElementById(id + '-detailed');
+  const plus     = document.getElementById('plus-' + id);
+  if(!compact || !detailed) return;
+  const opening = detailed.style.display === 'none';
+  detailed.style.display = opening ? '' : 'none';
+  compact.style.display  = opening ? 'none' : '';
+  if(plus) plus.textContent = opening ? '−' : '+';
 }
 
 let billsStatusFilter = '';
