@@ -211,12 +211,12 @@
 
   /* ---------- SECTION HEADS ---------- */
   .section-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:16px; gap:16px; flex-wrap:wrap;}
-  .snooze-pill{
+  .snooze-pill, .bd-back{
     font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:11px; color:var(--slate);
     background:var(--paper-2); border:1px solid var(--line); border-radius:20px;
     padding:6px 12px; cursor:pointer; flex:none; user-select:none; height:fit-content;
   }
-  .snooze-pill:hover{border-color:var(--gold); color:var(--gold);}
+  .snooze-pill:hover, .bd-back:hover{border-color:var(--gold); color:var(--gold);}
   .snooze-pill.snoozed{background:var(--ink); color:var(--paper-2); border-color:var(--ink);}
   [id^="body-"].collapsed{display:none;}
   .section-head h2{font-family:'Fraunces',serif; font-size:20px; font-weight:600; margin:20px 0 0;}
@@ -534,6 +534,9 @@
   .footer-gh{display:inline-flex; align-items:center; gap:5px; color:var(--slate); text-decoration:none;}
   .footer-gh:hover{color:var(--ink);}
   .footer-coffee{cursor:default;}
+  /* « et moi » — porte d'entrée discrète vers la page cachée de la BD (view-bd). */
+  .footer-etmoi{cursor:pointer; color:var(--gold); margin-left:4px;}
+  .footer-etmoi:hover{text-decoration:underline;}
   .back-to-top{
     position:fixed; right:24px; bottom:24px; z-index:50;
     width:46px; height:46px; border-radius:50%; border:none;
@@ -678,7 +681,6 @@
       <a data-jump="sec-projets-recents" data-i18n="quicknav.projets">Projets de loi</a>
       <a data-jump="sec-quoideneuf" data-i18n="quicknav.quoideneuf">Quoi de neuf</a>
       <a data-jump="sec-petitions" data-i18n="quicknav.petitions">Pétitions</a>
-      <a data-jump="sec-apropos-moi" data-i18n="quicknav.creator">Le mot du créateur</a>
     </div>
 
     <div class="intro-compact" id="introCompact" onclick="toggleIntro()">
@@ -753,142 +755,7 @@
     <div class="info-box" data-i18n="pet.info">Chaque pétition ci-dessus est reproduite telle quelle depuis la liste officielle de l'Assemblée nationale, avec un lien direct vers la page où la signer. Le nombre de signatures affiché est celui relevé au moment de la dernière mise à jour — pour le nombre exact et à jour, ou pour signer, utilise le lien « Voir et signer sur assnat.qc.ca » de chaque carte.</div>
     </div>
 
-    <div class="section-head" id="sec-apropos-moi">
-      <div>
-        <h2 data-i18n="creator.h">Le mot du créateur</h2>
-        <div class="sub" data-i18n="creator.sub">Qui je suis et pourquoi j'ai bâti ce site</div>
-      </div>
-    </div>
-    <div class="mission-box">
-      <!-- Bande dessinée « l'idée derrière le site » — dessinée en SVG (vectoriel,
-           léger, s'adapte à toutes les tailles d'écran). La photo est découpée en
-           rond via clipPath. Les textes des cases passent par data-i18n (FR/EN). -->
-      <svg width="100%" viewBox="0 0 680 1280" role="img" style="max-width:680px; display:block; margin:0 auto;">
-      <title>Bande dessinée : l'idée derrière DossierQuébec</title>
-      <desc>Martin Archambault, 45 ans, se présente. Ti-Jo travaille dans l'électricité le jour. Le soir, il regarde à la télé ce que les politiciens ont fait de sa journée. Mais eux, le soir, regardent-ils des vidéos de Ti-Jo ? C'est de cette question qu'est né DossierQuébec.</desc>
-      <defs><clipPath id="bdPhotoClip"><circle cx="165" cy="130" r="55"/></clipPath></defs>
-
-      <rect x="60" y="40" width="560" height="180" rx="8" fill="#EDEEE8" stroke="#16213E" stroke-width="2"/>
-      <image href="martin.png" x="110" y="75" width="110" height="110" clip-path="url(#bdPhotoClip)" preserveAspectRatio="xMidYMid slice"/>
-      <circle cx="165" cy="130" r="55" fill="none" stroke="#16213E" stroke-width="2"/>
-      <rect x="240" y="75" width="350" height="105" rx="10" fill="#FFFFFF" stroke="#16213E" stroke-width="1.5"/>
-      <polygon points="240,118 240,142 220,130" fill="#FFFFFF" stroke="#16213E" stroke-width="1.5"/>
-      <rect x="239" y="120" width="4" height="20" fill="#FFFFFF"/>
-      <text x="260" y="102" style="font-size:13px" fill="#16213E" data-i18n="bd.intro1">Bonjour, moi c'est</text>
-      <text x="260" y="130" style="font-size:20px;font-weight:600" fill="#16213E">Martin Archambault</text>
-      <rect x="260" y="138" width="120" height="3" fill="#A9782E"/>
-      <text x="260" y="164" style="font-size:13px" fill="#16213E" data-i18n="bd.intro3">j'ai 45 ans et c'est moi l'idée derrière le site.</text>
-
-      <rect x="60" y="240" width="560" height="260" rx="8" fill="#EDEEE8" stroke="#16213E" stroke-width="2"/>
-      <rect x="60" y="240" width="560" height="28" rx="8" fill="#16213E"/>
-      <rect x="60" y="254" width="560" height="14" fill="#16213E"/>
-      <text x="74" y="259" style="font-size:12px" fill="#F7F7F3" data-i18n="bd.cap1">Ti-Jo travaille dans l'électricité.</text>
-      <circle cx="105" cy="308" r="18" fill="#F2C14E"/>
-      <path d="M75 292 Q230 335 385 310" stroke="#16213E" stroke-width="1.5" fill="none"/>
-      <path d="M494 310 Q550 318 605 305" stroke="#16213E" stroke-width="1.5" fill="none"/>
-      <rect x="430" y="290" width="14" height="195" fill="#8A6323"/>
-      <rect x="380" y="305" width="114" height="10" fill="#8A6323"/>
-      <line x1="335" y1="485" x2="420" y2="350" stroke="#8A6323" stroke-width="4"/>
-      <line x1="365" y1="485" x2="445" y2="355" stroke="#8A6323" stroke-width="4"/>
-      <line x1="356" y1="451" x2="385" y2="452" stroke="#8A6323" stroke-width="3"/>
-      <line x1="369" y1="431" x2="397" y2="433" stroke="#8A6323" stroke-width="3"/>
-      <line x1="382" y1="411" x2="409" y2="413" stroke="#8A6323" stroke-width="3"/>
-      <line x1="394" y1="390" x2="421" y2="394" stroke="#8A6323" stroke-width="3"/>
-      <line x1="407" y1="370" x2="433" y2="374" stroke="#8A6323" stroke-width="3"/>
-      <rect x="395" y="398" width="8" height="22" rx="3" fill="#1F2E52"/>
-      <rect x="407" y="398" width="8" height="22" rx="3" fill="#1F2E52"/>
-      <rect x="392" y="361" width="26" height="40" rx="8" fill="#16213E"/>
-      <rect x="392" y="371" width="26" height="6" fill="#F2C14E"/>
-      <path d="M415 370 Q428 358 436 344" stroke="#16213E" stroke-width="8" stroke-linecap="round" fill="none"/>
-      <circle cx="437" cy="341" r="5" fill="#E9B58B"/>
-      <circle cx="405" cy="350" r="13" fill="#E9B58B"/>
-      <path d="M392 348 a13 13 0 0 1 26 0 z" fill="#F2C14E"/>
-      <rect x="388" y="346" width="34" height="4" rx="2" fill="#F2C14E"/>
-      <circle cx="400" cy="353" r="1.8" fill="#2B2118"/>
-      <polygon points="458,308 444,332 452,332 442,352 464,326 454,326" fill="#F2C14E"/>
-      <line x1="75" y1="485" x2="605" y2="485" stroke="#16213E" stroke-width="1" opacity="0.25"/>
-
-      <rect x="60" y="520" width="560" height="260" rx="8" fill="#EDEEE8" stroke="#16213E" stroke-width="2"/>
-      <rect x="60" y="520" width="560" height="28" rx="8" fill="#16213E"/>
-      <rect x="60" y="534" width="560" height="14" fill="#16213E"/>
-      <text x="74" y="539" style="font-size:12px" fill="#F7F7F3" data-i18n="bd.cap2">Le soir, il regarde ce que les politiciens ont fait de sa journée.</text>
-      <rect x="95" y="575" width="75" height="60" fill="#1F2E52" stroke="#16213E" stroke-width="1.5"/>
-      <circle cx="140" cy="592" r="9" fill="#F5E6C4"/>
-      <circle cx="110" cy="590" r="1.5" fill="#F5E6C4"/>
-      <circle cx="155" cy="620" r="1.5" fill="#F5E6C4"/>
-      <rect x="200" y="630" width="130" height="85" rx="4" fill="#16213E"/>
-      <rect x="207" y="637" width="116" height="64" fill="#1F2E52"/>
-      <rect x="245" y="678" width="36" height="16" fill="#A9782E"/>
-      <circle cx="263" cy="658" r="7" fill="#E9B58B"/>
-      <rect x="254" y="665" width="18" height="14" rx="4" fill="#3A4A6B"/>
-      <circle cx="314" cy="646" r="4" fill="#C0392B"/>
-      <rect x="225" y="715" width="80" height="8" fill="#8A6323"/>
-      <line x1="332" y1="655" x2="378" y2="668" stroke="#F5E6C4" stroke-width="2" opacity="0.4"/>
-      <line x1="332" y1="700" x2="378" y2="712" stroke="#F5E6C4" stroke-width="2" opacity="0.4"/>
-      <rect x="537" y="625" width="26" height="112" rx="10" fill="#9DC3E6"/>
-      <rect x="390" y="680" width="175" height="58" rx="10" fill="#9DC3E6"/>
-      <rect x="392" y="705" width="56" height="13" rx="6" fill="#1F2E52"/>
-      <rect x="392" y="715" width="11" height="32" rx="5" fill="#1F2E52"/>
-      <ellipse cx="390" cy="749" rx="12" ry="4" fill="#16213E"/>
-      <rect x="440" y="648" width="62" height="72" rx="14" fill="#16213E"/>
-      <circle cx="468" cy="630" r="19" fill="#E9B58B"/>
-      <path d="M451 627 Q452 611 468 610 Q485 611 486 628 Q477 617 468 617 Q459 617 451 627 Z" fill="#3A2E25"/>
-      <circle cx="461" cy="629" r="2" fill="#2B2118"/>
-      <path d="M456 640 L465 640" stroke="#3A2E25" stroke-width="1.5" stroke-linecap="round"/>
-      <path d="M450 670 Q440 678 437 685" stroke="#16213E" stroke-width="10" stroke-linecap="round" fill="none"/>
-      <circle cx="435" cy="688" r="6" fill="#E9B58B"/>
-      <rect x="424" y="678" width="16" height="17" rx="2" fill="#F7F7F3" stroke="#B9BDC7" stroke-width="0.5"/>
-      <path d="M429 673 q2 -4 0 -8" stroke="#B9BDC7" stroke-width="1.5" fill="none"/>
-      <line x1="75" y1="752" x2="605" y2="752" stroke="#16213E" stroke-width="1" opacity="0.25"/>
-
-      <rect x="60" y="800" width="560" height="260" rx="8" fill="#EDEEE8" stroke="#16213E" stroke-width="2"/>
-      <rect x="60" y="800" width="560" height="28" rx="8" fill="#16213E"/>
-      <rect x="60" y="814" width="560" height="14" fill="#16213E"/>
-      <text x="74" y="819" style="font-size:12px" fill="#F7F7F3" data-i18n="bd.cap3">Mais eux, le soir… est-ce qu'ils regardent des vidéos de Ti-Jo ?</text>
-      <rect x="470" y="855" width="75" height="60" fill="#1F2E52" stroke="#16213E" stroke-width="1.5"/>
-      <circle cx="515" cy="872" r="9" fill="#F5E6C4"/>
-      <circle cx="485" cy="870" r="1.5" fill="#F5E6C4"/>
-      <circle cx="530" cy="900" r="1.5" fill="#F5E6C4"/>
-      <rect x="95" y="905" width="26" height="112" rx="10" fill="#C9A96A"/>
-      <rect x="100" y="960" width="175" height="58" rx="10" fill="#C9A96A"/>
-      <rect x="205" y="985" width="56" height="13" rx="6" fill="#1F2E52"/>
-      <rect x="250" y="995" width="11" height="32" rx="5" fill="#1F2E52"/>
-      <ellipse cx="263" cy="1029" rx="12" ry="4" fill="#16213E"/>
-      <rect x="150" y="928" width="62" height="72" rx="14" fill="#1F2E52"/>
-      <polygon points="182,932 196,932 189,952" fill="#F7F7F3"/>
-      <rect x="186" y="934" width="6" height="20" rx="2" fill="#B3402F"/>
-      <circle cx="184" cy="910" r="19" fill="#E9B58B"/>
-      <path d="M167 907 Q168 891 184 890 Q201 891 202 908 Q193 897 184 897 Q175 897 167 907 Z" fill="#9AA0AA"/>
-      <circle cx="192" cy="908" r="2" fill="#2B2118"/>
-      <path d="M186 900 L197 902" stroke="#6E747E" stroke-width="2" stroke-linecap="round"/>
-      <path d="M200 950 Q212 958 217 965" stroke="#1F2E52" stroke-width="10" stroke-linecap="round" fill="none"/>
-      <circle cx="219" cy="968" r="6" fill="#E9B58B"/>
-      <rect x="224" y="962" width="20" height="9" rx="3" fill="#5C6270"/>
-      <circle cx="206" cy="898" r="3" fill="#A9782E"/>
-      <circle cx="214" cy="888" r="4" fill="#A9782E"/>
-      <text x="222" y="884" style="font-size:22px;font-weight:600" fill="#A9782E">?</text>
-      <rect x="330" y="910" width="130" height="85" rx="4" fill="#16213E"/>
-      <rect x="337" y="917" width="116" height="64" fill="#EDEEE8"/>
-      <line x1="355" y1="976" x2="378" y2="940" stroke="#8A6323" stroke-width="2"/>
-      <line x1="368" y1="978" x2="390" y2="942" stroke="#8A6323" stroke-width="2"/>
-      <rect x="381" y="943" width="11" height="14" rx="3" fill="#16213E"/>
-      <circle cx="386" cy="938" r="5.5" fill="#E9B58B"/>
-      <path d="M380.5 937 a5.5 5.5 0 0 1 11 0 z" fill="#F2C14E"/>
-      <polygon points="402,931 395,943 399,943 394,953 405,940 400,940" fill="#A9782E"/>
-      <text x="418" y="965" style="font-size:34px;font-weight:600" fill="#A9782E">?</text>
-      <rect x="355" y="995" width="80" height="8" fill="#8A6323"/>
-      <line x1="326" y1="935" x2="286" y2="948" stroke="#F5E6C4" stroke-width="2" opacity="0.4"/>
-      <line x1="326" y1="980" x2="286" y2="992" stroke="#F5E6C4" stroke-width="2" opacity="0.4"/>
-      <line x1="75" y1="1032" x2="605" y2="1032" stroke="#16213E" stroke-width="1" opacity="0.25"/>
-
-      <rect x="60" y="1080" width="560" height="170" rx="8" fill="#16213E"/>
-      <circle cx="340" cy="1135" r="26" fill="#9DC3E6"/>
-      <path d="M329 1129 L336 1129 L339 1133 L351 1133 L351 1147 L329 1147 Z" fill="#FFFFFF"/>
-      <text x="340" y="1190" text-anchor="middle" style="font-size:13px" fill="#EDEEE8" data-i18n="bd.out1">C'est de cette question qu'est né</text>
-      <text x="340" y="1216" text-anchor="middle" style="font-size:22px;font-weight:500;font-family:'Fraunces',Georgia,serif" fill="#F7F7F3">DossierQuébec</text>
-      <text x="340" y="1236" text-anchor="middle" style="font-size:12px" fill="#9DC3E6" data-i18n="bd.tagline">Qui siège, qui légifère, qui vote quoi</text>
-      </svg>
-    </div>
+    
   </section>
 
   <!-- MINISTRES & DÉPUTÉS -->
@@ -1330,6 +1197,146 @@
     </div>
   </section>
 
+  <!-- PAGE CACHÉE — la BD « l'idée derrière le site ». Aucun onglet n'y mène :
+       accessible seulement par le « et moi » du bas de page (à côté de
+       « Construit avec Claude »). goToTab('bd') fonctionne sans bouton d'onglet. -->
+  <section class="view" id="view-bd">
+    <div class="section-head">
+      <div>
+        <h2 data-i18n="creator.h">Le mot du créateur</h2>
+        <div class="sub" data-i18n="creator.sub">Qui je suis et pourquoi j'ai bâti ce site</div>
+      </div>
+      <span class="bd-back" onclick="goToTab('apercu')" data-i18n="bd.back">← Retour à l'aperçu</span>
+    </div>
+    <div class="mission-box">
+      <svg width="100%" viewBox="0 0 680 1280" role="img" style="max-width:680px; display:block; margin:0 auto;">
+      <title>Bande dessinée : l'idée derrière DossierQuébec</title>
+      <desc>Ti-Jo travaille dans l'électricité le jour. Le soir, il regarde à la télé ce que les politiciens ont fait de sa journée. Mais eux, le soir, regardent-ils des vidéos de Ti-Jo ? C'est de cette question qu'est né DossierQuébec. Puis Martin Archambault, 45 ans, se présente comme l'idée derrière le site.</desc>
+      <defs><clipPath id="bdPhotoClip"><circle cx="165" cy="1160" r="55"/></clipPath></defs>
+
+      <rect x="60" y="40" width="560" height="260" rx="8" fill="#EDEEE8" stroke="#16213E" stroke-width="2"/>
+      <rect x="60" y="40" width="560" height="28" rx="8" fill="#16213E"/>
+      <rect x="60" y="54" width="560" height="14" fill="#16213E"/>
+      <text x="74" y="59" style="font-size:12px" fill="#F7F7F3" data-i18n="bd.cap1">Ti-Jo travaille dans l'électricité.</text>
+      <circle cx="105" cy="108" r="18" fill="#F2C14E"/>
+      <path d="M75 92 Q230 135 385 110" stroke="#16213E" stroke-width="1.5" fill="none"/>
+      <path d="M494 110 Q550 118 605 105" stroke="#16213E" stroke-width="1.5" fill="none"/>
+      <rect x="430" y="90" width="14" height="195" fill="#8A6323"/>
+      <rect x="380" y="105" width="114" height="10" fill="#8A6323"/>
+      <line x1="335" y1="285" x2="420" y2="150" stroke="#8A6323" stroke-width="4"/>
+      <line x1="365" y1="285" x2="445" y2="155" stroke="#8A6323" stroke-width="4"/>
+      <line x1="356" y1="251" x2="385" y2="252" stroke="#8A6323" stroke-width="3"/>
+      <line x1="369" y1="231" x2="397" y2="233" stroke="#8A6323" stroke-width="3"/>
+      <line x1="382" y1="211" x2="409" y2="213" stroke="#8A6323" stroke-width="3"/>
+      <line x1="394" y1="190" x2="421" y2="194" stroke="#8A6323" stroke-width="3"/>
+      <line x1="407" y1="170" x2="433" y2="174" stroke="#8A6323" stroke-width="3"/>
+      <rect x="395" y="198" width="8" height="22" rx="3" fill="#1F2E52"/>
+      <rect x="407" y="198" width="8" height="22" rx="3" fill="#1F2E52"/>
+      <rect x="392" y="161" width="26" height="40" rx="8" fill="#16213E"/>
+      <rect x="392" y="171" width="26" height="6" fill="#F2C14E"/>
+      <path d="M415 170 Q428 158 436 144" stroke="#16213E" stroke-width="8" stroke-linecap="round" fill="none"/>
+      <circle cx="437" cy="141" r="5" fill="#E9B58B"/>
+      <circle cx="405" cy="150" r="13" fill="#E9B58B"/>
+      <path d="M392 148 a13 13 0 0 1 26 0 z" fill="#F2C14E"/>
+      <rect x="388" y="146" width="34" height="4" rx="2" fill="#F2C14E"/>
+      <circle cx="400" cy="153" r="1.8" fill="#2B2118"/>
+      <polygon points="458,108 444,132 452,132 442,152 464,126 454,126" fill="#F2C14E"/>
+      <line x1="75" y1="285" x2="605" y2="285" stroke="#16213E" stroke-width="1" opacity="0.25"/>
+
+      <rect x="60" y="320" width="560" height="260" rx="8" fill="#EDEEE8" stroke="#16213E" stroke-width="2"/>
+      <rect x="60" y="320" width="560" height="28" rx="8" fill="#16213E"/>
+      <rect x="60" y="334" width="560" height="14" fill="#16213E"/>
+      <text x="74" y="339" style="font-size:12px" fill="#F7F7F3" data-i18n="bd.cap2">Le soir, il regarde ce que les politiciens ont fait de sa journée.</text>
+      <rect x="95" y="375" width="75" height="60" fill="#1F2E52" stroke="#16213E" stroke-width="1.5"/>
+      <circle cx="140" cy="392" r="9" fill="#F5E6C4"/>
+      <circle cx="110" cy="390" r="1.5" fill="#F5E6C4"/>
+      <circle cx="155" cy="420" r="1.5" fill="#F5E6C4"/>
+      <rect x="200" y="430" width="130" height="85" rx="4" fill="#16213E"/>
+      <rect x="207" y="437" width="116" height="64" fill="#1F2E52"/>
+      <rect x="245" y="478" width="36" height="16" fill="#A9782E"/>
+      <circle cx="263" cy="458" r="7" fill="#E9B58B"/>
+      <rect x="254" y="465" width="18" height="14" rx="4" fill="#3A4A6B"/>
+      <circle cx="314" cy="446" r="4" fill="#C0392B"/>
+      <rect x="225" y="515" width="80" height="8" fill="#8A6323"/>
+      <line x1="332" y1="455" x2="378" y2="468" stroke="#F5E6C4" stroke-width="2" opacity="0.4"/>
+      <line x1="332" y1="500" x2="378" y2="512" stroke="#F5E6C4" stroke-width="2" opacity="0.4"/>
+      <rect x="537" y="425" width="26" height="112" rx="10" fill="#9DC3E6"/>
+      <rect x="390" y="480" width="175" height="58" rx="10" fill="#9DC3E6"/>
+      <rect x="392" y="505" width="56" height="13" rx="6" fill="#1F2E52"/>
+      <rect x="392" y="515" width="11" height="32" rx="5" fill="#1F2E52"/>
+      <ellipse cx="390" cy="549" rx="12" ry="4" fill="#16213E"/>
+      <rect x="440" y="448" width="62" height="72" rx="14" fill="#16213E"/>
+      <circle cx="468" cy="430" r="19" fill="#E9B58B"/>
+      <path d="M451 427 Q452 411 468 410 Q485 411 486 428 Q477 417 468 417 Q459 417 451 427 Z" fill="#3A2E25"/>
+      <circle cx="461" cy="429" r="2" fill="#2B2118"/>
+      <path d="M456 440 L465 440" stroke="#3A2E25" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M450 470 Q440 478 437 485" stroke="#16213E" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <circle cx="435" cy="488" r="6" fill="#E9B58B"/>
+      <rect x="424" y="478" width="16" height="17" rx="2" fill="#F7F7F3" stroke="#B9BDC7" stroke-width="0.5"/>
+      <path d="M429 473 q2 -4 0 -8" stroke="#B9BDC7" stroke-width="1.5" fill="none"/>
+      <line x1="75" y1="552" x2="605" y2="552" stroke="#16213E" stroke-width="1" opacity="0.25"/>
+
+      <rect x="60" y="600" width="560" height="260" rx="8" fill="#EDEEE8" stroke="#16213E" stroke-width="2"/>
+      <rect x="60" y="600" width="560" height="28" rx="8" fill="#16213E"/>
+      <rect x="60" y="614" width="560" height="14" fill="#16213E"/>
+      <text x="74" y="619" style="font-size:12px" fill="#F7F7F3" data-i18n="bd.cap3">Mais eux, le soir… est-ce qu'ils regardent des vidéos de Ti-Jo ?</text>
+      <rect x="470" y="655" width="75" height="60" fill="#1F2E52" stroke="#16213E" stroke-width="1.5"/>
+      <circle cx="515" cy="672" r="9" fill="#F5E6C4"/>
+      <circle cx="485" cy="670" r="1.5" fill="#F5E6C4"/>
+      <circle cx="530" cy="700" r="1.5" fill="#F5E6C4"/>
+      <rect x="95" y="705" width="26" height="112" rx="10" fill="#C9A96A"/>
+      <rect x="100" y="760" width="175" height="58" rx="10" fill="#C9A96A"/>
+      <rect x="205" y="785" width="56" height="13" rx="6" fill="#1F2E52"/>
+      <rect x="250" y="795" width="11" height="32" rx="5" fill="#1F2E52"/>
+      <ellipse cx="263" cy="829" rx="12" ry="4" fill="#16213E"/>
+      <rect x="150" y="728" width="62" height="72" rx="14" fill="#1F2E52"/>
+      <polygon points="182,732 196,732 189,752" fill="#F7F7F3"/>
+      <rect x="186" y="734" width="6" height="20" rx="2" fill="#B3402F"/>
+      <circle cx="184" cy="710" r="19" fill="#E9B58B"/>
+      <path d="M167 707 Q168 691 184 690 Q201 691 202 708 Q193 697 184 697 Q175 697 167 707 Z" fill="#9AA0AA"/>
+      <circle cx="192" cy="708" r="2" fill="#2B2118"/>
+      <path d="M186 700 L197 702" stroke="#6E747E" stroke-width="2" stroke-linecap="round"/>
+      <path d="M200 750 Q212 758 217 765" stroke="#1F2E52" stroke-width="10" stroke-linecap="round" fill="none"/>
+      <circle cx="219" cy="768" r="6" fill="#E9B58B"/>
+      <rect x="224" y="762" width="20" height="9" rx="3" fill="#5C6270"/>
+      <circle cx="206" cy="698" r="3" fill="#A9782E"/>
+      <circle cx="214" cy="688" r="4" fill="#A9782E"/>
+      <text x="222" y="684" style="font-size:22px;font-weight:600" fill="#A9782E">?</text>
+      <rect x="330" y="710" width="130" height="85" rx="4" fill="#16213E"/>
+      <rect x="337" y="717" width="116" height="64" fill="#EDEEE8"/>
+      <line x1="355" y1="776" x2="378" y2="740" stroke="#8A6323" stroke-width="2"/>
+      <line x1="368" y1="778" x2="390" y2="742" stroke="#8A6323" stroke-width="2"/>
+      <rect x="381" y="743" width="11" height="14" rx="3" fill="#16213E"/>
+      <circle cx="386" cy="738" r="5.5" fill="#E9B58B"/>
+      <path d="M380.5 737 a5.5 5.5 0 0 1 11 0 z" fill="#F2C14E"/>
+      <polygon points="402,731 395,743 399,743 394,753 405,740 400,740" fill="#A9782E"/>
+      <text x="418" y="765" style="font-size:34px;font-weight:600" fill="#A9782E">?</text>
+      <rect x="355" y="795" width="80" height="8" fill="#8A6323"/>
+      <line x1="326" y1="735" x2="286" y2="748" stroke="#F5E6C4" stroke-width="2" opacity="0.4"/>
+      <line x1="326" y1="780" x2="286" y2="792" stroke="#F5E6C4" stroke-width="2" opacity="0.4"/>
+      <line x1="75" y1="832" x2="605" y2="832" stroke="#16213E" stroke-width="1" opacity="0.25"/>
+
+      <rect x="60" y="880" width="560" height="170" rx="8" fill="#16213E"/>
+      <circle cx="340" cy="935" r="26" fill="#9DC3E6"/>
+      <path d="M329 929 L336 929 L339 933 L351 933 L351 947 L329 947 Z" fill="#FFFFFF"/>
+      <text x="340" y="990" text-anchor="middle" style="font-size:13px" fill="#EDEEE8" data-i18n="bd.out1">C'est de cette question qu'est né</text>
+      <text x="340" y="1016" text-anchor="middle" style="font-size:22px;font-weight:500;font-family:'Fraunces',Georgia,serif" fill="#F7F7F3">DossierQuébec</text>
+      <text x="340" y="1036" text-anchor="middle" style="font-size:12px" fill="#9DC3E6" data-i18n="bd.tagline">Qui siège, qui légifère, qui vote quoi</text>
+
+      <rect x="60" y="1070" width="560" height="180" rx="8" fill="#EDEEE8" stroke="#16213E" stroke-width="2"/>
+      <image href="martin.png" x="110" y="1105" width="110" height="110" clip-path="url(#bdPhotoClip)" preserveAspectRatio="xMidYMid slice"/>
+      <circle cx="165" cy="1160" r="55" fill="none" stroke="#16213E" stroke-width="2"/>
+      <rect x="240" y="1105" width="350" height="105" rx="10" fill="#FFFFFF" stroke="#16213E" stroke-width="1.5"/>
+      <polygon points="240,1148 240,1172 220,1160" fill="#FFFFFF" stroke="#16213E" stroke-width="1.5"/>
+      <rect x="239" y="1150" width="4" height="20" fill="#FFFFFF"/>
+      <text x="260" y="1132" style="font-size:13px" fill="#16213E" data-i18n="bd.intro1">Bonjour, moi c'est</text>
+      <text x="260" y="1160" style="font-size:20px;font-weight:600" fill="#16213E">Martin Archambault</text>
+      <rect x="260" y="1168" width="120" height="3" fill="#A9782E"/>
+      <text x="260" y="1194" style="font-size:13px" fill="#16213E" data-i18n="bd.intro3">j'ai 45 ans et c'est moi l'idée derrière le site.</text>
+      </svg>
+    </div>
+  </section>
+
 </div>
 
 <footer>
@@ -1348,7 +1355,7 @@
       <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.62-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.29 0 .32.22.7.83.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5Z"/></svg>
       <span data-i18n="footer.source">Code source</span>
     </a>
-    <span id="footerRight">Construit avec Claude</span>
+    <span id="footerRight">Construit avec Claude</span><a class="footer-etmoi" role="button" tabindex="0" onclick="goToTab('bd')" data-i18n="footer.etmoi">et moi</a>
   </span>
 </footer>
 
@@ -1512,7 +1519,8 @@ const translations = {
     'quicknav.projets':"Bills",
     'quicknav.quoideneuf':"What's new",
     'quicknav.petitions':"Petitions",
-    'quicknav.creator':"A word from the creator",
+    'footer.etmoi':"and me",
+    'bd.back':"← Back to overview",
     'quicknav.personnes':"Who's involved",
     'quicknav.lexiqueitem':"Glossary",
     'quicknav.apropos':"Where this data comes from",
