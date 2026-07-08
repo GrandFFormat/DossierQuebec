@@ -104,15 +104,9 @@
   /* Logo à deux faces qui flippe : avant = Québec (cercle bleu poudre + dossier
      blanc), arrière = Canada (cercle rouge + dossier blanc). Indique qu'on peut
      sauter au site fédéral en cliquant. */
-  .flip-inner{position:absolute;inset:0;transform-style:preserve-3d;animation:brandFlip 6s ease-in-out infinite;}
+  .flip-inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform 0.7s ease-in-out;}
   .flip-face{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
   .flip-back{transform:rotateY(180deg);}
-  @keyframes brandFlip{
-    0%,42%   {transform:rotateY(0deg);}
-    58%,92%  {transform:rotateY(180deg);}
-    100%     {transform:rotateY(360deg);}
-  }
-  @media (prefers-reduced-motion: reduce){ .flip-inner{animation:none;} }
   .brand-text h1{
     font-family:'Fraunces',serif;
     font-weight:600;
@@ -5676,6 +5670,16 @@ function goToFederal(evt){
     ? 'Federal site (DossierCanada) — coming soon 🍁'
     : 'Site fédéral (DossierCanada) — à venir 🍁');
 }
+
+// Accroche du logo : un seul aller-retour. Flip vers le rouge (Canada) à 1 s,
+// retour au bleu (Québec) à 3 s, puis plus aucun flip. Respecte prefers-reduced-motion.
+(function(){
+  const inner = document.querySelector('.brand-mark .flip-inner');
+  if(!inner) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  setTimeout(()=>{ inner.style.transform = 'rotateY(180deg)'; }, 1000); // -> Canada (rouge)
+  setTimeout(()=>{ inner.style.transform = 'rotateY(360deg)'; }, 3000); // -> Québec (bleu), fin
+})();
 
 function openMobileMenu(){
   document.querySelector('nav.tabs').classList.add('open');
