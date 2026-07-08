@@ -23,7 +23,7 @@
 // le scraper s'arrête pour cette session — il ne devine jamais un numéro
 // suivant qui n'existe pas.
 
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, readFileSync, existsSync } from 'node:fs';
 
 const LEGISLATURE = 43;
 const SESSIONS = [1, 2, 3];
@@ -139,21 +139,45 @@ async function fetchVote(legislature, session, num) {
   };
 }
 
+// Votes déjà en base : ils sont IMMUABLES (un résultat de scrutin ne change pas)
+// et numérotés séquentiellement par session. On reprend donc juste APRÈS le plus
+// haut numéro déjà connu, au lieu de re-télécharger les ~735 votes à chaque run.
+// Un rafraîchissement quotidien ne récupère ainsi que les nouveaux votes
+// (quelques secondes au lieu de 10-15 min et 700+ requêtes à assnat).
+function loadExistingVotes() {
+  if (!existsSync(OUT_PATH)) return [];
+  try {
+    return JSON.parse(readFileSync(OUT_PATH, 'utf-8')).votes || [];
+  } catch {
+    return [];
+  }
+}
+
 async function main() {
-  const votes = [];
+  const votes = loadExistingVotes();
   let errors = 0;
+  let added = 0;
+
+  const maxBySession = new Map();
+  for (const v of votes) {
+    if (v.legislature === LEGISLATURE) {
+      maxBySession.set(v.session, Math.max(maxBySession.get(v.session) ?? 0, v.num));
+    }
+  }
 
   const sessionsToRun = process.env.SCRAPE_SESSION ? [Number(process.env.SCRAPE_SESSION)] : SESSIONS;
   const maxPerSession = process.env.SCRAPE_LIMIT ? Number(process.env.SCRAPE_LIMIT) : MAX_VOTES_PER_SESSION;
 
   for (const session of sessionsToRun) {
-    let num = 1;
+    const startNum = (maxBySession.get(session) ?? 0) + 1;
+    let num = startNum;
     let consecutiveMisses = 0;
     while (num <= maxPerSession && consecutiveMisses < 2) {
       try {
         const vote = await fetchVote(LEGISLATURE, session, num);
         if (vote) {
           votes.push(vote);
+          added++;
           consecutiveMisses = 0;
         } else {
           consecutiveMisses++;
@@ -166,7 +190,8 @@ async function main() {
       num++;
       await sleep(REQUEST_DELAY_MS);
     }
-    console.log(`Session ${session} : ${votes.filter((v) => v.session === session).length} votes trouvés (arrêt à ${num - 1}).`);
+    const total = votes.filter((v) => v.session === session).length;
+    console.log(`Session ${session} : reprise à ${startNum}, ${total} votes au total (arrêt à ${num - 1}).`);
   }
 
   writeFileSync(
@@ -178,7 +203,7 @@ async function main() {
     )
   );
 
-  console.log(`Terminé. ${votes.length} votes écrits dans ${OUT_PATH}, ${errors} erreurs.`);
+  console.log(`Terminé. ${added} nouveau(x) vote(s), ${votes.length} au total dans ${OUT_PATH}, ${errors} erreurs.`);
 }
 
 main().catch((err) => {
