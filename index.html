@@ -629,7 +629,7 @@
 
 <header class="top">
   <div class="brand">
-    <div class="brand-mark" id="brandFlip" role="button" tabindex="0" title="Sauter au site fédéral (DossierCanada) — à venir" aria-label="Site fédéral (DossierCanada) — à venir" onclick="goToFederal(event)">
+    <div class="brand-mark" id="brandFlip" role="button" tabindex="0" title="Aller au site fédéral — DossierCanada" aria-label="Aller au site fédéral — DossierCanada" onclick="goToFederal(event)">
       <div class="flip-inner">
         <div class="flip-face flip-front">
           <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#9DC3E6"/><path d="M9 12 L16 12 L19 16 L31 16 L31 30 L9 30 Z" fill="#fff"/></svg>
@@ -5911,14 +5911,10 @@ document.querySelector('.brand-mark').addEventListener('keydown', (e)=>{
   if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); goToFederal(e); }
 });
 
-// Le logo (dossier bleu poudre QC ↔ rouge Canada) mène au site fédéral.
-// PLACEHOLDER : DossierCanada n'est pas encore en ligne. Quand il le sera,
-// remplacer le corps par : window.location.href = 'https://<domaine-federal>';
+// Le logo (dossier bleu poudre QC ↔ rouge Canada) mène au site fédéral DossierCanada.
 function goToFederal(evt){
   if(evt) evt.stopPropagation();
-  alert(currentLang === 'en'
-    ? 'Federal site (DossierCanada) — coming soon 🍁'
-    : 'Site fédéral (DossierCanada) — à venir 🍁');
+  window.location.href = 'https://dossiercanada.ca/';
 }
 
 // Animation du logo : accroche puis flip continu. Flip vers le rouge (Canada) à
