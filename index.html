@@ -5914,7 +5914,7 @@ document.querySelector('.brand-mark').addEventListener('keydown', (e)=>{
 // Le logo (dossier bleu poudre QC ↔ rouge Canada) mène au site fédéral DossierCanada.
 function goToFederal(evt){
   if(evt) evt.stopPropagation();
-  window.location.href = 'https://dossiercanada.ca/';
+  window.open('https://dossiercanada.ca/', '_blank', 'noopener');
 }
 
 // Animation du logo : accroche puis flip continu. Flip vers le rouge (Canada) à
