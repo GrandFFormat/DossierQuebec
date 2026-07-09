@@ -845,8 +845,6 @@
       </div>
     </div>
 
-    <div class="account-box" id="flagBox"></div>
-
     <div data-i18n="apercu.recent.sub" style="text-align:center; color:var(--slate); font-size:12.5px; margin:2px 0 16px;">↓ Cliquez n'importe où dans le carré blanc pour voir le résumé ↓</div>
 
     <div id="billsList"></div>
@@ -4486,6 +4484,47 @@ async function loadFollowsFromSupabase(){
   }
 }
 
+// Projets de loi pour lesquels CE compte a demandé une explication (bill_flags).
+// La RLS n'autorise chaque personne à voir que ses propres lignes — donc ceci ne
+// révèle rien sur les autres. Alimente l'état « déjà demandé » du bouton par carte.
+let myFlaggedBills = {};
+async function loadMyFlagsFromSupabase(){
+  myFlaggedBills = {};
+  if(!currentUser) return;
+  const { data, error } = await supabaseClient.from('bill_flags')
+    .select('bill_id').eq('user_id', currentUser.id);
+  if(error){ console.error('loadMyFlagsFromSupabase failed:', error); return; }
+  for(const row of (data || [])) myFlaggedBills[row.bill_id] = true;
+}
+
+// Demande une explication sur un projet de loi (bouton par carte, 3 états).
+// Réutilise la table bill_flags : RLS + limite mensuelle inchangées, l'insert
+// reste réservé au rôle authenticated avec auth.uid() = user_id. Un doublon
+// (23505 = déjà demandé) est traité comme un succès.
+async function requestExplanation(billId, btnId){
+  if(!currentUser){ goToTab('compte'); return; }
+  const isEn = currentLang === 'en';
+  const btn = document.getElementById(btnId);
+  if(btn) btn.disabled = true;
+  const { error } = await supabaseClient.from('bill_flags').insert({ user_id: currentUser.id, bill_id: billId });
+  if(error && error.code !== '23505'){
+    // Refus serveur — typiquement la limite mensuelle (10) appliquée par la RLS.
+    console.error('requestExplanation insert error:', error);
+    if(btn) btn.disabled = false;
+    alert(isEn
+      ? "Couldn't record your request — you may have reached your monthly limit (10 requests)."
+      : "Impossible d'enregistrer la demande — vous avez peut-être atteint votre limite mensuelle (10 demandes).");
+    return;
+  }
+  myFlaggedBills[billId] = true; // succès OU doublon = « demandé »
+  if(btn){
+    btn.textContent = isEn ? '✓ Explanation requested' : '✓ Explication demandée';
+    btn.classList.add('on');
+    btn.disabled = true;
+  }
+  challengedCache = null; renderChallenged(); // le compteur a bougé
+}
+
 async function signInWithMagicLink(email){
   const { error } = await supabaseClient.auth.signInWithOtp({
     email,
@@ -4557,6 +4596,7 @@ async function initAuth(){
     const { data: { session } } = await supabaseClient.auth.getSession();
     currentUser = session?.user ?? null;
     if(currentUser) await loadFollowsFromSupabase();
+    await loadMyFlagsFromSupabase();
   }catch(e){
     console.error('initAuth failed:', e);
   }finally{
@@ -4569,6 +4609,7 @@ async function initAuth(){
     try{
       currentUser = newSession?.user ?? null;
       if(currentUser) await loadFollowsFromSupabase();
+      await loadMyFlagsFromSupabase();
     }catch(e){
       console.error('onAuthStateChange failed:', e);
     }finally{
@@ -4710,6 +4751,9 @@ async function checkIsAdmin(){
   return !!data;
 }
 
+// Paliers de pétition (le seuil monte via le bouton admin « Resend »).
+const PETITION_TIERS = [1000, 5000, 25000];
+
 async function renderAdminFlagCounts(){
   const container = document.getElementById('adminFlagCounts');
   if(!container) return;
@@ -4718,6 +4762,9 @@ async function renderAdminFlagCounts(){
 
   const { data, error } = await supabaseClient.from('bill_flags').select('bill_id');
   if(error){ console.error('renderAdminFlagCounts failed:', error); container.innerHTML = ''; return; }
+  // État de campagne (seuil courant + escalade en attente) — table bill_campaign.
+  const { data: campData } = await supabaseClient.from('bill_campaign').select('bill_id, threshold, escalation_pending');
+  const camp = {}; for(const r of (campData || [])) camp[r.bill_id] = r;
 
   const isEn = currentLang === 'en';
   const counts = {};
@@ -4727,15 +4774,48 @@ async function renderAdminFlagCounts(){
   const rowsHtml = entries.length ? entries.map(([billId, count]) => {
     const bill = bills.find(b => b.id === Number(billId));
     const title = bill ? (isEn ? (bill.titleEn || bill.title) : bill.title) : `#${billId}`;
-    return `<div class="account-row"><span>${title}</span><b>${count} / 1000</b></div>`;
+    const c = camp[billId];
+    const threshold = c ? c.threshold : PETITION_TIERS[0];
+    const pending = c && c.escalation_pending;
+    return `<div class="account-row" style="flex-wrap:wrap; gap:8px;">
+      <span style="flex:1 1 180px;">${title}</span>
+      <b>${count} / ${threshold}</b>
+      <button class="account-btn" style="padding:4px 10px; font-size:11px;" onclick="adminResend(${billId})">${pending ? (isEn ? '↑ queued' : '↑ en file') : 'Resend ↑'}</button>
+      <button class="account-btn" style="padding:4px 10px; font-size:11px;" onclick="adminReset(${billId})">Reset</button>
+    </div>`;
   }).join('') : `<div class="account-note">${isEn ? 'No requests yet.' : 'Aucune demande pour l\'instant.'}</div>`;
 
   container.innerHTML = `
     <div class="account-box">
-      <div class="account-note" style="margin-bottom:10px;"><b>${isEn ? 'Explanation requests (admin only)' : "Demandes d'explications (réservé aux admins)"}</b></div>
+      <div class="account-note" style="margin-bottom:10px;"><b>${isEn ? 'Explanation requests (admin only)' : "Demandes d'explications (réservé aux admins)"}</b> — ${isEn ? 'Resend raises the petition threshold and queues an escalation email in the next digest; Reset clears the campaign.' : "Resend monte le seuil de pétition et met un courriel d'escalade dans le prochain digest ; Reset remet la campagne à zéro."}</div>
       ${rowsHtml}
     </div>
   `;
+}
+
+// Escalade (bouton admin) : monte le seuil de pétition au palier suivant et pose
+// escalation_pending → le prochain digest aux 2 semaines annonce « le parrain a
+// répondu mais insuffisant, on continue jusqu'à X ». Mutation via la RLS admin.
+async function adminResend(billId){
+  const { data } = await supabaseClient.from('bill_campaign').select('threshold').eq('bill_id', billId).maybeSingle();
+  const cur = data ? data.threshold : PETITION_TIERS[0];
+  const next = PETITION_TIERS.find(t => t > cur) ?? cur;
+  if(next === cur && !confirm('Seuil déjà au maximum. Renvoyer quand même un courriel d\'escalade au prochain digest ?')) return;
+  const { error } = await supabaseClient.from('bill_campaign').upsert(
+    { bill_id: billId, threshold: next, escalation_pending: true, updated_at: new Date().toISOString() },
+    { onConflict: 'bill_id' }
+  );
+  if(error){ alert('Erreur : ' + error.message); return; }
+  alert(`Escalade posée (seuil ${cur} → ${next}). Le prochain digest l'annoncera.`);
+  renderAdminFlagCounts();
+}
+
+// Reset (bouton admin) : efface la campagne de ce projet — repart à zéro.
+async function adminReset(billId){
+  if(!confirm('Réinitialiser la campagne de ce projet (repart à zéro) ?')) return;
+  const { error } = await supabaseClient.from('bill_campaign').delete().eq('bill_id', billId);
+  if(error){ alert('Erreur : ' + error.message); return; }
+  renderAdminFlagCounts();
 }
 
 /* ---------------- RENDER ---------------- */
@@ -5435,12 +5515,35 @@ function billCard(b, ctx){
   // ils sont finaux, ne changeront plus d'étape, donc rien à suivre. Gardé sur
   // les « sur la glace » (laissés de côté) : un projet dormant pourrait être
   // réactivé, auquel cas la personne qui le suit voudra être avertie.
-  const canFollow = b.status !== 'sanctionne';
-  const followHint = isEn ? 'Email only when it changes stage' : 'Courriel seulement s\'il change d\'étape';
-  const followRow = canFollow ? `<div class="bill-follow-row">
-    <span class="follow-hint">${followHint}</span>
-    <button class="follow-btn ${isFollowed?'on':''}" onclick="event.stopPropagation(); toggleFollowBill(${b.id})">${isFollowed ? t('btn.following') : t('btn.follow')}</button>
-  </div>` : '';
+  // Bouton « Demander une explication » (remplace l'ancien « Suivre » pour les
+  // projets de loi — le suivi des personnes reste intact ailleurs). 3 états :
+  // déconnecté (mène au compte), à demander, déjà demandé. Seulement sur les
+  // projets ACTIFS (status 'encours') : un projet sanctionné ou laissé de côté
+  // ne se « challenge » plus.
+  const isFlagged = !!myFlaggedBills[b.id];
+  const canFlag = b.status === 'encours';
+  const flagBtnId = 'demand-' + ctx + '-' + b.id;
+  const mailHint = isEn
+    ? 'One email at the moments that count (500 & 1,000 requests, or if it becomes law)'
+    : 'Un courriel aux moments qui comptent (500 et 1000 demandes, ou si ça devient loi)';
+  let flagRow = '';
+  if(canFlag){
+    let hint, label, onclick = '', disabled = '';
+    if(!currentUser){
+      hint = isEn ? 'Sign in — one request per person, no anonymous requests' : 'Connexion requise — une demande par personne, aucune demande anonyme';
+      label = isEn ? '🔒 Sign in to ask' : '🔒 Se connecter pour demander';
+      onclick = "goToTab('compte')";
+    } else if(isFlagged){
+      hint = mailHint; label = isEn ? '✓ Explanation requested' : '✓ Explication demandée'; disabled = 'disabled';
+    } else {
+      hint = mailHint; label = isEn ? 'Ask for an explanation' : 'Demander une explication';
+      onclick = `requestExplanation(${b.id}, '${flagBtnId}')`;
+    }
+    flagRow = `<div class="bill-follow-row">
+      <span class="follow-hint">${hint}</span>
+      <button class="follow-btn ${isFlagged?'on':''}" id="${flagBtnId}" ${disabled} onclick="event.stopPropagation(); ${onclick}">${label}</button>
+    </div>`;
+  }
   return `
     <div class="bill" onclick="toggleBillSummary('${domId}', event)">
       <div class="head">
@@ -5455,7 +5558,7 @@ function billCard(b, ctx){
           <span class="status-pill ${statusClass(b.status)}">${statusLabel(b.status)}</span>
         </div>
       </div>
-      ${followRow}
+      ${flagRow}
       <div class="stepper">
         ${steps.map((s,i)=>`<div class="step ${i<displayStep(b.step)-1?'done':''} ${i===displayStep(b.step)-1?'current':''}"></div>`).join('')}
       </div>
@@ -5650,19 +5753,55 @@ function renderApercuBills(){
 // le seuil de demandes d'explications, via l'agrégat Supabase flag_counts() qui
 // ne renvoie QUE les totaux (jamais qui a demandé quoi). Robuste : si la fonction
 // SQL n'existe pas encore, l'appel échoue en douceur -> état vide, pas d'erreur.
-const CHALLENGE_THRESHOLD = 1000;
+// Paliers de « challenge » (montent en continu, le compteur ne se remet jamais à
+// zéro). 500 = apparition + momentum ; 1000 = seuil pétition ; au-dessus =
+// escalade (déclenchée MANUELLEMENT par l'admin — voir le panneau admin).
+// ⚠️ La fonction SQL flag_counts() doit renvoyer les projets >= 500 (le 1er palier).
+const CHALLENGE_TIERS = [500, 1000, 2500, 5000, 25000];
+const CHALLENGE_THRESHOLD = CHALLENGE_TIERS[0];
+const PETITION_THRESHOLD = 1000;
+const nextChallengeTier = cnt => CHALLENGE_TIERS.find(t => cnt < t) ?? null;
 let challengedCache = null;
+
+// Partage social d'un projet challengé — accès DIRECT en un clic (pas de
+// copier-coller). Message : « X personnes contestent le projet de loi n° N —
+// [titre]. Connectez-vous pour appuyer cette demande : [lien] ». X et « Copier »
+// portent le texte complet ; Facebook n'affiche que l'aperçu du lien (règle FB,
+// pas contournable) — le bouton reste direct quand même.
+function shareChallenge(billId, count, platform, evt){
+  if(evt) evt.stopPropagation();
+  const isEn = currentLang === 'en';
+  const b = bills.find(x => x.id === Number(billId));
+  const num = b ? b.num : '';
+  const title = b ? (isEn ? (b.titleEn || b.title) : b.title) : '';
+  const n = Number(count).toLocaleString(isEn ? 'en-CA' : 'fr-CA');
+  const url = 'https://dossierquebec.ca/';
+  const text = isEn
+    ? `${n} people are challenging Bill no. ${num} — ${title}. Sign in to support this request:`
+    : `${n} personnes contestent le projet de loi n° ${num} — ${title}. Connectez-vous pour appuyer cette demande :`;
+  if(platform === 'x'){
+    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank', 'noopener,width=600,height=520');
+  } else if(platform === 'fb'){
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank', 'noopener,width=600,height=520');
+  } else { // copier
+    const full = text + ' ' + url;
+    (navigator.clipboard ? navigator.clipboard.writeText(full) : Promise.reject())
+      .then(() => alert(isEn ? 'Copied — paste it anywhere!' : 'Copié — collez-le où vous voulez !'))
+      .catch(() => prompt(isEn ? 'Copy this:' : 'Copiez ceci :', full));
+  }
+}
+
 async function renderChallenged(){
   const el = document.getElementById('challengedList');
   if(!el) return;
   const isEn = currentLang === 'en';
-  const seuil = CHALLENGE_THRESHOLD.toLocaleString(isEn ? 'en-CA' : 'fr-CA');
+  const fmt = n => n.toLocaleString(isEn ? 'en-CA' : 'fr-CA');
   const titleEl = document.getElementById('challengedTitle');
   const subEl = document.getElementById('challengedSub');
   if(titleEl) titleEl.textContent = isEn ? 'Bills challenged by citizens' : 'Projets challengés par les citoyen·ne·s';
   if(subEl) subEl.textContent = isEn
-    ? `When a bill reaches ${seuil} requests for explanations, it appears here first — a signal of real public interest`
-    : `Quand un projet de loi atteint ${seuil} demandes d'explications, il apparaît ici en premier — le signal d'un vrai intérêt citoyen`;
+    ? `From ${fmt(CHALLENGE_THRESHOLD)} requests for explanations a bill appears here — at ${fmt(PETITION_THRESHOLD)}, we push for a petition`
+    : `Dès ${fmt(CHALLENGE_THRESHOLD)} demandes d'explications, un projet apparaît ici — à ${fmt(PETITION_THRESHOLD)}, on pousse pour une pétition`;
 
   if(challengedCache === null){
     try{
@@ -5679,27 +5818,38 @@ async function renderChallenged(){
   if(challenged.length){
     el.innerHTML = challenged.map(c => {
       const b = c.bill;
-      const n = c.cnt.toLocaleString(isEn ? 'en-CA' : 'fr-CA');
+      const cnt = c.cnt;
       const title = isEn ? (b.titleEn || b.title) : b.title;
       const numLabel = isEn ? 'BILL NO.' : 'PROJET DE LOI N°';
-      return `<div class="bill" onclick="goToTab('projets')" style="cursor:pointer;">
-        <div class="head">
+      const next = nextChallengeTier(cnt);
+      const progress = next ? `${fmt(cnt)} / ${fmt(next)}` : fmt(cnt);
+      const flames = '🔥'.repeat(CHALLENGE_TIERS.filter(t => cnt >= t).length) || '🔥';
+      const petitionBadge = cnt >= PETITION_THRESHOLD
+        ? `<div class="meta" style="margin-top:4px; color:var(--gold);">${isEn ? '⚑ Petition threshold reached' : '⚑ Seuil de pétition atteint'}</div>` : '';
+      return `<div class="bill">
+        <div class="head" onclick="goToTab('projets')" style="cursor:pointer;">
           <div>
             <div class="num">${numLabel} ${b.num}</div>
             <h3>${title}</h3>
           </div>
-          <div style="flex:none;"><span class="status-pill status-sanctionne">🔥 ${n} ${isEn ? 'requests' : 'demandes'}</span></div>
+          <div style="flex:none; text-align:right;"><span class="status-pill status-sanctionne">${flames} ${progress}</span></div>
         </div>
-        <div class="meta" style="margin-top:6px;">${isEn ? 'Citizens are asking for explanations on this bill.' : 'Des citoyen·ne·s demandent des explications sur ce projet.'}</div>
+        ${petitionBadge}
+        <div class="bill-follow-row">
+          <span class="follow-hint">${isEn ? 'Share:' : 'Partager :'}</span>
+          <button class="follow-btn" onclick="event.stopPropagation(); shareChallenge(${b.id}, ${cnt}, 'x', event)" aria-label="Partager sur X">𝕏</button>
+          <button class="follow-btn" onclick="event.stopPropagation(); shareChallenge(${b.id}, ${cnt}, 'fb', event)" aria-label="Partager sur Facebook">Facebook</button>
+          <button class="follow-btn" onclick="event.stopPropagation(); shareChallenge(${b.id}, ${cnt}, 'copy', event)">${isEn ? '⧉ Copy' : '⧉ Copier'}</button>
+        </div>
       </div>`;
     }).join('');
   } else {
     el.innerHTML = `<div style="background:var(--card); border:1px dashed var(--line); border-radius:var(--radius); padding:22px 18px; text-align:center; color:var(--slate);">
       <div style="font-size:26px; margin-bottom:8px;">🔎</div>
       <div style="font-size:14px; line-height:1.65; max-width:580px; margin:0 auto;">${isEn
-        ? `No bill has reached ${seuil} requests yet. This is where the bills the most citizens want explained will appear. Be the first to challenge one.`
-        : `Aucun projet n'a encore atteint ${seuil} demandes. C'est ici qu'apparaîtront les projets que le plus de citoyen·ne·s veulent voir expliqués. Soyez la première personne à en challenger un.`}</div>
-      <button class="sort-toggle" style="margin-top:14px; cursor:pointer;" onclick="goToTab('projets')">${isEn ? 'Challenge a bill →' : 'Challenger un projet →'}</button>
+        ? `No bill has reached ${fmt(CHALLENGE_THRESHOLD)} requests yet. This is where the bills the most citizens want explained will appear — ask for an explanation on any active bill to get one started.`
+        : `Aucun projet n'a encore atteint ${fmt(CHALLENGE_THRESHOLD)} demandes. C'est ici qu'apparaîtront les projets que le plus de citoyen·ne·s veulent voir expliqués — demandez une explication sur n'importe quel projet actif pour en lancer un.`}</div>
+      <button class="sort-toggle" style="margin-top:14px; cursor:pointer;" onclick="goToTab('projets')">${isEn ? 'Go to bills →' : 'Aller aux projets de loi →'}</button>
     </div>`;
   }
 }
