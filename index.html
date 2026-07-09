@@ -718,6 +718,14 @@
       </div>
     </div>
 
+    <div class="section-head" id="sec-challenged">
+      <div>
+        <h2 id="challengedTitle">Projets challengés par les citoyen·ne·s</h2>
+        <div class="sub" id="challengedSub"></div>
+      </div>
+    </div>
+    <div id="challengedList"></div>
+
     <div class="section-head" id="sec-projets-recents">
       <div>
         <h2 data-i18n="h.billsrecent">Projets de loi récemment actifs</h2>
@@ -1664,6 +1672,7 @@ function applyLanguage(){
   renderApercuBills();
   renderApercuPetitions();
   renderNews();
+  renderChallenged();
   document.querySelectorAll('.snooze-pill').forEach(pill=>{
     // La pastille de l'intro compacte (#introCompact) n'a pas de <span> imbriqué
     // comme les autres — sans ce repli, ça plantait ici et bloquait tout le
@@ -5637,6 +5646,64 @@ function renderApercuBills(){
   document.getElementById('apercuBills').innerHTML = bills.slice(0,4).map(b=>billCard(b,'apercu')).join('');
 }
 
+// Projets « challengés » : affiche PUBLIQUEMENT les projets de loi ayant atteint
+// le seuil de demandes d'explications, via l'agrégat Supabase flag_counts() qui
+// ne renvoie QUE les totaux (jamais qui a demandé quoi). Robuste : si la fonction
+// SQL n'existe pas encore, l'appel échoue en douceur -> état vide, pas d'erreur.
+const CHALLENGE_THRESHOLD = 1000;
+let challengedCache = null;
+async function renderChallenged(){
+  const el = document.getElementById('challengedList');
+  if(!el) return;
+  const isEn = currentLang === 'en';
+  const seuil = CHALLENGE_THRESHOLD.toLocaleString(isEn ? 'en-CA' : 'fr-CA');
+  const titleEl = document.getElementById('challengedTitle');
+  const subEl = document.getElementById('challengedSub');
+  if(titleEl) titleEl.textContent = isEn ? 'Bills challenged by citizens' : 'Projets challengés par les citoyen·ne·s';
+  if(subEl) subEl.textContent = isEn
+    ? `When a bill reaches ${seuil} requests for explanations, it appears here first — a signal of real public interest`
+    : `Quand un projet de loi atteint ${seuil} demandes d'explications, il apparaît ici en premier — le signal d'un vrai intérêt citoyen`;
+
+  if(challengedCache === null){
+    try{
+      const { data, error } = await supabaseClient.rpc('flag_counts');
+      challengedCache = (!error && Array.isArray(data)) ? data : [];
+    }catch(e){ challengedCache = []; }
+  }
+
+  const challenged = challengedCache
+    .map(c => ({ cnt: Number(c.cnt), bill: bills.find(b => b.id === Number(c.bill_id)) }))
+    .filter(c => c.bill && c.cnt >= CHALLENGE_THRESHOLD)
+    .sort((a, b) => b.cnt - a.cnt);
+
+  if(challenged.length){
+    el.innerHTML = challenged.map(c => {
+      const b = c.bill;
+      const n = c.cnt.toLocaleString(isEn ? 'en-CA' : 'fr-CA');
+      const title = isEn ? (b.titleEn || b.title) : b.title;
+      const numLabel = isEn ? 'BILL NO.' : 'PROJET DE LOI N°';
+      return `<div class="bill" onclick="goToTab('projets')" style="cursor:pointer;">
+        <div class="head">
+          <div>
+            <div class="num">${numLabel} ${b.num}</div>
+            <h3>${title}</h3>
+          </div>
+          <div style="flex:none;"><span class="status-pill status-sanctionne">🔥 ${n} ${isEn ? 'requests' : 'demandes'}</span></div>
+        </div>
+        <div class="meta" style="margin-top:6px;">${isEn ? 'Citizens are asking for explanations on this bill.' : 'Des citoyen·ne·s demandent des explications sur ce projet.'}</div>
+      </div>`;
+    }).join('');
+  } else {
+    el.innerHTML = `<div style="background:var(--card); border:1px dashed var(--line); border-radius:var(--radius); padding:22px 18px; text-align:center; color:var(--slate);">
+      <div style="font-size:26px; margin-bottom:8px;">🔎</div>
+      <div style="font-size:14px; line-height:1.65; max-width:580px; margin:0 auto;">${isEn
+        ? `No bill has reached ${seuil} requests yet. This is where the bills the most citizens want explained will appear. Be the first to challenge one.`
+        : `Aucun projet n'a encore atteint ${seuil} demandes. C'est ici qu'apparaîtront les projets que le plus de citoyen·ne·s veulent voir expliqués. Soyez la première personne à en challenger un.`}</div>
+      <button class="sort-toggle" style="margin-top:14px; cursor:pointer;" onclick="goToTab('projets')">${isEn ? 'Challenge a bill →' : 'Challenger un projet →'}</button>
+    </div>`;
+  }
+}
+
 const deputeById = new Map(deputes.map(d=>[d.assnatId, d]));
 const voteById = new Map(votes.map(v=>[v.id, v]));
 
@@ -5934,6 +6001,7 @@ function sortRoadmapItems(){
   renderVotes();
   renderDeputes();
   renderNews();
+  renderChallenged();
   await loadSnoozedSections();
   applyLanguage();
 })();
