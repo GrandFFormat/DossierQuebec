@@ -59,7 +59,7 @@ export default async function handler(req, res) {
       '<p>Vous ne recevrez plus le résumé hebdomadaire par courriel.</p>' +
       '<p style="font-size:13px;color:#5C6270;">Vos suivis et demandes d\'explications restent intacts sur le site — seuls les courriels s\'arrêtent. ' +
       'Pour reprendre les alertes plus tard, écrivez-nous ou re-suivez un projet de loi une fois cette option rétablie.</p>' +
-      '<p><a href="https://dossierquebec.com">Retour à DossierQuébec</a></p>'
+      '<p><a href="https://www.dossierquebec.ca">Retour à DossierQuébec</a></p>'
     ));
   } catch (err) {
     console.error('unsubscribe failed:', err);
