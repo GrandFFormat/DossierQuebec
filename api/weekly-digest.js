@@ -15,7 +15,7 @@
 //   RESEND_API_KEY               clé API Resend
 //   DIGEST_FROM                  ex. "DossierQuébec <alertes@dossierquebec.com>"
 //   CRON_SECRET                  fourni automatiquement par Vercel pour sécuriser le cron
-//   PUBLIC_SITE_URL              ex. https://www.dossierquebec.ca (pour les liens du courriel)
+//   PUBLIC_SITE_URL              ex. https://dossierquebec.ca (pour les liens du courriel)
 
 import { parse } from 'csv-parse/sync';
 import crypto from 'node:crypto';
@@ -200,7 +200,7 @@ export default async function handler(req, res) {
 
     // 7. Courriels des utilisateurs.
     const emailById = await getAllUserEmails();
-    const siteUrl = process.env.PUBLIC_SITE_URL || 'https://www.dossierquebec.ca';
+    const siteUrl = process.env.PUBLIC_SITE_URL || 'https://dossierquebec.ca';
 
     // 8. Un courriel par personne (sauf désabonnées), avec lien de désabonnement.
     let sent = 0;
