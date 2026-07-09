@@ -5,7 +5,8 @@
       "name": "veille-assnat",
       "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
       "runtimeArgs": ["scripts/static-server.js"],
-      "port": 8080
+      "port": 8080,
+      "autoPort": true
     }
   ]
 }
