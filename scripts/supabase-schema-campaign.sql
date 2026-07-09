@@ -55,7 +55,13 @@ alter table public.bill_campaign enable row level security;
 grant select, insert, update, delete on public.bill_campaign to service_role;
 
 -- Les admins (table public.admins) peuvent lire et agir (boutons Resend/Reset).
--- Personne d'autre n'y touche.
+-- Personne d'autre n'y touche. Les `drop policy if exists` rendent ce fichier
+-- re-exécutable sans erreur « policy already exists » (Postgres n'a pas de
+-- `create policy if not exists`).
+drop policy if exists "admins read campaign" on public.bill_campaign;
+drop policy if exists "admins write campaign" on public.bill_campaign;
+drop policy if exists "admins update campaign" on public.bill_campaign;
+drop policy if exists "admins delete campaign" on public.bill_campaign;
 create policy "admins read campaign" on public.bill_campaign for select
   using (exists (select 1 from public.admins a where a.user_id = auth.uid()));
 create policy "admins write campaign" on public.bill_campaign for insert
