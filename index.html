@@ -1036,6 +1036,7 @@
     <div class="quick-nav" id="quickNavLexique">
       <span class="quick-nav-label" data-i18n="quicknav.label">Aller à :</span>
       <a data-jump="sec-personnes" data-i18n="quicknav.personnes">Qui gravite autour</a>
+      <a data-jump="sec-lobby" data-i18n="quicknav.lobby">Registre des lobbyistes</a>
       <a data-jump="sec-lexique" data-i18n="quicknav.lexiqueitem">Lexique</a>
       <a data-jump="sec-apropos" data-i18n="quicknav.apropos">D'où viennent ces données</a>
     </div>
@@ -1114,6 +1115,15 @@
     </div>
 
     <div class="info-box" data-i18n="pers.info">Ces personnes exercent des fonctions publiques officielles et sont nommées selon un processus prévu par la loi — c'est en cela que l'information ci-dessus est publique. Ça ne veut pas dire que tout ce qui les concerne devient public : je m'en tiens ici à leur fonction officielle, comme pour tout le reste du site.</div>
+    </div>
+
+    <div class="section-head" id="sec-lobby"><div><h2 data-i18n="h.lobby">Le registre des lobbyistes</h2><div class="sub" data-i18n="lobby.sub">Qui est payé pour influencer les décisions publiques — et comment le consulter</div></div></div>
+    <div class="info-box" style="scroll-margin-top:12px;">
+      <p data-i18n="lobby.body" style="margin:0 0 8px;">Toute personne payée pour communiquer avec des <b>titulaires de charge publique</b> (ministres, député·e·s, hauts fonctionnaires…) au sujet de lois, règlements, subventions ou contrats doit s'inscrire à un <b>registre public</b>, supervisé par le <b>Commissaire au lobbyisme du Québec</b>, une institution indépendante. Les lobbyistes doivent y déclarer leurs mandats.</p>
+      <p data-i18n="lobby.note" style="margin:0 0 10px; color:var(--slate); font-size:12.5px;">Pourquoi ce site ne reproduit pas ce registre : ses données ne sont pas offertes en données ouvertes (rien sur Données Québec) et ne sont consultables qu'à travers l'outil de recherche officiel. Plutôt que d'en faire une copie qui ne serait pas fiable ni à jour, on renvoie directement aux outils publics officiels.</p>
+      <div style="font-size:12.5px;">
+        <a href="https://www.carrefourlobby.quebec/recherche-mandats" target="_blank" rel="noopener" style="color:var(--gold); white-space:nowrap;" data-i18n="lobby.link1">Rechercher dans le registre ↗</a><span style="color:var(--line); margin:0 8px;">·</span><a href="https://www.carrefourlobby.quebec/mandats-publies" target="_blank" rel="noopener" style="color:var(--gold); white-space:nowrap;" data-i18n="lobby.link2">Mandats récemment publiés ↗</a><span style="color:var(--line); margin:0 8px;">·</span><a href="https://lobbyisme.quebec/" target="_blank" rel="noopener" style="color:var(--gold); white-space:nowrap;" data-i18n="lobby.link3">Commissaire au lobbyisme ↗</a>
+      </div>
     </div>
 
     <div class="section-head" id="sec-lexique"><div><h2 data-i18n="h.lexique">Lexique du jargon parlementaire</h2><div class="sub" data-i18n="h.lexique.sub">Pour comprendre le reste du site sans avoir fait un cours de science politique</div></div><span class="snooze-pill" onclick="toggleSnooze('lexique')" id="snooze-lexique"><span data-i18n="snooze.label">😴 Réduire</span></span></div>
@@ -1490,6 +1500,13 @@ const translations = {
     'pers.8.role':"Commissioner for the Well-Being and Rights of Children", 'pers.8.desc':"The most recent institution in this group, created in 2023.",
     'pers.badge.designee':"Appointed officer",
     'pers.info':"These people hold official public functions and are appointed through a legally defined process — that's what makes the information above public. That doesn't mean everything about them becomes public: I stick to their official function here, as with the rest of the site.",
+    'h.lobby':"The lobbyist registry",
+    'lobby.sub':"Who's paid to influence public decisions — and how to look it up",
+    'lobby.body':"Anyone paid to communicate with <b>public office holders</b> (ministers, MNAs, senior officials…) about laws, regulations, grants or contracts must register in a <b>public registry</b>, overseen by the <b>Quebec Lobbying Commissioner</b>, an independent institution. Lobbyists must declare their mandates there.",
+    'lobby.note':"Why this site doesn't reproduce the registry: its data isn't offered as open data (nothing on Données Québec) and is only accessible through the official search tool. Rather than make a copy that wouldn't be reliable or up to date, we link straight to the official public tools.",
+    'lobby.link1':"Search the registry ↗",
+    'lobby.link2':"Recently published mandates ↗",
+    'lobby.link3':"Lobbying Commissioner ↗",
     // Petitions
     'pet.sub':"Real e-petitions currently open for signature — recorded June 23, 2026",
     'pet.info':"Each petition above is reproduced as-is from the National Assembly's official list, with a direct link to the page where you can sign it. The signature count shown is the one recorded at the last update — for the exact, current count, or to sign, use the \u201cView and sign on assnat.qc.ca\u201d link on each card.",
@@ -1522,6 +1539,7 @@ const translations = {
     'footer.etmoi':"and me",
     'bd.back':"← Back to overview",
     'quicknav.personnes':"Who's involved",
+    'quicknav.lobby':"Lobbyist registry",
     'quicknav.lexiqueitem':"Glossary",
     'quicknav.apropos':"Where this data comes from",
     'quicknav.ministres':"Cabinet",
