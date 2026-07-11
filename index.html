@@ -6386,7 +6386,7 @@ function billCard(b, ctx){
     let hint, label, onclick = '', disabled = '';
     if(!currentUser){
       hint = isEn ? 'Sign in — one request per person, no anonymous requests' : 'Connexion requise — une demande par personne, aucune demande anonyme';
-      label = isEn ? '🔒 Sign in to ask' : '🔒 Se connecter pour demander';
+      label = isEn ? '🔒 Sign in to challenge' : '🔒 Se connecter pour challenger';
       onclick = "goToTab('compte')";
     } else if(isFlagged){
       hint = mailHint; label = isEn ? '✓ Explanation requested' : '✓ Explication demandée'; disabled = 'disabled';
