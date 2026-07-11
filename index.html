@@ -1449,8 +1449,8 @@
     <div class="band band-blue bleed" id="band-comparateur">
     <div class="section-head" id="sec-comparateur">
       <div>
-        <h2 data-i18n="h.comparateur">Comparateur de ministres</h2>
-        <div class="sub" data-i18n="comp.sub">Choisissez deux ministres pour voir leurs dossiers côte à côte</div>
+        <h2 data-i18n="h.comparateur">Comparateur</h2>
+        <div class="sub" data-i18n="comp.sub">Deux ministres, les mêmes faits, côte à côte — jamais un classement</div>
       </div>
     </div>
     <div class="toolbar comparateur-toolbar">
@@ -2131,8 +2131,8 @@ const translations = {
     'min.sub2b':" ministers — official quebec.ca list",
     'min.restTitle':"The rest of the Assembly",
     'min.restNote':"Every party — 125 seats total",
-    'h.comparateur':"Minister comparator",
-    'comp.sub':"Pick two ministers to see their files side by side",
+    'h.comparateur':"Comparator",
+    'comp.sub':"Two ministers, the same facts, side by side — never a ranking",
     'h.projets':"Bills",
     'h.votes':"Vote registry",
     'h.compte':"Account, synced follows — and about the project",
@@ -6223,19 +6223,14 @@ function renderComparateurTable(){
   const billsA = billsSponsoredBy(nameA);
   const billsB = billsSponsoredBy(nameB);
 
-  const attCell = (att, pres) => pres ? pres : (att ? `${att.rate}% (${att.participated}/${att.total})` : (isEn ? 'Not available' : 'Non disponible'));
-  const billsCell = (list) => {
-    if(list.length === 0) return isEn ? 'None found' : 'Aucun trouvé';
-    const titles = list.slice(0,3).map(b => isEn ? (b.titleEn||b.title) : b.title).join(' · ');
-    return `${list.length} — ${titles}${list.length > 3 ? '…' : ''}`;
-  };
-
+  // Valeurs concises comme la maquette (pas de listes de titres qui débordent).
+  const attCell = (att, pres) => pres ? '—' : (att ? `${att.rate} %` : (isEn ? 'n/a' : 'n/d'));
   const rows = [
-    [isEn?'Current portfolio':'Portefeuille actuel', isEn?(mA.roleEn||mA.role):mA.role, isEn?(mB.roleEn||mB.role):mB.role],
+    [isEn?'Portfolio':'Portefeuille', isEn?(mA.roleEn||mA.role):mA.role, isEn?(mB.roleEn||mB.role):mB.role],
     [isEn?'Party':'Parti', mA.party, mB.party],
-    [isEn?'Riding — region':'Circonscription — région', depA?`${depA.riding} — ${depA.region}`:'?', depB?`${depB.riding} — ${depB.region}`:'?'],
-    [isEn?'Attendance':'Présence', attCell(attA,presA), attCell(attB,presB)],
-    [isEn?'Bills sponsored':'Projets de loi parrainés', billsCell(billsA), billsCell(billsB)],
+    [isEn?'Riding':'Circonscription', depA?depA.riding:'?', depB?depB.riding:'?'],
+    [isEn?'Vote attendance':'Présence votes', attCell(attA,presA), attCell(attB,presB)],
+    [isEn?'Bills sponsored':'PL parrainés', String(billsA.length), String(billsB.length)],
   ];
 
   container.innerHTML = `
