@@ -881,6 +881,44 @@
   }
   #band-challenge-explainer p{font-size:16.5px; font-weight:500; line-height:1.5; max-width:760px; margin:0 0 12px;}
 
+  /* ---------- PHASE 4 : VOTES ---------- */
+  .vote-card{border:3px solid var(--ink); box-shadow:var(--shadow); background:#fff;}
+  .vote-card h3{font-weight:800; font-size:17px; letter-spacing:-0.01em;}
+  .result-badge{
+    font-family:'Archivo Narrow',sans-serif; font-size:12px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.04em; border:2px solid var(--ink);
+    padding:4px 11px; white-space:nowrap; flex:none; align-self:flex-start;
+  }
+  .result-badge.adopte{background:var(--green-soft); color:#14532D;}
+  .result-badge.rejete{background:var(--red-soft); color:var(--red);}
+
+  /* Barre de résultat segmentée, bordée (maquette) */
+  .bar{height:16px; border:2px solid var(--ink); background:#D8D4C8;}
+  .bar .seg.pour{background:#2E9958;}
+  .bar .seg.contre{background:#D9442F; border-left:2px solid var(--ink);}
+  .bar .seg.abst{background:#D8D4C8; opacity:1; border-left:2px solid var(--ink);}
+
+  /* Décompte compact en gros chiffres */
+  .vote-compact-row{font-family:'Archivo',sans-serif; font-size:13px;}
+  .vote-compact-row b{font-size:21px; font-weight:900; letter-spacing:-0.02em;}
+
+  .info-box{border:2px solid var(--ink); background:#fff;}
+
+  /* Bande bleue « Comment lire un vote » */
+  #band-lire-vote{margin-top:34px;}
+  #band-lire-vote h2{
+    font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase;
+    letter-spacing:-0.02em; font-size:clamp(26px, 3.2vw, 40px); margin:0 0 30px; color:#fff;
+  }
+  .lire-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;}
+  .lire-box{border:3px solid #fff; padding:22px 24px;}
+  .lire-box h3{font-size:24px; font-weight:900; margin:0 0 10px; color:#fff; letter-spacing:-0.01em;}
+  .lire-box p{font-size:15px; line-height:1.5; margin:0; color:#D6E4FF; font-weight:500;}
+  .lire-box.hl{border-color:var(--yellow); background:rgba(255,210,77,0.08);}
+  .lire-box.hl h3{color:var(--yellow);}
+  .lire-box.hl p{color:#fff;}
+  @media (max-width:900px){ .lire-grid{grid-template-columns:1fr;} }
+
   @media (max-width:640px){
     header.top{padding:24px 18px 18px;}
     .app{padding:0 18px 60px;}
@@ -1268,9 +1306,18 @@
 
   <!-- VOTES -->
   <section class="view" id="view-votes">
+    <!-- Hero de vue (refonte brutaliste) -->
+    <div class="view-hero">
+      <h1 class="hero-h1 hero-h1-md">
+        <span>Qui a voté</span>
+        <span class="hero-outline">pour, contre, absent.</span>
+      </h1>
+      <p class="view-hero-sub">Le registre des votes nominatifs, tel quel. <b>On n'interprète pas — on montre.</b> Une absence peut être une mission officielle, une maladie, un conflit d'horaire.</p>
+    </div>
+
     <div class="section-head">
       <div>
-        <h2 data-i18n="h.votes">Registre des votes</h2>
+        <h2 data-i18n="h.votes" class="visually-hidden-title">Registre des votes</h2>
         <div class="sub" data-i18n="votes.sub">43e législature (sessions 1 à 3) — décomptes et détail nominatif officiels</div>
       </div>
       <div class="toolbar">
@@ -1278,11 +1325,29 @@
         <button class="sort-toggle" id="motionsToggle" onclick="toggleShowMotions()"></button>
       </div>
     </div>
-    <div data-i18n="apercu.recent.sub" style="text-align:center; color:var(--slate); font-size:12.5px; margin:2px 0 16px;">↓ Cliquez n'importe où dans le carré blanc pour voir le résumé ↓</div>
 
     <div id="votesList"></div>
     <div class="info-box">
       <b data-i18n="votes.info.b">Sur le détail « qui a voté quoi »</b> <span data-i18n="votes.info.text">— l'Assemblée nationale publie le nom de chaque député pour chaque vote nominal dans son registre des votes officiel. Le détail nominatif ci-dessus (bouton « Voir le détail nominatif ») vient de ce registre officiel, pas d'une estimation. Le parti affiché à côté de chaque nom est celui inscrit au registre au moment du vote — il peut différer du parti actuel d'un·e député·e ayant changé d'allégeance depuis.</span>
+    </div>
+
+    <!-- « Comment lire un vote » : bande bleue pédagogique (maquette) -->
+    <div class="band band-blue bleed" id="band-lire-vote">
+      <h2>Comment lire un vote</h2>
+      <div class="lire-grid">
+        <div class="lire-box">
+          <h3>Vote nominal</h3>
+          <p>Chaque député·e se lève et son choix est consigné au Journal des débats. C'est le seul type de vote qu'on peut attribuer à une personne.</p>
+        </div>
+        <div class="lire-box">
+          <h3>Adopté ≠ loi</h3>
+          <p>Un vote gagné fait avancer le projet d'une étape. Il ne devient loi qu'après la sanction du lieutenant-gouverneur.</p>
+        </div>
+        <div class="lire-box hl">
+          <h3>Ligne de parti</h3>
+          <p>La plupart des votes suivent la consigne du parti. Les votes libres sont rares — et c'est là que le détail nominatif devient intéressant.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -6384,6 +6449,7 @@ function renderVotes(keyword){
             <h3>${title}</h3>
             ${sponsorLine}
           </div>
+          <span class="result-badge ${v.totals.pour > v.totals.contre ? 'adopte' : 'rejete'}">${v.totals.pour > v.totals.contre ? (isEn ? 'Passed' : 'Adopté') : (isEn ? 'Rejected' : 'Rejeté')}</span>
         </div>
         <div class="bar">
           <div class="seg pour" style="width:${total?(v.totals.pour/total*100).toFixed(1):0}%"></div>
