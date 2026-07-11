@@ -788,6 +788,99 @@
     .bleed{padding-inline:18px;}
   }
 
+  /* ---------- PHASE 3 : PROJETS DE LOI ---------- */
+  .view-hero{padding:34px 0 8px;}
+  .hero-h1-md{font-size:clamp(36px, 5.6vw, 72px); line-height:0.94;}
+  .view-hero-sub{font-size:17px; font-weight:500; max-width:640px; line-height:1.45; margin:18px 0 8px;}
+  .visually-hidden-title{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
+
+  /* Recherche + filtres brutaux */
+  .toolbar input{
+    border:3px solid var(--ink); background:#fff; box-shadow:var(--shadow);
+    padding:14px 16px; font-family:'Archivo',sans-serif; font-weight:500; font-size:15px;
+  }
+  .toolbar input:focus{outline:3px solid var(--yellow); outline-offset:0;}
+  .status-chip, .step-chip{
+    border:3px solid var(--ink); background:#fff; color:var(--ink);
+    font-family:'Archivo Narrow',sans-serif; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.04em; padding:8px 14px; font-size:12.5px; cursor:pointer;
+  }
+  .status-chip.active, .step-chip.active{background:#131313; color:var(--yellow); border-color:#131313;}
+  .sort-toggle, .filter-hamburger{
+    border:2px solid var(--ink); background:#fff; color:var(--ink);
+    font-family:'Archivo Narrow',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.03em;
+  }
+  .sort-toggle:hover, .filter-hamburger:hover{background:var(--yellow);}
+
+  /* Bande légende */
+  .legend-strip{
+    background:#fff; border-block:3px solid var(--ink);
+    padding-top:16px; padding-bottom:16px; margin:18px 0 26px;
+    display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+  }
+  .legend-label{font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--slate);}
+  .legend-chips{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .legend-arrow{font-weight:900;}
+  .legend-link{
+    margin-left:auto; font-family:'Archivo Narrow',sans-serif; font-size:12.5px;
+    font-weight:700; text-transform:uppercase; letter-spacing:0.04em;
+    color:var(--gold); cursor:pointer;
+  }
+  .legend-link:hover{color:#08307A;}
+
+  /* Chips d'étapes des cartes (remplacent les barres de progression) */
+  .bstep-row{display:flex; gap:6px; margin-top:16px; flex-wrap:wrap;}
+  .bstep{
+    font-family:'Archivo Narrow',sans-serif; font-size:11.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.03em; border:2px solid var(--ink);
+    padding:3px 9px; background:var(--paper);
+  }
+  .bstep.on{background:var(--gold); color:#fff;}
+  .bstep.now{background:var(--yellow); color:var(--ink);}
+  .bstep.off{background:#fff; color:#999; border-color:#CCC;}
+
+  /* Numéro de projet en bloc bleu */
+  .bill .num{
+    display:inline-block; background:var(--gold); color:#fff;
+    border:2px solid var(--ink); padding:4px 11px;
+    font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:13px;
+    letter-spacing:0.02em; margin-bottom:8px;
+  }
+  .bill h3{font-weight:800; font-size:17.5px; letter-spacing:-0.01em;}
+  .bill .last-activity, .bill .last-activity b{color:var(--ink);}
+
+  /* Pastilles de statut bordées */
+  .status-pill{border:2px solid var(--ink); font-weight:700; font-size:11.5px;}
+  .status-sanctionne{background:var(--green-soft); color:#14532D;}
+  .status-encours{background:var(--gold-soft); color:var(--gold);}
+  .status-glace{background:#E5E2DA; color:var(--ink);}
+
+  /* Boutons Demander une explication / Suivre / partage */
+  .follow-btn{
+    border:3px solid var(--ink); background:#fff; color:var(--ink);
+    font-family:'Archivo',sans-serif; font-weight:800; text-transform:uppercase;
+    letter-spacing:0.03em; cursor:pointer;
+  }
+  .follow-btn:hover{background:var(--yellow); color:var(--ink);}
+  .follow-btn.on{background:#131313; color:var(--yellow);}
+  .follow-btn:disabled{background:#131313; color:var(--yellow); opacity:1;}
+
+  /* CTA texte intégral (jaune, ombre dure) */
+  .bill-more{
+    border:3px solid var(--ink); background:var(--yellow); color:var(--ink);
+    font-weight:800; text-transform:uppercase; letter-spacing:0.03em;
+    box-shadow:var(--shadow-sm); padding:12px 18px;
+  }
+  .bill-more:hover{background:#131313; color:var(--yellow);}
+
+  /* Explainer jaune */
+  #band-challenge-explainer{margin-top:34px;}
+  #band-challenge-explainer h2{
+    font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase;
+    letter-spacing:-0.02em; font-size:clamp(26px, 3.2vw, 40px); margin:0 0 14px;
+  }
+  #band-challenge-explainer p{font-size:16.5px; font-weight:500; line-height:1.5; max-width:760px; margin:0 0 12px;}
+
   @media (max-width:640px){
     header.top{padding:24px 18px 18px;}
     .app{padding:0 18px 60px;}
@@ -1122,9 +1215,18 @@
 
   <!-- PROJETS DE LOI -->
   <section class="view" id="view-projets">
+    <!-- Hero de vue (refonte brutaliste) -->
+    <div class="view-hero">
+      <h1 class="hero-h1 hero-h1-md">
+        <span>Projets de loi,</span>
+        <span class="hero-outline">traduits en clair.</span>
+      </h1>
+      <p class="view-hero-sub">Chaque projet résumé en langage courant, avec son étape réelle dans le processus. <b>Le texte intégral reste toujours à un clic sur assnat.qc.ca.</b></p>
+    </div>
+
     <div class="section-head">
       <div>
-        <h2 data-i18n="h.projets">Projets de loi</h2>
+        <h2 data-i18n="h.projets" class="visually-hidden-title">Projets de loi</h2>
         <div class="sub" data-i18n="proj.sub">43e législature — statut réel au 12 juin 2026 (ajournement des travaux)</div>
       </div>
       <div class="toolbar">
@@ -1141,9 +1243,27 @@
       </div>
     </div>
 
-    <div data-i18n="apercu.recent.sub" style="text-align:center; color:var(--slate); font-size:12.5px; margin:2px 0 16px;">↓ Cliquez n'importe où dans le carré blanc pour voir le résumé ↓</div>
+    <!-- Bande légende : le chemin d'un projet (les 3 étapes RÉELLES du site) -->
+    <div class="legend-strip bleed">
+      <span class="legend-label">Le chemin d'un projet de loi :</span>
+      <span class="legend-chips">
+        <span class="bstep">Présentation</span><span class="legend-arrow">→</span>
+        <span class="bstep">Étude détaillée</span><span class="legend-arrow">→</span>
+        <span class="bstep">Adoption / Sanction</span>
+      </span>
+      <a class="legend-link" role="button" tabindex="0" onclick="goToTab('lexique')">C'est quoi ces étapes ? → Lexique</a>
+    </div>
 
     <div id="billsList"></div>
+
+    <!-- Explainer « challenger » : adapté au VRAI mécanisme du site (compte
+         requis, 1 demande par personne, paliers 500/1000) — la maquette disait
+         « pas de compte requis », ce qui ne correspond pas à la réalité. -->
+    <div class="band band-yellow bleed" id="band-challenge-explainer">
+      <h2>✋ C'est quoi, « demander une explication » ?</h2>
+      <p>Un clic sur « Demander une explication » = une demande citoyenne pour que le parrain du projet l'explique en langage clair, et pour qu'on le garde à l'œil ensemble.</p>
+      <p><b>Un compte (courriel) est requis</b> — une demande par personne, aucune demande anonyme. À <b>500 demandes</b>, le projet apparaît dans « Projets challengés » sur l'accueil ; à <b>1 000</b>, on pousse pour une pétition officielle.</p>
+    </div>
   </section>
 
   <!-- VOTES -->
@@ -5853,10 +5973,13 @@ function billCard(b, ctx){
         </div>
       </div>
       ${flagRow}
-      <div class="stepper">
-        ${steps.map((s,i)=>`<div class="step ${i<displayStep(b.step)-1?'done':''} ${i===displayStep(b.step)-1?'current':''}"></div>`).join('')}
+      <div class="bstep-row">
+        ${(isEn?stepsEn:steps).map((s,i)=>{
+          const cur = displayStep(b.step)-1;
+          const cls = i < cur ? 'on' : (i === cur ? 'now' : 'off');
+          return `<span class="bstep ${cls}">${s}</span>`;
+        }).join('')}
       </div>
-      <div class="stepper-labels">${(isEn?stepsEn:steps).map(s=>`<span>${s}</span>`).join('')}</div>
       ${relatedVotes.length ? (()=>{
         // id unique par carte (préfixé par ctx + id du projet : la même carte
         // peut apparaître à deux endroits — aperçu ET onglet — sans collision).
