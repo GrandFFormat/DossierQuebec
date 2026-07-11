@@ -1142,16 +1142,6 @@
 <div id="dq-topbar">
 <header class="top">
   <div class="brand">
-    <div class="brand-mark" id="brandFlip" role="button" tabindex="0" title="Aller au site fédéral — DossierCanada" aria-label="Aller au site fédéral — DossierCanada" onclick="goToFederal(event)">
-      <div class="flip-inner">
-        <div class="flip-face flip-front">
-          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#9DC3E6"/><path d="M9 12 L16 12 L19 16 L31 16 L31 30 L9 30 Z" fill="#fff"/></svg>
-        </div>
-        <div class="flip-face flip-back">
-          <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#D52B1E"/><path d="M9 12 L16 12 L19 16 L31 16 L31 30 L9 30 Z" fill="#fff"/></svg>
-        </div>
-      </div>
-    </div>
     <div class="brand-text" role="button" tabindex="0" aria-label="Retour à l'aperçu" onclick="goToTab('apercu')">
       <h1>Dossier<span class="brand-blue">Québec</span></h1>
       <p>Qui siège, qui légifère, qui vote quoi</p>
@@ -1170,10 +1160,7 @@
 
 <nav class="tabs">
   <div class="close-menu" id="closeMenuBtn"><span data-i18n="nav.close">Fermer</span> ✕</div>
-  <span class="tabs-minibrand" role="button" tabindex="0" aria-label="Retour à l'aperçu" onclick="goToTab('apercu')">
-    <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#9DC3E6"/><path d="M9 12 L16 12 L19 16 L31 16 L31 30 L9 30 Z" fill="#fff"/></svg>
-    DossierQuébec
-  </span>
+  <span class="tabs-minibrand" role="button" tabindex="0" aria-label="Retour à l'aperçu" onclick="goToTab('apercu')">Dossier<span class="brand-blue">Québec</span></span>
   <button class="active" data-view="apercu" style="margin-left:28px;"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></button>
   <button data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres &amp; député·e·s</span></button>
   <button data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></button>
@@ -1225,14 +1212,6 @@
       <div class="stat-cell"><b id="statMinistres">—</b><span data-i18n="stat.ministres">Ministres au Conseil</span></div>
       <div class="stat-cell"><b id="statProjets">—</b><span data-i18n="stat.projets">Projets de loi suivis</span></div>
       <div class="stat-cell"><b id="statVotes">—</b><span data-i18n="stat.votes">Votes nominatifs</span></div>
-    </div>
-
-    <div class="quick-nav" id="quickNav">
-      <span class="quick-nav-label" data-i18n="quicknav.label">Aller à :</span>
-      <a data-jump="sec-mission" data-i18n="quicknav.mission">Notre mission</a>
-      <a data-jump="sec-projets-recents" data-i18n="quicknav.projets">Projets de loi</a>
-      <a data-jump="sec-quoideneuf" data-i18n="quicknav.quoideneuf">Quoi de neuf</a>
-      <a data-jump="sec-petitions" data-i18n="quicknav.petitions">Pétitions</a>
     </div>
 
     <!-- Section signature du handoff : bande JAUNE pleine largeur -->
