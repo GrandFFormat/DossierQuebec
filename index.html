@@ -705,16 +705,56 @@
   .band-white{background:#fff;}
   .band-blue{background:var(--gold); color:#fff; border-top:3px solid var(--ink);}
   #band-challenged{margin-top:30px;}
-  /* Badge de compteur des cartes challengées (sur bande jaune) : blanc bordé
-     noir, plus lisible que le vert « sanctionné » repris avant. */
-  .status-challenge{background:#fff; color:var(--ink); border:2px solid var(--ink); font-weight:800;}
-  /* Bouton « Demander » proéminent, directement sur la carte challengée */
-  .challenge-demand-row{margin-top:14px;}
-  .follow-btn.demand-cta{
-    background:var(--gold); color:#fff; border:3px solid var(--ink);
-    box-shadow:var(--shadow-sm); font-size:14px; padding:11px 18px;
+  /* Cartes challengées : grille 3 colonnes compacte, fidèle à la maquette */
+  .ch-more{
+    flex:none; border:3px solid var(--ink); background:#fff; color:var(--ink);
+    padding:10px 18px; font-weight:800; font-size:14px; text-transform:uppercase;
+    letter-spacing:0.02em; box-shadow:var(--shadow-sm); cursor:pointer;
   }
-  .follow-btn.demand-cta:hover{background:#08307A; color:#fff;}
+  .ch-more:hover{background:#131313; color:var(--yellow);}
+  #challengedList.ch-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;}
+  .ch-card{
+    background:#fff; border:3px solid var(--ink); box-shadow:var(--shadow);
+    padding:22px 24px; display:flex; flex-direction:column; cursor:pointer;
+  }
+  .ch-top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:16px;}
+  .ch-num{font-family:'Archivo',sans-serif; font-weight:900; font-size:15px; color:var(--gold);}
+  .ch-badge{
+    background:#131313; color:var(--yellow);
+    font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700;
+    padding:4px 10px; text-transform:uppercase; white-space:nowrap;
+  }
+  .ch-title{font-size:17px; font-weight:700; line-height:1.3; margin-bottom:10px;}
+  .ch-petition{
+    font-family:'Archivo Narrow',sans-serif; font-size:12px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.04em; color:var(--gold); margin-bottom:8px;
+  }
+  .ch-stage{
+    font-family:'Archivo Narrow',sans-serif; font-size:13px; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.04em; color:#555;
+    margin-top:auto; padding-top:12px; border-top:2px solid var(--ink);
+  }
+  .ch-demand{
+    margin-top:14px; border:3px solid var(--ink); background:var(--gold); color:#fff;
+    font-family:'Archivo',sans-serif; font-weight:800; font-size:13px;
+    text-transform:uppercase; letter-spacing:0.03em; padding:10px 14px;
+    cursor:pointer; box-shadow:var(--shadow-sm);
+  }
+  .ch-demand:hover{background:#08307A;}
+  .ch-demand.on, .ch-demand:disabled{background:#131313; color:var(--yellow); cursor:default; box-shadow:none;}
+  .ch-share{display:flex; align-items:center; gap:6px; margin-top:10px;}
+  .ch-share span{
+    font-family:'Archivo Narrow',sans-serif; font-size:11.5px; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.03em; color:#555; margin-right:2px;
+  }
+  .ch-share button{
+    border:2px solid var(--ink); background:#fff; color:var(--ink);
+    font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:11.5px;
+    padding:5px 9px; cursor:pointer; text-transform:uppercase;
+  }
+  .ch-share button:hover{background:var(--yellow);}
+  @media (max-width:980px){ #challengedList.ch-grid{grid-template-columns:repeat(2, 1fr);} }
+  @media (max-width:640px){ #challengedList.ch-grid{grid-template-columns:1fr;} }
   .band .section-head h2{font-size:clamp(26px, 3.4vw, 42px);}
   .band-yellow .section-head .sub{color:var(--ink); font-weight:600;}
 
@@ -1204,6 +1244,7 @@
         <h2 id="challengedTitle">Projets challengés par les citoyen·ne·s</h2>
         <div class="sub" id="challengedSub"></div>
       </div>
+      <a class="ch-more" role="button" tabindex="0" onclick="goToTab('projets')" data-i18n="ch.more">Voir plus →</a>
     </div>
     <div id="challengedList"></div>
     </div>
@@ -2089,6 +2130,7 @@ const translations = {
     'suggest.h':"Missing a word?",
     'suggest.p':"If a term tripped you up while reading a bill or a vote, it tripped others too. Suggest it on the Facebook page — it will be added with a plain-language definition.",
     'suggest.cta':"✉ Suggest a term",
+    'ch.more':"See more →",
     'filter.statuts':"Statuses", 'filter.etapes':"Stages",
     'ph.searchDeputes':"Name, riding, or region…",
     'ph.searchVotes':"Keyword: subject, bill number…",
@@ -6524,59 +6566,54 @@ async function renderChallenged(){
     .slice(0, CHALLENGE_DISPLAY_MAX);
 
   if(challenged.length){
+    // Cartes compactes en GRILLE 3 colonnes, fidèles à la maquette
+    // (Apercu.dc.html) : nº bleu 900 + badge noir/jaune 🔥 N, titre 700,
+    // étape en bas séparée d'une bordure — plus le bouton « Demander »
+    // (3 états, projets actifs seulement) et le partage direct.
+    el.classList.add('ch-grid');
     el.innerHTML = challenged.map(c => {
       const b = c.bill;
       const cnt = c.cnt;
       const title = isEn ? (b.titleEn || b.title) : b.title;
-      const numLabel = isEn ? 'BILL NO.' : 'PROJET DE LOI N°';
-      const next = nextChallengeTier(cnt);
-      const progress = next ? `${fmt(cnt)} / ${fmt(next)}` : fmt(cnt);
-      const flames = '🔥'.repeat(CHALLENGE_TIERS.filter(t => cnt >= t).length) || '🔥';
-      const petitionBadge = cnt >= PETITION_THRESHOLD
-        ? `<div class="meta" style="margin-top:4px; color:var(--gold);">${isEn ? '⚑ Petition threshold reached' : '⚑ Seuil de pétition atteint'}</div>` : '';
-      // Bouton « Demander » DIRECTEMENT sur la carte (les gens pressés
-      // n'ont pas à ouvrir l'onglet Projets de loi). Mêmes 3 états que
-      // billCard, et seulement sur un projet ACTIF (un projet sanctionné ne
-      // se challenge plus). requestExplanation() re-rend cette section.
+      const numLabel = isEn ? `Bill ${b.num}` : `PL Nº ${b.num}`;
+      const flames = '🔥'.repeat(Math.max(1, CHALLENGE_TIERS.filter(t => cnt >= t).length));
+      const stepLabels = isEn ? stepsEn : steps;
+      const stageIdx = Math.max(0, Math.min(stepLabels.length - 1, displayStep(b.step) - 1));
+      const stageLabel = b.status === 'encours' ? stepLabels[stageIdx] : statusLabel(b.status);
+      const petition = cnt >= PETITION_THRESHOLD
+        ? `<div class="ch-petition">⚑ ${isEn ? 'Petition threshold reached' : 'Seuil de pétition atteint'}</div>` : '';
       const canFlag = b.status === 'encours';
       const isFlagged = !!myFlaggedBills[b.id];
       const flagBtnId = 'demand-ch-' + b.id;
-      let demandRow = '';
+      let demandBtn = '';
       if(canFlag){
-        let label, onclick = '', disabled = '', cls = 'demand-cta';
         if(!currentUser){
-          label = isEn ? '🔒 Sign in to ask' : '🔒 Se connecter pour demander';
-          onclick = "goToTab('compte')";
+          demandBtn = `<button class="ch-demand" onclick="event.stopPropagation(); goToTab('compte')">🔒 ${isEn ? 'Sign in to ask' : 'Se connecter pour demander'}</button>`;
         } else if(isFlagged){
-          label = isEn ? '✓ Explanation requested' : '✓ Explication demandée';
-          disabled = 'disabled'; cls = 'on';
+          demandBtn = `<button class="ch-demand on" disabled>✓ ${isEn ? 'Explanation requested' : 'Explication demandée'}</button>`;
         } else {
-          label = isEn ? '✋ Ask for an explanation' : '✋ Demander une explication';
-          onclick = `requestExplanation(${b.id}, '${flagBtnId}')`;
+          demandBtn = `<button class="ch-demand" id="${flagBtnId}" onclick="event.stopPropagation(); requestExplanation(${b.id}, '${flagBtnId}')">✋ ${isEn ? 'Ask for an explanation' : 'Demander une explication'}</button>`;
         }
-        demandRow = `<div class="challenge-demand-row">
-          <button class="follow-btn ${cls}" id="${flagBtnId}" ${disabled} onclick="event.stopPropagation(); ${onclick}">${label}</button>
-        </div>`;
       }
-      return `<div class="bill">
-        <div class="head" onclick="goToTab('projets')" style="cursor:pointer;">
-          <div>
-            <div class="num">${numLabel} ${b.num}</div>
-            <h3>${title}</h3>
-          </div>
-          <div style="flex:none; text-align:right;"><span class="status-pill status-challenge">${flames} ${progress}</span></div>
+      return `<div class="ch-card" onclick="goToTab('projets')">
+        <div class="ch-top">
+          <span class="ch-num">${numLabel}</span>
+          <span class="ch-badge">${flames} ${fmt(cnt)}</span>
         </div>
-        ${petitionBadge}
-        ${demandRow}
-        <div class="bill-follow-row">
-          <span class="follow-hint">${isEn ? 'Share:' : 'Partager :'}</span>
-          <button class="follow-btn" onclick="event.stopPropagation(); shareChallenge(${b.id}, ${cnt}, 'x', event)" aria-label="Partager sur X">𝕏</button>
-          <button class="follow-btn" onclick="event.stopPropagation(); shareChallenge(${b.id}, ${cnt}, 'fb', event)" aria-label="Partager sur Facebook">Facebook</button>
-          <button class="follow-btn" onclick="event.stopPropagation(); shareChallenge(${b.id}, ${cnt}, 'copy', event)">${isEn ? '⧉ Copy' : '⧉ Copier'}</button>
+        <div class="ch-title">${title}</div>
+        ${petition}
+        <div class="ch-stage">${stageLabel}</div>
+        ${demandBtn}
+        <div class="ch-share">
+          <span>${isEn ? 'Share:' : 'Partager :'}</span>
+          <button onclick="event.stopPropagation(); shareChallenge(${b.id}, ${cnt}, 'x', event)" aria-label="Partager sur X">𝕏</button>
+          <button onclick="event.stopPropagation(); shareChallenge(${b.id}, ${cnt}, 'fb', event)" aria-label="Partager sur Facebook">FB</button>
+          <button onclick="event.stopPropagation(); shareChallenge(${b.id}, ${cnt}, 'copy', event)" aria-label="Copier">⧉</button>
         </div>
       </div>`;
     }).join('');
   } else {
+    el.classList.remove('ch-grid');
     el.innerHTML = `<div style="background:var(--card); border:1px dashed var(--line); border-radius:var(--radius); padding:22px 18px; text-align:center; color:var(--slate);">
       <div style="font-size:26px; margin-bottom:8px;">🔎</div>
       <div style="font-size:14px; line-height:1.65; max-width:580px; margin:0 auto;">${isEn
