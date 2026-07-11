@@ -974,6 +974,25 @@
   @media (max-width:900px){ .lire-grid{grid-template-columns:1fr;} }
 
   /* ---------- PHASE 5 : MINISTRES & ASSEMBLÉE ---------- */
+  /* Grande recherche façon maquette : cellule loupe JAUNE + champ bordé */
+  .brutal-search{
+    display:flex; max-width:640px; margin-top:22px;
+    border:3px solid var(--ink); background:#fff; box-shadow:var(--shadow);
+  }
+  .brutal-search .bs-icon{
+    display:flex; align-items:center; padding:0 16px; font-size:18px;
+    border-right:3px solid var(--ink); background:var(--yellow); flex:none;
+  }
+  .brutal-search input{
+    flex:1; min-width:0; border:none; outline:none; background:#fff;
+    box-shadow:none; font-family:'Archivo',sans-serif; font-size:16px;
+    font-weight:500; padding:16px 18px; color:var(--ink);
+  }
+  .brutal-search input:focus{outline:none;}
+  .hero-filters{display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:14px;}
+  #band-composition{margin-top:30px;}
+  #band-composition .compo-wrap{margin-bottom:0;}
+
   /* Composition : barre empilée bordée + légende à carrés */
   .compo-wrap{margin-bottom:34px;}
   .compo-bar{display:flex; height:56px; border:3px solid var(--ink); background:#fff;}
@@ -1362,40 +1381,31 @@
         <span class="hero-outline" data-i18n="minhero.l2">&amp; toute l'Assemblée.</span>
       </h1>
       <p class="view-hero-sub" data-i18n="minhero.sub">Les ministres, puis les 125 député·e·s de tous les partis — <b>une seule recherche pour les deux.</b></p>
-    </div>
 
-    <div class="section-head">
-      <div>
-        <h2 data-i18n="h.ministres" class="visually-hidden-title">Conseil des ministres et Assemblée</h2>
-        <div class="sub" data-i18n="min.merged.sub">Le Conseil des ministres, puis les 125 député·e·s de tous les partis — une seule recherche pour les deux</div>
-      </div>
-      <div class="toolbar">
+      <!-- Grande recherche façon maquette : loupe sur cellule jaune -->
+      <div class="brutal-search">
+        <span class="bs-icon" aria-hidden="true">🔍</span>
         <input type="text" id="searchMinistres" data-i18n-placeholder="ph.searchMinistres" placeholder="Nom, circonscription, région ou ministère…">
+      </div>
+      <div class="hero-filters">
         <div class="party-filters" id="partyFilters"></div>
         <button class="sort-toggle" id="ministresSortToggle" onclick="toggleMinistresSort()"></button>
       </div>
     </div>
 
-    <div class="quick-nav">
-      <span class="quick-nav-label" data-i18n="quicknav.label">Aller à :</span>
-      <a data-jump="sec-composition" data-i18n="quicknav.composition">Composition</a>
-      <a data-jump="ministresTitle" data-i18n="quicknav.ministres">Conseil des ministres</a>
-      <a data-jump="deputesTitle" data-i18n="quicknav.deputes">Reste de l'Assemblée</a>
-      <a data-jump="sec-comparateur" data-i18n="quicknav.comparateur">Comparateur de ministres</a>
-    </div>
-
+    <!-- Composition : bande BLANCHE (maquette) — barre empilée bordée,
+         mêmes données réelles `seats`, rendu par renderHemicycle(). -->
+    <div class="band band-white bleed" id="band-composition">
     <div class="section-head" id="sec-composition">
       <div>
-        <h2 data-i18n="h.composition">Composition de l'Assemblée</h2>
-        <div class="sub" data-i18n="apercu.composition.sub">125 sièges — répartition par groupe parlementaire (43e législature)</div>
+        <h2 data-i18n="h.composition">Composition — 125 sièges</h2>
+        <div class="sub" data-i18n="apercu.composition.sub">43e législature · répartition par groupe parlementaire</div>
       </div>
     </div>
-
-    <!-- Composition : barre empilée bordée (remplace l'hémicycle SVG — mêmes
-         données réelles `seats`, rendu par renderHemicycle()). -->
     <div class="compo-wrap">
       <div class="compo-bar" id="compoBar"></div>
       <div class="compo-legend" id="hemicycleLegend"></div>
+    </div>
     </div>
 
     <div class="role-group-title" id="combinedTitle" style="display:none;"></div>
@@ -2056,7 +2066,7 @@ const translations = {
     'nav.votes':"Votes",'nav.quoideneuf':"Quoi de neuf",'nav.compte':"Compte & à propos",'nav.trouve':"Trouvez votre député",
     'nav.lexique':"Lexique",'nav.personnes':"Qui gravite autour",'nav.petitions':"Pétitions",'nav.apropos':"D'où viennent ces données",
     'stat.ministres':"Ministres",'stat.projets':"Projets de loi",'stat.votes':"Votes enregistrés",
-    'h.composition':"Composition de l'Assemblée",
+    'h.composition':"Composition — 125 sièges",
     'h.billsrecent':"Projets de loi récemment actifs",
     'h.ministres':"Ministres et député·e·s",
     'h.projets':"Projets de loi",
@@ -2087,7 +2097,7 @@ const translations = {
     'nav.votes':"Votes",'nav.quoideneuf':"What's new",'nav.compte':"Account & about",'nav.trouve':"Find your MNA",
     'nav.lexique':"Glossary",'nav.personnes':"Who's involved",'nav.petitions':"Petitions",'nav.apropos':"Where this data comes from",
     'stat.ministres':"Ministers",'stat.projets':"Bills",'stat.votes':"Votes recorded",
-    'h.composition':"Composition of the Assembly",
+    'h.composition':"Composition — 125 seats",
     'h.billsrecent':"Recently active bills",
     'h.ministres':"Ministers and MNAs",
     'h.ministres2':"Cabinet",
@@ -2223,7 +2233,7 @@ const translations = {
     'apropos.missing.p':"1. <b style=\"color:var(--ink)\">A backend that queries these sources automatically</b> (e.g. a scheduled task that re-reads the vote registry and the bill feed every day) and writes them to a real database.<br>2. <b style=\"color:var(--ink)\">Hosting</b> for this backend and database (e.g. Vercel + Supabase/Postgres, or a classic Node server).<br>3. <b style=\"color:var(--ink)\">The by-MNA vote detail</b>, to be extracted from the official registry — the single biggest missing piece for fully answering \u201cwho voted for what.\u201d<br>4. <b style=\"color:var(--ink)\">An attendance proxy</b>: the Assembly doesn't publish attendance as such; the best public indicator is an MNA's participation rate in recorded votes (the method used by media outlets such as Radio-Canada and The Canadian Press).",
     'apropos.claude.p':"I can write this backend and help you deploy it when you're ready — this is exactly the kind of project where <b style=\"color:var(--ink)\">Claude Code</b> is especially useful, because it can work directly inside a repository, run sync scripts, and iterate on deployment with you.",
     // Overview page
-    'apercu.composition.sub':"125 seats — breakdown by parliamentary group (43rd Legislature)",
+    'apercu.composition.sub':"43rd Legislature · breakdown by parliamentary group",
     'apercu.recent.sub':"↓ Click anywhere in the white square to see the summary ↓",
     'creator.h':"A word from the creator",
     'creator.sub':"Who I am and why I built this site",
