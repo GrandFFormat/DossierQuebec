@@ -651,10 +651,17 @@
 
   /* ---------- FOOTER : bande noire pleine largeur ---------- */
   footer{
-    max-width:none; margin:40px 0 0; padding:34px 32px;
+    max-width:none; margin:40px 0 0; padding:34px 0;
+    display:block; /* le flex vit dans .footer-inner */
     background:#131313; color:#B8B4AA; border-top:none;
     font-family:'Archivo Narrow',sans-serif; font-size:13px;
     text-transform:uppercase; letter-spacing:0.05em;
+  }
+  /* Contenu du footer ALIGNÉ sur la colonne centrale (même gabarit que .app) */
+  .footer-inner{
+    max-width:1280px; margin:0 auto; padding:0 28px;
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:10px;
   }
   .footer-gh{color:#F2F0EA; font-weight:700;}
   .footer-gh:hover{color:var(--yellow);}
@@ -1311,7 +1318,6 @@
     </div>
     <div id="body-petitions">
     <div id="apercuPetitions"></div>
-    <div class="info-box" data-i18n="pet.info">Chaque pétition ci-dessus est reproduite telle quelle depuis la liste officielle de l'Assemblée nationale, avec un lien direct vers la page où la signer. Le nombre de signatures affiché est celui relevé au moment de la dernière mise à jour — pour le nombre exact et à jour, ou pour signer, utilise le lien « Voir et signer sur assnat.qc.ca » de chaque carte.</div>
     </div>
     </div>
     </div><!-- /actu-grid -->
@@ -2027,12 +2033,14 @@
 <!-- Footer maquette : texte à gauche (avec « construit avec Claude » suivi du
      lien caché « et moi » vers la BD), liens texte en majuscules à droite. -->
 <footer>
+  <div class="footer-inner">
   <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">construit avec Claude</span> <a class="footer-etmoi" role="button" tabindex="0" onclick="goToTab('bd')" data-i18n="footer.etmoi">et moi</a></span>
   <span class="footer-right-group">
     <a class="footer-gh" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook">Facebook</a>
     <a class="footer-gh footer-coffee" href="https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00" target="_blank" rel="noopener" aria-label="Offre-moi un café">Offre-moi un café</a>
     <a class="footer-gh" href="https://github.com/GrandFFormat/DossierQuebec" target="_blank" rel="noopener" data-i18n="footer.source">Code source</a>
   </span>
+  </div>
 </footer>
 
 <button id="backToTop" class="back-to-top" aria-label="Remonter en haut" title="Remonter en haut" onclick="window.scrollTo({top:0, behavior:'smooth'})">
