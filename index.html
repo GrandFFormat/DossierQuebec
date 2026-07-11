@@ -6497,11 +6497,11 @@ const PETITION_THRESHOLD = 1000;
 // flag_counts() renvoie aussi les projets sous 500 : voir
 // scripts/supabase-schema-campaign.sql (having count(*) >= 1).
 const CHALLENGE_DISPLAY_MIN = 1;
-const CHALLENGE_DISPLAY_MAX = 9; // cap total (révélé par lots de 3 via « Voir plus »)
-// Pagination visuelle : 3 cartes affichées, chaque clic sur « Voir plus »
-// fait glisser les 3 suivantes. Persiste entre deux re-rendus (ex. après une
-// demande) pour ne pas recacher ce que la personne venait d'ouvrir.
-let challengedShown = 3;
+const CHALLENGE_DISPLAY_MAX = 9; // cap total (pagine par 3 via « Voir plus »)
+// Pagination en carrousel : 3 cartes affichées à la fois. « Voir plus »
+// REMPLACE les 3 visibles par les 3 suivantes (slide-in), et reboucle au
+// début une fois au bout. La page courante survit aux re-rendus.
+let challengedPage = 0;
 const nextChallengeTier = cnt => CHALLENGE_TIERS.find(t => cnt < t) ?? null;
 let challengedCache = null;
 
@@ -6580,6 +6580,9 @@ async function renderChallenged(){
     // étape en bas séparée d'une bordure — plus le bouton « Demander »
     // (3 états, projets actifs seulement) et le partage direct.
     el.classList.add('ch-grid');
+    // Si la donnée a changé et que la page courante n'existe plus, on recale.
+    challengedPage = Math.min(challengedPage, Math.ceil(challenged.length / 3) - 1);
+    const pageStart = challengedPage * 3;
     el.innerHTML = challenged.map((c, idx) => {
       const b = c.bill;
       const cnt = c.cnt;
@@ -6604,7 +6607,7 @@ async function renderChallenged(){
           demandBtn = `<button class="ch-demand" id="${flagBtnId}" onclick="event.stopPropagation(); requestExplanation(${b.id}, '${flagBtnId}')">✋ ${isEn ? 'Ask for an explanation' : 'Demander une explication'}</button>`;
         }
       }
-      return `<div class="ch-card${idx >= challengedShown ? ' ch-hidden' : ''}" onclick="goToTab('projets')">
+      return `<div class="ch-card${(idx < pageStart || idx >= pageStart + 3) ? ' ch-hidden' : ''}" onclick="goToTab('projets')">
         <div class="ch-top">
           <span class="ch-num">${numLabel}</span>
           <span class="ch-badge">${flames} ${fmt(cnt)}</span>
@@ -6622,7 +6625,7 @@ async function renderChallenged(){
       </div>`;
     }).join('');
     const moreBtn = document.getElementById('chMoreBtn');
-    if(moreBtn) moreBtn.style.display = challenged.length > challengedShown ? '' : 'none';
+    if(moreBtn) moreBtn.style.display = challenged.length > 3 ? '' : 'none';
   } else {
     el.classList.remove('ch-grid');
     const moreBtn = document.getElementById('chMoreBtn');
@@ -6637,18 +6640,25 @@ async function renderChallenged(){
   }
 }
 
-// « Voir plus » : fait glisser les 3 cartes challengées suivantes (léger
-// décalage entre elles), puis cache le bouton quand tout est affiché.
+// « Voir plus » : REMPLACE les 3 cartes visibles par les 3 suivantes
+// (slide-in décalé de 80 ms par carte), et reboucle au début après la
+// dernière page.
 function showMoreChallenged(){
-  const hidden = Array.from(document.querySelectorAll('#challengedList .ch-card.ch-hidden'));
-  hidden.slice(0, 3).forEach((card, i) => {
-    card.classList.remove('ch-hidden');
-    card.classList.add('ch-reveal');
-    card.style.animationDelay = (i * 0.08) + 's';
+  const cards = Array.from(document.querySelectorAll('#challengedList .ch-card'));
+  if(cards.length <= 3) return;
+  const pages = Math.ceil(cards.length / 3);
+  challengedPage = (challengedPage + 1) % pages;
+  const start = challengedPage * 3;
+  cards.forEach((card, i) => {
+    const show = i >= start && i < start + 3;
+    card.classList.remove('ch-reveal');
+    card.classList.toggle('ch-hidden', !show);
+    if(show){
+      void card.offsetWidth; // force le redémarrage de l'animation
+      card.classList.add('ch-reveal');
+      card.style.animationDelay = ((i - start) * 0.08) + 's';
+    }
   });
-  challengedShown += 3;
-  const moreBtn = document.getElementById('chMoreBtn');
-  if(moreBtn && !document.querySelector('#challengedList .ch-card.ch-hidden')) moreBtn.style.display = 'none';
 }
 
 const deputeById = new Map(deputes.map(d=>[d.assnatId, d]));
