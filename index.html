@@ -866,6 +866,20 @@
   }
   .sort-toggle:hover, .filter-hamburger:hover{background:var(--yellow);}
 
+  /* Recherche + filtres rapides (maquette) sur une rangée */
+  .projets-controls{display:flex; gap:16px; flex-wrap:wrap; align-items:stretch; margin-top:22px;}
+  .projets-controls .brutal-search{flex:1 1 320px; min-width:300px; max-width:560px; margin-top:0;}
+  .quick-filters{display:flex; gap:8px; flex-wrap:wrap; align-items:center;}
+  .qf-btn{
+    font-family:'Archivo Narrow',sans-serif; font-size:13.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.04em;
+    border:3px solid var(--ink); background:#fff; color:var(--ink);
+    padding:10px 16px; cursor:pointer;
+  }
+  .qf-btn.active{background:#131313; color:var(--yellow);}
+  .qf-btn:hover:not(.active){background:var(--yellow);}
+  #billsResultHead{margin-top:6px; margin-bottom:18px;}
+
   /* Bande légende */
   .legend-strip{
     background:#fff; border-block:3px solid var(--ink);
@@ -1521,24 +1535,14 @@
         <span class="hero-outline" data-i18n="projhero.l2">traduits en clair.</span>
       </h1>
       <p class="view-hero-sub" data-i18n="projhero.sub">Chaque projet résumé en langage courant, avec son étape réelle dans le processus. <b>Le texte intégral reste toujours à un clic sur assnat.qc.ca.</b></p>
-    </div>
 
-    <div class="section-head">
-      <div>
-        <h2 data-i18n="h.projets" class="visually-hidden-title">Projets de loi</h2>
-        <div class="sub" data-i18n="proj.sub">43e législature — statut réel au 12 juin 2026 (ajournement des travaux)</div>
-      </div>
-      <div class="toolbar">
-        <input type="text" id="searchBills" data-i18n-placeholder="ph.searchBills" placeholder="Mot-clé : logement, justice, immigration…">
-        <button class="sort-toggle" id="sortToggle" onclick="toggleBillsSort()"></button>
-      </div>
-      <div class="filter-group">
-        <button class="filter-hamburger" id="statusFilterBtn" onclick="toggleFilterPanel('status')" aria-expanded="false">☰ <span data-i18n="filter.statuts">Statuts</span></button>
-        <div class="status-filters" id="statusFilters"></div>
-      </div>
-      <div class="filter-group">
-        <button class="filter-hamburger" id="stepFilterBtn" onclick="toggleFilterPanel('step')" aria-expanded="false">☰ <span data-i18n="filter.etapes">Étapes</span></button>
-        <div class="step-filters" id="stepFilters"></div>
+      <!-- Recherche façon maquette + 4 filtres rapides (actif = noir/jaune) -->
+      <div class="projets-controls">
+        <div class="brutal-search">
+          <span class="bs-icon" aria-hidden="true">🔍</span>
+          <input type="text" id="searchBills" data-i18n-placeholder="ph.searchBills" placeholder="Numéro, titre ou mot-clé…">
+        </div>
+        <div class="quick-filters" id="billsQuickFilters"></div>
       </div>
     </div>
 
@@ -1551,6 +1555,12 @@
         <span class="bstep">Adoption / Sanction</span>
       </span>
       <a class="legend-link" role="button" tabindex="0" onclick="goToTab('lexique')" data-i18n="legend.link">C'est quoi ces étapes ? → Lexique</a>
+    </div>
+
+    <!-- Titre de résultats (change avec le filtre actif) -->
+    <div class="section-head min-group-head" id="billsResultHead">
+      <div><h2 id="billsResultTitle">Tous les projets</h2></div>
+      <span class="head-note" id="billsResultNote"></span>
     </div>
 
     <div id="billsList"></div>
@@ -2158,7 +2168,7 @@ const translations = {
     'h.petitions':"Pétitions ouvertes à l'Assemblée nationale",
     'h.apropos':"D'où viennent ces données, et comment aller plus loin",
     'ph.searchMinistres':"Nom, circonscription, région ou ministère…",
-    'ph.searchBills':"Mot-clé : logement, justice, immigration…",
+    'ph.searchBills':"Numéro, titre ou mot-clé…",
     'filter.statuts':"Statuts", 'filter.etapes':"Étapes",
     'ph.searchDeputes':"Nom, circonscription ou région…",
     'ph.searchVotes':"Mot-clé : sujet, numéro de projet de loi…",
@@ -2196,7 +2206,7 @@ const translations = {
     'h.petitions':"Petitions open at the National Assembly",
     'h.apropos':"Where this data comes from, and how to go further",
     'ph.searchMinistres':"Name, riding, region, or ministry…",
-    'ph.searchBills':"Keyword: housing, justice, immigration…",
+    'ph.searchBills':"Number, title or keyword…",
     // Refonte brutaliste — heroes de vues et bandes explicatives
     'hero.l1':"Who sits,",
     'hero.l2':"who legislates,",
@@ -6588,16 +6598,41 @@ function toggleShowMotions(){
   renderVotes();
 }
 
+// Filtre rapide des projets (maquette) : Tous / En cours / Adoptés / 🔥 Challengés
+let billsQuickFilter = 'tous';
+function setBillsQuickFilter(k){
+  billsQuickFilter = k;
+  renderBills();
+}
+function renderBillsQuickFilters(){
+  const el = document.getElementById('billsQuickFilters');
+  if(!el) return;
+  const isEn = currentLang === 'en';
+  const defs = [
+    ['tous', isEn ? 'All' : 'Tous'],
+    ['encours', isEn ? 'Active' : 'En cours'],
+    ['adoptes', isEn ? 'Passed' : 'Adoptés'],
+    ['challenges', isEn ? '🔥 Challenged' : '🔥 Challengés'],
+  ];
+  el.innerHTML = defs.map(([k, label]) =>
+    `<button class="qf-btn ${billsQuickFilter===k?'active':''}" onclick="setBillsQuickFilter('${k}')">${label}</button>`
+  ).join('');
+}
+
 function renderBills(keyword){
   keyword = keyword !== undefined ? keyword : (document.getElementById('searchBills')?.value || '');
   const kw = norm(keyword);
+  const isEn = currentLang === 'en';
+  const ch = challengedCache || [];
   const list = bills.filter(b => {
-    const statusOk = !billsStatusFilter || b.status === billsStatusFilter;
-    const stepOk = billsStepFilter === null || displayStep(b.step) === billsStepFilter;
+    const quickOk = billsQuickFilter === 'tous'
+      || (billsQuickFilter === 'encours' && b.status === 'encours')
+      || (billsQuickFilter === 'adoptes' && b.status === 'sanctionne')
+      || (billsQuickFilter === 'challenges' && ch.some(c => Number(c.bill_id) === b.id));
     const summaryText = (b.summary||'').replace(/<[^>]+>/g, ' ');
     const haystack = norm([b.title, summaryText, b.note, b.sponsor, 'projet de loi n° ' + b.num].join(' '));
     const kwOk = !kw || haystack.includes(kw);
-    return statusOk && stepOk && kwOk;
+    return quickOk && kwOk;
   }).sort((a,b)=>{
     const da = a.lastActivity || '', db = b.lastActivity || '';
     if(!da && !db) return 0;
@@ -6606,8 +6641,20 @@ function renderBills(keyword){
     return billsSortDir === 'desc' ? db.localeCompare(da) : da.localeCompare(db);
   });
   const el = document.getElementById('billsList');
-  el.innerHTML = list.length ? list.map(b=>billCard(b,'full')).join('') : `<div class="no-results">${currentLang==='en' ? 'No bill matches this search.' : 'Aucun projet de loi ne correspond à cette recherche.'}</div>`;
+  el.innerHTML = list.length ? list.map(b=>billCard(b,'full')).join('') : `<div class="no-results">${isEn ? 'No bill matches this search.' : 'Aucun projet de loi ne correspond à cette recherche.'}</div>`;
   document.getElementById('statProjets').textContent = bills.length;
+  // Titre de résultats + note (suivent le filtre actif et la langue)
+  renderBillsQuickFilters();
+  const titles = {
+    tous:       isEn ? 'All bills' : 'Tous les projets',
+    encours:    isEn ? 'Active bills' : 'En cours',
+    adoptes:    isEn ? 'Passed bills' : 'Adoptés',
+    challenges: isEn ? 'Challenged bills' : 'Challengés',
+  };
+  const titleEl = document.getElementById('billsResultTitle');
+  const noteEl = document.getElementById('billsResultNote');
+  if(titleEl) titleEl.textContent = titles[billsQuickFilter];
+  if(noteEl) noteEl.textContent = `${list.length} ${isEn ? 'shown · click a card → plain summary' : 'affiché·s · cliquez une carte → résumé en clair'}`;
 }
 
 function renderApercuBills(){
