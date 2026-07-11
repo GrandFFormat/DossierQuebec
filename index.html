@@ -1104,6 +1104,29 @@
     text-transform:uppercase; letter-spacing:0.05em; color:#666; width:200px;
   }
   @media (max-width:760px){ .comparateur-toolbar{grid-template-columns:1fr;} }
+  /* Placeholder du comparateur (avant sélection) */
+  .compare-placeholder{border:3px dashed #fff; background:rgba(255,255,255,0.06); padding:26px 24px;}
+  .cp-cols{display:flex; align-items:stretch; gap:16px;}
+  .cp-col{
+    flex:1; display:flex; align-items:center; gap:12px; min-width:0;
+    border:3px solid #fff; background:transparent; padding:16px 18px;
+  }
+  .cp-col.filled{border-color:var(--yellow); background:rgba(255,210,77,0.1);}
+  .cp-slot{
+    flex:none; width:34px; height:34px; display:flex; align-items:center; justify-content:center;
+    background:var(--yellow); color:#131313; border:2px solid #131313;
+    font-family:'Archivo',sans-serif; font-weight:900; font-size:16px;
+  }
+  .cp-txt{font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:0.03em; color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .cp-vs{
+    flex:none; align-self:center; font-family:'Archivo',sans-serif; font-weight:900;
+    font-size:18px; color:#A9C6FF; letter-spacing:0.04em;
+  }
+  .cp-hint{
+    margin-top:16px; font-family:'Archivo Narrow',sans-serif; font-size:13px; font-weight:600;
+    text-transform:uppercase; letter-spacing:0.04em; color:#A9C6FF;
+  }
+  @media (max-width:760px){ .cp-cols{flex-direction:column;} }
 
   /* ---------- PHASE 6 : LEXIQUE, COMPTE, RÔLES ---------- */
   /* Lexique : grille 2 colonnes de cartes brutales (le <dl> existant) */
@@ -1437,15 +1460,9 @@
     </div>
     <div class="grid" id="ministresGrid"></div>
 
-    <div class="section-head min-group-head" id="deputesTitle">
-      <div><h2 data-i18n="min.restTitle">Le reste de l'Assemblée</h2></div>
-      <span class="head-note" data-i18n="min.restNote">Tous les partis — 125 sièges au total</span>
-    </div>
-    <div class="grid" id="deputesList"></div>
-    <div class="info-box" id="deputesInfoBox" data-i18n="trouve.info">Ces 125 entrées viennent directement de la liste officielle des députés en fonction de l'Assemblée nationale. Certains sièges peuvent changer entre deux mises à jour (démission, élection partielle) — cette liste est une photo prise au moment de la dernière mise à jour, pas un flux automatiquement à jour.</div>
-
-    <!-- Comparateur : bande BLEUE pleine largeur (maquette) — jamais un
-         classement, une présentation factuelle côte à côte. -->
+    <!-- Comparateur : bande BLEUE pleine largeur (maquette) — entre le Conseil
+         des ministres et le reste de l'Assemblée. Jamais un classement, une
+         présentation factuelle côte à côte. -->
     <div class="band band-blue bleed" id="band-comparateur">
     <div class="section-head" id="sec-comparateur">
       <div>
@@ -1459,6 +1476,13 @@
     </div>
     <div id="comparateurTable"></div>
     </div>
+
+    <div class="section-head min-group-head" id="deputesTitle">
+      <div><h2 data-i18n="min.restTitle">Le reste de l'Assemblée</h2></div>
+      <span class="head-note" data-i18n="min.restNote">Tous les partis — 125 sièges au total</span>
+    </div>
+    <div class="grid" id="deputesList"></div>
+    <div class="info-box" id="deputesInfoBox" data-i18n="trouve.info">Ces 125 entrées viennent directement de la liste officielle des députés en fonction de l'Assemblée nationale. Certains sièges peuvent changer entre deux mises à jour (démission, élection partielle) — cette liste est une photo prise au moment de la dernière mise à jour, pas un flux automatiquement à jour.</div>
   </section>
 
   <!-- PROJETS DE LOI -->
@@ -6209,7 +6233,15 @@ function renderComparateurTable(){
   const nameA = document.getElementById('compareA').value;
   const nameB = document.getElementById('compareB').value;
   if(!nameA || !nameB){
-    container.innerHTML = '';
+    // Placeholder tant que les deux ministres ne sont pas choisis
+    container.innerHTML = `<div class="compare-placeholder">
+      <div class="cp-cols">
+        <div class="cp-col ${nameA ? 'filled' : ''}"><span class="cp-slot">A</span><span class="cp-txt">${nameA ? nameA : (isEn ? 'Pick a first minister' : 'Choisissez un premier ministre')}</span></div>
+        <div class="cp-vs">VS</div>
+        <div class="cp-col ${nameB ? 'filled' : ''}"><span class="cp-slot">B</span><span class="cp-txt">${nameB ? nameB : (isEn ? 'Pick a second minister' : 'Choisissez un second ministre')}</span></div>
+      </div>
+      <div class="cp-hint">${isEn ? 'Portfolio · party · riding · vote attendance · bills sponsored — side by side.' : 'Portefeuille · parti · circonscription · présence votes · PL parrainés — côte à côte.'}</div>
+    </div>`;
     return;
   }
   const mA = ministers.find(m => m.name === nameA);
