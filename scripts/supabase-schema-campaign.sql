@@ -5,16 +5,18 @@
 -- protégée par sa RLS : chaque personne ne voit que ses propres lignes, sauf
 -- les admins. Voir scripts/supabase-schema-flags.sql.
 
--- 1) Palmarès public : les projets à partir de 500 demandes (1er palier).
---    (Remplace la version qui filtrait à 1000.) N'expose que le total, jamais
---    les identités — sûr côté vie privée.
+-- 1) Palmarès public : les projets DÈS la première demande (seuil abaissé de
+--    500 -> 1 pour que la section « Projets challengés » de l'accueil montre
+--    l'élan et laisse les gens appuyer directement de là). N'expose que le
+--    total, jamais les identités — sûr côté vie privée (le count est agrégé,
+--    la RLS de bill_flags protège toujours qui a demandé quoi).
 create or replace function public.flag_counts()
 returns table (bill_id bigint, cnt bigint)
 language sql stable security definer set search_path = public as $$
   select bill_id, count(*)::bigint as cnt
   from public.bill_flags
   group by bill_id
-  having count(*) >= 500
+  having count(*) >= 1
   order by count(*) desc;
 $$;
 grant execute on function public.flag_counts() to anon, authenticated;
