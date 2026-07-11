@@ -768,6 +768,19 @@
 
   /* Mission sur fond bleu */
   .band-blue .mission-box{background:transparent; border:none; box-shadow:none; padding:0; margin:0;}
+  .mission-eyebrow{
+    font-family:'Archivo Narrow',sans-serif; font-size:14px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.1em; color:#A9C6FF; margin-bottom:18px;
+  }
+  .mission-statement{
+    font-family:'Archivo',sans-serif; font-size:clamp(22px, 2.8vw, 34px);
+    line-height:1.3; font-weight:800; letter-spacing:-0.015em;
+    margin:0 0 34px; max-width:860px; text-transform:uppercase; color:#fff;
+  }
+  .mission-statement .hl{
+    background:var(--yellow); color:#131313; padding:0 8px;
+    -webkit-box-decoration-break:clone; box-decoration-break:clone;
+  }
   .band-blue .mission-box h2{
     color:#fff; text-transform:uppercase; font-weight:800; letter-spacing:-0.015em;
     font-size:clamp(22px, 2.8vw, 34px); line-height:1.25;
@@ -1308,8 +1321,8 @@
     <div class="band band-blue bleed" id="band-mission">
     <div id="introBlock">
       <div class="mission-box" id="sec-mission">
-        <h2 data-i18n="mission.h">Notre mission — en quoi ce n'est pas juste une copie du site de l'Assemblée nationale</h2>
-        <p data-i18n="mission.intro"><b>Ceci est un site citoyen indépendant bâti avec de vraies données publiques de l'Assemblée nationale du Québec et de Données Québec.</b></p>
+        <div class="mission-eyebrow" data-i18n="mission.eyebrow">Notre mission</div>
+        <p class="mission-statement"><span data-i18n="mission.st1">Le site officiel de l'Assemblée est la source la plus fiable qui existe. Celui-ci la rend juste </span><span class="hl" data-i18n="mission.st2">plus facile à suivre.</span></p>
         <div class="compare">
           <div class="compare-col">
             <span class="tag" data-i18n="mission.assnat.tag">assnat.qc.ca fait</span>
@@ -1328,7 +1341,6 @@
             </ul>
           </div>
         </div>
-        <p data-i18n="mission.p">Le site officiel de l'Assemblée nationale est la source la plus fiable qui existe, et ce site ne cherche jamais à la remplacer — seulement à la rendre plus facile à suivre pour quelqu'un qui n'a pas de temps à perdre dans des menus de procédure parlementaire.</p>
       </div>
     </div>
     </div><!-- /band-mission -->
@@ -2012,23 +2024,14 @@
 
 </div>
 
+<!-- Footer maquette : texte à gauche (avec « construit avec Claude » suivi du
+     lien caché « et moi » vers la BD), liens texte en majuscules à droite. -->
 <footer>
-  <span id="footerLeft">Site non officiel — données publiques, Assemblée nationale du Québec &amp; Données Québec.</span>
+  <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">construit avec Claude</span> <a class="footer-etmoi" role="button" tabindex="0" onclick="goToTab('bd')" data-i18n="footer.etmoi">et moi</a></span>
   <span class="footer-right-group">
-    <a class="footer-gh" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook">
-      <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07Z"/></svg>
-      <span>Facebook</span>
-    </a>
-    <a class="footer-gh footer-coffee" href="https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00" target="_blank" rel="noopener" aria-label="Offre-moi un café" title="Offre-moi un café">
-      <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"/></svg>
-      <span>Offre-moi un café</span>
-      <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"/></svg>
-    </a>
-    <a class="footer-gh" href="https://github.com/GrandFFormat/DossierQuebec" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.31-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.87.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.62-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.29 0 .32.22.7.83.58A12.01 12.01 0 0 0 24 12.5C24 5.87 18.63.5 12 .5Z"/></svg>
-      <span data-i18n="footer.source">Code source</span>
-    </a>
-    <span id="footerRight">Construit avec Claude</span><a class="footer-etmoi" role="button" tabindex="0" onclick="goToTab('bd')" data-i18n="footer.etmoi">et moi</a>
+    <a class="footer-gh" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook">Facebook</a>
+    <a class="footer-gh footer-coffee" href="https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00" target="_blank" rel="noopener" aria-label="Offre-moi un café">Offre-moi un café</a>
+    <a class="footer-gh" href="https://github.com/GrandFFormat/DossierQuebec" target="_blank" rel="noopener" data-i18n="footer.source">Code source</a>
   </span>
 </footer>
 
@@ -2067,8 +2070,8 @@ const translations = {
     'btn.follow':"+ Suivre",'btn.following':"✓ Suivi",
     'btn.viewSummary':"+ Voir le résumé",'btn.hideSummary':"− Masquer le résumé",
     'btn.viewFull':"Voir le texte complet sur assnat.qc.ca →",
-    'footer.left':"Site non officiel — données publiques, Assemblée nationale du Québec & Données Québec.",
-    'footer.right':"Construit avec Claude",
+    'footer.left':"Site non officiel — données publiques ANQ & Données Québec ·",
+    'footer.right':"construit avec Claude",
     'footer.source':"Code source",
   },
   en: {
@@ -2132,14 +2135,17 @@ const translations = {
     'suggest.p':"If a term tripped you up while reading a bill or a vote, it tripped others too. Suggest it on the Facebook page — it will be added with a plain-language definition.",
     'suggest.cta':"✉ Suggest a term",
     'ch.more':"See more →",
+    'mission.eyebrow':"Our mission",
+    'mission.st1':"The Assembly's official site is the most reliable source there is. This one just makes it ",
+    'mission.st2':"easier to follow.",
     'filter.statuts':"Statuses", 'filter.etapes':"Stages",
     'ph.searchDeputes':"Name, riding, or region…",
     'ph.searchVotes':"Keyword: subject, bill number…",
     'btn.follow':"+ Follow",'btn.following':"✓ Following",
     'btn.viewSummary':"+ View summary",'btn.hideSummary':"− Hide summary",
     'btn.viewFull':"View full text on assnat.qc.ca →",
-    'footer.left':"Unofficial site — public data, Assemblée nationale du Québec & Données Québec.",
-    'footer.right':"Built with Claude",
+    'footer.left':"Unofficial site — public data ANQ & Données Québec ·",
+    'footer.right':"built with Claude",
     'footer.source':"Source code",
 
     // Ministers
