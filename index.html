@@ -893,15 +893,42 @@
   .bstep.now{background:var(--yellow); color:var(--ink);}
   .bstep.off{background:#fff; color:#999; border-color:#CCC;}
 
-  /* Numéro de projet en bloc bleu */
+  /* Tête de carte façon maquette : badge PL | titre+parrain | badges à droite */
   .bill .num{
     display:inline-block; background:var(--gold); color:#fff;
-    border:2px solid var(--ink); padding:4px 11px;
-    font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:13px;
-    letter-spacing:0.02em; margin-bottom:8px;
+    border:2px solid var(--ink); padding:5px 12px; flex:none;
+    font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:14px;
+    letter-spacing:0.02em; white-space:nowrap;
   }
-  .bill h3{font-weight:800; font-size:17.5px; letter-spacing:-0.01em;}
-  .bill .last-activity, .bill .last-activity b{color:var(--ink);}
+  .bill .head{align-items:flex-start; gap:18px;}
+  .bill-head-main{flex:1 1 0; min-width:240px;}
+  .bill-head-main h3{margin:0;}
+  .bill-head-right{display:flex; align-items:center; gap:6px; flex:none; flex-wrap:wrap; justify-content:flex-end;}
+  .bill h3{font-weight:800; font-size:17.5px; letter-spacing:-0.01em; line-height:1.25;}
+  .bill .meta{
+    font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:600;
+    color:#666; text-transform:uppercase; letter-spacing:0.04em; margin-top:4px;
+  }
+  .hot-badge{
+    background:#131313; color:var(--yellow);
+    font-family:'Archivo Narrow',sans-serif; font-size:12px; font-weight:700;
+    padding:5px 11px; text-transform:uppercase; letter-spacing:0.04em; white-space:nowrap;
+  }
+  /* Résumé ouvert en 2 colonnes (maquette) : « en clair » + dernier événement */
+  .bill-open-grid{display:grid; grid-template-columns:1.5fr 1fr; gap:32px; align-items:start;}
+  .open-label{
+    font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.06em; color:var(--gold); margin-bottom:12px;
+  }
+  .open-label.side{color:#666; margin-bottom:0;}
+  .bill-open-side{display:flex; flex-direction:column; gap:10px;}
+  .last-event-box{
+    border:2px solid var(--ink); background:var(--paper);
+    padding:14px 16px; font-size:14px; font-weight:600; line-height:1.4;
+  }
+  .bill-open-side .bill-more{display:block; text-align:center;}
+  .bill-summary p{font-size:14px;}
+  @media (max-width:760px){ .bill-open-grid{grid-template-columns:1fr;} }
 
   /* Pastilles de statut bordées */
   .status-pill{border:2px solid var(--ink); font-weight:700; font-size:11.5px;}
@@ -6308,7 +6335,7 @@ function billCard(b, ctx){
   const note = isEn ? (b.noteEn||b.note) : b.note;
   const summary = isEn ? (b.summaryEn||b.summary) : b.summary;
   const url = isEn ? (b.urlEn||b.url) : b.url;
-  const billLabel = isEn ? 'BILL NO.' : 'PROJET DE LOI N°';
+  const billLabel = isEn ? `Bill ${b.num}` : `PL Nº ${b.num}`;
   const sponsorLabel = isEn ? 'Sponsor' : 'Parrain';
   const pourLabel = isEn ? 'yeas' : 'pour';
   const contreLabel = isEn ? 'nays' : 'contre';
@@ -6321,6 +6348,11 @@ function billCard(b, ctx){
   const noSponsorLabel = isEn ? 'Not specified' : 'Non précisé';
   const party = sponsorParty(b.sponsor);
   const partyBadge = party ? `<span class="depute-party" style="background:${partyColors[party]}; color:${partyText(party)}">${party}</span>` : '';
+  // Badge « 🔥 N demandes » (maquette) quand le projet est challengé — compte
+  // AGRÉGÉ public (challengedCache) ; absent tant que le cache n'est pas chargé
+  // (renderChallenged re-rend les listes une fois le cache arrivé).
+  const chEntry = (challengedCache || []).find(c => Number(c.bill_id) === b.id);
+  const hotBadge = chEntry ? `<span class="hot-badge">🔥 ${Number(chEntry.cnt).toLocaleString(isEn ? 'en-CA' : 'fr-CA')} ${isEn ? (Number(chEntry.cnt) > 1 ? 'requests' : 'request') : (Number(chEntry.cnt) > 1 ? 'demandes' : 'demande')}</span>` : '';
   const isFollowed = !!followedBills[b.id];
   // Le suivi (et les alertes courriel) est caché sur les projets sanctionnés :
   // ils sont finaux, ne changeront plus d'étape, donc rien à suivre. Gardé sur
@@ -6358,18 +6390,17 @@ function billCard(b, ctx){
   return `
     <div class="bill" onclick="toggleBillSummary('${domId}', event)">
       <div class="head">
-        <div>
-          <div class="num">${billLabel} ${b.num}</div>
+        <span class="num">${billLabel}</span>
+        <div class="bill-head-main">
           <h3>${title}</h3>
-          <div class="last-activity">${lastActivityLabel} : <b>${lastActivityValue}</b>${note ? ` — ${note}` : ''}</div>
           <div class="meta">${sponsorLabel} : ${b.sponsor || noSponsorLabel} · ${presentedOnLabel} ${presentedOnValue}</div>
         </div>
-        <div style="display:flex; align-items:center; gap:6px; flex:none; flex-wrap:wrap; justify-content:flex-end;">
+        <div class="bill-head-right">
+          ${hotBadge}
           ${partyBadge}
           <span class="status-pill ${statusClass(b.status)}">${statusLabel(b.status)}</span>
         </div>
       </div>
-      ${flagRow}
       <div class="bstep-row">
         ${(isEn?stepsEn:steps).map((s,i)=>{
           const cur = displayStep(b.step)-1;
@@ -6430,9 +6461,19 @@ function billCard(b, ctx){
       })() : ''}
       <div class="expand-hint" id="hint-${domId}">${t('btn.viewSummary')}</div>
       <div class="bill-summary" id="${domId}">
-        ${summary}
-        <p class="src-note">${b.summaryAiGenerated ? (isEn ? '⚙ AI-generated summary of the bill as introduced — may not reflect amendments made since.' : '⚙ Résumé généré par IA à partir du texte tel que présenté — peut ne pas refléter les amendements adoptés depuis.') : srcNote}</p>
-        <a class="bill-more" href="${url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${t('btn.viewFull')}</a>
+        <div class="bill-open-grid">
+          <div>
+            <div class="open-label">${isEn ? 'What it does, plainly' : 'Ce que ça fait, en clair'}</div>
+            ${summary}
+            <p class="src-note">${b.summaryAiGenerated ? (isEn ? '⚙ AI-generated summary of the bill as introduced — may not reflect amendments made since.' : '⚙ Résumé généré par IA à partir du texte tel que présenté — peut ne pas refléter les amendements adoptés depuis.') : srcNote}</p>
+          </div>
+          <div class="bill-open-side">
+            <div class="open-label side">${lastActivityLabel}</div>
+            <div class="last-event-box">${lastActivityValue}${note ? ` — ${note}` : ''}</div>
+            <a class="bill-more" href="${url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${t('btn.viewFull')}</a>
+            ${flagRow}
+          </div>
+        </div>
       </div>
     </div>
   `;
@@ -6442,8 +6483,18 @@ function toggleBillSummary(domId, evt){
   if(evt) evt.stopPropagation();
   const el = document.getElementById(domId);
   const hint = document.getElementById('hint-'+domId);
-  const isOpen = el.classList.toggle('open');
-  hint.textContent = isOpen ? t('btn.hideSummary') : t('btn.viewSummary');
+  const willOpen = !el.classList.contains('open');
+  if(willOpen){
+    // Accordéon (maquette) : un seul résumé ouvert à la fois.
+    document.querySelectorAll('.bill-summary.open').forEach(other=>{
+      if(other === el) return;
+      other.classList.remove('open');
+      const h = document.getElementById('hint-'+other.id);
+      if(h) h.textContent = t('btn.viewSummary');
+    });
+  }
+  el.classList.toggle('open', willOpen);
+  if(hint) hint.textContent = willOpen ? t('btn.hideSummary') : t('btn.viewSummary');
 }
 
 // Bascule la section « votes enregistrés » d'une carte entre la vue compacte
@@ -6649,6 +6700,10 @@ async function renderChallenged(){
       const { data, error } = await supabaseClient.rpc('flag_counts');
       challengedCache = (!error && Array.isArray(data)) ? data : [];
     }catch(e){ challengedCache = []; }
+    // Le cache vient d'arriver : re-rend les listes de projets pour que les
+    // badges « 🔥 N demandes » des cartes apparaissent (billCard le lit).
+    renderBills();
+    renderApercuBills();
   }
 
   const challenged = challengedCache
