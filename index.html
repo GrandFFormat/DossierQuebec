@@ -1226,7 +1226,7 @@
   <nav class="tabs">
     <div class="close-menu" id="closeMenuBtn"><span data-i18n="nav.close">Fermer</span> ✕</div>
     <button class="active" data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></button>
-    <button data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres &amp; député·e·s</span></button>
+    <button data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></button>
     <button data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></button>
     <button data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></button>
     <button data-view="compte"><span class="n">05</span><span data-i18n="nav.compte">Compte &amp; à propos</span></button>
@@ -1388,7 +1388,6 @@
         <input type="text" id="searchMinistres" data-i18n-placeholder="ph.searchMinistres" placeholder="Nom, circonscription, région ou ministère…">
       </div>
       <div class="hero-filters">
-        <div class="party-filters" id="partyFilters"></div>
         <button class="sort-toggle" id="ministresSortToggle" onclick="toggleMinistresSort()"></button>
       </div>
     </div>
@@ -2062,7 +2061,7 @@
 /* ---------------- I18N ---------------- */
 const translations = {
   fr: {
-    'nav.close':"Fermer",'nav.apercu':"Aperçu",'nav.ministres':"Ministres & député·e·s",'nav.projets':"Projets de loi",
+    'nav.close':"Fermer",'nav.apercu':"Aperçu",'nav.ministres':"Ministres",'nav.projets':"Projets de loi",
     'nav.votes':"Votes",'nav.quoideneuf':"Quoi de neuf",'nav.compte':"Compte & à propos",'nav.trouve':"Trouvez votre député",
     'nav.lexique':"Lexique",'nav.personnes':"Qui gravite autour",'nav.petitions':"Pétitions",'nav.apropos':"D'où viennent ces données",
     'stat.ministres':"Ministres",'stat.projets':"Projets de loi",'stat.votes':"Votes enregistrés",
@@ -2093,7 +2092,7 @@ const translations = {
     'footer.source':"Code source",
   },
   en: {
-    'nav.close':"Close",'nav.apercu':"Overview",'nav.ministres':"Ministers & MNAs",'nav.projets':"Bills",
+    'nav.close':"Close",'nav.apercu':"Overview",'nav.ministres':"Ministers",'nav.projets':"Bills",
     'nav.votes':"Votes",'nav.quoideneuf':"What's new",'nav.compte':"Account & about",'nav.trouve':"Find your MNA",
     'nav.lexique':"Glossary",'nav.personnes':"Who's involved",'nav.petitions':"Petitions",'nav.apropos':"Where this data comes from",
     'stat.ministres':"Ministers",'stat.projets':"Bills",'stat.votes':"Votes recorded",
