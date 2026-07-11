@@ -919,6 +919,94 @@
   .lire-box.hl p{color:#fff;}
   @media (max-width:900px){ .lire-grid{grid-template-columns:1fr;} }
 
+  /* ---------- PHASE 5 : MINISTRES & ASSEMBLÉE ---------- */
+  /* Composition : barre empilée bordée + légende à carrés */
+  .compo-wrap{margin-bottom:34px;}
+  .compo-bar{display:flex; height:56px; border:3px solid var(--ink); background:#fff;}
+  .compo-seg{height:100%;}
+  .compo-legend{display:flex; gap:20px; margin-top:16px; flex-wrap:wrap; align-items:center;}
+  .compo-row{
+    display:flex; align-items:center; gap:8px;
+    font-family:'Archivo Narrow',sans-serif; font-size:13.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.03em;
+  }
+  .compo-swatch{width:16px; height:16px; border:2px solid var(--ink); flex:none;}
+  .compo-note{flex-basis:100%; font-size:11.5px; color:var(--slate); font-family:'Archivo Narrow',sans-serif;}
+
+  /* Cartes ministres brutales */
+  .m-card{border:3px solid var(--ink); box-shadow:var(--shadow); background:#fff;}
+  .m-card h3{font-weight:800; font-size:16.5px; text-transform:uppercase; letter-spacing:-0.01em; line-height:1.15;}
+  .m-card .role{
+    font-family:'Archivo Narrow',sans-serif; font-size:13px; font-weight:700;
+    color:var(--gold); text-transform:uppercase; letter-spacing:0.04em;
+  }
+  .m-card .meta-row{border-top:2px solid #E5E2DA;}
+  .m-card .avatar{border:2px solid var(--ink); background:#fff; color:var(--ink);}
+  .depute-party{
+    border:2px solid var(--ink); font-family:'Archivo Narrow',sans-serif;
+    font-weight:700; text-transform:uppercase; letter-spacing:0.03em; padding:3px 9px;
+  }
+  .party-chip{border-width:2px; font-weight:700; text-transform:uppercase;}
+  .role-group-title{
+    font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase;
+    letter-spacing:-0.01em;
+  }
+
+  /* Tableau du reste de l'Assemblée, groupé par parti */
+  #deputesList{display:block;}
+  .dep-table{border:3px solid var(--ink); box-shadow:var(--shadow-lg); background:#fff;}
+  .dep-table-head{
+    display:grid; grid-template-columns:1fr 280px 110px; gap:16px; padding:12px 22px;
+    background:#131313; color:var(--paper);
+    font-family:'Archivo Narrow',sans-serif; font-size:12px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.06em;
+  }
+  .dep-group-banner{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:12px 22px; border-top:3px solid var(--ink); border-bottom:2px solid var(--ink);
+  }
+  .dep-group-name{font-size:16px; font-weight:900; text-transform:uppercase; letter-spacing:0.02em;}
+  .dep-group-count{font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;}
+  .dep-row{
+    display:grid; grid-template-columns:1fr 280px 110px; gap:16px; padding:13px 22px;
+    border-top:2px solid #E5E2DA; align-items:center; background:#fff;
+  }
+  .dep-name{font-size:15px; font-weight:700;}
+  .dep-mail{font-family:'Archivo Narrow',sans-serif; font-size:12px; font-weight:600; color:var(--gold);}
+  .dep-riding{font-size:13.5px; font-weight:600;}
+  .dep-att{font-family:'Archivo Narrow',sans-serif; font-size:11.5px; color:var(--slate);}
+  .dep-follow{padding:7px 12px; font-size:11.5px; justify-self:start;}
+  @media (max-width:760px){
+    .dep-table-head{display:none;}
+    .dep-row{grid-template-columns:1fr; gap:8px;}
+    .dep-follow{justify-self:start;}
+  }
+
+  /* Comparateur sur bande bleue */
+  #band-comparateur{margin-top:34px;}
+  #band-comparateur .section-head h2{color:#fff;}
+  #band-comparateur .section-head .sub{color:#A9C6FF;}
+  .comparateur-toolbar{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:24px;}
+  .comparateur-toolbar select{
+    border:3px solid var(--ink); background:var(--yellow); color:var(--ink);
+    font-family:'Archivo Narrow',sans-serif; font-size:15px; font-weight:700;
+    text-transform:uppercase; padding:14px 16px; cursor:pointer;
+    box-shadow:5px 5px 0 var(--ink);
+  }
+  .comparateur-toolbar select#compareB{background:#fff;}
+  #band-comparateur .compare-table-wrap{border:3px solid var(--ink); background:#fff; box-shadow:var(--shadow-lg); overflow-x:auto;}
+  #band-comparateur .compare-table{width:100%; border-collapse:collapse; color:var(--ink);}
+  #band-comparateur .compare-table th{
+    background:#131313; color:var(--paper); text-align:left; padding:14px 20px;
+    font-size:16px; font-weight:800; text-transform:uppercase;
+  }
+  #band-comparateur .compare-table td{padding:13px 20px; border-top:2px solid #E5E2DA; font-size:14px; font-weight:600;}
+  #band-comparateur .compare-table td:first-child{
+    font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.05em; color:#666; width:200px;
+  }
+  @media (max-width:760px){ .comparateur-toolbar{grid-template-columns:1fr;} }
+
   @media (max-width:640px){
     header.top{padding:24px 18px 18px;}
     .app{padding:0 18px 60px;}
@@ -1196,9 +1284,18 @@
 
   <!-- MINISTRES & DÉPUTÉS -->
   <section class="view" id="view-ministres">
+    <!-- Hero de vue (refonte brutaliste) -->
+    <div class="view-hero">
+      <h1 class="hero-h1 hero-h1-md">
+        <span>Conseil des ministres</span>
+        <span class="hero-outline">&amp; toute l'Assemblée.</span>
+      </h1>
+      <p class="view-hero-sub">Les ministres, puis les 125 député·e·s de tous les partis — <b>une seule recherche pour les deux.</b></p>
+    </div>
+
     <div class="section-head">
       <div>
-        <h2 data-i18n="h.ministres">Conseil des ministres et Assemblée</h2>
+        <h2 data-i18n="h.ministres" class="visually-hidden-title">Conseil des ministres et Assemblée</h2>
         <div class="sub" data-i18n="min.merged.sub">Le Conseil des ministres, puis les 125 député·e·s de tous les partis — une seule recherche pour les deux</div>
       </div>
       <div class="toolbar">
@@ -1223,9 +1320,11 @@
       </div>
     </div>
 
-    <div class="hemicycle-wrap">
-      <svg id="hemicycleSvg" width="420" height="230" viewBox="0 0 420 230"></svg>
-      <div class="hemicycle-legend" id="hemicycleLegend"></div>
+    <!-- Composition : barre empilée bordée (remplace l'hémicycle SVG — mêmes
+         données réelles `seats`, rendu par renderHemicycle()). -->
+    <div class="compo-wrap">
+      <div class="compo-bar" id="compoBar"></div>
+      <div class="compo-legend" id="hemicycleLegend"></div>
     </div>
 
     <div class="role-group-title" id="combinedTitle" style="display:none;"></div>
@@ -1238,17 +1337,21 @@
     <div class="grid" id="deputesList"></div>
     <div class="info-box" id="deputesInfoBox" data-i18n="trouve.info">Ces 125 entrées viennent directement de la liste officielle des députés en fonction de l'Assemblée nationale. Certains sièges peuvent changer entre deux mises à jour (démission, élection partielle) — cette liste est une photo prise au moment de la dernière mise à jour, pas un flux automatiquement à jour.</div>
 
+    <!-- Comparateur : bande BLEUE pleine largeur (maquette) — jamais un
+         classement, une présentation factuelle côte à côte. -->
+    <div class="band band-blue bleed" id="band-comparateur">
     <div class="section-head" id="sec-comparateur">
       <div>
         <h2 data-i18n="h.comparateur">Comparateur de ministres</h2>
         <div class="sub" data-i18n="comp.sub">Choisissez deux ministres pour voir leurs dossiers côte à côte</div>
       </div>
     </div>
-    <div class="toolbar">
+    <div class="toolbar comparateur-toolbar">
       <select id="compareA" onchange="renderComparateurTable()"></select>
       <select id="compareB" onchange="renderComparateurTable()"></select>
     </div>
     <div id="comparateurTable"></div>
+    </div>
   </section>
 
   <!-- PROJETS DE LOI -->
@@ -2167,7 +2270,11 @@ document.getElementById('langToggle').addEventListener('click', ()=>{
 // Couleurs des partis — au plus proche des vraies identités visuelles, tout en
 // restant distinguables (CAQ cyan clair, PCQ bleu royal, PQ bleu foncé : trois
 // bleus séparés par la clarté, comme dans la vraie vie politique québécoise).
-const partyColors = { CAQ:'#1AA0D8', PLQ:'#D3222A', QS:'#E0551F', PQ:'#12326B', PCQ:'#3E63B0', IND:'#8A8F99' };
+const partyColors = { CAQ:'#00A5CF', PLQ:'#E23A3A', QS:'#FF7B33', PQ:'#12429B', PCQ:'#3E63B0', IND:'#8B8578' };
+// Refonte : badges de parti à fond PLEIN — couleur de texte lisible par parti
+// (noir sur cyan/orange clairs, blanc sur les foncés).
+const partyTextColors = { CAQ:'#131313', QS:'#131313', PLQ:'#fff', PQ:'#fff', PCQ:'#fff', IND:'#fff' };
+function partyText(p){ return partyTextColors[p] || '#fff'; }
 
 // Répartition réelle approximative des groupes à la 43e législature (Ass. nat. du Québec)
 const seats = [
@@ -5695,7 +5802,52 @@ function renderDeputes(filter){
     return;
   }
   const isEn = currentLang === 'en';
-  el.innerHTML = list.map(d => personCard({ type:'depute', d, att: attendanceForAssnatId(d.assnatId) })).join('');
+  // Refonte brutaliste : tableau GROUPÉ PAR PARTI (bandeau pleine largeur aux
+  // couleurs du parti), au lieu de la grille de cartes — mêmes données, mêmes
+  // boutons Suivre (followedDeputes), même courriel.
+  const partyOrder = seats.map(s=>s.party);
+  const groups = partyOrder
+    .map(p => ({ party:p, seat: seats.find(s=>s.party===p), members: list.filter(d=>d.party===p) }))
+    .filter(g => g.members.length);
+  const nameLabel = isEn ? 'Name' : 'Nom';
+  const ridingLabel = isEn ? 'Riding — region' : 'Circonscription — région';
+  const followColLabel = isEn ? 'Follow' : 'Suivre';
+  const seatWord = isEn ? 'shown' : 'affiché·e·s';
+  el.innerHTML = `<div class="dep-table">
+    <div class="dep-table-head"><span>${nameLabel}</span><span>${ridingLabel}</span><span>${followColLabel}</span></div>
+    ${groups.map(g => {
+      const label = isEn ? (g.seat.labelEn||g.seat.label) : g.seat.label;
+      return `
+      <div class="dep-group-banner" style="background:${partyColors[g.party]}; color:${partyText(g.party)}">
+        <span class="dep-group-name">${label}</span>
+        <span class="dep-group-count">${g.members.length} ${seatWord}</span>
+      </div>
+      ${g.members.map(d => {
+        const email = findDeputeEmail(d.name);
+        const mailHref = email ? 'mailto:'+email : deputesDirectoryUrl;
+        const mailText = email ? email : (isEn ? 'Official email on assnat.qc.ca' : 'Courriel officiel sur assnat.qc.ca');
+        const followKey = d.name + '|' + d.riding;
+        const isFollowed = !!followedDeputes[followKey];
+        const att = attendanceForAssnatId(d.assnatId);
+        const presidingNote = presidingRoleNote(d.name, isEn);
+        const attNote = presidingNote ? presidingNote : att
+          ? (isEn ? `attendance: ${att.rate}%` : `présence : ${att.rate} %`)
+          : (isEn ? 'attendance: n/a' : 'présence : n/d');
+        return `
+        <div class="dep-row">
+          <div>
+            <div class="dep-name">${d.name}</div>
+            <a class="dep-mail" href="${mailHref}" ${email ? '' : 'target="_blank" rel="noopener"'}>✉ ${mailText}</a>
+          </div>
+          <div>
+            <div class="dep-riding">${d.riding} — ${d.region}</div>
+            <div class="dep-att">${attNote}</div>
+          </div>
+          <button class="follow-btn dep-follow ${isFollowed?'on':''}" onclick="toggleFollowDepute('${followKey.replace(/'/g,"\\'")}')">${isFollowed ? t('btn.following') : t('btn.follow')}</button>
+        </div>`;
+      }).join('')}`;
+    }).join('')}
+  </div>`;
 }
 
 // Carte unifiée pour la vue combinée (ministres + reste de l'Assemblée sur un
@@ -5740,7 +5892,7 @@ function personCard(p){
       <h3>${name}</h3>
       <div class="role">${subtitle}</div>
       <div class="meta-row">
-        <span class="depute-party" style="background:${partyColors[party]}22; color:${partyColors[party]}">${party}</span>
+        <span class="depute-party" style="background:${partyColors[party]}; color:${partyText(party)}">${party}</span>
         <span class="vp-note" title="${attTitle}">${attNote}</span>
       </div>
     </div>
@@ -5748,36 +5900,21 @@ function personCard(p){
 }
 
 function renderHemicycle(){
-  const svg = document.getElementById('hemicycleSvg');
-  const total = seats.reduce((a,s)=>a+s.n,0);
-  const cx=210, cy=210, rOuter=190, rInner=60, rows=6;
-  let seatEls = '';
-  let idx=0;
-  // Build ordered seat list by party
-  let seatList = [];
-  seats.forEach(s=>{ for(let i=0;i<s.n;i++) seatList.push(s.party); });
-
-  for(let row=0; row<rows; row++){
-    const r = rInner + (rOuter-rInner) * (row/(rows-1));
-    const seatsInRow = Math.round(12 + row*4.2);
-    for(let i=0;i<seatsInRow;i++){
-      if(idx>=seatList.length) break;
-      const t = Math.PI * (i/(seatsInRow-1));
-      const x = cx - r*Math.cos(t);
-      const y = cy - r*Math.sin(t);
-      const color = partyColors[seatList[idx]] || '#999';
-      seatEls += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.3" fill="${color}"/>`;
-      idx++;
-    }
-  }
-  svg.innerHTML = seatEls;
-
+  // Refonte brutaliste : la composition est une barre empilée bordée (segments
+  // proportionnels aux sièges, séparés par des bordures noires) + légende à
+  // carrés — mêmes données réelles `seats` que l'ancien hémicycle SVG.
+  const bar = document.getElementById('compoBar');
   const legend = document.getElementById('hemicycleLegend');
+  if(!bar || !legend) return;
+  const total = seats.reduce((a,s)=>a+s.n,0);
   const isEn = currentLang === 'en';
+  bar.innerHTML = seats.map((s,i)=>
+    `<div class="compo-seg" title="${(isEn ? (s.labelEn||s.label) : s.label)} — ${s.n}" style="width:${(s.n/total*100).toFixed(2)}%; background:${partyColors[s.party] || '#999'};${i>0 ? ' border-left:3px solid var(--ink);' : ''}"></div>`
+  ).join('');
   const footNote = isEn ? 'Real count, drawn from the list of 125 MNAs (Cabinet tab).' : 'Décompte réel, tiré de la liste des 125 députés (onglet Conseil des ministres).';
   legend.innerHTML = seats.map(s=>`
-    <div class="row"><span class="dot" style="background:${partyColors[s.party]}"></span>${isEn ? (s.labelEn||s.label) : s.label} <b style="margin-left:auto">${s.n}</b></div>
-  `).join('') + `<div style="font-size:11px; color:var(--slate); margin-top:6px; max-width:220px;">${footNote}</div>`;
+    <div class="compo-row"><span class="compo-swatch" style="background:${partyColors[s.party]}"></span>${isEn ? (s.labelEn||s.label) : s.label} — <b>${s.n}</b></div>
+  `).join('') + `<div class="compo-note">${footNote}</div>`;
 }
 
 let ministresSortMode = null; // null (ordre par défaut) | 'desc' (+ actif) | 'asc' (- actif)
@@ -5988,7 +6125,7 @@ function billCard(b, ctx){
   const presentedOnValue = b.presentedOn || (isEn ? 'unknown' : 'inconnu');
   const noSponsorLabel = isEn ? 'Not specified' : 'Non précisé';
   const party = sponsorParty(b.sponsor);
-  const partyBadge = party ? `<span class="depute-party" style="background:${partyColors[party]}22; color:${partyColors[party]}">${party}</span>` : '';
+  const partyBadge = party ? `<span class="depute-party" style="background:${partyColors[party]}; color:${partyText(party)}">${party}</span>` : '';
   const isFollowed = !!followedBills[b.id];
   // Le suivi (et les alertes courriel) est caché sur les projets sanctionnés :
   // ils sont finaux, ne changeront plus d'étape, donc rien à suivre. Gardé sur
@@ -6439,7 +6576,7 @@ function renderVotes(keyword){
     const whoLabel = isEn ? 'who voted what' : 'qui a voté quoi';
     const numLine = (v.billNum ? `${billLabel} ${v.billNum} — ` : '') + (v.stage ? v.stage + ' — ' : '') + v.date;
     const sponsorParty_ = bill && bill.sponsor ? sponsorParty(bill.sponsor) : null;
-    const sponsorBadge = sponsorParty_ ? `<span class="depute-party" style="background:${partyColors[sponsorParty_]}22; color:${partyColors[sponsorParty_]}">${sponsorParty_}</span>` : '';
+    const sponsorBadge = sponsorParty_ ? `<span class="depute-party" style="background:${partyColors[sponsorParty_]}; color:${partyText(sponsorParty_)}">${sponsorParty_}</span>` : '';
     const sponsorLine = bill && bill.sponsor ? `<div class="meta">${sponsorLabel} : ${bill.sponsor} ${sponsorBadge}</div>` : '';
     return `
       <div class="vote-card" onclick="toggleBillSummary('summary-${domId}', event)">
