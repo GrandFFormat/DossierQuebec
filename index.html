@@ -6600,7 +6600,7 @@ async function renderChallenged(){
       let demandBtn = '';
       if(canFlag){
         if(!currentUser){
-          demandBtn = `<button class="ch-demand" onclick="event.stopPropagation(); goToTab('compte')">🔒 ${isEn ? 'Sign in to ask' : 'Se connecter pour demander'}</button>`;
+          demandBtn = `<button class="ch-demand" onclick="event.stopPropagation(); goToTab('compte')">🔒 ${isEn ? 'Sign in to challenge' : 'Se connecter pour challenger'}</button>`;
         } else if(isFlagged){
           demandBtn = `<button class="ch-demand on" disabled>✓ ${isEn ? 'Explanation requested' : 'Explication demandée'}</button>`;
         } else {
