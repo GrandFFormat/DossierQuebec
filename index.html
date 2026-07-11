@@ -705,6 +705,16 @@
   .band-white{background:#fff;}
   .band-blue{background:var(--gold); color:#fff; border-top:3px solid var(--ink);}
   #band-challenged{margin-top:30px;}
+  /* Badge de compteur des cartes challengées (sur bande jaune) : blanc bordé
+     noir, plus lisible que le vert « sanctionné » repris avant. */
+  .status-challenge{background:#fff; color:var(--ink); border:2px solid var(--ink); font-weight:800;}
+  /* Bouton « Demander » proéminent, directement sur la carte challengée */
+  .challenge-demand-row{margin-top:14px;}
+  .follow-btn.demand-cta{
+    background:var(--gold); color:#fff; border:3px solid var(--ink);
+    box-shadow:var(--shadow-sm); font-size:14px; padding:11px 18px;
+  }
+  .follow-btn.demand-cta:hover{background:#08307A; color:#fff;}
   .band .section-head h2{font-size:clamp(26px, 3.4vw, 42px);}
   .band-yellow .section-head .sub{color:var(--ink); font-weight:600;}
 
@@ -6434,6 +6444,13 @@ function renderApercuBills(){
 const CHALLENGE_TIERS = [500, 1000, 2500, 5000, 25000];
 const CHALLENGE_THRESHOLD = CHALLENGE_TIERS[0];
 const PETITION_THRESHOLD = 1000;
+// Un projet apparaît dans « Projets challengés » dès la PREMIÈRE demande (pas
+// besoin d'attendre 500) — pour montrer l'élan et laisser les gens « piler »
+// dessus directement depuis l'accueil. ⚠️ Nécessite que la fonction SQL
+// flag_counts() renvoie aussi les projets sous 500 : voir
+// scripts/supabase-schema-campaign.sql (having count(*) >= 1).
+const CHALLENGE_DISPLAY_MIN = 1;
+const CHALLENGE_DISPLAY_MAX = 8; // on n'affiche que les N plus demandés
 const nextChallengeTier = cnt => CHALLENGE_TIERS.find(t => cnt < t) ?? null;
 let challengedCache = null;
 
@@ -6474,8 +6491,8 @@ async function renderChallenged(){
   const subEl = document.getElementById('challengedSub');
   if(titleEl) titleEl.textContent = isEn ? 'Bills challenged by citizens' : 'Projets challengés par les citoyen·ne·s';
   if(subEl) subEl.textContent = isEn
-    ? `From ${fmt(CHALLENGE_THRESHOLD)} requests for explanations a bill appears here — at ${fmt(PETITION_THRESHOLD)}, we push for a petition`
-    : `Dès ${fmt(CHALLENGE_THRESHOLD)} demandes d'explications, un projet apparaît ici — à ${fmt(PETITION_THRESHOLD)}, on pousse pour une pétition`;
+    ? `The moment one person asks for an explanation, the bill appears here — pile on in one click; at ${fmt(PETITION_THRESHOLD)}, we push for a petition`
+    : `Dès qu'une personne demande une explication, le projet apparaît ici — appuyez en un clic ; à ${fmt(PETITION_THRESHOLD)}, on pousse pour une pétition`;
 
   if(challengedCache === null){
     try{
@@ -6486,8 +6503,9 @@ async function renderChallenged(){
 
   const challenged = challengedCache
     .map(c => ({ cnt: Number(c.cnt), bill: bills.find(b => b.id === Number(c.bill_id)) }))
-    .filter(c => c.bill && c.cnt >= CHALLENGE_THRESHOLD)
-    .sort((a, b) => b.cnt - a.cnt);
+    .filter(c => c.bill && c.cnt >= CHALLENGE_DISPLAY_MIN)
+    .sort((a, b) => b.cnt - a.cnt)
+    .slice(0, CHALLENGE_DISPLAY_MAX);
 
   if(challenged.length){
     el.innerHTML = challenged.map(c => {
@@ -6500,15 +6518,40 @@ async function renderChallenged(){
       const flames = '🔥'.repeat(CHALLENGE_TIERS.filter(t => cnt >= t).length) || '🔥';
       const petitionBadge = cnt >= PETITION_THRESHOLD
         ? `<div class="meta" style="margin-top:4px; color:var(--gold);">${isEn ? '⚑ Petition threshold reached' : '⚑ Seuil de pétition atteint'}</div>` : '';
+      // Bouton « Demander » DIRECTEMENT sur la carte (les gens pressés
+      // n'ont pas à ouvrir l'onglet Projets de loi). Mêmes 3 états que
+      // billCard, et seulement sur un projet ACTIF (un projet sanctionné ne
+      // se challenge plus). requestExplanation() re-rend cette section.
+      const canFlag = b.status === 'encours';
+      const isFlagged = !!myFlaggedBills[b.id];
+      const flagBtnId = 'demand-ch-' + b.id;
+      let demandRow = '';
+      if(canFlag){
+        let label, onclick = '', disabled = '', cls = 'demand-cta';
+        if(!currentUser){
+          label = isEn ? '🔒 Sign in to ask' : '🔒 Se connecter pour demander';
+          onclick = "goToTab('compte')";
+        } else if(isFlagged){
+          label = isEn ? '✓ Explanation requested' : '✓ Explication demandée';
+          disabled = 'disabled'; cls = 'on';
+        } else {
+          label = isEn ? '✋ Ask for an explanation' : '✋ Demander une explication';
+          onclick = `requestExplanation(${b.id}, '${flagBtnId}')`;
+        }
+        demandRow = `<div class="challenge-demand-row">
+          <button class="follow-btn ${cls}" id="${flagBtnId}" ${disabled} onclick="event.stopPropagation(); ${onclick}">${label}</button>
+        </div>`;
+      }
       return `<div class="bill">
         <div class="head" onclick="goToTab('projets')" style="cursor:pointer;">
           <div>
             <div class="num">${numLabel} ${b.num}</div>
             <h3>${title}</h3>
           </div>
-          <div style="flex:none; text-align:right;"><span class="status-pill status-sanctionne">${flames} ${progress}</span></div>
+          <div style="flex:none; text-align:right;"><span class="status-pill status-challenge">${flames} ${progress}</span></div>
         </div>
         ${petitionBadge}
+        ${demandRow}
         <div class="bill-follow-row">
           <span class="follow-hint">${isEn ? 'Share:' : 'Partager :'}</span>
           <button class="follow-btn" onclick="event.stopPropagation(); shareChallenge(${b.id}, ${cnt}, 'x', event)" aria-label="Partager sur X">𝕏</button>
@@ -6521,8 +6564,8 @@ async function renderChallenged(){
     el.innerHTML = `<div style="background:var(--card); border:1px dashed var(--line); border-radius:var(--radius); padding:22px 18px; text-align:center; color:var(--slate);">
       <div style="font-size:26px; margin-bottom:8px;">🔎</div>
       <div style="font-size:14px; line-height:1.65; max-width:580px; margin:0 auto;">${isEn
-        ? `No bill has reached ${fmt(CHALLENGE_THRESHOLD)} requests yet. This is where the bills the most citizens want explained will appear — ask for an explanation on any active bill to get one started.`
-        : `Aucun projet n'a encore atteint ${fmt(CHALLENGE_THRESHOLD)} demandes. C'est ici qu'apparaîtront les projets que le plus de citoyen·ne·s veulent voir expliqués — demandez une explication sur n'importe quel projet actif pour en lancer un.`}</div>
+        ? `No one has asked for an explanation yet. The moment someone does, the bill shows up here — ask for an explanation on any active bill to get the ball rolling.`
+        : `Personne n'a encore demandé d'explication. Dès qu'une personne le fait, le projet apparaît ici — demandez une explication sur n'importe quel projet actif pour lancer le bal.`}</div>
       <button class="sort-toggle" style="margin-top:14px; cursor:pointer;" onclick="goToTab('projets')">${isEn ? 'Go to bills →' : 'Aller aux projets de loi →'}</button>
     </div>`;
   }
