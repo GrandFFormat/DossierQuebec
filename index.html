@@ -795,7 +795,16 @@
     font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700;
     text-transform:uppercase; letter-spacing:0.06em; color:var(--gold); margin-bottom:4px;
   }
-  .calendar-box{border:3px solid var(--ink);}
+  /* Encadré noir compact « travaux / reprise » (maquette) */
+  .calendar-box{
+    border:3px solid var(--ink); background:#131313;
+    padding:16px 20px; margin-top:20px;
+  }
+  .calendar-box .status{
+    color:var(--paper); font-family:'Archivo Narrow',sans-serif;
+    font-size:13px; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.06em; margin:0;
+  }
 
   /* Pétitions : compteur bleu + barre bordée */
   .petition-card{border:3px solid var(--ink); background:var(--paper); box-shadow:none;}
@@ -1259,7 +1268,6 @@
         <h2 data-i18n="h.billsrecent">Projets de loi récemment actifs</h2>
         <div class="sub" data-i18n="apercu.recent.sub">↓ Cliquez n'importe où dans le carré blanc pour voir le résumé ↓</div>
       </div>
-      <span class="snooze-pill" onclick="toggleSnooze('projets-recents', true)" id="snooze-projets-recents"><span data-i18n="snooze.label">😴 Réduire</span></span>
     </div>
     <div id="body-projets-recents">
     <div id="apercuBills"></div>
@@ -1269,17 +1277,15 @@
     <div class="band band-white bleed" id="band-actu">
     <div class="actu-grid">
     <div>
-    <div class="section-head" id="sec-quoideneuf"><div><h2 data-i18n="h.quoideneuf">Quoi de neuf</h2><div class="sub" data-i18n="h.quoideneuf.sub">Dernières activités réelles à l'Assemblée nationale</div></div><span class="snooze-pill" onclick="toggleSnooze('quoideneuf', true)" id="snooze-quoideneuf"><span data-i18n="snooze.label">😴 Réduire</span></span></div>
+    <div class="section-head" id="sec-quoideneuf"><div><h2 data-i18n="h.quoideneuf">Quoi de neuf</h2><div class="sub" data-i18n="h.quoideneuf.sub">Dernières activités réelles à l'Assemblée nationale</div></div></div>
 
     <div id="body-quoideneuf">
+    <div id="newsList"></div>
+    <!-- Encadré noir compact (maquette) — le même statut réel que le ticker.
+         renderTicker() lit .calendar-box .status : NE PAS renommer. -->
     <div class="calendar-box">
       <div class="status" data-i18n="cal.status">● Travaux ajournés depuis le 12 juin 2026 · reprise le 15 septembre 2026</div>
-      <h3 data-i18n="cal.title">Calendrier des travaux</h3>
-      <p data-i18n="cal.p1">L'Assemblée ne siège pas en continu. Son Règlement fixe deux périodes de travaux : au printemps, à partir du 2e mardi de février (16 semaines, plus 2 semaines de travaux intensifs), et à l'automne, à partir du 3e mardi de septembre (10 semaines, plus 2 semaines intensives). En dehors de ces périodes, l'Assemblée est ajournée — sauf séance extraordinaire convoquée par la première ministre.</p>
-      <p style="color:#8891A8; font-size:11.5px;" data-i18n="cal.p2">Cette page résume les grandes périodes de travaux, pas l'horaire quotidien. Pour le détail jour par jour des prochaines séances et des commissions, le calendrier officiel de l'Assemblée reste la référence.</p>
     </div>
-
-    <div id="newsList"></div>
     </div>
     </div>
 
@@ -1289,7 +1295,6 @@
         <h2 data-i18n="h.petitions">Pétitions ouvertes à l'Assemblée nationale</h2>
         <div class="sub" data-i18n="pet.sub">Vraies pétitions électroniques actuellement ouvertes pour signature — relevées le 23 juin 2026</div>
       </div>
-      <span class="snooze-pill" onclick="toggleSnooze('petitions', true)" id="snooze-petitions"><span data-i18n="snooze.label">😴 Réduire</span></span>
     </div>
     <div id="body-petitions">
     <div id="apercuPetitions"></div>
@@ -1301,16 +1306,7 @@
 
     <!-- Mission : bande BLEUE pleine largeur en pied de page (maquette) -->
     <div class="band band-blue bleed" id="band-mission">
-    <div class="intro-compact" id="introCompact" onclick="toggleIntro()">
-      <span data-i18n="intro.compact.text">Site citoyen indépendant · Notre mission</span>
-      <span class="snooze-pill" data-i18n="intro.show">😴 Afficher</span>
-    </div>
-
     <div id="introBlock">
-      <div class="intro-toggle-row">
-        <span class="snooze-pill" id="introToggle" onclick="toggleIntro()"><span data-i18n="intro.hide">😴 Réduire</span></span>
-      </div>
-
       <div class="mission-box" id="sec-mission">
         <h2 data-i18n="mission.h">Notre mission — en quoi ce n'est pas juste une copie du site de l'Assemblée nationale</h2>
         <p data-i18n="mission.intro"><b>Ceci est un site citoyen indépendant bâti avec de vraies données publiques de l'Assemblée nationale du Québec et de Données Québec.</b></p>
@@ -1696,7 +1692,7 @@
       <a data-jump="sec-apropos" data-i18n="quicknav.apropos">D'où viennent ces données</a>
     </div>
 
-    <div class="section-head" id="sec-personnes"><div><h2 data-i18n="h.personnes">Qui gravite autour de l'Assemblée</h2><div class="sub" data-i18n="pers.sub">Les rôles publics qu'on n'avait pas encore couverts — vrais noms, vraies fonctions actuelles</div></div><span class="snooze-pill" onclick="toggleSnooze('personnes')" id="snooze-personnes"><span data-i18n="snooze.label">😴 Réduire</span></span></div>
+    <div class="section-head" id="sec-personnes"><div><h2 data-i18n="h.personnes">Qui gravite autour de l'Assemblée</h2><div class="sub" data-i18n="pers.sub">Les rôles publics qu'on n'avait pas encore couverts — vrais noms, vraies fonctions actuelles</div></div></div>
 
     <div id="body-personnes">
 
@@ -1781,7 +1777,7 @@
       </div>
     </div>
 
-    <div class="section-head" id="sec-lexique"><div><h2 data-i18n="h.lexique">Lexique du jargon parlementaire</h2><div class="sub" data-i18n="h.lexique.sub">Pour comprendre le reste du site sans avoir fait un cours de science politique</div></div><span class="snooze-pill" onclick="toggleSnooze('lexique')" id="snooze-lexique"><span data-i18n="snooze.label">😴 Réduire</span></span></div>
+    <div class="section-head" id="sec-lexique"><div><h2 data-i18n="h.lexique">Lexique du jargon parlementaire</h2><div class="sub" data-i18n="h.lexique.sub">Pour comprendre le reste du site sans avoir fait un cours de science politique</div></div></div>
 
     <div id="body-lexique">
 
@@ -1853,7 +1849,7 @@
       </div>
     </div>
 
-    <div class="section-head" id="sec-apropos"><div><h2 data-i18n="h.apropos">D'où viennent ces données, et comment aller plus loin</h2></div><span class="snooze-pill" onclick="toggleSnooze('apropos')" id="snooze-apropos"><span data-i18n="snooze.label">😴 Réduire</span></span></div>
+    <div class="section-head" id="sec-apropos"><div><h2 data-i18n="h.apropos">D'où viennent ces données, et comment aller plus loin</h2></div></div>
 
     <div id="body-apropos">
 
@@ -5688,13 +5684,10 @@ async function loadIntroState(){
   applyIntroState();
 }
 function applyIntroState(){
-  document.getElementById('introBlock').classList.toggle('collapsed', introCollapsed);
-  document.getElementById('introCompact').classList.toggle('open', introCollapsed);
-}
-async function toggleIntro(){
-  introCollapsed = !introCollapsed;
-  applyIntroState();
-  try{ await window.storage.set('apercu-intro-collapsed', JSON.stringify(introCollapsed)); }catch(e){}
+  // Refonte : les boutons « 😴 Réduire » ont été retirés — la mission est
+  // toujours affichée, peu importe l'état sauvegardé d'avant.
+  const block = document.getElementById('introBlock');
+  if(block) block.classList.remove('collapsed');
 }
 
 document.querySelectorAll('.quick-nav a').forEach(a=>{
