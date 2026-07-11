@@ -884,16 +884,17 @@
   .legend-strip{
     background:#fff; border-block:3px solid var(--ink);
     padding-top:16px; padding-bottom:16px; margin:18px 0 26px;
-    display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+    display:flex; align-items:center; gap:18px; flex-wrap:nowrap; overflow-x:auto;
   }
-  .legend-label{font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--slate);}
-  .legend-chips{display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+  .legend-label{font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--slate); white-space:nowrap; flex:none;}
+  .legend-chips{display:flex; align-items:center; gap:8px; flex-wrap:nowrap; flex:none;}
   .legend-arrow{font-weight:900;}
   .legend-link{
     margin-left:auto; font-family:'Archivo Narrow',sans-serif; font-size:12.5px;
     font-weight:700; text-transform:uppercase; letter-spacing:0.04em;
-    color:var(--gold); cursor:pointer;
+    color:var(--gold); cursor:pointer; white-space:nowrap; flex:none; padding-left:8px;
   }
+  .bstep{white-space:nowrap;}
   .legend-link:hover{color:#08307A;}
 
   /* Chips d'étapes des cartes (remplacent les barres de progression) */
