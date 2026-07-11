@@ -1006,7 +1006,10 @@
   .compo-swatch{width:16px; height:16px; border:2px solid var(--ink); flex:none;}
   .compo-note{flex-basis:100%; font-size:11.5px; color:var(--slate); font-family:'Archivo Narrow',sans-serif;}
 
-  /* Cartes ministres brutales */
+  /* Cartes ministres brutales — grille de 3 par rangée (maquette) */
+  #ministresGrid.grid{grid-template-columns:repeat(3, 1fr); gap:20px;}
+  @media (max-width:980px){ #ministresGrid.grid{grid-template-columns:repeat(2, 1fr);} }
+  @media (max-width:640px){ #ministresGrid.grid{grid-template-columns:1fr;} }
   .m-card{border:3px solid var(--ink); box-shadow:var(--shadow); background:#fff;}
   .m-card h3{font-weight:800; font-size:16.5px; text-transform:uppercase; letter-spacing:-0.01em; line-height:1.15;}
   .m-card .role{
@@ -1386,9 +1389,6 @@
       <div class="brutal-search">
         <span class="bs-icon" aria-hidden="true">🔍</span>
         <input type="text" id="searchMinistres" data-i18n-placeholder="ph.searchMinistres" placeholder="Nom, circonscription, région ou ministère…">
-      </div>
-      <div class="hero-filters">
-        <button class="sort-toggle" id="ministresSortToggle" onclick="toggleMinistresSort()"></button>
       </div>
     </div>
 
@@ -6040,8 +6040,9 @@ function renderHemicycle(){
     `<div class="compo-seg" title="${(isEn ? (s.labelEn||s.label) : s.label)} — ${s.n}" style="width:${(s.n/total*100).toFixed(2)}%; background:${partyColors[s.party] || '#999'};${i>0 ? ' border-left:3px solid var(--ink);' : ''}"></div>`
   ).join('');
   const footNote = isEn ? 'Real count, drawn from the list of 125 MNAs (Cabinet tab).' : 'Décompte réel, tiré de la liste des 125 députés (onglet Conseil des ministres).';
+  // Légende en ACRONYMES (le nom complet reste au survol des segments).
   legend.innerHTML = seats.map(s=>`
-    <div class="compo-row"><span class="compo-swatch" style="background:${partyColors[s.party]}"></span>${isEn ? (s.labelEn||s.label) : s.label} — <b>${s.n}</b></div>
+    <div class="compo-row" title="${isEn ? (s.labelEn||s.label) : s.label}"><span class="compo-swatch" style="background:${partyColors[s.party]}"></span>${s.party} — <b>${s.n}</b></div>
   `).join('') + `<div class="compo-note">${footNote}</div>`;
 }
 
