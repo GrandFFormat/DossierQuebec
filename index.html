@@ -162,55 +162,26 @@
 
   nav.tabs .close-menu{display:none;}
 
-  /* ---------- BLOC COLLANT LOGO + MENU ---------- */
-  /* L'en-tête (logo/stats) et les onglets forment UN bloc qui suit le
-     défilement. Après ~80px de scroll, la rangée logo/stats se replie et il
-     ne reste qu'une barre mince sur fond blanc (mini-logo + onglets).
-     Sur mobile (≤640px) : comportement inchangé, le menu reste le panneau
-     plein écran du hamburger. */
+  /* ---------- BARRE COLLANTE (une seule rangée) ---------- */
+  /* Logo | onglets | contrôles sur UNE rangée (maquette), collée en haut.
+     Au scroll (.compact via le petit script), on ajoute juste une ombre.
+     Sur mobile (≤640px), le nav devient le panneau plein écran du hamburger. */
   #dq-topbar{
     position:sticky; top:0; z-index:90;
     background:var(--paper);
-    border-bottom:1px solid var(--line);
-    transition:background-color 0.22s ease, box-shadow 0.22s ease;
+    transition:box-shadow 0.22s ease;
   }
-  #dq-topbar.compact{
-    background:var(--card);
-    box-shadow:0 6px 16px rgb(22 33 62 / 8%);
+  #dq-topbar.compact{box-shadow:0 6px 16px rgb(19 19 19 / 12%);}
+  #dq-topbar header.top{border-bottom:none; padding-top:12px; padding-bottom:12px;}
+  #dq-topbar nav.tabs{
+    border-bottom:none; max-width:none; margin:0; padding:0;
+    flex:1 1 auto; min-width:0; justify-content:center; overflow-x:auto;
   }
-  #dq-topbar header.top{
-    border-bottom:none;
-    padding-top:20px; padding-bottom:12px;
-    overflow:hidden; max-height:110px;
-    transition:max-height 0.22s ease, opacity 0.18s ease, padding 0.22s ease;
-  }
-  #dq-topbar nav.tabs{border-bottom:none;}
-  #dq-topbar.compact header.top{
-    max-height:0; opacity:0; padding-top:0; padding-bottom:0; pointer-events:none;
-  }
-  .tabs-minibrand{
-    display:none; align-items:center; gap:8px;
-    margin-left:28px; margin-right:4px; flex:none; cursor:pointer;
-    font-family:'Archivo',sans-serif; font-weight:600; font-size:15px;
-    color:var(--ink); white-space:nowrap;
-  }
-  .tabs-minibrand svg{width:22px; height:22px; flex:none;}
-  #dq-topbar.compact .tabs-minibrand{display:inline-flex;}
-  #dq-topbar.compact nav.tabs button[data-view="apercu"]{margin-left:0 !important;}
-  /* La barre collante couvre le haut des cibles de saut (Aller à…) : on
-     réserve la hauteur de la barre compacte. */
-  .view, [id^="sec-"]{scroll-margin-top:64px;}
+  .header-ctrls{display:flex; align-items:center; gap:8px; flex:none;}
+  /* La barre collante couvre le haut des cibles de saut : on réserve sa hauteur. */
+  .view, [id^="sec-"]{scroll-margin-top:70px;}
   @media (max-width:640px){
-    /* Les sélecteurs avec .compact sont répétés exprès : sans eux, la règle
-       desktop « #dq-topbar.compact header.top » gagnerait en spécificité et
-       replierait l'en-tête sur mobile aussi. */
-    #dq-topbar, #dq-topbar.compact{position:static; border-bottom:none; box-shadow:none; background:transparent;}
-    #dq-topbar header.top, #dq-topbar.compact header.top{
-      max-height:none; overflow:visible; opacity:1;
-      border-bottom:1px solid var(--line);
-      padding:24px 18px 18px; pointer-events:auto;
-    }
-    .tabs-minibrand{display:none !important;}
+    #dq-topbar header.top{padding:12px 18px;}
   }
 
   .view{display:none; padding-top:30px;}
@@ -635,8 +606,7 @@
   }
 
   /* ---------- HEADER ---------- */
-  #dq-topbar{border-bottom:3px solid var(--ink); box-shadow:none;}
-  #dq-topbar.compact{background:var(--paper); box-shadow:none;}
+  #dq-topbar{border-bottom:3px solid var(--ink);}
   header.top{align-items:center;}
   .brand-text h1{
     font-family:'Archivo',sans-serif; font-weight:900; font-size:24px;
@@ -660,18 +630,18 @@
   .hamburger{border:2px solid var(--ink); background:var(--paper);}
 
   /* ---------- NAV : pilules carrées ---------- */
-  nav.tabs{gap:8px; padding-top:10px; padding-bottom:12px; border-bottom:none; align-items:center;}
+  nav.tabs{gap:8px; border-bottom:none; align-items:center;}
   nav.tabs button{
     font-family:'Archivo Narrow',sans-serif; font-size:13.5px; font-weight:700;
     text-transform:uppercase; letter-spacing:0.04em; color:var(--ink);
     padding:6px 12px; border:2px solid transparent; border-bottom:2px solid transparent;
+    white-space:nowrap;
   }
   nav.tabs button .n{display:none;} /* fini la numérotation 01/02/03 */
   nav.tabs button.active{
     color:#fff; background:#131313; border-color:#131313; border-bottom-color:#131313;
   }
   nav.tabs button:hover:not(.active){background:var(--yellow); border-color:var(--ink); color:var(--ink);}
-  .tabs-minibrand{font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; letter-spacing:-0.02em;}
 
   /* ---------- TITRES DE SECTION ---------- */
   .section-head h2, .view h2{
@@ -1147,27 +1117,30 @@
       <p>Qui siège, qui légifère, qui vote quoi</p>
     </div>
   </div>
-  <div class="font-size-ctrl" id="fontSizeCtrl">
-    <button id="fontMinus" aria-label="Réduire le texte">A−</button>
-    <span id="fontPct">100%</span>
-    <button id="fontPlus" aria-label="Agrandir le texte">A+</button>
+  <!-- Nav DANS la ligne du header (maquette : logo | menu | contrôles sur
+       UNE seule rangée). Sur mobile, le nav devient le panneau plein écran
+       du hamburger (position:fixed), peu importe où il vit dans le DOM. -->
+  <nav class="tabs">
+    <div class="close-menu" id="closeMenuBtn"><span data-i18n="nav.close">Fermer</span> ✕</div>
+    <button class="active" data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></button>
+    <button data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres &amp; député·e·s</span></button>
+    <button data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></button>
+    <button data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></button>
+    <button data-view="compte"><span class="n">05</span><span data-i18n="nav.compte">Compte &amp; à propos</span></button>
+    <button data-view="lexique"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></button>
+  </nav>
+  <div class="header-ctrls">
+    <div class="font-size-ctrl" id="fontSizeCtrl">
+      <button id="fontMinus" aria-label="Réduire le texte">A−</button>
+      <span id="fontPct">100%</span>
+      <button id="fontPlus" aria-label="Agrandir le texte">A+</button>
+    </div>
+    <button class="lang-toggle" id="langToggle">English</button>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-  <button class="lang-toggle" id="langToggle">English</button>
-  <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
 </header>
-
-<nav class="tabs">
-  <div class="close-menu" id="closeMenuBtn"><span data-i18n="nav.close">Fermer</span> ✕</div>
-  <span class="tabs-minibrand" role="button" tabindex="0" aria-label="Retour à l'aperçu" onclick="goToTab('apercu')">Dossier<span class="brand-blue">Québec</span></span>
-  <button class="active" data-view="apercu" style="margin-left:28px;"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></button>
-  <button data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres &amp; député·e·s</span></button>
-  <button data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></button>
-  <button data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></button>
-  <button data-view="compte"><span class="n">05</span><span data-i18n="nav.compte">Compte &amp; à propos</span></button>
-  <button data-view="lexique" style="margin-right:28px;"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></button>
-</nav>
 </div>
 
 <script>
@@ -6759,28 +6732,8 @@ document.querySelectorAll('nav.tabs button').forEach(btn=>{
 document.querySelector('.brand-text').addEventListener('keydown', (e)=>{
   if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); goToTab('apercu'); }
 });
-document.querySelector('.brand-mark').addEventListener('keydown', (e)=>{
-  if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); goToFederal(e); }
-});
-
-// Le logo (dossier bleu poudre QC ↔ rouge Canada) mène au site fédéral DossierCanada.
-function goToFederal(evt){
-  if(evt) evt.stopPropagation();
-  window.open('https://dossiercanada.ca/', '_blank', 'noopener');
-}
-
-// Animation du logo : accroche puis flip continu. Flip vers le rouge (Canada) à
-// 1 s, retour au bleu (Québec) à 5 s, puis il continue de flipper toutes les 10 s
-// (alternance QC/Canada). Respecte prefers-reduced-motion.
-(function(){
-  const inner = document.querySelector('.brand-mark .flip-inner');
-  if(!inner) return;
-  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  let angle = 0;
-  const flip = () => { angle += 180; inner.style.transform = 'rotateY(' + angle + 'deg)'; };
-  setTimeout(flip, 1000);                                       // 1 s : -> rouge (Canada)
-  setTimeout(() => { flip(); setInterval(flip, 10000); }, 5000); // 5 s : -> bleu, puis flip aux 10 s
-})();
+// (Le logo-dossier qui flippait vers DossierCanada a été retiré — le listener
+// et l'animation sont partis avec. À réintroduire ailleurs si souhaité.)
 
 function openMobileMenu(){
   document.querySelector('nav.tabs').classList.add('open');
