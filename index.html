@@ -6454,6 +6454,22 @@ const CHALLENGE_DISPLAY_MAX = 8; // on n'affiche que les N plus demandés
 const nextChallengeTier = cnt => CHALLENGE_TIERS.find(t => cnt < t) ?? null;
 let challengedCache = null;
 
+// ⚠️ DÉMO LOCALE (branche redesign-brutaliste) — À RETIRER AVANT MERGE. ⚠️
+// Peuple « Projets challengés » avec des compteurs FICTIFS pour juger le
+// design, sans rien écrire en base. Ne s'active QUE sur localhost : en prod
+// (dossierquebec.ca), cette condition est fausse et la vraie donnée s'affiche.
+// Les 5 bill_id sont de vrais projets actifs au stade Présentation.
+if(location.hostname === 'localhost' || location.hostname === '127.0.0.1'){
+  challengedCache = [
+    { bill_id: 27827, cnt: 1240 }, // PL 692 — conservation des milieux naturels
+    { bill_id: 27753, cnt: 640 },  // PL 13  — greffier spécial
+    { bill_id: 27657, cnt: 410 },  // PL 691 — autonomie des personnes aînées
+    { bill_id: 27741, cnt: 180 },  // PL 796 — jeunes et écrans
+    { bill_id: 27715, cnt: 60 }    // PL 8   — langue de l'enseignement
+  ];
+  console.info('[DÉMO] Projets challengés : compteurs fictifs (localhost seulement)');
+}
+
 // Partage social d'un projet challengé — accès DIRECT en un clic (pas de
 // copier-coller). Message : « X personnes contestent le projet de loi n° N —
 // [titre]. Connectez-vous pour appuyer cette demande : [lien] ». X et « Copier »
