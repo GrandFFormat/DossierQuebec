@@ -1037,6 +1037,9 @@
     font-family:'Archivo Narrow',sans-serif; font-size:13px; font-weight:600;
     text-transform:uppercase; letter-spacing:0.05em; color:#555; flex:none;
   }
+  /* Titres de groupes (Les ministres / Le reste de l'Assemblée) : taille maquette */
+  .min-group-head{margin-top:44px; align-items:baseline;}
+  .min-group-head h2{font-size:clamp(28px, 3.6vw, 46px); margin:0;}
   .depute-party{
     border:2px solid var(--ink); font-family:'Archivo Narrow',sans-serif;
     font-weight:700; text-transform:uppercase; letter-spacing:0.03em; padding:3px 9px;
@@ -1428,11 +1431,16 @@
 
     <div class="role-group-title" id="combinedTitle" style="display:none;"></div>
 
-    <div class="role-group-title" id="ministresTitle"><span data-i18n="h.ministres2">Conseil des ministres</span> — <span id="ministresCount"></span><span data-i18n="min.sub2b"> ministres, liste officielle complète</span></div>
+    <div class="section-head min-group-head" id="ministresTitle">
+      <div><h2 data-i18n="h.ministres2">Les ministres</h2></div>
+      <span class="head-note"><span id="ministresCount"></span><span data-i18n="min.sub2b"> ministres — liste officielle quebec.ca</span></span>
+    </div>
     <div class="grid" id="ministresGrid"></div>
-    <div class="info-box" id="ministresInfoBox"><b data-i18n="min.incomplete.b">Liste à jour.</b> <span data-i18n="min.incomplete.pre">Les </span><span id="ministresCount2"></span><span data-i18n="min.incomplete.post"> ministres viennent directement de la page officielle du Conseil des ministres sur quebec.ca, scrapée en direct — pas une liste maintenue à la main.</span></div>
 
-    <div class="role-group-title" id="deputesTitle" data-i18n="min.restTitle">Le reste de l'Assemblée — tous les partis, 125 sièges au total</div>
+    <div class="section-head min-group-head" id="deputesTitle">
+      <div><h2 data-i18n="min.restTitle">Le reste de l'Assemblée</h2></div>
+      <span class="head-note" data-i18n="min.restNote">Tous les partis — 125 sièges au total</span>
+    </div>
     <div class="grid" id="deputesList"></div>
     <div class="info-box" id="deputesInfoBox" data-i18n="trouve.info">Ces 125 entrées viennent directement de la liste officielle des députés en fonction de l'Assemblée nationale. Certains sièges peuvent changer entre deux mises à jour (démission, élection partielle) — cette liste est une photo prise au moment de la dernière mise à jour, pas un flux automatiquement à jour.</div>
 
@@ -2118,10 +2126,11 @@ const translations = {
     'h.composition':"Composition — 125 seats",
     'h.billsrecent':"Recently active bills",
     'h.ministres':"Ministers and MNAs",
-    'h.ministres2':"Cabinet",
+    'h.ministres2':"The ministers",
     'min.merged.sub':"The Cabinet, then all 125 MNAs from every party — one search box for both",
-    'min.sub2b':" ministers, complete official list",
-    'min.restTitle':"The rest of the Assembly — every party, 125 seats total",
+    'min.sub2b':" ministers — official quebec.ca list",
+    'min.restTitle':"The rest of the Assembly",
+    'min.restNote':"Every party — 125 seats total",
     'h.comparateur':"Minister comparator",
     'comp.sub':"Pick two ministers to see their files side by side",
     'h.projets':"Bills",
@@ -6132,7 +6141,6 @@ function renderMinistres(filter){
     // (ministres + reste de l'Assemblée) sur un même pied d'égalité, classé
     // par présence. Voir toggleMinistresSort().
     document.getElementById('ministresTitle').style.display = 'none';
-    document.getElementById('ministresInfoBox').style.display = 'none';
     document.getElementById('deputesTitle').style.display = 'none';
     document.getElementById('deputesInfoBox').style.display = 'none';
     const combinedTitle = document.getElementById('combinedTitle');
@@ -6161,7 +6169,6 @@ function renderMinistres(filter){
   // Ordre par défaut : Conseil des ministres seulement dans cette grille (rang
   // de cabinet), le reste de l'Assemblée s'affiche séparément via renderDeputes().
   document.getElementById('ministresTitle').style.display = '';
-  document.getElementById('ministresInfoBox').style.display = '';
   document.getElementById('deputesTitle').style.display = '';
   document.getElementById('deputesInfoBox').style.display = '';
   document.getElementById('combinedTitle').style.display = 'none';
@@ -6170,7 +6177,6 @@ function renderMinistres(filter){
   const list = ministers.filter(m => (!partyFilter || m.party===partyFilter) && (!f || norm(m.name).includes(f) || norm(m.role).includes(f) || norm(m.roleEn||'').includes(f)));
   grid.innerHTML = list.map(m => personCard({ type:'minister', m, att: computeAttendance(m.name) })).join('');
   document.getElementById('ministresCount').textContent = ministers.length;
-  document.getElementById('ministresCount2').textContent = ministers.length;
 }
 
 // Comparateur de deux ministres (voir onglet 5, item réglé une fois la
