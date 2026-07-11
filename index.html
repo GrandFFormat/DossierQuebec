@@ -753,6 +753,11 @@
     padding:5px 9px; cursor:pointer; text-transform:uppercase;
   }
   .ch-share button:hover{background:var(--yellow);}
+  /* Pagination « Voir plus » : cartes cachées puis glissées en douceur */
+  .ch-card.ch-hidden{display:none;}
+  .ch-reveal{animation:chSlideIn 0.35s ease both;}
+  @keyframes chSlideIn{from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:none;}}
+  @media (prefers-reduced-motion: reduce){ .ch-reveal{animation:none;} }
   @media (max-width:980px){ #challengedList.ch-grid{grid-template-columns:repeat(2, 1fr);} }
   @media (max-width:640px){ #challengedList.ch-grid{grid-template-columns:1fr;} }
   .band .section-head h2{font-size:clamp(26px, 3.4vw, 42px);}
@@ -1244,7 +1249,7 @@
         <h2 id="challengedTitle">Projets challengés par les citoyen·ne·s</h2>
         <div class="sub" id="challengedSub"></div>
       </div>
-      <a class="ch-more" role="button" tabindex="0" onclick="goToTab('projets')" data-i18n="ch.more">Voir plus →</a>
+      <a class="ch-more" id="chMoreBtn" role="button" tabindex="0" onclick="showMoreChallenged()" data-i18n="ch.more" style="display:none;">Voir plus →</a>
     </div>
     <div id="challengedList"></div>
     </div>
@@ -6492,7 +6497,11 @@ const PETITION_THRESHOLD = 1000;
 // flag_counts() renvoie aussi les projets sous 500 : voir
 // scripts/supabase-schema-campaign.sql (having count(*) >= 1).
 const CHALLENGE_DISPLAY_MIN = 1;
-const CHALLENGE_DISPLAY_MAX = 8; // on n'affiche que les N plus demandés
+const CHALLENGE_DISPLAY_MAX = 9; // cap total (révélé par lots de 3 via « Voir plus »)
+// Pagination visuelle : 3 cartes affichées, chaque clic sur « Voir plus »
+// fait glisser les 3 suivantes. Persiste entre deux re-rendus (ex. après une
+// demande) pour ne pas recacher ce que la personne venait d'ouvrir.
+let challengedShown = 3;
 const nextChallengeTier = cnt => CHALLENGE_TIERS.find(t => cnt < t) ?? null;
 let challengedCache = null;
 
@@ -6571,7 +6580,7 @@ async function renderChallenged(){
     // étape en bas séparée d'une bordure — plus le bouton « Demander »
     // (3 états, projets actifs seulement) et le partage direct.
     el.classList.add('ch-grid');
-    el.innerHTML = challenged.map(c => {
+    el.innerHTML = challenged.map((c, idx) => {
       const b = c.bill;
       const cnt = c.cnt;
       const title = isEn ? (b.titleEn || b.title) : b.title;
@@ -6595,7 +6604,7 @@ async function renderChallenged(){
           demandBtn = `<button class="ch-demand" id="${flagBtnId}" onclick="event.stopPropagation(); requestExplanation(${b.id}, '${flagBtnId}')">✋ ${isEn ? 'Ask for an explanation' : 'Demander une explication'}</button>`;
         }
       }
-      return `<div class="ch-card" onclick="goToTab('projets')">
+      return `<div class="ch-card${idx >= challengedShown ? ' ch-hidden' : ''}" onclick="goToTab('projets')">
         <div class="ch-top">
           <span class="ch-num">${numLabel}</span>
           <span class="ch-badge">${flames} ${fmt(cnt)}</span>
@@ -6612,8 +6621,12 @@ async function renderChallenged(){
         </div>
       </div>`;
     }).join('');
+    const moreBtn = document.getElementById('chMoreBtn');
+    if(moreBtn) moreBtn.style.display = challenged.length > challengedShown ? '' : 'none';
   } else {
     el.classList.remove('ch-grid');
+    const moreBtn = document.getElementById('chMoreBtn');
+    if(moreBtn) moreBtn.style.display = 'none';
     el.innerHTML = `<div style="background:var(--card); border:1px dashed var(--line); border-radius:var(--radius); padding:22px 18px; text-align:center; color:var(--slate);">
       <div style="font-size:26px; margin-bottom:8px;">🔎</div>
       <div style="font-size:14px; line-height:1.65; max-width:580px; margin:0 auto;">${isEn
@@ -6622,6 +6635,20 @@ async function renderChallenged(){
       <button class="sort-toggle" style="margin-top:14px; cursor:pointer;" onclick="goToTab('projets')">${isEn ? 'Go to bills →' : 'Aller aux projets de loi →'}</button>
     </div>`;
   }
+}
+
+// « Voir plus » : fait glisser les 3 cartes challengées suivantes (léger
+// décalage entre elles), puis cache le bouton quand tout est affiché.
+function showMoreChallenged(){
+  const hidden = Array.from(document.querySelectorAll('#challengedList .ch-card.ch-hidden'));
+  hidden.slice(0, 3).forEach((card, i) => {
+    card.classList.remove('ch-hidden');
+    card.classList.add('ch-reveal');
+    card.style.animationDelay = (i * 0.08) + 's';
+  });
+  challengedShown += 3;
+  const moreBtn = document.getElementById('chMoreBtn');
+  if(moreBtn && !document.querySelector('#challengedList .ch-card.ch-hidden')) moreBtn.style.display = 'none';
 }
 
 const deputeById = new Map(deputes.map(d=>[d.assnatId, d]));
