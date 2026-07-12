@@ -5262,13 +5262,46 @@ async function requestExplanation(billId, btnId){
               : ("Impossible d'enregistrer la demande. (" + (error.message || error.code || 'inconnu') + ")")));
     return;
   }
-  myFlaggedBills[billId] = true; // succès OU doublon = « demandé »
+  myFlaggedBills[billId] = true; // succès OU doublon = « challengé »
   if(btn){
-    btn.textContent = isEn ? '✓ Explanation requested' : '✓ Explication demandée';
+    // Bouton réactivé (pas disabled) pour permettre de RETIRER le challenge
+    // ensuite. Le libellé indique l'état « challengé + retirer ».
+    btn.textContent = isEn ? '✓ Challenged — remove' : '✓ Challengé — retirer';
+    btn.title = isEn ? 'Click to remove your challenge' : 'Cliquer pour retirer votre challenge';
     btn.classList.add('on');
-    btn.disabled = true;
+    btn.disabled = false;
   }
-  challengedCache = null; renderChallenged(); // le compteur a bougé
+  challengedCache = null; renderChallenged(); renderApercuBills(); // le compteur a bougé
+}
+
+// Bascule : challenge si pas encore fait, retire si déjà fait.
+async function toggleChallenge(billId, btnId){
+  if(!currentUser){ goToAccount(); return; }
+  return myFlaggedBills[billId] ? removeExplanation(billId, btnId) : requestExplanation(billId, btnId);
+}
+
+// Retire la demande/challenge de la personne sur ce projet de loi.
+async function removeExplanation(billId, btnId){
+  const isEn = currentLang === 'en';
+  const btn = document.getElementById(btnId);
+  if(btn) btn.disabled = true;
+  const { error } = await supabaseClient.from('bill_flags')
+    .delete().eq('user_id', currentUser.id).eq('bill_id', billId);
+  if(error){
+    console.error('removeExplanation delete error:', error);
+    if(btn) btn.disabled = false;
+    alert(isEn ? ("Couldn't remove your challenge. (" + (error.message || error.code || 'unknown') + ")")
+               : ("Impossible de retirer votre challenge. (" + (error.message || error.code || 'inconnu') + ")"));
+    return;
+  }
+  myFlaggedBills[billId] = false;
+  if(btn){
+    btn.textContent = (btn.classList.contains('ch-demand') ? '✋ ' : '') + (isEn ? 'Ask for an explanation' : 'Demander une explication');
+    btn.removeAttribute('title');
+    btn.classList.remove('on');
+    btn.disabled = false;
+  }
+  challengedCache = null; renderChallenged(); renderApercuBills();
 }
 
 async function signInWithMagicLink(email){
@@ -6316,20 +6349,23 @@ function billCard(b, ctx){
     : 'Un courriel aux moments qui comptent (500 et 1000 demandes, ou si ça devient loi)';
   let flagRow = '';
   if(canFlag){
-    let hint, label, onclick = '', disabled = '';
+    let hint, label, onclick = '', title = '';
     if(!currentUser){
       hint = isEn ? 'Sign in — one request per person, no anonymous requests' : 'Connexion requise — une demande par personne, aucune demande anonyme';
       label = isEn ? '🔒 Sign in to challenge' : '🔒 Se connecter pour challenger';
       onclick = "goToAccount()";
     } else if(isFlagged){
-      hint = mailHint; label = isEn ? '✓ Explanation requested' : '✓ Explication demandée'; disabled = 'disabled';
+      // Déjà challengé → re-cliquer RETIRE le challenge (bascule).
+      hint = mailHint; label = isEn ? '✓ Challenged — remove' : '✓ Challengé — retirer';
+      title = isEn ? 'Click to remove your challenge' : 'Cliquer pour retirer votre challenge';
+      onclick = `toggleChallenge(${b.id}, '${flagBtnId}')`;
     } else {
       hint = mailHint; label = isEn ? 'Ask for an explanation' : 'Demander une explication';
-      onclick = `requestExplanation(${b.id}, '${flagBtnId}')`;
+      onclick = `toggleChallenge(${b.id}, '${flagBtnId}')`;
     }
     flagRow = `<div class="bill-follow-row">
       <span class="follow-hint">${hint}</span>
-      <button class="follow-btn ${isFlagged?'on':''}" id="${flagBtnId}" ${disabled} onclick="event.stopPropagation(); ${onclick}">${label}</button>
+      <button class="follow-btn ${isFlagged?'on':''}" id="${flagBtnId}"${title?` title="${title}"`:''} onclick="event.stopPropagation(); ${onclick}">${label}</button>
     </div>`;
   }
   // Les votes ne sont plus affichés sur les cartes de projets de loi — le
@@ -6670,9 +6706,9 @@ async function renderChallenged(){
         if(!currentUser){
           demandBtn = `<button class="ch-demand" onclick="event.stopPropagation(); goToAccount()">🔒 ${isEn ? 'Sign in to challenge' : 'Se connecter pour challenger'}</button>`;
         } else if(isFlagged){
-          demandBtn = `<button class="ch-demand on" disabled>✓ ${isEn ? 'Explanation requested' : 'Explication demandée'}</button>`;
+          demandBtn = `<button class="ch-demand on" id="${flagBtnId}" title="${isEn ? 'Click to remove your challenge' : 'Cliquer pour retirer votre challenge'}" onclick="event.stopPropagation(); toggleChallenge(${b.id}, '${flagBtnId}')">✓ ${isEn ? 'Challenged — remove' : 'Challengé — retirer'}</button>`;
         } else {
-          demandBtn = `<button class="ch-demand" id="${flagBtnId}" onclick="event.stopPropagation(); requestExplanation(${b.id}, '${flagBtnId}')">✋ ${isEn ? 'Ask for an explanation' : 'Demander une explication'}</button>`;
+          demandBtn = `<button class="ch-demand" id="${flagBtnId}" onclick="event.stopPropagation(); toggleChallenge(${b.id}, '${flagBtnId}')">✋ ${isEn ? 'Ask for an explanation' : 'Demander une explication'}</button>`;
         }
       }
       return `<div class="ch-card${(idx < pageStart || idx >= pageStart + 3) ? ' ch-hidden' : ''}" onclick="goToTab('projets')">
