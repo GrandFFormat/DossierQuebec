@@ -14,15 +14,30 @@ alter table public.bill_flags enable row level security;
 -- appliquée ici (pas juste côté navigateur) pour qu'elle ne puisse pas être
 -- contournée. Empêche un seul compte d'inonder le système en signalant tous
 -- les projets de loi d'un coup.
+--
+-- ⚠️ Le compte se fait via une fonction SECURITY DEFINER, PAS via une
+-- sous-requête directe sur bill_flags dans la policy. Une sous-requête sur
+-- bill_flags à l'intérieur d'une policy de bill_flags déclenche
+-- « infinite recursion detected in policy for relation bill_flags » dès qu'il
+-- y a des lignes (la sous-requête ré-applique les policies SELECT, dont
+-- « admins view all flags »). La fonction SECURITY DEFINER contourne la RLS,
+-- donc pas de récursion.
+create or replace function public.my_recent_flag_count()
+returns integer
+language sql stable security definer set search_path = public as $$
+  select count(*)::int
+  from public.bill_flags
+  where user_id = auth.uid()
+    and created_at > now() - interval '30 days';
+$$;
+grant execute on function public.my_recent_flag_count() to authenticated;
+
+drop policy if exists "insert own flag" on public.bill_flags;
 create policy "insert own flag"
   on public.bill_flags for insert
   with check (
     auth.uid() = user_id
-    and (
-      select count(*) from public.bill_flags
-      where user_id = auth.uid()
-        and created_at > now() - interval '30 days'
-    ) < 10
+    and public.my_recent_flag_count() < 10
   );
 
 create policy "select own flag"
