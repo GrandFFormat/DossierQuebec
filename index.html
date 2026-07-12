@@ -1223,12 +1223,24 @@
   .lexique-item{
     background:#fff; border:3px solid var(--ink); box-shadow:var(--shadow);
     padding:24px 26px; margin:0;
+    display:grid; grid-template-columns:1fr auto; gap:0 12px; align-items:start;
   }
   .lexique-item dt{
-    font-family:'Archivo',sans-serif; font-size:19px; font-weight:900;
+    grid-column:1; font-family:'Archivo',sans-serif; font-size:19px; font-weight:900;
     letter-spacing:-0.01em; text-transform:uppercase; margin:0 0 10px;
   }
-  .lexique-item dd{margin:0; font-size:15px; font-weight:500; line-height:1.5;}
+  .lexique-item dd{grid-column:1 / -1; margin:0; font-size:15px; font-weight:500; line-height:1.5;}
+  /* Bulle de catégorie en haut à droite (couleurs de la palette) */
+  .lex-badge{
+    grid-column:2; justify-self:end; align-self:start;
+    border:2px solid var(--ink); font-family:'Archivo Narrow',sans-serif;
+    font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em;
+    padding:4px 10px; white-space:nowrap;
+  }
+  .lex-badge.cat-proc{background:var(--gold-soft); color:var(--gold);}       /* bleu Québec */
+  .lex-badge.cat-votes{background:var(--green-soft); color:#14532D;}         /* vert */
+  .lex-badge.cat-pers{background:var(--yellow); color:var(--ink);}          /* jaune */
+  .lex-badge.cat-outils{background:#CFF0F7; color:#0A6E85;}                 /* cyan (CAQ) */
   @media (max-width:820px){ #body-lexique dl{grid-template-columns:1fr;} }
 
   /* Bande jaune « suggérer un terme » */
@@ -1794,54 +1806,67 @@
     <dl>
       <div class="lexique-item">
         <dt data-i18n="lex.1.t">Projet de loi</dt>
+        <span class="lex-badge cat-proc" data-i18n="lexcat.proc">Processus</span>
         <dd data-i18n="lex.1.d">Le texte qu'un député ou le gouvernement soumet à l'Assemblée pour qu'il devienne une loi. Il devient une vraie loi seulement une fois adopté puis sanctionné.</dd>
       </div>
       <div class="lexique-item">
         <dt data-i18n="lex.2.t">Adoption du principe</dt>
+        <span class="lex-badge cat-proc" data-i18n="lexcat.proc">Processus</span>
         <dd data-i18n="lex.2.d">La première grande étape : l'Assemblée vote pour dire si elle est d'accord avec l'idée générale du projet de loi, avant d'en étudier le détail article par article.</dd>
       </div>
       <div class="lexique-item">
         <dt data-i18n="lex.3.t">Étude détaillée</dt>
+        <span class="lex-badge cat-proc" data-i18n="lexcat.proc">Processus</span>
         <dd data-i18n="lex.3.d">L'étape où une commission parlementaire (un petit groupe de députés) passe le projet de loi au peigne fin, article par article, et peut y proposer des amendements.</dd>
       </div>
       <div class="lexique-item">
         <dt data-i18n="lex.4.t">Adoption</dt>
+        <span class="lex-badge cat-proc" data-i18n="lexcat.proc">Processus</span>
         <dd data-i18n="lex.4.d">Le vote final en Chambre sur l'ensemble du projet de loi, une fois toutes les étapes précédentes complétées.</dd>
       </div>
       <div class="lexique-item">
         <dt data-i18n="lex.5.t">Sanction</dt>
+        <span class="lex-badge cat-proc" data-i18n="lexcat.proc">Processus</span>
         <dd data-i18n="lex.5.d">La toute dernière étape administrative : le lieutenant-gouverneur donne son assentiment officiel, et le projet de loi devient formellement une loi du Québec.</dd>
       </div>
       <div class="lexique-item">
         <dt data-i18n="lex.6.t">Commission parlementaire</dt>
+        <span class="lex-badge cat-proc" data-i18n="lexcat.proc">Processus</span>
         <dd data-i18n="lex.6.d">Un groupe plus restreint de députés (une dizaine, en général) qui étudie un sujet ou un projet de loi en profondeur, entend des experts et des citoyens, avant que ça revienne devant l'Assemblée au complet.</dd>
       </div>
       <div class="lexique-item">
         <dt data-i18n="lex.7.t">Vote par appel nominal</dt>
+        <span class="lex-badge cat-votes" data-i18n="lexcat.votes">Votes</span>
         <dd data-i18n="lex.7.d">Un vote où le nom de chaque député et son choix (Pour/Contre/Abstention) sont officiellement consignés — par opposition à un vote à main levée, où seul le résultat global est noté.</dd>
       </div>
       <div class="lexique-item">
         <dt data-i18n="lex.8.t">Procès-verbal</dt>
+        <span class="lex-badge cat-votes" data-i18n="lexcat.votes">Votes</span>
         <dd data-i18n="lex.8.d">Le compte rendu officiel, mais résumé, de tout ce qui s'est passé pendant une séance : décisions, votes, dépôts de documents.</dd>
       </div>
       <div class="lexique-item">
         <dt data-i18n="lex.9.t">Journal des débats</dt>
+        <span class="lex-badge cat-votes" data-i18n="lexcat.votes">Votes</span>
         <dd data-i18n="lex.9.d">La transcription complète, mot pour mot, de tout ce qui a été dit en Chambre — contrairement au procès-verbal, qui ne fait que résumer les décisions.</dd>
       </div>
       <div class="lexique-item">
         <dt data-i18n="lex.10.t">Leader parlementaire</dt>
+        <span class="lex-badge cat-pers" data-i18n="lexcat.pers">Personnes et rôles</span>
         <dd data-i18n="lex.10.d">Le député responsable d'organiser les travaux de son groupe à l'Assemblée — un peu le chef d'orchestre du calendrier et des débats pour son parti.</dd>
       </div>
       <div class="lexique-item">
         <dt data-i18n="lex.11.t">Whip</dt>
+        <span class="lex-badge cat-pers" data-i18n="lexcat.pers">Personnes et rôles</span>
         <dd data-i18n="lex.11.d">Le député chargé de s'assurer que les membres de son groupe parlementaire sont présents aux votes et suivent la ligne du parti.</dd>
       </div>
       <div class="lexique-item">
         <dt data-i18n="lex.12.t">Ministre délégué / Ministre responsable de</dt>
+        <span class="lex-badge cat-pers" data-i18n="lexcat.pers">Personnes et rôles</span>
         <dd data-i18n="lex.12.d">Un ministre qui n'est pas le grand titulaire d'un ministère, mais qui a la charge officielle d'un dossier précis à l'intérieur ou en marge de celui-ci.</dd>
       </div>
       <div class="lexique-item">
         <dt data-i18n="lex.13.t">Présence (%)</dt>
+        <span class="lex-badge cat-outils" data-i18n="lexcat.outils">Outils citoyens</span>
         <dd data-i18n="lex.13.d">Le chiffre affiché sous chaque ministre (ex. « présence : 88 % (647/735) ») : sur les 735 votes par appel nominal enregistrés dans les 3 sessions de la législature, 647 sont ceux où cette personne apparaît comme Pour, Contre ou Abstention — donc était présente pour voter, peu importe le sens de son vote. Le compte débute à son tout premier vote détecté (une façon d'approximer le début de son mandat actuel sans donnée externe). L'Assemblée ne publie pas d'assiduité officielle ; c'est un indicateur de présence, pas une mesure officielle — même méthode que certains médias (ex. Radio-Canada).</dd>
       </div>
     </dl>
@@ -2128,6 +2153,7 @@ const translations = {
     'suggest.p':"If a term tripped you up while reading a bill or a vote, it tripped others too. Suggest it on the Facebook page — it will be added with a plain-language definition.",
     'suggest.cta':"✉ Suggest a term",
     'ch.more':"See more →",
+    'lexcat.proc':"Process", 'lexcat.votes':"Votes", 'lexcat.pers':"People & roles", 'lexcat.outils':"Citizen tools",
     'mission.eyebrow':"Our mission",
     'mission.st1':"The Assembly's official site is the most reliable source there is. This one just makes it ",
     'mission.st2':"easier to follow.",
