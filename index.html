@@ -1679,13 +1679,17 @@
       <p class="view-hero-sub" data-i18n="lexhero.sub">« Sanction royale », « étude détaillée », « bâillon »… Le Parlement a son vocabulaire. <b>Ici, chaque terme est expliqué comme à un·e ami·e.</b></p>
     </div>
 
+    <!-- Connexion — remontee tout en haut de Lexique -->
+    <div class="section-head" id="sec-compte"><div><h2 data-i18n="h.compte">Compte</h2></div></div>
+    <div class="account-box" id="accountBox"></div>
+    <div id="adminFlagCounts"></div>
+
     <div class="quick-nav" id="quickNavLexique">
       <span class="quick-nav-label" data-i18n="quicknav.label">Aller à :</span>
       <a data-jump="sec-personnes" data-i18n="quicknav.personnes">Qui gravite autour</a>
       <a data-jump="sec-lobby" data-i18n="quicknav.lobby">Registre des lobbyistes</a>
       <a data-jump="sec-lexique" data-i18n="quicknav.lexiqueitem">Lexique</a>
       <a data-jump="sec-apropos" data-i18n="quicknav.apropos">D'où viennent ces données</a>
-      <a data-jump="sec-compte" data-i18n="nav.compte">Compte &amp; à propos</a>
     </div>
 
     <div class="section-head" id="sec-personnes"><div><h2 data-i18n="h.personnes">Qui gravite autour de l'Assemblée</h2><div class="sub" data-i18n="pers.sub">Les rôles publics qu'on n'avait pas encore couverts — vrais noms, vraies fonctions actuelles</div></div></div>
@@ -1764,6 +1768,16 @@
     <div class="info-box" data-i18n="pers.info">Ces personnes exercent des fonctions publiques officielles et sont nommées selon un processus prévu par la loi — c'est en cela que l'information ci-dessus est publique. Ça ne veut pas dire que tout ce qui les concerne devient public : je m'en tiens ici à leur fonction officielle, comme pour tout le reste du site.</div>
     </div>
 
+    <div class="band band-yellow bleed" id="band-suggest">
+      <div class="suggest-inner">
+        <div>
+          <h2 data-i18n="suggest.h">Un mot vous échappe ?</h2>
+          <p data-i18n="suggest.p">Si vous avez buté sur un terme en lisant un projet de loi ou un vote, d'autres aussi. Suggérez-le sur la page Facebook — il sera ajouté avec une définition en langage clair.</p>
+        </div>
+        <a class="suggest-cta" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" data-i18n="suggest.cta">✉ Suggérer un terme</a>
+      </div>
+    </div>
+
     <div class="section-head" id="sec-lobby"><div><h2 data-i18n="h.lobby">Le registre des lobbyistes</h2><div class="sub" data-i18n="lobby.sub">Qui est payé pour influencer les décisions publiques — et comment le consulter</div></div></div>
     <div class="info-box" style="scroll-margin-top:12px;">
       <p data-i18n="lobby.body" style="margin:0 0 8px;">Toute personne payée pour communiquer avec des <b>titulaires de charge publique</b> (ministres, député·e·s, hauts fonctionnaires…) au sujet de lois, règlements, subventions ou contrats doit s'inscrire à un <b>registre public</b>, supervisé par le <b>Commissaire au lobbyisme du Québec</b>, une institution indépendante. Les lobbyistes doivent y déclarer leurs mandats.</p>
@@ -1835,15 +1849,6 @@
 
     <!-- Bande jaune « suggérer un terme » (maquette) — le canal de contact
          existant est la page Facebook : pas de courriel inventé. -->
-    <div class="band band-yellow bleed" id="band-suggest">
-      <div class="suggest-inner">
-        <div>
-          <h2 data-i18n="suggest.h">Un mot vous échappe ?</h2>
-          <p data-i18n="suggest.p">Si vous avez buté sur un terme en lisant un projet de loi ou un vote, d'autres aussi. Suggérez-le sur la page Facebook — il sera ajouté avec une définition en langage clair.</p>
-        </div>
-        <a class="suggest-cta" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" data-i18n="suggest.cta">✉ Suggérer un terme</a>
-      </div>
-    </div>
 
     <div class="section-head" id="sec-apropos"><div><h2 data-i18n="h.apropos">D'où viennent ces données, et comment aller plus loin</h2></div></div>
 
@@ -1865,168 +1870,6 @@
 
     </div>
 
-    <div class="section-head" id="sec-compte"><div><h2 data-i18n="h.compte">Comptes, suivi synchronisé et abonnement — feuille de route</h2></div></div>
-
-    <div class="account-box" id="accountBox"></div>
-
-    <div id="adminFlagCounts"></div>
-
-    <div class="roadmap-item">
-      <div class="roadmap-status now" data-i18n="rm.status.now">Déjà là</div>
-      <div class="roadmap-body">
-        <h4 data-i18n="rm.1.h">Suivre des ministres, sans compte</h4>
-        <p data-i18n="rm.1.p">Le bouton « Suivre » (onglet Ministres) fonctionne déjà : votre choix est enregistré dans votre navigateur. Limite actuelle : ça ne vous suit pas si vous changez d'appareil ou videz vos données de navigation.</p>
-      </div>
-    </div>
-    <div class="roadmap-item">
-      <div class="roadmap-status now" data-i18n="rm.status.now">Déjà là</div>
-      <div class="roadmap-body">
-        <h4 data-i18n="rm.17.h">Version anglaise du site</h4>
-        <p data-i18n="rm.17.p">Fait : le bouton « English » (en haut du site) traduit l'interface au complet, ainsi que le contenu détaillé — projets de loi, ministres, votes, lexique, pétitions, feuille de route. Les titres officiels des projets de loi n° 1, 7 et 13 viennent des vraies pages anglaises d'assnat.qc.ca ; les autres titres et résumés sont ma traduction, pas encore vérifiés mot pour mot contre le site officiel.</p>
-      </div>
-    </div>
-    <div class="roadmap-item" onclick="toggleRoadmapRecap('recap-enjeux')" style="cursor:pointer;">
-      <div class="roadmap-status later" data-i18n="rm.status.later">À faire</div>
-      <div class="roadmap-body">
-        <h4><span data-i18n="rm.2.h">Enjeux prioritaires — vote des visiteurs</span> <span class="roadmap-plus" id="hint-recap-enjeux">+</span></h4>
-        <p data-i18n="rm.2.p">Retiré du site pour l'instant, gardé ici comme idée à reconsidérer plus tard.</p>
-        <div class="roadmap-recap" id="recap-enjeux">
-          <p data-i18n="rm.2.r1"><b style="color:var(--ink)">L'idée :</b> un onglet où les visiteurs proposent un enjeu qui les touche (ex. « les prisons ne font plus leur travail de réhabilitation ») et votent pour ceux qui devraient passer avant les autres — un baromètre de sentiment, pas un sondage officiel.</p>
-          <p data-i18n="rm.2.r2"><b style="color:var(--ink)">Ce qui fonctionnait déjà dans une version précédente :</b> les votes étaient réellement partagés entre tous les visiteurs du site, en temps réel.</p>
-          <p data-i18n="rm.2.r3"><b style="color:var(--ink)">Sa limite honnête :</b> sans compte utilisateur, rien n'empêche quelqu'un de revoter en changeant de navigateur — donc pas représentatif d'un vrai vote populaire.</p>
-          <p style="margin-bottom:12px;" data-i18n="rm.2.r4"><b style="color:var(--ink)">À garder en tête :</b> l'Assemblée nationale a déjà son propre système de pétitions électroniques officielles, qui lui oblige un ministre à répondre publiquement — un canal avec un vrai poids, contrairement à ce baromètre.</p>
-          <a class="bill-more" href="https://www.assnat.qc.ca/fr/exprimez-votre-opinion/petition/index.html" target="_blank" rel="noopener" onclick="event.stopPropagation()" data-i18n="rm.2.link">Voir le vrai système de pétitions sur assnat.qc.ca →</a>
-        </div>
-      </div>
-    </div>
-    <div class="roadmap-item">
-      <div class="roadmap-status now" data-i18n="rm.status.now">Déjà là</div>
-      <div class="roadmap-body">
-        <h4 data-i18n="rm.3.h">Comptes utilisateurs (courriel ou Google)</h4>
-        <p data-i18n="rm.3.p">Fait : connexion par lien magique (courriel) via Supabase Auth — pas de mot de passe à gérer. Le suivi des ministres/député·e·s se synchronise maintenant entre appareils pour les personnes connectées (table `follows`, protégée par des règles de sécurité — chacun·e ne voit que ses propres suivis). Les visiteur·euse·s non connecté·e·s gardent le suivi local dans leur navigateur, comme avant.</p>
-      </div>
-    </div>
-    <div class="roadmap-item">
-      <div class="roadmap-status next" data-i18n="rm.status.next">Prochaine étape</div>
-      <div class="roadmap-body">
-        <h4 data-i18n="rm.4.h">Don volontaire pour soutenir le projet</h4>
-        <p data-i18n="rm.4.p">Décision déjà prise : pas de publicité sur ce site, un modèle « soutenez le projet » avec don volontaire (Stripe). <b style="color:var(--ink)">Démarche en cours :</b> immatriculation d'une entreprise individuelle soumise au Registraire des entreprises du Québec (en attente du NEQ, généralement 24 à 72 heures ouvrables après paiement). Une fois le NEQ reçu : ouverture d'un compte Stripe, puis un simple lien de paiement Stripe (« Customers choose what to pay », montant libre) — aucun serveur requis pour cette étape, juste un bouton pointant vers ce lien. Pas de don récurrent automatique pour l'instant (demande un montage différent, à revoir plus tard si utile). Sous le seuil de 30 000 $/an, pas d'inscription à la TPS/TVQ nécessaire.</p>
-      </div>
-    </div>
-    <div class="roadmap-item" onclick="toggleRoadmapRecap('recap-comparateur')" style="cursor:pointer;">
-      <div class="roadmap-status now" data-i18n="rm.status.now">Déjà là</div>
-      <div class="roadmap-body">
-        <h4><span data-i18n="rm.6.h">Comparateur de deux ministres côte à côte</span> <span class="roadmap-plus" id="hint-recap-comparateur">+</span></h4>
-        <p data-i18n="rm.6.p">Fait, dans l'onglet Conseil des ministres : choisis deux ministres dans les menus déroulants, leurs dossiers s'affichent en colonnes — portefeuille, parti, circonscription, présence réelle, projets de loi parrainés. Ce qui bloquait avant (participation aux votes) est maintenant réglé. Pas de ligne « postes précédents » : cet item a été volontairement écarté plus haut sur cette liste (LinkedIn et les bios officielles couvrent déjà ça), donc pas de donnée inventée pour remplir cette case.</p>
-        <div class="roadmap-recap" id="recap-comparateur">
-          <p data-i18n="rm.6.r1"><b style="color:var(--ink)">Ce que ce n'est pas :</b> pas un classement (« meilleur/pire ministre ») — juste les mêmes faits, deux fois, côte à côte. Même esprit que le reste du site : des faits vérifiables, pas un jugement.</p>
-        </div>
-      </div>
-    </div>
-    <div class="roadmap-item">
-      <div class="roadmap-status later" data-i18n="rm.status.later">À faire</div>
-      <div class="roadmap-body">
-        <h4 data-i18n="rm.7.h">Calendrier détaillé des prochaines séances, jour par jour</h4>
-        <p data-i18n="rm.7.p">Actuellement, l'onglet Quoi de neuf n'affiche que les règles générales du calendrier parlementaire (quand l'Assemblée siège en général), pas un horaire précis des prochaines séances et commissions. Même mur technique que le registre des votes : la page officielle charge son contenu en JavaScript.</p>
-      </div>
-    </div>
-    <div class="roadmap-item">
-      <div class="roadmap-status now" data-i18n="rm.status.now">Déjà là</div>
-      <div class="roadmap-body">
-        <h4 data-i18n="rm.8.h">Alertes automatiques (courriel)</h4>
-        <p data-i18n="rm.8.p">Fait : un digest hebdomadaire par courriel. Suivez un projet de loi (bouton « Suivre »), ou demandez-en des explications, et vous recevez un résumé quand il change d'étape — un seul courriel par semaine, jamais un par changement, pour éviter la fatigue. Envoyé par une tâche planifiée dans le nuage (Vercel), qui relit Données Québec chaque semaine et n'écrit qu'aux personnes concernées. Vous ne recevez que ce que vous suivez ; arrêtez quand vous voulez en retirant le suivi.</p>
-      </div>
-    </div>
-    <div class="roadmap-item">
-      <div class="roadmap-status later" data-i18n="rm.status.later">À faire</div>
-      <div class="roadmap-body">
-        <h4 data-i18n="rm.9.h">Recherche élargie au texte intégral des projets de loi</h4>
-        <p data-i18n="rm.9.p">La recherche par mot-clé actuelle fouille les titres et les résumés IA générés à partir du texte intégral (voir l'item plus haut), mais pas le texte intégral lui-même. Un mot très précis qui n'apparaît que dans le texte de loi (pas dans le résumé) ne sort rien pour l'instant. Indexer le texte intégral pour la recherche est un chantier séparé du résumé.</p>
-      </div>
-    </div>
-    <div class="roadmap-item">
-      <div class="roadmap-status later" data-i18n="rm.status.dropped">Idée explorée, écartée pour l'instant</div>
-      <div class="roadmap-body">
-        <h4 data-i18n="rm.10.h">Système de notation des ministres (bulletin par enjeu)</h4>
-        <p data-i18n="rm.10.p">Discuté puis volontairement écarté : ça ferait passer le site de « je rapporte des faits vérifiables » à « je porte un jugement sur de vraies personnes », sans méthodologie solide derrière. Gardé ici pour mémoire, pas comme tâche active.</p>
-      </div>
-    </div>
-    <div class="roadmap-item" onclick="toggleRoadmapRecap('recap-promesses')" style="cursor:pointer;">
-      <div class="roadmap-status later" data-i18n="rm.status.caution">À faire — prudence particulière</div>
-      <div class="roadmap-body">
-        <h4><span data-i18n="rm.11.h">Bilan de promesses électorales vs actions gouvernementales — pour tous les partis</span> <span class="roadmap-plus" id="hint-recap-promesses">+</span></h4>
-        <p data-i18n="rm.11.p">Preuve de concept ci-dessous. Règle non négociable si on généralise : jamais de verdict « tenue / brisée » écrit par moi — seulement la promesse et l'action, chacune sourcée, laissées côte à côte pour que la personne qui lit juge elle-même. Ça doit couvrir le programme électoral de <b style="color:var(--ink)">chaque parti représenté à l'Assemblée</b> (CAQ, PLQ, PQ, QS, PCQ), pas seulement celui au pouvoir — sinon le site aurait l'air de ne surveiller qu'un seul parti, ce qui serait injuste et nuirait à la crédibilité de tout le reste du site.</p>
-        <div class="roadmap-recap" id="recap-promesses">
-          <p data-i18n="rm.11.r1">Aucun verdict de ma part ici — juste la promesse telle que rapportée, et l'action gouvernementale telle que rapportée, chacune avec sa source. À vous de juger si l'une répond à l'autre.</p>
-          <div class="roadmap-recap-table-wrap"><table>
-            <tr><th data-i18n="rm.11.t1">Promesse rapportée</th><th data-i18n="rm.11.t2">Action gouvernementale rapportée</th></tr>
-            <tr>
-              <td data-i18n="rm.11.t3">Lors de la course à la direction de la CAQ, Christine Fréchette a promis de rouvrir le Programme de l'expérience québécoise (PEQ) pour deux ans, avec une clause de droits acquis pour les immigrants déjà présents au Québec au moment de sa fermeture. <a href="https://www.lapresse.ca/actualites/politique/2026-04-21/nouveau-conseil-des-ministres/christine-frechette-promet-un-souffle-nouveau-a-son-gouvernement.php" target="_blank" rel="noopener" onclick="event.stopPropagation()">Source →</a></td>
-              <td data-i18n="rm.11.t4">Le 21 avril 2026, la responsabilité de mettre en œuvre cette réouverture du PEQ a été confiée à François Bonnardel, nommé ministre de l'Immigration. <a href="https://www.lapresse.ca/actualites/politique/2026-04-21/nouveau-conseil-des-ministres/christine-frechette-promet-un-souffle-nouveau-a-son-gouvernement.php" target="_blank" rel="noopener" onclick="event.stopPropagation()">Source →</a></td>
-            </tr>
-          </table></div>
-          <p style="margin-top:10px;" data-i18n="rm.11.r2">Statut objectif : responsabilité assignée. Aucun projet de loi ou décret concret trouvé pour l'instant confirmant la mise en œuvre — à vérifier au fil des prochaines sessions.</p>
-        </div>
-      </div>
-    </div>
-    <div class="roadmap-item" onclick="toggleRoadmapRecap('recap-nominatif')" style="cursor:pointer;">
-      <div class="roadmap-status now" data-i18n="rm.status.now">Déjà là</div>
-      <div class="roadmap-body">
-        <h4><span data-i18n="rm.12.h">Détail nominatif des votes (qui a voté quoi, par député)</span> <span class="roadmap-plus" id="hint-recap-nominatif">+</span></h4>
-        <p data-i18n="rm.12.p">Fait : les 735 votes nominaux des 3 sessions de la 43e législature, avec le nom et le parti de chaque député pour chaque vote (Pour/Contre/Abstention) — plus les totaux déjà affichés avant. Scrapé directement des pages de détail du registre officiel (une par vote), pas d'une estimation. Ouvrez « Voir le détail nominatif » sur n'importe quel vote dans l'onglet Votes pour un exemple réel.</p>
-        <div class="roadmap-recap" id="recap-nominatif">
-          <p data-i18n="rm.12.r1"><b style="color:var(--ink)">Rapprochement aux projets de loi :</b> 64 des 735 votes sont automatiquement liés au bon projet de loi dans l'onglet Projets de loi, en vérifiant toujours le titre — même quand un seul candidat existe pour un numéro donné (une vraie collision trouvée et corrigée : le PL 10 de 2023, différent, avait d'abord été rapproché à tort au PL 10 de 2026 simplement parce que l'ancien avait été exclu du suivi). Les autres votes concernent des motions sans projet de loi associé, ou des lois déjà pleinement sanctionnées et donc hors du champ « affaires en cours » suivi par ce site.</p>
-          <p style="margin-bottom:0;" data-i18n="rm.12.r2"><b style="color:var(--ink)">Détail utile :</b> le parti affiché à côté de chaque nom est celui inscrit au registre au moment du vote, pas le parti actuel du député — utile pour repérer les changements d'allégeance depuis.</p>
-        </div>
-      </div>
-    </div>
-    <div class="roadmap-item" onclick="toggleRoadmapRecap('recap-resume')" style="cursor:pointer;">
-      <div class="roadmap-status now" data-i18n="rm.status.now">Déjà là</div>
-      <div class="roadmap-body">
-        <h4><span data-i18n="rm.13.h">Résumés IA basés sur le texte intégral</span> <span class="roadmap-plus" id="hint-recap-resume">+</span></h4>
-        <p data-i18n="rm.13.p">Fait pour les 120 projets de loi actifs : un résumé de 3 à 7 puces courtes et concrètes, écrit par l'API Claude à partir du vrai texte intégral (PDF) déposé — pas juste du titre. Coût réel : environ 4 $ US pour l'ensemble. Ouvrez n'importe quel résumé dans l'onglet Projets de loi pour un exemple réel.</p>
-        <div class="roadmap-recap" id="recap-resume">
-          <p data-i18n="rm.13.r1"><b style="color:var(--ink)">Ce que ça couvre :</b> les changements concrets qui affectent les gens (chiffres, obligations, interdictions, nouveaux organismes), en langage simple, sans jamais de jugement de valeur.</p>
-          <p data-i18n="rm.13.r2"><b style="color:var(--ink)">Sa limite honnête :</b> le résumé porte sur le texte tel que présenté, pas nécessairement la version finale amendée en commission — c'est indiqué directement sur chaque résumé. Pour 2 projets sur 120, le PDF récupéré n'était qu'un document procédural sans contenu à résumer ; le site le dit plutôt que d'inventer.</p>
-          <p style="margin-bottom:0;" data-i18n="rm.13.r3"><b style="color:var(--ink)">Prochaine étape liée :</b> indexer ce texte intégral pour la recherche par mot-clé (voir l'item plus haut), et un jour résumer la version finale plutôt que celle déposée si les délais le permettent.</p>
-        </div>
-      </div>
-    </div>
-    <div class="roadmap-item">
-      <div class="roadmap-status now" data-i18n="rm.status.now">Déjà là</div>
-      <div class="roadmap-body">
-        <h4 data-i18n="rm.14.h">Pastilles de contact public (courriel)</h4>
-        <p data-i18n="rm.14.p">Fait pour les 27 ministres et 125 député·e·s : le courriel officiel (assnat.qc.ca) s'affiche directement à côté du badge de parti, dans l'onglet Conseil des ministres. Scrapé en un seul fetch de la page d'index (le tableau contenait déjà le courriel de chacun·e). Les réseaux sociaux (LinkedIn, Facebook, Instagram) restent volontairement exclus : ces comptes ne sont listés nulle part officiellement, et les trouver par recherche de nom risquerait de confondre des homonymes ou de tomber sur un faux compte — pas de façon fiable de vérifier la correspondance pour l'instant.</p>
-      </div>
-    </div>
-    <div class="roadmap-item">
-      <div class="roadmap-status later" data-i18n="rm.status.dropped">Idée explorée, écartée pour l'instant</div>
-      <div class="roadmap-body">
-        <h4 data-i18n="rm.15.h">Registre des lobbyistes — qui déclare vouloir influencer qui, sur quel sujet</h4>
-        <p data-i18n="rm.15.p">Le Québec a un vrai registre officiel (Carrefour Lobby Québec) où chaque lobbyiste doit déclarer publiquement qui il représente, quel ministère ou organisme il approche, et sur quel sujet. <b style="color:var(--ink)">Pourquoi ce n'est pas fait :</b> vérifié — ce n'est pas juste une page qui charge son contenu en JavaScript (ça, ça se contourne, voir le registre des votes). Le formulaire de recherche est protégé par reCAPTCHA (Google), une mesure anti-automatisation volontaire, pas un simple mur technique. Contourner un reCAPTCHA pour scraper en masse ne serait pas une pratique honnête, peu importe l'outil utilisé — donc écarté pour l'instant, pas une question de temps ou d'effort technique. <b style="color:var(--ink)">Démarche entreprise :</b> vérifié qu'aucun jeu de données n'existe encore sur Données Québec pour ce registre (0 résultat de recherche) ; une demande de publication en données ouvertes a été rédigée pour Données Québec (pilote@donneesquebec.ca), à envoyer par la personne derrière ce projet plutôt que par un mécanisme automatisé.</p>
-      </div>
-    </div>
-    <div class="roadmap-item">
-      <div class="roadmap-status later" data-i18n="rm.status.laterlabel">Plus tard</div>
-      <div class="roadmap-body">
-        <h4 data-i18n="rm.16.h">Suivi synchronisé entre appareils</h4>
-        <p data-i18n="rm.16.p">Une fois les comptes en place, « Suivre un ministre » et les votes s'enregistrent sur votre compte plutôt que dans le navigateur — ça règle les deux limites actuelles d'un coup.</p>
-      </div>
-    </div>
-    <div class="roadmap-item">
-      <div class="roadmap-status now" data-i18n="rm.status.now">Déjà là</div>
-      <div class="roadmap-body">
-        <h4 data-i18n="rm.18.h">Demander des explications sur un projet de loi (+ éventuelle pétition)</h4>
-        <p data-i18n="rm.18.p">Fait : dans l'onglet Projets de loi, toute personne connectée peut demander des explications sur un projet de loi actif — jamais un projet déjà sanctionné, toujours vérifié contre les vraies données (jamais de numéro inventé). Une demande par personne par projet, grâce aux comptes utilisateurs (empêche le bourrage). <b style="color:var(--ink)">Limite anti-troll :</b> maximum 10 demandes par compte par mois, appliquée par une règle de sécurité côté serveur (impossible à contourner depuis le navigateur) — évite qu'un seul compte inonde le système en signalant tous les projets de loi d'un coup. Le vrai décompte n'est visible que par les comptes admin désignés — jamais public pour l'instant. <b style="color:var(--ink)">Limite réelle du système officiel :</b> une pétition à l'Assemblée nationale doit être déposée par un député, qui peut refuser de la présenter — donc la suite (trouver un·e élu·e prêt·e à la parrainer, publication Facebook, dépôt de la pétition) reste un processus manuel, pas automatisé. <b style="color:var(--ink)">À surveiller de près :</b> même risque que le système de notation des ministres écarté plus haut — les chiffres sont affichés bruts, sans interprétation, jamais comme un jugement, pour rester fidèle à la règle « jamais de verdict sur de vraies personnes ».</p>
-      </div>
-    </div>
-    <div class="roadmap-item">
-      <div class="roadmap-status later" data-i18n="rm.status.dropped">Idée explorée, écartée pour l'instant</div>
-      <div class="roadmap-body">
-        <h4 data-i18n="rm.5.h">Historique de carrière des ministres</h4>
-        <p data-i18n="rm.5.p">Discuté puis volontairement écarté : LinkedIn (et les bios officielles) couvrent déjà ça pour la plupart des ministres, et reconstituer les 27 parcours à la main, un par un, à partir de communiqués et d'articles épars, ne semble pas un bon rapport effort/valeur comparé aux autres priorités du site (registre des votes, comptes utilisateurs). Gardé ici pour mémoire, pas comme tâche active.</p>
-      </div>
-    </div>
   </section>
 
   <!-- PAGE CACHÉE — la BD « l'idée derrière le site ». Aucun onglet n'y mène :
@@ -2202,7 +2045,7 @@ const translations = {
     'h.ministres':"Ministres et député·e·s",
     'h.projets':"Projets de loi",
     'h.votes':"Registre des votes",
-    'h.compte':"Compte, suivi synchronisé — et à propos du projet",
+    'h.compte':"Compte",
     'h.trouve':"Trouvez votre député",
     'h.quoideneuf':"Quoi de neuf",
     'h.quoideneuf.sub':"Dernières activités réelles à l'Assemblée nationale",
@@ -2240,7 +2083,7 @@ const translations = {
     'comp.sub':"Two ministers, the same facts, side by side — never a ranking",
     'h.projets':"Bills",
     'h.votes':"Vote registry",
-    'h.compte':"Account, synced follows — and about the project",
+    'h.compte':"Account",
     'h.trouve':"Find your MNA",
     'h.quoideneuf':"What's new",
     'h.quoideneuf.sub':"Real, recent activity from the National Assembly",
