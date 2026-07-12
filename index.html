@@ -613,6 +613,18 @@
     letter-spacing:-0.03em; text-transform:uppercase;
   }
   .brand-blue{color:var(--gold);}
+  /* Feuille d'érable → passerelle DossierCanada : jaune, flippe en rouge /20s */
+  .maple-flip{
+    display:inline-flex; align-items:center; margin-left:12px; flex:none;
+    color:var(--yellow); cursor:pointer;
+    transition:transform 0.7s ease-in-out, color 0.7s ease-in-out;
+    transform-style:preserve-3d;
+  }
+  .maple-flip svg{width:26px; height:26px; display:block; filter:drop-shadow(1.5px 1.5px 0 var(--ink));}
+  .maple-flip.is-red{color:#D52B1E; transform:rotateY(180deg);}
+  .maple-flip:hover{transform:scale(1.12);}
+  .maple-flip.is-red:hover{transform:rotateY(180deg) scale(1.12);}
+  @media (prefers-reduced-motion: reduce){ .maple-flip{transition:color 0.3s ease;} }
   .brand-text p{display:none;} /* la devise devient le H1 du hero (Phase 2) */
   .top-meta{display:none;}     /* les stats migrent dans la bande du hero (Phase 2) */
   .font-size-ctrl{border:none; background:transparent; padding:0; gap:8px;}
@@ -1366,6 +1378,14 @@
       <h1>Dossier<span class="brand-blue">Québec</span></h1>
       <p>Qui siège, qui légifère, qui vote quoi</p>
     </div>
+    <!-- Feuille d'érable : passerelle vers le site fédéral DossierCanada.
+         Flippe jaune ↔ rouge toutes les 20 s (voir le script plus bas). -->
+    <a class="maple-flip" id="mapleFlip" role="button" tabindex="0"
+       title="Aller au site fédéral — DossierCanada"
+       aria-label="Aller au site fédéral — DossierCanada"
+       onclick="goToFederal(event)">
+      <svg viewBox="0 0 489 512" aria-hidden="true"><path fill="currentColor" d="M383.8 351.7c2.5-2.5 105.2-92.4 105.2-92.4l-17.5-7.5c-10-4.9-7.4-11.5-5-17.4 2.4-7.6 20.1-67.3 20.1-67.3s-47.7 10-57.7 12.5c-7.5 2.4-10-2.5-12.5-7.5s-15-32.4-15-32.4-52.6 59.9-55.1 62.3c-10 7.5-20.1 0-17.6-10 0-10 12.6-67.3 12.6-67.3s-30.1 17.4-42.6 22.4c-10 5-15 5-20.1-5C251.1 122 231 84.9 231 84.9s-20.1 37.1-25.1 47.1c-5 10-10 10-20.1 5-12.5-5-42.6-22.4-42.6-22.4s12.6 57.3 12.6 67.3c2.5 10-7.5 17.5-17.6 10-2.5-2.4-55.1-62.3-55.1-62.3s-12.5 27.4-15 32.4-5 9.9-12.5 7.5c-10-2.5-57.7-12.5-57.7-12.5s17.7 59.7 20.1 67.3c2.4 5.9 5 12.5-5 17.4L0 259.3s102.7 89.9 105.2 92.4c5.1 5 10 7.5 5.1 22.4-5.1 15-10.1 32.5-10.1 32.5s95.2-20 105.3-22.5c8.7-1.7 17.7-2.5 17.7 7.5S222.4 512 222.4 512h67.2s-5.1-97.4-5.1-107.4 8.9-9.2 17.7-7.5c10.1 2.5 105.3 22.5 105.3 22.5s-5-17.5-10.1-32.5c-4.8-14.9.1-17.4 5.2-22.4z"/></svg>
+    </a>
   </div>
   <!-- Nav DANS la ligne du header (maquette : logo | menu | contrôles sur
        UNE seule rangée). Sur mobile, le nav devient le panneau plein écran
@@ -1405,6 +1425,18 @@
   }
   window.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
+})();
+
+// Ouvre le site fédéral DossierCanada dans un nouvel onglet.
+function goToFederal(evt){
+  if(evt) evt.stopPropagation();
+  window.open('https://dossiercanada.ca/', '_blank', 'noopener');
+}
+// Feuille d'érable : flippe jaune ↔ rouge toutes les 20 secondes.
+(function(){
+  var leaf = document.getElementById('mapleFlip');
+  if(!leaf) return;
+  setInterval(function(){ leaf.classList.toggle('is-red'); }, 20000);
 })();
 </script>
 
