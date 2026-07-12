@@ -1630,6 +1630,10 @@
       <p data-i18n="chexp.p1">Un clic sur « Demander une explication » = une demande citoyenne pour que le parrain du projet l'explique en langage clair, et pour qu'on le garde à l'œil ensemble.</p>
       <p data-i18n="chexp.p2"><b>Un compte (courriel) est requis</b> — une demande par personne, aucune demande anonyme. À <b>1 000</b>, on pousse pour une pétition officielle.</p>
     </div>
+
+    <!-- Reste des projets (3e et suivants) — la bande jaune ci-dessus
+         s'intercale ainsi entre le 2e et le 3e projet. -->
+    <div id="billsListRest"></div>
   </section>
 
   <!-- VOTES -->
@@ -6499,8 +6503,21 @@ function renderBills(keyword){
     if(!db) return -1;
     return billsSortDir === 'desc' ? db.localeCompare(da) : da.localeCompare(db);
   });
+  // La bande jaune « challenger » s'intercale entre le 2e et le 3e projet :
+  // 2 premiers dans #billsList, le reste dans #billsListRest (la bande est
+  // le noeud HTML statique entre les deux).
   const el = document.getElementById('billsList');
-  el.innerHTML = list.length ? list.map(b=>billCard(b,'full')).join('') : `<div class="no-results">${isEn ? 'No bill matches this search.' : 'Aucun projet de loi ne correspond à cette recherche.'}</div>`;
+  const rest = document.getElementById('billsListRest');
+  const banner = document.getElementById('band-challenge-explainer');
+  if(list.length){
+    el.innerHTML = list.slice(0, 2).map(b=>billCard(b,'full')).join('');
+    if(rest) rest.innerHTML = list.slice(2).map(b=>billCard(b,'full')).join('');
+    if(banner) banner.style.display = '';
+  } else {
+    el.innerHTML = `<div class="no-results">${isEn ? 'No bill matches this search.' : 'Aucun projet de loi ne correspond à cette recherche.'}</div>`;
+    if(rest) rest.innerHTML = '';
+    if(banner) banner.style.display = 'none'; // pas de bande sur « aucun résultat »
+  }
   document.getElementById('statProjets').textContent = bills.length;
   // Titre de résultats + note (suivent le filtre actif et la langue)
   renderBillsQuickFilters();
