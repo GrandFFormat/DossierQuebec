@@ -1011,6 +1011,19 @@
   .vc-foot-note{font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; color:#666;}
   @media (max-width:820px){ .vc-ncols{grid-template-columns:1fr;} }
   @media (max-width:640px){ .vc-head{flex-wrap:wrap;} .vc-counts{width:100%;} }
+  /* Barre jaune « Voir 6 de plus » (maquette) */
+  .votes-more{
+    display:block; width:100%; margin-top:10px;
+    border:3px solid var(--ink); background:var(--yellow); color:var(--ink);
+    box-shadow:var(--shadow); cursor:pointer;
+    font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:14px;
+    text-transform:uppercase; letter-spacing:0.05em; padding:14px 20px; text-align:center;
+  }
+  .votes-more:hover{background:#131313; color:var(--yellow);}
+  .votes-more-note{
+    margin-top:10px; text-align:center; font-family:'Archivo Narrow',sans-serif;
+    font-size:12.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--slate);
+  }
   .vote-card h3{font-weight:800; font-size:17px; letter-spacing:-0.01em;}
   .result-badge{
     font-family:'Archivo Narrow',sans-serif; font-size:12px; font-weight:700;
@@ -1626,7 +1639,6 @@
       </div>
       <div class="toolbar">
         <input type="text" id="searchVotes" data-i18n-placeholder="ph.searchVotes" placeholder="Mot-clé : sujet, numéro de projet de loi…">
-        <button class="sort-toggle" id="motionsToggle" onclick="toggleShowMotions()"></button>
       </div>
     </div>
 
@@ -6899,17 +6911,22 @@ function partyBreakdownHtml(pairs){
   return partyCounts(pairs).map(([p, n]) => `<span style="color:${partyColors[p]}">${n} ${p}</span>`).join('');
 }
 
+let votesShown = 6; // on montre les 6 plus récents ; « Voir 6 de plus » ajoute 6
+function loadMoreVotes(){ votesShown += 6; renderVotes(); }
+
 function renderVotes(keyword){
   const isEn = currentLang === 'en';
   keyword = keyword !== undefined ? keyword : (document.getElementById('searchVotes')?.value || '');
   const kw = norm(keyword);
-  const list = votes.filter(v=>{
-    if(!showMotions && !v.billNum) return false;
+  // Votes ET motions, les plus récents d'abord (les gens peuvent chercher un
+  // projet de loi précis via la recherche).
+  const full = votes.filter(v=>{
     if(!kw) return true;
     const bill = v.billId ? bills.find(b=>b.id===v.billId) : null;
     const haystack = norm([v.subject, v.stage, bill?bill.title:'', v.billNum?('projet de loi n° '+v.billNum):''].join(' '));
     return haystack.includes(kw);
   }).sort((a,b)=> (b.date||'').localeCompare(a.date||''));
+  const list = full.slice(0, votesShown);
 
   const billLabel = isEn ? 'BILL NO.' : 'PROJET DE LOI N°';
   const pourLabel = isEn ? 'yeas' : 'pour';
@@ -7001,6 +7018,16 @@ function renderVotes(keyword){
       </div>
     `;
   }).join('') : `<div class="no-results">${isEn ? 'No vote matches this search.' : 'Aucun vote ne correspond à cette recherche.'}</div>`;
+  // Barre jaune « Voir 6 de plus » (maquette) tant qu'il reste des votes.
+  if(full.length > votesShown){
+    const remaining = full.length - votesShown;
+    const step = Math.min(6, remaining);
+    el.innerHTML += `<button class="votes-more" onclick="loadMoreVotes()">${isEn
+      ? `Show ${step} more — ${list.length} of ${full.length} shown`
+      : `Voir ${step} de plus — ${list.length} sur ${full.length} affichés`}</button>`;
+  } else if(full.length > 6){
+    el.innerHTML += `<div class="votes-more-note">${isEn ? `All ${full.length} shown` : `Les ${full.length} affichés`}</div>`;
+  }
   document.getElementById('statVotes').textContent = votes.length;
 }
 
@@ -7088,7 +7115,7 @@ window.addEventListener('scroll', ()=>{
 
 document.getElementById('searchMinistres').addEventListener('input', e=> { renderMinistres(e.target.value); renderDeputes(e.target.value); });
 document.getElementById('searchBills').addEventListener('input', ()=> renderBills());
-document.getElementById('searchVotes').addEventListener('input', ()=> renderVotes());
+document.getElementById('searchVotes').addEventListener('input', ()=> { votesShown = 6; renderVotes(); });
 
 /* ---------------- INIT ---------------- */
 function sortRoadmapItems(){
