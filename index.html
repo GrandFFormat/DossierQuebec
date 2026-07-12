@@ -5229,14 +5229,37 @@ async function requestExplanation(billId, btnId){
   const isEn = currentLang === 'en';
   const btn = document.getElementById(btnId);
   if(btn) btn.disabled = true;
-  const { error } = await supabaseClient.from('bill_flags').insert({ user_id: currentUser.id, bill_id: billId });
+
+  // 1) Vérifie que la session est ENCORE valide côté serveur (le jeton peut
+  //    avoir expiré même si currentUser est encore en mémoire). C'est la cause
+  //    la plus fréquente du faux message « limite mensuelle ».
+  const { data: fresh, error: authErr } = await supabaseClient.auth.getUser();
+  if(authErr || !fresh || !fresh.user){
+    if(btn) btn.disabled = false;
+    alert(isEn ? 'Your session has expired — please sign in again.' : 'Votre session a expiré — reconnectez-vous.');
+    goToAccount();
+    return;
+  }
+  const uid = fresh.user.id;
+
+  const { error } = await supabaseClient.from('bill_flags').insert({ user_id: uid, bill_id: billId });
   if(error && error.code !== '23505'){
-    // Refus serveur — typiquement la limite mensuelle (10) appliquée par la RLS.
     console.error('requestExplanation insert error:', error);
     if(btn) btn.disabled = false;
-    alert(isEn
-      ? "Couldn't record your request — you may have reached your monthly limit (10 requests)."
-      : "Impossible d'enregistrer la demande — vous avez peut-être atteint votre limite mensuelle (10 demandes).");
+    // 2) Distingue la VRAIE limite (≥10 en 30 jours) des autres erreurs :
+    //    on compte les demandes récentes de la personne (RLS : ne voit que
+    //    les siennes) au lieu de supposer que c'est toujours la limite.
+    let atLimit = false;
+    try{
+      const since = new Date(Date.now() - 30*864e5).toISOString();
+      const { count } = await supabaseClient.from('bill_flags')
+        .select('*', { count: 'exact', head: true }).gte('created_at', since);
+      atLimit = (typeof count === 'number' && count >= 10);
+    }catch(e){}
+    alert(atLimit
+      ? (isEn ? "You've reached your monthly limit (10 requests)." : "Vous avez atteint votre limite mensuelle (10 demandes).")
+      : (isEn ? ("Couldn't record your request. (" + (error.message || error.code || 'unknown') + ")")
+              : ("Impossible d'enregistrer la demande. (" + (error.message || error.code || 'inconnu') + ")")));
     return;
   }
   myFlaggedBills[billId] = true; // succès OU doublon = « demandé »
