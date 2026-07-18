@@ -901,6 +901,7 @@
   }
   .legend-label{font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--slate); white-space:nowrap; flex:none;}
   .legend-chips{display:flex; align-items:center; gap:8px; flex-wrap:wrap; flex:none;}
+  @media (max-width:640px){ .legend-chips{flex:1 1 100%; min-width:0;} }
   .legend-arrow{font-weight:900;}
   .legend-link{
     font-family:'Archivo Narrow',sans-serif; font-size:12.5px;
@@ -1135,6 +1136,13 @@
   .head-note{
     font-family:'Archivo Narrow',sans-serif; font-size:13px; font-weight:600;
     text-transform:uppercase; letter-spacing:0.05em; color:#555; flex:none;
+  }
+  /* Sécurité petits écrans (≤480px) : la note de section passe sous le titre,
+     et les mots longs des cartes du lexique se coupent proprement. */
+  @media (max-width:480px){
+    .section-head{flex-wrap:wrap; row-gap:6px;}
+    .head-note{flex:1 1 100%;}
+    .lexique-item dt, .lexique-item dd{overflow-wrap:break-word; word-break:break-word; min-width:0;}
   }
   /* Titres de groupes (Les ministres / Le reste de l'Assemblée) : taille maquette */
   .min-group-head{margin-top:44px; align-items:baseline;}
@@ -1830,7 +1838,7 @@ function goToFederal(evt){
     <div class="info-box" style="scroll-margin-top:12px;">
       <p data-i18n="lobby.body" style="margin:0 0 8px;">Toute personne payée pour communiquer avec des <b>titulaires de charge publique</b> (ministres, député·e·s, hauts fonctionnaires…) au sujet de lois, règlements, subventions ou contrats doit s'inscrire à un <b>registre public</b>, supervisé par le <b>Commissaire au lobbyisme du Québec</b>, une institution indépendante. Les lobbyistes doivent y déclarer leurs mandats.</p>
       <p data-i18n="lobby.note" style="margin:0 0 10px; color:var(--slate); font-size:12.5px;">Pourquoi ce site ne reproduit pas ce registre : ses données ne sont pas offertes en données ouvertes (rien sur Données Québec) et ne sont consultables qu'à travers l'outil de recherche officiel. Plutôt que d'en faire une copie qui ne serait pas fiable ni à jour, on renvoie directement aux outils publics officiels.</p>
-      <div style="font-size:12.5px;">
+      <div style="font-size:12.5px; display:flex; flex-wrap:wrap; align-items:center; gap:2px 0;">
         <a href="https://www.carrefourlobby.quebec/recherche-mandats" target="_blank" rel="noopener" style="color:var(--gold); white-space:nowrap;" data-i18n="lobby.link1">Rechercher dans le registre ↗</a><span style="color:var(--line); margin:0 8px;">·</span><a href="https://www.carrefourlobby.quebec/mandats-publies" target="_blank" rel="noopener" style="color:var(--gold); white-space:nowrap;" data-i18n="lobby.link2">Mandats récemment publiés ↗</a><span style="color:var(--line); margin:0 8px;">·</span><a href="https://lobbyisme.quebec/" target="_blank" rel="noopener" style="color:var(--gold); white-space:nowrap;" data-i18n="lobby.link3">Commissaire au lobbyisme ↗</a>
       </div>
     </div>
