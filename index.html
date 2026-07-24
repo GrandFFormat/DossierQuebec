@@ -2434,6 +2434,8 @@ function applyLanguage(){
     const labelSpan = pill.querySelector('span') || pill;
     labelSpan.textContent = isCollapsed ? (currentLang==='en' ? '😴 Show' : '😴 Afficher') : (currentLang==='en' ? '😴 Collapse' : '😴 Réduire');
   });
+  // Le <title> suit la langue ET l'onglet courant (déduit de l'URL).
+  if(typeof syncTitle === 'function') syncTitle(viewFromPath());
 }
 
 document.getElementById('langToggle').addEventListener('click', ()=>{
@@ -7044,13 +7046,49 @@ function toggleNominalGroup(domId, voteId, group){
 }
 
 /* ---------------- NAV ---------------- */
-function goToTab(viewName){
+/* ---------- Routage par URL (SEO : chaque onglet a sa propre adresse) ----------
+   Les pages /ministres, /projets-de-loi, /votes, /lexique existent aussi en
+   HTML pré-rendu (scripts/build-section-pages.js) : contenu visible sans JS et
+   <title> propre, pour que Google les indexe séparément. Ici, côté client : on
+   synchronise l'URL au clic et on ouvre le bon onglet si on arrive directement
+   sur une de ces adresses. */
+const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', lexique:'/lexique' };
+const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'lexique':'lexique' };
+const PAGE_META = {
+  apercu:    { fr:"DossierQuébec — ministres, projets de loi et votes de l'Assemblée nationale", en:"DossierQuébec — ministers, bills and votes of Quebec's National Assembly" },
+  ministres: { fr:"Ministres du Québec — Conseil des ministres · DossierQuébec", en:"Quebec ministers — Cabinet · DossierQuébec" },
+  projets:   { fr:"Projets de loi du Québec, expliqués en clair · DossierQuébec", en:"Quebec bills, explained in plain language · DossierQuébec" },
+  votes:     { fr:"Votes nominatifs à l'Assemblée nationale du Québec · DossierQuébec", en:"Recorded divisions at Quebec's National Assembly · DossierQuébec" },
+  lexique:   { fr:"Lexique et compte citoyen · DossierQuébec", en:"Glossary and citizen account · DossierQuébec" },
+};
+function viewFromPath(){
+  const seg = location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '');
+  return SLUG_VIEWS[seg] || 'apercu';
+}
+function syncTitle(viewName){
+  const m = PAGE_META[viewName]; if(!m) return;
+  document.title = (typeof currentLang !== 'undefined' && currentLang === 'en') ? m.en : m.fr;
+}
+
+function goToTab(viewName, opts){
+  opts = opts || {};
   document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.view === viewName));
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.getElementById('view-'+viewName).classList.add('active');
+  const target = document.getElementById('view-'+viewName);
+  if(target) target.classList.add('active');
   closeMobileMenu();
-  window.scrollTo({top:0, behavior:'smooth'});
+  if(!opts.noScroll) window.scrollTo({top:0, behavior: opts.fromHistory ? 'auto' : 'smooth'});
+  // Met l'URL à jour au clic (mais pas quand on répond à un back/forward).
+  if(!opts.fromHistory && VIEW_SLUGS[viewName]){
+    const url = VIEW_SLUGS[viewName];
+    const here = (location.pathname.replace(/\.html$/, '') || '/');
+    if(here !== url){ history.pushState({ view: viewName }, '', url); }
+  }
+  syncTitle(viewName);
 }
+
+// Boutons Précédent/Suivant du navigateur.
+window.addEventListener('popstate', ()=>{ goToTab(viewFromPath(), { fromHistory: true }); });
 
 // La connexion vit désormais dans l'onglet Lexique (section « Compte & à
 // propos »). Les boutons « Se connecter » y sautent et défilent jusqu'au bloc.
@@ -7160,6 +7198,11 @@ function renderTicker(){
   renderChallenged();
   await loadSnoozedSections();
   applyLanguage();
+  // Ouvre l'onglet correspondant à l'adresse d'arrivée (/votes, /ministres…).
+  const bootView = viewFromPath();
+  history.replaceState({ view: bootView }, '', location.pathname + location.search);
+  if(bootView !== 'apercu'){ goToTab(bootView, { fromHistory: true, noScroll: true }); }
+  else { syncTitle('apercu'); }
   renderTicker();
 })();
 </script>
