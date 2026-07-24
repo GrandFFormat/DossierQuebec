@@ -63,6 +63,12 @@ jobs:
           if git diff --cached --quiet; then
             echo "Aucun changement — rien à committer."
           else
-            git commit -m "Rafraîchissement auto des données ($(date -u +%Y-%m-%d))"
+            # Le contenu a changé aujourd'hui -> on date le sitemap (signal SEO
+            # « la page a changé »). Fait ici, pas à chaque exécution, pour ne
+            # jamais produire de commit fantôme les jours sans changement.
+            TODAY=$(date -u +%Y-%m-%d)
+            node scripts/update-sitemap-lastmod.js "$TODAY"
+            git add sitemap.xml
+            git commit -m "Rafraîchissement auto des données ($TODAY)"
             git push
           fi
