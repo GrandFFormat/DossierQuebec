@@ -81,4 +81,8 @@ run('Build : courriels -> index.html', ['scrapers/build-depute-emails-data.js'])
 run('Build : votes -> index.html', ['scrapers/build-votes-data.js']);
 run('Build : ministres -> index.html', ['scrapers/build-ministers-data.js']);
 
+// 3) Pages de section pré-rendues (SEO) : depuis index.html -> *.html par section.
+//    Doit tourner APRÈS toutes les injections de données ci-dessus.
+run('Build : pages de section (SEO) -> *.html', ['scripts/build-section-pages.js']);
+
 console.log('\n✓ Rafraîchissement complet terminé.');

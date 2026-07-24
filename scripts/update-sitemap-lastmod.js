@@ -22,11 +22,12 @@ if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
 let xml = readFileSync(FILE, 'utf8').replace(/\r\n/g, '\n');
 
 if (/<lastmod>[^<]*<\/lastmod>/.test(xml)) {
-  xml = xml.replace(/<lastmod>[^<]*<\/lastmod>/, `<lastmod>${date}</lastmod>`);
+  // Toutes les <url> du sitemap sont datées du jour du changement.
+  xml = xml.replace(/<lastmod>[^<]*<\/lastmod>/g, `<lastmod>${date}</lastmod>`);
 } else {
-  // Pas encore de <lastmod> : on l'insère juste après le premier <loc>.
-  xml = xml.replace(/(<loc>[^<]*<\/loc>)/, `$1\n    <lastmod>${date}</lastmod>`);
+  // Aucun <lastmod> : on en insère un après chaque <loc>.
+  xml = xml.replace(/(<loc>[^<]*<\/loc>)/g, `$1\n    <lastmod>${date}</lastmod>`);
 }
 
 writeFileSync(FILE, xml, 'utf8');
-console.log(`✓ sitemap.xml : lastmod = ${date}`);
+console.log(`✓ sitemap.xml : lastmod = ${date} (toutes les URL)`);
