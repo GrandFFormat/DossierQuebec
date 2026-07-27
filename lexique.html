@@ -296,6 +296,16 @@
   .follow-btn.on{background:var(--ink); color:var(--paper-2); border-color:var(--ink);}
   .bill-follow-row{display:flex; align-items:center; justify-content:flex-end; gap:10px; flex-wrap:wrap; margin-top:12px;}
   .follow-hint{font-size:11px; color:var(--slate); text-align:right;}
+  /* Partage du projet (bouton natif ou repli 𝕏/FB/copier) */
+  .bill-share-row{display:flex; align-items:center; justify-content:flex-end; gap:8px; flex-wrap:wrap; margin-top:10px;}
+  .bill-share-label{font-family:'Archivo Narrow',sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--slate);}
+  .bill-share-btn{
+    border:2px solid var(--ink); background:#fff; color:var(--ink);
+    font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:12px;
+    text-transform:uppercase; letter-spacing:0.03em; padding:6px 12px; cursor:pointer;
+  }
+  .bill-share-btn:hover{background:var(--yellow);}
+  .bill-share-btn.ic{padding:6px 10px; min-width:34px;}
   .vp-note{font-size:10.5px; color:var(--slate); background:var(--paper-2); border-radius:20px; padding:4px 9px; font-family:'Archivo Narrow',sans-serif;}
 
   /* ---------- BILLS ---------- */
@@ -6410,6 +6420,19 @@ function billCard(b, ctx){
       <button class="follow-btn ${isFlagged?'on':''}" id="${flagBtnId}"${title?` title="${title}"`:''} onclick="event.stopPropagation(); ${onclick}">${label}</button>
     </div>`;
   }
+  // Partage du projet — bouton natif (menu du téléphone) si le navigateur le
+  // supporte, sinon repli 𝕏 / Facebook / copier. Le lien pointe vers
+  // /projets-de-loi?pl=NUM qui ouvre directement CE projet (voir openBillFromQuery).
+  const canNativeShare = (typeof navigator !== 'undefined' && !!navigator.share);
+  const shareCtrls = canNativeShare
+    ? `<button class="bill-share-btn" onclick="event.stopPropagation(); shareBill(${b.id}, 'native', event)">${isEn ? '↗ Share' : '↗ Partager'}</button>`
+    : `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'x', event)" aria-label="Partager sur X">𝕏</button>`
+      + `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'fb', event)" aria-label="Partager sur Facebook">FB</button>`
+      + `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'copy', event)" aria-label="Copier le lien">⧉</button>`;
+  const shareRow = `<div class="bill-share-row">
+      <span class="bill-share-label">${isEn ? 'Share:' : 'Partager :'}</span>
+      ${shareCtrls}
+    </div>`;
   // Les votes ne sont plus affichés sur les cartes de projets de loi — le
   // détail complet (décomptes + qui a voté quoi) vit dans l'onglet Votes.
   return `
@@ -6446,6 +6469,7 @@ function billCard(b, ctx){
             <div class="last-event-box">${lastActivityValue}${note ? ` — ${note}` : ''}</div>
             <a class="bill-more" href="${url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${t('btn.viewFull')}</a>
             ${flagRow}
+            ${shareRow}
           </div>
         </div>
       </div>
@@ -6688,6 +6712,57 @@ function shareChallenge(billId, count, platform, evt){
     (navigator.clipboard ? navigator.clipboard.writeText(full) : Promise.reject())
       .then(() => alert(isEn ? 'Copied — paste it anywhere!' : 'Copié — collez-le où vous voulez !'))
       .catch(() => prompt(isEn ? 'Copy this:' : 'Copiez ceci :', full));
+  }
+}
+
+// Partage d'un projet de loi (onglet Projets). Message neutre + lien profond
+// /projets-de-loi?pl=NUM qui ouvre directement le projet à l'arrivée. « native »
+// utilise le menu de partage du système (mobile) ; sinon 𝕏 / Facebook / copier.
+function shareBill(billId, platform, evt){
+  if(evt) evt.stopPropagation();
+  const isEn = currentLang === 'en';
+  const b = bills.find(x => x.id === Number(billId));
+  if(!b) return;
+  const title = isEn ? (b.titleEn || b.title) : b.title;
+  const url = `https://dossierquebec.ca/projets-de-loi?pl=${encodeURIComponent(b.num)}`;
+  const text = isEn
+    ? `Bill no. ${b.num} — ${title}. Plain-language summary on DossierQuébec:`
+    : `Projet de loi n° ${b.num} — ${title}. Résumé en clair sur DossierQuébec :`;
+  if(platform === 'native' && navigator.share){
+    navigator.share({ title: 'DossierQuébec', text, url }).catch(() => {});
+    return;
+  }
+  if(platform === 'x'){
+    window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank', 'noopener,width=600,height=520');
+  } else if(platform === 'fb'){
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank', 'noopener,width=600,height=520');
+  } else { // copier (et repli si le partage natif échoue)
+    const full = text + ' ' + url;
+    (navigator.clipboard ? navigator.clipboard.writeText(full) : Promise.reject())
+      .then(() => alert(isEn ? 'Copied — paste it anywhere!' : 'Copié — collez-le où vous voulez !'))
+      .catch(() => prompt(isEn ? 'Copy this:' : 'Copiez ceci :', full));
+  }
+}
+
+// Lien profond : /projets-de-loi?pl=NUM → ouvre directement ce projet.
+function openBillFromQuery(){
+  const pl = new URLSearchParams(location.search).get('pl');
+  if(!pl) return;
+  const b = bills.find(x => String(x.num) === String(pl));
+  if(!b) return;
+  // S'assurer qu'on est bien sur l'onglet Projets (au cas où le lien arrive
+  // ailleurs, ex. /?pl=NUM) — sans toucher à l'URL (fromHistory).
+  if(viewFromPath() !== 'projets'){ goToTab('projets', { fromHistory: true, noScroll: true }); }
+  // Le projet doit passer le filtre courant : on force « tous » + recherche vide.
+  billsQuickFilter = 'tous';
+  const sb = document.getElementById('searchBills'); if(sb) sb.value = '';
+  renderBills();
+  const domId = 'bill-summary-full-' + b.id;
+  const summary = document.getElementById(domId);
+  if(summary){
+    if(!summary.classList.contains('open')) toggleBillSummary(domId);
+    const card = summary.closest('.bill');
+    if(card) setTimeout(() => card.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
   }
 }
 
@@ -7195,7 +7270,10 @@ function renderTicker(){
   renderVotes();
   renderDeputes();
   renderNews();
-  renderChallenged();
+  // Attendu : renderChallenged charge le cache PUIS re-rend la liste des projets.
+  // Sans l'attendre, ce re-rendu tardif referme la carte ouverte par le lien
+  // profond (?pl=NUM) — d'où le await avant openBillFromQuery plus bas.
+  await renderChallenged();
   await loadSnoozedSections();
   applyLanguage();
   // Ouvre l'onglet correspondant à l'adresse d'arrivée (/votes, /ministres…).
@@ -7203,6 +7281,8 @@ function renderTicker(){
   history.replaceState({ view: bootView }, '', location.pathname + location.search);
   if(bootView !== 'apercu'){ goToTab(bootView, { fromHistory: true, noScroll: true }); }
   else { syncTitle('apercu'); }
+  // Lien profond partagé (/projets-de-loi?pl=NUM) : ouvre le projet ciblé.
+  openBillFromQuery();
   renderTicker();
 })();
 </script>
