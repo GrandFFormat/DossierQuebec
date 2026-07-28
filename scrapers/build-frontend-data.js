@@ -32,17 +32,22 @@ function shortSponsorName(raw) {
   return match ? `${match[2]} ${match[1]}` : trimmed;
 }
 
-function summaryToHtml(bill) {
-  if (!bill.summary) {
-    return '<p><em>Résumé non disponible pour ce projet de loi.</em></p>';
-  }
-  const lines = bill.summary
+// Convertit un texte à puces « - … » (une idée par ligne) en <ul>. Utilisé pour
+// le résumé FR et sa traduction EN. `emptyValue` = ce qu'on retourne si le texte
+// est vide (message pour le FR, null pour l'EN qui retombe alors sur le FR).
+function bulletsToHtml(text, emptyValue) {
+  if (!text) return emptyValue;
+  const lines = text
     .split('\n')
     .map((l) => l.trim())
     .filter((l) => l.startsWith('- '))
     .map((l) => l.slice(2).trim());
-  if (lines.length === 0) return `<p>${bill.summary}</p>`;
+  if (lines.length === 0) return `<p>${text}</p>`;
   return `<ul class="bill-summary-list">${lines.map((l) => `<li>${l}</li>`).join('')}</ul>`;
+}
+
+function summaryToHtml(bill) {
+  return bulletsToHtml(bill.summary, '<p><em>Résumé non disponible pour ce projet de loi.</em></p>');
 }
 
 function main() {
@@ -59,10 +64,10 @@ function main() {
     summary: summaryToHtml(b),
     summaryAiGenerated: Boolean(b.summaryAiGenerated),
     url: b.url,
-    urlEn: null,
-    titleEn: null,
-    noteEn: null,
-    summaryEn: null,
+    urlEn: b.urlEn || null,
+    titleEn: b.titleEn || null,
+    noteEn: b.noteEn || null,
+    summaryEn: b.summaryEn ? bulletsToHtml(b.summaryEn, null) : null,
     lastActivity: b.lastActivity,
     presentedOn: b.presentedOn || null,
   }));

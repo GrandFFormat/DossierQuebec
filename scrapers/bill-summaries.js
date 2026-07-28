@@ -97,6 +97,54 @@ async function summarizeBill(bill) {
   return { summarized: true };
 }
 
+// --- Traduction EN (titre + résumé + note) -------------------------------
+// Le titre et la note officiels sont en français ; le résumé est déjà généré
+// par IA en français. On les traduit vers l'anglais pour l'affichage bilingue.
+// Incrémental : on ne (re)traduit un projet que si son contenu source a changé
+// (signature enSource), donc pas de coût ni de churn quotidien inutile.
+const TRANSLATE_SYSTEM = `You are a professional French-to-English translator for an independent, non-partisan citizen watchdog site about Québec's National Assembly. Translate faithfully, neutrally and into clear, natural Canadian English. Do NOT add, omit, interpret or editorialize. If the source has bullet lines starting with "- ", keep exactly the same bullets, one idea per line, same order. Return ONLY valid JSON (no code fence, no preamble).`;
+
+function enSignature(bill) {
+  return `${bill.title || ''}${bill.summary || ''}${bill.note || ''}`;
+}
+
+async function translateBill(bill) {
+  const source = enSignature(bill);
+  if (bill.enSource === source && bill.titleEn) return { skipped: 'déjà à jour' };
+
+  const parts = [`French title: ${bill.title || ''}`];
+  if (bill.summary) parts.push(`French summary (keep the "- " bullets, one idea per line):\n${bill.summary}`);
+  if (bill.note) parts.push(`French status note: ${bill.note}`);
+  const wanted = ['"titleEn"'];
+  if (bill.summary) wanted.push('"summaryEn"');
+  if (bill.note) wanted.push('"noteEn"');
+  parts.push(`Return a JSON object with exactly these keys: ${wanted.join(', ')}.`);
+
+  const response = await client.messages.create({
+    model: MODEL,
+    max_tokens: 700,
+    thinking: { type: 'disabled' },
+    output_config: { effort: 'low' },
+    system: TRANSLATE_SYSTEM,
+    messages: [{ role: 'user', content: parts.join('\n\n') }],
+  });
+
+  const textBlock = response.content.find((b) => b.type === 'text');
+  if (!textBlock) return { skipped: 'réponse vide du modèle' };
+  let parsed;
+  try {
+    parsed = JSON.parse(textBlock.text.trim().replace(/^```(?:json)?\s*|\s*```$/g, ''));
+  } catch (e) {
+    return { skipped: 'JSON invalide' };
+  }
+
+  bill.titleEn = (parsed.titleEn && String(parsed.titleEn).trim()) || bill.title;
+  bill.summaryEn = bill.summary ? ((parsed.summaryEn && String(parsed.summaryEn).trim()) || null) : null;
+  bill.noteEn = bill.note ? ((parsed.noteEn && String(parsed.noteEn).trim()) || null) : null;
+  bill.enSource = source;
+  return { translated: true };
+}
+
 async function main() {
   const data = JSON.parse(readFileSync(BILLS_PATH, 'utf-8'));
 
@@ -132,6 +180,44 @@ async function main() {
 
   writeFileSync(BILLS_PATH, JSON.stringify(data, null, 2));
   console.log(`Terminé. ${done} résumés générés, ${skipped} ignorés, ${errors} erreurs.`);
+
+  // --- Passe 2 : traduction EN (incrémentale) ---
+  // Limite propre à cette passe : NE PAS réutiliser `limit` (calculé sur les
+  // candidats FR, souvent 0 puisque les résumés existent déjà).
+  const trLimit = process.env.SCRAPE_LIMIT ? Number(process.env.SCRAPE_LIMIT) : data.bills.length;
+  // Contrairement au résumé (qu'on ne génère pas pour les projets « laissés de
+  // côté »), on traduit le TITRE de TOUS les projets : ils apparaissent dans la
+  // liste « Tous » et afficheraient sinon un titre français en mode anglais.
+  const trTargets = data.bills.filter((b) => enSignature(b) !== b.enSource);
+  const trBills = trTargets.slice(0, trLimit);
+  console.log(`\n${trBills.length} projets de loi à traduire en anglais (titre/résumé/note).`);
+
+  let trDone = 0;
+  let trSkipped = 0;
+  let trErrors = 0;
+
+  for (const [i, bill] of trBills.entries()) {
+    try {
+      const result = await translateBill(bill);
+      if (result.translated) trDone++;
+      else {
+        trSkipped++;
+        console.log(`  ⏭ PL ${bill.num} (id ${bill.id}) : ${result.skipped}`);
+      }
+    } catch (err) {
+      trErrors++;
+      console.error(`  ⚠ PL ${bill.num} (id ${bill.id}) : ${err.message}`);
+    }
+
+    if ((i + 1) % 10 === 0) {
+      writeFileSync(BILLS_PATH, JSON.stringify(data, null, 2));
+      console.log(`  ...${i + 1}/${trBills.length} (sauvegardé)`);
+    }
+    await sleep(REQUEST_DELAY_MS);
+  }
+
+  writeFileSync(BILLS_PATH, JSON.stringify(data, null, 2));
+  console.log(`Traduction EN terminée. ${trDone} traduits, ${trSkipped} ignorés, ${trErrors} erreurs.`);
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
