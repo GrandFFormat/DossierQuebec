@@ -172,7 +172,7 @@ function buildBills(rows) {
 const PRESERVE_FIELDS = [
   'sponsor', 'presentationPdfUrl',
   'summary', 'summaryEn', 'summaryAiGenerated', 'summarySource', 'summaryGeneratedAt',
-  'titleEn',
+  'titleEn', 'noteEn', 'enSource',
 ];
 
 function mergePreviousEnrichment(bills) {
