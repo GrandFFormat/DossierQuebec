@@ -36,10 +36,18 @@ const summariesArgs = existsSync('api.env')
   ? ['--env-file=api.env', 'scrapers/bill-summaries.js']
   : ['scrapers/bill-summaries.js'];
 
+// Les pétitions bougent lentement : on ne les rafraîchit qu'une fois par semaine
+// (lundi UTC), pas chaque jour comme le reste. FORCE_PETITIONS=1 force la mise à
+// jour (pratique en local), et on force aussi si le fichier n'existe pas encore.
+const doPetitions =
+  new Date().getUTCDay() === 1 || // 0=dimanche, 1=lundi
+  process.env.FORCE_PETITIONS === '1' ||
+  !existsSync('data/petitions.json');
+
 // 1) Scrapers : source -> data/*.json
 run('Scrape : projets de loi (Données Québec)', ['scrapers/bills.js']);
 run('Scrape : détails des projets de loi (assnat)', ['scrapers/bill-details.js']);
-run('Scrape : pétitions ouvertes (assnat)', ['scrapers/petitions.js']);
+if (doPetitions) run('Scrape : pétitions ouvertes (assnat, hebdo)', ['scrapers/petitions.js']);
 run('Scrape : résumés IA + traductions (Claude)', summariesArgs, { optional: true });
 run('Scrape : députés (assnat)', ['scrapers/deputes.js']);
 run('Scrape : courriels des députés (assnat)', ['scrapers/depute-emails.js']);
@@ -81,7 +89,7 @@ run('Build : députés -> index.html', ['scrapers/build-deputes-data.js']);
 run('Build : courriels -> index.html', ['scrapers/build-depute-emails-data.js']);
 run('Build : votes -> index.html', ['scrapers/build-votes-data.js']);
 run('Build : ministres -> index.html', ['scrapers/build-ministers-data.js']);
-run('Build : pétitions -> index.html', ['scrapers/build-petitions-data.js']);
+if (doPetitions) run('Build : pétitions -> index.html (hebdo)', ['scrapers/build-petitions-data.js']);
 
 // 3) Pages de section pré-rendues (SEO) : depuis index.html -> *.html par section.
 //    Doit tourner APRÈS toutes les injections de données ci-dessus.
