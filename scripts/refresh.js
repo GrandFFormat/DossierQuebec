@@ -39,7 +39,8 @@ const summariesArgs = existsSync('api.env')
 // 1) Scrapers : source -> data/*.json
 run('Scrape : projets de loi (Données Québec)', ['scrapers/bills.js']);
 run('Scrape : détails des projets de loi (assnat)', ['scrapers/bill-details.js']);
-run('Scrape : résumés IA (Claude)', summariesArgs, { optional: true });
+run('Scrape : pétitions ouvertes (assnat)', ['scrapers/petitions.js']);
+run('Scrape : résumés IA + traductions (Claude)', summariesArgs, { optional: true });
 run('Scrape : députés (assnat)', ['scrapers/deputes.js']);
 run('Scrape : courriels des députés (assnat)', ['scrapers/depute-emails.js']);
 run('Scrape : votes (assnat)', ['scrapers/votes.js']);
@@ -80,6 +81,7 @@ run('Build : députés -> index.html', ['scrapers/build-deputes-data.js']);
 run('Build : courriels -> index.html', ['scrapers/build-depute-emails-data.js']);
 run('Build : votes -> index.html', ['scrapers/build-votes-data.js']);
 run('Build : ministres -> index.html', ['scrapers/build-ministers-data.js']);
+run('Build : pétitions -> index.html', ['scrapers/build-petitions-data.js']);
 
 // 3) Pages de section pré-rendues (SEO) : depuis index.html -> *.html par section.
 //    Doit tourner APRÈS toutes les injections de données ci-dessus.
