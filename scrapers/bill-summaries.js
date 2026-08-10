@@ -18,12 +18,13 @@
 // Nécessite la variable d'environnement ANTHROPIC_API_KEY (clé API, PAS un
 // abonnement Claude Pro/Code — voir la conversation pour le pourquoi).
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import Anthropic from '@anthropic-ai/sdk';
 import pdfParse from 'pdf-parse';
 
 const BILLS_PATH = 'data/bills.json';
+const PETITIONS_PATH = 'data/petitions.json';
 const REQUEST_DELAY_MS = 500;
 const USER_AGENT = 'veille-assnat-scraper/0.1 (projet citoyen independant, usage non commercial)';
 const MAX_PDF_CHARS = 60000; // ~15k tokens — au-delà, on tronque (projets de loi omnibus)
@@ -145,6 +146,53 @@ async function translateBill(bill) {
   return { translated: true };
 }
 
+// Traduit le titre d'une pétition (best effort, incrémental via enSource=titre).
+async function translatePetitionTitle(p) {
+  if (p.enSource === p.title && p.titleEn) return { skipped: 'déjà à jour' };
+  const response = await client.messages.create({
+    model: MODEL,
+    max_tokens: 300,
+    thinking: { type: 'disabled' },
+    output_config: { effort: 'low' },
+    system: TRANSLATE_SYSTEM,
+    messages: [{ role: 'user', content: `French petition title: ${p.title}\n\nReturn a JSON object with exactly this key: "titleEn".` }],
+  });
+  const textBlock = response.content.find((b) => b.type === 'text');
+  if (!textBlock) return { skipped: 'réponse vide du modèle' };
+  let parsed;
+  try {
+    parsed = JSON.parse(textBlock.text.trim().replace(/^```(?:json)?\s*|\s*```$/g, ''));
+  } catch {
+    return { skipped: 'JSON invalide' };
+  }
+  p.titleEn = (parsed.titleEn && String(parsed.titleEn).trim()) || p.title;
+  p.enSource = p.title;
+  return { translated: true };
+}
+
+// Passe best effort : traduit les titres de pétitions (data/petitions.json).
+// Séparée de main() sur les projets de loi ; ne bloque jamais si le fichier
+// n'existe pas encore (le scraper petitions.js tourne avant, mais on reste sûr).
+async function translatePetitions() {
+  if (!existsSync(PETITIONS_PATH)) return;
+  const pdata = JSON.parse(readFileSync(PETITIONS_PATH, 'utf-8'));
+  const targets = (pdata.petitions || []).filter((p) => p.enSource !== p.title || !p.titleEn);
+  if (targets.length === 0) return;
+  console.log(`\n${targets.length} titre(s) de pétition à traduire en anglais.`);
+  let done = 0;
+  for (const p of targets) {
+    try {
+      const r = await translatePetitionTitle(p);
+      if (r.translated) done++;
+    } catch (err) {
+      console.error(`  ⚠ pétition ${p.id} : ${err.message}`);
+    }
+    await sleep(REQUEST_DELAY_MS);
+  }
+  writeFileSync(PETITIONS_PATH, JSON.stringify(pdata, null, 2));
+  console.log(`Traduction des pétitions terminée. ${done} traduit(s).`);
+}
+
 async function main() {
   const data = JSON.parse(readFileSync(BILLS_PATH, 'utf-8'));
 
@@ -218,6 +266,9 @@ async function main() {
 
   writeFileSync(BILLS_PATH, JSON.stringify(data, null, 2));
   console.log(`Traduction EN terminée. ${trDone} traduits, ${trSkipped} ignorés, ${trErrors} erreurs.`);
+
+  // --- Passe 3 : titres de pétitions (best effort) ---
+  await translatePetitions();
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
