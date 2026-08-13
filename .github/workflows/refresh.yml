@@ -51,10 +51,16 @@ jobs:
         run: npm ci --omit=dev
 
       - name: Rafraîchir toutes les données
+        id: refresh
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: npm run refresh
 
+      # Rafraîchissement tolérant : `npm run refresh` sort 0 même si un scraper a
+      # échoué (il expose `builds_ok`/`failed` via $GITHUB_OUTPUT). On sort != 0
+      # UNIQUEMENT si un build/garde-fou a cassé — auquel cas l'étape ci-dessus a
+      # déjà échoué et le commit est sauté. Sinon on committe les données fraîches
+      # des sources qui ont fonctionné.
       - name: Committer et pousser s'il y a des changements
         run: |
           git config user.name "dossierquebec-bot"
@@ -72,3 +78,15 @@ jobs:
             git commit -m "Rafraîchissement auto des données ($TODAY)"
             git push
           fi
+
+      # Après le commit : si un ou des scrapers ont échoué (mais que le build a
+      # réussi), on marque quand même le run en échec pour être alerté qu'une
+      # source est tombée — les données des autres sont déjà publiées.
+      - name: Alerter si des scrapers ont échoué
+        if: ${{ steps.refresh.outputs.failed != '' }}
+        env:
+          FAILED: ${{ steps.refresh.outputs.failed }}
+        run: |
+          echo "::warning::Scrapers en échec (données de la veille conservées) : $FAILED"
+          echo "Le reste des données a été publié. Vérifier la ou les sources en panne."
+          exit 1

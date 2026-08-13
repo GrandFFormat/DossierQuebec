@@ -1,34 +1,35 @@
-// Orchestrateur du rafraîchissement complet des données (local ET CI).
+// Rafraîchissement TOLÉRANT des données (local ET CI).
 //
-// Lance chaque scraper puis chaque build d'injection dans le bon ordre. Un seul
-// script à retenir : `npm run refresh`. Utilisé aussi par le workflow GitHub
-// Actions (.github/workflows/refresh.yml) qui tourne chaque jour.
+// Avant, un seul scraper en échec (source bloquée, 403, panne réseau) arrêtait
+// TOUT le rafraîchissement — donc aucune donnée n'était publiée, même celles des
+// sources qui fonctionnaient (cf. l'échec transitoire du 2026-08-12). Désormais :
+// chaque scraper est lancé à tour de rôle ; s'il échoue, on le NOTE et on
+// CONTINUE. Le scraper en échec garde simplement ses données de la veille (son
+// data/*.json n'est pas réécrit) et le build assemble le site avec ce qui est
+// disponible.
 //
-// Ordre : d'abord les scrapers (source -> data/*.json), puis les builds
-// (data/*.json -> injection dans index.html). Chaque scraper tape UNE source et
-// n'invente rien.
+// Politique de sortie :
+//   - Un scraper qui échoue N'ARRÊTE PAS la chaîne (données partielles = publiables).
+//   - Le garde-fou anti-corruption OU un build qui échoue EST fatal : on ne publie
+//     pas un index.html cassé (exit 1 → le workflow saute le commit).
+//   - En CI, on écrit `builds_ok` et `failed` dans $GITHUB_OUTPUT : le workflow
+//     committe les données fraîches si builds_ok, PUIS marque le run en échec si
+//     « failed » n'est pas vide (alerte visuelle sans perdre les données).
 //
-// L'étape des résumés IA (bill-summaries) est « best effort » : si la clé
-// ANTHROPIC_API_KEY manque ou que l'API échoue, on log et on CONTINUE. Les
-// données civiques (nouveaux projets de loi, votes) et le déploiement ne doivent
-// jamais être bloqués par cet enrichissement optionnel et payant.
+// L'étape des résumés IA (bill-summaries) reste « best effort » : traitée comme
+// un scraper tolérant, un échec (clé absente, API en panne) ne bloque rien.
 //
 // La clé API vient de api.env en local (chargé si le fichier existe) ou des
 // variables d'environnement en CI (secret GitHub) — jamais codée en dur.
 
 import { spawnSync } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, appendFileSync } from 'node:fs';
 
-function run(label, nodeArgs, { optional = false } = {}) {
+// Lance un script node. Lève une erreur si le code de sortie n'est pas 0.
+function runOrThrow(label, nodeArgs) {
   console.log(`\n=== ${label} ===`);
   const res = spawnSync(process.execPath, nodeArgs, { stdio: 'inherit' });
-  if (res.status === 0) return true;
-  if (optional) {
-    console.warn(`⚠ « ${label} » a échoué (étape optionnelle, code ${res.status}) — on continue.`);
-    return false;
-  }
-  console.error(`✖ « ${label} » a échoué (code ${res.status}) — arrêt du rafraîchissement.`);
-  process.exit(res.status || 1);
+  if (res.status !== 0) throw new Error(`code ${res.status}`);
 }
 
 // En local, api.env fournit ANTHROPIC_API_KEY ; en CI, elle vient de l'env (secret).
@@ -37,28 +38,40 @@ const summariesArgs = existsSync('api.env')
   : ['scrapers/bill-summaries.js'];
 
 // Les pétitions bougent lentement : on ne les rafraîchit qu'une fois par semaine
-// (lundi UTC), pas chaque jour comme le reste. FORCE_PETITIONS=1 force la mise à
-// jour (pratique en local), et on force aussi si le fichier n'existe pas encore.
+// (lundi UTC), pas chaque jour. FORCE_PETITIONS=1 force la mise à jour (local),
+// et on force aussi si le fichier n'existe pas encore.
 const doPetitions =
   new Date().getUTCDay() === 1 || // 0=dimanche, 1=lundi
   process.env.FORCE_PETITIONS === '1' ||
   !existsSync('data/petitions.json');
 
-// 1) Scrapers : source -> data/*.json
-run('Scrape : projets de loi (Données Québec)', ['scrapers/bills.js']);
-run('Scrape : détails des projets de loi (assnat)', ['scrapers/bill-details.js']);
-if (doPetitions) run('Scrape : pétitions ouvertes (assnat, hebdo)', ['scrapers/petitions.js']);
-run('Scrape : résumés IA + traductions (Claude)', summariesArgs, { optional: true });
-run('Scrape : députés (assnat)', ['scrapers/deputes.js']);
-run('Scrape : courriels des députés (assnat)', ['scrapers/depute-emails.js']);
-run('Scrape : votes (assnat)', ['scrapers/votes.js']);
-run('Scrape : ministres (quebec.ca)', ['scrapers/ministers.js']);
+// 1) Scrapers (source -> data/*.json) — TOLÉRANT.
+const SCRAPERS = [
+  ['Scrape : projets de loi (Données Québec)', ['scrapers/bills.js']],
+  ['Scrape : détails des projets de loi (assnat)', ['scrapers/bill-details.js']],
+  ...(doPetitions ? [['Scrape : pétitions ouvertes (assnat, hebdo)', ['scrapers/petitions.js']]] : []),
+  ['Scrape : résumés IA + traductions (Claude)', summariesArgs],
+  ['Scrape : députés (assnat)', ['scrapers/deputes.js']],
+  ['Scrape : courriels des députés (assnat)', ['scrapers/depute-emails.js']],
+  ['Scrape : votes (assnat)', ['scrapers/votes.js']],
+  ['Scrape : ministres (quebec.ca)', ['scrapers/ministers.js']],
+];
 
-// 1.5) Garde-fou : on refuse de continuer (donc d'injecter dans index.html, de
-// committer et de déployer) si les données fraîches semblent catastrophiquement
-// cassées — typiquement une source qui change de format et vide un champ pour
-// tout le monde (déjà vu : régions des députés passées à 0). Seuils très bas :
-// on n'attrape que les effondrements évidents, jamais les variations normales.
+const failed = [];
+for (const [label, args] of SCRAPERS) {
+  try {
+    runOrThrow(label, args);
+  } catch (e) {
+    failed.push(label);
+    console.error(`⚠ « ${label} » a échoué (${e.message}) — on garde ses données précédentes et on continue.`);
+  }
+}
+
+// 1.5) Garde-fou anti-corruption : refuse de publier si les données fraîches
+// semblent catastrophiquement cassées (une source qui change de format et vide
+// un champ pour tout le monde — déjà vu : régions des députés passées à 0).
+// Seuils très bas : on n'attrape que les effondrements évidents. Un scraper qui
+// a ÉCHOUÉ garde ses données de la veille → il passe ce garde-fou (normal).
 function sanityCheck() {
   const arr = (path, key) => {
     try { return JSON.parse(readFileSync(path, 'utf-8'))[key] || []; }
@@ -76,23 +89,43 @@ function sanityCheck() {
   if (failures.length) {
     console.error('\n✖ Garde-fou : données suspectes — AUCUNE injection, aucun commit.');
     for (const [label, n, min] of failures) console.error(`   - ${label} : ${n} (minimum attendu : ${min})`);
-    console.error('  Probable changement de format d\'une source. À vérifier à la main avant de rafraîchir.');
-    process.exit(2);
+    throw new Error('garde-fou anti-corruption déclenché');
   }
   console.log('\n✓ Garde-fou OK : ' + checks.map(([l, n]) => `${l}=${n}`).join(', '));
 }
-sanityCheck();
 
-// 2) Builds : data/*.json -> injection dans index.html
-run('Build : projets de loi -> index.html', ['scrapers/build-frontend-data.js']);
-run('Build : députés -> index.html', ['scrapers/build-deputes-data.js']);
-run('Build : courriels -> index.html', ['scrapers/build-depute-emails-data.js']);
-run('Build : votes -> index.html', ['scrapers/build-votes-data.js']);
-run('Build : ministres -> index.html', ['scrapers/build-ministers-data.js']);
-if (doPetitions) run('Build : pétitions -> index.html (hebdo)', ['scrapers/build-petitions-data.js']);
+// 2) Builds (data/*.json -> index.html) — FATAL : on ne publie pas un site cassé.
+let publishOk = true;
+try {
+  sanityCheck();
+  const BUILDS = [
+    ['Build : projets de loi -> index.html', ['scrapers/build-frontend-data.js']],
+    ['Build : députés -> index.html', ['scrapers/build-deputes-data.js']],
+    ['Build : courriels -> index.html', ['scrapers/build-depute-emails-data.js']],
+    ['Build : votes -> index.html', ['scrapers/build-votes-data.js']],
+    ['Build : ministres -> index.html', ['scrapers/build-ministers-data.js']],
+    ...(doPetitions ? [['Build : pétitions -> index.html (hebdo)', ['scrapers/build-petitions-data.js']]] : []),
+    // Pages de section pré-rendues (SEO) : APRÈS toutes les injections ci-dessus.
+    ['Build : pages de section (SEO) -> *.html', ['scripts/build-section-pages.js']],
+  ];
+  for (const [label, args] of BUILDS) runOrThrow(label, args);
+} catch (e) {
+  publishOk = false;
+  console.error(`\n✖ Étape critique échouée (${e.message}) — rien ne sera publié.`);
+}
 
-// 3) Pages de section pré-rendues (SEO) : depuis index.html -> *.html par section.
-//    Doit tourner APRÈS toutes les injections de données ci-dessus.
-run('Build : pages de section (SEO) -> *.html', ['scripts/build-section-pages.js']);
+console.log('\n──────── Résumé du rafraîchissement ────────');
+console.log(`  scrapers en échec : ${failed.length ? failed.join(' | ') : 'aucun'}`);
+console.log(`  garde-fou + build : ${publishOk ? 'OK' : 'ÉCHEC'}`);
 
-console.log('\n✓ Rafraîchissement complet terminé.');
+// Sorties pour GitHub Actions (ignorées en local, où $GITHUB_OUTPUT n'existe pas).
+if (process.env.GITHUB_OUTPUT) {
+  appendFileSync(process.env.GITHUB_OUTPUT, `builds_ok=${publishOk}\n`);
+  appendFileSync(process.env.GITHUB_OUTPUT, `failed=${failed.join(' | ')}\n`);
+}
+
+// Fatal UNIQUEMENT si le garde-fou/build a cassé. Un scraper raté ne fait pas
+// échouer ce process (sinon l'étape de commit serait sautée et on ne publierait
+// pas les données fraîches des autres) : c'est le workflow qui transforme
+// « failed » en échec de run APRÈS le commit, pour l'alerte.
+process.exit(publishOk ? 0 : 1);
