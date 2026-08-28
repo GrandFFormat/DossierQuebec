@@ -26,6 +26,10 @@ import * as cheerio from 'cheerio';
 const URL = 'https://www.assnat.qc.ca/fr/exprimez-votre-opinion/petition/signer-petition/index.html';
 const OUT_PATH = 'data/petitions.json';
 const USER_AGENT = 'veille-assnat-scraper/0.1 (projet citoyen independant, usage non commercial)';
+// Page « Signer une pétition » (FR/EN) — cible de TOUS les liens de pétition.
+// Les URL par pétition d'assnat renvoient 404 (pas de page publique stable).
+const SIGN_URL_FR = 'https://www.assnat.qc.ca/fr/exprimez-votre-opinion/petition/signer-petition/index.html';
+const SIGN_URL_EN = 'https://www.assnat.qc.ca/en/exprimez-votre-opinion/petition/signer-petition/index.html';
 
 // "Nom, Prénom" -> "Prénom Nom" (comme le reste du site).
 function normalizeSponsor(raw) {
@@ -62,7 +66,12 @@ function scrapePetitions(html) {
     const id = idMatch ? idMatch[1] : null;
     const title = (link.text().trim() || $(tds[0]).text().trim()).replace(/\s+/g, ' ');
     if (!id || !title) return;
-    const url = href.startsWith('http') ? href : new URL(href, 'https://www.assnat.qc.ca').href;
+    // ⚠️ Les URL individuelles « Petition-XXXX/index.html » présentes dans le
+    // tableau renvoient 404 (pas de page publique stable par pétition ; la
+    // signature se fait via un formulaire JS sur la page générale). On pointe
+    // donc TOUJOURS vers la page « Signer une pétition » (vérifiée 200, FR/EN)
+    // plutôt que vers un lien mort. L'`id` reste conservé pour l'agrégation et
+    // la clé de traduction.
     petitions.push({
       id,
       title,
@@ -72,8 +81,8 @@ function scrapePetitions(html) {
       start: $(tds[2]).text().trim(),
       end: $(tds[3]).text().trim(),
       count: parseCount($(tds[4]).text()),
-      url,
-      urlEn: url.replace('/fr/', '/en/'),
+      url: SIGN_URL_FR,
+      urlEn: SIGN_URL_EN,
     });
   });
   return petitions;
@@ -102,8 +111,13 @@ function carryTranslations(petitions) {
 async function main() {
   const html = await fetchPage(URL);
   const petitions = scrapePetitions(html);
-  // Tableau présent mais 0 pétition = légitime (aucune pétition ouverte) : on
-  // écrit une liste vide, le site affiche son état « aucune pétition ».
+  // La liste des pétitions est parfois rendue côté serveur, parfois injectée en
+  // AJAX (réponse sans lignes). Si on n'extrait AUCUNE pétition, on considère que
+  // c'est une réponse incomplète et on ÉCHOUE (garde les données de la veille via
+  // le rafraîchissement tolérant) — plutôt que de vider la liste du site.
+  if (petitions.length === 0) {
+    throw new Error('0 pétition extraite (réponse AJAX/incomplète probable) — données précédentes conservées.');
+  }
   carryTranslations(petitions);
   writeFileSync(OUT_PATH, JSON.stringify({ scrapedAt: new Date().toISOString(), petitions }, null, 2));
   console.log(`${petitions.length} pétition(s) ouverte(s) écrite(s) dans ${OUT_PATH}.`);
