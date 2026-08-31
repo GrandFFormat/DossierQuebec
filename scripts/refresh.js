@@ -49,7 +49,11 @@ const doPetitions =
 const SCRAPERS = [
   ['Scrape : projets de loi (Données Québec)', ['scrapers/bills.js']],
   ['Scrape : détails des projets de loi (assnat)', ['scrapers/bill-details.js']],
-  ...(doPetitions ? [['Scrape : pétitions ouvertes (assnat, hebdo)', ['scrapers/petitions.js']]] : []),
+  // `soft: true` = source lente/peu critique dont une panne NE déclenche PAS
+  // d'alerte (run vert). Les pétitions (hebdo) sont capricieuses côté assnat
+  // (liste parfois servie en AJAX) : une semaine ratée = données de la veille
+  // conservées, sans rendre le run rouge inutilement.
+  ...(doPetitions ? [['Scrape : pétitions ouvertes (assnat, hebdo)', ['scrapers/petitions.js'], { soft: true }]] : []),
   ['Scrape : résumés IA + traductions (Claude)', summariesArgs],
   ['Scrape : députés (assnat)', ['scrapers/deputes.js']],
   ['Scrape : courriels des députés (assnat)', ['scrapers/depute-emails.js']],
@@ -57,12 +61,13 @@ const SCRAPERS = [
   ['Scrape : ministres (quebec.ca)', ['scrapers/ministers.js']],
 ];
 
-const failed = [];
-for (const [label, args] of SCRAPERS) {
+const failed = [];      // sources critiques → déclenchent l'alerte (run rouge)
+const softFailed = [];  // sources « douces » (pétitions) → juste un log, run vert
+for (const [label, args, opts = {}] of SCRAPERS) {
   try {
     runOrThrow(label, args);
   } catch (e) {
-    failed.push(label);
+    (opts.soft ? softFailed : failed).push(label);
     console.error(`⚠ « ${label} » a échoué (${e.message}) — on garde ses données précédentes et on continue.`);
   }
 }
@@ -115,8 +120,9 @@ try {
 }
 
 console.log('\n──────── Résumé du rafraîchissement ────────');
-console.log(`  scrapers en échec : ${failed.length ? failed.join(' | ') : 'aucun'}`);
-console.log(`  garde-fou + build : ${publishOk ? 'OK' : 'ÉCHEC'}`);
+console.log(`  scrapers critiques en échec : ${failed.length ? failed.join(' | ') : 'aucun'}`);
+console.log(`  sources douces en échec     : ${softFailed.length ? softFailed.join(' | ') : 'aucune'} (garde les données de la veille, pas d'alerte)`);
+console.log(`  garde-fou + build           : ${publishOk ? 'OK' : 'ÉCHEC'}`);
 
 // Sorties pour GitHub Actions (ignorées en local, où $GITHUB_OUTPUT n'existe pas).
 if (process.env.GITHUB_OUTPUT) {

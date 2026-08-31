@@ -108,15 +108,33 @@ function carryTranslations(petitions) {
   }
 }
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
 async function main() {
-  const html = await fetchPage(URL);
-  const petitions = scrapePetitions(html);
-  // La liste des pétitions est parfois rendue côté serveur, parfois injectée en
-  // AJAX (réponse sans lignes). Si on n'extrait AUCUNE pétition, on considère que
-  // c'est une réponse incomplète et on ÉCHOUE (garde les données de la veille via
-  // le rafraîchissement tolérant) — plutôt que de vider la liste du site.
-  if (petitions.length === 0) {
-    throw new Error('0 pétition extraite (réponse AJAX/incomplète probable) — données précédentes conservées.');
+  // La liste est parfois rendue côté serveur, parfois servie en AJAX (réponse
+  // sans tableau/lignes). On réessaie quelques fois, espacé, pour attraper la
+  // version complète. Si toutes les tentatives donnent 0 pétition, on ÉCHOUE
+  // (source « douce » dans refresh.js → garde les données de la veille, pas
+  // d'alerte) — jamais on ne vide la liste du site.
+  const ATTEMPTS = 4;
+  let petitions = null;
+  let lastErr = null;
+  for (let i = 1; i <= ATTEMPTS; i++) {
+    try {
+      const html = await fetchPage(URL);
+      const p = scrapePetitions(html);
+      if (p.length > 0) { petitions = p; break; }
+      lastErr = new Error('0 pétition extraite (réponse AJAX/incomplète probable)');
+    } catch (e) {
+      lastErr = e;
+    }
+    if (i < ATTEMPTS) {
+      console.warn(`  tentative ${i}/${ATTEMPTS} infructueuse — nouvel essai dans 8 s…`);
+      await sleep(8000);
+    }
+  }
+  if (!petitions) {
+    throw new Error(`${ATTEMPTS} tentatives infructueuses (${lastErr ? lastErr.message : 'inconnu'}) — données précédentes conservées.`);
   }
   carryTranslations(petitions);
   writeFileSync(OUT_PATH, JSON.stringify({ scrapedAt: new Date().toISOString(), petitions }, null, 2));
