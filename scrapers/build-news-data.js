@@ -44,19 +44,33 @@ function main() {
   const votes = lire('data/votes.json', 'votes');
   const items = [];
 
+  // ⚠️ On lit UNIQUEMENT le champ `note`, qui reprend mot pour mot la ligne de
+  // statut officielle d'assnat (« Présenté le AAAA-MM-JJ », « Sanctionné le
+  // AAAA-MM-JJ »). C'est une citation, donc une date exacte.
+  //
+  // NE PAS utiliser `presentedOn` ni `lastActivity` ici : ce sont des
+  // APPROXIMATIONS. `presentedOn` prend le premier événement daté sous
+  // « Présentation », ce qui, pour certains projets, attrape un vote rapproché —
+  // d'où des aberrations (PL 7 et PL 16 « présentés et sanctionnés le même
+  // jour »). C'est aussi pourquoi la carte d'un projet dit prudemment « Suivi
+  // depuis le » et non « déposé le ». Un événement daté publié doit être exact,
+  // pas approximatif : on préfère afficher moins d'événements que des faux.
   for (const b of bills) {
     const titreFr = court(b.title);
     const titreEn = court(b.titleEn || b.title);
-    if (b.presentedOn) {
+    const note = String(b.note || '');
+    const presente = note.match(/^Présenté le (\d{4}-\d{2}-\d{2})/);
+    if (presente) {
       items.push({
-        date: b.presentedOn,
+        date: presente[1],
         text: `Dépôt du projet de loi n° ${b.num} — ${titreFr}`,
         textEn: `Bill ${b.num} introduced — ${titreEn}`,
       });
     }
-    if (b.status === 'sanctionne' && b.lastActivity) {
+    const sanctionne = note.match(/^Sanctionné le (\d{4}-\d{2}-\d{2})/);
+    if (sanctionne) {
       items.push({
-        date: b.lastActivity,
+        date: sanctionne[1],
         text: `Sanction du projet de loi n° ${b.num} — ${titreFr}`,
         textEn: `Bill ${b.num} assented to — ${titreEn}`,
       });

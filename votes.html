@@ -449,6 +449,8 @@
   .news-item:last-child{border-bottom:none;}
   .news-date{flex:none; width:90px; font-family:'Archivo Narrow',sans-serif; font-size:11px; color:var(--gold); padding-top:2px;}
   .news-body p{margin:0; font-size:13.5px; line-height:1.55; color:var(--ink);}
+  /* Plusieurs événements sous une même date : on les sépare légèrement. */
+  .news-body p + p{margin-top:7px;}
   .calendar-box{
     background:var(--ink); color:var(--paper-2); border-radius:var(--radius);
     padding:20px 22px; margin-bottom:26px;
@@ -6181,7 +6183,7 @@ function initials(name){
 // Vrais éléments datés, tirés de la page d'accueil assnat.qc.ca (relevés le 12 juin 2026)
 /* NEWS_DATA_START — généré par scrapers/build-news-data.js à partir de data/bills.json
    et data/votes.json. Ne pas éditer à la main : relancer le build.
-   Généré le 2026-09-09T14:25:00.386Z */
+   Généré le 2026-09-09T16:42:29.574Z */
 const newsItems = [
   {
     "date": "2026-06-12",
@@ -6313,13 +6315,6 @@ const newsItems = [
     "date": "2026-06-05",
     "label": "5 juin 2026",
     "labelEn": "June 5, 2026",
-    "text": "Dépôt du projet de loi n° 9 — Loi visant à prévenir les effets nocifs de la boisson énergisante sur la santé des jeunes",
-    "textEn": "Bill 9 introduced — Act to prevent the harmful effects of energy drinks on young people's health"
-  },
-  {
-    "date": "2026-06-05",
-    "label": "5 juin 2026",
-    "labelEn": "June 5, 2026",
     "text": "Dépôt du projet de loi n° 691 — Loi sur le maintien de l’autonomie des personnes aînées",
     "textEn": "Bill 691 introduced — Act to Maintain the Autonomy of Older Persons"
   },
@@ -6336,13 +6331,6 @@ const newsItems = [
     "labelEn": "June 5, 2026",
     "text": "30 votes nominatifs tenus à l'Assemblée.",
     "textEn": "30 recorded divisions held in the Assembly."
-  },
-  {
-    "date": "2026-06-04",
-    "label": "4 juin 2026",
-    "labelEn": "June 4, 2026",
-    "text": "Dépôt du projet de loi n° 7 — Loi n° 2 sur les crédits, 2026-2027",
-    "textEn": "Bill 7 introduced — Appropriation Act No. 2, 2026-2027"
   },
   {
     "date": "2026-06-04",
@@ -6439,13 +6427,6 @@ const newsItems = [
     "date": "2026-05-13",
     "label": "13 mai 2026",
     "labelEn": "May 13, 2026",
-    "text": "Dépôt du projet de loi n° 4 — Loi sur la communication de renseignements aux fins de protection contre la violence d’un partenaire int…",
-    "textEn": "Bill 4 introduced — Act respecting the disclosure of information for the protection against intimate partner violence and am…"
-  },
-  {
-    "date": "2026-05-13",
-    "label": "13 mai 2026",
-    "labelEn": "May 13, 2026",
     "text": "Dépôt du projet de loi n° 696 — Loi visant à garantir la liberté des personnes exploitant un établissement d’hébergement touristique qua…",
     "textEn": "Bill 696 introduced — Act to guarantee the freedom of persons operating a tourist accommodation establishment with regard to t…"
   },
@@ -6460,15 +6441,15 @@ const newsItems = [
     "date": "2026-05-12",
     "label": "12 mai 2026",
     "labelEn": "May 12, 2026",
-    "text": "1 vote nominatif tenu à l'Assemblée.",
-    "textEn": "1 recorded division held in the Assembly."
+    "text": "Dépôt du projet de loi n° 6 — Loi donnant suite à des mesures fiscales annoncées lors du discours sur le budget du 18 mars 2026 et du…",
+    "textEn": "Bill 6 introduced — Act to give effect to fiscal measures announced in the budget speech of 18 March 2026 and in the update…"
   },
   {
-    "date": "2026-05-07",
-    "label": "7 mai 2026",
-    "labelEn": "May 7, 2026",
-    "text": "Dépôt du projet de loi n° 3 — Loi visant à assurer la représentation effective des électeurs",
-    "textEn": "Bill 3 introduced — Act to ensure the effective representation of electors"
+    "date": "2026-05-12",
+    "label": "12 mai 2026",
+    "labelEn": "May 12, 2026",
+    "text": "1 vote nominatif tenu à l'Assemblée.",
+    "textEn": "1 recorded division held in the Assembly."
   },
   {
     "date": "2026-05-07",
@@ -6488,13 +6469,6 @@ const newsItems = [
     "date": "2026-05-06",
     "label": "6 mai 2026",
     "labelEn": "May 6, 2026",
-    "text": "Dépôt du projet de loi n° 2 — Loi permettant au Parlement du Québec de préserver le principe de la souveraineté parlementaire à l’égar…",
-    "textEn": "Bill 2 introduced — Act to enable the Parliament of Québec to preserve the principle of parliamentary sovereignty with regar…"
-  },
-  {
-    "date": "2026-05-06",
-    "label": "6 mai 2026",
-    "labelEn": "May 6, 2026",
     "text": "Dépôt du projet de loi n° 191 — Loi mettant en place des mesures concernant les approches complémentaires et intégratives en santé",
     "textEn": "Bill 191 introduced — Act respecting measures concerning complementary and integrative health approaches"
   },
@@ -6504,13 +6478,6 @@ const newsItems = [
     "labelEn": "May 6, 2026",
     "text": "2 votes nominatifs tenus à l'Assemblée.",
     "textEn": "2 recorded divisions held in the Assembly."
-  },
-  {
-    "date": "2026-04-02",
-    "label": "2 avril 2026",
-    "labelEn": "April 2, 2026",
-    "text": "Dépôt du projet de loi n° 205 — Loi concernant un immeuble situé sur le territoire de la Ville de Québec",
-    "textEn": "Bill 205 introduced — Act respecting a building located in the territory of Ville de Québec"
   },
   {
     "date": "2026-04-02",
@@ -6607,20 +6574,6 @@ const newsItems = [
     "date": "2026-03-26",
     "label": "26 mars 2026",
     "labelEn": "March 26, 2026",
-    "text": "Dépôt du projet de loi n° 24 — Loi protégeant le consommateur contre l’utilisation trompeuse ou frauduleuse de l’identité ou de l’image…",
-    "textEn": "Bill 24 introduced — Act to protect consumers against misleading or fraudulent use of a person's identity or image"
-  },
-  {
-    "date": "2026-03-26",
-    "label": "26 mars 2026",
-    "labelEn": "March 26, 2026",
-    "text": "Dépôt du projet de loi n° 18 — Loi modifiant les critères du vote de l’électeur hors Québec",
-    "textEn": "Bill 18 introduced — Act to Amend the Criteria for Voting by Electors Outside Québec"
-  },
-  {
-    "date": "2026-03-26",
-    "label": "26 mars 2026",
-    "labelEn": "March 26, 2026",
     "text": "4 votes nominatifs tenus à l'Assemblée.",
     "textEn": "4 recorded divisions held in the Assembly."
   },
@@ -6628,29 +6581,8 @@ const newsItems = [
     "date": "2026-03-25",
     "label": "25 mars 2026",
     "labelEn": "March 25, 2026",
-    "text": "Dépôt du projet de loi n° 22 — Loi bonifiant les pouvoirs d’intervention des municipalités et modifiant d’autres dispositions législati…",
-    "textEn": "Bill 22 introduced — Act to enhance the intervention powers of municipalities and to amend other legislative provisions"
-  },
-  {
-    "date": "2026-03-25",
-    "label": "25 mars 2026",
-    "labelEn": "March 25, 2026",
     "text": "1 vote nominatif tenu à l'Assemblée.",
     "textEn": "1 recorded division held in the Assembly."
-  },
-  {
-    "date": "2026-03-24",
-    "label": "24 mars 2026",
-    "labelEn": "March 24, 2026",
-    "text": "Dépôt du projet de loi n° 23 — Loi visant principalement à mieux accompagner les personnes dont l’état mental pourrait représenter un r…",
-    "textEn": "Bill 23 introduced — Act mainly to better support persons whose mental state could pose a risk to their own safety or that of…"
-  },
-  {
-    "date": "2026-03-24",
-    "label": "24 mars 2026",
-    "labelEn": "March 24, 2026",
-    "text": "Dépôt du projet de loi n° 204 — Loi concernant la Ville de Gatineau",
-    "textEn": "Bill 204 introduced — Act respecting the Ville de Gatineau"
   },
   {
     "date": "2026-03-24",
@@ -6670,22 +6602,8 @@ const newsItems = [
     "date": "2026-03-19",
     "label": "19 mars 2026",
     "labelEn": "March 19, 2026",
-    "text": "Dépôt du projet de loi n° 26 — Loi n° 1 sur les crédits, 2026-2027",
-    "textEn": "Bill 26 introduced — Appropriation Act No. 1, 2026-2027"
-  },
-  {
-    "date": "2026-03-19",
-    "label": "19 mars 2026",
-    "labelEn": "March 19, 2026",
     "text": "5 votes nominatifs tenus à l'Assemblée.",
     "textEn": "5 recorded divisions held in the Assembly."
-  },
-  {
-    "date": "2026-03-18",
-    "label": "18 mars 2026",
-    "labelEn": "March 18, 2026",
-    "text": "Dépôt du projet de loi n° 6 — Loi donnant suite à des mesures fiscales annoncées lors du discours sur le budget du 18 mars 2026 et du…",
-    "textEn": "Bill 6 introduced — Act to give effect to fiscal measures announced in the budget speech of 18 March 2026 and in the update…"
   },
   {
     "date": "2026-03-18",
@@ -6742,6 +6660,90 @@ const newsItems = [
     "labelEn": "February 25, 2026",
     "text": "Dépôt du projet de loi n° 497 — Loi visant à assurer la qualité de l’air",
     "textEn": "Bill 497 introduced — Act to ensure air quality"
+  },
+  {
+    "date": "2026-02-25",
+    "label": "25 février 2026",
+    "labelEn": "February 25, 2026",
+    "text": "3 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "3 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-02-24",
+    "label": "24 février 2026",
+    "labelEn": "February 24, 2026",
+    "text": "Sanction du projet de loi n° 111 — Loi modernisant la Loi sur les coopératives et modifiant d’autres dispositions",
+    "textEn": "Bill 111 assented to — Act to modernize the Act respecting cooperatives and to amend other provisions"
+  },
+  {
+    "date": "2026-02-24",
+    "label": "24 février 2026",
+    "labelEn": "February 24, 2026",
+    "text": "1 vote nominatif tenu à l'Assemblée.",
+    "textEn": "1 recorded division held in the Assembly."
+  },
+  {
+    "date": "2026-02-19",
+    "label": "19 février 2026",
+    "labelEn": "February 19, 2026",
+    "text": "2 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "2 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-02-18",
+    "label": "18 février 2026",
+    "labelEn": "February 18, 2026",
+    "text": "3 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "3 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-02-17",
+    "label": "17 février 2026",
+    "labelEn": "February 17, 2026",
+    "text": "Dépôt du projet de loi n° 498 — Loi retirant des freins à l’efficacité du système de santé",
+    "textEn": "Bill 498 introduced — Act removing barriers to the efficiency of the health system"
+  },
+  {
+    "date": "2026-02-17",
+    "label": "17 février 2026",
+    "labelEn": "February 17, 2026",
+    "text": "1 vote nominatif tenu à l'Assemblée.",
+    "textEn": "1 recorded division held in the Assembly."
+  },
+  {
+    "date": "2026-02-12",
+    "label": "12 février 2026",
+    "labelEn": "February 12, 2026",
+    "text": "4 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "4 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-02-11",
+    "label": "11 février 2026",
+    "labelEn": "February 11, 2026",
+    "text": "2 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "2 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-02-05",
+    "label": "5 février 2026",
+    "labelEn": "February 5, 2026",
+    "text": "2 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "2 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-02-04",
+    "label": "4 février 2026",
+    "labelEn": "February 4, 2026",
+    "text": "1 vote nominatif tenu à l'Assemblée.",
+    "textEn": "1 recorded division held in the Assembly."
+  },
+  {
+    "date": "2026-02-03",
+    "label": "3 février 2026",
+    "labelEn": "February 3, 2026",
+    "text": "2 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "2 recorded divisions held in the Assembly."
   }
 ];
 /* NEWS_DATA_END */
@@ -6768,10 +6770,20 @@ function renderNews(){
         : "Rien de neuf depuis le 12 juin 2026 — et c'est normal. L'Assemblée a suspendu ses travaux ce jour-là, puis a été dissoute le 27 août. Il n'y aura pas de nouvelle activité parlementaire avant la rentrée de la nouvelle Assemblée, le 17 novembre 2026. Ce qui suit est le dernier état des travaux de la 43<sup>e</sup> législature."}</div>`
     : '';
 
-  document.getElementById('newsList').innerHTML = avisDissolution + visible.map(n => `
+  // Regroupé PAR JOUR : une même date revenait jusqu'à huit fois de suite, ce
+  // qui noyait le contenu sous des en-têtes répétés. Un bloc par journée, avec
+  // tous ses événements en dessous.
+  const parJour = [];
+  for(const n of visible){
+    const dernier = parJour[parJour.length - 1];
+    if(dernier && dernier.date === n.date) dernier.items.push(n);
+    else parJour.push({ date: n.date, label: isEn ? (n.labelEn||n.label) : n.label, items: [n] });
+  }
+
+  document.getElementById('newsList').innerHTML = avisDissolution + parJour.map(j => `
     <div class="news-item">
-      <div class="news-date">${isEn ? (n.labelEn||n.label) : n.label}</div>
-      <div class="news-body"><p>${isEn ? (n.textEn||n.text) : n.text}</p></div>
+      <div class="news-date">${j.label}</div>
+      <div class="news-body">${j.items.map(n => `<p>${isEn ? (n.textEn||n.text) : n.text}</p>`).join('')}</div>
     </div>
   `).join('') + (hasMore ? `<button class="bill-more" style="margin-top:14px; border:none; cursor:pointer;" onclick="loadMoreNews()">${moreBtn}</button>` : `<div class="no-results">${noMore}</div>`);
 }
