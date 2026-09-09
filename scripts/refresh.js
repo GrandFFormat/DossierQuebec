@@ -36,6 +36,9 @@ function runOrThrow(label, nodeArgs) {
 const summariesArgs = existsSync('api.env')
   ? ['--env-file=api.env', 'scrapers/bill-summaries.js']
   : ['scrapers/bill-summaries.js'];
+const promisesArgs = existsSync('api.env')
+  ? ['--env-file=api.env', 'scrapers/promises.js']
+  : ['scrapers/promises.js'];
 
 // Les pétitions bougent lentement : on ne les rafraîchit qu'une fois par semaine
 // (lundi UTC), pas chaque jour. FORCE_PETITIONS=1 force la mise à jour (local),
@@ -55,6 +58,10 @@ const SCRAPERS = [
   // conservées, sans rendre le run rouge inutilement.
   ...(doPetitions ? [['Scrape : pétitions ouvertes (assnat, hebdo)', ['scrapers/petitions.js'], { soft: true }]] : []),
   ['Scrape : résumés IA + traductions (Claude)', summariesArgs],
+  // Promesses électorales : extraction IA des plateformes officielles, PUIS
+  // vérification que chaque citation existe mot pour mot dans la source.
+  // « soft » : source lente et dépendante de l'IA, une panne n'alerte pas.
+  ['Scrape : promesses électorales (Claude + vérif)', promisesArgs, { soft: true }],
   ['Scrape : députés (assnat)', ['scrapers/deputes.js']],
   ['Scrape : courriels des députés (assnat)', ['scrapers/depute-emails.js']],
   ['Scrape : votes (assnat)', ['scrapers/votes.js']],
