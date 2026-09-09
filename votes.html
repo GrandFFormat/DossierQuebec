@@ -1887,6 +1887,9 @@ function goToFederal(evt){
       </div>
     </div>
 
+    <!-- Pourquoi la CAQ est absente. Une absence non expliquée se lit comme un
+         parti pris : tant qu'elle n'a pas publié de plateforme, on dit pourquoi. -->
+    <div class="info-box" data-i18n="prom.caq">Une seule source est acceptée ici : la <b>plateforme officielle du parti</b>, citée mot pour mot. Au 9 septembre 2026, la <b>Coalition avenir Québec</b> n'avait publié aucune plateforme consolidée — elle n'apparaît donc pas dans la liste, et y entrera automatiquement le jour où elle en publiera une. Les engagements rapportés par les médias ne sont pas repris : la presse québécoise a retiré son contenu de l'usage par l'IA, et les demandes d'autorisation envoyées restent sans réponse.</div>
     <div class="section-head min-group-head" id="promResultHead">
       <div><h2 id="promResultTitle">Toutes les promesses</h2></div>
       <span class="head-note" id="promResultNote"></span>
@@ -2429,6 +2432,7 @@ const translations = {
     'prom.m1':"Exact quote",
     'prom.m2':"Source linked",
     'prom.m3':"No judgment",
+    'prom.caq':"Only one source is accepted here: the <b>party's official platform</b>, quoted word for word. As of September 9, 2026, the <b>Coalition avenir Québec</b> had not published a consolidated platform — it therefore does not appear in the list, and will be added automatically the day it publishes one. Commitments reported by news outlets are not used: Quebec news organizations have opted their content out of AI use, and the permission requests sent to them remain unanswered.",
     'prom.next.h':"And after October 5?",
     'prom.next.p':"The new Assembly sits from <b>November 17, 2026</b>. From then on, every bill introduced will be placed next to the promise it matches — and the absence of a bill on a commitment will be just as visible. That is the follow-up nobody does past election week.",
     'dissp.h':"⚠️ These bills never became law",
@@ -6930,7 +6934,7 @@ const petitions = [
 
 /* PROMISES_DATA_START — généré par scrapers/build-promises-data.js à partir de
    data/promises.json (saisi à la main). Éditer le JSON, pas ce bloc.
-   Généré le 2026-09-09T14:30:04.767Z */
+   Généré le 2026-09-09T22:14:20.397Z */
 const promises = [
   {
     "id": "qs-97f94166",
@@ -7138,17 +7142,6 @@ const promises = [
     "sourceLabel": "Parti Québécois — site officiel",
     "sourceUrl": "https://pq.org/",
     "sourceType": "primaire",
-    "capturedAt": "2026-09-09",
-    "draft": false
-  },
-  {
-    "id": "caq-churchill",
-    "party": "CAQ",
-    "theme": "Énergie",
-    "quote": "Le contrat de Churchill Falls, à 70 milliards de dollars, pour générer de l'électricité.",
-    "sourceLabel": "Noovo Info — « Les premières promesses électorales » (27 août 2026). Au 9 septembre 2026, aucune plateforme électorale consolidée n'était publiée sur le site de la CAQ ; source journalistique en attendant.",
-    "sourceUrl": "https://www.noovo.info/nouvelles/politique/elections-quebec/article/les-premieres-promesses-electorales-de-la-caq-du-plq-du-pq-de-qs-et-du-pcq/",
-    "sourceType": "journalistique",
     "capturedAt": "2026-09-09",
     "draft": false
   }
