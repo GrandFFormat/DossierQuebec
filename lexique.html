@@ -974,6 +974,7 @@
   .status-sanctionne{background:var(--green-soft); color:#14532D;}
   .status-encours{background:var(--gold-soft); color:var(--gold);}
   .status-glace{background:#E5E2DA; color:var(--ink);}
+  .status-mort{background:#131313; color:#fff; border:2px solid var(--ink);}
 
   /* Boutons Demander une explication / Suivre / partage */
   .follow-btn{
@@ -1463,6 +1464,15 @@ function goToFederal(evt){
   <!-- APERÇU -->
   <section class="view" id="view-apercu">
 
+    <!-- Avis de dissolution — la 43e législature s'est terminée le 2026-08-27.
+         À RETIRER (ici et dans view-projets) quand la nouvelle Assemblée
+         commencera le 17 novembre 2026 ; voir l'objet ASSEMBLY dans le script. -->
+    <div class="band band-yellow bleed" id="band-dissolution">
+      <h2 data-i18n="diss.h">⚠️ L'Assemblée est dissoute — élections le 5 octobre</h2>
+      <p data-i18n="diss.p1">Le <b>27 août 2026</b>, l'Assemblée nationale a été dissoute : la 43<sup>e</sup> législature est terminée. Il n'y a plus de député·e·s en poste — celles et ceux qui siégeaient sont maintenant candidat·e·s ou se retirent. Le gouvernement, lui, reste en place le temps de la campagne.</p>
+      <p data-i18n="diss.p2">Conséquence directe : <b>tous les projets de loi qui n'avaient pas été sanctionnés sont morts au feuilleton.</b> Ils devront repartir de zéro devant la nouvelle Assemblée, convoquée le <b>17 novembre 2026</b>. Ce qui reste ici, c'est le bilan complet de la 43<sup>e</sup> législature : les lois adoptées, les votes de chaque député·e, et les projets qui n'ont pas abouti.</p>
+    </div>
+
     <!-- Hero poster brutaliste : la devise du site devient l'affiche.
          (La ligne du header .brand-text p est masquée en échange.) -->
     <div class="hero-poster">
@@ -1519,7 +1529,7 @@ function goToFederal(evt){
     <!-- Encadré noir compact (maquette) — le même statut réel que le ticker.
          renderTicker() lit .calendar-box .status : NE PAS renommer. -->
     <div class="calendar-box">
-      <div class="status" data-i18n="cal.status">● Travaux ajournés depuis le 12 juin 2026 · reprise le 15 septembre 2026</div>
+      <div class="status" data-i18n="cal.status">● Assemblée dissoute le 27 août 2026 · élections générales le 5 octobre · nouvelle législature le 17 novembre</div>
     </div>
     </div>
     </div>
@@ -1635,6 +1645,13 @@ function goToFederal(evt){
 
   <!-- PROJETS DE LOI -->
   <section class="view" id="view-projets">
+    <!-- Rappel de dissolution : sans ça, les projets non sanctionnés seraient lus
+         comme « encore en cours ». À retirer avec l'autre bande le 17 nov. 2026. -->
+    <div class="band band-yellow bleed" id="band-dissolution-projets">
+      <h2 data-i18n="dissp.h">⚠️ Ces projets sont morts au feuilleton</h2>
+      <p data-i18n="dissp.p">L'Assemblée a été dissoute le <b>27 août 2026</b>. Tout projet de loi qui n'avait pas été <b>sanctionné</b> est donc mort au feuilleton : il devra être re-présenté depuis le début devant la nouvelle Assemblée (17 novembre 2026). Les projets marqués « Sanctionnée » sont bel et bien devenus des lois.</p>
+    </div>
+
     <!-- Hero de vue (refonte brutaliste) -->
     <div class="view-hero">
       <h1 class="hero-h1 hero-h1-md">
@@ -2237,8 +2254,14 @@ const translations = {
     'trouve.sub':"125 ridings — full list, real National Assembly data",
     'trouve.info':"These 125 entries come directly from the official list of sitting MNAs at the National Assembly. Some seats may change between updates (resignation, by-election) — this list is a snapshot taken at the last update, not an automatically updated feed.",
     // What's new / calendar
-    'cal.status':"\u25CF Proceedings adjourned since June 12, 2026 \u00B7 resumes September 15, 2026",
+    'cal.status':"\u25CF Assembly dissolved on August 27, 2026 \u00B7 general election October 5 · new legislature November 17",
     'cal.title':"Sitting calendar",
+    // Dissolution de la 43e législature (2026-08-27) — à retirer le 17 nov. 2026.
+    'diss.h':"⚠️ The Assembly is dissolved — election October 5",
+    'diss.p1':"On <b>August 27, 2026</b>, the National Assembly was dissolved: the 43rd legislature is over. There are no sitting members anymore — those who sat are now candidates or are stepping down. The government stays in place for the duration of the campaign.",
+    'diss.p2':"Direct consequence: <b>every bill that had not been assented to died on the Order Paper.</b> They will have to start over before the new Assembly, convened on <b>November 17, 2026</b>. What remains here is the full record of the 43rd legislature: the laws that passed, how each member voted, and the bills that did not make it.",
+    'dissp.h':"⚠️ These bills died on the Order Paper",
+    'dissp.p':"The Assembly was dissolved on <b>August 27, 2026</b>. Any bill that had not been <b>assented to</b> therefore died on the Order Paper: it must be reintroduced from scratch before the new Assembly (November 17, 2026). Bills marked “Assented to” did become law.",
     'cal.p1':"The Assembly doesn't sit year-round. Its Standing Orders set two working periods: a spring period starting the 2nd Tuesday of February (16 weeks, plus 2 intensive weeks), and a fall period starting the 3rd Tuesday of September (10 weeks, plus 2 intensive weeks). Outside these periods the Assembly is adjourned — barring a special sitting called by the Premier.",
     'cal.p2':"This page outlines the main working periods, not the daily schedule. For a day-by-day view of upcoming sittings and committees, the Assembly's official calendar remains the reference.",
     // Lexicon
@@ -2447,6 +2470,25 @@ function applyLanguage(){
   });
   // Le <title> suit la langue ET l'onglet courant (déduit de l'URL).
   if(typeof syncTitle === 'function') syncTitle(viewFromPath());
+  if(typeof applyAssemblyState === 'function') applyAssemblyState();
+}
+
+/* Corrige les textes statiques qui deviennent FAUX pendant une dissolution —
+   les député·e·s ne sont plus en poste. Piloté par ASSEMBLY.dissolved : quand
+   la nouvelle législature commencera, ces textes reprennent leur version i18n
+   d'origine sans autre intervention. Appelé à la fin d'applyLanguage (donc
+   APRÈS le remplacement des data-i18n, sinon il serait écrasé). */
+function applyAssemblyState(){
+  if(typeof ASSEMBLY === 'undefined' || !ASSEMBLY.dissolved) return;
+  const isEn = currentLang === 'en';
+  const h = document.querySelector('#deputesTitle h2');
+  if(h) h.textContent = isEn ? 'The outgoing Assembly' : 'L\'Assemblée sortante';
+  const note = document.querySelector('#deputesTitle .head-note');
+  if(note) note.textContent = isEn ? 'All parties — 125 seats before dissolution' : 'Tous les partis — 125 sièges avant la dissolution';
+  const box = document.getElementById('deputesInfoBox');
+  if(box) box.textContent = isEn
+    ? 'The Assembly was dissolved on August 27, 2026: these 125 people are no longer members — they are the outgoing members of the 43rd legislature (now candidates, or stepping down). Their voting record below is the record of that legislature.'
+    : 'L\'Assemblée a été dissoute le 27 août 2026 : ces 125 personnes ne sont plus députées — ce sont les sortant·e·s de la 43e législature (maintenant candidat·e·s, ou qui se retirent). Leur bilan de votes ci-dessous reste celui de cette législature.';
 }
 
 document.getElementById('langToggle').addEventListener('click', ()=>{
@@ -6377,13 +6419,36 @@ function renderComparateurTable(){
   `;
 }
 
+/* ---------- État de l'Assemblée (source de vérité unique) ----------
+   L'Assemblée nationale a été DISSOUTE le 27 août 2026 (fin de la 43e
+   législature) : élections générales le 5 octobre 2026, nouvelle Assemblée
+   convoquée le 17 novembre 2026.
+   Conséquences factuelles, appliquées partout via cet objet :
+     - tout projet de loi NON sanctionné meurt au feuilleton ;
+     - les député·e·s cessent de l'être (ce sont des sortant·e·s / candidat·e·s) ;
+     - on ne peut plus « challenger » un projet mort ni interpeller son parrain.
+   ➜ Quand la nouvelle législature commencera (17 nov. 2026), remettre
+     `dissolved: false` et mettre à jour la ligne « cal.status ». */
+const ASSEMBLY = {
+  dissolved: true,
+  dissolvedOn: '2026-08-27',
+  electionOn: '2026-10-05',
+  newLegislatureOn: '2026-11-17',
+};
+
 function statusLabel(s){
-  if(currentLang === 'en'){
+  const isEn = currentLang === 'en';
+  // À la dissolution, tout ce qui n'est pas sanctionné est mort au feuilleton.
+  if(ASSEMBLY.dissolved && s !== 'sanctionne'){
+    return isEn ? 'Died on the Order Paper' : 'Mort au feuilleton';
+  }
+  if(isEn){
     return s==='sanctionne' ? 'Assented to' : s==='laisse_de_cote' ? 'On ice' : 'Under review';
   }
   return s==='sanctionne' ? 'Sanctionnée' : s==='laisse_de_cote' ? 'Sur la glace' : 'À l\'étude';
 }
 function statusClass(s){
+  if(ASSEMBLY.dissolved && s !== 'sanctionne') return 'status-mort';
   return s==='sanctionne' ? 'status-sanctionne' : s==='laisse_de_cote' ? 'status-glace' : 'status-encours';
 }
 
@@ -6436,7 +6501,7 @@ function billCard(b, ctx){
   // projets ACTIFS (status 'encours') : un projet sanctionné ou laissé de côté
   // ne se « challenge » plus.
   const isFlagged = !!myFlaggedBills[b.id];
-  const canFlag = b.status === 'encours';
+  const canFlag = b.status === 'encours' && !ASSEMBLY.dissolved;
   const flagBtnId = 'demand-' + ctx + '-' + b.id;
   const mailHint = isEn
     ? 'One email at the moments that count (500 & 1,000 requests, or if it becomes law)'
@@ -6640,7 +6705,7 @@ function renderBillsQuickFilters(){
   const isEn = currentLang === 'en';
   const defs = [
     ['tous', isEn ? 'All' : 'Tous'],
-    ['encours', isEn ? 'Active' : 'En cours'],
+    ['encours', ASSEMBLY.dissolved ? (isEn ? 'Died on Order Paper' : 'Morts au feuilleton') : (isEn ? 'Active' : 'En cours')],
     ['adoptes', isEn ? 'Passed' : 'Adoptés'],
     ['challenges', isEn ? '🔥 Challenged' : '🔥 Challengés'],
   ];
@@ -6679,7 +6744,9 @@ function renderBills(keyword){
   if(list.length){
     el.innerHTML = list.slice(0, 2).map(b=>billCard(b,'full')).join('');
     if(rest) rest.innerHTML = list.slice(2).map(b=>billCard(b,'full')).join('');
-    if(banner) banner.style.display = '';
+    // Pendant la dissolution, on n'affiche pas l'explication du « challenge » :
+    // la fonction est désactivée (on n'interpelle pas le parrain d'un projet mort).
+    if(banner) banner.style.display = ASSEMBLY.dissolved ? 'none' : '';
   } else {
     el.innerHTML = `<div class="no-results">${isEn ? 'No bill matches this search.' : 'Aucun projet de loi ne correspond à cette recherche.'}</div>`;
     if(rest) rest.innerHTML = '';
@@ -6690,7 +6757,7 @@ function renderBills(keyword){
   renderBillsQuickFilters();
   const titles = {
     tous:       isEn ? 'All bills' : 'Tous les projets',
-    encours:    isEn ? 'Active bills' : 'En cours',
+    encours:    ASSEMBLY.dissolved ? (isEn ? 'Bills that died on the Order Paper' : 'Projets morts au feuilleton') : (isEn ? 'Active bills' : 'En cours'),
     adoptes:    isEn ? 'Passed bills' : 'Adoptés',
     challenges: isEn ? 'Challenged bills' : 'Challengés',
   };
@@ -6815,10 +6882,18 @@ async function renderChallenged(){
   const fmt = n => n.toLocaleString(isEn ? 'en-CA' : 'fr-CA');
   const titleEl = document.getElementById('challengedTitle');
   const subEl = document.getElementById('challengedSub');
-  if(titleEl) titleEl.textContent = isEn ? 'Bills challenged by citizens' : 'Projets challengés par les citoyen·ne·s';
-  if(subEl) subEl.textContent = isEn
-    ? `The moment one person asks for an explanation, the bill appears here — pile on in one click; at ${fmt(PETITION_THRESHOLD)}, we push for a petition`
-    : `Dès qu'une personne demande une explication, le projet apparaît ici — appuyez en un clic ; à ${fmt(PETITION_THRESHOLD)}, on pousse pour une pétition`;
+  if(titleEl) titleEl.textContent = ASSEMBLY.dissolved
+    ? (isEn ? 'Bills citizens had challenged' : 'Projets que les citoyen·ne·s avaient challengés')
+    : (isEn ? 'Bills challenged by citizens' : 'Projets challengés par les citoyen·ne·s');
+  // Pendant la dissolution, on ne promet plus de pétition : ces projets sont morts
+  // au feuilleton, on présente donc la section comme une trace de la législature.
+  if(subEl) subEl.textContent = ASSEMBLY.dissolved
+    ? (isEn
+        ? 'Demands made before the Assembly was dissolved — these bills died on the Order Paper and would have to start over'
+        : 'Demandes faites avant la dissolution — ces projets sont morts au feuilleton et devraient repartir de zéro')
+    : (isEn
+        ? `The moment one person asks for an explanation, the bill appears here — pile on in one click; at ${fmt(PETITION_THRESHOLD)}, we push for a petition`
+        : `Dès qu'une personne demande une explication, le projet apparaît ici — appuyez en un clic ; à ${fmt(PETITION_THRESHOLD)}, on pousse pour une pétition`);
 
   if(challengedCache === null){
     try{
@@ -6857,7 +6932,7 @@ async function renderChallenged(){
       const stageLabel = b.status === 'encours' ? stepLabels[stageIdx] : statusLabel(b.status);
       const petition = cnt >= PETITION_THRESHOLD
         ? `<div class="ch-petition">⚑ ${isEn ? 'Petition threshold reached' : 'Seuil de pétition atteint'}</div>` : '';
-      const canFlag = b.status === 'encours';
+      const canFlag = b.status === 'encours' && !ASSEMBLY.dissolved;
       const isFlagged = !!myFlaggedBills[b.id];
       const flagBtnId = 'demand-ch-' + b.id;
       let demandBtn = '';
