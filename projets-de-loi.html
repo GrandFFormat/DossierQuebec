@@ -1648,8 +1648,8 @@ function goToFederal(evt){
     <!-- Rappel de dissolution : sans ça, les projets non sanctionnés seraient lus
          comme « encore en cours ». À retirer avec l'autre bande le 17 nov. 2026. -->
     <div class="band band-yellow bleed" id="band-dissolution-projets">
-      <h2 data-i18n="dissp.h">⚠️ Ces projets sont morts au feuilleton</h2>
-      <p data-i18n="dissp.p">L'Assemblée a été dissoute le <b>27 août 2026</b>. Tout projet de loi qui n'avait pas été <b>sanctionné</b> est donc mort au feuilleton : il devra être re-présenté depuis le début devant la nouvelle Assemblée (17 novembre 2026). Les projets marqués « Sanctionnée » sont bel et bien devenus des lois.</p>
+      <h2 data-i18n="dissp.h">⚠️ Ces projets ne sont jamais devenus des lois</h2>
+      <p data-i18n="dissp.p">L'Assemblée a été dissoute le <b>27 août 2026</b>. Tout projet de loi qui n'avait pas été <b>sanctionné</b> est donc <b>mort au feuilleton</b> — c'est le terme officiel de l'Assemblée. Sur les cartes, on l'écrit en clair : <b>« mort dans l'œuf »</b> si le projet n'a jamais dépassé la présentation, <b>« tombé en cours de route »</b> s'il s'était rendu plus loin. Dans les deux cas, il devra repartir de zéro devant la nouvelle Assemblée (17 novembre 2026). Les projets marqués « Sanctionnée » sont, eux, bel et bien devenus des lois.</p>
     </div>
 
     <!-- Hero de vue (refonte brutaliste) -->
@@ -2260,8 +2260,8 @@ const translations = {
     'diss.h':"⚠️ The Assembly is dissolved — election October 5",
     'diss.p1':"On <b>August 27, 2026</b>, the National Assembly was dissolved: the 43rd legislature is over. There are no sitting members anymore — those who sat are now candidates or are stepping down. The government stays in place for the duration of the campaign.",
     'diss.p2':"Direct consequence: <b>every bill that had not been assented to died on the Order Paper.</b> They will have to start over before the new Assembly, convened on <b>November 17, 2026</b>. What remains here is the full record of the 43rd legislature: the laws that passed, how each member voted, and the bills that did not make it.",
-    'dissp.h':"⚠️ These bills died on the Order Paper",
-    'dissp.p':"The Assembly was dissolved on <b>August 27, 2026</b>. Any bill that had not been <b>assented to</b> therefore died on the Order Paper: it must be reintroduced from scratch before the new Assembly (November 17, 2026). Bills marked “Assented to” did become law.",
+    'dissp.h':"⚠️ These bills never became law",
+    'dissp.p':"The Assembly was dissolved on <b>August 27, 2026</b>. Any bill that had not been <b>assented to</b> therefore <b>died on the Order Paper</b> — that is the Assembly's official term. On the cards we say it plainly: <b>“dead on arrival”</b> if the bill never got past introduction, <b>“died along the way”</b> if it got further. Either way, it must start over before the new Assembly (November 17, 2026). Bills marked “Assented to” did become law.",
     'cal.p1':"The Assembly doesn't sit year-round. Its Standing Orders set two working periods: a spring period starting the 2nd Tuesday of February (16 weeks, plus 2 intensive weeks), and a fall period starting the 3rd Tuesday of September (10 weeks, plus 2 intensive weeks). Outside these periods the Assembly is adjourned — barring a special sitting called by the Premier.",
     'cal.p2':"This page outlines the main working periods, not the daily schedule. For a day-by-day view of upcoming sittings and committees, the Assembly's official calendar remains the reference.",
     // Lexicon
@@ -6436,11 +6436,22 @@ const ASSEMBLY = {
   newLegislatureOn: '2026-11-17',
 };
 
-function statusLabel(s){
+function statusLabel(s, step){
   const isEn = currentLang === 'en';
-  // À la dissolution, tout ce qui n'est pas sanctionné est mort au feuilleton.
+  // À la dissolution, tout ce qui n'est pas sanctionné meurt (« mort au feuilleton »
+  // dans le jargon de l'Assemblée — gardé dans la bande d'explication et le Lexique,
+  // mais PAS sur la pastille : ici on écrit en langage clair).
+  // On distingue selon l'étape atteinte, sinon le libellé contredirait les chips
+  // d'étapes affichées juste en dessous : 95 des 102 projets n'ont jamais dépassé
+  // la présentation, 7 s'étaient rendus à l'adoption du principe.
   if(ASSEMBLY.dissolved && s !== 'sanctionne'){
-    return isEn ? 'Died on the Order Paper' : 'Mort au feuilleton';
+    // Appel sans étape (chips de filtre, qui portent sur un statut, pas un projet).
+    if(step === undefined || step === null){
+      return isEn ? 'Not passed' : 'Non adopté';
+    }
+    return (step <= 1)
+      ? (isEn ? 'Dead on arrival' : 'Mort dans l\'œuf')
+      : (isEn ? 'Died along the way' : 'Tombé en cours de route');
   }
   if(isEn){
     return s==='sanctionne' ? 'Assented to' : s==='laisse_de_cote' ? 'On ice' : 'Under review';
@@ -6553,7 +6564,7 @@ function billCard(b, ctx){
         <div class="bill-head-right">
           ${hotBadge}
           ${partyBadge}
-          <span class="status-pill ${statusClass(b.status)}">${statusLabel(b.status)}</span>
+          <span class="status-pill ${statusClass(b.status)}">${statusLabel(b.status, b.step)}</span>
         </div>
       </div>
       <div class="bstep-row">
@@ -6705,7 +6716,7 @@ function renderBillsQuickFilters(){
   const isEn = currentLang === 'en';
   const defs = [
     ['tous', isEn ? 'All' : 'Tous'],
-    ['encours', ASSEMBLY.dissolved ? (isEn ? 'Died on Order Paper' : 'Morts au feuilleton') : (isEn ? 'Active' : 'En cours')],
+    ['encours', ASSEMBLY.dissolved ? (isEn ? 'Not passed' : 'Non adoptés') : (isEn ? 'Active' : 'En cours')],
     ['adoptes', isEn ? 'Passed' : 'Adoptés'],
     ['challenges', isEn ? '🔥 Challenged' : '🔥 Challengés'],
   ];
@@ -6721,7 +6732,7 @@ function renderBills(keyword){
   const ch = challengedCache || [];
   const list = bills.filter(b => {
     const quickOk = billsQuickFilter === 'tous'
-      || (billsQuickFilter === 'encours' && b.status === 'encours')
+      || (billsQuickFilter === 'encours' && (ASSEMBLY.dissolved ? b.status !== 'sanctionne' : b.status === 'encours'))
       || (billsQuickFilter === 'adoptes' && b.status === 'sanctionne')
       || (billsQuickFilter === 'challenges' && ch.some(c => Number(c.bill_id) === b.id));
     const summaryText = (b.summary||'').replace(/<[^>]+>/g, ' ');
@@ -6757,7 +6768,7 @@ function renderBills(keyword){
   renderBillsQuickFilters();
   const titles = {
     tous:       isEn ? 'All bills' : 'Tous les projets',
-    encours:    ASSEMBLY.dissolved ? (isEn ? 'Bills that died on the Order Paper' : 'Projets morts au feuilleton') : (isEn ? 'Active bills' : 'En cours'),
+    encours:    ASSEMBLY.dissolved ? (isEn ? 'Bills that never passed' : 'Projets non adoptés') : (isEn ? 'Active bills' : 'En cours'),
     adoptes:    isEn ? 'Passed bills' : 'Adoptés',
     challenges: isEn ? 'Challenged bills' : 'Challengés',
   };
@@ -6929,7 +6940,7 @@ async function renderChallenged(){
       const flames = '🔥'.repeat(Math.max(1, CHALLENGE_TIERS.filter(t => cnt >= t).length));
       const stepLabels = isEn ? stepsEn : steps;
       const stageIdx = Math.max(0, Math.min(stepLabels.length - 1, displayStep(b.step) - 1));
-      const stageLabel = b.status === 'encours' ? stepLabels[stageIdx] : statusLabel(b.status);
+      const stageLabel = b.status === 'encours' && !ASSEMBLY.dissolved ? stepLabels[stageIdx] : statusLabel(b.status, b.step);
       const petition = cnt >= PETITION_THRESHOLD
         ? `<div class="ch-petition">⚑ ${isEn ? 'Petition threshold reached' : 'Seuil de pétition atteint'}</div>` : '';
       const canFlag = b.status === 'encours' && !ASSEMBLY.dissolved;
