@@ -6505,6 +6505,24 @@ function renderPetitions(targetId){
   targetId = targetId || 'petitionsList';
   const el = document.getElementById(targetId);
   const isEn = currentLang === 'en';
+  // DISSOLUTION : le Règlement de l'Assemblée interdit de signer une pétition
+  // électronique quand l'Assemblée est dissoute — il n'y a donc AUCUNE pétition
+  // ouverte. On n'affiche pas les anciennes : elles ne sont plus signables, et
+  // les montrer avec un bouton « signer » enverrait les gens vers un mur.
+  // (Le scraper hebdo garde ses données de la veille ; c'est l'affichage qui
+  // tranche, comme pour les projets de loi morts au feuilleton.)
+  if(typeof ASSEMBLY !== 'undefined' && ASSEMBLY.dissolved){
+    const msg = isEn
+      ? "No petition can be signed right now. The National Assembly's rules prohibit signing an e-petition while the Assembly is dissolved — which has been the case since August 27, 2026. Petitions reopen once the new Assembly convenes, on November 17, 2026."
+      : "Aucune pétition ne peut être signée en ce moment. Le Règlement de l'Assemblée interdit de signer une pétition électronique pendant que l'Assemblée est dissoute — c'est le cas depuis le 27 août 2026. Les pétitions rouvriront à la rentrée de la nouvelle Assemblée, le 17 novembre 2026.";
+    const lien = isEn ? "See the official notice on assnat.qc.ca →" : "Voir l'avis officiel sur assnat.qc.ca →";
+    const url = isEn
+      ? "https://www.assnat.qc.ca/en/exprimez-votre-opinion/petition/signer-petition/index.html"
+      : "https://www.assnat.qc.ca/fr/exprimez-votre-opinion/petition/signer-petition/index.html";
+    el.innerHTML = `<div class="no-results">${msg}</div>
+    <a class="bill-more" href="${url}" target="_blank" rel="noopener" style="display:inline-block; margin-top:12px;">${lien}</a>`;
+    return;
+  }
   if(petitions.length === 0){
     const emptyMsg = isEn
       ? "I couldn't retrieve the real list of open petitions — the official page loads its content dynamically, like the vote registry. Rather than invent petitions, I'm leaving this tab empty for now. Use the link below to see the real petitions right now."
