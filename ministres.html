@@ -1572,7 +1572,7 @@ function goToFederal(evt){
     <div class="band band-yellow bleed" id="band-dissolution">
       <h2 data-i18n="diss.h">⚠️ L'Assemblée est dissoute — élections le 5 octobre</h2>
       <p data-i18n="diss.p1">Le <b>27 août 2026</b>, l'Assemblée nationale a été dissoute : la 43<sup>e</sup> législature est terminée. Il n'y a plus de député·e·s en poste — celles et ceux qui siégeaient sont maintenant candidat·e·s ou se retirent. Le gouvernement, lui, reste en place le temps de la campagne.</p>
-      <p data-i18n="diss.p2">Conséquence directe : <b>tous les projets de loi qui n'avaient pas été sanctionnés sont morts au feuilleton.</b> Ils devront repartir de zéro devant la nouvelle Assemblée, convoquée le <b>17 novembre 2026</b>. Ce qui reste ici, c'est le bilan complet de la 43<sup>e</sup> législature : les lois adoptées, les votes de chaque député·e, et les projets qui n'ont pas abouti.</p>
+      <p data-i18n="diss.p2">Conséquence directe : <b>tous les projets de loi qui n'avaient pas été sanctionnés sont morts avec elle.</b> Ils devront repartir de zéro devant la nouvelle Assemblée, convoquée le <b>17 novembre 2026</b>. Ce qui reste ici, c'est le bilan complet de la 43<sup>e</sup> législature : les lois adoptées, les votes de chaque député·e, et les projets qui n'ont pas abouti.</p>
       <a class="diss-cta" href="/promesses" data-i18n="diss.cta">Ce que les partis promettent →</a>
     </div>
 
@@ -2415,7 +2415,7 @@ const translations = {
     // Dissolution de la 43e législature (2026-08-27) — à retirer le 17 nov. 2026.
     'diss.h':"⚠️ The Assembly is dissolved — election October 5",
     'diss.p1':"On <b>August 27, 2026</b>, the National Assembly was dissolved: the 43rd legislature is over. There are no sitting members anymore — those who sat are now candidates or are stepping down. The government stays in place for the duration of the campaign.",
-    'diss.p2':"Direct consequence: <b>every bill that had not been assented to died on the Order Paper.</b> They will have to start over before the new Assembly, convened on <b>November 17, 2026</b>. What remains here is the full record of the 43rd legislature: the laws that passed, how each member voted, and the bills that did not make it.",
+    'diss.p2':"Direct consequence: <b>every bill that had not been assented to died with it.</b> They will have to start over before the new Assembly, convened on <b>November 17, 2026</b>. What remains here is the full record of the 43rd legislature: the laws that passed, how each member voted, and the bills that did not make it.",
     'diss.cta':"What the parties are promising →",
     'prom.l1':"What they promise,",
     'prom.l2':"what they'll do with it.",
@@ -8034,8 +8034,8 @@ async function renderChallenged(){
   // au feuilleton, on présente donc la section comme une trace de la législature.
   if(subEl) subEl.textContent = ASSEMBLY.dissolved
     ? (isEn
-        ? 'Demands made before the Assembly was dissolved — these bills died on the Order Paper and would have to start over'
-        : 'Demandes faites avant la dissolution — ces projets sont morts au feuilleton et devraient repartir de zéro')
+        ? 'Demands made before the Assembly was dissolved — these bills died with it and would have to start over'
+        : 'Demandes faites avant la dissolution — ces projets sont morts avec elle et devraient repartir de zéro')
     : (isEn
         ? `The moment one person asks for an explanation, the bill appears here — pile on in one click; at ${fmt(PETITION_THRESHOLD)}, we push for a petition`
         : `Dès qu'une personne demande une explication, le projet apparaît ici — appuyez en un clic ; à ${fmt(PETITION_THRESHOLD)}, on pousse pour une pétition`);
