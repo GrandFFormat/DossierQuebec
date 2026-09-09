@@ -114,6 +114,9 @@ try {
     // pas scrapées. Le build tourne quand même chaque jour pour que toute
     // édition du JSON se retrouve dans la page sans étape manuelle.
     ['Build : promesses -> index.html', ['scrapers/build-promises-data.js']],
+    // « Quoi de neuf » dérivé des projets de loi et des votes déjà scrapés —
+    // APRÈS eux, donc, pour refléter les données du jour.
+    ['Build : quoi de neuf -> index.html', ['scrapers/build-news-data.js']],
     // Pages de section pré-rendues (SEO) : APRÈS toutes les injections ci-dessus.
     ['Build : pages de section (SEO) -> *.html', ['scripts/build-section-pages.js']],
   ];
