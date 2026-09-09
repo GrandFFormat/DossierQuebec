@@ -41,6 +41,11 @@ const SECTIONS = [
     desc: "Les votes nominatifs des député·e·s à l'Assemblée nationale du Québec : qui a voté pour, contre ou s'est abstenu. Vraies données publiques.",
   },
   {
+    slug: 'promesses', view: 'promesses', noTab: true,
+    title: 'Promesses électorales 2026 — ce que les partis promettent · DossierQuébec',
+    desc: "Les engagements des partis pour l'élection québécoise du 5 octobre 2026, chacun avec sa source. Aucun verdict : la promesse et l'action, côte à côte.",
+  },
+  {
     slug: 'lexique', view: 'lexique',
     title: 'Lexique et compte citoyen · DossierQuébec',
     desc: "Le vocabulaire de l'Assemblée nationale expliqué simplement, et votre compte citoyen DossierQuébec. Site indépendant, données publiques.",
@@ -89,10 +94,14 @@ function buildPage(sec){
 
   // 7) Onglet actif dans le menu : idem côté nav.
   h = h.replace('<button class="active" data-view="apercu">', '<button data-view="apercu">');
-  const nfrom = `<button data-view="${sec.view}">`;
-  const nto   = `<button class="active" data-view="${sec.view}">`;
-  must(h.includes(nfrom), `bouton nav data-view="${sec.view}" introuvable`);
-  h = h.replace(nfrom, nto);
+  // Certaines vues n'ont PAS d'onglet (ex. /promesses, comme view-bd) : on ne
+  // marque alors aucun bouton actif, et c'est normal.
+  if (!sec.noTab) {
+    const nfrom = `<button data-view="${sec.view}">`;
+    const nto   = `<button class="active" data-view="${sec.view}">`;
+    must(h.includes(nfrom), `bouton nav data-view="${sec.view}" introuvable`);
+    h = h.replace(nfrom, nto);
+  }
 
   writeFileSync(`${sec.slug}.html`, h, 'utf8');
   console.log(`✓ ${sec.slug}.html  (vue ${sec.view})`);
