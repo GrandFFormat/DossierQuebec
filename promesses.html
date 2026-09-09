@@ -964,6 +964,10 @@
   }
   .qf-btn.active{background:#131313; color:var(--yellow);}
   .qf-btn:hover:not(.active){background:var(--yellow);}
+  /* Compteur sur les filtres des promesses. Chiffres à chasse fixe pour que les
+     boutons ne sautillent pas quand les nombres changent en filtrant. */
+  .qf-n{opacity:0.68; font-variant-numeric:tabular-nums; margin-left:6px; font-weight:800;}
+  .qf-btn.qf-zero{opacity:0.45;}
   #billsResultHead{margin-top:6px; margin-bottom:18px;}
 
   /* Bande légende */
@@ -5919,23 +5923,37 @@ function renderPromFilters(){
   // Les boutons portent TOUJOURS la couleur (parti ou sujet) : on reconnaît
   // d'un coup d'œil. La sélection se marque par la classe .qf-sel (ombre dure),
   // pas par la couleur — sinon on perdrait le repère visuel.
+  // Compteurs CROISÉS : le nombre affiché sur un bouton de parti tient compte du
+  // sujet sélectionné, et inversement. Sinon le chiffre ne correspondrait pas aux
+  // cartes visibles à l'écran. Un « 0 » est donc possible et il est honnête : ce
+  // parti n'a rien dans ce sujet PARMI CE QU'ON PUBLIE — le plafond de 8 par
+  // parti est expliqué juste au-dessus, dans l'encadré.
+  const nb = (f) => promises.filter(f).length;
+  const compteur = (n) => ` <span class="qf-n">${n}</span>`;
+
   if(partyEl){
     const partis = [...new Set(promises.map(p => p.party))];
+    const sousTheme = (p) => promTheme === 'tous' || p.theme === promTheme;
     partyEl.innerHTML = [['tous', tous], ...partis.map(x => [x, x])].map(([k, label]) => {
       const sel = promParty === k;
-      if(k === 'tous') return `<button class="qf-btn ${sel ? 'active' : ''}" onclick="setPromParty('tous')">${label}</button>`;
+      const n = k === 'tous' ? nb(sousTheme) : nb(p => p.party === k && sousTheme(p));
+      const zero = n === 0 ? ' qf-zero' : '';
+      if(k === 'tous') return `<button class="qf-btn ${sel ? 'active' : ''}${zero}" onclick="setPromParty('tous')">${label}${compteur(n)}</button>`;
       const bg = partyColors[k] || '#8B8578';
-      return `<button class="qf-btn ${sel ? 'qf-sel' : ''}" style="background:${bg}; color:${partyText(k)};" onclick="setPromParty('${k}')">${label}</button>`;
+      return `<button class="qf-btn ${sel ? 'qf-sel' : ''}${zero}" style="background:${bg}; color:${partyText(k)};" onclick="setPromParty('${k}')">${label}${compteur(n)}</button>`;
     }).join('');
   }
   if(themeEl){
     const sujets = [...new Set(promises.map(p => p.theme))].sort();
+    const sousParti = (p) => promParty === 'tous' || p.party === promParty;
     themeEl.innerHTML = [['tous', tous], ...sujets.map(x => [x, x])].map(([k, label]) => {
       const sel = promTheme === k;
       const esc = String(k).replace(/'/g, "\\'");
-      if(k === 'tous') return `<button class="qf-btn ${sel ? 'active' : ''}" onclick="setPromTheme('tous')">${label}</button>`;
+      const n = k === 'tous' ? nb(sousParti) : nb(p => p.theme === k && sousParti(p));
+      const zero = n === 0 ? ' qf-zero' : '';
+      if(k === 'tous') return `<button class="qf-btn ${sel ? 'active' : ''}${zero}" onclick="setPromTheme('tous')">${label}${compteur(n)}</button>`;
       const bg = themeColor(k);
-      return `<button class="qf-btn ${sel ? 'qf-sel' : ''}" style="background:${bg}; color:${readableOn(bg)};" onclick="setPromTheme('${esc}')">${label}</button>`;
+      return `<button class="qf-btn ${sel ? 'qf-sel' : ''}${zero}" style="background:${bg}; color:${readableOn(bg)};" onclick="setPromTheme('${esc}')">${label}${compteur(n)}</button>`;
     }).join('');
   }
 }
