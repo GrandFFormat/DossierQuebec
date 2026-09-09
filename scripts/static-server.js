@@ -26,10 +26,16 @@ async function lire(path) {
 }
 
 createServer(async (req, res) => {
-  const path = req.url === '/' ? '/index.html' : req.url.split('?')[0];
+  // La query est retirée AVANT de résoudre la racine : sinon « /?debug=1 »
+  // n'était pas reconnu comme « / » et renvoyait un 404.
+  const sansQuery = req.url.split('?')[0];
+  const path = sansQuery === '/' ? '/index.html' : sansQuery;
   try {
     const { data, ext } = await lire(path);
-    res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' });
+    // Pas de cache en développement : sans ça, le navigateur resservait
+    // l'ancien index.html après une modification — on croit tester son
+    // correctif alors qu'on mesure la version précédente.
+    res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream', 'Cache-Control': 'no-store' });
     res.end(data);
   } catch {
     res.writeHead(404);
