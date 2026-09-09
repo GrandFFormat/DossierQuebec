@@ -6179,13 +6179,572 @@ function initials(name){
 }
 
 // Vrais éléments datés, tirés de la page d'accueil assnat.qc.ca (relevés le 12 juin 2026)
+/* NEWS_DATA_START — généré par scrapers/build-news-data.js à partir de data/bills.json
+   et data/votes.json. Ne pas éditer à la main : relancer le build.
+   Généré le 2026-09-09T14:25:00.386Z */
 const newsItems = [
-  {date:'2026-06-12', label:'12 juin 2026', labelEn:'June 12, 2026', text:"L'Assemblée nationale a ajourné ses travaux.", textEn:"The National Assembly adjourned its proceedings."},
-  {date:'2026-06-12', label:'12 juin 2026', labelEn:'June 12, 2026', text:"Dépôt du projet de loi n° 692 — Loi visant à créer un nouvel outil de conservation volontaire des milieux naturels.", textEn:"Bill 692 introduced — An Act to create a new tool for the voluntary conservation of natural environments."},
-  {date:'2026-06-11', label:'11 juin 2026', labelEn:'June 11, 2026', text:"Les joueuses de la Victoire célébrées à l'Assemblée nationale.", textEn:"Members of the Victoire hockey team honoured at the National Assembly."},
-  {date:'2026-06-10', label:'10 juin 2026', labelEn:'June 10, 2026', text:"La Commission de la culture et de l'éducation entreprend l'étude détaillée du projet de loi n° 2 (souveraineté parlementaire et Charte de la langue française).", textEn:"The Committee on Culture and Education begins clause-by-clause review of Bill 2 (parliamentary sovereignty and the Charter of the French Language)."},
-  {date:'2026-06-09', label:'9 juin 2026', labelEn:'June 9, 2026', text:"La Commission de l'agriculture, des pêcheries, de l'énergie et des ressources naturelles entreprend l'étude détaillée du projet de loi n° 17 (stockage de gaz naturel).", textEn:"The Committee on Agriculture, Fisheries, Energy and Natural Resources begins clause-by-clause review of Bill 17 (natural gas storage)."},
+  {
+    "date": "2026-06-12",
+    "label": "12 juin 2026",
+    "labelEn": "June 12, 2026",
+    "text": "Sanction du projet de loi n° 3 — Loi visant à assurer la représentation effective des électeurs",
+    "textEn": "Bill 3 assented to — Act to ensure the effective representation of electors"
+  },
+  {
+    "date": "2026-06-12",
+    "label": "12 juin 2026",
+    "labelEn": "June 12, 2026",
+    "text": "Sanction du projet de loi n° 10 — Loi protégeant les consommateurs contre les pratiques abusives de revente de billets et de renouvellemen…",
+    "textEn": "Bill 10 assented to — Act to protect consumers against abusive ticket resale practices and online subscription renewals"
+  },
+  {
+    "date": "2026-06-12",
+    "label": "12 juin 2026",
+    "labelEn": "June 12, 2026",
+    "text": "Sanction du projet de loi n° 17 — Loi modifiant la Loi sur le stockage de gaz naturel et sur les conduites de gaz naturel et de pétrole au…",
+    "textEn": "Bill 17 assented to — Act to amend the Act respecting the storage of natural gas and respecting natural gas and oil pipelines…"
+  },
+  {
+    "date": "2026-06-12",
+    "label": "12 juin 2026",
+    "labelEn": "June 12, 2026",
+    "text": "Sanction du projet de loi n° 22 — Loi bonifiant les pouvoirs d’intervention des municipalités et modifiant d’autres dispositions législati…",
+    "textEn": "Bill 22 assented to — Act to enhance the intervention powers of municipalities and to amend other legislative provisions"
+  },
+  {
+    "date": "2026-06-12",
+    "label": "12 juin 2026",
+    "labelEn": "June 12, 2026",
+    "text": "Sanction du projet de loi n° 23 — Loi visant principalement à mieux accompagner les personnes dont l’état mental pourrait représenter un r…",
+    "textEn": "Bill 23 assented to — Act mainly to better support persons whose mental state could pose a risk to their own safety or that of…"
+  },
+  {
+    "date": "2026-06-12",
+    "label": "12 juin 2026",
+    "labelEn": "June 12, 2026",
+    "text": "Sanction du projet de loi n° 24 — Loi protégeant le consommateur contre l’utilisation trompeuse ou frauduleuse de l’identité ou de l’image…",
+    "textEn": "Bill 24 assented to — Act to protect consumers against misleading or fraudulent use of a person's identity or image"
+  },
+  {
+    "date": "2026-06-12",
+    "label": "12 juin 2026",
+    "labelEn": "June 12, 2026",
+    "text": "Dépôt du projet de loi n° 692 — Loi visant à créer un nouvel outil de conservation volontaire des milieux naturels",
+    "textEn": "Bill 692 introduced — Act to create a new tool for the voluntary conservation of natural environments"
+  },
+  {
+    "date": "2026-06-11",
+    "label": "11 juin 2026",
+    "labelEn": "June 11, 2026",
+    "text": "Sanction du projet de loi n° 4 — Loi sur la communication de renseignements aux fins de protection contre la violence d’un partenaire int…",
+    "textEn": "Bill 4 assented to — Act respecting the disclosure of information for the protection against intimate partner violence and am…"
+  },
+  {
+    "date": "2026-06-11",
+    "label": "11 juin 2026",
+    "labelEn": "June 11, 2026",
+    "text": "Sanction du projet de loi n° 9 — Loi visant à prévenir les effets nocifs de la boisson énergisante sur la santé des jeunes",
+    "textEn": "Bill 9 assented to — Act to prevent the harmful effects of energy drinks on young people's health"
+  },
+  {
+    "date": "2026-06-11",
+    "label": "11 juin 2026",
+    "labelEn": "June 11, 2026",
+    "text": "Sanction du projet de loi n° 11 — Loi modifiant diverses dispositions principalement aux fins d’allègement du fardeau réglementaire et adm…",
+    "textEn": "Bill 11 assented to — Act to amend various provisions mainly for the purpose of reducing the regulatory and administrative bur…"
+  },
+  {
+    "date": "2026-06-11",
+    "label": "11 juin 2026",
+    "labelEn": "June 11, 2026",
+    "text": "Sanction du projet de loi n° 12 — Loi instituant la prestation de services de garde éducatifs à l’enfance par les personnes reconnues à ti…",
+    "textEn": "Bill 12 assented to — An Act to establish the provision of educational childcare services by persons recognized as in-charge o…"
+  },
+  {
+    "date": "2026-06-11",
+    "label": "11 juin 2026",
+    "labelEn": "June 11, 2026",
+    "text": "Sanction du projet de loi n° 200 — Loi concernant Le Country Club de Montréal",
+    "textEn": "Bill 200 assented to — Act respecting Le Country Club de Montréal"
+  },
+  {
+    "date": "2026-06-11",
+    "label": "11 juin 2026",
+    "labelEn": "June 11, 2026",
+    "text": "Sanction du projet de loi n° 201 — Loi concernant le Monastère des Ursulines de Québec",
+    "textEn": "Bill 201 assented to — Act respecting the Monastère des Ursulines de Québec"
+  },
+  {
+    "date": "2026-06-11",
+    "label": "11 juin 2026",
+    "labelEn": "June 11, 2026",
+    "text": "Sanction du projet de loi n° 204 — Loi concernant la Ville de Gatineau",
+    "textEn": "Bill 204 assented to — Act respecting the Ville de Gatineau"
+  },
+  {
+    "date": "2026-06-11",
+    "label": "11 juin 2026",
+    "labelEn": "June 11, 2026",
+    "text": "Sanction du projet de loi n° 205 — Loi concernant un immeuble situé sur le territoire de la Ville de Québec",
+    "textEn": "Bill 205 assented to — Act respecting a building located in the territory of Ville de Québec"
+  },
+  {
+    "date": "2026-06-11",
+    "label": "11 juin 2026",
+    "labelEn": "June 11, 2026",
+    "text": "6 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "6 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-06-10",
+    "label": "10 juin 2026",
+    "labelEn": "June 10, 2026",
+    "text": "Dépôt du projet de loi n° 13 — Loi instaurant la charge de greffier spécial",
+    "textEn": "Bill 13 introduced — Act to establish the office of special clerk"
+  },
+  {
+    "date": "2026-06-10",
+    "label": "10 juin 2026",
+    "labelEn": "June 10, 2026",
+    "text": "3 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "3 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-06-05",
+    "label": "5 juin 2026",
+    "labelEn": "June 5, 2026",
+    "text": "Dépôt du projet de loi n° 9 — Loi visant à prévenir les effets nocifs de la boisson énergisante sur la santé des jeunes",
+    "textEn": "Bill 9 introduced — Act to prevent the harmful effects of energy drinks on young people's health"
+  },
+  {
+    "date": "2026-06-05",
+    "label": "5 juin 2026",
+    "labelEn": "June 5, 2026",
+    "text": "Dépôt du projet de loi n° 691 — Loi sur le maintien de l’autonomie des personnes aînées",
+    "textEn": "Bill 691 introduced — Act to Maintain the Autonomy of Older Persons"
+  },
+  {
+    "date": "2026-06-05",
+    "label": "5 juin 2026",
+    "labelEn": "June 5, 2026",
+    "text": "Dépôt du projet de loi n° 796 — Loi visant à protéger les jeunes contre les effets néfastes des écrans notamment en encadrant les médias…",
+    "textEn": "Bill 796 introduced — Act to protect young people from the harmful effects of screens, in particular by regulating social medi…"
+  },
+  {
+    "date": "2026-06-05",
+    "label": "5 juin 2026",
+    "labelEn": "June 5, 2026",
+    "text": "30 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "30 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-06-04",
+    "label": "4 juin 2026",
+    "labelEn": "June 4, 2026",
+    "text": "Dépôt du projet de loi n° 7 — Loi n° 2 sur les crédits, 2026-2027",
+    "textEn": "Bill 7 introduced — Appropriation Act No. 2, 2026-2027"
+  },
+  {
+    "date": "2026-06-04",
+    "label": "4 juin 2026",
+    "labelEn": "June 4, 2026",
+    "text": "Sanction du projet de loi n° 7 — Loi n° 2 sur les crédits, 2026-2027",
+    "textEn": "Bill 7 assented to — Appropriation Act No. 2, 2026-2027"
+  },
+  {
+    "date": "2026-06-04",
+    "label": "4 juin 2026",
+    "labelEn": "June 4, 2026",
+    "text": "Dépôt du projet de loi n° 8 — Loi encadrant la langue de l’enseignement en formation professionnelle et en formation générale des adul…",
+    "textEn": "Bill 8 introduced — Act Regulating the Language of Instruction in Vocational Training and Adult General Education"
+  },
+  {
+    "date": "2026-06-04",
+    "label": "4 juin 2026",
+    "labelEn": "June 4, 2026",
+    "text": "4 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "4 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-06-03",
+    "label": "3 juin 2026",
+    "labelEn": "June 3, 2026",
+    "text": "2 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "2 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-06-02",
+    "label": "2 juin 2026",
+    "labelEn": "June 2, 2026",
+    "text": "2 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "2 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-05-28",
+    "label": "28 mai 2026",
+    "labelEn": "May 28, 2026",
+    "text": "Dépôt du projet de loi n° 698 — Loi sur la coconstruction des mesures législatives et réglementaires touchant les Premières Nations et l…",
+    "textEn": "Bill 698 introduced — Act respecting the co-construction of legislative and regulatory measures affecting First Nations and In…"
+  },
+  {
+    "date": "2026-05-28",
+    "label": "28 mai 2026",
+    "labelEn": "May 28, 2026",
+    "text": "2 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "2 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-05-27",
+    "label": "27 mai 2026",
+    "labelEn": "May 27, 2026",
+    "text": "Dépôt du projet de loi n° 791 — Loi modifiant la Loi électorale aux fins de protéger de manière permanente les circonscriptions de Gaspé…",
+    "textEn": "Bill 791 introduced — Act to amend the Election Act for the purpose of permanently protecting the electoral divisions of Gaspé…"
+  },
+  {
+    "date": "2026-05-27",
+    "label": "27 mai 2026",
+    "labelEn": "May 27, 2026",
+    "text": "3 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "3 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-05-26",
+    "label": "26 mai 2026",
+    "labelEn": "May 26, 2026",
+    "text": "2 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "2 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-05-14",
+    "label": "14 mai 2026",
+    "labelEn": "May 14, 2026",
+    "text": "Dépôt du projet de loi n° 599 — Loi proclamant la Journée nationale de sensibilisation aux enjeux vécus par les personnes immunosupprimé…",
+    "textEn": "Bill 599 introduced — Act to proclaim National Awareness Day for the Issues Faced by Immunosuppressed Persons"
+  },
+  {
+    "date": "2026-05-14",
+    "label": "14 mai 2026",
+    "labelEn": "May 14, 2026",
+    "text": "Dépôt du projet de loi n° 690 — Loi sur le droit à l’alimentation",
+    "textEn": "Bill 690 introduced — Act respecting the right to food"
+  },
+  {
+    "date": "2026-05-14",
+    "label": "14 mai 2026",
+    "labelEn": "May 14, 2026",
+    "text": "1 vote nominatif tenu à l'Assemblée.",
+    "textEn": "1 recorded division held in the Assembly."
+  },
+  {
+    "date": "2026-05-13",
+    "label": "13 mai 2026",
+    "labelEn": "May 13, 2026",
+    "text": "Dépôt du projet de loi n° 4 — Loi sur la communication de renseignements aux fins de protection contre la violence d’un partenaire int…",
+    "textEn": "Bill 4 introduced — Act respecting the disclosure of information for the protection against intimate partner violence and am…"
+  },
+  {
+    "date": "2026-05-13",
+    "label": "13 mai 2026",
+    "labelEn": "May 13, 2026",
+    "text": "Dépôt du projet de loi n° 696 — Loi visant à garantir la liberté des personnes exploitant un établissement d’hébergement touristique qua…",
+    "textEn": "Bill 696 introduced — Act to guarantee the freedom of persons operating a tourist accommodation establishment with regard to t…"
+  },
+  {
+    "date": "2026-05-13",
+    "label": "13 mai 2026",
+    "labelEn": "May 13, 2026",
+    "text": "3 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "3 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-05-12",
+    "label": "12 mai 2026",
+    "labelEn": "May 12, 2026",
+    "text": "1 vote nominatif tenu à l'Assemblée.",
+    "textEn": "1 recorded division held in the Assembly."
+  },
+  {
+    "date": "2026-05-07",
+    "label": "7 mai 2026",
+    "labelEn": "May 7, 2026",
+    "text": "Dépôt du projet de loi n° 3 — Loi visant à assurer la représentation effective des électeurs",
+    "textEn": "Bill 3 introduced — Act to ensure the effective representation of electors"
+  },
+  {
+    "date": "2026-05-07",
+    "label": "7 mai 2026",
+    "labelEn": "May 7, 2026",
+    "text": "Dépôt du projet de loi n° 596 — Loi renforçant l’intégrité et la protection des droits et libertés de la personne",
+    "textEn": "Bill 596 introduced — Act to strengthen integrity and the protection of human rights and freedoms"
+  },
+  {
+    "date": "2026-05-07",
+    "label": "7 mai 2026",
+    "labelEn": "May 7, 2026",
+    "text": "2 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "2 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-05-06",
+    "label": "6 mai 2026",
+    "labelEn": "May 6, 2026",
+    "text": "Dépôt du projet de loi n° 2 — Loi permettant au Parlement du Québec de préserver le principe de la souveraineté parlementaire à l’égar…",
+    "textEn": "Bill 2 introduced — Act to enable the Parliament of Québec to preserve the principle of parliamentary sovereignty with regar…"
+  },
+  {
+    "date": "2026-05-06",
+    "label": "6 mai 2026",
+    "labelEn": "May 6, 2026",
+    "text": "Dépôt du projet de loi n° 191 — Loi mettant en place des mesures concernant les approches complémentaires et intégratives en santé",
+    "textEn": "Bill 191 introduced — Act respecting measures concerning complementary and integrative health approaches"
+  },
+  {
+    "date": "2026-05-06",
+    "label": "6 mai 2026",
+    "labelEn": "May 6, 2026",
+    "text": "2 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "2 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-04-02",
+    "label": "2 avril 2026",
+    "labelEn": "April 2, 2026",
+    "text": "Dépôt du projet de loi n° 205 — Loi concernant un immeuble situé sur le territoire de la Ville de Québec",
+    "textEn": "Bill 205 introduced — Act respecting a building located in the territory of Ville de Québec"
+  },
+  {
+    "date": "2026-04-02",
+    "label": "2 avril 2026",
+    "labelEn": "April 2, 2026",
+    "text": "Sanction du projet de loi n° 3 — Loi visant à améliorer la transparence, la gouvernance et le processus démocratique de diverses associat…",
+    "textEn": "Bill 3 assented to — Act to improve the transparency, governance and democratic process of various workplace associations"
+  },
+  {
+    "date": "2026-04-02",
+    "label": "2 avril 2026",
+    "labelEn": "April 2, 2026",
+    "text": "Sanction du projet de loi n° 7 — Loi visant à réduire la bureaucratie, à accroître l’efficacité de l’État et à renforcer l’imputabilité d…",
+    "textEn": "Bill 7 assented to — Act to reduce bureaucracy, increase government efficiency and strengthen the accountability of senior of…"
+  },
+  {
+    "date": "2026-04-02",
+    "label": "2 avril 2026",
+    "labelEn": "April 2, 2026",
+    "text": "Sanction du projet de loi n° 9 — Loi sur le renforcement de la laïcité au Québec",
+    "textEn": "Bill 9 assented to — Act to strengthen secularism in Québec"
+  },
+  {
+    "date": "2026-04-02",
+    "label": "2 avril 2026",
+    "labelEn": "April 2, 2026",
+    "text": "Sanction du projet de loi n° 13 — Loi visant à favoriser la sécurité et le sentiment de sécurité de la population et modifiant diverses di…",
+    "textEn": "Bill 13 assented to — Act to promote public safety and the public's sense of safety and to amend various provisions"
+  },
+  {
+    "date": "2026-04-02",
+    "label": "2 avril 2026",
+    "labelEn": "April 2, 2026",
+    "text": "Sanction du projet de loi n° 15 — Loi modifiant le Code des professions et d’autres dispositions principalement afin d’alléger les process…",
+    "textEn": "Bill 15 assented to — Act to amend the Professional Code and other provisions mainly to streamline regulatory processes of the…"
+  },
+  {
+    "date": "2026-04-02",
+    "label": "2 avril 2026",
+    "labelEn": "April 2, 2026",
+    "text": "Sanction du projet de loi n° 18 — Loi modifiant les critères du vote de l’électeur hors Québec",
+    "textEn": "Bill 18 assented to — Act to Amend the Criteria for Voting by Electors Outside Québec"
+  },
+  {
+    "date": "2026-04-02",
+    "label": "2 avril 2026",
+    "labelEn": "April 2, 2026",
+    "text": "Dépôt du projet de loi n° 590 — Loi modifiant la Loi sur le drapeau et les emblèmes du Québec afin de reconnaître le tartan du Québec",
+    "textEn": "Bill 590 introduced — Act to amend the Flag and Emblems of Québec Act to recognize the tartan of Québec"
+  },
+  {
+    "date": "2026-04-02",
+    "label": "2 avril 2026",
+    "labelEn": "April 2, 2026",
+    "text": "Dépôt du projet de loi n° 598 — Loi visant à protéger l’enfant et le parent victimes de violence familiale",
+    "textEn": "Bill 598 introduced — Act to protect the child and parent who are victims of family violence"
+  },
+  {
+    "date": "2026-04-02",
+    "label": "2 avril 2026",
+    "labelEn": "April 2, 2026",
+    "text": "31 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "31 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-04-01",
+    "label": "1 avril 2026",
+    "labelEn": "April 1, 2026",
+    "text": "Dépôt du projet de loi n° 27 — Loi modifiant diverses dispositions concernant les décrets de convention collective et l’industrie de la…",
+    "textEn": "Bill 27 introduced — Act to amend various provisions concerning collective agreement decrees and the construction industry"
+  },
+  {
+    "date": "2026-04-01",
+    "label": "1 avril 2026",
+    "labelEn": "April 1, 2026",
+    "text": "Dépôt du projet de loi n° 595 — Loi sur l’assistance personnelle autodirigée pour les personnes handicapées",
+    "textEn": "Bill 595 introduced — Act respecting self-directed personal assistance for persons with disabilities"
+  },
+  {
+    "date": "2026-04-01",
+    "label": "1 avril 2026",
+    "labelEn": "April 1, 2026",
+    "text": "1 vote nominatif tenu à l'Assemblée.",
+    "textEn": "1 recorded division held in the Assembly."
+  },
+  {
+    "date": "2026-03-31",
+    "label": "31 mars 2026",
+    "labelEn": "March 31, 2026",
+    "text": "3 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "3 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-03-26",
+    "label": "26 mars 2026",
+    "labelEn": "March 26, 2026",
+    "text": "Dépôt du projet de loi n° 24 — Loi protégeant le consommateur contre l’utilisation trompeuse ou frauduleuse de l’identité ou de l’image…",
+    "textEn": "Bill 24 introduced — Act to protect consumers against misleading or fraudulent use of a person's identity or image"
+  },
+  {
+    "date": "2026-03-26",
+    "label": "26 mars 2026",
+    "labelEn": "March 26, 2026",
+    "text": "Dépôt du projet de loi n° 18 — Loi modifiant les critères du vote de l’électeur hors Québec",
+    "textEn": "Bill 18 introduced — Act to Amend the Criteria for Voting by Electors Outside Québec"
+  },
+  {
+    "date": "2026-03-26",
+    "label": "26 mars 2026",
+    "labelEn": "March 26, 2026",
+    "text": "4 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "4 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-03-25",
+    "label": "25 mars 2026",
+    "labelEn": "March 25, 2026",
+    "text": "Dépôt du projet de loi n° 22 — Loi bonifiant les pouvoirs d’intervention des municipalités et modifiant d’autres dispositions législati…",
+    "textEn": "Bill 22 introduced — Act to enhance the intervention powers of municipalities and to amend other legislative provisions"
+  },
+  {
+    "date": "2026-03-25",
+    "label": "25 mars 2026",
+    "labelEn": "March 25, 2026",
+    "text": "1 vote nominatif tenu à l'Assemblée.",
+    "textEn": "1 recorded division held in the Assembly."
+  },
+  {
+    "date": "2026-03-24",
+    "label": "24 mars 2026",
+    "labelEn": "March 24, 2026",
+    "text": "Dépôt du projet de loi n° 23 — Loi visant principalement à mieux accompagner les personnes dont l’état mental pourrait représenter un r…",
+    "textEn": "Bill 23 introduced — Act mainly to better support persons whose mental state could pose a risk to their own safety or that of…"
+  },
+  {
+    "date": "2026-03-24",
+    "label": "24 mars 2026",
+    "labelEn": "March 24, 2026",
+    "text": "Dépôt du projet de loi n° 204 — Loi concernant la Ville de Gatineau",
+    "textEn": "Bill 204 introduced — Act respecting the Ville de Gatineau"
+  },
+  {
+    "date": "2026-03-24",
+    "label": "24 mars 2026",
+    "labelEn": "March 24, 2026",
+    "text": "3 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "3 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-03-20",
+    "label": "20 mars 2026",
+    "labelEn": "March 20, 2026",
+    "text": "Sanction du projet de loi n° 26 — Loi n° 1 sur les crédits, 2026-2027",
+    "textEn": "Bill 26 assented to — Appropriation Act No. 1, 2026-2027"
+  },
+  {
+    "date": "2026-03-19",
+    "label": "19 mars 2026",
+    "labelEn": "March 19, 2026",
+    "text": "Dépôt du projet de loi n° 26 — Loi n° 1 sur les crédits, 2026-2027",
+    "textEn": "Bill 26 introduced — Appropriation Act No. 1, 2026-2027"
+  },
+  {
+    "date": "2026-03-19",
+    "label": "19 mars 2026",
+    "labelEn": "March 19, 2026",
+    "text": "5 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "5 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-03-18",
+    "label": "18 mars 2026",
+    "labelEn": "March 18, 2026",
+    "text": "Dépôt du projet de loi n° 6 — Loi donnant suite à des mesures fiscales annoncées lors du discours sur le budget du 18 mars 2026 et du…",
+    "textEn": "Bill 6 introduced — Act to give effect to fiscal measures announced in the budget speech of 18 March 2026 and in the update…"
+  },
+  {
+    "date": "2026-03-18",
+    "label": "18 mars 2026",
+    "labelEn": "March 18, 2026",
+    "text": "Dépôt du projet de loi n° 25 — Loi visant à accroître la confiance du public envers le système de justice en modernisant la déontologie…",
+    "textEn": "Bill 25 introduced — Act to increase public confidence in the justice system by modernizing judicial ethics and implementing…"
+  },
+  {
+    "date": "2026-03-18",
+    "label": "18 mars 2026",
+    "labelEn": "March 18, 2026",
+    "text": "1 vote nominatif tenu à l'Assemblée.",
+    "textEn": "1 recorded division held in the Assembly."
+  },
+  {
+    "date": "2026-03-17",
+    "label": "17 mars 2026",
+    "labelEn": "March 17, 2026",
+    "text": "2 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "2 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-02-26",
+    "label": "26 février 2026",
+    "labelEn": "February 26, 2026",
+    "text": "Sanction du projet de loi n° 19 — Loi visant notamment l’amélioration de l’accès aux services médicaux et la prise en charge médicale de l…",
+    "textEn": "Bill 19 assented to — Act to notably improve access to medical services and the medical care of the population"
+  },
+  {
+    "date": "2026-02-26",
+    "label": "26 février 2026",
+    "labelEn": "February 26, 2026",
+    "text": "Dépôt du projet de loi n° 592 — Loi édictant la Loi sur la régionalisation de l’immigration afin d’instituer des tables régionales de l’…",
+    "textEn": "Bill 592 introduced — An Act to enact the Act respecting the regionalization of immigration in order to establish regional imm…"
+  },
+  {
+    "date": "2026-02-26",
+    "label": "26 février 2026",
+    "labelEn": "February 26, 2026",
+    "text": "5 votes nominatifs tenus à l'Assemblée.",
+    "textEn": "5 recorded divisions held in the Assembly."
+  },
+  {
+    "date": "2026-02-25",
+    "label": "25 février 2026",
+    "labelEn": "February 25, 2026",
+    "text": "Dépôt du projet de loi n° 392 — Loi visant à lutter contre le gaspillage alimentaire",
+    "textEn": "Bill 392 introduced — Act to combat food waste"
+  },
+  {
+    "date": "2026-02-25",
+    "label": "25 février 2026",
+    "labelEn": "February 25, 2026",
+    "text": "Dépôt du projet de loi n° 497 — Loi visant à assurer la qualité de l’air",
+    "textEn": "Bill 497 introduced — Act to ensure air quality"
+  }
 ];
+/* NEWS_DATA_END */
 const newsAnchor = newsItems.reduce((max,n)=> n.date > max ? n.date : max, newsItems[0].date);
 let newsWindows = 1; // nombre de fenêtres de 7 jours affichées
 
