@@ -2601,6 +2601,15 @@ function applyLanguage(){
 function applyAssemblyState(){
   if(typeof ASSEMBLY === 'undefined' || !ASSEMBLY.dissolved) return;
   const isEn = currentLang === 'en';
+  // Le titre et le sous-titre des pétitions annonçaient des pétitions
+  // « actuellement ouvertes pour signature », ce qui contredisait l'avis affiché
+  // juste en dessous (aucune ne peut être signée pendant la dissolution).
+  const pTitre = document.querySelector('[data-i18n="h.petitions"]');
+  if(pTitre) pTitre.textContent = isEn ? 'Petitions at the National Assembly' : 'Pétitions à l\'Assemblée nationale';
+  const pSub = document.querySelector('[data-i18n="pet.sub"]');
+  if(pSub) pSub.textContent = isEn
+    ? 'No petition can be signed while the Assembly is dissolved'
+    : 'Aucune pétition ne peut être signée pendant la dissolution de l\'Assemblée';
   const h = document.querySelector('#deputesTitle h2');
   if(h) h.textContent = isEn ? 'The outgoing Assembly' : 'L\'Assemblée sortante';
   const note = document.querySelector('#deputesTitle .head-note');
@@ -6748,16 +6757,19 @@ const newsItems = [
 ];
 /* NEWS_DATA_END */
 const newsAnchor = newsItems.reduce((max,n)=> n.date > max ? n.date : max, newsItems[0].date);
-let newsWindows = 1; // nombre de fenêtres de 7 jours affichées
+// Borne le nombre d'ÉVÉNEMENTS, pas de journées : une seule journée de fin de
+// session peut en contenir neuf et remplir l'écran à elle seule.
+const NEWS_STEP = 8;
+let newsShown = NEWS_STEP;
 
 function renderNews(){
   const isEn = currentLang === 'en';
-  const cutoff = new Date(newsAnchor);
-  cutoff.setDate(cutoff.getDate() - 7*newsWindows);
-  const cutoffStr = cutoff.toISOString().slice(0,10);
-  const visible = newsItems.filter(n => n.date >= cutoffStr);
-  const hasMore = newsItems.some(n => n.date < cutoffStr);
-  const moreBtn = isEn ? '+ 7 more days' : '+ 7 jours de plus';
+  // Pagination par JOURNÉES, pas par fenêtres de 7 jours : une seule semaine de
+  // fin de session peut contenir 20 événements et remplir tout l'écran. On
+  // affiche un nombre fixe de journées, comme les pétitions affichent 3 cartes.
+  const visible = newsItems.slice(0, newsShown);
+  const hasMore = newsItems.length > visible.length;
+  const moreBtn = isEn ? "+ Show more" : "+ Voir plus";
   const noMore = isEn ? 'Data not yet confirmed beyond this — to be added later.' : 'Donnée manquante au-delà de cette date — à confirmer plus tard.';
 
   // DISSOLUTION : sans explication, « Quoi de neuf » affichant des entrées de
@@ -6789,7 +6801,7 @@ function renderNews(){
 }
 
 function loadMoreNews(){
-  newsWindows++;
+  newsShown += NEWS_STEP;
   renderNews();
 }
 
