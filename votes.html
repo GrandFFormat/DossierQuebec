@@ -6199,7 +6199,17 @@ function renderNews(){
   const moreBtn = isEn ? '+ 7 more days' : '+ 7 jours de plus';
   const noMore = isEn ? 'Data not yet confirmed beyond this — to be added later.' : 'Donnée manquante au-delà de cette date — à confirmer plus tard.';
 
-  document.getElementById('newsList').innerHTML = visible.map(n => `
+  // DISSOLUTION : sans explication, « Quoi de neuf » affichant des entrées de
+  // juin donne l'impression d'un site à l'abandon. La vraie raison, c'est qu'il
+  // ne s'est rien passé : l'Assemblée a suspendu ses travaux le 12 juin puis a
+  // été dissoute le 27 août. On le dit, plutôt que de laisser le doute.
+  const avisDissolution = (typeof ASSEMBLY !== 'undefined' && ASSEMBLY.dissolved)
+    ? `<div class="info-box" style="margin-bottom:16px;">${isEn
+        ? "Nothing new since June 12, 2026 — and that is expected. The Assembly rose that day, then was dissolved on August 27. There will be no new parliamentary activity until the new Assembly convenes on November 17, 2026. What follows is the final record of the 43rd legislature."
+        : "Rien de neuf depuis le 12 juin 2026 — et c'est normal. L'Assemblée a suspendu ses travaux ce jour-là, puis a été dissoute le 27 août. Il n'y aura pas de nouvelle activité parlementaire avant la rentrée de la nouvelle Assemblée, le 17 novembre 2026. Ce qui suit est le dernier état des travaux de la 43<sup>e</sup> législature."}</div>`
+    : '';
+
+  document.getElementById('newsList').innerHTML = avisDissolution + visible.map(n => `
     <div class="news-item">
       <div class="news-date">${isEn ? (n.labelEn||n.label) : n.label}</div>
       <div class="news-body"><p>${isEn ? (n.textEn||n.text) : n.text}</p></div>
