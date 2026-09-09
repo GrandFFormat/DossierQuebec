@@ -5821,7 +5821,7 @@ const themeColors = {
   'Santé':'#E23A3A', 'Logement':'#0E4FC1', 'Transport':'#1E9E5A',
   'Finances publiques':'#FFD24D', 'Éducation':'#FF7B33', 'Environnement':'#12429B',
   'Économie':'#7C5CD6', 'Famille':'#D4537E', 'Culture':'#00A5CF',
-  'Immigration':'#B45309', 'Énergie':'#0891B2', 'Justice':'#6B7280', 'Agriculture':'#84A31E', 'Aînés':'#7C3AED',
+  'Immigration':'#B45309', 'Énergie':'#0891B2', 'Justice':'#6B7280', 'Agriculture':'#84A31E', 'Aînés':'#7C3AED', 'Fiscalité':'#A16207', 'Infrastructures':'#475569',
 };
 const themeFallback = ['#8B5CF6','#0891B2','#C2410C','#4D7C0F','#BE185D','#0F766E'];
 function themeColor(t){
@@ -6272,14 +6272,25 @@ const petitions = [
 
 /* PROMISES_DATA_START — généré par scrapers/build-promises-data.js à partir de
    data/promises.json (saisi à la main). Éditer le JSON, pas ce bloc.
-   Généré le 2026-09-09T13:38:08.404Z */
+   Généré le 2026-09-09T14:11:36.312Z */
 const promises = [
   {
-    "id": "qs-loyers",
+    "id": "qs-fortunes",
+    "party": "QS",
+    "theme": "Fiscalité",
+    "quote": "Un gouvernement solidaire instaurera une taxe progressive sur la part des grandes fortunes excédant 25 millions de dollars.",
+    "sourceLabel": "Québec solidaire — Plateforme électorale 2026 (PDF officiel)",
+    "sourceUrl": "https://quebecsolidaire.net/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "qs-logements-sociaux",
     "party": "QS",
     "theme": "Logement",
-    "quote": "Plafonner les hausses de loyer à l'inflation.",
-    "sourceLabel": "Québec solidaire — site officiel, « Contrôler le prix des loyers »",
+    "quote": "Viser l'ajout de 50 000 logements sociaux et communautaires dans un premier mandat, pour qu'ils représentent 20 % du parc locatif d'ici 2050.",
+    "sourceLabel": "Québec solidaire — Plateforme électorale 2026 (PDF officiel)",
     "sourceUrl": "https://quebecsolidaire.net/",
     "sourceType": "primaire",
     "capturedAt": "2026-09-09",
@@ -6289,8 +6300,30 @@ const promises = [
     "id": "qs-transport",
     "party": "QS",
     "theme": "Transport",
-    "quote": "Faire aboutir les projets restés trop longtemps sur la table, comme les tramways à Québec et à Gatineau, ou le lien structurant à l'Est de Montréal.",
-    "sourceLabel": "Québec solidaire — site officiel, « Choisir le transport collectif »",
+    "quote": "Augmenter la proportion d'investissements dans les transports collectifs au-delà de 50 % des dépenses publiques en transport.",
+    "sourceLabel": "Québec solidaire — Plateforme électorale 2026 (PDF officiel)",
+    "sourceUrl": "https://quebecsolidaire.net/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "qs-territoire",
+    "party": "QS",
+    "theme": "Environnement",
+    "quote": "Garantir la protection de 30 % du territoire dans toutes les régions, en priorisant le sud du Québec.",
+    "sourceLabel": "Québec solidaire — Plateforme électorale 2026 (PDF officiel)",
+    "sourceUrl": "https://quebecsolidaire.net/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "qs-premiere-ligne",
+    "party": "QS",
+    "theme": "Santé",
+    "quote": "Créer jusqu'à 400 points d'accès de services en première ligne, principalement via les CLSC.",
+    "sourceLabel": "Québec solidaire — Plateforme électorale 2026 (PDF officiel)",
     "sourceUrl": "https://quebecsolidaire.net/",
     "sourceType": "primaire",
     "capturedAt": "2026-09-09",
@@ -6300,19 +6333,63 @@ const promises = [
     "id": "plq-logements",
     "party": "PLQ",
     "theme": "Logement",
-    "quote": "Construire, à terme, 100 000 logements par année.",
-    "sourceLabel": "Parti libéral du Québec — engagements 2026 (site officiel)",
+    "quote": "Construire, à terme, 100 000 logements par an.",
+    "sourceLabel": "Parti libéral du Québec — page « Engagements » (site officiel)",
     "sourceUrl": "https://plq.org/engagements/",
     "sourceType": "primaire",
     "capturedAt": "2026-09-09",
     "draft": false
   },
   {
-    "id": "plq-telesante",
+    "id": "plq-abordables",
     "party": "PLQ",
-    "theme": "Santé",
-    "quote": "Mettre en place une plateforme de télésanté.",
-    "sourceLabel": "Parti libéral du Québec — engagements 2026 (site officiel)",
+    "theme": "Logement",
+    "quote": "Ajouter 40 000 unités abordables au parc locatif.",
+    "sourceLabel": "Parti libéral du Québec — page « Engagements » (site officiel)",
+    "sourceUrl": "https://plq.org/engagements/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "plq-pme",
+    "party": "PLQ",
+    "theme": "Économie",
+    "quote": "Réduire graduellement le taux d'imposition des PME, de 11,5 % à 10 %.",
+    "sourceLabel": "Parti libéral du Québec — page « Engagements » (site officiel)",
+    "sourceUrl": "https://plq.org/engagements/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "plq-moratoire",
+    "party": "PLQ",
+    "theme": "Économie",
+    "quote": "Imposer un moratoire immédiat sur toute nouvelle règle ou réglementation qui alourdit le fardeau administratif des municipalités et des PME.",
+    "sourceLabel": "Parti libéral du Québec — page « Engagements » (site officiel)",
+    "sourceUrl": "https://plq.org/engagements/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "plq-livre",
+    "party": "PLQ",
+    "theme": "Éducation",
+    "quote": "Offrir un livre jeunesse québécois en français à tous les élèves du primaire à la fin de chaque année scolaire.",
+    "sourceLabel": "Parti libéral du Québec — page « Engagements » (site officiel)",
+    "sourceUrl": "https://plq.org/engagements/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "plq-manufacturier",
+    "party": "PLQ",
+    "theme": "Économie",
+    "quote": "Faire passer la contribution du secteur manufacturier de 12 % à 15 % du PIB québécois d'ici 2035.",
+    "sourceLabel": "Parti libéral du Québec — page « Engagements » (site officiel)",
     "sourceUrl": "https://plq.org/engagements/",
     "sourceType": "primaire",
     "capturedAt": "2026-09-09",
@@ -6323,7 +6400,7 @@ const promises = [
     "party": "PQ",
     "theme": "Immigration",
     "quote": "Un modèle viable en immigration.",
-    "sourceLabel": "Parti Québécois — site officiel (programme : « Le Livre bleu »)",
+    "sourceLabel": "Parti Québécois — site officiel",
     "sourceUrl": "https://pq.org/",
     "sourceType": "primaire",
     "capturedAt": "2026-09-09",
@@ -6341,11 +6418,55 @@ const promises = [
     "draft": false
   },
   {
+    "id": "pq-culture-jeunes",
+    "party": "PQ",
+    "theme": "Culture",
+    "quote": "Favoriser l'accès des jeunes à la culture québécoise et mieux accompagner les artistes.",
+    "sourceLabel": "Parti Québécois — annonce du 6 septembre 2026 (site officiel)",
+    "sourceUrl": "https://pq.org/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "pq-sante-quebec",
+    "party": "PQ",
+    "theme": "Santé",
+    "quote": "Abolir Santé Québec, l'agence gouvernementale créée par le gouvernement de la CAQ en 2023.",
+    "sourceLabel": "Noovo Info — « Les premières promesses électorales » (27 août 2026)",
+    "sourceUrl": "https://www.noovo.info/nouvelles/politique/elections-quebec/article/les-premieres-promesses-electorales-de-la-caq-du-plq-du-pq-de-qs-et-du-pcq/",
+    "sourceType": "journalistique",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "pcq-embauches",
+    "party": "PCQ",
+    "theme": "Finances publiques",
+    "quote": "Gel permanent des embauches dans la fonction publique et réduction graduelle de 5,6 % par année, grâce principalement à l'attrition.",
+    "sourceLabel": "Parti conservateur du Québec — Plateforme électorale 2026 (PDF officiel)",
+    "sourceUrl": "https://conservateur.quebec/documents-officiels/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "pcq-infrastructures",
+    "party": "PCQ",
+    "theme": "Infrastructures",
+    "quote": "Porter la part des investissements consacrée à l'entretien de 65 % à 75-80 %, tant que le déficit de maintien des actifs de 40 milliards $ ne commencera pas à se résorber.",
+    "sourceLabel": "Parti conservateur du Québec — Plateforme électorale 2026 (PDF officiel)",
+    "sourceUrl": "https://conservateur.quebec/documents-officiels/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
     "id": "pcq-sport",
     "party": "PCQ",
     "theme": "Famille",
     "quote": "Un rabais de 100 $ par an pour l'inscription à une activité sportive, pour les familles ayant un revenu inférieur à 100 000 $.",
-    "sourceLabel": "Parti conservateur du Québec — site officiel (Plateforme 2026)",
+    "sourceLabel": "Parti conservateur du Québec — site officiel",
     "sourceUrl": "https://conservateur.quebec/documents-officiels/",
     "sourceType": "primaire",
     "capturedAt": "2026-09-09",
@@ -6354,9 +6475,9 @@ const promises = [
   {
     "id": "pcq-impots",
     "party": "PCQ",
-    "theme": "Finances publiques",
+    "theme": "Fiscalité",
     "quote": "Une économie de plus de 8 700 $ par ménage sur cinq ans, avec un seuil d'exemption fiscale porté à plus de 35 000 $.",
-    "sourceLabel": "Parti conservateur du Québec — site officiel (Plateforme 2026)",
+    "sourceLabel": "Parti conservateur du Québec — site officiel",
     "sourceUrl": "https://conservateur.quebec/documents-officiels/",
     "sourceType": "primaire",
     "capturedAt": "2026-09-09",
