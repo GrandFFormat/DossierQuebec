@@ -698,8 +698,18 @@
 
   /* ---------- PHASE 2 : APERÇU ---------- */
   /* Bande pleine largeur qui « déborde » du conteneur .app tout en gardant le
-     contenu aligné sur lui. */
-  .bleed{margin-inline:calc(50% - 50vw); padding-inline:max(28px, calc(50vw - 50%));}
+     contenu aligné sur lui.
+
+     ⚠️ --vw, et non 100vw. L'unité vw se trompe ici DEUX fois :
+     1) elle inclut la barre de défilement — 8 px de débordement horizontal sur
+        desktop, même sans zoom ;
+     2) elle ne suit pas le `zoom` CSS que le bouton A+ applique sur <body> :
+        à 120 %, 100vw vaut toujours la largeur de la fenêtre mais est ensuite
+        RENDU 1,2 fois plus grand, d'où 41 px de débordement de chaque côté
+        (page qui glisse de côté sur téléphone).
+     --vw est publié par majMetriquesMiseEnPage() : largeur RÉELLEMENT
+     disponible, barre de défilement retirée et zoom pris en compte. */
+  .bleed{margin-inline:calc(50% - var(--vw,100vw)/2); padding-inline:max(28px, calc(var(--vw,100vw)/2 - 50%));}
 
   .hero-poster{padding:44px 0 40px;}
   .hero-h1{
@@ -712,7 +722,7 @@
   .hero-blue{color:var(--gold); -webkit-text-stroke:0;}
   .hero-row{display:flex; align-items:stretch; gap:16px; margin-top:40px; flex-wrap:wrap;}
   .hero-manifesto{
-    flex:1; min-width:300px; border:3px solid var(--ink); background:#fff;
+    flex:1; min-width:min(300px,100%); border:3px solid var(--ink); background:#fff;
     padding:20px 24px; box-shadow:var(--shadow);
   }
   .hero-manifesto p{margin:0; font-size:17px; line-height:1.45; font-weight:500;}
@@ -942,7 +952,9 @@
 
   /* Recherche + filtres rapides (maquette) sur une rangée */
   .projets-controls{display:flex; gap:16px; flex-wrap:wrap; align-items:stretch; margin-top:22px;}
-  .projets-controls .brutal-search{flex:1 1 320px; min-width:300px; max-width:560px; margin-top:0;}
+  /* min() : un min-width fixe de 300 px dépassait l'écran quand la largeur de
+     mise en page tombe sous 300 px — ce que produit le bouton A+ à 150 %. */
+  .projets-controls .brutal-search{flex:1 1 320px; min-width:min(300px,100%); max-width:560px; margin-top:0;}
   .quick-filters{display:flex; gap:8px; flex-wrap:wrap; align-items:center;}
   .qf-btn{
     font-family:'Archivo Narrow',sans-serif; font-size:13.5px; font-weight:700;
@@ -1395,6 +1407,29 @@
     .step-filters{margin-top:8px;}
     .status-filters.open, .step-filters.open{display:flex;}
   }
+
+  /* Largeur de mise en page très étroite.
+     ⚠️ Pas de @media ici, et c'est volontaire : le `zoom` du bouton A+ NE
+     CHANGE PAS la largeur vue par les media queries. À 150 % sur un écran de
+     412 px, la mise en page ne dispose réellement que de 275 px, mais
+     « @media (max-width:360px) » ne se déclencherait jamais. C'est le JS
+     (majLargeurEtroite) qui pose la classe .etroit d'après la largeur EFFECTIVE.
+     Le logotype tient en un seul mot — il ne peut pas se couper — il faut donc
+     le réduire, sinon il pousse la page hors de l'écran. */
+  .etroit .brand{gap:8px; min-width:0;}
+  .etroit .brand-text h1{font-size:19px;}
+  .etroit .brand-mark, .etroit .maple-flip, .etroit .maple-flip svg{width:30px; height:30px;}
+  .etroit .suggest-cta{white-space:normal;}   /* nowrap : 389 px sur 275 disponibles */
+  .etroit .result-badge{white-space:normal;}
+  .etroit .dep-group-banner{flex-wrap:wrap; gap:4px;}
+  .etroit .dep-group-name{min-width:0;}
+  .etroit .hero-h1-md{font-size:30px;}
+  .etroit .vc-counts{flex-wrap:wrap; gap:8px;}
+  .etroit .vcc{white-space:normal;}
+  .etroit .vote-card *{overflow-wrap:break-word; word-break:break-word;}
+  /* Un champ ou une liste déroulante ne rétrécit pas sous sa largeur par
+     défaut du navigateur : sans ceci, ils débordent sur écran très étroit. */
+  input, select, textarea{max-width:100%;}
 
   .font-size-ctrl{
     display:flex; align-items:center; gap:2px; flex:none;
@@ -6147,6 +6182,18 @@ document.querySelectorAll('.quick-nav a').forEach(a=>{
 });
 
 let fontZoom = 100;
+// Le CSS n'a aucun moyen de connaître la largeur dont dispose RÉELLEMENT la
+// mise en page : l'unité vw inclut la barre de défilement, et ni vw ni les
+// media queries ne suivent le `zoom` que le bouton A+ applique sur <body>
+// (à 150 % sur un téléphone de 412 px, la page se compose comme dans 275 px).
+// On la mesure donc ici et on la publie : --vw pour les bandes pleine largeur,
+// la classe .etroit pour les réglages qu'un @media ne peut pas déclencher.
+function majMetriquesMiseEnPage(){
+  const effective = document.documentElement.clientWidth / (fontZoom / 100);
+  document.body.style.setProperty('--vw', effective + 'px');
+  document.documentElement.classList.toggle('etroit', effective < 360);
+}
+window.addEventListener('resize', majMetriquesMiseEnPage);
 async function loadFontZoom(){
   try{
     const res = await window.storage.get('font-zoom');
@@ -6156,6 +6203,7 @@ async function loadFontZoom(){
 }
 function applyFontZoom(){
   document.body.style.zoom = fontZoom + '%';
+  majMetriquesMiseEnPage();
   document.getElementById('fontPct').textContent = fontZoom + '%';
   document.getElementById('fontMinus').disabled = fontZoom <= 80;
   document.getElementById('fontPlus').disabled = fontZoom >= 150;
