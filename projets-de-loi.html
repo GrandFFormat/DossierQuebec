@@ -270,7 +270,9 @@
   .hemicycle-legend b{font-family:'Archivo Narrow',sans-serif; font-size:12.5px;}
 
   /* ---------- MINISTER GRID ---------- */
-  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:14px;}
+  /* min(270px,100%) : sur un écran très étroit (320 px), une colonne de 270 px
+     minimum débordait de la page. Le min() la laisse rétrécir quand il le faut. */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(270px,100%),1fr)); gap:14px;}
   .m-card{
     background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
     padding:16px; position:relative;
@@ -991,6 +993,16 @@
   }
   .bill .head{align-items:flex-start; gap:18px;}
   .bill-head-main{flex:1 1 0; min-width:240px;}
+  /* Écrans étroits (Pixel 8 en 360 px et moins) : le min-width du titre combiné
+     aux badges de droite débordait de la page. Les libellés de statut se sont
+     allongés (« Tombé en cours de route »), ce qui a révélé le problème.
+     On laisse la tête de carte passer sur deux lignes plutôt que déborder. */
+  @media (max-width:480px){
+    .bill .head{flex-wrap:wrap; gap:10px;}
+    .bill-head-main{min-width:0; flex:1 1 100%;}
+    .bill-head-right{width:100%; justify-content:flex-start;}
+    .status-pill{white-space:normal;}
+  }
   .bill-head-main h3{margin:0;}
   .bill-head-right{display:flex; align-items:center; gap:6px; flex:none; flex-wrap:wrap; justify-content:flex-end;}
   .bill h3{font-weight:800; font-size:17.5px; letter-spacing:-0.01em; line-height:1.25;}
@@ -1174,7 +1186,12 @@
   .m-card{
     border:3px solid var(--ink); box-shadow:var(--shadow); background:#fff;
     padding:0; display:flex; flex-direction:column;
+    /* Un élément de grille a min-width:auto : il refuse de rétrécir sous la
+       largeur de son plus long contenu, et débordait donc sa cellule sur les
+       écrans très étroits (320 px). */
+    min-width:0;
   }
+  .m-card, .m-card *{overflow-wrap:break-word; word-break:break-word;}
   .m-card-top{padding:20px 22px 16px; border-bottom:2px solid var(--ink);}
   .m-top-row{display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:10px;}
   .m-name{font-size:19px; font-weight:800; letter-spacing:-0.01em; line-height:1.15; text-transform:uppercase;}
