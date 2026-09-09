@@ -731,6 +731,54 @@
 
   .band{padding-top:46px; padding-bottom:50px; border-bottom:3px solid var(--ink);}
   .band-yellow{background:var(--yellow); border-top:3px solid var(--ink);}
+  /* CTA dans une bande jaune : noir sur jaune pour ressortir. */
+  .diss-cta{
+    display:inline-flex; align-items:center; margin-top:8px;
+    background:#131313; color:var(--yellow); border:3px solid var(--ink);
+    font-family:'Archivo',sans-serif; font-weight:800; font-size:15px;
+    text-transform:uppercase; letter-spacing:0.03em; padding:14px 22px;
+    box-shadow:var(--shadow-sm); cursor:pointer; text-decoration:none;
+  }
+  .diss-cta:hover{background:#fff; color:var(--ink);}
+
+  /* ---------- PROMESSES (promesse | action, côte à côte) ---------- */
+  .prom-card{border:3px solid var(--ink); background:#fff; box-shadow:var(--shadow); padding:20px 24px; margin-bottom:16px;}
+  .prom-top{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:12px;}
+  .prom-theme{font-family:'Archivo Narrow',sans-serif; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--slate);}
+  .prom-draft{
+    font-family:'Archivo Narrow',sans-serif; font-size:11px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.04em; border:2px solid var(--ink);
+    background:var(--yellow); color:var(--ink); padding:2px 8px;
+  }
+  .prom-quote{font-size:17px; font-weight:600; line-height:1.4; margin:0 0 16px;}
+  .prom-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:760px){ .prom-grid{grid-template-columns:1fr;} }
+  .prom-col{border:2px solid var(--ink); background:var(--paper); padding:14px 16px;}
+  .prom-col .lbl{
+    font-family:'Archivo Narrow',sans-serif; font-size:11.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.06em; color:var(--gold); margin-bottom:8px; display:block;
+  }
+  .prom-col .lbl.att{color:var(--slate);}
+  .prom-col p{font-size:13.5px; line-height:1.5; margin:0 0 6px;}
+  .prom-col a{font-size:12px; color:var(--ink); text-decoration:underline;}
+  .prom-none{font-size:13.5px; color:var(--slate); line-height:1.5;}
+  .prom-srctype{font-family:'Archivo Narrow',sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; color:var(--slate);}
+  .prom-filters{display:flex; flex-direction:column; gap:10px; margin:18px 0 6px;}
+  .prom-filter-row{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+  .prom-filter-lbl{
+    font-family:'Archivo Narrow',sans-serif; font-size:12px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.06em; color:var(--slate);
+    min-width:74px; flex:none;
+  }
+  /* Pastille de sujet sur la carte (cliquable pour filtrer). */
+  .prom-theme-pill{
+    font-family:'Archivo Narrow',sans-serif; font-size:11.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.04em; border:2px solid var(--ink);
+    background:var(--paper); color:var(--ink); padding:3px 10px; cursor:pointer;
+  }
+  .prom-theme-pill:hover{filter:brightness(0.88);}
+  /* Bouton de filtre sélectionné qui garde sa couleur : ombre dure + trait épais. */
+  .qf-btn.qf-sel{box-shadow:var(--shadow-sm); outline:3px solid var(--ink); outline-offset:2px;}
   .band-white{background:#fff;}
   .band-blue{background:var(--gold); color:#fff; border-top:3px solid var(--ink);}
   #band-challenged{margin-top:30px;}
@@ -1471,6 +1519,7 @@ function goToFederal(evt){
       <h2 data-i18n="diss.h">⚠️ L'Assemblée est dissoute — élections le 5 octobre</h2>
       <p data-i18n="diss.p1">Le <b>27 août 2026</b>, l'Assemblée nationale a été dissoute : la 43<sup>e</sup> législature est terminée. Il n'y a plus de député·e·s en poste — celles et ceux qui siégeaient sont maintenant candidat·e·s ou se retirent. Le gouvernement, lui, reste en place le temps de la campagne.</p>
       <p data-i18n="diss.p2">Conséquence directe : <b>tous les projets de loi qui n'avaient pas été sanctionnés sont morts au feuilleton.</b> Ils devront repartir de zéro devant la nouvelle Assemblée, convoquée le <b>17 novembre 2026</b>. Ce qui reste ici, c'est le bilan complet de la 43<sup>e</sup> législature : les lois adoptées, les votes de chaque député·e, et les projets qui n'ont pas abouti.</p>
+      <a class="diss-cta" href="/promesses" data-i18n="diss.cta">Ce que les partis promettent →</a>
     </div>
 
     <!-- Hero poster brutaliste : la devise du site devient l'affiche.
@@ -1752,6 +1801,51 @@ function goToFederal(evt){
   <!-- COMPTE & ABONNEMENT -->
 
   <!-- LEXIQUE (fusion : personnes, lexique, apropos) -->
+  <!-- PROMESSES — vue sans onglet (comme view-bd). Accessible par /promesses,
+       par le bouton de la bande de dissolution et par le bloc du Lexique.
+       Contenu saisi à la main dans data/promises.json (voir la note du fichier). -->
+  <section class="view" id="view-promesses">
+    <div class="view-hero">
+      <h1 class="hero-h1 hero-h1-md">
+        <span data-i18n="prom.l1">Ce qu'ils promettent,</span>
+        <span class="hero-outline" data-i18n="prom.l2">ce qu'ils en feront.</span>
+      </h1>
+      <p class="view-hero-sub" data-i18n="prom.sub">Les engagements des partis pour l'élection du 5 octobre 2026, chacun avec sa source. <b>Aucun verdict n'est rendu ici</b> — à mesure que la nouvelle Assemblée légiférera, chaque promesse sera placée à côté de ce qui a réellement été fait.</p>
+    </div>
+
+    <div class="legend-strip bleed">
+      <span class="legend-label" data-i18n="prom.method">Notre méthode :</span>
+      <span class="legend-chips">
+        <span class="bstep" data-i18n="prom.m1">Citation exacte</span><span class="legend-arrow">→</span>
+        <span class="bstep" data-i18n="prom.m2">Source liée</span><span class="legend-arrow">→</span>
+        <span class="bstep" data-i18n="prom.m3">Aucun jugement</span>
+      </span>
+    </div>
+
+    <div class="prom-filters">
+      <div class="prom-filter-row">
+        <span class="prom-filter-lbl" data-i18n="prom.byparty">Par parti</span>
+        <div class="quick-filters" id="promPartyFilters"></div>
+      </div>
+      <div class="prom-filter-row">
+        <span class="prom-filter-lbl" data-i18n="prom.bytheme">Par sujet</span>
+        <div class="quick-filters" id="promThemeFilters"></div>
+      </div>
+    </div>
+
+    <div class="section-head min-group-head" id="promResultHead">
+      <div><h2 id="promResultTitle">Toutes les promesses</h2></div>
+      <span class="head-note" id="promResultNote"></span>
+    </div>
+
+    <div id="promisesList"></div>
+
+    <div class="band band-yellow bleed" id="band-promesses-suite">
+      <h2 data-i18n="prom.next.h">Et après le 5 octobre ?</h2>
+      <p data-i18n="prom.next.p">La nouvelle Assemblée siégera à partir du <b>17 novembre 2026</b>. À partir de là, chaque projet de loi déposé viendra se placer à côté de la promesse qui lui correspond — et l'absence de projet de loi sur un engagement sera tout aussi visible. C'est le suivi que personne ne fait passé la semaine électorale.</p>
+    </div>
+  </section>
+
   <section class="view" id="view-lexique">
     <!-- Hero de vue (refonte brutaliste) -->
     <div class="view-hero">
@@ -1766,6 +1860,14 @@ function goToFederal(evt){
     <div class="section-head" id="sec-compte"><div><h2 data-i18n="h.compte">Compte</h2></div></div>
     <div class="account-box" id="accountBox"></div>
     <div id="adminFlagCounts"></div>
+
+    <!-- Entrée permanente vers /promesses (la vue n'a pas d'onglet — voir la
+         décision : on lui en donnera un si la page est visitée souvent). -->
+    <div class="section-head" id="sec-promesses"><div><h2 data-i18n="h.promesses">Promesses électorales</h2></div></div>
+    <div class="info-box">
+      <span data-i18n="prom.lex">Les engagements des partis pour l'élection du 5 octobre 2026, chacun avec sa source — et, à mesure que la nouvelle Assemblée légiférera, ce qui en aura réellement été fait. Aucun verdict : la promesse et l'action, côte à côte.</span>
+      <div><a class="diss-cta" href="/promesses" data-i18n="prom.lex.cta" style="margin-top:12px;">Voir les promesses →</a></div>
+    </div>
 
     <div class="quick-nav" id="quickNavLexique">
       <span class="quick-nav-label" data-i18n="quicknav.label">Aller à :</span>
@@ -2260,6 +2362,21 @@ const translations = {
     'diss.h':"⚠️ The Assembly is dissolved — election October 5",
     'diss.p1':"On <b>August 27, 2026</b>, the National Assembly was dissolved: the 43rd legislature is over. There are no sitting members anymore — those who sat are now candidates or are stepping down. The government stays in place for the duration of the campaign.",
     'diss.p2':"Direct consequence: <b>every bill that had not been assented to died on the Order Paper.</b> They will have to start over before the new Assembly, convened on <b>November 17, 2026</b>. What remains here is the full record of the 43rd legislature: the laws that passed, how each member voted, and the bills that did not make it.",
+    'diss.cta':"What the parties are promising →",
+    'prom.l1':"What they promise,",
+    'prom.l2':"what they'll do with it.",
+    'prom.sub':"The parties' commitments for the October 5, 2026 election, each with its source. <b>No verdict is issued here</b> — as the new Assembly legislates, each promise will be placed next to what was actually done.",
+    'h.promesses':"Election promises",
+    'prom.lex':"The parties' commitments for the October 5, 2026 election, each with its source — and, as the new Assembly legislates, what was actually done about them. No verdict: the promise and the action, side by side.",
+    'prom.lex.cta':"See the promises →",
+    'prom.byparty':"By party",
+    'prom.bytheme':"By topic",
+    'prom.method':"Our method:",
+    'prom.m1':"Exact quote",
+    'prom.m2':"Source linked",
+    'prom.m3':"No judgment",
+    'prom.next.h':"And after October 5?",
+    'prom.next.p':"The new Assembly sits from <b>November 17, 2026</b>. From then on, every bill introduced will be placed next to the promise it matches — and the absence of a bill on a commitment will be just as visible. That is the follow-up nobody does past election week.",
     'dissp.h':"⚠️ These bills never became law",
     'dissp.p':"The Assembly was dissolved on <b>August 27, 2026</b>. Any bill that had not been <b>assented to</b> therefore <b>died on the Order Paper</b> — that is the Assembly's official term. On the cards we say it plainly: <b>“dead on arrival”</b> if the bill never got past introduction, <b>“died along the way”</b> if it got further. Either way, it must start over before the new Assembly (November 17, 2026). Bills marked “Assented to” did become law.",
     'cal.p1':"The Assembly doesn't sit year-round. Its Standing Orders set two working periods: a spring period starting the 2nd Tuesday of February (16 weeks, plus 2 intensive weeks), and a fall period starting the 3rd Tuesday of September (10 weeks, plus 2 intensive weeks). Outside these periods the Assembly is adjourned — barring a special sitting called by the Premier.",
@@ -2460,6 +2577,7 @@ function applyLanguage(){
   renderApercuPetitions();
   renderNews();
   renderChallenged();
+  renderPromises();
   document.querySelectorAll('.snooze-pill').forEach(pill=>{
     // La pastille de l'intro compacte (#introCompact) n'a pas de <span> imbriqué
     // comme les autres — sans ce repli, ça plantait ici et bloquait tout le
@@ -5692,6 +5810,119 @@ async function adminReset(billId){
   renderAdminFlagCounts();
 }
 
+/* Promesses électorales — promesse et action côte à côte, sans verdict.
+   La colonne « action » reste vide tant que la nouvelle Assemblée n'a pas
+   légiféré (17 nov. 2026) ; elle se remplira à partir des projets de loi
+   déjà scrapés. Le vide est lui aussi une information. */
+/* Couleurs de sujet. Les thèmes courants ont une couleur fixe ; tout nouveau
+   thème ajouté dans data/promises.json reçoit automatiquement une couleur
+   stable de la palette de secours (dérivée du nom, donc toujours la même). */
+const themeColors = {
+  'Santé':'#E23A3A', 'Logement':'#0E4FC1', 'Transport':'#1E9E5A',
+  'Finances publiques':'#FFD24D', 'Éducation':'#FF7B33', 'Environnement':'#12429B',
+  'Économie':'#7C5CD6', 'Famille':'#D4537E', 'Culture':'#00A5CF',
+  'Immigration':'#B45309', 'Énergie':'#0891B2', 'Justice':'#6B7280', 'Agriculture':'#84A31E', 'Aînés':'#7C3AED',
+};
+const themeFallback = ['#8B5CF6','#0891B2','#C2410C','#4D7C0F','#BE185D','#0F766E'];
+function themeColor(t){
+  if(themeColors[t]) return themeColors[t];
+  let h = 0; for(let i=0; i<String(t).length; i++) h = (h*31 + String(t).charCodeAt(i)) % 9973;
+  return themeFallback[h % themeFallback.length];
+}
+// Noir ou blanc selon la luminance du fond — marche aussi pour les couleurs de secours.
+function readableOn(hex){
+  const c = String(hex).replace('#','');
+  const r = parseInt(c.slice(0,2),16), g = parseInt(c.slice(2,4),16), b = parseInt(c.slice(4,6),16);
+  return (0.299*r + 0.587*g + 0.114*b) > 150 ? '#131313' : '#fff';
+}
+
+let promParty = 'tous';
+let promTheme = 'tous';
+function setPromParty(p){ promParty = p; renderPromises(); }
+function setPromTheme(t){ promTheme = t; renderPromises(); }
+
+// Construit les deux rangées de filtres à partir des données elles-mêmes :
+// à mesure que des promesses sont ajoutées, les partis et sujets apparaissent
+// tout seuls — rien à maintenir à la main.
+function renderPromFilters(){
+  const isEn = currentLang === 'en';
+  const partyEl = document.getElementById('promPartyFilters');
+  const themeEl = document.getElementById('promThemeFilters');
+  const tous = isEn ? 'All' : 'Tous';
+  // Les boutons portent TOUJOURS la couleur (parti ou sujet) : on reconnaît
+  // d'un coup d'œil. La sélection se marque par la classe .qf-sel (ombre dure),
+  // pas par la couleur — sinon on perdrait le repère visuel.
+  if(partyEl){
+    const partis = [...new Set(promises.map(p => p.party))];
+    partyEl.innerHTML = [['tous', tous], ...partis.map(x => [x, x])].map(([k, label]) => {
+      const sel = promParty === k;
+      if(k === 'tous') return `<button class="qf-btn ${sel ? 'active' : ''}" onclick="setPromParty('tous')">${label}</button>`;
+      const bg = partyColors[k] || '#8B8578';
+      return `<button class="qf-btn ${sel ? 'qf-sel' : ''}" style="background:${bg}; color:${partyText(k)};" onclick="setPromParty('${k}')">${label}</button>`;
+    }).join('');
+  }
+  if(themeEl){
+    const sujets = [...new Set(promises.map(p => p.theme))].sort();
+    themeEl.innerHTML = [['tous', tous], ...sujets.map(x => [x, x])].map(([k, label]) => {
+      const sel = promTheme === k;
+      const esc = String(k).replace(/'/g, "\\'");
+      if(k === 'tous') return `<button class="qf-btn ${sel ? 'active' : ''}" onclick="setPromTheme('tous')">${label}</button>`;
+      const bg = themeColor(k);
+      return `<button class="qf-btn ${sel ? 'qf-sel' : ''}" style="background:${bg}; color:${readableOn(bg)};" onclick="setPromTheme('${esc}')">${label}</button>`;
+    }).join('');
+  }
+}
+
+function renderPromises(){
+  const el = document.getElementById('promisesList');
+  if(!el) return;
+  const isEn = currentLang === 'en';
+  renderPromFilters();
+  const liste = promises.filter(p =>
+    (promParty === 'tous' || p.party === promParty) &&
+    (promTheme === 'tous' || p.theme === promTheme));
+  const titreEl = document.getElementById('promResultTitle');
+  const noteEl = document.getElementById('promResultNote');
+  if(titreEl) titreEl.textContent = promParty === 'tous' && promTheme === 'tous'
+    ? (isEn ? 'All promises' : 'Toutes les promesses')
+    : [promParty !== 'tous' ? promParty : null, promTheme !== 'tous' ? promTheme : null].filter(Boolean).join(' · ');
+  if(noteEl) noteEl.textContent = `${liste.length} ${isEn ? (liste.length > 1 ? 'promises' : 'promise') : (liste.length > 1 ? 'promesses' : 'promesse')}`;
+  if(!promises.length){
+    el.innerHTML = `<div class="no-results">${isEn ? 'No promise recorded yet.' : 'Aucune promesse saisie pour l\'instant.'}</div>`;
+    return;
+  }
+  if(!liste.length){
+    el.innerHTML = `<div class="no-results">${isEn ? 'No promise matches these filters.' : 'Aucune promesse ne correspond à ces filtres.'}</div>`;
+    return;
+  }
+  el.innerHTML = liste.map(p => {
+    const couleur = partyColors[p.party] || '#8B8578';
+    const badge = `<span class="depute-party" style="background:${couleur}; color:${partyText(p.party)}">${p.party}</span>`;
+    const brouillon = p.draft ? `<span class="prom-draft">${isEn ? 'To verify' : 'À vérifier'}</span>` : '';
+    const typeSrc = p.sourceType === 'primaire'
+      ? (isEn ? 'Primary source (party)' : 'Source primaire (parti)')
+      : (isEn ? 'Journalistic source' : 'Source journalistique');
+    return `<div class="prom-card">
+      <div class="prom-top">${badge}<button class="prom-theme-pill" style="background:${themeColor(p.theme)}; color:${readableOn(themeColor(p.theme))};" onclick="setPromTheme('${String(p.theme).replace(/'/g, "\\'")}')" title="${isEn ? 'Filter by this topic' : 'Filtrer par ce sujet'}">${p.theme}</button>${brouillon}</div>
+      <p class="prom-quote">« ${p.quote} »</p>
+      <div class="prom-grid">
+        <div class="prom-col">
+          <span class="lbl">${isEn ? 'The promise' : 'La promesse'}</span>
+          <p>${p.sourceLabel}</p>
+          <p class="prom-srctype">${typeSrc} · ${isEn ? 'captured on' : 'captée le'} ${p.capturedAt}</p>
+          <a href="${p.sourceUrl}" target="_blank" rel="noopener">${isEn ? 'See the source' : 'Voir la source'}</a>
+        </div>
+        <div class="prom-col">
+          <span class="lbl att">${isEn ? 'The action' : 'L\'action'}</span>
+          <p class="prom-none">${isEn
+            ? 'Nothing yet. The new Assembly sits from November 17, 2026.'
+            : 'Rien encore. La nouvelle Assemblée siège à partir du 17 novembre 2026.'}</p>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
 /* ---------------- RENDER ---------------- */
 const mailIconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>';
 const deputesDirectoryUrl = 'https://www.assnat.qc.ca/fr/deputes/index.html';
@@ -6038,6 +6269,112 @@ const petitions = [
   }
 ];
 /* PETITIONS_DATA_END */
+
+/* PROMISES_DATA_START — généré par scrapers/build-promises-data.js à partir de
+   data/promises.json (saisi à la main). Éditer le JSON, pas ce bloc.
+   Généré le 2026-09-09T13:38:08.404Z */
+const promises = [
+  {
+    "id": "qs-loyers",
+    "party": "QS",
+    "theme": "Logement",
+    "quote": "Plafonner les hausses de loyer à l'inflation.",
+    "sourceLabel": "Québec solidaire — site officiel, « Contrôler le prix des loyers »",
+    "sourceUrl": "https://quebecsolidaire.net/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "qs-transport",
+    "party": "QS",
+    "theme": "Transport",
+    "quote": "Faire aboutir les projets restés trop longtemps sur la table, comme les tramways à Québec et à Gatineau, ou le lien structurant à l'Est de Montréal.",
+    "sourceLabel": "Québec solidaire — site officiel, « Choisir le transport collectif »",
+    "sourceUrl": "https://quebecsolidaire.net/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "plq-logements",
+    "party": "PLQ",
+    "theme": "Logement",
+    "quote": "Construire, à terme, 100 000 logements par année.",
+    "sourceLabel": "Parti libéral du Québec — engagements 2026 (site officiel)",
+    "sourceUrl": "https://plq.org/engagements/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "plq-telesante",
+    "party": "PLQ",
+    "theme": "Santé",
+    "quote": "Mettre en place une plateforme de télésanté.",
+    "sourceLabel": "Parti libéral du Québec — engagements 2026 (site officiel)",
+    "sourceUrl": "https://plq.org/engagements/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "pq-immigration",
+    "party": "PQ",
+    "theme": "Immigration",
+    "quote": "Un modèle viable en immigration.",
+    "sourceLabel": "Parti Québécois — site officiel (programme : « Le Livre bleu »)",
+    "sourceUrl": "https://pq.org/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "pq-aines",
+    "party": "PQ",
+    "theme": "Aînés",
+    "quote": "Plan pour le soutien à domicile des aînés.",
+    "sourceLabel": "Parti Québécois — annonce du 7 septembre 2026 (site officiel)",
+    "sourceUrl": "https://pq.org/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "pcq-sport",
+    "party": "PCQ",
+    "theme": "Famille",
+    "quote": "Un rabais de 100 $ par an pour l'inscription à une activité sportive, pour les familles ayant un revenu inférieur à 100 000 $.",
+    "sourceLabel": "Parti conservateur du Québec — site officiel (Plateforme 2026)",
+    "sourceUrl": "https://conservateur.quebec/documents-officiels/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "pcq-impots",
+    "party": "PCQ",
+    "theme": "Finances publiques",
+    "quote": "Une économie de plus de 8 700 $ par ménage sur cinq ans, avec un seuil d'exemption fiscale porté à plus de 35 000 $.",
+    "sourceLabel": "Parti conservateur du Québec — site officiel (Plateforme 2026)",
+    "sourceUrl": "https://conservateur.quebec/documents-officiels/",
+    "sourceType": "primaire",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  },
+  {
+    "id": "caq-churchill",
+    "party": "CAQ",
+    "theme": "Énergie",
+    "quote": "Le contrat de Churchill Falls, à 70 milliards de dollars, pour générer de l'électricité.",
+    "sourceLabel": "Noovo Info — « Les premières promesses électorales » (27 août 2026). Au 9 septembre 2026, aucune plateforme électorale consolidée n'était publiée sur le site de la CAQ ; source journalistique en attendant.",
+    "sourceUrl": "https://www.noovo.info/nouvelles/politique/elections-quebec/article/les-premieres-promesses-electorales-de-la-caq-du-plq-du-pq-de-qs-et-du-pcq/",
+    "sourceType": "journalistique",
+    "capturedAt": "2026-09-09",
+    "draft": false
+  }
+];
+/* PROMISES_DATA_END */
 
 function daysBetween(a,b){ return Math.round((new Date(b)-new Date(a))/86400000); }
 
@@ -7255,14 +7592,15 @@ function toggleNominalGroup(domId, voteId, group){
    <title> propre, pour que Google les indexe séparément. Ici, côté client : on
    synchronise l'URL au clic et on ouvre le bon onglet si on arrive directement
    sur une de ces adresses. */
-const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', lexique:'/lexique' };
-const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'lexique':'lexique' };
+const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', lexique:'/lexique', promesses:'/promesses' };
+const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'lexique':'lexique', 'promesses':'promesses' };
 const PAGE_META = {
   apercu:    { fr:"DossierQuébec — ministres, projets de loi et votes de l'Assemblée nationale", en:"DossierQuébec — ministers, bills and votes of Quebec's National Assembly" },
   ministres: { fr:"Ministres du Québec — Conseil des ministres · DossierQuébec", en:"Quebec ministers — Cabinet · DossierQuébec" },
   projets:   { fr:"Projets de loi du Québec, expliqués en clair · DossierQuébec", en:"Quebec bills, explained in plain language · DossierQuébec" },
   votes:     { fr:"Votes nominatifs à l'Assemblée nationale du Québec · DossierQuébec", en:"Recorded divisions at Quebec's National Assembly · DossierQuébec" },
   lexique:   { fr:"Lexique et compte citoyen · DossierQuébec", en:"Glossary and citizen account · DossierQuébec" },
+  promesses: { fr:"Promesses électorales 2026 · DossierQuébec", en:"2026 election promises · DossierQuébec" },
 };
 function viewFromPath(){
   const seg = location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '');
@@ -7402,6 +7740,7 @@ function renderTicker(){
   // Sans l'attendre, ce re-rendu tardif referme la carte ouverte par le lien
   // profond (?pl=NUM) — d'où le await avant openBillFromQuery plus bas.
   await renderChallenged();
+  renderPromises();
   await loadSnoozedSections();
   applyLanguage();
   // Ouvre l'onglet correspondant à l'adresse d'arrivée (/votes, /ministres…).

@@ -110,6 +110,10 @@ try {
     ['Build : votes -> index.html', ['scrapers/build-votes-data.js']],
     ['Build : ministres -> index.html', ['scrapers/build-ministers-data.js']],
     ...(doPetitions ? [['Build : pétitions -> index.html (hebdo)', ['scrapers/build-petitions-data.js']]] : []),
+    // Promesses électorales : données saisies à la main (data/promises.json),
+    // pas scrapées. Le build tourne quand même chaque jour pour que toute
+    // édition du JSON se retrouve dans la page sans étape manuelle.
+    ['Build : promesses -> index.html', ['scrapers/build-promises-data.js']],
     // Pages de section pré-rendues (SEO) : APRÈS toutes les injections ci-dessus.
     ['Build : pages de section (SEO) -> *.html', ['scripts/build-section-pages.js']],
   ];

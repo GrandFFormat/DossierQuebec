@@ -12,12 +12,24 @@ const MIME = {
   '.css': 'text/css; charset=utf-8',
 };
 
+// Sert le dossier tel quel, PLUS les « URL propres » comme Vercel (cleanUrls) :
+// /votes sert votes.html, /promesses sert promesses.html. Sans ça, tester en
+// local les pages de section donne un 404 alors que la prod fonctionne.
+async function lire(path) {
+  const p = join(ROOT, decodeURIComponent(path));
+  try {
+    return { data: await readFile(p), ext: extname(p) };
+  } catch {
+    if (extname(p)) throw new Error('introuvable');
+    return { data: await readFile(p + '.html'), ext: '.html' }; // cleanUrls
+  }
+}
+
 createServer(async (req, res) => {
   const path = req.url === '/' ? '/index.html' : req.url.split('?')[0];
   try {
-    const filePath = join(ROOT, decodeURIComponent(path));
-    const data = await readFile(filePath);
-    res.writeHead(200, { 'Content-Type': MIME[extname(filePath)] || 'application/octet-stream' });
+    const { data, ext } = await lire(path);
+    res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' });
     res.end(data);
   } catch {
     res.writeHead(404);
