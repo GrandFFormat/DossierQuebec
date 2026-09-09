@@ -15,6 +15,13 @@
 // (bill-summaries.js). On préserve ici titleEn/enSource d'un run à l'autre pour
 // ne pas retraduire inutilement.
 //
+// ⚠️ PENDANT UNE DISSOLUTION, il n'y a AUCUNE pétition ouverte : le Règlement de
+// l'Assemblée interdit de signer une pétition électronique quand l'Assemblée est
+// dissoute. Ce scraper échouera donc (0 ligne extraite) — c'est normal, et sans
+// conséquence : il est marqué « soft » dans refresh.js (pas d'alerte) et c'est
+// l'AFFICHAGE, piloté par ASSEMBLY.dissolved dans index.html, qui montre l'avis
+// officiel au lieu des anciennes pétitions.
+//
 // ⚠️ Si le tableau attendu est introuvable (changement de structure de la page),
 // on sort en erreur AU LIEU d'écrire une liste vide — sinon un simple changement
 // de mise en page effacerait toutes les pétitions du site.
