@@ -1,5 +1,5 @@
 {
-  "note": "Promesses extraites automatiquement des plateformes officielles par scrapers/promises.js, PUIS vérifiées : toute citation introuvable mot pour mot dans le document source est rejetée. Les entrées marquées \"manual\": true sont saisies à la main (la CAQ bloque l'accès automatisé et n'a publié aucune plateforme consolidée). Règle du projet : jamais de verdict « tenue / brisée » — la promesse et l'action côte à côte, chacune sourcée.",
+  "note": "Promesses extraites automatiquement des plateformes officielles par scrapers/promises.js, PUIS vérifiées : toute citation introuvable mot pour mot dans le document source est rejetée. UNIQUEMENT des sources primaires (plateformes des partis). Aucune citation de presse : les médias québécois ont retiré leur contenu de l'usage par IA dans leur robots.txt, et les demandes d'autorisation envoyées le 2026-09-09 sont restées sans réponse. Une entrée sourcée à Noovo, saisie avant l'envoi de ces demandes, a été retirée le 2026-09-09. Règle du projet : jamais de verdict « tenue / brisée » — la promesse et l'action côte à côte, chacune sourcée.",
   "election": "2026-10-05",
   "promises": [
     {
@@ -210,17 +210,6 @@
       "sourceType": "primaire",
       "capturedAt": "2026-09-09",
       "sourceHash": "80635d8a764b96e7"
-    },
-    {
-      "id": "caq-churchill",
-      "party": "CAQ",
-      "theme": "Énergie",
-      "quote": "Le contrat de Churchill Falls, à 70 milliards de dollars, pour générer de l'électricité.",
-      "sourceLabel": "Noovo Info — « Les premières promesses électorales » (27 août 2026). Au 9 septembre 2026, aucune plateforme électorale consolidée n'était publiée sur le site de la CAQ ; source journalistique en attendant.",
-      "sourceUrl": "https://www.noovo.info/nouvelles/politique/elections-quebec/article/les-premieres-promesses-electorales-de-la-caq-du-plq-du-pq-de-qs-et-du-pcq/",
-      "sourceType": "journalistique",
-      "capturedAt": "2026-09-09",
-      "manual": true
     }
   ]
 }
