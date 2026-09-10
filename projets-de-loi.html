@@ -968,6 +968,23 @@
      boutons ne sautillent pas quand les nombres changent en filtrant. */
   .qf-n{opacity:0.68; font-variant-numeric:tabular-nums; margin-left:6px; font-weight:800;}
   .qf-btn.qf-zero{opacity:0.45;}
+
+  /* Légende de provenance, sous la liste des promesses. */
+  .prom-methode{
+    border:3px solid var(--ink); background:#fff; box-shadow:var(--shadow);
+    padding:22px 26px; margin-top:26px; scroll-margin-top:80px;
+  }
+  .prom-methode h3{
+    font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase;
+    letter-spacing:-0.01em; font-size:19px; margin:0 0 14px;
+  }
+  .prom-methode ul{margin:0; padding-left:20px;}
+  .prom-methode li{font-size:14.5px; line-height:1.55; margin-bottom:10px;}
+  .prom-methode li:last-child{margin-bottom:0;}
+  .prom-methode-fin{
+    margin:16px 0 0; padding-top:14px; border-top:2px solid var(--ink);
+    font-size:14.5px; line-height:1.5; font-weight:600;
+  }
   #billsResultHead{margin-top:6px; margin-bottom:18px;}
 
   /* Bande légende */
@@ -1893,13 +1910,30 @@ function goToFederal(evt){
 
     <!-- Pourquoi la CAQ est absente. Une absence non expliquée se lit comme un
          parti pris : tant qu'elle n'a pas publié de plateforme, on dit pourquoi. -->
-    <div class="info-box" data-i18n="prom.caq">Une seule source est acceptée ici : les <b>documents officiels du parti</b>, cités mot pour mot. La <b>Coalition avenir Québec</b> n'apparaît pas dans la liste : elle n'a pas publié de plateforme consolidée, et si elle a annoncé des engagements sur son site, celui-ci demande explicitement aux outils automatisés comme le nôtre de ne pas le lire. Nous respectons cette demande plutôt que de la contourner. La CAQ entrera dans la liste dès qu'une source lisible existera. Les engagements rapportés par les médias ne sont pas repris non plus : la presse québécoise a retiré son contenu de l'usage par l'IA, et nos demandes d'autorisation sont restées sans réponse. <b>Au plus 8 engagements par parti</b> : certains publient une plateforme complète, d'autres une annonce à la fois — sans ce plafond, le nombre de cartes refléterait leur façon de communiquer plutôt que leurs intentions.</div>
+    <div class="info-box" data-i18n="prom.caq">Une seule source est acceptée ici : les <b>documents officiels du parti</b>, cités mot pour mot. <b>Au plus 8 engagements par parti</b>, et la <b>Coalition avenir Québec</b> n'apparaît pas du tout — son site demande aux outils automatisés comme le nôtre de ne pas le lire, et nous respectons cette demande plutôt que de la contourner. <a href="#prom-methode">Comment cette liste est faite ↓</a></div>
     <div class="section-head min-group-head" id="promResultHead">
       <div><h2 id="promResultTitle">Toutes les promesses</h2></div>
       <span class="head-note" id="promResultNote"></span>
     </div>
 
     <div id="promisesList"></div>
+
+    <!-- Légende de provenance. Une liste de citations sans son mode d'emploi
+         invite à de fausses déductions : compter 8 cartes et croire que le parti
+         n'a promis que ça, ou lire une absence comme un silence du parti alors
+         que c'est notre plafond. On dit donc précisément ce que la liste est,
+         et surtout ce qu'elle n'est PAS. -->
+    <div class="prom-methode" id="prom-methode">
+      <h3 data-i18n="prom.meth.h">D'où viennent ces promesses</h3>
+      <ul>
+        <li data-i18n="prom.meth.1"><b>Des partis eux-mêmes.</b> Chaque citation est tirée d'un document publié par le parti — plateforme électorale ou annonce de campagne — et reproduite mot pour mot. Une citation qui ne se retrouve pas telle quelle dans la source est rejetée automatiquement. Le lien « Voir la source » de chaque carte mène à l'original.</li>
+        <li data-i18n="prom.meth.2"><b>Ce ne sont pas les « promesses phares ».</b> Au plus 8 par parti, choisies automatiquement parmi les plus concrètes — montants, cibles, échéances. Rien ici ne classe les engagements par importance. Un engagement central formulé sans chiffre peut donc ne pas y figurer, et les partis en ont publié davantage.</li>
+        <li data-i18n="prom.meth.3"><b>La période couverte n'est pas la même pour tous.</b> Québec solidaire, le Parti libéral et le Parti conservateur publient une plateforme complète, lue en entier. Le Parti Québécois n'en publie pas : ses engagements sont lus dans ses annonces de campagne depuis la dissolution du 27 août.</li>
+        <li data-i18n="prom.meth.4"><b>La Coalition avenir Québec est absente.</b> Elle a publié des engagements sur son site, mais celui-ci demande aux outils automatisés de ne pas le lire. Nous ne contournons pas cette demande. Elle entrera dans la liste dès qu'une source lisible existera.</li>
+        <li data-i18n="prom.meth.5"><b>Rien n'est tiré des médias.</b> Un engagement annoncé en conférence de presse mais jamais publié par le parti n'apparaît pas ici. La presse québécoise a retiré son contenu de l'usage par l'IA et nos demandes d'autorisation sont restées sans réponse.</li>
+      </ul>
+      <p class="prom-methode-fin" data-i18n="prom.meth.fin">Autrement dit : une absence dans cette liste ne dit rien de ce qu'un parti pense. Pour la liste complète, suivez le lien vers la source.</p>
+    </div>
 
     <div class="band band-yellow bleed" id="band-promesses-suite">
       <h2 data-i18n="prom.next.h">Et après le 5 octobre ?</h2>
@@ -2436,7 +2470,14 @@ const translations = {
     'prom.m1':"Exact quote",
     'prom.m2':"Source linked",
     'prom.m3':"No judgment",
-    'prom.caq':"Only one source is accepted here: the <b>party's own official documents</b>, quoted word for word. The <b>Coalition avenir Québec</b> does not appear in the list: it has not published a consolidated platform, and while it has announced commitments on its website, that site explicitly asks automated tools like ours not to read it. We honour that request rather than work around it. The CAQ will be added as soon as a readable source exists. Commitments reported by news outlets are not used either: Quebec news organizations have opted their content out of AI use, and our permission requests remain unanswered. <b>At most 8 commitments per party</b>: some publish a full platform, others one announcement at a time — without that cap, the number of cards would reflect how a party communicates rather than what it intends.",
+    'prom.caq':"Only one source is accepted here: the <b>party's own official documents</b>, quoted word for word. <b>At most 8 commitments per party</b>, and the <b>Coalition avenir Québec</b> does not appear at all — its website asks automated tools like ours not to read it, and we honour that request rather than work around it. <a href=\"#prom-methode\">How this list is built ↓</a>",
+    'prom.meth.h':"Where these promises come from",
+    'prom.meth.1':"<b>From the parties themselves.</b> Every quote is taken from a document the party published — an electoral platform or a campaign announcement — and reproduced word for word. A quote that cannot be found verbatim in the source is rejected automatically. The “See the source” link on each card leads to the original.",
+    'prom.meth.2':"<b>These are not the “flagship” promises.</b> At most 8 per party, selected automatically from the most concrete ones — amounts, targets, deadlines. Nothing here ranks commitments by importance. A central commitment stated without a figure may therefore be missing, and the parties have published more.",
+    'prom.meth.3':"<b>The period covered is not the same for everyone.</b> Québec solidaire, the Liberal Party and the Conservative Party publish a full platform, read in its entirety. The Parti Québécois does not: its commitments are read from its campaign announcements since the August 27 dissolution.",
+    'prom.meth.4':"<b>The Coalition avenir Québec is absent.</b> It has published commitments on its website, but that site asks automated tools not to read it. We do not work around that request. It will be added as soon as a readable source exists.",
+    'prom.meth.5':"<b>Nothing is taken from the news media.</b> A commitment announced at a press conference but never published by the party does not appear here. Quebec news organizations have opted their content out of AI use, and our permission requests remain unanswered.",
+    'prom.meth.fin':"In short: an absence from this list says nothing about what a party thinks. For the full list, follow the link to the source.",
     'prom.next.h':"And after October 5?",
     'prom.next.p':"The new Assembly sits from <b>November 17, 2026</b>. From then on, every bill introduced will be placed next to the promise it matches — and the absence of a bill on a commitment will be just as visible. That is the follow-up nobody does past election week.",
     'dissp.h':"⚠️ These bills never became law",
@@ -6211,11 +6252,22 @@ let fontZoom = 100;
 // On la mesure donc ici et on la publie : --vw pour les bandes pleine largeur,
 // la classe .etroit pour les réglages qu'un @media ne peut pas déclencher.
 function majMetriquesMiseEnPage(){
-  const effective = document.documentElement.clientWidth / (fontZoom / 100);
+  // ⚠️ clientWidth peut valoir 0 : onglet caché, rendu en arrière-plan, capture
+  // de vignette. Publier « --vw: 0px » cassait toute la mise en page ET ne se
+  // corrigeait jamais, car le repli « var(--vw, 100vw) » ne s'applique que si la
+  // variable est ABSENTE — pas si elle est présente mais fausse. On ne publie
+  // donc rien tant qu'on n'a pas une largeur crédible.
+  const largeur = document.documentElement.clientWidth || window.innerWidth || 0;
+  if(largeur < 200) return;
+  const effective = largeur / (fontZoom / 100);
   document.body.style.setProperty('--vw', effective + 'px');
   document.documentElement.classList.toggle('etroit', effective < 360);
 }
 window.addEventListener('resize', majMetriquesMiseEnPage);
+// Rattrapage : si la page a été construite alors qu'elle n'avait pas encore de
+// largeur, on remesure dès qu'elle devient visible.
+window.addEventListener('pageshow', majMetriquesMiseEnPage);
+document.addEventListener('visibilitychange', () => { if(!document.hidden) majMetriquesMiseEnPage(); });
 async function loadFontZoom(){
   try{
     const res = await window.storage.get('font-zoom');
