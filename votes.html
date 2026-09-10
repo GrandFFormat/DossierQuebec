@@ -580,7 +580,12 @@
   /* « et moi » — porte d'entrée discrète vers la page cachée de la BD (view-bd). */
   .footer-etmoi{cursor:pointer; color:var(--gold); margin-left:4px;}
   .footer-etmoi:hover{text-decoration:underline;}
-  .back-to-top{
+  /* ⚠️ Ne PAS renommer cette classe « back-to-top ». Sous ce nom générique,
+     Brave Shields et les listes anti-nuisances de uBlock la masquent d'office
+     (display:none injecté, invisible depuis document.styleSheets) : le bouton
+     disparaissait pour tout utilisateur de Brave. Vérifié en isolant la cause :
+     la classe seule déclenche le filtre, l'id backToTop n'y est pour rien. */
+  .dq-remonter{
     position:fixed; right:24px; bottom:24px; z-index:50;
     width:46px; height:46px; border-radius:50%; border:none;
     background:var(--ink); color:#fff; cursor:pointer;
@@ -589,10 +594,10 @@
     opacity:0; visibility:hidden; transform:translateY(8px);
     transition:opacity 0.25s ease, transform 0.25s ease, visibility 0.25s, background 0.2s ease;
   }
-  .back-to-top.visible{opacity:1; visibility:visible; transform:translateY(0);}
-  .back-to-top:hover{background:var(--gold);}
+  .dq-remonter.visible{opacity:1; visibility:visible; transform:translateY(0);}
+  .dq-remonter:hover{background:var(--gold);}
   @media (max-width:640px){
-    .back-to-top{right:16px; bottom:16px; width:42px; height:42px;}
+    .dq-remonter{right:16px; bottom:16px; width:42px; height:42px;}
   }
   a{color:inherit;}
 
@@ -693,8 +698,8 @@
   .footer-gh:hover{color:var(--yellow);}
   .footer-etmoi{color:var(--yellow);}
   .app{padding-bottom:0;}
-  .back-to-top{border:3px solid #131313; box-shadow:var(--shadow-sm); background:var(--yellow); color:#131313;}
-  .back-to-top:hover{background:#131313; color:var(--yellow);}
+  .dq-remonter{border:3px solid #131313; box-shadow:var(--shadow-sm); background:var(--yellow); color:#131313;}
+  .dq-remonter:hover{background:#131313; color:var(--yellow);}
 
   /* ---------- PHASE 2 : APERÇU ---------- */
   /* Bande pleine largeur qui « déborde » du conteneur .app tout en gardant le
@@ -2320,7 +2325,7 @@ function goToFederal(evt){
   </div>
 </footer>
 
-<button id="backToTop" class="back-to-top" aria-label="Remonter en haut" title="Remonter en haut" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+<button id="backToTop" class="dq-remonter" aria-label="Remonter en haut" title="Remonter en haut" onclick="window.scrollTo({top:0, behavior:'smooth'})">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
 </button>
 
