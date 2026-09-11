@@ -561,34 +561,17 @@ function instanceArrondissement(arrondissement) {
 // ---------- lexique ----------
 // Les définitions viennent de nous ; les décomptes et les exemples viennent des documents
 // de la Ville. La page distingue visuellement les deux — c'est tout l'intérêt de l'exercice.
-// Une entrée de lexique n'est pas une fiche de décision : le terme est un titre, pas une
-// pastille, et la définition se lit comme du texte courant. Les chiffres passent en
-// second plan — ils prouvent, ils ne racontent pas.
+// Le plus simple possible : le mot, ce qu'il veut dire, et où on le croise. Rien d'autre.
+// Les décomptes mesurés sur le corpus restent dans data/lexique.json — ils servent à
+// vérifier que les formulations cherchées collent encore aux documents — mais les
+// afficher répondait à une question que le lecteur ne se pose pas.
 function entreeLexique(e) {
-  const ex = e.exemple;
-  const entete = `<h3 class="terme">${echapper(e.terme)}</h3>
-    ${e.aussi ? `<p class="alias">aussi&nbsp;: ${echapper(e.aussi)}</p>` : ''}
-    <p class="definition">${echapper(e.definition)}</p>
-    <p class="mesure">${nombreFr(e.occurrences.total)} documents du portail${
-      e.occurrences.annee ? ` · ${nombreFr(e.occurrences.annee)} en ${e.occurrences.pourAnnee}` : ''
-    }</p>`;
-
-  const corps = `${e.ouVousLeVoyez ? `<p class="remarque">${echapper(e.ouVousLeVoyez)}</p>` : ''}
-    ${
-      ex
-        ? `<div class="exemple">
-            <p class="exemple-titre">Un document réel où le terme apparaît</p>
-            <p class="exemple-objet">${echapper(ex.objet ?? '(sans objet)')}</p>
-            <p class="exemple-meta">
-              ${ex.numero ? `<span class="puce num">${echapper(ex.numero)}</span>` : ''}
-              <span>${dateFr(ex.date)}</span>
-              ${ex.instance ? `<span>· ${echapper(ex.instance)}</span>` : ''}
-              ${ex.pdf ? ` · <a class="lien-pdf" href="${echapper(ex.pdf)}" target="_blank" rel="noopener">PDF officiel ↗</a>` : ''}
-            </p>
-          </div>`
-        : `<p class="vide">Aucun document de ${echapper(e.occurrences.pourAnnee)} n'emploie ce terme — il reste présent les années précédentes.</p>`
-    }`;
-  return `<details class="carte pliante entree-lexique" name="${NOM_ACCORDEON}"><summary>${entete}</summary><div class="corps">${corps}</div></details>`;
+  return `<div class="entree-lexique">
+      <h3 class="terme">${echapper(e.terme)}</h3>
+      ${e.aussi ? `<p class="alias">On dit aussi&nbsp;: ${echapper(e.aussi)}</p>` : ''}
+      <p class="definition">${echapper(e.definition)}</p>
+      ${e.ouVousLeVoyez ? `<p class="remarque">${echapper(e.ouVousLeVoyez)}</p>` : ''}
+    </div>`;
 }
 
 function lexiqueFiltre() {
@@ -603,8 +586,7 @@ function rendreLexique() {
   const entrees = lexiqueFiltre();
   const categories = etat.lexique.categories ?? {};
   $('#compte-lexique').textContent =
-    `${entrees.length} terme(s) sur ${etat.lexique.nombre}. ` +
-    `Les décomptes portent sur les ${nombreFr(207915)} documents du portail.`;
+    entrees.length === etat.lexique.nombre ? `${entrees.length} termes` : `${entrees.length} terme(s) sur ${etat.lexique.nombre}`;
 
   // Regroupés par catégorie, dans l'ordre déclaré côté données.
   const html = Object.entries(categories)
