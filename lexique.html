@@ -130,7 +130,7 @@
   .flip-inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform 0.7s ease-in-out;}
   .flip-face{position:absolute;inset:0;border-radius:50%;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
   .flip-back{transform:rotateY(180deg);}
-  .brand-text h1{
+  .brand-text .brand-title{
     font-family:'Archivo',sans-serif;
     font-weight:600;
     font-size:22px;
@@ -646,7 +646,7 @@
   /* ---------- HEADER ---------- */
   #dq-topbar{border-bottom:3px solid var(--ink);}
   header.top{align-items:center;}
-  .brand-text h1{
+  .brand-text .brand-title{
     font-family:'Archivo',sans-serif; font-weight:900; font-size:24px;
     letter-spacing:-0.03em; text-transform:uppercase;
   }
@@ -1462,7 +1462,7 @@
      Le logotype tient en un seul mot — il ne peut pas se couper — il faut donc
      le réduire, sinon il pousse la page hors de l'écran. */
   .etroit .brand{gap:8px; min-width:0;}
-  .etroit .brand-text h1{font-size:19px;}
+  .etroit .brand-text .brand-title{font-size:19px;}
   .etroit .brand-mark, .etroit .maple-flip, .etroit .maple-flip svg{width:30px; height:30px;}
   .etroit .suggest-cta{white-space:normal;}   /* nowrap : 389 px sur 275 disponibles */
   .etroit .result-badge{white-space:normal;}
@@ -1541,7 +1541,14 @@
 <header class="top">
   <div class="brand">
     <div class="brand-text" role="button" tabindex="0" aria-label="Retour à l'aperçu" onclick="goToTab('apercu')">
-      <h1>Dossier<span class="brand-blue">Québec</span></h1>
+      <!-- Volontairement un div, et non un titre de niveau 1 : le nom du site se
+           répète sur chaque page, alors que le titre de niveau 1 doit annoncer
+           le sujet de LA page. C'est le titre de une de la vue active qui joue
+           ce rôle, et le générateur de pages de section s'en assure.
+           (Pas de balise écrite en toutes lettres dans ce commentaire : elle
+           fausserait les outils qui comptent les titres à l'expression
+           régulière.) -->
+      <div class="brand-title">Dossier<span class="brand-blue">Québec</span></div>
       <p>Qui siège, qui légifère, qui vote quoi</p>
     </div>
     <!-- Feuille d'érable : passerelle vers le site fédéral DossierCanada.
@@ -1624,11 +1631,11 @@ function goToFederal(evt){
     <!-- Hero poster brutaliste : la devise du site devient l'affiche.
          (La ligne du header .brand-text p est masquée en échange.) -->
     <div class="hero-poster">
-      <h1 class="hero-h1">
+      <h2 class="hero-h1">
         <span data-i18n="hero.l1">Qui siège,</span>
         <span class="hero-outline" data-i18n="hero.l2">qui légifère,</span>
         <span class="hero-blue" data-i18n="hero.l3">qui vote quoi.</span>
-      </h1>
+      </h2>
       <div class="hero-row">
         <div class="hero-manifesto">
           <p data-i18n="hero.manifesto">L'Assemblée nationale du Québec, réorganisée <b>par personne</b> et traduite <b>en langage clair</b> — sans jugement ni verdict. Site citoyen indépendant, vraies données publiques.</p>
@@ -1730,10 +1737,10 @@ function goToFederal(evt){
   <section class="view" id="view-ministres">
     <!-- Hero de vue (refonte brutaliste) -->
     <div class="view-hero">
-      <h1 class="hero-h1 hero-h1-md">
+      <h2 class="hero-h1 hero-h1-md">
         <span data-i18n="minhero.l1">Conseil des ministres</span>
         <span class="hero-outline" data-i18n="minhero.l2">&amp; toute l'Assemblée.</span>
-      </h1>
+      </h2>
       <p class="view-hero-sub" data-i18n="minhero.sub">Les ministres, puis les 125 député·e·s de tous les partis (<b>les député·e·s sont plus bas</b>) — <b>une seule recherche pour les deux.</b></p>
 
       <!-- Grande recherche façon maquette : loupe sur cellule jaune -->
@@ -1802,10 +1809,10 @@ function goToFederal(evt){
 
     <!-- Hero de vue (refonte brutaliste) -->
     <div class="view-hero">
-      <h1 class="hero-h1 hero-h1-md">
+      <h2 class="hero-h1 hero-h1-md">
         <span data-i18n="projhero.l1">Projets de loi,</span>
         <span class="hero-outline" data-i18n="projhero.l2">traduits en clair.</span>
-      </h1>
+      </h2>
       <p class="view-hero-sub" data-i18n="projhero.sub">Chaque projet résumé en langage courant, avec son étape réelle dans le processus. <b>Le texte intégral reste toujours à un clic sur assnat.qc.ca.</b></p>
 
       <!-- Recherche façon maquette + 4 filtres rapides (actif = noir/jaune) -->
@@ -1855,10 +1862,10 @@ function goToFederal(evt){
   <section class="view" id="view-votes">
     <!-- Hero de vue (refonte brutaliste) -->
     <div class="view-hero">
-      <h1 class="hero-h1 hero-h1-md">
+      <h2 class="hero-h1 hero-h1-md">
         <span data-i18n="votehero.l1">Qui a voté</span>
         <span class="hero-outline" data-i18n="votehero.l2">pour, contre, absent.</span>
-      </h1>
+      </h2>
       <p class="view-hero-sub" data-i18n="votehero.sub">Le registre des votes nominatifs, tel quel. <b>On n'interprète pas — on montre.</b> Une absence peut être une mission officielle, une maladie, un conflit d'horaire.</p>
     </div>
 
@@ -1905,10 +1912,10 @@ function goToFederal(evt){
        Contenu saisi à la main dans data/promises.json (voir la note du fichier). -->
   <section class="view" id="view-promesses">
     <div class="view-hero">
-      <h1 class="hero-h1 hero-h1-md">
+      <h2 class="hero-h1 hero-h1-md">
         <span data-i18n="prom.l1">Ce qu'ils promettent,</span>
         <span class="hero-outline" data-i18n="prom.l2">ce qu'ils en feront.</span>
-      </h1>
+      </h2>
       <p class="view-hero-sub" data-i18n="prom.sub">Les engagements des partis pour l'élection du 5 octobre 2026, chacun avec sa source. <b>Aucun verdict n'est rendu ici</b> — à mesure que la nouvelle Assemblée légiférera, chaque promesse sera placée à côté de ce qui a réellement été fait.</p>
     </div>
 

@@ -63,6 +63,37 @@ must(src.includes('<button class="active" data-view="apercu">'), "bouton nav Ape
 
 function esc(s){ return s.replace(/"/g, '&quot;'); }
 
+// UN SEUL <h1> par page : celui de la vue affichée.
+//
+// Le problème réglé ici : toutes les vues vivent dans le même document, chacune
+// avec son titre de une. Chaque page servait donc SIX <h1>, dont cinq décrivant
+// une section qui n'est pas son sujet — sur /votes, Google lisait « Projets de
+// loi, traduits en clair » et « Le jargon, décodé » au même rang que le titre
+// de la page. Le titre de une de la vue cible reste <h1>, les autres passent
+// en <h2>. Le style tient à la classe .hero-h1 (margin:0 comprise), pas à la
+// balise : le rendu est identique au pixel près.
+//
+// Idempotent : la fonction accepte h1 comme h2 en entrée, donc la relancer ne
+// dégrade rien. C'est ce qui permet de l'appliquer aussi à index.html lui-même.
+function unSeulH1(html, vueCible){
+  return html.split(/(?=<section class="view)/).map((bloc) => {
+    const m = bloc.match(/^<section class="view[^"]*" id="view-([a-z-]+)"/);
+    if (!m) return bloc;                                  // tout ce qui précède la 1re vue
+    const balise = m[1] === vueCible ? 'h1' : 'h2';
+    const ouv = bloc.match(/<(h1|h2)(\s+class="hero-h1[^"]*")>/);
+    if (!ouv) return bloc;                                // vue sans titre de une (bd, compte)
+    const debut = bloc.indexOf(ouv[0]);
+    const ferm = `</${ouv[1]}>`;
+    const fin = bloc.indexOf(ferm, debut);
+    if (fin === -1) return bloc;
+    return bloc.slice(0, debut)
+      + `<${balise}${ouv[2]}>`
+      + bloc.slice(debut + ouv[0].length, fin)
+      + `</${balise}>`
+      + bloc.slice(fin + ferm.length);
+  }).join('');
+}
+
 function buildPage(sec){
   const url = `${BASE}/${sec.slug}`;
   let h = src;
@@ -103,8 +134,21 @@ function buildPage(sec){
     h = h.replace(nfrom, nto);
   }
 
+  // 8) Un seul <h1>, celui de la vue affichée.
+  h = unSeulH1(h, sec.view);
+
   writeFileSync(`${sec.slug}.html`, h, 'utf8');
   console.log(`✓ ${sec.slug}.html  (vue ${sec.view})`);
+}
+
+// index.html est servi à la racine : c'est la page « Aperçu », et elle a droit
+// au même traitement. On la réécrit donc en place. Sans danger : unSeulH1 est
+// idempotent, donc une exécution répétée laisse le fichier tel quel — et ça
+// évite d'avoir deux implémentations de la même règle qui se désynchronisent.
+const racine = unSeulH1(src, 'apercu');
+if (racine !== src) {
+  writeFileSync(SRC, racine, 'utf8');
+  console.log(`✓ ${SRC}  (vue apercu — titres normalisés)`);
 }
 
 SECTIONS.forEach(buildPage);
