@@ -1,0 +1,85 @@
+# Rafraîchissement quotidien du volet municipal (dossierquebec.ca/villedequebec/).
+#
+# Même mécanique que refresh.yml : chaque matin, on relance les extractions, et s'il y a du
+# nouveau on committe et on pousse — Vercel redéploie. Tout se passe dans villedequebec/, qui
+# a ses propres scrapers et sa propre dépendance (voir villedequebec/README.md).
+#
+# Secrets et variables (Settings > Secrets and variables > Actions) :
+#   ANTHROPIC_API_KEY  secret, déjà utilisé par refresh.yml — résumés en langage clair.
+#                      Sans lui, l'étape est sautée et le reste tourne.
+#   GPD_CONTACT        variable, facultative — ce que notre robot laisse comme contact dans
+#                      son User-Agent auprès de la Ville. À défaut : l'adresse du site.
+
+name: Rafraîchissement quotidien — volet municipal
+
+on:
+  schedule:
+    # 08:30 UTC, après le rafraîchissement de DossierQuébec (08:00). Le groupe de
+    # concurrence ci-dessous garantit de toute façon qu'ils ne se chevauchent pas.
+    - cron: '30 8 * * *'
+  workflow_dispatch: {} # bouton « Run workflow » pour lancer à la main
+
+permissions:
+  contents: write
+
+# Même groupe que refresh.yml : deux jobs qui poussent sur master ne courent jamais en
+# même temps.
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    # Une dizaine de requêtes vers la Ville et au plus 120 résumés : quelques minutes en
+    # temps normal. 45 min laisse une marge très large sans laisser un job s'emballer.
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: villedequebec
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v5
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Installer la dépendance (SDK Anthropic)
+        run: npm ci --omit=dev
+
+      - name: Rafraîchir les données municipales
+        id: refresh
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GPD_CONTACT: ${{ vars.GPD_CONTACT }}
+        run: npm run refresh
+
+      # Seul villedequebec/data/ bouge. On rebase avant de pousser au cas où quelqu'un
+      # aurait poussé pendant le job.
+      - name: Committer et pousser s'il y a des changements
+        working-directory: .
+        run: |
+          git config user.name "dossierquebec-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add villedequebec/data
+          if git diff --cached --quiet; then
+            echo "Aucun changement — rien à committer."
+          else
+            git commit -m "Rafraîchissement auto du volet municipal ($(date -u +%Y-%m-%d))"
+            git pull --rebase
+            git push
+          fi
+
+      - name: Signaler les étapes secondaires en échec
+        if: ${{ steps.refresh.outputs.warnings != '' }}
+        run: echo "::warning::Étapes secondaires en échec (données de la veille conservées) : ${{ steps.refresh.outputs.warnings }}"
+
+      # Après le commit : une extraction principale en échec rend le run rouge pour qu'on
+      # le voie — les données des autres étapes sont déjà publiées.
+      - name: Alerter si une extraction principale a échoué
+        if: ${{ steps.refresh.outputs.failed != '' }}
+        run: |
+          echo "::error::Extractions en échec (données de la veille conservées) : ${{ steps.refresh.outputs.failed }}"
+          exit 1
