@@ -7,6 +7,8 @@
 
 const PAS = 60; // fiches affichées par palier
 const PAS_SEANCES = 8; // séances affichées par palier, en mode groupé
+const PAS_VOTES = 10; // appels nominaux affichés par palier
+const PAS_FIL = 5; // éléments du fil d'accueil par palier
 
 const etat = {
   decisions: null,
@@ -16,7 +18,8 @@ const etat = {
   parId: new Map(), // id du document -> résumé IA
   limiteDecisions: PAS,
   limiteSeances: PAS_SEANCES,
-  limiteVotes: PAS,
+  limiteVotes: PAS_VOTES,
+  limiteFil: PAS_FIL,
 };
 
 const $ = (sel) => document.querySelector(sel);
@@ -377,7 +380,7 @@ function rendreVotes() {
   $('#liste-votes').innerHTML = visibles.map(carteVote).join('');
   const reste = filtres.length - visibles.length;
   $('#plus-votes').hidden = reste <= 0;
-  $('#plus-votes').textContent = `Afficher plus (${reste} restants)`;
+  $('#plus-votes').textContent = `${Math.min(PAS_VOTES, reste)} de plus (${reste} restants)`;
   reinitialiserDepliage();
 }
 
@@ -665,13 +668,20 @@ function ligneEvenement(e) {
 function rendreFil() {
   if (!$('#fil')) return;
   const { evenements, nouveaux, mode } = evenementsRecents();
-  const aMontrer = (mode === 'nouveautes' ? nouveaux : evenements).slice(0, 12);
+  const source = mode === 'nouveautes' ? nouveaux : evenements;
+  const aMontrer = source.slice(0, etat.limiteFil);
 
   // Le titre suffit à dire ce qu'on regarde. Le détail de l'extraction (date, nombre de
   // nouveautés) vit sur la page « Sources et limites », là où on va quand on se pose la
   // question — pas en travers du fil quand on veut juste lire.
   $('#titre-fil').textContent = mode === 'nouveautes' ? 'Ce qui a changé' : 'Activité récente';
   $('#fil').innerHTML = aMontrer.map(ligneEvenement).join('');
+
+  const reste = source.length - aMontrer.length;
+  if ($('#plus-fil')) {
+    $('#plus-fil').hidden = reste <= 0;
+    $('#plus-fil').textContent = `${Math.min(PAS_FIL, reste)} de plus (${nombreFr(reste)} restants)`;
+  }
 }
 
 // ---------- accueil ----------
@@ -799,7 +809,7 @@ document.addEventListener('input', (e) => {
   }
   if (e.target.matches('#rech-lexique')) rendreLexique();
   if (e.target.matches('#rech-votes, #filtre-instance-votes, #filtre-theme-votes')) {
-    etat.limiteVotes = PAS;
+    etat.limiteVotes = PAS_VOTES;
     rendreVotes();
   }
 });
@@ -810,9 +820,15 @@ if (existe('#plus-decisions')) {
     rendreDecisions();
   });
 }
+if (existe('#plus-fil')) {
+  $('#plus-fil').addEventListener('click', () => {
+    etat.limiteFil += PAS_FIL;
+    rendreFil();
+  });
+}
 if (existe('#plus-votes')) {
   $('#plus-votes').addEventListener('click', () => {
-    etat.limiteVotes += PAS;
+    etat.limiteVotes += PAS_VOTES;
     rendreVotes();
   });
 }
