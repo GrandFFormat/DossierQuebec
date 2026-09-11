@@ -63,13 +63,25 @@ function remplirSelect(select, valeurs) {
   }
 }
 
+// Le résumé d'une décision peut venir de deux endroits : du document lui-même s'il s'agit
+// d'un sommaire décisionnel, ou du sommaire auquel une résolution renvoie. Sans ce second
+// cas, une séance d'arrondissement — qui ne contient que des résolutions — n'afficherait
+// aucun résumé, alors que la matière existe.
+function resumePour(d) {
+  const direct = etat.parId.get(d.id);
+  if (direct) return { r: direct, indirect: false };
+  const viaSommaire = d.sommaireId ? etat.parId.get(d.sommaireId) : null;
+  return viaSommaire ? { r: viaSommaire, indirect: true } : null;
+}
+
 // Le résumé n'est affiché que s'il existe pour ce document précis, toujours identifié
 // comme généré par une IA, et toujours accompagné du lien vers le PDF officiel.
-function blocResume(r) {
-  if (!r) return '';
+function blocResume(trouve) {
+  if (!trouve) return '';
+  const { r, indirect } = trouve;
   return `<div class="resume">
     <div class="resume-entete">
-      <span>Résumé généré par IA</span>
+      <span>Résumé généré par IA${indirect && r.numero ? ` — sommaire ${echapper(r.numero)}` : ''}</span>
       ${r.montantPrincipal ? `<span class="puce montant">${echapper(r.montantPrincipal)}</span>` : ''}
       ${r.sansContenuSubstantiel ? '<span class="puce procedural">document de procédure</span>' : ''}
     </div>
@@ -121,7 +133,7 @@ function carteDecision(d) {
       ${d.unite ? `<span class="puce">${echapper(d.unite)}</span>` : ''}
     </div>
     <p class="objet">${echapper(d.objet ?? '(sans objet)')}</p>`;
-  const corps = `${blocResume(etat.parId.get(d.id))}
+  const corps = `${blocResume(resumePour(d))}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}`;
   return carteRepliable(entete, corps);
 }
@@ -136,7 +148,7 @@ function decisionsFiltrees() {
     if (type && d.type !== type) return false;
     if (instance && d.instance !== instance) return false;
     if (theme && d.theme !== theme) return false;
-    if (avecResume && !etat.parId.has(d.id)) return false;
+    if (avecResume && !resumePour(d)) return false;
     if (q && !((d.objet ?? '') + ' ' + (d.numero ?? '')).toLowerCase().includes(q)) return false;
     return true;
   });
@@ -645,7 +657,7 @@ function ligneEvenement(e) {
       ${e.nouveau ? '<span class="puce neuf">nouveau</span>' : ''}
     </div>
     <p class="objet">${echapper(d.objet ?? '(sans objet)')}</p>`;
-  const corps = `${blocResume(etat.parId.get(d.id))}
+  const corps = `${blocResume(resumePour(d))}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}`;
   return carteRepliable(entete, corps);
 }
