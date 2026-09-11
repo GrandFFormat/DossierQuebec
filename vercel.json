@@ -5,5 +5,16 @@
       "path": "/api/weekly-digest",
       "schedule": "0 13 * * 1"
     }
+  ],
+  "headers": [
+    {
+      "source": "/villedequebec/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
   ]
 }

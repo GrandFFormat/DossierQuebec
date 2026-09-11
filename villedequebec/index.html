@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
+<meta name="robots" content="noindex, nofollow">
+<title>DossierVilleDeQuébec — les décisions de la Ville de Québec, lisibles</title>
+<meta name="description" content="Site citoyen indépendant qui rend lisibles les décisions du conseil municipal de Québec : résolutions, sommaires décisionnels, votes nominatifs et membres du conseil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvq:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="accueil">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="index.html"><h1>Dossier<span class="marque">VilleDeQuébec</span></h1></a>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Québec, lisibles. Données publiques, reprises telles quelles
+      du portail des documents décisionnels de la Ville et de la page officielle du conseil municipal.
+    </p>
+    <nav>
+      <a href="index.html" aria-current="page">Accueil</a>
+      <a href="decisions.html">Décisions</a>
+      <a href="votes.html">Votes nominatifs</a>
+      <a href="conseil.html">Conseil municipal</a>
+      <a href="lexique.html">Lexique</a>
+      <a href="sources.html">Sources et limites</a>
+      <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+              title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu">
+  <div id="chargement" class="avis">Chargement des données…</div>
+
+  <div class="chiffres" id="chiffres"></div>
+
+  <h2 class="page" id="titre-fil">Ce qui a changé</h2>
+  <p class="chapeau" id="note-fil"></p>
+  <p class="chapeau" style="margin-bottom:14px">
+    Décisions et votes nominatifs mêlés, du plus récent au plus ancien. Chaque fiche renvoie au
+    document officiel&nbsp;; les puces, quand il y en a, sont un résumé généré par IA du sommaire
+    décisionnel — jamais un remplacement du document.
+  </p>
+  <div id="fil"></div>
+  <p style="margin-top:14px">
+    <a href="decisions.html">Toutes les décisions →</a> &nbsp;·&nbsp;
+    <a href="votes.html">Tous les votes nominatifs →</a>
+  </p>
+
+  <h2 class="page">Par où commencer</h2>
+  <div class="cartes-liens">
+    <a class="lien-section" href="decisions.html">
+      <h3>Décisions</h3>
+      <p>Résolutions, sommaires décisionnels, procès-verbaux et tableaux de décisions de l'année en cours, avec recherche et filtres.</p>
+    </a>
+    <a class="lien-section" href="votes.html">
+      <h3>Votes nominatifs</h3>
+      <p>Quand quelqu'un demande le vote, on sait qui a voté pour et qui a voté contre. Le décompte, par personne.</p>
+    </a>
+    <a class="lien-section" href="conseil.html">
+      <h3>Conseil municipal</h3>
+      <p>La carte des 21 districts : cliquez sur le vôtre pour savoir qui vous représente, son parti, ses fonctions et comment le joindre.</p>
+    </a>
+    <a class="lien-section" href="sources.html">
+      <h3>Sources et limites</h3>
+      <p>D'où viennent les données, comment elles sont obtenues, et ce que ce prototype ne fait pas encore.</p>
+    </a>
+  </div>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Québec, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources.html">Sources et limites</a>.</p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+</body>
+</html>

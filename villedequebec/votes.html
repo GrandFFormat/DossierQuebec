@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
+<meta name="robots" content="noindex, nofollow">
+<title>Votes nominatifs du conseil municipal de Québec — DossierVilleDeQuébec</title>
+<meta name="description" content="Qui a voté pour et qui a voté contre au conseil municipal et au conseil d'agglomération de Québec : les appels nominaux consignés dans les résolutions officielles.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvq:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="votes">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="index.html"><h1>Dossier<span class="marque">VilleDeQuébec</span></h1></a>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Québec, lisibles. Données publiques, reprises telles quelles
+      du portail des documents décisionnels de la Ville.
+    </p>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="decisions.html">Décisions</a>
+      <a href="votes.html" aria-current="page">Votes nominatifs</a>
+      <a href="conseil.html">Conseil municipal</a>
+      <a href="lexique.html">Lexique</a>
+      <a href="sources.html">Sources et limites</a>
+      <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+              title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu">
+  <div id="chargement" class="avis">Chargement des données…</div>
+
+  <h2 class="page">Votes nominatifs</h2>
+  <div class="avis">
+    <strong>Comment ces votes sont obtenus.</strong> À la Ville de Québec, la plupart des décisions
+    sont adoptées sans appel nominal. Quand un membre « demande le vote », le procès-verbal consigne
+    nommément qui vote pour et qui vote contre. Ces noms sont extraits du texte des résolutions
+    par lecture automatique&nbsp;: chaque vote garde le passage d'origine et tout écart avec le décompte
+    officiel du document est signalé plutôt que corrigé.
+  </div>
+
+  <details class="carte pliante bloc-tableau">
+    <summary>
+      <div class="meta">
+        <span class="puce">tableau</span>
+        <span id="resume-dissidence"></span>
+      </div>
+      <p class="objet">Votes contre, par personne</p>
+    </summary>
+    <div class="corps">
+  <p class="compte">Décompte brut, sans interprétation. Voter contre n'est ni un défaut ni un mérite&nbsp;: c'est une position.</p>
+  <table id="table-dissidence">
+    <thead><tr><th>Personne</th><th>Instance la plus fréquente</th><th class="n">Votes contre</th></tr></thead>
+    <tbody></tbody>
+  </table>
+    </div>
+  </details>
+
+  <h2 class="section">Les appels nominaux</h2>
+  <div class="barre-outils">
+    <input type="search" id="rech-votes" placeholder="Rechercher dans l'objet ou les noms…">
+    <select id="filtre-theme-votes"><option value="">Tous les sujets</option></select>
+    <select id="filtre-instance-votes"><option value="">Toutes les instances</option></select>
+    <button type="button" class="bouton-lien" id="tout-deplier">Tout déplier</button>
+  </div>
+  <p class="compte" id="compte-votes"></p>
+  <div id="liste-votes"></div>
+  <button class="plus" id="plus-votes" hidden>Afficher plus</button>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Québec, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources.html">Sources et limites</a>.</p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+</body>
+</html>
