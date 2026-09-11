@@ -1,0 +1,460 @@
+# DossierVilleDeQuébec
+
+Veille citoyenne des décisions de la **Ville de Québec**. Même esprit que DossierQuébec, mais
+au palier municipal : données publiques seulement, aucune donnée inventée, aucun verdict sur
+de vraies personnes.
+
+Ce n'est pas un site de la Ville de Québec et ça n'a aucun caractère officiel.
+
+Le site est servi comme volet de DossierQuébec, à **https://dossierquebec.ca/villedequebec/**,
+et ce dossier vit dans le dépôt de DossierQuébec sous `villedequebec/` : mêmes déploiements
+(Vercel, à chaque push), même tableau de bord, même mécanique de rafraîchissement automatique.
+Tant que la Ville n'a pas répondu à la demande d'autorisation, les pages restent hors des
+moteurs de recherche (voir « Les pages »).
+
+## Démarrage
+
+```bash
+npm install            # une seule dépendance : le SDK Anthropic, pour les résumés
+npm run refresh        # la routine quotidienne : décisions, votes, résumés des nouveautés
+npm run serve          # http://localhost:4321
+```
+
+`npm run refresh` est exactement ce que GitHub Actions lance chaque matin (section suivante).
+Les extractions sont gratuites ; seule l'étape des résumés appelle une API payante, et elle est
+plafonnée à 120 documents par exécution — sautée s'il n'y a pas de clé (`api.env` ici, ou celui
+de DossierQuébec à la racine du dépôt).
+
+```bash
+npm run refresh -- --sans-resumes             # sans appel à l'API Claude
+npm run refresh -- --complet                  # votes : toute l'année (fait d'office le 1er du mois)
+npm run refresh -- --elus                     # force les pages du conseil (sinon : le lundi)
+npm run refresh -- --fenetre=30 --plafond=50  # fenêtre des votes et des résumés, plafond de résumés
+```
+
+**Une seule dépendance npm**, le SDK Anthropic, et elle ne sert qu'aux résumés. Toute
+l'extraction des données publiques — décisions, votes, élus, districts — et tout le site
+tournent sur Node seul : `fetch`, des regex, et du SVG écrit à la main.
+
+## Rafraîchissement automatique
+
+`.github/workflows/refresh-villedequebec.yml`, à la racine du dépôt DossierQuébec, lance
+`npm run refresh` chaque matin à 08 h 30 UTC — après celui de DossierQuébec, et jamais en même
+temps — puis pousse `data/` s'il y a du nouveau ; Vercel redéploie. Le bouton « Run workflow »
+sur GitHub permet de le lancer à la main.
+
+Ce que ça demande à la Ville, par jour, à 0,6 s d'écart : les métadonnées de l'année en cinq
+requêtes de mille documents ; le texte des seules résolutions jamais lues, une requête par
+centaine — c'est là qu'on lit le renvoi vers le sommaire décisionnel ; les votes des soixante
+derniers jours, une ou deux ; le texte des sommaires à résumer, une par cinquantaine. **Une
+dizaine de requêtes, quel que soit le nombre de documents déjà connus.** C'est ce qui a été
+décrit au greffe dans la demande d'autorisation — ne pas l'alourdir sans mettre le courriel à
+jour.
+
+Le nom de fichier n'est pas filtrable dans l'index de la Ville, mais le numéro l'est :
+`lib/textes.js` demande le texte par listes de numéros (`search.in`) et recoupe sur le nom de
+fichier pour ne rien attribuer de travers.
+
+Le lundi, les pages du conseil (membres, districts, agglomération) sont relues. Le 1er du mois,
+les votes sont relus sur toute l'année, pour rattraper un vote publié en retard. En janvier,
+`archive.js --rotate` range l'année révolue avant la première extraction de la nouvelle.
+
+Une étape qui échoue ne bloque pas les autres : la source en panne garde ses données de la
+veille, le reste est publié, et le run est marqué rouge si c'est une extraction principale
+(décisions, votes) ou reçoit un avertissement si c'est une étape secondaire (pages du conseil,
+résumés, archive).
+
+Secrets et variables du dépôt : `ANTHROPIC_API_KEY` (déjà là pour DossierQuébec) ;
+`GPD_CONTACT`, facultatif, pour laisser une adresse de contact dans le User-Agent plutôt que
+l'adresse du site.
+
+## Ce que le prototype contient
+
+| Jeu | Source | Ce qu'on en tire |
+|---|---|---|
+| `data/decisions.json` | index Azure Search du portail GPD | résolutions, sommaires décisionnels, procès-verbaux, tableaux des décisions de l'année en cours |
+| `data/votes.json` | même index, texte intégral des résolutions | les appels nominaux : qui vote pour, qui vote contre, décomptes, abstentions, résultat |
+| `data/elus.json` | page officielle des membres du conseil | les 22 membres, district, arrondissement, parti, rôles, téléphone, lien de contact |
+| `data/resumes.json` | API Claude, à partir du texte des sommaires | 3 à 7 puces en langage clair par décision, plus le montant en jeu |
+| `data/districts.json` | Données Québec (CC-BY 4.0) | les contours des 21 districts électoraux, simplifiés, joints aux élus |
+
+## Les pages
+
+Vraies pages HTML séparées, pas des onglets — chacune a son titre, sa description et son URL,
+donc elle peut être indexée et partagée telle quelle.
+
+| Page | Contenu |
+|---|---|
+| `index.html` | accueil : le fil de ce qui a changé depuis la dernière extraction |
+| `decisions.html` | toutes les décisions, recherche, filtres, résumés |
+| `votes.html` | appels nominaux et décompte des votes contre par personne |
+| `conseil.html` | la carte des 21 districts, les 22 membres, et le conseil d'agglomération |
+| `lexique.html` | 30 termes du vocabulaire décisionnel, chiffrés sur le corpus |
+| `sources.html` | provenance, méthode, limites, état des données |
+
+Le style et la logique sont partagés (`assets/style.css`, `assets/app.js`) et les données sont
+lues à l'exécution depuis `data/*.json` : chaque page fait quelques kilo-octets, et une seule
+extraction met tout le site à jour.
+
+Tant que la Ville n'a pas répondu, les pages portent `<meta name="robots" content="noindex,
+nofollow">`, le `vercel.json` de DossierQuébec ajoute `X-Robots-Tag` sur `/villedequebec/`, et
+le lien depuis DossierQuébec est en `rel="nofollow"`. Le jour où ça débloque : retirer ces trois
+verrous et ajouter les pages au `sitemap.xml` de DossierQuébec.
+
+## Le gisement : le portail des documents décisionnels
+
+`decisions.ville.quebec.qc.ca` est une application AzSearch.js. Sa configuration (service
+`srch-gpd-p`, index `stgpdprod01-index`, clé de lecture) est publiée **en clair** dans
+`js/scripts.js`, que tout navigateur télécharge en ouvrant le portail. On s'en sert de la même
+façon que le site lui-même, avec un débit volontairement plus lent.
+
+L'index contient **~207 900 documents** de 2000 à aujourd'hui, ~9 à 10 000 par an :
+
+| Type | Nombre |
+|---|---|
+| Résolutions | 122 618 |
+| Sommaires et mémoires | 73 946 |
+| Procès-verbaux | 7 383 |
+| Tableaux des décisions | 2 163 |
+| Mouvements de personnel | 1 802 |
+
+Deux particularités à connaître :
+
+1. **Le texte intégral est déjà extrait** par la Ville dans le champ `content`. Pas de
+   `pdf-parse` à faire — contrairement aux projets de loi de l'Assemblée nationale.
+2. **Les valeurs sont stockées URL-encodées dans l'index** (`Sommaires%20et%20m%C3%A9moires`).
+   `lib/gpd.js` s'occupe de l'encodage et du décodage dans les deux sens ; un `$filter` sur
+   ces champs demande donc un double encodage, géré par `encodeFieldValue()`.
+
+Le champ `Ancienneuadministrative`, présent dans le code du portail, **n'existe pas** dans
+l'index de production — l'inclure dans un `$select` renvoie un HTTP 400.
+
+## Comment les votes nominatifs sont obtenus
+
+La plupart des décisions sont adoptées sans appel nominal. Quand un membre « demande le vote »,
+le procès-verbal consigne le vote complet, nommément :
+
+```
+Monsieur le conseiller Richard Levesque demande le vote.
+
+Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères
+Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage, Catherine Vallières-Roland
+et Elisa Verreault et monsieur le conseiller Gabriel Dusablon.
+
+Ont voté contre : monsieur le conseiller Richard Levesque.
+
+En faveur : 7      Contre : 1
+
+Monsieur le président s'est abstenu de voter.
+
+Adoptée à la majorité
+```
+
+`scrapers/votes.js` lit ces passages et en fait des données structurées. Pièges rencontrés,
+tous corrigés :
+
+- **Le singulier.** Quand une seule personne vote d'un côté, c'est « **A** voté contre : ».
+- **Les listes qui traversent une page.** Un segment ne se termine pas à la première ligne
+  vide, sinon une liste de 18 noms est tronquée ; il se termine au marqueur suivant.
+- **Les hyperliens en plein milieu d'un nom.** Les résolutions contiennent des liens vers le
+  sommaire décisionnel, qui ressortent entre le prénom et le nom à l'extraction du PDF.
+- **Les connecteurs.** Les noms sont séparés par des virgules, par « et », et par « ainsi que ».
+- **« Aucun membre du conseil »** est une liste vide légitime, pas un échec.
+- **Les PDF aux glyphes espacés.** Une minorité de documents ressortent en
+  `Ca the r ine Va l l i è r e s -Ro land`. Les noms ne sont **pas** extraits dans ce cas :
+  la fiche porte `texteSourceDegrade: true` et affiche le texte brut. On préfère un trou
+  assumé à un nom inventé.
+
+**Le garde-fou** : chaque vote est recoupé avec le décompte imprimé dans le document lui-même
+(`En faveur : 7   Contre : 1`). Tout écart entre les noms extraits et ces chiffres est écrit
+dans `avertissements` et affiché sur le site — jamais corrigé en silence. Sur l'extraction de
+2026 : 227 appels nominaux, dont 217 se recoupent exactement et 10 signalés comme dégradés.
+
+## Les résumés en langage clair
+
+Le sommaire décisionnel est la note que l'administration rédige avant chaque décision :
+exposé de la situation, décisions antérieures, analyse, recommandation. Le « pourquoi » y est
+déjà écrit — le résumé ne fait que le rendre lisible. C'est une matière première bien meilleure
+que le texte brut d'un projet de loi, et **moins chère à traiter** : le texte est déjà extrait
+dans l'index, il n'y a aucun PDF à parser.
+
+```bash
+# 1. mettre la clé
+cp api.env.example api.env       # puis y coller ANTHROPIC_API_KEY=sk-ant-…
+
+# 2. estimer avant de dépenser — mesure réelle, aucun appel de génération
+npm run scrape:resumes -- --dry-run --max=1500
+
+# 3. générer
+npm run scrape:resumes -- --max=50              # un échantillon, tout de suite
+npm run scrape:resumes -- --max=1500 --batch    # tout, à 50 % du tarif
+
+# la routine quotidienne (ce que fait npm run refresh) : les sommaires des 60 derniers jours
+# sans résumé, au plus 120 par exécution, texte lu par lots de numéros — jamais tout l'index
+npm run scrape:resumes -- --depuis=2026-07-13 --plafond=120
+```
+
+- `--dry-run` compte les jetons de douze documents réels avec `messages.countTokens`, en déduit
+  le ratio caractères/jeton et extrapole. Pas de règle de trois approximative.
+- `--batch` passe par l'API Batches : **moitié prix**, résultats en moins d'une heure en général.
+- Les résumés sont **mis en cache** dans `data/resumes.json` : relancer la commande ne repaie
+  jamais un document déjà résumé. `--force` pour tout regénérer.
+- `--model=claude-sonnet-5` si tu veux arbitrer autrement le coût. Par défaut : `claude-opus-5`.
+
+La sortie passe par un outil en schéma strict (`strict: true` + `tool_choice` forcé), donc la
+structure est garantie valide — pas de JSON à rattraper au parsing.
+
+Ce que la consigne interdit au modèle, et qui est vérifiable dans `scrapers/resumes.js` :
+ajouter quoi que ce soit d'absent du document, porter un jugement (sur la décision comme sur
+une personne), et meubler quand un document est purement procédural — dans ce cas il doit lever
+`sansContenuSubstantiel`, et la fiche affiche « document de procédure ». Le montant est recopié
+tel qu'écrit, jamais recalculé. Chaque résumé porte le modèle utilisé et sa date, et la fiche
+garde le lien vers le PDF officiel.
+
+## La carte des districts
+
+Contours tirés du jeu « Districts électoraux » de la Ville sur Données Québec, en **CC-BY 4.0** —
+donc librement réutilisables avec mention de la source, contrairement aux documents décisionnels.
+
+Le GeoJSON d'origine fait 586 ko et descend au centimètre. `scrapers/districts.js` simplifie les
+contours (Douglas-Peucker, avec correction du facteur `cos(latitude)` pour ne pas écraser l'axe
+est-ouest) et arrondit à cinq décimales : **586 ko → 46 ko, 14 200 points → 1 805**, sans
+différence visible à l'échelle d'une ville.
+
+La carte est dessinée en **SVG, sans librairie et sans serveur de tuiles** : la projection Web
+Mercator tient en trois lignes, et aucune requête ne part vers un tiers quand la page s'ouvre.
+Coloration au choix par arrondissement ou par parti, districts cliquables au doigt comme au clavier.
+
+Deux choses que ce travail a mises au jour :
+
+- **Le GeoJSON porte déjà `CONSEILLER` et `PARTI`**, à jour depuis l'élection de novembre 2025.
+  On les recoupe avec la page des membres du conseil : deux sources de la Ville qui se
+  contredisent, c'est une information, pas un détail à écraser. Écart trouvé et consigné : le
+  nom du conseiller du district 19 est inscrit deux fois dans le GeoJSON.
+- **La page des membres balise la même information de trois façons** selon l'élu —
+  `itemprop="affiliation"`, `itemprop="jobTitle"`, ou un `<p>` nu sans aucun `itemprop` — et
+  `jobTitle` sert tantôt à la fonction, tantôt au district. Se fier à un seul balisage faisait
+  disparaître 8 des 12 fonctions (dont le chef de l'opposition et quatre présidences
+  d'arrondissement). Le parseur balaie maintenant tous les `<p>` du bloc.
+
+**Ce que la carte ne prétend pas faire** : les décisions de la Ville ne portent aucune coordonnée.
+Impossible de dire « voici ce qui s'est décidé dans votre district ». Le rattachement offert est
+celui de l'*arrondissement*, qui lui existe vraiment dans les données — un clic sur un district
+mène aux décisions du conseil d'arrondissement correspondant.
+
+
+## L'année en cours, et l'archive
+
+Le site ne montre que **l'année en cours**. C'est ce qui intéresse quelqu'un qui veut savoir ce
+que sa ville décide en ce moment, et ça garde les pages légères.
+
+Les années précédentes ne disparaissent pas : elles sont écrites compressées dans
+`data/archives/`, hors du chemin de chargement des pages. Le site ne lit que le manifeste
+`data/archives/index.json` pour annoncer ce qui existe — jamais les fichiers d'années eux-mêmes.
+
+```bash
+npm run archive -- --list          # état de l'archive
+npm run archive -- --year=2025     # archive une année
+npm run archive -- --rotate        # archive l'année de decisions.json si elle est révolue
+```
+
+`--rotate` est le cas d'usage normal : **l'archive n'est pas un rapatriement massif fait une
+fois, c'est ce qui arrive à l'année courante quand l'année tourne.** `npm run refresh` le lance
+en premier à chaque exécution ; en janvier 2027, il range 2026 et laisse la place à la nouvelle
+année. Les résumés, eux, ne sont pas encore archivés : `data/resumes.json` grossit d'une année
+à l'autre, et c'est à régler avant que ça pèse.
+
+Seules les **métadonnées** sont archivées — jamais le champ `content`. Le texte intégral reste
+chez la Ville, et le lien vers chaque PDF officiel est conservé. Mesure réelle sur 2025 :
+**8 637 documents, 3 814 ko → 413 ko** en gzip.
+
+### Sur le volume, une précision
+
+J'ai écrit plus haut qu'un miroir complet devait passer par une demande au greffe. C'est vrai,
+mais pour des raisons de droit et d'usage — **pas de charge**. Une année de métadonnées, c'est
+une dizaine de requêtes ; les 21 années de l'index en feraient environ 200, soit quelques
+minutes à débit volontairement lent. Ce qui serait lourd, ce serait de rapatrier le texte
+intégral des 207 000 documents. On ne le fait pas, et le site n'en a pas besoin.
+
+
+## Les pastilles de sujet
+
+Chaque décision porte une pastille colorée qui dit de quoi elle parle. **Ce classement n'existe
+pas dans les données de la Ville** — il est ajouté ici, et `lib/themes.js` le contient en entier,
+lisible d'un bout à l'autre.
+
+Deux bases, dans cet ordre :
+
+1. **L'objet du document.** Les libellés de la Ville sont très formulaires (« Adjudication d'un
+   contrat… », « Demande de dérogation mineure… », « Ordonnance … portant sur le stationnement »),
+   ce qui rend des règles par mots-clés fiables et vérifiables. Les sujets passent avant les
+   véhicules (contrats, finances), et une dernière salve de règles, en fin de liste, ramasse les
+   familles que l'année complète a fait apparaître — sans rien voler aux précédentes.
+2. **À défaut, l'unité administrative** responsable, quand la Ville la publie — surtout sur les
+   sommaires décisionnels.
+3. **Faute de mieux, « Administration »** : le tout-venant de la vie municipale qu'aucune règle ne
+   reconnaît. Chaque décision a donc une pastille, et `themeSource` (`objet`, `unite` ou `defaut`)
+   dit ce qui a tranché — 16 documents sur 4 835 sont classés par défaut.
+
+Résultat mesuré sur 2026 (4 835 documents) :
+
+| Sujet | N | | Sujet | N |
+|---|--:|---|---|--:|
+| Urbanisme | 907 | | Ressources humaines | 156 |
+| Procédure | 647 | | Administration | 149 |
+| Subventions | 533 | | Culture et patrimoine | 141 |
+| Transport | 515 | | Environnement | 140 |
+| Contrats | 479 | | Sécurité publique | 106 |
+| Immobilier | 285 | | Développement économique | 81 |
+| Loisirs et communauté | 245 | | Motions et hommages | 34 |
+| Finances | 207 | | Logement et social | 22 |
+| Travaux et infrastructures | 188 | | | |
+
+L'ordre des règles compte, et une subtilité mérite d'être notée : la règle « procédure » est
+scindée en deux. Les marqueurs sans ambiguïté (procès-verbal, ordre du jour, période de questions)
+passent en premier ; mais « avis de motion » passe en **dernier**, après les règles de sujet — sinon
+un avis de motion portant sur l'urbanisme sortirait en « Procédure » au lieu d'« Urbanisme », ce qui
+n'apprend rien au lecteur.
+
+## Les fiches repliables
+
+Les fiches sont **repliées par défaut** : on voit la pastille, le numéro, la date et l'objet ; on
+clique n'importe où sur la boîte pour lire le résumé et atteindre le PDF. Un bouton « Tout déplier /
+Tout replier » agit sur la liste visible.
+
+C'est fait avec `<details>`/`<summary>` natifs, sans JavaScript pour l'ouverture : le clavier, la
+recherche du navigateur et les lecteurs d'écran fonctionnent sans qu'on ait à les recoder.
+
+
+## Le conseil d'agglomération
+
+Saint-Augustin-de-Desmaures et L'Ancienne-Lorette sont des **villes reconstituées** : elles ont
+défusionné de Québec. Leurs élus ne siègent pas au conseil municipal de Québec et ne
+représentent aucun district de Québec — mais ils **votent au conseil d'agglomération**, sur des
+dossiers qui touchent Québec. Ils devaient donc être sur le site.
+
+Vérification faite avec notre propre carte, par test point-dans-polygone sur les 21 districts :
+
+| Point | District de Québec |
+|---|---|
+| Vieux-Québec (témoin) | district 1 — Cap-aux-Diamants |
+| Sainte-Foy (témoin) | district 10 — Le Plateau |
+| L'Ancienne-Lorette | **aucun** |
+| Saint-Augustin-de-Desmaures | **aucun** |
+
+Les trous dans la carte ne sont pas un défaut de données : ce sont les deux villes reconstituées.
+
+La Ville ne publie pas de page « membres » pour ce conseil. `scrapers/agglomeration.js` le
+reconstitue depuis les **listes de présences** des procès-verbaux, qui donnent pour chacun sa
+fonction, sa ville et la personne qu'il remplace. Sur 2026 : 12 séances, 15 élus — Québec 8,
+Saint-Augustin-de-Desmaures 5, L'Ancienne-Lorette 2.
+
+Deux faits que ça met au jour, bruts : **Bruno Marchand, maire de Québec, est absent des 12
+séances** (remplacé par Catherine Vallières-Roland), et **Sylvain Juneau, maire de
+Saint-Augustin, l'est aussi** (remplacé le plus souvent par Richard Levesque).
+
+### Le bug qui effaçait les femmes
+
+Première version du parseur : `conseill\w+` pour attraper la fonction. **`\w` ne couvre pas les
+lettres accentuées** — « conseiller » passait, « conseillère » jamais. Résultat : les cinq
+conseillères de Québec siégeant à l'agglomération avaient disparu de la liste, sans la moindre
+erreur à l'exécution. Corrigé par une classe explicite (`conseill[a-zà-ÿ]*`), et c'est signalé en
+commentaire dans le fichier parce que le piège est facile à refaire ailleurs.
+
+
+## Le lexique
+
+Le vocabulaire décisionnel municipal est opaque par habitude, pas par nécessité. `lexique.html`
+explique 30 termes — résolution, sommaire décisionnel, avis de motion, ordonnance, dérogation
+mineure, ville reconstituée, adjudication, gré à gré… — en six catégories.
+
+Le partage des rôles est strict, et la page le dit en haut :
+
+- **Les définitions sont écrites par nous** (`lib/lexique.js`). Ce ne sont ni des textes de la
+  Ville, ni des définitions légales.
+- **Les décomptes et les exemples viennent des documents.** `scrapers/lexique.js` mesure chaque
+  terme sur les 207 915 documents du portail, puis attache un vrai document de l'année en cours
+  avec son lien PDF. 28 des 30 termes ont un exemple vivant.
+
+Une définition sans exemple est une affirmation ; avec, elle est vérifiable.
+
+### Ce que la mesure a corrigé
+
+Écrire le lexique « de tête » aurait produit deux entrées fausses, que le décompte a attrapées :
+
+- **P.I.I.A.** — je cherchais « implantation et d'intégration architecturale » : **2 documents**.
+  Les documents écrivent l'acronyme pointé (**4 352**), et « plan d'implantation » au long
+  (1 018, dont 25 en 2026). Mieux : la facette par année montre que l'acronyme culmine entre 2006
+  et 2017 puis **disparaît** — le vocabulaire de la Ville a changé en cours de route, et le
+  lexique le dit.
+- **Ville reconstituée** — « municipalité reconstituée » ne donnait que 14 documents. Le terme du
+  droit et des documents est **« municipalité liée »** (335), et « villes reconstituées » (142).
+
+C'est l'argument pour cette approche : un lexique adossé au corpus se fait corriger par lui.
+
+## ⚠ Avant de passer à l'échelle
+
+Trois choses à régler, et elles sont politiques autant que techniques :
+
+1. **`robots.txt` du portail = `User-agent: * / Disallow: /`.** Le prototype reste à un volume
+   modeste, s'identifie (`GPD_CONTACT`) et attend 600 ms entre deux requêtes — mais un miroir
+   complet des 207 000 documents doit passer par une demande au greffe de la Ville, pas par un
+   fait accompli.
+2. **Droit d'auteur.** La Ville autorise la reproduction avec mention de la source et
+   **interdit l'usage commercial sans autorisation préalable**. Un site sans publicité et sans
+   vente est du bon côté, mais ça vaut d'être confirmé par écrit.
+3. **C'est leur facture Azure.** Chaque requête coûte quelque chose à la Ville.
+
+Variables d'environnement :
+
+```bash
+GPD_CONTACT="votre@courriel"   # dans le User-Agent, pour qu'on puisse vous joindre ; à défaut, l'adresse du site
+GPD_DELAY_MS=600               # délai minimal entre deux requêtes
+```
+
+## Ce qui n'est pas encore là
+
+- **Les contrats.** La Ville publie ses listes mensuelles en PDF seulement, et le jeu de
+  données ouvert du SEAO ne couvre que les ministères et organismes du gouvernement, pas le
+  municipal. Il faut parser les PDF ou scraper la page SEAO par organisation.
+- **Le lobbyisme.** Carrefour Lobby Québec refuse l'accès automatisé (HTTP 403) et aucun jeu
+  de données ouvert du registre n'existe sur Données Québec. Même mur qu'au provincial.
+- **Consulter l'archive depuis le site.** Les années révolues sont conservées (voir plus haut)
+  mais aucune page ne les lit encore — seul leur relevé est affiché.
+- **Les alertes et le suivi.** À reprendre de DossierQuébec (Supabase + Resend + Vercel Cron).
+
+## Ce que les données disent déjà
+
+Sur l'année 2026, les appels nominaux se répartissent ainsi : **175 au conseil d'agglomération**
+contre **52 au conseil de la ville**. Le conseil municipal est composé à 19 sur 22 d'un seul
+parti, donc peu contesté ; c'est au conseil d'agglomération — là où siègent les maires des
+villes reconstituées — que se jouent les votes serrés.
+
+C'est le genre de constat que le site doit présenter en chiffres bruts et sourcés, sans
+l'interpréter à la place du lecteur.
+
+## Structure
+
+```
+lib/gpd.js               client Azure Search : throttle, réessais, encodage/décodage
+lib/textes.js            texte intégral par lots de numéros (search.in) : on ne lit que le nouveau
+lib/themes.js            règles de classement thématique (pastilles de sujet)
+lib/lexique.js           définitions du lexique (écrites à la main)
+scrapers/decisions.js    miroir incrémental des documents décisionnels
+scrapers/votes.js        registre des votes nominatifs (analyse de texte)
+scrapers/elus.js         les 22 membres du conseil (microdonnées schema.org)
+scrapers/districts.js    contours des 21 districts, simplifiés et joints aux élus
+scrapers/agglomeration.js membres du conseil d'agglomération, via les listes de présences
+scrapers/lexique.js      mesure chaque terme du lexique sur le corpus + un exemple
+scrapers/resumes.js      résumés en langage clair (API Claude, avec cache et estimation)
+scrapers/archive.js      archivage compressé des années révolues
+scripts/refresh.js       la routine quotidienne, tolérante aux pannes (local et GitHub Actions)
+scripts/static-server.js serveur statique local
+scripts/reparer-echappements.js  répare les accents échappés (\uXXXX) dans les résumés
+assets/style.css         style commun à toutes les pages
+assets/app.js            logique commune ; chaque page charge ce dont elle a besoin
+index.html decisions.html votes.html conseil.html lexique.html sources.html
+data/                    sorties JSON
+../.github/workflows/refresh-villedequebec.yml   le workflow quotidien (racine du dépôt DossierQuébec)
+../.vercelignore         garde lib/, scrapers/ et scripts/ hors du site servi
+```
