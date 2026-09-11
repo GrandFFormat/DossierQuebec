@@ -19,6 +19,8 @@
       var t = localStorage.getItem('dvq:theme');
       if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
       document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
     } catch (e) {}
   })();
 </script>
@@ -42,6 +44,11 @@
       <a href="votes.html">Votes nominatifs</a>
       <a href="conseil.html" aria-current="page">Conseil municipal</a>
       <a href="lexique.html">Lexique</a>
+      <div class="taille-texte" role="group" aria-label="Taille du texte">
+        <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+        <span id="texte-pct" aria-live="polite">100%</span>
+        <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+      </div>
       <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
               title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
     </nav>

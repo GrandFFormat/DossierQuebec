@@ -913,3 +913,38 @@ init();
     if (!choisi) appliquer(e.matches ? 'sombre' : 'clair');
   });
 })();
+
+// ---------- Taille du texte : A− / 100 % / A+ ----------
+// Même mécanique que sur DossierQuébec : un zoom de la page entre 80 et 150 %, par pas de
+// dix, mémorisé. Le zoom plutôt qu'une taille de police racine, parce que la feuille de
+// style est en pixels : un zoom agrandit tout — texte, espacements, pastilles — de façon
+// cohérente, là où changer la seule police laisserait les boîtes à leur taille.
+// La valeur est appliquée avant le premier rendu par le script en <head> ; ici on ne fait
+// que réagir aux clics et tenir l'affichage à jour.
+(function tailleTexte() {
+  const moins = document.getElementById('texte-moins');
+  const plus = document.getElementById('texte-plus');
+  const pct = document.getElementById('texte-pct');
+  if (!moins || !plus || !pct) return;
+
+  const MIN = 80;
+  const MAX = 150;
+  const PAS = 10;
+
+  const lire = () => {
+    const z = parseInt(document.documentElement.style.zoom, 10);
+    return z >= MIN && z <= MAX ? z : 100;
+  };
+
+  const appliquer = (z) => {
+    document.documentElement.style.zoom = z + '%';
+    pct.textContent = z + '%';
+    moins.disabled = z <= MIN;
+    plus.disabled = z >= MAX;
+    try { localStorage.setItem('dvq:zoom', String(z)); } catch {}
+  };
+
+  appliquer(lire());
+  moins.addEventListener('click', () => appliquer(Math.max(MIN, lire() - PAS)));
+  plus.addEventListener('click', () => appliquer(Math.min(MAX, lire() + PAS)));
+})();
