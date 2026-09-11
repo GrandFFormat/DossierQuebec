@@ -1631,6 +1631,16 @@ function goToFederal(evt){
   if(!leaf) return;
   setInterval(function(){ leaf.classList.toggle('is-red'); }, 20000);
 })();
+
+// Icône de la Ville : compte les clics vers le volet municipal (événement
+// personnalisé Vercel Web Analytics — onglet « Events » du tableau de bord).
+(function(){
+  var ville = document.getElementById('cityFlip');
+  if(!ville) return;
+  ville.addEventListener('click', function(){
+    if(window.va) window.va('event', { name: 'clic_icone_ville' });
+  });
+})();
 </script>
 
 <div class="app">
