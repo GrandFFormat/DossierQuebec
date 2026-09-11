@@ -7,7 +7,10 @@
 
 const PAS = 60; // fiches affichées par palier
 const PAS_SEANCES = 8; // séances affichées par palier, en mode groupé
-const PAS_VOTES = 10; // appels nominaux affichés par palier
+// Cinq à l'arrivée pour que la page reste courte, dix par clic ensuite : le premier
+// écran sert à décider si on veut lire, les suivants à lire pour vrai.
+const PAS_VOTES_DEPART = 5;
+const PAS_VOTES = 10;
 const PAS_FIL = 5; // éléments du fil d'accueil par palier
 
 const etat = {
@@ -18,7 +21,7 @@ const etat = {
   parId: new Map(), // id du document -> résumé IA
   limiteDecisions: PAS,
   limiteSeances: PAS_SEANCES,
-  limiteVotes: PAS_VOTES,
+  limiteVotes: PAS_VOTES_DEPART,
   limiteFil: PAS_FIL,
 };
 
@@ -558,30 +561,34 @@ function instanceArrondissement(arrondissement) {
 // ---------- lexique ----------
 // Les définitions viennent de nous ; les décomptes et les exemples viennent des documents
 // de la Ville. La page distingue visuellement les deux — c'est tout l'intérêt de l'exercice.
+// Une entrée de lexique n'est pas une fiche de décision : le terme est un titre, pas une
+// pastille, et la définition se lit comme du texte courant. Les chiffres passent en
+// second plan — ils prouvent, ils ne racontent pas.
 function entreeLexique(e) {
   const ex = e.exemple;
-  const entete = `<div class="meta">
-      <span class="puce theme" style="background:var(--accent)">${echapper(e.terme)}</span>
-      ${e.aussi ? `<span class="puce">aussi : ${echapper(e.aussi)}</span>` : ''}
-      <span class="puce">${nombreFr(e.occurrences.total)} documents</span>
-      ${e.occurrences.annee ? `<span class="puce">${nombreFr(e.occurrences.annee)} en ${e.occurrences.pourAnnee}</span>` : ''}
-    </div>
-    <p class="objet">${echapper(e.definition)}</p>`;
+  const entete = `<h3 class="terme">${echapper(e.terme)}</h3>
+    ${e.aussi ? `<p class="alias">aussi&nbsp;: ${echapper(e.aussi)}</p>` : ''}
+    <p class="definition">${echapper(e.definition)}</p>
+    <p class="mesure">${nombreFr(e.occurrences.total)} documents du portail${
+      e.occurrences.annee ? ` · ${nombreFr(e.occurrences.annee)} en ${e.occurrences.pourAnnee}` : ''
+    }</p>`;
 
-  const corps = `${e.ouVousLeVoyez ? `<p class="compte" style="margin:0 0 10px">${echapper(e.ouVousLeVoyez)}</p>` : ''}
+  const corps = `${e.ouVousLeVoyez ? `<p class="remarque">${echapper(e.ouVousLeVoyez)}</p>` : ''}
     ${
       ex
-        ? `<div class="resume">
-            <div class="resume-entete"><span>Exemple tiré des documents de la Ville</span>
+        ? `<div class="exemple">
+            <p class="exemple-titre">Un document réel où le terme apparaît</p>
+            <p class="exemple-objet">${echapper(ex.objet ?? '(sans objet)')}</p>
+            <p class="exemple-meta">
               ${ex.numero ? `<span class="puce num">${echapper(ex.numero)}</span>` : ''}
-              <span class="puce">${dateFr(ex.date)}</span>
-            </div>
-            <p style="margin:0 0 8px">${echapper(ex.objet ?? '(sans objet)')}</p>
-            ${ex.pdf ? `<a class="lien-pdf" href="${echapper(ex.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}
+              <span>${dateFr(ex.date)}</span>
+              ${ex.instance ? `<span>· ${echapper(ex.instance)}</span>` : ''}
+              ${ex.pdf ? ` · <a class="lien-pdf" href="${echapper(ex.pdf)}" target="_blank" rel="noopener">PDF officiel ↗</a>` : ''}
+            </p>
           </div>`
-        : `<p class="vide">Aucun document de ${echapper(e.occurrences.pourAnnee)} n'emploie ce terme. Il reste présent dans les années antérieures.</p>`
+        : `<p class="vide">Aucun document de ${echapper(e.occurrences.pourAnnee)} n'emploie ce terme — il reste présent les années précédentes.</p>`
     }`;
-  return carteRepliable(entete, corps);
+  return `<details class="carte pliante entree-lexique" name="${NOM_ACCORDEON}"><summary>${entete}</summary><div class="corps">${corps}</div></details>`;
 }
 
 function lexiqueFiltre() {
@@ -809,7 +816,7 @@ document.addEventListener('input', (e) => {
   }
   if (e.target.matches('#rech-lexique')) rendreLexique();
   if (e.target.matches('#rech-votes, #filtre-instance-votes, #filtre-theme-votes')) {
-    etat.limiteVotes = PAS_VOTES;
+    etat.limiteVotes = PAS_VOTES_DEPART;
     rendreVotes();
   }
 });
