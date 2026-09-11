@@ -655,18 +655,10 @@ function rendreFil() {
   const { evenements, nouveaux, mode } = evenementsRecents();
   const aMontrer = (mode === 'nouveautes' ? nouveaux : evenements).slice(0, 12);
 
-  const extraction = etat.decisions?.generatedAt ? new Date(etat.decisions.generatedAt).toLocaleString('fr-CA') : null;
-  const nbNouvellesDecisions = etat.decisions?.nouveauxDepuisDerniereExecution;
-
+  // Le titre suffit à dire ce qu'on regarde. Le détail de l'extraction (date, nombre de
+  // nouveautés) vit sur la page « Sources et limites », là où on va quand on se pose la
+  // question — pas en travers du fil quand on veut juste lire.
   $('#titre-fil').textContent = mode === 'nouveautes' ? 'Ce qui a changé' : 'Activité récente';
-  $('#note-fil').innerHTML =
-    mode === 'nouveautes'
-      ? `${nouveaux.length} élément(s) apparu(s) depuis l'extraction précédente.` +
-        (extraction ? ` Dernière extraction&nbsp;: ${echapper(extraction)}.` : '')
-      : `Rien de neuf depuis l'extraction précédente${
-          nbNouvellesDecisions === 0 ? '' : ' (première extraction : il n\'y a pas encore de point de comparaison)'
-        }. Voici l'activité la plus récente.` + (extraction ? ` Dernière extraction&nbsp;: ${echapper(extraction)}.` : '');
-
   $('#fil').innerHTML = aMontrer.map(ligneEvenement).join('');
 }
 
