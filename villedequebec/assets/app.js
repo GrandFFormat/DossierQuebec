@@ -593,7 +593,12 @@ function rendreLexique() {
     .map(([cle, titre]) => {
       const dedans = entrees.filter((e) => e.categorie === cle);
       if (!dedans.length) return '';
-      return `<h2 class="section">${echapper(titre)}</h2>` + dedans.map(entreeLexique).join('');
+      // La classe de catégorie porte la couleur : le titre, le filet et les termes en
+      // héritent, sans qu'aucune teinte soit écrite dans le HTML.
+      return (
+        `<h2 class="section cat-${echapper(cle)}">${echapper(titre)}</h2>` +
+        `<div class="bloc-lexique cat-${echapper(cle)}">${dedans.map(entreeLexique).join('')}</div>`
+      );
     })
     .join('');
   $('#liste-lexique').innerHTML = html || '<p class="vide">Aucun terme ne correspond.</p>';

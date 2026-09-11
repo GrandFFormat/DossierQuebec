@@ -446,3 +446,20 @@ footer a { color: var(--doux); }
 .entree-lexique .alias { margin: 0 0 6px; font-size: 13.5px; color: var(--doux); }
 .entree-lexique .definition { margin: 0; font-size: 16px; line-height: 1.6; max-width: 68ch; }
 .entree-lexique .remarque { margin: 8px 0 0; font-size: 14.5px; line-height: 1.55; color: var(--doux); max-width: 68ch; }
+
+/* Une couleur par catégorie du lexique, empruntée au nuancier des sujets — donc déjà
+   ajustée au thème clair comme au sombre, sans une teinte écrite en dur. */
+.cat-documents { --cat: var(--t-transport); }
+.cat-instances { --cat: var(--t-economie); }
+.cat-agglomeration { --cat: var(--t-social); }
+.cat-vote { --cat: var(--t-subventions); }
+.cat-urbanisme { --cat: var(--t-urbanisme); }
+.cat-argent { --cat: var(--t-finances); }
+
+h2.section[class*="cat-"] {
+  color: var(--cat); border-bottom: 2px solid var(--cat);
+  padding-bottom: 7px; margin-bottom: 20px;
+}
+.bloc-lexique { border-left: 3px solid var(--cat); padding-left: 18px; }
+.bloc-lexique .terme { color: var(--cat); }
+.bloc-lexique .entree-lexique:last-child { padding-bottom: 4px; }
