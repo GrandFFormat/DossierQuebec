@@ -74,7 +74,8 @@ jobs:
 
       - name: Signaler les étapes secondaires en échec
         if: ${{ steps.refresh.outputs.warnings != '' }}
-        run: echo "::warning::Étapes secondaires en échec (données de la veille conservées) : ${{ steps.refresh.outputs.warnings }}"
+        run: |
+          echo "::warning::Étapes secondaires en échec (données de la veille conservées) : ${{ steps.refresh.outputs.warnings }}"
 
       # Après le commit : une extraction principale en échec rend le run rouge pour qu'on
       # le voie — les données des autres étapes sont déjà publiées.
