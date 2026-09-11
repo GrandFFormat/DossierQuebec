@@ -47,8 +47,17 @@
   }
 }
 </script>
+<!-- Les DEUX préconnexions sont nécessaires et ce n'est pas un doublon :
+     googleapis.com sert la feuille CSS, gstatic.com sert les ~258 ko de
+     fichiers de police. Sans la seconde, le navigateur n'ouvre la connexion
+     vers gstatic qu'APRÈS avoir lu le CSS — un DNS + TLS en série, soit 100 à
+     300 ms perdus sur mobile à la première visite. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- IBM Plex Mono a été retirée : elle n'était utilisée nulle part dans le CSS.
+     Aucun octet économisé (le navigateur ne télécharge une police que si elle
+     sert au rendu, donc elle ne partait déjà pas) — c'est du ménage. -->
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     /* Refonte néo-brutaliste (handoff « design_handoff_dossierquebec ») :
@@ -2293,7 +2302,7 @@ function goToFederal(evt){
       <circle cx="340" cy="935" r="26" fill="#9DC3E6"/>
       <path d="M329 929 L336 929 L339 933 L351 933 L351 947 L329 947 Z" fill="#FFFFFF"/>
       <text x="340" y="990" text-anchor="middle" style="font-size:13px" fill="#EDEEE8" data-i18n="bd.out1">C'est de cette question qu'est né</text>
-      <text x="340" y="1016" text-anchor="middle" style="font-size:22px;font-weight:500;font-family:'Fraunces',Georgia,serif" fill="#F7F7F3">DossierQuébec</text>
+      <text x="340" y="1016" text-anchor="middle" style="font-size:22px;font-weight:500;font-family:Georgia,serif" fill="#F7F7F3">DossierQuébec</text><!-- « Fraunces » était demandée ici mais n'a jamais été chargée : le rendu retombait sur Georgia. On écrit donc Georgia, ce qui ne change rien à l'affichage. Pour retrouver Fraunces, il faudrait l'ajouter au lien Google Fonts — une famille de plus à télécharger pour un seul mot. -->
       <text x="340" y="1036" text-anchor="middle" style="font-size:12px" fill="#9DC3E6" data-i18n="bd.tagline">Qui siège, qui légifère, qui vote quoi</text>
 
       <rect x="60" y="1070" width="560" height="180" rx="8" fill="#EDEEE8" stroke="#16213E" stroke-width="2"/>
