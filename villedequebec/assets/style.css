@@ -364,7 +364,7 @@ footer a { color: var(--doux); }
 /* L'icône est dessinée en CSS plutôt qu'en SVG : une lune, c'est un disque avec un
    second disque de la couleur du fond décalé par-dessus. Zéro requête, zéro balise. */
 .bascule-theme {
-  margin-left: auto; align-self: center;
+  align-self: center;
   width: 38px; height: 38px; flex: none; cursor: pointer;
   background: transparent; border: 1px solid transparent; border-radius: 100px;
   position: relative;
@@ -463,3 +463,23 @@ h2.section[class*="cat-"] {
 .bloc-lexique { border-left: 3px solid var(--cat); padding-left: 18px; }
 .bloc-lexique .terme { color: var(--cat); }
 .bloc-lexique .entree-lexique:last-child { padding-bottom: 4px; }
+
+/* ---------- TAILLE DU TEXTE ---------- */
+.taille-texte {
+  margin-left: auto; align-self: center;
+  display: inline-flex; align-items: center; gap: 2px;
+  border: 1px solid var(--ligne-forte); border-radius: 100px; padding: 2px;
+  background: var(--carte);
+}
+.taille-texte button {
+  font: inherit; font-size: 13px; font-weight: 700; line-height: 1;
+  width: 32px; height: 28px; border: 0; border-radius: 100px;
+  background: transparent; color: var(--entete-encre); cursor: pointer;
+}
+.taille-texte button:hover:not(:disabled) { background: var(--fond-2); }
+.taille-texte button:disabled { color: var(--ligne-forte); cursor: default; }
+.taille-texte button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+#texte-pct {
+  min-width: 42px; text-align: center; font-size: 12px; font-weight: 600;
+  color: var(--entete-doux); font-variant-numeric: tabular-nums;
+}
