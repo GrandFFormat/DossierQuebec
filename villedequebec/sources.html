@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
 <meta name="robots" content="noindex, nofollow">
-<title>Sources et limites — DossierVilleDeQuébec</title>
+<title>Sources — DossierVilleDeQuébec</title>
 <meta name="description" content="D'où viennent les données de DossierVilleDeQuébec, comment les votes nominatifs et les résumés sont produits, et ce que ce prototype ne fait pas encore.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,105 +51,48 @@
 <main class="contenu prose">
   <div id="chargement" class="avis" hidden></div>
 
-  <h2 class="page">Sources et limites</h2>
+  <h2 class="page">Sources</h2>
+  <p class="chapeau">
+    Ce site n'est pas la Ville de Québec et n'a aucun caractère officiel. En cas de différence,
+    le document PDF d'origine fait foi — il est à un clic sur chaque fiche.
+  </p>
 
-  <h3>D'où viennent ces données</h3>
+  <h3>D'où viennent les données</h3>
   <ul>
-    <li><strong>Décisions et votes</strong> — portail des documents décisionnels de la Ville de Québec,
-      <a href="https://decisions.ville.quebec.qc.ca/" target="_blank" rel="noopener">decisions.ville.quebec.qc.ca</a>.
-      Le texte intégral des documents y est déjà extrait par la Ville&nbsp;; rien n'est reconstitué ici.
-      Chaque fiche renvoie au PDF officiel.</li>
-    <li><strong>Membres du conseil</strong> — page officielle
-      <a href="https://www.ville.quebec.qc.ca/apropos/gouvernance/conseil-municipal/membres.aspx" target="_blank" rel="noopener">des membres du conseil municipal</a>,
-      lue via ses balises schema.org.</li>
-    <li><strong>Contours des districts</strong> — jeu de données ouvert
-      <a href="https://www.donneesquebec.ca/recherche/dataset/vque_43" target="_blank" rel="noopener">« Districts électoraux »</a>
-      de la Ville de Québec sur Données Québec, <strong>licence CC-BY&nbsp;4.0</strong> — donc librement
-      réutilisable avec mention de la source, contrairement aux documents décisionnels.</li>
-  </ul>
-  <p>Le GeoJSON d'origine fait 586&nbsp;ko. Les contours sont simplifiés (Douglas-Peucker) et arrondis
-  au mètre pour tenir en 46&nbsp;ko, ce qui ne change rien à la lecture à l'échelle d'une ville. La carte
-  est dessinée en SVG, sans librairie et sans serveur de tuiles&nbsp;: aucune requête ne part vers un tiers
-  quand vous l'ouvrez.</p>
-  <p><strong>Un écart trouvé entre deux sources de la Ville</strong>&nbsp;: dans le GeoJSON, le nom du
-  conseiller du district&nbsp;19 est inscrit deux fois («&nbsp;Marc Roussin Marc Roussin&nbsp;»). La carte affiche
-  le nom tel qu'il paraît sur la page des membres du conseil, et l'écart est consigné dans les données.</p>
-
-  <h3>Les résumés en langage clair</h3>
-  <p>Les puces affichées sur certaines décisions sont <strong>générées par une intelligence
-  artificielle</strong> (l'API Claude d'Anthropic) à partir du texte du <em>sommaire décisionnel</em> —
-  la note que l'administration municipale rédige avant chaque décision, avec son exposé de la
-  situation, son analyse et sa recommandation. Le raisonnement derrière la décision est donc écrit
-  par la Ville&nbsp;; le résumé ne fait que le rendre lisible.</p>
-  <ul>
-    <li>Le modèle reçoit la consigne stricte de <strong>n'ajouter aucune information</strong> absente du
-      document, et de <strong>ne porter aucun jugement</strong> — ni sur la décision, ni sur une personne.</li>
-    <li>Quand un document est purement procédural et n'a rien de substantiel à résumer, le résumé
-      le dit (mention «&nbsp;document de procédure&nbsp;») plutôt que de meubler.</li>
-    <li>Le montant affiché est recopié tel qu'il est écrit dans le document, jamais recalculé.</li>
-    <li>Un résumé reste un résumé&nbsp;: en cas d'écart, <strong>le PDF officiel fait foi</strong>, et il est
-      toujours à un clic.</li>
-    <li>Le résumé porte sur le document tel que déposé, pas nécessairement sur ce qui a finalement
-      été adopté si la décision a été modifiée en séance.</li>
+    <li>Les décisions et les votes viennent du
+      <a href="https://decisions.ville.quebec.qc.ca/" target="_blank" rel="noopener">portail des documents
+      décisionnels</a> de la Ville.</li>
+    <li>Les membres du conseil viennent de la
+      <a href="https://www.ville.quebec.qc.ca/apropos/gouvernance/conseil-municipal/membres.aspx" target="_blank" rel="noopener">page
+      officielle du conseil municipal</a>.</li>
+    <li>Les contours des districts viennent du jeu de données ouvert
+      <a href="https://www.donneesquebec.ca/recherche/dataset/vque_43" target="_blank" rel="noopener">« Districts
+      électoraux »</a> de la Ville, sous licence CC-BY&nbsp;4.0.</li>
   </ul>
 
-  <h3>Les pastilles de sujet</h3>
-  <p>La pastille colorée sur chaque décision («&nbsp;Urbanisme&nbsp;», «&nbsp;Subventions&nbsp;», «&nbsp;Transport&nbsp;»…)
-  n'existe pas dans les données de la Ville&nbsp;: <strong>c'est un classement ajouté ici</strong>, pour
-  qu'on voie d'un coup d'œil de quoi il s'agit. Il repose sur deux bases, dans cet ordre&nbsp;:</p>
-  <ol>
-    <li><strong>L'objet du document.</strong> Les libellés de la Ville sont très formulaires
-      («&nbsp;Adjudication d'un contrat…&nbsp;», «&nbsp;Demande de dérogation mineure…&nbsp;»), ce qui rend des règles
-      par mots-clés fiables et vérifiables.</li>
-    <li><strong>À défaut, l'unité administrative responsable</strong>, quand la Ville la publie —
-      c'est le cas d'environ un tiers des documents, surtout les sommaires décisionnels.</li>
-  </ol>
-  <p>Quand ni l'une ni l'autre ne tranche, <strong>la décision n'a pas de pastille</strong>. C'est le cas
-  d'environ une sur dix. Une pastille approximative serait pire que pas de pastille&nbsp;: le lecteur s'y
-  fierait. Les règles sont toutes dans un seul fichier lisible du projet (<code>lib/themes.js</code>),
-  et chaque décision garde en donnée la base qui a servi à la classer.</p>
-
-  <h3>Les votes nominatifs</h3>
+  <h3>Ce qu'une machine fait, et ce qu'elle peut rater</h3>
   <ul>
-    <li>Les noms des votants sont <strong>extraits d'un texte</strong>, pas d'un registre structuré.
-      Chaque vote est recoupé avec le décompte imprimé dans le document lui-même&nbsp;; tout écart est
-      affiché sur la fiche plutôt que corrigé en silence.</li>
-    <li>Une minorité de PDF ressortent de l'extraction avec les lettres espacées. Dans ces cas, les
-      noms ne sont pas extraits et la fiche le dit, plutôt que de deviner.</li>
-    <li>Un appel nominal n'a lieu que si quelqu'un le demande. L'absence de vote nominatif sur un sujet
-      ne veut pas dire qu'il a fait consensus.</li>
+    <li><strong>Les résumés</strong> sont écrits par une intelligence artificielle à partir du
+      sommaire décisionnel — la note que la Ville rédige avant chaque décision. Elle a pour
+      consigne de n'ajouter aucune information absente du document et de ne porter aucun jugement.</li>
+    <li><strong>Les noms des votants</strong> sont extraits du texte des résolutions, pas d'un
+      registre. Chaque vote est recoupé avec le décompte imprimé dans le document&nbsp;; tout écart
+      est affiché sur la fiche plutôt que corrigé en silence.</li>
+    <li><strong>Les pastilles de sujet</strong> n'existent pas dans les données de la Ville&nbsp;:
+      c'est un classement ajouté ici, d'après les mots de l'objet de chaque décision.</li>
   </ul>
 
-  <h3>Ce que ce prototype ne fait pas encore</h3>
+  <h3>Deux choses à savoir</h3>
   <ul>
-    <li><strong>Les contrats.</strong> La Ville publie ses listes mensuelles de contrats en PDF seulement,
-      et le jeu de données ouvert du SEAO ne couvre pas le municipal. À faire.</li>
-    <li><strong>Le lobbyisme.</strong> Carrefour Lobby Québec bloque l'accès automatisé et il n'existe
-      aucun jeu de données ouvert du registre. Bloqué pour l'instant.</li>
-    <li><strong>Les décisions géolocalisées.</strong> La carte montre qui représente chaque district,
-      mais les décisions de la Ville ne portent aucune coordonnée. On ne peut donc pas dire
-      «&nbsp;voici ce qui s'est décidé chez vous&nbsp;». Le rattachement offert est celui de
-      l'<em>arrondissement</em>, qui lui existe vraiment dans les données.</li>
+    <li>Le site ne montre que <strong>l'année en cours</strong>. Les années précédentes sont
+      conservées à part.</li>
+    <li>Un vote nominatif n'a lieu que si un membre le demande. <strong>L'absence de vote
+      nominatif ne veut pas dire qu'il y a eu consensus.</strong></li>
   </ul>
 
-  <h3>L'année en cours, et l'archive</h3>
-  <p>Le site ne montre que <strong>l'année en cours</strong> : c'est ce qui intéresse quelqu'un qui
-  veut savoir ce que sa ville décide en ce moment. Les années précédentes ne disparaissent pas pour
-  autant — elles sont conservées compressées, hors du chemin de chargement des pages. Rien de
-  l'archive n'est téléchargé quand vous ouvrez le site&nbsp;; seul le relevé ci-dessous l'est.</p>
-  <p>L'archive n'est pas un rapatriement massif fait une fois&nbsp;: c'est ce qui arrive à l'année
-  courante quand l'année tourne. Les métadonnées seulement sont archivées — le texte intégral reste
-  là où il est, chez la Ville, et le lien vers chaque PDF officiel est conservé.</p>
-  <div id="etat-archive"></div>
-
-  <h3>Conditions d'utilisation de la source</h3>
-  <p>Les documents décisionnels sont publics&nbsp;: la Ville en autorise la reproduction avec mention de
-  la source, mais <strong>interdit l'usage commercial sans autorisation préalable</strong>. Le
-  <code>robots.txt</code> du portail est par ailleurs un <code>Disallow: /</code>. Avant toute reprise
-  à grande échelle, il faut écrire au greffe de la Ville — pas scraper d'abord et demander ensuite.</p>
-
-  <h3>État des données chargées</h3>
+  <h3>État des données</h3>
   <div id="etat-donnees"></div>
+  <div id="etat-archive"></div>
 </main>
 
 <footer>
