@@ -2,10 +2,3 @@
 api.env
 node_modules/
 .claude/settings.local.json
-
-# Fichiers d'AUTRES projets qui traînent dans ce dossier (mods TLIML, sauvegardes
-# de jeu). Ils n'ont rien à faire dans le dépôt public de DossierQuébec — ignorés
-# ici pour qu'un `git add -A` ne puisse jamais les y pousser par accident.
-TLIMLChiefNameOptimizer*/
-config.ini
-save.srm

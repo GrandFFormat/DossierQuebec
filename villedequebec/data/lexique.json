@@ -1,0 +1,609 @@
+{
+ "generatedAt": "2026-09-11T12:24:40.958Z",
+ "source": "https://decisions.ville.quebec.qc.ca/",
+ "avertissement": "Les définitions de ce lexique sont rédigées par DossierVille — ce ne sont pas des textes de la Ville de Québec ni des définitions légales. Ce qui vient des documents officiels, ce sont les décomptes et les exemples, mesurés sur l'index du portail des documents décisionnels.",
+ "categories": {
+  "documents": "Les documents",
+  "instances": "Qui décide",
+  "agglomeration": "Agglomération et villes reconstituées",
+  "vote": "Voter et adopter",
+  "urbanisme": "Urbanisme",
+  "argent": "L'argent et les contrats"
+ },
+ "parametres": {
+  "annee": "2026"
+ },
+ "nombre": 30,
+ "entrees": [
+  {
+   "terme": "Résolution",
+   "categorie": "documents",
+   "recherche": "\"il est résolu\"",
+   "definition": "La décision elle-même. Une fois adoptée, c'est l'acte officiel du conseil : elle porte un numéro (CV-2026-0123, CE-2026-0456…) et engage la Ville.",
+   "ouVousLeVoyez": "C'est le type de document le plus nombreux du portail.",
+   "occurrences": {
+    "total": 127952,
+    "annee": 3233,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "IN2026-011",
+    "objet": "Dépôt de demandes d'aide financière au Programme de financement d'infrastructures en eau pour la réalisation d'habitations (FIERH) du ministère des Affaires municipales et de l'Habitation",
+    "date": "2026-09-09",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/IN2026-011.pdf"
+   }
+  },
+  {
+   "terme": "Sommaire décisionnel",
+   "categorie": "documents",
+   "recherche": "\"sommaire décisionnel\"",
+   "definition": "La note que l'administration municipale rédige AVANT la décision, pour l'expliquer aux élus : exposé de la situation, décisions antérieures, analyse des solutions, recommandation, impact financier. C'est le « pourquoi » derrière la résolution.",
+   "ouVousLeVoyez": "C'est à partir de ce document que les résumés en langage clair du site sont produits — le raisonnement y est déjà écrit par la Ville.",
+   "occurrences": {
+    "total": 114130,
+    "annee": 2916,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": null,
+    "objet": "Tableau des décisions de la séance planifiée du comité exécutif tenue le mercredi 09 septembre 2026",
+    "date": "2026-09-09",
+    "type": "Tableaux des décisions",
+    "instance": "Comité exécutif",
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CE_PL_2026-09-09_00h00.pdf"
+   }
+  },
+  {
+   "terme": "Procès-verbal",
+   "categorie": "documents",
+   "recherche": "\"procès-verbal de la séance\"",
+   "definition": "Le compte rendu officiel d'une séance : qui était présent, ce qui a été décidé, et — quand quelqu'un l'a demandé — qui a voté quoi.",
+   "ouVousLeVoyez": "C'est la source des votes nominatifs du site, et la seule source qui donne la composition réelle de chaque instance.",
+   "occurrences": {
+    "total": 134657,
+    "annee": 3416,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": null,
+    "objet": "Tableau des décisions de la séance planifiée du comité exécutif tenue le mercredi 09 septembre 2026",
+    "date": "2026-09-09",
+    "type": "Tableaux des décisions",
+    "instance": "Comité exécutif",
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CE_PL_2026-09-09_00h00.pdf"
+   }
+  },
+  {
+   "terme": "Avis de motion",
+   "categorie": "documents",
+   "recherche": "\"avis de motion\"",
+   "definition": "L'annonce qu'un règlement sera présenté à une séance suivante. Ça ne décide rien : ça prévient. C'est une étape obligatoire avant d'adopter un règlement.",
+   "ouVousLeVoyez": "Souvent suivi, quelques semaines plus tard, de l'adoption du règlement annoncé.",
+   "occurrences": {
+    "total": 22669,
+    "annee": 456,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "PA2026-121",
+    "objet": "Adoption du Règlement sur la réalisation d'un projet institutionnel relatif à un établissement scolaire sur une partie des lots 6 491 944 et 1 695 709 du cadastre du Québec, R.V.Q. 3570",
+    "date": "2026-09-09",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-121.pdf"
+   }
+  },
+  {
+   "terme": "Ordonnance",
+   "categorie": "documents",
+   "recherche": "ordonnance",
+   "definition": "Une décision d'application, prise en vertu d'un règlement déjà en vigueur. Elle ajuste des détails concrets sans qu'on doive rouvrir le règlement lui-même.",
+   "ouVousLeVoyez": "Très fréquente pour le stationnement et la circulation : « Ordonnance numéro O-604 concernant des modifications aux règles portant sur le stationnement ».",
+   "occurrences": {
+    "total": 9890,
+    "annee": 390,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "DE2026-265",
+    "objet": "Acquisition à des fins municipales d'un immeuble situé en bordure de la route de l'Église, connu et désigné comme étant une partie des lots 2 013 649 et 2 013 647 du cadastre du Québec, circonscription foncière de Québec Arrondissement de Sainte-Foy-Sillery-Cap-Rouge",
+    "date": "2026-09-09",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-265.pdf"
+   }
+  },
+  {
+   "terme": "Règlement",
+   "categorie": "documents",
+   "recherche": "\"adoption du règlement\"",
+   "definition": "La forme la plus contraignante d'une décision municipale : une norme générale qui s'applique à tous. Son adoption suit des étapes obligatoires (avis de motion, projet, adoption).",
+   "ouVousLeVoyez": "Les numéros disent l'instance : R.V.Q. pour la ville, R.A.V.Q. pour l'agglomération, R.C.A. pour un arrondissement.",
+   "occurrences": {
+    "total": 12194,
+    "annee": 413,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "PA2026-121",
+    "objet": "Adoption du Règlement sur la réalisation d'un projet institutionnel relatif à un établissement scolaire sur une partie des lots 6 491 944 et 1 695 709 du cadastre du Québec, R.V.Q. 3570",
+    "date": "2026-09-09",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-121.pdf"
+   }
+  },
+  {
+   "terme": "Tableau des décisions",
+   "categorie": "documents",
+   "recherche": "\"tableau des décisions\"",
+   "definition": "Le récapitulatif des décisions prises à une séance, sous forme de liste.",
+   "ouVousLeVoyez": "Utile pour balayer une séance d'un coup d'œil, sans lire tout le procès-verbal.",
+   "occurrences": {
+    "total": 1408,
+    "annee": 76,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": null,
+    "objet": "Tableau des décisions de la séance planifiée du comité exécutif tenue le mercredi 09 septembre 2026",
+    "date": "2026-09-09",
+    "type": "Tableaux des décisions",
+    "instance": "Comité exécutif",
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CE_PL_2026-09-09_00h00.pdf"
+   }
+  },
+  {
+   "terme": "Conseil municipal",
+   "categorie": "instances",
+   "recherche": "\"conseil de la ville\"",
+   "definition": "Les 22 élus de la Ville de Québec : le maire et 21 conseillères et conseillers, un par district. Il adopte les règlements, le budget, et les décisions les plus importantes.",
+   "ouVousLeVoyez": "Ses séances sont publiques et webdiffusées, avec une période de questions des citoyens.",
+   "occurrences": {
+    "total": 62959,
+    "annee": 1742,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "PA2026-121",
+    "objet": "Adoption du Règlement sur la réalisation d'un projet institutionnel relatif à un établissement scolaire sur une partie des lots 6 491 944 et 1 695 709 du cadastre du Québec, R.V.Q. 3570",
+    "date": "2026-09-09",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-121.pdf"
+   }
+  },
+  {
+   "terme": "Comité exécutif",
+   "categorie": "instances",
+   "recherche": "\"comité exécutif\"",
+   "definition": "Un petit groupe d'élus — 9 à Québec — à qui le conseil a délégué une large part de ses pouvoirs. C'est l'instance qui prend le plus de décisions, et de loin.",
+   "ouVousLeVoyez": "Plus de 70 000 documents du portail viennent du comité exécutif, contre environ 35 000 pour le conseil de la ville.",
+   "occurrences": {
+    "total": 70593,
+    "annee": 1557,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": null,
+    "objet": "Tableau des décisions de la séance planifiée du comité exécutif tenue le mercredi 09 septembre 2026",
+    "date": "2026-09-09",
+    "type": "Tableaux des décisions",
+    "instance": "Comité exécutif",
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CE_PL_2026-09-09_00h00.pdf"
+   }
+  },
+  {
+   "terme": "Conseil d'arrondissement",
+   "categorie": "instances",
+   "recherche": "\"conseil d'arrondissement\"",
+   "definition": "Chacun des six arrondissements de Québec a son conseil, formé des conseillers des districts qui le composent. Il décide de ce qui est local : urbanisme de proximité, loisirs, vie de quartier.",
+   "ouVousLeVoyez": "Les six : La Cité-Limoilou, Les Rivières, Sainte-Foy–Sillery–Cap-Rouge, Charlesbourg, Beauport, La Haute-Saint-Charles.",
+   "occurrences": {
+    "total": 56277,
+    "annee": 1114,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "AM5-2026-0098",
+    "objet": "Avis de motion relatif au Règlement modifiant le Règlement intérieur du conseil d'arrondissement de Beauport sur la délégation de pouvoirs relativement au pouvoir d'autoriser l'occupation du domaine public, R.C.A.5V.Q. 366 et dépôt du projet du règlement",
+    "date": "2026-09-08",
+    "type": "Résolutions",
+    "instance": "Conseil de l'Arrondissement de Beauport",
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AM5-2026-0098.pdf"
+   }
+  },
+  {
+   "terme": "Commission d'urbanisme et de conservation de Québec",
+   "aussi": "CUCQ",
+   "categorie": "instances",
+   "recherche": "\"Commission d'urbanisme et de conservation\"",
+   "definition": "Une commission qui rend des décisions contraignantes en urbanisme : apparence architecturale, démolitions, secteurs patrimoniaux. Elle est présidée par des élus, mais la majorité de ses membres ne sont pas élus.",
+   "ouVousLeVoyez": "Un permis peut dépendre de son avis. C'est l'instance la moins connue parmi celles qui décident vraiment.",
+   "occurrences": {
+    "total": 2321,
+    "annee": 133,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "GT2026-252",
+    "objet": "Demande de dérogation mineure pour la propriété sise au 51, rue des Jardins, lot 1 213 295, quartier du Vieux-Québec-Cap-Blanc-Colline parlementaire, district électoral du Cap-aux-Diamants, Arrondissement de La Cité-Limoilou",
+    "date": "2026-08-31",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-252.pdf"
+   }
+  },
+  {
+   "terme": "Greffier",
+   "categorie": "instances",
+   "recherche": "greffier",
+   "definition": "L'officier qui garde les documents officiels de la Ville, rédige les procès-verbaux et certifie les décisions. Ce n'est pas un élu.",
+   "ouVousLeVoyez": "Sa signature clôt les procès-verbaux, avec celle de la présidence d'assemblée.",
+   "occurrences": {
+    "total": 100766,
+    "annee": 1849,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "PA2026-111",
+    "objet": "Avenant numéro 1 à l'entente entre la Ville de Québec et un organisme visant une clientèle de femmes en difficulté pour le versement d'une contribution financière résiduelle de 108 458 $ dans le cadre de l'Initiative fédérale pour la création rapide de logements (ICRL-II)",
+    "date": "2026-09-09",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-111.pdf"
+   }
+  },
+  {
+   "terme": "Conseil d'agglomération",
+   "categorie": "agglomeration",
+   "recherche": "\"conseil d'agglomération\"",
+   "definition": "Neuf sièges où Québec siège avec L'Ancienne-Lorette et Saint-Augustin-de-Desmaures, pour décider des services partagés par les trois villes.",
+   "ouVousLeVoyez": "Selon la Ville : évaluation foncière, transport en commun, réseau artériel, eau potable et traitement, matières résiduelles, sécurité publique (police, incendie, 911), cour municipale, logement social et itinérance, développement économique.",
+   "occurrences": {
+    "total": 44354,
+    "annee": 1701,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": null,
+    "objet": "Tableau des décisions de la séance planifiée du comité exécutif tenue le mercredi 09 septembre 2026",
+    "date": "2026-09-09",
+    "type": "Tableaux des décisions",
+    "instance": "Comité exécutif",
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CE_PL_2026-09-09_00h00.pdf"
+   }
+  },
+  {
+   "terme": "Ville reconstituée",
+   "aussi": "ville défusionnée · municipalité liée",
+   "categorie": "agglomeration",
+   "recherche": "\"villes reconstituées\"",
+   "definition": "Une ville qui avait été fusionnée à Québec en 2002 et qui a repris son existence propre en 2006 à la suite d'un référendum. Elle a son propre conseil et son propre maire. Dans le texte de loi et dans les documents de la Ville, on lit plus souvent « municipalité liée » — qui désigne les trois villes de l'agglomération, Québec comprise.",
+   "ouVousLeVoyez": "Deux dans l'agglomération de Québec : L'Ancienne-Lorette et Saint-Augustin-de-Desmaures. Leurs élus votent à l'agglomération, mais ne siègent pas au conseil municipal de Québec et ne représentent aucun district de Québec.",
+   "occurrences": {
+    "total": 142,
+    "annee": 0,
+    "pourAnnee": "2026"
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Compétence d'agglomération",
+   "categorie": "agglomeration",
+   "recherche": "\"compétence d'agglomération\"",
+   "definition": "Un domaine que la loi confie au conseil d'agglomération plutôt qu'à chaque ville séparément, parce que le service est partagé. Le reste — ce qu'on appelle les compétences de proximité — demeure à chaque ville.",
+   "ouVousLeVoyez": "C'est ce qui explique qu'un élu d'une autre ville vote sur des dossiers qui touchent Québec.",
+   "occurrences": {
+    "total": 3966,
+    "annee": 144,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "PA2026-111",
+    "objet": "Avenant numéro 1 à l'entente entre la Ville de Québec et un organisme visant une clientèle de femmes en difficulté pour le versement d'une contribution financière résiduelle de 108 458 $ dans le cadre de l'Initiative fédérale pour la création rapide de logements (ICRL-II)",
+    "date": "2026-09-09",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-111.pdf"
+   }
+  },
+  {
+   "terme": "Demander le vote",
+   "categorie": "vote",
+   "recherche": "\"demande le vote\"",
+   "definition": "Exiger qu'on compte les voix une à une. Sans cette demande, une décision est adoptée sans appel nominal et personne n'est nommé au procès-verbal.",
+   "ouVousLeVoyez": "C'est la clé du registre des votes du site : les seuls votes dont on connaît le détail sont ceux que quelqu'un a demandés.",
+   "occurrences": {
+    "total": 3963,
+    "annee": 248,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "CA-2026-0461",
+    "objet": "Modification de la nomenclature des emplois professionnels",
+    "date": "2026-08-26",
+    "type": "Résolutions",
+    "instance": "Conseil d'agglomération de Québec",
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0461.pdf"
+   }
+  },
+  {
+   "terme": "Adoptée à l'unanimité",
+   "categorie": "vote",
+   "recherche": "\"adoptée à l'unanimité\"",
+   "definition": "Personne n'a voté contre.",
+   "ouVousLeVoyez": "La formule la plus courante, parce que la plupart des décisions passent sans opposition.",
+   "occurrences": {
+    "total": 67223,
+    "annee": 1689,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": null,
+    "objet": "Procès-verbal de la séance planifiée du conseil de l'Arrondissement de Beauport tenue le mardi 08 septembre 2026 à 17h30",
+    "date": "2026-09-08",
+    "type": "Procès-verbaux",
+    "instance": "Conseil de l'Arrondissement de Beauport",
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA5_OR_2026-09-08_17h30.pdf"
+   }
+  },
+  {
+   "terme": "Adoptée à la majorité",
+   "categorie": "vote",
+   "recherche": "\"adoptée à la majorité\"",
+   "definition": "Adoptée, mais au moins une personne a voté contre. Le procès-verbal nomme alors qui.",
+   "ouVousLeVoyez": "C'est le cas de la quasi-totalité des votes nominatifs du site.",
+   "occurrences": {
+    "total": 3627,
+    "annee": 247,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "CA-2026-0461",
+    "objet": "Modification de la nomenclature des emplois professionnels",
+    "date": "2026-08-26",
+    "type": "Résolutions",
+    "instance": "Conseil d'agglomération de Québec",
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0461.pdf"
+   }
+  },
+  {
+   "terme": "Adoptée sur division",
+   "categorie": "vote",
+   "recherche": "\"adoptée sur division\"",
+   "definition": "Adoptée malgré une opposition consignée, sans qu'on ait nécessairement compté les voix nominativement.",
+   "ouVousLeVoyez": "Plus rare que « à la majorité », et moins informatif : on sait qu'il y a eu désaccord, pas toujours de qui.",
+   "occurrences": {
+    "total": 316,
+    "annee": 0,
+    "pourAnnee": "2026"
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Prise d’acte",
+   "categorie": "vote",
+   "recherche": "\"prise d'acte\"",
+   "definition": "Le conseil constate officiellement qu'un document lui a été présenté. Ça ne l'approuve pas : ça l'enregistre.",
+   "ouVousLeVoyez": "Souvent pour des rapports, des ententes déjà signées ou des dépôts obligatoires.",
+   "occurrences": {
+    "total": 5352,
+    "annee": 241,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": null,
+    "objet": "Tableau des décisions de la séance planifiée du conseil d'agglomération de Québec tenue le mercredi 26 août 2026 à 13h00",
+    "date": "2026-08-26",
+    "type": "Tableaux des décisions",
+    "instance": "Conseil d'agglomération de Québec",
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CAG_PL_2026-08-26_13h00.pdf"
+   }
+  },
+  {
+   "terme": "Mairesse suppléante",
+   "aussi": "maire suppléant",
+   "categorie": "vote",
+   "recherche": "suppléant",
+   "definition": "L'élu désigné pour remplacer le maire quand celui-ci est absent ou empêché.",
+   "ouVousLeVoyez": "Aux séances d'agglomération de 2026, le maire de Québec a été remplacé à chacune des douze séances.",
+   "occurrences": {
+    "total": 506,
+    "annee": 4,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "GT2026-167",
+    "objet": "Demande de dérogation mineure pour la propriété sise au 530, rue des Canetons, lot 6 120 105, quartier de Duberger-Les Saules, district électoral des Saules-Les Méandres, Arrondissement des Rivières",
+    "date": "2026-05-26",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-167.pdf"
+   }
+  },
+  {
+   "terme": "Dérogation mineure",
+   "categorie": "urbanisme",
+   "recherche": "\"dérogation mineure\"",
+   "definition": "Une permission d'écarter légèrement une règle du zonage pour un terrain précis — une marge, une hauteur, un nombre de cases de stationnement — sans changer le règlement pour tout le monde.",
+   "ouVousLeVoyez": "Presque toujours rattachée à une adresse précise, qui est nommée dans l'objet de la décision.",
+   "occurrences": {
+    "total": 9639,
+    "annee": 298,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "GT2026-243",
+    "objet": "Adoption du Règlement modifiant le Règlement de l'agglomération sur la réalisation d'un projet de caserne de pompiers sur le lot projeté numéro 6 534 798 du cadastre du Québec, R.A.V.Q. 1875 (Allée d'accès de la caserne numéro 4, quartier du Vieux-Moulin, district électoral de Robert-Giffard)",
+    "date": "2026-09-09",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-243.pdf"
+   }
+  },
+  {
+   "terme": "Plan d'implantation et d'intégration architecturale",
+   "aussi": "PIIA",
+   "categorie": "urbanisme",
+   "recherche": "\"plan d'implantation\"",
+   "definition": "Un mécanisme qui soumet un projet à une évaluation de son apparence et de son insertion dans le milieu, au-delà des règles chiffrées du zonage.",
+   "ouVousLeVoyez": "C'est souvent ce qui amène un dossier devant la Commission d'urbanisme. Le vocabulaire de la Ville a changé en cours de route : l'acronyme pointé « P.I.I.A. » apparaît dans 4 352 documents, surtout entre 2006 et 2017, puis disparaît au profit de la formulation au long.",
+   "occurrences": {
+    "total": 1018,
+    "annee": 25,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "PA2026-092",
+    "objet": "Projet majeur résidentiel générant la réalisation de travaux municipaux pour l'aménagement d'un lien piéton sur la rue des Prairies - Projet Arno - Arrondissement de La Cité-Limoilou",
+    "date": "2026-07-02",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-092.pdf"
+   }
+  },
+  {
+   "terme": "Zonage",
+   "categorie": "urbanisme",
+   "recherche": "zonage",
+   "definition": "Le découpage du territoire en zones, avec pour chacune ce qu'on a le droit d'y construire et d'y faire.",
+   "ouVousLeVoyez": "La grille de zonage de Québec est publiée en données ouvertes.",
+   "occurrences": {
+    "total": 13933,
+    "annee": 153,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "GT2026-243",
+    "objet": "Adoption du Règlement modifiant le Règlement de l'agglomération sur la réalisation d'un projet de caserne de pompiers sur le lot projeté numéro 6 534 798 du cadastre du Québec, R.A.V.Q. 1875 (Allée d'accès de la caserne numéro 4, quartier du Vieux-Moulin, district électoral de Robert-Giffard)",
+    "date": "2026-09-09",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-243.pdf"
+   }
+  },
+  {
+   "terme": "Adjudication",
+   "categorie": "argent",
+   "recherche": "adjudication",
+   "definition": "L'attribution officielle d'un contrat à un soumissionnaire, au terme d'un appel d'offres.",
+   "ouVousLeVoyez": "« Adjudication d'un contrat pour… » est l'une des formulations les plus fréquentes du portail.",
+   "occurrences": {
+    "total": 26350,
+    "annee": 494,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "AP2026-271",
+    "objet": "Adjudication de contrats pour l'opération des dépôts à neige Jonquière, Saint-Thomas-d'Aquin et Godin (Appel d'offres public 94888)",
+    "date": "2026-09-09",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-271.pdf"
+   }
+  },
+  {
+   "terme": "Appel d'offres",
+   "categorie": "argent",
+   "recherche": "\"appel d'offres\"",
+   "definition": "La mise en concurrence obligatoire avant d'accorder un contrat au-delà d'un certain montant. Public, il est ouvert à tous ; sur invitation, il est réservé à des fournisseurs sollicités.",
+   "ouVousLeVoyez": "Les contrats municipaux sont publiés sur le SEAO, le système électronique d'appel d'offres du Québec.",
+   "occurrences": {
+    "total": 17496,
+    "annee": 580,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "AP2026-271",
+    "objet": "Adjudication de contrats pour l'opération des dépôts à neige Jonquière, Saint-Thomas-d'Aquin et Godin (Appel d'offres public 94888)",
+    "date": "2026-09-09",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-271.pdf"
+   }
+  },
+  {
+   "terme": "Gré à gré",
+   "categorie": "argent",
+   "recherche": "\"de gré à gré\"",
+   "definition": "Un contrat conclu directement, sans mise en concurrence. La loi ne le permet que dans des cas précis.",
+   "ouVousLeVoyez": "Apparaît aussi pour les acquisitions d'immeubles : « de gré à gré ou par expropriation ».",
+   "occurrences": {
+    "total": 3977,
+    "annee": 367,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "DE2026-342",
+    "objet": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'immeubles et d'une servitude situés en bordure de la 1re Avenue, connus et désignés comme étant des parties du lot 3 940 826 du cadastre du Québec, circonscription foncière de Québec, relativement au projet de Réseau structura",
+    "date": "2026-09-09",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-342.pdf"
+   }
+  },
+  {
+   "terme": "Appropriation",
+   "categorie": "argent",
+   "recherche": "\"appropriation d'un montant\"",
+   "definition": "Réserver une somme déjà disponible pour une dépense précise. Ce n'est pas un nouvel emprunt.",
+   "ouVousLeVoyez": "« Appropriation d'un montant de 2 510 000 $ à même le fonds général ».",
+   "occurrences": {
+    "total": 2699,
+    "annee": 115,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "CA-2026-0472",
+    "objet": "Appropriation d'un montant de 28 700 $ au fonds général",
+    "date": "2026-08-26",
+    "type": "Résolutions",
+    "instance": "Conseil d'agglomération de Québec",
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0472.pdf"
+   }
+  },
+  {
+   "terme": "Règlement d'emprunt",
+   "categorie": "argent",
+   "recherche": "\"règlement d'emprunt\"",
+   "definition": "Le règlement par lequel la Ville s'autorise à emprunter pour financer un projet, en général un investissement de longue durée.",
+   "ouVousLeVoyez": "Il précise le montant et la durée du remboursement.",
+   "occurrences": {
+    "total": 10261,
+    "annee": 240,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "AJ2026-022",
+    "objet": "Règlement hors tribunal du dossier relatif à l'expropriation du lot 6 697 154 du cadastre du Québec, circonscription foncière de Québec, situé sur le boulevard René-Lévesque Ouest (Ville de Québec c. Renée Lévesque et Ginette Goulet, SAI-Q-280543-2503)",
+    "date": "2026-09-09",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AJ2026-022.pdf"
+   }
+  },
+  {
+   "terme": "Expropriation",
+   "categorie": "argent",
+   "recherche": "expropriation",
+   "definition": "L'acquisition forcée d'un terrain ou d'un droit par la Ville pour un motif d'utilité publique, avec indemnité au propriétaire.",
+   "ouVousLeVoyez": "Souvent suivie d'un « règlement hors tribunal », c'est-à-dire d'une entente sur l'indemnité sans aller devant le juge.",
+   "occurrences": {
+    "total": 2143,
+    "annee": 287,
+    "pourAnnee": "2026"
+   },
+   "exemple": {
+    "numero": "DE2026-201",
+    "objet": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur un immeuble situé en bordure de la 1re Avenue, connu et désigné comme étant une partie du lot 6 460 865 du cadastre du Québec, circonscription foncière de Québec, relativement au projet de Réseau structurant",
+    "date": "2026-09-09",
+    "type": "Sommaires et mémoires",
+    "instance": null,
+    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-201.pdf"
+   }
+  }
+ ]
+}

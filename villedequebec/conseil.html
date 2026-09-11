@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
+<meta name="robots" content="noindex, nofollow">
+<title>Le conseil municipal de Québec — DossierVilleDeQuébec</title>
+<meta name="description" content="Carte des 21 districts électoraux de Québec et fiches des 22 membres du conseil municipal : district, parti, fonctions, votes contre et moyen de les joindre.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvq:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="conseil">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="index.html"><h1>Dossier<span class="marque">VilleDeQuébec</span></h1></a>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Québec, lisibles. Données publiques, reprises telles quelles
+      du portail des documents décisionnels de la Ville, de la page officielle du conseil
+      municipal et de Données Québec.
+    </p>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="decisions.html">Décisions</a>
+      <a href="votes.html">Votes nominatifs</a>
+      <a href="conseil.html" aria-current="page">Conseil municipal</a>
+      <a href="lexique.html">Lexique</a>
+      <a href="sources.html">Sources et limites</a>
+      <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+              title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu">
+  <div id="chargement" class="avis">Chargement des données…</div>
+
+  <h2 class="page">Le conseil municipal</h2>
+  <p class="chapeau">
+    Le conseil compte 22 membres&nbsp;: un maire élu au suffrage universel et 21 conseillères et
+    conseillers, un par district électoral. <strong>Cliquez sur votre district</strong> pour aller
+    directement à la fiche de la personne qui vous représente.
+  </p>
+
+  <div class="barre-outils">
+    <label class="case">Colorier par&nbsp;
+      <select id="mode-couleur">
+        <option value="arrondissement">arrondissement</option>
+        <option value="parti">parti</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="zone-carte" id="carte"></div>
+  <div class="legende" id="legende"></div>
+  <p class="compte" style="margin-top:12px">
+    Contours&nbsp;: jeu de données ouvert de la Ville de Québec (CC-BY&nbsp;4.0), simplifiés et dessinés
+    en SVG — aucune requête vers un service de cartographie externe.
+    <strong>Ce que la carte ne dit pas&nbsp;:</strong> les décisions de la Ville ne sont pas géolocalisées,
+    donc impossible de dire «&nbsp;voici ce qui s'est décidé dans votre district&nbsp;». Le rattachement
+    offert sur chaque fiche est celui de l'<em>arrondissement</em>, qui lui existe dans les données.
+  </p>
+
+  <h2 class="page" style="margin-top:34px">Les membres du conseil municipal</h2>
+  <p class="compte" id="compte-elus"></p>
+  <div id="liste-elus"></div>
+
+  <h2 class="page" style="margin-top:40px">Le conseil d'agglomération</h2>
+  <p class="chapeau">
+    C'est une <strong>instance distincte</strong> du conseil municipal, et elle décide des services
+    partagés de l'agglomération. Y siègent une délégation de la Ville de Québec et les
+    <strong>villes reconstituées</strong> — L'Ancienne-Lorette et Saint-Augustin-de-Desmaures.
+    Ces élus votent donc sur des dossiers qui touchent Québec, sans représenter de district de
+    Québec et sans siéger au conseil municipal.
+  </p>
+  <p class="chapeau" style="margin-bottom:14px">
+    La Ville ne publie pas de page «&nbsp;membres&nbsp;» pour ce conseil. Cette liste est reconstituée à
+    partir des listes de présences des procès-verbaux, qui donnent pour chacun sa fonction, sa ville
+    et la personne qu'il remplace le cas échéant.
+  </p>
+  <p class="compte" id="compte-agglo"></p>
+  <div id="liste-agglo"></div>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Québec, aucun caractère officiel.
+    En cas d'écart, la page officielle fait foi. <a href="sources.html">Sources et limites</a>.</p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+</body>
+</html>

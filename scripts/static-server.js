@@ -17,6 +17,12 @@ const MIME = {
 // local les pages de section donne un 404 alors que la prod fonctionne.
 async function lire(path) {
   const p = join(ROOT, decodeURIComponent(path));
+  // Un chemin qui finit par « / » désigne un dossier : Vercel y sert index.html.
+  // Sans ce cas, /villedequebec/ donnait un 404 en local alors que la prod aurait
+  // fonctionné — le pire des écarts, celui qu'on ne découvre qu'après le déploiement.
+  if (path.endsWith('/')) {
+    return { data: await readFile(join(p, 'index.html')), ext: '.html' };
+  }
   try {
     return { data: await readFile(p), ext: extname(p) };
   } catch {
