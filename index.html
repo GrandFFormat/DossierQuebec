@@ -324,6 +324,9 @@
   }
   .bill-share-btn:hover{background:var(--yellow);}
   .bill-share-btn.ic{padding:6px 10px; min-width:34px;}
+  /* Lien copié : le bouton se remplit un instant. min-width déjà fixé plus
+     haut, donc le passage de ⧉ à ✓ ne décale rien autour. */
+  .bill-share-btn.copie, .ch-share button.copie{background:var(--ink); color:var(--yellow);}
   .vp-note{font-size:10.5px; color:var(--slate); background:var(--paper-2); border-radius:20px; padding:4px 9px; font-family:'Archivo Narrow',sans-serif;}
 
   /* ---------- BILLS ---------- */
@@ -7888,15 +7891,20 @@ function billCard(b, ctx){
       <button class="follow-btn ${isFlagged?'on':''}" id="${flagBtnId}"${title?` title="${title}"`:''} onclick="event.stopPropagation(); ${onclick}">${label}</button>
     </div>`;
   }
-  // Partage du projet — bouton natif (menu du téléphone) si le navigateur le
-  // supporte, sinon repli 𝕏 / Facebook / copier. Le lien pointe vers
-  // /projets-de-loi?pl=NUM qui ouvre directement CE projet (voir openBillFromQuery).
-  const canNativeShare = (typeof navigator !== 'undefined' && !!navigator.share);
-  const shareCtrls = canNativeShare
-    ? `<button class="bill-share-btn" onclick="event.stopPropagation(); shareBill(${b.id}, 'native', event)">${isEn ? '↗ Share' : '↗ Partager'}</button>`
-    : `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'x', event)" aria-label="Partager sur X">𝕏</button>`
-      + `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'fb', event)" aria-label="Partager sur Facebook">FB</button>`
-      + `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'copy', event)" aria-label="Copier le lien">⧉</button>`;
+  // Partage du projet : toujours les trois mêmes boutons, 𝕏 / Facebook / copier.
+  // Le lien pointe vers /projets-de-loi?pl=NUM, qui ouvre directement CE projet
+  // (voir openBillFromQuery).
+  //
+  // ⚠️ Ne PAS réintroduire navigator.share ici. On avait un bouton « ↗ Partager »
+  // unique quand le navigateur supporte le partage natif — mais Chrome et Brave
+  // le supportent AUSSI sur Windows, où il ouvre la fenêtre de partage du
+  // système : un gros panneau modal pour copier un lien. Sur téléphone c'est
+  // naturel, sur ordinateur c'est disproportionné, et on ne peut pas distinguer
+  // les deux de façon fiable. Trois boutons visibles font le travail partout.
+  const shareCtrls =
+      `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'x', event)" aria-label="${isEn ? 'Share on X' : 'Partager sur X'}">𝕏</button>`
+    + `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'fb', event)" aria-label="${isEn ? 'Share on Facebook' : 'Partager sur Facebook'}">FB</button>`
+    + `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'copy', event)" aria-label="${isEn ? 'Copy link' : 'Copier le lien'}">⧉</button>`;
   const shareRow = `<div class="bill-share-row">
       <span class="bill-share-label">${isEn ? 'Share:' : 'Partager :'}</span>
       ${shareCtrls}
@@ -8178,16 +8186,41 @@ function shareChallenge(billId, count, platform, evt){
   } else if(platform === 'fb'){
     window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank', 'noopener,width=600,height=520');
   } else { // copier
-    const full = text + ' ' + url;
-    (navigator.clipboard ? navigator.clipboard.writeText(full) : Promise.reject())
-      .then(() => alert(isEn ? 'Copied — paste it anywhere!' : 'Copié — collez-le où vous voulez !'))
-      .catch(() => prompt(isEn ? 'Copy this:' : 'Copiez ceci :', full));
+    copierLien(text + ' ' + url, evt, isEn);
   }
 }
 
+// Copie dans le presse-papiers, avec accusé de réception SUR le bouton cliqué :
+// son libellé devient ✓ pendant une seconde et demie.
+//
+// ⚠️ Ne pas revenir à une alert(). C'était le comportement d'origine : une
+// fenêtre modale à fermer pour apprendre qu'un lien avait été copié — plus
+// d'effort que l'action elle-même, et deux clics pour un.
+function copierLien(texte, evt, isEn){
+  // Capté MAINTENANT : evt.currentTarget devient null dès la fin de la
+  // distribution de l'événement, donc inutilisable depuis un .then().
+  const bouton = evt && evt.target && evt.target.closest ? evt.target.closest('button') : null;
+  const confirmer = () => {
+    if(!bouton || bouton.dataset.repos) return;
+    bouton.dataset.repos = bouton.textContent;
+    bouton.textContent = '✓';
+    bouton.classList.add('copie');
+    setTimeout(() => {
+      bouton.textContent = bouton.dataset.repos;
+      delete bouton.dataset.repos;
+      bouton.classList.remove('copie');
+    }, 1500);
+  };
+  (navigator.clipboard ? navigator.clipboard.writeText(texte) : Promise.reject())
+    .then(confirmer)
+    // Repli seulement en cas d'échec réel (presse-papiers refusé) : là une
+    // fenêtre se justifie, c'est le seul moyen de laisser copier à la main.
+    .catch(() => prompt(isEn ? 'Copy this:' : 'Copiez ceci :', texte));
+}
+
 // Partage d'un projet de loi (onglet Projets). Message neutre + lien profond
-// /projets-de-loi?pl=NUM qui ouvre directement le projet à l'arrivée. « native »
-// utilise le menu de partage du système (mobile) ; sinon 𝕏 / Facebook / copier.
+// /projets-de-loi?pl=NUM qui ouvre directement le projet à l'arrivée.
+// Trois destinations : 𝕏, Facebook, copier.
 function shareBill(billId, platform, evt){
   if(evt) evt.stopPropagation();
   const isEn = currentLang === 'en';
@@ -8198,19 +8231,12 @@ function shareBill(billId, platform, evt){
   const text = isEn
     ? `Bill no. ${b.num} — ${title}. Plain-language summary on DossierQuébec:`
     : `Projet de loi n° ${b.num} — ${title}. Résumé en clair sur DossierQuébec :`;
-  if(platform === 'native' && navigator.share){
-    navigator.share({ title: 'DossierQuébec', text, url }).catch(() => {});
-    return;
-  }
   if(platform === 'x'){
     window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank', 'noopener,width=600,height=520');
   } else if(platform === 'fb'){
     window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank', 'noopener,width=600,height=520');
-  } else { // copier (et repli si le partage natif échoue)
-    const full = text + ' ' + url;
-    (navigator.clipboard ? navigator.clipboard.writeText(full) : Promise.reject())
-      .then(() => alert(isEn ? 'Copied — paste it anywhere!' : 'Copié — collez-le où vous voulez !'))
-      .catch(() => prompt(isEn ? 'Copy this:' : 'Copiez ceci :', full));
+  } else { // copier
+    copierLien(text + ' ' + url, evt, isEn);
   }
 }
 
