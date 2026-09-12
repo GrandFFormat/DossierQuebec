@@ -872,17 +872,6 @@
   }
   .footer-gh{color:var(--paper); font-weight:700;}
   .footer-gh:hover{color:var(--yellow);}
-
-  /* Lien RSS à côté du titre « Quoi de neuf » : petite pastille, aligné à
-     droite de l'en-tête de section, même famille que les compteurs. */
-  .section-head .rss-link{
-    align-self:flex-start; flex:none; margin-left:auto;
-    font-family:'Archivo Narrow',sans-serif; font-size:12px; font-weight:700;
-    text-transform:uppercase; letter-spacing:0.05em; text-decoration:none;
-    border:2px solid var(--ink); color:var(--ink); background:var(--card);
-    padding:5px 10px;
-  }
-  .section-head .rss-link:hover{background:var(--yellow); color:var(--sur-clair);}
   .footer-etmoi{color:var(--yellow);}
   .app{padding-bottom:0;}
   .dq-remonter{border:3px solid var(--ink); box-shadow:var(--shadow-sm); background:var(--yellow); color:var(--sur-clair);}
@@ -1918,10 +1907,10 @@ function goToFederal(evt){
     <div class="band band-white bleed" id="band-actu">
     <div class="actu-grid">
     <div>
-    <!-- Le flux RSS reprend exactement ces événements. Le lien est posé ICI,
-         à côté de ce qu'il alimente, parce que la balise <link rel=alternate>
-         de l'en-tête est invisible : seul un lecteur RSS la voit. -->
-    <div class="section-head" id="sec-quoideneuf"><div><h2 data-i18n="h.quoideneuf">Quoi de neuf</h2><div class="sub" data-i18n="h.quoideneuf.sub">Dernières activités réelles à l'Assemblée nationale</div></div><a class="rss-link" href="/feed.xml" title="Flux RSS — suivez ces événements dans votre lecteur" data-i18n="rss.link">⦿ RSS</a></div>
+    <!-- Le flux RSS (feed.xml) reprend exactement ces événements. Son lien
+         visible vit dans le pied de page ; la balise <link rel=alternate> de
+         l'en-tête sert aux lecteurs RSS. -->
+    <div class="section-head" id="sec-quoideneuf"><div><h2 data-i18n="h.quoideneuf">Quoi de neuf</h2><div class="sub" data-i18n="h.quoideneuf.sub">Dernières activités réelles à l'Assemblée nationale</div></div></div>
 
     <div id="body-quoideneuf">
     <div id="newsList"></div>
@@ -2854,7 +2843,6 @@ const translations = {
     'h.petitionsrecent':"Petitions open right now",
     'apercu.petitions.sub':"Click the \u201cPetitions\u201d tab for the full list",
     'quicknav.label':"Jump to:",
-    'rss.link':"⦿ RSS",
     'footer.rss':"RSS feed",
     'quicknav.mission':"Our mission",
     'quicknav.composition':"Composition",
