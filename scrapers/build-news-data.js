@@ -17,7 +17,10 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
 const HTML_PATH = 'index.html';
-const FEED_PATH = 'feed.xml';                 // flux RSS, mêmes événements
+// Le XML vit sous api/ et NON à la racine : Vercel sert le système de fichiers
+// avant les réécritures, donc un /feed.xml statique court-circuiterait la
+// fonction api/feed.js qui compte les lectures. api/ n'est pas servi tel quel.
+const FEED_PATH = 'api/feed-data.xml';
 const SITE = 'https://dossierquebec.ca';
 const START_MARKER = '/* NEWS_DATA_START';
 const END_MARKER = '/* NEWS_DATA_END */';
