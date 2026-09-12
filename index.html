@@ -77,18 +77,124 @@
     --card:#FFFFFF;
     --line:#131313;
     --slate:#555550;
+    --line-soft:#E5E2DA;   /* filets discrets */
+    /* Texte posé sur une surface qui reste CLAIRE dans les deux thèmes (le jaune
+       d'accent ne bascule pas). Ne jamais remplacer par --ink : en sombre, --ink
+       s'éclaircit et le texte deviendrait illisible sur le jaune. */
+    --sur-clair:#131313;
+    /* Son pendant : texte posé sur une surface qui reste SOMBRE dans les deux
+       thèmes (blocs bleus, pastilles noires). Ne jamais remplacer par --card. */
+    --sur-fonce:#FFFFFF;   /* filets discrets : separateurs, bordures internes */
     --gold:#0E4FC1; /* accent bleu Québec (variable au nom historique « gold ») */
     --gold-soft:#D6E4FF;
+    /* Le bleu sert à deux choses : la couleur du TEXTE des liens, et le fond des
+       BLOCS pleins. En thème sombre ces deux usages divergent — le texte doit
+       s'éclaircir pour rester lisible sur fond foncé, le bloc doit rester
+       profond pour garder son texte blanc. D'où deux jetons. */
+    --gold-bg:#0E4FC1;
+    /* Même raisonnement pour le noir : là où il sert de SURFACE sous du texte
+       jaune (pastilles actives, onglet courant), il doit rester sombre dans les
+       deux thèmes — sinon le jaune se retrouve sur du clair. */
+    --ink-bg:#131313;
     --yellow:#FFD24D;
     --green:#1E6A3C;
     --green-soft:#BFE8CD;
     --red:#C22B1D;
     --red-soft:#F6C9C2;
     --radius:0;
+    --h-ctrl:36px;   /* hauteur commune des contrôles de l'en-tête */
     --shadow:6px 6px 0 #131313;
     --shadow-lg:8px 8px 0 #131313;
     --shadow-sm:4px 4px 0 #131313;
+    color-scheme:light;
   }
+
+  /* ---------- THÈME SOMBRE ----------
+     Posé par un attribut data-theme sur <html>, jamais par prefers-color-scheme :
+     tant qu'on teste, le visiteur ordinaire ne doit voir aucun changement.
+
+     Deux partis pris qui méritent d'être écrits, parce qu'ils ne vont pas de soi
+     dans une refonte brutaliste :
+
+     1. LES OMBRES RESTENT NOIRES. Le réflexe est de les inverser en clair, mais
+        une ombre claire sur fond sombre n'est plus une ombre : c'est une lueur.
+        On garde donc la règle physique — l'ombre est plus foncée que la surface
+        sur laquelle elle tombe — dans les deux thèmes. C'est pour ça que --paper
+        est un gris chaud et non du noir : il faut de la place SOUS lui.
+
+     2. LES BORDURES S'INVERSENT, elles. Le trait franc est la signature du style ;
+        en sombre il devient clair, sinon les cartes n'ont plus de contour.
+
+     Le jaune ne bouge pas : c'est la couleur d'accent identitaire du site. Le
+     bleu, le vert et le rouge sont éclaircis, sinon ils passent sous le seuil de
+     lisibilité sur fond foncé. */
+  html[data-theme="dark"]{
+    --ink:#F3F1EA;
+    --ink-2:#F3F1EA;
+    --paper:#1A1815;
+    --paper-2:#221F1A;
+    --card:#272420;
+    --line:#F3F1EA;
+    --line-soft:#3D3931;
+    --slate:#A9A498;
+    --gold:#7BA9FF;
+    --gold-bg:#0E4FC1;   /* identique au clair : un bloc bleu saturé se tient très bien sur fond sombre, et l'éclaircir faisait passer son texte sous le seuil de lisibilité */
+    --ink-bg:#0E0D0B;
+    --gold-soft:#1C2C4C;
+    --yellow:#FFD24D;
+    --green:#5FCB8A;
+    --green-soft:#153A22;
+    --red:#FF8172;
+    --red-soft:#411D18;
+    --shadow:6px 6px 0 #000000;
+    --shadow-lg:8px 8px 0 #000000;
+    --shadow-sm:4px 4px 0 #000000;
+    color-scheme:dark;
+  }
+
+  /* La bande jaune reste jaune dans les deux thèmes. Plutôt que de corriger
+     chaque descendant un par un, on y REDÉFINIT les jetons : tout ce qu'elle
+     contient hérite alors des valeurs du mode clair, ce qui est la vérité de
+     cette surface. Un futur élément ajouté dedans sera correct sans rien faire.
+
+     ⚠️ Rétablir la palette COMPLÈTE, pas quelques jetons : une redéfinition
+     partielle laisse passer les autres. Premier essai, j'avais oublié --gold —
+     le bleu éclairci du thème sombre se retrouvait sur les cartes blanches de la
+     bande, illisible. */
+  html[data-theme="dark"] .band-yellow{
+    color:var(--sur-clair);
+    --ink:#131313; --ink-2:#131313; --line:#131313; --line-soft:#E5E2DA;
+    --slate:#555550; --card:#FFFFFF; --paper:#F2F0EA; --paper-2:#FDFCF9;
+    --gold:#0E4FC1; --gold-soft:#D6E4FF;
+    --green:#1E6A3C; --green-soft:#BFE8CD; --red:#C22B1D; --red-soft:#F6C9C2;
+  }
+  /* Le symétrique : la bande bleue reste un bloc SOMBRE dans les deux thèmes,
+     donc tout ce qu'elle contient garde une encre claire. */
+  html[data-theme="dark"] .band-blue{
+    color:var(--sur-fonce);
+    --ink:#FFFFFF; --ink-2:#FFFFFF; --card:#FFFFFF; --line:#FFFFFF;
+    --slate:#C6D6F7; --gold:#A9C6FF;
+  }
+  /* Petites surfaces jaunes ponctuelles (survols, cellule loupe) : elles ne
+     déclarent pas de couleur de texte, elles l'héritent — donc on la force. */
+  html[data-theme="dark"] .bill-share-btn:hover,
+  html[data-theme="dark"] .ch-share button:hover,
+  html[data-theme="dark"] .font-size-ctrl button:hover,
+  html[data-theme="dark"] .lang-toggle:hover,
+  html[data-theme="dark"] .sort-toggle:hover,
+  html[data-theme="dark"] .filter-hamburger:hover,
+  html[data-theme="dark"] .qf-btn:hover:not(.active),
+  html[data-theme="dark"] nav.tabs button:hover:not(.active),
+  html[data-theme="dark"] .brutal-search .bs-icon{ color:var(--sur-clair); }
+  html[data-theme="dark"] ::selection{ background:var(--yellow); color:var(--sur-clair); }
+  /* Pastilles « adopté » : leur texte est un vert foncé figé, illisible une fois
+     le fond passé au vert foncé. On prend le vert clair du thème. */
+  html[data-theme="dark"] .status-sanctionne,
+  html[data-theme="dark"] .result-badge.adopte,
+  html[data-theme="dark"] .lex-badge.cat-votes,
+  html[data-theme="dark"] .roadmap-status.now{ color:var(--green); }
+  /* Survol du bouton principal : fond bleu nuit figé, donc texte clair figé. */
+  html[data-theme="dark"] .hero-cta:hover{ color:#F3F1EA; }
   ::selection{background:var(--yellow);}
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -300,7 +406,7 @@
     display:flex;align-items:center;justify-content:center;
     flex:none; text-decoration:none; transition:background 0.15s;
   }
-  .m-card .avatar:hover, .depute-card .avatar:hover{background:var(--gold); color:#fff;}
+  .m-card .avatar:hover, .depute-card .avatar:hover{background:var(--gold-bg); color:var(--sur-fonce);}
   .m-card .avatar svg, .depute-card .avatar svg{width:18px; height:18px;}
   .m-card h3{font-size:15px; font-family:'Archivo',sans-serif; font-weight:600; margin:10px 0 2px;}
   .m-card .role{font-size:12.5px; color:var(--slate); line-height:1.4; min-height:34px;}
@@ -318,7 +424,7 @@
   .bill-share-row{display:flex; align-items:center; justify-content:flex-end; gap:8px; flex-wrap:wrap; margin-top:10px;}
   .bill-share-label{font-family:'Archivo Narrow',sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--slate);}
   .bill-share-btn{
-    border:2px solid var(--ink); background:#fff; color:var(--ink);
+    border:2px solid var(--ink); background:var(--card); color:var(--ink);
     font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:12px;
     text-transform:uppercase; letter-spacing:0.03em; padding:6px 12px; cursor:pointer;
   }
@@ -326,7 +432,7 @@
   .bill-share-btn.ic{padding:6px 10px; min-width:34px;}
   /* Lien copié : le bouton se remplit un instant. min-width déjà fixé plus
      haut, donc le passage de ⧉ à ✓ ne décale rien autour. */
-  .bill-share-btn.copie, .ch-share button.copie{background:var(--ink); color:var(--yellow);}
+  .bill-share-btn.copie, .ch-share button.copie{background:var(--ink-bg); color:var(--yellow);}
   .vp-note{font-size:10.5px; color:var(--slate); background:var(--paper-2); border-radius:20px; padding:4px 9px; font-family:'Archivo Narrow',sans-serif;}
 
   /* ---------- BILLS ---------- */
@@ -368,7 +474,7 @@
 
   .stepper{display:flex; gap:4px; margin-top:14px;}
   .stepper .step{flex:1; height:6px; background:var(--line); border-radius:2px; position:relative;}
-  .stepper .step.done{background:var(--gold);}
+  .stepper .step.done{background:var(--gold-bg);}
   .stepper .step.current{background:var(--ink);}
   .stepper-labels{display:flex; gap:4px; margin-top:6px;}
   .stepper-labels span{flex:1; font-size:9.5px; color:var(--slate); text-align:center; line-height:1.2;}
@@ -391,7 +497,7 @@
   .tally-row .tally-label{flex:none;}
   .tally-breakdown{display:flex; flex-wrap:wrap; gap:2px 10px; color:var(--slate);}
   .tally-plus{
-    font-family:'Archivo Narrow',sans-serif; font-size:11px; font-weight:600; color:#fff;
+    font-family:'Archivo Narrow',sans-serif; font-size:11px; font-weight:600; color:var(--card);
     background:var(--ink); border:none; border-radius:50%; width:18px; height:18px;
     display:inline-flex; align-items:center; justify-content:center; cursor:pointer; flex:none;
   }
@@ -440,7 +546,7 @@
     padding:8px 12px; border-radius:20px; cursor:pointer; border:1.5px solid transparent;
     background:var(--card); user-select:none;
   }
-  .party-chip.active{color:#fff !important;}
+  .party-chip.active{color:var(--card) !important;}
 
   .status-filters, .step-filters{display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-top:10px;}
   .step-filters{margin-top:6px;}
@@ -450,8 +556,8 @@
     border:1.5px solid var(--line); background:var(--card); color:var(--slate);
   }
   .step-chip{font-size:10.5px; padding:5px 10px; text-transform:none; font-weight:500;}
-  .status-chip.active{background:var(--ink); border-color:var(--ink); color:#fff;}
-  .step-chip.active{background:var(--ink); border-color:var(--ink); color:#fff;}
+  .status-chip.active{background:var(--ink); border-color:var(--ink); color:var(--card);}
+  .step-chip.active{background:var(--ink); border-color:var(--ink); color:var(--card);}
   .filter-hamburger{display:none;}
   .sort-toggle{
     font-family:'Archivo Narrow',sans-serif; font-size:11px; font-weight:600;
@@ -511,7 +617,7 @@
   .petition-meta{display:flex; gap:18px; flex-wrap:wrap; font-size:12px; color:var(--slate); margin-bottom:12px;}
   .petition-meta b{color:var(--ink); font-family:'Archivo Narrow',sans-serif;}
   .petition-progress{height:8px; background:var(--paper-2); border-radius:4px; overflow:hidden; margin-bottom:8px;}
-  .petition-progress .fill{height:100%; background:var(--gold);}
+  .petition-progress .fill{height:100%; background:var(--gold-bg);}
   .petition-count{font-family:'Archivo Narrow',sans-serif; font-size:12.5px; color:var(--gold); font-weight:600;}
 
   .role-group-title:first-child{margin-top:0;}
@@ -535,10 +641,10 @@
   }
   .account-box .account-btn{
     font-family:'Archivo',sans-serif; font-weight:600; font-size:12.5px;
-    background:var(--ink); color:#fff; border:none; cursor:pointer;
+    background:var(--ink); color:var(--card); border:none; cursor:pointer;
     padding:9px 16px; border-radius:var(--radius); flex:none;
   }
-  .account-box .account-btn:hover{background:var(--gold);}
+  .account-box .account-btn:hover{background:var(--gold-bg);}
   .account-box .account-btn:disabled{background:var(--slate); cursor:default; opacity:0.7;}
   .account-box .account-note{font-size:12px; color:var(--slate); margin-top:8px;}
   .account-box .account-email{font-weight:600; color:var(--ink);}
@@ -570,7 +676,7 @@
   .roadmap-status.later{color:var(--slate);}
   .roadmap-body h4{font-family:'Archivo',sans-serif; font-size:14.5px; font-weight:600; margin:0 0 4px; display:flex; align-items:center; gap:8px;}
   .roadmap-plus{
-    font-family:'Archivo Narrow',sans-serif; font-size:11px; font-weight:600; color:#fff;
+    font-family:'Archivo Narrow',sans-serif; font-size:11px; font-weight:600; color:var(--card);
     background:var(--ink); border:none; border-radius:50%; width:18px; height:18px;
     display:inline-flex; align-items:center; justify-content:center; cursor:pointer; flex:none;
   }
@@ -607,14 +713,14 @@
   .dq-remonter{
     position:fixed; right:24px; bottom:24px; z-index:50;
     width:46px; height:46px; border-radius:50%; border:none;
-    background:var(--ink); color:#fff; cursor:pointer;
+    background:var(--ink); color:var(--card); cursor:pointer;
     display:flex; align-items:center; justify-content:center;
     box-shadow:0 4px 14px rgba(0,0,0,0.25);
     opacity:0; visibility:hidden; transform:translateY(8px);
     transition:opacity 0.25s ease, transform 0.25s ease, visibility 0.25s, background 0.2s ease;
   }
   .dq-remonter.visible{opacity:1; visibility:visible; transform:translateY(0);}
-  .dq-remonter:hover{background:var(--gold);}
+  .dq-remonter:hover{background:var(--gold-bg);}
   @media (max-width:640px){
     .dq-remonter{right:16px; bottom:16px; width:42px; height:42px;}
   }
@@ -622,8 +728,8 @@
 
   /* ================================================================
      REFONTE BRUTALISTE — FONDATION (Phase 1)
-     Handoff « design_handoff_dossierquebec » : crème #F2F0EA, noir
-     #131313, bleu Québec #0E4FC1, jaune #FFD24D, Archivo/Archivo
+     Handoff « design_handoff_dossierquebec » : crème var(--paper), noir
+     var(--ink), bleu Québec #0E4FC1, jaune #FFD24D, Archivo/Archivo
      Narrow, bordures épaisses, ombres dures, AUCUN coin arrondi.
      Couche d'overrides chargée après les styles historiques ; les
      phases suivantes raffinent chaque vue.
@@ -631,7 +737,7 @@
   *{border-radius:0 !important;} /* tout est carré — spec du handoff */
 
   /* ---------- TICKER ---------- */
-  .ticker{background:#131313; color:var(--paper); overflow:hidden; border-bottom:3px solid #131313;}
+  .ticker{background:var(--ink); color:var(--paper); overflow:hidden; border-bottom:3px solid var(--ink);}
   .ticker-track{display:flex; white-space:nowrap; width:max-content; animation:dqTicker 26s linear infinite;}
   .ticker:hover .ticker-track{animation-play-state:paused;}
   .ticker-text{
@@ -687,6 +793,44 @@
     text-transform:uppercase; padding:5px 12px; font-size:13px;
   }
   .lang-toggle:hover{background:var(--yellow);}
+  /* Bascule de thème. L'icône est DESSINÉE EN CSS plutôt qu'écrite en caractère :
+     un « ☾ » est un glyphe de police, donc rendu différemment d'une plateforme à
+     l'autre — et souvent en emoji coloré sur Android. Ici, une lune est un disque
+     plus un second disque couleur du fond décalé par-dessus ; un soleil est un
+     disque avec huit rayons en box-shadow. Zéro requête, zéro balise, identique
+     partout. (Même procédé que le volet municipal, pour que les deux se
+     ressemblent.)
+     Deux variables locales portent les couleurs, ce qui évite de réécrire les
+     huit rayons à chaque état. */
+  .theme-toggle{
+    position:relative; width:34px; height:32px; flex:none; cursor:pointer;
+    border:2px solid var(--ink); background:var(--paper);
+    --icone:var(--ink); --derriere:var(--paper);
+  }
+  .theme-toggle:hover{background:var(--yellow); --icone:var(--sur-clair); --derriere:var(--yellow);}
+  .theme-toggle:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+  /* Thème clair : on montre la LUNE, parce qu'elle dit où l'on va. */
+  .theme-toggle::before{
+    content:''; position:absolute; inset:0; margin:auto;
+    width:15px; height:15px; border-radius:100px; background:var(--icone);
+  }
+  .theme-toggle::after{
+    content:''; position:absolute; inset:0; margin:auto;
+    width:13px; height:13px; border-radius:100px; background:var(--derriere);
+    transform:translate(4px,-3.5px);
+  }
+  /* Thème sombre : un SOLEIL — le disque seul, avec ses rayons. */
+  html[data-theme="dark"] .theme-toggle{--icone:var(--yellow); --derriere:var(--paper);}
+  html[data-theme="dark"] .theme-toggle:hover{--icone:var(--sur-clair); --derriere:var(--yellow);}
+  html[data-theme="dark"] .theme-toggle::before{
+    width:12px; height:12px;
+    box-shadow:
+      0 -8px 0 -4.5px var(--icone), 0 8px 0 -4.5px var(--icone),
+      -8px 0 0 -4.5px var(--icone), 8px 0 0 -4.5px var(--icone),
+      5.7px -5.7px 0 -4.5px var(--icone), -5.7px 5.7px 0 -4.5px var(--icone),
+      5.7px 5.7px 0 -4.5px var(--icone), -5.7px -5.7px 0 -4.5px var(--icone);
+  }
+  html[data-theme="dark"] .theme-toggle::after{display:none;}
   .hamburger{border:2px solid var(--ink); background:var(--paper);}
 
   /* ---------- NAV : pilules carrées ---------- */
@@ -699,9 +843,9 @@
   }
   nav.tabs button .n{display:none;} /* fini la numérotation 01/02/03 */
   nav.tabs button.active{
-    color:#fff; background:#131313; border-color:#131313; border-bottom-color:#131313;
+    color:var(--card); background:var(--ink); border-color:var(--ink); border-bottom-color:var(--ink);
   }
-  nav.tabs button:hover:not(.active){background:var(--yellow); border-color:var(--ink); color:var(--ink);}
+  nav.tabs button:hover:not(.active){background:var(--yellow); border-color:var(--sur-clair); color:var(--sur-clair);}
 
   /* ---------- TITRES DE SECTION ---------- */
   .section-head h2, .view h2{
@@ -713,7 +857,7 @@
   footer{
     max-width:none; margin:40px 0 0; padding:34px 0;
     display:block; /* le flex vit dans .footer-inner */
-    background:#131313; color:#B8B4AA; border-top:none;
+    background:var(--ink); color:#B8B4AA; border-top:none;
     font-family:'Archivo Narrow',sans-serif; font-size:13px;
     text-transform:uppercase; letter-spacing:0.05em;
   }
@@ -723,12 +867,12 @@
     display:flex; justify-content:space-between; align-items:center;
     flex-wrap:wrap; gap:10px;
   }
-  .footer-gh{color:#F2F0EA; font-weight:700;}
+  .footer-gh{color:var(--paper); font-weight:700;}
   .footer-gh:hover{color:var(--yellow);}
   .footer-etmoi{color:var(--yellow);}
   .app{padding-bottom:0;}
-  .dq-remonter{border:3px solid #131313; box-shadow:var(--shadow-sm); background:var(--yellow); color:#131313;}
-  .dq-remonter:hover{background:#131313; color:var(--yellow);}
+  .dq-remonter{border:3px solid var(--ink); box-shadow:var(--shadow-sm); background:var(--yellow); color:var(--sur-clair);}
+  .dq-remonter:hover{background:var(--ink-bg); color:var(--yellow);}
 
   /* ---------- PHASE 2 : APERÇU ---------- */
   /* Bande pleine largeur qui « déborde » du conteneur .app tout en gardant le
@@ -756,19 +900,19 @@
   .hero-blue{color:var(--gold); -webkit-text-stroke:0;}
   .hero-row{display:flex; align-items:stretch; gap:16px; margin-top:40px; flex-wrap:wrap;}
   .hero-manifesto{
-    flex:1; min-width:min(300px,100%); border:3px solid var(--ink); background:#fff;
+    flex:1; min-width:min(300px,100%); border:3px solid var(--ink); background:var(--card);
     padding:20px 24px; box-shadow:var(--shadow);
   }
   .hero-manifesto p{margin:0; font-size:17px; line-height:1.45; font-weight:500;}
   .hero-cta{
     display:flex; align-items:center; justify-content:center;
-    background:var(--gold); color:#fff; border:3px solid var(--ink);
+    background:var(--gold-bg); color:var(--sur-fonce); border:3px solid var(--ink);
     padding:20px 30px; font-weight:800; font-size:17px; text-transform:uppercase;
     letter-spacing:0.02em; box-shadow:var(--shadow); cursor:pointer;
   }
-  .hero-cta:hover{background:#08307A; color:#fff;}
+  .hero-cta:hover{background:#08307A; color:var(--card);}
 
-  .stat-band{background:#fff; border-block:3px solid var(--ink); display:grid; grid-template-columns:repeat(3,1fr); padding-block:0;}
+  .stat-band{background:var(--card); border-block:3px solid var(--ink); display:grid; grid-template-columns:repeat(3,1fr); padding-block:0;}
   .stat-cell{display:flex; flex-direction:column; padding:26px 28px; border-right:3px solid var(--ink);}
   .stat-cell:last-child{border-right:none;}
   .stat-cell b{font-family:'Archivo',sans-serif; font-size:54px; font-weight:900; letter-spacing:-0.03em; line-height:1;}
@@ -782,21 +926,21 @@
   /* CTA dans une bande jaune : noir sur jaune pour ressortir. */
   .diss-cta{
     display:inline-flex; align-items:center; margin-top:8px;
-    background:#131313; color:var(--yellow); border:3px solid var(--ink);
+    background:var(--ink-bg); color:var(--yellow); border:3px solid var(--ink);
     font-family:'Archivo',sans-serif; font-weight:800; font-size:15px;
     text-transform:uppercase; letter-spacing:0.03em; padding:14px 22px;
     box-shadow:var(--shadow-sm); cursor:pointer; text-decoration:none;
   }
-  .diss-cta:hover{background:#fff; color:var(--ink);}
+  .diss-cta:hover{background:var(--card); color:var(--ink);}
 
   /* ---------- PROMESSES (promesse | action, côte à côte) ---------- */
-  .prom-card{border:3px solid var(--ink); background:#fff; box-shadow:var(--shadow); padding:20px 24px; margin-bottom:16px;}
+  .prom-card{border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow); padding:20px 24px; margin-bottom:16px;}
   .prom-top{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:12px;}
   .prom-theme{font-family:'Archivo Narrow',sans-serif; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--slate);}
   .prom-draft{
     font-family:'Archivo Narrow',sans-serif; font-size:11px; font-weight:700;
     text-transform:uppercase; letter-spacing:0.04em; border:2px solid var(--ink);
-    background:var(--yellow); color:var(--ink); padding:2px 8px;
+    background:var(--yellow); color:var(--sur-clair); padding:2px 8px;
   }
   .prom-quote{font-size:17px; font-weight:600; line-height:1.4; margin:0 0 16px;}
   .prom-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
@@ -827,25 +971,25 @@
   .prom-theme-pill:hover{filter:brightness(0.88);}
   /* Bouton de filtre sélectionné qui garde sa couleur : ombre dure + trait épais. */
   .qf-btn.qf-sel{box-shadow:var(--shadow-sm); outline:3px solid var(--ink); outline-offset:2px;}
-  .band-white{background:#fff;}
-  .band-blue{background:var(--gold); color:#fff; border-top:3px solid var(--ink);}
+  .band-white{background:var(--card);}
+  .band-blue{background:var(--gold-bg); color:var(--sur-fonce); border-top:3px solid var(--ink);}
   #band-challenged{margin-top:30px;}
   /* Cartes challengées : grille 3 colonnes compacte, fidèle à la maquette */
   .ch-more{
-    flex:none; border:3px solid var(--ink); background:#fff; color:var(--ink);
+    flex:none; border:3px solid var(--ink); background:var(--card); color:var(--ink);
     padding:10px 18px; font-weight:800; font-size:14px; text-transform:uppercase;
     letter-spacing:0.02em; box-shadow:var(--shadow-sm); cursor:pointer;
   }
-  .ch-more:hover{background:#131313; color:var(--yellow);}
+  .ch-more:hover{background:var(--ink-bg); color:var(--yellow);}
   #challengedList.ch-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;}
   .ch-card{
-    background:#fff; border:3px solid var(--ink); box-shadow:var(--shadow);
+    background:var(--card); border:3px solid var(--ink); box-shadow:var(--shadow);
     padding:22px 24px; display:flex; flex-direction:column; cursor:pointer;
   }
   .ch-top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:16px;}
   .ch-num{font-family:'Archivo',sans-serif; font-weight:900; font-size:15px; color:var(--gold);}
   .ch-badge{
-    background:#131313; color:var(--yellow);
+    background:var(--ink-bg); color:var(--yellow);
     font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700;
     padding:4px 10px; text-transform:uppercase; white-space:nowrap;
   }
@@ -856,24 +1000,24 @@
   }
   .ch-stage{
     font-family:'Archivo Narrow',sans-serif; font-size:13px; font-weight:600;
-    text-transform:uppercase; letter-spacing:0.04em; color:#555;
+    text-transform:uppercase; letter-spacing:0.04em; color:var(--slate);
     margin-top:auto; padding-top:12px; border-top:2px solid var(--ink);
   }
   .ch-demand{
-    margin-top:14px; border:3px solid var(--ink); background:var(--gold); color:#fff;
+    margin-top:14px; border:3px solid var(--ink); background:var(--gold-bg); color:var(--sur-fonce);
     font-family:'Archivo',sans-serif; font-weight:800; font-size:13px;
     text-transform:uppercase; letter-spacing:0.03em; padding:10px 14px;
     cursor:pointer; box-shadow:var(--shadow-sm);
   }
   .ch-demand:hover{background:#08307A;}
-  .ch-demand.on, .ch-demand:disabled{background:#131313; color:var(--yellow); cursor:default; box-shadow:none;}
+  .ch-demand.on, .ch-demand:disabled{background:var(--ink-bg); color:var(--yellow); cursor:default; box-shadow:none;}
   .ch-share{display:flex; align-items:center; gap:6px; margin-top:10px;}
   .ch-share span{
     font-family:'Archivo Narrow',sans-serif; font-size:11.5px; font-weight:600;
-    text-transform:uppercase; letter-spacing:0.03em; color:#555; margin-right:2px;
+    text-transform:uppercase; letter-spacing:0.03em; color:var(--slate); margin-right:2px;
   }
   .ch-share button{
-    border:2px solid var(--ink); background:#fff; color:var(--ink);
+    border:2px solid var(--ink); background:var(--card); color:var(--ink);
     font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:11.5px;
     padding:5px 9px; cursor:pointer; text-transform:uppercase;
   }
@@ -900,18 +1044,18 @@
   .mission-statement{
     font-family:'Archivo',sans-serif; font-size:clamp(22px, 2.8vw, 34px);
     line-height:1.3; font-weight:800; letter-spacing:-0.015em;
-    margin:0 0 34px; max-width:860px; text-transform:uppercase; color:#fff;
+    margin:0 0 34px; max-width:860px; text-transform:uppercase; color:var(--card);
   }
   .mission-statement .hl{
-    background:var(--yellow); color:#131313; padding:0 8px;
+    background:var(--yellow); color:var(--sur-clair); padding:0 8px;
     -webkit-box-decoration-break:clone; box-decoration-break:clone;
   }
   .band-blue .mission-box h2{
-    color:#fff; text-transform:uppercase; font-weight:800; letter-spacing:-0.015em;
+    color:var(--card); text-transform:uppercase; font-weight:800; letter-spacing:-0.015em;
     font-size:clamp(22px, 2.8vw, 34px); line-height:1.25;
   }
-  .band-blue .mission-box p{color:#fff;}
-  .band-blue .compare-col{border:3px solid #fff; background:transparent;}
+  .band-blue .mission-box p{color:var(--card);}
+  .band-blue .compare-col{border:3px solid var(--card); background:transparent;}
   .band-blue .compare-col:last-child{border-color:var(--yellow); background:rgba(255,210,77,0.08);}
   .band-blue .compare-col .tag{
     background:transparent; border:none; padding:0; color:#A9C6FF;
@@ -919,12 +1063,12 @@
     text-transform:uppercase; letter-spacing:0.08em;
   }
   .band-blue .compare-col:last-child .tag{color:var(--yellow);}
-  .band-blue .compare-col ul, .band-blue .compare-col li{color:#fff;}
-  .band-blue .snooze-pill{background:#fff; color:var(--ink); border-color:var(--ink);}
-  .band-blue .intro-compact{background:#fff; color:var(--ink);}
+  .band-blue .compare-col ul, .band-blue .compare-col li{color:var(--card);}
+  .band-blue .snooze-pill{background:var(--card); color:var(--ink); border-color:var(--ink);}
+  .band-blue .intro-compact{background:var(--card); color:var(--ink);}
 
   /* Cartes (projets, challengés, votes) : bordures épaisses + ombre dure */
-  .bill{border:3px solid var(--ink); box-shadow:var(--shadow); background:#fff;}
+  .bill{border:3px solid var(--ink); box-shadow:var(--shadow); background:var(--card);}
   .bill .num{color:var(--gold); font-weight:900; font-family:'Archivo',sans-serif;}
 
   /* Quoi de neuf : items à barre bleue */
@@ -935,7 +1079,7 @@
   }
   /* Encadré noir compact « travaux / reprise » (maquette) */
   .calendar-box{
-    border:3px solid var(--ink); background:#131313;
+    border:3px solid var(--ink); background:var(--ink);
     padding:16px 20px; margin-top:20px;
   }
   .calendar-box .status{
@@ -946,8 +1090,8 @@
 
   /* Pétitions : compteur bleu + barre bordée */
   .petition-card{border:3px solid var(--ink); background:var(--paper); box-shadow:none;}
-  .petition-progress{height:12px; border:2px solid var(--ink); background:#fff;}
-  .petition-progress .fill{background:var(--gold);}
+  .petition-progress{height:12px; border:2px solid var(--ink); background:var(--card);}
+  .petition-progress .fill{background:var(--gold-bg);}
   .petition-count{font-family:'Archivo',sans-serif; font-weight:900; font-size:20px; color:var(--gold);}
 
   @media (max-width:640px){
@@ -968,18 +1112,18 @@
 
   /* Recherche + filtres brutaux */
   .toolbar input{
-    border:3px solid var(--ink); background:#fff; box-shadow:var(--shadow);
+    border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow);
     padding:14px 16px; font-family:'Archivo',sans-serif; font-weight:500; font-size:15px;
   }
   .toolbar input:focus{outline:3px solid var(--yellow); outline-offset:0;}
   .status-chip, .step-chip{
-    border:3px solid var(--ink); background:#fff; color:var(--ink);
+    border:3px solid var(--ink); background:var(--card); color:var(--ink);
     font-family:'Archivo Narrow',sans-serif; font-weight:700; text-transform:uppercase;
     letter-spacing:0.04em; padding:8px 14px; font-size:12.5px; cursor:pointer;
   }
-  .status-chip.active, .step-chip.active{background:#131313; color:var(--yellow); border-color:#131313;}
+  .status-chip.active, .step-chip.active{background:var(--ink-bg); color:var(--yellow); border-color:var(--ink);}
   .sort-toggle, .filter-hamburger{
-    border:2px solid var(--ink); background:#fff; color:var(--ink);
+    border:2px solid var(--ink); background:var(--card); color:var(--ink);
     font-family:'Archivo Narrow',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:0.03em;
   }
   .sort-toggle:hover, .filter-hamburger:hover{background:var(--yellow);}
@@ -993,10 +1137,10 @@
   .qf-btn{
     font-family:'Archivo Narrow',sans-serif; font-size:13.5px; font-weight:700;
     text-transform:uppercase; letter-spacing:0.04em;
-    border:3px solid var(--ink); background:#fff; color:var(--ink);
+    border:3px solid var(--ink); background:var(--card); color:var(--ink);
     padding:10px 16px; cursor:pointer;
   }
-  .qf-btn.active{background:#131313; color:var(--yellow);}
+  .qf-btn.active{background:var(--ink-bg); color:var(--yellow);}
   .qf-btn:hover:not(.active){background:var(--yellow);}
   /* Compteur sur les filtres des promesses. Chiffres à chasse fixe pour que les
      boutons ne sautillent pas quand les nombres changent en filtrant. */
@@ -1005,7 +1149,7 @@
 
   /* Légende de provenance, sous la liste des promesses. */
   .prom-methode{
-    border:3px solid var(--ink); background:#fff; box-shadow:var(--shadow);
+    border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow);
     padding:22px 26px; margin-top:26px; scroll-margin-top:80px;
   }
   .prom-methode h3{
@@ -1023,7 +1167,7 @@
 
   /* Bande légende */
   .legend-strip{
-    background:#fff; border-block:3px solid var(--ink);
+    background:var(--card); border-block:3px solid var(--ink);
     padding-top:16px; padding-bottom:16px; margin:18px 0 26px;
     display:flex; align-items:center; justify-content:flex-start;
     gap:12px 18px; flex-wrap:wrap;
@@ -1047,13 +1191,13 @@
     text-transform:uppercase; letter-spacing:0.03em; border:2px solid var(--ink);
     padding:3px 9px; background:var(--paper);
   }
-  .bstep.on{background:var(--gold); color:#fff;}
-  .bstep.now{background:var(--yellow); color:var(--ink);}
-  .bstep.off{background:#fff; color:#999; border-color:#CCC;}
+  .bstep.on{background:var(--gold-bg); color:var(--sur-fonce);}
+  .bstep.now{background:var(--yellow); color:var(--sur-clair);}
+  .bstep.off{background:var(--card); color:var(--slate); border-color:var(--line-soft);}
 
   /* Tête de carte façon maquette : badge PL | titre+parrain | badges à droite */
   .bill .num{
-    display:inline-block; background:var(--gold); color:#fff;
+    display:inline-block; background:var(--gold-bg); color:var(--sur-fonce);
     border:2px solid var(--ink); padding:5px 12px; flex:none;
     font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:14px;
     letter-spacing:0.02em; white-space:nowrap;
@@ -1075,10 +1219,10 @@
   .bill h3{font-weight:800; font-size:17.5px; letter-spacing:-0.01em; line-height:1.25;}
   .bill .meta{
     font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:600;
-    color:#666; text-transform:uppercase; letter-spacing:0.04em; margin-top:4px;
+    color:var(--slate); text-transform:uppercase; letter-spacing:0.04em; margin-top:4px;
   }
   .hot-badge{
-    background:#131313; color:var(--yellow);
+    background:var(--ink-bg); color:var(--yellow);
     font-family:'Archivo Narrow',sans-serif; font-size:12px; font-weight:700;
     padding:5px 11px; text-transform:uppercase; letter-spacing:0.04em; white-space:nowrap;
   }
@@ -1088,7 +1232,7 @@
     font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700;
     text-transform:uppercase; letter-spacing:0.06em; color:var(--gold); margin-bottom:12px;
   }
-  .open-label.side{color:#666; margin-bottom:0;}
+  .open-label.side{color:var(--slate); margin-bottom:0;}
   .bill-open-side{display:flex; flex-direction:column; gap:10px;}
   .last-event-box{
     border:2px solid var(--ink); background:var(--paper);
@@ -1102,26 +1246,26 @@
   .status-pill{border:2px solid var(--ink); font-weight:700; font-size:11.5px;}
   .status-sanctionne{background:var(--green-soft); color:#14532D;}
   .status-encours{background:var(--gold-soft); color:var(--gold);}
-  .status-glace{background:#E5E2DA; color:var(--ink);}
-  .status-mort{background:#131313; color:#fff; border:2px solid var(--ink);}
+  .status-glace{background:var(--line-soft); color:var(--ink);}
+  .status-mort{background:var(--ink); color:var(--card); border:2px solid var(--ink);}
 
   /* Boutons Demander une explication / Suivre / partage */
   .follow-btn{
-    border:3px solid var(--ink); background:#fff; color:var(--ink);
+    border:3px solid var(--ink); background:var(--card); color:var(--ink);
     font-family:'Archivo',sans-serif; font-weight:800; text-transform:uppercase;
     letter-spacing:0.03em; cursor:pointer;
   }
-  .follow-btn:hover{background:var(--yellow); color:var(--ink);}
-  .follow-btn.on{background:#131313; color:var(--yellow);}
-  .follow-btn:disabled{background:#131313; color:var(--yellow); opacity:1;}
+  .follow-btn:hover{background:var(--yellow); color:var(--sur-clair);}
+  .follow-btn.on{background:var(--ink-bg); color:var(--yellow);}
+  .follow-btn:disabled{background:var(--ink-bg); color:var(--yellow); opacity:1;}
 
   /* CTA texte intégral (jaune, ombre dure) */
   .bill-more{
-    border:3px solid var(--ink); background:var(--yellow); color:var(--ink);
+    border:3px solid var(--ink); background:var(--yellow); color:var(--sur-clair);
     font-weight:800; text-transform:uppercase; letter-spacing:0.03em;
     box-shadow:var(--shadow-sm); padding:12px 18px;
   }
-  .bill-more:hover{background:#131313; color:var(--yellow);}
+  .bill-more:hover{background:var(--ink-bg); color:var(--yellow);}
 
   /* Explainer jaune */
   #band-challenge-explainer{margin-top:34px;}
@@ -1132,13 +1276,13 @@
   #band-challenge-explainer p{font-size:16.5px; font-weight:500; line-height:1.5; max-width:760px; margin:0 0 12px;}
 
   /* ---------- PHASE 4 : VOTES (carte détaillée, maquette) ---------- */
-  .vote-card{border:3px solid var(--ink); box-shadow:var(--shadow); background:#fff; margin-bottom:16px;}
+  .vote-card{border:3px solid var(--ink); box-shadow:var(--shadow); background:var(--card); margin-bottom:16px;}
   .vc-head{display:flex; align-items:flex-start; gap:16px; padding:20px 24px; cursor:pointer;}
   .vc-head-main{flex:1; min-width:0;}
   .vc-head-main h3{margin:0; font-size:17px; font-weight:800; line-height:1.3; letter-spacing:-0.01em;}
-  .vc-meta{font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:600; color:#666; text-transform:uppercase; letter-spacing:0.04em; margin-top:4px;}
+  .vc-meta{font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:600; color:var(--slate); text-transform:uppercase; letter-spacing:0.04em; margin-top:4px;}
   .vc-counts{display:flex; gap:16px; align-items:baseline; flex:none;}
-  .vcc{font-family:'Archivo Narrow',sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; color:#666; white-space:nowrap;}
+  .vcc{font-family:'Archivo Narrow',sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; color:var(--slate); white-space:nowrap;}
   .vcc b{font-family:'Archivo',sans-serif; font-size:22px; font-weight:900; letter-spacing:-0.02em;}
   .vcc.pour b{color:#1E9E5A;} .vcc.contre b{color:#D64545;} .vcc.abst b{color:#8B8578;}
   .vc-toggle{flex:none; font-weight:900; font-size:22px; line-height:1; min-width:20px; text-align:center;}
@@ -1146,33 +1290,33 @@
   .vc-detail{display:none; border-top:3px solid var(--ink); padding:20px 24px;}
   .vc-detail.open{display:block;}
   .vc-pgrid{display:grid; grid-template-columns:repeat(auto-fit, minmax(175px, 1fr)); gap:14px; margin-bottom:16px;}
-  .vc-pbox{border:2px solid var(--ink); background:#fff;}
+  .vc-pbox{border:2px solid var(--ink); background:var(--card);}
   .vc-phead{padding:8px 14px; font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:0.04em; border-bottom:2px solid var(--ink);}
   .vc-pbody{padding:12px 14px; display:flex; flex-direction:column; gap:6px;}
   .vc-prow{display:flex; justify-content:space-between; gap:10px; font-size:13.5px;}
   .vc-prow span{font-family:'Archivo Narrow',sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:0.03em;}
   .vc-prow b{font-weight:800;}
   .vc-ncols{display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; margin-bottom:16px;}
-  .vc-ncol{border:2px solid var(--ink); background:#fff; display:flex; flex-direction:column;}
-  .vc-nhead{padding:8px 14px; font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:#fff; border-bottom:2px solid var(--ink);}
+  .vc-ncol{border:2px solid var(--ink); background:var(--card); display:flex; flex-direction:column;}
+  .vc-nhead{padding:8px 14px; font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--card); border-bottom:2px solid var(--ink);}
   .vc-nhead.pour{background:#2E9958;} .vc-nhead.contre{background:#D9442F;} .vc-nhead.abst{background:#8B8578;}
   .vc-nbody{padding:10px 14px; max-height:260px; overflow-y:auto; display:flex; flex-direction:column; gap:5px;}
   .vc-nrow{display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600;}
   .vc-chip{width:12px; height:12px; border:1px solid var(--ink); flex:none;}
   .vc-empty{font-size:12px; color:var(--slate);}
   .vc-foot{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;}
-  .vc-foot-note{font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; color:#666;}
+  .vc-foot-note{font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; color:var(--slate);}
   @media (max-width:820px){ .vc-ncols{grid-template-columns:1fr;} }
   @media (max-width:640px){ .vc-head{flex-wrap:wrap;} .vc-counts{width:100%;} }
   /* Barre jaune « Voir 6 de plus » (maquette) */
   .votes-more{
     display:block; width:100%; margin-top:10px;
-    border:3px solid var(--ink); background:var(--yellow); color:var(--ink);
+    border:3px solid var(--ink); background:var(--yellow); color:var(--sur-clair);
     box-shadow:var(--shadow); cursor:pointer;
     font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:14px;
     text-transform:uppercase; letter-spacing:0.05em; padding:14px 20px; text-align:center;
   }
-  .votes-more:hover{background:#131313; color:var(--yellow);}
+  .votes-more:hover{background:var(--ink-bg); color:var(--yellow);}
   .votes-more-note{
     margin-top:10px; text-align:center; font-family:'Archivo Narrow',sans-serif;
     font-size:12.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:var(--slate);
@@ -1187,44 +1331,44 @@
   .result-badge.rejete{background:var(--red-soft); color:var(--red);}
 
   /* Barre de résultat segmentée, bordée (maquette) */
-  .bar{height:16px; border:2px solid var(--ink); background:#D8D4C8;}
+  .bar{height:16px; border:2px solid var(--ink); background:var(--line-soft);}
   .bar .seg.pour{background:#2E9958;}
   .bar .seg.contre{background:#D9442F; border-left:2px solid var(--ink);}
-  .bar .seg.abst{background:#D8D4C8; opacity:1; border-left:2px solid var(--ink);}
+  .bar .seg.abst{background:var(--line-soft); opacity:1; border-left:2px solid var(--ink);}
 
   /* Décompte compact en gros chiffres */
   .vote-compact-row{font-family:'Archivo',sans-serif; font-size:13px;}
   .vote-compact-row b{font-size:21px; font-weight:900; letter-spacing:-0.02em;}
 
-  .info-box{border:2px solid var(--ink); background:#fff;}
+  .info-box{border:2px solid var(--ink); background:var(--card);}
 
   /* Bande bleue « Comment lire un vote » */
   #band-lire-vote{margin-top:34px;}
   #band-lire-vote h2{
     font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase;
-    letter-spacing:-0.02em; font-size:clamp(26px, 3.2vw, 40px); margin:0 0 30px; color:#fff;
+    letter-spacing:-0.02em; font-size:clamp(26px, 3.2vw, 40px); margin:0 0 30px; color:var(--card);
   }
   .lire-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;}
-  .lire-box{border:3px solid #fff; padding:22px 24px;}
-  .lire-box h3{font-size:24px; font-weight:900; margin:0 0 10px; color:#fff; letter-spacing:-0.01em;}
+  .lire-box{border:3px solid var(--card); padding:22px 24px;}
+  .lire-box h3{font-size:24px; font-weight:900; margin:0 0 10px; color:var(--card); letter-spacing:-0.01em;}
   .lire-box p{font-size:15px; line-height:1.5; margin:0; color:#D6E4FF; font-weight:500;}
   .lire-box.hl{border-color:var(--yellow); background:rgba(255,210,77,0.08);}
   .lire-box.hl h3{color:var(--yellow);}
-  .lire-box.hl p{color:#fff;}
+  .lire-box.hl p{color:var(--card);}
   @media (max-width:900px){ .lire-grid{grid-template-columns:1fr;} }
 
   /* ---------- PHASE 5 : MINISTRES & ASSEMBLÉE ---------- */
   /* Grande recherche façon maquette : cellule loupe JAUNE + champ bordé */
   .brutal-search{
     display:flex; max-width:640px; margin-top:22px;
-    border:3px solid var(--ink); background:#fff; box-shadow:var(--shadow);
+    border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow);
   }
   .brutal-search .bs-icon{
     display:flex; align-items:center; padding:0 16px; font-size:18px;
     border-right:3px solid var(--ink); background:var(--yellow); flex:none;
   }
   .brutal-search input{
-    flex:1; min-width:0; border:none; outline:none; background:#fff;
+    flex:1; min-width:0; border:none; outline:none; background:var(--card);
     box-shadow:none; font-family:'Archivo',sans-serif; font-size:16px;
     font-weight:500; padding:16px 18px; color:var(--ink);
   }
@@ -1235,7 +1379,7 @@
 
   /* Composition : barre empilée bordée + légende à carrés */
   .compo-wrap{margin-bottom:34px;}
-  .compo-bar{display:flex; height:56px; border:3px solid var(--ink); background:#fff;}
+  .compo-bar{display:flex; height:56px; border:3px solid var(--ink); background:var(--card);}
   .compo-seg{height:100%;}
   .compo-legend{display:flex; gap:20px; margin-top:16px; flex-wrap:wrap; align-items:center;}
   .compo-row{
@@ -1251,7 +1395,7 @@
   @media (max-width:980px){ #ministresGrid.grid{grid-template-columns:repeat(2, 1fr);} }
   @media (max-width:640px){ #ministresGrid.grid{grid-template-columns:1fr;} }
   .m-card{
-    border:3px solid var(--ink); box-shadow:var(--shadow); background:#fff;
+    border:3px solid var(--ink); box-shadow:var(--shadow); background:var(--card);
     padding:0; display:flex; flex-direction:column;
     /* Un élément de grille a min-width:auto : il refuse de rétrécir sous la
        largeur de son plus long contenu, et débordait donc sa cellule sur les
@@ -1268,19 +1412,19 @@
   }
   .m-card-bottom{padding:14px 22px 18px; display:flex; flex-direction:column; gap:8px; margin-top:auto;}
   .m-row{display:flex; justify-content:space-between; gap:10px; font-size:13.5px; align-items:baseline;}
-  .m-label{font-family:'Archivo Narrow',sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; color:#666; flex:none;}
+  .m-label{font-family:'Archivo Narrow',sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; color:var(--slate); flex:none;}
   .m-val{font-weight:700; text-align:right;}
   .m-val-blue{font-weight:800; color:var(--gold);}
   .m-mail{
     font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700;
-    letter-spacing:0.03em; margin-top:6px; border-top:2px solid #E5E2DA;
+    letter-spacing:0.03em; margin-top:6px; border-top:2px solid var(--line-soft);
     padding-top:10px; color:var(--gold);
     overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   }
   .m-card .follow-btn{padding:7px 12px; font-size:11.5px;}
   .head-note{
     font-family:'Archivo Narrow',sans-serif; font-size:13px; font-weight:600;
-    text-transform:uppercase; letter-spacing:0.05em; color:#555; flex:none;
+    text-transform:uppercase; letter-spacing:0.05em; color:var(--slate); flex:none;
   }
   /* Sécurité petits écrans (≤480px) : la note de section passe sous le titre,
      et les mots longs des cartes du lexique se coupent proprement. */
@@ -1304,10 +1448,10 @@
 
   /* Tableau du reste de l'Assemblée, groupé par parti */
   #deputesList{display:block;}
-  .dep-table{border:3px solid var(--ink); box-shadow:var(--shadow-lg); background:#fff;}
+  .dep-table{border:3px solid var(--ink); box-shadow:var(--shadow-lg); background:var(--card);}
   .dep-table-head{
     display:grid; grid-template-columns:1fr 280px 110px; gap:16px; padding:12px 22px;
-    background:#131313; color:var(--paper);
+    background:var(--ink); color:var(--paper);
     font-family:'Archivo Narrow',sans-serif; font-size:12px; font-weight:700;
     text-transform:uppercase; letter-spacing:0.06em;
   }
@@ -1319,7 +1463,7 @@
   .dep-group-count{font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;}
   .dep-row{
     display:grid; grid-template-columns:1fr 280px 110px; gap:16px; padding:13px 22px;
-    border-top:2px solid #E5E2DA; align-items:center; background:#fff;
+    border-top:2px solid var(--line-soft); align-items:center; background:var(--card);
   }
   .dep-name{font-size:15px; font-weight:700;}
   .dep-mail{font-family:'Archivo Narrow',sans-serif; font-size:12px; font-weight:600; color:var(--gold);}
@@ -1334,42 +1478,42 @@
 
   /* Comparateur sur bande bleue */
   #band-comparateur{margin-top:34px;}
-  #band-comparateur .section-head h2{color:#fff;}
+  #band-comparateur .section-head h2{color:var(--card);}
   #band-comparateur .section-head .sub{color:#A9C6FF;}
   .comparateur-toolbar{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:24px;}
   .comparateur-toolbar select{
-    border:3px solid var(--ink); background:var(--yellow); color:var(--ink);
+    border:3px solid var(--ink); background:var(--yellow); color:var(--sur-clair);
     font-family:'Archivo Narrow',sans-serif; font-size:15px; font-weight:700;
     text-transform:uppercase; padding:14px 16px; cursor:pointer;
     box-shadow:5px 5px 0 var(--ink);
   }
-  .comparateur-toolbar select#compareB{background:#fff;}
-  #band-comparateur .compare-table-wrap{border:3px solid var(--ink); background:#fff; box-shadow:var(--shadow-lg); overflow-x:auto;}
+  .comparateur-toolbar select#compareB{background:var(--card);}
+  #band-comparateur .compare-table-wrap{border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow-lg); overflow-x:auto;}
   #band-comparateur .compare-table{width:100%; border-collapse:collapse; color:var(--ink);}
   #band-comparateur .compare-table th{
-    background:#131313; color:var(--paper); text-align:left; padding:14px 20px;
+    background:var(--ink); color:var(--paper); text-align:left; padding:14px 20px;
     font-size:16px; font-weight:800; text-transform:uppercase;
   }
-  #band-comparateur .compare-table td{padding:13px 20px; border-top:2px solid #E5E2DA; font-size:14px; font-weight:600;}
+  #band-comparateur .compare-table td{padding:13px 20px; border-top:2px solid var(--line-soft); font-size:14px; font-weight:600;}
   #band-comparateur .compare-table td:first-child{
     font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700;
-    text-transform:uppercase; letter-spacing:0.05em; color:#666; width:200px;
+    text-transform:uppercase; letter-spacing:0.05em; color:var(--slate); width:200px;
   }
   @media (max-width:760px){ .comparateur-toolbar{grid-template-columns:1fr;} }
   /* Placeholder du comparateur (avant sélection) */
-  .compare-placeholder{border:3px dashed #fff; background:rgba(255,255,255,0.06); padding:26px 24px;}
+  .compare-placeholder{border:3px dashed var(--card); background:rgba(255,255,255,0.06); padding:26px 24px;}
   .cp-cols{display:flex; align-items:stretch; gap:16px;}
   .cp-col{
     flex:1; display:flex; align-items:center; gap:12px; min-width:0;
-    border:3px solid #fff; background:transparent; padding:16px 18px;
+    border:3px solid var(--card); background:transparent; padding:16px 18px;
   }
   .cp-col.filled{border-color:var(--yellow); background:rgba(255,210,77,0.1);}
   .cp-slot{
     flex:none; width:34px; height:34px; display:flex; align-items:center; justify-content:center;
-    background:var(--yellow); color:#131313; border:2px solid #131313;
+    background:var(--yellow); color:var(--sur-clair); border:2px solid var(--ink);
     font-family:'Archivo',sans-serif; font-weight:900; font-size:16px;
   }
-  .cp-txt{font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:0.03em; color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .cp-txt{font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:0.03em; color:var(--card); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
   .cp-vs{
     flex:none; align-self:center; font-family:'Archivo',sans-serif; font-weight:900;
     font-size:18px; color:#A9C6FF; letter-spacing:0.04em;
@@ -1386,7 +1530,7 @@
     display:grid; grid-template-columns:repeat(2, 1fr); gap:20px; margin:0;
   }
   .lexique-item{
-    background:#fff; border:3px solid var(--ink); box-shadow:var(--shadow);
+    background:var(--card); border:3px solid var(--ink); box-shadow:var(--shadow);
     padding:24px 26px; margin:0;
     display:grid; grid-template-columns:1fr auto; gap:0 12px; align-items:start;
   }
@@ -1404,7 +1548,7 @@
   }
   .lex-badge.cat-proc{background:var(--gold-soft); color:var(--gold);}       /* bleu Québec */
   .lex-badge.cat-votes{background:var(--green-soft); color:#14532D;}         /* vert */
-  .lex-badge.cat-pers{background:var(--yellow); color:var(--ink);}          /* jaune */
+  .lex-badge.cat-pers{background:var(--yellow); color:var(--sur-clair);}          /* jaune */
   .lex-badge.cat-outils{background:#CFF0F7; color:#0A6E85;}                 /* cyan (CAQ) */
   @media (max-width:820px){ #body-lexique dl{grid-template-columns:1fr;} }
 
@@ -1417,14 +1561,14 @@
   }
   #band-suggest p{font-size:16.5px; font-weight:500; line-height:1.5; margin:0; max-width:520px;}
   .suggest-cta{
-    border:3px solid var(--ink); background:#131313; color:var(--yellow);
+    border:3px solid var(--ink); background:var(--ink-bg); color:var(--yellow);
     padding:16px 26px; font-weight:800; font-size:15px; text-transform:uppercase;
     letter-spacing:0.03em; box-shadow:6px 6px 0 rgba(19,19,19,0.35); white-space:nowrap;
   }
-  .suggest-cta:hover{background:var(--gold); color:#fff;}
+  .suggest-cta:hover{background:var(--gold-bg); color:var(--sur-fonce);}
 
   /* Cartes de rôles (Qui gravite autour) */
-  .role-card{border:3px solid var(--ink); background:#fff; box-shadow:var(--shadow-sm);}
+  .role-card{border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow-sm);}
   .role-card .role{
     font-family:'Archivo Narrow',sans-serif; font-weight:700; color:var(--gold);
     text-transform:uppercase; letter-spacing:0.04em;
@@ -1433,8 +1577,8 @@
   .role-badge{border:2px solid var(--ink); font-family:'Archivo Narrow',sans-serif; font-weight:700; text-transform:uppercase;}
 
   /* Vue Compte & à propos */
-  .account-box{border:3px solid var(--ink); background:#fff; box-shadow:var(--shadow);}
-  .roadmap-item{border:2px solid var(--ink); background:#fff;}
+  .account-box{border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow);}
+  .roadmap-item{border:2px solid var(--ink); background:var(--card);}
   .roadmap-status{
     border:2px solid var(--ink); font-family:'Archivo Narrow',sans-serif;
     font-weight:700; text-transform:uppercase; letter-spacing:0.04em;
@@ -1504,6 +1648,21 @@
   }
   .lang-toggle:hover{background:var(--paper-2);}
 
+  /* GÉOMÉTRIE COMMUNE DES CONTRÔLES D'EN-TÊTE (taille du texte, thème, langue).
+     Ils forment une rangée : hauteurs et traits doivent concorder. Ils avaient
+     dérivé à 38 / 32 / 34 px avec des bordures de 1 et 2 px, parce que chacun est
+     défini DEUX fois — une fois dans la feuille d'origine, une fois dans la
+     refonte brutaliste. Plutôt que d'aller corriger quatre règles dispersées et
+     de laisser le prochain ajout dériver à son tour, on fixe la géométrie ici,
+     en dernier, pour tous les enfants directs de .header-ctrls. */
+  .header-ctrls > *{
+    height:var(--h-ctrl); box-sizing:border-box;
+    border:1px solid var(--line);
+  }
+  .font-size-ctrl{padding:0 6px;}
+  .lang-toggle{padding:0 14px;}
+  .theme-toggle{width:var(--h-ctrl); padding:0;}
+
   /* ---------- HAMBURGER (mobile) ---------- */
   .hamburger{
     display:none; flex:none; width:36px; height:36px;
@@ -1528,7 +1687,7 @@
       padding:16px 24px; border-bottom:1px solid var(--line); border-left:3px solid transparent;
       text-align:left; font-size:15px;
     }
-    nav.tabs button.active{background:#131313; color:#fff; border-left-color:var(--yellow); border-bottom-color:#131313;}
+    nav.tabs button.active{background:var(--ink-bg); color:var(--sur-fonce); border-left-color:var(--yellow); border-bottom-color:var(--ink);}
     nav.tabs .close-menu{
       display:flex; justify-content:flex-end; padding:0 18px 12px;
       font-family:'Archivo Narrow',sans-serif; font-size:12px; color:var(--slate); cursor:pointer;
@@ -1597,6 +1756,9 @@
       <span id="fontPct">100%</span>
       <button id="fontPlus" aria-label="Agrandir le texte">A+</button>
     </div>
+    <!-- Aucun contenu textuel : l'icône est dessinée en CSS. Le nom accessible
+         vient donc entièrement de aria-label, que le JS tient à jour. -->
+    <button class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="Passer au thème sombre" title="Passer au thème sombre"></button>
     <button class="lang-toggle" id="langToggle">English</button>
     <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -1851,6 +2013,10 @@ function goToFederal(evt){
           <span class="bs-icon" aria-hidden="true">🔍</span>
           <input type="text" id="searchBills" data-i18n-placeholder="ph.searchBills" placeholder="Numéro, titre ou mot-clé…">
         </div>
+        <!-- Tri par activité. La logique existait déjà (toggleBillsSort) mais
+             AUCUN bouton ne la déclenchait : la liste était figée sur « activité
+             la plus récente » sans que personne puisse en sortir. -->
+        <button class="sort-toggle" id="sortToggle" onclick="toggleBillsSort()">↓ Activité récente</button>
         <div class="quick-filters" id="billsQuickFilters"></div>
       </div>
     </div>
@@ -2753,6 +2919,8 @@ function applyLanguage(){
   // Le <title> suit la langue ET l'onglet courant (déduit de l'URL).
   if(typeof syncTitle === 'function') syncTitle(viewFromPath());
   if(typeof applyAssemblyState === 'function') applyAssemblyState();
+  // L'infobulle de la bascule de thème suit la langue elle aussi.
+  if(typeof appliquerTheme === 'function') appliquerTheme();
 }
 
 /* Corrige les textes statiques qui deviennent FAUX pendant une dissolution —
@@ -6348,6 +6516,39 @@ async function changeFontZoom(delta){
   applyFontZoom();
   try{ await window.storage.set('font-zoom', JSON.stringify(fontZoom)); }catch(e){}
 }
+
+/* ---------------- THÈME SOMBRE ----------------
+   Volontairement PAS branché sur prefers-color-scheme : tant que le thème est à
+   l'essai, personne ne doit le recevoir sans l'avoir demandé. Le jour où on le
+   juge prêt, il suffira de lire la préférence système au premier chargement.
+   L'attribut vit sur <html> et non sur <body>, pour que le fond de page soit
+   peint avant même que le corps existe. */
+let themeSombre = false;
+function appliquerTheme(){
+  document.documentElement.setAttribute('data-theme', themeSombre ? 'dark' : 'light');
+  const b = document.getElementById('themeToggle');
+  if(!b) return;
+  const isEn = currentLang === 'en';
+  b.setAttribute('aria-pressed', themeSombre ? 'true' : 'false');
+  const t = themeSombre
+    ? (isEn ? 'Switch to light theme' : 'Passer au thème clair')
+    : (isEn ? 'Switch to dark theme' : 'Passer au thème sombre');
+  b.setAttribute('aria-label', t);
+  b.setAttribute('title', t);
+}
+async function loadTheme(){
+  try{
+    const res = await window.storage.get('theme');
+    themeSombre = res ? JSON.parse(res.value) === 'dark' : false;
+  }catch(e){ themeSombre = false; }
+  appliquerTheme();
+}
+async function basculerTheme(){
+  themeSombre = !themeSombre;
+  appliquerTheme();
+  try{ await window.storage.set('theme', JSON.stringify(themeSombre ? 'dark' : 'light')); }catch(e){}
+}
+document.getElementById('themeToggle').addEventListener('click', basculerTheme);
 document.getElementById('fontMinus').addEventListener('click', ()=> changeFontZoom(-10));
 document.getElementById('fontPlus').addEventListener('click', ()=> changeFontZoom(10));
 
@@ -8074,13 +8275,20 @@ function setBillsStepFilter(n){
 function updateSortToggleLabel(){
   const btn = document.getElementById('sortToggle');
   if(!btn) return;
-  const asc = currentLang==='en' ? '↑ Oldest activity first' : '↑ Activité la plus ancienne';
-  const desc = currentLang==='en' ? '↓ Most recent activity first' : '↓ Activité la plus récente';
+  // Libellés courts : le bouton vit dans la rangée des contrôles, à côté de la
+  // recherche. Il annonce l'ORDRE COURANT, pas l'action — c'est ce qu'on lit sur
+  // les en-têtes de tri partout ailleurs.
+  const asc = currentLang==='en' ? '↑ Oldest activity' : '↑ Activité ancienne';
+  const desc = currentLang==='en' ? '↓ Recent activity' : '↓ Activité récente';
   btn.textContent = billsSortDir === 'desc' ? desc : asc;
+  btn.setAttribute('title', currentLang==='en'
+    ? 'Sort by date of last activity on the bill'
+    : "Trier par date de dernière activité sur le projet de loi");
 }
 function toggleBillsSort(){
   billsSortDir = billsSortDir === 'desc' ? 'asc' : 'desc';
   updateSortToggleLabel();
+  billsShown = BILLS_STEP;
   renderBills();
 }
 
@@ -8101,8 +8309,16 @@ function toggleShowMotions(){
 
 // Filtre rapide des projets (maquette) : Tous / En cours / Adoptés / 🔥 Challengés
 let billsQuickFilter = 'tous';
+// On n'affiche pas les 143 projets d'un coup : 10, puis « + 10 » à la demande.
+// ⚠️ Toute action qui change la LISTE (filtre, recherche, tri) doit remettre ce
+// compteur à BILLS_STEP — sinon on garde une fenêtre ouverte sur une liste qui
+// n'a plus rien à voir, et le lecteur croit voir « tout » ce qui correspond.
+const BILLS_STEP = 10;
+let billsShown = BILLS_STEP;
+function loadMoreBills(){ billsShown += BILLS_STEP; renderBills(); }
 function setBillsQuickFilter(k){
   billsQuickFilter = k;
+  billsShown = BILLS_STEP;
   renderBills();
 }
 function renderBillsQuickFilters(){
@@ -8147,9 +8363,23 @@ function renderBills(keyword){
   const el = document.getElementById('billsList');
   const rest = document.getElementById('billsListRest');
   const banner = document.getElementById('band-challenge-explainer');
+  const visibles = list.slice(0, billsShown);
   if(list.length){
-    el.innerHTML = list.slice(0, 2).map(b=>billCard(b,'full')).join('');
-    if(rest) rest.innerHTML = list.slice(2).map(b=>billCard(b,'full')).join('');
+    el.innerHTML = visibles.slice(0, 2).map(b=>billCard(b,'full')).join('');
+    if(rest){
+      rest.innerHTML = visibles.slice(2).map(b=>billCard(b,'full')).join('');
+      // Barre « + 10 », même patron que celle des votes.
+      if(list.length > visibles.length){
+        const reste = list.length - visibles.length;
+        const pas = Math.min(BILLS_STEP, reste);
+        rest.innerHTML += `<button class="votes-more" onclick="loadMoreBills()">${isEn
+          ? `Show ${pas} more — ${visibles.length} of ${list.length}`
+          : `Voir ${pas} de plus — ${visibles.length} sur ${list.length}`}</button>`;
+      } else if(list.length > BILLS_STEP){
+        rest.innerHTML += `<div class="votes-more-note">${isEn
+          ? `All ${list.length} shown` : `Les ${list.length} affichés`}</div>`;
+      }
+    }
     // Pendant la dissolution, on n'affiche pas l'explication du « challenge » :
     // la fonction est désactivée (on n'interpelle pas le parrain d'un projet mort).
     if(banner) banner.style.display = ASSEMBLY.dissolved ? 'none' : '';
@@ -8170,7 +8400,12 @@ function renderBills(keyword){
   const titleEl = document.getElementById('billsResultTitle');
   const noteEl = document.getElementById('billsResultNote');
   if(titleEl) titleEl.textContent = titles[billsQuickFilter];
-  if(noteEl) noteEl.textContent = `${list.length} ${isEn ? 'shown · click a card → plain summary' : 'affiché·s · cliquez une carte → résumé en clair'}`;
+  // La note dit ce qui est À L'ÉCRAN sur le total filtré — sinon annoncer « 143 »
+  // au-dessus de 10 cartes laisse croire à un bogue d'affichage.
+  if(noteEl){
+    const combien = visibles.length < list.length ? `${visibles.length} / ${list.length}` : `${list.length}`;
+    noteEl.textContent = `${combien} ${isEn ? 'shown · click a card → plain summary' : 'affiché·s · cliquez une carte → résumé en clair'}`;
+  }
 }
 
 function renderApercuBills(){
@@ -8288,6 +8523,19 @@ function openBillFromQuery(){
   if(viewFromPath() !== 'projets'){ goToTab('projets', { fromHistory: true, noScroll: true }); }
   // Le projet doit passer le filtre courant : on force « tous » + recherche vide.
   billsQuickFilter = 'tous';
+  // ⚠️ ET il doit être DANS LA FENÊTRE affichée. Depuis que la liste se limite à
+  // 10 projets, un lien partagé vers un projet plus bas ne trouvait plus sa carte
+  // dans le DOM : le lien semblait simplement ne rien faire. On ouvre donc assez
+  // de pages pour l'inclure. (Le tri est le même que dans renderBills.)
+  const ordonnes = [...bills].sort((x, y) => {
+    const dx = x.lastActivity || '', dy = y.lastActivity || '';
+    if(!dx && !dy) return 0;
+    if(!dx) return 1;
+    if(!dy) return -1;
+    return billsSortDir === 'desc' ? dy.localeCompare(dx) : dx.localeCompare(dy);
+  });
+  const rang = ordonnes.findIndex(x => x.id === b.id);
+  if(rang >= 0) billsShown = Math.max(billsShown, Math.ceil((rang + 1) / BILLS_STEP) * BILLS_STEP);
   const sb = document.getElementById('searchBills'); if(sb) sb.value = '';
   renderBills();
   const domId = 'bill-summary-full-' + b.id;
@@ -8747,7 +8995,7 @@ window.addEventListener('scroll', ()=>{
 });
 
 document.getElementById('searchMinistres').addEventListener('input', e=> { renderMinistres(e.target.value); renderDeputes(e.target.value); });
-document.getElementById('searchBills').addEventListener('input', ()=> renderBills());
+document.getElementById('searchBills').addEventListener('input', ()=> { billsShown = BILLS_STEP; renderBills(); });
 document.getElementById('searchVotes').addEventListener('input', ()=> { votesShown = 6; renderVotes(); });
 
 /* ---------------- INIT ---------------- */
@@ -8791,6 +9039,7 @@ function renderTicker(){
   await loadFollowed();
   await loadIntroState();
   await loadFontZoom();
+  await loadTheme();
   await loadFollowedDeputes();
   await loadFollowedBills();
   await initAuth();

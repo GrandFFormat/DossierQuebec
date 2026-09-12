@@ -61,6 +61,25 @@ function must(cond, msg){ if(!cond){ console.error('✖ build-section-pages : ' 
 must(src.includes('<section class="view active" id="view-apercu">'), "vue Aperçu active introuvable (format changé ?)");
 must(src.includes('<button class="active" data-view="apercu">'), "bouton nav Aperçu actif introuvable (format changé ?)");
 
+// Santé de la feuille de style. Un commentaire mal fermé ou une accolade en trop
+// ne fait PAS planter le navigateur : il avale silencieusement tout ce qui suit,
+// et une partie du site perd son style sans qu'aucune erreur n'apparaisse. C'est
+// arrivé deux fois — d'où ce contrôle, ici, où il bloque aussi le build quotidien.
+(function verifierCss(){
+  const d = src.indexOf('<style'), f = src.indexOf('</style>');
+  must(d !== -1 && f !== -1, 'bloc <style> introuvable');
+  const css = src.slice(src.indexOf('>', d) + 1, f);
+  const ouvrants = (css.match(/\/\*/g) || []).length;
+  const fermants = (css.match(/\*\//g) || []).length;
+  must(ouvrants === fermants, `commentaires CSS déséquilibrés : ${ouvrants} « /* » pour ${fermants} « */ »`);
+  // Hors commentaires, les accolades doivent s'équilibrer.
+  const sansCommentaires = css.replace(/\/\*[\s\S]*?\*\//g, '');
+  const o = (sansCommentaires.match(/\{/g) || []).length;
+  const c = (sansCommentaires.match(/\}/g) || []).length;
+  must(o === c, `accolades CSS déséquilibrées : ${o} « { » pour ${c} « } »`);
+  console.log(`✓ CSS sain (${o} règles, ${ouvrants} commentaires équilibrés)`);
+})();
+
 function esc(s){ return s.replace(/"/g, '&quot;'); }
 
 // UN SEUL <h1> par page : celui de la vue affichée.
