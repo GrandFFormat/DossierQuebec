@@ -60,6 +60,7 @@ const ETAPES = [
         { nom: 'Membres du conseil', argv: ['scrapers/elus.js'], secondaire: true },
         { nom: 'Districts électoraux', argv: ['scrapers/districts.js'], secondaire: true },
         { nom: "Conseil d'agglomération", argv: ['scrapers/agglomeration.js'], secondaire: true },
+        { nom: "Commission d'urbanisme (CUCQ)", argv: ['scrapers/cucq.js'], secondaire: true },
       ]
     : []),
   { nom: "Décisions de l'année", argv: ['scrapers/decisions.js'] },

@@ -453,6 +453,39 @@ function carteMembreAgglo(m) {
   </article>`;
 }
 
+// ---------- commission d'urbanisme (CUCQ) ----------
+// Même source que l'agglomération : les listes de présences. On dit ce que le procès-verbal
+// dit — votant ou substitut, élu·e ou non, présidence — et rien de plus sur les personnes.
+function carteMembreCucq(m) {
+  const statut = m.categorie === 'substitut' ? 'Membre substitut' : 'Membre votant';
+  const fonction = m.elu ? (m.civilite === 'Mme' ? 'conseillère municipale' : 'conseiller municipal') : null;
+  const partiel = m.partielles ? `, dont ${m.partielles} en partie` : '';
+  return `<article class="carte elu">
+    <div>
+      <h3>${echapper(m.nom)}</h3>
+      <p class="district">${statut}${fonction ? ' — ' + fonction : ''}</p>
+      <div class="meta">
+        ${m.roles.map((r) => `<span class="puce">${echapper(r)}</span>`).join('')}
+        ${m.elu ? '<span class="puce">siège au conseil municipal</span>' : ''}
+      </div>
+      <p class="compte" style="margin:6px 0 0">
+        Présence consignée à ${m.presences} séance(s) sur ${m.seances}${partiel}.
+      </p>
+    </div>
+  </article>`;
+}
+
+function rendreCucq() {
+  if (!$('#liste-cucq') || !etat.cucq) return;
+  const c = etat.cucq;
+  const elus = c.membres.filter((m) => m.elu).length;
+  $('#compte-cucq').textContent =
+    `${c.votants} membres votants et ${c.substituts} substituts relevés sur ${c.seancesAnalysees} séances de ` +
+    `${c.parametres.annee}, dont ${elus} qui siègent aussi au conseil municipal. ` +
+    (c.derniereSeance ? `Dernier procès-verbal analysé : ${dateFr(c.derniereSeance.date)}.` : '');
+  $('#liste-cucq').innerHTML = `<div class="grille-elus">${c.membres.map(carteMembreCucq).join('')}</div>`;
+}
+
 function rendreAgglomeration() {
   if (!$('#liste-agglo') || !etat.agglomeration) return;
   const a = etat.agglomeration;
@@ -717,6 +750,8 @@ function rendreEtat() {
   ajouter('Résumés en langage clair', etat.resumes, etat.resumes ? `${etat.resumes.nombre}` : '');
   ajouter('Membres du conseil', etat.elus, etat.elus ? `${etat.elus.nombre}` : '');
   ajouter('Districts électoraux', etat.districts, etat.districts ? `${etat.districts.nombre}` : '');
+  ajouter("Conseil d'agglomération", etat.agglomeration, etat.agglomeration ? `${etat.agglomeration.nombre}` : '');
+  ajouter("Commission d'urbanisme (CUCQ)", etat.cucq, etat.cucq ? `${etat.cucq.nombre}` : '');
   $('#etat-donnees').innerHTML =
     `<table><thead><tr><th>Jeu</th><th>Dernière extraction</th><th class="n">Chargé / disponible</th></tr></thead><tbody>${lignes.join('')}</tbody></table>` +
     (etat.resumes?.modele ? `<p class="compte">Modèle utilisé pour les résumés&nbsp;: <code>${echapper(etat.resumes.modele)}</code>.</p>` : '');
@@ -750,9 +785,9 @@ const BESOINS = {
   accueil: ['decisions', 'votes', 'elus', 'resumes'],
   decisions: ['decisions', 'resumes'],
   votes: ['votes'],
-  conseil: ['elus', 'districts', 'votes', 'decisions', 'agglomeration'],
+  conseil: ['elus', 'districts', 'votes', 'decisions', 'agglomeration', 'cucq'],
   lexique: ['lexique'],
-  sources: ['decisions', 'votes', 'elus', 'resumes', 'districts', 'agglomeration'],
+  sources: ['decisions', 'votes', 'elus', 'resumes', 'districts', 'agglomeration', 'cucq'],
 };
 
 async function init() {
@@ -789,6 +824,7 @@ async function init() {
     if (etat.districts) rendreCarte();
     rendreElus();
     rendreAgglomeration();
+    rendreCucq();
   }
   if (page === 'lexique') rendreLexique();
   if (page === 'sources') rendreEtat();
