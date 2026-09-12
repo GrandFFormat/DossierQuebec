@@ -353,6 +353,17 @@ Deux faits que ça met au jour, bruts : **Bruno Marchand, maire de Québec, est 
 séances** (remplacé par Catherine Vallières-Roland), et **Sylvain Juneau, maire de
 Saint-Augustin, l'est aussi** (remplacé le plus souvent par Richard Levesque).
 
+### La commission d'urbanisme, même méthode
+
+La Commission d'urbanisme et de conservation de Québec (CUCQ) siège à peu près chaque
+semaine — 31 procès-verbaux de janvier à août 2026 — et ses décisions sont les résolutions
+« C.U. » de la page Décisions. Là non plus, pas de page « membres » chez la Ville ;
+`scrapers/cucq.js` lit les blocs « Membres votant » et « Membres substituts » des
+procès-verbaux, en laissant de côté « Assistent également » (les fonctionnaires). Résultat :
+13 personnes, dont 3 élus (la présidence et une vice-présidence sont tenues par des
+conseillers municipaux), avec l'assiduité de chacun. La section est au bas de la page
+Conseil, après l'agglomération.
+
 ### Le bug qui effaçait les femmes
 
 Première version du parseur : `conseill\w+` pour attraper la fonction. **`\w` ne couvre pas les
@@ -445,6 +456,7 @@ scrapers/votes.js        registre des votes nominatifs (analyse de texte)
 scrapers/elus.js         les 22 membres du conseil (microdonnées schema.org)
 scrapers/districts.js    contours des 21 districts, simplifiés et joints aux élus
 scrapers/agglomeration.js membres du conseil d'agglomération, via les listes de présences
+scrapers/cucq.js         membres de la Commission d'urbanisme et de conservation, même méthode
 scrapers/lexique.js      mesure chaque terme du lexique sur le corpus + un exemple
 scrapers/resumes.js      résumés en langage clair (API Claude, avec cache et estimation)
 scrapers/archive.js      archivage compressé des années révolues
