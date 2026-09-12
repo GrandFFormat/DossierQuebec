@@ -17,6 +17,13 @@ const MIME = {
 // /votes sert votes.html, /promesses sert promesses.html. Sans ça, tester en
 // local les pages de section donne un 404 alors que la prod fonctionne.
 async function lire(path) {
+  // En production, /feed.xml est réécrit vers la fonction api/feed.js (qui compte
+  // les lectures) et le XML vit dans api/feed-data.xml. On reproduit la même URL
+  // en local — sans le comptage — sinon /feed.xml donnerait un 404 ici alors que
+  // la prod fonctionne.
+  if (path === '/feed.xml') {
+    return { data: await readFile(join(ROOT, 'api', 'feed-data.xml')), ext: '.xml' };
+  }
   const p = join(ROOT, decodeURIComponent(path));
   // Un chemin qui finit par « / » désigne un dossier : Vercel y sert index.html.
   // Sans ce cas, /villedequebec/ donnait un 404 en local alors que la prod aurait
