@@ -6,6 +6,9 @@ de vraies personnes.
 
 Ce n'est pas un site de la Ville de Québec et ça n'a aucun caractère officiel.
 
+Pour refaire la même chose ailleurs : `REPRODUIRE-POUR-UNE-AUTRE-VILLE.md` — ce qui se
+réutilise tel quel, ce qui se réécrit, dans quel ordre, et les pièges déjà rencontrés.
+
 Le site est servi comme volet de DossierQuébec, à **https://dossierquebec.ca/villedequebec/**,
 et ce dossier vit dans le dépôt de DossierQuébec sous `villedequebec/` : mêmes déploiements
 (Vercel, à chaque push), même tableau de bord, même mécanique de rafraîchissement automatique.
