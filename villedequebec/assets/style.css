@@ -145,6 +145,15 @@ h1 { font-size: 27px; margin: 0; font-weight: 800; letter-spacing: -0.025em; col
   padding: 3px 9px; border-radius: 999px; line-height: 1.5;
 }
 
+/* Retour vers DossierQuébec, à côté du logo — « en attendant » : le volet municipal n'a
+   pas encore sa propre entrée, on y arrive depuis DQ et on doit pouvoir y revenir. */
+.retour-dq {
+  display: inline-block; font-size: 13px; font-weight: 600; text-decoration: none;
+  color: var(--entete-doux); border: 1px solid var(--entete-ligne); border-radius: 999px;
+  padding: 4px 12px; line-height: 1.5; white-space: nowrap;
+}
+.retour-dq:hover { color: var(--entete-encre); border-color: var(--ligne-forte); }
+
 .sous-titre { color: var(--entete-doux); margin: 6px 0 18px; font-size: 14.5px; max-width: 66ch; }
 
 nav { display: flex; gap: 3px; flex-wrap: wrap; }
