@@ -8126,6 +8126,30 @@ function sponsorParty(sponsorName){
   return depute ? depute.party : null;
 }
 
+// Parti du parrain, calculé UNE SEULE FOIS par projet et mis en cache.
+// ⚠️ Ne pas appeler sponsorParty() dans le filtre de recherche : mesuré à 7,1 ms
+// pour les 143 projets, soit près de trois fois le coût total d'une frappe
+// (2,5 ms). Invisible sur un ordinateur, sensible sur un téléphone lent.
+// On stocke le sigle ET le nom complet, pour que « CAQ » comme « coalition
+// avenir québec » trouvent la même chose.
+let _partiParProjet = null;
+function partiDuProjet(b){
+  if(!_partiParProjet){
+    _partiParProjet = new Map();
+    // ⚠️ Le nom complet vient de `seats`, PAS de `deputes` : le champ partyFull
+    // existe bien dans data/deputes.json mais l'injection ne le reprend pas, et
+    // le chercher là donnait silencieusement une chaîne vide — « CAQ » trouvait,
+    // « coalition avenir » ne trouvait rien.
+    const nomComplet = new Map();
+    for(const s of seats) if(s.party && s.label) nomComplet.set(s.party, s.label);
+    for(const x of bills){
+      const sigle = sponsorParty(x.sponsor);
+      _partiParProjet.set(x.id, sigle ? `${sigle} ${nomComplet.get(sigle) || ''}` : '');
+    }
+  }
+  return _partiParProjet.get(b.id) || '';
+}
+
 function billCard(b, ctx){
   ctx = ctx || 'full';
   const domId = 'bill-summary-' + ctx + '-' + b.id;
@@ -8401,14 +8425,29 @@ function renderBills(keyword){
   const kw = norm(keyword);
   const isEn = currentLang === 'en';
   const ch = challengedCache || [];
+  // « 3 », « pl 3 », « PL Nº 3 », « projet de loi n° 3 » désignent tous le PROJET
+  // NUMÉRO 3, et rien d'autre. Sans cette règle, « 3 » renvoyait 75 projets (tout
+  // résumé ou toute date contenant un 3) et « pl 3 » en renvoyait 14, parce que
+  // « pl 30 », « pl 31 »… contiennent « pl 3 » comme sous-chaîne.
+  const numCherche = (kw.match(/^(?:pl|projet de loi)?\s*(?:n[°ºo]?\s*)?(\d+)$/) || [])[1] ?? null;
   const list = bills.filter(b => {
     const quickOk = billsQuickFilter === 'tous'
       || (billsQuickFilter === 'encours' && (ASSEMBLY.dissolved ? b.status !== 'sanctionne' : b.status === 'encours'))
       || (billsQuickFilter === 'adoptes' && b.status === 'sanctionne')
       || (billsQuickFilter === 'challenges' && ch.some(c => Number(c.bill_id) === b.id));
     const summaryText = (b.summary||'').replace(/<[^>]+>/g, ' ');
-    const haystack = norm([b.title, summaryText, b.note, b.sponsor, 'projet de loi n° ' + b.num].join(' '));
-    const kwOk = !kw || haystack.includes(kw);
+    // On cherche dans : le titre, le résumé en clair, la ligne de statut, le nom
+    // du parrain, le numéro sous toutes ses écritures, et le PARTI du parrain
+    // (sigle + nom complet). Sans le parti, taper « CAQ » ne donnait rien alors
+    // que chaque carte affiche une pastille CAQ — le lecteur croit à un bogue.
+    // « pl 3 » est ajouté parce que c'est la notation que le site lui-même
+    // affiche sur toutes les cartes ; elle ne trouvait rien.
+    const haystack = norm([
+      b.title, summaryText, b.note, b.sponsor,
+      'projet de loi n° ' + b.num, 'pl ' + b.num, 'pl no ' + b.num,
+      partiDuProjet(b),
+    ].join(' '));
+    const kwOk = !kw || (numCherche !== null ? String(b.num) === numCherche : haystack.includes(kw));
     return quickOk && kwOk;
   }).sort((a,b)=>{
     const da = a.lastActivity || '', db = b.lastActivity || '';
