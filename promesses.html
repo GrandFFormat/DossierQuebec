@@ -1163,6 +1163,25 @@
     margin:16px 0 0; padding-top:14px; border-top:2px solid var(--ink);
     font-size:14.5px; line-height:1.5; font-weight:600;
   }
+
+  /* Les comparateurs des médias : même cadre que la légende, mais sur le papier
+     plutôt que sur du blanc, pour qu'on lise « ailleurs » et non « chez nous ». */
+  .prom-ailleurs{
+    border:3px solid var(--ink); background:var(--paper-2); box-shadow:var(--shadow);
+    padding:22px 26px; margin-top:18px;
+  }
+  .prom-ailleurs h3{
+    font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase;
+    letter-spacing:-0.01em; font-size:19px; margin:0 0 12px;
+  }
+  .prom-ailleurs > p{font-size:14.5px; line-height:1.55; margin:0 0 14px;}
+  .prom-ailleurs-liste{list-style:none; margin:0; padding:0; display:grid; gap:10px;}
+  .prom-ailleurs-liste a{
+    display:block; border:2px solid var(--ink); background:var(--card);
+    padding:11px 14px; font-size:14px; line-height:1.4; text-decoration:none;
+  }
+  .prom-ailleurs-liste a:hover{background:var(--yellow); color:var(--sur-clair);}
+  .prom-ailleurs-liste b{font-family:'Archivo',sans-serif; font-weight:800;}
   #billsResultHead{margin-top:6px; margin-bottom:18px;}
 
   /* Bande légende */
@@ -2162,6 +2181,24 @@ function goToFederal(evt){
       <p class="prom-methode-fin" data-i18n="prom.meth.fin">Autrement dit : une absence dans cette liste ne dit rien de ce qu'un parti pense. Pour la liste complète, suivez le lien vers la source.</p>
     </div>
 
+    <!-- Les comparateurs des médias. On ne reprend pas leur contenu — ils ont
+         retiré leurs textes de l'usage par l'IA et nos demandes sont sans
+         réponse — mais UN LIEN N'EST PAS UNE REPRODUCTION. Priver le lecteur de
+         travaux qui l'aideraient à décider, par prudence excessive, irait contre
+         la raison d'être du site.
+         ⚠️ Ces quatre adresses ont été vérifiées (réponse 200) le 2026-09-12.
+         Si l'une tombe, la retirer plutôt que de la laisser pourrir. -->
+    <div class="prom-ailleurs">
+      <h3 data-i18n="prom.ail.h">Les comparateurs des médias</h3>
+      <p data-i18n="prom.ail.p">Plusieurs salles de rédaction ont bâti leur propre comparateur, avec des moyens que nous n'avons pas. <b>Nous ne reprenons pas leur contenu</b> : ces médias ont retiré leurs textes de l'usage par l'intelligence artificielle, et nos demandes d'autorisation sont restées sans réponse. Nous respectons ce choix. Mais un lien n'est pas une reproduction — alors les voici, parce qu'ils vous seront utiles.</p>
+      <ul class="prom-ailleurs-liste">
+        <li><a href="https://ici.radio-canada.ca/info/2026/elections-quebec/comparateur-programmes-plateformes-partis/" target="_blank" rel="noopener"><b>Radio-Canada</b> — Comparez les plateformes électorales des partis</a></li>
+        <li><a href="https://www.ledevoir.com/interactif/2026-08-28/promesses-elections-quebec/index.html" target="_blank" rel="noopener"><b>Le Devoir</b> — Comparez les promesses et programmes des partis</a></li>
+        <li><a href="https://www.lapresse.ca/elections-quebecoises/campagne-electorale/toutes-les-promesses-des-partis/2026-09-10/habitation-et-itinerance.php" target="_blank" rel="noopener"><b>La Presse</b> — « Toutes les promesses des partis », dossier en douze volets</a></li>
+        <li><a href="https://www.noovo.info/nouvelles/politique/elections-quebec/article/les-premieres-promesses-electorales-de-la-caq-du-plq-du-pq-de-qs-et-du-pcq/" target="_blank" rel="noopener"><b>Noovo Info</b> — Les premières promesses électorales des cinq partis</a></li>
+      </ul>
+    </div>
+
     <div class="band band-yellow bleed" id="band-promesses-suite">
       <h2 data-i18n="prom.next.h">Et après le 5 octobre ?</h2>
       <p data-i18n="prom.next.p">La nouvelle Assemblée siégera à partir du <b>17 novembre 2026</b>. À partir de là, chaque projet de loi déposé viendra se placer à côté de la promesse qui lui correspond — et l'absence de projet de loi sur un engagement sera tout aussi visible. C'est le suivi que personne ne fait passé la semaine électorale.</p>
@@ -2705,6 +2742,8 @@ const translations = {
     'prom.meth.4':"<b>The Coalition avenir Québec is absent.</b> It has published commitments on its website, but that site asks automated tools not to read it. We do not work around that request. It will be added as soon as a readable source exists.",
     'prom.meth.5':"<b>Nothing is taken from the news media.</b> A commitment announced at a press conference but never published by the party does not appear here. Quebec news organizations have opted their content out of AI use, and our permission requests remain unanswered.",
     'prom.meth.fin':"In short: an absence from this list says nothing about what a party thinks. For the full list, follow the link to the source.",
+    'prom.ail.h':"Comparison tools from news outlets",
+    'prom.ail.p':"Several newsrooms have built their own promise comparison tools, with resources we do not have. <b>We do not reproduce their content</b>: these outlets have opted their material out of AI use, and our permission requests remain unanswered. We respect that choice. But a link is not a reproduction — so here they are, because they will be useful to you.",
     'prom.next.h':"And after October 5?",
     'prom.next.p':"The new Assembly sits from <b>November 17, 2026</b>. From then on, every bill introduced will be placed next to the promise it matches — and the absence of a bill on a commitment will be just as visible. That is the follow-up nobody does past election week.",
     'dissp.h':"⚠️ These bills never became law",
