@@ -774,13 +774,22 @@
   /* Hôtel de ville — même gabarit que la feuille, sans le flip : une seule
      couleur suffit à le distinguer, et un pictogramme qui bouge tout seul à côté
      d'un autre qui bouge tout seul, c'est un de trop. */
+  /* Passerelle vers le volet municipal : pastille ronde « VDQ ». Même diamètre
+     que la feuille d'érable voisine (26 px) pour que les deux jetons s'alignent.
+     ⚠️ Le !important n'est pas de la paresse : plus bas, « *{border-radius:0
+     !important} » carre TOUT le site (règle du style brutaliste). Cette pastille
+     est l'exception assumée — le rond est justement ce qui la fait lire comme un
+     jeton plutôt que comme un bouton de plus dans l'en-tête. Sans !important
+     elle redevient carrée en silence. */
   .city-flip{
-    display:inline-flex; align-items:center; margin-left:10px; flex:none;
-    color:var(--green); cursor:pointer;
-    transition:transform 0.3s ease, color 0.3s ease;
+    display:inline-flex; align-items:center; justify-content:center; flex:none;
+    width:26px; height:26px; margin-left:12px; border-radius:50% !important;
+    background:var(--green); color:var(--card);
+    font-family:'Archivo',sans-serif; font-weight:900; font-size:9px;
+    letter-spacing:0.02em; text-decoration:none; cursor:pointer;
+    transition:transform 0.3s ease, background 0.3s ease;
   }
-  .city-flip svg{width:25px; height:25px; display:block;}
-  .city-flip:hover{transform:scale(1.12); color:var(--gold);}
+  .city-flip:hover{transform:scale(1.12); background:var(--gold);}
   @media (prefers-reduced-motion: reduce){ .maple-flip{transition:color 0.3s ease;} }
   .brand-text p{display:none;} /* la devise devient le H1 du hero (Phase 2) */
   .top-meta{display:none;}     /* les stats migrent dans la bande du hero (Phase 2) */
@@ -1652,6 +1661,7 @@
   .etroit .brand{gap:8px; min-width:0;}
   .etroit .brand-text .brand-title{font-size:19px;}
   .etroit .brand-mark, .etroit .maple-flip, .etroit .maple-flip svg{width:30px; height:30px;}
+  .etroit .city-flip{width:24px; height:24px; font-size:8px; margin-left:8px;}
   .etroit .suggest-cta{white-space:normal;}   /* nowrap : 389 px sur 275 disponibles */
   .etroit .result-badge{white-space:normal;}
   .etroit .dep-group-banner{flex-wrap:wrap; gap:4px;}
@@ -1770,7 +1780,12 @@
     <a class="city-flip" id="cityFlip" href="/villedequebec/" rel="nofollow"
        title="Aller au volet municipal — Ville de Québec"
        aria-label="Aller au volet municipal — Ville de Québec">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2 2 8v2h20V8L12 2zM4 11h2.4v8H4v-8zm5 0h2.4v8H9v-8zm5 0h2.4v8H14v-8zm5 0h2.4v8H19v-8zM2 20h20v2H2v-2z"/></svg>
+      <!-- « VDQ » en toutes lettres plutôt qu'un pictogramme d'hôtel de ville :
+           un bâtiment stylisé à 25 px ne dit à personne qu'il mène au volet
+           municipal, alors que trois lettres, oui. Le nom accessible reste
+           complet dans aria-label. aria-hidden sur le texte : sans ça, un
+           lecteur d'écran lirait « V D Q » en plus du libellé. -->
+      <span aria-hidden="true">VDQ</span>
     </a>
   </div>
   <!-- Nav DANS la ligne du header (maquette : logo | menu | contrôles sur
