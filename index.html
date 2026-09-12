@@ -1168,7 +1168,7 @@
      plutôt que sur du blanc, pour qu'on lise « ailleurs » et non « chez nous ». */
   .prom-ailleurs{
     border:3px solid var(--ink); background:var(--paper-2); box-shadow:var(--shadow);
-    padding:22px 26px; margin-top:18px;
+    padding:22px 26px; margin-top:18px; scroll-margin-top:80px;
   }
   .prom-ailleurs h3{
     font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase;
@@ -2134,6 +2134,17 @@ function goToFederal(evt){
       <p class="view-hero-sub" data-i18n="prom.sub">Les engagements des partis pour l'élection du 5 octobre 2026, chacun avec sa source. <b>Aucun verdict n'est rendu ici</b> — à mesure que la nouvelle Assemblée légiférera, chaque promesse sera placée à côté de ce qui a réellement été fait.</p>
     </div>
 
+    <!-- Raccourcis vers le bas de page. Deux blocs y répondent aux questions que
+         se pose le lecteur méfiant — « d'où ça sort ? » et « qu'est-ce que les
+         autres en disent ? » — mais ils sont sous trente cartes, donc invisibles.
+         Même patron que la rangée « Aller à » du Lexique : le gestionnaire de
+         .quick-nav a est déjà branché sur data-jump. -->
+    <div class="quick-nav" id="quickNavPromesses">
+      <span class="quick-nav-label" data-i18n="quicknav.label">Aller à :</span>
+      <a data-jump="prom-methode" data-i18n="quicknav.promsources">D'où viennent ces promesses</a>
+      <a data-jump="prom-ailleurs" data-i18n="quicknav.promailleurs">Les comparateurs des médias</a>
+    </div>
+
     <div class="legend-strip bleed">
       <span class="legend-label" data-i18n="prom.method">Notre méthode :</span>
       <span class="legend-chips">
@@ -2156,7 +2167,7 @@ function goToFederal(evt){
 
     <!-- Pourquoi la CAQ est absente. Une absence non expliquée se lit comme un
          parti pris : tant qu'elle n'a pas publié de plateforme, on dit pourquoi. -->
-    <div class="info-box" data-i18n="prom.caq">Une seule source est acceptée ici : les <b>documents officiels du parti</b>, cités mot pour mot. <b>Au plus 8 engagements par parti</b>, et la <b>Coalition avenir Québec</b> n'apparaît pas du tout — son site demande aux outils automatisés comme le nôtre de ne pas le lire, et nous respectons cette demande plutôt que de la contourner. <a href="#prom-methode">Comment cette liste est faite ↓</a></div>
+    <div class="info-box" data-i18n="prom.caq">Une seule source est acceptée ici : les <b>documents officiels du parti</b>, cités mot pour mot. <b>Au plus 8 engagements par parti</b>, et la <b>Coalition avenir Québec</b> n'apparaît pas du tout — son site demande aux outils automatisés comme le nôtre de ne pas le lire, et nous respectons cette demande plutôt que de la contourner.</div>
     <div class="section-head min-group-head" id="promResultHead">
       <div><h2 id="promResultTitle">Toutes les promesses</h2></div>
       <span class="head-note" id="promResultNote"></span>
@@ -2188,7 +2199,7 @@ function goToFederal(evt){
          la raison d'être du site.
          ⚠️ Ces quatre adresses ont été vérifiées (réponse 200) le 2026-09-12.
          Si l'une tombe, la retirer plutôt que de la laisser pourrir. -->
-    <div class="prom-ailleurs">
+    <div class="prom-ailleurs" id="prom-ailleurs">
       <h3 data-i18n="prom.ail.h">Les comparateurs des médias</h3>
       <p data-i18n="prom.ail.p">Plusieurs salles de rédaction ont bâti leur propre comparateur, avec des moyens que nous n'avons pas. <b>Nous ne reprenons pas leur contenu</b> : ces médias ont retiré leurs textes de l'usage par l'intelligence artificielle, et nos demandes d'autorisation sont restées sans réponse. Nous respectons ce choix. Mais un lien n'est pas une reproduction — alors les voici, parce qu'ils vous seront utiles.</p>
       <ul class="prom-ailleurs-liste">
@@ -2734,7 +2745,7 @@ const translations = {
     'prom.m1':"Exact quote",
     'prom.m2':"Source linked",
     'prom.m3':"No judgment",
-    'prom.caq':"Only one source is accepted here: the <b>party's own official documents</b>, quoted word for word. <b>At most 8 commitments per party</b>, and the <b>Coalition avenir Québec</b> does not appear at all — its website asks automated tools like ours not to read it, and we honour that request rather than work around it. <a href=\"#prom-methode\">How this list is built ↓</a>",
+    'prom.caq':"Only one source is accepted here: the <b>party's own official documents</b>, quoted word for word. <b>At most 8 commitments per party</b>, and the <b>Coalition avenir Québec</b> does not appear at all — its website asks automated tools like ours not to read it, and we honour that request rather than work around it.",
     'prom.meth.h':"Where these promises come from",
     'prom.meth.1':"<b>From the parties themselves.</b> Every quote is taken from a document the party published — an electoral platform or a campaign announcement — and reproduced word for word. A quote that cannot be found verbatim in the source is rejected automatically. The “See the source” link on each card leads to the original.",
     'prom.meth.2':"<b>These are not the “flagship” promises.</b> At most 8 per party, selected automatically from the most concrete ones — amounts, targets, deadlines. Nothing here ranks commitments by importance. A central commitment stated without a figure may therefore be missing, and the parties have published more.",
@@ -2811,6 +2822,8 @@ const translations = {
     'h.petitionsrecent':"Petitions open right now",
     'apercu.petitions.sub':"Click the \u201cPetitions\u201d tab for the full list",
     'quicknav.label':"Jump to:",
+    'quicknav.promsources':"Where these promises come from",
+    'quicknav.promailleurs':"Comparison tools from news outlets",
     'quicknav.mission':"Our mission",
     'quicknav.composition':"Composition",
     'quicknav.projets':"Bills",
