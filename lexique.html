@@ -1146,6 +1146,12 @@
      boutons ne sautillent pas quand les nombres changent en filtrant. */
   .qf-n{opacity:0.68; font-variant-numeric:tabular-nums; margin-left:6px; font-weight:800;}
   .qf-btn.qf-zero{opacity:0.45;}
+  /* Le renvoi « Médias » vit dans la rangée des partis sans en être un : trait
+     pointillé et fond neutre pour qu'on ne le prenne pas pour un filtre. */
+  .qf-btn.qf-renvoi{
+    border-style:dashed; background:transparent; color:var(--ink);
+  }
+  .qf-btn.qf-renvoi:hover{background:var(--yellow); color:var(--sur-clair); border-style:solid;}
 
   /* Légende de provenance, sous la liste des promesses. */
   .prom-methode{
@@ -2134,16 +2140,6 @@ function goToFederal(evt){
       <p class="view-hero-sub" data-i18n="prom.sub">Les engagements des partis pour l'élection du 5 octobre 2026, chacun avec sa source. <b>Aucun verdict n'est rendu ici</b> — à mesure que la nouvelle Assemblée légiférera, chaque promesse sera placée à côté de ce qui a réellement été fait.</p>
     </div>
 
-    <!-- Raccourcis vers le bas de page. Deux blocs y répondent aux questions que
-         se pose le lecteur méfiant — « d'où ça sort ? » et « qu'est-ce que les
-         autres en disent ? » — mais ils sont sous trente cartes, donc invisibles.
-         Même patron que la rangée « Aller à » du Lexique : le gestionnaire de
-         .quick-nav a est déjà branché sur data-jump. -->
-    <div class="quick-nav" id="quickNavPromesses">
-      <span class="quick-nav-label" data-i18n="quicknav.label">Aller à :</span>
-      <a data-jump="prom-methode" data-i18n="quicknav.promsources">D'où viennent ces promesses</a>
-      <a data-jump="prom-ailleurs" data-i18n="quicknav.promailleurs">Les comparateurs des médias</a>
-    </div>
 
     <div class="legend-strip bleed">
       <span class="legend-label" data-i18n="prom.method">Notre méthode :</span>
@@ -2822,8 +2818,6 @@ const translations = {
     'h.petitionsrecent':"Petitions open right now",
     'apercu.petitions.sub':"Click the \u201cPetitions\u201d tab for the full list",
     'quicknav.label':"Jump to:",
-    'quicknav.promsources':"Where these promises come from",
-    'quicknav.promailleurs':"Comparison tools from news outlets",
     'quicknav.mission':"Our mission",
     'quicknav.composition':"Composition",
     'quicknav.projets':"Bills",
@@ -6264,6 +6258,14 @@ function renderPromFilters(){
       const bg = partyColors[k] || '#8B8578';
       return `<button class="qf-btn ${sel ? 'qf-sel' : ''}${zero}" style="background:${bg}; color:${partyText(k)};" onclick="setPromParty('${k}')">${label}${compteur(n)}</button>`;
     }).join('');
+    // « Médias » à la suite des partis : ce n'est PAS un filtre, c'est un renvoi
+    // vers les comparateurs des salles de rédaction, en bas de page. Il est posé
+    // ici parce que c'est là que regarde quelqu'un qui compare — mais il doit se
+    // distinguer des partis, sinon on croit à un filtre qui ne filtre rien :
+    // d'où le trait pointillé, l'absence de couleur de parti et la flèche.
+    partyEl.innerHTML += `<button class="qf-btn qf-renvoi" onclick="allerAuxComparateurs()" title="${isEn
+      ? 'Comparison tools built by newsrooms, at the bottom of the page'
+      : 'Les comparateurs des salles de rédaction, en bas de page'}">${isEn ? 'Media' : 'Médias'}${compteur(4)} ↓</button>`;
   }
   if(themeEl){
     const sujets = [...new Set(promises.map(p => p.theme))].sort();
@@ -6278,6 +6280,12 @@ function renderPromFilters(){
       return `<button class="qf-btn ${sel ? 'qf-sel' : ''}${zero}" style="background:${bg}; color:${readableOn(bg)};" onclick="setPromTheme('${esc}')">${label}${compteur(n)}</button>`;
     }).join('');
   }
+}
+
+// Renvoi vers les comparateurs des médias, en bas de la page Promesses.
+function allerAuxComparateurs(){
+  const el = document.getElementById('prom-ailleurs');
+  if(el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function renderPromises(){

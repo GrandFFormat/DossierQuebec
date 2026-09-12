@@ -80,6 +80,25 @@ must(src.includes('<button class="active" data-view="apercu">'), "bouton nav Ape
   console.log(`✓ CSS sain (${o} règles, ${ouvrants} commentaires équilibrés)`);
 })();
 
+// Santé du JavaScript. Une seule erreur de syntaxe tue TOUT le script en ligne :
+// plus de rendu des projets de loi, plus de filtres, plus de bascule de langue —
+// une page qui s'affiche mais ne fait plus rien. Ça s'est produit sur une simple
+// apostrophe mal échappée dans une chaîne. On compile donc chaque bloc avant de
+// publier. `new Function` vérifie la syntaxe sans exécuter le code.
+(function verifierJs(){
+  const blocs = [...src.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)];
+  let n = 0;
+  for (const b of blocs) {
+    const attrs = b[1] || '';
+    // On saute les scripts externes et les blocs de données (JSON-LD).
+    if (/\bsrc=/.test(attrs) || /type=["'](application\/(ld\+)?json)["']/.test(attrs)) continue;
+    n++;
+    try { new Function(b[2]); }
+    catch (e) { must(false, `erreur de syntaxe JavaScript dans le bloc <script> n° ${n} : ${e.message}`); }
+  }
+  console.log(`✓ JavaScript sain (${n} bloc(s) compilé(s))`);
+})();
+
 function esc(s){ return s.replace(/"/g, '&quot;'); }
 
 // UN SEUL <h1> par page : celui de la vue affichée.
