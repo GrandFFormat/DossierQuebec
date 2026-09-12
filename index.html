@@ -6,6 +6,9 @@
 <title>DossierQuébec — ministres, projets de loi et votes de l'Assemblée nationale</title>
 <meta name="description" content="Suivez l'Assemblée nationale du Québec en un coup d'œil : ministres et député·e·s, projets de loi et leur statut réel, votes nominatifs. Site citoyen indépendant, vraies données publiques.">
 <link rel="canonical" href="https://dossierquebec.ca/">
+<!-- Flux RSS de « Quoi de neuf », généré au build par scrapers/build-news-data.js.
+     C'est ainsi que journalistes et agrégateurs suivent un site sans le visiter. -->
+<link rel="alternate" type="application/rss+xml" title="DossierQuébec — Quoi de neuf" href="https://dossierquebec.ca/feed.xml">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#16213E">
 
@@ -1188,6 +1191,12 @@
   }
   .prom-ailleurs-liste a:hover{background:var(--yellow); color:var(--sur-clair);}
   .prom-ailleurs-liste b{font-family:'Archivo',sans-serif; font-weight:800;}
+
+  /* Résultat du scrutin dans la bande de dissolution (après le 5 octobre). */
+  .diss-resultat{
+    font-family:'Archivo',sans-serif; font-weight:900; font-size:21px;
+    line-height:1.25; margin:0 0 14px; letter-spacing:-0.01em;
+  }
   #billsResultHead{margin-top:6px; margin-bottom:18px;}
 
   /* Bande légende */
@@ -1840,6 +1849,10 @@ function goToFederal(evt){
          commencera le 17 novembre 2026 ; voir l'objet ASSEMBLY dans le script. -->
     <div class="band band-yellow bleed" id="band-dissolution">
       <h2 data-i18n="diss.h">⚠️ L'Assemblée est dissoute — élections le 5 octobre</h2>
+      <!-- Résultat du scrutin : rempli par applyAssemblyState() depuis
+           ASSEMBLY.resultat, seulement après le 5 octobre et seulement si la
+           phrase a été écrite. Caché sinon. -->
+      <p class="diss-resultat" id="dissResultat" hidden></p>
       <p data-i18n="diss.p1">Le <b>27 août 2026</b>, l'Assemblée nationale a été dissoute : la 43<sup>e</sup> législature est terminée. Il n'y a plus de député·e·s en poste — celles et ceux qui siégeaient sont maintenant candidat·e·s ou se retirent. Le gouvernement, lui, reste en place le temps de la campagne.</p>
       <p data-i18n="diss.p2">Conséquence directe : <b>tous les projets de loi qui n'avaient pas été sanctionnés sont morts avec elle.</b> Ils devront repartir de zéro devant la nouvelle Assemblée, convoquée le <b>17 novembre 2026</b>. Ce qui reste ici, c'est le bilan complet de la 43<sup>e</sup> législature : les lois adoptées, les votes de chaque député·e, et les projets qui n'ont pas abouti.</p>
       <a class="diss-cta" href="/promesses" data-i18n="diss.cta">Ce que les partis promettent →</a>
@@ -1960,10 +1973,16 @@ function goToFederal(evt){
       </h2>
       <p class="view-hero-sub" data-i18n="minhero.sub">Les ministres, puis les 125 député·e·s de tous les partis (<b>les député·e·s sont plus bas</b>) — <b>une seule recherche pour les deux.</b></p>
 
-      <!-- Grande recherche façon maquette : loupe sur cellule jaune -->
-      <div class="brutal-search">
-        <span class="bs-icon" aria-hidden="true">🔍</span>
-        <input type="text" id="searchMinistres" data-i18n-placeholder="ph.searchMinistres" placeholder="Nom, circonscription, région ou ministère…">
+      <!-- Grande recherche façon maquette : loupe sur cellule jaune. Même rangée
+           que sur Projets de loi (.projets-controls = flex + retour à la ligne). -->
+      <div class="projets-controls">
+        <div class="brutal-search">
+          <span class="bs-icon" aria-hidden="true">🔍</span>
+          <input type="text" id="searchMinistres" data-i18n-placeholder="ph.searchMinistres" placeholder="Nom, circonscription, région ou ministère…">
+        </div>
+        <!-- Tri par assiduité aux votes. La logique (toggleMinistresSort) existait
+             depuis le début, mais AUCUN bouton ne la déclenchait. -->
+        <button class="sort-toggle" id="ministresSortToggle" onclick="toggleMinistresSort()">Trier : ordre par défaut</button>
       </div>
     </div>
 
@@ -2097,6 +2116,8 @@ function goToFederal(evt){
       </div>
       <div class="toolbar">
         <input type="text" id="searchVotes" data-i18n-placeholder="ph.searchVotes" placeholder="Mot-clé : sujet, numéro de projet de loi…">
+        <!-- Tous / Divisés / Projets de loi / Motions — rempli par renderVotesQuickFilters(). -->
+        <div class="quick-filters" id="votesQuickFilters"></div>
       </div>
     </div>
 
@@ -2938,9 +2959,7 @@ function applyLanguage(){
   renderMinistres(document.getElementById('searchMinistres').value);
   renderStatusFilters();
   renderStepFilters();
-  updateSortToggleLabel();
-  updateMotionsToggleLabel();
-  updateMinistresSortLabel();
+  updateSortToggleLabel();  updateMinistresSortLabel();
   renderAccountBox();
   renderFlagBox();
   renderAdminFlagCounts();
@@ -2977,6 +2996,28 @@ function applyLanguage(){
 function applyAssemblyState(){
   if(typeof ASSEMBLY === 'undefined' || !ASSEMBLY.dissolved) return;
   const isEn = currentLang === 'en';
+  // ENTRE LE SCRUTIN ET LA NOUVELLE LÉGISLATURE : le site ne doit pas annoncer au
+  // futur une élection qui a eu lieu. La phase vient de la date locale du
+  // visiteur (ASSEMBLY.phase) — rien à faire le matin du 6. Le résultat, lui,
+  // n'apparaît que si quelqu'un l'a écrit dans ASSEMBLY.resultat.
+  if(ASSEMBLY.phase === 'entre-deux'){
+    const cal = document.querySelector('[data-i18n="cal.status"]');
+    if(cal) cal.textContent = isEn
+      ? '● Assembly dissolved on August 27, 2026 · election held October 5 · new legislature November 17'
+      : '● Assemblée dissoute le 27 août 2026 · élection tenue le 5 octobre · nouvelle législature le 17 novembre';
+    const h = document.querySelector('[data-i18n="diss.h"]');
+    if(h) h.textContent = isEn
+      ? '⚠️ The Assembly is dissolved — the election was held on October 5'
+      : '⚠️ L\'Assemblée est dissoute — l\'élection a eu lieu le 5 octobre';
+    const p1 = document.querySelector('[data-i18n="diss.p1"]');
+    if(p1) p1.innerHTML = isEn
+      ? 'On <b>August 27, 2026</b>, the National Assembly was dissolved and the 43rd legislature ended. The general election was held on <b>October 5</b>. The new Assembly is convened on <b>November 17, 2026</b>; until then, the government stays in place to handle current business.'
+      : 'Le <b>27 août 2026</b>, l\'Assemblée nationale a été dissoute et la 43<sup>e</sup> législature a pris fin. L\'élection générale a eu lieu le <b>5 octobre</b>. La nouvelle Assemblée est convoquée le <b>17 novembre 2026</b> ; d\'ici là, le gouvernement reste en place pour expédier les affaires courantes.';
+    const res = document.getElementById('dissResultat');
+    const txt = isEn ? (ASSEMBLY.resultatEn || ASSEMBLY.resultat) : ASSEMBLY.resultat;
+    if(res){ res.hidden = !txt; res.textContent = txt || ''; }
+    if(typeof renderTicker === 'function') renderTicker(); // il lit cal.status
+  }
   // Le titre et le sous-titre des pétitions annonçaient des pétitions
   // « actuellement ouvertes pour signature », ce qui contredisait l'avis affiché
   // juste en dessous (aucune ne peut être signée pendant la dissolution).
@@ -3064,7 +3105,7 @@ const ministers = [
 /* BILLS_DATA_START — généré automatiquement par scrapers/build-frontend-data.js à partir de
    data/bills.json (voir scrapers/bills.js, bill-details.js, bill-summaries.js). Ne pas éditer
    ce bloc à la main : relancer `node scrapers/build-frontend-data.js` à la place.
-   Généré le 2026-09-12T12:06:50.156Z */
+   Généré le 2026-09-12T14:16:02.949Z */
 const bills = [
   {
     "id": 27463,
@@ -5673,7 +5714,7 @@ const votes = [{"id":"1-1","date":"2022-12-02","stage":"Motion sans préavis","s
    L'ID assnat (5e valeur) sert à rapprocher chaque député·e du détail nominatif des
    votes (voir scrapers/votes.js) sans dépendre du nom, qui peut être ambigu.
    [Nom complet, Circonscription, Région, Parti, ID assnat]. Ne pas éditer ce bloc à la main.
-   Généré le 2026-09-12T12:06:50.204Z */
+   Généré le 2026-09-12T14:16:03.031Z */
 const deputesRaw = [
 ["Éric Caire","La Peltrie","Capitale-Nationale","CAQ",485],["Pascal Bérubé","Matane-Matapédia","Bas-Saint-Laurent","PQ",991],["Christian Dubé","La Prairie","Montérégie","IND",12223],["Geneviève Guilbault","Louis-Hébert","Capitale-Nationale","CAQ",16885],["Caroline Proulx","Berthier","Lanaudière","CAQ",17837],["André Bachand","Richmond","Estrie","CAQ",17859],["Christopher Skeete","Sainte-Rose","Laval","CAQ",17873],["Christine Labrie","Sherbrooke","Estrie","QS",17889],["Denis Lamothe","Ungava","Nord-du-Québec","CAQ",17901],["Gilles Bélanger","Orford","Estrie","IND",17925],["Mathieu Lacombe","Papineau","Outaouais","CAQ",17927],["Eric Girard","Groulx","Saguenay–Lac-Saint-Jean","CAQ",17929],["Catherine Blouin","Bonaventure","Gaspésie–Îles-de-la-Madeleine","CAQ",19251],["Guillaume Cliche-Rivard","Saint-Henri–Sainte-Anne","Montréal","QS",19593],["Catherine Gentilcore","Terrebonne","Lanaudière","PQ",20131],["Alex Boissonneault","Arthabaska","Centre-du-Québec","PQ",20141],["Marie-Karlynn Laflamme","Chicoutimi","Saguenay–Lac-Saint-Jean","PQ",20193],["Suzanne Blais","Abitibi-Ouest","Abitibi-Témiscamingue","CAQ",17825],["André Albert Morin","Acadie","Montréal","PLQ",19253],["Agnès Grondin","Argenteuil","Laurentides","CAQ",17827],["Luc Provençal","Beauce-Nord","Chaudière-Appalaches","CAQ",17829],["Samuel Poulin","Beauce-Sud","Chaudière-Appalaches / Estrie","CAQ",17831],["Claude Reid","Beauharnois","Montérégie","CAQ",17833],["Stéphanie Lachance","Bellechasse","Chaudière-Appalaches","CAQ",17835],["France-Élaine Duranceau","Bertrand","Lanaudière / Laurentides","CAQ",19257],["Mario Laframboise","Blainville","Laurentides","CAQ",15357],["Simon Jolin-Barrette","Borduas","Montérégie","CAQ",15359],["Isabelle Charest","Brome-Missisquoi","Estrie","CAQ",17845],["Paul St-Pierre Plamondon","Camille-Laurin","Montréal","PQ",19289],["Jean-François Roberge","Chambly","Montérégie","CAQ",15361],["Sonia LeBel","Champlain","Mauricie","CAQ",17847],["Mathieu Lévesque","Chapleau","Outaouais","CAQ",17851],["Jonatan Julien","Charlesbourg","Capitale-Nationale","CAQ",17855],["Kariane Bourassa","Charlevoix–Côte-de-Beaupré","Capitale-Nationale","CAQ",19291],["Marie-Belle Gendron","Châteauguay","Montérégie","CAQ",19293],["Sylvain Lévesque","Chauveau","Capitale-Nationale","CAQ",12213],["Martine Biron","Chutes-de-la-Chaudière","Chaudière-Appalaches","CAQ",19297],["Mathieu Rivest","Côte-du-Sud","Bas-Saint-Laurent / Chaudière-Appalaches","CAQ",19299],["Elisabeth Prass","D'Arcy-McGee","Montréal","PLQ",19301],["Benoit Charette","Deux-Montagnes","Laurentides","CAQ",195],["Sébastien Schneeberger","Drummond–Bois-Francs","Centre-du-Québec","CAQ",5909],["Stéphane Sainte-Croix","Gaspé","Gaspésie–Îles-de-la-Madeleine","CAQ",19319],["Robert Bussière","Gatineau","Outaouais","CAQ",17921],["Gabriel Nadeau-Dubois","Gouin","Montréal","QS",16827],["François Bonnardel","Granby","Estrie","CAQ",11],["Alexandre Leduc","Hochelaga-Maisonneuve","Montréal","QS",17935],["Suzanne Tremblay","Hull","Outaouais","CAQ",19323],["Carole Mallette","Huntingdon","Montérégie","CAQ",19351],["Audrey Bogemans","Iberville","Montérégie","CAQ",19325],["Joël Arseneau","Îles-de-la-Madeleine","Gaspésie–Îles-de-la-Madeleine","PQ",17947],["Gregory Kelley","Jacques-Cartier","Montréal","PLQ",17951],["Sol Zanetti","Jean-Lesage","Capitale-Nationale","QS",17955],["Filomena Rotiroti","Jeanne-Mance–Viger","Montréal","PLQ",1171],["André Lamontagne","Johnson","Centre-du-Québec / Montérégie","CAQ",15401],["François St-Louis","Joliette","Lanaudière","CAQ",19321],["Yannick Gagnon","Jonquière","Saguenay–Lac-Saint-Jean","CAQ",19317],["Linda Caron","La Pinière","Montérégie","PLQ",19313],["Chantale Jeannotte","Labelle","Laurentides","CAQ",17959],["Eric Girard","Lac-Saint-Jean","Saguenay–Lac-Saint-Jean","CAQ",17957],["Marc Tanguay","LaFontaine","Montréal","PLQ",11789],["François Legault","L'Assomption","Lanaudière","CAQ",4131],["Andrés Fontecilla","Laurier-Dorion","Montréal","QS",17953],["Céline Haytayan","Laval-des-Rapides","Laval","CAQ",19309],["Marie-Louise Tardif","Laviolette–Saint-Maurice","Mauricie","CAQ",18071],["Isabelle Lecours","Lotbinière-Frontenac","Chaudière-Appalaches","CAQ",17945],["Bernard Drainville","Lévis","Chaudière-Appalaches","CAQ",209],["Shirley Dorismond","Marie-Victorin","Montérégie","CAQ",19063],["Enrico Ciccone","Marquette","Montréal","PLQ",17943],["Simon Allaire","Maskinongé","Mauricie","CAQ",17941],["Mathieu Lemay","Masson","Lanaudière","CAQ",15403],["Haroun Bouazzi","Maurice-Richard","Montréal","QS",19305],["François Jacques","Mégantic","Chaudière-Appalaches / Estrie","CAQ",17937],["Ruba Ghazal","Mercier","Montréal","QS",17933],["Sylvie D'Amours","Mirabel","Laurentides","CAQ",15399],["Suzanne Roy","Verchères","Montérégie","CAQ",19265],["Jean-François Simard","Montmorency","Capitale-Nationale","CAQ",5369],["Michelle Setlakwe","Mont-Royal–Outremont","Montréal","PLQ",19285],["Monsef Derraji","Nelligan","Montréal","PLQ",17923],["Donald Martel","Nicolet-Bécancour","Centre-du-Québec","CAQ",12165],["Désirée McGraw","Notre-Dame-de-Grâce","Montréal","PLQ",19283],["Chantal Rouleau","Pointe-aux-Trembles","Montréal","CAQ",17931],["André Fortin","Pontiac","Outaouais","PLQ",15383],["Vincent Caron","Portneuf","Capitale-Nationale","CAQ",17849],["Yves Montigny","René-Lévesque","Côte-Nord","CAQ",19279],["Pascale Déry","Repentigny","Lanaudière","CAQ",19277],["Jean-Bernard Émond","Richelieu","Montérégie","CAQ",17857],["Amélie Dionne","Rivière-du-Loup–Témiscouata","Bas-Saint-Laurent","CAQ",19273],["Brigitte B. Garceau","Robert-Baldwin","Montréal","PLQ",19271],["Nancy Guillemette","Roberval","Saguenay–Lac-Saint-Jean","CAQ",18247],["Louis-Charles Thouin","Rousseau","Lanaudière","CAQ",18073],["Daniel Bernard","Rouyn-Noranda–Témiscamingue","Abitibi-Témiscamingue","CAQ",13],["Manon Massé","Sainte-Marie–Saint-Jacques","Montréal","QS",15421],["Louis Lemieux","Saint-Jean","Montérégie","CAQ",17879],["Christine Fréchette","Sanguinet","Montérégie","CAQ",19269],["Etienne Grandmont","Taschereau","Capitale-Nationale","QS",19267],["Jean Boulet","Trois-Rivières","Mauricie","CAQ",17899],["Ian Lafrenière","Vachon","Montérégie","CAQ",17903],["Mario Asselin","Vanier-Les Rivières","Capitale-Nationale","CAQ",17905],["Alejandra Zaga Mendez","Verdun","Montréal","QS",19263],["Frantz Benjamin","Viau","Montréal","PLQ",17909],["Valérie Schmaltz","Vimont","Laval","CAQ",19259],["Karine Boivin Roy","Anjou–Louis-Riel","Montréal","CAQ",19255],["Sonia Bélanger","Prévost","Laurentides","CAQ",19281],["Alice Abou-Khalil","Fabre","Laval","CAQ",19315],["Kateri Champagne Jourdain","Duplessis","Côte-Nord","CAQ",19303],["Frédéric Beauchemin","Marguerite-Bourgeoys","Montréal","PLQ",19307],["Pascal Paradis","Jean-Talon","Capitale-Nationale","PQ",19999],["Youri Chassin","Saint-Jérôme","Laurentides","IND",17881],["Marie-Claude Nichols","Vaudreuil","Montérégie","PLQ",15439],["Pierre Dufour","Abitibi-Est","Abitibi-Témiscamingue","IND",17823],["Isabelle Poulet","Laporte","Montérégie","IND",19311],["Vincent Marissal","Rosemont","Montréal","IND",17867],["Marwah Rizqy","Saint-Laurent","Montréal","IND",17883],["Sona Lakhoyan Olivier","Chomedey","Laval","IND",19295],["François Tremblay","Dubuc","Saguenay–Lac-Saint-Jean","IND",17917],["Maïté Blanchette Vézina","Rimouski","Bas-Saint-Laurent","PCQ",19275],["Lionel Carmant","Taillon","Montérégie","CAQ",17893],["Nathalie Roy","Montarville","Montérégie","CAQ",12187],["Marilyne Picard","Soulanges","Montérégie","CAQ",17891],["Geneviève Hébert","Saint-François","Estrie","CAQ",17877],["Jennifer Maccarone","Westmount–Saint-Louis","Montréal","PLQ",17911],["Virginie Dufour","Mille-Îles","Laval","PLQ",19287],["Madwa-Nika Cadet","Bourassa-Sauvé","Montréal","PLQ",19261],["Lucie Lecours","Les Plaines","Lanaudière / Laurentides","CAQ",17949],["Chantal Soucy","Saint-Hyacinthe","Montérégie","CAQ",15417]
 ];
@@ -6347,7 +6388,7 @@ const deputesDirectoryUrl = 'https://www.assnat.qc.ca/fr/deputes/index.html';
    officiel assnat.qc.ca uniquement — pas de réseaux sociaux (voir la conversation :
    pas de façon fiable de vérifier qu'un compte Google trouvé par nom appartient
    vraiment à la bonne personne). Ne pas éditer ce bloc à la main.
-   Généré le 2026-09-12T12:06:50.247Z */
+   Généré le 2026-09-12T14:16:03.108Z */
 const deputeEmails = {
   "eric caire": "Eric.Caire.LAPE@assnat.qc.ca",
   "pascal berube": "Pascal.Berube.MATN@assnat.qc.ca",
@@ -6653,567 +6694,727 @@ function initials(name){
 // Vrais éléments datés, tirés de la page d'accueil assnat.qc.ca (relevés le 12 juin 2026)
 /* NEWS_DATA_START — généré par scrapers/build-news-data.js à partir de data/bills.json
    et data/votes.json. Ne pas éditer à la main : relancer le build.
-   Généré le 2026-09-12T12:06:50.576Z */
+   Généré le 2026-09-12T14:16:03.619Z */
 const newsItems = [
   {
     "date": "2026-06-12",
     "label": "12 juin 2026",
     "labelEn": "June 12, 2026",
     "text": "Sanction du projet de loi n° 3 — Loi visant à assurer la représentation effective des électeurs",
-    "textEn": "Bill 3 assented to — Act to ensure the effective representation of electors"
+    "textEn": "Bill 3 assented to — Act to ensure the effective representation of electors",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=3",
+    "guid": "sanction-3-2026-06-12"
   },
   {
     "date": "2026-06-12",
     "label": "12 juin 2026",
     "labelEn": "June 12, 2026",
     "text": "Sanction du projet de loi n° 10 — Loi protégeant les consommateurs contre les pratiques abusives de revente de billets et de renouvellemen…",
-    "textEn": "Bill 10 assented to — Act to protect consumers against abusive ticket resale practices and online subscription renewals"
+    "textEn": "Bill 10 assented to — Act to protect consumers against abusive ticket resale practices and online subscription renewals",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=10",
+    "guid": "sanction-10-2026-06-12"
   },
   {
     "date": "2026-06-12",
     "label": "12 juin 2026",
     "labelEn": "June 12, 2026",
     "text": "Sanction du projet de loi n° 17 — Loi modifiant la Loi sur le stockage de gaz naturel et sur les conduites de gaz naturel et de pétrole au…",
-    "textEn": "Bill 17 assented to — Act to amend the Act respecting the storage of natural gas and respecting natural gas and oil pipelines…"
+    "textEn": "Bill 17 assented to — Act to amend the Act respecting the storage of natural gas and respecting natural gas and oil pipelines…",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=17",
+    "guid": "sanction-17-2026-06-12"
   },
   {
     "date": "2026-06-12",
     "label": "12 juin 2026",
     "labelEn": "June 12, 2026",
     "text": "Sanction du projet de loi n° 22 — Loi bonifiant les pouvoirs d’intervention des municipalités et modifiant d’autres dispositions législati…",
-    "textEn": "Bill 22 assented to — Act to enhance the intervention powers of municipalities and to amend other legislative provisions"
+    "textEn": "Bill 22 assented to — Act to enhance the intervention powers of municipalities and to amend other legislative provisions",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=22",
+    "guid": "sanction-22-2026-06-12"
   },
   {
     "date": "2026-06-12",
     "label": "12 juin 2026",
     "labelEn": "June 12, 2026",
     "text": "Sanction du projet de loi n° 23 — Loi visant principalement à mieux accompagner les personnes dont l’état mental pourrait représenter un r…",
-    "textEn": "Bill 23 assented to — Act mainly to better support persons whose mental state could pose a risk to their own safety or that of…"
+    "textEn": "Bill 23 assented to — Act mainly to better support persons whose mental state could pose a risk to their own safety or that of…",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=23",
+    "guid": "sanction-23-2026-06-12"
   },
   {
     "date": "2026-06-12",
     "label": "12 juin 2026",
     "labelEn": "June 12, 2026",
     "text": "Sanction du projet de loi n° 24 — Loi protégeant le consommateur contre l’utilisation trompeuse ou frauduleuse de l’identité ou de l’image…",
-    "textEn": "Bill 24 assented to — Act to protect consumers against misleading or fraudulent use of a person's identity or image"
+    "textEn": "Bill 24 assented to — Act to protect consumers against misleading or fraudulent use of a person's identity or image",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=24",
+    "guid": "sanction-24-2026-06-12"
   },
   {
     "date": "2026-06-12",
     "label": "12 juin 2026",
     "labelEn": "June 12, 2026",
     "text": "Dépôt du projet de loi n° 692 — Loi visant à créer un nouvel outil de conservation volontaire des milieux naturels",
-    "textEn": "Bill 692 introduced — Act to create a new tool for the voluntary conservation of natural environments"
+    "textEn": "Bill 692 introduced — Act to create a new tool for the voluntary conservation of natural environments",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=692",
+    "guid": "depot-692-2026-06-12"
   },
   {
     "date": "2026-06-11",
     "label": "11 juin 2026",
     "labelEn": "June 11, 2026",
     "text": "Sanction du projet de loi n° 4 — Loi sur la communication de renseignements aux fins de protection contre la violence d’un partenaire int…",
-    "textEn": "Bill 4 assented to — Act respecting the disclosure of information for the protection against intimate partner violence and am…"
+    "textEn": "Bill 4 assented to — Act respecting the disclosure of information for the protection against intimate partner violence and am…",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=4",
+    "guid": "sanction-4-2026-06-11"
   },
   {
     "date": "2026-06-11",
     "label": "11 juin 2026",
     "labelEn": "June 11, 2026",
     "text": "Sanction du projet de loi n° 9 — Loi visant à prévenir les effets nocifs de la boisson énergisante sur la santé des jeunes",
-    "textEn": "Bill 9 assented to — Act to prevent the harmful effects of energy drinks on young people's health"
+    "textEn": "Bill 9 assented to — Act to prevent the harmful effects of energy drinks on young people's health",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=9",
+    "guid": "sanction-9-2026-06-11"
   },
   {
     "date": "2026-06-11",
     "label": "11 juin 2026",
     "labelEn": "June 11, 2026",
     "text": "Sanction du projet de loi n° 11 — Loi modifiant diverses dispositions principalement aux fins d’allègement du fardeau réglementaire et adm…",
-    "textEn": "Bill 11 assented to — Act to amend various provisions mainly for the purpose of reducing the regulatory and administrative bur…"
+    "textEn": "Bill 11 assented to — Act to amend various provisions mainly for the purpose of reducing the regulatory and administrative bur…",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=11",
+    "guid": "sanction-11-2026-06-11"
   },
   {
     "date": "2026-06-11",
     "label": "11 juin 2026",
     "labelEn": "June 11, 2026",
     "text": "Sanction du projet de loi n° 12 — Loi instituant la prestation de services de garde éducatifs à l’enfance par les personnes reconnues à ti…",
-    "textEn": "Bill 12 assented to — An Act to establish the provision of educational childcare services by persons recognized as in-charge o…"
+    "textEn": "Bill 12 assented to — An Act to establish the provision of educational childcare services by persons recognized as in-charge o…",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=12",
+    "guid": "sanction-12-2026-06-11"
   },
   {
     "date": "2026-06-11",
     "label": "11 juin 2026",
     "labelEn": "June 11, 2026",
     "text": "Sanction du projet de loi n° 200 — Loi concernant Le Country Club de Montréal",
-    "textEn": "Bill 200 assented to — Act respecting Le Country Club de Montréal"
+    "textEn": "Bill 200 assented to — Act respecting Le Country Club de Montréal",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=200",
+    "guid": "sanction-200-2026-06-11"
   },
   {
     "date": "2026-06-11",
     "label": "11 juin 2026",
     "labelEn": "June 11, 2026",
     "text": "Sanction du projet de loi n° 201 — Loi concernant le Monastère des Ursulines de Québec",
-    "textEn": "Bill 201 assented to — Act respecting the Monastère des Ursulines de Québec"
+    "textEn": "Bill 201 assented to — Act respecting the Monastère des Ursulines de Québec",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=201",
+    "guid": "sanction-201-2026-06-11"
   },
   {
     "date": "2026-06-11",
     "label": "11 juin 2026",
     "labelEn": "June 11, 2026",
     "text": "Sanction du projet de loi n° 204 — Loi concernant la Ville de Gatineau",
-    "textEn": "Bill 204 assented to — Act respecting the Ville de Gatineau"
+    "textEn": "Bill 204 assented to — Act respecting the Ville de Gatineau",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=204",
+    "guid": "sanction-204-2026-06-11"
   },
   {
     "date": "2026-06-11",
     "label": "11 juin 2026",
     "labelEn": "June 11, 2026",
     "text": "Sanction du projet de loi n° 205 — Loi concernant un immeuble situé sur le territoire de la Ville de Québec",
-    "textEn": "Bill 205 assented to — Act respecting a building located in the territory of Ville de Québec"
+    "textEn": "Bill 205 assented to — Act respecting a building located in the territory of Ville de Québec",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=205",
+    "guid": "sanction-205-2026-06-11"
   },
   {
     "date": "2026-06-11",
     "label": "11 juin 2026",
     "labelEn": "June 11, 2026",
     "text": "6 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "6 recorded divisions held in the Assembly."
+    "textEn": "6 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-06-11"
   },
   {
     "date": "2026-06-10",
     "label": "10 juin 2026",
     "labelEn": "June 10, 2026",
     "text": "Dépôt du projet de loi n° 13 — Loi instaurant la charge de greffier spécial",
-    "textEn": "Bill 13 introduced — Act to establish the office of special clerk"
+    "textEn": "Bill 13 introduced — Act to establish the office of special clerk",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=13",
+    "guid": "depot-13-2026-06-10"
   },
   {
     "date": "2026-06-10",
     "label": "10 juin 2026",
     "labelEn": "June 10, 2026",
     "text": "3 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "3 recorded divisions held in the Assembly."
+    "textEn": "3 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-06-10"
   },
   {
     "date": "2026-06-05",
     "label": "5 juin 2026",
     "labelEn": "June 5, 2026",
     "text": "Dépôt du projet de loi n° 691 — Loi sur le maintien de l’autonomie des personnes aînées",
-    "textEn": "Bill 691 introduced — Act to Maintain the Autonomy of Older Persons"
+    "textEn": "Bill 691 introduced — Act to Maintain the Autonomy of Older Persons",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=691",
+    "guid": "depot-691-2026-06-05"
   },
   {
     "date": "2026-06-05",
     "label": "5 juin 2026",
     "labelEn": "June 5, 2026",
     "text": "Dépôt du projet de loi n° 796 — Loi visant à protéger les jeunes contre les effets néfastes des écrans notamment en encadrant les médias…",
-    "textEn": "Bill 796 introduced — Act to protect young people from the harmful effects of screens, in particular by regulating social medi…"
+    "textEn": "Bill 796 introduced — Act to protect young people from the harmful effects of screens, in particular by regulating social medi…",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=796",
+    "guid": "depot-796-2026-06-05"
   },
   {
     "date": "2026-06-05",
     "label": "5 juin 2026",
     "labelEn": "June 5, 2026",
     "text": "30 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "30 recorded divisions held in the Assembly."
+    "textEn": "30 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-06-05"
   },
   {
     "date": "2026-06-04",
     "label": "4 juin 2026",
     "labelEn": "June 4, 2026",
     "text": "Sanction du projet de loi n° 7 — Loi n° 2 sur les crédits, 2026-2027",
-    "textEn": "Bill 7 assented to — Appropriation Act No. 2, 2026-2027"
+    "textEn": "Bill 7 assented to — Appropriation Act No. 2, 2026-2027",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=7",
+    "guid": "sanction-7-2026-06-04"
   },
   {
     "date": "2026-06-04",
     "label": "4 juin 2026",
     "labelEn": "June 4, 2026",
     "text": "Dépôt du projet de loi n° 8 — Loi encadrant la langue de l’enseignement en formation professionnelle et en formation générale des adul…",
-    "textEn": "Bill 8 introduced — Act Regulating the Language of Instruction in Vocational Training and Adult General Education"
+    "textEn": "Bill 8 introduced — Act Regulating the Language of Instruction in Vocational Training and Adult General Education",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=8",
+    "guid": "depot-8-2026-06-04"
   },
   {
     "date": "2026-06-04",
     "label": "4 juin 2026",
     "labelEn": "June 4, 2026",
     "text": "4 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "4 recorded divisions held in the Assembly."
+    "textEn": "4 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-06-04"
   },
   {
     "date": "2026-06-03",
     "label": "3 juin 2026",
     "labelEn": "June 3, 2026",
     "text": "2 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "2 recorded divisions held in the Assembly."
+    "textEn": "2 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-06-03"
   },
   {
     "date": "2026-06-02",
     "label": "2 juin 2026",
     "labelEn": "June 2, 2026",
     "text": "2 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "2 recorded divisions held in the Assembly."
+    "textEn": "2 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-06-02"
   },
   {
     "date": "2026-05-28",
     "label": "28 mai 2026",
     "labelEn": "May 28, 2026",
     "text": "Dépôt du projet de loi n° 698 — Loi sur la coconstruction des mesures législatives et réglementaires touchant les Premières Nations et l…",
-    "textEn": "Bill 698 introduced — Act respecting the co-construction of legislative and regulatory measures affecting First Nations and In…"
+    "textEn": "Bill 698 introduced — Act respecting the co-construction of legislative and regulatory measures affecting First Nations and In…",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=698",
+    "guid": "depot-698-2026-05-28"
   },
   {
     "date": "2026-05-28",
     "label": "28 mai 2026",
     "labelEn": "May 28, 2026",
     "text": "2 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "2 recorded divisions held in the Assembly."
+    "textEn": "2 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-05-28"
   },
   {
     "date": "2026-05-27",
     "label": "27 mai 2026",
     "labelEn": "May 27, 2026",
     "text": "Dépôt du projet de loi n° 791 — Loi modifiant la Loi électorale aux fins de protéger de manière permanente les circonscriptions de Gaspé…",
-    "textEn": "Bill 791 introduced — Act to amend the Election Act for the purpose of permanently protecting the electoral divisions of Gaspé…"
+    "textEn": "Bill 791 introduced — Act to amend the Election Act for the purpose of permanently protecting the electoral divisions of Gaspé…",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=791",
+    "guid": "depot-791-2026-05-27"
   },
   {
     "date": "2026-05-27",
     "label": "27 mai 2026",
     "labelEn": "May 27, 2026",
     "text": "3 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "3 recorded divisions held in the Assembly."
+    "textEn": "3 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-05-27"
   },
   {
     "date": "2026-05-26",
     "label": "26 mai 2026",
     "labelEn": "May 26, 2026",
     "text": "2 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "2 recorded divisions held in the Assembly."
+    "textEn": "2 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-05-26"
   },
   {
     "date": "2026-05-14",
     "label": "14 mai 2026",
     "labelEn": "May 14, 2026",
     "text": "Dépôt du projet de loi n° 599 — Loi proclamant la Journée nationale de sensibilisation aux enjeux vécus par les personnes immunosupprimé…",
-    "textEn": "Bill 599 introduced — Act to proclaim National Awareness Day for the Issues Faced by Immunosuppressed Persons"
+    "textEn": "Bill 599 introduced — Act to proclaim National Awareness Day for the Issues Faced by Immunosuppressed Persons",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=599",
+    "guid": "depot-599-2026-05-14"
   },
   {
     "date": "2026-05-14",
     "label": "14 mai 2026",
     "labelEn": "May 14, 2026",
     "text": "Dépôt du projet de loi n° 690 — Loi sur le droit à l’alimentation",
-    "textEn": "Bill 690 introduced — Act respecting the right to food"
+    "textEn": "Bill 690 introduced — Act respecting the right to food",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=690",
+    "guid": "depot-690-2026-05-14"
   },
   {
     "date": "2026-05-14",
     "label": "14 mai 2026",
     "labelEn": "May 14, 2026",
     "text": "1 vote nominatif tenu à l'Assemblée.",
-    "textEn": "1 recorded division held in the Assembly."
+    "textEn": "1 recorded division held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-05-14"
   },
   {
     "date": "2026-05-13",
     "label": "13 mai 2026",
     "labelEn": "May 13, 2026",
     "text": "Dépôt du projet de loi n° 696 — Loi visant à garantir la liberté des personnes exploitant un établissement d’hébergement touristique qua…",
-    "textEn": "Bill 696 introduced — Act to guarantee the freedom of persons operating a tourist accommodation establishment with regard to t…"
+    "textEn": "Bill 696 introduced — Act to guarantee the freedom of persons operating a tourist accommodation establishment with regard to t…",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=696",
+    "guid": "depot-696-2026-05-13"
   },
   {
     "date": "2026-05-13",
     "label": "13 mai 2026",
     "labelEn": "May 13, 2026",
     "text": "3 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "3 recorded divisions held in the Assembly."
+    "textEn": "3 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-05-13"
   },
   {
     "date": "2026-05-12",
     "label": "12 mai 2026",
     "labelEn": "May 12, 2026",
     "text": "Dépôt du projet de loi n° 6 — Loi donnant suite à des mesures fiscales annoncées lors du discours sur le budget du 18 mars 2026 et du…",
-    "textEn": "Bill 6 introduced — Act to give effect to fiscal measures announced in the budget speech of 18 March 2026 and in the update…"
+    "textEn": "Bill 6 introduced — Act to give effect to fiscal measures announced in the budget speech of 18 March 2026 and in the update…",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=6",
+    "guid": "depot-6-2026-05-12"
   },
   {
     "date": "2026-05-12",
     "label": "12 mai 2026",
     "labelEn": "May 12, 2026",
     "text": "1 vote nominatif tenu à l'Assemblée.",
-    "textEn": "1 recorded division held in the Assembly."
+    "textEn": "1 recorded division held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-05-12"
   },
   {
     "date": "2026-05-07",
     "label": "7 mai 2026",
     "labelEn": "May 7, 2026",
     "text": "Dépôt du projet de loi n° 596 — Loi renforçant l’intégrité et la protection des droits et libertés de la personne",
-    "textEn": "Bill 596 introduced — Act to strengthen integrity and the protection of human rights and freedoms"
+    "textEn": "Bill 596 introduced — Act to strengthen integrity and the protection of human rights and freedoms",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=596",
+    "guid": "depot-596-2026-05-07"
   },
   {
     "date": "2026-05-07",
     "label": "7 mai 2026",
     "labelEn": "May 7, 2026",
     "text": "2 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "2 recorded divisions held in the Assembly."
+    "textEn": "2 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-05-07"
   },
   {
     "date": "2026-05-06",
     "label": "6 mai 2026",
     "labelEn": "May 6, 2026",
     "text": "Dépôt du projet de loi n° 191 — Loi mettant en place des mesures concernant les approches complémentaires et intégratives en santé",
-    "textEn": "Bill 191 introduced — Act respecting measures concerning complementary and integrative health approaches"
+    "textEn": "Bill 191 introduced — Act respecting measures concerning complementary and integrative health approaches",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=191",
+    "guid": "depot-191-2026-05-06"
   },
   {
     "date": "2026-05-06",
     "label": "6 mai 2026",
     "labelEn": "May 6, 2026",
     "text": "2 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "2 recorded divisions held in the Assembly."
+    "textEn": "2 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-05-06"
   },
   {
     "date": "2026-04-02",
     "label": "2 avril 2026",
     "labelEn": "April 2, 2026",
     "text": "Sanction du projet de loi n° 3 — Loi visant à améliorer la transparence, la gouvernance et le processus démocratique de diverses associat…",
-    "textEn": "Bill 3 assented to — Act to improve the transparency, governance and democratic process of various workplace associations"
+    "textEn": "Bill 3 assented to — Act to improve the transparency, governance and democratic process of various workplace associations",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=3",
+    "guid": "sanction-3-2026-04-02"
   },
   {
     "date": "2026-04-02",
     "label": "2 avril 2026",
     "labelEn": "April 2, 2026",
     "text": "Sanction du projet de loi n° 7 — Loi visant à réduire la bureaucratie, à accroître l’efficacité de l’État et à renforcer l’imputabilité d…",
-    "textEn": "Bill 7 assented to — Act to reduce bureaucracy, increase government efficiency and strengthen the accountability of senior of…"
+    "textEn": "Bill 7 assented to — Act to reduce bureaucracy, increase government efficiency and strengthen the accountability of senior of…",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=7",
+    "guid": "sanction-7-2026-04-02"
   },
   {
     "date": "2026-04-02",
     "label": "2 avril 2026",
     "labelEn": "April 2, 2026",
     "text": "Sanction du projet de loi n° 9 — Loi sur le renforcement de la laïcité au Québec",
-    "textEn": "Bill 9 assented to — Act to strengthen secularism in Québec"
+    "textEn": "Bill 9 assented to — Act to strengthen secularism in Québec",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=9",
+    "guid": "sanction-9-2026-04-02"
   },
   {
     "date": "2026-04-02",
     "label": "2 avril 2026",
     "labelEn": "April 2, 2026",
     "text": "Sanction du projet de loi n° 13 — Loi visant à favoriser la sécurité et le sentiment de sécurité de la population et modifiant diverses di…",
-    "textEn": "Bill 13 assented to — Act to promote public safety and the public's sense of safety and to amend various provisions"
+    "textEn": "Bill 13 assented to — Act to promote public safety and the public's sense of safety and to amend various provisions",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=13",
+    "guid": "sanction-13-2026-04-02"
   },
   {
     "date": "2026-04-02",
     "label": "2 avril 2026",
     "labelEn": "April 2, 2026",
     "text": "Sanction du projet de loi n° 15 — Loi modifiant le Code des professions et d’autres dispositions principalement afin d’alléger les process…",
-    "textEn": "Bill 15 assented to — Act to amend the Professional Code and other provisions mainly to streamline regulatory processes of the…"
+    "textEn": "Bill 15 assented to — Act to amend the Professional Code and other provisions mainly to streamline regulatory processes of the…",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=15",
+    "guid": "sanction-15-2026-04-02"
   },
   {
     "date": "2026-04-02",
     "label": "2 avril 2026",
     "labelEn": "April 2, 2026",
     "text": "Sanction du projet de loi n° 18 — Loi modifiant les critères du vote de l’électeur hors Québec",
-    "textEn": "Bill 18 assented to — Act to Amend the Criteria for Voting by Electors Outside Québec"
+    "textEn": "Bill 18 assented to — Act to Amend the Criteria for Voting by Electors Outside Québec",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=18",
+    "guid": "sanction-18-2026-04-02"
   },
   {
     "date": "2026-04-02",
     "label": "2 avril 2026",
     "labelEn": "April 2, 2026",
     "text": "Dépôt du projet de loi n° 590 — Loi modifiant la Loi sur le drapeau et les emblèmes du Québec afin de reconnaître le tartan du Québec",
-    "textEn": "Bill 590 introduced — Act to amend the Flag and Emblems of Québec Act to recognize the tartan of Québec"
+    "textEn": "Bill 590 introduced — Act to amend the Flag and Emblems of Québec Act to recognize the tartan of Québec",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=590",
+    "guid": "depot-590-2026-04-02"
   },
   {
     "date": "2026-04-02",
     "label": "2 avril 2026",
     "labelEn": "April 2, 2026",
     "text": "Dépôt du projet de loi n° 598 — Loi visant à protéger l’enfant et le parent victimes de violence familiale",
-    "textEn": "Bill 598 introduced — Act to protect the child and parent who are victims of family violence"
+    "textEn": "Bill 598 introduced — Act to protect the child and parent who are victims of family violence",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=598",
+    "guid": "depot-598-2026-04-02"
   },
   {
     "date": "2026-04-02",
     "label": "2 avril 2026",
     "labelEn": "April 2, 2026",
     "text": "31 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "31 recorded divisions held in the Assembly."
+    "textEn": "31 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-04-02"
   },
   {
     "date": "2026-04-01",
     "label": "1 avril 2026",
     "labelEn": "April 1, 2026",
     "text": "Dépôt du projet de loi n° 27 — Loi modifiant diverses dispositions concernant les décrets de convention collective et l’industrie de la…",
-    "textEn": "Bill 27 introduced — Act to amend various provisions concerning collective agreement decrees and the construction industry"
+    "textEn": "Bill 27 introduced — Act to amend various provisions concerning collective agreement decrees and the construction industry",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=27",
+    "guid": "depot-27-2026-04-01"
   },
   {
     "date": "2026-04-01",
     "label": "1 avril 2026",
     "labelEn": "April 1, 2026",
     "text": "Dépôt du projet de loi n° 595 — Loi sur l’assistance personnelle autodirigée pour les personnes handicapées",
-    "textEn": "Bill 595 introduced — Act respecting self-directed personal assistance for persons with disabilities"
+    "textEn": "Bill 595 introduced — Act respecting self-directed personal assistance for persons with disabilities",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=595",
+    "guid": "depot-595-2026-04-01"
   },
   {
     "date": "2026-04-01",
     "label": "1 avril 2026",
     "labelEn": "April 1, 2026",
     "text": "1 vote nominatif tenu à l'Assemblée.",
-    "textEn": "1 recorded division held in the Assembly."
+    "textEn": "1 recorded division held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-04-01"
   },
   {
     "date": "2026-03-31",
     "label": "31 mars 2026",
     "labelEn": "March 31, 2026",
     "text": "3 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "3 recorded divisions held in the Assembly."
+    "textEn": "3 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-03-31"
   },
   {
     "date": "2026-03-26",
     "label": "26 mars 2026",
     "labelEn": "March 26, 2026",
     "text": "4 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "4 recorded divisions held in the Assembly."
+    "textEn": "4 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-03-26"
   },
   {
     "date": "2026-03-25",
     "label": "25 mars 2026",
     "labelEn": "March 25, 2026",
     "text": "1 vote nominatif tenu à l'Assemblée.",
-    "textEn": "1 recorded division held in the Assembly."
+    "textEn": "1 recorded division held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-03-25"
   },
   {
     "date": "2026-03-24",
     "label": "24 mars 2026",
     "labelEn": "March 24, 2026",
     "text": "3 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "3 recorded divisions held in the Assembly."
+    "textEn": "3 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-03-24"
   },
   {
     "date": "2026-03-20",
     "label": "20 mars 2026",
     "labelEn": "March 20, 2026",
     "text": "Sanction du projet de loi n° 26 — Loi n° 1 sur les crédits, 2026-2027",
-    "textEn": "Bill 26 assented to — Appropriation Act No. 1, 2026-2027"
+    "textEn": "Bill 26 assented to — Appropriation Act No. 1, 2026-2027",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=26",
+    "guid": "sanction-26-2026-03-20"
   },
   {
     "date": "2026-03-19",
     "label": "19 mars 2026",
     "labelEn": "March 19, 2026",
     "text": "5 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "5 recorded divisions held in the Assembly."
+    "textEn": "5 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-03-19"
   },
   {
     "date": "2026-03-18",
     "label": "18 mars 2026",
     "labelEn": "March 18, 2026",
     "text": "Dépôt du projet de loi n° 25 — Loi visant à accroître la confiance du public envers le système de justice en modernisant la déontologie…",
-    "textEn": "Bill 25 introduced — Act to increase public confidence in the justice system by modernizing judicial ethics and implementing…"
+    "textEn": "Bill 25 introduced — Act to increase public confidence in the justice system by modernizing judicial ethics and implementing…",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=25",
+    "guid": "depot-25-2026-03-18"
   },
   {
     "date": "2026-03-18",
     "label": "18 mars 2026",
     "labelEn": "March 18, 2026",
     "text": "1 vote nominatif tenu à l'Assemblée.",
-    "textEn": "1 recorded division held in the Assembly."
+    "textEn": "1 recorded division held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-03-18"
   },
   {
     "date": "2026-03-17",
     "label": "17 mars 2026",
     "labelEn": "March 17, 2026",
     "text": "2 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "2 recorded divisions held in the Assembly."
+    "textEn": "2 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-03-17"
   },
   {
     "date": "2026-02-26",
     "label": "26 février 2026",
     "labelEn": "February 26, 2026",
     "text": "Sanction du projet de loi n° 19 — Loi visant notamment l’amélioration de l’accès aux services médicaux et la prise en charge médicale de l…",
-    "textEn": "Bill 19 assented to — Act to notably improve access to medical services and the medical care of the population"
+    "textEn": "Bill 19 assented to — Act to notably improve access to medical services and the medical care of the population",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=19",
+    "guid": "sanction-19-2026-02-26"
   },
   {
     "date": "2026-02-26",
     "label": "26 février 2026",
     "labelEn": "February 26, 2026",
     "text": "Dépôt du projet de loi n° 592 — Loi édictant la Loi sur la régionalisation de l’immigration afin d’instituer des tables régionales de l’…",
-    "textEn": "Bill 592 introduced — An Act to enact the Act respecting the regionalization of immigration in order to establish regional imm…"
+    "textEn": "Bill 592 introduced — An Act to enact the Act respecting the regionalization of immigration in order to establish regional imm…",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=592",
+    "guid": "depot-592-2026-02-26"
   },
   {
     "date": "2026-02-26",
     "label": "26 février 2026",
     "labelEn": "February 26, 2026",
     "text": "5 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "5 recorded divisions held in the Assembly."
+    "textEn": "5 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-02-26"
   },
   {
     "date": "2026-02-25",
     "label": "25 février 2026",
     "labelEn": "February 25, 2026",
     "text": "Dépôt du projet de loi n° 392 — Loi visant à lutter contre le gaspillage alimentaire",
-    "textEn": "Bill 392 introduced — Act to combat food waste"
+    "textEn": "Bill 392 introduced — Act to combat food waste",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=392",
+    "guid": "depot-392-2026-02-25"
   },
   {
     "date": "2026-02-25",
     "label": "25 février 2026",
     "labelEn": "February 25, 2026",
     "text": "Dépôt du projet de loi n° 497 — Loi visant à assurer la qualité de l’air",
-    "textEn": "Bill 497 introduced — Act to ensure air quality"
+    "textEn": "Bill 497 introduced — Act to ensure air quality",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=497",
+    "guid": "depot-497-2026-02-25"
   },
   {
     "date": "2026-02-25",
     "label": "25 février 2026",
     "labelEn": "February 25, 2026",
     "text": "3 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "3 recorded divisions held in the Assembly."
+    "textEn": "3 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-02-25"
   },
   {
     "date": "2026-02-24",
     "label": "24 février 2026",
     "labelEn": "February 24, 2026",
     "text": "Sanction du projet de loi n° 111 — Loi modernisant la Loi sur les coopératives et modifiant d’autres dispositions",
-    "textEn": "Bill 111 assented to — Act to modernize the Act respecting cooperatives and to amend other provisions"
+    "textEn": "Bill 111 assented to — Act to modernize the Act respecting cooperatives and to amend other provisions",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=111",
+    "guid": "sanction-111-2026-02-24"
   },
   {
     "date": "2026-02-24",
     "label": "24 février 2026",
     "labelEn": "February 24, 2026",
     "text": "1 vote nominatif tenu à l'Assemblée.",
-    "textEn": "1 recorded division held in the Assembly."
+    "textEn": "1 recorded division held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-02-24"
   },
   {
     "date": "2026-02-19",
     "label": "19 février 2026",
     "labelEn": "February 19, 2026",
     "text": "2 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "2 recorded divisions held in the Assembly."
+    "textEn": "2 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-02-19"
   },
   {
     "date": "2026-02-18",
     "label": "18 février 2026",
     "labelEn": "February 18, 2026",
     "text": "3 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "3 recorded divisions held in the Assembly."
+    "textEn": "3 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-02-18"
   },
   {
     "date": "2026-02-17",
     "label": "17 février 2026",
     "labelEn": "February 17, 2026",
     "text": "Dépôt du projet de loi n° 498 — Loi retirant des freins à l’efficacité du système de santé",
-    "textEn": "Bill 498 introduced — Act removing barriers to the efficiency of the health system"
+    "textEn": "Bill 498 introduced — Act removing barriers to the efficiency of the health system",
+    "link": "https://dossierquebec.ca/projets-de-loi?pl=498",
+    "guid": "depot-498-2026-02-17"
   },
   {
     "date": "2026-02-17",
     "label": "17 février 2026",
     "labelEn": "February 17, 2026",
     "text": "1 vote nominatif tenu à l'Assemblée.",
-    "textEn": "1 recorded division held in the Assembly."
+    "textEn": "1 recorded division held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-02-17"
   },
   {
     "date": "2026-02-12",
     "label": "12 février 2026",
     "labelEn": "February 12, 2026",
     "text": "4 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "4 recorded divisions held in the Assembly."
+    "textEn": "4 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-02-12"
   },
   {
     "date": "2026-02-11",
     "label": "11 février 2026",
     "labelEn": "February 11, 2026",
     "text": "2 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "2 recorded divisions held in the Assembly."
+    "textEn": "2 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-02-11"
   },
   {
     "date": "2026-02-05",
     "label": "5 février 2026",
     "labelEn": "February 5, 2026",
     "text": "2 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "2 recorded divisions held in the Assembly."
+    "textEn": "2 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-02-05"
   },
   {
     "date": "2026-02-04",
     "label": "4 février 2026",
     "labelEn": "February 4, 2026",
     "text": "1 vote nominatif tenu à l'Assemblée.",
-    "textEn": "1 recorded division held in the Assembly."
+    "textEn": "1 recorded division held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-02-04"
   },
   {
     "date": "2026-02-03",
     "label": "3 février 2026",
     "labelEn": "February 3, 2026",
     "text": "2 votes nominatifs tenus à l'Assemblée.",
-    "textEn": "2 recorded divisions held in the Assembly."
+    "textEn": "2 recorded divisions held in the Assembly.",
+    "link": "https://dossierquebec.ca/votes",
+    "guid": "votes-2026-02-03"
   }
 ];
 /* NEWS_DATA_END */
@@ -7279,7 +7480,7 @@ function toggleRoadmapRecap(id){
 /* PETITIONS_DATA_START — généré automatiquement par scrapers/build-petitions-data.js à partir de
    data/petitions.json (voir scrapers/petitions.js). Ne pas éditer ce bloc à la main :
    relancer `node scrapers/petitions.js && node scrapers/build-petitions-data.js`.
-   Généré le 2026-09-07T14:10:11.854Z */
+   Généré le 2026-09-12T14:16:03.394Z */
 const petitions = [
   {
     "title": "Amélioration de la fluidité routière et maritime aux ponts du canal de Beauharnois",
@@ -7326,7 +7527,7 @@ const petitions = [
 
 /* PROMISES_DATA_START — généré par scrapers/build-promises-data.js à partir de
    data/promises.json (saisi à la main). Éditer le JSON, pas ce bloc.
-   Généré le 2026-09-12T12:06:50.467Z */
+   Généré le 2026-09-12T14:16:03.488Z */
 const promises = [
   {
     "id": "qs-50a74c2b",
@@ -8085,7 +8286,25 @@ const ASSEMBLY = {
   dissolvedOn: '2026-08-27',
   electionOn: '2026-10-05',
   newLegislatureOn: '2026-11-17',
+  // À remplir À LA MAIN le soir du 5 octobre : UNE phrase, factuelle, sans
+  // adjectif — p. ex. « Le Parti Québécois forme un gouvernement majoritaire
+  // (63 sièges). » Vide tant que ce n'est pas officiel : la bande passe au
+  // passé toute seule (voir phase), mais n'invente jamais de résultat.
+  resultat: '',
+  resultatEn: '',
 };
+// Phase déduite de la DATE LOCALE du visiteur, pour que le site ne dise pas
+// « élections le 5 octobre » le matin du 6 sans que personne n'ait à y toucher —
+// c'est le moment de trafic maximal, et un site au futur y aurait l'air
+// abandonné. Le jour du vote compte encore comme campagne (on vote jusqu'à
+// 20 h). Le retour à « legislature » reste MANUEL : dissolved = false le
+// 17 novembre, quand la nouvelle Assemblée siège.
+ASSEMBLY.phase = (function(){
+  if(!ASSEMBLY.dissolved) return 'legislature';
+  const d = new Date();
+  const local = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  return local > ASSEMBLY.electionOn ? 'entre-deux' : 'campagne';
+})();
 
 function statusLabel(s, step){
   const isEn = currentLang === 'en';
@@ -8376,19 +8595,78 @@ function toggleBillsSort(){
   renderBills();
 }
 
-let showMotions = false;
-function updateMotionsToggleLabel(){
-  const btn = document.getElementById('motionsToggle');
-  if(!btn) return;
-  const motionCount = votes.filter(v=>!v.billNum).length;
-  const show = currentLang==='en' ? `Show motions (${motionCount})` : `Afficher les motions (${motionCount})`;
-  const hide = currentLang==='en' ? 'Hide motions' : 'Masquer les motions';
-  btn.textContent = showMotions ? hide : show;
-}
-function toggleShowMotions(){
-  showMotions = !showMotions;
-  updateMotionsToggleLabel();
+// Filtre rapide des votes : Tous / Divisés / Projets de loi / Motions.
+//
+// Remplace un réglage « afficher les motions » qui n'a JAMAIS fonctionné : son
+// état existait, son libellé était traduit, mais aucun bouton ne le posait dans
+// la page, ET renderVotes ne le lisait pas. Doublement mort.
+//
+// « Divisé » = au moins deux partis ont pris des positions majoritaires
+// différentes. Mesuré sur les 735 votes de la 43e législature : 52 % sont
+// unanimes (motions de condamnation, nominations — lire « 105 pour, 0 contre »
+// n'apprend rien), 44 % opposent les partis, et AUCUN n'est serré — avec 79
+// sièges, la CAQ gagne chaque affrontement par une cinquantaine de voix.
+// L'information n'est donc pas qui gagne : c'est sur quoi on s'oppose.
+let votesQuickFilter = 'tous';
+function setVotesQuickFilter(k){
+  votesQuickFilter = k;
+  votesShown = 6;
   renderVotes();
+}
+// Calculé UNE fois par vote et mis en cache — sinon 735 votes × ~120 voix à
+// chaque frappe. Le nominal injecté est en forme compacte [[idDéputé, parti], …].
+let _voteDivise = null;
+function voteDivise(v){
+  if(!_voteDivise){
+    _voteDivise = new Map();
+    const PARTIS = ['CAQ','PLQ','QS','PQ','PCQ'];
+    for(const x of votes){
+      const pos = {};
+      for(const camp of ['pour','contre','abstentions']){
+        for(const entree of ((x.nominal && x.nominal[camp]) || [])){
+          const parti = entree[1];
+          if(!PARTIS.includes(parti)) continue;
+          pos[parti] = pos[parti] || { pour:0, contre:0, abstentions:0 };
+          pos[parti][camp]++;
+        }
+      }
+      const camps = new Set(Object.values(pos).map(o => Object.entries(o).sort((a,b)=>b[1]-a[1])[0][0]));
+      _voteDivise.set(x.id, camps.size > 1);
+    }
+  }
+  return _voteDivise.get(v.id) === true;
+}
+function voteAdmisParFiltre(v, filtre){
+  if(filtre === 'divises') return voteDivise(v);
+  if(filtre === 'projets') return !!v.billNum;
+  if(filtre === 'motions') return !v.billNum;
+  return true;
+}
+// Les compteurs tiennent compte de la recherche en cours (comme sur Promesses) :
+// le chiffre d'un bouton doit correspondre à ce qu'on verrait en le pressant.
+function renderVotesQuickFilters(correspondRecherche){
+  const el = document.getElementById('votesQuickFilters');
+  if(!el) return;
+  const isEn = currentLang === 'en';
+  const defs = [
+    ['tous',    isEn ? 'All' : 'Tous'],
+    ['divises', isEn ? 'Divided' : 'Divisés'],
+    ['projets', isEn ? 'Bills' : 'Projets de loi'],
+    ['motions', 'Motions'],
+  ];
+  const titres = {
+    divises: isEn
+      ? 'Votes where at least two parties took opposite positions'
+      : 'Votes où au moins deux partis ont pris des positions opposées',
+    motions: isEn
+      ? 'Motions are not bills: they state a position, they do not make law'
+      : 'Une motion n\'est pas un projet de loi : elle exprime une position, elle ne fait pas de loi',
+  };
+  el.innerHTML = defs.map(([k, label]) => {
+    const n = votes.filter(v => correspondRecherche(v) && voteAdmisParFiltre(v, k)).length;
+    const sel = votesQuickFilter === k;
+    return `<button class="qf-btn ${sel ? 'active' : ''}${n === 0 ? ' qf-zero' : ''}" onclick="setVotesQuickFilter('${k}')"${titres[k] ? ` title="${titres[k]}"` : ''}>${label} <span class="qf-n">${n}</span></button>`;
+  }).join('');
 }
 
 // Filtre rapide des projets (maquette) : Tous / En cours / Adoptés / 🔥 Challengés
@@ -8853,12 +9131,19 @@ function renderVotes(keyword){
   const kw = norm(keyword);
   // Votes ET motions, les plus récents d'abord (les gens peuvent chercher un
   // projet de loi précis via la recherche).
-  const full = votes.filter(v=>{
+  // La recherche est évaluée UNE fois par vote, puis mémorisée dans un Set : les
+  // quatre compteurs du filtre rapide et la liste elle-même la consultent, et
+  // bills.find() par vote × cinq passes coûterait ~400 000 comparaisons par frappe.
+  const correspondants = new Set(votes.filter(v=>{
     if(!kw) return true;
     const bill = v.billId ? bills.find(b=>b.id===v.billId) : null;
     const haystack = norm([v.subject, v.stage, bill?bill.title:'', v.billNum?('projet de loi n° '+v.billNum):''].join(' '));
     return haystack.includes(kw);
-  }).sort((a,b)=> (b.date||'').localeCompare(a.date||''));
+  }).map(v=>v.id));
+  const correspondRecherche = v => correspondants.has(v.id);
+  renderVotesQuickFilters(correspondRecherche);
+  const full = votes.filter(v => correspondRecherche(v) && voteAdmisParFiltre(v, votesQuickFilter))
+    .sort((a,b)=> (b.date||'').localeCompare(a.date||''));
   const list = full.slice(0, votesShown);
 
   const billLabel = isEn ? 'BILL NO.' : 'PROJET DE LOI N°';
@@ -9147,9 +9432,7 @@ function renderTicker(){
   renderMinistres();
   renderStatusFilters();
   renderStepFilters();
-  updateSortToggleLabel();
-  updateMotionsToggleLabel();
-  updateMinistresSortLabel();
+  updateSortToggleLabel();  updateMinistresSortLabel();
   renderAccountBox();
   renderFlagBox();
   renderAdminFlagCounts();
