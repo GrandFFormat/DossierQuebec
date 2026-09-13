@@ -437,6 +437,11 @@ export async function extraireDetails(numeros, { concurrence = 3, force = false 
   console.log(`  champs retirés par la vérification : ${retires} · types corrigés : ${nouveaux.filter((d) => d.verification.typeMontantCorrige).length} · fiches inutilisables : ${nouveaux.filter((d) => !d.verification.utilisable).length}`);
   if (docs.length < aFaire.length) console.warn(`⚠ ${aFaire.length - docs.length} document(s) introuvable(s) par numéro.`);
   for (const e of echecs) console.warn(`⚠ ${e}`);
+  // Aussitôt vérifié, aussitôt disponible pour les abonnés (si les clés Supabase sont là).
+  if (nouveaux.length) {
+    const { publier } = await import('../scripts/publier-details.js');
+    await publier(nouveaux).catch((err) => console.warn(`⚠ Publication du détail : ${err.message}`));
+  }
   return parId;
 }
 

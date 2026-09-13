@@ -248,6 +248,29 @@ l'estimation de la Ville et la médiane des soumissions ont été inversées sur
 non forcé, réflexion adaptative et consigne de vérification de cohérence : lecture correcte.
 Le brouillon se relit quand même avant l'envoi.
 
+## L'espace abonnés (commun à toutes les villes)
+
+Un seul compte et un seul abonnement pour tous les volets municipaux, parce qu'ils sont tous
+des sous-dossiers de dossierquebec.ca : la session Supabase ouverte sur une page vaut partout.
+
+- `/commun/abonnes.js` et `.css` (racine du dépôt) — chargés par chaque page de volet. Ils
+  ajoutent « Mes dossiers » dans l'en-tête et, à l'ouverture d'une fiche, « Suivre ce dossier » et
+  le « Détail de l'argent » : complet pour un abonné, aperçu et « Abonnez-vous » sinon.
+- Un volet n'a que deux choses à fournir : `data-ville="quebec"` sur `<body>`, et dans chaque
+  fiche un `<div class="ab-fiche" data-dossier data-numero data-objet>`. La clé de dossier est
+  celle qui suit une décision d'une instance à l'autre (le sommaire ici, le numéro de dossier à
+  Montréal).
+- `/mes-dossiers` et `/abonnement` — pages communes, à la racine.
+- `api/detail.js` — sert le détail après avoir vérifié l'abonnement, côté serveur.
+- `scripts/supabase-schema-abonnes.sql` — tables `dossiers_suivis`, `abonnements`,
+  `abonnement_liste_attente`, `details_argent`, et leurs règles.
+
+**Le détail ne vit plus dans le dépôt.** Le dépôt GitHub de DossierQuébec est public : un fichier
+versionné est lisible par tous. `data/details.json` reste en local comme cache (`.gitignore`), et
+la copie servie aux abonnés est dans Supabase, publiée par `scripts/publier-details.js` — appelé
+automatiquement après chaque extraction si `SUPABASE_URL` et `SUPABASE_SERVICE_ROLE_KEY` sont dans
+`api.env`. L'abonnement se donne à la main dans Supabase tant que Stripe n'est pas branché.
+
 ## La carte des districts
 
 Contours tirés du jeu « Districts électoraux » de la Ville sur Données Québec, en **CC-BY 4.0** —
