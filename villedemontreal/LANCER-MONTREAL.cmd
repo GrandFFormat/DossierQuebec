@@ -21,6 +21,16 @@ REM ============================================================================
 set "BRANCHE=claude/villedemontreal"
 set "DEPOT_URL=https://github.com/GrandFFormat/DossierQuebec"
 
+REM Windows lit un fichier .cmd au fur et a mesure qu'il l'execute. Comme ce script met a
+REM jour le depot ou il vit, il se recopie d'abord dans le dossier temporaire et se relance
+REM de la : la copie ne bouge pas pendant l'execution. %ORIGINE% garde le dossier d'origine.
+if /i not "%~dp0"=="%TEMP%\" (
+  copy /y "%~f0" "%TEMP%\LANCER-MONTREAL.cmd" >nul
+  "%TEMP%\LANCER-MONTREAL.cmd" "%~dp0"
+  exit /b
+)
+set "ORIGINE=%~1"
+
 echo.
 echo  ===================================================
 echo   DossierVilleDeMontreal - mise a jour des donnees
@@ -46,7 +56,7 @@ echo.
 
 REM ---- 2. Le depot -----------------------------------------------------------
 set "VOLET="
-if exist "%~dp0scrapers\decisions.js" set "VOLET=%~dp0"
+if defined ORIGINE if exist "%ORIGINE%scrapers\decisions.js" set "VOLET=%ORIGINE%"
 if not defined VOLET if exist "%USERPROFILE%\Documents\DossierQuebec\villedemontreal\scrapers\decisions.js" set "VOLET=%USERPROFILE%\Documents\DossierQuebec\villedemontreal\"
 if not defined VOLET if exist "%USERPROFILE%\DossierQuebec\villedemontreal\scrapers\decisions.js" set "VOLET=%USERPROFILE%\DossierQuebec\villedemontreal\"
 
@@ -77,7 +87,7 @@ if errorlevel 1 (
   echo  [!] Impossible de joindre GitHub. Verifiez la connexion Internet.
   goto :fin_erreur
 )
-git checkout "%BRANCHE%" >nul 2>nul
+git checkout "%BRANCHE%"
 if errorlevel 1 (
   echo  [!] Impossible de passer sur la branche %BRANCHE%.
   echo      Il y a probablement des modifications non enregistrees dans le depot.
@@ -85,8 +95,11 @@ if errorlevel 1 (
 )
 git pull --ff-only origin "%BRANCHE%"
 if errorlevel 1 (
-  echo  [!] La branche locale et GitHub ont diverge. On continue avec la version locale.
+  echo  [!] La mise a jour depuis GitHub a echoue ^(voir ci-dessus^). On n'ira pas plus loin
+  echo      avec une version perimee : copiez le texte de cette fenetre et envoyez-le a Claude.
+  goto :fin_erreur
 )
+for /f "tokens=*" %%v in ('git log -1 --format^=%%h') do echo  Version du code : %%v
 echo.
 
 REM ---- 4. Les dependances ---------------------------------------------------
