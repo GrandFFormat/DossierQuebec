@@ -66,7 +66,6 @@
     <strong>procès-verbal</strong> officiel d'une séance du conseil municipal, du conseil
     d'agglomération ou du comité exécutif. Le numéro de dossier renvoie au
     <strong>sommaire décisionnel</strong>, la note de l'administration qui explique pourquoi.
-    Les encadrés verts sont un résumé généré par IA de ce sommaire — le PDF officiel reste à un clic.
   </p>
 
   <div class="barre-outils">
@@ -78,10 +77,23 @@
       <option value="liste">Liste continue</option>
     </select>
     <select id="filtre-instance"><option value="">Toutes les instances</option></select>
-    <label class="case"><input type="checkbox" id="filtre-resume"> Avec résumé seulement</label>
+    <!-- Masqué tant qu'aucune décision n'a de résumé : app.js le révèle s'il y en a. -->
+    <label class="case" id="case-resume" hidden><input type="checkbox" id="filtre-resume"> Avec résumé seulement</label>
     <button type="button" class="bouton-lien" id="tout-deplier">Tout déplier</button>
   </div>
   <p class="compte" id="compte-decisions"></p>
+
+  <div class="avis legende-resume">
+    <strong>Aucun résumé en langage clair sur ce volet.</strong> Un résumé ne vaut la peine que
+    s'il condense le <strong>sommaire décisionnel</strong>, la note de plusieurs pages où
+    l'administration explique le contexte, les montants et les options écartées. Les résolutions
+    ci-dessous tiennent déjà en une phrase : les résumer n'apprendrait rien.
+    Ces sommaires existent et nous avons leur numéro de dossier, mais pas l'adresse où la Ville
+    les range — elle ne la publie nulle part, et ses ordres du jour, dont le nom annonce pourtant
+    des « liens vers les pièces publiques », n'en contiennent aucun.
+    <strong>Nous l'avons demandée à la Ville le 13 septembre 2026 et nous attendons sa réponse.</strong>
+    D'ici là, le site montre ce qui a été décidé, tel quel, sans rien y ajouter.
+  </div>
   <div id="liste-decisions"></div>
   <button class="plus" id="plus-decisions" hidden>Afficher plus</button>
 </main>
