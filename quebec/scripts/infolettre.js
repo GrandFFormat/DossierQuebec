@@ -7,9 +7,10 @@
 // Sans --details, tout vient des données déjà extraites — aucun appel à la Ville, aucun appel
 // IA : les séances, les plus gros montants, les subventions, les contrats, chacun avec son
 // lien et les puces du résumé. Avec --details, les documents retenus passent par
-// scrapers/details-argent.js (≈ 0,11 $ US chacun, mis en cache) : qui reçoit, nature du
-// montant, soumissions et estimation, répartition par année, financement, conditions, ce qui
-// change. On relit, on écrit l'introduction à la main, on envoie.
+// scrapers/details-argent.js (≈ 0,28 $ US chacun avec la vérification, mis en cache) : qui
+// reçoit, nature du montant, soumissions et estimation, répartition par année, financement,
+// conditions, ce qui change. Personne ne relit : seul un détail vérifié automatiquement est
+// publié, et l'introduction est une phrase de chiffres.
 // Le brouillon est écrit dans infolettres/AAAA-MM-JJ.md et .html (courriel, styles en ligne).
 //
 // Une même décision traverse plusieurs documents — le sommaire, la résolution du comité
