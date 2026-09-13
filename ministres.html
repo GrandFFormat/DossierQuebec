@@ -781,7 +781,7 @@
      est l'exception assumée — le rond est justement ce qui la fait lire comme un
      jeton plutôt que comme un bouton de plus dans l'en-tête. Sans !important
      elle redevient carrée en silence. */
-  /* Bouton « Villes » : la pastille verte d'avant, élargie en bouton, qui ouvre la liste
+  /* Bouton « Villes » : pastille bleue élargie en bouton, qui ouvre la liste
      des volets municipaux. <details>/<summary> natifs : clavier, lecteur d'écran et
      fermeture au clic hors du menu sans une ligne de JavaScript de plus. Une ville de
      plus, c'est une ligne de plus dans la liste. */
@@ -791,13 +791,17 @@
   .city-flip{
     display:inline-flex; align-items:center; justify-content:center; gap:5px;
     height:26px; padding:0 11px; border-radius:13px !important;
-    background:var(--green); color:var(--card);
+    background:var(--gold); color:var(--card);
     font-family:'Archivo',sans-serif; font-weight:900; font-size:10px;
     letter-spacing:0.04em; text-transform:uppercase; text-decoration:none; cursor:pointer;
-    transition:transform 0.3s ease, background 0.3s ease;
+    transition:transform 0.3s ease, background 0.3s ease, color 0.3s ease;
   }
   .city-flip::after{content:""; width:0; height:0; border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid currentColor; opacity:.85;}
-  .city-flip:hover, .villes-menu[open] .city-flip{transform:scale(1.06); background:var(--gold);}
+  /* Au survol et menu ouvert : jaune, comme les autres contrôles de l'en-tête.
+     Le bleu étant désormais la couleur de repos, rester bleu au survol aurait
+     supprimé tout retour visuel. Texte en --sur-clair : le jaune ne bascule pas
+     en thème sombre, le texte ne doit pas basculer non plus. */
+  .city-flip:hover, .villes-menu[open] .city-flip{transform:scale(1.06); background:var(--yellow); color:var(--sur-clair);}
   .villes-menu ul{
     position:absolute; top:calc(100% + 8px); left:0; z-index:60; margin:0; padding:6px;
     list-style:none; min-width:180px;
@@ -808,8 +812,12 @@
     display:block; padding:8px 12px; border-radius:7px; text-decoration:none;
     color:var(--ink); font-family:'Archivo',sans-serif; font-weight:700; font-size:14px;
   }
-  .villes-menu li a:hover, .villes-menu li a:focus-visible{background:var(--bg); color:var(--green);}
-  .villes-menu li a small{display:block; font-weight:400; font-size:11px; color:var(--muted); letter-spacing:.02em;}
+  /* ⚠️ --bg et --muted venaient de la feuille du volet municipal et N'EXISTENT PAS
+     dans la palette de DossierQuébec : le fond de survol ne s'affichait pas du
+     tout, et la légende grise tombait sur la couleur héritée. Remplacés par leurs
+     équivalents d'ici (--paper-2, --slate). */
+  .villes-menu li a:hover, .villes-menu li a:focus-visible{background:var(--paper-2); color:var(--gold);}
+  .villes-menu li a small{display:block; font-weight:400; font-size:11px; color:var(--slate); letter-spacing:.02em;}
   @media (prefers-reduced-motion: reduce){ .maple-flip{transition:color 0.3s ease;} }
   .brand-text p{display:none;} /* la devise devient le H1 du hero (Phase 2) */
   .top-meta{display:none;}     /* les stats migrent dans la bande du hero (Phase 2) */
