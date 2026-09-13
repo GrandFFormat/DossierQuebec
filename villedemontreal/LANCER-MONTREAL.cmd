@@ -107,15 +107,19 @@ echo   Extraction des donnees de la Ville de Montreal
 echo   (quelques minutes : les proces-verbaux sont de gros PDF)
 echo  ---------------------------------------------------
 echo.
+REM Tout ce que la routine affiche est aussi ecrit dans data\lancement.log, qui part sur
+REM GitHub avec les donnees : Claude peut ainsi lire ce qui s'est passe sans qu'on ait a
+REM copier la fenetre. --elus : les jeux du conseil sont relus a chaque lancement manuel.
 if exist "api.env" (
-  call npm run refresh
+  call npm run refresh -- --elus > "data\lancement.log" 2>&1
 ) else (
   echo  Pas de fichier api.env : les resumes en langage clair sont sautes.
   echo  ^(Pour les activer : copier api.env.example en api.env et y mettre la cle.^)
   echo.
-  call npm run refresh -- --sans-resumes
+  call npm run refresh -- --elus --sans-resumes > "data\lancement.log" 2>&1
 )
 set "CODE_REFRESH=%errorlevel%"
+type "data\lancement.log"
 echo.
 if not "%CODE_REFRESH%"=="0" (
   echo  [!] Une extraction principale a echoue ^(voir le Bilan ci-dessus^).

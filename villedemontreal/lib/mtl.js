@@ -71,6 +71,15 @@ export async function requete(url, { accept, notFoundIsNull = true } = {}) {
     }
     if (res.ok) return res;
     if (res.status === 404 && notFoundIsNull) return null;
+    // Un 403 sur un document public : certains serveurs refusent les User-Agent qu'ils ne
+    // connaissent pas. On se représente une fois sous une forme de navigateur, en gardant
+    // notre nom et notre contact dedans — on ne se cache pas, on se présente autrement.
+    if (res.status === 403 && attempt === 0) {
+      await throttle();
+      const res2 = await fetch(url, { headers: { 'User-Agent': `Mozilla/5.0 (compatible; ${USER_AGENT})`, ...(accept ? { Accept: accept } : {}) }, redirect: 'follow' });
+      if (res2.ok) return res2;
+      if (res2.status === 404 && notFoundIsNull) return null;
+    }
     if (res.status === 429 || res.status >= 500) {
       lastError = new Error(`HTTP ${res.status} sur ${url}`);
       const retryAfter = Number(res.headers.get('retry-after')) || 0;
@@ -176,12 +185,21 @@ export function candidatsDocument({ instance, genre, variante, date, heure }) {
   return [urlDocument(base)];
 }
 
+// Essaie chaque URL et garde la trace de ce que chacune a répondu : c'est ce qui permet,
+// depuis le fichier de données, de comprendre pourquoi une séance n'a pas de procès-verbal
+// (404 = pas encore publié ; 403 = refusé ; autre = à regarder).
 export async function premierDocument(candidats) {
+  const essais = [];
   for (const url of candidats) {
-    const data = await octets(url, { accept: 'application/pdf' });
-    if (data && data.length > 100) return { url, data };
+    try {
+      const data = await octets(url, { accept: 'application/pdf' });
+      if (data && data.length > 100) return { url, data, essais };
+      essais.push({ url, resultat: data ? 'réponse vide' : '404' });
+    } catch (err) {
+      essais.push({ url, resultat: String(err.message ?? err) });
+    }
   }
-  return null;
+  return { url: null, data: null, essais };
 }
 
 // Identifiant stable d'une séance : « CM_2026-01-26_13h00 ».

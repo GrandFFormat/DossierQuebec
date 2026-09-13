@@ -82,7 +82,7 @@ export async function documentDeSeance(seance, genre, { forcer = false } = {}) {
     if (cache) return { ...cache, depuisCache: true };
   }
   const trouve = await premierDocument(candidatsDocument({ instance: seance.instance, genre, variante: seance.variante, date: seance.date, heure: seance.heure }));
-  if (!trouve) return null;
+  if (!trouve.data) return { url: null, essais: trouve.essais };
   const lu = await lirePdf(trouve.data);
   const contenu = { url: trouve.url, nombrePages: lu.nombrePages, texte: lu.texte, pages: lu.pages.map((p) => ({ numero: p.numero, lignes: p.lignes, liens: p.liens })) };
   await ecrireCache(nom, contenu);
@@ -222,13 +222,26 @@ async function main() {
       etatSeances.push(deja);
       continue;
     }
-    const pv = await documentDeSeance(seance, 'PV', { forcer: Boolean(args.complet) });
-    if (!pv) {
-      introuvables++;
-      etatSeances.push({ ...seance, etat: 'procès-verbal non publié', pv: null, odj: deja?.odj ?? null, essaye: aujourdhui });
+    let pv;
+    let odj = null;
+    try {
+      pv = await documentDeSeance(seance, 'PV', { forcer: Boolean(args.complet) });
+      if (pv?.url) odj = await documentDeSeance(seance, 'ODJ', { forcer: Boolean(args.complet) });
+    } catch (err) {
+      // Une séance qui plante (PDF illisible, réseau) ne doit pas emporter les autres :
+      // on note l'erreur dans l'état de la séance et on continue.
+      console.warn(`⚠ ${seance.id} : ${err.message}`);
+      etatSeances.push({ ...seance, etat: 'erreur', erreur: String(err.message ?? err), pv: null, odj: null, essaye: aujourdhui });
       continue;
     }
-    const odj = await documentDeSeance(seance, 'ODJ', { forcer: Boolean(args.complet) });
+    if (!pv?.url) {
+      introuvables++;
+      const essais = pv?.essais ?? [];
+      console.log(`${seance.id} : procès-verbal non publié — ${essais.map((e) => e.resultat).join(', ') || 'aucune réponse'}`);
+      etatSeances.push({ ...seance, etat: 'procès-verbal non publié', pv: null, odj: deja?.odj ?? null, essaye: aujourdhui, essais });
+      continue;
+    }
+    if (odj && !odj.url) odj = null;
     const { decisions: nouvelles, resolutions, points } = decisionsDeSeance(seance, pv, odj);
     for (const d of nouvelles) decisions.set(d.id, d);
     lues++;
