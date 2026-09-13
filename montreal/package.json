@@ -6,6 +6,7 @@
   "description": "Prototype de veille citoyenne des décisions de la Ville de Montréal",
   "scripts": {
     "refresh": "node scripts/refresh.js",
+    "decouvrir:arrondissements": "node scrapers/decouverte-arrondissements.js",
     "scrape:seances": "node scrapers/seances.js",
     "scrape:robots": "node scrapers/robots.js",
     "scrape:decisions": "node scrapers/decisions.js",
