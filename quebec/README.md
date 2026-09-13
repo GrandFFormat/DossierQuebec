@@ -214,6 +214,24 @@ une personne), et meubler quand un document est purement procédural — dans ce
 tel qu'écrit, jamais recalculé. Chaque résumé porte le modèle utilisé et sa date, et la fiche
 garde le lien vers le PDF officiel.
 
+## L'infolettre hebdomadaire : le brouillon
+
+```bash
+npm run infolettre                                  # la semaine écoulée
+npm run infolettre -- --depuis=2026-07-02 --jusqua=2026-07-08
+```
+
+`scripts/infolettre.js` écrit `infolettres/AAAA-MM-JJ.md` et `.html` (courriel, styles en
+ligne) à partir des données déjà extraites — aucun appel à la Ville, aucun appel IA. Le
+brouillon contient les séances de la semaine, les votes divisés **regroupés par dissidence**
+(un élu qui vote contre 48 résolutions d'une même séance, c'est une ligne qui dit sur quoi,
+pas 48 lignes), les cinq décisions les plus lourdes, les subventions, les sujets. Une même
+décision traverse le sommaire, le comité exécutif et le conseil : tout est regroupé par
+sommaire pour ne la compter qu'une fois. Les dépôts de rapports et de listes, qui parlent
+d'argent sans rien décider, sont écartés des montants. L'introduction s'écrit à la main.
+
+Les brouillons ne sont pas versionnés (`.gitignore`) : ils se relisent, puis partent.
+
 ## La carte des districts
 
 Contours tirés du jeu « Districts électoraux » de la Ville sur Données Québec, en **CC-BY 4.0** —
