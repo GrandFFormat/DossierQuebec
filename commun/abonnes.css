@@ -1,0 +1,98 @@
+/* Espace abonnés — commun à tous les volets municipaux et aux pages « Mes dossiers » et
+   « Abonnement ». Dans un volet, les couleurs viennent de ses variables (--accent, --ligne…) ;
+   les valeurs de repli servent aux pages communes. */
+
+.ab-mes-dossiers {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap;
+  color: var(--entete-encre, #16191D); background: var(--carte, #fff);
+  border: 1px solid var(--ligne-forte, #C2CAD2); border-radius: 999px; padding: 5px 12px;
+  margin-left: auto; margin-right: 8px;
+}
+.ab-mes-dossiers:hover { border-color: var(--accent, #0B8A4B); color: var(--accent, #0B8A4B); }
+.ab-mes-dossiers + .taille-texte { margin-left: 0; }
+.ab-compte {
+  min-width: 18px; padding: 0 5px; border-radius: 999px; font-size: 11px; line-height: 18px; text-align: center;
+  background: var(--accent, #0B8A4B); color: #fff;
+}
+
+.ab-fiche { margin-top: 12px; }
+.ab-fiche:empty { display: none; }
+.ab-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+.ab-suivre {
+  font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+  color: var(--encre, #16191D); background: var(--carte, #fff);
+  border: 1px solid var(--ligne-forte, #C2CAD2); border-radius: 999px; padding: 5px 12px;
+}
+.ab-suivre:hover { border-color: var(--accent, #0B8A4B); }
+.ab-suivre.actif { border-color: var(--accent, #0B8A4B); color: var(--accent-encre, #076338); background: var(--accent-fond, #E6F6EC); }
+
+.ab-connexion { border: 1px solid var(--ligne, #DDE2E7); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; font-size: 14px; }
+.ab-connexion p { margin: 0 0 8px; }
+.ab-form { display: flex; flex-wrap: wrap; gap: 8px; }
+.ab-form input {
+  flex: 1 1 220px; font: inherit; font-size: 14px; padding: 7px 10px;
+  border: 1px solid var(--ligne-forte, #C2CAD2); border-radius: 6px; background: var(--fond, #fff); color: var(--encre, #16191D);
+}
+
+.ab-bouton {
+  display: inline-block; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none;
+  color: #fff; background: var(--accent, #0B8A4B); border: 0; border-radius: 6px; padding: 8px 14px;
+}
+.ab-bouton:hover { filter: brightness(1.08); }
+.ab-bouton:disabled { opacity: .6; cursor: default; }
+
+.ab-detail {
+  border: 1px solid var(--ligne, #DDE2E7); border-left: 4px solid var(--accent, #0B8A4B);
+  border-radius: 8px; padding: 12px 14px; margin-top: 4px; font-size: 14px; line-height: 1.5;
+  background: var(--carte, #fff);
+}
+.ab-detail.ab-verrou { border-left-color: var(--vedette, #F5B301); }
+.ab-detail-titre { font-weight: 800; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px; }
+.ab-etiquette {
+  font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 999px; background: var(--fond-2, #F4F6F8); color: var(--doux, #5B6570);
+}
+.ab-phrase { margin: 0 0 8px; }
+.ab-apercu { margin: 0 0 8px; color: var(--doux, #5B6570); }
+.ab-detail ul { margin: 0 0 8px; padding-left: 18px; }
+.ab-detail li { margin: 0 0 4px; }
+.ab-note { font-size: 12.5px; color: var(--doux, #5B6570); margin: 6px 0 0; }
+
+/* ---------- pages communes ---------- */
+.ab-page {
+  --fond: #F7F8FA; --carte: #FFFFFF; --encre: #16191D; --doux: #5B6570; --ligne: #DDE2E7; --ligne-forte: #C2CAD2;
+  --accent: #0B8A4B; --accent-fond: #E6F6EC; --accent-encre: #076338; --fond-2: #EEF1F4; --vedette: #F5B301;
+  margin: 0; background: var(--fond); color: var(--encre);
+  font-family: 'Archivo', system-ui, -apple-system, sans-serif; font-size: 16px; line-height: 1.6;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="clair"]) .ab-page {
+    --fond: #0E1116; --carte: #161B22; --encre: #E6EAEE; --doux: #9AA5B1; --ligne: #262D36; --ligne-forte: #36404B;
+    --accent: #3DD68C; --accent-fond: #0F2A1D; --accent-encre: #7BE7B2; --fond-2: #1C232C;
+  }
+}
+:root[data-theme="sombre"] .ab-page {
+  --fond: #0E1116; --carte: #161B22; --encre: #E6EAEE; --doux: #9AA5B1; --ligne: #262D36; --ligne-forte: #36404B;
+  --accent: #3DD68C; --accent-fond: #0F2A1D; --accent-encre: #7BE7B2; --fond-2: #1C232C;
+}
+.ab-page .ab-contenu { max-width: 860px; margin: 0 auto; padding: 22px 22px 80px; }
+.ab-page .ab-haut { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 14px 0 18px; border-bottom: 1px solid var(--ligne); margin-bottom: 22px; }
+.ab-page .ab-marque { font-size: 22px; font-weight: 800; letter-spacing: -.02em; color: var(--encre); text-decoration: none; }
+.ab-page .ab-marque span { color: var(--accent); }
+.ab-page .ab-haut nav { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-left: auto; font-size: 14px; }
+.ab-page .ab-haut nav a { color: var(--doux); text-decoration: none; font-weight: 600; }
+.ab-page .ab-haut nav a:hover { color: var(--encre); }
+.ab-page h1 { font-size: 30px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -.02em; }
+.ab-page h2 { font-size: 19px; margin: 28px 0 10px; }
+.ab-page .ab-chapeau { color: var(--doux); margin: 0 0 18px; max-width: 64ch; }
+.ab-page .ab-carte { background: var(--carte); border: 1px solid var(--ligne); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; }
+.ab-page .ab-carte h3 { font-size: 16px; margin: 0 0 4px; }
+.ab-page .ab-meta { display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 13px; color: var(--doux); margin-bottom: 6px; }
+.ab-page .ab-parcours { margin: 6px 0 0; padding-left: 18px; font-size: 14px; }
+.ab-page .ab-liens { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 10px; font-size: 14px; }
+.ab-page .ab-liens a, .ab-page .ab-lien { color: var(--accent-encre); font-weight: 600; }
+.ab-page .ab-lien-bouton { font: inherit; font-size: 14px; font-weight: 600; background: none; border: 0; padding: 0; cursor: pointer; color: var(--accent-encre); text-decoration: underline; }
+.ab-page .ab-grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.ab-page .ab-prix { font-size: 26px; font-weight: 800; }
+.ab-page .ab-vide { color: var(--doux); }

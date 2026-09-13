@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mes dossiers — DossierQuébec</title>
+<meta name="robots" content="noindex, nofollow">
+<script>
+  try {
+    var t = localStorage.getItem('dvq:theme');
+    if (t === 'clair' || t === 'sombre') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/commun/abonnes.css">
+</head>
+<body class="ab-page">
+<div class="ab-contenu">
+  <header class="ab-haut">
+    <a class="ab-marque" href="/">Dossier<span>Québec</span></a>
+    <nav aria-label="Les volets">
+      <a href="/quebec/">Ville de Québec</a>
+      <a href="/montreal/">Ville de Montréal</a>
+      <a href="/abonnement">Abonnement</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Mes dossiers</h1>
+    <p class="ab-chapeau">Les dossiers que vous suivez, toutes villes confondues, avec leur parcours d'une instance à l'autre. Pour en ajouter un, ouvrez une décision dans un volet et cliquez « Suivre ce dossier ».</p>
+    <div id="compte"></div>
+    <div id="liste"><p class="ab-vide">Chargement…</p></div>
+  </main>
+</div>
+
+<script type="module">
+  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, nePlusSuivre, chargerDetail, rendreDetail, mesurer } from '/commun/abonnes-client.js';
+
+  const $ = (s) => document.querySelector(s);
+  const decisionsParVille = new Map();
+
+  async function decisions(ville) {
+    if (!decisionsParVille.has(ville)) {
+      decisionsParVille.set(ville, fetch(`/${ville}/data/decisions.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null));
+    }
+    return decisionsParVille.get(ville);
+  }
+
+  function connexion() {
+    $('#compte').innerHTML = '';
+    $('#liste').innerHTML = `<div class="ab-carte">
+      <h3>Connectez-vous</h3>
+      <p>Un seul compte pour DossierQuébec et toutes les villes. On vous envoie un lien par courriel, sans mot de passe.</p>
+      <form class="ab-form" id="form-lien"><input type="email" required placeholder="Votre courriel" autocomplete="email">
+      <button type="submit" class="ab-bouton">Recevoir le lien de connexion</button></form>
+      <p class="ab-note" id="etat-lien" aria-live="polite"></p>
+    </div>`;
+    $('#form-lien').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = e.target.querySelector('input').value.trim();
+      const bouton = e.target.querySelector('button');
+      bouton.disabled = true;
+      $('#etat-lien').textContent = 'Envoi…';
+      const erreur = await envoyerLien(email);
+      if (erreur) {
+        bouton.disabled = false;
+        $('#etat-lien').textContent = erreur.code === 'over_email_send_rate_limit' ? 'Un lien a déjà été envoyé récemment — vérifiez votre boîte courriel.' : 'Une erreur est survenue. Réessayez.';
+      } else {
+        $('#etat-lien').textContent = `Lien envoyé à ${email}. Ouvrez-le pour revenir sur cette page, connecté.`;
+      }
+    });
+  }
+
+  async function statutAbonnement(s) {
+    const { data } = await client.from('abonnements').select('statut, fin').eq('user_id', s.user.id).maybeSingle();
+    return data && data.statut === 'actif' && (!data.fin || new Date(data.fin) > new Date());
+  }
+
+  function parcours(docs) {
+    const resolutions = docs.filter((d) => d.instance).sort((a, b) => (a.date ?? '').localeCompare(b.date ?? ''));
+    if (!resolutions.length) return '';
+    return `<ol class="ab-parcours">${resolutions
+      .map((d) => `<li>${echapper(d.instance)}, ${dateFr(d.date)}${d.numero ? ` — ${d.pdf ? `<a class="ab-lien" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${echapper(d.numero)}</a>` : echapper(d.numero)}` : ''}${d.resultat ? ` · ${echapper(d.resultat)}` : ''}</li>`)
+      .join('')}</ol>`;
+  }
+
+  async function carte(s, suivi) {
+    const jeu = await decisions(suivi.ville);
+    const docs = (jeu?.decisions ?? []).filter((d) => d.id === suivi.dossier_id || d.sommaireId === suivi.dossier_id || d.dossier === suivi.dossier_id);
+    const principal = docs.find((d) => d.id === suivi.dossier_id) ?? docs[0];
+    const derniere = docs.map((d) => d.date).filter(Boolean).sort().pop();
+    const objet = principal?.objet ?? suivi.objet ?? suivi.dossier_id;
+    const recherche = suivi.numero || principal?.numero || '';
+    return `<article class="ab-carte" data-ville="${echapper(suivi.ville)}" data-dossier="${echapper(suivi.dossier_id)}">
+      <div class="ab-meta">
+        <span>${echapper(VILLES[suivi.ville] ?? suivi.ville)}</span>
+        ${recherche ? `<span>${echapper(recherche)}</span>` : ''}
+        ${derniere ? `<span>Dernière décision : ${dateFr(derniere)}</span>` : ''}
+        <span>Suivi depuis le ${dateFr(suivi.created_at)}</span>
+      </div>
+      <h3>${echapper(objet)}</h3>
+      ${docs.length ? parcours(docs) : `<p class="ab-note">Ce dossier n'est plus dans les décisions de l'année en cours du volet${suivi.ville ? ` ${echapper(VILLES[suivi.ville] ?? '')}` : ''}.</p>`}
+      <div class="ab-liens">
+        ${principal?.pdf ? `<a href="${echapper(principal.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}
+        ${recherche ? `<a href="/${echapper(suivi.ville)}/decisions.html?q=${encodeURIComponent(recherche)}">Voir sur le site</a>` : ''}
+        <button type="button" class="ab-lien-bouton" data-action="detail">Détail de l'argent</button>
+        <button type="button" class="ab-lien-bouton" data-action="retirer">Ne plus suivre</button>
+      </div>
+      <div class="ab-detail-zone"></div>
+    </article>`;
+  }
+
+  async function afficher() {
+    const s = await session();
+    if (!s) return connexion();
+    const abonne = await statutAbonnement(s).catch(() => false);
+    $('#compte').innerHTML = `<p class="ab-note">Connecté comme <strong>${echapper(s.user.email)}</strong> · ${abonne ? 'abonnement actif' : 'pas d\'abonnement — <a class="ab-lien" href="/abonnement">voir l\'abonnement</a>'} · <button type="button" class="ab-lien-bouton" id="deconnexion">Se déconnecter</button></p>`;
+    $('#deconnexion').addEventListener('click', async () => { await client.auth.signOut(); });
+
+    const suivis = await chargerSuivis();
+    if (!suivis.length) {
+      $('#liste').innerHTML = `<p class="ab-vide">Vous ne suivez aucun dossier pour l'instant. Ouvrez une décision sur <a class="ab-lien" href="/quebec/decisions.html">Québec</a> ou <a class="ab-lien" href="/montreal/decisions.html">Montréal</a> et cliquez « Suivre ce dossier ».</p>`;
+      return;
+    }
+    const parVille = new Map();
+    for (const x of suivis) {
+      if (!parVille.has(x.ville)) parVille.set(x.ville, []);
+      parVille.get(x.ville).push(x);
+    }
+    const sections = [];
+    for (const [ville, liste] of parVille) {
+      sections.push(`<h2>${echapper(VILLES[ville] ?? ville)} <span class="ab-note">(${liste.length})</span></h2>${(await Promise.all(liste.map((x) => carte(s, x)))).join('')}`);
+    }
+    $('#liste').innerHTML = sections.join('');
+  }
+
+  document.addEventListener('click', async (e) => {
+    const bouton = e.target.closest('[data-action]');
+    if (!bouton) return;
+    const article = bouton.closest('article');
+    const cible = { ville: article.dataset.ville, dossier: article.dataset.dossier };
+    const s = await session();
+    if (!s) return connexion();
+    if (bouton.dataset.action === 'retirer') {
+      bouton.disabled = true;
+      const erreur = await nePlusSuivre(s, cible);
+      if (erreur) { bouton.disabled = false; bouton.textContent = 'Impossible — réessayez'; return; }
+      article.remove();
+    } else if (bouton.dataset.action === 'detail') {
+      const zone = article.querySelector('.ab-detail-zone');
+      if (zone.innerHTML) { zone.innerHTML = ''; return; }
+      zone.innerHTML = '<p class="ab-note">Chargement…</p>';
+      const reponse = await chargerDetail(cible.ville, cible.dossier, s);
+      zone.innerHTML = reponse === null
+        ? '<p class="ab-note">Le détail est indisponible pour le moment.</p>'
+        : rendreDetail(reponse, cible.ville) || "<p class=\"ab-note\">Pas de détail de l'argent vérifié pour ce dossier.</p>";
+    }
+  });
+  document.addEventListener('click', (e) => { const m = e.target.closest('[data-mesure]'); if (m) mesurer(m.dataset.mesure, { page: 'mes-dossiers' }); });
+
+  client.auth.onAuthStateChange(() => afficher());
+  afficher();
+</script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
