@@ -39,15 +39,32 @@ jobs:
       - name: Récupérer le dépôt
         uses: actions/checkout@v5
 
+      # Le même fichier vit sur master pour que « Run workflow » soit possible depuis
+      # GitHub sur n'importe quelle branche. Tant que le volet n'y est pas, il n'y a rien à
+      # faire ici — on le dit et on s'arrête proprement.
+      - name: Vérifier que le volet est présent
+        id: volet
+        working-directory: .
+        run: |
+          if [ -f villedemontreal/package.json ]; then
+            echo "present=oui" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=non" >> "$GITHUB_OUTPUT"
+            echo "::notice::Pas de dossier villedemontreal/ sur cette branche — rien à rafraîchir."
+          fi
+
       - name: Installer Node.js
+        if: ${{ steps.volet.outputs.present == 'oui' }}
         uses: actions/setup-node@v5
         with:
           node-version: '22'
 
       - name: Installer les dépendances (SDK Anthropic, pdf.js)
+        if: ${{ steps.volet.outputs.present == 'oui' }}
         run: npm ci --omit=dev
 
       - name: Rafraîchir les données municipales
+        if: ${{ steps.volet.outputs.present == 'oui' }}
         id: refresh
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -57,6 +74,7 @@ jobs:
       # Seul villedemontreal/data/ bouge (data/textes/ est ignoré par git). On rebase avant
       # de pousser au cas où quelqu'un aurait poussé pendant le job.
       - name: Committer et pousser s'il y a des changements
+        if: ${{ steps.volet.outputs.present == 'oui' }}
         working-directory: .
         run: |
           git config user.name "dossierquebec-bot"
@@ -71,12 +89,12 @@ jobs:
           fi
 
       - name: Signaler les étapes secondaires en échec
-        if: ${{ steps.refresh.outputs.warnings != '' }}
+        if: ${{ steps.volet.outputs.present == 'oui' && steps.refresh.outputs.warnings != '' }}
         run: |
           echo "::warning::Étapes secondaires en échec (données de la veille conservées) : ${{ steps.refresh.outputs.warnings }}"
 
       - name: Alerter si une extraction principale a échoué
-        if: ${{ steps.refresh.outputs.failed != '' }}
+        if: ${{ steps.volet.outputs.present == 'oui' && steps.refresh.outputs.failed != '' }}
         run: |
           echo "::error::Extractions en échec (données de la veille conservées) : ${{ steps.refresh.outputs.failed }}"
           exit 1
