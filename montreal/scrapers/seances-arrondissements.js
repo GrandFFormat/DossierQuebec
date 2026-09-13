@@ -105,9 +105,13 @@ async function sonder(instance, date, heures, compteur, formes = FORMES) {
 
 // ---------- Le calendrier d'un arrondissement ----------
 
-async function calendrierDe(nom, annee, connues, compteur, budget = 260) {
+// Les trois heures en usage chez l'ensemble des conseils. Quand celle qu'on croit connaître
+// ne donne rien, c'est qu'elle a changé : on essaie les autres avant de conclure.
+const HEURES_CONNUES = ['19h00', '18h30', '19h30'];
+
+async function calendrierDe(nom, annee, connues, compteur, budget = 400, heuresForcees = null) {
   const instance = instanceArrondissement(nom);
-  const heures = heuresArrondissement(nom);
+  const heures = heuresForcees ?? heuresArrondissement(nom);
   const trouvees = [];
   // Ce qu'on sait déjà : on ne re-sonde jamais une date confirmée.
   const dejaVues = new Map(connues.filter((s) => s.instance === instance).map((s) => [s.date, s]));
@@ -128,12 +132,20 @@ async function calendrierDe(nom, annee, connues, compteur, budget = 260) {
   const toutes = () => (forme ? [forme, ...FORMES.filter((f) => f !== forme)] : FORMES);
   const courtes = () => (forme ? [forme] : FORMES);
 
-  for (let mois = 1; mois <= 12; mois++) {
+  // On ne sonde pas l'avenir. Les documents d'une séance qui n'a pas eu lieu n'existent
+  // pas, et c'est là que tout le budget partait : les journaux du premier vrai passage
+  // montrent chaque arrondissement épuisant ses 260 requêtes sur octobre, novembre et
+  // décembre, APRÈS avoir déjà trouvé toutes ses séances de l'année.
+  const auj = new Date().toISOString().slice(0, 10);
+  const dernierMois = annee < Number(auj.slice(0, 4)) ? 12 : Number(auj.slice(5, 7));
+
+  for (let mois = 1; mois <= dernierMois; mois++) {
     if (reste() <= 0) {
       console.warn(`    ⚠ budget de requêtes épuisé pour ${nom} au mois ${mois}`);
       break;
     }
-    const jours = joursDuMois(annee, mois);
+    const jours = joursDuMois(annee, mois).filter((j) => j.date <= auj);
+    if (!jours.length) continue;
 
     // Une séance déjà connue ce mois-ci : on la garde, on en apprend le rythme, on passe.
     const connueCeMois = jours.map((j) => dejaVues.get(j.date)).find(Boolean);
@@ -157,10 +169,13 @@ async function calendrierDe(nom, annee, connues, compteur, budget = 260) {
     }
 
     let trouvee = null;
-    // Deux passes : la première avec la forme apprise seulement (bon marché), la seconde
-    // avec toutes les formes — au cas où ce conseil aurait changé de forme ce mois-ci.
-    for (const formes of forme ? [courtes(), toutes()] : [toutes()]) {
-      for (const j of ordre) {
+    // Deux passes. La première essaie la forme apprise sur tout le mois : une requête par
+    // date. La seconde essaie toutes les formes, mais SEULEMENT sur les dates du rythme —
+    // un conseil qui change de forme ne change pas de jour le même mois, et rebalayer les
+    // seize dates sur cinq formes coûtait quatre-vingts requêtes à chaque mois de relâche.
+    const passes = forme ? [{ formes: courtes(), dates: ordre }, { formes: toutes(), dates: ordre.slice(0, 4) }] : [{ formes: toutes(), dates: ordre }];
+    for (const { formes, dates: ordreDeLaPasse } of passes) {
+      for (const j of ordreDeLaPasse) {
         if (reste() <= 0) break;
         const hit = await sonder(instance, j.date, heures, compteur, formes);
         if (!hit) continue;
@@ -209,7 +224,15 @@ async function principal() {
 
   for (const nom of noms) {
     const avant = compteur.n;
-    const s = await calendrierDe(nom, annee, connues, compteur);
+    let s = await calendrierDe(nom, annee, connues, compteur);
+    // Rien du tout : l'heure que l'on croit connaître a changé. On réessaie sur les trois
+    // heures en usage avant de déclarer forfait — c'est ce qui est arrivé au Plateau-
+    // Mont-Royal, dont le code est pourtant relevé dans une vraie URL.
+    if (!s.length) {
+      console.log(`    ${nom} : rien à l'heure habituelle, essai des autres heures…`);
+      s = await calendrierDe(nom, annee, connues, compteur, 160, HEURES_CONNUES);
+      if (s.length) console.log(`    ✓ trouvé à ${[...new Set(s.map((x) => x.heure))].join(', ')} — à corriger dans ARRONDISSEMENTS_CODES`);
+    }
     toutes.push(...s);
     const nouvelles = s.filter((x) => !connues.some((c) => c.id === x.id)).length;
     bilan.push({ arrondissement: nom, seances: s.length, nouvelles, requetes: compteur.n - avant });

@@ -1,5 +1,8 @@
 # Courriel à la Ville de Montréal — demander ce qui manque
 
+> **Envoyé le 13 septembre 2026** à donneesouvertes@montreal.ca, copie au greffe.
+> En attente de réponse.
+
 Court, précis, et il ne demande aucune faveur : les trois choses demandées servent tout le
 monde, pas seulement nous. C'est ce qui rend une demande facile à accepter.
 
