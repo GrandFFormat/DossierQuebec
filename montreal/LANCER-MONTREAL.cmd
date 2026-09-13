@@ -23,7 +23,7 @@ REM
 REM  Rien a taper. S'il y a un probleme, la fenetre reste ouverte et dit lequel.
 REM ============================================================================
 
-set "BRANCHE=claude/montreal"
+set "BRANCHE=claude/villedemontreal"
 set "DEPOT_URL=https://github.com/GrandFFormat/DossierQuebec"
 set "DEPOT=%USERPROFILE%\Documents\DossierVilleMontreal"
 set "VOLET=%DEPOT%\montreal"
@@ -75,6 +75,17 @@ if errorlevel 1 (
   goto :fin_erreur
 )
 echo  Mise a jour depuis GitHub ...
+REM ls-remote sort avec 2 si la branche n'existe plus, et avec 128 s'il n'y a pas de reseau.
+git ls-remote --exit-code --heads origin "%BRANCHE%" >nul 2>nul
+if errorlevel 128 (
+  echo  [!] Impossible de joindre GitHub. Verifiez la connexion Internet.
+  goto :fin_erreur
+)
+if errorlevel 1 (
+  echo  [!] La branche %BRANCHE% n'existe plus sur GitHub.
+  echo      Retelechargez LANCER-MONTREAL.cmd, ou demandez a Claude la nouvelle version.
+  goto :fin_erreur
+)
 git fetch origin "%BRANCHE%"
 if errorlevel 1 (
   echo  [!] Impossible de joindre GitHub. Verifiez la connexion Internet.
@@ -82,7 +93,10 @@ if errorlevel 1 (
 )
 REM checkout -B + reset --hard : quoi qu'il soit arrive dans ce dossier, on repart de la
 REM version exacte de GitHub. Le cache data\textes\ (non versionne) survit.
-git checkout -B "%BRANCHE%" "origin/%BRANCHE%"
+REM -f : on jette ce qui traine dans le dossier. Sans lui, git REFUSE le checkout des
+REM qu'un fichier suivi a ete modifie ici (une extraction interrompue laisse data\ et
+REM lancement.log a moitie ecrits) et le reset --hard ci-dessous n'est jamais atteint.
+git checkout -q -f -B "%BRANCHE%" "origin/%BRANCHE%"
 if errorlevel 1 (
   echo  [!] Impossible de se placer sur la branche %BRANCHE%.
   goto :fin_erreur
@@ -93,14 +107,24 @@ echo  Version du code : %VERSION%
 echo.
 
 REM ---- 3. Se relancer depuis la version fraiche du script, si elle a change ---------
+REM fc renvoie 2 quand un des deux fichiers est introuvable, et "if errorlevel 1" est vrai
+REM pour 2 comme pour 1 : sans cette garde, un script absent de la branche se relancerait
+REM lui-meme sans fin. Le deuxieme argument borne la recursion a un seul tour.
+if not exist "%VOLET%\LANCER-MONTREAL.cmd" goto :apres_relance
+if /i "%~2"=="deja" goto :apres_relance
 fc /b "%~f0" "%VOLET%\LANCER-MONTREAL.cmd" >nul 2>nul
 if errorlevel 1 (
   echo  Le script a ete mis a jour : relance avec sa nouvelle version ...
   echo.
   copy /y "%VOLET%\LANCER-MONTREAL.cmd" "%TEMP%\LANCER-MONTREAL.cmd" >nul
-  call "%TEMP%\LANCER-MONTREAL.cmd" relance
-  exit /b
+  if errorlevel 1 (
+    echo  [!] Impossible de recopier le script : on continue avec la version actuelle.
+  ) else (
+    call "%TEMP%\LANCER-MONTREAL.cmd" relance deja
+    exit /b
+  )
 )
+:apres_relance
 
 REM ---- 4. Les dependances ---------------------------------------------------
 cd /d "%VOLET%"
@@ -142,7 +166,9 @@ if errorlevel 1 (
   git push origin "%BRANCHE%"
   if errorlevel 1 (
     echo  [!] L'envoi sur GitHub a echoue ^(pas d'acces en ecriture depuis ce PC ?^).
-    echo      Les donnees sont quand meme sur ce PC, dans %VOLET%\data.
+    echo      Les donnees sont dans "%VOLET%\data", mais SEULEMENT jusqu'au prochain
+    echo      lancement d'un des deux scripts, qui reprend la version de GitHub.
+    echo      Copiez ce dossier ailleurs si vous voulez les garder.
   ) else (
     echo  Donnees envoyees sur GitHub, branche %BRANCHE%.
   )
@@ -158,6 +184,14 @@ echo  ^(Fermez cette fenetre pour arreter le site.^)
 echo.
 start "" "http://localhost:4321"
 node scripts\static-server.js
+REM Le serveur sort avec 2 si le port est deja pris : sans ce test, la fenetre se fermerait
+REM aussitot, emportant le compte rendu de l'extraction avec elle.
+if errorlevel 1 (
+  echo.
+  echo  Le site n'a pas pu demarrer ^(voir le message ci-dessus^).
+  echo.
+  pause
+)
 goto :eof
 
 :fin_erreur
