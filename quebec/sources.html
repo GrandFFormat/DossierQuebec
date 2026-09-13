@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
 <meta name="robots" content="noindex, nofollow">
-<title>Décisions de la Ville de Québec — DossierVilleDeQuébec</title>
-<meta name="description" content="Résolutions, sommaires décisionnels, procès-verbaux et tableaux de décisions de la Ville de Québec, avec recherche, filtres par instance et résumés en langage clair.">
+<title>Sources — DossierVilleDeQuébec</title>
+<meta name="description" content="D'où viennent les données de DossierVilleDeQuébec, comment les votes nominatifs et les résumés sont produits, et ce que ce prototype ne fait pas encore.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
 </script>
 <link rel="stylesheet" href="assets/style.css">
 </head>
-<body data-page="decisions">
+<body data-page="sources">
 
 <header>
   <div class="contenu">
@@ -37,14 +37,15 @@
     </div>
     <p class="sous-titre">
       Les décisions de la Ville de Québec, lisibles. Données publiques, reprises telles quelles
-      du portail des documents décisionnels de la Ville.
+      du portail des documents décisionnels de la Ville et de la page officielle du conseil municipal.
     </p>
     <nav>
       <a href="./">Accueil</a>
-      <a href="decisions.html" aria-current="page">Décisions</a>
+      <a href="decisions.html">Décisions</a>
       <a href="votes.html">Votes nominatifs</a>
       <a href="conseil.html">Conseil municipal</a>
       <a href="lexique.html">Lexique</a>
+      <a href="sources.html" aria-current="page">Sources</a>
       <div class="taille-texte" role="group" aria-label="Taille du texte">
         <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
         <span id="texte-pct" aria-live="polite">100%</span>
@@ -56,44 +57,63 @@
   </div>
 </header>
 
-<main class="contenu">
-  <div id="chargement" class="avis">Chargement des données…</div>
+<main class="contenu prose">
+  <div id="chargement" class="avis" hidden></div>
 
-  <h2 class="page">Décisions</h2>
+  <h2 class="page">Sources</h2>
   <p class="chapeau">
-    Quatre types de documents&nbsp;: la <strong>résolution</strong> (la décision elle-même), le
-    <strong>sommaire décisionnel</strong> (la note de l'administration qui explique pourquoi),
-    le <strong>procès-verbal</strong> et le <strong>tableau des décisions</strong>.
-    Les encadrés verts sont un résumé généré par IA du sommaire — le PDF officiel reste à un clic.
+    Ce site n'est pas la Ville de Québec et n'a aucun caractère officiel. En cas de différence,
+    le document PDF d'origine fait foi — il est à un clic sur chaque fiche.
   </p>
 
-  <div class="barre-outils">
-    <input type="search" id="rech-decisions" placeholder="Rechercher dans l'objet des décisions…">
-    <select id="filtre-type"><option value="">Tous les types</option></select>
-    <select id="filtre-theme"><option value="">Tous les sujets</option></select>
-    <select id="affichage" title="Mode d'affichage">
-      <option value="seance">Grouper par séance</option>
-      <option value="liste">Liste continue</option>
-    </select>
-    <select id="filtre-instance"><option value="">Toutes les instances</option></select>
-    <label class="case"><input type="checkbox" id="filtre-resume"> Avec résumé seulement</label>
-    <button type="button" class="bouton-lien" id="tout-deplier">Tout déplier</button>
-  </div>
-  <p class="compte" id="compte-decisions"></p>
-  <div id="liste-decisions"></div>
-  <button class="plus" id="plus-decisions" hidden>Afficher plus</button>
+  <h3>D'où viennent les données</h3>
+  <ul>
+    <li>Les décisions et les votes viennent du
+      <a href="https://decisions.ville.quebec.qc.ca/" target="_blank" rel="noopener">portail des documents
+      décisionnels</a> de la Ville.</li>
+    <li>Les membres du conseil viennent de la
+      <a href="https://www.ville.quebec.qc.ca/apropos/gouvernance/conseil-municipal/membres.aspx" target="_blank" rel="noopener">page
+      officielle du conseil municipal</a>.</li>
+    <li>Les contours des districts viennent du jeu de données ouvert
+      <a href="https://www.donneesquebec.ca/recherche/dataset/vque_43" target="_blank" rel="noopener">« Districts
+      électoraux »</a> de la Ville, sous licence CC-BY&nbsp;4.0.</li>
+  </ul>
+
+  <h3>Ce qu'une machine fait, et ce qu'elle peut rater</h3>
+  <ul>
+    <li><strong>Les résumés</strong> sont écrits par une intelligence artificielle à partir du
+      sommaire décisionnel — la note que la Ville rédige avant chaque décision. Elle a pour
+      consigne de n'ajouter aucune information absente du document et de ne porter aucun jugement.</li>
+    <li><strong>Les noms des votants</strong> sont extraits du texte des résolutions, pas d'un
+      registre. Chaque vote est recoupé avec le décompte imprimé dans le document&nbsp;; tout écart
+      est affiché sur la fiche plutôt que corrigé en silence.</li>
+    <li><strong>Les pastilles de sujet</strong> n'existent pas dans les données de la Ville&nbsp;:
+      c'est un classement ajouté ici, d'après les mots de l'objet de chaque décision.</li>
+  </ul>
+
+  <h3>Deux choses à savoir</h3>
+  <ul>
+    <li>Le site ne montre que <strong>l'année en cours</strong>. Les années précédentes sont
+      conservées à part.</li>
+    <li>Un vote nominatif n'a lieu que si un membre le demande. <strong>L'absence de vote
+      nominatif ne veut pas dire qu'il y a eu consensus.</strong></li>
+  </ul>
+
+  <h3>État des données</h3>
+  <div id="etat-donnees"></div>
+  <div id="etat-archive"></div>
 </main>
 
 <footer>
   <div class="contenu">
     <p>Site citoyen indépendant. Aucun lien avec la Ville de Québec, aucun caractère officiel.
-    En cas d'écart, le document PDF d'origine fait foi. <a href="sources.html">Sources</a>.</p>
+    En cas d'écart, le document PDF d'origine fait foi.</p>
   </div>
 </footer>
 
 <script type="module" src="assets/app.js"></script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
-     Même projet Vercel : les pages vues de /villedequebec/ s'ajoutent au même tableau de
+     Même projet Vercel : les pages vues de /quebec/ s'ajoutent au même tableau de
      bord. En local le script n'existe pas (404 sans conséquence). -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>

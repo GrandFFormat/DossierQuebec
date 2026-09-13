@@ -157,7 +157,8 @@ function extraireSegment(texte, etiquette) {
 export function nettoyerNoms(segment) {
   if (!segment) return { noms: [], avertissements: [], degrade: false, declare: null };
   const avertissements = [];
-  let t = segment.replace(/\s+/g, ' ').trim();
+  // Un nom coupé par la mise en page (« Hénault- Ratelle ») est recollé avant tout.
+  let t = segment.replace(/(\p{L})-\s+(\p{L})/gu, '$1-$2').replace(/\s+/g, ' ').trim();
 
   // « Votent contre : aucun » — liste vide légitime.
   if (/^(?:aucun|aucune|personne|—|-)\b/i.test(t) || t === '') return { noms: [], avertissements, degrade: false, declare: 0 };
@@ -183,7 +184,9 @@ export function nettoyerNoms(segment) {
   // « Mmes », « Mme », « M. », « madame la mairesse », etc.
   t = t
     .replace(/\b(?:Mmes|Mme|MM\.|M\.)\s*(?:et\s+(?:Mmes|MM\.|Mme|M\.))?\s*/g, '')
-    .replace(/\b(?:mesdames|messieurs|madame|monsieur)\s+(?:les?\s+|la\s+)?(?:conseill(?:ères|ers|ère|er)|mairesses?|maires?|président(?:es|s|e)?)?\s*(?:d['’]arrondissement\s*)?/gi, '');
+    // « Mesdames et messieurs … » en un seul bloc, sinon il en restait « et … » collé au premier nom.
+    .replace(/\b(?:mesdames|messieurs|madame|monsieur)(?:\s+et\s+(?:mesdames|messieurs))?\s+(?:les?\s+|la\s+)?(?:conseill(?:ères|ers|ère|er)|mairesses?|maires?|président(?:es|s|e)?)?\s*(?:d['’]arrondissement\s*)?/gi, '')
+    .replace(/^\s*(?:et|,)\s+/i, '');
 
   const noms = t
     .split(/,|\s+et\s+|\s+ainsi que\s+|;/i)
@@ -285,6 +288,19 @@ export function parserOrdreDuJour(pages) {
       if (mp) {
         fermer();
         courant = { article: mp[1], categorie: mp[2].trim() || null, instanceFinale: null, unite: null, dossier: null, objet: [], sommairePdf: null, page: page.numero, attendDossier: false };
+        // Au comité exécutif, la ligne de l'article porte la catégorie ; au conseil municipal
+        // et à l'agglomération, elle porte directement le service et le dossier
+        // (« 20.01  Service du greffe , Direction … - 1261234001 »). Et « L'étude de ce
+        // dossier se fera à huis clos » n'est pas une catégorie.
+        const reste = courant.categorie ?? '';
+        const ms = reste.match(/^(?:(CM|CG|CE|CA)\s+)?((?:Service|Direction|Bureau|Arrondissement|Commission|Office|Soci[ée]t[ée]|Conseil|Cabinet|Secr[ée]tariat|Greffe|Ombudsman|V[ée]rificateur)\b.+?)(?:\s+-\s*(\d{10})?)?\s*$/);
+        if (ms) {
+          courant.categorie = null;
+          courant.instanceFinale = ms[1] ?? null;
+          courant.unite = ms[2].replace(/\s+,/g, ',').replace(/\s+-\s*$/, '').trim();
+          courant.dossier = ms[3] ?? null;
+          courant.attendDossier = !ms[3];
+        } else if (/huis clos/i.test(reste)) courant.categorie = null;
         continue;
       }
       if (!courant) continue;

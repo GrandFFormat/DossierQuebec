@@ -36,20 +36,33 @@ export const DOCUMENTS = 'https://ville.montreal.qc.ca/documents/Adi_Public/';
 // Ce que notre robot laisse comme contact dans son User-Agent, pour que la Ville puisse
 // nous joindre si notre trafic la dérange. MTL_CONTACT dans l'environnement ; à défaut,
 // l'adresse du site.
-const CONTACT = process.env.MTL_CONTACT || 'https://dossierquebec.ca/villedemontreal/';
+const CONTACT = process.env.MTL_CONTACT || 'https://dossierquebec.ca/montreal/';
 export const USER_AGENT = `DossierVille/0.1 (veille citoyenne; ${CONTACT})`;
 
 const DELAY_MS = Number(process.env.MTL_DELAY_MS || 600);
-let lastCallAt = 0;
+// donnees.montreal.ca demande « Crawl-Delay: 10 » dans son robots.txt (lu le 13 septembre
+// 2026, conservé dans data/robots.json). On le respecte : dix secondes entre deux requêtes
+// à ce portail — cinq ou six par jour, ça ne coûte rien.
+const DELAIS_PAR_HOTE = { 'donnees.montreal.ca': Number(process.env.MTL_DELAY_DONNEES_MS || 10000) };
+const dernierAppelParHote = new Map();
 
 export async function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-async function throttle() {
-  const wait = lastCallAt + DELAY_MS - Date.now();
+async function throttle(url = '') {
+  let hote = '';
+  try {
+    hote = new URL(url).host;
+  } catch {
+    hote = '';
+  }
+  const delai = DELAIS_PAR_HOTE[hote] ?? DELAY_MS;
+  const dernier = Math.max(dernierAppelParHote.get(hote) ?? 0, dernierAppelParHote.get('') ?? 0);
+  const wait = dernier + delai - Date.now();
   if (wait > 0) await sleep(wait);
-  lastCallAt = Date.now();
+  dernierAppelParHote.set(hote, Date.now());
+  dernierAppelParHote.set('', Date.now());
 }
 
 // Un fetch poli : throttle, User-Agent, quatre tentatives avec recul sur 429/5xx et sur
@@ -58,7 +71,7 @@ async function throttle() {
 export async function requete(url, { accept, notFoundIsNull = true } = {}) {
   let lastError;
   for (let attempt = 0; attempt < 4; attempt++) {
-    await throttle();
+    await throttle(url);
     let res;
     try {
       res = await fetch(url, {
@@ -76,7 +89,7 @@ export async function requete(url, { accept, notFoundIsNull = true } = {}) {
     // connaissent pas. On se représente une fois sous une forme de navigateur, en gardant
     // notre nom et notre contact dedans — on ne se cache pas, on se présente autrement.
     if (res.status === 403 && attempt === 0) {
-      await throttle();
+      await throttle(url);
       const res2 = await fetch(url, { headers: { 'User-Agent': `Mozilla/5.0 (compatible; ${USER_AGENT})`, ...(accept ? { Accept: accept } : {}) }, redirect: 'follow' });
       if (res2.ok) return res2;
       if (res2.status === 404 && notFoundIsNull) return null;

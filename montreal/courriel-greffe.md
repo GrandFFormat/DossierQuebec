@@ -50,9 +50,11 @@ erreurs que je trouve dans vos données — il y en a toujours, et je vous les d
    interdisent la reproduction d'images à des fins commerciales. Les procès-verbaux sont des
    documents publics ; je les reproduis sans usage commercial et avec mention de la source.
    Pouvez-vous me confirmer que cet usage vous convient, ou me dire ce qu'il faudrait changer ?
-2. Le fichier robots.txt de vos sites : si l'un d'eux exclut les robots des chemins que je lis,
-   je préfère vous le demander plutôt que de passer outre. Le débit décrit ci-dessus est
-   volontairement faible, et je peux le réduire encore si vous le souhaitez.
+2. Vos fichiers robots.txt : `ville.montreal.qc.ca` autorise tout, et je respecte le délai de
+   10 secondes que demande `donnees.montreal.ca`. Ce dernier exclut aussi `/api/` des robots
+   d'indexation ; j'y fais cinq ou six requêtes par jour, par l'API CKAN prévue pour les
+   programmes, et pour retrouver l'adresse à jour de vos fichiers plutôt que de la coder en
+   dur. Si vous préférez que je lise les fichiers autrement, dites-le-moi.
 
 **Ce que je demande.** Votre accord pour continuer à lire les documents comme décrit, et pour
 rendre le site public. Tant que je n'ai pas votre réponse, les pages restent hors des moteurs
@@ -63,4 +65,4 @@ Je reste disponible pour toute question, et pour ajuster ce qui doit l'être.
 Merci de votre attention,
 
 Martin Archambault
-[courriel] — https://dossierquebec.ca/villedemontreal/ (prototype)
+[courriel] — https://dossierquebec.ca/montreal/ (prototype)

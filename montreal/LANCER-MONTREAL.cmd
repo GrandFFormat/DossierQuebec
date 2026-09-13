@@ -23,10 +23,10 @@ REM
 REM  Rien a taper. S'il y a un probleme, la fenetre reste ouverte et dit lequel.
 REM ============================================================================
 
-set "BRANCHE=claude/villedemontreal"
+set "BRANCHE=claude/montreal"
 set "DEPOT_URL=https://github.com/GrandFFormat/DossierQuebec"
 set "DEPOT=%USERPROFILE%\Documents\DossierVilleMontreal"
-set "VOLET=%DEPOT%\villedemontreal"
+set "VOLET=%DEPOT%\montreal"
 
 REM Windows lit un .cmd pendant qu'il l'execute : on ne tourne jamais depuis un fichier
 REM que git pourrait reecrire. Premiere etape, toujours : se recopier dans le dossier
@@ -134,7 +134,7 @@ echo.
 
 REM ---- 6. Envoi sur GitHub --------------------------------------------------
 cd /d "%DEPOT%"
-git add villedemontreal/data
+git add montreal/data
 git diff --cached --quiet
 if errorlevel 1 (
   echo  Envoi des donnees sur GitHub ...

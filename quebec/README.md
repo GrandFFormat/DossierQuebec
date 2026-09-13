@@ -9,8 +9,8 @@ Ce n'est pas un site de la Ville de Québec et ça n'a aucun caractère officiel
 Pour refaire la même chose ailleurs : `REPRODUIRE-POUR-UNE-AUTRE-VILLE.md` — ce qui se
 réutilise tel quel, ce qui se réécrit, dans quel ordre, et les pièges déjà rencontrés.
 
-Le site est servi comme volet de DossierQuébec, à **https://dossierquebec.ca/villedequebec/**,
-et ce dossier vit dans le dépôt de DossierQuébec sous `villedequebec/` : mêmes déploiements
+Le site est servi comme volet de DossierQuébec, à **https://dossierquebec.ca/quebec/**,
+et ce dossier vit dans le dépôt de DossierQuébec sous `quebec/` : mêmes déploiements
 (Vercel, à chaque push), même tableau de bord, même mécanique de rafraîchissement automatique.
 Tant que la Ville n'a pas répondu à la demande d'autorisation, les pages restent hors des
 moteurs de recherche (voir « Les pages »).
@@ -100,7 +100,7 @@ lues à l'exécution depuis `data/*.json` : chaque page fait quelques kilo-octet
 extraction met tout le site à jour.
 
 Tant que la Ville n'a pas répondu, les pages portent `<meta name="robots" content="noindex,
-nofollow">`, le `vercel.json` de DossierQuébec ajoute `X-Robots-Tag` sur `/villedequebec/`, et
+nofollow">`, le `vercel.json` de DossierQuébec ajoute `X-Robots-Tag` sur `/quebec/`, et
 le lien depuis DossierQuébec est en `rel="nofollow"`. Le jour où ça débloque : retirer ces trois
 verrous et ajouter les pages au `sitemap.xml` de DossierQuébec.
 

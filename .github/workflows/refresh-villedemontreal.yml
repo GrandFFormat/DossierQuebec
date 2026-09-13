@@ -1,8 +1,8 @@
-# Rafraîchissement quotidien du volet Montréal (villedemontreal/).
+# Rafraîchissement quotidien du volet Montréal (montreal/).
 #
 # Même mécanique que refresh.yml : chaque matin, on relance les extractions, et s'il y a du
-# nouveau on committe et on pousse — Vercel redéploie. Tout se passe dans villedemontreal/,
-# qui a ses propres scrapers et ses deux dépendances (voir villedemontreal/README.md).
+# nouveau on committe et on pousse — Vercel redéploie. Tout se passe dans montreal/,
+# qui a ses propres scrapers et ses deux dépendances (voir montreal/README.md).
 #
 # Secrets et variables (Settings > Secrets and variables > Actions) :
 #   ANTHROPIC_API_KEY  secret — résumés en langage clair. Sans lui, l'étape est sautée et
@@ -34,7 +34,7 @@ jobs:
     timeout-minutes: 45
     defaults:
       run:
-        working-directory: villedemontreal
+        working-directory: montreal
     steps:
       - name: Récupérer le dépôt
         uses: actions/checkout@v5
@@ -46,11 +46,11 @@ jobs:
         id: volet
         working-directory: .
         run: |
-          if [ -f villedemontreal/package.json ]; then
+          if [ -f montreal/package.json ]; then
             echo "present=oui" >> "$GITHUB_OUTPUT"
           else
             echo "present=non" >> "$GITHUB_OUTPUT"
-            echo "::notice::Pas de dossier villedemontreal/ sur cette branche — rien à rafraîchir."
+            echo "::notice::Pas de dossier montreal/ sur cette branche — rien à rafraîchir."
           fi
 
       - name: Installer Node.js
@@ -70,7 +70,7 @@ jobs:
         if: ${{ steps.volet.outputs.present == 'oui' }}
         uses: actions/cache@v4
         with:
-          path: villedemontreal/data/textes
+          path: montreal/data/textes
           key: textes-montreal-${{ github.run_id }}
           restore-keys: |
             textes-montreal-
@@ -83,7 +83,7 @@ jobs:
           MTL_CONTACT: ${{ vars.MTL_CONTACT }}
         run: npm run refresh
 
-      # Seul villedemontreal/data/ bouge (data/textes/ est ignoré par git). On rebase avant
+      # Seul montreal/data/ bouge (data/textes/ est ignoré par git). On rebase avant
       # de pousser au cas où quelqu'un aurait poussé pendant le job.
       - name: Committer et pousser s'il y a des changements
         if: ${{ steps.volet.outputs.present == 'oui' }}
@@ -91,7 +91,7 @@ jobs:
         run: |
           git config user.name "dossierquebec-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add villedemontreal/data
+          git add montreal/data
           if git diff --cached --quiet; then
             echo "Aucun changement — rien à committer."
           else

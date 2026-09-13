@@ -1,8 +1,8 @@
-# Rafraîchissement quotidien du volet municipal (dossierquebec.ca/villedequebec/).
+# Rafraîchissement quotidien du volet municipal (dossierquebec.ca/quebec/).
 #
 # Même mécanique que refresh.yml : chaque matin, on relance les extractions, et s'il y a du
-# nouveau on committe et on pousse — Vercel redéploie. Tout se passe dans villedequebec/, qui
-# a ses propres scrapers et sa propre dépendance (voir villedequebec/README.md).
+# nouveau on committe et on pousse — Vercel redéploie. Tout se passe dans quebec/, qui
+# a ses propres scrapers et sa propre dépendance (voir quebec/README.md).
 #
 # Secrets et variables (Settings > Secrets and variables > Actions) :
 #   ANTHROPIC_API_KEY  secret, déjà utilisé par refresh.yml — résumés en langage clair.
@@ -36,7 +36,7 @@ jobs:
     timeout-minutes: 45
     defaults:
       run:
-        working-directory: villedequebec
+        working-directory: quebec
     steps:
       - name: Récupérer le dépôt
         uses: actions/checkout@v5
@@ -56,14 +56,14 @@ jobs:
           GPD_CONTACT: ${{ vars.GPD_CONTACT }}
         run: npm run refresh
 
-      # Seul villedequebec/data/ bouge. On rebase avant de pousser au cas où quelqu'un
+      # Seul quebec/data/ bouge. On rebase avant de pousser au cas où quelqu'un
       # aurait poussé pendant le job.
       - name: Committer et pousser s'il y a des changements
         working-directory: .
         run: |
           git config user.name "dossierquebec-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add villedequebec/data
+          git add quebec/data
           if git diff --cached --quiet; then
             echo "Aucun changement — rien à committer."
           else
