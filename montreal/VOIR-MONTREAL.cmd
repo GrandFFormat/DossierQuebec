@@ -12,26 +12,57 @@ REM    1. verifie que Node.js et Git sont installes ;
 REM    2. ramene sa copie du depot (Documents\DossierVilleMontreal) a la derniere version
 REM       de la branche sur GitHub - donnees comprises, celles que GitHub Actions a
 REM       extraites ce matin ;
-REM    3. ouvre http://localhost:4321 dans le navigateur et sert le site.
+REM    3. se relance depuis la version du script qui est dans le depot ;
+REM    4. ouvre http://localhost:4321 dans le navigateur et sert le site.
 REM
 REM  Il ne lit aucun proces-verbal et n'envoie rien sur GitHub : quelques secondes, pas
 REM  quelques minutes. Pour extraire des donnees fraiches, c'est LANCER-MONTREAL.cmd.
 REM  Fermer la fenetre arrete le site.
+REM
+REM  Trois tours : le fichier double-clique (tour 0) se recopie dans %TEMP% et se
+REM  relance (tour 1) ; le tour 1 met le depot a jour, puis relance la copie du depot
+REM  (tour 2, argument "deja") qui sert le site. Chaque tour tourne depuis un fichier
+REM  que personne ne reecrit pendant qu'il s'execute : cmd lit un .cmd au fur et a
+REM  mesure, et git reset --hard remplace celui du depot.
 REM ============================================================================
 
 set "BRANCHE=claude/villedemontreal"
 set "DEPOT_URL=https://github.com/GrandFFormat/DossierQuebec"
 set "DEPOT=%USERPROFILE%\Documents\DossierVilleMontreal"
 set "VOLET=%DEPOT%\montreal"
+REM Le verrou : un fichier que LANCER-MONTREAL garde OUVERT pendant qu'il extrait. cmd
+REM ouvre ses redirections sans partage en ecriture, donc tant qu'une fenetre le tient,
+REM personne d'autre ne peut l'ouvrir ; et fermer cette fenetre le libere, quoi qu'il
+REM arrive. Rien ne reste jamais a supprimer a la main.
+set "VERROU=%TEMP%\DossierVilleMontreal.verrou"
 
-REM Windows lit un .cmd pendant qu'il l'execute : on ne tourne jamais depuis un fichier
-REM que git pourrait reecrire. Premiere etape, toujours : se recopier dans le dossier
-REM temporaire et se relancer de la. "relance" en argument = on y est deja.
+REM ---- Tour 0 : se recopier dans %TEMP% sous un nom unique et se relancer de la ------
+REM Nom unique : %RANDOM% est seme avec l'heure en secondes, deux fenetres ouvertes la
+REM meme seconde tirent la meme suite. md est atomique et echoue si le dossier existe :
+REM le nom n'appartient qu'a la fenetre qui l'a cree (on ne reessaie que sur collision,
+REM pas si %TEMP% est inaccessible). TOUR est herite par les tours suivants.
+if defined TOUR goto :tour_ok
+:tour_nom
+set "TOUR=%TEMP%\VOIR-MONTREAL-%RANDOM%%RANDOM%"
+md "%TOUR%" 2>nul || if exist "%TOUR%\*" goto :tour_nom
+:tour_ok
 if /i not "%~1"=="relance" (
-  copy /y "%~f0" "%TEMP%\VOIR-MONTREAL.cmd" >nul
-  call "%TEMP%\VOIR-MONTREAL.cmd" relance
+  REM Menage : quand on ferme la fenetre, le rd ci-dessous n'est jamais atteint et le
+  REM dossier reste. On ne balaie que ceux d'au moins deux jours : une fenetre encore
+  REM ouverte peut executer les plus recents.
+  forfiles /p "%TEMP%" /m "VOIR-MONTREAL-*" /d -2 /c "cmd /c if @isdir==TRUE rd /s /q @path" >nul 2>nul
+  copy /y "%~f0" "%TOUR%\1.cmd" >nul
+  if errorlevel 1 (
+    echo  [!] Impossible de se recopier dans "%TEMP%".
+    goto :fin_erreur
+  )
+  call "%TOUR%\1.cmd" relance
+  rd /s /q "%TOUR%" 2>nul
   exit /b
 )
+
+REM ---- Tour 2 : le depot est deja a jour, il ne reste qu'a servir -----------------
+if /i "%~2"=="deja" goto :servir
 
 echo.
 echo  ===================================================
@@ -53,12 +84,13 @@ if errorlevel 1 (
   goto :fin_erreur
 )
 
-REM ---- 2. La copie du depot, a la derniere version (donnees comprises) -------
+REM ---- 2. La copie du depot, exactement a la derniere version ----------------
 if not exist "%DEPOT%\.git" (
   echo  Telechargement du depot dans "%DEPOT%" ...
   git clone --branch "%BRANCHE%" "%DEPOT_URL%" "%DEPOT%"
   if errorlevel 1 (
-    echo  [!] Le telechargement du depot a echoue. Verifiez la connexion Internet.
+    echo  [!] Le telechargement du depot a echoue. Verifiez la connexion Internet, et
+    echo      qu'aucun dossier "%DEPOT%" a moitie rempli ne traine deja.
     goto :fin_erreur
   )
 )
@@ -66,6 +98,16 @@ cd /d "%DEPOT%"
 if errorlevel 1 (
   echo  [!] Impossible d'ouvrir "%DEPOT%".
   goto :fin_erreur
+)
+REM ---- Une extraction tourne-t-elle deja dans une autre fenetre ? -----------------
+REM Si oui, on ne touche pas au depot : la remise a zero ci-dessous ecraserait les
+REM fichiers qu'elle est en train d'ecrire.
+2>nul ( >>"%VERROU%" (call ) ) || (
+  echo  [!] LANCER-MONTREAL.cmd est en train d'extraire des donnees dans une autre fenetre.
+  echo      Attendez qu'il affiche "Ouverture du site", puis relancez ce script.
+  echo.
+  pause
+  goto :eof
 )
 echo  Mise a jour depuis GitHub ...
 REM ls-remote sort avec 2 si la branche n'existe plus, et avec 128 s'il n'y a pas de reseau :
@@ -87,11 +129,10 @@ if errorlevel 1 (
   echo.
   goto :servir
 )
-REM checkout -B + reset --hard : quoi qu'il soit arrive dans ce dossier, on repart de la
-REM version exacte de GitHub. Le cache data\textes\ (non versionne) survit.
-REM -f : on jette ce qui traine dans le dossier. Sans lui, git REFUSE le checkout des
-REM qu'un fichier suivi a ete modifie ici (une extraction interrompue, par exemple) et
-REM le reset --hard ci-dessous, cense tout rattraper, n'est jamais atteint.
+REM checkout -f -B + reset --hard : quoi qu'il soit arrive dans ce dossier, on repart de
+REM la version exacte de GitHub. Le cache data\textes\ (non versionne) survit.
+REM Sans -f, git REFUSE le checkout des qu'un fichier suivi a ete modifie ici (une
+REM extraction interrompue, par exemple) et le reset --hard n'est jamais atteint.
 git checkout -q -f -B "%BRANCHE%" "origin/%BRANCHE%"
 if errorlevel 1 (
   echo  [!] Impossible de se placer sur la branche %BRANCHE%.
@@ -103,24 +144,18 @@ for /f "tokens=*" %%v in ('git log -1 --date^=short --format^=%%cd') do set "DAT
 echo  Version du code : %VERSION%  ^(derniere mise a jour : %DATE_DONNEES%^)
 echo.
 
-REM ---- 3. Se relancer depuis la version fraiche du script, si elle a change ---------
-REM fc renvoie 2 quand un des deux fichiers est introuvable, et "if errorlevel 1" est vrai
-REM pour 2 comme pour 1 : sans cette garde, un script absent de la branche se relancerait
-REM lui-meme sans fin. Le deuxieme argument borne la recursion a un seul tour.
+REM ---- 3. Se relancer depuis la copie du depot, sous un autre nom ----------------
+REM Un autre nom : on ne reecrit jamais le fichier en cours d'execution. Pas de
+REM comparaison prealable, elle serait faussee par les fins de ligne (le depot livre
+REM du CRLF, un telechargement direct du LF). L'argument "deja" borne a un tour.
 if not exist "%VOLET%\VOIR-MONTREAL.cmd" goto :servir
-if /i "%~2"=="deja" goto :servir
-fc /b "%~f0" "%VOLET%\VOIR-MONTREAL.cmd" >nul 2>nul
+copy /y "%VOLET%\VOIR-MONTREAL.cmd" "%TOUR%\2.cmd" >nul
 if errorlevel 1 (
-  echo  Le script a ete mis a jour : relance avec sa nouvelle version ...
-  echo.
-  copy /y "%VOLET%\VOIR-MONTREAL.cmd" "%TEMP%\VOIR-MONTREAL.cmd" >nul
-  if errorlevel 1 (
-    echo  [!] Impossible de recopier le script : on continue avec la version actuelle.
-  ) else (
-    call "%TEMP%\VOIR-MONTREAL.cmd" relance deja
-    exit /b
-  )
+  echo  [!] Impossible de recopier le script : on continue avec la version actuelle.
+  goto :servir
 )
+call "%TOUR%\2.cmd" relance deja
+exit /b
 
 :servir
 REM ---- 4. Le site en local ----------------------------------------------------
@@ -135,6 +170,17 @@ echo  ^(Fermez cette fenetre pour arreter le site.^)
 echo.
 start "" "http://localhost:4321"
 node scripts\static-server.js
+REM Le serveur sort avec 2 si le port est deja pris : le site tourne dans une autre
+REM fenetre et la page vient de s'ouvrir dessus, rien a signaler. Tout autre code
+REM non nul est une vraie panne.
+if errorlevel 3 goto :fin_erreur
+if errorlevel 2 (
+  echo.
+  echo  Le site tourne deja dans une autre fenetre : la page est ouverte dans le navigateur.
+  echo.
+  pause
+  goto :eof
+)
 if errorlevel 1 goto :fin_erreur
 goto :eof
 
