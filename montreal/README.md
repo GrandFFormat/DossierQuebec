@@ -289,7 +289,8 @@ scripts/reparer-echappements.js  répare les accents échappés dans les résum�
 test/pv.test.js          les lecteurs, hors ligne (npm test)
 assets/style.css assets/app.js
 index.html decisions.html votes.html conseil.html lexique.html sources.html
-courriel-greffe.md       le modèle du courriel à envoyer avant de rendre le site public
+courriel-greffe.md       le modèle du courriel au greffe, sur les droits d'usage
+courriel-donnees-ouvertes.md  demander le calendrier des arrondissements et un index
 data/                    sorties JSON (data/textes/ = cache, hors dépôt)
 ../.github/workflows/refresh-villedemontreal.yml   le workflow quotidien
 ../.vercelignore         garde lib/, scrapers/, scripts/, test/ hors du site servi
