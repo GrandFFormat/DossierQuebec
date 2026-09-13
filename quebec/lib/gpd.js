@@ -51,7 +51,7 @@ async function queryKey() {
 // nous joindre si notre trafic la dérange — la contrepartie minimale du Disallow.
 // GPD_CONTACT dans l'environnement (une adresse courriel, par exemple) ; à défaut,
 // l'adresse du site, où la Ville trouve qui nous sommes.
-const CONTACT = process.env.GPD_CONTACT || 'https://dossierquebec.ca/villedequebec/';
+const CONTACT = process.env.GPD_CONTACT || 'https://dossierquebec.ca/quebec/';
 const USER_AGENT = `DossierVille/0.1 (veille citoyenne; ${CONTACT})`;
 
 const DELAY_MS = Number(process.env.GPD_DELAY_MS || 600);
