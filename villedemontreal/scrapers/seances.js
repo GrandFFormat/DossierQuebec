@@ -78,12 +78,17 @@ export function seanceDepuisLigne(ligne, cles) {
     const c = colonne(cles, ...frags);
     return c ? ligne[c] : '';
   };
-  const instance = codeInstance(col('instance', 'conseil', 'comite', 'type', 'organisme', 'titre', 'nom'));
+  // Colonnes vues dans le jeu de la Ville : seance, lien_site_ville, date, heure_debut,
+  // heure_fin, lien_video_seance. « seance » porte l'instance et le caractère ordinaire ou
+  // extraordinaire (« Séance extraordinaire du conseil municipal »).
+  const libelle = col('seance', 'instance', 'conseil', 'comite', 'type', 'organisme', 'titre', 'nom');
+  const instance = codeInstance(libelle);
   const date = lireDate(col('date de la seance', 'date debut', 'date', 'debut'));
   if (!instance || !date) return null;
-  const heureLue = lireHeure(col('heure de debut', 'heure', 'debut', 'date'));
-  const titre = [col('titre'), col('type de seance', 'type')].filter(Boolean).join(' — ') || null;
-  const variante = /extra/i.test([titre, col('type')].join(' ')) ? 'EXTRA' : 'ORDI';
+  const heureLue = lireHeure(col('heure debut', 'heure de debut', 'heure', 'debut', 'date'));
+  const titre = [libelle, col('titre'), col('type de seance', 'type')].filter(Boolean).join(' — ') || null;
+  const variante = /extra/i.test([libelle, col('type')].join(' ')) ? 'EXTRA' : 'ORDI';
+  const lien = normaliserEspacesLien(col('lien site ville', 'lien', 'url'));
   const heure = heureLue ?? HEURES_HABITUELLES[instance];
   return {
     id: idSeance({ instance, date, heure }),
@@ -94,8 +99,13 @@ export function seanceDepuisLigne(ligne, cles) {
     heureSupposee: !heureLue,
     variante,
     titre,
+    lien: lien || null,
     source: 'calendrier',
   };
+}
+
+function normaliserEspacesLien(s) {
+  return String(s ?? '').trim();
 }
 
 // Les liens de documents dans n'importe quel HTML.

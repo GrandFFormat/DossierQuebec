@@ -73,10 +73,14 @@ export function parserCsv(texte) {
   return { colonnes, cles, lignes: objets };
 }
 
-// La première colonne dont la clé normalisée contient l'un des fragments donnés.
+// La colonne qui correspond à l'un des fragments donnés, dans l'ordre des fragments et, pour
+// chacun, d'abord la clé exacte, puis celle qui commence par le fragment, puis celle qui le
+// contient. ⚠ Sans cet ordre, demander « nom » renvoyait « prenom » (qui contient « nom ») :
+// tous les élus s'appelaient « Soraya Soraya ».
 export function colonne(cles, ...fragments) {
   for (const f of fragments) {
-    const trouve = cles.find((c) => c.includes(normaliserCle(f)));
+    const n = normaliserCle(f);
+    const trouve = cles.find((c) => c === n) ?? cles.find((c) => c.startsWith(n)) ?? cles.find((c) => c.includes(n));
     if (trouve) return trouve;
   }
   return null;

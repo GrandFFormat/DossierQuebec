@@ -485,7 +485,7 @@ function carteMembreAgglo(m) {
 // Pas de jeu de données à part : ses membres sont les élus dont les rôles publiés par la
 // Ville disent « comité exécutif » (présidence, vice-présidence, membre, responsabilités).
 function membresComiteExecutif() {
-  return (etat.elus?.membres ?? []).filter((m) => [m.fonction, ...(m.roles ?? [])].some((r) => /comit[ée] ex[ée]cutif/i.test(r ?? '')));
+  return (etat.elus?.membres ?? []).filter((m) => m.comiteExecutif || [m.fonction, ...(m.roles ?? [])].some((r) => /comit[ée] ex[ée]cutif/i.test(r ?? '')));
 }
 
 function carteMembreCe(m) {

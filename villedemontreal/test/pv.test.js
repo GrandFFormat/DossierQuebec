@@ -208,3 +208,68 @@ test('calendrier : instance, date, heure, et liens dans une page', () => {
   assert.deepEqual(trouvees.map((s) => s.id), ['CM_2026-01-26_13h00', 'CG_2026-02-05_17h00']);
   assert.equal(trouvees[1].variante, 'EXTRA');
 });
+
+// ---------- les en-têtes RÉELS des jeux de la Ville (premier lancement, 12 sept. 2026) ----------
+import { villeDe } from '../scrapers/agglomeration.js';
+import { estArrondissement, cleStricte } from '../lib/noms.js';
+
+test('colonne : la clé exacte gagne sur celle qui contient le fragment', () => {
+  const cles = ['appellation', 'prenom', 'nom', 'fonction elective'];
+  assert.equal(colonne(cles, 'nom de famille', 'nom'), 'nom');
+  assert.equal(colonne(cles, 'prenom'), 'prenom');
+  assert.equal(colonne(cles, 'fonction'), 'fonction elective');
+});
+
+test('élus 2025 : Appellation, Prénom, Nom, Fonction élective, Fonctions additionnelles, Responsabilités CE…', () => {
+  const csv = 'Appellation,Prénom,Nom,Fonction élective,Fonctions additionnelles,Responsabilités CE,Arrondissement,District,Parti,Bureau,Téléphone,Courriel officiel,Historique des changements d\'allégeance,Historique des fonctions terminées\n' +
+    'Madame,Soraya,Martinez Ferrada,Mairesse de la Ville de Montréal,Présidente du comité exécutif,"Responsable du développement de l\'Est",Ville-Marie,,Ensemble Montréal,Hôtel de ville,Tél. :,soraya@montreal.ca,,\n' +
+    'Madame,Ericka,Alneus,Conseiller(ère) de la Ville,Cheffe de l\'opposition officielle,,Rosemont–La Petite-Patrie,Étienne-Desmarteau,Projet Montréal,,Tél. : 514 872-0000,ericka@montreal.ca,,\n' +
+    'Monsieur,Alan,DeSousa,Maire(sse) d\'arrondissement,Membre du comité exécutif,Responsable des finances,Saint-Laurent,,Ensemble Montréal,,,alan@montreal.ca,,\n' +
+    'Monsieur,Pierre,Lafond,Conseiller(ère) d\'arrondissement,,,Anjou,Est,Équipe Anjou,,,,,\n';
+  const { cles, lignes } = parserCsv(csv);
+  const m = lignes.map((l) => normaliserMembre(l, cles));
+  assert.equal(m[0].nomComplet, 'Soraya Martinez Ferrada');
+  assert.equal(m[0].fonction, 'Mairesse ou maire de Montréal');
+  assert.equal(m[0].comiteExecutif, true);
+  assert.equal(m[0].telephone, null);
+  assert.equal(m[1].nomComplet, 'Ericka Alneus');
+  assert.equal(m[1].fonction, 'Conseiller de ville');
+  assert.equal(m[1].siegeAuConseilMunicipal, true);
+  assert.equal(m[1].telephone, '514 872-0000');
+  assert.deepEqual(m[1].roles, ["Cheffe de l'opposition officielle"]);
+  assert.equal(m[1].comiteExecutif, false);
+  assert.equal(m[2].fonction, "Maire d'arrondissement");
+  assert.equal(m[2].comiteExecutif, true);
+  assert.deepEqual(m[2].roles, ['Membre du comité exécutif', 'Responsable des finances']);
+  assert.equal(m[3].siegeAuConseilMunicipal, false);
+  assert.equal(m[0].genre, 'Madame');
+});
+
+test('agglomération 2025 : « Arrondissement / Ville liée » tranche entre Montréal et ville liée', () => {
+  assert.equal(villeDe('Conseiller(ère) de la Ville', 'Ville-Marie'), 'Montréal');
+  assert.equal(villeDe('Conseiller(ère) de la Ville', 'Côte-des-Neiges - Notre-Dame-de-Grâce'), 'Montréal');
+  assert.equal(villeDe('Maire(sse)', 'Dorval'), 'Dorval');
+  assert.equal(villeDe('Maire(sse)', 'Ville de Mont-Royal'), 'Mont-Royal');
+  assert.equal(estArrondissement("L'Ile-Bizard - Sainte-Geneviève"), true);
+  assert.equal(estArrondissement('Westmount'), false);
+});
+
+test('calendrier 2026 : seance, lien_site_ville, date, heure_debut, heure_fin, lien_video_seance', () => {
+  const { cles, lignes } = parserCsv('seance,lien_site_ville,date,heure_debut,heure_fin,lien_video_seance\n' +
+    'Conseil municipal,https://montreal.ca/evenements/seance-du-conseil-municipal-102468,2026-01-26,13:00,23:00,\n' +
+    "Séance extraordinaire du conseil d'agglomération,,2026-02-05,17:00,,\n" +
+    'Comité exécutif,,2026-01-28,09:30,,\n');
+  const s = lignes.map((l) => seanceDepuisLigne(l, cles));
+  assert.equal(s[0].id, 'CM_2026-01-26_13h00');
+  assert.equal(s[0].variante, 'ORDI');
+  assert.match(s[0].lien, /montreal\.ca/);
+  assert.equal(s[1].id, 'CG_2026-02-05_17h00');
+  assert.equal(s[1].variante, 'EXTRA');
+  assert.equal(s[2].id, 'CE_2026-01-28_09h30');
+  assert.equal(s[2].heureSupposee, false);
+});
+
+test('clé stricte : De Lorimier = DeLorimier', () => {
+  assert.equal(cleStricte('De Lorimier'), cleStricte('DeLorimier'));
+  assert.equal(cleStricte('Saint-Paul–Émard'), cleStricte('Saint-Paul—Émard'));
+});
