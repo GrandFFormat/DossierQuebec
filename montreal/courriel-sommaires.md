@@ -37,10 +37,13 @@ Par exemple, la résolution CM26 0590 du 15 juin 2026 renvoie au dossier 1269902
 il est numéroté, il est public — je n'ai simplement pas le chemin pour l'atteindre.
 
 Mon idée était de le trouver dans l'ordre du jour. Vos fichiers s'appellent
-`CM_ODJ_LPP_ORDI_…`, où LPP signifie, si je comprends bien, « liens vers les pièces
-publiques ». Mais les PDF que je récupère à cette adresse ne contiennent aucun hyperlien :
-le nom du fichier annonce des liens, le fichier n'en a pas. Peut-être les liens se perdent-ils
-à la génération du PDF, peut-être me trompé-je sur le sens de LPP.
+`CM_ODJ_LPP_ORDI_…` ou `CM_ODJ_LP_ORDI_…`, où LP et LPP signifient, si je comprends bien,
+« liens vers les pièces publiques ». Or ces PDF ne contiennent aucun hyperlien. Je l'ai
+d'abord constaté par programme, puis vérifié à la main dans un navigateur, sur
+`CA_Rpp_ODJ_LP_ORDI_2025-05-05_19h00_FR.pdf` : aucun point de l'ordre du jour n'est
+cliquable, aucun numéro de dossier non plus. Le nom du fichier annonce des liens, le fichier
+n'en a pas. Peut-être se perdent-ils à la génération du PDF ; peut-être me trompé-je sur le
+sens du sigle. Dans les deux cas la réponse m'intéresse.
 
 **Ma question, en une phrase.** Existe-t-il une adresse stable qui donne le sommaire
 décisionnel à partir de son numéro de dossier, quelque chose comme
