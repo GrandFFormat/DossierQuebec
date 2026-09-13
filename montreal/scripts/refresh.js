@@ -38,6 +38,11 @@ const depuis = new Date(Date.UTC(maintenant.getUTCFullYear(), maintenant.getUTCM
   .slice(0, 10);
 
 const complet = args.has('complet') || maintenant.getUTCDate() === 1;
+// Le calendrier des arrondissements se reconstitue en cherchant les documents : c'est la
+// seule étape qui coûte des centaines de requêtes à la Ville. Une fois les séances
+// connues, elles ne sont plus re-sondées, donc l'étape est bon marché au quotidien — mais
+// on la saute quand même si on la lui demande.
+const arrondissements = !args.has('sans-arrondissements');
 const conseil = args.has('elus') || maintenant.getUTCDay() === 1 || !existsSync('data/elus.json');
 
 const fichierCle = ['api.env', '../api.env'].find((f) => existsSync(f));
@@ -57,9 +62,20 @@ const ETAPES = [
     : []),
   { nom: 'robots.txt des sites de la Ville', argv: ['scrapers/robots.js'], secondaire: true },
   { nom: 'Calendrier des séances', argv: ['scrapers/seances.js'] },
+  ...(arrondissements
+    ? [{ nom: "Calendrier des séances d'arrondissement", argv: ['scrapers/seances-arrondissements.js'], secondaire: true }]
+    : []),
   // --max-old-space-size : un procès-verbal du conseil municipal fait des centaines de pages ;
   // le premier lancement s'est éteint sans un mot au milieu de l'un d'eux.
-  { nom: "Décisions de l'année" + (complet ? ' (relecture complète)' : ''), argv: ['--max-old-space-size=4096', 'scrapers/decisions.js', ...(complet ? ['--complet'] : [])] },
+  {
+    nom: "Décisions de l'année" + (complet ? ' (relecture complète)' : ''),
+    argv: [
+      '--max-old-space-size=4096',
+      'scrapers/decisions.js',
+      ...(complet ? ['--complet'] : []),
+      ...(arrondissements ? [] : ['--sans-arrondissements']),
+    ],
+  },
   {
     nom: 'Votes enregistrés' + (complet ? ' (année complète)' : ` (depuis ${depuis})`),
     argv: ['--max-old-space-size=4096', 'scrapers/votes.js', ...(complet ? ['--complet'] : [`--depuis=${depuis}`])],

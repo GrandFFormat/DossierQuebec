@@ -38,8 +38,11 @@
 
 import { texteDegrade } from './pdf.js';
 
-// « CM26 0355 », « CG26 0123 », « CE26 0412 » en début de ligne.
-const NUMERO_RESOLUTION = /^(C[MGEA])\s?(\d{2})\s+(\d{4})\s*$/;
+// « CM26 0355 », « CG26 0123 », « CE26 0412 » en début de ligne. Les conseils
+// d'arrondissement intercalent leur numéro d'arrondissement : « CA26 12 0123 ». Le
+// groupe du milieu est donc facultatif, et il est conservé à part — c'est lui qui dit
+// de quel arrondissement vient la résolution, quand le nom du fichier ne le dit pas.
+const NUMERO_RESOLUTION = /^(C[MGEA])\s?(\d{2})\s+(?:(\d{1,2})\s+)?(\d{4})\s*$/;
 // « 20.03   1266245003 » (article + dossier) ; « 03.01 » seul pour les points sans dossier.
 const LIGNE_ARTICLE = /^(\d{2}\.\d{2,3})(?:\s+(\d{10}))?\s*$/;
 
@@ -99,15 +102,23 @@ export function extraireDissidences(bloc) {
 // exécutif (« par sa résolution CE26 0412 »), mais celles-là ne sont pas sur une ligne à
 // part, donc ne déclenchent pas de bloc.
 export function decouperResolutions(texte, { instance } = {}) {
+  const prefixeAttendu = instance?.startsWith('CA_') ? 'CA' : instance;
   const lignes = normaliserTexte(texte).split('\n');
   const blocs = [];
   let courant = null;
   for (const brut of lignes) {
     const l = brut.trim();
     const m = l.match(NUMERO_RESOLUTION);
-    if (m && (!instance || m[1] === instance)) {
+    // Une séance d'arrondissement s'appelle « CA_Mhm » mais ses résolutions sont
+    // préfixées « CA » tout court : on compare sur le préfixe.
+    if (m && (!instance || m[1] === prefixeAttendu)) {
       if (courant) blocs.push(courant);
-      courant = { numero: `${m[1]}${m[2]} ${m[3]}`, lignes: [] };
+      const [, prefixe, an, numeroArrondissement, sequence] = m;
+      courant = {
+        numero: `${prefixe}${an} ${numeroArrondissement ? numeroArrondissement + ' ' : ''}${sequence}`,
+        numeroArrondissement: numeroArrondissement ?? null,
+        lignes: [],
+      };
       continue;
     }
     if (courant) courant.lignes.push(l);
@@ -128,6 +139,7 @@ export function decouperResolutions(texte, { instance } = {}) {
     const vote = parserVote(bloc);
     return {
       numero: b.numero,
+      numeroArrondissement: b.numeroArrondissement ?? null,
       objet: extraireObjet(b.lignes),
       article,
       dossier,

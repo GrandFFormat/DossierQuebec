@@ -166,6 +166,63 @@ export const INSTANCES = {
   CE: { code: 'CE', nom: 'Comité exécutif', prefixeResolution: 'CE' },
 };
 
+// LES 19 CONSEILS D'ARRONDISSEMENT. Chaque code a été relevé dans une URL réellement
+// publiée par la Ville — aucun n'est déduit d'une règle. La règle n'existe d'ailleurs
+// pas : « Mhm », « Rdp », « Vsm » prennent l'initiale de chaque composante du nom,
+// « Ahu », « Lac », « Out » les trois premières lettres, et « Las »/« Lac » comme
+// « Slt »/« Sld » ne sont que des désambiguïsations (LaSalle et Lachine, Saint-Laurent
+// et Saint-Léonard commencent pareil).
+//
+// L'HEURE fait partie du nom du fichier, donc il faut la connaître pour construire une
+// URL. Elle est stable dans le temps, contrairement à la date. Trois familles : la
+// plupart siègent à 19 h, trois à 18 h 30, deux à 19 h 30. `heuresSecours` couvre les
+// changements annoncés mais pas encore visibles dans les noms de fichiers — Côte-des-
+// Neiges–Notre-Dame-de-Grâce a annoncé 18 h 30 en 2025, ses fichiers disent encore 19 h.
+export const ARRONDISSEMENTS_CODES = {
+  'Ahuntsic-Cartierville': { code: 'Ahu', heure: '19h00' },
+  Anjou: { code: 'Anj', heure: '19h00' },
+  'Côte-des-Neiges–Notre-Dame-de-Grâce': { code: 'Cdn', heure: '19h00', heuresSecours: ['18h30'] },
+  Lachine: { code: 'Lac', heure: '19h00' },
+  LaSalle: { code: 'Las', heure: '19h00' },
+  "L'Île-Bizard–Sainte-Geneviève": { code: 'Ibs', heure: '19h30' },
+  'Mercier–Hochelaga-Maisonneuve': { code: 'Mhm', heure: '18h30' },
+  'Montréal-Nord': { code: 'Mtn', heure: '19h00' },
+  Outremont: { code: 'Out', heure: '19h00' },
+  'Pierrefonds-Roxboro': { code: 'Pir', heure: '19h00' },
+  'Le Plateau-Mont-Royal': { code: 'Pmr', heure: '19h00' },
+  'Rivière-des-Prairies–Pointe-aux-Trembles': { code: 'Rdp', heure: '19h00' },
+  'Rosemont–La Petite-Patrie': { code: 'Rpp', heure: '19h00' },
+  'Saint-Laurent': { code: 'Slt', heure: '19h30' },
+  'Saint-Léonard': { code: 'Sld', heure: '19h00' },
+  'Le Sud-Ouest': { code: 'Sud', heure: '19h00' },
+  Verdun: { code: 'Ver', heure: '19h00' },
+  'Ville-Marie': { code: 'Vma', heure: '18h30' },
+  'Villeray–Saint-Michel–Parc-Extension': { code: 'Vsm', heure: '18h30' },
+};
+
+// Du code vers le nom : « CA_Mhm » -> « Mercier–Hochelaga-Maisonneuve ».
+export const ARRONDISSEMENT_PAR_CODE = Object.fromEntries(
+  Object.entries(ARRONDISSEMENTS_CODES).map(([nom, a]) => [`CA_${a.code}`, { nom, ...a }])
+);
+
+// Les heures à essayer pour un arrondissement, l'habituelle d'abord.
+export function heuresArrondissement(nom) {
+  const a = ARRONDISSEMENTS_CODES[nom];
+  if (!a) return [];
+  return [a.heure, ...(a.heuresSecours ?? [])];
+}
+
+// Une instance d'arrondissement s'écrit CA_<code> partout : répertoire, nom de fichier,
+// et clé de séance.
+export function instanceArrondissement(nom) {
+  const a = ARRONDISSEMENTS_CODES[nom];
+  return a ? `CA_${a.code}` : null;
+}
+
+export function estInstanceArrondissement(instance) {
+  return typeof instance === 'string' && instance.startsWith('CA_');
+}
+
 // « 13 h » / « 13:00 » / « 13h00 » -> « 13h00 », comme dans les noms de fichiers.
 export function heureFichier(h) {
   const m = String(h ?? '').match(/(\d{1,2})\s*[h:]\s*(\d{2})?/i);
@@ -190,9 +247,15 @@ export function urlDocument({ instance, genre, variante = 'ORDI', date, heure, q
 export function candidatsDocument({ instance, genre, variante, date, heure }) {
   const base = { instance, genre, variante, date, heure };
   if (genre === 'ODJ') {
+    // Quatre formes coexistent, et un même conseil passe de l'une à l'autre d'une année
+    // à l'autre : « ODJ_LPP » (liens vers les pièces publiques), « ODJ_LP », « ODJ » nu,
+    // et « ODJP » en un seul bloc, très répandu dans les arrondissements. On les essaie
+    // toutes et on garde la première qui répond.
     return [
-      urlDocument({ ...base, qualificatif: 'LPP' }), // avec liens vers les pièces publiques (sommaires)
+      urlDocument({ ...base, qualificatif: 'LPP' }),
+      urlDocument({ ...base, qualificatif: 'LP' }),
       urlDocument(base),
+      urlDocument({ ...base, genre: 'ODJP' }),
       urlDocument({ ...base, qualificatif: 'ADOPTE' }),
     ];
   }
