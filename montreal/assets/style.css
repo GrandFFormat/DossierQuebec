@@ -189,9 +189,16 @@ input[type="search"], select {
   font: inherit; font-size: 14.5px; padding: 9px 13px;
   border: 1px solid var(--ligne-forte); background: var(--carte); color: var(--encre);
   border-radius: var(--rayon);
+  /* Un select prend par défaut la largeur de sa plus longue option : depuis l'arrivée des
+     dix-neuf arrondissements, « Conseil d'arrondissement de Villeray–Saint-Michel–Parc-
+     Extension » débordait de l'écran. Le menu déroulant, lui, s'ouvre à sa vraie largeur. */
+  max-width: 100%; text-overflow: ellipsis;
 }
 input[type="search"]:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
 input[type="search"] { flex: 1 1 260px; min-width: 200px; }
+/* display:flex l'emporte sur le display:none que le navigateur donne à [hidden] : sans
+   cette ligne, masquer la case avec l'attribut hidden n'a aucun effet. */
+.case[hidden] { display: none; }
 .case {
   font-size: 14px; color: var(--doux); display: flex; align-items: center; gap: 7px;
   white-space: nowrap; border: 1px solid var(--ligne-forte); background: var(--carte);
@@ -215,7 +222,11 @@ input[type="search"] { flex: 1 1 260px; min-width: 200px; }
   font-size: 11.5px; font-weight: 600; letter-spacing: 0.01em;
   padding: 3px 9px; border-radius: 100px;
   background: var(--fond-2); color: var(--doux); white-space: nowrap;
+  /* « Direction de la culture_des sports… » ne tient pas sur un téléphone, et les soulignés
+     empêchent toute coupure naturelle : sur petit écran la pastille passe à la ligne. */
+  max-width: 100%; overflow-wrap: anywhere;
 }
+@media (max-width: 700px) { .puce { white-space: normal; } }
 .puce.num { font-family: ui-monospace, Consolas, monospace; font-size: 11px; background: var(--fond-2); color: var(--encre); }
 .puce.theme { color: #fff; font-weight: 700; }
 .puce.montant { background: var(--accent-fond); color: var(--accent-encre); font-weight: 700; }
@@ -555,3 +566,7 @@ h2.page[id] { scroll-margin-top: 16px; }
 }
 .haut.visible { opacity: 1; transform: none; pointer-events: auto; }
 .haut:hover { border-color: var(--accent); color: var(--accent); }
+
+/* La légende qui explique l'absence de résumés : elle suit la ligne de comptage, donc elle
+   se serre contre elle plutôt que de flotter comme un avis ordinaire. */
+.avis.legende-resume { margin: 4px 0 20px; font-size: 13.5px; line-height: 1.55; }

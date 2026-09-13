@@ -157,7 +157,7 @@ function decisionsFiltrees() {
   const type = $('#filtre-type').value;
   const instance = $('#filtre-instance').value;
   const theme = $('#filtre-theme')?.value ?? '';
-  const avecResume = $('#filtre-resume').checked;
+  const avecResume = $('#filtre-resume')?.checked ?? false;
   return etat.decisions.decisions.filter((d) => {
     if (type && d.type !== type) return false;
     if (instance && d.instance !== instance) return false;
@@ -173,6 +173,12 @@ function rendreDecisions() {
   if (!$('#filtre-type').dataset.rempli) {
     remplirSelect($('#filtre-type'), facettes.type);
     remplirSelect($('#filtre-instance'), facettes.instance.slice(0, 25));
+    // La case « Avec résumé seulement » n'a de sens que s'il y a des résumés. Sur Montréal
+    // il n'y en a aucun, faute de lien vers les sommaires décisionnels — voir l'encadré en
+    // haut de la page. Une case qui ne peut que vider la liste vaut mieux cachée.
+    const caseResume = document.getElementById('case-resume');
+    if (caseResume) caseResume.hidden = !etat.decisions.decisions.some((d) => d.resume || d.resumeCourt);
+
     if ($('#filtre-theme')) {
       // On affiche le libellé lisible, pas la clé interne.
       remplirSelect(
