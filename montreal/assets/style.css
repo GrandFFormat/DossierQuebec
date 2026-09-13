@@ -504,3 +504,13 @@ h2.section[class*="cat-"] {
 /* Montréal : les conseillères et conseillers d'arrondissement ne siègent pas au conseil
    municipal. Même fiche, un peu en retrait, pour qu'on ne les confonde pas. */
 .elu.arrondissement-seulement { opacity: .82; }
+
+/* Montréal : les responsabilités publiées par la Ville font parfois une ligne entière
+   (« Responsable du développement de l'Est de Montréal, des relations internationales et
+   intergouvernementales… »). Une pastille qui refuse de se couper élargit la fiche à sa
+   propre largeur, et tous les titres sortent du cadre. Dans une fiche d'élu, les pastilles
+   se coupent, et la colonne de texte peut rétrécir. */
+.elu > div { min-width: 0; flex: 1 1 auto; }
+.elu .puce, .elu .meta { white-space: normal; }
+.elu .meta { flex-wrap: wrap; }
+.elu h3, .elu .district { overflow-wrap: anywhere; }
