@@ -255,6 +255,13 @@ et l'icône « VDM » de l'en-tête de DossierQuébec sont ses seules attaches a
 
 ## Ce qui n'est pas encore là
 
+- **Les ordres du jour « LP » et « LPP » ne contiennent aucun hyperlien.** Leur nom annonce
+  des « liens vers les pièces publiques » ; il n'y en a pas. Constaté par le lecteur de PDF
+  sur tous les ordres du jour lus, puis vérifié à la main dans un navigateur le 13 septembre
+  2026 sur `CA_Rpp_ODJ_LP_ORDI_2025-05-05_19h00_FR.pdf` : rien n'est cliquable. C'est ce qui
+  prive le volet de tout lien vers les sommaires décisionnels, alors qu'il en connaît le
+  numéro de dossier pour 2 877 décisions. Demandé à la Ville, voir `courriel-sommaires.md`.
+
 - **Les 19 conseils d'arrondissement.** Même schéma d'URL (`CA_<code>_PV_ORDI_…`) et même
   gabarit ; il manque le calendrier de leurs séances et la table des codes (`Pmr`, `Rpp`, `Sud`,
   `Pir`…). `INSTANCES` dans `lib/mtl.js` est fait pour les recevoir.
