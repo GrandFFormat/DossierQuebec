@@ -1,7 +1,9 @@
 # Courriel au greffe de la Ville de Montréal — modèle
 
 À envoyer **avant** de retirer les verrous `noindex` (voir README, « Les pages »), au
-Service du greffe (greffe@montreal.ca ou le formulaire d'accès à l'information) et, en
+Service du greffe — PAS par courriel : `greffe@montreal.ca` n'existe pas et rebondit
+(vérifié le 13 septembre 2026). Passer par https://montreal.ca/unites/service-du-greffe
+ou par la démarche d'accès aux documents. Et, en
 copie, à l'équipe des données ouvertes (donneesouvertes@montreal.ca). Remplacer les
 chiffres entre crochets par ceux du dernier `npm run refresh`.
 
