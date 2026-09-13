@@ -28,6 +28,9 @@ import { classer, THEMES } from '../lib/themes.js';
 
 const OUT = new URL('../data/decisions.json', import.meta.url);
 const SEANCES = new URL('../data/seances.json', import.meta.url);
+// Les conseils d'arrondissement ont leur propre calendrier : la Ville n'en publie pas,
+// il est reconstitué en cherchant les documents (voir seances-arrondissements.js).
+const SEANCES_ARRONDISSEMENTS = new URL('../data/seances-arrondissements.json', import.meta.url);
 export const CACHE = new URL('../data/textes/', import.meta.url);
 
 const RATTRAPAGE_JOURS = 45;
@@ -221,7 +224,14 @@ async function main() {
 
   const calendrier = await lireJson(SEANCES);
   if (!calendrier) throw new Error('data/seances.json manquant — lancez d\'abord scrapers/seances.js');
-  const seances = calendrier.seances.filter((s) => s.date.startsWith(year) && (!args.seance || s.id === args.seance));
+  // Les deux calendriers se lisent ensemble : une séance d'arrondissement se traite
+  // exactement comme une séance centrale, seul son instance change (« CA_Mhm »).
+  // Le volet tourne sans le second fichier — les arrondissements manquent, c'est tout.
+  const calendrierCa = args['sans-arrondissements'] ? null : await lireJson(SEANCES_ARRONDISSEMENTS);
+  const seancesCa = (calendrierCa?.seances ?? []).map((s) => ({ ...s, nom: s.nomInstance ?? s.nom }));
+  if (seancesCa.length) console.log(`${seancesCa.length} séance(s) d'arrondissement au calendrier.`);
+  else if (!args['sans-arrondissements']) console.log("Pas de calendrier d'arrondissement (data/seances-arrondissements.json) — seules les instances centrales seront lues.");
+  const seances = [...calendrier.seances, ...seancesCa].filter((s) => s.date.startsWith(year) && (!args.seance || s.id === args.seance));
   const aujourdhui = new Date().toISOString().slice(0, 10);
 
   const precedent = await lireJson(OUT);

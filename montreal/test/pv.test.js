@@ -156,7 +156,21 @@ test('thèmes : les sujets avant les véhicules', () => {
 test('URL des documents de séance', () => {
   assert.equal(urlDocument({ instance: 'CM', genre: 'PV', date: '2026-01-26', heure: '13 h' }), 'https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-01-26_13h00_FR.pdf');
   assert.equal(urlDocument({ instance: 'CM', genre: 'PV', variante: 'EXTRA', date: '2026-01-12', heure: '13:00' }), 'https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_EXTRA_2026-01-12_13h00_FR.pdf');
-  assert.equal(candidatsDocument({ instance: 'CE', genre: 'ODJ', variante: 'ORDI', date: '2025-09-17', heure: '09h00' })[2], 'https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_ODJ_ADOPTE_ORDI_2025-09-17_09h00_FR.pdf');
+  // Les cinq formes d'ordre du jour réellement en usage, quel que soit leur ordre : la
+  // Ville en change d'une instance et d'une année à l'autre.
+  const odj = candidatsDocument({ instance: 'CE', genre: 'ODJ', variante: 'ORDI', date: '2025-09-17', heure: '09h00' });
+  const noms = odj.map((u) => u.split('/').pop());
+  for (const attendu of ['CE_ODJ_LPP_ORDI_2025-09-17_09h00_FR.pdf', 'CE_ODJ_LP_ORDI_2025-09-17_09h00_FR.pdf', 'CE_ODJ_ORDI_2025-09-17_09h00_FR.pdf', 'CE_ODJP_ORDI_2025-09-17_09h00_FR.pdf', 'CE_ODJ_ADOPTE_ORDI_2025-09-17_09h00_FR.pdf']) {
+    assert.ok(noms.includes(attendu), `forme manquante : ${attendu}`);
+  }
+  // Celle qui porte les liens vers les pièces publiques passe en premier : c'est la
+  // seule qui permette de rattacher un sommaire décisionnel à sa résolution.
+  assert.match(noms[0], /_ODJ_LPP_/);
+  // Un conseil d'arrondissement se construit pareil, sous son propre répertoire.
+  assert.equal(
+    urlDocument({ instance: 'CA_Out', genre: 'ODJP', date: '2026-05-05', heure: '19h00' }),
+    'https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-05-05_19h00_FR.pdf'
+  );
   assert.equal(heureFichier('9h'), '09h00');
   assert.equal(idSeance({ instance: 'CG', date: '2026-02-26', heure: '17 h 00' }), 'CG_2026-02-26_17h00');
 });
@@ -335,4 +349,38 @@ test('votes : la liste s\'arrête au décompte « (N) », le reste de la page es
   const w = parserVote('Votent en faveur : A, B (2)\nVotent contre : C et D (2) Séance ordinaire du conseil municipal du lundi 23 mars 2026 à 19 h 111\nRésultat : En faveur : 2\nContre : 2');
   assert.deepEqual(w.contre, ['C', 'D']);
   assert.deepEqual(w.avertissements, []);
+});
+
+test("résolutions d'arrondissement : le numéro porte celui de l'arrondissement", () => {
+  const PV_CA = [
+    "PROCÈS-VERBAL de la séance ordinaire du conseil d'arrondissement",
+    'CA26 12 0123',
+    "Accorder un contrat de déneigement à Les Entreprises Untel inc.",
+    '20.01 1267026004',
+    "Adopté à l'unanimité.",
+    'CA26 12 0124',
+    "Approuver la programmation d'événements publics",
+    '40.02',
+    'Adopté à la majorité des voix.',
+  ].join('\n');
+  const r = decouperResolutions(PV_CA, { instance: 'CA_Mhm' });
+  assert.equal(r.length, 2);
+  assert.equal(r[0].numero, 'CA26 12 0123');
+  assert.equal(r[0].numeroArrondissement, '12');
+  assert.match(r[0].objet, /contrat de déneigement/);
+  assert.equal(r[0].article, '20.01');
+  assert.equal(r[0].dossier, '1267026004');
+  assert.equal(r[0].resultat, "Adoptée à l'unanimité");
+  assert.equal(r[1].numero, 'CA26 12 0124');
+
+  // La forme courte, sans numéro d'arrondissement, reste lisible.
+  const court = decouperResolutions('CA26 0456\nObjet quelconque\n30.01', { instance: 'CA_Sud' });
+  assert.equal(court[0].numero, 'CA26 0456');
+  assert.equal(court[0].numeroArrondissement, null);
+
+  // Et un PV d'arrondissement ne doit pas happer les résolutions du conseil municipal
+  // qu'il cite en référence.
+  const melange = decouperResolutions('CM26 0570\nRésolution du conseil\n20.01\nCA26 12 0125\nCelle-ci est à nous\n20.02', { instance: 'CA_Mhm' });
+  assert.equal(melange.length, 1);
+  assert.equal(melange[0].numero, 'CA26 12 0125');
 });

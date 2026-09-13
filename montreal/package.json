@@ -8,6 +8,7 @@
     "refresh": "node scripts/refresh.js",
     "decouvrir:arrondissements": "node scrapers/decouverte-arrondissements.js",
     "scrape:seances": "node scrapers/seances.js",
+    "scrape:seances-arrondissements": "node scrapers/seances-arrondissements.js",
     "scrape:robots": "node scrapers/robots.js",
     "scrape:decisions": "node scrapers/decisions.js",
     "scrape:votes": "node scrapers/votes.js",
