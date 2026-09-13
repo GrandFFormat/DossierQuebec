@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
+<meta name="robots" content="noindex, nofollow">
+<title>Sources — DossierVilleDeMontréal</title>
+<meta name="description" content="D'où viennent les données de DossierVilleDeMontréal, comment les votes enregistrés et les résumés sont produits, et ce que ce prototype ne fait pas encore.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvm:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvm:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="sources">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="./"><h1>Dossier<span class="marque">VilleDeMontréal</span></h1></a>
+      <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
+      <a class="retour-dq" href="https://dossierquebec.ca/">← Retour à DossierQuébec</a>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Montréal, lisibles. Données publiques, reprises telles quelles
+      des procès-verbaux officiels de la Ville et de son portail de données ouvertes.
+    </p>
+    <nav>
+      <a href="./">Accueil</a>
+      <a href="decisions.html">Décisions</a>
+      <a href="votes.html">Votes nominatifs</a>
+      <a href="conseil.html">Conseil municipal</a>
+      <a href="lexique.html">Lexique</a>
+      <a href="sources.html" aria-current="page">Sources</a>
+      <div class="taille-texte" role="group" aria-label="Taille du texte">
+        <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+        <span id="texte-pct" aria-live="polite">100%</span>
+        <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+      </div>
+      <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+              title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu prose">
+  <div id="chargement" class="avis" hidden></div>
+
+  <h2 class="page">Sources</h2>
+  <p class="chapeau">
+    Ce site n'est pas la Ville de Montréal et n'a aucun caractère officiel. En cas de différence,
+    le document PDF d'origine fait foi — il est à un clic sur chaque fiche.
+  </p>
+
+  <h3>D'où viennent les données</h3>
+  <ul>
+    <li>Les décisions et les votes viennent des <strong>procès-verbaux</strong> et des
+      <strong>ordres du jour</strong> que la Ville publie en PDF pour chaque séance du
+      <a href="https://montreal.ca/conseils-decisionnels/conseil-municipal" target="_blank" rel="noopener">conseil municipal</a>,
+      du <a href="https://montreal.ca/conseils-decisionnels/conseil-dagglomeration" target="_blank" rel="noopener">conseil d'agglomération</a>
+      et du <a href="https://montreal.ca/conseils-decisionnels/comite-executif" target="_blank" rel="noopener">comité exécutif</a>.
+      Les dates de séance viennent du jeu de données ouvert
+      <a href="https://donnees.montreal.ca/dataset/calendrier-seances-comite-executif-conseil-municipal-conseil-agglomeration" target="_blank" rel="noopener">«&nbsp;Calendrier des séances&nbsp;»</a>.</li>
+    <li>Les résumés sont produits à partir du <strong>sommaire décisionnel</strong> de chaque dossier,
+      atteint par le lien que porte l'ordre du jour de la séance.</li>
+    <li>Les membres du conseil viennent du jeu de données ouvert
+      <a href="https://donnees.montreal.ca/dataset/listes-des-elus-de-la-ville-de-montreal" target="_blank" rel="noopener">«&nbsp;Liste des élus de la Ville de Montréal&nbsp;»</a>,
+      ceux du conseil d'agglomération du jeu
+      <a href="https://donnees.montreal.ca/dataset/listes-des-elus-du-conseil-d-agglomeration" target="_blank" rel="noopener">«&nbsp;Liste des élus du Conseil d'agglomération&nbsp;»</a>.</li>
+    <li>Les contours des districts viennent du jeu de données ouvert
+      <a href="https://donnees.montreal.ca/dataset/districts-electoraux" target="_blank" rel="noopener">«&nbsp;Élections municipales – Districts électoraux&nbsp;»</a>.</li>
+    <li>Les jeux de données ouverts de la Ville sont publiés sous
+      <a href="https://donnees.montreal.ca/pages/licence-d-utilisation" target="_blank" rel="noopener">licence CC-BY&nbsp;4.0</a>&nbsp;;
+      les procès-verbaux sont des documents publics de la Ville, reproduits avec mention de la source et sans usage commercial.</li>
+  </ul>
+
+  <h3>Ce qu'une machine fait, et ce qu'elle peut rater</h3>
+  <ul>
+    <li><strong>Les résumés</strong> sont écrits par une intelligence artificielle à partir du
+      sommaire décisionnel — la note que la Ville rédige avant chaque décision. Elle a pour
+      consigne de n'ajouter aucune information absente du document et de ne porter aucun jugement.</li>
+    <li><strong>Les noms des votants</strong> sont extraits du texte des procès-verbaux, pas d'un
+      registre. Chaque vote est recoupé avec le décompte imprimé dans le document&nbsp;; tout écart
+      est affiché sur la fiche plutôt que corrigé en silence.</li>
+    <li><strong>Le découpage des procès-verbaux en résolutions</strong> repose sur le gabarit de la
+      Ville (un numéro de résolution sur sa ligne, l'article et le numéro de dossier à la fin). Une
+      séance dont aucune résolution n'est reconnue est signalée dans l'état des données, jamais
+      remplie à la main.</li>
+    <li><strong>Les pastilles de sujet</strong> n'existent pas dans les données de la Ville&nbsp;:
+      c'est un classement ajouté ici, d'après les mots de l'objet de chaque décision.</li>
+  </ul>
+
+  <h3>Deux choses à savoir</h3>
+  <ul>
+    <li>Le site ne montre que <strong>l'année en cours</strong>. Les années précédentes sont
+      conservées à part.</li>
+    <li>Un vote enregistré n'a lieu que si un membre le demande. <strong>L'absence de vote
+      enregistré ne veut pas dire qu'il y a eu consensus.</strong></li>
+    <li>Ce prototype couvre les trois instances centrales. Les 19 conseils d'arrondissement publient
+      leurs procès-verbaux selon le même schéma et sont l'étape suivante.</li>
+  </ul>
+
+  <h3>État des données</h3>
+  <div id="etat-donnees"></div>
+  <div id="etat-archive"></div>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi.</p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
+     Même projet Vercel : les pages vues de /villedemontreal/ s'ajoutent au même tableau de
+     bord. En local le script n'existe pas (404 sans conséquence). -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

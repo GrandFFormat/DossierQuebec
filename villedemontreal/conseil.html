@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
+<meta name="robots" content="noindex, nofollow">
+<title>Le conseil municipal de Montréal — DossierVilleDeMontréal</title>
+<meta name="description" content="Carte des 58 districts électoraux de Montréal et fiches des 65 membres du conseil municipal, du comité exécutif et du conseil d'agglomération : district, arrondissement, parti, fonctions et moyen de les joindre.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvm:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvm:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="conseil">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="./"><h1>Dossier<span class="marque">VilleDeMontréal</span></h1></a>
+      <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
+      <a class="retour-dq" href="https://dossierquebec.ca/">← Retour à DossierQuébec</a>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Montréal, lisibles. Données publiques, reprises telles quelles
+      des procès-verbaux officiels de la Ville et de son portail de données ouvertes.
+    </p>
+    <nav>
+      <a href="./">Accueil</a>
+      <a href="decisions.html">Décisions</a>
+      <a href="votes.html">Votes nominatifs</a>
+      <a href="conseil.html" aria-current="page">Conseil municipal</a>
+      <a href="lexique.html">Lexique</a>
+      <div class="taille-texte" role="group" aria-label="Taille du texte">
+        <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+        <span id="texte-pct" aria-live="polite">100%</span>
+        <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+      </div>
+      <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+              title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu">
+  <div id="chargement" class="avis">Chargement des données…</div>
+
+  <h2 class="page">Le conseil municipal</h2>
+  <p class="chapeau">
+    Le conseil compte 65 membres&nbsp;: la mairesse ou le maire, élu au suffrage universel, les
+    18 maires d'arrondissement et 46 conseillères et conseillers de ville, un par district.
+    <strong>Cliquez sur votre district</strong> pour aller directement à la fiche de la personne qui
+    vous représente. Les conseillères et conseillers <em>d'arrondissement</em>, qui ne siègent qu'à
+    leur conseil d'arrondissement, figurent aussi sous leur arrondissement, marqués comme tels.
+  </p>
+
+  <div class="barre-outils">
+    <label class="case">Colorier par&nbsp;
+      <select id="mode-couleur">
+        <option value="arrondissement">arrondissement</option>
+        <option value="parti">parti</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="zone-carte" id="carte"></div>
+  <div class="legende" id="legende"></div>
+  <p class="compte" style="margin-top:12px">
+    Contours&nbsp;: jeu de données ouvert «&nbsp;Districts électoraux&nbsp;» de la Ville de Montréal (CC-BY&nbsp;4.0),
+    simplifiés et dessinés en SVG — aucune requête vers un service de cartographie externe.
+    <strong>Ce que la carte ne dit pas&nbsp;:</strong> les décisions des instances centrales ne sont pas
+    géolocalisées, donc impossible de dire «&nbsp;voici ce qui s'est décidé dans votre district&nbsp;».
+  </p>
+
+  <h2 class="page" style="margin-top:34px">Les membres du conseil municipal</h2>
+  <p class="compte" id="compte-elus"></p>
+  <div id="liste-elus"></div>
+
+  <h2 class="page" style="margin-top:40px">Le comité exécutif</h2>
+  <p class="chapeau">
+    Le gouvernement de la Ville au quotidien&nbsp;: la mairesse ou le maire, la présidence du comité et
+    une dizaine de membres choisis parmi les élus, chacun responsable de dossiers. Il siège chaque
+    semaine et prend, de loin, le plus grand nombre de décisions.
+    <a href="decisions.html?instance=Comit%C3%A9%20ex%C3%A9cutif">Voir ses décisions</a>.
+  </p>
+  <p class="compte" id="compte-ce"></p>
+  <div id="liste-ce"></div>
+
+  <h2 class="page" style="margin-top:40px">Le conseil d'agglomération</h2>
+  <p class="chapeau">
+    C'est une <strong>instance distincte</strong> du conseil municipal, et elle décide des services
+    partagés de l'île&nbsp;: police, incendie, transport en commun, eau, évaluation foncière, logement
+    social. Y siègent la mairesse ou le maire de Montréal, quinze élus de Montréal désignés par le
+    conseil municipal, et les maires des quinze <strong>villes liées</strong>. Ces derniers votent
+    donc sur des dossiers qui touchent Montréal, sans représenter de district de Montréal et sans
+    siéger au conseil municipal.
+    <a href="decisions.html?instance=Conseil%20d'agglom%C3%A9ration">Voir ses décisions</a>.
+  </p>
+  <p class="chapeau" style="margin-bottom:14px">
+    La liste vient du jeu de données ouvert «&nbsp;Liste des élus du Conseil d'agglomération&nbsp;» de
+    la Ville. Elle donne la composition, pas les présences aux séances.
+  </p>
+  <p class="compte" id="compte-agglo"></p>
+  <div id="liste-agglo"></div>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
+    En cas d'écart, la page officielle fait foi. <a href="sources.html">Sources</a>.</p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
+     Même projet Vercel : les pages vues de /villedemontreal/ s'ajoutent au même tableau de
+     bord. En local le script n'existe pas (404 sans conséquence). -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

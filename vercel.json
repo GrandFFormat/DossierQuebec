@@ -26,12 +26,26 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/villedemontreal/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "redirects": [
     {
       "source": "/villedequebec",
       "destination": "/villedequebec/",
+      "permanent": true
+    },
+    {
+      "source": "/villedemontreal",
+      "destination": "/villedemontreal/",
       "permanent": true
     }
   ]

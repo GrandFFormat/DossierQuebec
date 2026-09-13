@@ -1,0 +1,506 @@
+/* DossierVilleDeMontréal — feuille de style commune à toutes les pages (reprise telle quelle de DossierVilleDeQuébec).
+ *
+ * DEUX THÈMES, via l'attribut data-theme sur <html> : "clair" (défaut) et "sombre".
+ * Le thème est posé avant le premier rendu par un petit script en <head> de chaque page :
+ * choix explicite mémorisé d'abord, préférence du système ensuite. La bascule (icône de
+ * lune / soleil) vit dans la barre de navigation.
+ *
+ * Les couleurs de pastilles thématiques sont ici et NON dans les données : changer une
+ * teinte ne doit pas obliger à relancer un scraper.
+ */
+
+/* ============================================================
+   THÈME CLAIR (défaut)
+   ============================================================ */
+:root, :root[data-theme="clair"] {
+  --fond: #FFFFFF;
+  --fond-2: #F4F6F8;
+  --carte: #FFFFFF;
+  --encre: #16191D;
+  --doux: #5B6570;
+  --ligne: #DDE2E7;
+  --ligne-forte: #C2CAD2;
+
+  --accent: #0B8A4B;
+  --accent-fond: #E6F6EC;
+  --accent-encre: #076338;
+  --vedette: #F5B301;
+  --pour: #0B8A4B;
+  --contre: #D23B2C;
+  --contre-fond: #FDECEA;
+
+  --entete-fond: #FFFFFF;
+  --entete-encre: #16191D;
+  --entete-doux: #5B6570;
+  --entete-ligne: #DDE2E7;
+
+  --rayon: 6px;
+  --ombre: 0 1px 2px rgba(16, 24, 40, .06), 0 4px 12px rgba(16, 24, 40, .05);
+  --ombre-forte: 0 2px 4px rgba(16, 24, 40, .08), 0 10px 24px rgba(16, 24, 40, .09);
+  --bordure-carte: 1px solid var(--ligne);
+
+  /* Le vert est réservé à l'accent du site (liens, boutons, résumés IA). Aucun sujet ne
+     le reprend, sauf Environnement où le vert veut dire quelque chose — et il ne compte
+     que 16 décisions, donc la confusion reste rare.
+     Trois familles assumées plutôt que quinze teintes qu'on ne distinguerait pas :
+     l'administratif en ardoise, l'argent et la propriété en chaud, le reste distinct. */
+  --t-urbanisme: #7C3AED;      /* violet */
+  --t-subventions: #DB2777;    /* rose — surtout PAS le vert d'accent */
+  --t-transport: #1D4ED8;      /* bleu */
+  --t-contrats: #EA580C;       /* orange */
+  --t-securite: #DC2626;       /* rouge */
+  --t-loisirs: #0891B2;        /* cyan */
+  --t-culture: #A21CAF;        /* fuchsia */
+  --t-economie: #4338CA;       /* indigo */
+  --t-rh: #65A30D;             /* lime */
+  --t-environnement: #059669;  /* émeraude */
+  --t-finances: #CA8A04;       /* or        \                        */
+  --t-immobilier: #92400E;     /* brun      / famille « argent et propriété » */
+  --t-procedure: #64748B;      /* ardoise   \                        */
+  --t-travaux: #475569;        /* ardoise foncée > famille administrative */
+  --t-administration: #94A3B8; /* ardoise claire /                   */
+  --t-honneurs: #9F1239;       /* lie-de-vin — les motions cérémonielles */
+  --t-social: #0D9488;         /* sarcelle — logement et services sociaux */
+}
+
+/* ============================================================
+   THÈME SOMBRE
+   ============================================================ */
+:root[data-theme="sombre"] {
+  --fond: #101419;
+  --fond-2: #161B22;
+  --carte: #1A2029;
+  --encre: #E9EDF2;
+  --doux: #96A1AE;
+  --ligne: #2A323C;
+  --ligne-forte: #3A4450;
+
+  --accent: #3DDC84;
+  --accent-fond: #163326;
+  --accent-encre: #7EF0AC;
+  --vedette: #FFCF4D;
+  --pour: #3DDC84;
+  --contre: #FF6B5B;
+  --contre-fond: #3A1F1C;
+
+  --entete-fond: #0B0E12;
+  --entete-encre: #F2F5F8;
+  --entete-doux: #8E9AA8;
+  --entete-ligne: #242C35;
+
+  --rayon: 6px;
+  --ombre: 0 1px 2px rgba(0, 0, 0, .5);
+  --ombre-forte: 0 6px 22px rgba(0, 0, 0, .55);
+  --bordure-carte: 1px solid var(--ligne);
+
+  --t-urbanisme: #A78BFA;
+  --t-subventions: #F472B6;   /* rose — le vert néon reste l'accent du site */
+  --t-transport: #60A5FA;
+  --t-contrats: #FB923C;
+  --t-securite: #FB7185;
+  --t-loisirs: #22D3EE;
+  --t-culture: #E879F9;
+  --t-economie: #818CF8;
+  --t-rh: #A3E635;
+  --t-environnement: #2DD4BF;
+  --t-finances: #FBBF24;
+  --t-immobilier: #D9A066;
+  --t-procedure: #8B96A3;
+  --t-travaux: #6B7A8A;
+  --t-administration: #B0BCC9;
+  --t-honneurs: #FDA4AF;
+  --t-social: #5EEAD4;
+}
+:root[data-theme="sombre"] .puce.theme { color: #101419; }
+:root[data-theme="sombre"] .elu img { filter: brightness(.92); }
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--fond);
+  color: var(--encre);
+  font-family: 'Archivo', system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--accent); color: #fff; }
+.contenu { max-width: 1120px; margin: 0 auto; padding: 0 26px 90px; }
+
+/* ---------- EN-TÊTE ---------- */
+header { background: var(--entete-fond); border-bottom: 1px solid var(--entete-ligne); }
+.titre-ligne { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 26px 0 2px; }
+.titre-ligne a { text-decoration: none; color: inherit; }
+h1 { font-size: 27px; margin: 0; font-weight: 800; letter-spacing: -0.025em; color: var(--entete-encre); }
+.marque { color: var(--accent); }
+/* Étiquette « Prototype » à côté du logo — à retirer le jour où le site est considéré
+   comme définitif. */
+.prototype {
+  display: inline-block; align-self: center;
+  font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+  color: #16191D; background: var(--vedette);
+  padding: 3px 9px; border-radius: 999px; line-height: 1.5;
+}
+
+/* Retour vers DossierQuébec, à côté du logo — le volet municipal n'a
+   pas encore sa propre entrée, on y arrive depuis DQ et on doit pouvoir y revenir. */
+.retour-dq {
+  display: inline-block; font-size: 13px; font-weight: 600; text-decoration: none;
+  color: var(--entete-doux); border: 1px solid var(--entete-ligne); border-radius: 999px;
+  padding: 4px 12px; line-height: 1.5; white-space: nowrap;
+}
+.retour-dq:hover { color: var(--entete-encre); border-color: var(--ligne-forte); }
+
+.sous-titre { color: var(--entete-doux); margin: 6px 0 18px; font-size: 14.5px; max-width: 66ch; }
+
+nav { display: flex; gap: 3px; flex-wrap: wrap; }
+nav a {
+  font-size: 14px; font-weight: 600; text-decoration: none; color: var(--entete-doux);
+  padding: 9px 14px; border-radius: var(--rayon) var(--rayon) 0 0;
+  border-bottom: 3px solid transparent;
+}
+nav a:hover { color: var(--entete-encre); }
+nav a[aria-current="page"] { color: var(--entete-encre); border-bottom-color: var(--accent); font-weight: 700; }
+
+
+/* ---------- TITRES ---------- */
+h2.page { font-size: 30px; margin: 36px 0 8px; font-weight: 800; letter-spacing: -0.028em; line-height: 1.15; }
+h2.section {
+  font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.09em;
+  color: var(--doux); font-weight: 700; margin: 34px 0 12px;
+}
+p.chapeau { color: var(--doux); margin: 0 0 6px; max-width: 74ch; font-size: 15.5px; }
+
+/* ---------- AVIS ---------- */
+.avis {
+  background: var(--accent-fond); border: 1px solid transparent; border-left: 4px solid var(--accent);
+  border-radius: var(--rayon); padding: 14px 18px; margin: 22px 0; font-size: 14.5px;
+  color: var(--encre);
+}
+.avis strong { color: var(--accent-encre); font-weight: 700; }
+:root[data-theme="sombre"] .avis strong { color: var(--accent); }
+
+/* ---------- OUTILS ---------- */
+.barre-outils { display: flex; gap: 9px; flex-wrap: wrap; align-items: center; margin: 24px 0 10px; }
+input[type="search"], select {
+  font: inherit; font-size: 14.5px; padding: 9px 13px;
+  border: 1px solid var(--ligne-forte); background: var(--carte); color: var(--encre);
+  border-radius: var(--rayon);
+}
+input[type="search"]:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+input[type="search"] { flex: 1 1 260px; min-width: 200px; }
+.case {
+  font-size: 14px; color: var(--doux); display: flex; align-items: center; gap: 7px;
+  white-space: nowrap; border: 1px solid var(--ligne-forte); background: var(--carte);
+  padding: 8px 13px; border-radius: var(--rayon);
+}
+.bouton-lien {
+  font: inherit; font-size: 14px; font-weight: 600;
+  background: var(--carte); color: var(--accent);
+  border: 1px solid var(--ligne-forte); border-radius: var(--rayon); padding: 9px 15px; cursor: pointer;
+}
+.bouton-lien:hover { border-color: var(--accent); background: var(--accent-fond); }
+.compte { color: var(--doux); font-size: 13.5px; margin: 8px 0 18px; }
+
+/* ---------- FICHES ---------- */
+.carte {
+  background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon);
+  box-shadow: var(--ombre); padding: 16px 18px; margin-bottom: 12px;
+}
+.meta { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; font-size: 12.5px; color: var(--doux); margin-bottom: 9px; }
+.puce {
+  font-size: 11.5px; font-weight: 600; letter-spacing: 0.01em;
+  padding: 3px 9px; border-radius: 100px;
+  background: var(--fond-2); color: var(--doux); white-space: nowrap;
+}
+.puce.num { font-family: ui-monospace, Consolas, monospace; font-size: 11px; background: var(--fond-2); color: var(--encre); }
+.puce.theme { color: #fff; font-weight: 700; }
+.puce.montant { background: var(--accent-fond); color: var(--accent-encre); font-weight: 700; }
+:root[data-theme="sombre"] .puce.montant { color: var(--accent); }
+.puce.procedural { background: var(--fond-2); color: var(--doux); }
+.puce.neuf { background: var(--vedette); color: #16191D; font-weight: 700; }
+.puce.genre-decision { background: var(--accent); color: #fff; font-weight: 700; }
+.puce.genre-vote { background: var(--t-transport); color: #fff; font-weight: 700; }
+.puce.reconstituee { background: var(--vedette); color: #16191D; font-weight: 700; }
+
+/* Les 15 sujets — la couleur vit ici, pas dans les données. */
+.t-procedure { background: var(--t-procedure); }
+.t-urbanisme { background: var(--t-urbanisme); }
+.t-transport { background: var(--t-transport); }
+.t-immobilier { background: var(--t-immobilier); }
+.t-subventions { background: var(--t-subventions); }
+.t-contrats { background: var(--t-contrats); }
+.t-finances { background: var(--t-finances); }
+.t-rh { background: var(--t-rh); }
+.t-environnement { background: var(--t-environnement); }
+.t-culture { background: var(--t-culture); }
+.t-loisirs { background: var(--t-loisirs); }
+.t-securite { background: var(--t-securite); }
+.t-economie { background: var(--t-economie); }
+.t-travaux { background: var(--t-travaux); }
+.t-administration { background: var(--t-administration); }
+.t-honneurs { background: var(--t-honneurs); }
+.t-social { background: var(--t-social); }
+
+.objet { margin: 0 0 8px; font-size: 16px; line-height: 1.5; font-weight: 500; }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:hover { color: var(--accent-encre); }
+:root[data-theme="sombre"] a:hover { color: var(--accent-encre); }
+.lien-pdf { font-size: 13.5px; font-weight: 600; }
+
+/* ---------- FICHES REPLIABLES ---------- */
+.pliante > summary { cursor: pointer; list-style: none; display: block; position: relative; padding-right: 30px; }
+.pliante > summary::-webkit-details-marker { display: none; }
+.pliante > summary::after {
+  content: '+'; position: absolute; right: 2px; top: -2px;
+  font-size: 21px; font-weight: 400; line-height: 1; color: var(--doux);
+}
+.pliante[open] > summary::after { content: '\2212'; }
+.pliante:hover { box-shadow: var(--ombre-forte); }
+.pliante > summary:hover .objet { color: var(--accent); }
+.pliante > summary .objet { margin-bottom: 0; }
+.pliante > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: var(--rayon); }
+.pliante > .corps { margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--ligne); }
+
+/* ---------- VOTES ---------- */
+.resultat { font-size: 11.5px; font-weight: 700; padding: 3px 9px; border-radius: 100px; }
+.r-majorite, .r-unanimite { background: var(--accent-fond); color: var(--accent-encre); }
+:root[data-theme="sombre"] .r-majorite, :root[data-theme="sombre"] .r-unanimite { color: var(--accent); }
+.r-division, .r-rejetee { background: var(--contre-fond); color: var(--contre); }
+
+.colonnes-vote { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 4px; }
+@media (max-width: 620px) { .colonnes-vote { grid-template-columns: 1fr; } }
+.colonne-vote { background: var(--fond-2); border-radius: var(--rayon); padding: 12px 14px; }
+.colonne-vote h4 { margin: 0 0 9px; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 700; }
+.colonne-vote.pour h4 { color: var(--pour); }
+.colonne-vote.contre h4 { color: var(--contre); }
+.noms { display: flex; gap: 6px; flex-wrap: wrap; }
+.nom { font-size: 13px; padding: 3px 10px; border-radius: 100px; background: var(--carte); border: 1px solid var(--ligne); }
+.colonne-vote.contre .nom { background: var(--contre-fond); border-color: transparent; color: var(--contre); }
+.vide { color: var(--doux); font-size: 13px; font-style: italic; }
+
+.drapeau {
+  background: var(--contre-fond); border-left: 4px solid var(--contre); border-radius: var(--rayon);
+  padding: 10px 14px; margin-top: 12px; font-size: 13.5px; color: var(--encre);
+}
+details { margin-top: 10px; font-size: 13.5px; }
+details summary { cursor: pointer; color: var(--doux); }
+details p { background: var(--fond-2); border-radius: var(--rayon); padding: 12px 14px; color: var(--encre); margin: 8px 0 0; }
+
+/* ---------- RÉSUMÉS IA ---------- */
+.resume { background: var(--accent-fond); border-radius: var(--rayon); padding: 13px 16px; margin: 0 0 12px; }
+.resume-entete {
+  display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+  font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.09em;
+  color: var(--accent-encre); font-weight: 700; margin-bottom: 9px;
+}
+:root[data-theme="sombre"] .resume-entete { color: var(--accent); }
+.resume ul { margin: 0; padding-left: 19px; }
+.resume li { margin-bottom: 6px; font-size: 15px; line-height: 1.55; }
+.resume li:last-child { margin-bottom: 0; }
+
+/* ---------- ÉLUS ---------- */
+.grille-elus { display: grid; grid-template-columns: repeat(auto-fill, minmax(275px, 1fr)); gap: 12px; }
+.elu { display: flex; gap: 14px; }
+.elu img { width: 62px; height: 86px; object-fit: cover; border-radius: var(--rayon); background: var(--fond-2); flex: none; }
+.elu h3 { margin: 0 0 3px; font-size: 17px; font-weight: 700; letter-spacing: -0.015em; }
+.elu .district { font-size: 13.5px; color: var(--doux); margin: 0 0 8px; }
+.elu.choisi { box-shadow: 0 0 0 2px var(--accent), var(--ombre-forte); }
+
+/* ---------- TABLEAUX ---------- */
+table {
+  border-collapse: collapse; width: 100%; font-size: 14.5px;
+  background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon); overflow: hidden;
+}
+th, td { text-align: left; padding: 10px 13px; border-bottom: 1px solid var(--ligne); }
+tr:last-child td { border-bottom: none; }
+th {
+  font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.07em;
+  color: var(--doux); font-weight: 700; background: var(--fond-2);
+}
+td.n { font-variant-numeric: tabular-nums; text-align: right; width: 1%; white-space: nowrap; font-weight: 700; }
+
+/* ---------- PROSE ---------- */
+.prose { max-width: 74ch; }
+.prose h3 { margin: 32px 0 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.015em; }
+.prose li { margin-bottom: 6px; }
+code { font-family: ui-monospace, Consolas, monospace; font-size: 13px; background: var(--fond-2); padding: 2px 6px; border-radius: 4px; }
+
+.plus {
+  display: block; width: 100%; padding: 13px; margin-top: 6px;
+  font: inherit; font-size: 14.5px; font-weight: 600;
+  background: var(--carte); border: 1px solid var(--ligne-forte); border-radius: var(--rayon);
+  cursor: pointer; color: var(--accent);
+}
+.plus:hover { background: var(--accent-fond); border-color: var(--accent); }
+
+/* ---------- ACCUEIL ---------- */
+.chiffres { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 26px 0 12px; }
+.chiffre {
+  background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon);
+  box-shadow: var(--ombre); padding: 20px 22px; text-decoration: none; color: inherit; display: block;
+  border-top: 4px solid var(--accent);
+}
+.chiffre:nth-child(2) { border-top-color: var(--t-transport); }
+.chiffre:nth-child(3) { border-top-color: var(--t-urbanisme); }
+.chiffre:nth-child(4) { border-top-color: var(--t-contrats); }
+.chiffre:hover { box-shadow: var(--ombre-forte); }
+.chiffre .n { font-size: 40px; font-weight: 800; line-height: 1; letter-spacing: -0.035em; font-variant-numeric: tabular-nums; }
+.chiffre .quoi { font-size: 13.5px; color: var(--doux); margin-top: 8px; line-height: 1.4; }
+.cartes-liens { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 12px; }
+.lien-section {
+  background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon);
+  box-shadow: var(--ombre); padding: 20px 22px; text-decoration: none; display: block; color: inherit;
+}
+.lien-section:hover { box-shadow: var(--ombre-forte); }
+.lien-section h3 { margin: 0 0 6px; font-size: 18px; font-weight: 700; letter-spacing: -0.015em; color: var(--accent); }
+.lien-section p { margin: 0; font-size: 14.5px; color: var(--doux); }
+
+footer { border-top: 1px solid var(--ligne); margin-top: 52px; padding: 22px 0 0; font-size: 13.5px; color: var(--doux); }
+footer a { color: var(--doux); }
+
+/* ---------- CARTE DES DISTRICTS ---------- */
+.zone-carte {
+  background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon);
+  box-shadow: var(--ombre); padding: 14px; margin-top: 10px;
+}
+.zone-carte svg { display: block; width: 100%; height: auto; }
+.zone-carte .district { stroke: var(--carte); stroke-width: 1.4; cursor: pointer; transition: opacity .12s; opacity: .9; }
+.zone-carte .district:hover, .zone-carte .district:focus { opacity: 1; stroke: var(--encre); stroke-width: 2.6; outline: none; }
+.zone-carte .district.choisi { opacity: 1; stroke: var(--encre); stroke-width: 3.2; }
+.legende { display: flex; gap: 15px; flex-wrap: wrap; margin: 14px 0 0; font-size: 13px; color: var(--doux); }
+.cle-legende { display: flex; align-items: center; gap: 7px; }
+.cle-legende i { width: 13px; height: 13px; border-radius: 3px; display: inline-block; }
+.colonnes-carte { display: grid; grid-template-columns: 1fr 320px; gap: 18px; align-items: start; }
+@media (max-width: 860px) { .colonnes-carte { grid-template-columns: 1fr; } }
+
+/* ---------- BASCULE DE THÈME ---------- */
+/* L'icône est dessinée en CSS plutôt qu'en SVG : une lune, c'est un disque avec un
+   second disque de la couleur du fond décalé par-dessus. Zéro requête, zéro balise. */
+.bascule-theme {
+  align-self: center;
+  width: 38px; height: 38px; flex: none; cursor: pointer;
+  background: transparent; border: 1px solid transparent; border-radius: 100px;
+  position: relative;
+}
+.bascule-theme:hover { border-color: var(--ligne-forte); background: var(--fond-2); }
+.bascule-theme:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Thème clair : on montre la lune, parce qu'elle dit où l'on va. */
+.bascule-theme::before {
+  content: ''; position: absolute; inset: 0; margin: auto;
+  width: 17px; height: 17px; border-radius: 100px;
+  background: var(--entete-doux);
+}
+.bascule-theme::after {
+  content: ''; position: absolute; inset: 0; margin: auto;
+  width: 15px; height: 15px; border-radius: 100px;
+  background: var(--entete-fond);
+  transform: translate(5px, -4px);
+}
+.bascule-theme:hover::after { background: var(--fond-2); }
+/* Thème sombre : un soleil — le disque seul, avec des rayons. */
+:root[data-theme="sombre"] .bascule-theme::before {
+  width: 14px; height: 14px; background: var(--vedette);
+  box-shadow:
+    0 -9px 0 -5.5px var(--vedette), 0 9px 0 -5.5px var(--vedette),
+    -9px 0 0 -5.5px var(--vedette), 9px 0 0 -5.5px var(--vedette),
+    6.4px -6.4px 0 -5.5px var(--vedette), -6.4px 6.4px 0 -5.5px var(--vedette),
+    6.4px 6.4px 0 -5.5px var(--vedette), -6.4px -6.4px 0 -5.5px var(--vedette);
+}
+:root[data-theme="sombre"] .bascule-theme::after { display: none; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+
+/* Un tableau replié : il doit porter la même ombre et le même cadre qu'une fiche, mais
+   son contenu déborde en largeur sur petit écran — d'où le défilement horizontal interne
+   plutôt qu'une page qui se met à glisser latéralement. */
+.bloc-tableau > .corps { overflow-x: auto; }
+.bloc-tableau table { min-width: 460px; }
+
+/* Décompte d'un vote : deux jetons accolés, l'information la plus utile de l'en-tête. */
+.decompte { display: inline-flex; border-radius: 100px; overflow: hidden; font-size: 11.5px; font-weight: 700; }
+.decompte > span { padding: 3px 9px; }
+.d-pour { background: var(--accent-fond); color: var(--accent-encre); }
+.d-contre { background: var(--contre-fond); color: var(--contre); }
+:root[data-theme="sombre"] .d-pour { color: var(--accent); }
+
+/* ---------- SÉANCES ---------- */
+/* Une séance est un <details> : au chargement on ne voit que les en-têtes, c'est-à-dire
+   l'agenda de la Ville. L'en-tête reste collant pendant qu'on parcourt les décisions. */
+.seance { margin-bottom: 10px; }
+.seance-entete {
+  display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  cursor: pointer; list-style: none; position: relative; padding: 12px 34px 12px 16px;
+  background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon);
+  box-shadow: var(--ombre);
+}
+.seance-entete::-webkit-details-marker { display: none; }
+.seance-entete::after {
+  content: '+'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  font-size: 21px; font-weight: 400; line-height: 1; color: var(--doux);
+}
+.seance[open] > .seance-entete::after { content: '\2212'; }
+.seance[open] > .seance-entete {
+  position: sticky; top: 0; z-index: 2;
+  border-radius: var(--rayon) var(--rayon) 0 0; border-bottom-color: var(--accent);
+}
+.seance-entete:hover { border-color: var(--accent); }
+.seance-entete:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.seance-entete h3 { margin: 0; font-size: 16.5px; font-weight: 700; letter-spacing: -0.015em; }
+.seance-date { font-size: 14px; color: var(--doux); }
+.seance-corps { padding: 12px 0 18px 16px; border-left: 2px solid var(--ligne); margin-left: 10px; }
+
+/* ---------- LEXIQUE ---------- */
+/* Une liste de définitions, rien de plus : pas de carte, pas d'ombre, pas de dépliage.
+   Ce qui sépare les entrées, c'est un filet et de l'air. */
+.entree-lexique { padding: 0 0 20px; margin-bottom: 20px; border-bottom: 1px solid var(--ligne); }
+.entree-lexique:last-child { border-bottom: 0; }
+.entree-lexique .terme { margin: 0 0 4px; font-size: 18px; font-weight: 700; letter-spacing: -0.015em; }
+.entree-lexique .alias { margin: 0 0 6px; font-size: 13.5px; color: var(--doux); }
+.entree-lexique .definition { margin: 0; font-size: 16px; line-height: 1.6; max-width: 68ch; }
+.entree-lexique .remarque { margin: 8px 0 0; font-size: 14.5px; line-height: 1.55; color: var(--doux); max-width: 68ch; }
+
+/* Une couleur par catégorie du lexique, empruntée au nuancier des sujets — donc déjà
+   ajustée au thème clair comme au sombre, sans une teinte écrite en dur. */
+.cat-documents { --cat: var(--t-transport); }
+.cat-instances { --cat: var(--t-economie); }
+.cat-agglomeration { --cat: var(--t-social); }
+.cat-vote { --cat: var(--t-subventions); }
+.cat-urbanisme { --cat: var(--t-urbanisme); }
+.cat-argent { --cat: var(--t-finances); }
+
+h2.section[class*="cat-"] {
+  color: var(--cat); border-bottom: 2px solid var(--cat);
+  padding-bottom: 7px; margin-bottom: 20px;
+}
+.bloc-lexique { border-left: 3px solid var(--cat); padding-left: 18px; }
+.bloc-lexique .terme { color: var(--cat); }
+.bloc-lexique .entree-lexique:last-child { padding-bottom: 4px; }
+
+/* ---------- TAILLE DU TEXTE ---------- */
+.taille-texte {
+  margin-left: auto; align-self: center;
+  display: inline-flex; align-items: center; gap: 2px;
+  border: 1px solid var(--ligne-forte); border-radius: 100px; padding: 2px;
+  background: var(--carte);
+}
+.taille-texte button {
+  font: inherit; font-size: 13px; font-weight: 700; line-height: 1;
+  width: 32px; height: 28px; border: 0; border-radius: 100px;
+  background: transparent; color: var(--entete-encre); cursor: pointer;
+}
+.taille-texte button:hover:not(:disabled) { background: var(--fond-2); }
+.taille-texte button:disabled { color: var(--ligne-forte); cursor: default; }
+.taille-texte button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+#texte-pct {
+  min-width: 42px; text-align: center; font-size: 12px; font-weight: 600;
+  color: var(--entete-doux); font-variant-numeric: tabular-nums;
+}
+
+/* Montréal : les conseillères et conseillers d'arrondissement ne siègent pas au conseil
+   municipal. Même fiche, un peu en retrait, pour qu'on ne les confonde pas. */
+.elu.arrondissement-seulement { opacity: .82; }
