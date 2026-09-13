@@ -1,6 +1,8 @@
 @echo off
 setlocal EnableExtensions
 title DossierVilleDeMontreal - mise a jour des donnees
+REM UTF-8 dans la fenetre : les accents des messages de Node s'affichent correctement.
+chcp 65001 >nul
 
 REM ============================================================================
 REM  DossierVilleDeMontreal - script a double-cliquer (Windows).
@@ -117,23 +119,18 @@ echo   (quelques minutes : les proces-verbaux sont de gros PDF)
 echo   Tout est ecrit dans data\lancement.log
 echo  ---------------------------------------------------
 echo.
+REM Chaque ligne va a la fois a l'ecran (pour voir que ca avance) et dans le journal
+REM (pour que Claude puisse le lire sur GitHub). PowerShell fait le double envoi.
 > "data\lancement.log" echo Version du code : %VERSION%
-if exist "api.env" (
-  call npm run refresh -- --elus >> "data\lancement.log" 2>&1
-) else (
+set "OPTIONS=--elus"
+if not exist "api.env" (
   echo  Pas de fichier api.env : les resumes en langage clair sont sautes.
   echo  ^(Pour les activer : copier api.env.example en api.env et y mettre la cle.^)
   echo.
-  call npm run refresh -- --elus --sans-resumes >> "data\lancement.log" 2>&1
+  set "OPTIONS=--elus --sans-resumes"
 )
-set "CODE_REFRESH=%errorlevel%"
-findstr /v /c:"Warning:" "data\lancement.log"
+call npm run refresh -- %OPTIONS% 2>&1 | powershell -NoProfile -Command "$input | ForEach-Object { if ($_ -notmatch '^Warning:') { $_ }; Add-Content -Encoding utf8 -Path 'data\lancement.log' -Value $_ }"
 echo.
-if not "%CODE_REFRESH%"=="0" (
-  echo  [!] Une extraction principale a echoue ^(voir le Bilan ci-dessus^).
-  echo      Les autres donnees ont quand meme ete ecrites.
-  echo.
-)
 
 REM ---- 6. Envoi sur GitHub --------------------------------------------------
 cd /d "%DEPOT%"
