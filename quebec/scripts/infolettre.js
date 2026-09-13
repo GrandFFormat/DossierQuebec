@@ -19,7 +19,7 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { chargerDetails, extraireDetails, TYPES_MONTANT } from '../scrapers/details-argent.js';
+import { chargerDetails, extraireDetails, TYPES_MONTANT, VERSION_VERIFICATION } from '../scrapers/details-argent.js';
 
 const DATA = new URL('../data/', import.meta.url);
 const SORTIE = new URL('../infolettres/', import.meta.url);
@@ -129,25 +129,33 @@ async function main() {
       if (fichier) process.loadEnvFile(fichier);
     }
     const candidats = [
-      ...liste.filter((f) => f.montant != null && decidant(f)).sort(parMontant).slice(0, 12),
-      ...liste.filter((f) => f.theme === 'subventions' && decidant(f)).sort(parMontant).slice(0, 12),
-      ...liste.filter((f) => f.theme === 'contrats' && f.montant != null && decidant(f)).sort(parMontant).slice(0, 10),
+      ...liste.filter((f) => f.montant != null && decidant(f)).sort(parMontant).slice(0, 8),
+      ...liste.filter((f) => f.theme === 'subventions' && decidant(f)).sort(parMontant).slice(0, 10),
+      ...liste.filter((f) => f.theme === 'contrats' && f.montant != null && decidant(f)).sort(parMontant).slice(0, 8),
     ];
     await extraireDetails(candidats.filter((f) => f.cle.endsWith('.pdf') && f.resume).map((f) => f.cle.replace(/\.pdf$/, '')));
   }
-  const detailParId = new Map((await chargerDetails()).details.map((d) => [d.id, d]));
+  // Seuls les détails passés par la vérification automatique complète sont publiés.
+  const detailParId = new Map(
+    (await chargerDetails()).details
+      .filter((d) => d.verification?.version === VERSION_VERIFICATION && d.verification.utilisable)
+      .map((d) => [d.id, d])
+  );
   const PAS_UNE_DEPENSE = new Set(['valeur_au_role', 'fermeture_emprunt', 'aucun']);
   for (const f of liste) {
     const d = detailParId.get(f.cle);
     if (!d) continue;
     f.detail = d;
-    f.montant = lireMontant(d.montantPrincipal) ?? f.montant;
+    // Le titre prend le montant du résumé quand il est vérifié dans le texte (souvent la dépense
+    // nette), sinon celui du détail.
+    f.montant = lireMontant(d.verification.montantResume) ?? lireMontant(d.montantPrincipal) ?? f.montant;
   }
   const compteParmiLesMontants = (f) => f.montant != null && decidant(f) && !PAS_UNE_DEPENSE.has(f.detail?.typeMontant);
 
   const lourdes = liste.filter(compteParmiLesMontants).sort(parMontant).slice(0, 6);
   const subventions = liste.filter((f) => f.theme === 'subventions' && decidant(f)).sort(parMontant);
-  const contrats = liste.filter((f) => f.theme === 'contrats' && compteParmiLesMontants(f)).sort(parMontant);
+  // Un « contrat » dont la lecture dit que c'est une subvention ou un prêt n'est pas un contrat.
+  const contrats = liste.filter((f) => f.theme === 'contrats' && compteParmiLesMontants(f) && ['depense', 'autre', undefined].includes(f.detail?.typeMontant)).sort(parMontant);
   // Le total ne compte que ce que la Ville accorde — pas ce qu'elle reçoit d'un gouvernement.
   const totalSubventions = subventions
     .filter((f) => !['subvention_recue', 'revenu', ...PAS_UNE_DEPENSE].includes(f.detail?.typeMontant))
@@ -167,7 +175,16 @@ async function main() {
   const L = [];
   L.push(`# Ce que la Ville de Québec a décidé — semaine du ${dateFr(depuis)} au ${dateFr(jusqua)}`);
   L.push('');
-  L.push(`*[Introduction à écrire à la main : deux ou trois phrases sur ce qui ressort.]*`);
+  // Pas d'introduction à la main : personne ne relit. Une phrase de chiffres, tirés des mêmes
+  // listes que le reste de l'infolettre.
+  const nbAccordees = subventions.filter((f) => !['subvention_recue', 'revenu', ...PAS_UNE_DEPENSE].includes(f.detail?.typeMontant)).length;
+  L.push(
+    `Cette semaine, ${nombreFr(liste.length)} dossiers ont passé devant les instances de la Ville` +
+      (contrats.length ? `, dont ${contrats.length} contrat${contrats.length > 1 ? 's' : ''} avec un montant` : '') +
+      (nbAccordees ? ` et ${nbAccordees} subvention${nbAccordees > 1 ? 's' : ''} accordée${nbAccordees > 1 ? 's' : ''}${totalSubventions ? ` pour ${argent(totalSubventions)} au total` : ''}` : '') +
+      (lourdes[0] ? `. Le plus gros montant : ${argent(lourdes[0].montant)}, ${(lourdes[0].detail?.enUnePhrase ?? lourdes[0].resume?.puces?.[0] ?? lourdes[0].objet ?? '').replace(/^La Ville (?:de Québec )?/, 'la Ville ').replace(/\.$/, '')}` : '') +
+      '.'
+  );
   L.push('');
   L.push(`**${nombreFr(liste.length)} dossiers** cette semaine, dans ${nombreFr(docs.length)} documents : ` +
     [...seances.entries()]
@@ -235,7 +252,17 @@ async function main() {
   L.push('');
   // Ce qui figure déjà parmi les plus gros montants n'est pas répété.
   const dejaVues = new Set(lourdes.map((f) => f.cle));
-  for (const f of subventions.filter((f) => !dejaVues.has(f.cle)).slice(0, 10)) detailler(f, 2);
+  // Une ligne par subvention ou contrat : le montant, sa nature, qui, en une phrase, le lien.
+  const ligne = (f) => {
+    const d = f.detail;
+    const montant = f.montant != null ? `**${argent(f.montant)}**` : '**Montant non précisé**';
+    const nature = d ? ` *(${TYPES_MONTANT[d.typeMontant] ?? 'montant'})*` : '';
+    const phrase = d?.enUnePhrase ?? f.resume?.puces?.[0] ?? court(f.objet, 160);
+    const qui = d?.beneficiaire && !phrase.toLowerCase().includes(d.beneficiaire.toLowerCase()) ? ` — ${d.beneficiaire}` : '';
+    const offres = d?.soumissions?.length ? ` · ${new Set(d.soumissions.map((s) => s.entreprise)).size} soumissionnaire${new Set(d.soumissions.map((s) => s.entreprise)).size > 1 ? 's' : ''}` : '';
+    L.push(`- ${montant}${nature} — ${phrase}${qui}${offres} [${f.numero}](${f.pdf})`);
+  };
+  for (const f of subventions.filter((f) => !dejaVues.has(f.cle)).slice(0, 10)) ligne(f);
   const resteSub = subventions.filter((f) => !dejaVues.has(f.cle)).length - 10;
   if (resteSub > 0) L.push(`- … et ${resteSub} autre${resteSub > 1 ? 's' : ''} : [toutes les décisions de la semaine](${SITE}decisions.html)`);
   if (!subventions.length) L.push('Aucune cette semaine.');
@@ -243,7 +270,7 @@ async function main() {
 
   L.push(`## Les contrats (${contrats.length} avec un montant)`);
   L.push('');
-  for (const f of contrats.filter((f) => !dejaVues.has(f.cle)).slice(0, 8)) detailler(f, 2);
+  for (const f of contrats.filter((f) => !dejaVues.has(f.cle)).slice(0, 8)) ligne(f);
   const resteCon = contrats.filter((f) => !dejaVues.has(f.cle)).length - 8;
   if (resteCon > 0) L.push(`- … et ${resteCon} autre${resteCon > 1 ? 's' : ''} : [toutes les décisions de la semaine](${SITE}decisions.html)`);
   if (!contrats.length) L.push('Aucun cette semaine.');
@@ -256,7 +283,7 @@ async function main() {
   L.push('---');
   L.push('');
   L.push(`Les montants sont ceux des documents — des plafonds et des estimations, pas des factures.` +
-    (detailParId.size ? ` Le détail (soumissions, répartitions, conditions) est extrait automatiquement des sommaires décisionnels ; en cas d'écart, le PDF fait foi.` : '') +
+    (detailParId.size ? ` Le détail (soumissions, répartitions, conditions) est extrait automatiquement des sommaires décisionnels, puis vérifié automatiquement contre leur texte ; ce qui ne se vérifie pas est retiré. En cas d'écart, le PDF fait foi.` : '') +
     ` Chaque lien mène au PDF officiel de la Ville. Site : ${SITE} — indépendant, sans publicité, aucun caractère officiel.`);
 
   const md = L.join('\n');
