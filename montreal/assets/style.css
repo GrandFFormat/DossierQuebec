@@ -536,24 +536,22 @@ h2.section[class*="cat-"] {
 .lexique-cat .bloc-lexique { margin-top: 18px; margin-bottom: 8px; }
 @media (prefers-reduced-motion: reduce) { .lexique-cat > summary h2.section::before { transition: none; } }
 
-/* ---------- Liens rapides vers les sections d'une page ---------- */
-.liens-rapides { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 6px; }
-.liens-rapides a {
-  display: inline-block; padding: 6px 12px; border: 1px solid var(--ligne); border-radius: 999px;
-  font-size: 13px; font-weight: 600; text-decoration: none; color: var(--encre); background: var(--carte);
+/* ---------- raccourcis de page (Conseil) ---------- */
+.raccourcis { display: flex; flex-wrap: wrap; gap: 8px; margin: -4px 0 14px; }
+.raccourcis a {
+  font-size: 13px; font-weight: 600; text-decoration: none; color: var(--doux);
+  border: 1px solid var(--ligne); border-radius: 999px; padding: 4px 12px; background: var(--carte);
 }
-.liens-rapides a:hover { border-color: var(--accent); color: var(--accent-encre, var(--accent)); }
+.raccourcis a:hover { color: var(--encre); border-color: var(--ligne-forte); }
 h2.page[id] { scroll-margin-top: 16px; }
 
-/* ---------- Remonter en haut de page ---------- */
-.haut-page {
-  position: fixed; right: 18px; bottom: 18px; z-index: 50;
-  width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--ligne);
-  background: var(--carte); color: var(--encre); font-size: 20px; line-height: 42px; text-align: center;
-  cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.18);
-  opacity: 0; visibility: hidden; transform: translateY(8px);
-  transition: opacity .2s, transform .2s, visibility .2s;
+/* ---------- retour en haut ---------- */
+.haut {
+  position: fixed; right: 18px; bottom: 18px; z-index: 20;
+  width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--ligne-forte);
+  background: var(--carte); color: var(--encre); font-size: 20px; line-height: 1; cursor: pointer;
+  box-shadow: var(--ombre-forte); opacity: 0; transform: translateY(8px); pointer-events: none;
+  transition: opacity .18s, transform .18s;
 }
-.haut-page.visible { opacity: 1; visibility: visible; transform: none; }
-.haut-page:hover { border-color: var(--accent); color: var(--accent-encre, var(--accent)); }
-@media (max-width: 600px) { .haut-page { right: 12px; bottom: 12px; } }
+.haut.visible { opacity: 1; transform: none; pointer-events: auto; }
+.haut:hover { border-color: var(--accent); color: var(--accent); }
