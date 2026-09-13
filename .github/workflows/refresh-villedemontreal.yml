@@ -63,6 +63,18 @@ jobs:
         if: ${{ steps.volet.outputs.present == 'oui' }}
         run: npm ci --omit=dev
 
+      # Le texte extrait des PDF (data/textes/, hors dépôt) d'un run à l'autre : relire une
+      # séance déjà téléchargée ne redemande rien à la Ville. Clé unique par run, restauration
+      # depuis le run précédent.
+      - name: Restaurer le cache de texte des PDF
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        uses: actions/cache@v4
+        with:
+          path: villedemontreal/data/textes
+          key: textes-montreal-${{ github.run_id }}
+          restore-keys: |
+            textes-montreal-
+
       - name: Rafraîchir les données municipales
         if: ${{ steps.volet.outputs.present == 'oui' }}
         id: refresh
