@@ -990,3 +990,19 @@ init();
   moins.addEventListener('click', () => appliquer(Math.max(MIN, lire() - PAS)));
   plus.addEventListener('click', () => appliquer(Math.min(MAX, lire() + PAS)));
 })();
+
+// ---------- retour en haut ----------
+// Sur toutes les pages : la liste des décisions et la page du conseil sont longues. Le bouton
+// n'apparaît qu'une fois qu'on a vraiment descendu, pour ne pas encombrer l'en-tête.
+(function retourEnHaut() {
+  const bouton = document.createElement('button');
+  bouton.type = 'button';
+  bouton.className = 'haut';
+  bouton.setAttribute('aria-label', 'Revenir en haut de la page');
+  bouton.textContent = '↑';
+  document.body.appendChild(bouton);
+  const majVisible = () => bouton.classList.toggle('visible', window.scrollY > 600);
+  window.addEventListener('scroll', majVisible, { passive: true });
+  majVisible();
+  bouton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+})();
