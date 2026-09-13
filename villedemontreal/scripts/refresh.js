@@ -75,6 +75,15 @@ const ETAPES = [
     : []),
 ];
 
+// La version du code qui tourne, en tête du journal : la première question quand un
+// lancement se comporte comme l'ancien.
+try {
+  const rev = spawnSync('git', ['rev-parse', '--short', 'HEAD'], { encoding: 'utf8' });
+  if (rev.status === 0) console.log(`Code : commit ${rev.stdout.trim()} — Node ${process.version}`);
+} catch {
+  // pas de git : tant pis
+}
+
 const echecs = [];
 const avertissements = [];
 for (const etape of ETAPES) {

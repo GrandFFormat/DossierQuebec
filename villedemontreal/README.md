@@ -21,9 +21,10 @@ construit, ce qui reste à vérifier, et pourquoi.
 ## Démarrage
 
 **Sans rien taper (Windows)** : double-cliquer sur `LANCER-MONTREAL.cmd`. Il vérifie Node.js et
-Git, télécharge le dépôt s'il n'est pas sur le PC, prend la dernière version de la branche,
-installe les dépendances, lance la routine, envoie les données sur GitHub et ouvre le site
-en local. S'il s'arrête, la fenêtre dit pourquoi ; copier son texte et l'envoyer à Claude.
+Git, tient sa propre copie du dépôt dans `Documents\DossierVilleMontreal` ramenée à la dernière
+version de la branche à chaque fois, se relance depuis cette version, installe les dépendances,
+lance la routine en écrivant tout dans `data/lancement.log`, envoie données et journal sur
+GitHub et ouvre le site en local. S'il s'arrête, la fenêtre dit pourquoi.
 
 
 ```bash
