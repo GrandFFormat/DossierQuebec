@@ -100,8 +100,14 @@ async function main() {
   let analysees = 0;
   const seancesVues = new Set();
   for (const seance of seances) {
-    const pv = await documentDeSeance(seance, 'PV');
-    if (!pv) continue;
+    let pv;
+    try {
+      pv = await documentDeSeance(seance, 'PV');
+    } catch (err) {
+      console.warn(`⚠ ${seance.id} : ${err.message}`);
+      continue;
+    }
+    if (!pv?.url) continue;
     analysees++;
     seancesVues.add(seance.id);
     votes.push(...votesDeSeance(seance, pv));
