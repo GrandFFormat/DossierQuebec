@@ -68,7 +68,25 @@ const REGLES = [
   ['contrats', /mandat|services?\b|fourniture|acquisition|location|achat/i],
 ];
 
-// L'unité administrative (le service), quand l'ordre du jour la donne. Second recours.
+// La CATÉGORIE que la Ville écrit sur chaque point de l'ordre du jour (« Subvention -
+// Contribution financière », « Contrat d'approvisionnement et de services autres que
+// professionnels », « Immeuble - Acquisition »…). C'est son propre classement : il passe
+// juste après les règles par mots-clés sur l'objet, avant le service.
+const PAR_CATEGORIE = [
+  [/subvention|soutien financier|contribution/i, 'subventions'],
+  [/urbanisme|zonage|d[ée]rogation|projet particulier|PIIA|patrimoine b[âa]ti/i, 'urbanisme'],
+  [/immeuble|location|servitude|acquisition|ali[ée]nation|bail/i, 'immobilier'],
+  [/emprunt|budget|taxe|tarif|[ée]tats financiers|virement|cr[ée]dit/i, 'finances'],
+  [/nomination|ressources humaines|structure|convention collective/i, 'rh'],
+  [/toponymie|culture|patrimoine|art public/i, 'culture'],
+  [/ordre du jour|proc[èe]s-verbal|d[ée]p[ôo]t|p[ée]riode de questions|avis de motion|r[èe]glement - adoption|r[èe]glement - avis/i, 'procedure'],
+  [/travaux|ex[ée]cution de travaux|construction/i, 'travaux'],
+  [/contrat|entente|convention|approvisionnement|services professionnels|gr[ée] [àa] gr[ée]/i, 'contrats'],
+  [/d[ée]claration|motion|hommage|f[ée]licitation/i, 'honneurs'],
+  [/administration|politique|plan|rapport|mandat|autorisation/i, 'administration'],
+];
+
+// L'unité administrative (le service), quand l'ordre du jour la donne. Troisième recours.
 const PAR_UNITE = [
   [/urbanisme|am[ée]nagement|habitation/i, 'urbanisme'],
   [/infrastructures? du r[ée]seau routier|travaux publics|infrastructures?/i, 'travaux'],
@@ -87,10 +105,15 @@ const PAR_UNITE = [
 ];
 
 // Renvoie { theme, themeSource } — toujours un thème, la source dit ce qui a tranché.
-export function classer({ objet, unite }) {
+export function classer({ objet, categorie, unite }) {
   const texte = objet ?? '';
   for (const [theme, regle] of REGLES) {
     if (regle.test(texte)) return { theme, themeSource: 'objet' };
+  }
+  if (categorie) {
+    for (const [regle, theme] of PAR_CATEGORIE) {
+      if (regle.test(categorie)) return { theme, themeSource: 'categorie' };
+    }
   }
   if (unite) {
     for (const [regle, theme] of PAR_UNITE) {

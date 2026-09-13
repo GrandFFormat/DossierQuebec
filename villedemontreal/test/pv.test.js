@@ -119,32 +119,6 @@ test('dissidences sur une ou plusieurs lignes', () => {
   assert.deepEqual(extraireDissidences('Dissidence : M. Lafond\n40.12'), ['Lafond']);
 });
 
-test("ordre du jour : rattache le lien du sommaire au numéro de dossier", () => {
-  const pages = [
-    {
-      numero: 1,
-      lignes: [
-        { y: 700, texte: '20.03 Service de la diversité - 1266245003' },
-        { y: 685, texte: "Approuver un projet de convention entre la Ville et l'organisme Exemple inc." },
-        { y: 600, texte: '20.04 Service des finances - 1266245004' },
-        { y: 585, texte: 'Autoriser une dépense de 1 000 000 $' },
-      ],
-      liens: [
-        { url: 'https://ville.montreal.qc.ca/sel/sypre-consultation/afficherpdf?idDoc=1&typeDoc=1', y: 686 },
-        { url: 'https://ville.montreal.qc.ca/sel/sypre-consultation/afficherpdf?idDoc=2&typeDoc=1', y: 586 },
-      ],
-    },
-  ];
-  const points = parserOrdreDuJour(pages);
-  assert.equal(points.length, 2);
-  assert.equal(points[0].article, '20.03');
-  assert.equal(points[0].dossier, '1266245003');
-  assert.match(points[0].sommairePdf, /idDoc=1&/);
-  assert.equal(points[1].dossier, '1266245004');
-  assert.match(points[1].sommairePdf, /idDoc=2&/);
-  assert.match(points[0].objet, /Approuver un projet/);
-});
-
 test('CSV : guillemets, retours à la ligne, BOM, point-virgule', () => {
   const { colonnes, cles, lignes } = parserCsv('﻿Prénom;Nom;Rôles\nJulie;Tremblay;"Conseillère de la ville; Membre du comité exécutif"\nPierre;"La\nFond";Maire d\'arrondissement\n');
   assert.deepEqual(colonnes, ['Prénom', 'Nom', 'Rôles']);
@@ -272,4 +246,43 @@ test('calendrier 2026 : seance, lien_site_ville, date, heure_debut, heure_fin, l
 test('clé stricte : De Lorimier = DeLorimier', () => {
   assert.equal(cleStricte('De Lorimier'), cleStricte('DeLorimier'));
   assert.equal(cleStricte('Saint-Paul–Émard'), cleStricte('Saint-Paul—Émard'));
+});
+
+test("ordre du jour de Montréal : article, catégorie, service, dossier, objet — sans hyperlien", () => {
+  const lignes = (arr) => arr.map((texte, i) => ({ y: 700 - i * 12, texte }));
+  const pages = [{ numero: 2, liens: [], lignes: lignes([
+    '20 – Affaires contractuelles',
+    "20.001 Contrat d'approvisionnement et de services autres que professionnels",
+    'CE Service de police de Montréal , Direction des services organisationnels - 1267026004',
+    'Conclure une entente-cadre avec SB joints et peinture inc., pour les services de peintre en bâtiment pour',
+    "les besoins du Service de police - Appel d'offres public 26-21327 (7 soumissionnaires)",
+    "Compétence d’agglomération : Éléments de la sécurité publique",
+    '20.003 Subvention - Contribution financière',
+    'CE Service de la diversité et de l\'inclusion sociale , Direction stratégies et programmes -',
+    '1268122001',
+    'Réaffecter un soutien financier totalisant 69 196 $, pour 2026 et 2027',
+    'Page 2',
+  ]) }, { numero: 3, liens: [], lignes: lignes(['à différents organismes', '20.004 Subvention - Soutien financier avec convention', 'CG Service de la culture , Direction des sports - 1261204001', 'Accorder un soutien financier de 150 000 $']) }];
+  const p = parserOrdreDuJour(pages);
+  assert.equal(p.length, 3);
+  assert.equal(p[0].article, '20.001');
+  assert.equal(p[0].categorie, "Contrat d'approvisionnement et de services autres que professionnels");
+  assert.equal(p[0].unite, 'Service de police de Montréal, Direction des services organisationnels');
+  assert.equal(p[0].dossier, '1267026004');
+  assert.match(p[0].objet, /^Conclure une entente-cadre .* \(7 soumissionnaires\)$/);
+  assert.equal(p[1].dossier, '1268122001');
+  assert.equal(p[1].objet, 'Réaffecter un soutien financier totalisant 69 196 $, pour 2026 et 2027 à différents organismes');
+  assert.equal(p[2].instanceFinale, 'CG');
+});
+
+test("comité exécutif : la résolution sans ligne d'objet prend celui de l'ordre du jour", () => {
+  const r = decouperResolutions('CE26 1015\nIl est\nRÉSOLU :\n1- de conclure une entente-cadre…\nAdopté à l\'unanimité.\n20.001 1267026004\n', { instance: 'CE' });
+  assert.equal(r[0].objet, null);
+  assert.equal(r[0].dossier, '1267026004');
+  assert.equal(r[0].resultat, "Adoptée à l'unanimité");
+});
+
+test('thèmes : la catégorie de la Ville tranche après l\'objet', () => {
+  assert.equal(classer({ objet: 'Zzz', categorie: 'Subvention - Contribution financière' }).theme, 'subventions');
+  assert.equal(classer({ objet: 'Zzz', categorie: 'Immeuble - Location' }).themeSource, 'categorie');
 });

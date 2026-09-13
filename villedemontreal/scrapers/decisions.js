@@ -31,6 +31,9 @@ const SEANCES = new URL('../data/seances.json', import.meta.url);
 export const CACHE = new URL('../data/textes/', import.meta.url);
 
 const RATTRAPAGE_JOURS = 45;
+// Quand le découpage change (ce numéro augmente), les séances déjà lues sont relues à la
+// prochaine exécution, sans qu'on ait à le demander.
+export const VERSION_LECTURE = 2;
 const DIAGNOSTIC = new URL('../data/diagnostic.json', import.meta.url);
 
 // Un échantillon de ce que les PDF contiennent vraiment — les premières lignes d'un
@@ -119,18 +122,22 @@ export function decisionsDeSeance(seance, pv, odj) {
   const decisions = resolutions.map((r) => {
     const point = (r.dossier && parDossier.get(r.dossier)) || (r.article && parArticle.get(r.article)) || null;
     const page = pageDe(pv.pages, r.numero);
+    // L'objet du procès-verbal quand il en a un ; sinon — au comité exécutif, où la
+    // résolution commence par « Il est RÉSOLU » — celui de l'ordre du jour, plus lisible.
+    const objetPv = r.objet && !/^(?:Il est|R[ÉE]SOLU|L['’][ée]tude de ce dossier)/i.test(r.objet) ? r.objet : null;
     return {
       id: r.numero,
       numero: r.numero,
-      objet: r.objet ?? point?.objet ?? null,
+      objet: objetPv ?? point?.objet ?? r.objet ?? null,
+      categorie: point?.categorie ?? null,
       date: seance.date,
       annee: seance.date.slice(0, 4),
       type: 'Résolution',
       instance: seance.nom,
       seanceId: seance.id,
-      unite: null,
+      unite: point?.unite ?? null,
       article: r.article,
-      dossier: r.dossier,
+      dossier: r.dossier ?? point?.dossier ?? null,
       resultat: r.resultat,
       dissidences: r.dissidences,
       voteEnregistre: Boolean(r.vote),
@@ -232,7 +239,7 @@ async function main() {
     const plusRecentConnu = [...decisionsConnues.values()].reduce((m, d) => ((d.date ?? '') > m ? d.date : m), '');
     const seuil = plusRecentConnu ? ajouterJours(plusRecentConnu, -RATTRAPAGE_JOURS) : '';
     for (const d of liste) d.nouveau = precedent ? !decisionsConnues.has(d.id) && (d.date ?? '') >= seuil : null;
-    for (const d of liste) Object.assign(d, classer({ objet: d.type === 'Résolution' ? d.objet : 'procès-verbal', unite: d.unite }));
+    for (const d of liste) Object.assign(d, classer({ objet: d.type === 'Résolution' ? d.objet : 'procès-verbal', categorie: d.categorie, unite: d.unite }));
     liste.sort((a, b) => b.date.localeCompare(a.date) || (a.instance ?? '').localeCompare(b.instance ?? '') || (a.numero ?? '').localeCompare(b.numero ?? ''));
     // Les séances pas encore traitées gardent leur état précédent, ou « non traitée ».
     const traitees = new Set(etatSeances.map((s) => s.id));
@@ -264,7 +271,7 @@ async function main() {
       etatSeances.push({ ...seance, etat: 'à venir', pv: null, odj: null });
       continue;
     }
-    if (deja?.etat === 'lue' && !args.complet && !args.seance) {
+    if (deja?.etat === 'lue' && deja.versionLecture === VERSION_LECTURE && !args.complet && !args.seance) {
       etatSeances.push(deja);
       continue;
     }
@@ -298,7 +305,7 @@ async function main() {
     const avecSommaire = nouvelles.filter((d) => d.sommairePdf).length;
     console.log(`${seance.id} : ${pv.nombrePages} pages, ${resolutions.length} résolutions, ${points.length} points à l'ordre du jour, ${avecSommaire} liens vers un sommaire${pv.depuisCache ? ' (cache)' : ''}`);
     if (resolutions.length === 0) console.warn(`⚠ ${seance.id} : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.`);
-    etatSeances.push({ ...seance, etat: 'lue', pv: pv.url, odj: odj?.url ?? null, nombreResolutions: resolutions.length, lueLe: aujourdhui });
+    etatSeances.push({ ...seance, etat: 'lue', versionLecture: VERSION_LECTURE, pv: pv.url, odj: odj?.url ?? null, nombreResolutions: resolutions.length, lueLe: aujourdhui });
     await ecrire(true);
     await ecrireDiagnostic();
   }

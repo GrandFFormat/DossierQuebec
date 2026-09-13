@@ -57,7 +57,9 @@ export function normaliserTexte(texte) {
 // deux ou trois lignes de PDF.
 // « Adopté à l'unanimité » ferme l'objet ; « Adopter le règlement… » EST l'objet — d'où le
 // participe passé suivi de « à / sur / par », jamais l'infinitif.
-const FIN_OBJET = /^(?:Vu\b|Attendu\b|Consid[ée]rant\b|Il est propos[ée]|Il est r[ée]solu|Et r[ée]solu|Après avoir|Le conseil\b|Le comité\b|Un débat|Le président|La présidente|Adopt[ée]e?\s+(?:à|sur|par)\b|Rejet[ée]e?\s*\.?\s*$|_{3,})/i;
+// Au comité exécutif, la résolution n'a pas de ligne d'objet : elle commence par « Il est »
+// puis « RÉSOLU : » — l'objet vient alors de l'ordre du jour (voir parserOrdreDuJour).
+const FIN_OBJET = /^(?:Vu\b|Attendu\b|Consid[ée]rant\b|Il est\s*$|Il est propos[ée]|Il est r[ée]solu|Et r[ée]solu|R[ÉE]SOLU\s*:|L['’][ée]tude de ce dossier|Après avoir|Le conseil\b|Le comité\b|Un débat|Le président|La présidente|Adopt[ée]e?\s+(?:à|sur|par)\b|Rejet[ée]e?\s*\.?\s*$|_{3,})/i;
 
 function extraireObjet(lignes) {
   const morceaux = [];
@@ -249,45 +251,70 @@ export function parserVote(bloc) {
 
 // ---------- ordres du jour ----------
 
-// Un ordre du jour « LPP » (avec liens vers les pièces publiques) liste les points de la
-// séance — « 20.03 » — avec le numéro de dossier à dix chiffres et, en hyperlien, le
-// sommaire décisionnel. On rattache chaque lien au numéro de dossier écrit sur la même
-// ligne ou juste au-dessus, page par page. `pages` vient de lib/pdf.js.
+// Un ordre du jour de Montréal (version « LPP », la seule publiée) n'a AUCUN hyperlien :
+// le rattachement au sommaire décisionnel par lien n'existe pas. En revanche chaque point
+// est écrit sur un gabarit fixe, et c'est une mine :
+//
+//   20.001 Contrat d'approvisionnement et de services autres que professionnels
+//   CE Service de police de Montréal , Direction des services organisationnels - 1267026004
+//   Conclure une entente-cadre avec SB joints et peinture inc., pour les services de peintre …
+//   Compétence d'agglomération : Éléments de la sécurité publique …
+//
+// Ligne 1 : l'article et la CATÉGORIE de la Ville. Ligne 2 : l'instance qui tranchera en
+// dernier, le SERVICE responsable, et le numéro de dossier (qui déborde parfois sur la ligne
+// suivante). Puis l'objet, jusqu'à la mention de compétence ou au point suivant. Les
+// chapitres (« 20 – Affaires contractuelles ») et « Page N » sont ignorés.
+const LIGNE_POINT = /^(\d{2}\.\d{2,3})\s+(.*)$/;
+const LIGNE_SERVICE = /^(CM|CG|CE|CA)\s+(.+?)(?:\s+-\s*(\d{10})?)?\s*$/;
+const FIN_POINT = /^(?:Comp[ée]tence d['’]agglom[ée]ration|Page\s+\d+|\d{2}\s+[–-]\s+)/i;
+
 export function parserOrdreDuJour(pages) {
   const points = [];
+  let courant = null;
+  const fermer = () => {
+    if (!courant) return;
+    courant.objet = courant.objet.join(' ').replace(/\s+/g, ' ').trim() || null;
+    points.push(courant);
+    courant = null;
+  };
   for (const page of pages) {
-    const lignesDossier = [];
     for (const l of page.lignes) {
-      const m = l.texte.match(/\b(\d{10})\b/);
-      if (m) lignesDossier.push({ y: l.y, dossier: m[1] });
-    }
-    // Pour chaque lien : le dossier le plus proche verticalement, en privilégiant la ligne
-    // au-dessus (le lien est souvent posé sur l'objet, écrit sous le numéro).
-    const liens = new Map();
-    for (const lien of page.liens) {
-      if (lien.y == null || !lignesDossier.length) continue;
-      let meilleur = null;
-      for (const ld of lignesDossier) {
-        const d = Math.abs(ld.y - lien.y);
-        if (!meilleur || d < meilleur.d) meilleur = { d, dossier: ld.dossier };
+      const t = l.texte.trim();
+      if (!t) continue;
+      const mp = t.match(LIGNE_POINT);
+      if (mp) {
+        fermer();
+        courant = { article: mp[1], categorie: mp[2].trim() || null, instanceFinale: null, unite: null, dossier: null, objet: [], sommairePdf: null, page: page.numero, attendDossier: false };
+        continue;
       }
-      if (meilleur && meilleur.d < 80 && !liens.has(meilleur.dossier)) liens.set(meilleur.dossier, lien.url);
-    }
-    // Les points : article, dossier, et l'objet qui suit.
-    const lignes = page.lignes.map((l) => l.texte.trim());
-    for (let i = 0; i < lignes.length; i++) {
-      const m = lignes[i].match(/^(\d{2}\.\d{2,3})\b\s*(.*)$/);
-      if (!m) continue;
-      const suite = [m[2], ...lignes.slice(i + 1, i + 6).filter((l) => !/^\d{2}\.\d{2,3}\b/.test(l))].join(' ');
-      const dossier = suite.match(/\b(\d{10})\b/)?.[1] ?? null;
-      points.push({
-        article: m[1],
-        dossier,
-        objet: suite.replace(/\b\d{10}\b/, '').replace(/\s+/g, ' ').trim() || null,
-        sommairePdf: dossier ? (liens.get(dossier) ?? null) : null,
-        page: page.numero,
-      });
+      if (!courant) continue;
+      if (FIN_POINT.test(t)) {
+        if (/^Page\s+\d+/i.test(t)) continue; // pied de page : le point continue sur la page suivante
+        fermer();
+        continue;
+      }
+      if (!courant.unite) {
+        const ms = t.match(LIGNE_SERVICE);
+        if (ms) {
+          courant.instanceFinale = ms[1];
+          courant.unite = ms[2].replace(/\s+,/g, ',').replace(/\s+-\s*$/, '').trim();
+          courant.dossier = ms[3] ?? null;
+          courant.attendDossier = !ms[3];
+          continue;
+        }
+      }
+      if (courant.attendDossier) {
+        const md = t.match(/^(\d{10})\s*$/);
+        courant.attendDossier = false;
+        if (md) {
+          courant.dossier = md[1];
+          continue;
+        }
+      }
+      courant.objet.push(t);
     }
   }
+  fermer();
+  for (const p of points) delete p.attendDossier;
   return points;
 }
