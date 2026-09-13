@@ -56,10 +56,12 @@ const ETAPES = [
       ]
     : []),
   { nom: 'Calendrier des séances', argv: ['scrapers/seances.js'] },
-  { nom: "Décisions de l'année" + (complet ? ' (relecture complète)' : ''), argv: ['scrapers/decisions.js', ...(complet ? ['--complet'] : [])] },
+  // --max-old-space-size : un procès-verbal du conseil municipal fait des centaines de pages ;
+  // le premier lancement s'est éteint sans un mot au milieu de l'un d'eux.
+  { nom: "Décisions de l'année" + (complet ? ' (relecture complète)' : ''), argv: ['--max-old-space-size=4096', 'scrapers/decisions.js', ...(complet ? ['--complet'] : [])] },
   {
     nom: 'Votes enregistrés' + (complet ? ' (année complète)' : ` (depuis ${depuis})`),
-    argv: ['scrapers/votes.js', ...(complet ? ['--complet'] : [`--depuis=${depuis}`])],
+    argv: ['--max-old-space-size=4096', 'scrapers/votes.js', ...(complet ? ['--complet'] : [`--depuis=${depuis}`])],
   },
   { nom: 'Lexique, mesuré sur les procès-verbaux', argv: ['scrapers/lexique.js'], secondaire: true },
   ...(resumes
