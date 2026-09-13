@@ -81,7 +81,10 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           MTL_CONTACT: ${{ vars.MTL_CONTACT }}
-        run: npm run refresh
+        # Le journal part avec les données : on le lit sur GitHub sans ouvrir le run.
+        run: |
+          set -o pipefail
+          npm run refresh 2>&1 | tee data/lancement.log
 
       # Seul montreal/data/ bouge (data/textes/ est ignoré par git). On rebase avant
       # de pousser au cas où quelqu'un aurait poussé pendant le job.
