@@ -1,0 +1,52 @@
+{
+ "generatedAt": "2026-09-13T03:18:36.945Z",
+ "cheminsLus": [
+  "/documents/Adi_Public/",
+  "/api/3/action/",
+  "/dataset/"
+ ],
+ "sites": [
+  {
+   "url": "https://ville.montreal.qc.ca/robots.txt",
+   "present": true,
+   "erreur": null,
+   "toutInterdit": false,
+   "reglesConcernantNosChemins": [
+    {
+     "type": "allow",
+     "chemin": "/"
+    }
+   ],
+   "texte": "User-agent: *\nAllow: /\n"
+  },
+  {
+   "url": "https://donnees.montreal.ca/robots.txt",
+   "present": true,
+   "erreur": null,
+   "toutInterdit": false,
+   "reglesConcernantNosChemins": [
+    {
+     "type": "disallow",
+     "chemin": "/dataset/rate/"
+    },
+    {
+     "type": "disallow",
+     "chemin": "/dataset/*/history"
+    },
+    {
+     "type": "disallow",
+     "chemin": "/api/"
+    }
+   ],
+   "texte": "User-agent: *\n\nDisallow: /dataset/rate/\nDisallow: /revision/\nDisallow: /dataset/*/history\nDisallow: /api/\nCrawl-Delay: 10\n\n# Faceted search views are not useful search results and the set of\n# filter combinations is effectively unbounded: every extra facet\n# multiplies the number of distinct URLs, none of which are cacheable.\n# Crawlers that walk them generate a full Solr query per request while\n# adding nothing indexable, so disallow the filtered views and leave the\n# canonical dataset, group and organization pages crawlable.\nDisallow: /*?*tags=\nDisallow: /*?*groups=\nDisallow: /*?*res_format=\nDisallow: /*?*organization=\nDisallow: /*?*license_id=\nDisallow: /*?*_tags_limit=\nDisallow: /*?*_groups_limit=\nDisallow: /*?*_res_format_limit=\n\n# CKAN escapes the separator in multi-facet links as \"&amp;\", which is\n# correct HTML. A crawler that also treats \";\" as a parameter separator\n# reads the \"amp\" as its own parameter and re-requests the URL with a\n# bare \"amp=\" appended. The reply contains the same escaped links, so\n# each pass appends another one and the crawl space compounds; requests\n# carrying fifteen stacked \"amp=\" parameters have been observed in\n# production. The parameter is meaningless to CKAN, so refuse the URLs.\nDisallow: /*?*amp=\n\n\n\n"
+  },
+  {
+   "url": "https://montreal.ca/robots.txt",
+   "present": true,
+   "erreur": null,
+   "toutInterdit": false,
+   "reglesConcernantNosChemins": [],
+   "texte": "User-Agent: *\n\nDisallow: /en/search?*\nDisallow: /recherche?*\n\nDisallow: /*?*q=*\n\n# Disallow: /*?arrondissement=*\n\nDisallow: /*?*dc_*\nDisallow: /*?*sioc_*\nDisallow: /*?*mtl_*\n\n### Calendriers\n\n# prévenir le crawling dans les calendriers thématiques - on le fait déjà dans le calendrier global\nDisallow: /calendrier-culturel?*\nDisallow: /calendrier-expositions?*\nDisallow: /calendrier-loisirs-et-sports?*\nDisallow: /calendrier-participation-publique?*\nDisallow: /calendrier-vie-de-quartier?*\n\nDisallow: /en/arts-and-culture-calendar?*\nDisallow: /en/exhibitions-calendar?*\nDisallow: /en/sports-and-recreation-calendar?*\nDisallow: /en/public-participation-calendar?*\nDisallow: /en/neighbourhood-life-calendar?*\n\n### règles par \"section\" du site\n\n# Avis et alertes - ne pas indexer les alertes\n# = on bloque tout à partir d'une \"recherche\", incluant la pagination\nDisallow: /avis-et-alertes?*\nDisallow: /alertes/*\nDisallow: /en/notices-and-alerts?page=*\nDisallow: /en/alerts/*\n\n# Règlements (SN) ne pas indexer les règlements\n# = on bloque tout à partir d'une \"recherche\", incluant la pagination\nDisallow: /*reglements-municipaux/recherche*\n\n### règles diverses - en vrac\n\nDisallow: /*?fbclid*\n\n### Ajout du fichier sitemap.xml\n\n# En attente d'un fichier optimisé et mis à jour\n# Sera également renseigné dans la Google Search Console\n"
+  }
+ ]
+}

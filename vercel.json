@@ -26,6 +26,15 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/montreal/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -42,6 +51,21 @@
     {
       "source": "/villedequebec",
       "destination": "/quebec/",
+      "permanent": true
+    },
+    {
+      "source": "/montreal",
+      "destination": "/montreal/",
+      "permanent": true
+    },
+    {
+      "source": "/villedemontreal/(.*)",
+      "destination": "/montreal/$1",
+      "permanent": true
+    },
+    {
+      "source": "/villedemontreal",
+      "destination": "/montreal/",
       "permanent": true
     }
   ]
