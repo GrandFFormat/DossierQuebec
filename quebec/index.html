@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
 <meta name="robots" content="noindex, nofollow">
-<title>Lexique du vocabulaire municipal — DossierVilleDeQuébec</title>
-<meta name="description" content="Résolution, sommaire décisionnel, avis de motion, dérogation mineure, ville reconstituée : le vocabulaire des décisions de la Ville de Québec, expliqué et chiffré sur les documents officiels.">
+<title>DossierVilleDeQuébec — les décisions de la Ville de Québec, lisibles</title>
+<meta name="description" content="Site citoyen indépendant qui rend lisibles les décisions du conseil municipal de Québec : résolutions, sommaires décisionnels, votes nominatifs et membres du conseil.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
 </script>
 <link rel="stylesheet" href="assets/style.css">
 </head>
-<body data-page="lexique">
+<body data-page="accueil">
 
 <header>
   <div class="contenu">
@@ -37,14 +37,14 @@
     </div>
     <p class="sous-titre">
       Les décisions de la Ville de Québec, lisibles. Données publiques, reprises telles quelles
-      du portail des documents décisionnels de la Ville.
+      du portail des documents décisionnels de la Ville et de la page officielle du conseil municipal.
     </p>
     <nav>
-      <a href="./">Accueil</a>
+      <a href="./" aria-current="page">Accueil</a>
       <a href="decisions.html">Décisions</a>
       <a href="votes.html">Votes nominatifs</a>
       <a href="conseil.html">Conseil municipal</a>
-      <a href="lexique.html" aria-current="page">Lexique</a>
+      <a href="lexique.html">Lexique</a>
       <div class="taille-texte" role="group" aria-label="Taille du texte">
         <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
         <span id="texte-pct" aria-live="polite">100%</span>
@@ -59,17 +59,35 @@
 <main class="contenu">
   <div id="chargement" class="avis">Chargement des données…</div>
 
-  <h2 class="page">Lexique</h2>
-  <p class="chapeau">
-    Le vocabulaire des décisions municipales est opaque par habitude, pas par nécessité. Voici ce
-    que veulent dire les mots que vous croisez sur ce site.
+  <div class="chiffres" id="chiffres"></div>
+
+  <h2 class="page" id="titre-fil">Ce qui a changé</h2>
+  <div id="fil"></div>
+  <button class="plus" id="plus-fil" hidden>Afficher plus</button>
+  <p style="margin-top:14px">
+    <a href="decisions.html">Toutes les décisions →</a> &nbsp;·&nbsp;
+    <a href="votes.html">Tous les votes nominatifs →</a>
   </p>
 
-  <div class="barre-outils">
-    <input type="search" id="rech-lexique" placeholder="Chercher un terme…">
+  <h2 class="page">Par où commencer</h2>
+  <div class="cartes-liens">
+    <a class="lien-section" href="decisions.html">
+      <h3>Décisions</h3>
+      <p>Résolutions, sommaires décisionnels, procès-verbaux et tableaux de décisions de l'année en cours, avec recherche et filtres.</p>
+    </a>
+    <a class="lien-section" href="votes.html">
+      <h3>Votes nominatifs</h3>
+      <p>Quand quelqu'un demande le vote, on sait qui a voté pour et qui a voté contre. Le décompte, par personne.</p>
+    </a>
+    <a class="lien-section" href="conseil.html">
+      <h3>Conseil municipal</h3>
+      <p>La carte des 21 districts : cliquez sur le vôtre pour savoir qui vous représente, son parti, ses fonctions et comment le joindre.</p>
+    </a>
+    <a class="lien-section" href="sources.html">
+      <h3>Sources et limites</h3>
+      <p>D'où viennent les données, comment elles sont obtenues, et ce que ce prototype ne fait pas encore.</p>
+    </a>
   </div>
-  <p class="compte" id="compte-lexique"></p>
-  <div id="liste-lexique"></div>
 </main>
 
 <footer>
@@ -81,7 +99,7 @@
 
 <script type="module" src="assets/app.js"></script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
-     Même projet Vercel : les pages vues de /villedequebec/ s'ajoutent au même tableau de
+     Même projet Vercel : les pages vues de /quebec/ s'ajoutent au même tableau de
      bord. En local le script n'existe pas (404 sans conséquence). -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>

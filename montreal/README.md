@@ -7,7 +7,7 @@ verdict sur de vraies personnes.
 Ce n'est pas un site de la Ville de Montréal et ça n'a aucun caractère officiel.
 
 Ce volet a été construit en suivant `REPRODUIRE-POUR-UNE-AUTRE-VILLE.md` du volet Québec
-(dépôt DossierQuébec, dossier `villedequebec/`), avec une phrase en plus : « La ville, c'est
+(dépôt DossierQuébec, dossier `quebec/`), avec une phrase en plus : « La ville, c'est
 Montréal. » Le présent README est le journal du projet : ce qui a été trouvé, ce qui a été
 construit, ce qui reste à vérifier, et pourquoi.
 
@@ -100,9 +100,13 @@ de recoupement exact (noms extraits = décompte imprimé) et le README le consig
   Vérifié (mentions légales). Les PV sont des documents publics ; on les reproduit sans usage
   commercial, avec la source, et on le confirme par écrit — c'est le point 1 de
   `courriel-greffe.md`.
-- **robots.txt** de `montreal.ca` et de `ville.montreal.qc.ca` : **non vérifié** (inaccessibles
-  depuis la session). À lire au premier lancement, avant tout volume, et à mentionner au greffe
-  (point 2 du courriel). Le robot s'identifie de toute façon et attend 0,6 s entre deux requêtes.
+- **robots.txt**, lus par la routine et conservés dans `data/robots.json` (13 septembre 2026) :
+  `ville.montreal.qc.ca` autorise tout (`Allow: /`) ; `montreal.ca` n'exclut que ses pages de
+  recherche et de calendrier, qu'on ne lit pas ; `donnees.montreal.ca` demande un
+  **Crawl-Delay de 10 s** et exclut `/api/` des robots d'indexation. L'API CKAN est faite pour
+  les programmes, pas pour l'indexation, mais on respecte la lettre autant que possible : le
+  client attend 10 s entre deux requêtes à ce portail (cinq ou six par jour), et le point est
+  nommé dans le courriel au greffe (point 2).
 
 ### Les pages « membres »
 
@@ -211,14 +215,14 @@ Ce qui a changé dans `app.js`, et pourquoi :
   nomment les votants.
 
 Tant que la Ville n'a pas répondu, les pages portent `<meta name="robots" content="noindex,
-nofollow">`, le `vercel.json` du dépôt ajoute `X-Robots-Tag` sur `/villedemontreal/`, et le
+nofollow">`, le `vercel.json` du dépôt ajoute `X-Robots-Tag` sur `/montreal/`, et le
 volet n'est pas dans le sitemap. Le jour où ça débloque : retirer ces verrous, ajouter les pages
 au sitemap, retirer l'étiquette « Prototype ».
 
 ## Où ce dossier vit
 
-Comme le volet Québec : dans le dépôt de DossierQuébec, sous `villedemontreal/`, servi à
-**https://dossierquebec.ca/villedemontreal/** — mêmes déploiements Vercel, même tableau de
+Comme le volet Québec : dans le dépôt de DossierQuébec, sous `montreal/`, servi à
+**https://dossierquebec.ca/montreal/** — mêmes déploiements Vercel, même tableau de
 bord, même mécanique de rafraîchissement. Le workflow `.github/workflows/refresh-villedemontreal.yml`,
 les entrées `headers`/`redirects` de `vercel.json`, les lignes de `.vercelignore` et de `.gitignore`
 et l'icône « VDM » de l'en-tête de DossierQuébec sont ses seules attaches au dépôt hôte.

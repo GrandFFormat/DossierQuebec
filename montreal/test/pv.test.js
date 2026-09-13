@@ -286,3 +286,26 @@ test('thèmes : la catégorie de la Ville tranche après l\'objet', () => {
   assert.equal(classer({ objet: 'Zzz', categorie: 'Subvention - Contribution financière' }).theme, 'subventions');
   assert.equal(classer({ objet: 'Zzz', categorie: 'Immeuble - Location' }).themeSource, 'categorie');
 });
+
+test('votes : « Mesdames et messieurs », « et » en tête, nom coupé par la ligne', () => {
+  const { noms, declare } = nettoyerNoms('Mesdames et messieurs Soraya Martinez Ferrada, Pinard, Hénault- Ratelle, V. Doyon et Beauregard (5)');
+  assert.deepEqual(noms, ['Soraya Martinez Ferrada', 'Pinard', 'Hénault-Ratelle', 'V. Doyon', 'Beauregard']);
+  assert.equal(declare, 5);
+});
+
+test("ordre du jour du conseil municipal : le service sur la ligne de l'article, « huis clos » ignoré", () => {
+  const lignes = (arr) => arr.map((texte, i) => ({ y: 700 - i * 12, texte }));
+  const p = parserOrdreDuJour([{ numero: 1, liens: [], lignes: lignes([
+    '20.01 Service du greffe , Direction des affaires juridiques - 1261234001',
+    "Approuver un projet d'acte",
+    "20.02 L'étude de ce dossier se fera à huis clos",
+    'CE Service des finances , Direction du budget - 1261234002',
+    'Autoriser une dépense',
+  ]) }]);
+  assert.equal(p[0].categorie, null);
+  assert.equal(p[0].unite, 'Service du greffe, Direction des affaires juridiques');
+  assert.equal(p[0].dossier, '1261234001');
+  assert.equal(p[0].objet, "Approuver un projet d'acte");
+  assert.equal(p[1].categorie, null);
+  assert.equal(p[1].unite, 'Service des finances, Direction du budget');
+});

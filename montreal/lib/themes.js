@@ -1,6 +1,6 @@
 // Classement thématique des décisions — « ça parle de quoi ».
 //
-// Même méthode qu'à Québec (lib/themes.js du volet villedequebec), réécrite pour les
+// Même méthode qu'à Québec (lib/themes.js du volet quebec), réécrite pour les
 // libellés de Montréal. Ici l'objet d'une résolution commence presque toujours par un
 // verbe à l'infinitif — « Accorder un contrat à… », « Approuver un projet d'entente… »,
 // « Adopter le règlement… », « Nommer… » — et la Ville n'accompagne pas ses

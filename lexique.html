@@ -781,15 +781,35 @@
      est l'exception assumée — le rond est justement ce qui la fait lire comme un
      jeton plutôt que comme un bouton de plus dans l'en-tête. Sans !important
      elle redevient carrée en silence. */
+  /* Bouton « Villes » : la pastille verte d'avant, élargie en bouton, qui ouvre la liste
+     des volets municipaux. <details>/<summary> natifs : clavier, lecteur d'écran et
+     fermeture au clic hors du menu sans une ligne de JavaScript de plus. Une ville de
+     plus, c'est une ligne de plus dans la liste. */
+  .villes-menu{position:relative; flex:none; margin-left:12px;}
+  .villes-menu summary{list-style:none;}
+  .villes-menu summary::-webkit-details-marker{display:none;}
   .city-flip{
-    display:inline-flex; align-items:center; justify-content:center; flex:none;
-    width:26px; height:26px; margin-left:12px; border-radius:50% !important;
+    display:inline-flex; align-items:center; justify-content:center; gap:5px;
+    height:26px; padding:0 11px; border-radius:13px !important;
     background:var(--green); color:var(--card);
-    font-family:'Archivo',sans-serif; font-weight:900; font-size:9px;
-    letter-spacing:0.02em; text-decoration:none; cursor:pointer;
+    font-family:'Archivo',sans-serif; font-weight:900; font-size:10px;
+    letter-spacing:0.04em; text-transform:uppercase; text-decoration:none; cursor:pointer;
     transition:transform 0.3s ease, background 0.3s ease;
   }
-  .city-flip:hover{transform:scale(1.12); background:var(--gold);}
+  .city-flip::after{content:""; width:0; height:0; border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid currentColor; opacity:.85;}
+  .city-flip:hover, .villes-menu[open] .city-flip{transform:scale(1.06); background:var(--gold);}
+  .villes-menu ul{
+    position:absolute; top:calc(100% + 8px); left:0; z-index:60; margin:0; padding:6px;
+    list-style:none; min-width:180px;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,.14);
+  }
+  .villes-menu li a{
+    display:block; padding:8px 12px; border-radius:7px; text-decoration:none;
+    color:var(--ink); font-family:'Archivo',sans-serif; font-weight:700; font-size:14px;
+  }
+  .villes-menu li a:hover, .villes-menu li a:focus-visible{background:var(--bg); color:var(--green);}
+  .villes-menu li a small{display:block; font-weight:400; font-size:11px; color:var(--muted); letter-spacing:.02em;}
   @media (prefers-reduced-motion: reduce){ .maple-flip{transition:color 0.3s ease;} }
   .brand-text p{display:none;} /* la devise devient le H1 du hero (Phase 2) */
   .top-meta{display:none;}     /* les stats migrent dans la bande du hero (Phase 2) */
@@ -1661,7 +1681,8 @@
   .etroit .brand{gap:8px; min-width:0;}
   .etroit .brand-text .brand-title{font-size:19px;}
   .etroit .brand-mark, .etroit .maple-flip, .etroit .maple-flip svg{width:30px; height:30px;}
-  .etroit .city-flip{width:24px; height:24px; font-size:8px; margin-left:8px;}
+  .etroit .villes-menu{margin-left:8px;}
+  .etroit .city-flip{height:24px; padding:0 8px; font-size:9px;}
   .etroit .suggest-cta{white-space:normal;}   /* nowrap : 389 px sur 275 disponibles */
   .etroit .result-badge{white-space:normal;}
   .etroit .dep-group-banner{flex-wrap:wrap; gap:4px;}
@@ -1772,21 +1793,22 @@
        onclick="goToFederal(event)">
       <svg viewBox="-2015 -2000 4030 4030" aria-hidden="true"><path fill="currentColor" d="m-90 2030 45-863a95 95 0 0 0-111-98l-859 151 116-320a65 65 0 0 0-20-73l-941-762 212-99a65 65 0 0 0 34-79l-186-572 542 115a65 65 0 0 0 73-38l105-247 423 454a65 65 0 0 0 111-57l-204-1052 327 189a65 65 0 0 0 91-27l332-652 332 652a65 65 0 0 0 91 27l327-189-204 1052a65 65 0 0 0 111 57l423-454 105 247a65 65 0 0 0 73 38l542-115-186 572a65 65 0 0 0 34 79l212 99-941 762a65 65 0 0 0-20 73l116 320-859-151a95 95 0 0 0-111 98l45 863z"/></svg>
     </a>
-    <!-- Hôtel de ville : passerelle vers le volet municipal (DossierVille).
-         Vrai lien <a href> plutôt qu'un onclick : le clavier, le clic du milieu et
-         « ouvrir dans un nouvel onglet » fonctionnent sans une ligne de code.
-         La barre oblique finale est OBLIGATOIRE — sans elle, les chemins relatifs du
-         volet municipal (assets/, data/) se résolvent depuis la racine du site. -->
-    <a class="city-flip" id="cityFlip" href="/villedequebec/" rel="nofollow"
-       title="Aller au volet municipal — Ville de Québec"
-       aria-label="Aller au volet municipal — Ville de Québec">
-      <!-- « VDQ » en toutes lettres plutôt qu'un pictogramme d'hôtel de ville :
-           un bâtiment stylisé à 25 px ne dit à personne qu'il mène au volet
-           municipal, alors que trois lettres, oui. Le nom accessible reste
-           complet dans aria-label. aria-hidden sur le texte : sans ça, un
-           lecteur d'écran lirait « V D Q » en plus du libellé. -->
-      <span aria-hidden="true">VDQ</span>
-    </a>
+    <!-- Les volets municipaux (DossierVille) : un bouton « Villes » qui ouvre la liste.
+         Vrais liens <a href> : le clavier, le clic du milieu et « ouvrir dans un
+         nouvel onglet » fonctionnent sans une ligne de code. La barre oblique finale
+         est OBLIGATOIRE — sans elle, les chemins relatifs du volet (assets/, data/)
+         se résolvent depuis la racine du site. rel="nofollow" tant que les volets sont
+         des prototypes hors des moteurs de recherche. Le chemin dit /quebec/ : c'est la
+         liste, sous « Villes », qui dit qu'il s'agit de la ville. -->
+    <details class="villes-menu" id="villesMenu">
+      <summary class="city-flip" title="Les volets municipaux" aria-label="Les volets municipaux">
+        <span data-i18n="nav.villes">Villes</span>
+      </summary>
+      <ul>
+        <li><a href="/quebec/" rel="nofollow">Québec <small>DossierVilleDeQuébec</small></a></li>
+        <li><a href="/montreal/" rel="nofollow">Montréal <small>DossierVilleDeMontréal · prototype</small></a></li>
+      </ul>
+    </details>
   </div>
   <!-- Nav DANS la ligne du header (maquette : logo | menu | contrôles sur
        UNE seule rangée). Sur mobile, le nav devient le panneau plein écran
@@ -1843,14 +1865,19 @@ function goToFederal(evt){
   setInterval(function(){ leaf.classList.toggle('is-red'); }, 20000);
 })();
 
-// Icône de la Ville : compte les clics vers le volet municipal (événement
-// personnalisé Vercel Web Analytics — onglet « Events » du tableau de bord).
+// Menu « Villes » : compte les clics vers chaque volet municipal (événement
+// personnalisé Vercel Web Analytics — onglet « Events » du tableau de bord), et
+// referme le menu quand on clique ailleurs ou qu'on appuie sur Échap.
 (function(){
-  var ville = document.getElementById('cityFlip');
-  if(!ville) return;
-  ville.addEventListener('click', function(){
-    if(window.va) window.va('event', { name: 'clic_icone_ville' });
+  var menu = document.getElementById('villesMenu');
+  if(!menu) return;
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      if(window.va) window.va('event', { name: 'clic_icone_ville', data: { ville: a.getAttribute('href') } });
+    });
   });
+  document.addEventListener('click', function(e){ if(menu.open && !menu.contains(e.target)) menu.open = false; });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && menu.open){ menu.open = false; menu.querySelector('summary').focus(); } });
 })();
 </script>
 
@@ -2640,7 +2667,7 @@ function goToFederal(evt){
 /* ---------------- I18N ---------------- */
 const translations = {
   fr: {
-    'nav.close':"Fermer",'nav.apercu':"Aperçu",'nav.ministres':"Ministres",'nav.projets':"Projets de loi",
+    'nav.close':"Fermer",'nav.villes':"Villes",'nav.apercu':"Aperçu",'nav.ministres':"Ministres",'nav.projets':"Projets de loi",
     'nav.votes':"Votes",'nav.quoideneuf':"Quoi de neuf",'nav.compte':"Compte & à propos",'nav.trouve':"Trouvez votre député",
     'nav.lexique':"Lexique",'nav.personnes':"Qui gravite autour",'nav.petitions':"Pétitions",'nav.apropos':"D'où viennent ces données",
     'stat.ministres':"Ministres",'stat.projets':"Projets de loi",'stat.votes':"Votes enregistrés",
@@ -2671,7 +2698,7 @@ const translations = {
     'footer.source':"Code source",
   },
   en: {
-    'nav.close':"Close",'nav.apercu':"Overview",'nav.ministres':"Ministers",'nav.projets':"Bills",
+    'nav.close':"Close",'nav.villes':"Cities",'nav.apercu':"Overview",'nav.ministres':"Ministers",'nav.projets':"Bills",
     'nav.votes':"Votes",'nav.quoideneuf':"What's new",'nav.compte':"Account & about",'nav.trouve':"Find your MNA",
     'nav.lexique':"Glossary",'nav.personnes':"Who's involved",'nav.petitions':"Petitions",'nav.apropos':"Where this data comes from",
     'stat.ministres':"Ministers",'stat.projets':"Bills",'stat.votes':"Votes recorded",

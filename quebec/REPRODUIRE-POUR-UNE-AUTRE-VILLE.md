@@ -4,7 +4,7 @@ Ce document est fait pour être **collé tel quel au début d'une nouvelle sessi
 seule phrase en plus : « La ville, c'est ___. » Il dit ce qu'on a construit pour Québec, ce
 qui se réutilise sans y toucher, ce qui doit être réécrit pour une autre source, dans quel
 ordre travailler, et les pièges déjà rencontrés. Le code de référence est public :
-`github.com/GrandFFormat/DossierQuebec`, dossier `villedequebec/`.
+`github.com/GrandFFormat/DossierQuebec`, dossier `quebec/`.
 
 ---
 
@@ -198,12 +198,12 @@ parfois littéralement dans ses chaînes.
 
 ## 8. Étape 6 — Le site
 
-- Servi comme **sous-dossier de dossierquebec.ca** (`/villedequebec/`), dans le dépôt de DQ :
+- Servi comme **sous-dossier de dossierquebec.ca** (`/quebec/`), dans le dépôt de DQ :
   mêmes déploiements Vercel, même analytics (pages vues, événement de clic sur l'icône),
   même workflow. **La barre oblique finale est obligatoire** : sans elle, `assets/` et
   `data/` se résolvent depuis la racine du site. Les liens « accueil » pointent vers `./`,
   jamais vers `index.html` (Vercel `cleanUrls` le réécrit sans barre), et `vercel.json`
-  redirige `/villedequebec` vers `/villedequebec/`.
+  redirige `/quebec` vers `/quebec/`.
 - Icône dans l'en-tête de DQ vers le volet municipal ; bouton « ← Retour à DossierQuébec »
   à côté du logo du volet ; étiquette « Prototype » tant qu'on n'a pas tranché.
 - Pastilles de sujet : règles par mots-clés sur l'objet, **les sujets avant les véhicules**

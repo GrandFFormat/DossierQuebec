@@ -33,7 +33,7 @@ export const CACHE = new URL('../data/textes/', import.meta.url);
 const RATTRAPAGE_JOURS = 45;
 // Quand le découpage change (ce numéro augmente), les séances déjà lues sont relues à la
 // prochaine exécution, sans qu'on ait à le demander.
-export const VERSION_LECTURE = 2;
+export const VERSION_LECTURE = 3;
 const DIAGNOSTIC = new URL('../data/diagnostic.json', import.meta.url);
 
 // Un échantillon de ce que les PDF contiennent vraiment — les premières lignes d'un

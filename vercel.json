@@ -19,7 +19,7 @@
   ],
   "headers": [
     {
-      "source": "/villedequebec/(.*)",
+      "source": "/quebec/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "source": "/villedemontreal/(.*)",
+      "source": "/montreal/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -39,13 +39,33 @@
   ],
   "redirects": [
     {
+      "source": "/quebec",
+      "destination": "/quebec/",
+      "permanent": true
+    },
+    {
+      "source": "/villedequebec/(.*)",
+      "destination": "/quebec/$1",
+      "permanent": true
+    },
+    {
       "source": "/villedequebec",
-      "destination": "/villedequebec/",
+      "destination": "/quebec/",
+      "permanent": true
+    },
+    {
+      "source": "/montreal",
+      "destination": "/montreal/",
+      "permanent": true
+    },
+    {
+      "source": "/villedemontreal/(.*)",
+      "destination": "/montreal/$1",
       "permanent": true
     },
     {
       "source": "/villedemontreal",
-      "destination": "/villedemontreal/",
+      "destination": "/montreal/",
       "permanent": true
     }
   ]

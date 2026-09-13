@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
 <meta name="robots" content="noindex, nofollow">
-<title>DossierVilleDeQuébec — les décisions de la Ville de Québec, lisibles</title>
-<meta name="description" content="Site citoyen indépendant qui rend lisibles les décisions du conseil municipal de Québec : résolutions, sommaires décisionnels, votes nominatifs et membres du conseil.">
+<title>Décisions de la Ville de Québec — DossierVilleDeQuébec</title>
+<meta name="description" content="Résolutions, sommaires décisionnels, procès-verbaux et tableaux de décisions de la Ville de Québec, avec recherche, filtres par instance et résumés en langage clair.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
 </script>
 <link rel="stylesheet" href="assets/style.css">
 </head>
-<body data-page="accueil">
+<body data-page="decisions">
 
 <header>
   <div class="contenu">
@@ -37,11 +37,11 @@
     </div>
     <p class="sous-titre">
       Les décisions de la Ville de Québec, lisibles. Données publiques, reprises telles quelles
-      du portail des documents décisionnels de la Ville et de la page officielle du conseil municipal.
+      du portail des documents décisionnels de la Ville.
     </p>
     <nav>
-      <a href="./" aria-current="page">Accueil</a>
-      <a href="decisions.html">Décisions</a>
+      <a href="./">Accueil</a>
+      <a href="decisions.html" aria-current="page">Décisions</a>
       <a href="votes.html">Votes nominatifs</a>
       <a href="conseil.html">Conseil municipal</a>
       <a href="lexique.html">Lexique</a>
@@ -59,35 +59,29 @@
 <main class="contenu">
   <div id="chargement" class="avis">Chargement des données…</div>
 
-  <div class="chiffres" id="chiffres"></div>
-
-  <h2 class="page" id="titre-fil">Ce qui a changé</h2>
-  <div id="fil"></div>
-  <button class="plus" id="plus-fil" hidden>Afficher plus</button>
-  <p style="margin-top:14px">
-    <a href="decisions.html">Toutes les décisions →</a> &nbsp;·&nbsp;
-    <a href="votes.html">Tous les votes nominatifs →</a>
+  <h2 class="page">Décisions</h2>
+  <p class="chapeau">
+    Quatre types de documents&nbsp;: la <strong>résolution</strong> (la décision elle-même), le
+    <strong>sommaire décisionnel</strong> (la note de l'administration qui explique pourquoi),
+    le <strong>procès-verbal</strong> et le <strong>tableau des décisions</strong>.
+    Les encadrés verts sont un résumé généré par IA du sommaire — le PDF officiel reste à un clic.
   </p>
 
-  <h2 class="page">Par où commencer</h2>
-  <div class="cartes-liens">
-    <a class="lien-section" href="decisions.html">
-      <h3>Décisions</h3>
-      <p>Résolutions, sommaires décisionnels, procès-verbaux et tableaux de décisions de l'année en cours, avec recherche et filtres.</p>
-    </a>
-    <a class="lien-section" href="votes.html">
-      <h3>Votes nominatifs</h3>
-      <p>Quand quelqu'un demande le vote, on sait qui a voté pour et qui a voté contre. Le décompte, par personne.</p>
-    </a>
-    <a class="lien-section" href="conseil.html">
-      <h3>Conseil municipal</h3>
-      <p>La carte des 21 districts : cliquez sur le vôtre pour savoir qui vous représente, son parti, ses fonctions et comment le joindre.</p>
-    </a>
-    <a class="lien-section" href="sources.html">
-      <h3>Sources et limites</h3>
-      <p>D'où viennent les données, comment elles sont obtenues, et ce que ce prototype ne fait pas encore.</p>
-    </a>
+  <div class="barre-outils">
+    <input type="search" id="rech-decisions" placeholder="Rechercher dans l'objet des décisions…">
+    <select id="filtre-type"><option value="">Tous les types</option></select>
+    <select id="filtre-theme"><option value="">Tous les sujets</option></select>
+    <select id="affichage" title="Mode d'affichage">
+      <option value="seance">Grouper par séance</option>
+      <option value="liste">Liste continue</option>
+    </select>
+    <select id="filtre-instance"><option value="">Toutes les instances</option></select>
+    <label class="case"><input type="checkbox" id="filtre-resume"> Avec résumé seulement</label>
+    <button type="button" class="bouton-lien" id="tout-deplier">Tout déplier</button>
   </div>
+  <p class="compte" id="compte-decisions"></p>
+  <div id="liste-decisions"></div>
+  <button class="plus" id="plus-decisions" hidden>Afficher plus</button>
 </main>
 
 <footer>
@@ -99,7 +93,7 @@
 
 <script type="module" src="assets/app.js"></script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
-     Même projet Vercel : les pages vues de /villedequebec/ s'ajoutent au même tableau de
+     Même projet Vercel : les pages vues de /quebec/ s'ajoutent au même tableau de
      bord. En local le script n'existe pas (404 sans conséquence). -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>
