@@ -13,20 +13,9 @@
 //   npm run decouvrir:arrondissements
 
 import { writeFile, mkdir } from 'node:fs/promises';
-import { API_CKAN, DOCUMENTS, json, texte, requete } from '../lib/mtl.js';
+import { API_CKAN, DOCUMENTS, json, texte } from '../lib/mtl.js';
 
 const OUT = new URL('../data/arrondissements-decouverte.json', import.meta.url);
-
-// Ce qu'on a VU dans de vraies URL, et ce qu'on en DÉDUIT : deux choses différentes.
-// Pmr, Rpp et Sud se lisent sans effort. « Pir » a été vu lui aussi, mais rien ne dit à
-// quel arrondissement il appartient — « Pierrefonds-Roxboro » n'est qu'une supposition,
-// et le sondage tranchera. On ne code jamais une supposition comme un fait.
-const CODES_VUS = ['Pmr', 'Rpp', 'Sud', 'Pir'];
-const CODES_ATTRIBUES = {
-  'Le Plateau-Mont-Royal': 'Pmr',
-  'Rosemont–La Petite-Patrie': 'Rpp',
-  'Le Sud-Ouest': 'Sud',
-};
 
 // ---------- A. Le catalogue de données ouvertes ----------
 
