@@ -19,7 +19,7 @@
   ],
   "headers": [
     {
-      "source": "/villedequebec/(.*)",
+      "source": "/quebec/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
@@ -30,8 +30,18 @@
   ],
   "redirects": [
     {
+      "source": "/quebec",
+      "destination": "/quebec/",
+      "permanent": true
+    },
+    {
+      "source": "/villedequebec/(.*)",
+      "destination": "/quebec/$1",
+      "permanent": true
+    },
+    {
       "source": "/villedequebec",
-      "destination": "/villedequebec/",
+      "destination": "/quebec/",
       "permanent": true
     }
   ]
