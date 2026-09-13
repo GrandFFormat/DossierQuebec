@@ -77,7 +77,18 @@ must(src.includes('<button class="active" data-view="apercu">'), "bouton nav Ape
   const o = (sansCommentaires.match(/\{/g) || []).length;
   const c = (sansCommentaires.match(/\}/g) || []).length;
   must(o === c, `accolades CSS déséquilibrées : ${o} « { » pour ${c} « } »`);
-  console.log(`✓ CSS sain (${o} règles, ${ouvrants} commentaires équilibrés)`);
+  // Variables CSS utilisées mais jamais définies. Une var() vers une variable
+  // inexistante ne lève aucune erreur : la propriété tombe simplement sur sa
+  // valeur héritée ou initiale. C'est arrivé avec --bg et --muted, recopiées
+  // depuis la feuille du volet municipal — le fond de survol du menu « Villes »
+  // ne s'affichait tout bonnement pas.
+  // On ne signale QUE les var() SANS valeur de repli : une variable posée par le
+  // JavaScript à l'exécution (ex. var(--vw, 100vw)) est volontaire.
+  const definies = new Set([...sansCommentaires.matchAll(/(--[a-zA-Z0-9-]+)\s*:/g)].map(m => m[1]));
+  const sansRepli = [...sansCommentaires.matchAll(/var\(\s*(--[a-zA-Z0-9-]+)\s*\)/g)].map(m => m[1]);
+  const orphelines = [...new Set(sansRepli.filter(v => !definies.has(v)))];
+  must(orphelines.length === 0, `variable(s) CSS utilisée(s) sans être définie(s) ni avoir de valeur de repli : ${orphelines.join(', ')}`);
+  console.log(`✓ CSS sain (${o} règles, ${ouvrants} commentaires équilibrés, aucune variable orpheline)`);
 })();
 
 // Santé du JavaScript. Une seule erreur de syntaxe tue TOUT le script en ligne :
