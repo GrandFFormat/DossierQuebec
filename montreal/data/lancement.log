@@ -2,7 +2,7 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 8fa11db — Node v22.23.2
+Code : commit 47f942c — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -20,31 +20,31 @@ Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_vide
 71 séance(s) de 2026 dans data/seances.json (0 de plus qu'avant) — CE : 36, CG : 13, CM : 22
 
 === Calendrier des séances d'arrondissement ===
-0 séance(s) de 2026 déjà connue(s).
-  Ahuntsic-Cartierville                       6 séance(s), 6 nouvelle(s)  (206 requêtes)
-  Anjou                                       8 séance(s), 8 nouvelle(s)  (86 requêtes)
-  Côte-des-Neiges–Notre-Dame-de-Grâce         6 séance(s), 6 nouvelle(s)  (311 requêtes)
-  Lachine                                     7 séance(s), 7 nouvelle(s)  (152 requêtes)
-  LaSalle                                     7 séance(s), 7 nouvelle(s)  (139 requêtes)
-  L'Île-Bizard–Sainte-Geneviève               7 séance(s), 7 nouvelle(s)  (145 requêtes)
-  Mercier–Hochelaga-Maisonneuve               5 séance(s), 5 nouvelle(s)  (194 requêtes)
-  Montréal-Nord                               5 séance(s), 5 nouvelle(s)  (214 requêtes)
-  Outremont                                   7 séance(s), 7 nouvelle(s)  (168 requêtes)
-  Pierrefonds-Roxboro                         7 séance(s), 7 nouvelle(s)  (119 requêtes)
+118 séance(s) de 2026 déjà connue(s).
+  Ahuntsic-Cartierville                       6 séance(s)  (113 requêtes)
+  Anjou                                       8 séance(s)  (42 requêtes)
+  Côte-des-Neiges–Notre-Dame-de-Grâce         6 séance(s)  (226 requêtes)
+  Lachine                                     7 séance(s)  (82 requêtes)
+  LaSalle                                     7 séance(s)  (72 requêtes)
+  L'Île-Bizard–Sainte-Geneviève               7 séance(s)  (82 requêtes)
+  Mercier–Hochelaga-Maisonneuve               5 séance(s)  (155 requêtes)
+  Montréal-Nord                               5 séance(s)  (155 requêtes)
+  Outremont                                   7 séance(s)  (82 requêtes)
+  Pierrefonds-Roxboro                         7 séance(s)  (73 requêtes)
     ⚠ budget de requêtes épuisé pour Le Plateau-Mont-Royal au mois 6
     Le Plateau-Mont-Royal : rien à l'heure habituelle, essai des autres heures…
     ⚠ budget de requêtes épuisé pour Le Plateau-Mont-Royal au mois 2
   Le Plateau-Mont-Royal                       0 séance(s)  (565 requêtes)
-  Rivière-des-Prairies–Pointe-aux-Trembles    7 séance(s), 7 nouvelle(s)  (144 requêtes)
-  Rosemont–La Petite-Patrie                   7 séance(s), 7 nouvelle(s)  (169 requêtes)
-  Saint-Laurent                               7 séance(s), 7 nouvelle(s)  (103 requêtes)
-  Saint-Léonard                               6 séance(s), 6 nouvelle(s)  (166 requêtes)
-  Le Sud-Ouest                                6 séance(s), 6 nouvelle(s)  (177 requêtes)
-  Verdun                                      6 séance(s), 6 nouvelle(s)  (197 requêtes)
-  Ville-Marie                                 7 séance(s), 7 nouvelle(s)  (165 requêtes)
-  Villeray–Saint-Michel–Parc-Extension        7 séance(s), 7 nouvelle(s)  (144 requêtes)
+  Rivière-des-Prairies–Pointe-aux-Trembles    7 séance(s)  (82 requêtes)
+  Rosemont–La Petite-Patrie                   7 séance(s)  (82 requêtes)
+  Saint-Laurent                               7 séance(s)  (84 requêtes)
+  Saint-Léonard                               6 séance(s)  (113 requêtes)
+  Le Sud-Ouest                                6 séance(s)  (113 requêtes)
+  Verdun                                      6 séance(s)  (124 requêtes)
+  Ville-Marie                                 7 séance(s)  (82 requêtes)
+  Villeray–Saint-Michel–Parc-Extension        7 séance(s)  (82 requêtes)
 
-118 séance(s) d'arrondissement pour 2026, en 3564 requête(s).
+118 séance(s) d'arrondissement pour 2026, en 2409 requête(s).
 ⚠ 1 arrondissement(s) sans aucune séance trouvée :
    Le Plateau-Mont-Royal — code ou heure à revoir
 
@@ -62,156 +62,14 @@ CM_2026-06-16_09h00 : procès-verbal non publié — pas un PDF — page « 404 
 CM_2026-05-12_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CM_2026-02-17_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CM_2026-01-27_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Slt_2026-01-06_19h30 : 19 pages, 30 résolutions, 30 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Pir_2026-01-12_19h00 : 21 pages, 0 résolutions, 22 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Pir_2026-01-12_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Anj_2026-01-13_19h00 : 10 pages, 0 résolutions, 18 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Anj_2026-01-13_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Cdn_2026-02-02_19h00 : 26 pages, 0 résolutions, 80 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Cdn_2026-02-02_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Lac_2026-02-02_19h00 : 14 pages, 25 résolutions, 23 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Las_2026-02-02_19h00 : 17 pages, 50 résolutions, 52 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Mhm_2026-02-02_18h30 : 14 pages, 23 résolutions, 28 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Pir_2026-02-02_19h00 : 24 pages, 0 résolutions, 26 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Pir_2026-02-02_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Rpp_2026-02-02_19h00 : 9 pages, 19 résolutions, 0 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Sld_2026-02-02_19h00 : 15 pages, 31 résolutions, 26 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Anj_2026-02-03_19h00 : 6 pages, 0 résolutions, 13 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Anj_2026-02-03_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Ibs_2026-02-03_19h30 : 12 pages, 0 résolutions, 28 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Ibs_2026-02-03_19h30 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Out_2026-02-03_19h00 : 18 pages, 24 résolutions, 28 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Rdp_2026-02-03_19h00 : 23 pages, 0 résolutions, 37 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Rdp_2026-02-03_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Slt_2026-02-03_19h30 : 17 pages, 35 résolutions, 34 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Ver_2026-02-03_19h00 : 22 pages, 0 résolutions, 39 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Ver_2026-02-03_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Vsm_2026-02-03_18h30 : 11 pages, 16 résolutions, 111 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Ahu_2026-02-09_19h00 : 17 pages, 29 résolutions, 36 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Mtn_2026-02-09_19h00 : 22 pages, 0 résolutions, 38 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Mtn_2026-02-09_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Sud_2026-02-09_19h00 : 12 pages, 23 résolutions, 29 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Vma_2026-02-10_18h30 : 30 pages, 0 résolutions, 99 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Vma_2026-02-10_18h30 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Lac_2026-03-02_19h00 : 12 pages, 23 résolutions, 25 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Las_2026-03-02_19h00 : 17 pages, 47 résolutions, 48 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Anj_2026-03-03_19h00 : 16 pages, 0 résolutions, 73 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Anj_2026-03-03_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Cdn_2026-03-09_19h00 : 26 pages, 0 résolutions, 94 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Cdn_2026-03-09_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Mhm_2026-03-09_18h30 : 34 pages, 41 résolutions, 46 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Mtn_2026-03-09_19h00 : 20 pages, 0 résolutions, 33 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Mtn_2026-03-09_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Pir_2026-03-09_19h00 : 26 pages, 0 résolutions, 29 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Pir_2026-03-09_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Rpp_2026-03-09_19h00 : 11 pages, 24 résolutions, 0 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Sld_2026-03-09_19h00 : 18 pages, 35 résolutions, 34 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Sud_2026-03-09_19h00 : 11 pages, 21 résolutions, 27 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Ibs_2026-03-10_19h30 : 7 pages, 0 résolutions, 19 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Ibs_2026-03-10_19h30 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Out_2026-03-10_19h00 : 12 pages, 18 résolutions, 22 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Rdp_2026-03-10_19h00 : 22 pages, 0 résolutions, 32 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Rdp_2026-03-10_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Ver_2026-03-10_19h00 : 21 pages, 0 résolutions, 32 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Ver_2026-03-10_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Vma_2026-03-10_18h30 : 33 pages, 4 résolutions, 134 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Vsm_2026-03-10_18h30 : 22 pages, 42 résolutions, 133 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Ahu_2026-03-16_19h00 : 21 pages, 39 résolutions, 47 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Anj_2026-04-07_19h00 : 22 pages, 0 résolutions, 35 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Anj_2026-04-07_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Ibs_2026-04-07_19h30 : 12 pages, 0 résolutions, 24 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Ibs_2026-04-07_19h30 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Lac_2026-04-07_19h00 : 13 pages, 25 résolutions, 26 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Rdp_2026-04-07_19h00 : 18 pages, 0 résolutions, 28 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Rdp_2026-04-07_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Rpp_2026-04-07_19h00 : 10 pages, 18 résolutions, 0 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Sld_2026-04-07_19h00 : 16 pages, 30 résolutions, 30 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Slt_2026-04-07_19h30 : 29 pages, 52 résolutions, 53 points à l'ordre du jour, 0 liens vers un sommaire
 CA_Ver_2026-04-07_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Vsm_2026-04-07_18h30 : 20 pages, 33 résolutions, 158 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Out_2026-04-09_19h00 : 24 pages, 41 résolutions, 43 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Ahu_2026-04-13_19h00 : 20 pages, 36 résolutions, 44 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Cdn_2026-04-13_19h00 : 20 pages, 0 résolutions, 76 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Cdn_2026-04-13_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Las_2026-04-13_19h00 : 16 pages, 45 résolutions, 47 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Mhm_2026-04-13_18h30 : 31 pages, 31 résolutions, 35 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Mtn_2026-04-13_19h00 : 30 pages, 0 résolutions, 55 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Mtn_2026-04-13_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Pir_2026-04-13_19h00 : 27 pages, 0 résolutions, 31 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Pir_2026-04-13_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Sud_2026-04-13_19h00 : 10 pages, 19 résolutions, 26 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Vma_2026-04-14_18h30 : 33 pages, 2 résolutions, 124 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Ahu_2026-05-04_19h00 : 16 pages, 27 résolutions, 36 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Cdn_2026-05-04_18h30 : 17 pages, 0 résolutions, 64 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Cdn_2026-05-04_18h30 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Lac_2026-05-04_19h00 : 12 pages, 22 résolutions, 24 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Las_2026-05-04_19h00 : 19 pages, 40 résolutions, 40 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Mhm_2026-05-04_18h30 : 22 pages, 34 résolutions, 39 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Mtn_2026-05-04_19h00 : 23 pages, 0 résolutions, 42 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Mtn_2026-05-04_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Pir_2026-05-04_19h00 : 17 pages, 0 résolutions, 20 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Pir_2026-05-04_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Rpp_2026-05-04_19h00 : 13 pages, 23 résolutions, 0 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Sld_2026-05-04_19h00 : 15 pages, 32 résolutions, 31 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Sud_2026-05-04_19h00 : 11 pages, 21 résolutions, 28 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Anj_2026-05-05_19h00 : 18 pages, 0 résolutions, 29 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Anj_2026-05-05_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Ibs_2026-05-05_19h30 : 12 pages, 0 résolutions, 28 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Ibs_2026-05-05_19h30 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Out_2026-05-05_19h00 : 21 pages, 32 résolutions, 36 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Rdp_2026-05-05_19h00 : 18 pages, 0 résolutions, 37 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Rdp_2026-05-05_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Slt_2026-05-05_19h30 : 35 pages, 38 résolutions, 38 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Ver_2026-05-05_19h00 : 11 pages, 0 résolutions, 27 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Ver_2026-05-05_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Vma_2026-05-05_18h30 : 31 pages, 0 résolutions, 124 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Vma_2026-05-05_18h30 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Vsm_2026-05-05_18h30 : 15 pages, 25 résolutions, 128 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Cdn_2026-06-01_18h30 : 23 pages, 0 résolutions, 70 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Cdn_2026-06-01_18h30 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Lac_2026-06-01_19h00 : 15 pages, 25 résolutions, 26 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Las_2026-06-01_19h00 : 17 pages, 36 résolutions, 36 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Mhm_2026-06-01_18h30 : 18 pages, 25 résolutions, 29 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Pir_2026-06-01_19h00 : 18 pages, 0 résolutions, 18 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Pir_2026-06-01_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Sld_2026-06-01_19h00 : 23 pages, 34 résolutions, 33 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Anj_2026-06-02_19h00 : 21 pages, 0 résolutions, 33 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Anj_2026-06-02_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Ibs_2026-06-02_19h30 : 13 pages, 0 résolutions, 29 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Ibs_2026-06-02_19h30 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
 CA_Out_2026-06-02_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Rdp_2026-06-02_19h00 : 22 pages, 0 résolutions, 41 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Rdp_2026-06-02_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Slt_2026-06-02_19h30 : 16 pages, 29 résolutions, 30 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Ver_2026-06-02_19h00 : 15 pages, 0 résolutions, 31 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Ver_2026-06-02_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Vsm_2026-06-02_18h30 : 15 pages, 24 résolutions, 57 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Ahu_2026-06-08_19h00 : 28 pages, 46 résolutions, 55 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Mtn_2026-06-08_19h00 : 23 pages, 0 résolutions, 39 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Mtn_2026-06-08_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
 CA_Rpp_2026-06-08_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Sud_2026-06-08_19h00 : 13 pages, 26 résolutions, 30 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Vma_2026-06-09_18h30 : 30 pages, 1 résolutions, 125 points à l'ordre du jour, 0 liens vers un sommaire
 CA_Ahu_2026-07-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Cdn_2026-07-06_18h30 : 30 pages, 0 résolutions, 80 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Cdn_2026-07-06_18h30 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Lac_2026-07-06_19h00 : 18 pages, 32 résolutions, 31 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Las_2026-07-06_19h00 : 26 pages, 46 résolutions, 48 points à l'ordre du jour, 0 liens vers un sommaire
 CA_Rpp_2026-07-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Sld_2026-07-06_19h00 : 27 pages, 39 résolutions, 39 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Ibs_2026-07-07_19h30 : 11 pages, 0 résolutions, 25 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Ibs_2026-07-07_19h30 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
 CA_Out_2026-07-07_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Rdp_2026-07-07_19h00 : 22 pages, 0 résolutions, 41 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Rdp_2026-07-07_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Vma_2026-07-07_18h30 : 31 pages, 1 résolutions, 123 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Vsm_2026-07-07_18h30 : 23 pages, 40 résolutions, 157 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Sud_2026-07-13_19h00 : 12 pages, 26 résolutions, 28 points à l'ordre du jour, 0 liens vers un sommaire
 CA_Las_2026-08-03_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Pir_2026-08-03_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Anj_2026-08-04_19h00 : 16 pages, 0 résolutions, 88 points à l'ordre du jour, 0 liens vers un sommaire
-⚠ CA_Anj_2026-08-04_19h00 : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.
-CA_Slt_2026-08-04_19h30 : 10 pages, 19 résolutions, 19 points à l'ordre du jour, 0 liens vers un sommaire
 CA_Anj_2026-09-01_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Ibs_2026-09-01_19h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Lac_2026-09-01_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -223,8 +81,8 @@ CA_Vma_2026-09-01_18h30 : procès-verbal non publié — pas un PDF — page « 
 CA_Vsm_2026-09-01_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Rpp_2026-09-08_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 
-4080 décisions écrites dans data/decisions.json — 100 séance(s) lue(s) cette fois, 30 en attente de procès-verbal.
-502 nouveauté(s) depuis la dernière exécution.
+4080 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 30 en attente de procès-verbal.
+0 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
     698  Procédure
