@@ -29,9 +29,12 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    # Une poignée de requêtes, quelques PDF les jours de publication, au plus 120 résumés :
-    # quelques minutes en temps normal. 45 min laisse une marge très large.
-    timeout-minutes: 45
+    # Quelques minutes en régime établi. La première fois, la reconstitution du calendrier
+    # des 19 conseils d'arrondissement cherche les dates de séance en essayant des URL :
+    # jusqu'à une heure, une seule fois, puisqu'une séance trouvée n'est jamais re-sondée.
+    # Le calendrier est écrit après chaque arrondissement, donc un run coupé ne perd rien
+    # et le suivant reprend où il en était.
+    timeout-minutes: 120
     defaults:
       run:
         working-directory: montreal
