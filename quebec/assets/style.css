@@ -521,7 +521,7 @@ h2.section[class*="cat-"] {
 .lexique-cat .compte-cat { margin-left: auto; font-size: 12px; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--doux); }
 .lexique-cat .bloc-lexique { margin-top: 18px; margin-bottom: 8px; }
 @media (prefers-reduced-motion: reduce) { .lexique-cat > summary h2.section::before { transition: none; } }
-=======
+
 /* ---------- raccourcis de page (Conseil) ---------- */
 .raccourcis { display: flex; flex-wrap: wrap; gap: 8px; margin: -4px 0 14px; }
 .raccourcis a {
