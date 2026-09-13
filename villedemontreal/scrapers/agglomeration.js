@@ -15,14 +15,19 @@
 import { writeFile } from 'node:fs/promises';
 import { jeu, ressource, lireCsv, PORTAIL_DONNEES } from '../lib/mtl.js';
 import { colonne } from '../lib/csv.js';
-import { normaliserEspaces } from '../lib/noms.js';
+import { normaliserEspaces, estArrondissement } from '../lib/noms.js';
 
 export const JEU = 'listes-des-elus-du-conseil-d-agglomeration';
 const OUT = new URL('../data/agglomeration.json', import.meta.url);
 
-// « Maire de la Ville de Dorval » / « Mairesse de la Cité de Dorval » / « Maire de Montréal-Est »
-function villeDe(fonction, arrondissement) {
-  if (arrondissement) return 'Montréal';
+// La colonne « Arrondissement / Ville liée » porte l'un ou l'autre : un des 19
+// arrondissements de Montréal, ou le nom de la ville liée. On tranche avec la liste des
+// arrondissements ; à défaut, avec la fonction (« Maire de la Ville de Dorval »).
+export function villeDe(fonction, arrondissementOuVille) {
+  const a = normaliserEspaces(arrondissementOuVille);
+  if (a && estArrondissement(a)) return 'Montréal';
+  if (a && /^(?:ville de )?montr[ée]al$/i.test(a)) return 'Montréal';
+  if (a) return a.replace(/^(?:ville|cit[ée]|municipalit[ée]) (?:de |d')\s*/i, '');
   const m = String(fonction ?? '').match(/(?:ville|cit[ée]|municipalit[ée]) (?:de |d')\s*(.+)$/i) ?? String(fonction ?? '').match(/maire(?:sse)?\s+(?:de |d')\s*(.+)$/i);
   if (!m) return null;
   const v = normaliserEspaces(m[1]).replace(/[.,;]$/, '');
@@ -37,9 +42,12 @@ export function normaliserMembre(ligne, cles) {
   const prenom = normaliserEspaces(col('prenom'));
   const nom = normaliserEspaces(col('nom de famille', 'nom'));
   if (!prenom && !nom) return null;
-  const fonction = normaliserEspaces(col('fonction', 'role')) || null;
-  const arrondissement = normaliserEspaces(col('arrondissement')) || null;
-  const responsabilites = String(col('responsabilit') ?? '')
+  const fonction = normaliserEspaces(col('fonction elective', 'fonction', 'role')) || null;
+  const arrondissementOuVille = normaliserEspaces(col('arrondissement')) || null;
+  const ville = villeDe(fonction, arrondissementOuVille);
+  const arrondissement = ville === 'Montréal' ? arrondissementOuVille : null;
+  const responsabilites = [col('fonctions additionnelles'), col('responsabilit')]
+    .join(';')
     .split(/;|\n|\|/)
     .map(normaliserEspaces)
     .filter(Boolean);
@@ -49,7 +57,7 @@ export function normaliserMembre(ligne, cles) {
     civilite: civilite ? civilite.replace(/^madame$/i, 'Mme').replace(/^monsieur$/i, 'M.') : null,
     fonction: fonction ? fonction.toLowerCase() : null,
     fonctionTelleQuelle: fonction,
-    ville: villeDe(fonction, arrondissement),
+    ville,
     arrondissement,
     district: normaliserEspaces(col('district')) || null,
     parti: normaliserEspaces(col('parti')) || null,
@@ -104,7 +112,9 @@ async function main() {
   if (membres.length !== 32) console.warn(`⚠ ${membres.length} membres au lieu des 32 sièges attendus — vacance, ou jeu de données modifié.`);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split(/[\\/]/).pop())) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}

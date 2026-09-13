@@ -23,13 +23,15 @@ import { cle, normaliserEspaces } from '../lib/noms.js';
 export const JEU = 'listes-des-elus-de-la-ville-de-montreal';
 const OUT = new URL('../data/elus.json', import.meta.url);
 
-// Les rôles tels que la Ville les écrit, ramenés à trois fonctions et à un drapeau.
-function fonctionDe(roles) {
-  const r = roles.join(' ').toLowerCase();
-  if (/maire(?:sse)? de la ville de montr/.test(r) || /^maire(?:sse)?$/.test(r.trim())) return { fonction: 'Mairesse ou maire de Montréal', conseil: true };
-  if (/maire(?:sse)?(?:\(sse\))? d.arrondissement/.test(r)) return { fonction: "Maire d'arrondissement", conseil: true };
-  if (/conseill[èe]re?(?:\(ère\))? de (?:la )?ville/.test(r)) return { fonction: 'Conseiller de ville', conseil: true };
-  if (/conseill[èe]re?(?:\(ère\))? d.arrondissement/.test(r)) return { fonction: "Conseiller d'arrondissement", conseil: false };
+// La fonction élective telle que la Ville l'écrit — « Mairesse de la Ville de Montréal »,
+// « Maire(sse) d'arrondissement », « Conseiller(ère) de la Ville », « Conseiller(ère)
+// d'arrondissement » — ramenée à quatre fonctions et à un drapeau.
+export function fonctionDe(roles) {
+  const r = roles.join(' ').toLowerCase().replace(/\((?:sse|ère|e)\)/g, '');
+  if (/maire(?:sse)?\s+(?:de la ville\s+)?de montr/.test(r) || /^maire(?:sse)?$/.test(r.trim())) return { fonction: 'Mairesse ou maire de Montréal', conseil: true };
+  if (/maire(?:sse)?\s+d.arrondissement/.test(r)) return { fonction: "Maire d'arrondissement", conseil: true };
+  if (/conseill[èe]re?\s+de (?:la )?ville/.test(r)) return { fonction: 'Conseiller de ville', conseil: true };
+  if (/conseill[èe]re?\s+d.arrondissement/.test(r)) return { fonction: "Conseiller d'arrondissement", conseil: false };
   return { fonction: roles[0] ?? null, conseil: null };
 }
 
@@ -49,13 +51,19 @@ export function normaliserMembre(ligne, cles) {
   const prenom = normaliserEspaces(col('prenom'));
   const nom = normaliserEspaces(col('nom de famille', 'nom'));
   if (!prenom && !nom) return null;
-  const roles = decouperRoles(col('roles', 'role'));
-  const responsabilites = decouperRoles(col('responsabilit'));
-  const { fonction, conseil } = fonctionDe(roles);
+  // Deux formes de CSV vues chez la Ville : « Rôles » + « Responsabilités » (2021), ou
+  // « Fonction élective » + « Fonctions additionnelles » + « Responsabilités CE » (2025).
+  const principale = decouperRoles(col('fonction elective', 'roles', 'role'));
+  const additionnelles = decouperRoles(col('fonctions additionnelles'));
+  const responsabilitesCe = decouperRoles(col('responsabilites ce'));
+  const responsabilites = responsabilitesCe.length ? responsabilitesCe : decouperRoles(col('responsabilit'));
+  const roles = [...principale, ...additionnelles];
+  const { fonction, conseil } = fonctionDe(principale.length ? principale : roles);
   const arrondissement = normaliserEspaces(col('arrondissement')).replace(/^ville de montr[ée]al$/i, '') || null;
   const district = normaliserEspaces(col('nom du district', 'district')) || null;
   const parti = normaliserEspaces(col('nom du parti', 'parti')) || null;
-  const telephone = normaliserEspaces(col('telephone (hotel', 'telephone')) || null;
+  // La cellule commence parfois par « Tél. : » ; sans numéro derrière, il n'y a rien.
+  const telephone = normaliserEspaces(col('telephone (hotel', 'telephone')).replace(/^t[ée]l\.?\s*:?\s*/i, '') || null;
   const courriel = normaliserEspaces(col('courriel', 'email')).split(/\s+/).pop() || null;
   const photo = normaliserEspaces(col('url d\'une photo', 'photo')) || null;
 
@@ -63,7 +71,7 @@ export function normaliserMembre(ligne, cles) {
     nom,
     prenom,
     nomComplet: [prenom, nom].filter(Boolean).join(' '),
-    genre: normaliserEspaces(col('genre')) || null,
+    genre: normaliserEspaces(col('genre', 'appellation')) || null,
     fonction,
     siegeAuConseilMunicipal: conseil,
     districtNumero: null, // Montréal ne numérote pas ses districts dans ce jeu ; la clé sert de jointure
@@ -75,6 +83,8 @@ export function normaliserMembre(ligne, cles) {
     // Les rôles secondaires (comité exécutif, présidence, commissions) sans la fonction
     // principale, plus les responsabilités que la Ville publie.
     roles: [...roles.filter((r) => r !== roles[0]), ...responsabilites],
+    // La Ville publie une colonne « Responsabilités CE » : non vide = membre du comité exécutif.
+    comiteExecutif: responsabilitesCe.length > 0 || roles.some((r) => /comit[ée] ex[ée]cutif/i.test(r)),
     telephone,
     // La Ville publie une adresse courriel directe : on la garde sous le nom que le site
     // attend (formulaireCourriel = « comment écrire à cette personne »).

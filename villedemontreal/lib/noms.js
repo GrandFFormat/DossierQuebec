@@ -25,3 +25,24 @@ export function cleNom(s) {
 export function normaliserEspaces(s) {
   return String(s ?? '').replace(/\s+/g, ' ').trim();
 }
+
+// Les 19 arrondissements de Montréal, en clé. Sert à distinguer, dans une colonne
+// « Arrondissement / Ville liée », ce qui est un arrondissement de Montréal de ce qui est
+// une ville liée.
+export const ARRONDISSEMENTS = [
+  'Ahuntsic-Cartierville', 'Anjou', 'Côte-des-Neiges–Notre-Dame-de-Grâce', 'Lachine', 'LaSalle',
+  "L'Île-Bizard–Sainte-Geneviève", 'Mercier–Hochelaga-Maisonneuve', 'Montréal-Nord', 'Outremont',
+  'Pierrefonds-Roxboro', 'Le Plateau-Mont-Royal', 'Rivière-des-Prairies–Pointe-aux-Trembles',
+  'Rosemont–La Petite-Patrie', 'Saint-Laurent', 'Saint-Léonard', 'Le Sud-Ouest', 'Verdun',
+  'Ville-Marie', 'Villeray–Saint-Michel–Parc-Extension',
+];
+const CLES_ARRONDISSEMENTS = new Set(ARRONDISSEMENTS.map(cle));
+export function estArrondissement(s) {
+  return CLES_ARRONDISSEMENTS.has(cle(s));
+}
+
+// Clé encore plus tolérante : sans aucun séparateur. « De Lorimier » et « DeLorimier »
+// se rejoignent ; « Saint-Paul–Émard » et « Saint-Paul—Émard » aussi.
+export function cleStricte(s) {
+  return cle(s).replace(/-/g, '');
+}

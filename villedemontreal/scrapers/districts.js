@@ -18,7 +18,7 @@
 
 import { writeFile, readFile } from 'node:fs/promises';
 import { jeu, ressource, texte, PORTAIL_DONNEES } from '../lib/mtl.js';
-import { cle } from '../lib/noms.js';
+import { cle, cleStricte } from '../lib/noms.js';
 
 export const JEU = 'districts-electoraux';
 const OUT = new URL('../data/districts.json', import.meta.url);
@@ -76,13 +76,23 @@ function propriete(p, ...candidats) {
   return null;
 }
 
+// Deux index : par arrondissement + district (des districts « Est » et « Ouest » existent
+// dans plusieurs arrondissements), puis par district seul en repli. Les clés sont
+// strictes (sans séparateur) : « De Lorimier » et « DeLorimier » se rejoignent.
 async function chargerElus() {
+  const composite = new Map();
+  const simple = new Map();
   try {
     const data = JSON.parse(await readFile(new URL('../data/elus.json', import.meta.url), 'utf8'));
-    return new Map((data.membres ?? []).filter((m) => m.districtCle && m.siegeAuConseilMunicipal).map((m) => [m.districtCle, m]));
+    for (const m of data.membres ?? []) {
+      if (!m.district || !m.siegeAuConseilMunicipal) continue;
+      composite.set(`${cleStricte(m.arrondissement)}/${cleStricte(m.district)}`, m);
+      simple.set(cleStricte(m.district), simple.has(cleStricte(m.district)) ? null : m); // null = ambigu
+    }
   } catch {
-    return new Map();
+    // pas d'élus : la carte se dessine sans noms
   }
+  return { composite, simple };
 }
 
 async function main() {
@@ -120,7 +130,7 @@ async function main() {
       .filter((anneau) => anneau.length >= 4);
 
     const cleDistrict = cle(nom);
-    const elu = elus.get(cleDistrict);
+    const elu = elus.composite.get(`${cleStricte(arrondissement)}/${cleStricte(nom)}`) ?? elus.simple.get(cleStricte(nom)) ?? null;
     if (!elu && nom) ecarts.push(`District « ${nom} » : aucun élu de ville correspondant dans data/elus.json`);
     if (elu && arrondissement && elu.arrondissement && cle(arrondissement) !== cle(elu.arrondissement)) {
       ecarts.push(`District « ${nom} » : arrondissement « ${arrondissement} » (GeoJSON) vs « ${elu.arrondissement} » (liste des élus)`);
