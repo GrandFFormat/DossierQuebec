@@ -24,6 +24,9 @@ import { documentDeSeance } from './decisions.js';
 import { INSTANCES, idSeance } from '../lib/mtl.js';
 
 const OUT = new URL('../data/votes.json', import.meta.url);
+// Quand la lecture des votes change (ce numéro augmente), le registre est relu en entier
+// à la prochaine exécution, fenêtre ou pas.
+export const VERSION_LECTURE_VOTES = 2;
 const SEANCES = new URL('../data/seances.json', import.meta.url);
 
 function parseArgs(argv) {
@@ -96,8 +99,9 @@ async function main() {
   // Tant que le registre est vide, la fenêtre n'a pas de sens : on lit toute l'année.
   // (Sans ça, un premier lancement en septembre ne voyait que des séances dont le
   // procès-verbal n'est pas encore publié, et le registre restait vide.)
-  const depuisEffectif = precedent?.votes?.length ? depuis : null;
-  if (depuis && !depuisEffectif) console.log('Registre vide : première passe sur toute l\'année, sans fenêtre.');
+  const lecteurAChange = precedent && precedent.versionLecture !== VERSION_LECTURE_VOTES;
+  const depuisEffectif = precedent?.votes?.length && !lecteurAChange ? depuis : null;
+  if (depuis && !depuisEffectif) console.log(lecteurAChange ? 'Le lecteur des votes a changé : relecture de toute l\'année.' : 'Registre vide : première passe sur toute l\'année, sans fenêtre.');
   const idsPrecedents = new Set((precedent?.votes ?? []).map((v) => v.id));
   const seances = calendrier.seances.filter((s) => s.date.startsWith(year) && s.date <= aujourdhui && (!depuisEffectif || s.date >= depuisEffectif));
 
@@ -138,7 +142,8 @@ async function main() {
       'Extraction par analyse du texte des procès-verbaux (PDF de la Ville). ' +
       'Les noms sont lus dans les passages « Votent en faveur / Votent contre ». ' +
       'Chaque vote conserve le texte brut et signale tout écart avec le décompte officiel.',
-    parametres: { annee: year, depuis, complet: Boolean(args.complet) },
+    parametres: { annee: year, depuis: depuisEffectif, complet: Boolean(args.complet) || !depuisEffectif },
+    versionLecture: VERSION_LECTURE_VOTES,
     totalDisponible: votes.length,
     documentsAnalyses: analysees,
     nombre: votes.length,
