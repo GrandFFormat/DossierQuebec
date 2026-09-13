@@ -59,7 +59,12 @@
 <main class="contenu">
   <div id="chargement" class="avis">Chargement des données…</div>
 
-  <h2 class="page">Le conseil municipal</h2>
+  <h2 class="page" id="conseil">Le conseil municipal</h2>
+  <nav class="liens-rapides" aria-label="Sections de la page">
+    <a href="#membres">Les membres du conseil municipal</a>
+    <a href="#comite-executif">Le comité exécutif</a>
+    <a href="#agglomeration">Le conseil d'agglomération</a>
+  </nav>
   <p class="chapeau">
     Le conseil compte 65 membres&nbsp;: la mairesse ou le maire, élu au suffrage universel, les
     18 maires d'arrondissement et 46 conseillères et conseillers de ville, un par district.
@@ -86,11 +91,11 @@
     géolocalisées, donc impossible de dire «&nbsp;voici ce qui s'est décidé dans votre district&nbsp;».
   </p>
 
-  <h2 class="page" style="margin-top:34px">Les membres du conseil municipal</h2>
+  <h2 class="page" id="membres" style="margin-top:34px">Les membres du conseil municipal</h2>
   <p class="compte" id="compte-elus"></p>
   <div id="liste-elus"></div>
 
-  <h2 class="page" style="margin-top:40px">Le comité exécutif</h2>
+  <h2 class="page" id="comite-executif" style="margin-top:40px">Le comité exécutif</h2>
   <p class="chapeau">
     Le gouvernement de la Ville au quotidien&nbsp;: la mairesse ou le maire, la présidence du comité et
     une dizaine de membres choisis parmi les élus, chacun responsable de dossiers. Il siège chaque
@@ -100,7 +105,7 @@
   <p class="compte" id="compte-ce"></p>
   <div id="liste-ce"></div>
 
-  <h2 class="page" style="margin-top:40px">Le conseil d'agglomération</h2>
+  <h2 class="page" id="agglomeration" style="margin-top:40px">Le conseil d'agglomération</h2>
   <p class="chapeau">
     C'est une <strong>instance distincte</strong> du conseil municipal, et elle décide des services
     partagés de l'île&nbsp;: police, incendie, transport en commun, eau, évaluation foncière, logement

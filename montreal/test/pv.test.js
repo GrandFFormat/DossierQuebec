@@ -316,3 +316,23 @@ test('un vote enregistré tient son résultat de ses décomptes', () => {
   assert.equal(decouperResolutions('CM26 0001\nObjet\n' + bloc + '20.01', { instance: 'CM' })[0].resultat, 'Rejetée');
   assert.equal(parserVote('Votent en faveur : A, B (2)\nVotent contre : aucun\nRésultat : En faveur : 2\nContre : 0').resultat, "Adoptée à l'unanimité");
 });
+
+test('votes : la liste s\'arrête au décompte « (N) », le reste de la page est ignoré', () => {
+  const v = parserVote(
+    'Votent en faveur : Mesdames et messieurs Alneus, Plourde et Beauregard (3)\n' +
+    'Votent contre : Mesdames et messieurs Pinard, Hénault- Ratelle et Hénault (3) Ouverture des portes : À l’ouverture des portes, ' +
+    'la conseillère Elvira Carhuallanqui déclare que si elle avait été présente au moment du vote elle se serait prononcée en faveur.\n' +
+    'Résultat : En faveur : 4\nContre : 3\n'
+  );
+  assert.deepEqual(v.pour, ['Alneus', 'Plourde', 'Beauregard']);
+  assert.deepEqual(v.contre, ['Pinard', 'Hénault-Ratelle', 'Hénault']);
+  assert.deepEqual(v.avertissements, []);
+  assert.equal(v.notes.length, 1);
+  assert.match(v.notes[0], /Décompte final en faveur : 4, liste nominale : 3/);
+  assert.equal(v.decomptePour, 4);
+  assert.equal(v.resultat, 'Adoptée à la majorité');
+
+  const w = parserVote('Votent en faveur : A, B (2)\nVotent contre : C et D (2) Séance ordinaire du conseil municipal du lundi 23 mars 2026 à 19 h 111\nRésultat : En faveur : 2\nContre : 2');
+  assert.deepEqual(w.contre, ['C', 'D']);
+  assert.deepEqual(w.avertissements, []);
+});
