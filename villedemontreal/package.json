@@ -7,6 +7,7 @@
   "scripts": {
     "refresh": "node scripts/refresh.js",
     "scrape:seances": "node scrapers/seances.js",
+    "scrape:robots": "node scrapers/robots.js",
     "scrape:decisions": "node scrapers/decisions.js",
     "scrape:votes": "node scrapers/votes.js",
     "scrape:elus": "node scrapers/elus.js",

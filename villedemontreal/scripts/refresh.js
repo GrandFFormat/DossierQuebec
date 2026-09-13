@@ -55,6 +55,7 @@ const ETAPES = [
         { nom: 'Districts électoraux', argv: ['scrapers/districts.js'], secondaire: true },
       ]
     : []),
+  { nom: 'robots.txt des sites de la Ville', argv: ['scrapers/robots.js'], secondaire: true },
   { nom: 'Calendrier des séances', argv: ['scrapers/seances.js'] },
   // --max-old-space-size : un procès-verbal du conseil municipal fait des centaines de pages ;
   // le premier lancement s'est éteint sans un mot au milieu de l'un d'eux.
