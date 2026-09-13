@@ -8,7 +8,15 @@ C'est la demande la plus facile à accorder des trois, parce qu'elle ne demande 
 publication nouvelle. Le document existe déjà et il est public ; il manque son adresse.
 
 **À** : donneesouvertes@montreal.ca
-**Copie** : greffe@montreal.ca
+**Copie** : le Service du greffe — voir la note ci-dessous
+
+> ⚠ `greffe@montreal.ca` N'EXISTE PAS : un envoi à cette adresse rebondit (vérifié le
+> 13 septembre 2026). La Ville ne publie pas d'adresse courriel pour son Service du greffe.
+> Les voies vérifiées sont la page du service, https://montreal.ca/unites/service-du-greffe,
+> et la démarche d'accès aux documents,
+> https://montreal.ca/demarches/demander-lacces-aux-documents-dun-arrondissement
+> (Division du greffe, 555 rue Chabanel Ouest, bureau 600, Montréal H2N 2H8).
+> Envoyer à donneesouvertes@montreal.ca seul fonctionne.
 **Objet** : Suite — l'adresse d'un sommaire décisionnel à partir de son numéro de dossier
 
 ---

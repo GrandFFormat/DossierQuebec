@@ -7,7 +7,15 @@ Court, précis, et il ne demande aucune faveur : les trois choses demandées ser
 monde, pas seulement nous. C'est ce qui rend une demande facile à accepter.
 
 **À** : donneesouvertes@montreal.ca
-**Copie** : greffe@montreal.ca
+**Copie** : le Service du greffe — voir la note ci-dessous
+
+> ⚠ `greffe@montreal.ca` N'EXISTE PAS : un envoi à cette adresse rebondit (vérifié le
+> 13 septembre 2026). La Ville ne publie pas d'adresse courriel pour son Service du greffe.
+> Les voies vérifiées sont la page du service, https://montreal.ca/unites/service-du-greffe,
+> et la démarche d'accès aux documents,
+> https://montreal.ca/demarches/demander-lacces-aux-documents-dun-arrondissement
+> (Division du greffe, 555 rue Chabanel Ouest, bureau 600, Montréal H2N 2H8).
+> Envoyer à donneesouvertes@montreal.ca seul fonctionne.
 **Objet** : Calendrier des séances des conseils d'arrondissement — demande de publication
 
 Remplacer `[courriel]` par votre adresse avant d'envoyer. Ce courriel est indépendant de
