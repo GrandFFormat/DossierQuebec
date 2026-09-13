@@ -232,6 +232,22 @@ d'argent sans rien décider, sont écartés des montants. L'introduction s'écri
 
 Les brouillons ne sont pas versionnés (`.gitignore`) : ils se relisent, puis partent.
 
+**Avec `--details`**, les documents retenus pour les montants, les subventions et les contrats
+passent par `scrapers/details-argent.js` : un outil en schéma strict extrait du sommaire la
+nature du montant (dépense, subvention accordée ou reçue, valeur au rôle, investissement
+privé…), le bénéficiaire, la durée, le mode d'attribution, les soumissions et l'estimation de
+la Ville, la répartition par année, le financement, les conditions et ce qui change. Le type
+de montant empêche d'additionner une valeur au rôle ou une subvention reçue avec une dépense ;
+le parcours (comité exécutif → conseil → agglomération) est calculé à partir des résolutions,
+sans IA. Coût mesuré sur la semaine du 2 au 8 juillet : 30 documents, ≈ 4 $ US — mis en cache
+dans `data/details.json`, jamais repayés.
+
+Un piège trouvé en testant : les tableaux d'annexe (analyse des soumissions) arrivent aplatis,
+valeurs avant libellés. Avec un appel d'outil forcé — qui désactive la réflexion du modèle —
+l'estimation de la Ville et la médiane des soumissions ont été inversées sur AP2026-271. Appel
+non forcé, réflexion adaptative et consigne de vérification de cohérence : lecture correcte.
+Le brouillon se relit quand même avant l'envoi.
+
 ## La carte des districts
 
 Contours tirés du jeu « Districts électoraux » de la Ville sur Données Québec, en **CC-BY 4.0** —
