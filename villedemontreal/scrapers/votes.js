@@ -92,10 +92,15 @@ async function main() {
     process.exit(1);
   }
   const aujourdhui = new Date().toISOString().slice(0, 10);
-  const seances = calendrier.seances.filter((s) => s.date.startsWith(year) && s.date <= aujourdhui && (!depuis || s.date >= depuis));
-
   const precedent = await lireJson(OUT);
+  // Tant que le registre est vide, la fenêtre n'a pas de sens : on lit toute l'année.
+  // (Sans ça, un premier lancement en septembre ne voyait que des séances dont le
+  // procès-verbal n'est pas encore publié, et le registre restait vide.)
+  const depuisEffectif = precedent?.votes?.length ? depuis : null;
+  if (depuis && !depuisEffectif) console.log('Registre vide : première passe sur toute l\'année, sans fenêtre.');
   const idsPrecedents = new Set((precedent?.votes ?? []).map((v) => v.id));
+  const seances = calendrier.seances.filter((s) => s.date.startsWith(year) && s.date <= aujourdhui && (!depuisEffectif || s.date >= depuisEffectif));
+
   const votes = [];
   let analysees = 0;
   const seancesVues = new Set();
@@ -117,11 +122,11 @@ async function main() {
   const nouveaux = precedent ? votes.filter((v) => v.nouveau).length : null;
 
   // Fenêtre : ce qui est hors fenêtre est conservé du fichier précédent.
-  if (depuis && precedent) {
-    const conserves = (precedent.votes ?? []).filter((v) => String(v.annee) === year && !seancesVues.has(v.seanceId) && (v.date ?? '') < depuis);
+  if (depuisEffectif && precedent) {
+    const conserves = (precedent.votes ?? []).filter((v) => String(v.annee) === year && !seancesVues.has(v.seanceId) && (v.date ?? '') < depuisEffectif);
     for (const v of conserves) v.nouveau = false;
     votes.push(...conserves);
-    console.log(`Fenêtre depuis ${depuis} : ${analysees} séance(s) relue(s), ${conserves.length} vote(s) conservé(s) du fichier précédent.`);
+    console.log(`Fenêtre depuis ${depuisEffectif} : ${analysees} séance(s) relue(s), ${conserves.length} vote(s) conservé(s) du fichier précédent.`);
   }
   votes.sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '') || (a.numero ?? '').localeCompare(b.numero ?? ''));
 

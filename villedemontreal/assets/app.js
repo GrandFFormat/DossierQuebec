@@ -136,6 +136,7 @@ function carteDecision(d) {
       <span>${dateFr(d.date)}</span>
       <span class="puce">${echapper(d.type)}</span>
       ${d.instance ? `<span class="puce">${echapper(d.instance)}</span>` : ''}
+      ${d.categorie ? `<span class="puce">${echapper(d.categorie)}</span>` : ''}
       ${d.unite ? `<span class="puce">${echapper(d.unite)}</span>` : ''}
       ${d.resultat ? `<span class="resultat ${classeResultat(d.resultat)}">${echapper(d.resultat)}</span>` : ''}
       ${d.voteEnregistre ? '<span class="puce genre-vote">vote enregistré</span>' : ''}
