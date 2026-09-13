@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
+<meta name="robots" content="noindex, nofollow">
+<title>Décisions de la Ville de Montréal — DossierVilleDeMontréal</title>
+<meta name="description" content="Les résolutions du conseil municipal, du conseil d'agglomération et du comité exécutif de Montréal, avec recherche, filtres par instance et résumés en langage clair.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvm:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvm:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="decisions">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="./"><h1>Dossier<span class="marque">VilleDeMontréal</span></h1></a>
+      <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
+      <a class="retour-dq" href="https://dossierquebec.ca/">← Retour à DossierQuébec</a>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Montréal, lisibles. Données publiques, reprises telles quelles
+      des procès-verbaux officiels de la Ville et de son portail de données ouvertes.
+    </p>
+    <nav>
+      <a href="./">Accueil</a>
+      <a href="decisions.html" aria-current="page">Décisions</a>
+      <a href="votes.html">Votes nominatifs</a>
+      <a href="conseil.html">Conseil municipal</a>
+      <a href="lexique.html">Lexique</a>
+      <div class="taille-texte" role="group" aria-label="Taille du texte">
+        <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+        <span id="texte-pct" aria-live="polite">100%</span>
+        <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+      </div>
+      <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+              title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu">
+  <div id="chargement" class="avis">Chargement des données…</div>
+
+  <h2 class="page">Décisions</h2>
+  <p class="chapeau">
+    Chaque fiche est une <strong>résolution</strong> — la décision elle-même — lue dans le
+    <strong>procès-verbal</strong> officiel d'une séance du conseil municipal, du conseil
+    d'agglomération ou du comité exécutif. Le numéro de dossier renvoie au
+    <strong>sommaire décisionnel</strong>, la note de l'administration qui explique pourquoi.
+    Les encadrés verts sont un résumé généré par IA de ce sommaire — le PDF officiel reste à un clic.
+  </p>
+
+  <div class="barre-outils">
+    <input type="search" id="rech-decisions" placeholder="Rechercher dans l'objet des décisions…">
+    <select id="filtre-type"><option value="">Tous les types</option></select>
+    <select id="filtre-theme"><option value="">Tous les sujets</option></select>
+    <select id="affichage" title="Mode d'affichage">
+      <option value="seance">Grouper par séance</option>
+      <option value="liste">Liste continue</option>
+    </select>
+    <select id="filtre-instance"><option value="">Toutes les instances</option></select>
+    <label class="case"><input type="checkbox" id="filtre-resume"> Avec résumé seulement</label>
+    <button type="button" class="bouton-lien" id="tout-deplier">Tout déplier</button>
+  </div>
+  <p class="compte" id="compte-decisions"></p>
+  <div id="liste-decisions"></div>
+  <button class="plus" id="plus-decisions" hidden>Afficher plus</button>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources.html">Sources</a>.</p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
+     Même projet Vercel : les pages vues de /villedemontreal/ s'ajoutent au même tableau de
+     bord. En local le script n'existe pas (404 sans conséquence). -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

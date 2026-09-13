@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
+<meta name="robots" content="noindex, nofollow">
+<title>Lexique du vocabulaire municipal — DossierVilleDeMontréal</title>
+<meta name="description" content="Résolution, sommaire décisionnel, dossier décisionnel, vote enregistré, dissidence, ville liée : le vocabulaire des décisions de la Ville de Montréal, expliqué et chiffré sur les procès-verbaux officiels.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvm:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvm:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="lexique">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="./"><h1>Dossier<span class="marque">VilleDeMontréal</span></h1></a>
+      <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
+      <a class="retour-dq" href="https://dossierquebec.ca/">← Retour à DossierQuébec</a>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Montréal, lisibles. Données publiques, reprises telles quelles
+      des procès-verbaux officiels de la Ville et de son portail de données ouvertes.
+    </p>
+    <nav>
+      <a href="./">Accueil</a>
+      <a href="decisions.html">Décisions</a>
+      <a href="votes.html">Votes nominatifs</a>
+      <a href="conseil.html">Conseil municipal</a>
+      <a href="lexique.html" aria-current="page">Lexique</a>
+      <div class="taille-texte" role="group" aria-label="Taille du texte">
+        <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+        <span id="texte-pct" aria-live="polite">100%</span>
+        <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+      </div>
+      <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+              title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu">
+  <div id="chargement" class="avis">Chargement des données…</div>
+
+  <h2 class="page">Lexique</h2>
+  <p class="chapeau">
+    Le vocabulaire des décisions municipales est opaque par habitude, pas par nécessité. Voici ce
+    que veulent dire les mots que vous croisez sur ce site.
+  </p>
+
+  <div class="barre-outils">
+    <input type="search" id="rech-lexique" placeholder="Chercher un terme…">
+  </div>
+  <p class="compte" id="compte-lexique"></p>
+  <div id="liste-lexique"></div>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources.html">Sources</a>.</p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
+     Même projet Vercel : les pages vues de /villedemontreal/ s'ajoutent au même tableau de
+     bord. En local le script n'existe pas (404 sans conséquence). -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

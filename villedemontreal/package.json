@@ -1,0 +1,25 @@
+{
+  "name": "dossiervillemontreal",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Prototype de veille citoyenne des décisions de la Ville de Montréal",
+  "scripts": {
+    "refresh": "node scripts/refresh.js",
+    "scrape:seances": "node scrapers/seances.js",
+    "scrape:decisions": "node scrapers/decisions.js",
+    "scrape:votes": "node scrapers/votes.js",
+    "scrape:elus": "node scrapers/elus.js",
+    "scrape:agglomeration": "node scrapers/agglomeration.js",
+    "scrape:districts": "node scrapers/districts.js",
+    "scrape:lexique": "node scrapers/lexique.js",
+    "scrape:resumes": "node --env-file-if-exists=api.env scrapers/resumes.js",
+    "archive": "node scrapers/archive.js",
+    "test": "node --test test/*.test.js",
+    "serve": "node scripts/static-server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.125.0",
+    "pdfjs-dist": "^6.3.0"
+  }
+}

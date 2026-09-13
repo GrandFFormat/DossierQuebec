@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
+<meta name="robots" content="noindex, nofollow">
+<title>Votes enregistrés au conseil municipal de Montréal — DossierVilleDeMontréal</title>
+<meta name="description" content="Qui a voté pour et qui a voté contre au conseil municipal et au conseil d'agglomération de Montréal : les votes enregistrés consignés dans les procès-verbaux officiels.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvm:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvm:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="votes">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="./"><h1>Dossier<span class="marque">VilleDeMontréal</span></h1></a>
+      <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
+      <a class="retour-dq" href="https://dossierquebec.ca/">← Retour à DossierQuébec</a>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Montréal, lisibles. Données publiques, reprises telles quelles
+      des procès-verbaux officiels de la Ville et de son portail de données ouvertes.
+    </p>
+    <nav>
+      <a href="./">Accueil</a>
+      <a href="decisions.html">Décisions</a>
+      <a href="votes.html" aria-current="page">Votes nominatifs</a>
+      <a href="conseil.html">Conseil municipal</a>
+      <a href="lexique.html">Lexique</a>
+      <div class="taille-texte" role="group" aria-label="Taille du texte">
+        <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+        <span id="texte-pct" aria-live="polite">100%</span>
+        <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+      </div>
+      <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+              title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu">
+  <div id="chargement" class="avis">Chargement des données…</div>
+
+  <h2 class="page">Votes nominatifs</h2>
+  <div class="avis">
+    <strong>Comment ces votes sont obtenus.</strong> À la Ville de Montréal, la plupart des décisions
+    sont adoptées à main levée, sans que personne ne soit nommé. Quand un membre demande un
+    <strong>vote enregistré</strong>, le greffier fait l'appel et le procès-verbal consigne nommément
+    qui vote pour et qui vote contre. Ces noms sont extraits du texte des procès-verbaux par lecture
+    automatique&nbsp;: chaque vote garde le passage d'origine et tout écart avec le décompte officiel
+    du document est signalé plutôt que corrigé. Les <em>dissidences</em> — une opposition consignée
+    sans appel nominal complet — figurent sur les fiches de la page Décisions, pas ici.
+  </div>
+
+  <details class="carte pliante bloc-tableau">
+    <summary>
+      <div class="meta">
+        <span class="puce">tableau</span>
+        <span id="resume-dissidence"></span>
+      </div>
+      <p class="objet">Votes contre, par personne</p>
+    </summary>
+    <div class="corps">
+  <p class="compte">Décompte brut, sans interprétation. Voter contre n'est ni un défaut ni un mérite&nbsp;: c'est une position.</p>
+  <table id="table-dissidence">
+    <thead><tr><th>Personne</th><th>Instance la plus fréquente</th><th class="n">Votes contre</th></tr></thead>
+    <tbody></tbody>
+  </table>
+    </div>
+  </details>
+
+  <h2 class="section">Les votes enregistrés</h2>
+  <div class="barre-outils">
+    <input type="search" id="rech-votes" placeholder="Rechercher dans l'objet ou les noms…">
+    <select id="filtre-theme-votes"><option value="">Tous les sujets</option></select>
+    <select id="filtre-instance-votes"><option value="">Toutes les instances</option></select>
+    <button type="button" class="bouton-lien" id="tout-deplier">Tout déplier</button>
+  </div>
+  <p class="compte" id="compte-votes"></p>
+  <div id="liste-votes"></div>
+  <button class="plus" id="plus-votes" hidden>10 de plus</button>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources.html">Sources</a>.</p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
+     Même projet Vercel : les pages vues de /villedemontreal/ s'ajoutent au même tableau de
+     bord. En local le script n'existe pas (404 sans conséquence). -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
