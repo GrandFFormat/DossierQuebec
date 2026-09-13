@@ -500,3 +500,24 @@ h2.section[class*="cat-"] {
   min-width: 42px; text-align: center; font-size: 12px; font-weight: 600;
   color: var(--entete-doux); font-variant-numeric: tabular-nums;
 }
+
+/* ---------- LEXIQUE : catégories dépliantes ---------- */
+/* Le titre de catégorie est le bouton : details/summary natifs, donc clavier et lecteur
+   d'écran sans JavaScript. Le chevron dit l'état ; le compte dit ce qu'on va trouver. */
+.lexique-cat > summary { list-style: none; cursor: pointer; }
+.lexique-cat > summary::-webkit-details-marker { display: none; }
+.lexique-cat > summary h2.section {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--cat); border-bottom: 2px solid var(--cat); padding-bottom: 7px; margin-bottom: 0;
+}
+.lexique-cat > summary h2.section::before {
+  content: ""; flex: none; width: 7px; height: 7px;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg); transition: transform .15s; margin-right: 2px;
+}
+.lexique-cat[open] > summary h2.section::before { transform: rotate(45deg); }
+.lexique-cat > summary:hover h2.section, .lexique-cat > summary:focus-visible h2.section { color: var(--encre); border-bottom-color: var(--encre); }
+.lexique-cat > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.lexique-cat .compte-cat { margin-left: auto; font-size: 12px; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--doux); }
+.lexique-cat .bloc-lexique { margin-top: 18px; margin-bottom: 8px; }
+@media (prefers-reduced-motion: reduce) { .lexique-cat > summary h2.section::before { transition: none; } }
