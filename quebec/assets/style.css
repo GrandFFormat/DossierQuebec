@@ -541,3 +541,11 @@ h2.page[id] { scroll-margin-top: 16px; }
 }
 .haut.visible { opacity: 1; transform: none; pointer-events: auto; }
 .haut:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- FICHES D'ÉLUS : rien ne sort du cadre ---------- */
+/* Les pastilles longues (« Président de l'Arrondissement de … ») et les noms composés passent
+   à la ligne au lieu d'élargir la fiche et la page. */
+.elu > div { min-width: 0; flex: 1 1 auto; }
+.elu .puce, .elu .meta { white-space: normal; }
+.elu .meta { flex-wrap: wrap; }
+.elu h3, .elu .district { overflow-wrap: anywhere; }
