@@ -39,4 +39,13 @@ createServer(async (req, res) => {
     res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
     res.end('Introuvable : ' + relatif);
   }
-}).listen(PORT, () => console.log('DossierVille sur http://localhost:' + PORT));
+})
+  .on('error', (e) => {
+    if (e.code === 'EADDRINUSE') {
+      console.error('Le port ' + PORT + ' est déjà pris : le site tourne sans doute déjà dans une autre fenêtre.');
+      console.error('Ouvrez simplement http://localhost:' + PORT + ' — ou fermez l\'autre fenêtre et relancez.');
+      process.exit(2);
+    }
+    throw e;
+  })
+  .listen(PORT, () => console.log('DossierVille sur http://localhost:' + PORT));
