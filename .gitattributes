@@ -1,0 +1,4 @@
+# Les scripts a double-cliquer sont lus par cmd.exe, qui veut des fins de ligne Windows.
+# Sans cette regle, un fichier recupere en LF (telechargement direct depuis GitHub, ou
+# clone avec core.autocrlf=false) peut faire deriver goto et blocs parentheses.
+*.cmd text eol=crlf
