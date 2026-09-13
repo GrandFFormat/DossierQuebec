@@ -1,0 +1,100 @@
+# Rafraîchissement quotidien du volet Montréal (villedemontreal/).
+#
+# Même mécanique que refresh.yml : chaque matin, on relance les extractions, et s'il y a du
+# nouveau on committe et on pousse — Vercel redéploie. Tout se passe dans villedemontreal/,
+# qui a ses propres scrapers et ses deux dépendances (voir villedemontreal/README.md).
+#
+# Secrets et variables (Settings > Secrets and variables > Actions) :
+#   ANTHROPIC_API_KEY  secret — résumés en langage clair. Sans lui, l'étape est sautée et
+#                      le reste tourne.
+#   MTL_CONTACT        variable, facultative — ce que notre robot laisse comme contact dans
+#                      son User-Agent auprès de la Ville. À défaut : l'adresse du site.
+
+name: Rafraîchissement quotidien — volet Montréal
+
+on:
+  schedule:
+    # 09:00 UTC, après DossierQuébec (08:00) et le volet Québec (08:30). Le groupe de concurrence
+    # ci-dessous garantit de toute façon qu'ils ne se chevauchent pas.
+    - cron: '0 9 * * *'
+  workflow_dispatch: {} # bouton « Run workflow » pour lancer à la main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    # Une poignée de requêtes, quelques PDF les jours de publication, au plus 120 résumés :
+    # quelques minutes en temps normal. 45 min laisse une marge très large.
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: villedemontreal
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v5
+
+      # Le même fichier vit sur master pour que « Run workflow » soit possible depuis
+      # GitHub sur n'importe quelle branche. Tant que le volet n'y est pas, il n'y a rien à
+      # faire ici — on le dit et on s'arrête proprement.
+      - name: Vérifier que le volet est présent
+        id: volet
+        working-directory: .
+        run: |
+          if [ -f villedemontreal/package.json ]; then
+            echo "present=oui" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=non" >> "$GITHUB_OUTPUT"
+            echo "::notice::Pas de dossier villedemontreal/ sur cette branche — rien à rafraîchir."
+          fi
+
+      - name: Installer Node.js
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Installer les dépendances (SDK Anthropic, pdf.js)
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        run: npm ci --omit=dev
+
+      - name: Rafraîchir les données municipales
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        id: refresh
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MTL_CONTACT: ${{ vars.MTL_CONTACT }}
+        run: npm run refresh
+
+      # Seul villedemontreal/data/ bouge (data/textes/ est ignoré par git). On rebase avant
+      # de pousser au cas où quelqu'un aurait poussé pendant le job.
+      - name: Committer et pousser s'il y a des changements
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        working-directory: .
+        run: |
+          git config user.name "dossierquebec-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add villedemontreal/data
+          if git diff --cached --quiet; then
+            echo "Aucun changement — rien à committer."
+          else
+            git commit -m "Rafraîchissement auto du volet Montréal ($(date -u +%Y-%m-%d))"
+            git pull --rebase
+            git push
+          fi
+
+      - name: Signaler les étapes secondaires en échec
+        if: ${{ steps.volet.outputs.present == 'oui' && steps.refresh.outputs.warnings != '' }}
+        run: |
+          echo "::warning::Étapes secondaires en échec (données de la veille conservées) : ${{ steps.refresh.outputs.warnings }}"
+
+      - name: Alerter si une extraction principale a échoué
+        if: ${{ steps.volet.outputs.present == 'oui' && steps.refresh.outputs.failed != '' }}
+        run: |
+          echo "::error::Extractions en échec (données de la veille conservées) : ${{ steps.refresh.outputs.failed }}"
+          exit 1
