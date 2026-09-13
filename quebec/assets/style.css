@@ -549,3 +549,8 @@ h2.page[id] { scroll-margin-top: 16px; }
 .elu .puce, .elu .meta { white-space: normal; }
 .elu .meta { flex-wrap: wrap; }
 .elu h3, .elu .district { overflow-wrap: anywhere; }
+
+/* Lien sortant dans la navigation : même rangée, mais on dit qu'on quitte le site. */
+nav a.externe { color: var(--entete-doux); font-weight: 500; }
+nav a.externe span[aria-hidden] { font-size: 12px; margin-left: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
