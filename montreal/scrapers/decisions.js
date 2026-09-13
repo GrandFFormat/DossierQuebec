@@ -39,7 +39,7 @@ const DIAGNOSTIC = new URL('../data/diagnostic.json', import.meta.url);
 // Un échantillon de ce que les PDF contiennent vraiment — les premières lignes d'un
 // procès-verbal, les lignes et les hyperliens d'un ordre du jour — écrit avec les données.
 // C'est ce qui permet d'ajuster les lecteurs sans avoir le PDF sous la main.
-const diagnostic = { generatedAt: null, pv: null, odj: null, nonPdf: null };
+const diagnostic = { generatedAt: null, pv: null, odj: null, nonPdf: null, votes: [] };
 function noterDiagnostic(cle, valeur) {
   if (!diagnostic[cle]) diagnostic[cle] = valeur;
 }
@@ -300,6 +300,10 @@ async function main() {
     noterDiagnostic('pv', { seance: seance.id, url: pv.url, nombrePages: pv.nombrePages, pages: pv.pages.slice(0, 3).map((p) => ({ numero: p.numero, lignes: p.lignes.slice(0, 80).map((l) => l.texte) })) });
     if (odj) noterDiagnostic('odj', { seance: seance.id, url: odj.url, nombrePages: odj.nombrePages, pages: odj.pages.slice(0, 3).map((p) => ({ numero: p.numero, lignes: p.lignes.slice(0, 80), liens: p.liens.slice(0, 40) })) });
     const { decisions: nouvelles, resolutions, points } = decisionsDeSeance(seance, pv, odj);
+    // Quelques blocs votés, bruts : c'est là qu'on vérifie la lecture des votes sans le PDF.
+    for (const r of resolutions.filter((r) => r.vote).slice(0, 2)) {
+      if (diagnostic.votes.length < 4) diagnostic.votes.push({ seance: seance.id, numero: r.numero, texte: r.texte.slice(0, 2500) });
+    }
     for (const d of nouvelles) decisions.set(d.id, d);
     lues++;
     const avecSommaire = nouvelles.filter((d) => d.sommairePdf).length;

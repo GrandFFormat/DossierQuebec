@@ -309,3 +309,10 @@ test("ordre du jour du conseil municipal : le service sur la ligne de l'article,
   assert.equal(p[1].categorie, null);
   assert.equal(p[1].unite, 'Service des finances, Direction du budget');
 });
+
+test('un vote enregistré tient son résultat de ses décomptes', () => {
+  const bloc = 'Amendement adopté à l\'unanimité.\nVotent en faveur : Mmes et MM. A, B (2)\nVotent contre : Mmes et MM. C, D, E (3)\nRésultat : En faveur : 2\nContre : 3\n';
+  assert.equal(parserVote(bloc).resultat, 'Rejetée');
+  assert.equal(decouperResolutions('CM26 0001\nObjet\n' + bloc + '20.01', { instance: 'CM' })[0].resultat, 'Rejetée');
+  assert.equal(parserVote('Votent en faveur : A, B (2)\nVotent contre : aucun\nRésultat : En faveur : 2\nContre : 0').resultat, "Adoptée à l'unanimité");
+});

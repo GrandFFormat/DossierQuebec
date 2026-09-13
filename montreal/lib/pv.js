@@ -131,7 +131,8 @@ export function decouperResolutions(texte, { instance } = {}) {
       objet: extraireObjet(b.lignes),
       article,
       dossier,
-      resultat: extraireResultat(bloc),
+      // Une résolution votée nommément porte le résultat de son vote.
+      resultat: vote?.resultat ?? extraireResultat(bloc),
       dissidences: vote ? [] : extraireDissidences(bloc),
       vote,
       texte: bloc,
@@ -235,8 +236,19 @@ export function parserVote(bloc) {
   const mAbst = texte.match(/((?:Mme|M\.)\s+[A-ZÀ-Ÿ][^\n.]{1,50}?)\s+s['’](?:est\s+)?abst(?:ient|enue?)/i);
   const abstention = mAbst ? mAbst[1].replace(/\s+/g, ' ').trim() : /\babstention\b/i.test(texte) ? 'oui' : null;
 
+  // Le résultat d'un vote enregistré se lit dans ses chiffres, pas dans une formule
+  // attrapée ailleurs dans le bloc (un amendement « adopté à l'unanimité » juste avant
+  // faisait dire « unanimité » à un vote de 37 contre 23). Sans décompte, la formule.
+  let resultat = extraireResultat(texte);
+  if (nFaveur != null && nContre != null) {
+    if (nContre === 0) resultat = "Adoptée à l'unanimité";
+    else if (nFaveur > nContre) resultat = 'Adoptée à la majorité';
+    else if (nFaveur < nContre) resultat = 'Rejetée';
+    else resultat = 'Égalité';
+  }
+
   return {
-    resultat: extraireResultat(texte),
+    resultat,
     pour: faveur.noms,
     contre: contre.noms,
     decomptePour: nFaveur,
