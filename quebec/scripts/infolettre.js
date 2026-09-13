@@ -70,7 +70,7 @@ async function main() {
   const jusqua = args.jusqua ?? new Date().toISOString().slice(0, 10);
   const depuis = args.depuis ?? new Date(new Date(jusqua + 'T00:00:00Z').getTime() - 6 * 864e5).toISOString().slice(0, 10);
 
-  const [decisions, votes, resumes] = await Promise.all([lire('decisions'), lire('votes'), lire('resumes')]);
+  const [decisions, resumes] = await Promise.all([lire('decisions'), lire('resumes')]);
   const THEMES = decisions.themes;
   const resumeParId = new Map(resumes.resumes.map((r) => [r.id, r]));
   const dansFenetre = (d) => d.date >= depuis && d.date <= jusqua;
@@ -110,13 +110,13 @@ async function main() {
   // Les montants : on écarte les dépôts de rapports et de listes, qui parlent d'argent sans
   // rien décider.
   const decidant = (f) => f.theme !== 'procedure' && !/prise d'acte|d[ée]p[ôo]t (?:de la|des|du)/i.test(f.objet ?? '');
-  const lourdes = liste.filter((f) => f.montant != null && decidant(f)).sort((a, b) => b.montant - a.montant).slice(0, 5);
-  const subventions = liste.filter((f) => f.theme === 'subventions' && decidant(f));
+  const parMontant = (a, b) => (b.montant ?? 0) - (a.montant ?? 0);
+  const lourdes = liste.filter((f) => f.montant != null && decidant(f)).sort(parMontant).slice(0, 6);
+  const subventions = liste.filter((f) => f.theme === 'subventions' && decidant(f)).sort(parMontant);
+  const contrats = liste.filter((f) => f.theme === 'contrats' && f.montant != null && decidant(f)).sort(parMontant);
   const totalSubventions = subventions.reduce((n, f) => n + (f.montant ?? 0), 0);
   const parTheme = new Map();
   for (const f of liste) if (f.theme) parTheme.set(f.theme, (parTheme.get(f.theme) ?? 0) + 1);
-
-  const divises = votes.votes.filter((v) => dansFenetre(v) && v.contre.length > 0);
 
   // ---------- Markdown ----------
   const L = [];
@@ -131,64 +131,40 @@ async function main() {
       .join(' · ') + '.');
   L.push('');
 
-  if (divises.length) {
-    // Une même séance produit souvent des dizaines d'appels nominaux avec la même dissidence
-    // (un élu qui vote contre toute une série). On regroupe par séance et par liste des voix
-    // contre, et on dit sur quoi portait la série — c'est ça, l'information.
-    const groupes = new Map();
-    for (const v of divises) {
-      const cle = `${v.instance}|${v.date}|${v.contre.join(',')}`;
-      if (!groupes.has(cle)) groupes.set(cle, { instance: v.instance, date: v.date, contre: v.contre, votes: [] });
-      groupes.get(cle).votes.push(v);
-    }
-    L.push(`## Les votes divisés (${divises.length} ${divises.length > 1 ? 'appels nominaux' : 'appel nominal'} avec des voix contre)`);
-    L.push('');
-    for (const g of [...groupes.values()].sort((a, b) => b.votes.length - a.votes.length)) {
-      const ou = `**${INSTANCE_COURTE(g.instance)}, ${dateCourte(g.date)}**`;
-      if (g.votes.length <= 2) {
-        for (const v of g.votes) {
-          L.push(`- ${ou} — ${court(v.objet)} — *${v.resultat}*, ${v.decomptePour} pour, ${v.decompteContre} contre (${v.contre.join(', ')}). [${v.numero}](${v.pdf})`);
-        }
-        continue;
-      }
-      const themes = new Map();
-      for (const v of g.votes) if (v.theme) themes.set(v.theme, (themes.get(v.theme) ?? 0) + 1);
-      const sujets = [...themes.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([t, n]) => `${(THEMES[t]?.libelle ?? t).toLowerCase()} (${n})`).join(', ');
-      const decomptes = [...new Set(g.votes.map((v) => `${v.decomptePour} pour, ${v.decompteContre} contre`))].join(' ou ');
-      const qui = g.contre.length === 1 ? `${g.contre[0]} a voté contre` : `${g.contre.join(', ')} ont voté contre`;
-      L.push(`- ${ou} — ${qui} **${g.votes.length} résolutions** adoptées ${decomptes} : ${sujets}. Par exemple : ` +
-        g.votes.slice(0, 2).map((v) => `${court(v.objet, 90)} [${v.numero}](${v.pdf})`).join(' ; ') + '.');
-    }
-    L.push('');
-    L.push(`Le détail de chaque appel nominal, nom par nom : [${SITE}votes.html](${SITE}votes.html).`);
-    L.push('');
-  } else {
-    L.push('## Les votes divisés');
-    L.push('');
-    L.push('Aucun appel nominal avec des voix contre cette semaine.');
-    L.push('');
-  }
-
-  L.push('## Les cinq décisions les plus lourdes');
-  L.push('');
-  // Le résumé en langage clair dit mieux que le titre administratif de quoi il s'agit ; on le
-  // préfère quand il existe.
-  const dire = (f, n) => f.resume?.puces?.[0] ?? court(f.objet, n);
+  // L'ARGENT, EN DÉTAIL. C'est là que le lecteur se perd dans un PDF : qui reçoit, pour
+  // quoi, d'où vient l'argent, jusqu'à quand. Le résumé en langage clair le dit déjà en
+  // quelques puces — on les donne, plutôt que le seul titre administratif. La première puce
+  // sert de phrase principale, les suivantes de détail.
   const ouVu = (f) => ([...f.instances].length ? [...f.instances].join(', ') : `sommaire du ${dateCourte(f.dates[0])}`);
-  for (const f of lourdes) {
-    L.push(`- **${argent(f.montant)}** — ${dire(f, 160)} *(${ouVu(f)})* [${f.numero}](${f.pdf})`);
-  }
+  const detailler = (f, nPuces) => {
+    const puces = f.resume?.puces ?? [];
+    const principale = puces[0] ?? court(f.objet, 160);
+    L.push(`- **${f.montant != null ? argent(f.montant) : 'Montant non précisé'}** — ${principale} *(${ouVu(f)})* [${f.numero}](${f.pdf})`);
+    for (const p of puces.slice(1, 1 + nPuces)) L.push(`  - ${p}`);
+  };
+
+  L.push('## Les plus gros montants de la semaine');
+  L.push('');
+  for (const f of lourdes) detailler(f, 3);
   if (!lourdes.length) L.push('Aucun montant relevé dans les résumés de la semaine.');
   L.push('');
 
   L.push(`## Les subventions (${subventions.length}${totalSubventions ? `, ${argent(totalSubventions)} au total` : ''})`);
   L.push('');
-  for (const f of [...subventions].sort((a, b) => (b.montant ?? 0) - (a.montant ?? 0)).slice(0, 8)) {
-    L.push(`- ${f.montant != null ? `**${argent(f.montant)}** — ` : ''}${dire(f, 130)} [${f.numero}](${f.pdf})`);
-  }
-  const reste = subventions.length - 8;
-  if (reste > 0) L.push(`- … et ${reste} autre${reste > 1 ? 's' : ''} : [toutes les décisions](${SITE}decisions.html)`);
+  // Ce qui figure déjà parmi les plus gros montants n'est pas répété.
+  const dejaVues = new Set(lourdes.map((f) => f.cle));
+  for (const f of subventions.filter((f) => !dejaVues.has(f.cle)).slice(0, 10)) detailler(f, 2);
+  const resteSub = subventions.filter((f) => !dejaVues.has(f.cle)).length - 10;
+  if (resteSub > 0) L.push(`- … et ${resteSub} autre${resteSub > 1 ? 's' : ''} : [toutes les décisions de la semaine](${SITE}decisions.html)`);
   if (!subventions.length) L.push('Aucune cette semaine.');
+  L.push('');
+
+  L.push(`## Les contrats (${contrats.length} avec un montant)`);
+  L.push('');
+  for (const f of contrats.filter((f) => !dejaVues.has(f.cle)).slice(0, 8)) detailler(f, 2);
+  const resteCon = contrats.filter((f) => !dejaVues.has(f.cle)).length - 8;
+  if (resteCon > 0) L.push(`- … et ${resteCon} autre${resteCon > 1 ? 's' : ''} : [toutes les décisions de la semaine](${SITE}decisions.html)`);
+  if (!contrats.length) L.push('Aucun cette semaine.');
   L.push('');
 
   L.push('## De quoi on a parlé');
@@ -208,21 +184,33 @@ async function main() {
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.+?)\*/g, '<em>$1</em>')
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#0B8A4B">$1</a>');
+  // Listes à deux niveaux : « - » puis « (deux espaces)- » pour le détail sous un montant.
   const html = [];
-  let liste_ouverte = false;
-  for (const ligne of md.split('\n')) {
+  const lignes = md.split('\n');
+  for (let i = 0; i < lignes.length; ) {
+    const ligne = lignes[i];
     if (ligne.startsWith('- ')) {
-      if (!liste_ouverte) { html.push('<ul style="padding-left:20px;margin:0 0 16px">'); liste_ouverte = true; }
-      html.push(`<li style="margin:0 0 8px;line-height:1.5">${enLigne(ligne.slice(2))}</li>`);
+      html.push('<ul style="padding-left:20px;margin:0 0 16px">');
+      while (i < lignes.length && lignes[i].startsWith('- ')) {
+        let item = `<li style="margin:0 0 10px;line-height:1.5">${enLigne(lignes[i].slice(2))}`;
+        i++;
+        const sous = [];
+        while (i < lignes.length && lignes[i].startsWith('  - ')) {
+          sous.push(`<li style="margin:0 0 4px;line-height:1.45">${enLigne(lignes[i].slice(4))}</li>`);
+          i++;
+        }
+        if (sous.length) item += `<ul style="padding-left:18px;margin:6px 0 0;color:#4b5563;font-size:14px">${sous.join('')}</ul>`;
+        html.push(item + '</li>');
+      }
+      html.push('</ul>');
       continue;
     }
-    if (liste_ouverte) { html.push('</ul>'); liste_ouverte = false; }
     if (ligne.startsWith('# ')) html.push(`<h1 style="font-size:22px;margin:0 0 12px">${enLigne(ligne.slice(2))}</h1>`);
     else if (ligne.startsWith('## ')) html.push(`<h2 style="font-size:17px;margin:22px 0 8px">${enLigne(ligne.slice(3))}</h2>`);
     else if (ligne === '---') html.push('<hr style="border:0;border-top:1px solid #ddd;margin:20px 0">');
     else if (ligne.trim()) html.push(`<p style="margin:0 0 12px;line-height:1.55">${enLigne(ligne)}</p>`);
+    i++;
   }
-  if (liste_ouverte) html.push('</ul>');
   const page = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Infolettre — semaine du ${dateFr(depuis)}</title></head>` +
     `<body style="margin:0;padding:24px;background:#fff;color:#16191D;font-family:system-ui,-apple-system,sans-serif;font-size:15px"><div style="max-width:640px;margin:0 auto">${html.join('\n')}</div></body></html>`;
 
