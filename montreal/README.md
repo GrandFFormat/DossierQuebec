@@ -26,6 +26,10 @@ version de la branche à chaque fois, se relance depuis cette version, installe 
 lance la routine en écrivant tout dans `data/lancement.log`, envoie données et journal sur
 GitHub et ouvre le site en local. S'il s'arrête, la fenêtre dit pourquoi.
 
+**Juste voir le site (Windows)** : double-cliquer sur `VOIR-MONTREAL.cmd`. Il ramène la copie du
+dépôt à la dernière version de la branche — données comprises, celles que GitHub Actions extrait
+chaque matin — et ouvre http://localhost:4321. Quelques secondes, rien d'extrait, rien d'envoyé.
+
 
 ```bash
 npm install            # deux dépendances : le SDK Anthropic (résumés) et pdf.js (lecture des PDF)
