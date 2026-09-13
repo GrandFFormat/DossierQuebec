@@ -261,6 +261,10 @@ et l'icône « VDM » de l'en-tête de DossierQuébec sont ses seules attaches a
   2026 sur `CA_Rpp_ODJ_LP_ORDI_2025-05-05_19h00_FR.pdf` : rien n'est cliquable. C'est ce qui
   prive le volet de tout lien vers les sommaires décisionnels, alors qu'il en connaît le
   numéro de dossier pour 2 877 décisions. Demandé à la Ville, voir `courriel-sommaires.md`.
+  Les pages web autour de ces documents n'en portent pas davantage : vérifié le même jour,
+  il n'y a ni « Sommaire décisionnel » ni « Pièces jointes » à côté des points de l'ordre du
+  jour. Les trois voies vers les sommaires sont donc fermées — l'ordre du jour, la page web,
+  et le portail de données ouvertes, qui ne les publie pas. Il ne reste que la Ville.
 
 - **Les 19 conseils d'arrondissement.** Même schéma d'URL (`CA_<code>_PV_ORDI_…`) et même
   gabarit ; il manque le calendrier de leurs séances et la table des codes (`Pmr`, `Rpp`, `Sud`,
