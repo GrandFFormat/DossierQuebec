@@ -141,7 +141,10 @@ function carteDecision(d) {
     <p class="objet">${echapper(d.objet ?? '(sans objet)')}</p>`;
   const corps = `${blocResume(resumePour(d))}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}`;
-  return carteRepliable(entete, corps);
+  // Espace abonnés (/commun/abonnes.js) : « Suivre ce dossier » et le détail de l'argent. La clé
+  // de dossier suit la décision d'une instance à l'autre.
+  const abonnes = `<div class="ab-fiche" data-dossier="${echapper(d.sommaireId ?? d.id)}" data-numero="${echapper(d.numero ?? '')}" data-objet="${echapper((d.objet ?? '').slice(0, 300))}"></div>`;
+  return carteRepliable(entete, corps + abonnes);
 }
 
 function decisionsFiltrees() {
@@ -819,6 +822,8 @@ async function init() {
   if (page === 'decisions') {
     // Permet d'arriver ici depuis la carte avec un arrondissement déjà sélectionné.
     const instance = new URLSearchParams(location.search).get('instance');
+    const recherche = new URLSearchParams(location.search).get('q');
+    if (recherche && $('#rech-decisions')) $('#rech-decisions').value = recherche;
     rendreDecisions();
     if (instance && [...$('#filtre-instance').options].some((o) => o.value === instance)) {
       $('#filtre-instance').value = instance;

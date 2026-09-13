@@ -1,0 +1,124 @@
+// Ce que partagent les volets municipaux et les pages « Mes dossiers » et « Abonnement » :
+// la connexion Supabase (la même que DossierQuébec — un seul compte pour tout le site), les
+// suivis, l'appel au détail réservé, et le rendu de ce détail.
+//
+// Tous les volets sont des sous-dossiers de dossierquebec.ca : la session ouverte sur une
+// page vaut pour toutes les autres, sans rien de plus.
+
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+// Mêmes valeurs que index.html de DossierQuébec. La clé « publishable » est faite pour être
+// publique : ce sont les règles RLS (scripts/supabase-schema-abonnes.sql) qui protègent.
+export const client = createClient('https://wfgcqftgtmptfutrbujz.supabase.co', 'sb_publishable_CutVYEz29QYUV3tCDsAhSQ_RvZUQ3G6');
+
+export const VILLES = { quebec: 'Québec', montreal: 'Montréal' };
+
+export const echapper = (s) =>
+  String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+export const dateFr = (iso) => {
+  if (!iso) return '';
+  const [a, m, j] = iso.slice(0, 10).split('-').map(Number);
+  return `${j} ${MOIS[m - 1]} ${a}`;
+};
+
+export const mesurer = (nom, donnees = {}) => {
+  try {
+    window.va?.('event', { name: nom, ...donnees });
+  } catch {}
+};
+
+export async function session() {
+  const { data } = await client.auth.getSession();
+  return data.session ?? null;
+}
+
+// Le lien de connexion ramène sur la page où l'on était. L'adresse doit être permise dans
+// Supabase (Authentication → URL Configuration → Redirect URLs : https://dossierquebec.ca/**).
+export async function envoyerLien(email) {
+  const { error } = await client.auth.signInWithOtp({
+    email,
+    options: { emailRedirectTo: location.origin + location.pathname + location.search },
+  });
+  return error;
+}
+
+export async function chargerSuivis() {
+  const { data, error } = await client.from('dossiers_suivis').select('ville, dossier_id, numero, objet, created_at').order('created_at', { ascending: false });
+  if (error) {
+    console.error('suivis :', error);
+    return [];
+  }
+  return data ?? [];
+}
+
+export async function suivre(s, { ville, dossier, numero, objet }) {
+  const { error } = await client.from('dossiers_suivis').upsert(
+    { user_id: s.user.id, ville, dossier_id: dossier, numero: numero || null, objet: (objet || '').slice(0, 600) || null },
+    { onConflict: 'user_id,ville,dossier_id', ignoreDuplicates: true }
+  );
+  return error;
+}
+
+export async function nePlusSuivre(s, { ville, dossier }) {
+  const { error } = await client.from('dossiers_suivis').delete().eq('user_id', s.user.id).eq('ville', ville).eq('dossier_id', dossier);
+  return error;
+}
+
+// Renvoie { existe, acces, apercu | detail } ou null si le service ne répond pas (en local,
+// par exemple, où les fonctions Vercel n'existent pas).
+export async function chargerDetail(ville, dossier, s) {
+  try {
+    const res = await fetch(`/api/detail?ville=${encodeURIComponent(ville)}&dossier=${encodeURIComponent(dossier)}`, {
+      headers: s ? { Authorization: `Bearer ${s.access_token}` } : {},
+      cache: 'no-store',
+    });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
+
+const ligne = (etiquette, texte) => (texte ? `<li><strong>${echapper(etiquette)} :</strong> ${echapper(texte)}</li>` : '');
+
+export function rendreDetail(reponse, ville) {
+  if (!reponse?.existe) return '';
+  if (reponse.acces === 'apercu') {
+    const a = reponse.apercu;
+    return `<div class="ab-detail ab-verrou">
+      <div class="ab-detail-titre">Détail de l'argent <span class="ab-etiquette">réservé aux abonnés</span></div>
+      <p class="ab-apercu">Nature du montant : <strong>${echapper(a.nature)}</strong>${a.beneficiaire ? ` · ${echapper(a.beneficiaire)}` : ''}</p>
+      ${a.sections.length ? `<p class="ab-apercu">L'abonnement débloque ${echapper(a.sections.join(', '))}.</p>` : ''}
+      <a class="ab-bouton" href="/abonnement?ville=${encodeURIComponent(ville)}" data-mesure="clic_abonnez_vous">Abonnez-vous</a>
+    </div>`;
+  }
+  const d = reponse.detail;
+  const soumissions = (d.soumissions ?? [])
+    .map((s) => `<li><strong>${s.retenue ? 'Soumission retenue' : 'Autre soumission'} :</strong> ${echapper(s.entreprise)}${s.ville ? ` (${echapper(s.ville)})` : ''}${s.prix ? ` · ${echapper(s.prix)}` : ''}${s.conforme === false ? ' · non conforme' : ''}</li>`)
+    .join('');
+  const parAnnee = (d.repartitionAnnuelle ?? []).map((r) => `${r.annee} : ${r.montant}`).join(' · ');
+  const chiffres = (d.chiffresCles ?? []).map((c) => `${c.libelle} : ${c.valeur}`).join(' · ');
+  return `<div class="ab-detail">
+    <div class="ab-detail-titre">Détail de l'argent <span class="ab-etiquette">${echapper(d.nature)}</span></div>
+    ${d.enUnePhrase ? `<p class="ab-phrase">${echapper(d.enUnePhrase)}</p>` : ''}
+    <ul>
+      ${ligne('Montant', d.montantPrincipal)}
+      ${ligne('Qui reçoit', [d.beneficiaire, d.beneficiaireVille].filter(Boolean).join(', '))}
+      ${ligne('Qui paie', d.payeur)}
+      ${ligne('Durée', d.duree)}
+      ${ligne('Renouvellements', d.renouvellements)}
+      ${ligne('Attribué par', d.modeAttribution)}
+      ${soumissions}
+      ${ligne('Estimation de la Ville', d.estimationVille)}
+      ${ligne('Écart', d.ecartEstimation)}
+      ${ligne('Par année', parAnnee)}
+      ${ligne('Financement', d.sourceFinancement)}
+      ${ligne('En chiffres', chiffres)}
+      ${(d.changementsNotables ?? []).map((c) => ligne('Ce qui change', c)).join('')}
+      ${(d.conditions ?? []).map((c) => ligne('Condition', c)).join('')}
+    </ul>
+    <p class="ab-note">Extrait automatiquement du sommaire décisionnel, puis vérifié automatiquement contre son texte ; ce qui ne se vérifiait pas a été retiré. En cas d'écart, le PDF officiel fait foi.</p>
+  </div>`;
+}
