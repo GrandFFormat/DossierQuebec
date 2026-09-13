@@ -1,0 +1,88 @@
+# Découverte des conseils d'arrondissement de Montréal — à lancer à la main, pas planifié.
+#
+# Deux choses ne se trouvent pas depuis un poste de développement qui n'atteint pas
+# montreal.ca : le code que la Ville emploie pour chacun des 19 conseils d'arrondissement
+# dans le nom de ses fichiers, et la source des dates de leurs séances. Ce workflow pose
+# les questions à la Ville depuis un runner, écrit le rapport dans
+# montreal/data/arrondissements-decouverte.json et le committe pour qu'on puisse le lire.
+#
+# Il ne touche à rien d'autre : aucune donnée du site n'est modifiée.
+
+name: Découverte — conseils d'arrondissement de Montréal
+
+on:
+  workflow_dispatch:
+    inputs:
+      annee:
+        description: "Année à sonder (les séances de cette année servent de repères)"
+        required: false
+        default: '2026'
+
+permissions:
+  contents: write
+
+# Même groupe que les rafraîchissements : deux jobs ne parlent jamais à la Ville en même
+# temps, et ne se marchent pas dessus au moment de pousser.
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  decouvrir:
+    runs-on: ubuntu-latest
+    # Le portail de données ouvertes impose 10 s entre deux requêtes, et le sondage d'URL
+    # en fait quelques centaines à 0,6 s : large de quoi voir venir.
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: montreal
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v5
+
+      # Le fichier peut exister sur une branche où le volet n'est pas : on le dit et on
+      # s'arrête proprement, comme le workflow de rafraîchissement.
+      - name: Vérifier que le volet est présent
+        id: volet
+        working-directory: .
+        run: |
+          if [ -f montreal/scrapers/decouverte-arrondissements.js ]; then
+            echo "present=oui" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=non" >> "$GITHUB_OUTPUT"
+            echo "::notice::Pas de script de découverte sur cette branche — rien à faire."
+          fi
+
+      - name: Installer Node.js
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Installer les dépendances
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        run: npm ci --omit=dev
+
+      - name: Interroger la Ville
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        env:
+          MTL_CONTACT: ${{ vars.MTL_CONTACT }}
+        # Le journal part avec le rapport : on le lit sur GitHub sans ouvrir le run.
+        run: |
+          set -o pipefail
+          npm run decouvrir:arrondissements -- ${{ inputs.annee }} 2>&1 | tee data/decouverte.log
+
+      - name: Committer le rapport
+        if: ${{ always() && steps.volet.outputs.present == 'oui' }}
+        working-directory: .
+        run: |
+          git config user.name "dossierquebec-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add montreal/data/arrondissements-decouverte.json montreal/data/decouverte.log || true
+          if git diff --cached --quiet; then
+            echo "Aucun rapport à committer."
+          else
+            git commit -m "Découverte des conseils d'arrondissement de Montréal ($(date -u +%Y-%m-%d))"
+            git pull --rebase
+            git push
+          fi
