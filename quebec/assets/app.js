@@ -618,6 +618,10 @@ function lexiqueFiltre() {
 function rendreLexique() {
   const entrees = lexiqueFiltre();
   const categories = etat.lexique.categories ?? {};
+  // Chaque catégorie est un menu dépliant, fermé à l'arrivée : on voit les six titres d'un
+  // coup, on ouvre celui qu'on cherche. Une recherche en cours ouvre les catégories où
+  // elle a trouvé quelque chose — sinon les résultats resteraient cachés.
+  const recherche = ($('#rech-lexique')?.value ?? '').trim() !== '';
   $('#compte-lexique').textContent =
     entrees.length === etat.lexique.nombre ? `${entrees.length} termes` : `${entrees.length} terme(s) sur ${etat.lexique.nombre}`;
 
@@ -629,8 +633,10 @@ function rendreLexique() {
       // La classe de catégorie porte la couleur : le titre, le filet et les termes en
       // héritent, sans qu'aucune teinte soit écrite dans le HTML.
       return (
-        `<h2 class="section cat-${echapper(cle)}">${echapper(titre)}</h2>` +
-        `<div class="bloc-lexique cat-${echapper(cle)}">${dedans.map(entreeLexique).join('')}</div>`
+        `<details class="lexique-cat cat-${echapper(cle)}"${recherche ? ' open' : ''}>` +
+        `<summary><h2 class="section">${echapper(titre)}<span class="compte-cat">${dedans.length} terme${dedans.length > 1 ? 's' : ''}</span></h2></summary>` +
+        `<div class="bloc-lexique">${dedans.map(entreeLexique).join('')}</div>` +
+        `</details>`
       );
     })
     .join('');
