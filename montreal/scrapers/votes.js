@@ -26,7 +26,7 @@ import { INSTANCES, idSeance } from '../lib/mtl.js';
 const OUT = new URL('../data/votes.json', import.meta.url);
 // Quand la lecture des votes change (ce numéro augmente), le registre est relu en entier
 // à la prochaine exécution, fenêtre ou pas.
-export const VERSION_LECTURE_VOTES = 2;
+export const VERSION_LECTURE_VOTES = 3;
 const SEANCES = new URL('../data/seances.json', import.meta.url);
 
 function parseArgs(argv) {

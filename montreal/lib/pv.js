@@ -173,9 +173,11 @@ export function nettoyerNoms(segment) {
     };
   }
 
-  // Le décompte que la Ville imprime entre parenthèses à la fin de la liste.
+  // Le décompte que la Ville imprime entre parenthèses à la fin de la liste. Tout ce
+  // qui suit n'est plus la liste : un en-tête de page ou une remarque (« Ouverture des
+  // portes : … ») collés au dernier nom par la mise en page.
   let declare = null;
-  const mDeclare = t.match(/\((\d+)\)\s*\.?\s*$/);
+  const mDeclare = t.match(/\((\d+)\)/);
   if (mDeclare) {
     declare = Number(mDeclare[1]);
     t = t.slice(0, mDeclare.index);
@@ -225,12 +227,22 @@ export function parserVote(bloc) {
 
   const degrade = faveur.degrade || contre.degrade;
   const avertissements = [...faveur.avertissements, ...contre.avertissements];
-  if (!degrade && nFaveur != null && faveur.noms.length !== nFaveur) {
-    avertissements.push(faveur.noms.length + ' nom(s) extrait(s) en faveur, mais le document en déclare ' + nFaveur);
-  }
-  if (!degrade && nContre != null && contre.noms.length !== nContre) {
-    avertissements.push(contre.noms.length + ' nom(s) extrait(s) contre, mais le document en déclare ' + nContre);
-  }
+  // Les noms se comparent au décompte imprimé au bout de leur liste ; le « Résultat »
+  // final peut légitimement en différer (un élu absent au moment du vote qui déclare
+  // ensuite son intention est compté par la Ville, mais pas nommé dans la liste).
+  const verifier = (etiquette, lu, nResultat) => {
+    if (degrade) return;
+    const nListe = lu.declare ?? nResultat;
+    if (nListe != null && lu.noms.length !== nListe) {
+      avertissements.push(lu.noms.length + ' nom(s) extrait(s) ' + etiquette + ', mais le document en déclare ' + nListe);
+    }
+    if (lu.declare != null && nResultat != null && lu.declare !== nResultat) {
+      notes.push('Décompte final ' + etiquette + ' : ' + nResultat + ', liste nominale : ' + lu.declare + ' — un élu absent au moment du vote a pu déclarer son intention ensuite.');
+    }
+  };
+  const notes = [];
+  verifier('en faveur', faveur, nFaveur);
+  verifier('contre', contre, nContre);
 
   const demandeur = texte.match(/vote\s+(?:enregistr[ée]\s+)?(?:est\s+)?demand[ée]\s+par\s+((?:Mme|M\.|Mmes|MM\.)?\s*[A-ZÀ-Ÿ][^\n.;]{1,60}?)(?:[.;\n]|\s+sur\b|$)/i);
   const mAbst = texte.match(/((?:Mme|M\.)\s+[A-ZÀ-Ÿ][^\n.]{1,50}?)\s+s['’](?:est\s+)?abst(?:ient|enue?)/i);
@@ -257,6 +269,7 @@ export function parserVote(bloc) {
     demandeParVote: demandeur ? demandeur[1].replace(/\s+/g, ' ').trim() : null,
     texteSourceDegrade: degrade,
     avertissements,
+    notes,
     brut: [segFaveur && 'Votent en faveur : ' + segFaveur, segContre && 'Votent contre : ' + segContre]
       .filter(Boolean)
       .join(' | ')

@@ -1024,3 +1024,19 @@ init();
   moins.addEventListener('click', () => appliquer(Math.max(MIN, lire() - PAS)));
   plus.addEventListener('click', () => appliquer(Math.min(MAX, lire() + PAS)));
 })();
+
+// ---------- Remonter en haut de page ----------
+// Un bouton fixe, sur toutes les pages, qui n'apparaît qu'une fois qu'on a défilé.
+(function hautDePage() {
+  const bouton = document.createElement('button');
+  bouton.type = 'button';
+  bouton.className = 'haut-page';
+  bouton.setAttribute('aria-label', 'Remonter en haut de la page');
+  bouton.title = 'Remonter en haut';
+  bouton.textContent = '\u2191';
+  document.body.appendChild(bouton);
+  const majVisibilite = () => bouton.classList.toggle('visible', window.scrollY > 400);
+  window.addEventListener('scroll', majVisibilite, { passive: true });
+  majVisibilite();
+  bouton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+})();
