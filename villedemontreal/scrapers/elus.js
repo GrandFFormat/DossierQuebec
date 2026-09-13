@@ -51,6 +51,8 @@ export function normaliserMembre(ligne, cles) {
   const prenom = normaliserEspaces(col('prenom'));
   const nom = normaliserEspaces(col('nom de famille', 'nom'));
   if (!prenom && !nom) return null;
+  // Le CSV de la Ville répète sa ligne d'en-têtes au milieu des données.
+  if (/^pr[ée]nom$/i.test(prenom) && /^nom$/i.test(nom)) return null;
   // Deux formes de CSV vues chez la Ville : « Rôles » + « Responsabilités » (2021), ou
   // « Fonction élective » + « Fonctions additionnelles » + « Responsabilités CE » (2025).
   const principale = decouperRoles(col('fonction elective', 'roles', 'role'));

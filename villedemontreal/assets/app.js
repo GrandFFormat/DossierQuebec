@@ -589,7 +589,7 @@ function rendreCarte() {
         (d) =>
           `<path d="${chemin(d.anneaux)}" class="district" data-numero="${d.numero}" ` +
           `fill="${table.get(cle(d)) ?? '#999'}" tabindex="0" role="button" ` +
-          `aria-label="District ${d.numero} — ${echapper(d.nom ?? '')}"><title>${echapper(d.nom ?? '')} (${d.numero}) — ${echapper(d.conseiller ?? '')}</title></path>`
+          `aria-label="District ${d.numero} — ${echapper(d.nom ?? '')}"><title>${echapper(d.nom ?? '')} (${d.numero}) — ${echapper(d.conseiller ?? '')}${d.conseillerArrondissement ? " (conseil d'arrondissement)" : ''}</title></path>`
       )
       .join('') +
     '</svg>';

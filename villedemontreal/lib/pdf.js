@@ -54,7 +54,9 @@ function lignesDePage(items) {
 
 export async function lirePdf(data) {
   const lib = await pdfjs();
-  const tache = lib.getDocument({ data, useSystemFonts: true, isEvalSupported: false, disableFontFace: true });
+  // verbosity 0 : les avertissements de polices (« TT: undefined function ») remplissaient le
+  // journal par centaines sans rien dire d'utile.
+  const tache = lib.getDocument({ data, useSystemFonts: true, isEvalSupported: false, disableFontFace: true, verbosity: 0 });
   const doc = await tache.promise;
   const pages = [];
   for (let i = 1; i <= doc.numPages; i++) {
@@ -80,6 +82,12 @@ export async function lirePdf(data) {
     liens: [...new Set(pages.flatMap((p) => p.liens.map((l) => l.url)))],
     pages,
   };
+}
+
+// Un vrai PDF commence par « %PDF ». La Ville répond parfois une page HTML (200) à l'URL
+// d'un procès-verbal pas encore publié : ce n'est pas un PDF, et pdf.js le dit en plantant.
+export function estPdf(data) {
+  return data && data.length > 4 && data[0] === 0x25 && data[1] === 0x50 && data[2] === 0x44 && data[3] === 0x46;
 }
 
 // Une minorité de PDF ressortent avec les lettres espacées (« Ca the r ine »). On ne

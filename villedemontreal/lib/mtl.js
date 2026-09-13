@@ -26,6 +26,7 @@
 // throttle, User-Agent identifiable, lecture incrémentale, et un courriel au greffe.
 
 import { parserCsv } from './csv.js';
+import { estPdf } from './pdf.js';
 
 export const PORTAIL_DONNEES = 'https://donnees.montreal.ca/';
 export const API_CKAN = 'https://donnees.montreal.ca/api/3/action/';
@@ -193,8 +194,12 @@ export async function premierDocument(candidats) {
   for (const url of candidats) {
     try {
       const data = await octets(url, { accept: 'application/pdf' });
-      if (data && data.length > 100) return { url, data, essais };
-      essais.push({ url, resultat: data ? 'réponse vide' : '404' });
+      if (data && estPdf(data)) return { url, data, essais };
+      if (data && data.length) {
+        const extrait = new TextDecoder().decode(data.slice(0, 4000)).replace(/\s+/g, ' ');
+        const titre = extrait.match(/<title>([^<]*)<\/title>/i)?.[1]?.trim();
+        essais.push({ url, resultat: 'pas un PDF' + (titre ? ` — page « ${titre} »` : ''), extrait: extrait.slice(0, 300) });
+      } else essais.push({ url, resultat: data ? 'réponse vide' : '404' });
     } catch (err) {
       essais.push({ url, resultat: String(err.message ?? err) });
     }

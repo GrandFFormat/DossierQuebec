@@ -31,6 +31,19 @@ const SEANCES = new URL('../data/seances.json', import.meta.url);
 export const CACHE = new URL('../data/textes/', import.meta.url);
 
 const RATTRAPAGE_JOURS = 45;
+const DIAGNOSTIC = new URL('../data/diagnostic.json', import.meta.url);
+
+// Un échantillon de ce que les PDF contiennent vraiment — les premières lignes d'un
+// procès-verbal, les lignes et les hyperliens d'un ordre du jour — écrit avec les données.
+// C'est ce qui permet d'ajuster les lecteurs sans avoir le PDF sous la main.
+const diagnostic = { generatedAt: null, pv: null, odj: null, nonPdf: null };
+function noterDiagnostic(cle, valeur) {
+  if (!diagnostic[cle]) diagnostic[cle] = valeur;
+}
+async function ecrireDiagnostic() {
+  diagnostic.generatedAt = new Date().toISOString();
+  await writeFile(DIAGNOSTIC, JSON.stringify(diagnostic, null, 1), 'utf8');
+}
 
 function parseArgs(argv) {
   const args = {};
@@ -212,6 +225,39 @@ async function main() {
   let lues = 0;
   let introuvables = 0;
 
+  // Le fichier est réécrit après chaque séance lue : si le processus meurt au milieu d'un
+  // gros procès-verbal, ce qui précède est déjà sur le disque.
+  const ecrire = async (partiel) => {
+    const liste = [...decisions.values()].filter((d) => d.annee === year);
+    const plusRecentConnu = [...decisionsConnues.values()].reduce((m, d) => ((d.date ?? '') > m ? d.date : m), '');
+    const seuil = plusRecentConnu ? ajouterJours(plusRecentConnu, -RATTRAPAGE_JOURS) : '';
+    for (const d of liste) d.nouveau = precedent ? !decisionsConnues.has(d.id) && (d.date ?? '') >= seuil : null;
+    for (const d of liste) Object.assign(d, classer({ objet: d.type === 'Résolution' ? d.objet : 'procès-verbal', unite: d.unite }));
+    liste.sort((a, b) => b.date.localeCompare(a.date) || (a.instance ?? '').localeCompare(b.instance ?? '') || (a.numero ?? '').localeCompare(b.numero ?? ''));
+    // Les séances pas encore traitées gardent leur état précédent, ou « non traitée ».
+    const traitees = new Set(etatSeances.map((s) => s.id));
+    const etats = [...etatSeances, ...seances.filter((s) => !traitees.has(s.id)).map((s) => connues.get(s.id) ?? { ...s, etat: partiel ? 'non traitée' : 'à venir' })];
+    const payload = {
+      generatedAt: new Date().toISOString(),
+      source: 'https://ville.montreal.qc.ca/documents/Adi_Public/',
+      licence: 'Documents publics de la Ville de Montréal — reproduction avec mention de la source, usage non commercial (voir README).',
+      parametres: { annee: year, instances: Object.keys(INSTANCES) },
+      partiel,
+      totalDisponible: liste.length,
+      nombre: liste.length,
+      nouveauxDepuisDerniereExecution: precedent ? liste.filter((d) => d.nouveau).length : null,
+      seancesLues: etats.filter((s) => s.etat === 'lue').length,
+      seancesEnAttente: etats.filter((s) => s.etat === 'procès-verbal non publié').length,
+      themes: THEMES,
+      sansTheme: liste.filter((d) => d.themeSource === 'defaut').length,
+      facettes: { type: tally(liste, 'type'), instance: tally(liste, 'instance'), unite: tally(liste, 'unite'), theme: tally(liste, 'theme') },
+      seances: etats.sort((a, b) => b.date.localeCompare(a.date)),
+      decisions: liste,
+    };
+    await writeFile(OUT, JSON.stringify(payload, null, 1), 'utf8');
+    return payload;
+  };
+
   for (const seance of seances) {
     const deja = connues.get(seance.id);
     if (seance.date > aujourdhui) {
@@ -238,10 +284,14 @@ async function main() {
       introuvables++;
       const essais = pv?.essais ?? [];
       console.log(`${seance.id} : procès-verbal non publié — ${essais.map((e) => e.resultat).join(', ') || 'aucune réponse'}`);
-      etatSeances.push({ ...seance, etat: 'procès-verbal non publié', pv: null, odj: deja?.odj ?? null, essaye: aujourdhui, essais });
+      const nonPdf = essais.find((e) => e.extrait);
+      if (nonPdf) noterDiagnostic('nonPdf', { seance: seance.id, ...nonPdf });
+      etatSeances.push({ ...seance, etat: 'procès-verbal non publié', pv: null, odj: deja?.odj ?? null, essaye: aujourdhui, essais: essais.map(({ url, resultat }) => ({ url, resultat })) });
       continue;
     }
     if (odj && !odj.url) odj = null;
+    noterDiagnostic('pv', { seance: seance.id, url: pv.url, nombrePages: pv.nombrePages, pages: pv.pages.slice(0, 3).map((p) => ({ numero: p.numero, lignes: p.lignes.slice(0, 80).map((l) => l.texte) })) });
+    if (odj) noterDiagnostic('odj', { seance: seance.id, url: odj.url, nombrePages: odj.nombrePages, pages: odj.pages.slice(0, 3).map((p) => ({ numero: p.numero, lignes: p.lignes.slice(0, 80), liens: p.liens.slice(0, 40) })) });
     const { decisions: nouvelles, resolutions, points } = decisionsDeSeance(seance, pv, odj);
     for (const d of nouvelles) decisions.set(d.id, d);
     lues++;
@@ -249,39 +299,14 @@ async function main() {
     console.log(`${seance.id} : ${pv.nombrePages} pages, ${resolutions.length} résolutions, ${points.length} points à l'ordre du jour, ${avecSommaire} liens vers un sommaire${pv.depuisCache ? ' (cache)' : ''}`);
     if (resolutions.length === 0) console.warn(`⚠ ${seance.id} : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.`);
     etatSeances.push({ ...seance, etat: 'lue', pv: pv.url, odj: odj?.url ?? null, nombreResolutions: resolutions.length, lueLe: aujourdhui });
+    await ecrire(true);
+    await ecrireDiagnostic();
   }
 
-  const liste = [...decisions.values()].filter((d) => d.annee === year);
-  const plusRecentConnu = [...decisionsConnues.values()].reduce((m, d) => ((d.date ?? '') > m ? d.date : m), '');
-  const seuil = plusRecentConnu ? ajouterJours(plusRecentConnu, -RATTRAPAGE_JOURS) : '';
-  for (const d of liste) d.nouveau = precedent ? !decisionsConnues.has(d.id) && (d.date ?? '') >= seuil : null;
-  for (const d of liste) Object.assign(d, classer({ objet: d.type === 'Résolution' ? d.objet : 'procès-verbal', unite: d.unite }));
-  liste.sort((a, b) => b.date.localeCompare(a.date) || (a.instance ?? '').localeCompare(b.instance ?? '') || (a.numero ?? '').localeCompare(b.numero ?? ''));
-
-  const nouveaux = liste.filter((d) => d.nouveau).length;
-  const payload = {
-    generatedAt: new Date().toISOString(),
-    source: 'https://ville.montreal.qc.ca/documents/Adi_Public/',
-    licence: 'Documents publics de la Ville de Montréal — reproduction avec mention de la source, usage non commercial (voir README).',
-    parametres: { annee: year, instances: Object.keys(INSTANCES) },
-    totalDisponible: liste.length,
-    nombre: liste.length,
-    nouveauxDepuisDerniereExecution: precedent ? nouveaux : null,
-    seancesLues: etatSeances.filter((s) => s.etat === 'lue').length,
-    seancesEnAttente: etatSeances.filter((s) => s.etat === 'procès-verbal non publié').length,
-    themes: THEMES,
-    sansTheme: liste.filter((d) => d.themeSource === 'defaut').length,
-    facettes: {
-      type: tally(liste, 'type'),
-      instance: tally(liste, 'instance'),
-      unite: tally(liste, 'unite'),
-      theme: tally(liste, 'theme'),
-    },
-    seances: etatSeances.sort((a, b) => b.date.localeCompare(a.date)),
-    decisions: liste,
-  };
-
-  await writeFile(OUT, JSON.stringify(payload, null, 1), 'utf8');
+  const payload = await ecrire(false);
+  await ecrireDiagnostic();
+  const liste = payload.decisions;
+  const nouveaux = payload.nouveauxDepuisDerniereExecution ?? 0;
   console.log(`\n${liste.length} décisions écrites dans data/decisions.json — ${lues} séance(s) lue(s) cette fois, ${introuvables} en attente de procès-verbal.`);
   if (precedent) console.log(`${nouveaux} nouveauté(s) depuis la dernière exécution.`);
   console.log('\nPastilles thématiques :');

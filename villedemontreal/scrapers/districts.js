@@ -84,10 +84,15 @@ async function chargerElus() {
   const simple = new Map();
   try {
     const data = JSON.parse(await readFile(new URL('../data/elus.json', import.meta.url), 'utf8'));
-    for (const m of data.membres ?? []) {
-      if (!m.district || !m.siegeAuConseilMunicipal) continue;
-      composite.set(`${cleStricte(m.arrondissement)}/${cleStricte(m.district)}`, m);
-      simple.set(cleStricte(m.district), simple.has(cleStricte(m.district)) ? null : m); // null = ambigu
+    // Les conseillers de ville d'abord ; à défaut, les conseillers d'arrondissement — dans
+    // Anjou, Lachine, LaSalle, Outremont, L'Île-Bizard–Sainte-Geneviève, les districts
+    // n'élisent que ceux-là, les conseillers de ville y étant élus sans district.
+    const tous = (data.membres ?? []).filter((m) => m.district).sort((a, b) => Number(Boolean(b.siegeAuConseilMunicipal)) - Number(Boolean(a.siegeAuConseilMunicipal)));
+    for (const m of tous) {
+      const k = `${cleStricte(m.arrondissement)}/${cleStricte(m.district)}`;
+      if (!composite.has(k)) composite.set(k, m);
+      const ks = cleStricte(m.district);
+      simple.set(ks, simple.has(ks) ? null : m); // null = ambigu
     }
   } catch {
     // pas d'élus : la carte se dessine sans noms
@@ -142,6 +147,7 @@ async function main() {
       nom,
       parti: elu?.parti ?? null,
       conseiller: elu?.nomComplet ?? null,
+      conseillerArrondissement: elu ? elu.siegeAuConseilMunicipal === false : null,
       arrondissement: elu?.arrondissement ?? arrondissement ?? null,
       telephone: elu?.telephone ?? null,
       formulaireCourriel: elu?.formulaireCourriel ?? null,
