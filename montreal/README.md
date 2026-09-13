@@ -26,7 +26,12 @@ version de la branche à chaque fois, se relance depuis cette version, installe 
 lance la routine en écrivant tout dans `data/lancement.log`, envoie données et journal sur
 GitHub et ouvre le site en local. S'il s'arrête, la fenêtre dit pourquoi.
 
-**Juste voir le site (Windows)** : double-cliquer sur `VOIR-MONTREAL.cmd`. Il ramène la copie du
+**Juste ouvrir le site, hors ligne (Windows)** : double-cliquer sur `OUVRIR-LE-SITE.cmd`.
+Il sert le dossier tel qu'il est sur le disque et ouvre http://localhost:4321. Pas de git,
+pas de npm, pas de réseau : le serveur n'utilise que Node lui-même, donc il n'y a presque
+rien qui puisse échouer. C'est le script à prendre pour regarder le résultat d'un changement.
+
+**Voir le site après mise à jour (Windows)** : double-cliquer sur `VOIR-MONTREAL.cmd`. Il ramène la copie du
 dépôt à la dernière version de la branche — données comprises, celles que GitHub Actions extrait
 chaque matin — et ouvre http://localhost:4321. Quelques secondes, rien d'extrait, rien d'envoyé.
 
