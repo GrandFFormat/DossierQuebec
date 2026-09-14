@@ -1,18 +1,18 @@
 {
- "generatedAt": "2026-09-13T14:09:13.716Z",
+ "generatedAt": "2026-09-14T16:14:06.122Z",
  "source": "https://ville.montreal.qc.ca/documents/Adi_Public/",
  "licence": "Documents publics de la Ville de Montréal — reproduction avec mention de la source, usage non commercial (voir README).",
  "methode": "Sondage des noms de fichiers publiés : l'existence du document prouve la séance. Les séances extraordinaires, dont l'heure est imprévisible, ne sont pas couvertes.",
  "annee": 2026,
  "partiel": false,
- "nombre": 118,
- "requetes": 2409,
+ "nombre": 121,
+ "requetes": 2377,
  "parArrondissement": [
   {
    "arrondissement": "Ahuntsic-Cartierville",
-   "seances": 6,
-   "nouvelles": 0,
-   "requetes": 113
+   "seances": 7,
+   "nouvelles": 1,
+   "requetes": 100
   },
   {
    "arrondissement": "Anjou",
@@ -24,7 +24,7 @@
    "arrondissement": "Côte-des-Neiges–Notre-Dame-de-Grâce",
    "seances": 6,
    "nouvelles": 0,
-   "requetes": 226
+   "requetes": 228
   },
   {
    "arrondissement": "Lachine",
@@ -34,9 +34,9 @@
   },
   {
    "arrondissement": "LaSalle",
-   "seances": 7,
-   "nouvelles": 0,
-   "requetes": 72
+   "seances": 8,
+   "nouvelles": 1,
+   "requetes": 58
   },
   {
    "arrondissement": "L'Île-Bizard–Sainte-Geneviève",
@@ -48,13 +48,13 @@
    "arrondissement": "Mercier–Hochelaga-Maisonneuve",
    "seances": 5,
    "nouvelles": 0,
-   "requetes": 155
+   "requetes": 156
   },
   {
    "arrondissement": "Montréal-Nord",
    "seances": 5,
    "nouvelles": 0,
-   "requetes": 155
+   "requetes": 156
   },
   {
    "arrondissement": "Outremont",
@@ -64,9 +64,9 @@
   },
   {
    "arrondissement": "Pierrefonds-Roxboro",
-   "seances": 7,
-   "nouvelles": 0,
-   "requetes": 73
+   "seances": 8,
+   "nouvelles": 1,
+   "requetes": 62
   },
   {
    "arrondissement": "Le Plateau-Mont-Royal",
@@ -96,13 +96,13 @@
    "arrondissement": "Saint-Léonard",
    "seances": 6,
    "nouvelles": 0,
-   "requetes": 113
+   "requetes": 114
   },
   {
    "arrondissement": "Le Sud-Ouest",
    "seances": 6,
    "nouvelles": 0,
-   "requetes": 113
+   "requetes": 114
   },
   {
    "arrondissement": "Verdun",
@@ -1421,6 +1421,39 @@
    "variante": "ORDI",
    "source": "sondage des documents publiés",
    "preuve": "CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Ahu_2026-09-14_19h00",
+   "instance": "CA_Ahu",
+   "arrondissement": "Ahuntsic-Cartierville",
+   "nomInstance": "Conseil d'arrondissement de Ahuntsic-Cartierville",
+   "date": "2026-09-14",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Ahu_ODJP_ORDI_2026-09-14_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Las_2026-09-14_19h00",
+   "instance": "CA_Las",
+   "arrondissement": "LaSalle",
+   "nomInstance": "Conseil d'arrondissement de LaSalle",
+   "date": "2026-09-14",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Pir_2026-09-14_19h00",
+   "instance": "CA_Pir",
+   "arrondissement": "Pierrefonds-Roxboro",
+   "nomInstance": "Conseil d'arrondissement de Pierrefonds-Roxboro",
+   "date": "2026-09-14",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Pir_ODJ_ORDI_2026-09-14_19h00_FR.pdf"
   }
  ]
 }

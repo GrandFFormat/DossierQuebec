@@ -2,10 +2,52 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 47f942c — Node v22.23.2
+Code : commit 4939f63 — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
+
+=== Élus de la Ville ===
+Source : https://donnees.montreal.ca/dataset/381d74ca-dadd-459f-95c9-db255b5f4480/resource/211f6903-1440-438a-9f6c-9718ecf2d3ee/download/liste_elus_montreal.csv (Liste des élu-es de la Ville de Montréal au 2 novembre 2025, modifié 2025-12-15T20:15:52.959031)
+Colonnes : Appellation | Prénom | Nom | Fonction élective | Fonctions additionnelles | Responsabilités CE | Arrondissement | District | Parti | Bureau | Téléphone | Courriel officiel | Historique des changements d'allégeance | Historique des fonctions terminées
+65 membres du conseil municipal (103 élus au total) écrits dans data/elus.json
+  Ensemble Montréal : 34
+  Projet Montréal : 25
+  Équipe LaSalle : 3
+  Équipe Anjou : 2
+  Équipe St-Léonard : 1
+
+=== Conseil d'agglomération ===
+Source : https://donnees.montreal.ca/dataset/da0e81ae-5a30-4919-9b89-ddf66a5e177b/resource/f0fa1aec-71fd-4c77-84e7-025f0bd8c410/download/liste_des-elus-es_aglomeration_elections_2-novembre_2025.csv (modifié 2025-12-15T20:18:51.406683)
+Colonnes : Appellation | Prénom | Nom | Fonction élective | Fonctions additionnelles | Arrondissement / Ville liée | District | Bureau | Téléphone | Courriel officiel | Historique des fonctions terminées
+(pour les Villes liées uniquement)
+
+30 membres écrits dans data/agglomeration.json
+  Montréal : 16
+  Baie-D'Urfé : 1
+  Beaconsfield : 1
+  Côte-Saint-Luc : 1
+  Dollard-Des Ormeaux : 1
+  Dorval : 1
+  Hampstead : 1
+  Kirkland : 1
+  Montréal-Est : 1
+  Montréal-Ouest : 1
+  Mont-Royal : 1
+  Pointe-Claire : 1
+  Sainte-Anne-de-Bellevue : 1
+  Senneville : 1
+  Westmount : 1
+⚠ 30 membres au lieu des 32 sièges attendus — vacance, ou jeu de données modifié.
+
+=== Districts électoraux ===
+Source : https://donnees.montreal.ca/dataset/70acec75-c2b4-4d26-a399-facc7b0ad9bf/resource/fa1f8cfc-cdbf-42fd-9979-32c16b68b5ca/download/districts-electoraux-2025.json (Districts électoraux 2025, modifié 2025-10-20T15:36:15.229218)
+Propriétés : NO_DISTRICT | CODE_DISTRICT | NOM_DISTRICT | NOM_ARR
+58 districts écrits dans data/districts.json
+Contours : 161343 points -> 4716 (6722 ko -> 118 ko)
+
+⚠ Écarts entre les deux sources de la Ville :
+  District « Est » : aucun élu de ville correspondant dans data/elus.json
 
 === robots.txt des sites de la Ville ===
 https://ville.montreal.qc.ca/robots.txt : règles sur nos chemins : allow /
@@ -13,7 +55,7 @@ https://donnees.montreal.ca/robots.txt : règles sur nos chemins : disallow /dat
 https://montreal.ca/robots.txt : rien qui concerne nos chemins
 
 === Calendrier des séances ===
-Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-09-12T23:30:53.369980)
+Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-09-13T23:30:53.202183)
 Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_video_seance
 71 séance(s) de 2026 lue(s) dans le calendrier.
 
@@ -21,16 +63,16 @@ Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_vide
 
 === Calendrier des séances d'arrondissement ===
 118 séance(s) de 2026 déjà connue(s).
-  Ahuntsic-Cartierville                       6 séance(s)  (113 requêtes)
+  Ahuntsic-Cartierville                       7 séance(s), 1 nouvelle(s)  (100 requêtes)
   Anjou                                       8 séance(s)  (42 requêtes)
-  Côte-des-Neiges–Notre-Dame-de-Grâce         6 séance(s)  (226 requêtes)
+  Côte-des-Neiges–Notre-Dame-de-Grâce         6 séance(s)  (228 requêtes)
   Lachine                                     7 séance(s)  (82 requêtes)
-  LaSalle                                     7 séance(s)  (72 requêtes)
+  LaSalle                                     8 séance(s), 1 nouvelle(s)  (58 requêtes)
   L'Île-Bizard–Sainte-Geneviève               7 séance(s)  (82 requêtes)
-  Mercier–Hochelaga-Maisonneuve               5 séance(s)  (155 requêtes)
-  Montréal-Nord                               5 séance(s)  (155 requêtes)
+  Mercier–Hochelaga-Maisonneuve               5 séance(s)  (156 requêtes)
+  Montréal-Nord                               5 séance(s)  (156 requêtes)
   Outremont                                   7 séance(s)  (82 requêtes)
-  Pierrefonds-Roxboro                         7 séance(s)  (73 requêtes)
+  Pierrefonds-Roxboro                         8 séance(s), 1 nouvelle(s)  (62 requêtes)
     ⚠ budget de requêtes épuisé pour Le Plateau-Mont-Royal au mois 6
     Le Plateau-Mont-Royal : rien à l'heure habituelle, essai des autres heures…
     ⚠ budget de requêtes épuisé pour Le Plateau-Mont-Royal au mois 2
@@ -38,18 +80,18 @@ Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_vide
   Rivière-des-Prairies–Pointe-aux-Trembles    7 séance(s)  (82 requêtes)
   Rosemont–La Petite-Patrie                   7 séance(s)  (82 requêtes)
   Saint-Laurent                               7 séance(s)  (84 requêtes)
-  Saint-Léonard                               6 séance(s)  (113 requêtes)
-  Le Sud-Ouest                                6 séance(s)  (113 requêtes)
+  Saint-Léonard                               6 séance(s)  (114 requêtes)
+  Le Sud-Ouest                                6 séance(s)  (114 requêtes)
   Verdun                                      6 séance(s)  (124 requêtes)
   Ville-Marie                                 7 séance(s)  (82 requêtes)
   Villeray–Saint-Michel–Parc-Extension        7 séance(s)  (82 requêtes)
 
-118 séance(s) d'arrondissement pour 2026, en 2409 requête(s).
+121 séance(s) d'arrondissement pour 2026, en 2377 requête(s).
 ⚠ 1 arrondissement(s) sans aucune séance trouvée :
    Le Plateau-Mont-Royal — code ou heure à revoir
 
 === Décisions de l'année ===
-118 séance(s) d'arrondissement au calendrier.
+121 séance(s) d'arrondissement au calendrier.
 CE_2026-09-09_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-09-02_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CG_2026-08-27_16h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -80,8 +122,11 @@ CA_Ver_2026-09-01_19h00 : procès-verbal non publié — pas un PDF — page « 
 CA_Vma_2026-09-01_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Vsm_2026-09-01_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Rpp_2026-09-08_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Ahu_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Las_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Pir_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 
-4080 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 30 en attente de procès-verbal.
+4080 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 33 en attente de procès-verbal.
 0 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
@@ -104,8 +149,8 @@ Pastilles thématiques :
      58  Ressources humaines
     138  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes enregistrés (depuis 2026-07-15) ===
-Fenêtre depuis 2026-07-15 : 0 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
+=== Votes enregistrés (depuis 2026-07-16) ===
+Fenêtre depuis 2026-07-16 : 0 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
 
 14 votes enregistrés écrits dans data/votes.json (0 procès-verbaux analysés).
 1 portent un avertissement d'extraction (à vérifier à la main).
@@ -154,11 +199,11 @@ Mesure de 33 termes sur 100 procès-verbaux de 2026 en cache et 4080 décisions�
   Compétence d'agglomération  (recherche : comp[ée]tence d.agglom[ée]ration)
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-15 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-07-16 pas encore résumés (plafond : 120)…
 0 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
 === Bilan ===
-  étapes         : 8
+  étapes         : 11
   échecs         : aucun
   avertissements : aucun
