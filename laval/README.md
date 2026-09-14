@@ -121,3 +121,11 @@ d'ouverture est dans le nom (`18h33`, `09h03`). Trois voies, par ordre de préf�
    des présences) en essayant les quelques minutes plausibles de l'heure d'ouverture. Possible,
    mais c'est deviner des URL ; seulement si la Ville ne répond pas, et dit comme tel dans le
    courriel.
+
+## Étape 2 — L'entente avec la Ville
+
+- **14 septembre 2026** : courriel envoyé à `donneesouvertes@laval.ca`, greffe en copie. Il demande
+  l'accès du robot identifié à l'index (ou l'index en données ouvertes), confirme l'usage non
+  commercial avec la source citée, et demande l'accord pour rendre le site public.
+- **13 octobre 2026** : fin du délai de 20 jours ouvrables (le 12 est l'Action de grâce). Relance
+  programmée ce jour-là si rien n'est arrivé.
