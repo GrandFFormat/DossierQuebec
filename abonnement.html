@@ -101,7 +101,8 @@
 </div>
 
 <script type="module">
-  import { client, VILLES, mesurer, echapper } from '/commun/abonnes-client.js';
+  import { client, VILLES, mesurer, echapper, boutonRetourEnHaut } from '/commun/abonnes-client.js';
+  boutonRetourEnHaut();
   const ville = new URLSearchParams(location.search).get('ville');
   mesurer('page_abonnement', { ville: VILLES[ville] ? ville : 'aucune' });
 
