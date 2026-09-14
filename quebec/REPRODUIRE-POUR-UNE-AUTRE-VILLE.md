@@ -205,7 +205,8 @@ parfois littéralement dans ses chaînes.
   jamais vers `index.html` (Vercel `cleanUrls` le réécrit sans barre), et `vercel.json`
   redirige `/quebec` vers `/quebec/`.
 - Icône dans l'en-tête de DQ vers le volet municipal ; bouton « ← Retour à DossierQuébec »
-  à côté du logo du volet ; étiquette « Prototype » tant qu'on n'a pas tranché.
+  à côté du logo du volet ; étiquette « Prototype » pendant la construction (retirée de Québec
+  le 14 sept. 2026, une fois le volet jugé stable).
 - Pastilles de sujet : règles par mots-clés sur l'objet, **les sujets avant les véhicules**
   (contrats, finances), puis l'unité administrative, puis « Administration » faute de mieux
   — chaque décision a une pastille, et `themeSource` dit ce qui a tranché. Recompter à
@@ -275,7 +276,7 @@ un navigateur, ou la mettre en secret.
 9. Courriel au greffe ; verrous `noindex` ; publication sous DQ ; icône et bouton retour.
 10. `refresh.js` + workflow ; vérifier un run planifié le lendemain.
 11. README à jour à chaque étape : chaque décision technique y a sa raison.
-12. Le jour de la réponse de la ville : retirer les trois verrous, sitemap, retirer « Prototype ».
+12. Le volet stable : retirer « Prototype ». Le jour de la réponse de la ville : retirer les trois verrous, sitemap.
 
 ## 12. Conventions de travail
 
