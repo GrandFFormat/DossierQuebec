@@ -136,14 +136,6 @@ header { background: var(--entete-fond); border-bottom: 1px solid var(--entete-l
 .titre-ligne a { text-decoration: none; color: inherit; }
 h1 { font-size: 27px; margin: 0; font-weight: 800; letter-spacing: -0.025em; color: var(--entete-encre); }
 .marque { color: var(--accent); }
-/* Étiquette « Prototype » à côté du logo — à retirer le jour où le site est considéré
-   comme définitif. */
-.prototype {
-  display: inline-block; align-self: center;
-  font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
-  color: #16191D; background: var(--vedette);
-  padding: 3px 9px; border-radius: 999px; line-height: 1.5;
-}
 
 /* Retour vers DossierQuébec, à côté du logo — « en attendant » : le volet municipal n'a
    pas encore sa propre entrée, on y arrive depuis DQ et on doit pouvoir y revenir. */
