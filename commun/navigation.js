@@ -33,7 +33,7 @@ export function dernierVolet() {
 // ailleurs ou sur Échap. Une ville ajoutée à VILLES y apparaît toute seule.
 export function menuVilles(details, villeActuelle) {
   if (!details) return;
-  details.innerHTML = `<summary>${villeActuelle ? `Ville : ${echapper(VILLES[villeActuelle])}` : 'Choisir une ville'}</summary>
+  details.innerHTML = `<summary>${villeActuelle ? `<span class="ab-villes-libelle">Ville : </span>${echapper(VILLES[villeActuelle])}` : 'Choisir une ville'}</summary>
     <ul class="ab-villes-menu">
       ${Object.entries(VILLES).map(([v, nom]) => `<li><a href="/${v}/"${v === villeActuelle ? ' aria-current="true"' : ''}>${echapper(nom)}</a></li>`).join('')}
       <li class="ab-villes-dq"><a href="/">DossierQuébec <span>(provincial)</span></a></li>

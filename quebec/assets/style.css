@@ -197,6 +197,11 @@ nav .outils { flex-basis: 100%; justify-content: center; margin-left: 0; padding
   nav .outils .bascule-theme { width: 34px; height: 34px; }
   nav .outils .ab-lien-abonnement { padding: 5px 2px; }
   #texte-pct { display: none; }
+  /* Rien ne dépasse de l'écran : un menu déroulant aux options très longues (« Conseil de
+     l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge ») et les pastilles de nom d'instance
+     élargissaient la page, qui glissait de côté. */
+  select { max-width: 100%; }
+  .puce { max-width: 100%; white-space: normal; }
 }
 
 

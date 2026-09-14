@@ -132,7 +132,8 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-marque span { color: var(--accent); }
 /* Le menu des villes, en haut à droite de chaque page — volets (dans .titre-ligne) et pages
    communes (dans .ab-haut-ligne). Les couleurs viennent de la page ; valeurs de repli sinon. */
-.ab-villes { margin-left: auto; position: relative; font-size: 13.5px; }
+/* margin-top/bottom à zéro : le style des volets donne une marge à tous les <details> (les fiches). */
+.ab-villes { margin: 0 0 0 auto; position: relative; font-size: 13.5px; }
 .ab-villes > summary {
   list-style: none; cursor: pointer; white-space: nowrap; font-weight: 600; line-height: 1.5;
   color: var(--encre, #16191D); background: var(--carte, #fff);
@@ -156,9 +157,22 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-villes-mobile { display: none; }
 @media (max-width: 620px) {
   .titre-ligne > .ab-villes { display: none; }
-  nav .outils .ab-villes-mobile { display: block; margin-left: 0; font-size: 13px; }
-  nav .outils .ab-villes-mobile > summary { padding: 5px 10px; }
   nav .outils .ab-lien-abonnement { display: none; }
+  /* Toute la ligne à la même hauteur (32 px), et assez étroite pour un écran de 320 px ; si
+     elle ne tient quand même pas, elle passe à la ligne plutôt que de déborder. */
+  nav .outils { flex-wrap: wrap; gap: 6px; }
+  /* En flex : un <details> en bloc ajoute une ligne de texte sous son résumé, ce qui le décalait
+     de quelques pixels vers le bas par rapport aux autres pastilles. */
+  nav .outils .ab-villes-mobile { display: flex; align-items: center; margin-left: 0; font-size: 13px; }
+  nav .outils .ab-villes-mobile .ab-villes-libelle { display: none; }
+  nav .outils .ab-mes-dossiers,
+  nav .outils .ab-villes-mobile > summary {
+    box-sizing: border-box; height: 32px; display: inline-flex; align-items: center;
+    padding: 0 10px; font-size: 13px; line-height: 1;
+  }
+  nav .outils .taille-texte { box-sizing: border-box; height: 32px; padding: 2px; }
+  nav .outils .taille-texte button { height: 26px; width: 30px; }
+  nav .outils .bascule-theme { width: 32px; height: 32px; }
 }
 .ab-villes-dq { border-top: 1px solid var(--ligne, #DDE2E7); margin-top: 4px; padding-top: 4px; }
 .ab-villes-dq span { color: var(--doux, #5B6570); font-weight: 400; }
