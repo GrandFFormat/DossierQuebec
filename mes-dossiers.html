@@ -220,8 +220,9 @@
     const li = bouton.closest('li');
     const { ville } = bouton.closest('details.ab-dossier').dataset;
     const etaitOuvert = bouton.getAttribute('aria-expanded') === 'true';
-    for (const b of li.querySelectorAll('[data-action="ref"]')) b.setAttribute('aria-expanded', 'false');
-    li.querySelector(':scope > .ab-ref-panneau')?.remove();
+    // Une seule décision dépliée à la fois, dans toute la page.
+    for (const b of document.querySelectorAll('[data-action="ref"][aria-expanded="true"]')) b.setAttribute('aria-expanded', 'false');
+    for (const p of document.querySelectorAll('.ab-ref-panneau')) p.remove();
     if (etaitOuvert) return;
     bouton.setAttribute('aria-expanded', 'true');
 
@@ -252,7 +253,10 @@
         </div>`;
     }
     // Le clic a pu se refermer entre-temps (double clic rapide).
-    if (bouton.getAttribute('aria-expanded') === 'true' && !li.querySelector(':scope > .ab-ref-panneau')) li.append(panneau);
+    if (bouton.getAttribute('aria-expanded') !== 'true' || document.querySelector('.ab-ref-panneau')) return;
+    li.append(panneau);
+    // Si la décision fermée était plus haut, la page remonte : on garde le numéro cliqué en vue.
+    bouton.scrollIntoView({ block: 'nearest' });
     mesurer('deplier_decision_projet', { ville });
   }
 
