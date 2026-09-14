@@ -18,7 +18,7 @@ create policy "organismes : lire les siens" on public.organismes_suivis for sele
 create policy "organismes : ajouter les siens" on public.organismes_suivis for insert with check (auth.uid() = user_id);
 create policy "organismes : retirer les siens" on public.organismes_suivis for delete using (auth.uid() = user_id);
 
-create or replace function public.limite_organismes_suivis() returns trigger language plpgsql as $$
+create or replace function public.limite_organismes_suivis() returns trigger language plpgsql set search_path = '' as $$
 begin
   if (select count(*) from public.organismes_suivis where user_id = new.user_id) >= 30 then
     raise exception 'limite de 30 organismes suivis atteinte';

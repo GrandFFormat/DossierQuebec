@@ -30,6 +30,8 @@ language sql stable security definer set search_path = public as $$
   where user_id = auth.uid()
     and created_at > now() - interval '30 days';
 $$;
+-- Postgres donne EXECUTE à PUBLIC à la création : un visiteur non connecté n'en a pas besoin.
+revoke execute on function public.my_recent_flag_count() from public, anon;
 grant execute on function public.my_recent_flag_count() to authenticated;
 
 drop policy if exists "insert own flag" on public.bill_flags;
