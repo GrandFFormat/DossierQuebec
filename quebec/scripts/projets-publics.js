@@ -181,3 +181,46 @@ const projetsUtilises = Object.fromEntries([...new Set(attendues.flatMap((d) => 
 const texteAttendues = JSON.stringify({ generatedAt: new Date().toISOString(), themes: themesUtilises, projets: projetsUtilises, decisions: attendues });
 await writeFile('data/attendues.json', texteAttendues, 'utf8');
 console.log(`Décisions attendues : ${attendues.length} dossiers en attente, dont ${attendues.filter((d) => d.echeance).length} avec une date cible · ${(texteAttendues.length / 1024).toFixed(1)} Ko.`);
+
+// ---------- les décisions récentes (alertes par mot-clé) ----------
+// data/recentes.json : chaque dossier qui a bougé dans les 45 derniers jours (le sommaire et ses
+// résolutions comptent une fois), avec ce qu'on cherche dedans (objet et résumé). Lu par
+// api/alertes-projets.js pour les mots-clés des abonnés, et par Mes dossiers pour dire combien de
+// décisions récentes contiennent un mot. FORMAT COMMUN À TOUTES LES VILLES :
+//   { generatedAt, depuis, dossiers: [{ numero, numeros[], date, derniere, instances[],
+//     statutDossier, etapeFinale, echeance, objet, puces[], pdf }] }
+const RECENT_JOURS = 45;
+const plusRecente = decisions.decisions.map((d) => d.date).filter(Boolean).sort().pop() ?? new Date().toISOString().slice(0, 10);
+const depuisRecent = new Date(Date.parse(plusRecente) - RECENT_JOURS * 864e5).toISOString().slice(0, 10);
+const groupesRecents = new Map();
+for (const d of decisions.decisions) {
+  if (PAS_UN_DOSSIER.has(d.type)) continue;
+  const k = d.sommaireId ?? d.id;
+  if (!groupesRecents.has(k)) groupesRecents.set(k, []);
+  groupesRecents.get(k).push(d);
+}
+const recentes = [...groupesRecents.entries()]
+  .map(([k, groupe]) => {
+    groupe.sort(parDate);
+    const principal = groupe.find((d) => d.id === k) ?? groupe[0];
+    const resume = resumeDe.get(k);
+    return {
+      numero: principal.numero ?? null,
+      numeros: [...new Set(groupe.map((d) => d.numero).filter(Boolean))],
+      date: principal.date ?? null,
+      derniere: groupe.at(-1).date ?? null,
+      instances: [...new Set(groupe.map((d) => d.instance).filter(Boolean))],
+      statutDossier: principal.statutDossier ?? null,
+      etapeFinale: principal.etapeFinale ?? null,
+      echeance: principal.echeance ?? null,
+      objet: principal.objet ?? null,
+      puces: resume?.puces?.length && !resume.sansContenuSubstantiel ? resume.puces : [],
+      pdf: principal.pdf ?? null,
+      resolutions: groupe.filter((d) => d.instance).map((d) => ({ numero: d.numero ?? null, instance: d.instance, date: d.date ?? null })),
+    };
+  })
+  .filter((d) => d.numero && (d.derniere ?? '') >= depuisRecent)
+  .sort((a, b) => (b.derniere ?? '').localeCompare(a.derniere ?? ''));
+const texteRecentes = JSON.stringify({ generatedAt: new Date().toISOString(), depuis: depuisRecent, dossiers: recentes });
+await writeFile('data/recentes.json', texteRecentes, 'utf8');
+console.log(`Décisions récentes : ${recentes.length} dossiers depuis le ${depuisRecent} · ${(texteRecentes.length / 1024).toFixed(0)} Ko.`);

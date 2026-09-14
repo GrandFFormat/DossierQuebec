@@ -277,6 +277,14 @@ des sous-dossiers de dossierquebec.ca : la session Supabase ouverte sur une page
   peut s'envoyer un essai (3 par 24 h) ; chaque courriel a un lien signé « Ne plus recevoir ces
   alertes » (`api/alertes-desabonnement.js`, aussi en un clic pour les messageries).
   Tables : `scripts/supabase-schema-alertes.sql`.
+- **Alertes par mot-clé (abonnés).** Dans Mes dossiers, jusqu'à 20 mots (« 1re Avenue », « Limoilou »,
+  « déneigement ») dans la table `alertes_mots_cles` (`scripts/supabase-schema-mots-cles.sql`). Le
+  même courriel du matin y ajoute les dossiers récents dont l'objet ou le résumé contient le mot —
+  mot entier, sans accents ni majuscules (`contientMot`) — lus dans `data/recentes.json` (dossiers
+  qui ont bougé dans les 45 derniers jours, écrit par `projets-publics.js`). Déjà signalé : dans
+  `alertes_etat` sous « mot_<id> » ; un mot tout juste ajouté est mémorisé sans courriel ; un dossier
+  déjà signalé pour un projet dans le même courriel n'est pas répété. Sans la table, les alertes de
+  projets partent quand même.
 - **À l'agenda des conseils (abonnés).** `scripts/projets-publics.js` écrit `data/attendues.json` : chaque
   sommaire encore en attente d'une décision finale, avec l'instance qui doit décider (regroupée :
   conseil de la ville, d'agglomération, comité exécutif, arrondissements), la date cible écrite
