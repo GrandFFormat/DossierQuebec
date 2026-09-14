@@ -158,7 +158,7 @@
           <br><span class="ab-note">Offert pour les dossiers avec un montant : ceux des grands projets suivis, et chaque nouveau dossier depuis le 15 septembre 2026. Les autres dossiers de 2026 ne l'ont pas encore.</span></li>
         <li><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : « tout ce que la Ville décide sur la 1re Avenue », « dans Limoilou », « sur le déneigement ».</li>
         <li><strong>Suivre un organisme ou une entreprise</strong> : les décisions de l'année qui le nomment — contrats, subventions, ententes — avec le montant de chacune tel qu'écrit, et une alerte quand une nouvelle le nomme.</li>
-        <li><strong>L'agenda des conseils</strong> <span class="ab-note">(approximatif)</span> : ce qui s'en vient à chaque conseil, avec son résumé, et ce qui sera probablement présenté à la prochaine séance.</li>
+        <li><strong>L'agenda des conseils</strong> (<em class="ab-mise-en-garde">approximatif</em>) : ce qui s'en vient à chaque conseil, avec son résumé, et ce qui sera <em class="ab-mise-en-garde">probablement</em> présenté à la prochaine séance.</li>
         <li><strong>L'export en tableur ou en PDF</strong> (Excel, CSV ou PDF à imprimer) : vous choisissez un projet, un mot ou un nom et les colonnes, avec le détail de l'argent quand il est lu.</li>`;
 
   // ---------- alertes par courriel (abonnés) ----------
@@ -747,7 +747,7 @@ ${liste.map(fiche).join('')}
     };
 
     zone.innerHTML = `<section class="ab-carte ab-ouverts">
-      <h2 style="margin-top:0;margin-bottom:2px">À l'agenda des conseils <span class="ab-h2-precision">(approximatif)</span></h2>
+      <h2 style="margin-top:0;margin-bottom:2px">À l'agenda des conseils <span class="ab-h2-precision">(<em class="ab-mise-en-garde">approximatif</em>)</span></h2>
       <p class="ab-note" style="margin:0 0 12px">Tiré des documents PDF et du portail de la Ville.</p>
       <p class="ab-chapeau" style="margin-bottom:12px">Les dossiers qui attendent encore le vote d'un conseil. Ceux qui ont une date cible passeront <em class="ab-mise-en-garde">probablement</em> à la prochaine séance, mais <em class="ab-mise-en-garde">ce n'est pas l'ordre du jour officiel</em> : un dossier peut être reporté.</p>
       <label class="ab-choix-instance">Instance
