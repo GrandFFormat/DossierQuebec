@@ -1,21 +1,23 @@
 {
- "generatedAt": "2026-09-11T14:12:23.165Z",
+ "generatedAt": "2026-09-14T11:27:17.738Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
  "parametres": {
   "annee": "2026",
-  "max": 1500,
-  "batch": true
+  "max": 40,
+  "batch": false,
+  "depuis": "2026-01-01",
+  "plafond": 40
  },
- "nombre": 1500,
- "genereCetteFois": 1450,
+ "nombre": 1502,
+ "genereCetteFois": 1,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 30.1156,
-  "jetonsEntree": 8582419,
-  "jetonsSortie": 692766
+  "montant": 0.0307,
+  "jetonsEntree": 3674,
+  "jetonsSortie": 492
  },
  "resumes": [
   {
@@ -478,32 +480,6 @@
    }
   },
   {
-   "id": "AP2026-300.pdf",
-   "numero": "AP2026-300",
-   "date": "2026-09-09",
-   "unite": "Approvisionnements",
-   "objet": "Conclusion d'une entente entre la Ville de Québec et l'organisme Loisirs et Sports Neufchâtel inc. relativement à la fourniture de services d'entretien sanitaire (Dossier 96410)",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-300.pdf",
-   "puces": [
-    "La Ville de Québec confie l'entretien sanitaire de b\ntiments \n l'organisme Loisirs et Sports Neufch\ntel inc.",
-    "Les services touchent des lieux et \nquipements r\ncr\natifs ou sportifs de l'arrondissement des Rivi\nres.",
-    "L'entente couvre 24 mois, du 1er octobre 2026 au 30 septembre 2028.",
-    "Le contrat vaut 219 235,61 $ (plus TPS et TVQ); la d\npense nette pour la Ville est de 230 169,97 $.",
-    "Les sommes se r\npartissent ainsi : 28 024,61 $ en 2026, 113 591,96 $ en 2027 et 88 553,40 $ en 2028 (taxes nettes).",
-    "Les montants de 2027 et 2028 d\npendent de l'adoption des budgets de ces ann\nes.",
-    "Cette entente remplace la pr\nc\ndente, qui se termine le 30 septembre 2026."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "219 235,61 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T11:23:00.324Z",
-   "jetons": {
-    "entree": 7295,
-    "sortie": 441
-   }
-  },
-  {
    "id": "DE2026-342.pdf",
    "numero": "DE2026-342",
    "date": "2026-09-09",
@@ -837,6 +813,32 @@
    }
   },
   {
+   "id": "AP2026-300.pdf",
+   "numero": "AP2026-300",
+   "date": "2026-09-09",
+   "unite": "Approvisionnements",
+   "objet": "Conclusion d'une entente entre la Ville de Québec et l'organisme Loisirs et Sports Neufchâtel inc. relativement à la fourniture de services d'entretien sanitaire (Dossier 96410)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-300.pdf",
+   "puces": [
+    "La Ville de Québec confie l'entretien sanitaire de bâtiments de l'arrondissement des Rivières à l'organisme Loisirs et Sports Neufchâtel inc.",
+    "Le contrat couvre 24 mois, du 1er octobre 2026 au 30 septembre 2028.",
+    "La somme prévue est de 219 235,61 $, plus TPS et TVQ; la dépense nette est de 230 169,97 $.",
+    "Les versements se répartissent ainsi : 28 024,61 $ en 2026, 113 591,96 $ en 2027 et 88 553,40 $ en 2028 (taxes nettes).",
+    "Les sommes de 2027 et 2028 dépendent de l'approbation des budgets de ces années.",
+    "L'entente remplace la précédente, qui prend fin le 30 septembre 2026.",
+    "Le conseil de la ville doit se prononcer le 15 septembre 2026; le directeur du Service des approvisionnements signerait l'entente."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "219 235,61 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:53.780Z",
+   "jetons": {
+    "entree": 7295,
+    "sortie": 432
+   }
+  },
+  {
    "id": "DE2026-336.pdf",
    "numero": "DE2026-336",
    "date": "2026-09-08",
@@ -1011,30 +1013,6 @@
    "jetons": {
     "entree": 6654,
     "sortie": 416
-   }
-  },
-  {
-   "id": "AP2026-310.pdf",
-   "numero": "AP2026-310",
-   "date": "2026-09-02",
-   "unite": "Approvisionnements",
-   "objet": "Dépôt des listes des contrats octroyés, des dépenses autorisées et d'autres pouvoirs exercés par un employé pour le mois de juin 2026",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-310.pdf",
-   "puces": [
-    "Le conseil de ville prend acte des listes de contrats et de d\ferpenses autoris\fe9s par des employ\fe9s de la Ville pour juin 2026.",
-    "En juin 2026, la Ville a accord\fe9 176 contrats de plus de 25 000 $, pour un total de 123 960 768,11 $.",
-    "Des employ\fe9s ayant une d\fe9l\fe9gation ont autoris\fe9 pour 26 168 717,89 $ de d\fe9penses durant le mois.",
-    "Les listes d\fe9pos\fe9es couvrent aussi les contrats r\fe9sili\fe9s, les appels d'offres annul\fe9s apr\fe8s l'ouverture des soumissions et les d\fe9penses suppl\fe9mentaires par avis de modification.",
-    "La liste des contrats de 25 000 $ et plus de juin 2026 est publi\fe9e sur le site Internet de la Ville."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "123 960 768,11 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T11:23:39.133Z",
-   "jetons": {
-    "entree": 8502,
-    "sortie": 424
    }
   },
   {
@@ -1445,6 +1423,30 @@
    "jetons": {
     "entree": 3707,
     "sortie": 425
+   }
+  },
+  {
+   "id": "AP2026-310.pdf",
+   "numero": "AP2026-310",
+   "date": "2026-09-02",
+   "unite": "Approvisionnements",
+   "objet": "Dépôt des listes des contrats octroyés, des dépenses autorisées et d'autres pouvoirs exercés par un employé pour le mois de juin 2026",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-310.pdf",
+   "puces": [
+    "La Ville dépose au conseil les listes des contrats et des dépenses autorisés par ses employés pour le mois de juin 2026.",
+    "En juin 2026, 176 contrats de plus de 25 000 $ ont été accordés, pour un total de 123 960 768,11 $.",
+    "Des employés détenant une délégation ont autorisé 26 168 717,89 $ de dépenses durant le même mois.",
+    "Le dépôt comprend aussi les listes des contrats résiliés, des appels d'offres annulés après l'ouverture des soumissions et des dépenses supplémentaires par avis de modification.",
+    "Les montants indiqués excluent les taxes; la liste des contrats de 25 000 $ et plus est publiée sur le site Internet de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "123 960 768,11 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:24:57.746Z",
+   "jetons": {
+    "entree": 8502,
+    "sortie": 356
    }
   },
   {
@@ -3083,30 +3085,6 @@
    }
   },
   {
-   "id": "GT2026-265.pdf",
-   "numero": "GT2026-265",
-   "date": "2026-08-27",
-   "unite": "Gestion du territoire",
-   "objet": "Demande de dérogation mineure pour la propriété sise au 1400, avenue Joseph-Rousseau, lot 2 075 696, quartier de Sillery, district électoral de Saint-Louis-Sillery, Arrondissement de Sainte-Foy-Sillery-Cap-Rouge",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-265.pdf",
-   "puces": [
-    "Le conseil d'arrondissement de Sainte-Foy\ninSillery\ninCap-Rouge accorde une d\ninrogation mineure au 1400, avenue Joseph-Rousseau, dans le quartier de Sillery.",
-    "Le propri\ninaire peut reconstruire un garage attach\nin qui empi\nine de 2,0 m\ninres dans la marge avant secondaire du c\nint\nin de la rue de Bergerville, ce que le r\ninglement n'autorise pas.",
-    "Le garage pourra aussi \ninre implant\nin \nin 3,5 m\ninres du trottoir, au lieu du minimum de 4,0 m\ninres exig\nin.",
-    "Le comit\nin consultatif d'urbanisme s'est prononc\nin en faveur de la demande le 11 ao\ninnt 2026, \nin l'unanimit\nin.",
-    "Selon l'analyse, la forme irr\ninguli\ninre du terrain (lot d'angle transversal avec trois marges avant) emp\ninche de respecter les normes."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.111Z",
-   "jetons": {
-    "entree": 6191,
-    "sortie": 458
-   }
-  },
-  {
    "id": "TM2026-157.pdf",
    "numero": "TM2026-157",
    "date": "2026-08-27",
@@ -3556,6 +3534,31 @@
    "jetons": {
     "entree": 3721,
     "sortie": 382
+   }
+  },
+  {
+   "id": "GT2026-265.pdf",
+   "numero": "GT2026-265",
+   "date": "2026-08-27",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 1400, avenue Joseph-Rousseau, lot 2 075 696, quartier de Sillery, district électoral de Saint-Louis-Sillery, Arrondissement de Sainte-Foy-Sillery-Cap-Rouge",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-265.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure au 1400, avenue Joseph-Rousseau, dans le quartier de Sillery, pour permettre la construction d'un garage attaché.",
+    "Le garage pourra empiéter de 2,0 mètres dans la marge avant secondaire donnant sur la rue de Bergerville, ce que le règlement d'urbanisme interdit normalement.",
+    "Le garage pourra aussi être implanté à 3,5 mètres du trottoir, au lieu du minimum de 4,0 mètres exigé.",
+    "Le comité consultatif d'urbanisme a recommandé d'accorder la dérogation le 11 août 2026, et le conseil d'arrondissement a adopté la décision le 27 août 2026.",
+    "Selon l'analyse, la forme irrégulière du terrain, un lot d'angle transversal avec trois marges avant, limite les endroits où un garage conforme pourrait être construit.",
+    "Le garage actuel sera démoli et reconstruit; le document ne prévoit aucun impact financier pour la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:54.509Z",
+   "jetons": {
+    "entree": 6191,
+    "sortie": 452
    }
   },
   {
@@ -5682,31 +5685,6 @@
    }
   },
   {
-   "id": "CU2026-065.pdf",
-   "numero": "CU2026-065",
-   "date": "2026-08-19",
-   "unite": "Culture et patrimoine",
-   "objet": "Attribution d'un toponyme - Parc du Petit-Singe - District électoral de Cap-Rouge-Laurentien - Arrondissement de Sainte-Foy-Sillery-Cap-Rouge",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-065.pdf",
-   "puces": [
-    "La Ville donne officiellement le nom de « parc du Petit-Singe » \nà un parc de voisinage situé sur la rue Monty, dans le quartier de l'Aéroport.",
-    "Le parc se trouve dans l'arrondissement de Sainte-Foy–Sillery–Cap-Rouge, district de Cap-Rouge–Laurentien.",
-    "Le nom fait référence à la rue Monty, qui rappelle le maréchal britannique Bernard Law Montgomery (1887-1976), surnommé « Monkey » durant son enfance.",
-    "Le Comité de commémoration et de toponymie a proposé ce nom pour évoquer aussi l'univers du jeu et de l'enfance.",
-    "La Commission de toponymie du Québec a été consultée pour vérifier l'orthographe du nom.",
-    "Le document ne mentionne aucun impact financier."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.141Z",
-   "jetons": {
-    "entree": 3913,
-    "sortie": 388
-   }
-  },
-  {
    "id": "PI2026-004.pdf",
    "numero": "PI2026-004",
    "date": "2026-08-19",
@@ -6192,6 +6170,31 @@
    }
   },
   {
+   "id": "CU2026-065.pdf",
+   "numero": "CU2026-065",
+   "date": "2026-08-19",
+   "unite": "Culture et patrimoine",
+   "objet": "Attribution d'un toponyme - Parc du Petit-Singe - District électoral de Cap-Rouge-Laurentien - Arrondissement de Sainte-Foy-Sillery-Cap-Rouge",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-065.pdf",
+   "puces": [
+    "La Ville donne un nom officiel à un parc de voisinage situé sur la rue Monty, dans le quartier de l'Aéroport, à Sainte-Foy–Sillery–Cap-Rouge.",
+    "Le parc s'appellera « parc du Petit-Singe ».",
+    "Le nom fait écho à la rue Monty voisine, qui rappelle le maréchal britannique Bernard Law Montgomery (1887-1976), surnommé « Monkey » dans son enfance.",
+    "Le Comité de commémoration et de toponymie a proposé ce nom pour lier la vocation familiale du parc au thème de la rue.",
+    "La Commission de toponymie du Québec a été consultée pour vérifier l'orthographe.",
+    "Le document ne mentionne aucun impact financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:53.053Z",
+   "jetons": {
+    "entree": 3913,
+    "sortie": 357
+   }
+  },
+  {
    "id": "AP2026-177.pdf",
    "numero": "AP2026-177",
    "date": "2026-07-29",
@@ -6645,32 +6648,6 @@
    }
   },
   {
-   "id": "TM2026-009.pdf",
-   "numero": "TM2026-009",
-   "date": "2026-07-09",
-   "unite": "Transport et mobilité intelligente",
-   "objet": "Ordonnances numéros O-1514, O-1515 et O1516 concernant des modifications aux règles portant sur le stationnement et la circulation sur le réseau local relativement à la rue des Embarcations - Arrondissement de La Cité-Limoilou - District électoral de Saint-Roch-Saint-Sauveur",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-009.pdf",
-   "puces": [
-    "La rue des Embarcations, dans Saint-Roch\t–\tSaint-Sauveur, devient officiellement une « rue partagée » après les travaux réalisés en 2025.",
-    "La limite de vitesse passe de 30 km/h à 20 km/h sur la rue, à partir de la rue du Chalutier.",
-    "Environ 31 places de stationnement disparaissent dans le rond de virée, où il n'est plus possible de se garer en angle droit.",
-    "De nouvelles zones de stationnement interdit sont créées pour permettre aux véhicules de se croiser dans la rue rétrécie.",
-    "Une portion de 20 m reste réservée aux véhicules avec vignette et une portion de 13 m garde le stationnement limité à 60 minutes, de 9 h à 17 h, du lundi au vendredi.",
-    "Un arrêt obligatoire est ajouté à l'approche ouest de la nouvelle intersection créée sur la rue.",
-    "Les travaux ont inclus la réfection du tronçon à l'est de la rue du Chalutier, des gonflements de trottoir et le rétrécissement de la voie."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.144Z",
-   "jetons": {
-    "entree": 6389,
-    "sortie": 473
-   }
-  },
-  {
    "id": "TM2026-093.pdf",
    "numero": "TM2026-093",
    "date": "2026-07-09",
@@ -6792,6 +6769,31 @@
    "jetons": {
     "entree": 9387,
     "sortie": 516
+   }
+  },
+  {
+   "id": "TM2026-009.pdf",
+   "numero": "TM2026-009",
+   "date": "2026-07-09",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnances numéros O-1514, O-1515 et O1516 concernant des modifications aux règles portant sur le stationnement et la circulation sur le réseau local relativement à la rue des Embarcations - Arrondissement de La Cité-Limoilou - District électoral de Saint-Roch-Saint-Sauveur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-009.pdf",
+   "puces": [
+    "La rue des Embarcations, dans Saint-Roch–Saint-Sauveur, devient officiellement une rue partagée après les travaux réalisés en 2025.",
+    "La limite de vitesse passe de 30 km/h à 20 km/h sur la rue, à partir de la rue du Chalutier.",
+    "Environ 31 places de stationnement disparaissent dans le rond de virée, où le stationnement en angle droit n'est plus possible.",
+    "De nouvelles zones de stationnement interdit sont créées pour permettre aux véhicules de se croiser dans la voie rétrécie.",
+    "Une section de 20 m reste réservée aux véhicules avec vignette ou permis, et une section de 13 m est limitée à 60 minutes, de 9 h à 17 h, du lundi au vendredi.",
+    "Un arrêt obligatoire est ajouté à l'approche ouest de la nouvelle intersection créée sur la rue."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:24:59.307Z",
+   "jetons": {
+    "entree": 6389,
+    "sortie": 406
    }
   },
   {
@@ -7480,27 +7482,6 @@
    "jetons": {
     "entree": 7430,
     "sortie": 510
-   }
-  },
-  {
-   "id": "LS2026-165.pdf",
-   "numero": "LS2026-165",
-   "date": "2026-07-08",
-   "unite": "Loisirs, sports et vie communautaire",
-   "objet": "Versement d'une subvention de 16 000 $ à l'organisme Festival Marocain de Québec dans le cadre d'un appel de projet pilote lié à la réalisation d'événements interculturels à l'été 2026 sur le territoire de la ville de Québec",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-165.pdf",
-   "puces": [
-    "La Ville verse 16 000 $ au Festival Marocain de Qu\bebec pour la tenue de son \ne0v\ne8nement \nc3\ne0 l'\nc3\ne9t\nc3\ne9 2026.",
-    "Le festival en est \nc3\ne0 sa 5e \nc3\ne9dition."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "16 000 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.127Z",
-   "jetons": {
-    "entree": 3388,
-    "sortie": 209
    }
   },
   {
@@ -8501,6 +8482,32 @@
    }
   },
   {
+   "id": "LS2026-165.pdf",
+   "numero": "LS2026-165",
+   "date": "2026-07-08",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement d'une subvention de 16 000 $ à l'organisme Festival Marocain de Québec dans le cadre d'un appel de projet pilote lié à la réalisation d'événements interculturels à l'été 2026 sur le territoire de la ville de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-165.pdf",
+   "puces": [
+    "La Ville verse 16 000 $ au Festival Marocain de Québec pour tenir un événement interculturel à l'été 2026.",
+    "Le festival en est à sa 5e édition et se tiendra du 4 au 6 septembre 2026 au parc Roland-Beaudin.",
+    "L'événement propose de la musique, de la danse, des traditions, de la gastronomie et de l'artisanat marocains.",
+    "La subvention vient d'un appel de projets sur invitation, un projet pilote pour ajouter des événements interculturels à Québec.",
+    "L'argent provient du Fonds des grands événements et événements spéciaux du Service des loisirs, des sports et de la vie communautaire.",
+    "Le formulaire de dépôt remplace l'entente : aucun contrat séparé n'est joint.",
+    "En 2024, l'organisme avait reçu 8 000 $ de la Ville pour son festival."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "16 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:37.473Z",
+   "jetons": {
+    "entree": 3388,
+    "sortie": 398
+   }
+  },
+  {
    "id": "DE2026-214.pdf",
    "numero": "DE2026-214",
    "date": "2026-07-07",
@@ -8780,31 +8787,6 @@
    "jetons": {
     "entree": 4421,
     "sortie": 479
-   }
-  },
-  {
-   "id": "DG2026-020.pdf",
-   "numero": "DG2026-020",
-   "date": "2026-07-07",
-   "unite": "Direction générale",
-   "objet": "Versement d'une subvention à Centraide",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DG2026-020.pdf",
-   "puces": [
-    "La Ville verse 245 000 $ à Centraide Qu\ftbec et Chaudi\fre-Appalaches pour la campagne 2026.",
-    "Le don corporatif passe de 175 000 $ en 2025 \ta 190 000 $ en 2026.",
-    "La Ville maintient \ta 30 000 $ sa contribution au Fonds d'impact Essentiel, qui soutient des organismes en s\fcurit\f alimentaire, en logement et en accompagnement de personnes en difficult\f.",
-    "Elle maintient aussi \ta 25 000 $ sa participation au programme de leadership Charg\fs partenaires Centraide, qui fournit du personnel pendant la campagne de financement.",
-    "Les subventions des ann\fes pr\fc\fdentes \ftaient de 205 000 $ (2022 et 2023) et de 230 000 $ (2024 et 2025).",
-    "L'argent provient enti\frement de la Ville, via l'activit\f \ftGgG\ftrer les subventions\ftg."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "245 000 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.128Z",
-   "jetons": {
-    "entree": 3450,
-    "sortie": 446
    }
   },
   {
@@ -9244,6 +9226,31 @@
    "jetons": {
     "entree": 6936,
     "sortie": 468
+   }
+  },
+  {
+   "id": "DG2026-020.pdf",
+   "numero": "DG2026-020",
+   "date": "2026-07-07",
+   "unite": "Direction générale",
+   "objet": "Versement d'une subvention à Centraide",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DG2026-020.pdf",
+   "puces": [
+    "La Ville de Québec verse 245 000 $ à Centraide Québec et Chaudière-Appalaches pour la campagne 2026.",
+    "Le don corporatif passe de 175 000 $ en 2025 à 190 000 $ en 2026.",
+    "La Ville maintient sa contribution de 30 000 $ au Fonds d'impact Essentiel, qui soutient des organismes en sécurité alimentaire, en logement et en accompagnement de personnes en difficulté.",
+    "Elle maintient aussi 25 000 $ pour le programme de leadership Chargés partenaires, qui fournit du personnel à Centraide pendant la campagne d'automne.",
+    "La subvention totale était de 230 000 $ en 2024 et en 2025.",
+    "L'argent vient des fonds de la Ville, au poste « Gérer les subventions »."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "245 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:24:50.271Z",
+   "jetons": {
+    "entree": 3450,
+    "sortie": 379
    }
   },
   {
@@ -10967,31 +10974,6 @@
    }
   },
   {
-   "id": "GT2026-234.pdf",
-   "numero": "GT2026-234",
-   "date": "2026-07-02",
-   "unite": "Gestion du territoire",
-   "objet": "Demandes assujetties à un règlement relatif aux PIIA - Arrondissement de La Haute-Saint-Charles",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-234.pdf",
-   "puces": [
-    "Le conseil de l'Arrondissement de La Haute-Saint-Charles approuve les plans d'architecture et d'implantation de 5 projets de construction ou d'agrandissement.",
-    "Quatre projets concernent la construction de bâtiments isolés de plusieurs logements sur le boulevard Pie-XI Sud, dans le district de Val-Bélair : aux 1239, 1245, 1241A-1241J, ainsi qu'aux 1247A-1247F et 1249A-1249F.",
-    "Un projet concerne l'agrandissement d'un bâtiment industriel au 9205, rue John-Simons, dans le district de Loretteville\ru2212Les Châtels.",
-    "Aucune demande n'est listée pour le district de Lac-Saint-Charles\ru2212Saint-Émile.",
-    "Ces approbations sont la condition pour que les permis de construction puissent être délivrés.",
-    "Le comité consultatif d'urbanisme avait donné un avis favorable à toutes ces demandes lors de sa séance du 15 juin 2026."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.140Z",
-   "jetons": {
-    "entree": 4137,
-    "sortie": 450
-   }
-  },
-  {
    "id": "TM2026-169.pdf",
    "numero": "TM2026-169",
    "date": "2026-07-02",
@@ -11449,6 +11431,30 @@
    }
   },
   {
+   "id": "GT2026-234.pdf",
+   "numero": "GT2026-234",
+   "date": "2026-07-02",
+   "unite": "Gestion du territoire",
+   "objet": "Demandes assujetties à un règlement relatif aux PIIA - Arrondissement de La Haute-Saint-Charles",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-234.pdf",
+   "puces": [
+    "L'arrondissement de La Haute-Saint-Charles approuve cinq projets de construction ou d'agrandissement soumis à l'examen architectural (PIIA).",
+    "Quatre projets concernent la construction de bâtiments isolés de plusieurs logements sur le boulevard Pie-XI Sud, dans le district de Val-Bélair (aux numéros 1239, 1241A-1241J, 1245, et 1247A-1247F / 1249A-1249F).",
+    "Un projet vise l'agrandissement d'un bâtiment industriel au 9205, rue John-Simons, dans le district de Loretteville/Les Châtels.",
+    "Le comité consultatif d'urbanisme avait donné un avis favorable à ces demandes lors de sa séance du 15 juin 2026.",
+    "L'approbation des plans permet la délivrance des permis pour ces travaux."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:34.536Z",
+   "jetons": {
+    "entree": 4137,
+    "sortie": 387
+   }
+  },
+  {
    "id": "AP2026-226.pdf",
    "numero": "AP2026-226",
    "date": "2026-06-25",
@@ -11524,31 +11530,6 @@
    "jetons": {
     "entree": 7678,
     "sortie": 538
-   }
-  },
-  {
-   "id": "LS2026-122.pdf",
-   "numero": "LS2026-122",
-   "date": "2026-06-25",
-   "unite": "Loisirs, sports et vie communautaire",
-   "objet": "Autorisation de conclure une entente entre la Ville de Québec et l'Institut canadien de Québec relative au versement d'un soutien financier total de 299 000 $, pour les années 2026, 2027 et 2028, afin de maintenir l'intervention sociale en bibliothèque",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-122.pdf",
-   "puces": [
-    "La Ville de Québec versera 299 000 $ à l'Institut canadien de Qu\rébec sur trois ans pour garder des intervenants sociaux \rà la biblioth\rèque Gabrielle-Roy, dans Saint-Roch.",
-    "L'argent sera r\réparti ainsi : 39 000 $ en 2026, 130 000 $ en 2027 et 130 000 $ en 2028, sous r\réserve de l'approbation des budgets 2027 et 2028.",
-    "Les intervenants accompagnent les personnes en situation d'itin\rérance ou \rà risque de l'\rêtre et les dirigent vers les ressources communautaires.",
-    "Le projet, lanc\ré comme projet pilote en 2024, a men\ré \rà plus de 1500 interventions par ann\rée selon la Ville.",
-    "Une ressource suppl\rémentaire a \rét\ré embauch\rée en 2025 pour assurer une pr\résence pendant les heures d'ouverture.",
-    "L'Institut canadien de Qu\rébec devra rendre des comptes selon les exigences pr\révues \rà l'entente."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "299 000 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.073Z",
-   "jetons": {
-    "entree": 7664,
-    "sortie": 562
    }
   },
   {
@@ -12238,6 +12219,31 @@
    }
   },
   {
+   "id": "LS2026-122.pdf",
+   "numero": "LS2026-122",
+   "date": "2026-06-25",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Autorisation de conclure une entente entre la Ville de Québec et l'Institut canadien de Québec relative au versement d'un soutien financier total de 299 000 $, pour les années 2026, 2027 et 2028, afin de maintenir l'intervention sociale en bibliothèque",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-122.pdf",
+   "puces": [
+    "La Ville de Québec versera 299 000 $ à l'Institut canadien de Québec sur trois ans pour garder des intervenants sociaux à la bibliothèque Gabrielle-Roy, dans Saint-Roch.",
+    "Les versements se répartissent ainsi : 39 000 $ en 2026, 130 000 $ en 2027 et 130 000 $ en 2028, sous réserve de l'approbation des budgets 2027 et 2028.",
+    "Les intervenants accompagnent les personnes en situation d'itinérance ou à risque de l'être, les réfèrent vers des ressources communautaires et soutiennent le personnel de la bibliothèque.",
+    "Le document indique plus de 1500 interventions par année depuis le lancement du projet en 2024, et une ressource supplémentaire embauchée en 2025.",
+    "L'organisme devra rendre des comptes selon les exigences prévues à l'entente.",
+    "La décision relève du conseil d'agglomération de Québec."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "299 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:34.793Z",
+   "jetons": {
+    "entree": 7664,
+    "sortie": 429
+   }
+  },
+  {
    "id": "GT2026-192.pdf",
    "numero": "GT2026-192",
    "date": "2026-06-23",
@@ -12308,31 +12314,6 @@
    "jetons": {
     "entree": 3598,
     "sortie": 322
-   }
-  },
-  {
-   "id": "GT2026-184.pdf",
-   "numero": "GT2026-184",
-   "date": "2026-06-23",
-   "unite": "Gestion du territoire",
-   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement des Rivières sur l'urbanisme relativement à la zone 21543Ha, R.C.A.2V.Q. 441 (8720, rue Colette-Samson, quartier de Neufchâtel Est-Lebourgneuf, district électoral de Neufchâtel-Lebourgneuf)",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-184.pdf",
-   "puces": [
-    "La Ville modifie le zonage d'un secteur de la rue Colette-Samson, dans le quartier de Neufch\ttel Est-Lebourgneuf (arrondissement des Rivi\tres).",
-    "Elle retire l'obligation d'un \tcran visuel de 2 m\ttres en cour arri\tre, qui emp\tchait toute construction (cabanon, garage, piscine) sur cette bande et imposait une rang\tte d'arbres \t feuillage persistant.",
-    "La fiche explique que cet \tcran est adjacent \t un terrain appartenant \t Hydro-Qu\tbec et que la plupart des r\tsidences ont d\tj\t des b\ttiments dans cette bande.",
-    "La marge arri\tre exig\tte passe de 9 m\ttres \t 6 m\ttres, ce qui laisse plus de place pour am\tnager les cours arri\tre.",
-    "Le r\tglement contient des dispositions susceptibles d'approbation r\tf\trendaire.",
-    "Le conseil de quartier de Neufch\ttel Est-Lebourgneuf donnera son opinion et tiendra l'assembl\tte publique de consultation; les personnes int\tress\ttes auront sept jours apr\ts cette assembl\tte pour \tcrire leurs observations."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.128Z",
-   "jetons": {
-    "entree": 9110,
-    "sortie": 539
    }
   },
   {
@@ -12632,6 +12613,32 @@
    "jetons": {
     "entree": 5593,
     "sortie": 445
+   }
+  },
+  {
+   "id": "GT2026-184.pdf",
+   "numero": "GT2026-184",
+   "date": "2026-06-23",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement des Rivières sur l'urbanisme relativement à la zone 21543Ha, R.C.A.2V.Q. 441 (8720, rue Colette-Samson, quartier de Neufchâtel Est-Lebourgneuf, district électoral de Neufchâtel-Lebourgneuf)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-184.pdf",
+   "puces": [
+    "La Ville modifie les règles d'urbanisme pour la zone 21543Ha, située au 8720, rue Colette-Samson, dans le quartier de Neufchâtel Est–Lebourgneuf.",
+    "Elle retire l'écran visuel de 2 mètres exigé en cour arrière, à la limite ouest des terrains de la rue Colette-Samson, qui est voisine d'un terrain d'Hydro-Québec.",
+    "Cet écran empêchait toute construction (cabanon, garage, piscine) sur 2 mètres et obligeait à planter une rangée d'arbres à feuillage persistant.",
+    "Elle réduit la marge arrière exigée de 9 mètres à 6 mètres, ce qui laisse plus de place pour aménager les cours arrière.",
+    "Le règlement contient des dispositions susceptibles d'approbation référendaire.",
+    "Le conseil de quartier de Neufchâtel Est–Lebourgneuf est appelé à donner son opinion et à tenir l'assemblée publique de consultation.",
+    "Les personnes intéressées auront sept jours après cette assemblée pour envoyer leurs observations par écrit."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:24:52.175Z",
+   "jetons": {
+    "entree": 9110,
+    "sortie": 485
    }
   },
   {
@@ -13066,21 +13073,21 @@
    "objet": "Adoption d'un avis d'intention afin de modifier le Règlement de l'Arrondissement de La Cité-Limoilou sur l'urbanisme, R.C.A.1V.Q. 4, pour les zones 13003Md et 13035Md afin de retirer le groupe d'usages C10 établissement d'hébergement touristique général et sa ratification par le conseil de la ville",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-185.pdf",
    "puces": [
-    "La Ville veut retirer la possibilité d'exploiter un \"\ntablissement d'h\nbergement touristique g\nn\nral\" (usages C10) dans deux zones de l'arrondissement de La Cit\n-Limoilou : 13003Md et 13035Md.",
-    "Ces zones se trouvent dans le secteur du Vieux-Qu\nbec et ses abords, o\nu la Ville dit vouloir favoriser la cr\nation de logements et l'arriv\ne de nouveaux r\nsidents.",
-    "D\ns l'adoption de l'avis d'intention, la Ville suspend la d\nlivrance de permis, de certificats ou l'approbation de plans de construction qui ne respectent pas cet avis.",
-    "Les services municipaux (planification, gestion territoriale, affaires juridiques) doivent pr\nparer les projets de r\nglement pour concr\ntiser le changement.",
-    "Le conseil de la ville ratifie l'avis pour la zone 13035Md; la seconde zone rel\nve du conseil d'arrondissement, qui la ratifiera \n sa prochaine s\nance.",
-    "La Ville note que le territoire compte d\nj\n un nombre important d'\ntablissements d'h\nbergement touristique et qu'elle analysera la dynamique du quartier."
+    "La Ville veut interdire les établissements d'hébergement touristique général (usage C10) dans deux zones de l'arrondissement de La Cité-Limoilou (13003Md et 13035Md), dans le secteur du Vieux-Québec et ses abords.",
+    "Dès l'adoption de l'avis d'intention, la Ville suspend l'approbation de plans de construction et la délivrance de permis ou certificats qui ne respectent pas cette intention.",
+    "La Ville dit vouloir favoriser la création de nouveaux logements et l'arrivée de nouveaux résidents dans ce secteur, où elle constate déjà un nombre important d'établissements d'hébergement touristique.",
+    "Les services de la planification, de la gestion territoriale et des affaires juridiques doivent préparer les projets de règlements qui donneront suite à l'avis.",
+    "Le conseil de la ville ratifie l'avis pour la zone 13035Md; le conseil d'arrondissement ratifiera l'autre zone qui relève de sa compétence.",
+    "En avril 2026, le comité exécutif avait déjà adopté un avis semblable pour une quinzaine d'autres zones du même arrondissement."
    ],
    "sansContenuSubstantiel": false,
    "montantPrincipal": null,
    "genereParIA": true,
    "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.110Z",
+   "genereLe": "2026-09-14T11:27:17.737Z",
    "jetons": {
     "entree": 3674,
-    "sortie": 541
+    "sortie": 492
    }
   },
   {
@@ -14962,30 +14969,6 @@
    }
   },
   {
-   "id": "TM2026-086.pdf",
-   "numero": "TM2026-086",
-   "date": "2026-06-15",
-   "unite": "Transport et mobilité intelligente",
-   "objet": "Ordonnance numéro O-426 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Raymond-Daveluy - Arrondissement de La Haute-Saint-Charles - District électoral de Loretteville-Les Châtels",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-086.pdf",
-   "puces": [
-    "La Ville interdit le stationnement sur le c\tot\ne ouest de la rue Raymond-Daveluy, entre la rue Albani et la route Sainte-Genevi\tve, du 15 novembre au 31 mars.",
-    "L'interdiction vise un tron\ton de 98 m\tres, qui d\tbute \t 40 m\tres au nord de la rue Albani, en direction nord.",
-    "La mesure retire 11 espaces de stationnement pendant cette p\triode.",
-    "Le but est de faciliter le d\tneigement : les v\thicules stationn\ts nuisaient au passage des \tquipements.",
-    "Le secteur touch\t est l'arrondissement de La Haute-Saint-Charles, district de Loretteville-Les Ch\ttels."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.141Z",
-   "jetons": {
-    "entree": 3916,
-    "sortie": 354
-   }
-  },
-  {
    "id": "GT2026-145.pdf",
    "numero": "GT2026-145",
    "date": "2026-06-15",
@@ -15034,6 +15017,31 @@
    "jetons": {
     "entree": 5487,
     "sortie": 428
+   }
+  },
+  {
+   "id": "TM2026-086.pdf",
+   "numero": "TM2026-086",
+   "date": "2026-06-15",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-426 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Raymond-Daveluy - Arrondissement de La Haute-Saint-Charles - District électoral de Loretteville-Les Châtels",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-086.pdf",
+   "puces": [
+    "La Ville interdit le stationnement sur le côté ouest de la rue Raymond-Daveluy, entre la rue Albani et la route Sainte-Geneviève, du 15 novembre au 31 mars.",
+    "L'interdiction vise un segment de 98 mètres, à partir de 40 mètres au nord de la rue Albani, vers le nord.",
+    "Cette mesure retire 11 espaces de stationnement pendant la période hivernale.",
+    "Le but : permettre aux équipements de déneigement de circuler, car les véhicules stationnés nuisaient à l'entretien hivernal.",
+    "Le secteur touché est l'Arrondissement de La Haute-Saint-Charles, district de Loretteville-Les Châtels.",
+    "Selon le document, le taux d'occupation des stationnements dans ce secteur est moyen."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:52.805Z",
+   "jetons": {
+    "entree": 3916,
+    "sortie": 372
    }
   },
   {
@@ -15137,31 +15145,6 @@
    "jetons": {
     "entree": 7218,
     "sortie": 498
-   }
-  },
-  {
-   "id": "AP2026-220.pdf",
-   "numero": "AP2026-220",
-   "date": "2026-06-10",
-   "unite": "Approvisionnements",
-   "objet": "Adjudication d'un contrat pour la fourniture et la livraison du média filtrant - Stations de traitement des eaux usées Est et Ouest (Appel d'offres public 95806)",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-220.pdf",
-   "puces": [
-    "La Ville confie à Veolia Water Technologies & Solutions Canada GP, de Saint-Laurent, la fourniture et la livraison de m\ndia filtrant pour ses stations de traitement des eaux us\nes.",
-    "Le contrat vaut 821 755 $ avant taxes; la d\npense nette pour la Ville s'\nl\nve \n 862 740,03 $.",
-    "Le m\ndia filtrant servira aux planchers de biofiltration de la station Est (105, chemin de la Baie-de-Beauport, La Cit\n-Limoilou) et de la station Ouest (3825, chemin Sainte-Foy, Sainte-Foy\nSillery\nCap-Rouge).",
-    "Une seule soumission a \nt\n re\nue \n l'appel d'offres public 95806; apr\ns n\ngociation, le fournisseur a baiss\n son prix de 865 003,50 $ \n 821 755 $.",
-    "Le prix retenu est inf\nrieur de 25,9 % \n l'estimation du service demandeur, qui \ntait de 1 108 310,32 $.",
-    "Le comit\n ex\ncutif a adopt\n la d\ncision le 10 juin 2026 (r\nsolution CE-2026-0777)."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "821 755 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.044Z",
-   "jetons": {
-    "entree": 3473,
-    "sortie": 528
    }
   },
   {
@@ -15368,32 +15351,6 @@
    "jetons": {
     "entree": 3933,
     "sortie": 542
-   }
-  },
-  {
-   "id": "GT2026-212.pdf",
-   "numero": "GT2026-212",
-   "date": "2026-06-10",
-   "unite": "Gestion du territoire",
-   "objet": "Modification avant adoption d'une résolution autorisant un projet immobilier sur les lots 1 749 129 et 6 317 067 du cadastre du Québec (1111, boulevard Pie-XI Nord, quartier de Val-Bélair, district électoral de Val-Bélair) - Loi modifiant diverses dispositions législatives en matière d'habitation,",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-212.pdf",
-   "puces": [
-    "La Ville autorise la construction d'un b\tenatiment mixte d'environ 80 logements sur quatre \tenaix \tenasix \tenaitages au 1111, boulevard Pie-XI Nord, dans Val-B\tenailair, m\tenaime si l'usage r\tenaisidentiel n'est pas permis dans cette zone.",
-    "Apr\tenais l'assembl\tenaie publique du 20 mai 2026 et une consultation \tenaicrite de trois jours, la Ville a modifi\tenai son projet pour r\tenaipondre aux commentaires des citoyens.",
-    "Le promoteur devra am\tenainager un sentier pi\tenaiton sur le terrain, du c\tenat\tenai des rues Émond et de l'Équinoxe, en r\tenaiponse aux pr\tenaioccupations sur la s\tenaicurit\tenai des pi\tenaitons.",
-    "Le nombre minimal de cases de stationnement passe de 95 \tenai 120, en raison des inqui\tenaitudes sur la disponibilit\tenai des places.",
-    "Le projet devra compter au moins 75 logements, dont 30 % avec deux chambres ou plus, et chaque logement devra \tenaitre \tenaiquip\tenai d'une thermopompe.",
-    "Le rez-de-chauss\tenaie devra inclure au moins 360 m\tenaitres carr\tenais r\tenaiserv\tenais \tenai des commerces, services ou un restaurant.",
-    "Quiconque contrevient aux conditions s'expose \tenai une amende de 1000 $ pour une personne physique ou de 2000 $ dans les autres cas, doubl\tenaie en cas de r\tenaicidive."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.108Z",
-   "jetons": {
-    "entree": 7764,
-    "sortie": 696
    }
   },
   {
@@ -15793,6 +15750,58 @@
    "jetons": {
     "entree": 4740,
     "sortie": 423
+   }
+  },
+  {
+   "id": "GT2026-212.pdf",
+   "numero": "GT2026-212",
+   "date": "2026-06-10",
+   "unite": "Gestion du territoire",
+   "objet": "Modification avant adoption d'une résolution autorisant un projet immobilier sur les lots 1 749 129 et 6 317 067 du cadastre du Québec (1111, boulevard Pie-XI Nord, quartier de Val-Bélair, district électoral de Val-Bélair) - Loi modifiant diverses dispositions législatives en matière d'habitation,",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-212.pdf",
+   "puces": [
+    "La Ville autorise la construction d'un immeuble mixte d'environ 80 logements sur quatre à six étages au 1111, boulevard Pie-XI Nord, dans Val-Bélair, même si le résidentiel n'est normalement pas permis dans cette zone.",
+    "Après la consultation publique du 20 mai 2026, le promoteur devra aménager un sentier piéton sur le terrain, du côté des rues Émond et de l'Équinoxe.",
+    "Le nombre minimal de cases de stationnement passe de 95 à 120, en réponse aux inquiétudes des citoyens sur la disponibilité des places.",
+    "La condition sur l'emplacement de la terrasse est reformulée pour préciser où elle doit être aménagée.",
+    "Le projet doit compter au moins 75 logements, dont 30 % avec deux chambres ou plus et au moins trois avec trois chambres ou plus; chaque logement doit avoir une thermopompe.",
+    "Le rez-de-chaussée doit réserver au moins 360 mètres carrés à un commerce, un service ou un restaurant.",
+    "Qui contrevient aux conditions s'expose à une amende de 1000 $ (personne physique) ou 2000 $ (autres cas), doublée en cas de récidive."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:09.270Z",
+   "jetons": {
+    "entree": 7764,
+    "sortie": 521
+   }
+  },
+  {
+   "id": "AP2026-220.pdf",
+   "numero": "AP2026-220",
+   "date": "2026-06-10",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat pour la fourniture et la livraison du média filtrant - Stations de traitement des eaux usées Est et Ouest (Appel d'offres public 95806)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-220.pdf",
+   "puces": [
+    "La Ville accorde à Veolia Water Technologies & Solutions Canada GP un contrat de 821 755 $ (avant taxes) pour fournir et livrer du média filtrant.",
+    "Ce média filtrant granulaire minéral servira aux planchers de biofiltration des deux stations de traitement des eaux usées.",
+    "Les livraisons visent la station Est (105, chemin de la Baie-de-Beauport, La Cité-Limoilou) et la station Ouest (3825, chemin Sainte-Foy, Sainte-Foy–Sillery–Cap-Rouge).",
+    "Une seule soumission a été reçue à l'appel d'offres public 95806; les autres fournisseurs ayant pris les documents ont expliqué pourquoi ils n'ont pas soumissionné.",
+    "Après négociation, le fournisseur a révisé son prix de 865 003,50 $ à 821 755 $, soit 25,9 % sous l'estimation de la Ville de 1 108 310,32 $.",
+    "La dépense nette pour la Ville s'élève à 862 740,03 $, payée à même le budget de fonctionnement du Service du traitement des eaux.",
+    "Le comité exécutif a adopté la décision le 10 juin 2026 (résolution CE-2026-0777)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "821 755 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:47.722Z",
+   "jetons": {
+    "entree": 3473,
+    "sortie": 531
    }
   },
   {
@@ -16273,31 +16282,6 @@
    }
   },
   {
-   "id": "GT2026-176.pdf",
-   "numero": "GT2026-176",
-   "date": "2026-06-08",
-   "unite": "Gestion du territoire",
-   "objet": "Demande de dérogation mineure pour la propriété sise aux 2942-2948, chemin Sainte-Foy, lot 1 533 022, quartier du Plateau, district électoral du Plateau, Arrondissement de Sainte-Foy-Sillery-Cap-Rouge",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-176.pdf",
-   "puces": [
-    "La Ville accorde une dérogation mineure au 2942-2948, chemin Sainte-Foy, dans le quartier du Plateau (arrondissement de Sainte-Foy\ttSillery\tCap-Rouge).",
-    "La marge arrière du bâtiment est acceptée à 5,6 mètres, alors que le règlement d'urbanisme en exige 15,0 mètres.",
-    "La dérogation permet de régulariser le bâtiment existant et d'autoriser son agrandissement dans le tambour arrière, l'ajout d'une galerie et d'un escalier arrière.",
-    "Selon l'analyse, sans cette dérogation le bâtiment devrait être déplacé ou démoli pour devenir conforme.",
-    "Le document note que la situation existe depuis 1935 et qu'aucune plainte n'a été enregistrée.",
-    "Le comité consultatif d'urbanisme a recommandé la dérogation à l'unanimité le 12 mai 2026."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.152Z",
-   "jetons": {
-    "entree": 5392,
-    "sortie": 421
-   }
-  },
-  {
    "id": "TM2026-116.pdf",
    "numero": "TM2026-116",
    "date": "2026-06-08",
@@ -16348,6 +16332,31 @@
    }
   },
   {
+   "id": "GT2026-176.pdf",
+   "numero": "GT2026-176",
+   "date": "2026-06-08",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise aux 2942-2948, chemin Sainte-Foy, lot 1 533 022, quartier du Plateau, district électoral du Plateau, Arrondissement de Sainte-Foy-Sillery-Cap-Rouge",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-176.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure au 2942-2948, chemin Sainte-Foy, dans le quartier du Plateau (arrondissement de Sainte-Foy–Sillery–Cap-Rouge).",
+    "La marge arrière du bâtiment pourra être de 5,6 mètres au lieu des 15 mètres exigés par le règlement d'urbanisme de l'arrondissement.",
+    "La dérogation vise le bâtiment existant, son agrandissement prévu dans le tambour arrière et l'ajout d'une galerie en cour arrière.",
+    "Selon l'analyse, sans la dérogation, le bâtiment devrait être déplacé ou démoli et l'agrandissement, la galerie et l'escalier arrière seraient impossibles.",
+    "L'analyse indique que la situation existe depuis 1935 et qu'aucune plainte n'a été enregistrée.",
+    "Le comité consultatif d'urbanisme a recommandé la demande à l'unanimité le 12 mai 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:26:00.504Z",
+   "jetons": {
+    "entree": 5392,
+    "sortie": 437
+   }
+  },
+  {
    "id": "PA2026-076.pdf",
    "numero": "PA2026-076",
    "date": "2026-06-03",
@@ -16371,32 +16380,6 @@
    "jetons": {
     "entree": 7814,
     "sortie": 632
-   }
-  },
-  {
-   "id": "PA2026-068.pdf",
-   "numero": "PA2026-068",
-   "date": "2026-06-03",
-   "unite": "Planification de l'aménagement et de l'environnement",
-   "objet": "Prise d'acte de la décision relative à la demande d'autorisation pour la démolition d'un immeuble patrimonial sis au 1132, boulevard Raymond, Québec, et confirmation que le conseil d'agglomération de Québec n'entend pas se prévaloir du pouvoir de désaveu",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-068.pdf",
-   "puces": [
-    "La Commission d'urbanisme et de conservation de Qu\bébec a autoris\bé, le 26 mars 2026, la d\bémolition de la maison Dubreuil-Latulippe, au 1132, boulevard Raymond, dans le quartier Sainte-Th\bér\bèse-de-Lisieux \bà Beauport.",
-    "La Commission s'appuie sur l'\bétat de d\bét\bérioration avanc\bé du b\bâtiment, les d\béficiences structurelles et d'entretien relev\bées par une architecte, et les co\bûts de remise en \bétat.",
-    "Elle reconna\bît tout de m\bême l'int\bér\bêt patrimonial du b\bâtiment, l'une des plus vieilles maisons du secteur.",
-    "La d\bémolition est conditionnelle : le projet de remplacement devra \bêtre ajust\bé selon les recommandations de la Commission avant d'obtenir ses permis.",
-    "Personne n'a d\bépos\bé de commentaire \bécrit ni demand\bé la r\bévision de la d\bécision dans le d\bélai de 30 jours; aucun acqu\béreur ne s'\bétait manifest\bé pour la propri\bét\bé.",
-    "Le conseil d'agglom\bération prend acte de la d\bécision, renonce \bà son pouvoir de d\bésaveu et abr\bège le d\bélai de 90 jours, ce qui ouvre la voie \bà la d\bélivrance du certificat de d\bémolition.",
-    "Le document indique qu'il n'y a aucun impact financier."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.044Z",
-   "jetons": {
-    "entree": 7822,
-    "sortie": 640
    }
   },
   {
@@ -17139,6 +17122,32 @@
    "jetons": {
     "entree": 7683,
     "sortie": 513
+   }
+  },
+  {
+   "id": "PA2026-068.pdf",
+   "numero": "PA2026-068",
+   "date": "2026-06-03",
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "objet": "Prise d'acte de la décision relative à la demande d'autorisation pour la démolition d'un immeuble patrimonial sis au 1132, boulevard Raymond, Québec, et confirmation que le conseil d'agglomération de Québec n'entend pas se prévaloir du pouvoir de désaveu",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-068.pdf",
+   "puces": [
+    "La Ville autorise la démolition d'une maison patrimoniale située au 1132, boulevard Raymond, dans le quartier Sainte-Thérèse-de-Lisieux, à Beauport.",
+    "La Commission d'urbanisme et de conservation de Québec a approuvé la démolition le 26 mars 2026, en invoquant l'état de détérioration du bâtiment et les coûts de remise en état.",
+    "Le bâtiment visé est la maison Dubreuil-Latulippe, décrite comme l'une des plus vieilles maisons du secteur.",
+    "Personne n'a demandé au conseil de ville de réviser la décision dans le délai de 30 jours et aucun commentaire écrit n'a été reçu durant la période de publication.",
+    "Le conseil d'agglomération renonce à son pouvoir de désaveu et raccourcit le délai de 90 jours prévu par la loi.",
+    "La démolition est conditionnelle : le projet de remplacement devra être ajusté selon les recommandations de la Commission avant l'émission des permis.",
+    "Le document indique qu'il n'y a aucun impact financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:28.893Z",
+   "jetons": {
+    "entree": 7822,
+    "sortie": 469
    }
   },
   {
@@ -19352,30 +19361,6 @@
    }
   },
   {
-   "id": "GT2026-166.pdf",
-   "numero": "GT2026-166",
-   "date": "2026-05-21",
-   "unite": "Gestion du territoire",
-   "objet": "Demandes assujetties à un règlement relatif aux PIIA - Arrondissement de La Haute-Saint-Charles",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-166.pdf",
-   "puces": [
-    "L'arrondissement de La Haute-Saint-Charles approuve les plans d'architecture et d'implantation de trois projets de construction résidentielle.",
-    "Deux permis visent des bâtiments jumelés d'un logement, au 3315 et au 3319, rue de la Herse (district de Loretteville\ntLes Châtels).",
-    "Un permis vise un bâtiment isolé d'un logement au 1226, rue de l'Embâcle (district de Val-Bélair).",
-    "Ces approbations suivent les recommandations favorables du comité consultatif d'urbanisme réuni le 29 avril 2026.",
-    "Aucun impact financier n'est indiqué au document."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.142Z",
-   "jetons": {
-    "entree": 3516,
-    "sortie": 318
-   }
-  },
-  {
    "id": "AP2026-151.pdf",
    "numero": "AP2026-151",
    "date": "2026-05-21",
@@ -19497,6 +19482,30 @@
    "jetons": {
     "entree": 5381,
     "sortie": 426
+   }
+  },
+  {
+   "id": "GT2026-166.pdf",
+   "numero": "GT2026-166",
+   "date": "2026-05-21",
+   "unite": "Gestion du territoire",
+   "objet": "Demandes assujetties à un règlement relatif aux PIIA - Arrondissement de La Haute-Saint-Charles",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-166.pdf",
+   "puces": [
+    "L'arrondissement de La Haute-Saint-Charles approuve les plans d'apparence et d'implantation de trois projets de construction résidentielle.",
+    "Deux permis touchent la rue de la Herse (3315 et 3319), dans le district de Loretteville–Les Châtels : un bâtiment jumelé d'un logement chacun.",
+    "Un permis touche le 1226, rue de l'Embâcle, dans le district de Val-Bélair : un bâtiment isolé d'un logement.",
+    "Les approbations suivent les recommandations favorables du comité consultatif d'urbanisme réuni le 29 avril 2026.",
+    "Aucun impact financier n'est indiqué au sommaire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:26:00.605Z",
+   "jetons": {
+    "entree": 3516,
+    "sortie": 327
    }
   },
   {
@@ -20707,26 +20716,6 @@
    }
   },
   {
-   "id": "DE2026-141.pdf",
-   "numero": "DE2026-141",
-   "date": "2026-05-13",
-   "unite": "Développement économique et grands projets",
-   "objet": "Participation de madame Loubna Sefrioui, directrice de division au sein du Service du développement économique et des grands projets, à une mission économique, en France, du 6 au 13 juin 2026",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-141.pdf",
-   "puces": [
-    "La Ville autorise une directrice de division du Service du d\ff1cveloppement \ff1cconomique \ff1e participer \ff1e une mission \ff1cconomique \ff1e Paris, en France, du 6 au 13 juin 2026."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "6 500 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.108Z",
-   "jetons": {
-    "entree": 3796,
-    "sortie": 180
-   }
-  },
-  {
    "id": "AP2026-188.pdf",
    "numero": "AP2026-188",
    "date": "2026-05-13",
@@ -21161,6 +21150,32 @@
    }
   },
   {
+   "id": "DE2026-141.pdf",
+   "numero": "DE2026-141",
+   "date": "2026-05-13",
+   "unite": "Développement économique et grands projets",
+   "objet": "Participation de madame Loubna Sefrioui, directrice de division au sein du Service du développement économique et des grands projets, à une mission économique, en France, du 6 au 13 juin 2026",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-141.pdf",
+   "puces": [
+    "La Ville envoie une directrice de division du Service du développement économique et des grands projets en mission économique à Paris, du 6 au 13 juin 2026 (ou à d'autres dates fixées par les organisateurs).",
+    "La dépense est estimée à 6 500 $, plus taxes, remboursée sur présentation des pièces justificatives : transport aérien et terrestre, hébergement et repas.",
+    "L'argent vient du budget de fonctionnement du Service du développement économique et des grands projets.",
+    "La mission est organisée par l'association Palme Québec, dont la Ville est membre depuis août 2025, qui travaille sur l'aménagement durable des parcs industriels.",
+    "Les 10 et 11 juin, la représentante participera aux travaux de l'Association internationale des territoires d'activités durables (AITAD).",
+    "Le 10 juin, elle prendra part à une table ronde sur la réduction de l'impact climatique des mobilités dans les territoires d'activités durables.",
+    "Un écart d'au plus 10 % du montant autorisé sera accepté sans autre autorisation."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "6 500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:24:50.677Z",
+   "jetons": {
+    "entree": 3796,
+    "sortie": 461
+   }
+  },
+  {
    "id": "LS2026-113.pdf",
    "numero": "LS2026-113",
    "date": "2026-05-12",
@@ -21439,32 +21454,6 @@
    }
   },
   {
-   "id": "LS2026-114.pdf",
-   "numero": "LS2026-114",
-   "date": "2026-05-11",
-   "unite": "Loisirs, sports et vie communautaire",
-   "objet": "Versement de subventions totalisant un montant de 28 900 $ à trois organismes pour des demandes déposées dans le cadre du programme de soutien financier à un événement de proximité pour l'organisation d'événements à l'été 2026 - Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-114.pdf",
-   "puces": [
-    "L'arrondissement de Sainte-Foy\ntSillery\ntCap-Rouge verse 28 900 $ en subventions à trois organismes pour des événements de l'été 2026.",
-    "Fête de quartier SJBDLS : 1 300 $ à l'Organisme paroissiale de loisirs St-Jean-Baptiste-De-La Salle inc., le samedi 6 juin de 11 h à 16 h au parc Saint-Jean-Baptiste-De La Salle (à l'intérieur s'il pleut).",
-    "Festival Découvr'Arts : 16 100 $ à la Société arts & culture de Cap-Rouge, les 6 et 7 juin au parc Provancher, au parc nautique de Cap-Rouge, au parc de la Forge et sous le Tracel.",
-    "Journée Plein Air des Aînés : 11 500 $ au Club FADOQ Cap-Rouge inc., le mercredi 10 juin de 7 h à 20 h à la Base de plein air de Sainte-Foy, pour une 34e année.",
-    "La subvention de la Journée Plein Air des Aînés augmente parce que l'organisme prend en charge des éléments habituellement payés par la Ville (elle était de 5 000 $ en 2025).",
-    "La Ville fournit aussi un soutien technique aux trois événements, selon les ressources disponibles; police et pompiers se disent favorables.",
-    "L'argent vient du budget de fonctionnement de l'arrondissement, à l'activité « Réaliser et soutenir les événements »."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "28 900 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.140Z",
-   "jetons": {
-    "entree": 4719,
-    "sortie": 622
-   }
-  },
-  {
    "id": "LS2026-099.pdf",
    "numero": "LS2026-099",
    "date": "2026-05-11",
@@ -21513,6 +21502,32 @@
    "jetons": {
     "entree": 8877,
     "sortie": 525
+   }
+  },
+  {
+   "id": "LS2026-114.pdf",
+   "numero": "LS2026-114",
+   "date": "2026-05-11",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement de subventions totalisant un montant de 28 900 $ à trois organismes pour des demandes déposées dans le cadre du programme de soutien financier à un événement de proximité pour l'organisation d'événements à l'été 2026 - Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-114.pdf",
+   "puces": [
+    "La Ville verse 28 900 $ en subventions à trois organismes de l'arrondissement de Sainte-Foy–Sillery–Cap-Rouge pour des événements de l'été 2026.",
+    "1 300 $ vont à l'Organisme paroissiale de loisirs St-Jean-Baptiste-De-La Salle inc. pour la Fête de quartier SJBDLS, le 6 juin 2026 au parc Saint-Jean-Baptiste-De La Salle (jeux gonflables, animation, cuisine de rue, pique-nique).",
+    "16 100 $ vont à la Société arts & culture de Cap-Rouge pour le Festival Découvr'Arts, les 6 et 7 juin 2026 au parc Provancher, au parc nautique de Cap-Rouge, au parc de la Forge et sous le Tracel.",
+    "11 500 $ vont au Club FADOQ Cap-Rouge inc. pour la Journée Plein Air des Aînés, le 10 juin 2026 de 7 h à 20 h à la Base de plein air de Sainte-Foy (34e édition).",
+    "La hausse de la subvention à la Journée Plein Air des Aînés s'explique par le fait que l'organisme prend en charge des éléments habituellement gérés et payés par la Ville.",
+    "La Ville offrira aussi un soutien technique aux trois événements, dans les limites de ses ressources; les services de police et d'incendie sont favorables.",
+    "L'argent provient du budget de fonctionnement de l'arrondissement (activité « Réaliser et soutenir les événements »)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "28 900 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:46.963Z",
+   "jetons": {
+    "entree": 4719,
+    "sortie": 637
    }
   },
   {
@@ -24927,32 +24942,6 @@
    }
   },
   {
-   "id": "GA2026-003.pdf",
-   "numero": "GA2026-003",
-   "date": "2026-04-22",
-   "unite": "Greffe et archives",
-   "objet": "Adoption du Règlement modifiant le Règlement intérieur du comité exécutif sur la délégation de pouvoirs relativement à la signature des contrats et autres documents, R.C.E.V.Q. 220",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GA2026-003.pdf",
-   "puces": [
-    "La Ville regroupe dans un seul chapitre toutes les r\règles sur qui peut signer les contrats et documents en son nom.",
-    "D\résormais, toute personne qui d\rétient une d\rél\régation de pouvoir peut signer seule les contrats et documents n\récessaires pour appliquer sa d\récision.",
-    "Les actes notari\rés, les r\règlements et les r\résolutions restent sign\rés par le maire et le greffier, sauf l'exception pr\révue \rà l'article 62.",
-    "Le r\règlement liste qui peut signer \rà la place du maire : directeurs et directeurs adjoints, employ\rés des approvisionnements selon des montants pr\récis, arpenteurs-g\réom\rètres de la Ville, directeur g\rén\réral et directeurs g\rén\réraux adjoints, entre autres.",
-    "Le directeur g\rén\réral et les directeurs g\rén\réraux adjoints peuvent agir pour des montants de 0 $ \rà 250 000 $.",
-    "Le maire conserve son pouvoir de d\résapprouver les contrats et obligations approuv\rés par le conseil ou le comit\ré ex\récutif.",
-    "Le r\règlement entre en vigueur d\rès son adoption."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "250 000 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.143Z",
-   "jetons": {
-    "entree": 7193,
-    "sortie": 674
-   }
-  },
-  {
    "id": "GA2026-002.pdf",
    "numero": "GA2026-002",
    "date": "2026-04-22",
@@ -25077,6 +25066,32 @@
    "jetons": {
     "entree": 8041,
     "sortie": 523
+   }
+  },
+  {
+   "id": "GA2026-003.pdf",
+   "numero": "GA2026-003",
+   "date": "2026-04-22",
+   "unite": "Greffe et archives",
+   "objet": "Adoption du Règlement modifiant le Règlement intérieur du comité exécutif sur la délégation de pouvoirs relativement à la signature des contrats et autres documents, R.C.E.V.Q. 220",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GA2026-003.pdf",
+   "puces": [
+    "La Ville change les règles qui disent qui peut signer ses contrats et documents à la place du maire.",
+    "Toutes les règles de signature, jusque-là éparpillées dans le règlement, sont regroupées au même endroit.",
+    "Tout employé qui détient déjà une délégation de pouvoir pourra signer seul les contrats et documents nécessaires pour l'appliquer.",
+    "La liste des personnes autorisées à signer inclut notamment les directeurs et directeurs adjoints, ainsi que des employés des approvisionnements, un arpenteur-géomètre de la Ville et des directeurs de certains services.",
+    "Les actes notariés (sauf une exception), les règlements et les résolutions continuent d'être signés par le maire et le greffier.",
+    "Le maire garde son pouvoir de désapprouver les obligations et contrats approuvés par le conseil ou le comité exécutif.",
+    "Le règlement entre en vigueur dès son adoption."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:46.593Z",
+   "jetons": {
+    "entree": 7193,
+    "sortie": 412
    }
   },
   {
@@ -26054,31 +26069,6 @@
    }
   },
   {
-   "id": "PA2026-047.pdf",
-   "numero": "PA2026-047",
-   "date": "2026-04-15",
-   "unite": "Planification de l'aménagement et de l'environnement",
-   "objet": "Participation de MM. Ghislain Breton et Jean-Louis Tedone à EuroMAB 2026 dans la Région de biosphère de Mount Arrowsmith (Colombie-Britannique), du 14 au 19 septembre 2026",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-047.pdf",
-   "puces": [
-    "La Ville envoie deux employés du Service de la planification de l'am\ttexteagement et de l'environnement à la conférence EuroMAB 2026, à Parksville en Colombie-Britannique, du 14 au 19 septembre 2026.",
-    "Le Service des finances remboursera leurs dépenses (inscription, transport, hébergement, repas) jusqu'à 7 460 $, soit 3 730 $ par personne, sur pièces justificatives.",
-    "Un écart d'au plus 10 % du montant autorisé sera accepté sans autre autorisation.",
-    "Le voyage dépend de la réponse de l'UNESCO sur la candidature de Québec comme Région de biosphère, attendue dans la semaine du 1er juin 2026; sinon, le déplacement sera annulé.",
-    "Les billets d'avion et l'hébergement seront réservés avant la décision de l'UNESCO, avec des conditions permettant l'annulation.",
-    "Si la désignation est accordée, Québec deviendrait la 20e Région de biosphère au Canada et la 5e au Québec."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "7 460 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.072Z",
-   "jetons": {
-    "entree": 4239,
-    "sortie": 631
-   }
-  },
-  {
    "id": "AP2026-133.pdf",
    "numero": "AP2026-133",
    "date": "2026-04-15",
@@ -26482,6 +26472,31 @@
    "jetons": {
     "entree": 2751,
     "sortie": 335
+   }
+  },
+  {
+   "id": "PA2026-047.pdf",
+   "numero": "PA2026-047",
+   "date": "2026-04-15",
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "objet": "Participation de MM. Ghislain Breton et Jean-Louis Tedone à EuroMAB 2026 dans la Région de biosphère de Mount Arrowsmith (Colombie-Britannique), du 14 au 19 septembre 2026",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-047.pdf",
+   "puces": [
+    "La Ville envoie deux employés du Service de la planification de l'aménagement et de l'environnement à la conférence EuroMAB 2026, à Parksville en Colombie-Britannique, du 14 au 19 septembre 2026.",
+    "Elle remboursera jusqu'à 7 460 $ au total (environ 3 730 $ par personne) pour l'avion, le transport terrestre, l'hébergement, les repas et l'inscription, sur présentation de pièces justificatives.",
+    "Un écart d'au plus 10 % du montant autorisé sera accepté sans autre autorisation.",
+    "Le voyage est conditionnel à l'obtention du statut de Région de biosphère de l'UNESCO, réponse attendue dans la semaine du 1er juin 2026; sinon, le déplacement sera annulé.",
+    "Les billets d'avion et l'hôtel seront réservés avant la décision de l'UNESCO, avec des conditions permettant l'annulation.",
+    "La Ville a déposé sa candidature de Région de biosphère le 30 janvier 2025; elle deviendrait la 20e au Canada et la 5e au Québec."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "7 460 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:45.320Z",
+   "jetons": {
+    "entree": 4239,
+    "sortie": 480
    }
   },
   {
@@ -28984,27 +28999,6 @@
    }
   },
   {
-   "id": "AP2026-071.pdf",
-   "numero": "AP2026-071",
-   "date": "2026-03-25",
-   "unite": "Approvisionnements",
-   "objet": "Adjudication d'un contrat pour la réfection des infrastructures souterraines - Rue des Récollets (PSP185695) (Appel d'offres public 94558)",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-071.pdf",
-   "puces": [
-    "La Ville accorde à Groupe Colas Qu\ntébec inc. (L\nt\nt\nt\nt\nt\nt\nt\nt\nt\nt\nt\nt\nt\nt\nt\nt)",
-    "placeholder"
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "2 137 000 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.106Z",
-   "jetons": {
-    "entree": 3754,
-    "sortie": 182
-   }
-  },
-  {
    "id": "TW2026-001.pdf",
    "numero": "TW2026-001",
    "date": "2026-03-25",
@@ -29585,6 +29579,32 @@
    "jetons": {
     "entree": 6991,
     "sortie": 358
+   }
+  },
+  {
+   "id": "AP2026-071.pdf",
+   "numero": "AP2026-071",
+   "date": "2026-03-25",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat pour la réfection des infrastructures souterraines - Rue des Récollets (PSP185695) (Appel d'offres public 94558)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-071.pdf",
+   "puces": [
+    "La Ville confie à Groupe Colas Québec inc. (Lévis) le contrat de réfection des infrastructures souterraines de la rue des Récollets, pour 2 137 000 $ avant taxes.",
+    "Les travaux touchent la rue des Récollets, dans l'arrondissement de La Haute-Saint-Charles.",
+    "Le chantier prévoit la reconstruction des conduites d'eau potable et des égouts pluvial et sanitaire, plus l'installation d'un réseau d'eau temporaire.",
+    "La voirie, la signalisation et les aménagements urbains seront remis en état.",
+    "Sept entreprises ont soumissionné; Colas a présenté le prix le plus bas, soit 26,4 % sous l'estimation de la Ville (2 902 076,75 $).",
+    "La dépense nette pour la Ville, après récupération de la TVQ, s'élève à 2 243 582,87 $, financée par un règlement d'emprunt.",
+    "Le contrat comprend des clauses d'ajustement des prix du bitume et du carburant."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 137 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:08.852Z",
+   "jetons": {
+    "entree": 3754,
+    "sortie": 456
    }
   },
   {
@@ -31028,26 +31048,6 @@
    }
   },
   {
-   "id": "FN2026-003.pdf",
-   "numero": "FN2026-003",
-   "date": "2026-03-11",
-   "unite": "Finances",
-   "objet": "Approbation des virements et ajouts de crédits budgétaires pour la période du 1er septembre au 31 décembre 2025 relevant de l'autorité du conseil d'agglomération de Québec et prise d'acte de la liste finale des virements de crédits budgétaires entre les compétences d'agglomération",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/FN2026-003.pdf",
-   "puces": [
-    "La Ville fait approuver 16 658 136 $ de virements de cr\ntimes budg\ntaires"
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "16 658 136 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.106Z",
-   "jetons": {
-    "entree": 10218,
-    "sortie": 135
-   }
-  },
-  {
    "id": "AP2026-062.pdf",
    "numero": "AP2026-062",
    "date": "2026-03-11",
@@ -31406,31 +31406,6 @@
    }
   },
   {
-   "id": "CU2026-019.pdf",
-   "numero": "CU2026-019",
-   "date": "2026-03-11",
-   "unite": "Culture et patrimoine",
-   "objet": "Versement de subventions totalisant une somme maximale de 325 000 $ à plusieurs artistes et organismes professionnels, dans le cadre de l'entente de partenariat territorial entre la Ville de Québec et le Conseil des arts et des lettres du Québec",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-019.pdf",
-   "puces": [
-    "La Ville verse jusqu'\rà 325 000 $ en subventions \rà des artistes et des organismes culturels professionnels de Qu\rébec.",
-    "En tout, 28 projets sont financ\rés : ceux de 13 artistes et de 15 organismes.",
-    "Le volet destin\ré aux artistes et \récrivains re\rçoit 118 000 $, avec des montants individuels de 5 950 $ \rà 9 750 $.",
-    "Le volet des projets \récoresponsables et de mutualisation re\rçoit 207 000 $, avec des montants de 12 000 $ \rà 15 000 $ par organisme.",
-    "L'argent vient de l'entente de partenariat 2025-2028 entre la Ville et le Conseil des arts et des lettres du Qu\rébec, o\rù chaque partenaire met 325 000 $.",
-    "Un jury de repr\résentants du milieu a choisi les projets; la Ville y si\régeait comme observatrice."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "325 000 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.142Z",
-   "jetons": {
-    "entree": 6511,
-    "sortie": 483
-   }
-  },
-  {
    "id": "CU2026-017.pdf",
    "numero": "CU2026-017",
    "date": "2026-03-11",
@@ -31686,6 +31661,57 @@
    "jetons": {
     "entree": 7731,
     "sortie": 534
+   }
+  },
+  {
+   "id": "CU2026-019.pdf",
+   "numero": "CU2026-019",
+   "date": "2026-03-11",
+   "unite": "Culture et patrimoine",
+   "objet": "Versement de subventions totalisant une somme maximale de 325 000 $ à plusieurs artistes et organismes professionnels, dans le cadre de l'entente de partenariat territorial entre la Ville de Québec et le Conseil des arts et des lettres du Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-019.pdf",
+   "puces": [
+    "La Ville verse jusqu'à 325 000 $ en subventions à 13 artistes et 15 organismes culturels de Québec, pour 28 projets au total.",
+    "Les subventions aux artistes et écrivains totalisent 118 000 $, avec des montants individuels allant de 5 950 $ à 9 750 $.",
+    "Les projets écoresponsables ou de mutualisation d'organismes reçoivent 207 000 $, avec des montants de 12 000 $ à 15 000 $ par organisme.",
+    "L'argent vient d'une entente avec le Conseil des arts et des lettres du Québec (CALQ), signée en 2025 pour 2025-2028, où chaque partenaire met 325 000 $.",
+    "Un jury composé de représentants du milieu a choisi les projets; la Ville y siégeait comme observatrice seulement.",
+    "Parmi les organismes soutenus : Machine de cirque, Théâtre Périscope, EXMURO arts publics, Folie/Culture et le Festival international de poésie de Québec.",
+    "Les fonds proviennent d'un règlement d'emprunt lié aux travaux de mise en œuvre des Visions culturelles."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "325 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:24:51.479Z",
+   "jetons": {
+    "entree": 6511,
+    "sortie": 493
+   }
+  },
+  {
+   "id": "FN2026-003.pdf",
+   "numero": "FN2026-003",
+   "date": "2026-03-11",
+   "unite": "Finances",
+   "objet": "Approbation des virements et ajouts de crédits budgétaires pour la période du 1er septembre au 31 décembre 2025 relevant de l'autorité du conseil d'agglomération de Québec et prise d'acte de la liste finale des virements de crédits budgétaires entre les compétences d'agglomération",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/FN2026-003.pdf",
+   "puces": [
+    "La Ville approuve 16 658 136 $ de virements budgétaires faits entre le 1er septembre et le 31 décembre 2025 pour les dépenses de fonctionnement relevant du conseil d'agglomération.",
+    "Elle prend acte d'une somme de 3 919 786 $ transférée au bénéfice de la compétence de proximité pour l'année financière 2025.",
+    "Les virements touchent 439 lignes budgétaires réparties entre les services, dont 7 219 499 $ de virements multiservices.",
+    "Les services les plus visés incluent les Travaux publics (4 563 053 $ reçus), la Police (2 094 886 $ reçus) et l'Entretien des voies de circulation (2 123 919 $ versés).",
+    "Parmi les exemples cités : des heures de surveillance ajoutées pour l'installation sanitaire devant la bibliothèque Gabrielle-Roy et le paiement d'une facture d'hébergement de la Croix-Rouge.",
+    "Le dossier doit être présenté au conseil d'agglomération le 11 mars 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "16 658 136 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:01.455Z",
+   "jetons": {
+    "entree": 10218,
+    "sortie": 464
    }
   },
   {
@@ -34008,31 +34034,6 @@
    }
   },
   {
-   "id": "LS2026-016.pdf",
-   "numero": "LS2026-016",
-   "date": "2026-02-24",
-   "unite": "Loisirs, sports et vie communautaire",
-   "objet": "Versement d'une subvention à Adaptavie inc. pour un montant de 33 178 $",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-016.pdf",
-   "puces": [
-    "La Ville verse 33 178 $ à Adaptavie inc. pour l'ann\ne 2026.",
-    "L'argent soutient des activit\ns de loisir et de sport adapt\nes pour les personnes vivant avec des limitations fonctionnelles, sur le territoire de la ville de Qu\nbec.",
-    "Adaptavie inc. a re\bu le m\bme montant de 33 178 $ en 2024 et en 2025.",
-    "Avec la subvention de 2025, l'organisme a structur\n son initiation aux sports adapt\ns et renforc\n son offre aquatique, dont des activit\ns pour 45 enfants vivant avec un trouble du spectre de l'autisme ou un autre handicap.",
-    "\b la fin de 2026, l'organisme devra remettre un bilan de ses activit\ns, un bilan financier et des preuves de la visibilit\n accord\ne \b la Ville.",
-    "Les fonds proviennent du budget de fonctionnement de l'Arrondissement des Rivi\bres."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "33 178 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.128Z",
-   "jetons": {
-    "entree": 3469,
-    "sortie": 446
-   }
-  },
-  {
    "id": "LS2026-022.pdf",
    "numero": "LS2026-022",
    "date": "2026-02-24",
@@ -34357,6 +34358,31 @@
    "jetons": {
     "entree": 8468,
     "sortie": 483
+   }
+  },
+  {
+   "id": "LS2026-016.pdf",
+   "numero": "LS2026-016",
+   "date": "2026-02-24",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement d'une subvention à Adaptavie inc. pour un montant de 33 178 $",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-016.pdf",
+   "puces": [
+    "La Ville verse 33 178 $ à Adaptavie inc. pour l'année 2026.",
+    "L'argent soutient l'offre d'activités de loisir et de sport adaptées aux personnes vivant avec des limitations fonctionnelles, sur le territoire de la ville de Québec.",
+    "Le même montant avait été versé en 2024 et en 2025.",
+    "À la fin de 2026, l'organisme devra remettre un bilan de ses activités, un bilan financier et des preuves de la visibilité accordée à la Ville.",
+    "Les fonds proviennent du budget de fonctionnement de l'Arrondissement des Rivières.",
+    "Adaptavie inc. est situé au 525, boulevard Wilfrid-Hamel Est, à Québec."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "33 178 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:24:57.093Z",
+   "jetons": {
+    "entree": 3469,
+    "sortie": 351
    }
   },
   {
@@ -36840,32 +36866,6 @@
    }
   },
   {
-   "id": "DE2026-005.pdf",
-   "numero": "DE2026-005",
-   "date": "2026-02-03",
-   "unite": "Développement économique et grands projets",
-   "objet": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'un immeuble sis au 7000, rue de l'Apogée, connu et désigné comme étant une partie du lot 5 969 976 du cadastre du Québec, circonscription foncière de Québec Arrondissement de La Haute-Saint-Charles",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-005.pdf",
-   "puces": [
-    "La Ville veut acquérir une bande de terrain d'environ 126,4 m\r² au 7000, rue de l'Apogée, dans l'arrondissement de La Haute-Saint-Charles.",
-    "Le terrain servira à élargir la rue de la Faune, dans le cadre du projet de réfection de cette rue.",
-    "L'achat se fera de gré à gré avec le propriétaire ou, si les discussions n'aboutissent pas, par expropriation.",
-    "Le Service des affaires juridiques est autorisé à lancer les procédures d'acquisition ou d'expropriation.",
-    "La Division de l'arpentage et de la géomatique préparera les plans, descriptions techniques et opérations cadastrales nécessaires.",
-    "L'ensemble du terrain du propriétaire est évalué à 1 810 000 $ au rôle 2025-2026-2027, soit 201,56 $ le mètre carré.",
-    "Les fonds proviennent du règlement d'emprunt R.V.Q. 3449 lié aux travaux de la rue de la Faune."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-11T14:12:23.043Z",
-   "jetons": {
-    "entree": 4483,
-    "sortie": 453
-   }
-  },
-  {
    "id": "DE2026-008.pdf",
    "numero": "DE2026-008",
    "date": "2026-02-03",
@@ -37042,6 +37042,32 @@
    "jetons": {
     "entree": 4531,
     "sortie": 475
+   }
+  },
+  {
+   "id": "DE2026-005.pdf",
+   "numero": "DE2026-005",
+   "date": "2026-02-03",
+   "unite": "Développement économique et grands projets",
+   "objet": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'un immeuble sis au 7000, rue de l'Apogée, connu et désigné comme étant une partie du lot 5 969 976 du cadastre du Québec, circonscription foncière de Québec Arrondissement de La Haute-Saint-Charles",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-005.pdf",
+   "puces": [
+    "La Ville veut acquérir une partie d'un terrain au 7000, rue de l'Apogée, dans l'arrondissement de La Haute-Saint-Charles.",
+    "La parcelle visée mesure environ 126,4 mètres carrés et servirait à élargir la rue de la Faune.",
+    "L'achat se fera à l'amiable avec le propriétaire ou, si les discussions échouent, par expropriation.",
+    "Le Service des affaires juridiques est autorisé à lancer les procédures d'acquisition ou d'expropriation.",
+    "La Division de l'arpentage et de la géomatique préparera les plans, descriptions techniques et opérations cadastrales requises.",
+    "Le terrain complet est inscrit au rôle d'évaluation 2025-2026-2027 à 1 810 000 $, soit 201,56 $ le mètre carré.",
+    "Les fonds proviennent du règlement d'emprunt R.V.Q. 3449 lié au réaménagement de la rue de la Faune."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 810 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:26:00.793Z",
+   "jetons": {
+    "entree": 4483,
+    "sortie": 435
    }
   },
   {
@@ -38111,6 +38137,57 @@
    "jetons": {
     "entree": 5851,
     "sortie": 469
+   }
+  },
+  {
+   "id": "AP2026-002.pdf",
+   "numero": "AP2026-002",
+   "date": "2026-01-22",
+   "unite": "Approvisionnements",
+   "objet": "Conclusion d'une entente entre la Ville de Québec et l'organisme Trip Jeunesse Beauport relativement à la mise en oeuvre du programme Liaisons jeunesse sur le territoire de l'Arrondissement de Beauport (Dossier 94835)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-002.pdf",
+   "puces": [
+    "La Ville confie à l'organisme Trip Jeunesse Beauport la mise en oeuvre du programme Liaisons jeunesse dans l'arrondissement de Beauport.",
+    "Des intervenants iront à la rencontre des jeunes de 12 à 25 ans dans les parcs et lieux publics de Beauport, pour favoriser une cohabitation harmonieuse.",
+    "L'entente couvre la période du 1er mai au 30 septembre, pour les années 2026, 2027 et 2028.",
+    "La Ville versera 74 515,27 $ par année, pour un total de 223 545,81 $ (sans TPS ni TVQ).",
+    "Les montants de 2027 et 2028 seront ajustés selon le salaire minimum en vigueur au 1er mai de chaque année, et dépendent de l'adoption des budgets.",
+    "L'entente est conclue sans appel d'offres, ce que la loi permet avec un organisme sans but lucratif.",
+    "L'entente précédente avec l'organisme s'était terminée le 30 septembre 2025."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "223 545,81 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:26:01.179Z",
+   "jetons": {
+    "entree": 7497,
+    "sortie": 455
+   }
+  },
+  {
+   "id": "DG2026-001.pdf",
+   "numero": "DG2026-001",
+   "date": "2026-01-21",
+   "unite": "Direction générale",
+   "objet": "Paiement de la cotisation pour l'année 2026 à l'Union des municipalités du Québec (UMQ)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DG2026-001.pdf",
+   "puces": [
+    "La Ville paie sa cotisation 2026 à l'Union des municipalités du Québec : 385 188,27 $ plus taxes, pour la période du 1er janvier au 31 décembre 2026.",
+    "La cotisation générale (346 560,27 $ plus taxes) est calculée à 0,583 $ par habitant, sur une population de 594 443 personnes (décret 2025).",
+    "Un montant de 38 628 $ plus taxes va au « Carrefour du capital humain », calculé sur la masse salariale 2024 de 838 252 562 $.",
+    "Ce service offre aux municipalités de l'information, de la formation et de la représentation en ressources humaines et en relations du travail.",
+    "Le coût total en taxes nettes atteint 404 399,53 $ : 363 844,96 $ du budget de la Direction générale et 40 554,57 $ de celui des Ressources humaines.",
+    "La cotisation était de 372 794,01 $ plus taxes en 2025, de 355 197,75 $ en 2024 et de 344 386,76 $ en 2023."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "385 188,27 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T11:25:09.543Z",
+   "jetons": {
+    "entree": 3032,
+    "sortie": 456
    }
   }
  ]
