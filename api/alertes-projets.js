@@ -166,7 +166,12 @@ export default async function handler(req, res) {
   let pourSoi = null;
   if (!serveur) {
     if (req.method !== 'POST' || req.query?.essai !== 'moi' || !jeton) return res.status(401).json({ erreur: 'non autorisé' });
-    pourSoi = await essaiPourSoi(jeton);
+    try {
+      pourSoi = await essaiPourSoi(jeton);
+    } catch (erreur) {
+      console.error('alertes-projets (essai) :', erreur);
+      return res.status(500).json({ erreur: erreur.message });
+    }
     if (!pourSoi.uid) return res.status(pourSoi.statut).json(pourSoi.corps);
   }
   const apercu = serveur && req.query?.apercu === '1';
