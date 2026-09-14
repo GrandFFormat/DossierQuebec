@@ -37,6 +37,7 @@
     <h1>Mes dossiers</h1>
     <p class="ab-chapeau">Les projets que vous suivez, toutes villes confondues. Cliquez sur un projet pour voir ses décisions ici, les plus récentes d'abord. Pour en ajouter un, choisissez-le plus bas, ou cliquez « Projet : … » sur une décision dans un volet.</p>
     <div id="compte"></div>
+    <div id="alertes"></div>
     <div id="liste"><p class="ab-vide">Chargement…</p></div>
     <div id="pourquoi"></div>
     <div id="suggestions"></div>
@@ -70,6 +71,7 @@
 
   function connexion() {
     $('#compte').innerHTML = '';
+    alertes(null, false);
     $('#liste').innerHTML = `<div class="ab-carte">
       <h3>Connectez-vous</h3>
       <p>Un seul compte pour DossierQuébec et toutes les villes. On vous envoie un lien par courriel, sans mot de passe.</p>
@@ -148,6 +150,45 @@
         <li><strong>Suivre un organisme ou une entreprise</strong> : tous les contrats, subventions et ententes que la Ville lui accorde, avec les montants tels qu'écrits dans les documents. <span class="ab-note">(bientôt)</span></li>
         <li><strong>Le calendrier des décisions attendues</strong> : quelle instance doit décider et à quelle date cible, tel que la Ville l'indique dans ses documents, avant la séance plutôt qu'après — à ajouter à votre agenda. <span class="ab-note">(bientôt)</span></li>
         <li><strong>L'export en tableur</strong> (Excel ou CSV) des décisions d'un projet, d'un quartier ou d'une année, avec les montants vérifiés. <span class="ab-note">(bientôt)</span></li>`;
+
+  // ---------- alertes par courriel (abonnés) ----------
+  // L'interrupteur (alertes_preferences), la date de la dernière alerte (alertes_envois) et un
+  // courriel d'essai (api/alertes-projets.js?essai=moi). Les alertes partent chaque matin.
+  async function alertes(s, abonne) {
+    const zone = $('#alertes');
+    if (!s || !abonne) { zone.innerHTML = ''; return; }
+    const [preference, envois] = await Promise.all([
+      client.from('alertes_preferences').select('actif').eq('user_id', s.user.id).maybeSingle(),
+      client.from('alertes_envois').select('envoye_le').eq('user_id', s.user.id).eq('essai', false).order('envoye_le', { ascending: false }).limit(1),
+    ]);
+    const actif = preference.data?.actif !== false;
+    const derniere = envois.data?.[0]?.envoye_le;
+    zone.innerHTML = `<section class="ab-carte ab-alertes">
+      <h2 style="margin-top:0">Alertes par courriel</h2>
+      <label class="ab-interrupteur"><input type="checkbox" id="alertes-actif"${actif ? ' checked' : ''}> <span>Recevoir un courriel quand mes projets bougent</span></label>
+      <p class="ab-note">Chaque matin, s'il y a du nouveau dans les projets que vous suivez — nouveaux dossiers, décisions finales, nouvelles étapes —, un seul courriel pour tous vos projets. Rien les jours où rien n'avance.${derniere ? ` Dernière alerte : ${dateFr(derniere)}.` : ''}</p>
+      <div class="ab-liens"><button type="button" class="ab-lien-bouton" id="alertes-essai">M'envoyer un courriel d'essai</button><span class="ab-note" id="alertes-etat" aria-live="polite" style="margin:0"></span></div>
+    </section>`;
+    const etat = $('#alertes-etat');
+    $('#alertes-actif').addEventListener('change', async (e) => {
+      const { error } = await client.from('alertes_preferences').upsert({ user_id: s.user.id, actif: e.target.checked, updated_at: new Date().toISOString() });
+      if (error) { e.target.checked = !e.target.checked; etat.textContent = "Impossible d'enregistrer. Réessayez."; return; }
+      etat.textContent = e.target.checked ? 'Alertes activées.' : 'Alertes arrêtées.';
+      mesurer(e.target.checked ? 'alertes_activees' : 'alertes_arretees');
+    });
+    $('#alertes-essai').addEventListener('click', async (e) => {
+      e.target.disabled = true;
+      etat.textContent = 'Envoi…';
+      const courante = await session();
+      const res = await fetch('/api/alertes-projets?essai=moi', { method: 'POST', headers: { Authorization: `Bearer ${courante?.access_token ?? ''}` } }).catch(() => null);
+      const corps = res ? await res.json().catch(() => ({})) : {};
+      e.target.disabled = false;
+      etat.textContent = res?.ok
+        ? corps.envoyes ? `Courriel d'essai envoyé à ${s.user.email}. Pensez à vérifier vos courriels indésirables.` : "Suivez au moins un projet pour recevoir un courriel d'essai."
+        : res?.status === 429 ? "Trois courriels d'essai déjà envoyés dans les dernières 24 heures. Réessayez demain." : "L'envoi n'a pas fonctionné. Réessayez dans un moment.";
+      mesurer('alertes_essai');
+    });
+  }
 
   // ---------- nous écrire ----------
   // Redessiné seulement si le compte change : suivre un projet ne doit pas effacer un message en cours.
@@ -423,6 +464,7 @@
     $('#compte').innerHTML = `<p class="ab-note">Connecté comme <strong>${echapper(s.user.email)}</strong> · ${abonne ? 'abonnement actif' : 'pas d\'abonnement — <a class="ab-lien" href="/abonnement">voir l\'abonnement</a>'} · <button type="button" class="ab-lien-bouton" id="deconnexion">Se déconnecter</button></p>`;
     $('#deconnexion').addEventListener('click', async () => { await client.auth.signOut(); });
 
+    alertes(s, abonne).catch((e) => console.error('alertes :', e));
     ecrire(s);
     const suivis = await chargerSuivis();
     pourquoi({ connecte: true, abonne });

@@ -256,6 +256,10 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-ligne-projet:first-child { border-top: 0; }
 .ab-page .ab-ligne-projet .ab-liens { margin-top: 4px; }
 .ab-page .ab-pourquoi { margin-top: 26px; border-left: 4px solid var(--vedette); }
+.ab-page .ab-alertes { border-left: 4px solid var(--accent); }
+.ab-page .ab-interrupteur { display: flex; align-items: center; gap: 10px; font-weight: 700; cursor: pointer; }
+.ab-page .ab-interrupteur input { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; }
+.ab-page .ab-alertes .ab-liens { align-items: center; }
 .ab-page .ab-pourquoi-deux { margin-top: 26px; }
 .ab-page .ab-pourquoi-deux .ab-pourquoi { margin-top: 0; }
 .ab-page .ab-pourquoi-deux .ab-carte { margin-bottom: 0; }
