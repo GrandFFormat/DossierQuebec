@@ -533,3 +533,17 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-abo .ab-offrir { border-top: 5px solid var(--c-violet); background: color-mix(in srgb, var(--c-violet) 8%, var(--carte)); }
 .ab-abo .ab-attente { border-top: 5px solid var(--c-vert); background: color-mix(in srgb, var(--c-vert) 8%, var(--carte)); }
 .ab-abo h3 .ab-icone { margin-right: 2px; }
+
+/* Mots-clés : pistes quand un mot ne donne rien */
+.ab-page .ab-pistes { margin: 10px 0 4px; padding: 12px 14px; border-radius: 8px; border-left: 3px solid var(--vedette); background: var(--fond-2); font-size: 14px; }
+.ab-page .ab-pistes p { margin: 0 0 8px; }
+.ab-page .ab-pistes ul { margin: 0; padding-left: 18px; }
+.ab-page .ab-pistes li { margin: 0 0 4px; }
+.ab-page .ab-pistes-choix { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+.ab-page .ab-piste {
+  font: inherit; font-size: 13.5px; font-weight: 700; cursor: pointer; padding: 5px 12px; border-radius: 999px;
+  color: var(--encre); background: var(--carte); border: 1px solid var(--ligne-forte);
+}
+.ab-page .ab-piste span { font-weight: 400; color: var(--doux); margin-left: 4px; }
+.ab-page .ab-piste:hover { border-color: var(--accent); }
+.ab-page .ab-piste:disabled { opacity: .6; cursor: default; }

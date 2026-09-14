@@ -239,11 +239,12 @@
     zone.innerHTML = `<details class="ab-carte ab-pliable ab-mots"${ouvertMots}>
       <summary><h2>Mots-clés</h2><span class="ab-etiquette" id="mots-compte">${(data ?? []).length}</span></summary>
       <div class="ab-pliable-corps">
-      <p class="ab-chapeau" style="margin-bottom:10px">Une rue, un quartier, un sujet : « 1re Avenue », « Limoilou », « déneigement »… Les nouvelles décisions qui le contiennent s'ajoutent à votre alerte du matin.</p>
+      <p class="ab-chapeau" style="margin-bottom:10px">Une rue, un quartier, une école, un parc, un sujet : « 1re Avenue », « Limoilou », « Rochebelle », « déneigement »… Les nouvelles décisions qui le contiennent s'ajoutent à votre alerte du matin.</p>
       <ul class="ab-mots-liste" id="mots-liste"></ul>
       <form class="ab-form" id="mots-form"><input type="text" id="mots-champ" maxlength="60" placeholder="Ajouter un mot-clé" aria-label="Nouveau mot-clé"><button type="submit" class="ab-bouton">Ajouter</button></form>
       <p class="ab-note">Cherché dans l'objet et le résumé de chaque décision, sans tenir compte des accents ni des majuscules. Jusqu'à 20.</p>
       <p class="ab-note" id="mots-etat" aria-live="polite"></p>
+      <div class="ab-pistes" id="mots-pistes" hidden></div>
       <p class="ab-astuce"><strong>Astuce :</strong> pas sûr de l'orthographe d'une rue ou d'un lieu ? Cherchez-le dans Google pour trouver son nom officiel (« boulevard Wilfrid-Hamel », « 1re Avenue ») : c'est celui qu'emploient les documents de la Ville.</p>
       </div>
     </details>`;
@@ -265,20 +266,77 @@
     dessiner();
     if (recentes.depuis) etat.textContent = `« Décisions récentes » : depuis le ${dateFr(recentes.depuis)}.`;
 
+    // Quand un mot-clé ne donne rien : les gens écrivent « École Rochebelle » là où la décision dit
+    // « école secondaire De Rochebelle ». On cherche dans toute l'année des bouts plus courts du mot,
+    // sans les mots trop généraux (école, parc, rue…), et on propose ceux qui apparaissent vraiment.
+    const pistes = $('#mots-pistes');
+    const MOTS_GENERAUX = new Set(['ecole', 'primaire', 'secondaire', 'parc', 'rue', 'avenue', 'boulevard', 'chemin', 'route', 'place', 'centre', 'eglise', 'pavillon', 'arena', 'bibliotheque', 'quartier', 'secteur', 'ville', 'quebec', 'de', 'du', 'des', 'la', 'le', 'les', 'et', 'a', 'au', 'aux', 'en', 'sur', 'pour', 'st', 'ste']);
+    const bouts = (mot) => {
+      const jetons = mot.split(' ').map((t) => t.replace(/^[ldLD]['’]/, ''));
+      const utile = (t) => !MOTS_GENERAUX.has(normaliserTexte(t).replace(/[^a-z0-9-]/g, ''));
+      const candidats = new Set();
+      for (let i = 0; i < jetons.length; i++) {
+        for (let j = i; j < jetons.length; j++) {
+          if (!utile(jetons[i]) || !utile(jetons[j])) continue; // pas de bout qui commence ou finit par « école »
+          const bout = jetons.slice(i, j + 1).join(' ');
+          if (normaliserTexte(bout).replace(/[^a-z0-9]/g, '').length >= 4 && normaliserTexte(bout) !== normaliserTexte(mot)) candidats.add(bout);
+        }
+      }
+      return [...candidats];
+    };
+    const proposer = async (motId, mot) => {
+      pistes.hidden = true;
+      const annee = await chargerDossiersAnnee();
+      const compte = (m) => annee.filter((d) => contientMot(d, m)).length;
+      const plusTot = compte(mot);
+      if (plusTot) {
+        etat.textContent = `Ajouté. Aucune décision récente ne le contient, mais ${plusTot} dossier${plusTot > 1 ? 's' : ''} plus tôt en 2026 : vous serez alerté des prochains.`;
+        return;
+      }
+      const trouves = bouts(mot).map((b) => [b, compte(b)]).filter(([, n]) => n > 0)
+        .sort((a, b) => b[0].split(' ').length - a[0].split(' ').length || b[1] - a[1]).slice(0, 3);
+      etat.textContent = `Ajouté, mais aucune décision de 2026 ne contient « ${mot} » tel quel.`;
+      pistes.hidden = false;
+      pistes.innerHTML = trouves.length
+        ? `<p><strong>Les décisions l'écrivent peut-être autrement.</strong> Ces bouts apparaissent en 2026 :</p>
+           <div class="ab-pistes-choix">${trouves.map(([b, n]) => `<button type="button" class="ab-piste" data-remplacer="${echapper(motId)}" data-par="${echapper(b)}">Remplacer par « ${echapper(b)} » <span>${n} dossier${n > 1 ? 's' : ''}</span></button>`).join('')}</div>
+           <p class="ab-note">Ou gardez « ${echapper(mot)} » : vous serez alerté si une décision l'écrit un jour tel quel.</p>`
+        : `<p><strong>Rien trouvé en 2026, même en partie.</strong> Quelques pistes :</p>
+           <ul><li>un seul mot distinctif, sans « école », « parc » ou « rue » (« Rochebelle » plutôt que « École secondaire Rochebelle ») ;</li>
+           <li>le nom officiel, tel qu'écrit par la Ville (voir l'astuce plus bas) ;</li>
+           <li>ou gardez-le tel quel : vous serez alerté si une décision le mentionne un jour.</li></ul>`;
+    };
+
+    const ajouter = async (mot) => {
+      if (mot.length < 2) { etat.textContent = 'Un mot-clé compte au moins 2 caractères.'; return null; }
+      if (mots.some((m) => normaliserTexte(m.mot) === normaliserTexte(mot))) { etat.textContent = 'Ce mot-clé est déjà dans votre liste.'; return null; }
+      const { data: ajoute, error: erreur } = await client.from('alertes_mots_cles').insert({ user_id: s.user.id, mot }).select('id, mot').single();
+      if (erreur) { etat.textContent = /20/.test(erreur.message) ? 'Limite de 20 mots-clés atteinte.' : "Impossible d'ajouter ce mot-clé. Réessayez."; return null; }
+      mots = [...mots, ajoute];
+      dessiner();
+      pistes.hidden = true;
+      const n = recentes.dossiers.filter((d) => contientMot(d, mot)).length;
+      if (n) etat.textContent = `Ajouté. ${n} décision${n > 1 ? 's' : ''} récente${n > 1 ? 's' : ''} le contien${n > 1 ? 'nent' : 't'} déjà ; vous serez alerté des prochaines.`;
+      else await proposer(ajoute.id, mot);
+      mesurer('mot_cle_ajoute');
+      return ajoute;
+    };
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const champ = $('#mots-champ');
-      const mot = champ.value.trim().replace(/\s+/g, ' ');
-      if (mot.length < 2) { etat.textContent = 'Un mot-clé compte au moins 2 caractères.'; return; }
-      if (mots.some((m) => normaliserTexte(m.mot) === normaliserTexte(mot))) { etat.textContent = 'Ce mot-clé est déjà dans votre liste.'; return; }
-      const { data: ajoute, error: erreur } = await client.from('alertes_mots_cles').insert({ user_id: s.user.id, mot }).select('id, mot').single();
-      if (erreur) { etat.textContent = /20/.test(erreur.message) ? 'Limite de 20 mots-clés atteinte.' : "Impossible d'ajouter ce mot-clé. Réessayez."; return; }
-      mots = [...mots, ajoute];
-      champ.value = '';
+      if (await ajouter(champ.value.trim().replace(/\s+/g, ' '))) champ.value = '';
+    });
+    pistes.addEventListener('click', async (e) => {
+      const b = e.target.closest('[data-remplacer]');
+      if (!b) return;
+      b.disabled = true;
+      const { error: erreur } = await client.from('alertes_mots_cles').delete().eq('id', b.dataset.remplacer);
+      if (erreur) { b.disabled = false; etat.textContent = 'Impossible de remplacer ce mot-clé. Réessayez.'; return; }
+      mots = mots.filter((m) => m.id !== b.dataset.remplacer);
       dessiner();
-      const n = recentes.dossiers.filter((d) => contientMot(d, mot)).length;
-      etat.textContent = n ? `Ajouté. ${n} décision${n > 1 ? 's' : ''} récente${n > 1 ? 's' : ''} le contien${n > 1 ? 'nent' : 't'} déjà ; vous serez alerté des prochaines.` : "Ajouté. Aucune décision récente ne le contient : vous serez alerté dès qu'une le contiendra.";
-      mesurer('mot_cle_ajoute');
+      await ajouter(b.dataset.par);
+      mesurer('mot_cle_remplace');
     });
     liste.addEventListener('click', async (e) => {
       const bouton = e.target.closest('[data-mot]');
