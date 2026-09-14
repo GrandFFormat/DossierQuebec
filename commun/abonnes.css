@@ -466,3 +466,70 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page details.ab-toutes { margin: 4px 0 12px; }
 .ab-page details.ab-toutes > summary { cursor: pointer; font-weight: 800; font-size: 14.5px; padding: 6px 0; }
 .ab-page details.ab-toutes[open] > summary { margin-bottom: 4px; }
+
+/* ---------- Page Abonnement : de la couleur (main.ab-abo seulement) ----------
+   Six teintes moyennes, lisibles sur fond clair comme sombre ; les fonds teintés sont mélangés à
+   la couleur de la carte (color-mix), donc ils suivent le thème. Les chiffres et les pastilles
+   mélangent la teinte à l'encre pour garder le contraste. */
+.ab-abo {
+  --c-vert: var(--accent); --c-bleu: #3B82F6; --c-violet: #8B5CF6; --c-orange: #EA580C; --c-jaune: #D99A06; --c-rose: #DB2777;
+}
+.ab-abo .ab-av-vert, .ab-abo .ab-offre-gratuit { --c: var(--c-vert); }
+.ab-abo .ab-av-bleu { --c: var(--c-bleu); }
+.ab-abo .ab-av-violet { --c: var(--c-violet); }
+.ab-abo .ab-av-orange { --c: var(--c-orange); }
+.ab-abo .ab-av-jaune, .ab-abo .ab-offre-payant { --c: var(--c-jaune); }
+.ab-abo .ab-av-rose { --c: var(--c-rose); }
+
+/* Les deux offres */
+.ab-abo .ab-offre { border-top: 5px solid var(--c); }
+.ab-abo .ab-offre-payant {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--c-jaune) 12%, var(--carte)) 0, var(--carte) 180px);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--c-jaune) 16%, transparent);
+}
+.ab-abo .ab-offre-tete { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.ab-abo .ab-offre-tete h3 { margin: 0; font-size: 17px; }
+.ab-abo .ab-pastille-offre {
+  font-weight: 800; font-size: 13px; white-space: nowrap; padding: 3px 11px; border-radius: 999px;
+  color: color-mix(in srgb, var(--c) 55%, var(--encre));
+  background: color-mix(in srgb, var(--c) 18%, var(--carte)); border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
+}
+.ab-abo ul.ab-coches { list-style: none; margin: 0; padding: 0; }
+.ab-abo ul.ab-coches li { position: relative; padding-left: 28px; margin: 0 0 9px; }
+.ab-abo ul.ab-coches li::before {
+  content: "✓"; position: absolute; left: 0; top: 3px; width: 19px; height: 19px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 11px; font-weight: 900; color: #fff; background: var(--c-vert);
+}
+.ab-abo ul.ab-avantages { list-style: none; margin: 0 0 6px; padding: 0; display: grid; gap: 10px; }
+.ab-abo ul.ab-avantages li {
+  display: grid; grid-template-columns: 36px 1fr; gap: 10px; align-items: start; padding: 10px 12px; border-radius: 10px;
+  background: color-mix(in srgb, var(--c) 9%, var(--carte)); border-left: 3px solid var(--c);
+}
+.ab-abo ul.ab-avantages .ab-icone {
+  width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-size: 18px; line-height: 1;
+  background: color-mix(in srgb, var(--c) 22%, var(--carte));
+}
+.ab-abo .ab-prix { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; margin: 18px 0 2px; }
+.ab-abo .ab-prix-montant { font-size: 40px; font-weight: 900; letter-spacing: -.03em; line-height: 1; color: color-mix(in srgb, var(--c-orange) 80%, var(--encre)); }
+
+/* Le travail derrière le site */
+.ab-abo .ab-travail { border-top: 5px solid var(--c-bleu); }
+.ab-abo .ab-tuile { --c: var(--c-vert); background: color-mix(in srgb, var(--c) 11%, var(--carte)); border-left: 4px solid var(--c); }
+.ab-abo .ab-tuile:nth-child(6n+2) { --c: var(--c-bleu); }
+.ab-abo .ab-tuile:nth-child(6n+3) { --c: var(--c-violet); }
+.ab-abo .ab-tuile:nth-child(6n+4) { --c: var(--c-orange); }
+.ab-abo .ab-tuile:nth-child(6n+5) { --c: var(--c-rose); }
+.ab-abo .ab-tuile:nth-child(6n) { --c: var(--c-jaune); }
+.ab-abo .ab-tuile strong { color: color-mix(in srgb, var(--c) 70%, var(--encre)); }
+.ab-abo .ab-mois-barre { background: linear-gradient(180deg, var(--c-violet), var(--c-bleu)); }
+.ab-abo .ab-chemin li:nth-child(1)::before { background: var(--c-bleu); }
+.ab-abo .ab-chemin li:nth-child(2)::before { background: var(--c-violet); }
+.ab-abo .ab-chemin li:nth-child(3)::before { background: var(--c-rose); }
+.ab-abo .ab-chemin li:nth-child(4)::before { background: var(--c-orange); }
+.ab-abo .ab-chemin li:nth-child(5)::before { background: var(--c-jaune); }
+.ab-abo .ab-chemin li:nth-child(6)::before { background: var(--c-vert); }
+
+/* Offrir et liste d'attente */
+.ab-abo .ab-offrir { border-top: 5px solid var(--c-violet); background: color-mix(in srgb, var(--c-violet) 8%, var(--carte)); }
+.ab-abo .ab-attente { border-top: 5px solid var(--c-vert); background: color-mix(in srgb, var(--c-vert) 8%, var(--carte)); }
+.ab-abo h3 .ab-icone { margin-right: 2px; }
