@@ -1,0 +1,54 @@
+{
+ "generatedAt": "2026-09-14T23:05:43.369Z",
+ "cheminsLus": [
+  "/graphql/",
+  "/fr/ville/",
+  "/_nuxt/",
+  "/pc/",
+  "/recherche/api/3/action/",
+  "/recherche/dataset/"
+ ],
+ "sites": [
+  {
+   "url": "https://levis.ca/robots.txt",
+   "present": true,
+   "erreur": null,
+   "toutInterdit": false,
+   "reglesConcernantNosChemins": [],
+   "texte": "# robots.txt for https://levis.ca/\n\nsitemap: https://levis.ca/fr/sitemaps-1-sitemap.xml\n\n# live - don't allow web crawlers to index cpresources/ or vendor/\n\nUser-agent: *\nDisallow: /cpresources/\nDisallow: /vendor/\nDisallow: /.env\nDisallow: /cache/\n\n"
+  },
+  {
+   "url": "https://www.donneesquebec.ca/robots.txt",
+   "present": true,
+   "erreur": null,
+   "toutInterdit": false,
+   "reglesConcernantNosChemins": [
+    {
+     "type": "disallow",
+     "chemin": "/recherche/dataset/*?"
+    },
+    {
+     "type": "disallow",
+     "chemin": "/recherche/dataset/rate/"
+    },
+    {
+     "type": "disallow",
+     "chemin": "/recherche/dataset/*/history"
+    },
+    {
+     "type": "disallow",
+     "chemin": "/recherche/api/"
+    }
+   ],
+   "texte": "User-agent: *\nDisallow: /wp-admin/\nAllow: /wp-admin/admin-ajax.php\nDisallow: /recherche/dataset/*?\nDisallow: /recherche/organization/*?\nDisallow: /recherche/group/*?\nDisallow: /recherche/dataset/rate/\nDisallow: /recherche/revision/\nDisallow: /recherche/dataset/*/history\nDisallow: /recherche/api/\nDisallow: /api/\nCrawl-Delay: 10\n"
+  },
+  {
+   "url": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt",
+   "present": false,
+   "erreur": "HTTP 403 Forbidden sur https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt",
+   "toutInterdit": null,
+   "reglesConcernantNosChemins": null,
+   "texte": null
+  }
+ ]
+}
