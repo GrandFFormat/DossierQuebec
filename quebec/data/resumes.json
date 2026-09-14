@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-14T11:27:17.738Z",
+ "generatedAt": "2026-09-14T15:07:40.375Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,194 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-01-01",
-  "plafond": 40
+  "depuis": "2026-07-16",
+  "plafond": 120
  },
- "nombre": 1502,
- "genereCetteFois": 1,
+ "nombre": 1509,
+ "genereCetteFois": 7,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.0307,
-  "jetonsEntree": 3674,
-  "jetonsSortie": 492
+  "montant": 0.2396,
+  "jetonsEntree": 34067,
+  "jetonsSortie": 2772
  },
  "resumes": [
+  {
+   "id": "RH2026-725.pdf",
+   "numero": "RH2026-725",
+   "date": "2026-09-11",
+   "unite": "Ressources humaines",
+   "objet": "Nomination de madame Myriam Pellerin à l'emploi de greffière et directrice par intérim du Service du greffe et des archives",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/RH2026-725.pdf",
+   "puces": [
+    "La Ville nomme Myriam Pellerin greffière et directrice par intérim du Service du greffe et des archives.",
+    "La nomination s'applique rétroactivement au 24 août 2026.",
+    "Son salaire est fixé à 165 578 $, selon l'échelle des cadres de direction (DS2).",
+    "Elle conserve ses conditions actuelles pour l'assurance collective, le régime de retraite et la sécurité d'emploi.",
+    "Elle occupait jusqu'ici le poste de directrice de la Division du secrétariat aux instances décisionnelles et à l'accès à l'information.",
+    "Les fonds sont déjà prévus au budget du Service du greffe et des archives."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "165 578 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T15:07:30.585Z",
+   "jetons": {
+    "entree": 2711,
+    "sortie": 327
+   }
+  },
+  {
+   "id": "FN2026-032.pdf",
+   "numero": "FN2026-032",
+   "date": "2026-09-11",
+   "unite": "Finances",
+   "objet": "Contribution au déficit d'opération encouru par QMI Spectacles inc. pour l'exercice financier clos le 31 décembre 2025",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/FN2026-032.pdf",
+   "puces": [
+    "La Ville de Québec versera 2 822 917 $ à QMI Spectacles inc. pour couvrir une partie du déficit d'exploitation du Centre Vidéotron en 2025.",
+    "Ce versement découle du bail signé en 2011, qui oblige la Ville à assumer 50 % du déficit d'opération, sans dépasser le loyer de base payé par l'entreprise.",
+    "En 2025, la Ville a encaissé 2 822 917 $ en loyer, 946 445 $ en redevances sur les billets et 992 493 $ en revenus recouvrables, surtout liés aux stationnements.",
+    "Le montant de la contribution a été confirmé par l'audit des états financiers de QMI Spectacles inc. réalisé par Mallette S.E.N.C.R.L.",
+    "Des représentants du Service des finances ont consulté les registres de l'entreprise le 16 décembre 2025 et le 28 juillet 2026, dans le cadre d'une entente de confidentialité.",
+    "La somme est comptabilisée dans les résultats financiers 2025 de la Ville et relève de la compétence d'agglomération.",
+    "La décision doit être prise par le conseil d'agglomération de Québec, avec une date cible du 16 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 822 917 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T15:07:32.888Z",
+   "jetons": {
+    "entree": 6040,
+    "sortie": 523
+   }
+  },
+  {
+   "id": "OB2026-002.pdf",
+   "numero": "OB2026-002",
+   "date": "2026-09-11",
+   "unite": "Bureau de l'Ombudsman",
+   "objet": "Modification de la résolution CV-2004-0024 relative à la création du Bureau de l'ombudsman et nomination d'un commissaire",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/OB2026-002.pdf",
+   "puces": [
+    "La Ville nomme Pierre Rivard commissaire au Bureau de l'ombudsman, en remplacement de Jacques Ouellet, qui a démissionné.",
+    "Son mandat se termine le 1er octobre 2028, soit la même échéance que les autres commissaires nommés le 1er octobre 2025.",
+    "Il reste en poste jusqu'à ce qu'il soit remplacé ou nommé de nouveau.",
+    "La Ville ajoute une règle : quand un poste de commissaire devient vacant, le remplaçant termine le mandat déjà en cours plutôt que d'en commencer un nouveau.",
+    "Le document ne mentionne aucun impact financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T15:07:30.788Z",
+   "jetons": {
+    "entree": 4026,
+    "sortie": 321
+   }
+  },
+  {
+   "id": "RH2026-716.pdf",
+   "numero": "RH2026-716",
+   "date": "2026-09-11",
+   "unite": "Ressources humaines",
+   "objet": "Création d'un poste temporaire de directeur de projet, classe 1, à la direction du Service des finances et affectation de madame Ginette Lachance",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/RH2026-716.pdf",
+   "puces": [
+    "La Ville crée un poste temporaire de directeur de projet au Service des finances.",
+    "Ginette Lachance y est affectée jusqu'au 30 juin 2027, au plus tard, tout en gardant son titre d'assistante-trésorière.",
+    "Son salaire reste au niveau actuel, soit 169 183 $.",
+    "Elle pilotera toutes les étapes menant à l'adoption et au déploiement du budget 2027, déjà en cours.",
+    "Elle devra ensuite proposer des améliorations au processus budgétaire et à la préparation du Programme décennal d'immobilisations.",
+    "Les fonds nécessaires, avantages sociaux inclus, sont déjà prévus au budget du Service des finances."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "169 183 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T15:07:30.371Z",
+   "jetons": {
+    "entree": 2907,
+    "sortie": 339
+   }
+  },
+  {
+   "id": "DE2026-323.pdf",
+   "numero": "DE2026-323",
+   "date": "2026-09-11",
+   "unite": "Développement économique et grands projets",
+   "objet": "Adoption du Règlement sur l'acquisition d'immeubles à des fins municipales et sur l'emprunt nécessaire au paiement des coûts qui y sont rattachés R.V.Q. 3577",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-323.pdf",
+   "puces": [
+    "La Ville adopte un règlement qui l'autorise à emprunter 20 000 000 $ pour acheter des immeubles et des terrains à des fins municipales.",
+    "L'argent servira à racheter des terrains industriels, la réserve municipale ayant beaucoup diminué, et à acquérir des terrains stratégiques pour requalifier certains secteurs.",
+    "Les acquisitions peuvent se faire de gré à gré ou par expropriation, partout sur le territoire de la ville.",
+    "Le budget couvre aussi des services professionnels (études, arpentage, environnement, évaluation, négociation) et des travaux de démolition, déblaiement et décontamination.",
+    "Le terme de l'emprunt est de 5 ans et les fonds sont prévus aux années 2027 à 2030 du programme d'immobilisations 2026-2035.",
+    "La Ville puise 3 000 000 $ dans son fonds général, soit 15 % de la dépense; ce montant sera remboursé au fonds quand le règlement entrera en vigueur."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "20 000 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T15:07:39.441Z",
+   "jetons": {
+    "entree": 8716,
+    "sortie": 448
+   }
+  },
+  {
+   "id": "FN2026-039.pdf",
+   "numero": "FN2026-039",
+   "date": "2026-09-11",
+   "unite": "Finances",
+   "objet": "Approbation du Règlement No 455 décrétant un emprunt n'excédant pas 9 037 000 $ concernant l'acquisition de 29 véhicules de type minibus du Réseau de transport de la Capitale (RTC)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/FN2026-039.pdf",
+   "puces": [
+    "Le conseil d'agglomération approuve un règlement d'emprunt du RTC d'au plus 9 037 000 $ pour acheter 29 minibus.",
+    "Ces véhicules serviront à intégrer le service de transport à la demande « Flexibus » aux opérations du RTC.",
+    "L'emprunt se rembourse sur cinq ans : 9 037 000 $ de capital et 1 112 800 $ d'intérêts, soit 10 149 800 $ au total.",
+    "Le coût se répartit ainsi : 6 967 000 $ pour les véhicules (240 250 $ chacun), 300 000 $ d'équipements et frais, 1 090 000 $ de contingences, 417 000 $ de taxes nettes et 263 000 $ de frais de financement.",
+    "Toute subvention ou contribution reçue réduira le montant emprunté, et le RTC peut payer une partie comptant à même son budget d'exploitation.",
+    "Le règlement no 455 a été adopté par le conseil d'administration du RTC le 9 septembre 2026 et doit aussi être approuvé par le ministre des Affaires municipales et de l'Habitation."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "9 037 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T15:07:40.374Z",
+   "jetons": {
+    "entree": 6928,
+    "sortie": 487
+   }
+  },
+  {
+   "id": "RH2026-704.pdf",
+   "numero": "RH2026-704",
+   "date": "2026-09-11",
+   "unite": "Ressources humaines",
+   "objet": "Promotion de monsieur Jean-Philippe Légaré à l'emploi de directeur de division du budget et de la planification financière à la Division du budget et de la planification financière du Service des finances (17306)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/RH2026-704.pdf",
+   "puces": [
+    "La Ville nomme Jean-Philippe Légaré directeur de la Division du budget et de la planification financière, au Service des finances.",
+    "Son salaire est fixé à 162 516 $, selon la classe 1 (B8) de l'échelle des emplois de direction.",
+    "Le poste devient vacant à la suite du départ à la retraite de Ginette Lachance.",
+    "Il occupait jusqu'ici le poste de directeur de section de la performance financière et des systèmes financiers.",
+    "Le poste a été comblé par un concours interne et externe (CADRR-035-2026).",
+    "Les fonds nécessaires, avantages sociaux compris, sont déjà prévus au budget des Finances."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "162 516 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-14T15:07:39.268Z",
+   "jetons": {
+    "entree": 2739,
+    "sortie": 327
+   }
+  },
   {
    "id": "DE2026-304.pdf",
    "numero": "DE2026-304",
