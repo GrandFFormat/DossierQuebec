@@ -244,13 +244,20 @@ export function rendreDetail(reponse, ville) {
 // quebec/scripts/details-du-jour.js). À n'afficher que pour un dossier dont le résumé a un montant :
 // sans montant, il n'y a rien à détailler.
 const HEURE_LECTURE = tr('demain matin', 'tomorrow morning');
-export function rendreDemande(reponse) {
+// Les villes où les demandes sont réellement lues chaque matin. Sur les volets encore en prototype
+// (Montréal, Lévis, Longueuil…), les demandes sont enregistrées — elles disent où est l'intérêt —
+// mais mises sur la glace : le message ne promet pas une lecture qui n'aura pas lieu.
+const VILLES_DETAIL_LU = new Set(['quebec']);
+export function rendreDemande(reponse, ville) {
   if (!reponse || reponse.existe) return '';
   if (reponse.lu) return `<div class="ab-demande"><p class="ab-note" style="margin:0">${tr('Ce document a été lu, mais on n’a pas pu en tirer un détail de l’argent fiable. Le PDF officiel fait foi.', "This document was read, but no reliable money details could be drawn from it. The official PDF prevails.")}</p></div>`;
   if (!reponse.demandable) return '';
-  return `<div class="ab-demande">${contenuDemande(reponse.demande)}</div>`;
+  return `<div class="ab-demande">${contenuDemande(reponse.demande, ville)}</div>`;
 }
-function contenuDemande(demande) {
+function contenuDemande(demande, ville) {
+  if (demande && !VILLES_DETAIL_LU.has(ville)) {
+    return `<p class="ab-demande-etat">${tr('Demande enregistrée ; le détail de l’argent n’est pas encore offert pour cette ville, en prototype.', 'Request recorded; money details are not yet offered for this city, which is still a prototype.')}</p>`;
+  }
   if (demande) {
     return EN
       ? `<p class="ab-demande-etat">Money details ${demande.parVous ? 'requested' : 'already requested by a subscriber'} on ${echapper(dateFr(new Date(demande.le).toLocaleDateString('en-CA')))}: read as a priority, normally ${HEURE_LECTURE}.</p>`
@@ -273,7 +280,7 @@ export async function demanderDetail(bouton, ville, dossier, s) {
     });
     const corps = await res.json().catch(() => ({}));
     if (res.ok && corps.demande) {
-      boite.innerHTML = contenuDemande(corps.demande);
+      boite.innerHTML = contenuDemande(corps.demande, ville);
       mesurer('detail_demande', { ville });
       return;
     }

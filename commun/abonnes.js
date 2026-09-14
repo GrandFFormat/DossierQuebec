@@ -121,7 +121,7 @@ async function peupler(zone) {
     <div class="ab-signaler"><button type="button" class="ab-signaler-lien" data-action="signaler">${tr('Signaler une erreur dans cette fiche', 'Report an error in this item')}</button><div class="ab-message-boite" hidden></div></div>`;
   const reponse = await chargerDetail(VILLE, zone.dataset.dossier, sess);
   // Sans détail : un abonné peut le demander, si le résumé a trouvé un montant (data-montant).
-  zone.querySelector('.ab-detail-zone').innerHTML = rendreDetail(reponse, VILLE) || (zone.dataset.montant === '1' ? rendreDemande(reponse) : '');
+  zone.querySelector('.ab-detail-zone').innerHTML = rendreDetail(reponse, VILLE) || (zone.dataset.montant === '1' ? rendreDemande(reponse, VILLE) : '');
 }
 
 function formulaireConnexion(boite, message) {
