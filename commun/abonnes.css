@@ -289,6 +289,14 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-interrupteur { display: flex; align-items: center; gap: 10px; font-weight: 700; cursor: pointer; }
 .ab-page .ab-interrupteur input { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; }
 .ab-page .ab-alertes .ab-liens { align-items: center; }
+.ab-page .ab-organismes { border-left: 4px solid var(--accent); }
+/* Un organisme suivi : même menu dépliant que les sections de l'agenda (ab-section-agenda), avec
+   le « × » pour ne plus le suivre avant la flèche. */
+#org-liste { margin-top: 12px; }
+.ab-page details.ab-organisme > summary { flex-wrap: wrap; }
+.ab-page .ab-organisme-nom { min-width: 0; overflow-wrap: anywhere; }
+.ab-page details.ab-organisme > summary .ab-mot-retirer { margin-left: auto; }
+.ab-page .ab-detail-org { margin-top: 8px; }
 .ab-page .ab-mots { margin: 14px 0 4px; padding: 12px 14px; background: var(--fond-2); border-radius: 8px; }
 .ab-page .ab-mots-liste { list-style: none; margin: 0 0 10px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .ab-page .ab-mot { display: inline-flex; align-items: center; gap: 8px; padding: 3px 4px 3px 12px; background: var(--carte); border: 1px solid var(--ligne-forte); border-radius: 999px; font-size: 14px; }

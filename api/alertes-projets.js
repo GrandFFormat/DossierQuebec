@@ -17,7 +17,8 @@
 //   - un nouveau dossier dans le projet ;
 //   - un dossier qui passe d'« en attente » à « décision finale » ;
 //   - une nouvelle résolution sur un dossier encore en attente ;
-//   - un dossier récent qui contient un des mots-clés de l'abonné (alertes_mots_cles).
+//   - un dossier récent qui contient un de ses mots-clés (alertes_mots_cles) ou le nom d'un
+//     organisme qu'il suit (organismes_suivis).
 // Le récapitulatif « Où en est le projet », s'il a été refait, accompagne ces nouvelles.
 // Un projet suivi pour la première fois est mémorisé sans courriel : on ne signale que ce qui
 // arrive ensuite. Au plus un courriel par personne par exécution, tous projets réunis. Si l'envoi
@@ -83,6 +84,10 @@ export function contientMot(dossier, mot) {
   return new RegExp(`(^|[^a-z0-9])${m.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^a-z0-9])`).test(texte);
 }
 export const cleMot = (id) => `mot_${String(id).replace(/[^0-9a-f]/gi, '')}`;
+export const cleOrganisme = (id) => `org_${String(id).replace(/[^0-9a-f]/gi, '')}`;
+// Un organisme suivi (« Loisirs Montcalm inc. ») est cherché sans sa forme juridique : les documents
+// l'écrivent tantôt avec, tantôt sans.
+export const sansFormeJuridique = (nom) => String(nom ?? '').trim().replace(/[\s,]+(?:inc|ltée|limitée|s\.?e\.?n\.?c|s\.?e\.?c|enr|coop)\.?$/i, '').trim();
 
 // ---------- le courriel ----------
 const statut = (d) =>
@@ -127,7 +132,7 @@ function cadreProjet(ville, projet, contenu) {
 function blocsDe(ville, c, mot = false) {
   const derniere = (d) => d.resolutions?.at(-1);
   return [
-    { titre: mot ? 'Décisions récentes qui contiennent ce mot' : 'Nouveaux dossiers', lignes: c.nouveaux.map((d) => ligne(ville, d, [dateFr(d.derniere), statut(d)].filter(Boolean).join(' · '))) },
+    { titre: mot ? 'Décisions récentes qui le mentionnent' : 'Nouveaux dossiers', lignes: c.nouveaux.map((d) => ligne(ville, d, [dateFr(d.derniere), statut(d)].filter(Boolean).join(' · '))) },
     { titre: 'Décision finale prise', lignes: c.decides.map((d) => ligne(ville, d, [derniere(d)?.instance, dateFr(derniere(d)?.date)].filter(Boolean).join(', '))) },
     { titre: 'Nouvelle étape', lignes: c.etapes.map((d) => ligne(ville, d, [derniere(d)?.instance, dateFr(derniere(d)?.date), statut(d)].filter(Boolean).join(' · '))) },
   ];
@@ -152,7 +157,7 @@ export function courriel(sections, userId, essai = false) {
     ${essai ? '<p style="margin:8px 0 0;padding:8px 10px;background:#FFF6D6;border-radius:6px;font-size:13px">Courriel d\'essai : il reprend les dossiers les plus récents de chaque projet, pas seulement les nouveautés.</p>' : ''}`;
   const fin = `<p style="margin:22px 0 0"><a href="${mesDossiers}" style="display:inline-block;padding:9px 16px;background:#0B8A4B;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">Voir mes dossiers</a></p>
     <p style="margin:22px 0 0;font-size:12px;color:#5B6570">Les phrases sous chaque numéro sont des résumés générés par IA à partir des documents de la Ville ; en cas d'écart, les documents officiels font foi. DossierQuébec n'est pas un site de la Ville.<br>
-    Vous recevez ce courriel parce que vous suivez ces projets ou ces mots-clés avec votre abonnement. <a href="${echapper(desabonnement)}" style="color:#5B6570">Ne plus recevoir ces alertes</a></p>
+    Vous recevez ce courriel parce que vous suivez ces projets, mots-clés ou organismes avec votre abonnement. <a href="${echapper(desabonnement)}" style="color:#5B6570">Ne plus recevoir ces alertes</a></p>
   </div>`;
 
   // Réserve pour la liste « Aussi du nouveau » des projets qui n'entreront pas : ~250 octets chacun.
@@ -276,13 +281,17 @@ export default async function handler(req, res) {
     if (!abonnes.length) return res.status(200).json({ ok: true, ...rapport, raison: 'aucun abonné actif' });
 
     const liste = abonnes.join(',');
-    const [suivis, preferences, etats, mots] = await Promise.all([
+    const [suivis, preferences, etats, mots, organismes] = await Promise.all([
       supabase(`/rest/v1/dossiers_suivis?select=user_id,ville,dossier_id&user_id=in.(${liste})&dossier_id=like.projet:*`),
       supabase(`/rest/v1/alertes_preferences?select=user_id,actif&user_id=in.(${liste})`),
       supabase(`/rest/v1/alertes_etat?select=user_id,ville,projet,etat&user_id=in.(${liste})`),
       // Table des mots-clés absente (SQL pas encore exécuté) : les alertes de projets partent quand même.
       supabase(`/rest/v1/alertes_mots_cles?select=id,user_id,mot&user_id=in.(${liste})&order=created_at`).catch((e) => {
         rapport.erreurs.push(`mots-clés ignorés : ${e.message}`);
+        return [];
+      }),
+      supabase(`/rest/v1/organismes_suivis?select=id,user_id,nom&user_id=in.(${liste})&order=created_at`).catch((e) => {
+        rapport.erreurs.push(`organismes ignorés : ${e.message}`);
         return [];
       }),
     ]);
@@ -314,15 +323,22 @@ export default async function handler(req, res) {
       if (!projetsDe.has(s.user_id)) projetsDe.set(s.user_id, []);
       projetsDe.get(s.user_id).push({ ville: s.ville, cle });
     }
-    const motsDe = new Map();
+    // Les mots-clés et les organismes suivis : même mécanique, sur les dossiers récents.
+    const ciblesDe = new Map();
+    const ajouterCible = (userId, cible) => {
+      if (!ciblesDe.has(userId)) ciblesDe.set(userId, []);
+      ciblesDe.get(userId).push(cible);
+    };
     for (const m of mots) {
-      if (!m.mot || !/^[0-9a-f-]{36}$/.test(m.id ?? '')) continue;
-      if (!motsDe.has(m.user_id)) motsDe.set(m.user_id, []);
-      motsDe.get(m.user_id).push(m);
+      if (m.mot && /^[0-9a-f-]{36}$/.test(m.id ?? '')) ajouterCible(m.user_id, { cle: cleMot(m.id), cherche: m.mot, titre: `Mot-clé « ${m.mot} »` });
+    }
+    for (const o of organismes) {
+      const cherche = sansFormeJuridique(o.nom);
+      if (cherche.length >= 3 && /^[0-9a-f-]{36}$/.test(o.id ?? '')) ajouterCible(o.user_id, { cle: cleOrganisme(o.id), cherche, titre: `Organisme « ${o.nom} »` });
     }
     rapport.motsMemorises = 0;
 
-    for (const uid of new Set([...projetsDe.keys(), ...motsDe.keys()])) {
+    for (const uid of new Set([...projetsDe.keys(), ...ciblesDe.keys()])) {
       const projets = projetsDe.get(uid) ?? [];
       if (coupees.has(uid) && !essai) continue;
       try {
@@ -352,13 +368,13 @@ export default async function handler(req, res) {
         // Les mots-clés : les dossiers récents qui les contiennent et qu'on n'a pas encore signalés
         // (ni pour ce mot, ni plus haut dans ce même courriel pour un projet).
         const dejaDansCeCourriel = new Set(sections.flatMap((s) => [...s.c.nouveaux, ...s.c.decides, ...s.c.etapes].map((d) => d.numero)));
-        for (const m of motsDe.get(uid) ?? []) {
+        for (const m of ciblesDe.get(uid) ?? []) {
           for (const ville of Object.keys(VILLES)) {
             const fichier = await lireRecentes(ville);
             if (!fichier?.dossiers) continue;
-            const trouves = fichier.dossiers.filter((d) => contientMot(d, m.mot));
-            const cle = cleMot(m.id);
-            const titre = { titre: `Mot-clé « ${m.mot} »` };
+            const trouves = fichier.dossiers.filter((d) => contientMot(d, m.cherche));
+            const cle = m.cle;
+            const titre = { titre: m.titre };
             if (essai) {
               const recents = trouves.slice(0, 3);
               if (recents.length) sections.push({ ville, projet: titre, mot: true, c: { nouveaux: recents, decides: [], etapes: [], recap: null, total: recents.length } });
@@ -395,8 +411,8 @@ export default async function handler(req, res) {
             corps: aMemoriser,
             entetes: { Prefer: 'resolution=merge-duplicates,return=minimal' },
           });
-          rapport.projetsMemorises += aMemoriser.filter((a) => !a.projet.startsWith('mot_')).length;
-          rapport.motsMemorises += aMemoriser.filter((a) => a.projet.startsWith('mot_')).length;
+          rapport.projetsMemorises += aMemoriser.filter((a) => !/^(?:mot|org)_/.test(a.projet)).length;
+          rapport.motsMemorises += aMemoriser.filter((a) => /^(?:mot|org)_/.test(a.projet)).length;
         }
       } catch (erreur) {
         console.error('alertes-projets :', uid, erreur);
