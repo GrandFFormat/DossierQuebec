@@ -35,14 +35,14 @@
     </nav>
   </header>
 
-  <main>
+  <main class="ab-abo">
     <h1>Abonnement</h1>
     <p class="ab-chapeau">Les décisions des villes restent gratuites pour tout le monde, avec leur résumé en langage clair et le lien vers le document officiel. L'abonnement ajoute ce qui demande du travail en plus — et c'est lui qui permet de garder tout le reste gratuit.</p>
 
     <div class="ab-grille">
-      <section class="ab-carte">
-        <h3>Toujours gratuit</h3>
-        <ul>
+      <section class="ab-carte ab-offre ab-offre-gratuit">
+        <div class="ab-offre-tete"><h3>Toujours gratuit</h3><span class="ab-pastille-offre">0 $</span></div>
+        <ul class="ab-coches">
           <li>Toutes les décisions publiées, par séance</li>
           <li>Les résumés en langage clair</li>
           <li>Les votes nominatifs et les membres des conseils</li>
@@ -50,18 +50,19 @@
           <li>Avec un compte gratuit : suivre des projets dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a>, avec leur récapitulatif « Où en est le projet »</li>
         </ul>
       </section>
-      <section class="ab-carte">
-        <h3>Avec l'abonnement payant</h3>
-        <ul>
-          <li><strong>Une alerte par courriel quand vos projets bougent</strong> : une nouvelle décision, un dossier qui attend un vote au conseil, un récapitulatif mis à jour. Rien les semaines où rien n'avance — plus besoin de revenir vérifier.</li>
-          <li><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : tout ce que la Ville décide sur la 1re Avenue, dans Limoilou, sur le déneigement…</li>
-          <li><strong>Suivre un organisme ou une entreprise</strong> : les décisions de l'année qui le nomment — contrats, subventions, ententes — avec le montant de chacune tel qu'écrit, et une alerte quand une nouvelle le nomme</li>
-          <li><strong>L'agenda des conseils</strong> (<em class="ab-mise-en-garde">approximatif</em>) : ce qui s'en vient à chaque conseil, avec son résumé, et ce qui sera <em class="ab-mise-en-garde">probablement</em> présenté à la prochaine séance</li>
-          <li><strong>Le détail de l'argent</strong> : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions, ce qui change
-            <br><span class="ab-note">Offert pour les dossiers avec un montant : ceux des grands projets suivis (tramway, logement…), et chaque nouveau dossier depuis le 15 septembre 2026, dès le lendemain de sa publication. Les autres dossiers de 2026 ne l'ont pas encore.</span></li>
-          <li><strong>L'export en tableur ou en PDF</strong> (Excel, CSV ou PDF à imprimer) : vous choisissez un projet, un mot ou un nom et les colonnes, avec le détail de l'argent quand il est lu</li>
+      <section class="ab-carte ab-offre ab-offre-payant">
+        <div class="ab-offre-tete"><h3>Avec l'abonnement payant</h3><span class="ab-pastille-offre">3 $ / mois</span></div>
+        <p class="ab-note" style="margin:0 0 10px">Tout le gratuit, plus :</p>
+        <ul class="ab-avantages">
+          <li class="ab-av-bleu"><span class="ab-icone" aria-hidden="true">🔔</span><div><strong>Une alerte par courriel quand vos projets bougent</strong> : une nouvelle décision, un dossier qui attend un vote au conseil, un récapitulatif mis à jour. Rien les semaines où rien n'avance — plus besoin de revenir vérifier.</div></li>
+          <li class="ab-av-violet"><span class="ab-icone" aria-hidden="true">📍</span><div><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : tout ce que la Ville décide sur la 1re Avenue, dans Limoilou, sur le déneigement…</div></li>
+          <li class="ab-av-orange"><span class="ab-icone" aria-hidden="true">🏢</span><div><strong>Suivre un organisme ou une entreprise</strong> : les décisions de l'année qui le nomment — contrats, subventions, ententes — avec le montant de chacune tel qu'écrit, et une alerte quand une nouvelle le nomme</div></li>
+          <li class="ab-av-vert"><span class="ab-icone" aria-hidden="true">🗓️</span><div><strong>L'agenda des conseils</strong> (<em class="ab-mise-en-garde">approximatif</em>) : ce qui s'en vient à chaque conseil, avec son résumé, et ce qui sera <em class="ab-mise-en-garde">probablement</em> présenté à la prochaine séance</div></li>
+          <li class="ab-av-jaune"><span class="ab-icone" aria-hidden="true">💵</span><div><strong>Le détail de l'argent</strong> : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions, ce qui change
+            <br><span class="ab-note">Offert pour les dossiers avec un montant : ceux des grands projets suivis (tramway, logement…), et chaque nouveau dossier depuis le 15 septembre 2026, dès le lendemain de sa publication. Les autres dossiers de 2026 ne l'ont pas encore.</span></div></li>
+          <li class="ab-av-rose"><span class="ab-icone" aria-hidden="true">📊</span><div><strong>L'export en tableur ou en PDF</strong> (Excel, CSV ou PDF à imprimer) : vous choisissez un projet, un mot ou un nom et les colonnes, avec le détail de l'argent quand il est lu</div></li>
         </ul>
-        <p class="ab-prix">3 $ <span class="ab-note">par mois (prix prévu)</span></p>
+        <p class="ab-prix"><span class="ab-prix-montant">3 $</span> <span class="ab-note">par mois (prix prévu)</span></p>
         <p class="ab-note">Un seul abonnement pour toutes les villes couvertes — pas un abonnement par ville.</p>
       </section>
     </div>
@@ -82,7 +83,7 @@
             <li><strong>Expliqué en langage clair</strong> par un résumé généré par IA, toujours identifié comme tel.</li>
             <li><strong>Relié</strong> à son dossier, à son statut — en attente ou décision finale — et à son projet.</li>
             <li><strong>Vérifié</strong> : le détail de l'argent et les récapitulatifs de projets sont contre-vérifiés dans les documents ; ce qui ne se vérifie pas est retiré.</li>
-            <li><strong>Publié</strong> sur le site, dans Mes dossiers, et bientôt dans vos alertes.</li>
+            <li><strong>Publié</strong> sur le site, dans Mes dossiers et dans vos alertes du matin.</li>
           </ol>
         </div>
       </div>
@@ -90,13 +91,13 @@
       <p class="ab-note">Chaque abonnement garde tout ça gratuit pour tout le monde. Chiffres comptés dans les données publiées, mis à jour chaque matin.</p>
     </section>
 
-    <section class="ab-carte">
-      <h3>Offrir un abonnement <span class="ab-note">(bientôt)</span></h3>
+    <section class="ab-carte ab-offrir">
+      <h3><span class="ab-icone" aria-hidden="true">🎁</span> Offrir un abonnement <span class="ab-note">(bientôt)</span></h3>
       <p>À un proche qui suit ce qui se passe dans sa ville, à un groupe communautaire, à une association de quartier ou à une bibliothèque.</p>
     </section>
 
-    <section class="ab-carte" id="attente">
-      <h3>L'abonnement n'est pas encore ouvert</h3>
+    <section class="ab-carte ab-attente" id="attente">
+      <h3><span class="ab-icone" aria-hidden="true">✉️</span> L'abonnement n'est pas encore ouvert</h3>
       <p>Laissez votre courriel : on vous écrit une seule fois, le jour où il ouvre. En attendant, vous pouvez déjà suivre des projets avec un compte gratuit, dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a>.</p>
       <form class="ab-form" id="form-attente">
         <input type="email" required placeholder="Votre courriel" autocomplete="email">
