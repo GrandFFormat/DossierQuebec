@@ -159,7 +159,7 @@
         <li><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : « tout ce que la Ville décide sur la 1re Avenue », « dans Limoilou », « sur le déneigement ».</li>
         <li><strong>Suivre un organisme ou une entreprise</strong> : les décisions de l'année qui le nomment — contrats, subventions, ententes — avec le montant de chacune tel qu'écrit, et une alerte quand une nouvelle le nomme.</li>
         <li><strong>L'agenda des conseils</strong> : ce qui s'en vient à chaque conseil, avec son résumé, et ce qui sera probablement présenté à la prochaine séance.</li>
-        <li><strong>L'export en tableur</strong> (Excel ou CSV) : vous choisissez les décisions — l'année, un projet, un mot ou un nom — et les colonnes, avec le détail de l'argent quand il est lu.</li>`;
+        <li><strong>L'export en tableur ou en PDF</strong> (Excel, CSV ou PDF à imprimer) : vous choisissez les décisions — l'année, un projet, un mot ou un nom — et les colonnes, avec le détail de l'argent quand il est lu.</li>`;
 
   // ---------- alertes par courriel (abonnés) ----------
   // L'interrupteur (alertes_preferences), la date de la dernière alerte (alertes_envois) et un
@@ -445,6 +445,74 @@
   ];
   const nomFichier = (s) => normaliserTexte(s).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
 
+  // Le « PDF » : une page autonome, mise en page pour l'impression, une fiche par dossier avec les
+  // groupes cochés. Elle lance l'impression d'elle-même ; « Enregistrer au format PDF » fait le
+  // fichier, avec les liens cliquables. Tout le texte passe par echapper().
+  function rapportImprimable({ liste, details, groupes, description, aLire, titre }) {
+    const e = echapper;
+    const cleDetail = (d) => `${d.ville}|${/\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1]}`;
+    const ligneDl = (libelle, valeur) => (valeur ? `<dt>${e(libelle)}</dt><dd>${e(valeur).replace(/\n/g, '<br>')}</dd>` : '');
+    const fiche = (d) => {
+      const x = details.get(cleDetail(d));
+      const statut = d.statutDossier === 'termine' ? 'Décision finale' : d.statutDossier ? 'En cours' : '';
+      const meta = [`<span class="num">${e(d.numero)}</span>`, d.themeInfo ? `<span class="sujet">${e(d.themeInfo.libelle)}</span>` : '', d.date ? `préparé le ${e(dateFr(d.date))}` : '', d.derniere && d.derniere !== d.date ? `dernière décision le ${e(dateFr(d.derniere))}` : '', d.instances.length ? e(d.instances.join(' · ')) : '', statut ? `<strong>${e(statut)}</strong>` : ''].filter(Boolean).join(' <span class="sep">·</span> ');
+      return `<article>
+        <div class="meta">${meta}</div>
+        <h2>${e(d.objet ?? '')}</h2>
+        ${groupes.has('resume') && d.puces.length ? `<ul>${d.puces.map((p) => `<li>${e(p)}</li>`).join('')}</ul>` : ''}
+        ${groupes.has('montant') && d.montant ? `<p class="montant">Montant indiqué dans le résumé : <strong>${e(d.montant)}</strong></p>` : ''}
+        ${groupes.has('argent') && x ? `<div class="argent"><div class="titre-argent">Détail de l'argent${x.nature ? ` — ${e(x.nature)}` : ''}</div><dl>
+          ${ligneDl('En une phrase', x.enUnePhrase)}${ligneDl('Montant', x.montantPrincipal)}${ligneDl('Qui reçoit', [x.beneficiaire, x.beneficiaireVille].filter(Boolean).join(', '))}${ligneDl('Qui paie', x.payeur)}${ligneDl('Durée', x.duree)}${ligneDl("Mode d'attribution", x.modeAttribution)}${ligneDl('Estimation de la Ville', x.estimationVille)}${ligneDl('Soumissions', texteSoumissions(x))}
+        </dl></div>` : ''}
+        ${groupes.has('liens') ? `<p class="liens">${d.pdf ? `<a href="${e(d.pdf)}">Document officiel (PDF)</a> <span class="sep">·</span> ` : ''}<a href="${e(`${location.origin}/${d.ville}/decisions.html?q=${encodeURIComponent(d.numero)}`)}">Fiche sur le site</a></p>` : ''}
+      </article>`;
+    };
+    return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${e(titre)}</title>
+<style>
+  @page { size: letter; margin: 16mm 15mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0 auto; max-width: 780px; padding: 24px; font: 11pt/1.45 Georgia, 'Times New Roman', serif; color: #16191D; background: #fff; }
+  .barre { position: sticky; top: 0; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 12px 14px; margin: -24px -24px 20px; background: #E6F6EC; font: 14px system-ui, sans-serif; }
+  .barre button { font: 700 14px system-ui, sans-serif; padding: 8px 14px; border: 0; border-radius: 6px; background: #0B8A4B; color: #fff; cursor: pointer; }
+  header { border-bottom: 2px solid #16191D; padding-bottom: 10px; margin-bottom: 14px; }
+  header .marque { font: 800 13pt system-ui, sans-serif; letter-spacing: -.01em; }
+  header h1 { font: 700 17pt/1.25 system-ui, sans-serif; margin: 6px 0 4px; }
+  header p { margin: 0; color: #5B6570; font: 10pt system-ui, sans-serif; }
+  .alire { font: 8.5pt/1.4 system-ui, sans-serif; color: #5B6570; margin: 0 0 12px; display: grid; grid-template-columns: max-content 1fr; gap: 2px 10px; }
+  .alire dt { font-weight: 700; }
+  .alire dd { margin: 0; }
+  article { border-top: 1px solid #C2CAD2; padding: 10px 0 8px; break-inside: avoid; page-break-inside: avoid; }
+  .meta { font: 8.5pt system-ui, sans-serif; color: #5B6570; }
+  .meta .num { font: 700 9pt ui-monospace, Consolas, monospace; color: #16191D; }
+  .meta .sujet { font-weight: 700; color: #076338; }
+  .sep { color: #C2CAD2; }
+  h2 { font: 700 11pt/1.35 system-ui, sans-serif; margin: 4px 0 6px; }
+  ul { margin: 0 0 6px; padding-left: 16px; }
+  li { margin: 0 0 2px; }
+  .montant { margin: 4px 0; font: 10pt system-ui, sans-serif; }
+  .argent { margin: 6px 0; padding: 6px 10px; border-left: 3px solid #0B8A4B; background: #F4F6F8; font: 9pt/1.4 system-ui, sans-serif; }
+  .titre-argent { font-weight: 800; margin-bottom: 3px; }
+  .argent dl { display: grid; grid-template-columns: max-content 1fr; gap: 1px 10px; margin: 0; }
+  .argent dt { font-weight: 700; color: #5B6570; }
+  .argent dd { margin: 0; }
+  .liens { margin: 4px 0 0; font: 8.5pt system-ui, sans-serif; }
+  .liens a { color: #076338; }
+  footer { margin-top: 16px; border-top: 2px solid #16191D; padding-top: 8px; font: 8.5pt system-ui, sans-serif; color: #5B6570; }
+  @media print { .barre { display: none; } body { padding: 0; max-width: none; } }
+</style></head><body>
+<div class="barre"><button type="button" onclick="print()">Enregistrer en PDF ou imprimer</button><span>Dans la fenêtre d'impression, choisissez « Enregistrer au format PDF ».</span></div>
+<header>
+  <div class="marque">${e(location.host)}</div>
+  <h1>${e(description)}</h1>
+  <p>${liste.length.toLocaleString('fr-CA')} dossier${liste.length > 1 ? 's' : ''}, les plus récents d'abord · exporté le ${e(dateFr(new Date().toLocaleDateString('en-CA')))}</p>
+</header>
+<dl class="alire">${aLire.slice(3).map(([k, v]) => `<dt>${e(k)}</dt><dd>${e(v)}</dd>`).join('')}</dl>
+${liste.map(fiche).join('')}
+<footer>Site citoyen indépendant, sans lien avec les villes couvertes. Résumés générés par IA ; en cas d'écart, le document officiel fait foi.</footer>
+<script>addEventListener('load', () => setTimeout(() => print(), 400));<\/script>
+</body></html>`;
+  }
+
   async function exportTableur(s, abonne) {
     const zone = $('#export');
     if (!s || !abonne) { zone.innerHTML = ''; return; }
@@ -458,7 +526,7 @@
     const an = annee.map((d) => (d.derniere ?? d.date ?? '').slice(0, 4)).sort().at(-1);
     const projets = index.flatMap(([ville, idx]) => Object.entries(idx?.projets ?? {}).filter(([, p]) => p.decisions > 0).map(([cle, p]) => ({ ville, cle, titre: p.titre })));
     zone.innerHTML = `<section class="ab-carte ab-export">
-      <h2 style="margin-top:0">Export en tableur</h2>
+      <h2 style="margin-top:0">Export en tableur ou en PDF</h2>
       <p class="ab-chapeau" style="margin-bottom:14px">Choisissez ce que vous voulez dans le fichier. Il se fabrique dans votre navigateur, en quelques secondes.</p>
       <div class="ab-export-grille">
         <label class="ab-champ"><span>1. Quelles décisions</span>
@@ -482,7 +550,9 @@
       <div class="ab-liens">
         <button type="button" class="ab-bouton" data-format="xlsx">Télécharger Excel (.xlsx)</button>
         <button type="button" class="ab-bouton ab-bouton-second" data-format="csv">Télécharger CSV</button>
+        <button type="button" class="ab-bouton ab-bouton-second" data-format="pdf">PDF à imprimer</button>
       </div>
+      <p class="ab-note">Le PDF s'ouvre dans une nouvelle fenêtre, une fiche par dossier : dans la fenêtre d'impression, choisissez « Enregistrer au format PDF ».</p>
       <p class="ab-note" id="exp-etat" aria-live="polite"></p>
       <p class="ab-note">Il vous manque une colonne ou un autre genre d'export ? <a class="ab-lien" href="#ecrire">Dites-le-nous</a> : on ajoute ce que les abonnés demandent.</p>
     </section>`;
@@ -524,6 +594,13 @@
       if (!bouton) return;
       const etat = $('#exp-etat');
       const format = bouton.dataset.format;
+      // Le PDF passe par l'impression du navigateur, dans une nouvelle fenêtre. Elle doit s'ouvrir
+      // pendant le clic, avant toute attente : plus tard, le bloqueur de fenêtres la refuserait.
+      const fenetre = format === 'pdf' ? window.open('', '_blank') : null;
+      if (format === 'pdf') {
+        if (!fenetre) { etat.textContent = 'Votre navigateur a bloqué la fenêtre du PDF : autorisez les fenêtres pour ce site, puis réessayez.'; return; }
+        fenetre.document.write('<!doctype html><meta charset="utf-8"><title>Préparation…</title><p style="font:16px system-ui,sans-serif;padding:24px">Préparation du PDF…</p>');
+      }
       const groupes = new Set(['dossier', ...[...carte.querySelectorAll('[data-groupe]:checked')].map((c) => c.dataset.groupe)]);
       const colonnes = COLONNES_EXPORT.filter((c) => groupes.has(c.g));
       const liste = await selection();
@@ -558,17 +635,25 @@
       const mot = $('#exp-mot').value.trim();
       const description = `${titrePortee}${mot ? `, qui contiennent « ${mot} »` : ''}${$('#exp-avec-montant').checked ? ', avec un montant' : ''}`;
       const nom = `dossierville-${nomFichier(portee.value ? titrePortee : String(an))}${mot ? `-${nomFichier(mot)}` : ''}-${new Date().toLocaleDateString('en-CA')}`;
-      const { fichierXlsx, fichierCsv, telecharger } = await import('/commun/tableur.js');
-      if (format === 'xlsx') {
-        const aLire = [
-          ['Sélection', description],
-          ['Dossiers', `${liste.length} (une ligne par dossier : le sommaire décisionnel et ses résolutions)`],
-          ['Exporté le', new Date().toLocaleString('fr-CA')],
-          ['Source', `Documents décisionnels publiés par la Ville, repris par ${location.host}. Le document officiel (PDF) fait foi.`],
-          ['Résumé et montant du résumé', 'Générés par IA à partir du sommaire décisionnel.'],
-          ["Détail de l'argent", "Extrait automatiquement du sommaire décisionnel, puis vérifié automatiquement contre son texte ; ce qui ne se vérifiait pas a été retiré. Vide si le dossier n'a pas encore été lu : vous pouvez le demander sur sa fiche."],
-          ['Montants', "Chaque montant vaut pour son dossier et garde sa nature (dépense, emprunt, subvention, revenu…). Ils ne s'additionnent pas entre eux."],
-        ];
+      const aLire = [
+        ['Sélection', description],
+        ['Dossiers', `${liste.length} (une ${format === 'pdf' ? 'fiche' : 'ligne'} par dossier : le sommaire décisionnel et ses résolutions)`],
+        ['Exporté le', new Date().toLocaleString('fr-CA')],
+        ['Source', `Documents décisionnels publiés par la Ville, repris par ${location.host}. Le document officiel (PDF) fait foi.`],
+        ['Résumé et montant du résumé', 'Générés par IA à partir du sommaire décisionnel.'],
+        ["Détail de l'argent", "Extrait automatiquement du sommaire décisionnel, puis vérifié automatiquement contre son texte ; ce qui ne se vérifiait pas a été retiré. Vide si le dossier n'a pas encore été lu : vous pouvez le demander sur sa fiche."],
+        ['Montants', "Chaque montant vaut pour son dossier et garde sa nature (dépense, emprunt, subvention, revenu…). Ils ne s'additionnent pas entre eux."],
+      ];
+      if (format === 'pdf') {
+        fenetre.document.open();
+        fenetre.document.write(rapportImprimable({ liste, details, groupes, description, aLire, titre: nom }));
+        fenetre.document.close();
+        fenetre.focus();
+      }
+      const { fichierXlsx, fichierCsv, telecharger } = format === 'pdf' ? {} : await import('/commun/tableur.js');
+      if (format === 'pdf') {
+        // rien à télécharger : la fenêtre imprime d'elle-même
+      } else if (format === 'xlsx') {
         telecharger(fichierXlsx([
           { nom: 'Dossiers', colonnes, lignes },
           { nom: 'À lire', colonnes: [{ largeur: 28 }, { largeur: 110 }], lignes: aLire, entete: false },
@@ -576,7 +661,7 @@
       } else {
         telecharger(fichierCsv(colonnes.map((c) => c.titre), lignes), `${nom}.csv`);
       }
-      etat.textContent = `Fichier prêt : ${liste.length.toLocaleString('fr-CA')} dossier${liste.length > 1 ? 's' : ''}${groupes.has('argent') ? `, dont ${details.size} avec le détail de l'argent` : ''}.${detailManque ? " Une partie du détail de l'argent n'a pas pu être chargée : réessayez dans un moment." : ''}`;
+      etat.textContent = `${format === 'pdf' ? 'PDF ouvert dans une nouvelle fenêtre' : 'Fichier prêt'} : ${liste.length.toLocaleString('fr-CA')} dossier${liste.length > 1 ? 's' : ''}${groupes.has('argent') ? `, dont ${details.size} avec le détail de l'argent` : ''}.${detailManque ? " Une partie du détail de l'argent n'a pas pu être chargée : réessayez dans un moment." : ''}`;
       carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = false; });
       mesurer('export_tableur', { format, groupes: [...groupes].join(',') });
     });

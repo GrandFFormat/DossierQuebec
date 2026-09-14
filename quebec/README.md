@@ -407,6 +407,12 @@ feuille « À lire » : sélection, date, sources, et que les montants ne s'addi
 montants restent du texte tel qu'écrit. Le lien « Dites-le-nous » sert à apprendre quels exports
 les abonnés veulent vraiment.
 
+**PDF à imprimer.** Même sélection, mais une fiche par dossier (21 colonnes ne tiennent pas sur une
+page) : `rapportImprimable()` dans `mes-dossiers.html` écrit une page autonome dans une nouvelle
+fenêtre — ouverte pendant le clic, sinon le bloqueur de fenêtres la refuse — qui lance
+l'impression ; « Enregistrer au format PDF » fait le fichier, liens cliquables. Pas de
+bibliothèque PDF : le navigateur met en page mieux qu'elle et garde tous les accents.
+
 **Le coût du détail (~0,26-0,28 $ US par dossier) : ce qui a été mesuré le 14 sept. 2026.**
 D'où il vient : environ 40 % la lecture du document (deux fois : extraction et contre-lecture),
 60 % la réflexion du modèle (sortie, 5 fois plus chère que l'entrée). Deux pistes testées sur
