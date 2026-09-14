@@ -96,3 +96,19 @@
 .ab-page .ab-grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
 .ab-page .ab-prix { font-size: 26px; font-weight: 800; }
 .ab-page .ab-vide { color: var(--doux); }
+
+/* Un dossier suivi : cliquable, il s'ouvre sur place. */
+.ab-page details.ab-dossier { padding: 0; }
+.ab-page details.ab-dossier > summary { list-style: none; cursor: pointer; padding: 16px 44px 16px 18px; position: relative; border-radius: 10px; }
+.ab-page details.ab-dossier > summary::-webkit-details-marker { display: none; }
+.ab-page details.ab-dossier > summary::after {
+  content: "+"; position: absolute; right: 18px; top: 16px; font-size: 20px; line-height: 1; color: var(--doux);
+}
+.ab-page details.ab-dossier[open] > summary::after { content: "−"; }
+.ab-page details.ab-dossier > summary:hover { background: var(--fond-2); }
+.ab-page details.ab-dossier > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ab-page details.ab-dossier[open] > summary { border-bottom: 1px solid var(--ligne); border-radius: 10px 10px 0 0; }
+.ab-page .ab-dossier-corps { padding: 14px 18px 16px; }
+.ab-page .ab-bloc { margin-bottom: 14px; font-size: 14.5px; }
+.ab-page .ab-bloc ul { margin: 0; padding-left: 18px; }
+.ab-page .ab-bloc li { margin: 0 0 4px; }

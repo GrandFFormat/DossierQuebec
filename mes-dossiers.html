@@ -28,7 +28,7 @@
 
   <main>
     <h1>Mes dossiers</h1>
-    <p class="ab-chapeau">Les dossiers que vous suivez, toutes villes confondues, avec leur parcours d'une instance à l'autre. Pour en ajouter un, ouvrez une décision dans un volet et cliquez « Suivre ce dossier ».</p>
+    <p class="ab-chapeau">Les dossiers que vous suivez, toutes villes confondues. Cliquez sur un dossier pour l'ouvrir ici : son résumé, son parcours d'une instance à l'autre et le détail de l'argent. Pour en ajouter un, ouvrez une décision dans un volet et cliquez « Suivre ce dossier ».</p>
     <div id="compte"></div>
     <div id="liste"><p class="ab-vide">Chargement…</p></div>
   </main>
@@ -38,14 +38,16 @@
   import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, nePlusSuivre, chargerDetail, rendreDetail, mesurer } from '/commun/abonnes-client.js';
 
   const $ = (s) => document.querySelector(s);
-  const decisionsParVille = new Map();
 
-  async function decisions(ville) {
-    if (!decisionsParVille.has(ville)) {
-      decisionsParVille.set(ville, fetch(`/${ville}/data/decisions.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null));
-    }
-    return decisionsParVille.get(ville);
-  }
+  // Les données publiques de chaque volet, chargées une seule fois et seulement si besoin.
+  const cache = new Map();
+  const jeu = (ville, nom) => {
+    const k = `${ville}/${nom}`;
+    if (!cache.has(k)) cache.set(k, fetch(`/${ville}/data/${nom}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null));
+    return cache.get(k);
+  };
+
+  const docsDuDossier = (decisions, id) => (decisions?.decisions ?? []).filter((d) => d.id === id || d.sommaireId === id || d.dossier === id);
 
   function connexion() {
     $('#compte').innerHTML = '';
@@ -77,38 +79,61 @@
     return data && data.statut === 'actif' && (!data.fin || new Date(data.fin) > new Date());
   }
 
-  function parcours(docs) {
-    const resolutions = docs.filter((d) => d.instance).sort((a, b) => (a.date ?? '').localeCompare(b.date ?? ''));
-    if (!resolutions.length) return '';
-    return `<ol class="ab-parcours">${resolutions
-      .map((d) => `<li>${echapper(d.instance)}, ${dateFr(d.date)}${d.numero ? ` — ${d.pdf ? `<a class="ab-lien" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${echapper(d.numero)}</a>` : echapper(d.numero)}` : ''}${d.resultat ? ` · ${echapper(d.resultat)}` : ''}</li>`)
-      .join('')}</ol>`;
-  }
-
-  async function carte(s, suivi) {
-    const jeu = await decisions(suivi.ville);
-    const docs = (jeu?.decisions ?? []).filter((d) => d.id === suivi.dossier_id || d.sommaireId === suivi.dossier_id || d.dossier === suivi.dossier_id);
+  // L'en-tête d'un dossier : ce qu'on voit replié. Tout le reste se charge à l'ouverture.
+  async function entete(suivi) {
+    const docs = docsDuDossier(await jeu(suivi.ville, 'decisions'), suivi.dossier_id);
     const principal = docs.find((d) => d.id === suivi.dossier_id) ?? docs[0];
     const derniere = docs.map((d) => d.date).filter(Boolean).sort().pop();
-    const objet = principal?.objet ?? suivi.objet ?? suivi.dossier_id;
-    const recherche = suivi.numero || principal?.numero || '';
-    return `<article class="ab-carte" data-ville="${echapper(suivi.ville)}" data-dossier="${echapper(suivi.dossier_id)}">
-      <div class="ab-meta">
-        <span>${echapper(VILLES[suivi.ville] ?? suivi.ville)}</span>
-        ${recherche ? `<span>${echapper(recherche)}</span>` : ''}
-        ${derniere ? `<span>Dernière décision : ${dateFr(derniere)}</span>` : ''}
-        <span>Suivi depuis le ${dateFr(suivi.created_at)}</span>
-      </div>
-      <h3>${echapper(objet)}</h3>
-      ${docs.length ? parcours(docs) : `<p class="ab-note">Ce dossier n'est plus dans les décisions de l'année en cours du volet${suivi.ville ? ` ${echapper(VILLES[suivi.ville] ?? '')}` : ''}.</p>`}
+    const numero = suivi.numero || principal?.numero || '';
+    return `<details class="ab-carte ab-dossier" name="dossiers" data-ville="${echapper(suivi.ville)}" data-dossier="${echapper(suivi.dossier_id)}" data-numero="${echapper(numero)}">
+      <summary>
+        <div class="ab-meta">
+          <span>${echapper(VILLES[suivi.ville] ?? suivi.ville)}</span>
+          ${numero ? `<span>${echapper(numero)}</span>` : ''}
+          ${derniere ? `<span>Dernière décision : ${dateFr(derniere)}</span>` : ''}
+          <span>Suivi depuis le ${dateFr(suivi.created_at)}</span>
+        </div>
+        <h3>${echapper(principal?.objet ?? suivi.objet ?? suivi.dossier_id)}</h3>
+      </summary>
+      <div class="ab-dossier-corps"></div>
+    </details>`;
+  }
+
+  async function ouvrir(carte) {
+    const corps = carte.querySelector('.ab-dossier-corps');
+    if (corps.dataset.pret === '1') return;
+    corps.dataset.pret = '1';
+    corps.innerHTML = '<p class="ab-note">Chargement…</p>';
+    const { ville, dossier, numero } = carte.dataset;
+    const s = await session();
+    const [decisions, resumes, detail] = await Promise.all([jeu(ville, 'decisions'), jeu(ville, 'resumes'), chargerDetail(ville, dossier, s)]);
+
+    const docs = docsDuDossier(decisions, dossier).sort((a, b) => (a.date ?? '').localeCompare(b.date ?? ''));
+    const principal = docs.find((d) => d.id === dossier) ?? docs[0];
+    const resume = (resumes?.resumes ?? []).find((r) => r.id === dossier);
+    const resolutions = docs.filter((d) => d.instance);
+
+    const blocResume = resume?.puces?.length
+      ? `<div class="ab-bloc"><div class="ab-detail-titre">En bref <span class="ab-etiquette">résumé généré par IA</span></div><ul>${resume.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul></div>`
+      : '';
+
+    const blocParcours = `<div class="ab-bloc"><div class="ab-detail-titre">Parcours</div>${
+      resolutions.length
+        ? `<ol class="ab-parcours">${resolutions
+            .map((d) => `<li>${echapper(d.instance)}, ${dateFr(d.date)}${d.numero ? ` — ${d.pdf ? `<a class="ab-lien" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${echapper(d.numero)}</a>` : echapper(d.numero)}` : ''}${d.resultat ? ` · ${echapper(d.resultat)}` : ''}</li>`)
+            .join('')}</ol>`
+        : `<p class="ab-note">${docs.length ? 'Aucune résolution publiée pour l\'instant : le dossier est préparé, la décision suivra. Elle apparaîtra ici dès sa publication.' : "Ce dossier n'est plus dans les décisions de l'année en cours de ce volet."}</p>`
+    }</div>`;
+
+    const blocDetail = rendreDetail(detail, ville);
+
+    corps.innerHTML = `${blocResume}${blocParcours}${blocDetail}
       <div class="ab-liens">
         ${principal?.pdf ? `<a href="${echapper(principal.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}
-        ${recherche ? `<a href="/${echapper(suivi.ville)}/decisions.html?q=${encodeURIComponent(recherche)}">Voir sur le site</a>` : ''}
-        <button type="button" class="ab-lien-bouton" data-action="detail">Détail de l'argent</button>
+        ${numero ? `<a href="/${echapper(ville)}/decisions.html?q=${encodeURIComponent(numero)}">Voir dans le volet ${echapper(VILLES[ville] ?? '')}</a>` : ''}
         <button type="button" class="ab-lien-bouton" data-action="retirer">Ne plus suivre</button>
-      </div>
-      <div class="ab-detail-zone"></div>
-    </article>`;
+      </div>`;
+    mesurer('ouvrir_dossier_suivi', { ville });
   }
 
   async function afficher() {
@@ -130,36 +155,32 @@
     }
     const sections = [];
     for (const [ville, liste] of parVille) {
-      sections.push(`<h2>${echapper(VILLES[ville] ?? ville)} <span class="ab-note">(${liste.length})</span></h2>${(await Promise.all(liste.map((x) => carte(s, x)))).join('')}`);
+      sections.push(`<h2>${echapper(VILLES[ville] ?? ville)} <span class="ab-note">(${liste.length})</span></h2>${(await Promise.all(liste.map(entete))).join('')}`);
     }
     $('#liste').innerHTML = sections.join('');
+    // Un seul dossier suivi : on l'ouvre d'office.
+    if (suivis.length === 1) $('#liste details.ab-dossier').open = true;
   }
 
+  document.addEventListener('toggle', (e) => {
+    if (e.target.matches?.('details.ab-dossier') && e.target.open) ouvrir(e.target);
+  }, true);
+
   document.addEventListener('click', async (e) => {
-    const bouton = e.target.closest('[data-action]');
+    const m = e.target.closest('[data-mesure]');
+    if (m) mesurer(m.dataset.mesure, { page: 'mes-dossiers' });
+    const bouton = e.target.closest('[data-action="retirer"]');
     if (!bouton) return;
-    const article = bouton.closest('article');
-    const cible = { ville: article.dataset.ville, dossier: article.dataset.dossier };
+    const carte = bouton.closest('details.ab-dossier');
     const s = await session();
     if (!s) return connexion();
-    if (bouton.dataset.action === 'retirer') {
-      bouton.disabled = true;
-      const erreur = await nePlusSuivre(s, cible);
-      if (erreur) { bouton.disabled = false; bouton.textContent = 'Impossible — réessayez'; return; }
-      article.remove();
-    } else if (bouton.dataset.action === 'detail') {
-      const zone = article.querySelector('.ab-detail-zone');
-      if (zone.innerHTML) { zone.innerHTML = ''; return; }
-      zone.innerHTML = '<p class="ab-note">Chargement…</p>';
-      const reponse = await chargerDetail(cible.ville, cible.dossier, s);
-      zone.innerHTML = reponse === null
-        ? '<p class="ab-note">Le détail est indisponible pour le moment.</p>'
-        : rendreDetail(reponse, cible.ville) || "<p class=\"ab-note\">Pas de détail de l'argent vérifié pour ce dossier.</p>";
-    }
+    bouton.disabled = true;
+    const erreur = await nePlusSuivre(s, { ville: carte.dataset.ville, dossier: carte.dataset.dossier });
+    if (erreur) { bouton.disabled = false; bouton.textContent = 'Impossible — réessayez'; return; }
+    carte.remove();
   });
-  document.addEventListener('click', (e) => { const m = e.target.closest('[data-mesure]'); if (m) mesurer(m.dataset.mesure, { page: 'mes-dossiers' }); });
 
-  client.auth.onAuthStateChange(() => afficher());
+  client.auth.onAuthStateChange((evenement) => { if (evenement !== 'TOKEN_REFRESHED') afficher(); });
   afficher();
 </script>
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
