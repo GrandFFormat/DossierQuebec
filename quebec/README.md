@@ -265,6 +265,25 @@ des sous-dossiers de dossierquebec.ca : la session Supabase ouverte sur une page
 - `scripts/supabase-schema-abonnes.sql` — tables `dossiers_suivis`, `abonnements`,
   `abonnement_liste_attente`, `details_argent`, et leurs règles.
 
+**Où en est un dossier.** Chaque sommaire dit, en tête, quelle instance décide et à quelle date
+cible (« Conseil d'agglomération de Québec — Instance décisionnelle — 16 septembre 2026 »).
+`scrapers/decisions.js` le lit par extraits de texte (le *highlight* de l'index, ~3 ko par
+document au lieu du texte entier ; 16 requêtes pour toute l'année, puis quelques-unes par jour),
+et marque chaque décision `statutDossier` : `termine` quand une résolution de cette instance
+renvoie au sommaire — hors étapes préliminaires (autorisation de soumettre au conseil, avis de
+motion, adoption du projet de règlement) —, sinon `en_cours`, avec `etapeFinale` et `echeance`.
+Sur 2026 : 1 398 dossiers terminés, 104 en cours. Une fiche terminée affiche « Décision finale »
+au lieu de « Suivre » : il n'y a plus rien à suivre.
+
+**Les projets.** `lib/projets.js` définit à la main les projets suivables dans leur ensemble
+(tramway, logement social et abordable, matières résiduelles, ExpoCité, milieux humides,
+Galeries Charlesbourg, interconnexion Québec–Lévis), chacun par une règle relue sur ses
+résultats avec `node scripts/verifier-projets.js`. Deux corrections trouvées ainsi : les objets
+tronqués par la Ville (« projet TramC ») cachaient 42 décisions du tramway, et « UTILE » sans
+respect de la casse attrapait « remède utile ». Chaque fiche d'un projet affiche « Projet :
+Tramway » ; le suivre met toutes ses décisions dans « Mes dossiers », et
+`decisions.html?projet=tramway` les filtre dans le volet.
+
 **Le détail ne vit plus dans le dépôt.** Le dépôt GitHub de DossierQuébec est public : un fichier
 versionné est lisible par tous. `data/details.json` reste en local comme cache (`.gitignore`), et
 la copie servie aux abonnés est dans Supabase, publiée par `scripts/publier-details.js` — appelé

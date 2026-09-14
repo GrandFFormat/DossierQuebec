@@ -37,19 +37,44 @@ function majCompte() {
   badge.textContent = suivis.size;
 }
 
-// ---------- l'étoile ----------
+// ---------- les boutons de suivi ----------
+// Deux sortes : le dossier de la fiche (clé du volet) et les projets dont elle fait partie
+// (clé « projet:tramway »). Un dossier terminé n'a plus rien à suivre : la fiche affiche
+// « Décision finale » à la place — sauf s'il était déjà suivi, pour qu'on puisse le retirer.
+const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+const dateCourte = (iso) => (iso ? `${Number(iso.slice(8, 10))} ${MOIS[Number(iso.slice(5, 7)) - 1]}` : '');
+
 function etatEtoile(bouton) {
   const suivi = suivis.has(cle(VILLE, bouton.dataset.dossier));
+  const projet = bouton.dataset.titre;
   bouton.classList.toggle('actif', suivi);
   bouton.setAttribute('aria-pressed', String(suivi));
-  bouton.innerHTML = suivi ? '<span aria-hidden="true">★</span> Suivi' : '<span aria-hidden="true">☆</span> Suivre';
-  bouton.title = suivi ? 'Dossier suivi — cliquer pour ne plus le suivre' : 'Suivre ce dossier';
+  const etoile = `<span aria-hidden="true">${suivi ? '★' : '☆'}</span>`;
+  if (projet) {
+    bouton.innerHTML = `${etoile} Projet : ${echapper(projet)}`;
+    bouton.title = suivi ? `Projet suivi — cliquer pour ne plus suivre « ${projet} »` : `Suivre toutes les décisions du projet « ${projet} »`;
+  } else {
+    bouton.innerHTML = `${etoile} ${suivi ? 'Suivi' : 'Suivre'}`;
+    const etape = bouton.dataset.etape ? ` Prochaine étape : ${bouton.dataset.etape}${bouton.dataset.echeance ? `, date cible ${dateCourte(bouton.dataset.echeance)}` : ''}.` : '';
+    bouton.title = suivi ? 'Dossier suivi — cliquer pour ne plus le suivre' : `Suivre ce dossier jusqu'à sa décision finale.${etape}`;
+  }
   bouton.setAttribute('aria-label', bouton.title);
+}
+
+function pastilleFinale(zone) {
+  const final = document.createElement('span');
+  final.className = 'ab-final';
+  final.textContent = 'Décision finale';
+  final.title = `Ce dossier est terminé${zone.dataset.etape ? ` : adopté par ${zone.dataset.etape}` : ''}. Rien d'autre à venir sur cette décision.`;
+  return final;
 }
 
 function majEtoiles(dossier) {
   const selecteur = dossier ? `.ab-etoile[data-dossier="${CSS.escape(dossier)}"]` : '.ab-etoile';
-  for (const b of document.querySelectorAll(selecteur)) etatEtoile(b);
+  for (const b of document.querySelectorAll(selecteur)) {
+    etatEtoile(b);
+    masquerSiInutile(b);
+  }
 }
 
 // Chaque fiche de décision reçoit son étoile dès qu'elle apparaît (les listes sont redessinées
@@ -61,12 +86,39 @@ function equiper(fiche) {
   fiche.dataset.abPret = '1';
   if (!zone || !meta) return;
   meta.classList.add('ab-meta-inerte');
-  const bouton = document.createElement('button');
-  bouton.type = 'button';
-  bouton.className = 'ab-etoile';
-  bouton.dataset.dossier = zone.dataset.dossier;
-  etatEtoile(bouton);
-  meta.append(bouton);
+  const groupe = document.createElement('span');
+  groupe.className = 'ab-boutons';
+
+  let projets = [];
+  try {
+    projets = JSON.parse(zone.dataset.projets || '[]');
+  } catch {}
+  for (const p of projets) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'ab-etoile ab-projet';
+    Object.assign(b.dataset, { dossier: `projet:${p.cle}`, titre: p.titre, objet: p.titre, numero: '' });
+    etatEtoile(b);
+    groupe.append(b);
+  }
+
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'ab-etoile';
+  Object.assign(b.dataset, { dossier: zone.dataset.dossier, numero: zone.dataset.numero ?? '', objet: zone.dataset.objet ?? '', etape: zone.dataset.etape ?? '', echeance: zone.dataset.echeance ?? '' });
+  if (zone.dataset.statut === 'termine') {
+    // Terminé : « Décision finale », et le bouton seulement s'il faut pouvoir retirer un ancien suivi.
+    b.dataset.seulementSiSuivi = '1';
+    groupe.append(pastilleFinale(zone));
+  }
+  etatEtoile(b);
+  groupe.append(b);
+  meta.append(groupe);
+  masquerSiInutile(b);
+}
+
+function masquerSiInutile(bouton) {
+  if (bouton.dataset.seulementSiSuivi) bouton.hidden = !suivis.has(cle(VILLE, bouton.dataset.dossier));
 }
 
 function equiperTout() {
@@ -141,12 +193,18 @@ document.addEventListener('click', async (e) => {
   if (!sess) {
     await peupler(zone);
     fiche.open = true;
-    formulaireConnexion(zone.querySelector('.ab-connexion'), 'Connectez-vous pour suivre ce dossier et le retrouver dans « Mes dossiers », peu importe la ville.');
+    formulaireConnexion(
+      zone.querySelector('.ab-connexion'),
+      etoile.dataset.titre
+        ? `Connectez-vous pour suivre le projet « ${etoile.dataset.titre} » et retrouver toutes ses décisions dans « Mes dossiers ».`
+        : 'Connectez-vous pour suivre ce dossier et le retrouver dans « Mes dossiers », peu importe la ville.'
+    );
     return;
   }
 
   etoile.disabled = true;
-  const cible = { ville: VILLE, dossier: zone.dataset.dossier, numero: zone.dataset.numero, objet: zone.dataset.objet };
+  // Le bouton porte ce qu'il suit : le dossier de la fiche, ou un projet.
+  const cible = { ville: VILLE, dossier: etoile.dataset.dossier, numero: etoile.dataset.numero, objet: etoile.dataset.objet };
   const dejaSuivi = suivis.has(cle(VILLE, cible.dossier));
   const erreur = dejaSuivi ? await nePlusSuivre(sess, cible) : await suivre(sess, cible);
   etoile.disabled = false;

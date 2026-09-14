@@ -151,6 +151,8 @@ function carteDecision(d) {
     ${d.sommairePdf ? ` &nbsp;<a class="lien-pdf" href="${echapper(d.sommairePdf)}" target="_blank" rel="noopener">Sommaire décisionnel (PDF) ↗</a>` : ''}`;
   // Espace abonnés (/commun/abonnes.js) : « Suivre ce dossier » et le détail de l'argent. La clé
   // de dossier suit la décision d'une instance à l'autre.
+  // Un procès-verbal ou un ordre du jour n'est pas un dossier : rien à suivre.
+  if (d.type === 'Procès-verbal' || d.type === 'Ordre du jour') return carteRepliable(entete, corps);
   const abonnes = `<div class="ab-fiche" data-dossier="${echapper(d.dossier ?? d.id)}" data-numero="${echapper(d.numero ?? '')}" data-objet="${echapper((d.objet ?? '').slice(0, 300))}"></div>`;
   return carteRepliable(entete, corps + abonnes);
 }

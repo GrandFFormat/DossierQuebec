@@ -27,6 +27,14 @@
 .ab-etoile:hover { border-color: var(--vedette, #F5B301); }
 .ab-etoile.actif { border-color: var(--vedette, #F5B301); background: var(--fond-2, #F4F6F8); }
 .ab-etoile:focus-visible { outline: 2px solid var(--accent, #0B8A4B); outline-offset: 2px; }
+.ab-boutons { margin-left: auto; display: inline-flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 6px; }
+.ab-boutons .ab-etoile { margin-left: 0; }
+.ab-projet span { color: var(--accent, #0B8A4B); }
+.ab-projet.actif { border-color: var(--accent, #0B8A4B); }
+.ab-final {
+  font-size: 12px; font-weight: 700; white-space: nowrap; cursor: help;
+  color: var(--doux, #5B6570); border: 1px dashed var(--ligne-forte, #C2CAD2); border-radius: 999px; padding: 2px 9px;
+}
 .ab-etoile:disabled { opacity: .5; cursor: default; }
 
 .ab-fiche { margin-top: 12px; }
@@ -125,3 +133,9 @@
 .ab-page .ab-bloc { margin-bottom: 14px; font-size: 14.5px; }
 .ab-page .ab-bloc ul { margin: 0; padding-left: 18px; }
 .ab-page .ab-bloc li { margin: 0 0 4px; }
+.ab-page .ab-en-cours { background: var(--accent-fond); color: var(--accent-encre); }
+.ab-page .ab-type-projet { background: var(--accent); color: #fff; }
+.ab-page .ab-liste-projet { list-style: none; padding: 0; margin: 0; }
+.ab-page .ab-ligne-projet { padding: 10px 0; border-top: 1px solid var(--ligne); }
+.ab-page .ab-ligne-projet:first-child { border-top: 0; }
+.ab-page .ab-ligne-projet .ab-liens { margin-top: 4px; }

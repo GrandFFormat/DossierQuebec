@@ -102,6 +102,13 @@ export async function search(params = {}) {
   });
   if (params.searchMode) qs.set('searchMode', params.searchMode);
   if (params.queryType) qs.set('queryType', params.queryType);
+  // Extraits du texte autour des mots cherchés, au lieu du texte entier : quelques centaines
+  // d'octets par document plutôt que des dizaines de kilo-octets.
+  if (params.highlight) {
+    qs.set('highlight', params.highlight);
+    qs.set('highlightPreTag', params.highlightPreTag ?? '');
+    qs.set('highlightPostTag', params.highlightPostTag ?? '');
+  }
   if (params.filter) qs.set('$filter', params.filter);
   if (params.orderby) qs.set('$orderby', params.orderby);
   if (params.select) qs.set('$select', params.select);
