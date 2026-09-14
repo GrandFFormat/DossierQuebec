@@ -43,15 +43,18 @@
 
   const $ = (s) => document.querySelector(s);
 
-  // Les données publiques de chaque volet, chargées une seule fois et seulement si besoin.
+  // Les projets de chaque volet, préparés pour cette page (quebec/scripts/projets-publics.js) :
+  // l'index de la ville (quelques Ko) pour les en-têtes et les suggestions, et le fichier d'un
+  // projet seulement quand on l'ouvre. Jamais toutes les décisions d'une ville : avec quinze
+  // villes, ce serait des mégaoctets à chaque visite. Chargés une seule fois.
   const cache = new Map();
   const jeu = (ville, nom) => {
     const k = `${ville}/${nom}`;
-    if (!cache.has(k)) cache.set(k, fetch(`/${ville}/data/${nom}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null));
+    if (!cache.has(k)) cache.set(k, fetch(`/${ville}/data/projets/${nom}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null));
     return cache.get(k);
   };
-
-  const docsDuDossier = (decisions, id) => (decisions?.decisions ?? []).filter((d) => d.id === id || d.sommaireId === id || d.dossier === id);
+  const indexVille = (ville) => jeu(ville, 'index');
+  const fichierProjet = (ville, cle) => (/^[\w-]{1,60}$/.test(cle) ? jeu(ville, cle) : Promise.resolve(null));
 
   function connexion() {
     $('#compte').innerHTML = '';
@@ -118,21 +121,18 @@
   // Pour tout le monde : aux abonnés, du contenu de plus ; aux autres, une raison de s'abonner.
   async function suggestions(s, suivisIds) {
     const blocs = [];
-    for (const ville of Object.keys(VILLES)) {
-      const [decisions, resumes, recaps] = await Promise.all([jeu(ville, 'decisions'), jeu(ville, 'resumes'), jeu(ville, 'projets-recaps')]);
-      const projets = Object.entries(decisions?.projets ?? {}).filter(([cle, p]) => p.n > 0 && !suivisIds.has(`${ville}|projet:${cle}`));
+    const index = await Promise.all(Object.keys(VILLES).map(async (ville) => [ville, await indexVille(ville)]));
+    for (const [ville, idx] of index) {
+      const projets = Object.entries(idx?.projets ?? {}).filter(([cle, p]) => p.decisions > 0 && !suivisIds.has(`${ville}|projet:${cle}`));
       if (!projets.length) continue;
-      const resumeDe = new Map((resumes?.resumes ?? []).map((r) => [r.id, r]));
       const cartes = projets
-        .sort((a, b) => b[1].n - a[1].n)
+        .sort((a, b) => b[1].decisions - a[1].decisions)
         .map(([cle, p]) => {
-          const docs = docsDuProjet(decisions, cle).sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
-          const recent = docs[0];
           // Le récapitulatif du projet dit mieux de quoi il s'agit que sa dernière décision.
-          const enBref = recaps?.recaps?.[cle]?.utilisable ? recaps.recaps[cle].enBref : null;
-          const phrase = enBref ?? (recent ? resumeDe.get(recent.sommaireId ?? recent.id)?.puces?.[0] ?? recent.objet : '');
+          const enBref = p.enBref;
+          const phrase = enBref ?? p.plusRecent ?? '';
           return `<article class="ab-carte ab-suggestion">
-            <div class="ab-meta"><span class="ab-etiquette ab-type-projet">Projet</span><span>${p.n} décision(s) cette année</span>${recent ? `<span>Dernière : ${dateFr(recent.date)}</span>` : ''}</div>
+            <div class="ab-meta"><span class="ab-etiquette ab-type-projet">Projet</span><span>${p.decisions} décision(s) en ${p.annee}</span>${p.derniere ? `<span>Dernière : ${dateFr(p.derniere)}</span>` : ''}</div>
             <h3>${echapper(p.titre)}</h3>
             <p class="ab-note" style="margin:0 0 6px">${echapper(p.description ?? '')}</p>
             ${phrase ? `<p class="ab-derniere">${enBref ? '' : '<strong>Le plus récent :</strong> '}${echapper(phrase.length > 260 ? phrase.slice(0, 259) + '…' : phrase)}</p>` : ''}
@@ -157,8 +157,6 @@
   }
 
   const estProjet = (id) => id.startsWith('projet:');
-  const PAS_UN_DOSSIER = new Set(['Procès-verbaux', 'Tableaux des décisions', 'Procès-verbal', 'Ordre du jour']);
-  const docsDuProjet = (decisions, cle) => (decisions?.decisions ?? []).filter((d) => d.projets?.includes(cle) && !PAS_UN_DOSSIER.has(d.type));
 
   function pastilleStatut(d) {
     if (!d?.statutDossier) return '';
@@ -168,41 +166,34 @@
 
   // L'en-tête d'un dossier ou d'un projet : ce qu'on voit replié. Le reste se charge à l'ouverture.
   async function entete(suivi) {
-    const decisions = await jeu(suivi.ville, 'decisions');
     const attributs = `class="ab-carte ab-dossier" name="dossiers" data-ville="${echapper(suivi.ville)}" data-dossier="${echapper(suivi.dossier_id)}"`;
     if (estProjet(suivi.dossier_id)) {
       const cle = suivi.dossier_id.slice(7);
-      const projet = decisions?.projets?.[cle];
-      const docs = docsDuProjet(decisions, cle);
-      const derniere = docs.map((d) => d.date).filter(Boolean).sort().pop();
+      const p = (await indexVille(suivi.ville))?.projets?.[cle];
       return `<details ${attributs}>
         <summary>
           <div class="ab-meta">
             <span>${echapper(VILLES[suivi.ville] ?? suivi.ville)}</span>
             <span class="ab-etiquette ab-type-projet">Projet</span>
-            <span>${docs.length} décision(s) cette année</span>
-            ${derniere ? `<span>Dernière : ${dateFr(derniere)}</span>` : ''}
+            ${p ? `<span>${p.decisions} décision(s) en ${p.annee}</span>` : ''}
+            ${p?.derniere ? `<span>Dernière : ${dateFr(p.derniere)}</span>` : ''}
             <span>Suivi depuis le ${dateFr(suivi.created_at)}</span>
           </div>
-          <h3>${echapper(projet?.titre ?? suivi.objet ?? cle)}</h3>
+          <h3>${echapper(p?.titre ?? suivi.objet ?? cle)}</h3>
         </summary>
         <div class="ab-dossier-corps"></div>
       </details>`;
     }
-    const docs = docsDuDossier(decisions, suivi.dossier_id);
-    const principal = docs.find((d) => d.id === suivi.dossier_id) ?? docs[0];
-    const derniere = docs.map((d) => d.date).filter(Boolean).sort().pop();
-    const numero = suivi.numero || principal?.numero || '';
+    // Une décision seule, suivie avant l'arrivée des projets : ce qui a été enregistré au moment du suivi suffit.
+    const numero = suivi.numero || '';
     return `<details ${attributs} data-numero="${echapper(numero)}">
       <summary>
         <div class="ab-meta">
           <span>${echapper(VILLES[suivi.ville] ?? suivi.ville)}</span>
           ${numero ? `<span>${echapper(numero)}</span>` : ''}
-          ${pastilleStatut(principal)}
-          ${derniere ? `<span>Dernière décision : ${dateFr(derniere)}</span>` : ''}
           <span>Suivi depuis le ${dateFr(suivi.created_at)}</span>
         </div>
-        <h3>${echapper(principal?.objet ?? suivi.objet ?? suivi.dossier_id)}</h3>
+        <h3>${echapper(suivi.objet ?? suivi.dossier_id)}</h3>
       </summary>
       <div class="ab-dossier-corps"></div>
     </details>`;
@@ -218,7 +209,7 @@
 
   async function basculerRef(bouton) {
     const li = bouton.closest('li');
-    const { ville } = bouton.closest('details.ab-dossier').dataset;
+    const { ville, dossier } = bouton.closest('details.ab-dossier').dataset;
     const etaitOuvert = bouton.getAttribute('aria-expanded') === 'true';
     // Une seule décision dépliée à la fois, dans toute la page.
     for (const b of document.querySelectorAll('[data-action="ref"][aria-expanded="true"]')) b.setAttribute('aria-expanded', 'false');
@@ -226,26 +217,21 @@
     if (etaitOuvert) return;
     bouton.setAttribute('aria-expanded', 'true');
 
-    const [decisions, resumes] = await Promise.all([jeu(ville, 'decisions'), jeu(ville, 'resumes')]);
+    const projet = await fichierProjet(ville, dossier.slice(7));
     const numero = bouton.dataset.numero;
-    const doc = (decisions?.decisions ?? []).find((d) => d.numero === numero);
+    // Le dossier entier : le sommaire et toutes ses résolutions, même si c'est une résolution qui est citée.
+    const principal = (projet?.dossiers ?? []).find((d) => d.numeros.includes(numero));
     const panneau = document.createElement('div');
     panneau.className = 'ab-ref-panneau';
-    if (!doc) {
-      panneau.innerHTML = `<p class="ab-note">${echapper(numero)} n'est plus dans les décisions de l'année de ce volet.</p>`;
+    if (!principal) {
+      panneau.innerHTML = `<p class="ab-note">${echapper(numero)} n'est plus dans les décisions de l'année de ce projet.</p>`;
     } else {
-      // Le dossier entier : le sommaire et toutes ses résolutions, même si c'est une résolution qui est citée.
-      const k = doc.sommaireId ?? doc.dossier ?? doc.id;
-      const groupe = decisions.decisions.filter((d) => (d.sommaireId ?? d.dossier ?? d.id) === k && !PAS_UN_DOSSIER.has(d.type)).sort((a, b) => (a.date ?? '').localeCompare(b.date ?? ''));
-      const principal = groupe.find((d) => d.id === k) ?? doc;
-      const resume = (resumes?.resumes ?? []).find((r) => r.id === k);
-      const resolutions = groupe.filter((d) => d.instance);
       panneau.innerHTML = `<div class="ab-meta"><strong>${echapper(principal.numero ?? numero)}</strong><span>${dateFr(principal.date)}</span>${pastilleStatut(principal)}</div>
-        ${resume?.puces?.length
-          ? `<ul>${resume.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul><p class="ab-note">Résumé généré par IA. Le document officiel fait foi.</p>`
+        ${principal.puces.length
+          ? `<ul>${principal.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul><p class="ab-note">Résumé généré par IA. Le document officiel fait foi.</p>`
           : `<p>${echapper(principal.objet ?? '')}</p>`}
-        ${resolutions.length
-          ? `<div class="ab-ref-sous">Parcours</div><ol class="ab-parcours">${resolutions.map((d) => `<li>${echapper(d.instance)}, ${dateFr(d.date)}${d.numero ? ` — ${echapper(d.numero)}` : ''}${d.resultat ? ` · ${echapper(d.resultat)}` : ''}</li>`).join('')}</ol>`
+        ${principal.resolutions.length
+          ? `<div class="ab-ref-sous">Parcours</div><ol class="ab-parcours">${principal.resolutions.map((d) => `<li>${echapper(d.instance)}, ${dateFr(d.date)}${d.numero ? ` — ${echapper(d.numero)}` : ''}${d.resultat ? ` · ${echapper(d.resultat)}` : ''}</li>`).join('')}</ol>`
           : ''}
         <div class="ab-liens">
           ${principal.pdf ? `<a href="${echapper(principal.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}
@@ -260,8 +246,8 @@
     mesurer('deplier_decision_projet', { ville });
   }
 
-  function rendreRecap(r, ville) {
-    if (!r?.utilisable) return '';
+  function rendreRecap(r) {
+    if (!r) return '';
     const etapes = r.etapes.map((e) => `<li>
         <div class="ab-chrono-periode">${echapper(e.periode)}</div>
         <div class="ab-chrono-titre">${echapper(e.titre)}</div>
@@ -281,35 +267,28 @@
   async function ouvrirProjet(carte, corps) {
     const { ville, dossier } = carte.dataset;
     const cle = dossier.slice(7);
-    const [decisions, resumes, recaps] = await Promise.all([jeu(ville, 'decisions'), jeu(ville, 'resumes'), jeu(ville, 'projets-recaps')]);
-    const projet = decisions?.projets?.[cle];
-    const resumeDe = new Map((resumes?.resumes ?? []).map((r) => [r.id, r]));
-    const docs = docsDuProjet(decisions, cle);
-    const parDossier = new Map();
-    for (const d of [...docs].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))) {
-      const k = d.sommaireId ?? d.dossier ?? d.id;
-      if (!parDossier.has(k)) parDossier.set(k, { k, docs: [] });
-      parDossier.get(k).docs.push(d);
+    const projet = await fichierProjet(ville, cle);
+    if (!projet) {
+      corps.innerHTML = `<p class="ab-note">Ce projet n'est plus publié pour ${echapper(VILLES[ville] ?? ville)}.</p>
+        <div class="ab-liens"><button type="button" class="ab-lien-bouton" data-action="retirer">Ne plus suivre ce projet</button></div>`;
+      return;
     }
-    const lignes = [...parDossier.values()];
-    const principalDe = ({ k, docs }) => docs.find((d) => d.id === k) ?? docs[0];
-
-    // Les chiffres : calculés ici, jamais par l'IA.
-    const annee = (docs.map((d) => d.date).filter(Boolean).sort().pop() ?? new Date().toISOString()).slice(0, 4);
-    const enAttente = lignes.filter((l) => principalDe(l).statutDossier === 'en_cours');
-    const resolutions = docs.filter((d) => d.instance).length;
-    const derniere = docs.map((d) => d.date).filter(Boolean).sort().pop();
+    // Les dossiers arrivent du plus récent au plus ancien ; les chiffres ont été calculés au
+    // rafraîchissement (quebec/scripts/projets-publics.js), jamais par l'IA.
+    const lignes = projet.dossiers;
+    const { annee, chiffres } = projet;
+    const derniere = chiffres.derniere;
+    const enAttente = lignes.filter((d) => d.statutDossier === 'en_cours');
     const tuiles = `<div class="ab-tuiles">
-      <div class="ab-tuile"><strong>${lignes.length}</strong><span>dossiers en ${annee}</span></div>
-      <div class="ab-tuile"><strong>${resolutions}</strong><span>résolutions des conseils</span></div>
+      <div class="ab-tuile"><strong>${chiffres.dossiers}</strong><span>dossiers en ${annee}</span></div>
+      <div class="ab-tuile"><strong>${chiffres.resolutions}</strong><span>résolutions des conseils</span></div>
       <div class="ab-tuile${enAttente.length ? ' ab-tuile-attente' : ''}"><strong>${enAttente.length}</strong><span>en attente d'une décision</span></div>
       ${derniere ? `<div class="ab-tuile"><strong>${dateFr(derniere).replace(/ \d{4}$/, '')}</strong><span>dernière décision</span></div>` : ''}
     </div>`;
 
     // Activité par mois : chaque décision (sommaire ou résolution) compte, jusqu'au mois de la dernière.
-    const parMois = Array(12).fill(0);
-    for (const d of docs) if (d.date?.startsWith(annee)) parMois[Number(d.date.slice(5, 7)) - 1]++;
-    const dernierMois = derniere?.startsWith(annee) ? Number(derniere.slice(5, 7)) : 12;
+    const parMois = projet.parMois;
+    const dernierMois = derniere?.startsWith(String(annee)) ? Number(derniere.slice(5, 7)) : 12;
     const maxMois = Math.max(1, ...parMois);
     const graphiqueMois = `<div class="ab-bloc"><div class="ab-detail-titre">Décisions par mois</div>
       <div class="ab-mois" role="img" aria-label="${parMois.slice(0, dernierMois).map((n, i) => `${MOIS_COURTS[i]} ${n}`).join(', ')}">
@@ -319,49 +298,34 @@
       </div></div>`;
 
     // Par thème : un dossier compte une fois, selon la pastille de son document principal.
-    const themes = new Map();
-    for (const l of lignes) {
-      const t = principalDe(l).theme;
-      if (t) themes.set(t, (themes.get(t) ?? 0) + 1);
-    }
-    const maxTheme = Math.max(1, ...themes.values());
-    const graphiqueThemes = themes.size > 1
+    const maxTheme = Math.max(1, ...projet.themes.map((t) => t.n));
+    const graphiqueThemes = projet.themes.length > 1
       ? `<div class="ab-bloc"><div class="ab-detail-titre">De quoi il s'agit</div><ul class="ab-barres">
-          ${[...themes].sort((a, b) => b[1] - a[1]).map(([t, n]) => {
-            const info = decisions?.themes?.[t];
-            return `<li><span class="ab-barre-nom">${echapper(info?.libelle ?? t)}</span><span class="ab-barre"><span style="width:${Math.round((n / maxTheme) * 100)}%;background:${/^#[0-9a-f]{6}$/i.test(info?.couleur ?? '') ? info.couleur : 'var(--accent)'}"></span></span><span class="ab-barre-n">${n}</span></li>`;
-          }).join('')}
+          ${projet.themes.map((t) => `<li><span class="ab-barre-nom">${echapper(t.libelle)}</span><span class="ab-barre"><span style="width:${Math.round((t.n / maxTheme) * 100)}%;background:${/^#[0-9a-f]{6}$/i.test(t.couleur ?? '') ? t.couleur : 'var(--accent)'}"></span></span><span class="ab-barre-n">${t.n}</span></li>`).join('')}
         </ul></div>`
       : '';
 
+    const phraseDe = (d) => d.puces[0] ?? d.objet ?? '';
     const blocAttente = enAttente.length
       ? `<div class="ab-bloc"><div class="ab-detail-titre">En attente d'une décision</div><ul class="ab-liste-projet">
-          ${enAttente.map((l) => {
-            const p = principalDe(l);
-            return `<li class="ab-ligne-projet"><div class="ab-meta">${pastilleStatut(p)}</div><div>${echapper(resumeDe.get(l.k)?.puces?.[0] ?? p.objet ?? '')}</div>${p.numero ? `<div class="ab-refs ab-refs-dessous">${refNumero(p.numero)}</div>` : ''}</li>`;
-          }).join('')}
+          ${enAttente.map((d) => `<li class="ab-ligne-projet"><div class="ab-meta">${pastilleStatut(d)}</div><div>${echapper(phraseDe(d))}</div>${d.numero ? `<div class="ab-refs ab-refs-dessous">${refNumero(d.numero)}</div>` : ''}</li>`).join('')}
         </ul></div>`
       : '';
-    const ligne = ({ k, docs }) => {
-      const principal = docs.find((d) => d.id === k) ?? docs[0];
-      const resume = resumeDe.get(k);
-      const instances = [...new Set(docs.map((d) => d.instance).filter(Boolean))];
-      return `<li class="ab-ligne-projet">
-        <div class="ab-meta"><span>${dateFr(docs[0].date)}</span>${instances.length ? `<span>${echapper(instances.join(' · '))}</span>` : '<span>sommaire</span>'}${pastilleStatut(principal)}</div>
-        <div>${echapper(resume?.puces?.[0] ?? principal.objet ?? '')}</div>
-        ${principal.numero ? `<div class="ab-refs ab-refs-dessous">${refNumero(principal.numero)}</div>` : ''}
+    const ligne = (d) => `<li class="ab-ligne-projet">
+        <div class="ab-meta"><span>${dateFr(d.derniere)}</span>${d.instances.length ? `<span>${echapper(d.instances.join(' · '))}</span>` : '<span>sommaire</span>'}${pastilleStatut(d)}</div>
+        <div>${echapper(phraseDe(d))}</div>
+        ${d.numero ? `<div class="ab-refs ab-refs-dessous">${refNumero(d.numero)}</div>` : ''}
       </li>`;
-    };
-    corps.innerHTML = `${projet?.description ? `<p class="ab-note" style="margin-top:0">${echapper(projet.description)}</p>` : ''}
+    corps.innerHTML = `${projet.description ? `<p class="ab-note" style="margin-top:0">${echapper(projet.description)}</p>` : ''}
       ${lignes.length ? tuiles : ''}
-      ${rendreRecap(recaps?.recaps?.[cle], ville)}
+      ${rendreRecap(projet.recap)}
       ${lignes.length ? `<div class="ab-graphiques">${graphiqueMois}${graphiqueThemes}</div>` : ''}
       ${blocAttente}
       ${lignes.length
         ? `<details class="ab-toutes"><summary>Toutes les décisions, les plus récentes d'abord <span class="ab-etiquette">${lignes.length} dossier(s)</span></summary><ol class="ab-liste-projet">${lignes.map(ligne).join('')}</ol></details>`
         : "<p class=\"ab-note\">Aucune décision de ce projet dans l'année en cours pour l'instant.</p>"}
       <div class="ab-liens">
-        <a href="/${echapper(ville)}/decisions.html?projet=${encodeURIComponent(cle)}">Voir les ${projet?.n ?? lignes.length} décisions dans le volet ${echapper(VILLES[ville] ?? '')}</a>
+        <a href="/${echapper(ville)}/decisions.html?projet=${encodeURIComponent(cle)}">Voir les ${chiffres.decisions} décisions dans le volet ${echapper(VILLES[ville] ?? '')}</a>
         <button type="button" class="ab-lien-bouton" data-action="retirer">Ne plus suivre ce projet</button>
       </div>`;
     mesurer('ouvrir_projet_suivi', { ville, projet: cle });
@@ -373,32 +337,13 @@
     corps.dataset.pret = '1';
     corps.innerHTML = '<p class="ab-note">Chargement…</p>';
     if (estProjet(carte.dataset.dossier)) return ouvrirProjet(carte, corps);
+    // Une décision seule, suivie avant l'arrivée des projets. Son résumé et son parcours sont dans
+    // le volet ; ici, seulement le détail de l'argent (une petite requête) et les liens.
     const { ville, dossier, numero } = carte.dataset;
-    const s = await session();
-    const [decisions, resumes, detail] = await Promise.all([jeu(ville, 'decisions'), jeu(ville, 'resumes'), chargerDetail(ville, dossier, s)]);
-
-    const docs = docsDuDossier(decisions, dossier).sort((a, b) => (a.date ?? '').localeCompare(b.date ?? ''));
-    const principal = docs.find((d) => d.id === dossier) ?? docs[0];
-    const resume = (resumes?.resumes ?? []).find((r) => r.id === dossier);
-    const resolutions = docs.filter((d) => d.instance);
-
-    const blocResume = resume?.puces?.length
-      ? `<div class="ab-bloc"><div class="ab-detail-titre">En bref <span class="ab-etiquette">résumé généré par IA</span></div><ul>${resume.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul></div>`
-      : '';
-
-    const blocParcours = `<div class="ab-bloc"><div class="ab-detail-titre">Parcours</div>${
-      resolutions.length
-        ? `<ol class="ab-parcours">${resolutions
-            .map((d) => `<li>${echapper(d.instance)}, ${dateFr(d.date)}${d.numero ? ` — ${d.pdf ? `<a class="ab-lien" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${echapper(d.numero)}</a>` : echapper(d.numero)}` : ''}${d.resultat ? ` · ${echapper(d.resultat)}` : ''}</li>`)
-            .join('')}</ol>`
-        : `<p class="ab-note">${docs.length ? 'Aucune résolution publiée pour l\'instant : le dossier est préparé, la décision suivra. Elle apparaîtra ici dès sa publication.' : "Ce dossier n'est plus dans les décisions de l'année en cours de ce volet."}</p>`
-    }</div>`;
-
-    const blocDetail = rendreDetail(detail, ville);
-
-    corps.innerHTML = `${blocResume}${blocParcours}${blocDetail}
+    const detail = await chargerDetail(ville, dossier, await session());
+    corps.innerHTML = `<p class="ab-note" style="margin-top:0">On suit maintenant des projets plutôt que des décisions seules. Le résumé et le parcours de cette décision sont dans le volet ${echapper(VILLES[ville] ?? '')}.</p>
+      ${rendreDetail(detail, ville)}
       <div class="ab-liens">
-        ${principal?.pdf ? `<a href="${echapper(principal.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}
         ${numero ? `<a href="/${echapper(ville)}/decisions.html?q=${encodeURIComponent(numero)}">Voir dans le volet ${echapper(VILLES[ville] ?? '')}</a>` : ''}
         <button type="button" class="ab-lien-bouton" data-action="retirer">Ne plus suivre</button>
       </div>`;

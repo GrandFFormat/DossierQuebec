@@ -214,6 +214,15 @@ parfois littéralement dans ses chaînes.
   séances repliées, « Tout déplier » qui retire le `name` le temps de l'ouverture.
 - Thème clair et sombre (`data-theme`, appliqué avant le premier rendu), taille du texte
   mémorisée (`zoom` 80–150 %).
+- **Espace abonnés et « Mes dossiers » (communs à toutes les villes).** Chaque page porte
+  `data-ville="…"` sur `<body>` et charge `/commun/abonnes.js` ; chaque fiche contient un
+  `<div class="ab-fiche" data-dossier data-numero data-objet data-projets>`. Ajouter la ville à
+  `VILLES` dans `/commun/abonnes-client.js`, à `api/detail.js` et à `api/message.js`.
+- **Projets suivables** : définis à la main (`lib/projets.js`, relus sur leurs résultats), puis
+  publiés pour Mes dossiers dans `data/projets/index.json` et `data/projets/<cle>.json`, **au
+  format exact décrit dans le README de Québec** (`scripts/projets-publics.js`). Mes dossiers
+  ne lit que ces fichiers, jamais les décisions complètes : c'est ce qui la garde légère
+  quand les villes s'additionnent.
 
 ## 9. Étape 7 — L'automatisation
 
