@@ -576,7 +576,7 @@
       // Pas de détail : l'abonné peut le demander, si le résumé a trouvé un montant.
       boite.innerHTML = !reponse ? `<p class="ab-note">${tr('Le détail de l’argent ne répond pas pour l’instant. Réessayez dans un moment.', "Money details aren't responding right now. Try again in a moment.")}</p>`
         : rendreDetail(reponse, bouton.dataset.ville)
-          || (bouton.dataset.montant === '1' || reponse.lu ? rendreDemande(reponse) : '')
+          || (bouton.dataset.montant === '1' || reponse.lu ? rendreDemande(reponse, bouton.dataset.ville) : '')
           || `<p class="ab-note">${tr('Pas de détail de l’argent pour ce dossier : son résumé ne mentionne pas de montant.', "No money details for this item: its summary doesn't mention an amount.")}</p>`;
       mesurer('organisme_detail_argent', { ville: bouton.dataset.ville });
     });
