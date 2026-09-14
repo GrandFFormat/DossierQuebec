@@ -22,7 +22,7 @@ Tout ce qui suit a été **vérifié** le 14 septembre 2026, sauf mention contra
 
 | Porte | Ce qu'on y trouve | Accès automatisé |
 |---|---|---|
-| **Index des documents** — page « Sommaires décisionnels, ordres du jour, procès-verbaux » de laval.ca, un tableau wpDataTables servi par `wp-admin/admin-ajax.php?action=get_wdtable&table_id=11` (POST, pagination côté serveur) | **4 360 documents** depuis mai 2023. Par ligne : `ID`, `Nom Fichier`, instance (Conseil municipal / Comité exécutif), sous-type (Ordinaire, Extraordinaire, Publique, Huis clos), type (Ordre du jour, Procès verbal, Sommaire décisionnel), date, **`Numéro`** et **`Titre`** (sommaires seulement : `SD-2026-4237`, « CESSION DE CONTRAT - CONTRAT OS-SP-29554 »), version, URL du PDF | ❌ **HTTP 403 Cloudflare** pour tout client hors navigateur, quel que soit le User-Agent (laval.ca en entier : pages, sitemap, `wp-json`). Le `robots.txt` autorise pourtant explicitement `admin-ajax.php`. |
+| **Index des documents** — page « Ordre du jour, procès-verbaux et sommaire décisionnel » (`laval.ca/vie-democratique/hotel-de-ville-personnes-elues/ordre-jour-proces-verbaux-sommaire/`, aucun bouton d'export), un tableau wpDataTables servi par `wp-admin/admin-ajax.php?action=get_wdtable&table_id=11` (POST, pagination côté serveur) | **4 360 documents** depuis mai 2023. Par ligne : `ID`, `Nom Fichier`, instance (Conseil municipal / Comité exécutif), sous-type (Ordinaire, Extraordinaire, Publique, Huis clos), type (Ordre du jour, Procès verbal, Sommaire décisionnel), date, **`Numéro`** et **`Titre`** (sommaires seulement : `SD-2026-4237`, « CESSION DE CONTRAT - CONTRAT OS-SP-29554 »), version, URL du PDF | ❌ **HTTP 403 Cloudflare** pour tout client hors navigateur, quel que soit le User-Agent (laval.ca en entier : pages, sitemap, `wp-json`). Le `robots.txt` autorise pourtant explicitement `admin-ajax.php`. |
 | **PDF** — `https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/<Nom Fichier>` (stockage Azure de la Ville) | Les documents eux-mêmes. Noms : `CM_PV_ORD_18h30_2026_09_01_2.0.pdf`, `CE_PV_PUB_09h00_2026_09_09_2.0.pdf`, `CE_PV_HC_…`, `CM_ODJ_ORD_…`, `SD-2026-4237_1.0.pdf` | ✅ HTTP 200, sans Cloudflare. Le listage du conteneur n'est pas public (404) : il faut l'index pour connaître les noms. |
 | **Données Québec** (CKAN, CC-BY 4.0), organisation `ville-de-laval`, 130 jeux | `presence-des-elus-au-conseil-municipal` (CSV/JSON, **mensuel, à jour au 4 sept. 2026**, 6 000 lignes depuis 2016 : date, heure, type de séance, nom, présent/absent) · `limites-des-districts-electoraux-des-dernieres-elections-municipales` (GeoJSON, mis à jour le 20 mai 2026) · `liste-des-elus` (**périmé** : fichiers de février 2023, avant l'élection de novembre 2025) · `contrats-octroyes` (fichiers de mars 2025) · `remuneration-des-elus`, `depenses-des-elus` | ✅ API CKAN ouverte |
 | Ancien site `ville.laval.qc.ca/wlav2/docs/greffe/` | Ordres du jour de 2023 (`CM_ODJ_ORD_19h00_2023_01_10.pdf`) | ✅ encore en ligne, archive seulement |
@@ -94,8 +94,9 @@ même phrase :
 - **Cloudflare bloque pourtant tout accès non-navigateur** (403 immédiat, pas de défi à résoudre).
   C'est une décision technique de la Ville (ou de son hébergeur) qu'on ne contourne pas : pas de
   navigateur sans tête, pas d'usurpation d'identité de navigateur. La règle 3 du guide s'applique.
-- Aucun avis de droit d'auteur ou de conditions d'utilisation trouvé sur laval.ca (seulement une
-  politique de confidentialité). À poser dans le courriel au greffe.
+- Aucun avis de droit d'auteur ou de conditions d'utilisation sur laval.ca : le pied de page (vérifié
+  le 14 sept. 2026) n'a que « Accès à l'information », « Politique de confidentialité », « Plan du
+  site » et « Fichiers témoins ». Question posée dans le courriel à la Ville.
 - Données Québec : CC-BY 4.0.
 
 ### Conclusion
