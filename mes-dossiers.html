@@ -749,7 +749,7 @@ ${liste.map(fiche).join('')}
     zone.innerHTML = `<section class="ab-carte ab-ouverts">
       <h2 style="margin-top:0;margin-bottom:2px">À l'agenda des conseils <span class="ab-h2-precision">(approximatif)</span></h2>
       <p class="ab-note" style="margin:0 0 12px">Tiré des documents PDF et du portail de la Ville.</p>
-      <p class="ab-chapeau" style="margin-bottom:12px">Les dossiers qui attendent encore le vote d'un conseil. Ceux qui ont une date cible passeront <mark class="ab-surligne">probablement</mark> à la prochaine séance, mais <mark class="ab-surligne">ce n'est pas l'ordre du jour officiel</mark> : un dossier peut être reporté.</p>
+      <p class="ab-chapeau" style="margin-bottom:12px">Les dossiers qui attendent encore le vote d'un conseil. Ceux qui ont une date cible passeront <em class="ab-mise-en-garde">probablement</em> à la prochaine séance, mais <em class="ab-mise-en-garde">ce n'est pas l'ordre du jour officiel</em> : un dossier peut être reporté.</p>
       <label class="ab-choix-instance">Instance
         <select id="ouverts-instance">${cles.map((k) => { const g = groupes.get(k); return `<option value="${echapper(k)}"${k === choisie ? ' selected' : ''}>${plusieursVilles ? `${echapper(VILLES[g.ville] ?? g.ville)} — ` : ''}${echapper(g.nom)} (${g.dossiers.length})</option>`; }).join('')}</select>
       </label>
