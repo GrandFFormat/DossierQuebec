@@ -38,7 +38,6 @@
     <p class="ab-chapeau">Les projets que vous suivez, toutes villes confondues. Cliquez sur un projet pour voir ses décisions ici, les plus récentes d'abord. Pour en ajouter un, choisissez-le plus bas, ou cliquez « Projet : … » sur une décision dans un volet.</p>
     <div id="compte"></div>
     <div id="alertes"></div>
-    <div id="attendues"></div>
     <div id="liste"><p class="ab-vide">Chargement…</p></div>
     <div id="pourquoi"></div>
     <div id="suggestions"></div>
@@ -73,7 +72,6 @@
   function connexion() {
     $('#compte').innerHTML = '';
     alertes(null, false);
-    attendues(null, false);
     $('#liste').innerHTML = `<div class="ab-carte">
       <h3>Connectez-vous</h3>
       <p>Un seul compte pour DossierQuébec et toutes les villes. On vous envoie un lien par courriel, sans mot de passe.</p>
@@ -190,81 +188,6 @@
         ? corps.envoyes ? `Courriel d'essai envoyé à ${s.user.email}. Pensez à vérifier vos courriels indésirables.` : "Suivez au moins un projet pour recevoir un courriel d'essai."
         : res?.status === 429 ? "Trois courriels d'essai déjà envoyés dans les dernières 24 heures. Réessayez demain." : "L'envoi n'a pas fonctionné. Réessayez dans un moment.";
       mesurer('alertes_essai');
-    });
-  }
-
-  // ---------- décisions attendues (abonnés) ----------
-  // Les dossiers en attente d'une décision finale, avec l'instance et la date cible écrites par la
-  // Ville (/<ville>/data/attendues.json), pour ses projets ou pour toute la ville, et un lien
-  // d'abonnement d'agenda (api/calendrier.js). Une date cible n'est pas un ordre du jour.
-  async function attendues(s, abonne, suivisIds) {
-    const zone = $('#attendues');
-    if (!s || !abonne) { zone.innerHTML = ''; return; }
-    const fichiers = await Promise.all(Object.keys(VILLES).map(async (ville) => [ville, await fetch(`/${ville}/data/attendues.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)]));
-    const toutes = fichiers.flatMap(([ville, f]) => (f?.decisions ?? []).map((d) => ({ ...d, ville })));
-    if (!toutes.length) { zone.innerHTML = ''; return; }
-    const auj = new Date().toISOString().slice(0, 10);
-    const dansMesProjets = (d) => d.projets.some((cle) => suivisIds.has(`${d.ville}|projet:${cle}`));
-    const plusieursVilles = new Set(toutes.map((d) => d.ville)).size > 1;
-    let portee = toutes.some((d) => dansMesProjets(d) && d.echeance >= auj) ? 'projets' : 'ville';
-
-    const ligneAttendue = (d) => `<li class="ab-ligne-projet">
-        <div class="ab-meta">${d.echeance ? `<strong>${dateFr(d.echeance)}</strong>` : ''}${d.instance ? `<span>${echapper(d.instance)}</span>` : ''}${plusieursVilles ? `<span>${echapper(VILLES[d.ville] ?? d.ville)}</span>` : ''}</div>
-        <div>${echapper(d.phrase)}</div>
-        <div class="ab-refs ab-refs-dessous"><a class="ab-ref" href="/${echapper(d.ville)}/decisions.html?q=${encodeURIComponent(d.numero)}">${echapper(d.numero)}</a></div>
-      </li>`;
-
-    const dessiner = () => {
-      const liste = portee === 'projets' ? toutes.filter(dansMesProjets) : toutes;
-      const aVenir = liste.filter((d) => d.echeance && d.echeance >= auj);
-      const depassees = liste.filter((d) => d.echeance && d.echeance < auj);
-      const sansDate = liste.filter((d) => !d.echeance);
-      $('#attendues-liste').innerHTML = `
-        <div class="ab-bloc"><div class="ab-detail-titre">Date cible à venir <span class="ab-etiquette">${aVenir.length}</span></div>
-          ${aVenir.length ? `<ul class="ab-liste-projet">${aVenir.map(ligneAttendue).join('')}</ul>` : `<p class="ab-note">${portee === 'projets' ? "Aucun dossier de vos projets n'a de date cible à venir pour l'instant." : 'Aucune date cible à venir pour l\'instant.'}</p>`}
-        </div>
-        ${depassees.length ? `<details class="ab-toutes"><summary>Date cible passée, décision pas encore publiée <span class="ab-etiquette">${depassees.length}</span></summary><ul class="ab-liste-projet">${depassees.map(ligneAttendue).join('')}</ul></details>` : ''}
-        ${sansDate.length ? `<details class="ab-toutes"><summary>En attente, sans date cible <span class="ab-etiquette">${sansDate.length}</span></summary><ul class="ab-liste-projet">${sansDate.map(ligneAttendue).join('')}</ul></details>` : ''}`;
-      for (const b of zone.querySelectorAll('[data-portee]')) b.setAttribute('aria-pressed', String(b.dataset.portee === portee));
-    };
-
-    zone.innerHTML = `<section class="ab-carte ab-attendues">
-      <h2 style="margin-top:0">Décisions attendues</h2>
-      <p class="ab-chapeau" style="margin-bottom:10px">Les dossiers qui attendent encore une décision, avec l'instance qui doit décider et la <strong>date cible</strong> que la Ville écrit dans son sommaire. Ce n'est pas un ordre du jour : un dossier peut être reporté. La décision réelle apparaît dans vos projets dès sa publication.</p>
-      <div class="ab-portee" role="group" aria-label="Quels dossiers en attente" title="Mes projets : seulement les dossiers des projets que vous suivez. Tous les dossiers : tout ce qui attend une décision à la Ville.">
-        <button type="button" data-portee="projets">Mes projets</button>
-        <button type="button" data-portee="ville">${plusieursVilles ? 'Tous les dossiers' : `Tous les dossiers de ${echapper(VILLES[toutes[0].ville] ?? '')}`}</button>
-      </div>
-      <div id="attendues-liste"></div>
-      <div class="ab-liens"><button type="button" class="ab-lien-bouton" id="agenda">Ajouter à mon agenda</button></div>
-      <div id="agenda-zone" hidden></div>
-    </section>`;
-    dessiner();
-    for (const b of zone.querySelectorAll('[data-portee]')) b.addEventListener('click', () => { portee = b.dataset.portee; dessiner(); });
-
-    $('#agenda').addEventListener('click', async (e) => {
-      const boite = $('#agenda-zone');
-      if (!boite.hidden) { boite.hidden = true; return; }
-      e.target.disabled = true;
-      const courante = await session();
-      const res = await fetch('/api/calendrier?lien=1', { headers: { Authorization: `Bearer ${courante?.access_token ?? ''}` } }).catch(() => null);
-      const liens = res?.ok ? await res.json() : null;
-      e.target.disabled = false;
-      if (!liens) { boite.hidden = false; boite.innerHTML = "<p class=\"ab-note\">Le lien n'a pas pu être créé. Réessayez dans un moment.</p>"; return; }
-      const choix = (titre, url) => `<div class="ab-agenda-choix">
-          <strong>${titre}</strong>
-          <div class="ab-form"><input type="text" readonly value="${echapper(url)}" aria-label="Lien d'abonnement : ${titre}"><button type="button" class="ab-bouton" data-copier="${echapper(url)}">Copier</button></div>
-          <a class="ab-lien" href="${echapper(url.replace(/^https:/, 'webcal:'))}">Ouvrir dans l'agenda de cet appareil</a>
-        </div>`;
-      boite.hidden = false;
-      boite.innerHTML = `${choix('Mes projets', liens.url)}${choix(plusieursVilles ? 'Tous les dossiers' : `Tous les dossiers de ${echapper(VILLES[toutes[0].ville] ?? '')}`, liens.urlTout)}
-        <p class="ab-note"><strong>Google Agenda</strong> : Autres agendas → + → À partir de l'URL, puis collez le lien. <strong>Apple</strong> : « Ouvrir dans l'agenda », ou Fichier → Nouvel abonnement. <strong>Outlook</strong> : Ajouter un calendrier → S'abonner à partir du web. L'agenda se met à jour de lui-même, en général une fois par jour. Ce lien est personnel : ne le partagez pas.</p>`;
-      for (const b of boite.querySelectorAll('[data-copier]')) {
-        b.addEventListener('click', async () => {
-          try { await navigator.clipboard.writeText(b.dataset.copier); b.textContent = 'Copié'; } catch { b.previousElementSibling.select(); }
-        });
-      }
-      mesurer('agenda_lien');
     });
   }
 
@@ -545,7 +468,6 @@
     alertes(s, abonne).catch((e) => console.error('alertes :', e));
     ecrire(s);
     const suivis = await chargerSuivis();
-    attendues(s, abonne, new Set(suivis.map((x) => `${x.ville}|${x.dossier_id}`))).catch((e) => console.error('attendues :', e));
     pourquoi({ connecte: true, abonne });
     suggestions(s, new Set(suivis.map((x) => `${x.ville}|${x.dossier_id}`)));
     if (!suivis.length) {
