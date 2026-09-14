@@ -9,6 +9,8 @@
   try {
     var t = localStorage.getItem('dvq:theme');
     if (t === 'clair' || t === 'sombre') document.documentElement.setAttribute('data-theme', t);
+    var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
+    if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
   } catch (e) {}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,12 +20,18 @@
 <body class="ab-page">
 <div class="ab-contenu">
   <header class="ab-haut">
-    <a class="ab-marque" href="/">Dossier<span>Québec</span></a>
-    <nav aria-label="Les volets">
-      <a href="/quebec/">Ville de Québec</a>
-      <a href="/montreal/">Ville de Montréal</a>
-      <a href="/abonnement">Abonnement</a>
-      <a href="#ecrire">Nous écrire</a>
+    <div class="ab-haut-ligne">
+      <a class="ab-marque" href="/">Dossier<span>Québec</span></a>
+      <a class="ab-retour-volet" id="retour-volet" hidden></a>
+      <span class="ab-villes" id="villes"></span>
+    </div>
+    <nav class="ab-nav" aria-label="Espace abonnés">
+      <div class="ab-onglets">
+        <a href="/mes-dossiers" aria-current="page">Mes dossiers</a>
+        <a href="/abonnement">Abonnement</a>
+        <a href="/mes-dossiers#ecrire">Nous écrire</a>
+      </div>
+      <div class="ab-outils" id="outils"></div>
     </nav>
   </header>
 
@@ -39,8 +47,9 @@
 </div>
 
 <script type="module">
-  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, mesurer, formulaireMessage, boutonRetourEnHaut } from '/commun/abonnes-client.js';
+  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, mesurer, formulaireMessage, boutonRetourEnHaut, enteteCommune } from '/commun/abonnes-client.js';
   boutonRetourEnHaut();
+  enteteCommune();
 
   const $ = (s) => document.querySelector(s);
 

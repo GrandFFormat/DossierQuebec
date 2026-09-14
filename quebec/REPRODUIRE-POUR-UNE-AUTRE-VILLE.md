@@ -214,6 +214,10 @@ parfois littéralement dans ses chaînes.
   séances repliées, « Tout déplier » qui retire le `name` le temps de l'ouverture.
 - Thème clair et sombre (`data-theme`, appliqué avant le premier rendu), taille du texte
   mémorisée (`zoom` 80–150 %).
+- **En-tête** : dans `<nav>`, les onglets du volet puis `<div class="outils">` avec la taille du
+  texte et le thème — `/commun/abonnes.js` y ajoute « Mes dossiers » et « Abonnement », et
+  mémorise la page pour que Mes dossiers et Abonnement offrent « ← Retour au volet ». Sur
+  cellulaire, le sous-titre ne reste que sur l'accueil et les outils tiennent sur une ligne.
 - **Espace abonnés et « Mes dossiers » (communs à toutes les villes).** Chaque page porte
   `data-ville="…"` sur `<body>` et charge `/commun/abonnes.js` ; chaque fiche contient un
   `<div class="ab-fiche" data-dossier data-numero data-objet data-projets>`. Ajouter la ville à
