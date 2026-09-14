@@ -6,8 +6,8 @@
 <link rel="icon" type="image/svg+xml" href="/commun/icone.svg">
 <!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
 <meta name="robots" content="noindex, nofollow">
-<title>Sources — DossierVilleDeQuébec</title>
-<meta name="description" content="D'où viennent les données de DossierVilleDeQuébec, comment les votes nominatifs et les résumés sont produits, et ce que le site ne fait pas encore.">
+<title data-en="Sources — DossierVilleDeQuébec">Sources — DossierVilleDeQuébec</title>
+<meta data-en-content="Where the data of DossierVilleDeQuébec comes from, how the recorded votes, summaries and English translations are produced, and what the site does not do yet." name="description" content="D'où viennent les données de DossierVilleDeQuébec, comment les votes nominatifs et les résumés sont produits, et ce que le site ne fait pas encore.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
@@ -22,6 +22,9 @@
       document.documentElement.dataset.theme = t;
       var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
       if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+      // Anglais choisi (commun/langue.js) : page cachée le temps de traduire, 1,5 s au plus.
+      var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('dvq:langue');
+      if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.classList.add('dvq-en'); setTimeout(function () { document.documentElement.classList.add('dvq-pret'); }, 1500); }
     } catch (e) {}
   })();
 </script>
@@ -34,26 +37,26 @@
   <div class="contenu">
     <div class="titre-ligne">
       <a href="./"><h1>Dossier<span class="marque">VilleDeQuébec</span></h1></a>
-      <a class="retour-dq" href="https://dossierquebec.ca/" title="Retour à DossierQuébec" aria-label="Retour à DossierQuébec">DQ</a>
+      <a data-en-title="Back to DossierQuébec" data-en-aria-label="Back to DossierQuébec" class="retour-dq" href="https://dossierquebec.ca/" title="Retour à DossierQuébec" aria-label="Retour à DossierQuébec">DQ</a>
       <details class="ab-villes" id="villes"></details>
     </div>
-    <p class="sous-titre">
+    <p data-en="The City of Québec's decisions, made readable. Public data, taken as is from the City's decision-document portal and the official City Council page." class="sous-titre">
       Les décisions de la Ville de Québec, lisibles. Données publiques, reprises telles quelles
       du portail des documents décisionnels de la Ville et de la page officielle du conseil municipal.
     </p>
     <nav>
-      <a href="./">Accueil</a>
-      <a href="decisions.html">Décisions</a>
-      <a href="votes.html">Votes nominatifs</a>
-      <a href="conseil.html">Conseil municipal</a>
-      <a href="lexique.html">Lexique</a>
-      <a href="https://www.ville.quebec.qc.ca/" class="externe" target="_blank" rel="noopener">Ville de Québec <span aria-hidden="true">↗</span><span class="sr-only"> (site officiel, nouvel onglet)</span></a>
-      <a href="sources.html" aria-current="page">Sources</a>
+      <a data-en="Home" href="./">Accueil</a>
+      <a data-en="Decisions" href="decisions.html">Décisions</a>
+      <a data-en="Recorded votes" href="votes.html">Votes nominatifs</a>
+      <a data-en="City Council" href="conseil.html">Conseil municipal</a>
+      <a data-en="Glossary" href="lexique.html">Lexique</a>
+      <a data-en="Ville de Québec <span aria-hidden=&quot;true&quot;>↗</span><span class=&quot;sr-only&quot;> (official site, new tab)</span>" href="https://www.ville.quebec.qc.ca/" class="externe" target="_blank" rel="noopener">Ville de Québec <span aria-hidden="true">↗</span><span class="sr-only"> (site officiel, nouvel onglet)</span></a>
+      <a data-en="Sources" href="sources.html" aria-current="page">Sources</a>
       <div class="outils">
-        <div class="taille-texte" role="group" aria-label="Taille du texte">
-          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+        <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
+          <button data-en-aria-label="Smaller text" type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
           <span id="texte-pct" aria-live="polite">100%</span>
-          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+          <button data-en-aria-label="Larger text" type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
         </div>
         <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
                 title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
@@ -65,53 +68,53 @@
 <main class="contenu prose">
   <div id="chargement" class="avis" hidden></div>
 
-  <h2 class="page">Sources</h2>
-  <p class="chapeau">
+  <h2 data-en="Sources" class="page">Sources</h2>
+  <p data-en="This site is not the City of Québec and has no official status. If anything differs, the original PDF document prevails — it is one click away on each item. <strong>The City's documents are in French</strong>; the English version of this site translates the interface and the summaries only." class="chapeau">
     Ce site n'est pas la Ville de Québec et n'a aucun caractère officiel. En cas de différence,
     le document PDF d'origine fait foi — il est à un clic sur chaque fiche.
   </p>
 
-  <h3>D'où viennent les données</h3>
+  <h3 data-en="Where the data comes from">D'où viennent les données</h3>
   <ul>
-    <li>Les décisions et les votes viennent du
+    <li data-en="Decisions and votes come from the City's <a href=&quot;https://decisions.ville.quebec.qc.ca/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>decision-document portal</a>.">Les décisions et les votes viennent du
       <a href="https://decisions.ville.quebec.qc.ca/" target="_blank" rel="noopener">portail des documents
       décisionnels</a> de la Ville.</li>
-    <li>Les membres du conseil viennent de la
+    <li data-en="Council members come from the <a href=&quot;https://www.ville.quebec.qc.ca/apropos/gouvernance/conseil-municipal/membres.aspx&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>official City Council page</a>.">Les membres du conseil viennent de la
       <a href="https://www.ville.quebec.qc.ca/apropos/gouvernance/conseil-municipal/membres.aspx" target="_blank" rel="noopener">page
       officielle du conseil municipal</a>.</li>
-    <li>Les contours des districts viennent du jeu de données ouvert
+    <li data-en="District boundaries come from the City's open dataset <a href=&quot;https://www.donneesquebec.ca/recherche/dataset/vque_43&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>&quot;Districts électoraux&quot;</a>, under a CC-BY 4.0 licence.">Les contours des districts viennent du jeu de données ouvert
       <a href="https://www.donneesquebec.ca/recherche/dataset/vque_43" target="_blank" rel="noopener">« Districts
       électoraux »</a> de la Ville, sous licence CC-BY&nbsp;4.0.</li>
   </ul>
 
-  <h3>Ce qu'une machine fait, et ce qu'elle peut rater</h3>
+  <h3 data-en="What a machine does, and what it can miss">Ce qu'une machine fait, et ce qu'elle peut rater</h3>
   <ul>
-    <li><strong>Les résumés</strong> sont écrits par une intelligence artificielle à partir du
+    <li data-en="<strong>The summaries</strong> are written by artificial intelligence from the decision summary — the note the City writes before each decision. It is instructed not to add any information missing from the document and not to make any judgment. <strong>The English summaries</strong> are machine translations of the French ones; every number is checked against the French, and a translation that changes a figure is rejected."><strong>Les résumés</strong> sont écrits par une intelligence artificielle à partir du
       sommaire décisionnel — la note que la Ville rédige avant chaque décision. Elle a pour
       consigne de n'ajouter aucune information absente du document et de ne porter aucun jugement.</li>
-    <li><strong>Les noms des votants</strong> sont extraits du texte des résolutions, pas d'un
+    <li data-en="<strong>The names of voters</strong> are extracted from the text of the resolutions, not from a register. Each vote is cross-checked with the count printed in the document; any gap is shown on the item rather than silently corrected."><strong>Les noms des votants</strong> sont extraits du texte des résolutions, pas d'un
       registre. Chaque vote est recoupé avec le décompte imprimé dans le document&nbsp;; tout écart
       est affiché sur la fiche plutôt que corrigé en silence.</li>
-    <li><strong>Les pastilles de sujet</strong> n'existent pas dans les données de la Ville&nbsp;:
+    <li data-en="<strong>The topic tags</strong> don't exist in the City's data: they are a classification added here, based on the words of each decision's subject."><strong>Les pastilles de sujet</strong> n'existent pas dans les données de la Ville&nbsp;:
       c'est un classement ajouté ici, d'après les mots de l'objet de chaque décision.</li>
   </ul>
 
-  <h3>Deux choses à savoir</h3>
+  <h3 data-en="Two things to know">Deux choses à savoir</h3>
   <ul>
-    <li>Le site ne montre que <strong>l'année en cours</strong>. Les années précédentes sont
+    <li data-en="The site only shows <strong>the current year</strong>. Previous years are kept separately.">Le site ne montre que <strong>l'année en cours</strong>. Les années précédentes sont
       conservées à part.</li>
-    <li>Un vote nominatif n'a lieu que si un membre le demande. <strong>L'absence de vote
+    <li data-en="A recorded vote only happens if a member asks for it. <strong>The absence of a recorded vote does not mean there was a consensus.</strong>">Un vote nominatif n'a lieu que si un membre le demande. <strong>L'absence de vote
       nominatif ne veut pas dire qu'il y a eu consensus.</strong></li>
   </ul>
 
-  <h3>État des données</h3>
+  <h3 data-en="Data status">État des données</h3>
   <div id="etat-donnees"></div>
   <div id="etat-archive"></div>
 </main>
 
 <footer>
   <div class="contenu">
-    <p>Site citoyen indépendant. Aucun lien avec la Ville de Québec, aucun caractère officiel.
+    <p data-en="Independent citizen site. No connection with the City of Québec, no official status. If anything differs, the original PDF document prevails.">Site citoyen indépendant. Aucun lien avec la Ville de Québec, aucun caractère officiel.
     En cas d'écart, le document PDF d'origine fait foi.</p>
   </div>
 </footer>

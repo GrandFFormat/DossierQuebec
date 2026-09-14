@@ -188,6 +188,24 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
   nav .outils .taille-texte button { height: 26px; width: 30px; }
   nav .outils .bascule-theme { width: 32px; height: 32px; }
 }
+/* Pastille de langue EN / FR (commun/langue.js), collée au menu des villes. */
+.ab-langue {
+  display: inline-flex; align-items: center; margin-left: 6px; white-space: nowrap; text-decoration: none;
+  font-size: 13px; font-weight: 800; letter-spacing: .04em; line-height: 1.5;
+  color: var(--encre, #16191D); background: var(--carte, #fff);
+  border: 1px solid var(--ligne-forte, #C2CAD2); border-radius: 999px; padding: 5px 10px;
+}
+.ab-langue:hover { border-color: var(--accent, #0B8A4B); color: var(--accent, #0B8A4B); }
+.ab-langue:focus-visible { outline: 2px solid var(--accent, #0B8A4B); outline-offset: 2px; }
+.ab-langue-seule { margin-left: auto; }
+.ab-langue-mobile { display: none; }
+@media (max-width: 620px) {
+  .titre-ligne > .ab-langue { display: none; }
+  nav .ab-langue-mobile { display: inline-flex; box-sizing: border-box; height: 28px; padding: 0 9px; margin-left: 4px; font-size: 12px; }
+}
+/* Anglais choisi : la page reste cachée le temps de traduire l'en-tête (au plus 1,5 s, voir le
+   script en ligne de chaque page), pour ne pas montrer le français une fraction de seconde. */
+html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 .ab-villes-dq { border-top: 1px solid var(--ligne, #DDE2E7); margin-top: 4px; padding-top: 4px; }
 .ab-villes-dq span { color: var(--doux, #5B6570); font-weight: 400; }
 .ab-page .ab-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }

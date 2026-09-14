@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="/commun/icone.svg">
-<title>Mes dossiers — DossierQuébec</title>
+<title data-en="My files — DossierQuébec">Mes dossiers — DossierQuébec</title>
 <meta name="robots" content="noindex, nofollow">
 <script>
   try {
@@ -12,6 +12,9 @@
     if (t === 'clair' || t === 'sombre') document.documentElement.setAttribute('data-theme', t);
     var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
     if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+    // Anglais choisi (commun/langue.js) : page cachée le temps de traduire, 1,5 s au plus.
+    var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('dvq:langue');
+    if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.classList.add('dvq-en'); setTimeout(function () { document.documentElement.classList.add('dvq-pret'); }, 1500); }
   } catch (e) {}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,26 +27,26 @@
     <div class="ab-haut-ligne">
       <a class="ab-marque" href="/">Dossier<span>Québec</span></a>
     </div>
-    <nav class="ab-nav" aria-label="Espace abonnés">
+    <nav class="ab-nav" aria-label="Espace abonnés" data-en-aria-label="Subscriber area">
       <div class="ab-onglets">
-        <a href="/mes-dossiers" aria-current="page">Mes dossiers</a>
-        <a href="/abonnement">Abonnement</a>
-        <a href="/mes-dossiers#ecrire">Nous écrire</a>
+        <a href="/mes-dossiers" aria-current="page" data-en="My files">Mes dossiers</a>
+        <a href="/abonnement" data-en="Subscription">Abonnement</a>
+        <a href="/mes-dossiers#ecrire" data-en="Write to us">Nous écrire</a>
       </div>
       <div class="ab-outils" id="outils"></div>
     </nav>
   </header>
 
   <main>
-    <h1>Mes dossiers</h1>
-    <p class="ab-chapeau">Les projets que vous suivez, toutes villes confondues. Cliquez sur un projet pour voir ses décisions ici, les plus récentes d'abord. Pour en ajouter un, choisissez-le plus bas, ou cliquez « Projet : … » sur une décision dans un volet.</p>
+    <h1 data-en="My files">Mes dossiers</h1>
+    <p class="ab-chapeau" data-en="The projects you follow, all cities combined. Click a project to see its decisions here, most recent first. To add one, pick it further down, or click “Project: …” on a decision in a city section.">Les projets que vous suivez, toutes villes confondues. Cliquez sur un projet pour voir ses décisions ici, les plus récentes d'abord. Pour en ajouter un, choisissez-le plus bas, ou cliquez « Projet : … » sur une décision dans un volet.</p>
     <div id="compte"></div>
     <div id="alertes"></div>
     <div id="mots"></div>
     <div id="organismes"></div>
     <div id="export"></div>
     <div id="ouverts"></div>
-    <div id="liste"><p class="ab-vide">Chargement…</p></div>
+    <div id="liste"><p class="ab-vide" data-en="Loading…">Chargement…</p></div>
     <div id="pourquoi"></div>
     <div id="suggestions"></div>
     <div id="ecrire"></div>
@@ -57,7 +60,37 @@
   boutonRetourEnHaut();
 </script>
 <script type="module">
-  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, mesurer, formulaireMessage } from '/commun/abonnes-client.js';
+  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, mesurer, formulaireMessage, EN, tr } from '/commun/abonnes-client.js';
+  const pl = (n, sing, plur) => (n > 1 ? plur : sing);
+  import { libelleEn, themeEn } from '/quebec/assets/libelles-en.js';
+  // Libellés de la Ville (instances, sujets) et résumés IA en anglais quand l'anglais est choisi.
+  const lib = (texte) => (EN ? libelleEn(texte) : texte);
+  const libTheme = (cle, libelle) => (EN ? themeEn(cle, libelle) : libelle);
+  const libInstances = (liste) => liste.map(lib).join(' · ');
+  let traductionsEn = null;
+  const chargerTraductionsEn = () => {
+    traductionsEn ??= EN
+      ? Promise.all(Object.keys(VILLES).map((v) => fetch(`/${v}/data/resumes-en.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)))
+        .then((fichiers) => Object.assign({}, ...fichiers.map((f) => f?.traductions ?? {})))
+      : Promise.resolve({});
+    return traductionsEn;
+  };
+  // Remplace les puces françaises par les anglaises, en gardant les françaises pour la recherche de
+  // mots-clés et d'organismes (les décisions sont en français) : pucesFr.
+  const enAnglais = async (dossiers) => {
+    if (!EN || !dossiers?.length) return dossiers;
+    const traductions = await chargerTraductionsEn();
+    for (const d of dossiers) {
+      if (d.pucesFr) continue;
+      const x = traductions[/\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1]];
+      if (!x) continue;
+      d.pucesFr = d.puces ?? [];
+      d.puces = x.puces;
+      if ('phrase' in d) d.phrase = x.puces[0] ?? d.phrase;
+      if (d.montant && x.montantPrincipal) d.montant = x.montantPrincipal;
+    }
+    return dossiers;
+  };
 
   const $ = (s) => document.querySelector(s);
 
@@ -68,7 +101,7 @@
   const cache = new Map();
   const jeu = (ville, nom) => {
     const k = `${ville}/${nom}`;
-    if (!cache.has(k)) cache.set(k, fetch(`/${ville}/data/projets/${nom}.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null));
+    if (!cache.has(k)) cache.set(k, fetch(`/${ville}/data/projets/${nom}.json`).then((r) => (r.ok ? r.json() : null)).then(async (f) => { if (f?.dossiers) await enAnglais(f.dossiers); return f; }).catch(() => null));
     return cache.get(k);
   };
   const indexVille = (ville) => jeu(ville, 'index');
@@ -82,11 +115,11 @@
     exportTableur(null, false);
     dossiersOuverts(null, false);
     $('#liste').innerHTML = `<div class="ab-carte">
-      <h3>Connectez-vous</h3>
-      <p>Un seul compte pour DossierQuébec et toutes les villes. On vous envoie un lien par courriel, sans mot de passe.</p>
-      <form class="ab-form" id="form-lien"><input type="email" required placeholder="Votre courriel" autocomplete="email">
-      <button type="submit" class="ab-bouton">Recevoir le lien de connexion</button></form>
-      <p class="ab-note">Un seul lien peut être envoyé toutes les 5 minutes. Pensez à vérifier vos courriels indésirables.</p>
+      <h3>${tr('Connectez-vous', 'Sign in')}</h3>
+      <p>${tr('Un seul compte pour DossierQuébec et toutes les villes. On vous envoie un lien par courriel, sans mot de passe.', 'One account for DossierQuébec and every city. We email you a link, no password needed.')}</p>
+      <form class="ab-form" id="form-lien"><input type="email" required placeholder="${tr('Votre courriel', 'Your email')}" autocomplete="email">
+      <button type="submit" class="ab-bouton">${tr('Recevoir le lien de connexion', 'Get the sign-in link')}</button></form>
+      <p class="ab-note">${tr('Un seul lien peut être envoyé toutes les 5 minutes. Pensez à vérifier vos courriels indésirables.', 'Only one link can be sent every 5 minutes. Check your spam folder.')}</p>
       <p class="ab-note" id="etat-lien" aria-live="polite"></p>
     </div>`;
     pourquoi({ connecte: false, abonne: false });
@@ -97,13 +130,15 @@
       const email = e.target.querySelector('input').value.trim();
       const bouton = e.target.querySelector('button');
       bouton.disabled = true;
-      $('#etat-lien').textContent = 'Envoi…';
+      $('#etat-lien').textContent = tr('Envoi…', 'Sending…');
       const erreur = await envoyerLien(email);
       if (erreur) {
         bouton.disabled = false;
-        $('#etat-lien').textContent = erreur.code === 'over_email_send_rate_limit' ? 'Un lien a déjà été envoyé il y a moins de 5 minutes — vérifiez votre boîte courriel (et les indésirables), ou réessayez dans quelques minutes.' : 'Une erreur est survenue. Réessayez.';
+        $('#etat-lien').textContent = erreur.code === 'over_email_send_rate_limit'
+          ? tr('Un lien a déjà été envoyé il y a moins de 5 minutes — vérifiez votre boîte courriel (et les indésirables), ou réessayez dans quelques minutes.', 'A link was already sent less than 5 minutes ago — check your inbox (and spam), or try again in a few minutes.')
+          : tr('Une erreur est survenue. Réessayez.', 'Something went wrong. Try again.');
       } else {
-        $('#etat-lien').textContent = `Lien envoyé à ${email}. Ouvrez-le pour revenir sur cette page, connecté.`;
+        $('#etat-lien').textContent = tr(`Lien envoyé à ${email}. Ouvrez-le pour revenir sur cette page, connecté.`, `Link sent to ${email}. Open it to come back to this page, signed in.`);
       }
     });
   }
@@ -114,7 +149,15 @@
   //   - l'abonnement payant : les alertes, le détail de l'argent, etc.
   // Pas connecté : les deux, côte à côte. Connecté sans abonnement : seulement ce que le payant
   // ajoute (le compte, il l'a déjà). Abonné : rien.
-  const AVANTAGES_COMPTE = `<ul>
+  const AVANTAGES_COMPTE = EN
+    ? `<ul>
+        <li><strong>Follow the major projects</strong> of each city — the tramway, housing… — and find them here.</li>
+        <li><strong>“Where the project stands”</strong>: the recap, the timeline, decisions by month and what is still awaiting a decision.</li>
+        <li><strong>Every city covered</strong>, with the same account.</li>
+        <li><strong>Write to us</strong> and <strong>report an error</strong> on an item.</li>
+      </ul>
+      <p class="ab-note" style="margin:0">No password: a sign-in link by email.</p>`
+    : `<ul>
         <li><strong>Suivre les grands projets</strong> de chaque ville — le tramway, le logement… — et les retrouver ici.</li>
         <li><strong>« Où en est le projet »</strong> : le récapitulatif, la ligne du temps, les décisions par mois et ce qui attend encore une décision.</li>
         <li><strong>Toutes les villes couvertes</strong>, avec le même compte.</li>
@@ -126,33 +169,40 @@
     if (abonne) { $('#pourquoi').innerHTML = ''; return; }
     if (!connecte) {
       $('#pourquoi').innerHTML = `<section class="ab-pourquoi-deux">
-        <h2>Compte gratuit ou abonnement payant</h2>
+        <h2>${tr('Compte gratuit ou abonnement payant', 'Free account or paid subscription')}</h2>
         <div class="ab-grille">
           <div class="ab-carte">
-            <h3>Avec un compte gratuit</h3>
+            <h3>${tr('Avec un compte gratuit', 'With a free account')}</h3>
             ${AVANTAGES_COMPTE}
           </div>
           <div class="ab-carte ab-pourquoi">
-            <h3>Avec l'abonnement payant <span class="ab-note">(3 $ par mois, prix prévu)</span></h3>
-            <p class="ab-note" style="margin:0 0 8px">Tout le compte gratuit, plus :</p>
+            <h3>${tr("Avec l'abonnement payant", 'With the paid subscription')} <span class="ab-note">${tr('(3 $ par mois, prix prévu)', '($3 a month, planned price)')}</span></h3>
+            <p class="ab-note" style="margin:0 0 8px">${tr('Tout le compte gratuit, plus :', 'Everything in the free account, plus:')}</p>
             <ul>${AVANTAGES_PAYANTS}</ul>
-            <a class="ab-bouton" href="/abonnement" data-mesure="mes_dossiers_voir_abonnement">Voir l'abonnement</a>
+            <a class="ab-bouton" href="/abonnement" data-mesure="mes_dossiers_voir_abonnement">${tr("Voir l'abonnement", 'See the subscription')}</a>
           </div>
         </div>
-        <p class="ab-note">Un seul abonnement vaut pour toutes les villes couvertes — pas un abonnement par ville. Et chaque abonnement garde le reste du site gratuit pour tout le monde.</p>
+        <p class="ab-note">${tr('Un seul abonnement vaut pour toutes les villes couvertes — pas un abonnement par ville. Et chaque abonnement garde le reste du site gratuit pour tout le monde.', 'One subscription covers every city — not one subscription per city. And every subscription keeps the rest of the site free for everyone.')}</p>
       </section>`;
       return;
     }
     $('#pourquoi').innerHTML = `<section class="ab-carte ab-pourquoi">
-      <h2 style="margin-top:0">Ce que l'abonnement payant ajoute à votre compte</h2>
-      <p class="ab-chapeau" style="margin-bottom:10px">Votre compte gratuit vous montre tout quand vous venez voir. L'abonnement payant vous dit <strong>quand</strong> il y a quelque chose à voir, et ce que les documents disent de l'argent.</p>
+      <h2 style="margin-top:0">${tr("Ce que l'abonnement payant ajoute à votre compte", 'What the paid subscription adds to your account')}</h2>
+      <p class="ab-chapeau" style="margin-bottom:10px">${tr("Votre compte gratuit vous montre tout quand vous venez voir. L'abonnement payant vous dit <strong>quand</strong> il y a quelque chose à voir, et ce que les documents disent de l'argent.", 'Your free account shows you everything when you come to look. The paid subscription tells you <strong>when</strong> there is something to see, and what the documents say about the money.')}</p>
       <ul>${AVANTAGES_PAYANTS}</ul>
-      <p class="ab-note" style="margin:0 0 14px">3 $ par mois (prix prévu). Un seul abonnement vaut pour toutes les villes couvertes — pas un abonnement par ville. Et chaque abonnement garde le reste du site gratuit pour tout le monde.</p>
-      <a class="ab-bouton" href="/abonnement" data-mesure="mes_dossiers_voir_abonnement">Voir l'abonnement</a>
+      <p class="ab-note" style="margin:0 0 14px">${tr('3 $ par mois (prix prévu). Un seul abonnement vaut pour toutes les villes couvertes — pas un abonnement par ville. Et chaque abonnement garde le reste du site gratuit pour tout le monde.', '$3 a month (planned price). One subscription covers every city — not one per city. And every subscription keeps the rest of the site free for everyone.')}</p>
+      <a class="ab-bouton" href="/abonnement" data-mesure="mes_dossiers_voir_abonnement">${tr("Voir l'abonnement", 'See the subscription')}</a>
     </section>`;
   }
 
-  const AVANTAGES_PAYANTS = `
+  const AVANTAGES_PAYANTS = EN ? `
+        <li><strong>An email alert when your projects move</strong>: a new decision, an item awaiting a vote, an updated recap — and nothing in the weeks when nothing moves.</li>
+        <li><strong>Money details</strong>: who receives, who pays, the bids and the City's estimate, the breakdown by year, the conditions.
+          <br><span class="ab-note">Available for items with an amount: those of the major projects followed, and every new item since September 15, 2026. Other 2026 items don't have them yet.</span></li>
+        <li><strong>Alerts for your neighbourhood, your street or a keyword</strong>: “everything the City decides about 1re Avenue”, “in Limoilou”, “about snow removal”.</li>
+        <li><strong>Follow an organization or a company</strong>: this year's decisions that name it — contracts, grants, agreements — with each amount as written, and an alert when a new one names it.</li>
+        <li><strong>Council agendas</strong> (<em class="ab-mise-en-garde">approximate</em>): what's coming up at each council, with its summary, and what will <em class="ab-mise-en-garde">probably</em> be presented at the next meeting.</li>
+        <li><strong>Export to a spreadsheet or PDF</strong> (Excel, CSV or printable PDF): you choose a project, a word or a name and the columns, with the money details when they have been read.</li>` : `
         <li><strong>Une alerte par courriel quand vos projets bougent</strong> : une nouvelle décision, un dossier qui attend un vote, un récapitulatif mis à jour — et rien les semaines où rien n'avance.</li>
         <li><strong>Le détail de l'argent</strong> : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions.
           <br><span class="ab-note">Offert pour les dossiers avec un montant : ceux des grands projets suivis, et chaque nouveau dossier depuis le 15 septembre 2026. Les autres dossiers de 2026 ne l'ont pas encore.</span></li>
@@ -174,10 +224,10 @@
     const actif = preference.data?.actif !== false;
     const derniere = envois.data?.[0]?.envoye_le;
     zone.innerHTML = `<section class="ab-carte ab-alertes">
-      <h2 style="margin-top:0">Alertes par courriel</h2>
-      <label class="ab-interrupteur"><input type="checkbox" id="alertes-actif"${actif ? ' checked' : ''}> <span>Recevoir mon alerte du matin</span></label>
-      <p class="ab-note">Chaque matin, s'il y a du nouveau dans vos projets suivis, vos mots-clés ou vos organismes — un seul courriel pour tout. Rien les jours où rien n'avance.${derniere ? ` Dernière alerte : ${dateFr(derniere)}.` : ''}</p>
-      <div class="ab-liens"><button type="button" class="ab-lien-bouton" id="alertes-essai">M'envoyer un courriel d'essai</button><button type="button" class="ab-lien-bouton ab-lien-doux" id="alertes-retirer"></button><span class="ab-note" id="alertes-etat" aria-live="polite" style="margin:0"></span></div>
+      <h2 style="margin-top:0">${tr('Alertes par courriel', 'Email alerts')}</h2>
+      <label class="ab-interrupteur"><input type="checkbox" id="alertes-actif"${actif ? ' checked' : ''}> <span>${tr('Recevoir mon alerte du matin', 'Get my morning alert')}</span></label>
+      <p class="ab-note">${tr("Chaque matin, s'il y a du nouveau dans vos projets suivis, vos mots-clés ou vos organismes — un seul courriel pour tout. Rien les jours où rien n'avance.", 'Every morning, if there is something new in your followed projects, keywords or organizations — one email for everything. Nothing on days when nothing moves. (Alert emails are in French for now.)')}${derniere ? ` ${tr('Dernière alerte :', 'Last alert:')} ${dateFr(derniere)}.` : ''}</p>
+      <div class="ab-liens"><button type="button" class="ab-lien-bouton" id="alertes-essai">${tr("M'envoyer un courriel d'essai", 'Send me a test email')}</button><button type="button" class="ab-lien-bouton ab-lien-doux" id="alertes-retirer"></button><span class="ab-note" id="alertes-etat" aria-live="polite" style="margin:0"></span></div>
     </section>`;
     const etat = $('#alertes-etat');
     const caseActif = $('#alertes-actif');
@@ -185,30 +235,32 @@
     // La case et le lien « Retirer mon courriel des alertes » font la même chose (alertes_preferences.actif) ;
     // le lien est là pour qui cherche comment arrêter. Rien d'autre n'est effacé : les projets, mots-clés et
     // organismes restent, et on peut remettre son courriel d'un clic.
-    const libelleRetirer = () => { retirer.textContent = caseActif.checked ? 'Retirer mon courriel des alertes' : 'Remettre mon courriel dans les alertes'; };
+    const libelleRetirer = () => { retirer.textContent = caseActif.checked ? tr('Retirer mon courriel des alertes', 'Remove my email from alerts') : tr('Remettre mon courriel dans les alertes', 'Put my email back in alerts'); };
     libelleRetirer();
     const enregistrer = async (voulu) => {
       const { error } = await client.from('alertes_preferences').upsert({ user_id: s.user.id, actif: voulu, updated_at: new Date().toISOString() });
-      if (error) { caseActif.checked = !voulu; libelleRetirer(); etat.textContent = "Impossible d'enregistrer. Réessayez."; return; }
+      if (error) { caseActif.checked = !voulu; libelleRetirer(); etat.textContent = tr("Impossible d'enregistrer. Réessayez.", "Couldn't save. Try again."); return; }
       caseActif.checked = voulu;
       libelleRetirer();
       etat.textContent = voulu
-        ? `Votre courriel est de retour dans les alertes : ${s.user.email}.`
-        : "Votre courriel est retiré des alertes : plus aucun courriel du matin. Vos projets, mots-clés et organismes restent là.";
+        ? tr(`Votre courriel est de retour dans les alertes : ${s.user.email}.`, `Your email is back in the alerts: ${s.user.email}.`)
+        : tr("Votre courriel est retiré des alertes : plus aucun courriel du matin. Vos projets, mots-clés et organismes restent là.", 'Your email is removed from alerts: no more morning emails. Your projects, keywords and organizations stay here.');
       mesurer(voulu ? 'alertes_activees' : 'alertes_arretees');
     };
     caseActif.addEventListener('change', (e) => enregistrer(e.target.checked));
     retirer.addEventListener('click', () => enregistrer(!caseActif.checked));
     $('#alertes-essai').addEventListener('click', async (e) => {
       e.target.disabled = true;
-      etat.textContent = 'Envoi…';
+      etat.textContent = tr('Envoi…', 'Sending…');
       const courante = await session();
       const res = await fetch('/api/alertes-projets?essai=moi', { method: 'POST', headers: { Authorization: `Bearer ${courante?.access_token ?? ''}` } }).catch(() => null);
       const corps = res ? await res.json().catch(() => ({})) : {};
       e.target.disabled = false;
       etat.textContent = res?.ok
-        ? corps.envoyes ? `Courriel d'essai envoyé à ${s.user.email}. Pensez à vérifier vos courriels indésirables.` : "Suivez au moins un projet, ou ajoutez un mot-clé ou un organisme présent dans une décision récente, pour recevoir un courriel d'essai."
-        : res?.status === 429 ? "Trois courriels d'essai déjà envoyés dans les dernières 24 heures. Réessayez demain." : "L'envoi n'a pas fonctionné. Réessayez dans un moment.";
+        ? corps.envoyes
+          ? tr(`Courriel d'essai envoyé à ${s.user.email}. Pensez à vérifier vos courriels indésirables.`, `Test email sent to ${s.user.email}. Check your spam folder.`)
+          : tr("Suivez au moins un projet, ou ajoutez un mot-clé ou un organisme présent dans une décision récente, pour recevoir un courriel d'essai.", 'Follow at least one project, or add a keyword or organization found in a recent decision, to get a test email.')
+        : res?.status === 429 ? tr("Trois courriels d'essai déjà envoyés dans les dernières 24 heures. Réessayez demain.", 'Three test emails already sent in the last 24 hours. Try again tomorrow.') : tr("L'envoi n'a pas fonctionné. Réessayez dans un moment.", "Sending didn't work. Try again in a moment.");
       mesurer('alertes_essai');
     });
   }
@@ -221,7 +273,7 @@
   const contientMot = (d, mot) => {
     const m = normaliserTexte(mot).trim();
     if (m.length < 2) return false;
-    return new RegExp(`(^|[^a-z0-9])${m.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^a-z0-9])`).test(normaliserTexte([d.objet, ...(d.puces ?? [])].join(' ')));
+    return new RegExp(`(^|[^a-z0-9])${m.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^a-z0-9])`).test(normaliserTexte([d.objet, ...(d.pucesFr ?? d.puces ?? [])].join(' ')));
   };
   let recentesToutes = null;
   const chargerRecentes = async () => {
@@ -237,16 +289,16 @@
     if (error) { zone.innerHTML = ''; return; } // table pas encore créée
     const ouvertMots = zone.querySelector('details.ab-pliable')?.open ? ' open' : '';
     zone.innerHTML = `<details class="ab-carte ab-pliable ab-mots"${ouvertMots}>
-      <summary><h2>Mots-clés</h2><span class="ab-etiquette" id="mots-compte">${(data ?? []).length}</span></summary>
+      <summary><h2>${tr('Mots-clés', 'Keywords')}</h2><span class="ab-etiquette" id="mots-compte">${(data ?? []).length}</span></summary>
       <div class="ab-pliable-corps">
-      <p class="ab-chapeau" style="margin-bottom:10px">Une rue, un quartier, une école, un parc, un sujet : « 1re Avenue », « Limoilou », « Rochebelle », « déneigement »… Les nouvelles décisions qui le contiennent s'ajoutent à votre alerte du matin.</p>
+      <p class="ab-chapeau" style="margin-bottom:10px">${tr("Une rue, un quartier, une école, un parc, un sujet : « 1re Avenue », « Limoilou », « Rochebelle », « déneigement »… Les nouvelles décisions qui le contiennent s'ajoutent à votre alerte du matin.", 'A street, a neighbourhood, a school, a park, a topic: “1re Avenue”, “Limoilou”, “Rochebelle”, “déneigement” (snow removal)… New decisions that contain it are added to your morning alert. The decisions are in French, so use French words.')}</p>
       <ul class="ab-mots-liste" id="mots-liste"></ul>
-      <form class="ab-form" id="mots-form"><input type="text" id="mots-champ" maxlength="60" placeholder="Ajouter un mot-clé" aria-label="Nouveau mot-clé"><button type="submit" class="ab-bouton">Ajouter</button></form>
-      <p class="ab-note">Cherché dans l'objet et le résumé de chaque décision, sans tenir compte des accents ni des majuscules. Jusqu'à 20.</p>
+      <form class="ab-form" id="mots-form"><input type="text" id="mots-champ" maxlength="60" placeholder="${tr('Ajouter un mot-clé', 'Add a keyword')}" aria-label="${tr('Nouveau mot-clé', 'New keyword')}"><button type="submit" class="ab-bouton">${tr('Ajouter', 'Add')}</button></form>
+      <p class="ab-note">${tr("Cherché dans l'objet et le résumé de chaque décision, sans tenir compte des accents ni des majuscules. Jusqu'à 20.", "Searched in each decision's subject and French summary, ignoring accents and capitals. Up to 20.")}</p>
       <p class="ab-note" id="mots-etat" aria-live="polite"></p>
       <div class="ab-pistes" id="mots-pistes" hidden></div>
-      <p class="ab-astuce"><strong>Astuce :</strong> pas sûr de l'orthographe d'une rue ou d'un lieu ? Cherchez-le dans Google pour trouver son nom officiel (« boulevard Wilfrid-Hamel », « 1re Avenue ») : c'est celui qu'emploient les documents de la Ville.</p>
-      <p class="ab-vers-ecrire"><button type="button" class="ab-lien-bouton" id="mots-vers-ecrire">Vous avez des suggestions ?</button> Un mot-clé qui ne donne rien, un lieu, une idée : écrivez-nous.</p>
+      <p class="ab-astuce">${tr("<strong>Astuce :</strong> pas sûr de l'orthographe d'une rue ou d'un lieu ? Cherchez-le dans Google pour trouver son nom officiel (« boulevard Wilfrid-Hamel », « 1re Avenue ») : c'est celui qu'emploient les documents de la Ville.", '<strong>Tip:</strong> not sure how a street or place is spelled? Look it up on Google to find its official French name (“boulevard Wilfrid-Hamel”, “1re Avenue”): that is the one the City uses in its documents.')}</p>
+      <p class="ab-vers-ecrire"><button type="button" class="ab-lien-bouton" id="mots-vers-ecrire">${tr('Vous avez des suggestions ?', 'Have suggestions?')}</button> ${tr('Un mot-clé qui ne donne rien, un lieu, une idée : écrivez-nous.', 'A keyword that finds nothing, a place, an idea: write to us.')}</p>
       </div>
     </details>`;
     const liste = $('#mots-liste');
@@ -259,14 +311,14 @@
       liste.innerHTML = mots.length
         ? mots.map((m) => {
             const n = recentes.dossiers.filter((d) => contientMot(d, m.mot)).length;
-            return `<li class="ab-mot"><span class="ab-mot-texte">${echapper(m.mot)}</span><span class="ab-note" style="margin:0">${n ? `${n} décision${n > 1 ? 's' : ''} récente${n > 1 ? 's' : ''}` : 'aucune décision récente'}</span><button type="button" class="ab-mot-retirer" data-mot="${echapper(m.id)}" aria-label="Retirer le mot-clé ${echapper(m.mot)}">×</button></li>`;
+            return `<li class="ab-mot"><span class="ab-mot-texte">${echapper(m.mot)}</span><span class="ab-note" style="margin:0">${n ? tr(`${n} décision${n > 1 ? 's' : ''} récente${n > 1 ? 's' : ''}`, `${n} recent ${pl(n, 'decision', 'decisions')}`) : tr('aucune décision récente', 'no recent decision')}</span><button type="button" class="ab-mot-retirer" data-mot="${echapper(m.id)}" aria-label="${tr('Retirer le mot-clé', 'Remove keyword')} ${echapper(m.mot)}">×</button></li>`;
           }).join('')
-        : '<li class="ab-note" style="list-style:none;margin:0">Aucun mot-clé pour l’instant.</li>';
+        : `<li class="ab-note" style="list-style:none;margin:0">${tr('Aucun mot-clé pour l’instant.', 'No keywords yet.')}</li>`;
       form.querySelector('button').disabled = mots.length >= 20;
       $('#mots-compte').textContent = mots.length;
     };
     dessiner();
-    if (recentes.depuis) etat.textContent = `« Décisions récentes » : depuis le ${dateFr(recentes.depuis)}.`;
+    if (recentes.depuis) etat.textContent = tr(`« Décisions récentes » : depuis le ${dateFr(recentes.depuis)}.`, `“Recent decisions”: since ${dateFr(recentes.depuis)}.`);
 
     // Quand un mot-clé ne donne rien : les gens écrivent « École Rochebelle » là où la décision dit
     // « école secondaire De Rochebelle ». On cherche dans toute l'année des bouts plus courts du mot,
@@ -292,33 +344,38 @@
       const compte = (m) => annee.filter((d) => contientMot(d, m)).length;
       const plusTot = compte(mot);
       if (plusTot) {
-        etat.textContent = `Ajouté. Aucune décision récente ne le contient, mais ${plusTot} dossier${plusTot > 1 ? 's' : ''} plus tôt en 2026 : vous serez alerté des prochains.`;
+        etat.textContent = tr(`Ajouté. Aucune décision récente ne le contient, mais ${plusTot} dossier${plusTot > 1 ? 's' : ''} plus tôt en 2026 : vous serez alerté des prochains.`, `Added. No recent decision contains it, but ${plusTot} earlier ${pl(plusTot, 'item', 'items')} in 2026 do: you'll be alerted about the next ones.`);
         return;
       }
       const trouves = bouts(mot).map((b) => [b, compte(b)]).filter(([, n]) => n > 0)
         .sort((a, b) => b[0].split(' ').length - a[0].split(' ').length || b[1] - a[1]).slice(0, 3);
-      etat.textContent = `Ajouté, mais aucune décision de 2026 ne contient « ${mot} » tel quel.`;
+      etat.textContent = tr(`Ajouté, mais aucune décision de 2026 ne contient « ${mot} » tel quel.`, `Added, but no 2026 decision contains “${mot}” exactly.`);
       pistes.hidden = false;
       pistes.innerHTML = trouves.length
-        ? `<p><strong>Les décisions l'écrivent peut-être autrement.</strong> Ces bouts apparaissent en 2026 :</p>
-           <div class="ab-pistes-choix">${trouves.map(([b, n]) => `<button type="button" class="ab-piste" data-remplacer="${echapper(motId)}" data-par="${echapper(b)}">Remplacer par « ${echapper(b)} » <span>${n} dossier${n > 1 ? 's' : ''}</span></button>`).join('')}</div>
-           <p class="ab-note">Ou gardez « ${echapper(mot)} » : vous serez alerté si une décision l'écrit un jour tel quel.</p>`
-        : `<p><strong>Rien trouvé en 2026, même en partie.</strong> Quelques pistes :</p>
+        ? `<p>${tr("<strong>Les décisions l'écrivent peut-être autrement.</strong> Ces bouts apparaissent en 2026 :", '<strong>The decisions may spell it differently.</strong> These parts appear in 2026:')}</p>
+           <div class="ab-pistes-choix">${trouves.map(([b, n]) => `<button type="button" class="ab-piste" data-remplacer="${echapper(motId)}" data-par="${echapper(b)}">${tr('Remplacer par', 'Replace with')} « ${echapper(b)} » <span>${n} ${tr(pl(n, 'dossier', 'dossiers'), pl(n, 'item', 'items'))}</span></button>`).join('')}</div>
+           <p class="ab-note">${tr(`Ou gardez « ${echapper(mot)} » : vous serez alerté si une décision l'écrit un jour tel quel.`, `Or keep “${echapper(mot)}”: you'll be alerted if a decision ever writes it exactly that way.`)}</p>`
+        : EN
+          ? `<p><strong>Nothing found in 2026, not even in part.</strong> A few ideas:</p>
+           <ul><li>a single distinctive word, without “école”, “parc” or “rue” (“Rochebelle” rather than “École secondaire Rochebelle”);</li>
+           <li>the official French name, as the City writes it (see the tip below);</li>
+           <li>or keep it as is: you'll be alerted if a decision ever mentions it.</li></ul>`
+          : `<p><strong>Rien trouvé en 2026, même en partie.</strong> Quelques pistes :</p>
            <ul><li>un seul mot distinctif, sans « école », « parc » ou « rue » (« Rochebelle » plutôt que « École secondaire Rochebelle ») ;</li>
            <li>le nom officiel, tel qu'écrit par la Ville (voir l'astuce plus bas) ;</li>
            <li>ou gardez-le tel quel : vous serez alerté si une décision le mentionne un jour.</li></ul>`;
     };
 
     const ajouter = async (mot) => {
-      if (mot.length < 2) { etat.textContent = 'Un mot-clé compte au moins 2 caractères.'; return null; }
-      if (mots.some((m) => normaliserTexte(m.mot) === normaliserTexte(mot))) { etat.textContent = 'Ce mot-clé est déjà dans votre liste.'; return null; }
+      if (mot.length < 2) { etat.textContent = tr('Un mot-clé compte au moins 2 caractères.', 'A keyword needs at least 2 characters.'); return null; }
+      if (mots.some((m) => normaliserTexte(m.mot) === normaliserTexte(mot))) { etat.textContent = tr('Ce mot-clé est déjà dans votre liste.', 'This keyword is already in your list.'); return null; }
       const { data: ajoute, error: erreur } = await client.from('alertes_mots_cles').insert({ user_id: s.user.id, mot }).select('id, mot').single();
-      if (erreur) { etat.textContent = /20/.test(erreur.message) ? 'Limite de 20 mots-clés atteinte.' : "Impossible d'ajouter ce mot-clé. Réessayez."; return null; }
+      if (erreur) { etat.textContent = /20/.test(erreur.message) ? tr('Limite de 20 mots-clés atteinte.', 'Limit of 20 keywords reached.') : tr("Impossible d'ajouter ce mot-clé. Réessayez.", "Couldn't add this keyword. Try again."); return null; }
       mots = [...mots, ajoute];
       dessiner();
       pistes.hidden = true;
       const n = recentes.dossiers.filter((d) => contientMot(d, mot)).length;
-      if (n) etat.textContent = `Ajouté. ${n} décision${n > 1 ? 's' : ''} récente${n > 1 ? 's' : ''} le contien${n > 1 ? 'nent' : 't'} déjà ; vous serez alerté des prochaines.`;
+      if (n) etat.textContent = tr(`Ajouté. ${n} décision${n > 1 ? 's' : ''} récente${n > 1 ? 's' : ''} le contien${n > 1 ? 'nent' : 't'} déjà ; vous serez alerté des prochaines.`, `Added. ${n} recent ${pl(n, 'decision already contains', 'decisions already contain')} it; you'll be alerted about the next ones.`);
       else await proposer(ajoute.id, mot);
       mesurer('mot_cle_ajoute');
       return ajoute;
@@ -343,7 +400,7 @@
       if (!b) return;
       b.disabled = true;
       const { error: erreur } = await client.from('alertes_mots_cles').delete().eq('id', b.dataset.remplacer);
-      if (erreur) { b.disabled = false; etat.textContent = 'Impossible de remplacer ce mot-clé. Réessayez.'; return; }
+      if (erreur) { b.disabled = false; etat.textContent = tr('Impossible de remplacer ce mot-clé. Réessayez.', "Couldn't replace this keyword. Try again."); return; }
       mots = mots.filter((m) => m.id !== b.dataset.remplacer);
       dessiner();
       await ajouter(b.dataset.par);
@@ -354,10 +411,10 @@
       if (!bouton) return;
       bouton.disabled = true;
       const { error: erreur } = await client.from('alertes_mots_cles').delete().eq('id', bouton.dataset.mot);
-      if (erreur) { bouton.disabled = false; etat.textContent = 'Impossible de retirer ce mot-clé. Réessayez.'; return; }
+      if (erreur) { bouton.disabled = false; etat.textContent = tr('Impossible de retirer ce mot-clé. Réessayez.', "Couldn't remove this keyword. Try again."); return; }
       mots = mots.filter((m) => m.id !== bouton.dataset.mot);
       dessiner();
-      etat.textContent = 'Mot-clé retiré.';
+      etat.textContent = tr('Mot-clé retiré.', 'Keyword removed.');
     });
   }
 
@@ -373,7 +430,7 @@
     dossiersAnnee ??= Promise.all(Object.keys(VILLES).map(async (ville) => {
       const f = await fetch(`/${ville}/data/dossiers.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
       return (f?.dossiers ?? []).map((d) => ({ ...d, ville, themeInfo: f.themes?.[d.theme] ?? null }));
-    })).then((listes) => listes.flat());
+    })).then((listes) => enAnglais(listes.flat()));
     return dossiersAnnee;
   };
 
@@ -387,15 +444,15 @@
       .flatMap((f) => f?.organismes ?? []);
     const ouvertOrg = zone.querySelector('details.ab-pliable')?.open ? ' open' : '';
     zone.innerHTML = `<details class="ab-carte ab-pliable ab-organismes"${ouvertOrg}>
-      <summary><h2>Organismes et entreprises suivis</h2><span class="ab-etiquette" id="org-compte">${suivis.length}</span></summary>
+      <summary><h2>${tr('Organismes et entreprises suivis', 'Organizations and companies followed')}</h2><span class="ab-etiquette" id="org-compte">${suivis.length}</span></summary>
       <div class="ab-pliable-corps">
-      <p class="ab-chapeau" style="margin-bottom:10px">Les décisions de l'année qui nomment un organisme ou une entreprise : contrats, subventions, ententes. Les nouvelles s'ajoutent à votre alerte du matin.</p>
+      <p class="ab-chapeau" style="margin-bottom:10px">${tr("Les décisions de l'année qui nomment un organisme ou une entreprise : contrats, subventions, ententes. Les nouvelles s'ajoutent à votre alerte du matin.", "This year's decisions that name an organization or a company: contracts, grants, agreements. New ones are added to your morning alert.")}</p>
       <form class="ab-form" id="org-form">
-        <input type="text" id="org-champ" list="org-suggestions" maxlength="120" placeholder="Nom de l'organisme ou de l'entreprise" aria-label="Organisme ou entreprise à suivre">
-        <datalist id="org-suggestions">${suggestions.map((o) => `<option value="${echapper(o.nom)}">${o.dossiers} dossier${o.dossiers > 1 ? 's' : ''}</option>`).join('')}</datalist>
-        <button type="submit" class="ab-bouton">Suivre</button>
+        <input type="text" id="org-champ" list="org-suggestions" maxlength="120" placeholder="${tr("Nom de l'organisme ou de l'entreprise", 'Name of the organization or company')}" aria-label="${tr('Organisme ou entreprise à suivre', 'Organization or company to follow')}">
+        <datalist id="org-suggestions">${suggestions.map((o) => `<option value="${echapper(o.nom)}">${o.dossiers} ${tr(pl(o.dossiers, 'dossier', 'dossiers'), pl(o.dossiers, 'item', 'items'))}</option>`).join('')}</datalist>
+        <button type="submit" class="ab-bouton">${tr('Suivre', 'Follow')}</button>
       </form>
-      <p class="ab-note" id="org-etat" aria-live="polite">Le nom est cherché dans l'objet et le résumé des décisions, sans sa forme juridique (« inc. », « ltée »), sans accents ni majuscules. Jusqu'à 30.</p>
+      <p class="ab-note" id="org-etat" aria-live="polite">${tr("Le nom est cherché dans l'objet et le résumé des décisions, sans sa forme juridique (« inc. », « ltée »), sans accents ni majuscules. Jusqu'à 30.", 'The name is searched in the subject and French summary of the decisions, without its legal form (“inc.”, “ltée”), ignoring accents and capitals. Up to 30.')}</p>
       <div id="org-liste"></div>
       </div>
     </details>`;
@@ -409,22 +466,22 @@
       return `<details class="ab-ouvert" name="org-dossiers">
         <summary>
           <div class="ab-meta ab-pastilles">
-            ${d.themeInfo ? `<span class="ab-pastille-theme" style="background:${/^#[0-9a-f]{6}$/i.test(d.themeInfo.couleur ?? '') ? d.themeInfo.couleur : 'var(--doux)'}">${echapper(d.themeInfo.libelle)}</span>` : ''}
+            ${d.themeInfo ? `<span class="ab-pastille-theme" style="background:${/^#[0-9a-f]{6}$/i.test(d.themeInfo.couleur ?? '') ? d.themeInfo.couleur : 'var(--doux)'}">${echapper(libTheme(d.theme, d.themeInfo.libelle))}</span>` : ''}
             <span>${dateFr(d.derniere ?? d.date)}</span>
-            ${d.instances.length ? `<span class="ab-etiquette">${echapper(d.instances.join(' · '))}</span>` : ''}
-            ${d.statutDossier === 'termine' ? '<span class="ab-etiquette">Décision finale</span>' : d.statutDossier ? '<span class="ab-etiquette ab-en-cours">En cours</span>' : ''}
+            ${d.instances.length ? `<span class="ab-etiquette">${echapper(libInstances(d.instances))}</span>` : ''}
+            ${d.statutDossier === 'termine' ? `<span class="ab-etiquette">${tr('Décision finale', 'Final decision')}</span>` : d.statutDossier ? `<span class="ab-etiquette ab-en-cours">${tr('En cours', 'In progress')}</span>` : ''}
             <span class="ab-numero">${echapper(d.numero)}</span>
             ${d.montant ? `<span class="ab-etiquette">${echapper(d.montant)}</span>` : ''}
           </div>
           <div class="ab-ouvert-phrase">${echapper(d.puces[0] ?? d.objet ?? '')}</div>
         </summary>
         <div class="ab-ouvert-corps">
-          ${d.puces.length ? `<ul>${d.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul><p class="ab-note">Résumé généré par IA à partir du sommaire décisionnel. Le document officiel fait foi.</p>` : `<p>${echapper(d.objet ?? '')}</p>`}
-          ${d.montant ? `<p class="ab-note">Montant principal indiqué dans le résumé de ce dossier : ${echapper(d.montant)}. Les montants de dossiers différents ne s’additionnent pas (engagement, emprunt, subvention…).</p>` : ''}
+          ${d.puces.length ? `<ul>${d.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul><p class="ab-note">${tr('Résumé généré par IA à partir du sommaire décisionnel. Le document officiel fait foi.', 'AI-generated summary of the decision summary. The official document (in French) prevails.')}</p>` : `<p>${echapper(d.objet ?? '')}</p>`}
+          ${d.montant ? `<p class="ab-note">${tr(`Montant principal indiqué dans le résumé de ce dossier : ${echapper(d.montant)}. Les montants de dossiers différents ne s’additionnent pas (engagement, emprunt, subvention…).`, `Main amount stated in this item's summary: ${echapper(d.montant)}. Amounts from different items don't add up (commitment, loan, grant…).`)}</p>` : ''}
           <div class="ab-liens">
-            ${d.pdf ? `<a href="${echapper(d.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}
-            <a href="/${echapper(d.ville)}/decisions.html?q=${encodeURIComponent(d.numero)}">Voir dans le volet ${echapper(VILLES[d.ville] ?? '')}</a>
-            ${fichier ? `<button type="button" class="ab-lien-bouton" data-detail="${echapper(fichier)}" data-ville="${echapper(d.ville)}" data-montant="${d.montant ? 1 : 0}" aria-expanded="false">Détail de l'argent</button>` : ''}
+            ${d.pdf ? `<a href="${echapper(d.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}
+            <a href="/${echapper(d.ville)}/decisions.html?q=${encodeURIComponent(d.numero)}">${tr('Voir dans le volet', 'See in the city section:')} ${echapper(VILLES[d.ville] ?? '')}</a>
+            ${fichier ? `<button type="button" class="ab-lien-bouton" data-detail="${echapper(fichier)}" data-ville="${echapper(d.ville)}" data-montant="${d.montant ? 1 : 0}" aria-expanded="false">${tr("Détail de l'argent", 'Money details')}</button>` : ''}
           </div>
           <div class="ab-detail-org" hidden></div>
         </div>
@@ -436,11 +493,11 @@
         ? suivis.map((o) => {
             const liste = trouves(o.nom);
             return `<details class="ab-section-agenda ab-organisme" name="organismes">
-              <summary><span class="ab-organisme-nom">${echapper(o.nom)}</span><span class="ab-etiquette">${liste.length} dossier${liste.length > 1 ? 's' : ''}</span><button type="button" class="ab-mot-retirer" data-retirer="${echapper(o.id)}" aria-label="Ne plus suivre ${echapper(o.nom)}">×</button></summary>
-              ${liste.length ? `<div class="ab-organisme-dossiers">${liste.sort((a, b) => (b.derniere ?? b.date ?? '').localeCompare(a.derniere ?? a.date ?? '')).map(ligneDossier).join('')}</div>` :'<p class="ab-note">Aucune décision de cette année ne mentionne ce nom. Vous serez alerté dès qu’une le mentionnera.</p>'}
+              <summary><span class="ab-organisme-nom">${echapper(o.nom)}</span><span class="ab-etiquette">${liste.length} ${tr(pl(liste.length, 'dossier', 'dossiers'), pl(liste.length, 'item', 'items'))}</span><button type="button" class="ab-mot-retirer" data-retirer="${echapper(o.id)}" aria-label="${tr('Ne plus suivre', 'Stop following')} ${echapper(o.nom)}">×</button></summary>
+              ${liste.length ? `<div class="ab-organisme-dossiers">${liste.sort((a, b) => (b.derniere ?? b.date ?? '').localeCompare(a.derniere ?? a.date ?? '')).map(ligneDossier).join('')}</div>` : `<p class="ab-note">${tr('Aucune décision de cette année ne mentionne ce nom. Vous serez alerté dès qu’une le mentionnera.', "No decision this year mentions this name. You'll be alerted as soon as one does.")}</p>`}
             </details>`;
           }).join('')
-        : '<p class="ab-note">Vous ne suivez aucun organisme pour l’instant.</p>';
+        : `<p class="ab-note">${tr('Vous ne suivez aucun organisme pour l’instant.', "You aren't following any organization yet.")}</p>`;
       $('#org-form button').disabled = suivis.length >= 30;
       $('#org-compte').textContent = suivis.length;
     };
@@ -449,16 +506,18 @@
     $('#org-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const nom = $('#org-champ').value.trim().replace(/\s+/g, ' ');
-      if (sansFormeJuridique(nom).length < 3) { etat.textContent = 'Écrivez au moins 3 caractères, sans compter « inc. » ou « ltée ».'; return; }
-      if (suivis.some((o) => normaliserTexte(sansFormeJuridique(o.nom)) === normaliserTexte(sansFormeJuridique(nom)))) { etat.textContent = 'Vous suivez déjà cet organisme.'; return; }
+      if (sansFormeJuridique(nom).length < 3) { etat.textContent = tr('Écrivez au moins 3 caractères, sans compter « inc. » ou « ltée ».', 'Write at least 3 characters, not counting “inc.” or “ltée”.'); return; }
+      if (suivis.some((o) => normaliserTexte(sansFormeJuridique(o.nom)) === normaliserTexte(sansFormeJuridique(nom)))) { etat.textContent = tr('Vous suivez déjà cet organisme.', 'You already follow this organization.'); return; }
       const { data: ajoute, error: erreur } = await client.from('organismes_suivis').insert({ user_id: s.user.id, nom }).select('id, nom').single();
-      if (erreur) { etat.textContent = /30/.test(erreur.message) ? 'Limite de 30 organismes atteinte.' : "Impossible de suivre cet organisme. Réessayez."; return; }
+      if (erreur) { etat.textContent = /30/.test(erreur.message) ? tr('Limite de 30 organismes atteinte.', 'Limit of 30 organizations reached.') : tr('Impossible de suivre cet organisme. Réessayez.', "Couldn't follow this organization. Try again."); return; }
       suivis = [...suivis, ajoute];
       if (!annee.length) annee.push(...(await chargerDossiersAnnee()));
       $('#org-champ').value = '';
       dessiner();
       const n = trouves(nom).length;
-      etat.textContent = n ? `Suivi. ${n} dossier${n > 1 ? 's' : ''} de 2026 le mentionne${n > 1 ? 'nt' : ''} ; les prochaines décisions s'ajouteront à votre alerte.` : "Suivi. Aucune décision de 2026 ne le mentionne encore : vous serez alerté dès qu'une le mentionnera.";
+      etat.textContent = n
+        ? tr(`Suivi. ${n} dossier${n > 1 ? 's' : ''} de 2026 le mentionne${n > 1 ? 'nt' : ''} ; les prochaines décisions s'ajouteront à votre alerte.`, `Following. ${n} 2026 ${pl(n, 'item mentions', 'items mention')} it; the next decisions will be added to your alert.`)
+        : tr("Suivi. Aucune décision de 2026 ne le mentionne encore : vous serez alerté dès qu'une le mentionnera.", "Following. No 2026 decision mentions it yet: you'll be alerted as soon as one does.");
       mesurer('organisme_suivi');
     });
 
@@ -468,10 +527,10 @@
         e.preventDefault(); // le bouton est dans le résumé : ne pas déplier
         retirer.disabled = true;
         const { error: erreur } = await client.from('organismes_suivis').delete().eq('id', retirer.dataset.retirer);
-        if (erreur) { retirer.disabled = false; etat.textContent = 'Impossible de retirer cet organisme. Réessayez.'; return; }
+        if (erreur) { retirer.disabled = false; etat.textContent = tr('Impossible de retirer cet organisme. Réessayez.', "Couldn't remove this organization. Try again."); return; }
         suivis = suivis.filter((o) => o.id !== retirer.dataset.retirer);
         dessiner();
-        etat.textContent = 'Organisme retiré.';
+        etat.textContent = tr('Organisme retiré.', 'Organization removed.');
         return;
       }
       const demande = e.target.closest('[data-action="demander-detail"]');
@@ -489,10 +548,10 @@
       boite.hidden = false;
       bouton.setAttribute('aria-expanded', 'true');
       // Pas de détail : l'abonné peut le demander, si le résumé a trouvé un montant.
-      boite.innerHTML = !reponse ? '<p class="ab-note">Le détail de l’argent ne répond pas pour l’instant. Réessayez dans un moment.</p>'
+      boite.innerHTML = !reponse ? `<p class="ab-note">${tr('Le détail de l’argent ne répond pas pour l’instant. Réessayez dans un moment.', "Money details aren't responding right now. Try again in a moment.")}</p>`
         : rendreDetail(reponse, bouton.dataset.ville)
           || (bouton.dataset.montant === '1' || reponse.lu ? rendreDemande(reponse) : '')
-          || '<p class="ab-note">Pas de détail de l’argent pour ce dossier : son résumé ne mentionne pas de montant.</p>';
+          || `<p class="ab-note">${tr('Pas de détail de l’argent pour ce dossier : son résumé ne mentionne pas de montant.', "No money details for this item: its summary doesn't mention an amount.")}</p>`;
       mesurer('organisme_detail_argent', { ville: bouton.dataset.ville });
     });
   }
@@ -504,34 +563,34 @@
   // l'argent vient du serveur (api/detail.js, par lots, abonnés seulement). Les montants restent du
   // texte tel qu'écrit : jamais convertis, jamais additionnés.
   const GROUPES_EXPORT = [
-    { g: 'resume', libelle: 'Le résumé en langage clair (IA)' },
-    { g: 'montant', libelle: 'Le montant indiqué dans le résumé' },
-    { g: 'argent', libelle: "Le détail de l'argent : nature, montant, qui reçoit, qui paie, durée, attribution, estimation, soumissions", note: 'seulement pour les dossiers déjà lus' },
-    { g: 'liens', libelle: 'Les liens : document officiel (PDF) et fiche sur le site' },
+    { g: 'resume', libelle: tr('Le résumé en langage clair (IA)', 'The plain-language summary (AI)') },
+    { g: 'montant', libelle: tr('Le montant indiqué dans le résumé', 'The amount stated in the summary') },
+    { g: 'argent', libelle: tr("Le détail de l'argent : nature, montant, qui reçoit, qui paie, durée, attribution, estimation, soumissions", 'Money details: type, amount, who receives, who pays, duration, award, estimate, bids'), note: tr('seulement pour les dossiers déjà lus', 'only for items already read') },
+    { g: 'liens', libelle: tr('Les liens : document officiel (PDF) et fiche sur le site', 'The links: official document (PDF) and item on the site') },
   ];
-  const texteSoumissions = (x) => (x?.soumissions ?? []).map((so) => `${so.retenue ? 'Retenue' : 'Autre'} : ${so.entreprise ?? ''}${so.prix ? ` (${so.prix})` : ''}${so.conforme === false ? ', non conforme' : ''}`).join('\n');
+  const texteSoumissions = (x) => (x?.soumissions ?? []).map((so) => `${so.retenue ? tr('Retenue', 'Winning') : tr('Autre', 'Other')} : ${so.entreprise ?? ''}${so.prix ? ` (${so.prix})` : ''}${so.conforme === false ? tr(', non conforme', ', non-compliant') : ''}`).join('\n');
   const COLONNES_EXPORT = [
-    { g: 'dossier', titre: 'Ville', largeur: 10, v: (d) => VILLES[d.ville] ?? d.ville },
-    { g: 'dossier', titre: 'Numéro', largeur: 13, v: (d) => d.numero },
-    { g: 'dossier', titre: 'Préparé le', largeur: 12, v: (d) => d.date },
-    { g: 'dossier', titre: 'Dernière décision', largeur: 13, v: (d) => d.derniere },
-    { g: 'dossier', titre: 'Instances', largeur: 26, v: (d) => d.instances.join(' · ') },
-    { g: 'dossier', titre: 'Statut', largeur: 14, v: (d) => (d.statutDossier === 'termine' ? 'Décision finale' : d.statutDossier ? 'En cours' : '') },
-    { g: 'dossier', titre: 'Sujet', largeur: 16, v: (d) => d.themeInfo?.libelle },
-    { g: 'dossier', titre: 'Objet', largeur: 60, v: (d) => d.objet },
-    { g: 'resume', titre: 'Résumé en langage clair (IA)', largeur: 80, v: (d) => d.puces.map((p) => `• ${p}`).join('\n') },
-    { g: 'montant', titre: 'Montant indiqué dans le résumé (IA)', largeur: 20, v: (d) => d.montant },
-    { g: 'argent', titre: 'Détail : nature du montant', largeur: 18, v: (d, x) => x?.nature },
-    { g: 'argent', titre: 'Détail : montant', largeur: 22, v: (d, x) => x?.montantPrincipal },
-    { g: 'argent', titre: 'Détail : en une phrase', largeur: 50, v: (d, x) => x?.enUnePhrase },
-    { g: 'argent', titre: 'Détail : qui reçoit', largeur: 30, v: (d, x) => [x?.beneficiaire, x?.beneficiaireVille].filter(Boolean).join(', ') },
-    { g: 'argent', titre: 'Détail : qui paie', largeur: 24, v: (d, x) => x?.payeur },
-    { g: 'argent', titre: 'Détail : durée', largeur: 26, v: (d, x) => x?.duree },
-    { g: 'argent', titre: "Détail : mode d'attribution", largeur: 24, v: (d, x) => x?.modeAttribution },
-    { g: 'argent', titre: 'Détail : estimation de la Ville', largeur: 22, v: (d, x) => x?.estimationVille },
-    { g: 'argent', titre: 'Détail : soumissions', largeur: 40, v: (d, x) => texteSoumissions(x) },
-    { g: 'liens', titre: 'Document officiel (PDF)', largeur: 40, v: (d) => d.pdf },
-    { g: 'liens', titre: 'Fiche sur le site', largeur: 40, v: (d) => `${location.origin}/${d.ville}/decisions.html?q=${encodeURIComponent(d.numero)}` },
+    { g: 'dossier', titre: tr('Ville', 'City'), largeur: 10, v: (d) => VILLES[d.ville] ?? d.ville },
+    { g: 'dossier', titre: tr('Numéro', 'Number'), largeur: 13, v: (d) => d.numero },
+    { g: 'dossier', titre: tr('Préparé le', 'Prepared on'), largeur: 12, v: (d) => d.date },
+    { g: 'dossier', titre: tr('Dernière décision', 'Latest decision'), largeur: 13, v: (d) => d.derniere },
+    { g: 'dossier', titre: tr('Instances', 'Bodies'), largeur: 26, v: (d) => libInstances(d.instances) },
+    { g: 'dossier', titre: tr('Statut', 'Status'), largeur: 14, v: (d) => (d.statutDossier === 'termine' ? tr('Décision finale', 'Final decision') : d.statutDossier ? tr('En cours', 'In progress') : '') },
+    { g: 'dossier', titre: tr('Sujet', 'Topic'), largeur: 16, v: (d) => libTheme(d.theme, d.themeInfo?.libelle) },
+    { g: 'dossier', titre: tr('Objet', 'Subject (French)'), largeur: 60, v: (d) => d.objet },
+    { g: 'resume', titre: tr('Résumé en langage clair (IA)', 'Plain-language summary (AI)'), largeur: 80, v: (d) => d.puces.map((p) => `• ${p}`).join('\n') },
+    { g: 'montant', titre: tr('Montant indiqué dans le résumé (IA)', 'Amount stated in the summary (AI)'), largeur: 20, v: (d) => d.montant },
+    { g: 'argent', titre: tr('Détail : nature du montant', 'Details: type of amount'), largeur: 18, v: (d, x) => x?.nature },
+    { g: 'argent', titre: tr('Détail : montant', 'Details: amount'), largeur: 22, v: (d, x) => x?.montantPrincipal },
+    { g: 'argent', titre: tr('Détail : en une phrase', 'Details: in one sentence'), largeur: 50, v: (d, x) => x?.enUnePhrase },
+    { g: 'argent', titre: tr('Détail : qui reçoit', 'Details: who receives'), largeur: 30, v: (d, x) => [x?.beneficiaire, x?.beneficiaireVille].filter(Boolean).join(', ') },
+    { g: 'argent', titre: tr('Détail : qui paie', 'Details: who pays'), largeur: 24, v: (d, x) => x?.payeur },
+    { g: 'argent', titre: tr('Détail : durée', 'Details: duration'), largeur: 26, v: (d, x) => x?.duree },
+    { g: 'argent', titre: tr("Détail : mode d'attribution", 'Details: award method'), largeur: 24, v: (d, x) => x?.modeAttribution },
+    { g: 'argent', titre: tr('Détail : estimation de la Ville', "Details: City's estimate"), largeur: 22, v: (d, x) => x?.estimationVille },
+    { g: 'argent', titre: tr('Détail : soumissions', 'Details: bids'), largeur: 40, v: (d, x) => texteSoumissions(x) },
+    { g: 'liens', titre: tr('Document officiel (PDF)', 'Official document (PDF)'), largeur: 40, v: (d) => d.pdf },
+    { g: 'liens', titre: tr('Fiche sur le site', 'Item on the site'), largeur: 40, v: (d) => `${location.origin}/${d.ville}/decisions.html?q=${encodeURIComponent(d.numero)}` },
   ];
   const nomFichier = (s) => normaliserTexte(s).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
 
@@ -544,20 +603,20 @@
     const ligneDl = (libelle, valeur) => (valeur ? `<dt>${e(libelle)}</dt><dd>${e(valeur).replace(/\n/g, '<br>')}</dd>` : '');
     const fiche = (d) => {
       const x = details.get(cleDetail(d));
-      const statut = d.statutDossier === 'termine' ? 'Décision finale' : d.statutDossier ? 'En cours' : '';
-      const meta = [`<span class="num">${e(d.numero)}</span>`, d.themeInfo ? `<span class="sujet">${e(d.themeInfo.libelle)}</span>` : '', d.date ? `préparé le ${e(dateFr(d.date))}` : '', d.derniere && d.derniere !== d.date ? `dernière décision le ${e(dateFr(d.derniere))}` : '', d.instances.length ? e(d.instances.join(' · ')) : '', statut ? `<strong>${e(statut)}</strong>` : ''].filter(Boolean).join(' <span class="sep">·</span> ');
+      const statut = d.statutDossier === 'termine' ? tr('Décision finale', 'Final decision') : d.statutDossier ? tr('En cours', 'In progress') : '';
+      const meta = [`<span class="num">${e(d.numero)}</span>`, d.themeInfo ? `<span class="sujet">${e(libTheme(d.theme, d.themeInfo.libelle))}</span>` : '', d.date ? `${tr('préparé le', 'prepared on')} ${e(dateFr(d.date))}` : '', d.derniere && d.derniere !== d.date ? `${tr('dernière décision le', 'latest decision on')} ${e(dateFr(d.derniere))}` : '', d.instances.length ? e(libInstances(d.instances)) : '', statut ? `<strong>${e(statut)}</strong>` : ''].filter(Boolean).join(' <span class="sep">·</span> ');
       return `<article>
         <div class="meta">${meta}</div>
         <h2>${e(d.objet ?? '')}</h2>
         ${groupes.has('resume') && d.puces.length ? `<ul>${d.puces.map((p) => `<li>${e(p)}</li>`).join('')}</ul>` : ''}
-        ${groupes.has('montant') && d.montant ? `<p class="montant">Montant indiqué dans le résumé : <strong>${e(d.montant)}</strong></p>` : ''}
-        ${groupes.has('argent') && x ? `<div class="argent"><div class="titre-argent">Détail de l'argent${x.nature ? ` — ${e(x.nature)}` : ''}</div><dl>
-          ${ligneDl('En une phrase', x.enUnePhrase)}${ligneDl('Montant', x.montantPrincipal)}${ligneDl('Qui reçoit', [x.beneficiaire, x.beneficiaireVille].filter(Boolean).join(', '))}${ligneDl('Qui paie', x.payeur)}${ligneDl('Durée', x.duree)}${ligneDl("Mode d'attribution", x.modeAttribution)}${ligneDl('Estimation de la Ville', x.estimationVille)}${ligneDl('Soumissions', texteSoumissions(x))}
+        ${groupes.has('montant') && d.montant ? `<p class="montant">${tr('Montant indiqué dans le résumé :', 'Amount stated in the summary:')} <strong>${e(d.montant)}</strong></p>` : ''}
+        ${groupes.has('argent') && x ? `<div class="argent"><div class="titre-argent">${tr("Détail de l'argent", 'Money details')}${x.nature ? ` — ${e(x.nature)}` : ''}</div><dl>
+          ${ligneDl(tr('En une phrase', 'In one sentence'), x.enUnePhrase)}${ligneDl(tr('Montant', 'Amount'), x.montantPrincipal)}${ligneDl(tr('Qui reçoit', 'Who receives'), [x.beneficiaire, x.beneficiaireVille].filter(Boolean).join(', '))}${ligneDl(tr('Qui paie', 'Who pays'), x.payeur)}${ligneDl(tr('Durée', 'Duration'), x.duree)}${ligneDl(tr("Mode d'attribution", 'Award method'), x.modeAttribution)}${ligneDl(tr('Estimation de la Ville', "City's estimate"), x.estimationVille)}${ligneDl(tr('Soumissions', 'Bids'), texteSoumissions(x))}
         </dl></div>` : ''}
-        ${groupes.has('liens') ? `<p class="liens">${d.pdf ? `<a href="${e(d.pdf)}">Document officiel (PDF)</a> <span class="sep">·</span> ` : ''}<a href="${e(`${location.origin}/${d.ville}/decisions.html?q=${encodeURIComponent(d.numero)}`)}">Fiche sur le site</a></p>` : ''}
+        ${groupes.has('liens') ? `<p class="liens">${d.pdf ? `<a href="${e(d.pdf)}">${tr('Document officiel (PDF)', 'Official document (PDF, in French)')}</a> <span class="sep">·</span> ` : ''}<a href="${e(`${location.origin}/${d.ville}/decisions.html?q=${encodeURIComponent(d.numero)}`)}">${tr('Fiche sur le site', 'Item on the site')}</a></p>` : ''}
       </article>`;
     };
-    return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${e(titre)}</title>
+    return `<!doctype html><html lang="${EN ? 'en' : 'fr'}"><head><meta charset="utf-8"><title>${e(titre)}</title>
 <style>
   @page { size: letter; margin: 16mm 15mm; }
   * { box-sizing: border-box; }
@@ -591,15 +650,15 @@
   footer { margin-top: 24px; border-top: 2px solid #16191D; padding-top: 10px; font: 8.5pt system-ui, sans-serif; color: #5B6570; }
   @media print { .barre { display: none; } body { padding: 0; max-width: none; } }
 </style></head><body>
-<div class="barre"><button type="button" onclick="print()">Enregistrer en PDF ou imprimer</button><span>Dans la fenêtre d'impression, choisissez « Enregistrer au format PDF ».</span></div>
+<div class="barre"><button type="button" onclick="print()">${tr('Enregistrer en PDF ou imprimer', 'Save as PDF or print')}</button><span>${tr("Dans la fenêtre d'impression, choisissez « Enregistrer au format PDF ».", 'In the print window, choose “Save as PDF”.')}</span></div>
 <header>
   <div class="marque">${e(location.host)}</div>
   <h1>${e(description)}</h1>
-  <p>${liste.length.toLocaleString('fr-CA')} dossier${liste.length > 1 ? 's' : ''}, les plus récents d'abord · exporté le ${e(dateFr(new Date().toLocaleDateString('en-CA')))}</p>
+  <p>${EN ? `${liste.length.toLocaleString('en-CA')} ${pl(liste.length, 'item', 'items')}, most recent first · exported on ${e(dateFr(new Date().toLocaleDateString('en-CA')))}` : `${liste.length.toLocaleString('fr-CA')} dossier${liste.length > 1 ? 's' : ''}, les plus récents d'abord · exporté le ${e(dateFr(new Date().toLocaleDateString('en-CA')))}`}</p>
 </header>
 <dl class="alire">${aLire.slice(3).map(([k, v]) => `<dt>${e(k)}</dt><dd>${e(v)}</dd>`).join('')}</dl>
 ${liste.map(fiche).join('')}
-<footer>Site citoyen indépendant, sans lien avec les villes couvertes. Résumés générés par IA ; en cas d'écart, le document officiel fait foi.</footer>
+<footer>${tr("Site citoyen indépendant, sans lien avec les villes couvertes. Résumés générés par IA ; en cas d'écart, le document officiel fait foi.", 'Independent citizen site, with no connection to the cities covered. AI-generated summaries; if anything differs, the official document (in French) prevails.')}</footer>
 <script>addEventListener('load', () => setTimeout(() => print(), 400));<\/script>
 </body></html>`;
   }
@@ -622,36 +681,36 @@ ${liste.map(fiche).join('')}
     if (!groupesProjets.length) { zone.innerHTML = ''; return; }
     const ouvertExport = zone.querySelector('details.ab-pliable')?.open ? ' open' : '';
     zone.innerHTML = `<details class="ab-carte ab-pliable ab-export"${ouvertExport}>
-      <summary><h2>Export en tableur ou en PDF</h2></summary>
+      <summary><h2>${tr('Export en tableur ou en PDF', 'Export to a spreadsheet or PDF')}</h2></summary>
       <div class="ab-pliable-corps">
-      <p class="ab-chapeau" style="margin-bottom:14px">Choisissez ce que vous voulez dans le fichier. Il se fabrique dans votre navigateur, en quelques secondes.</p>
+      <p class="ab-chapeau" style="margin-bottom:14px">${tr('Choisissez ce que vous voulez dans le fichier. Il se fabrique dans votre navigateur, en quelques secondes.', 'Choose what you want in the file. It is built in your browser, in a few seconds.')}</p>
       <div class="ab-export-grille">
-        <label class="ab-champ"><span>1. Quelles décisions</span>
+        <label class="ab-champ"><span>${tr('1. Quelles décisions', '1. Which decisions')}</span>
           <select id="exp-portee">
-            <option value="" disabled>Toutes les décisions de ${echapper(an)} — non disponible, trop volumineux</option>
-            ${groupesProjets.map(([ville, ps], g) => `<optgroup label="Projets de la Ville de ${echapper(VILLES[ville] ?? ville)}">${ps.map((p, i) => `<option value="${echapper(`${p.ville}|${p.cle}`)}" data-titre="${echapper(p.titre)}"${g === 0 && i === 0 ? ' selected' : ''}>${echapper(p.titre)} (${p.dossiers} dossier${p.dossiers > 1 ? 's' : ''})</option>`).join('')}</optgroup>`).join('')}
+            <option value="" disabled>${tr(`Toutes les décisions de ${echapper(an)} — non disponible, trop volumineux`, `All ${echapper(an)} decisions — not available, too large`)}</option>
+            ${groupesProjets.map(([ville, ps], g) => `<optgroup label="${tr('Projets de la Ville de', 'Projects of the City of')} ${echapper(VILLES[ville] ?? ville)}">${ps.map((p, i) => `<option value="${echapper(`${p.ville}|${p.cle}`)}" data-titre="${echapper(p.titre)}"${g === 0 && i === 0 ? ' selected' : ''}>${echapper(p.titre)} (${p.dossiers} ${tr(pl(p.dossiers, 'dossier', 'dossiers'), pl(p.dossiers, 'item', 'items'))})</option>`).join('')}</optgroup>`).join('')}
           </select>
         </label>
-        <label class="ab-champ"><span>2. Qui contiennent ce mot ou ce nom <em>(facultatif)</em></span>
-          <input type="text" id="exp-mot" list="exp-suggestions" maxlength="120" placeholder="ex. 1re Avenue, déneigement, Groupe Colas Québec">
+        <label class="ab-champ"><span>${tr('2. Qui contiennent ce mot ou ce nom <em>(facultatif)</em>', '2. Containing this word or name <em>(optional, in French)</em>')}</span>
+          <input type="text" id="exp-mot" list="exp-suggestions" maxlength="120" placeholder="${tr('ex. 1re Avenue, déneigement, Groupe Colas Québec', 'e.g. 1re Avenue, déneigement, Groupe Colas Québec')}">
           <datalist id="exp-suggestions">${[...mots.map((m) => m.mot), ...orgs.map((o) => o.nom)].map((t) => `<option value="${echapper(t)}">`).join('')}</datalist>
         </label>
         <fieldset class="ab-champ">
-          <legend>3. Quelles colonnes</legend>
-          <label class="ab-case"><input type="checkbox" checked disabled> <span>Le dossier : ville, numéro, dates, instances, statut, sujet, objet</span></label>
+          <legend>${tr('3. Quelles colonnes', '3. Which columns')}</legend>
+          <label class="ab-case"><input type="checkbox" checked disabled> <span>${tr('Le dossier : ville, numéro, dates, instances, statut, sujet, objet', 'The item: city, number, dates, bodies, status, topic, subject')}</span></label>
           ${GROUPES_EXPORT.map((c) => `<label class="ab-case"><input type="checkbox" data-groupe="${c.g}" checked> <span>${echapper(c.libelle)}${c.note ? ` <span class="ab-doux">(${echapper(c.note)})</span>` : ''}</span></label>`).join('')}
-          <label class="ab-case ab-case-filtre"><input type="checkbox" id="exp-avec-montant"> <span>Seulement les dossiers avec un montant</span></label>
+          <label class="ab-case ab-case-filtre"><input type="checkbox" id="exp-avec-montant"> <span>${tr('Seulement les dossiers avec un montant', 'Only items with an amount')}</span></label>
         </fieldset>
       </div>
       <p class="ab-export-compte" id="exp-compte" aria-live="polite"></p>
       <div class="ab-liens">
-        <button type="button" class="ab-bouton" data-format="xlsx">Télécharger Excel (.xlsx)</button>
-        <button type="button" class="ab-bouton ab-bouton-second" data-format="csv">Télécharger CSV</button>
-        <button type="button" class="ab-bouton ab-bouton-second" data-format="pdf">PDF à imprimer</button>
+        <button type="button" class="ab-bouton" data-format="xlsx">${tr('Télécharger Excel (.xlsx)', 'Download Excel (.xlsx)')}</button>
+        <button type="button" class="ab-bouton ab-bouton-second" data-format="csv">${tr('Télécharger CSV', 'Download CSV')}</button>
+        <button type="button" class="ab-bouton ab-bouton-second" data-format="pdf">${tr('PDF à imprimer', 'Printable PDF')}</button>
       </div>
       <p class="ab-note" id="exp-pdf-note"></p>
       <p class="ab-note" id="exp-etat" aria-live="polite"></p>
-      <p class="ab-note">Il vous manque une colonne ou un autre genre d'export ? <a class="ab-lien" href="#ecrire">Dites-le-nous</a> : on ajoute ce que les abonnés demandent.</p>
+      <p class="ab-note">${tr('Il vous manque une colonne ou un autre genre d\'export ? <a class="ab-lien" href="#ecrire">Dites-le-nous</a> : on ajoute ce que les abonnés demandent.', 'Missing a column or another kind of export? <a class="ab-lien" href="#ecrire">Tell us</a>: we add what subscribers ask for.')}</p>
       </div>
     </details>`;
     // Les écouteurs vont sur la carte, pas sur #export : la carte est redessinée à chaque
@@ -684,9 +743,9 @@ ${liste.map(fiche).join('')}
     const pdfPermis = () => Boolean($('#exp-portee').value);
     const compter = async () => {
       const n = (await selection()).length;
-      $('#exp-compte').textContent = `${n.toLocaleString('fr-CA')} dossier${n > 1 ? 's' : ''} dans le fichier`;
+      $('#exp-compte').textContent = tr(`${n.toLocaleString('fr-CA')} dossier${n > 1 ? 's' : ''} dans le fichier`, `${n.toLocaleString('en-CA')} ${pl(n, 'item', 'items')} in the file`);
       carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = !n || !pdfPermis(); });
-      $('#exp-pdf-note').textContent = "Un projet à la fois. Le PDF s'ouvre dans une nouvelle fenêtre, une fiche par dossier : dans la fenêtre d'impression, choisissez « Enregistrer au format PDF ».";
+      $('#exp-pdf-note').textContent = tr("Un projet à la fois. Le PDF s'ouvre dans une nouvelle fenêtre, une fiche par dossier : dans la fenêtre d'impression, choisissez « Enregistrer au format PDF ».", 'One project at a time. The PDF opens in a new window, one card per item: in the print window, choose “Save as PDF”.');
     };
     let delai;
     carte.addEventListener('input', () => { clearTimeout(delai); delai = setTimeout(compter, 200); });
@@ -703,14 +762,14 @@ ${liste.map(fiche).join('')}
       // pendant le clic, avant toute attente : plus tard, le bloqueur de fenêtres la refuserait.
       const fenetre = format === 'pdf' ? window.open('', '_blank') : null;
       if (format === 'pdf') {
-        if (!fenetre) { etat.textContent = 'Votre navigateur a bloqué la fenêtre du PDF : autorisez les fenêtres pour ce site, puis réessayez.'; return; }
-        fenetre.document.write('<!doctype html><meta charset="utf-8"><title>Préparation…</title><p style="font:16px system-ui,sans-serif;padding:24px">Préparation du PDF…</p>');
+        if (!fenetre) { etat.textContent = tr('Votre navigateur a bloqué la fenêtre du PDF : autorisez les fenêtres pour ce site, puis réessayez.', 'Your browser blocked the PDF window: allow pop-ups for this site, then try again.'); return; }
+        fenetre.document.write(`<!doctype html><meta charset="utf-8"><title>${tr('Préparation…', 'Preparing…')}</title><p style="font:16px system-ui,sans-serif;padding:24px">${tr('Préparation du PDF…', 'Preparing the PDF…')}</p>`);
       }
       const groupes = new Set(['dossier', ...[...carte.querySelectorAll('[data-groupe]:checked')].map((c) => c.dataset.groupe)]);
       const colonnes = COLONNES_EXPORT.filter((c) => groupes.has(c.g));
       const liste = await selection();
       carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = true; });
-      etat.textContent = 'Préparation du fichier…';
+      etat.textContent = tr('Préparation du fichier…', 'Preparing the file…');
 
       // Le détail de l'argent : seulement pour les dossiers avec un montant, par lots de 150.
       const details = new Map();
@@ -722,7 +781,7 @@ ${liste.map(fiche).join('')}
         const courante = await session();
         for (const [ville, ids] of parVille) {
           for (let i = 0; i < ids.length; i += 150) {
-            etat.textContent = `Détail de l'argent : ${Math.min(i + 150, ids.length)} / ${ids.length}…`;
+            etat.textContent = `${tr("Détail de l'argent", 'Money details')} : ${Math.min(i + 150, ids.length)} / ${ids.length}…`;
             const r = await fetch(`/api/detail?ville=${encodeURIComponent(ville)}&dossiers=${encodeURIComponent(ids.slice(i, i + 150).join(','))}`, { headers: { Authorization: `Bearer ${courante?.access_token ?? ''}` }, cache: 'no-store' }).catch(() => null);
             const corps = r?.ok ? await r.json().catch(() => null) : null;
             if (!corps) { detailManque = true; continue; }
@@ -736,19 +795,29 @@ ${liste.map(fiche).join('')}
       });
 
       const portee = $('#exp-portee');
-      const titrePortee = portee.selectedOptions[0]?.dataset.titre ?? `Toutes les décisions de ${an}`;
+      const titrePortee = portee.selectedOptions[0]?.dataset.titre ?? tr(`Toutes les décisions de ${an}`, `All ${an} decisions`);
       const mot = $('#exp-mot').value.trim();
-      const description = `${titrePortee}${mot ? `, qui contiennent « ${mot} »` : ''}${$('#exp-avec-montant').checked ? ', avec un montant' : ''}`;
+      const description = `${titrePortee}${mot ? tr(`, qui contiennent « ${mot} »`, `, containing “${mot}”`) : ''}${$('#exp-avec-montant').checked ? tr(', avec un montant', ', with an amount') : ''}`;
       const nom = `dossierville-${nomFichier(portee.value ? titrePortee : String(an))}${mot ? `-${nomFichier(mot)}` : ''}-${new Date().toLocaleDateString('en-CA')}`;
-      const aLire = [
-        ['Sélection', description],
-        ['Dossiers', `${liste.length} (une ${format === 'pdf' ? 'fiche' : 'ligne'} par dossier : le sommaire décisionnel et ses résolutions)`],
-        ['Exporté le', new Date().toLocaleString('fr-CA')],
-        ['Source', `Documents décisionnels publiés par la Ville, repris par ${location.host}. Le document officiel (PDF) fait foi.`],
-        ['Résumé et montant du résumé', 'Générés par IA à partir du sommaire décisionnel.'],
-        ["Détail de l'argent", "Extrait automatiquement du sommaire décisionnel, puis vérifié automatiquement contre son texte ; ce qui ne se vérifiait pas a été retiré. Vide si le dossier n'a pas encore été lu : vous pouvez le demander sur sa fiche."],
-        ['Montants', "Chaque montant vaut pour son dossier et garde sa nature (dépense, emprunt, subvention, revenu…). Ils ne s'additionnent pas entre eux."],
-      ];
+      const aLire = EN
+        ? [
+          ['Selection', description],
+          ['Items', `${liste.length} (one ${format === 'pdf' ? 'card' : 'row'} per item: the decision summary and its resolutions)`],
+          ['Exported on', new Date().toLocaleString('en-CA')],
+          ['Source', `Decision documents published by the City, taken up by ${location.host}. The official document (PDF, in French) prevails.`],
+          ['Summary and summary amount', 'AI-generated from the decision summary, then translated into English.'],
+          ['Money details', "Extracted automatically from the decision summary, then checked automatically against its text; anything that couldn't be verified was removed. Quoted in French. Empty if the item hasn't been read yet: you can request it on its item page."],
+          ['Amounts', "Each amount applies to its own item and keeps its nature (expense, loan, grant, revenue…). They don't add up."],
+        ]
+        : [
+          ['Sélection', description],
+          ['Dossiers', `${liste.length} (une ${format === 'pdf' ? 'fiche' : 'ligne'} par dossier : le sommaire décisionnel et ses résolutions)`],
+          ['Exporté le', new Date().toLocaleString('fr-CA')],
+          ['Source', `Documents décisionnels publiés par la Ville, repris par ${location.host}. Le document officiel (PDF) fait foi.`],
+          ['Résumé et montant du résumé', 'Générés par IA à partir du sommaire décisionnel.'],
+          ["Détail de l'argent", "Extrait automatiquement du sommaire décisionnel, puis vérifié automatiquement contre son texte ; ce qui ne se vérifiait pas a été retiré. Vide si le dossier n'a pas encore été lu : vous pouvez le demander sur sa fiche."],
+          ['Montants', "Chaque montant vaut pour son dossier et garde sa nature (dépense, emprunt, subvention, revenu…). Ils ne s'additionnent pas entre eux."],
+        ];
       if (format === 'pdf') {
         fenetre.document.open();
         fenetre.document.write(rapportImprimable({ liste, details, groupes, description, aLire, titre: nom }));
@@ -760,13 +829,15 @@ ${liste.map(fiche).join('')}
         // rien à télécharger : la fenêtre imprime d'elle-même
       } else if (format === 'xlsx') {
         telecharger(fichierXlsx([
-          { nom: 'Dossiers', colonnes, lignes },
-          { nom: 'À lire', colonnes: [{ largeur: 28 }, { largeur: 110 }], lignes: aLire, entete: false },
+          { nom: tr('Dossiers', 'Items'), colonnes, lignes },
+          { nom: tr('À lire', 'Read me'), colonnes: [{ largeur: 28 }, { largeur: 110 }], lignes: aLire, entete: false },
         ]), `${nom}.xlsx`);
       } else {
         telecharger(fichierCsv(colonnes.map((c) => c.titre), lignes), `${nom}.csv`);
       }
-      etat.textContent = `${format === 'pdf' ? 'PDF ouvert dans une nouvelle fenêtre' : 'Fichier prêt'} : ${liste.length.toLocaleString('fr-CA')} dossier${liste.length > 1 ? 's' : ''}${groupes.has('argent') ? `, dont ${details.size} avec le détail de l'argent` : ''}.${detailManque ? " Une partie du détail de l'argent n'a pas pu être chargée : réessayez dans un moment." : ''}`;
+      etat.textContent = EN
+        ? `${format === 'pdf' ? 'PDF opened in a new window' : 'File ready'}: ${liste.length.toLocaleString('en-CA')} ${pl(liste.length, 'item', 'items')}${groupes.has('argent') ? `, ${details.size} with money details` : ''}.${detailManque ? " Some money details couldn't be loaded: try again in a moment." : ''}`
+        : `${format === 'pdf' ? 'PDF ouvert dans une nouvelle fenêtre' : 'Fichier prêt'} : ${liste.length.toLocaleString('fr-CA')} dossier${liste.length > 1 ? 's' : ''}${groupes.has('argent') ? `, dont ${details.size} avec le détail de l'argent` : ''}.${detailManque ? " Une partie du détail de l'argent n'a pas pu être chargée : réessayez dans un moment." : ''}`;
       carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = !pdfPermis(); });
       mesurer('export_tableur', { format, groupes: [...groupes].join(',') });
     });
@@ -781,7 +852,7 @@ ${liste.map(fiche).join('')}
     const zone = $('#ouverts');
     if (!s || !abonne) { zone.innerHTML = ''; return; }
     const fichiers = await Promise.all(Object.keys(VILLES).map(async (ville) => [ville, await fetch(`/${ville}/data/attendues.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)]));
-    const tous = fichiers.flatMap(([ville, f]) => (f?.decisions ?? []).map((d) => ({ ...d, ville, themeInfo: f.themes?.[d.theme] ?? null, titresProjets: d.projets.map((cle) => f.projets?.[cle] ?? cle) })));
+    const tous = await enAnglais(fichiers.flatMap(([ville, f]) => (f?.decisions ?? []).map((d) => ({ ...d, ville, themeInfo: f.themes?.[d.theme] ?? null, titresProjets: d.projets.map((cle) => f.projets?.[cle] ?? cle) }))));
     if (!tous.length) { zone.innerHTML = ''; return; }
     const auj = new Date().toISOString().slice(0, 10);
     const plusieursVilles = new Set(tous.map((d) => d.ville)).size > 1;
@@ -802,20 +873,20 @@ ${liste.map(fiche).join('')}
     const item = (d) => `<details class="ab-ouvert" name="ouverts">
         <summary>
           <div class="ab-meta ab-pastilles">
-            ${d.themeInfo ? `<span class="ab-pastille-theme" style="background:${/^#[0-9a-f]{6}$/i.test(d.themeInfo.couleur ?? '') ? d.themeInfo.couleur : 'var(--doux)'}">${echapper(d.themeInfo.libelle)}</span>` : ''}
-            ${d.echeance ? `<span class="ab-etiquette${d.echeance >= auj ? ' ab-en-cours' : ''}">date cible ${dateFr(d.echeance)}${d.echeance < auj ? ' (passée)' : ''}</span>` : '<span class="ab-etiquette">date non indiquée</span>'}
+            ${d.themeInfo ? `<span class="ab-pastille-theme" style="background:${/^#[0-9a-f]{6}$/i.test(d.themeInfo.couleur ?? '') ? d.themeInfo.couleur : 'var(--doux)'}">${echapper(libTheme(d.theme, d.themeInfo.libelle))}</span>` : ''}
+            ${d.echeance ? `<span class="ab-etiquette${d.echeance >= auj ? ' ab-en-cours' : ''}">${tr('date cible', 'target date')} ${dateFr(d.echeance)}${d.echeance < auj ? tr(' (passée)', ' (past)') : ''}</span>` : `<span class="ab-etiquette">${tr('date non indiquée', 'no date given')}</span>`}
             ${d.titresProjets.map((t) => `<span class="ab-etiquette ab-type-projet">${echapper(t)}</span>`).join('')}
             <span class="ab-numero">${echapper(d.numero)}</span>
-            <span>préparé le ${dateFr(d.date)}</span>
+            <span>${tr('préparé le', 'prepared on')} ${dateFr(d.date)}</span>
             ${d.unite ? `<span class="ab-etiquette">${echapper(d.unite)}</span>` : ''}
           </div>
           <div class="ab-ouvert-phrase">${echapper(d.phrase)}</div>
         </summary>
         <div class="ab-ouvert-corps">
-          ${d.puces.length ? `<ul>${d.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul><p class="ab-note">Résumé généré par IA à partir du sommaire décisionnel. Le document officiel fait foi.</p>` : '<p class="ab-note">Pas de résumé pour ce dossier : voir le document officiel.</p>'}
+          ${d.puces.length ? `<ul>${d.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul><p class="ab-note">${tr('Résumé généré par IA à partir du sommaire décisionnel. Le document officiel fait foi.', 'AI-generated summary of the decision summary. The official document (in French) prevails.')}</p>` : `<p class="ab-note">${tr('Pas de résumé pour ce dossier : voir le document officiel.', 'No summary for this item: see the official document.')}</p>`}
           <div class="ab-liens">
-            ${d.pdf ? `<a href="${echapper(d.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}
-            <a href="/${echapper(d.ville)}/decisions.html?q=${encodeURIComponent(d.numero)}">Voir dans le volet ${echapper(VILLES[d.ville] ?? '')}</a>
+            ${d.pdf ? `<a href="${echapper(d.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}
+            <a href="/${echapper(d.ville)}/decisions.html?q=${encodeURIComponent(d.numero)}">${tr('Voir dans le volet', 'See in the city section:')} ${echapper(VILLES[d.ville] ?? '')}</a>
           </div>
         </div>
       </details>`;
@@ -828,25 +899,25 @@ ${liste.map(fiche).join('')}
       // rien de daté, puisqu'il est alors seul).
       $('#ouverts-liste').innerHTML = `
         ${probables.length ? `<details class="ab-section-agenda">
-          <summary>Probablement à la prochaine séance <span class="ab-etiquette ab-en-cours">${probables.length}</span></summary>
-          <p class="ab-note" style="margin:0 0 8px">Date cible la plus proche écrite dans les sommaires : ${dateFr(prochaine(g))}.</p>
+          <summary>${tr('Probablement à la prochaine séance', 'Probably at the next meeting')} <span class="ab-etiquette ab-en-cours">${probables.length}</span></summary>
+          <p class="ab-note" style="margin:0 0 8px">${tr('Date cible la plus proche écrite dans les sommaires :', 'Nearest target date written in the decision summaries:')} ${dateFr(prochaine(g))}.</p>
           ${probables.map(item).join('')}
         </details>` : ''}
         <details class="ab-section-agenda"${probables.length ? '' : ' open'}>
-          <summary>${probables.length ? 'Aussi à l’agenda, sans date prévue' : 'À l’agenda, sans date prévue'} <span class="ab-etiquette">${autres.length}</span></summary>
-          ${probables.length ? '' : '<p class="ab-note" style="margin:0 0 8px">Aucun de ces dossiers n’indique de date cible : on ne peut pas dire lesquels seront présentés à la prochaine séance.</p>'}
-          ${autres.length ? autres.map(item).join('') : '<p class="ab-note">Rien d’autre à l’agenda de cette instance.</p>'}
+          <summary>${probables.length ? tr('Aussi à l’agenda, sans date prévue', 'Also on the agenda, no date set') : tr('À l’agenda, sans date prévue', 'On the agenda, no date set')} <span class="ab-etiquette">${autres.length}</span></summary>
+          ${probables.length ? '' : `<p class="ab-note" style="margin:0 0 8px">${tr('Aucun de ces dossiers n’indique de date cible : on ne peut pas dire lesquels seront présentés à la prochaine séance.', "None of these items gives a target date: we can't tell which ones will be presented at the next meeting.")}</p>`}
+          ${autres.length ? autres.map(item).join('') : `<p class="ab-note">${tr('Rien d’autre à l’agenda de cette instance.', 'Nothing else on this body’s agenda.')}</p>`}
         </details>`;
     };
 
     const ouvertAgenda = zone.querySelector('details.ab-pliable')?.open ? ' open' : '';
     zone.innerHTML = `<details class="ab-carte ab-pliable ab-ouverts"${ouvertAgenda}>
-      <summary><h2>À l'agenda des conseils <span class="ab-h2-precision">(<em class="ab-mise-en-garde">approximatif</em>)</span></h2><span class="ab-etiquette">${tous.length}</span></summary>
+      <summary><h2>${tr("À l'agenda des conseils", 'Council agendas')} <span class="ab-h2-precision">(<em class="ab-mise-en-garde">${tr('approximatif', 'approximate')}</em>)</span></h2><span class="ab-etiquette">${tous.length}</span></summary>
       <div class="ab-pliable-corps">
-      <p class="ab-note" style="margin:0 0 12px">Tiré des documents PDF et du portail de la Ville.</p>
-      <p class="ab-chapeau" style="margin-bottom:12px">Les dossiers qui attendent encore le vote d'un conseil. Ceux qui ont une date cible passeront <em class="ab-mise-en-garde">probablement</em> à la prochaine séance, mais <em class="ab-mise-en-garde">ce n'est pas l'ordre du jour officiel</em> : un dossier peut être reporté.</p>
-      <label class="ab-choix-instance">Instance
-        <select id="ouverts-instance">${cles.map((k) => { const g = groupes.get(k); return `<option value="${echapper(k)}"${k === choisie ? ' selected' : ''}>${plusieursVilles ? `${echapper(VILLES[g.ville] ?? g.ville)} — ` : ''}${echapper(g.nom)} (${g.dossiers.length})</option>`; }).join('')}</select>
+      <p class="ab-note" style="margin:0 0 12px">${tr('Tiré des documents PDF et du portail de la Ville.', "Drawn from the City's PDF documents and portal.")}</p>
+      <p class="ab-chapeau" style="margin-bottom:12px">${tr("Les dossiers qui attendent encore le vote d'un conseil. Ceux qui ont une date cible passeront <em class=\"ab-mise-en-garde\">probablement</em> à la prochaine séance, mais <em class=\"ab-mise-en-garde\">ce n'est pas l'ordre du jour officiel</em> : un dossier peut être reporté.", 'Items still awaiting a council vote. Those with a target date will <em class="ab-mise-en-garde">probably</em> come up at the next meeting, but <em class="ab-mise-en-garde">this is not the official agenda</em>: an item can be postponed.')}</p>
+      <label class="ab-choix-instance">${tr('Instance', 'Body')}
+        <select id="ouverts-instance">${cles.map((k) => { const g = groupes.get(k); return `<option value="${echapper(k)}"${k === choisie ? ' selected' : ''}>${plusieursVilles ? `${echapper(VILLES[g.ville] ?? g.ville)} — ` : ''}${echapper(lib(g.nom))} (${g.dossiers.length})</option>`; }).join('')}</select>
       </label>
       <div id="ouverts-liste"></div>
       </div>
@@ -863,9 +934,9 @@ ${liste.map(fiche).join('')}
     if (zone.dataset.pour === pour && zone.innerHTML) return;
     zone.dataset.pour = pour;
     zone.innerHTML = `<section class="ab-carte">
-      <h2 style="margin-top:0">Nous écrire</h2>
-      <p class="ab-chapeau" style="margin-bottom:12px">Une idée pour le site, un problème, une erreur dans une donnée ? Chaque message est lu. Pour une erreur dans une décision, le plus simple est le lien « Signaler une erreur » au bas de sa fiche : le numéro s'y ajoute tout seul.</p>
-      ${s ? '<div class="ab-message-boite"></div>' : '<p class="ab-note">Connectez-vous plus haut pour nous écrire.</p>'}
+      <h2 style="margin-top:0">${tr('Nous écrire', 'Write to us')}</h2>
+      <p class="ab-chapeau" style="margin-bottom:12px">${tr("Une idée pour le site, un problème, une erreur dans une donnée ? Chaque message est lu. Pour une erreur dans une décision, le plus simple est le lien « Signaler une erreur » au bas de sa fiche : le numéro s'y ajoute tout seul.", 'An idea for the site, a problem, an error in the data? Every message is read, in English or French. For an error in a decision, the easiest is the “Report an error” link at the bottom of its item: the number is added automatically.')}</p>
+      ${s ? '<div class="ab-message-boite"></div>' : `<p class="ab-note">${tr('Connectez-vous plus haut pour nous écrire.', 'Sign in above to write to us.')}</p>`}
     </section>`;
     if (s) formulaireMessage(zone.querySelector('.ab-message-boite'), s);
   }
@@ -904,13 +975,13 @@ ${liste.map(fiche).join('')}
           const enBref = p.enBref;
           const phrase = enBref ?? p.plusRecent ?? '';
           return `<article class="ab-carte ab-suggestion">
-            <div class="ab-meta"><span class="ab-etiquette ab-type-projet">Projet</span><span>${p.decisions} décision(s) en ${p.annee}</span>${p.derniere ? `<span>Dernière : ${dateFr(p.derniere)}</span>` : ''}</div>
+            <div class="ab-meta"><span class="ab-etiquette ab-type-projet">${tr('Projet', 'Project')}</span><span>${tr(`${p.decisions} décision(s) en ${p.annee}`, `${p.decisions} decision(s) in ${p.annee}`)}</span>${p.derniere ? `<span>${tr('Dernière :', 'Latest:')} ${dateFr(p.derniere)}</span>` : ''}</div>
             <h3>${echapper(p.titre)}</h3>
             <p class="ab-note" style="margin:0 0 6px">${echapper(p.description ?? '')}</p>
-            ${phrase ? `<p class="ab-derniere">${enBref ? '' : '<strong>Le plus récent :</strong> '}${echapper(phrase.length > 260 ? phrase.slice(0, 259) + '…' : phrase)}</p>` : ''}
+            ${phrase ? `<p class="ab-derniere">${enBref ? '' : `<strong>${tr('Le plus récent :', 'Most recent:')}</strong> `}${echapper(phrase.length > 260 ? phrase.slice(0, 259) + '…' : phrase)}</p>` : ''}
             <div class="ab-liens">
-              <button type="button" class="ab-bouton" data-action="suivre-projet" data-ville="${echapper(ville)}" data-cle="${echapper(cle)}" data-titre="${echapper(p.titre)}">☆ Suivre ce projet</button>
-              <a href="/${echapper(ville)}/decisions.html?projet=${encodeURIComponent(cle)}">Voir ses décisions</a>
+              <button type="button" class="ab-bouton" data-action="suivre-projet" data-ville="${echapper(ville)}" data-cle="${echapper(cle)}" data-titre="${echapper(p.titre)}">☆ ${tr('Suivre ce projet', 'Follow this project')}</button>
+              <a href="/${echapper(ville)}/decisions.html?projet=${encodeURIComponent(cle)}">${tr('Voir ses décisions', 'See its decisions')}</a>
             </div>
           </article>`;
         })
@@ -918,8 +989,8 @@ ${liste.map(fiche).join('')}
       blocs.push(`<h3 class="ab-sous-titre">${echapper(VILLES[ville])}</h3><div class="ab-grille">${cartes}</div>`);
     }
     $('#suggestions').innerHTML = blocs.length
-      ? `<h2>${suivisIds.size ? "D'autres projets à suivre" : 'Des projets à suivre'}</h2>
-         <p class="ab-chapeau">Les grands dossiers de chaque ville, qui reviennent de séance en séance. Suivez-en un pour garder le fil de toutes ses décisions.</p>${blocs.join('')}`
+      ? `<h2>${suivisIds.size ? tr("D'autres projets à suivre", 'More projects to follow') : tr('Des projets à suivre', 'Projects to follow')}</h2>
+         <p class="ab-chapeau">${tr('Les grands dossiers de chaque ville, qui reviennent de séance en séance. Suivez-en un pour garder le fil de toutes ses décisions.', "Each city's major files, which come back meeting after meeting. Follow one to keep track of all its decisions. (Project descriptions and recaps are in French for now.)")}</p>${blocs.join('')}`
       : '';
   }
 
@@ -932,8 +1003,8 @@ ${liste.map(fiche).join('')}
 
   function pastilleStatut(d) {
     if (!d?.statutDossier) return '';
-    if (d.statutDossier === 'termine') return `<span class="ab-etiquette">Décision finale${d.etapeFinale ? ` — ${echapper(d.etapeFinale)}` : ''}</span>`;
-    return `<span class="ab-etiquette ab-en-cours">En cours${d.etapeFinale ? ` — décision attendue : ${echapper(d.etapeFinale)}` : ''}${d.echeance ? `, date cible ${dateFr(d.echeance)}` : ''}</span>`;
+    if (d.statutDossier === 'termine') return `<span class="ab-etiquette">${tr('Décision finale', 'Final decision')}${d.etapeFinale ? ` — ${echapper(lib(d.etapeFinale))}` : ''}</span>`;
+    return `<span class="ab-etiquette ab-en-cours">${tr('En cours', 'In progress')}${d.etapeFinale ? ` — ${tr('décision attendue :', 'decision expected:')} ${echapper(lib(d.etapeFinale))}` : ''}${d.echeance ? `, ${tr('date cible', 'target date')} ${dateFr(d.echeance)}` : ''}</span>`;
   }
 
   // L'en-tête d'un dossier ou d'un projet : ce qu'on voit replié. Le reste se charge à l'ouverture.
@@ -946,10 +1017,10 @@ ${liste.map(fiche).join('')}
         <summary>
           <div class="ab-meta">
             <span>${echapper(VILLES[suivi.ville] ?? suivi.ville)}</span>
-            <span class="ab-etiquette ab-type-projet">Projet</span>
-            ${p ? `<span>${p.decisions} décision(s) en ${p.annee}</span>` : ''}
-            ${p?.derniere ? `<span>Dernière : ${dateFr(p.derniere)}</span>` : ''}
-            <span>Suivi depuis le ${dateFr(suivi.created_at)}</span>
+            <span class="ab-etiquette ab-type-projet">${tr('Projet', 'Project')}</span>
+            ${p ? `<span>${tr(`${p.decisions} décision(s) en ${p.annee}`, `${p.decisions} decision(s) in ${p.annee}`)}</span>` : ''}
+            ${p?.derniere ? `<span>${tr('Dernière :', 'Latest:')} ${dateFr(p.derniere)}</span>` : ''}
+            <span>${tr('Suivi depuis le', 'Followed since')} ${dateFr(suivi.created_at)}</span>
           </div>
           <h3>${echapper(p?.titre ?? suivi.objet ?? cle)}</h3>
         </summary>
@@ -963,7 +1034,7 @@ ${liste.map(fiche).join('')}
         <div class="ab-meta">
           <span>${echapper(VILLES[suivi.ville] ?? suivi.ville)}</span>
           ${numero ? `<span>${echapper(numero)}</span>` : ''}
-          <span>Suivi depuis le ${dateFr(suivi.created_at)}</span>
+          <span>${tr('Suivi depuis le', 'Followed since')} ${dateFr(suivi.created_at)}</span>
         </div>
         <h3>${echapper(suivi.objet ?? suivi.dossier_id)}</h3>
       </summary>
@@ -974,8 +1045,8 @@ ${liste.map(fiche).join('')}
   // Un projet ouvert, du plus lisible au plus détaillé : les chiffres, « Où en est le projet »
   // (rédigé par IA et vérifié, voir quebec/scrapers/recaps-projets.js), l'activité par mois et
   // par thème, ce qui attend une décision, puis toutes les décisions, repliées.
-  const MOIS_COURTS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
-  const MOIS_ETIQUETTES = ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 'juil', 'aoû', 'sep', 'oct', 'nov', 'déc'];
+  const MOIS_COURTS = EN ? ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'] : ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+  const MOIS_ETIQUETTES = EN ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] : ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 'juil', 'aoû', 'sep', 'oct', 'nov', 'déc'];
   // Un numéro de décision se déplie sur place, sous son paragraphe : on ne quitte pas la page.
   const refNumero = (n) => `<button type="button" class="ab-ref" data-action="ref" data-numero="${echapper(n)}" aria-expanded="false">${echapper(n)}<span aria-hidden="true">▾</span></button>`;
 
@@ -996,18 +1067,18 @@ ${liste.map(fiche).join('')}
     const panneau = document.createElement('div');
     panneau.className = 'ab-ref-panneau';
     if (!principal) {
-      panneau.innerHTML = `<p class="ab-note">${echapper(numero)} n'est plus dans les décisions de l'année de ce projet.</p>`;
+      panneau.innerHTML = `<p class="ab-note">${echapper(numero)} ${tr("n'est plus dans les décisions de l'année de ce projet.", "is no longer among this project's decisions for the year.")}</p>`;
     } else {
       panneau.innerHTML = `<div class="ab-meta"><strong>${echapper(principal.numero ?? numero)}</strong><span>${dateFr(principal.date)}</span>${pastilleStatut(principal)}</div>
         ${principal.puces.length
-          ? `<ul>${principal.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul><p class="ab-note">Résumé généré par IA. Le document officiel fait foi.</p>`
+          ? `<ul>${principal.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul><p class="ab-note">${tr('Résumé généré par IA. Le document officiel fait foi.', 'AI-generated summary. The official document (in French) prevails.')}</p>`
           : `<p>${echapper(principal.objet ?? '')}</p>`}
         ${principal.resolutions.length
-          ? `<div class="ab-ref-sous">Parcours</div><ol class="ab-parcours">${principal.resolutions.map((d) => `<li>${echapper(d.instance)}, ${dateFr(d.date)}${d.numero ? ` — ${echapper(d.numero)}` : ''}${d.resultat ? ` · ${echapper(d.resultat)}` : ''}</li>`).join('')}</ol>`
+          ? `<div class="ab-ref-sous">${tr('Parcours', 'Path')}</div><ol class="ab-parcours">${principal.resolutions.map((d) => `<li>${echapper(lib(d.instance))}, ${dateFr(d.date)}${d.numero ? ` — ${echapper(d.numero)}` : ''}${d.resultat ? ` · ${echapper(lib(d.resultat))}` : ''}</li>`).join('')}</ol>`
           : ''}
         <div class="ab-liens">
-          ${principal.pdf ? `<a href="${echapper(principal.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}
-          <a href="/${echapper(ville)}/decisions.html?q=${encodeURIComponent(principal.numero ?? numero)}">Voir dans le volet ${echapper(VILLES[ville] ?? '')}</a>
+          ${principal.pdf ? `<a href="${echapper(principal.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}
+          <a href="/${echapper(ville)}/decisions.html?q=${encodeURIComponent(principal.numero ?? numero)}">${tr('Voir dans le volet', 'See in the city section:')} ${echapper(VILLES[ville] ?? '')}</a>
         </div>`;
     }
     // Le clic a pu se refermer entre-temps (double clic rapide).
@@ -1028,11 +1099,11 @@ ${liste.map(fiche).join('')}
       </li>`).join('');
     const surveiller = r.aSurveiller.map((e) => `<li>${echapper(e.texte)}<div class="ab-refs ab-refs-dessous">${e.numeros.map((n) => refNumero(n)).join('')}</div></li>`).join('');
     return `<section class="ab-recap">
-      <div class="ab-detail-titre">Où en est le projet <span class="ab-etiquette">résumé généré par IA</span></div>
+      <div class="ab-detail-titre">${tr('Où en est le projet', 'Where the project stands')} <span class="ab-etiquette">${tr('résumé généré par IA', 'AI-generated recap, in French')}</span></div>
       ${r.enBref ? `<p class="ab-en-bref">${echapper(r.enBref)}</p>` : ''}
       ${etapes ? `<ol class="ab-chrono">${etapes}</ol>` : ''}
-      ${surveiller ? `<div class="ab-surveiller"><div class="ab-detail-titre">À surveiller</div><ul>${surveiller}</ul></div>` : ''}
-      <p class="ab-note">Rédigé automatiquement à partir des résumés et des résolutions des ${r.dossiers} dossiers du projet, puis vérifié automatiquement : ce qui ne se vérifiait pas a été retiré. Mis à jour le ${dateFr(r.genereLe)}. Les documents officiels font foi.</p>
+      ${surveiller ? `<div class="ab-surveiller"><div class="ab-detail-titre">${tr('À surveiller', 'To watch')}</div><ul>${surveiller}</ul></div>` : ''}
+      <p class="ab-note">${tr(`Rédigé automatiquement à partir des résumés et des résolutions des ${r.dossiers} dossiers du projet, puis vérifié automatiquement : ce qui ne se vérifiait pas a été retiré. Mis à jour le ${dateFr(r.genereLe)}. Les documents officiels font foi.`, `Written automatically from the summaries and resolutions of the project's ${r.dossiers} items, then checked automatically: anything that couldn't be verified was removed. Updated on ${dateFr(r.genereLe)}. The official documents prevail.`)}</p>
     </section>`;
   }
 
@@ -1041,8 +1112,8 @@ ${liste.map(fiche).join('')}
     const cle = dossier.slice(7);
     const projet = await fichierProjet(ville, cle);
     if (!projet) {
-      corps.innerHTML = `<p class="ab-note">Ce projet n'est plus publié pour ${echapper(VILLES[ville] ?? ville)}.</p>
-        <div class="ab-liens"><button type="button" class="ab-lien-bouton" data-action="retirer">Ne plus suivre ce projet</button></div>`;
+      corps.innerHTML = `<p class="ab-note">${tr("Ce projet n'est plus publié pour", 'This project is no longer published for')} ${echapper(VILLES[ville] ?? ville)}.</p>
+        <div class="ab-liens"><button type="button" class="ab-lien-bouton" data-action="retirer">${tr('Ne plus suivre ce projet', 'Stop following this project')}</button></div>`;
       return;
     }
     // Les dossiers arrivent du plus récent au plus ancien ; les chiffres ont été calculés au
@@ -1052,19 +1123,19 @@ ${liste.map(fiche).join('')}
     const derniere = chiffres.derniere;
     const enAttente = lignes.filter((d) => d.statutDossier === 'en_cours');
     const tuiles = `<div class="ab-tuiles">
-      <div class="ab-tuile"><strong>${chiffres.dossiers}</strong><span>dossiers en ${annee}</span></div>
-      <div class="ab-tuile"><strong>${chiffres.resolutions}</strong><span>résolutions des conseils</span></div>
-      <div class="ab-tuile${enAttente.length ? ' ab-tuile-attente' : ''}"><strong>${enAttente.length}</strong><span>en attente d'une décision</span></div>
-      ${derniere ? `<div class="ab-tuile"><strong>${dateFr(derniere).replace(/ \d{4}$/, '')}</strong><span>dernière décision</span></div>` : ''}
+      <div class="ab-tuile"><strong>${chiffres.dossiers}</strong><span>${tr(`dossiers en ${annee}`, `items in ${annee}`)}</span></div>
+      <div class="ab-tuile"><strong>${chiffres.resolutions}</strong><span>${tr('résolutions des conseils', 'council resolutions')}</span></div>
+      <div class="ab-tuile${enAttente.length ? ' ab-tuile-attente' : ''}"><strong>${enAttente.length}</strong><span>${tr("en attente d'une décision", 'awaiting a decision')}</span></div>
+      ${derniere ? `<div class="ab-tuile"><strong>${dateFr(derniere).replace(/,? \d{4}$/, '')}</strong><span>${tr('dernière décision', 'latest decision')}</span></div>` : ''}
     </div>`;
 
     // Activité par mois : chaque décision (sommaire ou résolution) compte, jusqu'au mois de la dernière.
     const parMois = projet.parMois;
     const dernierMois = derniere?.startsWith(String(annee)) ? Number(derniere.slice(5, 7)) : 12;
     const maxMois = Math.max(1, ...parMois);
-    const graphiqueMois = `<div class="ab-bloc"><div class="ab-detail-titre">Décisions par mois</div>
+    const graphiqueMois = `<div class="ab-bloc"><div class="ab-detail-titre">${tr('Décisions par mois', 'Decisions by month')}</div>
       <div class="ab-mois" role="img" aria-label="${parMois.slice(0, dernierMois).map((n, i) => `${MOIS_COURTS[i]} ${n}`).join(', ')}">
-        ${parMois.slice(0, dernierMois).map((n, i) => `<div class="ab-mois-col" title="${MOIS_COURTS[i]} ${annee} : ${n} décision(s)">
+        ${parMois.slice(0, dernierMois).map((n, i) => `<div class="ab-mois-col" title="${MOIS_COURTS[i]} ${annee} : ${n} ${tr('décision(s)', 'decision(s)')}">
           <span class="ab-mois-n">${n || ''}</span><span class="ab-mois-barre" style="height:${Math.round((n / maxMois) * 100)}%"></span><span class="ab-mois-nom">${MOIS_ETIQUETTES[i]}</span>
         </div>`).join('')}
       </div></div>`;
@@ -1072,19 +1143,19 @@ ${liste.map(fiche).join('')}
     // Par thème : un dossier compte une fois, selon la pastille de son document principal.
     const maxTheme = Math.max(1, ...projet.themes.map((t) => t.n));
     const graphiqueThemes = projet.themes.length > 1
-      ? `<div class="ab-bloc"><div class="ab-detail-titre">De quoi il s'agit</div><ul class="ab-barres">
-          ${projet.themes.map((t) => `<li><span class="ab-barre-nom">${echapper(t.libelle)}</span><span class="ab-barre"><span style="width:${Math.round((t.n / maxTheme) * 100)}%;background:${/^#[0-9a-f]{6}$/i.test(t.couleur ?? '') ? t.couleur : 'var(--accent)'}"></span></span><span class="ab-barre-n">${t.n}</span></li>`).join('')}
+      ? `<div class="ab-bloc"><div class="ab-detail-titre">${tr("De quoi il s'agit", "What it's about")}</div><ul class="ab-barres">
+          ${projet.themes.map((t) => `<li><span class="ab-barre-nom">${echapper(libTheme(t.cle, t.libelle))}</span><span class="ab-barre"><span style="width:${Math.round((t.n / maxTheme) * 100)}%;background:${/^#[0-9a-f]{6}$/i.test(t.couleur ?? '') ? t.couleur : 'var(--accent)'}"></span></span><span class="ab-barre-n">${t.n}</span></li>`).join('')}
         </ul></div>`
       : '';
 
     const phraseDe = (d) => d.puces[0] ?? d.objet ?? '';
     const blocAttente = enAttente.length
-      ? `<div class="ab-bloc"><div class="ab-detail-titre">En attente d'une décision</div><ul class="ab-liste-projet">
+      ? `<div class="ab-bloc"><div class="ab-detail-titre">${tr("En attente d'une décision", 'Awaiting a decision')}</div><ul class="ab-liste-projet">
           ${enAttente.map((d) => `<li class="ab-ligne-projet"><div class="ab-meta">${pastilleStatut(d)}</div><div>${echapper(phraseDe(d))}</div>${d.numero ? `<div class="ab-refs ab-refs-dessous">${refNumero(d.numero)}</div>` : ''}</li>`).join('')}
         </ul></div>`
       : '';
     const ligne = (d) => `<li class="ab-ligne-projet">
-        <div class="ab-meta"><span>${dateFr(d.derniere)}</span>${d.instances.length ? `<span>${echapper(d.instances.join(' · '))}</span>` : '<span>sommaire</span>'}${pastilleStatut(d)}</div>
+        <div class="ab-meta"><span>${dateFr(d.derniere)}</span>${d.instances.length ? `<span>${echapper(libInstances(d.instances))}</span>` : `<span>${tr('sommaire', 'decision summary')}</span>`}${pastilleStatut(d)}</div>
         <div>${echapper(phraseDe(d))}</div>
         ${d.numero ? `<div class="ab-refs ab-refs-dessous">${refNumero(d.numero)}</div>` : ''}
       </li>`;
@@ -1094,11 +1165,11 @@ ${liste.map(fiche).join('')}
       ${lignes.length ? `<div class="ab-graphiques">${graphiqueMois}${graphiqueThemes}</div>` : ''}
       ${blocAttente}
       ${lignes.length
-        ? `<details class="ab-toutes"><summary>Toutes les décisions, les plus récentes d'abord <span class="ab-etiquette">${lignes.length} dossier(s)</span></summary><ol class="ab-liste-projet">${lignes.map(ligne).join('')}</ol></details>`
-        : "<p class=\"ab-note\">Aucune décision de ce projet dans l'année en cours pour l'instant.</p>"}
+        ? `<details class="ab-toutes"><summary>${tr("Toutes les décisions, les plus récentes d'abord", 'All decisions, most recent first')} <span class="ab-etiquette">${lignes.length} ${tr('dossier(s)', 'item(s)')}</span></summary><ol class="ab-liste-projet">${lignes.map(ligne).join('')}</ol></details>`
+        : `<p class="ab-note">${tr("Aucune décision de ce projet dans l'année en cours pour l'instant.", 'No decision for this project in the current year yet.')}</p>`}
       <div class="ab-liens">
-        <a href="/${echapper(ville)}/decisions.html?projet=${encodeURIComponent(cle)}">Voir les ${chiffres.decisions} décisions dans le volet ${echapper(VILLES[ville] ?? '')}</a>
-        <button type="button" class="ab-lien-bouton" data-action="retirer">Ne plus suivre ce projet</button>
+        <a href="/${echapper(ville)}/decisions.html?projet=${encodeURIComponent(cle)}">${tr(`Voir les ${chiffres.decisions} décisions dans le volet ${echapper(VILLES[ville] ?? '')}`, `See the ${chiffres.decisions} decisions in the ${echapper(VILLES[ville] ?? '')} section`)}</a>
+        <button type="button" class="ab-lien-bouton" data-action="retirer">${tr('Ne plus suivre ce projet', 'Stop following this project')}</button>
       </div>`;
     mesurer('ouvrir_projet_suivi', { ville, projet: cle });
   }
@@ -1107,17 +1178,17 @@ ${liste.map(fiche).join('')}
     const corps = carte.querySelector('.ab-dossier-corps');
     if (corps.dataset.pret === '1') return;
     corps.dataset.pret = '1';
-    corps.innerHTML = '<p class="ab-note">Chargement…</p>';
+    corps.innerHTML = `<p class="ab-note">${tr('Chargement…', 'Loading…')}</p>`;
     if (estProjet(carte.dataset.dossier)) return ouvrirProjet(carte, corps);
     // Une décision seule, suivie avant l'arrivée des projets. Son résumé et son parcours sont dans
     // le volet ; ici, seulement le détail de l'argent (une petite requête) et les liens.
     const { ville, dossier, numero } = carte.dataset;
     const detail = await chargerDetail(ville, dossier, await session());
-    corps.innerHTML = `<p class="ab-note" style="margin-top:0">On suit maintenant des projets plutôt que des décisions seules. Le résumé et le parcours de cette décision sont dans le volet ${echapper(VILLES[ville] ?? '')}.</p>
+    corps.innerHTML = `<p class="ab-note" style="margin-top:0">${tr(`On suit maintenant des projets plutôt que des décisions seules. Le résumé et le parcours de cette décision sont dans le volet ${echapper(VILLES[ville] ?? '')}.`, `We now follow projects rather than single decisions. This decision's summary and path are in the ${echapper(VILLES[ville] ?? '')} section.`)}</p>
       ${rendreDetail(detail, ville)}
       <div class="ab-liens">
-        ${numero ? `<a href="/${echapper(ville)}/decisions.html?q=${encodeURIComponent(numero)}">Voir dans le volet ${echapper(VILLES[ville] ?? '')}</a>` : ''}
-        <button type="button" class="ab-lien-bouton" data-action="retirer">Ne plus suivre</button>
+        ${numero ? `<a href="/${echapper(ville)}/decisions.html?q=${encodeURIComponent(numero)}">${tr('Voir dans le volet', 'See in the city section:')} ${echapper(VILLES[ville] ?? '')}</a>` : ''}
+        <button type="button" class="ab-lien-bouton" data-action="retirer">${tr('Ne plus suivre', 'Stop following')}</button>
       </div>`;
     mesurer('ouvrir_dossier_suivi', { ville });
   }
@@ -1126,7 +1197,7 @@ ${liste.map(fiche).join('')}
     const s = await session();
     if (!s) return connexion();
     const abonne = await statutAbonnement(s).catch(() => false);
-    $('#compte').innerHTML = `<p class="ab-note">Connecté comme <strong>${echapper(s.user.email)}</strong> · ${abonne ? 'abonnement actif' : 'pas d\'abonnement — <a class="ab-lien" href="/abonnement">voir l\'abonnement</a>'} · <button type="button" class="ab-lien-bouton" id="deconnexion">Se déconnecter</button></p>`;
+    $('#compte').innerHTML = `<p class="ab-note">${tr('Connecté comme', 'Signed in as')} <strong>${echapper(s.user.email)}</strong> · ${abonne ? tr('abonnement actif', 'active subscription') : tr('pas d\'abonnement — <a class="ab-lien" href="/abonnement">voir l\'abonnement</a>', 'no subscription — <a class="ab-lien" href="/abonnement">see the subscription</a>')} · <button type="button" class="ab-lien-bouton" id="deconnexion">${tr('Se déconnecter', 'Sign out')}</button></p>`;
     $('#deconnexion').addEventListener('click', async () => { await client.auth.signOut(); });
 
     alertes(s, abonne).catch((e) => console.error('alertes :', e));
@@ -1139,7 +1210,7 @@ ${liste.map(fiche).join('')}
     pourquoi({ connecte: true, abonne });
     suggestions(s, new Set(suivis.map((x) => `${x.ville}|${x.dossier_id}`)));
     if (!suivis.length) {
-      $('#liste').innerHTML = `<p class="ab-vide">Vous ne suivez aucun projet pour l'instant. Choisissez-en un ci-dessous.</p>`;
+      $('#liste').innerHTML = `<p class="ab-vide">${tr("Vous ne suivez aucun projet pour l'instant. Choisissez-en un ci-dessous.", "You aren't following any project yet. Pick one below.")}</p>`;
       return;
     }
     const parVille = new Map();
@@ -1170,12 +1241,12 @@ ${liste.map(fiche).join('')}
       if (!s) {
         $('#liste').scrollIntoView({ behavior: 'smooth', block: 'start' });
         $('#form-lien input')?.focus();
-        $('#etat-lien').textContent = `Connectez-vous d'abord : vous pourrez ensuite suivre « ${suggestion.dataset.titre} ».`;
+        $('#etat-lien').textContent = tr(`Connectez-vous d'abord : vous pourrez ensuite suivre « ${suggestion.dataset.titre} ».`, `Sign in first: then you'll be able to follow “${suggestion.dataset.titre}”.`);
         return;
       }
       suggestion.disabled = true;
       const erreur = await suivre(s, { ville: suggestion.dataset.ville, dossier: `projet:${suggestion.dataset.cle}`, numero: '', objet: suggestion.dataset.titre });
-      if (erreur) { suggestion.disabled = false; suggestion.textContent = 'Impossible — réessayez'; return; }
+      if (erreur) { suggestion.disabled = false; suggestion.textContent = tr('Impossible — réessayez', "Couldn't — try again"); return; }
       mesurer('suggestion_suivre_projet', { ville: suggestion.dataset.ville, projet: suggestion.dataset.cle });
       await afficher();
       $('#liste').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1192,7 +1263,7 @@ ${liste.map(fiche).join('')}
     if (!s) return connexion();
     bouton.disabled = true;
     const erreur = await nePlusSuivre(s, { ville: carte.dataset.ville, dossier: carte.dataset.dossier });
-    if (erreur) { bouton.disabled = false; bouton.textContent = 'Impossible — réessayez'; return; }
+    if (erreur) { bouton.disabled = false; bouton.textContent = tr('Impossible — réessayez', "Couldn't — try again"); return; }
     carte.remove();
   });
 

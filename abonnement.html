@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/svg+xml" href="/commun/icone.svg">
-<title>Abonnement — DossierQuébec</title>
+<title data-en="Subscription — DossierQuébec">Abonnement — DossierQuébec</title>
 <meta name="robots" content="noindex, nofollow">
 <script>
   try {
@@ -12,6 +12,9 @@
     if (t === 'clair' || t === 'sombre') document.documentElement.setAttribute('data-theme', t);
     var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
     if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+    // Anglais choisi (commun/langue.js) : page cachée le temps de traduire, 1,5 s au plus.
+    var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('dvq:langue');
+    if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.classList.add('dvq-en'); setTimeout(function () { document.documentElement.classList.add('dvq-pret'); }, 1500); }
   } catch (e) {}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,45 +28,46 @@
       <a class="ab-marque" href="/">Dossier<span>Québec</span></a>
       <details class="ab-villes" id="villes"></details>
     </div>
-    <nav class="ab-nav" aria-label="Espace abonnés">
+    <nav class="ab-nav" aria-label="Espace abonnés" data-en-aria-label="Subscriber area">
       <div class="ab-onglets">
-        <a href="/mes-dossiers">Mes dossiers</a>
-        <a href="/abonnement" aria-current="page">Abonnement</a>
-        <a href="/mes-dossiers#ecrire">Nous écrire</a>
+        <a href="/mes-dossiers" data-en="My files">Mes dossiers</a>
+        <a href="/abonnement" aria-current="page" data-en="Subscription">Abonnement</a>
+        <a href="/mes-dossiers#ecrire" data-en="Write to us">Nous écrire</a>
       </div>
       <div class="ab-outils" id="outils"></div>
     </nav>
   </header>
 
   <main class="ab-abo">
-    <h1>Abonnement</h1>
-    <p class="ab-chapeau">Les décisions des villes restent gratuites pour tout le monde, avec leur résumé en langage clair et le lien vers le document officiel. L'abonnement ajoute ce qui demande du travail en plus — et c'est lui qui permet de garder tout le reste gratuit.</p>
+    <h1 data-en="Subscription">Abonnement</h1>
+    <p class="ab-chapeau" data-en="City decisions stay free for everyone, with their plain-language summary and the link to the official document. The subscription adds what takes extra work — and it's what keeps everything else free.">Les décisions des villes restent gratuites pour tout le monde, avec leur résumé en langage clair et le lien vers le document officiel. L'abonnement ajoute ce qui demande du travail en plus — et c'est lui qui permet de garder tout le reste gratuit.</p>
 
     <div class="ab-grille">
       <section class="ab-carte ab-offre ab-offre-gratuit">
-        <div class="ab-offre-tete"><h3>Toujours gratuit</h3><span class="ab-pastille-offre">0 $</span></div>
+        <div class="ab-offre-tete"><h3 data-en="Always free">Toujours gratuit</h3><span class="ab-pastille-offre" data-en="$0">0 $</span></div>
         <ul class="ab-coches">
-          <li>Toutes les décisions publiées, par séance</li>
-          <li>Les résumés en langage clair</li>
-          <li>Les votes nominatifs et les membres des conseils</li>
-          <li>Le lien vers chaque document officiel</li>
-          <li>Avec un compte gratuit : suivre des projets dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a>, avec leur récapitulatif « Où en est le projet »</li>
+          <li data-en="Every published decision, by meeting">Toutes les décisions publiées, par séance</li>
+          <li data-en="Plain-language summaries (in English and French)">Les résumés en langage clair</li>
+          <li data-en="Recorded votes and council members">Les votes nominatifs et les membres des conseils</li>
+          <li data-en="The link to each official document (in French)">Le lien vers chaque document officiel</li>
+          <li data-en="With a free account: follow projects in <a class=&quot;ab-lien&quot; href=&quot;/mes-dossiers&quot;>My files</a>, with their “Where the project stands” recap">Avec un compte gratuit : suivre des projets dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a>, avec leur récapitulatif « Où en est le projet »</li>
         </ul>
       </section>
       <section class="ab-carte ab-offre ab-offre-payant">
-        <div class="ab-offre-tete"><h3>Avec l'abonnement payant</h3><span class="ab-pastille-offre">3 $ / mois</span></div>
-        <p class="ab-note" style="margin:0 0 10px">Tout le gratuit, plus :</p>
+        <div class="ab-offre-tete"><h3 data-en="With the paid subscription">Avec l'abonnement payant</h3><span class="ab-pastille-offre" data-en="$3 / month">3 $ / mois</span></div>
+        <p class="ab-note" style="margin:0 0 10px" data-en="Everything free, plus:">Tout le gratuit, plus :</p>
         <ul class="ab-avantages">
-          <li class="ab-av-bleu"><span class="ab-icone" aria-hidden="true">🔔</span><div><strong>Une alerte par courriel quand vos projets bougent</strong> : une nouvelle décision, un dossier qui attend un vote au conseil, un récapitulatif mis à jour. Rien les semaines où rien n'avance — plus besoin de revenir vérifier.</div></li>
-          <li class="ab-av-violet"><span class="ab-icone" aria-hidden="true">📍</span><div><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : tout ce que la Ville décide sur la 1re Avenue, dans Limoilou, sur le déneigement…</div></li>
-          <li class="ab-av-orange"><span class="ab-icone" aria-hidden="true">🏢</span><div><strong>Suivre un organisme ou une entreprise</strong> : les décisions de l'année qui le nomment — contrats, subventions, ententes — avec le montant de chacune tel qu'écrit, et une alerte quand une nouvelle le nomme</div></li>
-          <li class="ab-av-vert"><span class="ab-icone" aria-hidden="true">🗓️</span><div><strong>L'agenda des conseils</strong> (<em class="ab-mise-en-garde">approximatif</em>) : ce qui s'en vient à chaque conseil, avec son résumé, et ce qui sera <em class="ab-mise-en-garde">probablement</em> présenté à la prochaine séance</div></li>
-          <li class="ab-av-jaune"><span class="ab-icone" aria-hidden="true">💵</span><div><strong>Le détail de l'argent</strong> : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions, ce qui change
+          <li class="ab-av-bleu"><span class="ab-icone" aria-hidden="true">🔔</span><div data-en="<strong>An email alert when your projects move</strong>: a new decision, an item awaiting a council vote, an updated recap. Nothing in the weeks when nothing moves — no need to keep checking."><strong>Une alerte par courriel quand vos projets bougent</strong> : une nouvelle décision, un dossier qui attend un vote au conseil, un récapitulatif mis à jour. Rien les semaines où rien n'avance — plus besoin de revenir vérifier.</div></li>
+          <li class="ab-av-violet"><span class="ab-icone" aria-hidden="true">📍</span><div data-en="<strong>Alerts for your neighbourhood, your street or a keyword</strong>: everything the City decides about 1re Avenue, in Limoilou, about snow removal…"><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : tout ce que la Ville décide sur la 1re Avenue, dans Limoilou, sur le déneigement…</div></li>
+          <li class="ab-av-orange"><span class="ab-icone" aria-hidden="true">🏢</span><div data-en="<strong>Follow an organization or a company</strong>: this year's decisions that name it — contracts, grants, agreements — with each amount as written, and an alert when a new one names it"><strong>Suivre un organisme ou une entreprise</strong> : les décisions de l'année qui le nomment — contrats, subventions, ententes — avec le montant de chacune tel qu'écrit, et une alerte quand une nouvelle le nomme</div></li>
+          <li class="ab-av-vert"><span class="ab-icone" aria-hidden="true">🗓️</span><div data-en="<strong>Council agendas</strong> (<em class=&quot;ab-mise-en-garde&quot;>approximate</em>): what's coming up at each council, with its summary, and what will <em class=&quot;ab-mise-en-garde&quot;>probably</em> be presented at the next meeting"><strong>L'agenda des conseils</strong> (<em class="ab-mise-en-garde">approximatif</em>) : ce qui s'en vient à chaque conseil, avec son résumé, et ce qui sera <em class="ab-mise-en-garde">probablement</em> présenté à la prochaine séance</div></li>
+          <li class="ab-av-jaune"><span class="ab-icone" aria-hidden="true">💵</span><div data-en="<strong>Money details</strong>: who receives, who pays, the bids and the City's estimate, the breakdown by year, the conditions, what changes
+            <br><span class=&quot;ab-note&quot;>Available for items with an amount: those of the major projects followed (tramway, housing…), and every new item since September 15, 2026, the day after it is published. Other 2026 items don't have them yet. Quoted in French, as in the documents.</span>"><strong>Le détail de l'argent</strong> : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions, ce qui change
             <br><span class="ab-note">Offert pour les dossiers avec un montant : ceux des grands projets suivis (tramway, logement…), et chaque nouveau dossier depuis le 15 septembre 2026, dès le lendemain de sa publication. Les autres dossiers de 2026 ne l'ont pas encore.</span></div></li>
-          <li class="ab-av-rose"><span class="ab-icone" aria-hidden="true">📊</span><div><strong>L'export en tableur ou en PDF</strong> (Excel, CSV ou PDF à imprimer) : vous choisissez un projet, un mot ou un nom et les colonnes, avec le détail de l'argent quand il est lu</div></li>
+          <li class="ab-av-rose"><span class="ab-icone" aria-hidden="true">📊</span><div data-en="<strong>Export to a spreadsheet or PDF</strong> (Excel, CSV or printable PDF): you choose a project, a word or a name and the columns, with the money details when they have been read"><strong>L'export en tableur ou en PDF</strong> (Excel, CSV ou PDF à imprimer) : vous choisissez un projet, un mot ou un nom et les colonnes, avec le détail de l'argent quand il est lu</div></li>
         </ul>
-        <p class="ab-prix"><span class="ab-prix-montant">3 $</span> <span class="ab-note">par mois (prix prévu)</span></p>
-        <p class="ab-note">Un seul abonnement pour toutes les villes couvertes — pas un abonnement par ville.</p>
+        <p class="ab-prix" data-en="<span class=&quot;ab-prix-montant&quot;>$3</span> <span class=&quot;ab-note&quot;>a month (planned price)</span>"><span class="ab-prix-montant">3 $</span> <span class="ab-note">par mois (prix prévu)</span></p>
+        <p class="ab-note" data-en="One subscription for every city covered — not one per city.">Un seul abonnement pour toutes les villes couvertes — pas un abonnement par ville.</p>
       </section>
     </div>
 
@@ -76,37 +80,37 @@
       <div class="ab-graphiques">
         <div class="ab-bloc"><div class="ab-detail-titre" id="travail-mois-titre">Documents lus par mois</div><div class="ab-mois" id="travail-mois"></div></div>
         <div class="ab-bloc">
-          <div class="ab-detail-titre">Le chemin d'un document</div>
+          <div class="ab-detail-titre" data-en="A document's path">Le chemin d'un document</div>
           <ol class="ab-chemin">
-            <li><strong>La Ville publie</strong> ses résolutions, sommaires décisionnels et procès-verbaux.</li>
-            <li><strong>Lu chaque matin</strong> : le site relit le portail de la Ville et récupère ce qui est nouveau.</li>
-            <li><strong>Expliqué en langage clair</strong> par un résumé généré par IA, toujours identifié comme tel.</li>
-            <li><strong>Relié</strong> à son dossier, à son statut — en attente ou décision finale — et à son projet.</li>
-            <li><strong>Vérifié</strong> : le détail de l'argent et les récapitulatifs de projets sont contre-vérifiés dans les documents ; ce qui ne se vérifie pas est retiré.</li>
-            <li><strong>Publié</strong> sur le site, dans Mes dossiers et dans vos alertes du matin.</li>
+            <li data-en="<strong>The City publishes</strong> its resolutions, decision summaries and minutes."><strong>La Ville publie</strong> ses résolutions, sommaires décisionnels et procès-verbaux.</li>
+            <li data-en="<strong>Read every morning</strong>: the site rereads the City's portal and picks up what's new."><strong>Lu chaque matin</strong> : le site relit le portail de la Ville et récupère ce qui est nouveau.</li>
+            <li data-en="<strong>Explained in plain language</strong> by an AI-generated summary, always labelled as such — and translated into English."><strong>Expliqué en langage clair</strong> par un résumé généré par IA, toujours identifié comme tel.</li>
+            <li data-en="<strong>Linked</strong> to its file, its status — pending or final decision — and its project."><strong>Relié</strong> à son dossier, à son statut — en attente ou décision finale — et à son projet.</li>
+            <li data-en="<strong>Checked</strong>: money details, project recaps and English translations are cross-checked against the documents; anything that can't be verified is removed."><strong>Vérifié</strong> : le détail de l'argent et les récapitulatifs de projets sont contre-vérifiés dans les documents ; ce qui ne se vérifie pas est retiré.</li>
+            <li data-en="<strong>Published</strong> on the site, in My files and in your morning alerts."><strong>Publié</strong> sur le site, dans Mes dossiers et dans vos alertes du matin.</li>
           </ol>
         </div>
       </div>
-      <p><strong>Et à la main :</strong> chaque grand projet défini et relu, chaque signalement lu, chaque nouvelle ville étudiée avant d'être ajoutée.</p>
-      <p class="ab-note">Chaque abonnement garde tout ça gratuit pour tout le monde. Chiffres comptés dans les données publiées, mis à jour chaque matin.</p>
+      <p data-en="<strong>And by hand:</strong> every major project defined and reviewed, every report read, every new city studied before being added."><strong>Et à la main :</strong> chaque grand projet défini et relu, chaque signalement lu, chaque nouvelle ville étudiée avant d'être ajoutée.</p>
+      <p class="ab-note" data-en="Every subscription keeps all of this free for everyone. Figures counted in the published data, updated every morning.">Chaque abonnement garde tout ça gratuit pour tout le monde. Chiffres comptés dans les données publiées, mis à jour chaque matin.</p>
     </section>
 
     <section class="ab-carte ab-offrir">
-      <h3><span class="ab-icone" aria-hidden="true">🎁</span> Offrir un abonnement <span class="ab-note">(bientôt)</span></h3>
-      <p>À un proche qui suit ce qui se passe dans sa ville, à un groupe communautaire, à une association de quartier ou à une bibliothèque.</p>
+      <h3 data-en="<span class=&quot;ab-icone&quot; aria-hidden=&quot;true&quot;>🎁</span> Give a subscription <span class=&quot;ab-note&quot;>(coming soon)</span>"><span class="ab-icone" aria-hidden="true">🎁</span> Offrir un abonnement <span class="ab-note">(bientôt)</span></h3>
+      <p data-en="To someone who follows what's happening in their city, a community group, a neighbourhood association or a library.">À un proche qui suit ce qui se passe dans sa ville, à un groupe communautaire, à une association de quartier ou à une bibliothèque.</p>
     </section>
 
     <section class="ab-carte ab-attente" id="attente">
-      <h3><span class="ab-icone" aria-hidden="true">✉️</span> L'abonnement n'est pas encore ouvert</h3>
-      <p>Laissez votre courriel : on vous écrit une seule fois, le jour où il ouvre. En attendant, vous pouvez déjà suivre des projets avec un compte gratuit, dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a>.</p>
+      <h3 data-en="<span class=&quot;ab-icone&quot; aria-hidden=&quot;true&quot;>✉️</span> The subscription is not open yet"><span class="ab-icone" aria-hidden="true">✉️</span> L'abonnement n'est pas encore ouvert</h3>
+      <p data-en="Leave your email: we'll write to you once, the day it opens. In the meantime, you can already follow projects with a free account, in <a class=&quot;ab-lien&quot; href=&quot;/mes-dossiers&quot;>My files</a>.">Laissez votre courriel : on vous écrit une seule fois, le jour où il ouvre. En attendant, vous pouvez déjà suivre des projets avec un compte gratuit, dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a>.</p>
       <form class="ab-form" id="form-attente">
-        <input type="email" required placeholder="Votre courriel" autocomplete="email">
-        <button type="submit" class="ab-bouton" data-mesure="liste_attente_abonnement">Me prévenir</button>
+        <input type="email" required placeholder="Votre courriel" data-en-placeholder="Your email" autocomplete="email">
+        <button type="submit" class="ab-bouton" data-mesure="liste_attente_abonnement" data-en="Notify me">Me prévenir</button>
       </form>
       <p class="ab-note" id="etat-attente" aria-live="polite"></p>
     </section>
 
-    <p class="ab-note">Site citoyen indépendant, sans publicité. Aucun lien avec les villes couvertes ; en cas d'écart, les documents officiels font foi.</p>
+    <p class="ab-note" data-en="Independent citizen site, ad-free. No connection with the cities covered; if anything differs, the official documents prevail.">Site citoyen indépendant, sans publicité. Aucun lien avec les villes couvertes ; en cas d'écart, les documents officiels font foi.</p>
   </main>
 </div>
 
@@ -117,34 +121,37 @@
   boutonRetourEnHaut();
 </script>
 <script type="module">
-  import { client, VILLES, mesurer, echapper } from '/commun/abonnes-client.js';
+  import { client, VILLES, mesurer, echapper, EN, tr } from '/commun/abonnes-client.js';
   const ville = new URLSearchParams(location.search).get('ville');
   mesurer('page_abonnement', { ville: VILLES[ville] ? ville : 'aucune' });
 
   // ---------- le travail derrière le site ----------
   // Venue d'un volet : cette ville seulement. Sinon : toutes les villes qui publient leurs chiffres.
-  const MOIS = ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 'juil', 'aoû', 'sep', 'oct', 'nov', 'déc'];
-  const fr = (n) => Number(n).toLocaleString('fr-CA');
+  const MOIS = EN ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] : ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 'juil', 'aoû', 'sep', 'oct', 'nov', 'déc'];
+  const fr = (n) => Number(n).toLocaleString(EN ? 'en-CA' : 'fr-CA');
   async function travail() {
     const villes = VILLES[ville] ? [ville] : Object.keys(VILLES);
     const donnees = (await Promise.all(villes.map((v) => fetch(`/${v}/data/travail.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)))).filter(Boolean);
     if (!donnees.length) return;
     const somme = (f) => donnees.reduce((n, d) => n + (Number(f(d)) || 0), 0);
     const annee = Math.max(...donnees.map((d) => d.annee));
-    const noms = donnees.map((d) => d.nom).join(' et ');
+    const noms = donnees.map((d) => d.nom).join(tr(' et ', ' and '));
 
-    document.querySelector('#travail-titre').textContent = donnees.length === 1 && VILLES[ville] ? `Le travail derrière le volet ${donnees[0].nom}` : 'Le travail derrière le site';
-    document.querySelector('#travail-chapeau').textContent =
-      `Ce que le site fait pour vous${donnees.length > 1 ? ` à ${noms}` : ''}, compté dans les données publiées : rien d'estimé.`;
+    document.querySelector('#travail-titre').textContent = donnees.length === 1 && VILLES[ville]
+      ? tr(`Le travail derrière le volet ${donnees[0].nom}`, `The work behind the ${donnees[0].nom} section`)
+      : tr('Le travail derrière le site', 'The work behind the site');
+    document.querySelector('#travail-chapeau').textContent = EN
+      ? `What the site does for you${donnees.length > 1 ? ` in ${noms}` : ''}, counted in the published data: nothing estimated.`
+      : `Ce que le site fait pour vous${donnees.length > 1 ? ` à ${noms}` : ''}, compté dans les données publiées : rien d'estimé.`;
 
     const tuiles = [
-      [somme((d) => d.documents?.total), `documents municipaux lus en ${annee}`],
-      [somme((d) => d.resumes), 'sommaires expliqués en langage clair'],
-      [somme((d) => d.votes), 'votes nominatifs recensés'],
-      [somme((d) => d.dossiers?.termines), "dossiers suivis jusqu'à leur décision finale"],
-      [somme((d) => d.dossiers?.enCours), "dossiers en attente d'une décision, suivis"],
-      [somme((d) => d.projets?.n), 'grands projets définis et relus à la main'],
-      [somme((d) => d.retiresAvantPublication), 'éléments retirés avant publication, faute de se vérifier'],
+      [somme((d) => d.documents?.total), tr(`documents municipaux lus en ${annee}`, `municipal documents read in ${annee}`)],
+      [somme((d) => d.resumes), tr('sommaires expliqués en langage clair', 'decision summaries explained in plain language')],
+      [somme((d) => d.votes), tr('votes nominatifs recensés', 'recorded votes counted')],
+      [somme((d) => d.dossiers?.termines), tr("dossiers suivis jusqu'à leur décision finale", 'items tracked to their final decision')],
+      [somme((d) => d.dossiers?.enCours), tr("dossiers en attente d'une décision, suivis", 'items awaiting a decision, tracked')],
+      [somme((d) => d.projets?.n), tr('grands projets définis et relus à la main', 'major projects defined and reviewed by hand')],
+      [somme((d) => d.retiresAvantPublication), tr('éléments retirés avant publication, faute de se vérifier', 'elements removed before publication because they could not be verified')],
     ].filter(([n]) => n > 0);
     document.querySelector('#travail-tuiles').innerHTML = tuiles.map(([n, libelle]) => `<div class="ab-tuile"><strong>${fr(n)}</strong><span>${echapper(libelle)}</span></div>`).join('');
 
@@ -152,7 +159,7 @@
     const parMois = Array.from({ length: 12 }, (_, i) => somme((d) => (d.annee === annee ? d.parMois?.[i] : 0)));
     const dernier = parMois.findLastIndex((n) => n > 0) + 1;
     const max = Math.max(1, ...parMois);
-    document.querySelector('#travail-mois-titre').textContent = `Documents lus par mois en ${annee}`;
+    document.querySelector('#travail-mois-titre').textContent = tr(`Documents lus par mois en ${annee}`, `Documents read by month in ${annee}`);
     const mois = document.querySelector('#travail-mois');
     mois.setAttribute('role', 'img');
     mois.setAttribute('aria-label', parMois.slice(0, dernier).map((n, i) => `${MOIS[i]} ${n}`).join(', '));
@@ -169,16 +176,16 @@
     const bouton = e.target.querySelector('button');
     const etat = document.querySelector('#etat-attente');
     bouton.disabled = true;
-    etat.textContent = 'Envoi…';
+    etat.textContent = tr('Envoi…', 'Sending…');
     const { error } = await client.from('abonnement_liste_attente').insert({ email, ville: VILLES[ville] ? ville : null });
     if (error) {
       console.error(error);
       bouton.disabled = false;
-      etat.textContent = 'Une erreur est survenue. Réessayez.';
+      etat.textContent = tr('Une erreur est survenue. Réessayez.', 'Something went wrong. Try again.');
       return;
     }
     mesurer('liste_attente_abonnement', { ville: VILLES[ville] ? ville : 'aucune' });
-    etat.textContent = `C'est noté : on écrira à ${email} le jour où l'abonnement ouvre.`;
+    etat.textContent = tr(`C'est noté : on écrira à ${email} le jour où l'abonnement ouvre.`, `Got it: we'll write to ${email} the day the subscription opens.`);
     e.target.reset();
   });
 </script>
