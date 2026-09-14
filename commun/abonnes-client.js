@@ -220,10 +220,11 @@ export function rendreDemande(reponse) {
 }
 function contenuDemande(demande) {
   if (demande) {
-    return `<p class="ab-demande-etat"><strong>${demande.parVous ? 'Demandé' : 'Déjà demandé par un abonné'}</strong> le ${echapper(dateFr(new Date(demande.le).toLocaleDateString('en-CA')))} : ce détail sera lu en priorité, normalement ${HEURE_LECTURE}. Revenez voir cette fiche.</p>`;
+    return `<p class="ab-demande-etat">Détail de l’argent ${demande.parVous ? 'demandé' : 'déjà demandé par un abonné'} le ${echapper(dateFr(new Date(demande.le).toLocaleDateString('en-CA')))} : lu en priorité, normalement ${HEURE_LECTURE}.</p>`;
   }
-  // Discret, comme « Signaler une erreur » : un lien, pas un bouton (le bouton vert était trop voyant).
-  return `<p class="ab-demande-ligne">Pas encore de détail de l’argent pour ce dossier. <button type="button" class="ab-demande-lien" data-action="demander-detail" title="On le met en tête de la liste de lecture">Demander ce détail</button>
+  // Exactement comme « Signaler une erreur dans cette fiche » : un lien seul, sans phrase autour
+  // (un bouton vert, puis une phrase grise, étaient de trop).
+  return `<p><button type="button" class="ab-demande-lien" data-action="demander-detail" title="Pas encore lu pour ce dossier : on le met en tête de la liste">Demander le détail de l’argent</button>
     <span class="ab-demande-message" aria-live="polite"></span></p>`;
 }
 export async function demanderDetail(bouton, ville, dossier, s) {
