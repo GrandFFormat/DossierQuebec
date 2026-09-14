@@ -1,0 +1,108 @@
+# Rafraîchissement quotidien du volet Lévis (levis/).
+#
+# Même mécanique que les volets Québec et Montréal : chaque matin, on relance les extractions,
+# et s'il y a du nouveau on committe et on pousse — Vercel redéploie. Tout se passe dans
+# levis/, qui a ses propres scrapers et ses deux dépendances (voir levis/README.md).
+#
+# Secrets et variables (Settings > Secrets and variables > Actions) :
+#   ANTHROPIC_API_KEY  secret — résumés en langage clair. Sans lui, l'étape est sautée et
+#                      le reste tourne.
+#   LEVIS_CONTACT      variable, facultative — ce que notre robot laisse comme contact dans
+#                      son User-Agent auprès de la Ville. À défaut : l'adresse du site.
+
+name: Rafraîchissement quotidien — volet Lévis
+
+on:
+  schedule:
+    # 09:30 UTC, après DossierQuébec (08:00), le volet Québec (08:30) et Montréal (09:00). Le
+    # groupe de concurrence ci-dessous garantit de toute façon qu'ils ne se chevauchent pas.
+    - cron: '30 9 * * *'
+  workflow_dispatch: {} # bouton « Run workflow » pour lancer à la main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    # Quelques minutes en régime établi. Le premier run sans cache relit les procès-verbaux de
+    # l'année (une cinquantaine de PDF) : une vingtaine de minutes.
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: levis
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v5
+
+      - name: Vérifier que le volet est présent
+        id: volet
+        working-directory: .
+        run: |
+          if [ -f levis/package.json ]; then
+            echo "present=oui" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=non" >> "$GITHUB_OUTPUT"
+            echo "::notice::Pas de dossier levis/ sur cette branche — rien à rafraîchir."
+          fi
+
+      - name: Installer Node.js
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Installer les dépendances (SDK Anthropic, pdf.js)
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        run: npm ci --omit=dev
+
+      # Le texte extrait des PDF (data/textes/, hors dépôt) d'un run à l'autre : relire une
+      # séance déjà téléchargée ne redemande rien à la Ville.
+      - name: Restaurer le cache de texte des PDF
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        uses: actions/cache@v4
+        with:
+          path: levis/data/textes
+          key: textes-levis-${{ github.run_id }}
+          restore-keys: |
+            textes-levis-
+
+      - name: Rafraîchir les données municipales
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        id: refresh
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          LEVIS_CONTACT: ${{ vars.LEVIS_CONTACT }}
+        run: |
+          set -o pipefail
+          npm run refresh 2>&1 | tee data/lancement.log
+
+      - name: Committer et pousser s'il y a des changements
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        working-directory: .
+        run: |
+          git config user.name "dossierquebec-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add levis/data
+          if git diff --cached --quiet; then
+            echo "Aucun changement — rien à committer."
+          else
+            git commit -m "Rafraîchissement auto du volet Lévis ($(date -u +%Y-%m-%d))"
+            git pull --rebase
+            git push
+          fi
+
+      - name: Signaler les étapes secondaires en échec
+        if: ${{ steps.volet.outputs.present == 'oui' && steps.refresh.outputs.warnings != '' }}
+        run: |
+          echo "::warning::Étapes secondaires en échec (données de la veille conservées) : ${{ steps.refresh.outputs.warnings }}"
+
+      - name: Alerter si une extraction principale a échoué
+        if: ${{ steps.volet.outputs.present == 'oui' && steps.refresh.outputs.failed != '' }}
+        run: |
+          echo "::error::Extractions en échec (données de la veille conservées) : ${{ steps.refresh.outputs.failed }}"
+          exit 1

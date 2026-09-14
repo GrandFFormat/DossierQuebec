@@ -16,7 +16,7 @@
 // (une adresse, ou plusieurs séparées par des virgules).
 
 const SUJETS = { idee: 'Idée', suggestion: 'Suggestion', probleme: 'Problème sur le site', erreur: 'Erreur dans une donnée' };
-const VILLES = { quebec: 'Québec', montreal: 'Montréal' };
+const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis' };
 const PAR_JOUR = 5;
 const SITE = 'https://dossierquebec.ca';
 

@@ -20,7 +20,7 @@
 // L'abonnement est vérifié ici, côté serveur, avec la clé service_role ; le navigateur ne voit
 // jamais la table.
 
-const VILLES = new Set(['quebec', 'montreal']);
+const VILLES = new Set(['quebec', 'montreal', 'levis']);
 const DOSSIER = /^[\w.\-]{1,120}$/;
 
 const NATURES = {

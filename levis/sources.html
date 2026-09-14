@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
+<meta name="robots" content="noindex, nofollow">
+<title>Sources — DossierVilleDeLévis</title>
+<meta name="description" content="D'où viennent les données de DossierVilleDeLévis, comment les votes enregistrés et les résumés sont produits, et ce que ce prototype ne fait pas encore.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvq:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="/commun/abonnes.css">
+</head>
+<body data-page="sources" data-ville="levis">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="./"><h1>Dossier<span class="marque">VilleDeLévis</span></h1></a>
+      <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
+      <a class="retour-dq" href="https://dossierquebec.ca/" title="Retour à DossierQuébec" aria-label="Retour à DossierQuébec">DQ</a>
+      <details class="ab-villes" id="villes"></details>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Lévis, lisibles. Données publiques, reprises telles quelles
+      des procès-verbaux officiels de la Ville.
+    </p>
+    <nav>
+      <a href="./">Accueil</a>
+      <a href="decisions.html">Décisions</a>
+      <a href="votes.html">Votes nominatifs</a>
+      <a href="conseil.html">Conseil municipal</a>
+      <a href="lexique.html">Lexique</a>
+      <a href="https://levis.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Lévis (nouvel onglet)">Ville de Lévis ↗</a>
+      <a href="sources.html" aria-current="page">Sources</a>
+      <div class="outils">
+        <div class="taille-texte" role="group" aria-label="Taille du texte">
+          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+          <span id="texte-pct" aria-live="polite">100%</span>
+          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+        </div>
+        <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+                title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu prose">
+  <div id="chargement" class="avis" hidden></div>
+
+  <h2 class="page">Sources</h2>
+  <p class="chapeau">
+    Ce site n'est pas la Ville de Lévis et n'a aucun caractère officiel. En cas de différence,
+    le document PDF d'origine fait foi — il est à un clic sur chaque fiche.
+  </p>
+
+  <h3>D'où viennent les données</h3>
+  <ul>
+    <li>Les décisions, les votes et les présences viennent des <strong>procès-verbaux</strong> que la
+      Ville publie en PDF pour chaque séance du conseil de la Ville, du comité exécutif et des trois
+      conseils d'arrondissement, listés sur la page
+      <a href="https://levis.ca/fr/ville/conseil-municipal/seances-du-conseil-municipal/archives-des-seances-du-conseil-municipal" target="_blank" rel="noopener">«&nbsp;Archives des séances du conseil municipal&nbsp;»</a>.
+      La liste des séances est lue comme la page la lit elle-même, auprès du site de la Ville.</li>
+    <li>Les résumés sont produits à partir du <strong>sommaire décisionnel</strong> («&nbsp;document d'aide
+      à la décision&nbsp;») que chaque résolution cite, atteint par le lien que porte le procès-verbal.</li>
+    <li>Les membres du conseil et leurs fonctions viennent de la page
+      <a href="https://levis.ca/fr/ville/conseil-municipal/membres-du-conseil-municipal" target="_blank" rel="noopener">«&nbsp;Membres du conseil municipal&nbsp;»</a>&nbsp;;
+      le parti et l'arrondissement, des résultats de l'élection du 2 novembre 2025 publiés sur la page
+      <a href="https://levis.ca/fr/ville/organisation-municipale/elections" target="_blank" rel="noopener">«&nbsp;Élections&nbsp;»</a>.</li>
+    <li>Les contours des districts viennent du jeu de données ouvert
+      <a href="https://www.donneesquebec.ca/recherche/dataset/districts-electoraux-levis" target="_blank" rel="noopener">«&nbsp;Districts électoraux&nbsp;»</a>
+      de la Ville (Données Québec, licence CC-BY&nbsp;4.0). Ce jeu date de 2022&nbsp;: la carte est indicative.</li>
+    <li>Le contenu du site de la Ville est «&nbsp;tous droits réservés&nbsp;»&nbsp;; les procès-verbaux sont des
+      documents publics, repris ici avec mention de la source, un lien vers l'original et sans usage commercial.</li>
+  </ul>
+
+  <h3>Ce qu'une machine fait, et ce qu'elle peut rater</h3>
+  <ul>
+    <li><strong>Les résumés</strong> sont écrits par une intelligence artificielle à partir du
+      sommaire décisionnel — la note que l'administration rédige avant chaque décision. Elle a pour
+      consigne de n'ajouter aucune information absente du document et de ne porter aucun jugement.</li>
+    <li><strong>Les noms des votants</strong> sont extraits du texte des procès-verbaux, pas d'un
+      registre. La Ville n'imprime pas de décompte&nbsp;: chaque nom est recoupé avec la liste des
+      présences de la séance, et le résultat avec celui que déclare le président. Tout écart est
+      affiché sur la fiche plutôt que corrigé en silence.</li>
+    <li><strong>Le découpage des procès-verbaux en résolutions</strong> repose sur la mise en page de la
+      Ville&nbsp;: le numéro de résolution et son objet sont en gras. Une séance dont aucune résolution
+      n'est reconnue est signalée dans l'état des données, jamais remplie à la main.</li>
+    <li><strong>Les pastilles de sujet</strong> et le type de point (dépôt, avis de motion, règlement…)
+      n'existent pas dans les données de la Ville&nbsp;: c'est un classement ajouté ici, d'après les mots
+      de l'objet de chaque décision.</li>
+  </ul>
+
+  <h3>Trois choses à savoir</h3>
+  <ul>
+    <li>Le site ne montre que <strong>l'année en cours</strong>. Les années précédentes sont
+      conservées à part.</li>
+    <li>Un vote nominatif n'a lieu que si un membre le demande. <strong>L'absence de vote
+      nominatif ne veut pas dire qu'il y a eu consensus.</strong></li>
+    <li>Une décision n'apparaît qu'une fois le procès-verbal de sa séance publié par la Ville.
+      Les séances récentes peuvent donc manquer&nbsp;: l'état des données, ci-dessous, dit combien
+      attendent encore leur procès-verbal.</li>
+  </ul>
+  <h3>État des données</h3>
+  <div id="etat-donnees"></div>
+  <div id="etat-archive"></div>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Lévis, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi.</p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+<script type="module" src="/commun/entete-volet.js"></script>
+<script type="module" src="/commun/abonnes.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
+     Même projet Vercel : les pages vues de /levis/ s'ajoutent au même tableau de
+     bord. En local le script n'existe pas (404 sans conséquence). -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

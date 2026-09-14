@@ -39,6 +39,15 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/levis/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -70,6 +79,11 @@
     {
       "source": "/villedemontreal",
       "destination": "/montreal/",
+      "permanent": true
+    },
+    {
+      "source": "/levis",
+      "destination": "/levis/",
       "permanent": true
     }
   ]

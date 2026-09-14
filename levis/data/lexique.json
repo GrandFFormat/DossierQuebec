@@ -1,0 +1,578 @@
+{
+ "generatedAt": "2026-09-14T22:54:04.872Z",
+ "source": "https://levis.ca/fr/ville/conseil-municipal/seances-du-conseil-municipal/archives-des-seances-du-conseil-municipal",
+ "avertissement": "Les définitions de ce lexique sont rédigées par DossierVille — ce ne sont pas des textes de la Ville de Lévis ni des définitions légales. Ce qui vient des documents officiels, ce sont les décomptes et les exemples, mesurés sur les procès-verbaux de l'année.",
+ "categories": {
+  "documents": "Les documents",
+  "instances": "Qui décide",
+  "vote": "Voter et adopter",
+  "urbanisme": "Urbanisme",
+  "argent": "L'argent et les contrats"
+ },
+ "parametres": {
+  "annee": "2026",
+  "procesVerbauxMesures": 50
+ },
+ "nombre": 29,
+ "entrees": [
+  {
+   "terme": "Résolution",
+   "categorie": "documents",
+   "recherche": "\\b(?:CV|CE)\\d{4}\\b|\\bCA(?:D|CCE|CCO)-\\d{4}-\\d{4}\\b",
+   "definition": "La décision elle-même, consignée au procès-verbal. À Lévis, son numéro dit quelle instance l'a prise : CV3490 pour le conseil de la Ville, CE3302 pour le comité exécutif, CAD-2026-0218, CACCE-2026-… ou CACCO-2026-… pour les trois conseils d'arrondissement.",
+   "ouVousLeVoyez": "Chaque fiche de la page Décisions est une résolution lue dans le procès-verbal officiel.",
+   "occurrences": {
+    "procesVerbaux": 50,
+    "resolutions": 347,
+    "pourAnnee": "2026",
+    "total": 347
+   },
+   "exemple": {
+    "numero": "CV3529",
+    "objet": "Modification de la résolution CV3491 « Autorisation de participation de deux représentants désignés de la Ville à une mission économique en Allemagne et en Italie organisée par Naval Québec et financement afférent »",
+    "date": "2026-07-14",
+    "type": "Résolution",
+    "instance": "Conseil de la Ville",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV-CV-2026-07-14-sans-Projet.pdf#page=4"
+   }
+  },
+  {
+   "terme": "Document d’aide à la décision",
+   "aussi": "sommaire décisionnel",
+   "categorie": "documents",
+   "recherche": "document d['’]aide à la d[ée]cision|sommaire d[ée]cisionnel",
+   "definition": "La note que l'administration rédige avant la décision, pour l'expliquer aux élus : la situation, la recommandation, l'analyse, l'échéancier, les incidences financières. Son identifiant nomme la direction qui l'a préparé et l'année : FIN-2026-035 pour les Finances, URBA-SAT-2026-086 pour l'urbanisme.",
+   "ouVousLeVoyez": "Écrit sous le titre de la résolution (« Document d'aide à la décision FIN-2026-035 ») et relié au PDF du sommaire. Les résumés en langage clair du site sont produits à partir de ce document.",
+   "occurrences": {
+    "procesVerbaux": 28,
+    "resolutions": 911,
+    "pourAnnee": "2026",
+    "total": 911
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Procès-verbal",
+   "categorie": "documents",
+   "recherche": "proc[èe]s-verbal",
+   "definition": "Le compte rendu officiel d'une séance : qui était présent, ce qui a été décidé et, quand le vote a été appelé, qui a voté quoi. Il est approuvé à la séance suivante, puis publié.",
+   "ouVousLeVoyez": "C'est la source de toutes les décisions et de tous les votes du site. Un par séance, en PDF, sur le site de la Ville.",
+   "occurrences": {
+    "procesVerbaux": 44,
+    "resolutions": 89,
+    "pourAnnee": "2026",
+    "total": 89
+   },
+   "exemple": {
+    "numero": "CV3606",
+    "objet": "Approbation du procès-verbal du conseil de la Ville de la séance du 14 juillet 2026",
+    "date": "2026-08-25",
+    "type": "Procédure",
+    "instance": "Conseil de la Ville",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV-CV-2026-08-25-CV3600-a-CV3637.pdf#page=2"
+   }
+  },
+  {
+   "terme": "Ordre du jour",
+   "categorie": "documents",
+   "recherche": "ordre du jour",
+   "definition": "La liste des sujets qu'une séance doit traiter. Il est adopté en ouverture de séance, et la période de questions du conseil porte sur ses sujets.",
+   "ouVousLeVoyez": "« Adoption de l'ordre du jour » est presque toujours la deuxième résolution d'une séance.",
+   "occurrences": {
+    "procesVerbaux": 49,
+    "resolutions": 62,
+    "pourAnnee": "2026",
+    "total": 62
+   },
+   "exemple": {
+    "numero": "CV3601",
+    "objet": "Adoption de l’ordre du jour",
+    "date": "2026-08-25",
+    "type": "Procédure",
+    "instance": "Conseil de la Ville",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV-CV-2026-08-25-CV3600-a-CV3637.pdf#page=1"
+   }
+  },
+  {
+   "terme": "Avis de motion",
+   "categorie": "documents",
+   "recherche": "avis de motion",
+   "definition": "L'annonce qu'un règlement sera adopté à une séance suivante. Ça ne décide rien : ça prévient. C'est une étape obligatoire avant d'adopter un règlement, souvent accompagnée du dépôt du projet de règlement.",
+   "ouVousLeVoyez": "Sur la page Décisions, le type « Avis de motion ».",
+   "occurrences": {
+    "procesVerbaux": 23,
+    "resolutions": 121,
+    "pourAnnee": "2026",
+    "total": 121
+   },
+   "exemple": {
+    "numero": "CV3629",
+    "objet": "Avis de motion du Règlement RV3626 décrétant des emprunts pour financer les dépenses relatives à l’acquisition de véhicules incendie et dépôt du projet de règlement",
+    "date": "2026-08-25",
+    "type": "Avis de motion",
+    "instance": "Conseil de la Ville",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV-CV-2026-08-25-CV3600-a-CV3637.pdf#page=13"
+   }
+  },
+  {
+   "terme": "Règlement",
+   "categorie": "documents",
+   "recherche": "\\bR[èe]glement RV",
+   "definition": "La forme la plus contraignante d'une décision municipale : une norme générale qui s'applique à tous. À Lévis, les règlements sont numérotés RV (RV3590) ou, pour les plus anciens, RV-année-… (RV-2011-11-23 sur le zonage et le lotissement).",
+   "ouVousLeVoyez": "« Adoption du Règlement RV… » : type « Règlement » sur la page Décisions. Un « projet de règlement » en est l'étape précédente.",
+   "occurrences": {
+    "procesVerbaux": 41,
+    "resolutions": 738,
+    "pourAnnee": "2026",
+    "total": 738
+   },
+   "exemple": {
+    "numero": "CV3626",
+    "objet": "Adoption du Règlement RV3622 modifiant le Règlement RV3586 fixant pour l’année 2026 le montant maximal des dépenses prévues pour l’acquisition d’immeubles à des fins industrielles, para-industrielles ou de recherche",
+    "date": "2026-08-25",
+    "type": "Règlement",
+    "instance": "Conseil de la Ville",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV-CV-2026-08-25-CV3600-a-CV3637.pdf#page=11"
+   }
+  },
+  {
+   "terme": "Dépôt",
+   "categorie": "documents",
+   "recherche": "\\bd[ée]pos[ée]e?s?\\b",
+   "definition": "Un document présenté à l'instance pour information ou pour rendre des comptes (listes de contrats, virements de fonds, rapports de commissions). Rien n'est décidé : il est « déposé ».",
+   "ouVousLeVoyez": "« …est déposé, à titre de reddition de compte et d'information » : type « Dépôt » sur la page Décisions.",
+   "occurrences": {
+    "procesVerbaux": 29,
+    "resolutions": 133,
+    "pourAnnee": "2026",
+    "total": 133
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Conseil de la Ville",
+   "aussi": "conseil municipal",
+   "categorie": "instances",
+   "recherche": "conseil de la Ville",
+   "definition": "L'instance qui adopte les règlements, le budget et les décisions les plus importantes. À Lévis : le maire et 15 conseillères et conseillers, un par district. Ses séances sont publiques.",
+   "ouVousLeVoyez": "Ses résolutions portent le préfixe CV. C'est la seule instance dont les votes sont nommés sur la page Votes.",
+   "occurrences": {
+    "procesVerbaux": 28,
+    "resolutions": 766,
+    "pourAnnee": "2026",
+    "total": 766
+   },
+   "exemple": {
+    "numero": "CV3606",
+    "objet": "Approbation du procès-verbal du conseil de la Ville de la séance du 14 juillet 2026",
+    "date": "2026-08-25",
+    "type": "Procédure",
+    "instance": "Conseil de la Ville",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV-CV-2026-08-25-CV3600-a-CV3637.pdf#page=2"
+   }
+  },
+  {
+   "terme": "Comité exécutif",
+   "categorie": "instances",
+   "recherche": "comit[ée] ex[ée]cutif",
+   "definition": "Un petit groupe d'élus présidé par le maire, qui prépare les dossiers du conseil et décide de ce qui lui est délégué (contrats, aides financières, gestion courante). Beaucoup de dossiers passent par lui avant d'aller au conseil de la Ville.",
+   "ouVousLeVoyez": "Préfixe CE. « Il est résolu de recommander au conseil de la Ville… » : le dossier poursuit sa route au conseil.",
+   "occurrences": {
+    "procesVerbaux": 28,
+    "resolutions": 390,
+    "pourAnnee": "2026",
+    "total": 390
+   },
+   "exemple": {
+    "numero": "CV3607",
+    "objet": "Dépôt du procès-verbal du comité exécutif des séances des 7, 13 et 31 juillet 2026",
+    "date": "2026-08-25",
+    "type": "Dépôt",
+    "instance": "Conseil de la Ville",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV-CV-2026-08-25-CV3600-a-CV3637.pdf#page=2"
+   }
+  },
+  {
+   "terme": "Conseil d'arrondissement",
+   "categorie": "instances",
+   "recherche": "conseil d['’]arrondissement",
+   "definition": "Lévis compte trois arrondissements — Desjardins, Chutes-de-la-Chaudière-Est et Chutes-de-la-Chaudière-Ouest — et chacun a son conseil, formé des élus de ses districts. Il tranche surtout des questions d'urbanisme de proximité.",
+   "ouVousLeVoyez": "Préfixes CAD, CACCE et CACCO. Page Conseil municipal : leur composition, lue dans les listes de présences.",
+   "occurrences": {
+    "procesVerbaux": 21,
+    "resolutions": 128,
+    "pourAnnee": "2026",
+    "total": 128
+   },
+   "exemple": {
+    "numero": "CACCO-2026-0001",
+    "objet": "Nomination du président ou de la présidente du conseil d’arrondissement",
+    "date": "2026-01-21",
+    "type": "Résolution",
+    "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/01_Proces_verbal_de_la_seance_extraordinaire_du_21_janvier_2026.pdf#page=1"
+   }
+  },
+  {
+   "terme": "Président du conseil",
+   "categorie": "instances",
+   "recherche": "pr[ée]sident du conseil",
+   "definition": "L'élu qui dirige les séances du conseil de la Ville : il donne la parole, appelle le vote et déclare les résultats. Ce n'est pas le maire.",
+   "ouVousLeVoyez": "« Le président du conseil appelle le vote sur la proposition » : c'est à ce moment qu'un vote nominatif commence.",
+   "occurrences": {
+    "procesVerbaux": 13,
+    "resolutions": 63,
+    "pourAnnee": "2026",
+    "total": 63
+   },
+   "exemple": {
+    "numero": "CV3602",
+    "objet": "Mot de bienvenue du président du conseil",
+    "date": "2026-08-25",
+    "type": "Procédure",
+    "instance": "Conseil de la Ville",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV-CV-2026-08-25-CV3600-a-CV3637.pdf#page=1"
+   }
+  },
+  {
+   "terme": "Greffière",
+   "aussi": "greffier",
+   "categorie": "instances",
+   "recherche": "greffi[èe]re?",
+   "definition": "La fonctionnaire qui tient les registres officiels de la Ville : elle rédige et signe les procès-verbaux, et certifie les documents.",
+   "ouVousLeVoyez": "Nommée dans la liste « Assistent à la séance » de chaque procès-verbal du conseil.",
+   "occurrences": {
+    "procesVerbaux": 29,
+    "resolutions": 199,
+    "pourAnnee": "2026",
+    "total": 199
+   },
+   "exemple": {
+    "numero": "CE3215",
+    "objet": "Résolution habilitant la greffière à attester que la Ville ne s’oppose pas à la délivrance d’une autorisation visée à l’article 22 de la Loi sur la qualité de l’environnement (demande d’agrandissement d’un bâtiment agricole, travaux situés au 3815, chemin Pénin, secteur Saint-Jean-Chrysostome)",
+    "date": "2026-07-07",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV-CE-2026-07-07-CE3189-a-CE3278.pdf#page=8"
+   }
+  },
+  {
+   "terme": "Commission",
+   "categorie": "instances",
+   "recherche": "commission (?:des|de la|de l[’']|sur)",
+   "definition": "Un groupe d'élus qui étudie un domaine (finances, eau et environnement, planification du territoire, sécurité urbaine…) et fait des recommandations. Une commission ne décide pas : le comité exécutif ou le conseil tranche.",
+   "ouVousLeVoyez": "« Recommandation formulée par la commission… » dans l'objet d'une résolution.",
+   "occurrences": {
+    "procesVerbaux": 20,
+    "resolutions": 63,
+    "pourAnnee": "2026",
+    "total": 63
+   },
+   "exemple": {
+    "numero": "CE3298",
+    "objet": "Dépôt du rapport de la séance de la commission de la planification intégrée du territoire tenue le 22 juin 2026",
+    "date": "2026-08-11",
+    "type": "Dépôt",
+    "instance": "Comité exécutif",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV-CE-2026-08-11-CE3295-a-CE3330.pdf#page=1"
+   }
+  },
+  {
+   "terme": "Il est proposé par… Appuyé par…",
+   "categorie": "vote",
+   "recherche": "Il est propos[ée] par",
+   "definition": "Au conseil, une proposition doit être présentée par un membre et appuyée par un second avant d'être mise aux voix. Ça ne dit pas comment les autres ont voté.",
+   "ouVousLeVoyez": "En tête du dispositif de chaque résolution du conseil de la Ville et des conseils d’arrondissement.",
+   "occurrences": {
+    "procesVerbaux": 33,
+    "resolutions": 896,
+    "pourAnnee": "2026",
+    "total": 896
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Appeler le vote",
+   "aussi": "vote nominatif",
+   "categorie": "vote",
+   "recherche": "appelle le vote",
+   "definition": "À la demande d'un membre, le président du conseil fait voter nommément : le procès-verbal consigne alors qui vote en faveur et qui vote en défaveur. Sans cette demande, personne n'est nommé.",
+   "ouVousLeVoyez": "La page Votes nominatifs reprend chacun de ces votes. L'absence de vote appelé ne veut pas dire qu'il y a eu consensus.",
+   "occurrences": {
+    "procesVerbaux": 8,
+    "resolutions": 14,
+    "pourAnnee": "2026",
+    "total": 14
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Adoptée à l'unanimité",
+   "categorie": "vote",
+   "recherche": "adopt[ée]e? à l['’]unanimit[ée]",
+   "definition": "Aucun membre présent ne s'y est opposé. C'est la formule de la très grande majorité des résolutions.",
+   "ouVousLeVoyez": "Le résultat affiché sur la plupart des fiches de la page Décisions.",
+   "occurrences": {
+    "procesVerbaux": 33,
+    "resolutions": 875,
+    "pourAnnee": "2026",
+    "total": 875
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Adoptée à la majorité",
+   "categorie": "vote",
+   "recherche": "adopt[ée]e? à la majorit[ée]",
+   "definition": "Au moins un membre a voté contre. Au conseil de la Ville, ça suit un vote appelé, avec les noms. En conseil d'arrondissement, la formule est souvent écrite seule, sans noms.",
+   "ouVousLeVoyez": "Sur la fiche de la décision ; au conseil de la Ville, le détail est sur la page Votes.",
+   "occurrences": {
+    "procesVerbaux": 14,
+    "resolutions": 22,
+    "pourAnnee": "2026",
+    "total": 22
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Proposition d’amendement",
+   "categorie": "vote",
+   "recherche": "proposition d['’]amendement|proposition principale",
+   "definition": "Une modification proposée en séance au texte d'une résolution. On vote d'abord sur l'amendement, puis sur la proposition principale, telle qu'amendée ou non.",
+   "ouVousLeVoyez": "Une même résolution peut alors porter deux votes nominatifs sur la page Votes.",
+   "occurrences": {
+    "procesVerbaux": 3,
+    "resolutions": 3,
+    "pourAnnee": "2026",
+    "total": 3
+   },
+   "exemple": {
+    "numero": "CV3176",
+    "objet": "Proposition accessoire Retrait de la proposition principale relative à la « Proposition afin de créer un sous-comité transpartisan sur la philanthropie comme levier de financement municipal »",
+    "date": "2026-02-24",
+    "type": "Résolution",
+    "instance": "Conseil de la Ville",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/PV_-_CV-2026-02-24__CV3168_a_CV3220.pdf#page=2"
+   }
+  },
+  {
+   "terme": "Conflit d'intérêts",
+   "categorie": "vote",
+   "recherche": "conflit d['’]int[ée]r[êe]ts",
+   "definition": "Un élu qui a un intérêt personnel dans un dossier doit le déclarer et s'abstenir de participer aux discussions et au vote sur ce dossier.",
+   "ouVousLeVoyez": "« …annonce qu'il considère se trouver en conflit d'intérêts concernant ce sujet » dans le procès-verbal.",
+   "occurrences": {
+    "procesVerbaux": 11,
+    "resolutions": 18,
+    "pourAnnee": "2026",
+    "total": 18
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Dérogation mineure",
+   "categorie": "urbanisme",
+   "recherche": "d[ée]rogations? mineures?",
+   "definition": "Une permission d'écart léger au règlement de zonage pour un terrain précis (une marge de recul, une hauteur), accordée par le conseil d'arrondissement quand l'application stricte causerait un préjudice sérieux au propriétaire sans nuire aux voisins.",
+   "ouVousLeVoyez": "« Demande de dérogation mineure – … » : de loin l'objet le plus fréquent en conseil d'arrondissement.",
+   "occurrences": {
+    "procesVerbaux": 18,
+    "resolutions": 100,
+    "pourAnnee": "2026",
+    "total": 100
+   },
+   "exemple": {
+    "numero": "CAD-2026-0222",
+    "objet": "Demande de dérogation mineure – Marge de recul latérale pour un bâtiment principal – 122, rue Paul-Poirier (secteur Lévis) – Lot 3 019 077 du cadastre du Québec",
+    "date": "2026-07-29",
+    "type": "Résolution",
+    "instance": "Conseil d'arrondissement de Desjardins",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/07-Proces_verbal_de_la_seance_ordinaire_du_29_juillet_2026.pdf#page=2"
+   }
+  },
+  {
+   "terme": "PIIA",
+   "aussi": "plan d'implantation et d'intégration architecturale",
+   "categorie": "urbanisme",
+   "recherche": "\\bPIIA\\b|plans? d['’]implantation et d['’]int[ée]gration architecturale",
+   "definition": "Un règlement qui soumet certains travaux (enseignes, rénovations, constructions dans un secteur patrimonial) à l'approbation de leurs plans, selon des objectifs d'apparence et d'intégration au milieu.",
+   "ouVousLeVoyez": "« PIIA - Installation d'une enseigne… » en conseil d'arrondissement.",
+   "occurrences": {
+    "procesVerbaux": 18,
+    "resolutions": 324,
+    "pourAnnee": "2026",
+    "total": 324
+   },
+   "exemple": {
+    "numero": "CAD-2026-0229",
+    "objet": "PIIA - Installation d’une enseigne appliquée – 109-95, route du Président-Kennedy (secteur Lévis) – Vélo coureur Lévis",
+    "date": "2026-07-29",
+    "type": "Résolution",
+    "instance": "Conseil d'arrondissement de Desjardins",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/07-Proces_verbal_de_la_seance_ordinaire_du_29_juillet_2026.pdf#page=6"
+   }
+  },
+  {
+   "terme": "Usage conditionnel",
+   "categorie": "urbanisme",
+   "recherche": "usages? conditionnels?",
+   "definition": "Un usage que le zonage n'autorise pas d'emblée dans une zone, mais que le conseil peut permettre à un endroit précis, à certaines conditions.",
+   "ouVousLeVoyez": "La résolution énumère les conditions ; le droit peut se perdre si elles cessent d'être respectées.",
+   "occurrences": {
+    "procesVerbaux": 5,
+    "resolutions": 13,
+    "pourAnnee": "2026",
+    "total": 13
+   },
+   "exemple": {
+    "numero": "CACCO-2026-0121",
+    "objet": "Usage conditionnel – Installation d’un système d’antennes de télécommunication – 975, chemin Industriel (secteur Saint-Nicolas) – Lot 1 963 877 du cadastre du Québec",
+    "date": "2026-07-22",
+    "type": "Résolution",
+    "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/07-Proces-verbal-de-la-seance-ordinaire-du-22-juillet-2026.pdf#page=5"
+   }
+  },
+  {
+   "terme": "Zonage et lotissement",
+   "categorie": "urbanisme",
+   "recherche": "zonage et (?:le )?lotissement",
+   "definition": "Le règlement qui découpe le territoire en zones et dit ce qu'on peut y construire et y faire, et comment les terrains peuvent être divisés. À Lévis, c'est le Règlement RV-2011-11-23, modifié à répétition.",
+   "ouVousLeVoyez": "« Règlement RV… modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement » dans les objets du conseil.",
+   "occurrences": {
+    "procesVerbaux": 39,
+    "resolutions": 240,
+    "pourAnnee": "2026",
+    "total": 240
+   },
+   "exemple": {
+    "numero": "CV3632",
+    "objet": "Adoption du Second projet de règlement RV3620 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (agrandissement de la zone A1805 à même une partie de la zone H1974, avenue Saint-Augustin, secteur Sainte-Hélène-de-Breakeyville)",
+    "date": "2026-08-25",
+    "type": "Projet de règlement",
+    "instance": "Conseil de la Ville",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV-CV-2026-08-25-CV3600-a-CV3637.pdf#page=14"
+   }
+  },
+  {
+   "terme": "Consultation écrite",
+   "aussi": "assemblée publique de consultation",
+   "categorie": "urbanisme",
+   "recherche": "consultation [ée]crite|assembl[ée]es? publiques? de consultation",
+   "definition": "L'étape où la population peut commenter un projet de règlement d'urbanisme ou une demande (par écrit ou en assemblée) avant que l'instance ne décide.",
+   "ouVousLeVoyez": "« Rapport sur la consultation écrite » en ouverture des séances d'arrondissement.",
+   "occurrences": {
+    "procesVerbaux": 25,
+    "resolutions": 27,
+    "pourAnnee": "2026",
+    "total": 27
+   },
+   "exemple": {
+    "numero": "CE3299",
+    "objet": "Dépôt des rapports des assemblées publiques de consultation tenues par la commission de la planification intégrée du territoire les 2, 7 et 8 juillet 2026",
+    "date": "2026-08-11",
+    "type": "Dépôt",
+    "instance": "Comité exécutif",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV-CE-2026-08-11-CE3295-a-CE3330.pdf#page=2"
+   }
+  },
+  {
+   "terme": "Attribution du contrat",
+   "categorie": "argent",
+   "recherche": "attribu(?:tion|er) (?:du|le|d[’']un) contrat",
+   "definition": "La décision de confier un contrat à une entreprise, habituellement le plus bas soumissionnaire conforme à la suite d'un appel d'offres. Le montant est écrit avant taxes.",
+   "ouVousLeVoyez": "« Il est résolu d'attribuer le contrat… pour une dépense estimée à … $, avant TPS et TVQ ».",
+   "occurrences": {
+    "procesVerbaux": 15,
+    "resolutions": 43,
+    "pourAnnee": "2026",
+    "total": 43
+   },
+   "exemple": {
+    "numero": "CV3620",
+    "objet": "Attribution du contrat relatif aux services professionnels en évaluation foncière pour les immeubles non résidentiels",
+    "date": "2026-08-25",
+    "type": "Résolution",
+    "instance": "Conseil de la Ville",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV-CV-2026-08-25-CV3600-a-CV3637.pdf#page=9"
+   }
+  },
+  {
+   "terme": "Appel d'offres",
+   "categorie": "argent",
+   "recherche": "appel d['’]offres",
+   "definition": "La mise en concurrence publique des entreprises pour un contrat, obligatoire au-delà de certains montants. Il porte un numéro (2026-50-84).",
+   "ouVousLeVoyez": "Entre parenthèses dans la résolution qui attribue le contrat.",
+   "occurrences": {
+    "procesVerbaux": 17,
+    "resolutions": 52,
+    "pourAnnee": "2026",
+    "total": 52
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Aide financière",
+   "categorie": "argent",
+   "recherche": "aide financi[èe]re",
+   "definition": "Une somme versée par la Ville à un organisme ou à un projet, souvent dans le cadre d'un programme, avec un montant maximum.",
+   "ouVousLeVoyez": "« Aide financière à … » dans l’objet ; le montant et le programme dans le dispositif.",
+   "occurrences": {
+    "procesVerbaux": 24,
+    "resolutions": 109,
+    "pourAnnee": "2026",
+    "total": 109
+   },
+   "exemple": {
+    "numero": "CV3613",
+    "objet": "Aide financière à l’Association des personnes handicapées de Lévis inc.",
+    "date": "2026-08-25",
+    "type": "Résolution",
+    "instance": "Conseil de la Ville",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV-CV-2026-08-25-CV3600-a-CV3637.pdf#page=4"
+   }
+  },
+  {
+   "terme": "Réserve financière",
+   "categorie": "argent",
+   "recherche": "r[ée]serve financi[èe]re",
+   "definition": "Une somme mise de côté par règlement pour une fin précise (logement abordable, développement du territoire…), dans laquelle la Ville puise par résolution.",
+   "ouVousLeVoyez": "« …à même la réserve financière pour… » dans le dispositif.",
+   "occurrences": {
+    "procesVerbaux": 17,
+    "resolutions": 42,
+    "pourAnnee": "2026",
+    "total": 42
+   },
+   "exemple": {
+    "numero": "CV3612",
+    "objet": "Affectation de la réserve financière pour les salaires des assignations temporaires du 1 janvier au 30 juin 2026",
+    "date": "2026-08-25",
+    "type": "Résolution",
+    "instance": "Conseil de la Ville",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV-CV-2026-08-25-CV3600-a-CV3637.pdf#page=4"
+   }
+  },
+  {
+   "terme": "Virement de fonds",
+   "categorie": "argent",
+   "recherche": "virements? de fonds",
+   "definition": "Le déplacement de crédits d'un poste budgétaire à un autre en cours d'année. Les listes sont déposées au conseil, pour information.",
+   "ouVousLeVoyez": "« Dépôt des listes de virements de fonds pour la période du… ».",
+   "occurrences": {
+    "procesVerbaux": 9,
+    "resolutions": 12,
+    "pourAnnee": "2026",
+    "total": 12
+   },
+   "exemple": {
+    "numero": "CV3476",
+    "objet": "Dépôt des listes de virements de fonds pour la période du 1 au 30 avril 2026 et des crédits additionnels pour la même période",
+    "date": "2026-06-16",
+    "type": "Dépôt",
+    "instance": "Conseil de la Ville",
+    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/2026/PV-CV-2026-06-16-CV3465-a-CV3520.pdf#page=3"
+   }
+  }
+ ]
+}
