@@ -29,7 +29,7 @@ create policy "suivis : ajouter les siens" on public.dossiers_suivis for insert 
 create policy "suivis : retirer les siens" on public.dossiers_suivis for delete using (auth.uid() = user_id);
 
 -- Garde-fou : pas plus de 500 dossiers suivis par compte.
-create or replace function public.limite_dossiers_suivis() returns trigger language plpgsql as $$
+create or replace function public.limite_dossiers_suivis() returns trigger language plpgsql set search_path = '' as $$
 begin
   if (select count(*) from public.dossiers_suivis where user_id = new.user_id) >= 500 then
     raise exception 'limite de 500 dossiers suivis atteinte';
@@ -60,7 +60,8 @@ create table public.abonnement_liste_attente (
   created_at timestamptz not null default now()
 );
 alter table public.abonnement_liste_attente enable row level security;
-create policy "liste d'attente : s'inscrire" on public.abonnement_liste_attente for insert to anon, authenticated with check (true);
+create policy "liste d'attente : s'inscrire" on public.abonnement_liste_attente for insert to anon, authenticated
+  with check (length(email) <= 200 and email ~* '^[^@\s]+@[^@\s]+\.[^@\s]+$' and (ville is null or ville ~ '^[a-z-]{2,40}$'));
 -- Aucune politique de lecture : la liste ne se consulte que depuis le tableau de bord Supabase.
 
 -- ---------- détail de l'argent ----------

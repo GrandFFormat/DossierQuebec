@@ -17,7 +17,7 @@ create policy "mots-clés : lire les siens" on public.alertes_mots_cles for sele
 create policy "mots-clés : ajouter les siens" on public.alertes_mots_cles for insert with check (auth.uid() = user_id);
 create policy "mots-clés : retirer les siens" on public.alertes_mots_cles for delete using (auth.uid() = user_id);
 
-create or replace function public.limite_mots_cles() returns trigger language plpgsql as $$
+create or replace function public.limite_mots_cles() returns trigger language plpgsql set search_path = '' as $$
 begin
   if (select count(*) from public.alertes_mots_cles where user_id = new.user_id) >= 20 then
     raise exception 'limite de 20 mots-clés atteinte';
