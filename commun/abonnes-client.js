@@ -29,6 +29,21 @@ export const mesurer = (nom, donnees = {}) => {
   } catch {}
 };
 
+// La flèche « retour en haut » des pages communes, comme dans les volets : elle n'apparaît
+// qu'une fois qu'on a vraiment descendu.
+export function boutonRetourEnHaut() {
+  const bouton = document.createElement('button');
+  bouton.type = 'button';
+  bouton.className = 'ab-retour-haut';
+  bouton.setAttribute('aria-label', 'Revenir en haut de la page');
+  bouton.textContent = '↑';
+  document.body.appendChild(bouton);
+  const majVisible = () => bouton.classList.toggle('visible', window.scrollY > 600);
+  window.addEventListener('scroll', majVisible, { passive: true });
+  majVisible();
+  bouton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
 export async function session() {
   const { data } = await client.auth.getSession();
   return data.session ?? null;

@@ -226,6 +226,17 @@
 .ab-page .ab-barre span { display: block; height: 100%; border-radius: 5px; }
 .ab-page .ab-barre-n { text-align: right; color: var(--doux); font-variant-numeric: tabular-nums; }
 
+/* Retour en haut (pages communes), comme .haut dans les volets. */
+.ab-page .ab-retour-haut {
+  position: fixed; right: 18px; bottom: 18px; z-index: 20;
+  width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--ligne-forte);
+  background: var(--carte); color: var(--encre); font: inherit; font-size: 20px; line-height: 1; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .18); opacity: 0; transform: translateY(8px); pointer-events: none;
+  transition: opacity .18s, transform .18s;
+}
+.ab-page .ab-retour-haut.visible { opacity: 1; transform: none; pointer-events: auto; }
+.ab-page .ab-retour-haut:hover { border-color: var(--accent); color: var(--accent); }
+
 /* Page Abonnement : le travail derrière le site. */
 .ab-page .ab-travail .ab-tuile strong { font-size: 26px; }
 .ab-page .ab-travail .ab-mois-n { font-size: 10px; }
