@@ -47,9 +47,13 @@
 </div>
 
 <script type="module">
-  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, mesurer, formulaireMessage, boutonRetourEnHaut, enteteCommune } from '/commun/abonnes-client.js';
-  boutonRetourEnHaut();
+  // Sans attendre Supabase : marque du volet, retour, outils (voir commun/navigation.js).
+  import { enteteCommune, boutonRetourEnHaut } from '/commun/navigation.js';
   enteteCommune();
+  boutonRetourEnHaut();
+</script>
+<script type="module">
+  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, mesurer, formulaireMessage } from '/commun/abonnes-client.js';
 
   const $ = (s) => document.querySelector(s);
 
