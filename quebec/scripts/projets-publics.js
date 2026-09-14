@@ -256,11 +256,30 @@ const MOT_NOM = "(?:[A-ZÀ-Ý0-9][\\p{L}0-9'’&.\\-]*|de|du|des|la|le|les|et|d'
 const FORME_JURIDIQUE = new RegExp(`(${MOT_NOM}(?:\\s+${MOT_NOM}){0,8},?\\s+(?:inc\\.|ltée|limitée|s\\.e\\.n\\.c\\.|S\\.E\\.N\\.C\\.|S\\.E\\.C\\.))`, 'gu');
 const ORGANISME = /l['’]organisme\s+«?\s*([A-ZÀ-Ý][^,;()«»]{2,80}?)\s*»?(?=\s+(?:relativement|dans le cadre|pour|afin|concernant|visant|en vue)\b|[,;().]|$)/gu;
 const candidats = new Map();
+const nettoyerNom = (brut) => {
+  let nom = brut.replace(/\s+/g, ' ').trim();
+  // La fin d'une phrase avalée : « Chutes Montmorency et Orsainville. Gazon 911 inc. » → « Gazon 911
+  // inc. » (un mot d'au moins 3 lettres suivi d'un point ; « P.E. Pageau » n'est pas touché).
+  nom = nom.replace(/^.*\p{L}{3,}\.\s+(?=[\p{Lu}0-9])/u, '');
+  // Une entente « entre la Ville de Québec et X » : on garde X.
+  nom = nom.replace(/^(?:la\s+)?Ville(?:\s+de\s+[\p{Lu}][\p{L}-]+)?\s+et\s+/u, '');
+  // Articles et prépositions en minuscules du début (« à Pagui inc. », « de Villéco inc. », « le
+  // Patro… ») ; « Les Excavations Lafontaine », avec majuscule, fait partie du nom.
+  let avant;
+  do { avant = nom; nom = nom.replace(/^(?:\d{4}\.?\s+|(?:de|du|des|la|le|les|et|à|en|pour|sur|par|avec|au|aux)\s+|[dl]['’])/u, ''); } while (nom !== avant);
+  // La suite d'une phrase après « l'organisme X » : « Canards Illimités Canada la conception des plans ».
+  nom = nom.replace(/\s+(?:(?:la|le|les|relative|relatif|pour|afin)\s+|l['’])\p{Ll}.*$/u, '');
+  return nom.replace(/[ ,]+$/, '').trim();
+};
 const noter = (brut, numero) => {
-  const nom = brut.replace(/^(?:\d{4}\.\s*)/, '').replace(/^(?:de|du|des|la|le|les|et|d'|l'|à|en|pour|sur)\s+/i, '').replace(/\s+/g, ' ').replace(/[ ,]+$/, '').trim();
+  const nom = nettoyerNom(brut);
   const mots = nom.replace(/\b(?:inc|ltée|limitée|s\.e\.n\.c|s\.e\.c)\.?$/i, '').trim().split(/\s+/).filter(Boolean);
-  // Au moins deux mots, ou un nom-numéro (« 3559840 Canada inc. ») ; jamais un seul nom de lieu.
-  if (nom.length < 5 || nom.length > 90 || (mots.length < 2 && !/^\d/.test(nom)) || /^(?:Québec|Canada|Ville)\b.{0,6}$/i.test(nom)) return;
+  // Au moins deux mots, ou un seul avec sa forme juridique (« Pagui inc. »), ou un nom-numéro ;
+  // jamais un seul nom de lieu ni un bout de phrase avec un montant.
+  const formeJuridique = /\s(?:inc|ltée|limitée|s\.e\.n\.c|s\.e\.c)\.?$/i.test(nom);
+  if (nom.length < 5 || nom.length > 90 || (mots.length < 2 && !/^\d/.test(nom) && !(formeJuridique && mots[0]?.length >= 4)) || /^(?:Québec|Canada|Ville)\b.{0,6}$/i.test(nom) || /\$|\d \d{3}/.test(nom) || /\s(?:et|de|du|des)$/i.test(nom)
+    // Un bout coupé : « Association Y », « Loisirs des Hauts-Sentiers L », « Fonds 2 ».
+    || /\s\p{Lu}$/u.test(nom) || /^\S+\s\d$/u.test(nom)) return;
   // « Loisirs Montcalm inc. » et « Loisirs Montcalm inc », « Tétra Tech » et « Tetra Tech » : un seul.
   const cle = sansAccents(nom).replace(/[’']/g, "'").replace(/[.\s]+$/, '');
   if (!candidats.has(cle)) candidats.set(cle, { graphies: new Map(), dossiers: new Set() });
@@ -273,8 +292,12 @@ for (const d of annee) {
   for (const m of texte.matchAll(FORME_JURIDIQUE)) noter(m[1], d.numero);
   for (const m of texte.matchAll(ORGANISME)) noter(m[1], d.numero);
 }
-const organismes = [...candidats.values()]
-  .map((c) => ({ nom: [...c.graphies].sort((a, b) => b[1] - a[1])[0][0], dossiers: c.dossiers.size }))
+// « Fortier inc. » n'est que la fin de « Charles-Auguste Fortier inc. », « St-Sacrement inc. » celle de
+// « Centre des Loisirs St-Sacrement inc. » (un mot en minuscules a coupé le repérage) : on les écarte.
+const cles = [...candidats.keys()];
+const organismes = [...candidats.entries()]
+  .filter(([cle]) => !cles.some((autre) => autre !== cle && autre.endsWith(` ${cle}`)))
+  .map(([, c]) =>({ nom: [...c.graphies].sort((a, b) => b[1] - a[1])[0][0], dossiers: c.dossiers.size }))
   .sort((a, b) => b.dossiers - a.dossiers || a.nom.localeCompare(b.nom, 'fr'));
 await writeFile('data/organismes.json', JSON.stringify({ generatedAt: new Date().toISOString(), avertissement: 'Suggestions repérées automatiquement dans les objets et les résumés ; imparfaites.', organismes }), 'utf8');
 console.log(`Dossiers de l'année : ${annee.length} · ${(texteAnnee.length / 1024).toFixed(0)} Ko · organismes suggérés : ${organismes.length}.`);
