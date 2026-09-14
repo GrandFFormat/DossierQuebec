@@ -222,9 +222,9 @@ function contenuDemande(demande) {
   if (demande) {
     return `<p class="ab-demande-etat"><strong>${demande.parVous ? 'Demandé' : 'Déjà demandé par un abonné'}</strong> le ${echapper(dateFr(new Date(demande.le).toLocaleDateString('en-CA')))} : ce détail sera lu en priorité, normalement ${HEURE_LECTURE}. Revenez voir cette fiche.</p>`;
   }
-  return `<p class="ab-note" style="margin:0 0 8px">Pas encore de détail de l’argent pour ce dossier : il est lu d’office pour les grands projets et les nouvelles décisions. Vous le voulez ? On le met en tête de la liste.</p>
-    <button type="button" class="ab-bouton ab-bouton-second" data-action="demander-detail">Demander ce détail</button>
-    <span class="ab-note ab-demande-message" aria-live="polite"></span>`;
+  // Discret, comme « Signaler une erreur » : un lien, pas un bouton (le bouton vert était trop voyant).
+  return `<p class="ab-demande-ligne">Pas encore de détail de l’argent pour ce dossier. <button type="button" class="ab-demande-lien" data-action="demander-detail" title="On le met en tête de la liste de lecture">Demander ce détail</button>
+    <span class="ab-demande-message" aria-live="polite"></span></p>`;
 }
 export async function demanderDetail(bouton, ville, dossier, s) {
   const boite = bouton.closest('.ab-demande');
