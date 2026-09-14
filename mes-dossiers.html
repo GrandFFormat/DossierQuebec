@@ -293,7 +293,6 @@
     }
     const lignes = [...parDossier.values()];
     const principalDe = ({ k, docs }) => docs.find((d) => d.id === k) ?? docs[0];
-    const MONTRES = 15;
 
     // Les chiffres : calculés ici, jamais par l'IA.
     const annee = (docs.map((d) => d.date).filter(Boolean).sort().pop() ?? new Date().toISOString()).slice(0, 4);
@@ -348,9 +347,8 @@
       const resume = resumeDe.get(k);
       const instances = [...new Set(docs.map((d) => d.instance).filter(Boolean))];
       return `<li class="ab-ligne-projet">
-        <div class="ab-meta"><span>${dateFr(docs[0].date)}</span>${instances.length ? `<span>${echapper(instances.join(' · '))}</span>` : '<span>sommaire</span>'}${pastilleStatut(principal)}</div>
+        <div class="ab-meta">${principal.numero ? refNumero(principal.numero) : ''}<span>${dateFr(docs[0].date)}</span>${instances.length ? `<span>${echapper(instances.join(' · '))}</span>` : '<span>sommaire</span>'}${pastilleStatut(principal)}</div>
         <div>${echapper(resume?.puces?.[0] ?? principal.objet ?? '')}</div>
-        <div class="ab-liens">${principal.pdf ? `<a href="${echapper(principal.pdf)}" target="_blank" rel="noopener">${echapper(principal.numero ?? 'PDF')} ↗</a>` : ''}</div>
       </li>`;
     };
     corps.innerHTML = `${projet?.description ? `<p class="ab-note" style="margin-top:0">${echapper(projet.description)}</p>` : ''}
@@ -359,7 +357,7 @@
       ${lignes.length ? `<div class="ab-graphiques">${graphiqueMois}${graphiqueThemes}</div>` : ''}
       ${blocAttente}
       ${lignes.length
-        ? `<details class="ab-toutes"><summary>Les décisions les plus récentes <span class="ab-etiquette">${lignes.length} dossier(s)</span></summary><ol class="ab-liste-projet">${lignes.slice(0, MONTRES).map(ligne).join('')}</ol></details>`
+        ? `<details class="ab-toutes"><summary>Toutes les décisions, les plus récentes d'abord <span class="ab-etiquette">${lignes.length} dossier(s)</span></summary><ol class="ab-liste-projet">${lignes.map(ligne).join('')}</ol></details>`
         : "<p class=\"ab-note\">Aucune décision de ce projet dans l'année en cours pour l'instant.</p>"}
       <div class="ab-liens">
         <a href="/${echapper(ville)}/decisions.html?projet=${encodeURIComponent(cle)}">Voir les ${projet?.n ?? lignes.length} décisions dans le volet ${echapper(VILLES[ville] ?? '')}</a>
