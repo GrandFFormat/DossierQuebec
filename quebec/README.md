@@ -290,6 +290,19 @@ respect de la casse attrapait « remède utile ». Chaque fiche d'un projet affi
 Tramway » ; le suivre met toutes ses décisions dans « Mes dossiers », et
 `decisions.html?projet=tramway` les filtre dans le volet.
 
+**Où en est le projet.** Un projet ouvert dans « Mes dossiers » affiche, du plus lisible au plus
+détaillé : des chiffres (dossiers, résolutions, en attente, dernière décision), le récapitulatif
+« Où en est le projet », les décisions par mois et par thème, ce qui attend une décision, puis la
+liste, repliée. Les chiffres et les graphiques sont calculés dans la page, jamais par l'IA. Le
+récapitulatif vient de `scrapers/recaps-projets.js` → `data/projets-recaps.json` : quelques
+phrases d'ensemble, une ligne du temps de trois à six étapes rattachées aux numéros des décisions,
+et « À surveiller ». Sources : l'objet, le résumé et les résolutions de chaque dossier du projet
+(pas le détail de l'argent). Vérifié sans relecture humaine, comme le détail : chaque numéro cité
+doit appartenir au projet et chaque nombre exister dans les dossiers cités, puis une contre-lecture
+retire ce qui est mal attribué. Un projet n'est refait que si l'un de ses dossiers a changé
+(signature) ; `refresh.js` l'appelle après les résumés. Environ 0,50 $ pour le tramway, 0,20 $
+pour un petit projet ; rien les jours sans nouveauté.
+
 **Le détail ne vit plus dans le dépôt.** Le dépôt GitHub de DossierQuébec est public : un fichier
 versionné est lisible par tous. `data/details.json` reste en local comme cache (`.gitignore`), et
 la copie servie aux abonnés est dans Supabase, publiée par `scripts/publier-details.js` — appelé

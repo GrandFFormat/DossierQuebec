@@ -89,8 +89,8 @@
       <h2 style="margin-top:0">Ce que l'abonnement ajoute à vos dossiers</h2>
       <p class="ab-chapeau" style="margin-bottom:10px">« Mes dossiers » vous montre tout quand vous venez voir. L'abonnement vous dit <strong>quand</strong> il y a quelque chose à voir, et ce que les documents disent de l'argent.</p>
       <ul>
+        <li><strong>Une alerte par courriel quand vos projets bougent</strong> : une nouvelle décision, un dossier qui attend un vote, un récapitulatif mis à jour — et rien les semaines où rien ne bouge. <span class="ab-note">(bientôt)</span></li>
         <li><strong>Le détail de l'argent</strong> sur chaque dossier : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions.</li>
-        <li><strong>Un courriel le vendredi</strong> avec seulement ce qui a bougé dans vos projets et vos dossiers — et rien les semaines où rien ne bouge. <span class="ab-note">(bientôt)</span></li>
         <li><strong>Les décisions annoncées d'avance</strong> : « décision attendue au conseil d'agglomération mercredi », avant la séance plutôt qu'après. <span class="ab-note">(bientôt)</span></li>
         <li><strong>Toutes les villes couvertes</strong>, avec un seul abonnement.</li>
       </ul>
@@ -119,7 +119,7 @@
   async function suggestions(s, suivisIds) {
     const blocs = [];
     for (const ville of Object.keys(VILLES)) {
-      const [decisions, resumes] = await Promise.all([jeu(ville, 'decisions'), jeu(ville, 'resumes')]);
+      const [decisions, resumes, recaps] = await Promise.all([jeu(ville, 'decisions'), jeu(ville, 'resumes'), jeu(ville, 'projets-recaps')]);
       const projets = Object.entries(decisions?.projets ?? {}).filter(([cle, p]) => p.n > 0 && !suivisIds.has(`${ville}|projet:${cle}`));
       if (!projets.length) continue;
       const resumeDe = new Map((resumes?.resumes ?? []).map((r) => [r.id, r]));
@@ -128,12 +128,14 @@
         .map(([cle, p]) => {
           const docs = docsDuProjet(decisions, cle).sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
           const recent = docs[0];
-          const phrase = recent ? resumeDe.get(recent.sommaireId ?? recent.id)?.puces?.[0] ?? recent.objet : '';
+          // Le récapitulatif du projet dit mieux de quoi il s'agit que sa dernière décision.
+          const enBref = recaps?.recaps?.[cle]?.utilisable ? recaps.recaps[cle].enBref : null;
+          const phrase = enBref ?? (recent ? resumeDe.get(recent.sommaireId ?? recent.id)?.puces?.[0] ?? recent.objet : '');
           return `<article class="ab-carte ab-suggestion">
             <div class="ab-meta"><span class="ab-etiquette ab-type-projet">Projet</span><span>${p.n} décision(s) cette année</span>${recent ? `<span>Dernière : ${dateFr(recent.date)}</span>` : ''}</div>
             <h3>${echapper(p.titre)}</h3>
             <p class="ab-note" style="margin:0 0 6px">${echapper(p.description ?? '')}</p>
-            ${phrase ? `<p class="ab-derniere"><strong>Le plus récent :</strong> ${echapper(phrase.length > 220 ? phrase.slice(0, 219) + '…' : phrase)}</p>` : ''}
+            ${phrase ? `<p class="ab-derniere">${enBref ? '' : '<strong>Le plus récent :</strong> '}${echapper(phrase.length > 260 ? phrase.slice(0, 259) + '…' : phrase)}</p>` : ''}
             <div class="ab-liens">
               <button type="button" class="ab-bouton" data-action="suivre-projet" data-ville="${echapper(ville)}" data-cle="${echapper(cle)}" data-titre="${echapper(p.titre)}">☆ Suivre ce projet</button>
               <a href="/${echapper(ville)}/decisions.html?projet=${encodeURIComponent(cle)}">Voir ses décisions</a>
@@ -206,22 +208,96 @@
     </details>`;
   }
 
-  // Un projet ouvert : ses décisions, une ligne par dossier (le sommaire et ses résolutions ne
-  // comptent qu'une fois), les plus récentes d'abord.
+  // Un projet ouvert, du plus lisible au plus détaillé : les chiffres, « Où en est le projet »
+  // (rédigé par IA et vérifié, voir quebec/scrapers/recaps-projets.js), l'activité par mois et
+  // par thème, ce qui attend une décision, puis toutes les décisions, repliées.
+  const MOIS_COURTS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+  const MOIS_ETIQUETTES = ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 'juil', 'aoû', 'sep', 'oct', 'nov', 'déc'];
+  const lienNumero = (ville, n) => `<a class="ab-ref" href="/${echapper(ville)}/decisions.html?q=${encodeURIComponent(n)}">${echapper(n)}</a>`;
+
+  function rendreRecap(r, ville) {
+    if (!r?.utilisable) return '';
+    const etapes = r.etapes.map((e) => `<li>
+        <div class="ab-chrono-periode">${echapper(e.periode)}</div>
+        <div class="ab-chrono-titre">${echapper(e.titre)}</div>
+        <p>${echapper(e.texte)}</p>
+        <div class="ab-refs">${e.numeros.map((n) => lienNumero(ville, n)).join('')}</div>
+      </li>`).join('');
+    const surveiller = r.aSurveiller.map((e) => `<li>${echapper(e.texte)} <span class="ab-refs">${e.numeros.map((n) => lienNumero(ville, n)).join('')}</span></li>`).join('');
+    return `<section class="ab-recap">
+      <div class="ab-detail-titre">Où en est le projet <span class="ab-etiquette">résumé généré par IA</span></div>
+      ${r.enBref ? `<p class="ab-en-bref">${echapper(r.enBref)}</p>` : ''}
+      ${etapes ? `<ol class="ab-chrono">${etapes}</ol>` : ''}
+      ${surveiller ? `<div class="ab-surveiller"><div class="ab-detail-titre">À surveiller</div><ul>${surveiller}</ul></div>` : ''}
+      <p class="ab-note">Rédigé automatiquement à partir des résumés et des résolutions des ${r.dossiers} dossiers du projet, puis vérifié automatiquement : ce qui ne se vérifiait pas a été retiré. Mis à jour le ${dateFr(r.genereLe)}. Les documents officiels font foi.</p>
+    </section>`;
+  }
+
   async function ouvrirProjet(carte, corps) {
     const { ville, dossier } = carte.dataset;
     const cle = dossier.slice(7);
-    const [decisions, resumes] = await Promise.all([jeu(ville, 'decisions'), jeu(ville, 'resumes')]);
+    const [decisions, resumes, recaps] = await Promise.all([jeu(ville, 'decisions'), jeu(ville, 'resumes'), jeu(ville, 'projets-recaps')]);
     const projet = decisions?.projets?.[cle];
     const resumeDe = new Map((resumes?.resumes ?? []).map((r) => [r.id, r]));
+    const docs = docsDuProjet(decisions, cle);
     const parDossier = new Map();
-    for (const d of docsDuProjet(decisions, cle).sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))) {
+    for (const d of [...docs].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))) {
       const k = d.sommaireId ?? d.dossier ?? d.id;
       if (!parDossier.has(k)) parDossier.set(k, { k, docs: [] });
       parDossier.get(k).docs.push(d);
     }
     const lignes = [...parDossier.values()];
+    const principalDe = ({ k, docs }) => docs.find((d) => d.id === k) ?? docs[0];
     const MONTRES = 15;
+
+    // Les chiffres : calculés ici, jamais par l'IA.
+    const annee = (docs.map((d) => d.date).filter(Boolean).sort().pop() ?? new Date().toISOString()).slice(0, 4);
+    const enAttente = lignes.filter((l) => principalDe(l).statutDossier === 'en_cours');
+    const resolutions = docs.filter((d) => d.instance).length;
+    const derniere = docs.map((d) => d.date).filter(Boolean).sort().pop();
+    const tuiles = `<div class="ab-tuiles">
+      <div class="ab-tuile"><strong>${lignes.length}</strong><span>dossiers en ${annee}</span></div>
+      <div class="ab-tuile"><strong>${resolutions}</strong><span>résolutions des conseils</span></div>
+      <div class="ab-tuile${enAttente.length ? ' ab-tuile-attente' : ''}"><strong>${enAttente.length}</strong><span>en attente d'une décision</span></div>
+      ${derniere ? `<div class="ab-tuile"><strong>${dateFr(derniere).replace(/ \d{4}$/, '')}</strong><span>dernière décision</span></div>` : ''}
+    </div>`;
+
+    // Activité par mois : chaque décision (sommaire ou résolution) compte, jusqu'au mois de la dernière.
+    const parMois = Array(12).fill(0);
+    for (const d of docs) if (d.date?.startsWith(annee)) parMois[Number(d.date.slice(5, 7)) - 1]++;
+    const dernierMois = derniere?.startsWith(annee) ? Number(derniere.slice(5, 7)) : 12;
+    const maxMois = Math.max(1, ...parMois);
+    const graphiqueMois = `<div class="ab-bloc"><div class="ab-detail-titre">Décisions par mois</div>
+      <div class="ab-mois" role="img" aria-label="${parMois.slice(0, dernierMois).map((n, i) => `${MOIS_COURTS[i]} ${n}`).join(', ')}">
+        ${parMois.slice(0, dernierMois).map((n, i) => `<div class="ab-mois-col" title="${MOIS_COURTS[i]} ${annee} : ${n} décision(s)">
+          <span class="ab-mois-n">${n || ''}</span><span class="ab-mois-barre" style="height:${Math.round((n / maxMois) * 100)}%"></span><span class="ab-mois-nom">${MOIS_ETIQUETTES[i]}</span>
+        </div>`).join('')}
+      </div></div>`;
+
+    // Par thème : un dossier compte une fois, selon la pastille de son document principal.
+    const themes = new Map();
+    for (const l of lignes) {
+      const t = principalDe(l).theme;
+      if (t) themes.set(t, (themes.get(t) ?? 0) + 1);
+    }
+    const maxTheme = Math.max(1, ...themes.values());
+    const graphiqueThemes = themes.size > 1
+      ? `<div class="ab-bloc"><div class="ab-detail-titre">De quoi il s'agit</div><ul class="ab-barres">
+          ${[...themes].sort((a, b) => b[1] - a[1]).map(([t, n]) => {
+            const info = decisions?.themes?.[t];
+            return `<li><span class="ab-barre-nom">${echapper(info?.libelle ?? t)}</span><span class="ab-barre"><span style="width:${Math.round((n / maxTheme) * 100)}%;background:${/^#[0-9a-f]{6}$/i.test(info?.couleur ?? '') ? info.couleur : 'var(--accent)'}"></span></span><span class="ab-barre-n">${n}</span></li>`;
+          }).join('')}
+        </ul></div>`
+      : '';
+
+    const blocAttente = enAttente.length
+      ? `<div class="ab-bloc"><div class="ab-detail-titre">En attente d'une décision</div><ul class="ab-liste-projet">
+          ${enAttente.map((l) => {
+            const p = principalDe(l);
+            return `<li class="ab-ligne-projet"><div class="ab-meta">${lienNumero(ville, p.numero ?? '')}${pastilleStatut(p)}</div><div>${echapper(resumeDe.get(l.k)?.puces?.[0] ?? p.objet ?? '')}</div></li>`;
+          }).join('')}
+        </ul></div>`
+      : '';
     const ligne = ({ k, docs }) => {
       const principal = docs.find((d) => d.id === k) ?? docs[0];
       const resume = resumeDe.get(k);
@@ -233,9 +309,13 @@
       </li>`;
     };
     corps.innerHTML = `${projet?.description ? `<p class="ab-note" style="margin-top:0">${echapper(projet.description)}</p>` : ''}
-      <div class="ab-bloc"><div class="ab-detail-titre">Les décisions les plus récentes <span class="ab-etiquette">${lignes.length} dossier(s)</span></div>
-        ${lignes.length ? `<ol class="ab-liste-projet">${lignes.slice(0, MONTRES).map(ligne).join('')}</ol>` : "<p class=\"ab-note\">Aucune décision de ce projet dans l'année en cours pour l'instant.</p>"}
-      </div>
+      ${lignes.length ? tuiles : ''}
+      ${rendreRecap(recaps?.recaps?.[cle], ville)}
+      ${lignes.length ? `<div class="ab-graphiques">${graphiqueMois}${graphiqueThemes}</div>` : ''}
+      ${blocAttente}
+      ${lignes.length
+        ? `<details class="ab-toutes"><summary>Les décisions les plus récentes <span class="ab-etiquette">${lignes.length} dossier(s)</span></summary><ol class="ab-liste-projet">${lignes.slice(0, MONTRES).map(ligne).join('')}</ol></details>`
+        : "<p class=\"ab-note\">Aucune décision de ce projet dans l'année en cours pour l'instant.</p>"}
       <div class="ab-liens">
         <a href="/${echapper(ville)}/decisions.html?projet=${encodeURIComponent(cle)}">Voir les ${projet?.n ?? lignes.length} décisions dans le volet ${echapper(VILLES[ville] ?? '')}</a>
         <button type="button" class="ab-lien-bouton" data-action="retirer">Ne plus suivre ce projet</button>

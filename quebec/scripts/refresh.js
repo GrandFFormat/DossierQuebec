@@ -75,6 +75,12 @@ const ETAPES = [
           argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scrapers/resumes.js', `--depuis=${depuis}`, `--plafond=${plafond}`],
           secondaire: true,
         },
+        // Après les résumés, qu'il relit. Seuls les projets dont un dossier a changé sont refaits.
+        {
+          nom: 'Récapitulatifs des projets',
+          argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scrapers/recaps-projets.js'],
+          secondaire: true,
+        },
       ]
     : []),
 ];
