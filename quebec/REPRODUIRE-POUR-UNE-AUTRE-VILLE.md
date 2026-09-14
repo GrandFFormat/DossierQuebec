@@ -48,7 +48,7 @@ l'exécution. Aucun framework, aucune dépendance sauf le SDK Anthropic pour les
 
 **À garder tel quel** (ça ne dépend pas de la ville) : les six pages et `assets/app.js`,
 `assets/style.css` (deux thèmes, pastilles, accordéon `<details name="fiches">`, taille du
-texte A− / A+, étiquette Prototype, bouton retour vers DQ), `scrapers/resumes.js` (résumés
+texte A− / A+, étiquette Prototype, bouton fleur de lys vers DQ), `scrapers/resumes.js` (résumés
 IA avec cache, estimation, plafond, lots), `scrapers/archive.js` (rotation annuelle),
 `scripts/refresh.js` (routine quotidienne tolérante), `scripts/static-server.js`, le
 workflow GitHub Actions, `.vercelignore`.
@@ -204,8 +204,8 @@ parfois littéralement dans ses chaînes.
   `data/` se résolvent depuis la racine du site. Les liens « accueil » pointent vers `./`,
   jamais vers `index.html` (Vercel `cleanUrls` le réécrit sans barre), et `vercel.json`
   redirige `/quebec` vers `/quebec/`.
-- Icône dans l'en-tête de DQ vers le volet municipal ; bouton « ← Retour à DossierQuébec »
-  à côté du logo du volet ; étiquette « Prototype » pendant la construction (retirée de Québec
+- Icône dans l'en-tête de DQ vers le volet municipal ; bouton fleur de lys + « DQ » (retour à
+  DossierQuébec, bleu en clair, jaune en sombre) à côté du logo du volet ; étiquette « Prototype » pendant la construction (retirée de Québec
   le 14 sept. 2026, une fois le volet jugé stable).
 - Pastilles de sujet : règles par mots-clés sur l'objet, **les sujets avant les véhicules**
   (contrats, finances), puis l'unité administrative, puis « Administration » faute de mieux
