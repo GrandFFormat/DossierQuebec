@@ -280,6 +280,22 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-pourquoi { margin-top: 26px; border-left: 4px solid var(--vedette); }
 .ab-page .ab-alertes { border-left: 4px solid var(--accent); }
 .ab-page .ab-ouverts { border-left: 4px solid var(--accent); }
+/* Boîtes repliables de Mes dossiers (mots-clés, organismes, export, agenda) : fermées au départ,
+   le titre et un compteur visibles ; elles restent ouvertes si la page se redessine. */
+.ab-page details.ab-pliable > summary {
+  list-style: none; cursor: pointer; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px;
+  position: relative; padding-right: 30px;
+}
+.ab-page details.ab-pliable > summary::-webkit-details-marker { display: none; }
+.ab-page details.ab-pliable > summary::after {
+  content: "▾"; position: absolute; right: 2px; top: 50%; transform: translateY(-50%);
+  font-size: 24px; color: var(--doux); transition: transform .15s;
+}
+.ab-page details.ab-pliable[open] > summary::after { transform: translateY(-50%) rotate(180deg); }
+.ab-page details.ab-pliable > summary h2 { margin: 0; }
+.ab-page details.ab-pliable > summary:hover h2 { color: var(--accent-encre); }
+.ab-page details.ab-pliable > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.ab-page .ab-pliable-corps { margin-top: 14px; }
 /* Les mises en garde qu'on ne doit pas manquer (agenda des conseils) : gras, italique et
    soulignées, sans surlignage (essayé, pas joli). */
 .ab-page .ab-mise-en-garde { font-weight: 700; font-style: italic; color: var(--encre); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
