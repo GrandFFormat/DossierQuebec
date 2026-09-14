@@ -14,6 +14,11 @@
 // cache local. Au plus --plafond documents par exécution (30 par défaut, ~8 $ US au pire) : un
 // jour chargé se rattrape le lendemain.
 //
+// EN PREMIER : les demandes des abonnés (table demandes_details, « Demander ce détail » sur une
+// fiche), les plus anciennes d'abord, dans le même plafond. Une demande est notée traitée
+// (traite_le, resultat) quand le détail est lu (« lu »), l'était déjà (« deja-lu ») ou que le
+// résumé n'a pas de montant (« sans-montant ») ; une lecture qui échoue reste en attente.
+//
 // Décidé le 14 sept. 2026 : les projets suivis tout de suite, puis les nouveaux chaque matin. Le
 // reste de 2026 (~845 dossiers, ~235 $) attend qu'il y ait des abonnés pour le financer — ne pas
 // élargir la fenêtre sans en reparler.
@@ -83,16 +88,51 @@ async function main() {
     }
   }
 
-  const aFaire = [...candidats].filter(([id]) => !deja.has(id)).sort((a, b) => b[1].localeCompare(a[1]));
-  const lot = aFaire.slice(0, plafond).map(([id]) => id.replace(/\.pdf$/, ''));
-  console.log(`Détail de l'argent : ${candidats.size} candidat(s) (résumés depuis ${genereDepuis}${args.has('projets') ? ' + projets' : ''}), ${deja.size} déjà lu(s), ${aFaire.length} à faire, ${lot.length} cette fois (plafond ${plafond}).`);
+  // Les demandes des abonnés, avant tout le reste.
+  const demandes = await demandesEnAttente();
+  const demandees = [...new Set(demandes.map((d) => d.dossier_id))];
+  const traiter = async (ids, resultat) => {
+    if (!ids.length || args.has('essai')) return;
+    await marquerTraitees(ids, resultat).catch((err) => console.warn(`⚠ Demandes non marquées (${resultat}) : ${err.message}`));
+  };
+  await traiter(demandees.filter((id) => deja.has(id)), 'deja-lu');
+  await traiter(demandees.filter((id) => !deja.has(id) && !avecMontant.has(id)), 'sans-montant');
+  const prioritaires = demandees.filter((id) => !deja.has(id) && avecMontant.has(id));
+
+  const aFaire = [...candidats].filter(([id]) => !deja.has(id) && !prioritaires.includes(id)).sort((a, b) => b[1].localeCompare(a[1]));
+  const lot = [...prioritaires, ...aFaire.map(([id]) => id)].slice(0, plafond).map((id) => id.replace(/\.pdf$/, ''));
+  console.log(`Détail de l'argent : ${demandes.length} demande(s) d'abonnés (${prioritaires.length} à lire), ${candidats.size} candidat(s) (résumés depuis ${genereDepuis}${args.has('projets') ? ' + projets' : ''}), ${deja.size} déjà lu(s), ${aFaire.length} à faire, ${lot.length} cette fois (plafond ${plafond}).`);
   if (!lot.length || args.has('essai')) {
     if (args.has('essai')) console.log(`--essai : rien d'extrait. Premiers : ${lot.slice(0, 10).join(', ')}`);
     return;
   }
 
-  const { extraireDetails } = await import('../scrapers/details-argent.js');
-  await extraireDetails(lot);
+  const { extraireDetails, VERSION_VERIFICATION } = await import('../scrapers/details-argent.js');
+  const parId = await extraireDetails(lot);
+  await traiter(prioritaires.filter((id) => lot.includes(id.replace(/\.pdf$/, '')) && parId.get(id)?.verification?.version === VERSION_VERIFICATION), 'lu');
+}
+
+const entetesSupabase = () => ({ apikey: process.env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}` });
+
+// Sans la table (SQL pas encore exécuté), aucune demande : l'étape continue comme avant.
+async function demandesEnAttente() {
+  const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/demandes_details?ville=eq.${VILLE}&traite_le=is.null&select=dossier_id,created_at&order=created_at`, { headers: entetesSupabase() });
+  if (!res.ok) {
+    console.warn(`⚠ Demandes d'abonnés ignorées : demandes_details → ${res.status}`);
+    return [];
+  }
+  return res.json();
+}
+
+async function marquerTraitees(ids, resultat) {
+  const liste = ids.map((id) => `"${id.replace(/"/g, '')}"`).join(',');
+  const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/demandes_details?ville=eq.${VILLE}&traite_le=is.null&dossier_id=in.(${encodeURIComponent(liste)})`, {
+    method: 'PATCH',
+    headers: { ...entetesSupabase(), 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+    body: JSON.stringify({ traite_le: new Date().toISOString(), resultat }),
+  });
+  if (!res.ok) throw new Error(`demandes_details → ${res.status} ${await res.text()}`);
+  console.log(`Demandes d'abonnés « ${resultat} » : ${ids.length}.`);
 }
 
 await main();
