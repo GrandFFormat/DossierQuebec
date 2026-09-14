@@ -313,8 +313,9 @@ La mécanique complète est dans le README de Québec (« La version anglaise »
    `assets/libelles-en.js` comme celui de Québec. Les noms propres restent en français.
 4. **Résumés et lexique** : `scrapers/traductions.js --batch` pour le rattrapage (garde-fou : les
    mêmes nombres qu'en français, sinon refusé), puis `--plafond=150` dans `refresh.js` ;
-   `scrapers/lexique-en.js`. Coût mesuré à Québec : ~1,4 ¢ US par résumé (~10 $ en lot pour
-   1 500), ~3 $ par mois ensuite.
+   `scrapers/lexique-en.js`. Coût mesuré à Québec : 12,04 $ US en lot pour 1 495 résumés, puis
+   ~1,6 ¢ par nouveau résumé (~3 $ par mois). Relire les refus du premier passage : à Québec,
+   c'étaient des heures (« 18 h » → « 6 p.m. »), réglées dans le garde-fou sans repayer le lot.
 5. **Ajouter la clé à `VOLETS_EN`** dans `commun/langue.js`. Avant ça, la ville reste en français
    et n'a pas de pastille, même pour quelqu'un qui a choisi l'anglais : un en-tête anglais sur un
    contenu français serait pire que rien.

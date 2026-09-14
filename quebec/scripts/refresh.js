@@ -75,6 +75,18 @@ const ETAPES = [
           argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scrapers/resumes.js', `--depuis=${depuis}`, `--plafond=${plafond}`],
           secondaire: true,
         },
+        // Version anglaise : les résumés nouveaux ou refaits (data/resumes-en.json, ~1,4 ¢ chacun,
+        // chaque nombre vérifié contre le français), puis le lexique s'il a changé.
+        {
+          nom: 'Traductions anglaises des résumés',
+          argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scrapers/traductions.js', '--plafond=150'],
+          secondaire: true,
+        },
+        {
+          nom: 'Lexique anglais',
+          argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scrapers/lexique-en.js'],
+          secondaire: true,
+        },
         // Le détail de l'argent des nouveaux dossiers avec un montant (et des dossiers de projets
         // pas encore lus), 30 au plus. Demande aussi les clés Supabase : sautée sans elles.
         {
