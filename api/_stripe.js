@@ -18,8 +18,11 @@ import { supabase } from './_alertes.js';
 export const stripeConfigure = () => Boolean(process.env.STRIPE_SECRET_KEY && process.env.STRIPE_PRIX && process.env.STRIPE_WEBHOOK_SECRET);
 export const modeStripe = () => (/^[sr]k_live_/.test(process.env.STRIPE_SECRET_KEY ?? '') ? 'reel' : 'test');
 export const paiementOuvert = () => process.env.STRIPE_OUVERT === '1';
+// Comparées sans majuscules, guillemets ni « +étiquette » : « moi+essai@gmail.com » vaut pour
+// « moi@gmail.com » et inversement (la même boîte, donc la même personne).
+const adresseSimple = (a) => String(a ?? '').trim().replace(/^["']|["']$/g, '').toLowerCase().replace(/\+[^@]*@/, '@');
 export const adresseEssai = (email) =>
-  (process.env.STRIPE_ESSAI ?? '').split(',').map((a) => a.trim().toLowerCase()).filter(Boolean).includes(String(email ?? '').toLowerCase());
+  Boolean(email) && (process.env.STRIPE_ESSAI ?? '').split(/[,;\s]+/).map(adresseSimple).filter(Boolean).includes(adresseSimple(email));
 
 export async function stripe(chemin, parametres) {
   const res = await fetch(`https://api.stripe.com/v1${chemin}`, {
