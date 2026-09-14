@@ -346,6 +346,16 @@ la copie servie aux abonnés est dans Supabase, publiée par `scripts/publier-de
 automatiquement après chaque extraction si `SUPABASE_URL` et `SUPABASE_SERVICE_ROLE_KEY` sont dans
 `api.env`. L'abonnement se donne à la main dans Supabase tant que Stripe n'est pas branché.
 
+**Quels dossiers ont le détail (décidé le 14 sept. 2026).** Seulement ceux dont le résumé a trouvé
+un montant (875 des 1 502 sommaires de 2026) : les dossiers des projets suivables, extraits d'un
+coup, puis chaque matin les nouveaux dossiers (`scripts/details-du-jour.js --projets
+--plafond=30`, appelé par `refresh.js`) — environ 30 à 40 $ US par mois. Les autres dossiers de
+2026 (~845, ~235 $) attendent des abonnés pour les financer ; les pages Abonnement et Mes dossiers
+le disent sous « Le détail de l'argent ». Ce qui est déjà lu se lit dans Supabase (y compris les
+détails jugés inutilisables, publiés comme repère mais jamais montrés) : en CI, sans cache local,
+rien n'est relu ni repayé. Le workflow demande les secrets `SUPABASE_URL` et
+`SUPABASE_SERVICE_ROLE_KEY` ; sans eux, l'étape est sautée.
+
 ## La carte des districts
 
 Contours tirés du jeu « Districts électoraux » de la Ville sur Données Québec, en **CC-BY 4.0** —
