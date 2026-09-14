@@ -229,6 +229,7 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-carte .ab-note { line-height: 1.55; }
 .ab-page .ab-carte .ab-form + .ab-note { margin-top: 10px; }
 #compte .ab-note { margin: 0 0 18px; }
+@media (max-width: 560px) { .ab-page .ab-carte { padding: 18px 16px; margin-bottom: 20px; } }
 /* Les projets suivis restent une liste : plus serrés entre eux. */
 .ab-page .ab-carte.ab-dossier { margin-bottom: 14px; }
 .ab-page .ab-carte h3 { font-size: 16px; margin: 0 0 4px; }
