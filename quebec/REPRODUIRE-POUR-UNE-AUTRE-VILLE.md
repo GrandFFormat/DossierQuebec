@@ -216,7 +216,8 @@ parfois littéralement dans ses chaînes.
   mémorisée (`zoom` 80–150 %).
 - **En-tête** : dans `<nav>`, les onglets du volet puis `<div class="outils">` avec la taille du
   texte et le thème — `/commun/abonnes.js` y ajoute « Mes dossiers » et « Abonnement », et
-  mémorise la page pour que Mes dossiers et Abonnement offrent « ← Retour au volet ». Sur
+  mémorise la ville pour que Mes dossiers et Abonnement prennent la marque du volet (logo qui y
+  ramène, menu déroulant « Ville : … » pour changer de ville). Sur
   cellulaire, le sous-titre ne reste que sur l'accueil et les outils tiennent sur une ligne.
 - **Espace abonnés et « Mes dossiers » (communs à toutes les villes).** Chaque page porte
   `data-ville="…"` sur `<body>` et charge `/commun/abonnes.js` ; chaque fiche contient un
