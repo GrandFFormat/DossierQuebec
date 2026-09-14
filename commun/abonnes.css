@@ -16,6 +16,17 @@
   background: var(--accent, #0B8A4B); color: #fff;
 }
 
+/* La ligne des pastilles d'une fiche ne la déplie pas : curseur normal, et l'étoile à droite. */
+.pliante > summary .ab-meta-inerte { cursor: default; }
+.ab-etoile {
+  margin-left: auto; font: inherit; font-size: 20px; line-height: 1; cursor: pointer;
+  background: none; border: 0; padding: 2px 4px; border-radius: 6px; color: var(--doux, #5B6570);
+}
+.ab-etoile:hover { color: var(--vedette, #F5B301); background: var(--fond-2, #F4F6F8); }
+.ab-etoile.actif { color: var(--vedette, #F5B301); }
+.ab-etoile:focus-visible { outline: 2px solid var(--accent, #0B8A4B); outline-offset: 2px; }
+.ab-etoile:disabled { opacity: .5; cursor: default; }
+
 .ab-fiche { margin-top: 12px; }
 .ab-fiche:empty { display: none; }
 .ab-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
