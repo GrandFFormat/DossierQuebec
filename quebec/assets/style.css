@@ -178,6 +178,12 @@ nav a[aria-current="page"] { color: var(--entete-encre); border-bottom-color: va
 nav .outils { margin-left: auto; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
 nav .outils .taille-texte { margin-left: 0; }
 
+/* Quand le menu ne tient plus sur une ligne : deux lignes centrées, les onglets puis les outils. */
+@media (max-width: 1100px) {
+  nav { justify-content: center; }
+  nav .outils { flex-basis: 100%; justify-content: center; margin-left: 0; padding: 4px 0 10px; }
+}
+
 /* Cellulaire : l'en-tête ne doit pas repousser le contenu d'un écran entier. Le sous-titre
    ne reste que sur l'accueil, les onglets se resserrent, et les outils prennent leur ligne. */
 @media (max-width: 620px) {
@@ -189,7 +195,7 @@ nav .outils .taille-texte { margin-left: 0; }
   nav { gap: 0; }
   nav a { padding: 8px 9px; font-size: 13.5px; }
   .contenu { padding-left: 18px; padding-right: 18px; }
-  nav .outils { flex-basis: 100%; flex-wrap: nowrap; justify-content: space-between; gap: 4px; padding: 6px 0 10px; }
+  nav .outils { flex-basis: 100%; flex-wrap: nowrap; justify-content: center; gap: 6px; padding: 6px 0 10px; }
   nav .outils .bascule-theme { width: 34px; height: 34px; }
   nav .outils .ab-lien-abonnement { padding: 5px 2px; }
   #texte-pct { display: none; }
