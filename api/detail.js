@@ -90,12 +90,31 @@ function complet(d) {
   return { ...champs, nature: NATURES[d.typeMontant] ?? 'montant', extraitLe: genereLe ?? null };
 }
 
+// Export en tableur (Mes dossiers) : le détail de plusieurs dossiers d'un coup, abonnés seulement.
+//   GET /api/detail?ville=quebec&dossiers=AP2026-271.pdf,DE2026-256.pdf   (200 au plus par appel)
+//   → { details: { 'AP2026-271.pdf': {…champs publiables…} } } — seulement les détails utilisables.
+const LOT_MAX = 200;
+async function lot(res, { ville, liste, jeton }) {
+  const ids = [...new Set(liste.split(','))];
+  if (!ids.length || ids.length > LOT_MAX || !ids.every((id) => DOSSIER.test(id))) return res.status(400).json({ erreur: 'paramètres invalides' });
+  if (!(await abonneDe(jeton))?.abonne) return res.status(403).json({ erreur: 'réservé aux abonnés' });
+  const filtre = encodeURIComponent(`(${ids.map((id) => `"${id}"`).join(',')})`);
+  const r = await supabase(`/rest/v1/details_argent?ville=eq.${ville}&dossier_id=in.${filtre}&select=dossier_id,detail`);
+  if (!r.ok) return res.status(502).json({ erreur: 'détail indisponible' });
+  const details = {};
+  for (const { dossier_id, detail } of r.donnees ?? []) if (detail && detail.verification?.utilisable !== false) details[dossier_id] = complet(detail);
+  return res.status(200).json({ details });
+}
+
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'private, no-store');
   const ville = String(req.query.ville ?? '');
   const dossier = String(req.query.dossier ?? '');
-  if (!VILLES.has(ville) || !DOSSIER.test(dossier)) return res.status(400).json({ erreur: 'paramètres invalides' });
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) return res.status(503).json({ erreur: 'service non configuré' });
+  if (req.method === 'GET' && VILLES.has(ville) && req.query.dossiers !== undefined) {
+    return lot(res, { ville, liste: String(req.query.dossiers), jeton: (req.headers.authorization ?? '').replace(/^Bearer\s+/i, '') || null });
+  }
+  if (!VILLES.has(ville) || !DOSSIER.test(dossier)) return res.status(400).json({ erreur: 'paramètres invalides' });
 
   const r = await supabase(`/rest/v1/details_argent?ville=eq.${ville}&dossier_id=eq.${encodeURIComponent(dossier)}&select=detail`);
   if (!r.ok) return res.status(r.statut === 404 ? 503 : 502).json({ erreur: 'détail indisponible' });
