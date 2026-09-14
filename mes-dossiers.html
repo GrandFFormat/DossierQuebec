@@ -245,14 +245,19 @@
       const g = groupes.get(choisie);
       const probables = g.dossiers.filter((d) => d.echeance && d.echeance >= auj).sort((a, b) => a.echeance.localeCompare(b.echeance));
       const autres = g.dossiers.filter((d) => !(d.echeance && d.echeance >= auj)).sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
+      // Deux menus dépliants : ce qui vient probablement à la prochaine séance, ouvert d'emblée ;
+      // le reste de l'agenda, replié (ouvert seulement s'il n'y a rien de daté).
       $('#ouverts-liste').innerHTML = `
-        ${probables.length ? `<div class="ab-bloc"><div class="ab-detail-titre">Probablement à la prochaine séance <span class="ab-etiquette ab-en-cours">${probables.length}</span></div>
+        ${probables.length ? `<details class="ab-section-agenda" open>
+          <summary>Probablement à la prochaine séance <span class="ab-etiquette ab-en-cours">${probables.length}</span></summary>
           <p class="ab-note" style="margin:0 0 8px">Date cible la plus proche écrite dans les sommaires : ${dateFr(prochaine(g))}.</p>
-          ${probables.map(item).join('')}</div>` : ''}
-        <div class="ab-bloc"><div class="ab-detail-titre">${probables.length ? 'Aussi à l’agenda, sans date prévue' : 'À l’agenda, sans date prévue'} <span class="ab-etiquette">${autres.length}</span></div>
-          ${probables.length ? '' : '<p class="ab-note" style="margin:0 0 8px">Aucun de ces dossiers n\'indique de date cible : on ne peut pas dire lesquels seront présentés à la prochaine séance.</p>'}
+          ${probables.map(item).join('')}
+        </details>` : ''}
+        <details class="ab-section-agenda"${probables.length ? '' : ' open'}>
+          <summary>${probables.length ? 'Aussi à l’agenda, sans date prévue' : 'À l’agenda, sans date prévue'} <span class="ab-etiquette">${autres.length}</span></summary>
+          ${probables.length ? '' : '<p class="ab-note" style="margin:0 0 8px">Aucun de ces dossiers n’indique de date cible : on ne peut pas dire lesquels seront présentés à la prochaine séance.</p>'}
           ${autres.length ? autres.map(item).join('') : '<p class="ab-note">Rien d’autre à l’agenda de cette instance.</p>'}
-        </div>`;
+        </details>`;
     };
 
     zone.innerHTML = `<section class="ab-carte ab-ouverts">

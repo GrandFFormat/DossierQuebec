@@ -258,6 +258,16 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-pourquoi { margin-top: 26px; border-left: 4px solid var(--vedette); }
 .ab-page .ab-alertes { border-left: 4px solid var(--accent); }
 .ab-page .ab-ouverts { border-left: 4px solid var(--accent); }
+.ab-page details.ab-section-agenda { margin: 0 0 10px; border: 1px solid var(--ligne); border-radius: 8px; padding: 0 12px; }
+.ab-page details.ab-section-agenda > summary {
+  list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px;
+  font-weight: 800; font-size: 15px; padding: 10px 24px 10px 0; position: relative;
+}
+.ab-page details.ab-section-agenda > summary::-webkit-details-marker { display: none; }
+.ab-page details.ab-section-agenda > summary::after { content: "▾"; position: absolute; right: 2px; color: var(--doux); transition: transform .15s; }
+.ab-page details.ab-section-agenda[open] > summary::after { transform: rotate(180deg); }
+.ab-page details.ab-section-agenda > summary:hover { color: var(--accent-encre); }
+.ab-page details.ab-section-agenda[open] { padding-bottom: 6px; }
 .ab-page .ab-pastilles { align-items: center; gap: 5px 8px; }
 .ab-page .ab-pastille-theme { font-size: 11px; font-weight: 700; letter-spacing: .02em; color: #fff; padding: 2px 9px; border-radius: 999px; }
 .ab-page .ab-numero { font-family: ui-monospace, Consolas, monospace; font-size: 12px; font-weight: 700; color: var(--encre); }
