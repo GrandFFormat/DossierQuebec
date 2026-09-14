@@ -10,9 +10,10 @@
 //     « ☆ Projet : … » dans la ligne des pastilles, cliquable sans déplier la fiche ;
 //     une décision seule ne se suit pas : ce qui a du sens à suivre, c'est le projet ;
 //   - à l'ouverture, le « Détail de l'argent » s'il existe — complet pour un abonné, aperçu et
-//     « Abonnez-vous » sinon. Rien n'est chargé tant qu'on n'ouvre pas une fiche.
+//     « Abonnez-vous » sinon. Rien n'est chargé tant qu'on n'ouvre pas une fiche ;
+//   - au bas de la fiche ouverte, « Signaler une erreur dans cette fiche » (compte requis).
 
-import { VILLES, echapper, mesurer, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, client } from './abonnes-client.js';
+import { VILLES, echapper, mesurer, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, formulaireMessage, client } from './abonnes-client.js';
 
 const VILLE = document.body.dataset.ville;
 let sess = null;
@@ -104,7 +105,8 @@ new MutationObserver(() => {
 async function peupler(zone) {
   if (!zone || !VILLE || zone.dataset.pret === '1') return;
   zone.dataset.pret = '1';
-  zone.innerHTML = '<div class="ab-connexion" hidden></div><div class="ab-detail-zone"></div>';
+  zone.innerHTML = `<div class="ab-connexion" hidden></div><div class="ab-detail-zone"></div>
+    <div class="ab-signaler"><button type="button" class="ab-signaler-lien" data-action="signaler">Signaler une erreur dans cette fiche</button><div class="ab-message-boite" hidden></div></div>`;
   const reponse = await chargerDetail(VILLE, zone.dataset.dossier, sess);
   zone.querySelector('.ab-detail-zone').innerHTML = rendreDetail(reponse, VILLE);
 }
@@ -150,6 +152,21 @@ document.addEventListener('click', async (e) => {
   // La ligne des pastilles ne déplie pas la fiche (le reste de la boîte, oui).
   const meta = e.target.closest('summary .ab-meta-inerte');
   if (meta) e.preventDefault();
+
+  const signaler = e.target.closest('[data-action="signaler"]');
+  if (signaler) {
+    const zone = signaler.closest('.ab-fiche');
+    if (!sess) {
+      formulaireConnexion(zone.querySelector('.ab-connexion'), 'Connectez-vous pour signaler une erreur : on vous envoie un lien par courriel, sans mot de passe.');
+      return;
+    }
+    signaler.hidden = true;
+    formulaireMessage(zone.querySelector('.ab-message-boite'), sess, { sujet: 'erreur', fixe: true, ville: VILLE, numero: zone.dataset.numero || null })
+      .querySelector('textarea')
+      .focus();
+    mesurer('signaler_erreur', { ville: VILLE });
+    return;
+  }
 
   const etoile = e.target.closest('.ab-etoile');
   if (!etoile) return;

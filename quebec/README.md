@@ -264,6 +264,12 @@ des sous-dossiers de dossierquebec.ca : la session Supabase ouverte sur une page
 - `api/detail.js` — sert le détail après avoir vérifié l'abonnement, côté serveur.
 - `scripts/supabase-schema-abonnes.sql` — tables `dossiers_suivis`, `abonnements`,
   `abonnement_liste_attente`, `details_argent`, et leurs règles.
+- **Nous écrire.** « Signaler une erreur dans cette fiche » au bas de chaque fiche ouverte (le
+  numéro s'ajoute tout seul) et un formulaire « Nous écrire » dans `/mes-dossiers` (idée, problème,
+  erreur). Compte requis. `api/message.js` note si la personne est abonnée, limite à 5 messages
+  par 24 heures, garde le message dans la table `messages_utilisateurs`
+  (`scripts/supabase-schema-messages.sql`, aucun accès public) et en envoie une copie par Resend à
+  `MESSAGES_A` (variable Vercel), avec « Répondre » qui écrit directement à la personne.
 
 **Où en est un dossier.** Chaque sommaire dit, en tête, quelle instance décide et à quelle date
 cible (« Conseil d'agglomération de Québec — Instance décisionnelle — 16 septembre 2026 »).

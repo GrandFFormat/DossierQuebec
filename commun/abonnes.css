@@ -80,6 +80,26 @@
 .ab-detail li { margin: 0 0 4px; }
 .ab-note { font-size: 12.5px; color: var(--doux, #5B6570); margin: 6px 0 0; }
 
+/* Nous écrire / Signaler une erreur */
+.ab-signaler { margin-top: 10px; }
+.ab-signaler-lien {
+  font: inherit; font-size: 12.5px; background: none; border: 0; padding: 0; cursor: pointer;
+  color: var(--doux, #5B6570); text-decoration: underline; text-underline-offset: 2px;
+}
+.ab-signaler-lien:hover { color: var(--encre, #16191D); }
+.ab-signaler .ab-message-boite { border: 1px solid var(--ligne, #DDE2E7); border-radius: 8px; padding: 10px 12px; }
+.ab-message { display: grid; gap: 10px; font-size: 14px; }
+.ab-message label { display: grid; gap: 4px; font-weight: 600; }
+.ab-message select, .ab-message textarea {
+  font: inherit; font-size: 14px; font-weight: 400; padding: 7px 10px;
+  border: 1px solid var(--ligne-forte, #C2CAD2); border-radius: 6px; background: var(--fond, #fff); color: var(--encre, #16191D);
+}
+.ab-message select { justify-self: start; }
+.ab-message textarea { resize: vertical; min-height: 96px; }
+.ab-message p { margin: 0; padding: 0; background: none; border-radius: 0; } /* un volet stylise « details p » */
+.ab-message .ab-etat:empty { display: none; }
+.ab-merci { margin: 0; padding: 0; background: none; font-size: 14px; font-weight: 600; color: var(--accent-encre, #076338); }
+
 /* ---------- pages communes ---------- */
 .ab-page {
   --fond: #F7F8FA; --carte: #FFFFFF; --encre: #16191D; --doux: #5B6570; --ligne: #DDE2E7; --ligne-forte: #C2CAD2;

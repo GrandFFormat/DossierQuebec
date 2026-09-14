@@ -23,6 +23,7 @@
       <a href="/quebec/">Ville de Québec</a>
       <a href="/montreal/">Ville de Montréal</a>
       <a href="/abonnement">Abonnement</a>
+      <a href="#ecrire">Nous écrire</a>
     </nav>
   </header>
 
@@ -33,11 +34,12 @@
     <div id="liste"><p class="ab-vide">Chargement…</p></div>
     <div id="pourquoi"></div>
     <div id="suggestions"></div>
+    <div id="ecrire"></div>
   </main>
 </div>
 
 <script type="module">
-  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, mesurer } from '/commun/abonnes-client.js';
+  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, mesurer, formulaireMessage } from '/commun/abonnes-client.js';
 
   const $ = (s) => document.querySelector(s);
 
@@ -63,6 +65,7 @@
     </div>`;
     pourquoi(false);
     suggestions(null, new Set());
+    ecrire(null);
     $('#form-lien').addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = e.target.querySelector('input').value.trim();
@@ -93,6 +96,22 @@
       </ul>
       <a class="ab-bouton" href="/abonnement" data-mesure="mes_dossiers_voir_abonnement">Voir l'abonnement</a>
     </section>`;
+  }
+
+  // ---------- nous écrire ----------
+  // Redessiné seulement si le compte change : suivre un projet ne doit pas effacer un message en cours.
+  function ecrire(s) {
+    const zone = $('#ecrire');
+    const pour = s?.user.email ?? '';
+    if (zone.dataset.pour === pour && zone.innerHTML) return;
+    zone.dataset.pour = pour;
+    zone.innerHTML = `<section class="ab-carte">
+      <h2 style="margin-top:0">Nous écrire</h2>
+      <p class="ab-chapeau" style="margin-bottom:12px">Une idée pour le site, un problème, une erreur dans une donnée ? Chaque message est lu. Pour une erreur dans une décision, le plus simple est le lien « Signaler une erreur » au bas de sa fiche : le numéro s'y ajoute tout seul.</p>
+      ${s ? '<div class="ab-message-boite"></div>' : '<p class="ab-note">Connectez-vous plus haut pour nous écrire.</p>'}
+    </section>`;
+    if (s) formulaireMessage(zone.querySelector('.ab-message-boite'), s);
+    if (location.hash === '#ecrire') zone.scrollIntoView({ block: 'start' });
   }
 
   // ---------- projets à suivre, par ville ----------
@@ -269,6 +288,7 @@
     $('#compte').innerHTML = `<p class="ab-note">Connecté comme <strong>${echapper(s.user.email)}</strong> · ${abonne ? 'abonnement actif' : 'pas d\'abonnement — <a class="ab-lien" href="/abonnement">voir l\'abonnement</a>'} · <button type="button" class="ab-lien-bouton" id="deconnexion">Se déconnecter</button></p>`;
     $('#deconnexion').addEventListener('click', async () => { await client.auth.signOut(); });
 
+    ecrire(s);
     const suivis = await chargerSuivis();
     pourquoi(abonne);
     suggestions(s, new Set(suivis.map((x) => `${x.ville}|${x.dossier_id}`)));
