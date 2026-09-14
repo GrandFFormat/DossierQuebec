@@ -547,3 +547,8 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-piste span { font-weight: 400; color: var(--doux); margin-left: 4px; }
 .ab-page .ab-piste:hover { border-color: var(--accent); }
 .ab-page .ab-piste:disabled { opacity: .6; cursor: default; }
+.ab-page .ab-suggestions-mots { margin-top: 12px; font-size: 14px; }
+.ab-page .ab-suggestions-mots > p { margin: 0 0 8px; }
+.ab-page .ab-suggestions-groupe { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 4px 10px; align-items: start; margin-bottom: 8px; }
+.ab-page .ab-suggestions-titre { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--doux); padding-top: 6px; }
+@media (max-width: 560px) { .ab-page .ab-suggestions-groupe { grid-template-columns: minmax(0, 1fr); } .ab-page .ab-suggestions-titre { padding-top: 0; } }
