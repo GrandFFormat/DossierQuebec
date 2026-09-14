@@ -16,13 +16,15 @@ import { readFile, writeFile } from 'node:fs/promises';
 const FICHIER = new URL('../data/resumes.json', import.meta.url);
 
 // \uXXXX, y compris les paires de substitution pour les caractères hors du plan de base.
-const ECHAPPEMENT_UNICODE = /\\u([0-9a-fA-F]{4})/g;
+// Avec l'antislash (« é ») ou sans (« u00e9 », vu sur 4 résumés en septembre 2026) — sans,
+// seulement les plages des accents latins et de la ponctuation typographique.
+const ECHAPPEMENT_UNICODE = /\\?u(00[89a-fA-F][0-9a-fA-F]|20[0-9a-fA-F]{2})|\\u([0-9a-fA-F]{4})/g;
 // Les échappements simples que le modèle produit aussi à l'occasion.
 const ECHAPPEMENTS_SIMPLES = { '\\n': '\n', '\\t': '\t', '\\"': '"', "\\'": "'", '\\\\': '\\', '\\/': '/' };
 
 export function decoderEchappements(valeur) {
   if (typeof valeur !== 'string') return valeur;
-  let s = valeur.replace(ECHAPPEMENT_UNICODE, (_, hex) => String.fromCharCode(parseInt(hex, 16)));
+  let s = valeur.replace(ECHAPPEMENT_UNICODE, (_, sansAntislash, avecAntislash) => String.fromCharCode(parseInt(sansAntislash ?? avecAntislash, 16)));
   for (const [avant, apres] of Object.entries(ECHAPPEMENTS_SIMPLES)) s = s.split(avant).join(apres);
   return s;
 }

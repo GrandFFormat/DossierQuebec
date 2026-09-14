@@ -162,7 +162,13 @@ function preparerTexte(contenu) {
 
 // Même dérive que pour les résumés : le modèle glisse parfois des \uXXXX littéraux.
 function decoder(v) {
-  if (typeof v === 'string') return v.replace(/\\u([0-9a-fA-F]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
+  // Avec ou sans l'antislash (« é » comme « u00e9 ») ; sans, seulement les plages des accents
+  // latins et de la ponctuation typographique.
+  if (typeof v === 'string') {
+    return v
+      .replace(/\\u([0-9a-fA-F]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16)))
+      .replace(/u(00[89a-fA-F][0-9a-fA-F]|20[0-9a-fA-F]{2})/g, (_, h) => String.fromCharCode(parseInt(h, 16)));
+  }
   if (Array.isArray(v)) return v.map(decoder);
   if (v && typeof v === 'object') return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, decoder(x)]));
   return v;

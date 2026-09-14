@@ -136,6 +136,10 @@ function decoderEchappements(valeur) {
   if (typeof valeur !== 'string') return valeur;
   return valeur
     .replace(/\\u([0-9a-fA-F]{4})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
+    // Même dérive, sans l'antislash : « Quu00e9bec », « ru00e8gles » (vu sur 4 résumés sur 1 500).
+    // Seulement les plages des accents latins et de la ponctuation typographique : aucun mot
+    // français ne contient « u00e9 » ou « u2019 ».
+    .replace(/u(00[89a-fA-F][0-9a-fA-F]|20[0-9a-fA-F]{2})/g, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
     .split('\\n')
     .join('\n')
     .split('\\"')
