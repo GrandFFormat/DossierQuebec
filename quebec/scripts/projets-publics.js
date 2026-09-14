@@ -140,23 +140,37 @@ await writeFile(`${DOSSIER}/index.json`, texteIndex, 'utf8');
 
 console.log(`Projets publics : ${Object.keys(index).length} projets · index ${(texteIndex.length / 1024).toFixed(1)} Ko · fichiers de projet ${(octets / 1024).toFixed(0)} Ko au total.`);
 
-// ---------- les décisions attendues (le calendrier des abonnés, dans Mes dossiers) ----------
+// ---------- les dossiers ouverts (abonnés, dans Mes dossiers) ----------
 // data/attendues.json : chaque dossier encore en attente d'une décision finale, avec l'instance qui
-// doit décider et la date cible, telles que la Ville les écrit dans le sommaire. Une date cible
-// n'est pas un ordre du jour : le dossier peut être reporté — les pages et l'agenda le disent.
+// doit décider, la date cible telles que la Ville les écrit dans le sommaire, et son résumé. Une
+// date cible n'est pas un ordre du jour : le dossier peut être reporté — la page le dit.
 // FORMAT COMMUN À TOUTES LES VILLES :
-//   { generatedAt, decisions: [{ numero, date, instance, echeance, projets[], phrase, pdf }] }
+//   { generatedAt, decisions: [{ numero, date, instance, groupe, echeance, projets[], phrase,
+//     puces[], pdf }] }   groupe : l'instance regroupée pour le menu de Mes dossiers
+const groupeInstance = (instance) => {
+  const i = (instance ?? '').toLowerCase();
+  if (i.includes('agglom')) return "Conseil d'agglomération";
+  if (i.includes('arrondissement')) return "Conseils d'arrondissement";
+  if (i.includes('exécutif') || i.includes('executif')) return 'Comité exécutif';
+  if (i.includes('conseil de la ville')) return 'Conseil de la ville';
+  return instance || 'Instance non indiquée';
+};
 const attendues = decisions.decisions
   .filter((d) => d.type === 'Sommaires et mémoires' && d.statutDossier === 'en_cours' && d.numero)
-  .map((d) => ({
-    numero: d.numero,
-    date: d.date ?? null,
-    instance: d.etapeFinale ?? null,
-    echeance: d.echeance ?? null,
-    projets: (d.projets ?? []).filter((cle) => cle in PROJETS),
-    phrase: resumeDe.get(d.id)?.puces?.[0] ?? d.objet ?? '',
-    pdf: d.pdf ?? null,
-  }))
+  .map((d) => {
+    const resume = resumeDe.get(d.id);
+    return {
+      numero: d.numero,
+      date: d.date ?? null,
+      instance: d.etapeFinale ?? null,
+      groupe: groupeInstance(d.etapeFinale),
+      echeance: d.echeance ?? null,
+      projets: (d.projets ?? []).filter((cle) => cle in PROJETS),
+      phrase: resume?.puces?.[0] ?? d.objet ?? '',
+      puces: resume?.puces?.length && !resume.sansContenuSubstantiel ? resume.puces : [],
+      pdf: d.pdf ?? null,
+    };
+  })
   .sort((a, b) => (a.echeance ?? '9999').localeCompare(b.echeance ?? '9999') || (b.date ?? '').localeCompare(a.date ?? ''));
 const texteAttendues = JSON.stringify({ generatedAt: new Date().toISOString(), decisions: attendues });
 await writeFile('data/attendues.json', texteAttendues, 'utf8');
