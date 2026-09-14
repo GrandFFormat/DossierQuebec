@@ -393,6 +393,20 @@ maximal par jour ne change pas), puis note chacune « lu », « deja-lu » ou «
 lecture qui échoue reste en attente et repasse le lendemain. Un document lu mais inutilisable
 affiche « on n'a pas pu en tirer un détail fiable » au lieu du bouton.
 
+**Export en tableur (abonnés).** Dans Mes dossiers, l'abonné choisit lui-même : quelles décisions
+(toute l'année ou un projet), un mot ou un nom facultatif (ses mots-clés et organismes sont
+suggérés ; même recherche que les alertes), les groupes de colonnes (dossier toujours ; résumé IA,
+montant du résumé, détail de l'argent, liens au choix), « seulement avec un montant », puis Excel
+ou CSV. Une ligne par dossier (le sommaire et ses résolutions, `data/dossiers.json`, qui porte
+`numeros[]` pour retrouver les dossiers d'un projet cités par une résolution). Le fichier se
+fabrique dans le navigateur (`commun/tableur.js` : un vrai .xlsx écrit à la main — archive ZIP
+sans compression, relue par SheetJS au test — et un CSV « ; » avec marque UTF-8 pour Excel en
+français) ; seul le détail de l'argent vient du serveur, par lots de 150 (`GET
+/api/detail?ville=…&dossiers=…`, abonnés seulement, 200 au plus par appel). Le .xlsx a une
+feuille « À lire » : sélection, date, sources, et que les montants ne s'additionnent pas. Les
+montants restent du texte tel qu'écrit. Le lien « Dites-le-nous » sert à apprendre quels exports
+les abonnés veulent vraiment.
+
 **Le coût du détail (~0,26-0,28 $ US par dossier) : ce qui a été mesuré le 14 sept. 2026.**
 D'où il vient : environ 40 % la lecture du document (deux fois : extraction et contre-lecture),
 60 % la réflexion du modèle (sortie, 5 fois plus chère que l'entrée). Deux pistes testées sur

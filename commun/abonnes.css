@@ -303,6 +303,21 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-interrupteur input { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; }
 .ab-page .ab-alertes .ab-liens { align-items: center; }
 .ab-page .ab-organismes { border-left: 4px solid var(--accent); }
+.ab-page .ab-export { border-left: 4px solid var(--accent); }
+.ab-page .ab-export-grille { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.ab-page .ab-champ { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.ab-page .ab-champ > span, .ab-page .ab-champ > legend { font-weight: 700; font-size: 15px; padding: 0; }
+.ab-page .ab-champ > legend { margin-bottom: 6px; }
+.ab-page .ab-champ em { font-style: normal; font-weight: 400; color: var(--doux); }
+.ab-page .ab-champ select, .ab-page .ab-champ input[type="text"] {
+  font: inherit; font-size: 14px; padding: 8px 10px; width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box;
+  border: 1px solid var(--ligne-forte); border-radius: 6px; background: var(--carte); color: var(--encre);
+}
+.ab-page .ab-case { display: flex; align-items: flex-start; gap: 8px; font-size: 14.5px; line-height: 1.45; margin: 0 0 6px; }
+.ab-page .ab-case input { width: 17px; height: 17px; margin-top: 2px; flex: none; accent-color: var(--accent); }
+.ab-page .ab-case-filtre { margin-top: 8px; padding-top: 10px; border-top: 1px solid var(--ligne); }
+.ab-page .ab-case .ab-doux { color: var(--doux); font-size: 13px; }
+.ab-page .ab-export-compte { font-weight: 800; font-size: 16px; margin: 18px 0 0; }
 /* Un organisme suivi : même menu dépliant que les sections de l'agenda (ab-section-agenda), avec
    le « × » pour ne plus le suivre avant la flèche. */
 #org-liste { margin-top: 12px; }

@@ -235,6 +235,9 @@ const annee = [...groupesRecents.entries()]
     const resume = resumeDe.get(k);
     return {
       numero: principal.numero ?? null,
+      // Tous les numéros du dossier (sommaire et résolutions) : un projet peut citer une résolution
+      // seule (CA-2026-0362) là où ce fichier la range sous son sommaire (DE2026-212).
+      numeros: [...new Set(groupe.map((d) => d.numero).filter(Boolean))],
       date: principal.date ?? null,
       derniere: groupe.at(-1).date ?? null,
       instances: [...new Set(groupe.map((d) => d.instance).filter(Boolean))],
