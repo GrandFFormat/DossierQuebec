@@ -3,14 +3,14 @@
 Ce document est fait pour être **collé tel quel au début d'une nouvelle session**, avec une
 seule phrase en plus : « La ville, c'est ___. » Il dit ce qu'on a construit pour Québec, ce
 qui se réutilise sans y toucher, ce qui doit être réécrit pour une autre source, comment
-brancher la ville sur l'espace abonnés et la version anglaise, dans quel ordre travailler, et
+brancher la ville sur l'espace abonnés, dans quel ordre travailler, et
 les pièges déjà rencontrés. Le code de référence est public :
 `github.com/GrandFFormat/DossierQuebec`, dossier `quebec/` (le volet) et la racine (la couche
 commune : `commun/`, `api/`, `mes-dossiers.html`, `abonnement.html`). Le README de `quebec/` est le
 journal détaillé : ce guide y renvoie pour les formats exacts.
 
 Mis à jour le 14 sept. 2026 : espace abonnés (alertes, mots-clés, organismes, agenda, export,
-détail de l'argent et demandes) et version anglaise.
+détail de l'argent et demandes). La version anglaise n'est **pas** à reproduire (section 10).
 
 ---
 
@@ -55,8 +55,7 @@ l'exécution. Aucun framework, aucune dépendance sauf le SDK Anthropic pour les
 **À garder tel quel** (ça ne dépend pas de la ville) : les six pages et `assets/app.js`,
 `assets/style.css` (deux thèmes, pastilles, accordéon `<details name="fiches">`, taille du
 texte A− / A+, bouton fleur de lys vers DQ), `scrapers/resumes.js` (résumés IA avec cache,
-estimation, plafond, lots), `scrapers/traductions.js` et `scrapers/lexique-en.js` (version
-anglaise), `scrapers/recaps-projets.js`, `scrapers/details-argent.js`, `scrapers/archive.js`
+estimation, plafond, lots), `scrapers/recaps-projets.js`, `scrapers/details-argent.js`, `scrapers/archive.js`
 (rotation annuelle), `scripts/refresh.js` (routine quotidienne tolérante),
 `scripts/projets-publics.js` et `scripts/travail-public.js` (fichiers de Mes dossiers et de la
 page Abonnement), `scripts/static-server.js`, le workflow GitHub Actions, `.vercelignore`.
@@ -165,8 +164,8 @@ contradictions entre GeoJSON et page des membres, consignées), `districts[]` : 
 `octets`, `octetsCompresses`, `archiveLe`, `types`. Les années sont dans
 `archives/AAAA.json.gz`, métadonnées seulement, jamais lues par le site.
 
-À ces neuf fichiers s'ajoutent ceux de l'espace abonnés (section 9) et de la version anglaise
-(section 10), tous tirés des précédents par des scripts qui se réutilisent.
+À ces neuf fichiers s'ajoutent ceux de l'espace abonnés (section 9), tirés des précédents par
+des scripts qui se réutilisent.
 
 ## 6. Étape 4 — Les scrapers
 
@@ -240,7 +239,7 @@ parfois littéralement dans ses chaînes.
   `.titre-ligne`, un `<details class="ab-villes" id="villes">` rempli par
   `/commun/entete-volet.js`. Sur cellulaire, le sous-titre ne reste que sur l'accueil et les
   outils tiennent sur une ligne.
-- **Espace abonnés et version anglaise** : sections 9 et 10.
+- **Espace abonnés** : section 9. **Version anglaise** : pas pour l'instant, section 10.
 
 ## 9. Étape 7 — Brancher la ville sur l'espace abonnés
 
@@ -270,7 +269,6 @@ casse, ce qui permet de brancher morceau par morceau.
 | `api/detail.js` — `VILLES` | le détail de l'argent, les demandes et l'export |
 | `api/message.js` — `VILLES` | « Nous écrire » et « Signaler une erreur » |
 | `api/alertes-projets.js` — `VILLES` | les alertes du matin (projets, mots-clés, organismes) |
-| `commun/langue.js` — `VOLETS_EN` | la version anglaise, **seulement quand elle est prête** (section 10) |
 
 **3. Les fichiers que la ville publie pour Mes dossiers**, écrits par son
 `scripts/projets-publics.js` (celui de Québec se réutilise tel quel si `decisions.json` et
@@ -299,29 +297,24 @@ montants jamais additionnés, chaque nombre vérifié contre le texte.
 projet, ajouter un mot-clé et un organisme, ouvrir l'agenda, exporter en Excel et en PDF,
 s'envoyer un courriel d'essai d'alerte, demander un détail de l'argent.
 
-## 10. Étape 8 — La version anglaise (quand le volet est stable)
+## 10. La version anglaise : pas pour une nouvelle ville (pour l'instant)
 
-La mécanique complète est dans le README de Québec (« La version anglaise ») ; pour une ville :
+La version anglaise est un essai, sur Québec seulement : on attend de voir dans Vercel Analytics
+si des gens s'en servent (événements `langue_choisie` et `page_en`) avant de la reproduire
+ailleurs. C'est Martin qui décidera, chiffres en main. D'ici là, une nouvelle ville est **en
+français seulement** :
 
-1. **Pages** : `data-en="…"` sur chaque texte fixe (et `data-en-placeholder`, `data-en-title`,
-   `data-en-aria-label`, `data-en-content`, `<title data-en>`), plus les trois lignes du script
-   d'en-tête qui cachent la page le temps de traduire (copier celles de Québec).
-2. **`assets/app.js`** : `import { EN, tr } from '/commun/langue.js'`, chaque texte affiché en
-   `tr('français', 'English')`, dates et nombres au format anglais, et les résumés anglais
-   superposés au chargement (voir `init()` à Québec).
-3. **Libellés de la ville** (types, instances, arrondissements, rôles) : un
-   `assets/libelles-en.js` comme celui de Québec. Les noms propres restent en français.
-4. **Résumés et lexique** : `scrapers/traductions.js --batch` pour le rattrapage (garde-fou : les
-   mêmes nombres qu'en français, sinon refusé), puis `--plafond=150` dans `refresh.js` ;
-   `scrapers/lexique-en.js`. Coût mesuré à Québec : 12,04 $ US en lot pour 1 495 résumés, puis
-   ~1,6 ¢ par nouveau résumé (~3 $ par mois). Relire les refus du premier passage : à Québec,
-   c'étaient des heures (« 18 h » → « 6 p.m. »), réglées dans le garde-fou sans repayer le lot.
-5. **Ajouter la clé à `VOLETS_EN`** dans `commun/langue.js`. Avant ça, la ville reste en français
-   et n'a pas de pastille, même pour quelqu'un qui a choisi l'anglais : un en-tête anglais sur un
-   contenu français serait pire que rien.
+- Ne pas copier `scrapers/traductions.js` ni `scrapers/lexique-en.js`, et retirer du `refresh.js`
+  copié les deux étapes « Traductions anglaises des résumés » et « Lexique anglais » (elles
+  coûtent de l'argent chaque matin).
+- Ne pas ajouter la ville à `VOLETS_EN` dans `commun/langue.js` : la ville reste en français et
+  n'a pas de pastille EN, même pour quelqu'un qui a choisi l'anglais sur Québec.
+- Ce qui vient avec la copie des fichiers de Québec (`tr(…)` et `import` de `libelles-en.js`
+  dans `app.js`, attributs `data-en` dans les pages) est sans effet hors de `VOLETS_EN` : le
+  laisser tel quel, ne pas le compléter pour les textes propres à la ville, ne rien traduire.
 
-On mesure l'intérêt avant de généraliser : événements Vercel `langue_choisie` { vers, page } et
-`page_en` { page } (Analytics → Events, forfait Pro).
+Si l'anglais est retenu un jour, la mécanique et ses coûts sont dans le README de Québec
+(« La version anglaise »).
 
 ## 11. Étape 9 — L'automatisation
 
@@ -366,9 +359,6 @@ un navigateur, ou la mettre en secret.
 - **Supabase** : `service_role` a besoin de `grant` explicites sur chaque table ; une fonction
   reçoit `EXECUTE` pour tout le monde (`PUBLIC`) à sa création, il faut le révoquer ; ajouter une
   valeur (un sujet de message, par exemple) oblige à modifier la contrainte `check` de la table.
-- **Superposer une traduction aux données** : garder l'original (`pucesFr` à Québec) pour toute
-  recherche qui doit rester en français — les mots-clés et les organismes cherchent dans les
-  décisions, qui sont en français.
 - **Un compte ou une liste qui ne se voit qu'une fois connecté** se teste avec un faux client
   Supabase dans le navigateur, et le vrai aller-retour se vérifie après le déploiement.
 
@@ -387,8 +377,7 @@ un navigateur, ou la mettre en secret.
 11. Espace abonnés (section 9) : attributs des fiches, listes de villes, projets suivables et
     fichiers de Mes dossiers, puis le détail de l'argent ; vérifier avec un compte abonné.
 12. README à jour à chaque étape : chaque décision technique y a sa raison.
-13. Le volet stable : version anglaise (section 10), mesurée avant d'aller plus loin. Le jour
-    de la réponse de la ville : retirer les trois verrous, sitemap.
+13. Le jour de la réponse de la ville : retirer les trois verrous, sitemap.
 
 ## 14. Conventions de travail
 
@@ -418,5 +407,5 @@ un navigateur, ou la mettre en secret.
 - [ ] Cellulaire 375 px : aucun débordement horizontal, outils sur une ligne ; thème clair et
       sombre.
 - [ ] README du volet à jour ; ce guide aussi, s'il a appris quelque chose.
-- [ ] Plus tard : version anglaise (section 10) et retrait des verrous le jour de la réponse de la
-      ville.
+- [ ] Pas de traduction anglaise qui tourne pour la ville (section 10).
+- [ ] Plus tard : retrait des verrous le jour de la réponse de la ville.
