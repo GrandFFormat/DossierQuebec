@@ -101,8 +101,9 @@ possibles**, contrairement à Montréal.
   contenu demande son **autorisation préalable**. Comme DossierQuébec a un abonnement payant (les
   décisions restant gratuites), le courriel le dit franchement et demande l'autorisation
   (`courriel-greffe.md`).
-- Aucune adresse courriel publiée pour le greffe : le courriel passe par le Centre de services aux
-  citoyens, que l'avis juridique désigne pour les autorisations.
+- Aucune adresse courriel publiée pour le greffe : le courriel va à `accesinformation@longueuil.quebec`
+  (Me Audrey Paquet, responsable de l'accès aux documents, page « Demande d'accès à l'information »),
+  pour transmission à la greffière.
 
 ### Les pages « membres »
 
@@ -205,7 +206,7 @@ site servi.
 
 ## Ce qui n'est pas encore là
 
-- **Le courriel à la Ville** (`courriel-greffe.md`) : à envoyer, relance à 20 jours ouvrables. Les
+- **Le courriel à la Ville** (`courriel-greffe.md`) : à envoyer à accesinformation@longueuil.quebec (Me Audrey Paquet, pour transmission à la greffière), relance à 20 jours ouvrables. Les
   verrous `noindex` restent jusqu'à la réponse.
 - **Le comité exécutif, le comité exécutif d'agglomération et les trois arrondissements** : même
   gabarit de PV ; il suffit de passer `actif: true` dans `lib/lgl.js` et de vérifier le découpage. Seuls

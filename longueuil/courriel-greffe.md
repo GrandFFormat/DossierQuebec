@@ -3,16 +3,18 @@
 À envoyer **avant** de retirer les verrous `noindex` (voir README, « Où ce volet vit »).
 Programmer une relance à 20 jours ouvrables.
 
-**À qui.** Aucune adresse courriel du Service du greffe n'est publiée (vérifié le 14 septembre
-2026 : ni la page « Direction du greffe », ni les pages des instances, ni les procès-verbaux n'en
-donnent une). **Ne pas deviner une adresse.** Deux voies vérifiées :
+**À qui.** `accesinformation@longueuil.quebec` — l'adresse publiée sur la page
+[« Demande d'accès à l'information »](https://www.longueuil.quebec/fr/services/demande-acces-information)
+(vérifiée le 14 septembre 2026), celle de **Me Audrey Paquet**, responsable de l'accès aux documents
+et de la protection des renseignements personnels, en lui demandant de transmettre à **Me Sophie
+Deslauriers**, directrice du greffe et greffière (nommée en tête de chaque procès-verbal). Aucune
+adresse courriel du greffe lui-même n'est publiée : **ne pas en deviner une**.
 
-- l'[avis juridique](https://longueuil.quebec/fr/avis-juridique) désigne lui-même le **Centre de
-  services aux citoyens** ([nos coordonnées](https://longueuil.quebec/fr/nos-coordonnees), 311 ou
-  450 463-7311) pour les demandes d'autorisation : c'est la porte d'entrée officielle du point 1 ;
-- le formulaire [« Communiquez avec nous »](https://longueuil.quebec/fr/communiquez-avec-nous), en
-  demandant la transmission à la Direction du greffe. Par la poste : 4250, chemin de la Savane,
-  Longueuil (Québec) J3Y 9G4.
+Autres voies vérifiées : le **Centre de services aux citoyens**, que
+l'[avis juridique](https://longueuil.quebec/fr/avis-juridique) désigne pour les demandes
+d'autorisation (311 ou 450 463-7311) ; le formulaire
+[« Communiquez avec nous »](https://longueuil.quebec/fr/communiquez-avec-nous) ; la poste, 4250,
+chemin de la Savane, Longueuil (Québec) J3Y 9G4.
 
 Remplacer les chiffres entre crochets par ceux du dernier `npm run refresh`.
 
@@ -20,13 +22,15 @@ Remplacer les chiffres entre crochets par ceux du dernier `npm run refresh`.
 
 **Objet : Veille citoyenne des décisions de la Ville — demande d'autorisation et de confirmation d'usage**
 
+À l'attention de Me Audrey Paquet, responsable de l'accès aux documents — et, pour transmission, de
+Me Sophie Deslauriers, directrice du greffe
+
 Bonjour,
 
 Je m'appelle Martin Archambault. Je tiens un site citoyen indépendant, sans publicité, qui rend
 lisibles les décisions publiques : DossierQuébec (Assemblée nationale), DossierCanada (Parlement
 fédéral) et des volets municipaux pour Québec, Montréal et Lévis. Je prépare le même volet pour la
-Ville de Longueuil, et je vous écris avant de le rendre public. Je vous prie de transmettre ce
-message à la Direction du greffe.
+Ville de Longueuil, et je vous écris avant de le rendre public.
 
 **Ce que le site fait.** Il présente, pour l'année en cours, les résolutions du conseil de ville et
 du conseil d'agglomération — numéro, titre, date, résultat, et les votes nominatifs tels que
