@@ -471,33 +471,34 @@
 <style>
   @page { size: letter; margin: 16mm 15mm; }
   * { box-sizing: border-box; }
-  body { margin: 0 auto; max-width: 780px; padding: 24px; font: 11pt/1.45 Georgia, 'Times New Roman', serif; color: #16191D; background: #fff; }
+  body { margin: 0 auto; max-width: 780px; padding: 24px; font: 11pt/1.6 Georgia, 'Times New Roman', serif; color: #16191D; background: #fff; }
   .barre { position: sticky; top: 0; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 12px 14px; margin: -24px -24px 20px; background: #E6F6EC; font: 14px system-ui, sans-serif; }
   .barre button { font: 700 14px system-ui, sans-serif; padding: 8px 14px; border: 0; border-radius: 6px; background: #0B8A4B; color: #fff; cursor: pointer; }
-  header { border-bottom: 2px solid #16191D; padding-bottom: 10px; margin-bottom: 14px; }
+  header { border-bottom: 2px solid #16191D; padding-bottom: 12px; margin-bottom: 18px; }
   header .marque { font: 800 13pt system-ui, sans-serif; letter-spacing: -.01em; }
   header h1 { font: 700 17pt/1.25 system-ui, sans-serif; margin: 6px 0 4px; }
   header p { margin: 0; color: #5B6570; font: 10pt system-ui, sans-serif; }
-  .alire { font: 8.5pt/1.4 system-ui, sans-serif; color: #5B6570; margin: 0 0 12px; display: grid; grid-template-columns: max-content 1fr; gap: 2px 10px; }
+  .alire { font: 8.5pt/1.5 system-ui, sans-serif; color: #5B6570; margin: 0 0 22px; display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; }
   .alire dt { font-weight: 700; }
   .alire dd { margin: 0; }
-  article { border-top: 1px solid #C2CAD2; padding: 10px 0 8px; break-inside: avoid; page-break-inside: avoid; }
-  .meta { font: 8.5pt system-ui, sans-serif; color: #5B6570; }
+  /* De l'air (demandé par Martin après un premier PDF du tramway trop compact). */
+  article { border-top: 1px solid #C2CAD2; padding: 18px 0 16px; break-inside: avoid; page-break-inside: avoid; }
+  .meta { font: 8.5pt/1.5 system-ui, sans-serif; color: #5B6570; }
   .meta .num { font: 700 9pt ui-monospace, Consolas, monospace; color: #16191D; }
   .meta .sujet { font-weight: 700; color: #076338; }
   .sep { color: #C2CAD2; }
-  h2 { font: 700 11pt/1.35 system-ui, sans-serif; margin: 4px 0 6px; }
-  ul { margin: 0 0 6px; padding-left: 16px; }
-  li { margin: 0 0 2px; }
-  .montant { margin: 4px 0; font: 10pt system-ui, sans-serif; }
-  .argent { margin: 6px 0; padding: 6px 10px; border-left: 3px solid #0B8A4B; background: #F4F6F8; font: 9pt/1.4 system-ui, sans-serif; }
-  .titre-argent { font-weight: 800; margin-bottom: 3px; }
-  .argent dl { display: grid; grid-template-columns: max-content 1fr; gap: 1px 10px; margin: 0; }
+  h2 { font: 700 11.5pt/1.4 system-ui, sans-serif; margin: 6px 0 12px; }
+  ul { margin: 0 0 12px; padding-left: 20px; }
+  li { margin: 0 0 7px; padding-left: 2px; }
+  .montant { margin: 10px 0; font: 10pt/1.5 system-ui, sans-serif; }
+  .argent { margin: 12px 0; padding: 10px 14px; border-left: 3px solid #0B8A4B; background: #F4F6F8; font: 9pt/1.55 system-ui, sans-serif; }
+  .titre-argent { font-weight: 800; margin-bottom: 6px; }
+  .argent dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0; }
   .argent dt { font-weight: 700; color: #5B6570; }
   .argent dd { margin: 0; }
-  .liens { margin: 4px 0 0; font: 8.5pt system-ui, sans-serif; }
+  .liens { margin: 10px 0 0; font: 8.5pt system-ui, sans-serif; }
   .liens a { color: #076338; }
-  footer { margin-top: 16px; border-top: 2px solid #16191D; padding-top: 8px; font: 8.5pt system-ui, sans-serif; color: #5B6570; }
+  footer { margin-top: 24px; border-top: 2px solid #16191D; padding-top: 10px; font: 8.5pt system-ui, sans-serif; color: #5B6570; }
   @media print { .barre { display: none; } body { padding: 0; max-width: none; } }
 </style></head><body>
 <div class="barre"><button type="button" onclick="print()">Enregistrer en PDF ou imprimer</button><span>Dans la fenêtre d'impression, choisissez « Enregistrer au format PDF ».</span></div>
