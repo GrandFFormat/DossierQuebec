@@ -145,7 +145,8 @@ console.log(`Projets publics : ${Object.keys(index).length} projets · index ${(
 // doit décider, la date cible telles que la Ville les écrit dans le sommaire, et son résumé. Une
 // date cible n'est pas un ordre du jour : le dossier peut être reporté — la page le dit.
 // FORMAT COMMUN À TOUTES LES VILLES :
-//   { generatedAt, decisions: [{ numero, date, instance, groupe, echeance, projets[], phrase,
+//   { generatedAt, themes: { cle: { libelle, couleur } }, projets: { cle: titre },
+//     decisions: [{ numero, date, instance, groupe, echeance, projets[], theme, unite, phrase,
 //     puces[], pdf }] }   groupe : l'instance regroupée pour le menu de Mes dossiers
 const groupeInstance = (instance) => {
   const i = (instance ?? '').toLowerCase();
@@ -166,12 +167,17 @@ const attendues = decisions.decisions
       groupe: groupeInstance(d.etapeFinale),
       echeance: d.echeance ?? null,
       projets: (d.projets ?? []).filter((cle) => cle in PROJETS),
+      theme: d.theme ?? null,
+      unite: d.unite ?? null,
       phrase: resume?.puces?.[0] ?? d.objet ?? '',
       puces: resume?.puces?.length && !resume.sansContenuSubstantiel ? resume.puces : [],
       pdf: d.pdf ?? null,
     };
   })
   .sort((a, b) => (a.echeance ?? '9999').localeCompare(b.echeance ?? '9999') || (b.date ?? '').localeCompare(a.date ?? ''));
-const texteAttendues = JSON.stringify({ generatedAt: new Date().toISOString(), decisions: attendues });
+// Les pastilles de sujet (libellé, couleur) et le titre des projets, pour afficher sans autre fichier.
+const themesUtilises = Object.fromEntries([...new Set(attendues.map((d) => d.theme).filter(Boolean))].map((t) => [t, { libelle: themes[t]?.libelle ?? t, couleur: themes[t]?.couleur ?? null }]));
+const projetsUtilises = Object.fromEntries([...new Set(attendues.flatMap((d) => d.projets))].map((cle) => [cle, PROJETS[cle].titre]));
+const texteAttendues = JSON.stringify({ generatedAt: new Date().toISOString(), themes: themesUtilises, projets: projetsUtilises, decisions: attendues });
 await writeFile('data/attendues.json', texteAttendues, 'utf8');
 console.log(`Décisions attendues : ${attendues.length} dossiers en attente, dont ${attendues.filter((d) => d.echeance).length} avec une date cible · ${(texteAttendues.length / 1024).toFixed(1)} Ko.`);
