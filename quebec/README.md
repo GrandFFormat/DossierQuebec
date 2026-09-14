@@ -324,7 +324,7 @@ montre que cette ville ; sinon elle additionne les villes qui publient ce fichie
 du script).
 
 **Une autre ville qui veut ses projets dans Mes dossiers produit ces deux fichiers, avec ces
-champs** (et s'ajoute à `VILLES` dans `/commun/abonnes-client.js`). Sans `index.json`, la ville
+champs** (et s'ajoute à `VILLES` dans `/commun/navigation.js`). Sans `index.json`, la ville
 est simplement absente des suggestions.
 
 **Le détail ne vit plus dans le dépôt.** Le dépôt GitHub de DossierQuébec est public : un fichier

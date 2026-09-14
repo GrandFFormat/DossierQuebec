@@ -13,7 +13,8 @@
 //     « Abonnez-vous » sinon. Rien n'est chargé tant qu'on n'ouvre pas une fiche ;
 //   - au bas de la fiche ouverte, « Signaler une erreur dans cette fiche » (compte requis).
 
-import { VILLES, echapper, mesurer, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, formulaireMessage, memoriserVolet, client } from './abonnes-client.js';
+import { VILLES, echapper, mesurer, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, formulaireMessage, client } from './abonnes-client.js';
+import { memoriserVolet } from './navigation.js';
 
 const VILLE = document.body.dataset.ville;
 let sess = null;
