@@ -189,6 +189,7 @@
 .ab-page .ab-chrono-titre { font-weight: 800; font-size: 15px; margin: 1px 0 2px; }
 .ab-page .ab-chrono > li > p { margin: 0 0 4px; font-size: 14.5px; }
 .ab-page .ab-refs { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.ab-page .ab-refs-dessous { display: flex; margin-top: 4px; }
 .ab-page .ab-ref {
   display: inline-flex; align-items: center; gap: 3px; cursor: pointer;
   font-size: 11.5px; font-weight: 600; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; line-height: 1.5;

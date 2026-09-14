@@ -268,7 +268,7 @@
         <p>${echapper(e.texte)}</p>
         <div class="ab-refs">${e.numeros.map((n) => refNumero(n)).join('')}</div>
       </li>`).join('');
-    const surveiller = r.aSurveiller.map((e) => `<li>${echapper(e.texte)} <span class="ab-refs">${e.numeros.map((n) => refNumero(n)).join('')}</span></li>`).join('');
+    const surveiller = r.aSurveiller.map((e) => `<li>${echapper(e.texte)}<div class="ab-refs ab-refs-dessous">${e.numeros.map((n) => refNumero(n)).join('')}</div></li>`).join('');
     return `<section class="ab-recap">
       <div class="ab-detail-titre">Où en est le projet <span class="ab-etiquette">résumé généré par IA</span></div>
       ${r.enBref ? `<p class="ab-en-bref">${echapper(r.enBref)}</p>` : ''}
@@ -338,7 +338,7 @@
       ? `<div class="ab-bloc"><div class="ab-detail-titre">En attente d'une décision</div><ul class="ab-liste-projet">
           ${enAttente.map((l) => {
             const p = principalDe(l);
-            return `<li class="ab-ligne-projet"><div class="ab-meta">${refNumero(p.numero ?? '')}${pastilleStatut(p)}</div><div>${echapper(resumeDe.get(l.k)?.puces?.[0] ?? p.objet ?? '')}</div></li>`;
+            return `<li class="ab-ligne-projet"><div class="ab-meta">${pastilleStatut(p)}</div><div>${echapper(resumeDe.get(l.k)?.puces?.[0] ?? p.objet ?? '')}</div>${p.numero ? `<div class="ab-refs ab-refs-dessous">${refNumero(p.numero)}</div>` : ''}</li>`;
           }).join('')}
         </ul></div>`
       : '';
@@ -347,8 +347,9 @@
       const resume = resumeDe.get(k);
       const instances = [...new Set(docs.map((d) => d.instance).filter(Boolean))];
       return `<li class="ab-ligne-projet">
-        <div class="ab-meta">${principal.numero ? refNumero(principal.numero) : ''}<span>${dateFr(docs[0].date)}</span>${instances.length ? `<span>${echapper(instances.join(' · '))}</span>` : '<span>sommaire</span>'}${pastilleStatut(principal)}</div>
+        <div class="ab-meta"><span>${dateFr(docs[0].date)}</span>${instances.length ? `<span>${echapper(instances.join(' · '))}</span>` : '<span>sommaire</span>'}${pastilleStatut(principal)}</div>
         <div>${echapper(resume?.puces?.[0] ?? principal.objet ?? '')}</div>
+        ${principal.numero ? `<div class="ab-refs ab-refs-dessous">${refNumero(principal.numero)}</div>` : ''}
       </li>`;
     };
     corps.innerHTML = `${projet?.description ? `<p class="ab-note" style="margin-top:0">${echapper(projet.description)}</p>` : ''}
