@@ -76,9 +76,14 @@ même phrase :
 ### Les pages « membres »
 
 - **Districts** : GeoJSON CC-BY sur Données Québec, à jour (mai 2026).
-- **Élus** : le jeu ouvert date de 2023, inutilisable. La page des élus de laval.ca est derrière le
-  même Cloudflare (pas encore lue). Les présences (jeu ouvert, mensuel) et les en-têtes de
-  procès-verbaux donnent les noms et fonctions actuels ; district et parti devront venir de laval.ca.
+- **Élus** : le jeu ouvert date de 2023, inutilisable. La page officielle
+  `laval.ca/vie-democratique/hotel-de-ville-personnes-elues/membres-conseil-municipal/` (lue le
+  14 sept. 2026 dans un navigateur, même Cloudflare) donne le maire et **22 districts** : nom,
+  « District 05 – Marigot », courriel `@laval.ca`, téléphone, lien « Voir son profil ». Le **parti**
+  n'est que sur la fiche de profil (`…/membres-conseil-municipal/<prenom-nom>/` : « Parti politique :
+  Mouvement lavallois »), avec le nombre d'habitants du district et une biographie. Photos chargées
+  à l'affichage (image vide dans le HTML). Les présences (jeu ouvert, mensuel) et les en-têtes de
+  procès-verbaux recoupent les noms et les fonctions.
 - **Présences** : déjà publiées en données ouvertes par la Ville — pas besoin de les extraire des
   procès-verbaux comme pour l'agglomération de Québec.
 
