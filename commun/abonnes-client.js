@@ -86,6 +86,33 @@ export async function chargerDetail(ville, dossier, s) {
 // elle est abonnée, limite à 5 messages par 24 heures, garde le message et en envoie une copie.
 export const SUJETS_MESSAGE = { idee: 'Une idée', probleme: 'Un problème sur le site', erreur: 'Une erreur dans une donnée' };
 
+// Le remerciement dépend du sujet, et change d'une fois à l'autre : quelqu'un qui écrit souvent
+// ne reçoit pas toujours la même phrase.
+const MERCIS = {
+  idee: [
+    "Merci pour votre idée ! Merci d'avoir pris le temps de nous l'écrire, et de vous impliquer dans le site.",
+    'Idée bien reçue, merci ! Votre temps et votre implication font avancer le site.',
+    "Merci d'avoir partagé cette idée. C'est grâce à des gens impliqués comme vous que le site s'améliore.",
+    "Bien reçu, merci ! Chaque idée est lue, et on apprécie que vous preniez le temps de contribuer.",
+  ],
+  probleme: [
+    "Merci d'avoir pris le temps de nous signaler ce problème : vous nous aidez à rendre le site meilleur.",
+    'Problème bien reçu, merci ! Votre signalement nous aide à améliorer le site pour tout le monde.',
+    "Merci de nous l'avoir signalé. C'est comme ça qu'on rend le site meilleur, un problème à la fois.",
+    "Bien reçu, merci d'avoir pris ce temps : grâce à vous, on peut corriger ce qui cloche.",
+  ],
+  erreur: [
+    "Merci d'avoir pris le temps de signaler cette erreur : vous nous aidez à rendre les décisions plus claires pour tout le monde.",
+    "Erreur bien reçue, merci ! Votre œil attentif aide tout le monde à mieux comprendre ce que la Ville décide.",
+    "Merci de nous l'avoir signalée. Chaque correction rend l'information plus juste et plus lisible.",
+    "Bien reçu, merci ! Grâce à votre signalement, la fiche sera plus exacte pour les prochains lecteurs.",
+  ],
+};
+const merci = (sujet) => {
+  const phrases = MERCIS[sujet] ?? MERCIS.idee;
+  return phrases[Math.floor(Math.random() * phrases.length)];
+};
+
 async function envoyerMessage(contenu) {
   const s = await session();
   if (!s) return 'session';
@@ -124,7 +151,7 @@ export function formulaireMessage(boite, s, { sujet = 'idee', ville = null, nume
     const choix = form.elements.sujet?.value ?? sujet;
     const erreur = await envoyerMessage({ sujet: choix, message: form.elements.message.value.trim(), ville, numero, page: (location.pathname + location.search).slice(0, 300) });
     if (!erreur) {
-      boite.innerHTML = '<p class="ab-merci">Merci, votre message est bien reçu.</p>';
+      boite.innerHTML = `<p class="ab-merci">${echapper(merci(choix))}</p>`;
       mesurer('message_envoye', { sujet: choix, ville: ville ?? '' });
       return;
     }
