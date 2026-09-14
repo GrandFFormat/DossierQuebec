@@ -41,6 +41,10 @@ create index alertes_envois_par_compte on public.alertes_envois (user_id, envoye
 alter table public.alertes_envois enable row level security;
 create policy "alertes : lire ses envois" on public.alertes_envois for select using (auth.uid() = user_id);
 
+-- La fonction lit aussi les projets suivis de chaque abonné : scripts/supabase-schema-abonnes.sql
+-- ne donnait cette table qu'aux comptes connectés.
+grant select on public.dossiers_suivis to service_role;
+
 grant select, insert, update, delete on public.alertes_etat to service_role;
 grant select, insert, update on public.alertes_preferences to authenticated;
 grant select, insert, update on public.alertes_preferences to service_role;
