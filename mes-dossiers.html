@@ -213,7 +213,48 @@
   // par thème, ce qui attend une décision, puis toutes les décisions, repliées.
   const MOIS_COURTS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
   const MOIS_ETIQUETTES = ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 'juil', 'aoû', 'sep', 'oct', 'nov', 'déc'];
-  const lienNumero = (ville, n) => `<a class="ab-ref" href="/${echapper(ville)}/decisions.html?q=${encodeURIComponent(n)}">${echapper(n)}</a>`;
+  // Un numéro de décision se déplie sur place, sous son paragraphe : on ne quitte pas la page.
+  const refNumero = (n) => `<button type="button" class="ab-ref" data-action="ref" data-numero="${echapper(n)}" aria-expanded="false">${echapper(n)}<span aria-hidden="true">▾</span></button>`;
+
+  async function basculerRef(bouton) {
+    const li = bouton.closest('li');
+    const { ville } = bouton.closest('details.ab-dossier').dataset;
+    const etaitOuvert = bouton.getAttribute('aria-expanded') === 'true';
+    for (const b of li.querySelectorAll('[data-action="ref"]')) b.setAttribute('aria-expanded', 'false');
+    li.querySelector(':scope > .ab-ref-panneau')?.remove();
+    if (etaitOuvert) return;
+    bouton.setAttribute('aria-expanded', 'true');
+
+    const [decisions, resumes] = await Promise.all([jeu(ville, 'decisions'), jeu(ville, 'resumes')]);
+    const numero = bouton.dataset.numero;
+    const doc = (decisions?.decisions ?? []).find((d) => d.numero === numero);
+    const panneau = document.createElement('div');
+    panneau.className = 'ab-ref-panneau';
+    if (!doc) {
+      panneau.innerHTML = `<p class="ab-note">${echapper(numero)} n'est plus dans les décisions de l'année de ce volet.</p>`;
+    } else {
+      // Le dossier entier : le sommaire et toutes ses résolutions, même si c'est une résolution qui est citée.
+      const k = doc.sommaireId ?? doc.dossier ?? doc.id;
+      const groupe = decisions.decisions.filter((d) => (d.sommaireId ?? d.dossier ?? d.id) === k && !PAS_UN_DOSSIER.has(d.type)).sort((a, b) => (a.date ?? '').localeCompare(b.date ?? ''));
+      const principal = groupe.find((d) => d.id === k) ?? doc;
+      const resume = (resumes?.resumes ?? []).find((r) => r.id === k);
+      const resolutions = groupe.filter((d) => d.instance);
+      panneau.innerHTML = `<div class="ab-meta"><strong>${echapper(principal.numero ?? numero)}</strong><span>${dateFr(principal.date)}</span>${pastilleStatut(principal)}</div>
+        ${resume?.puces?.length
+          ? `<ul>${resume.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul><p class="ab-note">Résumé généré par IA. Le document officiel fait foi.</p>`
+          : `<p>${echapper(principal.objet ?? '')}</p>`}
+        ${resolutions.length
+          ? `<div class="ab-ref-sous">Parcours</div><ol class="ab-parcours">${resolutions.map((d) => `<li>${echapper(d.instance)}, ${dateFr(d.date)}${d.numero ? ` — ${echapper(d.numero)}` : ''}${d.resultat ? ` · ${echapper(d.resultat)}` : ''}</li>`).join('')}</ol>`
+          : ''}
+        <div class="ab-liens">
+          ${principal.pdf ? `<a href="${echapper(principal.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}
+          <a href="/${echapper(ville)}/decisions.html?q=${encodeURIComponent(principal.numero ?? numero)}">Voir dans le volet ${echapper(VILLES[ville] ?? '')}</a>
+        </div>`;
+    }
+    // Le clic a pu se refermer entre-temps (double clic rapide).
+    if (bouton.getAttribute('aria-expanded') === 'true' && !li.querySelector(':scope > .ab-ref-panneau')) li.append(panneau);
+    mesurer('deplier_decision_projet', { ville });
+  }
 
   function rendreRecap(r, ville) {
     if (!r?.utilisable) return '';
@@ -221,9 +262,9 @@
         <div class="ab-chrono-periode">${echapper(e.periode)}</div>
         <div class="ab-chrono-titre">${echapper(e.titre)}</div>
         <p>${echapper(e.texte)}</p>
-        <div class="ab-refs">${e.numeros.map((n) => lienNumero(ville, n)).join('')}</div>
+        <div class="ab-refs">${e.numeros.map((n) => refNumero(n)).join('')}</div>
       </li>`).join('');
-    const surveiller = r.aSurveiller.map((e) => `<li>${echapper(e.texte)} <span class="ab-refs">${e.numeros.map((n) => lienNumero(ville, n)).join('')}</span></li>`).join('');
+    const surveiller = r.aSurveiller.map((e) => `<li>${echapper(e.texte)} <span class="ab-refs">${e.numeros.map((n) => refNumero(n)).join('')}</span></li>`).join('');
     return `<section class="ab-recap">
       <div class="ab-detail-titre">Où en est le projet <span class="ab-etiquette">résumé généré par IA</span></div>
       ${r.enBref ? `<p class="ab-en-bref">${echapper(r.enBref)}</p>` : ''}
@@ -294,7 +335,7 @@
       ? `<div class="ab-bloc"><div class="ab-detail-titre">En attente d'une décision</div><ul class="ab-liste-projet">
           ${enAttente.map((l) => {
             const p = principalDe(l);
-            return `<li class="ab-ligne-projet"><div class="ab-meta">${lienNumero(ville, p.numero ?? '')}${pastilleStatut(p)}</div><div>${echapper(resumeDe.get(l.k)?.puces?.[0] ?? p.objet ?? '')}</div></li>`;
+            return `<li class="ab-ligne-projet"><div class="ab-meta">${refNumero(p.numero ?? '')}${pastilleStatut(p)}</div><div>${echapper(resumeDe.get(l.k)?.puces?.[0] ?? p.objet ?? '')}</div></li>`;
           }).join('')}
         </ul></div>`
       : '';
@@ -415,6 +456,9 @@
       $('#liste').scrollIntoView({ behavior: 'smooth', block: 'start' });
       return;
     }
+
+    const ref = e.target.closest('[data-action="ref"]');
+    if (ref) return basculerRef(ref);
 
     const bouton = e.target.closest('[data-action="retirer"]');
     if (!bouton) return;
