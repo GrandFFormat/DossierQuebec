@@ -58,6 +58,7 @@ function formulaireConnexion(boite, message) {
   boite.innerHTML = `<p>${echapper(message)}</p>
     <form class="ab-form"><input type="email" required placeholder="Votre courriel" autocomplete="email">
     <button type="submit" class="ab-bouton">Recevoir le lien de connexion</button></form>
+    <p class="ab-note">Un seul lien peut être envoyé toutes les 5 minutes. Pensez à vérifier vos courriels indésirables.</p>
     <p class="ab-note ab-etat" aria-live="polite"></p>`;
   boite.querySelector('form').addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -69,7 +70,7 @@ function formulaireConnexion(boite, message) {
     const erreur = await envoyerLien(champ.value.trim());
     if (erreur) {
       bouton.disabled = false;
-      etat.textContent = erreur.code === 'over_email_send_rate_limit' ? 'Un lien a déjà été envoyé récemment — vérifiez votre boîte courriel.' : 'Une erreur est survenue. Réessayez.';
+      etat.textContent = erreur.code === 'over_email_send_rate_limit' ? 'Un lien a déjà été envoyé il y a moins de 5 minutes — vérifiez votre boîte courriel (et les indésirables), ou réessayez dans quelques minutes.' : 'Une erreur est survenue. Réessayez.';
     } else {
       etat.textContent = `Lien envoyé à ${champ.value.trim()}. Ouvrez-le pour revenir ici, connecté.`;
     }
