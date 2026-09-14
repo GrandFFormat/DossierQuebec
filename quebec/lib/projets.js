@@ -45,8 +45,10 @@ export const PROJETS = {
     description: 'Le redéveloppement du site des Galeries Charlesbourg, par phases jusqu’en 2035.',
     regle: /Galeries Charlesbourg/i,
   },
+  // La clé garde l'ancien nom : elle est enregistrée dans les suivis (« projet:interconnexion-quebec-levis »).
+  // Le titre dit ce que la Ville de Québec décide, sur son territoire : ce n'est pas un suivi de Lévis.
   'interconnexion-quebec-levis': {
-    titre: 'Interconnexion Québec–Lévis',
+    titre: "Corridor de l'avenue des Hôtels (lien avec Lévis)",
     description: "Le corridor de transport collectif de l'avenue des Hôtels, qui relie les autobus de Lévis au tramway.",
     regle: /interconnexion des r[ée]seaux de transport en commun|avenue des H[ôo]tels/i,
   },
