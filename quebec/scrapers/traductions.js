@@ -4,10 +4,11 @@
 //   node --env-file=../api.env scrapers/traductions.js --max=5           essai synchrone
 //   node --env-file=../api.env scrapers/traductions.js --batch           rattrapage : tout, API Batches (−50 %)
 //   node --env-file=../api.env scrapers/traductions.js --plafond=150     routine du matin (refresh.js)
+//   node --env-file=../api.env scrapers/traductions.js --refusees        réessaie les refus du garde-fou
 //
 // On ne relit pas les PDF : on traduit les puces déjà écrites en français (data/resumes.json),
-// ce qui coûte peu (~0,007 $ US par résumé avec Opus, moitié moins en lot). Les documents de la
-// Ville restent en français ; le site le dit.
+// ce qui coûte peu (mesuré : ~1,6 ¢ US par résumé avec Opus, 0,8 ¢ en lot — 12,04 $ pour les
+// 1 495 du rattrapage). Les documents de la Ville restent en français ; le site le dit.
 //
 // GARDE-FOU : chaque nombre du français doit se retrouver dans l'anglais (montants, dates,
 // pourcentages, numéros), une fois retirés les séparateurs de milliers et de décimales — « 5 948 217 $ »
@@ -35,7 +36,10 @@ Translate faithfully, bullet by bullet: same number of bullets, same order, same
 remove, explain, soften or judge anything. No context from your general knowledge.
 
 Numbers: keep every figure. Use Canadian English formatting ($5,948,217; $175M; 6.5%; June 30, 2027).
-Never change, round, add or drop a number.
+Never change, round, add or drop a number. Keep figures in digits as in the French, even where an
+English idiom would merge them ("24 heures sur 24, 7 jours sur 7" = "24 hours a day, 7 days a week").
+Québec apartment sizes stay in digits ("4 ½" = "4½ unit"); a "5 à 7" is a "5-to-7 cocktail event".
+Do not repeat a figure in an added translation or explanation.
 
 Names: keep proper names in French exactly as written — streets (rue, avenue, boulevard: "1re Avenue",
 "boulevard Wilfrid-Hamel"), neighbourhoods, arrondissements, parks, buildings, organizations,
@@ -73,9 +77,20 @@ function requete(r) {
   };
 }
 
-// Tous les nombres d'un texte, séparateurs de milliers et décimales retirés, triés.
+// Tous les nombres d'un texte, séparateurs de milliers et décimales retirés, triés. Avant ça, les
+// tournures qui changent le compte sans changer le sens prennent une seule forme : « 6:30 p.m. » =
+// « 18 h 30 », « noon » = « midi » = 12, « midnight » = « minuit » = 0, « 24 heures sur 24 » = « 24 hours
+// a day ». Le reste (« 3 ½ » écrit en lettres, un nombre ajouté entre parenthèses) est refusé.
+const heure24 = (_, h, min, ap) => `${(Number(h) % 12) + (ap.toLowerCase() === 'p' ? 12 : 0)}${min ? ` h ${min}` : ''}`;
+const FORMES = [
+  [/\b(\d{1,2})(?::(\d{2}))?\s*([ap])\.?\s?m\b\.?/gi, heure24],
+  [/\b(?:noon|(?<![-\w])midi)\b/gi, () => '12 h'],
+  [/\b(?:midnight|minuit)\b/gi, () => '0 h'],
+  [/\b(\d+) (heures|jours) sur \1\b/gi, (_, n, mot) => `${n} ${mot}`],
+];
 export function nombres(texte) {
-  return (String(texte ?? '').replace(/(\d)[\s  .,](?=\d)/g, '$1').match(/\d+/g) ?? []).sort();
+  const uniforme = FORMES.reduce((t, [motif, forme]) => t.replace(motif, forme), String(texte ?? ''));
+  return (uniforme.replace(/(\d)(?:[\s\u00a0\u202f]+|[.,])(?=\d)/g, '$1').match(/\d+/g) ?? []).sort();
 }
 const memesNombres = (fr, en) => nombres(fr).join(' ') === nombres(en).join(' ');
 
@@ -100,11 +115,15 @@ const lireSortie = (message) => message.content.find((b) => b.type === 'tool_use
 async function main() {
   const { resumes = [] } = JSON.parse(await readFile(RESUMES, 'utf8'));
   let precedent = {};
-  try { precedent = JSON.parse(await readFile(OUT, 'utf8')).traductions ?? {}; } catch {}
+  // Les refus du garde-fou, gardés pour ne pas repayer chaque matin une traduction qui échouera
+  // encore : on réessaie quand le résumé français est refait, ou avec --refusees.
+  let refusPrecedents = {};
+  try { ({ traductions: precedent = {}, refus: refusPrecedents = {} } = JSON.parse(await readFile(OUT, 'utf8'))); } catch {}
 
   const candidats = resumes
     .filter((r) => r.puces?.length && !r.sansContenuSubstantiel)
     .filter((r) => args.has('force') || precedent[r.id]?.source !== (r.genereLe ?? null))
+    .filter((r) => args.has('force') || args.has('refusees') || refusPrecedents[r.id]?.source !== (r.genereLe ?? null))
     .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
   const plafond = args.has('batch') ? Infinity : Number(args.get('max') ?? args.get('plafond') ?? 150);
   const aFaire = candidats.slice(0, plafond);
@@ -116,6 +135,7 @@ async function main() {
 
   const client = new Anthropic();
   const faites = {};
+  const refus = {};
   const echecs = [];
   let entree = 0;
   let sortie = 0;
@@ -123,7 +143,12 @@ async function main() {
     entree += message.usage?.input_tokens ?? 0;
     sortie += message.usage?.output_tokens ?? 0;
     const v = verifier(r, lireSortie(message));
-    if (v.raison) { echecs.push(`${r.numero ?? r.id} : ${v.raison}`); return false; }
+    if (v.raison) {
+      echecs.push(`${r.numero ?? r.id} : ${v.raison}`);
+      refus[r.id] = { source: r.genereLe ?? null, raison: v.raison, le: new Date().toISOString() };
+      return false;
+    }
+    delete refus[r.id];
     faites[r.id] = { puces: v.puces, montantPrincipal: v.montantPrincipal, source: r.genereLe ?? null, genereLe: new Date().toISOString() };
     return true;
   };
@@ -165,6 +190,7 @@ async function main() {
   // Les traductions d'un résumé disparu ne sont plus utiles.
   const ids = new Set(resumes.map((r) => r.id));
   const traductions = Object.fromEntries(Object.entries({ ...precedent, ...faites }).filter(([id]) => ids.has(id)));
+  const refusGardes = Object.fromEntries(Object.entries({ ...refusPrecedents, ...refus }).filter(([id]) => ids.has(id) && !faites[id]));
   const coutReel = ((entree / 1e6) * TARIF.entree + (sortie / 1e6) * TARIF.sortie) * (args.has('batch') ? 0.5 : 1);
   await writeFile(OUT, JSON.stringify({
     generatedAt: new Date().toISOString(),
@@ -173,6 +199,7 @@ async function main() {
     avertissement: 'Traductions automatiques des résumés français ; chaque nombre a été vérifié contre le français. Les documents de la Ville sont en français et font foi.',
     nombre: Object.keys(traductions).length,
     traductions,
+    refus: refusGardes,
   }), 'utf8');
   console.log(`Traductions : ${Object.keys(faites).length} faites (${echecs.length} refusées ou en échec), ${Object.keys(traductions).length} au total — ${coutReel.toFixed(2)} $ US.`);
   for (const e of echecs.slice(0, 15)) console.warn(`  ⚠ ${e}`);
