@@ -230,6 +230,12 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-ligne-projet:first-child { border-top: 0; }
 .ab-page .ab-ligne-projet .ab-liens { margin-top: 4px; }
 .ab-page .ab-pourquoi { margin-top: 26px; border-left: 4px solid var(--vedette); }
+.ab-page .ab-pourquoi-deux { margin-top: 26px; }
+.ab-page .ab-pourquoi-deux .ab-pourquoi { margin-top: 0; }
+.ab-page .ab-pourquoi-deux .ab-carte { margin-bottom: 0; }
+.ab-page .ab-pourquoi-deux .ab-carte > ul { margin: 6px 0 12px; padding-left: 18px; font-size: 14.5px; }
+.ab-page .ab-pourquoi-deux .ab-carte li { margin: 0 0 6px; }
+.ab-page .ab-pourquoi-deux > .ab-note { margin-top: 10px; }
 .ab-page .ab-pourquoi ul { margin: 0 0 14px; padding-left: 18px; }
 .ab-page .ab-pourquoi li { margin: 0 0 6px; }
 .ab-page .ab-sous-titre { font-size: 15px; margin: 18px 0 8px; color: var(--doux); text-transform: uppercase; letter-spacing: .05em; }
