@@ -124,20 +124,32 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
   --accent: #3DD68C; --accent-fond: #0F2A1D; --accent-encre: #7BE7B2; --fond-2: #1C232C;
 }
 .ab-page .ab-contenu { max-width: 860px; margin: 0 auto; padding: 22px 22px 80px; }
-/* En-tête des pages communes : même organisation que les volets — le logo et le retour au
-   volet quitté, puis les onglets à gauche et les outils (taille du texte, thème) à droite. */
+/* En-tête des pages communes : même organisation que les volets — le logo (celui du volet d'où
+   l'on vient) et le choix de la ville, puis les onglets à gauche et les outils à droite. */
 .ab-page .ab-haut { padding: 14px 0 0; border-bottom: 1px solid var(--ligne); margin-bottom: 22px; }
 .ab-page .ab-haut-ligne { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding-bottom: 10px; }
 .ab-page .ab-marque { font-size: 22px; font-weight: 800; letter-spacing: -.02em; color: var(--encre); text-decoration: none; }
 .ab-page .ab-marque span { color: var(--accent); }
-.ab-page .ab-retour-volet {
-  font-size: 13px; font-weight: 600; text-decoration: none; white-space: nowrap;
-  color: var(--accent-encre); border: 1px solid var(--accent); border-radius: 999px; padding: 4px 12px;
+.ab-page .ab-villes { margin-left: auto; position: relative; font-size: 13.5px; }
+.ab-page .ab-villes > summary {
+  list-style: none; cursor: pointer; white-space: nowrap; font-weight: 600; color: var(--encre);
+  background: var(--carte); border: 1px solid var(--ligne-forte); border-radius: 999px; padding: 5px 12px;
 }
-.ab-page .ab-retour-volet:hover { background: var(--accent-fond); }
-.ab-page .ab-villes { margin-left: auto; font-size: 13px; color: var(--doux); }
-.ab-page .ab-villes a { color: var(--doux); font-weight: 600; text-decoration: none; }
-.ab-page .ab-villes a:hover { color: var(--encre); }
+.ab-page .ab-villes > summary::-webkit-details-marker { display: none; }
+.ab-page .ab-villes > summary::after { content: " ▾"; color: var(--doux); }
+.ab-page .ab-villes[open] > summary::after { content: " ▴"; }
+.ab-page .ab-villes > summary:hover { border-color: var(--accent); }
+.ab-page .ab-villes > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.ab-page .ab-villes-menu {
+  position: absolute; right: 0; top: calc(100% + 6px); z-index: 30; min-width: 220px;
+  list-style: none; margin: 0; padding: 6px; background: var(--carte);
+  border: 1px solid var(--ligne); border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+}
+.ab-page .ab-villes-menu a { display: block; padding: 8px 10px; border-radius: 6px; color: var(--encre); text-decoration: none; font-weight: 600; }
+.ab-page .ab-villes-menu a:hover { background: var(--fond-2); }
+.ab-page .ab-villes-menu a[aria-current] { color: var(--accent-encre); background: var(--accent-fond); }
+.ab-page .ab-villes-dq { border-top: 1px solid var(--ligne); margin-top: 4px; padding-top: 4px; }
+.ab-page .ab-villes-dq span { color: var(--doux); font-weight: 400; }
 .ab-page .ab-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
 .ab-page .ab-onglets { display: flex; flex-wrap: wrap; gap: 3px; }
 .ab-page .ab-onglets a {
@@ -178,7 +190,6 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 }
 .ab-page .ab-theme[aria-pressed="true"]::after { display: none; }
 @media (max-width: 620px) {
-  .ab-page .ab-villes { margin-left: 0; flex-basis: 100%; }
   .ab-page .ab-onglets a { padding: 8px 9px; font-size: 13.5px; }
   .ab-page .ab-outils { flex-basis: 100%; justify-content: space-between; padding: 4px 0 10px; }
   .ab-page .ab-taille span { display: none; }

@@ -23,7 +23,7 @@ const cle = (ville, dossier) => `${ville}|${dossier}`;
 const zoneDe = (fiche) => fiche?.querySelector(':scope > .corps > .ab-fiche');
 
 // « Mes dossiers » et « Abonnement » en tête des outils du menu (nav .outils), dans tous les
-// volets. La page quittée est mémorisée : Mes dossiers et Abonnement offrent d'y revenir.
+// volets. La ville est mémorisée : Mes dossiers et Abonnement prennent la marque de ce volet.
 function boutonsEntete() {
   if (document.querySelector('.ab-mes-dossiers')) return;
   const mesDossiers = document.createElement('a');

@@ -12,48 +12,54 @@ export const VILLES = { quebec: 'Québec', montreal: 'Montréal' };
 export const echapper = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-// Un volet mémorise la page où l'on était ; Mes dossiers et Abonnement se présentent alors
-// comme une partie de ce volet et proposent d'y revenir. Seulement un chemin du site, jamais une
-// adresse extérieure.
+// Un volet mémorise sa ville ; Mes dossiers et Abonnement se présentent alors comme une partie
+// de ce volet (sa marque, et son logo qui y ramène).
 const CLE_VOLET = 'dq:dernier-volet';
 export function memoriserVolet(ville) {
   try {
-    localStorage.setItem(CLE_VOLET, JSON.stringify({ ville, chemin: location.pathname + location.search }));
+    localStorage.setItem(CLE_VOLET, JSON.stringify({ ville }));
   } catch {}
 }
 export function dernierVolet() {
   try {
     const v = JSON.parse(localStorage.getItem(CLE_VOLET) ?? 'null');
-    if (v && VILLES[v.ville] && typeof v.chemin === 'string' && v.chemin.startsWith(`/${v.ville}/`) && /^[\w\-./?=&%+]*$/.test(v.chemin)) return v;
+    if (v && Object.hasOwn(VILLES, v.ville)) return v.ville;
   } catch {}
   return null;
 }
 
 // L'en-tête des pages communes. Venue d'un volet (mémorisé, ou ?ville=) : la marque du volet
-// (« DossierVilleDeQuébec », qui ramène à l'accueil du volet) et « ← Retour au volet » vers la
-// page quittée. Sinon : DossierQuébec. Puis les villes, la taille du texte et le thème — les
-// mêmes réglages (clés dvq:zoom et dvq:theme) que dans les volets.
+// (« DossierVilleDeQuébec », dont le logo ramène à l'accueil du volet). Sinon : DossierQuébec.
+// Puis les villes, la taille du texte et le thème — les mêmes réglages (clés dvq:zoom et
+// dvq:theme) que dans les volets.
 export function enteteCommune() {
   const ville = new URLSearchParams(location.search).get('ville');
-  const volet = dernierVolet();
   // Une ville demandée dans l'adresse l'emporte sur la dernière visitée.
-  const cible = VILLES[ville] ? (volet?.ville === ville ? volet : { ville, chemin: `/${ville}/` }) : volet;
+  const cible = Object.hasOwn(VILLES, ville ?? '') ? ville : dernierVolet();
 
   const marque = document.querySelector('.ab-marque');
   if (marque && cible) {
-    marque.href = `/${cible.ville}/`;
-    marque.innerHTML = `Dossier<span>VilleDe${echapper(VILLES[cible.ville])}</span>`;
-    document.title = document.title.replace(/— DossierQuébec$/, `— DossierVilleDe${VILLES[cible.ville]}`);
+    marque.href = `/${cible}/`;
+    marque.innerHTML = `Dossier<span>VilleDe${echapper(VILLES[cible])}</span>`;
+    document.title = document.title.replace(/— DossierQuébec$/, `— DossierVilleDe${VILLES[cible]}`);
   }
-  const retour = document.querySelector('#retour-volet');
-  if (retour && cible) {
-    retour.href = cible.chemin;
-    retour.textContent = `← Retour au volet ${VILLES[cible.ville]}`;
-    retour.hidden = false;
-  }
+  // Le choix de la ville : un menu déroulant (<details>), qui se referme au clic ailleurs ou sur Échap.
   const villes = document.querySelector('#villes');
   if (villes) {
-    villes.innerHTML = `Villes : ${Object.entries(VILLES).map(([v, nom]) => `<a href="/${v}/">${echapper(nom)}</a>`).join(' · ')} · <a href="/">DossierQuébec</a>`;
+    villes.innerHTML = `<summary>${cible ? `Ville : ${echapper(VILLES[cible])}` : 'Choisir une ville'}</summary>
+      <ul class="ab-villes-menu">
+        ${Object.entries(VILLES).map(([v, nom]) => `<li><a href="/${v}/"${v === cible ? ' aria-current="true"' : ''}>${echapper(nom)}</a></li>`).join('')}
+        <li class="ab-villes-dq"><a href="/">DossierQuébec <span>(provincial)</span></a></li>
+      </ul>`;
+    document.addEventListener('click', (e) => {
+      if (villes.open && !villes.contains(e.target)) villes.open = false;
+    });
+    villes.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && villes.open) {
+        villes.open = false;
+        villes.querySelector('summary').focus();
+      }
+    });
   }
 
   const outils = document.querySelector('#outils');
