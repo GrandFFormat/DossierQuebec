@@ -205,3 +205,48 @@ export function rendreDetail(reponse, ville) {
     <p class="ab-note">Extrait automatiquement du sommaire décisionnel, puis vérifié automatiquement contre son texte ; ce qui ne se vérifiait pas a été retiré. En cas d'écart, le PDF officiel fait foi.</p>
   </div>`;
 }
+
+// ---------- demander un détail de l'argent manquant (abonnés) ----------
+// Quand un dossier avec un montant n'a pas encore de détail, l'abonné peut le demander : la
+// demande passe en tête de la lecture du lendemain matin (api/detail.js en POST,
+// quebec/scripts/details-du-jour.js). À n'afficher que pour un dossier dont le résumé a un montant :
+// sans montant, il n'y a rien à détailler.
+const HEURE_LECTURE = 'demain matin';
+export function rendreDemande(reponse) {
+  if (!reponse || reponse.existe) return '';
+  if (reponse.lu) return '<div class="ab-demande"><p class="ab-note" style="margin:0">Ce document a été lu, mais on n’a pas pu en tirer un détail de l’argent fiable. Le PDF officiel fait foi.</p></div>';
+  if (!reponse.demandable) return '';
+  return `<div class="ab-demande">${contenuDemande(reponse.demande)}</div>`;
+}
+function contenuDemande(demande) {
+  if (demande) {
+    return `<p class="ab-demande-etat"><strong>${demande.parVous ? 'Demandé' : 'Déjà demandé par un abonné'}</strong> le ${echapper(dateFr(new Date(demande.le).toLocaleDateString('en-CA')))} : ce détail sera lu en priorité, normalement ${HEURE_LECTURE}. Revenez voir cette fiche.</p>`;
+  }
+  return `<p class="ab-note" style="margin:0 0 8px">Pas encore de détail de l’argent pour ce dossier : il est lu d’office pour les grands projets et les nouvelles décisions. Vous le voulez ? On le met en tête de la liste.</p>
+    <button type="button" class="ab-bouton ab-bouton-second" data-action="demander-detail">Demander ce détail</button>
+    <span class="ab-note ab-demande-message" aria-live="polite"></span>`;
+}
+export async function demanderDetail(bouton, ville, dossier, s) {
+  const boite = bouton.closest('.ab-demande');
+  const message = boite.querySelector('.ab-demande-message');
+  bouton.disabled = true;
+  message.textContent = 'Envoi…';
+  try {
+    const res = await fetch(`/api/detail?ville=${encodeURIComponent(ville)}&dossier=${encodeURIComponent(dossier)}`, {
+      method: 'POST',
+      headers: s ? { Authorization: `Bearer ${s.access_token}` } : {},
+    });
+    const corps = await res.json().catch(() => ({}));
+    if (res.ok && corps.demande) {
+      boite.innerHTML = contenuDemande(corps.demande);
+      mesurer('detail_demande', { ville });
+      return;
+    }
+    message.textContent = res.status === 429 ? 'Vous avez déjà fait 10 demandes dans les dernières 24 heures. Réessayez demain.'
+      : res.status === 409 ? 'Ce détail vient d’être lu : rouvrez la fiche.'
+      : res.status === 403 ? 'Réservé aux abonnés.' : 'La demande n’a pas fonctionné. Réessayez dans un moment.';
+  } catch {
+    message.textContent = 'La demande n’a pas fonctionné. Réessayez dans un moment.';
+  }
+  bouton.disabled = false;
+}

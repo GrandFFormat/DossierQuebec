@@ -383,6 +383,16 @@ détails jugés inutilisables, publiés comme repère mais jamais montrés) : en
 rien n'est relu ni repayé. Le workflow demande les secrets `SUPABASE_URL` et
 `SUPABASE_SERVICE_ROLE_KEY` ; sans eux, l'étape est sautée.
 
+**Demander un détail manquant (abonnés).** Sur une fiche d'un volet ou un dossier d'organisme dans
+Mes dossiers, quand le résumé a un montant mais que le détail n'est pas encore lu, l'abonné voit
+« Demander ce détail ». `api/detail.js` (POST) vérifie l'abonnement et l'ajoute à la table
+`demandes_details` (`scripts/supabase-schema-demandes-details.sql`), au plus 10 par abonné par
+24 heures ; la fiche affiche ensuite « Demandé le … ». Le lendemain matin, `details-du-jour.js`
+lit les demandes en attente avant les nouveaux dossiers, dans le même plafond de 30 (le coût
+maximal par jour ne change pas), puis note chacune « lu », « deja-lu » ou « sans-montant ». Une
+lecture qui échoue reste en attente et repasse le lendemain. Un document lu mais inutilisable
+affiche « on n'a pas pu en tirer un détail fiable » au lieu du bouton.
+
 **Le coût du détail (~0,26-0,28 $ US par dossier) : ce qui a été mesuré le 14 sept. 2026.**
 D'où il vient : environ 40 % la lecture du document (deux fois : extraction et contre-lecture),
 60 % la réflexion du modèle (sortie, 5 fois plus chère que l'entrée). Deux pistes testées sur

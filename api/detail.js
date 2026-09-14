@@ -4,9 +4,16 @@
 //   Authorization: Bearer <jeton de session Supabase>   (facultatif)
 //
 // Réponses :
-//   { existe: false }                          aucun détail vérifié pour ce dossier
+//   { existe: false, lu: false }               aucun détail pour ce dossier
+//     + pour un abonné : demandable: true et demande: { le, parVous } s'il est déjà demandé
+//   { existe: false, lu: true }                lu, mais le document ne donne pas un détail fiable
 //   { existe: true, acces: 'apercu', apercu }  visiteur ou compte non abonné
 //   { existe: true, acces: 'complet', detail } compte abonné
+//
+//   POST /api/detail?ville=quebec&dossier=AP2026-271.pdf   (abonné)
+//   Demande que ce détail soit lu en priorité (table demandes_details, au plus 10 par 24 h) :
+//   { ok: true, demande: { le, parVous: true } }. Le matin, quebec/scripts/details-du-jour.js lit
+//   les demandes avant les nouveaux dossiers.
 //
 // Le détail vit dans la table Supabase `details_argent` (voir scripts/supabase-schema-abonnes.sql),
 // jamais dans le site ni dans le dépôt GitHub public : c'est ce qui le rend réellement réservé.
@@ -29,23 +36,37 @@ const NATURES = {
   aucun: 'aucun montant',
 };
 
-async function supabase(chemin, { jeton } = {}) {
+const DEMANDES_PAR_JOUR = 10;
+
+async function supabase(chemin, { jeton, methode = 'GET', corps, entetes = {} } = {}) {
   const cle = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const res = await fetch(`${process.env.SUPABASE_URL}${chemin}`, {
-    headers: { apikey: cle, Authorization: `Bearer ${jeton ?? cle}` },
+    method: methode,
+    headers: { apikey: cle, Authorization: `Bearer ${jeton ?? cle}`, ...(corps ? { 'Content-Type': 'application/json' } : {}), ...entetes },
+    body: corps ? JSON.stringify(corps) : undefined,
   });
   if (!res.ok) return { ok: false, statut: res.status };
-  return { ok: true, donnees: await res.json() };
+  const texte = await res.text();
+  return { ok: true, donnees: texte ? JSON.parse(texte) : null, entetes: res.headers };
 }
 
-async function estAbonne(jeton) {
-  if (!jeton) return false;
+// L'abonné derrière le jeton : { id, abonne } ou null.
+async function abonneDe(jeton) {
+  if (!jeton) return null;
   const utilisateur = await supabase('/auth/v1/user', { jeton });
   const id = utilisateur.ok ? utilisateur.donnees?.id : null;
-  if (!id || !/^[0-9a-f-]{36}$/.test(id)) return false;
+  if (!id || !/^[0-9a-f-]{36}$/.test(id)) return null;
   const r = await supabase(`/rest/v1/abonnements?user_id=eq.${id}&select=statut,fin`);
   const ligne = r.ok ? r.donnees?.[0] : null;
-  return Boolean(ligne && ligne.statut === 'actif' && (!ligne.fin || new Date(ligne.fin) > new Date()));
+  return { id, abonne: Boolean(ligne && ligne.statut === 'actif' && (!ligne.fin || new Date(ligne.fin) > new Date())) };
+}
+
+// La demande en attente pour ce dossier (de n'importe quel abonné : il est déjà sur la liste).
+async function demandeEnAttente(ville, dossier, userId) {
+  const r = await supabase(`/rest/v1/demandes_details?ville=eq.${ville}&dossier_id=eq.${encodeURIComponent(dossier)}&traite_le=is.null&select=user_id,created_at&order=created_at`);
+  if (!r.ok || !r.donnees?.length) return null;
+  const sienne = r.donnees.find((x) => x.user_id === userId);
+  return { le: (sienne ?? r.donnees[0]).created_at, parVous: Boolean(sienne) };
 }
 
 // Ce qu'un visiteur voit : de quoi il s'agit et ce qu'il débloquerait, sans les chiffres.
@@ -79,9 +100,37 @@ export default async function handler(req, res) {
   const r = await supabase(`/rest/v1/details_argent?ville=eq.${ville}&dossier_id=eq.${encodeURIComponent(dossier)}&select=detail`);
   if (!r.ok) return res.status(r.statut === 404 ? 503 : 502).json({ erreur: 'détail indisponible' });
   const d = r.donnees?.[0]?.detail;
-  if (!d || d.verification?.utilisable === false) return res.status(200).json({ existe: false });
-
   const jeton = (req.headers.authorization ?? '').replace(/^Bearer\s+/i, '') || null;
-  if (await estAbonne(jeton)) return res.status(200).json({ existe: true, acces: 'complet', detail: complet(d) });
+
+  if (req.method === 'POST') return demander(res, { ville, dossier, d, jeton });
+  if (req.method !== 'GET') return res.status(405).json({ erreur: 'méthode non permise' });
+
+  if (!d || d.verification?.utilisable === false) {
+    const reponse = { existe: false, lu: Boolean(d) };
+    if (!d) {
+      const qui = await abonneDe(jeton);
+      if (qui?.abonne) Object.assign(reponse, { demandable: true, demande: await demandeEnAttente(ville, dossier, qui.id) });
+    }
+    return res.status(200).json(reponse);
+  }
+  if ((await abonneDe(jeton))?.abonne) return res.status(200).json({ existe: true, acces: 'complet', detail: complet(d) });
   return res.status(200).json({ existe: true, acces: 'apercu', apercu: apercu(d) });
+}
+
+async function demander(res, { ville, dossier, d, jeton }) {
+  const qui = await abonneDe(jeton);
+  if (!qui?.abonne) return res.status(403).json({ erreur: 'réservé aux abonnés' });
+  if (d) return res.status(409).json({ erreur: 'déjà lu' });
+  const depuis = new Date(Date.now() - 864e5).toISOString();
+  const recentes = await supabase(`/rest/v1/demandes_details?user_id=eq.${qui.id}&created_at=gte.${depuis}&select=id`, { entetes: { Prefer: 'count=exact', Range: '0-0' } });
+  if (!recentes.ok) return res.status(503).json({ erreur: 'demandes indisponibles' });
+  const nombre = Number(recentes.entetes.get('content-range')?.split('/')[1] ?? recentes.donnees?.length ?? 0);
+  if (nombre >= DEMANDES_PAR_JOUR) return res.status(429).json({ erreur: `au plus ${DEMANDES_PAR_JOUR} demandes par 24 heures` });
+  const ajout = await supabase('/rest/v1/demandes_details?on_conflict=user_id,ville,dossier_id', {
+    methode: 'POST',
+    corps: { user_id: qui.id, ville, dossier_id: dossier },
+    entetes: { Prefer: 'resolution=ignore-duplicates,return=minimal' },
+  });
+  if (!ajout.ok) return res.status(502).json({ erreur: "la demande n'a pas été enregistrée" });
+  return res.status(200).json({ ok: true, demande: (await demandeEnAttente(ville, dossier, qui.id)) ?? { le: new Date().toISOString(), parVous: true } });
 }
