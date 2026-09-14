@@ -93,33 +93,103 @@ function bloc(titre, lignes) {
     : '';
 }
 
+// Plafond de taille du courriel. Gmail coupe un message au-delà d'environ 102 Ko (« [Message
+// tronqué] ») et cache alors tout le bas, y compris le lien de désabonnement. À 80 Ko, on garde
+// de la marge : les projets entrent en entier tant qu'il y a de la place ; celui qui déborde est
+// coupé (« …et N autres ») ; les suivants tiennent sur une ligne chacun. Tout reste dans Mes dossiers.
+export const PLAFOND_OCTETS = 80 * 1024;
+const octets = (s) => Buffer.byteLength(s, 'utf8');
+const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
+
+function cadreProjet(ville, projet, contenu) {
+  return `<div style="margin:26px 0 0;padding:14px 16px;border:1px solid #DDE2E7;border-left:4px solid #0B8A4B;border-radius:8px">
+    <h2 style="margin:0;font-size:18px">${echapper(projet.titre)} <span style="font-size:13px;font-weight:normal;color:#5B6570">· ${echapper(VILLES[ville] ?? ville)}</span></h2>
+    ${contenu}
+  </div>`;
+}
+
+// Les trois sections d'un projet, chacune avec ses lignes toutes prêtes (pour pouvoir couper).
+function blocsDe(ville, c) {
+  const derniere = (d) => d.resolutions?.at(-1);
+  return [
+    { titre: 'Nouveaux dossiers', lignes: c.nouveaux.map((d) => ligne(ville, d, [dateFr(d.derniere), statut(d)].filter(Boolean).join(' · '))) },
+    { titre: 'Décision finale prise', lignes: c.decides.map((d) => ligne(ville, d, [derniere(d)?.instance, dateFr(derniere(d)?.date)].filter(Boolean).join(', '))) },
+    { titre: 'Nouvelle étape', lignes: c.etapes.map((d) => ligne(ville, d, [derniere(d)?.instance, dateFr(derniere(d)?.date), statut(d)].filter(Boolean).join(' · '))) },
+  ];
+}
+
+const recapHtml = (c) =>
+  c.recap?.enBref
+    ? `<p style="margin:14px 0 0;font-size:14px;color:#16191D"><b>Où en est le projet</b> <span style="color:#5B6570">(récapitulatif mis à jour, généré par IA)</span><br>${echapper(c.recap.enBref)}</p>`
+    : '';
+
 export function courriel(sections, userId, essai = false) {
   const total = sections.reduce((n, s) => n + s.c.total, 0);
   const titres = sections.map((s) => s.projet.titre);
   const sujet = `${essai ? '[Essai] ' : ''}Vos projets : ${total} nouveauté${total > 1 ? 's' : ''} — ${titres[0]}${titres.length > 1 ? ` et ${titres.length - 1} autre${titres.length > 2 ? 's' : ''}` : ''}`.replace(/[\r\n]+/g, ' ');
   const desabonnement = `${site()}/api/alertes-desabonnement?u=${userId}&s=${signature(userId)}`;
-  const corps = sections
-    .map(({ ville, projet, c }) => {
-      const derniere = (d) => d.resolutions?.at(-1);
-      return `<div style="margin:26px 0 0;padding:14px 16px;border:1px solid #DDE2E7;border-left:4px solid #0B8A4B;border-radius:8px">
-        <h2 style="margin:0;font-size:18px">${echapper(projet.titre)} <span style="font-size:13px;font-weight:normal;color:#5B6570">· ${echapper(VILLES[ville] ?? ville)}</span></h2>
-        ${bloc(`Nouveaux dossiers (${c.nouveaux.length})`, c.nouveaux.map((d) => ligne(ville, d, [dateFr(d.derniere), statut(d)].filter(Boolean).join(' · '))))}
-        ${bloc(`Décision finale prise (${c.decides.length})`, c.decides.map((d) => ligne(ville, d, [derniere(d)?.instance, dateFr(derniere(d)?.date)].filter(Boolean).join(', '))))}
-        ${bloc(`Nouvelle étape (${c.etapes.length})`, c.etapes.map((d) => ligne(ville, d, [derniere(d)?.instance, dateFr(derniere(d)?.date), statut(d)].filter(Boolean).join(' · '))))}
-        ${c.recap?.enBref ? `<p style="margin:14px 0 0;font-size:14px;color:#16191D"><b>Où en est le projet</b> <span style="color:#5B6570">(récapitulatif mis à jour, généré par IA)</span><br>${echapper(c.recap.enBref)}</p>` : ''}
-      </div>`;
-    })
-    .join('');
-  const html = `<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;color:#16191D;line-height:1.5">
+  const mesDossiers = `${site()}/mes-dossiers`;
+
+  const debut = `<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;color:#16191D;line-height:1.5">
     <p style="margin:0;font-size:13px;color:#5B6570">DossierQuébec · Mes dossiers</p>
     <h1 style="margin:4px 0 0;font-size:22px">Du nouveau dans vos projets</h1>
-    ${essai ? '<p style="margin:8px 0 0;padding:8px 10px;background:#FFF6D6;border-radius:6px;font-size:13px">Courriel d\'essai : il reprend les dossiers les plus récents de chaque projet, pas seulement les nouveautés.</p>' : ''}
-    ${corps}
-    <p style="margin:22px 0 0"><a href="${site()}/mes-dossiers" style="display:inline-block;padding:9px 16px;background:#0B8A4B;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">Voir mes dossiers</a></p>
+    ${essai ? '<p style="margin:8px 0 0;padding:8px 10px;background:#FFF6D6;border-radius:6px;font-size:13px">Courriel d\'essai : il reprend les dossiers les plus récents de chaque projet, pas seulement les nouveautés.</p>' : ''}`;
+  const fin = `<p style="margin:22px 0 0"><a href="${mesDossiers}" style="display:inline-block;padding:9px 16px;background:#0B8A4B;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">Voir mes dossiers</a></p>
     <p style="margin:22px 0 0;font-size:12px;color:#5B6570">Les phrases sous chaque numéro sont des résumés générés par IA à partir des documents de la Ville ; en cas d'écart, les documents officiels font foi. DossierQuébec n'est pas un site de la Ville.<br>
     Vous recevez ce courriel parce que vous suivez ces projets avec votre abonnement. <a href="${echapper(desabonnement)}" style="color:#5B6570">Ne plus recevoir ces alertes</a></p>
   </div>`;
-  return { sujet, html, desabonnement, total };
+
+  // Réserve pour la liste « Aussi du nouveau » des projets qui n'entreront pas : ~250 octets chacun.
+  let budget = PLAFOND_OCTETS - octets(debut) - octets(fin) - 600 - sections.length * 250;
+  const parties = [];
+  const enUneLigne = [];
+  let coupe = false;
+  for (const { ville, projet, c } of sections) {
+    const blocs = blocsDe(ville, c);
+    if (!coupe) {
+      const complet = cadreProjet(ville, projet, blocs.map((b) => bloc(`${b.titre} (${b.lignes.length})`, b.lignes)).join('') + recapHtml(c));
+      if (octets(complet) <= budget) {
+        parties.push(complet);
+        budget -= octets(complet);
+        continue;
+      }
+      coupe = true;
+      // Le projet qui déborde : autant de dossiers que la place le permet, puis « …et N autres ».
+      let place = budget - octets(cadreProjet(ville, projet, '')) - 500;
+      if (place > 1500) {
+        let omis = 0;
+        const html = [];
+        for (const b of blocs) {
+          const gardees = [];
+          for (const l of b.lignes) {
+            const cout = octets(l) + (gardees.length ? 0 : 250); // la première ligne paie le titre de la section
+            if (cout <= place) {
+              gardees.push(l);
+              place -= cout;
+            } else omis++;
+          }
+          if (gardees.length) html.push(bloc(`${b.titre} (${b.lignes.length})`, gardees));
+        }
+        const note = omis
+          ? `<p style="margin:10px 0 0;font-size:14px">…et ${pluriel(omis, 'autre nouveauté')} dans ce projet — <a href="${mesDossiers}" style="color:#076338;font-weight:bold">voir dans Mes dossiers</a></p>`
+          : '';
+        const partiel = cadreProjet(ville, projet, html.join('') + note);
+        parties.push(partiel);
+        budget -= octets(partiel);
+        continue;
+      }
+    }
+    enUneLigne.push({ ville, projet, c });
+  }
+  const autres = enUneLigne.length
+    ? `<div style="margin:26px 0 0;padding:14px 16px;border:1px solid #DDE2E7;border-radius:8px">
+        <p style="margin:0 0 6px;font-weight:bold">Aussi du nouveau dans vos autres projets</p>
+        <ul style="margin:0;padding-left:18px">${enUneLigne.map(({ ville, projet, c }) => `<li style="margin:0 0 4px">${echapper(projet.titre)} <span style="color:#5B6570">(${echapper(VILLES[ville] ?? ville)})</span> : ${pluriel(c.total, 'nouveauté')}</li>`).join('')}</ul>
+        <p style="margin:8px 0 0;font-size:14px"><a href="${mesDossiers}" style="color:#076338;font-weight:bold">Tout voir dans Mes dossiers</a></p>
+      </div>`
+    : '';
+
+  return { sujet, html: debut + parties.join('') + autres + fin, desabonnement, total, coupe };
 }
 
 async function envoyer(a, { sujet, html, desabonnement }) {

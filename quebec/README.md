@@ -269,7 +269,9 @@ des sous-dossiers de dossierquebec.ca : la session Supabase ouverte sur une page
   du projet (`data/projets/<cle>.json`) à ce qu'on lui a déjà signalé (table `alertes_etat`) et
   n'écrit que s'il y a un nouveau dossier, une décision finale ou une nouvelle résolution ; le
   récapitulatif refait accompagne ces nouvelles. Un projet tout juste suivi est mémorisé sans
-  courriel. Un courriel au plus par personne, tous projets réunis ; si l'envoi échoue, rien
+  courriel. Plafond de 80 Ko (Gmail coupe vers 102 Ko et cache le lien de désabonnement) : les
+  projets entrent en entier tant qu'il y a de la place, celui qui déborde est coupé (« …et N
+  autres »), les suivants tiennent sur une ligne. Un courriel au plus par personne, tous projets réunis ; si l'envoi échoue, rien
   n'est mémorisé et ce sera redit le lendemain. `?apercu=1` (avec `CRON_SECRET`) montre ce qui
   partirait. Dans Mes dossiers, l'abonné coupe ou remet ses alertes (`alertes_preferences`) et
   peut s'envoyer un essai (3 par 24 h) ; chaque courriel a un lien signé « Ne plus recevoir ces
