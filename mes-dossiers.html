@@ -79,7 +79,7 @@
       <p class="ab-note">Un seul lien peut être envoyé toutes les 5 minutes. Pensez à vérifier vos courriels indésirables.</p>
       <p class="ab-note" id="etat-lien" aria-live="polite"></p>
     </div>`;
-    pourquoi(false);
+    pourquoi({ connecte: false, abonne: false });
     suggestions(null, new Set());
     ecrire(null);
     $('#form-lien').addEventListener('submit', async (e) => {
@@ -98,24 +98,57 @@
     });
   }
 
-  // ---------- pour les non-abonnés : ce que l'abonnement ajoute ----------
-  function pourquoi(abonne) {
+  // ---------- compte gratuit et abonnement payant ----------
+  // Deux choses différentes, à ne jamais confondre :
+  //   - le compte gratuit (un lien par courriel) : suivre des projets, leur récapitulatif, écrire ;
+  //   - l'abonnement payant : les alertes, le détail de l'argent, etc.
+  // Pas connecté : les deux, côte à côte. Connecté sans abonnement : seulement ce que le payant
+  // ajoute (le compte, il l'a déjà). Abonné : rien.
+  const AVANTAGES_COMPTE = `<ul>
+        <li><strong>Suivre les grands projets</strong> de chaque ville — le tramway, le logement… — et les retrouver ici.</li>
+        <li><strong>« Où en est le projet »</strong> : le récapitulatif, la ligne du temps, les décisions par mois et ce qui attend encore une décision.</li>
+        <li><strong>Toutes les villes couvertes</strong>, avec le même compte.</li>
+        <li><strong>Nous écrire</strong> et <strong>signaler une erreur</strong> sur une fiche.</li>
+      </ul>
+      <p class="ab-note" style="margin:0">Sans mot de passe : un lien de connexion par courriel.</p>`;
+
+  function pourquoi({ connecte, abonne }) {
     if (abonne) { $('#pourquoi').innerHTML = ''; return; }
+    if (!connecte) {
+      $('#pourquoi').innerHTML = `<section class="ab-pourquoi-deux">
+        <h2>Compte gratuit ou abonnement payant</h2>
+        <div class="ab-grille">
+          <div class="ab-carte">
+            <h3>Avec un compte gratuit</h3>
+            ${AVANTAGES_COMPTE}
+          </div>
+          <div class="ab-carte ab-pourquoi">
+            <h3>Avec l'abonnement payant <span class="ab-note">(3 $ par mois, prix prévu)</span></h3>
+            <p class="ab-note" style="margin:0 0 8px">Tout le compte gratuit, plus :</p>
+            <ul>${AVANTAGES_PAYANTS}</ul>
+            <a class="ab-bouton" href="/abonnement" data-mesure="mes_dossiers_voir_abonnement">Voir l'abonnement</a>
+          </div>
+        </div>
+        <p class="ab-note">Un seul abonnement vaut pour toutes les villes couvertes — pas un abonnement par ville. Et chaque abonnement garde le reste du site gratuit pour tout le monde.</p>
+      </section>`;
+      return;
+    }
     $('#pourquoi').innerHTML = `<section class="ab-carte ab-pourquoi">
-      <h2 style="margin-top:0">Ce que l'abonnement ajoute à vos dossiers</h2>
-      <p class="ab-chapeau" style="margin-bottom:10px">« Mes dossiers » vous montre tout quand vous venez voir. L'abonnement vous dit <strong>quand</strong> il y a quelque chose à voir, et ce que les documents disent de l'argent.</p>
-      <ul>
+      <h2 style="margin-top:0">Ce que l'abonnement payant ajoute à votre compte</h2>
+      <p class="ab-chapeau" style="margin-bottom:10px">Votre compte gratuit vous montre tout quand vous venez voir. L'abonnement payant vous dit <strong>quand</strong> il y a quelque chose à voir, et ce que les documents disent de l'argent.</p>
+      <ul>${AVANTAGES_PAYANTS}</ul>
+      <p class="ab-note" style="margin:0 0 14px">3 $ par mois (prix prévu). Un seul abonnement vaut pour toutes les villes couvertes — pas un abonnement par ville. Et chaque abonnement garde le reste du site gratuit pour tout le monde.</p>
+      <a class="ab-bouton" href="/abonnement" data-mesure="mes_dossiers_voir_abonnement">Voir l'abonnement</a>
+    </section>`;
+  }
+
+  const AVANTAGES_PAYANTS = `
         <li><strong>Une alerte par courriel quand vos projets bougent</strong> : une nouvelle décision, un dossier qui attend un vote, un récapitulatif mis à jour — et rien les semaines où rien ne bouge. <span class="ab-note">(bientôt)</span></li>
         <li><strong>Le détail de l'argent</strong> sur chaque dossier : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions.</li>
         <li><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : « tout ce que la Ville décide sur la 1re Avenue », « dans Limoilou », « sur le déneigement ». <span class="ab-note">(bientôt)</span></li>
         <li><strong>Suivre un organisme ou une entreprise</strong> : tous les contrats, subventions et ententes que la Ville lui accorde, avec les montants tels qu'écrits dans les documents. <span class="ab-note">(bientôt)</span></li>
         <li><strong>Le calendrier des décisions attendues</strong> : quelle instance doit décider et à quelle date cible, tel que la Ville l'indique dans ses documents, avant la séance plutôt qu'après — à ajouter à votre agenda. <span class="ab-note">(bientôt)</span></li>
-        <li><strong>L'export en tableur</strong> (Excel ou CSV) des décisions d'un projet, d'un quartier ou d'une année, avec les montants vérifiés. <span class="ab-note">(bientôt)</span></li>
-      </ul>
-      <p class="ab-note" style="margin:0 0 14px">Un seul abonnement vaut pour toutes les villes couvertes — pas un abonnement par ville. Et chaque abonnement garde le reste du site gratuit pour tout le monde.</p>
-      <a class="ab-bouton" href="/abonnement" data-mesure="mes_dossiers_voir_abonnement">Voir l'abonnement</a>
-    </section>`;
-  }
+        <li><strong>L'export en tableur</strong> (Excel ou CSV) des décisions d'un projet, d'un quartier ou d'une année, avec les montants vérifiés. <span class="ab-note">(bientôt)</span></li>`;
 
   // ---------- nous écrire ----------
   // Redessiné seulement si le compte change : suivre un projet ne doit pas effacer un message en cours.
@@ -393,7 +426,7 @@
 
     ecrire(s);
     const suivis = await chargerSuivis();
-    pourquoi(abonne);
+    pourquoi({ connecte: true, abonne });
     suggestions(s, new Set(suivis.map((x) => `${x.ville}|${x.dossier_id}`)));
     if (!suivis.length) {
       $('#liste').innerHTML = `<p class="ab-vide">Vous ne suivez aucun projet pour l'instant. Choisissez-en un ci-dessous.</p>`;
