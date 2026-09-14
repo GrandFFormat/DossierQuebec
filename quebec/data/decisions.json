@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-14T01:12:17.387Z",
+ "generatedAt": "2026-09-14T15:07:20.976Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "licence": "Documents publics de la Ville de Québec — reproduction avec mention de la source, usage non commercial.",
  "parametres": {
@@ -12,9 +12,9 @@
    "Tableaux des décisions"
   ]
  },
- "totalDisponible": 4835,
- "nombre": 4835,
- "nouveauxDepuisDerniereExecution": 0,
+ "totalDisponible": 4843,
+ "nombre": 4843,
+ "nouveauxDepuisDerniereExecution": 8,
  "themes": {
   "procedure": {
    "libelle": "Procédure",
@@ -125,7 +125,7 @@
  },
  "statuts": {
   "termines": 1398,
-  "enCours": 104,
+  "enCours": 111,
   "inconnus": 0
  },
  "facettes": {
@@ -136,7 +136,7 @@
    },
    {
     "valeur": "Sommaires et mémoires",
-    "n": 1502
+    "n": 1509
    },
    {
     "valeur": "Procès-verbaux",
@@ -144,13 +144,13 @@
    },
    {
     "valeur": "Tableaux des décisions",
-    "n": 76
+    "n": 77
    }
   ],
   "instance": [
    {
     "valeur": "Comité exécutif",
-    "n": 1191
+    "n": 1192
    },
    {
     "valeur": "Conseil de la ville",
@@ -200,7 +200,7 @@
    },
    {
     "valeur": "Développement économique et grands projets",
-    "n": 181
+    "n": 182
    },
    {
     "valeur": "Loisirs, sports et vie communautaire",
@@ -220,7 +220,7 @@
    },
    {
     "valeur": "Ressources humaines",
-    "n": 50
+    "n": 53
    },
    {
     "valeur": "Direction générale",
@@ -228,7 +228,7 @@
    },
    {
     "valeur": "Finances",
-    "n": 32
+    "n": 34
    },
    {
     "valeur": "Affaires juridiques",
@@ -307,6 +307,10 @@
     "n": 3
    },
    {
+    "valeur": "Bureau de l'Ombudsman",
+    "n": 2
+   },
+   {
     "valeur": "Arrondissement de Beauport",
     "n": 2
    },
@@ -327,10 +331,6 @@
     "n": 1
    },
    {
-    "valeur": "Bureau de l'Ombudsman",
-    "n": 1
-   },
-   {
     "valeur": "Bureau pivot du tramway de Québec",
     "n": 1
    }
@@ -342,15 +342,15 @@
    },
    {
     "valeur": "procedure",
-    "n": 647
+    "n": 648
    },
    {
     "valeur": "subventions",
-    "n": 533
+    "n": 534
    },
    {
     "valeur": "transport",
-    "n": 515
+    "n": 516
    },
    {
     "valeur": "contrats",
@@ -366,7 +366,7 @@
    },
    {
     "valeur": "finances",
-    "n": 207
+    "n": 209
    },
    {
     "valeur": "travaux",
@@ -374,7 +374,7 @@
    },
    {
     "valeur": "rh",
-    "n": 156
+    "n": 159
    },
    {
     "valeur": "administration",
@@ -407,6 +407,157 @@
   ]
  },
  "decisions": [
+  {
+   "id": "TD_CE_PL_2026-09-11_00h00.pdf",
+   "numero": null,
+   "objet": "Tableau des décisions de la séance spéciale du comité exécutif tenue le vendredi 11 septembre 2026 à 08h30",
+   "date": "2026-09-11",
+   "annee": "2026",
+   "type": "Tableaux des décisions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CE_PL_2026-09-11_00h00.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "DE2026-323.pdf",
+   "numero": "DE2026-323",
+   "objet": "Adoption du Règlement sur l'acquisition d'immeubles à des fins municipales et sur l'emprunt nécessaire au paiement des coûts qui y sont rattachés R.V.Q. 3577",
+   "date": "2026-09-11",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Développement économique et grands projets",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-323.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil de la ville",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "theme": "finances",
+   "themeSource": "objet"
+  },
+  {
+   "id": "FN2026-032.pdf",
+   "numero": "FN2026-032",
+   "objet": "Contribution au déficit d'opération encouru par QMI Spectacles inc. pour l'exercice financier clos le 31 décembre 2025",
+   "date": "2026-09-11",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Finances",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/FN2026-032.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'agglomération de Québec",
+   "dateCible": "2026-09-16",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "echeance": "2026-09-16",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "FN2026-039.pdf",
+   "numero": "FN2026-039",
+   "objet": "Approbation du Règlement No 455 décrétant un emprunt n'excédant pas 9 037 000 $ concernant l'acquisition de 29 véhicules de type minibus du Réseau de transport de la Capitale (RTC)",
+   "date": "2026-09-11",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Finances",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/FN2026-039.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'agglomération de Québec",
+   "dateCible": "2026-09-16",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "echeance": "2026-09-16",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "OB2026-002.pdf",
+   "numero": "OB2026-002",
+   "objet": "Modification de la résolution CV-2004-0024 relative à la création du Bureau de l'ombudsman et nomination d'un commissaire",
+   "date": "2026-09-11",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Bureau de l'Ombudsman",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/OB2026-002.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil de la ville",
+   "dateCible": "2026-09-15",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "echeance": "2026-09-15",
+   "theme": "rh",
+   "themeSource": "objet"
+  },
+  {
+   "id": "RH2026-704.pdf",
+   "numero": "RH2026-704",
+   "objet": "Promotion de monsieur Jean-Philippe Légaré à l'emploi de directeur de division du budget et de la planification financière à la Division du budget et de la planification financière du Service des finances (17306)",
+   "date": "2026-09-11",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Ressources humaines",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/RH2026-704.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "theme": "finances",
+   "themeSource": "objet"
+  },
+  {
+   "id": "RH2026-716.pdf",
+   "numero": "RH2026-716",
+   "objet": "Création d'un poste temporaire de directeur de projet, classe 1, à la direction du Service des finances et affectation de madame Ginette Lachance",
+   "date": "2026-09-11",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Ressources humaines",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/RH2026-716.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "theme": "rh",
+   "themeSource": "objet"
+  },
+  {
+   "id": "RH2026-725.pdf",
+   "numero": "RH2026-725",
+   "objet": "Nomination de madame Myriam Pellerin à l'emploi de greffière et directrice par intérim du Service du greffe et des archives",
+   "date": "2026-09-11",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Ressources humaines",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/RH2026-725.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'agglomération de Québec",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "rh",
+   "themeSource": "objet"
+  },
   {
    "id": "TD_CE_PL_2026-09-09_00h00.pdf",
    "numero": null,
