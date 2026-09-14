@@ -231,9 +231,9 @@
     zone.innerHTML = `<section class="ab-carte ab-attendues">
       <h2 style="margin-top:0">Décisions attendues</h2>
       <p class="ab-chapeau" style="margin-bottom:10px">Les dossiers qui attendent encore une décision, avec l'instance qui doit décider et la <strong>date cible</strong> que la Ville écrit dans son sommaire. Ce n'est pas un ordre du jour : un dossier peut être reporté. La décision réelle apparaît dans vos projets dès sa publication.</p>
-      <div class="ab-portee" role="group" aria-label="Quelles décisions">
+      <div class="ab-portee" role="group" aria-label="Quels dossiers en attente" title="Mes projets : seulement les dossiers des projets que vous suivez. Tous les dossiers : tout ce qui attend une décision à la Ville.">
         <button type="button" data-portee="projets">Mes projets</button>
-        <button type="button" data-portee="ville">${plusieursVilles ? 'Toutes les villes' : `Toute la ville de ${echapper(VILLES[toutes[0].ville] ?? '')}`}</button>
+        <button type="button" data-portee="ville">${plusieursVilles ? 'Tous les dossiers' : `Tous les dossiers de ${echapper(VILLES[toutes[0].ville] ?? '')}`}</button>
       </div>
       <div id="attendues-liste"></div>
       <div class="ab-liens"><button type="button" class="ab-lien-bouton" id="agenda">Ajouter à mon agenda</button></div>
@@ -257,7 +257,7 @@
           <a class="ab-lien" href="${echapper(url.replace(/^https:/, 'webcal:'))}">Ouvrir dans l'agenda de cet appareil</a>
         </div>`;
       boite.hidden = false;
-      boite.innerHTML = `${choix('Mes projets', liens.url)}${choix(plusieursVilles ? 'Toutes les villes' : 'Toute la ville', liens.urlTout)}
+      boite.innerHTML = `${choix('Mes projets', liens.url)}${choix(plusieursVilles ? 'Tous les dossiers' : `Tous les dossiers de ${echapper(VILLES[toutes[0].ville] ?? '')}`, liens.urlTout)}
         <p class="ab-note"><strong>Google Agenda</strong> : Autres agendas → + → À partir de l'URL, puis collez le lien. <strong>Apple</strong> : « Ouvrir dans l'agenda », ou Fichier → Nouvel abonnement. <strong>Outlook</strong> : Ajouter un calendrier → S'abonner à partir du web. L'agenda se met à jour de lui-même, en général une fois par jour. Ce lien est personnel : ne le partagez pas.</p>`;
       for (const b of boite.querySelectorAll('[data-copier]')) {
         b.addEventListener('click', async () => {
