@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
+<meta name="robots" content="noindex, nofollow">
+<title>Le conseil de ville de Longueuil — DossierVilleDeLongueuil</title>
+<meta name="description" content="Carte des 18 districts électoraux de Longueuil et fiches des membres du conseil de ville et du conseil d'agglomération : district, arrondissement, parti et présences aux séances.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvm:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvm:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="/commun/abonnes.css">
+</head>
+<body data-page="conseil" data-ville="longueuil">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="./"><h1>Dossier<span class="marque">VilleDeLongueuil</span></h1></a>
+      <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
+      <a class="retour-dq" href="https://dossierquebec.ca/" title="Retour à DossierQuébec" aria-label="Retour à DossierQuébec">DQ</a>
+      <details class="ab-villes" id="villes"></details>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Longueuil, lisibles. Données publiques, reprises telles quelles
+      des procès-verbaux et des documents de séance officiels de la Ville.
+    </p>
+    <nav>
+      <a href="./">Accueil</a>
+      <a href="decisions.html">Décisions</a>
+      <a href="votes.html">Votes nominatifs</a>
+      <a href="conseil.html" aria-current="page">Conseil de ville</a>
+      <a href="lexique.html">Lexique</a>
+      <a href="https://longueuil.quebec/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Longueuil (nouvel onglet)">Ville de Longueuil ↗</a>
+      <div class="outils">
+        <div class="taille-texte" role="group" aria-label="Taille du texte">
+          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+          <span id="texte-pct" aria-live="polite">100%</span>
+          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+        </div>
+        <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+                title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu">
+  <div id="chargement" class="avis">Chargement des données…</div>
+
+  <h2 class="page">Le conseil de ville</h2>
+  <nav class="raccourcis" aria-label="Sections de cette page">
+    <a href="#membres">Les membres du conseil</a>
+    <a href="#agglomeration">Le conseil d'agglomération</a>
+  </nav>
+  <p class="chapeau">
+    Le conseil compte 19 sièges&nbsp;: la mairesse, élue au suffrage universel, et 18 conseillères et
+    conseillers de ville, un par district, répartis dans trois arrondissements.
+    <strong>Cliquez sur votre district</strong> pour aller directement à la fiche de la personne qui
+    vous représente. Greenfield Park élit en plus deux conseillers <em>d'arrondissement</em>, qui ne
+    siègent qu'à leur conseil d'arrondissement&nbsp;; ils figurent sous leur arrondissement, marqués
+    comme tels.
+  </p>
+
+  <div class="zone-carte" id="carte"></div>
+  <div class="legende" id="legende"></div>
+  <p class="compte" style="margin-top:12px">
+    Contours&nbsp;: couche publique «&nbsp;Districts électoraux (2025-2029)&nbsp;» de la Ville de Longueuil,
+    simplifiés et dessinés en SVG — aucune requête vers un service de cartographie externe.
+    <strong>Ce que la carte ne dit pas&nbsp;:</strong> les décisions du conseil ne sont pas
+    géolocalisées, donc impossible de dire «&nbsp;voici ce qui s'est décidé dans votre district&nbsp;».
+  </p>
+
+  <h2 class="page" id="membres" style="margin-top:34px">Les membres du conseil de ville</h2>
+  <p class="compte" id="compte-elus"></p>
+  <div id="liste-elus"></div>
+
+  <h2 class="page" id="agglomeration" style="margin-top:40px">Le conseil d'agglomération</h2>
+  <p class="chapeau">
+    C'est une <strong>instance distincte</strong> du conseil de ville, et elle décide des services
+    partagés des cinq villes de l'agglomération&nbsp;: police, sécurité incendie, transport en commun,
+    eau potable, évaluation foncière, développement économique. Y siègent la mairesse de Longueuil,
+    des élus de Longueuil qu'elle désigne, et les maires des quatre <strong>villes liées</strong>&nbsp;:
+    Boucherville, Brossard, Saint-Bruno-de-Montarville et Saint-Lambert. Le vote y est pondéré selon
+    la population de chaque ville.
+    <a href="decisions.html?instance=Conseil%20d'agglom%C3%A9ration">Voir ses décisions</a>.
+  </p>
+  <p class="chapeau" style="margin-bottom:14px">
+    La Ville ne publie pas de liste des membres de ce conseil. Celle-ci est <strong>reconstituée</strong>
+    à partir des listes de présences des procès-verbaux de l'année&nbsp;: la composition est celle de la
+    dernière séance, les présences comptent toutes les séances.
+  </p>
+  <p class="compte" id="compte-agglo"></p>
+  <div id="liste-agglo"></div>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Longueuil, aucun caractère officiel.
+    En cas d'écart, la page officielle fait foi. <a href="sources.html">Sources</a>.</p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+<script type="module" src="/commun/entete-volet.js"></script>
+<script type="module" src="/commun/abonnes.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
+     Même projet Vercel : les pages vues de /longueuil/ s'ajoutent au même tableau de
+     bord. En local le script n'existe pas (404 sans conséquence). -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
