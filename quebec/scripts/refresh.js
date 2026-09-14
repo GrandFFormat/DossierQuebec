@@ -75,6 +75,13 @@ const ETAPES = [
           argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scrapers/resumes.js', `--depuis=${depuis}`, `--plafond=${plafond}`],
           secondaire: true,
         },
+        // Le détail de l'argent des nouveaux dossiers avec un montant (et des dossiers de projets
+        // pas encore lus), 30 au plus. Demande aussi les clés Supabase : sautée sans elles.
+        {
+          nom: "Détail de l'argent des nouveaux dossiers",
+          argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scripts/details-du-jour.js', '--projets', '--plafond=30'],
+          secondaire: true,
+        },
         // Après les résumés, qu'il relit. Seuls les projets dont un dossier a changé sont refaits.
         {
           nom: 'Récapitulatifs des projets',

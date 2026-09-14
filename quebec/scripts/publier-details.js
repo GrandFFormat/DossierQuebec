@@ -31,7 +31,11 @@ export async function publier(details) {
     console.warn('⚠ Détail non publié : SUPABASE_URL et SUPABASE_SERVICE_ROLE_KEY manquent (api.env). Les abonnés ne le verront pas.');
     return 0;
   }
-  const publiables = details.filter((d) => d.verification?.version >= 2 && d.verification.utilisable);
+  // Les détails jugés inutilisables par la vérification sont publiés aussi : api/detail.js ne les
+  // montre jamais (utilisable === false), mais leur présence dit à l'extraction automatique
+  // (scripts/details-du-jour.js) que ce document a déjà été lu — sans elle, il serait relu et
+  // repayé chaque matin.
+  const publiables = details.filter((d) => d.verification?.version >= 2);
   const cle = process.env.SUPABASE_SERVICE_ROLE_KEY;
   let n = 0;
   for (let i = 0; i < publiables.length; i += 50) {
