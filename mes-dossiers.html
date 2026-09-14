@@ -94,6 +94,17 @@
 
   const $ = (s) => document.querySelector(s);
 
+  // Les boîtes dépliantes (mots-clés, organismes, export, agenda) ne chargent leurs gros fichiers
+  // qu'à leur première ouverture : dossiers.json (2,4 Mo pour Québec, et il grossit jusqu'en
+  // décembre), recentes.json, les résumés anglais. Fermées, elles ne coûtent qu'une requête
+  // Supabase. Une boîte restée ouverte d'un rendu à l'autre se remplit tout de suite.
+  const aLOuverture = (details, remplir) => {
+    const lancer = () => remplir().catch((e) => console.error('ouverture :', e));
+    if (details.open) return lancer();
+    details.addEventListener('toggle', () => { if (details.open) lancer(); }, { once: true });
+  };
+  const CHARGEMENT = () => `<p class="ab-note">${tr('Chargement…', 'Loading…')}</p>`;
+
   // Les projets de chaque volet, préparés pour cette page (quebec/scripts/projets-publics.js) :
   // l'index de la ville (quelques Ko) pour les en-têtes et les suggestions, et le fichier d'un
   // projet seulement quand on l'ouvre. Jamais toutes les décisions d'une ville : avec quinze
@@ -305,20 +316,24 @@
     const etat = $('#mots-etat');
     const form = $('#mots-form');
     let mots = data ?? [];
-    const recentes = await chargerRecentes();
+    let recentes = null; // chargées à l'ouverture de la boîte
 
     const dessiner = () => {
       liste.innerHTML = mots.length
         ? mots.map((m) => {
-            const n = recentes.dossiers.filter((d) => contientMot(d, m.mot)).length;
-            return `<li class="ab-mot"><span class="ab-mot-texte">${echapper(m.mot)}</span><span class="ab-note" style="margin:0">${n ? tr(`${n} décision${n > 1 ? 's' : ''} récente${n > 1 ? 's' : ''}`, `${n} recent ${pl(n, 'decision', 'decisions')}`) : tr('aucune décision récente', 'no recent decision')}</span><button type="button" class="ab-mot-retirer" data-mot="${echapper(m.id)}" aria-label="${tr('Retirer le mot-clé', 'Remove keyword')} ${echapper(m.mot)}">×</button></li>`;
+            const n = recentes?.dossiers.filter((d) => contientMot(d, m.mot)).length;
+            return `<li class="ab-mot"><span class="ab-mot-texte">${echapper(m.mot)}</span><span class="ab-note" style="margin:0">${n == null ? '' : n ? tr(`${n} décision${n > 1 ? 's' : ''} récente${n > 1 ? 's' : ''}`, `${n} recent ${pl(n, 'decision', 'decisions')}`) : tr('aucune décision récente', 'no recent decision')}</span><button type="button" class="ab-mot-retirer" data-mot="${echapper(m.id)}" aria-label="${tr('Retirer le mot-clé', 'Remove keyword')} ${echapper(m.mot)}">×</button></li>`;
           }).join('')
         : `<li class="ab-note" style="list-style:none;margin:0">${tr('Aucun mot-clé pour l’instant.', 'No keywords yet.')}</li>`;
       form.querySelector('button').disabled = mots.length >= 20;
       $('#mots-compte').textContent = mots.length;
     };
     dessiner();
-    if (recentes.depuis) etat.textContent = tr(`« Décisions récentes » : depuis le ${dateFr(recentes.depuis)}.`, `“Recent decisions”: since ${dateFr(recentes.depuis)}.`);
+    aLOuverture(zone.querySelector('details.ab-mots'), async () => {
+      recentes = await chargerRecentes();
+      dessiner();
+      if (recentes.depuis && !etat.textContent) etat.textContent = tr(`« Décisions récentes » : depuis le ${dateFr(recentes.depuis)}.`, `“Recent decisions”: since ${dateFr(recentes.depuis)}.`);
+    });
 
     // Quand un mot-clé ne donne rien : les gens écrivent « École Rochebelle » là où la décision dit
     // « école secondaire De Rochebelle ». On cherche dans toute l'année des bouts plus courts du mot,
@@ -374,6 +389,7 @@
       mots = [...mots, ajoute];
       dessiner();
       pistes.hidden = true;
+      if (!recentes) { recentes = await chargerRecentes(); dessiner(); }
       const n = recentes.dossiers.filter((d) => contientMot(d, mot)).length;
       if (n) etat.textContent = tr(`Ajouté. ${n} décision${n > 1 ? 's' : ''} récente${n > 1 ? 's' : ''} le contien${n > 1 ? 'nent' : 't'} déjà ; vous serez alerté des prochaines.`, `Added. ${n} recent ${pl(n, 'decision already contains', 'decisions already contain')} it; you'll be alerted about the next ones.`);
       else await proposer(ajoute.id, mot);
@@ -440,8 +456,6 @@
     const { data, error } = await client.from('organismes_suivis').select('id, nom').order('created_at');
     if (error) { zone.innerHTML = ''; return; } // table pas encore créée
     let suivis = data ?? [];
-    const suggestions = (await Promise.all(Object.keys(VILLES).map((v) => fetch(`/${v}/data/organismes.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null))))
-      .flatMap((f) => f?.organismes ?? []);
     const ouvertOrg = zone.querySelector('details.ab-pliable')?.open ? ' open' : '';
     zone.innerHTML = `<details class="ab-carte ab-pliable ab-organismes"${ouvertOrg}>
       <summary><h2>${tr('Organismes et entreprises suivis', 'Organizations and companies followed')}</h2><span class="ab-etiquette" id="org-compte">${suivis.length}</span></summary>
@@ -449,7 +463,7 @@
       <p class="ab-chapeau" style="margin-bottom:10px">${tr("Les décisions de l'année qui nomment un organisme ou une entreprise : contrats, subventions, ententes. Les nouvelles s'ajoutent à votre alerte du matin.", "This year's decisions that name an organization or a company: contracts, grants, agreements. New ones are added to your morning alert.")}</p>
       <form class="ab-form" id="org-form">
         <input type="text" id="org-champ" list="org-suggestions" maxlength="120" placeholder="${tr("Nom de l'organisme ou de l'entreprise", 'Name of the organization or company')}" aria-label="${tr('Organisme ou entreprise à suivre', 'Organization or company to follow')}">
-        <datalist id="org-suggestions">${suggestions.map((o) => `<option value="${echapper(o.nom)}">${o.dossiers} ${tr(pl(o.dossiers, 'dossier', 'dossiers'), pl(o.dossiers, 'item', 'items'))}</option>`).join('')}</datalist>
+        <datalist id="org-suggestions"></datalist>
         <button type="submit" class="ab-bouton">${tr('Suivre', 'Follow')}</button>
       </form>
       <p class="ab-note" id="org-etat" aria-live="polite">${tr("Le nom est cherché dans l'objet et le résumé des décisions, sans sa forme juridique (« inc. », « ltée »), sans accents ni majuscules. Jusqu'à 30.", 'The name is searched in the subject and French summary of the decisions, without its legal form (“inc.”, “ltée”), ignoring accents and capitals. Up to 30.')}</p>
@@ -457,8 +471,9 @@
       </div>
     </details>`;
     const etat = $('#org-etat');
-    const annee = suivis.length ? await chargerDossiersAnnee() : [];
-    const trouves = (nom) => annee.filter((d) => contientMot(d, sansFormeJuridique(nom)));
+    let annee = null; // les dossiers de l'année, chargés à l'ouverture de la boîte
+    const chargerAnnee = async () => (annee ??= await chargerDossiersAnnee());
+    const trouves = (nom) => (annee ?? []).filter((d) => contientMot(d, sansFormeJuridique(nom)));
 
     // Même fiche dépliante que l'agenda des conseils ; une seule ouverte à la fois.
     const ligneDossier = (d) => {
@@ -489,7 +504,9 @@
     };
 
     const dessiner = () => {
-      $('#org-liste').innerHTML = suivis.length
+      $('#org-liste').innerHTML = suivis.length && !annee
+        ? CHARGEMENT()
+        : suivis.length
         ? suivis.map((o) => {
             const liste = trouves(o.nom);
             return `<details class="ab-section-agenda ab-organisme" name="organismes">
@@ -502,6 +519,15 @@
       $('#org-compte').textContent = suivis.length;
     };
     dessiner();
+    aLOuverture(zone.querySelector('details.ab-organismes'), async () => {
+      const [suggestions] = await Promise.all([
+        Promise.all(Object.keys(VILLES).map((v) => fetch(`/${v}/data/organismes.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)))
+          .then((fichiers) => fichiers.flatMap((f) => f?.organismes ?? [])),
+        suivis.length ? chargerAnnee() : null,
+      ]);
+      $('#org-suggestions').innerHTML = suggestions.map((o) => `<option value="${echapper(o.nom)}">${o.dossiers} ${tr(pl(o.dossiers, 'dossier', 'dossiers'), pl(o.dossiers, 'item', 'items'))}</option>`).join('');
+      dessiner();
+    });
 
     $('#org-form').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -511,7 +537,7 @@
       const { data: ajoute, error: erreur } = await client.from('organismes_suivis').insert({ user_id: s.user.id, nom }).select('id, nom').single();
       if (erreur) { etat.textContent = /30/.test(erreur.message) ? tr('Limite de 30 organismes atteinte.', 'Limit of 30 organizations reached.') : tr('Impossible de suivre cet organisme. Réessayez.', "Couldn't follow this organization. Try again."); return; }
       suivis = [...suivis, ajoute];
-      if (!annee.length) annee.push(...(await chargerDossiersAnnee()));
+      await chargerAnnee();
       $('#org-champ').value = '';
       dessiner();
       const n = trouves(nom).length;
@@ -666,14 +692,7 @@ ${liste.map(fiche).join('')}
   async function exportTableur(s, abonne) {
     const zone = $('#export');
     if (!s || !abonne) { zone.innerHTML = ''; return; }
-    const [annee, index, mots, orgs] = await Promise.all([
-      chargerDossiersAnnee(),
-      Promise.all(Object.keys(VILLES).map(async (ville) => [ville, await indexVille(ville)])),
-      client.from('alertes_mots_cles').select('mot').then((r) => r.data ?? []),
-      client.from('organismes_suivis').select('nom').then((r) => r.data ?? []),
-    ]);
-    if (!annee.length) { zone.innerHTML = ''; return; }
-    const an = annee.map((d) => (d.derniere ?? d.date ?? '').slice(0, 4)).sort().at(-1);
+    const index = await Promise.all(Object.keys(VILLES).map(async (ville) => [ville, await indexVille(ville)]));
     // Les projets, rangés par ville, les plus fournis d'abord, avec leur nombre de dossiers.
     const projets = index.flatMap(([ville, idx]) => Object.entries(idx?.projets ?? {}).filter(([, p]) => p.decisions > 0).map(([cle, p]) => ({ ville, cle, titre: p.titre, dossiers: p.dossiers ?? 0 })))
       .sort((a, b) => b.dossiers - a.dossiers);
@@ -682,8 +701,26 @@ ${liste.map(fiche).join('')}
     const ouvertExport = zone.querySelector('details.ab-pliable')?.open ? ' open' : '';
     zone.innerHTML = `<details class="ab-carte ab-pliable ab-export"${ouvertExport}>
       <summary><h2>${tr('Export en tableur ou en PDF', 'Export to a spreadsheet or PDF')}</h2></summary>
-      <div class="ab-pliable-corps">
-      <p class="ab-chapeau" style="margin-bottom:14px">${tr('Choisissez ce que vous voulez dans le fichier. Il se fabrique dans votre navigateur, en quelques secondes.', 'Choose what you want in the file. It is built in your browser, in a few seconds.')}</p>
+      <div class="ab-pliable-corps" id="exp-corps">${CHARGEMENT()}</div>
+    </details>`;
+    const carte = zone.querySelector('.ab-export');
+    aLOuverture(carte, () => remplirExport(carte, groupesProjets));
+  }
+
+  // Le formulaire de l'export, construit à la première ouverture de la boîte : c'est lui qui a
+  // besoin de toutes les décisions de l'année (dossiers.json).
+  async function remplirExport(carte, groupesProjets) {
+    const [annee, mots, orgs] = await Promise.all([
+      chargerDossiersAnnee(),
+      client.from('alertes_mots_cles').select('mot').then((r) => r.data ?? []),
+      client.from('organismes_suivis').select('nom').then((r) => r.data ?? []),
+    ]);
+    if (!annee.length) {
+      $('#exp-corps').innerHTML = `<p class="ab-note">${tr("Les décisions de l'année ne répondent pas pour l'instant. Rechargez la page dans un moment.", "This year's decisions aren't responding right now. Reload the page in a moment.")}</p>`;
+      return;
+    }
+    const an = annee.map((d) => (d.derniere ?? d.date ?? '').slice(0, 4)).sort().at(-1);
+    $('#exp-corps').innerHTML = `      <p class="ab-chapeau" style="margin-bottom:14px">${tr('Choisissez ce que vous voulez dans le fichier. Il se fabrique dans votre navigateur, en quelques secondes.', 'Choose what you want in the file. It is built in your browser, in a few seconds.')}</p>
       <div class="ab-export-grille">
         <label class="ab-champ"><span>${tr('1. Quelles décisions', '1. Which decisions')}</span>
           <select id="exp-portee">
@@ -711,11 +748,7 @@ ${liste.map(fiche).join('')}
       <p class="ab-note" id="exp-pdf-note"></p>
       <p class="ab-note" id="exp-etat" aria-live="polite"></p>
       <p class="ab-note">${tr('Il vous manque une colonne ou un autre genre d\'export ? <a class="ab-lien" href="#ecrire">Dites-le-nous</a> : on ajoute ce que les abonnés demandent.', 'Missing a column or another kind of export? <a class="ab-lien" href="#ecrire">Tell us</a>: we add what subscribers ask for.')}</p>
-      </div>
-    </details>`;
-    // Les écouteurs vont sur la carte, pas sur #export : la carte est redessinée à chaque
-    // changement de session, et des écouteurs sur #export s'additionneraient (fichier en double).
-    const carte = zone.querySelector('.ab-export');
+`;
 
     let fichiers = new Map(); // ville|cle → Set des numéros du projet
     // Toujours un projet : toute l'année ne sort sous aucune forme (Martin, 14 sept. 2026 — un PDF
@@ -852,7 +885,10 @@ ${liste.map(fiche).join('')}
     const zone = $('#ouverts');
     if (!s || !abonne) { zone.innerHTML = ''; return; }
     const fichiers = await Promise.all(Object.keys(VILLES).map(async (ville) => [ville, await fetch(`/${ville}/data/attendues.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)]));
-    const tous = await enAnglais(fichiers.flatMap(([ville, f]) => (f?.decisions ?? []).map((d) => ({ ...d, ville, themeInfo: f.themes?.[d.theme] ?? null, titresProjets: d.projets.map((cle) => f.projets?.[cle] ?? cle) }))));
+    // attendues.json est léger (le compte du titre en vient) ; les résumés anglais, eux, attendent l'ouverture.
+    const tous = fichiers.flatMap(([ville, f]) => (f?.decisions ?? []).map((d) => ({ ...d, ville, themeInfo: f.themes?.[d.theme] ?? null, titresProjets: d.projets.map((cle) => f.projets?.[cle] ?? cle) })));
+    let traduction = null;
+    const traduire = () => (traduction ??= enAnglais(tous));
     if (!tous.length) { zone.innerHTML = ''; return; }
     const auj = new Date().toISOString().slice(0, 10);
     const plusieursVilles = new Set(tous.map((d) => d.ville)).size > 1;
@@ -919,11 +955,11 @@ ${liste.map(fiche).join('')}
       <label class="ab-choix-instance">${tr('Instance', 'Body')}
         <select id="ouverts-instance">${cles.map((k) => { const g = groupes.get(k); return `<option value="${echapper(k)}"${k === choisie ? ' selected' : ''}>${plusieursVilles ? `${echapper(VILLES[g.ville] ?? g.ville)} — ` : ''}${echapper(lib(g.nom))} (${g.dossiers.length})</option>`; }).join('')}</select>
       </label>
-      <div id="ouverts-liste"></div>
+      <div id="ouverts-liste">${CHARGEMENT()}</div>
       </div>
     </details>`;
-    dessiner();
-    $('#ouverts-instance').addEventListener('change', (e) => { choisie = e.target.value; dessiner(); mesurer('agenda_conseils_instance'); });
+    aLOuverture(zone.querySelector('details.ab-ouverts'), async () => { await traduire(); dessiner(); });
+    $('#ouverts-instance').addEventListener('change', async (e) => { choisie = e.target.value; await traduire(); dessiner(); mesurer('agenda_conseils_instance'); });
   }
 
   // ---------- nous écrire ----------

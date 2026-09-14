@@ -289,8 +289,8 @@ des sous-dossiers de dossierquebec.ca : la session Supabase ouverte sur une page
   `organismes_suivis` (`scripts/supabase-schema-organismes.sql`) ; des organismes seulement, jamais
   des personnes. Le nom est cherché sans sa forme juridique (`sansFormeJuridique` : « inc. »,
   « ltée », « s.e.n.c. »…), puis comme un mot-clé. Pour chacun, la carte déplie tous les dossiers
-  de l'année qui le nomment, lus dans `data/dossiers.json` (toute l'année, ~540 Ko compressé,
-  chargé seulement pour les abonnés qui suivent un organisme), avec le résumé, le PDF et le
+  de l'année qui le nomment, lus dans `data/dossiers.json` (toute l'année, ~560 Ko compressé,
+  chargé seulement à l'ouverture de la boîte — voir « Ce que Mes dossiers charge »), avec le résumé, le PDF et le
   « Détail de l'argent » à la demande. Les montants restent ceux de chaque résumé : jamais
   additionnés (un engagement, un emprunt et une subvention ne s'additionnent pas). Les
   suggestions du champ viennent de `data/organismes.json` : noms repérés automatiquement dans les
@@ -430,6 +430,18 @@ Reste le vrai levier : l'**API Batches (−50 %)**, sans effet sur la qualité m
 le reste de 2026 (~845 dossiers : ~110 $ au lieu de ~235 $) ; l'étape du matin reste synchrone.
 `lireEtVerifier(client, doc, montantResume, { effortExtraction })` fait un document sans rien
 écrire, et chaque détail garde ses `jetons` pour mesurer.
+
+### Ce que Mes dossiers charge (14 sept. 2026)
+
+Les boîtes des abonnés (mots-clés, organismes, export, agenda) sont fermées au départ et ne
+chargent leurs fichiers qu'à leur **première ouverture** (`aLOuverture` dans `mes-dossiers.html`).
+À l'arrivée, un abonné ne télécharge plus que l'index des projets et `attendues.json` (le compte de
+l'agenda) : ~35 Ko compressés au lieu de ~700 Ko (~1,1 Mo en anglais). Ensuite, à la demande :
+`recentes.json` (~100 Ko) pour les mots-clés, `organismes.json` et `dossiers.json` (~560 Ko, une
+seule fois pour les organismes et l'export) et, en anglais, `resumes-en.json` (~440 Ko) pour
+l'agenda, l'export et les projets. Une boîte restée ouverte d'un rendu à l'autre se remplit tout de
+suite. `dossiers.json` grossit jusqu'en décembre : c'est lui qu'on ne veut pas faire payer à
+chaque visite, surtout sur cellulaire.
 
 ### Le paiement : Stripe (construit le 14 sept. 2026, en mode essai)
 
