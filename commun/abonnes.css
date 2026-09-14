@@ -322,6 +322,9 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-pourquoi li { margin: 0 0 6px; }
 .ab-page .ab-sous-titre { font-size: 15px; margin: 18px 0 8px; color: var(--doux); text-transform: uppercase; letter-spacing: .05em; }
 .ab-page .ab-suggestion { display: flex; flex-direction: column; margin-bottom: 0; }
+/* Les cartes de la grille n'ont pas de marge : l'espace avant « Nous écrire » vient de la section. */
+.ab-page #suggestions:not(:empty) { margin-bottom: 32px; }
+.ab-page #suggestions .ab-grille { gap: 16px; }
 .ab-page .ab-suggestion .ab-liens { margin-top: auto; padding-top: 10px; align-items: center; }
 .ab-page .ab-derniere { font-size: 14px; margin: 0; }
 
