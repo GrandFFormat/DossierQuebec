@@ -11,7 +11,7 @@ create table public.messages_utilisateurs (
   user_id uuid references auth.users(id) on delete set null,
   email text not null check (length(email) <= 200),
   abonne boolean not null default false,
-  sujet text not null check (sujet in ('idee', 'probleme', 'erreur')),
+  sujet text not null check (sujet in ('idee', 'suggestion', 'probleme', 'erreur')),
   message text not null check (length(message) between 3 and 4000),
   ville text check (ville is null or ville ~ '^[a-z-]{2,40}$'),
   numero text check (numero is null or length(numero) <= 80),

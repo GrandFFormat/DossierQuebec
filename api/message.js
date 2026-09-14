@@ -2,7 +2,7 @@
 //
 //   POST /api/message
 //   Authorization: Bearer <jeton de session Supabase>   (obligatoire : il faut être connecté)
-//   { sujet: 'idee' | 'probleme' | 'erreur', message, ville?, numero?, page? }
+//   { sujet: 'idee' | 'suggestion' | 'probleme' | 'erreur', message, ville?, numero?, page? }
 //
 // Réponses : 200 { ok: true } · 400 message invalide · 401 pas connecté · 429 plus de 5 messages
 // en 24 heures · 502/503 service indisponible.
@@ -15,7 +15,7 @@
 // Variables : SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_API_KEY, DIGEST_FROM, MESSAGES_A
 // (une adresse, ou plusieurs séparées par des virgules).
 
-const SUJETS = { idee: 'Idée', probleme: 'Problème sur le site', erreur: 'Erreur dans une donnée' };
+const SUJETS = { idee: 'Idée', suggestion: 'Suggestion', probleme: 'Problème sur le site', erreur: 'Erreur dans une donnée' };
 const VILLES = { quebec: 'Québec', montreal: 'Montréal' };
 const PAR_JOUR = 5;
 const SITE = 'https://dossierquebec.ca';
@@ -115,11 +115,20 @@ export default async function handler(req, res) {
 
   const m = { user_id: id, email, abonne: await estAbonne(id), sujet, message, ville, numero, page };
   const courrielEnvoye = await envoyerCourriel(m);
-  const insertion = await supabase('/rest/v1/messages_utilisateurs', {
+  let insertion = await supabase('/rest/v1/messages_utilisateurs', {
     methode: 'POST',
     corps: { ...m, courriel_envoye: courrielEnvoye },
     entetes: { Prefer: 'return=minimal' },
   });
+  // Tant que la contrainte de la table ne connaît pas « suggestion » (scripts/supabase-schema-messages.sql),
+  // on garde le message comme une idée, marqué « [Suggestion] », plutôt que de le perdre.
+  if (!insertion.ok && sujet === 'suggestion') {
+    insertion = await supabase('/rest/v1/messages_utilisateurs', {
+      methode: 'POST',
+      corps: { ...m, sujet: 'idee', message: `[Suggestion] ${message}`, courriel_envoye: courrielEnvoye },
+      entetes: { Prefer: 'return=minimal' },
+    });
+  }
   if (!insertion.ok) {
     console.error('messages_utilisateurs :', insertion.statut);
     if (!courrielEnvoye) return res.status(502).json({ erreur: "le message n'a pas pu être enregistré" });

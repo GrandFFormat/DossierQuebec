@@ -246,7 +246,7 @@
       <p class="ab-note" id="mots-etat" aria-live="polite"></p>
       <div class="ab-pistes" id="mots-pistes" hidden></div>
       <p class="ab-astuce"><strong>Astuce :</strong> pas sûr de l'orthographe d'une rue ou d'un lieu ? Cherchez-le dans Google pour trouver son nom officiel (« boulevard Wilfrid-Hamel », « 1re Avenue ») : c'est celui qu'emploient les documents de la Ville.</p>
-      <div class="ab-suggestions-mots" id="mots-suggestions" hidden></div>
+      <p class="ab-vers-ecrire"><button type="button" class="ab-lien-bouton" id="mots-vers-ecrire">Vous avez des suggestions ?</button> Un mot-clé qui ne donne rien, un lieu, une idée : écrivez-nous.</p>
       </div>
     </details>`;
     const liste = $('#mots-liste');
@@ -254,40 +254,6 @@
     const form = $('#mots-form');
     let mots = data ?? [];
     const recentes = await chargerRecentes();
-
-    // Suggestions : ce qui revient dans les décisions récentes, en trois groupes, avec le nombre de
-    // décisions. Les quartiers et les sujets viennent d'une courte liste, gardés seulement s'ils
-    // apparaissent ; les rues sont repérées dans le texte (« rue », « avenue », « 1re Avenue »…).
-    const LIEUX = ['Limoilou', 'Saint-Roch', 'Saint-Sauveur', 'Saint-Jean-Baptiste', 'Montcalm', 'Vieux-Québec', 'Vanier', 'Duberger', 'Les Saules', 'Lebourgneuf', 'Neufchâtel', 'Loretteville', 'Val-Bélair', 'Lac-Saint-Charles', 'Charlesbourg', 'Beauport', 'Sainte-Foy', 'Sillery', 'Cap-Rouge'];
-    const SUJETS = ['tramway', 'déneigement', 'logement', 'arbres', 'piste cyclable', 'piscine', 'aréna', 'bibliothèque', 'école', 'parc'];
-    const RUE = /(\d+(?:re|e)\s+(?:Avenue|Rue)|(?:rue|avenue|boulevard|chemin|route|côte)\s+(?:de\s+la\s+|du\s+|des\s+|de\s+l['’]|de\s+|d['’])?\p{Lu}[\p{L}'’.-]+(?:[- ]\p{Lu}[\p{L}'’-]+)?)/gu;
-    const compteRecent = (m) => recentes.dossiers.filter((d) => contientMot(d, m)).length;
-    const rues = new Map();
-    for (const d of recentes.dossiers) {
-      const vues = new Set();
-      for (const [, r] of [d.objet, ...(d.puces ?? [])].join(' ').matchAll(RUE)) {
-        const nom = r.replace(/\s+/g, ' ').replace(/^(rue|avenue|boulevard|chemin|route|côte)\b/, (x) => x);
-        const cle = normaliserTexte(nom);
-        if (vues.has(cle)) continue;
-        vues.add(cle);
-        rues.set(cle, { nom: rues.get(cle)?.nom ?? nom, n: (rues.get(cle)?.n ?? 0) + 1 });
-      }
-    }
-    const groupesSuggestions = [
-      ['Quartiers', LIEUX.map((m) => [m, compteRecent(m)])],
-      ['Rues', [...rues.values()].map((r) => [r.nom, r.n])],
-      ['Sujets', SUJETS.map((m) => [m, compteRecent(m)])],
-    ].map(([titre, liste]) => [titre, liste.filter(([, n]) => n > 1).sort((a, b) => b[1] - a[1])]);
-    const suggestionsMots = $('#mots-suggestions');
-    const dessinerSuggestions = () => {
-      const deja = new Set(mots.map((m) => normaliserTexte(m.mot)));
-      const lignes = groupesSuggestions
-        .map(([titre, liste]) => [titre, liste.filter(([m]) => !deja.has(normaliserTexte(m))).slice(0, 6)])
-        .filter(([, liste]) => liste.length);
-      suggestionsMots.hidden = !lignes.length || mots.length >= 20;
-      suggestionsMots.innerHTML = `<p><strong>Suggestions</strong> — ce qui revient dans les décisions récentes. Un clic l'ajoute :</p>
-        ${lignes.map(([titre, liste]) => `<div class="ab-suggestions-groupe"><span class="ab-suggestions-titre">${titre}</span><div class="ab-pistes-choix">${liste.map(([m, n]) => `<button type="button" class="ab-piste" data-suggestion="${echapper(m)}">${echapper(m)} <span>${n}</span></button>`).join('')}</div></div>`).join('')}`;
-    };
 
     const dessiner = () => {
       liste.innerHTML = mots.length
@@ -298,7 +264,6 @@
         : '<li class="ab-note" style="list-style:none;margin:0">Aucun mot-clé pour l’instant.</li>';
       form.querySelector('button').disabled = mots.length >= 20;
       $('#mots-compte').textContent = mots.length;
-      dessinerSuggestions();
     };
     dessiner();
     if (recentes.depuis) etat.textContent = `« Décisions récentes » : depuis le ${dateFr(recentes.depuis)}.`;
@@ -364,12 +329,14 @@
       const champ = $('#mots-champ');
       if (await ajouter(champ.value.trim().replace(/\s+/g, ' '))) champ.value = '';
     });
-    suggestionsMots.addEventListener('click', async (e) => {
-      const b = e.target.closest('[data-suggestion]');
-      if (!b) return;
-      b.disabled = true;
-      await ajouter(b.dataset.suggestion);
-      mesurer('mot_cle_suggestion');
+    // « Vous avez des suggestions ? » : descend jusqu'à « Nous écrire », sujet « Une suggestion » choisi.
+    $('#mots-vers-ecrire').addEventListener('click', () => {
+      const boite = document.getElementById('ecrire');
+      const choix = boite?.querySelector('select[name="sujet"]');
+      if (choix) { choix.value = 'suggestion'; choix.dispatchEvent(new Event('change', { bubbles: true })); }
+      boite?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      boite?.querySelector('textarea')?.focus({ preventScroll: true });
+      mesurer('mots_cles_vers_suggestion');
     });
     pistes.addEventListener('click', async (e) => {
       const b = e.target.closest('[data-remplacer]');

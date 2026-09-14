@@ -83,11 +83,16 @@ export async function chargerDetail(ville, dossier, s) {
 // ---------- Nous écrire / Signaler une erreur ----------
 // Le serveur (api/message.js) exige une session : il en tire le courriel de la personne, note si
 // elle est abonnée, limite à 5 messages par 24 heures, garde le message et en envoie une copie.
-export const SUJETS_MESSAGE = { idee: 'Une idée', probleme: 'Un problème sur le site', erreur: 'Une erreur dans une donnée' };
+export const SUJETS_MESSAGE = { idee: 'Une idée', suggestion: 'Une suggestion', probleme: 'Un problème sur le site', erreur: 'Une erreur dans une donnée' };
 
 // Le remerciement dépend du sujet, et change d'une fois à l'autre : quelqu'un qui écrit souvent
 // ne reçoit pas toujours la même phrase.
 const MERCIS = {
+  suggestion: [
+    "Merci pour la suggestion ! On la lit, et c'est comme ça que le site colle à ce que les gens cherchent.",
+    'Suggestion bien reçue, merci ! Votre temps et votre implication font avancer le site.',
+    "Merci d'avoir pris le temps de nous l'écrire : chaque suggestion nous aide à mieux couvrir ce qui compte pour vous.",
+  ],
   idee: [
     "Merci pour votre idée ! Merci d'avoir pris le temps de nous l'écrire, et de vous impliquer dans le site.",
     'Idée bien reçue, merci ! Votre temps et votre implication font avancer le site.',
@@ -132,7 +137,11 @@ async function envoyerMessage(contenu) {
 export function formulaireMessage(boite, s, { sujet = 'idee', ville = null, numero = null, fixe = false } = {}) {
   boite.hidden = false;
   const question = fixe && sujet === 'erreur' ? `Qu'est-ce qui ne va pas${numero ? ` dans ${numero}` : ''} ?` : 'Votre message';
-  const exemple = sujet === 'erreur' ? 'Par exemple : le montant indiqué ne correspond pas à celui de la page 3 du PDF.' : '';
+  const EXEMPLES = {
+    erreur: 'Par exemple : le montant indiqué ne correspond pas à celui de la page 3 du PDF.',
+    suggestion: 'Par exemple : un mot-clé qui ne donne rien (« école Rochebelle »), un lieu ou un sujet que vous aimeriez suivre.',
+  };
+  const exemple = EXEMPLES[sujet] ?? '';
   boite.innerHTML = `<form class="ab-message">
     ${fixe ? '' : `<label>Sujet <select name="sujet">${Object.entries(SUJETS_MESSAGE).map(([k, v]) => `<option value="${k}"${k === sujet ? ' selected' : ''}>${v}</option>`).join('')}</select></label>`}
     <label>${echapper(question)} <textarea name="message" required minlength="3" maxlength="4000" rows="5" placeholder="${echapper(exemple)}"></textarea></label>
@@ -141,6 +150,7 @@ export function formulaireMessage(boite, s, { sujet = 'idee', ville = null, nume
     <p class="ab-note ab-etat" aria-live="polite"></p>
   </form>`;
   const form = boite.querySelector('form');
+  form.elements.sujet?.addEventListener('change', (e) => { form.elements.message.placeholder = EXEMPLES[e.target.value] ?? ''; });
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const bouton = form.querySelector('button');
