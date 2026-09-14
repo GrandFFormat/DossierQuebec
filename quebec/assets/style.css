@@ -165,6 +165,28 @@ nav a {
 nav a:hover { color: var(--entete-encre); }
 nav a[aria-current="page"] { color: var(--entete-encre); border-bottom-color: var(--accent); font-weight: 700; }
 
+/* Les outils à droite du menu : Mes dossiers et Abonnement (ajoutés par /commun/abonnes.js),
+   la taille du texte et le thème. Toujours groupés, pour qu'ils passent ensemble à la ligne. */
+nav .outils { margin-left: auto; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+nav .outils .taille-texte { margin-left: 0; }
+
+/* Cellulaire : l'en-tête ne doit pas repousser le contenu d'un écran entier. Le sous-titre
+   ne reste que sur l'accueil, les onglets se resserrent, et les outils prennent leur ligne. */
+@media (max-width: 620px) {
+  .titre-ligne { padding-top: 16px; gap: 8px; }
+  h1 { font-size: 23px; }
+  body:not([data-page="accueil"]) .sous-titre { display: none; }
+  body:not([data-page="accueil"]) .titre-ligne { padding-bottom: 10px; }
+  nav { gap: 0; }
+  nav a { padding: 8px 9px; font-size: 13.5px; }
+  .contenu { padding-left: 18px; padding-right: 18px; }
+  nav .outils { flex-basis: 100%; flex-wrap: nowrap; justify-content: space-between; gap: 4px; padding: 6px 0 10px; }
+  nav .outils .bascule-theme { width: 34px; height: 34px; }
+  nav .outils .ab-lien-abonnement { padding: 5px 2px; }
+  #texte-pct { display: none; }
+}
+
+
 
 /* ---------- TITRES ---------- */
 h2.page { font-size: 30px; margin: 36px 0 8px; font-weight: 800; letter-spacing: -0.028em; line-height: 1.15; }
