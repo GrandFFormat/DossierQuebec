@@ -356,6 +356,19 @@ détails jugés inutilisables, publiés comme repère mais jamais montrés) : en
 rien n'est relu ni repayé. Le workflow demande les secrets `SUPABASE_URL` et
 `SUPABASE_SERVICE_ROLE_KEY` ; sans eux, l'étape est sautée.
 
+**À faire : faire baisser le coût du détail (~0,28 $ US par dossier).** Pourquoi il coûte : le
+document entier (jusqu'à 40 000 caractères) est lu deux fois (extraction, puis contre-lecture),
+avec réflexion au maximum, sur Opus. Pistes, dans l'ordre, chacune validée avant d'être adoptée :
+1. API Batches (−50 %) pour l'étape du matin, et cache du document entre les deux lectures.
+2. Apprendre le gabarit des sommaires de la Ville : sur les ~75 détails vérifiés, repérer dans
+   quelle rubrique (objet, recommandation, impacts financiers, annexes…) se trouve chaque valeur
+   retenue, puis n'envoyer que ces rubriques.
+3. Extraire sans IA ce qui s'écrit toujours pareil (numéro d'appel d'offres, « plus TPS et TVQ »,
+   dates) ; garder l'IA pour la nature des montants et les tableaux aplatis.
+Validation : relancer la version allégée sur les dossiers déjà faits et comparer champ par champ ;
+ne l'adopter que si elle rend les mêmes valeurs. Objectif à confirmer : ~0,05 $ par dossier, ce qui
+rendrait envisageable de couvrir toute l'année.
+
 ## La carte des districts
 
 Contours tirés du jeu « Districts électoraux » de la Ville sur Données Québec, en **CC-BY 4.0** —
