@@ -271,8 +271,9 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-pourquoi { margin-top: 26px; border-left: 4px solid var(--vedette); }
 .ab-page .ab-alertes { border-left: 4px solid var(--accent); }
 .ab-page .ab-ouverts { border-left: 4px solid var(--accent); }
-/* Les mises en garde qu'on ne doit pas manquer (agenda des conseils). Jaune transparent : lisible en clair et en sombre. */
-.ab-page mark.ab-surligne { background: rgba(245, 179, 1, .32); color: inherit; font-weight: 700; padding: 0 .2em; border-radius: 3px; }
+/* Les mises en garde qu'on ne doit pas manquer (agenda des conseils) : gras et italique, sans
+   surlignage (essayé, pas joli). */
+.ab-page .ab-mise-en-garde { font-weight: 700; font-style: italic; color: var(--encre); }
 .ab-page .ab-h2-precision { font-weight: 400; color: var(--doux); font-size: .85em; }
 .ab-page details.ab-section-agenda { margin: 0 0 10px; border: 1px solid var(--ligne); border-radius: 8px; padding: 0 12px; }
 .ab-page details.ab-section-agenda > summary {
