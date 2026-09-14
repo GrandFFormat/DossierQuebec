@@ -2,9 +2,15 @@
 
 Ce document est fait pour être **collé tel quel au début d'une nouvelle session**, avec une
 seule phrase en plus : « La ville, c'est ___. » Il dit ce qu'on a construit pour Québec, ce
-qui se réutilise sans y toucher, ce qui doit être réécrit pour une autre source, dans quel
-ordre travailler, et les pièges déjà rencontrés. Le code de référence est public :
-`github.com/GrandFFormat/DossierQuebec`, dossier `quebec/`.
+qui se réutilise sans y toucher, ce qui doit être réécrit pour une autre source, comment
+brancher la ville sur l'espace abonnés et la version anglaise, dans quel ordre travailler, et
+les pièges déjà rencontrés. Le code de référence est public :
+`github.com/GrandFFormat/DossierQuebec`, dossier `quebec/` (le volet) et la racine (la couche
+commune : `commun/`, `api/`, `mes-dossiers.html`, `abonnement.html`). Le README de `quebec/` est le
+journal détaillé : ce guide y renvoie pour les formats exacts.
+
+Mis à jour le 14 sept. 2026 : espace abonnés (alertes, mots-clés, organismes, agenda, export,
+détail de l'argent et demandes) et version anglaise.
 
 ---
 
@@ -48,10 +54,19 @@ l'exécution. Aucun framework, aucune dépendance sauf le SDK Anthropic pour les
 
 **À garder tel quel** (ça ne dépend pas de la ville) : les six pages et `assets/app.js`,
 `assets/style.css` (deux thèmes, pastilles, accordéon `<details name="fiches">`, taille du
-texte A− / A+, étiquette Prototype, bouton fleur de lys vers DQ), `scrapers/resumes.js` (résumés
-IA avec cache, estimation, plafond, lots), `scrapers/archive.js` (rotation annuelle),
-`scripts/refresh.js` (routine quotidienne tolérante), `scripts/static-server.js`, le
-workflow GitHub Actions, `.vercelignore`.
+texte A− / A+, bouton fleur de lys vers DQ), `scrapers/resumes.js` (résumés IA avec cache,
+estimation, plafond, lots), `scrapers/traductions.js` et `scrapers/lexique-en.js` (version
+anglaise), `scrapers/recaps-projets.js`, `scrapers/details-argent.js`, `scrapers/archive.js`
+(rotation annuelle), `scripts/refresh.js` (routine quotidienne tolérante),
+`scripts/projets-publics.js` et `scripts/travail-public.js` (fichiers de Mes dossiers et de la
+page Abonnement), `scripts/static-server.js`, le workflow GitHub Actions, `.vercelignore`.
+
+**Et une couche commune, qui existe une fois pour toutes les villes** — on ne la recopie
+jamais, on s'y branche (section 9) : `mes-dossiers.html` et `abonnement.html`, `commun/`
+(navigation et menu des villes, client Supabase, styles de l'espace abonnés, tableur Excel/CSV,
+langue), `api/` (détail de l'argent et demandes, alertes du matin, messages, désabonnement) et
+les tables Supabase (suivis, abonnements, alertes, mots-clés, organismes, détail de l'argent,
+demandes, messages), qui ont toutes une colonne `ville` quand c'est utile.
 
 **À adapter** : `lib/themes.js` (règles de classement — les libellés d'objet changent d'une
 ville à l'autre), `lib/lexique.js` (définitions), les textes des pages (noms d'instances,
@@ -150,6 +165,9 @@ contradictions entre GeoJSON et page des membres, consignées), `districts[]` : 
 `octets`, `octetsCompresses`, `archiveLe`, `types`. Les années sont dans
 `archives/AAAA.json.gz`, métadonnées seulement, jamais lues par le site.
 
+À ces neuf fichiers s'ajoutent ceux de l'espace abonnés (section 9) et de la version anglaise
+(section 10), tous tirés des précédents par des scripts qui se réutilisent.
+
 ## 6. Étape 4 — Les scrapers
 
 Vanilla Node (ESM), `fetch`, regex. Un client de source (`lib/gpd.js` à Québec) qui
@@ -222,31 +240,104 @@ parfois littéralement dans ses chaînes.
   `.titre-ligne`, un `<details class="ab-villes" id="villes">` rempli par
   `/commun/entete-volet.js`. Sur cellulaire, le sous-titre ne reste que sur l'accueil et les
   outils tiennent sur une ligne.
-- **Espace abonnés et « Mes dossiers » (communs à toutes les villes).** Chaque page porte
-  `data-ville="…"` sur `<body>` et charge `/commun/abonnes.js` ; chaque fiche contient un
-  `<div class="ab-fiche" data-dossier data-numero data-objet data-projets>`. Ajouter la ville à
-  `VILLES` dans `/commun/navigation.js`, à `api/detail.js` et à `api/message.js`.
-- **Projets suivables** : définis à la main (`lib/projets.js`, relus sur leurs résultats), puis
-  publiés pour Mes dossiers dans `data/projets/index.json` et `data/projets/<cle>.json`, **au
-  format exact décrit dans le README de Québec** (`scripts/projets-publics.js`). Mes dossiers
-  ne lit que ces fichiers, jamais les décisions complètes : c'est ce qui la garde légère
-  quand les villes s'additionnent.
+- **Espace abonnés et version anglaise** : sections 9 et 10.
 
-## 9. Étape 7 — L'automatisation
+## 9. Étape 7 — Brancher la ville sur l'espace abonnés
+
+L'espace abonnés n'appartient à aucune ville : Mes dossiers, Abonnement, `commun/`, `api/` et
+Supabase servent toutes les villes à la fois. Une nouvelle ville s'y branche avec des attributs
+dans ses pages, sa clé dans quelques listes, et des fichiers publiés au bon format. Tant qu'un
+fichier manque, la boîte correspondante n'affiche simplement rien pour cette ville : rien ne
+casse, ce qui permet de brancher morceau par morceau.
+
+**1. Les pages du volet.**
+- `<body data-page="…" data-ville="<cle>">` (la clé = le nom du sous-dossier), et les scripts
+  `/commun/entete-volet.js` et `/commun/abonnes.js`.
+- En-tête : `<details class="ab-villes" id="villes"></details>` dans `.titre-ligne`, et
+  `<div class="outils">` dans `<nav>` (voir la section 8).
+- Chaque fiche de dossier contient
+  `<div class="ab-fiche" data-dossier data-numero data-objet data-montant data-statut data-etape data-echeance data-projets>`
+  (voir `carteDecision` dans `quebec/assets/app.js`). `data-dossier` est la clé qui suit la
+  décision d'une instance à l'autre (le sommaire à Québec, le numéro de dossier à Montréal) ;
+  `data-montant="1"` quand le résumé a trouvé un montant (ça offre « Demander le détail de
+  l'argent »).
+
+**2. Les listes de villes à allonger** (partout la même clé) :
+
+| Fichier | Ce que la liste commande |
+|---|---|
+| `commun/navigation.js` — `VILLES` | le menu des villes, la marque des pages communes, toutes les boucles de Mes dossiers et d'Abonnement |
+| `api/detail.js` — `VILLES` | le détail de l'argent, les demandes et l'export |
+| `api/message.js` — `VILLES` | « Nous écrire » et « Signaler une erreur » |
+| `api/alertes-projets.js` — `VILLES` | les alertes du matin (projets, mots-clés, organismes) |
+| `commun/langue.js` — `VOLETS_EN` | la version anglaise, **seulement quand elle est prête** (section 10) |
+
+**3. Les fichiers que la ville publie pour Mes dossiers**, écrits par son
+`scripts/projets-publics.js` (celui de Québec se réutilise tel quel si `decisions.json` et
+`resumes.json` ont la forme de la section 5). Formats exacts : README de Québec, section
+« L'espace abonnés ». Mes dossiers ne lit que ces fichiers, jamais les décisions complètes : c'est
+ce qui la garde légère quand les villes s'additionnent.
+
+| Fichier | Ce qu'il nourrit |
+|---|---|
+| `data/projets/index.json`, `data/projets/<cle>.json` | projets suivis, « Où en est le projet », suggestions, export. Projets définis à la main dans `lib/projets.js` (relus sur leurs résultats), récapitulatifs par `scrapers/recaps-projets.js` |
+| `data/attendues.json` | l'agenda des conseils (dossiers en attente, instance regroupée, date cible) |
+| `data/recentes.json` | les mots-clés et les alertes du matin (45 derniers jours) — **format commun à toutes les villes**, lu aussi par le serveur |
+| `data/dossiers.json` | les organismes suivis et l'export (toute l'année, avec `numeros[]` pour retrouver les dossiers d'un projet) |
+| `data/organismes.json` | les suggestions de noms d'organismes et d'entreprises |
+| `data/travail.json` | « Le travail derrière le volet… » de la page Abonnement (`scripts/travail-public.js`) |
+
+**4. Le détail de l'argent.** Les tables `details_argent` et `demandes_details` ont une colonne
+`ville` : rien à créer dans Supabase. `scripts/details-du-jour.js` et `scripts/publier-details.js`
+portent `const VILLE = 'quebec'` : les copier dans le volet avec la clé de la ville ;
+`scrapers/details-argent.js` doit savoir obtenir le texte d'un sommaire de cette source. Le
+workflow de la ville demande les secrets `SUPABASE_URL` et `SUPABASE_SERVICE_ROLE_KEY` (sans eux,
+l'étape est sautée, le reste tourne). Garder les règles : jamais le détail dans le dépôt public,
+montants jamais additionnés, chaque nombre vérifié contre le texte.
+
+**5. Vérifier avec un compte abonné** (une ligne dans `abonnements`, statut `actif`) : suivre un
+projet, ajouter un mot-clé et un organisme, ouvrir l'agenda, exporter en Excel et en PDF,
+s'envoyer un courriel d'essai d'alerte, demander un détail de l'argent.
+
+## 10. Étape 8 — La version anglaise (quand le volet est stable)
+
+La mécanique complète est dans le README de Québec (« La version anglaise ») ; pour une ville :
+
+1. **Pages** : `data-en="…"` sur chaque texte fixe (et `data-en-placeholder`, `data-en-title`,
+   `data-en-aria-label`, `data-en-content`, `<title data-en>`), plus les trois lignes du script
+   d'en-tête qui cachent la page le temps de traduire (copier celles de Québec).
+2. **`assets/app.js`** : `import { EN, tr } from '/commun/langue.js'`, chaque texte affiché en
+   `tr('français', 'English')`, dates et nombres au format anglais, et les résumés anglais
+   superposés au chargement (voir `init()` à Québec).
+3. **Libellés de la ville** (types, instances, arrondissements, rôles) : un
+   `assets/libelles-en.js` comme celui de Québec. Les noms propres restent en français.
+4. **Résumés et lexique** : `scrapers/traductions.js --batch` pour le rattrapage (garde-fou : les
+   mêmes nombres qu'en français, sinon refusé), puis `--plafond=150` dans `refresh.js` ;
+   `scrapers/lexique-en.js`. Coût mesuré à Québec : ~1,4 ¢ US par résumé (~10 $ en lot pour
+   1 500), ~3 $ par mois ensuite.
+5. **Ajouter la clé à `VOLETS_EN`** dans `commun/langue.js`. Avant ça, la ville reste en français
+   et n'a pas de pastille, même pour quelqu'un qui a choisi l'anglais : un en-tête anglais sur un
+   contenu français serait pire que rien.
+
+On mesure l'intérêt avant de généraliser : événements Vercel `langue_choisie` { vers, page } et
+`page_en` { page } (Analytics → Events, forfait Pro).
+
+## 11. Étape 9 — L'automatisation
 
 Un workflow GitHub Actions par volet, dans le dépôt de DQ, même groupe de concurrence que le
 rafraîchissement de DQ (jamais deux pushes en même temps), `permissions: contents: write`,
 `npm run refresh` dans le sous-dossier, commit + push de `data/` s'il y a du nouveau.
 `.vercelignore` garde `lib/`, `scrapers/`, `scripts/`, README et `package.json` hors du site
-servi. Secret `ANTHROPIC_API_KEY` (déjà là) ; sans lui, les résumés sont sautés, le reste
-tourne. Les échecs d'étapes secondaires sont des avertissements ; une extraction principale
+servi. Secrets `ANTHROPIC_API_KEY`, `SUPABASE_URL` et `SUPABASE_SERVICE_ROLE_KEY` (déjà là,
+passés en `env` à l'étape `npm run refresh`) ; sans eux, les résumés et le détail de l'argent
+sont sautés, le reste tourne. Les échecs d'étapes secondaires sont des avertissements ; une extraction principale
 en échec rend le run rouge après avoir publié ce qui a marché.
 
 **Aucune clé dans le dépôt.** GitHub bloque le push s'il reconnaît une clé (même une clé de
 lecture que la ville publie elle-même) : la lire à l'exécution dans le code du portail, comme
 un navigateur, ou la mettre en secret.
 
-## 10. Pièges déjà rencontrés (ne pas les refaire)
+## 12. Pièges déjà rencontrés (ne pas les refaire)
 
 - `\w` ne couvre pas les accents : `conseill\w+` attrape « conseiller » et jamais
   « conseillère » — toutes les femmes disparaissent sans erreur. Écrire `conseill[a-zà-ÿ]*`.
@@ -264,8 +355,23 @@ un navigateur, ou la mettre en secret.
 - Un document daté de longtemps avant ce qu'on connaît n'est pas une « nouveauté » : sinon
   le premier rattrapage remplit le fil de 2 800 « nouveautés ».
 - Les résumés grossissent d'une année à l'autre : prévoir leur archivage avant que ça pèse.
+- **Fichiers en fins de ligne Windows (CRLF)** : un remplacement scripté qui cherche `\n` ne trouve
+  rien ou abîme le fichier. Détecter la fin de ligne du fichier avant de remplacer.
+- **`String.replace(motif, texte)` interprète `$&`, `$'` et `$$`** dans le texte de remplacement
+  (un `$$` de SQL devient `$`, un `$'` recopie la fin du fichier) : passer une fonction,
+  `replace(motif, () => texte)`.
+- **Windows** : `process.exit()` pendant qu'un `fetch` est en cours fait planter Node (assertion
+  libuv). Laisser `main()` se terminer.
+- **Supabase** : `service_role` a besoin de `grant` explicites sur chaque table ; une fonction
+  reçoit `EXECUTE` pour tout le monde (`PUBLIC`) à sa création, il faut le révoquer ; ajouter une
+  valeur (un sujet de message, par exemple) oblige à modifier la contrainte `check` de la table.
+- **Superposer une traduction aux données** : garder l'original (`pucesFr` à Québec) pour toute
+  recherche qui doit rester en français — les mots-clés et les organismes cherchent dans les
+  décisions, qui sont en français.
+- **Un compte ou une liste qui ne se voit qu'une fois connecté** se teste avec un faux client
+  Supabase dans le navigateur, et le vrai aller-retour se vérifie après le déploiement.
 
-## 11. Ordre de travail conseillé
+## 13. Ordre de travail conseillé
 
 1. Étude de faisabilité (section 3), avec chiffres. Décider.
 2. Client de source + `decisions.js` : d'abord un échantillon, puis l'année.
@@ -277,15 +383,39 @@ un navigateur, ou la mettre en secret.
 8. Résumés : `--dry-run` d'abord, un échantillon de 50, puis le lot en Batches.
 9. Courriel au greffe ; verrous `noindex` ; publication sous DQ ; icône et bouton retour.
 10. `refresh.js` + workflow ; vérifier un run planifié le lendemain.
-11. README à jour à chaque étape : chaque décision technique y a sa raison.
-12. Le volet stable : retirer « Prototype ». Le jour de la réponse de la ville : retirer les trois verrous, sitemap.
+11. Espace abonnés (section 9) : attributs des fiches, listes de villes, projets suivables et
+    fichiers de Mes dossiers, puis le détail de l'argent ; vérifier avec un compte abonné.
+12. README à jour à chaque étape : chaque décision technique y a sa raison.
+13. Le volet stable : version anglaise (section 10), mesurée avant d'aller plus loin. Le jour
+    de la réponse de la ville : retirer les trois verrous, sitemap.
 
-## 12. Conventions de travail
+## 14. Conventions de travail
 
 - Le terminal de Martin est **PowerShell 5.1** : pas de `&&`, une commande par ligne. Quand
   une commande doit tourner, Claude la lance lui-même et pousse lui-même ; on ne demande pas
   « veux-tu que je… », on fait, on vérifie en ligne, on rend compte en une phrase.
 - Les domaines sont **dossierquebec.ca** et **dossiercanada.ca** — jamais `.com`.
-- Commits en français, message qui explique le pourquoi, signés
-  `Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>`.
+- Commits en français, message qui explique le pourquoi, signés avec la ligne
+  `Co-Authored-By` indiquée par la session.
 - Le README du volet est le journal du projet : ce qui a été mesuré, corrigé, et pourquoi.
+- Martin décide du produit ; il réagit sur ce qu'il voit. Montrer (capture, test dans le
+  navigateur), proposer une recommandation, et rester **consistant** d'une boîte à l'autre :
+  mêmes pastilles, mêmes menus dépliants, mêmes liens discrets.
+- Les clés et les secrets ne passent jamais dans la conversation : Martin les entre lui-même
+  (Vercel, GitHub, `api.env`). Le SQL à exécuter lui est donné prêt à coller.
+
+## 15. Liste de vérification de fin de mise en place
+
+- [ ] `https://dossierquebec.ca/<cle>/` s'ouvre (barre oblique finale) ; pages en `noindex`, lien
+      depuis DQ en `nofollow`, courriel au greffe envoyé et relance programmée.
+- [ ] Le menu « Ville : … » montre la ville, depuis les volets comme depuis Mes dossiers et
+      Abonnement.
+- [ ] Un run planifié du workflow a réussi le lendemain et poussé `data/`.
+- [ ] Mes dossiers, avec un compte abonné : projet suivi, mot-clé, organisme, agenda, export Excel
+      et PDF, courriel d'essai des alertes, demande de détail de l'argent.
+- [ ] Abonnement `?ville=<cle>` : « Le travail derrière le volet… » a ses chiffres.
+- [ ] Cellulaire 375 px : aucun débordement horizontal, outils sur une ligne ; thème clair et
+      sombre.
+- [ ] README du volet à jour ; ce guide aussi, s'il a appris quelque chose.
+- [ ] Plus tard : version anglaise (section 10) et retrait des verrous le jour de la réponse de la
+      ville.
