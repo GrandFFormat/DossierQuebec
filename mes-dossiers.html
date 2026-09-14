@@ -41,6 +41,7 @@
     <div id="alertes"></div>
     <div id="mots"></div>
     <div id="organismes"></div>
+    <div id="export"></div>
     <div id="ouverts"></div>
     <div id="liste"><p class="ab-vide">Chargement…</p></div>
     <div id="pourquoi"></div>
@@ -78,6 +79,7 @@
     alertes(null, false);
     motsCles(null, false);
     organismesSuivis(null, false);
+    exportTableur(null, false);
     dossiersOuverts(null, false);
     $('#liste').innerHTML = `<div class="ab-carte">
       <h3>Connectez-vous</h3>
@@ -157,7 +159,7 @@
         <li><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : « tout ce que la Ville décide sur la 1re Avenue », « dans Limoilou », « sur le déneigement ».</li>
         <li><strong>Suivre un organisme ou une entreprise</strong> : les décisions de l'année qui le nomment — contrats, subventions, ententes — avec le montant de chacune tel qu'écrit, et une alerte quand une nouvelle le nomme.</li>
         <li><strong>L'agenda des conseils</strong> : ce qui s'en vient à chaque conseil, avec son résumé, et ce qui sera probablement présenté à la prochaine séance.</li>
-        <li><strong>L'export en tableur</strong> (Excel ou CSV) des décisions d'un projet, d'un quartier ou d'une année, avec les montants vérifiés. <span class="ab-note">(bientôt)</span></li>`;
+        <li><strong>L'export en tableur</strong> (Excel ou CSV) : vous choisissez les décisions — l'année, un projet, un mot ou un nom — et les colonnes, avec le détail de l'argent quand il est lu.</li>`;
 
   // ---------- alertes par courriel (abonnés) ----------
   // L'interrupteur (alertes_preferences), la date de la dernière alerte (alertes_envois) et un
@@ -402,6 +404,181 @@
           || (bouton.dataset.montant === '1' || reponse.lu ? rendreDemande(reponse) : '')
           || '<p class="ab-note">Pas de détail de l’argent pour ce dossier : son résumé ne mentionne pas de montant.</p>';
       mesurer('organisme_detail_argent', { ville: bouton.dataset.ville });
+    });
+  }
+
+  // ---------- export en tableur (abonnés) ----------
+  // L'abonné choisit lui-même ce qu'il veut : quelles décisions (l'année, un projet), un mot ou un
+  // nom facultatif, les groupes de colonnes, puis Excel ou CSV. Le fichier se fabrique dans le
+  // navigateur (commun/tableur.js) à partir de /<ville>/data/dossiers.json ; seul le détail de
+  // l'argent vient du serveur (api/detail.js, par lots, abonnés seulement). Les montants restent du
+  // texte tel qu'écrit : jamais convertis, jamais additionnés.
+  const GROUPES_EXPORT = [
+    { g: 'resume', libelle: 'Le résumé en langage clair (IA)' },
+    { g: 'montant', libelle: 'Le montant indiqué dans le résumé' },
+    { g: 'argent', libelle: "Le détail de l'argent : nature, montant, qui reçoit, qui paie, durée, attribution, estimation, soumissions", note: 'seulement pour les dossiers déjà lus' },
+    { g: 'liens', libelle: 'Les liens : document officiel (PDF) et fiche sur le site' },
+  ];
+  const texteSoumissions = (x) => (x?.soumissions ?? []).map((so) => `${so.retenue ? 'Retenue' : 'Autre'} : ${so.entreprise ?? ''}${so.prix ? ` (${so.prix})` : ''}${so.conforme === false ? ', non conforme' : ''}`).join('\n');
+  const COLONNES_EXPORT = [
+    { g: 'dossier', titre: 'Ville', largeur: 10, v: (d) => VILLES[d.ville] ?? d.ville },
+    { g: 'dossier', titre: 'Numéro', largeur: 13, v: (d) => d.numero },
+    { g: 'dossier', titre: 'Préparé le', largeur: 12, v: (d) => d.date },
+    { g: 'dossier', titre: 'Dernière décision', largeur: 13, v: (d) => d.derniere },
+    { g: 'dossier', titre: 'Instances', largeur: 26, v: (d) => d.instances.join(' · ') },
+    { g: 'dossier', titre: 'Statut', largeur: 14, v: (d) => (d.statutDossier === 'termine' ? 'Décision finale' : d.statutDossier ? 'En cours' : '') },
+    { g: 'dossier', titre: 'Sujet', largeur: 16, v: (d) => d.themeInfo?.libelle },
+    { g: 'dossier', titre: 'Objet', largeur: 60, v: (d) => d.objet },
+    { g: 'resume', titre: 'Résumé en langage clair (IA)', largeur: 80, v: (d) => d.puces.map((p) => `• ${p}`).join('\n') },
+    { g: 'montant', titre: 'Montant indiqué dans le résumé (IA)', largeur: 20, v: (d) => d.montant },
+    { g: 'argent', titre: 'Détail : nature du montant', largeur: 18, v: (d, x) => x?.nature },
+    { g: 'argent', titre: 'Détail : montant', largeur: 22, v: (d, x) => x?.montantPrincipal },
+    { g: 'argent', titre: 'Détail : en une phrase', largeur: 50, v: (d, x) => x?.enUnePhrase },
+    { g: 'argent', titre: 'Détail : qui reçoit', largeur: 30, v: (d, x) => [x?.beneficiaire, x?.beneficiaireVille].filter(Boolean).join(', ') },
+    { g: 'argent', titre: 'Détail : qui paie', largeur: 24, v: (d, x) => x?.payeur },
+    { g: 'argent', titre: 'Détail : durée', largeur: 26, v: (d, x) => x?.duree },
+    { g: 'argent', titre: "Détail : mode d'attribution", largeur: 24, v: (d, x) => x?.modeAttribution },
+    { g: 'argent', titre: 'Détail : estimation de la Ville', largeur: 22, v: (d, x) => x?.estimationVille },
+    { g: 'argent', titre: 'Détail : soumissions', largeur: 40, v: (d, x) => texteSoumissions(x) },
+    { g: 'liens', titre: 'Document officiel (PDF)', largeur: 40, v: (d) => d.pdf },
+    { g: 'liens', titre: 'Fiche sur le site', largeur: 40, v: (d) => `${location.origin}/${d.ville}/decisions.html?q=${encodeURIComponent(d.numero)}` },
+  ];
+  const nomFichier = (s) => normaliserTexte(s).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+
+  async function exportTableur(s, abonne) {
+    const zone = $('#export');
+    if (!s || !abonne) { zone.innerHTML = ''; return; }
+    const [annee, index, mots, orgs] = await Promise.all([
+      chargerDossiersAnnee(),
+      Promise.all(Object.keys(VILLES).map(async (ville) => [ville, await indexVille(ville)])),
+      client.from('alertes_mots_cles').select('mot').then((r) => r.data ?? []),
+      client.from('organismes_suivis').select('nom').then((r) => r.data ?? []),
+    ]);
+    if (!annee.length) { zone.innerHTML = ''; return; }
+    const an = annee.map((d) => (d.derniere ?? d.date ?? '').slice(0, 4)).sort().at(-1);
+    const projets = index.flatMap(([ville, idx]) => Object.entries(idx?.projets ?? {}).filter(([, p]) => p.decisions > 0).map(([cle, p]) => ({ ville, cle, titre: p.titre })));
+    zone.innerHTML = `<section class="ab-carte ab-export">
+      <h2 style="margin-top:0">Export en tableur</h2>
+      <p class="ab-chapeau" style="margin-bottom:14px">Choisissez ce que vous voulez dans le fichier. Il se fabrique dans votre navigateur, en quelques secondes.</p>
+      <div class="ab-export-grille">
+        <label class="ab-champ"><span>1. Quelles décisions</span>
+          <select id="exp-portee">
+            <option value="">Toutes les décisions de ${echapper(an)}</option>
+            ${projets.length ? `<optgroup label="Un projet">${projets.map((p) => `<option value="${echapper(`${p.ville}|${p.cle}`)}">${echapper(p.titre)}${Object.keys(VILLES).length > 1 ? ` — ${echapper(VILLES[p.ville] ?? p.ville)}` : ''}</option>`).join('')}</optgroup>` : ''}
+          </select>
+        </label>
+        <label class="ab-champ"><span>2. Qui contiennent ce mot ou ce nom <em>(facultatif)</em></span>
+          <input type="text" id="exp-mot" list="exp-suggestions" maxlength="120" placeholder="ex. 1re Avenue, déneigement, Groupe Colas Québec">
+          <datalist id="exp-suggestions">${[...mots.map((m) => m.mot), ...orgs.map((o) => o.nom)].map((t) => `<option value="${echapper(t)}">`).join('')}</datalist>
+        </label>
+        <fieldset class="ab-champ">
+          <legend>3. Quelles colonnes</legend>
+          <label class="ab-case"><input type="checkbox" checked disabled> <span>Le dossier : ville, numéro, dates, instances, statut, sujet, objet</span></label>
+          ${GROUPES_EXPORT.map((c) => `<label class="ab-case"><input type="checkbox" data-groupe="${c.g}" checked> <span>${echapper(c.libelle)}${c.note ? ` <span class="ab-doux">(${echapper(c.note)})</span>` : ''}</span></label>`).join('')}
+          <label class="ab-case ab-case-filtre"><input type="checkbox" id="exp-avec-montant"> <span>Seulement les dossiers avec un montant</span></label>
+        </fieldset>
+      </div>
+      <p class="ab-export-compte" id="exp-compte" aria-live="polite"></p>
+      <div class="ab-liens">
+        <button type="button" class="ab-bouton" data-format="xlsx">Télécharger Excel (.xlsx)</button>
+        <button type="button" class="ab-bouton ab-bouton-second" data-format="csv">Télécharger CSV</button>
+      </div>
+      <p class="ab-note" id="exp-etat" aria-live="polite"></p>
+      <p class="ab-note">Il vous manque une colonne ou un autre genre d'export ? <a class="ab-lien" href="#ecrire">Dites-le-nous</a> : on ajoute ce que les abonnés demandent.</p>
+    </section>`;
+    // Les écouteurs vont sur la carte, pas sur #export : la carte est redessinée à chaque
+    // changement de session, et des écouteurs sur #export s'additionneraient (fichier en double).
+    const carte = zone.querySelector('.ab-export');
+
+    let fichiers = new Map(); // ville|cle → Set des numéros du projet
+    const selection = async () => {
+      const portee = $('#exp-portee').value;
+      let liste = annee;
+      if (portee) {
+        if (!fichiers.has(portee)) {
+          const [ville, cle] = portee.split('|');
+          const f = await fichierProjet(ville, cle);
+          fichiers.set(portee, new Set((f?.dossiers ?? []).flatMap((d) => [d.numero, ...(d.numeros ?? [])]).filter(Boolean)));
+        }
+        const numeros = fichiers.get(portee);
+        const ville = portee.split('|')[0];
+        liste = liste.filter((d) => d.ville === ville && (numeros.has(d.numero) || (d.numeros ?? []).some((n) => numeros.has(n))));
+      }
+      const mot = sansFormeJuridique($('#exp-mot').value.trim());
+      if (mot.length >= 2) liste = liste.filter((d) => contientMot(d, mot));
+      if ($('#exp-avec-montant').checked) liste = liste.filter((d) => d.montant);
+      return [...liste].sort((a, b) => (b.derniere ?? '').localeCompare(a.derniere ?? '') || (b.numero ?? '').localeCompare(a.numero ?? ''));
+    };
+    const compter = async () => {
+      const n = (await selection()).length;
+      $('#exp-compte').textContent = `${n.toLocaleString('fr-CA')} dossier${n > 1 ? 's' : ''} dans le fichier`;
+      carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = !n; });
+    };
+    let delai;
+    carte.addEventListener('input', () => { clearTimeout(delai); delai = setTimeout(compter, 200); });
+    carte.addEventListener('change', compter);
+    compter();
+
+    carte.addEventListener('click', async (e) => {
+      const bouton = e.target.closest('[data-format]');
+      if (!bouton) return;
+      const etat = $('#exp-etat');
+      const format = bouton.dataset.format;
+      const groupes = new Set(['dossier', ...[...carte.querySelectorAll('[data-groupe]:checked')].map((c) => c.dataset.groupe)]);
+      const colonnes = COLONNES_EXPORT.filter((c) => groupes.has(c.g));
+      const liste = await selection();
+      carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = true; });
+      etat.textContent = 'Préparation du fichier…';
+
+      // Le détail de l'argent : seulement pour les dossiers avec un montant, par lots de 150.
+      const details = new Map();
+      let detailManque = false;
+      if (groupes.has('argent')) {
+        const fichierDe = (d) => /\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1];
+        const parVille = new Map();
+        for (const d of liste) if (d.montant && fichierDe(d)) parVille.set(d.ville, [...(parVille.get(d.ville) ?? []), fichierDe(d)]);
+        const courante = await session();
+        for (const [ville, ids] of parVille) {
+          for (let i = 0; i < ids.length; i += 150) {
+            etat.textContent = `Détail de l'argent : ${Math.min(i + 150, ids.length)} / ${ids.length}…`;
+            const r = await fetch(`/api/detail?ville=${encodeURIComponent(ville)}&dossiers=${encodeURIComponent(ids.slice(i, i + 150).join(','))}`, { headers: { Authorization: `Bearer ${courante?.access_token ?? ''}` }, cache: 'no-store' }).catch(() => null);
+            const corps = r?.ok ? await r.json().catch(() => null) : null;
+            if (!corps) { detailManque = true; continue; }
+            for (const [id, x] of Object.entries(corps.details ?? {})) details.set(`${ville}|${id}`, x);
+          }
+        }
+      }
+      const lignes = liste.map((d) => {
+        const x = details.get(`${d.ville}|${/\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1]}`);
+        return colonnes.map((c) => c.v(d, x) ?? '');
+      });
+
+      const portee = $('#exp-portee');
+      const titrePortee = portee.value ? portee.selectedOptions[0].textContent : `Toutes les décisions de ${an}`;
+      const mot = $('#exp-mot').value.trim();
+      const description = `${titrePortee}${mot ? `, qui contiennent « ${mot} »` : ''}${$('#exp-avec-montant').checked ? ', avec un montant' : ''}`;
+      const nom = `dossierville-${nomFichier(portee.value ? titrePortee : String(an))}${mot ? `-${nomFichier(mot)}` : ''}-${new Date().toLocaleDateString('en-CA')}`;
+      const { fichierXlsx, fichierCsv, telecharger } = await import('/commun/tableur.js');
+      if (format === 'xlsx') {
+        const aLire = [
+          ['Sélection', description],
+          ['Dossiers', `${liste.length} (une ligne par dossier : le sommaire décisionnel et ses résolutions)`],
+          ['Exporté le', new Date().toLocaleString('fr-CA')],
+          ['Source', `Documents décisionnels publiés par la Ville, repris par ${location.host}. Le document officiel (PDF) fait foi.`],
+          ['Résumé et montant du résumé', 'Générés par IA à partir du sommaire décisionnel.'],
+          ["Détail de l'argent", "Extrait automatiquement du sommaire décisionnel, puis vérifié automatiquement contre son texte ; ce qui ne se vérifiait pas a été retiré. Vide si le dossier n'a pas encore été lu : vous pouvez le demander sur sa fiche."],
+          ['Montants', "Chaque montant vaut pour son dossier et garde sa nature (dépense, emprunt, subvention, revenu…). Ils ne s'additionnent pas entre eux."],
+        ];
+        telecharger(fichierXlsx([
+          { nom: 'Dossiers', colonnes, lignes },
+          { nom: 'À lire', colonnes: [{ largeur: 28 }, { largeur: 110 }], lignes: aLire, entete: false },
+        ]), `${nom}.xlsx`);
+      } else {
+        telecharger(fichierCsv(colonnes.map((c) => c.titre), lignes), `${nom}.csv`);
+      }
+      etat.textContent = `Fichier prêt : ${liste.length.toLocaleString('fr-CA')} dossier${liste.length > 1 ? 's' : ''}${groupes.has('argent') ? `, dont ${details.size} avec le détail de l'argent` : ''}.${detailManque ? " Une partie du détail de l'argent n'a pas pu être chargée : réessayez dans un moment." : ''}`;
+      carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = false; });
+      mesurer('export_tableur', { format, groupes: [...groupes].join(',') });
     });
   }
 
@@ -761,6 +938,7 @@
     alertes(s, abonne).catch((e) => console.error('alertes :', e));
     motsCles(s, abonne).catch((e) => console.error('mots-clés :', e));
     organismesSuivis(s, abonne).catch((e) => console.error('organismes :', e));
+    exportTableur(s, abonne).catch((e) => console.error('export :', e));
     dossiersOuverts(s, abonne).catch((e) => console.error('dossiers ouverts :', e));
     ecrire(s);
     const suivis = await chargerSuivis();
