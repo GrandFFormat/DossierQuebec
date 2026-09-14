@@ -245,10 +245,10 @@
       const g = groupes.get(choisie);
       const probables = g.dossiers.filter((d) => d.echeance && d.echeance >= auj).sort((a, b) => a.echeance.localeCompare(b.echeance));
       const autres = g.dossiers.filter((d) => !(d.echeance && d.echeance >= auj)).sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
-      // Deux menus dépliants : ce qui vient probablement à la prochaine séance, ouvert d'emblée ;
-      // le reste de l'agenda, replié (ouvert seulement s'il n'y a rien de daté).
+      // Deux menus dépliants, fermés au départ (le reste de l'agenda s'ouvre seulement s'il n'y a
+      // rien de daté, puisqu'il est alors seul).
       $('#ouverts-liste').innerHTML = `
-        ${probables.length ? `<details class="ab-section-agenda" open>
+        ${probables.length ? `<details class="ab-section-agenda">
           <summary>Probablement à la prochaine séance <span class="ab-etiquette ab-en-cours">${probables.length}</span></summary>
           <p class="ab-note" style="margin:0 0 8px">Date cible la plus proche écrite dans les sommaires : ${dateFr(prochaine(g))}.</p>
           ${probables.map(item).join('')}
