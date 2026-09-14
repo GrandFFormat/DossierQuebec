@@ -218,8 +218,10 @@ parfois littéralement dans ses chaînes.
 - **En-tête** : dans `<nav>`, les onglets du volet puis `<div class="outils">` avec la taille du
   texte et le thème — `/commun/abonnes.js` y ajoute « Mes dossiers » et « Abonnement », et
   mémorise la ville pour que Mes dossiers et Abonnement prennent la marque du volet (logo qui y
-  ramène, menu déroulant « Ville : … » pour changer de ville). Sur
-  cellulaire, le sous-titre ne reste que sur l'accueil et les outils tiennent sur une ligne.
+  ramène). Le menu déroulant « Ville : … » est en haut à droite de chaque page : dans
+  `.titre-ligne`, un `<details class="ab-villes" id="villes">` rempli par
+  `/commun/entete-volet.js`. Sur cellulaire, le sous-titre ne reste que sur l'accueil et les
+  outils tiennent sur une ligne.
 - **Espace abonnés et « Mes dossiers » (communs à toutes les villes).** Chaque page porte
   `data-ville="…"` sur `<body>` et charge `/commun/abonnes.js` ; chaque fiche contient un
   `<div class="ab-fiche" data-dossier data-numero data-objet data-projets>`. Ajouter la ville à

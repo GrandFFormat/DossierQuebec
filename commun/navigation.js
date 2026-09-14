@@ -28,6 +28,34 @@ export function dernierVolet() {
   return null;
 }
 
+// Le choix de la ville, en haut à droite de chaque page (volets et pages communes) : un menu
+// déroulant (<details>, donc clavier et lecteurs d'écran sans rien de plus) qui se referme au clic
+// ailleurs ou sur Échap. Une ville ajoutée à VILLES y apparaît toute seule.
+export function menuVilles(details, villeActuelle) {
+  if (!details) return;
+  details.innerHTML = `<summary>${villeActuelle ? `Ville : ${echapper(VILLES[villeActuelle])}` : 'Choisir une ville'}</summary>
+    <ul class="ab-villes-menu">
+      ${Object.entries(VILLES).map(([v, nom]) => `<li><a href="/${v}/"${v === villeActuelle ? ' aria-current="true"' : ''}>${echapper(nom)}</a></li>`).join('')}
+      <li class="ab-villes-dq"><a href="/">DossierQuébec <span>(provincial)</span></a></li>
+    </ul>`;
+  document.addEventListener('click', (e) => {
+    if (details.open && !details.contains(e.target)) details.open = false;
+  });
+  details.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && details.open) {
+      details.open = false;
+      details.querySelector('summary').focus();
+    }
+  });
+}
+
+// L'en-tête d'un volet : le menu des villes, sa ville cochée. Chargé par chaque page de volet
+// (<script type="module" src="/commun/entete-volet.js">), à part de Supabase pour ne pas attendre.
+export function enteteVolet() {
+  const ville = document.body.dataset.ville;
+  menuVilles(document.querySelector('#villes'), Object.hasOwn(VILLES, ville ?? '') ? ville : null);
+}
+
 // L'en-tête des pages communes. Venue d'un volet (mémorisé, ou ?ville=) : la marque du volet
 // (« DossierVilleDeQuébec », dont le logo ramène à l'accueil du volet). Sinon : DossierQuébec.
 // Puis les villes, la taille du texte et le thème — les mêmes réglages (clés dvq:zoom et
@@ -43,24 +71,7 @@ export function enteteCommune() {
     marque.innerHTML = `Dossier<span>VilleDe${echapper(VILLES[cible])}</span>`;
     document.title = document.title.replace(/— DossierQuébec$/, `— DossierVilleDe${VILLES[cible]}`);
   }
-  // Le choix de la ville : un menu déroulant (<details>), qui se referme au clic ailleurs ou sur Échap.
-  const villes = document.querySelector('#villes');
-  if (villes) {
-    villes.innerHTML = `<summary>${cible ? `Ville : ${echapper(VILLES[cible])}` : 'Choisir une ville'}</summary>
-      <ul class="ab-villes-menu">
-        ${Object.entries(VILLES).map(([v, nom]) => `<li><a href="/${v}/"${v === cible ? ' aria-current="true"' : ''}>${echapper(nom)}</a></li>`).join('')}
-        <li class="ab-villes-dq"><a href="/">DossierQuébec <span>(provincial)</span></a></li>
-      </ul>`;
-    document.addEventListener('click', (e) => {
-      if (villes.open && !villes.contains(e.target)) villes.open = false;
-    });
-    villes.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && villes.open) {
-        villes.open = false;
-        villes.querySelector('summary').focus();
-      }
-    });
-  }
+  menuVilles(document.querySelector('#villes'), cible);
 
   const outils = document.querySelector('#outils');
   if (!outils) return;
