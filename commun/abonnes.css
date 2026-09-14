@@ -130,26 +130,30 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-haut-ligne { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding-bottom: 10px; }
 .ab-page .ab-marque { font-size: 22px; font-weight: 800; letter-spacing: -.02em; color: var(--encre); text-decoration: none; }
 .ab-page .ab-marque span { color: var(--accent); }
-.ab-page .ab-villes { margin-left: auto; position: relative; font-size: 13.5px; }
-.ab-page .ab-villes > summary {
-  list-style: none; cursor: pointer; white-space: nowrap; font-weight: 600; color: var(--encre);
-  background: var(--carte); border: 1px solid var(--ligne-forte); border-radius: 999px; padding: 5px 12px;
+/* Le menu des villes, en haut à droite de chaque page — volets (dans .titre-ligne) et pages
+   communes (dans .ab-haut-ligne). Les couleurs viennent de la page ; valeurs de repli sinon. */
+.ab-villes { margin-left: auto; position: relative; font-size: 13.5px; }
+.ab-villes > summary {
+  list-style: none; cursor: pointer; white-space: nowrap; font-weight: 600; line-height: 1.5;
+  color: var(--encre, #16191D); background: var(--carte, #fff);
+  border: 1px solid var(--ligne-forte, #C2CAD2); border-radius: 999px; padding: 5px 12px;
 }
-.ab-page .ab-villes > summary::-webkit-details-marker { display: none; }
-.ab-page .ab-villes > summary::after { content: " ▾"; color: var(--doux); }
-.ab-page .ab-villes[open] > summary::after { content: " ▴"; }
-.ab-page .ab-villes > summary:hover { border-color: var(--accent); }
-.ab-page .ab-villes > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.ab-page .ab-villes-menu {
+.ab-villes > summary::-webkit-details-marker { display: none; }
+.ab-villes > summary::after { content: " ▾"; color: var(--doux, #5B6570); }
+.ab-villes[open] > summary::after { content: " ▴"; }
+.ab-villes > summary:hover { border-color: var(--accent, #0B8A4B); }
+.ab-villes > summary:focus-visible { outline: 2px solid var(--accent, #0B8A4B); outline-offset: 2px; }
+.ab-villes-menu {
   position: absolute; right: 0; top: calc(100% + 6px); z-index: 30; min-width: 220px;
-  list-style: none; margin: 0; padding: 6px; background: var(--carte);
-  border: 1px solid var(--ligne); border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+  list-style: none; margin: 0; padding: 6px; background: var(--carte, #fff);
+  border: 1px solid var(--ligne, #DDE2E7); border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
 }
-.ab-page .ab-villes-menu a { display: block; padding: 8px 10px; border-radius: 6px; color: var(--encre); text-decoration: none; font-weight: 600; }
-.ab-page .ab-villes-menu a:hover { background: var(--fond-2); }
-.ab-page .ab-villes-menu a[aria-current] { color: var(--accent-encre); background: var(--accent-fond); }
-.ab-page .ab-villes-dq { border-top: 1px solid var(--ligne); margin-top: 4px; padding-top: 4px; }
-.ab-page .ab-villes-dq span { color: var(--doux); font-weight: 400; }
+.ab-villes-menu li { margin: 0; }
+.ab-villes-menu a { display: block; padding: 8px 10px; border-radius: 6px; color: var(--encre, #16191D); text-decoration: none; font-weight: 600; }
+.ab-villes-menu a:hover { background: var(--fond-2, #F4F6F8); }
+.ab-villes-menu a[aria-current] { color: var(--accent-encre, var(--accent, #076338)); background: var(--accent-fond, var(--fond-2, #E6F6EC)); }
+.ab-villes-dq { border-top: 1px solid var(--ligne, #DDE2E7); margin-top: 4px; padding-top: 4px; }
+.ab-villes-dq span { color: var(--doux, #5B6570); font-weight: 400; }
 .ab-page .ab-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
 .ab-page .ab-onglets { display: flex; flex-wrap: wrap; gap: 3px; }
 .ab-page .ab-onglets a {
