@@ -13,7 +13,7 @@
 //     « Abonnez-vous » sinon. Rien n'est chargé tant qu'on n'ouvre pas une fiche ;
 //   - au bas de la fiche ouverte, « Signaler une erreur dans cette fiche » (compte requis).
 
-import { VILLES, echapper, mesurer, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, formulaireMessage, client } from './abonnes-client.js';
+import { VILLES, echapper, mesurer, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, formulaireMessage, client } from './abonnes-client.js';
 import { memoriserVolet } from './navigation.js';
 
 const VILLE = document.body.dataset.ville;
@@ -117,7 +117,8 @@ async function peupler(zone) {
   zone.innerHTML = `<div class="ab-connexion" hidden></div><div class="ab-detail-zone"></div>
     <div class="ab-signaler"><button type="button" class="ab-signaler-lien" data-action="signaler">Signaler une erreur dans cette fiche</button><div class="ab-message-boite" hidden></div></div>`;
   const reponse = await chargerDetail(VILLE, zone.dataset.dossier, sess);
-  zone.querySelector('.ab-detail-zone').innerHTML = rendreDetail(reponse, VILLE);
+  // Sans détail : un abonné peut le demander, si le résumé a trouvé un montant (data-montant).
+  zone.querySelector('.ab-detail-zone').innerHTML = rendreDetail(reponse, VILLE) || (zone.dataset.montant === '1' ? rendreDemande(reponse) : '');
 }
 
 function formulaireConnexion(boite, message) {
@@ -161,6 +162,12 @@ document.addEventListener('click', async (e) => {
   // La ligne des pastilles ne déplie pas la fiche (le reste de la boîte, oui).
   const meta = e.target.closest('summary .ab-meta-inerte');
   if (meta) e.preventDefault();
+
+  const demande = e.target.closest('[data-action="demander-detail"]');
+  if (demande) {
+    await demanderDetail(demande, VILLE, demande.closest('.ab-fiche').dataset.dossier, sess);
+    return;
+  }
 
   const signaler = e.target.closest('[data-action="signaler"]');
   if (signaler) {

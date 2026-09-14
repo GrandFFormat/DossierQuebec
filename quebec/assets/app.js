@@ -146,7 +146,9 @@ function carteDecision(d) {
   // un tableau des décisions n'est pas un dossier : rien à suivre.
   if (d.type === 'Procès-verbaux' || d.type === 'Tableaux des décisions') return carteRepliable(entete, corps);
   const projets = (d.projets ?? []).map((cle) => ({ cle, titre: etat.decisions?.projets?.[cle]?.titre ?? cle }));
-  const abonnes = `<div class="ab-fiche" data-dossier="${echapper(d.sommaireId ?? d.id)}" data-numero="${echapper(d.numero ?? '')}" data-objet="${echapper((d.objet ?? '').slice(0, 300))}"
+  // data-montant : le résumé a trouvé un montant, donc un abonné peut demander le détail de l'argent.
+  const resume = resumePour(d)?.r;
+  const abonnes = `<div class="ab-fiche" data-dossier="${echapper(d.sommaireId ?? d.id)}" data-numero="${echapper(d.numero ?? '')}" data-objet="${echapper((d.objet ?? '').slice(0, 300))}" data-montant="${resume?.montantPrincipal && !resume.sansContenuSubstantiel ? 1 : 0}"
     data-statut="${echapper(d.statutDossier ?? '')}" data-etape="${echapper(d.etapeFinale ?? '')}" data-echeance="${echapper(d.echeance ?? '')}"
     data-projets="${echapper(JSON.stringify(projets))}"></div>`;
   return carteRepliable(entete, corps + abonnes);

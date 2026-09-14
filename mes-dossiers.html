@@ -55,7 +55,7 @@
   boutonRetourEnHaut();
 </script>
 <script type="module">
-  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, mesurer, formulaireMessage } from '/commun/abonnes-client.js';
+  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, mesurer, formulaireMessage } from '/commun/abonnes-client.js';
 
   const $ = (s) => document.querySelector(s);
 
@@ -332,7 +332,7 @@
           <div class="ab-liens">
             ${d.pdf ? `<a href="${echapper(d.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}
             <a href="/${echapper(d.ville)}/decisions.html?q=${encodeURIComponent(d.numero)}">Voir dans le volet ${echapper(VILLES[d.ville] ?? '')}</a>
-            ${fichier ? `<button type="button" class="ab-lien-bouton" data-detail="${echapper(fichier)}" data-ville="${echapper(d.ville)}" aria-expanded="false">Détail de l'argent</button>` : ''}
+            ${fichier ? `<button type="button" class="ab-lien-bouton" data-detail="${echapper(fichier)}" data-ville="${echapper(d.ville)}" data-montant="${d.montant ? 1 : 0}" aria-expanded="false">Détail de l'argent</button>` : ''}
           </div>
           <div class="ab-detail-org" hidden></div>
         </div>
@@ -381,6 +381,11 @@
         etat.textContent = 'Organisme retiré.';
         return;
       }
+      const demande = e.target.closest('[data-action="demander-detail"]');
+      if (demande) {
+        const source = demande.closest('.ab-ouvert-corps').querySelector('[data-detail]');
+        return demanderDetail(demande, source.dataset.ville, source.dataset.detail, await session());
+      }
       const bouton = e.target.closest('[data-detail]');
       if (!bouton) return;
       const boite = bouton.closest('.ab-ouvert-corps').querySelector('.ab-detail-org');
@@ -390,7 +395,11 @@
       bouton.disabled = false;
       boite.hidden = false;
       bouton.setAttribute('aria-expanded', 'true');
-      boite.innerHTML = rendreDetail(reponse, bouton.dataset.ville) || '<p class="ab-note">Pas encore de détail de l’argent pour ce dossier : il est lu seulement pour certains projets et pour les nouvelles décisions.</p>';
+      // Pas de détail : l'abonné peut le demander, si le résumé a trouvé un montant.
+      boite.innerHTML = !reponse ? '<p class="ab-note">Le détail de l’argent ne répond pas pour l’instant. Réessayez dans un moment.</p>'
+        : rendreDetail(reponse, bouton.dataset.ville)
+          || (bouton.dataset.montant === '1' || reponse.lu ? rendreDemande(reponse) : '')
+          || '<p class="ab-note">Pas de détail de l’argent pour ce dossier : son résumé ne mentionne pas de montant.</p>';
       mesurer('organisme_detail_argent', { ville: bouton.dataset.ville });
     });
   }
