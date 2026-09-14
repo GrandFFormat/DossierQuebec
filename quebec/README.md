@@ -371,7 +371,8 @@ est simplement absente des suggestions.
 versionné est lisible par tous. `data/details.json` reste en local comme cache (`.gitignore`), et
 la copie servie aux abonnés est dans Supabase, publiée par `scripts/publier-details.js` — appelé
 automatiquement après chaque extraction si `SUPABASE_URL` et `SUPABASE_SERVICE_ROLE_KEY` sont dans
-`api.env`. L'abonnement se donne à la main dans Supabase tant que Stripe n'est pas branché.
+`api.env`. L'abonnement se paie par Stripe (plus bas, « Le paiement : Stripe ») ; il peut aussi se
+donner à la main dans Supabase (`source = 'manuel'`), et Stripe n'y touche pas.
 
 **Quels dossiers ont le détail (décidé le 14 sept. 2026).** Seulement ceux dont le résumé a trouvé
 un montant (875 des 1 502 sommaires de 2026) : les dossiers des projets suivables, extraits d'un
@@ -429,6 +430,44 @@ Reste le vrai levier : l'**API Batches (−50 %)**, sans effet sur la qualité m
 le reste de 2026 (~845 dossiers : ~110 $ au lieu de ~235 $) ; l'étape du matin reste synchrone.
 `lireEtVerifier(client, doc, montantResume, { effortExtraction })` fait un document sans rien
 écrire, et chaque détail garde ses `jetons` pour mesurer.
+
+### Le paiement : Stripe (construit le 14 sept. 2026, en mode essai)
+
+Un seul abonnement, 3 $ CA par mois, pour toutes les villes. Stripe tient la carte, les factures,
+les renouvellements et l'annulation ; le site ne voit jamais une carte. Aucune bibliothèque : l'API
+Stripe est du formulaire HTTP et la signature des webhooks un HMAC (`api/_stripe.js`).
+
+- **S'abonner** : la page Abonnement demande l'état à `GET /api/abonnement`, puis « S'abonner »
+  crée une session Stripe Checkout (`POST /api/abonnement?action=paiement`) rattachée au compte
+  (`client_reference_id` et `metadata.user_id`). Retour sur `/mes-dossiers?abonnement=merci`, qui
+  attend la confirmation (30 s au plus) et ouvre les boîtes des abonnés.
+- **L'accès n'est donné que par le webhook** (`api/stripe-webhook.js`, signature vérifiée sur le
+  corps brut). Pour chaque événement, il relit l'abonnement chez Stripe et le recopie dans la table
+  `abonnements` : l'ordre des événements n'importe pas, et en rejouer un ne change rien. Rien d'autre
+  ne change dans le site : `api/detail.js`, les alertes et Mes dossiers lisent déjà
+  `statut = 'actif'` et `fin` dans le futur.
+- **`fin`** : fin de la période payée + 2 jours (un renouvellement dont le webhook tarde ne coupe
+  rien) ; annulé par l'abonné : exactement la fin de la période payée ; carte refusée
+  (`past_due`) : 3 jours après le début de la période, pendant que Stripe réessaie.
+- **Gérer** (carte, factures, annulation) : le portail client de Stripe
+  (`POST /api/abonnement?action=portail`), depuis la page Abonnement ; Mes dossiers y renvoie.
+- **Un abonnement donné à la main** (`source = 'manuel'`, actif) n'est jamais modifié par Stripe.
+- **Ouvert ou pas** : sans `STRIPE_OUVERT=1`, le bouton n'apparaît qu'aux adresses de
+  `STRIPE_ESSAI` ; tout le monde d'autre voit la liste d'attente, comme avant. C'est ce qui permet
+  d'essayer en production sans ouvrir l'abonnement.
+
+**Variables Vercel** : `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRIX`, `STRIPE_ESSAI`,
+puis `STRIPE_OUVERT=1` le jour de l'ouverture. **Supabase** : `scripts/supabase-schema-stripe.sql`
+(colonnes `stripe_customer_id`, `stripe_subscription_id`, `annulation_prevue`). **Stripe** : le
+produit et son prix récurrent, le webhook vers `https://dossierquebec.ca/api/stripe-webhook`
+(`checkout.session.completed`, `customer.subscription.created/updated/deleted`, `invoice.paid`,
+`invoice.payment_failed`), et le portail client enregistré une fois (Paramètres → Facturation →
+Portail client).
+
+**Avant d'ouvrir en réel** : la réponse du greffe (usage commercial, N/Réf. 2026-09-11-2684) ; des
+conditions d'utilisation et une politique de remboursement liées depuis la page Abonnement ;
+retirer « prix prévu » des pages Abonnement et Mes dossiers ; refaire produit, prix, webhook et
+portail en mode réel (ils ne passent pas du mode essai au réel) et changer les trois clés.
 
 ## La version anglaise (étape 1, 14 sept. 2026)
 

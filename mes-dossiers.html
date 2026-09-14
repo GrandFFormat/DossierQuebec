@@ -994,6 +994,37 @@ ${liste.map(fiche).join('')}
       : '';
   }
 
+  // Retour de Stripe (?abonnement=merci) : le webhook confirme en quelques secondes. On revérifie
+  // seulement le statut, toutes les 2 secondes pendant 30 secondes, et on redessine la page une fois
+  // l'abonnement actif.
+  let attenteMerci = null;
+  const MERCI = {
+    actif: () => tr("<strong>Merci, votre abonnement est actif.</strong> Les alertes par courriel, les mots-clés, les organismes suivis, l'export et l'agenda des conseils sont ouverts ci-dessous. Stripe vous envoie le reçu par courriel.", '<strong>Thank you, your subscription is active.</strong> Email alerts, keywords, followed organizations, export and council agendas are open below. Stripe is emailing you the receipt.'),
+    attente: () => tr('<strong>Merci !</strong> On attend la confirmation du paiement par Stripe, quelques secondes…', '<strong>Thank you!</strong> Waiting for Stripe to confirm the payment, a few seconds…'),
+    tard: () => tr('<strong>Merci !</strong> La confirmation du paiement tarde : rechargez la page dans une minute. Si rien ne change, <a class="ab-lien" href="#ecrire">écrivez-nous</a> — rien ne sera perdu.', '<strong>Thank you!</strong> The payment confirmation is taking a while: reload the page in a minute. If nothing changes, <a class="ab-lien" href="#ecrire">write to us</a> — nothing will be lost.'),
+  };
+  function merciAbonnement(s, abonne) {
+    const params = new URLSearchParams(location.search);
+    if (params.get('abonnement') !== 'merci') return '';
+    if (abonne) {
+      params.delete('abonnement');
+      history.replaceState(null, '', location.pathname + (params.size ? `?${params}` : '') + location.hash);
+      mesurer('abonnement_confirme', {});
+    } else if (!attenteMerci) {
+      let essais = 0;
+      attenteMerci = setInterval(async () => {
+        essais++;
+        if (await statutAbonnement(s).catch(() => false)) { clearInterval(attenteMerci); return afficher(); }
+        if (essais >= 15) {
+          clearInterval(attenteMerci);
+          const boite = document.querySelector('.ab-merci');
+          if (boite) boite.innerHTML = MERCI.tard();
+        }
+      }, 2000);
+    }
+    return `<div class="ab-carte ab-merci" role="status">${abonne ? MERCI.actif() : MERCI.attente()}</div>`;
+  }
+
   async function statutAbonnement(s) {
     const { data } = await client.from('abonnements').select('statut, fin').eq('user_id', s.user.id).maybeSingle();
     return data && data.statut === 'actif' && (!data.fin || new Date(data.fin) > new Date());
@@ -1197,7 +1228,7 @@ ${liste.map(fiche).join('')}
     const s = await session();
     if (!s) return connexion();
     const abonne = await statutAbonnement(s).catch(() => false);
-    $('#compte').innerHTML = `<p class="ab-note">${tr('Connecté comme', 'Signed in as')} <strong>${echapper(s.user.email)}</strong> · ${abonne ? tr('abonnement actif', 'active subscription') : tr('pas d\'abonnement — <a class="ab-lien" href="/abonnement">voir l\'abonnement</a>', 'no subscription — <a class="ab-lien" href="/abonnement">see the subscription</a>')} · <button type="button" class="ab-lien-bouton" id="deconnexion">${tr('Se déconnecter', 'Sign out')}</button></p>`;
+    $('#compte').innerHTML = `${merciAbonnement(s, abonne)}<p class="ab-note">${tr('Connecté comme', 'Signed in as')} <strong>${echapper(s.user.email)}</strong> · ${abonne ? tr('abonnement actif — <a class="ab-lien" href="/abonnement">gérer</a>', 'active subscription — <a class="ab-lien" href="/abonnement">manage</a>') : tr('pas d\'abonnement — <a class="ab-lien" href="/abonnement">voir l\'abonnement</a>', 'no subscription — <a class="ab-lien" href="/abonnement">see the subscription</a>')} · <button type="button" class="ab-lien-bouton" id="deconnexion">${tr('Se déconnecter', 'Sign out')}</button></p>`;
     $('#deconnexion').addEventListener('click', async () => { await client.auth.signOut(); });
 
     alertes(s, abonne).catch((e) => console.error('alertes :', e));

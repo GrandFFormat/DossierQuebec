@@ -567,3 +567,7 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 .ab-page .ab-piste:disabled { opacity: .6; cursor: default; }
 
 .ab-page .ab-vers-ecrire { margin: 12px 0 0; font-size: 14px; color: var(--doux); }
+
+/* Retour de Stripe dans Mes dossiers, et l'abonnement actif sur la page Abonnement */
+.ab-page .ab-merci { border-left: 5px solid var(--accent); background: var(--accent-fond, #E6F6EC); color: var(--encre); margin-bottom: 16px; }
+.ab-abo .ab-payer h3 { margin-top: 0; }
