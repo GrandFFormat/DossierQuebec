@@ -271,6 +271,7 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-pourquoi { margin-top: 26px; border-left: 4px solid var(--vedette); }
 .ab-page .ab-alertes { border-left: 4px solid var(--accent); }
 .ab-page .ab-ouverts { border-left: 4px solid var(--accent); }
+.ab-page .ab-h2-precision { font-weight: 400; color: var(--doux); font-size: .85em; }
 .ab-page details.ab-section-agenda { margin: 0 0 10px; border: 1px solid var(--ligne); border-radius: 8px; padding: 0 12px; }
 .ab-page details.ab-section-agenda > summary {
   list-style: none; cursor: pointer; display: flex; align-items: center; gap: 8px;
