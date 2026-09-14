@@ -525,15 +525,18 @@ ${liste.map(fiche).join('')}
     ]);
     if (!annee.length) { zone.innerHTML = ''; return; }
     const an = annee.map((d) => (d.derniere ?? d.date ?? '').slice(0, 4)).sort().at(-1);
-    const projets = index.flatMap(([ville, idx]) => Object.entries(idx?.projets ?? {}).filter(([, p]) => p.decisions > 0).map(([cle, p]) => ({ ville, cle, titre: p.titre })));
+    // Les projets, rangés par ville, les plus fournis d'abord, avec leur nombre de dossiers.
+    const projets = index.flatMap(([ville, idx]) => Object.entries(idx?.projets ?? {}).filter(([, p]) => p.decisions > 0).map(([cle, p]) => ({ ville, cle, titre: p.titre, dossiers: p.dossiers ?? 0 })))
+      .sort((a, b) => b.dossiers - a.dossiers);
+    const groupesProjets = Object.keys(VILLES).map((ville) => [ville, projets.filter((p) => p.ville === ville)]).filter(([, ps]) => ps.length);
     zone.innerHTML = `<section class="ab-carte ab-export">
       <h2 style="margin-top:0">Export en tableur ou en PDF</h2>
       <p class="ab-chapeau" style="margin-bottom:14px">Choisissez ce que vous voulez dans le fichier. Il se fabrique dans votre navigateur, en quelques secondes.</p>
       <div class="ab-export-grille">
         <label class="ab-champ"><span>1. Quelles décisions</span>
           <select id="exp-portee">
-            <option value="">Toutes les décisions de ${echapper(an)}</option>
-            ${projets.length ? `<optgroup label="Un projet">${projets.map((p) => `<option value="${echapper(`${p.ville}|${p.cle}`)}">${echapper(p.titre)}${Object.keys(VILLES).length > 1 ? ` — ${echapper(VILLES[p.ville] ?? p.ville)}` : ''}</option>`).join('')}</optgroup>` : ''}
+            <option value="" data-titre="Toutes les décisions de ${echapper(an)}">Toutes les décisions de ${echapper(an)} — Excel ou CSV seulement</option>
+            ${groupesProjets.map(([ville, ps]) => `<optgroup label="Projets de la Ville de ${echapper(VILLES[ville] ?? ville)}">${ps.map((p) => `<option value="${echapper(`${p.ville}|${p.cle}`)}" data-titre="${echapper(p.titre)}">${echapper(p.titre)} (${p.dossiers} dossier${p.dossiers > 1 ? 's' : ''})</option>`).join('')}</optgroup>`).join('')}
           </select>
         </label>
         <label class="ab-champ"><span>2. Qui contiennent ce mot ou ce nom <em>(facultatif)</em></span>
@@ -553,7 +556,7 @@ ${liste.map(fiche).join('')}
         <button type="button" class="ab-bouton ab-bouton-second" data-format="csv">Télécharger CSV</button>
         <button type="button" class="ab-bouton ab-bouton-second" data-format="pdf">PDF à imprimer</button>
       </div>
-      <p class="ab-note">Le PDF s'ouvre dans une nouvelle fenêtre, une fiche par dossier : dans la fenêtre d'impression, choisissez « Enregistrer au format PDF ».</p>
+      <p class="ab-note" id="exp-pdf-note"></p>
       <p class="ab-note" id="exp-etat" aria-live="polite"></p>
       <p class="ab-note">Il vous manque une colonne ou un autre genre d'export ? <a class="ab-lien" href="#ecrire">Dites-le-nous</a> : on ajoute ce que les abonnés demandent.</p>
     </section>`;
@@ -580,10 +583,16 @@ ${liste.map(fiche).join('')}
       if ($('#exp-avec-montant').checked) liste = liste.filter((d) => d.montant);
       return [...liste].sort((a, b) => (b.derniere ?? '').localeCompare(a.derniere ?? '') || (b.numero ?? '').localeCompare(a.numero ?? ''));
     };
+    // Le PDF : un projet à la fois. Toute l'année ferait des centaines de pages (~815 mesurées) et
+    // figerait la fenêtre d'impression ; le tableur, lui, les tient sans peine.
+    const pdfPermis = () => Boolean($('#exp-portee').value);
     const compter = async () => {
       const n = (await selection()).length;
       $('#exp-compte').textContent = `${n.toLocaleString('fr-CA')} dossier${n > 1 ? 's' : ''} dans le fichier`;
-      carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = !n; });
+      carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = !n || (b.dataset.format === 'pdf' && !pdfPermis()); });
+      $('#exp-pdf-note').textContent = pdfPermis()
+        ? "Le PDF s'ouvre dans une nouvelle fenêtre, une fiche par dossier : dans la fenêtre d'impression, choisissez « Enregistrer au format PDF »."
+        : "Le PDF se fait un projet à la fois : choisissez un projet à l'étape 1. Pour toute l'année, prenez Excel ou CSV.";
     };
     let delai;
     carte.addEventListener('input', () => { clearTimeout(delai); delai = setTimeout(compter, 200); });
@@ -595,6 +604,7 @@ ${liste.map(fiche).join('')}
       if (!bouton) return;
       const etat = $('#exp-etat');
       const format = bouton.dataset.format;
+      if (format === 'pdf' && !pdfPermis()) return;
       // Le PDF passe par l'impression du navigateur, dans une nouvelle fenêtre. Elle doit s'ouvrir
       // pendant le clic, avant toute attente : plus tard, le bloqueur de fenêtres la refuserait.
       const fenetre = format === 'pdf' ? window.open('', '_blank') : null;
@@ -632,7 +642,7 @@ ${liste.map(fiche).join('')}
       });
 
       const portee = $('#exp-portee');
-      const titrePortee = portee.value ? portee.selectedOptions[0].textContent : `Toutes les décisions de ${an}`;
+      const titrePortee = portee.selectedOptions[0]?.dataset.titre ?? `Toutes les décisions de ${an}`;
       const mot = $('#exp-mot').value.trim();
       const description = `${titrePortee}${mot ? `, qui contiennent « ${mot} »` : ''}${$('#exp-avec-montant').checked ? ', avec un montant' : ''}`;
       const nom = `dossierville-${nomFichier(portee.value ? titrePortee : String(an))}${mot ? `-${nomFichier(mot)}` : ''}-${new Date().toLocaleDateString('en-CA')}`;
@@ -663,7 +673,7 @@ ${liste.map(fiche).join('')}
         telecharger(fichierCsv(colonnes.map((c) => c.titre), lignes), `${nom}.csv`);
       }
       etat.textContent = `${format === 'pdf' ? 'PDF ouvert dans une nouvelle fenêtre' : 'Fichier prêt'} : ${liste.length.toLocaleString('fr-CA')} dossier${liste.length > 1 ? 's' : ''}${groupes.has('argent') ? `, dont ${details.size} avec le détail de l'argent` : ''}.${detailManque ? " Une partie du détail de l'argent n'a pas pu être chargée : réessayez dans un moment." : ''}`;
-      carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = false; });
+      carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = b.dataset.format === 'pdf' && !pdfPermis(); });
       mesurer('export_tableur', { format, groupes: [...groupes].join(',') });
     });
   }
