@@ -66,10 +66,14 @@
             <br><span class="ab-note">Offert pour les dossiers avec un montant : ceux des grands projets suivis (tramway, logement…), et chaque nouveau dossier depuis le 15 septembre 2026, dès le lendemain de sa publication. Les autres dossiers de 2026 ne l'ont pas encore.</span></div></li>
           <li class="ab-av-rose"><span class="ab-icone" aria-hidden="true">📊</span><div data-en="<strong>Export to a spreadsheet or PDF</strong> (Excel, CSV or printable PDF): you choose a project, a word or a name and the columns, with the money details when they have been read"><strong>L'export en tableur ou en PDF</strong> (Excel, CSV ou PDF à imprimer) : vous choisissez un projet, un mot ou un nom et les colonnes, avec le détail de l'argent quand il est lu</div></li>
         </ul>
-        <p class="ab-prix" data-en="<span class=&quot;ab-prix-montant&quot;>$3</span> <span class=&quot;ab-note&quot;>a month (planned price)</span>"><span class="ab-prix-montant">3 $</span> <span class="ab-note">par mois (prix prévu)</span></p>
+        <p class="ab-prix" id="prix" data-en="<span class=&quot;ab-prix-montant&quot;>$3</span> <span class=&quot;ab-note&quot;>a month (planned price)</span>"><span class="ab-prix-montant">3 $</span> <span class="ab-note">par mois (prix prévu)</span></p>
         <p class="ab-note" data-en="One subscription for every city covered — not one per city.">Un seul abonnement pour toutes les villes couvertes — pas un abonnement par ville.</p>
       </section>
     </div>
+
+    <!-- Rempli par le script depuis /api/abonnement : s'abonner (Stripe), ou l'abonnement actif.
+         Caché tant que le paiement n'est pas offert à ce compte ; la liste d'attente reste alors. -->
+    <section class="ab-carte ab-attente ab-payer" id="payer" hidden></section>
 
     <!-- Rempli par le script plus bas depuis /<ville>/data/travail.json : venue d'un volet
          (?ville=quebec), la page ne montre que cette ville. Caché s'il n'y a aucun chiffre. -->
@@ -121,9 +125,96 @@
   boutonRetourEnHaut();
 </script>
 <script type="module">
-  import { client, VILLES, mesurer, echapper, EN, tr } from '/commun/abonnes-client.js';
+  import { client, VILLES, mesurer, echapper, dateFr, session, envoyerLien, EN, tr } from '/commun/abonnes-client.js';
   const ville = new URLSearchParams(location.search).get('ville');
   mesurer('page_abonnement', { ville: VILLES[ville] ? ville : 'aucune' });
+
+  // ---------- s'abonner ----------
+  // L'état vient du serveur (api/abonnement.js) : ouvert à tous, offert à ce compte (adresse d'essai),
+  // ou déjà abonné. Tant que rien de ça, la section reste cachée et la liste d'attente s'affiche.
+  const payer = document.querySelector('#payer');
+  async function etatAbonnement(s) {
+    const r = await fetch('/api/abonnement', { headers: s ? { Authorization: `Bearer ${s.access_token}` } : {} }).catch(() => null);
+    return r?.ok ? r.json() : null;
+  }
+  const bandeauEssai = (etat) => etat.mode === 'test'
+    ? `<p class="ab-note"><strong>${tr('Mode essai', 'Test mode')}</strong> : ${tr('aucune vraie carte n\'est débitée. Carte d\'essai 4242 4242 4242 4242, une date future, n\'importe quel code.', 'no real card is charged. Test card 4242 4242 4242 4242, any future date, any code.')}</p>`
+    : '';
+
+  async function sAbonner() {
+    const s = await session();
+    const etat = await etatAbonnement(s);
+    const annule = new URLSearchParams(location.search).get('abonnement') === 'annule';
+    if (etat?.ouvert) {
+      document.querySelector('#prix').innerHTML = `<span class="ab-prix-montant">${tr('3 $', '$3')}</span> <span class="ab-note">${tr('par mois', 'a month')}</span>`;
+    }
+    if (!etat || !(etat.abonne || etat.peutPayer || etat.ouvert)) return;
+
+    if (etat.abonne) {
+      payer.innerHTML = `<h3><span class="ab-icone" aria-hidden="true">✅</span> ${tr('Votre abonnement est actif', 'Your subscription is active')}</h3>
+        <p>${etat.annulationPrevue && etat.fin
+          ? tr(`Annulé : il reste actif jusqu'au ${dateFr(etat.fin)}, puis il s'arrête sans autre frais.`, `Cancelled: it stays active until ${dateFr(etat.fin)}, then stops with no further charge.`)
+          : tr('Merci : il garde le reste du site gratuit pour tout le monde. Les alertes, le détail de l\'argent, l\'agenda et l\'export sont dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a>.', 'Thank you: it keeps the rest of the site free for everyone. Alerts, money details, agendas and export are in <a class="ab-lien" href="/mes-dossiers">My files</a>.')}</p>
+        ${etat.gerable ? `<p><button type="button" class="ab-bouton ab-bouton-second" data-action="portail">${tr('Gérer mon abonnement', 'Manage my subscription')}</button> <span class="ab-note">${tr('carte, factures, annulation', 'card, invoices, cancellation')}</span></p>` : ''}
+        <p class="ab-note ab-payer-etat" aria-live="polite"></p>`;
+    } else if (etat.peutPayer) {
+      payer.innerHTML = `<h3><span class="ab-icone" aria-hidden="true">💳</span> ${tr("S'abonner", 'Subscribe')}</h3>
+        ${annule ? `<p class="ab-note">${tr('Paiement interrompu : rien n\'a été débité.', 'Payment interrupted: nothing was charged.')}</p>` : ''}
+        <p>${tr('3 $ par mois, pour toutes les villes couvertes. Le paiement se fait sur la page sécurisée de Stripe ; la carte n\'est jamais vue par DossierQuébec. <strong>Annulable en tout temps</strong>, depuis cette page ou Mes dossiers : l\'abonnement reste actif jusqu\'à la fin du mois payé.', '$3 a month, for every city covered. Payment happens on Stripe\'s secure page; DossierQuébec never sees your card. <strong>Cancel anytime</strong>, from this page or My files: the subscription stays active until the end of the paid month.')}</p>
+        ${bandeauEssai(etat)}
+        <p><button type="button" class="ab-bouton" data-action="payer">${tr("S'abonner — 3 $ par mois", 'Subscribe — $3 a month')}</button></p>
+        <p class="ab-note ab-payer-etat" aria-live="polite"></p>`;
+    } else if (!etat.connecte) {
+      // Ouvert à tous, mais pas connecté : le lien de connexion ramène ici.
+      payer.innerHTML = `<h3><span class="ab-icone" aria-hidden="true">💳</span> ${tr("S'abonner", 'Subscribe')}</h3>
+        <p>${tr("L'abonnement se rattache à votre compte : entrez votre courriel, on vous envoie un lien de connexion qui ramène ici.", 'The subscription is tied to your account: enter your email and we\'ll send you a sign-in link that brings you back here.')}</p>
+        <form class="ab-form" id="form-payer-lien">
+          <input type="email" required placeholder="${tr('Votre courriel', 'Your email')}" autocomplete="email">
+          <button type="submit" class="ab-bouton">${tr('Recevoir le lien', 'Get the link')}</button>
+        </form>
+        <p class="ab-note ab-payer-etat" aria-live="polite"></p>`;
+      payer.querySelector('#form-payer-lien').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = e.target.querySelector('input').value.trim();
+        const etatLien = payer.querySelector('.ab-payer-etat');
+        etatLien.textContent = tr('Envoi…', 'Sending…');
+        const erreur = await envoyerLien(email);
+        etatLien.textContent = erreur
+          ? tr('Une erreur est survenue. Réessayez.', 'Something went wrong. Try again.')
+          : tr(`Lien envoyé à ${email}. Ouvrez-le sur cet appareil.`, `Link sent to ${email}. Open it on this device.`);
+      });
+    } else {
+      return;
+    }
+    payer.hidden = false;
+    document.querySelector('#attente').hidden = true;
+  }
+
+  payer.addEventListener('click', async (e) => {
+    const bouton = e.target.closest('[data-action="payer"], [data-action="portail"]');
+    if (!bouton) return;
+    const action = bouton.dataset.action === 'payer' ? 'paiement' : 'portail';
+    const etat = payer.querySelector('.ab-payer-etat');
+    const s = await session();
+    if (!s) { location.assign('/mes-dossiers'); return; }
+    bouton.disabled = true;
+    etat.textContent = tr('Ouverture de Stripe…', 'Opening Stripe…');
+    mesurer(action === 'paiement' ? 'abonnement_payer' : 'abonnement_portail', { ville: VILLES[ville] ? ville : 'aucune' });
+    const r = await fetch(`/api/abonnement?action=${action}`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${s.access_token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ langue: EN ? 'en' : 'fr' }),
+    }).catch(() => null);
+    const donnees = r ? await r.json().catch(() => ({})) : {};
+    if (donnees.url) { location.assign(donnees.url); return; }
+    bouton.disabled = false;
+    etat.textContent = r?.status === 409
+      ? tr('Votre abonnement est déjà actif.', 'Your subscription is already active.')
+      : tr('Stripe ne répond pas pour l\'instant. Réessayez dans une minute.', 'Stripe is not responding right now. Try again in a minute.');
+  });
+
+  sAbonner();
+  client.auth.onAuthStateChange((evenement) => { if (evenement === 'SIGNED_IN') sAbonner(); });
 
   // ---------- le travail derrière le site ----------
   // Venue d'un volet : cette ville seulement. Sinon : toutes les villes qui publient leurs chiffres.
