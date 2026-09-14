@@ -31,11 +31,13 @@
     <p class="ab-chapeau">Les dossiers que vous suivez, toutes villes confondues. Cliquez sur un dossier pour l'ouvrir ici : son résumé, son parcours d'une instance à l'autre et le détail de l'argent. Pour en ajouter un, ouvrez une décision dans un volet et cliquez « Suivre ce dossier ».</p>
     <div id="compte"></div>
     <div id="liste"><p class="ab-vide">Chargement…</p></div>
+    <div id="pourquoi"></div>
+    <div id="suggestions"></div>
   </main>
 </div>
 
 <script type="module">
-  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, nePlusSuivre, chargerDetail, rendreDetail, mesurer } from '/commun/abonnes-client.js';
+  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, mesurer } from '/commun/abonnes-client.js';
 
   const $ = (s) => document.querySelector(s);
 
@@ -59,6 +61,8 @@
       <p class="ab-note">Un seul lien peut être envoyé toutes les 5 minutes. Pensez à vérifier vos courriels indésirables.</p>
       <p class="ab-note" id="etat-lien" aria-live="polite"></p>
     </div>`;
+    pourquoi(false);
+    suggestions(null, new Set());
     $('#form-lien').addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = e.target.querySelector('input').value.trim();
@@ -73,6 +77,57 @@
         $('#etat-lien').textContent = `Lien envoyé à ${email}. Ouvrez-le pour revenir sur cette page, connecté.`;
       }
     });
+  }
+
+  // ---------- pour les non-abonnés : ce que l'abonnement ajoute ----------
+  function pourquoi(abonne) {
+    if (abonne) { $('#pourquoi').innerHTML = ''; return; }
+    $('#pourquoi').innerHTML = `<section class="ab-carte ab-pourquoi">
+      <h2 style="margin-top:0">Ce que l'abonnement ajoute à vos dossiers</h2>
+      <p class="ab-chapeau" style="margin-bottom:10px">« Mes dossiers » vous montre tout quand vous venez voir. L'abonnement vous dit <strong>quand</strong> il y a quelque chose à voir, et ce que les documents disent de l'argent.</p>
+      <ul>
+        <li><strong>Le détail de l'argent</strong> sur chaque dossier : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions.</li>
+        <li><strong>Un courriel le vendredi</strong> avec seulement ce qui a bougé dans vos projets et vos dossiers — et rien les semaines où rien ne bouge. <span class="ab-note">(bientôt)</span></li>
+        <li><strong>Les décisions annoncées d'avance</strong> : « décision attendue au conseil d'agglomération mercredi », avant la séance plutôt qu'après. <span class="ab-note">(bientôt)</span></li>
+        <li><strong>Toutes les villes couvertes</strong>, avec un seul abonnement.</li>
+      </ul>
+      <a class="ab-bouton" href="/abonnement" data-mesure="mes_dossiers_voir_abonnement">Voir l'abonnement</a>
+    </section>`;
+  }
+
+  // ---------- projets à suivre, par ville ----------
+  // Pour tout le monde : aux abonnés, du contenu de plus ; aux autres, une raison de s'abonner.
+  async function suggestions(s, suivisIds) {
+    const blocs = [];
+    for (const ville of Object.keys(VILLES)) {
+      const [decisions, resumes] = await Promise.all([jeu(ville, 'decisions'), jeu(ville, 'resumes')]);
+      const projets = Object.entries(decisions?.projets ?? {}).filter(([cle, p]) => p.n > 0 && !suivisIds.has(`${ville}|projet:${cle}`));
+      if (!projets.length) continue;
+      const resumeDe = new Map((resumes?.resumes ?? []).map((r) => [r.id, r]));
+      const cartes = projets
+        .sort((a, b) => b[1].n - a[1].n)
+        .map(([cle, p]) => {
+          const docs = docsDuProjet(decisions, cle).sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
+          const recent = docs[0];
+          const phrase = recent ? resumeDe.get(recent.sommaireId ?? recent.id)?.puces?.[0] ?? recent.objet : '';
+          return `<article class="ab-carte ab-suggestion">
+            <div class="ab-meta"><span class="ab-etiquette ab-type-projet">Projet</span><span>${p.n} décision(s) cette année</span>${recent ? `<span>Dernière : ${dateFr(recent.date)}</span>` : ''}</div>
+            <h3>${echapper(p.titre)}</h3>
+            <p class="ab-note" style="margin:0 0 6px">${echapper(p.description ?? '')}</p>
+            ${phrase ? `<p class="ab-derniere"><strong>Le plus récent :</strong> ${echapper(phrase.length > 220 ? phrase.slice(0, 219) + '…' : phrase)}</p>` : ''}
+            <div class="ab-liens">
+              <button type="button" class="ab-bouton" data-action="suivre-projet" data-ville="${echapper(ville)}" data-cle="${echapper(cle)}" data-titre="${echapper(p.titre)}">☆ Suivre ce projet</button>
+              <a href="/${echapper(ville)}/decisions.html?projet=${encodeURIComponent(cle)}">Voir ses décisions</a>
+            </div>
+          </article>`;
+        })
+        .join('');
+      blocs.push(`<h3 class="ab-sous-titre">${echapper(VILLES[ville])}</h3><div class="ab-grille">${cartes}</div>`);
+    }
+    $('#suggestions').innerHTML = blocs.length
+      ? `<h2>${suivisIds.size ? "D'autres projets à suivre" : 'Des projets à suivre'}</h2>
+         <p class="ab-chapeau">Les grands dossiers de chaque ville, qui reviennent de séance en séance. Suivez-en un pour garder le fil de toutes ses décisions.</p>${blocs.join('')}`
+      : '';
   }
 
   async function statutAbonnement(s) {
@@ -215,8 +270,10 @@
     $('#deconnexion').addEventListener('click', async () => { await client.auth.signOut(); });
 
     const suivis = await chargerSuivis();
+    pourquoi(abonne);
+    suggestions(s, new Set(suivis.map((x) => `${x.ville}|${x.dossier_id}`)));
     if (!suivis.length) {
-      $('#liste').innerHTML = `<p class="ab-vide">Vous ne suivez aucun dossier pour l'instant. Ouvrez une décision sur <a class="ab-lien" href="/quebec/decisions.html">Québec</a> ou <a class="ab-lien" href="/montreal/decisions.html">Montréal</a> et cliquez « Suivre ce dossier ».</p>`;
+      $('#liste').innerHTML = `<p class="ab-vide">Vous ne suivez aucun dossier pour l'instant. Suivez un des projets ci-dessous, ou ouvrez une décision sur <a class="ab-lien" href="/quebec/decisions.html">Québec</a> ou <a class="ab-lien" href="/montreal/decisions.html">Montréal</a> et cliquez « Suivre ».</p>`;
       return;
     }
     const parVille = new Map();
@@ -240,6 +297,25 @@
   document.addEventListener('click', async (e) => {
     const m = e.target.closest('[data-mesure]');
     if (m) mesurer(m.dataset.mesure, { page: 'mes-dossiers' });
+
+    const suggestion = e.target.closest('[data-action="suivre-projet"]');
+    if (suggestion) {
+      const s = await session();
+      if (!s) {
+        $('#liste').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        $('#form-lien input')?.focus();
+        $('#etat-lien').textContent = `Connectez-vous d'abord : vous pourrez ensuite suivre « ${suggestion.dataset.titre} ».`;
+        return;
+      }
+      suggestion.disabled = true;
+      const erreur = await suivre(s, { ville: suggestion.dataset.ville, dossier: `projet:${suggestion.dataset.cle}`, numero: '', objet: suggestion.dataset.titre });
+      if (erreur) { suggestion.disabled = false; suggestion.textContent = 'Impossible — réessayez'; return; }
+      mesurer('suggestion_suivre_projet', { ville: suggestion.dataset.ville, projet: suggestion.dataset.cle });
+      await afficher();
+      $('#liste').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
     const bouton = e.target.closest('[data-action="retirer"]');
     if (!bouton) return;
     const carte = bouton.closest('details.ab-dossier');
