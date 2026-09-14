@@ -258,6 +258,9 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-pourquoi { margin-top: 26px; border-left: 4px solid var(--vedette); }
 .ab-page .ab-alertes { border-left: 4px solid var(--accent); }
 .ab-page .ab-ouverts { border-left: 4px solid var(--accent); }
+.ab-page .ab-pastilles { align-items: center; gap: 5px 8px; }
+.ab-page .ab-pastille-theme { font-size: 11px; font-weight: 700; letter-spacing: .02em; color: #fff; padding: 2px 9px; border-radius: 999px; }
+.ab-page .ab-numero { font-family: ui-monospace, Consolas, monospace; font-size: 12px; font-weight: 700; color: var(--encre); }
 .ab-page .ab-choix-instance { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 14px; font-weight: 700; font-size: 14px; }
 .ab-page .ab-choix-instance select {
   font: inherit; font-size: 14px; font-weight: 600; padding: 7px 10px; max-width: 100%;
