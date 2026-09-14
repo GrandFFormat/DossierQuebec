@@ -127,8 +127,26 @@
       ${s ? '<div class="ab-message-boite"></div>' : '<p class="ab-note">Connectez-vous plus haut pour nous écrire.</p>'}
     </section>`;
     if (s) formulaireMessage(zone.querySelector('.ab-message-boite'), s);
-    if (location.hash === '#ecrire') zone.scrollIntoView({ block: 'start' });
   }
+
+  // Arriver sur « Nous écrire » depuis une autre page (/mes-dossiers#ecrire) : le formulaire est
+  // en bas, et tout ce qui est au-dessus (connexion, projets suivis, suggestions) se charge après
+  // coup — le navigateur a déjà défilé vers une section vide, puis le contenu la repousse hors de
+  // l'écran. On la garde en vue tant que la page se construit, sauf si la personne fait défiler
+  // elle-même.
+  function garderEnVue(id) {
+    const cible = document.getElementById(id);
+    if (!cible) return;
+    const suivre = () => cible.scrollIntoView({ block: 'start' });
+    const observateur = new ResizeObserver(suivre);
+    observateur.observe(document.querySelector('main'));
+    const arreter = () => observateur.disconnect();
+    for (const evenement of ['wheel', 'touchstart', 'keydown', 'mousedown']) addEventListener(evenement, arreter, { once: true, passive: true });
+    setTimeout(arreter, 5000);
+  }
+  if (location.hash === '#ecrire') garderEnVue('ecrire');
+  // Déjà sur la page : le lien « Nous écrire » change seulement l'ancre.
+  addEventListener('hashchange', () => { if (location.hash === '#ecrire') document.getElementById('ecrire')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
 
   // ---------- projets à suivre, par ville ----------
   // Pour tout le monde : aux abonnés, du contenu de plus ; aux autres, une raison de s'abonner.
