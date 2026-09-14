@@ -57,21 +57,34 @@
       </section>
     </div>
 
-    <div class="ab-grille">
-      <section class="ab-carte">
-        <h3>Où va votre 3 $</h3>
-        <ul>
-          <li><strong>L'intelligence artificielle qui lit les documents</strong> : les résumés en langage clair, le détail de l'argent, les récapitulatifs de projets — et leur vérification automatique, qui relit chaque texte avant sa publication</li>
-          <li><strong>L'hébergement</strong> du site et des données, et l'envoi des alertes par courriel</li>
-          <li><strong>Le temps de travail</strong> pour ajouter des villes et des projets, et corriger ce que vous signalez</li>
-        </ul>
-        <p class="ab-note">Chaque abonnement garde les décisions, les résumés et le suivi des projets gratuits pour tout le monde.</p>
-      </section>
-      <section class="ab-carte">
-        <h3>Offrir un abonnement <span class="ab-note">(bientôt)</span></h3>
-        <p>À un proche qui suit ce qui se passe dans sa ville, à un groupe communautaire, à une association de quartier ou à une bibliothèque.</p>
-      </section>
-    </div>
+    <!-- Rempli par le script plus bas depuis /<ville>/data/travail.json : venue d'un volet
+         (?ville=quebec), la page ne montre que cette ville. Caché s'il n'y a aucun chiffre. -->
+    <section class="ab-carte ab-travail" id="travail" hidden>
+      <h2 style="margin-top:0" id="travail-titre">Le travail derrière le site</h2>
+      <p class="ab-chapeau" id="travail-chapeau"></p>
+      <div class="ab-tuiles" id="travail-tuiles"></div>
+      <div class="ab-graphiques">
+        <div class="ab-bloc"><div class="ab-detail-titre" id="travail-mois-titre">Documents lus par mois</div><div class="ab-mois" id="travail-mois"></div></div>
+        <div class="ab-bloc">
+          <div class="ab-detail-titre">Le chemin d'un document</div>
+          <ol class="ab-chemin">
+            <li><strong>La Ville publie</strong> ses résolutions, sommaires décisionnels et procès-verbaux.</li>
+            <li><strong>Lu chaque matin</strong> : le site relit le portail de la Ville et récupère ce qui est nouveau.</li>
+            <li><strong>Expliqué en langage clair</strong> par un résumé généré par IA, toujours identifié comme tel.</li>
+            <li><strong>Relié</strong> à son dossier, à son statut — en attente ou décision finale — et à son projet.</li>
+            <li><strong>Vérifié</strong> : le détail de l'argent et les récapitulatifs de projets sont contre-vérifiés dans les documents ; ce qui ne se vérifie pas est retiré.</li>
+            <li><strong>Publié</strong> sur le site, dans Mes dossiers, et bientôt dans vos alertes.</li>
+          </ol>
+        </div>
+      </div>
+      <p><strong>Et à la main :</strong> chaque grand projet défini et relu, chaque signalement lu, chaque nouvelle ville étudiée avant d'être ajoutée.</p>
+      <p class="ab-note">Chaque abonnement garde tout ça gratuit pour tout le monde. Chiffres comptés dans les données publiées, mis à jour chaque matin.</p>
+    </section>
+
+    <section class="ab-carte">
+      <h3>Offrir un abonnement <span class="ab-note">(bientôt)</span></h3>
+      <p>À un proche qui suit ce qui se passe dans sa ville, à un groupe communautaire, à une association de quartier ou à une bibliothèque.</p>
+    </section>
 
     <section class="ab-carte" id="attente">
       <h3>L'abonnement n'est pas encore ouvert</h3>
@@ -88,9 +101,51 @@
 </div>
 
 <script type="module">
-  import { client, VILLES, mesurer } from '/commun/abonnes-client.js';
+  import { client, VILLES, mesurer, echapper } from '/commun/abonnes-client.js';
   const ville = new URLSearchParams(location.search).get('ville');
   mesurer('page_abonnement', { ville: VILLES[ville] ? ville : 'aucune' });
+
+  // ---------- le travail derrière le site ----------
+  // Venue d'un volet : cette ville seulement. Sinon : toutes les villes qui publient leurs chiffres.
+  const MOIS = ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 'juil', 'aoû', 'sep', 'oct', 'nov', 'déc'];
+  const fr = (n) => Number(n).toLocaleString('fr-CA');
+  async function travail() {
+    const villes = VILLES[ville] ? [ville] : Object.keys(VILLES);
+    const donnees = (await Promise.all(villes.map((v) => fetch(`/${v}/data/travail.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)))).filter(Boolean);
+    if (!donnees.length) return;
+    const somme = (f) => donnees.reduce((n, d) => n + (Number(f(d)) || 0), 0);
+    const annee = Math.max(...donnees.map((d) => d.annee));
+    const noms = donnees.map((d) => d.nom).join(' et ');
+
+    document.querySelector('#travail-titre').textContent = donnees.length === 1 && VILLES[ville] ? `Le travail derrière le volet ${donnees[0].nom}` : 'Le travail derrière le site';
+    document.querySelector('#travail-chapeau').textContent =
+      `Ce que le site fait pour vous${donnees.length > 1 ? ` à ${noms}` : ''}, compté dans les données publiées : rien d'estimé.`;
+
+    const tuiles = [
+      [somme((d) => d.documents?.total), `documents municipaux lus en ${annee}`],
+      [somme((d) => d.resumes), 'sommaires expliqués en langage clair'],
+      [somme((d) => d.votes), 'votes nominatifs recensés'],
+      [somme((d) => d.dossiers?.termines), "dossiers suivis jusqu'à leur décision finale"],
+      [somme((d) => d.dossiers?.enCours), "dossiers en attente d'une décision, suivis"],
+      [somme((d) => d.projets?.n), 'grands projets définis et relus à la main'],
+      [somme((d) => d.retiresAvantPublication), 'éléments retirés avant publication, faute de se vérifier'],
+    ].filter(([n]) => n > 0);
+    document.querySelector('#travail-tuiles').innerHTML = tuiles.map(([n, libelle]) => `<div class="ab-tuile"><strong>${fr(n)}</strong><span>${echapper(libelle)}</span></div>`).join('');
+
+    // Les documents de l'année par mois, toutes villes affichées additionnées, jusqu'au dernier mois qui en a.
+    const parMois = Array.from({ length: 12 }, (_, i) => somme((d) => (d.annee === annee ? d.parMois?.[i] : 0)));
+    const dernier = parMois.findLastIndex((n) => n > 0) + 1;
+    const max = Math.max(1, ...parMois);
+    document.querySelector('#travail-mois-titre').textContent = `Documents lus par mois en ${annee}`;
+    const mois = document.querySelector('#travail-mois');
+    mois.setAttribute('role', 'img');
+    mois.setAttribute('aria-label', parMois.slice(0, dernier).map((n, i) => `${MOIS[i]} ${n}`).join(', '));
+    mois.innerHTML = parMois.slice(0, dernier).map((n, i) => `<div class="ab-mois-col" title="${MOIS[i]} ${annee} : ${fr(n)} documents">
+        <span class="ab-mois-n">${n ? fr(n) : ''}</span><span class="ab-mois-barre" style="height:${Math.round((n / max) * 100)}%"></span><span class="ab-mois-nom">${MOIS[i]}</span>
+      </div>`).join('');
+    document.querySelector('#travail').hidden = false;
+  }
+  travail();
 
   document.querySelector('#form-attente').addEventListener('submit', async (e) => {
     e.preventDefault();

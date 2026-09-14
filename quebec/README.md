@@ -316,6 +316,13 @@ quinze villes). `scripts/projets-publics.js`, dernière étape de `refresh.js`, 
   numero, instance, date, resultat }] }] }`, dossiers du plus récent au plus ancien. Chargé
   seulement quand on ouvre le projet (13 Ko compressé pour le tramway).
 
+**« Le travail derrière le site » (page Abonnement)** lit `data/travail.json`, produit par
+`scripts/travail-public.js` : des comptes tirés des données publiées (documents lus par type et
+par mois, résumés, votes, dossiers terminés et en attente, projets, éléments retirés par la
+vérification), jamais d'estimation. Venue d'un volet (`/abonnement?ville=quebec`), la page ne
+montre que cette ville ; sinon elle additionne les villes qui publient ce fichier (format en tête
+du script).
+
 **Une autre ville qui veut ses projets dans Mes dossiers produit ces deux fichiers, avec ces
 champs** (et s'ajoute à `VILLES` dans `/commun/abonnes-client.js`). Sans `index.json`, la ville
 est simplement absente des suggestions.

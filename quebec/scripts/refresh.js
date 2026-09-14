@@ -86,6 +86,8 @@ const ETAPES = [
   // En dernier, avec ou sans clé : ce que lit « Mes dossiers » (data/projets/), tiré des
   // décisions, résumés et récapitulatifs du jour. Sans lui, la page affiche les données de la veille.
   { nom: 'Projets pour « Mes dossiers »', argv: ['scripts/projets-publics.js'] },
+  // Les chiffres de « Le travail derrière le site » (page Abonnement).
+  { nom: 'Chiffres de la page Abonnement', argv: ['scripts/travail-public.js'], secondaire: true },
 ];
 
 const echecs = [];

@@ -226,6 +226,19 @@
 .ab-page .ab-barre span { display: block; height: 100%; border-radius: 5px; }
 .ab-page .ab-barre-n { text-align: right; color: var(--doux); font-variant-numeric: tabular-nums; }
 
+/* Page Abonnement : le travail derrière le site. */
+.ab-page .ab-travail .ab-tuile strong { font-size: 26px; }
+.ab-page .ab-travail .ab-mois-n { font-size: 10px; }
+.ab-page .ab-chemin { list-style: none; counter-reset: etape; margin: 0; padding: 0; font-size: 14px; }
+.ab-page .ab-chemin li { counter-increment: etape; position: relative; padding: 0 0 10px 34px; }
+.ab-page .ab-chemin li::before {
+  content: counter(etape); position: absolute; left: 0; top: 1px; width: 22px; height: 22px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 12px; font-weight: 800; color: #fff; background: var(--accent);
+}
+.ab-page .ab-chemin li:not(:last-child)::after {
+  content: ""; position: absolute; left: 10px; top: 25px; bottom: 2px; width: 2px; background: var(--ligne-forte);
+}
+
 .ab-page details.ab-toutes { margin: 4px 0 12px; }
 .ab-page details.ab-toutes > summary { cursor: pointer; font-weight: 800; font-size: 14.5px; padding: 6px 0; }
 .ab-page details.ab-toutes[open] > summary { margin-bottom: 4px; }
