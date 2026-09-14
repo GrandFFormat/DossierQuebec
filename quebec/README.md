@@ -277,7 +277,7 @@ des sous-dossiers de dossierquebec.ca : la session Supabase ouverte sur une page
   peut s'envoyer un essai (3 par 24 h) ; chaque courriel a un lien signé « Ne plus recevoir ces
   alertes » (`api/alertes-desabonnement.js`, aussi en un clic pour les messageries).
   Tables : `scripts/supabase-schema-alertes.sql`.
-- **Dossiers ouverts (abonnés).** `scripts/projets-publics.js` écrit `data/attendues.json` : chaque
+- **À l'agenda des conseils (abonnés).** `scripts/projets-publics.js` écrit `data/attendues.json` : chaque
   sommaire encore en attente d'une décision finale, avec l'instance qui doit décider (regroupée :
   conseil de la ville, d'agglomération, comité exécutif, arrondissements), la date cible écrite
   par la Ville et le résumé IA. Mes dossiers les montre par instance (menu déroulant) : d'abord
