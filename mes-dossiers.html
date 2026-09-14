@@ -177,15 +177,28 @@
       <h2 style="margin-top:0">Alertes par courriel</h2>
       <label class="ab-interrupteur"><input type="checkbox" id="alertes-actif"${actif ? ' checked' : ''}> <span>Recevoir mon alerte du matin</span></label>
       <p class="ab-note">Chaque matin, s'il y a du nouveau dans vos projets suivis, vos mots-clés ou vos organismes — un seul courriel pour tout. Rien les jours où rien n'avance.${derniere ? ` Dernière alerte : ${dateFr(derniere)}.` : ''}</p>
-      <div class="ab-liens"><button type="button" class="ab-lien-bouton" id="alertes-essai">M'envoyer un courriel d'essai</button><span class="ab-note" id="alertes-etat" aria-live="polite" style="margin:0"></span></div>
+      <div class="ab-liens"><button type="button" class="ab-lien-bouton" id="alertes-essai">M'envoyer un courriel d'essai</button><button type="button" class="ab-lien-bouton ab-lien-doux" id="alertes-retirer"></button><span class="ab-note" id="alertes-etat" aria-live="polite" style="margin:0"></span></div>
     </section>`;
     const etat = $('#alertes-etat');
-    $('#alertes-actif').addEventListener('change', async (e) => {
-      const { error } = await client.from('alertes_preferences').upsert({ user_id: s.user.id, actif: e.target.checked, updated_at: new Date().toISOString() });
-      if (error) { e.target.checked = !e.target.checked; etat.textContent = "Impossible d'enregistrer. Réessayez."; return; }
-      etat.textContent = e.target.checked ? 'Alertes activées.' : 'Alertes arrêtées.';
-      mesurer(e.target.checked ? 'alertes_activees' : 'alertes_arretees');
-    });
+    const caseActif = $('#alertes-actif');
+    const retirer = $('#alertes-retirer');
+    // La case et le lien « Retirer mon courriel des alertes » font la même chose (alertes_preferences.actif) ;
+    // le lien est là pour qui cherche comment arrêter. Rien d'autre n'est effacé : les projets, mots-clés et
+    // organismes restent, et on peut remettre son courriel d'un clic.
+    const libelleRetirer = () => { retirer.textContent = caseActif.checked ? 'Retirer mon courriel des alertes' : 'Remettre mon courriel dans les alertes'; };
+    libelleRetirer();
+    const enregistrer = async (voulu) => {
+      const { error } = await client.from('alertes_preferences').upsert({ user_id: s.user.id, actif: voulu, updated_at: new Date().toISOString() });
+      if (error) { caseActif.checked = !voulu; libelleRetirer(); etat.textContent = "Impossible d'enregistrer. Réessayez."; return; }
+      caseActif.checked = voulu;
+      libelleRetirer();
+      etat.textContent = voulu
+        ? `Votre courriel est de retour dans les alertes : ${s.user.email}.`
+        : "Votre courriel est retiré des alertes : plus aucun courriel du matin. Vos projets, mots-clés et organismes restent là.";
+      mesurer(voulu ? 'alertes_activees' : 'alertes_arretees');
+    };
+    caseActif.addEventListener('change', (e) => enregistrer(e.target.checked));
+    retirer.addEventListener('click', () => enregistrer(!caseActif.checked));
     $('#alertes-essai').addEventListener('click', async (e) => {
       e.target.disabled = true;
       etat.textContent = 'Envoi…';
