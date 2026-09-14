@@ -38,6 +38,7 @@
     <p class="ab-chapeau">Les projets que vous suivez, toutes villes confondues. Cliquez sur un projet pour voir ses décisions ici, les plus récentes d'abord. Pour en ajouter un, choisissez-le plus bas, ou cliquez « Projet : … » sur une décision dans un volet.</p>
     <div id="compte"></div>
     <div id="alertes"></div>
+    <div id="mots"></div>
     <div id="organismes"></div>
     <div id="ouverts"></div>
     <div id="liste"><p class="ab-vide">Chargement…</p></div>
@@ -74,6 +75,7 @@
   function connexion() {
     $('#compte').innerHTML = '';
     alertes(null, false);
+    motsCles(null, false);
     organismesSuivis(null, false);
     dossiersOuverts(null, false);
     $('#liste').innerHTML = `<div class="ab-carte">
@@ -170,19 +172,11 @@
     const derniere = envois.data?.[0]?.envoye_le;
     zone.innerHTML = `<section class="ab-carte ab-alertes">
       <h2 style="margin-top:0">Alertes par courriel</h2>
-      <label class="ab-interrupteur"><input type="checkbox" id="alertes-actif"${actif ? ' checked' : ''}> <span>Recevoir un courriel quand mes projets ou mes mots-clés bougent</span></label>
-      <p class="ab-note">Chaque matin, s'il y a du nouveau dans les projets que vous suivez — nouveaux dossiers, décisions finales, nouvelles étapes — ou une nouvelle décision qui contient un de vos mots-clés, un seul courriel pour tout. Rien les jours où rien n'avance.${derniere ? ` Dernière alerte : ${dateFr(derniere)}.` : ''}</p>
-      <div class="ab-mots">
-        <div class="ab-detail-titre">Mots-clés</div>
-        <p class="ab-note" style="margin:0 0 8px">Une rue, un quartier, un organisme, un sujet : « 1re Avenue », « Limoilou », « déneigement »… Cherché dans l'objet et le résumé de chaque décision, sans tenir compte des accents ni des majuscules. Jusqu'à 20.</p>
-        <ul class="ab-mots-liste" id="mots-liste"></ul>
-        <form class="ab-form" id="mots-form"><input type="text" id="mots-champ" maxlength="60" placeholder="Ajouter un mot-clé" aria-label="Nouveau mot-clé"><button type="submit" class="ab-bouton">Ajouter</button></form>
-        <p class="ab-note" id="mots-etat" aria-live="polite"></p>
-      </div>
+      <label class="ab-interrupteur"><input type="checkbox" id="alertes-actif"${actif ? ' checked' : ''}> <span>Recevoir mon alerte du matin</span></label>
+      <p class="ab-note">Chaque matin, s'il y a du nouveau dans vos projets suivis, vos mots-clés ou vos organismes — un seul courriel pour tout. Rien les jours où rien n'avance.${derniere ? ` Dernière alerte : ${dateFr(derniere)}.` : ''}</p>
       <div class="ab-liens"><button type="button" class="ab-lien-bouton" id="alertes-essai">M'envoyer un courriel d'essai</button><span class="ab-note" id="alertes-etat" aria-live="polite" style="margin:0"></span></div>
     </section>`;
     const etat = $('#alertes-etat');
-    motsCles(s).catch((e) => console.error('mots-clés :', e));
     $('#alertes-actif').addEventListener('change', async (e) => {
       const { error } = await client.from('alertes_preferences').upsert({ user_id: s.user.id, actif: e.target.checked, updated_at: new Date().toISOString() });
       if (error) { e.target.checked = !e.target.checked; etat.textContent = "Impossible d'enregistrer. Réessayez."; return; }
@@ -197,14 +191,14 @@
       const corps = res ? await res.json().catch(() => ({})) : {};
       e.target.disabled = false;
       etat.textContent = res?.ok
-        ? corps.envoyes ? `Courriel d'essai envoyé à ${s.user.email}. Pensez à vérifier vos courriels indésirables.` : "Suivez au moins un projet, ou ajoutez un mot-clé présent dans une décision récente, pour recevoir un courriel d'essai."
+        ? corps.envoyes ? `Courriel d'essai envoyé à ${s.user.email}. Pensez à vérifier vos courriels indésirables.` : "Suivez au moins un projet, ou ajoutez un mot-clé ou un organisme présent dans une décision récente, pour recevoir un courriel d'essai."
         : res?.status === 429 ? "Trois courriels d'essai déjà envoyés dans les dernières 24 heures. Réessayez demain." : "L'envoi n'a pas fonctionné. Réessayez dans un moment.";
       mesurer('alertes_essai');
     });
   }
 
   // ---------- mots-clés des alertes ----------
-  // Table alertes_mots_cles (scripts/supabase-schema-mots-cles.sql). À côté de chaque mot : combien
+  // Sa propre boîte. Table alertes_mots_cles (scripts/supabase-schema-mots-cles.sql). À côté de chaque mot : combien
   // de décisions récentes le contiennent (/<ville>/data/recentes.json), pour aider à le choisir —
   // même recherche que le serveur (api/alertes-projets.js, contientMot).
   const normaliserTexte = (t) => String(t ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[’`]/g, "'").replace(/\s+/g, ' ');
@@ -220,17 +214,22 @@
     return recentesToutes;
   };
 
-  async function motsCles(s) {
+  async function motsCles(s, abonne) {
+    const zone = $('#mots');
+    if (!s || !abonne) { zone.innerHTML = ''; return; }
+    const { data, error } = await client.from('alertes_mots_cles').select('id, mot').order('created_at');
+    if (error) { zone.innerHTML = ''; return; } // table pas encore créée
+    zone.innerHTML = `<section class="ab-carte ab-mots">
+      <h2 style="margin-top:0">Mots-clés</h2>
+      <p class="ab-chapeau" style="margin-bottom:10px">Une rue, un quartier, un sujet : « 1re Avenue », « Limoilou », « déneigement »… Les nouvelles décisions qui le contiennent s'ajoutent à votre alerte du matin.</p>
+      <ul class="ab-mots-liste" id="mots-liste"></ul>
+      <form class="ab-form" id="mots-form"><input type="text" id="mots-champ" maxlength="60" placeholder="Ajouter un mot-clé" aria-label="Nouveau mot-clé"><button type="submit" class="ab-bouton">Ajouter</button></form>
+      <p class="ab-note">Cherché dans l'objet et le résumé de chaque décision, sans tenir compte des accents ni des majuscules. Jusqu'à 20.</p>
+      <p class="ab-note" id="mots-etat" aria-live="polite"></p>
+    </section>`;
     const liste = $('#mots-liste');
     const etat = $('#mots-etat');
     const form = $('#mots-form');
-    const { data, error } = await client.from('alertes_mots_cles').select('id, mot').order('created_at');
-    if (error) {
-      liste.innerHTML = '';
-      form.hidden = true;
-      etat.textContent = 'Les mots-clés arrivent bientôt.';
-      return;
-    }
     let mots = data ?? [];
     const recentes = await chargerRecentes();
     const dessiner = () => {
@@ -749,6 +748,7 @@
     $('#deconnexion').addEventListener('click', async () => { await client.auth.signOut(); });
 
     alertes(s, abonne).catch((e) => console.error('alertes :', e));
+    motsCles(s, abonne).catch((e) => console.error('mots-clés :', e));
     organismesSuivis(s, abonne).catch((e) => console.error('organismes :', e));
     dossiersOuverts(s, abonne).catch((e) => console.error('dossiers ouverts :', e));
     ecrire(s);

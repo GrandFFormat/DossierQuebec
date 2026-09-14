@@ -220,10 +220,17 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
   .ab-page .ab-outils { flex-basis: 100%; justify-content: space-between; padding: 4px 0 10px; }
   .ab-page .ab-taille span { display: none; }
 }
-.ab-page h1 { font-size: 30px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -.02em; }
+.ab-page h1 { font-size: 30px; line-height: 1.2; margin: 0 0 12px; letter-spacing: -.02em; }
 .ab-page h2 { font-size: 19px; margin: 28px 0 10px; }
-.ab-page .ab-chapeau { color: var(--doux); margin: 0 0 18px; max-width: 64ch; }
-.ab-page .ab-carte { background: var(--carte); border: 1px solid var(--ligne); border-radius: 10px; padding: 16px 18px; margin-bottom: 12px; }
+.ab-page .ab-chapeau { color: var(--doux); margin: 0 0 24px; max-width: 64ch; }
+.ab-page .ab-carte { background: var(--carte); border: 1px solid var(--ligne); border-radius: 10px; padding: 20px 22px; margin-bottom: 24px; }
+/* De l'air (Martin, 14 sept.) : les boîtes de Mes dossiers bien séparées, le texte moins tassé. */
+.ab-page .ab-carte > h2:first-child { margin-bottom: 12px; }
+.ab-page .ab-carte .ab-note { line-height: 1.55; }
+.ab-page .ab-carte .ab-form + .ab-note { margin-top: 10px; }
+#compte .ab-note { margin: 0 0 18px; }
+/* Les projets suivis restent une liste : plus serrés entre eux. */
+.ab-page .ab-carte.ab-dossier { margin-bottom: 14px; }
 .ab-page .ab-carte h3 { font-size: 16px; margin: 0 0 4px; }
 .ab-page .ab-meta { display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 13px; color: var(--doux); margin-bottom: 6px; }
 .ab-page .ab-parcours { margin: 6px 0 0; padding-left: 18px; font-size: 14px; }
@@ -297,8 +304,8 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-organisme-nom { min-width: 0; overflow-wrap: anywhere; }
 .ab-page details.ab-organisme > summary .ab-mot-retirer { margin-left: auto; }
 .ab-page .ab-detail-org { margin-top: 8px; }
-.ab-page .ab-mots { margin: 14px 0 4px; padding: 12px 14px; background: var(--fond-2); border-radius: 8px; }
-.ab-page .ab-mots-liste { list-style: none; margin: 0 0 10px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.ab-page .ab-mots { border-left: 4px solid var(--accent); }
+.ab-page .ab-mots-liste { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .ab-page .ab-mot { display: inline-flex; align-items: center; gap: 8px; padding: 3px 4px 3px 12px; background: var(--carte); border: 1px solid var(--ligne-forte); border-radius: 999px; font-size: 14px; }
 .ab-page .ab-mot-texte { font-weight: 700; }
 .ab-page .ab-mot-retirer { font: inherit; font-size: 16px; line-height: 1; width: 24px; height: 24px; border: 0; border-radius: 50%; background: transparent; color: var(--doux); cursor: pointer; }
