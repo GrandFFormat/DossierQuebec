@@ -154,6 +154,12 @@ h1 { font-size: 27px; margin: 0; font-weight: 800; letter-spacing: -0.025em; col
 :root[data-theme="sombre"] .retour-dq::before { background: var(--vedette); }
 /* Le rond : blanc en thème sombre, couleur du texte en thème clair (du blanc y serait invisible). */
 :root[data-theme="sombre"] .retour-dq { border-color: #fff; }
+/* Une barre oblique entre le logo du volet et la pastille DQ (décorative : muette pour les lecteurs d'écran). */
+.titre-ligne > a:first-child { display: inline-flex; align-items: center; }
+.titre-ligne > a:first-child::after {
+  content: "/"; content: "/" / "";
+  margin-left: 12px; font-size: 26px; font-weight: 300; line-height: 1; color: var(--entete-doux);
+}
 .retour-dq:hover { background: var(--fond-2); }
 
 .sous-titre { color: var(--entete-doux); margin: 6px 0 18px; font-size: 14.5px; max-width: 66ch; }
@@ -175,8 +181,9 @@ nav .outils .taille-texte { margin-left: 0; }
 /* Cellulaire : l'en-tête ne doit pas repousser le contenu d'un écran entier. Le sous-titre
    ne reste que sur l'accueil, les onglets se resserrent, et les outils prennent leur ligne. */
 @media (max-width: 620px) {
-  .titre-ligne { padding-top: 16px; gap: 14px 10px; }
-  h1 { font-size: 23px; }
+  .titre-ligne { padding-top: 16px; gap: 14px 8px; }
+  h1 { font-size: 21px; }
+  .titre-ligne > a:first-child::after { margin-left: 8px; font-size: 21px; }
   body:not([data-page="accueil"]) .sous-titre { display: none; }
   body:not([data-page="accueil"]) .titre-ligne { padding-bottom: 10px; }
   nav { gap: 0; }
