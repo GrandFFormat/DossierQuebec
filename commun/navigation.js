@@ -52,8 +52,18 @@ export function menuVilles(details, villeActuelle) {
 // L'en-tête d'un volet : le menu des villes, sa ville cochée. Chargé par chaque page de volet
 // (<script type="module" src="/commun/entete-volet.js">), à part de Supabase pour ne pas attendre.
 export function enteteVolet() {
-  const ville = document.body.dataset.ville;
-  menuVilles(document.querySelector('#villes'), Object.hasOwn(VILLES, ville ?? '') ? ville : null);
+  const ville = Object.hasOwn(VILLES, document.body.dataset.ville ?? '') ? document.body.dataset.ville : null;
+  menuVilles(document.querySelector('#villes'), ville);
+  // Sur cellulaire, le menu en haut à droite passerait seul sur une ligne : un second exemplaire
+  // prend place dans la ligne des outils (à la place d'« Abonnement », masqué là). Le CSS n'en
+  // montre qu'un des deux selon la largeur.
+  const outils = document.querySelector('header nav .outils');
+  if (outils && !outils.querySelector('.ab-villes')) {
+    const mobile = document.createElement('details');
+    mobile.className = 'ab-villes ab-villes-mobile';
+    outils.prepend(mobile);
+    menuVilles(mobile, ville);
+  }
 }
 
 // L'en-tête des pages communes. Venue d'un volet (mémorisé, ou ?ville=) : la marque du volet
