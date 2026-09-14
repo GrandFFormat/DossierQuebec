@@ -394,7 +394,7 @@ lecture qui échoue reste en attente et repasse le lendemain. Un document lu mai
 affiche « on n'a pas pu en tirer un détail fiable » au lieu du bouton.
 
 **Export en tableur (abonnés).** Dans Mes dossiers, l'abonné choisit lui-même : quelles décisions
-(toute l'année ou un projet), un mot ou un nom facultatif (ses mots-clés et organismes sont
+(un projet à la fois : « toutes les décisions de l'année » est grisée et ne sort sous aucune forme, décision de Martin du 14 sept. 2026), un mot ou un nom facultatif (ses mots-clés et organismes sont
 suggérés ; même recherche que les alertes), les groupes de colonnes (dossier toujours ; résumé IA,
 montant du résumé, détail de l'argent, liens au choix), « seulement avec un montant », puis Excel
 ou CSV. Une ligne par dossier (le sommaire et ses résolutions, `data/dossiers.json`, qui porte
