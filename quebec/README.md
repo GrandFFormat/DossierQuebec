@@ -450,9 +450,16 @@ un lien. Tout passe par `commun/langue.js` :
 - **Résumés IA** : `scrapers/traductions.js` traduit les puces françaises (pas les PDF) dans
   `data/resumes-en.json`. **Garde-fou** : chaque nombre du français doit se retrouver dans
   l'anglais, séparateurs retirés (« 5 948 217 $ » = « $5,948,217 ») ; sinon la traduction est
-  refusée et la page garde le français (« summary not yet translated »). Rattrapage des 1 500
-  résumés de 2026 en lot (`--batch`, ~10 $ US) ; ensuite `refresh.js` traduit les nouveaux chaque
-  matin (`--plafond=150`, ~1,4 ¢ chacun, ~3 $ par mois). Mes dossiers superpose ces puces à celles
+  refusée et la page garde le français (« summary not yet translated »). Avant de compter, les
+  tournures qui changent le compte sans changer le sens prennent une seule forme : « 6:30 p.m. » =
+  « 18 h 30 », noon/midi = 12, midnight/minuit = 0, « 24 heures sur 24 » = « 24 hours a day ».
+  Rattrapage du 14 sept. 2026 : 1 495 résumés en lot (`--batch`), **12,04 $ US**, 113 refus au
+  premier passage, presque tous des heures (« 18 h » → « 6 p.m. ») ; le garde-fou corrigé a revérifié
+  les réponses du lot sans rien repayer : 1 491 traduits, 9 refus justifiés (« 4 ½ » écrit en
+  lettres, un « 5 à 7 » sans ses chiffres, un nombre ajouté). Les refus sont gardés dans
+  `resumes-en.json` (`refus`) et ne sont pas retentés chaque matin — seulement si le résumé
+  français est refait, ou avec `--refusees`. Ensuite `refresh.js` traduit les nouveaux chaque
+  matin (`--plafond=150`, ~1,6 ¢ chacun, ~3 $ par mois). Mes dossiers superpose ces puces à celles
   des fichiers de projets, de l'agenda et de l'année, en gardant les françaises (`pucesFr`) pour la
   recherche de mots-clés et d'organismes, puisque les décisions sont en français.
 - **Lexique** : `scrapers/lexique-en.js` → `data/lexique-en.json` (un appel, refait seulement si le
