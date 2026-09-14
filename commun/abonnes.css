@@ -257,6 +257,15 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-page .ab-ligne-projet .ab-liens { margin-top: 4px; }
 .ab-page .ab-pourquoi { margin-top: 26px; border-left: 4px solid var(--vedette); }
 .ab-page .ab-alertes { border-left: 4px solid var(--accent); }
+.ab-page .ab-attendues { border-left: 4px solid var(--accent); }
+.ab-page .ab-portee { display: inline-flex; gap: 2px; padding: 2px; margin: 0 0 12px; border: 1px solid var(--ligne-forte); border-radius: 999px; background: var(--fond-2); }
+.ab-page .ab-portee button { font: inherit; font-size: 13.5px; font-weight: 600; padding: 5px 14px; border: 0; border-radius: 999px; background: transparent; color: var(--doux); cursor: pointer; }
+.ab-page .ab-portee button[aria-pressed="true"] { background: var(--carte); color: var(--encre); box-shadow: 0 1px 3px rgba(0, 0, 0, .12); }
+.ab-page .ab-attendues a.ab-ref { text-decoration: none; }
+.ab-page #agenda-zone { margin-top: 12px; padding: 12px 14px; background: var(--fond-2); border-radius: 8px; }
+.ab-page .ab-agenda-choix { margin-bottom: 12px; font-size: 14px; }
+.ab-page .ab-agenda-choix .ab-form { margin: 4px 0; }
+.ab-page .ab-agenda-choix input { font-size: 12.5px; font-family: ui-monospace, Consolas, monospace; }
 .ab-page .ab-interrupteur { display: flex; align-items: center; gap: 10px; font-weight: 700; cursor: pointer; }
 .ab-page .ab-interrupteur input { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; }
 .ab-page .ab-alertes .ab-liens { align-items: center; }

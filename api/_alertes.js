@@ -18,13 +18,22 @@ export async function supabase(chemin, { methode = 'GET', corps, entetes = {} } 
 // Le lien « Ne plus recevoir ces alertes » : signé avec CRON_SECRET, pour que personne ne puisse
 // couper les alertes de quelqu'un d'autre. Préfixe « alertes: » : un jeton du résumé de
 // DossierQuébec (api/unsubscribe.js) ne vaut pas ici, et inversement.
-export const signature = (userId) => crypto.createHmac('sha256', process.env.CRON_SECRET).update(`alertes:${userId}`).digest('hex');
+// Le même mécanisme signe le lien d'agenda de chaque abonné (api/calendrier.js), avec son propre
+// préfixe : un lien d'agenda ne désabonne de rien, et inversement.
+export const signer = (usage, userId) => crypto.createHmac('sha256', process.env.CRON_SECRET).update(`${usage}:${userId}`).digest('hex');
+export const signature = (userId) => signer('alertes', userId);
 
-export function signatureValide(userId, sig) {
+export function signatureValide(userId, sig, usage = 'alertes') {
   if (!/^[0-9a-f-]{36}$/.test(userId ?? '') || !/^[0-9a-f]{64}$/.test(sig ?? '')) return false;
   const a = Buffer.from(sig);
-  const b = Buffer.from(signature(userId));
+  const b = Buffer.from(signer(usage, userId));
   return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+
+// Abonnement actif d'un compte (lu avec la clé serveur).
+export async function estAbonne(userId) {
+  const [ligne] = await supabase(`/rest/v1/abonnements?user_id=eq.${userId}&select=statut,fin`);
+  return Boolean(ligne && ligne.statut === 'actif' && (!ligne.fin || new Date(ligne.fin) > new Date()));
 }
 
 export const site = () => (process.env.PUBLIC_SITE_URL || 'https://dossierquebec.ca').replace(/\/$/, '');

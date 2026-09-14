@@ -277,6 +277,13 @@ des sous-dossiers de dossierquebec.ca : la session Supabase ouverte sur une page
   peut s'envoyer un essai (3 par 24 h) ; chaque courriel a un lien signé « Ne plus recevoir ces
   alertes » (`api/alertes-desabonnement.js`, aussi en un clic pour les messageries).
   Tables : `scripts/supabase-schema-alertes.sql`.
+- **Décisions attendues (abonnés).** `scripts/projets-publics.js` écrit aussi `data/attendues.json` :
+  chaque sommaire encore en attente d'une décision finale, avec l'instance et la date cible
+  écrites par la Ville (sur 2026 : 104 en attente, dont 25 avec une date cible — les autres
+  sommaires n'en donnent pas). Mes dossiers les montre pour ses projets ou pour toute la ville ;
+  `api/calendrier.js` en fait un abonnement d'agenda (iCalendar) : lien personnel signé
+  (préfixe « calendrier: »), abonnement revérifié à chaque lecture, un événement d'une journée à
+  la date cible, qui dit que ce n'est pas un ordre du jour.
 - **Nous écrire.** « Signaler une erreur dans cette fiche » au bas de chaque fiche ouverte (le
   numéro s'ajoute tout seul) et un formulaire « Nous écrire » dans `/mes-dossiers` (idée, problème,
   erreur). Compte requis. `api/message.js` note si la personne est abonnée, limite à 5 messages
