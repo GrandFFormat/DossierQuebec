@@ -5,7 +5,7 @@
 //      où data-dossier est la clé qui suit la décision d'une instance à l'autre (le sommaire à
 //      Québec, le numéro de dossier à Montréal).
 //
-// Le module ajoute « Mes dossiers » dans l'en-tête de la page et, sur chaque fiche :
+// Le module ajoute « Mes dossiers » et « Abonnement » dans l'en-tête de la page et, sur chaque fiche :
 //   - si la décision fait partie d'un projet suivable (tramway, logement…), un bouton
 //     « ☆ Projet : … » dans la ligne des pastilles, cliquable sans déplier la fiche ;
 //     une décision seule ne se suit pas : ce qui a du sens à suivre, c'est le projet ;
@@ -13,7 +13,7 @@
 //     « Abonnez-vous » sinon. Rien n'est chargé tant qu'on n'ouvre pas une fiche ;
 //   - au bas de la fiche ouverte, « Signaler une erreur dans cette fiche » (compte requis).
 
-import { VILLES, echapper, mesurer, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, formulaireMessage, client } from './abonnes-client.js';
+import { VILLES, echapper, mesurer, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, formulaireMessage, memoriserVolet, client } from './abonnes-client.js';
 
 const VILLE = document.body.dataset.ville;
 let sess = null;
@@ -21,15 +21,23 @@ let suivis = new Set(); // clés « ville|dossier »
 const cle = (ville, dossier) => `${ville}|${dossier}`;
 const zoneDe = (fiche) => fiche?.querySelector(':scope > .corps > .ab-fiche');
 
-function boutonEntete() {
+// « Mes dossiers » et « Abonnement » en tête des outils du menu (nav .outils), dans tous les
+// volets. La page quittée est mémorisée : Mes dossiers et Abonnement offrent d'y revenir.
+function boutonsEntete() {
   if (document.querySelector('.ab-mes-dossiers')) return;
-  const lien = document.createElement('a');
-  lien.className = 'ab-mes-dossiers';
-  lien.href = '/mes-dossiers';
-  lien.innerHTML = 'Mes dossiers <span class="ab-compte" hidden></span>';
-  const reperes = document.querySelector('header .taille-texte') ?? document.querySelector('header .bascule-theme');
-  if (reperes) reperes.before(lien);
-  else document.querySelector('header nav')?.append(lien);
+  const mesDossiers = document.createElement('a');
+  mesDossiers.className = 'ab-mes-dossiers';
+  mesDossiers.href = '/mes-dossiers';
+  mesDossiers.innerHTML = 'Mes dossiers <span class="ab-compte" hidden></span>';
+  const abonnement = document.createElement('a');
+  abonnement.className = 'ab-lien-abonnement';
+  abonnement.href = `/abonnement?ville=${encodeURIComponent(VILLE)}`;
+  abonnement.textContent = 'Abonnement';
+  const outils = document.querySelector('header nav .outils');
+  const repere = document.querySelector('header .taille-texte') ?? document.querySelector('header .bascule-theme');
+  if (outils) outils.prepend(mesDossiers, abonnement);
+  else if (repere) repere.before(mesDossiers, abonnement);
+  else document.querySelector('header nav')?.append(mesDossiers, abonnement);
 }
 
 function majCompte() {
@@ -224,7 +232,8 @@ client.auth.onAuthStateChange(async (evenement) => {
 });
 
 if (VILLE && VILLES[VILLE]) {
-  boutonEntete();
+  memoriserVolet(VILLE);
+  boutonsEntete();
   equiperTout();
   rafraichirSession();
 }

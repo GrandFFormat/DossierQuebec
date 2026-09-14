@@ -2,15 +2,21 @@
    « Abonnement ». Dans un volet, les couleurs viennent de ses variables (--accent, --ligne…) ;
    les valeurs de repli servent aux pages communes. */
 
+/* Dans l'en-tête d'un volet (nav .outils) : Mes dossiers, en pastille, puis Abonnement. */
 .ab-mes-dossiers {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap;
   color: var(--entete-encre, #16191D); background: var(--carte, #fff);
   border: 1px solid var(--ligne-forte, #C2CAD2); border-radius: 999px; padding: 5px 12px;
-  margin-left: auto; margin-right: 8px;
 }
 .ab-mes-dossiers:hover { border-color: var(--accent, #0B8A4B); color: var(--accent, #0B8A4B); }
-.ab-mes-dossiers + .taille-texte { margin-left: 0; }
+nav > .ab-mes-dossiers { margin-left: auto; } /* volet sans groupe .outils */
+.ab-mes-dossiers + .ab-lien-abonnement + .taille-texte { margin-left: 0; }
+header nav a.ab-lien-abonnement, .ab-lien-abonnement {
+  font-size: 13px; font-weight: 600; text-decoration: none; white-space: nowrap;
+  color: var(--entete-doux, #5B6570); padding: 5px 6px; border: 0; border-radius: 0;
+}
+header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-compte {
   min-width: 18px; padding: 0 5px; border-radius: 999px; font-size: 11px; line-height: 18px; text-align: center;
   background: var(--accent, #0B8A4B); color: #fff;
@@ -118,12 +124,65 @@
   --accent: #3DD68C; --accent-fond: #0F2A1D; --accent-encre: #7BE7B2; --fond-2: #1C232C;
 }
 .ab-page .ab-contenu { max-width: 860px; margin: 0 auto; padding: 22px 22px 80px; }
-.ab-page .ab-haut { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 14px 0 18px; border-bottom: 1px solid var(--ligne); margin-bottom: 22px; }
+/* En-tête des pages communes : même organisation que les volets — le logo et le retour au
+   volet quitté, puis les onglets à gauche et les outils (taille du texte, thème) à droite. */
+.ab-page .ab-haut { padding: 14px 0 0; border-bottom: 1px solid var(--ligne); margin-bottom: 22px; }
+.ab-page .ab-haut-ligne { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding-bottom: 10px; }
 .ab-page .ab-marque { font-size: 22px; font-weight: 800; letter-spacing: -.02em; color: var(--encre); text-decoration: none; }
 .ab-page .ab-marque span { color: var(--accent); }
-.ab-page .ab-haut nav { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-left: auto; font-size: 14px; }
-.ab-page .ab-haut nav a { color: var(--doux); text-decoration: none; font-weight: 600; }
-.ab-page .ab-haut nav a:hover { color: var(--encre); }
+.ab-page .ab-retour-volet {
+  font-size: 13px; font-weight: 600; text-decoration: none; white-space: nowrap;
+  color: var(--accent-encre); border: 1px solid var(--accent); border-radius: 999px; padding: 4px 12px;
+}
+.ab-page .ab-retour-volet:hover { background: var(--accent-fond); }
+.ab-page .ab-villes { margin-left: auto; font-size: 13px; color: var(--doux); }
+.ab-page .ab-villes a { color: var(--doux); font-weight: 600; text-decoration: none; }
+.ab-page .ab-villes a:hover { color: var(--encre); }
+.ab-page .ab-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+.ab-page .ab-onglets { display: flex; flex-wrap: wrap; gap: 3px; }
+.ab-page .ab-onglets a {
+  font-size: 14px; font-weight: 600; text-decoration: none; color: var(--doux);
+  padding: 9px 14px; border-bottom: 3px solid transparent;
+}
+.ab-page .ab-onglets a:hover { color: var(--encre); }
+.ab-page .ab-onglets a[aria-current="page"] { color: var(--encre); border-bottom-color: var(--accent); font-weight: 700; }
+.ab-page .ab-outils { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.ab-page .ab-taille {
+  display: inline-flex; align-items: center; gap: 2px; padding: 2px;
+  border: 1px solid var(--ligne-forte); border-radius: 100px; background: var(--carte);
+}
+.ab-page .ab-taille button {
+  font: inherit; font-size: 13px; font-weight: 700; line-height: 1; width: 32px; height: 28px;
+  border: 0; border-radius: 100px; background: transparent; color: var(--encre); cursor: pointer;
+}
+.ab-page .ab-taille button:hover:not(:disabled) { background: var(--fond-2); }
+.ab-page .ab-taille button:disabled { color: var(--ligne-forte); cursor: default; }
+.ab-page .ab-taille span { font-size: 12px; color: var(--doux); min-width: 36px; text-align: center; }
+/* Le thème : une lune en clair (où l'on va), un soleil en sombre — comme dans les volets. */
+.ab-page .ab-theme {
+  width: 38px; height: 38px; flex: none; cursor: pointer; position: relative;
+  background: transparent; border: 1px solid transparent; border-radius: 100px;
+}
+.ab-page .ab-theme:hover { border-color: var(--ligne-forte); background: var(--fond-2); }
+.ab-page .ab-theme::before {
+  content: ''; position: absolute; inset: 0; margin: auto; width: 17px; height: 17px; border-radius: 100px; background: var(--doux);
+}
+.ab-page .ab-theme::after {
+  content: ''; position: absolute; inset: 0; margin: auto; width: 15px; height: 15px; border-radius: 100px;
+  background: var(--fond); transform: translate(5px, -4px);
+}
+.ab-page .ab-theme:hover::after { background: var(--fond-2); }
+.ab-page .ab-theme[aria-pressed="true"]::before {
+  width: 14px; height: 14px; background: var(--vedette);
+  box-shadow: 0 -9px 0 -5.5px var(--vedette), 0 9px 0 -5.5px var(--vedette), -9px 0 0 -5.5px var(--vedette), 9px 0 0 -5.5px var(--vedette);
+}
+.ab-page .ab-theme[aria-pressed="true"]::after { display: none; }
+@media (max-width: 620px) {
+  .ab-page .ab-villes { margin-left: 0; flex-basis: 100%; }
+  .ab-page .ab-onglets a { padding: 8px 9px; font-size: 13.5px; }
+  .ab-page .ab-outils { flex-basis: 100%; justify-content: space-between; padding: 4px 0 10px; }
+  .ab-page .ab-taille span { display: none; }
+}
 .ab-page h1 { font-size: 30px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -.02em; }
 .ab-page h2 { font-size: 19px; margin: 28px 0 10px; }
 .ab-page .ab-chapeau { color: var(--doux); margin: 0 0 18px; max-width: 64ch; }
