@@ -16,6 +16,7 @@ import { writeFile, readFile } from 'node:fs/promises';
 import { search, searchAll, decode, encodeFieldValue, PDF_BASE, PORTAL } from '../lib/gpd.js';
 import { textesParNumero, normaliserObjet, LOT_TEXTE } from '../lib/textes.js';
 import { classer, THEMES } from '../lib/themes.js';
+import { PROJETS, projetsDe } from '../lib/projets.js';
 
 const OUT = new URL('../data/decisions.json', import.meta.url);
 
@@ -82,6 +83,85 @@ function tally(rows, key) {
   return [...counts.entries()]
     .sort((a, b) => b[1] - a[1])
     .map(([valeur, n]) => ({ valeur, n }));
+}
+
+// ---------- où en est un dossier ----------
+// Chaque sommaire décisionnel dit, en tête, quelle instance décide et à quelle date cible :
+//   « Projet  Conseil d'agglomération de Québec  Instance décisionnelle  16 Septembre 2026  Date cible »
+// On le lit par des EXTRAITS de texte (highlight de l'index, environ 3 ko par document) plutôt
+// que par le texte entier. Un dossier est « terminé » quand une résolution de cette instance
+// renvoie à son sommaire — hors étapes préliminaires (autorisation de soumettre, avis de motion,
+// adoption du projet de règlement), qui ne décident rien.
+const MOIS_FR = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
+const sansAccents = (s) => (s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '');
+const normInstance = (s) => sansAccents(s).toLowerCase().replace(/[’']/g, "'").replace(/\s+/g, ' ').trim();
+
+export function lireInstanceDecisionnelle(extraits) {
+  const t = (extraits ?? []).join(' ').replace(/<\/?em>/g, '').replace(/\s+/g, ' ');
+  // L'instance commence toujours par « Comité » ou « Conseil » : ça évite de prendre un autre
+  // « Projet » plus haut (« Projet de résolution (électronique) Projet Conseil de la ville »).
+  const m = t.match(/Projet\s+((?:Comité|Conseil)[^]{2,90}?)\s*Instance décisionnelle\s*(\d{1,2}\s+\p{L}+\s+\d{4})?\s*Date cible/u);
+  if (!m) return { instanceDecisionnelle: null, dateCible: null };
+  let dateCible = null;
+  if (m[2]) {
+    const [j, mois, a] = m[2].split(/\s+/);
+    const i = MOIS_FR.indexOf(sansAccents(mois).toLowerCase());
+    if (i >= 0) dateCible = `${a}-${String(i + 1).padStart(2, '0')}-${String(j).padStart(2, '0')}`;
+  }
+  return { instanceDecisionnelle: m[1].trim(), dateCible };
+}
+
+// « Autorisation de soumettre AU CONSEIL… » est une étape ; « Autorisation de soumettre une
+// demande d'aide financière au ministère » est une décision (vu sur CE-2026-0839).
+const PRELIMINAIRE = /^(?:Autorisation de soumettre,? (?:au|à la|à l'|aux) (?:conseil|comité)|Avis de motion|Adoption du projet de r[èe]glement)/i;
+const estPreliminaire = (r) => PRELIMINAIRE.test(r.objet ?? '') || /^[A-Z]*AM\d?-/.test(r.numero ?? '');
+
+// Les sommaires et les résolutions ne nomment pas les instances de la même façon (« Conseil
+// d'arrondissement » contre « Conseil de l'Arrondissement de Beauport »). Et quand un sommaire
+// en nomme plusieurs (« Conseil d'arrondissement et conseil de la ville »), c'est la dernière
+// qui décide.
+function instanceCanonique(s) {
+  const n = normInstance(s).split(' et ').pop();
+  if (n.includes('agglomeration')) return 'agglomeration';
+  if (n.includes('arrondissement')) return 'arrondissement';
+  if (n.includes('conseil de la ville')) return 'ville';
+  if (n.includes('comite executif')) return 'executif';
+  return n;
+}
+
+function statuerDossiers(decisions) {
+  const parId = new Map(decisions.map((d) => [d.id, d]));
+  const resolutionsDe = new Map();
+  for (const d of decisions) {
+    if (d.type !== 'Résolutions' || !d.sommaireId) continue;
+    if (!resolutionsDe.has(d.sommaireId)) resolutionsDe.set(d.sommaireId, []);
+    resolutionsDe.get(d.sommaireId).push(d);
+  }
+  const statutSommaire = (s) => {
+    if (!s?.instanceDecisionnelle) return null;
+    const cible = instanceCanonique(s.instanceDecisionnelle);
+    const termine = (resolutionsDe.get(s.id) ?? []).some((r) => !estPreliminaire(r) && instanceCanonique(r.instance) === cible);
+    return { statutDossier: termine ? 'termine' : 'en_cours', etapeFinale: s.instanceDecisionnelle.split(/ et /i).pop().replace(/^c/, 'C'), echeance: s.dateCible ?? null };
+  };
+  // Les champs lus dans les sommaires (instanceDecisionnelle, dateCible) restent intacts ; seuls
+  // les champs calculés ici sont remis à zéro.
+  for (const d of decisions) {
+    delete d.statutDossier;
+    delete d.etapeFinale;
+    delete d.echeance;
+    let statut = null;
+    if (d.type === 'Sommaires et mémoires') statut = statutSommaire(d);
+    else if (d.type === 'Résolutions') {
+      statut = d.sommaireId && parId.has(d.sommaireId) ? statutSommaire(parId.get(d.sommaireId)) : null;
+      // Une résolution sans sommaire connu : adoptée, donc terminée — sauf étape préliminaire.
+      if (!statut) statut = { statutDossier: estPreliminaire(d) ? 'en_cours' : 'termine', etapeFinale: null, echeance: null };
+    }
+    if (statut) {
+      d.statutDossier = statut.statutDossier;
+      if (statut.etapeFinale) d.etapeFinale = statut.etapeFinale;
+      if (statut.echeance) d.echeance = statut.echeance;
+    }
+  }
 }
 
 function ajouterJours(dateIso, jours) {
@@ -165,6 +245,47 @@ async function main() {
     if (lues < aLire.length) console.warn(`⚠ ${aLire.length - lues} résolution(s) introuvable(s) par numéro — relues la prochaine fois.`);
   }
 
+  // 3 bis. L'instance qui décide, pour les seuls sommaires jamais lus (extraits de texte, par lots).
+  // --relire-instances : relit tous les sommaires (après une correction de la lecture).
+  for (const d of decisions) {
+    if (d.type !== 'Sommaires et mémoires' || args['relire-instances']) continue;
+    const avant = connus.get(d.id);
+    if (avant && 'instanceDecisionnelle' in avant) {
+      d.instanceDecisionnelle = avant.instanceDecisionnelle;
+      if (avant.dateCible) d.dateCible = avant.dateCible;
+    }
+  }
+  const sommairesALire = decisions.filter((d) => d.type === 'Sommaires et mémoires' && d.numero && !('instanceDecisionnelle' in d));
+  const sommaireParNom = new Map(sommairesALire.map((d) => [d.id, d]));
+  for (let i = 0; i < sommairesALire.length; i += 100) {
+    const valeurs = sommairesALire.slice(i, i + 100).map((d) => encodeFieldValue(d.numero)).join('|');
+    const page = await search({
+      search: 'Instance décisionnelle',
+      filter: `search.in(Numero, '${valeurs}', '|')`,
+      select: 'Numero,metadata_storage_name',
+      highlight: 'content',
+      top: 1000,
+    });
+    for (const row of page.value ?? []) {
+      const d = sommaireParNom.get(row.metadata_storage_name);
+      if (d) Object.assign(d, lireInstanceDecisionnelle(row['@search.highlights']?.content));
+    }
+  }
+  // Un sommaire sans mention lisible est marqué lu (null), pour ne pas le redemander chaque jour.
+  for (const d of sommairesALire) if (!('instanceDecisionnelle' in d)) d.instanceDecisionnelle = null;
+  if (sommairesALire.length) {
+    const lus = sommairesALire.filter((d) => d.instanceDecisionnelle).length;
+    console.log(`Instance décisionnelle lue pour ${lus} sommaire(s) sur ${sommairesALire.length} (${Math.ceil(sommairesALire.length / 100)} requête(s)).`);
+  }
+  statuerDossiers(decisions);
+
+  // Les projets suivables dont parle chaque décision (lib/projets.js).
+  for (const d of decisions) {
+    delete d.projets;
+    const p = projetsDe(d.objet);
+    if (p.length && d.type !== 'Procès-verbaux' && d.type !== 'Tableaux des décisions') d.projets = p;
+  }
+
   // Pastille thématique : ce que la décision concerne. Voir lib/themes.js pour la méthode.
   for (const d of decisions) Object.assign(d, classer(d));
   const sansTheme = decisions.filter((d) => !d.theme).length;
@@ -179,6 +300,14 @@ async function main() {
     nouveauxDepuisDerniereExecution: precedent ? nouveaux : null,
     themes: THEMES,
     sansTheme,
+    projets: Object.fromEntries(
+      Object.entries(PROJETS).map(([cle, p]) => [cle, { titre: p.titre, description: p.description, n: decisions.filter((d) => d.projets?.includes(cle)).length }])
+    ),
+    statuts: {
+      termines: decisions.filter((d) => d.type === 'Sommaires et mémoires' && d.statutDossier === 'termine').length,
+      enCours: decisions.filter((d) => d.type === 'Sommaires et mémoires' && d.statutDossier === 'en_cours').length,
+      inconnus: decisions.filter((d) => d.type === 'Sommaires et mémoires' && !d.statutDossier).length,
+    },
     facettes: {
       type: tally(decisions, 'type'),
       instance: tally(decisions, 'instance'),

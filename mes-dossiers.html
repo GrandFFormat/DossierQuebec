@@ -80,17 +80,49 @@
     return data && data.statut === 'actif' && (!data.fin || new Date(data.fin) > new Date());
   }
 
-  // L'en-tête d'un dossier : ce qu'on voit replié. Tout le reste se charge à l'ouverture.
+  const estProjet = (id) => id.startsWith('projet:');
+  const PAS_UN_DOSSIER = new Set(['Procès-verbaux', 'Tableaux des décisions', 'Procès-verbal', 'Ordre du jour']);
+  const docsDuProjet = (decisions, cle) => (decisions?.decisions ?? []).filter((d) => d.projets?.includes(cle) && !PAS_UN_DOSSIER.has(d.type));
+
+  function pastilleStatut(d) {
+    if (!d?.statutDossier) return '';
+    if (d.statutDossier === 'termine') return `<span class="ab-etiquette">Décision finale${d.etapeFinale ? ` — ${echapper(d.etapeFinale)}` : ''}</span>`;
+    return `<span class="ab-etiquette ab-en-cours">En cours${d.etapeFinale ? ` — décision attendue : ${echapper(d.etapeFinale)}` : ''}${d.echeance ? `, date cible ${dateFr(d.echeance)}` : ''}</span>`;
+  }
+
+  // L'en-tête d'un dossier ou d'un projet : ce qu'on voit replié. Le reste se charge à l'ouverture.
   async function entete(suivi) {
-    const docs = docsDuDossier(await jeu(suivi.ville, 'decisions'), suivi.dossier_id);
+    const decisions = await jeu(suivi.ville, 'decisions');
+    const attributs = `class="ab-carte ab-dossier" name="dossiers" data-ville="${echapper(suivi.ville)}" data-dossier="${echapper(suivi.dossier_id)}"`;
+    if (estProjet(suivi.dossier_id)) {
+      const cle = suivi.dossier_id.slice(7);
+      const projet = decisions?.projets?.[cle];
+      const docs = docsDuProjet(decisions, cle);
+      const derniere = docs.map((d) => d.date).filter(Boolean).sort().pop();
+      return `<details ${attributs}>
+        <summary>
+          <div class="ab-meta">
+            <span>${echapper(VILLES[suivi.ville] ?? suivi.ville)}</span>
+            <span class="ab-etiquette ab-type-projet">Projet</span>
+            <span>${docs.length} décision(s) cette année</span>
+            ${derniere ? `<span>Dernière : ${dateFr(derniere)}</span>` : ''}
+            <span>Suivi depuis le ${dateFr(suivi.created_at)}</span>
+          </div>
+          <h3>${echapper(projet?.titre ?? suivi.objet ?? cle)}</h3>
+        </summary>
+        <div class="ab-dossier-corps"></div>
+      </details>`;
+    }
+    const docs = docsDuDossier(decisions, suivi.dossier_id);
     const principal = docs.find((d) => d.id === suivi.dossier_id) ?? docs[0];
     const derniere = docs.map((d) => d.date).filter(Boolean).sort().pop();
     const numero = suivi.numero || principal?.numero || '';
-    return `<details class="ab-carte ab-dossier" name="dossiers" data-ville="${echapper(suivi.ville)}" data-dossier="${echapper(suivi.dossier_id)}" data-numero="${echapper(numero)}">
+    return `<details ${attributs} data-numero="${echapper(numero)}">
       <summary>
         <div class="ab-meta">
           <span>${echapper(VILLES[suivi.ville] ?? suivi.ville)}</span>
           ${numero ? `<span>${echapper(numero)}</span>` : ''}
+          ${pastilleStatut(principal)}
           ${derniere ? `<span>Dernière décision : ${dateFr(derniere)}</span>` : ''}
           <span>Suivi depuis le ${dateFr(suivi.created_at)}</span>
         </div>
@@ -100,11 +132,49 @@
     </details>`;
   }
 
+  // Un projet ouvert : ses décisions, une ligne par dossier (le sommaire et ses résolutions ne
+  // comptent qu'une fois), les plus récentes d'abord.
+  async function ouvrirProjet(carte, corps) {
+    const { ville, dossier } = carte.dataset;
+    const cle = dossier.slice(7);
+    const [decisions, resumes] = await Promise.all([jeu(ville, 'decisions'), jeu(ville, 'resumes')]);
+    const projet = decisions?.projets?.[cle];
+    const resumeDe = new Map((resumes?.resumes ?? []).map((r) => [r.id, r]));
+    const parDossier = new Map();
+    for (const d of docsDuProjet(decisions, cle).sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))) {
+      const k = d.sommaireId ?? d.dossier ?? d.id;
+      if (!parDossier.has(k)) parDossier.set(k, { k, docs: [] });
+      parDossier.get(k).docs.push(d);
+    }
+    const lignes = [...parDossier.values()];
+    const MONTRES = 15;
+    const ligne = ({ k, docs }) => {
+      const principal = docs.find((d) => d.id === k) ?? docs[0];
+      const resume = resumeDe.get(k);
+      const instances = [...new Set(docs.map((d) => d.instance).filter(Boolean))];
+      return `<li class="ab-ligne-projet">
+        <div class="ab-meta"><span>${dateFr(docs[0].date)}</span>${instances.length ? `<span>${echapper(instances.join(' · '))}</span>` : '<span>sommaire</span>'}${pastilleStatut(principal)}</div>
+        <div>${echapper(resume?.puces?.[0] ?? principal.objet ?? '')}</div>
+        <div class="ab-liens">${principal.pdf ? `<a href="${echapper(principal.pdf)}" target="_blank" rel="noopener">${echapper(principal.numero ?? 'PDF')} ↗</a>` : ''}</div>
+      </li>`;
+    };
+    corps.innerHTML = `${projet?.description ? `<p class="ab-note" style="margin-top:0">${echapper(projet.description)}</p>` : ''}
+      <div class="ab-bloc"><div class="ab-detail-titre">Les décisions les plus récentes <span class="ab-etiquette">${lignes.length} dossier(s)</span></div>
+        ${lignes.length ? `<ol class="ab-liste-projet">${lignes.slice(0, MONTRES).map(ligne).join('')}</ol>` : "<p class=\"ab-note\">Aucune décision de ce projet dans l'année en cours pour l'instant.</p>"}
+      </div>
+      <div class="ab-liens">
+        <a href="/${echapper(ville)}/decisions.html?projet=${encodeURIComponent(cle)}">Voir les ${projet?.n ?? lignes.length} décisions dans le volet ${echapper(VILLES[ville] ?? '')}</a>
+        <button type="button" class="ab-lien-bouton" data-action="retirer">Ne plus suivre ce projet</button>
+      </div>`;
+    mesurer('ouvrir_projet_suivi', { ville, projet: cle });
+  }
+
   async function ouvrir(carte) {
     const corps = carte.querySelector('.ab-dossier-corps');
     if (corps.dataset.pret === '1') return;
     corps.dataset.pret = '1';
     corps.innerHTML = '<p class="ab-note">Chargement…</p>';
+    if (estProjet(carte.dataset.dossier)) return ouvrirProjet(carte, corps);
     const { ville, dossier, numero } = carte.dataset;
     const s = await session();
     const [decisions, resumes, detail] = await Promise.all([jeu(ville, 'decisions'), jeu(ville, 'resumes'), chargerDetail(ville, dossier, s)]);
