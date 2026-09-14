@@ -42,7 +42,7 @@ function etatEtoile(bouton) {
   const suivi = suivis.has(cle(VILLE, bouton.dataset.dossier));
   bouton.classList.toggle('actif', suivi);
   bouton.setAttribute('aria-pressed', String(suivi));
-  bouton.textContent = suivi ? '★' : '☆';
+  bouton.innerHTML = suivi ? '<span aria-hidden="true">★</span> Suivi' : '<span aria-hidden="true">☆</span> Suivre';
   bouton.title = suivi ? 'Dossier suivi — cliquer pour ne plus le suivre' : 'Suivre ce dossier';
   bouton.setAttribute('aria-label', bouton.title);
 }

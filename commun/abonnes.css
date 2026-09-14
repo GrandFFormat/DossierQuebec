@@ -19,11 +19,13 @@
 /* La ligne des pastilles d'une fiche ne la déplie pas : curseur normal, et l'étoile à droite. */
 .pliante > summary .ab-meta-inerte { cursor: default; }
 .ab-etoile {
-  margin-left: auto; font: inherit; font-size: 20px; line-height: 1; cursor: pointer;
-  background: none; border: 0; padding: 2px 4px; border-radius: 6px; color: var(--doux, #5B6570);
+  margin-left: auto; font: inherit; font-size: 12.5px; font-weight: 700; line-height: 1.4; cursor: pointer; white-space: nowrap;
+  color: var(--encre, #16191D); background: var(--carte, #fff);
+  border: 1px solid var(--ligne-forte, #C2CAD2); border-radius: 999px; padding: 2px 10px;
 }
-.ab-etoile:hover { color: var(--vedette, #F5B301); background: var(--fond-2, #F4F6F8); }
-.ab-etoile.actif { color: var(--vedette, #F5B301); }
+.ab-etoile span { color: var(--vedette, #F5B301); font-size: 14px; }
+.ab-etoile:hover { border-color: var(--vedette, #F5B301); }
+.ab-etoile.actif { border-color: var(--vedette, #F5B301); background: var(--fond-2, #F4F6F8); }
 .ab-etoile:focus-visible { outline: 2px solid var(--accent, #0B8A4B); outline-offset: 2px; }
 .ab-etoile:disabled { opacity: .5; cursor: default; }
 
