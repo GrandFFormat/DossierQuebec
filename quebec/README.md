@@ -464,6 +464,11 @@ produit et son prix récurrent, le webhook vers `https://dossierquebec.ca/api/st
 `invoice.payment_failed`), et le portail client enregistré une fois (Paramètres → Facturation →
 Portail client).
 
+**Essai de bout en bout le 14 sept. 2026**, en production et en mode test (compte `+essai` de
+Martin) : paiement Checkout, ligne `abonnements` écrite par le webhook 4 secondes plus tard, boîtes
+des abonnés ouvertes, puis annulation par le portail (`annulation_prevue`, fin ramenée à la fin du
+mois payé). Le produit, le webhook et le portail existent aussi en mode réel, prêts pour l'ouverture.
+
 **Avant d'ouvrir en réel** : la réponse du greffe (usage commercial, N/Réf. 2026-09-11-2684) ; des
 conditions d'utilisation et une politique de remboursement liées depuis la page Abonnement ;
 retirer « prix prévu » des pages Abonnement et Mes dossiers ; refaire produit, prix, webhook et
