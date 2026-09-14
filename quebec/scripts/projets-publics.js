@@ -221,6 +221,64 @@ const recentes = [...groupesRecents.entries()]
   })
   .filter((d) => d.numero && (d.derniere ?? '') >= depuisRecent)
   .sort((a, b) => (b.derniere ?? '').localeCompare(a.derniere ?? ''));
+// ---------- les dossiers de l'année et les organismes (suivre un organisme) ----------
+// data/dossiers.json : tous les dossiers de l'année, compacts (ce qu'on cherche et ce qu'on
+// affiche), pour la vue « organisme » de Mes dossiers — chargé seulement quand un abonné l'ouvre.
+// data/organismes.json : des SUGGESTIONS de noms d'entreprises et d'organismes, repérés par leur
+// forme juridique (« inc. », « ltée »…) ou par « l'organisme X » dans les objets et les résumés.
+// Le repérage est mécanique et imparfait : ce ne sont que des suggestions, l'abonné écrit le nom
+// qu'il veut suivre, et on cherche ce nom tel quel (mot entier, sans accents ni majuscules).
+const annee = [...groupesRecents.entries()]
+  .map(([k, groupe]) => {
+    groupe.sort(parDate);
+    const principal = groupe.find((d) => d.id === k) ?? groupe[0];
+    const resume = resumeDe.get(k);
+    return {
+      numero: principal.numero ?? null,
+      date: principal.date ?? null,
+      derniere: groupe.at(-1).date ?? null,
+      instances: [...new Set(groupe.map((d) => d.instance).filter(Boolean))],
+      statutDossier: principal.statutDossier ?? null,
+      theme: principal.theme ?? null,
+      objet: principal.objet ?? null,
+      puces: resume?.puces?.length && !resume.sansContenuSubstantiel ? resume.puces : [],
+      montant: resume?.montantPrincipal ?? null,
+      pdf: principal.pdf ?? null,
+    };
+  })
+  .filter((d) => d.numero)
+  .sort((a, b) => (b.derniere ?? '').localeCompare(a.derniere ?? ''));
+const texteAnnee = JSON.stringify({ generatedAt: new Date().toISOString(), themes, dossiers: annee });
+await writeFile('data/dossiers.json', texteAnnee, 'utf8');
+
+const sansAccents = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+const MOT_NOM = "(?:[A-ZÀ-Ý0-9][\\p{L}0-9'’&.\\-]*|de|du|des|la|le|les|et|d'|l'|à|en|pour|sur)";
+const FORME_JURIDIQUE = new RegExp(`(${MOT_NOM}(?:\\s+${MOT_NOM}){0,8},?\\s+(?:inc\\.|ltée|limitée|s\\.e\\.n\\.c\\.|S\\.E\\.N\\.C\\.|S\\.E\\.C\\.))`, 'gu');
+const ORGANISME = /l['’]organisme\s+«?\s*([A-ZÀ-Ý][^,;()«»]{2,80}?)\s*»?(?=\s+(?:relativement|dans le cadre|pour|afin|concernant|visant|en vue)\b|[,;().]|$)/gu;
+const candidats = new Map();
+const noter = (brut, numero) => {
+  const nom = brut.replace(/^(?:\d{4}\.\s*)/, '').replace(/^(?:de|du|des|la|le|les|et|d'|l'|à|en|pour|sur)\s+/i, '').replace(/\s+/g, ' ').replace(/[ ,]+$/, '').trim();
+  const mots = nom.replace(/\b(?:inc|ltée|limitée|s\.e\.n\.c|s\.e\.c)\.?$/i, '').trim().split(/\s+/).filter(Boolean);
+  // Au moins deux mots, ou un nom-numéro (« 3559840 Canada inc. ») ; jamais un seul nom de lieu.
+  if (nom.length < 5 || nom.length > 90 || (mots.length < 2 && !/^\d/.test(nom)) || /^(?:Québec|Canada|Ville)\b.{0,6}$/i.test(nom)) return;
+  // « Loisirs Montcalm inc. » et « Loisirs Montcalm inc », « Tétra Tech » et « Tetra Tech » : un seul.
+  const cle = sansAccents(nom).replace(/[’']/g, "'").replace(/[.\s]+$/, '');
+  if (!candidats.has(cle)) candidats.set(cle, { graphies: new Map(), dossiers: new Set() });
+  const c = candidats.get(cle);
+  c.graphies.set(nom, (c.graphies.get(nom) ?? 0) + 1);
+  c.dossiers.add(numero);
+};
+for (const d of annee) {
+  const texte = [d.objet, ...d.puces].join('\n');
+  for (const m of texte.matchAll(FORME_JURIDIQUE)) noter(m[1], d.numero);
+  for (const m of texte.matchAll(ORGANISME)) noter(m[1], d.numero);
+}
+const organismes = [...candidats.values()]
+  .map((c) => ({ nom: [...c.graphies].sort((a, b) => b[1] - a[1])[0][0], dossiers: c.dossiers.size }))
+  .sort((a, b) => b.dossiers - a.dossiers || a.nom.localeCompare(b.nom, 'fr'));
+await writeFile('data/organismes.json', JSON.stringify({ generatedAt: new Date().toISOString(), avertissement: 'Suggestions repérées automatiquement dans les objets et les résumés ; imparfaites.', organismes }), 'utf8');
+console.log(`Dossiers de l'année : ${annee.length} · ${(texteAnnee.length / 1024).toFixed(0)} Ko · organismes suggérés : ${organismes.length}.`);
+
 const texteRecentes = JSON.stringify({ generatedAt: new Date().toISOString(), depuis: depuisRecent, dossiers: recentes });
 await writeFile('data/recentes.json', texteRecentes, 'utf8');
 console.log(`Décisions récentes : ${recentes.length} dossiers depuis le ${depuisRecent} · ${(texteRecentes.length / 1024).toFixed(0)} Ko.`);

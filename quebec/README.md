@@ -285,6 +285,17 @@ des sous-dossiers de dossierquebec.ca : la session Supabase ouverte sur une page
   `alertes_etat` sous « mot_<id> » ; un mot tout juste ajouté est mémorisé sans courriel ; un dossier
   déjà signalé pour un projet dans le même courriel n'est pas répété. Sans la table, les alertes de
   projets partent quand même.
+- **Organismes et entreprises suivis (abonnés).** Dans Mes dossiers, jusqu'à 30 noms dans la table
+  `organismes_suivis` (`scripts/supabase-schema-organismes.sql`) ; des organismes seulement, jamais
+  des personnes. Le nom est cherché sans sa forme juridique (`sansFormeJuridique` : « inc. »,
+  « ltée », « s.e.n.c. »…), puis comme un mot-clé. Pour chacun, la carte déplie tous les dossiers
+  de l'année qui le nomment, lus dans `data/dossiers.json` (toute l'année, ~540 Ko compressé,
+  chargé seulement pour les abonnés qui suivent un organisme), avec le résumé, le PDF et le
+  « Détail de l'argent » à la demande. Les montants restent ceux de chaque résumé : jamais
+  additionnés (un engagement, un emprunt et une subvention ne s'additionnent pas). Les
+  suggestions du champ viennent de `data/organismes.json` : noms repérés automatiquement dans les
+  résumés (forme juridique, « l'organisme X »), donc imparfaits. Les nouvelles décisions
+  s'ajoutent au courriel du matin, comme les mots-clés, sous la clé « org_<id> » d'`alertes_etat`.
 - **À l'agenda des conseils (abonnés).** `scripts/projets-publics.js` écrit `data/attendues.json` : chaque
   sommaire encore en attente d'une décision finale, avec l'instance qui doit décider (regroupée :
   conseil de la ville, d'agglomération, comité exécutif, arrondissements), la date cible écrite

@@ -38,6 +38,7 @@
     <p class="ab-chapeau">Les projets que vous suivez, toutes villes confondues. Cliquez sur un projet pour voir ses décisions ici, les plus récentes d'abord. Pour en ajouter un, choisissez-le plus bas, ou cliquez « Projet : … » sur une décision dans un volet.</p>
     <div id="compte"></div>
     <div id="alertes"></div>
+    <div id="organismes"></div>
     <div id="ouverts"></div>
     <div id="liste"><p class="ab-vide">Chargement…</p></div>
     <div id="pourquoi"></div>
@@ -73,6 +74,7 @@
   function connexion() {
     $('#compte').innerHTML = '';
     alertes(null, false);
+    organismesSuivis(null, false);
     dossiersOuverts(null, false);
     $('#liste').innerHTML = `<div class="ab-carte">
       <h3>Connectez-vous</h3>
@@ -267,6 +269,129 @@
       mots = mots.filter((m) => m.id !== bouton.dataset.mot);
       dessiner();
       etat.textContent = 'Mot-clé retiré.';
+    });
+  }
+
+  // ---------- organismes et entreprises suivis (abonnés) ----------
+  // Table organismes_suivis (scripts/supabase-schema-organismes.sql). Pour chacun, tous les dossiers
+  // de l'année qui le mentionnent (/<ville>/data/dossiers.json, chargé seulement ici), cherché sans
+  // sa forme juridique — même recherche que les alertes du matin. Suggestions de noms :
+  // /<ville>/data/organismes.json (repérées automatiquement, donc imparfaites). Les montants sont
+  // ceux des résumés, chacun pour son dossier : jamais additionnés, ils ne sont pas de même nature.
+  const sansFormeJuridique = (nom) => String(nom ?? '').trim().replace(/[\s,]+(?:inc|ltée|limitée|s\.?e\.?n\.?c|s\.?e\.?c|enr|coop)\.?$/i, '').trim();
+  let dossiersAnnee = null;
+  const chargerDossiersAnnee = () => {
+    dossiersAnnee ??= Promise.all(Object.keys(VILLES).map(async (ville) => {
+      const f = await fetch(`/${ville}/data/dossiers.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+      return (f?.dossiers ?? []).map((d) => ({ ...d, ville, themeInfo: f.themes?.[d.theme] ?? null }));
+    })).then((listes) => listes.flat());
+    return dossiersAnnee;
+  };
+
+  async function organismesSuivis(s, abonne) {
+    const zone = $('#organismes');
+    if (!s || !abonne) { zone.innerHTML = ''; return; }
+    const { data, error } = await client.from('organismes_suivis').select('id, nom').order('created_at');
+    if (error) { zone.innerHTML = ''; return; } // table pas encore créée
+    let suivis = data ?? [];
+    const suggestions = (await Promise.all(Object.keys(VILLES).map((v) => fetch(`/${v}/data/organismes.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null))))
+      .flatMap((f) => f?.organismes ?? []);
+    zone.innerHTML = `<section class="ab-carte ab-organismes">
+      <h2 style="margin-top:0">Organismes et entreprises suivis</h2>
+      <p class="ab-chapeau" style="margin-bottom:10px">Les décisions de l'année qui nomment un organisme ou une entreprise : contrats, subventions, ententes. Les nouvelles s'ajoutent à votre alerte du matin.</p>
+      <form class="ab-form" id="org-form">
+        <input type="text" id="org-champ" list="org-suggestions" maxlength="120" placeholder="Nom de l'organisme ou de l'entreprise" aria-label="Organisme ou entreprise à suivre">
+        <datalist id="org-suggestions">${suggestions.map((o) => `<option value="${echapper(o.nom)}">${o.dossiers} dossier${o.dossiers > 1 ? 's' : ''}</option>`).join('')}</datalist>
+        <button type="submit" class="ab-bouton">Suivre</button>
+      </form>
+      <p class="ab-note" id="org-etat" aria-live="polite">Le nom est cherché dans l'objet et le résumé des décisions, sans sa forme juridique (« inc. », « ltée »), sans accents ni majuscules. Jusqu'à 30.</p>
+      <div id="org-liste"></div>
+    </section>`;
+    const etat = $('#org-etat');
+    const annee = suivis.length ? await chargerDossiersAnnee() : [];
+    const trouves = (nom) => annee.filter((d) => contientMot(d, sansFormeJuridique(nom)));
+
+    // Même fiche dépliante que l'agenda des conseils ; une seule ouverte à la fois.
+    const ligneDossier = (d) => {
+      const fichier = /\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1];
+      return `<details class="ab-ouvert" name="org-dossiers">
+        <summary>
+          <div class="ab-meta ab-pastilles">
+            ${d.themeInfo ? `<span class="ab-pastille-theme" style="background:${/^#[0-9a-f]{6}$/i.test(d.themeInfo.couleur ?? '') ? d.themeInfo.couleur : 'var(--doux)'}">${echapper(d.themeInfo.libelle)}</span>` : ''}
+            <span>${dateFr(d.derniere ?? d.date)}</span>
+            ${d.instances.length ? `<span class="ab-etiquette">${echapper(d.instances.join(' · '))}</span>` : ''}
+            ${d.statutDossier === 'termine' ? '<span class="ab-etiquette">Décision finale</span>' : d.statutDossier ? '<span class="ab-etiquette ab-en-cours">En cours</span>' : ''}
+            <span class="ab-numero">${echapper(d.numero)}</span>
+            ${d.montant ? `<span class="ab-etiquette">${echapper(d.montant)}</span>` : ''}
+          </div>
+          <div class="ab-ouvert-phrase">${echapper(d.puces[0] ?? d.objet ?? '')}</div>
+        </summary>
+        <div class="ab-ouvert-corps">
+          ${d.puces.length ? `<ul>${d.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul><p class="ab-note">Résumé généré par IA à partir du sommaire décisionnel. Le document officiel fait foi.</p>` : `<p>${echapper(d.objet ?? '')}</p>`}
+          ${d.montant ? `<p class="ab-note">Montant principal indiqué dans le résumé de ce dossier : ${echapper(d.montant)}. Les montants de dossiers différents ne s’additionnent pas (engagement, emprunt, subvention…).</p>` : ''}
+          <div class="ab-liens">
+            ${d.pdf ? `<a href="${echapper(d.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}
+            <a href="/${echapper(d.ville)}/decisions.html?q=${encodeURIComponent(d.numero)}">Voir dans le volet ${echapper(VILLES[d.ville] ?? '')}</a>
+            ${fichier ? `<button type="button" class="ab-lien-bouton" data-detail="${echapper(fichier)}" data-ville="${echapper(d.ville)}" aria-expanded="false">Détail de l'argent</button>` : ''}
+          </div>
+          <div class="ab-detail-org" hidden></div>
+        </div>
+      </details>`;
+    };
+
+    const dessiner = () => {
+      $('#org-liste').innerHTML = suivis.length
+        ? suivis.map((o) => {
+            const liste = trouves(o.nom);
+            return `<details class="ab-section-agenda ab-organisme" name="organismes">
+              <summary><span class="ab-organisme-nom">${echapper(o.nom)}</span><span class="ab-etiquette">${liste.length} dossier${liste.length > 1 ? 's' : ''}</span><button type="button" class="ab-mot-retirer" data-retirer="${echapper(o.id)}" aria-label="Ne plus suivre ${echapper(o.nom)}">×</button></summary>
+              ${liste.length ? `<div class="ab-organisme-dossiers">${liste.sort((a, b) => (b.derniere ?? b.date ?? '').localeCompare(a.derniere ?? a.date ?? '')).map(ligneDossier).join('')}</div>` :'<p class="ab-note">Aucune décision de cette année ne mentionne ce nom. Vous serez alerté dès qu’une le mentionnera.</p>'}
+            </details>`;
+          }).join('')
+        : '<p class="ab-note">Vous ne suivez aucun organisme pour l’instant.</p>';
+      $('#org-form button').disabled = suivis.length >= 30;
+    };
+    dessiner();
+
+    $('#org-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const nom = $('#org-champ').value.trim().replace(/\s+/g, ' ');
+      if (sansFormeJuridique(nom).length < 3) { etat.textContent = 'Écrivez au moins 3 caractères, sans compter « inc. » ou « ltée ».'; return; }
+      if (suivis.some((o) => normaliserTexte(sansFormeJuridique(o.nom)) === normaliserTexte(sansFormeJuridique(nom)))) { etat.textContent = 'Vous suivez déjà cet organisme.'; return; }
+      const { data: ajoute, error: erreur } = await client.from('organismes_suivis').insert({ user_id: s.user.id, nom }).select('id, nom').single();
+      if (erreur) { etat.textContent = /30/.test(erreur.message) ? 'Limite de 30 organismes atteinte.' : "Impossible de suivre cet organisme. Réessayez."; return; }
+      suivis = [...suivis, ajoute];
+      if (!annee.length) annee.push(...(await chargerDossiersAnnee()));
+      $('#org-champ').value = '';
+      dessiner();
+      const n = trouves(nom).length;
+      etat.textContent = n ? `Suivi. ${n} dossier${n > 1 ? 's' : ''} de 2026 le mentionne${n > 1 ? 'nt' : ''} ; les prochaines décisions s'ajouteront à votre alerte.` : "Suivi. Aucune décision de 2026 ne le mentionne encore : vous serez alerté dès qu'une le mentionnera.";
+      mesurer('organisme_suivi');
+    });
+
+    $('#org-liste').addEventListener('click', async (e) => {
+      const retirer = e.target.closest('[data-retirer]');
+      if (retirer) {
+        e.preventDefault(); // le bouton est dans le résumé : ne pas déplier
+        retirer.disabled = true;
+        const { error: erreur } = await client.from('organismes_suivis').delete().eq('id', retirer.dataset.retirer);
+        if (erreur) { retirer.disabled = false; etat.textContent = 'Impossible de retirer cet organisme. Réessayez.'; return; }
+        suivis = suivis.filter((o) => o.id !== retirer.dataset.retirer);
+        dessiner();
+        etat.textContent = 'Organisme retiré.';
+        return;
+      }
+      const bouton = e.target.closest('[data-detail]');
+      if (!bouton) return;
+      const boite = bouton.closest('.ab-ouvert-corps').querySelector('.ab-detail-org');
+      if (!boite.hidden) { boite.hidden = true; bouton.setAttribute('aria-expanded', 'false'); return; }
+      bouton.disabled = true;
+      const reponse = await chargerDetail(bouton.dataset.ville, bouton.dataset.detail, await session());
+      bouton.disabled = false;
+      boite.hidden = false;
+      bouton.setAttribute('aria-expanded', 'true');
+      boite.innerHTML = rendreDetail(reponse, bouton.dataset.ville) || '<p class="ab-note">Pas encore de détail de l’argent pour ce dossier : il est lu seulement pour certains projets et pour les nouvelles décisions.</p>';
+      mesurer('organisme_detail_argent', { ville: bouton.dataset.ville });
     });
   }
 
@@ -624,6 +749,7 @@
     $('#deconnexion').addEventListener('click', async () => { await client.auth.signOut(); });
 
     alertes(s, abonne).catch((e) => console.error('alertes :', e));
+    organismesSuivis(s, abonne).catch((e) => console.error('organismes :', e));
     dossiersOuverts(s, abonne).catch((e) => console.error('dossiers ouverts :', e));
     ecrire(s);
     const suivis = await chargerSuivis();
