@@ -1,0 +1,109 @@
+# Rafraîchissement quotidien du volet Longueuil (longueuil/).
+#
+# Même mécanique que les volets Québec, Montréal et Lévis : chaque matin, on relance les
+# extractions, et s'il y a du nouveau on committe et on pousse — Vercel redéploie. Tout se passe
+# dans longueuil/, qui a ses propres scrapers et ses deux dépendances (voir longueuil/README.md).
+#
+# Secrets et variables (Settings > Secrets and variables > Actions) :
+#   ANTHROPIC_API_KEY  secret — résumés en langage clair. Sans lui, l'étape est sautée et
+#                      le reste tourne.
+#   LGL_CONTACT        variable, facultative — ce que notre robot laisse comme contact dans
+#                      son User-Agent auprès de la Ville. À défaut : l'adresse du site.
+
+name: Rafraîchissement quotidien — volet Longueuil
+
+on:
+  schedule:
+    # 10:00 UTC, après DossierQuébec (08:00), Québec (08:30), Montréal (09:00) et Lévis (09:30). Le
+    # groupe de concurrence ci-dessous garantit de toute façon qu'ils ne se chevauchent pas.
+    - cron: '0 10 * * *'
+  workflow_dispatch: {} # bouton « Run workflow » pour lancer à la main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    # Quelques minutes en régime établi. Le premier run sans cache retélécharge les procès-verbaux
+    # des deux années (une cinquantaine de PDF, pour les votes, l'agglomération et le lexique) ;
+    # un document de séance à lire ajoute une vingtaine de secondes.
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: longueuil
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v5
+
+      - name: Vérifier que le volet est présent
+        id: volet
+        working-directory: .
+        run: |
+          if [ -f longueuil/package.json ]; then
+            echo "present=oui" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=non" >> "$GITHUB_OUTPUT"
+            echo "::notice::Pas de dossier longueuil/ sur cette branche — rien à rafraîchir."
+          fi
+
+      - name: Installer Node.js
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Installer les dépendances (SDK Anthropic, pdf.js)
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        run: npm ci --omit=dev
+
+      # Le texte extrait des PDF (data/textes/, hors dépôt) d'un run à l'autre : relire une
+      # séance déjà téléchargée ne redemande rien à la Ville.
+      - name: Restaurer le cache de texte des PDF
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        uses: actions/cache@v4
+        with:
+          path: longueuil/data/textes
+          key: textes-longueuil-${{ github.run_id }}
+          restore-keys: |
+            textes-longueuil-
+
+      - name: Rafraîchir les données municipales
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        id: refresh
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          LGL_CONTACT: ${{ vars.LGL_CONTACT }}
+        run: |
+          set -o pipefail
+          npm run refresh 2>&1 | tee data/lancement.log
+
+      - name: Committer et pousser s'il y a des changements
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        working-directory: .
+        run: |
+          git config user.name "dossierquebec-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add longueuil/data
+          if git diff --cached --quiet; then
+            echo "Aucun changement — rien à committer."
+          else
+            git commit -m "Rafraîchissement auto du volet Longueuil ($(date -u +%Y-%m-%d))"
+            git pull --rebase
+            git push
+          fi
+
+      - name: Signaler les étapes secondaires en échec
+        if: ${{ steps.volet.outputs.present == 'oui' && steps.refresh.outputs.warnings != '' }}
+        run: |
+          echo "::warning::Étapes secondaires en échec (données de la veille conservées) : ${{ steps.refresh.outputs.warnings }}"
+
+      - name: Alerter si une extraction principale a échoué
+        if: ${{ steps.volet.outputs.present == 'oui' && steps.refresh.outputs.failed != '' }}
+        run: |
+          echo "::error::Extractions en échec (données de la veille conservées) : ${{ steps.refresh.outputs.failed }}"
+          exit 1

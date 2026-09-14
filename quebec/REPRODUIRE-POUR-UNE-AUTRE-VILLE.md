@@ -359,6 +359,16 @@ un navigateur, ou la mettre en secret.
 - **Supabase** : `service_role` a besoin de `grant` explicites sur chaque table ; une fonction
   reçoit `EXECUTE` pour tout le monde (`PUBLIC`) à sa création, il faut le révoquer ; ajouter une
   valeur (un sujet de message, par exemple) oblige à modifier la contrainte `check` de la table.
+- **Les sommaires peuvent être cachés dans un document de séance** (Longueuil : colonne « Global »
+  du tableau des séances, un PDF SharePoint de 1 000 pages avec chaque sommaire et ses annexes).
+  Ouvrir toutes les colonnes de la page des séances avant de conclure « pas de sommaires publics ».
+  Un lien de partage SharePoint pose un cookie invité pendant sa redirection : `fetch` ne le rejoue
+  pas (401), il faut suivre la redirection à la main.
+- **Un jeu de données ouvertes peut être périmé** (Longueuil : districts et élus d'avant 2021 sur
+  Données Québec, découpage 2025 seulement sur la carte ArcGIS de la Ville). Recouper avec la page
+  des élus avant de dessiner la carte.
+- **Une année peut n'avoir aucun vote divisé** (Longueuil, 2026, un seul parti au conseil) : mesurer
+  l'année précédente avant de conclure qu'il n'y a pas de page Votes, et le dire sur la page.
 - **Un compte ou une liste qui ne se voit qu'une fois connecté** se teste avec un faux client
   Supabase dans le navigateur, et le vrai aller-retour se vérifie après le déploiement.
 

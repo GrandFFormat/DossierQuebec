@@ -48,6 +48,15 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/longueuil/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -84,6 +93,11 @@
     {
       "source": "/levis",
       "destination": "/levis/",
+      "permanent": true
+    },
+    {
+      "source": "/longueuil",
+      "destination": "/longueuil/",
       "permanent": true
     }
   ]
