@@ -15,6 +15,7 @@
 
 import { VILLES, echapper, mesurer, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, formulaireMessage, client } from './abonnes-client.js';
 import { memoriserVolet } from './navigation.js';
+import { tr } from './langue.js';
 
 const VILLE = document.body.dataset.ville;
 let sess = null;
@@ -29,11 +30,11 @@ function boutonsEntete() {
   const mesDossiers = document.createElement('a');
   mesDossiers.className = 'ab-mes-dossiers';
   mesDossiers.href = '/mes-dossiers';
-  mesDossiers.innerHTML = 'Mes dossiers <span class="ab-compte" hidden></span>';
+  mesDossiers.innerHTML = `${tr('Mes dossiers', 'My files')} <span class="ab-compte" hidden></span>`;
   const abonnement = document.createElement('a');
   abonnement.className = 'ab-lien-abonnement';
   abonnement.href = `/abonnement?ville=${encodeURIComponent(VILLE)}`;
-  abonnement.textContent = 'Abonnement';
+  abonnement.textContent = tr('Abonnement', 'Subscription');
   const outils = document.querySelector('header nav .outils');
   const repere = document.querySelector('header .taille-texte') ?? document.querySelector('header .bascule-theme');
   if (outils) outils.prepend(mesDossiers, abonnement);
@@ -58,8 +59,10 @@ function etatEtoile(bouton) {
   const projet = bouton.dataset.titre;
   bouton.classList.toggle('actif', suivi);
   bouton.setAttribute('aria-pressed', String(suivi));
-  bouton.innerHTML = `<span aria-hidden="true">${suivi ? '★' : '☆'}</span> Projet : ${echapper(projet)}`;
-  bouton.title = suivi ? `Projet suivi — cliquer pour ne plus suivre « ${projet} »` : `Suivre toutes les décisions du projet « ${projet} »`;
+  bouton.innerHTML = `<span aria-hidden="true">${suivi ? '★' : '☆'}</span> ${tr('Projet :', 'Project:')} ${echapper(projet)}`;
+  bouton.title = suivi
+    ? tr(`Projet suivi — cliquer pour ne plus suivre « ${projet} »`, `Project followed — click to stop following "${projet}"`)
+    : tr(`Suivre toutes les décisions du projet « ${projet} »`, `Follow all decisions of the project "${projet}"`);
   bouton.setAttribute('aria-label', bouton.title);
 }
 
@@ -115,7 +118,7 @@ async function peupler(zone) {
   if (!zone || !VILLE || zone.dataset.pret === '1') return;
   zone.dataset.pret = '1';
   zone.innerHTML = `<div class="ab-connexion" hidden></div><div class="ab-detail-zone"></div>
-    <div class="ab-signaler"><button type="button" class="ab-signaler-lien" data-action="signaler">Signaler une erreur dans cette fiche</button><div class="ab-message-boite" hidden></div></div>`;
+    <div class="ab-signaler"><button type="button" class="ab-signaler-lien" data-action="signaler">${tr('Signaler une erreur dans cette fiche', 'Report an error in this item')}</button><div class="ab-message-boite" hidden></div></div>`;
   const reponse = await chargerDetail(VILLE, zone.dataset.dossier, sess);
   // Sans détail : un abonné peut le demander, si le résumé a trouvé un montant (data-montant).
   zone.querySelector('.ab-detail-zone').innerHTML = rendreDetail(reponse, VILLE) || (zone.dataset.montant === '1' ? rendreDemande(reponse) : '');
@@ -124,9 +127,9 @@ async function peupler(zone) {
 function formulaireConnexion(boite, message) {
   boite.hidden = false;
   boite.innerHTML = `<p>${echapper(message)}</p>
-    <form class="ab-form"><input type="email" required placeholder="Votre courriel" autocomplete="email">
-    <button type="submit" class="ab-bouton">Recevoir le lien de connexion</button></form>
-    <p class="ab-note">Un seul lien peut être envoyé toutes les 5 minutes. Pensez à vérifier vos courriels indésirables.</p>
+    <form class="ab-form"><input type="email" required placeholder="${tr('Votre courriel', 'Your email')}" autocomplete="email">
+    <button type="submit" class="ab-bouton">${tr('Recevoir le lien de connexion', 'Get the sign-in link')}</button></form>
+    <p class="ab-note">${tr('Un seul lien peut être envoyé toutes les 5 minutes. Pensez à vérifier vos courriels indésirables.', 'Only one link can be sent every 5 minutes. Check your spam folder.')}</p>
     <p class="ab-note ab-etat" aria-live="polite"></p>`;
   boite.querySelector('input').focus();
   boite.querySelector('form').addEventListener('submit', async (e) => {
@@ -135,13 +138,15 @@ function formulaireConnexion(boite, message) {
     const bouton = boite.querySelector('button');
     const etat = boite.querySelector('.ab-etat');
     bouton.disabled = true;
-    etat.textContent = 'Envoi…';
+    etat.textContent = tr('Envoi…', 'Sending…');
     const erreur = await envoyerLien(champ.value.trim());
     if (erreur) {
       bouton.disabled = false;
-      etat.textContent = erreur.code === 'over_email_send_rate_limit' ? 'Un lien a déjà été envoyé il y a moins de 5 minutes — vérifiez votre boîte courriel (et les indésirables), ou réessayez dans quelques minutes.' : 'Une erreur est survenue. Réessayez.';
+      etat.textContent = erreur.code === 'over_email_send_rate_limit'
+        ? tr('Un lien a déjà été envoyé il y a moins de 5 minutes — vérifiez votre boîte courriel (et les indésirables), ou réessayez dans quelques minutes.', 'A link was already sent less than 5 minutes ago — check your inbox (and spam), or try again in a few minutes.')
+        : tr('Une erreur est survenue. Réessayez.', 'Something went wrong. Try again.');
     } else {
-      etat.textContent = `Lien envoyé à ${champ.value.trim()}. Ouvrez-le pour revenir ici, connecté.`;
+      etat.textContent = tr(`Lien envoyé à ${champ.value.trim()}. Ouvrez-le pour revenir ici, connecté.`, `Link sent to ${champ.value.trim()}. Open it to come back here, signed in.`);
     }
   });
 }
@@ -173,7 +178,7 @@ document.addEventListener('click', async (e) => {
   if (signaler) {
     const zone = signaler.closest('.ab-fiche');
     if (!sess) {
-      formulaireConnexion(zone.querySelector('.ab-connexion'), 'Connectez-vous pour signaler une erreur : on vous envoie un lien par courriel, sans mot de passe.');
+      formulaireConnexion(zone.querySelector('.ab-connexion'), tr('Connectez-vous pour signaler une erreur : on vous envoie un lien par courriel, sans mot de passe.', 'Sign in to report an error: we email you a link, no password needed.'));
       return;
     }
     signaler.hidden = true;
@@ -195,8 +200,8 @@ document.addEventListener('click', async (e) => {
     formulaireConnexion(
       zone.querySelector('.ab-connexion'),
       etoile.dataset.titre
-        ? `Connectez-vous pour suivre le projet « ${etoile.dataset.titre} » et retrouver toutes ses décisions dans « Mes dossiers ».`
-        : 'Connectez-vous pour suivre ce projet et le retrouver dans « Mes dossiers ».'
+        ? tr(`Connectez-vous pour suivre le projet « ${etoile.dataset.titre} » et retrouver toutes ses décisions dans « Mes dossiers ».`, `Sign in to follow the project "${etoile.dataset.titre}" and find all its decisions in "My files".`)
+        : tr('Connectez-vous pour suivre ce projet et le retrouver dans « Mes dossiers ».', 'Sign in to follow this project and find it in "My files".')
     );
     return;
   }
@@ -209,7 +214,7 @@ document.addEventListener('click', async (e) => {
   etoile.disabled = false;
   if (erreur) {
     console.error(erreur);
-    etoile.title = "Impossible d'enregistrer — réessayez";
+    etoile.title = tr("Impossible d'enregistrer — réessayez", "Couldn't save — try again");
     return;
   }
   if (dejaSuivi) suivis.delete(cle(VILLE, cible.dossier));

@@ -5,6 +5,9 @@
 // téléchargement de Supabase — la marque du volet et le bouton de retour sont en place dès
 // l'affichage, sans clignoter.
 
+import { EN, tr, traduirePage, pastilleLangue, compterPageEn, languePrete, PAGE_BILINGUE } from './langue.js';
+export { EN, tr } from './langue.js';
+
 // Les villes couvertes : clé du sous-dossier → nom. La marque d'un volet en découle
 // (« DossierVilleDeQuébec »).
 export const VILLES = { quebec: 'Québec', montreal: 'Montréal' };
@@ -33,10 +36,10 @@ export function dernierVolet() {
 // ailleurs ou sur Échap. Une ville ajoutée à VILLES y apparaît toute seule.
 export function menuVilles(details, villeActuelle) {
   if (!details) return;
-  details.innerHTML = `<summary>${villeActuelle ? `<span class="ab-villes-libelle">Ville : </span>${echapper(VILLES[villeActuelle])}` : 'Choisir une ville'}</summary>
+  details.innerHTML = `<summary>${villeActuelle ? `<span class="ab-villes-libelle">${tr('Ville : ', 'City: ')}</span>${echapper(VILLES[villeActuelle])}` : tr('Choisir une ville', 'Choose a city')}</summary>
     <ul class="ab-villes-menu">
       ${Object.entries(VILLES).map(([v, nom]) => `<li><a href="/${v}/"${v === villeActuelle ? ' aria-current="true"' : ''}>${echapper(nom)}</a></li>`).join('')}
-      <li class="ab-villes-dq"><a href="/">DossierQuébec <span>(provincial)</span></a></li>
+      <li class="ab-villes-dq"><a href="/">DossierQuébec <span>(${tr('provincial', 'Québec province')})</span></a></li>
     </ul>`;
   document.addEventListener('click', (e) => {
     if (details.open && !details.contains(e.target)) details.open = false;
@@ -53,7 +56,9 @@ export function menuVilles(details, villeActuelle) {
 // (<script type="module" src="/commun/entete-volet.js">), à part de Supabase pour ne pas attendre.
 export function enteteVolet() {
   const ville = Object.hasOwn(VILLES, document.body.dataset.ville ?? '') ? document.body.dataset.ville : null;
+  traduirePage();
   menuVilles(document.querySelector('#villes'), ville);
+  if (PAGE_BILINGUE) document.querySelector('#villes')?.after(pastilleLangue());
   // Sur cellulaire, le menu en haut à droite passerait seul sur une ligne : un second exemplaire
   // prend place dans la ligne des outils (à la place d'« Abonnement », masqué là). Le CSS n'en
   // montre qu'un des deux selon la largeur.
@@ -63,7 +68,12 @@ export function enteteVolet() {
     mobile.className = 'ab-villes ab-villes-mobile';
     outils.prepend(mobile);
     menuVilles(mobile, ville);
+    // Sur cellulaire, la ligne des outils est déjà pleine : la pastille de langue va au bout des liens.
+    const externe = document.querySelector('header nav a.externe');
+    if (PAGE_BILINGUE) (externe ? externe.after(pastilleLangue('ab-langue-mobile')) : mobile.after(pastilleLangue('ab-langue-mobile')));
   }
+  compterPageEn();
+  languePrete();
 }
 
 // L'en-tête des pages communes. Venue d'un volet (mémorisé, ou ?ville=) : la marque du volet
@@ -71,6 +81,7 @@ export function enteteVolet() {
 // Puis les villes, la taille du texte et le thème — les mêmes réglages (clés dvq:zoom et
 // dvq:theme) que dans les volets.
 export function enteteCommune() {
+  traduirePage();
   const ville = new URLSearchParams(location.search).get('ville');
   // Une ville demandée dans l'adresse l'emporte sur la dernière visitée.
   const cible = Object.hasOwn(VILLES, ville ?? '') ? ville : dernierVolet();
@@ -82,13 +93,20 @@ export function enteteCommune() {
     document.title = document.title.replace(/— DossierQuébec$/, `— DossierVilleDe${VILLES[cible]}`);
   }
   menuVilles(document.querySelector('#villes'), cible);
+  // La pastille de langue : à côté du menu des villes, ou au bout de la ligne du logo (Mes dossiers
+  // n'a pas de menu des villes).
+  const villes = document.querySelector('#villes');
+  if (villes) villes.after(pastilleLangue());
+  else document.querySelector('.ab-haut-ligne')?.append(pastilleLangue('ab-langue-seule'));
+  compterPageEn();
+  languePrete();
 
   const outils = document.querySelector('#outils');
   if (!outils) return;
-  outils.innerHTML = `<div class="ab-taille" role="group" aria-label="Taille du texte">
-      <button type="button" data-zoom="-10" aria-label="Réduire le texte">A−</button>
+  outils.innerHTML = `<div class="ab-taille" role="group" aria-label="${tr('Taille du texte', 'Text size')}">
+      <button type="button" data-zoom="-10" aria-label="${tr('Réduire le texte', 'Smaller text')}">A−</button>
       <span aria-live="polite"></span>
-      <button type="button" data-zoom="10" aria-label="Agrandir le texte">A+</button>
+      <button type="button" data-zoom="10" aria-label="${tr('Agrandir le texte', 'Larger text')}">A+</button>
     </div>
     <button type="button" class="ab-theme" aria-pressed="false"></button>`;
   const pct = outils.querySelector('.ab-taille span');
@@ -110,7 +128,7 @@ export function enteteCommune() {
   const themeActuel = () => document.documentElement.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair');
   const theme = (t) => {
     document.documentElement.dataset.theme = t;
-    const etiquette = t === 'sombre' ? 'Passer au thème clair' : 'Passer au thème sombre';
+    const etiquette = t === 'sombre' ? tr('Passer au thème clair', 'Switch to light theme') : tr('Passer au thème sombre', 'Switch to dark theme');
     bouton.title = etiquette;
     bouton.setAttribute('aria-label', etiquette);
     bouton.setAttribute('aria-pressed', String(t === 'sombre'));
@@ -129,7 +147,7 @@ export function boutonRetourEnHaut() {
   const bouton = document.createElement('button');
   bouton.type = 'button';
   bouton.className = 'ab-retour-haut';
-  bouton.setAttribute('aria-label', 'Revenir en haut de la page');
+  bouton.setAttribute('aria-label', tr('Revenir en haut de la page', 'Back to top'));
   bouton.textContent = '↑';
   document.body.appendChild(bouton);
   const majVisible = () => bouton.classList.toggle('visible', window.scrollY > 600);

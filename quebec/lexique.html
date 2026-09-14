@@ -6,8 +6,8 @@
 <link rel="icon" type="image/svg+xml" href="/commun/icone.svg">
 <!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
 <meta name="robots" content="noindex, nofollow">
-<title>Lexique du vocabulaire municipal — DossierVilleDeQuébec</title>
-<meta name="description" content="Résolution, sommaire décisionnel, avis de motion, dérogation mineure, ville reconstituée : le vocabulaire des décisions de la Ville de Québec, expliqué et chiffré sur les documents officiels.">
+<title data-en="Glossary of municipal terms — DossierVilleDeQuébec">Lexique du vocabulaire municipal — DossierVilleDeQuébec</title>
+<meta data-en-content="Résolution, sommaire décisionnel, avis de motion, dérogation mineure, ville reconstituée: the vocabulary of City of Québec decisions, explained in English." name="description" content="Résolution, sommaire décisionnel, avis de motion, dérogation mineure, ville reconstituée : le vocabulaire des décisions de la Ville de Québec, expliqué et chiffré sur les documents officiels.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
@@ -22,6 +22,9 @@
       document.documentElement.dataset.theme = t;
       var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
       if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+      // Anglais choisi (commun/langue.js) : page cachée le temps de traduire, 1,5 s au plus.
+      var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('dvq:langue');
+      if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.classList.add('dvq-en'); setTimeout(function () { document.documentElement.classList.add('dvq-pret'); }, 1500); }
     } catch (e) {}
   })();
 </script>
@@ -34,25 +37,25 @@
   <div class="contenu">
     <div class="titre-ligne">
       <a href="./"><h1>Dossier<span class="marque">VilleDeQuébec</span></h1></a>
-      <a class="retour-dq" href="https://dossierquebec.ca/" title="Retour à DossierQuébec" aria-label="Retour à DossierQuébec">DQ</a>
+      <a data-en-title="Back to DossierQuébec" data-en-aria-label="Back to DossierQuébec" class="retour-dq" href="https://dossierquebec.ca/" title="Retour à DossierQuébec" aria-label="Retour à DossierQuébec">DQ</a>
       <details class="ab-villes" id="villes"></details>
     </div>
-    <p class="sous-titre">
+    <p data-en="The City of Québec's decisions, made readable. Public data, taken as is from the City's decision-document portal." class="sous-titre">
       Les décisions de la Ville de Québec, lisibles. Données publiques, reprises telles quelles
       du portail des documents décisionnels de la Ville.
     </p>
     <nav>
-      <a href="./">Accueil</a>
-      <a href="decisions.html">Décisions</a>
-      <a href="votes.html">Votes nominatifs</a>
-      <a href="conseil.html">Conseil municipal</a>
-      <a href="lexique.html" aria-current="page">Lexique</a>
-      <a href="https://www.ville.quebec.qc.ca/" class="externe" target="_blank" rel="noopener">Ville de Québec <span aria-hidden="true">↗</span><span class="sr-only"> (site officiel, nouvel onglet)</span></a>
+      <a data-en="Home" href="./">Accueil</a>
+      <a data-en="Decisions" href="decisions.html">Décisions</a>
+      <a data-en="Recorded votes" href="votes.html">Votes nominatifs</a>
+      <a data-en="City Council" href="conseil.html">Conseil municipal</a>
+      <a data-en="Glossary" href="lexique.html" aria-current="page">Lexique</a>
+      <a data-en="Ville de Québec <span aria-hidden=&quot;true&quot;>↗</span><span class=&quot;sr-only&quot;> (official site, new tab)</span>" href="https://www.ville.quebec.qc.ca/" class="externe" target="_blank" rel="noopener">Ville de Québec <span aria-hidden="true">↗</span><span class="sr-only"> (site officiel, nouvel onglet)</span></a>
       <div class="outils">
-        <div class="taille-texte" role="group" aria-label="Taille du texte">
-          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+        <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
+          <button data-en-aria-label="Smaller text" type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
           <span id="texte-pct" aria-live="polite">100%</span>
-          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+          <button data-en-aria-label="Larger text" type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
         </div>
         <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
                 title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
@@ -62,16 +65,16 @@
 </header>
 
 <main class="contenu">
-  <div id="chargement" class="avis">Chargement des données…</div>
+  <div data-en="Loading data…" id="chargement" class="avis">Chargement des données…</div>
 
-  <h2 class="page">Lexique</h2>
-  <p class="chapeau">
+  <h2 data-en="Glossary" class="page">Lexique</h2>
+  <p data-en="The official documents are in French, and the vocabulary of municipal decisions is opaque out of habit, not necessity. Here is what the French terms you'll see on this site mean." class="chapeau">
     Le vocabulaire des décisions municipales est opaque par habitude, pas par nécessité. Voici ce
     que veulent dire les mots que vous croisez sur ce site.
   </p>
 
   <div class="barre-outils">
-    <input type="search" id="rech-lexique" placeholder="Chercher un terme…">
+    <input data-en-placeholder="Search for a term…" type="search" id="rech-lexique" placeholder="Chercher un terme…">
   </div>
   <p class="compte" id="compte-lexique"></p>
   <div id="liste-lexique"></div>
@@ -79,7 +82,7 @@
 
 <footer>
   <div class="contenu">
-    <p>Site citoyen indépendant. Aucun lien avec la Ville de Québec, aucun caractère officiel.
+    <p data-en="Independent citizen site. No connection with the City of Québec, no official status. If anything differs, the original PDF document prevails. <a href=&quot;sources.html&quot;>Sources</a>.">Site citoyen indépendant. Aucun lien avec la Ville de Québec, aucun caractère officiel.
     En cas d'écart, le document PDF d'origine fait foi. <a href="sources.html">Sources</a>.</p>
   </div>
 </footer>

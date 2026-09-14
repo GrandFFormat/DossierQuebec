@@ -430,6 +430,45 @@ le reste de 2026 (~845 dossiers : ~110 $ au lieu de ~235 $) ; l'étape du matin 
 `lireEtVerifier(client, doc, montantResume, { effortExtraction })` fait un document sans rien
 écrire, et chaque détail garde ses `jetons` pour mesurer.
 
+## La version anglaise (étape 1, 14 sept. 2026)
+
+Le français reste la langue par défaut et celle des documents officiels. La pastille **EN** (à côté
+du menu des villes ; sur cellulaire, au bout des liens) bascule le volet Québec et les pages
+communes en anglais ; le choix est gardé (`localStorage` `dvq:langue`) et `?lang=en` l'impose dans
+un lien. Tout passe par `commun/langue.js` :
+
+- **HTML des pages** : `data-en="…"` remplace le contenu d'un élément (et `data-en-placeholder`,
+  `data-en-title`, `data-en-aria-label`, `data-en-content`), appliqué par `traduirePage()` depuis
+  `navigation.js`. Le script en ligne de chaque page cache la page le temps de traduire (1,5 s au
+  plus), pour ne pas montrer le français une fraction de seconde.
+- **JavaScript** : `tr('français', 'English')` dans `assets/app.js`, `commun/abonnes.js`,
+  `commun/abonnes-client.js`, `mes-dossiers.html`, `abonnement.html`. Dates (« Sept. 11, 2026 ») et
+  nombres (« 4,843 ») au format anglais.
+- **Libellés de la Ville** : `assets/libelles-en.js` — types de documents, instances (« Conseil de
+  l'Arrondissement de Beauport » → « Borough Council — Beauport »), sujets, résultats, rôles. Les
+  noms propres restent en français.
+- **Résumés IA** : `scrapers/traductions.js` traduit les puces françaises (pas les PDF) dans
+  `data/resumes-en.json`. **Garde-fou** : chaque nombre du français doit se retrouver dans
+  l'anglais, séparateurs retirés (« 5 948 217 $ » = « $5,948,217 ») ; sinon la traduction est
+  refusée et la page garde le français (« summary not yet translated »). Rattrapage des 1 500
+  résumés de 2026 en lot (`--batch`, ~10 $ US) ; ensuite `refresh.js` traduit les nouveaux chaque
+  matin (`--plafond=150`, ~1,4 ¢ chacun, ~3 $ par mois). Mes dossiers superpose ces puces à celles
+  des fichiers de projets, de l'agenda et de l'année, en gardant les françaises (`pucesFr`) pour la
+  recherche de mots-clés et d'organismes, puisque les décisions sont en français.
+- **Lexique** : `scrapers/lexique-en.js` → `data/lexique-en.json` (un appel, refait seulement si le
+  lexique français change) ; le terme reste en français, suivi de son équivalent anglais.
+- **Pas encore traduits (étape 2)** : titres et descriptions des projets, récapitulatifs « Où en est
+  le projet », contenu du détail de l'argent (ses libellés le sont), courriels d'alerte. Les objets
+  des décisions restent les titres officiels, en français.
+- **Montréal** : `VOLETS_EN` dans `langue.js` ne contient que `quebec`. Sur un volet absent de la
+  liste, la page reste en français même si l'anglais a été choisi, et la pastille n'apparaît pas.
+  Pour l'ajouter : traduire ses pages et son `app.js` de la même façon, puis l'ajouter à la liste.
+
+**Mesurer si ça vaut la peine** (Vercel → Analytics → Events ; les événements personnalisés
+demandent le forfait Pro) : `langue_choisie` { vers, page } à chaque clic sur la pastille, et
+`page_en` { page } à chaque page vue en anglais. Rapporté aux pages vues du volet, ça dit quelle part
+des visiteurs lit en anglais, et sur quelles pages.
+
 ## La carte des districts
 
 Contours tirés du jeu « Districts électoraux » de la Ville sur Données Québec, en **CC-BY 4.0** —
