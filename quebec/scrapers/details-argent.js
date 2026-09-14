@@ -161,7 +161,7 @@ function preparerTexte(contenu) {
 }
 
 // Même dérive que pour les résumés : le modèle glisse parfois des \uXXXX littéraux.
-function decoder(v) {
+export function decoder(v) {
   // Avec ou sans l'antislash (« é » comme « u00e9 ») ; sans, seulement les plages des accents
   // latins et de la ponctuation typographique.
   if (typeof v === 'string') {
@@ -190,8 +190,8 @@ function decoder(v) {
 export const VERSION_VERIFICATION = 2;
 
 const sansAccents = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '');
-const compacter = (s) => sansAccents(String(s)).toLowerCase().replace(/[\s  ]/g, '');
-const nombresDe = (s) =>
+export const compacter = (s) => sansAccents(String(s)).toLowerCase().replace(/[\s  ]/g, '');
+export const nombresDe = (s) =>
   (String(s).match(/\d[\d   ]*(?:[,.]\d+)?/g) ?? [])
     .map((t) => t.replace(/[\s  ]/g, '').replace(/[.,]$/, '').replace('.', ','))
     .filter(Boolean);
@@ -312,7 +312,7 @@ export async function chargerDetails() {
 
 // Un appel en streaming : à effort maximal la réflexion peut être longue, et la réponse
 // complète ne doit pas se heurter au délai d'une requête simple.
-async function appeler(client, { system, outil, effort, texte }) {
+export async function appeler(client, { system, outil, effort, texte }) {
   const flux = client.beta.messages.stream({
     model: MODELE,
     max_tokens: 64000,

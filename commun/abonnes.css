@@ -166,3 +166,51 @@
 .ab-page .ab-suggestion { display: flex; flex-direction: column; margin-bottom: 0; }
 .ab-page .ab-suggestion .ab-liens { margin-top: auto; padding-top: 10px; align-items: center; }
 .ab-page .ab-derniere { font-size: 14px; margin: 0; }
+
+/* Un projet ouvert : chiffres, récapitulatif, graphiques. */
+.ab-page .ab-tuiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 16px; }
+.ab-page .ab-tuile { background: var(--fond-2); border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; }
+.ab-page .ab-tuile strong { font-size: 24px; line-height: 1.1; letter-spacing: -.02em; }
+.ab-page .ab-tuile span { font-size: 12.5px; color: var(--doux); }
+.ab-page .ab-tuile-attente { background: var(--accent-fond); }
+.ab-page .ab-tuile-attente strong { color: var(--accent-encre); }
+
+.ab-page .ab-recap { border: 1px solid var(--ligne); border-left: 4px solid var(--accent); border-radius: 8px; padding: 14px 16px; margin-bottom: 16px; }
+.ab-page .ab-en-bref { font-size: 15.5px; margin: 0 0 14px; }
+.ab-page .ab-chrono { list-style: none; margin: 0 0 12px; padding: 0 0 0 18px; border-left: 2px solid var(--ligne-forte); }
+.ab-page .ab-chrono li { position: relative; padding: 0 0 14px 4px; }
+.ab-page .ab-chrono li::before {
+  content: ""; position: absolute; left: -25px; top: 5px; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--carte); border: 2px solid var(--accent);
+}
+.ab-page .ab-chrono li:last-child { padding-bottom: 2px; }
+.ab-page .ab-chrono li:last-child::before { background: var(--accent); }
+.ab-page .ab-chrono-periode { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--doux); }
+.ab-page .ab-chrono-titre { font-weight: 800; font-size: 15px; margin: 1px 0 2px; }
+.ab-page .ab-chrono p { margin: 0 0 4px; font-size: 14.5px; }
+.ab-page .ab-refs { display: inline-flex; flex-wrap: wrap; gap: 4px; }
+.ab-page .ab-ref {
+  font-size: 11.5px; font-weight: 600; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; text-decoration: none;
+  color: var(--accent-encre); background: var(--accent-fond); border-radius: 4px; padding: 1px 6px;
+}
+.ab-page .ab-ref:hover { text-decoration: underline; }
+.ab-page .ab-surveiller { background: var(--fond-2); border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; }
+.ab-page .ab-surveiller ul { margin: 0; padding-left: 18px; font-size: 14.5px; }
+.ab-page .ab-surveiller li { margin: 0 0 6px; }
+
+.ab-page .ab-graphiques { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px 24px; }
+.ab-page .ab-mois { display: flex; align-items: flex-end; gap: 4px; height: 130px; padding-top: 4px; }
+.ab-page .ab-mois-col { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; min-width: 0; }
+.ab-page .ab-mois-barre { width: 100%; max-width: 28px; min-height: 2px; background: var(--accent); border-radius: 3px 3px 0 0; }
+.ab-page .ab-mois-n { font-size: 11px; color: var(--doux); line-height: 1.4; }
+.ab-page .ab-mois-nom { font-size: 11px; color: var(--doux); border-top: 1px solid var(--ligne); width: 100%; text-align: center; padding-top: 2px; }
+.ab-page .ab-barres { list-style: none; margin: 0; padding: 0; }
+.ab-page .ab-barres li { display: grid; grid-template-columns: minmax(90px, 40%) 1fr 28px; align-items: center; gap: 8px; font-size: 13.5px; margin: 0 0 6px; }
+.ab-page .ab-barre-nom { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ab-page .ab-barre { height: 10px; background: var(--fond-2); border-radius: 5px; overflow: hidden; }
+.ab-page .ab-barre span { display: block; height: 100%; border-radius: 5px; }
+.ab-page .ab-barre-n { text-align: right; color: var(--doux); font-variant-numeric: tabular-nums; }
+
+.ab-page details.ab-toutes { margin: 4px 0 12px; }
+.ab-page details.ab-toutes > summary { cursor: pointer; font-weight: 800; font-size: 14.5px; padding: 6px 0; }
+.ab-page details.ab-toutes[open] > summary { margin-bottom: 4px; }
