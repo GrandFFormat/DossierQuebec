@@ -28,7 +28,7 @@
 
   <main>
     <h1>Mes dossiers</h1>
-    <p class="ab-chapeau">Les dossiers que vous suivez, toutes villes confondues. Cliquez sur un dossier pour l'ouvrir ici : son résumé, son parcours d'une instance à l'autre et le détail de l'argent. Pour en ajouter un, ouvrez une décision dans un volet et cliquez « Suivre ce dossier ».</p>
+    <p class="ab-chapeau">Les projets que vous suivez, toutes villes confondues. Cliquez sur un projet pour voir ses décisions ici, les plus récentes d'abord. Pour en ajouter un, choisissez-le plus bas, ou cliquez « Projet : … » sur une décision dans un volet.</p>
     <div id="compte"></div>
     <div id="liste"><p class="ab-vide">Chargement…</p></div>
     <div id="pourquoi"></div>
@@ -273,7 +273,7 @@
     pourquoi(abonne);
     suggestions(s, new Set(suivis.map((x) => `${x.ville}|${x.dossier_id}`)));
     if (!suivis.length) {
-      $('#liste').innerHTML = `<p class="ab-vide">Vous ne suivez aucun dossier pour l'instant. Suivez un des projets ci-dessous, ou ouvrez une décision sur <a class="ab-lien" href="/quebec/decisions.html">Québec</a> ou <a class="ab-lien" href="/montreal/decisions.html">Montréal</a> et cliquez « Suivre ».</p>`;
+      $('#liste').innerHTML = `<p class="ab-vide">Vous ne suivez aucun projet pour l'instant. Choisissez-en un ci-dessous.</p>`;
       return;
     }
     const parVille = new Map();

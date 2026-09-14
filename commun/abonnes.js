@@ -6,8 +6,9 @@
 //      Québec, le numéro de dossier à Montréal).
 //
 // Le module ajoute « Mes dossiers » dans l'en-tête de la page et, sur chaque fiche :
-//   - une étoile « Suivre ce dossier » dans la ligne des pastilles, cliquable sans déplier ;
-//   - la ligne des pastilles ne déplie plus la fiche : c'est le reste de la boîte qui le fait ;
+//   - si la décision fait partie d'un projet suivable (tramway, logement…), un bouton
+//     « ☆ Projet : … » dans la ligne des pastilles, cliquable sans déplier la fiche ;
+//     une décision seule ne se suit pas : ce qui a du sens à suivre, c'est le projet ;
 //   - à l'ouverture, le « Détail de l'argent » s'il existe — complet pour un abonné, aperçu et
 //     « Abonnez-vous » sinon. Rien n'est chargé tant qu'on n'ouvre pas une fiche.
 
@@ -37,62 +38,44 @@ function majCompte() {
   badge.textContent = suivis.size;
 }
 
-// ---------- les boutons de suivi ----------
-// Deux sortes : le dossier de la fiche (clé du volet) et les projets dont elle fait partie
-// (clé « projet:tramway »). Un dossier terminé n'a plus rien à suivre : la fiche affiche
-// « Décision finale » à la place — sauf s'il était déjà suivi, pour qu'on puisse le retirer.
-const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
-const dateCourte = (iso) => (iso ? `${Number(iso.slice(8, 10))} ${MOIS[Number(iso.slice(5, 7)) - 1]}` : '');
-
+// ---------- suivre un projet ----------
+// Seulement les projets dont la fiche fait partie (clé « projet:tramway »). Une décision seule
+// ne se suit pas : la plupart sont finales dès leur adoption, et celles qui ne le sont pas
+// avancent au sein de leur projet. Sans projet, la fiche n'a aucun bouton, et sa ligne de
+// pastilles se comporte comme avant (elle déplie la fiche).
 function etatEtoile(bouton) {
   const suivi = suivis.has(cle(VILLE, bouton.dataset.dossier));
   const projet = bouton.dataset.titre;
   bouton.classList.toggle('actif', suivi);
   bouton.setAttribute('aria-pressed', String(suivi));
-  const etoile = `<span aria-hidden="true">${suivi ? '★' : '☆'}</span>`;
-  if (projet) {
-    bouton.innerHTML = `${etoile} Projet : ${echapper(projet)}`;
-    bouton.title = suivi ? `Projet suivi — cliquer pour ne plus suivre « ${projet} »` : `Suivre toutes les décisions du projet « ${projet} »`;
-  } else {
-    bouton.innerHTML = `${etoile} ${suivi ? 'Suivi' : 'Suivre'}`;
-    const etape = bouton.dataset.etape ? ` Prochaine étape : ${bouton.dataset.etape}${bouton.dataset.echeance ? `, date cible ${dateCourte(bouton.dataset.echeance)}` : ''}.` : '';
-    bouton.title = suivi ? 'Dossier suivi — cliquer pour ne plus le suivre' : `Suivre ce dossier jusqu'à sa décision finale.${etape}`;
-  }
+  bouton.innerHTML = `<span aria-hidden="true">${suivi ? '★' : '☆'}</span> Projet : ${echapper(projet)}`;
+  bouton.title = suivi ? `Projet suivi — cliquer pour ne plus suivre « ${projet} »` : `Suivre toutes les décisions du projet « ${projet} »`;
   bouton.setAttribute('aria-label', bouton.title);
-}
-
-function pastilleFinale(zone) {
-  const final = document.createElement('span');
-  final.className = 'ab-final';
-  final.textContent = 'Décision finale';
-  final.title = `Ce dossier est terminé${zone.dataset.etape ? ` : adopté par ${zone.dataset.etape}` : ''}. Rien d'autre à venir sur cette décision.`;
-  return final;
 }
 
 function majEtoiles(dossier) {
   const selecteur = dossier ? `.ab-etoile[data-dossier="${CSS.escape(dossier)}"]` : '.ab-etoile';
-  for (const b of document.querySelectorAll(selecteur)) {
-    etatEtoile(b);
-    masquerSiInutile(b);
-  }
+  for (const b of document.querySelectorAll(selecteur)) etatEtoile(b);
 }
 
-// Chaque fiche de décision reçoit son étoile dès qu'elle apparaît (les listes sont redessinées
-// à chaque filtre, d'où l'observateur).
+// Chaque fiche reçoit ses boutons de projet dès qu'elle apparaît (les listes sont redessinées à
+// chaque filtre, d'où l'observateur).
 function equiper(fiche) {
   if (fiche.dataset.abPret) return;
+  fiche.dataset.abPret = '1';
   const zone = zoneDe(fiche);
   const meta = fiche.querySelector(':scope > summary .meta');
-  fiche.dataset.abPret = '1';
   if (!zone || !meta) return;
-  meta.classList.add('ab-meta-inerte');
-  const groupe = document.createElement('span');
-  groupe.className = 'ab-boutons';
-
   let projets = [];
   try {
     projets = JSON.parse(zone.dataset.projets || '[]');
   } catch {}
+  if (!projets.length) return;
+
+  // La ligne des pastilles porte un bouton : elle ne déplie plus la fiche (le reste de la boîte, oui).
+  meta.classList.add('ab-meta-inerte');
+  const groupe = document.createElement('span');
+  groupe.className = 'ab-boutons';
   for (const p of projets) {
     const b = document.createElement('button');
     b.type = 'button';
@@ -101,24 +84,7 @@ function equiper(fiche) {
     etatEtoile(b);
     groupe.append(b);
   }
-
-  const b = document.createElement('button');
-  b.type = 'button';
-  b.className = 'ab-etoile';
-  Object.assign(b.dataset, { dossier: zone.dataset.dossier, numero: zone.dataset.numero ?? '', objet: zone.dataset.objet ?? '', etape: zone.dataset.etape ?? '', echeance: zone.dataset.echeance ?? '' });
-  if (zone.dataset.statut === 'termine') {
-    // Terminé : « Décision finale », et le bouton seulement s'il faut pouvoir retirer un ancien suivi.
-    b.dataset.seulementSiSuivi = '1';
-    groupe.append(pastilleFinale(zone));
-  }
-  etatEtoile(b);
-  groupe.append(b);
   meta.append(groupe);
-  masquerSiInutile(b);
-}
-
-function masquerSiInutile(bouton) {
-  if (bouton.dataset.seulementSiSuivi) bouton.hidden = !suivis.has(cle(VILLE, bouton.dataset.dossier));
 }
 
 function equiperTout() {
@@ -197,7 +163,7 @@ document.addEventListener('click', async (e) => {
       zone.querySelector('.ab-connexion'),
       etoile.dataset.titre
         ? `Connectez-vous pour suivre le projet « ${etoile.dataset.titre} » et retrouver toutes ses décisions dans « Mes dossiers ».`
-        : 'Connectez-vous pour suivre ce dossier et le retrouver dans « Mes dossiers », peu importe la ville.'
+        : 'Connectez-vous pour suivre ce projet et le retrouver dans « Mes dossiers ».'
     );
     return;
   }
