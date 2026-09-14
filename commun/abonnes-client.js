@@ -81,6 +81,63 @@ export async function chargerDetail(ville, dossier, s) {
   }
 }
 
+// ---------- Nous écrire / Signaler une erreur ----------
+// Le serveur (api/message.js) exige une session : il en tire le courriel de la personne, note si
+// elle est abonnée, limite à 5 messages par 24 heures, garde le message et en envoie une copie.
+export const SUJETS_MESSAGE = { idee: 'Une idée', probleme: 'Un problème sur le site', erreur: 'Une erreur dans une donnée' };
+
+async function envoyerMessage(contenu) {
+  const s = await session();
+  if (!s) return 'session';
+  try {
+    const res = await fetch('/api/message', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${s.access_token}` },
+      body: JSON.stringify(contenu),
+    });
+    if (res.ok) return null;
+    return res.status === 429 ? 'limite' : res.status === 401 ? 'session' : 'erreur';
+  } catch {
+    return 'erreur';
+  }
+}
+
+// Dans « Mes dossiers », on choisit le sujet ; sous une fiche, sujet et numéro sont déjà remplis.
+export function formulaireMessage(boite, s, { sujet = 'idee', ville = null, numero = null, fixe = false } = {}) {
+  boite.hidden = false;
+  const question = fixe && sujet === 'erreur' ? `Qu'est-ce qui ne va pas${numero ? ` dans ${numero}` : ''} ?` : 'Votre message';
+  const exemple = sujet === 'erreur' ? 'Par exemple : le montant indiqué ne correspond pas à celui de la page 3 du PDF.' : '';
+  boite.innerHTML = `<form class="ab-message">
+    ${fixe ? '' : `<label>Sujet <select name="sujet">${Object.entries(SUJETS_MESSAGE).map(([k, v]) => `<option value="${k}"${k === sujet ? ' selected' : ''}>${v}</option>`).join('')}</select></label>`}
+    <label>${echapper(question)} <textarea name="message" required minlength="3" maxlength="4000" rows="5" placeholder="${echapper(exemple)}"></textarea></label>
+    <div><button type="submit" class="ab-bouton">Envoyer</button></div>
+    <p class="ab-note">Si une réponse est utile, elle vous arrivera à ${echapper(s.user.email)}.</p>
+    <p class="ab-note ab-etat" aria-live="polite"></p>
+  </form>`;
+  const form = boite.querySelector('form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const bouton = form.querySelector('button');
+    const etat = form.querySelector('.ab-etat');
+    bouton.disabled = true;
+    etat.textContent = 'Envoi…';
+    const choix = form.elements.sujet?.value ?? sujet;
+    const erreur = await envoyerMessage({ sujet: choix, message: form.elements.message.value.trim(), ville, numero, page: (location.pathname + location.search).slice(0, 300) });
+    if (!erreur) {
+      boite.innerHTML = '<p class="ab-merci">Merci, votre message est bien reçu.</p>';
+      mesurer('message_envoye', { sujet: choix, ville: ville ?? '' });
+      return;
+    }
+    bouton.disabled = false;
+    etat.textContent = {
+      limite: 'Vous avez déjà envoyé 5 messages dans les dernières 24 heures. Réessayez demain.',
+      session: 'Votre session a expiré. Reconnectez-vous, puis renvoyez le message.',
+      erreur: "L'envoi n'a pas fonctionné. Réessayez dans un moment.",
+    }[erreur];
+  });
+  return form;
+}
+
 const ligne = (etiquette, texte) => (texte ? `<li><strong>${echapper(etiquette)} :</strong> ${echapper(texte)}</li>` : '');
 
 export function rendreDetail(reponse, ville) {
