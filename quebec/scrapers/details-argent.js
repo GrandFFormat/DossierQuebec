@@ -154,7 +154,7 @@ const OUTIL = {
   },
 };
 
-function preparerTexte(contenu) {
+export function preparerTexte(contenu) {
   const t = (contenu ?? '').replace(/ /g, ' ').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim();
   if (t.length <= MAX_DEBUT + MAX_FIN) return t;
   return t.slice(0, MAX_DEBUT) + '\n\n[… partie centrale du document omise pour la longueur …]\n\n' + t.slice(-MAX_FIN);
@@ -337,6 +337,52 @@ export async function appeler(client, { system, outil, effort, texte }) {
   return { entree: decoder(bloc.input), usage: message.usage, modele: message.model };
 }
 
+// Un document : extraction, contrôle mécanique, contre-lecture. doc = { id, numero, date, texte
+// (ce qu'on envoie au modèle), texteIntegral (ce contre quoi on vérifie) }. N'écrit rien.
+export async function lireEtVerifier(client, doc, montantResume = null, { effortExtraction = 'max' } = {}) {
+  const document = `Sommaire décisionnel ${doc.numero}\n\n--- texte du document ---\n${doc.texte}`;
+  // 1. Extraction, à effort maximal : personne ne relira.
+  const extraction = await appeler(client, { system: CONSIGNE, outil: OUTIL, effort: effortExtraction, texte: document });
+  // 2. Contrôle mécanique contre le texte (on vérifie sur le texte intégral, pas l'extrait).
+  const mecanique = controleMecanique(extraction.entree, doc.texteIntegral);
+  // 3. Contre-lecture des champs qui restent.
+  const verification = await appeler(client, {
+    system: CONSIGNE_VERIFICATION,
+    outil: OUTIL_VERIFICATION,
+    effort: 'high',
+    texte: `${document}\n\n--- champs extraits à vérifier ---\n${JSON.stringify(mecanique.detail, null, 1)}`,
+  });
+  const final = retirerChamps(mecanique.detail, verification.entree.problemes);
+  if (!verification.entree.typeMontantExact) final.typeMontant = 'autre';
+  const utilisable = mecanique.utilisable && Boolean(final.enUnePhrase);
+  const tc = compacter(doc.texteIntegral);
+  const montantResumeVerifie = Boolean(montantResume) && nombresDe(montantResume).length > 0 && nombresDe(montantResume).every((n) => tc.includes(n));
+  const jetons = {
+    entree: extraction.usage.input_tokens + verification.usage.input_tokens,
+    sortie: extraction.usage.output_tokens + verification.usage.output_tokens,
+  };
+  return {
+    jetons,
+    detail: {
+      id: doc.id,
+      numero: doc.numero,
+      date: doc.date,
+      ...final,
+      modele: extraction.modele,
+      genereLe: new Date().toISOString(),
+      jetons,
+      verification: {
+        version: VERSION_VERIFICATION,
+        utilisable,
+        montantResume: montantResumeVerifie ? montantResume : null,
+        retiresMecanique: mecanique.retires,
+        retiresContreLecture: verification.entree.problemes,
+        typeMontantCorrige: !verification.entree.typeMontantExact,
+      },
+    },
+  };
+}
+
 // numeros : ['AP2026-271', …]. Renvoie la Map id → détail, cache compris.
 export async function extraireDetails(numeros, { concurrence = 3, force = false } = {}) {
   const cache = await chargerDetails();
@@ -370,44 +416,10 @@ export async function extraireDetails(numeros, { concurrence = 3, force = false 
     const lot = docs.slice(i, i + concurrence);
     const resultats = await Promise.allSettled(
       lot.map(async (doc) => {
-        const document = `Sommaire décisionnel ${doc.numero}\n\n--- texte du document ---\n${doc.texte}`;
-        // 1. Extraction, à effort maximal : personne ne relira.
-        const extraction = await appeler(client, { system: CONSIGNE, outil: OUTIL, effort: 'max', texte: document });
-        entree += extraction.usage.input_tokens;
-        sortie += extraction.usage.output_tokens;
-        // 2. Contrôle mécanique contre le texte (on vérifie sur le texte intégral, pas l'extrait).
-        const mecanique = controleMecanique(extraction.entree, doc.texteIntegral);
-        // 3. Contre-lecture des champs qui restent.
-        const verification = await appeler(client, {
-          system: CONSIGNE_VERIFICATION,
-          outil: OUTIL_VERIFICATION,
-          effort: 'high',
-          texte: `${document}\n\n--- champs extraits à vérifier ---\n${JSON.stringify(mecanique.detail, null, 1)}`,
-        });
-        entree += verification.usage.input_tokens;
-        sortie += verification.usage.output_tokens;
-        let final = retirerChamps(mecanique.detail, verification.entree.problemes);
-        if (!verification.entree.typeMontantExact) final.typeMontant = 'autre';
-        const utilisable = mecanique.utilisable && Boolean(final.enUnePhrase);
-        const montantResume = montantsResumes.get(doc.id) ?? null;
-        const tc = compacter(doc.texteIntegral);
-        const montantResumeVerifie = Boolean(montantResume) && nombresDe(montantResume).length > 0 && nombresDe(montantResume).every((n) => tc.includes(n));
-        return {
-          id: doc.id,
-          numero: doc.numero,
-          date: doc.date,
-          ...final,
-          modele: extraction.modele,
-          genereLe: new Date().toISOString(),
-          verification: {
-            version: VERSION_VERIFICATION,
-            utilisable,
-            montantResume: montantResumeVerifie ? montantResume : null,
-            retiresMecanique: mecanique.retires,
-            retiresContreLecture: verification.entree.problemes,
-            typeMontantCorrige: !verification.entree.typeMontantExact,
-          },
-        };
+        const { detail, jetons } = await lireEtVerifier(client, doc, montantsResumes.get(doc.id) ?? null);
+        entree += jetons.entree;
+        sortie += jetons.sortie;
+        return detail;
       })
     );
     resultats.forEach((r, j) => {

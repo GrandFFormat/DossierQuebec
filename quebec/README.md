@@ -364,18 +364,22 @@ détails jugés inutilisables, publiés comme repère mais jamais montrés) : en
 rien n'est relu ni repayé. Le workflow demande les secrets `SUPABASE_URL` et
 `SUPABASE_SERVICE_ROLE_KEY` ; sans eux, l'étape est sautée.
 
-**À faire : faire baisser le coût du détail (~0,28 $ US par dossier).** Pourquoi il coûte : le
-document entier (jusqu'à 40 000 caractères) est lu deux fois (extraction, puis contre-lecture),
-avec réflexion au maximum, sur Opus. Pistes, dans l'ordre, chacune validée avant d'être adoptée :
-1. API Batches (−50 %) pour l'étape du matin, et cache du document entre les deux lectures.
-2. Apprendre le gabarit des sommaires de la Ville : sur les ~75 détails vérifiés, repérer dans
-   quelle rubrique (objet, recommandation, impacts financiers, annexes…) se trouve chaque valeur
-   retenue, puis n'envoyer que ces rubriques.
-3. Extraire sans IA ce qui s'écrit toujours pareil (numéro d'appel d'offres, « plus TPS et TVQ »,
-   dates) ; garder l'IA pour la nature des montants et les tableaux aplatis.
-Validation : relancer la version allégée sur les dossiers déjà faits et comparer champ par champ ;
-ne l'adopter que si elle rend les mêmes valeurs. Objectif à confirmer : ~0,05 $ par dossier, ce qui
-rendrait envisageable de couvrir toute l'année.
+**Le coût du détail (~0,26-0,28 $ US par dossier) : ce qui a été mesuré le 14 sept. 2026.**
+D'où il vient : environ 40 % la lecture du document (deux fois : extraction et contre-lecture),
+60 % la réflexion du modèle (sortie, 5 fois plus chère que l'entrée). Deux pistes testées sur
+des dossiers déjà vérifiés, comparées champ par champ :
+- **Document allégé** (formulaire GPD1101R + passages d'annexe qui parlent d'argent, ~60 % du
+  texte ; étude préalable : montant, bénéficiaire, financement, durée presque toujours dans le
+  formulaire) : 0,235 $ par long dossier, mais des durées et des renouvellements perdus (ils
+  sont dans les annexes). **Écarté.**
+- **Effort de réflexion « high » au lieu de « max »**, document complet : même qualité (le piège
+  estimation/médiane d'AP2026-271 et AP2026-278 évité), mais 0,284 $ par dossier — le modèle
+  réfléchit presque autant. **Aucune économie.**
+Reste le vrai levier : l'**API Batches (−50 %)**, sans effet sur la qualité mais avec un délai
+(extraction puis contre-lecture = deux lots). Tout indiqué pour un rattrapage sans urgence, comme
+le reste de 2026 (~845 dossiers : ~110 $ au lieu de ~235 $) ; l'étape du matin reste synchrone.
+`lireEtVerifier(client, doc, montantResume, { effortExtraction })` fait un document sans rien
+écrire, et chaque détail garde ses `jetons` pour mesurer.
 
 ## La carte des districts
 
