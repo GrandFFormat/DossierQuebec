@@ -9,6 +9,8 @@
 #                      Sans lui, l'étape est sautée et le reste tourne.
 #   GPD_CONTACT        variable, facultative — ce que notre robot laisse comme contact dans
 #                      son User-Agent auprès de la Ville. À défaut : l'adresse du site.
+#   SUPABASE_URL,      secrets — le détail de l'argent des nouveaux dossiers (abonnés),
+#   SUPABASE_SERVICE_ROLE_KEY  publié dans Supabase. Sans eux, l'étape est sautée.
 
 name: Rafraîchissement quotidien — volet municipal
 
@@ -54,6 +56,10 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GPD_CONTACT: ${{ vars.GPD_CONTACT }}
+          # Détail de l'argent (réservé aux abonnés) : publié dans Supabase, qui dit aussi ce qui
+          # est déjà lu. Sans ces deux secrets, l'étape est sautée et le reste tourne.
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: npm run refresh
 
       # Seul quebec/data/ bouge. On rebase avant de pousser au cas où quelqu'un
