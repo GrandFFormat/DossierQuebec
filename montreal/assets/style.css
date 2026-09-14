@@ -173,7 +173,7 @@ nav .outils .taille-texte { margin-left: 0; }
 /* Cellulaire : l'en-tête ne doit pas repousser le contenu d'un écran entier. Le sous-titre
    ne reste que sur l'accueil, les onglets se resserrent, et les outils prennent leur ligne. */
 @media (max-width: 620px) {
-  .titre-ligne { padding-top: 16px; gap: 8px; }
+  .titre-ligne { padding-top: 16px; gap: 14px 10px; }
   h1 { font-size: 23px; }
   body:not([data-page="accueil"]) .sous-titre { display: none; }
   body:not([data-page="accueil"]) .titre-ligne { padding-bottom: 10px; }
