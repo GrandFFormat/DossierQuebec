@@ -178,11 +178,9 @@ nav a[aria-current="page"] { color: var(--entete-encre); border-bottom-color: va
 nav .outils { margin-left: auto; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
 nav .outils .taille-texte { margin-left: 0; }
 
-/* Quand le menu ne tient plus sur une ligne : deux lignes centrées, les onglets puis les outils. */
-@media (max-width: 1100px) {
-  nav { justify-content: center; }
-  nav .outils { flex-basis: 100%; justify-content: center; margin-left: 0; padding: 4px 0 10px; }
-}
+/* Le menu sur deux lignes centrées, à toutes les largeurs : les onglets, puis les outils. */
+nav { justify-content: center; }
+nav .outils { flex-basis: 100%; justify-content: center; margin-left: 0; padding: 4px 0 10px; }
 
 /* Cellulaire : l'en-tête ne doit pas repousser le contenu d'un écran entier. Le sous-titre
    ne reste que sur l'accueil, les onglets se resserrent, et les outils prennent leur ligne. */
