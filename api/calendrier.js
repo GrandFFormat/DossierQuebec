@@ -43,7 +43,7 @@ export function calendrierIcs(evenements, { tout = false } = {}) {
     'PRODID:-//DossierQuébec//Décisions attendues//FR',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
-    `X-WR-CALNAME:${texteIcs(tout ? 'Décisions attendues — toutes les villes' : 'Décisions attendues — mes projets')}`,
+    `X-WR-CALNAME:${texteIcs(tout ? 'Décisions attendues — tous les dossiers' : 'Décisions attendues — mes projets')}`,
     `X-WR-CALDESC:${texteIcs("Dates cibles écrites par la Ville dans ses sommaires décisionnels. Un dossier peut être reporté. DossierQuébec n'est pas un site de la Ville.")}`,
     'REFRESH-INTERVAL;VALUE=DURATION:P1D',
     'X-PUBLISHED-TTL:P1D',
