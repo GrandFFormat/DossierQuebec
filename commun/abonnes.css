@@ -86,11 +86,19 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-detail li { margin: 0 0 4px; }
 .ab-note { font-size: 12.5px; color: var(--doux, #5B6570); margin: 6px 0 0; }
 /* Demander un détail de l'argent manquant */
-.ab-demande { border: 1px dashed var(--ligne-forte, #C2CAD2); border-radius: 8px; padding: 10px 12px; margin-top: 4px; font-size: 14px; }
-.ab-demande p { padding: 0; background: none; border-radius: 0; } /* un volet stylise « details p » */
-.ab-demande .ab-demande-etat { margin: 0; color: var(--encre, #16191D); }
+/* Discret, dans le ton de « Signaler une erreur dans cette fiche » : une ligne grise et un lien. */
+.ab-demande { margin-top: 6px; font-size: 12.5px; color: var(--doux, #5B6570); }
+.ab-demande p { margin: 0; padding: 0; background: none; border-radius: 0; } /* un volet stylise « details p » */
+.ab-demande .ab-demande-etat { color: var(--doux, #5B6570); }
+.ab-demande .ab-demande-etat strong { color: var(--encre, #16191D); }
+.ab-demande-lien {
+  font: inherit; font-size: 12.5px; background: none; border: 0; padding: 0; cursor: pointer;
+  color: var(--doux, #5B6570); text-decoration: underline; text-underline-offset: 2px;
+}
+.ab-demande-lien:hover { color: var(--encre, #16191D); }
+.ab-demande-lien:disabled { opacity: .6; cursor: default; }
 .ab-bouton-second { font-size: 13px; padding: 6px 12px; color: var(--accent-encre, #076338); background: var(--accent-fond, #E6F6EC); border: 1px solid var(--accent, #0B8A4B); }
-.ab-demande-message:not(:empty) { display: inline-block; margin: 0 0 0 10px; }
+.ab-demande-message:not(:empty) { margin-left: 8px; }
 
 /* Nous écrire / Signaler une erreur */
 .ab-signaler { margin-top: 10px; }
