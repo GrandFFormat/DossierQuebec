@@ -30,6 +30,8 @@ language sql stable security definer set search_path = public as $$
   from public.bill_flags
   group by bill_id;
 $$;
+-- Postgres donne EXECUTE à PUBLIC à la création : on le retire, c'est réservé au serveur.
+revoke execute on function public.flag_counts_all() from public, anon, authenticated;
 grant execute on function public.flag_counts_all() to service_role;
 
 -- 3) État de campagne par projet challengé.
