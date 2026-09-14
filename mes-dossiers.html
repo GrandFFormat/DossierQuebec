@@ -38,6 +38,7 @@
     <p class="ab-chapeau">Les projets que vous suivez, toutes villes confondues. Cliquez sur un projet pour voir ses décisions ici, les plus récentes d'abord. Pour en ajouter un, choisissez-le plus bas, ou cliquez « Projet : … » sur une décision dans un volet.</p>
     <div id="compte"></div>
     <div id="alertes"></div>
+    <div id="ouverts"></div>
     <div id="liste"><p class="ab-vide">Chargement…</p></div>
     <div id="pourquoi"></div>
     <div id="suggestions"></div>
@@ -72,6 +73,7 @@
   function connexion() {
     $('#compte').innerHTML = '';
     alertes(null, false);
+    dossiersOuverts(null, false);
     $('#liste').innerHTML = `<div class="ab-carte">
       <h3>Connectez-vous</h3>
       <p>Un seul compte pour DossierQuébec et toutes les villes. On vous envoie un lien par courriel, sans mot de passe.</p>
@@ -149,7 +151,7 @@
           <br><span class="ab-note">Offert pour les dossiers avec un montant : ceux des grands projets suivis, et chaque nouveau dossier depuis le 15 septembre 2026. Les autres dossiers de 2026 ne l'ont pas encore.</span></li>
         <li><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : « tout ce que la Ville décide sur la 1re Avenue », « dans Limoilou », « sur le déneigement ». <span class="ab-note">(bientôt)</span></li>
         <li><strong>Suivre un organisme ou une entreprise</strong> : tous les contrats, subventions et ententes que la Ville lui accorde, avec les montants tels qu'écrits dans les documents. <span class="ab-note">(bientôt)</span></li>
-        <li><strong>Le calendrier des décisions attendues</strong> : quelle instance doit décider et à quelle date cible, tel que la Ville l'indique dans ses documents, avant la séance plutôt qu'après — à ajouter à votre agenda. <span class="ab-note">(bientôt)</span></li>
+        <li><strong>Les dossiers ouverts</strong> de chaque conseil : ce qui attend encore une décision, avec son résumé, et ce qui sera probablement présenté à la prochaine séance.</li>
         <li><strong>L'export en tableur</strong> (Excel ou CSV) des décisions d'un projet, d'un quartier ou d'une année, avec les montants vérifiés. <span class="ab-note">(bientôt)</span></li>`;
 
   // ---------- alertes par courriel (abonnés) ----------
@@ -189,6 +191,72 @@
         : res?.status === 429 ? "Trois courriels d'essai déjà envoyés dans les dernières 24 heures. Réessayez demain." : "L'envoi n'a pas fonctionné. Réessayez dans un moment.";
       mesurer('alertes_essai');
     });
+  }
+
+  // ---------- dossiers ouverts (abonnés) ----------
+  // Ce que chaque instance a sur la table : les dossiers préparés par l'administration et encore en
+  // attente d'une décision (/<ville>/data/attendues.json), avec leur résumé IA. Ceux qui ont une
+  // date cible à venir seront probablement présentés à la prochaine séance — jamais « seront ».
+  async function dossiersOuverts(s, abonne) {
+    const zone = $('#ouverts');
+    if (!s || !abonne) { zone.innerHTML = ''; return; }
+    const fichiers = await Promise.all(Object.keys(VILLES).map(async (ville) => [ville, await fetch(`/${ville}/data/attendues.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)]));
+    const tous = fichiers.flatMap(([ville, f]) => (f?.decisions ?? []).map((d) => ({ ...d, ville })));
+    if (!tous.length) { zone.innerHTML = ''; return; }
+    const auj = new Date().toISOString().slice(0, 10);
+    const plusieursVilles = new Set(tous.map((d) => d.ville)).size > 1;
+    const cleGroupe = (d) => (plusieursVilles ? `${d.ville}|${d.groupe}` : d.groupe);
+    const groupes = new Map();
+    for (const d of tous) {
+      const k = cleGroupe(d);
+      if (!groupes.has(k)) groupes.set(k, { ville: d.ville, nom: d.groupe, dossiers: [] });
+      groupes.get(k).dossiers.push(d);
+    }
+    const ordre = ['Conseil de la ville', "Conseil d'agglomération", 'Comité exécutif', "Conseils d'arrondissement"];
+    const rang = (nom) => (ordre.includes(nom) ? ordre.indexOf(nom) : 99);
+    const cles = [...groupes.keys()].sort((a, b) => groupes.get(a).ville.localeCompare(groupes.get(b).ville) || rang(groupes.get(a).nom) - rang(groupes.get(b).nom));
+    // Par défaut : l'instance dont la prochaine date cible est la plus proche, sinon la plus chargée.
+    const prochaine = (g) => g.dossiers.map((d) => d.echeance).filter((e) => e && e >= auj).sort()[0] ?? null;
+    let choisie = [...cles].sort((a, b) => (prochaine(groupes.get(a)) ?? '9999').localeCompare(prochaine(groupes.get(b)) ?? '9999') || groupes.get(b).dossiers.length - groupes.get(a).dossiers.length)[0];
+
+    const item = (d) => `<details class="ab-ouvert" name="ouverts">
+        <summary>
+          <div class="ab-meta"><span>${echapper(d.numero)}</span><span>préparé le ${dateFr(d.date)}</span>${d.echeance ? `<span class="ab-etiquette${d.echeance >= auj ? ' ab-en-cours' : ''}">date cible ${dateFr(d.echeance)}${d.echeance < auj ? ' (passée)' : ''}</span>` : ''}</div>
+          <div class="ab-ouvert-phrase">${echapper(d.phrase)}</div>
+        </summary>
+        <div class="ab-ouvert-corps">
+          ${d.puces.length ? `<ul>${d.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul><p class="ab-note">Résumé généré par IA à partir du sommaire décisionnel. Le document officiel fait foi.</p>` : '<p class="ab-note">Pas de résumé pour ce dossier : voir le document officiel.</p>'}
+          <div class="ab-liens">
+            ${d.pdf ? `<a href="${echapper(d.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}
+            <a href="/${echapper(d.ville)}/decisions.html?q=${encodeURIComponent(d.numero)}">Voir dans le volet ${echapper(VILLES[d.ville] ?? '')}</a>
+          </div>
+        </div>
+      </details>`;
+
+    const dessiner = () => {
+      const g = groupes.get(choisie);
+      const probables = g.dossiers.filter((d) => d.echeance && d.echeance >= auj).sort((a, b) => a.echeance.localeCompare(b.echeance));
+      const autres = g.dossiers.filter((d) => !(d.echeance && d.echeance >= auj)).sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
+      $('#ouverts-liste').innerHTML = `
+        ${probables.length ? `<div class="ab-bloc"><div class="ab-detail-titre">Probablement à la prochaine séance <span class="ab-etiquette ab-en-cours">${probables.length}</span></div>
+          <p class="ab-note" style="margin:0 0 8px">Date cible la plus proche écrite dans les sommaires : ${dateFr(prochaine(g))}.</p>
+          ${probables.map(item).join('')}</div>` : ''}
+        <div class="ab-bloc"><div class="ab-detail-titre">${probables.length ? 'Autres dossiers ouverts' : 'Dossiers ouverts'} <span class="ab-etiquette">${autres.length}</span></div>
+          ${probables.length ? '' : '<p class="ab-note" style="margin:0 0 8px">Aucun de ces dossiers n\'indique de date cible : on ne peut pas dire lesquels seront présentés à la prochaine séance.</p>'}
+          ${autres.length ? autres.map(item).join('') : '<p class="ab-note">Aucun autre dossier ouvert.</p>'}
+        </div>`;
+    };
+
+    zone.innerHTML = `<section class="ab-carte ab-ouverts">
+      <h2 style="margin-top:0">Dossiers ouverts</h2>
+      <p class="ab-chapeau" style="margin-bottom:12px">Les dossiers que l'administration a préparés et qui attendent encore une décision. Ceux qui ont une date cible à venir seront <strong>probablement</strong> présentés à la prochaine séance : ce n'est pas un ordre du jour, un dossier peut être reporté.</p>
+      <label class="ab-choix-instance">Instance
+        <select id="ouverts-instance">${cles.map((k) => { const g = groupes.get(k); return `<option value="${echapper(k)}"${k === choisie ? ' selected' : ''}>${plusieursVilles ? `${echapper(VILLES[g.ville] ?? g.ville)} — ` : ''}${echapper(g.nom)} (${g.dossiers.length})</option>`; }).join('')}</select>
+      </label>
+      <div id="ouverts-liste"></div>
+    </section>`;
+    dessiner();
+    $('#ouverts-instance').addEventListener('change', (e) => { choisie = e.target.value; dessiner(); mesurer('dossiers_ouverts_instance'); });
   }
 
   // ---------- nous écrire ----------
@@ -466,6 +534,7 @@
     $('#deconnexion').addEventListener('click', async () => { await client.auth.signOut(); });
 
     alertes(s, abonne).catch((e) => console.error('alertes :', e));
+    dossiersOuverts(s, abonne).catch((e) => console.error('dossiers ouverts :', e));
     ecrire(s);
     const suivis = await chargerSuivis();
     pourquoi({ connecte: true, abonne });

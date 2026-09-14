@@ -277,13 +277,14 @@ des sous-dossiers de dossierquebec.ca : la session Supabase ouverte sur une page
   peut s'envoyer un essai (3 par 24 h) ; chaque courriel a un lien signé « Ne plus recevoir ces
   alertes » (`api/alertes-desabonnement.js`, aussi en un clic pour les messageries).
   Tables : `scripts/supabase-schema-alertes.sql`.
-- **Décisions attendues : en pause.** `scripts/projets-publics.js` écrit `data/attendues.json` :
-  chaque sommaire encore en attente, avec l'instance et la date cible écrites par la Ville. Une
-  carte dans Mes dossiers et un abonnement d'agenda (`api/calendrier.js`) ont été faits puis
-  retirés le 14 sept. 2026 : seulement 25 des 104 dossiers en attente ont une date cible, aucun des
-  projets suivis, et une partie est déjà passée — trop peu pour être utile. À reprendre quand on
-  aura une source datée fiable : les ordres du jour que la Ville publie avant ses séances (le code
-  retiré est dans l'historique git, commit 22896d2). L'avantage reste marqué « bientôt ».
+- **Dossiers ouverts (abonnés).** `scripts/projets-publics.js` écrit `data/attendues.json` : chaque
+  sommaire encore en attente d'une décision finale, avec l'instance qui doit décider (regroupée :
+  conseil de la ville, d'agglomération, comité exécutif, arrondissements), la date cible écrite
+  par la Ville et le résumé IA. Mes dossiers les montre par instance (menu déroulant) : d'abord
+  « Probablement à la prochaine séance » (date cible à venir), puis les autres, chacun dépliable
+  sur son résumé. Toujours « probablement » : une date cible n'est pas un ordre du jour. Une
+  première version en calendrier avec abonnement d'agenda (25 dates cibles sur 104) a été retirée
+  le 14 sept. 2026 (commit 22896d2 dans l'historique).
 - **Nous écrire.** « Signaler une erreur dans cette fiche » au bas de chaque fiche ouverte (le
   numéro s'ajoute tout seul) et un formulaire « Nous écrire » dans `/mes-dossiers` (idée, problème,
   erreur). Compte requis. `api/message.js` note si la personne est abonnée, limite à 5 messages
