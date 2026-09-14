@@ -257,7 +257,20 @@ function afficherEstimation(estimation, docs, modele, batch) {
   }
 }
 
+// Garde-fou : une puce ne contient jamais de caractère de contrôle. Vu sur 26 des 1 500 premiers
+// résumés (lot du 11 sept. 2026) : des lettres accentuées remplacées par des sauts de ligne
+// (« b\ntiments », « Neufch\ntel »), la lettre d'origine perdue. Un tel résumé est refusé :
+// il n'entre pas dans le cache et sera redemandé à la prochaine exécution.
+const CONTROLE = /[\x00-\x1f\x7f]/;
+
 function ficheResume(doc, sortie, modele, usage) {
+  const puces = (sortie.puces ?? []).map(decoderEchappements);
+  const montant = decoderEchappements(sortie.montantPrincipal ?? null);
+  if (puces.some((p) => CONTROLE.test(p)) || CONTROLE.test(montant ?? '')) {
+    // Le texte brut reçu (avant décodage), pour voir d'où vient la perte.
+    const brut = (sortie.puces ?? []).find((p, i) => CONTROLE.test(puces[i])) ?? sortie.montantPrincipal;
+    throw new Error(`caractères de contrôle dans le résumé (lettres perdues) — refusé, sera redemandé. Brut : ${JSON.stringify(String(brut).slice(0, 160))}`);
+  }
   return {
     id: doc.id,
     numero: doc.numero,
@@ -265,9 +278,9 @@ function ficheResume(doc, sortie, modele, usage) {
     unite: doc.unite,
     objet: doc.objet,
     pdf: doc.pdf,
-    puces: (sortie.puces ?? []).map(decoderEchappements),
+    puces,
     sansContenuSubstantiel: sortie.sansContenuSubstantiel,
-    montantPrincipal: decoderEchappements(sortie.montantPrincipal ?? null),
+    montantPrincipal: montant,
     genereParIA: true,
     modele,
     genereLe: new Date().toISOString(),
@@ -335,7 +348,11 @@ async function genererParLot(client, docs, modele) {
       echecs.push({ id: doc.id, raison: "le modèle n'a pas rempli l'outil" });
       continue;
     }
-    resumes.push(ficheResume(doc, sortie, modele, resultat.result.message.usage));
+    try {
+      resumes.push(ficheResume(doc, sortie, modele, resultat.result.message.usage));
+    } catch (erreur) {
+      echecs.push({ id: doc.id, raison: erreur.message });
+    }
   }
   return { resumes, echecs };
 }
