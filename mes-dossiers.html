@@ -56,6 +56,7 @@
       <p>Un seul compte pour DossierQuébec et toutes les villes. On vous envoie un lien par courriel, sans mot de passe.</p>
       <form class="ab-form" id="form-lien"><input type="email" required placeholder="Votre courriel" autocomplete="email">
       <button type="submit" class="ab-bouton">Recevoir le lien de connexion</button></form>
+      <p class="ab-note">Un seul lien peut être envoyé toutes les 5 minutes. Pensez à vérifier vos courriels indésirables.</p>
       <p class="ab-note" id="etat-lien" aria-live="polite"></p>
     </div>`;
     $('#form-lien').addEventListener('submit', async (e) => {
@@ -67,7 +68,7 @@
       const erreur = await envoyerLien(email);
       if (erreur) {
         bouton.disabled = false;
-        $('#etat-lien').textContent = erreur.code === 'over_email_send_rate_limit' ? 'Un lien a déjà été envoyé récemment — vérifiez votre boîte courriel.' : 'Une erreur est survenue. Réessayez.';
+        $('#etat-lien').textContent = erreur.code === 'over_email_send_rate_limit' ? 'Un lien a déjà été envoyé il y a moins de 5 minutes — vérifiez votre boîte courriel (et les indésirables), ou réessayez dans quelques minutes.' : 'Une erreur est survenue. Réessayez.';
       } else {
         $('#etat-lien').textContent = `Lien envoyé à ${email}. Ouvrez-le pour revenir sur cette page, connecté.`;
       }
