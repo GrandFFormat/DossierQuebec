@@ -747,7 +747,7 @@ ${liste.map(fiche).join('')}
     };
 
     zone.innerHTML = `<section class="ab-carte ab-ouverts">
-      <h2 style="margin-top:0">À l'agenda des conseils</h2>
+      <h2 style="margin-top:0">À l'agenda des conseils <span class="ab-h2-precision">(approximatif)</span></h2>
       <p class="ab-chapeau" style="margin-bottom:12px">Ce qui s'en vient : les dossiers que l'administration a préparés et sur lesquels un conseil doit encore se prononcer. Ceux qui ont une date cible à venir seront <strong>probablement</strong> présentés à la prochaine séance — ce n'est pas l'ordre du jour officiel, un dossier peut être reporté.</p>
       <label class="ab-choix-instance">Instance
         <select id="ouverts-instance">${cles.map((k) => { const g = groupes.get(k); return `<option value="${echapper(k)}"${k === choisie ? ' selected' : ''}>${plusieursVilles ? `${echapper(VILLES[g.ville] ?? g.ville)} — ` : ''}${echapper(g.nom)} (${g.dossiers.length})</option>`; }).join('')}</select>
