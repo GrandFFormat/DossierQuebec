@@ -29,7 +29,7 @@
 
 import { supabase, signature, site } from './_alertes.js';
 
-const VILLES = { quebec: 'Québec', montreal: 'Montréal' };
+const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis' };
 const CLE = /^[\w-]{1,60}$/;
 const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
 const dateFr = (iso) => {
