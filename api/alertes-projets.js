@@ -16,7 +16,8 @@
 // et on n'écrit que s'il y a du nouveau :
 //   - un nouveau dossier dans le projet ;
 //   - un dossier qui passe d'« en attente » à « décision finale » ;
-//   - une nouvelle résolution sur un dossier encore en attente.
+//   - une nouvelle résolution sur un dossier encore en attente ;
+//   - un dossier récent qui contient un des mots-clés de l'abonné (alertes_mots_cles).
 // Le récapitulatif « Où en est le projet », s'il a été refait, accompagne ces nouvelles.
 // Un projet suivi pour la première fois est mémorisé sans courriel : on ne signale que ce qui
 // arrive ensuite. Au plus un courriel par personne par exécution, tous projets réunis. Si l'envoi
@@ -69,6 +70,20 @@ export function changements(projet, ancien) {
   return { nouveaux, decides, etapes, recap, total };
 }
 
+// ---------- les mots-clés ----------
+// Un mot-clé (« 1re Avenue », « Limoilou », « déneigement ») est cherché, mot entier, sans tenir
+// compte des accents ni des majuscules, dans l'objet et le résumé des dossiers récents
+// (/<ville>/data/recentes.json). Même mécanique que les projets : ce qu'on a déjà signalé est
+// retenu dans alertes_etat sous « mot_<id> », et un mot tout juste ajouté part d'ici, sans courriel.
+export const normaliserTexte = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[’`]/g, "'").replace(/\s+/g, ' ');
+export function contientMot(dossier, mot) {
+  const m = normaliserTexte(mot).trim();
+  if (m.length < 2) return false;
+  const texte = normaliserTexte([dossier.objet, ...(dossier.puces ?? [])].join(' '));
+  return new RegExp(`(^|[^a-z0-9])${m.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^a-z0-9])`).test(texte);
+}
+export const cleMot = (id) => `mot_${String(id).replace(/[^0-9a-f]/gi, '')}`;
+
 // ---------- le courriel ----------
 const statut = (d) =>
   d.statutDossier === 'termine'
@@ -109,10 +124,10 @@ function cadreProjet(ville, projet, contenu) {
 }
 
 // Les trois sections d'un projet, chacune avec ses lignes toutes prêtes (pour pouvoir couper).
-function blocsDe(ville, c) {
+function blocsDe(ville, c, mot = false) {
   const derniere = (d) => d.resolutions?.at(-1);
   return [
-    { titre: 'Nouveaux dossiers', lignes: c.nouveaux.map((d) => ligne(ville, d, [dateFr(d.derniere), statut(d)].filter(Boolean).join(' · '))) },
+    { titre: mot ? 'Décisions récentes qui contiennent ce mot' : 'Nouveaux dossiers', lignes: c.nouveaux.map((d) => ligne(ville, d, [dateFr(d.derniere), statut(d)].filter(Boolean).join(' · '))) },
     { titre: 'Décision finale prise', lignes: c.decides.map((d) => ligne(ville, d, [derniere(d)?.instance, dateFr(derniere(d)?.date)].filter(Boolean).join(', '))) },
     { titre: 'Nouvelle étape', lignes: c.etapes.map((d) => ligne(ville, d, [derniere(d)?.instance, dateFr(derniere(d)?.date), statut(d)].filter(Boolean).join(' · '))) },
   ];
@@ -126,17 +141,18 @@ const recapHtml = (c) =>
 export function courriel(sections, userId, essai = false) {
   const total = sections.reduce((n, s) => n + s.c.total, 0);
   const titres = sections.map((s) => s.projet.titre);
-  const sujet = `${essai ? '[Essai] ' : ''}Vos projets : ${total} nouveauté${total > 1 ? 's' : ''} — ${titres[0]}${titres.length > 1 ? ` et ${titres.length - 1} autre${titres.length > 2 ? 's' : ''}` : ''}`.replace(/[\r\n]+/g, ' ');
+  const avecMots = sections.some((x) => x.mot);
+  const sujet = `${essai ? '[Essai] ' : ''}${avecMots ? 'Vos alertes' : 'Vos projets'} : ${total} nouveauté${total > 1 ? 's' : ''} — ${titres[0]}${titres.length > 1 ? ` et ${titres.length - 1} autre${titres.length > 2 ? 's' : ''}` : ''}`.replace(/[\r\n]+/g, ' ');
   const desabonnement = `${site()}/api/alertes-desabonnement?u=${userId}&s=${signature(userId)}`;
   const mesDossiers = `${site()}/mes-dossiers`;
 
   const debut = `<div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;color:#16191D;line-height:1.5">
     <p style="margin:0;font-size:13px;color:#5B6570">DossierQuébec · Mes dossiers</p>
-    <h1 style="margin:4px 0 0;font-size:22px">Du nouveau dans vos projets</h1>
+    <h1 style="margin:4px 0 0;font-size:22px">${avecMots ? 'Du nouveau dans vos alertes' : 'Du nouveau dans vos projets'}</h1>
     ${essai ? '<p style="margin:8px 0 0;padding:8px 10px;background:#FFF6D6;border-radius:6px;font-size:13px">Courriel d\'essai : il reprend les dossiers les plus récents de chaque projet, pas seulement les nouveautés.</p>' : ''}`;
   const fin = `<p style="margin:22px 0 0"><a href="${mesDossiers}" style="display:inline-block;padding:9px 16px;background:#0B8A4B;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">Voir mes dossiers</a></p>
     <p style="margin:22px 0 0;font-size:12px;color:#5B6570">Les phrases sous chaque numéro sont des résumés générés par IA à partir des documents de la Ville ; en cas d'écart, les documents officiels font foi. DossierQuébec n'est pas un site de la Ville.<br>
-    Vous recevez ce courriel parce que vous suivez ces projets avec votre abonnement. <a href="${echapper(desabonnement)}" style="color:#5B6570">Ne plus recevoir ces alertes</a></p>
+    Vous recevez ce courriel parce que vous suivez ces projets ou ces mots-clés avec votre abonnement. <a href="${echapper(desabonnement)}" style="color:#5B6570">Ne plus recevoir ces alertes</a></p>
   </div>`;
 
   // Réserve pour la liste « Aussi du nouveau » des projets qui n'entreront pas : ~250 octets chacun.
@@ -144,8 +160,8 @@ export function courriel(sections, userId, essai = false) {
   const parties = [];
   const enUneLigne = [];
   let coupe = false;
-  for (const { ville, projet, c } of sections) {
-    const blocs = blocsDe(ville, c);
+  for (const { ville, projet, c, mot } of sections) {
+    const blocs = blocsDe(ville, c, mot);
     if (!coupe) {
       const complet = cadreProjet(ville, projet, blocs.map((b) => bloc(`${b.titre} (${b.lignes.length})`, b.lignes)).join('') + recapHtml(c));
       if (octets(complet) <= budget) {
@@ -260,10 +276,15 @@ export default async function handler(req, res) {
     if (!abonnes.length) return res.status(200).json({ ok: true, ...rapport, raison: 'aucun abonné actif' });
 
     const liste = abonnes.join(',');
-    const [suivis, preferences, etats] = await Promise.all([
+    const [suivis, preferences, etats, mots] = await Promise.all([
       supabase(`/rest/v1/dossiers_suivis?select=user_id,ville,dossier_id&user_id=in.(${liste})&dossier_id=like.projet:*`),
       supabase(`/rest/v1/alertes_preferences?select=user_id,actif&user_id=in.(${liste})`),
       supabase(`/rest/v1/alertes_etat?select=user_id,ville,projet,etat&user_id=in.(${liste})`),
+      // Table des mots-clés absente (SQL pas encore exécuté) : les alertes de projets partent quand même.
+      supabase(`/rest/v1/alertes_mots_cles?select=id,user_id,mot&user_id=in.(${liste})&order=created_at`).catch((e) => {
+        rapport.erreurs.push(`mots-clés ignorés : ${e.message}`);
+        return [];
+      }),
     ]);
     const coupees = new Set(preferences.filter((p) => p.actif === false).map((p) => p.user_id));
     const dejaVu = new Map(etats.map((e) => [`${e.user_id}|${e.ville}|${e.projet}`, e.etat]));
@@ -278,6 +299,14 @@ export default async function handler(req, res) {
       return fichiers.get(k);
     };
 
+    const recentes = new Map();
+    const lireRecentes = (ville) => {
+      if (!recentes.has(ville)) {
+        recentes.set(ville, fetch(`${site()}/${ville}/data/recentes.json`, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).catch(() => null));
+      }
+      return recentes.get(ville);
+    };
+
     const projetsDe = new Map();
     for (const s of suivis) {
       const cle = s.dossier_id.slice('projet:'.length);
@@ -285,8 +314,16 @@ export default async function handler(req, res) {
       if (!projetsDe.has(s.user_id)) projetsDe.set(s.user_id, []);
       projetsDe.get(s.user_id).push({ ville: s.ville, cle });
     }
+    const motsDe = new Map();
+    for (const m of mots) {
+      if (!m.mot || !/^[0-9a-f-]{36}$/.test(m.id ?? '')) continue;
+      if (!motsDe.has(m.user_id)) motsDe.set(m.user_id, []);
+      motsDe.get(m.user_id).push(m);
+    }
+    rapport.motsMemorises = 0;
 
-    for (const [uid, projets] of projetsDe) {
+    for (const uid of new Set([...projetsDe.keys(), ...motsDe.keys()])) {
+      const projets = projetsDe.get(uid) ?? [];
       if (coupees.has(uid) && !essai) continue;
       try {
         const utilisateur = await supabase(`/auth/v1/admin/users/${uid}`);
@@ -312,6 +349,31 @@ export default async function handler(req, res) {
           if (c.total) sections.push({ ville, projet, c });
         }
 
+        // Les mots-clés : les dossiers récents qui les contiennent et qu'on n'a pas encore signalés
+        // (ni pour ce mot, ni plus haut dans ce même courriel pour un projet).
+        const dejaDansCeCourriel = new Set(sections.flatMap((s) => [...s.c.nouveaux, ...s.c.decides, ...s.c.etapes].map((d) => d.numero)));
+        for (const m of motsDe.get(uid) ?? []) {
+          for (const ville of Object.keys(VILLES)) {
+            const fichier = await lireRecentes(ville);
+            if (!fichier?.dossiers) continue;
+            const trouves = fichier.dossiers.filter((d) => contientMot(d, m.mot));
+            const cle = cleMot(m.id);
+            const titre = { titre: `Mot-clé « ${m.mot} »` };
+            if (essai) {
+              const recents = trouves.slice(0, 3);
+              if (recents.length) sections.push({ ville, projet: titre, mot: true, c: { nouveaux: recents, decides: [], etapes: [], recap: null, total: recents.length } });
+              continue;
+            }
+            aMemoriser.push({ user_id: uid, ville, projet: cle, etat: { vus: trouves.map((d) => d.numero) }, mis_a_jour: maintenant.toISOString() });
+            const ancien = dejaVu.get(`${uid}|${ville}|${cle}`);
+            if (!ancien) continue; // mot ajouté depuis la dernière exécution : on part d'ici
+            const vus = new Set(ancien.vus ?? []);
+            const nouveaux = trouves.filter((d) => !vus.has(d.numero) && !dejaDansCeCourriel.has(d.numero));
+            for (const d of nouveaux) dejaDansCeCourriel.add(d.numero);
+            if (nouveaux.length) sections.push({ ville, projet: titre, mot: true, c: { nouveaux, decides: [], etapes: [], recap: null, total: nouveaux.length } });
+          }
+        }
+
         if (sections.length) {
           const message = courriel(sections, uid, Boolean(essai));
           if (apercu) {
@@ -333,7 +395,8 @@ export default async function handler(req, res) {
             corps: aMemoriser,
             entetes: { Prefer: 'resolution=merge-duplicates,return=minimal' },
           });
-          rapport.projetsMemorises += aMemoriser.length;
+          rapport.projetsMemorises += aMemoriser.filter((a) => !a.projet.startsWith('mot_')).length;
+          rapport.motsMemorises += aMemoriser.filter((a) => a.projet.startsWith('mot_')).length;
         }
       } catch (erreur) {
         console.error('alertes-projets :', uid, erreur);
