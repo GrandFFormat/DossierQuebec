@@ -238,6 +238,8 @@ qu'une fois. Les dépôts de rapports, les « 0 $ » et les valeurs au rôle son
 restent aux abonnés. Le détail vérifié sert seulement à reconnaître la nature d'un montant (une
 subvention reçue d'un gouvernement n'entre pas dans le total des subventions accordées).
 
+**Deux éditions**, dans la même commande : `AAAA-MM.html` (gratuite, avec l'invitation à s'abonner) et `AAAA-MM-abonnes.html` (sans publicité ; sous chaque montant, un lien « Détail de l'argent » vers sa fiche, ou « Demander le détail » s'il n'est pas encore lu, et un rappel de Mes dossiers à la place de l'invitation). Le détail lui-même reste derrière la connexion.
+
 **Le mot du mois**, facultatif : un fichier `infolettres/AAAA-MM-mot.md` écrit à la main s'ajoute sous
 le titre. Le courriel est fait de tableaux et de styles en ligne, sans variables CSS ni `color-mix`,
 pour s'afficher pareil dans Gmail, Outlook et sur cellulaire. Les brouillons ne sont pas versionnés
