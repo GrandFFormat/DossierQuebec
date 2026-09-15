@@ -34,9 +34,18 @@ const SEANCES_ARRONDISSEMENTS = new URL('../data/seances-arrondissements.json', 
 export const CACHE = new URL('../data/textes/', import.meta.url);
 
 const RATTRAPAGE_JOURS = 45;
-// Quand le découpage change (ce numéro augmente), les séances déjà lues sont relues à la
-// prochaine exécution, sans qu'on ait à le demander.
-export const VERSION_LECTURE = 5;
+
+// Lire un procès-verbal, c'est deux choses : en extraire le TEXTE du PDF (lib/pdf.js) puis
+// y DÉCOUPER les résolutions (lib/pv.js). Chacune a son numéro, et une séance déjà lue est
+// relue dès que l'un des deux bouge — sans qu'on ait à le demander.
+//
+// Les deux sont noués exprès, et c'est une leçon payée deux fois. La correction des
+// colonnes de Pierrefonds a d'abord été perdue parce que les séances, relues, l'ont été
+// sur le texte du cache, extrait par l'ancienne version. Le cache a donc pris sa version —
+// mais le rafraîchissement suivant n'a rien relu du tout, puisque les séances étaient
+// déjà marquées « lues » au bon numéro de découpage. Deux compteurs indépendants pour un
+// même travail laissent toujours passer l'un ou l'autre ; celui-ci n'en fait qu'un.
+export const VERSION_DECOUPAGE = 5;
 const DIAGNOSTIC = new URL('../data/diagnostic.json', import.meta.url);
 
 // Un échantillon de ce que les PDF contiennent vraiment — les premières lignes d'un
@@ -93,6 +102,8 @@ async function lireJson(url) {
 // rafraîchissement s'est terminé sans un seul changement, et le défaut corrigé était
 // toujours là. Un cache qui ne dit pas de quoi il est le cache ment par omission.
 export const VERSION_TEXTE = 2;
+// Ce que porte l'état d'une séance lue. Changer l'un ou l'autre suffit à tout relire.
+export const VERSION_LECTURE = `${VERSION_DECOUPAGE}.${VERSION_TEXTE}`;
 export async function ecrireCache(nom, contenu) {
   await mkdir(CACHE, { recursive: true });
   await writeFile(new URL(nom + '.json', CACHE), JSON.stringify({ ...contenu, versionTexte: VERSION_TEXTE }), 'utf8');
