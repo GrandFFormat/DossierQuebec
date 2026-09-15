@@ -1,5 +1,6 @@
 {
   "cleanUrls": true,
+  "ignoreCommand": "git diff --quiet ${VERCEL_GIT_PREVIOUS_SHA:-HEAD^} HEAD -- . ':(exclude,glob)**/*.md' ':(exclude,glob)**/scripts/**' ':(exclude,glob)**/scrapers/**' ':(exclude,glob)*/lib/**' ':(exclude,glob)**/test/**' ':(exclude,glob).github/**' ':(exclude,glob)*/package.json' ':(exclude,glob)*/package-lock.json' ':(exclude,glob)**/*.cmd'",
   "crons": [
     {
       "path": "/api/weekly-digest",
