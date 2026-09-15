@@ -368,27 +368,34 @@ async function main() {
       if (!morceaux.length) return '';
       return `<div style="margin-top:6px;padding:4px 9px;border-left:3px solid #D99A06;border-radius:4px;background:#FFF7E0;font-size:12.5px;line-height:1.45;color:#7A4E00">🔒 <strong>★ Abonnés :</strong> ${echapper(morceaux.slice(0, 3).join(' · '))}</div>`;
     }
-    if (entreprises) morceaux.push(pluriel(entreprises, 'soumission', 'soumissions'));
+    // Chaque morceau est une phrase qui se comprend seule : une date dit à quoi elle s'applique,
+    // un chiffre dit ce qu'il mesure (Martin : « Deuxième versement : 50 % · au plus tard le
+    // 31 mars 2027 » laissait croire que la date était celle du deuxième versement).
+    const contrat = f.theme === 'contrats';
+    if (entreprises) morceaux.push(`${pluriel(entreprises, 'entreprise a soumissionné', 'entreprises ont soumissionné')}`);
     // L'écart avec la plus basse soumission conforme ; un seul lot, sinon on ne résume pas.
     const ecarts = [...String(d.ecartEstimation ?? '').matchAll(/plus basse[^:]*:\s*([-+−]?\s?\d+(?:,\d+)?)\s*%/gi)].map((m) => m[1]);
     if (ecarts.length === 1 && !/lot/i.test(d.ecartEstimation)) {
       const n = Number(ecarts[0].replace(/[\s−]/g, (c) => (c === '−' ? '-' : '')).replace(',', '.'));
-      if (Number.isFinite(n) && n !== 0) morceaux.push(`plus basse ${nombreFr(Math.abs(n))} % ${n < 0 ? 'sous' : 'au-dessus de'} l'estimation de la Ville`);
+      if (Number.isFinite(n) && n !== 0) morceaux.push(`la plus basse soumission est ${nombreFr(Math.abs(n))} % ${n < 0 ? 'sous' : 'au-dessus de'} l'estimation de la Ville`);
     }
-    // Sans appel d'offres (une subvention, une entente) : le chiffre clé du document, souvent le
-    // coût total du projet ou la part de l'aide dans son budget.
-    // Pas le montant de la ligne répété, ni une durée (dite plus loin) ; le coût ou le budget d'abord.
-    const utile = (d.chiffresCles ?? []).filter((c) => c.libelle && c.valeur && `${c.libelle} ${c.valeur}`.length <= 80 && !/dur[ée]e/i.test(c.libelle) && lireMontant(c.valeur) !== Math.round(f.montant ?? -1) && Math.abs((lireMontant(c.valeur) ?? 0) - (f.montant ?? 0)) > 1);
-    const cle = utile.find((c) => /co[uû]t|budget|pr[ée]vision|part |taux/i.test(c.libelle)) ?? utile[0];
+    // Sans appel d'offres (une subvention, une entente) : le coût ou le budget du projet que l'aide
+    // finance. Pas un pourcentage de versement ni une durée, qui ne se comprennent pas seuls.
+    const utile = (d.chiffresCles ?? []).filter((c) => c.libelle && c.valeur && `${c.libelle} ${c.valeur}`.length <= 80 && !/dur[ée]e|versement|tranche/i.test(c.libelle) && lireMontant(c.valeur) !== Math.round(f.montant ?? -1) && Math.abs((lireMontant(c.valeur) ?? 0) - (f.montant ?? 0)) > 1);
+    const cle = utile.find((c) => /co[uû]t|budget|pr[ée]vision/i.test(c.libelle));
     if (!entreprises && cle) morceaux.push(`${cle.libelle.replace(/\s*:$/, '')} : ${cle.valeur}`);
     const versements = /(?:payable|vers[ée]e?s?)\s+en\s+(deux|trois|quatre|cinq|six|\d+)\s+(versements|tranches)/i.exec((d.conditions ?? []).join(' '));
-    if (versements) morceaux.push(`en ${versements[1].toLowerCase()} ${versements[2].toLowerCase()}`);
-    const date = (motif) => motif.exec(d.duree ?? '')?.[1];
+    if (versements) morceaux.push(`${contrat ? 'payé' : 'aide versée'} en ${versements[1].toLowerCase()} ${versements[2].toLowerCase()}`);
     const JOUR = '(\\d{1,2}(?:er)?\\s+[a-zéû]+\\s+\\d{4})';
-    const auPlusTard = date(new RegExp(`(?:terminer|termin[ée]s?|verser[^;]*?)\\s+au plus tard le\\s+${JOUR}`, 'i')) ?? date(new RegExp(`au plus tard le\\s+${JOUR}`, 'i'));
-    const jusqua = date(new RegExp(`jusqu'au\\s+${JOUR}`, 'i')) ?? date(new RegExp(`\\bau\\s+${JOUR}`, 'i'));
-    if (jusqua) morceaux.push(`jusqu'au ${jusqua}`);
-    else if (auPlusTard) morceaux.push(`au plus tard le ${auPlusTard}`);
+    const trouver = (motif) => new RegExp(motif, 'i').exec(d.duree ?? '');
+    const periode = trouver(`\\bdu\\s+(\\d{1,2}(?:er)?(?:\\s+[a-zéû]+(?:\\s+\\d{4})?)?)\\s+au\\s+${JOUR}`);
+    const jusqua = trouver(`jusqu'au\\s+${JOUR}`);
+    const aVerser = trouver(`verser[^;.]*?au plus tard le\\s+${JOUR}`);
+    const aTerminer = trouver(`terminer[^;.]*?au plus tard le\\s+${JOUR}`);
+    if (periode) morceaux.push(`${contrat ? 'contrat' : 'période'} du ${periode[1]} au ${periode[2]}`);
+    else if (jusqua) morceaux.push(`${contrat ? 'contrat' : 'entente'} en vigueur jusqu'au ${jusqua[1]}`);
+    else if (aVerser) morceaux.push(`aide versée au complet au plus tard le ${aVerser[1]}`);
+    else if (aTerminer) morceaux.push(`projet à terminer au plus tard le ${aTerminer[1]}`);
     if (!morceaux.length) return '';
     return `<div style="margin-top:6px;padding:4px 9px;border-left:3px solid #D99A06;border-radius:4px;background:#FFF7E0;font-size:12.5px;line-height:1.45;color:#7A4E00"><strong>★</strong> ${echapper(morceaux.slice(0, 3).join(' · '))}</div>`;
   };
