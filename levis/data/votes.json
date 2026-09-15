@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-09-15T00:51:06.846Z",
+ "generatedAt": "2026-09-15T14:37:17.555Z",
  "source": "https://levis.ca/fr/ville/conseil-municipal/seances-du-conseil-municipal/archives-des-seances-du-conseil-municipal",
  "methode": "Extraction par analyse du texte des procès-verbaux (PDF de la Ville). Les noms sont lus dans les passages « … votent en faveur / votent en défaveur de la proposition », après « le président du conseil appelle le vote ». La Ville n'imprime pas de décompte : chaque nom est recoupé avec la liste des présences de la séance, et le résultat avec celui que déclare le président. Chaque vote conserve le texte brut et signale tout écart.",
  "parametres": {
   "annee": "2026",
-  "depuis": null,
-  "complet": true
+  "depuis": "2026-07-17",
+  "complet": false
  },
  "versionLecture": 1,
  "totalDisponible": 15,
- "documentsAnalyses": 29,
+ "documentsAnalyses": 3,
  "nombre": 15,
- "nouveauxDepuisDerniereExecution": 1,
+ "nouveauxDepuisDerniereExecution": 0,
  "avecAvertissement": 0,
  "themes": {
   "procedure": {
@@ -393,7 +393,7 @@
    "brut": "Les membres du conseil de la Ville Erik Bilodeau, Olivier Biron, Jean Demers, Alain Quirion , Daniel Saindon , Mélanie Sicotte , Anne -Marie Tremblay , le président du conseil Jean Leblond et le maire Steven Blaney votent en faveur de la proposition. | Les membres du conseil de la Ville Audrey Bédard, Anthony Dufour, Benoit Forget -Chiasson , Karine Lavertu , Isabelle Lefebvre , Éric Nadeau et Anick Tremblay votent en défaveur de la proposition.",
    "theme": "transport",
    "themeSource": "objet",
-   "nouveau": true
+   "nouveau": false
   },
   {
    "id": "CV3385",

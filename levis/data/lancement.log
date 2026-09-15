@@ -1,0 +1,122 @@
+
+> dossiervillelevis@0.1.0 refresh
+> node scripts/refresh.js
+
+Code : commit 3fbf239 — Node v22.23.2
+
+=== Syntaxe du JavaScript du site ===
+
+=== Archivage des années révolues ===
+data/decisions.json porte l'année courante (2026) — rien à archiver.
+
+=== robots.txt des sites lus ===
+https://levis.ca/robots.txt : rien qui concerne nos chemins
+https://www.donneesquebec.ca/robots.txt : règles sur nos chemins : disallow /recherche/dataset/*?, disallow /recherche/dataset/rate/, disallow /recherche/dataset/*/history, disallow /recherche/api/
+https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt : HTTP 403 Forbidden sur https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt
+
+=== Calendrier des séances ===
+72 séance(s) en 2026 écrites dans data/seances.json.
+  CAD     12 séances, 7 avec procès-verbal
+  CV      19 séances, 12 avec procès-verbal
+  CACCO   12 séances, 7 avec procès-verbal
+  CACCE   12 séances, 7 avec procès-verbal
+  CE      17 séances, 17 avec procès-verbal
+
+=== Décisions de l'année ===
+
+1782 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 4 en attente de procès-verbal.
+0 nouveauté(s) depuis la dernière exécution.
+
+Pastilles thématiques :
+    630  Urbanisme
+    435  Procédure
+    139  Administration
+     96  Transport
+     72  Finances
+     60  Contrats
+     57  Subventions
+     56  Environnement
+     41  Motions et hommages
+     34  Sécurité publique
+     33  Loisirs et communauté
+     29  Travaux et infrastructures
+     26  Ressources humaines
+     23  Logement et social
+     19  Développement économique
+     17  Immobilier
+     15  Culture et patrimoine
+    105  (classées par défaut — aucune règle n'a tranché)
+
+=== Votes nominatifs (depuis 2026-07-17) ===
+Fenêtre depuis 2026-07-17 : 3 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
+
+15 votes nominaux écrits dans data/votes.json (3 procès-verbaux analysés).
+0 portent un avertissement d'extraction (à vérifier à la main).
+
+=== Lexique, mesuré sur les procès-verbaux ===
+Mesure de 29 termes sur 3 procès-verbaux de 2026 en cache et 1782 décisions…
+
+     3 PV      24 résolutions   Résolution
+     3 PV      61 résolutions   Document d’aide à la décision
+     3 PV       6 résolutions   Procès-verbal
+     3 PV       3 résolutions   Ordre du jour
+     2 PV       6 résolutions   Avis de motion
+     2 PV      19 résolutions   Règlement
+     2 PV       8 résolutions   Dépôt
+     2 PV      49 résolutions   Conseil de la Ville
+     3 PV      29 résolutions   Comité exécutif
+     0 PV       0 résolutions   Conseil d'arrondissement
+     1 PV       5 résolutions   Président du conseil
+     3 PV      16 résolutions   Greffière
+     1 PV       2 résolutions   Commission
+     1 PV      23 résolutions   Il est proposé par… Appuyé par…
+     0 PV       0 résolutions   Appeler le vote
+     1 PV      23 résolutions   Adoptée à l'unanimité
+     0 PV       0 résolutions   Adoptée à la majorité
+     0 PV       0 résolutions   Proposition d’amendement
+     0 PV       0 résolutions   Conflit d'intérêts
+     0 PV       0 résolutions   Dérogation mineure
+     0 PV       0 résolutions   PIIA
+     0 PV       0 résolutions   Usage conditionnel
+     2 PV       4 résolutions   Zonage et lotissement
+     1 PV       1 résolutions   Consultation écrite
+     3 PV       7 résolutions   Attribution du contrat
+     2 PV       5 résolutions   Appel d'offres
+     2 PV      12 résolutions   Aide financière
+     2 PV       3 résolutions   Réserve financière
+     0 PV       0 résolutions   Virement de fonds
+
+29 entrées écrites dans data/lexique.json
+
+⚠ 9 terme(s) sans aucune occurrence — la formulation cherchée ne colle pas :
+  Conseil d'arrondissement  (recherche : conseil d['’]arrondissement)
+  Appeler le vote  (recherche : appelle le vote)
+  Adoptée à la majorité  (recherche : adopt[ée]e? à la majorit[ée])
+  Proposition d’amendement  (recherche : proposition d['’]amendement|proposition principale)
+  Conflit d'intérêts  (recherche : conflit d['’]int[ée]r[êe]ts)
+  Dérogation mineure  (recherche : d[ée]rogations? mineures?)
+  PIIA  (recherche : \bPIIA\b|plans? d['’]implantation et d['’]int[ée]gration architecturale)
+  Usage conditionnel  (recherche : usages? conditionnels?)
+  Virement de fonds  (recherche : virements? de fonds)
+
+=== Résumés en langage clair ===
+Sommaires depuis 2026-07-17 pas encore résumés (plafond : 120)…
+492 déjà résumés, 0 à faire.
+Rien à générer. (--force pour tout regénérer.)
+
+=== Récapitulatifs des projets ===
+Récapitulatifs des projets : rien de nouveau.
+
+=== Projets pour « Mes dossiers » ===
+Projets publics : 4 projets · index 2.8 Ko · fichiers de projet 39 Ko au total.
+Décisions attendues : 32 dossiers en attente, dont 0 avec une date cible · 45.1 Ko.
+Dossiers de l'année : 1337 · 997 Ko · organismes suggérés : 86.
+Décisions récentes : 230 dossiers depuis le 2026-07-11 · 212 Ko.
+
+=== Chiffres de la page Abonnement ===
+Travail public : 2287 documents, 451 résumés, 15 votes, 4 projets.
+
+=== Bilan ===
+  étapes         : 11
+  échecs         : aucun
+  avertissements : aucun
