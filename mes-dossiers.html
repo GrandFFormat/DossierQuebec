@@ -42,6 +42,7 @@
     <p class="ab-chapeau" data-en="The projects you follow, all cities combined. Click a project to see its decisions here, most recent first. To add one, pick it further down, or click “Project: …” on a decision in a city section.">Les projets que vous suivez, toutes villes confondues. Cliquez sur un projet pour voir ses décisions ici, les plus récentes d'abord. Pour en ajouter un, choisissez-le plus bas, ou cliquez « Projet : … » sur une décision dans un volet.</p>
     <div id="compte"></div>
     <div id="alertes"></div>
+    <div id="infolettre"></div>
     <div id="mots"></div>
     <div id="organismes"></div>
     <div id="export"></div>
@@ -61,6 +62,7 @@
 </script>
 <script type="module">
   import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, mesurer, formulaireMessage, EN, tr } from '/commun/abonnes-client.js';
+  import { boiteInfolettre } from '/commun/infolettre.js';
   const pl = (n, sing, plur) => (n > 1 ? plur : sing);
   import { libelleEn, themeEn } from '/quebec/assets/libelles-en.js';
   // Libellés de la Ville (instances, sujets) et résumés IA en anglais quand l'anglais est choisi.
@@ -121,6 +123,7 @@
   function connexion() {
     $('#compte').innerHTML = '';
     alertes(null, false);
+    boiteInfolettre($('#infolettre'), null);
     motsCles(null, false);
     organismesSuivis(null, false);
     exportTableur(null, false);
@@ -1272,6 +1275,8 @@ ${liste.map(fiche).join('')}
     organismesSuivis(s, abonne).catch((e) => console.error('organismes :', e));
     exportTableur(s, abonne).catch((e) => console.error('export :', e));
     dossiersOuverts(s, abonne).catch((e) => console.error('dossiers ouverts :', e));
+    // Le compte rendu du mois : pour tous les comptes, gratuits ou abonnés.
+    boiteInfolettre($('#infolettre'), s).catch((e) => console.error('infolettre :', e));
     ecrire(s);
     const suivis = await chargerSuivis();
     pourquoi({ connecte: true, abonne });
