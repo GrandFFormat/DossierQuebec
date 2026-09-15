@@ -38,11 +38,53 @@
 
 import { texteDegrade } from './pdf.js';
 
-// « CM26 0355 », « CG26 0123 », « CE26 0412 » en début de ligne. Les conseils
-// d'arrondissement intercalent leur numéro d'arrondissement : « CA26 12 0123 ». Le
-// groupe du milieu est donc facultatif, et il est conservé à part — c'est lui qui dit
-// de quel arrondissement vient la résolution, quand le nom du fichier ne le dit pas.
-const NUMERO_RESOLUTION = /^(C[MGEA])\s?(\d{2})\s+(?:(\d{1,2})\s+)?(\d{4})\s*$/;
+// « CM26 0355 », « CG26 0123 », « CE26 0412 » en début de ligne, à la ville centrale.
+//
+// Les dix-neuf conseils d'arrondissement y intercalent leur propre numéro, et chacun
+// l'écrit à sa façon. Huit graphies relevées dans les procès-verbaux de 2026 :
+//
+//   CA26 20 0234     LaSalle, Saint-Laurent, Lachine, Rosemont…  (la plus répandue)
+//   CA26 12158       Anjou                     — numéro d'arrondissement et séquence collés
+//   CA26 170145      Côte-des-Neiges–NDG       — collés, et la ligne dit « RÉSOLUTION » devant
+//   CA26 210108      Verdun
+//   CA26 240290      Ville-Marie
+//   CA26 10 163      Montréal-Nord             — séquence sur trois chiffres
+//   CA26 28 109      L'Île-Bizard–Sainte-Geneviève
+//   CA26 30 07 0169  Rivière-des-Prairies–PAT  — deux groupes avant la séquence
+//   RÉSOLUTION NUMÉRO CA26 29 0132 RESOLUTION NUMBER CA26 29 0132
+//                    Pierrefonds-Roxboro       — étiquetée, et doublée en anglais
+//
+// N'accepter que la première forme, c'était perdre sept conseils sur dix-neuf : leurs
+// procès-verbaux de vingt pages ne rendaient aucune décision. On accepte donc tout ce
+// qui suit le préfixe et l'année en chiffres et en espaces — à la condition stricte que
+// la LIGNE ENTIÈRE ne soit que cela. C'est cette condition qui distingue le numéro qui
+// ouvre une résolution du même numéro cité au fil d'une phrase (« d'amender la
+// résolution CA25 20 0505 »), qui, lui, ne doit rien déclencher.
+const NUMERO_RESOLUTION = /^(C[MGEA])\s?(\d{2})(?:((?:\s+\d{1,4}){1,3})|\s*(\d{5,6}))\s*$/;
+
+// Deux conseils écrivent le mot devant le numéro, et Pierrefonds-Roxboro répète toute la
+// ligne en anglais — ses procès-verbaux sont sur deux colonnes, que la lecture du PDF
+// remet bout à bout. On enlève l'étiquette, puis tout ce qui suit un second « RÉSOLUTION ».
+const ETIQUETTE_NUMERO = /^(?:R[ÉE]SOLUTION|RESOLUTION)(?:\s+(?:NUM[ÉE]ROS?|NUMBER|N[°ºo]s?\.?))?\s*:?\s*/i;
+const DOUBLON_ANGLAIS = /\s*(?:R[ÉE]SOLUTION|RESOLUTION)\b.*$/i;
+
+// Le numéro tel que la Ville l'écrit, et, à part, le numéro d'arrondissement qu'il porte.
+// Jamais de réécriture : « CA26 12158 » reste « CA26 12158 », c'est ce qui est imprimé
+// dans le procès-verbal et c'est ce qu'un lecteur cherchera.
+function lireNumero(ligne) {
+  const nu = ligne.replace(ETIQUETTE_NUMERO, '').replace(DOUBLON_ANGLAIS, '').trim();
+  const m = nu.match(NUMERO_RESOLUTION);
+  if (!m) return null;
+  const [, prefixe, an, espaces, colles] = m;
+  const reste = (espaces ?? colles).trim().replace(/\s+/g, ' ');
+  // Deux groupes ou plus : le premier est le numéro d'arrondissement. Un seul groupe de
+  // cinq ou six chiffres : les deux premiers le sont. Un seul groupe de quatre : la ville
+  // centrale, qui n'en a pas.
+  const groupes = reste.split(' ');
+  const numeroArrondissement =
+    groupes.length > 1 ? groupes[0] : reste.length >= 5 ? reste.slice(0, 2) : null;
+  return { numero: `${prefixe}${an} ${reste}`, prefixe, numeroArrondissement };
+}
 // « 20.03   1266245003 » (article + dossier) ; « 03.01 » seul pour les points sans dossier.
 const LIGNE_ARTICLE = /^(\d{2}\.\d{2,3})(?:\s+(\d{10}))?\s*$/;
 
@@ -80,7 +122,9 @@ function extraireObjet(lignes) {
 }
 
 export function extraireResultat(bloc) {
-  if (/Adopt[ée]e?\s+à\s+l['’]unanimit[ée]/i.test(bloc)) return "Adoptée à l'unanimité";
+  // « et unanimement résolu : » est la formule de plusieurs arrondissements ; elle dit
+  // exactement ce que « Adopté à l'unanimité » dit ailleurs.
+  if (/Adopt[ée]e?\s+à\s+l['’]unanimit[ée]|unanimement\s+r[ée]solu/i.test(bloc)) return "Adoptée à l'unanimité";
   if (/Adopt[ée]e?\s+à\s+la\s+majorit[ée]/i.test(bloc)) return 'Adoptée à la majorité';
   if (/Adopt[ée]e?\s+sur\s+division/i.test(bloc)) return 'Adoptée sur division';
   if (/\bRejet[ée]e?\b/i.test(bloc)) return 'Rejetée';
@@ -108,17 +152,12 @@ export function decouperResolutions(texte, { instance } = {}) {
   let courant = null;
   for (const brut of lignes) {
     const l = brut.trim();
-    const m = l.match(NUMERO_RESOLUTION);
+    const lu = lireNumero(l);
     // Une séance d'arrondissement s'appelle « CA_Mhm » mais ses résolutions sont
     // préfixées « CA » tout court : on compare sur le préfixe.
-    if (m && (!instance || m[1] === prefixeAttendu)) {
+    if (lu && (!instance || lu.prefixe === prefixeAttendu)) {
       if (courant) blocs.push(courant);
-      const [, prefixe, an, numeroArrondissement, sequence] = m;
-      courant = {
-        numero: `${prefixe}${an} ${numeroArrondissement ? numeroArrondissement + ' ' : ''}${sequence}`,
-        numeroArrondissement: numeroArrondissement ?? null,
-        lignes: [],
-      };
+      courant = { numero: lu.numero, numeroArrondissement: lu.numeroArrondissement, lignes: [] };
       continue;
     }
     if (courant) courant.lignes.push(l);

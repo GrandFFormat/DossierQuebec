@@ -33,11 +33,21 @@ function lignesDePage(items) {
     }
     ligne.fragments.push({ x, str: it.str, largeur: it.width ?? 0 });
   }
+  for (const l of lignes) l.fragments.sort((a, b) => a.x - b.x);
+
+  // Pierrefonds-Roxboro publie ses procès-verbaux sur deux colonnes, le français à gauche
+  // et sa traduction anglaise à droite. Mises bout à bout, les deux moitiés donnent des
+  // lignes illisibles : « Règlement CA29 0046 sur la tenue, la By-law CA29 0046 governing
+  // the holding, ». On ne garde alors que la colonne de gauche — le document français,
+  // celui que le site présente. Rien n'est inventé : l'autre moitié dit la même chose en
+  // anglais.
+  const coupure = colonneDroite(lignes);
+
   for (const l of lignes) {
-    l.fragments.sort((a, b) => a.x - b.x);
+    const fragments = coupure == null ? l.fragments : l.fragments.filter((f) => f.x < coupure);
     let texte = '';
     let precedent = null;
-    for (const f of l.fragments) {
+    for (const f of fragments) {
       if (precedent) {
         const ecart = f.x - (precedent.x + precedent.largeur);
         if (ecart > 1 && !precedent.str.endsWith(' ') && !f.str.startsWith(' ')) texte += ' ';
@@ -45,11 +55,57 @@ function lignesDePage(items) {
       texte += f.str;
       precedent = f;
     }
-    l.texte = texte.replace(ESPACE_INSECABLE, ' ');
+    l.texte = texte.replace(ESPACE_INSECABLE, ' ').trimEnd();
   }
   // pdf.js donne y depuis le bas de la page : le haut a le y le plus grand.
   lignes.sort((a, b) => b.y - a.y);
-  return lignes.map(({ y, texte }) => ({ y, texte }));
+  return lignes.map(({ y, texte }) => ({ y, texte })).filter((l) => l.texte !== '');
+}
+
+// Où commence la colonne de droite, s'il y en a une ? On ne le décide qu'en voyant la
+// même coupure se répéter : une page sur deux colonnes a, ligne après ligne, un blanc
+// large au MÊME endroit. Un blanc isolé — « 20.03      1266245003 », un tableau, une
+// signature en marge — n'en fait pas une, et c'est voulu : se tromper ici coûterait la
+// moitié de chaque ligne d'un procès-verbal ordinaire.
+const ECART_COLONNE = 24; // en unités PDF : bien plus qu'une espace, même large
+const PART_MINIMALE = 0.45; // la coupure doit revenir sur au moins 45 % des lignes
+
+function colonneDroite(lignes) {
+  if (lignes.length < 12) return null;
+  // Le plus grand blanc de chaque ligne, et la position où il s'ouvre.
+  const ouvertures = [];
+  for (const l of lignes) {
+    let meilleur = 0;
+    let ou = null;
+    for (let i = 1; i < l.fragments.length; i++) {
+      const precedent = l.fragments[i - 1];
+      const ecart = l.fragments[i].x - (precedent.x + precedent.largeur);
+      if (ecart > meilleur) {
+        meilleur = ecart;
+        ou = l.fragments[i].x;
+      }
+    }
+    if (meilleur >= ECART_COLONNE) ouvertures.push(ou);
+  }
+  if (ouvertures.length < lignes.length * PART_MINIMALE) return null;
+
+  // La colonne de droite commence là où le plus de lignes s'ouvrent. On tolère 12 unités
+  // d'écart : les deux colonnes sont alignées, mais les fragments ne commencent pas tous
+  // exactement au même point.
+  ouvertures.sort((a, b) => a - b);
+  let meilleure = null;
+  let mieux = 0;
+  for (const candidate of ouvertures) {
+    const n = ouvertures.filter((o) => Math.abs(o - candidate) <= 12).length;
+    if (n > mieux) {
+      mieux = n;
+      meilleure = candidate;
+    }
+  }
+  if (mieux < lignes.length * PART_MINIMALE) return null;
+  // La coupure se place un peu avant le début de la colonne de droite, pour ne pas
+  // couper un fragment qui commencerait deux ou trois unités plus tôt.
+  return meilleure - 6;
 }
 
 export async function lirePdf(data) {
