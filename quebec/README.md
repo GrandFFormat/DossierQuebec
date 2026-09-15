@@ -234,11 +234,11 @@ d'élus minoritaire, et les sujets dans leurs couleurs du site. Une même décis
 sommaire, le comité exécutif et le conseil : tout est regroupé par sommaire pour ne la compter
 qu'une fois. Les dépôts de rapports, les « 0 $ » et les valeurs au rôle sont écartés des montants.
 
-**Le détail de l'argent n'y est pas** : soumissions, estimation de la Ville et répartition par année
-restent aux abonnés. Le détail vérifié sert seulement à reconnaître la nature d'un montant (une
-subvention reçue d'un gouvernement n'entre pas dans le total des subventions accordées).
+**Dans l'édition gratuite, le détail de l'argent n'y est pas** : il y sert seulement à reconnaître la nature d'un montant (une subvention reçue d'un gouvernement n'entre pas dans le total des subventions accordées).
 
-**Deux éditions**, dans la même commande : `AAAA-MM.html` (gratuite, avec l'invitation à s'abonner) et `AAAA-MM-abonnes.html` (sans publicité ; sous chaque montant, un lien « Détail de l'argent » vers sa fiche, ou « Demander le détail » s'il n'est pas encore lu, et un rappel de Mes dossiers à la place de l'invitation). Le détail lui-même reste derrière la connexion.
+**Deux éditions qui se ressemblent**, dans la même commande : `AAAA-MM.html` (gratuite) et `AAAA-MM-abonnes.html`. Tout ce qui est réservé aux abonnés est **doré**, avec la marque « ★ ABONNÉS », aux mêmes endroits dans les deux : rempli pour l'abonné, fermé (🔒, ce qu'on y trouverait, sans les chiffres) pour les autres. Ce qui est doré : le détail de l'argent des plus gros montants (qui reçoit, soumissions, estimation de la Ville, par année, financement, durée — cinq lignes au plus), un lien « Détail de l'argent » sous chaque subvention et contrat dont le détail est lu (abonnés seulement), et l'agenda des conseils des 45 prochains jours (`attendues.json`, dit approximatif). Là où le détail n'est pas lu, rien : jamais de « demander le détail » dans un compte rendu (Martin, 15 sept. 2026 : pas attirant). En bas, l'invitation à s'abonner (gratuite) ou le rappel de Mes dossiers (abonnés).
+
+**`--details`** fait d'abord lire le détail des 8 plus gros montants qui ne l'ont pas (≈ 0,30 $ US chacun, mis en cache et publié pour les abonnés) : pour août 2026, 5 documents, 1,52 $. À partir des dossiers du 15 sept. 2026, l'étape du matin les lit déjà. Une édition abonnés transférée montre ces quelques lignes de détail : c'est accepté, le reste demande la connexion.
 
 **Le mot du mois**, facultatif : un fichier `infolettres/AAAA-MM-mot.md` écrit à la main s'ajoute sous
 le titre. Le courriel est fait de tableaux et de styles en ligne, sans variables CSS ni `color-mix`,
