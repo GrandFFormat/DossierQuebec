@@ -178,6 +178,38 @@ export function urlSommaire(url) {
   return url.replace(/^https?:\/\/www\.ville\.levis\.qc\.ca\/fileadmin\/documents\/SD\//i, 'https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/');
 }
 
+// Ce que le conseil décide, dans ses mots. Les conseils d'arrondissement n'ont pas de sommaire
+// décisionnel, mais chaque résolution écrit sa décision en une phrase qui commence par un verbe en
+// MAJUSCULES : « D’ACCORDER la dérogation mineure visant à rendre conforme une marge de recul
+// latérale de 1,44 mètre au lieu de 2 mètres… », « DE REFUSER la dérogation mineure, laquelle
+// aurait eu pour effet… ». Une résolution peut en porter plusieurs (refuser une partie, accorder
+// l'autre). On recopie ces phrases telles quelles, jusqu'à « Adoptée » ; rien n'est reformulé.
+//
+// `sens` : 'refus' quand la résolution ne fait que refuser, 'refus-partiel' quand elle refuse et
+// accorde, sinon null. Sans cela la fiche d'un refus n'affichait que « Adoptée à l'unanimité »,
+// qui se lit « accordée ».
+const VERBES_DISPOSITIF =
+  'ACCORDER|REFUSER|D[ÉE]SAPPROUVER|APPROUVER|AUTORISER|ADOPTER|PRENDRE ACTE|REPORTER|NE PAS ACCORDER|NE PAS APPROUVER|NE PAS AUTORISER|RECOMMANDER|DEMANDER|EXIGER|ASSUJETTIR|RETIRER|MODIFIER|ABROGER|NOMMER|D[ÉE]SIGNER|CONFIRMER|D[ÉE]L[ÉE]GUER|MANDATER|RENOUVELER|ACCEPTER|REJETER|STATUER';
+const DEBUT_DISPOSITIF = new RegExp(`(?:^|\\s)((?:D[’']|DE\\s)(?:${VERBES_DISPOSITIF}))\\b`, 'g');
+const FIN_DISPOSITIF = /\s(?:Adopt[ée]e?s?\b|Rejet[ée]e?s?\b|À la demande d|[\p{Lu}][\p{L}-]+ [\p{Lu}][\p{L}-]+(?: [\p{Lu}][\p{L}-]+)?, conseill[èe]re?, annonce)/u;
+
+export function extraireDispositif(texte) {
+  const t = String(texte ?? '');
+  const debuts = [...t.matchAll(DEBUT_DISPOSITIF)].map((m) => m.index + m[0].indexOf(m[1]));
+  if (!debuts.length) return null;
+  let bloc = t.slice(debuts[0]);
+  const fin = bloc.search(FIN_DISPOSITIF);
+  if (fin > 0) bloc = bloc.slice(0, fin);
+  bloc = bloc.trim();
+  if (bloc.length < 20) return null;
+  // Un paragraphe par verbe en majuscules.
+  const coupes = [...bloc.matchAll(DEBUT_DISPOSITIF)].map((m) => m.index + m[0].indexOf(m[1]));
+  const paragraphes = coupes.map((c, i) => bloc.slice(c, coupes[i + 1] ?? bloc.length).trim()).filter(Boolean);
+  const refuse = paragraphes.some((p) => /^(?:DE REFUSER|DE D[ÉE]SAPPROUVER|DE NE PAS (?:ACCORDER|APPROUVER|AUTORISER)|DE REJETER)\b/.test(p));
+  const accorde = paragraphes.some((p) => /^D[’'](?:ACCORDER|APPROUVER|AUTORISER|ACCEPTER)\b/.test(p));
+  return { paragraphes, sens: refuse ? (accorde ? 'refus-partiel' : 'refus') : null };
+}
+
 // La nature du point, d'après les premiers mots de son objet.
 export function natureDuPoint(objet) {
   const o = String(objet ?? '');
@@ -222,6 +254,7 @@ export function decouperResolutions(source, { liens = [], presences = null } = {
         .map((id) => urlsSommaires.find((u) => decodeURIComponent(u.split('/').pop()).toUpperCase().startsWith(id.toUpperCase())))
         .find(Boolean) ?? null;
     const votes = parserVotes(texte, { presences });
+    const dispositif = extraireDispositif(texte);
     return {
       numero: b.numero,
       prefixe: b.prefixe,
@@ -236,6 +269,7 @@ export function decouperResolutions(source, { liens = [], presences = null } = {
       // principale vient après l'amendement).
       resultat: votes.length ? votes[votes.length - 1].resultat : extraireResultat(texte),
       votes,
+      dispositif,
       texte,
     };
   });

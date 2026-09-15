@@ -28,7 +28,7 @@ export const CACHE = new URL('../data/textes/', import.meta.url);
 const RATTRAPAGE_JOURS = 45;
 // Quand le découpage change (ce numéro augmente), les séances déjà lues sont relues à la
 // prochaine exécution — depuis le cache, sans rien redemander à la Ville.
-export const VERSION_LECTURE = 9;
+export const VERSION_LECTURE = 10;
 
 function parseArgs(argv) {
   const args = {};
@@ -157,6 +157,10 @@ export function decisionsDeSeance(seance, pv) {
     sommaireId: r.sommaireId,
     sommairePdf: r.sommairePdf,
     resultat: r.resultat,
+    // Ce que le conseil décide, recopié du procès-verbal (conseils d'arrondissement surtout, qui
+    // n'ont pas de sommaire) ; `sens` dit si c'est un refus. Voir extraireDispositif (lib/pv.js).
+    dispositif: r.nature !== 'Procédure' ? r.dispositif?.paragraphes : undefined,
+    refus: r.nature !== 'Procédure' ? r.dispositif?.sens ?? undefined : undefined,
     voteEnregistre: r.votes.length > 0,
     recommandeAuConseil: /recommander au conseil de la Ville/i.test(r.texte) || undefined,
     pdf: r.page ? `${pv.url}#page=${r.page}` : pv.url,

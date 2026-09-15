@@ -129,6 +129,21 @@ function carteRepliable(entete, corps) {
   return `<details class="carte pliante" name="${NOM_ACCORDEON}"><summary>${entete}</summary><div class="corps">${corps}</div></details>`;
 }
 
+// « Ce que le conseil décide » : la phrase de décision du procès-verbal, recopiée telle quelle
+// (« D’ACCORDER la dérogation mineure visant à rendre conforme… »). Montrée quand la décision n'a
+// pas de résumé — c'est le cas des conseils d'arrondissement, qui n'ont pas de sommaire. Les
+// énumérations « - … ; - … » de la Ville deviennent des lignes, sans rien changer aux mots.
+function blocDispositif(paragraphes) {
+  const paragraphe = (p) => {
+    const [tete, ...items] = p.split(/\s+-\s+(?=\S)/);
+    return `<p style="margin:0 0 6px">${echapper(tete)}</p>${items.length ? `<ul style="margin:0 0 8px">${items.map((i) => `<li>${echapper(i)}</li>`).join('')}</ul>` : ''}`;
+  };
+  return `<div class="resume">
+    <div class="resume-entete"><span>Ce que le conseil décide — texte du procès-verbal</span></div>
+    ${paragraphes.map(paragraphe).join('')}
+  </div>`;
+}
+
 function carteDecision(d) {
   const entete = `<div class="meta">
       ${puceTheme(d.theme)}
@@ -139,12 +154,14 @@ function carteDecision(d) {
       ${d.categorie ? `<span class="puce">${echapper(d.categorie)}</span>` : ''}
       ${d.unite ? `<span class="puce">${echapper(d.unite)}</span>` : ''}
       ${d.resultat ? `<span class="resultat ${classeResultat(d.resultat)}">${echapper(d.resultat)}</span>` : ''}
+      ${d.refus === 'refus' ? '<span class="resultat r-rejetee">Demande refusée</span>' : d.refus === 'refus-partiel' ? '<span class="resultat r-rejetee">Refusée en partie</span>' : ''}
       ${d.voteEnregistre ? '<span class="puce genre-vote">vote enregistré</span>' : ''}
     </div>
     <p class="objet">${echapper(d.objet ?? '(sans objet)')}</p>`;
   // Lévis : le sommaire décisionnel (« Document d'aide à la décision FIN-2026-035 ») suit la
   // décision du comité exécutif au conseil de la Ville. Les votes nominaux sont sur la page Votes.
   const corps = `${blocResume(resumePour(d))}
+    ${!resumePour(d) && d.dispositif?.length ? blocDispositif(d.dispositif) : ''}
     ${d.annotation ? `<p class="compte" style="margin:0 0 8px">Résolution ${echapper(d.annotation)}.</p>` : ''}
     ${d.sommaires?.length ? `<p class="compte" style="margin:0 0 8px">Sommaire décisionnel ${d.sommaires.map(echapper).join(', ')}</p>` : ''}
     ${d.voteEnregistre ? `<p class="compte" style="margin:0 0 8px"><a href="votes.html?q=${encodeURIComponent(d.numero ?? '')}">Voir qui a voté pour et contre</a></p>` : ''}
