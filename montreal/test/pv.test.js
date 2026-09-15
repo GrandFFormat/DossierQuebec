@@ -495,3 +495,28 @@ test("un document sur une colonne n'a pas de colonne apprise", () => {
   // Trop peu de lignes pour conclure quoi que ce soit.
   assert.deepEqual(colonnes([ligne([[92, 100, 'a'], [315, 100, 'b']])], 612), []);
 });
+
+// Le comité exécutif attache à ses procès-verbaux l'ordre du jour complet des trois
+// instances. La dernière résolution de la séance l'avalait tout entier : onze objets
+// allaient jusqu'à 155 769 caractères — 450 Ko de bruit dans le fichier des décisions, et
+// c'est ce que la fiche affichait au lecteur.
+test("un objet ne déborde pas sur l'annexe qui suit la séance", () => {
+  const annexe = 'Levée de la séance ____________ Nombre d’articles de niveau décisionnel CE : 14 ' + 'CE : 20.001 2026/04/08 09:00 '.repeat(500);
+  assert.equal(decouperResolutions(`CE26 0577\n${annexe}`, { instance: 'CE' })[0].objet, null);
+
+  // Le bloc de signature qui ferme le procès-verbal ferme aussi l'objet.
+  const signature = '/mt Caroline BOURGEOIS Domenico ZAMBITO ' + 'suite de l’annexe '.repeat(500);
+  assert.equal(decouperResolutions(`CE26 0160\n${signature}`, { instance: 'CE' })[0].objet, null);
+
+  // Et quoi qu'il arrive, un objet reste borné — coupé au dernier mot entier.
+  const tresLong = 'Accorder un soutien financier à un organisme montréalais '.repeat(40);
+  const objet = decouperResolutions(`CM26 0001\n${tresLong}\nIl est proposé par X`, { instance: 'CM' })[0].objet;
+  assert.ok(objet.length <= 700, `objet de ${objet.length} caractères`);
+  assert.match(objet, /\S$/, 'la coupe tombe sur un mot entier');
+
+  // Un objet ordinaire n'est pas touché.
+  assert.equal(
+    decouperResolutions('CM26 0002\nAccorder un contrat de déneigement\n20.01 1267026004', { instance: 'CM' })[0].objet,
+    'Accorder un contrat de déneigement'
+  );
+});
