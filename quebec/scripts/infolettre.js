@@ -354,9 +354,41 @@ async function main() {
   // « 2 soumissions · plus basse 22,8 % sous l'estimation de la Ville · jusqu'au 31 août 2028 ».
   // Dans l'édition gratuite, la même ligne est fermée : ce que le détail contient, sans les chiffres
   // (« 🔒 ★ Abonnés : 4 soumissions comparées à l'estimation de la Ville · 3 conditions »).
+  const styleLigneOr = 'margin-top:6px;padding:5px 9px;border-left:3px solid #D99A06;border-radius:4px;background:#FFF7E0;font-size:12.5px;line-height:1.5;color:#7A4E00';
+  // « 1200, rue Bergar, Laval (Québec) H7L 5A2 » → « Laval » ; « Mississauga (Ontario) » reste tel quel.
+  const villeSeule = (v) => (v ?? '').replace(/\s*[A-Z]\d[A-Z]\s?\d[A-Z]\d\s*$/, '').split(',').pop().replace(/\s*\(Québec\)\s*$/, '').trim() || null;
+  const prixCourt = (p) => court(String(p ?? '').split(';')[0].replace(/\s*\(avant taxes\)/i, ' avant taxes').trim(), 70);
+  // Un contrat : qui a gagné et à quel prix, contre qui, l'estimation de la Ville, comment et pour combien de temps.
+  const blocContrat = (f, d) => {
+    const soumissions = d.soumissions ?? [];
+    const retenues = soumissions.filter((s) => s.retenue);
+    const autres = soumissions.filter((s) => !s.retenue && s.entreprise);
+    const entreprise = (s) => `${s.entreprise}${villeSeule(s.ville) ? ` (${villeSeule(s.ville)})` : ''}`;
+    if (!abonne) {
+      const morceaux = [
+        retenues.length ? `l'entreprise retenue et son prix` : null,
+        autres.length ? pluriel(autres.length, 'autre soumission', 'autres soumissions') : null,
+        d.estimationVille ? "l'estimation de la Ville" : null,
+        d.duree ? 'la durée' : null,
+        d.conditions?.length ? pluriel(d.conditions.length, 'condition', 'conditions') : null,
+      ].filter(Boolean);
+      return morceaux.length ? `<div style="${styleLigneOr}">🔒 <strong>★ Abonnés :</strong> ${echapper(morceaux.join(' · '))}</div>` : '';
+    }
+    const ecart = [...String(d.ecartEstimation ?? '').matchAll(/plus basse[^:]*:\s*([-+−]?\s?\d+(?:,\d+)?)\s*%/gi)].map((m) => Number(m[1].replace(/[\s−]/g, (c) => (c === '−' ? '-' : '')).replace(',', '.')));
+    const mode = /gr[ée] à gr[ée]/i.test(d.modeAttribution ?? '') ? 'gré à gré, sans appel d\'offres' : /appel d'offres (?:public|sur invitation)\s*\d*/i.exec(d.modeAttribution ?? '')?.[0];
+    const lignes = [
+      ...retenues.slice(0, 2).map((s) => `<strong>Retenue :</strong> ${echapper(entreprise(s))}${s.prix ? ` — ${echapper(prixCourt(s.prix))}` : ''}`),
+      autres.length ? `<strong>${autres.length > 1 ? 'Les autres soumissions' : "L'autre soumission"} :</strong> ${echapper(autres.slice(0, 3).map((s) => `${s.entreprise}${s.prix ? ` (${prixCourt(s.prix)})` : ''}${s.conforme === false ? ', non conforme' : ''}`).join(' · '))}${autres.length > 3 ? ` · et ${autres.length - 3} autre${autres.length - 3 > 1 ? 's' : ''}` : ''}` : null,
+      d.estimationVille ? `<strong>Estimation de la Ville :</strong> ${echapper(prixCourt(d.estimationVille))}${ecart.length === 1 && Number.isFinite(ecart[0]) && ecart[0] !== 0 ? ` — la plus basse soumission conforme est ${nombreFr(Math.abs(ecart[0]))} % ${ecart[0] < 0 ? 'sous' : 'au-dessus de'} l'estimation` : ''}` : null,
+      mode ? `<strong>Attribué par :</strong> ${echapper(mode.charAt(0).toLowerCase() + mode.slice(1))}` : null,
+      d.duree ? `<strong>Durée :</strong> ${echapper(court(d.duree.charAt(0).toLowerCase() + d.duree.slice(1), 90))}${d.renouvellements ? ` · renouvellement : ${echapper(court(d.renouvellements, 60))}` : ''}` : null,
+    ].filter(Boolean);
+    return lignes.length ? `<div style="${styleLigneOr}"><strong>★</strong> ${lignes.join('<br>')}</div>` : '';
+  };
   const ligneOr = (f) => {
     const d = natureParId.get(f.cle);
     if (!d) return '';
+    if (f.theme === 'contrats') return blocContrat(f, d);
     const morceaux = [];
     const entreprises = new Set((d.soumissions ?? []).map((s) => s.entreprise)).size;
     if (!abonne) {
@@ -413,7 +445,7 @@ async function main() {
       entreprises ? `<strong>Soumissions :</strong> ${pluriel(entreprises, 'entreprise', 'entreprises')}${retenue ? ` · retenue : ${echapper(retenue.entreprise)}, ${echapper(court(retenue.prix, 90))}` : ''}` : null,
       d.estimationVille ? `<strong>Estimation de la Ville :</strong> ${echapper(court(d.estimationVille, 160))}` : null,
       d.repartitionAnnuelle?.length ? `<strong>Par année :</strong> ${echapper(d.repartitionAnnuelle.slice(0, 4).map((r) => `${r.annee} : ${r.montant.replace(/\s*\(taxes nettes\)/i, '')}`).join(' · '))}${d.repartitionAnnuelle.length > 4 ? ' …' : ''}` : null,
-      d.duree ? `<strong>Durée :</strong> ${echapper(court(d.duree, 120))}` : null,
+      d.duree ? `<strong>Durée :</strong> ${echapper(court(d.duree.charAt(0).toLowerCase() + d.duree.slice(1), 120))}` : null,
       d.sourceFinancement ? `<strong>D'où vient l'argent :</strong> ${echapper(court(d.sourceFinancement.replace(/\s*\(clé [^)]*\)/i, ''), 140))}` : null,
       d.chiffresCles?.length ? `<strong>En chiffres :</strong> ${echapper(d.chiffresCles.slice(0, 2).map((c) => `${c.libelle} : ${c.valeur}`).join(' · '))}` : null,
       // La première clause du document, en entier : coupée, elle ne disait rien.
