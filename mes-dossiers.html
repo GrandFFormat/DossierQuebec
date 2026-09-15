@@ -1027,9 +1027,18 @@ ${liste.map(fiche).join('')}
         .join('');
       blocs.push(`<h3 class="ab-sous-titre">${echapper(VILLES[ville])}</h3><div class="ab-grille">${cartes}</div>`);
     }
+    // Un menu dépliant, comme les autres boîtes : fermé si on suit déjà des projets, ouvert sinon
+    // (c'est là qu'on choisit le premier). Il garde son état quand la page se redessine.
+    const dejaOuvert = $('#suggestions details.ab-pliable');
+    const ouvert = dejaOuvert ? dejaOuvert.open : !suivisIds.size;
+    const nombre = index.reduce((n, [ville, idx]) => n + Object.entries(idx?.projets ?? {}).filter(([cle, p]) => p.decisions > 0 && !suivisIds.has(`${ville}|projet:${cle}`)).length, 0);
     $('#suggestions').innerHTML = blocs.length
-      ? `<h2>${suivisIds.size ? tr("D'autres projets à suivre", 'More projects to follow') : tr('Des projets à suivre', 'Projects to follow')}</h2>
-         <p class="ab-chapeau">${tr('Les grands dossiers de chaque ville, qui reviennent de séance en séance. Suivez-en un pour garder le fil de toutes ses décisions.', "Each city's major files, which come back meeting after meeting. Follow one to keep track of all its decisions. (Project descriptions and recaps are in French for now.)")}</p>${blocs.join('')}`
+      ? `<details class="ab-pliable ab-suggestions"${ouvert ? ' open' : ''}>
+          <summary><h2>${suivisIds.size ? tr("D'autres projets à suivre", 'More projects to follow') : tr('Des projets à suivre', 'Projects to follow')}</h2><span class="ab-etiquette">${nombre}</span></summary>
+          <div class="ab-pliable-corps">
+            <p class="ab-chapeau">${tr('Les grands dossiers de chaque ville, qui reviennent de séance en séance. Suivez-en un pour garder le fil de toutes ses décisions.', "Each city's major files, which come back meeting after meeting. Follow one to keep track of all its decisions. (Project descriptions and recaps are in French for now.)")}</p>${blocs.join('')}
+          </div>
+        </details>`
       : '';
   }
 
