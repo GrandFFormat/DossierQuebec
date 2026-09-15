@@ -352,11 +352,22 @@ async function main() {
   // autres (sans les chiffres). Rien, dans les deux éditions, s'il n'est pas lu.
   // Sous une subvention ou un contrat, l'essentiel du détail en une ligne dorée (abonnés seulement) :
   // « 2 soumissions · plus basse 22,8 % sous l'estimation de la Ville · jusqu'au 31 août 2028 ».
+  // Dans l'édition gratuite, la même ligne est fermée : ce que le détail contient, sans les chiffres
+  // (« 🔒 ★ Abonnés : 4 soumissions comparées à l'estimation de la Ville · 3 conditions »).
   const ligneOr = (f) => {
-    const d = abonne ? natureParId.get(f.cle) : null;
+    const d = natureParId.get(f.cle);
     if (!d) return '';
     const morceaux = [];
     const entreprises = new Set((d.soumissions ?? []).map((s) => s.entreprise)).size;
+    if (!abonne) {
+      if (entreprises) morceaux.push(`${pluriel(entreprises, 'soumission', 'soumissions')}${d.estimationVille ? ` comparée${entreprises > 1 ? 's' : ''} à l'estimation de la Ville` : ''}`);
+      else if (d.chiffresCles?.some((c) => /co[uû]t|budget|pr[ée]vision/i.test(c.libelle ?? ''))) morceaux.push('le coût total du projet');
+      if (/(?:payable|vers[ée]e?s?)\s+en\s+(?:deux|trois|quatre|cinq|six|\d+)\s+(?:versements|tranches)/i.test((d.conditions ?? []).join(' '))) morceaux.push('le calendrier des versements');
+      else if (d.duree) morceaux.push('la durée');
+      if (d.conditions?.length) morceaux.push(pluriel(d.conditions.length, 'condition', 'conditions'));
+      if (!morceaux.length) return '';
+      return `<div style="margin-top:6px;padding:4px 9px;border-left:3px solid #D99A06;border-radius:4px;background:#FFF7E0;font-size:12.5px;line-height:1.45;color:#7A4E00">🔒 <strong>★ Abonnés :</strong> ${echapper(morceaux.slice(0, 3).join(' · '))}</div>`;
+    }
     if (entreprises) morceaux.push(pluriel(entreprises, 'soumission', 'soumissions'));
     // L'écart avec la plus basse soumission conforme ; un seul lot, sinon on ne résume pas.
     const ecarts = [...String(d.ecartEstimation ?? '').matchAll(/plus basse[^:]*:\s*([-+−]?\s?\d+(?:,\d+)?)\s*%/gi)].map((m) => m[1]);
