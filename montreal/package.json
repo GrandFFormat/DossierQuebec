@@ -7,6 +7,7 @@
   "scripts": {
     "refresh": "node scripts/refresh.js",
     "decouvrir:arrondissements": "node scrapers/decouverte-arrondissements.js",
+    "diagnostic:arrondissements": "node scrapers/diagnostic-arrondissements.js",
     "scrape:seances": "node scrapers/seances.js",
     "scrape:seances-arrondissements": "node scrapers/seances-arrondissements.js",
     "scrape:robots": "node scrapers/robots.js",
