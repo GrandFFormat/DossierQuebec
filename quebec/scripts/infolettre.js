@@ -301,17 +301,25 @@ async function main() {
       </tr></table>
     </td></tr>`;
 
+  // Deux éditions du même compte rendu : gratuite (avec l'invitation à s'abonner) et abonnés
+  // (sans publicité, et un lien vers le détail de l'argent sous chaque montant — le détail
+  // lui-même reste dans sa fiche, derrière la connexion).
+  const pageHtml = (abonne) => {
+  const lienDetail = (f, couleur) =>
+    abonne && f.numero && f.montant > 0
+      ? ` · <a href="${SITE}decisions.html?q=${encodeURIComponent(f.numero)}" style="color:${couleur};font-weight:700;text-decoration:none;white-space:nowrap">${natureParId.has(f.cle) ? "💵 Détail de l'argent" : 'Demander le détail'}&nbsp;↗</a>`
+      : '';
   const H = [];
   // Bandeau
   H.push(`
     <tr><td style="background:#0B8A4B;border-radius:12px 12px 0 0;padding:26px 24px 22px">
-      <div style="${POLICE};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#CFF5DE">DossierVilleDeQuébec · Compte rendu mensuel</div>
+      <div style="${POLICE};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#CFF5DE">DossierVilleDeQuébec · Compte rendu mensuel${abonne ? ' · édition abonnés' : ''}</div>
       <h1 style="${POLICE};margin:8px 0 0;font-size:27px;line-height:1.2;color:#ffffff">Ce que la Ville de Québec a décidé ${echapper(nomPeriode)}</h1>
     </td></tr>
     <tr><td style="height:6px;line-height:6px;font-size:0;background:#F5B301">&nbsp;</td></tr>`);
   // Le mot du mois, puis l'introduction
   const paragraphes = [...mot.map((p) => `<p style="${POLICE};margin:0 0 12px;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(p)}</p>`)];
-  H.push(`<tr><td style="padding:22px 4px 4px">${paragraphes.join('')}<p style="${POLICE};margin:0;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(introduction)}</p></td></tr>`);
+  H.push(`<tr><td style="padding:22px 4px 4px">${paragraphes.join('')}<p style="${POLICE};margin:0;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(introduction)}</p>${abonne ? `<p style="${POLICE};margin:12px 0 0;padding:10px 12px;border-radius:8px;background:${teinte('#D99A06', 0.14)};font-size:14px;line-height:1.5;color:${ENCRE}">💵 <strong>Merci d'être abonné.</strong> Sous chaque montant, le lien <strong>Détail de l'argent</strong> ouvre sa fiche : qui reçoit, les soumissions, l'estimation de la Ville, la répartition par année. Pas encore lu ? <strong>Demander le détail</strong> le fait lire en priorité.</p>` : ''}</td></tr>`);
 
   // Le mois en chiffres : quatre tuiles de couleur, deux par rangée (lisible sur cellulaire).
   const tuile = (n, libelle, couleur) => `<td width="50%" valign="top" style="padding:6px">
@@ -335,7 +343,7 @@ async function main() {
       <div style="margin:0 0 6px">${montant(f, SECTIONS.montants.couleur)} ${natureDe(f) ? pastille(natureDe(f), SECTIONS.montants.couleur) : ''} ${sujetDe(f)}</div>
       <div style="font-weight:600">${echapper(phraseDe(f))}</div>
       ${puces.length ? `<ul style="margin:6px 0 0;padding-left:18px;color:#374151;font-size:14px">${puces.map((p) => `<li style="margin:0 0 3px">${echapper(p)}</li>`).join('')}</ul>` : ''}
-      <div style="margin-top:8px;font-size:13px;color:${DOUX}">${echapper(ouVu(f))} · ${lien(f.numero, f.pdf, SECTIONS.montants.couleur)}</div>`));
+      <div style="margin-top:8px;font-size:13px;color:${DOUX}">${echapper(ouVu(f))} · ${lien(f.numero, f.pdf, SECTIONS.montants.couleur)}${lienDetail(f, SECTIONS.montants.couleur)}</div>`));
   }
   if (!lourdes.length) H.push(`<tr><td style="${POLICE};color:${DOUX}">Aucun montant relevé dans les résumés du mois.</td></tr>`);
 
@@ -345,7 +353,7 @@ async function main() {
     if (!dossiers.length) { H.push(`<tr><td style="${POLICE};color:${DOUX};padding:0 0 8px">${vide}</td></tr>`); return; }
     const lignes = dossiers.map((f, i) => `<tr style="background:${i % 2 ? teinte(s.couleur, 0.05) : '#ffffff'}">
         <td valign="top" width="1" style="${POLICE};padding:10px 10px 10px 12px;white-space:nowrap">${montant(f, s.couleur)}</td>
-        <td valign="top" style="${POLICE};padding:10px 12px 10px 0;font-size:14px;line-height:1.5;color:${ENCRE}">${echapper(phraseDe(f))}${natureDe(f) ? ` ${pastille(natureDe(f), s.couleur)}` : ''}<div style="margin-top:3px;font-size:12px">${lien(f.numero, f.pdf, s.couleur)}</div></td>
+        <td valign="top" style="${POLICE};padding:10px 12px 10px 0;font-size:14px;line-height:1.5;color:${ENCRE}">${echapper(phraseDe(f))}${natureDe(f) ? ` ${pastille(natureDe(f), s.couleur)}` : ''}<div style="margin-top:3px;font-size:12px">${lien(f.numero, f.pdf, s.couleur)}${lienDetail(f, s.couleur)}</div></td>
       </tr>`).join('');
     H.push(`<tr><td style="padding:0 0 6px"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid ${teinte(s.couleur, 0.25)};border-top:4px solid ${s.couleur};border-radius:8px;border-collapse:separate;overflow:hidden">${lignes}</table></td></tr>`);
   };
@@ -368,8 +376,15 @@ async function main() {
   H.push(enTete(SECTIONS.sujets));
   H.push(`<tr><td style="padding:0 0 6px;line-height:2.1">${sujets.map((s) => `<span style="${POLICE};display:inline-block;margin:0 6px 6px 0;padding:4px 11px;border-radius:999px;background:${s.couleur};color:#fff;font-size:13px;font-weight:700;white-space:nowrap">${echapper(s.libelle)} <span style="opacity:.85">${s.n}</span></span>`).join('')}</td></tr>`);
 
-  // L'invitation, puis le pied
-  H.push(`<tr><td style="padding:26px 0 0">
+  // L'invitation (gratuit) ou le rappel de ce que l'abonnement donne (abonnés), puis le pied
+  if (abonne) H.push(`<tr><td style="padding:26px 0 0">
+    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#E8F6EE;border:1px solid #9FD9B6;border-radius:10px;border-collapse:separate"><tr><td style="${POLICE};padding:16px 18px;font-size:15px;line-height:1.55;color:${ENCRE}">
+      <div style="font-size:17px;font-weight:800;color:#0B8A4B;margin-bottom:4px">📂 Dans vos dossiers</div>
+      Vos alertes du matin continuent chaque jour où vos projets, vos mots-clés ou vos organismes bougent. Dans <a href="${RACINE}/mes-dossiers" style="color:#0B8A4B;font-weight:700">Mes dossiers</a> : l'agenda des conseils, l'export en tableur ou en PDF, et le détail de l'argent de chaque dossier.
+      <div style="margin-top:12px"><a href="${RACINE}/mes-dossiers" style="display:inline-block;padding:9px 16px;border-radius:6px;background:#0B8A4B;color:#ffffff;font-weight:700;text-decoration:none">Ouvrir Mes dossiers</a> <a href="${RACINE}/abonnement" style="margin-left:10px;color:${DOUX};font-size:13px">Gérer mon abonnement</a></div>
+    </td></tr></table>
+  </td></tr>`);
+  else H.push(`<tr><td style="padding:26px 0 0">
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#FFF7E0;border:1px solid #F5D78A;border-radius:10px;border-collapse:separate"><tr><td style="${POLICE};padding:16px 18px;font-size:15px;line-height:1.55;color:${ENCRE}">
       <div style="font-size:17px;font-weight:800;color:#B7791F;margin-bottom:4px">🔔 Aller plus loin</div>
       Suivez un projet, une rue ou une entreprise dans <a href="${RACINE}/mes-dossiers" style="color:#0B8A4B;font-weight:700">Mes dossiers</a>. L'abonnement ajoute les alertes quand ils bougent et le détail de l'argent de chaque dossier : qui a soumissionné, l'estimation de la Ville, la répartition par année.
@@ -381,18 +396,22 @@ async function main() {
     <a href="${SITE}decisions.html" style="color:${DOUX}">Toutes les décisions</a> · site indépendant, sans publicité, aucun caractère officiel.
   </td></tr>`);
 
-  const page = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ce que la Ville de Québec a décidé ${echapper(nomPeriode)}</title></head>` +
+  return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ce que la Ville de Québec a décidé ${echapper(nomPeriode)}</title></head>` +
     `<body style="margin:0;padding:0;background:#EEF1F4"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#EEF1F4"><tr><td align="center" style="padding:20px 10px">` +
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:660px;background:#F8FAFB;border-radius:12px"><tr><td style="padding:0 0 26px">` +
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">${H[0]}</table>` +
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td style="padding:0 16px"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">${H.slice(1).join('')}</table></td></tr></table>` +
     `</td></tr></table></td></tr></table></body></html>`;
+  };
+  const page = pageHtml(false);
+  const pageAbonnes = pageHtml(true);
 
   await mkdir(SORTIE, { recursive: true });
   await writeFile(new URL(`${fichier}.md`, SORTIE), md, 'utf8');
   await writeFile(new URL(`${fichier}.html`, SORTIE), page, 'utf8');
+  await writeFile(new URL(`${fichier}-abonnes.html`, SORTIE), pageAbonnes, 'utf8');
   console.log(`${nomPeriode} : ${liste.length} dossiers, ${nbSeances} séances, ${subventions.length} subventions, ${contrats.length} contrats, ${nbVotesDivises} votes divisés${mot.length ? ', mot du mois inclus' : ''}.`);
-  console.log(`→ infolettres/${fichier}.html et .md`);
+  console.log(`→ infolettres/${fichier}.html (gratuit), ${fichier}-abonnes.html et ${fichier}.md`);
 }
 
 main().catch((err) => {
