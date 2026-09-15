@@ -386,7 +386,7 @@ async function main() {
     if (!d) return '';
     const entreprises = new Set((d.soumissions ?? []).map((s) => s.entreprise)).size;
     if (!abonne) {
-      const contenu = [d.beneficiaire ? 'qui reçoit' : null, d.payeur ? 'qui paie' : null, entreprises ? pluriel(entreprises, 'soumissionnaire comparé', 'soumissionnaires comparés') : null, d.estimationVille ? "l'estimation de la Ville" : null, d.repartitionAnnuelle?.length ? 'la répartition par année' : null, d.conditions?.length ? 'les conditions' : null].filter(Boolean);
+      const contenu = [d.beneficiaire ? 'qui reçoit' : null, d.payeur ? 'qui paie' : null, entreprises ? pluriel(entreprises, 'soumissionnaire comparé', 'soumissionnaires comparés') : null, d.estimationVille ? "l'estimation de la Ville" : null, d.repartitionAnnuelle?.length ? 'la répartition par année' : null].filter(Boolean);
       return boiteOr(`🔒 <strong>Détail de l'argent</strong> ${marque}<br>${contenu.length ? `Dans ce dossier : ${echapper(contenu.join(', '))}.` : "Lu et vérifié dans le document."} ${lienOr("S'abonner", `${RACINE}/abonnement`)}`);
     }
     const retenue = (d.soumissions ?? []).find((s) => s.retenue);
@@ -398,7 +398,8 @@ async function main() {
       d.duree ? `<strong>Durée :</strong> ${echapper(court(d.duree, 120))}` : null,
       d.sourceFinancement ? `<strong>D'où vient l'argent :</strong> ${echapper(court(d.sourceFinancement.replace(/\s*\(clé [^)]*\)/i, ''), 140))}` : null,
       d.chiffresCles?.length ? `<strong>En chiffres :</strong> ${echapper(d.chiffresCles.slice(0, 2).map((c) => `${c.libelle} : ${c.valeur}`).join(' · '))}` : null,
-      d.conditions?.length ? `<strong>Condition :</strong> ${echapper(court(d.conditions[0], 140))}` : null,
+      // La première clause du document, en entier : coupée, elle ne disait rien.
+      d.conditions?.length ? `<strong>À savoir :</strong> ${echapper(court(d.conditions[0], 320))}` : null,
     ].filter(Boolean).slice(0, 5);
     return boiteOr(`💵 <strong>Détail de l'argent</strong> ${marque}${lignes.map((l) => `<br>${l}`).join('')}<br>${lienOr('Toute la fiche', fiche(f.numero))}`);
   };
