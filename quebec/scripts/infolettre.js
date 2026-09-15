@@ -160,7 +160,13 @@ async function main() {
       const cle = [racine + 'api.env', racine + '../api.env'].find((f) => existsSync(f));
       if (cle) process.loadEnvFile(cle);
     }
-    const candidats = liste.filter((f) => f.montant > 0 && decidant(f) && f.cle.endsWith('.pdf') && f.resume).sort(parMontant).slice(0, 8);
+    // Les plus gros montants, puis toutes les subventions et tous les contrats du mois : l'édition
+    // abonnés résume leur détail sous chaque ligne.
+    const lisible = (f) => f.montant > 0 && decidant(f) && f.cle.endsWith('.pdf') && f.resume;
+    const candidats = [...new Set([
+      ...liste.filter(lisible).sort(parMontant).slice(0, 8),
+      ...liste.filter((f) => lisible(f) && ['subventions', 'contrats'].includes(f.theme)),
+    ])];
     await extraireDetails(candidats.map((f) => f.cle.replace(/\.pdf$/, '')));
   }
 
@@ -344,6 +350,37 @@ async function main() {
   const fiche = (numero) => `${SITE}decisions.html?q=${encodeURIComponent(numero)}`;
   // Le détail de l'argent d'un gros montant : quelques lignes pour l'abonné, ce qu'il contient pour les
   // autres (sans les chiffres). Rien, dans les deux éditions, s'il n'est pas lu.
+  // Sous une subvention ou un contrat, l'essentiel du détail en une ligne dorée (abonnés seulement) :
+  // « 2 soumissions · plus basse 22,8 % sous l'estimation de la Ville · jusqu'au 31 août 2028 ».
+  const ligneOr = (f) => {
+    const d = abonne ? natureParId.get(f.cle) : null;
+    if (!d) return '';
+    const morceaux = [];
+    const entreprises = new Set((d.soumissions ?? []).map((s) => s.entreprise)).size;
+    if (entreprises) morceaux.push(pluriel(entreprises, 'soumission', 'soumissions'));
+    // L'écart avec la plus basse soumission conforme ; un seul lot, sinon on ne résume pas.
+    const ecarts = [...String(d.ecartEstimation ?? '').matchAll(/plus basse[^:]*:\s*([-+−]?\s?\d+(?:,\d+)?)\s*%/gi)].map((m) => m[1]);
+    if (ecarts.length === 1 && !/lot/i.test(d.ecartEstimation)) {
+      const n = Number(ecarts[0].replace(/[\s−]/g, (c) => (c === '−' ? '-' : '')).replace(',', '.'));
+      if (Number.isFinite(n) && n !== 0) morceaux.push(`plus basse ${nombreFr(Math.abs(n))} % ${n < 0 ? 'sous' : 'au-dessus de'} l'estimation de la Ville`);
+    }
+    // Sans appel d'offres (une subvention, une entente) : le chiffre clé du document, souvent le
+    // coût total du projet ou la part de l'aide dans son budget.
+    // Pas le montant de la ligne répété, ni une durée (dite plus loin) ; le coût ou le budget d'abord.
+    const utile = (d.chiffresCles ?? []).filter((c) => c.libelle && c.valeur && `${c.libelle} ${c.valeur}`.length <= 80 && !/dur[ée]e/i.test(c.libelle) && lireMontant(c.valeur) !== Math.round(f.montant ?? -1) && Math.abs((lireMontant(c.valeur) ?? 0) - (f.montant ?? 0)) > 1);
+    const cle = utile.find((c) => /co[uû]t|budget|pr[ée]vision|part |taux/i.test(c.libelle)) ?? utile[0];
+    if (!entreprises && cle) morceaux.push(`${cle.libelle.replace(/\s*:$/, '')} : ${cle.valeur}`);
+    const versements = /(?:payable|vers[ée]e?s?)\s+en\s+(deux|trois|quatre|cinq|six|\d+)\s+(versements|tranches)/i.exec((d.conditions ?? []).join(' '));
+    if (versements) morceaux.push(`en ${versements[1].toLowerCase()} ${versements[2].toLowerCase()}`);
+    const date = (motif) => motif.exec(d.duree ?? '')?.[1];
+    const JOUR = '(\\d{1,2}(?:er)?\\s+[a-zéû]+\\s+\\d{4})';
+    const auPlusTard = date(new RegExp(`(?:terminer|termin[ée]s?|verser[^;]*?)\\s+au plus tard le\\s+${JOUR}`, 'i')) ?? date(new RegExp(`au plus tard le\\s+${JOUR}`, 'i'));
+    const jusqua = date(new RegExp(`jusqu'au\\s+${JOUR}`, 'i')) ?? date(new RegExp(`\\bau\\s+${JOUR}`, 'i'));
+    if (jusqua) morceaux.push(`jusqu'au ${jusqua}`);
+    else if (auPlusTard) morceaux.push(`au plus tard le ${auPlusTard}`);
+    if (!morceaux.length) return '';
+    return `<div style="margin-top:6px;padding:4px 9px;border-left:3px solid #D99A06;border-radius:4px;background:#FFF7E0;font-size:12.5px;line-height:1.45;color:#7A4E00"><strong>★</strong> ${echapper(morceaux.slice(0, 3).join(' · '))}</div>`;
+  };
   const detailOr = (f) => {
     const d = natureParId.get(f.cle);
     if (!d) return '';
@@ -376,7 +413,7 @@ async function main() {
   // Le mot du mois, puis l'introduction
   const paragraphes = [...mot.map((p) => `<p style="${POLICE};margin:0 0 12px;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(p)}</p>`)];
   H.push(`<tr><td style="padding:22px 4px 4px">${paragraphes.join('')}<p style="${POLICE};margin:0;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(introduction)}</p>${abonne
-    ? boiteOr(`${marque} <strong>Votre édition abonnés.</strong> Tout ce qui est en doré vous est réservé : le détail de l'argent des plus gros montants et l'agenda des conseils du mois qui vient. Merci : c'est votre abonnement qui garde le reste gratuit pour tout le monde.`, '14px 0 0')
+    ? boiteOr(`${marque} <strong>Votre édition abonnés.</strong> Merci : c'est votre abonnement qui garde le reste gratuit pour tout le monde.`, '14px 0 0')
     : boiteOr(`${marque} <strong>Les encadrés dorés sont réservés aux abonnés :</strong> le détail de l'argent de chaque montant — qui reçoit, les soumissions, l'estimation de la Ville — et l'agenda des conseils du mois qui vient. ${lienOr("Voir l'abonnement", `${RACINE}/abonnement`)}`, '14px 0 0')}</td></tr>`);
 
   // Le mois en chiffres : quatre tuiles de couleur, deux par rangée (lisible sur cellulaire).
@@ -412,7 +449,7 @@ async function main() {
     if (!dossiers.length) { H.push(`<tr><td style="${POLICE};color:${DOUX};padding:0 0 8px">${vide}</td></tr>`); return; }
     const lignes = dossiers.map((f, i) => `<tr style="background:${i % 2 ? teinte(s.couleur, 0.05) : '#ffffff'}">
         <td valign="top" width="1" style="${POLICE};padding:10px 10px 10px 12px;white-space:nowrap">${montant(f, s.couleur)}</td>
-        <td valign="top" style="${POLICE};padding:10px 12px 10px 0;font-size:14px;line-height:1.5;color:${ENCRE}">${echapper(phraseDe(f))}${natureDe(f) ? ` ${pastille(natureDe(f), s.couleur)}` : ''}<div style="margin-top:3px;font-size:12px">${lien(f.numero, f.pdf, s.couleur)}</div></td>
+        <td valign="top" style="${POLICE};padding:10px 12px 10px 0;font-size:14px;line-height:1.5;color:${ENCRE}">${echapper(phraseDe(f))}${natureDe(f) ? ` ${pastille(natureDe(f), s.couleur)}` : ''}<div style="margin-top:3px;font-size:12px">${lien(f.numero, f.pdf, s.couleur)}</div>${ligneOr(f)}</td>
       </tr>`).join('');
     H.push(`<tr><td style="padding:0 0 6px"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid ${teinte(s.couleur, 0.25)};border-top:4px solid ${s.couleur};border-radius:8px;border-collapse:separate;overflow:hidden">${lignes}</table></td></tr>`);
   };
