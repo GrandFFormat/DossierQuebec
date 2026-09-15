@@ -342,8 +342,6 @@ async function main() {
   const boiteOr = (contenu, marge = '10px 0 0') => `<div style="${POLICE};margin:${marge};padding:10px 12px;border-radius:8px;background:#FFF7E0;border:1px dashed #E9B949;font-size:14px;line-height:1.55;color:${ENCRE}">${contenu}</div>`;
   const lienOr = (texte, url) => `<a href="${echapper(url)}" style="color:${OR};font-weight:700;text-decoration:none;white-space:nowrap">${texte}&nbsp;↗</a>`;
   const fiche = (numero) => `${SITE}decisions.html?q=${encodeURIComponent(numero)}`;
-  // Seulement là où le détail est lu : jamais de « pas encore lu » ni de « demander » dans le compte rendu.
-  const lienDetail = (f) => (abonne && f.numero && natureParId.has(f.cle) ? ` · ${lienOr("💵 Détail de l'argent", fiche(f.numero))}` : '');
   // Le détail de l'argent d'un gros montant : quelques lignes pour l'abonné, ce qu'il contient pour les
   // autres (sans les chiffres). Rien, dans les deux éditions, s'il n'est pas lu.
   const detailOr = (f) => {
@@ -378,7 +376,7 @@ async function main() {
   // Le mot du mois, puis l'introduction
   const paragraphes = [...mot.map((p) => `<p style="${POLICE};margin:0 0 12px;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(p)}</p>`)];
   H.push(`<tr><td style="padding:22px 4px 4px">${paragraphes.join('')}<p style="${POLICE};margin:0;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(introduction)}</p>${abonne
-    ? boiteOr(`${marque} <strong>Votre édition abonnés.</strong> Tout ce qui est en doré vous est réservé : le détail de l'argent des plus gros montants, un lien direct vers celui des subventions et des contrats, et l'agenda des conseils du mois qui vient. Merci : c'est votre abonnement qui garde le reste gratuit pour tout le monde.`, '14px 0 0')
+    ? boiteOr(`${marque} <strong>Votre édition abonnés.</strong> Tout ce qui est en doré vous est réservé : le détail de l'argent des plus gros montants et l'agenda des conseils du mois qui vient. Merci : c'est votre abonnement qui garde le reste gratuit pour tout le monde.`, '14px 0 0')
     : boiteOr(`${marque} <strong>Les encadrés dorés sont réservés aux abonnés :</strong> le détail de l'argent de chaque montant — qui reçoit, les soumissions, l'estimation de la Ville — et l'agenda des conseils du mois qui vient. ${lienOr("Voir l'abonnement", `${RACINE}/abonnement`)}`, '14px 0 0')}</td></tr>`);
 
   // Le mois en chiffres : quatre tuiles de couleur, deux par rangée (lisible sur cellulaire).
@@ -414,7 +412,7 @@ async function main() {
     if (!dossiers.length) { H.push(`<tr><td style="${POLICE};color:${DOUX};padding:0 0 8px">${vide}</td></tr>`); return; }
     const lignes = dossiers.map((f, i) => `<tr style="background:${i % 2 ? teinte(s.couleur, 0.05) : '#ffffff'}">
         <td valign="top" width="1" style="${POLICE};padding:10px 10px 10px 12px;white-space:nowrap">${montant(f, s.couleur)}</td>
-        <td valign="top" style="${POLICE};padding:10px 12px 10px 0;font-size:14px;line-height:1.5;color:${ENCRE}">${echapper(phraseDe(f))}${natureDe(f) ? ` ${pastille(natureDe(f), s.couleur)}` : ''}<div style="margin-top:3px;font-size:12px">${lien(f.numero, f.pdf, s.couleur)}${lienDetail(f)}</div></td>
+        <td valign="top" style="${POLICE};padding:10px 12px 10px 0;font-size:14px;line-height:1.5;color:${ENCRE}">${echapper(phraseDe(f))}${natureDe(f) ? ` ${pastille(natureDe(f), s.couleur)}` : ''}<div style="margin-top:3px;font-size:12px">${lien(f.numero, f.pdf, s.couleur)}</div></td>
       </tr>`).join('');
     H.push(`<tr><td style="padding:0 0 6px"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid ${teinte(s.couleur, 0.25)};border-top:4px solid ${s.couleur};border-radius:8px;border-collapse:separate;overflow:hidden">${lignes}</table></td></tr>`);
   };
