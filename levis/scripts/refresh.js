@@ -50,6 +50,10 @@ if (!resumes) {
 }
 
 const ETAPES = [
+  // Le 15 septembre 2026, un « `n » laissé par un remplacement scripté dans app.js a cassé toutes
+  // les pages du volet pendant une nuit, sans que rien ne le signale : une erreur de syntaxe dans
+  // le JavaScript du site rend maintenant le run rouge.
+  { nom: 'Syntaxe du JavaScript du site', argv: ['--check', 'assets/app.js'] },
   { nom: 'Archivage des années révolues', argv: ['scrapers/archive.js', '--rotate'], secondaire: true },
   ...(conseil
     ? [
