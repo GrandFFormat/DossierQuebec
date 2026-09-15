@@ -28,6 +28,7 @@
 // PUBLIC_SITE_URL. Tables : scripts/supabase-schema-alertes.sql.
 
 import { supabase, signature, site } from './_alertes.js';
+import { envoyerNumerosEnAttente } from './_infolettre.js';
 
 const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis', longueuil: 'Longueuil' };
 const CLE = /^[\w-]{1,60}$/;
@@ -268,6 +269,17 @@ export default async function handler(req, res) {
   const apercu = serveur && req.query?.apercu === '1';
   const essai = pourSoi ? pourSoi.email.toLowerCase() : String(req.query?.essai ?? '').trim().toLowerCase() || null;
   const rapport = { abonnes: 0, personnes: 0, envoyes: 0, projetsMemorises: 0, erreurs: [], ...(apercu ? { apercu: [] } : {}) };
+
+  // Le compte rendu mensuel publié (api/_infolettre.js) part au même passage : Vercel Hobby n'accepte
+  // que deux crons. Une panne de l'infolettre n'empêche pas les alertes.
+  if (serveur && !apercu && !essai) {
+    try {
+      rapport.infolettre = await envoyerNumerosEnAttente();
+    } catch (erreur) {
+      console.error('infolettre (cron) :', erreur);
+      rapport.erreurs.push(`infolettre : ${erreur.message}`);
+    }
+  }
 
   try {
     const maintenant = new Date();
