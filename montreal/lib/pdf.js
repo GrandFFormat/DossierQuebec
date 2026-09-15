@@ -19,7 +19,9 @@ function pdfjs() {
 
 const ESPACE_INSECABLE = / /g;
 
-// Regroupe les fragments d'une page en lignes, triées de haut en bas.
+// Regroupe les fragments d'une page en lignes, triées de haut en bas. Le texte n'est pas
+// encore composé : il dépend d'une décision qui se prend sur le document entier, pas sur
+// une page (voir colonneDroite).
 function lignesDePage(items) {
   const lignes = [];
   for (const it of items) {
@@ -34,78 +36,131 @@ function lignesDePage(items) {
     ligne.fragments.push({ x, str: it.str, largeur: it.width ?? 0 });
   }
   for (const l of lignes) l.fragments.sort((a, b) => a.x - b.x);
-
-  // Pierrefonds-Roxboro publie ses procès-verbaux sur deux colonnes, le français à gauche
-  // et sa traduction anglaise à droite. Mises bout à bout, les deux moitiés donnent des
-  // lignes illisibles : « Règlement CA29 0046 sur la tenue, la By-law CA29 0046 governing
-  // the holding, ». On ne garde alors que la colonne de gauche — le document français,
-  // celui que le site présente. Rien n'est inventé : l'autre moitié dit la même chose en
-  // anglais.
-  const coupure = colonneDroite(lignes);
-
-  for (const l of lignes) {
-    const fragments = coupure == null ? l.fragments : l.fragments.filter((f) => f.x < coupure);
-    let texte = '';
-    let precedent = null;
-    for (const f of fragments) {
-      if (precedent) {
-        const ecart = f.x - (precedent.x + precedent.largeur);
-        if (ecart > 1 && !precedent.str.endsWith(' ') && !f.str.startsWith(' ')) texte += ' ';
-      }
-      texte += f.str;
-      precedent = f;
-    }
-    l.texte = texte.replace(ESPACE_INSECABLE, ' ').trimEnd();
-  }
   // pdf.js donne y depuis le bas de la page : le haut a le y le plus grand.
   lignes.sort((a, b) => b.y - a.y);
-  return lignes.map(({ y, texte }) => ({ y, texte })).filter((l) => l.texte !== '');
+  return lignes;
 }
 
-// Où commence la colonne de droite, s'il y en a une ? On ne le décide qu'en voyant la
-// même coupure se répéter : une page sur deux colonnes a, ligne après ligne, un blanc
-// large au MÊME endroit. Un blanc isolé — « 20.03      1266245003 », un tableau, une
-// signature en marge — n'en fait pas une, et c'est voulu : se tromper ici coûterait la
-// moitié de chaque ligne d'un procès-verbal ordinaire.
-const ECART_COLONNE = 24; // en unités PDF : bien plus qu'une espace, même large
-const PART_MINIMALE = 0.45; // la coupure doit revenir sur au moins 45 % des lignes
+// Pierrefonds-Roxboro publie ses procès-verbaux sur deux colonnes, le français à gauche et
+// sa traduction anglaise à droite. Mises bout à bout, les deux moitiés donnent des lignes
+// illisibles : « Règlement CA29 0046 sur la tenue, la By-law CA29 0046 governing the
+// holding, ». On ne garde alors que la colonne de gauche — le document français, celui que
+// le site présente. Rien n'est inventé : l'autre moitié dit la même chose en anglais.
+//
+// Ce qui rend l'exercice délicat, c'est qu'un blanc large ne suffit pas à reconnaître une
+// gouttière. Mesurés sur un vrai procès-verbal, les espaces entre deux mots FRANÇAIS de la
+// même phrase montent jusqu'à 25 unités (« M  Jean-François », « d'arrondissement
+// située »), tandis que la gouttière de la page de garde n'en fait que 17. Les deux
+// populations se recouvrent entièrement : aucun seuil ne les sépare.
+//
+// Ce qui les sépare, c'est la POSITION. Une colonne commence toujours au même endroit,
+// page après page ; un espace entre deux mots tombe où il tombe. D'où la méthode, en deux
+// temps :
+//
+//   1. Apprendre, sur TOUTES les lignes du document, les x où une colonne commence. Seuls
+//      les blancs francs — au moins 24 unités, vers le milieu de la page — servent de
+//      preuve. Sur un procès-verbal de Pierrefonds, trois positions ressortent : x=315
+//      dans le corps du texte, x=338 et x=362 dans les tableaux de la période de
+//      questions, où le français est en retrait derrière une puce. Une page seule se
+//      tromperait : la mesure page à page donnait 305, 332, 356, puis rien du tout.
+//   2. Couper chaque ligne au premier fragment qui commence à l'une de ces positions,
+//      quelle que soit la largeur du blanc qui le précède. C'est ainsi que la page de
+//      garde et les titres se coupent enfin — « PROLONGATION DE LA PÉRIODE DE QUESTION
+//      PERIOD EXTENSION » redevient « PROLONGATION DE LA PÉRIODE DE ».
+const ECART_COLONNE = 24; // la preuve : un blanc franc, bien plus qu'une espace entre mots
+const ECART_MINIMAL = 6; // à une position apprise, ce reste suffit — ci-dessus, 17 unités
+const TOLERANCE = 8; // deux colonnes sont alignées à quelques unités près (311 et 315)
+const PART_MINIMALE = 0.35; // au moins 35 % des lignes doivent être coupées en deux
+const PART_COLONNE = 0.03; // une position retenue doit revenir sur au moins 3 % des lignes
+// Deux colonnes se partagent la page : elles commencent vers le milieu. Hors de cette
+// bande, ce n'est pas une mise en colonnes — c'est une marge, une numérotation ou un
+// tableau, et se tromper là coûterait la moitié de chaque ligne du document.
+const BANDE = [0.35, 0.65];
+// Une ligne qui commence au-delà de ce point n'a pas de moitié française : elle est tout
+// entière dans la colonne de droite, et n'a rien à faire dans le texte qu'on garde.
+const DEBUT_COLONNE_DROITE = 0.45;
 
-function colonneDroite(lignes) {
-  if (lignes.length < 12) return null;
-  // Le plus grand blanc de chaque ligne, et la position où il s'ouvre.
-  const ouvertures = [];
+function pleins(ligne) {
+  return ligne.fragments.filter((f) => f.str.trim() !== '');
+}
+
+// Les fragments faits UNIQUEMENT d'espaces sont écartés de toutes ces mesures, et c'est
+// une part du problème : dans ces PDF, la gouttière est souvent comblée par un tel
+// fragment — « Signature du livre d'or » à x=95, trente-et-un blancs à x=198, puis
+// « Signing of the guestbook » à x=315. Mesuré sur les fragments voisins, l'écart valait
+// zéro, et la ligne ne comptait pas comme coupable.
+function preuves(lignes, largeurPage) {
+  const out = [];
   for (const l of lignes) {
-    let meilleur = 0;
-    let ou = null;
-    for (let i = 1; i < l.fragments.length; i++) {
-      const precedent = l.fragments[i - 1];
-      const ecart = l.fragments[i].x - (precedent.x + precedent.largeur);
-      if (ecart > meilleur) {
-        meilleur = ecart;
-        ou = l.fragments[i].x;
+    const f = pleins(l);
+    for (let i = 1; i < f.length; i++) {
+      if (f[i].x - (f[i - 1].x + f[i - 1].largeur) < ECART_COLONNE) continue;
+      if (f[i].x < largeurPage * BANDE[0] || f[i].x > largeurPage * BANDE[1]) continue;
+      out.push(f[i].x);
+    }
+  }
+  return out;
+}
+
+// Les positions où une colonne commence, de la mieux attestée à la moins bonne.
+export function colonnes(lignes, largeurPage) {
+  if (lignes.length < 25 || !largeurPage) return [];
+  let reste = preuves(lignes, largeurPage);
+  const minimum = Math.max(3, lignes.length * PART_COLONNE);
+  const centres = [];
+  while (reste.length) {
+    let meilleur = null;
+    let mieux = 0;
+    for (const c of reste) {
+      const n = reste.filter((o) => Math.abs(o - c) <= TOLERANCE).length;
+      if (n > mieux) {
+        mieux = n;
+        meilleur = c;
       }
     }
-    if (meilleur >= ECART_COLONNE) ouvertures.push(ou);
+    if (mieux < minimum) break;
+    centres.push(meilleur);
+    reste = reste.filter((o) => Math.abs(o - meilleur) > TOLERANCE);
   }
-  if (ouvertures.length < lignes.length * PART_MINIMALE) return null;
+  return centres;
+}
 
-  // La colonne de droite commence là où le plus de lignes s'ouvrent. On tolère 12 unités
-  // d'écart : les deux colonnes sont alignées, mais les fragments ne commencent pas tous
-  // exactement au même point.
-  ouvertures.sort((a, b) => a - b);
-  let meilleure = null;
-  let mieux = 0;
-  for (const candidate of ouvertures) {
-    const n = ouvertures.filter((o) => Math.abs(o - candidate) <= 12).length;
-    if (n > mieux) {
-      mieux = n;
-      meilleure = candidate;
-    }
+// Où cette ligne passe-t-elle dans la colonne de droite ?
+function coupureDeLigne(ligne, centres) {
+  const f = pleins(ligne);
+  for (let i = 1; i < f.length; i++) {
+    if (f[i].x - (f[i - 1].x + f[i - 1].largeur) < ECART_MINIMAL) continue;
+    if (centres.some((c) => Math.abs(f[i].x - c) <= TOLERANCE)) return f[i].x;
   }
-  if (mieux < lignes.length * PART_MINIMALE) return null;
-  // La coupure se place un peu avant le début de la colonne de droite, pour ne pas
-  // couper un fragment qui commencerait deux ou trois unités plus tôt.
-  return meilleure - 6;
+  return null;
+}
+
+export function estDeuxColonnes(lignes, centres) {
+  if (!centres.length) return false;
+  return lignes.filter((l) => coupureDeLigne(l, centres) != null).length >= lignes.length * PART_MINIMALE;
+}
+
+// Compose le texte d'une ligne, sans sa moitié anglaise quand il y en a une.
+export function texteDeLigne(ligne, largeurPage, centres) {
+  let fragments = ligne.fragments;
+  if (centres.length) {
+    const f = pleins(ligne);
+    // Rien que du blanc, ou une ligne entièrement dans la colonne de droite.
+    if (!f.length || f[0].x >= largeurPage * DEBUT_COLONNE_DROITE) return '';
+    const coupure = coupureDeLigne(ligne, centres);
+    if (coupure != null) fragments = fragments.filter((x) => x.x < coupure);
+  }
+  let texte = '';
+  let precedent = null;
+  for (const f of fragments) {
+    if (precedent) {
+      const ecart = f.x - (precedent.x + precedent.largeur);
+      if (ecart > 1 && !precedent.str.endsWith(' ') && !f.str.startsWith(' ')) texte += ' ';
+    }
+    texte += f.str;
+    precedent = f;
+  }
+  return texte.replace(ESPACE_INSECABLE, ' ').trimEnd();
 }
 
 export async function lirePdf(data) {
@@ -114,11 +169,13 @@ export async function lirePdf(data) {
   // journal par centaines sans rien dire d'utile.
   const tache = lib.getDocument({ data, useSystemFonts: true, isEvalSupported: false, disableFontFace: true, verbosity: 0 });
   const doc = await tache.promise;
-  const pages = [];
+  // Premier temps : les lignes et leurs fragments, sans composer le texte. La mise en
+  // colonnes se décide sur l'ensemble du document (voir colonneDroite), donc il faut
+  // l'avoir lu en entier avant d'écrire une seule ligne.
+  const brutes = [];
   for (let i = 1; i <= doc.numPages; i++) {
     const page = await doc.getPage(i);
     const contenu = await page.getTextContent();
-    const lignes = lignesDePage(contenu.items);
     const liens = [];
     try {
       for (const a of await page.getAnnotations()) {
@@ -128,10 +185,26 @@ export async function lirePdf(data) {
     } catch {
       // certaines annotations sont illisibles : on garde le texte
     }
-    pages.push({ numero: i, lignes, liens, texte: lignes.map((l) => l.texte).join('\n') });
+    brutes.push({ numero: i, lignes: lignesDePage(contenu.items), liens, largeur: page.view?.[2] ?? null });
     page.cleanup();
   }
   await tache.destroy();
+
+  const largeurs = brutes.map((p) => p.largeur).filter(Boolean).sort((a, b) => a - b);
+  const largeurPage = largeurs.length ? largeurs[Math.floor(largeurs.length / 2)] : null;
+  const toutesLesLignes = brutes.flatMap((p) => p.lignes);
+  const centres = colonnes(toutesLesLignes, largeurPage);
+  // Les positions apprises ne servent que si le document est VRAIMENT sur deux colonnes.
+  const deuxColonnes = estDeuxColonnes(toutesLesLignes, centres) ? centres : [];
+
+  // Second temps : le texte. Une ligne entièrement dans la colonne écartée devient vide,
+  // et une ligne vide n'apprend rien à personne.
+  const pages = brutes.map(({ numero, lignes, liens }) => {
+    const rendues = lignes
+      .map((l) => ({ y: l.y, texte: texteDeLigne(l, largeurPage, deuxColonnes) }))
+      .filter((l) => l.texte !== '');
+    return { numero, lignes: rendues, liens, texte: rendues.map((l) => l.texte).join('\n') };
+  });
   return {
     nombrePages: pages.length,
     texte: pages.map((p) => p.texte).join('\n\f\n'),
