@@ -157,6 +157,14 @@ function carteDecision(d) {
   return carteRepliable(entete, corps + abonnes);
 }
 
+// Le total honnête : les résolutions seules. `nombre` compte aussi les fiches de
+// documents (un procès-verbal et un ordre du jour par séance), qui ne sont pas des
+// décisions. La facette donne le compte sans reparcourir les milliers de fiches.
+function totalDecisions() {
+  const f = (etat.decisions.facettes?.type ?? []).find((t) => t.valeur === 'Résolution');
+  return f ? f.n : etat.decisions.decisions.filter((d) => d.type === 'Résolution').length;
+}
+
 function decisionsFiltrees() {
   const q = $('#rech-decisions').value.trim().toLowerCase();
   const type = $('#filtre-type').value;
@@ -174,7 +182,7 @@ function decisionsFiltrees() {
 }
 
 function rendreDecisions() {
-  const { facettes, parametres, nombre } = etat.decisions;
+  const { facettes, parametres } = etat.decisions;
   if (!$('#filtre-type').dataset.rempli) {
     remplirSelect($('#filtre-type'), facettes.type);
     remplirSelect($('#filtre-instance'), facettes.instance.slice(0, 25));
@@ -196,9 +204,17 @@ function rendreDecisions() {
   const filtrees = decisionsFiltrees();
   const parSeance = $('#affichage')?.value !== 'liste';
 
+  // Une décision, c'est une RÉSOLUTION. Le procès-verbal et l'ordre du jour d'une séance
+  // ont eux aussi leur fiche — elles donnent accès au PDF officiel — mais ce sont des
+  // documents, pas des décisions, et les compter gonflerait le total de 272 pour rien.
+  // C'est précisément le défaut qu'on reproche aux données de Québec : on ne le refait pas.
+  const nDecisions = filtrees.reduce((n, d) => n + (d.type === 'Résolution' ? 1 : 0), 0);
+  const nDocuments = filtrees.length - nDecisions;
+
   $('#compte-decisions').textContent =
-    `${nombreFr(filtrees.length)} décision(s) affichée(s) sur ${nombreFr(nombre)} lues dans les procès-verbaux de ${parametres.annee}` +
+    `${nombreFr(nDecisions)} décision(s) affichée(s) sur ${nombreFr(totalDecisions())} lues dans les procès-verbaux de ${parametres.annee}` +
     (etat.decisions.seancesLues != null ? ` (${etat.decisions.seancesLues} séance(s) lue(s)${etat.decisions.seancesEnAttente ? `, ${etat.decisions.seancesEnAttente} en attente de procès-verbal` : ''}).` : '.') +
+    (nDocuments ? ` S'y ajoutent ${nombreFr(nDocuments)} document(s) de séance : les procès-verbaux et ordres du jour eux-mêmes.` : '') +
     (etat.parId.size ? ` ${nombreFr(etat.parId.size)} portent un résumé en langage clair.` : '');
 
   let reste;
@@ -764,7 +780,9 @@ function rendreFil() {
 function rendreAccueil() {
   const chiffres = [];
   if (etat.decisions) {
-    chiffres.push({ n: nombreFr(etat.decisions.totalDisponible), quoi: `décisions publiées en ${etat.decisions.parametres.annee}`, lien: 'decisions.html' });
+    // Les résolutions seules : les fiches de procès-verbaux et d'ordres du jour sont des
+    // documents, pas des décisions (voir totalDecisions).
+    chiffres.push({ n: nombreFr(totalDecisions()), quoi: `décisions publiées en ${etat.decisions.parametres.annee}`, lien: 'decisions.html' });
   }
   if (etat.votes) {
     chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: 'votes nominatifs consignés cette année', lien: 'votes.html' });
