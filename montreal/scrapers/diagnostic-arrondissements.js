@@ -180,6 +180,65 @@ async function chercherPlateau(compteur, budget = 900) {
   return trouvees;
 }
 
+
+// ---------- C. Les deux colonnes de Pierrefonds-Roxboro ----------
+
+// Le corps de ses procès-verbaux se coupe bien en deux colonnes, mais pas les TITRES :
+// « PROLONGATION DE LA PÉRIODE DE QUESTION PERIOD EXTENSION QUESTIONS ». Pour corriger
+// sans deviner, il faut voir où le texte se pose vraiment dans la page. On imprime donc,
+// ligne par ligne, la position et la largeur de chaque fragment, avec la coupure que la
+// détection a retenue pour cette page.
+async function colonnesDePierrefonds(fichier) {
+  const url = `${DOCUMENTS}CA_Pir/${fichier}`;
+  console.log(`\n${'='.repeat(78)}\nColonnes — ${url}\n${'='.repeat(78)}`);
+  const buf = await octets(url);
+  if (!buf) {
+    console.log('  ⚠ 404');
+    return null;
+  }
+  const lib = await import('pdfjs-dist/legacy/build/pdf.mjs');
+  const tache = lib.getDocument({ data: new Uint8Array(buf), useSystemFonts: true, isEvalSupported: false, disableFontFace: true, verbosity: 0 });
+  const doc = await tache.promise;
+  const rapport = [];
+  for (let i = 1; i <= Math.min(doc.numPages, 4); i++) {
+    const page = await doc.getPage(i);
+    const contenu = await page.getTextContent();
+    const largeurPage = page.view?.[2] ?? null;
+    // Mêmes regroupements que lib/pdf.js : une ligne = une hauteur.
+    const lignes = [];
+    for (const it of contenu.items) {
+      if (!('str' in it) || it.str === '') continue;
+      const y = it.transform[5];
+      let l = lignes.find((x) => Math.abs(x.y - y) <= 2);
+      if (!l) {
+        l = { y, fragments: [] };
+        lignes.push(l);
+      }
+      l.fragments.push({ x: it.transform[4], largeur: it.width ?? 0, str: it.str });
+    }
+    lignes.sort((a, b) => b.y - a.y);
+    for (const l of lignes) l.fragments.sort((a, b) => a.x - b.x);
+    console.log(`\n  --- page ${i} (largeur ${largeurPage}), ${lignes.length} lignes ---`);
+    for (const l of lignes.slice(0, 40)) {
+      const morceaux = l.fragments.map((f) => `${Math.round(f.x)}+${Math.round(f.largeur)}«${f.str}»`).join(' ');
+      let plusGrandEcart = 0;
+      let ou = null;
+      for (let k = 1; k < l.fragments.length; k++) {
+        const e = l.fragments[k].x - (l.fragments[k - 1].x + l.fragments[k - 1].largeur);
+        if (e > plusGrandEcart) {
+          plusGrandEcart = e;
+          ou = Math.round(l.fragments[k].x);
+        }
+      }
+      console.log(`    écart max ${String(Math.round(plusGrandEcart)).padStart(4)} à x=${String(ou ?? '-').padStart(4)} | ${morceaux.slice(0, 210)}`);
+    }
+    rapport.push({ page: i, largeurPage, lignes: lignes.length });
+    page.cleanup();
+  }
+  await tache.destroy();
+  return rapport;
+}
+
 // ---------- Programme ----------
 
 async function principal() {
@@ -192,13 +251,19 @@ async function principal() {
 
   console.log('\n\n########## B. Les séances du Plateau-Mont-Royal ##########');
   const compteur = { n: 0 };
-  const trouvees = await chercherPlateau(compteur);
+  // La réponse est connue depuis le 15 septembre 2026 : rien, en 900 requêtes. On ne la
+  // redemande que sur demande explicite — inutile de repayer pour la même réponse.
+  const trouvees = process.argv.includes('--plateau') ? await chercherPlateau(compteur) : [];
+  if (!process.argv.includes('--plateau')) console.log('  (sauté — passer --plateau pour refaire le sondage)');
   rapport.b = { requetes: compteur.n, trouvees };
   console.log(
     trouvees.length
       ? `\n${trouvees.length} document(s) trouvé(s) en ${compteur.n} requêtes.`
       : `\nRien en ${compteur.n} requêtes : ni les six codes candidats, ni les huit heures. Le Plateau ne publie pas sous Adi_Public.`
   );
+
+  console.log('\n\n########## C. Les deux colonnes de Pierrefonds-Roxboro ##########');
+  rapport.c = await colonnesDePierrefonds('CA_Pir_PV_ORDI_2026-06-01_19h00_FR.pdf');
 
   await mkdir(new URL('../data/', import.meta.url), { recursive: true });
   await writeFile(OUT, JSON.stringify(rapport, null, 1) + '\n');
