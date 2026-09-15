@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-14T16:14:30.620Z",
+ "generatedAt": "2026-09-15T01:40:11.059Z",
  "source": "https://ville.montreal.qc.ca/documents/Adi_Public/",
  "avertissement": "Les définitions de ce lexique sont rédigées par DossierVille — ce ne sont pas des textes de la Ville de Montréal ni des définitions légales. Ce qui vient des documents officiels, ce sont les décomptes et les exemples, mesurés sur les procès-verbaux de l'année.",
  "categories": {
@@ -12,7 +12,7 @@
  },
  "parametres": {
   "annee": "2026",
-  "procesVerbauxMesures": 100
+  "procesVerbauxMesures": 136
  },
  "nombre": 33,
  "entrees": [
@@ -23,10 +23,10 @@
    "definition": "La décision elle-même. Une fois adoptée, c'est l'acte officiel de l'instance : elle porte un numéro qui dit qui l'a prise et quand — CM26 0355 pour le conseil municipal en 2026, CE26 0412 pour le comité exécutif, CG26 0123 pour le conseil d'agglomération, CA26 pour un conseil d'arrondissement.",
    "ouVousLeVoyez": "Chaque fiche de la page Décisions est une résolution lue dans le procès-verbal officiel.",
    "occurrences": {
-    "procesVerbaux": 60,
-    "resolutions": 1150,
+    "procesVerbaux": 76,
+    "resolutions": 2634,
     "pourAnnee": "2026",
-    "total": 1150
+    "total": 2634
    },
    "exemple": {
     "numero": "CA26 08 0296",
@@ -45,9 +45,9 @@
    "ouVousLeVoyez": "C'est à partir de ce document que les résumés en langage clair du site sont produits. Le numéro de dossier — 1266245003, par exemple — est écrit à la fin de chaque résolution, à côté du numéro d'article.",
    "occurrences": {
     "procesVerbaux": 54,
-    "resolutions": 271,
+    "resolutions": 351,
     "pourAnnee": "2026",
-    "total": 271
+    "total": 351
    },
    "exemple": {
     "numero": "CA26 08 0299",
@@ -66,10 +66,10 @@
    "definition": "Le dossier complet d'une décision dans le système de la Ville : le sommaire, ses pièces jointes, les interventions des services, puis la ou les résolutions. Son numéro à dix chiffres suit la décision d'une instance à l'autre — du comité exécutif au conseil municipal, puis à l'agglomération.",
    "ouVousLeVoyez": "Un même dossier peut donc apparaître trois fois sur la page Décisions, une par instance qui s'est prononcée.",
    "occurrences": {
-    "procesVerbaux": 100,
-    "resolutions": 1369,
+    "procesVerbaux": 136,
+    "resolutions": 4576,
     "pourAnnee": "2026",
-    "total": 1369
+    "total": 4576
    },
    "exemple": {
     "numero": "CA26 08 0299",
@@ -87,10 +87,10 @@
    "definition": "Le compte rendu officiel d'une séance : qui était présent, ce qui a été décidé, et — quand un vote enregistré a été demandé — qui a voté quoi.",
    "ouVousLeVoyez": "C'est la source de toutes les décisions et de tous les votes du site. Un par séance, en PDF, sur le site de la Ville.",
    "occurrences": {
-    "procesVerbaux": 100,
-    "resolutions": 103,
+    "procesVerbaux": 136,
+    "resolutions": 374,
     "pourAnnee": "2026",
-    "total": 103
+    "total": 374
    },
    "exemple": {
     "numero": "CA26 08 0297",
@@ -108,18 +108,18 @@
    "definition": "La liste des points qu'une séance doit traiter, publiée le vendredi précédant l'assemblée du conseil municipal. Les points sont numérotés par chapitre : 20 pour les contrats et ententes, 30 pour l'administration et les finances, 40 pour les règlements, 50 pour les nominations, 60 pour les motions.",
    "ouVousLeVoyez": "Le numéro d'article d'une résolution (20.03, 40.12) est celui de son point à l'ordre du jour.",
    "occurrences": {
-    "procesVerbaux": 100,
-    "resolutions": 131,
+    "procesVerbaux": 136,
+    "resolutions": 575,
     "pourAnnee": "2026",
-    "total": 131
+    "total": 575
    },
    "exemple": {
-    "numero": "CA26 08 0296",
-    "objet": "Soumis l'ordre du jour de la séance ordinaire du 4 août 2026. Proposé par le conseiller Jacques Cohen; Appuyé par la conseillère Vana Nazarian, il est RÉSOLU À L'UNANIMITÉ : D'adopter, tel que soumis, l'ordre du jour de la séance ordinaire du 4 août 2026. ADOPTÉ.",
+    "numero": "CA26 12158",
+    "objet": "Adopter l'ordre du jour de la séance du conseil d'arrondissement du 4 août 2026, à 19 h",
     "date": "2026-08-04",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Saint-Laurent",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-08-04_19h30_FR.pdf#page=1"
+    "instance": "Conseil d'arrondissement de Anjou",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-08-04_19h00_FR.pdf#page=2"
    }
   },
   {
@@ -129,18 +129,18 @@
    "definition": "L'annonce qu'un règlement sera présenté à une séance suivante. Ça ne décide rien : ça prévient. C'est une étape obligatoire avant d'adopter un règlement.",
    "ouVousLeVoyez": "Souvent accompagné du dépôt du projet de règlement, puis suivi de son adoption à la séance suivante.",
    "occurrences": {
-    "procesVerbaux": 82,
-    "resolutions": 147,
+    "procesVerbaux": 110,
+    "resolutions": 402,
     "pourAnnee": "2026",
-    "total": 147
+    "total": 402
    },
    "exemple": {
-    "numero": "CA26 08 0308",
-    "objet": "Soumis sommaire décisionnel numéro 1260219009 visant à donner un avis de motion et déposer le projet de règlement numéro 878-51 modifiant le règlement 878 sur la sécurité routière, afin de modifier l'horaire de stationnement hors rue au parc Decelles sur la rue Roy, de manière à limiter le stationnement à la période comprise entre 7 h et 17 h, en remplacement de l’horaire actuellement en vigueur de 7 h à 22 h.",
+    "numero": "CA26 12176",
+    "objet": "Donner avis de motion et déposer le projet de règlement RCA 1333-40 intitulé « Règlement modifiant le règlement relatif à la circulation dans les limites de l'arrondissement d'Anjou (1333), afin d'encadrer le stationnement des véhicules sur les terrains privés ainsi que le changement de pneus et les activités de mécanique sur le domaine public »",
     "date": "2026-08-04",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Saint-Laurent",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-08-04_19h30_FR.pdf#page=7"
+    "instance": "Conseil d'arrondissement de Anjou",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-08-04_19h00_FR.pdf#page=11"
    }
   },
   {
@@ -150,18 +150,18 @@
    "definition": "La forme la plus contraignante d'une décision municipale : une norme générale qui s'applique à tous. Son adoption suit des étapes obligatoires (avis de motion, projet, adoption).",
    "ouVousLeVoyez": "Les numéros disent l'instance et l'année : 26-012 pour le conseil municipal, RCG 26-005 pour l'agglomération, RCA pour un arrondissement.",
    "occurrences": {
-    "procesVerbaux": 41,
-    "resolutions": 61,
+    "procesVerbaux": 59,
+    "resolutions": 175,
     "pourAnnee": "2026",
-    "total": 61
+    "total": 175
    },
    "exemple": {
-    "numero": "CA26 14 0182",
-    "objet": "Adopter le Règlement 01-283-128 intitulé « Règlement modifiant le Règlement de zonage de l’arrondissement de Villeray–Saint-Michel–Parc-Extension (01-283) » afin d’autoriser l’installation d’enseignes temporaires à l’occasion des travaux de réaménagement de la rue De Castelnau Est et recevoir le procès-verbal de l’assemblée publique de consultation tenue le 11 juin 2026.",
-    "date": "2026-07-07",
+    "numero": "CA26 12177",
+    "objet": "Adopter le règlement RCA 193 intitulé « Règlement sur les plans d'aménagement d'ensemble de l'arrondissement d'Anjou »",
+    "date": "2026-08-04",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Villeray–Saint-Michel–Parc-Extension",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-07-07_18h30_FR.pdf#page=17"
+    "instance": "Conseil d'arrondissement de Anjou",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-08-04_19h00_FR.pdf#page=12"
    }
   },
   {
@@ -172,10 +172,10 @@
    "definition": "Les 65 élus de la Ville de Montréal : la mairesse ou le maire, les 18 maires d'arrondissement et 46 conseillères et conseillers de ville. Il adopte le budget, les règlements, les motions, et siège en assemblée ordinaire une fois par mois, le lundi.",
    "ouVousLeVoyez": "Ses séances sont publiques, webdiffusées, et s'ouvrent sur une période de questions du public.",
    "occurrences": {
-    "procesVerbaux": 50,
-    "resolutions": 41,
+    "procesVerbaux": 80,
+    "resolutions": 966,
     "pourAnnee": "2026",
-    "total": 41
+    "total": 966
    },
    "exemple": {
     "numero": "CA26 14 0173",
@@ -193,18 +193,18 @@
    "definition": "Le gouvernement de la Ville au quotidien : la mairesse ou le maire, sa présidence et une dizaine de membres choisis parmi les élus, chacun responsable de dossiers. Il prépare ce que les conseils adoptent et décide seul de ce qui lui est délégué. Il siège chaque semaine, le mercredi.",
    "ouVousLeVoyez": "La formule « Vu la recommandation du comité exécutif… » ouvre la plupart des résolutions du conseil municipal.",
    "occurrences": {
-    "procesVerbaux": 22,
-    "resolutions": 15,
+    "procesVerbaux": 58,
+    "resolutions": 1098,
     "pourAnnee": "2026",
-    "total": 15
+    "total": 1098
    },
    "exemple": {
-    "numero": "CA26 19 0152",
-    "objet": "Approuver l'accueil d'une fermette sur le domaine public de l'arrondissement de Lachine à l'occasion de la Fête des récoltes, approuver une dépense totale de 2 552,45 $, taxes incluses, et approuver la convention à cette fin. De recommander au comité exécutif d'édicter une ordonnance autorisant l'accueil de ladite fermette le 10 octobre 2026",
-    "date": "2026-07-06",
+    "numero": "CA26 30 07 0202",
+    "objet": "DEMANDER - COMITÉ EXÉCUTIF - ÉDICTER - ORDONNANCE - REMPLAÇANT - ORDONNANCE ACTUELLE - ARTICLE 66 - RÈGLEMENT SUR L'ENCADREMENT DES ANIMAUX DOMESTIQUES (21-012) - AUTORISER - GARDE - POULES - CONDITIONS ASSOCIÉES - ACTIVITÉ - TERRITOIRE - ARRONDISSEMENT DE RIVIÈRE-DES-PRAIRIES-POINTE-AUX-TREMBLES - MISE EN OEUVRE - PLAN D'ACTION - AGRICULTURE URBAIN",
+    "date": "2026-07-07",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Lachine",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Lac/CA_Lac_PV_ORDI_2026-07-06_19h00_FR.pdf#page=10"
+    "instance": "Conseil d'arrondissement de Rivière-des-Prairies–Pointe-aux-Trembles",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rdp/CA_Rdp_PV_ORDI_2026-07-07_19h00_FR.pdf#page=20"
    }
   },
   {
@@ -214,18 +214,18 @@
    "definition": "Chacun des 19 arrondissements de Montréal a son conseil, présidé par son maire d'arrondissement, avec les conseillers de ville et d'arrondissement élus sur son territoire. Il décide de ce qui est local : urbanisme de proximité, parcs, loisirs, voirie locale, déneigement.",
    "ouVousLeVoyez": "Ce site couvre les trois instances centrales ; les 19 conseils d'arrondissement suivent le même schéma de publication et sont l'étape suivante.",
    "occurrences": {
-    "procesVerbaux": 100,
-    "resolutions": 903,
+    "procesVerbaux": 120,
+    "resolutions": 1801,
     "pourAnnee": "2026",
-    "total": 903
+    "total": 1801
    },
    "exemple": {
-    "numero": "CA26 08 0295",
-    "objet": "Séance ordinaire du conseil d’arrondissement de Saint-Laurent est convoquée selon la loi et est tenue à la salle du conseil située au 777, boulevard Marcel-Laurin, Saint-Laurent, le mardi 4 août 2026, à 19 h 30. Cette séance est diffusée et disponible en ligne. Sont présents : Le maire d’arrondissement : Alan DeSousa Les conseillers de Ville : Aref Salem Vana Nazarian Les conseillers d’arrondissement : Jacques Cohen Annie Gagnier formant le quorum et siégeant sous la présidence du maire d’arrondissement, Alan DeSousa, et en présence de Me Stéphanie Boulé, agissant à titre de secrétaire substitut du conseil d’arrondissement. Le maire d’arrondissement demande un instant de recueillement.",
+    "numero": "CA26 12158",
+    "objet": "Adopter l'ordre du jour de la séance du conseil d'arrondissement du 4 août 2026, à 19 h",
     "date": "2026-08-04",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Saint-Laurent",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-08-04_19h30_FR.pdf#page=1"
+    "instance": "Conseil d'arrondissement de Anjou",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-08-04_19h00_FR.pdf#page=2"
    }
   },
   {
@@ -236,18 +236,18 @@
    "definition": "Un élu qui siège au conseil de son arrondissement seulement, pas au conseil municipal. Il n'existe que dans certains arrondissements, pour que chaque conseil d'arrondissement compte au moins cinq membres.",
    "ouVousLeVoyez": "La liste des élus de la Ville en compte 38 en plus des 65 membres du conseil municipal ; ils sont dans le jeu de données ouvert, mais pas sur la carte des districts.",
    "occurrences": {
-    "procesVerbaux": 55,
-    "resolutions": 14,
+    "procesVerbaux": 64,
+    "resolutions": 74,
     "pourAnnee": "2026",
-    "total": 14
+    "total": 74
    },
    "exemple": {
-    "numero": "CA26 19 0148",
-    "objet": "Désigner Mme Nancy Berthelot, conseillère d'arrondissement, à titre de mairesse suppléante de er l'arrondissement de Lachine pour la période du 1 août au 30 novembre 2026",
-    "date": "2026-07-06",
+    "numero": "CA26 12180",
+    "objet": "Désigner le conseiller d'arrondissement, monsieur Richard Leblanc, à titre de maire suppléant de l'arrondissement d'Anjou pour les mois d'octobre, novembre et décembre 2026",
+    "date": "2026-08-04",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Lachine",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Lac/CA_Lac_PV_ORDI_2026-07-06_19h00_FR.pdf#page=8"
+    "instance": "Conseil d'arrondissement de Anjou",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-08-04_19h00_FR.pdf#page=15"
    }
   },
   {
@@ -258,10 +258,10 @@
    "definition": "L'officier qui garde les documents officiels de la Ville, rédige les procès-verbaux et certifie les décisions. Ce n'est pas un élu. À Montréal, le greffier fait aussi l'appel des membres lors d'un vote enregistré.",
    "ouVousLeVoyez": "Sa signature clôt les procès-verbaux, avec celle de la présidence.",
    "occurrences": {
-    "procesVerbaux": 7,
-    "resolutions": 5,
+    "procesVerbaux": 43,
+    "resolutions": 128,
     "pourAnnee": "2026",
-    "total": 5
+    "total": 128
    },
    "exemple": {
     "numero": "CM26 0491",
@@ -279,10 +279,10 @@
    "definition": "L'élu qui dirige les débats du conseil municipal — ce n'est pas la mairesse. La présidence donne la parole, met les propositions aux voix et déclare le résultat.",
    "ouVousLeVoyez": "« Le président du conseil déclare la proposition adoptée à la majorité des voix. »",
    "occurrences": {
-    "procesVerbaux": 12,
-    "resolutions": 5,
+    "procesVerbaux": 22,
+    "resolutions": 135,
     "pourAnnee": "2026",
-    "total": 5
+    "total": 135
    },
    "exemple": {
     "numero": "CE26 0892",
@@ -300,18 +300,18 @@
    "definition": "L'instance où Montréal siège avec les 15 villes liées de l'île pour décider des services partagés : police, incendie, transport en commun, eau, évaluation foncière, logement social, grands parcs. Montréal y détient la majorité des voix ; les maires des villes liées y votent aussi.",
    "ouVousLeVoyez": "Ses résolutions portent le préfixe CG. Beaucoup passent d'abord par le conseil municipal sous la forme « recommander au conseil d'agglomération ».",
    "occurrences": {
-    "procesVerbaux": 11,
-    "resolutions": 10,
+    "procesVerbaux": 46,
+    "resolutions": 944,
     "pourAnnee": "2026",
-    "total": 10
+    "total": 944
    },
    "exemple": {
-    "numero": "CG26 0308",
-    "objet": "Adoption de l'ordre du jour de l'assemblée du conseil d'agglomération",
-    "date": "2026-06-18",
+    "numero": "CA26 240324",
+    "objet": "Recommander au conseil d'agglomération de nommer monsieur Leslie Roberts à titre de représentant élu de l'arrondissement de Ville-Marie au conseil d'administration de PME MTL Centre-Ville",
+    "date": "2026-07-07",
     "type": "Résolution",
-    "instance": "Conseil d'agglomération",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-06-18_16h00_FR.pdf#page=6"
+    "instance": "Conseil d'arrondissement de Ville-Marie",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-07-07_18h30_FR.pdf#page=16"
    }
   },
   {
@@ -322,10 +322,10 @@
    "definition": "Une des quinze municipalités de l'île de Montréal qui avaient été fusionnées à Montréal en 2002 et qui ont repris leur existence propre en 2006, à la suite d'un référendum. Elles ont leur conseil et leur maire, et siègent à l'agglomération pour les services partagés.",
    "ouVousLeVoyez": "Baie-D'Urfé, Beaconsfield, Côte-Saint-Luc, Dollard-Des Ormeaux, Dorval, Hampstead, Kirkland, L'Île-Dorval, Montréal-Est, Montréal-Ouest, Mont-Royal, Pointe-Claire, Sainte-Anne-de-Bellevue, Senneville, Westmount.",
    "occurrences": {
-    "procesVerbaux": 0,
-    "resolutions": 0,
+    "procesVerbaux": 19,
+    "resolutions": 27,
     "pourAnnee": "2026",
-    "total": 0
+    "total": 27
    },
    "exemple": {
     "numero": "CG26 0382",
@@ -343,10 +343,10 @@
    "definition": "Un domaine que la loi confie au conseil d'agglomération plutôt qu'à chaque ville séparément, parce que le service est partagé. Le reste — les compétences de proximité — demeure à chaque ville ou arrondissement.",
    "ouVousLeVoyez": "La mention « Compétence d'agglomération : … » figure sur les ordres du jour, sous chaque point concerné.",
    "occurrences": {
-    "procesVerbaux": 0,
-    "resolutions": 0,
+    "procesVerbaux": 6,
+    "resolutions": 9,
     "pourAnnee": "2026",
-    "total": 0
+    "total": 9
    },
    "exemple": {
     "numero": "CE26 0975",
@@ -365,10 +365,10 @@
    "definition": "Un vote où le greffier fait l'appel des membres et où le procès-verbal nomme qui a voté pour et qui a voté contre. Il faut qu'un membre le demande ; sans ça, la décision est adoptée à main levée et personne n'est nommé.",
    "ouVousLeVoyez": "C'est la clé du registre des votes du site : les seuls votes dont on connaît le détail sont ceux qui ont été enregistrés.",
    "occurrences": {
-    "procesVerbaux": 14,
-    "resolutions": 79,
+    "procesVerbaux": 18,
+    "resolutions": 105,
     "pourAnnee": "2026",
-    "total": 79
+    "total": 105
    },
    "exemple": null
   },
@@ -379,10 +379,10 @@
    "definition": "Personne n'a voté contre.",
    "ouVousLeVoyez": "La formule la plus courante, parce que la plupart des décisions passent sans opposition.",
    "occurrences": {
-    "procesVerbaux": 73,
-    "resolutions": 1188,
+    "procesVerbaux": 109,
+    "resolutions": 4145,
     "pourAnnee": "2026",
-    "total": 1188
+    "total": 4145
    },
    "exemple": {
     "numero": "CE26 1029",
@@ -400,10 +400,10 @@
    "definition": "Adoptée, mais au moins une personne a voté contre. Le procès-verbal nomme alors les dissidences, ou tout le monde s'il y a eu vote enregistré.",
    "ouVousLeVoyez": "C'est le cas de la quasi-totalité des votes nominatifs du site.",
    "occurrences": {
-    "procesVerbaux": 15,
-    "resolutions": 4,
+    "procesVerbaux": 20,
+    "resolutions": 32,
     "pourAnnee": "2026",
-    "total": 4
+    "total": 32
    },
    "exemple": null
   },
@@ -414,10 +414,10 @@
    "definition": "Le nom des élus qui ont voté contre, consigné au procès-verbal sans qu'il y ait eu appel nominal complet. On sait qui s'est opposé, pas nommément qui a voté pour.",
    "ouVousLeVoyez": "« Adopté à la majorité des voix. Dissidences : Mme X, M. Y. » Ces noms sont repris sur les fiches de décision.",
    "occurrences": {
-    "procesVerbaux": 5,
-    "resolutions": 4,
+    "procesVerbaux": 7,
+    "resolutions": 8,
     "pourAnnee": "2026",
-    "total": 4
+    "total": 8
    },
    "exemple": null
   },
@@ -428,18 +428,18 @@
    "definition": "L'instance constate officiellement qu'un document lui a été présenté. Ça ne l'approuve pas : ça l'enregistre.",
    "ouVousLeVoyez": "Souvent pour des rapports, des réponses du comité exécutif ou des dépôts obligatoires.",
    "occurrences": {
-    "procesVerbaux": 69,
-    "resolutions": 91,
+    "procesVerbaux": 85,
+    "resolutions": 193,
     "pourAnnee": "2026",
-    "total": 91
+    "total": 193
    },
    "exemple": {
-    "numero": "CA26 08 0305",
-    "objet": "Dépôt par la secrétaire d’arrondissement des rapports globaux sur l’exercice des pouvoirs délégués en vertu du Règlement numéro RCA07-08-0012 sur la délégation de pouvoirs et ses amendements (sommaire décisionnel numéro 1260219008). Proposé par le conseiller Aref Salem; Appuyé par le conseiller Jacques Cohen, il est RÉSOLU À L'UNANIMITÉ: De prendre acte des rapports globaux sur l’exercice des pouvoirs délégués entre le 20 juin et le 21 juillet 2026, en vertu du Règlement numéro RCA07-08-0012 sur la délégation de pouvoirs et ses amendements.",
+    "numero": "CA26 12164",
+    "objet": "Prendre acte du rapport des décisions déléguées, de la liste des bons de commande approuvés, des demandes de paiement et des virements budgétaires ainsi que des achats par carte de crédit pour la période er comptable du 1 mai 2026 au 31 mai 2026",
     "date": "2026-08-04",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Saint-Laurent",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-08-04_19h30_FR.pdf#page=6"
+    "instance": "Conseil d'arrondissement de Anjou",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-08-04_19h00_FR.pdf#page=5"
    }
   },
   {
@@ -450,18 +450,18 @@
    "definition": "L'élu désigné pour remplacer la mairesse ou le maire en cas d'absence ou d'empêchement. Au conseil municipal de Montréal, la fonction tourne entre élus pour des périodes fixées par résolution.",
    "ouVousLeVoyez": "La désignation est elle-même une résolution du conseil municipal, sous le chapitre 51.",
    "occurrences": {
-    "procesVerbaux": 30,
-    "resolutions": 22,
+    "procesVerbaux": 36,
+    "resolutions": 54,
     "pourAnnee": "2026",
-    "total": 22
+    "total": 54
    },
    "exemple": {
-    "numero": "CA26 14 0188",
-    "objet": "Nommer le conseiller, Sylvain Ouellet, à titre de maire suppléant pour la période du 8 juillet au 3 novembre 2026.",
-    "date": "2026-07-07",
+    "numero": "CA26 12180",
+    "objet": "Désigner le conseiller d'arrondissement, monsieur Richard Leblanc, à titre de maire suppléant de l'arrondissement d'Anjou pour les mois d'octobre, novembre et décembre 2026",
+    "date": "2026-08-04",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Villeray–Saint-Michel–Parc-Extension",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-07-07_18h30_FR.pdf#page=22"
+    "instance": "Conseil d'arrondissement de Anjou",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-08-04_19h00_FR.pdf#page=15"
    }
   },
   {
@@ -471,18 +471,18 @@
    "definition": "Une permission d'écarter légèrement une règle du zonage pour un terrain précis — une marge, une hauteur, un nombre de cases de stationnement — sans changer le règlement pour tout le monde. À Montréal, c'est surtout une affaire d'arrondissement.",
    "ouVousLeVoyez": "Presque toujours rattachée à une adresse précise, nommée dans l'objet de la décision.",
    "occurrences": {
-    "procesVerbaux": 67,
-    "resolutions": 65,
+    "procesVerbaux": 68,
+    "resolutions": 119,
     "pourAnnee": "2026",
-    "total": 65
+    "total": 119
    },
    "exemple": {
-    "numero": "CA26 08 0306",
-    "objet": "Soumis sommaire décisionnel numéro 1263768006 relatif à une demande de dérogation mineure concernant la propriété située au 1695, rue Champigny ayant pour objet d’autoriser un agrandissement arrière d’une habitation unifamiliale isolée en empiétant dans la marge avant.",
+    "numero": "CA26 12167",
+    "objet": "Accorder, en vertu du Règlement sur les dérogations mineures aux règlements d'urbanisme (1557), une dérogation mineure afin d'autoriser l'agrandissement du bâtiment et l'implantation d'une génératrice en non- conformité avec le Règlement concernant le zonage (RCA 40) pour l'immeuble situé au 7000, avenue de Champchevrier - lot 1 005 073 du cadastre du Québec, circonscription foncière de Montréal",
     "date": "2026-08-04",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Saint-Laurent",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-08-04_19h30_FR.pdf#page=7"
+    "instance": "Conseil d'arrondissement de Anjou",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-08-04_19h00_FR.pdf#page=6"
    }
   },
   {
@@ -494,17 +494,17 @@
    "ouVousLeVoyez": "Fréquent dans les résolutions d'arrondissement et, pour les grands projets, au conseil municipal.",
    "occurrences": {
     "procesVerbaux": 45,
-    "resolutions": 49,
+    "resolutions": 82,
     "pourAnnee": "2026",
-    "total": 49
+    "total": 82
    },
    "exemple": {
-    "numero": "CA26 19 0161",
-    "objet": "Adoption du premier projet de résolution - PPCMOI afin d'autoriser l'agrandissement du lot numéro 2 437 121 du cadastre du Québec (1111, rue François-Lenoir) à même le lot numéro 6 047 880 pour fins d'aménagement d'un espace d'entreposage de machinerie lourde",
-    "date": "2026-07-06",
+    "numero": "CA26 30 07 0191",
+    "objet": "ADOPTION - PREMIER PROJET - RÉSOLUTION - PROJET PARTICULIER NUMÉRO PP-166",
+    "date": "2026-07-07",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Lachine",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Lac/CA_Lac_PV_ORDI_2026-07-06_19h00_FR.pdf#page=14"
+    "instance": "Conseil d'arrondissement de Rivière-des-Prairies–Pointe-aux-Trembles",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rdp/CA_Rdp_PV_ORDI_2026-07-07_19h00_FR.pdf#page=10"
    }
   },
   {
@@ -515,9 +515,9 @@
    "ouVousLeVoyez": "« Adopter le règlement … en vertu du paragraphe … de l'article 89 de la Charte ».",
    "occurrences": {
     "procesVerbaux": 3,
-    "resolutions": 2,
+    "resolutions": 3,
     "pourAnnee": "2026",
-    "total": 2
+    "total": 3
    },
    "exemple": {
     "numero": "CE26 0968",
@@ -535,18 +535,18 @@
    "definition": "Le découpage du territoire en zones, avec pour chacune ce qu'on a le droit d'y construire et d'y faire. À Montréal, chaque arrondissement a son règlement d'urbanisme.",
    "ouVousLeVoyez": "Le plan d'urbanisme de la Ville chapeaute les 19 règlements d'arrondissement.",
    "occurrences": {
-    "procesVerbaux": 73,
-    "resolutions": 119,
+    "procesVerbaux": 74,
+    "resolutions": 240,
     "pourAnnee": "2026",
-    "total": 119
+    "total": 240
    },
    "exemple": {
-    "numero": "CA26 22 0134",
-    "objet": "Adopter un second projet de Règlement sur le zonage incitatif",
-    "date": "2026-07-13",
+    "numero": "CA26 12167",
+    "objet": "Accorder, en vertu du Règlement sur les dérogations mineures aux règlements d'urbanisme (1557), une dérogation mineure afin d'autoriser l'agrandissement du bâtiment et l'implantation d'une génératrice en non- conformité avec le Règlement concernant le zonage (RCA 40) pour l'immeuble situé au 7000, avenue de Champchevrier - lot 1 005 073 du cadastre du Québec, circonscription foncière de Montréal",
+    "date": "2026-08-04",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Le Sud-Ouest",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sud/CA_Sud_PV_ORDI_2026-07-13_19h00_FR.pdf#page=9"
+    "instance": "Conseil d'arrondissement de Anjou",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-08-04_19h00_FR.pdf#page=6"
    }
   },
   {
@@ -557,10 +557,10 @@
    "definition": "L'attribution officielle d'un contrat à une entreprise, en général au plus bas soumissionnaire conforme au terme d'un appel d'offres.",
    "ouVousLeVoyez": "« Accorder un contrat à … pour … — Dépense totale de … $, taxes incluses — Appel d'offres public … (3 soumissionnaires) ». L'objet dit tout : qui, quoi, combien, combien de concurrents.",
    "occurrences": {
-    "procesVerbaux": 31,
-    "resolutions": 32,
+    "procesVerbaux": 53,
+    "resolutions": 250,
     "pourAnnee": "2026",
-    "total": 32
+    "total": 250
    },
    "exemple": {
     "numero": "CA26 22 0122",
@@ -578,10 +578,10 @@
    "definition": "La mise en concurrence obligatoire avant d'accorder un contrat au-delà d'un certain montant. Public, il est ouvert à tous ; sur invitation, il est réservé à des fournisseurs sollicités.",
    "ouVousLeVoyez": "Les contrats de Montréal sont aussi publiés en données ouvertes, avec le numéro de la résolution qui les accorde.",
    "occurrences": {
-    "procesVerbaux": 84,
-    "resolutions": 145,
+    "procesVerbaux": 116,
+    "resolutions": 626,
     "pourAnnee": "2026",
-    "total": 145
+    "total": 626
    },
    "exemple": {
     "numero": "CA26 08 0299",
@@ -599,18 +599,18 @@
    "definition": "Un contrat conclu directement, sans mise en concurrence. La loi ne le permet que dans des cas précis, et la Ville doit le dire dans la résolution.",
    "ouVousLeVoyez": "« contrat de gré à gré », « fournisseur unique ».",
    "occurrences": {
-    "procesVerbaux": 15,
-    "resolutions": 12,
+    "procesVerbaux": 38,
+    "resolutions": 126,
     "pourAnnee": "2026",
-    "total": 12
+    "total": 126
    },
    "exemple": {
-    "numero": "CA26 14 0158",
-    "objet": "Octroyer un contrat de gré à gré à la Corporation de Gestion des loisirs du Parc, organisme à but non lucratif, au montant maximal de 212 703 $, taxes incluses, pour l’exploitation du Complexe William-Hingston (volet accueil, surveillance, gestion des locaux et entretien), pour la période er du 1 juillet 2026 au 30 juin 2027, et approuver le projet de convention à cette fin.",
+    "numero": "CA26 30 07 0174",
+    "objet": "OCTROYER - CONTRAT DE GRÉ À GRÉ - LES ENTREPRISES ROSENEIGE INC. - TRAVAUX - REBOISEMENT - PARC SIMONE-DÉNÉCHAUD - AUTORISER - DÉPENSE - CONTRAT DE GRÉ À GRÉ NUMÉRO PARC26-13 (2 OFFRES DE SERVICES)",
     "date": "2026-07-07",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Villeray–Saint-Michel–Parc-Extension",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-07-07_18h30_FR.pdf#page=6"
+    "instance": "Conseil d'arrondissement de Rivière-des-Prairies–Pointe-aux-Trembles",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rdp/CA_Rdp_PV_ORDI_2026-07-07_19h00_FR.pdf#page=4"
    }
   },
   {
@@ -621,18 +621,18 @@
    "definition": "Une somme que la Ville verse à un organisme pour un projet ou une mission, encadrée par une convention qui dit à quoi elle sert et ce que l'organisme doit rendre compte.",
    "ouVousLeVoyez": "« Accorder un soutien financier de 250 000 $ à … et approuver un projet de convention à cet effet ».",
    "occurrences": {
-    "procesVerbaux": 76,
-    "resolutions": 147,
+    "procesVerbaux": 110,
+    "resolutions": 467,
     "pourAnnee": "2026",
-    "total": 147
+    "total": 467
    },
    "exemple": {
-    "numero": "CA26 08 0302",
-    "objet": "Soumis sommaire décisionnel numéro 1260299017 visant à octroyer un soutien financier totalisant 70 000 $, en provenance du budget dédié au Plan stratégique 2026-2029, afin de permettre à trois (3) organismes la réalisation de projets répondant aux objectifs du Plan d'action concerté en sécurité urbaine de Saint-Laurent, approuver les projets de conventions à cet effet et autoriser la signature desdites conventions par le directeur Culture, Sports, Loisirs et Développement social.",
+    "numero": "CA26 12161",
+    "objet": "Accorder une contribution financière de 5 000 $ à Parcours Âme pour soutenir la réalisation d'activités de médiation culturelle et les festivités d'inauguration de la première murale à Anjou",
     "date": "2026-08-04",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Saint-Laurent",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-08-04_19h30_FR.pdf#page=4"
+    "instance": "Conseil d'arrondissement de Anjou",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-08-04_19h00_FR.pdf#page=3"
    }
   },
   {
@@ -643,10 +643,10 @@
    "definition": "Le plan des investissements de la Ville sur dix ans — bâtiments, conduites, rues, parcs — adopté chaque année avec le budget. C'est là qu'on voit ce que la Ville compte construire, et quand.",
    "ouVousLeVoyez": "Beaucoup de contrats de travaux renvoient au PDI comme source de financement.",
    "occurrences": {
-    "procesVerbaux": 15,
-    "resolutions": 7,
+    "procesVerbaux": 33,
+    "resolutions": 57,
     "pourAnnee": "2026",
-    "total": 7
+    "total": 57
    },
    "exemple": {
     "numero": "CA26 13 0185",
@@ -664,10 +664,10 @@
    "definition": "Le règlement par lequel la Ville s'autorise à emprunter pour financer un projet, en général un investissement de longue durée. Il précise le montant et l'objet.",
    "ouVousLeVoyez": "« Adopter le règlement autorisant un emprunt de 12 000 000 $ afin de financer … ».",
    "occurrences": {
-    "procesVerbaux": 12,
-    "resolutions": 5,
+    "procesVerbaux": 34,
+    "resolutions": 70,
     "pourAnnee": "2026",
-    "total": 5
+    "total": 70
    },
    "exemple": {
     "numero": "CA26 22 0142",
@@ -685,10 +685,10 @@
    "definition": "L'acquisition forcée d'un terrain ou d'un droit par la Ville pour un motif d'utilité publique, avec indemnité au propriétaire.",
    "ouVousLeVoyez": "« Décréter l'acquisition, de gré à gré ou par expropriation, … ».",
    "occurrences": {
-    "procesVerbaux": 1,
-    "resolutions": 1,
+    "procesVerbaux": 9,
+    "resolutions": 13,
     "pourAnnee": "2026",
-    "total": 1
+    "total": 13
    },
    "exemple": {
     "numero": "CG26 0347",
