@@ -84,13 +84,23 @@ async function lireJson(url) {
   }
 }
 
-// Le cache de texte : un .json par document (texte + pages avec liens), jamais versionné.
+// Le cache de texte : un .json par document (texte + pages avec liens). Le PDF n'est
+// redemandé à la Ville que si son texte n'est pas déjà là.
+//
+// Il porte la version de LECTURE DU PDF, et c'est une leçon payée comptant : quand la
+// lecture des colonnes a changé, VERSION_LECTURE a bien fait relire les 136 séances, mais
+// elles ont été relues SUR LE TEXTE DU CACHE, extrait par l'ancienne version. Le
+// rafraîchissement s'est terminé sans un seul changement, et le défaut corrigé était
+// toujours là. Un cache qui ne dit pas de quoi il est le cache ment par omission.
+export const VERSION_TEXTE = 2;
 export async function ecrireCache(nom, contenu) {
   await mkdir(CACHE, { recursive: true });
-  await writeFile(new URL(nom + '.json', CACHE), JSON.stringify(contenu), 'utf8');
+  await writeFile(new URL(nom + '.json', CACHE), JSON.stringify({ ...contenu, versionTexte: VERSION_TEXTE }), 'utf8');
 }
 export async function lireCache(nom) {
-  return lireJson(new URL(nom + '.json', CACHE));
+  const cache = await lireJson(new URL(nom + '.json', CACHE));
+  // Un texte extrait par une version antérieure est jeté : le PDF sera relu.
+  return cache?.versionTexte === VERSION_TEXTE ? cache : null;
 }
 
 // Lit un document de séance (PV ou ODJ) : cache d'abord, la Ville ensuite.
