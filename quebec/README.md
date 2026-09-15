@@ -214,39 +214,34 @@ une personne), et meubler quand un document est purement procédural — dans ce
 tel qu'écrit, jamais recalculé. Chaque résumé porte le modèle utilisé et sa date, et la fiche
 garde le lien vers le PDF officiel.
 
-## L'infolettre hebdomadaire : le brouillon
+## L'infolettre : le compte rendu mensuel
 
 ```bash
-npm run infolettre                                  # la semaine écoulée
-npm run infolettre -- --depuis=2026-07-02 --jusqua=2026-07-08
+npm run infolettre                                  # le mois précédent, au complet
+npm run infolettre -- --mois=2026-08
+npm run infolettre -- --depuis=2026-08-16 --jusqua=2026-09-14
 ```
 
-`scripts/infolettre.js` écrit `infolettres/AAAA-MM-JJ.md` et `.html` (courriel, styles en
-ligne) à partir des données déjà extraites — aucun appel à la Ville, aucun appel IA. Le
-brouillon contient les séances de la semaine, les votes divisés **regroupés par dissidence**
-(un élu qui vote contre 48 résolutions d'une même séance, c'est une ligne qui dit sur quoi,
-pas 48 lignes), les cinq décisions les plus lourdes, les subventions, les sujets. Une même
-décision traverse le sommaire, le comité exécutif et le conseil : tout est regroupé par
-sommaire pour ne la compter qu'une fois. Les dépôts de rapports et de listes, qui parlent
-d'argent sans rien décider, sont écartés des montants. L'introduction s'écrit à la main.
+`scripts/infolettre.js` écrit `infolettres/AAAA-MM.html` (le courriel, en couleur) et `AAAA-MM.md` (la
+version texte) à partir des données déjà extraites — aucun appel à la Ville, aucun appel IA. Mensuel
+plutôt qu'hebdomadaire (décidé le 15 sept. 2026) : les alertes du matin couvrent déjà ce qui bouge
+pour chacun ; le compte rendu, lui, raconte le mois à tout le monde.
 
-Les brouillons ne sont pas versionnés (`.gitignore`) : ils se relisent, puis partent.
+Le contenu : le mois en chiffres (quatre tuiles), les séances, les plus gros montants avec les puces
+du résumé, **toutes** les subventions et **tous** les contrats avec un montant, du plus gros au plus
+petit (Martin tient aux petits montants), les votes divisés regroupés par séance et par groupe
+d'élus minoritaire, et les sujets dans leurs couleurs du site. Une même décision traverse le
+sommaire, le comité exécutif et le conseil : tout est regroupé par sommaire pour ne la compter
+qu'une fois. Les dépôts de rapports, les « 0 $ » et les valeurs au rôle sont écartés des montants.
 
-**Avec `--details`**, les documents retenus pour les montants, les subventions et les contrats
-passent par `scrapers/details-argent.js` : un outil en schéma strict extrait du sommaire la
-nature du montant (dépense, subvention accordée ou reçue, valeur au rôle, investissement
-privé…), le bénéficiaire, la durée, le mode d'attribution, les soumissions et l'estimation de
-la Ville, la répartition par année, le financement, les conditions et ce qui change. Le type
-de montant empêche d'additionner une valeur au rôle ou une subvention reçue avec une dépense ;
-le parcours (comité exécutif → conseil → agglomération) est calculé à partir des résolutions,
-sans IA. Coût mesuré sur la semaine du 2 au 8 juillet : 30 documents, ≈ 4 $ US — mis en cache
-dans `data/details.json`, jamais repayés.
+**Le détail de l'argent n'y est pas** : soumissions, estimation de la Ville et répartition par année
+restent aux abonnés. Le détail vérifié sert seulement à reconnaître la nature d'un montant (une
+subvention reçue d'un gouvernement n'entre pas dans le total des subventions accordées).
 
-Un piège trouvé en testant : les tableaux d'annexe (analyse des soumissions) arrivent aplatis,
-valeurs avant libellés. Avec un appel d'outil forcé — qui désactive la réflexion du modèle —
-l'estimation de la Ville et la médiane des soumissions ont été inversées sur AP2026-271. Appel
-non forcé, réflexion adaptative et consigne de vérification de cohérence : lecture correcte.
-Le brouillon se relit quand même avant l'envoi.
+**Le mot du mois**, facultatif : un fichier `infolettres/AAAA-MM-mot.md` écrit à la main s'ajoute sous
+le titre. Le courriel est fait de tableaux et de styles en ligne, sans variables CSS ni `color-mix`,
+pour s'afficher pareil dans Gmail, Outlook et sur cellulaire. Les brouillons ne sont pas versionnés
+(`.gitignore`) : ils se relisent, puis partent.
 
 ## L'espace abonnés (commun à toutes les villes)
 
