@@ -104,7 +104,17 @@ export function normaliserTexte(texte) {
 // participe passé suivi de « à / sur / par », jamais l'infinitif.
 // Au comité exécutif, la résolution n'a pas de ligne d'objet : elle commence par « Il est »
 // puis « RÉSOLU : » — l'objet vient alors de l'ordre du jour (voir parserOrdreDuJour).
-const FIN_OBJET = /^(?:Vu\b|Attendu\b|Consid[ée]rant\b|Il est\s*$|Il est propos[ée]|Il est r[ée]solu|Et r[ée]solu|R[ÉE]SOLU\s*:|L['’][ée]tude de ce dossier|Après avoir|Le conseil\b|Le comité\b|Un débat|Le président|La présidente|Adopt[ée]e?\s+(?:à|sur|par)\b|Rejet[ée]e?\s*\.?\s*$|_{3,})/i;
+// « Levée de la séance » et « Nombre d'articles de niveau décisionnel » ouvrent l'annexe que
+// le comité exécutif attache à ses procès-verbaux — l'ordre du jour complet des trois
+// instances, des dizaines de milliers de caractères. La dernière résolution de la séance
+// l'avalait tout entière : onze objets allaient jusqu'à 155 769 caractères, et c'est ce que
+// la fiche affichait. « /mt Caroline BOURGEOIS Domenico ZAMBITO ____ » est le bloc de
+// signature qui ferme le procès-verbal, et qui avalait la même chose.
+const FIN_OBJET = /^(?:Vu\b|Attendu\b|Consid[ée]rant\b|Il est\s*$|Il est propos[ée]|Il est r[ée]solu|Et r[ée]solu|R[ÉE]SOLU\s*:|L['’][ée]tude de ce dossier|Après avoir|Le conseil\b|Le comité\b|Un débat|Le président|La présidente|Adopt[ée]e?\s+(?:à|sur|par)\b|Rejet[ée]e?\s*\.?\s*$|_{3,}|Lev[ée]e de la s[ée]ance\b|Nombre d['’]articles de niveau d[ée]cisionnel|\/\p{L}{2,3}\s+\p{Lu})/iu;
+
+// Un objet tient en quelques lignes. Au-delà, ce n'est plus un objet : c'est une lecture
+// qui a débordé. On coupe au dernier mot entier — le PDF reste là pour le texte complet.
+const OBJET_MAX = 700;
 
 function extraireObjet(lignes) {
   const morceaux = [];
@@ -116,9 +126,15 @@ function extraireObjet(lignes) {
     }
     if (FIN_OBJET.test(t) || LIGNE_ARTICLE.test(t)) break;
     morceaux.push(t);
-    if (morceaux.join(' ').length > 700) break;
+    // La borne se vérifie APRÈS l'ajout, donc une seule ligne démesurée passait entière :
+    // d'où la coupe ci-dessous, qui ne se fie pas au nombre de lignes.
+    if (morceaux.join(' ').length > OBJET_MAX) break;
   }
-  return morceaux.join(' ').replace(/\s+/g, ' ').trim() || null;
+  const objet = morceaux.join(' ').replace(/\s+/g, ' ').trim();
+  if (!objet) return null;
+  if (objet.length <= OBJET_MAX) return objet;
+  const coupe = objet.lastIndexOf(' ', OBJET_MAX);
+  return objet.slice(0, coupe > OBJET_MAX * 0.6 ? coupe : OBJET_MAX).trim();
 }
 
 export function extraireResultat(bloc) {

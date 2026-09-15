@@ -81,6 +81,9 @@ const ETAPES = [
     argv: ['--max-old-space-size=4096', 'scrapers/votes.js', ...(complet ? ['--complet'] : [`--depuis=${depuis}`])],
   },
   { nom: 'Lexique, mesuré sur les procès-verbaux', argv: ['scrapers/lexique.js'], secondaire: true },
+  // Ce que lit « Mes dossiers » : un fichier par sujet suivable, plus les dossiers de
+  // l'année. Après les décisions, dont il dépend entièrement.
+  { nom: 'Sujets suivables et dossiers, pour Mes dossiers', argv: ['scripts/projets-publics.js'], secondaire: true },
   ...(resumes
     ? [
         {

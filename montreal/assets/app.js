@@ -15,6 +15,7 @@ const PAS_FIL = 5; // éléments du fil d'accueil par palier
 
 const etat = {
   decisions: null,
+  projet: null, // le sujet suivi dont on arrive, depuis « Mes dossiers »
   votes: null,
   elus: null,
   resumes: null,
@@ -172,6 +173,7 @@ function decisionsFiltrees() {
   const theme = $('#filtre-theme')?.value ?? '';
   const avecResume = $('#filtre-resume')?.checked ?? false;
   return etat.decisions.decisions.filter((d) => {
+    if (etat.projet && !d.projets?.includes(etat.projet)) return false;
     if (type && d.type !== type) return false;
     if (instance && d.instance !== instance) return false;
     if (theme && d.theme !== theme) return false;
@@ -884,6 +886,16 @@ async function init() {
     const instance = new URLSearchParams(location.search).get('instance');
     const recherche = new URLSearchParams(location.search).get('q');
     if (recherche && $('#rech-decisions')) $('#rech-decisions').value = recherche;
+    // Arriver sur les décisions d'un sujet (lien depuis « Mes dossiers ») : filtre annoncé,
+    // et retirable — sans quoi le lecteur croit voir toutes les décisions de la Ville.
+    const projet = new URLSearchParams(location.search).get('projet');
+    if (projet && etat.decisions.projets?.[projet]) {
+      etat.projet = projet;
+      $('#compte-decisions')?.insertAdjacentHTML(
+        'beforebegin',
+        `<p class="compte" id="filtre-projet">Projet&nbsp;: <strong>${echapper(etat.decisions.projets[projet].titre)}</strong> — ${nombreFr(etat.decisions.projets[projet].n)} décision(s). <a href="decisions.html">Voir toutes les décisions</a></p>`
+      );
+    }
     rendreDecisions();
     if (instance && [...$('#filtre-instance').options].some((o) => o.value === instance)) {
       $('#filtre-instance').value = instance;
