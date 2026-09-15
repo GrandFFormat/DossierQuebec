@@ -25,6 +25,7 @@ import { candidatsDocument, premierDocument, INSTANCES, idSeance } from '../lib/
 import { lirePdf } from '../lib/pdf.js';
 import { decouperResolutions, parserOrdreDuJour } from '../lib/pv.js';
 import { classer, THEMES } from '../lib/themes.js';
+import { PROJETS, projetsDe } from '../lib/projets.js';
 
 const OUT = new URL('../data/decisions.json', import.meta.url);
 const SEANCES = new URL('../data/seances.json', import.meta.url);
@@ -271,6 +272,14 @@ async function main() {
     const seuil = plusRecentConnu ? ajouterJours(plusRecentConnu, -RATTRAPAGE_JOURS) : '';
     for (const d of liste) d.nouveau = precedent ? !decisionsConnues.has(d.id) && (d.date ?? '') >= seuil : null;
     for (const d of liste) Object.assign(d, classer({ objet: d.type === 'Résolution' ? d.objet : 'procès-verbal', categorie: d.categorie, unite: d.unite }));
+    // Les sujets suivables (lib/projets.js). Seules les résolutions en portent : la fiche
+    // d'un procès-verbal n'est pas une décision, elle n'appartient à aucun projet. Le champ
+    // est absent plutôt que vide quand il n'y en a pas — la liste pèse déjà 4 Mo.
+    for (const d of liste) {
+      delete d.projets;
+      const p = d.type === 'Résolution' ? projetsDe(d.objet) : [];
+      if (p.length) d.projets = p;
+    }
     liste.sort((a, b) => b.date.localeCompare(a.date) || (a.instance ?? '').localeCompare(b.instance ?? '') || (a.numero ?? '').localeCompare(b.numero ?? ''));
     // Les séances pas encore traitées gardent leur état précédent, ou « non traitée ».
     const traitees = new Set(etatSeances.map((s) => s.id));
@@ -289,6 +298,11 @@ async function main() {
       themes: THEMES,
       sansTheme: liste.filter((d) => d.themeSource === 'defaut').length,
       facettes: { type: tally(liste, 'type'), instance: tally(liste, 'instance'), unite: tally(liste, 'unite'), theme: tally(liste, 'theme') },
+      // Le titre et le compte de chaque sujet, pour que la page annonce « Projet : … » sans
+      // charger un second fichier.
+      projets: Object.fromEntries(
+        Object.entries(PROJETS).map(([cle, p]) => [cle, { titre: p.titre, description: p.description, n: liste.filter((d) => d.projets?.includes(cle)).length }])
+      ),
       seances: etats.sort((a, b) => b.date.localeCompare(a.date)),
       decisions: liste,
     };
