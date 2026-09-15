@@ -1037,14 +1037,21 @@ ${liste.map(fiche).join('')}
     // première) est ouverte, puisque c'est là qu'on choisit son premier projet. Chaque ville garde
     // son état quand la page se redessine.
     const avant = new Map([...document.querySelectorAll('#suggestions details[data-ville]')].map((d) => [d.dataset.ville, d.open]));
+    const boiteAvant = $('#suggestions details.ab-suggestions');
     const aOuvrir = suivisIds.size ? null : (blocs.find((b) => b.ville === dernierVolet()) ?? blocs[0])?.ville;
+    const total = blocs.reduce((n, b) => n + b.nombre, 0);
+    // La même boîte que les autres (Export, Agenda…) ; dedans, une ville par menu dépliant.
     $('#suggestions').innerHTML = blocs.length
-      ? `<h2>${tr('Des projets à suivre', 'Projects to follow')}</h2>
+      ? `<details class="ab-carte ab-pliable ab-suggestions"${(boiteAvant ? boiteAvant.open : !suivisIds.size) ? ' open' : ''}>
+         <summary><h2>${tr('Des projets à suivre', 'Projects to follow')}</h2><span class="ab-etiquette">${total}</span></summary>
+         <div class="ab-pliable-corps">
          <p class="ab-chapeau">${tr('Les grands dossiers de chaque ville, qui reviennent de séance en séance. Suivez-en un pour garder le fil de toutes ses décisions.', "Each city's major files, which come back meeting after meeting. Follow one to keep track of all its decisions. (Project descriptions and recaps are in French for now.)")}</p>
          ${blocs.map((b, i) => `<details class="ab-pliable ab-ville-projets" data-ville="${echapper(b.ville)}" style="--ville:${couleurVille(b.ville, i)}"${(avant.has(b.ville) ? avant.get(b.ville) : b.ville === aOuvrir) ? ' open' : ''}>
            <summary><h3>${echapper(VILLES[b.ville])}</h3><span class="ab-etiquette">${b.nombre} ${tr(pl(b.nombre, 'projet', 'projets'), pl(b.nombre, 'project', 'projects'))}</span></summary>
            <div class="ab-pliable-corps"><div class="ab-grille">${b.cartes}</div></div>
-         </details>`).join('')}`
+         </details>`).join('')}
+         </div>
+       </details>`
       : '';
   }
 
