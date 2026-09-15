@@ -3,6 +3,7 @@
 //   npm run infolettre                           le mois précédent (complet)
 //   npm run infolettre -- --mois=2026-08
 //   npm run infolettre -- --depuis=2026-08-16 --jusqua=2026-09-14
+//   npm run infolettre -- --mois=2026-08 --details   fait d'abord lire le détail des plus gros montants (API)
 //
 // Tout vient des données déjà extraites : aucun appel à la Ville, aucun appel IA. Écrit
 // infolettres/AAAA-MM.html (le courriel, en couleur, styles en ligne) et AAAA-MM.md (la version
@@ -23,7 +24,8 @@
 
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
-import { chargerDetails, TYPES_MONTANT, VERSION_VERIFICATION } from '../scrapers/details-argent.js';
+import { fileURLToPath } from 'node:url';
+import { chargerDetails, extraireDetails, TYPES_MONTANT, VERSION_VERIFICATION } from '../scrapers/details-argent.js';
 
 const DATA = new URL('../data/', import.meta.url);
 const SORTIE = new URL('../infolettres/', import.meta.url);
@@ -102,7 +104,7 @@ async function main() {
   const args = parseArgs(process.argv);
   const { depuis, jusqua, nom: nomPeriode, fichier } = periode(args);
 
-  const [decisions, resumes, votes] = await Promise.all([lire('decisions'), lire('resumes'), lire('votes')]);
+  const [decisions, resumes, votes, attendues] = await Promise.all([lire('decisions'), lire('resumes'), lire('votes'), lire('attendues').catch(() => ({ decisions: [] }))]);
   const THEMES = decisions.themes;
   const resumeParId = new Map(resumes.resumes.map((r) => [r.id, r]));
   const dansFenetre = (d) => d.date >= depuis && d.date <= jusqua;
@@ -149,7 +151,20 @@ async function main() {
   const decidant = (f) => f.theme !== 'procedure' && !/prise d'acte|d[ée]p[ôo]t (?:de la|des|du)/i.test(f.objet ?? '');
   const parMontant = (a, b) => (b.montant ?? 0) - (a.montant ?? 0);
 
-  // La nature d'un montant, quand son détail a été lu et vérifié (le détail lui-même n'est pas publié ici).
+  // --details : fait lire le détail de l'argent des plus gros montants qui ne l'ont pas encore
+  // (≈ 0,28 $ US chacun, mis en cache et publié pour les abonnés comme celui du matin). Sans
+  // l'option, on prend ce qui est déjà lu.
+  if (args.details) {
+    if (!process.env.ANTHROPIC_API_KEY) {
+      const racine = fileURLToPath(new URL('../', import.meta.url));
+      const cle = [racine + 'api.env', racine + '../api.env'].find((f) => existsSync(f));
+      if (cle) process.loadEnvFile(cle);
+    }
+    const candidats = liste.filter((f) => f.montant > 0 && decidant(f) && f.cle.endsWith('.pdf') && f.resume).sort(parMontant).slice(0, 8);
+    await extraireDetails(candidats.map((f) => f.cle.replace(/\.pdf$/, '')));
+  }
+
+  // Le détail de l'argent vérifié : sa nature partout, et son contenu dans l'édition abonnés.
   const natureParId = new Map(
     (await chargerDetails()).details
       .filter((d) => d.verification?.version === VERSION_VERIFICATION && d.verification.utilisable)
@@ -193,6 +208,16 @@ async function main() {
   for (const f of liste) if (f.theme) parTheme.set(f.theme, (parTheme.get(f.theme) ?? 0) + 1);
   const sujets = [...parTheme.entries()].sort((a, b) => b[1] - a[1]).map(([t, n]) => ({ libelle: THEMES[t]?.libelle ?? t, couleur: THEMES[t]?.couleur ?? '#6b7280', n }));
 
+  // L'agenda : ce qui attend un vote au moment où le compte rendu est préparé (attendues.json), et
+  // ce qui a une date cible dans les 45 prochains jours.
+  const aujourdhui = new Date().toISOString().slice(0, 10);
+  const dans45 = new Date(Date.now() + 45 * 864e5).toISOString().slice(0, 10);
+  const agendaTotal = attendues.decisions.length;
+  const agendaProchain = attendues.decisions.filter((d) => d.echeance && d.echeance >= aujourdhui && d.echeance <= dans45).sort((a, b) => a.echeance.localeCompare(b.echeance));
+  const parGroupe = new Map();
+  for (const d of attendues.decisions) parGroupe.set(d.groupe ?? d.instance, (parGroupe.get(d.groupe ?? d.instance) ?? 0) + 1);
+  const agendaInstances = [...parGroupe.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4).map(([g, n]) => `${INSTANCE_COURTE(g)} (${n})`).join(' · ');
+
   const phraseDe = (f) => f.resume?.puces?.[0] ?? court(f.objet, 170);
   const natureDe = (f) => (f.typeMontant && !['depense', 'autre'].includes(f.typeMontant) ? TYPES_MONTANT[f.typeMontant] : null);
   const ouVu = (f) => ([...f.instances].length ? [...f.instances].join(', ') : `sommaire du ${jourMois(f.dates[0])}`);
@@ -223,6 +248,10 @@ async function main() {
     votes: {
       titre: 'Les votes divisés', icone: '🗳️', couleur: '#7C3AED',
       chapeau: "La plupart des résolutions passent sans opposition. Voici celles où des élus ont voté autrement que la majorité, regroupées quand ce sont les mêmes élus à la même séance.",
+    },
+    agenda: {
+      titre: "À l'agenda des conseils", icone: '🗓️', couleur: '#B7791F',
+      chapeau: "Les dossiers qui attendent encore un vote et dont la date cible arrive. Ils passeront probablement à la prochaine séance, mais ce n'est pas l'ordre du jour officiel : un dossier peut être reporté.",
     },
     sujets: {
       titre: 'De quoi on a parlé', icone: '🏷️', couleur: '#DB2777',
@@ -286,11 +315,11 @@ async function main() {
   const montant = (f, couleur) => `<span style="display:inline-block;padding:3px 10px;border-radius:6px;background:${couleur};color:#fff;font-weight:800;font-size:14px;white-space:nowrap">${f.montant != null ? echapper(argent(f.montant)) : 'Montant non précisé'}</span>`;
   const sujetDe = (f) => (THEMES[f.theme] ? pastille(THEMES[f.theme].libelle, THEMES[f.theme].couleur) : '');
 
-  const enTete = (s, n) => `
+  const enTete = (s, n, apres = '') => `
     <tr><td style="padding:30px 0 6px">
       <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr>
         <td width="44" valign="middle"><div style="width:36px;height:36px;line-height:36px;border-radius:50%;background:${teinte(s.couleur, 0.16)};text-align:center;font-size:19px">${s.icone}</div></td>
-        <td valign="middle" style="${POLICE};font-size:20px;font-weight:800;color:${s.couleur}">${echapper(s.titre)}${n != null ? ` <span style="display:inline-block;margin-left:6px;padding:1px 9px;border-radius:999px;background:${s.couleur};color:#fff;font-size:13px;vertical-align:middle">${nombreFr(n)}</span>` : ''}</td>
+        <td valign="middle" style="${POLICE};font-size:20px;font-weight:800;color:${s.couleur}">${echapper(s.titre)}${n != null ? ` <span style="display:inline-block;margin-left:6px;padding:1px 9px;border-radius:999px;background:${s.couleur};color:#fff;font-size:13px;vertical-align:middle">${nombreFr(n)}</span>` : ''}${apres ? ` ${apres}` : ''}</td>
       </tr></table>
       <p style="${POLICE};margin:8px 0 12px;font-size:14px;line-height:1.5;color:${DOUX}">${echapper(s.chapeau)}</p>
     </td></tr>`;
@@ -304,11 +333,40 @@ async function main() {
   // Deux éditions du même compte rendu : gratuite (avec l'invitation à s'abonner) et abonnés
   // (sans publicité, et un lien vers le détail de l'argent sous chaque montant — le détail
   // lui-même reste dans sa fiche, derrière la connexion).
+  // Ce qui est réservé aux abonnés est DORÉ dans les deux éditions, avec la marque « ★ ABONNÉS » :
+  // rempli pour l'abonné, fermé (🔒, ce qu'on y trouverait, sans les chiffres) pour les autres.
+  // Même mise en page ; la différence se voit d'un coup d'œil.
   const pageHtml = (abonne) => {
-  const lienDetail = (f, couleur) =>
-    abonne && f.numero && f.montant > 0
-      ? ` · <a href="${SITE}decisions.html?q=${encodeURIComponent(f.numero)}" style="color:${couleur};font-weight:700;text-decoration:none;white-space:nowrap">${natureParId.has(f.cle) ? "💵 Détail de l'argent" : 'Demander le détail'}&nbsp;↗</a>`
-      : '';
+  const OR = '#B7791F';
+  const marque = `<span style="display:inline-block;padding:2px 8px;border-radius:999px;background:#D99A06;color:#ffffff;font-size:11px;font-weight:800;letter-spacing:.04em;white-space:nowrap;vertical-align:middle">★ ABONNÉS</span>`;
+  const boiteOr = (contenu, marge = '10px 0 0') => `<div style="${POLICE};margin:${marge};padding:10px 12px;border-radius:8px;background:#FFF7E0;border:1px dashed #E9B949;font-size:14px;line-height:1.55;color:${ENCRE}">${contenu}</div>`;
+  const lienOr = (texte, url) => `<a href="${echapper(url)}" style="color:${OR};font-weight:700;text-decoration:none;white-space:nowrap">${texte}&nbsp;↗</a>`;
+  const fiche = (numero) => `${SITE}decisions.html?q=${encodeURIComponent(numero)}`;
+  // Seulement là où le détail est lu : jamais de « pas encore lu » ni de « demander » dans le compte rendu.
+  const lienDetail = (f) => (abonne && f.numero && natureParId.has(f.cle) ? ` · ${lienOr("💵 Détail de l'argent", fiche(f.numero))}` : '');
+  // Le détail de l'argent d'un gros montant : quelques lignes pour l'abonné, ce qu'il contient pour les
+  // autres (sans les chiffres). Rien, dans les deux éditions, s'il n'est pas lu.
+  const detailOr = (f) => {
+    const d = natureParId.get(f.cle);
+    if (!d) return '';
+    const entreprises = new Set((d.soumissions ?? []).map((s) => s.entreprise)).size;
+    if (!abonne) {
+      const contenu = [d.beneficiaire ? 'qui reçoit' : null, d.payeur ? 'qui paie' : null, entreprises ? pluriel(entreprises, 'soumissionnaire comparé', 'soumissionnaires comparés') : null, d.estimationVille ? "l'estimation de la Ville" : null, d.repartitionAnnuelle?.length ? 'la répartition par année' : null, d.conditions?.length ? 'les conditions' : null].filter(Boolean);
+      return boiteOr(`🔒 <strong>Détail de l'argent</strong> ${marque}<br>${contenu.length ? `Dans ce dossier : ${echapper(contenu.join(', '))}.` : "Lu et vérifié dans le document."} ${lienOr("S'abonner", `${RACINE}/abonnement`)}`);
+    }
+    const retenue = (d.soumissions ?? []).find((s) => s.retenue);
+    const lignes = [
+      d.beneficiaire ? `<strong>Qui reçoit :</strong> ${echapper(d.beneficiaire)}${d.payeur ? ` · payé par ${echapper(d.payeur)}` : ''}` : null,
+      entreprises ? `<strong>Soumissions :</strong> ${pluriel(entreprises, 'entreprise', 'entreprises')}${retenue ? ` · retenue : ${echapper(retenue.entreprise)}, ${echapper(court(retenue.prix, 90))}` : ''}` : null,
+      d.estimationVille ? `<strong>Estimation de la Ville :</strong> ${echapper(court(d.estimationVille, 160))}` : null,
+      d.repartitionAnnuelle?.length ? `<strong>Par année :</strong> ${echapper(d.repartitionAnnuelle.slice(0, 4).map((r) => `${r.annee} : ${r.montant.replace(/\s*\(taxes nettes\)/i, '')}`).join(' · '))}${d.repartitionAnnuelle.length > 4 ? ' …' : ''}` : null,
+      d.duree ? `<strong>Durée :</strong> ${echapper(court(d.duree, 120))}` : null,
+      d.sourceFinancement ? `<strong>D'où vient l'argent :</strong> ${echapper(court(d.sourceFinancement.replace(/\s*\(clé [^)]*\)/i, ''), 140))}` : null,
+      d.chiffresCles?.length ? `<strong>En chiffres :</strong> ${echapper(d.chiffresCles.slice(0, 2).map((c) => `${c.libelle} : ${c.valeur}`).join(' · '))}` : null,
+      d.conditions?.length ? `<strong>Condition :</strong> ${echapper(court(d.conditions[0], 140))}` : null,
+    ].filter(Boolean).slice(0, 5);
+    return boiteOr(`💵 <strong>Détail de l'argent</strong> ${marque}${lignes.map((l) => `<br>${l}`).join('')}<br>${lienOr('Toute la fiche', fiche(f.numero))}`);
+  };
   const H = [];
   // Bandeau
   H.push(`
@@ -319,7 +377,9 @@ async function main() {
     <tr><td style="height:6px;line-height:6px;font-size:0;background:#F5B301">&nbsp;</td></tr>`);
   // Le mot du mois, puis l'introduction
   const paragraphes = [...mot.map((p) => `<p style="${POLICE};margin:0 0 12px;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(p)}</p>`)];
-  H.push(`<tr><td style="padding:22px 4px 4px">${paragraphes.join('')}<p style="${POLICE};margin:0;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(introduction)}</p>${abonne ? `<p style="${POLICE};margin:12px 0 0;padding:10px 12px;border-radius:8px;background:${teinte('#D99A06', 0.14)};font-size:14px;line-height:1.5;color:${ENCRE}">💵 <strong>Merci d'être abonné.</strong> Sous chaque montant, le lien <strong>Détail de l'argent</strong> ouvre sa fiche : qui reçoit, les soumissions, l'estimation de la Ville, la répartition par année. Pas encore lu ? <strong>Demander le détail</strong> le fait lire en priorité.</p>` : ''}</td></tr>`);
+  H.push(`<tr><td style="padding:22px 4px 4px">${paragraphes.join('')}<p style="${POLICE};margin:0;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(introduction)}</p>${abonne
+    ? boiteOr(`${marque} <strong>Votre édition abonnés.</strong> Tout ce qui est en doré vous est réservé : le détail de l'argent des plus gros montants, un lien direct vers celui des subventions et des contrats, et l'agenda des conseils du mois qui vient. Merci : c'est votre abonnement qui garde le reste gratuit pour tout le monde.`, '14px 0 0')
+    : boiteOr(`${marque} <strong>Les encadrés dorés sont réservés aux abonnés :</strong> le détail de l'argent de chaque montant — qui reçoit, les soumissions, l'estimation de la Ville — et l'agenda des conseils du mois qui vient. ${lienOr("Voir l'abonnement", `${RACINE}/abonnement`)}`, '14px 0 0')}</td></tr>`);
 
   // Le mois en chiffres : quatre tuiles de couleur, deux par rangée (lisible sur cellulaire).
   const tuile = (n, libelle, couleur) => `<td width="50%" valign="top" style="padding:6px">
@@ -343,7 +403,8 @@ async function main() {
       <div style="margin:0 0 6px">${montant(f, SECTIONS.montants.couleur)} ${natureDe(f) ? pastille(natureDe(f), SECTIONS.montants.couleur) : ''} ${sujetDe(f)}</div>
       <div style="font-weight:600">${echapper(phraseDe(f))}</div>
       ${puces.length ? `<ul style="margin:6px 0 0;padding-left:18px;color:#374151;font-size:14px">${puces.map((p) => `<li style="margin:0 0 3px">${echapper(p)}</li>`).join('')}</ul>` : ''}
-      <div style="margin-top:8px;font-size:13px;color:${DOUX}">${echapper(ouVu(f))} · ${lien(f.numero, f.pdf, SECTIONS.montants.couleur)}${lienDetail(f, SECTIONS.montants.couleur)}</div>`));
+      <div style="margin-top:8px;font-size:13px;color:${DOUX}">${echapper(ouVu(f))} · ${lien(f.numero, f.pdf, SECTIONS.montants.couleur)}</div>
+      ${detailOr(f)}`));
   }
   if (!lourdes.length) H.push(`<tr><td style="${POLICE};color:${DOUX}">Aucun montant relevé dans les résumés du mois.</td></tr>`);
 
@@ -353,7 +414,7 @@ async function main() {
     if (!dossiers.length) { H.push(`<tr><td style="${POLICE};color:${DOUX};padding:0 0 8px">${vide}</td></tr>`); return; }
     const lignes = dossiers.map((f, i) => `<tr style="background:${i % 2 ? teinte(s.couleur, 0.05) : '#ffffff'}">
         <td valign="top" width="1" style="${POLICE};padding:10px 10px 10px 12px;white-space:nowrap">${montant(f, s.couleur)}</td>
-        <td valign="top" style="${POLICE};padding:10px 12px 10px 0;font-size:14px;line-height:1.5;color:${ENCRE}">${echapper(phraseDe(f))}${natureDe(f) ? ` ${pastille(natureDe(f), s.couleur)}` : ''}<div style="margin-top:3px;font-size:12px">${lien(f.numero, f.pdf, s.couleur)}${lienDetail(f, s.couleur)}</div></td>
+        <td valign="top" style="${POLICE};padding:10px 12px 10px 0;font-size:14px;line-height:1.5;color:${ENCRE}">${echapper(phraseDe(f))}${natureDe(f) ? ` ${pastille(natureDe(f), s.couleur)}` : ''}<div style="margin-top:3px;font-size:12px">${lien(f.numero, f.pdf, s.couleur)}${lienDetail(f)}</div></td>
       </tr>`).join('');
     H.push(`<tr><td style="padding:0 0 6px"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid ${teinte(s.couleur, 0.25)};border-top:4px solid ${s.couleur};border-radius:8px;border-collapse:separate;overflow:hidden">${lignes}</table></td></tr>`);
   };
@@ -371,6 +432,21 @@ async function main() {
       <ul style="margin:8px 0 0;padding-left:18px;font-size:14px;color:#374151">${b.resolutions.map((r) => `<li style="margin:0 0 6px">${echapper(r.phrase)} <span style="color:${DOUX};font-size:13px">— ${echapper(r.resultat ?? '')}, ${r.pour} pour, ${r.contre} contre</span> ${lien(r.numero, r.pdf, SECTIONS.votes.couleur)}</li>`).join('')}</ul>`));
   }
   if (!votesDivises.length) H.push(`<tr><td style="${POLICE};color:${DOUX};padding:0 0 8px">Aucun vote divisé publié pour ce mois.</td></tr>`);
+
+  // L'agenda des conseils du mois qui vient : rempli pour l'abonné, fermé pour les autres.
+  H.push(enTete(SECTIONS.agenda, null, marque));
+  if (abonne) {
+    const lignes = agendaProchain.slice(0, 8).map((d, i) => `<tr style="background:${i % 2 ? '#FFFBEF' : '#ffffff'}">
+        <td valign="top" width="1" style="${POLICE};padding:10px 10px 10px 12px;white-space:nowrap"><span style="display:inline-block;padding:3px 9px;border-radius:6px;background:#D99A06;color:#fff;font-weight:800;font-size:13px">${echapper(jourMois(d.echeance))}</span></td>
+        <td valign="top" style="${POLICE};padding:10px 12px 10px 0;font-size:14px;line-height:1.5;color:${ENCRE}">${echapper(d.phrase ?? court(d.objet))}<div style="margin-top:3px;font-size:12px;color:${DOUX}">${echapper(INSTANCE_COURTE(d.groupe ?? d.instance))} · ${lienOr(d.numero, fiche(d.numero))}</div></td>
+      </tr>`).join('');
+    H.push(agendaProchain.length
+      ? `<tr><td style="padding:0 0 6px"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px dashed #E9B949;border-top:4px solid #D99A06;border-radius:8px;border-collapse:separate;overflow:hidden">${lignes}</table>
+          <p style="${POLICE};margin:8px 4px 0;font-size:13px;color:${DOUX}"><em><strong><u>Approximatif</u></strong></em> : tiré des dates cibles écrites dans les sommaires. ${pluriel(agendaTotal, 'dossier attend', 'dossiers attendent')} un vote en tout : ${lienOr("tout l'agenda dans Mes dossiers", `${RACINE}/mes-dossiers`)}</p></td></tr>`
+      : `<tr><td>${boiteOr(`Aucune date cible à venir dans les sommaires pour l'instant. ${pluriel(agendaTotal, 'dossier attend', 'dossiers attendent')} un vote : ${lienOr("l'agenda dans Mes dossiers", `${RACINE}/mes-dossiers`)}`, '0')}</td></tr>`);
+  } else {
+    H.push(`<tr><td>${boiteOr(`🔒 <strong>${pluriel(agendaTotal, 'dossier attend', 'dossiers attendent')} un vote</strong>${agendaProchain.length ? `, dont ${pluriel(agendaProchain.length, 'avec une date cible dans les prochaines semaines', 'avec une date cible dans les prochaines semaines')}` : ''}${agendaInstances ? ` — ${echapper(agendaInstances)}` : ''}. Leur résumé et leur date cible sont réservés aux abonnés. ${lienOr("S'abonner", `${RACINE}/abonnement`)}`, '0')}</td></tr>`);
+  }
 
   // Les sujets, dans leurs couleurs du site
   H.push(enTete(SECTIONS.sujets));
