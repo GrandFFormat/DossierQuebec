@@ -77,6 +77,11 @@ const ETAPES = [
         },
       ]
     : []),
+  // Espace abonnés : les petits fichiers que lit Mes dossiers (projets, agenda, mots-clés,
+  // organismes, export) et les chiffres de la page Abonnement. Pas de récapitulatif IA de projet
+  // ni de détail de l'argent pour Lévis pour l'instant (voir README).
+  { nom: 'Projets pour « Mes dossiers »', argv: ['scripts/projets-publics.js'] },
+  { nom: 'Chiffres de la page Abonnement', argv: ['scripts/travail-public.js'], secondaire: true },
 ];
 
 try {

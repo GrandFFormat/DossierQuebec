@@ -206,12 +206,41 @@ jusqu'à la réponse de la Ville : `noindex` sur chaque page, `X-Robots-Tag` sur
 volets le montre). Workflow : `.github/workflows/refresh-villedelevis.yml`, 09:30 UTC, même
 groupe de concurrence que les autres.
 
+## L'espace abonnés
+
+Branché le 14 septembre 2026 (guide, section 9). Les fiches portent `data-dossier` (l'identifiant
+du sommaire, sinon le numéro de résolution), `data-montant`, `data-statut`, `data-etape` et
+`data-projets` ; Lévis est dans les quatre listes `VILLES`.
+
+**Les projets suivables** (`lib/projets.js`, relus avec `node scripts/verifier-projets.js`) :
+
+| Projet | Décisions 2026 | Ce qui a été écarté |
+|---|---|---|
+| Stations d'épuration de Saint-Nicolas et de Desjardins | 17 | postes de pompage ; emprunts RV3580/RV3581 (objet général « traitement des eaux et aqueduc ») |
+| Logement social et abordable | 14 | — |
+| Lévis 2030 — Finale des Jeux du Québec | 2 | — |
+| Projet Guillaume-Couture | 2 | 44 PIIA et enseignes qui ont seulement une adresse sur le boulevard |
+
+**Où en est un dossier.** Le sommaire de Lévis ne donne pas d'instance décisionnelle ni de date
+cible lisibles d'un coup : `statutsDesDossiers` (`scrapers/decisions.js`) déduit l'état des
+résolutions. Décision finale quand le conseil de la Ville a tranché (hors avis de motion et
+projet de règlement) ; en attente quand le comité exécutif « recommande au conseil de la Ville »
+ou qu'un règlement n'en est qu'à ses étapes préliminaires ; sinon, décidé par le comité exécutif.
+2026 : 470 dossiers terminés, 34 en attente. `echeance` reste vide : pas de date cible.
+
+**Les fichiers de Mes dossiers** : `scripts/projets-publics.js` (copié de Québec, adapté : un
+dossier = un sommaire et ses résolutions, présenté par sa résolution la plus récente, `numeros[]`
+avec l'identifiant du sommaire) et `scripts/travail-public.js`, appelés par `refresh.js`.
+La recherche du volet trouve aussi l'identifiant du sommaire (`decisions.html?q=FIN-2026-035`).
+
+**Résumés abîmés.** 13 des 492 résumés du lot Batches portaient des débris d'échappement
+illisibles (« L\tévis », « r\nde9glement ») : retirés et régénérés (0,38 $). `resumes.js` refuse
+maintenant un résumé de ce genre, compté comme échec et redemandé à l'exécution suivante.
+
 ## Ce qui n'est pas encore là
 
-- **Espace abonnés, fichiers de Mes dossiers** (guide, section 9, point 3) : `data/projets/`,
-  `attendues.json`, `recentes.json`, `dossiers.json`, `organismes.json`, `travail.json`. Les
-  pages portent déjà `data-ville="levis"` et les fiches « Suivre ce dossier » ; Lévis est dans
-  les quatre listes `VILLES`. Tant que ces fichiers manquent, les boîtes de Lévis restent vides.
+- **Récapitulatifs « Où en est le projet »** (`recaps-projets.js` de Québec) : il dépend du module
+  du détail de l'argent ; les projets de Lévis s'affichent sans récapitulatif (`recap: null`).
 - **Détail de l'argent** (section 9, point 4).
 - **Courriel au greffe** : modèle dans `courriel-greffe.md`, à envoyer par Martin.
 - **Contours à jour des districts** (voir plus haut).

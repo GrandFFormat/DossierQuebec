@@ -1,23 +1,23 @@
 {
- "generatedAt": "2026-09-14T23:10:42.805Z",
+ "generatedAt": "2026-09-15T00:40:21.474Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
  "parametres": {
   "annee": "2026",
-  "max": 600,
-  "batch": true,
+  "max": 30,
+  "batch": false,
   "depuis": null,
   "plafond": 120
  },
  "nombre": 492,
- "genereCetteFois": 442,
+ "genereCetteFois": 11,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 8.0116,
-  "jetonsEntree": 2191472,
-  "jetonsSortie": 202630
+  "montant": 0.3837,
+  "jetonsEntree": 51791,
+  "jetonsSortie": 4991
  },
  "resumes": [
   {
@@ -437,32 +437,6 @@
    }
   },
   {
-   "id": "DVC-SPO-2026-009",
-   "numero": "DVC-SPO-2026-009",
-   "resolution": "CV3625",
-   "date": "2026-08-25",
-   "unite": "Vie communautaire",
-   "objet": "Protocole d’entente relatif à la vente d’espaces publicitaires à l’aréna André-Lacroix à intervenir avec le Club de hockey junior AA de Lévis",
-   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DVC-SPO-2026-009.pdf",
-   "puces": [
-    "La Ville renouvelle son entente avec le Club de hockey junior AA de L\tévis pour la vente d'espaces publicitaires \tà l'ar\téna Andr\té-Lacroix.",
-    "L'entente pr\téc\tédente est \téchue depuis le 30 avril 2026.",
-    "Le nouveau protocole dure un an au lieu de cinq, le temps que la Ville se dote d'une politique d'affichage pour ses installations sportives.",
-    "Les autres clauses restent les m\têmes que dans l'entente pr\téc\tédente; le Club a dit \têtre d'accord pour signer.",
-    "Le Service des sports et du plein air constate que les r\tègles varient d'un organisme \tà l'autre dans les ar\tténas; le contrat avec l'entreprise Sport M\tédia est \téchu depuis environ trois ans.",
-    "Aucun impact financier n'est pr\tévu; le dossier doit passer au comit\té ex\técutif du 11 ao\tût et au conseil de la Ville du 25 ao\tût 2026."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T22:58:44.465Z",
-   "jetons": {
-    "entree": 3889,
-    "sortie": 455
-   }
-  },
-  {
    "id": "DEV-2026-029",
    "numero": "DEV-2026-029",
    "resolution": "CV3626",
@@ -671,6 +645,33 @@
    "jetons": {
     "entree": 6397,
     "sortie": 510
+   }
+  },
+  {
+   "id": "DVC-SPO-2026-009",
+   "numero": "DVC-SPO-2026-009",
+   "resolution": "CV3625",
+   "date": "2026-08-25",
+   "unite": "Vie communautaire",
+   "objet": "Protocole d’entente relatif à la vente d’espaces publicitaires à l’aréna André-Lacroix à intervenir avec le Club de hockey junior AA de Lévis",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DVC-SPO-2026-009.pdf",
+   "puces": [
+    "La Ville renouvelle son entente avec le Club de hockey junior AA de Lévis pour la vente d'espaces publicitaires à l'aréna André-Lacroix.",
+    "L'entente précédente est échue depuis le 30 avril 2026.",
+    "La nouvelle entente dure un an au lieu de cinq; les autres clauses restent les mêmes.",
+    "Ce délai plus court doit permettre à la Ville d'élaborer une politique d'affichage pour toutes ses installations sportives.",
+    "Le Service des sports et du plein air constate que les règles d'affichage varient d'un organisme à l'autre; le contrat avec l'entreprise Sport Média est échu depuis environ trois ans.",
+    "Aucun impact financier n'est prévu pour la Ville.",
+    "Passage au comité exécutif le 11 août et au conseil de la Ville le 25 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-15T00:39:42.329Z",
+   "jetons": {
+    "entree": 3889,
+    "sortie": 517
    }
   },
   {
@@ -1608,30 +1609,6 @@
    }
   },
   {
-   "id": "URBA-SAT-2026-071",
-   "numero": "URBA-SAT-2026-071",
-   "resolution": "CV3578",
-   "date": "2026-07-14",
-   "unite": null,
-   "objet": "Adoption du Second projet de règlement RV3615 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (ajout des classes d’usages C300, C304, C310, C311, C312, C314, C315, C320 et du groupe d’usages C8 dans la zone C2404, chemin des Îles, à proximité de l’intersection avec le boulevard Guillaume-Couture, secteur Lévis)",
-   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-071.pdf",
-   "puces": [
-    "La Ville adopte le second projet de r\ndeglement RV3615, qui modifie le r\nde9glement de zonage et de lotissement.",
-    "Le changement vise la zone C2404, sur le chemin des Îles, près du boulevard Guillaume-Couture, dans le secteur Lévis.",
-    "De nouvelles classes d’usages commerciaux y seraient permises : C300, C304, C310, C311, C312, C314, C315, C320, ainsi que le groupe d’usages C8.",
-    "Il s’agit d’une étape du processus d’adoption : le règlement n’est pas encore en vigueur."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.776Z",
-   "jetons": {
-    "entree": 1528,
-    "sortie": 350
-   }
-  },
-  {
    "id": "DEV-2026-033",
    "numero": "DEV-2026-033",
    "resolution": "CV3585",
@@ -1762,33 +1739,6 @@
    "jetons": {
     "entree": 3791,
     "sortie": 441
-   }
-  },
-  {
-   "id": "DVC-DIR-2026-008",
-   "numero": "DVC-DIR-2026-008",
-   "resolution": "CV3564",
-   "date": "2026-07-14",
-   "unite": "Vie communautaire",
-   "objet": "Nomination d’une représentante au conseil d’administration de la Corporation villieu",
-   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DVC-DIR-2026-008.pdf",
-   "puces": [
-    "La Ville nomme Annie Turner, cheffe du Service des biblioth\ru00e8ques et des lettres, comme repr\ru00e9sentante au conseil d'administration de la Corporation Villieu.",
-    "Elle remplace Fran\ru00e7ois Bilodeau, parti \ru00e0 la retraite.",
-    "La Ville de L\ru00e9vis d\ru00e9tient 50 % de l'immeuble du 601, route des Rivi\ru00e8res, en partenariat avec la soci\ru00e9t\ru00e9 Medway.",
-    "Chaque copropri\ru00e9taire d\ru00e9signe deux repr\ru00e9sentants au conseil d'administration de la corporation, cr\ru00e9\ru00e9e en 1986.",
-    "Fr\ru00e9d\ru00e9ric Bourque demeure l'autre repr\ru00e9sentant de la Ville.",
-    "Le dossier doit passer au comit\ru00e9 ex\ru00e9cutif le 7 juillet 2026, puis au conseil de la Ville le 14 juillet 2026.",
-    "Aucun impact financier n'est pr\ru00e9vu."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.777Z",
-   "jetons": {
-    "entree": 4020,
-    "sortie": 496
    }
   },
   {
@@ -1998,32 +1948,6 @@
    "jetons": {
     "entree": 2859,
     "sortie": 433
-   }
-  },
-  {
-   "id": "URBA-SAT-2026-077",
-   "numero": "URBA-SAT-2026-077",
-   "resolution": "CV3582",
-   "date": "2026-07-14",
-   "unite": "Urbanisme",
-   "objet": "Adoption du Règlement RV3607 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (agrandissement de la zone C1526 à même l’entièreté de la zone P1525, rue de la Symphonie, secteur Charny)",
-   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-077.pdf",
-   "puces": [
-    "La Ville change le zonage d'un terrain situé à l'intersection de la rue de la Symphonie et de l'avenue des G\néra&tions, dans le secteur Charny.",
-    "La zone publique P1525 est supprim\ne et int\ngr\ne \n la zone commerciale C1526 voisine.",
-    "Le but : permettre d'autres usages que \" public \" sur ces immeubles, pour faciliter la vente de b\ntiments que la Ville n'utilise plus.",
-    "Aucun citoyen n'a demand\n de r\nf\nrendum avant la date limite du 16 juin 2026, ce qui permet l'adoption du r\nglement.",
-    "Le r\nglement entre en vigueur d\ns son adoption par le conseil de la Ville.",
-    "La d\ncision n'entra\nne aucun co\nt ni revenu pour la Ville."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.799Z",
-   "jetons": {
-    "entree": 4231,
-    "sortie": 385
    }
   },
   {
@@ -2319,32 +2243,6 @@
    }
   },
   {
-   "id": "DG-2026-038",
-   "numero": "DG-2026-038",
-   "resolution": "CV3542",
-   "date": "2026-07-14",
-   "unite": "Direction générale",
-   "objet": "Mandat confié à la Direction générale concernant la poursuite des analyses requises relatives à l’évaluation des impacts des mesures proposées au plan de gestion uniformisée de la vitesse",
-   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DG-2026-038.pdf",
-   "puces": [
-    "La Ville poursuit ses analyses sur un plan de gestion uniformis\ttée de la vitesse, pour mesurer les impacts op\térationnels, financiers et organisationnels d'un d\téploiement rapide des nouvelles limites de vitesse propos\ttées.",
-    "Elle pr\tévoit les sommes n\técessaires aux \tétudes de la phase 2 du projet Guillaume-Couture; des subventions du gouvernement du Qu\tébec pourraient couvrir jusqu'\ta 75 % du co\tût de l'\tétude.",
-    "La commission recommande de tenir une s\téance d'information et de consultation en septembre 2026 pour faire le point sur le moratoire et recenser les projets de d\téveloppement.",
-    "Cette s\téance servira aux r\téflexions sur le renouvellement des r\téglements de contr\tôle provisoire.",
-    "La revitalisation des anciens quartiers sera abord\ttée lors d'une prochaine rencontre de la commission.",
-    "Le conseil de la Ville doit aussi prendre acte du proc\tès-verbal de la s\téance du 19 juin 2026; les d\técisions passent au comit\té ex\técutif le 7 juillet et au conseil le 14 juillet 2026."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.803Z",
-   "jetons": {
-    "entree": 5067,
-    "sortie": 526
-   }
-  },
-  {
    "id": "URBA-SAT-2026-075",
    "numero": "URBA-SAT-2026-075",
    "resolution": "CV3581",
@@ -2422,6 +2320,109 @@
    "jetons": {
     "entree": 7583,
     "sortie": 555
+   }
+  },
+  {
+   "id": "DG-2026-038",
+   "numero": "DG-2026-038",
+   "resolution": "CV3542",
+   "date": "2026-07-14",
+   "unite": "Direction générale",
+   "objet": "Mandat confié à la Direction générale concernant la poursuite des analyses requises relatives à l’évaluation des impacts des mesures proposées au plan de gestion uniformisée de la vitesse",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DG-2026-038.pdf",
+   "puces": [
+    "La Ville poursuit ses analyses sur un plan de gestion uniformisée de la vitesse, qui vise à harmoniser les limites de vitesse sur le territoire; elle évaluera les impacts opérationnels, financiers et organisationnels avant un déploiement rapide des mesures.",
+    "La Ville prévoira les sommes nécessaires pour les études d'avant-projet de la phase 2 du projet Guillaume-Couture.",
+    "Ces études pourraient être subventionnées par le gouvernement du Québec jusqu'à 75 % de leur coût.",
+    "La commission recommande aussi une séance d'information et de consultation en septembre pour recenser les projets de développement liés au moratoire et au renouvellement des règlements de contrôle provisoire.",
+    "La commission appuie la préparation d'un appel d'offres ou d'un appel de projets pour trouver un opérateur d'un espace commercial éphémère, dans une stratégie de revitalisation commerciale d'un secteur.",
+    "Le dossier passe au comité exécutif le 7 juillet 2026, puis au conseil de la Ville le 14 juillet 2026.",
+    "Aucun montant n'est chiffré dans le document : la fiche indique qu'il n'y a pas d'impacts financiers."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-15T00:39:20.539Z",
+   "jetons": {
+    "entree": 5067,
+    "sortie": 521
+   }
+  },
+  {
+   "id": "DVC-DIR-2026-008",
+   "numero": "DVC-DIR-2026-008",
+   "resolution": "CV3564",
+   "date": "2026-07-14",
+   "unite": "Vie communautaire",
+   "objet": "Nomination d’une représentante au conseil d’administration de la Corporation villieu",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DVC-DIR-2026-008.pdf",
+   "puces": [
+    "La Ville nomme Annie Turner, cheffe du Service des bibliothèques et des lettres, comme représentante au conseil d'administration de la Corporation Villieu.",
+    "Elle remplace François Bilodeau, parti à la retraite; Frédéric Bourque demeure l'autre représentant de la Ville.",
+    "La Corporation gère l'immeuble du 601, route des Rivières, dont la Ville est copropriétaire à 50 % avec la société Medway.",
+    "Chaque copropriétaire désigne deux représentants au conseil d'administration.",
+    "Le dossier doit passer au comité exécutif le 7 juillet 2026, puis au conseil de la Ville le 14 juillet 2026.",
+    "La décision n'entraîne aucun impact financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-15T00:39:40.696Z",
+   "jetons": {
+    "entree": 4020,
+    "sortie": 483
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-071",
+   "numero": "URBA-SAT-2026-071",
+   "resolution": "CV3578",
+   "date": "2026-07-14",
+   "unite": null,
+   "objet": "Adoption du Second projet de règlement RV3615 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (ajout des classes d’usages C300, C304, C310, C311, C312, C314, C315, C320 et du groupe d’usages C8 dans la zone C2404, chemin des Îles, à proximité de l’intersection avec le boulevard Guillaume-Couture, secteur Lévis)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-071.pdf",
+   "puces": [
+    "La Ville adopte le second projet de règlement RV3615, qui modifie son règlement de zonage et de lotissement.",
+    "Le changement vise la zone C2404, sur le chemin des Îles, près de l'intersection avec le boulevard Guillaume-Couture, dans le secteur Lévis.",
+    "Le règlement ajoute dans cette zone les classes d'usages C300, C304, C310, C311, C312, C314, C315 et C320, ainsi que le groupe d'usages C8.",
+    "Il s'agit d'une étape du processus d'adoption : le règlement n'est pas encore en vigueur."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-15T00:39:17.555Z",
+   "jetons": {
+    "entree": 1528,
+    "sortie": 297
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-077",
+   "numero": "URBA-SAT-2026-077",
+   "resolution": "CV3582",
+   "date": "2026-07-14",
+   "unite": "Urbanisme",
+   "objet": "Adoption du Règlement RV3607 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (agrandissement de la zone C1526 à même l’entièreté de la zone P1525, rue de la Symphonie, secteur Charny)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-077.pdf",
+   "puces": [
+    "La Ville change le zonage à l'intersection de la rue de la Symphonie et de l'avenue des Générations, dans le secteur Charny.",
+    "La zone publique P1525 disparaît et est absorbée par la zone commerciale voisine C1526.",
+    "Le changement permettra d'autoriser d'autres usages que « public » sur ces terrains.",
+    "Objectif indiqué : faciliter la vente d'immeubles de la Ville qu'elle n'utilise plus.",
+    "Aucune demande de référendum n'a été déposée avant la date limite du 16 juin 2026, ce qui ouvre la voie à l'adoption.",
+    "Le règlement entre en vigueur le jour de son adoption par le conseil de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-15T00:39:47.199Z",
+   "jetons": {
+    "entree": 4231,
+    "sortie": 337
    }
   },
   {
@@ -2772,31 +2773,6 @@
    }
   },
   {
-   "id": "DAJG-2026-014",
-   "numero": "DAJG-2026-014",
-   "resolution": "CE3222",
-   "date": "2026-07-07",
-   "unite": ": affaires juridiques et greffe",
-   "objet": "Demande de reconnaissance aux fins d’exemption de taxes foncières présentée par la Maison de soins palliatifs du littoral (immeuble situé au 180- 182, rue de Saint-Romuald, Lévis) auprès de la Commission municipale du Québec",
-   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DAJG-2026-014.pdf",
-   "puces": [
-    "La Maison de soins palliatifs du Littoral demande d'\ru00eatre exempt\ru00e9e de taxes fonci\ru00e8res pour son immeuble du 180-182, rue de Saint-Romuald, \ru00e0 L\ru00e9vis.",
-    "Ses taxes fonci\ru00e8res s'\ru00e9l\ru00e8vent \ru00e0 44 101 $ pour l'ann\ru00e9e 2026.",
-    "La Ville recommande de donner une opinion favorable \ru00e0 la Commission municipale du Qu\ru00e9bec, qui tranchera la demande.",
-    "La Ville avisera aussi la Commission qu'elle ne souhaite pas \ru00eatre pr\ru00e9sente si une audience a lieu.",
-    "La Commission a transmis la demande le 19 mai 2026; la Ville a 90 jours pour r\ru00e9pondre et vise une d\ru00e9cision \ru00e0 la s\ru00e9ance du 7 juillet 2026."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "44 101 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.800Z",
-   "jetons": {
-    "entree": 4903,
-    "sortie": 452
-   }
-  },
-  {
    "id": "APGI-GI-2026-042",
    "numero": "APGI-GI-2026-042",
    "resolution": "CE3221",
@@ -3089,6 +3065,32 @@
    }
   },
   {
+   "id": "DAJG-2026-014",
+   "numero": "DAJG-2026-014",
+   "resolution": "CE3222",
+   "date": "2026-07-07",
+   "unite": ": affaires juridiques et greffe",
+   "objet": "Demande de reconnaissance aux fins d’exemption de taxes foncières présentée par la Maison de soins palliatifs du littoral (immeuble situé au 180- 182, rue de Saint-Romuald, Lévis) auprès de la Commission municipale du Québec",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DAJG-2026-014.pdf",
+   "puces": [
+    "La Maison de soins palliatifs du Littoral demande d'être exemptée de taxes foncières pour son immeuble du 180-182, rue de Saint-Romuald, à Lévis.",
+    "La Ville recommande de donner une opinion favorable à cette demande auprès de la Commission municipale du Québec.",
+    "Les taxes foncières de l'organisme s'élèvent à 44 101 $ pour l'année 2026.",
+    "La Ville indique qu'elle ne souhaite pas être présente si la Commission tient une audience sur le dossier.",
+    "La Commission a transmis la demande le 19 mai 2026 et la Ville a 90 jours pour répondre; une décision du comité exécutif est souhaitée à la séance du 7 juillet 2026.",
+    "C'est la Commission municipale du Québec, et non la Ville, qui accorde ou refuse l'exemption."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "44 101 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-15T00:39:47.909Z",
+   "jetons": {
+    "entree": 4903,
+    "sortie": 391
+   }
+  },
+  {
    "id": "GEN-RPBA-2026-013",
    "numero": "GEN-RPBA-2026-013",
    "resolution": "CE3187",
@@ -3216,33 +3218,6 @@
    "jetons": {
     "entree": 7829,
     "sortie": 569
-   }
-  },
-  {
-   "id": "FIN-2026-027",
-   "numero": "FIN-2026-027",
-   "resolution": "CV3486",
-   "date": "2026-06-16",
-   "unite": "Finances et trésorerie",
-   "objet": "Entente de collaboration à intervenir avec la Ville de Gatineau et la Ville de Sherbrooke",
-   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/FIN-2026-027.pdf",
-   "puces": [
-    "La Ville de L\ré\ravis s'associe \ravec Gatineau et Sherbrooke pour partager expertise, outils et personnalisations li\ravec au logiciel financier Unit4 Business World.",
-    "L'entente dure 5 ans, du 1er mai 2025 au 30 avril 2030, donc de fa\ravecon r\ravectroactive.",
-    "Les trois villes utilisent d\ravecj\ravec le m\ravecme logiciel et ont migr\ravec vers des licences en mode abonnement, obtenues aupr\ravecs de Levio Conseils inc.",
-    "Des comit\ravecs (strat\ravecgique, de gestion des activit\ravecs, technique) encadreront la collaboration.",
-    "Chaque ville garde son autonomie d\ravecisionnelle et financi\ravecre; tout projet commun devra faire l'objet d'une entente s\ravecpar\ravece.",
-    "Le suivi administratif rel\ravecve du directeur des finances et de la tr\ravecsorerie de L\ravecvis.",
-    "Le maire et la greffi\ravecre sont autoris\ravecs \ravec signer les documents requis."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.752Z",
-   "jetons": {
-    "entree": 7447,
-    "sortie": 490
    }
   },
   {
@@ -4049,6 +4024,33 @@
    "jetons": {
     "entree": 5311,
     "sortie": 465
+   }
+  },
+  {
+   "id": "FIN-2026-027",
+   "numero": "FIN-2026-027",
+   "resolution": "CV3486",
+   "date": "2026-06-16",
+   "unite": "Finances et trésorerie",
+   "objet": "Entente de collaboration à intervenir avec la Ville de Gatineau et la Ville de Sherbrooke",
+   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/FIN-2026-027.pdf",
+   "puces": [
+    "La Ville de Lévis signe une entente de collaboration avec les villes de Gatineau et de Sherbrooke au sujet du progiciel financier Unit4 Business World, que les trois villes utilisent.",
+    "Les trois villes vont se partager de l'expertise, des outils et des personnalisations du logiciel, et mettre en place des comités pour encadrer cette collaboration.",
+    "L'entente dure 5 ans, du 1er mai 2025 (rétroactivement) au 30 avril 2030.",
+    "Lévis garde son autonomie décisionnelle et financière malgré l'entente.",
+    "Le suivi administratif revient au directeur des finances et de la trésorerie de Lévis.",
+    "Les projets communs plus précis devront faire l'objet d'ententes distinctes, incluant le partage des coûts s'il y a lieu.",
+    "Le sommaire n'indique aucun montant : la section sur les impacts financiers n'est pas remplie."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-15T00:39:49.167Z",
+   "jetons": {
+    "entree": 7447,
+    "sortie": 412
    }
   },
   {
@@ -8470,32 +8472,6 @@
    }
   },
   {
-   "id": "DVC-DIR-2026-002",
-   "numero": "DVC-DIR-2026-002",
-   "resolution": "CV3258",
-   "date": "2026-03-31",
-   "unite": "Vie communautaire",
-   "objet": "Reconnaissance des organismes",
-   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/DVC-DIR-2026-002.pdf",
-   "puces": [
-    "La Ville reconna\ftrait cinq organismes : Sentiers V\ravec V\rlo L\rvis et Flash Ensemble comme partenaires, Th\r\ratre Cam\rl\ron, Mar\remusique et le Club de P\rtanque St-\rtienne comme affinitaires.",
-    "Elle refuserait la reconnaissance des Trousseaux de Lisette.",
-    "Elle maintiendrait le statut actuel d'Albatros L\rvis (affinitaire) et des Aidants scolaires (non reconnu).",
-    "Une aide financi\rre de 7 750 $ par ann\re irait \r Sentiers V\rlo L\rvis \r partir de 2027; les autres organismes re\roivent 0 $ en argent.",
-    "Les organismes reconnus obtiennent du soutien en services : aide professionnelle, mat\rriel, communications et action b\rn\rvole; les partenaires ont aussi les assurances (d\rs octobre 2026) et les photocopies.",
-    "\rch\rancier pr\rvu : recommandation du comit\r ex\rcutif le 17 mars 2026, d\rcision du conseil de la Ville le 31 mars 2026."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "7 750 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.777Z",
-   "jetons": {
-    "entree": 8169,
-    "sortie": 505
-   }
-  },
-  {
    "id": "DG-2026-008",
    "numero": "DG-2026-008",
    "resolution": "CV3237",
@@ -9047,27 +9023,6 @@
    }
   },
   {
-   "id": "DVC-DSC-2026-006",
-   "numero": "DVC-DSC-2026-006",
-   "resolution": "CV3259",
-   "date": "2026-03-31",
-   "unite": "Vie communautaire",
-   "objet": "Entente d’aide financière et de collaboration à intervenir avec Le tremplin, centre pour personnes immigrantes et leurs familles, concernant l’édition 2026 de l’événement Lévis interculturelle",
-   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/DVC-DSC-2026-006.pdf",
-   "puces": [
-    "La Ville de L\ncrit une entente d'aide financi\nre et de collaboration avec l'organisme Le Tremplin pour l'\nv\nnement L\nvis interculturelle 2026."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "35 000 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.803Z",
-   "jetons": {
-    "entree": 4611,
-    "sortie": 164
-   }
-  },
-  {
    "id": "GRE-2026-009",
    "numero": "GRE-2026-009",
    "resolution": "CV3234",
@@ -9142,6 +9097,59 @@
    "jetons": {
     "entree": 4659,
     "sortie": 688
+   }
+  },
+  {
+   "id": "DVC-DIR-2026-002",
+   "numero": "DVC-DIR-2026-002",
+   "resolution": "CV3258",
+   "date": "2026-03-31",
+   "unite": "Vie communautaire",
+   "objet": "Reconnaissance des organismes",
+   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/DVC-DIR-2026-002.pdf",
+   "puces": [
+    "La Ville reconnaît cinq organismes : Théâtre Caméléon, Maréemusique et le Club de Pétanque St-Étienne comme « affinitaires », Sentiers Vélo Lévis et Flash Ensemble comme « partenaires ».",
+    "Sentiers Vélo Lévis (secteurs Desjardins et Chaudière-Est) recevra 7 750 $ par année à partir de 2027, en plus du programme d'assurances (dès octobre 2026) et du service de photocopies.",
+    "Les organismes affinitaires reçoivent du soutien en services (professionnel, matériel, communications, bénévolat), mais aucune aide financière.",
+    "La Ville refuse de reconnaître l'organisme Les Trousseaux de Lisette.",
+    "La Ville maintient le statut actuel d'Albatros Lévis (affinitaire) et des Aidants scolaires (non reconnu), qui demandaient une révision.",
+    "Le comité exécutif doit recommander la décision le 17 mars 2026 et le conseil de la Ville l'approuver le 31 mars 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "7 750 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-15T00:39:49.614Z",
+   "jetons": {
+    "entree": 8169,
+    "sortie": 468
+   }
+  },
+  {
+   "id": "DVC-DSC-2026-006",
+   "numero": "DVC-DSC-2026-006",
+   "resolution": "CV3259",
+   "date": "2026-03-31",
+   "unite": "Vie communautaire",
+   "objet": "Entente d’aide financière et de collaboration à intervenir avec Le tremplin, centre pour personnes immigrantes et leurs familles, concernant l’édition 2026 de l’événement Lévis interculturelle",
+   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/DVC-DSC-2026-006.pdf",
+   "puces": [
+    "La Ville de Lévis versera 35 000 $ à l'organisme Le Tremplin, centre pour personnes immigrantes et leurs familles, pour l'édition 2026 de Lévis interculturelle.",
+    "L'événement aura lieu le samedi 12 septembre 2026 au Quai Paquet.",
+    "Il s'agit de la neuvième édition; l'événement se tient depuis 2018.",
+    "En plus de l'argent, la Ville fournira des ressources humaines et matérielles pour la logistique.",
+    "Un comité organisateur conjoint (Service du développement social et communautaire, Le Tremplin et un représentant des communications de la Ville) planifiera la programmation.",
+    "L'activité est inscrite au programme d'appui aux collectivités conclu avec le ministère de l'Immigration, de la Francisation et de l'Intégration.",
+    "Le dossier doit passer au comité exécutif du 17 mars et au conseil de la Ville du 31 mars 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "35 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-15T00:40:21.474Z",
+   "jetons": {
+    "entree": 4611,
+    "sortie": 559
    }
   },
   {
@@ -11432,33 +11440,6 @@
    }
   },
   {
-   "id": "APGI-GI-2026-010",
-   "numero": "APGI-GI-2026-010",
-   "resolution": "CE2756",
-   "date": "2026-02-03",
-   "unite": "Approvisionnement et gestion immobilière",
-   "objet": "Confirmation relative à l’utilisation des parties des lots 2 155 724 et 2 158 860 du cadastre du Québec (5e rue, secteur Saint-Romuald), vente des parties de ces lots et affectation du fruit de la vente",
-   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/APGI-GI-2026-010.pdf",
-   "puces": [
-    "La Ville vend un terrain de 19 929,6 m\" \"\ndans le parc industriel de Saint-Romuald (5e Rue) à Gestion Duro inc. pour 1 195 324 $, plus taxes.",
-    "Le prix correspond à 59,98 $ le mètre carré; avec les taxes nettes, la Ville encaisserait 1 254 940,79 $.",
-    "Le terrain n'est pas desservi et comporte un cran rocheux : l'acheteur paie lui-même le dynamitage et le prolongement des réseaux, et le prix de vente est ajusté en conséquence.",
-    "La vente se fait sans garantie de qualité, aux risques de l'acheteur, qui assume aussi les honoraires professionnels.",
-    "L'acheteur a 90 jours après l'acceptation pour faire ses études environnementales; la vente dépend aussi d'une entente sur les travaux municipaux et de servitudes de passage, d'électricité et de télécommunication.",
-    "Une partie du lot 2 155 724 (1 480,4 mètres carrés) cesse d'être affectée à l'utilité publique pour permettre la vente.",
-    "L'argent de la vente ira à la réserve financière pour le développement du territoire (économique, environnemental, patrimonial et historique); décision prévue au comité exécutif du 3 février 2026."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "1 195 324 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.800Z",
-   "jetons": {
-    "entree": 4446,
-    "sortie": 763
-   }
-  },
-  {
    "id": "DVC-SPO-2026-001",
    "numero": "DVC-SPO-2026-001",
    "resolution": "CE2780",
@@ -11661,6 +11642,33 @@
    "jetons": {
     "entree": 4135,
     "sortie": 472
+   }
+  },
+  {
+   "id": "APGI-GI-2026-010",
+   "numero": "APGI-GI-2026-010",
+   "resolution": "CE2756",
+   "date": "2026-02-03",
+   "unite": "Approvisionnement et gestion immobilière",
+   "objet": "Confirmation relative à l’utilisation des parties des lots 2 155 724 et 2 158 860 du cadastre du Québec (5e rue, secteur Saint-Romuald), vente des parties de ces lots et affectation du fruit de la vente",
+   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/APGI-GI-2026-010.pdf",
+   "puces": [
+    "La Ville vend à Gestion Duro inc. un terrain de 19 929,6 m² sur la 5e Rue, dans le parc industriel de Saint-Romuald, au prix de 1 195 324 $ plus taxes (59,98 $ le mètre carré).",
+    "Le terrain n'est pas desservi et comporte un cran rocheux : l'acheteur paiera lui-même le dynamitage et les honoraires professionnels, et le prix de vente en tient compte.",
+    "La vente se fait sans garantie de qualité, aux risques de l'acheteur.",
+    "L'acheteur a 90 jours après l'acceptation de l'offre pour faire ses études environnementales.",
+    "La vente ne se conclura que si une entente est signée sur le prolongement des réseaux municipaux de la 5e Rue et si des servitudes de passage, d'électricité et de télécommunication sont établies.",
+    "Une partie du lot 2 155 724 de 1 480,4 m² cesse d'être affectée à l'utilité publique.",
+    "L'argent de la vente ira à la réserve financière pour le développement du territoire (économique, environnemental, patrimonial et historique); le dossier passe au comité exécutif du 3 février 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 195 324 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-15T00:39:56.912Z",
+   "jetons": {
+    "entree": 4446,
+    "sortie": 510
    }
   },
   {
@@ -11994,32 +12002,6 @@
    "jetons": {
     "entree": 7207,
     "sortie": 587
-   }
-  },
-  {
-   "id": "URBA-CUMB-2025-042",
-   "numero": "URBA-CUMB-2025-042",
-   "resolution": "CV3108",
-   "date": "2026-01-27",
-   "unite": "Urbanisme",
-   "objet": "Dépense relative à trois unités additionnelles de supplément au loyer du programme de supplément au loyer Québec au bénéfice d’Espace mélilot",
-   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/URBA-CUMB-2025-042.pdf",
-   "puces": [
-    "La Ville accepte de payer sa part pour trois nouvelles unit\ru00e9s de suppl\ru00e9ment au loyer \ru00e0 l'organisme Espace M\ru00e9lilot.",
-    "Ces trois chambres d'urgence s'adressent \ru00e0 des femmes seules en situation de vuln\ru00e9rabilit\ru00e9 et d'itin\ru00e9rance, pour un s\ru00e9jour pouvant aller jusqu'\ru00e0 six mois.",
-    "Les occupantes paieront un loyer \ru00e9quivalant \ru00e0 25 % de leur revenu; le reste est couvert \ru00e0 90 % par la Soci\ru00e9t\ru00e9 d'habitation du Qu\ru00e9bec et \ru00e0 10 % par la Ville.",
-    "La part de la Ville est estim\ru00e9e \ru00e0 1 736 $ par ann\ru00e9e, soit 5 308 $ pour 2026, 2027 et 2028; l'apport gouvernemental atteint 15 617 $ par ann\ru00e9e.",
-    "Espace M\ru00e9lilot veut ouvrir les trois chambres subventionn\ru00e9es d\ru00e8s janvier 2026.",
-    "L'organisme g\ru00e8re d\ru00e9j\ru00e0 18 logements transitoires pour femmes seules ou monoparentales, o\ru00f9 le s\ru00e9jour peut durer de un \ru00e0 trois ans."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "5 308$ pour les trois prochaines années.",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.800Z",
-   "jetons": {
-    "entree": 3480,
-    "sortie": 638
    }
   },
   {
@@ -12381,6 +12363,33 @@
    "jetons": {
     "entree": 3428,
     "sortie": 534
+   }
+  },
+  {
+   "id": "URBA-CUMB-2025-042",
+   "numero": "URBA-CUMB-2025-042",
+   "resolution": "CV3108",
+   "date": "2026-01-27",
+   "unite": "Urbanisme",
+   "objet": "Dépense relative à trois unités additionnelles de supplément au loyer du programme de supplément au loyer Québec au bénéfice d’Espace mélilot",
+   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/URBA-CUMB-2025-042.pdf",
+   "puces": [
+    "La Ville accepte de payer sa part pour trois nouvelles unités de supplément au loyer à l'organisme Espace Mélilot.",
+    "Ces unités servent à trois chambres d'urgence pour femmes seules en situation de vulnérabilité et d'itinérance, occupées jusqu'à six mois.",
+    "Les occupantes paieront un loyer équivalant à 25 % de leur revenu; le reste est couvert à 90 % par la Société d'habitation du Québec et à 10 % par la Ville.",
+    "La part de la Ville est estimée à 1 736 $ en 2026, 1 739 $ en 2027 et 1 833 $ en 2028, soit 5 308 $ sur trois ans; la part gouvernementale atteint 15 617 $ par année.",
+    "Le montant sera ajusté chaque année selon les hausses suggérées par le Tribunal administratif du logement.",
+    "Espace Mélilot veut offrir les trois chambres subventionnées dès janvier 2026.",
+    "L'organisme gère déjà 18 logements transitoires pour femmes seules ou monoparentales, où le séjour peut durer de un à trois ans."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "5 308$ pour les trois prochaines années",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-15T00:39:58.613Z",
+   "jetons": {
+    "entree": 3480,
+    "sortie": 496
    }
   },
   {
