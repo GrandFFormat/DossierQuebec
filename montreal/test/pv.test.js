@@ -4,6 +4,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { decouperResolutions, parserVote, nettoyerNoms, parserOrdreDuJour, extraireDissidences, extraireResultat } from '../lib/pv.js';
+import { colonnes, texteDeLigne } from '../lib/pdf.js';
 import { parserCsv, colonne } from '../lib/csv.js';
 import { classer } from '../lib/themes.js';
 import { urlDocument, candidatsDocument, heureFichier, idSeance } from '../lib/mtl.js';
@@ -432,4 +433,65 @@ test("résolutions d'arrondissement : un numéro cité dans une phrase n'ouvre p
 test("« unanimement résolu » vaut l'unanimité", () => {
   assert.equal(extraireResultat('Il est proposé par X\net unanimement résolu :\nADOPTÉE'), "Adoptée à l'unanimité");
   assert.equal(extraireResultat("ADOPTÉE À L'UNANIMITÉ."), "Adoptée à l'unanimité");
+});
+
+// ---------- Les deux colonnes de Pierrefonds-Roxboro ----------
+
+// Positions relevées telles quelles dans CA_Pir_PV_ORDI_2026-06-01_19h00_FR.pdf, page
+// par page — [x, largeur, texte] pour chaque fragment. Le procès-verbal est sur deux
+// colonnes, le français à gauche et sa traduction anglaise à droite ; recollées, ses
+// lignes étaient illisibles. Ces six-là sont les cas qui ont fait échouer trois versions
+// successives de la détection, et c'est pour cela qu'elles sont ici.
+const LIGNES_PIERREFONDS = [
+  // La page de garde : la gouttière ne fait que 17 unités, MOINS qu'un espace entre deux
+  // mots français ailleurs dans le même document (jusqu'à 25). Aucun seuil ne les sépare ;
+  // seule la position apprise, x=315, y arrive.
+  [[92, 201, 'Procès-verbal de la séance ordinaire du'], [311, 53, 'Minutes of'], [365, 6, ' '], [371, 15, 'the'], [386, 6, ' '], [392, 34, 'regular'], [426, 6, ' '], [432, 30, 'sitting'], [462, 6, ' '], [468, 9, 'of'], [478, 6, ' '], [484, 15, 'the']],
+  // La gouttière comblée par un fragment de 117 blancs : mesuré entre fragments voisins,
+  // l'écart vaut zéro.
+  [[95, 103, 'Signature du livre d’or'], [198, 117, ' '], [315, 117, 'Signing of the guestbook']],
+  // Un titre de résolution, et le numéro qui l'ouvre — les deux étaient doublés en anglais.
+  [[72, 180, 'RÉSOLUTION NUMÉRO CA26 29 0132'], [252, 61, ' '], [313, 179, 'RESOLUTION NUMBER CA26 29 0132']],
+  [[72, 81, 'PROLONGATION'], [152, 10, ' '], [162, 14, 'DE'], [176, 10, ' '], [186, 12, 'LA'], [198, 10, ' '], [207, 45, 'PÉRIODE'], [252, 10, ' '], [262, 14, 'DE'], [315, 154, 'QUESTION PERIOD EXTENSION']],
+  // Une ligne française seule : elle doit rester entière.
+  [[143, 142, 'encore la possibilité aux citoyens']],
+  // Une ligne entièrement dans la colonne anglaise : elle doit disparaître.
+  [[363, 94, 'Mrs. Zahra Ghassemi']],
+];
+
+const ligne = (fragments) => ({ y: 0, fragments: fragments.map(([x, largeur, str]) => ({ x, largeur, str })) });
+
+test('deux colonnes : la moitié anglaise est écartée, la française reste entière', () => {
+  // Les positions de colonne s'apprennent sur tout le document. Ici on les fournit :
+  // x=315 est celle que le vrai procès-verbal donne, à côté de 334 et 357.
+  const centres = [315, 334, 357];
+  const rendu = LIGNES_PIERREFONDS.map((f) => texteDeLigne(ligne(f), 612, centres));
+  assert.equal(rendu[0], 'Procès-verbal de la séance ordinaire du');
+  assert.equal(rendu[1], 'Signature du livre d’or');
+  assert.equal(rendu[2], 'RÉSOLUTION NUMÉRO CA26 29 0132');
+  assert.equal(rendu[3], 'PROLONGATION DE LA PÉRIODE DE');
+  assert.equal(rendu[4], 'encore la possibilité aux citoyens');
+  assert.equal(rendu[5], '', 'une ligne entièrement anglaise disparaît');
+});
+
+test('une seule colonne : le texte est rendu tel quel', () => {
+  const rendu = LIGNES_PIERREFONDS.map((f) => texteDeLigne(ligne(f), 612, []));
+  assert.match(rendu[0], /Minutes of the regular sitting of the$/);
+  assert.equal(rendu[5], 'Mrs. Zahra Ghassemi');
+});
+
+// L'autre moitié du travail : ne JAMAIS couper un document ordinaire. Se tromper ici
+// coûterait la moitié de chaque ligne de chaque procès-verbal du conseil municipal.
+test("un document sur une colonne n'a pas de colonne apprise", () => {
+  const prose = Array.from({ length: 60 }, (_, i) =>
+    ligne([[92, 200, `Une ligne ordinaire de procès-verbal, numéro ${i}`], [300, 150, 'et sa suite immédiate']])
+  );
+  assert.deepEqual(colonnes(prose, 612), [], 'de la prose serrée ne fait pas deux colonnes');
+
+  // « 20.03      1266245003 » : un grand blanc, mais tout à droite, hors de la bande.
+  const articles = Array.from({ length: 60 }, (_, i) => ligne([[92, 20, `20.0${i % 9}`], [480, 60, `126624500${i % 9}`]]));
+  assert.deepEqual(colonnes(articles, 612), [], 'un numéro de dossier en marge ne fait pas deux colonnes');
+
+  // Trop peu de lignes pour conclure quoi que ce soit.
+  assert.deepEqual(colonnes([ligne([[92, 100, 'a'], [315, 100, 'b']])], 612), []);
 });
