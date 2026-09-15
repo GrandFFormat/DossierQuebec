@@ -485,7 +485,14 @@ mois payé). Le produit, le webhook et le portail existent aussi en mode réel, 
 **Avant d'ouvrir en réel** : la réponse du greffe (usage commercial, N/Réf. 2026-09-11-2684) ; des
 conditions d'utilisation et une politique de remboursement liées depuis la page Abonnement ;
 retirer « prix prévu » des pages Abonnement et Mes dossiers ; refaire produit, prix, webhook et
-portail en mode réel (ils ne passent pas du mode essai au réel) et changer les trois clés.
+portail en mode réel (ils ne passent pas du mode essai au réel) et changer les trois clés ; faire
+valider les taxes (TPS/TVQ, seuil du petit fournisseur) par un comptable ; une politique de
+confidentialité qui dit que les adresses courriel sont traitées hors Québec (Resend en Virginie,
+Supabase, Vercel), comme le demande la Loi 25.
+
+**Expéditeur des courriels** (15 sept. 2026) : la variable Vercel `DIGEST_FROM` vaut
+`DossierQuébec <compte-rendu@dossierquebec.ca>` — domaine dossierquebec.ca vérifié dans Resend
+(DNS chez Cloudflare, région North Virginia, la seule proche). Elle servait avant une adresse en .com.
 
 ## La version anglaise (étape 1, 14 sept. 2026)
 
