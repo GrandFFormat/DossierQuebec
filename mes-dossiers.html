@@ -61,7 +61,7 @@
   boutonRetourEnHaut();
 </script>
 <script type="module">
-  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, mesurer, formulaireMessage, EN, tr } from '/commun/abonnes-client.js';
+  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, mesurer, formulaireMessage, dernierVolet, EN, tr } from '/commun/abonnes-client.js';
   import { boiteInfolettre } from '/commun/infolettre.js';
   const pl = (n, sing, plur) => (n > 1 ? plur : sing);
   import { libelleEn, themeEn } from '/quebec/assets/libelles-en.js';
@@ -1001,6 +1001,11 @@ ${liste.map(fiche).join('')}
 
   // ---------- projets à suivre, par ville ----------
   // Pour tout le monde : aux abonnés, du contenu de plus ; aux autres, une raison de s'abonner.
+  // Une couleur par ville, la même partout où la ville a sa boîte ; une ville à venir prend la suivante.
+  const COULEURS_VILLES = { quebec: '#2563EB', levis: '#0B8A4B', montreal: '#DC2626', longueuil: '#7C3AED' };
+  const PALETTE_VILLES = ['#EA580C', '#DB2777', '#0891B2', '#B7791F'];
+  const couleurVille = (ville, i) => COULEURS_VILLES[ville] ?? PALETTE_VILLES[i % PALETTE_VILLES.length];
+
   async function suggestions(s, suivisIds) {
     const blocs = [];
     const index = await Promise.all(Object.keys(VILLES).map(async (ville) => [ville, await indexVille(ville)]));
@@ -1025,20 +1030,21 @@ ${liste.map(fiche).join('')}
           </article>`;
         })
         .join('');
-      blocs.push(`<h3 class="ab-sous-titre">${echapper(VILLES[ville])}</h3><div class="ab-grille">${cartes}</div>`);
+      blocs.push({ ville, nombre: projets.length, cartes });
     }
-    // Un menu dépliant, comme les autres boîtes : fermé si on suit déjà des projets, ouvert sinon
-    // (c'est là qu'on choisit le premier). Il garde son état quand la page se redessine.
-    const dejaOuvert = $('#suggestions details.ab-pliable');
-    const ouvert = dejaOuvert ? dejaOuvert.open : !suivisIds.size;
-    const nombre = index.reduce((n, [ville, idx]) => n + Object.entries(idx?.projets ?? {}).filter(([cle, p]) => p.decisions > 0 && !suivisIds.has(`${ville}|projet:${cle}`)).length, 0);
+    // Le titre toujours visible, puis une ville par menu dépliant, avec son nombre de projets.
+    // Fermés au départ ; pour qui ne suit encore rien, la ville du dernier volet visité (ou la
+    // première) est ouverte, puisque c'est là qu'on choisit son premier projet. Chaque ville garde
+    // son état quand la page se redessine.
+    const avant = new Map([...document.querySelectorAll('#suggestions details[data-ville]')].map((d) => [d.dataset.ville, d.open]));
+    const aOuvrir = suivisIds.size ? null : (blocs.find((b) => b.ville === dernierVolet()) ?? blocs[0])?.ville;
     $('#suggestions').innerHTML = blocs.length
-      ? `<details class="ab-pliable ab-suggestions"${ouvert ? ' open' : ''}>
-          <summary><h2>${suivisIds.size ? tr("D'autres projets à suivre", 'More projects to follow') : tr('Des projets à suivre', 'Projects to follow')}</h2><span class="ab-etiquette">${nombre}</span></summary>
-          <div class="ab-pliable-corps">
-            <p class="ab-chapeau">${tr('Les grands dossiers de chaque ville, qui reviennent de séance en séance. Suivez-en un pour garder le fil de toutes ses décisions.', "Each city's major files, which come back meeting after meeting. Follow one to keep track of all its decisions. (Project descriptions and recaps are in French for now.)")}</p>${blocs.join('')}
-          </div>
-        </details>`
+      ? `<h2>${tr('Des projets à suivre', 'Projects to follow')}</h2>
+         <p class="ab-chapeau">${tr('Les grands dossiers de chaque ville, qui reviennent de séance en séance. Suivez-en un pour garder le fil de toutes ses décisions.', "Each city's major files, which come back meeting after meeting. Follow one to keep track of all its decisions. (Project descriptions and recaps are in French for now.)")}</p>
+         ${blocs.map((b, i) => `<details class="ab-pliable ab-ville-projets" data-ville="${echapper(b.ville)}" style="--ville:${couleurVille(b.ville, i)}"${(avant.has(b.ville) ? avant.get(b.ville) : b.ville === aOuvrir) ? ' open' : ''}>
+           <summary><h3>${echapper(VILLES[b.ville])}</h3><span class="ab-etiquette">${b.nombre} ${tr(pl(b.nombre, 'projet', 'projets'), pl(b.nombre, 'project', 'projects'))}</span></summary>
+           <div class="ab-pliable-corps"><div class="ab-grille">${b.cartes}</div></div>
+         </details>`).join('')}`
       : '';
   }
 
