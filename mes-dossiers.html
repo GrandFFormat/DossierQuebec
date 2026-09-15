@@ -47,9 +47,9 @@
     <div id="organismes"></div>
     <div id="export"></div>
     <div id="ouverts"></div>
+    <div id="suggestions"></div>
     <div id="liste"><p class="ab-vide" data-en="Loading…">Chargement…</p></div>
     <div id="pourquoi"></div>
-    <div id="suggestions"></div>
     <div id="ecrire"></div>
   </main>
 </div>
@@ -1304,7 +1304,7 @@ ${liste.map(fiche).join('')}
     pourquoi({ connecte: true, abonne });
     suggestions(s, new Set(suivis.map((x) => `${x.ville}|${x.dossier_id}`)));
     if (!suivis.length) {
-      $('#liste').innerHTML = `<p class="ab-vide">${tr("Vous ne suivez aucun projet pour l'instant. Choisissez-en un ci-dessous.", "You aren't following any project yet. Pick one below.")}</p>`;
+      $('#liste').innerHTML = `<p class="ab-vide">${tr("Vous ne suivez aucun projet pour l'instant. Choisissez-en un ci-dessus, dans « Des projets à suivre ».", "You aren't following any project yet. Pick one above, in “Projects to follow”.")}</p>`;
       return;
     }
     const parVille = new Map();
