@@ -354,6 +354,7 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 .ab-page .ab-alertes #alertes-etat { flex-basis: 100%; }
 .ab-page .ab-organismes { border-left: 4px solid var(--accent); }
 .ab-page .ab-export { border-left: 4px solid var(--accent); }
+.ab-page .ab-suggestions { border-left: 4px solid var(--accent); }
 .ab-page .ab-export-grille { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
 .ab-page .ab-champ { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; margin: 0; padding: 0; border: 0; min-width: 0; }
 .ab-page .ab-champ > span, .ab-page .ab-champ > legend { font-weight: 700; font-size: 15px; padding: 0; }
