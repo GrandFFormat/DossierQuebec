@@ -28,7 +28,7 @@ export const CACHE = new URL('../data/textes/', import.meta.url);
 const RATTRAPAGE_JOURS = 45;
 // Quand le découpage change (ce numéro augmente), les séances déjà lues sont relues à la
 // prochaine exécution — depuis le cache, sans rien redemander à la Ville.
-export const VERSION_LECTURE = 7;
+export const VERSION_LECTURE = 9;
 
 function parseArgs(argv) {
   const args = {};
@@ -140,6 +140,8 @@ export function decisionsDeSeance(seance, pv) {
     id: r.numero,
     numero: r.numero,
     objet: r.objet,
+    // « modifiée par CV3432 » : l'annotation que la greffe écrit à côté du numéro.
+    annotation: r.annotation ?? undefined,
     date: seance.date,
     annee: seance.date.slice(0, 4),
     type: r.nature,

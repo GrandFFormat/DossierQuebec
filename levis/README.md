@@ -237,11 +237,26 @@ La recherche du volet trouve aussi l'identifiant du sommaire (`decisions.html?q=
 illisibles (« L\tévis », « r\nde9glement ») : retirés et régénérés (0,38 $). `resumes.js` refuse
 maintenant un résumé de ce genre, compté comme échec et redemandé à l'exécution suivante.
 
+**« Où en est le projet »** (`scrapers/recaps-projets.js`, copié de Québec). Il dépendait du module
+du détail de l'argent pour quatre outils (`appeler`, `compacter`, `nombresDe`, `decoder`) : ils
+sont dans `lib/ia.js`. Même garantie qu'à Québec, sans relecture humaine : chaque numéro cité
+appartient au projet, chaque nombre existe dans les dossiers cités, puis une contre-lecture retire
+ce qui est faux. Au moins trois dossiers par projet : les stations d'épuration (7) et le logement
+(9) ont un récapitulatif ; Lévis 2030 et Guillaume-Couture (1 dossier chacun) s'en passent. Premier
+passage : 0,63 $ en tout. Refait seulement quand un dossier du projet change.
+
+**Ce que la contre-lecture a attrapé.** Le premier récapitulatif du logement disait que la
+contribution au projet de la rue des Fines-Herbes « restait à trancher au conseil ». Cause : la
+décision du conseil (CV3384) manquait — son numéro était annoté « CV3384 modifiée par CV3432 » et le
+lecteur n'attendait qu'un numéro seul sur sa ligne. Cinq résolutions de 2026 étaient perdues ainsi,
+sans erreur ; `NUMERO_RESOLUTION` accepte maintenant l'annotation (« modifié(e) par »,
+« abrogé(e) par »…) et la fiche l'affiche.
+
 ## Ce qui n'est pas encore là
 
-- **Récapitulatifs « Où en est le projet »** (`recaps-projets.js` de Québec) : il dépend du module
-  du détail de l'argent ; les projets de Lévis s'affichent sans récapitulatif (`recap: null`).
 - **Détail de l'argent** (section 9, point 4).
+- **Vérification avec un compte abonné** : suivre un projet de Lévis dans Mes dossiers, ouvrir son
+  récapitulatif, recevoir un courriel d'essai des alertes.
 - **Courriel au greffe** : modèle dans `courriel-greffe.md`, à envoyer par Martin.
 - **Contours à jour des districts** (voir plus haut).
 - **Années antérieures** : l'API rend 2001-2025 ; seule 2026 est lue.
