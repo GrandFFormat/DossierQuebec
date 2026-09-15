@@ -153,7 +153,13 @@ function carteDecision(d) {
   // de dossier suit la décision d'une instance à l'autre.
   // Un procès-verbal ou un ordre du jour n'est pas un dossier : rien à suivre.
   if (d.type === 'Procès-verbal' || d.type === 'Ordre du jour') return carteRepliable(entete, corps);
-  const abonnes = `<div class="ab-fiche" data-dossier="${echapper(d.dossier ?? d.id)}" data-numero="${echapper(d.numero ?? '')}" data-objet="${echapper((d.objet ?? '').slice(0, 300))}"></div>`;
+  // Comme à Québec : « Décision finale » ou « Suivre », les projets, et data-montant quand le
+  // résumé a trouvé un montant (un abonné peut alors demander le détail de l'argent).
+  const projets = (d.projets ?? []).map((cle) => ({ cle, titre: etat.decisions?.projets?.[cle]?.titre ?? cle }));
+  const resume = resumePour(d)?.r;
+  const abonnes = `<div class="ab-fiche" data-dossier="${echapper(d.dossier ?? d.id)}" data-numero="${echapper(d.numero ?? '')}" data-objet="${echapper((d.objet ?? '').slice(0, 300))}" data-montant="${resume?.montantPrincipal && !resume.sansContenuSubstantiel ? 1 : 0}"
+    data-statut="${echapper(d.statutDossier ?? '')}" data-etape="${echapper(d.etapeFinale ?? '')}" data-echeance="${echapper(d.echeance ?? '')}"
+    data-projets="${echapper(JSON.stringify(projets))}"></div>`;
   return carteRepliable(entete, corps + abonnes);
 }
 
@@ -163,12 +169,15 @@ function decisionsFiltrees() {
   const instance = $('#filtre-instance').value;
   const theme = $('#filtre-theme')?.value ?? '';
   const avecResume = $('#filtre-resume')?.checked ?? false;
+  const projet = etat.projet;
   return etat.decisions.decisions.filter((d) => {
+    if (projet && !d.projets?.includes(projet)) return false;
     if (type && d.type !== type) return false;
     if (instance && d.instance !== instance) return false;
     if (theme && d.theme !== theme) return false;
     if (avecResume && !resumePour(d)) return false;
-    if (q && !((d.objet ?? '') + ' ' + (d.numero ?? '')).toLowerCase().includes(q)) return false;
+    // L'identifiant du sommaire (FIN-2026-035) se cherche aussi : Mes dossiers y renvoie.
+    if (q && !((d.objet ?? '') + ' ' + (d.numero ?? '') + ' ' + (d.sommaires ?? []).join(' ')).toLowerCase().includes(q)) return false;
     return true;
   });
 }
@@ -885,6 +894,15 @@ async function init() {
     const instance = new URLSearchParams(location.search).get('instance');
     const recherche = new URLSearchParams(location.search).get('q');
     if (recherche && $('#rech-decisions')) $('#rech-decisions').value = recherche;
+    // Arriver sur les décisions d'un projet (lien depuis « Mes dossiers ») : filtre annoncé, retirable.
+    const projet = new URLSearchParams(location.search).get('projet');
+    if (projet && etat.decisions.projets?.[projet]) {
+      etat.projet = projet;
+      $('#compte-decisions')?.insertAdjacentHTML(
+        'beforebegin',
+        `<p class="compte" id="filtre-projet">Projet : <strong>${echapper(etat.decisions.projets[projet].titre)}</strong> — ${nombreFr(etat.decisions.projets[projet].n)} décisions. <a href="decisions.html">Voir toutes les décisions</a></p>`
+      );
+    }
     rendreDecisions();
     if (instance && [...$('#filtre-instance').options].some((o) => o.value === instance)) {
       $('#filtre-instance').value = instance;

@@ -18,6 +18,7 @@ import { INSTANCES, pdf as telechargerPdf, PAGE_ARCHIVES } from '../lib/levis.js
 import { lirePdf } from '../lib/pdf.js';
 import { decouperResolutions, extrairePresences } from '../lib/pv.js';
 import { classer, THEMES } from '../lib/themes.js';
+import { PROJETS, projetsDe } from '../lib/projets.js';
 
 const OUT = new URL('../data/decisions.json', import.meta.url);
 const SEANCES = new URL('../data/seances.json', import.meta.url);
@@ -27,7 +28,7 @@ export const CACHE = new URL('../data/textes/', import.meta.url);
 const RATTRAPAGE_JOURS = 45;
 // Quand le découpage change (ce numéro augmente), les séances déjà lues sont relues à la
 // prochaine exécution — depuis le cache, sans rien redemander à la Ville.
-export const VERSION_LECTURE = 6;
+export const VERSION_LECTURE = 7;
 
 function parseArgs(argv) {
   const args = {};
@@ -100,6 +101,38 @@ export async function procesVerbal(seance, { forcer = false } = {}) {
   return { ...contenu, depuisCache: false };
 }
 
+// Où en est un dossier (un sommaire décisionnel et ses résolutions). Le sommaire de Lévis ne
+// porte pas, comme celui de Québec, une « instance décisionnelle » et une date cible lisibles
+// d'un coup : on le déduit des résolutions elles-mêmes.
+//   - une résolution du conseil de la Ville qui n'est ni un avis de motion ni l'adoption d'un
+//     projet de règlement : décision finale (`termine`, Conseil de la Ville) ;
+//   - sinon, une résolution du comité exécutif qui « recommande au conseil de la Ville », ou une
+//     étape préliminaire d'un règlement : en attente du conseil (`en_cours`) ;
+//   - sinon, le comité exécutif a décidé lui-même : `termine`.
+// Les conseils d'arrondissement n'ont pas de sommaire : pas de statut.
+const PRELIMINAIRE = new Set(['Avis de motion', 'Projet de règlement']);
+function statutsDesDossiers(liste) {
+  const parDossier = new Map();
+  for (const d of liste) {
+    delete d.statutDossier;
+    delete d.etapeFinale;
+    delete d.echeance;
+    if (!d.dossier) continue;
+    if (!parDossier.has(d.dossier)) parDossier.set(d.dossier, []);
+    parDossier.get(d.dossier).push(d);
+  }
+  for (const groupe of parDossier.values()) {
+    const finalAuConseil = groupe.some((d) => d.instanceCode === 'CV' && !PRELIMINAIRE.has(d.type));
+    const attendConseil = groupe.some((d) => d.recommandeAuConseil || PRELIMINAIRE.has(d.type));
+    const statut = finalAuConseil
+      ? { statutDossier: 'termine', etapeFinale: 'Conseil de la Ville' }
+      : attendConseil
+        ? { statutDossier: 'en_cours', etapeFinale: 'Conseil de la Ville' }
+        : { statutDossier: 'termine', etapeFinale: groupe.at(-1).instance };
+    for (const d of groupe) Object.assign(d, statut, { echeance: null });
+  }
+}
+
 export function decisionsDeSeance(seance, pv) {
   const presences = extrairePresences(pv.pages);
   const resolutions = decouperResolutions(pv.pages, { liens: pv.liens, presences });
@@ -123,6 +156,7 @@ export function decisionsDeSeance(seance, pv) {
     sommairePdf: r.sommairePdf,
     resultat: r.resultat,
     voteEnregistre: r.votes.length > 0,
+    recommandeAuConseil: /recommander au conseil de la Ville/i.test(r.texte) || undefined,
     pdf: r.page ? `${pv.url}#page=${r.page}` : pv.url,
   }));
   decisions.push({
@@ -186,6 +220,12 @@ async function main() {
     for (const d of liste) d.nouveau = precedent ? !decisionsConnues.has(d.id) && (d.date ?? '') >= seuil : null;
     for (const d of liste) Object.assign(d, classer({ objet: d.type === 'Procès-verbal' ? 'procès-verbal' : d.objet, categorie: d.type, unite: d.unite }));
     liste.sort((a, b) => b.date.localeCompare(a.date) || (a.instance ?? '').localeCompare(b.instance ?? '') || (a.numero ?? '').localeCompare(b.numero ?? '', 'fr', { numeric: true }));
+    for (const d of liste) {
+      delete d.projets;
+      const p = d.type === 'Procès-verbal' ? [] : projetsDe(d.objet);
+      if (p.length) d.projets = p;
+    }
+    statutsDesDossiers(liste);
     const traitees = new Set(etatSeances.map((s) => s.id));
     const etats = [...etatSeances, ...seances.filter((s) => !traitees.has(s.id)).map((s) => connues.get(s.id) ?? { ...s, etat: partiel ? 'non traitée' : 'procès-verbal non publié' })];
     const payload = {
@@ -202,6 +242,11 @@ async function main() {
       themes: THEMES,
       sansTheme: liste.filter((d) => d.themeSource === 'defaut').length,
       facettes: { type: tally(liste, 'type'), instance: tally(liste, 'instance'), unite: tally(liste, 'unite'), theme: tally(liste, 'theme') },
+      projets: Object.fromEntries(Object.entries(PROJETS).map(([cle, p]) => [cle, { titre: p.titre, description: p.description, n: liste.filter((d) => d.projets?.includes(cle)).length }])),
+      dossiers: {
+        termines: new Set(liste.filter((d) => d.statutDossier === 'termine').map((d) => d.dossier)).size,
+        enCours: new Set(liste.filter((d) => d.statutDossier === 'en_cours').map((d) => d.dossier)).size,
+      },
       seances: etats.sort((a, b) => b.date.localeCompare(a.date)),
       decisions: liste,
     };
