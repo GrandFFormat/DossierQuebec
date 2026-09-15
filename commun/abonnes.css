@@ -571,3 +571,13 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 /* Retour de Stripe dans Mes dossiers, et l'abonnement actif sur la page Abonnement */
 .ab-page .ab-merci { border-left: 5px solid var(--accent); background: var(--accent-fond, #E6F6EC); color: var(--encre); margin-bottom: 16px; }
 .ab-abo .ab-payer h3 { margin-top: 0; }
+
+/* Le compte rendu du mois : formulaire (accueil des volets) et boîte de Mes dossiers */
+.ab-infolettre { margin: 36px 0 8px; padding: 22px 22px 16px; border-radius: 12px; border: 1px solid var(--ligne, #DDE2E7); border-top: 5px solid #0B8A4B; background: var(--carte, #fff); }
+.ab-infolettre h2 { margin: 0 0 8px; font-size: 21px; }
+.ab-infolettre p { margin: 0 0 12px; line-height: 1.55; }
+.ab-infolettre .ab-form { margin: 4px 0 8px; }
+.ab-infolettre-villes { border: 0; padding: 0; margin: 0 0 10px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.ab-infolettre-villes legend { font-weight: 600; margin-bottom: 6px; }
+.ab-pot-de-miel { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
+.ab-infolettre-boite .ab-case { display: inline-flex; margin-right: 18px; }

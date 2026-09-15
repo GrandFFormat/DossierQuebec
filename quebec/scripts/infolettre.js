@@ -4,6 +4,7 @@
 //   npm run infolettre -- --mois=2026-08
 //   npm run infolettre -- --depuis=2026-08-16 --jusqua=2026-09-14
 //   npm run infolettre -- --mois=2026-08 --details   fait d'abord lire le détail des plus gros montants (API)
+//   npm run infolettre -- --mois=2026-08 --publier   après relecture : publié, il part aux inscrits (api/_infolettre.js)
 //
 // Tout vient des données déjà extraites : aucun appel à la Ville, aucun appel IA. Écrit
 // infolettres/AAAA-MM.html (le courriel, en couleur, styles en ligne) et AAAA-MM.md (la version
@@ -30,6 +31,7 @@ import { chargerDetails, extraireDetails, TYPES_MONTANT, VERSION_VERIFICATION } 
 const DATA = new URL('../data/', import.meta.url);
 const SORTIE = new URL('../infolettres/', import.meta.url);
 const SITE = 'https://dossierquebec.ca/quebec/';
+const VILLE = 'quebec';
 const RACINE = 'https://dossierquebec.ca';
 
 function parseArgs(argv) {
@@ -463,6 +465,8 @@ async function main() {
       <h1 style="${POLICE};margin:8px 0 0;font-size:27px;line-height:1.2;color:#ffffff">Ce que la Ville de Québec a décidé ${echapper(nomPeriode)}</h1>
     </td></tr>
     <tr><td style="height:6px;line-height:6px;font-size:0;background:#F5B301">&nbsp;</td></tr>`);
+  // Remplacé à l'envoi (api/_infolettre.js) : le bandeau de bienvenue pour qui vient de s'inscrire.
+  H.push('<!--BANDEAU-->');
   // Le mot du mois, puis l'introduction
   const paragraphes = [...mot.map((p) => `<p style="${POLICE};margin:0 0 12px;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(p)}</p>`)];
   H.push(`<tr><td style="padding:22px 4px 4px">${paragraphes.join('')}<p style="${POLICE};margin:0;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(introduction)}</p>${abonne
@@ -557,7 +561,7 @@ async function main() {
   </td></tr>`);
   H.push(`<tr><td style="${POLICE};padding:22px 4px 0;font-size:12px;line-height:1.55;color:${DOUX}">
     Les montants sont ceux des documents. Les résumés sont générés par IA à partir des sommaires décisionnels ; chaque lien mène au PDF officiel de la Ville, qui fait foi.
-    <a href="${SITE}decisions.html" style="color:${DOUX}">Toutes les décisions</a> · site indépendant, sans publicité, aucun caractère officiel.
+    <a href="${SITE}decisions.html" style="color:${DOUX}">Toutes les décisions</a> · site indépendant, sans publicité, aucun caractère officiel.<!--DESINSCRIPTION-->
   </td></tr>`);
 
   return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ce que la Ville de Québec a décidé ${echapper(nomPeriode)}</title></head>` +
@@ -576,6 +580,29 @@ async function main() {
   await writeFile(new URL(`${fichier}-abonnes.html`, SORTIE), pageAbonnes, 'utf8');
   console.log(`${nomPeriode} : ${liste.length} dossiers, ${nbSeances} séances, ${subventions.length} subventions, ${contrats.length} contrats, ${nbVotesDivises} votes divisés${mot.length ? ', mot du mois inclus' : ''}.`);
   console.log(`→ infolettres/${fichier}.html (gratuit), ${fichier}-abonnes.html et ${fichier}.md`);
+
+  // --publier : le compte rendu relu part dans Supabase. Il sera envoyé aux inscrits confirmés au
+  // prochain passage du cron (11 h UTC), et il devient celui que reçoit chaque nouvel inscrit.
+  if (args.publier) {
+    if (!/^\d{4}-\d{2}$/.test(fichier)) throw new Error('--publier demande un mois complet (--mois=AAAA-MM).');
+    if (!process.env.SUPABASE_URL) {
+      const racine = fileURLToPath(new URL('../', import.meta.url));
+      const cle = [racine + 'api.env', racine + '../api.env'].find((f) => existsSync(f));
+      if (cle) process.loadEnvFile(cle);
+    }
+    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) throw new Error('--publier : SUPABASE_URL et SUPABASE_SERVICE_ROLE_KEY manquent (api.env).');
+    const h = { apikey: process.env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`, 'Content-Type': 'application/json' };
+    const url = `${process.env.SUPABASE_URL}/rest/v1/infolettre_numeros`;
+    const existant = await fetch(`${url}?ville=eq.${VILLE}&mois=eq.${fichier}&select=envoye_le,envoyes`, { headers: h }).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`Supabase ${r.status} — scripts/supabase-schema-infolettre.sql a-t-il été exécuté ?`))));
+    if (existant[0]?.envoyes > 0) throw new Error(`Le compte rendu ${fichier} est déjà parti vers ${existant[0].envoyes} personne(s) : on ne le remplace pas.`);
+    const r = await fetch(`${url}?on_conflict=ville,mois`, {
+      method: 'POST',
+      headers: { ...h, Prefer: 'resolution=merge-duplicates,return=minimal' },
+      body: JSON.stringify([{ ville: VILLE, mois: fichier, titre: `Ce que la Ville de Québec a décidé ${nomPeriode}`, html: page, html_abonnes: pageAbonnes, publie_le: new Date().toISOString(), updated_at: new Date().toISOString() }]),
+    });
+    if (!r.ok) throw new Error(`Publication → ${r.status} ${(await r.text()).slice(0, 200)}`);
+    console.log(`Publié : ${fichier}. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.`);
+  }
 }
 
 main().catch((err) => {
