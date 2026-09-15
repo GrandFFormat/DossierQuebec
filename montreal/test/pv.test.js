@@ -3,7 +3,7 @@
 // publiés par la Ville. `npm test`.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { decouperResolutions, parserVote, nettoyerNoms, parserOrdreDuJour, extraireDissidences } from '../lib/pv.js';
+import { decouperResolutions, parserVote, nettoyerNoms, parserOrdreDuJour, extraireDissidences, extraireResultat } from '../lib/pv.js';
 import { parserCsv, colonne } from '../lib/csv.js';
 import { classer } from '../lib/themes.js';
 import { urlDocument, candidatsDocument, heureFichier, idSeance } from '../lib/mtl.js';
@@ -383,4 +383,53 @@ test("résolutions d'arrondissement : le numéro porte celui de l'arrondissement
   const melange = decouperResolutions('CM26 0570\nRésolution du conseil\n20.01\nCA26 12 0125\nCelle-ci est à nous\n20.02', { instance: 'CA_Mhm' });
   assert.equal(melange.length, 1);
   assert.equal(melange[0].numero, 'CA26 12 0125');
+});
+
+// Chaque conseil d'arrondissement écrit son numéro de résolution à sa façon. Les huit
+// graphies ci-dessous sont relevées telles quelles dans les procès-verbaux de 2026 — le
+// journal de scrapers/diagnostic-arrondissements.js les donne toutes. Sept d'entre elles
+// n'étaient pas reconnues, et sept conseils rendaient donc zéro décision sur des
+// procès-verbaux de vingt pages. Ce test est là pour qu'on ne les reperde pas.
+test("résolutions d'arrondissement : les huit graphies de numéro publiées par la Ville", () => {
+  const graphies = [
+    ['CA_Las', 'CA26 20 0234', 'CA26 20 0234', '20'], // LaSalle et la plupart
+    ['CA_Anj', 'CA26 12158', 'CA26 12158', '12'], // Anjou : collés
+    ['CA_Cdn', 'RÉSOLUTION CA26 170145', 'CA26 170145', '17'], // Côte-des-Neiges–NDG
+    ['CA_Ver', 'CA26 210108', 'CA26 210108', '21'], // Verdun
+    ['CA_Vma', 'CA26 240290', 'CA26 240290', '24'], // Ville-Marie
+    ['CA_Mtn', 'CA26 10 163', 'CA26 10 163', '10'], // Montréal-Nord : séquence à 3 chiffres
+    ['CA_Ibs', 'CA26 28 109', 'CA26 28 109', '28'], // L'Île-Bizard–Sainte-Geneviève
+    ['CA_Rdp', 'CA26 30 07 0169', 'CA26 30 07 0169', '30'], // Rivière-des-Prairies–PAT
+    // Pierrefonds-Roxboro : procès-verbal sur deux colonnes, français puis anglais.
+    ['CA_Pir', 'RÉSOLUTION NUMÉRO CA26 29 0132 RESOLUTION NUMBER CA26 29 0132', 'CA26 29 0132', '29'],
+  ];
+  for (const [instance, ligne, attendu, arrondissement] of graphies) {
+    const r = decouperResolutions(`${ligne}\nUn objet quelconque\n20.01 1267026004`, { instance });
+    assert.equal(r.length, 1, `${instance} : ${ligne}`);
+    assert.equal(r[0].numero, attendu, `${instance} : ${ligne}`);
+    assert.equal(r[0].numeroArrondissement, arrondissement, `${instance} : ${ligne}`);
+    assert.equal(r[0].dossier, '1267026004');
+  }
+});
+
+// L'autre moitié du travail : une graphie permissive ne doit pas happer les numéros
+// cités au fil d'une phrase. Toutes ces lignes sont tirées de procès-verbaux réels.
+test("résolutions d'arrondissement : un numéro cité dans une phrase n'ouvre pas de résolution", () => {
+  const phrases = [
+    "D'amender la résolution CA25 20 0505 afin d'apporter une modification au calendrier",
+    'ATTENDU QUE le second projet de résolution CA26 20 0220 (PP-38) a été adopté le 1 juin 2026;',
+    'Règlement numéro CA28 0023-54 modifiant le Règlement de zonage CA28 0023',
+    "CONSIDÉRANT QUE l'avis de motion CA26 12134 du règlement intitulé",
+    'en vertu du règlement CA28 0074.',
+  ];
+  for (const phrase of phrases) {
+    assert.equal(decouperResolutions(`${phrase}\nsuite du texte`, { instance: 'CA_Las' }).length, 0, phrase);
+  }
+});
+
+// « et unanimement résolu : » est la formule de plusieurs arrondissements ; elle dit ce
+// que « Adopté à l'unanimité » dit ailleurs, et doit donner le même résultat.
+test("« unanimement résolu » vaut l'unanimité", () => {
+  assert.equal(extraireResultat('Il est proposé par X\net unanimement résolu :\nADOPTÉE'), "Adoptée à l'unanimité");
+  assert.equal(extraireResultat("ADOPTÉE À L'UNANIMITÉ."), "Adoptée à l'unanimité");
 });
