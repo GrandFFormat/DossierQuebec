@@ -44,7 +44,10 @@
 import { texteDegrade } from './pdf.js';
 
 // « CV3490 », « CE3295 » ; « CAD-2026-0218 », « CACCE-2026-0101 », « CACCO-2026-0117 ».
-export const NUMERO_RESOLUTION = /^(?:(CV|CE)(\d{3,5})|(CAD|CACCE|CACCO)-(\d{4})-(\d{3,5}))$/;
+// Le numéro peut porter une annotation de la greffe, en gras sur la même ligne : « CV3384
+// modifiée par CV3432 », « CE2709 modifié par CE2803 » (5 cas en 2026 — sans elle, ces
+// résolutions disparaissaient sans erreur).
+export const NUMERO_RESOLUTION = /^(?:(CV|CE)(\d{3,5})|(CAD|CACCE|CACCO)-(\d{4})-(\d{3,5}))(?:\s+((?:modifi[ée]e?|abrog[ée]e?|remplac[ée]e?|corrig[ée]e?|annul[ée]e?)\s+par\s+.{3,40}))?$/i;
 
 // En-têtes et pieds de page, répétés sur chaque page.
 const ENTETE_TOUJOURS = [
@@ -198,7 +201,8 @@ export function decouperResolutions(source, { liens = [], presences = null } = {
     // corps (« résolution CV3412 ») n'est jamais seule sur sa ligne.
     if (m && l.gras !== false) {
       if (courant) blocs.push(courant);
-      courant = { numero: l.texte, prefixe: m[1] ?? m[3], page: l.page, lignes: [] };
+      const numero = m[1] ? m[1] + m[2] : `${m[3]}-${m[4]}-${m[5]}`;
+      courant = { numero, prefixe: m[1] ?? m[3], annotation: m[6] ?? null, page: l.page, lignes: [] };
       continue;
     }
     if (courant) courant.lignes.push(l);
@@ -221,6 +225,7 @@ export function decouperResolutions(source, { liens = [], presences = null } = {
     return {
       numero: b.numero,
       prefixe: b.prefixe,
+      annotation: b.annotation,
       page: b.page,
       objet,
       nature: natureDuPoint(objet),

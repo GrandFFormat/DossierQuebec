@@ -77,9 +77,20 @@ const ETAPES = [
         },
       ]
     : []),
+  // « Où en est le projet » : refait seulement pour un projet dont un dossier a changé (signature),
+  // donc rien les jours calmes ; il doit passer AVANT projets-publics.js, qui le recopie.
+  ...(resumes
+    ? [
+        {
+          nom: 'Récapitulatifs des projets',
+          argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scrapers/recaps-projets.js'],
+          secondaire: true,
+        },
+      ]
+    : []),
   // Espace abonnés : les petits fichiers que lit Mes dossiers (projets, agenda, mots-clés,
-  // organismes, export) et les chiffres de la page Abonnement. Pas de récapitulatif IA de projet
-  // ni de détail de l'argent pour Lévis pour l'instant (voir README).
+  // organismes, export) et les chiffres de la page Abonnement. Pas de détail de l'argent pour
+  // Lévis pour l'instant (voir README).
   { nom: 'Projets pour « Mes dossiers »', argv: ['scripts/projets-publics.js'] },
   { nom: 'Chiffres de la page Abonnement', argv: ['scripts/travail-public.js'], secondaire: true },
 ];
