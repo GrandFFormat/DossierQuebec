@@ -4,12 +4,17 @@
 //
 // UNE DIFFÉRENCE DE FOND AVEC QUÉBEC. Là-bas, un projet domine : le tramway, une centaine
 // de décisions par an à lui seul, avec un début, un chantier et une fin. Montréal n'a pas
-// son équivalent dans ses propres procès-verbaux, et ce n'est pas un défaut de lecture :
-// ses grands chantiers appartiennent à d'autres — le REM à CDPQ Infra (4 décisions), la
-// ligne bleue et le boulevard Pie-IX à l'ARTM et au gouvernement (2 et 0), le pont de
-// l'Île-aux-Tourtes au ministère des Transports (aucune). La Ville n'en décide que les
-// abords. Ce que Montréal décide vraiment, et en volume, ce sont des sujets récurrents :
-// l'eau, le logement, les déchets, la neige.
+// de chantier de cette taille dans ses propres procès-verbaux, et ce n'est pas un défaut
+// de lecture : les grands travaux dont on parle appartiennent à d'autres — le REM à CDPQ
+// Infra (4 décisions), la ligne bleue et le boulevard Pie-IX à l'ARTM et au gouvernement
+// (2 et 0), le pont de l'Île-aux-Tourtes au ministère des Transports (aucune). La Ville
+// n'en décide que les abords.
+//
+// Ce que Montréal PILOTE elle-même, en revanche, ce sont quatre grands projets de terrain,
+// plus petits que le tramway mais de la même nature : la Ville possède le sol, achète,
+// décontamine, emprunte, nomme les rues et accorde les contrats. On les suit ici sous leur
+// nom. Le reste de ce qu'elle décide, et c'est le gros du volume, ce sont des sujets
+// récurrents sans fin annoncée : l'eau, le logement, les déchets, la neige.
 //
 // Chaque règle est définie À LA MAIN et relue sur ses résultats avant d'être ajoutée. Un
 // mot-clé seul ment, et il ment discrètement :
@@ -28,6 +33,40 @@
 // Les chiffres en commentaire sont ceux des 5 244 résolutions de 2026 au 15 septembre.
 
 export const PROJETS = {
+  // ---------- Les quatre grands projets que la Ville pilote elle-même ----------
+  'namur-hippodrome': {
+    titre: 'Quartier Namur–Hippodrome',
+    description:
+      "Le nouveau quartier sur le site de l'ancien hippodrome Blue Bonnets : vente des terrains, règlements d'emprunt, aqueduc du secteur Namur–De la Savane.",
+    // Les seize décisions de 2026 ont été relues une à une : ventes de terrain, règlements
+    // d'emprunt de 12 et 29 M$ passant du comité exécutif au conseil puis à l'agglomération,
+    // et la conduite d'aqueduc du secteur. Une seule est en marge : une question du public
+    // citant l'organisme « Pour Namur-Hippodrome ».
+    regle: /Namur|hippodrome/iu, // 16
+  },
+  'louvain-est': {
+    titre: 'Écoquartier Louvain Est',
+    description:
+      "Le quartier construit sur des terrains municipaux d'Ahuntsic-Cartierville : acquisitions, décontamination des sols, noms de rues, aménagements transitoires.",
+    // Les vingt décisions relues une à une. Les adresses « rue de Louvain Ouest » sont les
+    // lots du projet, pas du bruit. Une seule est en marge : le réaménagement de la rue de
+    // Louvain entre le parc Frédéric-Back et Saint-Michel, à l'autre bout de la rue.
+    regle: /Louvain/iu, // 20
+  },
+  'frederic-back': {
+    titre: 'Parc Frédéric-Back et complexe environnemental Saint-Michel',
+    description:
+      "L'ancienne carrière devenue dépotoir, transformée en parc par phases : serres urbaines, captage des biogaz, rationalisation électrique.",
+    regle: /Fr[ée]d[ée]ric-Back|Complexe environnemental (?:de )?Saint-Michel|\bCESM\b/iu, // 22
+  },
+  'grand-parc-ouest': {
+    titre: "Grand parc de l'Ouest",
+    description:
+      "Le plus grand parc municipal du Canada, en assemblage : acquisitions de terrains, Anse-à-l'Orme, Cap-Saint-Jacques, Bois-de-la-Roche, parc-nature des Sources.",
+    regle: /Grand parc de l.Ouest|Cap-Saint-Jacques|Anse-[àa]-l.Orme|Bois-de-la-Roche|parc-nature des Sources/iu, // 11
+  },
+
+  // ---------- Les sujets récurrents, sans fin annoncée ----------
   'eau-egouts': {
     titre: 'Eau potable, aqueduc et égouts',
     description: "Conduites, usines de production d'eau potable, station d'épuration Jean-R.-Marcotte, bassins de rétention.",
