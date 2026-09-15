@@ -581,3 +581,16 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 .ab-infolettre-villes legend { font-weight: 600; margin-bottom: 6px; }
 .ab-pot-de-miel { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
 .ab-infolettre-boite .ab-case { display: inline-flex; margin-right: 18px; }
+
+/* « Des projets à suivre » : une ville par menu dépliant, dans sa couleur (--ville, posée par mes-dossiers.html) */
+.ab-page details.ab-ville-projets { --ville: var(--accent); margin: 0 0 12px; padding: 12px 16px; border: 1px solid color-mix(in srgb, var(--ville) 30%, var(--ligne, #DDE2E7)); border-left: 6px solid var(--ville); border-radius: 12px; background: color-mix(in srgb, var(--ville) 8%, var(--carte, #fff)); }
+.ab-page details.ab-ville-projets[open] { background: color-mix(in srgb, var(--ville) 5%, var(--carte, #fff)); }
+.ab-page details.ab-pliable > summary h3 { margin: 0; font-size: 19px; }
+.ab-page details.ab-ville-projets > summary h3 { color: var(--ville); }
+.ab-page details.ab-ville-projets > summary:hover h3 { color: var(--ville); text-decoration: underline; text-underline-offset: 3px; }
+.ab-page details.ab-ville-projets > summary .ab-etiquette { background: var(--ville); border-color: var(--ville); color: #fff; }
+.ab-page details.ab-ville-projets > summary::after { color: var(--ville); }
+.ab-page details.ab-ville-projets .ab-grille { margin-top: 4px; }
+.ab-page details.ab-ville-projets .ab-suggestion { border-top: 4px solid var(--ville); }
+.ab-page details.ab-ville-projets .ab-suggestion .ab-type-projet { background: color-mix(in srgb, var(--ville) 15%, var(--carte, #fff)); color: var(--ville); border-color: color-mix(in srgb, var(--ville) 40%, transparent); }
+.ab-page details.ab-ville-projets .ab-suggestion .ab-bouton { background: var(--ville); border-color: var(--ville); }
