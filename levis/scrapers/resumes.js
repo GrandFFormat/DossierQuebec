@@ -233,7 +233,14 @@ function afficherEstimation(estimation, docs, modele, batch) {
   } else console.log('Coût estimé          : tarif inconnu pour ce modèle');
 }
 
+// Des débris d'échappement que le décodage ne sait pas défaire (« L\tévis », « r\nde9glement »,
+// « biblioth\ru00e8ques ») : 13 résumés sur 492 du lot Batches du 14 sept. 2026. Un résumé
+// abîmé n'est pas gardé : il compte comme un échec et sera redemandé à la prochaine exécution.
+const DEBRIS = /[\t\r\n\\]|u00[0-9a-f]{2}|[a-zà-ÿ]de[89]/i;
+
 function ficheResume(doc, sortie, modele, usage) {
+  const puces = (sortie.puces ?? []).map(decoderEchappements);
+  if (puces.some((p) => DEBRIS.test(p))) throw new Error("résumé abîmé (séquences d'échappement illisibles) — sera redemandé");
   return {
     id: doc.id,
     numero: doc.numero,
@@ -242,7 +249,7 @@ function ficheResume(doc, sortie, modele, usage) {
     unite: doc.unite,
     objet: doc.objet,
     pdf: doc.pdf,
-    puces: (sortie.puces ?? []).map(decoderEchappements),
+    puces,
     sansContenuSubstantiel: sortie.sansContenuSubstantiel,
     montantPrincipal: decoderEchappements(sortie.montantPrincipal ?? null),
     genereParIA: true,
@@ -304,7 +311,11 @@ async function genererParLot(client, docs, modele) {
       echecs.push({ id: doc.id, raison: "le modèle n'a pas rempli l'outil" });
       continue;
     }
-    resumes.push(ficheResume(doc, sortie, modele, resultat.result.message.usage));
+    try {
+      resumes.push(ficheResume(doc, sortie, modele, resultat.result.message.usage));
+    } catch (err) {
+      echecs.push({ id: doc.id, raison: String(err.message ?? err) });
+    }
   }
   return { resumes, echecs };
 }
