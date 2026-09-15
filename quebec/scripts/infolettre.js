@@ -246,6 +246,7 @@ async function main() {
     subventions: {
       titre: 'Les subventions', icone: '🤝', couleur: '#0B8A4B',
       chapeau: `Ce que la Ville accorde à des organismes et à des entreprises — du gros projet au petit événement de quartier.${totalSubventions ? ` ${argent(totalSubventions)} accordés au total ; l'aide reçue d'un gouvernement n'y est pas comptée.` : ''}`,
+      note: "« Subvention maximale » : le montant est un plafond. La Ville peut verser moins, selon les dépenses réelles et les conditions de l'entente.",
     },
     contrats: {
       titre: 'Les contrats', icone: '📝', couleur: '#2563EB',
@@ -327,7 +328,8 @@ async function main() {
         <td width="44" valign="middle"><div style="width:36px;height:36px;line-height:36px;border-radius:50%;background:${teinte(s.couleur, 0.16)};text-align:center;font-size:19px">${s.icone}</div></td>
         <td valign="middle" style="${POLICE};font-size:20px;font-weight:800;color:${s.couleur}">${echapper(s.titre)}${n != null ? ` <span style="display:inline-block;margin-left:6px;padding:1px 9px;border-radius:999px;background:${s.couleur};color:#fff;font-size:13px;vertical-align:middle">${nombreFr(n)}</span>` : ''}${apres ? ` ${apres}` : ''}</td>
       </tr></table>
-      <p style="${POLICE};margin:8px 0 12px;font-size:14px;line-height:1.5;color:${DOUX}">${echapper(s.chapeau)}</p>
+      <p style="${POLICE};margin:8px 0 ${s.note ? '6px' : '12px'};font-size:14px;line-height:1.5;color:${DOUX}">${echapper(s.chapeau)}</p>
+      ${s.note ? `<p style="${POLICE};margin:0 0 12px;font-size:13px;line-height:1.5;color:${DOUX}"><strong style="color:${ENCRE}">ℹ️</strong> ${echapper(s.note)}</p>` : ''}
     </td></tr>`;
   const carte = (couleur, contenu) => `
     <tr><td style="padding:0 0 10px">
