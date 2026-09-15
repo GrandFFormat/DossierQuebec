@@ -224,14 +224,21 @@ async function principal() {
 
   for (const nom of noms) {
     const avant = compteur.n;
-    let s = await calendrierDe(nom, annee, connues, compteur);
+    // Un conseil dont on a établi qu'il ne publie rien ici a son propre budget, bien plus
+    // petit : Le Plateau-Mont-Royal engloutissait 565 requêtes par exécution pour zéro
+    // séance. On continue de regarder, mais pour le prix d'un coup d'œil.
+    const { budget, absentDuRepertoire } = ARRONDISSEMENTS_CODES[nom] ?? {};
+    let s = await calendrierDe(nom, annee, connues, compteur, budget ?? 400);
     // Rien du tout : l'heure que l'on croit connaître a changé. On réessaie sur les trois
-    // heures en usage avant de déclarer forfait — c'est ce qui est arrivé au Plateau-
-    // Mont-Royal, dont le code est pourtant relevé dans une vraie URL.
-    if (!s.length) {
+    // heures en usage avant de déclarer forfait — sauf pour un conseil déjà ratissé en
+    // vain, où ce serait payer deux fois pour la même réponse.
+    if (!s.length && !absentDuRepertoire) {
       console.log(`    ${nom} : rien à l'heure habituelle, essai des autres heures…`);
       s = await calendrierDe(nom, annee, connues, compteur, 160, HEURES_CONNUES);
       if (s.length) console.log(`    ✓ trouvé à ${[...new Set(s.map((x) => x.heure))].join(', ')} — à corriger dans ARRONDISSEMENTS_CODES`);
+    }
+    if (!s.length && absentDuRepertoire) {
+      console.log(`    ${nom} : toujours rien sous Adi_Public (sondage plafonné, voir ARRONDISSEMENTS_CODES).`);
     }
     toutes.push(...s);
     const nouvelles = s.filter((x) => !connues.some((c) => c.id === x.id)).length;
