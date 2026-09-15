@@ -1,0 +1,121 @@
+
+> dossiervillelongueuil@0.1.0 refresh
+> node scripts/refresh.js
+
+Code : commit b505335 — Node v22.23.2
+
+=== Archivage des années révolues ===
+data/decisions.json porte l'année courante (2026) — rien à archiver.
+
+=== Calendrier des séances ===
+Conseil de ville : 95 séances (93 avec procès-verbal, 65 avec document de séance)
+Conseil d'agglomération : 87 séances (84 avec procès-verbal, 49 avec document de séance)
+
+182 séances écrites dans data/seances.json — 0 procès-verbal(aux) nouvellement publié(s).
+
+=== Décisions de l'année ===
+
+901 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 3 en attente de procès-verbal.
+0 nouveauté(s) depuis la dernière exécution.
+
+Pastilles thématiques :
+    213  Procédure
+    120  Contrats
+     94  Environnement
+     82  Urbanisme
+     69  Travaux et infrastructures
+     68  Finances
+     62  Transport
+     54  Administration
+     38  Loisirs et communauté
+     28  Sécurité publique
+     26  Culture et patrimoine
+     18  Subventions
+      8  Ressources humaines
+      8  Logement et social
+      7  Immobilier
+      3  Développement économique
+      3  Motions et hommages
+      0  (classées par défaut — aucune règle n'a tranché)
+
+=== Votes nominatifs (depuis 2026-07-17) ===
+Fenêtre depuis 2026-07-17 : 0 séance(s) relue(s), 22 vote(s) conservé(s) du fichier précédent.
+
+22 votes nominaux écrits dans data/votes.json (2025 : 22, 2026 : 0 ; 0 procès-verbaux analysés).
+0 portent un avertissement d'extraction (à vérifier à la main).
+
+=== Conseil d'agglomération (listes de présences) ===
+CA-260122 : 10 présent(s), 0 absent(s), 0 remplacement(s)
+CA-260219 : 9 présent(s), 1 absent(s), 0 remplacement(s)
+CA-260319 : 8 présent(s), 2 absent(s), 2 remplacement(s)
+CA-260430 : 10 présent(s), 0 absent(s), 0 remplacement(s)
+CA-260528 : 10 présent(s), 0 absent(s), 0 remplacement(s)
+CA-260618 : 8 présent(s), 2 absent(s), 2 remplacement(s)
+CA-260709 : 8 présent(s), 2 absent(s), 2 remplacement(s)
+CAX-260709 : 8 présent(s), 2 absent(s), 1 remplacement(s)
+
+10 membres (dernière séance CAX-260709) écrits dans data/agglomeration.json — 8 séance(s) analysée(s).
+  Brossard : 1
+  Saint-Lambert : 1
+  Longueuil : 6
+  Saint-Bruno-de-Montarville : 1
+  Boucherville : 1
+Ne siègent plus : Jonathan Tabarah (dernière séance CA-260528)
+Remplaçants : Carl Lévesque pour Jonathan Tabarah (1) ; Stéphanie Verreault pour Loïc Blancquaert (2) ; Andrée Savard pour Jean Martel (1) ; Nancy Cormier pour Ludovic Grisé Farand (2) ; Christian Gaudette pour Doreen Assaad (1)
+
+=== Lexique, mesuré sur les procès-verbaux ===
+Mesure de 32 termes sur 46 procès-verbaux de 2025 et 2026 et 901 décisions…
+
+    46 PV    1839 résolutions   Résolution
+    46 PV     561 résolutions   Sommaire décisionnel
+    46 PV      85 résolutions   Document de séance
+    46 PV      55 résolutions   Procès-verbal
+    37 PV      37 résolutions   Ordre du jour
+    41 PV     225 résolutions   Dépôt
+    32 PV      87 résolutions   Avis de motion
+    35 PV       4 résolutions   Règlement
+    24 PV       2 résolutions   Conseil de ville
+    19 PV      36 résolutions   Comité exécutif
+    10 PV      18 résolutions   Conseil d'arrondissement
+    46 PV     205 résolutions   Greffière
+    43 PV      43 résolutions   Présidence d'assemblée
+    46 PV     576 résolutions   Conseil d'agglomération
+    38 PV     145 résolutions   Ville liée
+    21 PV     492 résolutions   Orientation pour le conseil d'agglomération
+     8 PV      21 résolutions   Demander le vote
+    46 PV    1818 résolutions   Adoptée à l'unanimité
+    12 PV      26 résolutions   Adoptée à la majorité
+     5 PV       5 résolutions   Dissidence
+    23 PV      44 résolutions   Proposition principale
+    22 PV      40 résolutions   Prendre acte
+     9 PV      12 résolutions   Dérogation mineure
+     5 PV       7 résolutions   Projet particulier
+    15 PV      21 résolutions   Projet d'habitation autorisé par l'article 93
+    38 PV       7 résolutions   Attribution du contrat
+    35 PV     204 résolutions   Plus bas soumissionnaire conforme
+    34 PV     102 résolutions   Contrat-cadre
+    27 PV      78 résolutions   Gré à gré
+    31 PV      50 résolutions   Virement budgétaire
+    27 PV      67 résolutions   Règlement d'emprunt
+    21 PV      30 résolutions   Demande d'aide financière
+
+32 entrées écrites dans data/lexique.json
+
+=== Sommaires décisionnels (documents de séance) ===
+4 document(s) de séance à lire (au plus 4 cette fois).
+CA-260820 (texte absent du cache) : 896 pages, 94 Mo, 49 sommaires ; 0 cité(s) au procès-verbal mais absent(s) du document — 15 s
+CO-260818 (texte absent du cache) : 1364 pages, 155 Mo, 82 sommaires ; 0 cité(s) au procès-verbal mais absent(s) du document — 19 s
+CO-260526 (texte absent du cache) : 1096 pages, 121 Mo, 70 sommaires ; 4 cité(s) au procès-verbal mais absent(s) du document — 14 s
+CO-260317 (texte absent du cache) : 873 pages, 90 Mo, 59 sommaires ; 2 cité(s) au procès-verbal mais absent(s) du document — 13 s
+
+4 document(s) lu(s) ; 556 sommaires indexés dans data/sommaires.json.
+
+=== Résumés en langage clair ===
+Sommaires depuis 2026-07-17 pas encore résumés (plafond : 120)…
+467 déjà résumés, 0 à faire.
+Rien à générer. (--force pour tout regénérer.)
+
+=== Bilan ===
+  étapes         : 8
+  échecs         : aucun
+  avertissements : aucun
