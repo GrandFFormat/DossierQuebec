@@ -11,8 +11,69 @@
 import crypto from 'node:crypto';
 import { supabase, site } from './_alertes.js';
 
-// Les villes qui ont un compte rendu mensuel. Une ville s'ajoute ici le jour où son volet en produit un.
+// Les villes qui ont des courriels. Une ville s'ajoute ici le jour où son volet en produit.
 export const VILLES_INFOLETTRE = { quebec: 'Québec' };
+
+// Les trois sortes de courriels. Chacune s'inscrit à part : on peut vouloir seulement son
+// arrondissement, ou seulement le gros compte rendu du mois.
+export const TYPES_INFOLETTRE = {
+  mensuel: {
+    nom: 'Le compte rendu du mois',
+    quoi: 'Tout ce que la Ville a décidé dans le mois : les plus gros montants, toutes les subventions et tous les contrats, les votes divisés.',
+    rythme: 'une fois par mois',
+  },
+  conseil: {
+    nom: 'Après chaque séance du conseil de la ville',
+    quoi: 'Ce que le conseil a décidé à sa séance : les montants, les votes divisés, ce qui a été reporté.',
+    rythme: 'environ aux deux semaines',
+  },
+  arrondissement: {
+    nom: 'Mon arrondissement',
+    quoi: "Ce que le conseil de votre arrondissement a décidé à sa séance : permis, travaux, subventions de quartier, circulation.",
+    rythme: 'après chaque séance de l’arrondissement',
+    parArrondissement: true,
+  },
+};
+
+// Les arrondissements de chaque ville : la clé sert à l'inscription, `instance` à retrouver leurs
+// décisions dans les données du volet. Une ville sans arrondissements n'offre pas cette sorte.
+export const ARRONDISSEMENTS = {
+  quebec: [
+    { cle: 'la-cite-limoilou', nom: 'La Cité-Limoilou', instance: "Conseil de l'Arrondissement de La Cité-Limoilou" },
+    { cle: 'les-rivieres', nom: 'Les Rivières', instance: "Conseil de l'Arrondissement des Rivières" },
+    { cle: 'sainte-foy-sillery-cap-rouge', nom: 'Sainte-Foy–Sillery–Cap-Rouge', instance: "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge" },
+    { cle: 'charlesbourg', nom: 'Charlesbourg', instance: "Conseil de l'Arrondissement de Charlesbourg" },
+    { cle: 'beauport', nom: 'Beauport', instance: "Conseil de l'Arrondissement de Beauport" },
+    { cle: 'la-haute-saint-charles', nom: 'La Haute-Saint-Charles', instance: "Conseil de l'Arrondissement de La Haute-Saint-Charles" },
+  ],
+};
+
+// Ce qu'une ville offre : les sortes valides, et ses arrondissements s'il y en a.
+export const offreDe = (ville) =>
+  Object.entries(TYPES_INFOLETTRE)
+    .filter(([, t]) => !t.parArrondissement || (ARRONDISSEMENTS[ville] ?? []).length)
+    .map(([cle, t]) => ({ cle, nom: t.nom, quoi: t.quoi, rythme: t.rythme, arrondissements: t.parArrondissement ? ARRONDISSEMENTS[ville].map(({ cle: c, nom }) => ({ cle: c, nom })) : null }));
+
+// Un choix valide : { ville, type, arrondissement } — l'arrondissement vaut '' quand la sorte n'en
+// demande pas, et doit exister quand elle en demande un.
+export function choixValide(choix) {
+  const ville = String(choix?.ville ?? '');
+  const type = String(choix?.type ?? 'mensuel');
+  if (!Object.hasOwn(VILLES_INFOLETTRE, ville) || !Object.hasOwn(TYPES_INFOLETTRE, type)) return null;
+  const arrondissement = String(choix?.arrondissement ?? '');
+  if (TYPES_INFOLETTRE[type].parArrondissement) {
+    if (!(ARRONDISSEMENTS[ville] ?? []).some((a) => a.cle === arrondissement)) return null;
+  } else if (arrondissement) return null;
+  return { ville, type, arrondissement };
+}
+
+// « Québec — Mon arrondissement : Beauport », pour les courriels et les pages.
+export function nomComplet({ ville, type, arrondissement }) {
+  const nomVille = VILLES_INFOLETTRE[ville] ?? ville;
+  const nomType = TYPES_INFOLETTRE[type]?.nom ?? type;
+  const nomArr = (ARRONDISSEMENTS[ville] ?? []).find((a) => a.cle === arrondissement)?.nom;
+  return `${nomVille} — ${nomArr ? `${nomType} : ${nomArr}` : nomType}`;
+}
 
 export const COURRIEL = /^[^@\s]{1,100}@[^@\s]{1,100}\.[^@\s]{2,40}$/;
 export const PAR_JOUR = 90;
@@ -74,18 +135,20 @@ export async function courrielsAbonnes() {
   return courriels;
 }
 
-export const dernierNumero = async (ville) =>
-  (await supabase(`/rest/v1/infolettre_numeros?ville=eq.${ville}&publie_le=not.is.null&select=ville,mois,titre,html,html_abonnes&order=mois.desc&limit=1`))[0] ?? null;
+// Le plus récent numéro publié d'une sorte (et d'un arrondissement, s'il y a lieu).
+export const dernierNumero = async ({ ville, type = 'mensuel', arrondissement = '' }) =>
+  (await supabase(`/rest/v1/infolettre_numeros?ville=eq.${ville}&type=eq.${type}&arrondissement=eq.${arrondissement}&publie_le=not.is.null&select=ville,type,arrondissement,mois,titre,html,html_abonnes&order=mois.desc&limit=1`))[0] ?? null;
 
-// Le compte rendu, prêt à partir : le bandeau de bienvenue (s'il y a lieu) et les liens de désinscription.
+// Le courriel, prêt à partir : le bandeau de bienvenue (s'il y a lieu) et les liens de désinscription.
 export function composer(numero, { id, abonne, bienvenue }) {
-  const ville = VILLES_INFOLETTRE[numero.ville] ?? numero.ville;
+  const mensuel = (numero.type ?? 'mensuel') === 'mensuel';
+  const quoi = nomComplet({ ville: numero.ville, type: numero.type ?? 'mensuel', arrondissement: numero.arrondissement ?? '' });
   const bandeau = bienvenue
-    ? `<tr><td style="padding:18px 0 0"><div style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;padding:14px 16px;border-radius:10px;background:#E8F6EE;border:1px solid #9FD9B6;font-size:15px;line-height:1.55;color:#16191D">👋 <strong>Bienvenue !</strong> Voici le plus récent compte rendu de la Ville de ${echapper(ville)}, celui ${echapper(deMois(numero.mois))}. <strong>Le prochain arrive ${prochainEnvoi()}</strong>, puis un par mois.</div></td></tr>`
+    ? `<tr><td style="padding:18px 0 0"><div style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;padding:14px 16px;border-radius:10px;background:#E8F6EE;border:1px solid #9FD9B6;font-size:15px;line-height:1.55;color:#16191D">👋 <strong>Bienvenue !</strong> Voici le plus récent courriel de « ${echapper(quoi)} »${mensuel ? `, celui ${echapper(deMois(numero.mois))}` : ''}. <strong>Le prochain arrive ${mensuel ? echapper(prochainEnvoi()) : 'après la prochaine séance'}.</strong></div></td></tr>`
     : '';
-  const pied = `<br><br>Vous recevez ce compte rendu parce que vous vous y êtes inscrit sur dossierquebec.ca.
-    <a href="${lienSigne('desinscrire', [id])}" style="color:#5B6470">Ne plus recevoir celui de ${echapper(ville)}</a> ·
-    <a href="${lienSigne('desinscrire', [id], '&tout=1')}" style="color:#5B6470">me désinscrire de tous les comptes rendus</a>`;
+  const pied = `<br><br>Vous recevez ce courriel parce que vous vous y êtes inscrit sur dossierquebec.ca.
+    <a href="${lienSigne('desinscrire', [id])}" style="color:#5B6470">Ne plus recevoir « ${echapper(quoi)} »</a> ·
+    <a href="${lienSigne('desinscrire', [id], '&tout=1')}" style="color:#5B6470">me désinscrire de tout</a>`;
   return (abonne ? numero.html_abonnes : numero.html).replace('<!--BANDEAU-->', bandeau).replace('<!--DESINSCRIPTION-->', pied);
 }
 
@@ -97,16 +160,17 @@ export async function envoyerBienvenue(inscriptions) {
   const messages = [];
   const envoyesPour = new Map(); // mois → ids
   for (const i of inscriptions) {
-    const numero = await dernierNumero(i.ville);
-    const ville = VILLES_INFOLETTRE[i.ville] ?? i.ville;
+    const numero = await dernierNumero(i);
+    const quoi = nomComplet(i);
     if (numero) {
       messages.push({ a: i.email, sujet: `Bienvenue — ${numero.titre}`, html: composer(numero, { id: i.id, abonne: abonnes.has(i.email), bienvenue: true }), desinscription: lienSigne('desinscrire', [i.id]) });
       envoyesPour.set(numero.mois, [...(envoyesPour.get(numero.mois) ?? []), i.id]);
     } else {
+      const quand = (i.type ?? 'mensuel') === 'mensuel' ? prochainEnvoi() : 'après la prochaine séance';
       messages.push({
         a: i.email,
-        sujet: `Inscription confirmée — le compte rendu de la Ville de ${ville}`,
-        html: `<div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#16191D;line-height:1.55"><h1 style="font-size:20px;color:#0B8A4B">📬 C'est confirmé</h1><p>Vous recevrez le compte rendu mensuel de la Ville de ${echapper(ville)}. <strong>Le premier arrive ${prochainEnvoi()}.</strong></p><p style="font-size:13px;color:#5B6470">En attendant : <a href="${site()}/${i.ville}/" style="color:#0B8A4B">les décisions de la Ville</a>. <a href="${lienSigne('desinscrire', [i.id])}" style="color:#5B6470">Me désinscrire</a></p></div>`,
+        sujet: `Inscription confirmée — ${quoi}`,
+        html: `<div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#16191D;line-height:1.55"><h1 style="font-size:20px;color:#0B8A4B">📬 C'est confirmé</h1><p>Vous recevrez « ${echapper(quoi)} ». <strong>Le premier arrive ${echapper(quand)}.</strong></p><p style="font-size:13px;color:#5B6470">En attendant : <a href="${site()}/${i.ville}/" style="color:#0B8A4B">les décisions de la Ville</a>. <a href="${lienSigne('desinscrire', [i.id])}" style="color:#5B6470">Me désinscrire</a></p></div>`,
         desinscription: lienSigne('desinscrire', [i.id]),
       });
     }
@@ -122,14 +186,14 @@ export async function envoyerBienvenue(inscriptions) {
 // reçu (ceux qui l'ont eu en bienvenue sont sautés), PAR_JOUR au plus.
 export async function envoyerNumerosEnAttente() {
   const rapport = { numeros: 0, envoyes: 0, termines: 0 };
-  const numeros = await supabase('/rest/v1/infolettre_numeros?publie_le=not.is.null&envoye_le=is.null&select=ville,mois,titre,html,html_abonnes,envoyes&order=mois');
+  const numeros = await supabase('/rest/v1/infolettre_numeros?publie_le=not.is.null&envoye_le=is.null&select=ville,type,arrondissement,mois,titre,html,html_abonnes,envoyes&order=mois');
   if (!numeros.length) return rapport;
   const abonnes = await courrielsAbonnes();
   let reste = PAR_JOUR;
   for (const numero of numeros) {
     if (reste <= 0) break;
     rapport.numeros++;
-    const inscrits = await supabase(`/rest/v1/infolettre_inscriptions?ville=eq.${numero.ville}&statut=eq.confirme&or=(dernier_mois.is.null,dernier_mois.lt.${numero.mois})&select=id,email&order=confirme_le&limit=${reste + 1}`);
+    const inscrits = await supabase(`/rest/v1/infolettre_inscriptions?ville=eq.${numero.ville}&type=eq.${numero.type ?? 'mensuel'}&arrondissement=eq.${numero.arrondissement ?? ''}&statut=eq.confirme&or=(dernier_mois.is.null,dernier_mois.lt.${numero.mois})&select=id,email&order=confirme_le&limit=${reste + 1}`);
     const lot = inscrits.slice(0, reste);
     if (lot.length) {
       await envoyerCourriels(lot.map((i) => ({ a: i.email, sujet: numero.titre, html: composer(numero, { id: i.id, abonne: abonnes.has(i.email), bienvenue: false }), desinscription: lienSigne('desinscrire', [i.id]) })));
@@ -138,7 +202,7 @@ export async function envoyerNumerosEnAttente() {
       rapport.envoyes += lot.length;
     }
     const termine = inscrits.length <= lot.length;
-    await supabase(`/rest/v1/infolettre_numeros?ville=eq.${numero.ville}&mois=eq.${numero.mois}`, {
+    await supabase(`/rest/v1/infolettre_numeros?ville=eq.${numero.ville}&type=eq.${numero.type ?? 'mensuel'}&arrondissement=eq.${numero.arrondissement ?? ''}&mois=eq.${numero.mois}`, {
       methode: 'PATCH',
       corps: { envoyes: (numero.envoyes ?? 0) + lot.length, updated_at: new Date().toISOString(), ...(termine ? { envoye_le: new Date().toISOString() } : {}) },
       entetes: { Prefer: 'return=minimal' },

@@ -595,3 +595,17 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 .ab-page details.ab-ville-projets .ab-suggestion { border-top: 4px solid var(--ville); }
 .ab-page details.ab-ville-projets .ab-suggestion .ab-type-projet { background: color-mix(in srgb, var(--ville) 15%, var(--carte, #fff)); color: var(--ville); border-color: color-mix(in srgb, var(--ville) 40%, transparent); }
 .ab-page details.ab-ville-projets .ab-suggestion .ab-bouton { background: var(--ville); border-color: var(--ville); }
+
+/* Les courriels : une ligne par sorte (compte rendu du mois, conseil, arrondissement) */
+.ab-courriel { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-top: 1px solid var(--ligne, #DDE2E7); }
+.ab-courriel:first-of-type { border-top: 0; }
+.ab-courriel input[type="checkbox"] { margin-top: 4px; width: 18px; height: 18px; flex: none; accent-color: var(--accent); }
+.ab-courriel-texte { display: block; }
+.ab-courriel-nom { font-weight: 700; }
+.ab-courriel-rythme { display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: var(--fond-2, #EEF1F4); color: var(--doux); font-size: 12px; font-weight: 600; white-space: nowrap; }
+.ab-courriel-quoi { display: block; margin-top: 3px; font-size: 14px; line-height: 1.5; color: var(--doux); }
+.ab-courriel-arr { padding-left: 28px; }
+.ab-arr-suivis { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.ab-arr-puce { display: inline-flex; align-items: center; gap: 4px; padding: 3px 6px 3px 10px; border-radius: 999px; background: var(--accent-fond, #E6F6EC); color: var(--accent-encre, #076338); border: 1px solid var(--accent, #0B8A4B); font-size: 13px; font-weight: 600; }
+.ab-arr-retirer { border: 0; background: none; color: inherit; font-size: 16px; line-height: 1; cursor: pointer; padding: 0 2px; }
+.ab-arr-choix { display: block; margin-top: 8px; max-width: 320px; width: 100%; }
