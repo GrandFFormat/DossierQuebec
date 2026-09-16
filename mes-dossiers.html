@@ -1046,7 +1046,10 @@ ${liste.map(fiche).join('')}
           </article>`;
         })
         .join('');
-      blocs.push({ ville, nombre: projets.length, cartes });
+      // La ville peut expliquer, en tête de ses projets, ce qui leur manque et pourquoi
+      // (data/projets/index.json, champ `legende`). Sans cette phrase, on croit que ses
+      // projets sont plus pauvres que ceux des autres villes, alors qu'il manque un document.
+      blocs.push({ ville, nombre: projets.length, cartes, legende: idx?.legende ?? null });
     }
     // Le titre toujours visible, puis une ville par menu dépliant, avec son nombre de projets.
     // Fermés au départ ; pour qui ne suit encore rien, la ville du dernier volet visité (ou la
@@ -1064,7 +1067,7 @@ ${liste.map(fiche).join('')}
          <p class="ab-chapeau">${tr('Les grands dossiers de chaque ville, qui reviennent de séance en séance. Suivez-en un pour garder le fil de toutes ses décisions.', "Each city's major files, which come back meeting after meeting. Follow one to keep track of all its decisions. (Project descriptions and recaps are in French for now.)")}</p>
          ${blocs.map((b, i) => `<details class="ab-pliable ab-ville-projets" data-ville="${echapper(b.ville)}" style="--ville:${couleurVille(b.ville, i)}"${(avant.has(b.ville) ? avant.get(b.ville) : b.ville === aOuvrir) ? ' open' : ''}>
            <summary><h3>${echapper(VILLES[b.ville])}</h3><span class="ab-etiquette">${b.nombre} ${tr(pl(b.nombre, 'projet', 'projets'), pl(b.nombre, 'project', 'projects'))}</span></summary>
-           <div class="ab-pliable-corps"><div class="ab-grille">${b.cartes}</div></div>
+           <div class="ab-pliable-corps">${b.legende?.texte ? `<p class="ab-note ab-legende-ville">${echapper(tr(b.legende.texte, b.legende.texteEn ?? b.legende.texte))}</p>` : ''}<div class="ab-grille">${b.cartes}</div></div>
          </details>`).join('')}
          </div>
        </details>`
