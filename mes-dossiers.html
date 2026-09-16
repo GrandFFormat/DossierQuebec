@@ -1301,6 +1301,7 @@ ${liste.map(fiche).join('')}
     mesurer('ouvrir_dossier_suivi', { ville });
   }
 
+  let premierRendu = true;
   async function afficher() {
     const s = await session();
     if (!s) return connexion();
@@ -1334,8 +1335,10 @@ ${liste.map(fiche).join('')}
       sections.push(`<h2>${echapper(VILLES[ville] ?? ville)} <span class="ab-note">(${liste.length})</span></h2>${(await Promise.all(liste.map(entete))).join('')}`);
     }
     $('#liste').innerHTML = sections.join('');
-    // Un seul dossier suivi : on l'ouvre d'office.
-    if (suivis.length === 1) $('#liste details.ab-dossier').open = true;
+    // Un seul dossier suivi : on l'ouvre d'office, mais seulement à l'arrivée sur la page — pas
+    // quand on vient de suivre un projet, où rien ne doit bouger.
+    if (premierRendu && suivis.length === 1) $('#liste details.ab-dossier').open = true;
+    premierRendu = false;
   }
 
   document.addEventListener('toggle', (e) => {
@@ -1359,8 +1362,11 @@ ${liste.map(fiche).join('')}
       const erreur = await suivre(s, { ville: suggestion.dataset.ville, dossier: `projet:${suggestion.dataset.cle}`, numero: '', objet: suggestion.dataset.titre });
       if (erreur) { suggestion.disabled = false; suggestion.textContent = tr('Impossible — réessayez', "Couldn't — try again"); return; }
       mesurer('suggestion_suivre_projet', { ville: suggestion.dataset.ville, projet: suggestion.dataset.cle });
+      // On reste exactement où on est : suivre un projet ne doit pas expédier la page ailleurs
+      // (Martin, 16 sept. 2026). La page se redessine sous les yeux, sans bouger ni rien déplier.
+      const hauteur = window.scrollY;
       await afficher();
-      $('#liste').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.scrollTo({ top: hauteur });
       return;
     }
 
