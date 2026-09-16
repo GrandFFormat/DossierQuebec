@@ -1206,13 +1206,27 @@ ${liste.map(fiche).join('')}
   // `enAttenteDe`), on l'affiche à la place, au même endroit et avec le même poids.
   // C'est le cas de Montréal, dont la Ville ne publie pas l'adresse de ses sommaires
   // décisionnels ; toute autre ville peut renseigner le même champ.
+  // Surligne, dans un texte, les fragments que la ville a désignés. Le texte est échappé
+  // d'abord et l'on n'insère que notre propre balise : rien de ce que contient le fichier
+  // ne peut devenir du HTML.
+  function surligner(texte, fragments) {
+    let html = echapper(texte);
+    for (const f of fragments ?? []) {
+      const cible = echapper(f);
+      const i = html.indexOf(cible);
+      if (i < 0) continue; // un fragment qui ne s'y trouve plus ne casse rien
+      html = html.slice(0, i) + `<mark class="ab-marque">${cible}</mark>` + html.slice(i + cible.length);
+    }
+    return html;
+  }
+
   function rendreAttente(a) {
     if (!a?.texte) return '';
     // `ligne` se détache sous un filet : c'est la phrase qui dit ce qui va se passer, et elle
     // se perdait au bout du paragraphe.
     return `<section class="ab-recap ab-recap-attente">
       <div class="ab-detail-titre">${echapper(tr(a.titre, a.titreEn ?? a.titre))}</div>
-      <p class="ab-en-bref">${echapper(tr(a.texte, a.texteEn ?? a.texte))}</p>
+      <p class="ab-en-bref">${surligner(tr(a.texte, a.texteEn ?? a.texte), tr(a.surligne, a.surligneEn ?? a.surligne))}</p>
       ${a.ligne ? `<p class="ab-attente-ligne">${echapper(tr(a.ligne, a.ligneEn ?? a.ligne))}</p>` : ''}
     </section>`;
   }
