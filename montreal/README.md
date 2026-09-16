@@ -223,9 +223,27 @@ Ce qui a changé dans `app.js`, et pourquoi :
 - **Votes contre par élu** : comparaison sur le nom de famille, parce que c'est ainsi que les PV
   nomment les votants.
 
-Tant que la Ville n'a pas répondu, les pages portent `<meta name="robots" content="noindex,
-nofollow">`, le `vercel.json` du dépôt ajoute `X-Robots-Tag` sur `/montreal/`, et le
-volet n'est pas dans le sitemap. Le jour où ça débloque : retirer ces verrous, ajouter les pages
+## Où en sont les demandes à la Ville
+
+| Demande | Envoyée | Où ça en est |
+| --- | --- | --- |
+| Calendrier des séances d'arrondissement | 13 sept. 2026 | **En travaux.** Réponse du 16 sept. : les 19 conseils sont autonomes et gérés par d'autres équipes que le calendrier central ; la Ville cherche une façon de réunir ces dix-neuf sources. |
+| Index des documents de séance | 13 sept. 2026 | **Non, pour l'instant.** Les documents sont déjà publiés ; un index n'est pas priorisé. |
+| Décisions en données structurées | 13 sept. 2026 | **Reconnu, pas bientôt.** Valeur admise ; obstacle : l'âge des systèmes. |
+| Adresse des sommaires décisionnels | 13 sept. 2026 | **Sans réponse.** Second courriel (`courriel-sommaires.md`), non couvert par la réponse du 16. |
+| Droits d'usage | non envoyé | `courriel-greffe.md`, prêt. |
+
+La réponse du 16 septembre est reproduite telle quelle à la fin de `courriel-donnees-ouvertes.md`,
+avec ce qu'elle change pour nous. Deux choses à en retenir. La première : le calendrier des
+arrondissements n'est pas un refus mais un chantier, donc notre reconstitution par sondage
+d'adresses a une date de péremption — c'est exactement ce qu'on voulait. La seconde : la Ville a
+remercié pour le respect de son `robots.txt`, en précisant que le trafic des agents automatisés a
+décuplé cette année. Le throttle, le User-Agent identifiable et le délai de 10 secondes ne sont
+pas de la décoration : ils sont ce qui nous distingue de ce trafic-là. On n'y touche pas.
+
+Tant que les droits d'usage ne sont pas confirmés, les pages portent `<meta name="robots"
+content="noindex, nofollow">`, le `vercel.json` du dépôt ajoute `X-Robots-Tag` sur `/montreal/`, et
+le volet n'est pas dans le sitemap. Le jour où ça débloque : retirer ces verrous, ajouter les pages
 au sitemap, retirer l'étiquette « Prototype ».
 
 ## Où ce dossier vit

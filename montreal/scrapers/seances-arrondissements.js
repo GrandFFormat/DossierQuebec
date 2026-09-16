@@ -5,6 +5,12 @@
 // ne publient pas tous le leur. Restent les documents eux-mêmes : le nom d'un fichier
 // contient la date et l'heure, donc l'existence du fichier PROUVE la séance.
 //
+// CE SCRIPT A UNE DATE DE PÉREMPTION, et c'est une bonne nouvelle. Interrogée le 13 septembre
+// 2026, la Ville a répondu le 16 : les horaires ne sont pas dans le calendrier central parce
+// que les dix-neuf conseils sont autonomes et gérés par d'autres équipes, et elle cherche une
+// façon de réunir ces dix-neuf sources. Le jour où elle publiera, tout ce fichier devient
+// inutile — il suffira de lire le calendrier comme on lit celui des instances centrales.
+//
 // D'où la méthode : on cherche les fichiers. L'heure est stable et connue par
 // arrondissement (voir ARRONDISSEMENTS_CODES), la date ne l'est pas — « le premier mardi
 // du mois » est une bonne approximation qui se trompe souvent, et les relâches d'été et

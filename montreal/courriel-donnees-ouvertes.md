@@ -1,7 +1,8 @@
 # Courriel à la Ville de Montréal — demander ce qui manque
 
-> **Envoyé le 13 septembre 2026** à donneesouvertes@montreal.ca, copie au greffe.
-> En attente de réponse.
+> **Envoyé le 13 septembre 2026** à donneesouvertes@montreal.ca.
+> **Réponse reçue le 16 septembre 2026** — voir à la fin du fichier. Aucune des trois demandes
+> n'est refusée sur le fond ; deux sont « pas pour l'instant », une est en travaux.
 
 Court, précis, et il ne demande aucune faveur : les trois choses demandées servent tout le
 monde, pas seulement nous. C'est ce qui rend une demande facile à accepter.
@@ -75,3 +76,64 @@ Merci de votre temps,
 
 Martin Archambault
 [courriel] — https://dossierquebec.ca/montreal/ (prototype)
+
+---
+
+## La réponse de la Ville, le 16 septembre 2026
+
+Reçue d'Alexis, équipe des Données ouvertes. Reproduite telle quelle, parce qu'une réponse
+qu'on résume est une réponse qu'on déforme.
+
+> Bonjour Martin,
+>
+> Merci de votre intérêt pour les données ouvertes,
+>
+> Pour répondre à vos questions, voici au meilleur de nos connaissances quelques éléments de
+> réponse,
+>
+> Les horaires des conseils d'arrondissement ne sont pas intégrés au calendrier des séances,
+> car ils ne sont pas gérés par les mêmes équipes. Le fonctionnement des arrondissements,
+> surtout dans l'aspect politique, est en grande partie autonome. Trouver une solution
+> technologique pour réunir les 19 sources différentes de données est un travail complexe sur
+> lequel nous travaillons.
+>
+> Pour ce qui est des index, je comprends votre besoin, mais, comme les documents sont déjà
+> publiés sur le site officiel de la ville, un index complet n'est pas priorisé pour l'instant
+> par les équipes responsables.
+>
+> Les décisions en format structurées seraient, je l'accorde d'une grande valeur, mais la
+> complexité liée à leur extraction automatisée sur des systèmes relativement âgés et sécurisés
+> représente un défi important que nous allons considérer, mais qui ne sera pas réglé
+> prochainement.
+>
+> Merci pour respect des consignes du fichier robot.txt, c'est très apprécié en ces temps-ci.
+> Les agents IA créent un trafic qui a décuplé dans l'année courante.
+>
+> Cordialement,
+>
+> Alexis, équipe des Données ouvertes
+
+### Ce que ça change pour nous
+
+**1. Le calendrier des arrondissements — en travaux.** C'est la meilleure nouvelle des trois,
+et elle était la moins attendue : la Ville dit y travailler. La raison du manque est
+organisationnelle et non technique — dix-neuf conseils autonomes, gérés par d'autres équipes que
+le calendrier central. Notre reconstitution par sondage d'adresses reste donc la seule voie
+aujourd'hui, mais elle a une date de péremption, et c'est exactement ce qu'on voulait.
+
+**2. L'index des documents — non, pour l'instant.** Le motif est clair : les documents sont déjà
+publiés, un index n'est pas prioritaire. Rien à redire, et rien à relancer avant longtemps.
+
+**3. Les décisions en données structurées — reconnu, mais pas bientôt.** La valeur est admise ;
+l'obstacle est l'âge des systèmes. C'est la demande la plus lourde et on le savait. Elle reste
+posée.
+
+**4. Le robot.txt.** Le remerciement n'est pas de la politesse creuse : la Ville dit voir son
+trafic décupler à cause des agents IA. Notre throttle, notre User-Agent identifiable et le
+délai de 10 secondes ne sont pas seulement corrects — ils sont ce qui nous distingue, et c'est
+pour cela qu'on ne les touche pas.
+
+**Ce que cette réponse ne couvre pas.** L'adresse des sommaires décisionnels, qui fait l'objet du
+second courriel (`courriel-sommaires.md`), envoyé après celui-ci. C'est la demande la moins
+coûteuse des quatre — le document existe, il est public, il ne manque que son chemin — et c'est
+la seule qui débloquerait les résumés en langage clair. Elle reste sans réponse.
