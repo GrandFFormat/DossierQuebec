@@ -76,7 +76,13 @@ jobs:
             node scripts/update-sitemap-lastmod.js "$TODAY"
             git add sitemap.xml
             git commit -m "Rafraîchissement auto des données ($TODAY)"
-            git push
+            # Quelqu'un a pu pousser pendant les scrapers (un volet, ou du travail à la main) :
+            # on se remet à jour avant de réessayer, comme les workflows des volets.
+            for essai in 1 2 3; do
+              git push && break
+              echo "Push refusé (essai $essai) — on rebase sur l'état du dépôt."
+              git pull --rebase
+            done
           fi
 
       # Après le commit : si un ou des scrapers ont échoué (mais que le build a
