@@ -60,13 +60,24 @@ const numerosDe = (groupe) => [...new Set(groupe.map((d) => d.numero).filter(Boo
 // est facultatif et lu par /mes-dossiers : toute ville à qui il manque ses sommaires peut
 // dire pourquoi, de la même façon.
 const EN_ATTENTE_DE = {
-  titre: "En attente d'un document de la Ville",
-  titreEn: 'Waiting on a City document',
+  titre: "Pas de récapitulatif : le document qui l'écrirait n'est pas ouvert",
+  titreEn: 'No recap: the document that would write it is not open',
   texte:
-    "Pour écrire « Où en est le projet », il faut le sommaire décisionnel — la note de l'administration qui explique chaque décision : le contexte, les montants, les options écartées. Montréal produit ces documents, et 4 088 de nos décisions portent leur numéro, mais la Ville ne publie pas l'adresse où les lire. Nous la lui avons demandée le 13 septembre 2026. Dès qu'elle répond, ce projet aura son récapitulatif, comme ceux de Québec et de Lévis.",
+    "Un projet se raconte à partir des sommaires décisionnels — la note que l'administration écrit pour chaque dossier, avec le contexte, les montants et les options écartées. C'est de là que viennent les récapitulatifs de Québec et de Lévis. Montréal produit exactement les mêmes documents : 4 088 de nos décisions portent leur numéro de dossier. Mais elle n'en publie pas l'adresse, et sans adresse personne ne peut les ouvrir — ni un citoyen, ni notre robot. Nous la lui avons demandée. D'ici là, ce projet montre ses décisions telles que le conseil les a adoptées, chacune avec son procès-verbal officiel.",
   texteEn:
-    "Writing “Where the project stands” requires the decision summary — the administration's memo explaining each decision: the context, the amounts, the options set aside. Montréal produces these documents, and 4,088 of our decisions carry their number, but the City does not publish an address where they can be read. We asked for it on 13 September 2026. As soon as they answer, this project will have its recap, like those of Québec and Lévis.",
+    "A project's story comes from the decision summaries — the memo the administration writes for each file, with the context, the amounts and the options set aside. That is where the Québec and Lévis recaps come from. Montréal produces exactly the same documents: 4,088 of our decisions carry their file number. But it publishes no address for them, and without an address nobody can open them — neither a citizen nor our robot. We have asked for it. Until then, this project shows its decisions as the council adopted them, each with its official minutes.",
 };
+
+// La même chose en deux phrases, en tête de la liste des projets de la ville : sans elle, on
+// croit que Montréal a des projets plus pauvres que les autres villes, alors que c'est un
+// document qui manque.
+const LEGENDE = {
+  texte:
+    "Les projets se racontent à partir des sommaires décisionnels, la note que l'administration écrit pour chaque dossier. Montréal produit ces documents mais n'en publie pas l'adresse : ni un citoyen ni notre robot ne peut les ouvrir, donc aucun projet de Montréal n'a encore de récapitulatif. Nous avons demandé cette adresse à la Ville.",
+  texteEn:
+    "Projects are told from the decision summaries, the memo the administration writes for each file. Montréal produces these documents but publishes no address for them: neither a citizen nor our robot can open them, so no Montréal project has a recap yet. We have asked the City for that address.",
+};
+
 
 const decisions = await lire('data/decisions.json', null);
 if (!decisions?.decisions) {
@@ -160,7 +171,7 @@ for (const [cle, def] of Object.entries(PROJETS)) {
 for (const f of await readdir(DOSSIER)) {
   if (f !== 'index.json' && f.endsWith('.json') && !(f.slice(0, -5) in PROJETS)) await rm(`${DOSSIER}/${f}`);
 }
-const texteIndex = JSON.stringify({ generatedAt: new Date().toISOString(), projets: index });
+const texteIndex = JSON.stringify({ generatedAt: new Date().toISOString(), legende: LEGENDE, projets: index });
 await writeFile(`${DOSSIER}/index.json`, texteIndex, 'utf8');
 console.log(`Projets publics : ${Object.keys(index).length} sujets · index ${(texteIndex.length / 1024).toFixed(1)} Ko · fichiers de sujet ${(octets / 1024).toFixed(0)} Ko au total.`);
 
