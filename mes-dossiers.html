@@ -1197,6 +1197,20 @@ ${liste.map(fiche).join('')}
     mesurer('deplier_decision_projet', { ville });
   }
 
+  // Un projet sans « Où en est le projet » n'a pas l'air d'un projet : la page montre une
+  // liste de décisions nues et le lecteur en conclut qu'il n'y a rien à voir. Quand la
+  // ville dit POURQUOI son récapitulatif manque (data/projets/<cle>.json, champ
+  // `enAttenteDe`), on l'affiche à la place, au même endroit et avec le même poids.
+  // C'est le cas de Montréal, dont la Ville ne publie pas l'adresse de ses sommaires
+  // décisionnels ; toute autre ville peut renseigner le même champ.
+  function rendreAttente(a) {
+    if (!a?.texte) return '';
+    return `<section class="ab-recap ab-recap-attente">
+      <div class="ab-detail-titre">${echapper(tr(a.titre, a.titreEn ?? a.titre))}</div>
+      <p class="ab-en-bref">${echapper(tr(a.texte, a.texteEn ?? a.texte))}</p>
+    </section>`;
+  }
+
   function rendreRecap(r) {
     if (!r) return '';
     const etapes = r.etapes.map((e) => `<li>
@@ -1269,7 +1283,7 @@ ${liste.map(fiche).join('')}
       </li>`;
     corps.innerHTML = `${projet.description ? `<p class="ab-note" style="margin-top:0">${echapper(projet.description)}</p>` : ''}
       ${lignes.length ? tuiles : ''}
-      ${rendreRecap(projet.recap)}
+      ${rendreRecap(projet.recap) || rendreAttente(projet.enAttenteDe)}
       ${lignes.length ? `<div class="ab-graphiques">${graphiqueMois}${graphiqueThemes}</div>` : ''}
       ${blocAttente}
       ${lignes.length
