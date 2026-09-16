@@ -66,6 +66,11 @@ const EN_ATTENTE_DE = {
     "Un projet se raconte à partir des sommaires décisionnels — la note que l'administration écrit pour chaque dossier, avec le contexte, les montants et les options écartées. C'est de là que viennent les récapitulatifs de Québec et de Lévis. Montréal produit exactement les mêmes documents : 4 088 de nos décisions portent leur numéro de dossier. Mais elle n'en publie pas l'adresse, et sans adresse personne ne peut les ouvrir — ni un citoyen, ni notre robot.",
   texteEn:
     "A project's story comes from the decision summaries — the memo the administration writes for each file, with the context, the amounts and the options set aside. That is where the Québec and Lévis recaps come from. Montréal produces exactly the same documents: 4,088 of our decisions carry their file number. But it publishes no address for them, and without an address nobody can open them — neither a citizen nor our robot.",
+  // Ce qui doit sauter aux yeux dans le paragraphe : que la Ville PRODUIT bien ces documents.
+  // Sans ça, on lit « Montréal n'a pas de sommaires », ce qui est faux — elle en a, elle n'en
+  // publie pas l'adresse. Les fragments sont cherchés tels quels dans le texte ci-dessus.
+  surligne: ['Montréal produit exactement les mêmes documents'],
+  surligneEn: ['Montréal produces exactly the same documents'],
   // Ce qui suit se détache du reste, sur sa propre ligne : c'est la seule phrase du bloc qui
   // dise ce qui va se passer, et elle se perdait au bout d'un paragraphe de cinq phrases.
   ligne:
