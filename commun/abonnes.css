@@ -412,6 +412,14 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 /* Le même encadré, quand la ville explique pourquoi son récapitulatif manque : en gris
    plutôt qu'en couleur d'accent, parce qu'il annonce une absence, pas un contenu. */
 .ab-page .ab-recap-attente { border-left-color: var(--ligne-forte); background: var(--fond-2); }
+/* Le surligneur : ce qu'une ville désigne comme devant sauter aux yeux dans son texte. Fond
+   jaune en clair, ambre sourd en sombre — un jaune vif sur fond noir éblouit. */
+.ab-page mark.ab-marque { background: #FFF1A8; color: inherit; padding: 0 2px; border-radius: 3px; }
+:root[data-theme="dark"] .ab-page mark.ab-marque { background: #4A3C0F; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .ab-page mark.ab-marque { background: #4A3C0F; }
+}
+
 /* La phrase qui dit ce qui va se passer : surlignée, pas séparée. Dans un encadré déjà gris,
    un filet ne la détache pas — une bande de couleur, oui. */
 .ab-page .ab-attente-ligne {
