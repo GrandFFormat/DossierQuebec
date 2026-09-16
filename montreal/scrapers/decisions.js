@@ -46,7 +46,7 @@ const RATTRAPAGE_JOURS = 45;
 // mais le rafraîchissement suivant n'a rien relu du tout, puisque les séances étaient
 // déjà marquées « lues » au bon numéro de découpage. Deux compteurs indépendants pour un
 // même travail laissent toujours passer l'un ou l'autre ; celui-ci n'en fait qu'un.
-export const VERSION_DECOUPAGE = 6;
+export const VERSION_DECOUPAGE = 7;
 const DIAGNOSTIC = new URL('../data/diagnostic.json', import.meta.url);
 
 // Un échantillon de ce que les PDF contiennent vraiment — les premières lignes d'un

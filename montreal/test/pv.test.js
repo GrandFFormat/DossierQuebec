@@ -520,3 +520,31 @@ test("un objet ne déborde pas sur l'annexe qui suit la séance", () => {
     'Accorder un contrat de déneigement'
   );
 });
+
+// La borne sur l'objet avait d'abord été posée du seul côté du procès-verbal, et les objets
+// de 300 000 caractères ont continué d'arriver par l'autre porte : l'ordre du jour, d'où
+// vient l'objet des résolutions qui n'en portent pas. Six dépassaient 240 000 caractères,
+// le pire 318 571 — le dernier point avalait l'ordre du jour des trois instances, annexé au
+// document.
+test("un point d'ordre du jour ne déborde pas non plus", () => {
+  const pages = [
+    {
+      numero: 1,
+      lignes: [
+        { texte: '20.01 CE Service du greffe, Direction - 1261234001' },
+        { texte: 'Accorder un contrat de déneigement à Les Entreprises Untel inc.' },
+        { texte: 'Levée de la séance ______________________ Nombre d’articles de niveau décisionnel CE : 14' },
+        { texte: 'CE : 20.001 2026/04/08 09:00 '.repeat(2000) },
+      ],
+    },
+  ];
+  const points = parserOrdreDuJour(pages);
+  assert.equal(points.length, 1);
+  assert.equal(points[0].objet, 'Accorder un contrat de déneigement à Les Entreprises Untel inc.');
+
+  // Et si rien ne ferme le point, la borne le fait.
+  const sansFin = [{ numero: 1, lignes: [{ texte: '30.02 CM Service X - 1261234002' }, { texte: 'Un objet interminable '.repeat(400) }] }];
+  const objet = parserOrdreDuJour(sansFin)[0].objet;
+  assert.ok(objet.length <= 700, `objet de ${objet.length} caractères`);
+  assert.match(objet, /\S$/);
+});
