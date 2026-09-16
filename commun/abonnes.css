@@ -409,6 +409,10 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 
 .ab-page .ab-recap { border: 1px solid var(--ligne); border-left: 4px solid var(--accent); border-radius: 8px; padding: 14px 16px; margin-bottom: 16px; }
 .ab-page .ab-en-bref { font-size: 15.5px; margin: 0 0 14px; }
+/* Le même encadré, quand la ville explique pourquoi son récapitulatif manque : en gris
+   plutôt qu'en couleur d'accent, parce qu'il annonce une absence, pas un contenu. */
+.ab-page .ab-recap-attente { border-left-color: var(--ligne-forte); background: var(--fond-2); }
+.ab-page .ab-recap-attente .ab-en-bref { font-size: 14.5px; margin: 0; color: var(--doux); }
 .ab-page .ab-chrono { list-style: none; margin: 0 0 12px; padding: 0 0 0 18px; border-left: 2px solid var(--ligne-forte); }
 .ab-page .ab-chrono > li { position: relative; padding: 0 0 14px 4px; }
 .ab-page .ab-chrono > li::before {
