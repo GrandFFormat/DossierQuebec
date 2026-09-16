@@ -230,8 +230,16 @@ Ce qui a changé dans `app.js`, et pourquoi :
 | Calendrier des séances d'arrondissement | 13 sept. 2026 | **En travaux.** Réponse du 16 sept. : les 19 conseils sont autonomes et gérés par d'autres équipes que le calendrier central ; la Ville cherche une façon de réunir ces dix-neuf sources. |
 | Index des documents de séance | 13 sept. 2026 | **Non, pour l'instant.** Les documents sont déjà publiés ; un index n'est pas priorisé. |
 | Décisions en données structurées | 13 sept. 2026 | **Reconnu, pas bientôt.** Valeur admise ; obstacle : l'âge des systèmes. |
-| Adresse des sommaires décisionnels | 13 sept. 2026 | **Sans réponse.** Second courriel (`courriel-sommaires.md`), non couvert par la réponse du 16. |
+| Adresse des sommaires décisionnels | 13 sept., **reposée le 16 sept.** | **En attente.** Le second courriel (`courriel-sommaires.md`) n'était pas couvert par la réponse du 16 ; la question est reposée autrement dans `courriel-reponse-alexis.md`. Relance prévue le 30 sept. |
 | Droits d'usage | non envoyé | `courriel-greffe.md`, prêt. |
+
+**Où ça bloque, pour les sommaires.** Ce n'est pas un intranet : le viewer est public, de la forme
+`ville.montreal.qc.ca/sel/sypre-consultation/afficherpdf?idDoc=<N>`. Ce qui manque, c'est le moyen
+de passer du numéro de dossier à dix chiffres — celui qu'impriment les procès-verbaux — à ce
+`idDoc`. La porte est ouverte, la clé n'est pas publiée. La demande est donc devenue une table à
+deux colonnes, qui ne rend public aucun document qui ne le soit déjà : c'est la plus facile à
+accorder des quatre, et celle qui débloquerait d'un coup les 4 088 décisions de 2026 dont on
+connaît le numéro de dossier.
 
 La réponse du 16 septembre est reproduite telle quelle à la fin de `courriel-donnees-ouvertes.md`,
 avec ce qu'elle change pour nous. Deux choses à en retenir. La première : le calendrier des
