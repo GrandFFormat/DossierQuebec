@@ -2,7 +2,7 @@
 > dossiervillelongueuil@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit b505335 — Node v22.23.2
+Code : commit 173dce0 — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -38,8 +38,8 @@ Pastilles thématiques :
       3  Motions et hommages
       0  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-07-17) ===
-Fenêtre depuis 2026-07-17 : 0 séance(s) relue(s), 22 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-07-18) ===
+Fenêtre depuis 2026-07-18 : 0 séance(s) relue(s), 22 vote(s) conservé(s) du fichier précédent.
 
 22 votes nominaux écrits dans data/votes.json (2025 : 22, 2026 : 0 ; 0 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
@@ -102,16 +102,12 @@ Mesure de 32 termes sur 46 procès-verbaux de 2025 et 2026 et 901 décisions…
 32 entrées écrites dans data/lexique.json
 
 === Sommaires décisionnels (documents de séance) ===
-4 document(s) de séance à lire (au plus 4 cette fois).
-CA-260820 (texte absent du cache) : 896 pages, 94 Mo, 49 sommaires ; 0 cité(s) au procès-verbal mais absent(s) du document — 15 s
-CO-260818 (texte absent du cache) : 1364 pages, 155 Mo, 82 sommaires ; 0 cité(s) au procès-verbal mais absent(s) du document — 19 s
-CO-260526 (texte absent du cache) : 1096 pages, 121 Mo, 70 sommaires ; 4 cité(s) au procès-verbal mais absent(s) du document — 14 s
-CO-260317 (texte absent du cache) : 873 pages, 90 Mo, 59 sommaires ; 2 cité(s) au procès-verbal mais absent(s) du document — 13 s
+0 document(s) de séance à lire (au plus 4 cette fois).
 
-4 document(s) lu(s) ; 556 sommaires indexés dans data/sommaires.json.
+0 document(s) lu(s) ; 556 sommaires indexés dans data/sommaires.json.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-17 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-07-18 pas encore résumés (plafond : 120)…
 467 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
