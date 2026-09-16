@@ -5,6 +5,8 @@
 //   npm run infolettre -- --depuis=2026-08-16 --jusqua=2026-09-14
 //   npm run infolettre -- --mois=2026-08 --details   fait d'abord lire le détail des plus gros montants (API)
 //   npm run infolettre -- --mois=2026-08 --publier   après relecture : publié, il part aux inscrits (api/_infolettre.js)
+//   npm run infolettre -- --seance=2026-08-25                        le courriel après une séance du conseil
+//   npm run infolettre -- --seance=2026-08-31 --instance=charlesbourg  après une séance d'arrondissement
 //
 // Tout vient des données déjà extraites : aucun appel à la Ville, aucun appel IA. Écrit
 // infolettres/AAAA-MM.html (le courriel, en couleur, styles en ligne) et AAAA-MM.md (la version
@@ -32,6 +34,19 @@ const DATA = new URL('../data/', import.meta.url);
 const SORTIE = new URL('../infolettres/', import.meta.url);
 const SITE = 'https://dossierquebec.ca/quebec/';
 const VILLE = 'quebec';
+
+// Les instances qui ont leur courriel après chaque séance (mêmes clés que api/_infolettre.js) :
+// le conseil de la ville, et chaque arrondissement.
+const ARR = (cle, nom, instance) => ({ type: 'arrondissement', arrondissement: cle, instance, sujet: `le conseil de l'arrondissement ${nom}`, groupe: "Conseils d'arrondissement" });
+const INSTANCES = {
+  conseil: { type: 'conseil', arrondissement: '', instance: 'Conseil de la ville', sujet: 'le conseil de la ville', groupe: 'Conseil de la ville' },
+  'la-cite-limoilou': ARR('la-cite-limoilou', 'de La Cité-Limoilou', "Conseil de l'Arrondissement de La Cité-Limoilou"),
+  'les-rivieres': ARR('les-rivieres', 'des Rivières', "Conseil de l'Arrondissement des Rivières"),
+  'sainte-foy-sillery-cap-rouge': ARR('sainte-foy-sillery-cap-rouge', 'de Sainte-Foy–Sillery–Cap-Rouge', "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge"),
+  charlesbourg: ARR('charlesbourg', 'de Charlesbourg', "Conseil de l'Arrondissement de Charlesbourg"),
+  beauport: ARR('beauport', 'de Beauport', "Conseil de l'Arrondissement de Beauport"),
+  'la-haute-saint-charles': ARR('la-haute-saint-charles', 'de La Haute-Saint-Charles', "Conseil de l'Arrondissement de La Haute-Saint-Charles"),
+};
 const RACINE = 'https://dossierquebec.ca';
 
 function parseArgs(argv) {
@@ -85,6 +100,12 @@ async function lire(nom) {
 
 // La période : le mois demandé, sinon le mois précédent au complet.
 function periode(args) {
+  if (args.seance) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(args.seance)) throw new Error('--seance=AAAA-MM-JJ');
+    const cle = args.instance ?? 'conseil';
+    if (!INSTANCES[cle]) throw new Error(`--instance inconnue : ${cle} (${Object.keys(INSTANCES).join(', ')})`);
+    return { depuis: args.seance, jusqua: args.seance, nom: `le ${dateFr(args.seance)}`, fichier: `${cle}-${args.seance}`, seance: { cle, ...INSTANCES[cle] } };
+  }
   if (args.depuis || args.jusqua) {
     const jusqua = args.jusqua ?? new Date().toISOString().slice(0, 10);
     const depuis = args.depuis ?? new Date(new Date(jusqua + 'T00:00:00Z').getTime() - 29 * 864e5).toISOString().slice(0, 10);
@@ -104,7 +125,10 @@ function periode(args) {
 
 async function main() {
   const args = parseArgs(process.argv);
-  const { depuis, jusqua, nom: nomPeriode, fichier } = periode(args);
+  const { depuis, jusqua, nom: nomPeriode, fichier, seance = null } = periode(args);
+  // Le titre du courriel : le mois de toute la Ville, ou une séance d'une instance.
+  const titreCourriel = seance ? `Ce que ${seance.sujet} a décidé ${nomPeriode}` : `Ce que la Ville de Québec a décidé ${nomPeriode}`;
+  const surInstance = (d) => !seance || (d.instance ?? '').trim() === seance.instance;
 
   const [decisions, resumes, votes, attendues] = await Promise.all([lire('decisions'), lire('resumes'), lire('votes'), lire('attendues').catch(() => ({ decisions: [] }))]);
   const THEMES = decisions.themes;
@@ -114,8 +138,16 @@ async function main() {
 
   // Les documents du mois. Les procès-verbaux et tableaux des décisions signalent une séance
   // mais ne sont pas des décisions : on s'en sert pour les séances, pas pour les dossiers.
-  const tous = decisions.decisions.filter(dansFenetre);
+  const tous = decisions.decisions.filter((d) => dansFenetre(d) && surInstance(d));
   const docs = tous.filter((d) => d.type !== 'Procès-verbaux' && d.type !== 'Tableaux des décisions');
+  // Une séance : ses résolutions, et les sommaires qu'elles citent (préparés plus tôt), pour le résumé.
+  if (seance) {
+    const cites = new Set(docs.map((d) => d.sommaireId).filter(Boolean));
+    docs.push(...decisions.decisions.filter((d) => d.type === 'Sommaires et mémoires' && cites.has(d.id)));
+    if (!tous.some((d) => d.type === 'Résolutions')) throw new Error(`Aucune résolution de « ${seance.instance} » le ${seance ? depuis : ''} dans les données.`);
+  }
+  const nbResolutions = tous.filter((d) => d.type === 'Résolutions').length;
+  const documentsSeance = tous.filter((d) => d.type === 'Procès-verbaux' || d.type === 'Tableaux des décisions');
 
   // Les séances, par instance : les dates de chacune ; les arrondissements ensemble.
   const datesParInstance = new Map();
@@ -201,7 +233,7 @@ async function main() {
   // votent contre dix résolutions d'une même séance, c'est un bloc, pas dix.
   const sommaireDeResolution = new Map(decisions.decisions.filter((d) => d.type === 'Résolutions' && d.sommaireId).map((d) => [d.id, d.sommaireId]));
   const blocsVotes = new Map();
-  for (const v of votes.votes.filter((v) => dansFenetre(v) && v.contre?.length && v.pour?.length)) {
+  for (const v of votes.votes.filter((v) => dansFenetre(v) && surInstance(v) && v.contre?.length && v.pour?.length)) {
     const cote = v.contre.length <= v.pour.length ? 'contre' : 'pour';
     const noms = v[cote];
     const cle = `${v.instance}|${v.date}|${cote}|${noms.join(',')}`;
@@ -220,17 +252,24 @@ async function main() {
   // ce qui a une date cible dans les 45 prochains jours.
   const aujourdhui = new Date().toISOString().slice(0, 10);
   const dans45 = new Date(Date.now() + 45 * 864e5).toISOString().slice(0, 10);
-  const agendaTotal = attendues.decisions.length;
-  const agendaProchain = attendues.decisions.filter((d) => d.echeance && d.echeance >= aujourdhui && d.echeance <= dans45).sort((a, b) => a.echeance.localeCompare(b.echeance));
+  const agendaDe = seance ? attendues.decisions.filter((d) => (seance.type === 'conseil' ? d.groupe === seance.groupe : (d.instance ?? '').trim() === seance.instance)) : attendues.decisions;
+  const agendaTotal = agendaDe.length;
+  const agendaProchain = agendaDe.filter((d) => d.echeance && d.echeance >= aujourdhui && d.echeance <= dans45).sort((a, b) => a.echeance.localeCompare(b.echeance));
   const parGroupe = new Map();
-  for (const d of attendues.decisions) parGroupe.set(d.groupe ?? d.instance, (parGroupe.get(d.groupe ?? d.instance) ?? 0) + 1);
+  for (const d of agendaDe) parGroupe.set(d.groupe ?? d.instance, (parGroupe.get(d.groupe ?? d.instance) ?? 0) + 1);
   const agendaInstances = [...parGroupe.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4).map(([g, n]) => `${INSTANCE_COURTE(g)} (${n})`).join(' · ');
 
   const phraseDe = (f) => f.resume?.puces?.[0] ?? court(f.objet, 170);
   const natureDe = (f) => (f.typeMontant && !['depense', 'autre'].includes(f.typeMontant) ? TYPES_MONTANT[f.typeMontant] : null);
   const ouVu = (f) => ([...f.instances].length ? [...f.instances].join(', ') : `sommaire du ${jourMois(f.dates[0])}`);
 
-  const introduction =
+  const introduction = seance
+    ? `À sa séance ${nomPeriode.replace(/^le /, 'du ')}, ${seance.sujet} a adopté ${pluriel(nbResolutions, 'résolution', 'résolutions')} sur ${pluriel(liste.length, 'dossier', 'dossiers')}` +
+      (accordees.length ? `, dont ${pluriel(accordees.length, 'subvention accordée', 'subventions accordées')}${totalSubventions ? ` pour ${argent(totalSubventions)} au total` : ''}` : '') +
+      (contrats.length ? ` et ${pluriel(contrats.length, 'contrat', 'contrats')} avec un montant` : '') +
+      (lourdes[0] ? `. Le plus gros montant : ${argent(lourdes[0].montant)} — ${phraseDe(lourdes[0]).replace(/^La Ville (?:de Québec )?/, 'la Ville ').replace(/\.$/, '')}` : '') +
+      '.'
+    :
     `${nomPeriode[0].toUpperCase()}${nomPeriode.slice(1)}, ${pluriel(liste.length, 'dossier a', 'dossiers ont')} passé devant les instances de la Ville de Québec, en ${pluriel(nbSeances, 'séance', 'séances')}` +
     (accordees.length ? `, dont ${pluriel(accordees.length, 'subvention accordée', 'subventions accordées')}${totalSubventions ? ` pour ${argent(totalSubventions)} au total` : ''}` : '') +
     (contrats.length ? ` et ${pluriel(contrats.length, 'contrat', 'contrats')} avec un montant` : '') +
@@ -259,21 +298,21 @@ async function main() {
       chapeau: "La plupart des résolutions passent sans opposition. Voici celles où des élus ont voté autrement que la majorité, regroupées quand ce sont les mêmes élus à la même séance.",
     },
     agenda: {
-      titre: "À l'agenda des conseils", icone: '🗓️', couleur: '#B7791F',
+      titre: seance ? `À l'agenda de ${seance.type === 'conseil' ? 'la prochaine séance' : 'l’arrondissement'}` : "À l'agenda des conseils", icone: '🗓️', couleur: '#B7791F',
       chapeau: "Les dossiers qui attendent encore un vote et dont la date cible arrive. Ils passeront probablement à la prochaine séance, mais ce n'est pas l'ordre du jour officiel : un dossier peut être reporté.",
     },
     sujets: {
       titre: 'De quoi on a parlé', icone: '🏷️', couleur: '#DB2777',
-      chapeau: 'Le nombre de dossiers du mois, par sujet.',
+      chapeau: seance ? 'Le nombre de dossiers de la séance, par sujet.' : 'Le nombre de dossiers du mois, par sujet.',
     },
   };
 
   // ---------- Markdown ----------
   const L = [];
-  L.push(`# Ce que la Ville de Québec a décidé ${nomPeriode}`, '');
+  L.push(`# ${titreCourriel}`, '');
   for (const p of mot) L.push(p, '');
   L.push(introduction, '');
-  L.push(`**Séances :** ${seances.join(' · ')}.`, '');
+  if (!seance) L.push(`**Séances :** ${seances.join(' · ')}.`, '');
   const titreMd = (s, n) => { L.push(`## ${s.icone} ${s.titre}${n != null ? ` (${nombreFr(n)})` : ''}`, '', `*${s.chapeau}*`, ''); };
   titreMd(SECTIONS.montants);
   for (const f of lourdes) {
@@ -461,8 +500,8 @@ async function main() {
   // Bandeau
   H.push(`
     <tr><td style="background:#0B8A4B;border-radius:12px 12px 0 0;padding:26px 24px 22px">
-      <div style="${POLICE};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#CFF5DE">DossierVilleDeQuébec · Compte rendu mensuel${abonne ? ' · édition abonnés' : ''}</div>
-      <h1 style="${POLICE};margin:8px 0 0;font-size:27px;line-height:1.2;color:#ffffff">Ce que la Ville de Québec a décidé ${echapper(nomPeriode)}</h1>
+      <div style="${POLICE};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#CFF5DE">DossierVilleDeQuébec · ${seance ? 'Après la séance' : 'Compte rendu mensuel'}${abonne ? ' · édition abonnés' : ''}</div>
+      <h1 style="${POLICE};margin:8px 0 0;font-size:27px;line-height:1.2;color:#ffffff">${echapper(titreCourriel)}</h1>
     </td></tr>
     <tr><td style="height:6px;line-height:6px;font-size:0;background:#F5B301">&nbsp;</td></tr>`);
   // Remplacé à l'envoi (api/_infolettre.js) : le bandeau de bienvenue pour qui vient de s'inscrire.
@@ -481,10 +520,10 @@ async function main() {
       </div></td>`;
   H.push(`<tr><td style="padding:16px 0 0">
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
-      <tr>${tuile(nombreFr(liste.length), 'dossiers devant les instances', '#0B8A4B')}${tuile(nombreFr(nbSeances), 'séances', '#2563EB')}</tr>
+      <tr>${seance ? `${tuile(nombreFr(nbResolutions), 'résolutions adoptées', '#0B8A4B')}${tuile(nombreFr(liste.length), 'dossiers', '#2563EB')}` : `${tuile(nombreFr(liste.length), 'dossiers devant les instances', '#0B8A4B')}${tuile(nombreFr(nbSeances), 'séances', '#2563EB')}`}</tr>
       <tr>${tuile(totalSubventions ? argent(totalSubventions) : nombreFr(accordees.length), `en ${pluriel(accordees.length, 'subvention accordée', 'subventions accordées')}`, '#EA580C')}${tuile(nombreFr(nbVotesDivises), nbVotesDivises > 1 ? 'votes divisés' : 'vote divisé', '#7C3AED')}</tr>
     </table>
-    <p style="${POLICE};margin:10px 6px 0;font-size:13px;line-height:1.5;color:${DOUX}"><strong style="color:${ENCRE}">Séances :</strong> ${echapper(seances.join(' · '))}.</p>
+    <p style="${POLICE};margin:10px 6px 0;font-size:13px;line-height:1.5;color:${DOUX}">${seance ? (documentsSeance.length ? `<strong style="color:${ENCRE}">Les documents de la séance :</strong> ${documentsSeance.map((d) => lien(d.type === 'Procès-verbaux' ? 'procès-verbal' : 'tableau des décisions', d.pdf, '#0B8A4B')).join(' · ')}` : '') : `<strong style="color:${ENCRE}">Séances :</strong> ${echapper(seances.join(' · '))}.`}</p>
   </td></tr>`);
 
   // Les plus gros montants, avec les puces du résumé
@@ -564,7 +603,7 @@ async function main() {
     <a href="${SITE}decisions.html" style="color:${DOUX}">Toutes les décisions</a> · site indépendant, sans publicité, aucun caractère officiel.<!--DESINSCRIPTION-->
   </td></tr>`);
 
-  return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ce que la Ville de Québec a décidé ${echapper(nomPeriode)}</title></head>` +
+  return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${echapper(titreCourriel)}</title></head>` +
     `<body style="margin:0;padding:0;background:#EEF1F4"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#EEF1F4"><tr><td align="center" style="padding:20px 10px">` +
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:660px;background:#F8FAFB;border-radius:12px"><tr><td style="padding:0 0 26px">` +
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">${H[0]}</table>` +
@@ -584,7 +623,8 @@ async function main() {
   // --publier : le compte rendu relu part dans Supabase. Il sera envoyé aux inscrits confirmés au
   // prochain passage du cron (11 h UTC), et il devient celui que reçoit chaque nouvel inscrit.
   if (args.publier) {
-    if (!/^\d{4}-\d{2}$/.test(fichier)) throw new Error('--publier demande un mois complet (--mois=AAAA-MM).');
+    if (!seance && !/^\d{4}-\d{2}$/.test(fichier)) throw new Error('--publier demande un mois complet (--mois=AAAA-MM) ou une séance (--seance=AAAA-MM-JJ).');
+    const cleNumero = { ville: VILLE, type: seance?.type ?? 'mensuel', arrondissement: seance?.arrondissement ?? '', mois: seance ? depuis : fichier };
     if (!process.env.SUPABASE_URL) {
       const racine = fileURLToPath(new URL('../', import.meta.url));
       const cle = [racine + 'api.env', racine + '../api.env'].find((f) => existsSync(f));
@@ -593,12 +633,12 @@ async function main() {
     if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) throw new Error('--publier : SUPABASE_URL et SUPABASE_SERVICE_ROLE_KEY manquent (api.env).');
     const h = { apikey: process.env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`, 'Content-Type': 'application/json' };
     const url = `${process.env.SUPABASE_URL}/rest/v1/infolettre_numeros`;
-    const existant = await fetch(`${url}?ville=eq.${VILLE}&mois=eq.${fichier}&select=envoye_le,envoyes`, { headers: h }).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`Supabase ${r.status} — scripts/supabase-schema-infolettre.sql a-t-il été exécuté ?`))));
+    const existant = await fetch(`${url}?ville=eq.${VILLE}&type=eq.${cleNumero.type}&arrondissement=eq.${cleNumero.arrondissement}&mois=eq.${cleNumero.mois}&select=envoye_le,envoyes`, { headers: h }).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`Supabase ${r.status} — scripts/supabase-schema-infolettre.sql a-t-il été exécuté ?`))));
     if (existant[0]?.envoyes > 0) throw new Error(`Le compte rendu ${fichier} est déjà parti vers ${existant[0].envoyes} personne(s) : on ne le remplace pas.`);
-    const r = await fetch(`${url}?on_conflict=ville,mois`, {
+    const r = await fetch(`${url}?on_conflict=ville,type,arrondissement,mois`, {
       method: 'POST',
       headers: { ...h, Prefer: 'resolution=merge-duplicates,return=minimal' },
-      body: JSON.stringify([{ ville: VILLE, mois: fichier, titre: `Ce que la Ville de Québec a décidé ${nomPeriode}`, html: page, html_abonnes: pageAbonnes, publie_le: new Date().toISOString(), updated_at: new Date().toISOString() }]),
+      body: JSON.stringify([{ ...cleNumero, titre: titreCourriel, html: page, html_abonnes: pageAbonnes, publie_le: new Date().toISOString(), updated_at: new Date().toISOString() }]),
     });
     if (!r.ok) throw new Error(`Publication → ${r.status} ${(await r.text()).slice(0, 200)}`);
     console.log(`Publié : ${fichier}. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.`);
