@@ -63,10 +63,17 @@ const EN_ATTENTE_DE = {
   titre: "Pas de récapitulatif : le document qui l'écrirait n'est pas ouvert",
   titreEn: 'No recap: the document that would write it is not open',
   texte:
-    "Un projet se raconte à partir des sommaires décisionnels — la note que l'administration écrit pour chaque dossier, avec le contexte, les montants et les options écartées. C'est de là que viennent les récapitulatifs de Québec et de Lévis. Montréal produit exactement les mêmes documents : 4 088 de nos décisions portent leur numéro de dossier. Mais elle n'en publie pas l'adresse, et sans adresse personne ne peut les ouvrir — ni un citoyen, ni notre robot. Nous la lui avons demandée. D'ici là, ce projet montre ses décisions telles que le conseil les a adoptées, chacune avec son procès-verbal officiel.",
+    "Un projet se raconte à partir des sommaires décisionnels — la note que l'administration écrit pour chaque dossier, avec le contexte, les montants et les options écartées. C'est de là que viennent les récapitulatifs de Québec et de Lévis. Montréal produit exactement les mêmes documents : 4 088 de nos décisions portent leur numéro de dossier. Mais elle n'en publie pas l'adresse, et sans adresse personne ne peut les ouvrir — ni un citoyen, ni notre robot.",
   texteEn:
-    "A project's story comes from the decision summaries — the memo the administration writes for each file, with the context, the amounts and the options set aside. That is where the Québec and Lévis recaps come from. Montréal produces exactly the same documents: 4,088 of our decisions carry their file number. But it publishes no address for them, and without an address nobody can open them — neither a citizen nor our robot. We have asked for it. Until then, this project shows its decisions as the council adopted them, each with its official minutes.",
+    "A project's story comes from the decision summaries — the memo the administration writes for each file, with the context, the amounts and the options set aside. That is where the Québec and Lévis recaps come from. Montréal produces exactly the same documents: 4,088 of our decisions carry their file number. But it publishes no address for them, and without an address nobody can open them — neither a citizen nor our robot.",
+  // Ce qui suit se détache du reste, sur sa propre ligne : c'est la seule phrase du bloc qui
+  // dise ce qui va se passer, et elle se perdait au bout d'un paragraphe de cinq phrases.
+  ligne:
+    "Nous avons demandé cette adresse à la Ville le 13 septembre 2026, et de nouveau le 16. Dès qu'elle répond, ce projet aura son récapitulatif, comme ceux de Québec et de Lévis.",
+  ligneEn:
+    'We asked the City for that address on 13 September 2026, and again on the 16th. As soon as they answer, this project will have its recap, like those of Québec and Lévis.',
 };
+
 
 // La même chose en deux phrases, en tête de la liste des projets de la ville : sans elle, on
 // croit que Montréal a des projets plus pauvres que les autres villes, alors que c'est un

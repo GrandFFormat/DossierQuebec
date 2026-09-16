@@ -412,6 +412,12 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 /* Le même encadré, quand la ville explique pourquoi son récapitulatif manque : en gris
    plutôt qu'en couleur d'accent, parce qu'il annonce une absence, pas un contenu. */
 .ab-page .ab-recap-attente { border-left-color: var(--ligne-forte); background: var(--fond-2); }
+/* La phrase qui dit ce qui va se passer, détachée sous un filet. */
+.ab-page .ab-attente-ligne {
+  margin: 12px 0 0; padding-top: 10px; border-top: 1px solid var(--ligne);
+  font-size: 14.5px; line-height: 1.55;
+}
+
 /* Ce qui manque aux projets d'une ville, dit une fois en tête de sa liste. */
 .ab-page .ab-legende-ville { margin: 0 0 12px; line-height: 1.55; border-left: 3px solid var(--ligne-forte); padding-left: 10px; }
 .ab-page .ab-recap-attente .ab-en-bref { font-size: 14.5px; margin: 0; color: var(--doux); }
