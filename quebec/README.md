@@ -104,6 +104,12 @@ nofollow">`, le `vercel.json` de DossierQuébec ajoute `X-Robots-Tag` sur `/queb
 le lien depuis DossierQuébec est en `rel="nofollow"`. Le jour où ça débloque : retirer ces trois
 verrous et ajouter les pages au `sitemap.xml` de DossierQuébec.
 
+**Où en est la demande.** Courriel au greffe et aux données ouvertes le 11 sept. 2026
+(N/Réf. 2026-09-11-2684). La Ville a répondu le 16 sept. en redirigeant vers le **311** ; la demande
+y a été redéposée le même jour, en 974 caractères (limite de 1 000), avec les deux mêmes questions —
+le `robots.txt` du portail et l'usage commercial — et, cette fois, **l'abonnement de 3 $ par mois
+nommé explicitement**, puisqu'il existe depuis le 14 sept. Sans réponse, relancer vers le 2 oct.
+
 ## Le gisement : le portail des documents décisionnels
 
 `decisions.ville.quebec.qc.ca` est une application AzSearch.js. Sa configuration (service
