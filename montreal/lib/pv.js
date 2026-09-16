@@ -116,6 +116,19 @@ const FIN_OBJET = /^(?:Vu\b|Attendu\b|Consid[ée]rant\b|Il est\s*$|Il est propos
 // qui a débordé. On coupe au dernier mot entier — le PDF reste là pour le texte complet.
 const OBJET_MAX = 700;
 
+// Un objet démesuré n'est jamais un objet : c'est une lecture qui a débordé. La coupe tombe
+// au dernier mot entier, et le PDF reste là pour le texte complet. Le procès-verbal et
+// l'ordre du jour passent tous les deux par ici : le défaut s'était d'abord montré du côté
+// du procès-verbal, la borne n'y avait été posée que là, et les objets de 300 000 caractères
+// ont continué d'arriver par l'autre porte.
+export function bornerObjet(texte) {
+  const objet = String(texte ?? '').replace(/\s+/g, ' ').trim();
+  if (!objet) return null;
+  if (objet.length <= OBJET_MAX) return objet;
+  const coupe = objet.lastIndexOf(' ', OBJET_MAX);
+  return objet.slice(0, coupe > OBJET_MAX * 0.6 ? coupe : OBJET_MAX).trim();
+}
+
 function extraireObjet(lignes) {
   const morceaux = [];
   for (const l of lignes) {
@@ -130,11 +143,7 @@ function extraireObjet(lignes) {
     // d'où la coupe ci-dessous, qui ne se fie pas au nombre de lignes.
     if (morceaux.join(' ').length > OBJET_MAX) break;
   }
-  const objet = morceaux.join(' ').replace(/\s+/g, ' ').trim();
-  if (!objet) return null;
-  if (objet.length <= OBJET_MAX) return objet;
-  const coupe = objet.lastIndexOf(' ', OBJET_MAX);
-  return objet.slice(0, coupe > OBJET_MAX * 0.6 ? coupe : OBJET_MAX).trim();
+  return bornerObjet(morceaux.join(' '));
 }
 
 export function extraireResultat(bloc) {
@@ -361,14 +370,17 @@ export function parserVote(bloc) {
 // chapitres (« 20 – Affaires contractuelles ») et « Page N » sont ignorés.
 const LIGNE_POINT = /^(\d{2}\.\d{2,3})\s+(.*)$/;
 const LIGNE_SERVICE = /^(CM|CG|CE|CA)\s+(.+?)(?:\s+-\s*(\d{10})?)?\s*$/;
-const FIN_POINT = /^(?:Comp[ée]tence d['’]agglom[ée]ration|Page\s+\d+|\d{2}\s+[–-]\s+)/i;
+// « Levée de la séance » ferme le dernier point de l'ordre du jour. Sans elle, ce point
+// avalait tout ce qui suit — l'ordre du jour complet des trois instances, annexé au
+// document : six objets dépassaient 240 000 caractères, le pire 318 571.
+const FIN_POINT = /^(?:Comp[ée]tence d['’]agglom[ée]ration|Page\s+\d+|\d{2}\s+[–-]\s+|Lev[ée]e de la s[ée]ance\b|Nombre d['’]articles de niveau d[ée]cisionnel)/i;
 
 export function parserOrdreDuJour(pages) {
   const points = [];
   let courant = null;
   const fermer = () => {
     if (!courant) return;
-    courant.objet = courant.objet.join(' ').replace(/\s+/g, ' ').trim() || null;
+    courant.objet = bornerObjet(courant.objet.join(' '));
     points.push(courant);
     courant = null;
   };

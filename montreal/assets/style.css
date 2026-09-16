@@ -474,6 +474,12 @@ footer a { color: var(--doux); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
 
+/* Les tableaux d'état (Sources) : à 400 px, « Dernière extraction » et « Chargé / disponible »
+   ne tiennent pas côte à côte et poussaient la page à 418 px de large. Le tableau défile seul
+   dans sa boîte plutôt que d'emporter la page avec lui. */
+#etat-donnees, #etat-archive { overflow-x: auto; }
+#etat-donnees table, #etat-archive table { min-width: 420px; }
+
 /* Un tableau replié : il doit porter la même ombre et le même cadre qu'une fiche, mais
    son contenu déborde en largeur sur petit écran — d'où le défilement horizontal interne
    plutôt qu'une page qui se met à glisser latéralement. */
