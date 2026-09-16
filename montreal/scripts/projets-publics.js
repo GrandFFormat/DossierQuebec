@@ -54,6 +54,20 @@ const parDate = (a, b) => (a.date ?? '').localeCompare(b.date ?? '');
 const principalDe = (groupe) => groupe.at(-1);
 const numerosDe = (groupe) => [...new Set(groupe.map((d) => d.numero).filter(Boolean))];
 
+// Pourquoi un sujet de Montréal n'a pas de « Où en est le projet ». Sans cette phrase, la
+// page affiche une liste de décisions nues et le lecteur en conclut qu'il n'y a rien à
+// voir, alors que le manque vient de la Ville et qu'il est en voie d'être comblé. Le champ
+// est facultatif et lu par /mes-dossiers : toute ville à qui il manque ses sommaires peut
+// dire pourquoi, de la même façon.
+const EN_ATTENTE_DE = {
+  titre: "En attente d'un document de la Ville",
+  titreEn: 'Waiting on a City document',
+  texte:
+    "Pour écrire « Où en est le projet », il faut le sommaire décisionnel — la note de l'administration qui explique chaque décision : le contexte, les montants, les options écartées. Montréal produit ces documents, et 4 088 de nos décisions portent leur numéro, mais la Ville ne publie pas l'adresse où les lire. Nous la lui avons demandée le 13 septembre 2026. Dès qu'elle répond, ce projet aura son récapitulatif, comme ceux de Québec et de Lévis.",
+  texteEn:
+    "Writing “Where the project stands” requires the decision summary — the administration's memo explaining each decision: the context, the amounts, the options set aside. Montréal produces these documents, and 4,088 of our decisions carry their number, but the City does not publish an address where they can be read. We asked for it on 13 September 2026. As soon as they answer, this project will have its recap, like those of Québec and Lévis.",
+};
+
 const decisions = await lire('data/decisions.json', null);
 if (!decisions?.decisions) {
   console.error('data/decisions.json introuvable : rien à publier.');
@@ -131,6 +145,7 @@ for (const [cle, def] of Object.entries(PROJETS)) {
       .map(([t, n]) => ({ cle: t, libelle: themes[t]?.libelle ?? t, couleur: themes[t]?.couleur ?? null, n })),
     // Pas de récapitulatif écrit par un modèle : il se nourrit des sommaires, qui manquent.
     recap: null,
+    enAttenteDe: EN_ATTENTE_DE,
     dossiers,
   };
   const texte = JSON.stringify(projet);
@@ -138,7 +153,7 @@ for (const [cle, def] of Object.entries(PROJETS)) {
   await writeFile(`${DOSSIER}/${cle}.json`, texte, 'utf8');
 
   // Ce qu'une carte montre sans ouvrir le sujet : la décision la plus récente.
-  index[cle] = { titre: def.titre, description: def.description, annee, ...chiffres, enBref: null, plusRecent: dossiers[0]?.objet ?? null };
+  index[cle] = { titre: def.titre, description: def.description, annee, ...chiffres, enBref: null, enAttenteDe: EN_ATTENTE_DE.titre, plusRecent: dossiers[0]?.objet ?? null };
 }
 
 // Un sujet retiré de lib/projets.js ne laisse pas de fichier orphelin.
