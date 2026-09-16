@@ -120,19 +120,25 @@ export async function formulaireInfolettre(zone, { ville = null } = {}) {
 }
 
 // ---------- la boîte de Mes dossiers (compte connecté, adresse déjà vérifiée) ----------
-export async function boiteInfolettre(zone, s) {
+// `premiereLigne` : une ligne fournie par la page — l'alerte du matin, qui n'est pas une infolettre
+// mais se coche au même endroit. { html, cabler(racine) } : le HTML est réinséré à chaque rendu,
+// et `cabler` rebranche ses boutons.
+export async function boiteInfolettre(zone, s, { premiereLigne = null } = {}) {
   if (!zone) return;
   if (!s) { zone.innerHTML = ''; return; }
   let etat = await etatServeur(s);
-  if (!etat?.villes?.length) { zone.innerHTML = ''; return; }
+  if (!etat?.villes?.length && !premiereLigne) { zone.innerHTML = ''; return; }
+  etat ??= { villes: [], inscriptions: {}, courriel: s.user?.email ?? '' };
 
   const dessiner = (message = '') => {
     zone.innerHTML = `<section class="ab-carte ab-infolettre-boite">
-      <h2 style="margin-top:0">📬 ${tr('Les courriels de DossierQuébec', 'DossierQuébec emails')}</h2>
-      <p class="ab-chapeau" style="margin-bottom:12px">${tr('Cochez ce que vous voulez recevoir. Le plus récent de chaque sorte part tout de suite ; vous pouvez tout décocher en tout temps.', 'Check what you want to receive. The latest of each kind goes out right away; you can uncheck anything anytime.')}</p>
+      <h2 style="margin-top:0">📬 ${tr('Mes courriels', 'My emails')}</h2>
+      <p class="ab-chapeau" style="margin-bottom:12px">${tr('Cochez ce que vous voulez recevoir, décochez quand vous voulez. Pour les infolettres, le plus récent numéro part tout de suite.', 'Check what you want to receive, uncheck whenever you like. For newsletters, the latest issue goes out right away.')}</p>
+      ${premiereLigne?.html ?? ''}
       ${etat.villes.map((v) => `${etat.villes.length > 1 ? `<h3 class="ab-sous-titre">${echapper(v.nom)}</h3>` : ''}${listeSortes(etat, v.cle, v.offre, { cocherSuivis: true, retirable: true })}`).join('')}
       <p class="ab-note" aria-live="polite">${message || tr(`Envoyé à ${echapper(etat.courriel ?? '')}.`, `Sent to ${echapper(etat.courriel ?? '')}.`)}</p>
     </section>`;
+    premiereLigne?.cabler?.(zone);
   };
   dessiner();
 
