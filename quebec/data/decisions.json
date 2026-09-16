@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-15T13:56:47.994Z",
+ "generatedAt": "2026-09-16T13:41:35.749Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "licence": "Documents publics de la Ville de Québec — reproduction avec mention de la source, usage non commercial.",
  "parametres": {
@@ -12,9 +12,9 @@
    "Tableaux des décisions"
   ]
  },
- "totalDisponible": 4843,
- "nombre": 4843,
- "nouveauxDepuisDerniereExecution": 0,
+ "totalDisponible": 4860,
+ "nombre": 4860,
+ "nouveauxDepuisDerniereExecution": 17,
  "themes": {
   "procedure": {
    "libelle": "Procédure",
@@ -124,23 +124,23 @@
   }
  },
  "statuts": {
-  "termines": 1398,
-  "enCours": 111,
+  "termines": 1403,
+  "enCours": 112,
   "inconnus": 0
  },
  "facettes": {
   "type": [
    {
     "valeur": "Résolutions",
-    "n": 3101
+    "n": 3111
    },
    {
     "valeur": "Sommaires et mémoires",
-    "n": 1509
+    "n": 1515
    },
    {
     "valeur": "Procès-verbaux",
-    "n": 156
+    "n": 157
    },
    {
     "valeur": "Tableaux des décisions",
@@ -166,7 +166,7 @@
    },
    {
     "valeur": "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
-    "n": 164
+    "n": 175
    },
    {
     "valeur": "Conseil de l'Arrondissement des Rivières",
@@ -200,15 +200,15 @@
    },
    {
     "valeur": "Développement économique et grands projets",
-    "n": 182
+    "n": 183
    },
    {
     "valeur": "Loisirs, sports et vie communautaire",
-    "n": 169
+    "n": 170
    },
    {
     "valeur": "Transport et mobilité intelligente",
-    "n": 153
+    "n": 157
    },
    {
     "valeur": "Planification de l'aménagement et de l'environnement",
@@ -338,11 +338,11 @@
   "theme": [
    {
     "valeur": "urbanisme",
-    "n": 907
+    "n": 908
    },
    {
     "valeur": "procedure",
-    "n": 648
+    "n": 654
    },
    {
     "valeur": "subventions",
@@ -350,7 +350,7 @@
    },
    {
     "valeur": "transport",
-    "n": 516
+    "n": 524
    },
    {
     "valeur": "contrats",
@@ -362,7 +362,7 @@
    },
    {
     "valeur": "loisirs",
-    "n": 245
+    "n": 247
    },
    {
     "valeur": "finances",
@@ -407,6 +407,323 @@
   ]
  },
  "decisions": [
+  {
+   "id": "PV_CA3_OR_2026-09-14_00h00.pdf",
+   "numero": null,
+   "objet": "Procès-verbal de la séance planifiée du conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge tenue le lundi 14 septembre 2026 à 17h30",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Procès-verbaux",
+   "instance": "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA3_OR_2026-09-14_00h00.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "AM3-2026-0161.pdf",
+   "numero": "AM3-2026-0161",
+   "objet": "Avis de motion relatif au Règlement modifiant le Règlement intérieur du conseil d'arrondissement de Sainte-Foy-Sillery-Cap-Rouge sur la délégation de pouvoirs relativement au pouvoir d'autoriser l'occupation du domaine public, R.C.A.3V.Q. 426 et dépôt du projet de règlement",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AM3-2026-0161.pdf",
+   "nouveau": true,
+   "sommaireId": "DE2026-341.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA3-2026-0153.pdf",
+   "numero": "CA3-2026-0153",
+   "objet": "Adoption de l'ordre du jour",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA3-2026-0153.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "statutDossier": "termine",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA3-2026-0154.pdf",
+   "numero": "CA3-2026-0154",
+   "objet": "Approbation du procès-verbal de la séance ordinaire tenue le 27 août 2026",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA3-2026-0154.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "statutDossier": "termine",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA3-2026-0155.pdf",
+   "numero": "CA3-2026-0155",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 3530, rue Stanley-Cosgrove, lot 6 506 195, quartier du Cap-Rouge, district électoral de la Pointe-de-Sainte-Foy",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA3-2026-0155.pdf",
+   "nouveau": true,
+   "sommaireId": "GT2026-266.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA3-2026-0156.pdf",
+   "numero": "CA3-2026-0156",
+   "objet": "Versement d'une subvention de 3 000 $ à l'organisme « La Maison Léon-Provancher » dans le cadre du programme de soutien financier à un événement de proximité pour l'organisation de l'événement « Halloween à Cap-Rouge », le samedi 24 octobre 2026, au parc Provancher et dans le rond-point de la rue Mi",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA3-2026-0156.pdf",
+   "nouveau": true,
+   "sommaireId": "LS2026-238.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "echeance": "2026-09-14",
+   "theme": "loisirs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA3-2026-0157.pdf",
+   "numero": "CA3-2026-0157",
+   "objet": "Ordonnance numéro O-775 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Esther-Blondin - District électoral de Cap-Rouge-Laurentien",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA3-2026-0157.pdf",
+   "nouveau": true,
+   "sommaireId": "TM2026-161.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA3-2026-0158.pdf",
+   "numero": "CA3-2026-0158",
+   "objet": "Ordonnance numéro O-766 concernant une modification aux règles portant sur la circulation, sur le réseau local, relativement à trois secteurs - District électoral de la Pointe-de-Sainte-Foy",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA3-2026-0158.pdf",
+   "nouveau": true,
+   "sommaireId": "TM2026-175.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA3-2026-0159.pdf",
+   "numero": "CA3-2026-0159",
+   "objet": "Ordonnance numéro O-772 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement à l'avenue Blaise-Pascal - District électoral de la Pointe-de-Sainte-Foy",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA3-2026-0159.pdf",
+   "nouveau": true,
+   "sommaireId": "TM2026-153.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA3-2026-0160.pdf",
+   "numero": "CA3-2026-0160",
+   "objet": "Ordonnances numéros O-764 et O-765 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement aux rues Jacques-Berthiaume et Laprade - District électoral du Plateau",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA3-2026-0160.pdf",
+   "nouveau": true,
+   "sommaireId": "TM2026-132.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA3-2026-0161.pdf",
+   "numero": "CA3-2026-0161",
+   "objet": "Avis de motion relatif au Règlement modifiant le Règlement intérieur du conseil d'arrondissement de Sainte-Foy-Sillery-Cap-Rouge sur la délégation de pouvoirs relativement au pouvoir d'autoriser l'occupation du domaine public, R.C.A.3V.Q. 426 et dépôt du projet de règlement",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA3-2026-0161.pdf",
+   "nouveau": true,
+   "sommaireId": "DE2026-341.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "DE2026-341.pdf",
+   "numero": "DE2026-341",
+   "objet": "Règlement modifiant le Règlement intérieur du conseil d'arrondissement de Sainte-Foy-Sillery-Cap-Rouge sur la délégation de pouvoirs relativement au pouvoir d'autoriser l'occupation du domaine public, R.C.A.3V.Q. 426",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Développement économique et grands projets",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-341.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'arrondissement",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "GT2026-266.pdf",
+   "numero": "GT2026-266",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 3530, rue Stanley-Cosgrove, lot 6 506 195, quartier du Cap-Rouge, district électoral de la Pointe-de-Sainte-Foy, Arrondissement de Sainte-Foy-Sillery-Cap-Rouge",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Gestion du territoire",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-266.pdf",
+   "nouveau": false,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'arrondissement",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "LS2026-238.pdf",
+   "numero": "LS2026-238",
+   "objet": "Versement d'une subvention de 3 000 $ à l'organisme « La Maison Léon-Provancher » dans le cadre du programme de soutien financier à un événement de proximité pour l'organisation de l'événement « Halloween à Cap-Rouge », le samedi 24 octobre 2026, au parc Provancher et dans le rond-point de la rue M",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Loisirs, sports et vie communautaire",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-238.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'arrondissement",
+   "dateCible": "2026-09-14",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "echeance": "2026-09-14",
+   "theme": "loisirs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "TM2026-132.pdf",
+   "numero": "TM2026-132",
+   "objet": "Ordonnances numéros O-764 et O-765 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement aux rues Jacques-Berthiaume et Laprade - Arrondissement de Sainte-Foy-Sillery-Cap-Rouge - District électoral du Plateau",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Transport et mobilité intelligente",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-132.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'arrondissement",
+   "dateCible": null,
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "TM2026-153.pdf",
+   "numero": "TM2026-153",
+   "objet": "Ordonnance numéro O-772 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement à l'avenue Blaise-Pascal - Arrondissement de Sainte-Foy-Sillery-Cap-Rouge - District électoral de la Pointe-de-Sainte-Foy",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Transport et mobilité intelligente",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-153.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'arrondissement",
+   "dateCible": null,
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "TM2026-161.pdf",
+   "numero": "TM2026-161",
+   "objet": "Ordonnance numéro O-775 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Esther-Blondin - Arrondissement de Sainte-Foy-Sillery-Cap-Rouge - District électoral de Cap-Rouge-Laurentien",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Transport et mobilité intelligente",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-161.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'arrondissement",
+   "dateCible": null,
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "TM2026-175.pdf",
+   "numero": "TM2026-175",
+   "objet": "Ordonnance numéro O-766 concernant une modification aux règles portant sur la circulation, sur le réseau local, relativement à trois secteurs - Arrondissement de Sainte-Foy - Sillery - Cap-Rouge - District électoral de la Pointe-de-Sainte-Foy",
+   "date": "2026-09-14",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Transport et mobilité intelligente",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-175.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'arrondissement",
+   "dateCible": null,
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
   {
    "id": "TD_CE_PL_2026-09-11_00h00.pdf",
    "numero": null,
@@ -4829,24 +5146,6 @@
    "instance": null,
    "unite": "Gestion du territoire",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-265.pdf",
-   "nouveau": false,
-   "sommaireId": null,
-   "instanceDecisionnelle": "Conseil d'arrondissement",
-   "statutDossier": "termine",
-   "etapeFinale": "Conseil d'arrondissement",
-   "theme": "urbanisme",
-   "themeSource": "objet"
-  },
-  {
-   "id": "GT2026-266.pdf",
-   "numero": "GT2026-266",
-   "objet": "Demande de dérogation mineure pour la propriété sise au 3530, rue Stanley-Cosgrove, lot 6 506 195, quartier du Cap-Rouge, district électoral de la Pointe-de-Sainte-Foy, Arrondissement de Sainte-Foy-Sillery-Cap-Rouge",
-   "date": "2026-08-27",
-   "annee": "2026",
-   "type": "Sommaires et mémoires",
-   "instance": null,
-   "unite": "Gestion du territoire",
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-266.pdf",
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil d'arrondissement",
