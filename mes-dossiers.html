@@ -41,7 +41,6 @@
     <h1 data-en="My files">Mes dossiers</h1>
     <p class="ab-chapeau" data-en="The projects you follow, all cities combined. Click a project to see its decisions here, most recent first. To add one, pick it further down, or click “Project: …” on a decision in a city section.">Les projets que vous suivez, toutes villes confondues. Cliquez sur un projet pour voir ses décisions ici, les plus récentes d'abord. Pour en ajouter un, choisissez-le plus bas, ou cliquez « Projet : … » sur une décision dans un volet.</p>
     <div id="compte"></div>
-    <div id="alertes"></div>
     <div id="infolettre"></div>
     <div id="mots"></div>
     <div id="organismes"></div>
@@ -122,7 +121,6 @@
 
   function connexion() {
     $('#compte').innerHTML = '';
-    alertes(null, false);
     boiteInfolettre($('#infolettre'), null);
     motsCles(null, false);
     organismesSuivis(null, false);
@@ -225,24 +223,42 @@
         <li><strong>L'agenda des conseils</strong> (<em class="ab-mise-en-garde">approximatif</em>) : ce qui s'en vient à chaque conseil, avec son résumé, et ce qui sera <em class="ab-mise-en-garde">probablement</em> présenté à la prochaine séance.</li>
         <li><strong>L'export en tableur ou en PDF</strong> (Excel, CSV ou PDF à imprimer) : vous choisissez un projet, un mot ou un nom et les colonnes, avec le détail de l'argent quand il est lu.</li>`;
 
-  // ---------- alertes par courriel (abonnés) ----------
-  // L'interrupteur (alertes_preferences), la date de la dernière alerte (alertes_envois) et un
-  // courriel d'essai (api/alertes-projets.js?essai=moi). Les alertes partent chaque matin.
-  async function alertes(s, abonne) {
-    const zone = $('#alertes');
-    if (!s || !abonne) { zone.innerHTML = ''; return; }
+  // ---------- l'alerte du matin (abonnés) ----------
+  // La première ligne de la boîte « Mes courriels » : l'interrupteur (alertes_preferences), la date
+  // de la dernière alerte (alertes_envois) et un courriel d'essai (api/alertes-projets.js?essai=moi).
+  // Rendue par /commun/infolettre.js avec les infolettres : tous les courriels se cochent au même endroit.
+  async function ligneAlerte(s, abonne) {
+    if (!s) return null;
+    if (!abonne) {
+      return {
+        html: `<div class="ab-courriel ab-courriel-verrou">
+          <span class="ab-courriel-cadenas" aria-hidden="true">🔒</span>
+          <span class="ab-courriel-texte">
+            <span class="ab-courriel-nom">🔔 ${tr('Mon alerte du matin', 'My morning alert')}</span><span class="ab-courriel-rythme">${tr('réservée aux abonnés', 'subscribers only')}</span>
+            <span class="ab-courriel-quoi">${tr("Chaque matin, s'il y a du nouveau dans vos projets suivis, vos mots-clés ou vos organismes — un seul courriel pour tout. <a class=\"ab-lien\" href=\"/abonnement\">Voir l'abonnement</a>", 'Every morning, if there is something new in your followed projects, keywords or organizations — one email for everything. <a class="ab-lien" href="/abonnement">See the subscription</a>')}</span>
+          </span>
+        </div>`,
+        cabler: () => {},
+      };
+    }
     const [preference, envois] = await Promise.all([
       client.from('alertes_preferences').select('actif').eq('user_id', s.user.id).maybeSingle(),
       client.from('alertes_envois').select('envoye_le').eq('user_id', s.user.id).eq('essai', false).order('envoye_le', { ascending: false }).limit(1),
     ]);
     const actif = preference.data?.actif !== false;
     const derniere = envois.data?.[0]?.envoye_le;
-    zone.innerHTML = `<section class="ab-carte ab-alertes">
-      <h2 style="margin-top:0">${tr('Alertes par courriel', 'Email alerts')}</h2>
-      <label class="ab-interrupteur"><input type="checkbox" id="alertes-actif"${actif ? ' checked' : ''}> <span>${tr('Recevoir mon alerte du matin', 'Get my morning alert')}</span></label>
-      <p class="ab-note">${tr("Chaque matin, s'il y a du nouveau dans vos projets suivis, vos mots-clés ou vos organismes — un seul courriel pour tout. Rien les jours où rien n'avance.", 'Every morning, if there is something new in your followed projects, keywords or organizations — one email for everything. Nothing on days when nothing moves. (Alert emails are in French for now.)')}${derniere ? ` ${tr('Dernière alerte :', 'Last alert:')} ${dateFr(derniere)}.` : ''}</p>
-      <div class="ab-liens"><button type="button" class="ab-lien-bouton" id="alertes-essai">${tr("M'envoyer un courriel d'essai", 'Send me a test email')}</button><button type="button" class="ab-lien-bouton ab-lien-doux" id="alertes-retirer"></button><span class="ab-note" id="alertes-etat" aria-live="polite" style="margin:0"></span></div>
-    </section>`;
+    const html = `<div class="ab-courriel">
+      <input type="checkbox" id="alertes-actif"${actif ? ' checked' : ''}>
+      <span class="ab-courriel-texte">
+        <label class="ab-courriel-nom" for="alertes-actif">🔔 ${tr('Mon alerte du matin', 'My morning alert')}</label><span class="ab-courriel-rythme">${tr("chaque matin, s'il y a du nouveau", 'every morning, if something is new')}</span>
+        <span class="ab-courriel-quoi">${tr('Vos projets suivis, vos mots-clés et vos organismes — un seul courriel pour tout. Rien les jours où rien n’avance.', 'Your followed projects, keywords and organizations — one email for everything. Nothing on days when nothing moves. (Alert emails are in French for now.)')}${derniere ? ` ${tr('Dernière alerte :', 'Last alert:')} ${dateFr(derniere)}.` : ''}</span>
+        <span class="ab-liens"><button type="button" class="ab-lien-bouton" id="alertes-essai">${tr("M'envoyer un courriel d'essai", 'Send me a test email')}</button><button type="button" class="ab-lien-bouton ab-lien-doux" id="alertes-retirer"></button><span class="ab-note" id="alertes-etat" aria-live="polite" style="margin:0"></span></span>
+      </span>
+    </div>`;
+    return { html, cabler: () => cablerAlerte(s) };
+  }
+
+  function cablerAlerte(s) {
     const etat = $('#alertes-etat');
     const caseActif = $('#alertes-actif');
     const retirer = $('#alertes-retirer');
@@ -1292,13 +1308,14 @@ ${liste.map(fiche).join('')}
     $('#compte').innerHTML = `${merciAbonnement(s, abonne)}<p class="ab-note">${tr('Connecté comme', 'Signed in as')} <strong>${echapper(s.user.email)}</strong> · ${abonne ? tr('abonnement actif — <a class="ab-lien" href="/abonnement">gérer</a>', 'active subscription — <a class="ab-lien" href="/abonnement">manage</a>') : tr('pas d\'abonnement — <a class="ab-lien" href="/abonnement">voir l\'abonnement</a>', 'no subscription — <a class="ab-lien" href="/abonnement">see the subscription</a>')} · <button type="button" class="ab-lien-bouton" id="deconnexion">${tr('Se déconnecter', 'Sign out')}</button></p>`;
     $('#deconnexion').addEventListener('click', async () => { await client.auth.signOut(); });
 
-    alertes(s, abonne).catch((e) => console.error('alertes :', e));
     motsCles(s, abonne).catch((e) => console.error('mots-clés :', e));
     organismesSuivis(s, abonne).catch((e) => console.error('organismes :', e));
     exportTableur(s, abonne).catch((e) => console.error('export :', e));
     dossiersOuverts(s, abonne).catch((e) => console.error('dossiers ouverts :', e));
     // Le compte rendu du mois : pour tous les comptes, gratuits ou abonnés.
-    boiteInfolettre($('#infolettre'), s).catch((e) => console.error('infolettre :', e));
+    ligneAlerte(s, abonne)
+      .then((premiereLigne) => boiteInfolettre($('#infolettre'), s, { premiereLigne }))
+      .catch((e) => console.error('courriels :', e));
     ecrire(s);
     const suivis = await chargerSuivis();
     pourquoi({ connecte: true, abonne });

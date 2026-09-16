@@ -609,3 +609,7 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 .ab-arr-puce { display: inline-flex; align-items: center; gap: 4px; padding: 3px 6px 3px 10px; border-radius: 999px; background: var(--accent-fond, #E6F6EC); color: var(--accent-encre, #076338); border: 1px solid var(--accent, #0B8A4B); font-size: 13px; font-weight: 600; }
 .ab-arr-retirer { border: 0; background: none; color: inherit; font-size: 16px; line-height: 1; cursor: pointer; padding: 0 2px; }
 .ab-arr-choix { display: block; margin-top: 8px; max-width: 320px; width: 100%; }
+
+.ab-courriel-verrou { opacity: .75; }
+.ab-courriel-cadenas { width: 18px; margin-top: 2px; flex: none; text-align: center; }
+.ab-courriel .ab-liens { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 6px; align-items: center; }
