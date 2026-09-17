@@ -43,7 +43,13 @@ const DELAY_MS = Number(process.env.MTL_DELAY_MS || 600);
 // donnees.montreal.ca demande « Crawl-Delay: 10 » dans son robots.txt (lu le 13 septembre
 // 2026, conservé dans data/robots.json). On le respecte : dix secondes entre deux requêtes
 // à ce portail — cinq ou six par jour, ça ne coûte rien.
-const DELAIS_PAR_HOTE = { 'donnees.montreal.ca': Number(process.env.MTL_DELAY_DONNEES_MS || 10000) };
+// Le portail documentaire est une application d'une seule page, servie par un logiciel qui
+// n'est pas fait pour encaisser des rafales : une seconde entre deux requêtes, et on ne le
+// sonde de toute façon qu'une trentaine de fois, à la main.
+const DELAIS_PAR_HOTE = {
+  'donnees.montreal.ca': Number(process.env.MTL_DELAY_DONNEES_MS || 10000),
+  'mtl.ged.montreal.ca': 1000,
+};
 const dernierAppelParHote = new Map();
 
 export async function sleep(ms) {
