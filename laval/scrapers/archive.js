@@ -8,8 +8,10 @@
 // compressées dans data/archives/, hors du chemin de chargement des pages ; le site ne
 // lit que le manifeste data/archives/index.json.
 //
-// À Québec, l'archive relisait l'année dans l'index de la Ville. Ici il n'y a pas d'index :
-// on archive ce que data/decisions.json contient au moment de la rotation — les
+// À Québec, l'archive relisait l'année dans l'index de la Ville. Ici l'index de Laval
+// (data/index-documents.json) ne liste que des DOCUMENTS, jamais les résolutions qu'ils
+// contiennent : il n'y a rien à relire pour reconstituer une année révolue. On archive donc
+// ce que data/decisions.json contient au moment de la rotation — les
 // métadonnées des résolutions, avec le lien vers chaque PDF officiel. Le texte des
 // procès-verbaux n'est jamais conservé.
 

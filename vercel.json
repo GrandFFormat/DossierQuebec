@@ -58,6 +58,15 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/laval/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "redirects": [
@@ -99,6 +108,11 @@
     {
       "source": "/longueuil",
       "destination": "/longueuil/",
+      "permanent": true
+    },
+    {
+      "source": "/laval",
+      "destination": "/laval/",
       "permanent": true
     }
   ]

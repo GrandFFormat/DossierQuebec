@@ -1,0 +1,1243 @@
+{
+ "generatedAt": "2026-09-17T20:14:31.364Z",
+ "source": "https://www.laval.ca/vie-democratique/hotel-de-ville-personnes-elues/ordre-jour-proces-verbaux-sommaire/",
+ "avertissement": "Les définitions de ce lexique sont rédigées par DossierVille — ce ne sont pas des textes de la Ville de Laval ni des définitions légales. Ce qui vient des documents officiels, ce sont les décomptes et les exemples, mesurés sur les procès-verbaux du conseil municipal et du comité exécutif de l'année.",
+ "categories": {
+  "documents": "Les documents",
+  "instances": "Qui décide",
+  "vote": "Voter et adopter",
+  "urbanisme": "Urbanisme",
+  "argent": "L'argent et les contrats"
+ },
+ "parametres": {
+  "annee": "2026",
+  "procesVerbauxMesures": 87,
+  "parInstance": {
+   "CM": 12,
+   "CE": 75
+  },
+  "instances": {
+   "CM": "Conseil municipal",
+   "CE": "Comité exécutif"
+  }
+ },
+ "nombre": 49,
+ "entrees": [
+  {
+   "terme": "Résolution",
+   "categorie": "documents",
+   "recherche": "r[ée]solu(?: [àa] l'unanimit[ée])?\\s*:",
+   "definition": "La décision elle-même, telle que l'instance l'a adoptée. Son numéro dit qui l'a prise, quand, et son rang dans l'année : CM-20260901-658, c'est le conseil municipal (CM), le 1er septembre 2026, 658e résolution du conseil cette année-là ; CE-20260909-2024, c'est le comité exécutif (CE), le 9 septembre.",
+   "ouVousLeVoyez": "Chaque fiche de la page Décisions est une résolution lue dans le procès-verbal officiel. Au conseil, la mention ADOPTÉ clôt le texte ; au comité exécutif, tout commence par « RÉSOLU À L'UNANIMITÉ : ».",
+   "occurrences": {
+    "procesVerbaux": 86,
+    "parInstance": {
+     "CM": 11,
+     "CE": 75
+    },
+    "resolutions": 2546,
+    "pourAnnee": "2026",
+    "total": 2546
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Sommaire décisionnel",
+   "aussi": "SD",
+   "categorie": "documents",
+   "recherche": "\\(SD-\\d{4}-\\d+\\)",
+   "definition": "La note que le service concerné rédige AVANT la décision, pour l'expliquer aux élus : la recommandation, le contexte, les numéros de contrat, le montant, les districts touchés, les décisions antérieures. Il porte un numéro — SD-2026-4237 — qui suit le dossier du comité exécutif au conseil.",
+   "ouVousLeVoyez": "Entre parenthèses, à la toute fin de chaque résolution : (SD-2026-3971). La Ville publie le PDF des sommaires qui vont au conseil municipal ; ceux du comité exécutif sont cités mais ne sont pas en ligne, et la fiche le dit.",
+   "occurrences": {
+    "procesVerbaux": 87,
+    "parInstance": {
+     "CM": 12,
+     "CE": 75
+    },
+    "resolutions": 2676,
+    "pourAnnee": "2026",
+    "total": 2676
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Procès-verbal",
+   "categorie": "documents",
+   "recherche": "PROC[ÈE]S-VERBAL D'UNE S[ÉE]ANCE|proc[èe]s-verbal de la s[ée]ance|APPROBATION - PROC[ÈE]S-VERBAL",
+   "definition": "Le compte rendu officiel d'une séance : qui était présent, chaque résolution avec son numéro, et — quand un membre a demandé le vote — qui a voté quoi. Il est approuvé à une séance suivante (« APPROBATION - PROCÈS-VERBAL »), puis publié.",
+   "ouVousLeVoyez": "C'est la source de toutes les décisions et de tous les votes du site. Le nom du fichier porte l'heure réelle d'ouverture (CM_PV_ORD_18h33_…), pas l'heure prévue.",
+   "occurrences": {
+    "procesVerbaux": 87,
+    "parInstance": {
+     "CM": 12,
+     "CE": 75
+    },
+    "resolutions": 85,
+    "pourAnnee": "2026",
+    "total": 85
+   },
+   "exemple": {
+    "numero": "CE-20260909-2026",
+    "objet": "Approuver les procès-verbaux des séances du comité exécutif tenues le mercredi 26 août 2026",
+    "titre": "APPROBATION - PROCÈS-VERBAL",
+    "date": "2026-09-09",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_09_09_2.0.pdf#page=1"
+   }
+  },
+  {
+   "terme": "Ordre du jour",
+   "categorie": "documents",
+   "recherche": "ordre du jour",
+   "definition": "La liste des points qu'une séance doit traiter, publiée avant la séance. Celui du conseil municipal écrit chaque point en langage courant, avec le numéro de sommaire, le certificat de trésorerie, les districts touchés et le montant ; ses chapitres reviennent toujours dans le même ordre : approbation des procès-verbaux, présentation des recommandations du comité exécutif, étude et adoption des règlements, avis de motion, dépôt de documents administratifs, discussions sur les propositions des membres du conseil.",
+   "ouVousLeVoyez": "Quand l'ordre du jour existe, la fiche du conseil reprend son texte en casse normale, avec les districts et le montant. Au comité exécutif, l'ordre du jour ne donne pas l'objet : la fiche n'a que le titre du procès-verbal.",
+   "occurrences": {
+    "procesVerbaux": 63,
+    "parInstance": {
+     "CM": 12,
+     "CE": 51
+    },
+    "resolutions": 163,
+    "pourAnnee": "2026",
+    "total": 163
+   },
+   "exemple": {
+    "numero": "CM-20260901-645",
+    "objet": "Adoption - ordre du jour de la séance",
+    "titre": "ADOPTION - ORDRE DU JOUR DE LA SÉANCE",
+    "date": "2026-09-01",
+    "type": "Résolution",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=1"
+   }
+  },
+  {
+   "terme": "Dépôt",
+   "categorie": "documents",
+   "recherche": "d[ée]pose (?:un|une|le|la|les|des) |D[ÉE]P[ÔO]T - ",
+   "definition": "Un document est remis officiellement à l'instance : une pétition, un rapport, un projet de règlement, un certificat de registre. Rien n'est mis aux voix ; le dépôt le rend public et le verse aux archives.",
+   "ouVousLeVoyez": "« Le conseiller Nicholas Borne dépose une pétition des résidents de la 7e Avenue… », « M. Stéphane Boyer, maire, dépose le rapport annuel de la vérificatrice générale ». Le titre commence par « DÉPÔT - » et la fiche porte le type « Dépôt », sans résultat de vote.",
+   "occurrences": {
+    "procesVerbaux": 63,
+    "parInstance": {
+     "CM": 11,
+     "CE": 52
+    },
+    "resolutions": 63,
+    "pourAnnee": "2026",
+    "total": 63
+   },
+   "exemple": {
+    "numero": "CE-20260909-2051",
+    "objet": "Recommander au conseil d'approuver le dépôt d'une demande de reconnaissances du bois de l'île Paton à titre d'Autres mesures de conservation efficaces auprès du ministère de l'environnement, de la lutte contre les changements climatiques, de la faune et des parcs",
+    "titre": "RECOMMANDATION AU CONSEIL - AUTORISATION - DÉPÔT - MINISTÈRE DE L'ENVIRONNEMENT, DE LA LUTTE CONTRE LES CHANGEMENTS CLIMATIQUES, DE LA FAUNE ET DES PARCS",
+    "date": "2026-09-09",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_09_09_2.0.pdf#page=11"
+   }
+  },
+  {
+   "terme": "Avis de motion",
+   "categorie": "documents",
+   "recherche": "avis de motion",
+   "definition": "L'annonce qu'un règlement sera adopté à une séance suivante. Ça ne décide rien : ça prévient. C'est une étape obligatoire, accompagnée du dépôt du projet de règlement à la même séance.",
+   "ouVousLeVoyez": "« Le conseiller Pierre Brabant donne un avis de motion qu'à une séance subséquente de ce conseil, il sera présenté pour lecture et adoption un règlement portant le numéro L-13280… » Le même numéro de sommaire revient au dépôt du projet, à l'avis de motion, puis à l'adoption.",
+   "occurrences": {
+    "procesVerbaux": 28,
+    "parInstance": {
+     "CM": 9,
+     "CE": 19
+    },
+    "resolutions": 73,
+    "pourAnnee": "2026",
+    "total": 73
+   },
+   "exemple": {
+    "numero": "CM-20260901-691",
+    "objet": "Règlement numéro L-13280 modifiant le Règlement L-1236 fixant l'étendue en front pour fins d'imposition des lots situés à un carrefour ou qui ne sont pas rectangulaires",
+    "titre": "AVIS DE MOTION - RÈGLEMENT L-13280",
+    "date": "2026-09-01",
+    "type": "Avis de motion",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=25"
+   }
+  },
+  {
+   "terme": "Règlement",
+   "categorie": "documents",
+   "recherche": "R[èe]glement (?:num[ée]ro )?(?:L-\\d+|CDU-1)",
+   "definition": "La forme la plus contraignante d'une décision municipale : une norme générale qui s'applique à tous. Son adoption suit des étapes obligatoires — dépôt du projet, avis de motion, adoption — et, pour un règlement d'emprunt, l'ouverture d'un registre.",
+   "ouVousLeVoyez": "Les règlements de Laval sont numérotés L-13281 ; les modifications au Code de l'urbanisme, CDU-1-20. Avant l'adoption, « la greffière mentionne les éléments prévus à l'article 356 de la Loi sur les cités et villes » : l'objet du règlement, sa portée, son coût et son mode de financement.",
+   "occurrences": {
+    "procesVerbaux": 60,
+    "parInstance": {
+     "CM": 10,
+     "CE": 50
+    },
+    "resolutions": 674,
+    "pourAnnee": "2026",
+    "total": 674
+   },
+   "exemple": {
+    "numero": "CE-20260909-2048",
+    "objet": "Dépenses - règlement L-13248-F - contrat DOS-3485",
+    "titre": "DÉPENSES - RÈGLEMENT L-13248-F - CONTRAT DOS-3485",
+    "date": "2026-09-09",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_09_09_2.0.pdf#page=10"
+   }
+  },
+  {
+   "terme": "Certificat de trésorerie",
+   "aussi": "CT",
+   "categorie": "documents",
+   "recherche": "\\(CT:\\s?\\d+\\)",
+   "definition": "Le numéro du certificat par lequel la trésorerie de la Ville atteste que les fonds d'une dépense sont disponibles. Il accompagne les résolutions qui engagent de l'argent — un contrat, des honoraires, des crédits — et pas les autres.",
+   "ouVousLeVoyez": "Entre parenthèses, juste avant le numéro de sommaire, dans les procès-verbaux du comité exécutif : (CT:1908852) (SD-2026-3971). À l'ordre du jour du conseil, la mention « CT : 1876662 » sous le point. La fiche l'affiche quand il existe.",
+   "occurrences": {
+    "procesVerbaux": 59,
+    "parInstance": {
+     "CM": 0,
+     "CE": 59
+    },
+    "resolutions": 780,
+    "pourAnnee": "2026",
+    "total": 780
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Conseil municipal",
+   "categorie": "instances",
+   "recherche": "S[ÉE]ANCE (?:ORDINAIRE|EXTRAORDINAIRE) DU CONSEIL MUNICIPAL",
+   "definition": "Les 23 élus de la Ville de Laval : le maire et 22 conseillères et conseillers, un par district. Il adopte les règlements, le budget et les contrats que lui recommande le comité exécutif, et siège en séance ordinaire une fois par mois, un mardi soir à 18 h 30, à l'hôtel de ville.",
+   "ouVousLeVoyez": "Ses séances sont présidées par une membre du conseil désignée à cette fin, pas par le maire : « siégeant sous la présidence de Mme Cecilia Macedo ». Elles s'ouvrent sur l'adoption de l'ordre du jour et comprennent une période de questions du public.",
+   "occurrences": {
+    "procesVerbaux": 11,
+    "parInstance": {
+     "CM": 10,
+     "CE": 1
+    },
+    "resolutions": 28,
+    "pourAnnee": "2026",
+    "total": 28
+   },
+   "exemple": {
+    "numero": "CM-20260811-555",
+    "objet": "Procès-verbal de la séance ordinaire du conseil municipal tenue le mardi 7 juillet 2026 à 18 h 33",
+    "titre": "APPROBATION - PROCÈS-VERBAL",
+    "date": "2026-08-11",
+    "type": "Résolution",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_08_11_2.0.pdf#page=1"
+   }
+  },
+  {
+   "terme": "Comité exécutif",
+   "categorie": "instances",
+   "recherche": "comit[ée] ex[ée]cutif",
+   "definition": "Le maire, qui le préside, et quatre membres du conseil (cinq membres en tout en 2026) : ils prennent les décisions courantes que les règlements leur délèguent (contrats, dérogations mineures, embauches, subventions) et préparent tout ce qui va au conseil. Il siège chaque mercredi matin, en séance publique puis à huis clos, et publie les deux procès-verbaux.",
+   "ouVousLeVoyez": "Trois fiches sur quatre en 2026 viennent de lui. Son procès-verbal ne nomme ni proposeur ni appuyeur : chaque résolution commence par « RÉSOLU À L'UNANIMITÉ : ».",
+   "occurrences": {
+    "procesVerbaux": 87,
+    "parInstance": {
+     "CM": 12,
+     "CE": 75
+    },
+    "resolutions": 858,
+    "pourAnnee": "2026",
+    "total": 858
+   },
+   "exemple": {
+    "numero": "CE-20260909-2026",
+    "objet": "Approuver les procès-verbaux des séances du comité exécutif tenues le mercredi 26 août 2026",
+    "titre": "APPROBATION - PROCÈS-VERBAL",
+    "date": "2026-09-09",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_09_09_2.0.pdf#page=1"
+   }
+  },
+  {
+   "terme": "Séance publique et séance à huis clos",
+   "aussi": "huis clos",
+   "categorie": "instances",
+   "recherche": "huis clos",
+   "definition": "Le comité exécutif tient deux séances à la suite le même matin : une séance publique, à 9 h, puis une séance à huis clos, quelques minutes plus tard, sans public. Les deux ont un procès-verbal publié ; celui du huis clos est plus court et porte notamment les dossiers de personnel (terminaisons d'emploi, congédiements) et certaines dépenses.",
+   "ouVousLeVoyez": "« PROCÈS-VERBAL D'UNE SÉANCE À HUIS CLOS DU COMITÉ EXÉCUTIF … tenue le mercredi 9 septembre 2026 à 9 h 11 ». Sur le site, le sous-type de séance dit « Publique » ou « Huis clos ».",
+   "occurrences": {
+    "procesVerbaux": 65,
+    "parInstance": {
+     "CM": 0,
+     "CE": 65
+    },
+    "resolutions": 36,
+    "pourAnnee": "2026",
+    "total": 36
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Maire et président du comité exécutif",
+   "aussi": "vice-président du comité exécutif",
+   "categorie": "instances",
+   "recherche": "maire et pr[ée]sident du comit[ée] ex[ée]cutif",
+   "definition": "À Laval, le maire préside le comité exécutif ; un vice-président le remplace au besoin. C'est le maire (ou le vice-président) et la greffière qui signent les actes au nom de la Ville une fois la décision prise.",
+   "ouVousLeVoyez": "« M. Stéphane Boyer, maire et président du comité exécutif », « Ray Khalil, vice-président du comité exécutif », en tête de chaque procès-verbal ; et la formule « d'autoriser le maire et président du comité exécutif ou le vice-président du comité exécutif et la greffière ou la greffière adjointe à signer… ».",
+   "occurrences": {
+    "procesVerbaux": 78,
+    "parInstance": {
+     "CM": 12,
+     "CE": 66
+    },
+    "resolutions": 296,
+    "pourAnnee": "2026",
+    "total": 296
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Greffière",
+   "aussi": "greffier · greffière adjointe",
+   "categorie": "instances",
+   "recherche": "greffi[èe]re",
+   "definition": "L'officière qui garde les documents officiels de la Ville, rédige les procès-verbaux, tient les registres et signe les actes avec le maire. Ce n'est pas une élue.",
+   "ouVousLeVoyez": "« Me Marie-Christine Lefebvre, greffière », dans la liste des présences de chaque séance ; et « la greffière ou la greffière adjointe à signer pour et au nom de la Ville ».",
+   "occurrences": {
+    "procesVerbaux": 82,
+    "parInstance": {
+     "CM": 12,
+     "CE": 70
+    },
+    "resolutions": 438,
+    "pourAnnee": "2026",
+    "total": 438
+   },
+   "exemple": {
+    "numero": "CE-20260909-2029",
+    "objet": "Approuver la correction des lots 1 068 596, 1 068 662, 1 642 092, 1 642 100, 4 202 501, 4 202 502, 4 202 504, 4 202 509, 4 549 605 à 4 549 607 et 5 392 661 du cadastre du Québec et autoriser la greffière ou la greffière adjointe à signer pour et au nom de la Ville tous les documents requis aux fins des présentes",
+    "titre": "CORRECTION CADASTRALE - LOTS 1 068 596, 1 068 662, 1",
+    "date": "2026-09-09",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_09_09_2.0.pdf#page=2"
+   }
+  },
+  {
+   "terme": "Recommandation au conseil",
+   "categorie": "instances",
+   "recherche": "recommander au conseil|recommandation au conseil|sur recommandation du comit[ée] ex[ée]cutif",
+   "definition": "Ce qui dépasse les pouvoirs du comité exécutif passe deux fois : le comité recommande, le conseil décide. Le même dossier a donc deux résolutions, à deux dates, avec le même numéro de sommaire.",
+   "ouVousLeVoyez": "Au comité exécutif : « RECOMMANDATION AU CONSEIL - ATTRIBUTION - CONTRAT DOS-3623 … de recommander au conseil d'attribuer… ». Au conseil, la semaine suivante : « Sur recommandation du comité exécutif, IL EST PROPOSÉ PAR… ».",
+   "occurrences": {
+    "procesVerbaux": 71,
+    "parInstance": {
+     "CM": 10,
+     "CE": 61
+    },
+    "resolutions": 990,
+    "pourAnnee": "2026",
+    "total": 990
+   },
+   "exemple": {
+    "numero": "CE-20260909-2028",
+    "objet": "Recommander au conseil d'attribuer le contrat DOS-3623 pour des services d'hydro-excavation et de disposition des matières résiduelles",
+    "titre": "RECOMMANDATION AU CONSEIL - ATTRIBUTION - CONTRAT DOS-3623",
+    "date": "2026-09-09",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_09_09_2.0.pdf#page=2"
+   }
+  },
+  {
+   "terme": "Comité consultatif d'urbanisme",
+   "aussi": "CCU · comités consultatifs",
+   "categorie": "instances",
+   "recherche": "comit[ée] consultatif d'urbanisme|CCU-\\d{4}-\\d+",
+   "definition": "Un comité de citoyens et d'élus qui étudie les demandes de dérogation mineure, de PIIA et d'usage conditionnel, puis recommande. C'est le comité exécutif qui décide, en citant la recommandation. D'autres comités consultatifs donnent leur avis dans leur domaine : le Comité consultatif agricole (CCA), le Comité sur le patrimoine et la toponymie (CPT), le Comité consultatif en environnement (CCE).",
+   "ouVousLeVoyez": "« …et ce, conformément à la résolution du Comité consultatif d'urbanisme numéro CCU-2026-272 ». Les nominations de leurs membres passent au conseil.",
+   "occurrences": {
+    "procesVerbaux": 35,
+    "parInstance": {
+     "CM": 3,
+     "CE": 32
+    },
+    "resolutions": 306,
+    "pourAnnee": "2026",
+    "total": 306
+   },
+   "exemple": {
+    "numero": "CM-20260707-506",
+    "objet": "Nommer trois (3) conseillers municipaux afin de siéger au Comité consultatif d'urbanisme de la Ville de Laval",
+    "titre": "NOMINATIONS - COMITÉ CONSULTATIF D'URBANISME DE LA VILLE DE LAVAL",
+    "date": "2026-07-07",
+    "type": "Résolution",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h33_2026_07_07_2.0.pdf#page=17"
+   }
+  },
+  {
+   "terme": "« IL EST PROPOSÉ PAR … APPUYÉ PAR … »",
+   "aussi": "proposeur · appuyeur",
+   "categorie": "vote",
+   "recherche": "IL EST PROPOS[ÉE] PAR",
+   "definition": "Au conseil municipal, chaque résolution est proposée par un membre et appuyée par un autre avant d'être mise aux voix. Le procès-verbal nomme les deux.",
+   "ouVousLeVoyez": "« IL EST PROPOSÉ PAR : Pierre Brabant APPUYÉ PAR : Yannick Langlois et résolu à l'unanimité : ». La fiche porte les deux noms. Le comité exécutif ne les écrit pas.",
+   "occurrences": {
+    "procesVerbaux": 11,
+    "parInstance": {
+     "CM": 11,
+     "CE": 0
+    },
+    "resolutions": 505,
+    "pourAnnee": "2026",
+    "total": 505
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Résolu à l'unanimité",
+   "categorie": "vote",
+   "recherche": "r[ée]solu [àa] l'unanimit[ée]",
+   "definition": "Personne n'a demandé le vote ni fait inscrire sa dissidence. Quand le vote a été demandé, la formule devient « et résolu : », suivie du décompte.",
+   "ouVousLeVoyez": "La formule de presque toutes les décisions — et de toutes celles du comité exécutif en 2026, sans exception.",
+   "occurrences": {
+    "procesVerbaux": 86,
+    "parInstance": {
+     "CM": 11,
+     "CE": 75
+    },
+    "resolutions": 2512,
+    "pourAnnee": "2026",
+    "total": 2512
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Demander le vote",
+   "aussi": "vote nominal · décompte",
+   "categorie": "vote",
+   "recherche": "demande le vote",
+   "definition": "Un membre demande que la proposition soit mise aux voix. Le procès-verbal donne alors le décompte et nomme chacun : qui se prononce en faveur, qui se prononce contre. Sans cette demande, personne n'est nommé.",
+   "ouVousLeVoyez": "« La conseillère Louise Lortie demande le vote sur la proposition, laquelle est adoptée par un compte de 17 en faveur et de 4 contre : M. Stéphane Boyer, maire, et les conseillers …, se prononcent en faveur de la proposition ; les conseillers … se prononcent contre la proposition. » C'est la seule source de la page Votes ; le décompte imprimé sert à vérifier les noms.",
+   "occurrences": {
+    "procesVerbaux": 10,
+    "parInstance": {
+     "CM": 10,
+     "CE": 0
+    },
+    "resolutions": 45,
+    "pourAnnee": "2026",
+    "total": 45
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Dissidence",
+   "categorie": "vote",
+   "recherche": "dissidence",
+   "definition": "Un ou plusieurs élus font inscrire qu'ils s'opposent, sans demander le vote. La résolution est adoptée, on sait qui s'y est opposé, mais personne n'est nommé pour le pour.",
+   "ouVousLeVoyez": "« Les conseillers Louise Lortie et Martin Vaillancourt demandent que le procès-verbal fasse mention de leur dissidence. ADOPTÉ »",
+   "occurrences": {
+    "procesVerbaux": 3,
+    "parInstance": {
+     "CM": 3,
+     "CE": 0
+    },
+    "resolutions": 5,
+    "pourAnnee": "2026",
+    "total": 5
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Amendement",
+   "aussi": "proposition amendée",
+   "categorie": "vote",
+   "recherche": "propose un amendement|proposition amend[ée]e|vote sur l'amendement",
+   "definition": "Une modification proposée en séance au texte soumis. L'amendement se vote d'abord ; la proposition, amendée ou non, ensuite. Une même résolution peut donc porter plusieurs votes.",
+   "ouVousLeVoyez": "« La conseillère Louise Lortie propose un amendement afin que le règlement soit amendé de la façon suivante… » Ne pas confondre avec le titre « RÉSOLUTION AMENDÉE », qui désigne une résolution corrigeant une résolution antérieure.",
+   "occurrences": {
+    "procesVerbaux": 7,
+    "parInstance": {
+     "CM": 7,
+     "CE": 0
+    },
+    "resolutions": 8,
+    "pourAnnee": "2026",
+    "total": 8
+   },
+   "exemple": {
+    "numero": "CM-20260901-701",
+    "objet": "Avis de proposition déposé par le conseiller David De Cotis afin que le comité exécutif mandate la Direction générale afin de communiquer officiellement avec les exploitants des réseaux ferroviaires de marchandises traversant le territoire de Laval, soit CPKC et Chemins de fer Québec-Gatineau (CFQG), afin qu'ils procèdent, dans les meilleurs délais, à une inspection complète de leurs infrastructures ferroviaires situées sur le territoire lavallois et susceptibles d'affecter l'intégrité du réseau, et qu'ils transmettent à la Ville de Laval, dans les plus brefs délais, un rapport précisant les anomalies constatées, les correctifs apportés ainsi que les travaux d'entretien ou de réhabilitation prévus, le cas échéant",
+    "titre": "PROPOSITION AMENDÉE ACCEPTÉE - DEMANDE - INSPECTION - RÉSEAUX FÉRROVIAIRES - RAPPORT À LA VILLE",
+    "date": "2026-09-01",
+    "type": "Résolution",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=29"
+   }
+  },
+  {
+   "terme": "Avis de proposition",
+   "categorie": "vote",
+   "recherche": "avis de proposition",
+   "definition": "Le moyen, pour un membre du conseil, de mettre lui-même un sujet à l'ordre du jour : il dépose un avis de proposition, et la proposition est discutée à la séance suivante, sous le chapitre « Discussions sur les propositions déposées par les membres du conseil ». Le conseil peut aussi accepter d'en discuter immédiatement.",
+   "ouVousLeVoyez": "« Le conseiller David De Cotis dépose un avis de proposition afin que le comité exécutif mandate la Direction générale… » puis, un mois plus tard, « PROPOSITION ACCEPTÉE », « PROPOSITION REJETÉE » ou « PROPOSITION AMENDÉE ACCEPTÉE ». La fiche porte le type « Avis de proposition ».",
+   "occurrences": {
+    "procesVerbaux": 9,
+    "parInstance": {
+     "CM": 9,
+     "CE": 0
+    },
+    "resolutions": 40,
+    "pourAnnee": "2026",
+    "total": 40
+   },
+   "exemple": {
+    "numero": "CM-20260901-694",
+    "objet": "Avis de proposition - abrogation - article 114.1.1 - loi sur les cités et villes",
+    "titre": "AVIS DE PROPOSITION - ABROGATION - ARTICLE 114.1.1 - LOI SUR LES CITÉS ET VILLES",
+    "date": "2026-09-01",
+    "type": "Avis de proposition",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=25"
+   }
+  },
+  {
+   "terme": "Prendre acte",
+   "aussi": "prise d'acte",
+   "categorie": "vote",
+   "recherche": "prendre acte",
+   "definition": "L'instance constate officiellement qu'une chose lui a été présentée. Ça ne l'approuve pas : ça l'enregistre.",
+   "ouVousLeVoyez": "« de prendre acte du rapport mensuel déposé en vertu de l'article 45 du Règlement L-CE-1 », « de prendre acte de la liste des contrats pour le mois de mars 2026 ». La fiche porte le type « Prise d'acte » quand c'est tout ce que dit la résolution.",
+   "occurrences": {
+    "procesVerbaux": 68,
+    "parInstance": {
+     "CM": 9,
+     "CE": 59
+    },
+    "resolutions": 315,
+    "pourAnnee": "2026",
+    "total": 315
+   },
+   "exemple": {
+    "numero": "CE-20260826-1934",
+    "objet": "Prendre acte du rapport mensuel déposé en vertu de l'article 45 du Règlement L-CE-1 pour le mois de juillet 2026, pour l'exercice d'un pouvoir délégué par des employés de la Ville",
+    "titre": "DÉPÔT - RAPPORT MENSUEL - RÈGLEMENT L-CE-1 - JUILLET 2026",
+    "date": "2026-08-26",
+    "type": "Dépôt",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_08_26_2.0.pdf#page=1"
+   }
+  },
+  {
+   "terme": "Certificat de registre",
+   "aussi": "personnes habiles à voter · approbation référendaire",
+   "categorie": "vote",
+   "recherche": "certificat concernant le registre",
+   "definition": "Un règlement d'emprunt (et certains règlements d'urbanisme) doit être approuvé par les personnes habiles à voter : un registre est ouvert quelques jours au greffe, où qui s'y oppose vient signer. Si le nombre de signatures requis est atteint, il faut tenir un référendum ; sinon le règlement est réputé approuvé. La greffière dresse le certificat qui donne le résultat, et le conseil en prend acte.",
+   "ouVousLeVoyez": "« CERTIFICAT DE REGISTRE - RÈGLEMENT L-13274 : de prendre acte du certificat concernant le registre tenu les 15, 16, 17, 18 et 19 juin 2026 pour l'enregistrement des personnes habiles à voter sur le Règlement numéro L-13274 ».",
+   "occurrences": {
+    "procesVerbaux": 6,
+    "parInstance": {
+     "CM": 3,
+     "CE": 3
+    },
+    "resolutions": 24,
+    "pourAnnee": "2026",
+    "total": 24
+   },
+   "exemple": {
+    "numero": "CM-20260811-626",
+    "objet": "Certificat concernant le registre tenu du 15 au 19 juin 2026 pour l'enregistrement des personnes habiles à voter sur le Règlement numéro L-13274",
+    "titre": "CERTIFICAT DE REGISTRE - RÈGLEMENT L-13274",
+    "date": "2026-08-11",
+    "type": "Prise d’acte",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_08_11_2.0.pdf#page=37"
+   }
+  },
+  {
+   "terme": "Ratification",
+   "categorie": "vote",
+   "recherche": "RATIFICATION - |de ratifier",
+   "definition": "L'instance approuve après coup un geste déjà posé — une entente signée, une activité tenue — pour lui donner sa valeur officielle.",
+   "ouVousLeVoyez": "« RATIFICATION - ENTENTE - MINISTRE DE LA SÉCURITÉ PUBLIQUE », « RATIFICATION - PRÊT À USAGE - … », au comité exécutif.",
+   "occurrences": {
+    "procesVerbaux": 21,
+    "parInstance": {
+     "CM": 3,
+     "CE": 18
+    },
+    "resolutions": 29,
+    "pourAnnee": "2026",
+    "total": 29
+   },
+   "exemple": {
+    "numero": "CM-20260901-659",
+    "objet": "Ratifier l'avenant de modification au bail entre 3370-3418 Industriel Boulevard Holdings ULC et la Ville de Laval relativement à l'utilisation temporaire d'un espace d'entreposage extérieur situé au 3370, boulevard Industriel, pour une période de quatre (4) mois",
+    "titre": "RATIFICATION - AVENANT DE MODIFICATION AU BAIL EN FAVEUR DE LA VILLE",
+    "date": "2026-09-01",
+    "type": "Résolution",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=11"
+   }
+  },
+  {
+   "terme": "Prolongation de la séance",
+   "categorie": "vote",
+   "recherche": "prolongation de la s[ée]ance|ajourn[ée]e automatiquement",
+   "definition": "Les règles de régie du conseil arrêtent la séance à 23 h. Pour continuer, il faut un vote des deux tiers des membres présents, par blocs de 30 minutes ; sinon la séance est ajournée automatiquement.",
+   "ouVousLeVoyez": "« À 23 h, la présidente Cecilia Macedo constate l'heure et précise qu'à moins que le conseil, par un vote du 2/3 des membres présents, adopte une résolution afin de prolonger la séance du conseil, celle-ci est ajournée automatiquement à 23 h, et ce, conformément à l'article 7 du Règlement numéro L-12968. »",
+   "occurrences": {
+    "procesVerbaux": 7,
+    "parInstance": {
+     "CM": 7,
+     "CE": 0
+    },
+    "resolutions": 13,
+    "pourAnnee": "2026",
+    "total": 13
+   },
+   "exemple": {
+    "numero": "CM-20260901-697",
+    "objet": "Prolongation de la séance",
+    "titre": "PROLONGATION DE LA SÉANCE",
+    "date": "2026-09-01",
+    "type": "Résolution",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=26"
+   }
+  },
+  {
+   "terme": "Période de questions du public",
+   "categorie": "vote",
+   "recherche": "P[ÉE]RIODE DE QUESTIONS DU PUBLIC",
+   "definition": "Le moment de la séance du conseil où les citoyens prennent la parole. Le procès-verbal note le nom de chaque personne et le sujet en quelques mots ; il ne rapporte ni la question ni la réponse.",
+   "ouVousLeVoyez": "« PÉRIODE DE QUESTIONS DU PUBLIC — Christian Veilleux : Parc Pie X – entretien – passages urbains – éclairage ». Le site ne reprend pas ces noms.",
+   "occurrences": {
+    "procesVerbaux": 9,
+    "parInstance": {
+     "CM": 9,
+     "CE": 0
+    },
+    "resolutions": 9,
+    "pourAnnee": "2026",
+    "total": 9
+   },
+   "exemple": null
+  },
+  {
+   "terme": "Code de l'urbanisme",
+   "aussi": "CDU-1",
+   "categorie": "urbanisme",
+   "recherche": "CDU-1",
+   "definition": "Le règlement CDU-1 réunit en un seul texte les règles d'urbanisme de Laval : zonage, lotissement, construction, plans d'implantation, usages conditionnels, frais de parcs. Ses modifications sont numérotées CDU-1-18, CDU-1-20… et suivent la procédure des règlements de zonage : premier projet, assemblée publique de consultation, second projet, adoption.",
+   "ouVousLeVoyez": "« Règlement numéro CDU-1-20 modifiant le Règlement CDU-1 concernant le Code de l'urbanisme de la Ville de Laval pour un territoire situé en bordure du boulevard René-Laennec ». Les dérogations mineures, les PIIA et les exemptions de stationnement s'y réfèrent.",
+   "occurrences": {
+    "procesVerbaux": 39,
+    "parInstance": {
+     "CM": 5,
+     "CE": 34
+    },
+    "resolutions": 253,
+    "pourAnnee": "2026",
+    "total": 253
+   },
+   "exemple": {
+    "numero": "CM-20260901-653",
+    "objet": "Projet de Règlement numéro CDU-1-20 modifiant le Règlement CDU-1 concernant le Code de l'urbanisme de la Ville de Laval pour un territoire situé en bordure du boulevard René-Laennec",
+    "titre": "ADOPTION - PROJET DE RÈGLEMENT CDU-1-20",
+    "date": "2026-09-01",
+    "type": "Résolution",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=8"
+   }
+  },
+  {
+   "terme": "Dérogation mineure",
+   "categorie": "urbanisme",
+   "recherche": "d[ée]rogation mineure",
+   "definition": "Une permission d'écarter légèrement une règle du Code de l'urbanisme pour un terrain précis — une marge, une hauteur, un nombre de cases — sans changer le règlement pour tout le monde. Le comité exécutif l'accepte ou la refuse sur recommandation du comité consultatif d'urbanisme.",
+   "ouVousLeVoyez": "« DEMANDE DE DÉROGATION MINEURE ACCEPTÉE - … : d'accepter la demande de dérogation mineure au Règlement numéro CDU-1 concernant le Code de l'urbanisme DM-2026-50 de …, propriétaire, à l'effet d'autoriser, pour l'immeuble sur le lot … : une hauteur … au lieu de … ».",
+   "occurrences": {
+    "procesVerbaux": 21,
+    "parInstance": {
+     "CM": 0,
+     "CE": 21
+    },
+    "resolutions": 128,
+    "pourAnnee": "2026",
+    "total": 128
+   },
+   "exemple": {
+    "numero": "CE-20260909-2031",
+    "objet": "Accepter la demande de dérogation mineure DM-2026-101 située au 800, boulevard des Laurentides",
+    "titre": "DEMANDE DE DÉROGATION MINEURE ACCEPTÉE",
+    "date": "2026-09-09",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_09_09_2.0.pdf#page=3"
+   }
+  },
+  {
+   "terme": "Plan d'implantation et d'intégration architecturale",
+   "aussi": "PIIA",
+   "categorie": "urbanisme",
+   "recherche": "PIIA|plan d'implantation et d'int[ée]gration architecturale",
+   "definition": "Dans certains secteurs, un projet de construction ou de transformation doit d'abord faire approuver son apparence et son implantation — volumes, matériaux, façades — au-delà des règles chiffrées du zonage. C'est le comité exécutif qui approuve, sur recommandation du comité consultatif d'urbanisme.",
+   "ouVousLeVoyez": "« DEMANDE D'APPROBATION D'UN PIIA ACCEPTÉE : d'accepter la demande d'approbation d'un plan d'implantation et d'intégration architecturale IA-2026-0117, à l'effet de permettre la construction… ».",
+   "occurrences": {
+    "procesVerbaux": 25,
+    "parInstance": {
+     "CM": 1,
+     "CE": 24
+    },
+    "resolutions": 131,
+    "pourAnnee": "2026",
+    "total": 131
+   },
+   "exemple": {
+    "numero": "CE-20260909-2032",
+    "objet": "Accepter la demande d'un plan d'implantation et d'intégration architecturale IA-2026-0117 située sur le Boulevard des Laurentides",
+    "titre": "DEMANDE D'APPROBATION D'UN PIIA ACCEPTÉE",
+    "date": "2026-09-09",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_09_09_2.0.pdf#page=3"
+   }
+  },
+  {
+   "terme": "Projet particulier",
+   "aussi": "PPCMOI",
+   "categorie": "urbanisme",
+   "recherche": "PPCMOI|projet particulier de construction",
+   "definition": "Un mécanisme qui autorise un projet précis qui déroge au zonage, à des conditions précises, sans modifier le règlement pour tout le secteur. Le nom au long : projet particulier de construction, de modification ou d'occupation d'un immeuble. Il s'adopte par résolution, avec consultation publique.",
+   "ouVousLeVoyez": "« ADOPTION - PROJET DE RÉSOLUTION AUTORISANT UN PPCMOI - LOT 1 374 173 », au comité exécutif, avec ses attendus.",
+   "occurrences": {
+    "procesVerbaux": 18,
+    "parInstance": {
+     "CM": 0,
+     "CE": 18
+    },
+    "resolutions": 63,
+    "pourAnnee": "2026",
+    "total": 63
+   },
+   "exemple": {
+    "numero": "CE-20260819-1894",
+    "objet": "Adopter un projet de résolution autorisant un projet particulier de construction, de modification ou d'occupation d'un immeuble (PPCMOI) qui déroge au Règlement numéro CDU-1 concernant le Code de l'urbanisme de la Ville de Laval afin de permettre la construction d'une habitation de 4 logements sur le lot 1 374 173 du cadastre du Québec situé à l'intersection du boulevard Sainte-Rose et de la 43e Avenue",
+    "titre": "ADOPTION - PROJET DE RÉSOLUTION AUTORISANT UN PPCMOI - LOT 1 374 173",
+    "date": "2026-08-19",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h03_2026_08_19_2.0.pdf#page=4"
+   }
+  },
+  {
+   "terme": "Exemption de cases de stationnement",
+   "categorie": "urbanisme",
+   "recherche": "exemption de (?:cases|l.obligation)",
+   "definition": "Le Code de l'urbanisme exige un nombre de cases de stationnement par bâtiment. Un propriétaire qui ne peut pas les fournir demande d'en être exempté et verse une compensation à la Ville. Le comité exécutif accepte sur recommandation du comité consultatif d'urbanisme.",
+   "ouVousLeVoyez": "« DEMANDE D'EXEMPTION DE CASES DE STATIONNEMENT ACCEPTÉE : d'accepter la demande d'exemption de l'obligation de fournir et de maintenir les cases de stationnement requises au Règlement numéro CDU-1 … en retour d'une compensation d'un montant de 559 $ ».",
+   "occurrences": {
+    "procesVerbaux": 16,
+    "parInstance": {
+     "CM": 0,
+     "CE": 16
+    },
+    "resolutions": 38,
+    "pourAnnee": "2026",
+    "total": 38
+   },
+   "exemple": {
+    "numero": "CE-20260909-2033",
+    "objet": "Accepter la demande d'exemption de cases de stationnement EX-2026-38 située sur le boulevard des Laurentides",
+    "titre": "DEMANDE D'EXEMPTION DE CASES DE STATIONNEMENT ACCEPTÉE",
+    "date": "2026-09-09",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_09_09_2.0.pdf#page=4"
+   }
+  },
+  {
+   "terme": "Frais de parcs",
+   "aussi": "fonds de parcs et terrains de jeux",
+   "categorie": "urbanisme",
+   "recherche": "frais de parcs?",
+   "definition": "Quand un terrain est loti ou qu'un permis de construction est délivré, le propriétaire doit céder une partie du terrain à la Ville pour des parcs, ou payer l'équivalent. L'argent va au fonds de parcs et terrains de jeux, qui finance ensuite des aménagements.",
+   "ouVousLeVoyez": "« APPROBATION - PAIEMENT - FRAIS DE PARCS - LOT 1 627 752 - PN-2026-0120 : d'approuver, conformément au chapitre 7 du titre 10 du Code de l'urbanisme, le paiement des frais de parcs par le versement de la somme de 83 840 $ ». Et de l'autre côté : « Dépenses - fonds de parcs et terrains de jeux - contrat DOS-3700 ».",
+   "occurrences": {
+    "procesVerbaux": 25,
+    "parInstance": {
+     "CM": 0,
+     "CE": 25
+    },
+    "resolutions": 53,
+    "pourAnnee": "2026",
+    "total": 53
+   },
+   "exemple": {
+    "numero": "CE-20260819-1892",
+    "objet": "Approuver la somme à être versée en guise de contribution pour fins de parcs relativement à la demande de permis de construction PN-2026-0085",
+    "titre": "APPROBATION - PAIEMENT - FRAIS DE PARCS - LOTS 6 727 322 ET 6 727 323 - PN-2026-0085",
+    "date": "2026-08-19",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h03_2026_08_19_2.0.pdf#page=3"
+   }
+  },
+  {
+   "terme": "Lot du cadastre du Québec",
+   "aussi": "lot projeté · partie de lot (P.)",
+   "categorie": "urbanisme",
+   "recherche": "du cadastre du Qu[ée]bec",
+   "definition": "Chaque terrain a un numéro unique au cadastre du Québec, à sept chiffres écrits par groupes de trois : 1 857 109. Un « lot projeté » est un numéro réservé pour un terrain qui n'existe pas encore (une subdivision à venir) ; « P. » devant un numéro veut dire une partie du lot.",
+   "ouVousLeVoyez": "Dans presque toutes les résolutions immobilières et d'urbanisme : « le lot 1 857 109 du cadastre du Québec, d'une superficie de 26 mètres carrés ». Un remplacement ou une correction cadastrale change ces numéros.",
+   "occurrences": {
+    "procesVerbaux": 50,
+    "parInstance": {
+     "CM": 9,
+     "CE": 41
+    },
+    "resolutions": 558,
+    "pourAnnee": "2026",
+    "total": 558
+   },
+   "exemple": {
+    "numero": "CE-20260909-2024",
+    "objet": "Autoriser la vente du lot 1 857 109 du cadastre du Québec, situé en front de la rue Parenteau, moyennant le paiement d'une somme de 2 000 $",
+    "titre": "VENTE - JOHANNE LEFRANÇOIS",
+    "date": "2026-09-09",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_09_09_2.0.pdf#page=1"
+   }
+  },
+  {
+   "terme": "Servitude",
+   "categorie": "urbanisme",
+   "recherche": "servitude",
+   "definition": "Un droit sur le terrain d'autrui : la Ville en acquiert pour protéger et entretenir une conduite enfouie, Hydro-Québec pour ses lignes. Elle s'achète de gré à gré ou, à défaut, par expropriation.",
+   "ouVousLeVoyez": "« d'autoriser l'acquisition de gré à gré ou par voie d'expropriation d'une servitude permanente sur une partie du lot 6 330 988 du cadastre du Québec, nécessaire pour protéger, maintenir et entretenir une conduite municipale enfouie ».",
+   "occurrences": {
+    "procesVerbaux": 15,
+    "parInstance": {
+     "CM": 4,
+     "CE": 11
+    },
+    "resolutions": 27,
+    "pourAnnee": "2026",
+    "total": 27
+   },
+   "exemple": {
+    "numero": "CM-20260811-586",
+    "objet": "Autoriser l'acquisition de gré à gré ou par voie d'expropriation d'une servitude permanente sur une partie du lot 6 330 988 du cadastre du Québec, nécessaire pour protéger, maintenir et entretenir une conduite municipale enfouie",
+    "titre": "PROCÉDURES EN EXPROPRIATION - LOT P.6 330 988",
+    "date": "2026-08-11",
+    "type": "Résolution",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_08_11_2.0.pdf#page=18"
+   }
+  },
+  {
+   "terme": "Assemblée publique de consultation",
+   "categorie": "urbanisme",
+   "recherche": "assembl[ée]e publique de consultation|lettre aux citoyens",
+   "definition": "Avant d'adopter un règlement de zonage, la Ville doit consulter : le conseil adopte un premier projet et fixe la date de l'assemblée, où le projet est expliqué et où le public peut s'exprimer ; le second projet vient ensuite.",
+   "ouVousLeVoyez": "« …et de fixer l'assemblée publique de consultation au jeudi 17 septembre 2026 à 19 h, en la salle du conseil de l'hôtel de ville et par voie de visioconférence ». Le comité exécutif approuve la « lettre aux citoyens » qui annonce l'assemblée.",
+   "occurrences": {
+    "procesVerbaux": 14,
+    "parInstance": {
+     "CM": 4,
+     "CE": 10
+    },
+    "resolutions": 31,
+    "pourAnnee": "2026",
+    "total": 31
+   },
+   "exemple": {
+    "numero": "CE-20260826-1964",
+    "objet": "Approbation - lettre aux citoyens - projet de règlement CDU-1-20",
+    "titre": "APPROBATION - LETTRE AUX CITOYENS - PROJET DE RÈGLEMENT CDU-1-20",
+    "date": "2026-08-26",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_08_26_2.0.pdf#page=10"
+   }
+  },
+  {
+   "terme": "Domaine public",
+   "aussi": "exclusion du domaine public · ouverture de rue",
+   "categorie": "urbanisme",
+   "recherche": "domaine public|ouverture de (?:la )?rue",
+   "definition": "Les rues, les parcs et les terrains affectés à l'usage de tous font partie du domaine public de la Ville : ils ne se vendent pas. Pour aliéner un tel lot, le conseil doit d'abord l'exclure du domaine public ; à l'inverse, « ouvrir » une rue verse des lots au domaine public et au réseau routier.",
+   "ouVousLeVoyez": "« EXCLUSION DU DOMAINE PUBLIC - LOTS 1 784 706, 1 784 707 ET 1 784 708 : d'exclure les lots … du domaine public », « OUVERTURE DE RUE - LOTS … afin qu'elle fasse dorénavant partie du domaine public et du réseau routier ».",
+   "occurrences": {
+    "procesVerbaux": 13,
+    "parInstance": {
+     "CM": 3,
+     "CE": 10
+    },
+    "resolutions": 21,
+    "pourAnnee": "2026",
+    "total": 21
+   },
+   "exemple": {
+    "numero": "CE-20260902-1997",
+    "objet": "Autoriser la vente d'une partie du lot 1 222 210 (lot projeté 6 737 875) du cadastre du Québec, située en front de la rue Favreau, moyennant le paiement d'une somme de 35 000 $ et recommander au conseil de fermer une partie de la rue Favreau associée au lot projeté 6 737 875 et de l'exclure du domaine public",
+    "titre": "VENTE - 9274-5744 QUÉBEC INC",
+    "date": "2026-09-02",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h03_2026_09_02_2.0.pdf#page=1"
+   }
+  },
+  {
+   "terme": "Adjudication de contrat",
+   "aussi": "attribution · octroi · DOS-…",
+   "categorie": "argent",
+   "recherche": "adjuger le contrat|ADJUDICATION - CONTRAT|attribuer le contrat|octroyer le contrat",
+   "definition": "L'attribution officielle d'un contrat à une entreprise, au prix de sa soumission, après un appel d'offres ou une demande de prix. Le numéro DOS-3623 est celui du dossier d'approvisionnement ; les contrats plus anciens portent OS-SP-29554 ou SP-30190. Selon la résolution, la Ville « adjuge », « attribue » ou « octroie » le contrat.",
+   "ouVousLeVoyez": "« d'adjuger le contrat DOS-3705 à l'entreprise et au montant ci-dessous mentionnés, pour …, le tout selon les termes et conditions de sa soumission et des documents d'appel d'offres : Brault Maxtech inc. 1 888 989,07 $ ». Les plus gros passent au conseil sur recommandation du comité exécutif.",
+   "occurrences": {
+    "procesVerbaux": 55,
+    "parInstance": {
+     "CM": 9,
+     "CE": 46
+    },
+    "resolutions": 310,
+    "pourAnnee": "2026",
+    "total": 310
+   },
+   "exemple": {
+    "numero": "CE-20260909-2028",
+    "objet": "Recommander au conseil d'attribuer le contrat DOS-3623 pour des services d'hydro-excavation et de disposition des matières résiduelles",
+    "titre": "RECOMMANDATION AU CONSEIL - ATTRIBUTION - CONTRAT DOS-3623",
+    "date": "2026-09-09",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_09_09_2.0.pdf#page=2"
+   }
+  },
+  {
+   "terme": "Appel d'offres et demande de prix",
+   "categorie": "argent",
+   "recherche": "appel d'offres|demande de prix",
+   "definition": "Les deux façons de mettre les fournisseurs en concurrence : l'appel d'offres, public, pour les contrats importants ; la demande de prix, adressée à quelques fournisseurs invités, pour les plus petits. La résolution renvoie aux « documents d'appel d'offres » ou aux « documents de demande de prix ». La Ville vend aussi ses terrains excédentaires par appel d'offres public.",
+   "ouVousLeVoyez": "« …le tout selon les termes et conditions de sa soumission et des documents d'appel d'offres », « ALIÉNATION PAR APPEL D'OFFRES PUBLIC - LOT 1 289 937 ».",
+   "occurrences": {
+    "procesVerbaux": 56,
+    "parInstance": {
+     "CM": 9,
+     "CE": 47
+    },
+    "resolutions": 401,
+    "pourAnnee": "2026",
+    "total": 401
+   },
+   "exemple": {
+    "numero": "CM-20260811-590",
+    "objet": "Octroyer le contrat DOS-3249 aux adjudicataires de l'appel d'offres 2026-8109-50 pour l'acquisition de pneus neufs, rechapés et remoulés, pour une période de trois (3) ans",
+    "titre": "OCTROI - CONTRAT DOS-3249",
+    "date": "2026-08-11",
+    "type": "Résolution",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_08_11_2.0.pdf#page=20"
+   }
+  },
+  {
+   "terme": "Honoraires supplémentaires",
+   "categorie": "argent",
+   "recherche": "honoraires suppl[ée]mentaires",
+   "definition": "Des honoraires ajoutés à un contrat de services professionnels déjà accordé — ingénieurs, architectes — parce que le mandat s'est allongé ou étendu. Chaque ajout est autorisé par résolution, avec son montant.",
+   "ouVousLeVoyez": "« HONORAIRES SUPPLÉMENTAIRES - CONTRAT DOS-332 », « d'autoriser des honoraires supplémentaires au montant de 56 832,14 $ à Les Services EXP inc. … ».",
+   "occurrences": {
+    "procesVerbaux": 32,
+    "parInstance": {
+     "CM": 9,
+     "CE": 23
+    },
+    "resolutions": 89,
+    "pourAnnee": "2026",
+    "total": 89
+   },
+   "exemple": {
+    "numero": "CE-20260902-2016",
+    "objet": "Autoriser des honoraires supplémentaires au montant de 103 536,61 $ à Groupe ABS inc. pour des services du laboratoire spécialisé en environnement, en géotechnique, en contrôle qualitatif des matériaux et leur mise en oeuvre, en métallurgie et en science du bâtiment dans le cadre des travaux de construction de la nouvelle caserne de pompiers numéro 1",
+    "titre": "HONORAIRES SUPPLÉMENTAIRES - CONTRAT DOS-332",
+    "date": "2026-09-02",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h03_2026_09_02_2.0.pdf#page=8"
+   }
+  },
+  {
+   "terme": "Contingence",
+   "aussi": "crédits supplémentaires · quantités supplémentaires · reddition de comptes",
+   "categorie": "argent",
+   "recherche": "contingences?|quantit[ée]s suppl[ée]mentaires",
+   "definition": "La réserve prévue dans un contrat de travaux pour les imprévus. Quand elle est épuisée, l'instance autorise des crédits supplémentaires ; quand ce sont les quantités qui dépassent le devis, des quantités supplémentaires. Le service rend compte de ce qu'il a dépensé dans des rapports intérimaires puis un rapport final, dont le comité exécutif prend acte.",
+   "ouVousLeVoyez": "« CRÉDITS SUPPLÉMENTAIRES - CONTINGENCE DU CONTRAT DOS-2872 : d'autoriser des crédits supplémentaires au montant de 352 327,89 $ pour la contingence du contrat… », « RAPPORT INTÉRIMAIRE UNIQUE - REDDITION DE COMPTES - CONTINGENCES - CONTRAT DOS-3178 ».",
+   "occurrences": {
+    "procesVerbaux": 31,
+    "parInstance": {
+     "CM": 8,
+     "CE": 23
+    },
+    "resolutions": 60,
+    "pourAnnee": "2026",
+    "total": 60
+   },
+   "exemple": {
+    "numero": "CE-20260902-2010",
+    "objet": "Recommander au conseil d'autoriser des crédits supplémentaires pour la contingence du contrat DOS-2144 en lien avec les travaux de réhabilitation sans tranchée de conduites d'égout sur diverses rues de la Ville de Laval, programmation 2024-2025",
+    "titre": "RECOMMANDATION AU CONSEIL - CRÉDITS SUPPLÉMENTAIRES - CONTINGENCE DU CONTRAT DOS-",
+    "date": "2026-09-02",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h03_2026_09_02_2.0.pdf#page=6"
+   }
+  },
+  {
+   "terme": "Cession de contrat",
+   "categorie": "argent",
+   "recherche": "cession (?:du|de) contrat",
+   "definition": "Une entreprise qui a un contrat avec la Ville le transfère à une autre — souvent la même sous un nouveau numéro d'entreprise, après une réorganisation. La Ville doit approuver la cession, aux mêmes conditions et jusqu'à la fin prévue du contrat.",
+   "ouVousLeVoyez": "« d'approuver la cession du contrat OS-SP-29554 par Lemay CO inc. (NEQ 1149007115) à Lemay CO inc. (NEQ 1180667447), et ce, jusqu'à la fin prévue dudit contrat ».",
+   "occurrences": {
+    "procesVerbaux": 15,
+    "parInstance": {
+     "CM": 6,
+     "CE": 9
+    },
+    "resolutions": 14,
+    "pourAnnee": "2026",
+    "total": 14
+   },
+   "exemple": {
+    "numero": "CM-20260901-663",
+    "objet": "Approuver la cession du contrat OS-SP-29554 par Lemay CO inc. (NEQ 1149007115) à Lemay CO inc. (NEQ 1180667447), et ce, jusqu'à la fin prévue dudit contrat et selon le montant disponible entre le montant actuellement payé et facturé, moins le montant adjugé",
+    "titre": "CESSION DE CONTRAT - CONTRAT OS-SP-29554",
+    "date": "2026-09-01",
+    "type": "Résolution",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=12"
+   }
+  },
+  {
+   "terme": "Début des travaux, surveillance et mise en place des matériaux",
+   "categorie": "argent",
+   "recherche": "d[ée]but des travaux|mise en place des mat[ée]riaux",
+   "definition": "Une fois le contrat de travaux adjugé, le comité exécutif autorise l'entrepreneur à commencer, dès que ses garanties sont reçues, et confie en même temps la surveillance du chantier à une firme et le contrôle des matériaux à un laboratoire. Ces mandats sont payés selon des contrats à exécution sur demande déjà en place.",
+   "ouVousLeVoyez": "« DÉBUT, SURVEILLANCE ET MISE EN PLACE DES MATÉRIAUX - CONTRAT DOS-3574 : d'autoriser le début des travaux par …, et ce, sur réception des garanties exigées par les documents d'appel d'offres ; d'autoriser … à effectuer le contrôle de la mise en place des matériaux ainsi que les essais sur les matériaux au chantier et au laboratoire, au montant de 51 520,99 $ ».",
+   "occurrences": {
+    "procesVerbaux": 32,
+    "parInstance": {
+     "CM": 5,
+     "CE": 27
+    },
+    "resolutions": 72,
+    "pourAnnee": "2026",
+    "total": 72
+   },
+   "exemple": {
+    "numero": "CE-20260819-1932",
+    "objet": "Début et mise en place des matériaux - contrat DOS-3700",
+    "titre": "DÉBUT ET MISE EN PLACE DES MATÉRIAUX - CONTRAT DOS-3700",
+    "date": "2026-08-19",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_HC_09h16_2026_08_19_2.0.pdf#page=3"
+   }
+  },
+  {
+   "terme": "Règlement d'emprunt",
+   "categorie": "argent",
+   "recherche": "emprunt de [\\d ]+ \\$|fonds disponibles au R[èe]glement",
+   "definition": "Le règlement par lequel la Ville s'autorise à emprunter pour des travaux ou un achat de longue durée. Il précise l'objet et le montant, passe par le registre des personnes habiles à voter, puis sert de caisse : les contrats sont ensuite financés « à même les fonds disponibles » au règlement.",
+   "ouVousLeVoyez": "« Règlement numéro L-13274 décrétant l'exécution de travaux … et décrétant un emprunt de 47 381 500 $ à cette fin » ; puis « DÉPENSES - RÈGLEMENT L-13248-F - CONTRAT DOS-3485 : de financer, à même les fonds disponibles au Règlement L-13248-F, un montant de … ».",
+   "occurrences": {
+    "procesVerbaux": 53,
+    "parInstance": {
+     "CM": 7,
+     "CE": 46
+    },
+    "resolutions": 201,
+    "pourAnnee": "2026",
+    "total": 201
+   },
+   "exemple": {
+    "numero": "CM-20260901-652",
+    "objet": "Règlement numéro L-13287 modifiant le Règlement L-13026 décrétant l'implantation d'une signalisation dynamique dans les secteurs 2 et 3 pour gérer le stationnement sur rue lors des opérations d'entretien et décrétant un emprunt de 47 381 500 $ à cette fin, afin de cibler l'ensemble du territoire de la Ville",
+    "titre": "ADOPTION - RÈGLEMENT L-13287",
+    "date": "2026-09-01",
+    "type": "Résolution",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=8"
+   }
+  },
+  {
+   "terme": "Crédits",
+   "aussi": "virement de crédits",
+   "categorie": "argent",
+   "recherche": "cr[ée]dits",
+   "definition": "L'autorisation de dépenser une somme prévue au budget. Un virement de crédits déplace de l'argent d'un poste budgétaire à un autre en cours d'année, sans changer le total.",
+   "ouVousLeVoyez": "« d'autoriser des crédits au montant de 312 488 $ à Pre Labs inc. … », « VIREMENT DE CRÉDITS - POLICE ».",
+   "occurrences": {
+    "procesVerbaux": 58,
+    "parInstance": {
+     "CM": 9,
+     "CE": 49
+    },
+    "resolutions": 174,
+    "pourAnnee": "2026",
+    "total": 174
+   },
+   "exemple": {
+    "numero": "CE-20260909-2046",
+    "objet": "Recommander au conseil d'autoriser des crédits supplémentaires à la bonification du contrat DOS-3485 en lien avec les travaux d'infrastructures de surface, resurfaçage 2026, groupe 4, sur les rues Dorion et Marchand",
+    "titre": "RECOMMANDATION AU CONSEIL - CRÉDITS - BONIFICATION DU CONTRAT DOS-3485",
+    "date": "2026-09-09",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_09_09_2.0.pdf#page=9"
+   }
+  },
+  {
+   "terme": "Excédent de fonctionnement et réserves financières",
+   "aussi": "affectation · appropriation",
+   "categorie": "argent",
+   "recherche": "exc[ée]dent de fonctionnement|r[ée]serve financi[èe]re|R[ée]serve bleue",
+   "definition": "L'excédent de fonctionnement est le surplus des années passées ; une partie est « affectée » à des fins précises (le logement social, par exemple), le reste est « non affecté ». Les réserves financières sont créées par règlement pour un usage donné. Y puiser demande une résolution : une affectation ou une appropriation.",
+   "ouVousLeVoyez": "« d'autoriser une affectation de l'excédent de fonctionnement non affecté au montant de 1 069 000 $ pour assurer le financement du contrat DOS-3523 », « d'autoriser le Service des finances à approprier un montant de 150 000 $, pris à même la réserve financière créée par le Règlement numéro L-12846 ».",
+   "occurrences": {
+    "procesVerbaux": 29,
+    "parInstance": {
+     "CM": 4,
+     "CE": 25
+    },
+    "resolutions": 84,
+    "pourAnnee": "2026",
+    "total": 84
+   },
+   "exemple": {
+    "numero": "CE-20260902-2011",
+    "objet": "Dépenses - réserve bleue - contingence du contrat DOS-2144",
+    "titre": "DÉPENSES - RÉSERVE BLEUE - CONTINGENCE DU CONTRAT DOS-2144",
+    "date": "2026-09-02",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h03_2026_09_02_2.0.pdf#page=6"
+   }
+  },
+  {
+   "terme": "Aide financière",
+   "aussi": "entente d'aide financière · demande d'aide financière",
+   "categorie": "argent",
+   "recherche": "aide financi[èe]re",
+   "definition": "Dans un sens, la Ville subventionne un organisme : elle approuve une entente d'aide financière qui fixe le montant et les conditions. Dans l'autre, la Ville demande de l'argent à un gouvernement pour un projet : la résolution autorise le dépôt de la demande, elle ne garantit pas que l'aide sera accordée.",
+   "ouVousLeVoyez": "« APPROBATION - ENTENTE D'AIDE FINANCIÈRE - PERSPECTIVE FAMILLE », « AUTORISATION - DÉPÔT - DEMANDE D'AIDE FINANCIÈRE - MINISTÈRE DE L'EMPLOI ET DE LA SOLIDARITÉ SOCIALE ».",
+   "occurrences": {
+    "procesVerbaux": 45,
+    "parInstance": {
+     "CM": 7,
+     "CE": 38
+    },
+    "resolutions": 124,
+    "pourAnnee": "2026",
+    "total": 124
+   },
+   "exemple": {
+    "numero": "CE-20260909-2049",
+    "objet": "Autoriser les services de l'ingénierie, de planification et de réalisation des projets, de la gestion de l'eau et de l'urbanisme à présenter plusieurs demandes d'aide financière auprès du ministère des Affaires municipales et de l'Habitation dans le cadre du programme Financement d'infrastructures en eau pour la réalisation d'habitations abordables (FIERH) en lien avec plusieurs projets d'infrastructures en eau",
+    "titre": "AUTORISATION - DÉPÔTS - DEMANDES D'AIDES FINANCIÈRES - MINISTÈRE DES AFFAIRES MUNICIPALES ET DE L'HABITATION",
+    "date": "2026-09-09",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_09_09_2.0.pdf#page=10"
+   }
+  },
+  {
+   "terme": "Déboursés et liste des contrats",
+   "categorie": "argent",
+   "recherche": "rapports? des d[ée]bours[ée]s|liste des contrats",
+   "definition": "Deux redditions de comptes régulières dont les instances prennent acte : chaque semaine, le rapport des déboursés (les paiements faits) et le rapport des salaires, produits par la trésorière adjointe ; chaque mois, la liste des contrats préparée par le Service de l'approvisionnement, que la loi oblige à déposer au conseil.",
+   "ouVousLeVoyez": "« DÉPÔT - DÉBOURSÉS : de prendre acte des rapports des déboursés produits par la trésorière adjointe datés des 19 et 26 août 2026 au montant de 39 040 507,15 $ », « LISTE DES CONTRATS - MARS 2026 … conformément à l'article 477.3 de la Loi sur les cités et villes ».",
+   "occurrences": {
+    "procesVerbaux": 24,
+    "parInstance": {
+     "CM": 5,
+     "CE": 19
+    },
+    "resolutions": 29,
+    "pourAnnee": "2026",
+    "total": 29
+   },
+   "exemple": {
+    "numero": "CM-20260505-393",
+    "objet": "Liste des contrats pour le mois de mars 2026",
+    "titre": "LISTE DES CONTRATS - MARS 2026",
+    "date": "2026-05-05",
+    "type": "Prise d’acte",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h32_2026_05_05_2.0.pdf#page=29"
+   }
+  },
+  {
+   "terme": "Taxes nettes incluses",
+   "categorie": "argent",
+   "recherche": "taxes nettes incluses",
+   "definition": "Les montants des résolutions sont souvent donnés « taxes nettes incluses » : ils comprennent la part des taxes de vente que la Ville ne récupère pas. Les municipalités se font rembourser une partie de la TPS et de la TVQ qu'elles paient ; le montant net est ce que coûte vraiment la dépense.",
+   "ouVousLeVoyez": "« un montant de 221 600 $, taxes nettes incluses ». Le montant de la soumission, lui, est écrit avec les taxes : « 832 131,56 $ ».",
+   "occurrences": {
+    "procesVerbaux": 54,
+    "parInstance": {
+     "CM": 2,
+     "CE": 52
+    },
+    "resolutions": 217,
+    "pourAnnee": "2026",
+    "total": 217
+   },
+   "exemple": {
+    "numero": "CM-20260310-217",
+    "objet": "Reddition de comptes pour les déboursés du 1er janvier au 31 décembre 2025 par carte de crédit, taxes nettes incluses, pour l'essence et l'entretien du matériel de transport effectués par le Service de police",
+    "titre": "REDDITION DE COMPTES - CARTE DE CRÉDIT - POLICE",
+    "date": "2026-03-10",
+    "type": "Prise d’acte",
+    "instance": "Conseil municipal",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h31_2026_03_10_2.0.pdf#page=45"
+   }
+  },
+  {
+   "terme": "Traces Québec",
+   "categorie": "argent",
+   "recherche": "Traces Qu[ée]bec",
+   "definition": "Le système gouvernemental qui suit les sols contaminés excavés d'un chantier jusqu'au lieu où ils sont traités. Pour chaque contrat de travaux qui creuse, la Ville autorise à part le paiement des frais de traçabilité et d'une redevance au ministre des Finances, et cela apparaît comme une résolution distincte.",
+   "ouVousLeVoyez": "« AUTORISATION - PAIEMENT - TRACES QUÉBEC - CONTRAT DOS-3574 : d'autoriser le paiement des frais prévus au Règlement concernant la traçabilité des sols contaminés excavés, suivis par le biais du système gouvernemental de traçabilité Traces Québec … au montant estimé de 11 399,40 $ ».",
+   "occurrences": {
+    "procesVerbaux": 25,
+    "parInstance": {
+     "CM": 0,
+     "CE": 25
+    },
+    "resolutions": 42,
+    "pourAnnee": "2026",
+    "total": 42
+   },
+   "exemple": {
+    "numero": "CE-20260826-1941",
+    "objet": "Autorisation - paiement - traces québec - contrat DOS-3497",
+    "titre": "AUTORISATION - PAIEMENT - TRACES QUÉBEC - CONTRAT DOS-3497",
+    "date": "2026-08-26",
+    "type": "Résolution",
+    "instance": "Comité exécutif",
+    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CE_PV_PUB_09h00_2026_08_26_2.0.pdf#page=3"
+   }
+  }
+ ]
+}

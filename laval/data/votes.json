@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-17T11:17:22.440Z",
+ "generatedAt": "2026-09-17T20:48:14.373Z",
  "source": "https://www.laval.ca/vie-democratique/hotel-de-ville-personnes-elues/ordre-jour-proces-verbaux-sommaire/",
  "methode": "Extraction par analyse du texte des procès-verbaux (PDF de la Ville). Les noms sont lus dans les passages « … demande le vote sur la proposition, laquelle est adoptée par un compte de N en faveur et de M contre : … se prononcent en faveur … ; … se prononcent contre … ». Chaque vote conserve le texte brut et signale tout écart avec le décompte imprimé.",
  "parametres": {
@@ -8,10 +8,10 @@
   "complet": true
  },
  "versionLecture": 1,
- "totalDisponible": 44,
+ "totalDisponible": 46,
  "documentsAnalyses": 87,
- "nombre": 44,
- "nouveauxDepuisDerniereExecution": null,
+ "nombre": 46,
+ "nouveauxDepuisDerniereExecution": 2,
  "avecAvertissement": 0,
  "themes": {
   "procedure": {
@@ -93,6 +93,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260901-ORD-18h30",
    "dossier": "SD-2026-3772",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=6",
    "etiquette": "L'amendement",
    "resultat": "Rejetée",
@@ -126,10 +127,10 @@
    "demandeParVote": "Christine Poirier",
    "texteSourceDegrade": false,
    "avertissements": [],
-   "brut": "demande le vote sur l'amendement, lequel est rejeté par un compte de 4 en faveur et de 16 contre: les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent en faveur de l'amendement; M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent contre l'amendement. Le débat se poursuit sur la proposition. La conseillère Louise Lortie demande le report du point laquelle est refusée. La conseillère demande ensuite le vote sur la demande de report du point laquelle est rejetée par un compte de 4 en faveur et de 16 contre: les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent en faveur du report; M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent contre le report. Le débat se poursuit. La conseillère Louise Lortie",
+   "brut": "demande le vote sur l'amendement, lequel est rejeté par un compte de 4 en faveur et de 16 contre: les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent en faveur de l'amendement; M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent contre l'amendement. Le débat se poursuit sur la proposition. La conseillère Louise Lortie demande le report du point laquelle est refusée. La conseillère",
    "theme": "culture",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260901-650#2",
@@ -140,6 +141,55 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260901-ORD-18h30",
    "dossier": "SD-2026-3772",
+   "voteDeProcedure": false,
+   "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=6",
+   "etiquette": "La demande de report du point",
+   "resultat": "Rejetée",
+   "pour": [
+    "Martin Vaillancourt",
+    "Louise Lortie",
+    "David De Cotis",
+    "Isabelle Piché"
+   ],
+   "contre": [
+    "Stéphane Boyer",
+    "Ray Khalil",
+    "Christine Poirier",
+    "Nicholas Borne",
+    "Aline Dib",
+    "Mohamed Bâ",
+    "Sandra El-Helou",
+    "Yannick Langlois",
+    "Carole St-Denis",
+    "Seta Topouzian",
+    "Martin Fiola",
+    "Annick Senghor",
+    "Pierre Brabant",
+    "Anick Brunet",
+    "Vasilios Karidogiannis",
+    "Sylvain Yelle"
+   ],
+   "decomptePour": 4,
+   "decompteContre": 16,
+   "abstention": null,
+   "demandeParVote": null,
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "demande ensuite le vote sur la demande de report du point laquelle est rejetée par un compte de 4 en faveur et de 16 contre: les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent en faveur du report; M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent contre le report. Le débat se poursuit. La conseillère Louise Lortie",
+   "theme": "culture",
+   "themeSource": "objet",
+   "nouveau": false
+  },
+  {
+   "id": "CM-20260901-650#3",
+   "numero": "CM-20260901-650",
+   "objet": "Règlement numéro L-13281 établissant le Programme de résidence pour les artistes dans des lieux de création",
+   "date": "2026-09-01",
+   "annee": "2026",
+   "instance": "Conseil municipal",
+   "seanceId": "CM-20260901-ORD-18h30",
+   "dossier": "SD-2026-3772",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=6",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -176,7 +226,7 @@
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 16 en faveur et de 4 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
    "theme": "culture",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": true
   },
   {
    "id": "CM-20260901-652",
@@ -187,6 +237,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260901-ORD-18h30",
    "dossier": "SD-2026-3814",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=8",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -223,7 +274,7 @@
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 18 en faveur et de 2 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, David De Cotis, Isabelle Piché, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Martin Vaillancourt et Louise Lortie se prononcent contre la proposition. ADOPTÉ",
    "theme": "transport",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260901-664",
@@ -234,6 +285,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260901-ORD-18h30",
    "dossier": "SD-2026-3420",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=13",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -268,9 +320,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est acceptée par un compte de 16 en faveur et de 4 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché, se prononcent contre la proposition. ADOPTÉ",
-   "theme": "economie",
+   "theme": "travaux",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260901-665",
@@ -281,6 +333,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260901-ORD-18h30",
    "dossier": "SD-2026-3525",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=13",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -315,9 +368,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 16 en faveur et de 4 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché, se prononcent contre la proposition. ADOPTÉ",
-   "theme": "economie",
+   "theme": "travaux",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260901-666",
@@ -328,6 +381,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260901-ORD-18h30",
    "dossier": "SD-2026-3577",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=14",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -362,9 +416,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 16 en faveur et de 4 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché, se prononcent contre la proposition. ADOPTÉ",
-   "theme": "economie",
+   "theme": "travaux",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260901-679",
@@ -375,6 +429,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260901-ORD-18h30",
    "dossier": "SD-2026-3881",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=20",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -411,7 +466,7 @@
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 16 en faveur et de 4 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
    "theme": "travaux",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260901-680",
@@ -422,6 +477,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260901-ORD-18h30",
    "dossier": "SD-2026-4320",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=20",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -456,9 +512,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est acceptée par un compte de 17 en faveur et de 3 contre; Le conseiller David De Cotis, ayant indiqué s'être trompé, corrige son vote avec l'autorisation de la présidente. Le compte final est de 16 en faveur et de 4 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché, se prononcent contre la proposition. ADOPTÉ",
-   "theme": "economie",
+   "theme": "travaux",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260901-682",
@@ -469,6 +525,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260901-ORD-18h30",
    "dossier": "SD-2026-3800",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=22",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -503,9 +560,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 18 en faveur et de 2 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Martin Vaillancourt, Louise Lortie, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
-   "theme": "contrats",
+   "theme": "culture",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260901-698",
@@ -516,6 +573,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260901-ORD-18h30",
    "dossier": "SD-2026-4228",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=26",
    "etiquette": null,
    "resultat": "Rejetée",
@@ -552,7 +610,7 @@
    "brut": "demande le vote sur la proposition, laquelle est rejetée par un compte de 4 en faveur et de 16 contre: les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché, se prononcent en faveur de la proposition; M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent contre la proposition.",
    "theme": "culture",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260901-699",
@@ -563,6 +621,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260901-ORD-18h30",
    "dossier": "SD-2026-4248",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_09_01_2.0.pdf#page=28",
    "etiquette": null,
    "resultat": "Rejetée",
@@ -599,7 +658,7 @@
    "brut": "demande le vote sur la proposition, laquelle est rejetée par un compte de 2 en faveur et de 18 contre: les conseillers David De Cotis et Isabelle Piché se prononcent en faveur de la proposition; M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Martin Vaillancourt, Louise Lortie, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent contre la proposition.",
    "theme": "administration",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260811-577",
@@ -610,6 +669,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260811-ORD-18h30",
    "dossier": "SD-2026-2882",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_08_11_2.0.pdf#page=13",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -644,7 +704,7 @@
    "brut": "demande le vote sur la proposition laquelle est adoptée par un compte de 13 en faveur et de 5 contre: M. Stéphane Boyer, maire, et les conseillers Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Mohamed Bâ, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
    "theme": "transport",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260811-640",
@@ -655,6 +715,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260811-ORD-18h30",
    "dossier": null,
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_08_11_2.0.pdf#page=41",
    "etiquette": "La proposition de discuter immédiatement de la proposition",
    "resultat": "Rejetée",
@@ -687,9 +748,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition de discuter immédiatement de la proposition, laquelle est rejetée par un compte de 4 en faveur et de 14 contre: les conseillers Martin Vaillancourt, Isabelle Piché, Louise Lortie et David De Cotis se prononcent en faveur de la proposition; M. Stéphane Boyer, maire, et les conseillers Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Mohamed Bâ, Yannick Langlois, Carole St-Denis, Aglaia Revelakis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet et Sylvain Yelle se prononcent contre la proposition; Les discussions sur l'avis de proposition sont reportées à la prochaine séance ordinaire du conseil municipal. À 22 h 39, le conseiller Mohamed Bâ quitte son siège et le reprend à 22 h 43.",
-   "theme": "administration",
-   "themeSource": "defaut",
-   "nouveau": null
+   "theme": "transport",
+   "themeSource": "objet",
+   "nouveau": false
   },
   {
    "id": "CM-20260811-641",
@@ -700,6 +761,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260811-ORD-18h30",
    "dossier": "SD-2026-3709",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_08_11_2.0.pdf#page=42",
    "etiquette": null,
    "resultat": "Rejetée",
@@ -732,9 +794,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est rejetée par un compte de 5 en faveur et de 13 contre: les conseillers Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent en faveur de la proposition; M. Stéphane Boyer, maire, et les conseillers Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Mohamed Bâ, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet et Sylvain Yelle se prononcent contre la proposition.",
-   "theme": "immobilier",
+   "theme": "administration",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260811-643",
@@ -745,6 +807,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260811-ORD-18h30",
    "dossier": "SD-2026-3710",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_08_11_2.0.pdf#page=43",
    "etiquette": null,
    "resultat": "Rejetée",
@@ -779,7 +842,7 @@
    "brut": "demande le vote sur la proposition, laquelle est rejetée par un compte de 4 en faveur et de 14 contre: les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent en faveur de la proposition; M. Stéphane Boyer, maire, et les conseillers Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Mohamed Bâ, Yannick Langlois, Carole St-Denis, Aglaia Revelakis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet et Sylvain Yelle se prononcent contre la proposition.",
    "theme": "immobilier",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260811-644",
@@ -790,6 +853,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260811-ORD-18h30",
    "dossier": null,
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_08_11_2.0.pdf#page=44",
    "etiquette": "La prolongation",
    "resultat": "Adoptée",
@@ -822,9 +886,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la prolongation, laquelle est acceptée par un compte de 16 en faveur et de 2 contre: M. Stéphane Boyer, maire, et les conseillers Flavia Alexandra Novac, Nicholas Borne, Mohamed Bâ, Yannick Langlois, Carole St- Denis, Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, David De Cotis, Isabelle Piché, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant et Anick Brunet se prononcent en faveur de la prolongation; les conseillers Christine Poirier et Sylvain Yelle se prononcent contre la prolongation. ADOPTÉ PÉRIODE DE QUESTIONS DES CONSEILLERS Louise Lortie Suivi sur la campagne «Laval veut sa juste part» Effet de la pétition sur le gouvernement Isabelle Piché Pétition de la campagne «Laval veut sa juste part» – nombre de signatures obtenues à ce jour Aglaia Revelakis Affichage dynamique – problématiques – possibilité d'afficher par secteur – améliorations Louise Lortie Affichage dynamique – prévisibilité des passages David De Cotis Complexe aquatique – entente de commandite – montant et échéance Isabelle Piché Ferme PACE – clôture électrique – avis de M. le maire David De Cotis Travaux de prolongement – suivi – échéancier – boulevard Dagenais Isabelle Piché Collecte des déchets – précision Martin Vaillancourt Précision sur le point 12.6 de l'ordre du jour Louise Lortie Annulation – bibliothèque en milieu carcéral David De Cotis Budget 2027 – plan d'action pour baisser les taxes Louise Lortie Travaux de réfection – rue du Lac-de-Mai David De Cotis Taxes municipales 2027 Décision du CDU Louise Lortie Installation des feux de circulation David De Cotis Présentation pour baisser les taxes municipales 2027 Louise Lortie Collaboration des élus de l'opposition dans les comités À 23 h 56, l'ordre du jour étant épuisé, la séance est levée. ________________________________________________ Mme Cecilia Macedo, présidente du conseil et conseillère ________________________________________________ Me Christopher Griffin, greffier adjoint substitut",
-   "theme": "administration",
-   "themeSource": "defaut",
-   "nouveau": null
+   "theme": "procedure",
+   "themeSource": "objet",
+   "nouveau": false
   },
   {
    "id": "CM-20260603-474#1",
@@ -835,6 +899,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260603-ORD-18h30",
    "dossier": null,
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_16h00_2026_06_03_2.0.pdf#page=3",
    "etiquette": "L'amendement",
    "resultat": "Rejetée",
@@ -867,7 +932,7 @@
    "brut": "demande le vote sur l'amendement, lequel est rejeté par un compte de 2 en faveur et de 14 contre: les conseillers David De Cotis et Isabelle Piché se prononcent en faveur de l'amendement; les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Martin Vaillancourt, Louise Lortie, Martin Fiola, Annick Senghor, Pierre Brabant et Sylvain Yelle se prononcent contre l'amendement. Un débat s'engage. Le conseiller David De Cotis",
    "theme": "travaux",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260603-474#2",
@@ -878,6 +943,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260603-ORD-18h30",
    "dossier": null,
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_16h00_2026_06_03_2.0.pdf#page=3",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -910,7 +976,7 @@
    "brut": "demande le vote sur la proposition, laquelle est acceptée par un compte de 14 en faveur et de 2 contre: les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Martin Vaillancourt, Louise Lortie, Martin Fiola, Annick Senghor, Pierre Brabant et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers David De Cotis et Isabelle Piché se prononcent contre la proposition.",
    "theme": "travaux",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260603-477",
@@ -921,6 +987,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260603-ORD-18h30",
    "dossier": null,
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_16h00_2026_06_03_2.0.pdf#page=6",
    "etiquette": "La demande de discuter immédiatement de la proposition",
    "resultat": "Rejetée",
@@ -952,8 +1019,8 @@
    "avertissements": [],
    "brut": "demande le vote sur la demande de discuter immédiatement de la proposition, laquelle est rejetée par un compte de 4 en faveur et de 12 contre: les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent en faveur de la demande; les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Martin Fiola, Annick Senghor, Pierre Brabant et Sylvain Yelle se prononcent contre la proposition.",
    "theme": "administration",
-   "themeSource": "defaut",
-   "nouveau": null
+   "themeSource": "objet",
+   "nouveau": false
   },
   {
    "id": "CM-20260602-423",
@@ -964,6 +1031,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260602-ORD-18h30",
    "dossier": "SD-2026-2139",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h33_2026_06_02_2.0.pdf#page=9",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -1001,7 +1069,7 @@
    "brut": "demande le vote sur la proposition, laquelle est acceptée par un compte de 19 en faveur et de 2 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Aglaia Revelakis, David De Cotis, Isabelle Piché, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Martin Vaillancourt et Louise Lortie se prononcent contre la proposition. ADOPTÉ",
    "theme": "loisirs",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260602-453",
@@ -1012,6 +1080,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260602-ORD-18h30",
    "dossier": "SD-2026-2497",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h33_2026_06_02_2.0.pdf#page=21",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -1049,7 +1118,7 @@
    "brut": "demande le vote sur la proposition, laquelle est acceptée par un compte de 19 en faveur et de 2 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Aglaia Revelakis, David De Cotis, Isabelle Piché, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Martin Vaillancourt et Louise Lortie se prononcent contre la proposition. ADOPTÉ",
    "theme": "culture",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260602-464#1",
@@ -1060,6 +1129,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260602-ORD-18h30",
    "dossier": "SD-2026-1315",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h33_2026_06_02_2.0.pdf#page=27",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -1097,17 +1167,18 @@
    "brut": "demande le vote sur la proposition, laquelle est acceptée par un compte de 18 en faveur et de 3 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Aglaia Revelakis, David De Cotis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Martin Vaillancourt, Louise Lortie et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
    "theme": "administration",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260602-464#2",
    "numero": "CM-20260602-464",
-   "objet": "Adopter la Politique sur les communications entre les personnes élues, le personnel de cabinet et les employées et employés municipaux",
+   "objet": "Prolongation de la séance",
    "date": "2026-06-02",
    "annee": "2026",
    "instance": "Conseil municipal",
    "seanceId": "CM-20260602-ORD-18h30",
-   "dossier": "SD-2026-1315",
+   "dossier": null,
+   "voteDeProcedure": true,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h33_2026_06_02_2.0.pdf#page=27",
    "etiquette": "La prolongation",
    "resultat": "Rejetée",
@@ -1143,9 +1214,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la prolongation, laquelle est rejetée par un compte de 10 en faveur et de 11 contre: les conseillers Flavia Alexandra Novac, Nicholas Borne, Yannick Langlois, Carole St-Denis, Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, Annick Senghor, Pierre Brabant et Sylvain Yelle se prononcent en faveur de la prolongation; Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Aline Dib, Mohamed Bâ, Sandra El-Helou, David De Cotis, Isabelle Piché, Seta Topouzian, Martin Fiola et Vasilios Karidogiannis se prononcent contre la prolongation. À 23 h 02, la séance est ajournée au mercredi 3 juin 2026 à 16 h. ________________________________________________ Mme Cecilia Macedo, présidente du conseil et conseillère ________________________________________________ Me Marie-Christine Lefebvre, greffière",
-   "theme": "administration",
+   "theme": "procedure",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260505-374",
@@ -1156,6 +1227,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260505-ORD-18h30",
    "dossier": "SD-2026-2000",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h32_2026_05_05_2.0.pdf#page=22",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -1188,9 +1260,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 16 en faveur et de 2 contre: les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Yannick Langlois, Carole St-Denis, Aglaia Revelakis, Louise Lortie, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet et Vasilios Karidogiannis se prononcent en faveur de la proposition; les conseillers David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
-   "theme": "contrats",
+   "theme": "securite",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260505-409#1",
@@ -1201,8 +1273,9 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260505-ORD-18h30",
    "dossier": "SD-2026-2009",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h32_2026_05_05_2.0.pdf#page=34",
-   "etiquette": null,
+   "etiquette": "L'amendement",
    "resultat": "Rejetée",
    "pour": [
     "Aglaia Revelakis",
@@ -1234,9 +1307,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur celui-ci, lequel est rejeté par un compte de 3 en faveur et de 16 contre: les conseillers Aglaia Revelakis, Martin Vaillancourt et Louise Lortie se prononcent en faveur de l'amendement; les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Yannick Langlois, Carole St-Denis, David De Cotis, Isabelle Piché, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet et Vasilios Karidogiannis se prononcent contre l'amendement. Un débat s'engage. Le conseiller Ray Khalil",
-   "theme": "immobilier",
+   "theme": "urbanisme",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260505-409#2",
@@ -1247,6 +1320,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260505-ORD-18h30",
    "dossier": "SD-2026-2009",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h32_2026_05_05_2.0.pdf#page=34",
    "etiquette": null,
    "resultat": "Rejetée",
@@ -1280,9 +1354,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est rejetée par un compte de 2 en faveur et de 17 contre: les conseillers David De Cotis et Isabelle Piché se prononcent en faveur de la proposition; les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Yannick Langlois, Carole St-Denis, Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet et Vasilios Karidogiannis se prononcent contre la proposition.",
-   "theme": "immobilier",
+   "theme": "urbanisme",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260414-247",
@@ -1293,6 +1367,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260414-ORD-18h30",
    "dossier": "SD-2025-6155",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h31_2026_04_14_2.0.pdf#page=11",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -1329,9 +1404,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 19 en faveur et de 3 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Martin Vaillancourt, Louise Lortie, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Aglaia Revelakis, David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
-   "theme": "immobilier",
+   "theme": "environnement",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260414-265",
@@ -1342,6 +1417,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260414-ORD-18h30",
    "dossier": "SD-2026-1491",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h31_2026_04_14_2.0.pdf#page=20",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -1378,9 +1454,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 20 en faveur et de 2 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
-   "theme": "urbanisme",
+   "theme": "loisirs",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260414-270",
@@ -1391,6 +1467,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260414-ORD-18h30",
    "dossier": "SD-2026-607",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h31_2026_04_14_2.0.pdf#page=24",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -1429,7 +1506,57 @@
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 17 en faveur et de 5 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
    "theme": "administration",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
+  },
+  {
+   "id": "CM-20260414-327",
+   "numero": "CM-20260414-327",
+   "objet": "Avis de proposition refusé - partage d'informations - gilles vaillancourt",
+   "date": "2026-04-14",
+   "annee": "2026",
+   "instance": "Conseil municipal",
+   "seanceId": "CM-20260414-ORD-18h30",
+   "dossier": null,
+   "voteDeProcedure": false,
+   "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h31_2026_04_14_2.0.pdf#page=43",
+   "etiquette": "La décision de la présidente",
+   "resultat": "Maintenue",
+   "pour": [
+    "Stéphane Boyer",
+    "Ray Khalil",
+    "Christine Poirier",
+    "Flavia Alexandra Novac",
+    "Nicholas Borne",
+    "Aline Dib",
+    "Mohamed Bâ",
+    "Sandra El-Helou",
+    "Yannick Langlois",
+    "Carole St-Denis",
+    "Aglaia Revelakis",
+    "Seta Topouzian",
+    "Martin Fiola",
+    "Annick Senghor",
+    "Pierre Brabant",
+    "Anick Brunet",
+    "Vasilios Karidogiannis",
+    "Sylvain Yelle"
+   ],
+   "contre": [
+    "Martin Vaillancourt",
+    "Louise Lortie",
+    "David De Cotis",
+    "Isabelle Piché"
+   ],
+   "decomptePour": 18,
+   "decompteContre": 4,
+   "abstention": null,
+   "demandeParVote": "David De Cotis",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "demande le vote sur la décision de la présidente, laquelle est maintenue par un compte de 18 en faveur et de 4 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Aglaia Revelakis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la décision; les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent contre la décision.",
+   "theme": "administration",
+   "themeSource": "objet",
+   "nouveau": true
   },
   {
    "id": "CM-20260414-331",
@@ -1440,6 +1567,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260414-ORD-18h30",
    "dossier": "SD-2026-1288",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h31_2026_04_14_2.0.pdf#page=45",
    "etiquette": "La proposition amendée",
    "resultat": "Rejetée",
@@ -1476,9 +1604,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition amendée, laquelle est rejetée par un compte de 5 en faveur et de 17 contre: les conseillers Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent en faveur de la proposition; M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent contre la proposition.",
-   "theme": "loisirs",
+   "theme": "transport",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260310-155",
@@ -1489,6 +1617,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260310-ORD-18h30",
    "dossier": "SD-2026-245",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h31_2026_03_10_2.0.pdf#page=18",
    "etiquette": "L'amendement",
    "resultat": "Rejetée",
@@ -1526,7 +1655,7 @@
    "brut": "demande le vote sur l'amendement, lequel est rejeté par un compte de 4 en faveur et de 17 contre: les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent en faveur de l'amendement; M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent contre l'amendement. ADOPTÉ",
    "theme": "environnement",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260310-162",
@@ -1537,6 +1666,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260310-ORD-18h30",
    "dossier": "SD-2026-593",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h31_2026_03_10_2.0.pdf#page=21",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -1572,9 +1702,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 17 en faveur et de 4 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
-   "theme": "travaux",
+   "theme": "environnement",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260310-232",
@@ -1585,6 +1715,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260310-ORD-18h30",
    "dossier": null,
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h31_2026_03_10_2.0.pdf#page=50",
    "etiquette": "La demande de discuter immédiatement de la proposition",
    "resultat": "Rejetée",
@@ -1620,9 +1751,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la demande de discuter immédiatement de la proposition, laquelle est rejetée par un compte de 4 en faveur et de 17 contre: les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent en faveur de la demande; M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent contre la demande. À la suite de discussions, la conseillère Louise Lortie retire son avis de proposition prévu au point 15.1 de l'ordre du jour. PÉRIODE DE QUESTIONS DES CONSEILLERS David De Cotis Problématiques à la Société de transport de Laval Suivi sur le dossier des boutiques sportives spécialisées dans les arénas Louise Lortie Liste des tronçons cyclables sur le territoire lavallois David De Cotis Prévision sur l'imposition de mesures d'écofiscalité À 23 h 24, la conseillère Isabelle Piché quitte son siège et le reprend à 23 h 28. Louise Lortie Comité sur les transports et la mobilité durable – dépôt du rapport 2024 – réunions du comité Liste des projets – Programme d'aide financière aux infrastructures récréatives, sportives et de plein air À 23 h 32, l'ordre du jour étant épuisé, la séance est levée. ________________________________________________ Mme Cecilia Macedo, présidente du conseil et conseillère ________________________________________________ Me Marie-Christine Lefebvre, greffière",
-   "theme": "loisirs",
+   "theme": "transport",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260204-121",
@@ -1633,6 +1764,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260204-ORD-18h30",
    "dossier": "SD-2026-152",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_16h00_2026_02_04_2.0.pdf#page=1",
    "etiquette": null,
    "resultat": "Rejetée",
@@ -1667,9 +1799,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est rejetée par un compte de 5 en faveur et de 15 contre: les conseillers Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent en faveur de la proposition; les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet et Sylvain Yelle se prononcent contre la proposition.",
-   "theme": "administration",
+   "theme": "loisirs",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260203-119",
@@ -1680,6 +1812,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260203-ORD-18h30",
    "dossier": null,
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_02_03_2.0.pdf#page=31",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -1715,9 +1848,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 16 en faveur et de 5 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent contre la proposition.",
-   "theme": "administration",
-   "themeSource": "defaut",
-   "nouveau": null
+   "theme": "procedure",
+   "themeSource": "objet",
+   "nouveau": false
   },
   {
    "id": "CM-20260203-120",
@@ -1728,6 +1861,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260203-ORD-18h30",
    "dossier": null,
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_02_03_2.0.pdf#page=31",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -1763,9 +1897,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 16 en faveur et de 5 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent contre la proposition. À 00 h 14, la séance est ajournée au mercredi 4 février 2026 à 16 h. ________________________________________________ Mme Cecilia Macedo, présidente du conseil et conseillère ________________________________________________ Me Marie-Christine Lefebvre, greffière",
-   "theme": "administration",
-   "themeSource": "defaut",
-   "nouveau": null
+   "theme": "loisirs",
+   "themeSource": "objet",
+   "nouveau": false
   },
   {
    "id": "CM-20260203-64",
@@ -1776,6 +1910,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260203-ORD-18h30",
    "dossier": "SD-2025-6270",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_02_03_2.0.pdf#page=6",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -1813,7 +1948,7 @@
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 17 en faveur et de 4 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Aglaia Revelakis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
    "theme": "urbanisme",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260203-65",
@@ -1824,6 +1959,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260203-ORD-18h30",
    "dossier": "SD-2025-6268",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_02_03_2.0.pdf#page=7",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -1861,7 +1997,7 @@
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 16 en faveur et de 5 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
    "theme": "culture",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260203-66",
@@ -1872,6 +2008,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260203-ORD-18h30",
    "dossier": "SD-2026-329",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_02_03_2.0.pdf#page=8",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -1907,9 +2044,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 18 en faveur et de 3 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Martin Vaillancourt, Louise Lortie, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Aglaia Revelakis, David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
-   "theme": "urbanisme",
+   "theme": "immobilier",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260203-67",
@@ -1920,6 +2057,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260203-ORD-18h30",
    "dossier": "SD-2026-329",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_02_03_2.0.pdf#page=9",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -1955,9 +2093,9 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 19 en faveur et de 2 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
-   "theme": "urbanisme",
+   "theme": "immobilier",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260203-76",
@@ -1968,6 +2106,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260203-ORD-18h30",
    "dossier": "SD-2025-5837",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_02_03_2.0.pdf#page=13",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -2005,7 +2144,7 @@
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 19 en faveur et de 2 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
    "theme": "urbanisme",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260113-40",
@@ -2016,6 +2155,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260113-ORD-18h30",
    "dossier": "SD-2025-6452",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_01_13_3.0.pdf#page=19",
    "etiquette": null,
    "resultat": "Adoptée",
@@ -2052,7 +2192,7 @@
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 15 en faveur et de 5 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
    "theme": "contrats",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260113-58",
@@ -2063,6 +2203,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260113-ORD-18h30",
    "dossier": "SD-2025-6805",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_01_13_3.0.pdf#page=26",
    "etiquette": null,
    "resultat": "Rejetée",
@@ -2099,7 +2240,7 @@
    "brut": "demande le vote sur la proposition, laquelle est rejetée par un compte de 5 en faveur et de 15 contre: les conseillers Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent en faveur de la proposition; M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent contre la proposition.",
    "theme": "social",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   },
   {
    "id": "CM-20260113-59",
@@ -2110,6 +2251,7 @@
    "instance": "Conseil municipal",
    "seanceId": "CM-20260113-ORD-18h30",
    "dossier": "SD-2025-6807",
+   "voteDeProcedure": false,
    "pdf": "https://vdldocgreffecmspc01sa.blob.core.windows.net/cms/CM_PV_ORD_18h30_2026_01_13_3.0.pdf#page=27",
    "etiquette": null,
    "resultat": "Rejetée",
@@ -2146,7 +2288,7 @@
    "brut": "demande le vote sur la proposition, laquelle est rejetée par un compte de 2 en faveur et de 18 contre: les conseillers David De Cotis et Isabelle Piché se prononcent en faveur de la proposition; M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Aglaia Revelakis, Martin Vaillancourt, Louise Lortie, Seta Topouzian, Martin Fiola, Annick Senghor, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent contre la proposition.",
    "theme": "culture",
    "themeSource": "objet",
-   "nouveau": null
+   "nouveau": false
   }
  ]
 }

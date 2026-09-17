@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- VERROU : le volet reste hors des moteurs de recherche tant que la Ville de Laval n'a pas
+     répondu au courriel du 14 septembre 2026 (README, étape 2). À retirer avec son accord. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Décisions de la Ville de Laval — DossierVilleDeLaval</title>
+<meta name="description" content="Les résolutions du conseil municipal et du comité exécutif de Laval, séance par séance, avec recherche, filtres par type, sujet et instance, districts touchés, montants et sommaires décisionnels.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvm:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvm:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="/commun/abonnes.css">
+</head>
+<body data-page="decisions" data-ville="laval">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="./"><h1>Dossier<span class="marque">VilleDeLaval</span></h1></a>
+      <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
+      <a class="retour-dq" href="https://dossierquebec.ca/" title="Retour à DossierQuébec" aria-label="Retour à DossierQuébec">DQ</a>
+      <details class="ab-villes" id="villes"></details>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Laval, lisibles. Données publiques, reprises telles quelles
+      des procès-verbaux, des ordres du jour et des sommaires décisionnels officiels de la Ville.
+    </p>
+    <nav>
+      <a href="./">Accueil</a>
+      <a href="decisions.html" aria-current="page">Décisions</a>
+      <a href="votes.html">Votes nominaux</a>
+      <a href="conseil.html">Conseil municipal</a>
+      <a href="lexique.html">Lexique</a>
+      <a href="https://www.laval.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Laval (nouvel onglet)">Ville de Laval ↗</a>
+      <div class="outils">
+        <div class="taille-texte" role="group" aria-label="Taille du texte">
+          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+          <span id="texte-pct" aria-live="polite">100%</span>
+          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+        </div>
+        <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+                title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu">
+  <div id="chargement" class="avis">Chargement des données…</div>
+
+  <h2 class="page">Décisions</h2>
+  <p class="chapeau">
+    Chaque fiche est une <strong>résolution</strong> — la décision elle-même — lue dans le
+    <strong>procès-verbal</strong> officiel d'une séance du conseil municipal ou du comité
+    exécutif. Le numéro «&nbsp;SD&nbsp;» renvoie au <strong>sommaire décisionnel</strong>, la note
+    de l'administration qui explique pourquoi. L'<strong>ordre du jour</strong> de la séance donne
+    en plus l'objet en toutes lettres et les districts touchés&nbsp;; au conseil municipal, il
+    donne aussi le montant. Quand l'ordre du jour ne dit rien d'une résolution, la fiche garde le
+    titre en capitales du procès-verbal, remis en casse de phrase — et le dit.
+  </p>
+
+  <div class="barre-outils">
+    <input type="search" id="rech-decisions" placeholder="Rechercher dans l'objet, le numéro ou le sommaire…">
+    <select id="filtre-type"><option value="">Tous les types</option></select>
+    <select id="filtre-theme"><option value="">Tous les sujets</option></select>
+    <select id="filtre-instance"><option value="">Toutes les instances</option></select>
+    <select id="affichage" title="Mode d'affichage">
+      <option value="seance">Grouper par séance</option>
+      <option value="liste">Liste continue</option>
+    </select>
+    <!-- Masqué tant qu'aucune décision n'a de résumé : app.js le révèle s'il y en a. -->
+    <label class="case" id="case-resume" hidden><input type="checkbox" id="filtre-resume"> Avec résumé seulement</label>
+    <button type="button" class="bouton-lien" id="tout-deplier">Tout déplier</button>
+  </div>
+  <p class="compte" id="compte-decisions"></p>
+
+  <div id="liste-decisions"></div>
+  <button class="plus" id="plus-decisions" hidden>Afficher plus</button>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Laval, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources.html">Sources</a>.</p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+<script type="module" src="/commun/entete-volet.js"></script>
+<script type="module" src="/commun/abonnes.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
+     Même projet Vercel : les pages vues de /laval/ s'ajoutent au même tableau de
+     bord. En local le script n'existe pas (404 sans conséquence). -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

@@ -10,7 +10,7 @@ export { EN, tr } from './langue.js';
 
 // Les villes couvertes : clé du sous-dossier → nom. La marque d'un volet en découle
 // (« DossierVilleDeQuébec »).
-export const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis', longueuil: 'Longueuil' };
+export const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis', longueuil: 'Longueuil', laval: 'Laval' };
 
 export const echapper = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

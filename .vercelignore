@@ -48,5 +48,19 @@ longueuil/api.env.example
 longueuil/data/textes
 longueuil/data/seances.json
 
-# Volet Laval : même règle (étude de faisabilité seulement pour l'instant).
+# Volet Laval : même règle. data/index-documents.json (1,3 Mo) n'est lu que par les scrapers, et
+# data/sources/ est la capture de la page des élus — matière première, pas une donnée servie.
+laval/lib
+laval/scrapers
+laval/scripts
+laval/test
 laval/README.md
+laval/courriel-greffe.md
+laval/package.json
+laval/package-lock.json
+laval/api.env.example
+laval/data/textes
+laval/data/sources
+laval/data/index-documents.json
+laval/data/lancement.log
+laval/data/seances.json

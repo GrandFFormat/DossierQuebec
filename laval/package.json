@@ -10,7 +10,7 @@
     "scrape:decisions": "node scrapers/decisions.js",
     "scrape:votes": "node scrapers/votes.js",
     "scrape:sommaires": "node scrapers/sommaires.js",
-    "scrape:resumes": "node --env-file-if-exists=api.env scrapers/resumes.js",
+    "scrape:resumes": "node --env-file-if-exists=../api.env scrapers/resumes.js",
     "scrape:elus": "node scrapers/elus.js",
     "scrape:districts": "node scrapers/districts.js",
     "scrape:presences": "node scrapers/presences.js",
