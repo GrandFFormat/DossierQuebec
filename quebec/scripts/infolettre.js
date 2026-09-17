@@ -252,7 +252,9 @@ async function main() {
   // ce qui a une date cible dans les 45 prochains jours.
   const aujourdhui = new Date().toISOString().slice(0, 10);
   const dans45 = new Date(Date.now() + 45 * 864e5).toISOString().slice(0, 10);
-  const agendaDe = seance ? attendues.decisions.filter((d) => (seance.type === 'conseil' ? d.groupe === seance.groupe : (d.instance ?? '').trim() === seance.instance)) : attendues.decisions;
+  // Par groupe d'instances : les sommaires ne disent pas quel arrondissement (attendues.json n'a
+  // que « Conseil d'arrondissement »), un numéro d'arrondissement montre donc l'agenda de tous.
+  const agendaDe = seance ? attendues.decisions.filter((d) => d.groupe === seance.groupe) : attendues.decisions;
   const agendaTotal = agendaDe.length;
   const agendaProchain = agendaDe.filter((d) => d.echeance && d.echeance >= aujourdhui && d.echeance <= dans45).sort((a, b) => a.echeance.localeCompare(b.echeance));
   const parGroupe = new Map();
@@ -298,8 +300,9 @@ async function main() {
       chapeau: "La plupart des résolutions passent sans opposition. Voici celles où des élus ont voté autrement que la majorité, regroupées quand ce sont les mêmes élus à la même séance.",
     },
     agenda: {
-      titre: seance ? `À l'agenda de ${seance.type === 'conseil' ? 'la prochaine séance' : 'l’arrondissement'}` : "À l'agenda des conseils", icone: '🗓️', couleur: '#B7791F',
-      chapeau: "Les dossiers qui attendent encore un vote et dont la date cible arrive. Ils passeront probablement à la prochaine séance, mais ce n'est pas l'ordre du jour officiel : un dossier peut être reporté.",
+      titre: seance ? (seance.type === 'conseil' ? "À l'agenda de la prochaine séance" : "À l'agenda des conseils d'arrondissement") : "À l'agenda des conseils", icone: '🗓️', couleur: '#B7791F',
+      chapeau: "Les dossiers qui attendent encore un vote et dont la date cible arrive. Ils passeront probablement à la prochaine séance, mais ce n'est pas l'ordre du jour officiel : un dossier peut être reporté." +
+        (seance?.type === 'arrondissement' ? " Les sommaires ne disent pas quel arrondissement : voici ceux de tous les arrondissements." : ''),
     },
     sujets: {
       titre: 'De quoi on a parlé', icone: '🏷️', couleur: '#DB2777',

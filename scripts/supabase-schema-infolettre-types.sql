@@ -27,3 +27,11 @@ alter table public.infolettre_numeros
 
 alter table public.infolettre_numeros drop constraint if exists infolettre_numeros_pkey;
 alter table public.infolettre_numeros add primary key (ville, type, arrondissement, mois);
+
+-- (17 sept. 2026) Les deux contraintes du premier schéma n'acceptaient que « AAAA-MM » : un numéro
+-- de séance (« 2026-09-15 ») aurait été refusé à la publication, et l'inscription qui l'a reçu aussi
+-- (dernier_mois). Ré-exécutable : on retire puis on remet.
+alter table public.infolettre_numeros drop constraint if exists infolettre_numeros_mois_check;
+alter table public.infolettre_numeros add constraint infolettre_numeros_mois_check check (mois ~ '^\d{4}-\d{2}(-\d{2})?$');
+alter table public.infolettre_inscriptions drop constraint if exists infolettre_inscriptions_dernier_mois_check;
+alter table public.infolettre_inscriptions add constraint infolettre_inscriptions_dernier_mois_check check (dernier_mois is null or dernier_mois ~ '^\d{4}-\d{2}(-\d{2})?$');
