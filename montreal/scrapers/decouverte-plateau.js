@@ -72,5 +72,34 @@ if (pvs.length) {
     }
   }
 }
+// L'ordre du jour du Plateau s'intitule « Ordre du jour et documents décisionnels » et pèse
+// 3 Mo : contient-il les sommaires décisionnels, que la Ville ne publie nulle part ailleurs ?
+// On lit le plus récent et on montre ce qui ressemble à un sommaire.
+const odjs = documents.filter((d) => d.genre === 'ODJ' && d.doc).sort((a, b) => Number(b.doc) - Number(a.doc));
+if (odjs.length) {
+  const cible = odjs[0];
+  console.log(`\n=== Ordre du jour ${cible.href} ===`);
+  try {
+    const buf = await octets(cible.href);
+    if (buf && Buffer.from(buf.slice(0, 5)).toString('latin1').startsWith('%PDF')) {
+      const lu = await lirePdf(new Uint8Array(buf));
+      console.log(`  ${buf.byteLength} octets, ${lu.nombrePages} page(s)`);
+      const pages = lu.pages.map((p) => p.lignes.map((l) => l.texte));
+      // Les premières lignes de chaque page, pour voir la structure du document.
+      for (const [i, p] of pages.entries()) {
+        if (i < 6 || i % 10 === 0) console.log(`  --- page ${i + 1} : ${p.slice(0, 4).map((l) => `[${l.slice(0, 70)}]`).join(' ')}`);
+      }
+      const mots = /sommaire d[ée]cisionnel|SOMMAIRE|Contenu|Justification|Aspect\(s\) financier|ASPECTS FINANCIERS|Recommandation|Numéro de dossier|Identification/i;
+      const hits = [];
+      for (const [i, p] of pages.entries()) for (const l of p) if (mots.test(l)) hits.push([i + 1, l.slice(0, 100)]);
+      console.log(`  ${hits.length} ligne(s) qui ressemblent à un sommaire décisionnel`);
+      for (const [n, l] of hits.slice(0, 40)) console.log(`   p.${String(n).padStart(3)} [${l}]`);
+      const liens = lu.pages.reduce((a, p) => a + (p.liens?.length ?? 0), 0);
+      console.log(`  ${liens} lien(s) dans le document`);
+      for (const p of lu.pages.slice(0, 4)) for (const l of (p.liens ?? []).slice(0, 5)) console.log(`   lien p.${p.numero} ${JSON.stringify(l).slice(0, 160)}`);
+      rapport.odj = { href: cible.href, pages: lu.nombrePages, ressemblent: hits.slice(0, 40), liens };
+    } else console.log('  pas un PDF');
+  } catch (err) { console.log(`  ⚠ ${err.message ?? err}`); }
+}
 await mkdir(new URL('../data/', import.meta.url), { recursive: true });
 await writeFile(OUT, JSON.stringify(rapport, null, 1) + '\n');
