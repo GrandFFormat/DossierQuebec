@@ -196,13 +196,13 @@ export const ARRONDISSEMENTS_CODES = {
   Outremont: { code: 'Out', heure: '19h00' },
   'Pierrefonds-Roxboro': { code: 'Pir', heure: '19h00' },
   // Le Plateau-Mont-Royal ne publie rien sous Adi_Public, et c'est établi, pas supposé :
-  // 900 requêtes le 15 septembre 2026 — six codes plausibles (Pmr, Plt, Pla, Lpm, Pmt,
-  // Plm) sur 65 dates de 2026 et deux formes, puis huit heures sur le code Pmr — n'ont
-  // trouvé aucun document. Les dix-huit autres conseils en rendent tous. On garde donc
-  // le code relevé, mais on plafonne la dépense : `budget` borne ce qu'on accepte de
-  // perdre à le redemander, assez pour s'en apercevoir le jour où la Ville publiera.
-  // C'est l'un des points du courriel envoyé au Service des données ouvertes.
-  'Le Plateau-Mont-Royal': { code: 'Pmr', heure: '19h00', budget: 40, absentDuRepertoire: true },
+  // 900 requêtes le 15 septembre 2026 — six codes plausibles sur 65 dates et deux formes,
+  // puis huit heures sur le code Pmr — n'ont trouvé aucun document. Il publie par sa page
+  // « Ordres du jour et procès-verbaux », qui renvoie au visualiseur de la Ville avec un
+  // numéro de document (voir lib/plateau.js) : `publieParPage` dit au calendrier de lire
+  // cette page au lieu de sonder le répertoire. Le code Pmr reste : c'est celui du conseil
+  // dans les résolutions (« CA26 25 0172 »). L'heure est celle lue dans ses procès-verbaux.
+  'Le Plateau-Mont-Royal': { code: 'Pmr', heure: '18h30', publieParPage: true },
   'Rivière-des-Prairies–Pointe-aux-Trembles': { code: 'Rdp', heure: '19h00' },
   'Rosemont–La Petite-Patrie': { code: 'Rpp', heure: '19h00' },
   'Saint-Laurent': { code: 'Slt', heure: '19h30' },

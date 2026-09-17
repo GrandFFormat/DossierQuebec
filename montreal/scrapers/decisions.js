@@ -126,7 +126,12 @@ export async function documentDeSeance(seance, genre, { forcer = false } = {}) {
     const cache = await lireCache(nom);
     if (cache) return { ...cache, depuisCache: true };
   }
-  const trouve = await premierDocument(candidatsDocument({ instance: seance.instance, genre, variante: seance.variante, date: seance.date, heure: seance.heure }));
+  // Une séance qui connaît déjà l'adresse de ses documents (Le Plateau-Mont-Royal, lu depuis
+  // sa page : voir lib/plateau.js) n'a rien à deviner. Les autres essaient les formes connues.
+  const candidats = seance.documents?.[genre]
+    ? [seance.documents[genre]]
+    : candidatsDocument({ instance: seance.instance, genre, variante: seance.variante, date: seance.date, heure: seance.heure });
+  const trouve = await premierDocument(candidats);
   if (!trouve.data) return { url: null, essais: trouve.essais };
   const lu = await lirePdf(trouve.data);
   const contenu = { url: trouve.url, nombrePages: lu.nombrePages, texte: lu.texte, pages: lu.pages.map((p) => ({ numero: p.numero, lignes: p.lignes, liens: p.liens })) };
