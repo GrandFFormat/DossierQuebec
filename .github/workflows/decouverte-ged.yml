@@ -73,7 +73,7 @@ jobs:
           set -o pipefail
           npm install --no-save playwright
           npx playwright install --with-deps chromium
-          npm run sonder:ged 2>&1 | tee data/ged-sonde.log
+          npm run sonder:ged 2>&1 | tee data/ged-sonde.log || echo "(la sonde s'est arrêtée — le journal ci-dessus dit où)"
 
       - name: Committer le journal
         if: ${{ always() && steps.volet.outputs.present == 'oui' }}
@@ -81,7 +81,7 @@ jobs:
         run: |
           git config user.name "dossierquebec-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add montreal/data/ged-decouverte.json montreal/data/ged-decouverte.log montreal/data/ged-sonde.json montreal/data/ged-sonde.log montreal/data/ged-sonde.png || true
+          git add montreal/data/ged-decouverte.json montreal/data/ged-decouverte.log montreal/data/ged-sonde.json montreal/data/ged-sonde.log montreal/data/ged-sonde.png montreal/data/ged-arrivee.png || true
           if git diff --cached --quiet; then
             echo "Aucun journal à committer."
           else
