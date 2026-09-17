@@ -180,8 +180,22 @@ const FIN_DISPOSITIF = /\n\s*(?:Adopt[ée]e?(?!\p{L})|Rejet[ée]e?(?!\p{L})|Vot(
 const DISPOSITIF_MAX = 2000;
 const MOTIFS_MAX = 1200;
 
+// Trois conseils — Côte-des-Neiges–Notre-Dame-de-Grâce, Outremont, Ville-Marie — n'écrivent
+// jamais « Et résolu : ». Chez eux, le dispositif suit directement le second nom :
+//
+//   Il est proposé par Sonny Moroz
+//   appuyé par Milany Thiagarajah
+//   D'adopter l'ordre du jour de la séance ordinaire du 6 juillet 2026…
+//   ADOPTÉE À L'UNANIMITÉ
+//
+// Sans cette forme, ils rendaient 1 % de dispositifs contre 93 % ailleurs. On part donc
+// après la PREMIÈRE ligne « appuyé par » : Côte-des-Neiges ajoute parfois un bloc
+// « EN AMENDEMENT » avec un second proposeur, et c'est bien tout ce qui suit le premier
+// qui a été décidé.
+const LIGNE_APPUYE = /(?:^|\n)\s*appuy[ée]e?\s+par\b[^\n]*\n?/i;
+
 export function extraireDispositif(bloc) {
-  const m = DEBUT_DISPOSITIF.exec(bloc ?? '');
+  const m = DEBUT_DISPOSITIF.exec(bloc ?? '') ?? LIGNE_APPUYE.exec(bloc ?? '');
   if (!m) return null;
   let reste = bloc.slice(m.index + m[0].length);
   const fin = FIN_DISPOSITIF.exec(reste);
