@@ -89,8 +89,19 @@ async function principal() {
     try {
       console.log(`\n  Recherche de « ${DOSSIER} » dans le champ ${editable + 1}…`);
       await champs.nth(editable).fill(DOSSIER, { timeout: 15000 });
-      await champs.nth(editable).press('Enter');
-      await page.waitForTimeout(8000);
+      // La touche Entrée ne lance rien : le portail a un bouton « Rechercher », et c'est lui
+      // qui parle au serveur. La première sonde avait bien tapé le numéro et cru que la
+      // recherche ne trouvait rien, alors qu'elle n'avait pas eu lieu — la capture d'écran
+      // montrait le numéro dans la boîte et la page d'accueil intacte derrière.
+      const bouton = page.getByRole('button', { name: /rechercher/i }).first();
+      if (await bouton.count()) {
+        await bouton.click({ timeout: 15000 });
+        rapport.lanceePar = 'bouton Rechercher';
+      } else {
+        await champs.nth(editable).press('Enter');
+        rapport.lanceePar = 'touche Entrée';
+      }
+      await page.waitForTimeout(9000);
       rapport.urlApres = page.url();
       const corps = await vu();
       rapport.trouveLeDossier = corps.includes(DOSSIER);
@@ -101,7 +112,22 @@ async function principal() {
       console.log(`  le numéro apparaît : ${rapport.trouveLeDossier ? 'OUI' : 'non'}`);
       if (rapport.mentionResultats) console.log(`  ${rapport.mentionResultats}`);
       console.log(`\n  --- après la recherche ---\n  ${rapport.pageApres.slice(0, 800)}`);
-      await page.screenshot({ path: new URL('../data/ged-sonde.png', import.meta.url).pathname }).catch(() => {});
+      await page.screenshot({ path: new URL('../data/ged-sonde.png', import.meta.url).pathname, fullPage: true }).catch(() => {});
+
+      // S'il y a des résultats, en ouvrir un : c'est la seule façon de savoir si un document
+      // porte une adresse qu'on peut donner à quelqu'un, ou seulement un état de session.
+      const liens = page.locator('a:visible');
+      const nLiens = await liens.count();
+      rapport.liensResultats = [];
+      for (let i = 0; i < Math.min(nLiens, 12); i++) {
+        const t = (await liens.nth(i).innerText().catch(() => '')).replace(/\s+/g, ' ').trim();
+        const href = await liens.nth(i).getAttribute('href').catch(() => null);
+        if (t) rapport.liensResultats.push({ texte: t.slice(0, 80), href });
+      }
+      if (rapport.liensResultats.length) {
+        console.log('\n  --- liens visibles après la recherche ---');
+        for (const l of rapport.liensResultats) console.log(`    « ${l.texte} » -> ${l.href ?? '(pas d’adresse)'}`);
+      }
     } catch (err) {
       rapport.conclusion = `la recherche a échoué : ${String(err.message ?? err).split('\n')[0]}`;
       console.log(`  ${rapport.conclusion}`);
