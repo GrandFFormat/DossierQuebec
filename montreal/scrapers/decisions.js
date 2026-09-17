@@ -50,7 +50,7 @@ const RATTRAPAGE_JOURS = 45;
 // mais le rafraîchissement suivant n'a rien relu du tout, puisque les séances étaient
 // déjà marquées « lues » au bon numéro de découpage. Deux compteurs indépendants pour un
 // même travail laissent toujours passer l'un ou l'autre ; celui-ci n'en fait qu'un.
-export const VERSION_DECOUPAGE = 10;
+export const VERSION_DECOUPAGE = 11;
 const DIAGNOSTIC = new URL('../data/diagnostic.json', import.meta.url);
 
 // Un échantillon de ce que les PDF contiennent vraiment — les premières lignes d'un
@@ -140,6 +140,25 @@ function pageDe(pages, numero) {
   const re = new RegExp('^' + numero.replace(/\s+/g, '\\s+') + '\\s*$', 'm');
   for (const p of pages) if (re.test(p.lignes.map((l) => l.texte.trim()).join('\n'))) return p.numero;
   return null;
+}
+
+// Le texte d'une décision vient de la mémoire quand sa séance a été relue aujourd'hui, et du
+// fichier de la veille sinon. Une décision relue REMPLACE son texte connu, même par rien :
+// si le découpage ne trouve plus de dispositif, le fichier ne doit pas en garder un vieux.
+//
+// Ce que ça corrige : le rafraîchissement automatique du 17 septembre, un jour sans
+// nouveauté, a réécrit textes.json à zéro. Les décisions de ce jour-là venaient toutes de
+// decisions.json, qui ne porte pas les textes — ils en sont retirés à l'écriture,
+// justement pour qu'il reste léger. Le fichier des textes doit donc être un CUMUL, jamais
+// une photo de la mémoire du jour.
+export function fusionnerTextes(liste, connus, relues = null) {
+  const textes = {};
+  for (const d of liste) {
+    const relue = relues ? relues.has(d.seanceId) : 'dispositif' in d || 'motifs' in d;
+    const source = relue ? d : (connus[d.id] ?? null);
+    if (source?.dispositif || source?.motifs) textes[d.id] = { dispositif: source.dispositif ?? null, motifs: source.motifs ?? null };
+  }
+  return textes;
 }
 
 export function decisionsDeSeance(seance, pv, odj) {
@@ -268,6 +287,10 @@ async function main() {
   const aujourdhui = new Date().toISOString().slice(0, 10);
 
   const precedent = await lireJson(OUT);
+  // Les textes de la veille, pour les décisions qui ne seront pas relues aujourd'hui. Sans
+  // eux, un jour sans nouveauté écrasait textes.json par un fichier vide : les décisions
+  // reviennent alors de decisions.json, qui ne porte pas les textes par construction.
+  const textesConnus = (await lireJson(OUT_TEXTES))?.textes ?? {};
   const connues = new Map((precedent?.seances ?? []).map((s) => [s.id, s]));
   const decisionsConnues = new Map((precedent?.decisions ?? []).map((d) => [d.id, d]));
   const decisions = new Map(args.complet ? [] : decisionsConnues);
@@ -327,10 +350,7 @@ async function main() {
     };
     await writeFile(OUT, JSON.stringify(payload, null, 1), 'utf8');
 
-    const textes = {};
-    for (const d of liste) {
-      if (d.dispositif || d.motifs) textes[d.id] = { dispositif: d.dispositif ?? null, motifs: d.motifs ?? null };
-    }
+    const textes = fusionnerTextes(liste, textesConnus);
     await writeFile(
       OUT_TEXTES,
       JSON.stringify({ generatedAt: payload.generatedAt, source: payload.source, licence: payload.licence, nombre: Object.keys(textes).length, textes }),
