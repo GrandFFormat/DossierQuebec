@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- VERROU : le volet reste hors des moteurs de recherche tant que la Ville de Laval n'a pas
+     répondu au courriel du 14 septembre 2026 (README, étape 2). À retirer avec son accord. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Le conseil municipal de Laval — DossierVilleDeLaval</title>
+<meta name="description" content="Carte des 22 districts électoraux de Laval colorée par parti, et fiches du maire et des 22 membres du conseil municipal : district, parti, rôles au comité exécutif, coordonnées, présences aux séances et votes consignés.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvm:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvm:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="/commun/abonnes.css">
+</head>
+<body data-page="conseil" data-ville="laval">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="./"><h1>Dossier<span class="marque">VilleDeLaval</span></h1></a>
+      <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
+      <a class="retour-dq" href="https://dossierquebec.ca/" title="Retour à DossierQuébec" aria-label="Retour à DossierQuébec">DQ</a>
+      <details class="ab-villes" id="villes"></details>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Laval, lisibles. Données publiques, reprises telles quelles
+      des procès-verbaux, des ordres du jour et des sommaires décisionnels officiels de la Ville.
+    </p>
+    <nav>
+      <a href="./">Accueil</a>
+      <a href="decisions.html">Décisions</a>
+      <a href="votes.html">Votes nominaux</a>
+      <a href="conseil.html" aria-current="page">Conseil municipal</a>
+      <a href="lexique.html">Lexique</a>
+      <a href="https://www.laval.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Laval (nouvel onglet)">Ville de Laval ↗</a>
+      <div class="outils">
+        <div class="taille-texte" role="group" aria-label="Taille du texte">
+          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+          <span id="texte-pct" aria-live="polite">100%</span>
+          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+        </div>
+        <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+                title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu">
+  <div id="chargement" class="avis">Chargement des données…</div>
+
+  <h2 class="page">Le conseil municipal</h2>
+  <nav class="raccourcis" aria-label="Sections de cette page">
+    <a href="#carte">La carte des districts</a>
+    <a href="#membres">Les membres du conseil</a>
+  </nav>
+  <p class="chapeau">
+    Le conseil compte 23 sièges&nbsp;: le maire, élu au suffrage universel, et 22 conseillères et
+    conseillers, un par district. Le <strong>comité exécutif</strong>, qui prend la plupart des
+    décisions du quotidien, compte cinq membres en 2026&nbsp;: le maire, qui le préside, et quatre
+    membres du conseil — tels que les nomme l'en-tête de son procès-verbal. Les fiches disent qui y
+    siège. <strong>Cliquez sur votre district</strong> pour aller directement à la fiche de la
+    personne qui vous représente.
+  </p>
+
+  <div class="zone-carte" id="carte"></div>
+  <div class="legende" id="legende"></div>
+  <p class="compte" style="margin-top:12px" id="note-carte">
+    Contours&nbsp;: jeu «&nbsp;Limites des districts électoraux des dernières élections
+    municipales&nbsp;» de la Ville de Laval sur Données Québec (licence CC-BY 4.0), simplifiés et
+    dessinés en SVG — aucune requête vers un service de cartographie externe. La couleur est celle
+    du parti de la personne élue, dans des teintes neutres qui ne sont pas celles des partis.
+    <strong>Ce que la carte ne dit pas&nbsp;:</strong> les décisions ne sont pas géolocalisées.
+    L'ordre du jour du conseil nomme toutefois les districts touchés par chaque point&nbsp;: chaque
+    fiche renvoie aux décisions de l'année qui nomment son district.
+  </p>
+
+  <h2 class="page" id="membres" style="margin-top:34px">Les membres du conseil municipal</h2>
+  <p class="chapeau">
+    Les coordonnées, le parti, les rôles et le nombre d'habitants viennent de la page
+    «&nbsp;Membres du conseil municipal&nbsp;» de laval.ca et des fiches de profil qu'elle relie.
+    Les présences viennent du jeu ouvert «&nbsp;Présence des élus au conseil municipal&nbsp;»
+    (Données Québec, CC-BY 4.0), tenu par la Ville et mis à jour chaque mois. Les votes consignés
+    sont comptés sur la page <a href="votes.html">Votes nominaux</a>. Faits bruts, aucune
+    interprétation.
+  </p>
+  <p class="compte" id="compte-elus"></p>
+  <div id="liste-elus"></div>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Laval, aucun caractère officiel.
+    En cas d'écart, la page officielle fait foi. <a href="sources.html">Sources</a>.</p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+<script type="module" src="/commun/entete-volet.js"></script>
+<script type="module" src="/commun/abonnes.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
+     Même projet Vercel : les pages vues de /laval/ s'ajoutent au même tableau de
+     bord. En local le script n'existe pas (404 sans conséquence). -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

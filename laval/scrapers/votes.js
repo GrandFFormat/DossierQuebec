@@ -42,7 +42,13 @@ export function votesDeSeance(seance, pv, objets = new Map()) {
   const votes = [];
   for (const r of decouperResolutions(pv.texte, { prefixe: seance.prefixe, pages: pv.pages })) {
     r.votes.forEach((v, i) => {
-      const objet = objets.get(r.numero) ?? casseDePhrase(r.titreMajuscules);
+      // UN VOTE DE PROCÉDURE N'EMPRUNTE PAS L'OBJET DE SON VOISIN. La prolongation de la séance
+      // au-delà de 23 h se vote comme le reste ; quand elle est REJETÉE, la Ville ne lui donne pas
+      // de numéro de résolution, et le passage reste dans le dernier bloc ouvert. Le vote y prenait
+      // l'objet et le sommaire d'une décision sans rapport (2 juin 2026 : « Adopter la Politique
+      // sur les communications… », SD-2026-1315). On dit ce que le document dit, rien de plus.
+      const procedure = /prolongation/i.test(v.etiquette ?? '') && !/PROLONGATION/.test(r.titreMajuscules ?? '');
+      const objet = procedure ? 'Prolongation de la séance' : objets.get(r.numero) ?? casseDePhrase(r.titreMajuscules);
       votes.push({
         id: r.votes.length > 1 ? `${r.numero}#${i + 1}` : r.numero,
         numero: r.numero,
@@ -51,10 +57,13 @@ export function votesDeSeance(seance, pv, objets = new Map()) {
         annee: seance.date.slice(0, 4),
         instance: seance.nom,
         seanceId: seance.id,
-        dossier: r.sommaire,
+        dossier: procedure ? null : r.sommaire,
+        // Le numéro reste celui du bloc où le passage se trouve (c'est là qu'on le relit dans le
+        // PDF), mais la fiche dit que le vote porte sur la conduite de la séance, pas sur lui.
+        voteDeProcedure: procedure,
         pdf: r.page ? `${pv.url}#page=${r.page}` : pv.url,
         ...v,
-        ...classer({ objet, titre: r.titreMajuscules }),
+        ...classer({ objet, titre: procedure ? null : r.titreMajuscules }),
       });
     });
   }
@@ -113,6 +122,23 @@ async function main() {
     const lus = votesDeSeance(seance, pv, objets);
     if (lus.length) console.log(`${seance.id} : ${lus.length} vote(s) nominal(aux)`);
     votes.push(...lus);
+  }
+
+  // GARDE-FOU DE LA RELECTURE COMPLÈTE, même raison qu'à scrapers/decisions.js. Sans fenêtre
+  // (--complet le 1er du mois, ou registre à reconstruire), le registre repart de zéro : si aucun
+  // procès-verbal n'a pu être lu, on écrirait un fichier vide par-dessus l'année, sans échec
+  // visible. Mesuré : avec le stockage répondant 404 partout, data/votes.json passait de 44 votes
+  // à 0, code de sortie 0. Avec une fenêtre, les votes hors fenêtre sont déjà conservés plus bas,
+  // d'où le seul cas gardé ici. Le compte se fait sur l'année demandée, pour ne pas bloquer la
+  // première exécution d'une année neuve.
+  const connusDeLAnnee = (precedent?.votes ?? []).filter((v) => String(v.annee) === year).length;
+  if (!depuisEffectif && analysees === 0 && connusDeLAnnee > 0) {
+    console.error(
+      `Aucun des ${seances.length} procès-verbaux de ${year} n'a pu être lu — ` +
+        `data/votes.json (${connusDeLAnnee} votes) est conservé tel quel, rien n'est réécrit.`
+    );
+    process.exitCode = 1;
+    return;
   }
 
   for (const v of votes) v.nouveau = precedent ? !idsPrecedents.has(v.id) : null;

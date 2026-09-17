@@ -26,7 +26,7 @@
 
 import { estActive } from './_stripe.js';
 
-const VILLES = new Set(['quebec', 'montreal', 'levis', 'longueuil']);
+const VILLES = new Set(['quebec', 'montreal', 'levis', 'longueuil', 'laval']);
 const DOSSIER = /^[\w.\-]{1,120}$/;
 
 const NATURES = {

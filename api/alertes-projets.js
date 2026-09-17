@@ -31,7 +31,7 @@ import { supabase, signature, site } from './_alertes.js';
 import { envoyerNumerosEnAttente } from './_infolettre.js';
 import { estActive } from './_stripe.js';
 
-const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis', longueuil: 'Longueuil' };
+const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis', longueuil: 'Longueuil', laval: 'Laval' };
 const CLE = /^[\w-]{1,60}$/;
 const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
 const dateFr = (iso) => {

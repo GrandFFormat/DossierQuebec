@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- VERROU : le volet reste hors des moteurs de recherche tant que la Ville de Laval n'a pas
+     répondu au courriel du 14 septembre 2026 (README, étape 2). À retirer avec son accord. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Sources — DossierVilleDeLaval</title>
+<meta name="description" content="D'où viennent les données de DossierVilleDeLaval : l'index des documents de laval.ca capturé à la main, les PDF sur le stockage de la Ville, Données Québec ; comment les décisions et les votes sont lus, et ce que ce prototype ne fait pas encore.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvm:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvm:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="/commun/abonnes.css">
+</head>
+<body data-page="sources" data-ville="laval">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="./"><h1>Dossier<span class="marque">VilleDeLaval</span></h1></a>
+      <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
+      <a class="retour-dq" href="https://dossierquebec.ca/" title="Retour à DossierQuébec" aria-label="Retour à DossierQuébec">DQ</a>
+      <details class="ab-villes" id="villes"></details>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Laval, lisibles. Données publiques, reprises telles quelles
+      des procès-verbaux, des ordres du jour et des sommaires décisionnels officiels de la Ville.
+    </p>
+    <nav>
+      <a href="./">Accueil</a>
+      <a href="decisions.html">Décisions</a>
+      <a href="votes.html">Votes nominaux</a>
+      <a href="conseil.html">Conseil municipal</a>
+      <a href="lexique.html">Lexique</a>
+      <a href="https://www.laval.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Laval (nouvel onglet)">Ville de Laval ↗</a>
+      <a href="sources.html" aria-current="page">Sources</a>
+      <div class="outils">
+        <div class="taille-texte" role="group" aria-label="Taille du texte">
+          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+          <span id="texte-pct" aria-live="polite">100%</span>
+          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+        </div>
+        <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+                title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu prose">
+  <div id="chargement" class="avis" hidden></div>
+
+  <h2 class="page">Sources</h2>
+  <p class="chapeau">
+    Ce site n'est pas la Ville de Laval et n'a aucun caractère officiel. En cas de différence,
+    le document PDF d'origine fait foi — il est à un clic sur chaque fiche.
+  </p>
+
+  <h3>D'où viennent les données</h3>
+  <ul>
+    <li><strong>L'index des documents.</strong> La Ville publie la liste de ses ordres du jour,
+      procès-verbaux et sommaires décisionnels sur la page
+      <a href="https://www.laval.ca/vie-democratique/hotel-de-ville-personnes-elues/ordre-jour-proces-verbaux-sommaire/" target="_blank" rel="noopener">«&nbsp;Ordre du jour, procès-verbaux et sommaire décisionnel&nbsp;»</a>
+      de laval.ca. Le pare-feu du site (Cloudflare) refuse toute lecture qui ne vient pas d'un
+      navigateur, quel que soit le robot — et un robot identifié ne se déguise pas. L'index est
+      donc <strong>capturé à la main, dans un navigateur</strong>, puis versé dans le site&nbsp;:
+      <span id="date-index">la date de la dernière capture figure dans l'état des données, plus bas</span>.
+      Entre deux captures, une séance nouvellement publiée par la Ville n'apparaît pas ici.</li>
+    <li><strong>Les documents eux-mêmes</strong> — procès-verbaux, ordres du jour, sommaires
+      décisionnels — sont des PDF sur le stockage de la Ville
+      (<code>vdldocgreffecmspc01sa.blob.core.windows.net</code>), ouvert à tous. Chaque fiche
+      renvoie au sien, à la page où la résolution commence.</li>
+    <li><strong>Les décisions et les votes</strong> sont lus dans les procès-verbaux du
+      <strong>conseil municipal</strong> et du <strong>comité exécutif</strong> (séances publiques
+      et à huis clos, dont les procès-verbaux sont publiés). L'<strong>ordre du jour</strong> de la
+      séance donne en plus l'objet en toutes lettres et les districts touchés — et, au conseil
+      seulement, le montant.</li>
+    <li><strong>Les districts</strong> viennent du jeu
+      <a href="https://www.donneesquebec.ca/recherche/dataset/limites-des-districts-electoraux-des-dernieres-elections-municipales" target="_blank" rel="noopener">«&nbsp;Limites des districts électoraux des dernières élections municipales&nbsp;»</a>,
+      et <strong>les présences</strong> du jeu
+      <a href="https://www.donneesquebec.ca/recherche/dataset/presence-des-elus-au-conseil-municipal" target="_blank" rel="noopener">«&nbsp;Présence des élus au conseil municipal&nbsp;»</a>,
+      tous deux publiés par la Ville de Laval sur Données Québec sous licence CC-BY 4.0.</li>
+    <li><strong>Les membres du conseil</strong> viennent de la page
+      <a href="https://www.laval.ca/vie-democratique/hotel-de-ville-personnes-elues/membres-conseil-municipal/" target="_blank" rel="noopener">«&nbsp;Membres du conseil municipal&nbsp;»</a>
+      de laval.ca et des fiches de profil qu'elle relie (parti, nombre d'habitants, rôles),
+      capturées dans un navigateur pour la même raison que l'index. Le jeu ouvert «&nbsp;Liste des
+      élus&nbsp;» date de 2023, d'avant l'élection de novembre 2025&nbsp;: il n'est pas utilisé.</li>
+    <li>laval.ca n'affiche aucun avis de droit d'auteur ni conditions d'utilisation. Ce site cite
+      la source de chaque fiche et renvoie au document officiel&nbsp;; la question a été posée à
+      la Ville (voir plus bas).</li>
+  </ul>
+
+  <h3>Ce qu'une machine fait, et ce qu'elle peut rater</h3>
+  <ul>
+    <li><strong>Le découpage des procès-verbaux en résolutions</strong> repose sur le gabarit de la
+      Ville&nbsp;: le numéro de la résolution (<code>CM-20260203-64</code>) dans la marge, à la
+      hauteur de la première ligne du titre, puis le titre en capitales, puis le texte, qui se
+      termine par le renvoi au sommaire (<code>SD-2026-1234</code>). Une séance dont aucune
+      résolution n'est reconnue est signalée dans l'état des données, jamais remplie à la main.</li>
+    <li><strong>L'objet en toutes lettres</strong> vient de l'ordre du jour, apparié à la
+      résolution par son numéro de sommaire. Le conseil municipal et le comité exécutif publient
+      tous deux le leur, mais pas de la même façon&nbsp;: celui du conseil donne l'objet, les
+      districts touchés et le montant&nbsp;; celui du comité exécutif donne l'objet, les districts
+      et le certificat de trésorerie, jamais le montant. Le comité exécutif écrit en outre un seul
+      point par dossier, que le procès-verbal décline ensuite en deux à quatre résolutions
+      (adjudication, début des travaux, paiement)&nbsp;: seule la première reçoit l'objet de
+      l'ordre du jour, les suivantes gardent le titre du procès-verbal remis en casse de phrase.
+      C'est pourquoi 88&nbsp;% des résolutions du conseil portent un objet écrit en toutes lettres,
+      contre 61&nbsp;% de celles du comité exécutif.</li>
+    <li><strong>Les sommaires décisionnels.</strong> La Ville publie le PDF de ceux qui vont au
+      conseil municipal&nbsp;; ceux du comité exécutif sont cités par leur numéro dans chaque
+      résolution, mais ne sont pas en ligne. La fiche donne alors le numéro et dit que le document
+      n'est pas publié — elle ne devine rien à sa place.</li>
+    <li><strong>Les noms des votants</strong> sont extraits du texte des procès-verbaux, pas d'un
+      registre. Chaque vote est recoupé avec le décompte imprimé dans la même phrase («&nbsp;par
+      un compte de 16 en faveur et de 4 contre&nbsp;»)&nbsp;; tout écart est affiché sur la fiche
+      plutôt que corrigé en silence, et le passage d'origine reste lisible sous chaque vote.</li>
+    <li><strong>Les résumés</strong>, quand il y en a, sont écrits par une intelligence
+      artificielle à partir du sommaire décisionnel — la note que l'administration rédige avant
+      chaque décision. Elle a pour consigne de n'ajouter aucune information absente du document
+      et de ne porter aucun jugement. Chaque résumé est marqué comme tel.</li>
+    <li><strong>Les pastilles de sujet</strong> n'existent pas dans les données de la Ville&nbsp;:
+      c'est un classement ajouté ici, d'après les mots de l'objet de chaque décision, à défaut
+      d'après le titre en capitales du procès-verbal, à défaut encore d'après le chapitre de
+      l'ordre du jour où la Ville l'a rangée. Ce qui ne se laisse classer par aucun des trois
+      tomberait dans «&nbsp;Administration&nbsp;» — en 2026, aucune fiche n'en est là.</li>
+  </ul>
+
+  <h3>Trois choses à savoir</h3>
+  <ul>
+    <li>Le site montre les décisions de <strong>l'année en cours</strong>, conseil municipal et
+      comité exécutif confondus. Le comité exécutif décide beaucoup — plusieurs séances par
+      semaine — et adopte tout «&nbsp;à l'unanimité&nbsp;»&nbsp;: la page des votes ne concerne que
+      le conseil.</li>
+    <li>Un vote nominal n'a lieu que si un membre le demande. <strong>«&nbsp;Adoptée à
+      l'unanimité&nbsp;» veut dire que personne n'a demandé le vote</strong>, pas que chacun a
+      pris la parole pour l'appuyer.</li>
+    <li>Ce prototype reste <strong>hors des moteurs de recherche</strong> et sans version
+      anglaise tant que la Ville n'a pas répondu. Un courriel a été envoyé le
+      <strong>14 septembre 2026</strong> à <code>donneesouvertes@laval.ca</code>, greffe en
+      copie&nbsp;: il demande que le robot identifié <code>DossierVille/0.1</code> puisse lire
+      l'index (ou que l'index soit publié en données ouvertes), confirme l'usage non commercial
+      avec la source citée, et demande l'accord pour rendre le site public. Sans réponse, une
+      relance est prévue le 13 octobre 2026.</li>
+  </ul>
+
+  <h3>État des données</h3>
+  <div id="etat-donnees"></div>
+  <div id="etat-archive"></div>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Laval, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi.</p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+<script type="module" src="/commun/entete-volet.js"></script>
+<script type="module" src="/commun/abonnes.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
+     Même projet Vercel : les pages vues de /laval/ s'ajoutent au même tableau de
+     bord. En local le script n'existe pas (404 sans conséquence). -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
