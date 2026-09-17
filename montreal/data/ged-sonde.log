@@ -14,17 +14,24 @@ Ouverture du portail…
     type=text placeholder=— éditable=true actif=true
 
   Recherche de « 1265298015 » dans le champ 2…
-  adresse après recherche : https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM
+  adresse après recherche : https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM#!searchResults/s/5193a833-b238-11f1-81fa-77092c344f76
   le numéro apparaît : non
+  0 résultat
 
   --- après la recherche ---
-  Répertoire des documents officiels Cherchez, consultez, et téléchargez les documents officiels diffusés par la Ville de Montréal et ses 19 arrondissements.  Rechercher Filtrer la recherche À propos Mentions légales
+   Rechercher Filtrer la recherche Trier par  0 résultat Précédent Page de 1  Suivant À propos Mentions légales
 
-  --- ce que le portail demande au serveur (5 appels) ---
+  --- liens visibles après la recherche ---
+    « À propos » -> #
+    « Mentions légales » -> https://montreal.ca/articles/mentions-legales-2654
+
+  --- ce que le portail demande au serveur (7 appels) ---
   GET   /constellio/?collection=mtlca&portal=REPDOCVDM
-  POST  /constellio/?collection=mtlca&portal=REPDOCVDM&v-1789608714299
+  POST  /constellio/?collection=mtlca&portal=REPDOCVDM&v-1789609032993
   POST  /constellio/UIDL/?v-uiId=0
   POST  /constellio/UIDL/?v-uiId=0
+  POST  /constellio/UIDL/?v-uiId=0
+  GET   /constellio/?collection=mtlca&portal=REPDOCVDM
   POST  /constellio/UIDL/?v-uiId=0
 
 Rapport écrit dans data/ged-sonde.json
