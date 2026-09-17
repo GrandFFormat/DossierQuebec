@@ -260,9 +260,31 @@ Le courriel **après une séance** vient du même script : `npm run infolettre -
 que `api/_infolettre.js`). Mêmes sections et mêmes deux éditions que le mensuel, pour les seules
 résolutions de cette instance ce jour-là (et les sommaires qu'elles citent) : résolutions adoptées,
 montants, subventions, contrats, votes divisés de la séance, liens vers le procès-verbal et le tableau
-des décisions, et l'agenda de l'instance en doré. Fichiers `infolettres/<instance>-<date>.html`.
-`--publier` le range comme numéro `conseil` ou `arrondissement` (clé : la date de la séance). Le
-déclenchement automatique après chaque séance reste à faire.
+des décisions, et l'agenda en doré (pour un arrondissement : l'agenda de tous les conseils
+d'arrondissement, parce que les sommaires ne disent pas lequel — corrigé le 17 sept., il était
+toujours vide). Fichiers `infolettres/<instance>-<date>.html`. `--publier` le range comme numéro
+`conseil` ou `arrondissement` (clé : la date de la séance — les contraintes SQL `mois ~ 'AAAA-MM'`
+du premier schéma l'auraient refusé ; `supabase-schema-infolettre-types.sql` les élargit depuis le
+17 sept.). Le déclenchement automatique après chaque séance reste à faire.
+
+**Pourquoi Québec seulement (17 sept. 2026).** Martin a remarqué que « Mes courriels » ne montre
+que les arrondissements de Québec : la boîte reflète `VILLES_INFOLETTRE`, et c'est voulu — une ville
+n'y entre que quand ses numéros peuvent sortir (le courriel de bienvenue promet « le premier arrive
+le … »). Cinq lectures indépendantes ont établi ce qui manque ailleurs : le générateur est propre à
+Québec (chemins, instances, types de documents au pluriel, textes, détail de l'argent via
+`scrapers/details-argent.js` et l'index de la Ville) ; Montréal n'a ni résumés ni agenda et publie
+ses procès-verbaux un à deux mois après la séance (un numéro d'arrondissement serait une liste de
+titres, 18 arrondissements sur 19) ; Lévis a de quoi faire le mensuel et le conseil (résumés,
+montants, votes), mais ses 483 résolutions d'arrondissement n'ont ni sommaire ni résumé ni montant
+(une liste de dérogations et de PIIA, un à quatre mois après) ; Longueuil n'a aucun conseil
+d'arrondissement dans ses données (Vieux-Longueuil et Saint-Hubert sont `actif: false` dans
+`lib/lgl.js`, Greenfield Park n'a pas de document de séance), et le volet attend la réponse de la
+Ville sur l'usage de son contenu. La boîte le dit désormais (« Offert pour Québec seulement pour
+l'instant »). Chemin si on y va : rendre le générateur générique (`--ville`, un module de
+configuration par ville, sortie de Québec comparée octet pour octet), puis Lévis en mensuel +
+conseil d'abord, Longueuil après la réponse de la Ville, Montréal quand ses sommaires s'ouvrent ;
+« Mon arrondissement » hors Québec seulement avec des résumés d'arrondissement. Le rythme promis
+« environ aux deux semaines » pour le conseil est celui de Québec : à rendre propre à chaque ville.
 
 **L'inscription et l'envoi (15 sept. 2026).** Une ligne par adresse et par ville (`infolettre_inscriptions`, `scripts/supabase-schema-infolettre.sql`) : les villes offertes sont celles de `VILLES_INFOLETTRE` dans `api/_infolettre.js` (Québec pour l'instant). Formulaire sur l'accueil du volet (`commun/infolettre.js`) : courriel « Confirmer mon inscription » (lien signé), puis le plus récent compte rendu publié part aussitôt avec un bandeau « Bienvenue ! Le prochain arrive au début de… ». Connecté avec la même adresse (déjà vérifiée) : confirmé tout de suite ; dans Mes dossiers, une case par ville. Garde-fous : pot de miel, une confirmation par adresse aux 10 minutes, 30 par heure en tout ; la réponse ne dit jamais si une adresse est déjà inscrite. Chaque courriel porte « ne plus recevoir celui de Québec » et « me désinscrire de tout », et l'en-tête de désinscription en un clic. L'édition abonnés va aux adresses d'un abonnement actif.
 
