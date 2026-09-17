@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-17T22:44:12.998Z",
+ "generatedAt": "2026-09-17T23:08:09.523Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Récapitulatifs rédigés automatiquement à partir de l'objet, du dispositif et des motifs des résolutions de chaque sujet, lus dans les procès-verbaux, puis vérifiés automatiquement (numéros et nombres contre les dossiers cités, contre-lecture). Ce qui ne passe pas est retiré. En cas d'écart, les documents officiels font foi.",
@@ -307,16 +307,16 @@
   },
   "eau-egouts": {
    "titre": "Eau potable, aqueduc et égouts",
-   "signature": "ebec41dbdecd006f",
-   "genereLe": "2026-09-17T22:43:59.728Z",
+   "signature": "732f5d6a1cdb10ce",
+   "genereLe": "2026-09-17T23:08:05.921Z",
    "modele": "claude-opus-5",
    "dossiers": 61,
-   "enBref": "Cette année, la Ville accorde des contrats pour refaire ou rehabiliter des conduites d'eau et d'égout dans les rues de plusieurs arrondissements, et pour faire fonctionner ses usines d'eau potable et la station d'épuration Jean-R.-Marcotte. Elle adopte aussi des règlements d'emprunt pour financer ces travaux, dont celui de l'unité de désinfection de la station d'épuration. Des arrondissements offrent au conseil municipal de piloter eux-mêmes certains chantiers, dont le remplacement des entrées d'eau en plomb sur les terrains privés.",
+   "enBref": "Cette année, la Ville accorde des contrats pour refaire ou réhabiliter des conduites d'eau et d'égout dans les rues de plusieurs arrondissements. Elle finance aussi des travaux à la station d'épuration Jean-R.-Marcotte et achète des produits pour traiter l'eau. Des arrondissements offrent au conseil municipal de prendre en charge des chantiers d'aqueduc et le remplacement des entrées de service en plomb.",
    "etapes": [
     {
      "periode": "Février à juin 2026",
-     "titre": "Arrondissements et entrées d'eau en plomb",
-     "texte": "Plusieurs arrondissements offrent au conseil municipal de prendre en charge le remplacement des entrées d'eau en plomb sur les terrains privés, ainsi que la conception et la réalisation de travaux d'aqueduc et d'égout sur leur territoire. Lachine, Le Sud-Ouest, Ahuntsic-Cartierville et Rosemont–La Petite-Patrie font ces offres.",
+     "titre": "Les arrondissements offrent de mener des chantiers",
+     "texte": "Plusieurs arrondissements offrent au conseil municipal de prendre en charge des travaux d'aqueduc et d'égout sur leur territoire, dont le remplacement des entrées de service en plomb sur les terrains privés.",
      "numeros": [
       "CA26 19 0014",
       "CA26 26 0011",
@@ -326,16 +326,15 @@
      ]
     },
     {
-     "periode": "Avril à juin 2026",
-     "titre": "Chantiers de reconstruction de rues",
-     "texte": "La Ville accorde des contrats pour reconstruire des conduites d'eau, des égouts et la chaussée, notamment dans l'axe de la rue Guy entre la rue Saint-Jacques et le boulevard René-Lévesque, pour une dépense totale de 28 921 033,25 $, taxes incluses (CG26 0245). D'autres chantiers touchent la rue De Champlain, le boulevard Alexis-Nihon, l'avenue Wilson et l'écoquartier Louvain.",
+     "periode": "Mai et juin 2026",
+     "titre": "Entretien du réseau principal et détection de fuites",
+     "texte": "La Ville prolonge de 24 mois le contrat de détection de fuites dans les conduites d'aqueduc principales [CG26 0273] et ajoute des contingences aux travaux de réhabilitation d'une conduite entre la rue Saint-Jacques et le réservoir McTavish [CG26 0336]. Elle loue du gouvernement fédéral un terrain de 941 mètres carrés au canal de Lachine pour entretenir deux conduites d'eau [CG26 0355].",
      "numeros": [
-      "CG26 0245",
-      "CG26 0332",
-      "CA26 08 0191",
-      "CM26 0553",
-      "CG26 0368",
-      "CA26 19 0080"
+      "CG26 0273",
+      "CG26 0336",
+      "CG26 0355",
+      "CG26 0388",
+      "CG26 0306"
      ]
     }
    ],
@@ -347,28 +346,20 @@
     "retiresMecanique": [],
     "retiresContreLecture": [
      {
-      "element": "etapes[0]",
-      "raison": "Le texte affirme que « le conseil municipal et le conseil d'agglomération adoptent un règlement ». CM26 0058 n'adopte pas le règlement : il décide seulement « que l'orientation du conseil municipal soit » de l'adopter. Seul CG26 0075 (conseil d'agglomération) adopte réellement le règlement, sujet à l'approbation de la ministre."
+      "element": "etapes[4]",
+      "raison": "La période annoncée (« Mai et juin 2026 ») ne couvre pas le dossier CE26 0352, qui est une résolution du comité exécutif du 11 mars 2026. De plus, ce dossier (services professionnels en ingénierie et architecture pour le bâtiment administratif de l'usine d'eau potable Atwater, 497 781,96 $) n'est évoqué nulle part dans le texte, alors que le titre parle d'« usines » : le lecteur ne peut rattacher ce numéro à aucun fait énoncé."
+     },
+     {
+      "element": "etapes[3]",
+      "raison": "La phrase « Des mandats de surveillance et de contrôle des matériaux accompagnent ces travaux » n'est appuyée par aucun des dossiers cités (CG26 0245, CG26 0332, CM26 0463, CA26 08 0191, CA26 30 06 0133, CA26 29 0163). Les seuls mandats de surveillance et de contrôle qualitatif de l'année (CA26 08 0135 – Artelia, boulevard Alexis-Nihon; CA26 240257 – IGF Axiom; CA26 240320 – Groupe ABS, tronçons Montcalm/De la Visitation/Panet/Alexandre-DeSève) ne sont pas cités ici et portent sur d'autres chantiers que la rue Guy ou la rue De Champlain : le lien établi est faux."
      },
      {
       "element": "etapes[1]",
-      "raison": "La formule « réparer de l'intérieur les conduites d'eau secondaires, sans ouvrir la rue » ajoute une explication technique qu'aucun des dossiers cités ne donne. Les dossiers parlent de « réhabilitation de conduites d'eau secondaires par chemisage et de voirie (réhabilitation) », ce qui inclut des travaux de voirie, sans préciser que la rue n'est pas ouverte."
+      "raison": "La précision technique « réparer de l'intérieur des conduites […], sans ouvrir la rue sur toute sa longueur » est une explication du chemisage que ne donne aucun des dossiers cités; ils indiquent seulement des « travaux de réhabilitation de conduites d'eau secondaires par chemisage et de voirie (réhabilitation) »."
      },
      {
-      "element": "etapes[4]",
-      "raison": "Le dossier CE26 0352 est cité sous la période « Mai à juin 2026 » alors qu'il date du 11 mars 2026. De plus, son objet (services professionnels d'ingénierie et d'architecture de Bouthillette Parizeau et Leclerc architectes pour le bâtiment administratif de l'usine Atwater, 497 781,96 $) ne correspond à aucune affirmation du texte, qui ne traite que d'ABB, des polymères, du sulfate d'aluminium et de la détection de fuites."
-     },
-     {
-      "element": "etapes[4]",
-      "raison": "« La Ville renouvelle le soutien du système de commande et de surveillance » : CG26 0271 accorde un contrat de gré à gré à ABB inc. (fournisseur unique) pour trois ans à compter du 1er juin 2026; rien dans le dossier n'indique qu'il s'agit du renouvellement d'un contrat antérieur."
-     },
-     {
-      "element": "etapes[5]",
-      "raison": "Le dossier CA26 29 0163 (contrat 262000-ST à Les Entreprises J. Piccioni inc., chaussée et conduite d'aqueduc sur le boulevard Gouin Ouest, arrondissement de Pierrefonds-Roxboro, 3 août 2026) est cité sous « Emprunt Namur–De la Savane et entretien du réseau », alors qu'aucune phrase du texte n'en rend compte et qu'il ne porte ni sur un emprunt ni sur la délégation de l'entretien du réseau principal."
-     },
-     {
-      "element": "etapes[5]",
-      "raison": "Le dossier CG26 0306 (nomination d'un membre du comité technique prévu au RCG 05-002, 19 mai 2026) est cité sans qu'aucun élément du texte n'y corresponde; le texte n'évoque que l'adoption de l'emprunt, l'avis de motion sur la délégation et les contingences de la rue de la Cathédrale."
+      "element": "etapes[0]",
+      "raison": "Affirmer que le conseil d'agglomération « fait passer à 381 000 000 $ l'emprunt » et « adopte […] un emprunt de 12 000 000 $ » présente comme acquis ce que les dossiers CG26 0075 et CG26 0391 conditionnent expressément : l'adoption est faite « sujet à son approbation par la ministre / le ministre des Affaires municipales ». La condition d'approbation ministérielle est omise."
      }
     ]
    }
@@ -556,88 +547,80 @@
   },
   "matieres-residuelles": {
    "titre": "Matières résiduelles",
-   "signature": "a6e5bd058ad31aca",
-   "genereLe": "2026-09-17T22:44:12.998Z",
+   "signature": "f7b9690858cc06bf",
+   "genereLe": "2026-09-17T23:07:46.452Z",
    "modele": "claude-opus-5",
    "dossiers": 27,
    "enBref": null,
    "etapes": [
     {
-     "periode": "Janvier 2026",
-     "titre": "Traitement des résidus alimentaires prolongé",
-     "texte": "La Ville a prolongé de six mois deux contrats confiés à Recyclage Notre-Dame inc. pour traiter les résidus alimentaires par compostage ou biométhanisation. La dépense additionnelle autorisée est de 3 269 055,43 $, taxes incluses (CG26 0045).",
+     "periode": "Janvier à juin 2026",
+     "titre": "Prolongation des contrats de traitement et de collecte",
+     "texte": "La Ville a prolongé de six mois les deux contrats de compostage ou de biométhanisation des résidus alimentaires confiés à Recyclage Notre-Dame inc., avec une dépense additionnelle de 3 269 055,43 $, taxes incluses [CG26 0045]. Elle a aussi prolongé de 12 mois les contrats de collecte et d'élimination des ordures provenant de conteneurs, ainsi que le contrat de transport de matières résiduelles par conteneurs pour l'écocentre Saint-Laurent.",
      "numeros": [
       "CM26 0029",
-      "CE26 0062",
-      "CG26 0045"
+      "CG26 0045",
+      "CM26 0416",
+      "CG26 0233",
+      "CM26 0608",
+      "CG26 0325"
      ]
     },
     {
      "periode": "Mars à mai 2026",
      "titre": "Contrats d'hydro-excavation dans les arrondissements",
-     "texte": "Plusieurs arrondissements ont accordé des contrats d'hydro-excavation qui comprennent le traitement des matières résiduelles, à la suite de l'appel d'offres public 25-21256. À Ahuntsic-Cartierville, le contrat accordé à Tech Vac Environnement inc. couvre la période du 16 mars 2026 au 31 décembre 2028, pour 581 198,63 $, taxes incluses (CA26 09 0033).",
+     "texte": "Plusieurs arrondissements ont accordé des contrats d'hydro-excavation incluant le traitement des matières résiduelles, issus du même appel d'offres public 25-21256. Les contrats vont jusqu'au 31 décembre 2028 dans Ahuntsic-Cartierville [CA26 09 0033] et Pierrefonds-Roxboro [CA26 29 0116].",
      "numeros": [
       "CA26 12030",
       "CA26 26 0028",
       "CA26 09 0033",
       "CA26 13 0079",
-      "CA26 14 0073",
-      "CA26 10 128"
+      "CA26 10 128",
+      "CA26 29 0116"
      ]
     },
     {
      "periode": "Mars à juin 2026",
-     "titre": "Bacs et matériel de tri achetés",
-     "texte": "Le conseil municipal a conclu des ententes-cadres avec USD Global inc. et Orbis Canada pour fournir des outils de collecte pendant 36 mois, puis avec Plasti-Bac inc. pour fournir et distribuer des outils de collecte des ordures ménagères en 2026 et 2027. La Ville a aussi accepté une contribution de 43 773,61 $, taxes incluses, de Tricentris pour prêter de la vaisselle réutilisable, des fontaines d'eau et des stations de tri lors d'événements de quartier (CE26 0795).",
+     "titre": "Achat de bacs et d'outils de collecte",
+     "texte": "Le conseil municipal a conclu des ententes-cadres de 36 mois avec Orbis Canada et USD Global pour fournir des outils de collecte des matières résiduelles. Il a ensuite conclu une entente de 24 mois avec Plasti-Bac inc. pour fournir et distribuer des outils de collecte des ordures ménagères en 2026 et 2027.",
      "numeros": [
-      "CE26 0337",
       "CM26 0336",
-      "CE26 0818",
-      "CM26 0690",
-      "CE26 0795"
+      "CM26 0690"
      ]
     },
     {
-     "periode": "Avril et juin 2026",
-     "titre": "Conteneurs et écocentre Saint-Laurent",
-     "texte": "La Ville a prolongé de 12 mois deux contrats avec Waste Connections of Canada inc. / Enviro Connexions pour la collecte, le transport et l'élimination des ordures provenant de conteneurs à chargement avant et semi-enfouis. Elle a aussi prolongé de 12 mois le contrat de fourniture et de transport de matières résiduelles par conteneurs à l'écocentre Saint-Laurent, maintenant détenu par GFL Environmental inc.",
+     "periode": "Mai à juin 2026",
+     "titre": "Sensibilisation et prêt d'équipement",
+     "texte": "Le comité exécutif a approuvé une entente avec Tricentris, la Coop de solidarité, qui verse 43 773,61 $, taxes incluses, pour prêter de la vaisselle réutilisable, des fontaines d'eau et des stations de tri lors d'événements de quartier [CE26 0795]. Ahuntsic-Cartierville a retenu Ville en vert pour informer et accompagner les immeubles de huit logements et moins des districts d'Ahuntsic et du Sault-au-Récollet lors du changement de fréquence de la collecte des ordures.",
      "numeros": [
-      "CM26 0416",
-      "CE26 0531",
-      "CG26 0233",
-      "CM26 0608",
-      "CE26 0819",
-      "CG26 0325"
+      "CE26 0795",
+      "CA26 09 0141"
      ]
     },
     {
      "periode": "Février à juillet 2026",
-     "titre": "Bilans déposés et règles sur les locaux à déchets",
-     "texte": "Les arrondissements de Rivière-des-Prairies–Pointe-aux-Trembles, Saint-Laurent et Côte-des-Neiges–Notre-Dame-de-Grâce ont déposé leurs bilans de dépenses de 2025 pour les activités déléguées, et le conseil d'agglomération a pris acte du bilan 2025 de la gestion des matières résiduelles et de la reddition de compte du Plan directeur 2020-2025. Le Plateau-Mont-Royal a autorisé l'aménagement d'un local d'entreposage des matières résiduelles d'au moins 28 m² au 397, boulevard Saint-Joseph Ouest, et Le Sud-Ouest a permis qu'aucune aire de dépôt extérieure ne soit aménagée au 2380, rue Notre-Dame Ouest.",
+     "titre": "Dépôt des bilans 2025",
+     "texte": "Les arrondissements de Rivière-des-Prairies–Pointe-aux-Trembles, de Saint-Laurent et de Côte-des-Neiges–Notre-Dame-de-Grâce ont déposé leurs bilans de dépenses pour la gestion déléguée des matières résiduelles. Le bilan 2025 de l'agglomération et la reddition de compte du Plan directeur de gestion des matières résiduelles 2020-2025 ont aussi été déposés.",
      "numeros": [
       "CE26 0476",
       "CE26 0477",
       "CG26 0311",
-      "CA26 170171",
-      "CA26 25 0097",
-      "CA26 22 0081"
+      "CA26 170171"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "La convention avec Ville en vert pour l'accompagnement des résidents d'Ahuntsic et du Sault-au-Récollet court jusqu'au 15 juillet 2027.",
+     "texte": "Les contrats d'hydro-excavation d'Ahuntsic-Cartierville et de Pierrefonds-Roxboro se terminent le 31 décembre 2028.",
      "numeros": [
-      "CA26 09 0141"
+      "CA26 09 0033",
+      "CA26 29 0116"
      ]
     },
     {
-     "texte": "Les contrats d'hydro-excavation avec traitement des matières résiduelles se terminent le 31 décembre 2028, notamment à Anjou, Ahuntsic-Cartierville, Villeray–Saint-Michel–Parc-Extension et Pierrefonds-Roxboro.",
+     "texte": "La convention de sensibilisation avec Ville en vert dans Ahuntsic-Cartierville couvre la période du 15 juin 2026 au 15 juillet 2027.",
      "numeros": [
-      "CA26 12030",
-      "CA26 09 0033",
-      "CA26 14 0073",
-      "CA26 29 0116"
+      "CA26 09 0141"
      ]
     }
    ],
@@ -649,11 +632,15 @@
     "retiresContreLecture": [
      {
       "element": "enBref",
-      "raison": "« des bacs et autres outils de collecte » : aucun dossier ne parle de « bacs ». CM26 0336 et CM26 0690 portent sur la fourniture d'« outils de collecte des matières résiduelles / des ordures ménagères », sans préciser la nature des contenants. La mention de bacs ajoute une précision que les dossiers ne donnent pas."
+      "raison": "« une dizaine d'arrondissements » est un décompte approximatif que les dossiers ne donnent pas : les contrats d'hydro-excavation de l'appel d'offres 25-21256 figurant à la liste visent huit arrondissements (Anjou, Rosemont–La Petite-Patrie, Ahuntsic-Cartierville, L'Île-Bizard–Sainte-Geneviève, Saint-Léonard, Villeray–Saint-Michel–Parc-Extension, Montréal-Nord, Pierrefonds-Roxboro). Le chiffre gonfle le nombre réel."
      },
      {
-      "element": "etapes[1]",
-      "raison": "Attribution imprécise du contenu des ordonnances de CE26 0146 : l'ordonnance 4-1 modifie le jour, l'horaire et les secteurs de la seule collecte des matières recyclables à L'Île-Bizard–Sainte-Geneviève, alors que l'ordonnance 12 modifie uniquement le jour et les secteurs (sans horaire) de la collecte des matières résiduelles au Plateau-Mont-Royal. Le texte fusionne les deux et attribue « les jours, les horaires et les secteurs » aux deux arrondissements, sans distinguer les matières recyclables."
+      "element": "enBref",
+      "raison": "« Elle achète aussi des bacs » : les dossiers CM26 0336 et CM26 0690 parlent uniquement d'« outils de collecte des matières résiduelles » ou « des ordures ménagères », sans jamais préciser qu'il s'agit de bacs. Même remarque pour le titre de etapes[3] (« Achat de bacs et d'outils de collecte »), qui ajoute une précision absente des dossiers."
+     },
+     {
+      "element": "etapes[0]",
+      "raison": "Le texte attribue aux deux arrondissements une modification du « jour, l'horaire et les secteurs ». Selon CE26 0146, seule l'ordonnance 4-1 de L'Île-Bizard–Sainte-Geneviève modifie le jour, l'horaire et les secteurs, et uniquement pour la collecte des matières recyclables; l'ordonnance 12 du Plateau-Mont-Royal ne modifie que le jour et les secteurs. La fusion déforme le contenu du dossier."
      }
     ]
    }
@@ -903,16 +890,29 @@
   },
   "itinerance": {
    "titre": "Itinérance et hébergement d'urgence",
-   "signature": "77454b75ede775ea",
-   "genereLe": "2026-09-17T22:43:32.207Z",
+   "signature": "4ccd6ac35be069c5",
+   "genereLe": "2026-09-17T23:07:52.575Z",
    "modele": "claude-opus-5",
    "dossiers": 25,
-   "enBref": null,
+   "enBref": "Cette année, la Ville prête des bâtiments municipaux à des organismes pour y ouvrir des haltes-chaleur, et elle finance des projets communautaires liés à l'itinérance. Les arrondissements se partagent aussi une équipe de travaux publics dédiée à ces enjeux. La Ville s'est enfin donné un cadre pour recevoir des dons privés destinés au logement et à l'hébergement.",
    "etapes": [
     {
+     "periode": "Janvier à février 2026",
+     "titre": "Bâtiments prêtés pour des haltes-chaleur",
+     "texte": "La Ville prête gratuitement trois bâtiments à des organismes pour accueillir des personnes en situation d'itinérance : une église du 5600, 12e Avenue à Rosemont–La Petite-Patrie pour une clientèle féminine, l'ancien monastère des Recluses Missionnaires au 12050, boulevard Gouin Est, et le Bain St-Denis au 7075, rue Saint-Hubert. Le prêt du bâtiment du boulevard Gouin Est court jusqu'au 30 avril 2026 et s'accompagne d'un virement de 97 000 $ entre deux services de la Ville.",
+     "numeros": [
+      "CM26 0041",
+      "CM26 0050",
+      "CG26 0057",
+      "CG26 0066",
+      "CM26 0172",
+      "CG26 0116"
+     ]
+    },
+    {
      "periode": "Février 2026",
-     "titre": "Financement d'organismes par des arrondissements",
-     "texte": "Verdun accorde 12 950 $ à la Société de développement social pour embaucher des intervenants de milieu du 5 janvier au 6 février 2026. Ahuntsic-Cartierville ratifie la poursuite d'un contrat pour l'exploitation d'une halte-chaleur pendant l'hiver 2025-2026, pour un maximum de 126 615,07 $, taxes incluses.",
+     "titre": "Les arrondissements financent sur le terrain",
+     "texte": "Verdun verse 12 950 $ à la Société de développement social pour embaucher des intervenants de milieu du 5 janvier au 6 février 2026. Ahuntsic-Cartierville confirme la poursuite du contrat de COHAB inc. pour l'exploitation d'une halte-chaleur durant l'hiver 2025-2026, pour un maximum de 126 615,07 $, taxes incluses.",
      "numeros": [
       "CA26 210012",
       "CA26 09 0005"
@@ -921,29 +921,16 @@
     {
      "periode": "Mars 2026",
      "titre": "Programme itinérance et milieux inclusifs",
-     "texte": "La Ville accorde un soutien financier à des organismes pour leurs projets, sur une période de trois ans se terminant le 31 décembre 2028, dans le cadre du Programme itinérance et milieux inclusifs 2026-2028. Le conseil municipal donne son orientation et le conseil d'agglomération décide.",
+     "texte": "La Ville accorde un soutien financier de 5 407 736 $ à 15 organismes et un soutien additionnel de 3 942 461 $ à 10 organismes, sur une période de trois ans se terminant le 31 décembre 2028. Les projets financés touchent le loisir, l'insertion par le travail, l'accompagnement des jeunes et la cohabitation dans l'espace public.",
      "numeros": [
       "CM26 0284",
       "CG26 0179"
      ]
     },
     {
-     "periode": "Mars à juin 2026",
-     "titre": "Équipe de travaux publics partagée",
-     "texte": "Ville-Marie offre aux autres arrondissements les services d'une équipe de travaux publics en soutien aux enjeux liés à l'itinérance, pour douze mois à compter du printemps 2026. Plusieurs conseils d'arrondissement acceptent cette offre.",
-     "numeros": [
-      "CA26 240086",
-      "CA26 25 0076",
-      "CA26 26 0054",
-      "CA26 14 0081",
-      "CA26 22 0053",
-      "CA26 09 0147"
-     ]
-    },
-    {
      "periode": "Mai 2026",
      "titre": "Déclaration et motion au conseil",
-     "texte": "Le conseil municipal adopte une déclaration en soutien aux personnes en situation d'itinérance et de reconnaissance envers l'organisme Maison Mobile. Il traite aussi une motion de l'Opposition officielle sur la révision du programme d'aide à l'achat résidentiel et la création d'un fonds municipal de soutien au loyer pour prévenir l'itinérance.",
+     "texte": "Le conseil municipal adopte une déclaration en soutien aux personnes en situation d'itinérance et souligne le travail des organismes communautaires en santé, dont Maison Mobile. Il se prononce aussi sur une motion de l'Opposition officielle portant sur la révision du programme d'aide à l'achat résidentiel et la création d'un fonds municipal de soutien au loyer.",
      "numeros": [
       "CM26 0503",
       "CM26 0582"
@@ -952,7 +939,7 @@
     {
      "periode": "Juin 2026",
      "titre": "Cadre pour les dons privés",
-     "texte": "La Ville adopte un mécanisme d'acceptation de don pour encadrer la réception de contributions financières privées destinées au logement, à l'hébergement et à la cohabitation sociale pour les personnes en situation d'itinérance ou à risque de l'être.",
+     "texte": "La Ville adopte un mécanisme d'acceptation de don pour encadrer la réception de contributions financières privées. Ces sommes doivent servir à des initiatives de logement, d'hébergement et de cohabitation sociale pour les personnes en situation d'itinérance ou à risque de l'être.",
      "numeros": [
       "CM26 0670",
       "CG26 0387"
@@ -961,14 +948,7 @@
    ],
    "aSurveiller": [
     {
-     "texte": "Le prêt du bâtiment du 12050, boulevard Gouin Est à Projets Autochtones du Québec court jusqu'au 30 avril 2026.",
-     "numeros": [
-      "CM26 0050",
-      "CG26 0066"
-     ]
-    },
-    {
-     "texte": "À Rivière-des-Prairies–Pointe-aux-Trembles, l'entente sur l'équipe de travaux publics couvre la période du 15 mai 2026 au 15 mai 2027.",
+     "texte": "L'entente sur l'équipe de travaux publics acceptée par Rivière-des-Prairies–Pointe-aux-Trembles court du 15 mai 2026 au 15 mai 2027.",
      "numeros": [
       "CA26 30 05 0112"
      ]
@@ -988,12 +968,8 @@
     "retiresMecanique": [],
     "retiresContreLecture": [
      {
-      "element": "etapes[0]",
-      "raison": "« Chaque prêt est approuvé par le conseil municipal puis le conseil d'agglomération » déforme la procédure décrite dans les dossiers : CM26 0041, CM26 0050 et CM26 0172 énoncent seulement « que l'orientation du conseil municipal soit : d'approuver… », c'est-à-dire une orientation, tandis que l'approbation est faite par le conseil d'agglomération (CG26 0057, CG26 0066, CG26 0116). Le récapitulatif l'énonce d'ailleurs correctement à etapes[2] et etapes[5]."
-     },
-     {
-      "element": "enBref",
-      "raison": "« Elle a aussi adopté un programme de soutien financier sur trois ans » n'est pas ce que disent CM26 0284 et CG26 0179 : ces dossiers accordent des soutiens financiers à des organismes, sur une période de trois ans se terminant le 31 décembre 2028, dans le cadre du Programme itinérance et milieux inclusifs 2026-2028 déjà existant. Aucun dossier ne porte sur l'adoption d'un programme."
+      "element": "etapes[3]",
+      "raison": "Le texte nomme huit arrondissements acceptant l'offre de Ville-Marie, mais trois d'entre eux — Mercier–Hochelaga-Maisonneuve (CA26 27 0082), le Sud-Ouest (CA26 22 0053) et Lachine (CA26 19 0092) — ne figurent dans aucun des dossiers cités par l'élément (CA26 240086, CA26 25 0076, CA26 26 0054, CA26 14 0081, CA26 30 05 0112, CA26 09 0147). L'affirmation n'est donc pas soutenue par les numéros indiqués; il faut ajouter ces trois résolutions à la liste « numeros »."
      }
     ]
    }
@@ -1148,83 +1124,53 @@
   },
   "pietonnisation": {
    "titre": "Piétonnisation et places publiques",
-   "signature": "0a2dcda835c412a4",
-   "genereLe": "2026-09-17T22:43:49.855Z",
+   "signature": "1feb4cc92fb31153",
+   "genereLe": "2026-09-17T23:08:09.523Z",
    "modele": "claude-opus-5",
    "dossiers": 19,
-   "enBref": "Cette année, la Ville encadre les rues piétonnes et les places publiques par des ordonnances de fermeture de rues, de bruit et de vente sur le domaine public. Elle verse aussi de l'argent à des arrondissements et à des sociétés de développement commercial pour réaliser les piétonnisations de la saison 2026. Des mesures d'accompagnement s'ajoutent, comme un service de transport sur demande sur l'avenue du Mont-Royal.",
+   "enBref": "Cette année, la Ville ferme des rues à la circulation pour la saison estivale et aménage des places publiques dans plusieurs arrondissements. Elle adopte les ordonnances qui encadrent ces rues piétonnes (circulation, bruit, vente, terrasses) et verse de l'argent aux arrondissements et aux sociétés de développement commercial qui portent les projets. Elle paie aussi des services liés à ces rues, comme du transport de personnes et de l'animation.",
    "etapes": [
     {
      "periode": "Février 2026",
-     "titre": "Cadre des subventions et règlement d'un litige",
-     "texte": "Ville-Marie adopte le règlement CA-24-406 sur les subventions aux sociétés de développement commercial pour des projets de piétonnisation en 2026. Rosemont–La Petite-Patrie règle hors cour un recours de 41 686,46 $ lié aux travaux de la place publique au coin des rues Beaubien Est et Boyer.",
+     "titre": "Un règlement de subventions et un règlement hors cour",
+     "texte": "L'arrondissement de Ville-Marie adopte le règlement CA-24-406 sur les subventions aux sociétés de développement commercial pour des projets de piétonnisation. Rosemont–La Petite-Patrie règle hors cour un recours de 41 686,46 $ lié aux travaux d'une place publique au coin des rues Beaubien Est et Boyer.",
      "numeros": [
       "CA26 240037",
       "CA26 26 0010"
      ]
     },
     {
-     "periode": "Mars 2026",
-     "titre": "Premières fermetures de rues autorisées",
-     "texte": "Côte-des-Neiges–Notre-Dame-de-Grâce autorise l'aménagement de la Placette CDN, la fermeture d'une bretelle du chemin de la Côte-des-Neiges, des cafés-terrasses, la vente de nourriture et de boissons et la diffusion de musique du 1er avril au 31 octobre 2026. Ville-Marie interdit la circulation des véhicules sur plusieurs tronçons pour ses piétonnisations estivales et encadre le bruit, la circulation et la peinture sur la chaussée.",
+     "periode": "Mars à mai 2026",
+     "titre": "Financement des projets de piétonnisation",
+     "texte": "Le comité exécutif autorise des virements de 2 694 500 $ à six arrondissements pour les piétonnisations sur des artères commerciales en 2026. Les arrondissements versent ensuite des contributions aux sociétés de développement commercial, dont 375 500 $ pour le Village, 102 045 $ pour le Quartier Villeray et 67 500 $ pour Côte-des-Neiges, et Outremont affecte 105 000 $ à l'avenue Bernard.",
      "numeros": [
-      "CA26 170058",
-      "CA26 240090"
-     ]
-    },
-    {
-     "periode": "Mars 2026",
-     "titre": "Argent versé à six arrondissements",
-     "texte": "Le comité exécutif autorise des virements budgétaires de 2 694 500 $ à six arrondissements pour l'appel à projets de piétonnisation sur des artères commerciales en 2026 : Le Plateau-Mont-Royal, Villeray–Saint-Michel–Parc-Extension, Verdun, Mercier–Hochelaga-Maisonneuve, Ville-Marie et Outremont.",
-     "numeros": [
-      "CE26 0465"
-     ]
-    },
-    {
-     "periode": "Avril et mai 2026",
-     "titre": "Soutien aux sociétés commerciales",
-     "texte": "Villeray–Saint-Michel–Parc-Extension accorde 102 045 $ à la Société de développement commercial Quartier Villeray, Ville-Marie accorde 375 500 $ à la Société de développement commercial du Village, et Côte-des-Neiges–Notre-Dame-de-Grâce accorde 67 500 $ pour la piétonnisation de l'avenue Lacombe. Outremont affecte 105 000 $ à la piétonnisation de l'avenue Bernard.",
-     "numeros": [
-      "CA26 14 0078",
+      "CE26 0465",
       "CA26 240134",
+      "CA26 14 0078",
       "CA26 170108",
       "CA26 16 0061"
      ]
     },
     {
-     "periode": "Avril à juin 2026",
-     "titre": "Ordonnances de la saison estivale",
-     "texte": "Outremont ferme l'avenue Bernard du 19 mai au 24 septembre 2026, Le Plateau-Mont-Royal encadre les avenues du Mont-Royal et Duluth, Mercier–Hochelaga-Maisonneuve ferme la rue Ontario Est entre Darling et Pie-IX du 15 juin au 18 septembre 2026, et Côte-des-Neiges–Notre-Dame-de-Grâce désigne les avenues Royal et Madison comme rues piétonnes du 1er juin au 31 octobre 2026. Ville-Marie modifie ses ordonnances de mars.",
+     "periode": "Juin 2026",
+     "titre": "Musique, animation et promotion commerciale",
+     "texte": "Le Plateau-Mont-Royal encadre la diffusion de musique sur les avenues du Mont-Royal et Duluth. Côte-des-Neiges–Notre-Dame-de-Grâce autorise une promotion commerciale en rue fermée sur l'avenue de Monkland. Le comité exécutif accorde 40 000 $ à la Société culturelle « Les Survenants » pour animer la rue piétonne Notre-Dame Ouest.",
      "numeros": [
-      "CA26 16 0082",
-      "CA26 25 0134",
-      "CA26 27 0115",
-      "CA26 170088",
-      "CA26 240155",
-      "CA26 25 0168"
-     ]
-    },
-    {
-     "periode": "Mai et juin 2026",
-     "titre": "Mesures d'accompagnement et animation",
-     "texte": "Le Plateau-Mont-Royal confie à SOCIOCYCLE un service de transport de personnes sur demande sur l'avenue du Mont-Royal pour 287 724,94 $, et Mercier–Hochelaga-Maisonneuve retire temporairement 113 places de stationnement tarifées sur la rue Ontario Est. Le comité exécutif accorde 40 000 $ pour l'animation de la rue piétonne Notre-Dame Ouest, et Côte-des-Neiges–Notre-Dame-de-Grâce autorise une promotion commerciale en rue fermée sur l'avenue de Monkland.",
-     "numeros": [
-      "CA26 25 0115",
-      "CA26 27 0119",
-      "CE26 0991",
-      "CA26 170135"
+      "CA26 25 0168",
+      "CA26 170135",
+      "CE26 0991"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "Animation de la rue piétonne Notre-Dame Ouest du 10 au 19 juillet 2026.",
+     "texte": "Animation de la rue piétonne Notre-Dame Ouest, du 10 au 19 juillet 2026.",
      "numeros": [
       "CE26 0991"
      ]
     },
     {
-     "texte": "Promotion commerciale en rue fermée sur l'avenue de Monkland du 20 au 23 août 2026.",
+     "texte": "Promotion commerciale en rue fermée sur l'avenue de Monkland, du 20 au 23 août 2026.",
      "numeros": [
       "CA26 170135"
      ]
@@ -1240,12 +1186,6 @@
      "numeros": [
       "CA26 16 0082"
      ]
-    },
-    {
-     "texte": "Convention de transport sur demande sur l'avenue du Mont-Royal jusqu'au 31 décembre 2027.",
-     "numeros": [
-      "CA26 25 0115"
-     ]
     }
    ],
    "utilisable": true,
@@ -1255,8 +1195,16 @@
     "retiresMecanique": [],
     "retiresContreLecture": [
      {
+      "element": "etapes[1]",
+      "raison": "Le texte range « chemin de la Côte-des-Neiges » parmi les rues fermées, ce qui laisse entendre la fermeture du chemin lui-même. CA26 170058 n'autorise que la fermeture de la bretelle du chemin de la Côte-des-Neiges direction sud, entre Queen-Mary et la rue du Frère-André (aménagement de la Placette CDN). La portée est élargie par rapport au dossier."
+     },
+     {
+      "element": "etapes[3]",
+      "raison": "Ajoute une localisation absente du dossier : CA26 27 0119 autorise le retrait temporaire de 113 places de stationnement tarifées « dans le cadre de la piétonnisation estivale de la rue Ontario Est », sans préciser que ces places se trouvent sur la rue Ontario Est elle-même."
+     },
+     {
       "element": "aSurveiller[4]",
-      "raison": "Formulation trop générale : les dossiers CA26 170058 et CA26 170088 fixent au 31 octobre 2026 la fin de certaines ordonnances précises (Placette CDN / bretelle Côte-des-Neiges, avenues Royal et Madison), pas « les ordonnances de Côte-des-Neiges–Notre-Dame-de-Grâce ». L'arrondissement a d'autres ordonnances de piétonnisation dans la même liste dont les échéances diffèrent (CA26 170135, promotion commerciale sur Monkland du 20 au 23 août 2026; CA26 170108, soutien à la piétonnisation de l'avenue Lacombe jusqu'au 31 décembre 2028). Aucun dossier n'affirme une fin générale des ordonnances de l'arrondissement à cette date."
+      "raison": "Généralise à tout l'arrondissement (« fin des fermetures et des ordonnances d'animation à Côte-des-Neiges–Notre-Dame-de-Grâce ») une date qui ne vaut que pour les objets précis des deux dossiers cités (bretelle du chemin de la Côte-des-Neiges / Placette CDN, avenues Royal et Madison). L'arrondissement a aussi autorisé d'autres mesures hors de ce cadre (promotion commerciale sur Monkland, soutien à la piétonnisation de l'avenue Lacombe couvrant 2026-2028). De plus, l'ordonnance OCA26 17018 de CA26 170088 porte sur l'installation de mobilier de détente et d'équipements d'embellissement, et non sur de l'animation."
      }
     ]
    }
