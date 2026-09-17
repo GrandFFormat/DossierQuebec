@@ -114,7 +114,9 @@ async function principal() {
         else await champs.nth(editable).press('Enter');
         await page.waitForTimeout(7000);
         const corps = await vu();
-        ligne.resultats = corps.match(/(\d[\d\s]*)\s*r[ée]sultats?/i)?.[1]?.replace(/\s/g, '') ?? '?';
+        // Le portail écrit « 1,279 résultats » : la virgule sépare les milliers. Sans le
+        // prévoir, on lisait 279 et on sous-estimait le fonds d'un facteur dix.
+        ligne.resultats = corps.match(/([\d,\s]+)\s*r[ée]sultats?/i)?.[1]?.replace(/[\s,]/g, '') ?? '?';
         ligne.url = page.url();
         ligne.extrait = corps.slice(0, 600);
       } catch (err) {
@@ -128,6 +130,37 @@ async function principal() {
     // Ce que rend la requête la plus générale : de quoi ce répertoire est-il fait ?
     const derniere = rapport.recherches.at(-1);
     if (derniere?.extrait) console.log(`\n  --- ce que rend « ${derniere.terme} » ---\n  ${derniere.extrait.slice(0, 600)}`);
+
+    // Ouvrir le premier résultat de « sommaire décisionnel ». Savoir combien il y en a ne
+    // dit pas ce que c'est : un « procès-verbal » de ce répertoire peut être un
+    // procès-verbal d'ouverture de soumissions de 2008, qui n'a rien à voir avec une séance
+    // du conseil. Et s'il a une adresse qu'on peut donner à quelqu'un, il faut la voir.
+    try {
+      await champs.nth(editable).fill('sommaire décisionnel', { timeout: 15000 });
+      const b = page.getByRole('button', { name: /rechercher/i }).first();
+      if (await b.count()) await b.click({ timeout: 15000 });
+      await page.waitForTimeout(7000);
+      const titres = page.locator('[role="listitem"] a, .search-result a, table a').filter({ hasNotText: /^(À propos|Mentions)/ });
+      const nT = await titres.count();
+      rapport.premierResultat = { candidats: nT };
+      if (nT) {
+        const t = (await titres.first().innerText().catch(() => '')).replace(/\s+/g, ' ').trim();
+        rapport.premierResultat.titre = t.slice(0, 160);
+        console.log(`\n  Premier résultat de « sommaire décisionnel » : « ${t.slice(0, 120)} »`);
+        await titres.first().click({ timeout: 15000 });
+        await page.waitForTimeout(6000);
+        rapport.premierResultat.url = page.url();
+        rapport.premierResultat.page = (await vu()).slice(0, 900);
+        console.log(`  adresse : ${rapport.premierResultat.url}`);
+        console.log(`  --- la fiche ---\n  ${rapport.premierResultat.page.slice(0, 700)}`);
+        await page.screenshot({ path: new URL('../data/ged-fiche.png', import.meta.url).pathname, fullPage: true }).catch(() => {});
+      } else {
+        console.log('\n  Aucun titre de résultat cliquable repéré.');
+      }
+    } catch (err) {
+      rapport.premierResultat = { erreur: String(err.message ?? err).split('\n')[0] };
+      console.log(`\n  Ouverture du premier résultat : ${rapport.premierResultat.erreur}`);
+    }
 
     const liens = page.locator('a:visible');
     const nLiens = await liens.count();
