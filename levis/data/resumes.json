@@ -1,25 +1,853 @@
 {
- "generatedAt": "2026-09-15T00:40:21.474Z",
+ "generatedAt": "2026-09-17T14:35:17.211Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
  "parametres": {
   "annee": "2026",
-  "max": 30,
+  "max": 40,
   "batch": false,
-  "depuis": null,
+  "depuis": "2026-07-19",
   "plafond": 120
  },
- "nombre": 492,
- "genereCetteFois": 11,
- "echecs": [],
+ "nombre": 523,
+ "genereCetteFois": 31,
+ "echecs": [
+  {
+   "id": "APGI-GI-2026-045",
+   "raison": "résumé abîmé (séquences d'échappement illisibles) — sera redemandé"
+  },
+  {
+   "id": "DAJG-2026-017",
+   "raison": "résumé abîmé (séquences d'échappement illisibles) — sera redemandé"
+  }
+ ],
  "cout": {
   "devise": "USD",
-  "montant": 0.3837,
-  "jetonsEntree": 51791,
-  "jetonsSortie": 4991
+  "montant": 1.2318,
+  "jetonsEntree": 170998,
+  "jetonsSortie": 15073
  },
  "resumes": [
+  {
+   "id": "FIN-2026-040",
+   "numero": "FIN-2026-040",
+   "resolution": "CV3646",
+   "date": "2026-09-15",
+   "unite": "Finances et trésorerie",
+   "objet": "Dépôt des listes de virements de fonds pour la période du 1 au 31 mai 2026 et des crédits additionnels pour la même période",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/FIN-2026-040.pdf",
+   "puces": [
+    "Le trésorier dépose au conseil les listes des virements de fonds et des crédits additionnels traités entre le 1er et le 31 mai 2026.",
+    "Il s'agit d'une reddition de comptes et d'information : le conseil en prend acte, sans nouvelle dépense autorisée.",
+    "Ces listes ont d'abord été présentées à la commission des finances et de l'administration le 29 juin 2026.",
+    "Les virements touchent notamment des licences Microsoft, des frais de cellulaires, des équipements et une étude sur le Quai Paquet liée à la sécurité des lieux."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:05.028Z",
+   "jetons": {
+    "entree": 8096,
+    "sortie": 293
+   }
+  },
+  {
+   "id": "FIN-2026-043",
+   "numero": "FIN-2026-043",
+   "resolution": "CV3647",
+   "date": "2026-09-15",
+   "unite": "Finances et trésorerie",
+   "objet": "Dépôt des listes de virements de fonds et des crédits additionnels traités pour la période du 1 juin au 31 juillet 2026",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/FIN-2026-043.pdf",
+   "puces": [
+    "Le trésorier dépose au conseil les listes des virements de fonds et des crédits additionnels traités du 1er juin au 31 juillet 2026.",
+    "Il s'agit d'un dépôt d'information : le conseil en prend acte, sans nouvelle dépense autorisée.",
+    "Ces listes ont d'abord été présentées à la commission des finances et de l'administration le 17 août 2026.",
+    "Les documents détaillés sont joints en quatre annexes, une par mois pour les virements et pour les crédits additionnels."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:05.336Z",
+   "jetons": {
+    "entree": 7821,
+    "sortie": 269
+   }
+  },
+  {
+   "id": "APGI-APP-2026-090",
+   "numero": "APGI-APP-2026-090",
+   "resolution": "CV3648",
+   "date": "2026-09-15",
+   "unite": "Approvisionnement et gestion immobilière",
+   "objet": "Dépôt des listes de contrats au 30 juin 2026",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/APGI-APP-2026-090.pdf",
+   "puces": [
+    "La Ville dépose au conseil les listes de contrats et d'autorisations de dépenses accordés entre le 1er janvier et le 30 juin 2026, comme la loi l'exige.",
+    "Les contrats de plus de 25 000 $ accordés par le comité exécutif durant ces six mois totalisent 64 591 775,52 $.",
+    "Le plus gros contrat va à Les Excavations Lafontaine inc. : 13 784 224,99 $ pour la réfection de la conduite d'émissaire des étangs aérés, secteur Lévis (phase 2).",
+    "Autres contrats visibles : Bell Mobilité (4 829 299,35 $ pour la téléphonie cellulaire), du pavage et des trottoirs dans les routes urbaines et rurales, et un poste de pompage à Saint-Étienne-de-Lauzon (3 215 850,75 $).",
+    "Les listes couvrent aussi les contrats à soumission unique et ceux où le prix retenu dépasse l'estimation de plus de 20 %.",
+    "Le dépôt passe au comité exécutif le 8 septembre 2026, puis au conseil de la Ville le 15 septembre 2026.",
+    "Le document n'entraîne aucun impact financier en lui-même."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "64 591 775,52",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:07.829Z",
+   "jetons": {
+    "entree": 8252,
+    "sortie": 522
+   }
+  },
+  {
+   "id": "APGI-APP-2026-091",
+   "numero": "APGI-APP-2026-091",
+   "resolution": "CV3649",
+   "date": "2026-09-15",
+   "unite": "Approvisionnement et gestion immobilière",
+   "objet": "Dépôt des listes de contrats au 31 juillet 2026",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/APGI-APP-2026-091.pdf",
+   "puces": [
+    "La Ville dépose les listes de ses contrats et dépenses autorisées, comme la loi l'exige, pour la période allant jusqu'au 31 juillet 2026.",
+    "Les contrats de plus de 25 000 $ conclus par le comité exécutif du 1er janvier au 31 juillet 2026 totalisent 67 910 480,91 $.",
+    "Parmi les plus gros : 13 784 224,99 $ aux Excavations Lafontaine pour la conduite d'émissaire des étangs aérés (secteur Lévis, phase 2) et 6 880 455,71 $ au même entrepreneur pour les rues des Frênes et des Cèdres.",
+    "Autres contrats notables : 4 829 299,35 $ à Bell Mobilité pour la téléphonie cellulaire et plusieurs contrats de pavage et de trottoirs 2026 (Pavage U.C.P., Les entreprises Lévisiennes, Gilles Audet Excavation, Construction et pavage Portneuf).",
+    "Des sommes vont aussi aux stations d'épuration : 2 840 121,95 $ à WSP Canada (Saint-Nicolas) et 2 292 026,93 $ à Tetra Tech QI (Desjardins) pour des services d'ingénierie.",
+    "Les listes incluent aussi les contrats n'ayant reçu qu'une seule soumission et ceux dont le prix dépasse de plus de 20 % l'estimation de la Ville.",
+    "Le comité exécutif en prend acte le 8 septembre 2026 et le conseil de la Ville, le 15 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "67 910 480,91",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:08.943Z",
+   "jetons": {
+    "entree": 8198,
+    "sortie": 647
+   }
+  },
+  {
+   "id": "DG-2026-042",
+   "numero": "DG-2026-042",
+   "resolution": "CV3650",
+   "date": "2026-09-15",
+   "unite": "Direction générale",
+   "objet": "Calendrier modifié des réunions pour l’année 2026 de la commission des services à la communauté",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DG-2026-042.pdf",
+   "puces": [
+    "La Ville dépose le procès-verbal de la réunion du 20 août 2026 de la Commission des services à la communauté et approuve un calendrier modifié.",
+    "La rencontre du 10 septembre est annulée; celle du 8 octobre est allongée et commencera à 8 h 30.",
+    "La commission a choisi le lauréat du prix Ville de Lévis au Gala des Prix arts et culture; les noms restent sous embargo jusqu'au dévoilement officiel.",
+    "La commission recommande d'approuver la Politique de participation publique.",
+    "Des ajustements ont été faits au parc Quatre-Saisons après une rencontre sur les irritants liés au pickleball.",
+    "La Ville a pris contact avec Accès-Loisirs Québec, qui offre du loisir gratuit aux personnes à faible revenu de 0 à 99 ans.",
+    "Aucun impact financier; les décisions passent au comité exécutif le 8 septembre et au conseil de la Ville le 15 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:15.120Z",
+   "jetons": {
+    "entree": 4980,
+    "sortie": 433
+   }
+  },
+  {
+   "id": "FIN-2026-041",
+   "numero": "FIN-2026-041",
+   "resolution": "CV3651",
+   "date": "2026-09-15",
+   "unite": "Finances et trésorerie",
+   "objet": "Modification de règlements d’emprunt fermés relative à l’annulation du pouvoir d’emprunt",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/FIN-2026-041.pdf",
+   "puces": [
+    "La Ville demande au ministère des Affaires municipales et de l'Habitation d'annuler 43 622 555 $ de pouvoir d'emprunt qu'elle n'a jamais utilisé.",
+    "Ces sommes viennent de 10 règlements d'emprunt dont les travaux sont terminés et déjà payés : liens routiers et viaduc entre la 7e Rue (Saint-Rédempteur) et la rue de l'Aréna (Saint-Nicolas), travaux d'aqueduc, d'égouts et de traitement des eaux, et autres travaux permanents.",
+    "Au total, les règlements prévoyaient 142 680 000 $ de dépenses et d'emprunts; les montants sont ramenés à 122 682 284 $ de dépenses et 99 057 445 $ d'emprunts.",
+    "Le document précise que ces soldes ne sont pas de l'argent emprunté en trop : la Ville ne finance que les dépenses réellement faites.",
+    "Aucun impact financier n'est prévu et l'objectif énoncé est de mettre à jour l'état de l'endettement de la Ville.",
+    "Le dossier doit passer au comité exécutif le 8 septembre 2026 et au conseil de la Ville le 15 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "43 622 555 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:17.023Z",
+   "jetons": {
+    "entree": 5081,
+    "sortie": 527
+   }
+  },
+  {
+   "id": "FIN-2026-045",
+   "numero": "FIN-2026-045",
+   "resolution": "CV3652",
+   "date": "2026-09-15",
+   "unite": "Finances et trésorerie",
+   "objet": "Modification de la résolution CV-2019-04-74 « Renflouement de certaines réserves financières »",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/FIN-2026-045.pdf",
+   "puces": [
+    "La Ville réduit sa réserve d'argent pour le déneigement de 5 000 000 $ à 4 000 000 $.",
+    "Le million de dollars ainsi libéré retourne au surplus de fonctionnement non affecté.",
+    "Ce million servira à rembourser par anticipation certains refinancements lors d'une prochaine émission d'obligations.",
+    "Cette affectation du million fera l'objet d'un autre document décisionnel plus tard.",
+    "Le document n'annonce aucun impact financier pour 2026, 2027 ou 2028.",
+    "Passage au comité exécutif le 8 septembre 2026, puis au conseil de la Ville le 15 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 000 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:15.823Z",
+   "jetons": {
+    "entree": 3031,
+    "sortie": 327
+   }
+  },
+  {
+   "id": "FIN-2026-048",
+   "numero": "FIN-2026-048",
+   "resolution": "CV3653",
+   "date": "2026-09-15",
+   "unite": "Finances et trésorerie",
+   "objet": "Renflouement de la réserve financière pour le financement de dépenses relatives à la réalisation de projets reliés au mandat du comité des services de proximité",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/FIN-2026-048.pdf",
+   "puces": [
+    "La Ville ajoute 830 500 $ à la réserve financière servant à payer les projets du comité des services de proximité.",
+    "L'argent vient de l'excédent de fonctionnement accumulé non affecté.",
+    "La réserve ne contenait plus que 169 500 $, alors que le conseil avait fixé son plafond à 1 000 000 $.",
+    "La somme n'était pas prévue au budget de fonctionnement ni au plan des investissements.",
+    "Le comité exécutif devait se prononcer le 8 septembre 2026 et le conseil de la Ville, le 15 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "830 500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:13.154Z",
+   "jetons": {
+    "entree": 2739,
+    "sortie": 292
+   }
+  },
+  {
+   "id": "FIN-2026-049",
+   "numero": "FIN-2026-049",
+   "resolution": "CV3654",
+   "date": "2026-09-15",
+   "unite": "Finances et trésorerie",
+   "objet": "Affectation de l’excédent de fonctionnement accumulé non affecté au remboursement par anticipation des refinancements lors de l’émission d’obligations de novembre 2026",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/FIN-2026-049.pdf",
+   "puces": [
+    "La Ville veut utiliser 1 000 000 $ de son surplus accumulé pour rembourser une partie de sa dette par anticipation.",
+    "Cette somme vient de la réserve pour le déneigement, ramenée à 4 M$ par une décision antérieure du conseil.",
+    "Le remboursement touche 12 règlements d'emprunt dont il reste 5 ans à payer, pour des montants allant de 8 650 $ à 166 284 $.",
+    "Sans ce paiement et après d'autres mesures déjà adoptées, la Ville refinance 13 271 000 $ lors de sa prochaine émission d'obligations.",
+    "L'émission d'obligations est prévue le 24 novembre 2026 et l'adjudication le 12 novembre 2026.",
+    "Le dossier passe au comité exécutif le 8 septembre 2026 et au conseil de la Ville le 15 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 000 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:25.050Z",
+   "jetons": {
+    "entree": 3300,
+    "sortie": 522
+   }
+  },
+  {
+   "id": "ENV-2026-017",
+   "numero": "ENV-2026-017",
+   "resolution": "CV3655",
+   "date": "2026-09-15",
+   "unite": "Environnement",
+   "objet": "Demande d’aide financière dans le cadre du troisième appel de programmation du volet 2 du programme Accélérer la transition climatique locale, engagement et désignation d’une représentante de la Ville",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/ENV-2026-017.pdf",
+   "puces": [
+    "La Ville de Lévis demande 915 218 $ au ministère des Affaires municipales et de l'Habitation pour quatre projets liés aux changements climatiques, avec une contribution de la Ville de 228 805 $ (coût total de 1 144 022 $).",
+    "Le dépôt doit se faire au plus tard le 2 octobre 2026; le ministère prendra au moins 4 mois pour analyser les demandes.",
+    "Projet le plus coûteux : la mise à jour des plans de gestion des eaux pluviales des arrondissements des Chutes-de-la-Chaudière-Ouest, des Chutes-de-la-Chaudière-Est et de Desjardins (479 054 $), réalisé de 2027 à 2029.",
+    "Autres projets : une étude sur les impacts climatiques des développements industriels (162 164 $), une campagne de communication sur les prises d'eau potable (499 550 $) et la préparation de la programmation elle-même (3 254 $).",
+    "Si l'aide est accordée, la Ville paiera tous les coûts non admissibles, les dépassements de coûts et l'entretien des infrastructures subventionnées.",
+    "La part de la Ville sera assurée en bonne partie par du temps de travail du personnel déjà prévu aux budgets; le reste viendra des budgets des directions concernées.",
+    "La Ville aura 5 ans après l'approbation du ministère pour réaliser les projets retenus."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "915 218 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:26.963Z",
+   "jetons": {
+    "entree": 7322,
+    "sortie": 581
+   }
+  },
+  {
+   "id": "GEN-GAPP-2026-006",
+   "numero": "GEN-GAPP-2026-006",
+   "resolution": "CV3656",
+   "date": "2026-09-15",
+   "unite": "Génie",
+   "objet": "Demande d’aide financière au Programme de financement d’infrastructure en eau pour la réalisation d’habitation (FIERH), approbation des conditions d’octroi de l’aide financière relative à l’augmentation de la capacité de la conduite de refoulement du poste de pompage SN-G (secteur Saint-Nicolas) et désignation d’un représentant de la Ville",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/GEN-GAPP-2026-006.pdf",
+   "puces": [
+    "La Ville veut remplacer la conduite de refoulement du poste de pompage SN-G, dans le secteur Saint-Nicolas, par une conduite de plus grand diamètre.",
+    "Le projet est évalué à 3 300 000 $ : 1 320 000 $ viendraient d'une aide de Québec et 1 980 000 $ seraient payés par la Ville.",
+    "La Ville demande cette aide au programme FIERH du ministère des Affaires municipales et de l'Habitation, qui peut couvrir jusqu'à 40 % des dépenses admissibles.",
+    "Le conseil doit adopter une résolution pour déposer la demande; l'appel de propositions se termine le 18 septembre 2026.",
+    "Les plans et devis sont prévus en 2027 et les travaux en 2028.",
+    "Le secteur est sous moratoire à cause de la capacité de traitement de la station d'épuration de Saint-Nicolas; des travaux sont en cours pour corriger la situation.",
+    "Ces travaux visent à ne pas bloquer le développement résidentiel du secteur."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 300 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:23.689Z",
+   "jetons": {
+    "entree": 7170,
+    "sortie": 463
+   }
+  },
+  {
+   "id": "GEN-GAPP-2026-007",
+   "numero": "GEN-GAPP-2026-007",
+   "resolution": "CV3657",
+   "date": "2026-09-15",
+   "unite": "Génie",
+   "objet": "Demande d’aide financière programme au Programme de financement d’infrastructure en eau pour la réalisation d’habitation (FIERH), approbation des conditions d’octroi de l’aide financière relative à l’augmentation de la capacité des postes de pompage du secteur Saint-Romuald et désignation d’un représentant de la Ville",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/GEN-GAPP-2026-007.pdf",
+   "puces": [
+    "La Ville demande une aide financière au gouvernement du Québec (programme FIERH) pour augmenter la capacité de quatre postes de pompage du secteur Saint-Romuald : Ruisseau Cantin, Chaudière-Bassin, New-Liverpool et Hôtel de Ville.",
+    "Ces quatre postes ont atteint leur capacité plus vite que prévu à cause de la croissance du secteur, ce qui bloque présentement de nouveaux projets de développement.",
+    "Les travaux prévoient l'augmentation de la capacité des postes, le remplacement des conduites de refoulement et de certaines conduites gravitaires.",
+    "Coûts estimés à 10 000 000 $ : aide financière possible de 4 000 000 $ (40 %) et part de la Ville de 6 000 000 $.",
+    "Calendrier annoncé : avant-projet et plans et devis en 2027, travaux en 2028-2029.",
+    "Le dossier passe au comité exécutif le 8 septembre 2026 et au conseil de la Ville le 15 septembre 2026; l'appel de propositions se termine le 18 septembre.",
+    "La Ville doit aussi désigner un représentant pour signer la demande d'aide financière."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "10 000 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:24.214Z",
+   "jetons": {
+    "entree": 7164,
+    "sortie": 513
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-085",
+   "numero": "URBA-SAT-2026-085",
+   "resolution": "CV3658",
+   "date": "2026-09-15",
+   "unite": "Urbanisme",
+   "objet": "Entente sectorielle sur le développement des activités agricoles et agroalimentaires de la Capitale-Nationale et de Lévis 2027-2029 à intervenir avec le ministre de l’Agriculture, des Pêcheries et de l’Alimentation et autres partenaires, désignation d’un représentant de la Ville et confirmation d’une contribution financière",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-085.pdf",
+   "puces": [
+    "La Ville de Lévis signe une nouvelle entente 2027-2029 sur le développement agricole et agroalimentaire avec le MAPAQ et d'autres partenaires de la Capitale-Nationale.",
+    "Lévis versera 124 945 $ sur trois ans : 41 648 $ en 2027, 41 648 $ en 2028 et 41 649 $ en 2029 (contre 113 582 $ pour l'entente 2023-2025).",
+    "Le MAPAQ portera sa contribution à 1 500 000 $; deux nouveaux partenaires s'ajoutent, le ministère de l'Économie (225 000 $) et Santé Québec Capitale-Nationale (234 000 $).",
+    "Le conseiller municipal Olivier Biron représentera Lévis au comité directeur de l'entente, avec le maire Steven Blaney comme remplaçant.",
+    "L'entente finance cinq chantiers : territoire et activités agricoles, mise en marché des produits régionaux, Grand Marché de Québec, relève entrepreneuriale et main-d'œuvre.",
+    "En 2024, l'entente a notamment permis la remise en production de 10,77 hectares de terres pour trois entreprises et une aide de 11 111 $ au circuit Le Chemin de la Fraîcheur.",
+    "La contribution de Lévis est conditionnelle à la signature de l'entente par toutes les parties."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "124 945 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:34.646Z",
+   "jetons": {
+    "entree": 7610,
+    "sortie": 573
+   }
+  },
+  {
+   "id": "URBA-CUMB-2026-022",
+   "numero": "URBA-CUMB-2026-022",
+   "resolution": "CV3659",
+   "date": "2026-09-15",
+   "unite": "Urbanisme",
+   "objet": "Avis à la Société d’habitation du Québec de l’intention de la Ville relative à l’adoption, par règlement, d’un programme complémentaire au Programme d’habitation abordable Québec et au Programme visant à stimuler le développement et la concertation d’initiatives publiques et privées en matière d’habitation",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-CUMB-2026-022.pdf",
+   "puces": [
+    "La Ville de Lévis veut créer son propre programme d'aide financière qui s'ajoute à deux programmes de logement de la Société d'habitation du Québec (SHQ).",
+    "L'aide de la Ville peut prendre la forme d'argent, de dons de terrains ou de bâtiments, de travaux d'infrastructures ou de crédits de taxes foncières.",
+    "Pour les projets du Programme d'habitation abordable Québec, la Ville verserait au moins 40 % de la subvention de base de la SHQ, et parfois plus, notamment pour du logement social, abordable ou étudiant.",
+    "L'argent de la Ville et celui de la SHQ ne peuvent jamais dépasser 100 % du coût du projet; si la subvention de la SHQ baisse, le promoteur doit rembourser le trop-payé dans les 90 jours.",
+    "Seuls les projets déjà retenus par la SHQ (ou visés par des ententes avec le Fonds FTQ, Desjardins ou Fondaction) sont admissibles, et les entreprises inscrites au registre des entreprises non admissibles aux contrats publics sont exclues.",
+    "Les demandes se font par formulaire envoyé à comitesurbanisme@ville.levis.qc.ca, avec description du projet et montage financier.",
+    "Calendrier prévu : avis d'intention et dépôt du projet de règlement au conseil du 15 septembre, adoption le 29 septembre, puis approbation par la SHQ avant l'entrée en vigueur."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:34.851Z",
+   "jetons": {
+    "entree": 7167,
+    "sortie": 608
+   }
+  },
+  {
+   "id": "APGI-GI-2026-046",
+   "numero": "APGI-GI-2026-046",
+   "resolution": "CV3661",
+   "date": "2026-09-15",
+   "unite": "Approvisionnement et gestion immobilière",
+   "objet": "Régularisation du titre de propriété de la rue des Voltigeurs (lot 2 220 549 du cadastre du Québec, secteur Lévis)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/APGI-GI-2026-046.pdf",
+   "puces": [
+    "La Ville de Lévis constate qu'une partie de la rue des Voltigeurs, dans le secteur Lévis, ne lui appartient pas : le lot 2 220 549 n'a jamais été transféré à son nom.",
+    "La rue est ouverte à la circulation publique depuis plus de 10 ans; la Ville se sert de l'article 72 de la Loi sur les compétences municipales pour en devenir propriétaire.",
+    "Le conseil de ville doit adopter une résolution identifiant la rue, puis la greffière publiera les avis exigés par la loi.",
+    "Deux avis doivent être publiés : le second entre le 60e et le 90e jour après le premier, suivi d'une déclaration au registre foncier.",
+    "Passage au comité exécutif le 8 septembre 2026 et au conseil de ville le 15 septembre 2026.",
+    "Coût prévu : 152,23 $ en frais de publication au registre foncier, payés à même le budget de fonctionnement 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "152,23 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:33.495Z",
+   "jetons": {
+    "entree": 4188,
+    "sortie": 429
+   }
+  },
+  {
+   "id": "GRE-2026-039",
+   "numero": "GRE-2026-039",
+   "resolution": "CV3663",
+   "date": "2026-09-15",
+   "unite": "Greffe",
+   "objet": "Prononcé de la décision relative à la demande de démolition de l’immeuble situé au 103, rue Napoléon (lot 2 432 150 du cadastre du Québec, secteur Lévis)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/GRE-2026-039.pdf",
+   "puces": [
+    "Le conseil de la Ville doit se prononcer le 15 septembre 2026 sur la démolition de la maison du 103, rue Napoléon, dans le secteur Lévis.",
+    "La recommandation est de confirmer le refus déjà prononcé par le comité de démolition le 21 mai 2026.",
+    "Le comité de démolition avait refusé la démolition à l'unanimité et refusé le certificat d'autorisation, en raison de l'état de l'immeuble et de son apparence architecturale.",
+    "Les propriétaires demandeurs avaient déposé un rapport de non-conformité en structure d'Axys Consultants inc. daté du 5 septembre 2025.",
+    "Des avis d'opposition ont été reçus après la publication des avis publics, et des commentaires ont été formulés à l'audition publique du 23 avril 2026.",
+    "Le projet prévu après la démolition était la construction d'une résidence unifamiliale.",
+    "Le conseil peut confirmer la décision du comité ou prendre une autre décision et fixer ses propres conditions."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:42.468Z",
+   "jetons": {
+    "entree": 4362,
+    "sortie": 440
+   }
+  },
+  {
+   "id": "APGI-APP-2026-088",
+   "numero": "APGI-APP-2026-088",
+   "resolution": "CV3665",
+   "date": "2026-09-15",
+   "unite": "Approvisionnement et gestion immobilière",
+   "objet": "Attribution du contrat relatif à la fourniture et la livraison de chlorure de sodium (sel de déglaçage) pour la saison 2026-2027",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/APGI-APP-2026-088.pdf",
+   "puces": [
+    "La Ville de Lévis achète son sel de déglaçage pour l'hiver 2026-2027 de Sel Windsor Ltée, de Pointe-Claire.",
+    "Deux contrats d'un an sont visés : 820 800 $ avant taxes pour le secteur Saint-Romuald et 934 490 $ avant taxes pour le secteur Lévis.",
+    "Coût total avec taxes nettes : 1 842 835,09 $, réparti entre 2026 (552 850,53 $) et 2027 (1 289 984,56 $).",
+    "Sel Windsor a présenté le prix le plus bas des trois soumissionnaires, devant Sel Frigon et Selto Distribution.",
+    "L'achat passe par un appel d'offres public mené par la Ville de Québec, qui regroupait les besoins des deux villes.",
+    "Les livraisons doivent commencer le 1er octobre 2026 pour assurer la continuité du service.",
+    "Un troisième lot, pour le secteur Saint-Nicolas (107 340 $ avant taxes), sera attribué par un fonctionnaire plutôt que par le conseil."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 842 835,09",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:42.458Z",
+   "jetons": {
+    "entree": 3929,
+    "sortie": 477
+   }
+  },
+  {
+   "id": "APGI-APP-2026-092",
+   "numero": "APGI-APP-2026-092",
+   "resolution": "CV3666",
+   "date": "2026-09-15",
+   "unite": "Approvisionnement et gestion immobilière",
+   "objet": "Attribution du contrat relatif au déneigement du secteur rural de l’arrondissement des Chutes-de-la-Chaudière-Ouest et des trottoirs du secteur de Saint-Étienne-de-Lauzon",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/APGI-APP-2026-092.pdf",
+   "puces": [
+    "La Ville confie le déneigement du secteur rural de l'arrondissement des Chutes-de-la-Chaudière-Ouest et des trottoirs de Saint-Étienne-de-Lauzon à Gestion Belle-Rivière inc., de Saint-Apollinaire.",
+    "Le contrat est de 2 307 896,28 $ avant taxes, pour trois ans, avec une option de renouvellement de deux ans.",
+    "Trois entreprises ont soumissionné; les deux autres offres étaient de 2 582 715 $ et 2 683 147,50 $. La Ville avait estimé le contrat à 3 032 378,64 $.",
+    "Les prix restent fixes les 12 premiers mois, puis s'ajustent chaque année selon l'indice des prix à la consommation (70 %) et le prix du diesel (30 %).",
+    "Coût total avec taxes nettes : 2 423 002,61 $, réparti de 2026 à l'hiver 2029.",
+    "La décision doit passer au comité exécutif le 8 septembre 2026, puis au conseil de la Ville le 15 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 307 896,28 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:42.306Z",
+   "jetons": {
+    "entree": 3839,
+    "sortie": 478
+   }
+  },
+  {
+   "id": "DVC-ART-2026-011",
+   "numero": "DVC-ART-2026-011",
+   "resolution": "CV3667",
+   "date": "2026-09-15",
+   "unite": "Vie communautaire",
+   "objet": "Candidature à titre de ville hôte du forum Les Arts et la Ville en 2027",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DVC-ART-2026-011.pdf",
+   "puces": [
+    "La Ville de Lévis déposera sa candidature pour accueillir le forum Les Arts et la Ville en 2027, un événement de deux jours prévu les 9 et 10 juin 2027.",
+    "L'organisme demande une contribution de 25 000 $ payable dès 2026 : 18 000 $ du budget de la vie communautaire et 7 000 $ du développement économique.",
+    "La Ville prévoit aussi environ 25 000 $ en services en 2027 : accès à des lieux municipaux, soutien logistique, prestations artistiques et ressources professionnelles.",
+    "Coût total prévu de 50 000 $, réparti sur 2026 et 2027.",
+    "Le forum attirerait de 300 à 400 participants (élus, fonctionnaires, acteurs culturels) et nécessiterait de 300 à 400 nuitées d'hébergement.",
+    "Les Arts et la Ville offrirait des inscriptions gratuites à des acteurs culturels lévisiens, pour une valeur d'environ 5 000 $.",
+    "Le dépôt officiel de la candidature est prévu la semaine du 14 septembre 2026, après l'autorisation du conseil de ville du 15 septembre."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "25 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:51.151Z",
+   "jetons": {
+    "entree": 7470,
+    "sortie": 502
+   }
+  },
+  {
+   "id": "DVC-DIR-2026-009",
+   "numero": "DVC-DIR-2026-009",
+   "resolution": "CV3669",
+   "date": "2026-09-15",
+   "unite": "Vie communautaire",
+   "objet": "Modification du statut de reconnaissance de deux organismes",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DVC-DIR-2026-009.pdf",
+   "puces": [
+    "La Ville veut faire passer deux clubs de hockey junior — le Club de Hockey St-Romuald inc. et le Club de Hockey Junior AA de Lévis — du statut d'organisme collaborateur à celui d'organisme affinitaire.",
+    "Ce changement les arrime à la nouvelle politique de répartition des heures de glace, dont la clientèle prioritaire couvre maintenant les 21 ans et moins.",
+    "Les protocoles d'entente encadrant le prêt de locaux et de plateaux sportifs dans les arénas ont pris fin le 30 avril 2026 et ne seront pas renouvelés.",
+    "Le Club de Hockey Junior AA de Lévis (secteur Desjardins) obtient la gratuité des heures de glace de la saison régulière, évaluée à 9 161 $.",
+    "Le Club de Hockey St-Romuald inc. (arrondissement Chaudière-Est) obtient la gratuité des heures de glace de la saison régulière et de son tournoi, évaluée à 19 242 $.",
+    "Le Club de Hockey Junior AA de Lévis ne tient pas d'assemblée générale annuelle; il s'est engagé par écrit à en tenir une en septembre 2026, avec l'accompagnement d'une conseillère de la Ville.",
+    "Recommandation prévue au comité exécutif le 8 septembre 2026 et approbation par le conseil de la Ville le 15 septembre 2026. Aucun financement requis."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:52.008Z",
+   "jetons": {
+    "entree": 6317,
+    "sortie": 597
+   }
+  },
+  {
+   "id": "DVC-DIR-2026-010",
+   "numero": "DVC-DIR-2026-010",
+   "resolution": "CV3670",
+   "date": "2026-09-15",
+   "unite": "Vie communautaire",
+   "objet": "Convention de donation relative au don d’une horloge à intervenir avec le Club rotary de Lévis",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DVC-DIR-2026-010.pdf",
+   "puces": [
+    "Le Club Rotary de Lévis donne à la Ville une horloge extérieure ornementale et une plaque commémorative pour souligner son 35e anniversaire en 2026.",
+    "L'horloge sera installée dans le secteur de la Traverse, près du quai Paquet.",
+    "La Ville paie les travaux : base de béton, alimentation électrique et installation, pour environ 6 000 $.",
+    "L'argent vient de l'enveloppe du mobilier urbain du plan d'immobilisations 2026-2030; aucun financement supplémentaire n'est requis.",
+    "La Ville devient propriétaire de l'horloge dès son installation et assumera son entretien à même ses budgets courants.",
+    "L'horloge est conçue et fabriquée par l'entreprise québécoise Pelletier Horloger, mandatée par le Club Rotary.",
+    "Le comité exécutif doit recommander l'entente le 8 septembre 2026 et le conseil de la Ville l'approuver le 15 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "6 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:51.678Z",
+   "jetons": {
+    "entree": 3284,
+    "sortie": 564
+   }
+  },
+  {
+   "id": "DVC-DSC-2026-017",
+   "numero": "DVC-DSC-2026-017",
+   "resolution": "CV3671",
+   "date": "2026-09-15",
+   "unite": "Vie communautaire",
+   "objet": "Nomination de membres du comité consultatif en développement social et communautaire",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DVC-DSC-2026-017-R-1.pdf",
+   "puces": [
+    "La Ville nomme les membres de son Comité consultatif en développement social et communautaire, ce qui permet au comité de commencer ses travaux en septembre.",
+    "Le comité réunit une trentaine de personnes : 2 élus, 4 employés de la Ville (police, développement économique, urbanisme, vie communautaire) et des représentants d'organismes.",
+    "Des organismes communautaires siègent pour les personnes immigrantes, les jeunes, les familles, les femmes, les aînés, les personnes handicapées, en situation de pauvreté ou d'exclusion sociale.",
+    "S'ajoutent des représentants de l'emploi, de l'éducation (UQAR), de la santé (Santé Québec Chaudière-Appalaches), du logement social (Office municipal d'habitation), du transport (Société de transport de Lévis) et de Centraide.",
+    "La conseillère Anne-Marie Tremblay a déjà été désignée; le deuxième siège d'élu reste vacant et sera comblé plus tard.",
+    "Deux sièges pour les organismes œuvrant auprès des personnes handicapées restent vacants et un nom du secteur du développement local reste à confirmer.",
+    "La décision ne coûte rien à la Ville; elle devait passer au comité exécutif le 8 septembre 2026 et au conseil le 15 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:51.703Z",
+   "jetons": {
+    "entree": 4506,
+    "sortie": 542
+   }
+  },
+  {
+   "id": "COM-2026-003",
+   "numero": "COM-2026-003",
+   "resolution": "CV3672",
+   "date": "2026-09-15",
+   "unite": "Communications et de l'interaction citoyenne",
+   "objet": "Adoption de la Politique de participation publique",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/COM-2026-003.pdf",
+   "puces": [
+    "La Ville de Lévis adopte sa première Politique de participation publique, un cadre commun pour consulter la population sur les projets et décisions municipales.",
+    "La politique veut accroître la participation des citoyens au processus décisionnel et harmoniser les façons de faire des équipes municipales.",
+    "Elle a été élaborée à partir d'une démarche de consultation menée en 2025-2026 auprès de citoyens, de partenaires du milieu, d'employés et d'élus.",
+    "Le document ne prévoit aucune dépense ni financement.",
+    "Le comité exécutif l'examine le 8 septembre 2026 et le conseil de la ville doit l'adopter le 15 septembre 2026.",
+    "À partir de 2027, la Ville prévoit déployer des outils, accompagner ses équipes et tenir des démarches de participation publique; une directive administrative sera rédigée plus tard."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:58.371Z",
+   "jetons": {
+    "entree": 6550,
+    "sortie": 390
+   }
+  },
+  {
+   "id": "FIN-2026-046",
+   "numero": "FIN-2026-046",
+   "resolution": "CV3676",
+   "date": "2026-09-15",
+   "unite": "Finances et trésorerie",
+   "objet": "Avis de motion du Règlement RV3629 modifiant le Règlement RV-2022-22-36 sur la création d’une réserve financière pour le financement de dépenses relatives à la réalisation de projets environnementaux de la Politique environnementale et dépôt du projet de règlement",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/FIN-2026-046.pdf",
+   "puces": [
+    "La Ville veut réduire de 1 000 000 $ à 500 000 $ le montant maximal de la réserve financière servant à payer les projets environnementaux de sa Politique environnementale.",
+    "Ce plafond de 500 000 $ correspond à la somme utilisée annuellement; tout ce qui dépasse ce plafond irait directement au remboursement de la dette.",
+    "Comme le solde actuel de la réserve est sous le nouveau maximum, rien n'est versé au remboursement de la dette pour l'instant.",
+    "Étapes prévues : avis de motion et dépôt du projet de règlement le 15 septembre, adoption le 29 septembre.",
+    "Le règlement devra ensuite être approuvé par les personnes habiles à voter de tout le territoire de Lévis, avec des journées d'enregistrement.",
+    "Le document indique qu'il n'y a aucun impact financier direct."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:58.583Z",
+   "jetons": {
+    "entree": 3792,
+    "sortie": 398
+   }
+  },
+  {
+   "id": "FIN-2026-047",
+   "numero": "FIN-2026-047",
+   "resolution": "CV3677",
+   "date": "2026-09-15",
+   "unite": "Finances et trésorerie",
+   "objet": "Avis de motion du Règlement RV3630 modifiant le Règlement RV-2022-22-52 sur la création d’une réserve financière pour le financement de dépenses relatives à la réalisation de projets reliés au mandat du Comité des services de proximité et dépôt du projet de règlement",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/FIN-2026-047.pdf",
+   "puces": [
+    "La Ville veut réduire le plafond de sa réserve financière pour les projets du Comité des services de proximité : de 10 000 000 $ à 1 000 000 $.",
+    "Le mode de financement de la réserve est ajusté au même montant de 1 000 000 $.",
+    "Le changement découle d'une recommandation de la commission des finances et de l'administration, adoptée par le conseil de la Ville.",
+    "Avis de motion et dépôt du projet de règlement le 15 septembre, adoption prévue le 29 septembre.",
+    "Le règlement devra être approuvé par les personnes habiles à voter de tout le territoire de Lévis, avec journées d'enregistrement.",
+    "Le document indique aucun impact financier pour 2026, 2027, 2028 et les années suivantes."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 000 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:57.589Z",
+   "jetons": {
+    "entree": 3671,
+    "sortie": 355
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-044",
+   "numero": "URBA-SAT-2026-044",
+   "resolution": "CV3679",
+   "date": "2026-09-15",
+   "unite": "Urbanisme",
+   "objet": "Adoption du Règlement RV3617 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (autorisation et encadrement des concours hippiques en zone agricole)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-044.pdf",
+   "puces": [
+    "La Ville permet les concours hippiques comme usage temporaire dans les zones à dominance agricole, sur les propriétés servant à l'élevage d'équidés ou de centre équestre.",
+    "Chaque événement peut durer au maximum 5 jours consécutifs, une fois par mois.",
+    "Le terrain doit être nettoyé et remis en bon état dans les 3 jours suivant la fin de l'événement.",
+    "Aucune activité n'est permise dans une bande de 10 mètres le long des limites du terrain, et des toilettes publiques doivent être accessibles sur place.",
+    "Camions de cuisine, abris temporaires, tentes, tentes-roulottes, roulottes et véhicules récréatifs sont autorisés pendant l'événement.",
+    "Aucune demande de référendum n'a été déposée avant la fin de la période, le 28 juillet 2026; le règlement entre en vigueur dès son adoption par le conseil.",
+    "Les consultations publiques ont eu lieu dans les arrondissements des Chutes-de-la-Chaudière-Ouest, des Chutes-de-la-Chaudière-Est et de Desjardins."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:34:58.196Z",
+   "jetons": {
+    "entree": 4438,
+    "sortie": 480
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-066",
+   "numero": "URBA-SAT-2026-066",
+   "resolution": "CV3680",
+   "date": "2026-09-15",
+   "unite": "Urbanisme",
+   "objet": "Avis de motion du Règlement RV3632 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (ajout de la classe d’usages P201 dans la zone H2472, rue Charles-Rodrigue, à l’intersection de la rue Gérald-Godin, secteur Lévis) et dépôt du projet de Règlement",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-066.pdf",
+   "puces": [
+    "La Ville amorce une modification de zonage pour la zone H2472, rue Charles-Rodrigue à l'intersection de la rue Gérald-Godin, dans le secteur Lévis.",
+    "Le changement ajoute la classe d'usages « P201 – Service social ou de soins » (CHSLD, centre de réadaptation, centre jeunesse, CSSS, orphelinat, etc.) dans cette zone.",
+    "Objectif : permettre à la résidence privée pour aînés du 1231, rue Charles-Rodrigue d'offrir des séjours de convalescence, une activité actuellement non conforme au règlement.",
+    "L'établissement a déjà aménagé deux chambres pour des personnes référées par le CISSS de Chaudière-Appalaches.",
+    "Aucun agrandissement du bâtiment n'est prévu.",
+    "Une assemblée publique de consultation aura lieu dans l'arrondissement de Desjardins, suivie d'une possible demande d'approbation référendaire.",
+    "La Ville n'indique aucun impact financier lié à cette décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:35:05.104Z",
+   "jetons": {
+    "entree": 5887,
+    "sortie": 455
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-081",
+   "numero": "URBA-SAT-2026-081",
+   "resolution": "CV3682",
+   "date": "2026-09-15",
+   "unite": "Urbanisme",
+   "objet": "Adoption du Règlement RV3614 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (création de la zone H2491 à même les zones H2495 et H2502 à proximité de l’intersection des rues De Ségur et Colette, secteur Lévis)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-081.pdf",
+   "puces": [
+    "La Ville crée une nouvelle zone (H2491) près de l'intersection des rues De Ségur et Colette, dans le secteur Lévis, à même les zones H2495 et H2502.",
+    "Le changement permet de construire 4 immeubles multifamiliaux isolés de 64 logements, au lieu des 8 bâtiments de 32 logements prévus avant.",
+    "Pour les projets de 33 à 64 logements : 40 % du terrain doit rester sous couverture végétale et 50 % des cases de stationnement doivent être souterraines, dans un garage ou dans un stationnement étagé.",
+    "Un écran tampon de 2 mètres minimum devient obligatoire le long de la limite avec la zone H2495 : haie ou clôture opaque à 80 % d'au moins 1,2 mètre, plus des arbres de 2 mètres espacés d'au plus 5 mètres.",
+    "L'écran tampon doit être aménagé au plus tard 18 mois après la délivrance du permis de construction ou du certificat d'autorisation.",
+    "Les établissements de résidence principale (type location courte durée) sont spécifiquement interdits dans la nouvelle zone.",
+    "Aucune demande de référendum n'a été déposée avant l'échéance du 28 juillet 2026; le règlement entre en vigueur dès son adoption."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:35:09.216Z",
+   "jetons": {
+    "entree": 6277,
+    "sortie": 796
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-082",
+   "numero": "URBA-SAT-2026-082",
+   "resolution": "CV3683",
+   "date": "2026-09-15",
+   "unite": "Urbanisme",
+   "objet": "Adoption du Règlement RV3615 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (ajout des classes d’usages C300, C304, C310, C311, C312, C314, C315, C320 et du groupe d’usages C8 dans la zone C2404, chemin des Îles, à proximité de l’intersection avec le boulevard Guillaume-Couture, secteur Lévis)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-082.pdf",
+   "puces": [
+    "La Ville autorise de nouveaux usages commerciaux et para-industriels dans la zone C2404, sur le chemin des Îles, près du boulevard Guillaume-Couture, dans le secteur Lévis.",
+    "Parmi les usages permis : vente de véhicules lourds, matériaux de construction, grossistes et centres de distribution, transport de marchandises, mécanique de véhicules lourds, voirie et déneigement, excavation et abattage d'arbres, location d'outils et entreposage intérieur.",
+    "Le but est de mettre en valeur deux terrains vacants (lots 4 070 128 et 2 219 154) et de faciliter la relocalisation d'une entreprise d'excavation et de génie existante.",
+    "Les nouvelles normes fixent notamment une superficie de plancher minimale de 250 m², une hauteur maximale de 8,1 m et des marges de recul de 4 et 6 m.",
+    "Aucune demande de référendum n'a été déposée avant la fin de la période prévue, le 28 juillet 2026.",
+    "Le règlement entre en vigueur le jour de son adoption par le conseil de la Ville, sans changement par rapport au second projet.",
+    "La décision n'a aucun impact financier pour la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:35:08.319Z",
+   "jetons": {
+    "entree": 5452,
+    "sortie": 640
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-091",
+   "numero": "URBA-SAT-2026-091",
+   "resolution": "CV3684",
+   "date": "2026-09-15",
+   "unite": "Urbanisme",
+   "objet": "Adoption du Règlement RV3616 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (précisions relatives aux lots dérogatoires protégés par droits acquis)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-091.pdf",
+   "puces": [
+    "La Ville adopte un règlement qui encadre le changement d'usage sur un terrain dont les dimensions ne respectent pas les normes actuelles, mais qui est protégé par des droits acquis.",
+    "Deux conditions s'appliquent : le nouvel usage doit être autorisé à la grille des spécifications en vigueur, et il ne doit pas exiger un terrain desservi plus grand que celui de l'usage existant.",
+    "Objectif annoncé : éviter que des usages s'installent sur des terrains plus petits que les normes et prévenir des conflits de cohabitation avec les usages existants.",
+    "Le règlement s'applique à tout le territoire de la ville.",
+    "Des assemblées publiques ont eu lieu les 9, 11 et 18 juin 2026 dans les trois arrondissements, sans aucun commentaire; aucune demande de référendum n'a été déposée avant la fin de la période, le 28 juillet 2026.",
+    "Le règlement entre en vigueur le jour de son adoption et n'entraîne aucun impact financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:35:04.953Z",
+   "jetons": {
+    "entree": 4289,
+    "sortie": 447
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-093",
+   "numero": "URBA-SAT-2026-093",
+   "resolution": "CV3685",
+   "date": "2026-09-15",
+   "unite": "Urbanisme",
+   "objet": "Adoption du Règlement RV3613 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (ajout de la classe d’usages H7, habitation trifamiliale isolée, à la grille des spécifications de la zone H0865 sur la route des Rivières, secteur Saint-Étienne-de-Lauzon)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-093.pdf",
+   "puces": [
+    "La Ville modifie son zonage pour la zone H0865, sur la route des Rivières, dans le secteur Saint-Étienne-de-Lauzon.",
+    "Le changement permet désormais les habitations trifamiliales isolées (triplex) dans cette zone.",
+    "Le but est notamment de permettre l’ajout d’un troisième logement dans un bâtiment qui en compte déjà deux.",
+    "Une assemblée publique de consultation a eu lieu le 11 juin 2026 dans l’arrondissement des Chutes-de-la-Chaudière-Ouest, sans aucun commentaire.",
+    "Aucune demande de référendum n’a été déposée avant la fin de la période, le 28 juillet 2026.",
+    "Le règlement entre en vigueur dès son adoption par le conseil de la Ville et n’a aucun impact financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-17T14:35:17.210Z",
+   "jetons": {
+    "entree": 4816,
+    "sortie": 513
+   }
+  },
   {
    "id": "GRE-2026-031",
    "numero": "GRE-2026-031",
