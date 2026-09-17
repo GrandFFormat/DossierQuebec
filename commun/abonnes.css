@@ -97,6 +97,10 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 }
 .ab-demande-lien:hover { color: var(--encre, #16191D); }
 .ab-demande-lien:disabled { opacity: .6; cursor: default; }
+/* La même fonction, fermée, pour qui n'est pas abonné : on la voit, on ne peut pas s'en servir. */
+.ab-demande-verrou { color: var(--doux, #5B6570); }
+.ab-demande-verrou-nom { color: var(--doux, #5B6570); opacity: .85; }
+.ab-demande-verrou .ab-lien { font-size: 12.5px; }
 .ab-bouton-second { font-size: 13px; padding: 6px 12px; color: var(--accent-encre, #076338); background: var(--accent-fond, #E6F6EC); border: 1px solid var(--accent, #0B8A4B); }
 .ab-demande-message:not(:empty) { margin-left: 8px; }
 
