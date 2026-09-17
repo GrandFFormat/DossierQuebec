@@ -30,7 +30,10 @@ const MOIS = 'janvier|février|fevrier|mars|avril|mai|juin|juillet|août|aout|se
 const DATE = new RegExp(`(\\d{1,2}(?:er)?\\s+(?:${MOIS})\\s+\\d{4}|\\d{4}-\\d{2}-\\d{2})`, 'i');
 const documents = [];
 for (const m of html.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']*afficherpdf[^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
-  const href = m[1].replace(/&amp;/g, '&');
+  // Les liens de la page sont relatifs (« /sel/adi-public/… ») : on les résout contre la
+  // page, sans quoi le téléchargeur reçoit un chemin et non une adresse.
+  let href = m[1].replace(/&amp;/g, '&');
+  try { href = new URL(href, PAGE).href; } catch { continue; }
   const avant = html.slice(Math.max(0, m.index - 600), m.index).replace(/<[^>]+>/g, ' ').replace(/&nbsp;|&#160;/g, ' ').replace(/\s+/g, ' ');
   const dates = [...avant.matchAll(new RegExp(DATE.source, 'gi'))].map((x) => x[1]);
   const genre = /typeDoc=pv/i.test(href) ? 'PV' : /typeDoc=odj/i.test(href) ? 'ODJ' : 'autre';
@@ -46,7 +49,10 @@ const rapport = { generatedAt: new Date().toISOString(), page: PAGE, documents, 
 if (pvs.length) {
   const cible = pvs[0];
   console.log(`\n=== Lecture de ${cible.href} ===`);
-  const buf = await octets(cible.href);
+  // Un échec de lecture ne doit pas emporter le rapport : la liste des documents vaut déjà
+  // quelque chose, et c'est le journal qui est le livrable.
+  let buf = null;
+  try { buf = await octets(cible.href); } catch (err) { console.log(`  ⚠ ${err.message ?? err}`); }
   if (!buf) console.log('  rien reçu');
   else {
     const entete = Buffer.from(buf.slice(0, 5)).toString('latin1');
