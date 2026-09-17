@@ -87,11 +87,23 @@ const LEGENDE = {
     "Projects are told from the decision summaries, the memo the administration writes for each file. Montréal files them in a public repository, but they cannot be found there: the file number printed under each decision returns no result. We have asked the City to index that number; until then, no Montréal project has a recap.",
 };
 
+// Dès qu'un sujet a son récapitulatif, la légende change de sens : elle ne dit plus ce qui
+// manque, elle dit d'où vient ce qu'on lit — et ce qui lui manque encore.
+const LEGENDE_AVEC_RECAPS = {
+  texte:
+    "Les récapitulatifs de Montréal sont écrits à partir du texte des résolutions lu dans les procès-verbaux — ce que le conseil a décidé, pour combien, et sur quoi il s'appuie. Montréal ne publie pas ses sommaires décisionnels, qui donneraient le contexte et les options écartées ; nous lui avons demandé de les rendre trouvables.",
+  texteEn:
+    "Montréal recaps are written from the text of the resolutions as read in the minutes — what the council decided, for how much, and on what grounds. Montréal does not publish its decision summaries, which would give the context and the options set aside; we have asked the City to make them findable.",
+};
+
 const decisions = await lire('data/decisions.json', null);
 // Le texte des décisions vit à part (scrapers/decisions.js). C'est la matière d'un
 // récapitulatif de projet : faute des sommaires, c'est le dispositif — « Et résolu : … » —
 // qui porte les montants, les parties et les durées.
 const { textes = {} } = await lire('data/textes.json', {});
+// Les récapitulatifs « Où en est le projet », rédigés par scrapers/recaps-projets.js à partir
+// du texte des résolutions et vérifiés mécaniquement. Un sujet en a un ou n'en a pas.
+const { recaps = {} } = await lire('data/projets-recaps.json', {});
 if (!decisions?.decisions) {
   console.error('data/decisions.json introuvable : rien à publier.');
   process.exit(1);
@@ -151,6 +163,7 @@ for (const [cle, def] of Object.entries(PROJETS)) {
   const parTheme = new Map();
   for (const d of dossiers) if (d.theme) parTheme.set(d.theme, (parTheme.get(d.theme) ?? 0) + 1);
 
+  const recap = recaps[cle]?.utilisable ? recaps[cle] : null;
   const chiffres = {
     decisions: siennes.length,
     dossiers: dossiers.length,
@@ -169,9 +182,18 @@ for (const [cle, def] of Object.entries(PROJETS)) {
     themes: [...parTheme]
       .sort((a, b) => b[1] - a[1])
       .map(([t, n]) => ({ cle: t, libelle: themes[t]?.libelle ?? t, couleur: themes[t]?.couleur ?? null, n })),
-    // Pas de récapitulatif écrit par un modèle : il se nourrit des sommaires, qui manquent.
-    recap: null,
-    enAttenteDe: EN_ATTENTE_DE,
+    // Le récapitulatif, quand le sujet en a un d'utilisable ; sinon l'explication de ce qui
+    // manque. Jamais les deux : le récapitulatif dit lui-même d'où il vient (`source`).
+    recap: recap && {
+      enBref: recap.enBref,
+      etapes: recap.etapes,
+      aSurveiller: recap.aSurveiller,
+      dossiers: recap.dossiers,
+      genereLe: recap.genereLe,
+      genereParIA: true,
+      source: recap.source ?? null,
+    },
+    enAttenteDe: recap ? null : EN_ATTENTE_DE,
     dossiers,
   };
   const texte = JSON.stringify(projet);
@@ -179,14 +201,16 @@ for (const [cle, def] of Object.entries(PROJETS)) {
   await writeFile(`${DOSSIER}/${cle}.json`, texte, 'utf8');
 
   // Ce qu'une carte montre sans ouvrir le sujet : la décision la plus récente.
-  index[cle] = { titre: def.titre, description: def.description, annee, ...chiffres, enBref: null, enAttenteDe: EN_ATTENTE_DE.titre, plusRecent: dossiers[0]?.objet ?? null };
+  index[cle] = { titre: def.titre, description: def.description, annee, ...chiffres, enBref: recap?.enBref ?? null, enAttenteDe: recap ? null : EN_ATTENTE_DE.titre, plusRecent: dossiers[0]?.objet ?? null };
 }
 
 // Un sujet retiré de lib/projets.js ne laisse pas de fichier orphelin.
 for (const f of await readdir(DOSSIER)) {
   if (f !== 'index.json' && f.endsWith('.json') && !(f.slice(0, -5) in PROJETS)) await rm(`${DOSSIER}/${f}`);
 }
-const texteIndex = JSON.stringify({ generatedAt: new Date().toISOString(), legende: LEGENDE, projets: index });
+const avecRecap = Object.values(index).filter((p) => p.enBref).length;
+const legende = avecRecap ? LEGENDE_AVEC_RECAPS : LEGENDE;
+const texteIndex = JSON.stringify({ generatedAt: new Date().toISOString(), legende, projets: index });
 await writeFile(`${DOSSIER}/index.json`, texteIndex, 'utf8');
 console.log(`Projets publics : ${Object.keys(index).length} sujets · index ${(texteIndex.length / 1024).toFixed(1)} Ko · fichiers de sujet ${(octets / 1024).toFixed(0)} Ko au total.`);
 

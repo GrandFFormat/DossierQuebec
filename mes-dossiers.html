@@ -1255,7 +1255,7 @@ ${liste.map(fiche).join('')}
       ${r.enBref ? `<p class="ab-en-bref">${echapper(r.enBref)}</p>` : ''}
       ${etapes ? `<ol class="ab-chrono">${etapes}</ol>` : ''}
       ${surveiller ? `<div class="ab-surveiller"><div class="ab-detail-titre">${tr('À surveiller', 'To watch')}</div><ul>${surveiller}</ul></div>` : ''}
-      <p class="ab-note">${tr(`Rédigé automatiquement à partir des résumés et des résolutions des ${r.dossiers} dossiers du projet, puis vérifié automatiquement : ce qui ne se vérifiait pas a été retiré. Mis à jour le ${dateFr(r.genereLe)}. Les documents officiels font foi.`, `Written automatically from the summaries and resolutions of the project's ${r.dossiers} items, then checked automatically: anything that couldn't be verified was removed. Updated on ${dateFr(r.genereLe)}. The official documents prevail.`)}</p>
+      <p class="ab-note">${r.source ? `${echapper(r.source)} ${tr(`Mis à jour le ${dateFr(r.genereLe)}.`, `Updated on ${dateFr(r.genereLe)}.`)}` : tr(`Rédigé automatiquement à partir des résumés et des résolutions des ${r.dossiers} dossiers du projet, puis vérifié automatiquement : ce qui ne se vérifiait pas a été retiré. Mis à jour le ${dateFr(r.genereLe)}. Les documents officiels font foi.`, `Written automatically from the summaries and resolutions of the project's ${r.dossiers} items, then checked automatically: anything that couldn't be verified was removed. Updated on ${dateFr(r.genereLe)}. The official documents prevail.`)}</p>
     </section>`;
   }
 
