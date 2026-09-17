@@ -1,0 +1,26 @@
+{
+  "name": "dossiervillelaval",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Prototype de veille citoyenne des décisions de la Ville de Laval",
+  "scripts": {
+    "refresh": "node scripts/refresh.js",
+    "scrape:index": "node scrapers/index.js",
+    "scrape:decisions": "node scrapers/decisions.js",
+    "scrape:votes": "node scrapers/votes.js",
+    "scrape:sommaires": "node scrapers/sommaires.js",
+    "scrape:resumes": "node --env-file-if-exists=api.env scrapers/resumes.js",
+    "scrape:elus": "node scrapers/elus.js",
+    "scrape:districts": "node scrapers/districts.js",
+    "scrape:presences": "node scrapers/presences.js",
+    "scrape:lexique": "node scrapers/lexique.js",
+    "archive": "node scrapers/archive.js",
+    "test": "node --test test/*.test.js",
+    "serve": "node scripts/static-server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.125.0",
+    "pdfjs-dist": "^6.3.0"
+  }
+}
