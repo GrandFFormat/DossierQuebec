@@ -41,6 +41,7 @@ import {
   instanceArrondissement,
   requete,
 } from '../lib/mtl.js';
+import { seancesPlateau } from '../lib/plateau.js';
 
 const OUT = new URL('../data/seances-arrondissements.json', import.meta.url);
 
@@ -230,21 +231,27 @@ async function principal() {
 
   for (const nom of noms) {
     const avant = compteur.n;
-    // Un conseil dont on a établi qu'il ne publie rien ici a son propre budget, bien plus
-    // petit : Le Plateau-Mont-Royal engloutissait 565 requêtes par exécution pour zéro
-    // séance. On continue de regarder, mais pour le prix d'un coup d'œil.
-    const { budget, absentDuRepertoire } = ARRONDISSEMENTS_CODES[nom] ?? {};
-    let s = await calendrierDe(nom, annee, connues, compteur, budget ?? 400);
-    // Rien du tout : l'heure que l'on croit connaître a changé. On réessaie sur les trois
-    // heures en usage avant de déclarer forfait — sauf pour un conseil déjà ratissé en
-    // vain, où ce serait payer deux fois pour la même réponse.
-    if (!s.length && !absentDuRepertoire) {
-      console.log(`    ${nom} : rien à l'heure habituelle, essai des autres heures…`);
-      s = await calendrierDe(nom, annee, connues, compteur, 160, HEURES_CONNUES);
-      if (s.length) console.log(`    ✓ trouvé à ${[...new Set(s.map((x) => x.heure))].join(', ')} — à corriger dans ARRONDISSEMENTS_CODES`);
-    }
-    if (!s.length && absentDuRepertoire) {
-      console.log(`    ${nom} : toujours rien sous Adi_Public (sondage plafonné, voir ARRONDISSEMENTS_CODES).`);
+    // Un conseil qui publie par sa page plutôt que sous Adi_Public (Le Plateau-Mont-Royal,
+    // voir lib/plateau.js) : on lit sa page et la date dans chacun de ses documents. Le
+    // sondage du répertoire n'a aucun sens pour lui — 900 requêtes en septembre 2026 pour rien.
+    const { budget, publieParPage } = ARRONDISSEMENTS_CODES[nom] ?? {};
+    let s;
+    if (publieParPage) {
+      try {
+        s = await seancesPlateau(annee, compteur);
+      } catch (err) {
+        console.warn(`    ⚠ ${nom} : ${err.message ?? err}`);
+        s = connues.filter((x) => x.instance === instanceArrondissement(nom));
+      }
+    } else {
+      s = await calendrierDe(nom, annee, connues, compteur, budget ?? 400);
+      // Rien du tout : l'heure que l'on croit connaître a changé. On réessaie sur les trois
+      // heures en usage avant de déclarer forfait.
+      if (!s.length) {
+        console.log(`    ${nom} : rien à l'heure habituelle, essai des autres heures…`);
+        s = await calendrierDe(nom, annee, connues, compteur, 160, HEURES_CONNUES);
+        if (s.length) console.log(`    ✓ trouvé à ${[...new Set(s.map((x) => x.heure))].join(', ')} — à corriger dans ARRONDISSEMENTS_CODES`);
+      }
     }
     toutes.push(...s);
     const nouvelles = s.filter((x) => !connues.some((c) => c.id === x.id)).length;
@@ -280,7 +287,7 @@ async function ecrire(annee, seances, precedent, bilan, compteur, definitif) {
     source: DOCUMENTS,
     licence: 'Documents publics de la Ville de Montréal — reproduction avec mention de la source, usage non commercial (voir README).',
     methode:
-      "Sondage des noms de fichiers publiés : l'existence du document prouve la séance. Les séances extraordinaires, dont l'heure est imprévisible, ne sont pas couvertes.",
+      "Sondage des noms de fichiers publiés : l'existence du document prouve la séance. Les séances extraordinaires, dont l'heure est imprévisible, ne sont pas couvertes. Le Plateau-Mont-Royal, qui publie par sa page et non sous Adi_Public, est lu depuis cette page : la date vient du document lui-même (voir lib/plateau.js).",
     annee,
     partiel: !definitif,
     nombre: parId.size,
