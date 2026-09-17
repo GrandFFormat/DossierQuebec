@@ -140,7 +140,10 @@ async function principal() {
       const b = page.getByRole('button', { name: /rechercher/i }).first();
       if (await b.count()) await b.click({ timeout: 15000 });
       await page.waitForTimeout(7000);
-      const titres = page.locator('[role="listitem"] a, .search-result a, table a').filter({ hasNotText: /^(À propos|Mentions)/ });
+      // Vaadin ne rend pas ses résultats en liens HTML : le titre d'un document est un
+      // fragment cliquable sans <a>. On prend donc ce qui porte le texte d'un résultat,
+      // pas ce qui ressemble à un lien.
+      const titres = page.locator('[role="listitem"] a, .search-result a, table a, .v-label:visible').filter({ hasNotText: /^(À propos|Mentions|Rechercher|Filtrer|Trier)/ });
       const nT = await titres.count();
       rapport.premierResultat = { candidats: nT };
       if (nT) {

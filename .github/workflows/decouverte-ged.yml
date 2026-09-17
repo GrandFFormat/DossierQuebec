@@ -81,7 +81,11 @@ jobs:
         run: |
           git config user.name "dossierquebec-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add montreal/data/ged-decouverte.json montreal/data/ged-decouverte.log montreal/data/ged-sonde.json montreal/data/ged-sonde.log montreal/data/ged-sonde.png montreal/data/ged-arrivee.png montreal/data/ged-fiche.png || true
+          # Un seul chemin manquant faisait échouer tout le « git add », et le journal
+          # n'était jamais committé : « fatal: pathspec … did not match any files », puis
+          # « Aucun journal à committer », alors que la sonde avait bien travaillé. Le motif
+          # ne nomme que ce qui existe.
+          git add montreal/data/ged-*.json montreal/data/ged-*.log montreal/data/ged-*.png 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Aucun journal à committer."
           else
