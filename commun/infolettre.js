@@ -135,7 +135,8 @@ export async function boiteInfolettre(zone, s, { premiereLigne = null } = {}) {
       <h2 style="margin-top:0">📬 ${tr('Mes courriels', 'My emails')}</h2>
       <p class="ab-chapeau" style="margin-bottom:12px">${tr('Cochez ce que vous voulez recevoir, décochez quand vous voulez. Pour les infolettres, le plus récent numéro part tout de suite.', 'Check what you want to receive, uncheck whenever you like. For newsletters, the latest issue goes out right away.')}</p>
       ${premiereLigne?.html ?? ''}
-      ${etat.villes.map((v) => `${etat.villes.length > 1 ? `<h3 class="ab-sous-titre">${echapper(v.nom)}</h3>` : ''}${listeSortes(etat, v.cle, v.offre, { cocherSuivis: true, retirable: true })}`).join('')}
+      ${etat.villes.map((v) => `<h3 class="ab-sous-titre">${echapper(v.nom)}</h3>${listeSortes(etat, v.cle, v.offre, { cocherSuivis: true, retirable: true })}`).join('')}
+      ${etat.villes.length === 1 ? `<p class="ab-note" style="margin:6px 0 0">${tr(`Offert pour ${echapper(etat.villes[0].nom)} seulement pour l’instant : une ville s’ajoute quand ses numéros existent.`, `Offered for ${echapper(etat.villes[0].nom)} only for now: a city is added once its issues exist.`)}</p>` : ''}
       <p class="ab-note" aria-live="polite">${message || tr(`Envoyé à ${echapper(etat.courriel ?? '')}.`, `Sent to ${echapper(etat.courriel ?? '')}.`)}</p>
     </section>`;
     premiereLigne?.cabler?.(zone);

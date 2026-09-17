@@ -92,13 +92,15 @@ export default async function handler(req, res) {
     if (!ids) return res.status(400).send(page('Lien invalide', "<p>Ce lien n'est pas valide. Il a peut-être été coupé par votre logiciel de courriel.</p>"));
     try {
       const lignes = await supabase(`/rest/v1/infolettre_inscriptions?id=in.(${ids.join(',')})&select=id,email,ville,statut`);
-      if (!lignes.length) return res.status(404).send(page('Inscription introuvable', `<p>Cette inscription n'existe plus. <a href="${site()}/quebec/">Revenir au site</a></p>`));
+      if (!lignes.length) return res.status(404).send(page('Inscription introuvable', `<p>Cette inscription n'existe plus. <a href="${site()}/">Revenir au site</a></p>`));
       const noms = (ls) => ls.map((l) => `« ${nomComplet(l)} »`).join(', ');
+      // « Revenir au site » : le volet de l'inscription, pas toujours Québec (ville vérifiée par la table).
+      const retour = `${site()}/${lignes[0].ville}/`;
 
       if (action === 'confirmer') {
         const aConfirmer = lignes.filter((l) => l.statut === 'en_attente');
         if (!aConfirmer.length) {
-          return res.status(200).send(page('Déjà confirmé', `<p>Votre inscription à ${echapper(noms(lignes))} est déjà active.</p><p><a href="${site()}/quebec/">Revenir au site</a></p>`));
+          return res.status(200).send(page('Déjà confirmé', `<p>Votre inscription à ${echapper(noms(lignes))} est déjà active.</p><p><a href="${retour}">Revenir au site</a></p>`));
         }
         await supabase(`/rest/v1/infolettre_inscriptions?id=in.(${aConfirmer.map((l) => l.id).join(',')})`, {
           methode: 'PATCH', corps: { statut: 'confirme', confirme_le: new Date().toISOString() }, entetes: { Prefer: 'return=minimal' },
