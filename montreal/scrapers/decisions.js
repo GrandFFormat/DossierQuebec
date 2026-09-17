@@ -21,7 +21,7 @@
 // le découpage sur un vrai document avant de laisser tourner la routine.
 
 import { writeFile, readFile, mkdir } from 'node:fs/promises';
-import { candidatsDocument, premierDocument, INSTANCES, idSeance } from '../lib/mtl.js';
+import { candidatsDocument, premierDocument, INSTANCES, idSeance, corrigerNomConseil } from '../lib/mtl.js';
 import { lirePdf } from '../lib/pdf.js';
 import { decouperResolutions, parserOrdreDuJour } from '../lib/pv.js';
 import { classer, THEMES } from '../lib/themes.js';
@@ -285,7 +285,7 @@ async function main() {
   // exactement comme une séance centrale, seul son instance change (« CA_Mhm »).
   // Le volet tourne sans le second fichier — les arrondissements manquent, c'est tout.
   const calendrierCa = args['sans-arrondissements'] ? null : await lireJson(SEANCES_ARRONDISSEMENTS);
-  const seancesCa = (calendrierCa?.seances ?? []).map((s) => ({ ...s, nom: s.nomInstance ?? s.nom }));
+  const seancesCa = (calendrierCa?.seances ?? []).map((s) => ({ ...s, nomInstance: corrigerNomConseil(s.nomInstance), nom: corrigerNomConseil(s.nomInstance ?? s.nom) }));
   if (seancesCa.length) console.log(`${seancesCa.length} séance(s) d'arrondissement au calendrier.`);
   else if (!args['sans-arrondissements']) console.log("Pas de calendrier d'arrondissement (data/seances-arrondissements.json) — seules les instances centrales seront lues.");
   const seances = [...calendrier.seances, ...seancesCa].filter((s) => s.date.startsWith(year) && (!args.seance || s.id === args.seance));
@@ -309,6 +309,12 @@ async function main() {
     const liste = [...decisions.values()].filter((d) => d.annee === year);
     const plusRecentConnu = [...decisionsConnues.values()].reduce((m, d) => ((d.date ?? '') > m ? d.date : m), '');
     const seuil = plusRecentConnu ? ajouterJours(plusRecentConnu, -RATTRAPAGE_JOURS) : '';
+    // Les noms de conseil formés avant la contraction de l'article (« de Le Plateau ») sont
+    // repris tels quels des fichiers de la veille : on les répare à l'écriture.
+    for (const d of liste) {
+      d.instance = corrigerNomConseil(d.instance);
+      if (d.type !== 'Résolution') d.objet = corrigerNomConseil(d.objet);
+    }
     for (const d of liste) d.nouveau = precedent ? !decisionsConnues.has(d.id) && (d.date ?? '') >= seuil : null;
     for (const d of liste) Object.assign(d, classer({ objet: d.type === 'Résolution' ? d.objet : 'procès-verbal', categorie: d.categorie, unite: d.unite }));
     // Les sujets suivables (lib/projets.js). Seules les résolutions en portent : la fiche
@@ -322,7 +328,11 @@ async function main() {
     liste.sort((a, b) => b.date.localeCompare(a.date) || (a.instance ?? '').localeCompare(b.instance ?? '') || (a.numero ?? '').localeCompare(b.numero ?? ''));
     // Les séances pas encore traitées gardent leur état précédent, ou « non traitée ».
     const traitees = new Set(etatSeances.map((s) => s.id));
-    const etats = [...etatSeances, ...seances.filter((s) => !traitees.has(s.id)).map((s) => connues.get(s.id) ?? { ...s, etat: partiel ? 'non traitée' : 'à venir' })];
+    const etats = [...etatSeances, ...seances.filter((s) => !traitees.has(s.id)).map((s) => connues.get(s.id) ?? { ...s, etat: partiel ? 'non traitée' : 'à venir' })].map((s) => ({
+      ...s,
+      nom: corrigerNomConseil(s.nom),
+      nomInstance: corrigerNomConseil(s.nomInstance),
+    }));
     const payload = {
       generatedAt: new Date().toISOString(),
       source: 'https://ville.montreal.qc.ca/documents/Adi_Public/',

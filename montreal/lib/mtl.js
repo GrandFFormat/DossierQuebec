@@ -225,6 +225,18 @@ export function heuresArrondissement(nom) {
   return [a.heure, ...(a.heuresSecours ?? [])];
 }
 
+// « Conseil d'arrondissement du Plateau-Mont-Royal », pas « de Le Plateau-Mont-Royal » :
+// l'article du nom se contracte. « de L'Île-Bizard » reste tel quel.
+export function nomConseil(nom) {
+  if (/^Le /.test(nom)) return `Conseil d'arrondissement du ${nom.slice(3)}`;
+  if (/^Les /.test(nom)) return `Conseil d'arrondissement des ${nom.slice(4)}`;
+  return `Conseil d'arrondissement de ${nom}`;
+}
+// Répare un nom formé avant cette contraction, où qu'il apparaisse dans un texte.
+export function corrigerNomConseil(texte) {
+  return typeof texte === 'string' ? texte.replace(/Conseil d'arrondissement de Le /g, "Conseil d'arrondissement du ").replace(/Conseil d'arrondissement de Les /g, "Conseil d'arrondissement des ") : texte;
+}
+
 // Une instance d'arrondissement s'écrit CA_<code> partout : répertoire, nom de fichier,
 // et clé de séance.
 export function instanceArrondissement(nom) {

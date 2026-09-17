@@ -39,6 +39,8 @@ import {
   DOCUMENTS,
   heuresArrondissement,
   instanceArrondissement,
+  nomConseil,
+  corrigerNomConseil,
   requete,
 } from '../lib/mtl.js';
 import { seancesPlateau } from '../lib/plateau.js';
@@ -157,7 +159,7 @@ async function calendrierDe(nom, annee, connues, compteur, budget = 400, heuresF
     // Une séance déjà connue ce mois-ci : on la garde, on en apprend le rythme, on passe.
     const connueCeMois = jours.map((j) => dejaVues.get(j.date)).find(Boolean);
     if (connueCeMois) {
-      trouvees.push(connueCeMois);
+      trouvees.push({ ...connueCeMois, nomInstance: corrigerNomConseil(connueCeMois.nomInstance) });
       const j = jours.find((x) => x.date === connueCeMois.date);
       if (j) rythme = { jourSemaine: j.jourSemaine, rang: j.rang };
       continue;
@@ -192,7 +194,7 @@ async function calendrierDe(nom, annee, connues, compteur, budget = 400, heuresF
           id: `${instance}_${j.date}_${hit.heure}`,
           instance,
           arrondissement: nom,
-          nomInstance: `Conseil d'arrondissement de ${nom}`,
+          nomInstance: nomConseil(nom),
           date: j.date,
           heure: hit.heure,
           variante: 'ORDI',

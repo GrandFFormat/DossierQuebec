@@ -61,4 +61,15 @@ test('ordre du jour et procès-verbal d’une même date font une seule séance,
   assert.equal(s[0].preuve, 'u-pv');
   assert.equal(s[1].documents.PV, undefined);
   assert.equal(s[0].arrondissement, 'Le Plateau-Mont-Royal');
+  assert.equal(s[0].nomInstance, "Conseil d'arrondissement du Plateau-Mont-Royal");
+});
+
+import { nomConseil, corrigerNomConseil } from '../lib/mtl.js';
+test('l’article du nom d’arrondissement se contracte', () => {
+  assert.equal(nomConseil('Le Plateau-Mont-Royal'), "Conseil d'arrondissement du Plateau-Mont-Royal");
+  assert.equal(nomConseil('Le Sud-Ouest'), "Conseil d'arrondissement du Sud-Ouest");
+  assert.equal(nomConseil("L'Île-Bizard–Sainte-Geneviève"), "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève");
+  assert.equal(nomConseil('Verdun'), "Conseil d'arrondissement de Verdun");
+  assert.equal(corrigerNomConseil("Procès-verbal — Conseil d'arrondissement de Le Sud-Ouest, séance"), "Procès-verbal — Conseil d'arrondissement du Sud-Ouest, séance");
+  assert.equal(corrigerNomConseil(null), null);
 });

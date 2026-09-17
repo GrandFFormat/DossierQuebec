@@ -16,7 +16,7 @@
 // data/plateau-documents.json, par numéro.
 
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { octets, texte, ARRONDISSEMENTS_CODES, instanceArrondissement } from './mtl.js';
+import { octets, texte, ARRONDISSEMENTS_CODES, instanceArrondissement, nomConseil } from './mtl.js';
 import { lirePdf } from './pdf.js';
 
 export const ARRONDISSEMENT = 'Le Plateau-Mont-Royal';
@@ -117,7 +117,7 @@ export function seancesDesDocuments(documents, { annee = null } = {}) {
       id: null,
       instance,
       arrondissement: ARRONDISSEMENT,
-      nomInstance: `Conseil d'arrondissement de ${ARRONDISSEMENT}`,
+      nomInstance: nomConseil(ARRONDISSEMENT),
       date: d.date,
       heure: null,
       variante: d.variante ?? 'ORDI',
