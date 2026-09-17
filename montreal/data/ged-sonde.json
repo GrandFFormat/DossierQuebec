@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-17T01:31:53.845Z",
+ "generatedAt": "2026-09-17T01:37:12.603Z",
  "portail": "https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM",
  "dossier": "1265298015",
  "titre": "Répertoire des documents officiels",
@@ -20,11 +20,22 @@
    "actif": true
   }
  ],
- "urlApres": "https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM",
+ "lanceePar": "bouton Rechercher",
+ "urlApres": "https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM#!searchResults/s/5193a833-b238-11f1-81fa-77092c344f76",
  "trouveLeDossier": false,
- "mentionResultats": null,
- "pageApres": "Répertoire des documents officiels Cherchez, consultez, et téléchargez les documents officiels diffusés par la Ville de Montréal et ses 19 arrondissements.  Rechercher Filtrer la recherche À propos Mentions légales",
+ "mentionResultats": "0 résultat",
+ "pageApres": " Rechercher Filtrer la recherche Trier par  0 résultat Précédent Page de 1  Suivant À propos Mentions légales",
  "conclusion": "recherche faite, le numéro n’apparaît pas",
+ "liensResultats": [
+  {
+   "texte": "À propos",
+   "href": "#"
+  },
+  {
+   "texte": "Mentions légales",
+   "href": "https://montreal.ca/articles/mentions-legales-2654"
+  }
+ ],
  "appels": [
   {
    "methode": "GET",
@@ -32,7 +43,7 @@
   },
   {
    "methode": "POST",
-   "url": "/constellio/?collection=mtlca&portal=REPDOCVDM&v-1789608714299"
+   "url": "/constellio/?collection=mtlca&portal=REPDOCVDM&v-1789609032993"
   },
   {
    "methode": "POST",
@@ -41,6 +52,14 @@
   {
    "methode": "POST",
    "url": "/constellio/UIDL/?v-uiId=0"
+  },
+  {
+   "methode": "POST",
+   "url": "/constellio/UIDL/?v-uiId=0"
+  },
+  {
+   "methode": "GET",
+   "url": "/constellio/?collection=mtlca&portal=REPDOCVDM"
   },
   {
    "methode": "POST",
