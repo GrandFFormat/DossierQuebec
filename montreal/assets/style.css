@@ -369,6 +369,18 @@ details p { background: var(--fond-2); border-radius: var(--rayon); padding: 12p
 .elu .district { font-size: 13.5px; color: var(--doux); margin: 0 0 8px; }
 .elu.choisi { box-shadow: 0 0 0 2px var(--accent), var(--ombre-forte); }
 
+/* Ce que la décision dit vraiment : le dispositif, puis les motifs. Deux blocs sobres —
+   c'est du texte officiel cité, pas un résumé, et il doit se lire comme tel. */
+.texte-decision:empty { display: none; }
+.texte-decision h4 {
+  margin: 0 0 3px; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.07em;
+  color: var(--doux); font-weight: 700;
+}
+.texte-decision .dispositif, .texte-decision .motifs { margin: 0 0 10px; }
+.texte-decision .dispositif p, .texte-decision .motifs p { margin: 0; font-size: 14.5px; line-height: 1.6; }
+.texte-decision .dispositif { border-left: 3px solid var(--accent); padding-left: 10px; }
+.texte-decision .motifs p { color: var(--doux); font-size: 13.5px; }
+
 /* ---------- TABLEAUX ---------- */
 table {
   border-collapse: collapse; width: 100%; font-size: 14.5px;

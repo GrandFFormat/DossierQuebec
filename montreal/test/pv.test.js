@@ -548,3 +548,65 @@ test("un point d'ordre du jour ne déborde pas non plus", () => {
   assert.ok(objet.length <= 700, `objet de ${objet.length} caractères`);
   assert.match(objet, /\S$/);
 });
+
+// Faute des sommaires décisionnels, dont Montréal ne publie pas l'index, une résolution
+// doit donner d'elle-même ce qu'on allait y chercher : ce qu'elle décide vraiment (le
+// dispositif, après « Et résolu : ») et ce sur quoi le conseil s'appuie (les motifs, les
+// « Vu » et « Attendu que »). Les deux arrivent chaque matin dans les procès-verbaux ; on
+// les jetait.
+test('une résolution rend son dispositif et ses motifs', () => {
+  const pv = [
+    'CM26 0355',
+    "Approuver un projet de convention entre la Ville de Montréal et l'organisme Exemple inc.",
+    'Vu la recommandation du comité exécutif en date du 11 mars 2026 par sa résolution CE26 0412 ;',
+    "Attendu que l'organisme répond aux critères du programme ;",
+    'Il est proposé par Mme Julie Tremblay',
+    'appuyé par M. Pierre Lafond',
+    'Et résolu :',
+    "d'approuver le projet de convention entre la Ville et l'organisme Exemple inc.,",
+    "d'accorder un soutien financier de 250 000 $ pour l'année 2026,",
+    "d'imputer cette dépense conformément aux informations financières inscrites au dossier.",
+    "Adopté à l'unanimité.",
+    '20.03   1266245003',
+  ].join('\n');
+  const r = decouperResolutions(pv, { instance: 'CM' })[0];
+  assert.match(r.dispositif, /^d'approuver le projet de convention/);
+  assert.match(r.dispositif, /250 000 \$/, 'le montant est dans le dispositif, pas dans le titre');
+  // Le résultat du vote ferme le dispositif : « Adopté à l'unanimité » n'en fait pas partie.
+  assert.doesNotMatch(r.dispositif, /Adopté/);
+  assert.match(r.motifs, /^Vu la recommandation du comité exécutif/);
+  assert.match(r.motifs, /Attendu que l'organisme/);
+  assert.doesNotMatch(r.motifs, /Il est proposé/);
+});
+
+// Les conseils d'arrondissement écrivent « et unanimement résolu : » et ferment par
+// « ADOPTÉE » en capitales. Les deux doivent être reconnus.
+test("« et unanimement résolu » ouvre aussi un dispositif", () => {
+  const ca = [
+    'CA26 12158',
+    'Autoriser le prêt de matériel à la Communauté des Catholiques Portugais',
+    'Il est proposé par Marie-Josée Dubé',
+    'appuyé par Andrée Hénault',
+    'et unanimement résolu :',
+    "D'autoriser le prêt de matériel dans le cadre de la fête du 15 août 2026, et d'imputer",
+    'cette dépense au budget de fonctionnement.',
+    'ADOPTÉE',
+    '20.05   1269573013',
+  ].join('\n');
+  const r = decouperResolutions(ca, { instance: 'CA_Anj' })[0];
+  assert.match(r.dispositif, /^D'autoriser le prêt de matériel/);
+  assert.doesNotMatch(r.dispositif, /ADOPTÉE/);
+  assert.equal(r.motifs, null, 'pas de « Vu » ni d’« Attendu » dans cette résolution');
+});
+
+// Le piège du `\b` après un accent, rencontré deux fois. En JavaScript, « é » n'est pas un
+// caractère de mot : après « Adopté » il n'y a pas de frontière de mot, et un motif écrit
+// « Adopté\b » ne reconnaît jamais « Adopté à l'unanimité ». C'est ce qui faisait avaler le
+// résultat du vote par le dispositif, comme « \bREV\b » attrapait « REVÊTEMENT ».
+test("le résultat ferme le dispositif, malgré l'accent final", () => {
+  for (const fin of ['Adopté à l’unanimité.', 'ADOPTÉE', 'Adoptée à la majorité des voix.', 'Rejeté.']) {
+    const bloc = `CM26 0001\nUn objet\nEt résolu :\nde faire la chose décidée.\n${fin}\n20.01`;
+    const r = decouperResolutions(bloc, { instance: 'CM' })[0];
+    assert.equal(r.dispositif, 'de faire la chose décidée.', `fin : ${fin}`);
+  }
+});

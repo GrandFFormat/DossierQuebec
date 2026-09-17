@@ -146,6 +146,71 @@ function extraireObjet(lignes) {
   return bornerObjet(morceaux.join(' '));
 }
 
+// ---------- ce que la décision dit vraiment ----------
+//
+// Faute des sommaires décisionnels, dont la Ville ne publie pas l'index, il reste ceci :
+// une résolution N'EST PAS seulement son titre. Le procès-verbal en donne deux morceaux
+// qu'on écartait, et ce sont précisément les deux qu'on allait chercher dans le sommaire.
+//
+//   Le DISPOSITIF — ce qui suit « Et résolu : » — est le texte qui fait foi. C'est lui qui
+//   porte les montants, les parties, les durées, les conditions, les imputations
+//   budgétaires. Le titre dit « Approuver un projet de convention » ; le dispositif dit
+//   avec qui, pour combien et jusqu'à quand.
+//
+//   Les MOTIFS — les « Vu », « Attendu que », « Considérant que » qui précèdent — disent
+//   sur quoi le conseil s'appuie : la recommandation du comité exécutif, un règlement, un
+//   avis, une résolution antérieure. C'est le « pourquoi » le plus proche que le
+//   procès-verbal contienne.
+//
+// Ni l'un ni l'autre ne remplace le sommaire : il y manquera toujours les options
+// écartées et le contexte que l'administration écrit pour elle-même. Mais les deux
+// arrivent chaque matin dans des PDF qu'on lit déjà, et les jeter était du gaspillage.
+
+// Le dispositif s'ouvre à « Et résolu : » (ou « Il est résolu », « RÉSOLU : ») et se ferme
+// au résultat du vote, à la ligne d'article, ou au trait de séparation.
+const DEBUT_DISPOSITIF = /(?:^|\n)\s*(?:Et\s+r[ée]solu|Il\s+est\s+r[ée]solu|(?:et\s+)?unanimement\s+r[ée]solu|R[ÉE]SOLU)\s*:?\s*\n?/i;
+//
+// ⚠ Pas de `\b` après un mot accentué. En JavaScript, « é » n'est pas un caractère de mot :
+// après « Adopté », il n'y a donc PAS de frontière de mot, et « Adopt[ée]e?\b » ne
+// reconnaît jamais « Adopté à l'unanimité ». C'est le même piège que « \bREV\b », qui
+// attrapait « REVÊTEMENT ». On regarde donc ce qui suit, pas une frontière.
+const FIN_DISPOSITIF = /\n\s*(?:Adopt[ée]e?(?!\p{L})|Rejet[ée]e?(?!\p{L})|Vot(?:ent|e)\s|Ont\s+vot[ée]|R[ée]sultat\s*:|Dissidences?\s*:|_{3,}|\d{2}\.\d{2,3}(?:\s+\d{10})?\s*$)/iu;
+
+// Un dispositif tient en quelques paragraphes ; au-delà, c'est une lecture qui a débordé.
+const DISPOSITIF_MAX = 2000;
+const MOTIFS_MAX = 1200;
+
+export function extraireDispositif(bloc) {
+  const m = DEBUT_DISPOSITIF.exec(bloc ?? '');
+  if (!m) return null;
+  let reste = bloc.slice(m.index + m[0].length);
+  const fin = FIN_DISPOSITIF.exec(reste);
+  if (fin) reste = reste.slice(0, fin.index);
+  const texte = reste.replace(/\s+/g, ' ').trim();
+  if (texte.length < 12) return null; // « de le faire » n'apprend rien
+  return texte.length <= DISPOSITIF_MAX ? texte : texte.slice(0, texte.lastIndexOf(' ', DISPOSITIF_MAX)).trim();
+}
+
+// Les motifs : les lignes « Vu / Attendu / Considérant » jusqu'à la proposition.
+const LIGNE_MOTIF = /^(?:Vu\b|Attendu\b|Consid[ée]rant\b)/i;
+const FIN_MOTIFS = /^(?:Il\s+est\s+propos[ée]|Il\s+est\s+r[ée]solu|Et\s+r[ée]solu|R[ÉE]SOLU\s*:|appuy[ée]\s+par)/i;
+
+export function extraireMotifs(bloc) {
+  const morceaux = [];
+  let dedans = false;
+  for (const brut of String(bloc ?? '').split('\n')) {
+    const t = brut.trim();
+    if (!t) continue;
+    if (LIGNE_MOTIF.test(t)) dedans = true;
+    else if (dedans && FIN_MOTIFS.test(t)) break;
+    if (dedans) morceaux.push(t);
+    if (morceaux.join(' ').length > MOTIFS_MAX) break;
+  }
+  const texte = morceaux.join(' ').replace(/\s+/g, ' ').trim();
+  if (!texte) return null;
+  return texte.length <= MOTIFS_MAX ? texte : texte.slice(0, texte.lastIndexOf(' ', MOTIFS_MAX)).trim();
+}
+
 export function extraireResultat(bloc) {
   // « et unanimement résolu : » est la formule de plusieurs arrondissements ; elle dit
   // exactement ce que « Adopté à l'unanimité » dit ailleurs.
@@ -211,6 +276,9 @@ export function decouperResolutions(texte, { instance } = {}) {
       resultat: vote?.resultat ?? extraireResultat(bloc),
       dissidences: vote ? [] : extraireDissidences(bloc),
       vote,
+      // Le texte qui fait foi, et ce sur quoi le conseil s'appuie.
+      dispositif: extraireDispositif(bloc),
+      motifs: extraireMotifs(bloc),
       texte: bloc,
     };
   });
