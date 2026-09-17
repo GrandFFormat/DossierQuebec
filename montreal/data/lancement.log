@@ -2,7 +2,7 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 9d098d4 — Node v22.23.2
+Code : commit 1c70b87 — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -20,7 +20,7 @@ Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_vide
 71 séance(s) de 2026 dans data/seances.json (0 de plus qu'avant) — CE : 36, CG : 13, CM : 22
 
 === Calendrier des séances d'arrondissement ===
-121 séance(s) de 2026 déjà connue(s).
+129 séance(s) de 2026 déjà connue(s).
   Ahuntsic-Cartierville                       7 séance(s)  (82 requêtes)
   Anjou                                       8 séance(s)  (42 requêtes)
   Côte-des-Neiges–Notre-Dame-de-Grâce         6 séance(s)  (234 requêtes)
@@ -31,8 +31,8 @@ Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_vide
   Montréal-Nord                               5 séance(s)  (159 requêtes)
   Outremont                                   7 séance(s)  (82 requêtes)
   Pierrefonds-Roxboro                         8 séance(s)  (42 requêtes)
-    Le Plateau-Mont-Royal : 15 document(s) sur la page, 15 daté(s) aujourd'hui, 8 séance(s) en 2026.
-  Le Plateau-Mont-Royal                       8 séance(s), 8 nouvelle(s)  (16 requêtes)
+    Le Plateau-Mont-Royal : 15 document(s) sur la page, 0 daté(s) aujourd'hui, 8 séance(s) en 2026.
+  Le Plateau-Mont-Royal                       8 séance(s)  (1 requêtes)
   Rivière-des-Prairies–Pointe-aux-Trembles    7 séance(s)  (82 requêtes)
   Rosemont–La Petite-Patrie                   7 séance(s)  (82 requêtes)
   Saint-Laurent                               7 séance(s)  (84 requêtes)
@@ -42,7 +42,7 @@ Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_vide
   Ville-Marie                                 7 séance(s)  (82 requêtes)
   Villeray–Saint-Michel–Parc-Extension        7 séance(s)  (82 requêtes)
 
-129 séance(s) d'arrondissement pour 2026, en 1791 requête(s).
+129 séance(s) d'arrondissement pour 2026, en 1776 requête(s).
 
 === Décisions de l'année ===
 129 séance(s) d'arrondissement au calendrier.
@@ -59,17 +59,10 @@ CM_2026-06-16_09h00 : procès-verbal non publié — pas un PDF — page « 404 
 CM_2026-05-12_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CM_2026-02-17_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CM_2026-01-27_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Pmr_2026-02-02_18h30 : 24 pages, 37 résolutions, 40 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Pmr_2026-03-09_18h30 : 27 pages, 36 résolutions, 39 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Pmr_2026-03-20_09h30 : 4 pages, 6 résolutions, 9 points à l'ordre du jour, 0 liens vers un sommaire
 CA_Ver_2026-04-07_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Pmr_2026-04-13_18h30 : 21 pages, 30 résolutions, 32 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Pmr_2026-05-04_16h00 : 24 pages, 34 résolutions, 37 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Pmr_2026-06-01_18h30 : 22 pages, 28 résolutions, 31 points à l'ordre du jour, 0 liens vers un sommaire
 CA_Out_2026-06-02_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Rpp_2026-06-08_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Ahu_2026-07-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Pmr_2026-07-06_18h30 : 22 pages, 31 résolutions, 34 points à l'ordre du jour, 0 liens vers un sommaire
 CA_Rpp_2026-07-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Out_2026-07-07_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Anj_2026-09-01_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -87,8 +80,8 @@ CA_Ahu_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 
 CA_Las_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Pir_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 
-5806 décisions écrites dans data/decisions.json — 7 séance(s) lue(s) cette fois, 33 en attente de procès-verbal.
-33 nouveauté(s) depuis la dernière exécution.
+5806 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 33 en attente de procès-verbal.
+0 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
    1042  Procédure
@@ -156,19 +149,17 @@ Mesure de 33 termes sur 145 procès-verbaux de 2026 en cache et 5806 décisions�
 33 entrées écrites dans data/lexique.json
 
 === Récapitulatifs des sujets suivables ===
-Récapitulatifs des sujets : eau-egouts (61 dossiers), matieres-residuelles (27 dossiers), parcs (27 dossiers), itinerance (25 dossiers), velo (15 dossiers), pietonnisation (19 dossiers)
-  eau-egouts               2 étape(s), 0 à surveiller · retirés : 0 mécanique, 6 contre-lecture
-  matieres-residuelles     5 étape(s), 2 à surveiller · retirés : 0 mécanique, 2 contre-lecture
-  parcs                    4 étape(s), 0 à surveiller · retirés : 0 mécanique, 2 contre-lecture
-  itinerance               5 étape(s), 3 à surveiller · retirés : 0 mécanique, 2 contre-lecture
-  velo                     3 étape(s), 0 à surveiller · retirés : 0 mécanique, 3 contre-lecture
-  pietonnisation           6 étape(s), 5 à surveiller · retirés : 0 mécanique, 1 contre-lecture
-  coût ≈ 2.17 $ US
+Récapitulatifs des sujets : eau-egouts (61 dossiers), matieres-residuelles (27 dossiers), itinerance (25 dossiers), pietonnisation (19 dossiers)
+  eau-egouts               2 étape(s), 0 à surveiller · retirés : 0 mécanique, 4 contre-lecture
+  matieres-residuelles     5 étape(s), 2 à surveiller · retirés : 0 mécanique, 3 contre-lecture
+  itinerance               5 étape(s), 2 à surveiller · retirés : 0 mécanique, 1 contre-lecture
+  pietonnisation           3 étape(s), 4 à surveiller · retirés : 0 mécanique, 3 contre-lecture
+  coût ≈ 1.54 $ US
 
 === Sujets suivables et dossiers, pour Mes dossiers ===
-Projets publics : 16 sujets · index 14.5 Ko · fichiers de sujet 651 Ko au total.
+Projets publics : 16 sujets · index 14.7 Ko · fichiers de sujet 649 Ko au total.
 Décisions récentes : 537 dossiers depuis le 2026-06-20 · 750 Ko.
-Dossiers de l'année : 4554 · 2634 Ko · organismes suggérés : 449.
+Dossiers de l'année : 4554 · 2633 Ko · organismes suggérés : 449.
 
 === Résumés en langage clair ===
 Sommaires depuis 2026-07-19 pas encore résumés (plafond : 120)…
