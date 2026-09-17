@@ -28,6 +28,10 @@ import { classer, THEMES } from '../lib/themes.js';
 import { PROJETS, projetsDe } from '../lib/projets.js';
 
 const OUT = new URL('../data/decisions.json', import.meta.url);
+// Le texte des décisions vit à part : la page des décisions charge 4,7 Mo, et lui ajouter
+// le dispositif et les motifs de 5 245 résolutions la ferait doubler pour un contenu que
+// le lecteur ne demande qu'en dépliant une fiche.
+const OUT_TEXTES = new URL('../data/textes.json', import.meta.url);
 const SEANCES = new URL('../data/seances.json', import.meta.url);
 // Les conseils d'arrondissement ont leur propre calendrier : la Ville n'en publie pas,
 // il est reconstitué en cherchant les documents (voir seances-arrondissements.js).
@@ -46,7 +50,7 @@ const RATTRAPAGE_JOURS = 45;
 // mais le rafraîchissement suivant n'a rien relu du tout, puisque les séances étaient
 // déjà marquées « lues » au bon numéro de découpage. Deux compteurs indépendants pour un
 // même travail laissent toujours passer l'un ou l'autre ; celui-ci n'en fait qu'un.
-export const VERSION_DECOUPAGE = 7;
+export const VERSION_DECOUPAGE = 8;
 const DIAGNOSTIC = new URL('../data/diagnostic.json', import.meta.url);
 
 // Un échantillon de ce que les PDF contiennent vraiment — les premières lignes d'un
@@ -166,6 +170,13 @@ export function decisionsDeSeance(seance, pv, odj) {
       resultat: r.resultat,
       dissidences: r.dissidences,
       voteEnregistre: Boolean(r.vote),
+      // Ce que la décision dit vraiment, et ce sur quoi le conseil s'appuie. Faute des
+      // sommaires décisionnels, c'est tout ce qu'on a — et c'est déjà beaucoup : le
+      // dispositif porte les montants, les parties et les durées ; les motifs disent la
+      // recommandation ou le règlement invoqué. Les deux vivent à part (data/textes.json),
+      // pour ne pas alourdir de trois mégaoctets la page des décisions.
+      dispositif: r.dispositif ?? null,
+      motifs: r.motifs ?? null,
       pdf: page ? `${pv.url}#page=${page}` : pv.url,
       sommairePdf: point?.sommairePdf ?? null,
       sommaireId: point?.sommairePdf ? r.dossier : null,
@@ -307,6 +318,20 @@ async function main() {
       decisions: liste,
     };
     await writeFile(OUT, JSON.stringify(payload, null, 1), 'utf8');
+
+    // Le dispositif et les motifs partent dans leur propre fichier, et sortent de
+    // decisions.json : la page ne doit pas payer pour ce qu'elle n'affiche pas d'emblée.
+    const textes = {};
+    for (const d of liste) {
+      if (d.dispositif || d.motifs) textes[d.id] = { dispositif: d.dispositif ?? null, motifs: d.motifs ?? null };
+      delete d.dispositif;
+      delete d.motifs;
+    }
+    await writeFile(
+      OUT_TEXTES,
+      JSON.stringify({ generatedAt: payload.generatedAt, source: payload.source, licence: payload.licence, nombre: Object.keys(textes).length, textes }),
+      'utf8'
+    );
     return payload;
   };
 

@@ -88,6 +88,10 @@ const LEGENDE = {
 };
 
 const decisions = await lire('data/decisions.json', null);
+// Le texte des décisions vit à part (scrapers/decisions.js). C'est la matière d'un
+// récapitulatif de projet : faute des sommaires, c'est le dispositif — « Et résolu : … » —
+// qui porte les montants, les parties et les durées.
+const { textes = {} } = await lire('data/textes.json', {});
 if (!decisions?.decisions) {
   console.error('data/decisions.json introuvable : rien à publier.');
   process.exit(1);
@@ -121,6 +125,9 @@ function ficheDossier(groupe) {
     theme: principal.theme ?? null,
     objet: principal.objet ?? null,
     puces: [], // aucun résumé en langage clair tant que les sommaires ne sont pas accessibles
+    // Ce que la décision dit au-delà de son titre, tiré du procès-verbal lui-même.
+    dispositif: textes[principal.id]?.dispositif ?? null,
+    motifs: textes[principal.id]?.motifs ?? null,
     pdf: principal.pdf ?? null,
     resolutions: groupe.map((d) => ({ numero: d.numero ?? null, instance: d.instance, date: d.date ?? null, resultat: d.resultat ?? null })),
   };

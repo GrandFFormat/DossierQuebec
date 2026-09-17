@@ -111,6 +111,57 @@ function puceTheme(cle) {
 
 // Après un redessin, les fiches reviennent fermées : le bouton doit le refléter, sinon il
 // annonce « Tout replier » devant une liste entièrement repliée.
+// ---------- le texte d'une décision ----------
+//
+// Ce que la décision DIT, par-delà son titre : le dispositif (« Et résolu : … »), qui porte
+// les montants, les parties et les durées, et les motifs (« Vu… », « Attendu que… »), qui
+// disent sur quoi le conseil s'appuie. Faute des sommaires décisionnels, dont Montréal ne
+// publie pas l'index, c'est le plus près du « pourquoi » que les documents publics
+// donnent — et ils sont publics depuis toujours, dans le procès-verbal.
+//
+// Le fichier ne se charge qu'à la première fiche dépliée : la page des décisions pèse déjà
+// 4,7 Mo, et personne ne lit 5 245 dispositifs. Une fois là, il sert tout le reste de la
+// visite. Si le chargement échoue, la fiche reste ce qu'elle était : rien ne se casse.
+let textesDecisions = null;
+let textesEnCours = null;
+
+async function chargerTextes() {
+  if (textesDecisions) return textesDecisions;
+  textesEnCours ??= charger('textes').then((t) => (textesDecisions = t?.textes ?? {}));
+  return textesEnCours;
+}
+
+function rendreTexteDecision(zone, t) {
+  if (!t || (!t.dispositif && !t.motifs)) {
+    // Dire pourquoi c'est vide vaut mieux qu'un blanc : certaines résolutions n'ont
+    // simplement pas de dispositif séparé dans le procès-verbal.
+    zone.innerHTML = '<p class="compte" style="margin:0 0 8px">Le procès-verbal ne détaille pas cette décision au-delà de son objet.</p>';
+    return;
+  }
+  zone.innerHTML =
+    (t.dispositif ? `<div class="dispositif"><h4>Ce que le conseil a décidé</h4><p>${echapper(t.dispositif)}</p></div>` : '') +
+    (t.motifs ? `<div class="motifs"><h4>Sur quoi il s'appuie</h4><p>${echapper(t.motifs)}</p></div>` : '');
+}
+
+// `toggle` ne remonte pas : on écoute à la capture, sur la liste entière.
+function brancherTextes(liste) {
+  if (!liste || liste.dataset.textes) return;
+  liste.dataset.textes = '1';
+  liste.addEventListener(
+    'toggle',
+    async (e) => {
+      const fiche = e.target;
+      if (!fiche.open) return;
+      const zone = fiche.querySelector('.texte-decision');
+      if (!zone || zone.dataset.rempli) return;
+      zone.dataset.rempli = '1';
+      const textes = await chargerTextes();
+      rendreTexteDecision(zone, textes?.[zone.dataset.id]);
+    },
+    true
+  );
+}
+
 function reinitialiserDepliage() {
   const b = $('#tout-deplier');
   if (!b) return;
@@ -147,6 +198,7 @@ function carteDecision(d) {
   // dissidences sont les noms consignés contre, sans appel nominal complet. Faits bruts.
   const corps = `${blocResume(resumePour(d))}
     ${d.dissidences?.length ? `<p class="compte" style="margin:0 0 8px">Dissidence${d.dissidences.length > 1 ? 's' : ''}&nbsp;: ${d.dissidences.map(echapper).join(', ')}.</p>` : ''}
+    <div class="texte-decision" data-id="${echapper(d.id)}"></div>
     ${d.dossier ? `<p class="compte" style="margin:0 0 8px">Dossier ${echapper(d.dossier)}${d.article ? ` · article ${echapper(d.article)}` : ''}</p>` : ''}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${d.type === 'Résolution' ? 'Procès-verbal officiel (PDF)' : 'Document officiel (PDF)'} ↗</a>` : ''}
     ${d.sommairePdf ? ` &nbsp;<a class="lien-pdf" href="${echapper(d.sommairePdf)}" target="_blank" rel="noopener">Sommaire décisionnel (PDF) ↗</a>` : ''}`;
@@ -238,6 +290,7 @@ function rendreDecisions() {
     $('#plus-decisions').hidden = reste <= 0;
     $('#plus-decisions').textContent = `Afficher plus (${nombreFr(reste)} restantes)`;
   }
+  brancherTextes($('#liste-decisions'));
   reinitialiserDepliage();
 }
 
