@@ -2,7 +2,7 @@
 > dossiervillelevis@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 3fbf239 — Node v22.23.2
+Code : commit aa04b04 — Node v22.23.2
 
 === Syntaxe du JavaScript du site ===
 
@@ -17,104 +17,128 @@ https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt : HTTP 403 Fo
 === Calendrier des séances ===
 72 séance(s) en 2026 écrites dans data/seances.json.
   CAD     12 séances, 7 avec procès-verbal
-  CV      19 séances, 12 avec procès-verbal
+  CV      19 séances, 13 avec procès-verbal
   CACCO   12 séances, 7 avec procès-verbal
   CACCE   12 séances, 7 avec procès-verbal
   CE      17 séances, 17 avec procès-verbal
 
 === Décisions de l'année ===
+CV_2026-09-15 : 24 pages, 53 résolutions, 38 liées à un sommaire, 2 vote(s) nominal(aux)
+CV_2026-08-25 : 15 pages, 38 résolutions, 25 liées à un sommaire, 0 vote(s) nominal(aux)
 
-1782 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 4 en attente de procès-verbal.
-0 nouveauté(s) depuis la dernière exécution.
+1836 décisions écrites dans data/decisions.json — 2 séance(s) lue(s) cette fois, 4 en attente de procès-verbal.
+54 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
-    630  Urbanisme
-    435  Procédure
-    139  Administration
-     96  Transport
-     72  Finances
-     60  Contrats
+    641  Urbanisme
+    450  Procédure
+    142  Administration
+    104  Transport
+     77  Finances
+     64  Contrats
+     58  Environnement
      57  Subventions
-     56  Environnement
-     41  Motions et hommages
-     34  Sécurité publique
+     42  Motions et hommages
+     35  Sécurité publique
      33  Loisirs et communauté
-     29  Travaux et infrastructures
+     31  Travaux et infrastructures
      26  Ressources humaines
-     23  Logement et social
+     24  Logement et social
      19  Développement économique
      17  Immobilier
-     15  Culture et patrimoine
-    105  (classées par défaut — aucune règle n'a tranché)
+     16  Culture et patrimoine
+    107  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-07-17) ===
-Fenêtre depuis 2026-07-17 : 3 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-07-19) ===
+Fenêtre depuis 2026-07-19 : 4 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
 
-15 votes nominaux écrits dans data/votes.json (3 procès-verbaux analysés).
+17 votes nominaux écrits dans data/votes.json (4 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
 
 === Lexique, mesuré sur les procès-verbaux ===
-Mesure de 29 termes sur 3 procès-verbaux de 2026 en cache et 1782 décisions…
+Mesure de 29 termes sur 4 procès-verbaux de 2026 en cache et 1836 décisions…
 
-     3 PV      24 résolutions   Résolution
-     3 PV      61 résolutions   Document d’aide à la décision
-     3 PV       6 résolutions   Procès-verbal
-     3 PV       3 résolutions   Ordre du jour
-     2 PV       6 résolutions   Avis de motion
-     2 PV      19 résolutions   Règlement
-     2 PV       8 résolutions   Dépôt
-     2 PV      49 résolutions   Conseil de la Ville
-     3 PV      29 résolutions   Comité exécutif
+     4 PV      56 résolutions   Résolution
+     4 PV     101 résolutions   Document d’aide à la décision
+     4 PV       8 résolutions   Procès-verbal
+     4 PV       4 résolutions   Ordre du jour
+     3 PV      10 résolutions   Avis de motion
+     3 PV      32 résolutions   Règlement
+     3 PV      20 résolutions   Dépôt
+     3 PV      90 résolutions   Conseil de la Ville
+     4 PV      62 résolutions   Comité exécutif
      0 PV       0 résolutions   Conseil d'arrondissement
-     1 PV       5 résolutions   Président du conseil
-     3 PV      16 résolutions   Greffière
-     1 PV       2 résolutions   Commission
-     1 PV      23 résolutions   Il est proposé par… Appuyé par…
-     0 PV       0 résolutions   Appeler le vote
-     1 PV      23 résolutions   Adoptée à l'unanimité
-     0 PV       0 résolutions   Adoptée à la majorité
-     0 PV       0 résolutions   Proposition d’amendement
+     2 PV      10 résolutions   Président du conseil
+     4 PV      32 résolutions   Greffière
+     2 PV       4 résolutions   Commission
+     2 PV      59 résolutions   Il est proposé par… Appuyé par…
+     1 PV       1 résolutions   Appeler le vote
+     2 PV      58 résolutions   Adoptée à l'unanimité
+     1 PV       1 résolutions   Adoptée à la majorité
+     1 PV       1 résolutions   Proposition d’amendement
      0 PV       0 résolutions   Conflit d'intérêts
      0 PV       0 résolutions   Dérogation mineure
      0 PV       0 résolutions   PIIA
      0 PV       0 résolutions   Usage conditionnel
-     2 PV       4 résolutions   Zonage et lotissement
+     3 PV      11 résolutions   Zonage et lotissement
      1 PV       1 résolutions   Consultation écrite
-     3 PV       7 résolutions   Attribution du contrat
-     2 PV       5 résolutions   Appel d'offres
-     2 PV      12 résolutions   Aide financière
-     2 PV       3 résolutions   Réserve financière
-     0 PV       0 résolutions   Virement de fonds
+     4 PV       9 résolutions   Attribution du contrat
+     3 PV       7 résolutions   Appel d'offres
+     3 PV      16 résolutions   Aide financière
+     3 PV       8 résolutions   Réserve financière
+     1 PV       2 résolutions   Virement de fonds
 
 29 entrées écrites dans data/lexique.json
 
-⚠ 9 terme(s) sans aucune occurrence — la formulation cherchée ne colle pas :
+⚠ 5 terme(s) sans aucune occurrence — la formulation cherchée ne colle pas :
   Conseil d'arrondissement  (recherche : conseil d['’]arrondissement)
-  Appeler le vote  (recherche : appelle le vote)
-  Adoptée à la majorité  (recherche : adopt[ée]e? à la majorit[ée])
-  Proposition d’amendement  (recherche : proposition d['’]amendement|proposition principale)
   Conflit d'intérêts  (recherche : conflit d['’]int[ée]r[êe]ts)
   Dérogation mineure  (recherche : d[ée]rogations? mineures?)
   PIIA  (recherche : \bPIIA\b|plans? d['’]implantation et d['’]int[ée]gration architecturale)
   Usage conditionnel  (recherche : usages? conditionnels?)
-  Virement de fonds  (recherche : virements? de fonds)
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-17 pas encore résumés (plafond : 120)…
-492 déjà résumés, 0 à faire.
-Rien à générer. (--force pour tout regénérer.)
+Sommaires depuis 2026-07-19 pas encore résumés (plafond : 120)…
+492 déjà résumés, 33 à faire.
+
+--- Estimation ---
+Documents à résumer  : 33
+Modèle               : claude-opus-5
+Ratio mesuré         : 1.70 caractères/jeton (sur 12 documents)
+Jetons d'entrée      : ~170 152
+Jetons de sortie     : ~10 560
+Coût estimé          : ~1.11 $ US
+                       (moitié moins avec --batch, résultats en moins d'une heure)
+
+Génération…
+  … 4/33
+  … 8/33
+  … 12/33
+  … 16/33
+  … 20/33
+  … 24/33
+  … 28/33
+  … 32/33
+  … 33/33
+
+31 résumés générés, 523 au total dans data/resumes.json
+Coût réel : 1.23 $ US
+2 échec(s) — relancer la commande les reprendra.
 
 === Récapitulatifs des projets ===
-Récapitulatifs des projets : rien de nouveau.
+Récapitulatifs des projets : stations-epuration (9 dossiers), logement (10 dossiers)
+  stations-epuration           5 étape(s), 2 à surveiller · retirés : 0 mécanique, 2 contre-lecture
+  logement                     6 étape(s), 3 à surveiller · retirés : 0 mécanique, 1 contre-lecture
+  coût ≈ 0.42 $ US
 
 === Projets pour « Mes dossiers » ===
-Projets publics : 4 projets · index 2.8 Ko · fichiers de projet 39 Ko au total.
-Décisions attendues : 32 dossiers en attente, dont 0 avec une date cible · 45.1 Ko.
-Dossiers de l'année : 1337 · 997 Ko · organismes suggérés : 86.
-Décisions récentes : 230 dossiers depuis le 2026-07-11 · 212 Ko.
+Projets publics : 4 projets · index 2.8 Ko · fichiers de projet 45 Ko au total.
+Décisions attendues : 32 dossiers en attente, dont 0 avec une date cible · 45.4 Ko.
+Dossiers de l'année : 1384 · 1043 Ko · organismes suggérés : 89.
+Décisions récentes : 102 dossiers depuis le 2026-08-01 · 113 Ko.
 
 === Chiffres de la page Abonnement ===
-Travail public : 2287 documents, 451 résumés, 15 votes, 4 projets.
+Travail public : 2375 documents, 480 résumés, 17 votes, 4 projets.
 
 === Bilan ===
   étapes         : 11
