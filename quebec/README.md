@@ -409,15 +409,60 @@ détails jugés inutilisables, publiés comme repère mais jamais montrés) : en
 rien n'est relu ni repayé. Le workflow demande les secrets `SUPABASE_URL` et
 `SUPABASE_SERVICE_ROLE_KEY` ; sans eux, l'étape est sautée.
 
-**Demander un détail manquant (abonnés).** Sur une fiche d'un volet ou un dossier d'organisme dans
-Mes dossiers, quand le résumé a un montant mais que le détail n'est pas encore lu, l'abonné voit
-« Demander ce détail ». `api/detail.js` (POST) vérifie l'abonnement et l'ajoute à la table
-`demandes_details` (`scripts/supabase-schema-demandes-details.sql`), au plus 10 par abonné par
-24 heures ; la fiche affiche ensuite « Demandé le … ». Le lendemain matin, `details-du-jour.js`
-lit les demandes en attente avant les nouveaux dossiers, dans le même plafond de 30 (le coût
-maximal par jour ne change pas), puis note chacune « lu », « deja-lu » ou « sans-montant ». Une
-lecture qui échoue reste en attente et repasse le lendemain. Un document lu mais inutilisable
-affiche « on n'a pas pu en tirer un détail fiable » au lieu du bouton.
+**Demander un détail manquant (abonnés seulement).** Sur une fiche d'un volet ou un dossier
+d'organisme dans Mes dossiers, quand le résumé a un montant mais que le détail n'est pas encore
+lu, l'abonné voit « Demander le détail de l'argent ». `api/detail.js` (POST) vérifie
+l'abonnement et l'ajoute à la table `demandes_details`
+(`scripts/supabase-schema-demandes-details.sql`), au plus 10 par abonné par 24 heures ; la fiche
+affiche ensuite « Demandé le … ». Le lendemain matin, `details-du-jour.js` lit les demandes en
+attente avant les nouveaux dossiers, dans le même plafond de 30 (le coût maximal par jour ne
+change pas), puis note chacune « lu », « deja-lu » ou « sans-montant ». Une lecture qui échoue
+reste en attente et repasse le lendemain. Un document lu mais inutilisable affiche « on n'a pas
+pu en tirer un détail fiable » au lieu du bouton.
+
+**Visible pour tous, utilisable par les abonnés (Martin, 17 sept. 2026).** Un visiteur ou un
+compte gratuit voit, au même endroit, « 🔒 Demander le détail de l'argent · réservé aux
+abonnés », avec un lien vers la page Abonnement ; il n'a pas de bouton, et le serveur refuse sa
+demande (403). Seulement pour Québec, où les demandes sont lues : sur les volets en prototype, rien
+n'est proposé aux non-abonnés. La page Abonnement et Mes dossiers citent la demande parmi les
+avantages. Vérifié le 17 sept. par trois relectures indépendantes (serveur, interface, états
+d'abonnement) : aucun chemin ne permet à un non-abonné de créer une demande — la table n'a aucune
+politique RLS, seul le serveur y écrit, et le `user_id` vient du jeton vérifié. Durcissements
+ajoutés à cette occasion :
+
+- **Une seule définition d'« abonné actif »** : `estActive` (`api/_stripe.js`), importée par
+  `api/detail.js`, `api/alertes-projets.js` et le script du matin (statut `actif`, fin nulle ou
+  future).
+- **Le matin revérifie l'abonnement** : seules les demandes d'abonnés encore actifs sont lues, au
+  plus 10 par personne (abonnements lus par pages de 1000). Une demande faite avant une
+  annulation attend sans coûter de lecture, et revient si la personne se réabonne. En miroir,
+  `api/detail.js` ne montre « déjà demandé par un abonné » que si l'auteur est encore actif :
+  sinon, les autres abonnés gardent le bouton, et le dossier finit lu grâce à leur demande.
+- **Plus de fausse promesse** : un dossier classé « sans-montant » n'est plus proposé (« ce dossier
+  n'a pas de montant à détailler ») — et le matin rouvre ces demandes si un résumé refait trouve un
+  montant. Une demande notée « lu » dont le détail n'est pas dans Supabase (publication échouée)
+  est rouverte quand l'abonné redemande, au lieu d'un « déjà traitée » qui ne montre rien.
+  `projets-publics.js` marque `procedure: true` les dossiers dont le résumé est sans contenu
+  substantiel : Mes dossiers affiche leur montant, comme le volet, mais ne propose pas de le
+  demander (le matin ne les lit pas).
+- **Grâce d'impayé non renouvelable** : en `past_due`, un accès déjà expiré le reste d'une période
+  à l'autre (sinon, trois jours gratuits reviendraient chaque mois si Stripe laisse l'abonnement
+  impayé). Dans Stripe, régler « après les relances : annuler l'abonnement » reste le plus simple.
+- **Messages justes** : le serveur distingue 403 « abonnement inactif » (compte reconnu, plus
+  d'abonnement : « votre abonnement n'est plus actif », avec le lien), 403 « réservé aux abonnés »
+  (pas de session) et 503 « abonnement non vérifiable » (Supabase ne répond pas : « réessayez »,
+  jamais un faux verrou ni un faux aperçu à un abonné payant). L'export suit la même règle, et les
+  fiches des volets envoient la session du moment (le jeton se renouvelle toutes les heures).
+- **SQL** : `revoke all on public.demandes_details from anon, authenticated;` en plus de la RLS —
+  à exécuter dans Supabase (le fichier `scripts/supabase-schema-demandes-details.sql` est
+  ré-exécutable tel quel).
+
+Restent notés, sans correctif : la clé d'un dossier de Lévis diffère entre Mes dossiers
+(`FIN-2026-038.pdf`) et le volet (`FIN-2026-038`), sans effet tant que le détail de Lévis est
+sur la glace ; le quota de 10 par 24 h se compte avant l'ajout (des demandes lancées en parallèle
+peuvent le dépasser, d'où le plafond par personne du matin) ; la 11e demande d'un abonné très
+actif attend un matin de plus que promis ; les remboursements et contestations Stripe ne coupent
+pas l'accès avant la fin de la période.
 
 **Export en tableur (abonnés).** Dans Mes dossiers, l'abonné choisit lui-même : quelles décisions
 (un projet à la fois : « toutes les décisions de l'année » est grisée et ne sort sous aucune forme, décision de Martin du 14 sept. 2026), un mot ou un nom facultatif (ses mots-clés et organismes sont

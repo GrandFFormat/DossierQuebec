@@ -246,6 +246,10 @@ const annee = [...groupesRecents.entries()]
       objet: principal.objet ?? null,
       puces: resume?.puces?.length && !resume.sansContenuSubstantiel ? resume.puces : [],
       montant: resume?.montantPrincipal ?? null,
+      // Comme le volet (assets/app.js) : le montant d'un document de procédure s'affiche, mais il
+      // n'a pas de détail à en tirer (details-du-jour.js ne le lit pas) — Mes dossiers ne propose
+      // donc pas de le demander.
+      ...(resume?.sansContenuSubstantiel ? { procedure: true } : {}),
       pdf: principal.pdf ?? null,
     };
   })

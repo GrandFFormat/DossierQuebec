@@ -210,14 +210,14 @@
   const AVANTAGES_PAYANTS = EN ? `
         <li><strong>An email alert when your projects move</strong>: a new decision, an item awaiting a vote, an updated recap — and nothing in the weeks when nothing moves.</li>
         <li><strong>Money details</strong>: who receives, who pays, the bids and the City's estimate, the breakdown by year, the conditions.
-          <br><span class="ab-note">Available for items with an amount: those of the major projects followed, and every new item since September 15, 2026. Other 2026 items don't have them yet.</span></li>
+          <br><span class="ab-note">Available for items with an amount: those of the major projects followed, and every new item since September 15, 2026. Other 2026 items don't have them yet: in Québec City, request one and it is read first, normally the next day.</span></li>
         <li><strong>Alerts for your neighbourhood, your street or a keyword</strong>: “everything the City decides about 1re Avenue”, “in Limoilou”, “about snow removal”.</li>
         <li><strong>Follow an organization or a company</strong>: this year's decisions that name it — contracts, grants, agreements — with each amount as written, and an alert when a new one names it.</li>
         <li><strong>Council agendas</strong> (<em class="ab-mise-en-garde">approximate</em>): what's coming up at each council, with its summary, and what will <em class="ab-mise-en-garde">probably</em> be presented at the next meeting.</li>
         <li><strong>Export to a spreadsheet or PDF</strong> (Excel, CSV or printable PDF): you choose a project, a word or a name and the columns, with the money details when they have been read.</li>` : `
         <li><strong>Une alerte par courriel quand vos projets bougent</strong> : une nouvelle décision, un dossier qui attend un vote, un récapitulatif mis à jour — et rien les semaines où rien n'avance.</li>
         <li><strong>Le détail de l'argent</strong> : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions.
-          <br><span class="ab-note">Offert pour les dossiers avec un montant : ceux des grands projets suivis, et chaque nouveau dossier depuis le 15 septembre 2026. Les autres dossiers de 2026 ne l'ont pas encore.</span></li>
+          <br><span class="ab-note">Offert pour les dossiers avec un montant : ceux des grands projets suivis, et chaque nouveau dossier depuis le 15 septembre 2026. Les autres dossiers de 2026 ne l'ont pas encore : à Québec, demandez-le, il est lu en priorité, normalement le lendemain.</span></li>
         <li><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : « tout ce que la Ville décide sur la 1re Avenue », « dans Limoilou », « sur le déneigement ».</li>
         <li><strong>Suivre un organisme ou une entreprise</strong> : les décisions de l'année qui le nomment — contrats, subventions, ententes — avec le montant de chacune tel qu'écrit, et une alerte quand une nouvelle le nomme.</li>
         <li><strong>L'agenda des conseils</strong> (<em class="ab-mise-en-garde">approximatif</em>) : ce qui s'en vient à chaque conseil, avec son résumé, et ce qui sera <em class="ab-mise-en-garde">probablement</em> présenté à la prochaine séance.</li>
@@ -515,7 +515,7 @@
           <div class="ab-liens">
             ${d.pdf ? `<a href="${echapper(d.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}
             <a href="/${echapper(d.ville)}/decisions.html?q=${encodeURIComponent(d.numero)}">${tr('Voir dans le volet', 'See in the city section:')} ${echapper(VILLES[d.ville] ?? '')}</a>
-            ${fichier ? `<button type="button" class="ab-lien-bouton" data-detail="${echapper(fichier)}" data-ville="${echapper(d.ville)}" data-montant="${d.montant ? 1 : 0}" aria-expanded="false">${tr("Détail de l'argent", 'Money details')}</button>` : ''}
+            ${fichier ? `<button type="button" class="ab-lien-bouton" data-detail="${echapper(fichier)}" data-ville="${echapper(d.ville)}" data-montant="${d.montant ? (d.procedure ? 'procedure' : 1) : 0}" aria-expanded="false">${tr("Détail de l'argent", 'Money details')}</button>` : ''}
           </div>
           <div class="ab-detail-org" hidden></div>
         </div>
@@ -592,11 +592,17 @@
       bouton.disabled = false;
       boite.hidden = false;
       bouton.setAttribute('aria-expanded', 'true');
-      // Pas de détail : l'abonné peut le demander, si le résumé a trouvé un montant.
+      // Pas de détail : l'abonné peut le demander, si le résumé a trouvé un montant (data-montant = 1 ;
+      // « procedure » : un montant affiché, mais un document de procédure, dont on ne tire pas de détail).
+      const montant = bouton.dataset.montant;
       boite.innerHTML = !reponse ? `<p class="ab-note">${tr('Le détail de l’argent ne répond pas pour l’instant. Réessayez dans un moment.', "Money details aren't responding right now. Try again in a moment.")}</p>`
         : rendreDetail(reponse, bouton.dataset.ville)
-          || (bouton.dataset.montant === '1' || reponse.lu ? rendreDemande(reponse, bouton.dataset.ville) : '')
-          || `<p class="ab-note">${tr('Pas de détail de l’argent pour ce dossier : son résumé ne mentionne pas de montant.', "No money details for this item: its summary doesn't mention an amount.")}</p>`;
+          || (montant === '1' || reponse.lu ? rendreDemande(reponse, bouton.dataset.ville) : '')
+          || (montant === '1'
+            ? `<p class="ab-note">${tr('Pas encore de détail de l’argent pour ce dossier.', 'No money details for this item yet.')}</p>`
+            : montant === 'procedure'
+              ? `<p class="ab-note">${tr('Pas de détail de l’argent pour ce dossier : c’est un document de procédure.', 'No money details for this item: it is a procedural document.')}</p>`
+              : `<p class="ab-note">${tr('Pas de détail de l’argent pour ce dossier : son résumé ne mentionne pas de montant.', "No money details for this item: its summary doesn't mention an amount.")}</p>`);
       mesurer('organisme_detail_argent', { ville: bouton.dataset.ville });
     });
   }
@@ -826,6 +832,7 @@ ${liste.map(fiche).join('')}
       // Le détail de l'argent : seulement pour les dossiers avec un montant, par lots de 150.
       const details = new Map();
       let detailManque = false;
+      let detailRefuse = false; // 403 « abonnement inactif » : il a expiré pendant que la page était ouverte
       if (groupes.has('argent')) {
         const fichierDe = (d) => /\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1];
         const parVille = new Map();
@@ -835,8 +842,11 @@ ${liste.map(fiche).join('')}
           for (let i = 0; i < ids.length; i += 150) {
             etat.textContent = `${tr("Détail de l'argent", 'Money details')} : ${Math.min(i + 150, ids.length)} / ${ids.length}…`;
             const r = await fetch(`/api/detail?ville=${encodeURIComponent(ville)}&dossiers=${encodeURIComponent(ids.slice(i, i + 150).join(','))}`, { headers: { Authorization: `Bearer ${courante?.access_token ?? ''}` }, cache: 'no-store' }).catch(() => null);
-            const corps = r?.ok ? await r.json().catch(() => null) : null;
-            if (!corps) { detailManque = true; continue; }
+            const corps = r ? await r.json().catch(() => null) : null;
+            // Seul un abonnement vérifié et inactif le dit ; une panne (503) ou une session absente
+            // restent « réessayez ».
+            if (r?.status === 403 && corps?.erreur === 'abonnement inactif') { detailRefuse = true; continue; }
+            if (!r?.ok || !corps) { detailManque = true; continue; }
             for (const [id, x] of Object.entries(corps.details ?? {})) details.set(`${ville}|${id}`, x);
           }
         }
@@ -888,8 +898,8 @@ ${liste.map(fiche).join('')}
         telecharger(fichierCsv(colonnes.map((c) => c.titre), lignes), `${nom}.csv`);
       }
       etat.textContent = EN
-        ? `${format === 'pdf' ? 'PDF opened in a new window' : 'File ready'}: ${liste.length.toLocaleString('en-CA')} ${pl(liste.length, 'item', 'items')}${groupes.has('argent') ? `, ${details.size} with money details` : ''}.${detailManque ? " Some money details couldn't be loaded: try again in a moment." : ''}`
-        : `${format === 'pdf' ? 'PDF ouvert dans une nouvelle fenêtre' : 'Fichier prêt'} : ${liste.length.toLocaleString('fr-CA')} dossier${liste.length > 1 ? 's' : ''}${groupes.has('argent') ? `, dont ${details.size} avec le détail de l'argent` : ''}.${detailManque ? " Une partie du détail de l'argent n'a pas pu être chargée : réessayez dans un moment." : ''}`;
+        ? `${format === 'pdf' ? 'PDF opened in a new window' : 'File ready'}: ${liste.length.toLocaleString('en-CA')} ${pl(liste.length, 'item', 'items')}${groupes.has('argent') ? `, ${details.size} with money details` : ''}.${detailRefuse ? ' Money details are for subscribers only: your subscription is no longer active.' : detailManque ? " Some money details couldn't be loaded: try again in a moment." : ''}`
+        : `${format === 'pdf' ? 'PDF ouvert dans une nouvelle fenêtre' : 'Fichier prêt'} : ${liste.length.toLocaleString('fr-CA')} dossier${liste.length > 1 ? 's' : ''}${groupes.has('argent') ? `, dont ${details.size} avec le détail de l'argent` : ''}.${detailRefuse ? ' Le détail de l’argent est réservé aux abonnés : votre abonnement n’est plus actif.' : detailManque ? " Une partie du détail de l'argent n'a pas pu être chargée : réessayez dans un moment." : ''}`;
       carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = !pdfPermis(); });
       mesurer('export_tableur', { format, groupes: [...groupes].join(',') });
     });

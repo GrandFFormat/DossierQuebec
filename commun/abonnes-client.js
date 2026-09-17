@@ -251,7 +251,14 @@ const VILLES_DETAIL_LU = new Set(['quebec']);
 export function rendreDemande(reponse, ville) {
   if (!reponse || reponse.existe) return '';
   if (reponse.lu) return `<div class="ab-demande"><p class="ab-note" style="margin:0">${tr('Ce document a été lu, mais on n’a pas pu en tirer un détail de l’argent fiable. Le PDF officiel fait foi.', "This document was read, but no reliable money details could be drawn from it. The official PDF prevails.")}</p></div>`;
-  if (!reponse.demandable) return '';
+  if (reponse.sansMontant) return `<div class="ab-demande"><p class="ab-note" style="margin:0">${tr('Ce dossier n’a pas de montant à détailler.', 'This item has no amount to detail.')}</p></div>`;
+  // Visible pour tous, utilisable par les abonnés seulement (Martin, 17 sept. 2026) : un visiteur ou
+  // un compte gratuit voit la fonction, fermée, avec le chemin vers l'abonnement. Rien sur les volets
+  // en prototype, où les demandes ne sont pas encore lues : on n'y vend pas ce qui n'existe pas.
+  if (!reponse.demandable) {
+    if (!VILLES_DETAIL_LU.has(ville)) return '';
+    return `<div class="ab-demande"><p class="ab-demande-verrou"><span aria-hidden="true">🔒</span> <span class="ab-demande-verrou-nom">${tr('Demander le détail de l’argent', 'Request the money details')}</span> · <a class="ab-lien" href="/abonnement?ville=${encodeURIComponent(ville)}" data-mesure="clic_demande_verrou">${tr('réservé aux abonnés', 'subscribers only')}</a></p></div>`;
+  }
   return `<div class="ab-demande">${contenuDemande(reponse.demande, ville)}</div>`;
 }
 function contenuDemande(demande, ville) {
@@ -284,9 +291,14 @@ export async function demanderDetail(bouton, ville, dossier, s) {
       mesurer('detail_demande', { ville });
       return;
     }
-    message.textContent = res.status === 429 ? tr('Vous avez déjà fait 10 demandes dans les dernières 24 heures. Réessayez demain.', "You've already made 10 requests in the last 24 hours. Try again tomorrow.")
-      : res.status === 409 ? tr('Ce détail vient d’être lu : rouvrez la fiche.', 'These details were just read: reopen the item.')
-      : res.status === 403 ? tr('Réservé aux abonnés.', 'Subscribers only.') : tr('La demande n’a pas fonctionné. Réessayez dans un moment.', "The request didn't work. Try again in a moment.");
+    // Des phrases fixes (aucune donnée de l'utilisateur) : innerHTML pour le lien vers l'abonnement.
+    message.innerHTML = res.status === 429 ? tr('Vous avez déjà fait 10 demandes dans les dernières 24 heures. Réessayez demain.', "You've already made 10 requests in the last 24 hours. Try again tomorrow.")
+      : res.status === 409 && corps.erreur === 'sans montant' ? tr('Ce dossier n’a pas de montant à détailler.', 'This item has no amount to detail.')
+      : res.status === 409 ? tr('Ce détail vient d’être lu : rechargez la page pour l’afficher.', 'These details were just read: reload the page to see them.')
+      // « n'est plus actif » seulement quand le serveur a vraiment lu un abonnement inactif — pas
+      // pour une session absente ni une panne (503 : « réessayez »).
+      : res.status === 403 && corps.erreur === 'abonnement inactif' ? tr(`Réservé aux abonnés — votre abonnement n’est plus actif. <a class="ab-lien" href="/abonnement?ville=${encodeURIComponent(ville)}">Voir l’abonnement</a>`, `Subscribers only — your subscription is no longer active. <a class="ab-lien" href="/abonnement?ville=${encodeURIComponent(ville)}">See the subscription</a>`)
+      : res.status === 403 ? tr(`Réservé aux abonnés. <a class="ab-lien" href="/abonnement?ville=${encodeURIComponent(ville)}">Voir l’abonnement</a>`, `Subscribers only. <a class="ab-lien" href="/abonnement?ville=${encodeURIComponent(ville)}">See the subscription</a>`) : tr('La demande n’a pas fonctionné. Réessayez dans un moment.', "The request didn't work. Try again in a moment.");
   } catch {
     message.textContent = tr('La demande n’a pas fonctionné. Réessayez dans un moment.', "The request didn't work. Try again in a moment.");
   }

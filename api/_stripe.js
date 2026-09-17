@@ -101,7 +101,13 @@ export async function synchroniser(abonnementId, indiceUtilisateur) {
   const annulationPrevue = Boolean(sub.cancel_at_period_end || sub.cancel_at);
   let fin;
   if (!actif) fin = (sub.ended_at ?? Math.floor(Date.now() / 1000)) * 1000;
-  else if (sub.status === 'past_due') fin = ((debut ?? Math.floor(Date.now() / 1000)) + JOURS_IMPAYE) * 1000;
+  else if (sub.status === 'past_due') {
+    // La grâce ne se renouvelle pas : si Stripe laisse l'abonnement impayé d'une période à l'autre,
+    // un accès déjà expiré le reste (sinon, trois jours gratuits reviendraient chaque mois).
+    const grace = ((debut ?? Math.floor(Date.now() / 1000)) + JOURS_IMPAYE) * 1000;
+    const avant = existant?.stripe_subscription_id === sub.id && existant?.fin ? new Date(existant.fin).getTime() : null;
+    fin = avant != null && Number.isFinite(avant) ? Math.min(grace, avant) : grace;
+  }
   else if (finPeriode) fin = (annulationPrevue ? (sub.cancel_at ?? finPeriode) : finPeriode + GRACE) * 1000;
   else fin = null;
 
