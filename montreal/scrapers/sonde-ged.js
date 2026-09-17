@@ -45,36 +45,68 @@ async function principal() {
 
   console.log(`Ouverture du portail…`);
   await page.goto(PORTAIL, { waitUntil: 'networkidle', timeout: 60000 });
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(4000);
   rapport.titre = await page.title();
+  rapport.urlArrivee = page.url();
   console.log(`  titre de la page : « ${rapport.titre} »`);
+  console.log(`  adresse à l'arrivée : ${rapport.urlArrivee}`);
 
-  // Le champ de recherche, quel qu'il s'appelle. Vaadin ne met pas de noms stables sur ses
-  // champs : on prend le premier champ de texte visible.
-  const champs = page.locator('input[type="text"]:visible, input:not([type]):visible');
-  const nombreChamps = await champs.count();
-  console.log(`  ${nombreChamps} champ(s) de saisie visible(s)`);
-  rapport.champs = nombreChamps;
+  // REGARDER D'ABORD, ESSAYER ENSUITE. La première sonde est morte sur un champ qui
+  // refusait la saisie, sans rien écrire de ce qu'elle avait sous les yeux : on ne savait
+  // même pas si le portail demandait un mot de passe. On note donc ce que la page montre
+  // avant de toucher à quoi que ce soit, et plus rien ensuite ne peut faire perdre ça.
+  const vu = async () => (await page.locator('body').innerText().catch(() => '')).replace(/\s+/g, ' ').trim();
+  rapport.pageArrivee = (await vu()).slice(0, 1200);
+  console.log(`\n  --- ce que la page affiche en arrivant ---\n  ${rapport.pageArrivee.slice(0, 800)}\n`);
+  await page.screenshot({ path: new URL('../data/ged-arrivee.png', import.meta.url).pathname }).catch(() => {});
 
-  if (!nombreChamps) {
-    console.log("  Aucun champ : le portail demande peut-être une authentification.");
-    rapport.conclusion = 'aucun champ de recherche visible';
+  // Une page de connexion se reconnaît à ses mots, et elle règle la question.
+  rapport.demandeUneConnexion = /connexion|s.identifier|mot de passe|nom d.utilisateur|authentification/i.test(rapport.pageArrivee);
+  if (rapport.demandeUneConnexion) console.log('  ⚠ La page parle de connexion : le portail est probablement fermé au public.');
+
+  // Tous les champs, éditables ou non : c'est la différence qui renseigne.
+  const champs = page.locator('input:visible, textarea:visible');
+  const n = await champs.count();
+  rapport.champs = [];
+  for (let i = 0; i < Math.min(n, 8); i++) {
+    const c = champs.nth(i);
+    rapport.champs.push({
+      type: await c.getAttribute('type'),
+      placeholder: await c.getAttribute('placeholder'),
+      editable: await c.isEditable().catch(() => false),
+      actif: await c.isEnabled().catch(() => false),
+    });
+  }
+  console.log(`  ${n} champ(s) visible(s) :`);
+  for (const c of rapport.champs) console.log(`    type=${c.type ?? '—'} placeholder=${c.placeholder ?? '—'} éditable=${c.editable} actif=${c.actif}`);
+
+  // La recherche, si un champ veut bien d'elle. Tout échec est noté, jamais fatal.
+  const editable = rapport.champs.findIndex((c) => c.editable);
+  if (editable < 0) {
+    rapport.conclusion = n ? 'aucun champ éditable' : 'aucun champ de saisie';
+    console.log(`\n  ${rapport.conclusion} — la recherche ne peut pas être essayée.`);
   } else {
-    console.log(`  Recherche de « ${DOSSIER} »…`);
-    await champs.first().fill(DOSSIER);
-    await champs.first().press('Enter');
-    await page.waitForTimeout(6000);
-    rapport.urlApres = page.url();
-    const corps = await page.locator('body').innerText().catch(() => '');
-    rapport.trouveLeDossier = corps.includes(DOSSIER);
-    // Combien de résultats, si la page le dit.
-    rapport.mentionResultats = corps.match(/(\d[\d\s]*)\s*(r[ée]sultats?|documents?)/i)?.[0] ?? null;
-    rapport.extrait = corps.replace(/\s+/g, ' ').slice(0, 900);
-    console.log(`  adresse après recherche : ${rapport.urlApres}`);
-    console.log(`  le numéro apparaît dans la page : ${rapport.trouveLeDossier ? 'OUI' : 'non'}`);
-    if (rapport.mentionResultats) console.log(`  ${rapport.mentionResultats}`);
-    console.log(`\n  --- ce que la page affiche ---\n  ${rapport.extrait.slice(0, 700)}`);
-    await page.screenshot({ path: new URL('../data/ged-sonde.png', import.meta.url).pathname, fullPage: false });
+    try {
+      console.log(`\n  Recherche de « ${DOSSIER} » dans le champ ${editable + 1}…`);
+      await champs.nth(editable).fill(DOSSIER, { timeout: 15000 });
+      await champs.nth(editable).press('Enter');
+      await page.waitForTimeout(8000);
+      rapport.urlApres = page.url();
+      const corps = await vu();
+      rapport.trouveLeDossier = corps.includes(DOSSIER);
+      rapport.mentionResultats = corps.match(/(\d[\d\s]*)\s*(r[ée]sultats?|documents?)/i)?.[0] ?? null;
+      rapport.pageApres = corps.slice(0, 1200);
+      rapport.conclusion = rapport.trouveLeDossier ? 'le numéro apparaît dans les résultats' : 'recherche faite, le numéro n’apparaît pas';
+      console.log(`  adresse après recherche : ${rapport.urlApres}`);
+      console.log(`  le numéro apparaît : ${rapport.trouveLeDossier ? 'OUI' : 'non'}`);
+      if (rapport.mentionResultats) console.log(`  ${rapport.mentionResultats}`);
+      console.log(`\n  --- après la recherche ---\n  ${rapport.pageApres.slice(0, 800)}`);
+      await page.screenshot({ path: new URL('../data/ged-sonde.png', import.meta.url).pathname }).catch(() => {});
+    } catch (err) {
+      rapport.conclusion = `la recherche a échoué : ${String(err.message ?? err).split('\n')[0]}`;
+      console.log(`  ${rapport.conclusion}`);
+      await page.screenshot({ path: new URL('../data/ged-sonde.png', import.meta.url).pathname }).catch(() => {});
+    }
   }
 
   rapport.appels = appels.slice(0, 25);
