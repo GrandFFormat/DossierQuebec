@@ -81,7 +81,7 @@ jobs:
         run: |
           git config user.name "dossierquebec-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add montreal/data/ged-decouverte.json montreal/data/ged-decouverte.log montreal/data/ged-sonde.json montreal/data/ged-sonde.log montreal/data/ged-sonde.png montreal/data/ged-arrivee.png || true
+          git add montreal/data/ged-decouverte.json montreal/data/ged-decouverte.log montreal/data/ged-sonde.json montreal/data/ged-sonde.log montreal/data/ged-sonde.png montreal/data/ged-arrivee.png montreal/data/ged-fiche.png || true
           if git diff --cached --quiet; then
             echo "Aucun journal à committer."
           else
