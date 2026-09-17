@@ -1,0 +1,53 @@
+# Lire une page de la Ville de Montréal depuis un runner — à lancer à la main.
+#
+# Le poste de travail n'atteint pas ville.montreal.qc.ca. Quand Martin colle une adresse, ce
+# workflow va la lire et committe ce qu'il y a vu : le titre, et tous les liens qui parlent de
+# séances, d'ordres du jour, de procès-verbaux ou de PDF. C'est ainsi qu'on saura si une page
+# cache une source de documents qu'on ne lit pas encore.
+
+name: Découverte — une page de la Ville de Montréal
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "L'adresse à lire"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  lire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: montreal
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+      - run: npm ci --omit=dev
+      - name: Lire la page
+        env:
+          MTL_CONTACT: ${{ vars.MTL_CONTACT }}
+        run: |
+          set -o pipefail
+          node scrapers/decouverte-page.js "${{ inputs.url }}" 2>&1 | tee data/page-decouverte.log
+      - name: Committer le journal
+        if: always()
+        working-directory: .
+        run: |
+          git config user.name "dossierquebec-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add montreal/data/page-decouverte.json montreal/data/page-decouverte.log 2>/dev/null || true
+          if git diff --cached --quiet; then echo "Rien à committer."; else
+            git commit -m "Découverte d'une page de la Ville de Montréal ($(date -u +%Y-%m-%d))"
+            git pull --rebase && git push
+          fi
