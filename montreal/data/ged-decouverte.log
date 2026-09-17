@@ -1,0 +1,26 @@
+
+> dossiervillemontreal@0.1.0 decouvrir:ged
+> node scrapers/decouverte-ged.js
+
+=== Le portail documentaire de la Ville : https://mtl.ged.montreal.ca ===
+(une seconde entre deux requêtes ; on ne demande rien que le robots.txt interdise)
+
+  HTTP 200 text/html                 https://mtl.ged.montreal.ca/robots.txt
+
+  HTTP 200 text/html                 https://mtl.ged.montreal.ca/constellio/
+  HTTP 200 text/html                 https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM
+  HTTP 200 text/html                 https://mtl.ged.montreal.ca/constellio/rest/v1/collections
+  HTTP 200 text/html                 https://mtl.ged.montreal.ca/constellio/rest/v2/collections
+  HTTP 200 text/html                 https://mtl.ged.montreal.ca/constellio/rest/search
+  HTTP 200 text/html                 https://mtl.ged.montreal.ca/constellio/select?q=1265298015&wt=json
+  HTTP 200 text/html                 https://mtl.ged.montreal.ca/constellio/solr/select?q=1265298015&wt=json
+  HTTP 200 text/html                 https://mtl.ged.montreal.ca/constellio/search?collection=mtlca&portal=REPDOCVDM&q=1265298015
+  HTTP 200 text/html                 https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM&q=1265298015
+  HTTP 200 text/html                 https://mtl.ged.montreal.ca/constellio/document/46b35cdf-b20b-11f1-81fa-496f41e4c0cd
+
+11 chemin(s) répondent, 0 contiennent le numéro de dossier 1265298015.
+Aucune recherche ouverte n'a rendu le dossier. Le portail est probablement une
+application d'une seule page : sa recherche passe par des appels que ce script ne
+devine pas. La suite se fait à la main, dans un navigateur, ou en la redemandant.
+
+Rapport écrit dans data/ged-decouverte.json
