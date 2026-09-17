@@ -1,21 +1,21 @@
 {
- "generatedAt": "2026-09-14T08:05:58.879Z",
+ "generatedAt": "2026-09-17T13:40:28.378Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Récapitulatifs rédigés automatiquement à partir de l'objet, du résumé et des résolutions des dossiers de chaque projet, puis vérifiés automatiquement (numéros et nombres contre les dossiers cités, contre-lecture). Ce qui ne passe pas est retiré. En cas d'écart, les documents officiels font foi.",
  "recaps": {
   "tramway": {
    "titre": "Tramway (TramCité)",
-   "signature": "acf2d175afa3a412",
-   "genereLe": "2026-09-14T08:01:56.946Z",
+   "signature": "c44b36c8b20d2917",
+   "genereLe": "2026-09-17T13:40:28.378Z",
    "modele": "claude-opus-5",
    "dossiers": 48,
-   "enBref": "Cette année, la Ville prépare le terrain du tramway TramCité. Elle achète des bandes de terrain et obtient des droits de passage (servitudes) le long du tracé, surtout sur la 1re Avenue, le boulevard Laurier et la rue Mendel. Elle accorde aussi des contrats de chantier, signe des ententes avec le Canadien National et l'Université Laval, et rend compte des ententes sur les arbres.",
+   "enBref": null,
    "etapes": [
     {
      "periode": "Janvier et février 2026",
-     "titre": "Premiers terrains et servitudes achetés",
-     "texte": "La Ville autorise l'achat de bandes de terrain en bordure de la 1re Avenue pour élargir l'emprise de la rue, et de servitudes sur une ruelle près du boulevard René-Lévesque Ouest pour déplacer des conduits et des réseaux d'utilités publiques. Chaque fois, elle tente d'abord une entente avec le propriétaire, sinon elle peut exproprier.",
+     "titre": "Terrains et servitudes, premiers dossiers",
+     "texte": "La Ville autorise l'achat de bandes de terrain en bordure de la 1re Avenue, dans La Cité-Limoilou, pour élargir l'emprise de la rue. Elle vise aussi des servitudes sur une ruelle près du boulevard René-Lévesque Ouest pour déplacer des conduits et des réseaux d'utilités publiques.",
      "numeros": [
       "DE2026-022",
       "DE2026-063",
@@ -24,63 +24,77 @@
      ]
     },
     {
-     "periode": "Février à mars 2026",
-     "titre": "Contrats pour les travaux préparatoires",
-     "texte": "La Ville confie des travaux d'élagage, d'abattage et d'essouchement d'arbres, la gestion de la santé et de la sécurité sur les chantiers des tronçons TW-01 à TW-06A, et la fourniture de matériel d'aqueduc et d'égout pour le tronçon TW-03. Elle ajoute aussi 190 597,00 $ avant taxes à un contrat de réseaux techniques urbains, sous le chemin des Quatre-Bourgeois et sur le terrain de l'école secondaire De Rochebelle.",
+     "periode": "Février 2026",
+     "titre": "Arbres le long du tracé",
+     "texte": "La Ville confie à une entreprise l'élagage, l'abattage et l'essouchement d'arbres pour dégager l'emprise des travaux, pour une somme estimée à 2 840 827,31 $ avant taxes [AP2026-018]. Le comité exécutif prend acte du rapport des ententes signées avec des propriétaires riverains pour la période du 1er octobre au 31 décembre 2025.",
      "numeros": [
       "AP2026-018",
+      "DE2026-069"
+     ]
+    },
+    {
+     "periode": "Mars 2026",
+     "titre": "Contrats pour les chantiers préparatoires",
+     "texte": "La Ville accorde un contrat de gestion de la santé et sécurité sur les chantiers des tronçons TW-01 à TW-06A, un contrat de fourniture de matériel d'aqueduc et d'égout pour le tronçon TW-03, et ajoute une somme à un contrat de réseaux techniques urbains sous le chemin des Quatre-Bourgeois. Elle lance aussi des démarches pour des servitudes temporaires de trois ans en bordure de la rue Mendel.",
+     "numeros": [
       "AP2026-056",
       "AP2026-055",
-      "AP2026-068"
+      "AP2026-068",
+      "DE2026-102",
+      "DE2026-103"
      ]
     },
     {
-     "periode": "Février à juin 2026",
-     "titre": "Suivi des ententes sur les arbres",
-     "texte": "Le comité exécutif prend acte de deux rapports trimestriels sur les ententes signées avec des propriétaires riverains du tracé : abattage, transplantation, élagage ou protection d'arbres, avec plantation et entretien par la Ville dans plusieurs cas. La Ville modifie ensuite son règlement pour ajouter le directeur d'arrondissement responsable de la prévention et de la qualité du milieu parmi les signataires de ces ententes.",
+     "periode": "Avril et mai 2026",
+     "titre": "Servitudes Laurier, Moncton, René-Lévesque",
+     "texte": "La Ville autorise des servitudes en bordure du boulevard Laurier, de l'avenue Moncton, du boulevard René-Lévesque Ouest et sur des ruelles du secteur, pour déplacer des conduits et des réseaux. Elle annule l'autorisation qui permettait au Réseau de transport de la Capitale d'occuper une partie de l'emprise du boulevard Laurier, où une station de Métrobus a été démolie.",
      "numeros": [
-      "DE2026-069",
-      "DE2026-181",
-      "PQ2026-018"
+      "CA-2026-0152",
+      "CA-2026-0196",
+      "CA-2026-0218",
+      "CA-2026-0241",
+      "DE2026-179",
+      "DE2026-150"
      ]
     },
     {
-     "periode": "Mai à juillet 2026",
-     "titre": "Ententes avec le CN, l'Université Laval et espaces de chantier",
-     "texte": "La Ville s'entend avec le Canadien National pour un pont d'étagement dans le secteur de la rue Mendel, qui fera passer le tramway, un trottoir et une piste cyclable au-dessus d'une voie ferrée. Elle obtient de l'Université Laval des droits de passage sur le campus pour 10 000 000 $, occupe une partie du parc de l'Amérique-Française comme site de chantier et annule l'autorisation d'occupation d'une station démolie sur le boulevard Laurier.",
+     "periode": "Juin et juillet 2026",
+     "titre": "Ententes avec des propriétaires institutionnels",
+     "texte": "La Ville conclut une entente avec le Canadien National pour un pont d'étagement dans le secteur de la rue Mendel, et obtient de l'Université Laval des droits de passage sur le campus contre un versement de 10 000 000 $ à la signature de l'acte notarié [DE2026-256]. Elle pourra aussi occuper une partie du parc de l'Amérique-Française comme site d'entreposage et de chantier, et elle ajoute un signataire autorisé pour les ententes sur les arbres.",
      "numeros": [
-      "DE2026-150",
       "AP2026-197",
+      "DE2026-256",
       "DE2026-258",
-      "DE2026-256"
+      "PQ2026-018"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "Des demandes de terrain et de servitudes en bordure de la 1re Avenue et sur une ruelle de Limoilou, entre la rue des Pins Est et la rue des Peupliers Est, attendent une décision du conseil d'agglomération.",
+     "texte": "Trois dossiers d'acquisition sont en cours et attendent une décision du conseil d'agglomération : un terrain de 12,10 mètres carrés et une servitude de 23,30 mètres carrés en bordure de la 1re Avenue, ainsi qu'une servitude de 251 mètres carrés sur une ruelle du quartier Limoilou.",
      "numeros": [
-      "DE2026-201",
       "DE2026-213",
+      "DE2026-201",
       "DE2026-269"
      ]
     },
     {
-     "texte": "Les actes notariés des servitudes et du droit d'usage sur le campus de l'Université Laval doivent être signés au plus tard le 31 décembre 2026. Les travaux sur le campus peuvent commencer dès 2026 et les parties visent une fin au plus tard à la fin de 2033.",
+     "texte": "Les actes notariés établissant les servitudes et le droit d'usage sur le campus de l'Université Laval doivent être signés au plus tard le 31 décembre 2026.",
      "numeros": [
       "DE2026-256"
      ]
     },
     {
-     "texte": "L'occupation d'une partie du parc de l'Amérique-Française s'étend du 6 juillet 2026 au 5 juillet 2033. Une entente de servitude avec la Commission de la capitale nationale du Québec reste à négocier.",
+     "texte": "L'occupation d'une partie du parc de l'Amérique-Française s'étend du 6 juillet 2026 au 5 juillet 2033. Une entente de servitude avec la Commission de la capitale nationale du Québec est encore en négociation.",
      "numeros": [
       "DE2026-258"
      ]
     },
     {
-     "texte": "Le contrat de travaux d'arboriculture court jusqu'au 31 décembre 2027, avec possibilité de deux renouvellements de 12 mois.",
+     "texte": "Le contrat sur les arbres et le contrat de santé et sécurité des chantiers courent jusqu'au 31 décembre 2027.",
      "numeros": [
-      "AP2026-018"
+      "AP2026-018",
+      "AP2026-056"
      ]
     }
    ],
@@ -91,11 +105,11 @@
     "retiresContreLecture": [
      {
       "element": "etapes[5]",
-      "raison": "Le texte mentionne des acquisitions « en bordure de la 1re Avenue, de la rue Berthiaume et de la rue des Frênes Ouest », mais aucun des six dossiers cités (DE2026-203, CA-2026-0362, CA-2026-0364, CA-2026-0383, DE2026-219, CA-2026-0403) ne porte sur la rue Berthiaume ni sur la rue des Frênes Ouest : ces deux lieux proviennent de CA-2026-0365 et CA-2026-0384, qui ne sont pas cités. Faits attribués aux mauvais dossiers."
+      "raison": "Le texte mentionne des acquisitions « en bordure de la 1re Avenue, de la rue Berthiaume et de la rue des Frênes Ouest », mais aucun des dossiers cités (DE2026-203, CA-2026-0362, CA-2026-0383, DE2026-219, DE2026-202, CA-2026-0403) ne porte sur la rue Berthiaume ni sur la rue des Frênes Ouest : ces deux lieux relèvent de CA-2026-0365 et CA-2026-0384, qui ne figurent pas dans les numéros. Les faits sont donc attribués aux mauvais dossiers."
      },
      {
-      "element": "etapes[3]",
-      "raison": "Le titre « Servitudes à Sainte-Foy et Montcalm » ne correspond pas à tous les dossiers cités : CA-2026-0218 vise l'avenue Moncton, située dans l'arrondissement de La Cité-Limoilou, et le dossier n'indique aucun quartier Montcalm. Seul CA-2026-0241 mentionne Montcalm. La localisation annoncée n'est pas soutenue par l'ensemble des dossiers regroupés."
+      "element": "enBref",
+      "raison": "Affirme que la Ville « signe des ententes avec […] la Commission de la capitale nationale du Québec pour construire sur leurs terrains ». Le seul dossier concerné (DE2026-258) est une autorisation d'occupation temporaire d'une partie du parc de l'Amérique-Française à des fins d'entreposage et d'installations de chantier, et il précise que l'entente de servitude avec la Commission est « toujours en négociation ». Aucune entente signée, et l'usage décrit (construire) déforme le dossier."
      }
     ]
    }
