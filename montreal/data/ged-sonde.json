@@ -1,0 +1,50 @@
+{
+ "generatedAt": "2026-09-17T01:31:53.845Z",
+ "portail": "https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM",
+ "dossier": "1265298015",
+ "titre": "Répertoire des documents officiels",
+ "urlArrivee": "https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM",
+ "pageArrivee": "Répertoire des documents officiels Cherchez, consultez, et téléchargez les documents officiels diffusés par la Ville de Montréal et ses 19 arrondissements.  Rechercher Filtrer la recherche À propos Mentions légales",
+ "demandeUneConnexion": false,
+ "champs": [
+  {
+   "type": "text",
+   "placeholder": null,
+   "editable": false,
+   "actif": true
+  },
+  {
+   "type": "text",
+   "placeholder": null,
+   "editable": true,
+   "actif": true
+  }
+ ],
+ "urlApres": "https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM",
+ "trouveLeDossier": false,
+ "mentionResultats": null,
+ "pageApres": "Répertoire des documents officiels Cherchez, consultez, et téléchargez les documents officiels diffusés par la Ville de Montréal et ses 19 arrondissements.  Rechercher Filtrer la recherche À propos Mentions légales",
+ "conclusion": "recherche faite, le numéro n’apparaît pas",
+ "appels": [
+  {
+   "methode": "GET",
+   "url": "/constellio/?collection=mtlca&portal=REPDOCVDM"
+  },
+  {
+   "methode": "POST",
+   "url": "/constellio/?collection=mtlca&portal=REPDOCVDM&v-1789608714299"
+  },
+  {
+   "methode": "POST",
+   "url": "/constellio/UIDL/?v-uiId=0"
+  },
+  {
+   "methode": "POST",
+   "url": "/constellio/UIDL/?v-uiId=0"
+  },
+  {
+   "methode": "POST",
+   "url": "/constellio/UIDL/?v-uiId=0"
+  }
+ ]
+}
