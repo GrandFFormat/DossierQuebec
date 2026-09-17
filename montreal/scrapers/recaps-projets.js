@@ -42,7 +42,7 @@ const dateLongue = (iso) => {
   const [a, m, j] = iso.slice(0, 10).split('-').map(Number);
   return `${j}${j === 1 ? 'er' : ''} ${MOIS[m - 1]} ${a}`;
 };
-const instanceCourte = (i) => String(i ?? '').replace("Conseil d'arrondissement de ", 'arrondissement ');
+const instanceCourte = (i) => String(i ?? '').replace(/^Conseil d'arrondissement (?:de |du |des )/, 'arrondissement ');
 
 const args = new Map(process.argv.slice(2).map((a) => { const [k, v] = a.replace(/^--/, '').split('='); return [k, v ?? true]; }));
 
