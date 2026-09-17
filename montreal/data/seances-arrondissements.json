@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-09-17T20:59:07.393Z",
+ "generatedAt": "2026-09-17T22:41:42.862Z",
  "source": "https://ville.montreal.qc.ca/documents/Adi_Public/",
  "licence": "Documents publics de la Ville de Montréal — reproduction avec mention de la source, usage non commercial (voir README).",
- "methode": "Sondage des noms de fichiers publiés : l'existence du document prouve la séance. Les séances extraordinaires, dont l'heure est imprévisible, ne sont pas couvertes.",
+ "methode": "Sondage des noms de fichiers publiés : l'existence du document prouve la séance. Les séances extraordinaires, dont l'heure est imprévisible, ne sont pas couvertes. Le Plateau-Mont-Royal, qui publie par sa page et non sous Adi_Public, est lu depuis cette page : la date vient du document lui-même (voir lib/plateau.js).",
  "annee": 2026,
  "partiel": false,
- "nombre": 121,
- "requetes": 1815,
+ "nombre": 129,
+ "requetes": 1791,
  "parArrondissement": [
   {
    "arrondissement": "Ahuntsic-Cartierville",
@@ -70,9 +70,9 @@
   },
   {
    "arrondissement": "Le Plateau-Mont-Royal",
-   "seances": 0,
-   "nouvelles": 0,
-   "requetes": 40
+   "seances": 8,
+   "nouvelles": 8,
+   "requetes": 16
   },
   {
    "arrondissement": "Rivière-des-Prairies–Pointe-aux-Trembles",
@@ -211,6 +211,21 @@
    "variante": "ORDI",
    "source": "sondage des documents publiés",
    "preuve": "CA_Pir_PV_ORDI_2026-02-02_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Pmr_2026-02-02_18h30",
+   "instance": "CA_Pmr",
+   "arrondissement": "Le Plateau-Mont-Royal",
+   "nomInstance": "Conseil d'arrondissement de Le Plateau-Mont-Royal",
+   "date": "2026-02-02",
+   "heure": "18h30",
+   "variante": "ORDI",
+   "source": "page « Ordres du jour et procès-verbaux » de l'arrondissement (visualiseur)",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17018",
+    "PV": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8317"
+   },
+   "preuve": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8317"
   },
   {
    "id": "CA_Rpp_2026-02-02_19h00",
@@ -433,6 +448,21 @@
    "preuve": "CA_Pir_PV_ORDI_2026-03-09_19h00_FR.pdf"
   },
   {
+   "id": "CA_Pmr_2026-03-09_18h30",
+   "instance": "CA_Pmr",
+   "arrondissement": "Le Plateau-Mont-Royal",
+   "nomInstance": "Conseil d'arrondissement de Le Plateau-Mont-Royal",
+   "date": "2026-03-09",
+   "heure": "18h30",
+   "variante": "ORDI",
+   "source": "page « Ordres du jour et procès-verbaux » de l'arrondissement (visualiseur)",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17100",
+    "PV": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8340"
+   },
+   "preuve": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8340"
+  },
+  {
    "id": "CA_Rpp_2026-03-09_19h00",
    "instance": "CA_Rpp",
    "arrondissement": "Rosemont–La Petite-Patrie",
@@ -541,6 +571,21 @@
    "variante": "ORDI",
    "source": "sondage des documents publiés",
    "preuve": "CA_Ahu_PV_ORDI_2026-03-16_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Pmr_2026-03-20_09h30",
+   "instance": "CA_Pmr",
+   "arrondissement": "Le Plateau-Mont-Royal",
+   "nomInstance": "Conseil d'arrondissement de Le Plateau-Mont-Royal",
+   "date": "2026-03-20",
+   "heure": "09h30",
+   "variante": "EXTRA",
+   "source": "page « Ordres du jour et procès-verbaux » de l'arrondissement (visualiseur)",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17128",
+    "PV": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8339"
+   },
+   "preuve": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8339"
   },
   {
    "id": "CA_Anj_2026-04-07_19h00",
@@ -719,6 +764,21 @@
    "preuve": "CA_Pir_PV_ORDI_2026-04-13_19h00_FR.pdf"
   },
   {
+   "id": "CA_Pmr_2026-04-13_18h30",
+   "instance": "CA_Pmr",
+   "arrondissement": "Le Plateau-Mont-Royal",
+   "nomInstance": "Conseil d'arrondissement de Le Plateau-Mont-Royal",
+   "date": "2026-04-13",
+   "heure": "18h30",
+   "variante": "ORDI",
+   "source": "page « Ordres du jour et procès-verbaux » de l'arrondissement (visualiseur)",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17194",
+    "PV": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8361"
+   },
+   "preuve": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8361"
+  },
+  {
    "id": "CA_Sud_2026-04-13_19h00",
    "instance": "CA_Sud",
    "arrondissement": "Le Sud-Ouest",
@@ -816,6 +876,21 @@
    "variante": "ORDI",
    "source": "sondage des documents publiés",
    "preuve": "CA_Pir_PV_ORDI_2026-05-04_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Pmr_2026-05-04_16h00",
+   "instance": "CA_Pmr",
+   "arrondissement": "Le Plateau-Mont-Royal",
+   "nomInstance": "Conseil d'arrondissement de Le Plateau-Mont-Royal",
+   "date": "2026-05-04",
+   "heure": "16h00",
+   "variante": "ORDI",
+   "source": "page « Ordres du jour et procès-verbaux » de l'arrondissement (visualiseur)",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17261",
+    "PV": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8393"
+   },
+   "preuve": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8393"
   },
   {
    "id": "CA_Rpp_2026-05-04_19h00",
@@ -992,6 +1067,21 @@
    "variante": "ORDI",
    "source": "sondage des documents publiés",
    "preuve": "CA_Pir_PV_ORDI_2026-06-01_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Pmr_2026-06-01_18h30",
+   "instance": "CA_Pmr",
+   "arrondissement": "Le Plateau-Mont-Royal",
+   "nomInstance": "Conseil d'arrondissement de Le Plateau-Mont-Royal",
+   "date": "2026-06-01",
+   "heure": "18h30",
+   "variante": "ORDI",
+   "source": "page « Ordres du jour et procès-verbaux » de l'arrondissement (visualiseur)",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17312",
+    "PV": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8434"
+   },
+   "preuve": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8434"
   },
   {
    "id": "CA_Sld_2026-06-01_19h00",
@@ -1179,6 +1269,21 @@
    "variante": "ORDI",
    "source": "sondage des documents publiés",
    "preuve": "CA_Las_PV_ORDI_2026-07-06_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Pmr_2026-07-06_18h30",
+   "instance": "CA_Pmr",
+   "arrondissement": "Le Plateau-Mont-Royal",
+   "nomInstance": "Conseil d'arrondissement de Le Plateau-Mont-Royal",
+   "date": "2026-07-06",
+   "heure": "18h30",
+   "variante": "ORDI",
+   "source": "page « Ordres du jour et procès-verbaux » de l'arrondissement (visualiseur)",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17404",
+    "PV": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8483"
+   },
+   "preuve": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8483"
   },
   {
    "id": "CA_Rpp_2026-07-06_19h00",
@@ -1410,6 +1515,20 @@
    "variante": "ORDI",
    "source": "sondage des documents publiés",
    "preuve": "CA_Vsm_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf"
+  },
+  {
+   "id": "CA_Pmr_2026-09-08_18h30",
+   "instance": "CA_Pmr",
+   "arrondissement": "Le Plateau-Mont-Royal",
+   "nomInstance": "Conseil d'arrondissement de Le Plateau-Mont-Royal",
+   "date": "2026-09-08",
+   "heure": "18h30",
+   "variante": "ORDI",
+   "source": "page « Ordres du jour et procès-verbaux » de l'arrondissement (visualiseur)",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502"
+   },
+   "preuve": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502"
   },
   {
    "id": "CA_Rpp_2026-09-08_19h00",
