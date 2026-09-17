@@ -11,6 +11,7 @@
     "decouvrir:ged": "node scrapers/decouverte-ged.js",
     "sonder:ged": "node scrapers/sonde-ged.js",
     "projets:publics": "node scripts/projets-publics.js",
+    "recaps:projets": "node --env-file-if-exists=api.env scrapers/recaps-projets.js",
     "verifier:projets": "node scripts/verifier-projets.js",
     "scrape:seances": "node scrapers/seances.js",
     "scrape:seances-arrondissements": "node scrapers/seances-arrondissements.js",
