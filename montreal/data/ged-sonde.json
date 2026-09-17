@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-17T01:37:12.603Z",
+ "generatedAt": "2026-09-17T01:43:32.578Z",
  "portail": "https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM",
  "dossier": "1265298015",
  "titre": "Répertoire des documents officiels",
@@ -20,12 +20,43 @@
    "actif": true
   }
  ],
- "lanceePar": "bouton Rechercher",
- "urlApres": "https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM#!searchResults/s/5193a833-b238-11f1-81fa-77092c344f76",
- "trouveLeDossier": false,
- "mentionResultats": "0 résultat",
- "pageApres": " Rechercher Filtrer la recherche Trier par  0 résultat Précédent Page de 1  Suivant À propos Mentions légales",
- "conclusion": "recherche faite, le numéro n’apparaît pas",
+ "recherches": [
+  {
+   "terme": "1265298015",
+   "pourquoi": "le numéro de dossier d'une décision de 2026",
+   "resultats": "0",
+   "url": "https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM#!searchResults/s/34b430b3-b239-11f1-81fa-3b9c3768d77e",
+   "extrait": " Rechercher Filtrer la recherche Trier par  0 résultat Précédent Page de 1  Suivant À propos Mentions légales"
+  },
+  {
+   "terme": "CM26 0590",
+   "pourquoi": "un numéro de résolution du conseil municipal",
+   "resultats": "235",
+   "url": "https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM#!searchResults/s/38ea8765-b239-11f1-81fa-8533ffc37db0",
+   "extrait": " Rechercher Filtrer la recherche Trier par  8,235 résultats  127.6 kB Avis de motion et dépôt CM26 0907 - Règlement sur l'identification à titre d'événement historique de l'incendie du Laurier Palace #1 Avis de motion et dépôt CM26 0907 - Règlement sur l'identification à titre d'événement historique de l'incendie du Laurier Palace ... août 2026 Avis de motion: CM26 0907 Avis de motion et dépôt - Règlement sur l'identification à titre d'événement historique Type de publication: Résolution Émetteur: Conseil municipal Date de publication: 2026-08-25  132.7 kB Avis de motion et dépôt CM26 090"
+  },
+  {
+   "terme": "sommaire décisionnel",
+   "pourquoi": "le nom du document qu'on cherche",
+   "resultats": "690",
+   "url": "https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM#!searchResults/s/3d24d4fb-b239-11f1-81fa-15e8ebe8b67c",
+   "extrait": " Rechercher Filtrer la recherche Trier par  2,690 résultats  111.4 kB 1248358013 Sommaire Décisionnel.pdf #1 1248358013 Sommaire Décisionnel.pdf ... Système de gestion des décisions des instances Sommaire décisionnel Identification Numéro de dossier: 1248358013 Unité administrative Date de publication: 2025-03-13  465.5 kB Sommaire décisionnel_1246723004.pdf #2 Sommaire décisionnel_1246723004.pdf ... Système de gestion des décisions des instances Sommaire décisionnel Identification Numéro de dossier :1246723004 Unité administrative Date de publication: 2025-02-11  165.3 kB Sommaire décis"
+  },
+  {
+   "terme": "Eurovia Québec Construction",
+   "pourquoi": "un fournisseur nommé dans une décision de 2026",
+   "resultats": "490",
+   "url": "https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM#!searchResults/s/415ab6c7-b239-11f1-81fa-5d0cf4c2276c",
+   "extrait": " Rechercher Filtrer la recherche Trier par  25,490 résultats  3.1 MB 2022 Rapport financier consolide - MAMH #1 à l’état consolidé de la situation financière du 31 décembre 2022 un transfert d’actifs concernant la construction des infrastructures municipales ... Québec Catégorie: Budget et profil financier Type de publication: Budget Émetteur: Service des finances Date de publication: 2022-12-01  4.1 MB 2020 Rapport financier consolidé - MAHM #2 de Montréal 1 CPA auditeur, CA, permis de comptabilité publique no A116207 Montréal, Québec Le 21 mai 2021 VG Yérificateur Deloitte. VILLE ... Qu"
+  },
+  {
+   "terme": "procès-verbal",
+   "pourquoi": "un mot qui doit forcément répondre",
+   "resultats": "279",
+   "url": "https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM#!searchResults/s/45904a98-b239-11f1-81fa-9b5207e88282",
+   "extrait": " Rechercher Filtrer la recherche Trier par  1,279 résultats  29.6 kB Procès-verbal ouverture de soumission Planage de chaussée bitumineuse et pose de revêtement bitumineux sur différentes rues dans l’arrondissement de Mercier—Hochelaga-Maisonneuve de la Ville de Montréal (P.R.R. 2008) Procès-verbal ouverture de soumission Planage de chaussée bitumineuse et pose de revêtement bitumineux sur différentes rues ... Procès-verbal 2008-113 ... Procès-verbal d’ouverture de soumissions Arrondissement de Mercier__Hochelaga-Maisonneuve Ville de Montréal Appel d’offres public Type de publication: Appe"
+  }
+ ],
  "liensResultats": [
   {
    "texte": "À propos",
@@ -43,7 +74,23 @@
   },
   {
    "methode": "POST",
-   "url": "/constellio/?collection=mtlca&portal=REPDOCVDM&v-1789609032993"
+   "url": "/constellio/?collection=mtlca&portal=REPDOCVDM&v-1789609413274"
+  },
+  {
+   "methode": "POST",
+   "url": "/constellio/UIDL/?v-uiId=0"
+  },
+  {
+   "methode": "POST",
+   "url": "/constellio/UIDL/?v-uiId=0"
+  },
+  {
+   "methode": "POST",
+   "url": "/constellio/UIDL/?v-uiId=0"
+  },
+  {
+   "methode": "POST",
+   "url": "/constellio/UIDL/?v-uiId=0"
   },
   {
    "methode": "POST",
@@ -59,11 +106,67 @@
   },
   {
    "methode": "GET",
-   "url": "/constellio/?collection=mtlca&portal=REPDOCVDM"
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-8681241778538940479%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000155881%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3DResolution1264521007.jpg"
   },
   {
-   "methode": "POST",
-   "url": "/constellio/UIDL/?v-uiId=0"
+   "methode": "GET",
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D8619108595549325012%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000155877%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3DResolution1264521006.jpg"
+  },
+  {
+   "methode": "GET",
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D8536970145852631278%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000074000%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3Dpdfof590.jpg"
+  },
+  {
+   "methode": "GET",
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D1508149369006033645%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000068946%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3Dpdfof3302.jpg"
+  },
+  {
+   "methode": "GET",
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D5511432553692742300%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000068750%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3Dpdfof3389.jpg"
+  },
+  {
+   "methode": "GET",
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D4082876208970108391%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000065894%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3Dpdfof4897.jpg"
+  },
+  {
+   "methode": "GET",
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D3844454595738530568%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000065884%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3Dpdfof4904.jpg"
+  },
+  {
+   "methode": "GET",
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-8058911937391386826%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000052035%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3Dpdfof12122.jpg"
+  },
+  {
+   "methode": "GET",
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D224593546093806277%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000107402%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3DOutremont+depliant_protection_arbres.jpg"
+  },
+  {
+   "methode": "GET",
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-3095736071228219737%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000154739%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3D15E009A-Plan+de+rehab-7610-06-01-02515-10.jpg"
+  },
+  {
+   "methode": "GET",
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-174329418082868805%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000112593%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3Drapport_et_recommandations-mandat_cm22_0531.jpg"
+  },
+  {
+   "methode": "GET",
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-5311407951682710812%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000110779%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3DMemoire_CM_nuit_20240314.jpg"
+  },
+  {
+   "methode": "GET",
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-924413320126835170%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000101203%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3Drdppat_resolution_CM24_1496.jpg"
+  },
+  {
+   "methode": "GET",
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-223022461734021893%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000098498%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3Drdppat_projet+de+resolution_CM24+1288.jpg"
+  },
+  {
+   "methode": "GET",
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D643062182486128420%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000098494%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3Drdppat_dossier+decisionnel_CM24+1288.jpg"
+  },
+  {
+   "methode": "GET",
+   "url": "/constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-8574798874726481607%3BjpegConversion%3Dfalse%3BmetadataCode%3Dcontent%3Bpreview%3Dfalse%3BrecordId%3D00000122227%3Bthumbnail%3Dtrue%3Bversion%3D1.0%3Bz-filename%3DSLE_SD+1259000005.jpg"
   }
  ]
 }
