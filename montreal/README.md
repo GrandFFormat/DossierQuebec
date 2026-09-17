@@ -230,16 +230,32 @@ Ce qui a changé dans `app.js`, et pourquoi :
 | Calendrier des séances d'arrondissement | 13 sept. 2026 | **En travaux.** Réponse du 16 sept. : les 19 conseils sont autonomes et gérés par d'autres équipes que le calendrier central ; la Ville cherche une façon de réunir ces dix-neuf sources. |
 | Index des documents de séance | 13 sept. 2026 | **Non, pour l'instant.** Les documents sont déjà publiés ; un index n'est pas priorisé. |
 | Décisions en données structurées | 13 sept. 2026 | **Reconnu, pas bientôt.** Valeur admise ; obstacle : l'âge des systèmes. |
-| Adresse des sommaires décisionnels | 13 sept., **reposée le 16 sept.** | **En attente.** Le second courriel (`courriel-sommaires.md`) n'était pas couvert par la réponse du 16 ; la question est reposée autrement dans `courriel-reponse-alexis.md`. Relance prévue le 30 sept. |
+| Accès aux sommaires décisionnels | 13, 16 et **17 sept.** | **En attente.** Réponse du 17 : pas d'accès public par identifiant, mais les sommaires sont dans le Répertoire des documents officiels (portail public). Mesuré le jour même : le fonds est là (1 279 « procès-verbal »), le numéro de dossier rend **0**. Demande reformulée une troisième fois — indexer ce numéro (`courriel-repertoire-alexis.md`). Relance le 30 sept. |
 | Droits d'usage | non envoyé | `courriel-greffe.md`, prêt. |
 
-**Où ça bloque, pour les sommaires.** Ce n'est pas un intranet : le viewer est public, de la forme
-`ville.montreal.qc.ca/sel/sypre-consultation/afficherpdf?idDoc=<N>`. Ce qui manque, c'est le moyen
-de passer du numéro de dossier à dix chiffres — celui qu'impriment les procès-verbaux — à ce
-`idDoc`. La porte est ouverte, la clé n'est pas publiée. La demande est donc devenue une table à
-deux colonnes, qui ne rend public aucun document qui ne le soit déjà : c'est la plus facile à
-accorder des quatre, et celle qui débloquerait d'un coup les 4 088 décisions de 2026 dont on
-connaît le numéro de dossier.
+**Où ça bloque, pour les sommaires.** Ce n'est pas un intranet, et ce n'est pas non plus un
+secret : les documents sont dans le **Répertoire des documents officiels**
+(`mtl.ged.montreal.ca`), un portail public sans compte qui annonce couvrir la Ville et ses 19
+arrondissements. Ce qui manque est un index. Mesuré le 17 septembre 2026 en s'en servant comme un
+humain : « procès-verbal » y rend 1 279 documents, et `1265298015` — le numéro que le
+procès-verbal de la Ville imprime lui-même sous la résolution correspondante — rend **0**. C'est
+la seule mesure sans ambiguïté des cinq faites ce jour-là : la recherche du portail est un « ou »
+(« CM26 0590 » compte les documents contenant « CM26 » OU « 0590 », d'où 8 235 résultats qui ne
+prouvent rien), mais un numéro à dix chiffres est un seul mot.
+
+La demande est donc devenue la plus petite des trois : ni un accès, ni une table à publier, mais
+un champ à indexer dans un outil qui existe déjà. Elle ne sert pas que nous — un citoyen qui lit
+un procès-verbal voit un numéro de dossier sous chaque décision, et ce numéro ne mène nulle part,
+pas même dans le répertoire que la Ville met à sa disposition.
+
+Comment c'est mesuré, pour que ce soit refaisable : le portail est un Constellio bâti sur
+Vaadin 7, où toute l'interface vit sur le serveur — aucune adresse de recherche à appeler, les
+onze chemins essayés rendant tous la même coquille de 2 148 octets. La seule façon de
+l'interroger est de s'en servir comme un humain : `npm run sonder:ged` ouvre une session, tape
+cinq mots, note ce qu'il voit et s'en va (`scrapers/sonde-ged.js`, journal
+`data/ged-sonde.log`). Il ne moissonne rien, et il ne le fera pas : y lire 4 088 dossiers
+demanderait 4 088 sessions de navigateur, soit exactement le trafic dont la Ville nous a dit
+qu'il a décuplé cette année.
 
 La réponse du 16 septembre est reproduite telle quelle à la fin de `courriel-donnees-ouvertes.md`,
 avec ce qu'elle change pour nous. Deux choses à en retenir. La première : le calendrier des
