@@ -1,0 +1,77 @@
+# Le portail documentaire de la Ville de Montréal — à lancer à la main, pas planifié.
+#
+# Le 17 septembre 2026, l'équipe des Données ouvertes a indiqué que les sommaires
+# décisionnels se trouvent dans l'outil de gestion documentaire de la Ville
+# (mtl.ged.montreal.ca, un Constellio), mais qu'aucun chemin public ne mène d'un numéro de
+# dossier à son document. Ce workflow va voir sur place ce que le portail expose, depuis un
+# runner — le poste de travail n'atteint pas les serveurs de la Ville — et committe son
+# journal, qui est le livrable.
+#
+# Il ne touche à aucune donnée du site.
+
+name: Découverte — portail documentaire de Montréal
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  decouvrir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: montreal
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v5
+
+      - name: Vérifier que le volet est présent
+        id: volet
+        working-directory: .
+        run: |
+          if [ -f montreal/scrapers/decouverte-ged.js ]; then
+            echo "present=oui" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=non" >> "$GITHUB_OUTPUT"
+            echo "::notice::Pas de script sur cette branche — rien à faire."
+          fi
+
+      - name: Installer Node.js
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Installer les dépendances
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        run: npm ci --omit=dev
+
+      - name: Regarder ce que le portail expose
+        if: ${{ steps.volet.outputs.present == 'oui' }}
+        env:
+          MTL_CONTACT: ${{ vars.MTL_CONTACT }}
+        run: |
+          set -o pipefail
+          npm run decouvrir:ged 2>&1 | tee data/ged-decouverte.log
+
+      - name: Committer le journal
+        if: ${{ always() && steps.volet.outputs.present == 'oui' }}
+        working-directory: .
+        run: |
+          git config user.name "dossierquebec-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add montreal/data/ged-decouverte.json montreal/data/ged-decouverte.log || true
+          if git diff --cached --quiet; then
+            echo "Aucun journal à committer."
+          else
+            git commit -m "Découverte du portail documentaire de Montréal ($(date -u +%Y-%m-%d))"
+            git pull --rebase
+            git push
+          fi
