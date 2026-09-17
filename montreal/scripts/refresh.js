@@ -81,8 +81,14 @@ const ETAPES = [
     argv: ['--max-old-space-size=4096', 'scrapers/votes.js', ...(complet ? ['--complet'] : [`--depuis=${depuis}`])],
   },
   { nom: 'Lexique, mesuré sur les procès-verbaux', argv: ['scrapers/lexique.js'], secondaire: true },
+  // « Où en est le projet » : un récapitulatif par sujet suivable, écrit par le modèle à
+  // partir du texte des résolutions et vérifié mécaniquement. Même clé que les résumés ;
+  // sans elle, l'étape est sautée et les sujets s'affichent sans récapitulatif.
+  ...(resumes
+    ? [{ nom: 'Récapitulatifs des sujets suivables', argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scrapers/recaps-projets.js'], secondaire: true }]
+    : []),
   // Ce que lit « Mes dossiers » : un fichier par sujet suivable, plus les dossiers de
-  // l'année. Après les décisions, dont il dépend entièrement.
+  // l'année. Après les décisions et les récapitulatifs, dont il dépend entièrement.
   { nom: 'Sujets suivables et dossiers, pour Mes dossiers', argv: ['scripts/projets-publics.js'], secondaire: true },
   ...(resumes
     ? [
