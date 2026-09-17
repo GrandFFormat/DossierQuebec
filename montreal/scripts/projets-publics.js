@@ -60,36 +60,32 @@ const numerosDe = (groupe) => [...new Set(groupe.map((d) => d.numero).filter(Boo
 // est facultatif et lu par /mes-dossiers : toute ville à qui il manque ses sommaires peut
 // dire pourquoi, de la même façon.
 const EN_ATTENTE_DE = {
-  titre: "Pas de récapitulatif : le document qui l'écrirait n'est pas ouvert",
-  titreEn: 'No recap: the document that would write it is not open',
+  titre: "Pas de récapitulatif : rien ne relie une décision à son explication",
+  titreEn: 'No recap: nothing links a decision to its explanation',
   texte:
-    "Un projet se raconte à partir des sommaires décisionnels — la note que l'administration écrit pour chaque dossier, avec le contexte, les montants et les options écartées. C'est de là que viennent les récapitulatifs de Québec et de Lévis. Montréal produit exactement les mêmes documents : 4 088 de nos décisions portent leur numéro de dossier. Mais elle n'en publie pas l'adresse, et sans adresse personne ne peut les ouvrir — ni un citoyen, ni notre robot.",
+    "Un projet se raconte à partir des sommaires décisionnels — la note que l'administration écrit pour chaque dossier, avec le contexte, les montants et les options écartées. C'est de là que viennent les récapitulatifs de Québec et de Lévis. Montréal produit exactement les mêmes documents et nous dit les déposer dans un répertoire public. Mais on ne peut pas les y retrouver : le numéro de dossier que la Ville imprime elle-même sous chaque décision — nous en avons 4 088 — n'y donne aucun résultat.",
   texteEn:
-    "A project's story comes from the decision summaries — the memo the administration writes for each file, with the context, the amounts and the options set aside. That is where the Québec and Lévis recaps come from. Montréal produces exactly the same documents: 4,088 of our decisions carry their file number. But it publishes no address for them, and without an address nobody can open them — neither a citizen nor our robot.",
-  // Ce qui doit sauter aux yeux dans le paragraphe : que la Ville PRODUIT bien ces documents.
-  // Sans ça, on lit « Montréal n'a pas de sommaires », ce qui est faux — elle en a, elle n'en
-  // publie pas l'adresse. Les fragments sont cherchés tels quels dans le texte ci-dessus.
-  surligne: ['Montréal produit exactement les mêmes documents'],
-  surligneEn: ['Montréal produces exactly the same documents'],
-  // Ce qui suit se détache du reste, sur sa propre ligne : c'est la seule phrase du bloc qui
-  // dise ce qui va se passer, et elle se perdait au bout d'un paragraphe de cinq phrases.
+    "A project's story comes from the decision summaries — the memo the administration writes for each file, with the context, the amounts and the options set aside. That is where the Québec and Lévis recaps come from. Montréal produces exactly the same documents and tells us they are filed in a public repository. But they cannot be found there: the file number the City itself prints under every decision — we hold 4,088 of them — returns no result.",
+  // Ce qui doit sauter aux yeux : que la Ville PRODUIT ces documents (sans quoi on lit
+  // « Montréal n'a pas de sommaires », ce qui est faux), et que le blocage est un index
+  // manquant, pas un secret.
+  surligne: ['Montréal produit exactement les mêmes documents', "n'y donne aucun résultat"],
+  surligneEn: ['Montréal produces exactly the same documents', 'returns no result'],
   ligne:
-    "Nous avons demandé cette adresse à la Ville le 13 septembre 2026, et de nouveau le 16. Dès qu'elle répond, ce projet aura son récapitulatif, comme ceux de Québec et de Lévis.",
+    "Vérifié le 17 septembre 2026 dans le Répertoire des documents officiels de la Ville. Nous lui avons demandé d'indexer ce numéro : c'est un champ à ajouter dans un outil qui existe déjà. Le jour où ce sera fait, ce projet aura son récapitulatif, comme ceux de Québec et de Lévis.",
   ligneEn:
-    'We asked the City for that address on 13 September 2026, and again on the 16th. As soon as they answer, this project will have its recap, like those of Québec and Lévis.',
+    "Checked on 17 September 2026 in the City's official document repository. We have asked them to index that number: it is one field to add in a tool that already exists. The day it is done, this project will have its recap, like those of Québec and Lévis.",
 };
-
 
 // La même chose en deux phrases, en tête de la liste des projets de la ville : sans elle, on
 // croit que Montréal a des projets plus pauvres que les autres villes, alors que c'est un
-// document qui manque.
+// index qui manque.
 const LEGENDE = {
   texte:
-    "Les projets se racontent à partir des sommaires décisionnels, la note que l'administration écrit pour chaque dossier. Montréal produit ces documents mais n'en publie pas l'adresse : ni un citoyen ni notre robot ne peut les ouvrir, donc aucun projet de Montréal n'a encore de récapitulatif. Nous avons demandé cette adresse à la Ville.",
+    "Les projets se racontent à partir des sommaires décisionnels, la note que l'administration écrit pour chaque dossier. Montréal les dépose dans un répertoire public, mais on ne peut pas les y retrouver : le numéro de dossier imprimé sous chaque décision n'y donne aucun résultat. Nous avons demandé à la Ville d'indexer ce numéro ; d'ici là, aucun projet de Montréal n'a de récapitulatif.",
   texteEn:
-    "Projects are told from the decision summaries, the memo the administration writes for each file. Montréal produces these documents but publishes no address for them: neither a citizen nor our robot can open them, so no Montréal project has a recap yet. We have asked the City for that address.",
+    "Projects are told from the decision summaries, the memo the administration writes for each file. Montréal files them in a public repository, but they cannot be found there: the file number printed under each decision returns no result. We have asked the City to index that number; until then, no Montréal project has a recap.",
 };
-
 
 const decisions = await lire('data/decisions.json', null);
 if (!decisions?.decisions) {
