@@ -388,7 +388,10 @@ async function main() {
   // Ce qui est réservé aux abonnés est DORÉ dans les deux éditions, avec la marque « ★ ABONNÉS » :
   // rempli pour l'abonné, fermé (🔒, ce qu'on y trouverait, sans les chiffres) pour les autres.
   // Même mise en page ; la différence se voit d'un coup d'œil.
-  const pageHtml = (abonne) => {
+  const pageHtml = (abonne, { vitrine = false } = {}) => {
+    // vitrine (--pour-tous) : le contenu de l'édition abonnés, offert à tout le monde ce mois-ci ;
+    // seuls l'en-tête, l'encadré d'ouverture et le pied changent, pour le dire et inviter à s'abonner.
+    const payant = abonne || vitrine;
   const OR = '#B7791F';
   const marque = `<span style="display:inline-block;padding:2px 8px;border-radius:999px;background:#D99A06;color:#ffffff;font-size:11px;font-weight:800;letter-spacing:.04em;white-space:nowrap;vertical-align:middle">★ ABONNÉS</span>`;
   const boiteOr = (contenu, marge = '10px 0 0') => `<div style="${POLICE};margin:${marge};padding:10px 12px;border-radius:8px;background:#FFF7E0;border:1px dashed #E9B949;font-size:14px;line-height:1.55;color:${ENCRE}">${contenu}</div>`;
@@ -410,7 +413,7 @@ async function main() {
     const retenues = soumissions.filter((s) => s.retenue);
     const autres = soumissions.filter((s) => !s.retenue && s.entreprise);
     const entreprise = (s) => `${s.entreprise}${villeSeule(s.ville) ? ` (${villeSeule(s.ville)})` : ''}`;
-    if (!abonne) {
+    if (!payant) {
       const morceaux = [
         retenues.length ? `l'entreprise retenue et son prix` : null,
         autres.length ? pluriel(autres.length, 'autre soumission', 'autres soumissions') : null,
@@ -437,7 +440,7 @@ async function main() {
     if (f.theme === 'contrats') return blocContrat(f, d);
     const morceaux = [];
     const entreprises = new Set((d.soumissions ?? []).map((s) => s.entreprise)).size;
-    if (!abonne) {
+    if (!payant) {
       if (entreprises) morceaux.push(`${pluriel(entreprises, 'soumission', 'soumissions')}${d.estimationVille ? ` comparée${entreprises > 1 ? 's' : ''} à l'estimation de la Ville` : ''}`);
       else if (d.chiffresCles?.some((c) => /co[uû]t|budget|pr[ée]vision/i.test(c.libelle ?? ''))) morceaux.push('le coût total du projet');
       if (/(?:payable|vers[ée]e?s?)\s+en\s+(?:deux|trois|quatre|cinq|six|\d+)\s+(?:versements|tranches)/i.test((d.conditions ?? []).join(' '))) morceaux.push('le calendrier des versements');
@@ -481,7 +484,7 @@ async function main() {
     const d = natureParId.get(f.cle);
     if (!d) return '';
     const entreprises = new Set((d.soumissions ?? []).map((s) => s.entreprise)).size;
-    if (!abonne) {
+    if (!payant) {
       const contenu = [d.beneficiaire ? 'qui reçoit' : null, d.payeur ? 'qui paie' : null, entreprises ? pluriel(entreprises, 'soumissionnaire comparé', 'soumissionnaires comparés') : null, d.estimationVille ? "l'estimation de la Ville" : null, d.repartitionAnnuelle?.length ? 'la répartition par année' : null].filter(Boolean);
       return boiteOr(`🔒 <strong>Détail de l'argent</strong> ${marque}<br>${contenu.length ? `Dans ce dossier : ${echapper(contenu.join(', '))}.` : "Lu et vérifié dans le document."} ${lienOr("S'abonner", `${RACINE}/abonnement`)}`);
     }
@@ -503,7 +506,7 @@ async function main() {
   // Bandeau
   H.push(`
     <tr><td style="background:#0B8A4B;border-radius:12px 12px 0 0;padding:26px 24px 22px">
-      <div style="${POLICE};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#CFF5DE">DossierVilleDeQuébec · ${seance ? 'Après la séance' : 'Compte rendu mensuel'}${abonne ? ' · édition abonnés' : ''}</div>
+      <div style="${POLICE};font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#CFF5DE">DossierVilleDeQuébec · ${seance ? 'Après la séance' : 'Compte rendu mensuel'}${abonne ? ' · édition abonnés' : vitrine ? ' · édition abonnés, offerte ce mois-ci' : ''}</div>
       <h1 style="${POLICE};margin:8px 0 0;font-size:27px;line-height:1.2;color:#ffffff">${echapper(titreCourriel)}</h1>
     </td></tr>
     <tr><td style="height:6px;line-height:6px;font-size:0;background:#F5B301">&nbsp;</td></tr>`);
@@ -513,7 +516,9 @@ async function main() {
   const paragraphes = [...mot.map((p) => `<p style="${POLICE};margin:0 0 12px;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(p)}</p>`)];
   H.push(`<tr><td style="padding:22px 4px 4px">${paragraphes.join('')}<p style="${POLICE};margin:0;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(introduction)}</p>${abonne
     ? boiteOr(`${marque} <strong>Votre édition abonnés.</strong> Merci : c'est votre abonnement qui garde le reste gratuit pour tout le monde.`, '14px 0 0')
-    : boiteOr(`${marque} <strong>Les encadrés dorés sont réservés aux abonnés :</strong> le détail de l'argent de chaque montant — qui reçoit, les soumissions, l'estimation de la Ville — et l'agenda des conseils du mois qui vient. ${lienOr("Voir l'abonnement", `${RACINE}/abonnement`)}`, '14px 0 0')}</td></tr>`);
+    : vitrine
+      ? boiteOr(`${marque} <strong>Ce mois-ci, l'édition abonnés pour tout le monde.</strong> Les encadrés dorés — le détail de l'argent de chaque montant et l'agenda des conseils — sont d'habitude réservés aux abonnés. ${lienOr("Voir l'abonnement", `${RACINE}/abonnement`)}`, '14px 0 0')
+      : boiteOr(`${marque} <strong>Les encadrés dorés sont réservés aux abonnés :</strong> le détail de l'argent de chaque montant — qui reçoit, les soumissions, l'estimation de la Ville — et l'agenda des conseils du mois qui vient. ${lienOr("Voir l'abonnement", `${RACINE}/abonnement`)}`, '14px 0 0')}</td></tr>`);
 
   // Le mois en chiffres : quatre tuiles de couleur, deux par rangée (lisible sur cellulaire).
   const tuile = (n, libelle, couleur) => `<td width="50%" valign="top" style="padding:6px">
@@ -569,7 +574,7 @@ async function main() {
 
   // L'agenda des conseils du mois qui vient : rempli pour l'abonné, fermé pour les autres.
   H.push(enTete(SECTIONS.agenda, null, marque));
-  if (abonne) {
+  if (payant) {
     const lignes = agendaProchain.slice(0, 8).map((d, i) => `<tr style="background:${i % 2 ? '#FFFBEF' : '#ffffff'}">
         <td valign="top" width="1" style="${POLICE};padding:10px 10px 10px 12px;white-space:nowrap"><span style="display:inline-block;padding:3px 9px;border-radius:6px;background:#D99A06;color:#fff;font-weight:800;font-size:13px">${echapper(jourMois(d.echeance))}</span></td>
         <td valign="top" style="${POLICE};padding:10px 12px 10px 0;font-size:14px;line-height:1.5;color:${ENCRE}">${echapper(d.phrase ?? court(d.objet))}<div style="margin-top:3px;font-size:12px;color:${DOUX}">${echapper(INSTANCE_COURTE(d.groupe ?? d.instance))} · ${lienOr(d.numero, fiche(d.numero))}</div></td>
@@ -613,7 +618,10 @@ async function main() {
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td style="padding:0 16px"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">${H.slice(1).join('')}</table></td></tr></table>` +
     `</td></tr></table></td></tr></table></body></html>`;
   };
-  const page = pageHtml(false);
+  // --pour-tous : l'édition envoyée aux non-abonnés est celle des abonnés, en vitrine (Martin,
+  // 17 sept. 2026, pour le numéro d'août). L'édition abonnés, elle, ne change pas.
+  const vitrine = Boolean(args['pour-tous']);
+  const page = pageHtml(false, { vitrine });
   const pageAbonnes = pageHtml(true);
 
   await mkdir(SORTIE, { recursive: true });
@@ -621,7 +629,7 @@ async function main() {
   await writeFile(new URL(`${fichier}.html`, SORTIE), page, 'utf8');
   await writeFile(new URL(`${fichier}-abonnes.html`, SORTIE), pageAbonnes, 'utf8');
   console.log(`${nomPeriode} : ${liste.length} dossiers, ${nbSeances} séances, ${subventions.length} subventions, ${contrats.length} contrats, ${nbVotesDivises} votes divisés${mot.length ? ', mot du mois inclus' : ''}.`);
-  console.log(`→ infolettres/${fichier}.html (gratuit), ${fichier}-abonnes.html et ${fichier}.md`);
+  console.log(`→ infolettres/${fichier}.html (${vitrine ? 'édition abonnés offerte à tous' : 'gratuit'}), ${fichier}-abonnes.html et ${fichier}.md`);
 
   // --publier : le compte rendu relu part dans Supabase. Il sera envoyé aux inscrits confirmés au
   // prochain passage du cron (11 h UTC), et il devient celui que reçoit chaque nouvel inscrit.
