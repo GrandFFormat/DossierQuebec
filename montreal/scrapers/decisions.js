@@ -50,7 +50,7 @@ const RATTRAPAGE_JOURS = 45;
 // mais le rafraîchissement suivant n'a rien relu du tout, puisque les séances étaient
 // déjà marquées « lues » au bon numéro de découpage. Deux compteurs indépendants pour un
 // même travail laissent toujours passer l'un ou l'autre ; celui-ci n'en fait qu'un.
-export const VERSION_DECOUPAGE = 8;
+export const VERSION_DECOUPAGE = 9;
 const DIAGNOSTIC = new URL('../data/diagnostic.json', import.meta.url);
 
 // Un échantillon de ce que les PDF contiennent vraiment — les premières lignes d'un
@@ -315,17 +315,21 @@ async function main() {
         Object.entries(PROJETS).map(([cle, p]) => [cle, { titre: p.titre, description: p.description, n: liste.filter((d) => d.projets?.includes(cle)).length }])
       ),
       seances: etats.sort((a, b) => b.date.localeCompare(a.date)),
-      decisions: liste,
+      // Le dispositif et les motifs sortent d'ici pour aller dans textes.json : la page des
+      // décisions ne doit pas payer pour ce qu'elle n'affiche pas d'emblée.
+      //
+      // Ils sont RETIRÉS D'UNE COPIE, jamais des objets eux-mêmes. La première version
+      // faisait `delete d.dispositif` sur la liste : comme `ecrire()` est rappelée après
+      // chaque séance lue et que ces objets vivent dans la Map des décisions, le premier
+      // appel les vidait tous définitivement. Le fichier des textes est sorti à zéro alors
+      // que les 137 séances avaient bien été relues.
+      decisions: liste.map(({ dispositif, motifs, ...reste }) => reste),
     };
     await writeFile(OUT, JSON.stringify(payload, null, 1), 'utf8');
 
-    // Le dispositif et les motifs partent dans leur propre fichier, et sortent de
-    // decisions.json : la page ne doit pas payer pour ce qu'elle n'affiche pas d'emblée.
     const textes = {};
     for (const d of liste) {
       if (d.dispositif || d.motifs) textes[d.id] = { dispositif: d.dispositif ?? null, motifs: d.motifs ?? null };
-      delete d.dispositif;
-      delete d.motifs;
     }
     await writeFile(
       OUT_TEXTES,
