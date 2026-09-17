@@ -24,6 +24,19 @@ const OUT = new URL('../data/ged-sonde.json', import.meta.url);
 const PORTAIL = 'https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM';
 const DOSSIER = process.argv.find((a) => /^\d{10}$/.test(a)) ?? '1265298015';
 
+// Chercher le numéro de dossier ne suffit pas à conclure. Zéro résultat peut vouloir dire
+// « ce répertoire ne contient pas les sommaires » comme « il les contient mais ne les indexe
+// pas par ce numéro-là » — et ces deux réponses n'appellent pas la même demande à la Ville.
+// D'où une petite batterie, du plus précis au plus général : la dernière requête doit
+// répondre, sinon c'est le portail qui ne marche pas et tout le reste ne vaut rien.
+const REQUETES = [
+  [DOSSIER, "le numéro de dossier d'une décision de 2026"],
+  ['CM26 0590', 'un numéro de résolution du conseil municipal'],
+  ['sommaire décisionnel', "le nom du document qu'on cherche"],
+  ['Eurovia Québec Construction', 'un fournisseur nommé dans une décision de 2026'],
+  ['procès-verbal', 'un mot qui doit forcément répondre'],
+];
+
 async function principal() {
   const { chromium } = await import('playwright');
   const rapport = { generatedAt: new Date().toISOString(), portail: PORTAIL, dossier: DOSSIER };
@@ -80,58 +93,53 @@ async function principal() {
   console.log(`  ${n} champ(s) visible(s) :`);
   for (const c of rapport.champs) console.log(`    type=${c.type ?? '—'} placeholder=${c.placeholder ?? '—'} éditable=${c.editable} actif=${c.actif}`);
 
-  // La recherche, si un champ veut bien d'elle. Tout échec est noté, jamais fatal.
+  // Les recherches, si un champ veut bien d'elles. Tout échec est noté, jamais fatal.
   const editable = rapport.champs.findIndex((c) => c.editable);
+  rapport.recherches = [];
   if (editable < 0) {
     rapport.conclusion = n ? 'aucun champ éditable' : 'aucun champ de saisie';
     console.log(`\n  ${rapport.conclusion} — la recherche ne peut pas être essayée.`);
   } else {
-    try {
-      console.log(`\n  Recherche de « ${DOSSIER} » dans le champ ${editable + 1}…`);
-      await champs.nth(editable).fill(DOSSIER, { timeout: 15000 });
-      // La touche Entrée ne lance rien : le portail a un bouton « Rechercher », et c'est lui
-      // qui parle au serveur. La première sonde avait bien tapé le numéro et cru que la
-      // recherche ne trouvait rien, alors qu'elle n'avait pas eu lieu — la capture d'écran
-      // montrait le numéro dans la boîte et la page d'accueil intacte derrière.
-      const bouton = page.getByRole('button', { name: /rechercher/i }).first();
-      if (await bouton.count()) {
-        await bouton.click({ timeout: 15000 });
-        rapport.lanceePar = 'bouton Rechercher';
-      } else {
-        await champs.nth(editable).press('Enter');
-        rapport.lanceePar = 'touche Entrée';
+    console.log('');
+    for (const [terme, pourquoi] of REQUETES) {
+      const ligne = { terme, pourquoi };
+      try {
+        await champs.nth(editable).fill(terme, { timeout: 15000 });
+        // La touche Entrée ne lance rien : le portail a un bouton « Rechercher », et c'est
+        // lui qui parle au serveur. La première sonde avait tapé le numéro et cru que la
+        // recherche ne trouvait rien, alors qu'elle n'avait pas eu lieu — la capture
+        // montrait le numéro dans la boîte et la page d'accueil intacte derrière.
+        const bouton = page.getByRole('button', { name: /rechercher/i }).first();
+        if (await bouton.count()) await bouton.click({ timeout: 15000 });
+        else await champs.nth(editable).press('Enter');
+        await page.waitForTimeout(7000);
+        const corps = await vu();
+        ligne.resultats = corps.match(/(\d[\d\s]*)\s*r[ée]sultats?/i)?.[1]?.replace(/\s/g, '') ?? '?';
+        ligne.url = page.url();
+        ligne.extrait = corps.slice(0, 600);
+      } catch (err) {
+        ligne.erreur = String(err.message ?? err).split('\n')[0];
       }
-      await page.waitForTimeout(9000);
-      rapport.urlApres = page.url();
-      const corps = await vu();
-      rapport.trouveLeDossier = corps.includes(DOSSIER);
-      rapport.mentionResultats = corps.match(/(\d[\d\s]*)\s*(r[ée]sultats?|documents?)/i)?.[0] ?? null;
-      rapport.pageApres = corps.slice(0, 1200);
-      rapport.conclusion = rapport.trouveLeDossier ? 'le numéro apparaît dans les résultats' : 'recherche faite, le numéro n’apparaît pas';
-      console.log(`  adresse après recherche : ${rapport.urlApres}`);
-      console.log(`  le numéro apparaît : ${rapport.trouveLeDossier ? 'OUI' : 'non'}`);
-      if (rapport.mentionResultats) console.log(`  ${rapport.mentionResultats}`);
-      console.log(`\n  --- après la recherche ---\n  ${rapport.pageApres.slice(0, 800)}`);
-      await page.screenshot({ path: new URL('../data/ged-sonde.png', import.meta.url).pathname, fullPage: true }).catch(() => {});
+      rapport.recherches.push(ligne);
+      console.log(`  ${String(ligne.resultats ?? ligne.erreur).padStart(7)} résultat(s)  « ${terme} »  — ${pourquoi}`);
+    }
+    await page.screenshot({ path: new URL('../data/ged-sonde.png', import.meta.url).pathname, fullPage: true }).catch(() => {});
 
-      // S'il y a des résultats, en ouvrir un : c'est la seule façon de savoir si un document
-      // porte une adresse qu'on peut donner à quelqu'un, ou seulement un état de session.
-      const liens = page.locator('a:visible');
-      const nLiens = await liens.count();
-      rapport.liensResultats = [];
-      for (let i = 0; i < Math.min(nLiens, 12); i++) {
-        const t = (await liens.nth(i).innerText().catch(() => '')).replace(/\s+/g, ' ').trim();
-        const href = await liens.nth(i).getAttribute('href').catch(() => null);
-        if (t) rapport.liensResultats.push({ texte: t.slice(0, 80), href });
-      }
-      if (rapport.liensResultats.length) {
-        console.log('\n  --- liens visibles après la recherche ---');
-        for (const l of rapport.liensResultats) console.log(`    « ${l.texte} » -> ${l.href ?? '(pas d’adresse)'}`);
-      }
-    } catch (err) {
-      rapport.conclusion = `la recherche a échoué : ${String(err.message ?? err).split('\n')[0]}`;
-      console.log(`  ${rapport.conclusion}`);
-      await page.screenshot({ path: new URL('../data/ged-sonde.png', import.meta.url).pathname }).catch(() => {});
+    // Ce que rend la requête la plus générale : de quoi ce répertoire est-il fait ?
+    const derniere = rapport.recherches.at(-1);
+    if (derniere?.extrait) console.log(`\n  --- ce que rend « ${derniere.terme} » ---\n  ${derniere.extrait.slice(0, 600)}`);
+
+    const liens = page.locator('a:visible');
+    const nLiens = await liens.count();
+    rapport.liensResultats = [];
+    for (let i = 0; i < Math.min(nLiens, 14); i++) {
+      const t = (await liens.nth(i).innerText().catch(() => '')).replace(/\s+/g, ' ').trim();
+      const href = await liens.nth(i).getAttribute('href').catch(() => null);
+      if (t) rapport.liensResultats.push({ texte: t.slice(0, 90), href });
+    }
+    if (rapport.liensResultats.length) {
+      console.log('\n  --- liens visibles sur la dernière page de résultats ---');
+      for (const l of rapport.liensResultats) console.log(`    « ${l.texte} » -> ${l.href ?? "(pas d'adresse)"}`);
     }
   }
 
