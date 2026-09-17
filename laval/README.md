@@ -9,10 +9,33 @@ Ce n'est pas un site de la Ville de Laval et ça n'a aucun caractère officiel.
 Ce volet suit `quebec/REPRODUIRE-POUR-UNE-AUTRE-VILLE.md`, avec une phrase en plus : « La ville,
 c'est Laval. » Le présent README est le journal du projet.
 
-> **État au 14 septembre 2026 — étape 1 seulement.** L'étude de faisabilité est faite (ci-dessous),
-> aucun code n'est écrit. Elle conclut « faisable, et la source ressemble plus à Québec qu'à
-> Montréal », avec **un obstacle à régler avec la Ville avant d'écrire la routine** : l'index des
-> documents est derrière Cloudflare, qui refuse tout client qui n'est pas un navigateur.
+> **État au 17 septembre 2026 — la base est construite.** L'étude de faisabilité (étape 1, plus
+> bas) a conclu « faisable, et la source ressemble plus à Québec qu'à Montréal », avec un obstacle
+> qui tient toujours : l'index des documents est derrière Cloudflare, qui refuse tout client qui
+> n'est pas un navigateur. Le volet vit avec : l'index vient d'une **capture manuelle** (section
+> « Rafraîchir l'index à la main »), les PDF se lisent normalement. Le courriel à la Ville est
+> parti le 14 septembre (étape 2). Tout ce qui est en ligne est en français seulement et sous
+> verrou `noindex` en attendant sa réponse.
+
+## Démarrage
+
+```
+cd laval
+npm install                # deux dépendances : le SDK Anthropic (résumés) et pdf.js (lecture des PDF)
+npm test                   # les lecteurs, hors ligne, sur des extraits au gabarit de la Ville
+npm run refresh            # la routine quotidienne (résumés sautés sans clé API)
+npm run serve              # http://localhost:4321/
+```
+
+Utiles pendant la mise au point :
+
+```
+node scrapers/index.js                                             # l'index en ligne (403 aujourd'hui), sinon la capture
+node scrapers/index.js --capture=C:\Users\pc\Downloads\index-laval.json   # ingère une capture faite dans un navigateur
+node scrapers/decisions.js --fichier=chemin/CM_PV_ORD_18h30_2026_02_03_2.0.pdf   # découpage d'un PV, sans réseau
+node scrapers/votes.js --fichier=chemin/CM_PV_ORD_18h30_2026_02_03_2.0.pdf       # les votes d'un PV
+node --env-file=../api.env scrapers/resumes.js --dry-run           # estime le coût des résumés, n'appelle rien
+```
 
 ## Étape 1 — L'étude de faisabilité
 
@@ -135,3 +158,103 @@ d'ouverture est dans le nom (`18h33`, `09h03`). Trois voies, par ordre de préf�
   commercial avec la source citée, et demande l'accord pour rendre le site public.
 - **13 octobre 2026** : fin du délai de 20 jours ouvrables (le 12 est l'Action de grâce). Relance
   programmée ce jour-là si rien n'est arrivé.
+
+## Étape 3 — Le contrat de données, tel que construit (17 septembre 2026)
+
+| Fichier | Écrit par | Contenu |
+|---|---|---|
+| `data/index-documents.json` | `scrapers/index.js` | l'index de la Ville, 4 360 documents depuis mai 2023 (capture manuelle ; non servi) |
+| `data/seances.json` | `scrapers/index.js` | une séance par procès-verbal ou ordre du jour, les deux appariés ; `prefixe` (« CM-20260203 ») ouvre les numéros de résolution de la journée |
+| `data/decisions.json` | `scrapers/decisions.js` | les résolutions de l'année, lues dans les PV du conseil municipal et du comité exécutif (publiques et à huis clos) ; objet pris à l'ordre du jour du conseil quand il existe, avec les districts touchés et le montant |
+| `data/votes.json` | `scrapers/votes.js` | les votes nominaux de l'année, avec le passage brut et le décompte imprimé |
+| `data/textes/` | les scrapers | texte extrait des PDF (cache, hors dépôt) |
+
+Premier lancement, 17 septembre 2026 : **87 séances de 2026 lues** (13 du conseil, 74 du comité
+exécutif), **2 892 fiches**, 641 renvois à un sommaire pour le seul conseil, **44 votes nominaux**
+recoupés avec le décompte imprimé, **0 avertissement**.
+
+### Comment on lit un procès-verbal
+
+Avec pdf.js (`lib/pdf.js`, repris de Longueuil), qui reconstruit chaque ligne d'après la hauteur
+des fragments. C'est ce qui règle le piège noté à l'étude : **les numéros de résolution sont dans la
+marge de gauche, à la hauteur de la première ligne du titre**. `pdftotext -layout` les empilait en
+haut de la page, loin de leur résolution ; pdf.js les met sur la même ligne que le titre
+(`CM-20260203-64 ADOPTION - RÈGLEMENT L-13132`), et `lib/pv.js` ouvre un bloc sur chaque ligne qui
+commence par le préfixe de la journée. Un renvoi vers une résolution d'une autre date
+(« conformément à la résolution CE-20190320-759 ») n'ouvre donc jamais de bloc.
+
+Le titre continue tant que la ligne est en majuscules ; le corps suit ; le dernier `(SD-AAAA-N)` du
+bloc est le sommaire de la résolution (une résolution qui en cite d'autres se clôt toujours par le
+sien) ; `(CT:N)` est le certificat de trésorerie. Le résultat : « résolu à l'unanimité » (conseil :
+« et résolu à l'unanimité: » ; comité exécutif : « RÉSOLU À L'UNANIMITÉ: »), ou le décompte d'un
+vote demandé. Un dépôt, un avis de motion, une prise d'acte n'ont pas de résultat : la fiche porte
+un `type` qui le dit.
+
+### Les votes
+
+« La conseillère Louise Lortie demande le vote sur la proposition, laquelle est adoptée par un
+compte de 17 en faveur et de 4 contre: M. Stéphane Boyer, maire, et les conseillers …, se
+prononcent en faveur de la proposition; les conseillers … se prononcent contre la proposition. »
+Le décompte est dans la phrase : le garde-fou ne coûte rien. Variantes rencontrées en 2026 et
+lues : « l'amendement, lequel est rejeté », « la proposition amendée », « la demande de discuter
+immédiatement de la proposition », « la prolongation », « celui-ci », « acceptée » pour
+« adoptée », un membre seul (« se prononce »), une virgule avant « se prononcent », et **un vote
+corrigé en séance** (« Le conseiller …, ayant indiqué s'être trompé, corrige son vote … Le compte
+final est de 16 en faveur et de 4 contre: ») — c'est le compte final qui vaut. Un vote demandé
+mais « adopté à l'unanimité » n'a pas de noms et n'entre pas au registre. Le comité exécutif a tout
+adopté à l'unanimité en 2026.
+
+### L'ordre du jour du conseil
+
+Il écrit chaque point en casse normale, suivi de ses renvois : `SD-2025-6415 - CT : 1876662`,
+`District(s) : 01 Saint-François, 02 Saint-Vincent-de-Paul…` (coupé par la mise en page, recollé),
+`Montants(s) : 689 850,00 $`. Les points ne portent pas le numéro de résolution : **c'est le numéro
+de sommaire qui relie le point à la résolution**, et dans l'ordre — un règlement passe deux fois à
+la même séance (dépôt du projet, avis de motion) avec le même sommaire ; le k-ième point citant
+SD-X va au k-ième bloc qui le cite. Séance du 3 février 2026 : 50 résolutions avec sommaire, 50
+appariées.
+
+## Rafraîchir l'index à la main
+
+Tant que laval.ca refuse les robots, l'index se capture dans un navigateur, sur la page
+« Ordre du jour, procès-verbaux et sommaire décisionnel ». Dans la console du navigateur (F12),
+coller :
+
+```js
+(async () => {
+  const dt = jQuery('#table_1').DataTable(); const p = dt.ajax.params(); p.start = 0; p.length = 5000;
+  const r = await jQuery.ajax({ url: '/wp-admin/admin-ajax.php?action=get_wdtable&table_id=11', type: 'POST', data: p, dataType: 'json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify({ recordsTotal: r.recordsTotal, data: r.data })], { type: 'application/json' }));
+  a.download = 'index-laval.json'; a.click();
+})();
+```
+
+Puis `node scrapers/index.js --capture=C:\Users\pc\Downloads\index-laval.json`, et commiter
+`data/index-documents.json` et `data/seances.json`. Le tableau demande tout d'un coup
+(`length = 5000`) : pas de pagination, donc pas de ligne sautée ou répétée. La date de la capture
+est écrite dans le fichier et sur la page Sources. Le jour où la Ville ouvre la porte,
+`scrapers/index.js` lit l'index tout seul (il porte déjà le jeton `wdtNonce` que l'API exige,
+lu dans la page) : rien d'autre à changer.
+
+## Pièges rencontrés
+
+- **Les numéros de résolution sont dans la marge** : avec pdftotext, ils s'empilent en haut de
+  page ; avec pdf.js, ils sont à la hauteur du titre. Lire par hauteur, pas par colonne.
+- **Deux procès-verbaux du même type le même jour** (15 décembre 2025 : deux séances
+  extraordinaires, 16 h et 17 h 30 ; 4 février 2026 : deux huis clos du comité exécutif) : le
+  procès-verbal porte l'heure réelle d'ouverture (18h33), l'ordre du jour l'heure prévue (18h30).
+  Apparier par heure la plus proche, couples les plus serrés d'abord, jamais au-delà de deux heures
+  — un premier appariement « le premier libre » donnait l'ordre du jour de 17 h 30 au
+  procès-verbal de 16 h.
+- **Un même fichier d'ordre du jour listé deux fois** (11 août 2026 : sans version sur
+  `wp-content`, en 2.0 sur le stockage) : garder la version la plus haute, et à égalité le stockage.
+- **Un sommaire est listé à chaque passage au conseil** (dépôt, avis de motion, adoption : jusqu'à
+  trois dates, 448 fichiers en double) : un fichier par numéro, la liste des passages à côté.
+- **Les sommaires du comité exécutif ne sont pas publiés** (404 en XML sur le stockage) : la
+  version du fichier varie (`_1.0` à `_9.0`), on ne devine pas d'adresse, on lit l'index.
+- **`prononcent?`** exige « prononcen » : un membre seul « se prononce » disparaissait. Écrire
+  `prononce(?:nt)?`. Même famille que `conseill\w+` qui rate « conseillère ».
+- **L'apostrophe courbe** de « RÉSOLU À L’UNANIMITÉ » : normaliser avant de reconnaître.
+- **Le navigateur intégré refuse d'envoyer vers `127.0.0.1`** (`ERR_BLOCKED_BY_CLIENT`) : la capture
+  a transité par l'adresse d'une page locale (fragment `#`, gzip + base64), pas par `fetch`.
