@@ -1,0 +1,30 @@
+
+> dossiervillemontreal@0.1.0 sonder:ged
+> node scrapers/sonde-ged.js
+
+Ouverture du portail…
+  titre de la page : « Répertoire des documents officiels »
+  adresse à l'arrivée : https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM
+
+  --- ce que la page affiche en arrivant ---
+  Répertoire des documents officiels Cherchez, consultez, et téléchargez les documents officiels diffusés par la Ville de Montréal et ses 19 arrondissements.  Rechercher Filtrer la recherche À propos Mentions légales
+
+  2 champ(s) visible(s) :
+    type=text placeholder=— éditable=false actif=true
+    type=text placeholder=— éditable=true actif=true
+
+  Recherche de « 1265298015 » dans le champ 2…
+  adresse après recherche : https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM
+  le numéro apparaît : non
+
+  --- après la recherche ---
+  Répertoire des documents officiels Cherchez, consultez, et téléchargez les documents officiels diffusés par la Ville de Montréal et ses 19 arrondissements.  Rechercher Filtrer la recherche À propos Mentions légales
+
+  --- ce que le portail demande au serveur (5 appels) ---
+  GET   /constellio/?collection=mtlca&portal=REPDOCVDM
+  POST  /constellio/?collection=mtlca&portal=REPDOCVDM&v-1789608714299
+  POST  /constellio/UIDL/?v-uiId=0
+  POST  /constellio/UIDL/?v-uiId=0
+  POST  /constellio/UIDL/?v-uiId=0
+
+Rapport écrit dans data/ged-sonde.json
