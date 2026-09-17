@@ -258,3 +258,97 @@ lu dans la page) : rien d'autre à changer.
 - **L'apostrophe courbe** de « RÉSOLU À L’UNANIMITÉ » : normaliser avant de reconnaître.
 - **Le navigateur intégré refuse d'envoyer vers `127.0.0.1`** (`ERR_BLOCKED_BY_CLIENT`) : la capture
   a transité par l'adresse d'une page locale (fragment `#`, gzip + base64), pas par `fetch`.
+
+## Ce que le volet contient (17 septembre 2026)
+
+| Fichier | Écrit par | Contenu |
+|---|---|---|
+| `data/index-documents.json` | `scrapers/index.js` | l'index de la Ville, 4 360 documents (capture manuelle ; non servi) |
+| `data/seances.json` | `scrapers/index.js` | 467 séances, procès-verbal et ordre du jour appariés (non servi) |
+| `data/decisions.json` | `scrapers/decisions.js` | les résolutions de l'année, conseil municipal et comité exécutif |
+| `data/votes.json` | `scrapers/votes.js` | les votes nominaux de l'année, avec le passage brut |
+| `data/sommaires.json` | `scrapers/sommaires.js` | l'index des sommaires décisionnels lus, un PDF par dossier |
+| `data/elus.json`, `data/districts.json` | `scrapers/elus.js`, `scrapers/districts.js` | le conseil et la carte |
+| `data/presences.json` | `scrapers/presences.js` | les présences publiées en données ouvertes |
+| `data/lexique.json` | `scrapers/lexique.js` | 49 termes, mesurés sur les procès-verbaux de l'année |
+| `data/textes/` | les scrapers | texte extrait des PDF (cache, hors dépôt, 21 Mo) |
+
+Premier lancement complet, 17 septembre 2026 : **87 séances de 2026** (13 du conseil, 74 du comité
+exécutif), **2 892 fiches**, **0 classée par défaut**, **46 votes nominaux** sans aucun
+avertissement d'extraction, **511 sommaires décisionnels** lus (235 avec un montant, 428 avec des
+districts), 23 membres du conseil, 22 districts (359 ko de GeoJSON ramenés à 31 ko), 49 termes de
+lexique. `npm test` : 54 tests.
+
+Les pages : `index.html`, `decisions.html`, `votes.html`, `conseil.html` (carte des districts
+colorée par parti, fiches des élus, présences), `lexique.html`, `sources.html`.
+
+### L'ordre du jour du comité exécutif
+
+Il existe, mais son gabarit n'est pas celui du conseil : les chapitres sont les **services**
+numérotés par leur code (« 43 - Service de l'urbanisme »), les points s'écrivent « 43-1 Objet en
+casse normale », le renvoi au sommaire est systématique, `District(s) :05 Marigot` a son
+deux-points collé, et il n'y a **jamais de ligne Montant**. `lib/pv.js` reconnaît les deux gabarits
+et choisit, pour tout le document, celui dont la numérotation revient le plus — jamais ligne à
+ligne, parce qu'un ordre du jour du conseil contient « 1-18 modifiant le Règlement CDU-1 » et un du
+comité exécutif « 317-325 boulevard Goineau ». Résultat : 1 202 des 1 950 résolutions du comité
+exécutif prennent leur objet à l'ordre du jour. Les autres sont les 2e, 3e et 4e résolutions d'un
+même dossier (adjudication, début des travaux, dépenses) : le comité exécutif écrit **un point par
+dossier** et le procès-verbal le décline ; ces fiches gardent le titre du procès-verbal, parce que
+l'objet du point décrirait le dossier et non la résolution.
+
+### Les résumés : payants, et éteints par défaut
+
+`scrapers/resumes.js` est prêt et estimé, mais **aucun résumé n'a été généré**. Estimation du
+14 septembre pour les 511 sommaires de 2026 : `claude-opus-5` **12,26 $ US** en synchrone,
+**6,13 $** via l'API Batches ; `claude-sonnet-5` 4,90 / 2,45 $ ; `claude-haiku-4-5` 2,45 / 1,23 $.
+La moitié du coût est la part fixe de chaque requête (consigne et schéma d'outil, 1 648 jetons).
+
+Contrairement aux autres volets, **la seule présence de la clé API ne suffit pas à lancer l'étape** :
+il faut la demander (`npm run refresh -- --avec-resumes`, ou la variable `LAV_RESUMES=oui` dans le
+workflow), et le modèle se choisit avec `LAV_RESUMES_MODELE`, le mode avec `LAV_RESUMES_BATCH=oui`.
+Sans ça, le jour où le secret `ANTHROPIC_API_KEY` est posé, la routine se serait mise à dépenser
+chaque matin sans que personne l'ait décidé.
+
+## Pièges rencontrés (suite)
+
+- **Une relecture complète qui ne lit rien écrivait un fichier vide.** `--complet` repart d'une
+  carte vide et seules les séances relues la remplissent : un stockage en panne le 1er du mois
+  (jour où la routine force `--complet`) vidait `decisions.json` et `votes.json`, code de sortie 0,
+  et le workflow committait le vide. Les deux scrapers refusent maintenant d'écrire quand aucune
+  séance n'a pu être lue alors que le fichier précédent en contenait, et sortent en erreur.
+- **`--complet` retéléchargeait les ~175 PDF de l'année** alors que le cache est invalidé par
+  l'adresse (une nouvelle version d'un PDF en a une autre) : il rejoue désormais le découpage sur le
+  texte déjà lu, et seul `--retelecharger` redemande les fichiers à la Ville (règle 3).
+- **Deux votes nominaux manquaient au registre** : « demande **ensuite** le vote » (un second vote
+  demandé par la même personne dans le même bloc) et « laquelle est **maintenue** par un compte de »
+  (vote sur une décision de la présidence). Le registre passe de 44 à 46 ; « Maintenue » est le mot
+  de la Ville, on ne le traduit pas en « Adoptée ».
+- **Un vote de procédure empruntait l'objet de son voisin** : la prolongation de la séance au-delà
+  de 23 h, quand elle est **rejetée**, n'a pas de numéro de résolution et reste dans le dernier bloc
+  ouvert. La fiche affichait l'objet et le sommaire d'une décision sans rapport. Ces votes portent
+  maintenant « Prolongation de la séance », sans dossier ni lien vers une décision.
+- **Un palmarès s'était glissé sur la page des votes** : le résumé du tableau nommait les trois
+  personnes le plus souvent contre, et le tableau était trié par ce décompte. C'est ce que la règle 2
+  interdit, et l'assiette est trompeuse (46 votes sur 2 892 décisions, seulement les points
+  contestés). Résumé neutre, tableau par ordre alphabétique.
+- **`casseDePhrase` met les noms propres en minuscules** (« Vente - johanne lefrançois ») : la fiche
+  affiche donc toujours, en plus, le titre exact du procès-verbal.
+- **Une liste de montants coupée par la mise en page** perdait sa fin (huit sommes sur trois lignes
+  dans l'ordre du jour du 10 mars) : la continuation se recolle quand la ligne finit par « ; ».
+- **`\b` de JavaScript ne voit pas les lettres accentuées**, et les sous-chaînes piègent les règles
+  de classement : « velo » dans « développement », « sport » dans « transport », « céder » dans
+  « procéder », « ges » dans « Images », « aines » dans « souterraines », « arbres » dans
+  Val-des-Arbres.
+
+## Ce qui n'est pas encore là
+
+- **La réponse de la Ville** : verrous `noindex` en place, relance programmée le 13 octobre 2026.
+  L'index reste une capture à refaire à la main d'ici là.
+- **Les résumés** : estimés, éteints, en attente d'une décision de modèle et de budget.
+- **L'espace abonnés** (guide, section 9) : les pages portent `data-ville="laval"` et chaque fiche sa
+  boîte `ab-fiche` (clé = numéro de sommaire), mais les fichiers de Mes dossiers
+  (`data/projets/`, `recentes.json`, `dossiers.json`, `attendues.json`, `organismes.json`,
+  `travail.json`) et le détail de l'argent restent à écrire — comme pour Montréal, Lévis et Longueuil.
+- **Les présences de 2026** : le jeu ouvert de la Ville s'arrête au 18 novembre 2025 alors qu'il est
+  annoncé mensuel. La page affiche l'année couverte et le dit.
+- **Un premier run planifié du workflow** à vérifier le lendemain de la mise en place.

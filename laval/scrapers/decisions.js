@@ -29,7 +29,7 @@ export const CACHE = new URL('../data/textes/', import.meta.url);
 const RATTRAPAGE_JOURS = 45;
 // Quand le découpage change (ce numéro augmente), les séances déjà lues sont relues à la
 // prochaine exécution, sans qu'on ait à le demander.
-export const VERSION_LECTURE = 1;
+export const VERSION_LECTURE = 2;
 
 function parseArgs(argv) {
   const args = {};
@@ -109,6 +109,23 @@ function capitaliser(s) {
   return s ? s.charAt(0).toLocaleUpperCase('fr-CA') + s.slice(1) : s;
 }
 
+// « 2026-09-09 » -> « 9 septembre 2026 ». L'objet d'une fiche est lu par des humains : c'est le
+// seul endroit du fichier où une date sert de texte, et une date ISO s'y lisait mal.
+const MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+export function dateEnToutesLettres(iso) {
+  const m = String(iso ?? '').match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!m) return String(iso ?? '');
+  const jour = Number(m[3]);
+  return `${jour === 1 ? '1er' : jour} ${MOIS[Number(m[2]) - 1]} ${m[1]}`;
+}
+
+// « 09h00 » -> « 9 h », « 18h33 » -> « 18 h 33 ».
+export function heureEnToutesLettres(heure) {
+  const m = String(heure ?? '').match(/^(\d{1,2})h(\d{2})$/);
+  if (!m) return String(heure ?? '');
+  return `${Number(m[1])} h${m[2] === '00' ? '' : ' ' + m[2]}`;
+}
+
 // Le genre de la fiche, d'après le titre du procès-verbal. Tout est une résolution au sens
 // large ; on distingue ce qui n'est pas une décision — un dépôt, un avis de motion, une prise
 // d'acte — pour que le fil et les pastilles ne les confondent pas avec les décisions.
@@ -167,7 +184,7 @@ export function decisionsDeSeance(seance, pv, odj, sommaires = new Map()) {
   decisions.push({
     id: `${seance.id}_PV`,
     numero: null,
-    objet: `Procès-verbal — ${seance.nom}, séance ${seance.sousTypeLibelle.toLowerCase()} du ${seance.date} à ${seance.pv.heure.replace('h', ' h ')}`,
+    objet: `Procès-verbal — ${seance.nom}, séance ${seance.sousTypeLibelle.toLowerCase()} du ${dateEnToutesLettres(seance.date)}, ${heureEnToutesLettres(seance.pv.heure)}`,
     date: seance.date,
     annee: seance.date.slice(0, 4),
     type: 'Procès-verbal',
@@ -192,7 +209,7 @@ export function decisionsDeSeance(seance, pv, odj, sommaires = new Map()) {
     decisions.push({
       id: `${seance.id}_ODJ`,
       numero: null,
-      objet: `Ordre du jour — ${seance.nom}, séance ${seance.sousTypeLibelle.toLowerCase()} du ${seance.date}`,
+      objet: `Ordre du jour — ${seance.nom}, séance ${seance.sousTypeLibelle.toLowerCase()} du ${dateEnToutesLettres(seance.date)}`,
       date: seance.date,
       annee: seance.date.slice(0, 4),
       type: 'Ordre du jour',
@@ -294,8 +311,12 @@ async function main() {
     let pv;
     let odj = null;
     try {
-      pv = await documentDeSeance(seance, 'PV', { forcer: Boolean(args.complet) });
-      if (pv) odj = await documentDeSeance(seance, 'ODJ', { forcer: Boolean(args.complet) }).catch((err) => (console.warn(`⚠ ${seance.id} : ordre du jour illisible (${err.message})`), null));
+      // --complet REJOUE LE DÉCOUPAGE, il ne retélécharge pas : le cache est invalidé par
+      // l'adresse, et une nouvelle version d'un PDF en a une autre. Seul --retelecharger force la
+      // Ville à resservir ses fichiers — la routine du 1er du mois n'a plus à lui redemander les
+      // ~175 PDF de l'année pour un résultat identique (règle 3 : jamais de re-téléchargement complet).
+      pv = await documentDeSeance(seance, 'PV', { forcer: Boolean(args.retelecharger) });
+      if (pv) odj = await documentDeSeance(seance, 'ODJ', { forcer: Boolean(args.retelecharger) }).catch((err) => (console.warn(`⚠ ${seance.id} : ordre du jour illisible (${err.message})`), null));
     } catch (err) {
       // Une séance qui plante (PDF illisible, réseau) n'emporte pas les autres.
       console.warn(`⚠ ${seance.id} : ${err.message}`);
@@ -315,6 +336,24 @@ async function main() {
     if (resolutions.length === 0) console.warn(`⚠ ${seance.id} : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.`);
     etatSeances.push({ ...seance, etat: 'lue', versionLecture: VERSION_LECTURE, nombreResolutions: resolutions.length, lueLe: new Date().toISOString().slice(0, 10) });
     await ecrire();
+  }
+
+  // GARDE-FOU DE LA RELECTURE COMPLÈTE. En --complet, la carte des décisions repart vide : chaque
+  // séance relue réécrit ses propres fiches. Si AUCUNE séance n'a pu être lue (stockage de la Ville
+  // en panne, PDF retirés, réseau coupé), le fichier écrit serait vide — et la routine du 1er du
+  // mois, qui force --complet (scripts/refresh.js), le committerait par-dessus l'année entière sans
+  // que rien n'échoue. Mesuré : avec le stockage répondant 404 partout, data/decisions.json passait
+  // de 2 892 fiches à 0, code de sortie 0. On garde donc le fichier de la veille et on échoue, pour
+  // que le workflow alerte. Le compte se fait sur l'ANNÉE DEMANDÉE : au changement d'année, le
+  // fichier précédent n'en contient aucune et la première relecture de l'année neuve reste possible.
+  const connuesDeLAnnee = (precedent?.decisions ?? []).filter((d) => d.annee === year).length;
+  if (args.complet && lues === 0 && connuesDeLAnnee > 0) {
+    console.error(
+      `Relecture complète : aucune des ${seances.length} séance(s) de ${year} n'a pu être lue — ` +
+        `data/decisions.json (${connuesDeLAnnee} fiches) est conservé tel quel, rien n'est réécrit.`
+    );
+    process.exitCode = 1;
+    return;
   }
 
   const payload = await ecrire();
