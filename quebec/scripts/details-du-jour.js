@@ -29,10 +29,13 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { chargerCles } from './publier-details.js';
+import { estActive } from '../../api/_stripe.js';
 
 process.chdir(fileURLToPath(new URL('..', import.meta.url)));
 
 const VILLE = 'quebec';
+// Au plus tant de demandes d'un même abonné par matin : un abonné ne remplit pas seul le plafond.
+const DEMANDES_PAR_ABONNE = 10;
 const DEBUT = '2026-09-15'; // avant : l'échantillon de l'infolettre et le lot initial des résumés
 const args = new Map(process.argv.slice(2).map((a) => { const [k, v] = a.replace(/^--/, '').split('='); return [k, v ?? true]; }));
 const plafond = Number(args.get('plafond') ?? 30);
@@ -88,9 +91,23 @@ async function main() {
     }
   }
 
-  // Les demandes des abonnés, avant tout le reste.
+  // Les demandes des abonnés, avant tout le reste. D'abord, un « sans-montant » ne vaut que pour le
+  // résumé de ce jour-là : si un résumé refait trouve un montant, la demande repart (sinon
+  // api/detail.js refuserait ce dossier pour toujours, avec un texte devenu faux).
+  if (!args.has('essai')) await rouvrirSansMontant(avecMontant, deja).catch((err) => console.warn(`⚠ Demandes « sans-montant » non rouvertes : ${err.message}`));
   const demandes = await demandesEnAttente();
-  const demandees = [...new Set(demandes.map((d) => d.dossier_id))];
+  // Seulement celles d'abonnés ENCORE actifs ce matin : une demande faite avant une annulation ou
+  // une expiration attend, sans coûter une lecture (elle revient si la personne se réabonne).
+  // Et au plus DEMANDES_PAR_ABONNE par personne, les plus anciennes d'abord.
+  const actifs = await abonnesActifs();
+  const parAbonne = new Map();
+  const retenues = demandes.filter((d) => {
+    if (!actifs.has(d.user_id)) return false;
+    parAbonne.set(d.user_id, (parAbonne.get(d.user_id) ?? 0) + 1);
+    return parAbonne.get(d.user_id) <= DEMANDES_PAR_ABONNE;
+  });
+  if (retenues.length < demandes.length) console.log(`Demandes mises de côté : ${demandes.length - retenues.length} (abonnement inactif, ou plus de ${DEMANDES_PAR_ABONNE} par abonné).`);
+  const demandees = [...new Set(retenues.map((d) => d.dossier_id))];
   const traiter = async (ids, resultat) => {
     if (!ids.length || args.has('essai')) return;
     await marquerTraitees(ids, resultat).catch((err) => console.warn(`⚠ Demandes non marquées (${resultat}) : ${err.message}`));
@@ -116,12 +133,47 @@ const entetesSupabase = () => ({ apikey: process.env.SUPABASE_SERVICE_ROLE_KEY, 
 
 // Sans la table (SQL pas encore exécuté), aucune demande : l'étape continue comme avant.
 async function demandesEnAttente() {
-  const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/demandes_details?ville=eq.${VILLE}&traite_le=is.null&select=dossier_id,created_at&order=created_at`, { headers: entetesSupabase() });
+  const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/demandes_details?ville=eq.${VILLE}&traite_le=is.null&select=user_id,dossier_id,created_at&order=created_at`, { headers: entetesSupabase() });
   if (!res.ok) {
     console.warn(`⚠ Demandes d'abonnés ignorées : demandes_details → ${res.status}`);
     return [];
   }
   return res.json();
+}
+
+// Les abonnés actifs, selon la même règle que le site (api/_stripe.js, estActive). Par pages de
+// 1000, comme details_argent plus haut : Supabase ne rend jamais plus d'un coup.
+async function abonnesActifs() {
+  const actifs = new Set();
+  for (let debut = 0; ; debut += 1000) {
+    const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/abonnements?statut=eq.actif&select=user_id,statut,fin&order=user_id`, {
+      headers: { ...entetesSupabase(), Range: `${debut}-${debut + 999}` },
+    });
+    if (!res.ok) {
+      console.warn(`⚠ Abonnements illisibles (${res.status}) : aucune demande lue ce matin.`);
+      return new Set();
+    }
+    const lot = await res.json();
+    for (const a of lot) if (estActive(a)) actifs.add(a.user_id);
+    if (lot.length < 1000) return actifs;
+  }
+}
+
+// Les demandes classées « sans-montant » dont le dossier a maintenant un résumé avec montant (et
+// pas encore de détail) redeviennent en attente.
+async function rouvrirSansMontant(avecMontant, deja) {
+  const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/demandes_details?ville=eq.${VILLE}&resultat=eq.sans-montant&select=dossier_id`, { headers: entetesSupabase() });
+  if (!res.ok) throw new Error(`demandes_details → ${res.status}`);
+  const ids = [...new Set((await res.json()).map((d) => d.dossier_id))].filter((id) => avecMontant.has(id) && !deja.has(id));
+  if (!ids.length) return;
+  const liste = ids.map((id) => `"${id.replace(/"/g, '')}"`).join(',');
+  const maj = await fetch(`${process.env.SUPABASE_URL}/rest/v1/demandes_details?ville=eq.${VILLE}&resultat=eq.sans-montant&dossier_id=in.(${encodeURIComponent(liste)})`, {
+    method: 'PATCH',
+    headers: { ...entetesSupabase(), 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+    body: JSON.stringify({ traite_le: null, resultat: null }),
+  });
+  if (!maj.ok) throw new Error(`demandes_details → ${maj.status} ${await maj.text()}`);
+  console.log(`Demandes « sans-montant » rouvertes (le résumé a maintenant un montant) : ${ids.length}.`);
 }
 
 async function marquerTraitees(ids, resultat) {

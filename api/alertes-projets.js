@@ -29,6 +29,7 @@
 
 import { supabase, signature, site } from './_alertes.js';
 import { envoyerNumerosEnAttente } from './_infolettre.js';
+import { estActive } from './_stripe.js';
 
 const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis', longueuil: 'Longueuil' };
 const CLE = /^[\w-]{1,60}$/;
@@ -239,7 +240,7 @@ async function essaiPourSoi(jeton) {
   const uid = utilisateur?.id;
   if (!uid || !/^[0-9a-f-]{36}$/.test(uid) || !utilisateur.email) return { statut: 401, corps: { erreur: 'connexion requise' } };
   const [abonnement] = await supabase(`/rest/v1/abonnements?user_id=eq.${uid}&select=statut,fin`);
-  if (!abonnement || abonnement.statut !== 'actif' || (abonnement.fin && new Date(abonnement.fin) <= new Date())) {
+  if (!estActive(abonnement)) {
     return { statut: 403, corps: { erreur: 'réservé aux abonnés' } };
   }
   const depuis = new Date(Date.now() - 24 * 3600e3).toISOString();
