@@ -610,3 +610,34 @@ test("le résultat ferme le dispositif, malgré l'accent final", () => {
     assert.equal(r.dispositif, 'de faire la chose décidée.', `fin : ${fin}`);
   }
 });
+
+// Trois conseils n'écrivent jamais « Et résolu : » — le dispositif suit directement le
+// second nom. Sans cette forme, Côte-des-Neiges, Outremont et Ville-Marie rendaient 1 % de
+// dispositifs contre 93 % ailleurs. Formule relevée telle quelle dans le procès-verbal de
+// Côte-des-Neiges du 6 juillet 2026, amendement compris.
+test("« appuyé par » ouvre le dispositif quand « Et résolu » manque", () => {
+  const cdn = [
+    'RÉSOLUTION CA26 170145',
+    "ADOPTION DE L'ORDRE DU JOUR",
+    'Il est proposé par Sonny Moroz',
+    'appuyé par Milany Thiagarajah',
+    "D’adopter l'ordre du jour de la séance ordinaire du 6 juillet 2026 à 18 heures 30 du",
+    "conseil d'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce.",
+    'EN AMENDEMENT',
+    'Il est proposé par Sonny Moroz',
+    'appuyé par Milany Thiagarajah',
+    'D’ajouter au point 65.03 une motion visant à honorer les victimes.',
+    "ADOPTÉE À L'UNANIMITÉ",
+    '10.02',
+  ].join('\n');
+  const r = decouperResolutions(cdn, { instance: 'CA_Cdn' })[0];
+  assert.match(r.dispositif, /^D’adopter l'ordre du jour/);
+  assert.match(r.dispositif, /EN AMENDEMENT/, "l'amendement fait partie de ce qui a été décidé");
+  assert.doesNotMatch(r.dispositif, /ADOPTÉE/);
+  assert.equal(r.resultat, "Adoptée à l'unanimité");
+  assert.match(r.objet, /^ADOPTION DE L'ORDRE DU JOUR/);
+
+  // Ville-Marie, même forme, résultat en minuscules.
+  const vma = ['CA26 240290', 'Adoption de l’ordre du jour', 'Il est proposé par Robert Beaudry', 'appuyé par Effie Giannou', 'D’adopter l’ordre du jour de la séance du 7 juillet 2026.', "Adoptée à l'unanimité.", '10.04'].join('\n');
+  assert.equal(decouperResolutions(vma, { instance: 'CA_Vma' })[0].dispositif, 'D’adopter l’ordre du jour de la séance du 7 juillet 2026.');
+});
