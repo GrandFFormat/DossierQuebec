@@ -46,6 +46,8 @@ Pour chacune de : Accueil, Décisions, Votes nominatifs, Conseil municipal, Lexi
 - [ ] aucun texte qui promet encore quelque chose de faux (« pas encore accessible », « en attente », « prototype »)
 - [ ] chaque lien « PDF officiel » ouvre le bon document, à la bonne page (en tester 5 au hasard, dont un sommaire)
 - [ ] la carte des districts charge et chaque district mène à ses décisions
+- [ ] le bouton « retour en haut » (la flèche ↑, en bas à droite) apparaît dès qu'on a descendu de 600 px, sur toutes les pages assez longues, en clair comme en sombre, et sur téléphone
+- [ ] aucune étiquette ni aucun titre ne reste en français quand la page est en anglais (catégories, types, instances, titres de procès-verbal et d'ordre du jour)
 
 ## 5. Ce qu'on dit à la Ville et au lecteur
 

@@ -7,6 +7,10 @@
 //   node --env-file=../api.env scrapers/traductions.js --plafond=150     routine du matin (refresh.js)
 //   node --env-file=../api.env scrapers/traductions.js --refusees        réessaie les refus du garde-fou
 //
+// Les catégories — « Subvention - Soutien financier avec convention », « Appel d'offres
+// public » — sont des étiquettes que la Ville réutilise d'une décision à l'autre : on les
+// traduit une fois chacune, pas une fois par décision.
+//
 // Les objets voyagent par paquets de vingt dans un seul appel : ce sont des titres d'une ligne, et
 // vingt titres coûtent moins qu'un appel chacun. Le même garde-fou des nombres s'y applique.
 //
@@ -107,6 +111,33 @@ const OUTIL_OBJETS = {
 };
 const PAR_PAQUET = 20;
 
+// Les catégories : de courtes étiquettes, trente par appel.
+const CONSIGNE_CATEGORIES = `You translate the category labels the City of Montréal (Canada) puts on
+council decisions, from French into Canadian English, for a civic information website. These are short
+labels, not sentences: translate each one faithfully and keep it short. Usual terms: Subvention = Grant;
+Contrat = Contract; Appel d'offres public = Public call for tenders; Contrat d'approvisionnement =
+Supply contract; Contrat de services professionnels = Professional services contract; Contrat de
+construction = Construction contract; Règlement = By-law; Ordonnance = Order; Immeuble = Property;
+Dépôt = Tabling; Budget - Autorisation de dépense = Budget - Spending authorization; Urbanisme = Urban
+planning; Procès-verbal = Minutes; Ordre du jour = Agenda; Administration - Accord de principe = 
+Administration - Agreement in principle; Nomination = Appointment; Entente = Agreement. Keep proper
+names, numbers and any code exactly as written. You are given a numbered list; fill in the tool with one
+translation per number, same count, same order.`;
+
+const OUTIL_CATEGORIES = {
+  name: 'enregistrer_categories',
+  description: 'Enregistre la traduction anglaise de chaque catégorie, dans le même ordre.',
+  input_schema: {
+    type: 'object',
+    properties: {
+      categories: { type: 'array', items: { type: 'string' }, description: 'Une étiquette traduite par étiquette reçue, même nombre et même ordre.' },
+    },
+    required: ['categories'],
+    additionalProperties: false,
+  },
+};
+const PAR_PAQUET_CATEGORIES = 30;
+
 const args = new Map(process.argv.slice(2).map((a) => { const [k, v] = a.replace(/^--/, '').split('='); return [k, v ?? true]; }));
 
 function requete(r) {
@@ -167,6 +198,17 @@ function requeteObjets(paquet) {
     messages: [{ role: 'user', content: paquet.map((d, i) => `${i + 1}. ${d.objet}`).join('\n') }],
   };
 }
+function requeteCategories(paquet) {
+  return {
+    model: MODELE,
+    max_tokens: 3000,
+    system: CONSIGNE_CATEGORIES,
+    tools: [OUTIL_CATEGORIES],
+    tool_choice: { type: 'tool', name: OUTIL_CATEGORIES.name },
+    messages: [{ role: 'user', content: paquet.map((c, i) => `${i + 1}. ${c}`).join('\n') }],
+  };
+}
+
 export function verifierObjets(paquet, sortie) {
   const objets = (sortie?.objets ?? []).map(decoder).map((o) => String(o ?? '').trim());
   if (objets.length !== paquet.length) return { raison: `${objets.length} titres au lieu de ${paquet.length}` };
@@ -181,10 +223,11 @@ async function main() {
   const { decisions = [] } = JSON.parse(await readFile(DECISIONS, 'utf8'));
   let precedent = {};
   let objetsPrecedents = {};
+  let categoriesPrecedentes = {};
   // Les refus du garde-fou, gardés pour ne pas repayer chaque matin une traduction qui échouera
   // encore : on réessaie quand le résumé français est refait, ou avec --refusees.
   let refusPrecedents = {};
-  try { ({ traductions: precedent = {}, refus: refusPrecedents = {}, objets: objetsPrecedents = {} } = JSON.parse(await readFile(OUT, 'utf8'))); } catch {}
+  try { ({ traductions: precedent = {}, refus: refusPrecedents = {}, objets: objetsPrecedents = {}, categories: categoriesPrecedentes = {} } = JSON.parse(await readFile(OUT, 'utf8'))); } catch {}
 
   // Seuls les résumés qu'une fiche affiche vraiment. Une décision qui a le résumé de son sommaire
   // ne montre plus celui écrit d'après le texte de la résolution : le traduire serait payer pour
@@ -212,6 +255,12 @@ async function main() {
   const paquets = [];
   for (let i = 0; i < objetsAFaire.length; i += PAR_PAQUET) paquets.push(objetsAFaire.slice(i, i + PAR_PAQUET));
 
+  // Les catégories : une par étiquette distincte, jamais une par décision.
+  const categoriesAFaire = [...new Set(decisions.filter((d) => d.type === 'Résolution' && d.categorie).map((d) => d.categorie))]
+    .filter((c) => args.has('force') || !categoriesPrecedentes[c]);
+  const paquetsCategories = [];
+  for (let i = 0; i < categoriesAFaire.length; i += PAR_PAQUET_CATEGORIES) paquetsCategories.push(categoriesAFaire.slice(i, i + PAR_PAQUET_CATEGORIES));
+
   const jetonsEstimes = aFaire.reduce((n, r) => n + Math.round(JSON.stringify(r.puces).length / 3.6), 0);
   // La sortie d'une traduction pèse au moins autant que l'entrée, et l'outil ajoute sa
   // structure : compter la sortie à l'égal de l'entrée sous-estimait la facture de moitié
@@ -222,12 +271,14 @@ async function main() {
   const total = args.has('batch') ? (cout + coutObjets) / 2 : cout + coutObjets;
   console.log(`Résumés : ${Object.keys(precedent).length} déjà traduits, ${candidats.length} à faire, ${aFaire.length} cette fois.`);
   console.log(`Titres  : ${Object.keys(objetsPrecedents).length} déjà traduits, ${objetsCandidats.length} à faire, ${objetsAFaire.length} cette fois en ${paquets.length} paquet(s).`);
+  console.log(`Étiquettes : ${Object.keys(categoriesPrecedentes).length} déjà traduites, ${categoriesAFaire.length} à faire en ${paquetsCategories.length} paquet(s).`);
   console.log(`~${total.toFixed(2)} $ US estimés${args.has('batch') ? ' (lot, moitié prix)' : ''}.`);
-  if ((!aFaire.length && !paquets.length) || args.has('dry-run')) return;
+  if ((!aFaire.length && !paquets.length && !paquetsCategories.length) || args.has('dry-run')) return;
   if (!process.env.ANTHROPIC_API_KEY) { console.log('Traductions : sautées, pas de clé ANTHROPIC_API_KEY.'); return; }
 
   const client = new Anthropic();
   const objetsFaits = {};
+  const categoriesFaites = {};
   const faites = {};
   const refus = {};
   const echecs = [];
@@ -257,17 +308,32 @@ async function main() {
     for (const d of v.refuses) echecs.push(`titre ${d.numero ?? d.id} : nombres différents`);
   };
 
+  // Un paquet d'étiquettes : même garde-fou des nombres, étiquette par étiquette.
+  const garderCategories = (paquet, message) => {
+    entree += message.usage?.input_tokens ?? 0;
+    sortie += message.usage?.output_tokens ?? 0;
+    const sorties = (lireSortie(message, OUTIL_CATEGORIES)?.categories ?? []).map(decoder).map((c) => String(c ?? '').trim());
+    if (sorties.length !== paquet.length) { echecs.push(`paquet d'étiquettes : ${sorties.length} au lieu de ${paquet.length}`); return; }
+    paquet.forEach((fr, i) => {
+      const en = sorties[i];
+      if (en && !CONTROLE.test(en) && memesNombres(fr, en)) categoriesFaites[fr] = en;
+      else echecs.push(`étiquette « ${fr.slice(0, 40)} » refusée`);
+    });
+  };
+
   if (args.has('batch')) {
     const cle = (r) => r.id.replace(/[^A-Za-z0-9_-]/g, '_').slice(0, 64);
     const parCle = new Map(aFaire.map((r) => [cle(r), r]));
     const parPaquet = new Map(paquets.map((p, i) => [`objets_${i}`, p]));
+    const parPaquetCategories = new Map(paquetsCategories.map((p, i) => [`categories_${i}`, p]));
     const lot = await client.messages.batches.create({
       requests: [
         ...aFaire.map((r) => ({ custom_id: cle(r), params: requete(r) })),
         ...paquets.map((p, i) => ({ custom_id: `objets_${i}`, params: requeteObjets(p) })),
+        ...paquetsCategories.map((p, i) => ({ custom_id: `categories_${i}`, params: requeteCategories(p) })),
       ],
     });
-    console.log(`Lot ${lot.id} envoyé (${aFaire.length} résumés, ${paquets.length} paquets de titres).`);
+    console.log(`Lot ${lot.id} envoyé (${aFaire.length} résumés, ${paquets.length} paquets de titres, ${paquetsCategories.length} paquets d'étiquettes).`);
     let etat = lot;
     while (etat.processing_status !== 'ended') {
       await new Promise((ok) => setTimeout(ok, 30_000));
@@ -276,6 +342,12 @@ async function main() {
       console.log(`  ${etat.processing_status} — ${c.succeeded} réussis, ${c.processing} en cours, ${c.errored} en erreur`);
     }
     for await (const res of await client.messages.batches.results(lot.id)) {
+      const paquetC = parPaquetCategories.get(res.custom_id);
+      if (paquetC) {
+        if (res.result.type !== 'succeeded') { echecs.push(`${res.custom_id} : ${res.result.type}`); continue; }
+        garderCategories(paquetC, res.result.message);
+        continue;
+      }
       const paquet = parPaquet.get(res.custom_id);
       if (paquet) {
         if (res.result.type !== 'succeeded') { echecs.push(`${res.custom_id} : ${res.result.type}`); continue; }
@@ -301,6 +373,15 @@ async function main() {
         }
       }));
     }
+    for (let i = 0; i < paquetsCategories.length; i += CONCURRENCE) {
+      await Promise.all(paquetsCategories.slice(i, i + CONCURRENCE).map(async (p) => {
+        try {
+          garderCategories(p, await client.messages.create(requeteCategories(p)));
+        } catch (e) {
+          echecs.push(`paquet d'étiquettes : ${e.message}`);
+        }
+      }));
+    }
     for (let i = 0; i < paquets.length; i += CONCURRENCE) {
       await Promise.all(paquets.slice(i, i + CONCURRENCE).map(async (p) => {
         try {
@@ -315,6 +396,7 @@ async function main() {
   // Les traductions d'un résumé disparu ne sont plus utiles.
   const idsDecisions = new Set(decisions.map((d) => d.id));
   const objets = Object.fromEntries(Object.entries({ ...objetsPrecedents, ...objetsFaits }).filter(([id]) => idsDecisions.has(id)));
+  const categories = { ...categoriesPrecedentes, ...categoriesFaites };
   const ids = new Set(resumes.map((r) => r.id));
   const traductions = Object.fromEntries(Object.entries({ ...precedent, ...faites }).filter(([id]) => ids.has(id)));
   const refusGardes = Object.fromEntries(Object.entries({ ...refusPrecedents, ...refus }).filter(([id]) => ids.has(id) && !faites[id]));
@@ -326,11 +408,13 @@ async function main() {
     avertissement: "Traductions automatiques des résumés et des titres français ; chaque nombre a été vérifié contre le français. Les documents de la Ville sont en français et font foi.",
     nombre: Object.keys(traductions).length,
     nombreObjets: Object.keys(objets).length,
+    nombreCategories: Object.keys(categories).length,
     traductions,
     objets,
+    categories,
     refus: refusGardes,
   }), 'utf8');
-  console.log(`Traductions : ${Object.keys(faites).length} résumés et ${Object.keys(objetsFaits).length} titres faits (${echecs.length} refusés ou en échec) — ${Object.keys(traductions).length} résumés et ${Object.keys(objets).length} titres au total, ${coutReel.toFixed(2)} $ US.`);
+  console.log(`Traductions : ${Object.keys(faites).length} résumés et ${Object.keys(objetsFaits).length} titres et ${Object.keys(categoriesFaites).length} étiquettes faits (${echecs.length} refusés ou en échec) — ${Object.keys(traductions).length} résumés et ${Object.keys(objets).length} titres au total, ${coutReel.toFixed(2)} $ US.`);
   for (const e of echecs.slice(0, 15)) console.warn(`  ⚠ ${e}`);
 }
 
