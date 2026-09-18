@@ -5,7 +5,7 @@
 //
 // Le terme reste en français — c'est lui qu'on croise dans les documents de la Ville — et reçoit un
 // équivalent anglais ; la définition, « on dit aussi » et « où vous le voyez » sont traduits. Un
-// seul appel (30 termes, quelques cents). Refait seulement quand data/lexique.json change
+// seul appel (33 termes, quelques cents, sur Sonnet). Refait seulement quand data/lexique.json change
 // (empreinte des textes français).
 //
 // Écrit data/lexique-en.json : { generatedAt, source, categories: { cle: titre }, entrees: { <terme>:
@@ -73,7 +73,7 @@ async function main() {
 
   const client = new Anthropic();
   const message = await client.messages.create({
-    model: 'claude-opus-5',
+    model: 'claude-sonnet-5',
     max_tokens: 16000,
     system: CONSIGNE,
     tools: [OUTIL],
@@ -85,8 +85,8 @@ async function main() {
   const entrees = Object.fromEntries((sortie?.entrees ?? []).filter((e) => termes.has(e.terme)).map(({ terme, ...reste }) => [terme, reste]));
   if (Object.keys(entrees).length !== termes.size) throw new Error(`lexique anglais incomplet : ${Object.keys(entrees).length}/${termes.size}`);
   const categories = Object.fromEntries(Object.keys(lexique.categories).map((k) => [k, sortie.categories?.[k] ?? lexique.categories[k]]));
-  await writeFile(OUT, JSON.stringify({ generatedAt: new Date().toISOString(), source: empreinte, modele: 'claude-opus-5', genereParIA: true, categories, entrees }, null, 1), 'utf8');
-  const cout = (message.usage.input_tokens / 1e6) * 5 + (message.usage.output_tokens / 1e6) * 25;
+  await writeFile(OUT, JSON.stringify({ generatedAt: new Date().toISOString(), source: empreinte, modele: 'claude-sonnet-5', genereParIA: true, categories, entrees }, null, 1), 'utf8');
+  const cout = (message.usage.input_tokens / 1e6) * 2 + (message.usage.output_tokens / 1e6) * 10;
   console.log(`Lexique anglais : ${termes.size} termes traduits — ${cout.toFixed(2)} $ US.`);
 }
 
