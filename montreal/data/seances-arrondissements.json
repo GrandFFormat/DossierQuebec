@@ -1,24 +1,24 @@
 {
- "generatedAt": "2026-09-18T14:50:24.686Z",
+ "generatedAt": "2026-09-18T15:28:22.197Z",
  "source": "https://ville.montreal.qc.ca/documents/Adi_Public/",
  "licence": "Documents publics de la Ville de Montréal — reproduction avec mention de la source, usage non commercial (voir README).",
  "methode": "Sondage des noms de fichiers publiés : l'existence du document prouve la séance. Les séances extraordinaires, dont l'heure est imprévisible, ne sont pas couvertes. Le Plateau-Mont-Royal, qui publie par sa page et non sous Adi_Public, est lu depuis cette page : la date vient du document lui-même (voir lib/plateau.js).",
  "annee": 2026,
  "partiel": false,
  "nombre": 129,
- "requetes": 1776,
+ "requetes": 1857,
  "parArrondissement": [
   {
    "arrondissement": "Ahuntsic-Cartierville",
    "seances": 7,
    "nouvelles": 0,
-   "requetes": 82
+   "requetes": 103
   },
   {
    "arrondissement": "Anjou",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 42
+   "requetes": 72
   },
   {
    "arrondissement": "Côte-des-Neiges–Notre-Dame-de-Grâce",
@@ -66,7 +66,7 @@
    "arrondissement": "Pierrefonds-Roxboro",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 42
+   "requetes": 72
   },
   {
    "arrondissement": "Le Plateau-Mont-Royal",
@@ -144,7 +144,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Pir_PV_ORDI_2026-01-12_19h00_FR.pdf"
+   "preuve": "CA_Pir_PV_ORDI_2026-01-12_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=16970"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Anj_2026-01-13_19h00",
@@ -155,7 +159,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Anj_PV_ORDI_2026-01-13_19h00_FR.pdf"
+   "preuve": "CA_Anj_PV_ORDI_2026-01-13_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=16977"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Cdn_2026-02-02_19h00",
@@ -210,7 +218,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Pir_PV_ORDI_2026-02-02_19h00_FR.pdf"
+   "preuve": "CA_Pir_PV_ORDI_2026-02-02_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17030"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Pmr_2026-02-02_18h30",
@@ -258,7 +270,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Anj_PV_ORDI_2026-02-03_19h00_FR.pdf"
+   "preuve": "CA_Anj_PV_ORDI_2026-02-03_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17035"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Ibs_2026-02-03_19h30",
@@ -335,7 +351,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Ahu_PV_ORDI_2026-02-09_19h00_FR.pdf"
+   "preuve": "CA_Ahu_PV_ORDI_2026-02-09_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17040"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Mtn_2026-02-09_19h00",
@@ -401,7 +421,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Anj_PV_ORDI_2026-03-03_19h00_FR.pdf"
+   "preuve": "CA_Anj_PV_ORDI_2026-03-03_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17090"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Cdn_2026-03-09_19h00",
@@ -445,7 +469,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Pir_PV_ORDI_2026-03-09_19h00_FR.pdf"
+   "preuve": "CA_Pir_PV_ORDI_2026-03-09_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17113"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Pmr_2026-03-09_18h30",
@@ -570,7 +598,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Ahu_PV_ORDI_2026-03-16_19h00_FR.pdf"
+   "preuve": "CA_Ahu_PV_ORDI_2026-03-16_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17118"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Pmr_2026-03-20_09h30",
@@ -596,7 +628,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Anj_PV_ORDI_2026-04-07_19h00_FR.pdf"
+   "preuve": "CA_Anj_PV_ORDI_2026-04-07_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17172"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Ibs_2026-04-07_19h30",
@@ -706,7 +742,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Ahu_PV_ORDI_2026-04-13_19h00_FR.pdf"
+   "preuve": "CA_Ahu_PV_ORDI_2026-04-13_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17175"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Cdn_2026-04-13_19h00",
@@ -761,7 +801,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Pir_PV_ORDI_2026-04-13_19h00_FR.pdf"
+   "preuve": "CA_Pir_PV_ORDI_2026-04-13_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17199"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Pmr_2026-04-13_18h30",
@@ -809,7 +853,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Ahu_PV_ORDI_2026-05-04_19h00_FR.pdf"
+   "preuve": "CA_Ahu_PV_ORDI_2026-05-04_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17229"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Cdn_2026-05-04_18h30",
@@ -875,7 +923,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Pir_PV_ORDI_2026-05-04_19h00_FR.pdf"
+   "preuve": "CA_Pir_PV_ORDI_2026-05-04_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17266"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Pmr_2026-05-04_16h00",
@@ -934,7 +986,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Anj_PV_ORDI_2026-05-05_19h00_FR.pdf"
+   "preuve": "CA_Anj_PV_ORDI_2026-05-05_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17271"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Ibs_2026-05-05_19h30",
@@ -1066,7 +1122,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Pir_PV_ORDI_2026-06-01_19h00_FR.pdf"
+   "preuve": "CA_Pir_PV_ORDI_2026-06-01_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17321"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Pmr_2026-06-01_18h30",
@@ -1103,7 +1163,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Anj_PV_ORDI_2026-06-02_19h00_FR.pdf"
+   "preuve": "CA_Anj_PV_ORDI_2026-06-02_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17330"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Ibs_2026-06-02_19h30",
@@ -1180,7 +1244,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Ahu_PV_ORDI_2026-06-08_19h00_FR.pdf"
+   "preuve": "CA_Ahu_PV_ORDI_2026-06-08_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17345"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Mtn_2026-06-08_19h00",
@@ -1235,7 +1303,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Ahu_ODJP_ORDI_2026-07-06_19h00_FR.pdf"
+   "preuve": "CA_Ahu_ODJP_ORDI_2026-07-06_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17393"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Cdn_2026-07-06_18h30",
@@ -1393,7 +1465,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Pir_ODJP_ORDI_2026-08-03_19h00_FR.pdf"
+   "preuve": "CA_Pir_ODJP_ORDI_2026-08-03_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Anj_2026-08-04_19h00",
@@ -1404,7 +1480,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Anj_PV_ORDI_2026-08-04_19h00_FR.pdf"
+   "preuve": "CA_Anj_PV_ORDI_2026-08-04_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17442"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Slt_2026-08-04_19h30",
@@ -1426,7 +1506,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Anj_ODJP_ORDI_2026-09-01_19h00_FR.pdf"
+   "preuve": "CA_Anj_ODJP_ORDI_2026-09-01_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Ibs_2026-09-01_19h30",
@@ -1550,7 +1634,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Ahu_ODJP_ORDI_2026-09-14_19h00_FR.pdf"
+   "preuve": "CA_Ahu_ODJP_ORDI_2026-09-14_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17514"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
   {
    "id": "CA_Las_2026-09-14_19h00",
@@ -1572,7 +1660,11 @@
    "heure": "19h00",
    "variante": "ORDI",
    "source": "sondage des documents publiés",
-   "preuve": "CA_Pir_ODJ_ORDI_2026-09-14_19h00_FR.pdf"
+   "preuve": "CA_Pir_ODJ_ORDI_2026-09-14_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17532"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   }
  ]
 }
