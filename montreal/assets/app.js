@@ -11,6 +11,9 @@ import { libelleEn, themeEn } from './libelles-en.js';
 // Les libellés qui viennent des données (type, instance, résultat, fonction, rôle) : traduits en
 // anglais, intacts en français. Les noms propres restent français dans les deux cas.
 const lib = (texte) => (EN ? libelleEn(texte) : texte);
+// Les étiquettes de catégorie viennent des données et sont traduites en lot
+// (data/resumes-en.json, scrapers/traductions.js) : une par étiquette, pas une par décision.
+const categorieEn = (c) => (EN ? (etat.traductionsEn?.categories?.[c] ?? c) : c);
 
 const PAS = 60; // fiches affichées par palier
 const PAS_SEANCES = 8; // séances affichées par palier, en mode groupé
@@ -224,7 +227,7 @@ function carteDecision(d) {
       <span>${dateFr(d.date)}</span>
       <span class="puce">${echapper(lib(d.type))}</span>
       ${d.instance ? `<span class="puce">${echapper(lib(d.instance))}</span>` : ''}
-      ${d.categorie ? `<span class="puce">${echapper(d.categorie)}</span>` : ''}
+      ${d.categorie ? `<span class="puce">${echapper(categorieEn(d.categorie))}</span>` : ''}
       ${d.unite ? `<span class="puce">${echapper(d.unite)}</span>` : ''}
       ${d.resultat ? `<span class="resultat ${classeResultat(d.resultat)}">${echapper(lib(d.resultat))}</span>` : ''}
       ${d.voteEnregistre ? `<span class="puce genre-vote">${tr('vote enregistré', 'recorded vote')}</span>` : ''}
@@ -991,6 +994,7 @@ async function init() {
   // aussi (data/resumes-en.json). Ce qui n'est pas encore traduit reste en français, et le dit.
   if (EN && (etat.resumes || etat.decisions)) {
     const en = await charger('resumes-en');
+    etat.traductionsEn = en;
     const traductions = en?.traductions ?? {};
     const objets = en?.objets ?? {};
     for (const r of etat.resumes?.resumes ?? []) {
