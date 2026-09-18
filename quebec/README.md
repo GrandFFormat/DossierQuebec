@@ -537,7 +537,12 @@ chaque visite, surtout sur cellulaire.
 
 ### Le paiement : Stripe (construit le 14 sept. 2026, en mode essai)
 
-Un seul abonnement, 3 $ CA par mois, pour toutes les villes. Stripe tient la carte, les factures,
+Un seul abonnement pour toutes les villes : **10 $ CA par mois ou 80 $ CA par an** (Martin, 18 sept.
+2026 ; c'était 3 $ par mois jusque-là). Le navigateur n'envoie que « mensuel » ou « annuel » ; le
+serveur choisit le prix Stripe (`STRIPE_PRIX`, `STRIPE_PRIX_ANNUEL`) et **vérifie auprès de Stripe
+qu'il vaut bien 10 $ par mois ou 80 $ par an avant d'ouvrir le paiement** (`prixConforme`,
+`api/_stripe.js`) : un ancien `price_…` oublié dans Vercel répond « prix mal configuré » au lieu de
+vendre au mauvais montant. Sans `STRIPE_PRIX_ANNUEL`, seul le mensuel est offert. Stripe tient la carte, les factures,
 les renouvellements et l'annulation ; le site ne voit jamais une carte. Aucune bibliothèque : l'API
 Stripe est du formulaire HTTP et la signature des webhooks un HMAC (`api/_stripe.js`).
 
@@ -560,7 +565,8 @@ Stripe est du formulaire HTTP et la signature des webhooks un HMAC (`api/_stripe
   `STRIPE_ESSAI` ; tout le monde d'autre voit la liste d'attente, comme avant. C'est ce qui permet
   d'essayer en production sans ouvrir l'abonnement.
 
-**Variables Vercel** : `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRIX`, `STRIPE_ESSAI`,
+**Variables Vercel** : `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRIX` (mensuel),
+`STRIPE_PRIX_ANNUEL`, `STRIPE_ESSAI`,
 puis `STRIPE_OUVERT=1` le jour de l'ouverture. **Supabase** : `scripts/supabase-schema-stripe.sql`
 (colonnes `stripe_customer_id`, `stripe_subscription_id`, `annulation_prevue`). **Stripe** : le
 produit et son prix récurrent, le webhook vers `https://dossierquebec.ca/api/stripe-webhook`

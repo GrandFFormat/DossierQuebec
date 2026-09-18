@@ -1,8 +1,9 @@
 // L'abonnement payant, côté abonné : l'état, le paiement (Stripe Checkout) et la gestion (portail Stripe).
 //
 //   GET  /api/abonnement                     Authorization: Bearer <jeton Supabase> (facultatif)
-//        → { ouvert, mode, peutPayer, abonne, source, fin, annulationPrevue, gerable }
-//   POST /api/abonnement?action=paiement     (connecté, pas déjà abonné) { langue? } → { url } de Stripe Checkout
+//        → { ouvert, mode, peutPayer, abonne, source, fin, annulationPrevue, gerable, forfaits }
+//   POST /api/abonnement?action=paiement     (connecté, pas déjà abonné) { langue?, forfait? } → { url } de
+//                                             Stripe Checkout ; forfait = « mensuel » (défaut) ou « annuel »
 //   POST /api/abonnement?action=portail      (abonné par Stripe) → { url } du portail client Stripe
 //                                             (carte, factures, annulation)
 //
@@ -11,7 +12,7 @@
 // fois le paiement confirmé par Stripe.
 
 import { site } from './_alertes.js';
-import { adresseEssai, estActive, ligneAbonnement, modeStripe, paiementOuvert, stripe, stripeConfigure, utilisateurDe } from './_stripe.js';
+import { adresseEssai, estActive, ligneAbonnement, modeStripe, paiementOuvert, prixConforme, prixDe, stripe, stripeConfigure, utilisateurDe } from './_stripe.js';
 
 const jetonDe = (req) => String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '') || null;
 
@@ -34,6 +35,8 @@ export default async function handler(req, res) {
       fin: abonne ? ligne.fin : null,
       annulationPrevue: Boolean(abonne && ligne.annulation_prevue),
       gerable: Boolean(configure && ligne?.stripe_customer_id),
+      // Ce que la page peut offrir : l'annuel seulement si son prix est configuré.
+      forfaits: { mensuel: configure, annuel: Boolean(configure && prixDe('annuel')) },
     });
   }
   if (req.method !== 'POST') return res.status(405).json({ erreur: 'méthode non permise' });
@@ -45,16 +48,22 @@ export default async function handler(req, res) {
     if (action === 'paiement') {
       if (abonne) return res.status(409).json({ erreur: 'déjà abonné' });
       if (!peutPayer) return res.status(403).json({ erreur: "l'abonnement n'est pas encore ouvert" });
-      const anglais = String((typeof req.body === 'string' ? JSON.parse(req.body || '{}') : req.body)?.langue ?? '') === 'en';
+      let corps = req.body;
+      if (typeof corps === 'string') { try { corps = JSON.parse(corps || '{}'); } catch { corps = {}; } }
+      const anglais = String(corps?.langue ?? '') === 'en';
+      const forfait = String(corps?.forfait ?? 'mensuel');
+      if (!prixDe(forfait)) return res.status(400).json({ erreur: 'forfait indisponible' });
+      if (!(await prixConforme(forfait))) return res.status(503).json({ erreur: 'prix mal configuré' });
       const session = await stripe('/checkout/sessions', {
         mode: 'subscription',
-        'line_items[0][price]': process.env.STRIPE_PRIX,
+        'line_items[0][price]': prixDe(forfait),
         'line_items[0][quantity]': '1',
         success_url: `${site()}/mes-dossiers?abonnement=merci`,
         cancel_url: `${site()}/abonnement?abonnement=annule`,
         client_reference_id: u.id,
         'metadata[user_id]': u.id,
         'subscription_data[metadata][user_id]': u.id,
+        'subscription_data[metadata][forfait]': forfait,
         locale: anglais ? 'en' : 'fr-CA',
         allow_promotion_codes: 'true',
         ...(ligne?.stripe_customer_id ? { customer: ligne.stripe_customer_id } : { customer_email: u.email }),
