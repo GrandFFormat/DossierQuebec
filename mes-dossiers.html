@@ -73,23 +73,48 @@
   const chargerTraductionsEn = () => {
     traductionsEn ??= EN
       ? Promise.all(Object.keys(VILLES).map((v) => fetch(`/${v}/data/resumes-en.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)))
-        .then((fichiers) => Object.assign({}, ...fichiers.map((f) => f?.traductions ?? {})))
-      : Promise.resolve({});
+        .then((fichiers) => ({
+          // Québec indexe ses résumés par nom de fichier PDF, Montréal par numéro de résolution ou
+          // par numéro de dossier : les deux vivent dans la même table, les clés ne se croisent pas.
+          resumes: Object.assign({}, ...fichiers.map((f) => f?.traductions ?? {})),
+          // L'objet d'une décision, traduit (Montréal) : la ligne qu'on lit dans un projet.
+          objets: Object.assign({}, ...fichiers.map((f) => f?.objets ?? {})),
+        }))
+      : Promise.resolve({ resumes: {}, objets: {} });
     return traductionsEn;
+  };
+  // Les sujets suivables en anglais (titre, description, récapitulatif) : un fichier par ville,
+  // écrit par <volet>/scrapers/projets-en.js. Sans lui, le sujet reste en français.
+  const projetsEn = new Map();
+  const chargerProjetsEn = (ville) => {
+    if (!EN) return Promise.resolve({});
+    if (!projetsEn.has(ville)) {
+      projetsEn.set(ville, fetch(`/${ville}/data/projets/en.json`).then((r) => (r.ok ? r.json() : null)).then((f) => f?.projets ?? {}).catch(() => ({})));
+    }
+    return projetsEn.get(ville);
   };
   // Remplace les puces françaises par les anglaises, en gardant les françaises pour la recherche de
   // mots-clés et d'organismes (les décisions sont en français) : pucesFr.
   const enAnglais = async (dossiers) => {
     if (!EN || !dossiers?.length) return dossiers;
-    const traductions = await chargerTraductionsEn();
+    const { resumes, objets } = await chargerTraductionsEn();
     for (const d of dossiers) {
       if (d.pucesFr) continue;
-      const x = traductions[/\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1]];
-      if (!x) continue;
+      // Québec : la clé est le nom du PDF. Montréal : le numéro de résolution, ou le numéro de
+      // dossier quand le résumé vient du sommaire décisionnel.
+      const x = resumes[/\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1]] ?? resumes[d.numero] ?? resumes[d.dossier];
+      const objetEn = objets[d.numero]?.en ?? null;
+      if (!x && !objetEn) continue;
       d.pucesFr = d.puces ?? [];
-      d.puces = x.puces;
-      if ('phrase' in d) d.phrase = x.puces[0] ?? d.phrase;
-      if (d.montant && x.montantPrincipal) d.montant = x.montantPrincipal;
+      if (objetEn) {
+        d.objetFr = d.objet;
+        d.objet = objetEn;
+      }
+      if (x) {
+        d.puces = x.puces;
+        if (d.montant && x.montantPrincipal) d.montant = x.montantPrincipal;
+      }
+      if ('phrase' in d) d.phrase = x?.puces?.[0] ?? objetEn ?? d.phrase;
     }
     return dossiers;
   };
@@ -114,9 +139,40 @@
   const cache = new Map();
   const jeu = (ville, nom) => {
     const k = `${ville}/${nom}`;
-    if (!cache.has(k)) cache.set(k, fetch(`/${ville}/data/projets/${nom}.json`).then((r) => (r.ok ? r.json() : null)).then(async (f) => { if (f?.dossiers) await enAnglais(f.dossiers); return f; }).catch(() => null));
+    if (!cache.has(k)) cache.set(k, fetch(`/${ville}/data/projets/${nom}.json`).then((r) => (r.ok ? r.json() : null)).then(async (f) => {
+      if (f?.dossiers) await enAnglais(f.dossiers);
+      if (EN && f) await projetEnAnglais(ville, f);
+      return f;
+    }).catch(() => null));
     return cache.get(k);
   };
+  // Le titre, la description et le récapitulatif d'un sujet, en anglais (data/projets/en.json).
+  // Les numéros de résolution restent ceux du fichier français : ils ne se traduisent pas.
+  async function projetEnAnglais(ville, fichier) {
+    const tous = await chargerProjetsEn(ville);
+    // Le fichier d'un sujet (avec `cle`), ou l'index de la ville (avec `projets`).
+    if (fichier.cle) {
+      const en = tous[fichier.cle];
+      if (!en) return;
+      fichier.titre = en.titre ?? fichier.titre;
+      fichier.description = en.description ?? fichier.description;
+      if (fichier.recap && en.recap !== null) {
+        fichier.recap.enBref = en.enBref ?? fichier.recap.enBref;
+        fichier.recap.source = en.source ?? fichier.recap.source;
+        (fichier.recap.etapes ?? []).forEach((e, i) => Object.assign(e, en.etapes?.[i] ? { periode: en.etapes[i].periode, titre: en.etapes[i].titre, texte: en.etapes[i].texte } : {}));
+        (fichier.recap.aSurveiller ?? []).forEach((e, i) => { if (en.aSurveiller?.[i]) e.texte = en.aSurveiller[i].texte; });
+      }
+      return;
+    }
+    for (const [cle, p] of Object.entries(fichier.projets ?? {})) {
+      const en = tous[cle];
+      if (!en) continue;
+      p.titre = en.titre ?? p.titre;
+      p.description = en.description ?? p.description;
+      if (p.enBref) p.enBref = en.enBref ?? p.enBref;
+    }
+  }
+
   const indexVille = (ville) => jeu(ville, 'index');
   const fichierProjet = (ville, cle) => (/^[\w-]{1,60}$/.test(cle) ? jeu(ville, cle) : Promise.resolve(null));
 
