@@ -19,7 +19,10 @@ import { supabase } from './_alertes.js';
 
 export const stripeConfigure = () => Boolean(process.env.STRIPE_SECRET_KEY && process.env.STRIPE_PRIX && process.env.STRIPE_WEBHOOK_SECRET);
 export const modeStripe = () => (/^[sr]k_live_/.test(process.env.STRIPE_SECRET_KEY ?? '') ? 'reel' : 'test');
-export const paiementOuvert = () => process.env.STRIPE_OUVERT === '1';
+// STRIPE_OUVERT ne vaut qu'avec une clé du mode RÉEL. Posé par-dessus des clés d'essai — le geste
+// littéral de « débarrer » — il donnerait l'accès payant à n'importe qui contre la carte 4242, que la
+// page affiche elle-même en mode essai.
+export const paiementOuvert = () => process.env.STRIPE_OUVERT === '1' && modeStripe() === 'reel';
 // Comparées sans majuscules, guillemets ni « +étiquette » : « moi+essai@gmail.com » vaut pour
 // « moi@gmail.com » et inversement (la même boîte, donc la même personne).
 const adresseSimple = (a) => String(a ?? '').trim().replace(/^["']|["']$/g, '').toLowerCase().replace(/\+[^@]*@/, '@');
@@ -36,7 +39,11 @@ export async function stripe(chemin, parametres) {
     body: parametres ? new URLSearchParams(parametres).toString() : undefined,
   });
   const donnees = await res.json().catch(() => null);
-  if (!res.ok) throw new Error(`Stripe ${chemin.split('?')[0]} → ${res.status} ${donnees?.error?.message ?? ''}`);
+  if (!res.ok) {
+    const e = new Error(`Stripe ${chemin.split('?')[0]} → ${res.status} ${donnees?.error?.message ?? ''}`);
+    e.code = donnees?.error?.code ?? null; // « resource_missing » : l'objet n'existe pas dans ce mode (essai ou réel)
+    throw e;
+  }
   return donnees;
 }
 
@@ -120,6 +127,16 @@ export async function synchroniser(abonnementId, indiceUtilisateur) {
   const actif = ['active', 'trialing', 'past_due'].includes(sub.status);
   // Un vieil abonnement annulé ne remplace pas celui, actif, qui l'a suivi.
   if (!actif && existant?.stripe_subscription_id && existant.stripe_subscription_id !== sub.id && estActive(existant)) return 'autre';
+  // Deux abonnements vivants pour un même compte (deux paiements menés en parallèle) : la ligne n'en
+  // retient qu'un. On garde le premier et on le crie dans les journaux, pour que Martin annule et
+  // rembourse l'autre — sinon il débiterait sans que l'abonné puisse le voir.
+  if (actif && existant?.stripe_subscription_id && existant.stripe_subscription_id !== sub.id && estActive(existant)) {
+    const premier = await stripe(`/subscriptions/${encodeURIComponent(existant.stripe_subscription_id)}`).catch(() => null);
+    if (premier && ['active', 'trialing', 'past_due'].includes(premier.status)) {
+      console.error('DOUBLE ABONNEMENT', userId, '— gardé :', premier.id, '— à annuler et rembourser dans Stripe :', sub.id);
+      return 'double';
+    }
+  }
 
   const item = sub.items?.data?.[0] ?? {};
   const debut = sub.current_period_start ?? item.current_period_start;
@@ -137,6 +154,7 @@ export async function synchroniser(abonnementId, indiceUtilisateur) {
   else if (finPeriode) fin = (annulationPrevue ? (sub.cancel_at ?? finPeriode) : finPeriode + GRACE) * 1000;
   else fin = null;
 
+  let orphelin = false;
   await supabase('/rest/v1/abonnements?on_conflict=user_id', {
     methode: 'POST',
     entetes: { Prefer: 'resolution=merge-duplicates,return=minimal' },
@@ -150,6 +168,15 @@ export async function synchroniser(abonnementId, indiceUtilisateur) {
       annulation_prevue: annulationPrevue,
       updated_at: new Date().toISOString(),
     },
+  }).catch((e) => {
+    if (!/\b23503\b/.test(e.message)) throw e;
+    orphelin = true;
   });
+  // Le compte a été supprimé (sa ligne avec lui, en cascade) mais Stripe débite encore. Répondre 500
+  // ferait réessayer Stripe trois jours pour rien : on le crie, et on répond que c'est reçu.
+  if (orphelin) {
+    console.error('ABONNEMENT SANS COMPTE (compte supprimé) — à annuler dans Stripe :', sub.id, userId);
+    return 'sans-compte';
+  }
   return actif ? 'actif' : 'annule';
 }
