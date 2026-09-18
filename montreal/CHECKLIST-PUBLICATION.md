@@ -15,6 +15,7 @@ regarde. Quand tout est coché, la dernière section dit quoi changer pour publi
 
 - [x] Thème clair/sombre et zoom partagés avec Mes dossiers et les autres volets *(18 sept. 2026)*
 - [ ] La pastille « EN » traduit les six pages, ou n'apparaît pas — pas de page à moitié traduite
+- [ ] Les mêmes filtres et boutons qu'à Québec sur la page Décisions : recherche, type, sujet, affichage, instance, « Avec résumé seulement », « Tout déplier » — et rien de plus *(case « Avec résumé seulement » révélée le 18 sept. 2026)*
 - [ ] Le menu des villes mène à Montréal et en revient, depuis chaque volet
 - [ ] Mes dossiers : les 16 sujets de Montréal s'affichent, avec leur récapitulatif, en clair et en sombre
 - [ ] S'abonner à un sujet de Montréal fonctionne de bout en bout (abonnement.html → courriel reçu)
