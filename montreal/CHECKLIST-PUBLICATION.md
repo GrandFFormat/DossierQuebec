@@ -17,6 +17,7 @@ regarde. Quand tout est coché, la dernière section dit quoi changer pour publi
 - [ ] La pastille « EN » traduit les six pages, ou n'apparaît pas — pas de page à moitié traduite
 - [ ] Les mêmes filtres et boutons qu'à Québec sur la page Décisions : recherche, type, sujet, affichage, instance, « Avec résumé seulement », « Tout déplier » — et rien de plus *(case « Avec résumé seulement » révélée le 18 sept. 2026)*
 - [ ] Le menu des villes mène à Montréal et en revient, depuis chaque volet
+- [ ] Le favicon (la petite icône de l'onglet) s'affiche sur les six pages, en clair et en sombre, et se distingue de celui de Québec
 - [ ] Mes dossiers : les 16 sujets de Montréal s'affichent, avec leur récapitulatif, en clair et en sombre
 - [ ] S'abonner à un sujet de Montréal fonctionne de bout en bout (abonnement.html → courriel reçu)
 - [x] Le bloc « Les courriels » au bas de l'accueil ne montre que ceux de Montréal *(18 sept. 2026)*
