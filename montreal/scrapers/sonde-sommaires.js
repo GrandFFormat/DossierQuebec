@@ -44,8 +44,24 @@ for (const url of urls) {
   // Les trois ordres du jour les plus récents, et le dernier procès-verbal. Trois plutôt qu'un :
   // le document le plus récent est parfois un simple avis de convocation d'une seule page, et
   // conclure là-dessus ferait dire « pas de sommaires » à un arrondissement qui en publie.
+  // Tous les autres liens de la page qui mènent à un document : un arrondissement peut publier
+  // ses sommaires ailleurs que par le visualiseur (un PDF déposé, un autre portail).
+  const autres = [];
+  for (const m of html.matchAll(/<a\b[^>]*href\s*=\s*["']([^"'#][^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi)) {
+    let href = m[1].replace(/&amp;/g, '&');
+    try { href = new URL(href, url).href; } catch { continue; }
+    if (/afficherpdf/i.test(href)) continue;
+    const label = m[2].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    if (/\.pdf|Adi_Public|document|sommaire|d[ée]cisionnel|ordre du jour|proc[èe]s-verbal/i.test(`${label} ${href}`)) autres.push({ label, href });
+  }
+  if (autres.length) {
+    console.log(`  ${autres.length} autre(s) lien(s) vers un document :`);
+    for (const a of autres.slice(0, 15)) console.log(`      « ${a.label.slice(0, 60)} » ${a.href.slice(0, 110)}`);
+  }
+  page.autres = autres.slice(0, 40);
+
   const cibles = [
-    ...docs.filter((d) => d.genre === 'ODJ').sort((a, b) => Number(b.doc) - Number(a.doc)).slice(0, 3),
+    ...docs.filter((d) => d.genre === 'ODJ').sort((a, b) => Number(b.doc) - Number(a.doc)).slice(0, 6),
     ...docs.filter((d) => d.genre === 'PV').sort((a, b) => Number(b.doc) - Number(a.doc)).slice(0, 1),
   ];
   for (const cible of cibles) {
