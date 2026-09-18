@@ -8,6 +8,13 @@ import { dernierVolet } from './navigation.js';
 
 const ICONES = { mensuel: '🗓️', conseil: '🏛️', arrondissement: '📍' };
 
+const libSorte = (o) => ({
+  nom: tr(o.nom, o.nomEn || o.nom),
+  quoi: tr(o.quoi, o.quoiEn || o.quoi),
+  rythme: tr(o.rythme, o.rythmeEn || o.rythme),
+});
+
+
 const etatServeur = async (s) => {
   const r = await fetch('/api/infolettre?action=etat', { headers: s ? { Authorization: `Bearer ${s.access_token}` } : {}, cache: 'no-store' }).catch(() => null);
   return r?.ok ? r.json() : null;
@@ -50,23 +57,25 @@ const sorteVilleActive = (etat, ville, type, langues) =>
 
 // ---------- rendu Québec (simple) ----------
 function ligneSorte(ville, o, { coche = false, langue = 'fr' } = {}) {
+  const L = libSorte(o);
   return `<label class="ab-courriel">
     <input type="checkbox" data-ville="${echapper(ville)}" data-type="${echapper(o.cle)}" data-langue="${echapper(langue)}"${coche ? ' checked' : ''}>
     <span class="ab-courriel-texte">
-      <span class="ab-courriel-nom">${ICONES[o.cle] ?? '📬'} ${echapper(o.nom)}</span>
-      <span class="ab-courriel-rythme">${echapper(o.rythme)}</span>
-      <span class="ab-courriel-quoi">${echapper(o.quoi)}</span>
+      <span class="ab-courriel-nom">${ICONES[o.cle] ?? '📬'} ${echapper(L.nom)}</span>
+      <span class="ab-courriel-rythme">${echapper(L.rythme)}</span>
+      <span class="ab-courriel-quoi">${echapper(L.quoi)}</span>
     </span>
   </label>`;
 }
 
 function ligneArrondissementSimple(ville, o, suivis, { retirable = false, langue = 'fr' } = {}) {
   const restants = o.arrondissements.filter((a) => !suivis.includes(a.cle));
+  const L = libSorte(o);
   return `<div class="ab-courriel ab-courriel-arr">
     <span class="ab-courriel-texte">
-      <span class="ab-courriel-nom">${ICONES.arrondissement} ${echapper(o.nom)}</span>
-      <span class="ab-courriel-rythme">${echapper(o.rythme)}</span>
-      <span class="ab-courriel-quoi">${echapper(o.quoi)}</span>
+      <span class="ab-courriel-nom">${ICONES.arrondissement} ${echapper(L.nom)}</span>
+      <span class="ab-courriel-rythme">${echapper(L.rythme)}</span>
+      <span class="ab-courriel-quoi">${echapper(L.quoi)}</span>
       ${suivis.length ? `<span class="ab-arr-suivis">${suivis.map((cle) => `<span class="ab-arr-puce">${echapper(nomArrondissement([o], cle))}${retirable ? `<button type="button" class="ab-arr-retirer" data-ville="${echapper(ville)}" data-arrondissement="${echapper(cle)}" data-langue="${echapper(langue)}" aria-label="${tr('Retirer', 'Remove')} ${echapper(nomArrondissement([o], cle))}">×</button>` : ''}</span>`).join('')}</span>` : ''}
       ${restants.length ? `<select class="ab-arr-choix" data-ville="${echapper(ville)}" data-langue="${echapper(langue)}" aria-label="${tr('Choisir un arrondissement', 'Choose a borough')}">
         <option value="">${suivis.length ? tr('Ajouter un arrondissement…', 'Add a borough…') : tr('Choisir mon arrondissement…', 'Choose my borough…')}</option>
@@ -108,7 +117,7 @@ function blocMontreal(etat, villeEtat, { retirable = false, cocherSuivis = false
     <legend>${tr('1. Langues', '1. Languages')}</legend>
     <p class="ab-zone-aide">${tr('Chaque lettre cochée plus bas part dans chaque langue cochée ici.', 'Each letter checked below is sent in every language checked here.')}</p>
     <div class="ab-zone-cases">
-      ${languesDispo.map((lang) => `<label class="ab-langue"><input type="checkbox" class="ab-langue-case" data-ville="${echapper(ville)}" data-langue="${lang}"${languesCochees.includes(lang) ? ' checked' : ''}> ${lang === 'fr' ? 'Français' : 'English'}</label>`).join('')}
+      ${languesDispo.map((lang) => `<label class="ab-langue"><input type="checkbox" class="ab-langue-case" data-ville="${echapper(ville)}" data-langue="${lang}"${languesCochees.includes(lang) ? ' checked' : ''}> ${lang === 'fr' ? tr('Français', 'French') : 'English'}</label>`).join('')}
     </div>
   </fieldset>`;
 
@@ -118,9 +127,9 @@ function blocMontreal(etat, villeEtat, { retirable = false, cocherSuivis = false
     return `<label class="ab-courriel">
       <input type="checkbox" class="ab-sorte-ville" data-ville="${echapper(ville)}" data-type="${echapper(o.cle)}"${coche ? ' checked' : ''}>
       <span class="ab-courriel-texte">
-        <span class="ab-courriel-nom">${ICONES[o.cle] ?? '📬'} ${echapper(o.nom)}</span>
-        <span class="ab-courriel-rythme">${echapper(o.rythme)}</span>
-        <span class="ab-courriel-quoi">${echapper(o.quoi)}</span>
+        <span class="ab-courriel-nom">${ICONES[o.cle] ?? '📬'} ${echapper(libSorte(o).nom)}</span>
+        <span class="ab-courriel-rythme">${echapper(libSorte(o).rythme)}</span>
+        <span class="ab-courriel-quoi">${echapper(libSorte(o).quoi)}</span>
       </span>
     </label>`;
   };
@@ -182,7 +191,11 @@ function choixDepuisFormulaire(racine) {
   return out;
 }
 
-const noteDe = (v) => (v?.note ? `<p class="ab-note ab-infolettre-note">${v.note}</p>` : '');
+const noteDe = (v) => {
+  if (!v?.note && !v?.noteEn) return '';
+  const texte = v.noteEn ? tr(v.note, v.noteEn) : v.note;
+  return texte ? `<p class="ab-note ab-infolettre-note">${texte}</p>` : '';
+};
 export async function formulaireInfolettre(zone, { ville = null } = {}) {
   if (!zone) return;
   const s = await session().catch(() => null);
@@ -232,7 +245,7 @@ export async function formulaireInfolettre(zone, { ville = null } = {}) {
     puce.className = 'ab-arr-puce';
     puce.dataset.arrondissement = sel.value;
     const nom = sel.selectedOptions[0]?.textContent ?? sel.value;
-    puce.innerHTML = `${nom}<button type="button" class="ab-arr-retirer ab-arr-mtl-accum" data-arrondissement="${sel.value}" aria-label="Retirer">×</button>`;
+    puce.innerHTML = `${nom}<button type="button" class="ab-arr-retirer ab-arr-mtl-accum" data-arrondissement="${sel.value}" aria-label="${tr('Retirer', 'Remove')}">×</button>`;
     liste.appendChild(puce);
     sel.querySelector(`option[value="${CSS.escape(sel.value)}"]`)?.remove();
     sel.value = '';

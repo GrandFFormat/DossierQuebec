@@ -17,7 +17,10 @@ export const VILLES_INFOLETTRE = { quebec: 'Québec', montreal: 'Montréal' };
 // Mes dossiers). Montréal : à retirer le jour où son premier compte rendu du mois est publié
 // (Martin, 18 septembre 2026 : « cette légende tu l'enlèveras quand la newsletter sera créée »).
 export const NOTES_INFOLETTRE = {
-  montreal: "<strong>Montréal commence :</strong> le premier compte rendu du mois arrive à la fin de septembre 2026. Il n'y en a pas encore pour août. Les courriels après chaque séance partent à compter des prochaines séances.",
+  montreal: {
+    fr: "<strong>Montréal commence :</strong> le premier compte rendu du mois arrive à la fin de septembre 2026. Il n'y en a pas encore pour août. Les courriels après chaque séance partent à compter des prochaines séances.",
+    en: "<strong>Montréal is starting:</strong> the first monthly roundup arrives at the end of September 2026. There isn't one for August yet. After-meeting emails start with the upcoming meetings.",
+  },
 };
 
 // Langues offertes par ville. Montréal : FR et EN (chaque combo type×langue = un envoi).
@@ -31,18 +34,27 @@ export const NOM_LANGUE = { fr: 'Français', en: 'English' };
 export const TYPES_INFOLETTRE = {
   mensuel: {
     nom: 'Le compte rendu du mois',
+    nomEn: 'The monthly roundup',
     quoi: 'Tout ce que la Ville a décidé dans le mois : les plus gros montants, toutes les subventions et tous les contrats, les votes divisés.',
+    quoiEn: 'Everything City Hall decided this month: the biggest amounts, every grant and every contract, the split votes.',
     rythme: 'une fois par mois',
+    rythmeEn: 'once a month',
   },
   conseil: {
     nom: 'Après chaque séance du conseil de la ville',
+    nomEn: 'After each city council meeting',
     quoi: 'Ce que le conseil a décidé à sa séance : les montants, les votes divisés, ce qui a été reporté.',
+    quoiEn: 'What council decided at its meeting: the amounts, the split votes, what was postponed.',
     rythme: 'environ aux deux semaines',
+    rythmeEn: 'about every two weeks',
   },
   arrondissement: {
     nom: 'Mon arrondissement',
+    nomEn: 'My borough',
     quoi: "Ce que le conseil de votre arrondissement a décidé à sa séance : permis, travaux, subventions de quartier, circulation.",
-    rythme: 'après chaque séance de l’arrondissement',
+    quoiEn: 'What your borough council decided at its meeting: permits, works, neighbourhood grants, traffic.',
+    rythme: "après chaque séance de l'arrondissement",
+    rythmeEn: 'after each borough council meeting',
     parArrondissement: true,
   },
 };
@@ -88,7 +100,7 @@ export const offreDe = (ville) => {
   return Object.entries(TYPES_INFOLETTRE)
     .filter(([, t]) => !t.parArrondissement || (ARRONDISSEMENTS[ville] ?? []).length)
     .map(([cle, t]) => ({
-      cle, nom: t.nom, quoi: t.quoi, rythme: t.rythme,
+      cle, nom: t.nom, nomEn: t.nomEn, quoi: t.quoi, quoiEn: t.quoiEn, rythme: t.rythme, rythmeEn: t.rythmeEn,
       arrondissements: t.parArrondissement ? ARRONDISSEMENTS[ville].map(({ cle: c, nom }) => ({ cle: c, nom })) : null,
       langues,
     }));
