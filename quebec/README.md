@@ -579,13 +579,51 @@ Martin) : paiement Checkout, ligne `abonnements` écrite par le webhook 4 second
 des abonnés ouvertes, puis annulation par le portail (`annulation_prevue`, fin ramenée à la fin du
 mois payé). Le produit, le webhook et le portail existent aussi en mode réel, prêts pour l'ouverture.
 
-**Avant d'ouvrir en réel** : la réponse du greffe (usage commercial, N/Réf. 2026-09-11-2684) ; des
-conditions d'utilisation et une politique de remboursement liées depuis la page Abonnement ;
-retirer « prix prévu » des pages Abonnement et Mes dossiers ; refaire produit, prix, webhook et
-portail en mode réel (ils ne passent pas du mode essai au réel) et changer les trois clés ; faire
-valider les taxes (TPS/TVQ, seuil du petit fournisseur) par un comptable ; une politique de
-confidentialité qui dit que les adresses courriel sont traitées hors Québec (Resend en Virginie,
-Supabase, Vercel), comme le demande la Loi 25.
+**Durci le 18 sept. 2026, après un audit de lancement** (cinq angles — bascule Stripe, promesses,
+droit québécois, exploitation, sécurité — 70 constats, chacun contre-vérifié) :
+
+- **`STRIPE_OUVERT=1` ne vaut qu'avec une clé du mode réel** (`paiementOuvert`). Posé sur des clés
+  d'essai — le geste littéral de « débarrer » — il aurait donné l'accès payant à n'importe qui contre
+  la carte 4242, que la page affiche elle-même en mode essai.
+- **Un seul client Stripe par compte** : celui de la ligne s'il existe dans ce mode, sinon celui que
+  Stripe connaît sous cette adresse, sinon un nouveau (`clientStripe`). Avec `customer_email`, deux
+  paiements ouverts en parallèle créaient deux clients, dont un invisible dans le portail.
+- **Jamais de vente par-dessus un abonnement vivant** : un impayé que Stripe relance encore renvoie
+  au portail (changer de carte) ; un abonnement payé chez Stripe dont la ligne ne le dit pas (webhook
+  perdu) est resynchronisé au clic. Deux abonnements vivants malgré tout : `synchroniser` garde le
+  premier et écrit `DOUBLE ABONNEMENT` dans les journaux Vercel — à annuler et rembourser dans Stripe.
+- **Ligne du mode essai lue avec les clés réelles** (« No such customer ») : le portail répond 404 et
+  le paiement repart sur un client neuf, au lieu de « Stripe ne répond pas » à chaque clic.
+- **Supabase en panne** : 503, jamais « pas abonné » ni un nouveau paiement.
+- **Session Checkout** : adresse de facturation exigée (le contrat à distance doit porter le nom et
+  l'adresse du consommateur), carte seulement (payé d'avance : la rétrofacturation reste possible),
+  plus de codes promo (la Loi 10 exige un avis 2 à 10 jours avant la fin d'une période à prix
+  réduit, et rien ne l'envoie), payable 31 minutes au lieu de 24 heures.
+- **« Annuler mon abonnement »** sur la page Abonnement (`action=annuler`) : le portail ouvert
+  directement sur l'annulation, sans motif demandé — la Loi 10 (en vigueur le 12 sept. 2026) exige
+  un bouton facile à repérer pour un abonnement conclu en ligne.
+- **Compte supprimé alors que Stripe débite encore** : le webhook répond 200 « sans-compte » et
+  écrit `ABONNEMENT SANS COMPTE` dans les journaux, au lieu de 500 et de trois jours de réessais.
+  Avant de supprimer un compte (demande Loi 25), annuler son abonnement dans Stripe.
+
+**Clé Stripe** : une clé restreinte suffit — Checkout Sessions et Customer portal en écriture,
+Customers en écriture, Subscriptions et Prices en lecture ; rien d'autre.
+
+**Avant d'ouvrir en réel** : la réponse du greffe (usage commercial, N/Réf. 2026-09-11-2684) — et
+les lettres aux greffes de Montréal et de Lévis promettent « aucun usage commercial » ; le forfait
+Vercel Pro (Hobby interdit « tout moyen de demander ou traiter un paiement des visiteurs ») ; des
+conditions (qui vend, avec nom, adresse, téléphone et courriel ; annulation ; remboursement)
+acceptées avant le paiement, et la copie du contrat envoyée dans les 15 jours ; une politique de
+confidentialité avec le responsable nommé (Loi 25 ; adresses traitées hors Québec : Resend en
+Virginie, Supabase, Vercel) ; l'immatriculation au REQ si l'activité se fait sous « DossierQuébec » ;
+retirer « prix prévu » des pages Abonnement et Mes dossiers ; une promesse par ville qui dit vrai
+(seul Québec a tout) ; le détail de l'argent livré plusieurs matins de suite ; un SMTP à soi pour les
+liens de connexion de Supabase ; refaire les deux prix, le webhook et le portail en mode réel (ils
+ne passent pas du mode essai au réel), changer les trois clés, puis **redéployer en décochant
+« Use project's Ignore Build Step »** (sinon `scripts/vercel-deployer.sh` annule le redéploiement du
+même commit et les nouvelles variables ne s'appliquent pas) ; avant la bascule, annuler tout de suite
+les abonnements d'essai et vider les lignes `source = 'stripe'` ; faire valider les taxes (TPS/TVQ,
+seuil du petit fournisseur) par un comptable.
 
 **Expéditeur des courriels** (15 sept. 2026) : la variable Vercel `DIGEST_FROM` vaut
 `DossierQuébec <compte-rendu@dossierquebec.ca>` — domaine dossierquebec.ca vérifié dans Resend
