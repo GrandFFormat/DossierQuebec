@@ -373,6 +373,16 @@ details p { background: var(--fond-2); border-radius: var(--rayon); padding: 12p
    c'est du texte officiel cité, pas un résumé, et il doit se lire comme tel. */
 .texte-decision:empty { display: none; }
 .texte-decision-pli { margin: 0 0 10px; }
+
+/* Le reste des décisions d'une séance, replié : un seul bouton, pas un mur de fiches. */
+.reste-seance > summary {
+  cursor: pointer; list-style: none; margin: 6px 0 2px; padding: 9px 14px;
+  border: 1px solid var(--ligne-forte); border-radius: var(--rayon);
+  background: var(--carte); color: var(--accent); font-weight: 700; font-size: 14px; text-align: center;
+}
+.reste-seance > summary::before { content: '▸ '; }
+.reste-seance[open] > summary::before { content: '▾ '; }
+.reste-seance > summary:hover { border-color: var(--accent); }
 .texte-decision-pli > summary { cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 600; list-style: none; }
 .texte-decision-pli > summary::before { content: '▸ '; }
 .texte-decision-pli[open] > summary::before { content: '▾ '; }
