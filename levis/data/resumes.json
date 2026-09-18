@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-17T14:35:17.211Z",
+ "generatedAt": "2026-09-18T14:01:23.177Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,26 +7,17 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-07-19",
+  "depuis": "2026-07-20",
   "plafond": 120
  },
- "nombre": 523,
- "genereCetteFois": 31,
- "echecs": [
-  {
-   "id": "APGI-GI-2026-045",
-   "raison": "résumé abîmé (séquences d'échappement illisibles) — sera redemandé"
-  },
-  {
-   "id": "DAJG-2026-017",
-   "raison": "résumé abîmé (séquences d'échappement illisibles) — sera redemandé"
-  }
- ],
+ "nombre": 525,
+ "genereCetteFois": 2,
+ "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 1.2318,
-  "jetonsEntree": 170998,
-  "jetonsSortie": 15073
+  "montant": 0.0559,
+  "jetonsEntree": 6863,
+  "jetonsSortie": 864
  },
  "resumes": [
   {
@@ -846,6 +837,58 @@
    "jetons": {
     "entree": 4816,
     "sortie": 513
+   }
+  },
+  {
+   "id": "APGI-GI-2026-045",
+   "numero": "APGI-GI-2026-045",
+   "resolution": "CV3660",
+   "date": "2026-09-15",
+   "unite": "Approvisionnement et gestion immobilière",
+   "objet": "Régularisation du titre de propriété de la rue Olivar-Asselin (lot 2 220 174 du cadastre du Québec, secteur Lévis)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/APGI-GI-2026-045.pdf",
+   "puces": [
+    "La Ville constate qu'un bout de la rue Olivar-Asselin, dans le secteur Lévis, ne lui appartient pas : le titre de propriété du lot 2 220 174 n'a jamais été transféré.",
+    "La rue est ouverte à la circulation publique depuis plus de dix ans, ce qui permet à la Ville de s'en déclarer propriétaire en vertu de la Loi sur les compétences municipales.",
+    "Le conseil identifierait officiellement ce bout de rue et autoriserait la greffière à publier les avis légaux requis, puis une déclaration au registre foncier.",
+    "Aucune taxe ne doit avoir été prélevée sur cette voie durant les dix dernières années pour que la démarche soit valide.",
+    "Le dossier passerait au comité exécutif le 8 septembre 2026 et au conseil de la Ville le 15 septembre 2026.",
+    "Un second avis doit être publié après le 60e et au plus tard le 90e jour suivant le premier avis.",
+    "Les frais de publication au registre foncier s'élèvent à 152,23 $, payés à même le budget de fonctionnement 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "152,23 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T14:01:23.177Z",
+   "jetons": {
+    "entree": 4221,
+    "sortie": 482
+   }
+  },
+  {
+   "id": "DAJG-2026-017",
+   "numero": "DAJG-2026-017",
+   "resolution": "CV3662",
+   "date": "2026-09-15",
+   "unite": "Affaires juridiques",
+   "objet": "Autorisation concernant la signature d’une transaction et quittance relative au lot 2 218 734 du cadastre du Québec",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DAJG-2026-017.pdf",
+   "puces": [
+    "La Ville veut signer une entente de règlement (transaction et quittance) avec les propriétaires du lot 2 218 734.",
+    "L'entente porte sur des travaux à réaliser à la suite d'avis du ministère de l'Environnement, de la Lutte contre les changements climatiques, de la Faune et des Parcs.",
+    "Les procureurs mandatés et le directeur des affaires juridiques et du greffe seraient autorisés à signer l'entente et les documents liés.",
+    "La décision doit passer au conseil de la Ville du 15 septembre.",
+    "Le document ne mentionne aucun montant et le texte de l'entente est joint en annexe confidentielle."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T14:01:22.429Z",
+   "jetons": {
+    "entree": 2642,
+    "sortie": 382
    }
   },
   {
