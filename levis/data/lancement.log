@@ -2,7 +2,7 @@
 > dossiervillelevis@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit aa04b04 — Node v22.23.2
+Code : commit 665fec0 — Node v22.23.2
 
 === Syntaxe du JavaScript du site ===
 
@@ -23,11 +23,9 @@ https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt : HTTP 403 Fo
   CE      17 séances, 17 avec procès-verbal
 
 === Décisions de l'année ===
-CV_2026-09-15 : 24 pages, 53 résolutions, 38 liées à un sommaire, 2 vote(s) nominal(aux)
-CV_2026-08-25 : 15 pages, 38 résolutions, 25 liées à un sommaire, 0 vote(s) nominal(aux)
 
-1836 décisions écrites dans data/decisions.json — 2 séance(s) lue(s) cette fois, 4 en attente de procès-verbal.
-54 nouveauté(s) depuis la dernière exécution.
+1836 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 4 en attente de procès-verbal.
+0 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
     641  Urbanisme
@@ -49,8 +47,8 @@ Pastilles thématiques :
      16  Culture et patrimoine
     107  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-07-19) ===
-Fenêtre depuis 2026-07-19 : 4 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-07-20) ===
+Fenêtre depuis 2026-07-20 : 4 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
 
 17 votes nominaux écrits dans data/votes.json (4 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
@@ -98,47 +96,35 @@ Mesure de 29 termes sur 4 procès-verbaux de 2026 en cache et 1836 décisions…
   Usage conditionnel  (recherche : usages? conditionnels?)
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-19 pas encore résumés (plafond : 120)…
-492 déjà résumés, 33 à faire.
+Sommaires depuis 2026-07-20 pas encore résumés (plafond : 120)…
+523 déjà résumés, 2 à faire.
 
 --- Estimation ---
-Documents à résumer  : 33
+Documents à résumer  : 2
 Modèle               : claude-opus-5
-Ratio mesuré         : 1.70 caractères/jeton (sur 12 documents)
-Jetons d'entrée      : ~170 152
-Jetons de sortie     : ~10 560
-Coût estimé          : ~1.11 $ US
+Ratio mesuré         : 1.17 caractères/jeton (sur 2 documents)
+Jetons d'entrée      : ~6 863
+Jetons de sortie     : ~640
+Coût estimé          : ~0.05 $ US
                        (moitié moins avec --batch, résultats en moins d'une heure)
 
 Génération…
-  … 4/33
-  … 8/33
-  … 12/33
-  … 16/33
-  … 20/33
-  … 24/33
-  … 28/33
-  … 32/33
-  … 33/33
+  … 2/2
 
-31 résumés générés, 523 au total dans data/resumes.json
-Coût réel : 1.23 $ US
-2 échec(s) — relancer la commande les reprendra.
+2 résumés générés, 525 au total dans data/resumes.json
+Coût réel : 0.06 $ US
 
 === Récapitulatifs des projets ===
-Récapitulatifs des projets : stations-epuration (9 dossiers), logement (10 dossiers)
-  stations-epuration           5 étape(s), 2 à surveiller · retirés : 0 mécanique, 2 contre-lecture
-  logement                     6 étape(s), 3 à surveiller · retirés : 0 mécanique, 1 contre-lecture
-  coût ≈ 0.42 $ US
+Récapitulatifs des projets : rien de nouveau.
 
 === Projets pour « Mes dossiers » ===
 Projets publics : 4 projets · index 2.8 Ko · fichiers de projet 45 Ko au total.
 Décisions attendues : 32 dossiers en attente, dont 0 avec une date cible · 45.4 Ko.
-Dossiers de l'année : 1384 · 1043 Ko · organismes suggérés : 89.
-Décisions récentes : 102 dossiers depuis le 2026-08-01 · 113 Ko.
+Dossiers de l'année : 1384 · 1045 Ko · organismes suggérés : 89.
+Décisions récentes : 102 dossiers depuis le 2026-08-01 · 114 Ko.
 
 === Chiffres de la page Abonnement ===
-Travail public : 2375 documents, 480 résumés, 17 votes, 4 projets.
+Travail public : 2375 documents, 482 résumés, 17 votes, 4 projets.
 
 === Bilan ===
   étapes         : 11
