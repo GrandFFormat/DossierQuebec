@@ -20,6 +20,12 @@ export const NOTES_INFOLETTRE = {
   montreal: "<strong>Montréal commence :</strong> le premier compte rendu du mois arrive à la fin de septembre 2026. Il n'y en a pas encore pour août. Les courriels après chaque séance partent à compter des prochaines séances.",
 };
 
+// Langues offertes par ville. Montréal : FR et EN (chaque combo type×langue = un envoi).
+// Québec : FR seulement pour l'instant.
+export const LANGUES_PAR_VILLE = { quebec: ['fr'], montreal: ['fr', 'en'] };
+export const NOM_LANGUE = { fr: 'Français', en: 'English' };
+
+
 // Les trois sortes de courriels. Chacune s'inscrit à part : on peut vouloir seulement son
 // arrondissement, ou seulement le gros compte rendu du mois.
 export const TYPES_INFOLETTRE = {
@@ -77,10 +83,16 @@ export const ARRONDISSEMENTS = {
 };
 
 // Ce qu'une ville offre : les sortes valides, et ses arrondissements s'il y en a.
-export const offreDe = (ville) =>
-  Object.entries(TYPES_INFOLETTRE)
+export const offreDe = (ville) => {
+  const langues = LANGUES_PAR_VILLE[ville] ?? ['fr'];
+  return Object.entries(TYPES_INFOLETTRE)
     .filter(([, t]) => !t.parArrondissement || (ARRONDISSEMENTS[ville] ?? []).length)
-    .map(([cle, t]) => ({ cle, nom: t.nom, quoi: t.quoi, rythme: t.rythme, arrondissements: t.parArrondissement ? ARRONDISSEMENTS[ville].map(({ cle: c, nom }) => ({ cle: c, nom })) : null }));
+    .map(([cle, t]) => ({
+      cle, nom: t.nom, quoi: t.quoi, rythme: t.rythme,
+      arrondissements: t.parArrondissement ? ARRONDISSEMENTS[ville].map(({ cle: c, nom }) => ({ cle: c, nom })) : null,
+      langues,
+    }));
+};
 
 // Un choix valide : { ville, type, arrondissement } — l'arrondissement vaut '' quand la sorte n'en
 // demande pas, et doit exister quand elle en demande un.
@@ -92,15 +104,17 @@ export function choixValide(choix) {
   if (TYPES_INFOLETTRE[type].parArrondissement) {
     if (!(ARRONDISSEMENTS[ville] ?? []).some((a) => a.cle === arrondissement)) return null;
   } else if (arrondissement) return null;
-  return { ville, type, arrondissement };
+  const langue = String(choix?.langue ?? 'fr');
+  if (!(LANGUES_PAR_VILLE[ville] ?? ['fr']).includes(langue)) return null;
+  return { ville, type, arrondissement, langue };
 }
 
-// « Québec — Mon arrondissement : Beauport », pour les courriels et les pages.
-export function nomComplet({ ville, type, arrondissement }) {
+export function nomComplet({ ville, type, arrondissement, langue = 'fr' }) {
   const nomVille = VILLES_INFOLETTRE[ville] ?? ville;
   const nomType = TYPES_INFOLETTRE[type]?.nom ?? type;
   const nomArr = (ARRONDISSEMENTS[ville] ?? []).find((a) => a.cle === arrondissement)?.nom;
-  return `${nomVille} — ${nomArr ? `${nomType} : ${nomArr}` : nomType}`;
+  const base = `${nomVille} — ${nomArr ? `${nomType} : ${nomArr}` : nomType}`;
+  return langue === 'en' ? `${base} (English)` : base;
 }
 
 export const COURRIEL = /^[^@\s]{1,100}@[^@\s]{1,100}\.[^@\s]{2,40}$/;
@@ -164,8 +178,10 @@ export async function courrielsAbonnes() {
 }
 
 // Le plus récent numéro publié d'une sorte (et d'un arrondissement, s'il y a lieu).
-export const dernierNumero = async ({ ville, type = 'mensuel', arrondissement = '' }) =>
-  (await supabase(`/rest/v1/infolettre_numeros?ville=eq.${ville}&type=eq.${type}&arrondissement=eq.${arrondissement}&publie_le=not.is.null&select=ville,type,arrondissement,mois,titre,html,html_abonnes&order=mois.desc&limit=1`))[0] ?? null;
+export const dernierNumero = async ({ ville, type = 'mensuel', arrondissement = '', langue = 'fr' }) => {
+  const q = (lang) => supabase(`/rest/v1/infolettre_numeros?ville=eq.${ville}&type=eq.${type}&arrondissement=eq.${arrondissement}&langue=eq.${lang}&publie_le=not.is.null&select=ville,type,arrondissement,langue,mois,titre,html,html_abonnes&order=mois.desc&limit=1`);
+  return (await q(langue))[0] ?? (langue !== 'fr' ? (await q('fr'))[0] : null) ?? null;
+};
 
 // Le courriel, prêt à partir : le bandeau de bienvenue (s'il y a lieu) et les liens de désinscription.
 export function composer(numero, { id, abonne, bienvenue }) {
