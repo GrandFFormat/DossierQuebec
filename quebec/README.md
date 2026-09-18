@@ -288,7 +288,7 @@ conseil d'abord, Longueuil après la réponse de la Ville, Montréal quand ses s
 
 **L'inscription et l'envoi (15 sept. 2026).** Une ligne par adresse et par ville (`infolettre_inscriptions`, `scripts/supabase-schema-infolettre.sql`) : les villes offertes sont celles de `VILLES_INFOLETTRE` dans `api/_infolettre.js` (Québec pour l'instant). Formulaire sur l'accueil du volet (`commun/infolettre.js`) : courriel « Confirmer mon inscription » (lien signé), puis le plus récent compte rendu publié part aussitôt avec un bandeau « Bienvenue ! Le prochain arrive au début de… ». Connecté avec la même adresse (déjà vérifiée) : confirmé tout de suite ; dans Mes dossiers, une case par ville. Garde-fous : pot de miel, une confirmation par adresse aux 10 minutes, 30 par heure en tout ; la réponse ne dit jamais si une adresse est déjà inscrite. Chaque courriel porte « ne plus recevoir celui de Québec » et « me désinscrire de tout », et l'en-tête de désinscription en un clic. L'édition abonnés va aux adresses d'un abonnement actif.
 
-**Chaque mois** : `npm run infolettre -- --mois=AAAA-MM --details`, relire les deux fichiers, puis `npm run infolettre -- --mois=AAAA-MM --publier` (dans `infolettre_numeros` ; refusé si le numéro est déjà parti). Avec `--pour-tous` (Martin, 17 sept. 2026, pour le numéro d'août) : l'édition gratuite devient l'édition abonnés offerte à tout le monde — même contenu doré, mais l'en-tête, l'encadré d'ouverture et le pied disent que c'est offert ce mois-ci et invitent à s'abonner ; l'édition abonnés, elle, ne change pas. Le cron quotidien des alertes (11 h UTC) l'envoie aux inscrits confirmés qui ne l'ont pas eu en bienvenue, **90 par jour au plus** (Resend gratuit : 100 par jour, alertes comprises) ; le reste part les jours suivants. Vercel Hobby n'accepte que deux crons, d'où ce passage partagé.
+**Chaque mois** : `npm run infolettre -- --mois=AAAA-MM --details`, relire les deux fichiers, puis `npm run infolettre -- --mois=AAAA-MM --publier` (dans `infolettre_numeros` ; refusé si le numéro est déjà parti). Avec `--pour-tous` (Martin, 17 sept. 2026, pour le numéro d'août) : l'édition gratuite devient l'édition abonnés offerte à tout le monde — même contenu doré, mais l'en-tête, l'encadré d'ouverture et le pied disent que c'est offert ce mois-ci et invitent à s'abonner ; l'édition abonnés, elle, ne change pas. Le cron quotidien des alertes (11 h UTC) l'envoie aux inscrits confirmés qui ne l'ont pas eu en bienvenue, **après les alertes des abonnés payants, avec ce qu'elles ont laissé** des 90 envois du jour (Resend gratuit : 100 par jour pour tout) ; le reste part les jours suivants. Jusqu'au 18 sept. 2026, l'infolettre passait avant et pouvait prendre 90 envois sur 100 : un jour de parution, il ne restait que 10 courriels pour les alertes payées. Resend Pro (20 $ US par mois, 50 000 courriels) le jour où abonnés et inscrits approchent 60 ou 70.
 
 **Le mot du mois**, facultatif : un fichier `infolettres/AAAA-MM-mot.md` écrit à la main s'ajoute sous
 le titre. Le courriel est fait de tableaux et de styles en ligne, sans variables CSS ni `color-mix`,
@@ -610,8 +610,9 @@ droit québécois, exploitation, sécurité — 70 constats, chacun contre-véri
 Customers en écriture, Subscriptions et Prices en lecture ; rien d'autre.
 
 **Avant d'ouvrir en réel** : la réponse du greffe (usage commercial, N/Réf. 2026-09-11-2684) — et
-les lettres aux greffes de Montréal et de Lévis promettent « aucun usage commercial » ; le forfait
-Vercel Pro (Hobby interdit « tout moyen de demander ou traiter un paiement des visiteurs ») ; des
+les lettres aux greffes de Montréal et de Lévis promettent « aucun usage commercial » ; ~~le forfait
+Vercel Pro~~ (fait le 18 sept. 2026 : Hobby interdit « tout moyen de demander ou traiter un paiement
+des visiteurs ») ; des
 conditions (qui vend, avec nom, adresse, téléphone et courriel ; annulation ; remboursement)
 acceptées avant le paiement, et la copie du contrat envoyée dans les 15 jours ; une politique de
 confidentialité avec le responsable nommé (Loi 25 ; adresses traitées hors Québec : Resend en
