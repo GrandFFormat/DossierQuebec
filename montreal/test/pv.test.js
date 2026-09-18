@@ -641,3 +641,23 @@ test("« appuyé par » ouvre le dispositif quand « Et résolu » manque", () =
   const vma = ['CA26 240290', 'Adoption de l’ordre du jour', 'Il est proposé par Robert Beaudry', 'appuyé par Effie Giannou', 'D’adopter l’ordre du jour de la séance du 7 juillet 2026.', "Adoptée à l'unanimité.", '10.04'].join('\n');
   assert.equal(decouperResolutions(vma, { instance: 'CA_Vma' })[0].dispositif, 'D’adopter l’ordre du jour de la séance du 7 juillet 2026.');
 });
+
+import { decouperSommaires } from '../lib/pv.js';
+test('les sommaires décisionnels annexés à un ordre du jour se découpent par dossier', () => {
+  const page = (numero, lignes) => ({ numero, lignes: lignes.map((texte) => ({ texte })) });
+  const pages = [
+    page(1, ['Séance ordinaire du conseil d’arrondissement', 'ORDRE DU JOUR', '20.01 Appel d’offres public']),
+    page(9, ['Système de gestion des', 'décisions des instances', 'RECOMMANDATION', 'CA : 20.01', 'Dossier # : 1264950005', 'D’attribuer un contrat à Limoges et Fils Inc.']),
+    page(10, ['Système de gestion des décisions des', 'instances', 'SOMMAIRE DÉCISIONNEL', 'IDENTIFICATION Dossier # :1264950005', 'CONTENU', 'Le parc Baldwin sera réaménagé.', 'JUSTIFICATION', 'Le parc date de 1960.']),
+    page(11, ['ASPECT(S) FINANCIER(S)', '3 406 916 $ taxes incluses']),
+    page(12, ['Système de gestion des CA : 30.04', 'décisions des instances', 'RECOMMANDATION', 'Dossier # : 1269226001', 'Demander au conseil municipal de majorer la dotation.']),
+    page(13, ['Système de gestion des décisions des', 'instances', 'SOMMAIRE DÉCISIONNEL', 'IDENTIFICATION Dossier # :1269226001', 'CONTENU', 'Réserve du passif environnemental.']),
+  ];
+  const s = decouperSommaires(pages);
+  assert.deepEqual(s.map((x) => [x.dossier, x.page, x.feuilles]), [['1264950005', 9, 2], ['1269226001', 12, 2]]);
+  assert.match(s[0].texte, /Le parc Baldwin sera réaménagé/);
+  assert.match(s[0].texte, /3 406 916 \$/);
+  assert.doesNotMatch(s[0].texte, /passif environnemental/);
+  assert.doesNotMatch(s[0].texte, /ORDRE DU JOUR/);
+  assert.deepEqual(decouperSommaires([page(1, ['ORDRE DU JOUR', '20.01 Contrat'])]), []);
+});
