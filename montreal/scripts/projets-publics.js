@@ -60,21 +60,18 @@ const numerosDe = (groupe) => [...new Set(groupe.map((d) => d.numero).filter(Boo
 // est facultatif et lu par /mes-dossiers : toute ville à qui il manque ses sommaires peut
 // dire pourquoi, de la même façon.
 const EN_ATTENTE_DE = {
-  titre: "Pas de récapitulatif : rien ne relie une décision à son explication",
-  titreEn: 'No recap: nothing links a decision to its explanation',
+  titre: "Pas encore de récapitulatif pour ce sujet",
+  titreEn: 'No recap for this topic yet',
   texte:
-    "Un projet se raconte à partir des sommaires décisionnels — la note que l'administration écrit pour chaque dossier, avec le contexte, les montants et les options écartées. C'est de là que viennent les récapitulatifs de Québec et de Lévis. Montréal produit exactement les mêmes documents et nous dit les déposer dans un répertoire public. Mais on ne peut pas les y retrouver : le numéro de dossier que la Ville imprime elle-même sous chaque décision — nous en avons 4 088 — n'y donne aucun résultat.",
+    "Un projet se raconte à partir des sommaires décisionnels — la note que l'administration écrit pour chaque dossier, avec le contexte, les montants et les options écartées. Montréal les publie : la plupart des conseils les annexent à l'ordre du jour de la séance, et nous les lisons depuis le 18 septembre 2026. Ce sujet n'a pas encore assez de dossiers, ou son récapitulatif n'a pas passé la vérification.",
   texteEn:
-    "A project's story comes from the decision summaries — the memo the administration writes for each file, with the context, the amounts and the options set aside. That is where the Québec and Lévis recaps come from. Montréal produces exactly the same documents and tells us they are filed in a public repository. But they cannot be found there: the file number the City itself prints under every decision — we hold 4,088 of them — returns no result.",
-  // Ce qui doit sauter aux yeux : que la Ville PRODUIT ces documents (sans quoi on lit
-  // « Montréal n'a pas de sommaires », ce qui est faux), et que le blocage est un index
-  // manquant, pas un secret.
-  surligne: ['Montréal produit exactement les mêmes documents', "n'y donne aucun résultat"],
-  surligneEn: ['Montréal produces exactly the same documents', 'returns no result'],
+    "A project's story comes from the decision summaries — the memo the administration writes for each file, with the context, the amounts and the options set aside. Montréal publishes them: most councils append them to the meeting agenda, and we have been reading them since 18 September 2026. This topic does not have enough files yet, or its recap did not pass verification.",
+  surligne: ['Montréal les publie', "n'a pas encore assez de dossiers"],
+  surligneEn: ['Montréal publishes them', 'does not have enough files yet'],
   ligne:
-    "Vérifié le 17 septembre 2026 dans le Répertoire des documents officiels de la Ville. Nous lui avons demandé d'indexer ce numéro : c'est un champ à ajouter dans un outil qui existe déjà. Le jour où ce sera fait, ce projet aura son récapitulatif, comme ceux de Québec et de Lévis.",
+    "Trois conseils d'arrondissement — Saint-Laurent, Ahuntsic-Cartierville, Pierrefonds-Roxboro — n'annexent pas leurs sommaires. Pour eux, nous lisons le texte de la résolution elle-même.",
   ligneEn:
-    "Checked on 17 September 2026 in the City's official document repository. We have asked them to index that number: it is one field to add in a tool that already exists. The day it is done, this project will have its recap, like those of Québec and Lévis.",
+    'Three borough councils — Saint-Laurent, Ahuntsic-Cartierville, Pierrefonds-Roxboro — do not append their summaries. For them, we read the text of the resolution itself.',
 };
 
 // La même chose en deux phrases, en tête de la liste des projets de la ville : sans elle, on
@@ -82,18 +79,18 @@ const EN_ATTENTE_DE = {
 // index qui manque.
 const LEGENDE = {
   texte:
-    "Les projets se racontent à partir des sommaires décisionnels, la note que l'administration écrit pour chaque dossier. Montréal les dépose dans un répertoire public, mais on ne peut pas les y retrouver : le numéro de dossier imprimé sous chaque décision n'y donne aucun résultat. Nous avons demandé à la Ville d'indexer ce numéro ; d'ici là, aucun projet de Montréal n'a de récapitulatif.",
+    "Les projets se racontent à partir des sommaires décisionnels, la note que l'administration écrit pour chaque dossier, et du texte des résolutions lu dans les procès-verbaux. Aucun sujet de Montréal n'a encore de récapitulatif.",
   texteEn:
-    "Projects are told from the decision summaries, the memo the administration writes for each file. Montréal files them in a public repository, but they cannot be found there: the file number printed under each decision returns no result. We have asked the City to index that number; until then, no Montréal project has a recap.",
+    'Projects are told from the decision summaries, the memo the administration writes for each file, and from the text of the resolutions as read in the minutes. No Montréal topic has a recap yet.',
 };
 
 // Dès qu'un sujet a son récapitulatif, la légende change de sens : elle ne dit plus ce qui
 // manque, elle dit d'où vient ce qu'on lit — et ce qui lui manque encore.
 const LEGENDE_AVEC_RECAPS = {
   texte:
-    "Les récapitulatifs de Montréal sont écrits à partir du texte des résolutions lu dans les procès-verbaux — ce que le conseil a décidé, pour combien, et sur quoi il s'appuie. Montréal ne publie pas ses sommaires décisionnels, qui donneraient le contexte et les options écartées ; nous lui avons demandé de les rendre trouvables.",
+    "Les récapitulatifs de Montréal sont écrits à partir du texte des résolutions lu dans les procès-verbaux — ce que le conseil a décidé, pour combien, et sur quoi il s'appuie. Les sommaires décisionnels, que la plupart des conseils annexent à leur ordre du jour, nourrissent les résumés de chaque décision ; ils entreront dans les récapitulatifs à la prochaine étape.",
   texteEn:
-    "Montréal recaps are written from the text of the resolutions as read in the minutes — what the council decided, for how much, and on what grounds. Montréal does not publish its decision summaries, which would give the context and the options set aside; we have asked the City to make them findable.",
+    'Montréal recaps are written from the text of the resolutions as read in the minutes — what the council decided, for how much, and on what grounds. The decision summaries, which most councils append to their agenda, feed each decision\'s summary; they will enter the recaps at the next step.',
 };
 
 const decisions = await lire('data/decisions.json', null);

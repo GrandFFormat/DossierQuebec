@@ -233,6 +233,19 @@ Ce qui a changé dans `app.js`, et pourquoi :
 | Accès aux sommaires décisionnels | 13, 16 et **17 sept.** | **En attente.** Réponse du 17 : pas d'accès public par identifiant, mais les sommaires sont dans le Répertoire des documents officiels (portail public). Mesuré le jour même : le fonds est là (1 279 « procès-verbal »), le numéro de dossier rend **0**. Demande reformulée une troisième fois — indexer ce numéro (`courriel-repertoire-alexis.md`). Relance le 30 sept. |
 | Droits d'usage | non envoyé | `courriel-greffe.md`, prêt. |
 
+**Mise à jour du 18 septembre 2026 : les sommaires étaient dans les ordres du jour.** Le
+Plateau-Mont-Royal intitule le sien « Ordre du jour et documents décisionnels » : 181 pages, dont
+quelques-unes d'ordre du jour et le reste en sommaires décisionnels, un par dossier, avec
+RECOMMANDATION, CONTENU, JUSTIFICATION et ASPECT(S) FINANCIER(S). En cherchant la même chose
+partout (`decouperSommaires`, lib/pv.js), on l'a trouvée dans les `ODJ_LPP` du comité exécutif, du
+conseil municipal, du conseil d'agglomération et de seize conseils d'arrondissement : 3 785 des
+5 516 résolutions de 2026 ont leur sommaire annexé. Trois conseils n'annexent rien
+(Saint-Laurent, Ahuntsic-Cartierville, Pierrefonds-Roxboro). Le lien « LPP » à côté de chaque
+point — celui qui pointe vers l'intranet — nous avait fait croire que le document n'était que là.
+Chaque sommaire trouvé va dans le cache de texte sous `sommaire_<dossier>`, la fiche de la décision
+renvoie à sa page dans l'ordre du jour, et `scrapers/resumes.js` le résume. Le paragraphe qui suit
+décrit l'état d'avant, gardé pour les trois conseils qui restent.
+
 **Où ça bloque, pour les sommaires.** Ce n'est pas un intranet, et ce n'est pas non plus un
 secret : les documents sont dans le **Répertoire des documents officiels**
 (`mtl.ged.montreal.ca`), un portail public sans compte qui annonce couvrir la Ville et ses 19

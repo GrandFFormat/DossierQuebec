@@ -74,11 +74,18 @@ function remplirSelect(select, valeurs) {
 // d'un sommaire décisionnel, ou du sommaire auquel une résolution renvoie. Sans ce second
 // cas, une séance d'arrondissement — qui ne contient que des résolutions — n'afficherait
 // aucun résumé, alors que la matière existe.
+// Le résumé du sommaire décisionnel passe avant celui du texte de la résolution : le
+// sommaire explique le pourquoi, la résolution ne dit que le quoi. Une décision peut
+// avoir les deux (lot Grok d'après la résolution, puis lecture des sommaires annexés).
 function resumePour(d) {
-  const direct = etat.parId.get(d.id);
-  if (direct) return { r: direct, indirect: false };
   const viaSommaire = d.sommaireId ? etat.parId.get(d.sommaireId) : null;
-  return viaSommaire ? { r: viaSommaire, indirect: true } : null;
+  if (viaSommaire) return { r: viaSommaire, indirect: viaSommaire.id !== d.id };
+  const direct = etat.parId.get(d.id);
+  return direct ? { r: direct, indirect: false } : null;
+}
+// Combien de décisions de la liste ont un résumé, par l'une ou l'autre voie.
+function nombreResumees(liste) {
+  return liste.filter((d) => d.type === 'Résolution' && resumePour(d)).length;
 }
 
 // Le résumé n'est affiché que s'il existe pour ce document précis, toujours identifié
@@ -269,7 +276,7 @@ function rendreDecisions() {
     `${nombreFr(nDecisions)} décision(s) affichée(s) sur ${nombreFr(totalDecisions())} lues dans les procès-verbaux de ${parametres.annee}` +
     (etat.decisions.seancesLues != null ? ` (${etat.decisions.seancesLues} séance(s) lue(s)${etat.decisions.seancesEnAttente ? `, ${etat.decisions.seancesEnAttente} en attente de procès-verbal` : ''}).` : '.') +
     (nDocuments ? ` S'y ajoutent ${nombreFr(nDocuments)} document(s) de séance : les procès-verbaux et ordres du jour eux-mêmes.` : '') +
-    (etat.parId.size ? ` ${nombreFr(etat.parId.size)} portent un résumé en langage clair.` : '');
+    (etat.parId.size ? ` ${nombreFr(nombreResumees(etat.decisions.decisions))} portent un résumé en langage clair.` : '');
 
   let reste;
   if (parSeance) {
