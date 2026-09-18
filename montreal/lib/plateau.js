@@ -1,4 +1,4 @@
-// Le Plateau-Mont-Royal publie autrement. Ce module le lit.
+// Quatre arrondissements publient autrement. Ce module lit leur page.
 //
 // Les dix-huit autres conseils déposent leurs documents sous Adi_Public avec un nom de
 // fichier prévisible (voir mtl.js) : la date et l'heure sont dans le nom, l'existence du
@@ -7,6 +7,14 @@
 // renvoie au visualiseur de la Ville avec un NUMÉRO de document qu'on ne peut pas deviner :
 //
 //   https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8483
+//
+// Et trois autres arrondissements — Ahuntsic-Cartierville, Anjou, Pierrefonds-Roxboro — déposent
+// bien leurs séances sous Adi_Public, mais l'ordre du jour qu'on y lit ne porte pas les sommaires
+// décisionnels, alors que celui de leur propre page les porte : 32 sommaires sur 169 pages pour
+// Ahuntsic, 18 sur 316 pour Anjou, 14 sur 51 pour Pierrefonds (mesuré le 18 septembre 2026).
+// Pour eux, la page ne remplace pas le sondage : elle lui ajoute une meilleure adresse d'ordre
+// du jour. Saint-Laurent, lui, ne publie ses sommaires nulle part — ses ordres du jour font une
+// à quatre pages.
 //
 // Et le nom ne dit pas la date. Elle est dans le document, sur ses premières lignes :
 // « Procès-verbal de la séance ordinaire du conseil d'arrondissement / tenue le lundi
@@ -22,6 +30,8 @@ import { lirePdf } from './pdf.js';
 export const ARRONDISSEMENT = 'Le Plateau-Mont-Royal';
 export const PAGE_PLATEAU = 'https://ville.montreal.qc.ca/portal/page?_pageid=7297,74659590&_dad=portal&_schema=PORTAL';
 const MEMOIRE = new URL('../data/plateau-documents.json', import.meta.url);
+// Les documents des autres pages, par arrondissement : même mémoire, un tiroir chacun.
+const MEMOIRE_PAGES = new URL('../data/pages-documents.json', import.meta.url);
 
 // ---------- La page ----------
 
@@ -135,6 +145,63 @@ export function seancesDesDocuments(documents, { annee = null } = {}) {
   return [...parCle.values()]
     .map(({ heureLue, ...s }) => ({ ...s, id: `${instance}_${s.date}_${s.heure}`, preuve: s.documents.PV ?? s.documents.ODJ }))
     .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+// Lit une page d'arrondissement et rend, par date de séance, l'adresse de ses documents :
+// { '2026-09-14': { ODJ: '…', PV: '…' } }. C'est ce qui permet d'aller chercher l'ordre du jour
+// qui porte les sommaires, quand celui d'Adi_Public ne les porte pas. La mémoire évite de
+// retélécharger un document déjà daté — ils pèsent plusieurs mégaoctets.
+export async function documentsDeLArrondissement(nom, page, compteur = { n: 0 }, { journal = console } = {}) {
+  let memoire = {};
+  try {
+    memoire = JSON.parse(await readFile(MEMOIRE_PAGES, 'utf8'));
+  } catch { /* première fois */ }
+  memoire.pages ??= {};
+  const tiroir = (memoire.pages[nom] ??= { page, documents: {} });
+  tiroir.page = page;
+  compteur.n++;
+  const html = await texte(page, { notFoundIsNull: true });
+  if (html == null) {
+    journal.warn(`    ⚠ ${nom} : sa page ne répond pas (404) — on garde ce qu'on savait.`);
+  }
+  const surLaPage = html ? documentsDePage(html, page) : [];
+  let nouveaux = 0;
+  for (const d of surLaPage) {
+    const cle = `${d.genre}_${d.doc}`;
+    if (tiroir.documents[cle]?.date) continue;
+    compteur.n++;
+    let lu = null;
+    try {
+      const buf = await octets(d.url, { accept: 'application/pdf' });
+      if (buf && buf.length) {
+        const pdf = await lirePdf(buf);
+        const lignes = pdf.pages.flatMap((p) => p.lignes.map((l) => l.texte));
+        const date = dateDuDocument(lignes, { heureDefaut: null });
+        lu = { date: date?.date ?? null, pages: pdf.nombrePages };
+      }
+    } catch (err) {
+      journal.warn(`    ⚠ ${nom} : ${d.genre} ${d.doc} illisible — ${err.message ?? err}`);
+    }
+    tiroir.documents[cle] = { genre: d.genre, doc: d.doc, url: d.url, luLe: new Date().toISOString().slice(0, 10), ...(lu ?? {}) };
+    if (lu?.date) nouveaux++;
+    await mkdir(new URL('../data/', import.meta.url), { recursive: true });
+    await writeFile(MEMOIRE_PAGES, JSON.stringify({ generatedAt: new Date().toISOString(), ...memoire }, null, 1) + '\n');
+  }
+  // Par date : le document le plus récent de chaque genre gagne (un ordre du jour révisé
+  // porte un numéro plus grand que celui qu'il remplace).
+  const parDate = {};
+  for (const d of Object.values(tiroir.documents)) {
+    if (!d.date) continue;
+    const place = (parDate[d.date] ??= {});
+    const actuel = place[`${d.genre}_doc`];
+    if (actuel == null || Number(d.doc) > Number(actuel)) {
+      place[d.genre] = d.url;
+      place[`${d.genre}_doc`] = d.doc;
+      place[`${d.genre}_pages`] = d.pages ?? null;
+    }
+  }
+  journal.log(`    ${nom} : ${surLaPage.length} document(s) sur sa page, ${nouveaux} daté(s) aujourd'hui, ${Object.keys(parDate).length} date(s) de séance connues.`);
+  return parDate;
 }
 
 // Lit la page, puis chaque document pas encore daté, et rend les séances de l'année.
