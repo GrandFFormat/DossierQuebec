@@ -90,6 +90,8 @@ const ETAPES = [
   // Ce que lit « Mes dossiers » : un fichier par sujet suivable, plus les dossiers de
   // l'année. Après les décisions et les récapitulatifs, dont il dépend entièrement.
   { nom: 'Sujets suivables et dossiers, pour Mes dossiers', argv: ['scripts/projets-publics.js'], secondaire: true },
+  // Le lexique en anglais : un seul appel, refait quand le lexique français change.
+  ...(resumes ? [{ nom: 'Lexique en anglais', argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scrapers/lexique-en.js'], secondaire: true }] : []),
   // La version anglaise : les puces et les titres traduits (data/resumes-en.json). Après les
   // résumés, dont elle dépend ; par lots comme eux, et avec le même garde-fou des nombres.
   ...(resumes

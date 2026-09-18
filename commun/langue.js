@@ -39,7 +39,7 @@ export const LANGUE = lireLangue();
 // Les volets dont le contenu est traduit. Ailleurs (Montréal pour l'instant), la page reste en
 // français même si l'anglais a été choisi, et n'offre pas la pastille : un en-tête anglais sur un
 // contenu français serait pire que rien. Les pages communes (sans data-ville) sont bilingues.
-const VOLETS_EN = new Set(['quebec']);
+const VOLETS_EN = new Set(['quebec', 'montreal']);
 const villePage = typeof document !== 'undefined' ? document.body?.dataset.ville : null;
 export const PAGE_BILINGUE = !villePage || VOLETS_EN.has(villePage);
 export const EN = LANGUE === 'en' && PAGE_BILINGUE;
