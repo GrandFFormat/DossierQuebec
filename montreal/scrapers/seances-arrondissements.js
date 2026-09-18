@@ -43,7 +43,7 @@ import {
   corrigerNomConseil,
   requete,
 } from '../lib/mtl.js';
-import { seancesPlateau } from '../lib/plateau.js';
+import { seancesPlateau, documentsDeLArrondissement } from '../lib/plateau.js';
 
 const OUT = new URL('../data/seances-arrondissements.json', import.meta.url);
 
@@ -236,7 +236,7 @@ async function principal() {
     // Un conseil qui publie par sa page plutôt que sous Adi_Public (Le Plateau-Mont-Royal,
     // voir lib/plateau.js) : on lit sa page et la date dans chacun de ses documents. Le
     // sondage du répertoire n'a aucun sens pour lui — 900 requêtes en septembre 2026 pour rien.
-    const { budget, publieParPage } = ARRONDISSEMENTS_CODES[nom] ?? {};
+    const { budget, publieParPage, page } = ARRONDISSEMENTS_CODES[nom] ?? {};
     let s;
     if (publieParPage) {
       try {
@@ -253,6 +253,25 @@ async function principal() {
         console.log(`    ${nom} : rien à l'heure habituelle, essai des autres heures…`);
         s = await calendrierDe(nom, annee, connues, compteur, 160, HEURES_CONNUES);
         if (s.length) console.log(`    ✓ trouvé à ${[...new Set(s.map((x) => x.heure))].join(', ')} — à corriger dans ARRONDISSEMENTS_CODES`);
+      }
+    }
+    // Un arrondissement qui publie sur sa page un ordre du jour plus complet que celui
+    // d'Adi_Public : on attache cette adresse à la séance du même jour, et decisions.js la
+    // préfère (c'est là que sont les sommaires décisionnels).
+    if (page && !publieParPage && s.length) {
+      try {
+        const parDate = await documentsDeLArrondissement(nom, page, compteur);
+        let attaches = 0;
+        for (const seance of s) {
+          const trouve = parDate[seance.date];
+          if (!trouve?.ODJ) continue;
+          seance.documents = { ...(seance.documents ?? {}), ODJ: trouve.ODJ };
+          seance.sourceOdj = 'page de l’arrondissement (sommaires décisionnels annexés)';
+          attaches++;
+        }
+        if (attaches) console.log(`    ${nom} : ${attaches} ordre(s) du jour repris de sa page, sommaires compris.`);
+      } catch (err) {
+        console.warn(`    ⚠ ${nom} : sa page n'a rien donné — ${err.message ?? err}`);
       }
     }
     toutes.push(...s);

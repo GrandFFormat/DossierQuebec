@@ -185,8 +185,11 @@ export const INSTANCES = {
 // changements annoncés mais pas encore visibles dans les noms de fichiers — Côte-des-
 // Neiges–Notre-Dame-de-Grâce a annoncé 18 h 30 en 2025, ses fichiers disent encore 19 h.
 export const ARRONDISSEMENTS_CODES = {
-  'Ahuntsic-Cartierville': { code: 'Ahu', heure: '19h00' },
-  Anjou: { code: 'Anj', heure: '19h00' },
+  // Trois arrondissements déposent bien leurs séances sous Adi_Public, mais l'ordre du jour
+  // qu'on y lit ne porte pas les sommaires décisionnels, alors que celui de leur propre page
+  // les porte (mesuré le 18 septembre 2026, voir lib/plateau.js). `page` dit où le chercher.
+  'Ahuntsic-Cartierville': { code: 'Ahu', heure: '19h00', page: 'https://ville.montreal.qc.ca/portal/page?_pageid=7957,88041590&_dad=portal&_schema=PORTAL' },
+  Anjou: { code: 'Anj', heure: '19h00', page: 'https://ville.montreal.qc.ca/portal/page?_pageid=6958,69949771&_dad=portal&_schema=PORTAL' },
   'Côte-des-Neiges–Notre-Dame-de-Grâce': { code: 'Cdn', heure: '19h00', heuresSecours: ['18h30'] },
   Lachine: { code: 'Lac', heure: '19h00' },
   LaSalle: { code: 'Las', heure: '19h00' },
@@ -194,7 +197,7 @@ export const ARRONDISSEMENTS_CODES = {
   'Mercier–Hochelaga-Maisonneuve': { code: 'Mhm', heure: '18h30' },
   'Montréal-Nord': { code: 'Mtn', heure: '19h00' },
   Outremont: { code: 'Out', heure: '19h00' },
-  'Pierrefonds-Roxboro': { code: 'Pir', heure: '19h00' },
+  'Pierrefonds-Roxboro': { code: 'Pir', heure: '19h00', page: 'https://ville.montreal.qc.ca/portal/page?_pageid=8377,93953605&_dad=portal&_schema=PORTAL' },
   // Le Plateau-Mont-Royal ne publie rien sous Adi_Public, et c'est établi, pas supposé :
   // 900 requêtes le 15 septembre 2026 — six codes plausibles sur 65 dates et deux formes,
   // puis huit heures sur le code Pmr — n'ont trouvé aucun document. Il publie par sa page
@@ -205,6 +208,8 @@ export const ARRONDISSEMENTS_CODES = {
   'Le Plateau-Mont-Royal': { code: 'Pmr', heure: '18h30', publieParPage: true },
   'Rivière-des-Prairies–Pointe-aux-Trembles': { code: 'Rdp', heure: '19h00' },
   'Rosemont–La Petite-Patrie': { code: 'Rpp', heure: '19h00' },
+  // Saint-Laurent ne publie ses sommaires nulle part : ses ordres du jour, sur Adi_Public comme
+  // sur sa page, font une à quatre pages (mesuré le 18 septembre 2026).
   'Saint-Laurent': { code: 'Slt', heure: '19h30' },
   'Saint-Léonard': { code: 'Sld', heure: '19h00' },
   'Le Sud-Ouest': { code: 'Sud', heure: '19h00' },
