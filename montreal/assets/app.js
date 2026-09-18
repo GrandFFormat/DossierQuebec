@@ -22,6 +22,9 @@ const PAS_SEANCES = 8; // séances affichées par palier, en mode groupé
 const PAS_VOTES_DEPART = 5;
 const PAS_VOTES = 10;
 const PAS_FIL = 5; // éléments du fil d'accueil par palier
+// Dans une séance, les dix premières décisions, puis un dépliant pour le reste : une séance
+// de Ville-Marie en compte cinquante-huit, et cinquante-huit fiches d'affilée sont un mur.
+const PAR_SEANCE_DEPART = 10;
 
 const etat = {
   decisions: null,
@@ -393,7 +396,14 @@ function rendreSeance(g) {
         <span class="puce">${g.lignes.length} ${tr(s(g.lignes.length, 'décision', 'décisions'), s(g.lignes.length, 'decision', 'decisions'))}</span>
         ${g.tronquee ? `<span class="puce procedural">${tr('journée partiellement chargée', 'day partly loaded')}</span>` : ''}
       </summary>
-      <div class="seance-corps">${g.lignes.map(carteDecision).join('')}</div>
+      <div class="seance-corps">${g.lignes.slice(0, PAR_SEANCE_DEPART).map(carteDecision).join('')}${
+        g.lignes.length > PAR_SEANCE_DEPART
+          ? `<details class="reste-seance"><summary>${tr(
+              `Afficher les ${nombreFr(g.lignes.length - PAR_SEANCE_DEPART)} autres décisions de cette séance`,
+              `Show the ${nombreFr(g.lignes.length - PAR_SEANCE_DEPART)} other decisions of this meeting`
+            )}</summary>${g.lignes.slice(PAR_SEANCE_DEPART).map(carteDecision).join('')}</details>`
+          : ''
+      }</div>
     </details>`;
 }
 
