@@ -41,13 +41,15 @@ for (const url of urls) {
   console.log(`  « ${titre} » — ${docs.length} document(s) du visualiseur`);
   const page = { url, titre, documents: docs.length, essais: [] };
 
-  // Le plus récent de chaque genre : c'est là qu'on saura si les sommaires y sont.
-  for (const genre of ['ODJ', 'PV']) {
-    const cible = docs.filter((d) => d.genre === genre).sort((a, b) => Number(b.doc) - Number(a.doc))[0];
-    if (!cible) {
-      console.log(`  ${genre} : aucun sur la page`);
-      continue;
-    }
+  // Les trois ordres du jour les plus récents, et le dernier procès-verbal. Trois plutôt qu'un :
+  // le document le plus récent est parfois un simple avis de convocation d'une seule page, et
+  // conclure là-dessus ferait dire « pas de sommaires » à un arrondissement qui en publie.
+  const cibles = [
+    ...docs.filter((d) => d.genre === 'ODJ').sort((a, b) => Number(b.doc) - Number(a.doc)).slice(0, 3),
+    ...docs.filter((d) => d.genre === 'PV').sort((a, b) => Number(b.doc) - Number(a.doc)).slice(0, 1),
+  ];
+  for (const cible of cibles) {
+    const genre = cible.genre;
     let essai = { genre, doc: cible.doc, url: cible.url };
     try {
       const buf = await octets(cible.url, { accept: 'application/pdf' });
