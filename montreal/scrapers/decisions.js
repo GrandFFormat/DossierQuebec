@@ -23,7 +23,7 @@
 import { writeFile, readFile, mkdir } from 'node:fs/promises';
 import { candidatsDocument, premierDocument, INSTANCES, idSeance, corrigerNomConseil } from '../lib/mtl.js';
 import { lirePdf } from '../lib/pdf.js';
-import { decouperResolutions, parserOrdreDuJour } from '../lib/pv.js';
+import { decouperResolutions, parserOrdreDuJour, decouperSommaires } from '../lib/pv.js';
 import { classer, THEMES } from '../lib/themes.js';
 import { PROJETS, projetsDe } from '../lib/projets.js';
 
@@ -50,7 +50,7 @@ const RATTRAPAGE_JOURS = 45;
 // mais le rafraîchissement suivant n'a rien relu du tout, puisque les séances étaient
 // déjà marquées « lues » au bon numéro de découpage. Deux compteurs indépendants pour un
 // même travail laissent toujours passer l'un ou l'autre ; celui-ci n'en fait qu'un.
-export const VERSION_DECOUPAGE = 11;
+export const VERSION_DECOUPAGE = 12;
 const DIAGNOSTIC = new URL('../data/diagnostic.json', import.meta.url);
 
 // Un échantillon de ce que les PDF contiennent vraiment — les premières lignes d'un
@@ -169,12 +169,19 @@ export function fusionnerTextes(liste, connus, relues = null) {
 export function decisionsDeSeance(seance, pv, odj) {
   const resolutions = decouperResolutions(pv.texte, { instance: seance.instance });
   const points = odj ? parserOrdreDuJour(odj.pages) : [];
+  // Les sommaires décisionnels annexés à l'ordre du jour, quand le conseil les y met (Le
+  // Plateau-Mont-Royal : « Ordre du jour et documents décisionnels », 181 pages). C'est le
+  // document que la Ville ne publie nulle part ailleurs, et celui que les résumés condensent.
+  const sommaires = odj ? decouperSommaires(odj.pages) : [];
+  const sommaireParDossier = new Map(sommaires.map((s) => [s.dossier, s]));
   const parDossier = new Map(points.filter((p) => p.dossier).map((p) => [p.dossier, p]));
   const parArticle = new Map(points.map((p) => [p.article, p]));
 
   const decisions = resolutions.map((r) => {
     const point = (r.dossier && parDossier.get(r.dossier)) || (r.article && parArticle.get(r.article)) || null;
     const page = pageDe(pv.pages, r.numero);
+    const dossier = r.dossier ?? point?.dossier ?? null;
+    const annexe = dossier ? sommaireParDossier.get(dossier) ?? null : null;
     // L'objet du procès-verbal quand il en a un ; sinon — au comité exécutif, où la
     // résolution commence par « Il est RÉSOLU » — celui de l'ordre du jour, plus lisible.
     const objetPv = r.objet && !/^(?:Il est|R[ÉE]SOLU|L['’][ée]tude de ce dossier)/i.test(r.objet) ? r.objet : null;
@@ -190,7 +197,7 @@ export function decisionsDeSeance(seance, pv, odj) {
       seanceId: seance.id,
       unite: point?.unite ?? null,
       article: r.article,
-      dossier: r.dossier ?? point?.dossier ?? null,
+      dossier,
       resultat: r.resultat,
       dissidences: r.dissidences,
       voteEnregistre: Boolean(r.vote),
@@ -202,8 +209,8 @@ export function decisionsDeSeance(seance, pv, odj) {
       dispositif: r.dispositif ?? null,
       motifs: r.motifs ?? null,
       pdf: page ? `${pv.url}#page=${page}` : pv.url,
-      sommairePdf: point?.sommairePdf ?? null,
-      sommaireId: point?.sommairePdf ? r.dossier : null,
+      sommairePdf: point?.sommairePdf ?? (annexe ? `${odj.url}#page=${annexe.page}` : null),
+      sommaireId: point?.sommairePdf || annexe ? dossier : null,
     };
   });
 
@@ -250,7 +257,7 @@ export function decisionsDeSeance(seance, pv, odj) {
       sommaireId: null,
     });
   }
-  return { decisions, resolutions, points };
+  return { decisions, resolutions, points, sommaires };
 }
 
 async function main() {
@@ -408,7 +415,10 @@ async function main() {
     if (odj && !odj.url) odj = null;
     noterDiagnostic('pv', { seance: seance.id, url: pv.url, nombrePages: pv.nombrePages, pages: pv.pages.slice(0, 3).map((p) => ({ numero: p.numero, lignes: p.lignes.slice(0, 80).map((l) => l.texte) })) });
     if (odj) noterDiagnostic('odj', { seance: seance.id, url: odj.url, nombrePages: odj.nombrePages, pages: odj.pages.slice(0, 3).map((p) => ({ numero: p.numero, lignes: p.lignes.slice(0, 80), liens: p.liens.slice(0, 40) })) });
-    const { decisions: nouvelles, resolutions, points } = decisionsDeSeance(seance, pv, odj);
+    const { decisions: nouvelles, resolutions, points, sommaires } = decisionsDeSeance(seance, pv, odj);
+    // Chaque sommaire annexé va dans le cache de texte sous le nom que resumes.js attend,
+    // pour qu'il n'ait pas à relire l'ordre du jour entier.
+    for (const s of sommaires) await ecrireCache(`sommaire_${s.dossier}`, { url: `${odj.url}#page=${s.page}`, nombrePages: odj.nombrePages, texte: s.texte, annexe: true });
     // Quelques blocs votés, bruts : c'est là qu'on vérifie la lecture des votes sans le PDF.
     for (const r of resolutions.filter((r) => r.vote).slice(0, 2)) {
       if (diagnostic.votes.length < 4) diagnostic.votes.push({ seance: seance.id, numero: r.numero, texte: r.texte.slice(0, 2500) });
@@ -416,7 +426,7 @@ async function main() {
     for (const d of nouvelles) decisions.set(d.id, d);
     lues++;
     const avecSommaire = nouvelles.filter((d) => d.sommairePdf).length;
-    console.log(`${seance.id} : ${pv.nombrePages} pages, ${resolutions.length} résolutions, ${points.length} points à l'ordre du jour, ${avecSommaire} liens vers un sommaire${pv.depuisCache ? ' (cache)' : ''}`);
+    console.log(`${seance.id} : ${pv.nombrePages} pages, ${resolutions.length} résolutions, ${points.length} points à l'ordre du jour, ${avecSommaire} liens vers un sommaire${sommaires.length ? `, ${sommaires.length} sommaires annexés à l'ordre du jour` : ''}${pv.depuisCache ? ' (cache)' : ''}`);
     if (resolutions.length === 0) console.warn(`⚠ ${seance.id} : aucune résolution reconnue — le gabarit du procès-verbal a peut-être changé.`);
     etatSeances.push({ ...seance, etat: 'lue', versionLecture: VERSION_LECTURE, pv: pv.url, odj: odj?.url ?? null, nombreResolutions: resolutions.length, lueLe: aujourdhui });
     await ecrire(true);

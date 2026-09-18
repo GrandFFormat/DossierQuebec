@@ -94,7 +94,13 @@ const ETAPES = [
     ? [
         {
           nom: 'Résumés en langage clair',
-          argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scrapers/resumes.js', `--depuis=${depuis}`, `--plafond=${plafond}`],
+          // `--resumes-complets` : toute l'année, par l'API Batches (moitié prix) — pour
+          // rattraper d'un coup, quand une source de texte apparaît. Sinon la fenêtre.
+          argv: [
+            ...(fichierCle ? [`--env-file=${fichierCle}`] : []),
+            'scrapers/resumes.js',
+            ...(args.has('resumes-complets') ? [`--depuis=${maintenant.getUTCFullYear()}-01-01`, '--plafond=20000', '--batch'] : [`--depuis=${depuis}`, `--plafond=${plafond}`]),
+          ],
           secondaire: true,
         },
       ]

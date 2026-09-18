@@ -17,7 +17,12 @@ on:
     # 09:00 UTC, après DossierQuébec (08:00) et le volet Québec (08:30). Le groupe de concurrence
     # ci-dessous garantit de toute façon qu'ils ne se chevauchent pas.
     - cron: '0 9 * * *'
-  workflow_dispatch: {} # bouton « Run workflow » pour lancer à la main
+  workflow_dispatch: # bouton « Run workflow » pour lancer à la main
+    inputs:
+      resumes_complets:
+        description: "Résumés IA de toute l'année, par lots (moitié prix) — pour rattraper d'un coup"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -34,7 +39,7 @@ jobs:
     # jusqu'à une heure, une seule fois, puisqu'une séance trouvée n'est jamais re-sondée.
     # Le calendrier est écrit après chaque arrondissement, donc un run coupé ne perd rien
     # et le suivant reprend où il en était.
-    timeout-minutes: 120
+    timeout-minutes: 300
     defaults:
       run:
         working-directory: montreal
@@ -87,7 +92,7 @@ jobs:
         # Le journal part avec les données : on le lit sur GitHub sans ouvrir le run.
         run: |
           set -o pipefail
-          npm run refresh 2>&1 | tee data/lancement.log
+          npm run refresh -- ${{ inputs.resumes_complets == true && '--resumes-complets' || '' }} 2>&1 | tee data/lancement.log
 
       # Seul montreal/data/ bouge (data/textes/ est ignoré par git). On rebase avant
       # de pousser au cas où quelqu'un aurait poussé pendant le job.

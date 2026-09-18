@@ -27,10 +27,12 @@ import Anthropic from '@anthropic-ai/sdk';
 import { writeFile, readFile } from 'node:fs/promises';
 import { octets } from '../lib/mtl.js';
 import { lirePdf } from '../lib/pdf.js';
+import { decouperSommaires } from '../lib/pv.js';
 import { ecrireCache, lireCache } from './decisions.js';
 
 const OUT = new URL('../data/resumes.json', import.meta.url);
 const DECISIONS = new URL('../data/decisions.json', import.meta.url);
+const TEXTES = new URL('../data/textes.json', import.meta.url);
 
 // Tarifs $ US par million de jetons, pour l'estimation de coût.
 const TARIFS = {
@@ -44,8 +46,9 @@ const MODELE_DEFAUT = 'claude-opus-5';
 // disant, plutôt que de payer pour des annexes répétitives.
 const MAX_CARACTERES = 14000;
 
-const CONSIGNE = `Tu résumes des sommaires décisionnels de la Ville de Montréal pour un site
-d'information citoyenne. Ton lecteur est une personne pressée qui n'a aucune formation en
+const CONSIGNE = `Tu résumes des documents de décision de la Ville de Montréal — le sommaire décisionnel
+quand il existe, sinon le texte même de la résolution (ce que le conseil a décidé, et les
+motifs qu'il invoque) — pour un site d'information citoyenne. Ton lecteur est une personne pressée qui n'a aucune formation en
 administration municipale.
 
 Écris de 3 à 7 puces courtes, en français simple, à la voix active. Chaque puce tient sur
@@ -67,6 +70,10 @@ Trois interdits absolus :
    (une simple prise d'acte, un dépôt de document, une correction de forme), mets
    sansContenuSubstantiel à true et explique en une seule puce ce que le document fait,
    sans meubler.
+
+Quand le document est le texte d'une résolution et non un sommaire, le « pourquoi » se
+limite aux motifs écrits (« Attendu que… », « Considérant… ») : s'ils manquent, ne les
+devine pas — résume ce qui est décidé.
 
 Pour montantPrincipal : s'il y a une somme d'argent au cœur de la décision, recopie-la
 exactement comme elle est écrite dans le document (par exemple « 28 700 $ »). S'il n'y en a
@@ -97,7 +104,8 @@ function parseArgs(argv) {
   return args;
 }
 
-function requete(modele, texte, numero, objet) {
+function requete(modele, texte, numero, objet, source = 'sommaire') {
+  const entete = source === 'resolution' ? `Résolution ${numero ?? ''} (texte de la décision, pas de sommaire disponible)` : `Sommaire décisionnel — dossier ${numero ?? ''}`;
   return {
     model: modele,
     max_tokens: 2000,
@@ -107,7 +115,7 @@ function requete(modele, texte, numero, objet) {
     messages: [
       {
         role: 'user',
-        content: `Sommaire décisionnel — dossier ${numero ?? ''}\nObjet : ${objet ?? '(non précisé)'}\n\n--- texte du document ---\n${texte}`,
+        content: `${entete}\nObjet : ${objet ?? '(non précisé)'}\n\n--- texte du document ---\n${texte}`,
       },
     ],
   };
@@ -155,8 +163,23 @@ async function texteSommaire(d) {
   const data = await octets(d.sommairePdf, { accept: 'application/pdf' });
   if (!data) return null;
   const lu = await lirePdf(data);
+  // Un sommaire annexé à l'ordre du jour (Le Plateau-Mont-Royal) : le lien pointe dans
+  // l'ordre du jour entier. On le redécoupe, on garde tous ses sommaires, on rend le bon.
+  if (/typeDoc=odj/i.test(d.sommairePdf)) {
+    const sommaires = decouperSommaires(lu.pages);
+    const base = d.sommairePdf.replace(/#.*$/, '');
+    for (const s of sommaires) await ecrireCache(`sommaire_${s.dossier}`, { url: `${base}#page=${s.page}`, nombrePages: lu.nombrePages, texte: s.texte, annexe: true });
+    return sommaires.find((s) => s.dossier === d.dossier)?.texte ?? null;
+  }
   await ecrireCache(nom, { url: d.sommairePdf, nombrePages: lu.nombrePages, texte: lu.texte });
   return lu.texte;
+}
+
+// Sans sommaire, le texte de la résolution elle-même (data/textes.json) : l'objet, les
+// motifs quand le procès-verbal en donne, et le dispositif — ce qui est décidé.
+function texteResolution(d, t) {
+  if (!t?.dispositif) return null;
+  return [`Objet : ${d.objet ?? '(non précisé)'}`, t.motifs ? `Motifs invoqués :\n${t.motifs}` : null, `Ce qui est décidé :\n${t.dispositif}`].filter(Boolean).join('\n\n');
 }
 
 // Les candidats : les résolutions de l'année qui portent un lien vers un sommaire, une
@@ -172,17 +195,39 @@ async function candidats({ depuis = null, plafond = Infinity, cache }) {
     if (cache.has(d.dossier)) continue;
     if (!parDossier.has(d.dossier) || (d.date ?? '') > (parDossier.get(d.dossier).date ?? '')) parDossier.set(d.dossier, d);
   }
-  const liste = [...parDossier.values()].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '')).slice(0, plafond);
+  const liste = [...parDossier.values()].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
   const docs = [];
-  for (const d of liste) {
+  for (const d of liste.slice(0, plafond)) {
     const texte = await texteSommaire(d);
     if (!texte) {
       console.warn(`⚠ sommaire introuvable pour le dossier ${d.dossier} (${d.sommairePdf}) — on réessaiera.`);
       continue;
     }
-    docs.push({ id: d.dossier, numero: d.dossier, resolution: d.numero, date: d.date, unite: d.unite, objet: d.objet, pdf: d.sommairePdf, texte: preparerTexte(texte) });
+    docs.push({ id: d.dossier, numero: d.dossier, resolution: d.numero, date: d.date, unite: d.unite, objet: d.objet, pdf: d.sommairePdf, source: 'sommaire', texte: preparerTexte(texte) });
+  }
+  // Puis les résolutions sans sommaire, résumées d'après leur propre texte. Une résolution
+  // dont le dossier a déjà un résumé de sommaire n'en a pas besoin : la fiche le retrouve
+  // par `sommaireId`.
+  const textes = (await lireJsonSansEchec(TEXTES))?.textes ?? {};
+  const resolues = new Set([...parDossier.keys(), ...docs.map((x) => x.id)]);
+  const sansSommaire = (decisions ?? [])
+    .filter((d) => d.type === 'Résolution' && !d.sommaireId && !resolues.has(d.dossier) && !cache.has(d.id) && (!depuis || (d.date ?? '') >= depuis))
+    .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
+  for (const d of sansSommaire) {
+    if (docs.length >= plafond) break;
+    const texte = texteResolution(d, textes[d.id]);
+    if (!texte) continue;
+    docs.push({ id: d.id, numero: d.dossier, resolution: d.numero, date: d.date, unite: d.unite, objet: d.objet, pdf: d.pdf, source: 'resolution', texte: preparerTexte(texte) });
   }
   return docs;
+}
+
+async function lireJsonSansEchec(url) {
+  try {
+    return JSON.parse(await readFile(url, 'utf8'));
+  } catch {
+    return null;
+  }
 }
 
 async function estimer(client, docs, modele) {
@@ -190,7 +235,7 @@ async function estimer(client, docs, modele) {
   let jetonsEchantillon = 0;
   let caracteresEchantillon = 0;
   for (const doc of echantillon) {
-    const { model, max_tokens, ...params } = requete(modele, doc.texte, doc.numero, doc.objet);
+    const { model, max_tokens, ...params } = requete(modele, doc.texte, doc.numero, doc.objet, doc.source);
     const compte = await client.messages.countTokens({ model, ...params });
     jetonsEchantillon += compte.input_tokens;
     caracteresEchantillon += doc.texte.length;
@@ -227,6 +272,7 @@ function ficheResume(doc, sortie, modele, usage) {
     unite: doc.unite,
     objet: doc.objet,
     pdf: doc.pdf,
+    source: doc.source ?? 'sommaire',
     puces: (sortie.puces ?? []).map(decoderEchappements),
     sansContenuSubstantiel: sortie.sansContenuSubstantiel,
     montantPrincipal: decoderEchappements(sortie.montantPrincipal ?? null),
@@ -245,7 +291,7 @@ async function genererSynchrone(client, docs, modele) {
     const lot = docs.slice(i, i + CONCURRENCE);
     const resultats = await Promise.allSettled(
       lot.map(async (doc) => {
-        const message = await client.messages.create(requete(modele, doc.texte, doc.numero, doc.objet));
+        const message = await client.messages.create(requete(modele, doc.texte, doc.numero, doc.objet, doc.source));
         const sortie = lireResultat(message);
         if (!sortie) throw new Error("le modèle n'a pas rempli l'outil");
         return ficheResume(doc, sortie, modele, message.usage);
@@ -264,7 +310,7 @@ async function genererParLot(client, docs, modele) {
   console.log("Envoi à l'API Batches (50 % du tarif, résultats en moins d'une heure en général)…");
   const customId = (doc) => doc.id.replace(/[^A-Za-z0-9_-]/g, '_').slice(0, 64);
   const lot = await client.messages.batches.create({
-    requests: docs.map((doc) => ({ custom_id: customId(doc), params: requete(modele, doc.texte, doc.numero, doc.objet) })),
+    requests: docs.map((doc) => ({ custom_id: customId(doc), params: requete(modele, doc.texte, doc.numero, doc.objet, doc.source) })),
   });
   console.log(`Lot ${lot.id} — statut ${lot.processing_status}`);
   let etat = lot;
@@ -338,7 +384,8 @@ async function main() {
         modele,
         genereParIA: true,
         avertissement:
-          'Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans ' +
+          'Résumés produits automatiquement à partir du texte du sommaire décisionnel quand il est ' +
+          "publié (source « sommaire »), sinon du texte de la résolution elle-même (source « resolution »), sans " +
           "jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
         parametres: { annee: year, max, batch, depuis, plafond },
         nombre: tous.length,
