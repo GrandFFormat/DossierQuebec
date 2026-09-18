@@ -69,11 +69,15 @@ export async function formulaireInfolettre(zone, { ville = null, note = null } =
   const s = await session().catch(() => null);
   const etat = await etatServeur(s);
   if (!etat?.villes?.length) { zone.hidden = true; return; }
-  // La ville du volet d'abord ; les autres ensuite.
-  const villes = [...etat.villes].sort((a, b) => (b.cle === ville) - (a.cle === ville));
+  // Sur l'accueil d'un volet, seulement les courriels de cette ville (Martin, 18 septembre 2026 :
+  // « laisser juste les courriels de la section où on se trouve »). Une ville qui n'en a pas
+  // encore : le bloc reste caché. Sans ville (page commune) : toutes.
+  const villes = ville ? etat.villes.filter((v) => v.cle === ville) : [...etat.villes];
+  if (!villes.length) { zone.hidden = true; return; }
+  const titre = ville ? tr(`Les courriels de ${echapper(villes[0].nom)}`, `${echapper(villes[0].nom)} emails`) : tr('Les courriels de DossierQuébec', 'DossierQuébec emails');
 
   zone.innerHTML = `<section class="ab-infolettre">
-    <h2>📬 ${tr('Les courriels de DossierQuébec', 'DossierQuébec emails')}</h2>
+    <h2>📬 ${titre}</h2>
     <p>${tr('Choisissez ce que vous voulez recevoir. C’est gratuit, et on se désinscrit en un clic dans chaque courriel. <strong>Vous recevez tout de suite le plus récent de chaque sorte cochée.</strong>', 'Choose what you want to receive. It is free, and one click unsubscribes you in every email. <strong>You get the latest of each kind right away</strong> (in French).')}</p>
     ${note ? `<p class="ab-note ab-infolettre-note">${note}</p>` : ''}
     <form class="ab-infolettre-form" novalidate>
