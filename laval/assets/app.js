@@ -1330,8 +1330,13 @@ init();
   bouton.setAttribute('aria-label', 'Revenir en haut de la page');
   bouton.textContent = '↑';
   document.body.appendChild(bouton);
-  const majVisible = () => bouton.classList.toggle('visible', window.scrollY > 600);
+  // Le bouton apparaît quand on a descendu d'à peu près un écran, pas après 600 pixels fixes :
+  // sur une page courte ou sur un téléphone, 600 pixels n'arrivaient jamais et la flèche ne
+  // sortait pas (constaté le 18 septembre 2026 sur Mes dossiers).
+  const seuil = () => Math.max(200, Math.min(600, Math.round(window.innerHeight * 0.6)));
+  const majVisible = () => bouton.classList.toggle('visible', window.scrollY > seuil());
   window.addEventListener('scroll', majVisible, { passive: true });
+  window.addEventListener('resize', majVisible, { passive: true });
   majVisible();
   bouton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 })();
