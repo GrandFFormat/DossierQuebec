@@ -253,7 +253,8 @@ function rendreDecisions() {
     // il n'y en a aucun, faute de lien vers les sommaires décisionnels — voir l'encadré en
     // haut de la page. Une case qui ne peut que vider la liste vaut mieux cachée.
     const caseResume = document.getElementById('case-resume');
-    if (caseResume) caseResume.hidden = !etat.decisions.decisions.some((d) => d.resume || d.resumeCourt);
+    // Les résumés vivent dans resumes.json, pas sur la fiche : c'est resumePour qui sait.
+    if (caseResume) caseResume.hidden = !etat.parId.size;
 
     if ($('#filtre-theme')) {
       // On affiche le libellé lisible, pas la clé interne.
