@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-17T13:39:05.137Z",
+ "generatedAt": "2026-09-18T13:02:50.897Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "licence": "Documents publics de la Ville de Québec — reproduction avec mention de la source, usage non commercial.",
  "parametres": {
@@ -12,9 +12,9 @@
    "Tableaux des décisions"
   ]
  },
- "totalDisponible": 4862,
- "nombre": 4862,
- "nouveauxDepuisDerniereExecution": 2,
+ "totalDisponible": 4887,
+ "nombre": 4887,
+ "nouveauxDepuisDerniereExecution": 25,
  "themes": {
   "procedure": {
    "libelle": "Procédure",
@@ -90,12 +90,12 @@
   "tramway": {
    "titre": "Tramway (TramCité)",
    "description": "Le réseau structurant de transport en commun : financement, terrains et servitudes, arbres, chantiers.",
-   "n": 95
+   "n": 98
   },
   "logement": {
    "titre": "Logement social et abordable",
    "description": "Programmes, réserves, subventions et prêts aux organismes, terrains pour du logement social ou abordable.",
-   "n": 54
+   "n": 55
   },
   "matieres-residuelles": {
    "titre": "Matières résiduelles",
@@ -125,7 +125,7 @@
  },
  "statuts": {
   "termines": 1403,
-  "enCours": 112,
+  "enCours": 136,
   "inconnus": 0
  },
  "facettes": {
@@ -136,7 +136,7 @@
    },
    {
     "valeur": "Sommaires et mémoires",
-    "n": 1515
+    "n": 1539
    },
    {
     "valeur": "Procès-verbaux",
@@ -144,13 +144,13 @@
    },
    {
     "valeur": "Tableaux des décisions",
-    "n": 79
+    "n": 80
    }
   ],
   "instance": [
    {
     "valeur": "Comité exécutif",
-    "n": 1192
+    "n": 1193
    },
    {
     "valeur": "Conseil de la ville",
@@ -191,20 +191,20 @@
   ],
   "unite": [
    {
+    "valeur": "Approvisionnements",
+    "n": 279
+   },
+   {
     "valeur": "Gestion du territoire",
     "n": 276
    },
    {
-    "valeur": "Approvisionnements",
-    "n": 273
-   },
-   {
     "valeur": "Développement économique et grands projets",
-    "n": 183
+    "n": 187
    },
    {
     "valeur": "Loisirs, sports et vie communautaire",
-    "n": 170
+    "n": 176
    },
    {
     "valeur": "Transport et mobilité intelligente",
@@ -212,7 +212,7 @@
    },
    {
     "valeur": "Planification de l'aménagement et de l'environnement",
-    "n": 140
+    "n": 144
    },
    {
     "valeur": "Culture et patrimoine",
@@ -220,7 +220,7 @@
    },
    {
     "valeur": "Ressources humaines",
-    "n": 53
+    "n": 54
    },
    {
     "valeur": "Direction générale",
@@ -228,7 +228,7 @@
    },
    {
     "valeur": "Finances",
-    "n": 34
+    "n": 35
    },
    {
     "valeur": "Affaires juridiques",
@@ -237,6 +237,10 @@
    {
     "valeur": "Prévention et qualité du milieu",
     "n": 16
+   },
+   {
+    "valeur": "Greffe et archives",
+    "n": 11
    },
    {
     "valeur": "Ingénierie",
@@ -253,10 +257,6 @@
    {
     "valeur": "Gestion des matières résiduelles et valorisation",
     "n": 10
-   },
-   {
-    "valeur": "Greffe et archives",
-    "n": 9
    },
    {
     "valeur": "Gestion des équipements motorisés",
@@ -342,27 +342,27 @@
    },
    {
     "valeur": "procedure",
-    "n": 656
+    "n": 659
    },
    {
     "valeur": "subventions",
-    "n": 534
+    "n": 538
    },
    {
     "valeur": "transport",
-    "n": 524
+    "n": 525
    },
    {
     "valeur": "contrats",
-    "n": 479
+    "n": 481
    },
    {
     "valeur": "immobilier",
-    "n": 285
+    "n": 288
    },
    {
     "valeur": "loisirs",
-    "n": 247
+    "n": 251
    },
    {
     "valeur": "finances",
@@ -370,23 +370,23 @@
    },
    {
     "valeur": "travaux",
-    "n": 188
+    "n": 189
    },
    {
     "valeur": "rh",
-    "n": 159
+    "n": 161
    },
    {
     "valeur": "administration",
-    "n": 149
+    "n": 151
    },
    {
     "valeur": "culture",
-    "n": 141
+    "n": 142
    },
    {
     "valeur": "environnement",
-    "n": 140
+    "n": 141
    },
    {
     "valeur": "securite",
@@ -394,7 +394,7 @@
    },
    {
     "valeur": "economie",
-    "n": 81
+    "n": 82
    },
    {
     "valeur": "honneurs",
@@ -417,6 +417,21 @@
    "instance": "Conseil d'agglomération de Québec",
    "unite": null,
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CAG_PL_2026-09-16_13h00.pdf",
+   "nouveau": false,
+   "sommaireId": null,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "TD_CE_PL_2026-09-16_00h00.pdf",
+   "numero": null,
+   "objet": "Tableau des décisions de la séance planifiée du comité exécutif tenue le mercredi 16 septembre 2026",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Tableaux des décisions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CE_PL_2026-09-16_00h00.pdf",
    "nouveau": true,
    "sommaireId": null,
    "theme": "procedure",
@@ -461,6 +476,25 @@
    "themeSource": "objet"
   },
   {
+   "id": "AP2026-295.pdf",
+   "numero": "AP2026-295",
+   "objet": "Conclusion de contrats pour les services de soutien, d'entretien et de mise à jour des modules de la suite eBusiness PGI financier d'Oracle (Dossier 96396)",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Approvisionnements",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-295.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'agglomération de Québec",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
    "id": "AP2026-307.pdf",
    "numero": "AP2026-307",
    "objet": "Adjudication d'un contrat pour l'acquisition d'armes de service et accessoires (Appel d'offres sur invitation 96258)",
@@ -478,6 +512,102 @@
    "etapeFinale": "Conseil d'agglomération de Québec",
    "echeance": "2026-09-16",
    "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "AP2026-313.pdf",
+   "numero": "AP2026-313",
+   "objet": "Adjudication d'un contrat pour la construction d'un jardin communautaire - Parc Paul-Émile-Beaulieu (Appel d'offres public 96021)",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Approvisionnements",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-313.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "theme": "loisirs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "AP2026-316.pdf",
+   "numero": "AP2026-316",
+   "objet": "Adjudication de contrats à commande pour la fourniture de produits pour l'analyse et l'ajustement de la qualité de l'eau des piscines et de main-d'oeuvre à taux horaire - Lots 1 à 3 (Appel d'offres public 96325)",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Approvisionnements",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-316.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "theme": "loisirs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "AP2026-321.pdf",
+   "numero": "AP2026-321",
+   "objet": "Adjudication de contrats à commande pour des travaux d'entrepreneur général sur divers bâtiments - Lots 1 et 2 (Appel d'offres public 96297)",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Approvisionnements",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-321.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "AP2026-328.pdf",
+   "numero": "AP2026-328",
+   "objet": "Adjudication d'un contrat pour la construction d'une conduite principale d'eau potable, la réfection de ponceaux et des travaux connexes - Secteur 8e avenue de l'Aéroport (PSP200280) (Appel d'offres public 96048)",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Approvisionnements",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-328.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": "2026-09-16",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "echeance": "2026-09-16",
+   "theme": "environnement",
+   "themeSource": "objet"
+  },
+  {
+   "id": "AP2026-329.pdf",
+   "numero": "AP2026-329",
+   "objet": "Adjudication d'un contrat pour l'entretien hivernal de diverses rues (gravier et pavage) - Secteur du lac Saint-Augustin (Appel d'offres public 95916)",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Approvisionnements",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-329.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil de la ville",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "theme": "travaux",
    "themeSource": "objet"
   },
   {
@@ -613,6 +743,226 @@
    "themeSource": "objet"
   },
   {
+   "id": "DE2026-356.pdf",
+   "numero": "DE2026-356",
+   "objet": "Prise d'acte du rapport trimestriel des ententes de foresterie urbaine relativement au Réseau structurant de transport en commun de la Ville de Québec (projet TramCité) pour la période du 1er avril au 30 juin 2026 et ajout de trois ententes pour la période du 1er janvier au 31 mars 2026",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Développement économique et grands projets",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-356.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "projets": [
+    "tramway"
+   ],
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "DE2026-358.pdf",
+   "numero": "DE2026-358",
+   "objet": "Prise d'acte du rapport des transactions immobilières effectuées par le Service du développement économique et des grands projets du 1er avril au 30 juin 2026",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Développement économique et grands projets",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-358.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "theme": "economie",
+   "themeSource": "objet"
+  },
+  {
+   "id": "DE2026-359.pdf",
+   "numero": "DE2026-359",
+   "objet": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur une partie d'une ruelle, connue et désignée comme étant une partie du lot 1 317 753 du cadastre du Québec, circonscription foncière de Québec, relativement au projet de Réseau structurant de transport en comm",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Développement économique et grands projets",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-359.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'agglomération de Québec",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "projets": [
+    "tramway"
+   ],
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
+  {
+   "id": "DE2026-360.pdf",
+   "numero": "DE2026-360",
+   "objet": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur une partie d'une ruelle, connue et désignée comme étant une partie du lot 1 317 757 du cadastre du Québec, circonscription foncière de Québec, relativement au projet de Réseau structurant de transport en comm",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Développement économique et grands projets",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-360.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'agglomération de Québec",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "projets": [
+    "tramway"
+   ],
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
+  {
+   "id": "FN2026-038.pdf",
+   "numero": "FN2026-038",
+   "objet": "Comité de supervision de la réserve financière relative au déficit actuariel initial du régime de retraite de l'ancienne Ville de Québec (R.V.Q. 1103) - Dépôt du suivi de performance au 30 juin 2026",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Finances",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/FN2026-038.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": "2026-09-16",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "echeance": "2026-09-16",
+   "theme": "rh",
+   "themeSource": "objet"
+  },
+  {
+   "id": "GA2026-010.pdf",
+   "numero": "GA2026-010",
+   "objet": "Nomination de madame Gabrielle Beausoleil à titre d'assistante-greffière substitut",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Greffe et archives",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GA2026-010.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil de la ville",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "theme": "rh",
+   "themeSource": "objet"
+  },
+  {
+   "id": "GA2026-011.pdf",
+   "numero": "GA2026-011",
+   "objet": "Adoption du calendrier 2027 des séances du conseil de la ville et du calendrier 2027 des séances du conseil d'agglomération",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Greffe et archives",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GA2026-011.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil de la ville et conseil d'agglomération",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "LS2026-093.pdf",
+   "numero": "LS2026-093",
+   "objet": "Virement budgétaire de 750 000 $ du budget de fonctionnement du Service des loisirs, des sports et de la vie communautaire vers quatre (4) arrondissements pour le versement de subventions aux corporations de loisir",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Loisirs, sports et vie communautaire",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-093.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil de la ville",
+   "dateCible": "2026-09-15",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "echeance": "2026-09-15",
+   "theme": "loisirs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "LS2026-181.pdf",
+   "numero": "LS2026-181",
+   "objet": "Versement de trois subventions, pour une somme totale de 205 305 $, pour la deuxième année de réalisation des projets soutenus dans le cadre de l'appel de projets visant à améliorer l'accès aux services de base",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Loisirs, sports et vie communautaire",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-181.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "LS2026-206.pdf",
+   "numero": "LS2026-206",
+   "objet": "Versement de quatre subventions pour la deuxième phase des activités d'animation interculturelle, dans le cadre des projets des agentes et agents du vivre-ensemble interculturel, pour l'année 2026-2027 (44 500 $)",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Loisirs, sports et vie communautaire",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-206.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "theme": "culture",
+   "themeSource": "objet"
+  },
+  {
+   "id": "LS2026-207.pdf",
+   "numero": "LS2026-207",
+   "objet": "Versement d'une subvention d'une somme maximale de 31 050 $ au Regroupement des organismes de personnes handicapées de la région de la Capitale-Nationale (ROP03), pour l'année 2026-2027, afin de réaliser un projet visant à soutenir l'adaptation des pratiques et des services des organismes membres du",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Loisirs, sports et vie communautaire",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-207.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
    "id": "LS2026-212.pdf",
    "numero": "LS2026-212",
    "objet": "Conclusion d'une entente entre la Ville de Québec et La Parade des jouets inc. relativement au versement d'une subvention de 100 000 $, à la fourniture à titre gratuit de services municipaux pour une somme maximale de 59 000 $ et à l'achat de biens et services pour une somme maximale de 6 000 $, à t",
@@ -628,6 +978,126 @@
    "statutDossier": "en_cours",
    "etapeFinale": "Conseil d'agglomération de Québec",
    "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "LS2026-229.pdf",
+   "numero": "LS2026-229",
+   "objet": "Avenant numéro 1 à l'entente entre la Ville de Québec et Loisirs et Sports Neufchâtel inc. relativement à une contribution de la Corporation pour permettre à la Ville de Québec de financer le projet de surface polyvalente couverte au parc Saint-André",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Loisirs, sports et vie communautaire",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-229.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil de la ville",
+   "dateCible": "2026-10-06",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "echeance": "2026-10-06",
+   "theme": "loisirs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "LS2026-231.pdf",
+   "numero": "LS2026-231",
+   "objet": "Versement de cinq (5) subventions, pour une somme maximale de 2 500 $, dans le cadre de la programmation d'activités pendant le férié de l'Action de grâce sous le thème « À Québec, on bouge! »",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Loisirs, sports et vie communautaire",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-231.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "PA2026-057.pdf",
+   "numero": "PA2026-057",
+   "objet": "Conclusion d'une entente entre la Ville de Québec et Canards Illimités Canada, relative au versement d'une subvention de 900 000 $ pour l'acquisition de cinq (5) lots totalisant 165,8 hectares",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-057.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif et Conseil d'agglomération",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "PA2026-124.pdf",
+   "numero": "PA2026-124",
+   "objet": "Avenant à l'entente entre la Ville de Québec et Un Toit en Réserve inc. en vertu de la résolution CA-2025-0137 relativement au versement d'une aide financière sous forme de prêt au montant de 4 300 000 $ pour l'acquisition d'un immeuble situé au 2582-2600A, boulevard Montmorency, à des fins de logem",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-124.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'agglomération de Québec",
+   "dateCible": "2026-09-16",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "echeance": "2026-09-16",
+   "projets": [
+    "logement"
+   ],
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
+  {
+   "id": "PA2026-131.pdf",
+   "numero": "PA2026-131",
+   "objet": "Participation de monsieur Alexandre Armstrong, directeur de section, et de monsieur Benoît Longchamps, directeur de division, à la mission « Logement non-lucratif et performance environnementale au coeur du développement urbain : à la découverte des modèles danois et suédois », prévue du 18 au 24 oc",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-131.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": "2026-09-16",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "echeance": "2026-09-16",
+   "theme": "administration",
+   "themeSource": "objet"
+  },
+  {
+   "id": "PA2026-132.pdf",
+   "numero": "PA2026-132",
+   "objet": "Participation de Mme Hélène Harvey à Adaptation Canada 2026 à Toronto, du 21 au 24 septembre 2026",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-132.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "theme": "administration",
    "themeSource": "objet"
   },
   {
@@ -667,6 +1137,25 @@
    "themeSource": "objet"
   },
   {
+   "id": "RH2026-718.pdf",
+   "numero": "RH2026-718",
+   "objet": "Prise d'acte du rapport relatif à la création et l'abolition de postes dont les pouvoirs sont délégués au Service des ressources humaines entre le 1er avril et le 31 juillet 2026",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Ressources humaines",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/RH2026-718.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
    "id": "TD_CV_PL_2026-09-15_00h00.pdf",
    "numero": null,
    "objet": "Tableau des décisions de la séance planifiée du conseil de la ville tenue le mardi 15 septembre 2026 à 14h00",
@@ -676,7 +1165,7 @@
    "instance": "Conseil de la ville",
    "unite": null,
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CV_PL_2026-09-15_00h00.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "theme": "procedure",
    "themeSource": "objet"
@@ -18948,21 +19437,6 @@
    "themeSource": "objet"
   },
   {
-   "id": "PV_CA2_OR_2026-07-06_17h30.pdf",
-   "numero": null,
-   "objet": "Procès-verbal de la séance planifiée du conseil de l'Arrondissement des Rivières tenue le lundi 06 juillet 2026 à 17h30",
-   "date": "2026-07-06",
-   "annee": "2026",
-   "type": "Procès-verbaux",
-   "instance": "Conseil de l'Arrondissement des Rivières",
-   "unite": null,
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA2_OR_2026-07-06_17h30.pdf",
-   "nouveau": false,
-   "sommaireId": null,
-   "theme": "procedure",
-   "themeSource": "objet"
-  },
-  {
    "id": "PV_CA3_OR_2026-07-06_00h00.pdf",
    "numero": null,
    "objet": "Procès-verbal de la séance planifiée du conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge tenue le lundi 06 juillet 2026 à 17h30",
@@ -18972,6 +19446,21 @@
    "instance": "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
    "unite": null,
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA3_OR_2026-07-06_00h00.pdf",
+   "nouveau": false,
+   "sommaireId": null,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "PV_CA2_OR_2026-07-06_17h30.pdf",
+   "numero": null,
+   "objet": "Procès-verbal de la séance planifiée du conseil de l'Arrondissement des Rivières tenue le lundi 06 juillet 2026 à 17h30",
+   "date": "2026-07-06",
+   "annee": "2026",
+   "type": "Procès-verbaux",
+   "instance": "Conseil de l'Arrondissement des Rivières",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA2_OR_2026-07-06_17h30.pdf",
    "nouveau": false,
    "sommaireId": null,
    "theme": "procedure",
