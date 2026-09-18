@@ -1,8 +1,8 @@
 
 > dossiervillemontreal@0.1.0 refresh
-> node scripts/refresh.js
+> node scripts/refresh.js --resumes-complets
 
-Code : commit 1c70b87 — Node v22.23.2
+Code : commit 96b01f0 — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -13,7 +13,7 @@ https://donnees.montreal.ca/robots.txt : règles sur nos chemins : disallow /dat
 https://montreal.ca/robots.txt : rien qui concerne nos chemins
 
 === Calendrier des séances ===
-Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-09-16T23:30:52.236606)
+Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-09-17T23:30:55.952172)
 Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_video_seance
 71 séance(s) de 2026 lue(s) dans le calendrier.
 
@@ -55,16 +55,161 @@ CM_2026-08-24_13h00 : procès-verbal non publié — pas un PDF — page « 404 
 CE_2026-08-19_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-08-12_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-08-05_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CE_2026-07-02_09h00 : 16 pages, 36 résolutions, 121 points à l'ordre du jour, 32 liens vers un sommaire, 32 sommaires annexés à l'ordre du jour (cache)
+CE_2026-06-25_09h00 : 15 pages, 36 résolutions, 41 points à l'ordre du jour, 26 liens vers un sommaire, 26 sommaires annexés à l'ordre du jour (cache)
+CG_2026-06-18_16h00 : 56 pages, 89 résolutions, 276 points à l'ordre du jour, 85 liens vers un sommaire, 85 sommaires annexés à l'ordre du jour (cache)
 CM_2026-06-16_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CM_2026-06-15_13h00 : 108 pages, 151 résolutions, 425 points à l'ordre du jour, 61 liens vers un sommaire, 135 sommaires annexés à l'ordre du jour (cache)
+CE_2026-06-10_09h00 : 34 pages, 71 résolutions, 84 points à l'ordre du jour, 55 liens vers un sommaire, 55 sommaires annexés à l'ordre du jour (cache)
+CE_2026-06-03_09h00 : 38 pages, 98 résolutions, 125 points à l'ordre du jour, 84 liens vers un sommaire, 84 sommaires annexés à l'ordre du jour (cache)
+CE_2026-05-27_09h00 : 10 pages, 20 résolutions, 37 points à l'ordre du jour, 17 liens vers un sommaire, 17 sommaires annexés à l'ordre du jour (cache)
+CE_2026-05-20_09h00 : 13 pages, 35 résolutions, 417 points à l'ordre du jour, 26 liens vers un sommaire, 26 sommaires annexés à l'ordre du jour (cache)
+CG_2026-05-19_16h00 : 31 pages, 49 résolutions, 115 points à l'ordre du jour, 47 liens vers un sommaire, 47 sommaires annexés à l'ordre du jour (cache)
 CM_2026-05-12_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CM_2026-05-11_13h00 : 73 pages, 88 résolutions, 278 points à l'ordre du jour, 34 liens vers un sommaire, 78 sommaires annexés à l'ordre du jour (cache)
+CE_2026-05-06_09h00 : 19 pages, 48 résolutions, 72 points à l'ordre du jour, 42 liens vers un sommaire, 42 sommaires annexés à l'ordre du jour (cache)
+CE_2026-04-29_09h00 : 26 pages, 62 résolutions, 84 points à l'ordre du jour, 56 liens vers un sommaire, 56 sommaires annexés à l'ordre du jour (cache)
+CG_2026-04-23_16h00 : 30 pages, 46 résolutions, 136 points à l'ordre du jour, 43 liens vers un sommaire, 43 sommaires annexés à l'ordre du jour (cache)
+CE_2026-04-22_09h00 : 11 pages, 25 résolutions, 35 points à l'ordre du jour, 20 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour (cache)
+CM_2026-04-20_13h00 : 85 pages, 108 résolutions, 408 points à l'ordre du jour, 57 liens vers un sommaire, 101 sommaires annexés à l'ordre du jour (cache)
+CE_2026-04-15_09h00 : 17 pages, 39 résolutions, 86 points à l'ordre du jour, 28 liens vers un sommaire, 28 sommaires annexés à l'ordre du jour (cache)
+CE_2026-04-08_09h00 : 25 pages, 61 résolutions, 71 points à l'ordre du jour, 55 liens vers un sommaire, 55 sommaires annexés à l'ordre du jour (cache)
+CE_2026-04-01_09h00 : 16 pages, 34 résolutions, 47 points à l'ordre du jour, 31 liens vers un sommaire, 31 sommaires annexés à l'ordre du jour (cache)
+CG_2026-03-26_16h00 : 46 pages, 79 résolutions, 254 points à l'ordre du jour, 75 liens vers un sommaire, 75 sommaires annexés à l'ordre du jour (cache)
+CM_2026-03-23_13h00 : 114 pages, 157 résolutions, 550 points à l'ordre du jour, 76 liens vers un sommaire, 143 sommaires annexés à l'ordre du jour (cache)
+CE_2026-03-18_09h00 : 24 pages, 60 résolutions, 240 points à l'ordre du jour, 48 liens vers un sommaire, 48 sommaires annexés à l'ordre du jour (cache)
+CE_2026-03-11_09h00 : 44 pages, 108 résolutions, 236 points à l'ordre du jour, 101 liens vers un sommaire, 101 sommaires annexés à l'ordre du jour (cache)
+CE_2026-02-25_09h00 : 15 pages, 37 résolutions, 258 points à l'ordre du jour, 28 liens vers un sommaire, 28 sommaires annexés à l'ordre du jour (cache)
+CG_2026-02-19_16h00 : 28 pages, 48 résolutions, 128 points à l'ordre du jour, 45 liens vers un sommaire, 45 sommaires annexés à l'ordre du jour (cache)
 CM_2026-02-17_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CM_2026-02-16_13h00 : 71 pages, 92 résolutions, 306 points à l'ordre du jour, 41 liens vers un sommaire, 81 sommaires annexés à l'ordre du jour (cache)
+CE_2026-02-11_09h00 : 21 pages, 49 résolutions, 58 points à l'ordre du jour, 42 liens vers un sommaire, 43 sommaires annexés à l'ordre du jour (cache)
+CE_2026-02-04_09h00 : 30 pages, 73 résolutions, 168 points à l'ordre du jour, 66 liens vers un sommaire, 66 sommaires annexés à l'ordre du jour (cache)
+CG_2026-01-29_16h00 : 29 pages, 50 résolutions, 267 points à l'ordre du jour, 46 liens vers un sommaire, 46 sommaires annexés à l'ordre du jour (cache)
+CG_2026-01-29_09h30 : 13 pages, 18 résolutions, 20 points à l'ordre du jour, 16 liens vers un sommaire, 16 sommaires annexés à l'ordre du jour (cache)
+CM_2026-01-28_09h30 : 50 pages, 32 résolutions, 34 points à l'ordre du jour, 14 liens vers un sommaire, 30 sommaires annexés à l'ordre du jour (cache)
 CM_2026-01-27_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CM_2026-01-26_13h00 : 70 pages, 90 résolutions, 568 points à l'ordre du jour, 36 liens vers un sommaire, 80 sommaires annexés à l'ordre du jour (cache)
+CE_2026-01-21_09h00 : 16 pages, 40 résolutions, 53 points à l'ordre du jour, 36 liens vers un sommaire, 36 sommaires annexés à l'ordre du jour (cache)
+CE_2026-01-14_09h00 : 22 pages, 55 résolutions, 221 points à l'ordre du jour, 49 liens vers un sommaire, 49 sommaires annexés à l'ordre du jour (cache)
+CG_2026-01-12_19h00 : 11 pages, 17 résolutions, 19 points à l'ordre du jour, 15 liens vers un sommaire, 15 sommaires annexés à l'ordre du jour (cache)
+CM_2026-01-12_13h00 : 13 pages, 16 résolutions, 18 points à l'ordre du jour, 14 liens vers un sommaire, 14 sommaires annexés à l'ordre du jour (cache)
+CE_2026-01-07_09h00 : 9 pages, 25 résolutions, 251 points à l'ordre du jour, 20 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour (cache)
+CA_Slt_2026-01-06_19h30 : 19 pages, 30 résolutions, 30 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Pir_2026-01-12_19h00 : 21 pages, 21 résolutions, 22 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Anj_2026-01-13_19h00 : 10 pages, 17 résolutions, 18 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Cdn_2026-02-02_19h00 : 26 pages, 31 résolutions, 80 points à l'ordre du jour, 28 liens vers un sommaire, 29 sommaires annexés à l'ordre du jour (cache)
+CA_Lac_2026-02-02_19h00 : 14 pages, 25 résolutions, 23 points à l'ordre du jour, 14 liens vers un sommaire, 14 sommaires annexés à l'ordre du jour (cache)
+CA_Las_2026-02-02_19h00 : 17 pages, 50 résolutions, 52 points à l'ordre du jour, 41 liens vers un sommaire, 35 sommaires annexés à l'ordre du jour (cache)
+CA_Mhm_2026-02-02_18h30 : 14 pages, 23 résolutions, 28 points à l'ordre du jour, 19 liens vers un sommaire, 19 sommaires annexés à l'ordre du jour (cache)
+CA_Pir_2026-02-02_19h00 : 24 pages, 25 résolutions, 26 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Pmr_2026-02-02_18h30 : 24 pages, 37 résolutions, 40 points à l'ordre du jour, 33 liens vers un sommaire, 33 sommaires annexés à l'ordre du jour (cache)
+CA_Rpp_2026-02-02_19h00 : 9 pages, 19 résolutions, 0 points à l'ordre du jour, 17 liens vers un sommaire, 17 sommaires annexés à l'ordre du jour (cache)
+CA_Sld_2026-02-02_19h00 : 15 pages, 31 résolutions, 26 points à l'ordre du jour, 27 liens vers un sommaire, 22 sommaires annexés à l'ordre du jour (cache)
+CA_Anj_2026-02-03_19h00 : 6 pages, 10 résolutions, 13 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Ibs_2026-02-03_19h30 : 12 pages, 22 résolutions, 28 points à l'ordre du jour, 19 liens vers un sommaire, 19 sommaires annexés à l'ordre du jour (cache)
+CA_Out_2026-02-03_19h00 : 18 pages, 24 résolutions, 28 points à l'ordre du jour, 20 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour (cache)
+CA_Rdp_2026-02-03_19h00 : 23 pages, 35 résolutions, 37 points à l'ordre du jour, 28 liens vers un sommaire, 24 sommaires annexés à l'ordre du jour (cache)
+CA_Slt_2026-02-03_19h30 : 17 pages, 35 résolutions, 34 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Ver_2026-02-03_19h00 : 22 pages, 31 résolutions, 39 points à l'ordre du jour, 23 liens vers un sommaire, 23 sommaires annexés à l'ordre du jour (cache)
+CA_Vsm_2026-02-03_18h30 : 11 pages, 16 résolutions, 111 points à l'ordre du jour, 10 liens vers un sommaire, 10 sommaires annexés à l'ordre du jour (cache)
+CA_Ahu_2026-02-09_19h00 : 17 pages, 29 résolutions, 36 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Mtn_2026-02-09_19h00 : 22 pages, 33 résolutions, 38 points à l'ordre du jour, 23 liens vers un sommaire, 25 sommaires annexés à l'ordre du jour (cache)
+CA_Sud_2026-02-09_19h00 : 12 pages, 23 résolutions, 29 points à l'ordre du jour, 18 liens vers un sommaire, 18 sommaires annexés à l'ordre du jour (cache)
+CA_Vma_2026-02-10_18h30 : 30 pages, 51 résolutions, 99 points à l'ordre du jour, 44 liens vers un sommaire, 46 sommaires annexés à l'ordre du jour (cache)
+CA_Lac_2026-03-02_19h00 : 12 pages, 23 résolutions, 25 points à l'ordre du jour, 18 liens vers un sommaire, 19 sommaires annexés à l'ordre du jour (cache)
+CA_Las_2026-03-02_19h00 : 17 pages, 47 résolutions, 48 points à l'ordre du jour, 38 liens vers un sommaire, 37 sommaires annexés à l'ordre du jour (cache)
+CA_Anj_2026-03-03_19h00 : 16 pages, 30 résolutions, 73 points à l'ordre du jour, 27 liens vers un sommaire, 26 sommaires annexés à l'ordre du jour (cache)
+CA_Cdn_2026-03-09_19h00 : 26 pages, 39 résolutions, 94 points à l'ordre du jour, 35 liens vers un sommaire, 35 sommaires annexés à l'ordre du jour (cache)
+CA_Mhm_2026-03-09_18h30 : 34 pages, 41 résolutions, 46 points à l'ordre du jour, 37 liens vers un sommaire, 37 sommaires annexés à l'ordre du jour (cache)
+CA_Mtn_2026-03-09_19h00 : 20 pages, 31 résolutions, 33 points à l'ordre du jour, 29 liens vers un sommaire, 29 sommaires annexés à l'ordre du jour (cache)
+CA_Pir_2026-03-09_19h00 : 26 pages, 28 résolutions, 29 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Pmr_2026-03-09_18h30 : 27 pages, 36 résolutions, 39 points à l'ordre du jour, 32 liens vers un sommaire, 32 sommaires annexés à l'ordre du jour (cache)
+CA_Rpp_2026-03-09_19h00 : 11 pages, 24 résolutions, 0 points à l'ordre du jour, 22 liens vers un sommaire, 22 sommaires annexés à l'ordre du jour (cache)
+CA_Sld_2026-03-09_19h00 : 18 pages, 35 résolutions, 34 points à l'ordre du jour, 31 liens vers un sommaire, 30 sommaires annexés à l'ordre du jour (cache)
+CA_Sud_2026-03-09_19h00 : 11 pages, 23 résolutions, 27 points à l'ordre du jour, 16 liens vers un sommaire, 16 sommaires annexés à l'ordre du jour (cache)
+CA_Ibs_2026-03-10_19h30 : 7 pages, 13 résolutions, 19 points à l'ordre du jour, 11 liens vers un sommaire, 11 sommaires annexés à l'ordre du jour (cache)
+CA_Out_2026-03-10_19h00 : 12 pages, 18 résolutions, 22 points à l'ordre du jour, 15 liens vers un sommaire, 15 sommaires annexés à l'ordre du jour (cache)
+CA_Rdp_2026-03-10_19h00 : 22 pages, 30 résolutions, 32 points à l'ordre du jour, 26 liens vers un sommaire, 26 sommaires annexés à l'ordre du jour (cache)
+CA_Ver_2026-03-10_19h00 : 21 pages, 25 résolutions, 32 points à l'ordre du jour, 19 liens vers un sommaire, 19 sommaires annexés à l'ordre du jour (cache)
+CA_Vma_2026-03-10_18h30 : 33 pages, 62 résolutions, 134 points à l'ordre du jour, 53 liens vers un sommaire, 54 sommaires annexés à l'ordre du jour (cache)
+CA_Vsm_2026-03-10_18h30 : 22 pages, 42 résolutions, 133 points à l'ordre du jour, 35 liens vers un sommaire, 35 sommaires annexés à l'ordre du jour (cache)
+CA_Ahu_2026-03-16_19h00 : 21 pages, 39 résolutions, 47 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Pmr_2026-03-20_09h30 : 4 pages, 6 résolutions, 9 points à l'ordre du jour, 4 liens vers un sommaire, 4 sommaires annexés à l'ordre du jour (cache)
+CA_Anj_2026-04-07_19h00 : 22 pages, 32 résolutions, 35 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Ibs_2026-04-07_19h30 : 12 pages, 18 résolutions, 24 points à l'ordre du jour, 16 liens vers un sommaire, 16 sommaires annexés à l'ordre du jour (cache)
+CA_Lac_2026-04-07_19h00 : 13 pages, 25 résolutions, 26 points à l'ordre du jour, 21 liens vers un sommaire, 21 sommaires annexés à l'ordre du jour (cache)
+CA_Rdp_2026-04-07_19h00 : 18 pages, 27 résolutions, 28 points à l'ordre du jour, 23 liens vers un sommaire, 23 sommaires annexés à l'ordre du jour (cache)
+CA_Rpp_2026-04-07_19h00 : 10 pages, 18 résolutions, 0 points à l'ordre du jour, 15 liens vers un sommaire, 15 sommaires annexés à l'ordre du jour (cache)
+CA_Sld_2026-04-07_19h00 : 16 pages, 30 résolutions, 30 points à l'ordre du jour, 26 liens vers un sommaire, 26 sommaires annexés à l'ordre du jour (cache)
+CA_Slt_2026-04-07_19h30 : 29 pages, 52 résolutions, 53 points à l'ordre du jour, 0 liens vers un sommaire (cache)
 CA_Ver_2026-04-07_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Vsm_2026-04-07_18h30 : 20 pages, 33 résolutions, 158 points à l'ordre du jour, 25 liens vers un sommaire, 25 sommaires annexés à l'ordre du jour (cache)
+CA_Out_2026-04-09_19h00 : 24 pages, 41 résolutions, 43 points à l'ordre du jour, 36 liens vers un sommaire, 35 sommaires annexés à l'ordre du jour (cache)
+CA_Ahu_2026-04-13_19h00 : 20 pages, 36 résolutions, 44 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Cdn_2026-04-13_19h00 : 20 pages, 27 résolutions, 76 points à l'ordre du jour, 24 liens vers un sommaire, 24 sommaires annexés à l'ordre du jour (cache)
+CA_Las_2026-04-13_19h00 : 16 pages, 46 résolutions, 47 points à l'ordre du jour, 35 liens vers un sommaire, 34 sommaires annexés à l'ordre du jour (cache)
+CA_Mhm_2026-04-13_18h30 : 31 pages, 31 résolutions, 35 points à l'ordre du jour, 24 liens vers un sommaire, 24 sommaires annexés à l'ordre du jour (cache)
+CA_Mtn_2026-04-13_19h00 : 30 pages, 51 résolutions, 55 points à l'ordre du jour, 46 liens vers un sommaire, 46 sommaires annexés à l'ordre du jour (cache)
+CA_Pir_2026-04-13_19h00 : 27 pages, 31 résolutions, 31 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Pmr_2026-04-13_18h30 : 21 pages, 30 résolutions, 32 points à l'ordre du jour, 25 liens vers un sommaire, 25 sommaires annexés à l'ordre du jour (cache)
+CA_Sud_2026-04-13_19h00 : 10 pages, 19 résolutions, 26 points à l'ordre du jour, 16 liens vers un sommaire, 16 sommaires annexés à l'ordre du jour (cache)
+CA_Vma_2026-04-14_18h30 : 33 pages, 60 résolutions, 124 points à l'ordre du jour, 50 liens vers un sommaire, 51 sommaires annexés à l'ordre du jour (cache)
+CA_Ahu_2026-05-04_19h00 : 16 pages, 27 résolutions, 36 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Cdn_2026-05-04_18h30 : 17 pages, 21 résolutions, 64 points à l'ordre du jour, 18 liens vers un sommaire, 18 sommaires annexés à l'ordre du jour (cache)
+CA_Lac_2026-05-04_19h00 : 12 pages, 23 résolutions, 24 points à l'ordre du jour, 16 liens vers un sommaire, 16 sommaires annexés à l'ordre du jour (cache)
+CA_Las_2026-05-04_19h00 : 19 pages, 40 résolutions, 40 points à l'ordre du jour, 34 liens vers un sommaire, 34 sommaires annexés à l'ordre du jour (cache)
+CA_Mhm_2026-05-04_18h30 : 22 pages, 34 résolutions, 39 points à l'ordre du jour, 30 liens vers un sommaire, 30 sommaires annexés à l'ordre du jour (cache)
+CA_Mtn_2026-05-04_19h00 : 23 pages, 39 résolutions, 42 points à l'ordre du jour, 36 liens vers un sommaire, 36 sommaires annexés à l'ordre du jour (cache)
+CA_Pir_2026-05-04_19h00 : 17 pages, 20 résolutions, 20 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Pmr_2026-05-04_16h00 : 24 pages, 34 résolutions, 37 points à l'ordre du jour, 30 liens vers un sommaire, 30 sommaires annexés à l'ordre du jour (cache)
+CA_Rpp_2026-05-04_19h00 : 13 pages, 23 résolutions, 0 points à l'ordre du jour, 20 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour (cache)
+CA_Sld_2026-05-04_19h00 : 15 pages, 32 résolutions, 31 points à l'ordre du jour, 28 liens vers un sommaire, 27 sommaires annexés à l'ordre du jour (cache)
+CA_Sud_2026-05-04_19h00 : 11 pages, 21 résolutions, 28 points à l'ordre du jour, 18 liens vers un sommaire, 18 sommaires annexés à l'ordre du jour (cache)
+CA_Anj_2026-05-05_19h00 : 18 pages, 26 résolutions, 29 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Ibs_2026-05-05_19h30 : 12 pages, 22 résolutions, 28 points à l'ordre du jour, 20 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour (cache)
+CA_Out_2026-05-05_19h00 : 21 pages, 32 résolutions, 36 points à l'ordre du jour, 28 liens vers un sommaire, 28 sommaires annexés à l'ordre du jour (cache)
+CA_Rdp_2026-05-05_19h00 : 18 pages, 34 résolutions, 37 points à l'ordre du jour, 30 liens vers un sommaire, 29 sommaires annexés à l'ordre du jour (cache)
+CA_Slt_2026-05-05_19h30 : 35 pages, 38 résolutions, 38 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Ver_2026-05-05_19h00 : 11 pages, 20 résolutions, 27 points à l'ordre du jour, 16 liens vers un sommaire, 16 sommaires annexés à l'ordre du jour (cache)
+CA_Vma_2026-05-05_18h30 : 31 pages, 57 résolutions, 124 points à l'ordre du jour, 44 liens vers un sommaire, 50 sommaires annexés à l'ordre du jour (cache)
+CA_Vsm_2026-05-05_18h30 : 15 pages, 25 résolutions, 128 points à l'ordre du jour, 17 liens vers un sommaire, 17 sommaires annexés à l'ordre du jour (cache)
+CA_Cdn_2026-06-01_18h30 : 23 pages, 26 résolutions, 70 points à l'ordre du jour, 23 liens vers un sommaire, 23 sommaires annexés à l'ordre du jour (cache)
+CA_Lac_2026-06-01_19h00 : 15 pages, 26 résolutions, 26 points à l'ordre du jour, 18 liens vers un sommaire, 18 sommaires annexés à l'ordre du jour (cache)
+CA_Las_2026-06-01_19h00 : 17 pages, 36 résolutions, 36 points à l'ordre du jour, 27 liens vers un sommaire, 27 sommaires annexés à l'ordre du jour (cache)
+CA_Mhm_2026-06-01_18h30 : 18 pages, 25 résolutions, 29 points à l'ordre du jour, 20 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour (cache)
+CA_Pir_2026-06-01_19h00 : 18 pages, 17 résolutions, 18 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Pmr_2026-06-01_18h30 : 22 pages, 28 résolutions, 31 points à l'ordre du jour, 25 liens vers un sommaire, 25 sommaires annexés à l'ordre du jour (cache)
+CA_Sld_2026-06-01_19h00 : 23 pages, 34 résolutions, 33 points à l'ordre du jour, 30 liens vers un sommaire, 29 sommaires annexés à l'ordre du jour (cache)
+CA_Anj_2026-06-02_19h00 : 21 pages, 29 résolutions, 33 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Ibs_2026-06-02_19h30 : 13 pages, 24 résolutions, 29 points à l'ordre du jour, 0 liens vers un sommaire (cache)
 CA_Out_2026-06-02_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Rdp_2026-06-02_19h00 : 22 pages, 39 résolutions, 41 points à l'ordre du jour, 33 liens vers un sommaire, 32 sommaires annexés à l'ordre du jour (cache)
+CA_Slt_2026-06-02_19h30 : 16 pages, 30 résolutions, 30 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Ver_2026-06-02_19h00 : 15 pages, 23 résolutions, 31 points à l'ordre du jour, 18 liens vers un sommaire, 18 sommaires annexés à l'ordre du jour (cache)
+CA_Vsm_2026-06-02_18h30 : 15 pages, 24 résolutions, 57 points à l'ordre du jour, 16 liens vers un sommaire, 16 sommaires annexés à l'ordre du jour (cache)
+CA_Ahu_2026-06-08_19h00 : 28 pages, 46 résolutions, 55 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Mtn_2026-06-08_19h00 : 23 pages, 36 résolutions, 39 points à l'ordre du jour, 31 liens vers un sommaire, 32 sommaires annexés à l'ordre du jour (cache)
 CA_Rpp_2026-06-08_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Sud_2026-06-08_19h00 : 13 pages, 26 résolutions, 30 points à l'ordre du jour, 21 liens vers un sommaire, 21 sommaires annexés à l'ordre du jour (cache)
+CA_Vma_2026-06-09_18h30 : 30 pages, 58 résolutions, 125 points à l'ordre du jour, 48 liens vers un sommaire, 49 sommaires annexés à l'ordre du jour (cache)
 CA_Ahu_2026-07-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Cdn_2026-07-06_18h30 : 30 pages, 31 résolutions, 80 points à l'ordre du jour, 28 liens vers un sommaire, 28 sommaires annexés à l'ordre du jour (cache)
+CA_Lac_2026-07-06_19h00 : 18 pages, 32 résolutions, 31 points à l'ordre du jour, 24 liens vers un sommaire, 24 sommaires annexés à l'ordre du jour (cache)
+CA_Las_2026-07-06_19h00 : 26 pages, 47 résolutions, 48 points à l'ordre du jour, 37 liens vers un sommaire, 36 sommaires annexés à l'ordre du jour (cache)
+CA_Pmr_2026-07-06_18h30 : 22 pages, 31 résolutions, 34 points à l'ordre du jour, 27 liens vers un sommaire, 27 sommaires annexés à l'ordre du jour (cache)
 CA_Rpp_2026-07-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Sld_2026-07-06_19h00 : 27 pages, 39 résolutions, 39 points à l'ordre du jour, 35 liens vers un sommaire, 35 sommaires annexés à l'ordre du jour (cache)
+CA_Ibs_2026-07-07_19h30 : 11 pages, 19 résolutions, 25 points à l'ordre du jour, 0 liens vers un sommaire (cache)
 CA_Out_2026-07-07_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Rdp_2026-07-07_19h00 : 22 pages, 37 résolutions, 41 points à l'ordre du jour, 33 liens vers un sommaire, 31 sommaires annexés à l'ordre du jour (cache)
+CA_Vma_2026-07-07_18h30 : 31 pages, 56 résolutions, 123 points à l'ordre du jour, 40 liens vers un sommaire, 47 sommaires annexés à l'ordre du jour (cache)
+CA_Vsm_2026-07-07_18h30 : 23 pages, 40 résolutions, 157 points à l'ordre du jour, 36 liens vers un sommaire, 37 sommaires annexés à l'ordre du jour (cache)
+CA_Sud_2026-07-13_19h00 : 12 pages, 26 résolutions, 28 points à l'ordre du jour, 20 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour (cache)
+CA_Las_2026-08-03_19h00 : 14 pages, 37 résolutions, 39 points à l'ordre du jour, 30 liens vers un sommaire, 30 sommaires annexés à l'ordre du jour (cache)
+CA_Pir_2026-08-03_19h00 : 33 pages, 32 résolutions, 32 points à l'ordre du jour, 0 liens vers un sommaire (cache)
+CA_Anj_2026-08-04_19h00 : 16 pages, 25 résolutions, 88 points à l'ordre du jour, 19 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour (cache)
+CA_Slt_2026-08-04_19h30 : 10 pages, 19 résolutions, 19 points à l'ordre du jour, 0 liens vers un sommaire (cache)
 CA_Anj_2026-09-01_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Ibs_2026-09-01_19h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Lac_2026-09-01_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -80,7 +225,7 @@ CA_Ahu_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 
 CA_Las_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Pir_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 
-5806 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 33 en attente de procès-verbal.
+5806 décisions écrites dans data/decisions.json — 145 séance(s) lue(s) cette fois, 33 en attente de procès-verbal.
 0 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
@@ -103,8 +248,8 @@ Pastilles thématiques :
      81  Ressources humaines
     184  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes enregistrés (depuis 2026-07-19) ===
-Fenêtre depuis 2026-07-19 : 0 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
+=== Votes enregistrés (depuis 2026-07-20) ===
+Fenêtre depuis 2026-07-20 : 0 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
 
 14 votes enregistrés écrits dans data/votes.json (0 procès-verbaux analysés).
 1 portent un avertissement d'extraction (à vérifier à la main).
@@ -149,12 +294,7 @@ Mesure de 33 termes sur 145 procès-verbaux de 2026 en cache et 5806 décisions�
 33 entrées écrites dans data/lexique.json
 
 === Récapitulatifs des sujets suivables ===
-Récapitulatifs des sujets : eau-egouts (61 dossiers), matieres-residuelles (27 dossiers), itinerance (25 dossiers), pietonnisation (19 dossiers)
-  eau-egouts               2 étape(s), 0 à surveiller · retirés : 0 mécanique, 4 contre-lecture
-  matieres-residuelles     5 étape(s), 2 à surveiller · retirés : 0 mécanique, 3 contre-lecture
-  itinerance               5 étape(s), 2 à surveiller · retirés : 0 mécanique, 1 contre-lecture
-  pietonnisation           3 étape(s), 4 à surveiller · retirés : 0 mécanique, 3 contre-lecture
-  coût ≈ 1.54 $ US
+Récapitulatifs des sujets : rien de nouveau.
 
 === Sujets suivables et dossiers, pour Mes dossiers ===
 Projets publics : 16 sujets · index 14.7 Ko · fichiers de sujet 649 Ko au total.
@@ -162,9 +302,188 @@ Décisions récentes : 537 dossiers depuis le 2026-06-20 · 750 Ko.
 Dossiers de l'année : 4554 · 2633 Ko · organismes suggérés : 449.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-19 pas encore résumés (plafond : 120)…
-0 déjà résumés, 0 à faire.
-Rien à générer. (--force pour tout regénérer.)
+Sommaires depuis 2026-01-01 pas encore résumés (plafond : 20000)…
+4641 déjà résumés, 3203 à faire.
+
+--- Estimation ---
+Documents à résumer  : 3203
+Modèle               : claude-opus-5
+Ratio mesuré         : 1.73 caractères/jeton (sur 12 documents)
+Jetons d'entrée      : ~17 363 386
+Jetons de sortie     : ~1 024 960
+Coût estimé          : ~112.44 $ US (56.22 $ via l'API Batches)
+
+Génération…
+Envoi à l'API Batches (50 % du tarif, résultats en moins d'une heure en général)…
+Lot msgbatch_01NHLoXShd6hgbB5rsrAUfmA — statut in_progress
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  in_progress — 0 réussis, 3203 en cours, 0 en erreur
+  ended — 3203 réussis, 0 en cours, 0 en erreur
+
+3203 résumés générés, 7844 au total dans data/resumes.json
+Coût réel : 64.41 $ US
 
 === Bilan ===
   étapes         : 10
