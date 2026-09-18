@@ -88,9 +88,9 @@ const LEGENDE = {
 // manque, elle dit d'où vient ce qu'on lit — et ce qui lui manque encore.
 const LEGENDE_AVEC_RECAPS = {
   texte:
-    "Les récapitulatifs de Montréal sont écrits à partir du texte des résolutions lu dans les procès-verbaux — ce que le conseil a décidé, pour combien, et sur quoi il s'appuie. Les sommaires décisionnels, que la plupart des conseils annexent à leur ordre du jour, nourrissent les résumés de chaque décision ; ils entreront dans les récapitulatifs à la prochaine étape.",
+    "Les récapitulatifs de Montréal sont écrits à partir du sommaire décisionnel de chaque dossier, quand le conseil l'annexe à son ordre du jour, et du texte des résolutions lu dans les procès-verbaux — ce que le conseil a décidé, pour combien, et sur quoi il s'appuie. Trois conseils d'arrondissement n'annexent pas leurs sommaires : pour eux, il ne reste que le texte des résolutions.",
   texteEn:
-    'Montréal recaps are written from the text of the resolutions as read in the minutes — what the council decided, for how much, and on what grounds. The decision summaries, which most councils append to their agenda, feed each decision\'s summary; they will enter the recaps at the next step.',
+    'Montréal recaps are written from each file\'s decision summary, when the council appends it to its agenda, and from the text of the resolutions as read in the minutes — what the council decided, for how much, and on what grounds. Three borough councils do not append their summaries: for those, only the text of the resolutions remains.',
 };
 
 const decisions = await lire('data/decisions.json', null);
@@ -127,7 +127,7 @@ function ficheDossier(groupe) {
     date: groupe[0].date ?? null,
     derniere: groupe.at(-1).date ?? null,
     instances: [...new Set(groupe.map((d) => d.instance).filter(Boolean))],
-    // Montréal ne publie pas ses sommaires : ni statut, ni étape finale, ni date cible.
+    // Le sommaire annexé donne le contexte, pas le suivi : ni statut, ni étape finale, ni date cible.
     statutDossier: null,
     etapeFinale: null,
     echeance: null,
