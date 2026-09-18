@@ -41,9 +41,12 @@ jobs:
         if: ${{ inputs.sommaires != '' }}
         env:
           MTL_CONTACT: ${{ vars.MTL_CONTACT }}
+          # Les adresses passent par l'environnement : elles contiennent des « & », que le
+          # shell couperait en tâches de fond si on les mettait sur la ligne de commande.
+          MTL_URLS: ${{ inputs.sommaires }}
         run: |
           set -o pipefail
-          node scrapers/sonde-sommaires.js ${{ inputs.sommaires }} 2>&1 | tee data/sonde-sommaires.log
+          node scrapers/sonde-sommaires.js 2>&1 | tee data/sonde-sommaires.log
 
       - name: Lire la page
         if: ${{ inputs.sommaires == '' }}
