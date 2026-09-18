@@ -16,6 +16,9 @@ on:
       sommaires:
         description: "Des adresses séparées par une espace : pour chacune, dire si son ordre du jour contient les sommaires décisionnels"
         required: false
+      pdf:
+        description: "Des adresses de PDF séparées par une espace : dire ce que chacun contient et ce que nos découpeurs en tirent"
+        required: false
 
 permissions:
   contents: write
@@ -37,8 +40,17 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci --omit=dev
+      - name: Lire des PDF et dire ce qu'ils contiennent
+        if: ${{ inputs.pdf != '' }}
+        env:
+          MTL_CONTACT: ${{ vars.MTL_CONTACT }}
+          MTL_URLS: ${{ inputs.pdf }}
+        run: |
+          set -o pipefail
+          node scrapers/sonde-pdf.js 2>&1 | tee data/sonde-pdf.log
+
       - name: Chercher les sommaires décisionnels dans les ordres du jour
-        if: ${{ inputs.sommaires != '' }}
+        if: ${{ inputs.sommaires != '' && inputs.pdf == '' }}
         env:
           MTL_CONTACT: ${{ vars.MTL_CONTACT }}
           # Les adresses passent par l'environnement : elles contiennent des « & », que le
@@ -49,7 +61,7 @@ jobs:
           node scrapers/sonde-sommaires.js 2>&1 | tee data/sonde-sommaires.log
 
       - name: Lire la page
-        if: ${{ inputs.sommaires == '' }}
+        if: ${{ inputs.sommaires == '' && inputs.pdf == '' }}
         env:
           MTL_CONTACT: ${{ vars.MTL_CONTACT }}
         run: |
@@ -65,7 +77,7 @@ jobs:
         run: |
           git config user.name "dossierquebec-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add montreal/data/page-decouverte.json montreal/data/page-decouverte.log montreal/data/plateau-decouverte.json montreal/data/plateau-decouverte.log montreal/data/sonde-sommaires.json montreal/data/sonde-sommaires.log 2>/dev/null || true
+          git add montreal/data/page-decouverte.json montreal/data/page-decouverte.log montreal/data/plateau-decouverte.json montreal/data/plateau-decouverte.log montreal/data/sonde-sommaires.json montreal/data/sonde-sommaires.log montreal/data/sonde-pdf.json montreal/data/sonde-pdf.log 2>/dev/null || true
           if git diff --cached --quiet; then echo "Rien à committer."; else
             git commit -m "Découverte d'une page de la Ville de Montréal ($(date -u +%Y-%m-%d))"
             git pull --rebase && git push
