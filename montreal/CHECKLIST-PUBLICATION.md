@@ -1,4 +1,8 @@
-# Avant d'enlever l'étiquette « Prototype » — volet Montréal
+# Avant d'ouvrir le volet Montréal aux moteurs de recherche
+
+L'étiquette « Prototype » est retirée depuis le 18 septembre 2026. Ce qui reste sous clé,
+c'est le `noindex` : le site ne se laisse pas indexer tant que les droits d'usage des
+documents ne sont pas confirmés par le greffe.
 
 Une case cochée = vérifié à la date indiquée, par qui. On ne coche pas de mémoire : on
 regarde. Quand tout est coché, la dernière section dit quoi changer pour publier.
@@ -43,7 +47,7 @@ Pour chacune de : Accueil, Décisions, Votes nominatifs, Conseil municipal, Lexi
 - [ ] en thème clair et en thème sombre
 - [ ] sur téléphone (largeur 390 px) : rien ne déborde, tout se lit
 - [ ] au zoom 150 %
-- [ ] aucun texte qui promet encore quelque chose de faux (« pas encore accessible », « en attente », « prototype »)
+- [ ] aucun texte qui promet encore quelque chose de faux (« pas encore accessible », « en attente »)
 - [ ] chaque lien « PDF officiel » ouvre le bon document, à la bonne page (en tester 5 au hasard, dont un sommaire)
 - [ ] la carte des districts charge et chaque district mène à ses décisions
 - [ ] le bouton « retour en haut » (la flèche ↑, en bas à droite) apparaît dès qu'on a descendu de 600 px, sur toutes les pages assez longues, en clair comme en sombre, et sur téléphone
@@ -61,6 +65,6 @@ Pour chacune de : Accueil, Décisions, Votes nominatifs, Conseil municipal, Lexi
 - [ ] Retirer `<meta name="robots" content="noindex, nofollow">` des six pages de montreal/
 - [ ] Retirer l'en-tête `X-Robots-Tag` sur `/montreal/` dans vercel.json
 - [ ] Ajouter les six pages à sitemap.xml
-- [ ] Retirer l'étiquette « Prototype » (index.html et les cinq autres en-têtes)
+- [x] Retirer l'étiquette « Prototype » (les six en-têtes) *(18 sept. 2026)*
 - [ ] Image de partage (og-image) propre à Montréal, testée sur un lien partagé
 - [ ] Une dernière capture de chaque page, clair et sombre, jointe au commit de publication
