@@ -29,8 +29,11 @@ import { readFile, writeFile } from 'node:fs/promises';
 const RESUMES = new URL('../data/resumes.json', import.meta.url);
 const DECISIONS = new URL('../data/decisions.json', import.meta.url);
 const OUT = new URL('../data/resumes-en.json', import.meta.url);
-const MODELE = 'claude-opus-5';
-const TARIF = { entree: 5, sortie: 25 };
+// Sonnet plutôt qu'Opus : traduire un texte déjà écrit n'est pas la même tâche que l'écrire,
+// et le garde-fou des nombres vérifie ce qui compte. Décidé le 18 septembre 2026, après le
+// rattrapage : 39,91 $ US sur Opus pour 3 728 résumés et 5 377 titres — 16 $ sur Sonnet.
+const MODELE = 'claude-sonnet-5';
+const TARIF = { entree: 2, sortie: 10 };
 const CONCURRENCE = 4;
 
 const CONSIGNE = `You translate plain-language summaries of City of Montréal (Canada) municipal decisions
@@ -210,9 +213,12 @@ async function main() {
   for (let i = 0; i < objetsAFaire.length; i += PAR_PAQUET) paquets.push(objetsAFaire.slice(i, i + PAR_PAQUET));
 
   const jetonsEstimes = aFaire.reduce((n, r) => n + Math.round(JSON.stringify(r.puces).length / 3.6), 0);
-  const cout = aFaire.length ? ((jetonsEstimes + aFaire.length * 330) / 1e6) * TARIF.entree + (jetonsEstimes / 1e6) * TARIF.sortie : 0;
+  // La sortie d'une traduction pèse au moins autant que l'entrée, et l'outil ajoute sa
+  // structure : compter la sortie à l'égal de l'entrée sous-estimait la facture de moitié
+  // (21,97 $ annoncés, 39,91 $ payés le 18 septembre 2026). On compte 1,4 fois.
+  const cout = aFaire.length ? ((jetonsEstimes + aFaire.length * 330) / 1e6) * TARIF.entree + ((jetonsEstimes * 1.4) / 1e6) * TARIF.sortie : 0;
   const jetonsObjets = objetsAFaire.reduce((n, d) => n + Math.round(d.objet.length / 3.6), 0);
-  const coutObjets = paquets.length ? ((jetonsObjets + paquets.length * 400) / 1e6) * TARIF.entree + (jetonsObjets / 1e6) * TARIF.sortie : 0;
+  const coutObjets = paquets.length ? ((jetonsObjets + paquets.length * 400) / 1e6) * TARIF.entree + ((jetonsObjets * 1.4) / 1e6) * TARIF.sortie : 0;
   const total = args.has('batch') ? (cout + coutObjets) / 2 : cout + coutObjets;
   console.log(`Résumés : ${Object.keys(precedent).length} déjà traduits, ${candidats.length} à faire, ${aFaire.length} cette fois.`);
   console.log(`Titres  : ${Object.keys(objetsPrecedents).length} déjà traduits, ${objetsCandidats.length} à faire, ${objetsAFaire.length} cette fois en ${paquets.length} paquet(s).`);

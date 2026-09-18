@@ -34,7 +34,7 @@ regarde. Quand tout est coché, la dernière section dit quoi changer pour publi
 - [ ] Les résumés arrivent par lots chaque matin : data/resumes.json grossit les jours de séance
 - [ ] data/textes.json n'est jamais retombé à zéro
 - [ ] Les 19 conseils ont des séances de l'année en cours (page Sources › État des données)
-- [ ] Le coût mensuel de l'API est celui attendu : ~20 $ US par mois en session, vérifié sur la facture
+- [ ] Le coût mensuel de l'API est celui attendu : ~25 $ US par mois en session (résumés sur Opus, traductions sur Sonnet), vérifié sur la facture
 
 ## 4. Chaque page, à l'œil
 
