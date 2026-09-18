@@ -6,6 +6,7 @@
 // Les sortes et les arrondissements viennent du serveur : une ville en gagne sans toucher à ce fichier.
 
 import { session, mesurer, echapper, tr } from './abonnes-client.js';
+import { dernierVolet } from './navigation.js';
 
 const ICONES = { mensuel: '🗓️', conseil: '🏛️', arrondissement: '📍' };
 
@@ -62,9 +63,17 @@ const choixCoches = (racine) => [
 ];
 
 // ---------- le formulaire public (accueil des volets) ----------
-// `note` : une ligne propre au volet, sous l'explication — par exemple « le premier compte rendu
-// de Montréal arrive fin septembre » —, retirée par la page le jour où elle n'est plus vraie.
-export async function formulaireInfolettre(zone, { ville = null, note = null } = {}) {
+// La note d'une ville (api/_infolettre.js, NOTES_INFOLETTRE) — « le premier compte rendu de
+// Montréal arrive fin septembre » — vient du serveur : une seule place à changer.
+const noteDe = (v) => (v?.note ? `<p class="ab-note ab-infolettre-note">${v.note}</p>` : '');
+// « Pour les courriels de Québec, allez dans sa section » : on s'inscrit à chaque ville chez elle
+// (Martin, 18 septembre 2026). `autres` : les villes qui ont des courriels, sauf celle-ci.
+const ligneAutresVilles = (autres) =>
+  autres.length
+    ? `<p class="ab-note ab-infolettre-autres">${tr('Pour les courriels d’une autre ville, allez dans sa section : ', 'For another city’s emails, go to its section: ')}${autres.map((v) => `<a href="/${encodeURIComponent(v.cle)}/">${echapper(v.nom)}</a>`).join(', ')}.</p>`
+    : '';
+
+export async function formulaireInfolettre(zone, { ville = null } = {}) {
   if (!zone) return;
   const s = await session().catch(() => null);
   const etat = await etatServeur(s);
@@ -74,14 +83,14 @@ export async function formulaireInfolettre(zone, { ville = null, note = null } =
   // encore : le bloc reste caché. Sans ville (page commune) : toutes.
   const villes = ville ? etat.villes.filter((v) => v.cle === ville) : [...etat.villes];
   if (!villes.length) { zone.hidden = true; return; }
+  const autres = ville ? etat.villes.filter((v) => v.cle !== ville) : [];
   const titre = ville ? tr(`Les courriels de ${echapper(villes[0].nom)}`, `${echapper(villes[0].nom)} emails`) : tr('Les courriels de DossierQuébec', 'DossierQuébec emails');
 
   zone.innerHTML = `<section class="ab-infolettre">
     <h2>📬 ${titre}</h2>
     <p>${tr('Choisissez ce que vous voulez recevoir. C’est gratuit, et on se désinscrit en un clic dans chaque courriel. <strong>Vous recevez tout de suite le plus récent de chaque sorte cochée.</strong>', 'Choose what you want to receive. It is free, and one click unsubscribes you in every email. <strong>You get the latest of each kind right away</strong> (in French).')}</p>
-    ${note ? `<p class="ab-note ab-infolettre-note">${note}</p>` : ''}
     <form class="ab-infolettre-form" novalidate>
-      ${villes.map((v) => `${villes.length > 1 ? `<h3 class="ab-sous-titre">${echapper(v.nom)}</h3>` : ''}${listeSortes(etat, v.cle, v.offre)}`).join('')}
+      ${villes.map((v) => `${villes.length > 1 ? `<h3 class="ab-sous-titre">${echapper(v.nom)}</h3>` : ''}${noteDe(v)}${listeSortes(etat, v.cle, v.offre)}`).join('')}
       <div class="ab-form">
         <input type="email" name="email" required maxlength="200" autocomplete="email" placeholder="${tr('Votre courriel', 'Your email')}" aria-label="${tr('Votre courriel', 'Your email')}" value="${echapper(etat.courriel ?? '')}">
         <input type="text" name="site_web" tabindex="-1" autocomplete="off" aria-hidden="true" class="ab-pot-de-miel">
@@ -90,6 +99,7 @@ export async function formulaireInfolettre(zone, { ville = null, note = null } =
     </form>
     <p class="ab-note ab-infolettre-etat" aria-live="polite"></p>
     <p class="ab-note">${tr('Un courriel par sorte cochée. Aucune publicité ; votre adresse ne sert qu’à ça.', 'One email per kind you check. No ads; your address is used for nothing else.')}</p>
+    ${ligneAutresVilles(autres)}
   </section>`;
   zone.hidden = false;
 
@@ -136,15 +146,23 @@ export async function boiteInfolettre(zone, s, { premiereLigne = null } = {}) {
   let etat = await etatServeur(s);
   if (!etat?.villes?.length && !premiereLigne) { zone.innerHTML = ''; return; }
   etat ??= { villes: [], inscriptions: {}, courriel: s.user?.email ?? '' };
+  // Mes dossiers fait partie du volet d'où l'on vient (navigation.js) : seulement les courriels de
+  // cette ville, comme sur son accueil. Une autre ville s'inscrit chez elle. Sans volet mémorisé,
+  // ou si cette ville n'a pas de courriels : toutes.
+  const volet = dernierVolet();
+  const villesIci = etat.villes.filter((v) => v.cle === volet);
+  const villes = villesIci.length ? villesIci : etat.villes;
+  const autres = villesIci.length ? etat.villes.filter((v) => v.cle !== volet) : [];
+  const titreBoite = villesIci.length ? tr(`Mes courriels de ${echapper(villesIci[0].nom)}`, `My ${echapper(villesIci[0].nom)} emails`) : tr('Mes courriels', 'My emails');
 
   const dessiner = (message = '') => {
     zone.innerHTML = `<section class="ab-carte ab-infolettre-boite">
-      <h2 style="margin-top:0">📬 ${tr('Mes courriels', 'My emails')}</h2>
+      <h2 style="margin-top:0">📬 ${titreBoite}</h2>
       <p class="ab-chapeau" style="margin-bottom:12px">${tr('Cochez ce que vous voulez recevoir, décochez quand vous voulez. Pour les infolettres, le plus récent numéro part tout de suite.', 'Check what you want to receive, uncheck whenever you like. For newsletters, the latest issue goes out right away.')}</p>
       ${premiereLigne?.html ?? ''}
-      ${etat.villes.map((v) => `<h3 class="ab-sous-titre">${echapper(v.nom)}</h3>${listeSortes(etat, v.cle, v.offre, { cocherSuivis: true, retirable: true })}`).join('')}
-      ${etat.villes.length === 1 ? `<p class="ab-note" style="margin:6px 0 0">${tr(`Pour l’instant, seule ${echapper(etat.villes[0].nom)} a son compte rendu du mois passé de prêt.`, `For now, only ${echapper(etat.villes[0].nom)} has last month’s recap ready.`)}</p>` : ''}
+      ${villes.map((v) => `${villes.length > 1 ? `<h3 class="ab-sous-titre">${echapper(v.nom)}</h3>` : ''}${noteDe(v)}${listeSortes(etat, v.cle, v.offre, { cocherSuivis: true, retirable: true })}`).join('')}
       <p class="ab-note" aria-live="polite">${message || tr(`Envoyé à ${echapper(etat.courriel ?? '')}.`, `Sent to ${echapper(etat.courriel ?? '')}.`)}</p>
+      ${ligneAutresVilles(autres)}
     </section>`;
     premiereLigne?.cabler?.(zone);
   };
