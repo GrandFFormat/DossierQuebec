@@ -398,6 +398,25 @@ details p { background: var(--fond-2); border-radius: var(--rayon); padding: 12p
 
 /* Un nom d'arrondissement cité dans un paragraphe : souligné et en italique. Sans ça, une page
    comme Sources est un mur de texte d'une seule couleur, où l'œil ne trouve pas les noms. */
+/* La page Sources est un long texte suivi : elle se lit comme un article, pas comme une
+   liste de fiches. Plus d'air entre les lignes, entre les puces et autour des titres, et une
+   colonne qui ne dépasse pas la largeur où l'œil retrouve le début de la ligne suivante.
+   (Martin, 18 septembre 2026 : « c'est dur à lire ».) */
+body[data-page="sources"] main { line-height: 1.75; }
+body[data-page="sources"] main p,
+body[data-page="sources"] main li { max-width: 72ch; }
+body[data-page="sources"] main > p { margin: 0 0 20px; }
+body[data-page="sources"] main > ul { margin: 0 0 28px; padding-left: 22px; }
+body[data-page="sources"] main > ul > li { margin-bottom: 16px; }
+body[data-page="sources"] main > ul > li:last-child { margin-bottom: 0; }
+body[data-page="sources"] h3 { margin: 40px 0 14px; }
+body[data-page="sources"] h2.page { margin-bottom: 14px; }
+/* Le tableau garde une largeur minimale ; sur un téléphone il défile seul plutôt que de
+   pousser toute la page. */
+body[data-page="sources"] .bloc-tableau { margin: 24px 0 28px; overflow-x: auto; }
+body[data-page="sources"] main td,
+body[data-page="sources"] main th { padding: 12px 14px; }
+
 /* Un nom propre cité dans un paragraphe — la Ville, un jeu de données, un répertoire :
    souligné, sans italique. L'italique reste aux noms de lieux. */
 .nom-propre { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
