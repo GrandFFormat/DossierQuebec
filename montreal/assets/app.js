@@ -1082,14 +1082,14 @@ init();
   bouton.addEventListener('click', () => {
     const suivant = document.documentElement.dataset.theme === 'sombre' ? 'clair' : 'sombre';
     appliquer(suivant);
-    try { localStorage.setItem('dvm:theme', suivant); } catch {}
+    try { localStorage.setItem('dvq:theme', suivant); } catch {}
   });
 
   // Tant que rien n'a été choisi explicitement, on reste aligné sur le système.
   const media = matchMedia('(prefers-color-scheme: dark)');
   media.addEventListener?.('change', (e) => {
     let choisi = null;
-    try { choisi = localStorage.getItem('dvm:theme'); } catch {}
+    try { choisi = localStorage.getItem('dvq:theme'); } catch {}
     if (!choisi) appliquer(e.matches ? 'sombre' : 'clair');
   });
 })();
@@ -1121,7 +1121,7 @@ init();
     pct.textContent = z + '%';
     moins.disabled = z <= MIN;
     plus.disabled = z >= MAX;
-    try { localStorage.setItem('dvm:zoom', String(z)); } catch {}
+    try { localStorage.setItem('dvq:zoom', String(z)); } catch {}
   };
 
   appliquer(lire());
