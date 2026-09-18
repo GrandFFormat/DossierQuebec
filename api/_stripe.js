@@ -7,7 +7,9 @@
 // Variables Vercel :
 //   STRIPE_SECRET_KEY      sk_test_… en essai, sk_live_… en réel
 //   STRIPE_WEBHOOK_SECRET  whsec_… du point de terminaison https://dossierquebec.ca/api/stripe-webhook
-//   STRIPE_PRIX            price_… (3 $ CA par mois, récurrent)
+//   STRIPE_PRIX            price_… du forfait mensuel (10 $ CA par mois, récurrent)
+//   STRIPE_PRIX_ANNUEL     price_… du forfait annuel (80 $ CA par an, récurrent) — facultatif : sans
+//                          lui, seul le mensuel est offert
 //   STRIPE_OUVERT          « 1 » : le paiement est offert à tout le monde. Sinon, seulement aux
 //                          adresses de STRIPE_ESSAI (séparées par des virgules) — pour essayer en
 //                          production sans ouvrir l'abonnement.
@@ -36,6 +38,30 @@ export async function stripe(chemin, parametres) {
   const donnees = await res.json().catch(() => null);
   if (!res.ok) throw new Error(`Stripe ${chemin.split('?')[0]} → ${res.status} ${donnees?.error?.message ?? ''}`);
   return donnees;
+}
+
+// Les forfaits (Martin, 18 sept. 2026 : 10 $ par mois ou 80 $ par an). Le navigateur n'envoie que
+// « mensuel » ou « annuel » : l'identifiant du prix Stripe ne vient jamais de lui.
+export const FORFAITS = {
+  mensuel: { variable: 'STRIPE_PRIX', montant: 1000, intervalle: 'month' },
+  annuel: { variable: 'STRIPE_PRIX_ANNUEL', montant: 8000, intervalle: 'year' },
+};
+export const prixDe = (forfait) => (Object.hasOwn(FORFAITS, forfait) ? process.env[FORFAITS[forfait].variable] || null : null);
+
+// Avant d'envoyer quelqu'un payer : le prix configuré dans Vercel vaut-il ce que la page annonce ?
+// Un vieux price_… oublié (l'ancien 3 $) vendrait au mauvais montant. Un prix conforme le reste
+// (Stripe ne permet pas d'en changer le montant) : on ne le redemande pas à chaque paiement.
+const conformes = new Set();
+export async function prixConforme(forfait) {
+  const id = prixDe(forfait);
+  if (!id) return false;
+  if (conformes.has(id)) return true;
+  const p = await stripe(`/prices/${encodeURIComponent(id)}`);
+  const { montant, intervalle } = FORFAITS[forfait];
+  const ok = Boolean(p.active && p.currency === 'cad' && p.unit_amount === montant && p.recurring?.interval === intervalle && (p.recurring?.interval_count ?? 1) === 1);
+  if (ok) conformes.add(id);
+  else console.error(`Stripe : le prix du forfait ${forfait} (${FORFAITS[forfait].variable}) ne vaut pas ${montant / 100} $ CA par ${intervalle} — paiement refusé.`);
+  return ok;
 }
 
 // Stripe-Signature: t=<horodatage>,v1=<hmac>[,v1=…] ; HMAC-SHA256 de « t.corps brut ». Cinq minutes
