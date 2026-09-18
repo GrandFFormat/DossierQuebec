@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-18T02:57:42.456Z",
+ "generatedAt": "2026-09-18T16:10:08.376Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel quand il est publié (source « sommaire »), sinon du texte de la résolution elle-même (source « resolution »), sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,17 +7,17 @@
   "annee": "2026",
   "max": 40,
   "batch": true,
-  "depuis": "2026-01-01",
-  "plafond": 20000
+  "depuis": "2026-07-20",
+  "plafond": 120
  },
- "nombre": 7844,
- "genereCetteFois": 3203,
+ "nombre": 7871,
+ "genereCetteFois": 27,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 64.4124,
-  "jetonsEntree": 18409751,
-  "jetonsSortie": 1471039
+  "montant": 0.4014,
+  "jetonsEntree": 103258,
+  "jetonsSortie": 11462
  },
  "resumes": [
   {
@@ -3370,6 +3370,732 @@
    "jetons": {
     "entree": 3629,
     "sortie": 410
+   }
+  },
+  {
+   "id": "1262155018",
+   "numero": "1262155018",
+   "resolution": "CA26 29 0160",
+   "date": "2026-08-03",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "MOTION EN SOUTIEN AU SPVM SUITE À LA FUSILLADE DU 22 JUIN 2026 DANS L'ARRONDISSEMENT DE CÔTE-DES- NEIGES-NOTRE-DAME-DE-GRÂCE",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=18",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Pierrefonds-Roxboro adopte une motion en soutien au SPVM après la fusillade du 22 juin à Côte-des-Neiges–Notre-Dame-de-Grâce.",
+    "Il offre ses condoléances à la famille, aux proches et aux collègues de l'agent Mohamed Lamine Benredouane, décédé dans l'exercice de ses fonctions.",
+    "Il souligne le courage quotidien des membres du SPVM et réaffirme son engagement envers le service pour renforcer la sécurité publique et la confiance de la population.",
+    "Il invite la population montréalaise à témoigner son soutien aux personnes qui veillent à sa sécurité.",
+    "La motion n'entraîne aucune dépense ni aucune obligation nouvelle."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.371Z",
+   "jetons": {
+    "entree": 2784,
+    "sortie": 366
+   }
+  },
+  {
+   "id": "1263050009",
+   "numero": "1263050009",
+   "resolution": "CA26 29 0180",
+   "date": "2026-08-03",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "AVIS DE MOTION ET DÉPÔT DU PROJET DE RÈGLEMENT NUMÉRO CA29 0001-17 – DÉLÉGATION DE POUVOIRS Avis de motion est donné par la conseillère Sophie Mohsen de l’inscription pour adoption à une séance subséquente du Règlement CA29 0001-17 modifiant le Règlement CA29 0001 sur la délégation de pouvoirs aux fonctionnaires et employés de l’arrondissement de Pierrefonds-Roxboro afin de déléguer à un fonctionnaire le pouvoir d'autoriser temporairement une tolérance dans l'application de la réglementation de stationnement; Le projet de règlement est déposé avec le sommaire décisionnel. ADOPTÉ À L'UNANIMITÉ",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=86",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro annonce une modification à son règlement de délégation de pouvoirs, déposée en avis de motion pour adoption à une séance ultérieure.",
+    "Le changement confierait à un fonctionnaire de niveau 2 le pouvoir de décider en matière de circulation et de stationnement, dont l'autorisation de tolérances temporaires.",
+    "Chaque autorisation devrait préciser le territoire visé, la durée de la tolérance et les conditions de sécurité et de mobilité.",
+    "Le directeur d'arrondissement pourrait en tout temps exercer lui-même ce pouvoir ou s'en réserver l'exercice.",
+    "Motif invoqué : l'Agence de mobilité durable exige une confirmation par résolution du conseil, ce qui allonge les délais lors de tempêtes, sinistres, travaux ou événements imprévus.",
+    "Le sommaire indique qu'aucun impact financier significatif n'est associé à cette modification."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.371Z",
+   "jetons": {
+    "entree": 5052,
+    "sortie": 434
+   }
+  },
+  {
+   "id": "1268707012",
+   "numero": "1268707012",
+   "resolution": "CA26 29 0182",
+   "date": "2026-08-03",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "P.I.I.A. – LOT 1 841 979 992, CHEMIN DE LA RIVE-BOISÉE",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=94",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro refuse le projet d'agrandissement au 992, chemin de la Rive-Boisée.",
+    "Le propriétaire voulait ajouter, devant la maison et collé à celle-ci, un garage de deux étages d'environ 663 m² (±7 136 pi²).",
+    "Ce garage serait plus grand que la maison elle-même, qui fait environ 410 m² (±4 413 pi²).",
+    "Le comité consultatif d'urbanisme a recommandé le refus à l'unanimité : le garage serait trop en avant par rapport aux maisons voisines et ne suivrait pas le mode d'implantation dominant du secteur.",
+    "Le comité juge aussi le gabarit trop imposant, avec un effet d'écrasement sur la propriété voisine, et une volumétrie qui ne s'harmonise pas avec la maison existante.",
+    "Le terrain se trouve dans une zone de « terrains riverains » du règlement de zonage.",
+    "Le projet demandait en plus une dérogation mineure sur le nombre de portes de garage permis pour une maison unifamiliale isolée."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.372Z",
+   "jetons": {
+    "entree": 3947,
+    "sortie": 479
+   }
+  },
+  {
+   "id": "1266936023",
+   "numero": "1266936023",
+   "resolution": "CA26 29 0165",
+   "date": "2026-08-03",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "CONTRAT NUMÉRO 261100-ST – ANNULATION DU PROCESSUS D’APPEL D’OFFRES",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=36",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro annule son appel d'offres pour refaire l'étanchéité de la toiture, les fenêtres et les murs-rideaux de la mairie.",
+    "Les travaux prévus comprenaient la modification des fenêtres dans la toiture, la réparation de l'étanchéité autour des murs-rideaux, la réfection complète de l'étanchéité de la toiture ainsi que des travaux intérieurs et de finition.",
+    "Une seule entreprise a soumissionné : Gagné Roy inc., à 3 087 078,75 $.",
+    "Cette soumission dépasse de 380 % l'estimation des professionnels, qui était de 800 174,58 $ taxes incluses.",
+    "L'appel d'offres avait été lancé le 18 juin 2026, avec ouverture des soumissions le 9 juillet 2026 et deux addendas publiés entre-temps.",
+    "L'arrondissement indique que l'annulation et le rejet des soumissions n'ont aucun impact financier pour la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 087 078,75 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.372Z",
+   "jetons": {
+    "entree": 3251,
+    "sortie": 456
+   }
+  },
+  {
+   "id": "1264991011",
+   "numero": "1264991011",
+   "resolution": "CA26 29 0167",
+   "date": "2026-08-03",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "POLITIQUE DE RECONNAISSANCE ET DE SOUTIEN DES ORGANISMES À BUT NON LUCRATIF (OBNL)",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=43",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro reconnaît officiellement le Club de Volley-ball Dynamique comme organisme à but non lucratif, dans la catégorie A du domaine sportif.",
+    "La reconnaissance prend effet dès son adoption par le conseil d'arrondissement.",
+    "Le Club devient admissible au soutien prévu par la Politique de reconnaissance et de soutien des OBNL de l'arrondissement, selon sa catégorie.",
+    "Le Club offre un programme de volleyball pour les jeunes axé sur la condition physique, les compétences sportives et l'esprit d'équipe.",
+    "Une convention de partenariat sera préparée avec l'organisme, qui pourra aussi recevoir un accompagnement individualisé.",
+    "La reconnaissance et le soutien de tous les OBNL sont réévalués chaque année; les résultats seront transmis aux organismes à la fin de 2026, avec les ajustements exigés pour garder leur statut.",
+    "Les demandes de reconnaissance peuvent être déposées deux fois par année; plus d'une centaine d'OBNL sont actifs sur le territoire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.372Z",
+   "jetons": {
+    "entree": 5011,
+    "sortie": 485
+   }
+  },
+  {
+   "id": "1260354005",
+   "numero": "1260354005",
+   "resolution": "CA26 29 0173",
+   "date": "2026-08-03",
+   "unite": "Direction des travaux publics",
+   "objet": "SUBVENTION – REGROUPEMENT DES ÉCO-QUARTIERS – PATROUILLE DE SENSIBILISATION ENVIRONNEMENTALE « LA PATROUILLE VERTE »",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=65",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro verse 9 300 $ (taxes incluses) au Regroupement des éco-quartiers pour la « Patrouille verte » de l'été 2026.",
+    "Des étudiants en environnement iront à la rencontre des citoyens dans les parcs et lors d'événements publics de l'arrondissement.",
+    "Les sujets abordés : matières résiduelles, éco-civisme, verdissement, gestion de l'eau, forêt urbaine et biodiversité.",
+    "La description du dossier parle de 2 étudiants pour 12 semaines, tandis que la section financière mentionne l'embauche de trois étudiants.",
+    "Le projet se déroule du 1er juin au 31 août 2026, sous la supervision de la section Environnement et parcs.",
+    "La somme provient du budget de fonctionnement de l'arrondissement et n'est pas récurrente.",
+    "Les années précédentes, la contribution avait été de 2 000 $ (été 2024), 5 400 $ (2023) et 4 800 $ (2022 et 2021)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "9 300 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.372Z",
+   "jetons": {
+    "entree": 4732,
+    "sortie": 462
+   }
+  },
+  {
+   "id": "1260608001",
+   "numero": "1260608001",
+   "resolution": "CA26 29 0168",
+   "date": "2026-08-03",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "SUBVENTION À ÉCOHABITATION POUR LA PRESTATION DU SERVICE D’ACCOMPAGNEMENT JERÉNOVÉCO",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=47",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro verse 52 773,53 $ à l'organisme Écohabitation, à même son surplus.",
+    "L'argent finance le service JeRénovÉco, qui aide les propriétaires à protéger leur maison contre les inondations pluviales et les refoulements d'égout.",
+    "Le service prévoit 75 diagnostics, 75 plans de travail personnalisés, l'analyse de 15 soumissions d'entrepreneurs et un suivi jusqu'à la fin des travaux, incluant l'information sur les aides financières.",
+    "L'accompagnement est offert à 75 résidents de l'arrondissement, en français et en anglais.",
+    "Signature de l'entente et lancement en août 2026; diagnostics et travaux en 2026-2027, suivis d'un rapport de bilan.",
+    "Le document invoque les fortes pluies du 20 juin et la vulnérabilité de plusieurs secteurs résidentiels de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "52 773,53 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.372Z",
+   "jetons": {
+    "entree": 5425,
+    "sortie": 436
+   }
+  },
+  {
+   "id": "1266936020",
+   "numero": "1266936020",
+   "resolution": "CA26 29 0164",
+   "date": "2026-08-03",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "CONTRAT NUMÉRO 261500-ST – TRAVAUX D'IMPLANTATION DE DOS D'ÂNE, DE MARQUAGE ET SIGNALISATION À DIVERS ENDROITS",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=32",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro confie à CA 1 inc. l'installation de dos d'âne, du marquage et de la signalisation à divers endroits sur son territoire.",
+    "La dépense totale autorisée est de 267 506,59 $ taxes incluses : 214 005,27 $ pour le contrat, 32 100,79 $ pour les contingences et 21 400,53 $ pour les incidences.",
+    "Les travaux doivent commencer à la fin août 2026 et se terminer en novembre 2026.",
+    "Le but est de réduire les excès de vitesse sur des tronçons jugés à risque par le Comité de circulation et de sécurité routière.",
+    "CA 1 inc. a déposé la plus basse des trois soumissions conformes analysées, soit 46,66 % sous la dernière estimation de 401 228 $.",
+    "La facture est payée à 100 % par le budget d'investissement (PDI) de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "267 506,59 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.372Z",
+   "jetons": {
+    "entree": 4840,
+    "sortie": 417
+   }
+  },
+  {
+   "id": "1268707013",
+   "numero": "1268707013",
+   "resolution": "CA26 29 0184",
+   "date": "2026-08-03",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "PROCÈS-VERBAUX – COMITÉ",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=100",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Pierrefonds-Roxboro prend acte des procès-verbaux des réunions du comité consultatif d'urbanisme des 3 juin et 15 juillet 2026, et les dépose aux archives."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.372Z",
+   "jetons": {
+    "entree": 2470,
+    "sortie": 175
+   }
+  },
+  {
+   "id": "1265300006",
+   "numero": "1265300006",
+   "resolution": "CA26 29 0177",
+   "date": "2026-08-03",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "DÉROGATION MINEURE – ÉTUDE N°3003650901 15 729, BOULEVARD DE PIERREFONDS LOTS 4 062 752, 4 062 753, 4 062 754 ET 4 062 755",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=77",
+   "source": "sommaire",
+   "puces": [
+    "Un commerce situé au 15 729, boulevard de Pierrefonds (arrondissement de Pierrefonds-Roxboro) demande le droit d'installer une clôture de 3,7 m de haut.",
+    "Le règlement de zonage de l'arrondissement limite normalement les clôtures à 2 m à cet endroit.",
+    "Le propriétaire dit vouloir cette clôture plus haute pour prévenir des vols répétés sur son site.",
+    "Le comité consultatif d'urbanisme a recommandé la demande à l'unanimité le 3 juin 2026, jugeant qu'elle ne nuit pas au droit de propriété des voisins.",
+    "Un avis public de 15 jours précède la décision du conseil d'arrondissement, prévue le 3 août 2026.",
+    "Aucun coût pour la Ville n'est indiqué au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.372Z",
+   "jetons": {
+    "entree": 3343,
+    "sortie": 382
+   }
+  },
+  {
+   "id": "1262155019",
+   "numero": "1262155019",
+   "resolution": "CA26 29 0161",
+   "date": "2026-08-03",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "MOTION CONTRE LA VIOLENCE ET LA HAINE ENVERS LES FEMMES",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=20",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Pierrefonds-Roxboro adopte une motion qui condamne toute forme de haine, de violence ou de discours visant les femmes, incluant les idéologies incel et autres mouvements misogynes.",
+    "La motion évoque une tragédie survenue à Montréal, dont le manifeste du tireur exprimait une hostilité envers les femmes, comme exemple des conséquences de la radicalisation misogyne.",
+    "L'arrondissement réaffirme son soutien aux femmes de Montréal et du Québec et leur droit de vivre sans peur, violence ni discrimination.",
+    "Il dit soutenir les organismes qui préviennent la violence faite aux femmes, accompagnent les victimes et font la promotion de l'égalité entre les genres.",
+    "Il encourage le développement de ressources et l'éducation pour prévenir la radicalisation et promouvoir des modèles de masculinité non violents.",
+    "Aucune somme d'argent n'est rattachée à la motion; le document indique qu'il ne s'applique pas aux engagements de Montréal 2030."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 2990,
+    "sortie": 464
+   }
+  },
+  {
+   "id": "1266936021",
+   "numero": "1266936021",
+   "resolution": "CA26 29 0166",
+   "date": "2026-08-03",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "CONTRAT NUMÉRO 260400-ST – TRAVAUX DE DRAINAGE, D'AMÉNAGEMENT PAYSAGER ET TRAVAUX CONNEXES À DIFFÉRENTES ADRESSES",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=39",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro accorde un contrat de 414 909,47 $, taxes incluses, à Les Entreprises Cogenex inc. pour des travaux de drainage et d'aménagement paysager.",
+    "Le montant se divise ainsi : 377 190,43 $ pour le contrat, 26 403,33 $ de contingences (7 %) et 11 315,71 $ de dépenses incidentes (3 %).",
+    "Les travaux touchent une vingtaine d'adresses dans l'arrondissement : réparation de cours d'eau, drainage, réparation de l'arrière des bordures, béton, asphalte, égout et aqueduc, gazonnement.",
+    "Le chantier doit débuter en septembre 2026 et se terminer en novembre 2026; les citoyens seront avisés avant le début des travaux.",
+    "La facture est payée à 100 % par le surplus de l'arrondissement de Pierrefonds-Roxboro.",
+    "Quatre des six preneurs du cahier des charges ont soumissionné; la plus basse soumission dépasse de 47 % l'estimation initiale de 255 139,08 $, écart ramené à 20,3 % après correction d'items sous-estimés."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "414 909,47 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 4483,
+    "sortie": 515
+   }
+  },
+  {
+   "id": "1262155016",
+   "numero": "1262155016",
+   "resolution": "CA26 29 0159",
+   "date": "2026-08-03",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "PROCLAMATION – MOIS DE LA SENSIBILISATION À L'ARTHRITE",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=16",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro proclame le mois de septembre « Mois de la sensibilisation à l'arthrite ».",
+    "Le geste vise à appuyer la Société de l'arthrite du Canada pour faire passer son message aux résidents de l'arrondissement.",
+    "Le document rappelle que six millions de personnes au Canada, soit une sur cinq, vivent avec l'arthrite et qu'il n'existe aucun moyen d'en guérir.",
+    "Il indique que ce nombre pourrait atteindre neuf millions d'ici 2040 si la question reste sans réponse.",
+    "Aucune dépense n'est prévue : il s'agit d'une proclamation, reconduite chaque année depuis 2023."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 2931,
+    "sortie": 341
+   }
+  },
+  {
+   "id": "1268707011",
+   "numero": "1268707011",
+   "resolution": "CA26 29 0181",
+   "date": "2026-08-03",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "P.I.I.A. – LOT 1 842 819 14101-14103, AVENUE ANSELME-LAVIGNE ET 4500, RUE RENÉ-ÉMARD",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=90",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro approuve la rénovation complète des façades du Manoir Roger-Bernard, un immeuble résidentiel de 5 étages situé au 14101-14103, avenue Anselme-Lavigne et 4500, rue René-Émard.",
+    "Le crépi existant sera remplacé par un parement métallique, choisi parce que la structure actuelle ne peut porter qu'un matériau léger.",
+    "Les garde-corps des balcons seront refaits en résille métallique, qui laisse passer la lumière tout en masquant la vue depuis la rue.",
+    "Trois nouvelles marquises seront installées dans les cours avant et latérale, à la demande de l'Office municipal d'habitation de Montréal, pour abriter les personnes âgées entre le stationnement et les entrées.",
+    "Les marquises auront une structure indépendante, ce qui exige aussi une dérogation mineure traitée dans un autre dossier.",
+    "Les travaux suivront les plans des architectes Ruccolo + Faubert datés du 5 juin 2026.",
+    "Le comité consultatif d'urbanisme a recommandé le projet à l'unanimité le 15 juillet 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 3980,
+    "sortie": 496
+   }
+  },
+  {
+   "id": "1264911001",
+   "numero": "1264911001",
+   "resolution": "CA26 29 0172",
+   "date": "2026-08-03",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "CONTRIBUTION FINANCIERE – SPORTS MONTRÉAL",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=62",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro verse 10 000 $ à l'organisme sans but lucratif Sports Montréal inc. pour l'été 2026.",
+    "L'argent sert à payer les accompagnateurs des enfants avec limitations dans les camps de jour.",
+    "Les besoins évalués atteignent 35 semaines d'accompagnement : 14 à Grier, 11 à À-Ma-Baie et 10 à George-Springate.",
+    "Le coût total de ce service pour la saison est de 27 288,99 $, alors que l'organisme avait prévu 7 787,52 $ à son budget.",
+    "Avec le financement déjà reçu, il manquait 10 000 $ à l'organisme pour couvrir tous les salaires.",
+    "Sports Montréal avait déjà reçu 10 000 $ en mars 2026 pour l'offre de camps de jour dans l'arrondissement.",
+    "L'organisme devra remettre un rapport final des camps de jour après la saison estivale."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "10 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 3928,
+    "sortie": 438
+   }
+  },
+  {
+   "id": "1268388006",
+   "numero": "1268388006",
+   "resolution": "CA26 29 0176",
+   "date": "2026-08-03",
+   "unite": "Direction des relations avec les citoyens_services administratifs et greffe",
+   "objet": "REDDITION DES COMPTES DES DEMANDES DE PAIEMENT ET ENGAGEMENTS",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=75",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro dépose au conseil d'arrondissement son rapport de dépenses autorisées par les fonctionnaires, comme l'exige la loi.",
+    "Le rapport couvre la période du 2 mai au 3 juillet 2026 : 568 452.31 $ d'engagements et 108 140.04 $ de demandes de paiement, pour un total de 676 592,35 $.",
+    "Il inclut aussi 183 464.17 $ de dépenses par imputations directes (mai et juin) et 22 246.82 $ d'achats par cartes de crédit du 1er avril au 30 mai 2026, soit 205 710,99 $.",
+    "Il s'agit d'une reddition de comptes : le conseil en prend acte, sans nouvelle dépense décidée."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": "676 592,35 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 2838,
+    "sortie": 372
+   }
+  },
+  {
+   "id": "1262155015",
+   "numero": "1262155015",
+   "resolution": "CA26 29 0158",
+   "date": "2026-08-03",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "PROCLAMATION – JOURNÉE DE LA SENSIBILISATION À LA MALADIE POLYKYSTIQUE DES REINS (MPR)",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=14",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro proclame le 4 septembre Journée nationale de sensibilisation à la maladie polykystique des reins (MPR).",
+    "Le conseil d'arrondissement invite la population à appuyer la Fondation canadienne de la MPR.",
+    "Le document rappelle que Santé Canada reconnaît cette date et que la maladie touche 66 000 personnes au Canada.",
+    "Aucune dépense n'est prévue au dossier; l'arrondissement a adopté la même proclamation chaque année depuis 2022."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 2926,
+    "sortie": 284
+   }
+  },
+  {
+   "id": "1264902001",
+   "numero": "1264902001",
+   "resolution": "CA26 29 0175",
+   "date": "2026-08-03",
+   "unite": "Direction des relations avec les citoyens_services administratifs et greffe",
+   "objet": "AFFECTATION DU SURPLUS DE GESTION DÉGAGÉ DE L’EXERCICE FINANCIER 2025",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=72",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement Pierrefonds-Roxboro répartit le surplus de gestion de 1 342 300 $ dégagé de son exercice financier 2025.",
+    "150 300 $ vont à la réserve qui sert à stabiliser les coûts du déneigement.",
+    "200 000 $ vont à la réserve pour l'équilibre budgétaire.",
+    "Le solde de 992 000 $ reste un surplus libre que l'arrondissement peut utiliser à sa discrétion.",
+    "Un transfert de 350 300 $ entre les différents comptes de surplus est autorisé.",
+    "La répartition suit la politique sur les surplus 2025 adoptée par le comité exécutif le 10 juin 2026 et le conseil municipal le 15 juin 2026.",
+    "La décision relève du conseil d'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 342 300 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 3656,
+    "sortie": 375
+   }
+  },
+  {
+   "id": "1266936018",
+   "numero": "1266936018",
+   "resolution": "CA26 29 0162",
+   "date": "2026-08-03",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "AUTORISATION DE SIGNATURE D’UN BAIL VISANT À RÉGULARISER LA PRÉSENCE D'UN TERRE-PLEIN SUR LE LIT DE LA RIVIÈRE DES PRAIRIES FACE AU PARC DE LA PROMENADE-LALANDE ET À CONFIRMER QUE LES LIEUX SERONT UTILISÉS À DES FINS NON LUCRATIVES FAVORISANT L'ACCÈS DU PUBLIC AU PLAN D'EAU",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=23",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro veut régulariser un terre-plein qui empiète sur le lit de la rivière des Prairies, devant le parc de la Promenade-Lalande.",
+    "Cet empiètement vient de remblais faits vers les années 1960 et a été signalé par le consultant (Terraformex) lors de la conception du réaménagement du parc.",
+    "La Ville choisit de louer le terrain plutôt que de l'acheter, jugeant la location plus simple.",
+    "Le bail prévoit des frais annuels : 80,00 $ plus taxes pour 2026.",
+    "Le directeur d'arrondissement, Dominique Jacob, est désigné mandataire pour signer le bail au nom de l'arrondissement.",
+    "Le bail confirme que les lieux serviront à des fins non lucratives favorisant l'accès du public au plan d'eau.",
+    "Prochaines étapes : transmettre la résolution, payer les frais, puis signer le bail."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "80,00$ + taxes",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 3290,
+    "sortie": 433
+   }
+  },
+  {
+   "id": "1265000004",
+   "numero": "1265000004",
+   "resolution": "CA26 29 0170",
+   "date": "2026-08-03",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "ENTENTE DE SERVICES – CÉGEP GÉRALD-GODIN",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=56",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro et le Cégep Gérald-Godin échangent l'accès à leurs installations du 1er août 2026 au 31 juillet 2027.",
+    "Aucun argent ne change de main : l'échange se fait heure pour heure, gratuitement de part et d'autre.",
+    "Le Cégep obtient l'accès aux terrains sportifs, espaces publics et centres communautaires de l'arrondissement pour ses programmes sports-études.",
+    "L'arrondissement et ses organismes sportifs locaux obtiennent l'accès aux gymnases, classes et salles du Cégep.",
+    "Les plages horaires seront fixées chaque année selon les besoins des deux parties et la disponibilité des lieux.",
+    "À titre indicatif, le document compare 14,5 heures de terrain de soccer (1 087 $) à 14,5 heures de gymnase (1 305 $).",
+    "Une entente semblable existait déjà pour la période du 1er mai 2025 au 31 mai 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 3203,
+    "sortie": 442
+   }
+  },
+  {
+   "id": "1263050008",
+   "numero": "1263050008",
+   "resolution": "CA26 29 0183",
+   "date": "2026-08-03",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "COMITÉ DE CIRCULATION ET DE SÉCURITÉ ROUTIÈRE",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=98",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil de l'arrondissement Pierrefonds-Roxboro approuve les procès-verbaux du comité de circulation et de sécurité routière des 14 mai et 25 juin 2026.",
+    "En les approuvant, le conseil accepte les conclusions et recommandations du comité.",
+    "Cette approbation permet de modifier l'annexe « A » du règlement 868 sur la circulation et la sécurité publique (ancienne ville de Pierrefonds) et du règlement 98-596 sur le stationnement (ancienne ville de Roxboro).",
+    "Le document ne détaille pas les mesures précises recommandées; il indique qu'elles visent la sécurité des usagers du réseau routier de l'arrondissement.",
+    "Aucune somme d'argent n'est associée à la décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 2672,
+    "sortie": 359
+   }
+  },
+  {
+   "id": "1266936022",
+   "numero": "1266936022",
+   "resolution": "CA26 29 0163",
+   "date": "2026-08-03",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "CONTRAT NUMÉRO 262000-ST – TRAVAUX DE VOIRIE POUR LA RECONSTRUCTION DE LA CHAUSSÉE ET D'UNE CONDUITE D'AQUEDUC SUR UN TRONÇON DU BOULEVARD GOUIN OUEST, ENTRE LES RUES DES CAGEUX ET COURSOL",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=26",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro accorde un contrat de 1 191 749,18 $ (taxes incluses) à Les Entreprises J. Piccioni inc. pour refaire la chaussée et une conduite d'aqueduc sur le boulevard Gouin Ouest, entre les rues Des Cageux et Coursol.",
+    "Le montant comprend 998 600 $ pour le contrat, 143 219,18 $ de contingences (14 %) et 49 930 $ d'incidences (5 %).",
+    "Les travaux ajoutent un nouveau trottoir pour sécuriser l'accès des piétons au parc Deauville, dans le cadre du programme Vision Zéro.",
+    "Les travaux doivent commencer le 24 août 2026 et se terminer le 15 octobre 2026; les citoyens seront avisés au préalable.",
+    "Cinq entreprises ont soumissionné sur douze qui ont pris le cahier des charges; la soumission retenue est de 18 % sous l'estimation de 1 220 804 $.",
+    "La facture se partage entre le Service de l'urbanisme et de la mobilité (781 928,09 $) et la Direction de la gestion de l'eau (409 821,09 $), avec un financement par règlement d'emprunt jusqu'à 715 000 $ net."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 191 749,18 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 5634,
+    "sortie": 550
+   }
+  },
+  {
+   "id": "1260207002",
+   "numero": "1260207002",
+   "resolution": "CA26 29 0174",
+   "date": "2026-08-03",
+   "unite": "Direction des relations avec les citoyens_services administratifs et greffe",
+   "objet": "RÉPARTITION DES SOMMES DU SOLDE REPORTÉ DE 2025 AU PROGRAMME DÉCENNAL D'IMMOBILISATIONS 2026-2035",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=69",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro n'a pas dépensé 9 653 000 $ de son budget d'immobilisations en 2025; cette somme est reportée au programme d'investissement 2026-2035.",
+    "Avec ce report, le budget d'immobilisations de l'arrondissement passe de 7 102 000 $ à 16 755 000 $.",
+    "Le conseil d'arrondissement répartit cette somme entre les différents projets déjà prévus, pour qu'ils se poursuivent ou se terminent.",
+    "Le solde reporté vient de projets non réalisés, de projets commencés mais non terminés, et de projets terminés à un coût plus bas que prévu.",
+    "Le report n'augmente pas le niveau d'emprunt à la charge des contribuables.",
+    "L'arrondissement peut utiliser ce budget supplémentaire comme il le souhaite."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "9 653 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 3360,
+    "sortie": 399
+   }
+  },
+  {
+   "id": "1263050010",
+   "numero": "1263050010",
+   "resolution": "CA26 29 0178",
+   "date": "2026-08-03",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "DÉROGATION MINEURE – ÉTUDE N°3003674919 14 101-14 103, AVENUE ANSELME-LAVIGNE ET 4 500, RUE RENÉ-ÉMARD – LOT 1 842 819",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=80",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Pierrefonds-Roxboro doit se prononcer sur une dérogation mineure pour un immeuble d'habitations collectives situé aux 14 101-14 103, avenue Anselme-Lavigne et 4 500, rue René-Émard.",
+    "Le propriétaire veut installer trois marquises (auvents) séparées du bâtiment principal, dans les cours avant et latérale donnant sur une rue.",
+    "Le règlement de zonage actuel interdit les marquises dans une cour latérale adjacente à une rue et celles qui ne sont pas rattachées au bâtiment.",
+    "Le document invoque des contraintes techniques : la structure des nouvelles marquises doit être indépendante de celle des marquises existantes.",
+    "Le comité consultatif d'urbanisme a recommandé l'acceptation à l'unanimité le 15 juillet 2026, jugeant que les dérogations ne nuisent pas au droit de propriété des voisins.",
+    "Un avis public de 15 jours précède la décision du conseil d'arrondissement, prévue le 3 août 2026.",
+    "Aucun impact financier n'est prévu au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 3619,
+    "sortie": 490
+   }
+  },
+  {
+   "id": "1265000005",
+   "numero": "1265000005",
+   "resolution": "CA26 29 0171",
+   "date": "2026-08-03",
+   "unite": "Conseil d'arrondissement",
+   "objet": "ENTENTE DE SERVICES – CÉGEP JOHN-ABBOTT",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=59",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro et le Cégep John-Abbott s'échangent gratuitement des installations sportives du 1er août 2026 au 31 juillet 2027.",
+    "Le Cégep peut utiliser le terrain de baseball du parc George-Springate (4788, rue Richmond), avec ouverture, préparation et entretien du terrain assurés.",
+    "Cet accès est limité à 11 semaines, du 1er août à la troisième semaine d'octobre; le Club de baseball Pierrefonds garde la priorité et la Ville peut modifier l'horaire.",
+    "En échange, les groupes sportifs de l'arrondissement obtiennent jusqu'à 96 heures dans les gymnases du Complexe sportif du Cégep (gymnase Casgrain à l'automne, autre gymnase en hiver-printemps).",
+    "Les gymnases ne sont pas disponibles pendant les examens (mi-décembre, mi-mai) et les remises de diplômes; le Cégep peut modifier les horaires.",
+    "À titre indicatif, le document évalue l'usage du terrain de baseball à 1 725 $ et celui des gymnases à 3 255 $."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 3487,
+    "sortie": 500
+   }
+  },
+  {
+   "id": "1263050011",
+   "numero": "1263050011",
+   "resolution": "CA26 29 0179",
+   "date": "2026-08-03",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "DÉROGATION MINEURE – ÉTUDE N°3003646351 992, CHEMIN DE LA RIVE-BOISÉE LOT 1 841 979",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=83",
+   "source": "sommaire",
+   "puces": [
+    "Un propriétaire du 992, chemin de la Rive-Boisée, dans Pierrefonds-Roxboro, demande une dérogation mineure pour agrandir sa maison unifamiliale isolée.",
+    "Il veut installer deux portes de garage doubles et deux portes de garage simples, alors que le règlement de zonage en permet au maximum deux simples ou une double.",
+    "Le comité consultatif d'urbanisme a recommandé à l'unanimité de refuser la demande, le 3 juin 2026.",
+    "Le comité retient que le refus ne cause pas de préjudice sérieux, puisque le projet d'agrandissement peut se faire en respectant la réglementation.",
+    "Le conseil d'arrondissement doit trancher le 3 août 2026, après un avis public de 15 jours."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 3449,
+    "sortie": 362
+   }
+  },
+  {
+   "id": "1264991010",
+   "numero": "1264991010",
+   "resolution": "CA26 29 0169",
+   "date": "2026-08-03",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "SUBVENTION AVEC CONVENTION – TABLE DE QUARTIER DU NORD-OUEST DE L'ÎLE DE MONTRÉAL",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17438#page=51",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro verse 50 000 $ à la Table de quartier du Nord-Ouest-de-l'Île de Montréal pour la période du 4 août 2026 au 31 août 2027.",
+    "La somme vient de la Ville centre : 33 620 $ du Service de la diversité et de l'inclusion sociale et 16 380 $ de l'entente Ville–ministère de l'Emploi et de la Solidarité sociale (non récurrent).",
+    "Avec Centraide (75 000 $) et la Direction régionale de santé publique (17 145 $), la Table reçoit au total 142 145 $ pour 2026-2027.",
+    "L'an dernier, la contribution de la Ville à cette Table était de 31 113 $; le soutien cible par table a été porté à 50 000 $ en avril 2026.",
+    "La Table réunit organismes communautaires, institutions, partenaires privés et élus locaux, et travaille sur le logement, la sécurité alimentaire, la diversité culturelle, l'accès aux services et la transition socio-écologique.",
+    "Kathy Dancsecs, cheffe de division Loisirs, Événements et Développement social, ou son remplaçant est autorisée à signer la convention.",
+    "L'organisme doit appliquer deux protocoles de visibilité annexés à la convention."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "50 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-18T16:10:08.373Z",
+   "jetons": {
+    "entree": 5957,
+    "sortie": 550
    }
   },
   {
