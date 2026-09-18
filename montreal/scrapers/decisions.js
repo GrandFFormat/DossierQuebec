@@ -50,7 +50,7 @@ const RATTRAPAGE_JOURS = 45;
 // mais le rafraîchissement suivant n'a rien relu du tout, puisque les séances étaient
 // déjà marquées « lues » au bon numéro de découpage. Deux compteurs indépendants pour un
 // même travail laissent toujours passer l'un ou l'autre ; celui-ci n'en fait qu'un.
-export const VERSION_DECOUPAGE = 12;
+export const VERSION_DECOUPAGE = 13;
 const DIAGNOSTIC = new URL('../data/diagnostic.json', import.meta.url);
 
 // Un échantillon de ce que les PDF contiennent vraiment — les premières lignes d'un
@@ -121,7 +121,11 @@ export async function lireCache(nom) {
 
 // Lit un document de séance (PV ou ODJ) : cache d'abord, la Ville ensuite.
 export async function documentDeSeance(seance, genre, { forcer = false } = {}) {
-  const nom = `${seance.id}_${genre}`;
+  // Le cache porte l'adresse quand la séance en impose une : Ahuntsic, Anjou et Pierrefonds ont
+  // changé d'ordre du jour le 18 septembre 2026 (celui de leur page, avec les sommaires), et le
+  // cache de l'ancien aurait tenu lieu de nouveau.
+  const impose = seance.documents?.[genre];
+  const nom = impose ? `${seance.id}_${genre}_${impose.match(/doc=(\d+)/)?.[1] ?? 'page'}` : `${seance.id}_${genre}`;
   if (!forcer) {
     const cache = await lireCache(nom);
     if (cache) return { ...cache, depuisCache: true };
