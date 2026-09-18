@@ -3,6 +3,11 @@
 // AILLEURS un ordre du jour qui, lui, les contient ?
 //
 //   node scrapers/sonde-sommaires.js <url> [<url> …]
+//   MTL_URLS="<url> <url>" node scrapers/sonde-sommaires.js
+//
+// Les adresses du portail de la Ville contiennent des « & » : passées en argument de shell,
+// elles se coupent en tâches de fond et le script ne reçoit rien. D'où MTL_URLS, lue telle
+// quelle depuis l'environnement — c'est ce qu'utilise le workflow.
 //
 // Pour chaque page donnée : la liste des documents du visualiseur qu'elle porte (comme la page
 // du Plateau), puis, pour le plus récent ordre du jour et le plus récent procès-verbal, le
@@ -15,7 +20,7 @@ import { lirePdf, estPdf } from '../lib/pdf.js';
 import { decouperSommaires, decouperResolutions, normaliserTexte } from '../lib/pv.js';
 import { documentsDePage, dateDuDocument } from '../lib/plateau.js';
 
-const urls = process.argv.slice(2).filter((a) => /^https?:/i.test(a));
+const urls = [...process.argv.slice(2), ...String(process.env.MTL_URLS ?? '').split(/\s+/)].filter((a) => /^https?:/i.test(a));
 if (!urls.length) {
   console.error('usage : node scrapers/sonde-sommaires.js <url> [<url> …]');
   process.exit(2);
