@@ -639,3 +639,17 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 .ab-courriel-verrou { opacity: .75; }
 .ab-courriel-cadenas { width: 18px; margin-top: 2px; flex: none; text-align: center; }
 .ab-courriel .ab-liens { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 6px; align-items: center; }
+
+
+/* mtl-courriels-zones */
+.ab-mtl-blocs { display: flex; flex-direction: column; gap: 14px; margin: 8px 0 4px; }
+.ab-zone { margin: 0; padding: 12px 14px 10px; border: 1px solid var(--ligne, #DDE2E7); border-radius: 10px; background: var(--fond-2, #F4F6F8); }
+.ab-zone legend { padding: 0 6px; font-weight: 700; font-size: 14px; color: var(--encre, #16191D); }
+.ab-zone-aide { margin: 0 0 8px; font-size: 13px; color: var(--doux, #5B6570); line-height: 1.45; }
+.ab-zone-cases { display: flex; flex-wrap: wrap; gap: 10px 18px; }
+.ab-langue { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; }
+.ab-langue input { width: 18px; height: 18px; accent-color: var(--accent, #0B8A4B); }
+.ab-zone-ville .ab-courriel,
+.ab-zone-arr .ab-courriel { border-top-color: transparent; padding-top: 6px; }
+.ab-zone-arr .ab-arr-suivis { margin-top: 4px; }
+.ab-zone-arr .ab-arr-choix { margin-top: 8px; }

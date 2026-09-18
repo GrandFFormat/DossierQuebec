@@ -13,7 +13,7 @@
 
 import { supabase, site } from './_alertes.js';
 import { utilisateurDe } from './_stripe.js';
-import { COURRIEL, VILLES_INFOLETTRE, choixValide, deMois, dernierNumero, echapper, envoyerBienvenue, envoyerCourriels, idsSignes, lienSigne, nomComplet, offreDe, prochainEnvoi, NOTES_INFOLETTRE } from './_infolettre.js';
+import { COURRIEL, VILLES_INFOLETTRE, LANGUES_PAR_VILLE, choixValide, deMois, dernierNumero, echapper, envoyerBienvenue, envoyerCourriels, idsSignes, lienSigne, nomComplet, offreDe, prochainEnvoi, NOTES_INFOLETTRE } from './_infolettre.js';
 
 const jetonDe = (req) => String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '') || null;
 const corpsDe = (req) => {
@@ -33,17 +33,19 @@ function page(titre, message) {
 }
 
 async function inscriptionsDe(email) {
-  return supabase(`/rest/v1/infolettre_inscriptions?email=eq.${encodeURIComponent(email)}&select=id,email,ville,type,arrondissement,statut,confirmation_envoyee_le`);
+  return supabase(`/rest/v1/infolettre_inscriptions?email=eq.${encodeURIComponent(email)}&select=id,email,ville,type,arrondissement,langue,statut,confirmation_envoyee_le`);
 }
 
 // La clé d'un choix dans la réponse : « quebec », « quebec:conseil », « quebec:arrondissement:beauport ».
-const cleChoix = ({ ville, type = 'mensuel', arrondissement = '' }) => [ville, type, arrondissement].filter(Boolean).join(':').replace(/:mensuel$/, '');
+// montreal:mensuel:fr · montreal:conseil:en · montreal:arrondissement:plateau-mont-royal:fr
+const cleChoix = ({ ville, type = 'mensuel', arrondissement = '', langue = 'fr' }) =>
+  [ville, type === 'mensuel' ? null : type, arrondissement || null, langue || 'fr'].filter(Boolean).join(':');
 
 async function etat(u) {
   const inscriptions = {};
   if (u?.email) for (const i of await inscriptionsDe(u.email.toLowerCase())) inscriptions[cleChoix(i)] = i.statut;
   return {
-    villes: Object.entries(VILLES_INFOLETTRE).map(([cle, nom]) => ({ cle, nom, offre: offreDe(cle), note: NOTES_INFOLETTRE[cle] ?? null })),
+    villes: Object.entries(VILLES_INFOLETTRE).map(([cle, nom]) => ({ cle, nom, offre: offreDe(cle), langues: LANGUES_PAR_VILLE[cle] ?? ['fr'], note: NOTES_INFOLETTRE[cle] ?? null })),
     connecte: Boolean(u),
     courriel: u?.email ?? null,
     inscriptions,
@@ -67,7 +69,7 @@ async function confirmerPour(email, choix, { userId = null, source = 'formulaire
   for (const c of choix) {
     const e = existantes.find((x) => cleChoix(x) === cleChoix(c));
     if (e?.statut === 'confirme') continue;
-    const [ligne] = await supabase('/rest/v1/infolettre_inscriptions?on_conflict=email,ville,type,arrondissement', {
+    const [ligne] = await supabase('/rest/v1/infolettre_inscriptions?on_conflict=email,ville,type,arrondissement,langue', {
       methode: 'POST',
       corps: [{ email, ...c, statut: 'confirme', confirme_le: maintenant, desinscrit_le: null, source, ...(userId ? { user_id: userId } : {}) }],
       entetes: { Prefer: 'resolution=merge-duplicates,return=representation' },
@@ -165,7 +167,7 @@ export default async function handler(req, res) {
 
       const aDemander = choix.filter((c) => existantes.find((e) => cleChoix(e) === cleChoix(c))?.statut !== 'confirme');
       if (aDemander.length && !recent) {
-        const lignes = await supabase('/rest/v1/infolettre_inscriptions?on_conflict=email,ville,type,arrondissement', {
+        const lignes = await supabase('/rest/v1/infolettre_inscriptions?on_conflict=email,ville,type,arrondissement,langue', {
           methode: 'POST',
           corps: aDemander.map((c) => ({ email, ...c, statut: 'en_attente', confirmation_envoyee_le: new Date().toISOString() })),
           entetes: { Prefer: 'resolution=merge-duplicates,return=representation' },
@@ -194,7 +196,7 @@ export default async function handler(req, res) {
       const non = choixDe({ choix: (corps.choix ?? []).filter((c) => c?.actif === false) });
       await confirmerPour(email, oui, { userId: u.id, source: 'mes-dossiers' });
       for (const c of non) {
-        await supabase(`/rest/v1/infolettre_inscriptions?email=eq.${encodeURIComponent(email)}&ville=eq.${c.ville}&type=eq.${c.type}&arrondissement=eq.${c.arrondissement}&statut=neq.desinscrit`, {
+        await supabase(`/rest/v1/infolettre_inscriptions?email=eq.${encodeURIComponent(email)}&ville=eq.${c.ville}&type=eq.${c.type}&arrondissement=eq.${c.arrondissement}&langue=eq.${c.langue ?? 'fr'}&statut=neq.desinscrit`, {
           methode: 'PATCH', corps: { statut: 'desinscrit', desinscrit_le: new Date().toISOString() }, entetes: { Prefer: 'return=minimal' },
         });
       }
