@@ -45,7 +45,8 @@ async function etat(u) {
   const inscriptions = {};
   if (u?.email) for (const i of await inscriptionsDe(u.email.toLowerCase())) inscriptions[cleChoix(i)] = i.statut;
   return {
-    villes: Object.entries(VILLES_INFOLETTRE).map(([cle, nom]) => ({ cle, nom, offre: offreDe(cle), langues: LANGUES_PAR_VILLE[cle] ?? ['fr'], note: NOTES_INFOLETTRE[cle] ?? null })),
+    villes: Object.entries(VILLES_INFOLETTRE).map(([cle, nom]) => ({ cle, nom, offre: offreDe(cle), langues: LANGUES_PAR_VILLE[cle] ?? ['fr'], note: typeof NOTES_INFOLETTRE[cle] === 'string' ? NOTES_INFOLETTRE[cle] : (NOTES_INFOLETTRE[cle]?.fr ?? null),
+      noteEn: typeof NOTES_INFOLETTRE[cle] === 'object' ? (NOTES_INFOLETTRE[cle]?.en ?? null) : null })),
     connecte: Boolean(u),
     courriel: u?.email ?? null,
     inscriptions,
