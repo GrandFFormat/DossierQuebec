@@ -270,13 +270,14 @@ function rendreDecisions() {
   // documents, pas des décisions, et les compter gonflerait le total de 272 pour rien.
   // C'est précisément le défaut qu'on reproche aux données de Québec : on ne le refait pas.
   const nDecisions = filtrees.reduce((n, d) => n + (d.type === 'Résolution' ? 1 : 0), 0);
-  const nDocuments = filtrees.length - nDecisions;
 
-  $('#compte-decisions').textContent =
-    `${nombreFr(nDecisions)} décision(s) affichée(s) sur ${nombreFr(totalDecisions())} lues dans les procès-verbaux de ${parametres.annee}` +
-    (etat.decisions.seancesLues != null ? ` (${etat.decisions.seancesLues} séance(s) lue(s)${etat.decisions.seancesEnAttente ? `, ${etat.decisions.seancesEnAttente} en attente de procès-verbal` : ''}).` : '.') +
-    (nDocuments ? ` S'y ajoutent ${nombreFr(nDocuments)} document(s) de séance : les procès-verbaux et ordres du jour eux-mêmes.` : '') +
-    (etat.parId.size ? ` ${nombreFr(nombreResumees(etat.decisions.decisions))} portent un résumé en langage clair.` : '');
+  // Court : le nombre, l'état des séances, les résumés. Le compte des documents de séance
+  // (procès-verbaux, ordres du jour) se lit dans le filtre des types, pas ici.
+  const total = totalDecisions();
+  const filtre = nDecisions !== total ? `${nombreFr(nDecisions)} décision(s) affichée(s) sur ${nombreFr(total)}` : `${nombreFr(total)} décisions de ${parametres.annee}`;
+  const seancesTexte = etat.decisions.seancesLues != null ? `, ${etat.decisions.seancesLues} séances lues${etat.decisions.seancesEnAttente ? `, ${etat.decisions.seancesEnAttente} en attente de procès-verbal` : ''}` : '';
+  const resumesTexte = etat.parId.size ? ` ${nombreFr(nombreResumees(etat.decisions.decisions))} ont un résumé.` : '';
+  $('#compte-decisions').textContent = `${filtre}${seancesTexte}.${resumesTexte}`;
 
   let reste;
   if (parSeance) {
