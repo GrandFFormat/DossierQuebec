@@ -372,6 +372,11 @@ details p { background: var(--fond-2); border-radius: var(--rayon); padding: 12p
 /* Ce que la décision dit vraiment : le dispositif, puis les motifs. Deux blocs sobres —
    c'est du texte officiel cité, pas un résumé, et il doit se lire comme tel. */
 .texte-decision:empty { display: none; }
+.texte-decision-pli { margin: 0 0 10px; }
+.texte-decision-pli > summary { cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 600; list-style: none; }
+.texte-decision-pli > summary::before { content: '▸ '; }
+.texte-decision-pli[open] > summary::before { content: '▾ '; }
+.texte-decision-pli[open] > summary { margin-bottom: 8px; }
 .texte-decision h4 {
   margin: 0 0 3px; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.07em;
   color: var(--doux); font-weight: 700;

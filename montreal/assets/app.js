@@ -138,16 +138,18 @@ async function chargerTextes() {
   return textesEnCours;
 }
 
+// Le texte officiel reste derrière un pli fermé : le résumé suffit à la plupart des lecteurs, et
+// Québec ne montre pas plus. Rien du tout quand le procès-verbal n'en a pas (Martin, 18 sept. 2026 :
+// « pourquoi y a ça en plus, y a pas ça à Québec »).
 function rendreTexteDecision(zone, t) {
   if (!t || (!t.dispositif && !t.motifs)) {
-    // Dire pourquoi c'est vide vaut mieux qu'un blanc : certaines résolutions n'ont
-    // simplement pas de dispositif séparé dans le procès-verbal.
-    zone.innerHTML = '<p class="compte" style="margin:0 0 8px">Le procès-verbal ne détaille pas cette décision au-delà de son objet.</p>';
+    zone.innerHTML = '';
     return;
   }
-  zone.innerHTML =
-    (t.dispositif ? `<div class="dispositif"><h4>Ce que le conseil a décidé</h4><p>${echapper(t.dispositif)}</p></div>` : '') +
-    (t.motifs ? `<div class="motifs"><h4>Sur quoi il s'appuie</h4><p>${echapper(t.motifs)}</p></div>` : '');
+  zone.innerHTML = `<details class="texte-decision-pli"><summary>Texte exact de la résolution</summary>
+    ${t.dispositif ? `<div class="dispositif"><h4>Ce que le conseil a décidé</h4><p>${echapper(t.dispositif)}</p></div>` : ''}
+    ${t.motifs ? `<div class="motifs"><h4>Sur quoi il s'appuie</h4><p>${echapper(t.motifs)}</p></div>` : ''}
+  </details>`;
 }
 
 // `toggle` ne remonte pas : on écoute à la capture, sur la liste entière.
