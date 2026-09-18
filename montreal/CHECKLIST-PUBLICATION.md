@@ -20,7 +20,7 @@ regarde. Quand tout est coché, la dernière section dit quoi changer pour publi
 - [ ] Mes dossiers : les 16 sujets de Montréal s'affichent, avec leur récapitulatif, en clair et en sombre
 - [ ] S'abonner à un sujet de Montréal fonctionne de bout en bout (abonnement.html → courriel reçu)
 - [x] Le bloc « Les courriels » au bas de l'accueil ne montre que ceux de Montréal *(18 sept. 2026)*
-- [x] Dans Mes dossiers, ouvert depuis Montréal, la boîte « Mes courriels de Montréal » ne montre que ceux de Montréal ; les autres villes s'inscrivent chez elles, un lien le dit *(18 sept. 2026)*
+- [x] Dans Mes dossiers, ouvert depuis Montréal, la boîte « Mes courriels de Montréal » ne montre que ceux de Montréal ; les autres villes s'inscrivent chez elles, sans lien ni mention *(18 sept. 2026)*
 - [ ] Même règle vérifiée sur chaque volet : Québec, Lévis, Laval, Longueuil (bloc caché tant que la ville n'a pas de courriels)
 - [ ] S'inscrire au compte rendu du mois de Montréal depuis l'accueil, avec une vraie adresse : courriel de confirmation reçu, puis le plus récent numéro
 
