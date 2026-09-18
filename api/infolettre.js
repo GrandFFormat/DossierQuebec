@@ -13,7 +13,7 @@
 
 import { supabase, site } from './_alertes.js';
 import { utilisateurDe } from './_stripe.js';
-import { COURRIEL, VILLES_INFOLETTRE, choixValide, deMois, dernierNumero, echapper, envoyerBienvenue, envoyerCourriels, idsSignes, lienSigne, nomComplet, offreDe, prochainEnvoi } from './_infolettre.js';
+import { COURRIEL, VILLES_INFOLETTRE, choixValide, deMois, dernierNumero, echapper, envoyerBienvenue, envoyerCourriels, idsSignes, lienSigne, nomComplet, offreDe, prochainEnvoi, NOTES_INFOLETTRE } from './_infolettre.js';
 
 const jetonDe = (req) => String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '') || null;
 const corpsDe = (req) => {
@@ -43,7 +43,7 @@ async function etat(u) {
   const inscriptions = {};
   if (u?.email) for (const i of await inscriptionsDe(u.email.toLowerCase())) inscriptions[cleChoix(i)] = i.statut;
   return {
-    villes: Object.entries(VILLES_INFOLETTRE).map(([cle, nom]) => ({ cle, nom, offre: offreDe(cle) })),
+    villes: Object.entries(VILLES_INFOLETTRE).map(([cle, nom]) => ({ cle, nom, offre: offreDe(cle), note: NOTES_INFOLETTRE[cle] ?? null })),
     connecte: Boolean(u),
     courriel: u?.email ?? null,
     inscriptions,

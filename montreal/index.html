@@ -110,12 +110,7 @@
 <script type="module" src="/commun/abonnes.js"></script>
 <script type="module">
   import { formulaireInfolettre } from '/commun/infolettre.js';
-  // La légende ci-dessous se retire le jour où le premier compte rendu du mois de Montréal est
-  // publié (voir CHECKLIST-PUBLICATION.md).
-  formulaireInfolettre(document.getElementById('infolettre'), {
-    ville: document.body.dataset.ville,
-    note: "<strong>Montréal commence :</strong> le premier compte rendu du mois arrive à la fin de septembre 2026. Il n'y en a pas encore pour août. Les courriels après chaque séance partent à compter des prochaines séances.",
-  });
+  formulaireInfolettre(document.getElementById('infolettre'), { ville: document.body.dataset.ville });
 </script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
      Même projet Vercel : les pages vues de /montreal/ s'ajoutent au même tableau de

@@ -13,6 +13,12 @@ import { supabase, site } from './_alertes.js';
 
 // Les villes qui ont des courriels. Une ville s'ajoute ici le jour où son volet en produit.
 export const VILLES_INFOLETTRE = { quebec: 'Québec', montreal: 'Montréal' };
+// Une ligne propre à une ville, affichée sous son nom partout où on s'inscrit (accueil du volet,
+// Mes dossiers). Montréal : à retirer le jour où son premier compte rendu du mois est publié
+// (Martin, 18 septembre 2026 : « cette légende tu l'enlèveras quand la newsletter sera créée »).
+export const NOTES_INFOLETTRE = {
+  montreal: "<strong>Montréal commence :</strong> le premier compte rendu du mois arrive à la fin de septembre 2026. Il n'y en a pas encore pour août. Les courriels après chaque séance partent à compter des prochaines séances.",
+};
 
 // Les trois sortes de courriels. Chacune s'inscrit à part : on peut vouloir seulement son
 // arrondissement, ou seulement le gros compte rendu du mois.
