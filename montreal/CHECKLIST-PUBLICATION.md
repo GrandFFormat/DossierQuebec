@@ -44,6 +44,7 @@ Pour chacune de : Accueil, Décisions, Votes nominatifs, Conseil municipal, Lexi
 - [ ] Sources › « Ce qu'on a demandé à la Ville » est à jour (dernier échange, dernière date)
 - [ ] Le lexique n'a pas de terme vide
 - [ ] Le pied de page dit « site citoyen indépendant, aucun caractère officiel »
+- [ ] Le bloc « Les courriels » de l'accueil : la légende « Montréal commence… » est retirée dès que le premier compte rendu du mois est publié (`npm run infolettre -- --mois=2026-09 --publier`)
 
 ## 6. Publier (à faire d'un coup, une fois tout coché)
 

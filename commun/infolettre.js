@@ -62,7 +62,9 @@ const choixCoches = (racine) => [
 ];
 
 // ---------- le formulaire public (accueil des volets) ----------
-export async function formulaireInfolettre(zone, { ville = null } = {}) {
+// `note` : une ligne propre au volet, sous l'explication — par exemple « le premier compte rendu
+// de Montréal arrive fin septembre » —, retirée par la page le jour où elle n'est plus vraie.
+export async function formulaireInfolettre(zone, { ville = null, note = null } = {}) {
   if (!zone) return;
   const s = await session().catch(() => null);
   const etat = await etatServeur(s);
@@ -73,6 +75,7 @@ export async function formulaireInfolettre(zone, { ville = null } = {}) {
   zone.innerHTML = `<section class="ab-infolettre">
     <h2>📬 ${tr('Les courriels de DossierQuébec', 'DossierQuébec emails')}</h2>
     <p>${tr('Choisissez ce que vous voulez recevoir. C’est gratuit, et on se désinscrit en un clic dans chaque courriel. <strong>Vous recevez tout de suite le plus récent de chaque sorte cochée.</strong>', 'Choose what you want to receive. It is free, and one click unsubscribes you in every email. <strong>You get the latest of each kind right away</strong> (in French).')}</p>
+    ${note ? `<p class="ab-note ab-infolettre-note">${note}</p>` : ''}
     <form class="ab-infolettre-form" novalidate>
       ${villes.map((v) => `${villes.length > 1 ? `<h3 class="ab-sous-titre">${echapper(v.nom)}</h3>` : ''}${listeSortes(etat, v.cle, v.offre)}`).join('')}
       <div class="ab-form">
