@@ -24,10 +24,12 @@ on:
 permissions:
   contents: write
 
-# Même groupe que refresh.yml : deux jobs qui poussent sur master ne courent jamais en
-# même temps.
+# Son propre groupe (18 sept. 2026). Avec le groupe partagé « refresh-data », GitHub ne garde qu'UN
+# run en attente : un matin où Montréal tourne longtemps, celui de Québec pouvait être annulé sans
+# bruit — pas d'alertes ni de détail de l'argent ce jour-là, alors que Québec est le volet vendu.
+# Deux jobs peuvent donc pousser en même temps : le push plus bas rebase et réessaie.
 concurrency:
-  group: refresh-data
+  group: refresh-quebec
   cancel-in-progress: false
 
 jobs:
@@ -74,14 +76,23 @@ jobs:
             echo "Aucun changement — rien à committer."
           else
             git commit -m "Rafraîchissement auto du volet municipal ($(date -u +%Y-%m-%d))"
-            git pull --rebase
-            git push
+            # D'autres workflows poussent sur master : on rebase et on réessaie (seul quebec/data
+            # bouge ici, donc pas de conflit).
+            for essai in 1 2 3; do
+              git pull --rebase && git push && break
+              [ "$essai" = 3 ] && exit 1
+              sleep $((essai * 10))
+            done
           fi
 
+      # Le texte vient de stderr (messages d'erreur, guillemets compris) : il passe par une variable
+      # d'environnement, jamais par ${{ }} dans le script, que bash réinterpréterait.
       - name: Signaler les étapes secondaires en échec
         if: ${{ steps.refresh.outputs.warnings != '' }}
+        env:
+          AVERTISSEMENTS: ${{ steps.refresh.outputs.warnings }}
         run: |
-          echo "::warning::Étapes secondaires en échec (données de la veille conservées) : ${{ steps.refresh.outputs.warnings }}"
+          echo "::warning::Étapes secondaires en échec (données de la veille conservées) : $AVERTISSEMENTS"
 
       # Après le commit : une extraction principale en échec rend le run rouge pour qu'on
       # le voie — les données des autres étapes sont déjà publiées.
@@ -89,4 +100,14 @@ jobs:
         if: ${{ steps.refresh.outputs.failed != '' }}
         run: |
           echo "::error::Extractions en échec (données de la veille conservées) : ${{ steps.refresh.outputs.failed }}"
+          exit 1
+
+      # Même règle pour ce qui est promis aux abonnés payants (le détail de l'argent « dès le
+      # lendemain ») : run rouge, donc courriel de GitHub à Martin.
+      - name: Alerter si une étape promise aux abonnés a échoué
+        if: ${{ steps.refresh.outputs.paid_failed != '' }}
+        env:
+          PAYANTS: ${{ steps.refresh.outputs.paid_failed }}
+        run: |
+          echo "::error::Promis aux abonnés, en échec ce matin : $PAYANTS"
           exit 1

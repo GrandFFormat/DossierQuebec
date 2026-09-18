@@ -93,6 +93,10 @@ const ETAPES = [
           nom: "Détail de l'argent des nouveaux dossiers",
           argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scripts/details-du-jour.js', '--projets', '--plafond=30'],
           secondaire: true,
+          // Promis aux abonnés payants (« dès le lendemain ») : son échec rend le run rouge, après le
+          // commit des données, pour que GitHub prévienne Martin. La panne du 15 au 18 sept. 2026
+          // est passée inaperçue parce que le run restait vert.
+          payant: true,
         },
         // Après les résumés, qu'il relit. Seuls les projets dont un dossier a changé sont refaits.
         {
@@ -111,12 +115,23 @@ const ETAPES = [
 
 const echecs = [];
 const avertissements = [];
+const payants = [];
+// L'annotation d'un run est publique : rien qui ressemble à une clé n'y sort.
+const sansSecret = (s) => s.replace(/eyJ[\w-]{10,}\.[\w-]{10,}\.[\w-]{10,}|sb_(?:secret|publishable)_[\w-]+|sk-ant-[\w-]+|[sr]k_(?:live|test)_\w+|whsec_\w+/g, '[secret]');
+// La fin de stderr d'une étape en échec, sans le bruit de la pile d'appels : le POURQUOI, en une ligne.
+const pourquoiDe = (stderr) =>
+  sansSecret((stderr ?? '').split(/\r?\n/).map((l) => l.trim()).filter((l) => l && !/^(at |node:|Node\.js v|\^+$)/.test(l)).slice(-3).join(' ⏎ ')).slice(0, 400);
 for (const etape of ETAPES) {
   console.log(`\n=== ${etape.nom} ===`);
-  const res = spawnSync(process.execPath, etape.argv, { stdio: 'inherit' });
+  // stderr passe par nous : réécrit tel quel dans le journal, et sa fin va dans l'annotation du run —
+  // lisible sans être connecté à GitHub, là où le journal complet ne l'est pas.
+  const res = spawnSync(process.execPath, etape.argv, { stdio: ['inherit', 'inherit', 'pipe'], encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+  if (res.stderr) process.stderr.write(res.stderr);
   if (res.status === 0) continue;
+  const pourquoi = pourquoiDe(res.stderr) || (res.error ? sansSecret(String(res.error.message)).slice(0, 200) : '');
+  if (etape.payant) payants.push(pourquoi ? `${etape.nom} — ${pourquoi}` : etape.nom);
   if (etape.secondaire) {
-    avertissements.push(etape.nom);
+    avertissements.push(pourquoi ? `${etape.nom} — ${pourquoi}` : etape.nom);
     console.warn(`⚠ « ${etape.nom} » a échoué (code ${res.status}) — on garde les données précédentes, ça attendra.`);
   } else {
     echecs.push(etape.nom);
@@ -133,4 +148,5 @@ console.log(`  avertissements : ${avertissements.length ? avertissements.join(' 
 if (process.env.GITHUB_OUTPUT) {
   appendFileSync(process.env.GITHUB_OUTPUT, `failed=${echecs.join(' | ')}\n`);
   appendFileSync(process.env.GITHUB_OUTPUT, `warnings=${avertissements.join(' | ')}\n`);
+  appendFileSync(process.env.GITHUB_OUTPUT, `paid_failed=${payants.join(' | ')}\n`);
 }

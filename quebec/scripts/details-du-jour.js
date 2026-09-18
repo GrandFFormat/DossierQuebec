@@ -6,8 +6,10 @@
 //
 // Ce qui est lu : les sommaires dont le résumé en langage clair a trouvé un montant
 // (montantPrincipal), et
-//   - dont le résumé a été produit depuis --genere-depuis (par défaut : les trois derniers jours,
-//     jamais avant DEBUT) — ce sont les nouveaux dossiers de la Ville ;
+//   - dont le résumé a été produit depuis --genere-depuis (par défaut : DEBUT) — ce sont les
+//     nouveaux dossiers de la Ville. Pas de fenêtre glissante : « tout ce qui n'est pas encore lu
+//     depuis DEBUT », pour qu'une panne de quelques matins se rattrape d'elle-même (du 15 au
+//     18 sept. 2026, une fenêtre de trois jours aurait perdu des dossiers pour de bon) ;
 //   - avec --projets : tous les dossiers des projets suivables (data/projets/), quelle que soit
 //     leur date.
 // Ce qui est sauté : ce qui est déjà dans Supabase (details_argent, utilisable ou non) ou dans le
@@ -39,8 +41,8 @@ const DEMANDES_PAR_ABONNE = 10;
 const DEBUT = '2026-09-15'; // avant : l'échantillon de l'infolettre et le lot initial des résumés
 const args = new Map(process.argv.slice(2).map((a) => { const [k, v] = a.replace(/^--/, '').split('='); return [k, v ?? true]; }));
 const plafond = Number(args.get('plafond') ?? 30);
-const troisJours = new Date(Date.now() - 3 * 864e5).toISOString().slice(0, 10);
-const genereDepuis = String(args.get('genere-depuis') ?? (troisJours > DEBUT ? troisJours : DEBUT));
+// Le plafond borne le coût d'un matin ; ce qui est déjà lu est sauté : remonter à DEBUT ne coûte rien.
+const genereDepuis = String(args.get('genere-depuis') ?? DEBUT);
 
 const lire = async (f, repli) => {
   try {
