@@ -13,6 +13,9 @@ on:
       url:
         description: "L'adresse à lire (vide : lire la page du Plateau et son dernier procès-verbal)"
         required: false
+      sommaires:
+        description: "Des adresses séparées par une espace : pour chacune, dire si son ordre du jour contient les sommaires décisionnels"
+        required: false
 
 permissions:
   contents: write
@@ -34,7 +37,16 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci --omit=dev
+      - name: Chercher les sommaires décisionnels dans les ordres du jour
+        if: ${{ inputs.sommaires != '' }}
+        env:
+          MTL_CONTACT: ${{ vars.MTL_CONTACT }}
+        run: |
+          set -o pipefail
+          node scrapers/sonde-sommaires.js ${{ inputs.sommaires }} 2>&1 | tee data/sonde-sommaires.log
+
       - name: Lire la page
+        if: ${{ inputs.sommaires == '' }}
         env:
           MTL_CONTACT: ${{ vars.MTL_CONTACT }}
         run: |
@@ -50,7 +62,7 @@ jobs:
         run: |
           git config user.name "dossierquebec-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add montreal/data/page-decouverte.json montreal/data/page-decouverte.log montreal/data/plateau-decouverte.json montreal/data/plateau-decouverte.log 2>/dev/null || true
+          git add montreal/data/page-decouverte.json montreal/data/page-decouverte.log montreal/data/plateau-decouverte.json montreal/data/plateau-decouverte.log montreal/data/sonde-sommaires.json montreal/data/sonde-sommaires.log 2>/dev/null || true
           if git diff --cached --quiet; then echo "Rien à committer."; else
             git commit -m "Découverte d'une page de la Ville de Montréal ($(date -u +%Y-%m-%d))"
             git pull --rebase && git push
