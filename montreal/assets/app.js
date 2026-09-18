@@ -48,6 +48,21 @@ export function dateFr(iso) {
 }
 
 const nombreFr = (n) => Number(n).toLocaleString(EN ? 'en-CA' : 'fr-CA');
+
+// Le titre d'un procès-verbal ou d'un ordre du jour n'est pas écrit par la Ville : c'est le
+// robot qui le compose (scrapers/decisions.js), en français, et il dort tel quel dans les
+// données. En anglais on le recompose plutôt que de le traduire à la pièce.
+const TITRE_PV = /^Procès-verbal — (.+), séance (ordinaire|extraordinaire) du (\d{4}-\d{2}-\d{2})$/;
+const TITRE_ODJ = /^Ordre du jour — (.+), séance du (\d{4}-\d{2}-\d{2}) \((\d+) points?\)$/;
+function objetDe(d) {
+  const objet = d?.objet ?? null;
+  if (!EN || !objet) return objet;
+  const pv = objet.match(TITRE_PV);
+  if (pv) return `Minutes — ${libelleEn(pv[1])}, ${pv[2] === 'extraordinaire' ? 'special' : 'regular'} meeting of ${dateFr(pv[3])}`;
+  const odj = objet.match(TITRE_ODJ);
+  if (odj) return `Agenda — ${libelleEn(odj[1])}, meeting of ${dateFr(odj[2])} (${odj[3]} item${odj[3] === '1' ? '' : 's'})`;
+  return objet;
+}
 const s = (n, sing, plur) => (n > 1 ? plur : sing);
 
 // ---------- chargement ----------
@@ -214,7 +229,7 @@ function carteDecision(d) {
       ${d.resultat ? `<span class="resultat ${classeResultat(d.resultat)}">${echapper(lib(d.resultat))}</span>` : ''}
       ${d.voteEnregistre ? `<span class="puce genre-vote">${tr('vote enregistré', 'recorded vote')}</span>` : ''}
     </div>
-    <p class="objet">${echapper(d.objet ?? tr('(sans objet)', '(no subject)'))}</p>`;
+    <p class="objet">${echapper(objetDe(d) ?? tr('(sans objet)', '(no subject)'))}</p>`;
   // Montréal : le numéro de dossier suit la décision d'une instance à l'autre, et les
   // dissidences sont les noms consignés contre, sans appel nominal complet. Faits bruts.
   const corps = `${blocResume(resumePour(d))}
@@ -855,7 +870,7 @@ function ligneEvenement(e) {
       ${d.instance ? `<span class="puce">${echapper(lib(d.instance))}</span>` : ''}
       ${e.nouveau ? `<span class="puce neuf">${tr('nouveau', 'new')}</span>` : ''}
     </div>
-    <p class="objet">${echapper(d.objet ?? tr('(sans objet)', '(no subject)'))}</p>`;
+    <p class="objet">${echapper(objetDe(d) ?? tr('(sans objet)', '(no subject)'))}</p>`;
   const corps = `${blocResume(resumePour(d))}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}`;
   return carteRepliable(entete, corps);
