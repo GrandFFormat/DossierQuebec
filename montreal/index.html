@@ -16,10 +16,10 @@
      du système ensuite. */
   (function () {
     try {
-      var t = localStorage.getItem('dvm:theme');
+      var t = localStorage.getItem('dvq:theme');
       if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
       document.documentElement.dataset.theme = t;
-      var z = parseInt(localStorage.getItem('dvm:zoom'), 10);
+      var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
       if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
     } catch (e) {}
   })();
