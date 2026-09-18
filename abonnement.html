@@ -156,7 +156,8 @@
         <p>${etat.annulationPrevue && etat.fin
           ? tr(`Annulé : il reste actif jusqu'au ${dateFr(new Date(etat.fin).toLocaleDateString('en-CA'))}, puis il s'arrête sans autre frais.`, `Cancelled: it stays active until ${dateFr(new Date(etat.fin).toLocaleDateString('en-CA'))}, then stops with no further charge.`)
           : tr('Merci : il garde le reste du site gratuit pour tout le monde. Les alertes, le détail de l\'argent, l\'agenda et l\'export sont dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a>.', 'Thank you: it keeps the rest of the site free for everyone. Alerts, money details, agendas and export are in <a class="ab-lien" href="/mes-dossiers">My files</a>.')}</p>
-        ${etat.gerable ? `<p><button type="button" class="ab-bouton ab-bouton-second" data-action="portail">${tr('Gérer mon abonnement', 'Manage my subscription')}</button> <span class="ab-note">${tr('carte, factures, annulation', 'card, invoices, cancellation')}</span></p>` : ''}
+        ${etat.gerable ? `<p><button type="button" class="ab-bouton ab-bouton-second" data-action="portail">${tr('Gérer mon abonnement', 'Manage my subscription')}</button> <span class="ab-note">${tr('carte, factures', 'card, invoices')}</span></p>` : ''}
+        ${etat.annulable ? `<p><button type="button" class="ab-lien-bouton" data-action="annuler">${tr('Annuler mon abonnement', 'Cancel my subscription')}</button> <span class="ab-note">${tr('en deux clics, sans justification ; il reste actif jusqu’à la fin de la période payée', 'two clicks, no questions asked; it stays active until the end of the paid period')}</span></p>` : ''}
         <p class="ab-note ab-payer-etat" aria-live="polite"></p>`;
     } else if (etat.peutPayer) {
       payer.innerHTML = `<h3><span class="ab-icone" aria-hidden="true">💳</span> ${tr("S'abonner", 'Subscribe')}</h3>
@@ -193,16 +194,16 @@
   }
 
   payer.addEventListener('click', async (e) => {
-    const bouton = e.target.closest('[data-action="payer"], [data-action="portail"]');
+    const bouton = e.target.closest('[data-action="payer"], [data-action="portail"], [data-action="annuler"]');
     if (!bouton) return;
-    const action = bouton.dataset.action === 'payer' ? 'paiement' : 'portail';
+    const action = bouton.dataset.action === 'payer' ? 'paiement' : bouton.dataset.action;
     const etat = payer.querySelector('.ab-payer-etat');
     const s = await session();
     if (!s) { location.assign('/mes-dossiers'); return; }
     bouton.disabled = true;
     etat.textContent = tr('Ouverture de Stripe…', 'Opening Stripe…');
     const forfait = bouton.dataset.forfait === 'annuel' ? 'annuel' : 'mensuel';
-    mesurer(action === 'paiement' ? 'abonnement_payer' : 'abonnement_portail', { ville: VILLES[ville] ? ville : 'aucune', ...(action === 'paiement' ? { forfait } : {}) });
+    mesurer(action === 'paiement' ? 'abonnement_payer' : action === 'annuler' ? 'abonnement_annuler' : 'abonnement_portail', { ville: VILLES[ville] ? ville : 'aucune', ...(action === 'paiement' ? { forfait } : {}) });
     const r = await fetch(`/api/abonnement?action=${action}`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${s.access_token}`, 'Content-Type': 'application/json' },
