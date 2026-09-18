@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
 <meta name="robots" content="noindex, nofollow">
-<title>Votes enregistrés au conseil municipal de Montréal — DossierVilleDeMontréal</title>
-<meta name="description" content="Qui a voté pour et qui a voté contre au conseil municipal et au conseil d'agglomération de Montréal : les votes enregistrés consignés dans les procès-verbaux officiels.">
+<title data-en="Recorded votes at Montréal city council — DossierVilleDeMontréal">Votes enregistrés au conseil municipal de Montréal — DossierVilleDeMontréal</title>
+<meta data-en-content="Who voted for and who voted against at Montréal's city council and urban agglomeration council: the recorded votes set down in the official minutes." name="description" content="Qui a voté pour et qui a voté contre au conseil municipal et au conseil d'agglomération de Montréal : les votes enregistrés consignés dans les procès-verbaux officiels.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
@@ -21,6 +21,9 @@
       document.documentElement.dataset.theme = t;
       var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
       if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+      // Anglais choisi (commun/langue.js) : page cachée le temps de traduire, 1,5 s au plus.
+      var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('dvq:langue');
+      if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.classList.add('dvq-en'); setTimeout(function () { document.documentElement.classList.add('dvq-pret'); }, 1500); }
     } catch (e) {}
   })();
 </script>
@@ -36,26 +39,26 @@
   <div class="contenu">
     <div class="titre-ligne">
       <a href="./"><h1>Dossier<span class="marque">VilleDeMontréal</span></h1></a>
-      <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
-      <a class="retour-dq" href="https://dossierquebec.ca/" title="Retour à DossierQuébec" aria-label="Retour à DossierQuébec">DQ</a>
+      <span data-en-title="Trial version: the content and the layout may still change" class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
+      <a data-en-title="Back to DossierQuébec" data-en-aria-label="Back to DossierQuébec" class="retour-dq" href="https://dossierquebec.ca/" title="Retour à DossierQuébec" aria-label="Retour à DossierQuébec">DQ</a>
       <details class="ab-villes" id="villes"></details>
     </div>
-    <p class="sous-titre">
+    <p data-en="The City of Montréal's decisions, made readable. Public data, taken as is from the City's official minutes and its open data portal." class="sous-titre">
       Les décisions de la Ville de Montréal, lisibles. Données publiques, reprises telles quelles
       des procès-verbaux officiels de la Ville et de son portail de données ouvertes.
     </p>
     <nav>
-      <a href="./">Accueil</a>
-      <a href="decisions.html">Décisions</a>
-      <a href="votes.html" aria-current="page">Votes nominatifs</a>
-      <a href="conseil.html">Conseil municipal</a>
-      <a href="lexique.html">Lexique</a>
-      <a href="https://montreal.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Montréal (nouvel onglet)">Ville de Montréal ↗</a>
+      <a data-en="Home" href="./">Accueil</a>
+      <a data-en="Decisions" href="decisions.html">Décisions</a>
+      <a data-en="Recorded votes" href="votes.html" aria-current="page">Votes nominatifs</a>
+      <a data-en="City Council" href="conseil.html">Conseil municipal</a>
+      <a data-en="Glossary" href="lexique.html">Lexique</a>
+      <a data-en-title="The official City of Montréal website (new tab)" href="https://montreal.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Montréal (nouvel onglet)">Ville de Montréal ↗</a>
       <div class="outils">
-        <div class="taille-texte" role="group" aria-label="Taille du texte">
-          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+        <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
+          <button data-en-aria-label="Smaller text" type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
           <span id="texte-pct" aria-live="polite">100%</span>
-          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+          <button data-en-aria-label="Larger text" type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
         </div>
         <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
                 title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
@@ -65,10 +68,10 @@
 </header>
 
 <main class="contenu">
-  <div id="chargement" class="avis">Chargement des données…</div>
+  <div data-en="Loading data…" id="chargement" class="avis">Chargement des données…</div>
 
-  <h2 class="page">Votes nominatifs</h2>
-  <div class="avis">
+  <h2 data-en="Recorded votes" class="page">Votes nominatifs</h2>
+  <div data-en="<strong>How these votes are obtained.</strong> At the City of Montréal, most decisions are adopted by a show of hands, without anyone being named. When a member calls for a <strong>recorded vote</strong>, the clerk calls the roll and the minutes set down by name who votes for and who votes against. These names are extracted from the text of the minutes by automatic reading: each vote keeps the original passage, and any gap with the official count in the document is flagged rather than corrected. A <em>dissidence</em> — an objection recorded without a full roll call — appears on the items of the Decisions page, not here." class="avis">
     <strong>Comment ces votes sont obtenus.</strong> À la Ville de Montréal, la plupart des décisions
     sont adoptées à main levée, sans que personne ne soit nommé. Quand un membre demande un
     <strong>vote enregistré</strong>, le greffier fait l'appel et le procès-verbal consigne nommément
@@ -81,35 +84,35 @@
   <details class="carte pliante bloc-tableau">
     <summary>
       <div class="meta">
-        <span class="puce">tableau</span>
+        <span data-en="table" class="puce">tableau</span>
         <span id="resume-dissidence"></span>
       </div>
-      <p class="objet">Votes contre, par personne</p>
+      <p data-en="Votes against, by person" class="objet">Votes contre, par personne</p>
     </summary>
     <div class="corps">
-  <p class="compte">Décompte brut, sans interprétation. Voter contre n'est ni un défaut ni un mérite&nbsp;: c'est une position.</p>
+  <p data-en="Raw count, without interpretation. Voting against is neither a flaw nor a merit: it is a position." class="compte">Décompte brut, sans interprétation. Voter contre n'est ni un défaut ni un mérite&nbsp;: c'est une position.</p>
   <table id="table-dissidence">
-    <thead><tr><th>Personne</th><th>Instance la plus fréquente</th><th class="n">Votes contre</th></tr></thead>
+    <thead><tr><th data-en="Person">Personne</th><th data-en="Most frequent body">Instance la plus fréquente</th><th data-en="Votes against" class="n">Votes contre</th></tr></thead>
     <tbody></tbody>
   </table>
     </div>
   </details>
 
-  <h2 class="section">Les votes enregistrés</h2>
+  <h2 data-en="The recorded votes" class="section">Les votes enregistrés</h2>
   <div class="barre-outils">
-    <input type="search" id="rech-votes" placeholder="Rechercher dans l'objet ou les noms…">
-    <select id="filtre-theme-votes"><option value="">Tous les sujets</option></select>
-    <select id="filtre-instance-votes"><option value="">Toutes les instances</option></select>
-    <button type="button" class="bouton-lien" id="tout-deplier">Tout déplier</button>
+    <input data-en-placeholder="Search subjects or names…" type="search" id="rech-votes" placeholder="Rechercher dans l'objet ou les noms…">
+    <select id="filtre-theme-votes"><option data-en="All topics" value="">Tous les sujets</option></select>
+    <select id="filtre-instance-votes"><option data-en="All bodies" value="">Toutes les instances</option></select>
+    <button data-en="Expand all" type="button" class="bouton-lien" id="tout-deplier">Tout déplier</button>
   </div>
   <p class="compte" id="compte-votes"></p>
   <div id="liste-votes"></div>
-  <button class="plus" id="plus-votes" hidden>10 de plus</button>
+  <button data-en="10 more" class="plus" id="plus-votes" hidden>10 de plus</button>
 </main>
 
 <footer>
   <div class="contenu">
-    <p>Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
+    <p data-en="Independent citizen site. No connection with the City of Montréal, no official status. If anything differs, the original PDF document prevails. <a href=&quot;sources.html&quot;>Sources</a>.">Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
     En cas d'écart, le document PDF d'origine fait foi. <a href="sources.html">Sources</a>.</p>
   </div>
 </footer>

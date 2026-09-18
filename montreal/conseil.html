@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
 <meta name="robots" content="noindex, nofollow">
-<title>Le conseil municipal de Montréal — DossierVilleDeMontréal</title>
-<meta name="description" content="Carte des 58 districts électoraux de Montréal et fiches des 65 membres du conseil municipal, du comité exécutif et du conseil d'agglomération : district, arrondissement, parti, fonctions et moyen de les joindre.">
+<title data-en="Montréal city council — DossierVilleDeMontréal">Le conseil municipal de Montréal — DossierVilleDeMontréal</title>
+<meta data-en-content="Map of Montréal's 58 electoral districts and profiles of the 65 members of the city council, the executive committee and the urban agglomeration council: district, borough, party, roles and how to reach them." name="description" content="Carte des 58 districts électoraux de Montréal et fiches des 65 membres du conseil municipal, du comité exécutif et du conseil d'agglomération : district, arrondissement, parti, fonctions et moyen de les joindre.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
@@ -21,6 +21,9 @@
       document.documentElement.dataset.theme = t;
       var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
       if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+      // Anglais choisi (commun/langue.js) : page cachée le temps de traduire, 1,5 s au plus.
+      var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('dvq:langue');
+      if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.classList.add('dvq-en'); setTimeout(function () { document.documentElement.classList.add('dvq-pret'); }, 1500); }
     } catch (e) {}
   })();
 </script>
@@ -36,26 +39,26 @@
   <div class="contenu">
     <div class="titre-ligne">
       <a href="./"><h1>Dossier<span class="marque">VilleDeMontréal</span></h1></a>
-      <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
-      <a class="retour-dq" href="https://dossierquebec.ca/" title="Retour à DossierQuébec" aria-label="Retour à DossierQuébec">DQ</a>
+      <span data-en-title="Trial version: the content and the layout may still change" class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
+      <a data-en-title="Back to DossierQuébec" data-en-aria-label="Back to DossierQuébec" class="retour-dq" href="https://dossierquebec.ca/" title="Retour à DossierQuébec" aria-label="Retour à DossierQuébec">DQ</a>
       <details class="ab-villes" id="villes"></details>
     </div>
-    <p class="sous-titre">
+    <p data-en="The City of Montréal's decisions, made readable. Public data, taken as is from the City's official minutes and its open data portal." class="sous-titre">
       Les décisions de la Ville de Montréal, lisibles. Données publiques, reprises telles quelles
       des procès-verbaux officiels de la Ville et de son portail de données ouvertes.
     </p>
     <nav>
-      <a href="./">Accueil</a>
-      <a href="decisions.html">Décisions</a>
-      <a href="votes.html">Votes nominatifs</a>
-      <a href="conseil.html" aria-current="page">Conseil municipal</a>
-      <a href="lexique.html">Lexique</a>
-      <a href="https://montreal.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Montréal (nouvel onglet)">Ville de Montréal ↗</a>
+      <a data-en="Home" href="./">Accueil</a>
+      <a data-en="Decisions" href="decisions.html">Décisions</a>
+      <a data-en="Recorded votes" href="votes.html">Votes nominatifs</a>
+      <a data-en="City Council" href="conseil.html" aria-current="page">Conseil municipal</a>
+      <a data-en="Glossary" href="lexique.html">Lexique</a>
+      <a data-en-title="The official City of Montréal website (new tab)" href="https://montreal.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Montréal (nouvel onglet)">Ville de Montréal ↗</a>
       <div class="outils">
-        <div class="taille-texte" role="group" aria-label="Taille du texte">
-          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+        <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
+          <button data-en-aria-label="Smaller text" type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
           <span id="texte-pct" aria-live="polite">100%</span>
-          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+          <button data-en-aria-label="Larger text" type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
         </div>
         <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
                 title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
@@ -65,15 +68,15 @@
 </header>
 
 <main class="contenu">
-  <div id="chargement" class="avis">Chargement des données…</div>
+  <div data-en="Loading data…" id="chargement" class="avis">Chargement des données…</div>
 
-  <h2 class="page">Le conseil municipal</h2>
-  <nav class="raccourcis" aria-label="Sections de cette page">
-    <a href="#membres">Les membres du conseil</a>
-    <a href="#comite-executif">Le comité exécutif</a>
-    <a href="#agglomeration">Le conseil d'agglomération</a>
+  <h2 data-en="City Council" class="page">Le conseil municipal</h2>
+  <nav data-en-aria-label="Sections of this page" class="raccourcis" aria-label="Sections de cette page">
+    <a data-en="Council members" href="#membres">Les membres du conseil</a>
+    <a data-en="The executive committee" href="#comite-executif">Le comité exécutif</a>
+    <a data-en="The urban agglomeration council" href="#agglomeration">Le conseil d'agglomération</a>
   </nav>
-  <p class="chapeau">
+  <p data-en="The council has 65 members: the mayor, elected by all voters, the 18 borough mayors and 46 city councillors, one per district. <strong>Click your district</strong> to go straight to the profile of the person who represents you. <em>Borough</em> councillors, who sit only on their borough council, also appear under their borough, marked as such." class="chapeau">
     Le conseil compte 65 membres&nbsp;: la mairesse ou le maire, élu au suffrage universel, les
     18 maires d'arrondissement et 46 conseillères et conseillers de ville, un par district.
     <strong>Cliquez sur votre district</strong> pour aller directement à la fiche de la personne qui
@@ -82,7 +85,11 @@
   </p>
 
   <div class="barre-outils">
-    <label class="case">Colorier par&nbsp;
+    <label data-en="Colour by&nbsp;
+      <select id=&quot;mode-couleur&quot;>
+        <option value=&quot;arrondissement&quot;>borough</option>
+        <option value=&quot;parti&quot;>party</option>
+      </select>" class="case">Colorier par&nbsp;
       <select id="mode-couleur">
         <option value="arrondissement">arrondissement</option>
         <option value="parti">parti</option>
@@ -92,19 +99,19 @@
 
   <div class="zone-carte" id="carte"></div>
   <div class="legende" id="legende"></div>
-  <p class="compte" style="margin-top:12px">
+  <p data-en="Boundaries: the City of Montréal's open dataset &quot;Districts électoraux&quot; (CC-BY 4.0), simplified and drawn in SVG — no request to an outside mapping service. <strong>What the map doesn't say:</strong> the decisions of the central bodies are not geolocated, so it is impossible to say &quot;here is what was decided in your district&quot;." class="compte" style="margin-top:12px">
     Contours&nbsp;: jeu de données ouvert «&nbsp;Districts électoraux&nbsp;» de la Ville de Montréal (CC-BY&nbsp;4.0),
     simplifiés et dessinés en SVG — aucune requête vers un service de cartographie externe.
     <strong>Ce que la carte ne dit pas&nbsp;:</strong> les décisions des instances centrales ne sont pas
     géolocalisées, donc impossible de dire «&nbsp;voici ce qui s'est décidé dans votre district&nbsp;».
   </p>
 
-  <h2 class="page" id="membres" style="margin-top:34px">Les membres du conseil municipal</h2>
+  <h2 data-en="Members of City Council" class="page" id="membres" style="margin-top:34px">Les membres du conseil municipal</h2>
   <p class="compte" id="compte-elus"></p>
   <div id="liste-elus"></div>
 
-  <h2 class="page" id="comite-executif" style="margin-top:40px">Le comité exécutif</h2>
-  <p class="chapeau">
+  <h2 data-en="The executive committee" class="page" id="comite-executif" style="margin-top:40px">Le comité exécutif</h2>
+  <p data-en="The City's day-to-day government: the mayor, the chair of the committee and about a dozen members chosen from among the elected officials, each responsible for a set of files. It meets every week and takes, by far, the largest number of decisions. <a href=&quot;decisions.html?instance=Comit%C3%A9%20ex%C3%A9cutif&quot;>See its decisions</a>." class="chapeau">
     Le gouvernement de la Ville au quotidien&nbsp;: la mairesse ou le maire, la présidence du comité et
     une dizaine de membres choisis parmi les élus, chacun responsable de dossiers. Il siège chaque
     semaine et prend, de loin, le plus grand nombre de décisions.
@@ -113,8 +120,8 @@
   <p class="compte" id="compte-ce"></p>
   <div id="liste-ce"></div>
 
-  <h2 class="page" id="agglomeration" style="margin-top:40px">Le conseil d'agglomération</h2>
-  <p class="chapeau">
+  <h2 data-en="The urban agglomeration council" class="page" id="agglomeration" style="margin-top:40px">Le conseil d'agglomération</h2>
+  <p data-en="It is a <strong>separate body</strong> from city council, and it decides on the services shared across the island: police, fire, public transit, water, property assessment and social housing. It is made up of the mayor of Montréal, fifteen Montréal elected officials appointed by city council, and the mayors of the fifteen <strong>related cities</strong>. Those mayors therefore vote on matters that affect Montréal, without representing a Montréal district and without sitting on city council. <a href=&quot;decisions.html?instance=Conseil%20d'agglom%C3%A9ration&quot;>See its decisions</a>." class="chapeau">
     C'est une <strong>instance distincte</strong> du conseil municipal, et elle décide des services
     partagés de l'île&nbsp;: police, incendie, transport en commun, eau, évaluation foncière, logement
     social. Y siègent la mairesse ou le maire de Montréal, quinze élus de Montréal désignés par le
@@ -123,7 +130,7 @@
     siéger au conseil municipal.
     <a href="decisions.html?instance=Conseil%20d'agglom%C3%A9ration">Voir ses décisions</a>.
   </p>
-  <p class="chapeau" style="margin-bottom:14px">
+  <p data-en="The list comes from the City's open dataset &quot;Liste des élus du Conseil d'agglomération&quot;. It gives who sits on the council, not who attended each meeting." class="chapeau" style="margin-bottom:14px">
     La liste vient du jeu de données ouvert «&nbsp;Liste des élus du Conseil d'agglomération&nbsp;» de
     la Ville. Elle donne la composition, pas les présences aux séances.
   </p>
@@ -133,7 +140,7 @@
 
 <footer>
   <div class="contenu">
-    <p>Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
+    <p data-en="Independent citizen site. No connection with the City of Montréal, no official status. If anything differs, the official page prevails. <a href=&quot;sources.html&quot;>Sources</a>.">Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
     En cas d'écart, la page officielle fait foi. <a href="sources.html">Sources</a>.</p>
   </div>
 </footer>
