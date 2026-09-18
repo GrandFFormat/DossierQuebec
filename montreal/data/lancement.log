@@ -2,7 +2,7 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit d34dcef — Node v22.23.2
+Code : commit 3f9e998 — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -149,58 +149,67 @@ Mesure de 33 termes sur 145 procès-verbaux de 2026 en cache et 5806 décisions�
 33 entrées écrites dans data/lexique.json
 
 === Récapitulatifs des sujets suivables ===
-Récapitulatifs des sujets : rien de nouveau.
+Récapitulatifs des sujets : namur-hippodrome (9 dossiers), louvain-est (12 dossiers), frederic-back (15 dossiers), grand-parc-ouest (8 dossiers), eau-egouts (61 dossiers), securite-publique (42 dossiers), logement (22 dossiers), matieres-residuelles (27 dossiers), parcs (27 dossiers), plan-urbanisme (17 dossiers), transport-collectif (25 dossiers), itinerance (25 dossiers), deneigement (22 dossiers), velo (15 dossiers), pietonnisation (19 dossiers), canopee (8 dossiers)
+  namur-hippodrome         4 étape(s), 2 à surveiller · retirés : 0 mécanique, 3 contre-lecture
+  louvain-est              5 étape(s), 6 à surveiller · retirés : 0 mécanique, 2 contre-lecture
+  frederic-back            6 étape(s), 6 à surveiller · retirés : 0 mécanique, 0 contre-lecture
+  grand-parc-ouest         4 étape(s), 3 à surveiller · retirés : 0 mécanique, 2 contre-lecture
+  eau-egouts               3 étape(s), 6 à surveiller · retirés : 0 mécanique, 6 contre-lecture
+  securite-publique        2 étape(s), 4 à surveiller · retirés : 0 mécanique, 4 contre-lecture
+  logement                 6 étape(s), 4 à surveiller · retirés : 0 mécanique, 0 contre-lecture
+  matieres-residuelles     5 étape(s), 4 à surveiller · retirés : 0 mécanique, 3 contre-lecture
+  parcs                    4 étape(s), 6 à surveiller · retirés : 0 mécanique, 2 contre-lecture
+  plan-urbanisme           4 étape(s), 3 à surveiller · retirés : 0 mécanique, 3 contre-lecture
+  transport-collectif      5 étape(s), 5 à surveiller · retirés : 0 mécanique, 1 contre-lecture
+  itinerance               6 étape(s), 2 à surveiller · retirés : 0 mécanique, 0 contre-lecture
+  deneigement              4 étape(s), 4 à surveiller · retirés : 0 mécanique, 3 contre-lecture
+  velo                     4 étape(s), 4 à surveiller · retirés : 0 mécanique, 4 contre-lecture
+  pietonnisation           5 étape(s), 6 à surveiller · retirés : 0 mécanique, 1 contre-lecture
+  canopee                  5 étape(s), 3 à surveiller · retirés : 0 mécanique, 0 contre-lecture
+  coût ≈ 6.77 $ US
 
 === Sujets suivables et dossiers, pour Mes dossiers ===
-Projets publics : 16 sujets · index 14.8 Ko · fichiers de sujet 649 Ko au total.
+Projets publics : 16 sujets · index 15.3 Ko · fichiers de sujet 658 Ko au total.
 Décisions récentes : 537 dossiers depuis le 2026-06-20 · 750 Ko.
 Dossiers de l'année : 4554 · 2633 Ko · organismes suggérés : 449.
+
+=== Sujets suivables en anglais ===
+Sujets en anglais : 0 déjà traduits, 16 à faire — ~0.25 $ US estimés.
+Sujets en anglais : 14 traduits (2 refusés), 14 au total — 0.29 $ US.
+  ⚠ pietonnisation : nombres différents : 10,19,2026,2026,21,40000,8 ≠ 10,19,2026,2026,40000,8,9
+  ⚠ transport-collectif : nombres différents : 2024,2026,24,24,32742,4636,4670 ≠ 2024,2026,24,32742,4636,4670
 
 === Lexique en anglais ===
 Lexique anglais : à jour.
 
 === Traductions anglaises ===
 Résumés : 3728 déjà traduits, 0 à faire, 0 cette fois.
-Titres  : 5418 déjà traduits, 33 à faire, 33 cette fois en 2 paquet(s).
-Étiquettes : 879 déjà traduites, 58 à faire en 2 paquet(s).
-~0.04 $ US estimés (lot, moitié prix).
-Lot msgbatch_014DAW85mhsA3TBHAZJaC1eX envoyé (0 résumés, 2 paquets de titres, 2 paquets d'étiquettes).
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  in_progress — 0 réussis, 4 en cours, 0 en erreur
-  ended — 4 réussis, 0 en cours, 0 en erreur
-Traductions : 0 résumés et 11 titres et 54 étiquettes faits (26 refusés ou en échec) — 3728 résumés et 5429 titres au total, 0.05 $ US.
-  ⚠ étiquette « Déposer le procès-verbal de l’assemblée  » refusée
-  ⚠ étiquette « Fixer le lieu de la séance ordinaire du  » refusée
+Titres  : 5429 déjà traduits, 22 à faire, 22 cette fois en 2 paquet(s).
+Étiquettes : 933 déjà traduites, 4 à faire en 1 paquet(s).
+~0.03 $ US estimés (lot, moitié prix).
+Lot msgbatch_01F9gvQRQFDoNBr9EpNhxoZf envoyé (0 résumés, 2 paquets de titres, 1 paquets d'étiquettes).
+  in_progress — 0 réussis, 3 en cours, 0 en erreur
+  in_progress — 0 réussis, 3 en cours, 0 en erreur
+  in_progress — 0 réussis, 3 en cours, 0 en erreur
+  in_progress — 0 réussis, 3 en cours, 0 en erreur
+  in_progress — 0 réussis, 3 en cours, 0 en erreur
+  ended — 3 réussis, 0 en cours, 0 en erreur
+Traductions : 0 résumés et 1 titres et 3 étiquettes faits (22 refusés ou en échec) — 3728 résumés et 5430 titres au total, 0.03 $ US.
   ⚠ étiquette « Autoriser le transfert de 14/036,01/$, t » refusée
-  ⚠ étiquette « Déposer le procès-verbal de l’assemblée  » refusée
-  ⚠ titre CG26 0130 : nombres différents
-  ⚠ titre CM26 0161 : nombres différents
-  ⚠ titre CA26 09 0005 : nombres différents
-  ⚠ titre CE26 0156 : nombres différents
-  ⚠ titre CE26 0163 : nombres différents
-  ⚠ titre CE26 0165 : nombres différents
-  ⚠ titre CE26 0175 : nombres différents
-  ⚠ titre CE26 0180 : nombres différents
-  ⚠ titre CE26 0008 : nombres différents
   ⚠ titre CA26 28 084 : nombres différents
   ⚠ titre CA26 25 0167 : nombres différents
+  ⚠ titre CE26 0772 : nombres différents
+  ⚠ titre CE26 0778 : nombres différents
+  ⚠ titre CA26 09 0110 : nombres différents
+  ⚠ titre CE26 0472 : nombres différents
+  ⚠ titre CA26 12047 : nombres différents
+  ⚠ titre CE26 0286 : nombres différents
+  ⚠ titre CE26 0289 : nombres différents
+  ⚠ titre CE26 0294 : nombres différents
+  ⚠ titre CE26 0300 : nombres différents
+  ⚠ titre CE26 0307 : nombres différents
+  ⚠ titre CG26 0105 : nombres différents
+  ⚠ titre CM26 0161 : nombres différents
 
 === Résumés en langage clair ===
 Sommaires depuis 2026-07-20 pas encore résumés (plafond : 120)…
@@ -208,6 +217,6 @@ Sommaires depuis 2026-07-20 pas encore résumés (plafond : 120)…
 Rien à générer. (--force pour tout regénérer.)
 
 === Bilan ===
-  étapes         : 12
+  étapes         : 13
   échecs         : aucun
   avertissements : aucun
