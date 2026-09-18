@@ -386,6 +386,10 @@ details p { background: var(--fond-2); border-radius: var(--rayon); padding: 12p
 .texte-decision .dispositif { border-left: 3px solid var(--accent); padding-left: 10px; }
 .texte-decision .motifs p { color: var(--doux); font-size: 13.5px; }
 
+/* Un nom d'arrondissement cité dans un paragraphe : souligné et en italique. Sans ça, une page
+   comme Sources est un mur de texte d'une seule couleur, où l'œil ne trouve pas les noms. */
+.lieu { font-style: italic; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
 /* ---------- TABLEAUX ---------- */
 table {
   border-collapse: collapse; width: 100%; font-size: 14.5px;
