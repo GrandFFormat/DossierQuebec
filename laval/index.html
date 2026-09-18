@@ -95,6 +95,9 @@
       <p>D'où viennent les données, comment elles sont obtenues — et pourquoi l'index de la Ville est capturé à la main —, et ce que ce prototype ne fait pas encore.</p>
     </a>
   </div>
+
+  <!-- Les courriels de la ville : rempli par /commun/infolettre.js, caché tant qu'elle n'en a pas. -->
+  <div id="infolettre" hidden></div>
 </main>
 
 <footer>
@@ -107,6 +110,10 @@
 <script type="module" src="assets/app.js"></script>
 <script type="module" src="/commun/entete-volet.js"></script>
 <script type="module" src="/commun/abonnes.js"></script>
+<script type="module">
+  import { formulaireInfolettre } from '/commun/infolettre.js';
+  formulaireInfolettre(document.getElementById('infolettre'), { ville: document.body.dataset.ville });
+</script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
      Même projet Vercel : les pages vues de /laval/ s'ajoutent au même tableau de
      bord. En local le script n'existe pas (404 sans conséquence). -->

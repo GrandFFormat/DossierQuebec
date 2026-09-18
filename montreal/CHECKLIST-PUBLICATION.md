@@ -18,6 +18,10 @@ regarde. Quand tout est coché, la dernière section dit quoi changer pour publi
 - [ ] Le menu des villes mène à Montréal et en revient, depuis chaque volet
 - [ ] Mes dossiers : les 16 sujets de Montréal s'affichent, avec leur récapitulatif, en clair et en sombre
 - [ ] S'abonner à un sujet de Montréal fonctionne de bout en bout (abonnement.html → courriel reçu)
+- [x] Le bloc « Les courriels » au bas de l'accueil ne montre que ceux de Montréal *(18 sept. 2026)*
+- [x] Dans Mes dossiers, ouvert depuis Montréal, la boîte « Mes courriels de Montréal » ne montre que ceux de Montréal ; les autres villes s'inscrivent chez elles, un lien le dit *(18 sept. 2026)*
+- [ ] Même règle vérifiée sur chaque volet : Québec, Lévis, Laval, Longueuil (bloc caché tant que la ville n'a pas de courriels)
+- [ ] S'inscrire au compte rendu du mois de Montréal depuis l'accueil, avec une vraie adresse : courriel de confirmation reçu, puis le plus récent numéro
 
 ## 3. Les données tiennent toutes seules
 
@@ -44,7 +48,7 @@ Pour chacune de : Accueil, Décisions, Votes nominatifs, Conseil municipal, Lexi
 - [ ] Sources › « Ce qu'on a demandé à la Ville » est à jour (dernier échange, dernière date)
 - [ ] Le lexique n'a pas de terme vide
 - [ ] Le pied de page dit « site citoyen indépendant, aucun caractère officiel »
-- [ ] Le bloc « Les courriels » de l'accueil : la légende « Montréal commence… » est retirée dès que le premier compte rendu du mois est publié (`npm run infolettre -- --mois=2026-09 --publier`)
+- [ ] La légende « Montréal commence… » (api/_infolettre.js, NOTES_INFOLETTRE) est retirée dès que le premier compte rendu du mois est publié (`npm run infolettre -- --mois=2026-09 --publier`) — elle s'affiche sur l'accueil et dans Mes dossiers
 
 ## 6. Publier (à faire d'un coup, une fois tout coché)
 
