@@ -1,8 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="MTL">
-  <rect width="32" height="32" rx="7" fill="#FFFDF7"/>
-  <text x="16" y="21.5" text-anchor="middle"
-        font-family="Arial Black, Helvetica Neue, Arial, sans-serif"
-        font-size="13" font-weight="900" letter-spacing="-0.5"
-        fill="#16191D">MTL</text>
-  <rect x="10" y="24" width="12" height="2.2" rx="1.1" fill="#0B8A4B"/>
+  <rect width="32" height="32" rx="4" fill="#FFFDF7"/>
+  <!-- M T L as filled paths — max fill, ~1.5px margin -->
+  <g fill="#16191D">
+    <!-- M -->
+    <path d="M1.5 24.2V7.2h3.4l2.55 10.3L10 7.2h3.4v17H10.2V12.6l-2.7 11.6H6.95L4.25 12.6v11.6H1.5z"/>
+    <!-- T -->
+    <path d="M14.1 7.2h9.3v3.05h-3.1V24.2h-3.15V10.25h-3.05V7.2z"/>
+    <!-- L -->
+    <path d="M24.2 7.2h3.3v13.95H30.5V24.2H24.2V7.2z"/>
+  </g>
+  <rect x="1.5" y="26.4" width="29" height="3.2" rx="1.4" fill="#0B8A4B"/>
 </svg>
