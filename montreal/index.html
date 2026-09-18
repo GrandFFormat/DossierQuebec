@@ -93,6 +93,9 @@
       <p>D'où viennent les données, comment elles sont obtenues, et ce que ce prototype ne fait pas encore.</p>
     </a>
   </div>
+
+  <!-- Les courriels : rempli par /commun/infolettre.js, caché si la ville n'en a pas. -->
+  <div id="infolettre" hidden></div>
 </main>
 
 <footer>
@@ -105,6 +108,15 @@
 <script type="module" src="assets/app.js"></script>
 <script type="module" src="/commun/entete-volet.js"></script>
 <script type="module" src="/commun/abonnes.js"></script>
+<script type="module">
+  import { formulaireInfolettre } from '/commun/infolettre.js';
+  // La légende ci-dessous se retire le jour où le premier compte rendu du mois de Montréal est
+  // publié (voir CHECKLIST-PUBLICATION.md).
+  formulaireInfolettre(document.getElementById('infolettre'), {
+    ville: document.body.dataset.ville,
+    note: "<strong>Montréal commence :</strong> le premier compte rendu du mois arrive à la fin de septembre 2026. Il n'y en a pas encore pour août. Les courriels après chaque séance partent à compter des prochaines séances.",
+  });
+</script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
      Même projet Vercel : les pages vues de /montreal/ s'ajoutent au même tableau de
      bord. En local le script n'existe pas (404 sans conséquence). -->

@@ -12,7 +12,7 @@ import crypto from 'node:crypto';
 import { supabase, site } from './_alertes.js';
 
 // Les villes qui ont des courriels. Une ville s'ajoute ici le jour où son volet en produit.
-export const VILLES_INFOLETTRE = { quebec: 'Québec' };
+export const VILLES_INFOLETTRE = { quebec: 'Québec', montreal: 'Montréal' };
 
 // Les trois sortes de courriels. Chacune s'inscrit à part : on peut vouloir seulement son
 // arrondissement, ou seulement le gros compte rendu du mois.
@@ -46,6 +46,28 @@ export const ARRONDISSEMENTS = {
     { cle: 'beauport', nom: 'Beauport', instance: "Conseil de l'Arrondissement de Beauport" },
     { cle: 'la-haute-saint-charles', nom: 'La Haute-Saint-Charles', instance: "Conseil de l'Arrondissement de La Haute-Saint-Charles" },
   ],
+  // Les 19 de Montréal, tels que montreal/data/decisions.json les nomme (lib/mtl.js, nomConseil).
+  montreal: [
+    ['ahuntsic-cartierville', 'Ahuntsic-Cartierville'],
+    ['anjou', 'Anjou'],
+    ['cote-des-neiges-notre-dame-de-grace', 'Côte-des-Neiges–Notre-Dame-de-Grâce'],
+    ['lachine', 'Lachine'],
+    ['lasalle', 'LaSalle'],
+    ['ile-bizard-sainte-genevieve', "L'Île-Bizard–Sainte-Geneviève"],
+    ['mercier-hochelaga-maisonneuve', 'Mercier–Hochelaga-Maisonneuve'],
+    ['montreal-nord', 'Montréal-Nord'],
+    ['outremont', 'Outremont'],
+    ['pierrefonds-roxboro', 'Pierrefonds-Roxboro'],
+    ['plateau-mont-royal', 'Le Plateau-Mont-Royal'],
+    ['riviere-des-prairies-pointe-aux-trembles', 'Rivière-des-Prairies–Pointe-aux-Trembles'],
+    ['rosemont-la-petite-patrie', 'Rosemont–La Petite-Patrie'],
+    ['saint-laurent', 'Saint-Laurent'],
+    ['saint-leonard', 'Saint-Léonard'],
+    ['sud-ouest', 'Le Sud-Ouest'],
+    ['verdun', 'Verdun'],
+    ['ville-marie', 'Ville-Marie'],
+    ['villeray-saint-michel-parc-extension', 'Villeray–Saint-Michel–Parc-Extension'],
+  ].map(([cle, nom]) => ({ cle, nom: nom.replace(/^Le /, ''), instance: `Conseil d'arrondissement ${/^Le /.test(nom) ? `du ${nom.slice(3)}` : `de ${nom}`}` })),
 };
 
 // Ce qu'une ville offre : les sortes valides, et ses arrondissements s'il y en a.
