@@ -21,6 +21,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { createHash } from 'node:crypto';
 import { readFile, writeFile, readdir } from 'node:fs/promises';
+import { nombres } from './traductions.js';
 
 const DOSSIER = new URL('../data/projets/', import.meta.url);
 const OUT = new URL('../data/projets/en.json', import.meta.url);
@@ -79,10 +80,10 @@ const OUTIL = {
   },
 };
 
-// Les nombres d'un texte, séparateurs retirés et triés — le même garde-fou que les résumés.
-export function nombres(texte) {
-  return (String(texte ?? '').replace(/(\d)(?:[\s  ]+|[.,])(?=\d)/g, '$1').match(/\d+/g) ?? []).sort();
-}
+// Le garde-fou des nombres est celui des résumés, importé pour de bon (scrapers/traductions.js) :
+// il connaît les tournures qui changent le compte sans changer le sens — « 21 h » et « 9 p.m. »,
+// « 24 heures sur 24 » et « 24 hours a day ». Sans lui, deux sujets sur seize étaient refusés à
+// tort le 18 septembre 2026.
 const memesNombres = (fr, en) => nombres(fr).join(' ') === nombres(en).join(' ');
 const CONTROLE = /[\x00-\x09\x0b-\x1f\x7f]/;
 const propre = (s) => typeof s === 'string' && s.trim() && !CONTROLE.test(s);
