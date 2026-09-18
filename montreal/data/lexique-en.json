@@ -1,0 +1,214 @@
+{
+ "generatedAt": "2026-09-18T12:37:01.953Z",
+ "source": "f43f6f0af078f2ad",
+ "modele": "claude-sonnet-5",
+ "genereParIA": true,
+ "categories": {
+  "documents": "Documents",
+  "instances": "Who decides",
+  "agglomeration": "Urban agglomeration and linked cities",
+  "vote": "Voting and adopting",
+  "urbanisme": "Urban planning",
+  "argent": "Money and contracts"
+ },
+ "entrees": {
+  "Résolution": {
+   "equivalent": "Resolution",
+   "aussi": null,
+   "definition": "The decision itself. Once adopted, it's the official act of the body: it carries a number that says who made it and when — CM26 0355 for the city council in 2026, CE26 0412 for the executive committee, CG26 0123 for the urban agglomeration council, CA26 for a borough council.",
+   "ouVousLeVoyez": "Every card on the Decisions page is a resolution read from the official minutes (« procès-verbal »)."
+  },
+  "Sommaire décisionnel": {
+   "equivalent": "Decision summary",
+   "aussi": null,
+   "definition": "The note the administration writes BEFORE the decision, to explain it to elected officials: background, prior decisions, description, justification, financial aspects, timeline. In Montréal, it lives in the « système de gestion des décisions des instances » (decision management system, GDD) and carries a ten-digit file number.",
+   "ouVousLeVoyez": "This is the document from which the site's plain-language summaries are produced. The file number — 1266245003, for example — is written at the end of every resolution, next to the item number."
+  },
+  "Dossier décisionnel": {
+   "equivalent": "Decision file",
+   "aussi": "file number · GDD",
+   "definition": "The complete file for a decision in the City's system: the summary, its attachments, department input, then the resolution(s). Its ten-digit number follows the decision from one body to the next — from the executive committee to the city council, then to the agglomeration.",
+   "ouVousLeVoyez": "The same file can therefore appear three times on the Decisions page, once for each body that ruled on it."
+  },
+  "Procès-verbal": {
+   "equivalent": "Minutes",
+   "aussi": null,
+   "definition": "The official record of a meeting: who was present, what was decided, and — when a recorded vote was requested — who voted what.",
+   "ouVousLeVoyez": "This is the source of every decision and every vote on the site. One per meeting, in PDF, on the City's website."
+  },
+  "Ordre du jour": {
+   "equivalent": "Agenda",
+   "aussi": null,
+   "definition": "The list of items a meeting must address, published the Friday before the city council meeting. Items are numbered by chapter: 20 for contracts and agreements, 30 for administration and finance, 40 for by-laws, 50 for appointments, 60 for motions.",
+   "ouVousLeVoyez": "A resolution's item number (20.03, 40.12) is that of its agenda item."
+  },
+  "Avis de motion": {
+   "equivalent": "Notice of motion",
+   "aussi": null,
+   "definition": "The announcement that a by-law will be presented at a following meeting. It decides nothing: it gives notice. It's a mandatory step before adopting a by-law.",
+   "ouVousLeVoyez": "Often accompanied by the tabling of the draft by-law, then followed by its adoption at the next meeting."
+  },
+  "Règlement": {
+   "equivalent": "By-law",
+   "aussi": null,
+   "definition": "The most binding form of a municipal decision: a general rule that applies to everyone. Its adoption follows mandatory steps (notice of motion, draft, adoption).",
+   "ouVousLeVoyez": "The numbers indicate the body and the year: 26-012 for city council, RCG 26-005 for the agglomeration, RCA for a borough."
+  },
+  "Conseil municipal": {
+   "equivalent": "City council",
+   "aussi": "conseil de ville (council)",
+   "definition": "The 65 elected officials of the City of Montréal: the mayor, the 18 borough mayors, and 46 city councillors. It adopts the budget, by-laws, and motions, and sits in regular session once a month, on Monday.",
+   "ouVousLeVoyez": "Its meetings are public, webcast, and open with a public question period."
+  },
+  "Comité exécutif": {
+   "equivalent": "Executive committee",
+   "aussi": null,
+   "definition": "The City's day-to-day government: the mayor, its chair, and about a dozen members chosen from among elected officials, each responsible for specific files. It prepares what the councils adopt and decides alone on matters delegated to it. It meets weekly, on Wednesday.",
+   "ouVousLeVoyez": "The phrase « Vu la recommandation du comité exécutif… » (Given the executive committee's recommendation…) opens most city council resolutions."
+  },
+  "Conseil d'arrondissement": {
+   "equivalent": "Borough council",
+   "aussi": null,
+   "definition": "Each of Montréal's 19 boroughs has its own council, chaired by its borough mayor, with the city and borough councillors elected in its territory. It decides on local matters: local urban planning, parks, recreation, local roads, snow removal.",
+   "ouVousLeVoyez": "This site covers the three central bodies; the 19 borough councils follow the same publication pattern and are the next step."
+  },
+  "Conseiller d'arrondissement": {
+   "equivalent": "Borough councillor",
+   "aussi": "conseillère d'arrondissement (fem.)",
+   "definition": "An elected official who sits only on their borough's council, not on the city council. This role exists only in certain boroughs, so that each borough council has at least five members.",
+   "ouVousLeVoyez": "The City's list of elected officials counts 38 of them in addition to the 65 city council members; they're in the open dataset, but not on the district map."
+  },
+  "Greffier": {
+   "equivalent": "City clerk",
+   "aussi": "greffière (fem.)",
+   "definition": "The officer who keeps the City's official records, drafts the minutes, and certifies decisions. This is not an elected official. In Montréal, the clerk also calls the roll of members during a recorded vote.",
+   "ouVousLeVoyez": "Their signature closes the minutes, along with that of the chair."
+  },
+  "Présidence du conseil": {
+   "equivalent": "Council chair",
+   "aussi": null,
+   "definition": "The elected official who chairs city council debates — not the mayor. The chair recognizes speakers, puts motions to a vote, and declares the result.",
+   "ouVousLeVoyez": "« Le président du conseil déclare la proposition adoptée à la majorité des voix. » (The council chair declares the motion adopted by a majority of votes.)"
+  },
+  "Conseil d'agglomération": {
+   "equivalent": "Urban agglomeration council",
+   "aussi": null,
+   "definition": "The body where Montréal sits with the island's 15 linked cities to decide on shared services: police, fire, public transit, water, property assessment, social housing, major parks. Montréal holds the majority of votes; the linked cities' mayors also vote there.",
+   "ouVousLeVoyez": "Its resolutions carry the CG prefix. Many go through city council first, in the form « recommander au conseil d'agglomération » (recommend to the urban agglomeration council)."
+  },
+  "Ville liée": {
+   "equivalent": "Linked city",
+   "aussi": "reconstituted city · demerged city",
+   "definition": "One of the fifteen municipalities on the island of Montréal that were merged into Montréal in 2002 and regained their separate existence in 2006, following a referendum. They have their own council and mayor, and sit on the agglomeration council for shared services.",
+   "ouVousLeVoyez": "Baie-D'Urfé, Beaconsfield, Côte-Saint-Luc, Dollard-Des Ormeaux, Dorval, Hampstead, Kirkland, L'Île-Dorval, Montréal-Est, Montréal-Ouest, Mont-Royal, Pointe-Claire, Sainte-Anne-de-Bellevue, Senneville, Westmount."
+  },
+  "Compétence d'agglomération": {
+   "equivalent": "Agglomeration jurisdiction",
+   "aussi": null,
+   "definition": "An area that the law entrusts to the agglomeration council rather than to each city separately, because the service is shared. Everything else — local jurisdiction — remains with each city or borough.",
+   "ouVousLeVoyez": "The note « Compétence d'agglomération : … » (Agglomeration jurisdiction: …) appears on agendas, under each relevant item."
+  },
+  "Vote enregistré": {
+   "equivalent": "Recorded vote",
+   "aussi": "roll call",
+   "definition": "A vote where the clerk calls the roll of members and the minutes name who voted for and who voted against. A member must request it; otherwise the decision is adopted by show of hands and no one is named.",
+   "ouVousLeVoyez": "This is key to the site's vote registry: the only votes whose details are known are those that were recorded."
+  },
+  "Adoptée à l'unanimité": {
+   "equivalent": "Adopted unanimously",
+   "aussi": null,
+   "definition": "No one voted against.",
+   "ouVousLeVoyez": "The most common wording, because most decisions pass without opposition."
+  },
+  "Adoptée à la majorité des voix": {
+   "equivalent": "Adopted by a majority of votes",
+   "aussi": null,
+   "definition": "Adopted, but at least one person voted against. The minutes then name the dissenters, or everyone if there was a recorded vote.",
+   "ouVousLeVoyez": "This is the case for nearly all of the recorded votes on the site."
+  },
+  "Dissidence": {
+   "equivalent": "Dissent",
+   "aussi": null,
+   "definition": "The names of the elected officials who voted against, recorded in the minutes without a full roll call having taken place. We know who opposed it, not specifically who voted for it.",
+   "ouVousLeVoyez": "« Adopté à la majorité des voix. Dissidences : Mme X, M. Y. » (Adopted by a majority of votes. Dissenting: Ms. X, Mr. Y.) These names are carried over to the decision cards."
+  },
+  "Prise d’acte": {
+   "equivalent": "Acknowledgement of receipt",
+   "aussi": null,
+   "definition": "The body officially notes that a document was presented to it. This doesn't approve it: it records it.",
+   "ouVousLeVoyez": "Often used for reports, executive committee responses, or mandatory filings."
+  },
+  "Mairesse suppléante": {
+   "equivalent": "Acting mayor",
+   "aussi": "maire suppléant (masc.)",
+   "definition": "The elected official designated to replace the mayor in case of absence or incapacity. On Montréal's city council, the role rotates among elected officials for periods set by resolution.",
+   "ouVousLeVoyez": "The designation is itself a city council resolution, under chapter 51."
+  },
+  "Dérogation mineure": {
+   "equivalent": "Minor exemption",
+   "aussi": null,
+   "definition": "A permission to slightly deviate from a zoning rule for a specific lot — a setback, a height, a number of parking spaces — without changing the by-law for everyone. In Montréal, this is mostly a borough matter.",
+   "ouVousLeVoyez": "Almost always tied to a specific address, named in the subject line of the decision."
+  },
+  "Projet particulier": {
+   "equivalent": "Special project",
+   "aussi": "PPCMOI",
+   "definition": "A mechanism that authorizes a specific project that deviates from zoning, under specific conditions, without amending the by-law for the whole area. Full name: projet particulier de construction, de modification ou d'occupation d'un immeuble (special project for the construction, modification, or occupancy of a building).",
+   "ouVousLeVoyez": "Common in borough resolutions and, for large projects, at city council."
+  },
+  "Article 89": {
+   "equivalent": "Section 89",
+   "aussi": null,
+   "definition": "The section of the Charter of Ville de Montréal (« Charte de la Ville de Montréal ») that allows city council to authorize a major project — a hospital, a campus, a large real estate development — by by-law, overriding the borough's urban planning rules, with public consultation.",
+   "ouVousLeVoyez": "« Adopter le règlement … en vertu du paragraphe … de l'article 89 de la Charte » (Adopt the by-law … under paragraph … of section 89 of the Charter)."
+  },
+  "Zonage": {
+   "equivalent": "Zoning",
+   "aussi": null,
+   "definition": "The division of the territory into zones, each with rules on what can be built and done there. In Montréal, each borough has its own urban planning by-law.",
+   "ouVousLeVoyez": "The City's urban plan (« plan d'urbanisme ») oversees the 19 borough by-laws."
+  },
+  "Accorder un contrat": {
+   "equivalent": "Award a contract",
+   "aussi": "grant a contract",
+   "definition": "The official awarding of a contract to a business, generally to the lowest compliant bidder following a call for tenders.",
+   "ouVousLeVoyez": "« Accorder un contrat à … pour … — Dépense totale de … $, taxes incluses — Appel d'offres public … (3 soumissionnaires) » (Award a contract to … for … — Total expenditure of $… , taxes included — Public call for tenders … (3 bidders)). The subject line says it all: who, what, how much, how many competitors."
+  },
+  "Appel d'offres": {
+   "equivalent": "Call for tenders",
+   "aussi": null,
+   "definition": "The mandatory competitive process before awarding a contract above a certain amount. Public, it's open to everyone; by invitation, it's limited to suppliers solicited.",
+   "ouVousLeVoyez": "Montréal's contracts are also published as open data, with the number of the resolution that awards them."
+  },
+  "Gré à gré": {
+   "equivalent": "Sole-source",
+   "aussi": null,
+   "definition": "A contract awarded directly, without a competitive process. The law only allows it in specific cases, and the City must state this in the resolution.",
+   "ouVousLeVoyez": "« contrat de gré à gré » (sole-source contract), « fournisseur unique » (sole supplier)."
+  },
+  "Contribution financière": {
+   "equivalent": "Financial contribution",
+   "aussi": "financial support",
+   "definition": "An amount the City pays to an organization for a project or mission, governed by an agreement that specifies what it's for and what the organization must report on.",
+   "ouVousLeVoyez": "« Accorder un soutien financier de 250 000 $ à … et approuver un projet de convention à cet effet » (Grant financial support of $250,000 to … and approve a draft agreement to that effect)."
+  },
+  "Programme décennal d'immobilisations": {
+   "equivalent": "Ten-year capital works program",
+   "aussi": "PDI",
+   "definition": "The City's investment plan over ten years — buildings, pipes, streets, parks — adopted each year along with the budget. This is where you see what the City plans to build, and when.",
+   "ouVousLeVoyez": "Many construction contracts refer to the PDI as their funding source."
+  },
+  "Règlement d'emprunt": {
+   "equivalent": "Borrowing by-law",
+   "aussi": null,
+   "definition": "The by-law by which the City authorizes itself to borrow to fund a project, generally a long-term investment. It specifies the amount and purpose.",
+   "ouVousLeVoyez": "« Adopter le règlement autorisant un emprunt de 12 000 000 $ afin de financer … » (Adopt the by-law authorizing a loan of $12,000,000 to fund …)."
+  },
+  "Expropriation": {
+   "equivalent": "Expropriation",
+   "aussi": null,
+   "definition": "The forced acquisition of land or a right by the City for a public purpose, with compensation to the owner.",
+   "ouVousLeVoyez": "« Décréter l'acquisition, de gré à gré ou par expropriation, … » (Order the acquisition, by mutual agreement or by expropriation, …)."
+  }
+ }
+}
