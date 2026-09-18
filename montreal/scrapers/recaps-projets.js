@@ -4,14 +4,14 @@
 //   node --env-file=api.env scrapers/recaps-projets.js                    les sujets qui ont bougé
 //   node --env-file=api.env scrapers/recaps-projets.js --projet=namur-hippodrome --force
 //
-// Copié de quebec/scrapers/recaps-projets.js, avec une différence de fond : Québec nourrit le
-// modèle des RÉSUMÉS de sommaires décisionnels. Montréal ne publie pas ses sommaires — son
-// Répertoire des documents officiels ne connaît même pas le numéro de dossier. Ce qu'on a,
-// c'est ce que le procès-verbal contient et qu'on écartait : le DISPOSITIF de chaque
-// résolution (« Et résolu : … », les montants, les parties, les durées) et ses MOTIFS
-// (« Vu… », « Attendu que… »). C'est moins qu'un sommaire — pas d'options écartées, pas de
-// contexte — et c'est déjà de quoi dire ce que la Ville a fait, quand, pour combien, et par
-// quelles instances c'est passé.
+// Copié de quebec/scrapers/recaps-projets.js. Trois matières nourrissent le modèle, dans cet
+// ordre : le RÉSUMÉ DU SOMMAIRE DÉCISIONNEL quand le conseil annexe ce sommaire à son ordre du
+// jour — trouvé le 18 septembre 2026, c'est là que vivent le contexte et les options écartées —,
+// puis le DISPOSITIF de la résolution (« Et résolu : … », les montants, les parties, les durées)
+// et ses MOTIFS (« Vu… », « Attendu que… »), lus dans le procès-verbal. Trois conseils
+// d'arrondissement n'annexent pas leurs sommaires (Saint-Laurent, Ahuntsic-Cartierville,
+// Pierrefonds-Roxboro) : pour eux il ne reste que les deux derniers, et c'est déjà de quoi dire
+// ce que la Ville a fait, quand, pour combien, et par quelles instances c'est passé.
 //
 // Un dossier, ici, c'est un numéro de dossier décisionnel et les résolutions qui le portent,
 // du comité exécutif au conseil municipal puis à l'agglomération. Le même dispositif se
@@ -33,7 +33,7 @@ import { PROJETS } from '../lib/projets.js';
 import { MODELE, TARIF, appeler, compacter, nombresDe } from '../lib/modele.js';
 
 const OUT = new URL('../data/projets-recaps.json', import.meta.url);
-const VERSION = 1; // changer pour tout refaire après une modification des consignes
+const VERSION = 2; // changer pour tout refaire après une modification des consignes
 const MIN_DOSSIERS = 3; // en deçà, la liste se lit très bien seule
 
 const MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
@@ -49,7 +49,7 @@ const args = new Map(process.argv.slice(2).map((a) => { const [k, v] = a.replace
 // ---------- les sources d'un sujet ----------
 // Une entrée par dossier décisionnel ; une résolution sans numéro de dossier est un dossier
 // à elle seule.
-function dossiersDuProjet(decisions, textes, cle) {
+function dossiersDuProjet(decisions, textes, resumes, cle) {
   const groupes = new Map();
   for (const d of decisions) {
     if (d.type !== 'Résolution' || !d.projets?.includes(cle)) continue;
@@ -64,9 +64,13 @@ function dossiersDuProjet(decisions, textes, cle) {
       // Le dispositif le plus complet parmi les étapes, et les motifs les plus complets.
       const dispositif = docs.map((d) => textes[d.id]?.dispositif).filter(Boolean).sort((a, b) => b.length - a.length)[0] ?? null;
       const motifs = docs.map((d) => textes[d.id]?.motifs).filter(Boolean).sort((a, b) => b.length - a.length)[0] ?? null;
+      // Le résumé du sommaire décisionnel, quand le conseil l'annexe à son ordre du jour : c'est
+      // le « pourquoi » que le procès-verbal ne dit pas. Indexé par numéro de dossier.
+      const sommaire = docs.map((d) => (d.sommaireId ? resumes.get(d.sommaireId) : null)).find((r) => r?.source === 'sommaire' && r.puces?.length) ?? null;
       const texte = [
         `[${principal.numero}] dossier ${d10(k) ? k : 'sans numéro'} — ${docs.length > 1 ? `${docs.length} résolutions, du ${dateLongue(docs[0].date)} au ${dateLongue(principal.date)}` : `résolution du ${dateLongue(principal.date)}`}${principal.resultat ? ` — ${principal.resultat}` : ''}`,
         `Objet : ${principal.objet ?? ''}`,
+        sommaire ? `Sommaire décisionnel (résumé) : ${sommaire.puces.map((x) => `- ${x}`).join('\n')}` : null,
         dispositif ? `Décidé : ${dispositif}` : null,
         motifs ? `Motifs : ${motifs}` : null,
         `Instances : ${docs.map((r) => `${r.numero} (${instanceCourte(r.instance)}, ${dateLongue(r.date)})`).join(' ; ')}`,
@@ -77,7 +81,7 @@ function dossiersDuProjet(decisions, textes, cle) {
         k,
         date: principal.date,
         numeros: [...new Set(docs.map((d) => d.numero).filter(Boolean))],
-        signature: `${k}|${docs.map((r) => r.numero).join(',')}|${dispositif ? compacter(dispositif).length : 0}|${motifs ? compacter(motifs).length : 0}`,
+        signature: `${k}|${docs.map((r) => r.numero).join(',')}|${dispositif ? compacter(dispositif).length : 0}|${motifs ? compacter(motifs).length : 0}|${sommaire ? compacter(sommaire.puces.join(' ')).length : 0}`,
         texte,
       };
     })
@@ -230,11 +234,13 @@ async function lireJson(url, repli) {
 }
 
 export async function rediger({ seulement = null, force = false } = {}) {
-  const [{ decisions = [], projets: resumeProjets = {} }, { textes = {} }, existant] = await Promise.all([
+  const [{ decisions = [], projets: resumeProjets = {} }, { textes = {} }, { resumes: listeResumes = [] }, existant] = await Promise.all([
     lireJson(new URL('../data/decisions.json', import.meta.url), {}),
     lireJson(new URL('../data/textes.json', import.meta.url), {}),
+    lireJson(new URL('../data/resumes.json', import.meta.url), { resumes: [] }),
     lireJson(OUT, { recaps: {} }),
   ]);
+  const resumes = new Map(listeResumes.map((r) => [r.id, r]));
   const recaps = existant.recaps ?? {};
   const client = new Anthropic();
   let entree = 0;
@@ -244,7 +250,7 @@ export async function rediger({ seulement = null, force = false } = {}) {
   const aFaire = [];
   for (const cle of Object.keys(PROJETS)) {
     if (seulement && cle !== seulement) continue;
-    const dossiers = dossiersDuProjet(decisions, textes, cle);
+    const dossiers = dossiersDuProjet(decisions, textes, resumes, cle);
     const signature = createHash('sha256').update(`${VERSION}\n${dossiers.map((d) => d.signature).join('\n')}`).digest('hex').slice(0, 16);
     if (dossiers.length < MIN_DOSSIERS) {
       delete recaps[cle];
@@ -291,7 +297,7 @@ export async function rediger({ seulement = null, force = false } = {}) {
           utilisable: Boolean(final.enBref) || etapes.length >= 2,
           // Ce que Mes dossiers écrit sous le récapitulatif : d'où il vient, et ce qui lui
           // manque par rapport à ceux des autres villes.
-          source: `Rédigé automatiquement à partir de l'objet, du texte décidé et des motifs des ${dossiers.length} dossiers du sujet, tels que lus dans les procès-verbaux — Montréal ne publie pas ses sommaires décisionnels, qui donneraient le contexte et les options écartées. Puis vérifié automatiquement : ce qui ne se vérifiait pas a été retiré. Les documents officiels font foi.`,
+          source: `Rédigé automatiquement à partir des ${dossiers.length} dossiers du sujet : leur sommaire décisionnel quand le conseil l'annexe à son ordre du jour, et le texte décidé et les motifs lus dans les procès-verbaux. Puis vérifié automatiquement : ce qui ne se vérifiait pas a été retiré. Les documents officiels font foi.`,
           verification: { version: VERSION, retiresMecanique: mecanique.retires, retiresContreLecture: verification.entree.problemes },
         },
       };
