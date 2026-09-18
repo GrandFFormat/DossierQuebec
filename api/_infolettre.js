@@ -211,13 +211,15 @@ export async function envoyerBienvenue(inscriptions) {
 }
 
 // Le cron : chaque compte rendu publié et pas encore parti, aux inscrits confirmés qui ne l'ont pas
-// reçu (ceux qui l'ont eu en bienvenue sont sautés), PAR_JOUR au plus.
-export async function envoyerNumerosEnAttente() {
-  const rapport = { numeros: 0, envoyes: 0, termines: 0 };
+// reçu (ceux qui l'ont eu en bienvenue sont sautés), `plafond` au plus — ce que les alertes des
+// abonnés payants, parties avant, ont laissé du quota quotidien.
+export async function envoyerNumerosEnAttente(plafond = PAR_JOUR) {
+  const rapport = { numeros: 0, envoyes: 0, termines: 0, plafond };
+  if (plafond <= 0) return rapport;
   const numeros = await supabase('/rest/v1/infolettre_numeros?publie_le=not.is.null&envoye_le=is.null&select=ville,type,arrondissement,mois,titre,html,html_abonnes,envoyes&order=mois');
   if (!numeros.length) return rapport;
   const abonnes = await courrielsAbonnes();
-  let reste = PAR_JOUR;
+  let reste = Math.min(plafond, PAR_JOUR);
   for (const numero of numeros) {
     if (reste <= 0) break;
     rapport.numeros++;

@@ -28,7 +28,7 @@
 // PUBLIC_SITE_URL. Tables : scripts/supabase-schema-alertes.sql.
 
 import { supabase, signature, site } from './_alertes.js';
-import { envoyerNumerosEnAttente } from './_infolettre.js';
+import { PAR_JOUR, envoyerNumerosEnAttente } from './_infolettre.js';
 import { estActive } from './_stripe.js';
 
 const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis', longueuil: 'Longueuil', laval: 'Laval' };
@@ -271,16 +271,19 @@ export default async function handler(req, res) {
   const essai = pourSoi ? pourSoi.email.toLowerCase() : String(req.query?.essai ?? '').trim().toLowerCase() || null;
   const rapport = { abonnes: 0, personnes: 0, envoyes: 0, projetsMemorises: 0, erreurs: [], ...(apercu ? { apercu: [] } : {}) };
 
-  // Le compte rendu mensuel publié (api/_infolettre.js) part au même passage : Vercel Hobby n'accepte
-  // que deux crons. Une panne de l'infolettre n'empêche pas les alertes.
-  if (serveur && !apercu && !essai) {
+  // Les infolettres publiées (api/_infolettre.js) partent au même passage, APRÈS les alertes : Resend
+  // gratuit, c'est 100 courriels par jour pour tout, et les abonnés payants passent d'abord.
+  // L'infolettre prend ce qui reste. Une panne de l'une n'empêche pas l'autre. (Jusqu'au 18 sept.
+  // 2026 l'infolettre partait avant et pouvait prendre 90 envois sur 100.)
+  const puisInfolettre = async () => {
+    if (!serveur || apercu || essai) return;
     try {
-      rapport.infolettre = await envoyerNumerosEnAttente();
+      rapport.infolettre = await envoyerNumerosEnAttente(Math.max(0, PAR_JOUR - rapport.envoyes));
     } catch (erreur) {
       console.error('infolettre (cron) :', erreur);
       rapport.erreurs.push(`infolettre : ${erreur.message}`);
     }
-  }
+  };
 
   try {
     const maintenant = new Date();
@@ -291,7 +294,10 @@ export default async function handler(req, res) {
           .map((a) => a.user_id)
           .filter((id) => /^[0-9a-f-]{36}$/.test(id));
     rapport.abonnes = abonnes.length;
-    if (!abonnes.length) return res.status(200).json({ ok: true, ...rapport, raison: 'aucun abonné actif' });
+    if (!abonnes.length) {
+      await puisInfolettre();
+      return res.status(200).json({ ok: true, ...rapport, raison: 'aucun abonné actif' });
+    }
 
     const liste = abonnes.join(',');
     const [suivis, preferences, etats, mots, organismes] = await Promise.all([
@@ -432,9 +438,11 @@ export default async function handler(req, res) {
         rapport.erreurs.push(`${uid.slice(0, 8)} : ${erreur.message}`);
       }
     }
+    await puisInfolettre();
     return res.status(200).json({ ok: true, ...rapport });
   } catch (erreur) {
     console.error('alertes-projets :', erreur);
+    await puisInfolettre();
     return res.status(500).json({ ok: false, erreur: erreur.message, ...rapport });
   }
 }
