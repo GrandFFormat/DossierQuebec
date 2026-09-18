@@ -520,3 +520,41 @@ export function parserOrdreDuJour(pages) {
   for (const p of points) delete p.attendDossier;
   return points;
 }
+
+// ---------- Les sommaires décisionnels annexés à un ordre du jour ----------
+//
+// Le Plateau-Mont-Royal publie « Ordre du jour et documents décisionnels » : après les
+// quelques pages de l'ordre du jour viennent, pour chaque dossier, la feuille de
+// RECOMMANDATION puis le SOMMAIRE DÉCISIONNEL lui-même — contenu, justification, aspects
+// financiers. C'est le document que la Ville ne publie nulle part ailleurs et que le volet
+// Québec résume depuis le début. Chaque feuille commence par l'en-tête du « Système de
+// gestion des décisions des instances » et porte son numéro de dossier ; on découpe aux
+// en-têtes, on lit le numéro, et on recolle les feuilles d'un même dossier.
+const DEBUT_FEUILLE = /^Syst[èe]me de gestion des(?:\s|$)/i;
+const NUMERO_DOSSIER_FEUILLE = /Dossier\s*#\s*:?\s*(\d{10})\b/i;
+
+export function decouperSommaires(pages) {
+  const feuilles = [];
+  let courante = null;
+  for (const page of pages) {
+    for (const l of page.lignes) {
+      const t = (typeof l === 'string' ? l : l.texte).trim();
+      if (DEBUT_FEUILLE.test(t)) {
+        courante = { page: page.numero, lignes: [] };
+        feuilles.push(courante);
+        continue;
+      }
+      if (courante && t) courante.lignes.push(t);
+    }
+  }
+  const parDossier = new Map();
+  for (const f of feuilles) {
+    const dossier = f.lignes.slice(0, 12).map((l) => l.match(NUMERO_DOSSIER_FEUILLE)?.[1]).find(Boolean);
+    if (!dossier) continue;
+    const s = parDossier.get(dossier) ?? { dossier, page: f.page, feuilles: 0, texte: '' };
+    s.feuilles++;
+    s.texte += (s.texte ? '\n\n' : '') + f.lignes.join('\n');
+    parDossier.set(dossier, s);
+  }
+  return [...parDossier.values()];
+}

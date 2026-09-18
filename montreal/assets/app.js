@@ -88,7 +88,7 @@ function blocResume(trouve) {
   const { r, indirect } = trouve;
   return `<div class="resume">
     <div class="resume-entete">
-      <span>Résumé généré par IA${indirect && r.numero ? ` — sommaire ${echapper(r.numero)}` : ''}</span>
+      <span>Résumé généré par IA${r.source === 'resolution' ? " — d'après le texte de la résolution" : indirect && r.numero ? ` — sommaire ${echapper(r.numero)}` : " — d'après le sommaire décisionnel"}</span>
       ${r.montantPrincipal ? `<span class="puce montant">${echapper(r.montantPrincipal)}</span>` : ''}
       ${r.sansContenuSubstantiel ? '<span class="puce procedural">document de procédure</span>' : ''}
     </div>
