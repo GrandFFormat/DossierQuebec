@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
 <meta name="robots" content="noindex, nofollow">
-<title>Lexique du vocabulaire municipal — DossierVilleDeMontréal</title>
-<meta name="description" content="Résolution, sommaire décisionnel, dossier décisionnel, vote enregistré, dissidence, ville liée : le vocabulaire des décisions de la Ville de Montréal, expliqué et chiffré sur les procès-verbaux officiels.">
+<title data-en="Glossary of municipal vocabulary — DossierVilleDeMontréal">Lexique du vocabulaire municipal — DossierVilleDeMontréal</title>
+<meta data-en-content="Resolution, decision summary, decision file, recorded vote, dissidence, related city: the vocabulary of the City of Montréal's decisions, explained and counted on the official minutes." name="description" content="Résolution, sommaire décisionnel, dossier décisionnel, vote enregistré, dissidence, ville liée : le vocabulaire des décisions de la Ville de Montréal, expliqué et chiffré sur les procès-verbaux officiels.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
@@ -21,6 +21,9 @@
       document.documentElement.dataset.theme = t;
       var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
       if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+      // Anglais choisi (commun/langue.js) : page cachée le temps de traduire, 1,5 s au plus.
+      var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('dvq:langue');
+      if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.classList.add('dvq-en'); setTimeout(function () { document.documentElement.classList.add('dvq-pret'); }, 1500); }
     } catch (e) {}
   })();
 </script>
@@ -36,26 +39,26 @@
   <div class="contenu">
     <div class="titre-ligne">
       <a href="./"><h1>Dossier<span class="marque">VilleDeMontréal</span></h1></a>
-      <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
-      <a class="retour-dq" href="https://dossierquebec.ca/" title="Retour à DossierQuébec" aria-label="Retour à DossierQuébec">DQ</a>
+      <span data-en-title="Trial version: the content and the layout may still change" class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
+      <a data-en-title="Back to DossierQuébec" data-en-aria-label="Back to DossierQuébec" class="retour-dq" href="https://dossierquebec.ca/" title="Retour à DossierQuébec" aria-label="Retour à DossierQuébec">DQ</a>
       <details class="ab-villes" id="villes"></details>
     </div>
-    <p class="sous-titre">
+    <p data-en="The City of Montréal's decisions, made readable. Public data, taken as is from the City's official minutes and its open data portal." class="sous-titre">
       Les décisions de la Ville de Montréal, lisibles. Données publiques, reprises telles quelles
       des procès-verbaux officiels de la Ville et de son portail de données ouvertes.
     </p>
     <nav>
-      <a href="./">Accueil</a>
-      <a href="decisions.html">Décisions</a>
-      <a href="votes.html">Votes nominatifs</a>
-      <a href="conseil.html">Conseil municipal</a>
-      <a href="lexique.html" aria-current="page">Lexique</a>
-      <a href="https://montreal.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Montréal (nouvel onglet)">Ville de Montréal ↗</a>
+      <a data-en="Home" href="./">Accueil</a>
+      <a data-en="Decisions" href="decisions.html">Décisions</a>
+      <a data-en="Recorded votes" href="votes.html">Votes nominatifs</a>
+      <a data-en="City Council" href="conseil.html">Conseil municipal</a>
+      <a data-en="Glossary" href="lexique.html" aria-current="page">Lexique</a>
+      <a data-en-title="The official City of Montréal website (new tab)" href="https://montreal.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Montréal (nouvel onglet)">Ville de Montréal ↗</a>
       <div class="outils">
-        <div class="taille-texte" role="group" aria-label="Taille du texte">
-          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+        <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
+          <button data-en-aria-label="Smaller text" type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
           <span id="texte-pct" aria-live="polite">100%</span>
-          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+          <button data-en-aria-label="Larger text" type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
         </div>
         <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
                 title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
@@ -65,16 +68,16 @@
 </header>
 
 <main class="contenu">
-  <div id="chargement" class="avis">Chargement des données…</div>
+  <div data-en="Loading data…" id="chargement" class="avis">Chargement des données…</div>
 
-  <h2 class="page">Lexique</h2>
-  <p class="chapeau">
+  <h2 data-en="Glossary" class="page">Lexique</h2>
+  <p data-en="The official documents are in French, and the vocabulary of municipal decisions is opaque out of habit, not necessity. Here is what the French terms you'll see on this site mean." class="chapeau">
     Le vocabulaire des décisions municipales est opaque par habitude, pas par nécessité. Voici ce
     que veulent dire les mots que vous croisez sur ce site.
   </p>
 
   <div class="barre-outils">
-    <input type="search" id="rech-lexique" placeholder="Chercher un terme…">
+    <input data-en-placeholder="Search for a term…" type="search" id="rech-lexique" placeholder="Chercher un terme…">
   </div>
   <p class="compte" id="compte-lexique"></p>
   <div id="liste-lexique"></div>
@@ -82,7 +85,7 @@
 
 <footer>
   <div class="contenu">
-    <p>Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
+    <p data-en="Independent citizen site. No connection with the City of Montréal, no official status. If anything differs, the original PDF document prevails. <a href=&quot;sources.html&quot;>Sources</a>.">Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
     En cas d'écart, le document PDF d'origine fait foi. <a href="sources.html">Sources</a>.</p>
   </div>
 </footer>

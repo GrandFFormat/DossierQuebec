@@ -15,6 +15,8 @@ regarde. Quand tout est coché, la dernière section dit quoi changer pour publi
 
 - [x] Thème clair/sombre et zoom partagés avec Mes dossiers et les autres volets *(18 sept. 2026)*
 - [ ] La pastille « EN » traduit les six pages, ou n'apparaît pas — pas de page à moitié traduite
+- [ ] En anglais : les résumés IA et les titres des décisions sont traduits (data/resumes-en.json), et un résumé pas encore traduit le dit au lieu de mentir
+- [ ] En anglais : le lexique (data/lexique-en.json) et les libellés des filtres sont traduits ; les noms propres, les numéros et les documents de la Ville restent en français
 - [ ] Les mêmes filtres et boutons qu'à Québec sur la page Décisions : recherche, type, sujet, affichage, instance, « Avec résumé seulement », « Tout déplier » — et rien de plus *(case « Avec résumé seulement » révélée le 18 sept. 2026)*
 - [ ] Le menu des villes mène à Montréal et en revient, depuis chaque volet
 - [ ] Le favicon (la petite icône de l'onglet) s'affiche sur les six pages, en clair et en sombre, et se distingue de celui de Québec
