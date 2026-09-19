@@ -201,7 +201,9 @@ nav .outils { flex-basis: 100%; justify-content: center; margin-left: 0; padding
      l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge ») et les pastilles de nom d'instance
      élargissaient la page, qui glissait de côté. */
   select { max-width: 100%; }
-  .puce { max-width: 100%; white-space: normal; }
+  /* La même règle pour les pastilles vit plus bas, APRÈS la règle de base .puce : ici,
+     elle était écrite avant et la base (white-space: nowrap) l'annulait — à 375 px, la
+     pastille de Sainte-Foy - Sillery - Cap-Rouge élargissait encore la page à 415 px. */
 }
 
 
@@ -255,7 +257,13 @@ input[type="search"] { flex: 1 1 260px; min-width: 200px; }
   font-size: 11.5px; font-weight: 600; letter-spacing: 0.01em;
   padding: 3px 9px; border-radius: 100px;
   background: var(--fond-2); color: var(--doux); white-space: nowrap;
+  max-width: 100%; overflow-wrap: anywhere;
 }
+/* ⚠️ APRÈS la règle de base, pas avant : à spécificité égale, la dernière règle écrite
+   gagne. Placée dans le bloc @media plus haut, cette dérogation était annulée par le
+   « nowrap » ci-dessus, et le nom d'instance le plus long (« Conseil de l'Arrondissement de
+   Sainte-Foy - Sillery - Cap-Rouge ») faisait glisser la page de côté sur un téléphone. */
+@media (max-width: 620px) { .puce { white-space: normal; } }
 .puce.num { font-family: ui-monospace, Consolas, monospace; font-size: 11px; background: var(--fond-2); color: var(--encre); }
 .puce.theme { color: #fff; font-weight: 700; }
 .puce.montant { background: var(--accent-fond); color: var(--accent-encre); font-weight: 700; }
@@ -339,7 +347,10 @@ details p { background: var(--fond-2); border-radius: var(--rayon); padding: 12p
 }
 :root[data-theme="sombre"] .resume-entete { color: var(--accent); }
 .resume ul { margin: 0; padding-left: 19px; }
-.resume li { margin-bottom: 6px; font-size: 15px; line-height: 1.55; }
+/* Un résumé peut contenir un « mot » sans espace ni trait d'union où couper : « ruelle Cardenon
+   (Cardinal/Briand/Denonville/Hadley) » élargissait la page à 381 px sur un téléphone, et toute la
+   page glissait de côté (Montréal, 19 sept. 2026). On coupe au besoin, n’importe où. */
+.resume li { margin-bottom: 6px; font-size: 15px; line-height: 1.55; overflow-wrap: anywhere; }
 .resume li:last-child { margin-bottom: 0; }
 
 /* ---------- ÉLUS ---------- */

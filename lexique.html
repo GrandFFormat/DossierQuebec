@@ -1685,12 +1685,28 @@
      « @media (max-width:360px) » ne se déclencherait jamais. C'est le JS
      (majLargeurEtroite) qui pose la classe .etroit d'après la largeur EFFECTIVE.
      Le logotype tient en un seul mot — il ne peut pas se couper — il faut donc
-     le réduire, sinon il pousse la page hors de l'écran. */
-  .etroit .brand{gap:8px; min-width:0;}
-  .etroit .brand-text .brand-title{font-size:19px;}
-  .etroit .brand-mark, .etroit .maple-flip, .etroit .maple-flip svg{width:30px; height:30px;}
-  .etroit .villes-menu{margin-left:8px;}
-  .etroit .city-flip{height:24px; padding:0 8px; font-size:9px;}
+     le réduire, sinon il pousse la page hors de l'écran.
+
+     ⚠️ LA RANGÉE DU LOGO A SON PROPRE SEUIL, .entete-etroite (moins de 420 px
+     effectifs), plus large que .etroit (360 px). Logo + feuille d'érable + bouton
+     « Villes » font 375 px de large : avec les 18 px de marge de chaque côté, il leur
+     faut 411 px d'écran. Les iPhone font 375, 390 ou 393 px — la réduction à 360 ne
+     s'y déclenchait jamais, et la rangée débordait de 18 px sur TOUTES les pages :
+     toute la page glissait de gauche à droite sous le doigt. Mesuré le 19 sept. 2026
+     à 375 px : 393 px de page avant, 375 après. La liste du menu s'ancre alors à
+     droite : ancrée à gauche, elle sortait de l'écran une fois ouverte (439 px). */
+  .entete-etroite .brand{gap:8px; min-width:0;}
+  .entete-etroite .brand-text .brand-title{font-size:19px;}
+  .entete-etroite .brand-mark, .entete-etroite .maple-flip, .entete-etroite .maple-flip svg{width:30px; height:30px;}
+  .entete-etroite .villes-menu{margin-left:8px;}
+  .entete-etroite .city-flip{height:24px; padding:0 8px; font-size:9px;}
+  .entete-etroite .villes-menu ul{left:auto; right:0;}
+  /* Sous 360 px (vieux petits téléphones, ou A+ poussé), un cran de plus : la rangée
+     faisait 307 px pour 284 disponibles à 320 px, et débordait encore de 7 px. Mesuré
+     tenant de 300 à 359 px avec ces trois réglages. */
+  .etroit .brand-text .brand-title{font-size:17px;}
+  .etroit .maple-flip{margin-left:4px;}
+  .etroit .city-flip{padding:0 7px;}
   .etroit .suggest-cta{white-space:normal;}   /* nowrap : 389 px sur 275 disponibles */
   .etroit .result-badge{white-space:normal;}
   .etroit .dep-group-banner{flex-wrap:wrap; gap:4px;}
@@ -6647,6 +6663,8 @@ function majMetriquesMiseEnPage(){
   const effective = largeur / (fontZoom / 100);
   document.body.style.setProperty('--vw', effective + 'px');
   document.documentElement.classList.toggle('etroit', effective < 360);
+  // La rangée du logo a besoin de 411 px : voir .entete-etroite dans le CSS.
+  document.documentElement.classList.toggle('entete-etroite', effective < 420);
 }
 window.addEventListener('resize', majMetriquesMiseEnPage);
 // Rattrapage : si la page a été construite alors qu'elle n'avait pas encore de
