@@ -1,6 +1,7 @@
 # Quatrième courriel à Alexis — merci, et une question sur Saint-Laurent
 
-> **À envoyer**, en réponse à son courriel du 19 septembre 2026.
+> **Envoyé le 19 septembre 2026**, en réponse à son courriel du même jour.
+> Suivi : rappel du 30 septembre 2026 (Saint-Laurent, et les dossiers de 2026 dans le Répertoire).
 > Ton : remerciement sincère, un constat, une seule question. Rien à reprocher.
 
 ---
