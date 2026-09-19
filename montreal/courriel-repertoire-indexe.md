@@ -41,6 +41,29 @@ viennent des ordres du jour, qui arrivent le jour même de la séance plutôt qu
 l'archivage. Le Répertoire reste le recours pour ce qui manque, en particulier pour
 Saint-Laurent, seul conseil à n'annexer aucun sommaire à son ordre du jour.
 
+## Ce que la mesure dit, le 19 septembre 2026
+
+Sonde `npm run sonder:ged`, un vrai navigateur, une recherche à la fois :
+
+| Recherche | Résultats |
+|---|---|
+| Cinq numéros de dossier de 2026 (janvier à juin) | **0** chacun |
+| `1248358013` et `1246723004` (2024), `1256723002` (2025) | **2 à 3** chacun |
+| « procès-verbal » | 1 281 |
+| « Eurovia Québec Construction » | 25 499 |
+
+Les trois numéros de 2024 et 2025 ont été pris **dans les résultats affichés par le portail
+lui-même**, puis recherchés : ils reviennent. L'index par numéro de dossier fonctionne donc,
+exactement comme la Ville l'écrit.
+
+Ce qui ne répond pas, c'est **l'année en cours**. Aucun des cinq dossiers de 2026 essayés
+n'est dans le Répertoire. C'est le délai d'archivage dont parle Alexis, et il se mesure en
+mois, pas en jours : à la mi-septembre 2026, le fonds va jusqu'en 2025.
+
+**Conséquence pour le site.** Le Répertoire est une bonne source pour les années passées et
+une mauvaise pour l'actualité, qui est précisément ce que le site montre. Les sommaires du
+site continuent donc de venir des ordres du jour, disponibles le jour de la séance.
+
 **Ce qui reste à vérifier.** Le lien donné en exemple est une adresse de session, pas une
 adresse de document : elle ne se partage pas. Reste à savoir si une recherche par numéro
 rend le sommaire lui-même, et si son adresse peut être citée. C'est ce que la sonde
