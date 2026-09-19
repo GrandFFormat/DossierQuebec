@@ -244,9 +244,11 @@ export function rendreDetail(reponse, ville) {
 // quebec/scripts/details-du-jour.js). À n'afficher que pour un dossier dont le résumé a un montant :
 // sans montant, il n'y a rien à détailler.
 const HEURE_LECTURE = tr('demain matin', 'tomorrow morning');
-// Les villes où les demandes sont réellement lues chaque matin. Sur les volets encore en prototype
-// (Montréal, Lévis, Longueuil…), les demandes sont enregistrées — elles disent où est l'intérêt —
-// mais mises sur la glace : le message ne promet pas une lecture qui n'aura pas lieu.
+// Les villes où les demandes sont réellement lues chaque matin (celles qui ont la chaîne
+// details-du-jour / publier-details). Ailleurs — les prototypes (Lévis, Longueuil, Laval), et
+// Montréal, sorti du prototype le 18 septembre 2026 sans cette chaîne —, les demandes sont
+// enregistrées, elles disent où est l'intérêt, mais mises sur la glace : le message ne promet pas
+// une lecture qui n'aura pas lieu. Une ville qui reçoit la chaîne entre dans cette liste.
 const VILLES_DETAIL_LU = new Set(['quebec']);
 export function rendreDemande(reponse, ville) {
   if (!reponse || reponse.existe) return '';
@@ -263,7 +265,9 @@ export function rendreDemande(reponse, ville) {
 }
 function contenuDemande(demande, ville) {
   if (demande && !VILLES_DETAIL_LU.has(ville)) {
-    return `<p class="ab-demande-etat">${tr('Demande enregistrée ; le détail de l’argent n’est pas encore offert pour cette ville, en prototype.', 'Request recorded; money details are not yet offered for this city, which is still a prototype.')}</p>`;
+    // Sans « en prototype » : Montréal n'en est plus un, et la raison qui compte pour l'abonné est
+    // que la lecture n'est pas encore offerte ici, pas l'étiquette du volet.
+    return `<p class="ab-demande-etat">${tr('Demande enregistrée ; le détail de l’argent n’est pas encore offert pour cette ville.', 'Request recorded; money details are not yet offered for this city.')}</p>`;
   }
   if (demande) {
     return EN
