@@ -13,6 +13,10 @@ name: Découverte — portail documentaire de Montréal
 
 on:
   workflow_dispatch:
+    inputs:
+      dossier:
+        description: "Un numéro de dossier à dix chiffres à chercher dans le Répertoire (vide : celui par défaut)"
+        required: false
 
 permissions:
   contents: write
