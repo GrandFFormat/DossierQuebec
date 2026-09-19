@@ -14,14 +14,15 @@ Ouverture du portail…
     type=text placeholder=— éditable=true actif=true
 
         0 résultat(s)  « 1253074013 »  — un numéro de dossier décisionnel
-        0 résultat(s)  « 1255593010 »  — un numéro de dossier décisionnel
-        0 résultat(s)  « 1267261001 »  — un numéro de dossier décisionnel
-        0 résultat(s)  « 1267157004 »  — un numéro de dossier décisionnel
-        0 résultat(s)  « 1265298015 »  — un numéro de dossier décisionnel
      8242 résultat(s)  « CM26 0590 »  — un numéro de résolution du conseil municipal
      2691 résultat(s)  « sommaire décisionnel »  — le nom du document qu'on cherche
     25499 résultat(s)  « Eurovia Québec Construction »  — un fournisseur nommé dans une décision de 2026
      1281 résultat(s)  « procès-verbal »  — un mot qui doit forcément répondre
+
+  --- numéros à dix chiffres affichés par le Répertoire : 1248358013, 1246723004, 1256723002 ---
+        2 résultat(s)  « 1248358013 »  — un numéro que le Répertoire vient d'afficher
+        3 résultat(s)  « 1246723004 »  — un numéro que le Répertoire vient d'afficher
+        3 résultat(s)  « 1256723002 »  — un numéro que le Répertoire vient d'afficher
 
   --- ce que rend « procès-verbal » ---
    Rechercher Filtrer la recherche Trier par  1,281 résultats  29.6 kB Procès-verbal ouverture de soumission Planage de chaussée bitumineuse et pose de revêtement bitumineux sur différentes rues dans l’arrondissement de Mercier—Hochelaga-Maisonneuve de la Ville de Montréal (P.R.R. 2008) Procès-verbal ouverture de soumission Planage de chaussée bitumineuse et pose de revêtement bitumineux sur différentes rues ... Procès-verbal 2008-113 ... Procès-verbal d’ouverture de soumissions Arrondissement de Mercier__Hochelaga-Maisonneuve Ville de Montréal Appel d’offres public Type de publication: Appe
@@ -34,13 +35,9 @@ Ouverture du portail…
     « À propos » -> #
     « Mentions légales » -> https://montreal.ca/articles/mentions-legales-2654
 
-  --- ce que le portail demande au serveur (158 appels) ---
+  --- ce que le portail demande au serveur (198 appels) ---
   GET   /constellio/?collection=mtlca&portal=REPDOCVDM
-  POST  /constellio/?collection=mtlca&portal=REPDOCVDM&v-1789781967259
-  POST  /constellio/UIDL/?v-uiId=0
-  POST  /constellio/UIDL/?v-uiId=0
-  POST  /constellio/UIDL/?v-uiId=0
-  GET   /constellio/?collection=mtlca&portal=REPDOCVDM
+  POST  /constellio/?collection=mtlca&portal=REPDOCVDM&v-1789782194150
   POST  /constellio/UIDL/?v-uiId=0
   POST  /constellio/UIDL/?v-uiId=0
   POST  /constellio/UIDL/?v-uiId=0
@@ -50,15 +47,19 @@ Ouverture du portail…
   POST  /constellio/UIDL/?v-uiId=0
   POST  /constellio/UIDL/?v-uiId=0
   POST  /constellio/UIDL/?v-uiId=0
-  POST  /constellio/UIDL/?v-uiId=0
-  POST  /constellio/UIDL/?v-uiId=0
-  POST  /constellio/UIDL/?v-uiId=0
-  POST  /constellio/UIDL/?v-uiId=0
-  POST  /constellio/UIDL/?v-uiId=0
-  POST  /constellio/UIDL/?v-uiId=0
-  POST  /constellio/UIDL/?v-uiId=0
-  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D2103053338281104921%3Bj
-  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D1892477065757004614%3Bj
-  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D1295079562326017901%3Bj
+  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D3892927500907332990%3Bj
+  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-4575191895946549589%3B
+  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-8557760421233846658%3B
+  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-4116623851383343950%3B
+  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-6988227072967655911%3B
+  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D1175628406744825542%3Bj
+  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D5879504969120791239%3Bj
+  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D2867730001013993731%3Bj
+  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D1638974574074316049%3Bj
+  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-4063221296545552422%3B
+  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-633716999968034849%3Bj
+  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D4551144235653552218%3Bj
+  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-8578911916915564698%3B
+  GET   /constellio/resource/9a353b5f-95cc-4406-9d7e-de6cb01c69bd/annotation%3Dfalse%3BcacheRandomizer%3D-8853480454350766983%3B
 
 Rapport écrit dans data/ged-sonde.json
