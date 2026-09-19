@@ -73,7 +73,7 @@ jobs:
           set -o pipefail
           npm install --no-save playwright
           npx playwright install --with-deps chromium
-          npm run sonder:ged 2>&1 | tee data/ged-sonde.log || echo "(la sonde s'est arrêtée — le journal ci-dessus dit où)"
+          npm run sonder:ged -- ${{ inputs.dossier }} 2>&1 | tee data/ged-sonde.log || echo "(la sonde s'est arrêtée — le journal ci-dessus dit où)"
 
       - name: Committer le journal
         if: ${{ always() && steps.volet.outputs.present == 'oui' }}
