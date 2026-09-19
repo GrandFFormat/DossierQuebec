@@ -246,6 +246,16 @@ Chaque sommaire trouvé va dans le cache de texte sous `sommaire_<dossier>`, la 
 renvoie à sa page dans l'ordre du jour, et `scrapers/resumes.js` le résume. Le paragraphe qui suit
 décrit l'état d'avant, gardé pour les trois conseils qui restent.
 
+**Le numéro de dossier est indexé, mais le fonds s'arrête à l'an dernier (19 septembre 2026).**
+Troisième réponse de la Ville : « Les numéros sont indexés », avec cette réserve — les résolutions
+ne sont pas archivées dans les mêmes délais, sous des règles provinciales. Vérifié à la sonde le
+même jour : les numéros `1248358013` et `1246723004` (2024) et `1256723002` (2025), pris dans les
+résultats affichés par le portail lui-même, y retrouvent leur document (2 à 3 résultats chacun) ;
+cinq numéros de 2026, de janvier à juin, n'y trouvent rien. L'index fonctionne ; c'est le dépôt qui
+retarde. Le Répertoire vaut donc pour les années passées, pas pour l'année en cours — et c'est
+l'année en cours que ce volet montre. Les sommaires du site viennent des ordres du jour, publiés
+le jour de la séance. Le paragraphe qui suit décrit l'état d'avant, gardé pour mémoire.
+
 **Où ça bloque, pour les sommaires.** Ce n'est pas un intranet, et ce n'est pas non plus un
 secret : les documents sont dans le **Répertoire des documents officiels**
 (`mtl.ged.montreal.ca`), un portail public sans compte qui annonce couvrir la Ville et ses 19
