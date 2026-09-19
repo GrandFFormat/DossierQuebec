@@ -132,6 +132,41 @@ async function principal() {
       rapport.recherches.push(ligne);
       console.log(`  ${String(ligne.resultats ?? ligne.erreur).padStart(7)} résultat(s)  « ${terme} »  — ${pourquoi}`);
     }
+    // L'essai décisif : prendre un numéro à dix chiffres que le Répertoire AFFICHE lui-même,
+    // puis le rechercher. Si le portail ne retrouve pas un numéro qu'il vient d'écrire, ce
+    // n'est pas une question de délai d'archivage — c'est que ce champ n'est pas cherchable.
+    // (La Ville écrit le 19 septembre 2026 que « les numéros sont indexés » ; nos cinq
+    // numéros de 2026 rendaient zéro. Ceci tranche entre les deux.)
+    try {
+      await champs.nth(editable).fill('sommaire décisionnel', { timeout: 15000 });
+      const bouton = page.getByRole('button', { name: /rechercher/i }).first();
+      if (await bouton.count()) await bouton.click({ timeout: 15000 });
+      await page.waitForTimeout(7000);
+      const corps = await vu();
+      const vus = [...new Set((corps.match(/(?<!\d)\d{10}(?!\d)/g) ?? []))].slice(0, 3);
+      rapport.numerosVus = vus;
+      console.log(`\n  --- numéros à dix chiffres affichés par le Répertoire : ${vus.join(', ') || 'aucun'} ---`);
+      rapport.retour = [];
+      for (const num of vus) {
+        const ligne = { terme: num };
+        try {
+          await champs.nth(editable).fill(num, { timeout: 15000 });
+          const b2 = page.getByRole('button', { name: /rechercher/i }).first();
+          if (await b2.count()) await b2.click({ timeout: 15000 });
+          await page.waitForTimeout(7000);
+          const c2 = await vu();
+          ligne.resultats = c2.match(/([\d,\s]+)\s*r[ée]sultats?/i)?.[1]?.replace(/[\s,]/g, '') ?? '?';
+          ligne.extrait = c2.slice(0, 300);
+        } catch (err) {
+          ligne.erreur = String(err.message ?? err).split('\n')[0];
+        }
+        rapport.retour.push(ligne);
+        console.log(`  ${String(ligne.resultats ?? ligne.erreur).padStart(7)} résultat(s)  « ${num} »  — un numéro que le Répertoire vient d'afficher`);
+      }
+    } catch (err) {
+      console.log(`  ⚠ essai de retour impossible : ${String(err.message ?? err).split('\n')[0]}`);
+    }
+
     await page.screenshot({ path: new URL('../data/ged-sonde.png', import.meta.url).pathname, fullPage: true }).catch(() => {});
 
     // Ce que rend la requête la plus générale : de quoi ce répertoire est-il fait ?
