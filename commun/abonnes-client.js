@@ -256,7 +256,8 @@ export function rendreDemande(reponse, ville) {
   if (reponse.sansMontant) return `<div class="ab-demande"><p class="ab-note" style="margin:0">${tr('Ce dossier n’a pas de montant à détailler.', 'This item has no amount to detail.')}</p></div>`;
   // Visible pour tous, utilisable par les abonnés seulement (Martin, 17 sept. 2026) : un visiteur ou
   // un compte gratuit voit la fonction, fermée, avec le chemin vers l'abonnement. Rien sur les volets
-  // en prototype, où les demandes ne sont pas encore lues : on n'y vend pas ce qui n'existe pas.
+  // hors de VILLES_DETAIL_LU, où les demandes ne sont pas encore lues : on n'y vend pas ce qui
+  // n'existe pas.
   if (!reponse.demandable) {
     if (!VILLES_DETAIL_LU.has(ville)) return '';
     return `<div class="ab-demande"><p class="ab-demande-verrou"><span aria-hidden="true">🔒</span> <span class="ab-demande-verrou-nom">${tr('Demander le détail de l’argent', 'Request the money details')}</span> · <a class="ab-lien" href="/abonnement?ville=${encodeURIComponent(ville)}" data-mesure="clic_demande_verrou">${tr('réservé aux abonnés', 'subscribers only')}</a></p></div>`;
