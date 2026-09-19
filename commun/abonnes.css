@@ -35,6 +35,11 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
 .ab-etoile:focus-visible { outline: 2px solid var(--accent, #0B8A4B); outline-offset: 2px; }
 .ab-boutons { margin-left: auto; display: inline-flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 6px; }
 .ab-boutons .ab-etoile { margin-left: 0; }
+/* Le bouton de projet porte le NOM du projet (« Projet : Stations d'épuration de Saint-Nicolas
+   et de Desjardins ») : en « nowrap », comme les autres étoiles, il mesurait jusqu'à 450 px et
+   faisait glisser toute la page de côté sur un téléphone (Lévis, 19 sept. 2026). Il passe à la
+   ligne, et reste dans la largeur de la fiche. */
+.ab-projet { white-space: normal; text-align: left; max-width: 100%; overflow-wrap: anywhere; }
 .ab-projet span { color: var(--accent, #0B8A4B); }
 .ab-projet.actif { border-color: var(--accent, #0B8A4B); }
 .ab-final {

@@ -358,7 +358,10 @@ details p { background: var(--fond-2); border-radius: var(--rayon); padding: 12p
 }
 :root[data-theme="sombre"] .resume-entete { color: var(--accent); }
 .resume ul { margin: 0; padding-left: 19px; }
-.resume li { margin-bottom: 6px; font-size: 15px; line-height: 1.55; }
+/* Un résumé peut contenir un « mot » sans espace ni trait d'union où couper : « ruelle Cardenon
+   (Cardinal/Briand/Denonville/Hadley) » élargissait la page à 381 px sur un téléphone, et toute la
+   page glissait de côté (Montréal, 19 sept. 2026). On coupe au besoin, n’importe où. */
+.resume li { margin-bottom: 6px; font-size: 15px; line-height: 1.55; overflow-wrap: anywhere; }
 .resume li:last-child { margin-bottom: 0; }
 
 /* ---------- ÉLUS ---------- */
