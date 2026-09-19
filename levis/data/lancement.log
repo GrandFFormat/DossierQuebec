@@ -2,7 +2,7 @@
 > dossiervillelevis@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 665fec0 — Node v22.23.2
+Code : commit 84c46f2 — Node v22.23.2
 
 === Syntaxe du JavaScript du site ===
 
@@ -47,8 +47,8 @@ Pastilles thématiques :
      16  Culture et patrimoine
     107  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-07-20) ===
-Fenêtre depuis 2026-07-20 : 4 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-07-21) ===
+Fenêtre depuis 2026-07-21 : 4 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
 
 17 votes nominaux écrits dans data/votes.json (4 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
@@ -96,23 +96,9 @@ Mesure de 29 termes sur 4 procès-verbaux de 2026 en cache et 1836 décisions…
   Usage conditionnel  (recherche : usages? conditionnels?)
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-20 pas encore résumés (plafond : 120)…
-523 déjà résumés, 2 à faire.
-
---- Estimation ---
-Documents à résumer  : 2
-Modèle               : claude-opus-5
-Ratio mesuré         : 1.17 caractères/jeton (sur 2 documents)
-Jetons d'entrée      : ~6 863
-Jetons de sortie     : ~640
-Coût estimé          : ~0.05 $ US
-                       (moitié moins avec --batch, résultats en moins d'une heure)
-
-Génération…
-  … 2/2
-
-2 résumés générés, 525 au total dans data/resumes.json
-Coût réel : 0.06 $ US
+Sommaires depuis 2026-07-21 pas encore résumés (plafond : 120)…
+525 déjà résumés, 0 à faire.
+Rien à générer. (--force pour tout regénérer.)
 
 === Récapitulatifs des projets ===
 Récapitulatifs des projets : rien de nouveau.
