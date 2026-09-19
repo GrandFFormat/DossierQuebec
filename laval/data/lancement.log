@@ -1,0 +1,127 @@
+
+> dossiervillelaval@0.1.0 refresh
+> node scripts/refresh.js
+
+Résumés : sautés : étape payante, à demander explicitement (--avec-resumes, ou LAV_RESUMES=oui dans le workflow).
+Code : commit 3096885 — Node v22.23.2
+
+=== Archivage des années révolues ===
+data/decisions.json porte l'année courante (2026) — rien à archiver.
+(0 s)
+
+=== Index des documents et calendrier des séances ===
+Index en ligne : refusé (403) — laval.ca bloque encore les robots. La capture manuelle reste la référence.
+Index conservé : 4360 documents, capture manuelle dans un navigateur (Cloudflare refuse les robots), 17 sept. 2026 (du 2026-09-17).
+467 séances dans data/seances.json (465 avec procès-verbal), 2883 sommaires décisionnels publiés.
+(0 s)
+
+=== Décisions de l'année ===
+
+2892 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 1 en attente de procès-verbal.
+0 nouveauté(s) depuis la dernière exécution.
+
+Pastilles thématiques :
+    499  Urbanisme
+    385  Procédure
+    306  Finances
+    294  Travaux et infrastructures
+    201  Transport
+    183  Environnement
+    183  Contrats
+    149  Ressources humaines
+    131  Administration
+    125  Immobilier
+    124  Loisirs et communauté
+     91  Culture et patrimoine
+     87  Logement et social
+     61  Sécurité publique
+     34  Développement économique
+     34  Subventions
+      5  Motions et hommages
+      0  (classées par défaut — aucune règle n'a tranché)
+(0 s)
+
+=== Votes nominaux (depuis 2026-07-21) ===
+CM-20260901-ORD-18h30 : 12 vote(s) nominal(aux)
+CM-20260811-ORD-18h30 : 5 vote(s) nominal(aux)
+Fenêtre depuis 2026-07-21 : 18 séance(s) relue(s), 29 vote(s) conservé(s) du fichier précédent.
+
+46 votes nominaux écrits dans data/votes.json (18 procès-verbaux analysés).
+0 portent un avertissement d'extraction (à vérifier à la main).
+(10 s)
+
+=== Lexique, mesuré sur les procès-verbaux ===
+Mesure de 49 termes sur 87 procès-verbaux de 2026 (12 conseil municipal, 75 comité exécutif) et 2892 décisions…
+
+    86 PV (CM 11, CE 75)    2546 résolutions   Résolution
+    87 PV (CM 12, CE 75)    2676 résolutions   Sommaire décisionnel
+    87 PV (CM 12, CE 75)      85 résolutions   Procès-verbal
+    63 PV (CM 12, CE 51)     163 résolutions   Ordre du jour
+    63 PV (CM 11, CE 52)      63 résolutions   Dépôt
+    28 PV (CM  9, CE 19)      73 résolutions   Avis de motion
+    60 PV (CM 10, CE 50)     674 résolutions   Règlement
+    59 PV (CM  0, CE 59)     780 résolutions   Certificat de trésorerie
+    11 PV (CM 10, CE  1)      28 résolutions   Conseil municipal
+    87 PV (CM 12, CE 75)     858 résolutions   Comité exécutif
+    65 PV (CM  0, CE 65)      36 résolutions   Séance publique et séance à huis clos
+    78 PV (CM 12, CE 66)     296 résolutions   Maire et président du comité exécutif
+    82 PV (CM 12, CE 70)     438 résolutions   Greffière
+    71 PV (CM 10, CE 61)     990 résolutions   Recommandation au conseil
+    35 PV (CM  3, CE 32)     306 résolutions   Comité consultatif d'urbanisme
+    11 PV (CM 11, CE  0)     505 résolutions   « IL EST PROPOSÉ PAR … APPUYÉ PAR … »
+    86 PV (CM 11, CE 75)    2512 résolutions   Résolu à l'unanimité
+    10 PV (CM 10, CE  0)      45 résolutions   Demander le vote
+     3 PV (CM  3, CE  0)       5 résolutions   Dissidence
+     7 PV (CM  7, CE  0)       8 résolutions   Amendement
+     9 PV (CM  9, CE  0)      40 résolutions   Avis de proposition
+    68 PV (CM  9, CE 59)     315 résolutions   Prendre acte
+     6 PV (CM  3, CE  3)      24 résolutions   Certificat de registre
+    21 PV (CM  3, CE 18)      29 résolutions   Ratification
+     7 PV (CM  7, CE  0)      13 résolutions   Prolongation de la séance
+     9 PV (CM  9, CE  0)       9 résolutions   Période de questions du public
+    39 PV (CM  5, CE 34)     253 résolutions   Code de l'urbanisme
+    21 PV (CM  0, CE 21)     128 résolutions   Dérogation mineure
+    25 PV (CM  1, CE 24)     131 résolutions   Plan d'implantation et d'intégration architecturale
+    18 PV (CM  0, CE 18)      63 résolutions   Projet particulier
+    16 PV (CM  0, CE 16)      38 résolutions   Exemption de cases de stationnement
+    25 PV (CM  0, CE 25)      53 résolutions   Frais de parcs
+    50 PV (CM  9, CE 41)     558 résolutions   Lot du cadastre du Québec
+    15 PV (CM  4, CE 11)      27 résolutions   Servitude
+    14 PV (CM  4, CE 10)      31 résolutions   Assemblée publique de consultation
+    13 PV (CM  3, CE 10)      21 résolutions   Domaine public
+    55 PV (CM  9, CE 46)     310 résolutions   Adjudication de contrat
+    56 PV (CM  9, CE 47)     401 résolutions   Appel d'offres et demande de prix
+    32 PV (CM  9, CE 23)      89 résolutions   Honoraires supplémentaires
+    31 PV (CM  8, CE 23)      60 résolutions   Contingence
+    15 PV (CM  6, CE  9)      14 résolutions   Cession de contrat
+    32 PV (CM  5, CE 27)      72 résolutions   Début des travaux, surveillance et mise en place des matériaux
+    53 PV (CM  7, CE 46)     201 résolutions   Règlement d'emprunt
+    58 PV (CM  9, CE 49)     174 résolutions   Crédits
+    29 PV (CM  4, CE 25)      84 résolutions   Excédent de fonctionnement et réserves financières
+    45 PV (CM  7, CE 38)     124 résolutions   Aide financière
+    24 PV (CM  5, CE 19)      29 résolutions   Déboursés et liste des contrats
+    54 PV (CM  2, CE 52)     217 résolutions   Taxes nettes incluses
+    25 PV (CM  0, CE 25)      42 résolutions   Traces Québec
+
+49 entrées écrites dans data/lexique.json
+
+10 terme(s) sans exemple (la formulation est dans le corps des résolutions, pas dans leur objet) : Résolution · Sommaire décisionnel · Certificat de trésorerie · Séance publique et séance à huis clos · Maire et président du comité exécutif · « IL EST PROPOSÉ PAR … APPUYÉ PAR … » · Résolu à l'unanimité · Demander le vote · Dissidence · Période de questions du public
+(42 s)
+
+=== Sommaires décisionnels (120 par jour au plus) ===
+511 sommaire(s) publié(s) cité(s) par les décisions de 2026 ; 1027 cité(s) mais non publié(s).
+0 déjà en cache, 0 réextrait(s) du cache, 511 à télécharger (au plus 120 cette fois).
+  … 25/120 (14 s)
+  … 50/120 (29 s)
+  … 75/120 (44 s)
+  … 100/120 (59 s)
+
+120 sommaire(s) téléchargé(s) et lu(s) en 71 s, 0 introuvable(s), 0 échec(s) ; 511 sommaires dans data/sommaires.json.
+Champs lus : 511 avec un service, 428 avec des districts, 235 avec un montant sûr, 242 avec un bloc contrat, 41 avec un bloc règlement, 0 avec au moins un avertissement.
+391 sommaire(s) attendent la prochaine exécution.
+(72 s)
+
+=== Bilan ===
+  étapes         : 6
+  échecs         : aucun
+  avertissements : aucun

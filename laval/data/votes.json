@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-09-17T20:48:14.373Z",
+ "generatedAt": "2026-09-19T13:58:17.396Z",
  "source": "https://www.laval.ca/vie-democratique/hotel-de-ville-personnes-elues/ordre-jour-proces-verbaux-sommaire/",
  "methode": "Extraction par analyse du texte des procès-verbaux (PDF de la Ville). Les noms sont lus dans les passages « … demande le vote sur la proposition, laquelle est adoptée par un compte de N en faveur et de M contre : … se prononcent en faveur … ; … se prononcent contre … ». Chaque vote conserve le texte brut et signale tout écart avec le décompte imprimé.",
  "parametres": {
   "annee": "2026",
-  "depuis": null,
-  "complet": true
+  "depuis": "2026-07-21",
+  "complet": false
  },
  "versionLecture": 1,
  "totalDisponible": 46,
- "documentsAnalyses": 87,
+ "documentsAnalyses": 18,
  "nombre": 46,
- "nouveauxDepuisDerniereExecution": 2,
+ "nouveauxDepuisDerniereExecution": 0,
  "avecAvertissement": 0,
  "themes": {
   "procedure": {
@@ -226,7 +226,7 @@
    "brut": "demande le vote sur la proposition, laquelle est adoptée par un compte de 16 en faveur et de 4 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la proposition; les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent contre la proposition. ADOPTÉ",
    "theme": "culture",
    "themeSource": "objet",
-   "nouveau": true
+   "nouveau": false
   },
   {
    "id": "CM-20260901-652",
@@ -1556,7 +1556,7 @@
    "brut": "demande le vote sur la décision de la présidente, laquelle est maintenue par un compte de 18 en faveur et de 4 contre: M. Stéphane Boyer, maire, et les conseillers Ray Khalil, Christine Poirier, Flavia Alexandra Novac, Nicholas Borne, Aline Dib, Mohamed Bâ, Sandra El-Helou, Yannick Langlois, Carole St-Denis, Aglaia Revelakis, Seta Topouzian, Martin Fiola, Annick Senghor, Pierre Brabant, Anick Brunet, Vasilios Karidogiannis et Sylvain Yelle se prononcent en faveur de la décision; les conseillers Martin Vaillancourt, Louise Lortie, David De Cotis et Isabelle Piché se prononcent contre la décision.",
    "theme": "administration",
    "themeSource": "objet",
-   "nouveau": true
+   "nouveau": false
   },
   {
    "id": "CM-20260414-331",
