@@ -22,7 +22,14 @@ import { writeFile, mkdir } from 'node:fs/promises';
 
 const OUT = new URL('../data/ged-sonde.json', import.meta.url);
 const PORTAIL = 'https://mtl.ged.montreal.ca/constellio/?collection=mtlca&portal=REPDOCVDM';
-const DOSSIER = process.argv.find((a) => /^\d{10}$/.test(a)) ?? '1265298015';
+// Plusieurs numéros plutôt qu'un : la Ville dit (19 septembre 2026) que les numéros sont
+// indexés mais que les résolutions n'arrivent pas toutes au même rythme dans le Répertoire.
+// Un seul numéro sans résultat ne distingue pas « pas indexé » de « pas encore archivé » ;
+// une poignée, étalée sur l'année, le distingue.
+const DOSSIERS = [...process.argv.slice(2), ...String(process.env.MTL_DOSSIERS ?? '').split(/\s+/)]
+  .filter((a) => /^\d{10}$/.test(a));
+if (!DOSSIERS.length) DOSSIERS.push('1265298015');
+const DOSSIER = DOSSIERS[0];
 
 // Chercher le numéro de dossier ne suffit pas à conclure. Zéro résultat peut vouloir dire
 // « ce répertoire ne contient pas les sommaires » comme « il les contient mais ne les indexe
@@ -30,7 +37,7 @@ const DOSSIER = process.argv.find((a) => /^\d{10}$/.test(a)) ?? '1265298015';
 // D'où une petite batterie, du plus précis au plus général : la dernière requête doit
 // répondre, sinon c'est le portail qui ne marche pas et tout le reste ne vaut rien.
 const REQUETES = [
-  [DOSSIER, "le numéro de dossier d'une décision de 2026"],
+  ...DOSSIERS.map((d) => [d, 'un numéro de dossier décisionnel']),
   ['CM26 0590', 'un numéro de résolution du conseil municipal'],
   ['sommaire décisionnel', "le nom du document qu'on cherche"],
   ['Eurovia Québec Construction', 'un fournisseur nommé dans une décision de 2026'],
@@ -39,7 +46,7 @@ const REQUETES = [
 
 async function principal() {
   const { chromium } = await import('playwright');
-  const rapport = { generatedAt: new Date().toISOString(), portail: PORTAIL, dossier: DOSSIER };
+  const rapport = { generatedAt: new Date().toISOString(), portail: PORTAIL, dossier: DOSSIER, dossiers: DOSSIERS };
   const navigateur = await chromium.launch();
   const contexte = await navigateur.newContext({
     userAgent: `Mozilla/5.0 (compatible; DossierVille/0.1; veille citoyenne; ${process.env.MTL_CONTACT ?? 'dossierquebec.ca'})`,
