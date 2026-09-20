@@ -3,7 +3,7 @@
 > node scripts/refresh.js
 
 Résumés : sautés : étape payante, à demander explicitement (--avec-resumes, ou LAV_RESUMES=oui dans le workflow).
-Code : commit 3096885 — Node v22.23.2
+Code : commit 3a02d95 — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -41,14 +41,14 @@ Pastilles thématiques :
       0  (classées par défaut — aucune règle n'a tranché)
 (0 s)
 
-=== Votes nominaux (depuis 2026-07-21) ===
+=== Votes nominaux (depuis 2026-07-22) ===
 CM-20260901-ORD-18h30 : 12 vote(s) nominal(aux)
 CM-20260811-ORD-18h30 : 5 vote(s) nominal(aux)
-Fenêtre depuis 2026-07-21 : 18 séance(s) relue(s), 29 vote(s) conservé(s) du fichier précédent.
+Fenêtre depuis 2026-07-22 : 18 séance(s) relue(s), 29 vote(s) conservé(s) du fichier précédent.
 
 46 votes nominaux écrits dans data/votes.json (18 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
-(10 s)
+(0 s)
 
 === Lexique, mesuré sur les procès-verbaux ===
 Mesure de 49 termes sur 87 procès-verbaux de 2026 (12 conseil municipal, 75 comité exécutif) et 2892 décisions…
@@ -106,11 +106,11 @@ Mesure de 49 termes sur 87 procès-verbaux de 2026 (12 conseil municipal, 75 com
 49 entrées écrites dans data/lexique.json
 
 10 terme(s) sans exemple (la formulation est dans le corps des résolutions, pas dans leur objet) : Résolution · Sommaire décisionnel · Certificat de trésorerie · Séance publique et séance à huis clos · Maire et président du comité exécutif · « IL EST PROPOSÉ PAR … APPUYÉ PAR … » · Résolu à l'unanimité · Demander le vote · Dissidence · Période de questions du public
-(42 s)
+(2 s)
 
 === Sommaires décisionnels (120 par jour au plus) ===
 511 sommaire(s) publié(s) cité(s) par les décisions de 2026 ; 1027 cité(s) mais non publié(s).
-0 déjà en cache, 0 réextrait(s) du cache, 511 à télécharger (au plus 120 cette fois).
+120 déjà en cache, 0 réextrait(s) du cache, 391 à télécharger (au plus 120 cette fois).
   … 25/120 (14 s)
   … 50/120 (29 s)
   … 75/120 (44 s)
@@ -118,7 +118,7 @@ Mesure de 49 termes sur 87 procès-verbaux de 2026 (12 conseil municipal, 75 com
 
 120 sommaire(s) téléchargé(s) et lu(s) en 71 s, 0 introuvable(s), 0 échec(s) ; 511 sommaires dans data/sommaires.json.
 Champs lus : 511 avec un service, 428 avec des districts, 235 avec un montant sûr, 242 avec un bloc contrat, 41 avec un bloc règlement, 0 avec au moins un avertissement.
-391 sommaire(s) attendent la prochaine exécution.
+271 sommaire(s) attendent la prochaine exécution.
 (72 s)
 
 === Bilan ===
