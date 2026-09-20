@@ -2,7 +2,7 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 84c46f2 — Node v22.23.2
+Code : commit 2ec0024 — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -13,7 +13,7 @@ https://donnees.montreal.ca/robots.txt : règles sur nos chemins : disallow /dat
 https://montreal.ca/robots.txt : rien qui concerne nos chemins
 
 === Calendrier des séances ===
-Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-09-18T23:30:59.259009)
+Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-09-19T23:31:12.179220)
 Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_video_seance
 71 séance(s) de 2026 lue(s) dans le calendrier.
 
@@ -109,8 +109,8 @@ Pastilles thématiques :
      81  Ressources humaines
     182  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes enregistrés (depuis 2026-07-21) ===
-Fenêtre depuis 2026-07-21 : 0 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
+=== Votes enregistrés (depuis 2026-07-22) ===
+Fenêtre depuis 2026-07-22 : 0 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
 
 14 votes enregistrés écrits dans data/votes.json (0 procès-verbaux analysés).
 1 portent un avertissement d'extraction (à vérifier à la main).
@@ -155,10 +155,7 @@ Mesure de 33 termes sur 145 procès-verbaux de 2026 en cache et 5806 décisions�
 33 entrées écrites dans data/lexique.json
 
 === Récapitulatifs des sujets suivables ===
-Récapitulatifs des sujets : eau-egouts (61 dossiers), securite-publique (42 dossiers)
-  eau-egouts               4 étape(s), 5 à surveiller · retirés : 0 mécanique, 2 contre-lecture
-  securite-publique        4 étape(s), 3 à surveiller · retirés : 0 mécanique, 3 contre-lecture
-  coût ≈ 1.35 $ US
+Récapitulatifs des sujets : rien de nouveau.
 
 === Sujets suivables et dossiers, pour Mes dossiers ===
 Projets publics : 16 sujets · index 15.3 Ko · fichiers de sujet 660 Ko au total.
@@ -167,27 +164,22 @@ Dossiers de l'année : 4554 · 2637 Ko · organismes suggérés : 449.
 
 === Sujets suivables en anglais ===
 Sujets en anglais : 0 déjà traduits, 16 à faire — ~0.26 $ US estimés.
-Sujets en anglais : 15 traduits (1 refusés), 15 au total — 0.29 $ US.
-  ⚠ logement : 2371 étapes au lieu de 6
+Sujets en anglais : 16 traduits (0 refusés), 16 au total — 0.29 $ US.
 
 === Lexique en anglais ===
 Lexique anglais : à jour.
 
 === Traductions anglaises ===
-Résumés : 3728 déjà traduits, 25 à faire, 25 cette fois.
+Résumés : 3753 déjà traduits, 0 à faire, 0 cette fois.
 Titres  : 5433 déjà traduits, 23 à faire, 23 cette fois en 2 paquet(s).
 Étiquettes : 1022 déjà traduites, 1 à faire en 1 paquet(s).
-~0.08 $ US estimés (lot, moitié prix).
-Lot msgbatch_01HRrd7cZfTxP4fBfY6uJjwE envoyé (25 résumés, 2 paquets de titres, 1 paquets d'étiquettes).
-  in_progress — 0 réussis, 28 en cours, 0 en erreur
-  in_progress — 0 réussis, 28 en cours, 0 en erreur
-  in_progress — 0 réussis, 28 en cours, 0 en erreur
-  ended — 28 réussis, 0 en cours, 0 en erreur
-Traductions : 25 résumés et 0 titres et 0 étiquettes faits (24 refusés ou en échec) — 3753 résumés et 5433 titres au total, 0.11 $ US.
-  ⚠ étiquette « Autoriser le transfert de 14/036,01/$, t » refusée
-  ⚠ titre CA26 12027 : nombres différents
-  ⚠ titre CA26 12017 : nombres différents
-  ⚠ titre CE26 0008 : nombres différents
+~0.03 $ US estimés (lot, moitié prix).
+Lot msgbatch_01VnVFgi8gY633v8Tkk4qxBz envoyé (0 résumés, 2 paquets de titres, 1 paquets d'étiquettes).
+  in_progress — 0 réussis, 3 en cours, 0 en erreur
+  in_progress — 0 réussis, 3 en cours, 0 en erreur
+  in_progress — 0 réussis, 3 en cours, 0 en erreur
+  ended — 3 réussis, 0 en cours, 0 en erreur
+Traductions : 0 résumés et 0 titres et 0 étiquettes faits (24 refusés ou en échec) — 3753 résumés et 5433 titres au total, 0.03 $ US.
   ⚠ titre CA26 28 084 : nombres différents
   ⚠ titre CA26 25 0167 : nombres différents
   ⚠ titre CE26 0772 : nombres différents
@@ -199,9 +191,13 @@ Traductions : 25 résumés et 0 titres et 0 étiquettes faits (24 refusés ou en
   ⚠ titre CE26 0289 : nombres différents
   ⚠ titre CE26 0294 : nombres différents
   ⚠ titre CE26 0300 : nombres différents
+  ⚠ titre CE26 0307 : nombres différents
+  ⚠ titre CG26 0105 : nombres différents
+  ⚠ titre CM26 0161 : nombres différents
+  ⚠ titre CA26 09 0005 : nombres différents
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-21 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-07-22 pas encore résumés (plafond : 120)…
 7871 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
