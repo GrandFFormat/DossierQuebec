@@ -1,3 +1,5 @@
+-- ⚠️ Plafond remplacé le 20 septembre 2026 : 500 projets suivis ici, mais c'est
+--    scripts/supabase-schema-limites.sql qui fait foi. Ne pas recoller ce bloc par-dessus.
 -- Espace abonnés des volets municipaux (dossierquebec.ca/quebec/, /montreal/, et les villes à
 -- venir). À exécuter une fois dans Supabase : SQL Editor → coller → Run.
 --

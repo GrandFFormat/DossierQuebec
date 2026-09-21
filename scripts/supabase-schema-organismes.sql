@@ -1,3 +1,5 @@
+-- ⚠️ Plafond remplacé le 20 septembre 2026 : 30 organismes, devenus 3 ici, mais c'est
+--    scripts/supabase-schema-limites.sql qui fait foi. Ne pas recoller ce bloc par-dessus.
 -- Suivre un organisme ou une entreprise (abonnés). À exécuter une fois dans Supabase : SQL Editor →
 -- coller → Run.
 --

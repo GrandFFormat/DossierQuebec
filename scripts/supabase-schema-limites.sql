@@ -24,11 +24,22 @@ create or replace function public.est_abonne(uid uuid) returns boolean
      where user_id = uid and statut = 'actif' and (fin is null or fin > now())
   );
 $$;
+-- Une fonction SECURITY DEFINER est exécutable par tout le monde par défaut : n'importe qui
+-- pourrait demander si tel compte paie. Elle ne sert qu'aux triggers ci-dessous, qui tournent
+-- pour un usager connecté ou pour le serveur.
+revoke execute on function public.est_abonne(uuid) from public, anon;
+grant execute on function public.est_abonne(uuid) to authenticated, service_role;
 
 -- ---------- projets suivis : 3 sans abonnement, 10 pour un abonné ----------
 create or replace function public.limite_dossiers_suivis() returns trigger language plpgsql set search_path = '' as $$
 declare plafond int;
 begin
+  -- Suivre un projet déjà suivi passe par un upsert « ignoreDuplicates » : ce n'est pas un ajout,
+  -- et au plafond pile, le compter en ferait échouer un geste qui n'ajoute rien.
+  if exists (select 1 from public.dossiers_suivis
+              where user_id = new.user_id and ville = new.ville and dossier_id = new.dossier_id) then
+    return new;
+  end if;
   plafond := case when public.est_abonne(new.user_id) then 10 else 3 end;
   if (select count(*) from public.dossiers_suivis where user_id = new.user_id) >= plafond then
     raise exception 'limite de % projets suivis atteinte', plafond;
@@ -67,4 +78,5 @@ create table if not exists public.exports (
 create index if not exists exports_user_mois on public.exports (user_id, created_at desc);
 alter table public.exports enable row level security;
 -- Aucune politique pour `authenticated` : seul le serveur (service_role) écrit et compte.
-grant select, insert on public.exports to service_role;
+-- delete : api/export.js rend la dernière réservation quand le fichier n'est jamais sorti.
+grant select, insert, delete on public.exports to service_role;

@@ -219,14 +219,14 @@
   // ajoute (le compte, il l'a déjà). Abonné : rien.
   const AVANTAGES_COMPTE = EN
     ? `<ul>
-        <li><strong>Follow the major projects</strong> of each city — the tramway, housing… — and find them here.</li>
+        <li><strong>Follow up to 3 projects</strong>, in any city — the tramway, housing… — and find them here. The subscription raises it to 10.</li>
         <li><strong>“Where the project stands”</strong>: the recap, the timeline, decisions by month and what is still awaiting a decision.</li>
         <li><strong>Every city covered</strong>, with the same account.</li>
         <li><strong>Write to us</strong> and <strong>report an error</strong> on an item.</li>
       </ul>
       <p class="ab-note" style="margin:0">No password: a sign-in link by email.</p>`
     : `<ul>
-        <li><strong>Suivre les grands projets</strong> de chaque ville — le tramway, le logement… — et les retrouver ici.</li>
+        <li><strong>Suivre jusqu'à 3 projets</strong>, dans la ville de votre choix — le tramway, le logement… — et les retrouver ici. L'abonnement en donne 10.</li>
         <li><strong>« Où en est le projet »</strong> : le récapitulatif, la ligne du temps, les décisions par mois et ce qui attend encore une décision.</li>
         <li><strong>Toutes les villes couvertes</strong>, avec le même compte.</li>
         <li><strong>Nous écrire</strong> et <strong>signaler une erreur</strong> sur une fiche.</li>
@@ -270,6 +270,7 @@
         <li><strong>Alerts for your neighbourhood, your street or a keyword</strong>: “everything the City decides about 1re Avenue”, “in Limoilou”, “about snow removal”.</li>
         <li><strong>Follow an organization or a company</strong>: this year's decisions that name it — contracts, grants, agreements — with each amount as written, and an alert when a new one names it.</li>
         <li><strong>What's coming up at council</strong>: the items on the agenda of each meeting, with their summary — estimated from the documents the City publishes.</li>
+        <li><strong>The monthly recap, subscriber edition</strong>: everything the City decided in the month, in plain language. <a class="ab-lien" href="/exemple-compte-rendu-aout-2026">See the August 2026 issue</a> (in French).</li>
         <li><strong>Export to a spreadsheet or PDF</strong> (Excel, CSV or printable PDF): you choose a project, a word or a name and the columns, with the money details when they have been read.</li>
         <li class="ab-note">Per account: 10 projects followed, 5 keyword alerts, 3 organizations, 10 exports a month.</li>` : `
         <li><strong>Une alerte par courriel quand vos projets bougent</strong> : une nouvelle décision, un dossier qui attend un vote, un récapitulatif mis à jour — et rien les semaines où rien n'avance.</li>
@@ -278,6 +279,7 @@
         <li><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : « tout ce que la Ville décide sur la 1re Avenue », « dans Limoilou », « sur le déneigement ».</li>
         <li><strong>Suivre un organisme ou une entreprise</strong> : les décisions de l'année qui le nomment — contrats, subventions, ententes — avec le montant de chacune tel qu'écrit, et une alerte quand une nouvelle le nomme.</li>
         <li><strong>Ce qui s'en vient au conseil</strong> : les dossiers à l'ordre du jour de chaque séance, avec leur résumé — estimé d'après les documents publiés par la Ville.</li>
+        <li><strong>Le compte rendu mensuel, édition abonnés</strong> : tout ce que la Ville a décidé dans le mois, en langage clair. <a class="ab-lien" href="/exemple-compte-rendu-aout-2026">Voir l'édition d'août 2026</a>.</li>
         <li><strong>L'export en tableur ou en PDF</strong> (Excel, CSV ou PDF à imprimer) : vous choisissez un projet, un mot ou un nom et les colonnes, avec le détail de l'argent quand il est lu.</li>
         <li class="ab-note">Par compte : 10 projets suivis, 5 alertes par mot-clé, 3 organismes, 10 exports par mois.</li>`;
 
@@ -382,7 +384,7 @@
       <p class="ab-chapeau" style="margin-bottom:10px">${tr("Une rue, un quartier, une école, un parc, un sujet : « 1re Avenue », « Limoilou », « Rochebelle », « déneigement »… Les nouvelles décisions qui le contiennent s'ajoutent à votre alerte du matin.", 'A street, a neighbourhood, a school, a park, a topic: “1re Avenue”, “Limoilou”, “Rochebelle”, “déneigement” (snow removal)… New decisions that contain it are added to your morning alert. The decisions are in French, so use French words.')}</p>
       <ul class="ab-mots-liste" id="mots-liste"></ul>
       <form class="ab-form" id="mots-form"><input type="text" id="mots-champ" maxlength="60" placeholder="${tr('Ajouter un mot-clé', 'Add a keyword')}" aria-label="${tr('Nouveau mot-clé', 'New keyword')}"><button type="submit" class="ab-bouton">${tr('Ajouter', 'Add')}</button></form>
-      <p class="ab-note">${tr("Cherché dans l'objet et le résumé de chaque décision, sans tenir compte des accents ni des majuscules. Jusqu'à 20.", "Searched in each decision's subject and French summary, ignoring accents and capitals. Up to 20.")}</p>
+      <p class="ab-note">${tr("Cherché dans l'objet et le résumé de chaque décision, sans tenir compte des accents ni des majuscules. Jusqu'à 5.", "Searched in each decision's subject and French summary, ignoring accents and capitals. Up to 5.")}</p>
       <p class="ab-note" id="mots-etat" aria-live="polite"></p>
       <div class="ab-pistes" id="mots-pistes" hidden></div>
       <p class="ab-astuce">${tr("<strong>Astuce :</strong> pas sûr de l'orthographe d'une rue ou d'un lieu ? Cherchez-le dans Google pour trouver son nom officiel (« boulevard Wilfrid-Hamel », « 1re Avenue ») : c'est celui qu'emploient les documents de la Ville.", '<strong>Tip:</strong> not sure how a street or place is spelled? Look it up on Google to find its official French name (“boulevard Wilfrid-Hamel”, “1re Avenue”): that is the one the City uses in its documents.')}</p>
@@ -402,7 +404,7 @@
             return `<li class="ab-mot"><span class="ab-mot-texte">${echapper(m.mot)}</span><span class="ab-note" style="margin:0">${n == null ? '' : n ? tr(`${n} décision${n > 1 ? 's' : ''} récente${n > 1 ? 's' : ''}`, `${n} recent ${pl(n, 'decision', 'decisions')}`) : tr('aucune décision récente', 'no recent decision')}</span><button type="button" class="ab-mot-retirer" data-mot="${echapper(m.id)}" aria-label="${tr('Retirer le mot-clé', 'Remove keyword')} ${echapper(m.mot)}">×</button></li>`;
           }).join('')
         : `<li class="ab-note" style="list-style:none;margin:0">${tr('Aucun mot-clé pour l’instant.', 'No keywords yet.')}</li>`;
-      form.querySelector('button').disabled = mots.length >= 20;
+      form.querySelector('button').disabled = mots.length >= 5;
       $('#mots-compte').textContent = mots.length;
     };
     dessiner();
@@ -543,7 +545,7 @@
         <datalist id="org-suggestions"></datalist>
         <button type="submit" class="ab-bouton">${tr('Suivre', 'Follow')}</button>
       </form>
-      <p class="ab-note" id="org-etat" aria-live="polite">${tr("Le nom est cherché dans l'objet et le résumé des décisions, sans sa forme juridique (« inc. », « ltée »), sans accents ni majuscules. Jusqu'à 30.", 'The name is searched in the subject and French summary of the decisions, without its legal form (“inc.”, “ltée”), ignoring accents and capitals. Up to 30.')}</p>
+      <p class="ab-note" id="org-etat" aria-live="polite">${tr("Le nom est cherché dans l'objet et le résumé des décisions, sans sa forme juridique (« inc. », « ltée »), sans accents ni majuscules. Jusqu'à 3.", 'The name is searched in the subject and French summary of the decisions, without its legal form (“inc.”, “ltée”), ignoring accents and capitals. Up to 3.')}</p>
       <div id="org-liste"></div>
       </div>
     </details>`;
@@ -592,7 +594,7 @@
             </details>`;
           }).join('')
         : `<p class="ab-note">${tr('Vous ne suivez aucun organisme pour l’instant.', "You aren't following any organization yet.")}</p>`;
-      $('#org-form button').disabled = suivis.length >= 30;
+      $('#org-form button').disabled = suivis.length >= 3;
       $('#org-compte').textContent = suivis.length;
     };
     dessiner();
@@ -791,8 +793,8 @@ ${liste.map(fiche).join('')}
   async function reserverExport(format) {
     const c = await compteurExports('POST', format);
     if (c?.statut === 429) {
-      const reprise = c.reprise ? new Date(c.reprise).toLocaleDateString(EN ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'long' }) : null;
-      return { refuse: true, texte: EN
+      const reprise = c.reprise ? new Date(c.reprise).toLocaleDateString(EN ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'long', timeZone: 'UTC' }) : null;
+      return { refuse: true, compteur: c, texte: EN
         ? `You have used your ${c.limite ?? LIMITE_EXPORTS} exports for this month${reprise ? `. The counter starts again on ${reprise}` : ''}.`
         : `Vous avez utilisé vos ${c.limite ?? LIMITE_EXPORTS} exports du mois${reprise ? `. Le compteur repart le ${reprise}` : ''}.` };
     }
@@ -803,15 +805,24 @@ ${liste.map(fiche).join('')}
     }
     return c?.statut === 200 ? c : null;
   }
+  // Rendre la réservation quand le fichier n’est jamais sorti (api/export.js, DELETE).
+  async function annulerExport() {
+    const c = await compteurExports('DELETE');
+    return c?.statut === 200 ? c : null;
+  }
   // La ligne « il vous reste N exports » sous le formulaire ; muette si le compteur ne répond pas.
-  async function afficherResteExports() {
+  function ecrireResteExports(c) {
     const zone = $('#exp-reste');
     if (!zone) return;
+    zone.textContent = c && Number.isFinite(c.reste)
+      ? (EN ? `${c.reste} of ${c.limite} exports left this month.` : `Il vous reste ${c.reste} export${c.reste > 1 ? 's' : ''} sur ${c.limite} ce mois-ci.`)
+      : '';
+  }
+  // Le 429 comme le 200 portent déjà faits/reste : on écrit la ligne sans un aller-retour de plus.
+  async function afficherResteExports(connu) {
+    if (connu) return ecrireResteExports(connu);
     const c = await compteurExports('GET');
-    if (c?.statut !== 200) { zone.textContent = ''; return; }
-    zone.textContent = EN
-      ? `${c.reste} of ${c.limite} exports left this month.`
-      : `Il vous reste ${c.reste} export${c.reste > 1 ? 's' : ''} sur ${c.limite} ce mois-ci.`;
+    ecrireResteExports(c?.statut === 200 ? c : null);
   }
 
   async function exportTableur(s, abonne) {
@@ -939,84 +950,96 @@ ${liste.map(fiche).join('')}
       if (reserve?.refuse) {
         fenetre?.close();
         etat.textContent = reserve.texte;
+        afficherResteExports(reserve.compteur);
         carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = !pdfPermis(); });
         return;
       }
+      try {
 
-      // Le détail de l'argent : seulement pour les dossiers avec un montant, par lots de 150.
-      const details = new Map();
-      let detailManque = false;
-      let detailRefuse = false; // 403 « abonnement inactif » : il a expiré pendant que la page était ouverte
-      if (groupes.has('argent')) {
-        const fichierDe = (d) => /\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1];
-        const parVille = new Map();
-        for (const d of liste) if (d.montant && fichierDe(d)) parVille.set(d.ville, [...(parVille.get(d.ville) ?? []), fichierDe(d)]);
-        const courante = await session();
-        for (const [ville, ids] of parVille) {
-          for (let i = 0; i < ids.length; i += 150) {
-            etat.textContent = `${tr("Détail de l'argent", 'Money details')} : ${Math.min(i + 150, ids.length)} / ${ids.length}…`;
-            const r = await fetch(`/api/detail?ville=${encodeURIComponent(ville)}&dossiers=${encodeURIComponent(ids.slice(i, i + 150).join(','))}`, { headers: { Authorization: `Bearer ${courante?.access_token ?? ''}` }, cache: 'no-store' }).catch(() => null);
-            const corps = r ? await r.json().catch(() => null) : null;
-            // Seul un abonnement vérifié et inactif le dit ; une panne (503) ou une session absente
-            // restent « réessayez ».
-            if (r?.status === 403 && corps?.erreur === 'abonnement inactif') { detailRefuse = true; continue; }
-            if (!r?.ok || !corps) { detailManque = true; continue; }
-            for (const [id, x] of Object.entries(corps.details ?? {})) details.set(`${ville}|${id}`, x);
+        // Le détail de l'argent : seulement pour les dossiers avec un montant, par lots de 150.
+        const details = new Map();
+        let detailManque = false;
+        let detailRefuse = false; // 403 « abonnement inactif » : il a expiré pendant que la page était ouverte
+        if (groupes.has('argent')) {
+          const fichierDe = (d) => /\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1];
+          const parVille = new Map();
+          for (const d of liste) if (d.montant && fichierDe(d)) parVille.set(d.ville, [...(parVille.get(d.ville) ?? []), fichierDe(d)]);
+          const courante = await session();
+          for (const [ville, ids] of parVille) {
+            for (let i = 0; i < ids.length; i += 150) {
+              etat.textContent = `${tr("Détail de l'argent", 'Money details')} : ${Math.min(i + 150, ids.length)} / ${ids.length}…`;
+              const r = await fetch(`/api/detail?ville=${encodeURIComponent(ville)}&dossiers=${encodeURIComponent(ids.slice(i, i + 150).join(','))}`, { headers: { Authorization: `Bearer ${courante?.access_token ?? ''}` }, cache: 'no-store' }).catch(() => null);
+              const corps = r ? await r.json().catch(() => null) : null;
+              // Seul un abonnement vérifié et inactif le dit ; une panne (503) ou une session absente
+              // restent « réessayez ».
+              if (r?.status === 403 && corps?.erreur === 'abonnement inactif') { detailRefuse = true; continue; }
+              if (!r?.ok || !corps) { detailManque = true; continue; }
+              for (const [id, x] of Object.entries(corps.details ?? {})) details.set(`${ville}|${id}`, x);
+            }
           }
         }
-      }
-      const lignes = liste.map((d) => {
-        const x = details.get(`${d.ville}|${/\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1]}`);
-        return colonnes.map((c) => c.v(d, x) ?? '');
-      });
+        const lignes = liste.map((d) => {
+          const x = details.get(`${d.ville}|${/\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1]}`);
+          return colonnes.map((c) => c.v(d, x) ?? '');
+        });
 
-      const portee = $('#exp-portee');
-      const titrePortee = portee.selectedOptions[0]?.dataset.titre ?? tr(`Toutes les décisions de ${an}`, `All ${an} decisions`);
-      const mot = $('#exp-mot').value.trim();
-      const description = `${titrePortee}${mot ? tr(`, qui contiennent « ${mot} »`, `, containing “${mot}”`) : ''}${$('#exp-avec-montant').checked ? tr(', avec un montant', ', with an amount') : ''}`;
-      const nom = `dossierville-${nomFichier(portee.value ? titrePortee : String(an))}${mot ? `-${nomFichier(mot)}` : ''}-${new Date().toLocaleDateString('en-CA')}`;
-      const aLire = EN
-        ? [
-          ['Selection', description],
-          ['Items', `${liste.length} (one ${format === 'pdf' ? 'card' : 'row'} per item: the decision summary and its resolutions)`],
-          ['Exported on', new Date().toLocaleString('en-CA')],
-          ['Source', `Decision documents published by the City, taken up by ${location.host}. The official document (PDF, in French) prevails.`],
-          ['Summary and summary amount', 'AI-generated from the decision summary, then translated into English.'],
-          ['Money details', "Extracted automatically from the decision summary, then checked automatically against its text; anything that couldn't be verified was removed. Quoted in French. Empty if the item hasn't been read yet: you can request it on its item page."],
-          ['Amounts', "Each amount applies to its own item and keeps its nature (expense, loan, grant, revenue…). They don't add up."],
-        ]
-        : [
-          ['Sélection', description],
-          ['Dossiers', `${liste.length} (une ${format === 'pdf' ? 'fiche' : 'ligne'} par dossier : le sommaire décisionnel et ses résolutions)`],
-          ['Exporté le', new Date().toLocaleString('fr-CA')],
-          ['Source', `Documents décisionnels publiés par la Ville, repris par ${location.host}. Le document officiel (PDF) fait foi.`],
-          ['Résumé et montant du résumé', 'Générés par IA à partir du sommaire décisionnel.'],
-          ["Détail de l'argent", "Extrait automatiquement du sommaire décisionnel, puis vérifié automatiquement contre son texte ; ce qui ne se vérifiait pas a été retiré. Vide si le dossier n'a pas encore été lu : vous pouvez le demander sur sa fiche."],
-          ['Montants', "Chaque montant vaut pour son dossier et garde sa nature (dépense, emprunt, subvention, revenu…). Ils ne s'additionnent pas entre eux."],
-        ];
-      if (format === 'pdf') {
-        fenetre.document.open();
-        fenetre.document.write(rapportImprimable({ liste, details, groupes, description, aLire, titre: nom }));
-        fenetre.document.close();
-        fenetre.focus();
+        const portee = $('#exp-portee');
+        const titrePortee = portee.selectedOptions[0]?.dataset.titre ?? tr(`Toutes les décisions de ${an}`, `All ${an} decisions`);
+        const mot = $('#exp-mot').value.trim();
+        const description = `${titrePortee}${mot ? tr(`, qui contiennent « ${mot} »`, `, containing “${mot}”`) : ''}${$('#exp-avec-montant').checked ? tr(', avec un montant', ', with an amount') : ''}`;
+        const nom = `dossierville-${nomFichier(portee.value ? titrePortee : String(an))}${mot ? `-${nomFichier(mot)}` : ''}-${new Date().toLocaleDateString('en-CA')}`;
+        const aLire = EN
+          ? [
+            ['Selection', description],
+            ['Items', `${liste.length} (one ${format === 'pdf' ? 'card' : 'row'} per item: the decision summary and its resolutions)`],
+            ['Exported on', new Date().toLocaleString('en-CA')],
+            ['Source', `Decision documents published by the City, taken up by ${location.host}. The official document (PDF, in French) prevails.`],
+            ['Summary and summary amount', 'AI-generated from the decision summary, then translated into English.'],
+            ['Money details', "Extracted automatically from the decision summary, then checked automatically against its text; anything that couldn't be verified was removed. Quoted in French. Empty if the item hasn't been read yet: you can request it on its item page."],
+            ['Amounts', "Each amount applies to its own item and keeps its nature (expense, loan, grant, revenue…). They don't add up."],
+          ]
+          : [
+            ['Sélection', description],
+            ['Dossiers', `${liste.length} (une ${format === 'pdf' ? 'fiche' : 'ligne'} par dossier : le sommaire décisionnel et ses résolutions)`],
+            ['Exporté le', new Date().toLocaleString('fr-CA')],
+            ['Source', `Documents décisionnels publiés par la Ville, repris par ${location.host}. Le document officiel (PDF) fait foi.`],
+            ['Résumé et montant du résumé', 'Générés par IA à partir du sommaire décisionnel.'],
+            ["Détail de l'argent", "Extrait automatiquement du sommaire décisionnel, puis vérifié automatiquement contre son texte ; ce qui ne se vérifiait pas a été retiré. Vide si le dossier n'a pas encore été lu : vous pouvez le demander sur sa fiche."],
+            ['Montants', "Chaque montant vaut pour son dossier et garde sa nature (dépense, emprunt, subvention, revenu…). Ils ne s'additionnent pas entre eux."],
+          ];
+        if (format === 'pdf') {
+          fenetre.document.open();
+          fenetre.document.write(rapportImprimable({ liste, details, groupes, description, aLire, titre: nom }));
+          fenetre.document.close();
+          fenetre.focus();
+        }
+        const { fichierXlsx, fichierCsv, telecharger } = format === 'pdf' ? {} : await import('/commun/tableur.js');
+        if (format === 'pdf') {
+          // rien à télécharger : la fenêtre imprime d'elle-même
+        } else if (format === 'xlsx') {
+          telecharger(fichierXlsx([
+            { nom: tr('Dossiers', 'Items'), colonnes, lignes },
+            { nom: tr('À lire', 'Read me'), colonnes: [{ largeur: 28 }, { largeur: 110 }], lignes: aLire, entete: false },
+          ]), `${nom}.xlsx`);
+        } else {
+          telecharger(fichierCsv(colonnes.map((c) => c.titre), lignes), `${nom}.csv`);
+        }
+        etat.textContent = EN
+          ? `${format === 'pdf' ? 'PDF opened in a new window' : 'File ready'}: ${liste.length.toLocaleString('en-CA')} ${pl(liste.length, 'item', 'items')}${groupes.has('argent') ? `, ${details.size} with money details` : ''}.${detailRefuse ? ' Money details are for subscribers only: your subscription is no longer active.' : detailManque ? " Some money details couldn't be loaded: try again in a moment." : ''}`
+          : `${format === 'pdf' ? 'PDF ouvert dans une nouvelle fenêtre' : 'Fichier prêt'} : ${liste.length.toLocaleString('fr-CA')} dossier${liste.length > 1 ? 's' : ''}${groupes.has('argent') ? `, dont ${details.size} avec le détail de l'argent` : ''}.${detailRefuse ? ' Le détail de l’argent est réservé aux abonnés : votre abonnement n’est plus actif.' : detailManque ? " Une partie du détail de l'argent n'a pas pu être chargée : réessayez dans un moment." : ''}`;
+        carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = !pdfPermis(); });
+        mesurer('export_tableur', { format, groupes: [...groupes].join(',') });
+        afficherResteExports();
+      } catch (e) {
+        // Le fichier n’est jamais sorti : on rend l’export plutôt que de le décompter.
+        console.error('export :', e);
+        fenetre?.close();
+        const rendu = await annulerExport();
+        etat.textContent = tr("Le fichier n’a pas pu être produit. Réessayez.", "The file couldn’t be produced. Try again.");
+        afficherResteExports(rendu ?? undefined);
+      } finally {
+        carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = !pdfPermis(); });
       }
-      const { fichierXlsx, fichierCsv, telecharger } = format === 'pdf' ? {} : await import('/commun/tableur.js');
-      if (format === 'pdf') {
-        // rien à télécharger : la fenêtre imprime d'elle-même
-      } else if (format === 'xlsx') {
-        telecharger(fichierXlsx([
-          { nom: tr('Dossiers', 'Items'), colonnes, lignes },
-          { nom: tr('À lire', 'Read me'), colonnes: [{ largeur: 28 }, { largeur: 110 }], lignes: aLire, entete: false },
-        ]), `${nom}.xlsx`);
-      } else {
-        telecharger(fichierCsv(colonnes.map((c) => c.titre), lignes), `${nom}.csv`);
-      }
-      etat.textContent = EN
-        ? `${format === 'pdf' ? 'PDF opened in a new window' : 'File ready'}: ${liste.length.toLocaleString('en-CA')} ${pl(liste.length, 'item', 'items')}${groupes.has('argent') ? `, ${details.size} with money details` : ''}.${detailRefuse ? ' Money details are for subscribers only: your subscription is no longer active.' : detailManque ? " Some money details couldn't be loaded: try again in a moment." : ''}`
-        : `${format === 'pdf' ? 'PDF ouvert dans une nouvelle fenêtre' : 'Fichier prêt'} : ${liste.length.toLocaleString('fr-CA')} dossier${liste.length > 1 ? 's' : ''}${groupes.has('argent') ? `, dont ${details.size} avec le détail de l'argent` : ''}.${detailRefuse ? ' Le détail de l’argent est réservé aux abonnés : votre abonnement n’est plus actif.' : detailManque ? " Une partie du détail de l'argent n'a pas pu être chargée : réessayez dans un moment." : ''}`;
-      carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = !pdfPermis(); });
-      mesurer('export_tableur', { format, groupes: [...groupes].join(',') });
-      afficherResteExports();
     });
   }
 
@@ -1204,7 +1227,7 @@ ${liste.map(fiche).join('')}
   // l'abonnement actif.
   let attenteMerci = null;
   const MERCI = {
-    actif: () => tr("<strong>Merci, votre abonnement est actif.</strong> Les alertes par courriel, les mots-clés, les organismes suivis, l'export et l'agenda des conseils sont ouverts ci-dessous. Stripe vous envoie le reçu par courriel.", '<strong>Thank you, your subscription is active.</strong> Email alerts, keywords, followed organizations, export and council agendas are open below. Stripe is emailing you the receipt.'),
+    actif: () => tr("<strong>Merci, votre abonnement est actif.</strong> Les alertes par courriel, les mots-clés, les organismes suivis, l'export et ce qui s'en vient au conseil sont ouverts ci-dessous. Stripe vous envoie le reçu par courriel.", '<strong>Thank you, your subscription is active.</strong> Email alerts, keywords, followed organizations, export and council agendas are open below. Stripe is emailing you the receipt.'),
     attente: () => tr('<strong>Merci !</strong> On attend la confirmation du paiement par Stripe, quelques secondes…', '<strong>Thank you!</strong> Waiting for Stripe to confirm the payment, a few seconds…'),
     tard: () => tr('<strong>Merci !</strong> La confirmation du paiement tarde : rechargez la page dans une minute. Si rien ne change, <a class="ab-lien" href="#ecrire">écrivez-nous</a> — rien ne sera perdu.', '<strong>Thank you!</strong> The payment confirmation is taking a while: reload the page in a minute. If nothing changes, <a class="ab-lien" href="#ecrire">write to us</a> — nothing will be lost.'),
   };

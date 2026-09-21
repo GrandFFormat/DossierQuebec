@@ -324,7 +324,12 @@ des sous-dossiers de dossierquebec.ca : la session Supabase ouverte sur une page
   peut s'envoyer un essai (3 par 24 h) ; chaque courriel a un lien signé « Ne plus recevoir ces
   alertes » (`api/alertes-desabonnement.js`, aussi en un clic pour les messageries).
   Tables : `scripts/supabase-schema-alertes.sql`.
-- **Alertes par mot-clé (abonnés).** Dans Mes dossiers, jusqu'à 20 mots (« 1re Avenue », « Limoilou »,
+- **Les limites du palier citoyen** (20 sept. 2026, `scripts/supabase-schema-limites.sql`) : 3 projets
+  suivis sans abonnement et 10 avec, 5 alertes par mot-clé, 3 organismes, 10 exports par mois civil.
+  Les trois premières sont des triggers Postgres ; les exports sont comptés côté serveur par
+  `api/export.js` dans la table `exports`. Les anciens plafonds (500/20/30) restent écrits dans les
+  scripts de création : c’est le script des limites qui fait foi.
+- **Alertes par mot-clé (abonnés).** Dans Mes dossiers, jusqu’à 5 mots (« 1re Avenue », « Limoilou »,
   « déneigement ») dans la table `alertes_mots_cles` (`scripts/supabase-schema-mots-cles.sql`). Le
   même courriel du matin y ajoute les dossiers récents dont l'objet ou le résumé contient le mot —
   mot entier, sans accents ni majuscules (`contientMot`) — lus dans `data/recentes.json` (dossiers
