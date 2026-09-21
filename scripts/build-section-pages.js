@@ -127,6 +127,10 @@ function extraireDonnees() {
 // `donnees` : ce que la page va chercher au démarrage. Volontairement explicite plutôt que
 // deviné — une vue qui se met à lire un jeu qu'elle ne déclare pas doit se voir tout de suite,
 // pas produire une page à moitié vide en production.
+//
+// `stats` (42 octets) est ajouté à TOUTES les pages plus bas : la bande défilante du haut
+// affiche les trois compteurs partout. Elle les comptait dans les jeux complets, que la plupart
+// des pages ne chargent plus — elle affichait « 0 vote nominatif » depuis le découpage.
 const PAGES = [
   {
     fichier: 'index.html', vue: 'apercu', onglet: 'apercu', url: '/',
@@ -166,11 +170,12 @@ const PAGES = [
   },
   {
     fichier: 'sources.html', vue: 'bd', onglet: null, url: '/sources',
-    donnees: [],
-    title: "D'où viennent ces données · DossierQuébec",
-    desc: "Chaque chiffre du site, sa source officielle et sa date de collecte. Rien n'est estimé, rien n'est inventé.",
+    donnees: ['journal'],
+    title: 'Mises à jour du site · DossierQuébec',
+    desc: "Ce qui a changé sur DossierQuébec, du plus récent au plus ancien, et qui est derrière le site.",
   },
 ];
+for (const page of PAGES) if (!page.donnees.includes('stats')) page.donnees.push('stats');
 
 const esc = (s) => s.replace(/"/g, '&quot;');
 
@@ -243,7 +248,7 @@ function fabriquer(page, tronc, vues, REPERE) {
     h = h.slice(0, heros.index) + `<h1${heros[2]}>` + h.slice(heros.index + heros[0].length, fin)
       + '</h1>' + h.slice(fin + `</${heros[1]}>`.length);
   } else {
-    // La vue « d'où viennent ces données » n'a pas de titre de une : elle n'était pas une page.
+    // La vue des mises à jour (/sources) n'a pas de titre de une : elle n'était pas une page.
     // Son premier <h2> le devient, sinon /sources partirait sans <h1>.
     const premier = /<h2([^>]*)>/.exec(h.slice(h.indexOf('<section class="view active"')));
     must(premier, `aucun titre dans la vue ${page.vue} : la page n'aurait pas de <h1>`);

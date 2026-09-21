@@ -18,7 +18,7 @@
 // fonction de rendu tourne APRÈS chargerDonnees(), et celles dont la vue n'est pas sur la page
 // sortent immédiatement (voir les gardes en tête de chacune).
 let ministers = [], bills = [], votes = [], presences = {}, deputesRaw = [],
-    deputeEmails = {}, newsItems = [], petitions = [], promises = [], stats = null;
+    deputeEmails = {}, newsItems = [], petitions = [], promises = [], stats = null, journal = [];
 
 // Dérivés des précédents, recalculés une fois les fichiers arrivés.
 let deputes = [], deputeById = new Map(), voteById = new Map();
@@ -39,7 +39,12 @@ const _remplir = {
   petitions: (v) => { petitions = v; },
   promises: (v) => { promises = v; },
   stats: (v) => { stats = v; },
+  journal: (v) => { journal = v; },
 };
+
+// Presque tout sort de data/site/, que scripts/build-section-pages.js régénère. Le journal des
+// mises à jour, lui, est écrit À LA MAIN : il vit à part, pour que personne ne le croie fabriqué.
+const _chemins = { journal: '/data/journal.json' };
 
 async function chargerDonnees(){
   const demandes = (document.body.dataset.donnees || '').split(',').map(s => s.trim()).filter(Boolean);
@@ -49,7 +54,7 @@ async function chargerDonnees(){
     const poser = _remplir[nom];
     if(!poser){ console.warn('jeu de données inconnu : ' + nom); return; }
     try {
-      const r = await fetch(`/data/site/${nom}.json`);
+      const r = await fetch(_chemins[nom] || `/data/site/${nom}.json`);
       if(!r.ok) throw new Error(r.status);
       poser(await r.json());
     } catch (e) {
@@ -280,15 +285,10 @@ const translations = {
     // Overview page
     'apercu.composition.sub':"43rd Legislature · breakdown by parliamentary group",
     'apercu.recent.sub':"↓ Click anywhere in the white square to see the summary ↓",
-    'creator.h':"A word from the creator",
-    'creator.sub':"Who I am and why I built this site",
+    'maj.h':"Site updates",
+    'maj.sub':"What changed on DossierQuébec, newest first",
     'bd.intro1':"Hi! My name is",
     'bd.intro3':"I'm 45, and I'm the idea behind this site.",
-    'bd.cap1':"Dude works in the electrical trade.",
-    'bd.cap2':"At night, he watches what the politicians did with their day.",
-    'bd.cap3':"But them, at night… do they watch videos of Dude?",
-    'bd.out1':"Born from that very question:",
-    'bd.tagline':"Who sits, who legislates, who votes what",
     'h.petitionsrecent':"Petitions open right now",
     'apercu.petitions.sub':"Click the \u201cPetitions\u201d tab for the full list",
     'quicknav.label':"Jump to:",
@@ -427,6 +427,7 @@ function applyLanguage(){
   renderNews();
   renderChallenged();
   renderPromises();
+  renderJournal();
   document.querySelectorAll('.snooze-pill').forEach(pill=>{
     // La pastille de l'intro compacte (#introCompact) n'a pas de <span> imbriqué
     // comme les autres — sans ce repli, ça plantait ici et bloquait tout le
@@ -2955,7 +2956,7 @@ function toggleVoteCard(id, evt){
 const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', lexique:'/lexique', promesses:'/promesses', bd:'/sources' };
 const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd' };
 const PAGE_META = {
-  bd:        { fr:"D'où viennent ces données · DossierQuébec", en:"Where this data comes from · DossierQuébec" },
+  bd:        { fr:"Mises à jour du site · DossierQuébec", en:"Site updates · DossierQuébec" },
   apercu:    { fr:"DossierQuébec — ministres, projets de loi et votes de l'Assemblée nationale", en:"DossierQuébec — ministers, bills and votes of Quebec's National Assembly" },
   ministres: { fr:"Ministres du Québec — Conseil des ministres · DossierQuébec", en:"Quebec ministers — Cabinet · DossierQuébec" },
   projets:   { fr:"Projets de loi du Québec, expliqués en clair · DossierQuébec", en:"Quebec bills, explained in plain language · DossierQuébec" },
@@ -3061,6 +3062,66 @@ function sortRoadmapItems(){
     .forEach(({item}) => container.appendChild(item));
 }
 
+/* ---------------- MISES À JOUR DU SITE (/sources) ----------------
+   data/journal.json est tenu À LA MAIN : un changement visible du site y ajoute son entrée,
+   dans le même commit que le changement. Les premières entrées couvrent la semaine du 14 au
+   21 septembre 2026, rédigées à partir de ses commits ; chacune garde les siens dans `commits`,
+   pour qu'on puisse toujours remonter à ce qui a vraiment été fait. Rien n'y entre qui ne soit
+   en ligne. */
+const JOURNAL_VOLETS = {
+  assemblee: ['Assemblée nationale', 'National Assembly'],
+  quebec:    ['Ville de Québec', 'Québec City'],
+  montreal:  ['Montréal', 'Montréal'],
+  levis:     ['Lévis', 'Lévis'],
+  longueuil: ['Longueuil', 'Longueuil'],
+  laval:     ['Laval', 'Laval'],
+  compte:    ['Compte et abonnement', 'Account and subscription'],
+  site:      ['Tout le site', 'Whole site'],
+};
+const JOURNAL_PREMIERES = 20;   // au-delà, un bouton ouvre le reste
+let journalTout = false;
+
+function renderJournal(){
+  const liste = document.getElementById('journalListe');
+  if(!liste) return;   // vue absente de cette page
+  const en = currentLang === 'en';
+  const loc = en ? 'en-CA' : 'fr-CA';
+  const h = (x) => String(x ?? '').replace(/[&<>"]/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+  // AAAA-MM-JJ lu comme une date LOCALE : new Date('2026-09-21') serait minuit UTC, donc le 20
+  // au soir au Québec.
+  const jour = (iso) => { const [a, m, j] = iso.split('-').map(Number); return new Date(a, m - 1, j); };
+  const fmtMois = new Intl.DateTimeFormat(loc, { month: 'long', year: 'numeric' });
+  const fmtJour = new Intl.DateTimeFormat(loc, { day: 'numeric', month: 'long' });
+  const entrees = journal.filter((e) => e && /^\d{4}-\d{2}-\d{2}$/.test(e.date) && e.fr)
+    .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+  const visibles = journalTout ? entrees : entrees.slice(0, JOURNAL_PREMIERES);
+  let html = '', mois = '';
+  for(const e of visibles){
+    if(e.date.slice(0, 7) !== mois){
+      if(mois) html += '</ol></li>';
+      mois = e.date.slice(0, 7);
+      const t = fmtMois.format(jour(e.date));
+      html += `<li class="maj-mois"><h2>${h(t.charAt(0).toUpperCase() + t.slice(1))}</h2><ol>`;
+    }
+    const txt = (en && e.en) ? e.en : e.fr;
+    const volet = JOURNAL_VOLETS[e.volet] || JOURNAL_VOLETS.site;
+    html += `<li class="maj-entree"><time datetime="${h(e.date)}">${h(fmtJour.format(jour(e.date)))}</time>`
+      + `<div class="maj-corps"><span class="maj-volet maj-volet-${h(e.volet)}">${h(volet[en ? 1 : 0])}</span>`
+      + `<h3>${h(txt.titre)}</h3><p>${h(txt.texte)}</p></div></li>`;
+  }
+  if(mois) html += '</ol></li>';
+  liste.innerHTML = html || `<li class="maj-vide">${en ? 'No updates to show yet.' : 'Aucune mise à jour à afficher pour l’instant.'}</li>`;
+  const plus = document.getElementById('journalPlus');
+  if(plus){
+    const reste = entrees.length - visibles.length;
+    plus.hidden = reste <= 0;
+    plus.textContent = en
+      ? `Show ${reste} older update${reste > 1 ? 's' : ''}`
+      : `Voir ${reste > 1 ? `les ${reste} mises à jour plus anciennes` : 'la mise à jour plus ancienne'}`;
+  }
+}
+document.getElementById('journalPlus')?.addEventListener('click', () => { journalTout = true; renderJournal(); });
+
 // Ticker brutaliste : compose la bande défilante avec les VRAIES données
 // (comptes réels des datasets + statut des travaux déjà affiché dans
 // .calendar-box). Le contenu est dupliqué dans deux spans identiques pour
@@ -3071,9 +3132,14 @@ function renderTicker(){
   const parts = [];
   const cal = document.querySelector('.calendar-box .status');
   if(cal) parts.push(cal.textContent.replace(/^●\s*/,'').trim());
-  parts.push(`${votes.length} ${isEn ? 'recorded divisions' : 'votes nominatifs enregistrés'}`);
-  parts.push(`${bills.length} ${isEn ? 'bills tracked' : 'projets de loi suivis'}`);
-  parts.push(`${ministers.length} ${isEn ? 'ministers in Cabinet' : 'ministres au Conseil'}`);
+  // Les compteurs viennent de stats, que chaque page charge. Compter les jeux eux-mêmes
+  // donnait 0 partout depuis le découpage : /votes n'a pas les projets, /sources n'a rien.
+  // Sans stats (fichier perdu), on se tait plutôt que d'afficher un faux zéro.
+  if(stats){
+    parts.push(`${stats.votes} ${isEn ? 'recorded divisions' : 'votes nominatifs enregistrés'}`);
+    parts.push(`${stats.projets} ${isEn ? 'bills tracked' : 'projets de loi suivis'}`);
+    parts.push(`${stats.ministres} ${isEn ? 'ministers in Cabinet' : 'ministres au Conseil'}`);
+  }
   parts.push(isEn ? 'Independent citizen site · real public data' : 'Site citoyen indépendant · vraies données publiques');
   const line = parts.map(p => `● ${p}`).join('   ') + '   ';
   const a = document.getElementById('tickerA'), b = document.getElementById('tickerB');
