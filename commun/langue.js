@@ -39,7 +39,10 @@ export const LANGUE = lireLangue();
 // Les volets dont le contenu est traduit. Ailleurs (Montréal pour l'instant), la page reste en
 // français même si l'anglais a été choisi, et n'offre pas la pastille : un en-tête anglais sur un
 // contenu français serait pire que rien. Les pages communes (sans data-ville) sont bilingues.
-const VOLETS_EN = new Set(['quebec', 'montreal']);
+// Les volets dont les pages se lisent aussi en anglais. Québec en est sorti le 21 septembre 2026 :
+// sa pastille EN disparaît et ses pages restent en français, même pour un visiteur qui avait
+// choisi l'anglais ailleurs. Mes dossiers et Abonnement (sans ville) restent bilingues.
+const VOLETS_EN = new Set(['montreal']);
 const villePage = typeof document !== 'undefined' ? document.body?.dataset.ville : null;
 export const PAGE_BILINGUE = !villePage || VOLETS_EN.has(villePage);
 export const EN = LANGUE === 'en' && PAGE_BILINGUE;

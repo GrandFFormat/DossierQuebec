@@ -187,7 +187,6 @@ header nav a.ab-lien-abonnement:hover { color: var(--accent, #0B8A4B); }
   /* En flex : un <details> en bloc ajoute une ligne de texte sous son résumé, ce qui le décalait
      de quelques pixels vers le bas par rapport aux autres pastilles. */
   nav .outils .ab-villes-mobile { display: flex; align-items: center; margin-left: 0; font-size: 13px; }
-  nav .outils .ab-villes-mobile .ab-villes-libelle { display: none; }
   nav .outils .ab-mes-dossiers,
   nav .outils .ab-villes-mobile > summary {
     box-sizing: border-box; height: 32px; display: inline-flex; align-items: center;

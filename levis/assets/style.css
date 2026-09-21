@@ -145,31 +145,6 @@ h1 { font-size: 27px; margin: 0; font-weight: 800; letter-spacing: -0.025em; col
   padding: 3px 9px; border-radius: 999px; line-height: 1.5;
 }
 
-/* Retour vers DossierQuébec, à côté du logo : une fleur de lys et « DQ » — le pendant de la
-   feuille d'érable qui mène de DQ à DossierCanada. La fleur, dessinée d'après celle du drapeau,
-   est un masque : sa couleur suit le thème (bleu du drapeau en clair, jaune en sombre). */
-.retour-dq {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap;
-  color: var(--entete-encre); border: 2px solid var(--entete-encre); border-radius: 999px;
-  padding: 3px 11px 3px 7px; line-height: 1.5;
-}
-.retour-dq::before {
-  content: ''; width: 17px; height: 17px; flex: none; background: #003DA5;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-16 0 132 132'%3E%3Cpath d='M50 1 C58 14 66 28 66 42 C66 58 58 72 56 85 L44 85 C42 72 34 58 34 42 C34 28 42 14 50 1 Z'/%3E%3Cpath d='M42 83 C38 58 26 42 15 44 C5 46 0 62 6 72 C10 78 15 80 18 78 C19 72 25 67 30 71 C34 75 36 80 37 85 Z'/%3E%3Cg transform='translate(100 0) scale(-1 1)'%3E%3Cpath d='M42 83 C38 58 26 42 15 44 C5 46 0 62 6 72 C10 78 15 80 18 78 C19 72 25 67 30 71 C34 75 36 80 37 85 Z'/%3E%3C/g%3E%3Crect x='27' y='85' width='46' height='8' rx='1'/%3E%3Cpath d='M45 93 C43 101 36 108 27 113 C36 113 42 110 46 106 C47 116 48 122 50 130 C52 122 53 116 54 106 C58 110 64 113 73 113 C64 108 57 101 55 93 Z'/%3E%3C/svg%3E") center / contain no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-16 0 132 132'%3E%3Cpath d='M50 1 C58 14 66 28 66 42 C66 58 58 72 56 85 L44 85 C42 72 34 58 34 42 C34 28 42 14 50 1 Z'/%3E%3Cpath d='M42 83 C38 58 26 42 15 44 C5 46 0 62 6 72 C10 78 15 80 18 78 C19 72 25 67 30 71 C34 75 36 80 37 85 Z'/%3E%3Cg transform='translate(100 0) scale(-1 1)'%3E%3Cpath d='M42 83 C38 58 26 42 15 44 C5 46 0 62 6 72 C10 78 15 80 18 78 C19 72 25 67 30 71 C34 75 36 80 37 85 Z'/%3E%3C/g%3E%3Crect x='27' y='85' width='46' height='8' rx='1'/%3E%3Cpath d='M45 93 C43 101 36 108 27 113 C36 113 42 110 46 106 C47 116 48 122 50 130 C52 122 53 116 54 106 C58 110 64 113 73 113 C64 108 57 101 55 93 Z'/%3E%3C/svg%3E") center / contain no-repeat;
-}
-:root[data-theme="sombre"] .retour-dq::before { background: var(--vedette); }
-/* Le rond : blanc en thème sombre, couleur du texte en thème clair (du blanc y serait invisible). */
-:root[data-theme="sombre"] .retour-dq { border-color: #fff; }
-/* Une barre oblique entre le logo du volet et la pastille DQ (décorative : muette pour les lecteurs d'écran). */
-.titre-ligne > a:first-child { display: inline-flex; align-items: center; }
-.titre-ligne > a:first-child::after {
-  content: "/"; content: "/" / "";
-  margin-left: 12px; font-size: 26px; font-weight: 300; line-height: 1; color: var(--entete-doux);
-}
-.retour-dq:hover { background: var(--fond-2); }
-
 .sous-titre { color: var(--entete-doux); margin: 6px 0 18px; font-size: 14.5px; max-width: 66ch; }
 
 nav { display: flex; gap: 3px; flex-wrap: wrap; }
