@@ -13,7 +13,7 @@
 //     « Abonnez-vous » sinon. Rien n'est chargé tant qu'on n'ouvre pas une fiche ;
 //   - au bas de la fiche ouverte, « Signaler une erreur dans cette fiche » (compte requis).
 
-import { VILLES, echapper, mesurer, session, envoyerLien, chargerSuivis, suivre, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, formulaireMessage, client } from './abonnes-client.js';
+import { VILLES, echapper, mesurer, session, envoyerLien, chargerSuivis, suivre, limiteSuivis, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, formulaireMessage, client } from './abonnes-client.js';
 import { memoriserVolet } from './navigation.js';
 import { tr } from './langue.js';
 
@@ -215,7 +215,12 @@ document.addEventListener('click', async (e) => {
   etoile.disabled = false;
   if (erreur) {
     console.error(erreur);
-    etoile.title = tr("Impossible d'enregistrer — réessayez", "Couldn't save — try again");
+    const plafond = limiteSuivis(erreur);
+    etoile.title = plafond === 3
+      ? tr('Limite atteinte : 3 projets suivis sans abonnement (10 avec)', 'Limit reached: 3 projects followed without a subscription (10 with)')
+      : plafond
+        ? tr(`Limite atteinte : ${plafond} projets suivis`, `Limit reached: ${plafond} projects followed`)
+        : tr("Impossible d'enregistrer — réessayez", "Couldn't save — try again");
     return;
   }
   if (dejaSuivi) suivis.delete(cle(VILLE, cible.dossier));
