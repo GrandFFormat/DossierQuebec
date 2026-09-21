@@ -1831,6 +1831,7 @@
   .promo-villes p{margin:0; font-size:14.5px; line-height:1.5; color:#131313;}
   .promo-villes a{color:#131313; font-weight:800; text-decoration:underline;}
   .promo-villes a:hover{color:#0E4FC1;}
+  .promo-villes .promo-villes-lien{display:inline-block; margin-top:10px; font-weight:900; text-decoration:underline;}
   .promo-compte{background:#FFFFFF; color:#131313; border:3px solid #131313; box-shadow:var(--shadow); padding:18px 20px;}
   .promo-compte-titre{display:block; margin:0 0 10px; font-family:'Archivo',sans-serif; font-weight:900; font-size:17px; text-transform:uppercase;}
   .promo-compte-ligne{display:flex; flex-wrap:wrap; gap:8px;}

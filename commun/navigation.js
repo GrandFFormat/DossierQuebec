@@ -55,6 +55,12 @@ export function dernierVolet() {
   } catch {}
   return null;
 }
+// Le site provincial inscrit « assemblee » à la même clé (commun/dq.js) : « ce qui est sur DQ
+// reste sur DQ ». Une adresse avec ?de=assemblee dit la même chose.
+export function vientDuProvincial() {
+  if (new URLSearchParams(location.search).get('de') === 'assemblee') return true;
+  try { return JSON.parse(localStorage.getItem(CLE_VOLET) ?? 'null')?.ville === 'assemblee'; } catch { return false; }
+}
 
 // Le choix de la ville, en haut à droite de chaque page (volets et pages communes) : un menu
 // déroulant (<details>, donc clavier et lecteurs d'écran sans rien de plus) qui se referme au clic
@@ -117,6 +123,9 @@ export function enteteCommune() {
   // Une ville demandée dans l'adresse l'emporte sur la dernière visitée. Venu du site provincial
   // (?de=assemblee) : l'en-tête reste DossierQuébec, même si on a visité une ville avant.
   const cible = Object.hasOwn(VILLES, ville ?? '') ? ville : params.get('de') === 'assemblee' ? null : dernierVolet();
+  // L'adresse fait foi pour la suite de la visite : Mes dossiers ↔ Abonnement restent du même côté.
+  if (Object.hasOwn(VILLES, ville ?? '')) memoriserVolet(ville);
+  else if (params.get('de') === 'assemblee') memoriserVolet('assemblee');
 
   const marque = document.querySelector('.ab-marque');
   if (marque && cible) {

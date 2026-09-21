@@ -101,7 +101,8 @@ export const sansFormeJuridique = (nom) => String(nom ?? '').trim().replace(/[\s
 // tôt) :
 //   - un projet de loi suivi (dossiers_suivis, ville « assemblee », dossier_id « pl:<id> ») qui
 //     change d'étape ou de statut ;
-//   - un projet de loi qui contient un mot-clé de l'abonné (titre officiel ou résumé) ;
+//   - un projet de loi qui contient un mot-clé de l'Assemblée de l'abonné (portee « assemblee »,
+//     une liste à part de ses mots de ville), dans le titre officiel ou le résumé ;
 //   - un projet de loi présenté par un ministre ou un·e député·e que l'abonné suit (table follows,
 //     la même que les boutons « Suivre » de l'onglet Ministres et député·e·s).
 // Même mémoire que les villes (alertes_etat, ville « assemblee ») : un suivi tout neuf part d'ici,
@@ -485,7 +486,9 @@ export default async function handler(req, res) {
       toutLire(`/rest/v1/alertes_preferences?select=user_id,actif&user_id=in.(${liste})`, 'user_id'),
       toutLire(`/rest/v1/alertes_etat?select=user_id,ville,projet,etat&user_id=in.(${liste})`, 'user_id,ville,projet'),
       // Table des mots-clés absente (SQL pas encore exécuté) : les alertes de projets partent quand même.
-      toutLire(`/rest/v1/alertes_mots_cles?select=id,user_id,mot&user_id=in.(${liste})`, 'created_at,id').catch((e) => {
+      // select=* : la colonne portee (villes | assemblee) n'existe qu'après
+      // scripts/supabase-schema-mots-cles-portee.sql ; avant, tout mot est un mot de ville.
+      toutLire(`/rest/v1/alertes_mots_cles?select=*&user_id=in.(${liste})`, 'created_at,id').catch((e) => {
         rapport.erreurs.push(`mots-clés ignorés : ${e.message}`);
         return [];
       }),
@@ -528,8 +531,17 @@ export default async function handler(req, res) {
       if (!ciblesDe.has(userId)) ciblesDe.set(userId, []);
       ciblesDe.get(userId).push(cible);
     };
+    // Deux listes : les mots de ville cherchent dans les décisions, ceux de l'Assemblée dans les
+    // projets de loi (Martin, 21 sept. 2026 : « ne seront probablement pas la même chose »).
+    const motsAssembleeDe = new Map();
     for (const m of mots) {
-      if (m.mot && /^[0-9a-f-]{36}$/.test(m.id ?? '')) ajouterCible(m.user_id, { cle: cleMot(m.id), cherche: m.mot, titre: `Mot-clé « ${m.mot} »`, mot: true });
+      if (!m.mot || !/^[0-9a-f-]{36}$/.test(m.id ?? '')) continue;
+      if ((m.portee ?? 'villes') === ASSEMBLEE) {
+        if (!motsAssembleeDe.has(m.user_id)) motsAssembleeDe.set(m.user_id, []);
+        motsAssembleeDe.get(m.user_id).push({ cle: cleMot(m.id), cherche: m.mot });
+      } else {
+        ajouterCible(m.user_id, { cle: cleMot(m.id), cherche: m.mot, titre: `Mot-clé « ${m.mot} »`, mot: true });
+      }
     }
     for (const o of organismes) {
       const cherche = sansFormeJuridique(o.nom);
@@ -601,7 +613,7 @@ export default async function handler(req, res) {
     }));
     rapport.loisMemorisees = 0;
 
-    for (const uid of new Set([...projetsDe.keys(), ...ciblesDe.keys(), ...loisDe.keys(), ...personnesDe.keys()])) {
+    for (const uid of new Set([...projetsDe.keys(), ...ciblesDe.keys(), ...loisDe.keys(), ...personnesDe.keys(), ...motsAssembleeDe.keys()])) {
       const projets = projetsDe.get(uid) ?? [];
       if (coupees.has(uid) && !essai) continue;
       try {
@@ -654,7 +666,7 @@ export default async function handler(req, res) {
         }
 
         // L'Assemblée, après les villes : ses sections viennent en dernier dans le courriel.
-        const motsAssemblee = (ciblesDe.get(uid) ?? []).filter((m) => m.mot);
+        const motsAssemblee = motsAssembleeDe.get(uid) ?? [];
         if (loisDe.has(uid) || personnesDe.has(uid) || motsAssemblee.length) {
           const donnees = await lireAssemblee();
           if (donnees) {
