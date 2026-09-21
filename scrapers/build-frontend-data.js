@@ -1,7 +1,11 @@
 // Injecte data/bills.json directement dans index.html, entre les marqueurs
-// BILLS_DATA_START / BILLS_DATA_END. Le prototype reste un fichier HTML unique et
-// autonome — ouvrable en double-cliquant, sans serveur ni fetch() (un <script src>
-// séparé pouvait ne pas se charger selon comment le fichier était ouvert).
+// BILLS_DATA_START / BILLS_DATA_END.
+//
+// Ce fichier disait « le prototype reste un fichier HTML unique et autonome, ouvrable en
+// double-cliquant, sans serveur ni fetch() ». Ce n'est plus vrai depuis le 21 septembre 2026 :
+// la feuille de style et la logique vivent dans commun/, et les gros textes se chargent à la
+// demande. Le site est servi par un serveur, et c'est ce qui lui permet de peser trois fois
+// moins. Ouvrir index.html en double-cliquant ne donne plus rien.
 //
 // Adapte aussi le format des données au gabarit attendu par billCard() :
 //   - `id` devient la clé unique utilisée pour les DOM ids (b.num n'est PAS unique,
@@ -17,7 +21,7 @@
 // front-end) — on ne les cache plus, voir la conversation sur la distinction
 // sanctionné / à l'étude / sur la glace.
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 const IN_PATH = 'data/bills.json';
 const HTML_PATH = 'index.html';
@@ -79,6 +83,25 @@ function main() {
     return b.lastActivity.localeCompare(a.lastActivity);
   });
 
+  // Les résumés sortent de la page. Mesuré : 177 ko bruts, 55 ko compressés — plus du tiers du
+  // poids compressé de la page, pour un texte qui ne s'affiche que dans la carte qu'on déplie.
+  // Un fichier par langue, parce qu'on n'a jamais besoin des deux en même temps.
+  const resumes = { fr: {}, en: {} };
+  for (const b of bills) {
+    if (b.summary) resumes.fr[b.id] = b.summary;
+    if (b.summaryEn) resumes.en[b.id] = b.summaryEn;
+  }
+  for (const [langue, map] of Object.entries(resumes)) {
+    const chemin = `data/bills-resumes-${langue}.json`;
+    const contenu = JSON.stringify(map);
+    // Ne réécrire que si ça change : garde le diff quotidien à ce qui a vraiment bougé.
+    if (existsSync(chemin) && readFileSync(chemin, 'utf-8') === contenu) continue;
+    writeFileSync(chemin, contenu);
+  }
+
+  // Ce qui part dans la page : tout sauf les résumés.
+  const allege = bills.map(({ summary, summaryEn, ...reste }) => reste);
+
   const html = readFileSync(HTML_PATH, 'utf-8');
   const startIdx = html.indexOf(START_MARKER);
   const endIdx = html.indexOf(END_MARKER);
@@ -86,11 +109,13 @@ function main() {
     throw new Error(`Marqueurs BILLS_DATA_START/END introuvables dans ${HTML_PATH}`);
   }
 
-  const block = `${START_MARKER} — généré automatiquement par scrapers/build-frontend-data.js à partir de\n   data/bills.json (voir scrapers/bills.js, bill-details.js, bill-summaries.js). Ne pas éditer\n   ce bloc à la main : relancer \`node scrapers/build-frontend-data.js\` à la place.\n   Généré le ${new Date().toISOString()} */\nconst bills = ${JSON.stringify(bills, null, 2)};\n`;
+  const block = `${START_MARKER} — généré automatiquement par scrapers/build-frontend-data.js à partir de\n   data/bills.json (voir scrapers/bills.js, bill-details.js, bill-summaries.js). Ne pas éditer\n   ce bloc à la main : relancer \`node scrapers/build-frontend-data.js\` à la place.\n   Les résumés ne sont PAS ici : ils vivent dans data/bills-resumes-{fr,en}.json et se chargent\n   au premier dépliement de carte ou à la première recherche.\n   Généré le ${new Date().toISOString()} */\nconst bills = ${JSON.stringify(allege, null, 2)};\n`;
 
   const updated = html.slice(0, startIdx) + block + html.slice(endIdx);
   writeFileSync(HTML_PATH, updated);
-  console.log(`${bills.length} projets de loi injectés directement dans ${HTML_PATH}`);
+  const ko = (x) => (Buffer.byteLength(JSON.stringify(x)) / 1024).toFixed(0);
+  console.log(`${bills.length} projets de loi injectés directement dans ${HTML_PATH} — ${ko(allege)} ko dans la page`);
+  console.log(`  résumés sortis : ${ko(resumes.fr)} ko en français, ${ko(resumes.en)} ko en anglais`);
 }
 
 main();
