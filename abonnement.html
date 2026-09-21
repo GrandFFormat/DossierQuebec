@@ -25,7 +25,8 @@
     var q = new URLSearchParams(location.search), c = null;
     if (q.get('de') === 'assemblee') c = 'assemblee';
     else if (q.get('ville')) c = 'villes';
-    else { try { var v = JSON.parse(localStorage.getItem('dq:dernier-volet') || 'null'); c = v && v.ville ? 'villes' : 'assemblee'; } catch (e) { c = 'assemblee'; } }
+    // Le provincial y inscrit « assemblee » (commun/dq.js) : ce n'est pas une ville.
+    else { try { var v = JSON.parse(localStorage.getItem('dq:dernier-volet') || 'null'); c = v && v.ville && v.ville !== 'assemblee' ? 'villes' : 'assemblee'; } catch (e) { c = 'assemblee'; } }
     document.documentElement.setAttribute('data-contexte', c);
   })();
 </script>
@@ -118,7 +119,7 @@
             <br><span class=&quot;ab-note&quot;>From the National Assembly's data (its open data and the bill pages on its website), reread every morning.</span>"><strong>Une alerte quand un projet de loi suivi passe à une étape plus avancée</strong>, de la présentation à la sanction. On le suit d'un clic depuis sa carte, dans Projets de loi.
             <br><span class="ab-note">Tiré des données de l'Assemblée nationale (ses données ouvertes et les fiches de son site), relues chaque matin.</span></div></li>
           <li class="ab-av-violet"><span class="ab-icone" aria-hidden="true">👤</span><div data-en="<strong>The elected members you follow</strong>: an email when a minister or an MNA you follow introduces a bill."><strong>Les élus que vous suivez</strong> : un courriel quand un ministre ou un député que vous suivez présente un projet de loi.</div></li>
-          <li class="ab-av-rose"><span class="ab-icone" aria-hidden="true">🔎</span><div data-en="<strong>Your keywords in new bills</strong>: “logement”, “forêt”, “électricité”… searched in each bill's title and summary."><strong>Vos mots-clés dans les nouveaux projets de loi</strong> : « logement », « forêt », « électricité »… cherchés dans le titre et le résumé de chacun.</div></li>
+          <li class="ab-av-rose"><span class="ab-icone" aria-hidden="true">🔎</span><div data-en="<strong>Your Assembly keywords</strong>: “logement”, “forêt”, “électricité”… searched in the title and summary of every new bill — a separate list from your city keywords."><strong>Vos mots-clés de l'Assemblée</strong> : « logement », « forêt », « électricité »… cherchés dans le titre et le résumé de chaque nouveau projet de loi — une liste à part de vos mots-clés de ville.</div></li>
         </ul>
         <p class="ab-note pour-villes" data-jusqua="2026-11-17" data-en="With the Assembly dissolved, these alerts will start with the bills of the new legislature, convened on November 17, 2026.">L'Assemblée étant dissoute, ces alertes partiront avec les projets de loi de la nouvelle législature, convoquée le 17 novembre 2026.</p>
         </div>
@@ -141,7 +142,7 @@
         </div>
         <p class="ab-prix" id="prix" data-en="<span class=&quot;ab-prix-montant&quot;>$10</span> <span class=&quot;ab-note&quot;>a month, or $96 a year — $8 a month, more than two months free</span>"><span class="ab-prix-montant">10 $</span> <span class="ab-note">par mois, ou 96 $ par an — soit 8 $ par mois, plus de deux mois offerts</span></p>
         <p class="ab-note" data-en="No commitment: cancel anytime, in two clicks; it stays active until the end of the paid period. Want to try first? A free account already follows 3 projects or bills.">Sans engagement : annulable en tout temps, en deux clics ; il reste actif jusqu'à la fin de la période payée. Envie d'essayer d'abord ? Un compte gratuit suit déjà 3 projets ou projets de loi.</p>
-        <p class="ab-note" data-en="Per account: 10 projects or bills followed, 5 keyword alerts, 3 organizations, 10 exports a month.">Par compte : 10 projets ou projets de loi suivis, 5 alertes par mot-clé, 3 organismes, 10 exports par mois.</p>
+        <p class="ab-note" data-en="Per account: 10 projects or bills followed, 5 city keywords and 5 Assembly keywords, 3 organizations, 10 exports a month.">Par compte : 10 projets ou projets de loi suivis, 5 mots-clés de ville et 5 de l'Assemblée, 3 organismes, 10 exports par mois.</p>
         <p class="ab-note" data-en="Made for engaged residents, neighbourhood associations and freelance journalists.">Pensé pour le citoyen engagé, l'association de quartier, le ou la journaliste à la pige.</p>
         <p class="ab-note" data-en="One subscription for every city covered — not one per city.">Un seul abonnement pour toutes les villes couvertes — pas un abonnement par ville.</p>
       </section>

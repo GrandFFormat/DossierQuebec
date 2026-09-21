@@ -14,7 +14,7 @@ export const client = createClient('https://wfgcqftgtmptfutrbujz.supabase.co', '
 // VILLES, echapper et la navigation vivent dans navigation.js (sans dépendance extérieure).
 import { VILLES, echapper } from './navigation.js';
 import { EN, tr } from './langue.js';
-export { VILLES, VILLES_PROJETS, VILLES_EN, VILLES_ATTENDUES, echapper, memoriserVolet, dernierVolet, enteteCommune, boutonRetourEnHaut } from './navigation.js';
+export { VILLES, VILLES_PROJETS, VILLES_EN, VILLES_ATTENDUES, echapper, memoriserVolet, dernierVolet, vientDuProvincial, enteteCommune, boutonRetourEnHaut } from './navigation.js';
 export { EN, tr } from './langue.js';
 
 const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];

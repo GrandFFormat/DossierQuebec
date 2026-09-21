@@ -313,7 +313,8 @@ const translations = {
     'promo.compte.h':"Your account",
     'promo.villes.h':"Also included: following the cities",
     'promo.villes.p':"The same subscription also alerts you to decisions in <a href=\"/quebec/\">Québec City</a>, <a href=\"/montreal/\">Montréal</a>, <a href=\"/levis/\">Lévis</a>, <a href=\"/longueuil/\">Longueuil</a> and <a href=\"/laval/\">Laval</a>: the projects you follow, your street, your neighbourhood, an organization. One subscription, not one per city: your 10 follows are shared between bills and city projects.",
-    'promo.limites':"<b>With the subscription:</b> up to 10 bills followed (3 without a subscription), 5 keywords, and the ministers and MNAs of your choice.",
+    'promo.villes.lien':"Pick a city project in My files →",
+    'promo.limites':"<b>With the subscription:</b> up to 10 bills followed (3 without a subscription), 5 Assembly keywords, and the ministers and MNAs of your choice.",
     'promo.mesdossiers':"My files →",
     'footer.villes':"Cities:",
     'maj.sub':"What changed on DossierQuébec, newest first",
@@ -676,7 +677,7 @@ async function toggleFollowBill(billId, btnId){
     if(plafond === 3){
       if(confirm(isEn
         ? 'Without a subscription, you can follow 3 projects or bills (10 with one, plus a morning email when they move). See the subscription?'
-        : 'Sans abonnement, on suit 3 projets ou projets de loi (10 avec, et un courriel le matin quand ils avancent). Voir l’abonnement ?')) location.href = '/abonnement';
+        : 'Sans abonnement, on suit 3 projets ou projets de loi (10 avec, et un courriel le matin quand ils avancent). Voir l’abonnement ?')) location.href = '/abonnement?de=assemblee';
     } else if(plafond){
       alert(isEn ? `Limit reached: ${plafond} projects or bills followed. Remove one in My files first.` : `Limite atteinte : ${plafond} projets ou projets de loi suivis. Retirez-en un dans Mes dossiers d’abord.`);
     } else if(/consultation/i.test(error.message || '')){
@@ -3320,6 +3321,12 @@ function renderTicker(){
   const a = document.getElementById('tickerA'), b = document.getElementById('tickerB');
   if(a && b){ a.textContent = line; b.textContent = line; }
 }
+
+// « Ce qui est sur DQ reste sur DQ » (Martin, 21 sept. 2026) : les pages communes (Mes dossiers,
+// Abonnement) prennent la marque du DERNIER site visité. Les volets y inscrivent leur ville
+// (commun/abonnes.js, memoriserVolet) ; le provincial y inscrit « assemblee » — même clé, lue par
+// commun/navigation.js (dernierVolet, vientDuProvincial) et par le <head> de abonnement.html.
+try{ localStorage.setItem('dq:dernier-volet', JSON.stringify({ ville: 'assemblee' })); }catch(e){}
 
 (async function init(){
   // D'abord les données : tout ce qui suit en dépend, et elles arrivent maintenant par le

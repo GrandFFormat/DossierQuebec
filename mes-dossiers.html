@@ -44,6 +44,7 @@
     <p class="ab-chapeau" data-en="The projects you follow, all cities combined. Click a project to see its decisions here, most recent first. To add one, pick it further down, or click “Project: …” on a decision in a city section.">Les projets que vous suivez, toutes villes confondues. Cliquez sur un projet pour voir ses décisions ici, les plus récentes d'abord. Pour en ajouter un, choisissez-le plus bas, ou cliquez « Projet : … » sur une décision dans un volet.</p>
     <div id="compte"></div>
     <div id="infolettre"></div>
+    <div id="mots-assemblee"></div>
     <div id="mots"></div>
     <div id="organismes"></div>
     <div id="export"></div>
@@ -62,7 +63,7 @@
   boutonRetourEnHaut();
 </script>
 <script type="module">
-  import { client, VILLES, VILLES_PROJETS, VILLES_EN, VILLES_ATTENDUES, avisConsultation, marquerConsultation, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, limiteSuivis, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, mesurer, formulaireMessage, dernierVolet, EN, tr } from '/commun/abonnes-client.js';
+  import { client, VILLES, VILLES_PROJETS, VILLES_EN, VILLES_ATTENDUES, avisConsultation, marquerConsultation, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, limiteSuivis, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, mesurer, formulaireMessage, dernierVolet, vientDuProvincial, EN, tr } from '/commun/abonnes-client.js';
   import { boiteInfolettre } from '/commun/infolettre.js';
   const pl = (n, sing, plur) => (n > 1 ? plur : sing);
   import { libelleEn, themeEn } from '/quebec/assets/libelles-en.js';
@@ -270,22 +271,22 @@
         <li><strong>The elected members you follow</strong>: an email when a minister or MNA you follow introduces a bill.</li>
         <li><strong>Money details</strong>: who receives, who pays, the bids and the City's estimate, the breakdown by year, the conditions.
           <br><span class="ab-note">Included as soon as it is read: the major projects followed, and every new item. In Québec City, anything else on request — normally read the next day.</span></li>
-        <li><strong>Alerts for your neighbourhood, your street or a keyword</strong>: “everything the City decides about 1re Avenue”, “in Limoilou”, “about snow removal” — and every new bill that mentions it.</li>
+        <li><strong>Alerts for your neighbourhood, your street or a keyword</strong>: “everything the City decides about 1re Avenue”, “in Limoilou”, “about snow removal”. And, in a separate list, keywords for the National Assembly: every new bill that mentions them.</li>
         <li><strong>Follow an organization or a company</strong>: this year's decisions that name it — contracts, grants, agreements — with each amount as written, and an alert when a new one names it.</li>
         <li><strong>What's coming up at council</strong>: the items on the agenda of each meeting, with their summary — estimated from the documents the City publishes.</li>
         <li><strong>The monthly recap, subscriber edition</strong>: everything the City decided in the month, in plain language. <a class="ab-lien" href="/exemple-compte-rendu-aout-2026">See the August 2026 issue</a> (in French).</li>
         <li><strong>Export to a spreadsheet or PDF</strong> (Excel, CSV or printable PDF): you choose a project, a word or a name and the columns, with the money details when they have been read.</li>
-        <li class="ab-note">Per account: 10 projects followed, 5 keyword alerts, 3 organizations, 10 exports a month.</li>` : `
+        <li class="ab-note">Per account: 10 projects or bills followed, 5 city keywords and 5 Assembly keywords, 3 organizations, 10 exports a month.</li>` : `
         <li><strong>Une alerte par courriel quand vos projets bougent</strong> : une nouvelle décision, un dossier qui attend un vote, un récapitulatif mis à jour — et, à l'Assemblée nationale, un projet de loi suivi qui passe une étape. Rien les semaines où rien n'avance.</li>
         <li><strong>Les élus que vous suivez</strong> : un courriel quand un ministre ou un député que vous suivez présente un projet de loi.</li>
         <li><strong>Le détail de l'argent</strong> : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions.
           <br><span class="ab-note">Inclus dès qu'il est lu : les grands projets suivis, et chaque nouveau dossier. À Québec, le reste sur demande — normalement lu le lendemain.</span></li>
-        <li><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : « tout ce que la Ville décide sur la 1re Avenue », « dans Limoilou », « sur le déneigement » — et chaque nouveau projet de loi qui en parle.</li>
+        <li><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : « tout ce que la Ville décide sur la 1re Avenue », « dans Limoilou », « sur le déneigement ». Et, dans une liste à part, des mots-clés pour l'Assemblée : chaque nouveau projet de loi qui en parle.</li>
         <li><strong>Suivre un organisme ou une entreprise</strong> : les décisions de l'année qui le nomment — contrats, subventions, ententes — avec le montant de chacune tel qu'écrit, et une alerte quand une nouvelle le nomme.</li>
         <li><strong>Ce qui s'en vient au conseil</strong> : les dossiers à l'ordre du jour de chaque séance, avec leur résumé — estimé d'après les documents publiés par la Ville.</li>
         <li><strong>Le compte rendu mensuel, édition abonnés</strong> : tout ce que la Ville a décidé dans le mois, en langage clair. <a class="ab-lien" href="/exemple-compte-rendu-aout-2026">Voir l'édition d'août 2026</a>.</li>
         <li><strong>L'export en tableur ou en PDF</strong> (Excel, CSV ou PDF à imprimer) : vous choisissez un projet, un mot ou un nom et les colonnes, avec le détail de l'argent quand il est lu.</li>
-        <li class="ab-note">Par compte : 10 projets suivis, 5 alertes par mot-clé, 3 organismes, 10 exports par mois.</li>`;
+        <li class="ab-note">Par compte : 10 projets ou projets de loi suivis, 5 mots-clés de ville et 5 de l'Assemblée, 3 organismes, 10 exports par mois.</li>`;
 
   // ---------- l'alerte du matin (abonnés) ----------
   // La première ligne de la boîte « Mes courriels » : l'interrupteur (alertes_preferences), la date
@@ -376,19 +377,26 @@
     return recentesToutes;
   };
 
+  // Deux listes depuis le 21 sept. 2026 (Martin : « les mots-clés de ville et DQ ne seront
+  // probablement pas la même chose ») : colonne `portee` (scripts/supabase-schema-mots-cles-portee.sql).
+  // Lue avec select('*') : avant ce script, la colonne manque, tout mot est un mot de ville, et la
+  // boîte de l'Assemblée reste cachée.
+  const porteeDe = (m) => m.portee ?? 'villes';
+
   async function motsCles(s, abonne) {
     const zone = $('#mots');
     if (!s || !abonne) { zone.innerHTML = ''; return; }
-    const { data, error } = await client.from('alertes_mots_cles').select('id, mot').order('created_at');
+    const { data: tous, error } = await client.from('alertes_mots_cles').select('*').order('created_at');
     if (error) { zone.innerHTML = ''; return; } // table pas encore créée
+    const data = (tous ?? []).filter((m) => porteeDe(m) === 'villes');
     const ouvertMots = zone.querySelector('details.ab-pliable')?.open ? ' open' : '';
     zone.innerHTML = `<details class="ab-carte ab-pliable ab-mots"${ouvertMots}>
-      <summary><h2>${tr('Mots-clés', 'Keywords')}</h2><span class="ab-etiquette" id="mots-compte">${(data ?? []).length}</span></summary>
+      <summary><h2>${tr('Mots-clés des villes', 'City keywords')}</h2><span class="ab-etiquette" id="mots-compte">${(data ?? []).length}</span></summary>
       <div class="ab-pliable-corps">
-      <p class="ab-chapeau" style="margin-bottom:10px">${tr("Une rue, un quartier, une école, un parc, un sujet : « 1re Avenue », « Limoilou », « Rochebelle », « déneigement »… Les nouvelles décisions des villes et les nouveaux projets de loi de l'Assemblée qui le contiennent s'ajoutent à votre alerte du matin.", 'A street, a neighbourhood, a school, a park, a topic: “1re Avenue”, “Limoilou”, “Rochebelle”, “déneigement” (snow removal)… New city decisions and new National Assembly bills that contain it are added to your morning alert. The documents are in French, so use French words.')}</p>
+      <p class="ab-chapeau" style="margin-bottom:10px">${tr("Une rue, un quartier, une école, un parc, un sujet : « 1re Avenue », « Limoilou », « Rochebelle », « déneigement »… Les nouvelles décisions qui le contiennent s'ajoutent à votre alerte du matin.", 'A street, a neighbourhood, a school, a park, a topic: “1re Avenue”, “Limoilou”, “Rochebelle”, “déneigement” (snow removal)… New decisions that contain it are added to your morning alert. The decisions are in French, so use French words.')}</p>
       <ul class="ab-mots-liste" id="mots-liste"></ul>
       <form class="ab-form" id="mots-form"><input type="text" id="mots-champ" maxlength="60" placeholder="${tr('Ajouter un mot-clé', 'Add a keyword')}" aria-label="${tr('Nouveau mot-clé', 'New keyword')}"><button type="submit" class="ab-bouton">${tr('Ajouter', 'Add')}</button></form>
-      <p class="ab-note">${tr("Cherché dans l'objet et le résumé de chaque décision, et dans le titre et le résumé de chaque projet de loi, sans tenir compte des accents ni des majuscules. Jusqu'à 5.", "Searched in each decision's subject and French summary, and in each bill's title and French summary, ignoring accents and capitals. Up to 5.")}</p>
+      <p class="ab-note">${tr("Cherché dans l'objet et le résumé de chaque décision, sans tenir compte des accents ni des majuscules. Jusqu'à 5.", "Searched in each decision's subject and French summary, ignoring accents and capitals. Up to 5.")}</p>
       <p class="ab-note" id="mots-etat" aria-live="polite"></p>
       <div class="ab-pistes" id="mots-pistes" hidden></div>
       <p class="ab-astuce">${tr("<strong>Astuce :</strong> pas sûr de l'orthographe d'une rue ou d'un lieu ? Cherchez-le dans Google pour trouver son nom officiel (« boulevard Wilfrid-Hamel », « 1re Avenue ») : c'est celui qu'emploient les documents de la Ville.", '<strong>Tip:</strong> not sure how a street or place is spelled? Look it up on Google to find its official French name (“boulevard Wilfrid-Hamel”, “1re Avenue”): that is the one the City uses in its documents.')}</p>
@@ -467,7 +475,9 @@
     const ajouter = async (mot) => {
       if (mot.length < 2) { etat.textContent = tr('Un mot-clé compte au moins 2 caractères.', 'A keyword needs at least 2 characters.'); return null; }
       if (mots.some((m) => normaliserTexte(m.mot) === normaliserTexte(mot))) { etat.textContent = tr('Ce mot-clé est déjà dans votre liste.', 'This keyword is already in your list.'); return null; }
-      const { data: ajoute, error: erreur } = await client.from('alertes_mots_cles').insert({ user_id: s.user.id, mot }).select('id, mot').single();
+      // Sans `portee` : la valeur par défaut de la colonne est « villes » (et avant le script SQL,
+      // la colonne n'existe pas encore).
+      const { data: ajoute, error: erreur } = await client.from('alertes_mots_cles').insert({ user_id: s.user.id, mot }).select('*').single();
       if (erreur) { etat.textContent = /limite de/i.test(erreur.message) ? tr('Limite de 5 alertes par mot-clé atteinte.', 'Limit of 5 keyword alerts reached.') : tr("Impossible d'ajouter ce mot-clé. Réessayez.", "Couldn't add this keyword. Try again."); return null; }
       mots = [...mots, ajoute];
       dessiner();
@@ -504,6 +514,87 @@
       dessiner();
       await ajouter(b.dataset.par);
       mesurer('mot_cle_remplace');
+    });
+    liste.addEventListener('click', async (e) => {
+      const bouton = e.target.closest('[data-mot]');
+      if (!bouton) return;
+      bouton.disabled = true;
+      const { error: erreur } = await client.from('alertes_mots_cles').delete().eq('id', bouton.dataset.mot);
+      if (erreur) { bouton.disabled = false; etat.textContent = tr('Impossible de retirer ce mot-clé. Réessayez.', "Couldn't remove this keyword. Try again."); return; }
+      mots = mots.filter((m) => m.id !== bouton.dataset.mot);
+      dessiner();
+      etat.textContent = tr('Mot-clé retiré.', 'Keyword removed.');
+    });
+  }
+
+  // ---------- mots-clés de l'Assemblée (abonnés) ----------
+  // La même table, portee « assemblee ». Cherchés par le serveur dans le titre et le résumé de
+  // chaque projet de loi (api/alertes-projets.js, loiContientMot) ; ici, à côté de chaque mot,
+  // combien de projets de loi de la législature le contiennent déjà — même recherche.
+  let loisEtResumes = null;
+  const chargerLoisEtResumes = () => (loisEtResumes ??= Promise.all([
+    fetch('/data/site/bills.json').then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    fetch('/data/bills-resumes-fr.json').then((r) => (r.ok ? r.json() : null)).catch(() => null),
+  ]).then(([lois, resumes]) => {
+    if (!Array.isArray(lois)) { loisEtResumes = null; return null; }
+    const texte = (html) => { const t = String(html ?? '').replace(/<[^>]+>/g, ' ').replace(/&(?:[a-z]+|#\d+);/gi, ' '); return /r[ée]sum[ée] non disponible/i.test(t) ? '' : t; };
+    return lois.map((b) => ({ objet: b.title, puces: [texte(resumes?.[b.id])] }));
+  }));
+
+  async function motsClesAssemblee(s, abonne) {
+    const zone = $('#mots-assemblee');
+    if (!s || !abonne) { zone.innerHTML = ''; return; }
+    // La colonne portee existe-t-elle ? Sinon (script SQL pas encore exécuté), pas de boîte.
+    const essai = await client.from('alertes_mots_cles').select('portee').limit(1);
+    if (essai.error) { zone.innerHTML = ''; return; }
+    const { data: tous, error } = await client.from('alertes_mots_cles').select('*').order('created_at');
+    if (error) { zone.innerHTML = ''; return; }
+    let mots = (tous ?? []).filter((m) => porteeDe(m) === 'assemblee');
+    const ouvert = zone.querySelector('details.ab-pliable')?.open ? ' open' : '';
+    zone.innerHTML = `<details class="ab-carte ab-pliable ab-mots"${ouvert}>
+      <summary><h2>${tr("Mots-clés de l'Assemblée", 'National Assembly keywords')}</h2><span class="ab-etiquette" id="mpl-compte">${mots.length}</span></summary>
+      <div class="ab-pliable-corps">
+      <p class="ab-chapeau" style="margin-bottom:10px">${tr("Un sujet : « logement », « forêt », « électricité », « aînés »… Chaque nouveau projet de loi qui le contient s'ajoute à votre alerte du matin. Une liste à part de vos mots-clés de ville.", 'A topic: “logement”, “forêt”, “électricité”, “aînés”… Every new bill that contains it is added to your morning alert. A separate list from your city keywords. Bills are in French, so use French words.')}</p>
+      <ul class="ab-mots-liste" id="mpl-liste"></ul>
+      <form class="ab-form" id="mpl-form"><input type="text" id="mpl-champ" maxlength="60" placeholder="${tr('Ajouter un mot-clé', 'Add a keyword')}" aria-label="${tr("Nouveau mot-clé de l'Assemblée", 'New National Assembly keyword')}"><button type="submit" class="ab-bouton">${tr('Ajouter', 'Add')}</button></form>
+      <p class="ab-note">${tr("Cherché dans le titre et le résumé de chaque projet de loi, sans tenir compte des accents ni des majuscules. Jusqu'à 5.", "Searched in each bill's title and French summary, ignoring accents and capitals. Up to 5.")}</p>
+      <p class="ab-note" id="mpl-etat" aria-live="polite"></p>
+      </div>
+    </details>`;
+    const liste = $('#mpl-liste');
+    const etat = $('#mpl-etat');
+    const form = $('#mpl-form');
+    let lois = null; // chargées à l'ouverture de la boîte
+    const dessiner = () => {
+      liste.innerHTML = mots.length
+        ? mots.map((m) => {
+            const n = lois?.filter((d) => contientMot(d, m.mot)).length;
+            return `<li class="ab-mot"><span class="ab-mot-texte">${echapper(m.mot)}</span><span class="ab-note" style="margin:0">${n == null ? '' : n ? tr(`${n} projet${n > 1 ? 's' : ''} de loi`, `${n} ${pl(n, 'bill', 'bills')}`) : tr('aucun projet de loi pour l’instant', 'no bill yet')}</span><button type="button" class="ab-mot-retirer" data-mot="${echapper(m.id)}" aria-label="${tr('Retirer le mot-clé', 'Remove keyword')} ${echapper(m.mot)}">×</button></li>`;
+          }).join('')
+        : `<li class="ab-note" style="list-style:none;margin:0">${tr('Aucun mot-clé pour l’instant.', 'No keywords yet.')}</li>`;
+      form.querySelector('button').disabled = mots.length >= 5;
+      $('#mpl-compte').textContent = mots.length;
+    };
+    dessiner();
+    aLOuverture(zone.querySelector('details.ab-mots'), async () => { lois = await chargerLoisEtResumes(); dessiner(); });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const champ = $('#mpl-champ');
+      const mot = champ.value.trim().replace(/\s+/g, ' ');
+      if (mot.length < 2) { etat.textContent = tr('Un mot-clé compte au moins 2 caractères.', 'A keyword needs at least 2 characters.'); return; }
+      if (mots.some((m) => normaliserTexte(m.mot) === normaliserTexte(mot))) { etat.textContent = tr('Ce mot-clé est déjà dans votre liste.', 'This keyword is already in your list.'); return; }
+      const { data: ajoute, error: erreur } = await client.from('alertes_mots_cles').insert({ user_id: s.user.id, mot, portee: 'assemblee' }).select('*').single();
+      if (erreur) { etat.textContent = /limite de/i.test(erreur.message) ? tr('Limite de 5 mots-clés de l’Assemblée atteinte.', 'Limit of 5 National Assembly keywords reached.') : tr("Impossible d'ajouter ce mot-clé. Réessayez.", "Couldn't add this keyword. Try again."); return; }
+      champ.value = '';
+      mots = [...mots, ajoute];
+      lois ??= await chargerLoisEtResumes();
+      dessiner();
+      const n = lois ? lois.filter((d) => contientMot(d, mot)).length : 0;
+      etat.textContent = n
+        ? tr(`Ajouté. ${n} projet${n > 1 ? 's' : ''} de loi le contien${n > 1 ? 'nent' : 't'} déjà ; vous serez alerté des prochains.`, `Added. ${n} ${pl(n, 'bill already contains', 'bills already contain')} it; you'll be alerted about the next ones.`)
+        : tr('Ajouté. Aucun projet de loi ne le contient pour l’instant : vous serez alerté du premier.', 'Added. No bill contains it yet: you’ll be alerted about the first one.');
+      mesurer('mot_cle_ajoute', { portee: 'assemblee' });
     });
     liste.addEventListener('click', async (e) => {
       const bouton = e.target.closest('[data-mot]');
@@ -852,7 +943,8 @@ ${liste.map(fiche).join('')}
   async function remplirExport(carte, groupesProjets) {
     const [annee, mots, orgs] = await Promise.all([
       chargerDossiersAnnee(),
-      client.from('alertes_mots_cles').select('mot').then((r) => r.data ?? []),
+      // L'export porte sur les décisions des villes : seulement les mots-clés de ville.
+      client.from('alertes_mots_cles').select('*').then((r) => (r.data ?? []).filter((m) => porteeDe(m) === 'villes')),
       client.from('organismes_suivis').select('nom').then((r) => r.data ?? []),
     ]);
     if (!annee.length) {
@@ -1164,6 +1256,9 @@ ${liste.map(fiche).join('')}
     setTimeout(arreter, 5000);
   }
   if (location.hash === '#ecrire') garderEnVue('ecrire');
+  // Le lien « Choisir un projet de ville » de l'encadré d'abonnement (accueil de DQ) : la boîte des
+  // projets à suivre, ouverte (voir suggestions).
+  if (location.hash === '#suggestions') garderEnVue('suggestions');
   // Déjà sur la page : le lien « Nous écrire » change seulement l'ancre.
   addEventListener('hashchange', () => { if (location.hash === '#ecrire') document.getElementById('ecrire')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
 
@@ -1213,7 +1308,7 @@ ${liste.map(fiche).join('')}
     const total = blocs.reduce((n, b) => n + b.nombre, 0);
     // La même boîte que les autres (Export, Agenda…) ; dedans, une ville par menu dépliant.
     $('#suggestions').innerHTML = blocs.length
-      ? `<details class="ab-carte ab-pliable ab-suggestions"${(boiteAvant ? boiteAvant.open : !suivisIds.size) ? ' open' : ''}>
+      ? `<details class="ab-carte ab-pliable ab-suggestions"${(boiteAvant ? boiteAvant.open : (!suivisIds.size || location.hash === '#suggestions')) ? ' open' : ''}>
          <summary><h2>${tr('Des projets à suivre', 'Projects to follow')}</h2><span class="ab-etiquette">${total}</span></summary>
          <div class="ab-pliable-corps">
          <p class="ab-chapeau">${tr('Les grands dossiers de chaque ville, qui reviennent de séance en séance. Suivez-en un pour garder le fil de toutes ses décisions.', "Each city's major files, which come back meeting after meeting. Follow one to keep track of all its decisions. (Project descriptions and recaps are in French for now.)")}</p>
@@ -1561,7 +1656,11 @@ ${liste.map(fiche).join('')}
     // Compte de consultation : on retire les commandes qui écrivent et on dit pourquoi.
     avisConsultation($('#compte'));
 
+    // Les deux boîtes de mots-clés : celle de l'Assemblée d'abord pour qui vient de DQ, après
+    // celle des villes pour qui vient d'un volet.
+    if (!vientDuProvincial()) $('#mots').after($('#mots-assemblee'));
     motsCles(s, abonne).catch((e) => console.error('mots-clés :', e));
+    motsClesAssemblee(s, abonne).catch((e) => console.error('mots-clés Assemblée :', e));
     organismesSuivis(s, abonne).catch((e) => console.error('organismes :', e));
     exportTableur(s, abonne).catch((e) => console.error('export :', e));
     dossiersOuverts(s, abonne).catch((e) => console.error('dossiers ouverts :', e));
@@ -1582,8 +1681,12 @@ ${liste.map(fiche).join('')}
       if (!parVille.has(x.ville)) parVille.set(x.ville, []);
       parVille.get(x.ville).push(x);
     }
+    // Venu de DQ, les projets de loi d'abord ; venu d'un volet, les villes d'abord (« ce qui est
+    // sur DQ reste sur DQ »).
+    const dq = vientDuProvincial();
+    const groupes = [...parVille].sort(([a], [b]) => ((a === ASSEMBLEE) === (b === ASSEMBLEE) ? 0 : (a === ASSEMBLEE) === dq ? -1 : 1));
     const sections = [];
-    for (const [ville, liste] of parVille) {
+    for (const [ville, liste] of groupes) {
       const nom = ville === ASSEMBLEE ? tr('Assemblée nationale', 'National Assembly') : (VILLES[ville] ?? ville);
       sections.push(`<h2>${echapper(nom)} <span class="ab-note">(${liste.length})</span></h2>${(await Promise.all(liste.map(entete))).join('')}`);
     }
