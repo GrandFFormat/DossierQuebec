@@ -19,6 +19,7 @@ import { INSTANCES, pdf as telechargerPdf } from '../lib/lgl.js';
 import { lirePdf } from '../lib/pdf.js';
 import { decouperResolutions, parserOrdreDuJour } from '../lib/pv.js';
 import { classer, THEMES } from '../lib/themes.js';
+import { projetsDe } from '../lib/projets.js';
 
 const OUT = new URL('../data/decisions.json', import.meta.url);
 const SEANCES = new URL('../data/seances.json', import.meta.url);
@@ -225,6 +226,14 @@ async function main() {
     const seuil = plusRecentConnu ? ajouterJours(plusRecentConnu, -RATTRAPAGE_JOURS) : '';
     for (const d of liste) d.nouveau = precedent ? !decisionsConnues.has(d.id) && (d.date ?? '') >= seuil : null;
     for (const d of liste) Object.assign(d, classer({ objet: d.type === 'Résolution' ? d.objet : 'procès-verbal', chapitre: d.categorie }));
+    // Les projets suivables dont parle chaque décision (voir ../lib/projets.js). Recalculé à
+    // chaque passage : une règle qu'on affine doit reclasser tout l'historique, pas seulement
+    // les nouvelles décisions.
+    for (const d of liste) {
+      delete d.projets;
+      const p = d.type === 'Résolution' ? projetsDe(d.objet) : [];
+      if (p.length) d.projets = p;
+    }
     liste.sort((a, b) => b.date.localeCompare(a.date) || (a.instance ?? '').localeCompare(b.instance ?? '') || ordreNumero(a) - ordreNumero(b));
     const traitees = new Set(etatSeances.map((s) => s.id));
     const etats = [...etatSeances, ...seances.filter((s) => !traitees.has(s.id)).map((s) => connues.get(s.id) ?? { ...s, etat: 'non traitée' })];
