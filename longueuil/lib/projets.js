@@ -9,6 +9,17 @@
 // administrative qui ne raconte pas d'histoire suivable : « services professionnels » (56),
 // « honoraires professionnels » (37), « aide financière » (36). Poser une règle sur une
 // fréquence, ce serait inventer un projet là où il n'y en a pas.
+//
+// LE LOGEMENT SOCIAL A ÉTÉ VÉRIFIÉ, ET IL NE TIENT PAS ICI. Québec, Montréal, Lévis et Laval
+// ont tous ce projet ; leurs règles, passées sur les décisions de Longueuil en 2026, ne
+// trouvent que 4 décisions, soit 2 dossiers : un appui à un projet de logements sociaux sur le
+// lot 6 602 263, et deux désignations au conseil d'administration de l'Office d'habitation de
+// Longueuil. Avec un vocabulaire plus large, le reste est du zonage sur des immeubles précis
+// (transformer un trifamilial en multifamilial), un projet immobilier privé, et la collecte des
+// matières organiques dans les multilogements — rien qui raconte ce que la Ville fait du
+// logement. Deux dossiers ne font pas un projet : la carte serait presque vide et donnerait à
+// croire que Longueuil ne décide rien en la matière, alors qu'on constate surtout que ses
+// décisions de 2026 n'en parlent pas. À revérifier quand l'année 2027 sera là.
 
 export const PROJETS = {
   eau: {

@@ -31,6 +31,38 @@ export const PROJETS = {
     // stationnement au 1323, chemin du Bord-de-l'Eau, et l'aide à l'Équipe aquatique unifiée.
     exclusion: /r[ée]servoirs? p[ée]troliers?|jeux d.eau|chaudi[èe]res? [àa] eau|[ée]quipements motoris[ée]s ou roulants/i,
   },
+  logement: {
+    titre: 'Logement social et abordable',
+    description:
+      "Ce que Laval fait pour le logement : le plan d'action en habitation 2025-2028, la Commission de l'habitation et du logement social, les ententes avec l'Office municipal d'habitation et la Société d'habitation du Québec, et les contributions aux organismes qui construisent — Corporation d'habitation Laval, Interloge, Toit à moi, Espoir habitat, Village urbain.",
+    // 47 décisions, 24 dossiers. Même projet qu'à Québec, Montréal et Lévis, et Laval a en plus
+    // sa propre Commission de l'habitation et du logement social (Règlement L-13272), son plan
+    // d'action, et un excédent de fonctionnement affecté au logement social.
+    //
+    // Les organismes sont nommés dans la règle parce que plusieurs décisions ne parlent que
+    // d'eux : la vente d'un lot à Interloge, la convention de travaux avec Inter-Loge
+    // Centre-Sud, l'emphytéose gratuite à Village urbain pour le projet Village Vert. Sans
+    // leurs noms, ces décisions tombaient dehors. Même principe que « Un toit en réserve » à
+    // Québec ou « OMHM » et « SHDM » à Montréal.
+    //
+    // « abordable » entre seul dans la règle : à Laval, ses 14 occurrences de 2026 parlent
+    // TOUTES de logement — jusqu'à « maisons préfabriquées abordables » du programme FIERH, que
+    // « logements abordables » ne rattrapait pas.
+    regle: /logements? (?:sociaux|social|hors march[ée]|communautaires?|locatifs|[àa] but non lucratif)|abordables?|habitation (?:abordable|communautaire)|plan d.action en habitation|Office (?:municipal )?d.habitation|\bOMHL?\b|Commission de l.habitation|Soci[ée]t[ée] d.habitation du Qu[ée]bec|\bSHQ\b|Corporation d.habitation Laval|Inter-?Loge|Toit [àa] moi|Espoir habitat|Village urbain/i,
+    // Pas d'exclusion : rien de faux n'entre. Vérifié — aucune des 47 décisions retenues n'est
+    // sans un mot du logement dans son objet.
+    //
+    // Restent dehors, et c'est voulu :
+    //   • le Règlement L-13267 sur la démolition d'immeubles de 10 logements ou plus — il
+    //     protège le parc, mais c'est du contrôle de démolition, pas du logement social ;
+    //     aucune des autres villes ne le range ici non plus ;
+    //   • les PPCMOI et dérogations sur un immeuble précis — du zonage, cas par cas ;
+    //   • « Les Habitations VAIA S.E.C. », un promoteur privé qui loue un terrain municipal ;
+    //   • la servitude d'Hydro-Québec sur un lot des Habitations l'Envolée — de la plomberie
+    //     administrative dont l'objet ne parle pas de logement ;
+    //   • le ministère des Affaires municipales et de l'Habitation quand il n'est qu'un nom
+    //     dans une candidature à un prix.
+  },
 };
 
 // « Traces Québec » (44 décisions) avait l'air d'un second candidat. Les 48 décisions qui le
