@@ -55,7 +55,7 @@
         </ul>
       </section>
       <section class="ab-carte ab-offre ab-offre-payant">
-        <div class="ab-offre-tete"><h3 data-en="With the paid subscription">Avec l'abonnement payant</h3><span class="ab-pastille-offre" data-en="$10 / month · $80 / year">10 $ / mois · 80 $ / an</span></div>
+        <div class="ab-offre-tete"><h3 data-en="With the paid subscription">Avec l'abonnement payant</h3><span class="ab-pastille-offre" data-en="$10 / month · $96 / year">10 $ / mois · 96 $ / an</span></div>
         <p class="ab-note" style="margin:0 0 10px" data-en="Everything free, plus:">Tout le gratuit, plus :</p>
         <ul class="ab-avantages">
           <li class="ab-av-bleu"><span class="ab-icone" aria-hidden="true">🔔</span><div data-en="<strong>An email alert when your projects move</strong>: a new decision, an item awaiting a council vote, an updated recap. Nothing in the weeks when nothing moves — no need to keep checking."><strong>Une alerte par courriel quand vos projets bougent</strong> : une nouvelle décision, un dossier qui attend un vote au conseil, un récapitulatif mis à jour. Rien les semaines où rien n'avance — plus besoin de revenir vérifier.</div></li>
@@ -67,7 +67,7 @@
             <br><span class="ab-note">Offert pour les dossiers avec un montant : ceux des grands projets suivis (tramway, logement…), et chaque nouveau dossier depuis le 15 septembre 2026, dès le lendemain de sa publication. Les autres dossiers de 2026 ne l'ont pas encore : à Québec, demandez-le, il est lu en priorité, normalement le lendemain.</span></div></li>
           <li class="ab-av-rose"><span class="ab-icone" aria-hidden="true">📊</span><div data-en="<strong>Export to a spreadsheet or PDF</strong> (Excel, CSV or printable PDF): you choose a project, a word or a name and the columns, with the money details when they have been read"><strong>L'export en tableur ou en PDF</strong> (Excel, CSV ou PDF à imprimer) : vous choisissez un projet, un mot ou un nom et les colonnes, avec le détail de l'argent quand il est lu</div></li>
         </ul>
-        <p class="ab-prix" id="prix" data-en="<span class=&quot;ab-prix-montant&quot;>$10</span> <span class=&quot;ab-note&quot;>a month, or $80 a year (planned price)</span>"><span class="ab-prix-montant">10 $</span> <span class="ab-note">par mois, ou 80 $ par an (prix prévu)</span></p>
+        <p class="ab-prix" id="prix" data-en="<span class=&quot;ab-prix-montant&quot;>$10</span> <span class=&quot;ab-note&quot;>a month, or $96 a year — $8 a month (planned price)</span>"><span class="ab-prix-montant">10 $</span> <span class="ab-note">par mois, ou 96 $ par an — 8 $ par mois (prix prévu)</span></p>
         <p class="ab-note" data-en="One subscription for every city covered — not one per city.">Un seul abonnement pour toutes les villes couvertes — pas un abonnement par ville.</p>
       </section>
     </div>
@@ -147,7 +147,7 @@
     const etat = await etatAbonnement(s);
     const annule = new URLSearchParams(location.search).get('abonnement') === 'annule';
     if (etat?.ouvert) {
-      document.querySelector('#prix').innerHTML = `<span class="ab-prix-montant">${tr('10 $', '$10')}</span> <span class="ab-note">${etat.forfaits?.annuel ? tr('par mois, ou 80 $ par an', 'a month, or $80 a year') : tr('par mois', 'a month')}</span>`;
+      document.querySelector('#prix').innerHTML = `<span class="ab-prix-montant">${tr('10 $', '$10')}</span> <span class="ab-note">${etat.forfaits?.annuel ? tr('par mois, ou 96 $ par an', 'a month, or $96 a year') : tr('par mois', 'a month')}</span>`;
     }
     if (!etat || !(etat.abonne || etat.peutPayer || etat.ouvert)) return;
 
@@ -162,10 +162,10 @@
     } else if (etat.peutPayer) {
       payer.innerHTML = `<h3><span class="ab-icone" aria-hidden="true">💳</span> ${tr("S'abonner", 'Subscribe')}</h3>
         ${annule ? `<p class="ab-note">${tr('Paiement interrompu : rien n\'a été débité.', 'Payment interrupted: nothing was charged.')}</p>` : ''}
-        <p>${etat.forfaits?.annuel ? tr('10 $ par mois, ou 80 $ par an (quatre mois gratuits)', '$10 a month, or $80 a year (four months free)') : tr('10 $ par mois', '$10 a month')}${tr(', pour toutes les villes couvertes. Le paiement se fait sur la page sécurisée de Stripe ; la carte n\'est jamais vue par DossierQuébec. <strong>Annulable en tout temps</strong>, depuis cette page ou Mes dossiers : l\'abonnement reste actif jusqu\'à la fin de la période payée.', ', for every city covered. Payment happens on Stripe\'s secure page; DossierQuébec never sees your card. <strong>Cancel anytime</strong>, from this page or My files: the subscription stays active until the end of the paid period.')}</p>
+        <p>${etat.forfaits?.annuel ? tr('10 $ par mois, ou 96 $ par an — soit 8 $ par mois', '$10 a month, or $96 a year — that is $8 a month') : tr('10 $ par mois', '$10 a month')}${tr(', pour toutes les villes couvertes. Le paiement se fait sur la page sécurisée de Stripe ; la carte n\'est jamais vue par DossierQuébec. <strong>Annulable en tout temps</strong>, depuis cette page ou Mes dossiers : l\'abonnement reste actif jusqu\'à la fin de la période payée.', ', for every city covered. Payment happens on Stripe\'s secure page; DossierQuébec never sees your card. <strong>Cancel anytime</strong>, from this page or My files: the subscription stays active until the end of the paid period.')}</p>
         ${bandeauEssai(etat)}
         <p><button type="button" class="ab-bouton" data-action="payer" data-forfait="mensuel">${tr("S'abonner — 10 $ par mois", 'Subscribe — $10 a month')}</button>
-          ${etat.forfaits?.annuel ? `<button type="button" class="ab-bouton ab-bouton-second" data-action="payer" data-forfait="annuel">${tr("S'abonner — 80 $ par an", 'Subscribe — $80 a year')}</button>` : ''}</p>
+          ${etat.forfaits?.annuel ? `<button type="button" class="ab-bouton ab-bouton-second" data-action="payer" data-forfait="annuel">${tr("S'abonner — 96 $ par an", 'Subscribe — $96 a year')}</button>` : ''}</p>
         <p class="ab-note ab-payer-etat" aria-live="polite"></p>`;
     } else if (!etat.connecte) {
       // Ouvert à tous, mais pas connecté : le lien de connexion ramène ici.
