@@ -15,14 +15,105 @@
 // côté client via `deputes` (voir build-deputes-data.js), qui porte le même
 // ID assnat — évite de répéter des milliers de fois les mêmes chaînes de
 // caractères dans le HTML final.
+//
+// LE NOMINATIF NE VA PLUS DANS LA PAGE (21 septembre 2026). Mesuré : 1 032 ko
+// pour 735 votes, soit 78 % des données de votes et 61 % du poids de la page —
+// recopiés dans les six pages de la racine et retéléchargés par chaque
+// visiteur, alors qu'ils ne servent qu'à une chose : afficher les noms quand
+// quelqu'un déplie UNE carte de vote. Ils partent donc dans un fichier par
+// vote, chargé à ce moment-là (~1,4 ko).
+//
+// Les deux autres usages du nominatif étaient des AGRÉGATS que le navigateur
+// recalculait à chaque visite. Ils sont calculés ici, une fois :
+//   `divise`    par vote — les partis se sont-ils divisés ? (735 booléens au
+//               lieu de 1 032 ko reparcourus)
+//   `presences` par député — le taux de participation aux votes nominaux
+//               (125 fiches au lieu d'un index reconstruit au chargement)
+// Leur calcul reproduit exactement ce que faisait commun/dq.js, ordre des clés
+// compris : c'est lui qui décide des égalités dans `divise`.
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 const VOTES_PATH = 'data/votes.json';
 const BILLS_PATH = 'data/bills.json';
+const NOMINAL_DIR = 'data/votes';
 const HTML_PATH = 'index.html';
 const START_MARKER = '/* VOTES_DATA_START */';
 const END_MARKER = '/* VOTES_DATA_END */';
+
+// Les partis pris en compte pour juger qu'un vote « divise ». Même liste que
+// celle qui vivait dans commun/dq.js.
+const PARTIS = ['CAQ', 'PLQ', 'QS', 'PQ', 'PCQ'];
+
+// Un vote divise quand les partis ne penchent pas tous du même côté. Le camp
+// d'un parti est celui où il a le plus de voix ; à égalité, c'est l'ordre
+// pour → contre → abstentions qui tranche, comme avant.
+function voteDivise(nominal) {
+  const pos = {};
+  for (const camp of ['pour', 'contre', 'abstentions']) {
+    for (const entree of nominal[camp] || []) {
+      const parti = entree[1];
+      if (!PARTIS.includes(parti)) continue;
+      pos[parti] = pos[parti] || { pour: 0, contre: 0, abstentions: 0 };
+      pos[parti][camp]++;
+    }
+  }
+  const camps = new Set(Object.values(pos).map((o) => Object.entries(o).sort((a, b) => b[1] - a[1])[0][0]));
+  return camps.size > 1;
+}
+
+// Taux de participation par député. L'Assemblée ne publie pas d'assiduité :
+// le meilleur indicateur public est la présence aux votes nominaux, comptée
+// depuis le premier vote où la personne apparaît — voir la note complète dans
+// commun/dq.js, d'où ce calcul vient mot pour mot.
+function calculerPresences(out) {
+  const parDate = out.filter((v) => v.date).slice().sort((a, b) => a.date.localeCompare(b.date));
+  const vus = new Map();
+  for (const v of out) {
+    const ids = new Set([...v.nominal.pour, ...v.nominal.contre, ...v.nominal.abstentions].map(([id]) => id));
+    for (const id of ids) {
+      if (!vus.has(id)) vus.set(id, new Set());
+      vus.get(id).add(v.id);
+    }
+  }
+  const presences = {};
+  for (const [id, apparus] of vus) {
+    if (apparus.size === 0) continue;
+    const siens = parDate.filter((v) => apparus.has(v.id));
+    if (siens.length === 0) continue;
+    const depuis = siens[0].date;
+    const eligibles = parDate.filter((v) => v.date >= depuis);
+    const participes = eligibles.filter((v) => apparus.has(v.id)).length;
+    presences[id] = { participated: participes, total: eligibles.length, rate: Math.round((participes / eligibles.length) * 100) };
+  }
+  return presences;
+}
+
+// Un fichier par vote. Les votes passés ne changent jamais : le rafraîchissement
+// quotidien n'ajoute que les nouveaux, au lieu de réécrire un bloc d'un mégaoctet
+// dans six pages. On retire quand même les fichiers dont le vote a disparu du jeu.
+function ecrireNominal(out) {
+  mkdirSync(NOMINAL_DIR, { recursive: true });
+  const attendus = new Set();
+  let ecrits = 0;
+  for (const v of out) {
+    const nom = `${v.id}.json`;
+    attendus.add(nom);
+    const contenu = JSON.stringify(v.nominal);
+    const chemin = join(NOMINAL_DIR, nom);
+    // Ne réécrire que ce qui change : garde l'horodatage des fichiers stables
+    // et le diff quotidien minuscule.
+    if (existsSync(chemin) && readFileSync(chemin, 'utf-8') === contenu) continue;
+    writeFileSync(chemin, contenu);
+    ecrits++;
+  }
+  let retires = 0;
+  for (const f of readdirSync(NOMINAL_DIR)) {
+    if (f.endsWith('.json') && !attendus.has(f)) { rmSync(join(NOMINAL_DIR, f)); retires++; }
+  }
+  return { ecrits, retires, total: attendus.size };
+}
 
 function normTitle(s) {
   return (s || '')
@@ -88,8 +179,19 @@ function main() {
     };
   });
 
-  const json = JSON.stringify(out);
-  const block = `${START_MARKER}\nconst votes = ${json};\n`;
+  // Les agrégats se calculent AVANT de retirer le nominatif : c'est lui qui les nourrit.
+  for (const v of out) v.divise = voteDivise(v.nominal);
+  const presences = calculerPresences(out);
+  const fichiers = ecrireNominal(out);
+
+  // Ce qui part dans la page : tout sauf le nominatif.
+  const allege = out.map(({ nominal, ...reste }) => reste);
+  const json = JSON.stringify(allege);
+  const block = `${START_MARKER}\nconst votes = ${json};\n`
+    + `/* Le détail nominatif de chaque vote vit dans ${NOMINAL_DIR}/<id>.json et se charge quand\n`
+    + `   on déplie une carte. Ici ne restent que les agrégats qui en dérivent : « divise » par\n`
+    + `   vote et « presences » par député. Ne pas éditer à la main. */\n`
+    + `const presences = ${JSON.stringify(presences)};\n`;
 
   const html = readFileSync(HTML_PATH, 'utf-8');
   const startIdx = html.indexOf(START_MARKER);
@@ -101,7 +203,11 @@ function main() {
   const updated = html.slice(0, startIdx) + block + html.slice(endIdx);
   writeFileSync(HTML_PATH, updated);
 
-  console.log(`${out.length} votes injectés dans ${HTML_PATH}.`);
+  const koPage = (Buffer.byteLength(json) / 1024).toFixed(0);
+  const koNominal = (out.reduce((t, v) => t + Buffer.byteLength(JSON.stringify(v.nominal)), 0) / 1024).toFixed(0);
+  console.log(`${out.length} votes injectés dans ${HTML_PATH} — ${koPage} ko dans la page.`);
+  console.log(`  détail nominatif sorti : ${koNominal} ko dans ${fichiers.total} fichiers (${fichiers.ecrits} écrit(s), ${fichiers.retires} retiré(s))`);
+  console.log(`  agrégats précalculés : ${out.filter((v) => v.divise).length} votes divisés, ${Object.keys(presences).length} taux de présence`);
   console.log(`  ${matched} rapprochés à un projet de loi connu, ${unmatchedWithBillNum} avec un n° de PL mais aucune correspondance dans bills.json (probablement hors du jeu de données Données Québec — pas de donnée inventée).`);
 }
 
