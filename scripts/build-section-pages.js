@@ -18,10 +18,12 @@
 //
 // Usage : node scripts/build-section-pages.js   (appelé par scripts/refresh.js)
 
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 const BASE = 'https://dossierquebec.ca';
 const SRC = 'index.html';
+const CSS_PATH = 'commun/dq.css';
+const JS_PATH = 'commun/dq.js';
 
 // slug = nom de fichier (donc l'URL via cleanUrls) ; view = id de section (#view-…)
 const SECTIONS = [
@@ -65,10 +67,17 @@ must(src.includes('<button class="active" data-view="apercu">'), "bouton nav Ape
 // ne fait PAS planter le navigateur : il avale silencieusement tout ce qui suit,
 // et une partie du site perd son style sans qu'aucune erreur n'apparaisse. C'est
 // arrivé deux fois — d'où ce contrôle, ici, où il bloque aussi le build quotidien.
+//
+// La feuille vivait en ligne dans index.html ; elle est sortie dans commun/dq.css pour que le
+// navigateur la garde d'une page à l'autre. Le contrôle l'a suivie : on vérifie AUSSI que la
+// page pointe encore dessus, sinon une page sans style partirait en production sans rien casser
+// de visible au build.
 (function verifierCss(){
-  const d = src.indexOf('<style'), f = src.indexOf('</style>');
-  must(d !== -1 && f !== -1, 'bloc <style> introuvable');
-  const css = src.slice(src.indexOf('>', d) + 1, f);
+  must(src.includes(`<link rel="stylesheet" href="/${CSS_PATH.replace(/\\/g, '/')}">`),
+    `index.html ne pointe plus vers /${CSS_PATH}`);
+  must(!/<style[\s>]/.test(src), 'un bloc <style> est revenu dans index.html : la feuille doit vivre dans ' + CSS_PATH);
+  must(existsSync(CSS_PATH), `${CSS_PATH} introuvable`);
+  const css = readFileSync(CSS_PATH, 'utf8');
   const ouvrants = (css.match(/\/\*/g) || []).length;
   const fermants = (css.match(/\*\//g) || []).length;
   must(ouvrants === fermants, `commentaires CSS déséquilibrés : ${ouvrants} « /* » pour ${fermants} « */ »`);
@@ -91,11 +100,15 @@ must(src.includes('<button class="active" data-view="apercu">'), "bouton nav Ape
   console.log(`✓ CSS sain (${o} règles, ${ouvrants} commentaires équilibrés, aucune variable orpheline)`);
 })();
 
-// Santé du JavaScript. Une seule erreur de syntaxe tue TOUT le script en ligne :
-// plus de rendu des projets de loi, plus de filtres, plus de bascule de langue —
-// une page qui s'affiche mais ne fait plus rien. Ça s'est produit sur une simple
-// apostrophe mal échappée dans une chaîne. On compile donc chaque bloc avant de
-// publier. `new Function` vérifie la syntaxe sans exécuter le code.
+// Santé du JavaScript. Une seule erreur de syntaxe tue TOUT le script : plus de rendu des
+// projets de loi, plus de filtres, plus de bascule de langue — une page qui s'affiche mais ne
+// fait plus rien. Ça s'est produit sur une simple apostrophe mal échappée dans une chaîne. On
+// compile donc chaque bloc avant de publier. `new Function` vérifie la syntaxe sans exécuter.
+//
+// La logique est sortie dans commun/dq.js ; elle est compilée ici comme le reste. Deux contrôles
+// de plus, parce qu'un découpage mal refait ne casserait RIEN au build tout en publiant un site
+// mort : la page doit encore appeler le fichier, et l'appel doit venir APRÈS les données (un
+// script classique lit la portée globale dans l'ordre d'exécution, pas dans le désordre).
 (function verifierJs(){
   const blocs = [...src.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)];
   let n = 0;
@@ -107,7 +120,18 @@ must(src.includes('<button class="active" data-view="apercu">'), "bouton nav Ape
     try { new Function(b[2]); }
     catch (e) { must(false, `erreur de syntaxe JavaScript dans le bloc <script> n° ${n} : ${e.message}`); }
   }
-  console.log(`✓ JavaScript sain (${n} bloc(s) compilé(s))`);
+
+  const appel = `<script src="/${JS_PATH}"></script>`;
+  must(src.includes(appel), `index.html n'appelle plus ${JS_PATH}`);
+  must(!/<script src="\/commun\/dq\.js"[^>]*\stype=["']module["']/.test(src),
+    `${JS_PATH} ne doit PAS être un module : il ne verrait plus les données restées en ligne`);
+  must(src.indexOf('/* VOTES_DATA_START') < src.indexOf(appel),
+    `${JS_PATH} est appelé AVANT les données : la logique ne les verrait pas`);
+  must(existsSync(JS_PATH), `${JS_PATH} introuvable`);
+  try { new Function(readFileSync(JS_PATH, 'utf8')); }
+  catch (e) { must(false, `erreur de syntaxe JavaScript dans ${JS_PATH} : ${e.message}`); }
+  n++;
+  console.log(`✓ JavaScript sain (${n} bloc(s) compilé(s), dont ${JS_PATH})`);
 })();
 
 function esc(s){ return s.replace(/"/g, '&quot;'); }
