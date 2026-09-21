@@ -11,6 +11,10 @@ const MIME = {
   '.json': 'application/json; charset=utf-8',
   '.xml': 'application/xml; charset=utf-8',   // feed.xml, sitemap.xml
   '.css': 'text/css; charset=utf-8',
+  // Sans ces deux-là, les icônes partaient en application/octet-stream et le navigateur
+  // refusait de les afficher : on ne pouvait pas vérifier un favicon en local.
+  '.svg': 'image/svg+xml',
+  '.png': 'image/png',
 };
 
 // Sert le dossier tel quel, PLUS les « URL propres » comme Vercel (cleanUrls) :

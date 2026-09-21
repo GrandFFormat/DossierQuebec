@@ -1,0 +1,38 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DQ">
+  <!--
+    Monogramme DQ — la marque du site principal (20 septembre 2026).
+    Remplace l'ancien favicon : un dossier blanc sur rond bleu #1877F2, qui était le bleu de
+    Facebook et ne disait rien du site.
+
+    Vocabulaire de la maison : coins carrés, aplats, pas de dégradé ni d'ombre.
+      tuile   #0E4FC1  le bleu Québec (jeton gold-bg) : tient sur barre d'onglets claire ET sombre
+      lettres #F2F0EA  le crème du papier (jeton paper) : 6,3:1 sur le bleu
+      bandeau #FFD24D  le jaune d'accent (jeton yellow) : 5,0:1 sur le bleu
+
+    Aucun double trait d'union dans ce bloc : un commentaire XML l'interdit, et un SVG qui ne
+    se parse pas ne s'affiche pas du tout.
+
+    Les lettres sont dessinées, pas composées : un favicon ne peut pas dépendre d'une police
+    chargée. Hauteur de capitale 32 dans un repère de 56,35 × 36,2, posé à 0,95 et centré dans
+    les 52 unités laissées libres par le bandeau. La queue du Q descend sous la ligne de base et
+    sort du bol : c'est elle qui empêche le Q de se lire comme un O à 16 px.
+
+    Le bandeau commence à 52 sur 64, soit 13/16 : la frontière tombe pile sur un pixel à 16, 32,
+    48 et 64 px. À 53 elle tombait entre deux, et l'anticrénelage posait un liseré gris.
+
+    Le PNG jumeau (dq-512.png, icône d'accueil iPhone et logo des données structurées) se
+    refabrique en rendant ce fichier à 512 px.
+  -->
+  <rect width="64" height="64" fill="#0E4FC1"/>
+  <g fill="#F2F0EA" transform="translate(5.23,8.81) scale(0.95)">
+    <!-- D : hampe droite à gauche, panse à droite ; le contrepoinçon est un trou (pair-impair). -->
+    <path fill-rule="evenodd" d="M0,0 H12 C19.2,0 23,5.4 23,16 C23,26.6 19.2,32 12,32 H0 Z
+                                 M8,7 H11.5 C14.4,7 15.8,9.8 15.8,16 C15.8,22.2 14.4,25 11.5,25 H8 Z"/>
+    <!-- Q : bol plein, puis contrepoinçon. -->
+    <path fill-rule="evenodd" d="M40.5,0 A11.5,16 0 1,1 40.5,32 A11.5,16 0 1,1 40.5,0 Z
+                                 M40.5,7.2 A4.3,8.8 0 1,0 40.5,24.8 A4.3,8.8 0 1,0 40.5,7.2 Z"/>
+    <!-- Queue du Q : barre épaisse partant de la paroi interne et traversant le bol. -->
+    <path d="M47.85,20.8 L56.35,31.8 L50.65,36.2 L42.15,25.2 Z"/>
+  </g>
+  <rect y="52" width="64" height="12" fill="#FFD24D"/>
+</svg>
