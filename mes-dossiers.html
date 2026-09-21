@@ -62,7 +62,7 @@
   boutonRetourEnHaut();
 </script>
 <script type="module">
-  import { client, VILLES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, limiteSuivis, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, mesurer, formulaireMessage, dernierVolet, EN, tr } from '/commun/abonnes-client.js';
+  import { client, VILLES, VILLES_PROJETS, VILLES_EN, VILLES_ATTENDUES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, limiteSuivis, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, mesurer, formulaireMessage, dernierVolet, EN, tr } from '/commun/abonnes-client.js';
   import { boiteInfolettre } from '/commun/infolettre.js';
   const pl = (n, sing, plur) => (n > 1 ? plur : sing);
   import { libelleEn, themeEn } from '/quebec/assets/libelles-en.js';
@@ -73,7 +73,7 @@
   let traductionsEn = null;
   const chargerTraductionsEn = () => {
     traductionsEn ??= EN
-      ? Promise.all(Object.keys(VILLES).map((v) => fetch(`/${v}/data/resumes-en.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)))
+      ? Promise.all(VILLES_EN.map((v) => fetch(`/${v}/data/resumes-en.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)))
         .then((fichiers) => ({
           // Québec indexe ses résumés par nom de fichier PDF, Montréal par numéro de résolution ou
           // par numéro de dossier : les deux vivent dans la même table, les clés ne se croisent pas.
@@ -369,7 +369,7 @@
   };
   let recentesToutes = null;
   const chargerRecentes = async () => {
-    recentesToutes ??= Promise.all(Object.keys(VILLES).map((v) => fetch(`/${v}/data/recentes.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)))
+    recentesToutes ??= Promise.all(VILLES_PROJETS.map((v) => fetch(`/${v}/data/recentes.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)))
       .then((fichiers) => ({ dossiers: fichiers.flatMap((f) => f?.dossiers ?? []), depuis: fichiers.map((f) => f?.depuis).filter(Boolean).sort()[0] ?? null }));
     return recentesToutes;
   };
@@ -524,7 +524,7 @@
   const sansFormeJuridique = (nom) => String(nom ?? '').trim().replace(/[\s,]+(?:inc|ltée|limitée|s\.?e\.?n\.?c|s\.?e\.?c|enr|coop)\.?$/i, '').trim();
   let dossiersAnnee = null;
   const chargerDossiersAnnee = () => {
-    dossiersAnnee ??= Promise.all(Object.keys(VILLES).map(async (ville) => {
+    dossiersAnnee ??= Promise.all(VILLES_PROJETS.map(async (ville) => {
       const f = await fetch(`/${ville}/data/dossiers.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
       return (f?.dossiers ?? []).map((d) => ({ ...d, ville, themeInfo: f.themes?.[d.theme] ?? null }));
     })).then((listes) => enAnglais(listes.flat()));
@@ -602,7 +602,7 @@
     dessiner();
     aLOuverture(zone.querySelector('details.ab-organismes'), async () => {
       const [suggestions] = await Promise.all([
-        Promise.all(Object.keys(VILLES).map((v) => fetch(`/${v}/data/organismes.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)))
+        Promise.all(VILLES_PROJETS.map((v) => fetch(`/${v}/data/organismes.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)))
           .then((fichiers) => fichiers.flatMap((f) => f?.organismes ?? [])),
         suivis.length ? chargerAnnee() : null,
       ]);
@@ -830,11 +830,11 @@ ${liste.map(fiche).join('')}
   async function exportTableur(s, abonne) {
     const zone = $('#export');
     if (!s || !abonne) { zone.innerHTML = ''; return; }
-    const index = await Promise.all(Object.keys(VILLES).map(async (ville) => [ville, await indexVille(ville)]));
+    const index = await Promise.all(VILLES_PROJETS.map(async (ville) => [ville, await indexVille(ville)]));
     // Les projets, rangés par ville, les plus fournis d'abord, avec leur nombre de dossiers.
     const projets = index.flatMap(([ville, idx]) => Object.entries(idx?.projets ?? {}).filter(([, p]) => p.decisions > 0).map(([cle, p]) => ({ ville, cle, titre: p.titre, dossiers: p.dossiers ?? 0 })))
       .sort((a, b) => b.dossiers - a.dossiers);
-    const groupesProjets = Object.keys(VILLES).map((ville) => [ville, projets.filter((p) => p.ville === ville)]).filter(([, ps]) => ps.length);
+    const groupesProjets = VILLES_PROJETS.map((ville) => [ville, projets.filter((p) => p.ville === ville)]).filter(([, ps]) => ps.length);
     if (!groupesProjets.length) { zone.innerHTML = ''; return; }
     const ouvertExport = zone.querySelector('details.ab-pliable')?.open ? ' open' : '';
     zone.innerHTML = `<details class="ab-carte ab-pliable ab-export"${ouvertExport}>
@@ -1053,7 +1053,7 @@ ${liste.map(fiche).join('')}
   async function dossiersOuverts(s, abonne) {
     const zone = $('#ouverts');
     if (!s || !abonne) { zone.innerHTML = ''; return; }
-    const fichiers = await Promise.all(Object.keys(VILLES).map(async (ville) => [ville, await fetch(`/${ville}/data/attendues.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)]));
+    const fichiers = await Promise.all(VILLES_ATTENDUES.map(async (ville) => [ville, await fetch(`/${ville}/data/attendues.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)]));
     // attendues.json est léger (le compte du titre en vient) ; les résumés anglais, eux, attendent l'ouverture.
     const tous = fichiers.flatMap(([ville, f]) => (f?.decisions ?? []).map((d) => ({ ...d, ville, themeInfo: f.themes?.[d.theme] ?? null, titresProjets: d.projets.map((cle) => f.projets?.[cle] ?? cle) })));
     let traduction = null;
@@ -1174,7 +1174,7 @@ ${liste.map(fiche).join('')}
 
   async function suggestions(s, suivisIds) {
     const blocs = [];
-    const index = await Promise.all(Object.keys(VILLES).map(async (ville) => [ville, await indexVille(ville)]));
+    const index = await Promise.all(VILLES_PROJETS.map(async (ville) => [ville, await indexVille(ville)]));
     for (const [ville, idx] of index) {
       const projets = Object.entries(idx?.projets ?? {}).filter(([cle, p]) => p.decisions > 0 && !suivisIds.has(`${ville}|projet:${cle}`));
       if (!projets.length) continue;
