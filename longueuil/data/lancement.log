@@ -2,10 +2,25 @@
 > dossiervillelongueuil@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit ac5f246 — Node v22.23.2
+Code : commit f30bd59 — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
+
+=== Élus de la Ville ===
+18 membres du conseil de ville (20 avec les conseillers d'arrondissement) écrits dans data/elus.json
+Partis : Coalition Longueuil 17
+Postes vacants : Parc-Michel-Chartrand (Vieux-Longueuil)
+
+=== Districts électoraux ===
+18 districts écrits dans data/districts.json
+Contours : 8343 points -> 874 (307 ko -> 29 ko)
+Aucun écart entre la couche des districts et la liste des élus.
+
+=== Élus de la Ville (numéros de district) ===
+18 membres du conseil de ville (20 avec les conseillers d'arrondissement) écrits dans data/elus.json
+Partis : Coalition Longueuil 17
+Postes vacants : Parc-Michel-Chartrand (Vieux-Longueuil)
 
 === Calendrier des séances ===
 Conseil de ville : 96 séances (93 avec procès-verbal, 65 avec document de séance)
@@ -38,8 +53,8 @@ Pastilles thématiques :
       3  Motions et hommages
       0  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-07-22) ===
-Fenêtre depuis 2026-07-22 : 0 séance(s) relue(s), 22 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-07-23) ===
+Fenêtre depuis 2026-07-23 : 0 séance(s) relue(s), 22 vote(s) conservé(s) du fichier précédent.
 
 22 votes nominaux écrits dans data/votes.json (2025 : 22, 2026 : 0 ; 0 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
@@ -107,11 +122,16 @@ Mesure de 32 termes sur 46 procès-verbaux de 2025 et 2026 et 901 décisions…
 0 document(s) lu(s) ; 556 sommaires indexés dans data/sommaires.json.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-22 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-07-23 pas encore résumés (plafond : 120)…
 467 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
+=== Fichiers pour « Mes dossiers » ===
+Projets publics : 1 projets · index 0.7 Ko · fichiers de projet 68 Ko au total.
+Dossiers de l'année : 637 · 653 Ko · organismes suggérés : 100.
+Décisions récentes : 281 dossiers depuis le 2026-05-25 · 310 Ko.
+
 === Bilan ===
-  étapes         : 8
+  étapes         : 12
   échecs         : aucun
   avertissements : aucun
