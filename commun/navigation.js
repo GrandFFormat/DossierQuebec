@@ -61,7 +61,7 @@ export function dernierVolet() {
 // ailleurs ou sur Échap. Une ville ajoutée à VILLES y apparaît toute seule.
 export function menuVilles(details, villeActuelle) {
   if (!details) return;
-  details.innerHTML = `<summary>${villeActuelle ? `<span class="ab-villes-libelle">${tr('Ville : ', 'City: ')}</span>${echapper(VILLES[villeActuelle])}` : tr('Choisir une ville', 'Choose a city')}</summary>
+  details.innerHTML = `<summary>${villeActuelle ? `<span class="ab-villes-libelle">${tr('Ville : ', 'Town: ')}</span>${echapper(VILLES[villeActuelle])}` : tr('Choisir une ville', 'Choose a city')}</summary>
     <ul class="ab-villes-menu">
       ${Object.entries(VILLES).map(([v, nom]) => `<li><a href="/${v}/"${v === villeActuelle ? ' aria-current="true"' : ''}>${echapper(nom)}</a></li>`).join('')}
       <li class="ab-villes-dq"><a href="/">DossierQuébec <span>(${tr('provincial', 'Québec province')})</span></a></li>
@@ -94,7 +94,12 @@ export function enteteVolet() {
     outils.prepend(mobile);
     menuVilles(mobile, ville);
     // Sur cellulaire, la ligne des outils est déjà pleine : la pastille de langue va au bout des liens.
-    const externe = document.querySelector('header nav a.externe');
+    // Aucun lien de volet ne porte la classe `externe` : on prend donc aussi le dernier lien de la
+    // navigation qui s'ouvre dans un nouvel onglet (« Ville de Montréal ↗ »). Sans ça, la pastille
+    // retombait dans la ligne des outils — invisible tant que « Ville : » y était caché, mais qui
+    // renvoyait la lune à la ligne dès qu'on l'a affiché (21 septembre 2026).
+    const externe = document.querySelector('header nav a.externe')
+      ?? [...document.querySelectorAll('header nav > a[target="_blank"]')].pop();
     if (PAGE_BILINGUE) (externe ? externe.after(pastilleLangue('ab-langue-mobile')) : mobile.after(pastilleLangue('ab-langue-mobile')));
   }
   compterPageEn();
