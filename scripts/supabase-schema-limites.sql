@@ -1,3 +1,6 @@
+-- ⚠️ 21 sept. 2026 : limite_mots_cles (5 PAR LISTE, villes et Assemblée) et limite_dossiers_suivis
+--    (même limite, sous verrou) sont remplacées par scripts/supabase-schema-mots-cles-portee.sql.
+--    Ne pas recoller ces deux fonctions d'ici par-dessus.
 -- Les limites du palier citoyen (20 septembre 2026). À exécuter une fois dans Supabase :
 -- SQL Editor → coller → Run.
 --

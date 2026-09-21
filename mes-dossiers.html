@@ -267,20 +267,20 @@
   }
 
   const AVANTAGES_PAYANTS = EN ? `
-        <li><strong>An email alert when your projects move</strong>: a new decision, an item awaiting a vote, an updated recap — and, at the National Assembly, a bill you follow that moves to its next stage. Nothing in the weeks when nothing moves.</li>
-        <li><strong>The elected members you follow</strong>: an email when a minister or MNA you follow introduces a bill.</li>
+        <li><strong>An email alert when your projects move</strong>: a new item or a new decision — and, in Québec City and Lévis, an item that gets its final decision — with the updated recap when there is one. At the National Assembly, a bill you follow that moves to its next stage <span class="ab-note">(from the first bills of the new legislature, convened on November 17, 2026)</span>. Nothing in the weeks when nothing moves.</li>
+        <li><strong>The elected members you follow</strong>: an email when a minister or MNA you follow introduces a bill <span class="ab-note">(from the first bills of the new legislature, convened on November 17, 2026)</span>.</li>
         <li><strong>Money details</strong>: who receives, who pays, the bids and the City's estimate, the breakdown by year, the conditions.
-          <br><span class="ab-note">Included as soon as it is read: the major projects followed, and every new item. In Québec City, anything else on request — normally read the next day.</span></li>
+          <br><span class="ab-note">In Québec City only for now. Included as soon as it is read: the major projects followed, and every new item. In Québec City, anything else on request — normally read the next day.</span></li>
         <li><strong>Alerts for your neighbourhood, your street or a keyword</strong>: “everything the City decides about 1re Avenue”, “in Limoilou”, “about snow removal”. And, in a separate list, keywords for the National Assembly: every new bill that mentions them.</li>
         <li><strong>Follow an organization or a company</strong>: this year's decisions that name it — contracts, grants, agreements — with each amount as written, and an alert when a new one names it.</li>
         <li><strong>What's coming up at council</strong>: the items on the agenda of each meeting, with their summary — estimated from the documents the City publishes.</li>
         <li><strong>The monthly recap, subscriber edition</strong>: everything the City decided in the month, in plain language. <a class="ab-lien" href="/exemple-compte-rendu-aout-2026">See the August 2026 issue</a> (in French).</li>
         <li><strong>Export to a spreadsheet or PDF</strong> (Excel, CSV or printable PDF): you choose a project, a word or a name and the columns, with the money details when they have been read.</li>
         <li class="ab-note">Per account: 10 projects or bills followed, 5 city keywords and 5 Assembly keywords, 3 organizations, 10 exports a month.</li>` : `
-        <li><strong>Une alerte par courriel quand vos projets bougent</strong> : une nouvelle décision, un dossier qui attend un vote, un récapitulatif mis à jour — et, à l'Assemblée nationale, un projet de loi suivi qui passe une étape. Rien les semaines où rien n'avance.</li>
-        <li><strong>Les élus que vous suivez</strong> : un courriel quand un ministre ou un député que vous suivez présente un projet de loi.</li>
+        <li><strong>Une alerte par courriel quand vos projets bougent</strong> : un nouveau dossier, une nouvelle décision — et, à Québec et à Lévis, un dossier qui reçoit sa décision finale — avec le récapitulatif mis à jour s'il y en a un. À l'Assemblée nationale, un projet de loi suivi qui passe à l'étape suivante <span class="ab-note">(dès les premiers projets de loi de la nouvelle législature, convoquée le 17 novembre 2026)</span>. Rien les semaines où rien n'avance.</li>
+        <li><strong>Les élus que vous suivez</strong> : un courriel quand un ministre ou un député que vous suivez présente un projet de loi <span class="ab-note">(dès les premiers projets de loi de la nouvelle législature, convoquée le 17 novembre 2026)</span>.</li>
         <li><strong>Le détail de l'argent</strong> : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions.
-          <br><span class="ab-note">Inclus dès qu'il est lu : les grands projets suivis, et chaque nouveau dossier. À Québec, le reste sur demande — normalement lu le lendemain.</span></li>
+          <br><span class="ab-note">À Québec seulement pour l'instant. Inclus dès qu'il est lu : les grands projets suivis, et chaque nouveau dossier. À Québec, le reste sur demande — normalement lu le lendemain.</span></li>
         <li><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : « tout ce que la Ville décide sur la 1re Avenue », « dans Limoilou », « sur le déneigement ». Et, dans une liste à part, des mots-clés pour l'Assemblée : chaque nouveau projet de loi qui en parle.</li>
         <li><strong>Suivre un organisme ou une entreprise</strong> : les décisions de l'année qui le nomment — contrats, subventions, ententes — avec le montant de chacune tel qu'écrit, et une alerte quand une nouvelle le nomme.</li>
         <li><strong>Ce qui s'en vient au conseil</strong> : les dossiers à l'ordre du jour de chaque séance, avec leur résumé — estimé d'après les documents publiés par la Ville.</li>
@@ -1392,7 +1392,7 @@ ${liste.map(fiche).join('')}
       return;
     }
     if (!b) {
-      corps.innerHTML = `<p class="ab-note" style="margin-top:0">${tr("Ce projet de loi n'est plus dans les données de la législature en cours : sa législature s'est terminée avant qu'il soit adopté.", 'This bill is no longer in the current legislature’s data: its legislature ended before it was passed.')}</p>
+      corps.innerHTML = `<p class="ab-note" style="margin-top:0">${tr("Ce projet de loi ne figure plus dans les données de DossierQuébec, qui ne gardent que la législature en cours : soit il est devenu loi lors d'une session précédente, soit sa législature a pris fin. Sa fiche reste sur le site de l'Assemblée nationale.", 'This bill is no longer in DossierQuébec’s data, which only keeps the current legislature: either it became law in an earlier session, or its legislature ended. Its page remains on the National Assembly’s website.')}</p>
         <div class="ab-liens">${retirer}</div>`;
       return;
     }
@@ -1673,7 +1673,15 @@ ${liste.map(fiche).join('')}
     pourquoi({ connecte: true, abonne });
     suggestions(s, new Set(suivis.map((x) => `${x.ville}|${x.dossier_id}`)));
     if (!suivis.length) {
-      $('#liste').innerHTML = `<p class="ab-vide">${tr("Vous ne suivez aucun projet pour l'instant. Choisissez-en un ci-dessus, dans « Des projets à suivre ». Les projets de loi, eux, se suivront depuis la page <a class=\"ab-lien\" href=\"/projets-de-loi\">Projets de loi</a> dès les premiers projets de la nouvelle législature, convoquée le 17 novembre 2026.", "You aren't following any project yet. Pick one above, in “Projects to follow”. Bills can be followed from the <a class=\"ab-lien\" href=\"/projets-de-loi\">Bills</a> page as soon as the new legislature, convened on November 17, 2026, introduces its first ones.")}</p>`;
+      // La phrase sur les projets de loi dépend de ce qui existe : même règle que canFollow /
+      // loiVivante (commun/dq.js) ; '2026-11-17' est ASSEMBLY.newLegislatureOn (page sans dq.js).
+      const listeLois = await loisAssemblee();
+      const suivables = listeLois?.some((b) => (b.status === 'encours' || b.status === 'laisse_de_cote') && String(b.lastActivity || '') >= '2026-11-17');
+      const lien = `<a class="ab-lien" href="/projets-de-loi">${tr('Projets de loi', 'Bills')}</a>`;
+      const phraseLois = suivables
+        ? tr(` Ou un projet de loi à l'étude, depuis la page ${lien}.`, ` Or a bill under study, from the ${lien} page.`)
+        : tr(` Les projets de loi, eux, se suivront depuis la page ${lien} dès les premiers projets de la nouvelle législature, convoquée le 17 novembre 2026.`, ` Bills can be followed from the ${lien} page as soon as the new legislature, convened on November 17, 2026, introduces its first ones.`);
+      $('#liste').innerHTML = `<p class="ab-vide">${tr("Vous ne suivez aucun projet pour l'instant. Choisissez-en un ci-dessus, dans « Des projets à suivre ».", "You aren't following any project yet. Pick one above, in “Projects to follow”.")}${phraseLois}</p>`;
       return;
     }
     const parVille = new Map();

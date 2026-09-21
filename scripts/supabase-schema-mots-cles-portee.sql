@@ -18,11 +18,34 @@ create unique index if not exists alertes_mots_cles_par_portee on public.alertes
 
 -- 3. La limite de 5 vaut pour CHAQUE liste (scripts/supabase-schema-limites.sql en comptait 5 en
 --    tout). Même message, que Mes dossiers reconnaît déjà.
+--    Le verrou (voir 4) empêche deux ajouts simultanés de passer tous les deux sous la limite.
 create or replace function public.limite_mots_cles() returns trigger language plpgsql set search_path = '' as $$
 begin
+  perform pg_advisory_xact_lock(hashtext('alertes_mots_cles:' || new.user_id::text));
   if (select count(*) from public.alertes_mots_cles
        where user_id = new.user_id and portee = coalesce(new.portee, 'villes')) >= 5 then
     raise exception 'limite de 5 alertes par mot-clé atteinte';
+  end if;
+  return new;
+end $$;
+
+-- 4. Les projets suivis : même limite qu'avant (3 sans abonnement, 10 avec, projets des villes et
+--    projets de loi confondus), mais sous verrou. Sans lui, dix ajouts envoyés en même temps
+--    comptaient chacun les lignes déjà enregistrées sans voir les autres, et passaient tous
+--    (relecture du 21 sept. 2026). Le verrou ne vaut que pour ce compte et tombe à la fin de
+--    l'ajout ; le texte de l'erreur ne change pas (Mes dossiers et dq.js le reconnaissent).
+create or replace function public.limite_dossiers_suivis() returns trigger language plpgsql set search_path = '' as $$
+declare plafond int;
+begin
+  perform pg_advisory_xact_lock(hashtext('dossiers_suivis:' || new.user_id::text));
+  -- Suivre un projet déjà suivi passe par un upsert « ignoreDuplicates » : ce n'est pas un ajout.
+  if exists (select 1 from public.dossiers_suivis
+              where user_id = new.user_id and ville = new.ville and dossier_id = new.dossier_id) then
+    return new;
+  end if;
+  plafond := case when public.est_abonne(new.user_id) then 10 else 3 end;
+  if (select count(*) from public.dossiers_suivis where user_id = new.user_id) >= plafond then
+    raise exception 'limite de % projets suivis atteinte', plafond;
   end if;
   return new;
 end $$;

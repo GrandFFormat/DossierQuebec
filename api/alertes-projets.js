@@ -100,7 +100,8 @@ export const sansFormeJuridique = (nom) => String(nom ?? '').trim().replace(/[\s
 // ouvertes de l'Assemblée sur Données Québec par .github/workflows/refresh.yml, trois heures plus
 // tôt) :
 //   - un projet de loi suivi (dossiers_suivis, ville « assemblee », dossier_id « pl:<id> ») qui
-//     change d'étape ou de statut ;
+//     passe à une étape plus avancée (voir RANGS plus bas) ; ni un recul, ni une nouvelle date à
+//     la même étape, ni « laissé de côté » ne valent un courriel ;
 //   - un projet de loi qui contient un mot-clé de l'Assemblée de l'abonné (portee « assemblee »,
 //     une liste à part de ses mots de ville), dans le titre officiel ou le résumé ;
 //   - un projet de loi présenté par un ministre ou un·e député·e que l'abonné suit (table follows,
@@ -117,14 +118,17 @@ export const cleLoi = (id) => `pl-${id}`;
 //   vu les 27 août et 19 sept. 2026), jamais de l'Assemblée ; on garde alors l'état le plus avancé ;
 // - une nouvelle date à la même étape (une autre séance d'étude détaillée) n'est pas une étape ;
 // - « laissé de côté » (non réinscrit à une nouvelle session) n'est pas une étape non plus.
+// Les codes du CSV depot_commission_consultation et depot_commission_etude_detaillee sont des
+// DÉPÔTS de rapport de commission, même si scrapers/bills.js les écrit « Déposé en commission pour
+// consultations particulières » et « Étude détaillée entreprise » : ils prennent le rang du dépôt.
 const RANGS = [
   [/sanction/i, 50],
   [/^adoption\b(?! du principe)/i, 45],
   [/prise en considération/i, 40],
-  [/dépôt du rapport de commission\s*-\s*étude détaillée/i, 33],
+  [/dépôt du rapport de commission\s*-\s*étude détaillée|étude détaillée entreprise/i, 33],
   [/étude détaillée/i, 30],
   [/adoption du principe/i, 20],
-  [/dépôt du rapport de commission\s*-\s*consultation/i, 17],
+  [/dépôt du rapport de commission\s*-\s*consultation|déposé en commission pour consultations/i, 17],
   [/consultation/i, 15],
   [/présent/i, 10],
 ];
@@ -134,7 +138,9 @@ export const rangLoi = (b) => {
   return (Number(b.step) || 0) * 10;
 };
 export const etatLoi = (b) => ({ statut: b.status ?? '', note: b.note ?? '', rang: rangLoi(b) });
-const rangMemorise = (a) => (typeof a?.rang === 'number' ? a.rang : rangLoi({ note: a?.note }));
+// Le plus haut des deux : le rang enregistré, et celui que donnerait aujourd'hui la note gardée
+// (si l'ordre des étapes est affiné plus tard, un état ancien ne paraît pas en retard).
+const rangMemorise = (a) => Math.max(typeof a?.rang === 'number' ? a.rang : 0, rangLoi({ note: a?.note }));
 export const loiARecule = (b, a) => Boolean(a) && (rangLoi(b) < rangMemorise(a) || (a.statut === 'sanctionne' && b.status !== 'sanctionne'));
 export const loiABouge = (b, a) => Boolean(a) && (rangLoi(b) > rangMemorise(a) || (b.status === 'sanctionne' && a.statut !== 'sanctionne'));
 // Le résumé arrive en HTML (data/bills-resumes-fr.json) : on n'en garde que le texte.
@@ -184,7 +190,9 @@ const sectionLois = (titre, sousTitre, lois, precision, mot) => ({
 //              rôles ministériels de CETTE personne (homonymes), [] si on ne peut pas trancher
 //   rolesParrains  Map id → rôle du parrain (« Ministre des Finances »), de /data/bills.json
 //   dejaVu     (cle) => l'état déjà mémorisé, ou undefined
-export function alertesAssemblee({ lois, resumes, suivies = [], mots = [], personnes = [], rolesParrains = null, dejaVu, essai = false }) {
+//   vusEnDirect  Set des ids dont l'étape a été relue ce matin sur le site de l'Assemblée
+//              (liveStage de /data/bills.json), ou null si on ne le sait pas
+export function alertesAssemblee({ lois, resumes, suivies = [], mots = [], personnes = [], rolesParrains = null, vusEnDirect = null, dejaVu, essai = false }) {
   const sections = [];
   const aMemoriser = [];
   const parId = new Map(lois.map((b) => [String(b.id), b]));
@@ -195,6 +203,11 @@ export function alertesAssemblee({ lois, resumes, suivies = [], mots = [], perso
     const b = parId.get(String(id));
     if (!b) continue; // plus dans les données (nouvelle législature) : rien à dire
     if (essai) { bouges.push(b); continue; }
+    // Un matin où bill-details est en panne, les étapes retombent à celles du CSV : un état
+    // mémorisé ce jour-là ferait paraître neuve, le lendemain, une étape déjà franchie. Sans
+    // étape relue en direct, on ne mémorise ni ne signale rien (les « laissés de côté » ne sont
+    // plus relus par bill-details : ils n'ont jamais d'étape en direct).
+    if (b.status !== 'laisse_de_cote' && (!vusEnDirect || !vusEnDirect.has(String(b.id)))) continue;
     const ancien = dejaVu(cleLoi(b.id));
     if (loiARecule(b, ancien)) continue; // on garde l'état le plus avancé, sans courriel
     aMemoriser.push({ projet: cleLoi(b.id), etat: etatLoi(b) });
@@ -316,7 +329,7 @@ export function courriel(sections, userId, essai = false) {
   const avecAssemblee = sections.some((x) => x.ville === ASSEMBLEE);
   const sources = [
     avecVilles ? "Les phrases sous chaque numéro de décision sont des résumés générés par IA à partir des documents de la Ville ; en cas d'écart, les documents officiels font foi." : '',
-    avecAssemblee ? "Les titres et les étapes des projets de loi viennent des données ouvertes de l'Assemblée nationale (Données Québec), qui peuvent avoir un jour ou deux de retard sur son site." : '',
+    avecAssemblee ? "Les titres et les étapes des projets de loi viennent des données de l'Assemblée nationale (ses données ouvertes et les fiches de son site), relues chaque matin." : '',
     `DossierQuébec est un site citoyen indépendant${avecVilles && avecAssemblee ? " : ni la Ville, ni l'Assemblée nationale" : avecAssemblee ? ", sans lien avec l'Assemblée nationale" : ", sans lien avec la Ville"}.`,
   ].filter(Boolean).join(' ');
   const fin = `<p style="margin:22px 0 0"><a href="${mesDossiers}" style="display:inline-block;padding:9px 16px;background:#0B8A4B;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">Voir mes dossiers</a></p>
@@ -561,14 +574,22 @@ export default async function handler(req, res) {
     // Une personne par clé suivie (« Eric Girard (Groulx) » et « Eric Girard (Lac-Saint-Jean) »
     // restent deux personnes) ; un même compte qui suit la même personne comme ministre ET comme
     // député·e n'en garde qu'une.
+    // La table follows n'a pas de plafond en base : au-delà de PERSONNES_MAX par compte (l'Assemblée
+    // compte 125 sièges), le reste est ignoré et dit dans le rapport, plutôt que de laisser un seul
+    // compte alourdir le passage de tous.
+    const PERSONNES_MAX = 200;
     const personnesDe = new Map();
+    const clesVues = new Map();
     for (const f of personnesSuivies) {
       const p = personneSuivie(f);
       if (p.nom.length < 3) continue;
       const cle = clePersonne(p.circo ? `${p.nom}|${p.circo}` : p.nom);
-      if (!personnesDe.has(f.user_id)) personnesDe.set(f.user_id, []);
-      const deja = personnesDe.get(f.user_id);
-      if (!deja.some((x) => x.cle === cle)) deja.push({ ...p, cle });
+      if (!personnesDe.has(f.user_id)) { personnesDe.set(f.user_id, []); clesVues.set(f.user_id, new Set()); }
+      const liste = personnesDe.get(f.user_id), vues = clesVues.get(f.user_id);
+      if (vues.has(cle)) continue;
+      if (liste.length >= PERSONNES_MAX) { rapport.personnesIgnorees = (rapport.personnesIgnorees ?? 0) + 1; continue; }
+      vues.add(cle);
+      liste.push({ ...p, cle });
     }
     // Lus une seule fois, et seulement s'il y a quelque chose à comparer. Un fichier illisible ou
     // vide : on saute l'Assemblée pour ce matin SANS rien mémoriser, sinon un projet déjà signalé
@@ -594,6 +615,10 @@ export default async function handler(req, res) {
       const rolesParrains = Array.isArray(brut?.bills)
         ? new Map(brut.bills.map((b) => [String(b.id), String(b.sponsor ?? '').split(' — ')[1] ?? '']))
         : null;
+      // Témoin d'un bon matin : l'étape de chaque projet actif a été relue sur le site de l'Assemblée.
+      const vusEnDirect = Array.isArray(brut?.bills)
+        ? new Set(brut.bills.filter((b) => b.status !== 'laisse_de_cote' && b.liveStage).map((b) => String(b.id)))
+        : null;
       const compte = new Map();
       for (const d of Array.isArray(deputes) ? deputes : []) {
         const n = normaliserTexte(d?.[0]).trim();
@@ -609,7 +634,7 @@ export default async function handler(req, res) {
         const m = p.circo && listeMinistres.find((x) => normaliserTexte(x.name).trim() === normaliserTexte(`${p.nom} (${p.circo})`).trim());
         return m ? String(m.role ?? '').split('·').map((r) => normaliserTexte(r).trim()).filter(Boolean) : [];
       };
-      return { lois, resumes: resumesLisibles, rolesParrains, rolesDe };
+      return { lois, resumes: resumesLisibles, rolesParrains, vusEnDirect, rolesDe };
     }));
     rapport.loisMemorisees = 0;
 
@@ -674,6 +699,7 @@ export default async function handler(req, res) {
               lois: donnees.lois,
               resumes: donnees.resumes,
               rolesParrains: donnees.rolesParrains,
+              vusEnDirect: donnees.vusEnDirect,
               suivies: loisDe.get(uid) ?? [],
               mots: motsAssemblee,
               personnes: (personnesDe.get(uid) ?? []).map((p) => ({ ...p, roles: donnees.rolesDe(p) })),

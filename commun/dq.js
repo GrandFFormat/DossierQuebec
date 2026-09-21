@@ -306,8 +306,8 @@ const translations = {
     'footer.abonnement':"Subscription",
     'promo.sur':"DossierQuébec subscription",
     'promo.h':"Get alerted when a bill changes status",
-    'promo.p':"Follow a bill in one click: an email in the morning when it changes stage, when an elected member you follow introduces one, or when a new bill contains your keywords. One email, everything together, nothing on the days when nothing moves.",
-    'promo.diss':"With the Assembly dissolved, the first alerts will go out with the bills of the new legislature, convened on November 17, 2026.",
+    'promo.p':"Follow a bill in one click: an email in the morning when it moves to its next stage, when an elected member you follow introduces one, or when a new bill contains your keywords. One email, everything together, nothing on the days when nothing moves.",
+    'promo.diss':"The bills of the 43rd legislature died when the Assembly was dissolved on August 27: following and alerts will start with the first bills of the new legislature, convened on November 17, 2026.",
     'promo.cta':"Get my alerts — $10/month",
     'promo.prix':"or $96 a year · cancel anytime",
     'promo.compte.h':"Your account",
@@ -889,6 +889,9 @@ async function handleMagicLinkClick(){
 // La boîte « Votre compte » de l'encadré d'abonnement, sur l'accueil (gabarit.html,
 // #promoCompte). Même connexion par lien que Lexique (signInWithMagicLink), ses propres ids :
 // les deux boîtes ne sont jamais sur la même page, mais le gabarit les porte toutes les deux.
+// L'état de l'envoi du lien vit hors de la boîte : un changement de langue la redessine, et
+// l'envoi en cours (ou fait) ne doit pas redevenir un bouton qu'on peut recliquer.
+let promoEnvoi = null; // null | { etat: 'encours' | 'envoye', email }
 function renderPromoCompte(){
   const box = document.getElementById('promoCompte');
   if(!box) return;
@@ -899,36 +902,45 @@ function renderPromoCompte(){
     box.innerHTML = `<p class="promo-compte-note" style="margin:0">${isEn ? 'Signed in as' : 'Connecté comme'} <b>${echappe}</b>. ${isEn ? 'Your followed bills and projects are in My files.' : 'Vos projets de loi et projets suivis sont dans Mes dossiers.'}</p>`;
     return;
   }
-  const saisie = document.getElementById('promoEmail')?.value || '';
+  const saisie = promoEnvoi?.email || document.getElementById('promoEmail')?.value || '';
+  const occupe = !!promoEnvoi;
+  const libelle = promoEnvoi?.etat === 'envoye' ? (isEn ? '✓ Link sent' : '✓ Lien envoyé')
+    : promoEnvoi?.etat === 'encours' ? (isEn ? 'Sending…' : 'Envoi…')
+    : (isEn ? 'Get the link' : 'Recevoir le lien');
+  const note = promoEnvoi?.etat === 'envoye'
+    ? (isEn ? 'Check your inbox for the sign-in link.' : 'Vérifiez vos courriels : le lien de connexion vous attend.')
+    : (isEn ? 'No password: a sign-in link arrives by email. A free account follows up to 3 projects.' : 'Pas de mot de passe : un lien de connexion arrive par courriel. Le compte gratuit suit jusqu’à 3 projets.');
   box.innerHTML = `<div class="promo-compte-ligne">
-      <input type="email" id="promoEmail" placeholder="${isEn ? 'Your email' : 'Votre courriel'}" aria-label="${isEn ? 'Your email' : 'Votre courriel'}">
-      <button class="account-btn" id="promoLienBtn" onclick="handlePromoLink()">${isEn ? 'Get the link' : 'Recevoir le lien'}</button>
+      <input type="email" id="promoEmail" placeholder="${isEn ? 'Your email' : 'Votre courriel'}" aria-label="${isEn ? 'Your email' : 'Votre courriel'}"${occupe ? ' readonly' : ''}>
+      <button class="account-btn" id="promoLienBtn" onclick="handlePromoLink()"${occupe ? ' disabled' : ''}>${libelle}</button>
     </div>
-    <p class="promo-compte-note" id="promoNote">${isEn ? 'No password: a sign-in link arrives by email. A free account follows up to 3 projects.' : 'Pas de mot de passe : un lien de connexion arrive par courriel. Le compte gratuit suit jusqu’à 3 projets.'}</p>`;
+    <p class="promo-compte-note" id="promoNote">${note}</p>`;
   const champ = document.getElementById('promoEmail');
   if(champ && saisie) champ.value = saisie;
-  champ?.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') handlePromoLink(); });
+  champ?.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); handlePromoLink(); } });
 }
 
 async function handlePromoLink(){
-  const input = document.getElementById('promoEmail');
-  const note = document.getElementById('promoNote');
-  const btn = document.getElementById('promoLienBtn');
   const isEn = currentLang === 'en';
+  const input = document.getElementById('promoEmail');
   const email = input ? input.value.trim() : '';
-  if(!email || !note || !btn){ input?.focus(); return; }
-  btn.disabled = true;
-  note.textContent = isEn ? 'Sending…' : 'Envoi en cours…';
+  // Un envoi en cours ou déjà fait : Entrée ou un second clic ne renvoient rien.
+  if(promoEnvoi) return;
+  if(!email || !input.checkValidity()){ input?.focus(); return; }
+  promoEnvoi = { etat: 'encours', email };
+  renderPromoCompte();
   const error = await signInWithMagicLink(email);
   if(error){
-    btn.disabled = false;
-    note.textContent = error.code === 'over_email_send_rate_limit'
+    promoEnvoi = null;
+    renderPromoCompte();
+    const note = document.getElementById('promoNote');   // la boîte a pu être refaite entre-temps
+    if(note) note.textContent = error.code === 'over_email_send_rate_limit'
       ? (isEn ? 'A link was already sent recently — check your inbox, or wait a bit.' : 'Un lien a déjà été envoyé récemment — vérifiez vos courriels, ou attendez un peu.')
       : (isEn ? 'Something went wrong. Try again.' : 'Une erreur est survenue. Réessayez.');
     return;
   }
-  btn.textContent = isEn ? '✓ Link sent' : '✓ Lien envoyé';
-  note.textContent = isEn ? `Check your inbox (${email}) for the sign-in link.` : `Vérifiez vos courriels (${email}) : le lien de connexion vous attend.`;
+  promoEnvoi = { etat: 'envoye', email };
+  renderPromoCompte();
 }
 
 function renderAccountBox(){
@@ -979,6 +991,10 @@ async function initAuth(){
   }
 
   supabaseClient.auth.onAuthStateChange(async (event, newSession) => {
+    // Même personne qu'avant (INITIAL_SESSION juste après initAuth, TOKEN_REFRESHED, SIGNED_IN au
+    // retour sur l'onglet) : rien à recharger ni à redessiner. Redessiner refermait la carte qu'un
+    // lien ?pl=…&id=… venait d'ouvrir (courriels d'alerte, Mes dossiers).
+    if((newSession?.user?.id ?? null) === (currentUser?.id ?? null)){ currentUser = newSession?.user ?? null; return; }
     try{
       currentUser = newSession?.user ?? null;
       if(currentUser) await loadFollowsFromSupabase();
@@ -3332,6 +3348,10 @@ try{ localStorage.setItem('dq:dernier-volet', JSON.stringify({ ville: 'assemblee
   // D'abord les données : tout ce qui suit en dépend, et elles arrivent maintenant par le
   // réseau plutôt que d'être écrites dans la page.
   await chargerDonnees();
+  // L'encadré de l'abonnement : sa phrase « le suivi commencera avec la nouvelle législature »
+  // tombe quand un projet de loi suivable existe VRAIMENT dans les données (loiVivante), pas à une
+  // date : le 17 nov., dissolved=false ne suffit pas, il faut le premier projet de la 44e.
+  for(const d of document.querySelectorAll('.promo-dissolution')) d.hidden = bills.some(loiVivante);
   await loadFollowed();
   await loadIntroState();
   await loadFontZoom();
@@ -3351,8 +3371,6 @@ try{ localStorage.setItem('dq:dernier-volet', JSON.stringify({ ville: 'assemblee
   renderComparateurTable();
   renderBills();
   renderApercuBills();
-  // L'encadré de l'abonnement : sa phrase de dissolution tombe d'elle-même.
-  for(const d of document.querySelectorAll('.promo-dissolution')) d.hidden = !ASSEMBLY.dissolved;
   renderVotes();
   renderDeputes();
   renderNews();
