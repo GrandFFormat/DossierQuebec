@@ -20,6 +20,9 @@
 //   - un dossier récent qui contient un de ses mots-clés (alertes_mots_cles) ou le nom d'un
 //     organisme qu'il suit (organismes_suivis).
 // Le récapitulatif « Où en est le projet », s'il a été refait, accompagne ces nouvelles.
+// Depuis le 21 sept. 2026, l'Assemblée nationale passe au même moment, dans le même courriel : un
+// projet de loi suivi qui change d'étape, un mot-clé dans un projet de loi, un projet de loi
+// présenté par un ministre ou un·e député·e suivi (voir alertesAssemblee, plus bas).
 // Un projet suivi pour la première fois est mémorisé sans courriel : on ne signale que ce qui
 // arrive ensuite. Au plus un courriel par personne par exécution, tous projets réunis. Si l'envoi
 // échoue, rien n'est mémorisé : ce sera redit le lendemain.
@@ -27,6 +30,7 @@
 // Variables : SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_API_KEY, DIGEST_FROM, CRON_SECRET,
 // PUBLIC_SITE_URL. Tables : scripts/supabase-schema-alertes.sql.
 
+import crypto from 'node:crypto';
 import { supabase, signature, site } from './_alertes.js';
 import { PAR_JOUR, envoyerNumerosEnAttente } from './_infolettre.js';
 import { estActive } from './_stripe.js';
@@ -91,6 +95,98 @@ export const cleOrganisme = (id) => `org_${String(id).replace(/[^0-9a-f]/gi, '')
 // l'écrivent tantôt avec, tantôt sans.
 export const sansFormeJuridique = (nom) => String(nom ?? '').trim().replace(/[\s,]+(?:inc|ltée|limitée|s\.?e\.?n\.?c|s\.?e\.?c|enr|coop)\.?$/i, '').trim();
 
+// ---------- l'Assemblée nationale ----------
+// Trois choses, comparées chaque matin au fichier public /data/site/bills.json (tiré des données
+// ouvertes de l'Assemblée sur Données Québec par .github/workflows/refresh.yml, trois heures plus
+// tôt) :
+//   - un projet de loi suivi (dossiers_suivis, ville « assemblee », dossier_id « pl:<id> ») qui
+//     change d'étape ou de statut ;
+//   - un projet de loi qui contient un mot-clé de l'abonné (titre officiel ou résumé) ;
+//   - un projet de loi présenté par un ministre ou un·e député·e que l'abonné suit (table follows,
+//     la même que les boutons « Suivre » de l'onglet Ministres et député·e·s).
+// Même mémoire que les villes (alertes_etat, ville « assemblee ») : un suivi tout neuf part d'ici,
+// sans courriel. Le CSV de l'Assemblée a parfois un jour ou deux de retard sur son site : l'alerte
+// arrive le matin qui suit la mise à jour du CSV, pas celui qui suit la séance.
+export const ASSEMBLEE = 'assemblee';
+export const LOI = /^pl:(\d{1,9})$/;
+export const cleLoi = (id) => `pl-${id}`;
+export const etatLoi = (b) => ({ statut: b.status ?? '', note: b.note ?? '' });
+export const loiABouge = (b, ancien) => Boolean(ancien) && (ancien.statut !== (b.status ?? '') || ancien.note !== (b.note ?? ''));
+// Le résumé arrive en HTML (data/bills-resumes-fr.json) : on n'en garde que le texte.
+const texteResume = (html) => {
+  const t = String(html ?? '').replace(/<[^>]+>/g, ' ').replace(/&(?:[a-z]+|#\d+);/gi, ' ');
+  return /r[ée]sum[ée] non disponible/i.test(t) ? '' : t;
+};
+export const loiContientMot = (b, resume, mot) => contientMot({ objet: b.title, puces: [texteResume(resume)] }, mot);
+// Une personne suivie : « Nom » pour un ministre, « Nom|Circonscription » pour un·e député·e.
+export const nomSuivi = (f) => String(f.person_key ?? '').split('|')[0].trim();
+export const clePersonne = (nom) => `per_${crypto.createHash('sha1').update(normaliserTexte(nom)).digest('hex').slice(0, 20)}`;
+const recentesD = (lois) => [...lois].sort((a, b) => String(b.lastActivity ?? '').localeCompare(String(a.lastActivity ?? '')));
+const etapeFr = (b) => String(b.note ?? '').replace(/\d{4}-\d{2}-\d{2}/g, (d) => dateFr(d));
+
+function ligneLoi(b, precision) {
+  const lien = `${site()}/projets-de-loi?pl=${encodeURIComponent(b.num)}`;
+  return `<li style="margin:0 0 12px">
+    <a href="${echapper(lien)}" style="font-family:Consolas,monospace;font-size:13px;font-weight:bold;color:#076338;text-decoration:none">PL ${echapper(b.num)}</a>
+    <span style="font-size:13px;color:#5B6570"> · ${echapper(precision)}</span><br>
+    <span style="font-size:15px">${echapper(b.title)}</span>
+  </li>`;
+}
+const sectionLois = (titre, sousTitre, lois, precision, mot) => ({
+  ville: ASSEMBLEE,
+  projet: { titre },
+  mot,
+  c: { nouveaux: [], decides: [], etapes: [], recap: null, total: lois.length, blocs: [{ titre: sousTitre, lignes: lois.map((b) => ligneLoi(b, precision(b))) }] },
+});
+
+// Tout ce qui concerne l'Assemblée pour UN abonné. Pur : aucune lecture ni écriture, pour qu'on
+// puisse l'essayer sur des données inventées (voir le commit qui l'a ajoutée).
+//   lois      le contenu de /data/site/bills.json
+//   resumes   { id: html } de /data/bills-resumes-fr.json (peut manquer : titres seulement)
+//   suivies   ids des projets de loi suivis, en texte
+//   mots      [{ cle, cherche }]      personnes  [{ cle, nom }]
+//   dejaVu    (cle) => l'état déjà mémorisé, ou undefined
+export function alertesAssemblee({ lois, resumes, suivies = [], mots = [], personnes = [], dejaVu, essai = false }) {
+  const sections = [];
+  const aMemoriser = [];
+  const parId = new Map(lois.map((b) => [String(b.id), b]));
+  const deja = new Set(); // un projet de loi n'apparaît qu'une fois par courriel
+
+  const bouges = [];
+  for (const id of suivies) {
+    const b = parId.get(String(id));
+    if (!b) continue; // plus dans les données (nouvelle législature) : rien à dire
+    if (essai) { bouges.push(b); continue; }
+    aMemoriser.push({ projet: cleLoi(b.id), etat: etatLoi(b) });
+    if (loiABouge(b, dejaVu(cleLoi(b.id)))) bouges.push(b);
+  }
+  if (bouges.length) {
+    for (const b of bouges) deja.add(b.id);
+    sections.push(sectionLois('Projets de loi suivis', essai ? 'Où ils en sont' : 'Nouvelle étape', bouges, (b) => etapeFr(b) || 'étape non précisée'));
+  }
+
+  const cibles = [
+    ...mots.map((m) => ({ cle: m.cle, titre: `Mot-clé « ${m.cherche} »`, sousTitre: 'Projets de loi qui le mentionnent', trouve: (b) => loiContientMot(b, resumes?.[b.id], m.cherche) })),
+    ...personnes.map((p) => ({ cle: p.cle, titre: p.nom, sousTitre: 'Projets de loi présentés', trouve: (b) => b.sponsor && normaliserTexte(b.sponsor).trim() === normaliserTexte(p.nom).trim() })),
+  ];
+  for (const cible of cibles) {
+    const trouves = recentesD(lois.filter(cible.trouve));
+    let aDire;
+    if (essai) {
+      aDire = trouves.slice(0, 3);
+    } else {
+      aMemoriser.push({ projet: cible.cle, etat: { vus: trouves.map((b) => b.id) } });
+      const ancien = dejaVu(cible.cle);
+      if (!ancien) continue; // ajouté depuis la dernière exécution : on part d'ici
+      const vus = new Set(ancien.vus ?? []);
+      aDire = trouves.filter((b) => !vus.has(b.id) && !deja.has(b.id));
+    }
+    for (const b of aDire) deja.add(b.id);
+    if (aDire.length) sections.push(sectionLois(cible.titre, cible.sousTitre, aDire, (b) => etapeFr(b) || 'présenté', true));
+  }
+  return { sections, aMemoriser };
+}
+
 // ---------- le courriel ----------
 const statut = (d) =>
   d.statutDossier === 'termine'
@@ -123,15 +219,19 @@ export const PLAFOND_OCTETS = 80 * 1024;
 const octets = (s) => Buffer.byteLength(s, 'utf8');
 const pluriel = (n, mot) => `${n} ${mot}${n > 1 ? 's' : ''}`;
 
+const LIEUX = { ...VILLES, [ASSEMBLEE]: 'Assemblée nationale' };
+
 function cadreProjet(ville, projet, contenu) {
   return `<div style="margin:26px 0 0;padding:14px 16px;border:1px solid #DDE2E7;border-left:4px solid #0B8A4B;border-radius:8px">
-    <h2 style="margin:0;font-size:18px">${echapper(projet.titre)} <span style="font-size:13px;font-weight:normal;color:#5B6570">· ${echapper(VILLES[ville] ?? ville)}</span></h2>
+    <h2 style="margin:0;font-size:18px">${echapper(projet.titre)} <span style="font-size:13px;font-weight:normal;color:#5B6570">· ${echapper(LIEUX[ville] ?? ville)}</span></h2>
     ${contenu}
   </div>`;
 }
 
 // Les trois sections d'un projet, chacune avec ses lignes toutes prêtes (pour pouvoir couper).
+// Une section de l'Assemblée arrive avec les siennes (sectionLois).
 function blocsDe(ville, c, mot = false) {
+  if (c.blocs) return c.blocs;
   const derniere = (d) => d.resolutions?.at(-1);
   return [
     { titre: mot ? 'Décisions récentes qui le mentionnent' : 'Nouveaux dossiers', lignes: c.nouveaux.map((d) => ligne(ville, d, [dateFr(d.derniere), statut(d)].filter(Boolean).join(' · '))) },
@@ -157,9 +257,17 @@ export function courriel(sections, userId, essai = false) {
     <p style="margin:0;font-size:13px;color:#5B6570">DossierQuébec · Mes dossiers</p>
     <h1 style="margin:4px 0 0;font-size:22px">${avecMots ? 'Du nouveau dans vos alertes' : 'Du nouveau dans vos projets'}</h1>
     ${essai ? '<p style="margin:8px 0 0;padding:8px 10px;background:#FFF6D6;border-radius:6px;font-size:13px">Courriel d\'essai : il reprend les dossiers les plus récents de chaque projet, pas seulement les nouveautés.</p>' : ''}`;
+  // Chaque source dit d'où viennent ses lignes, et seulement si le courriel en contient.
+  const avecVilles = sections.some((x) => x.ville !== ASSEMBLEE);
+  const avecAssemblee = sections.some((x) => x.ville === ASSEMBLEE);
+  const sources = [
+    avecVilles ? "Les phrases sous chaque numéro de décision sont des résumés générés par IA à partir des documents de la Ville ; en cas d'écart, les documents officiels font foi." : '',
+    avecAssemblee ? "Les titres et les étapes des projets de loi viennent des données ouvertes de l'Assemblée nationale (Données Québec), qui peuvent avoir un jour ou deux de retard sur son site." : '',
+    `DossierQuébec est un site citoyen indépendant${avecVilles && avecAssemblee ? " : ni la Ville, ni l'Assemblée nationale" : avecAssemblee ? ", sans lien avec l'Assemblée nationale" : ", sans lien avec la Ville"}.`,
+  ].filter(Boolean).join(' ');
   const fin = `<p style="margin:22px 0 0"><a href="${mesDossiers}" style="display:inline-block;padding:9px 16px;background:#0B8A4B;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">Voir mes dossiers</a></p>
-    <p style="margin:22px 0 0;font-size:12px;color:#5B6570">Les phrases sous chaque numéro sont des résumés générés par IA à partir des documents de la Ville ; en cas d'écart, les documents officiels font foi. DossierQuébec n'est pas un site de la Ville.<br>
-    Vous recevez ce courriel parce que vous suivez ces projets, mots-clés ou organismes avec votre abonnement. <a href="${echapper(desabonnement)}" style="color:#5B6570">Ne plus recevoir ces alertes</a></p>
+    <p style="margin:22px 0 0;font-size:12px;color:#5B6570">${sources}<br>
+    Vous recevez ce courriel parce que vous suivez ces projets, mots-clés, organismes ou personnes avec votre abonnement. <a href="${echapper(desabonnement)}" style="color:#5B6570">Ne plus recevoir ces alertes</a></p>
   </div>`;
 
   // Réserve pour la liste « Aussi du nouveau » des projets qui n'entreront pas : ~250 octets chacun.
@@ -207,7 +315,7 @@ export function courriel(sections, userId, essai = false) {
   const autres = enUneLigne.length
     ? `<div style="margin:26px 0 0;padding:14px 16px;border:1px solid #DDE2E7;border-radius:8px">
         <p style="margin:0 0 6px;font-weight:bold">Aussi du nouveau dans vos autres projets</p>
-        <ul style="margin:0;padding-left:18px">${enUneLigne.map(({ ville, projet, c }) => `<li style="margin:0 0 4px">${echapper(projet.titre)} <span style="color:#5B6570">(${echapper(VILLES[ville] ?? ville)})</span> : ${pluriel(c.total, 'nouveauté')}</li>`).join('')}</ul>
+        <ul style="margin:0;padding-left:18px">${enUneLigne.map(({ ville, projet, c }) => `<li style="margin:0 0 4px">${echapper(projet.titre)} <span style="color:#5B6570">(${echapper(LIEUX[ville] ?? ville)})</span> : ${pluriel(c.total, 'nouveauté')}</li>`).join('')}</ul>
         <p style="margin:8px 0 0;font-size:14px"><a href="${mesDossiers}" style="color:#076338;font-weight:bold">Tout voir dans Mes dossiers</a></p>
       </div>`
     : '';
@@ -300,8 +408,14 @@ export default async function handler(req, res) {
     }
 
     const liste = abonnes.join(',');
-    const [suivis, preferences, etats, mots, organismes] = await Promise.all([
+    const [suivis, suivisLois, personnesSuivies, preferences, etats, mots, organismes] = await Promise.all([
       supabase(`/rest/v1/dossiers_suivis?select=user_id,ville,dossier_id&user_id=in.(${liste})&dossier_id=like.projet:*`),
+      supabase(`/rest/v1/dossiers_suivis?select=user_id,dossier_id&user_id=in.(${liste})&ville=eq.${ASSEMBLEE}&dossier_id=like.pl:*`),
+      // Les ministres et député·e·s suivis : une panne ici n'empêche rien d'autre de partir.
+      supabase(`/rest/v1/follows?select=user_id,person_key&user_id=in.(${liste})&person_type=in.(minister,depute)`).catch((e) => {
+        rapport.erreurs.push(`personnes suivies ignorées : ${e.message}`);
+        return [];
+      }),
       supabase(`/rest/v1/alertes_preferences?select=user_id,actif&user_id=in.(${liste})`),
       supabase(`/rest/v1/alertes_etat?select=user_id,ville,projet,etat&user_id=in.(${liste})`),
       // Table des mots-clés absente (SQL pas encore exécuté) : les alertes de projets partent quand même.
@@ -349,7 +463,7 @@ export default async function handler(req, res) {
       ciblesDe.get(userId).push(cible);
     };
     for (const m of mots) {
-      if (m.mot && /^[0-9a-f-]{36}$/.test(m.id ?? '')) ajouterCible(m.user_id, { cle: cleMot(m.id), cherche: m.mot, titre: `Mot-clé « ${m.mot} »` });
+      if (m.mot && /^[0-9a-f-]{36}$/.test(m.id ?? '')) ajouterCible(m.user_id, { cle: cleMot(m.id), cherche: m.mot, titre: `Mot-clé « ${m.mot} »`, mot: true });
     }
     for (const o of organismes) {
       const cherche = sansFormeJuridique(o.nom);
@@ -357,7 +471,40 @@ export default async function handler(req, res) {
     }
     rapport.motsMemorises = 0;
 
-    for (const uid of new Set([...projetsDe.keys(), ...ciblesDe.keys()])) {
+    // L'Assemblée : projets de loi suivis et personnes suivies, par abonné. Les mots-clés servent
+    // aux deux (les organismes, eux, ne nomment que des contrats municipaux).
+    const loisDe = new Map();
+    for (const s of suivisLois) {
+      const id = LOI.exec(s.dossier_id)?.[1];
+      if (!id) continue;
+      if (!loisDe.has(s.user_id)) loisDe.set(s.user_id, []);
+      loisDe.get(s.user_id).push(id);
+    }
+    const personnesDe = new Map();
+    for (const f of personnesSuivies) {
+      const nom = nomSuivi(f);
+      if (nom.length < 3) continue;
+      if (!personnesDe.has(f.user_id)) personnesDe.set(f.user_id, []);
+      const deja = personnesDe.get(f.user_id);
+      if (!deja.some((p) => p.cle === clePersonne(nom))) deja.push({ cle: clePersonne(nom), nom });
+    }
+    // Lus une seule fois, et seulement s'il y a quelque chose à comparer. Un fichier illisible ou
+    // vide : on saute l'Assemblée pour ce matin SANS rien mémoriser, sinon un projet déjà signalé
+    // repasserait pour neuf le lendemain.
+    let assemblee = null;
+    const lireAssemblee = () => (assemblee ??= Promise.all([
+      fetch(`${site()}/data/site/bills.json`, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+      fetch(`${site()}/data/bills-resumes-fr.json`, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    ]).then(([lois, resumes]) => {
+      if (!Array.isArray(lois) || !lois.length) {
+        rapport.erreurs.push('projets de loi illisibles : Assemblée sautée ce matin');
+        return null;
+      }
+      return { lois, resumes };
+    }));
+    rapport.loisMemorisees = 0;
+
+    for (const uid of new Set([...projetsDe.keys(), ...ciblesDe.keys(), ...loisDe.keys(), ...personnesDe.keys()])) {
       const projets = projetsDe.get(uid) ?? [];
       if (coupees.has(uid) && !essai) continue;
       try {
@@ -409,10 +556,28 @@ export default async function handler(req, res) {
           }
         }
 
+        // L'Assemblée, après les villes : ses sections viennent en dernier dans le courriel.
+        const motsAssemblee = (ciblesDe.get(uid) ?? []).filter((m) => m.mot);
+        if (loisDe.has(uid) || personnesDe.has(uid) || motsAssemblee.length) {
+          const donnees = await lireAssemblee();
+          if (donnees) {
+            const a = alertesAssemblee({
+              ...donnees,
+              suivies: loisDe.get(uid) ?? [],
+              mots: motsAssemblee,
+              personnes: personnesDe.get(uid) ?? [],
+              dejaVu: (cle) => dejaVu.get(`${uid}|${ASSEMBLEE}|${cle}`),
+              essai: Boolean(essai),
+            });
+            sections.push(...a.sections);
+            for (const m of a.aMemoriser) aMemoriser.push({ user_id: uid, ville: ASSEMBLEE, ...m, mis_a_jour: maintenant.toISOString() });
+          }
+        }
+
         if (sections.length) {
           const message = courriel(sections, uid, Boolean(essai));
           if (apercu) {
-            rapport.apercu.push({ a: masquer(email), sujet: message.sujet, projets: sections.map((s) => ({ titre: s.projet.titre, nouveaux: s.c.nouveaux.length, decides: s.c.decides.length, etapes: s.c.etapes.length })) });
+            rapport.apercu.push({ a: masquer(email), sujet: message.sujet, projets: sections.map((s) => ({ titre: s.projet.titre, ...(s.c.blocs ? { lois: s.c.total } : { nouveaux: s.c.nouveaux.length, decides: s.c.decides.length, etapes: s.c.etapes.length }) })) });
           } else {
             await envoyer(email, message);
             rapport.envoyes++;
@@ -430,8 +595,9 @@ export default async function handler(req, res) {
             corps: aMemoriser,
             entetes: { Prefer: 'resolution=merge-duplicates,return=minimal' },
           });
-          rapport.projetsMemorises += aMemoriser.filter((a) => !/^(?:mot|org)_/.test(a.projet)).length;
-          rapport.motsMemorises += aMemoriser.filter((a) => /^(?:mot|org)_/.test(a.projet)).length;
+          rapport.projetsMemorises += aMemoriser.filter((a) => a.ville !== ASSEMBLEE && !/^(?:mot|org)_/.test(a.projet)).length;
+          rapport.motsMemorises += aMemoriser.filter((a) => a.ville !== ASSEMBLEE && /^(?:mot|org)_/.test(a.projet)).length;
+          rapport.loisMemorisees += aMemoriser.filter((a) => a.ville === ASSEMBLEE).length;
         }
       } catch (erreur) {
         console.error('alertes-projets :', uid, erreur);
