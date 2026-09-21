@@ -65,10 +65,10 @@ async function abonneDe(jeton) {
   if (!utilisateur.ok && ![401, 403].includes(utilisateur.statut)) return { indisponible: true };
   const id = utilisateur.ok ? utilisateur.donnees?.id : null;
   if (!id || !/^[0-9a-f-]{36}$/.test(id)) return null;
-  const r = await supabase(`/rest/v1/abonnements?user_id=eq.${id}&select=statut,fin`);
+  const r = await supabase(`/rest/v1/abonnements?user_id=eq.${id}&select=statut,fin,lecture_seule`);
   if (!r.ok) return { id, indisponible: true };
   // La même règle que tout le site : api/_stripe.js, estActive.
-  return { id, abonne: estActive(r.donnees?.[0]) };
+  return { id, abonne: estActive(r.donnees?.[0]), lectureSeule: r.donnees?.[0]?.lecture_seule === true };
 }
 
 // 503 quand l'abonnement n'a pas pu être vérifié (le client dit « réessayez ») ; 403 « abonnement
@@ -177,6 +177,10 @@ export default async function handler(req, res) {
 async function demander(res, { ville, dossier, d, jeton }) {
   const qui = await abonneDe(jeton);
   if (!qui?.abonne) return refus(res, qui);
+  // Compte de consultation (une bibliothèque, ouvert sur un poste public) : il LIT le détail
+  // déjà produit, mais n'en commande pas de nouveaux. Sinon le premier usager venu épuise le
+  // quota quotidien de l'abonnement pour le plaisir.
+  if (qui.lectureSeule) return res.status(403).json({ erreur: 'compte de consultation' });
   if (d) return res.status(409).json({ erreur: 'déjà lu' });
   if (await sansMontant(ville, dossier)) return res.status(409).json({ erreur: 'sans montant' });
   const depuis = new Date(Date.now() - 864e5).toISOString();

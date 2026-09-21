@@ -13,7 +13,7 @@
 //     « Abonnez-vous » sinon. Rien n'est chargé tant qu'on n'ouvre pas une fiche ;
 //   - au bas de la fiche ouverte, « Signaler une erreur dans cette fiche » (compte requis).
 
-import { VILLES, echapper, mesurer, session, envoyerLien, chargerSuivis, suivre, limiteSuivis, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, formulaireMessage, client } from './abonnes-client.js';
+import { VILLES, echapper, mesurer, session, envoyerLien, chargerSuivis, suivre, limiteSuivis, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, formulaireMessage, client , marquerConsultation } from './abonnes-client.js';
 import { memoriserVolet } from './navigation.js';
 import { tr } from './langue.js';
 
@@ -251,6 +251,10 @@ document.addEventListener('click', async (e) => {
 async function rafraichirSession() {
   sess = await session();
   suivis = new Set(sess ? (await chargerSuivis()).map((s) => cle(s.ville, s.dossier_id)) : []);
+  // Compte de consultation (une bibliothèque sur un poste public) : la classe retire les étoiles
+  // « Suivre », le signalement et la demande de détail (voir abonnes.css). La protection réelle
+  // est dans Postgres ; ceci évite des boutons qui échouent.
+  if (sess) await marquerConsultation();
   majCompte();
   majEtoiles();
 }

@@ -12,7 +12,7 @@
 // formulaire est la même qu'une adresse soit déjà inscrite ou non.
 
 import { supabase, site } from './_alertes.js';
-import { utilisateurDe } from './_stripe.js';
+import { ligneAbonnement, utilisateurDe } from './_stripe.js';
 import { COURRIEL, VILLES_INFOLETTRE, LANGUES_PAR_VILLE, choixValide, deMois, dernierNumero, echapper, envoyerBienvenue, envoyerCourriels, idsSignes, lienSigne, nomComplet, offreDe, prochainEnvoi, NOTES_INFOLETTRE } from './_infolettre.js';
 
 const jetonDe = (req) => String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '') || null;
@@ -191,6 +191,9 @@ export default async function handler(req, res) {
 
     if (action === 'preferences') {
       if (!u?.email) return res.status(401).json({ erreur: 'connexion requise' });
+      // Compte de consultation (une bibliothèque sur un poste public) : il ne change pas les
+      // infolettres auxquelles la bibliothèque est inscrite.
+      if ((await ligneAbonnement(u.id))?.lecture_seule) return res.status(403).json({ erreur: 'compte de consultation' });
       const email = u.email.toLowerCase();
       // { choix: [{ ville, type, arrondissement, actif }] }
       const oui = choixDe({ choix: (corps.choix ?? []).filter((c) => c?.actif === true) });

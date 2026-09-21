@@ -106,8 +106,21 @@
     </section>
 
     <section class="ab-carte ab-offrir">
-      <h3 data-en="<span class=&quot;ab-icone&quot; aria-hidden=&quot;true&quot;>🎁</span> Give a subscription <span class=&quot;ab-note&quot;>(coming soon)</span>"><span class="ab-icone" aria-hidden="true">🎁</span> Offrir un abonnement <span class="ab-note">(bientôt)</span></h3>
-      <p data-en="To someone who follows what's happening in their city, a community group, a neighbourhood association or a library.">À un proche qui suit ce qui se passe dans sa ville, à un groupe communautaire, à une association de quartier ou à une bibliothèque.</p>
+      <h3 data-en="<span class=&quot;ab-icone&quot; aria-hidden=&quot;true&quot;>🎁</span> Give a subscription"><span class="ab-icone" aria-hidden="true">🎁</span> Offrir un abonnement</h3>
+      <p data-en="To someone who follows what's happening in their city, a community group, a neighbourhood association or a library. Write to us and we'll send you a code to pass on.">À un proche qui suit ce qui se passe dans sa ville, à un groupe communautaire, à une association de quartier ou à une bibliothèque. <a class="ab-lien" href="/mes-dossiers#ecrire">Écrivez-nous</a> et on vous envoie un code à remettre.</p>
+    </section>
+
+    <!-- Faire valoir un code reçu. La fonction Postgres utiliser_code_cadeau fait tout le
+         travail (voir scripts/supabase-schema-cadeaux.sql) : la page ne fait que lui passer ce
+         qui est tapé et traduire sa réponse. Aucun code n'est lisible depuis le navigateur. -->
+    <section class="ab-carte ab-cadeau" id="cadeau">
+      <h3 data-en="<span class=&quot;ab-icone&quot; aria-hidden=&quot;true&quot;>🎟️</span> You were given a subscription?"><span class="ab-icone" aria-hidden="true">🎟️</span> On vous a offert un abonnement ?</h3>
+      <p data-en="Enter the code you received. It adds to whatever time you have left — no card, no payment.">Entrez le code reçu. Il s'ajoute au temps qu'il vous reste, sans carte ni paiement.</p>
+      <form class="ab-form" id="form-cadeau">
+        <input required placeholder="Votre code" data-en-placeholder="Your code" autocomplete="off" spellcheck="false" maxlength="40">
+        <button type="submit" class="ab-bouton" data-mesure="cadeau_utiliser" data-en="Use it">Utiliser</button>
+      </form>
+      <p class="ab-note" id="etat-cadeau" aria-live="polite"></p>
     </section>
 
     <section class="ab-carte ab-attente" id="attente">
@@ -227,6 +240,42 @@
 
   sAbonner();
   client.auth.onAuthStateChange((evenement) => { if (evenement === 'SIGNED_IN') sAbonner(); });
+
+  // ---------- faire valoir un code cadeau ----------
+  // Tout se décide dans Postgres (utiliser_code_cadeau) : la page ne connaît aucun code et ne
+  // peut pas en deviner. Elle envoie ce qui est tapé et traduit la raison du refus — dire
+  // « ça n'a pas marché » enverrait la personne réessayer pour rien.
+  const formCadeau = document.querySelector('#form-cadeau');
+  const etatCadeau = document.querySelector('#etat-cadeau');
+  const RAISONS = {
+    connexion: () => tr('Connectez-vous d’abord, depuis Mes dossiers, puis revenez ici.', 'Sign in first, from My files, then come back here.'),
+    inconnu: () => tr('Ce code n’existe pas. Vérifiez-le : les tirets et les espaces n’ont pas d’importance.', 'No such code. Check it: dashes and spaces don’t matter.'),
+    utilise: () => tr('Ce code a déjà été utilisé.', 'This code has already been used.'),
+    stripe: () => tr('Vous avez déjà un abonnement payant en cours. Gardez ce code pour plus tard, ou offrez-le.', 'You already have a paid subscription running. Keep this code for later, or give it away.'),
+    permanent: () => tr('Votre accès n’a pas de date de fin : ce code n’y ajouterait rien. Gardez-le, ou offrez-le.', 'Your access has no end date: this code would add nothing. Keep it, or give it away.'),
+  };
+  formCadeau?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const champ = formCadeau.querySelector('input');
+    const bouton = formCadeau.querySelector('button');
+    if (!(await session())) { etatCadeau.textContent = RAISONS.connexion(); return; }
+    bouton.disabled = true;
+    etatCadeau.textContent = tr('Un instant…', 'One moment…');
+    const { data, error } = await client.rpc('utiliser_code_cadeau', { p_code: champ.value });
+    bouton.disabled = false;
+    if (error) {
+      etatCadeau.textContent = tr('Le service ne répond pas. Réessayez dans une minute.', 'The service is not responding. Try again in a minute.');
+      return;
+    }
+    if (!data?.ok) { etatCadeau.textContent = (RAISONS[data?.raison] ?? RAISONS.inconnu)(); return; }
+    mesurer('cadeau_utilise', { mois: data.mois });
+    champ.value = '';
+    etatCadeau.textContent = tr(
+      `C’est fait : ${data.mois} mois ajoutés, jusqu’au ${dateFr(data.fin)}.`,
+      `Done: ${data.mois} months added, until ${dateFr(data.fin)}.`,
+    );
+    sAbonner();
+  });
 
   // ---------- le travail derrière le site ----------
   // Venue d'un volet : cette ville seulement. Sinon : toutes les villes qui publient leurs chiffres.
