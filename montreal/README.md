@@ -230,7 +230,7 @@ Ce qui a changé dans `app.js`, et pourquoi :
 | Calendrier des séances d'arrondissement | 13 sept. 2026 | **En travaux.** Réponse du 16 sept. : les 19 conseils sont autonomes et gérés par d'autres équipes que le calendrier central ; la Ville cherche une façon de réunir ces dix-neuf sources. |
 | Index des documents de séance | 13 sept. 2026 | **Non, pour l'instant.** Les documents sont déjà publiés ; un index n'est pas priorisé. |
 | Décisions en données structurées | 13 sept. 2026 | **Reconnu, pas bientôt.** Valeur admise ; obstacle : l'âge des systèmes. |
-| Accès aux sommaires décisionnels | 13, 16 et **17 sept.** | **En attente.** Réponse du 17 : pas d'accès public par identifiant, mais les sommaires sont dans le Répertoire des documents officiels (portail public). Mesuré le jour même : le fonds est là (1 279 « procès-verbal »), le numéro de dossier rend **0**. Demande reformulée une troisième fois — indexer ce numéro (`courriel-repertoire-alexis.md`). Relance le 30 sept. |
+| Accès aux sommaires décisionnels | 13, 16 et **17 sept.** | **En attente.** Réponse du 17 : pas d'accès public par identifiant, mais les sommaires sont dans le Répertoire des documents officiels (portail public). Mesuré le jour même : le fonds est là (1 279 « procès-verbal »), le numéro de dossier rend **0**. Demande reformulée une troisième fois — indexer ce numéro. Relance le 30 sept. |
 | Droits d'usage | non envoyé | `courriel-greffe.md`, prêt. |
 
 **Mise à jour du 18 septembre 2026 : les sommaires étaient dans les ordres du jour.** Le
@@ -280,8 +280,7 @@ cinq mots, note ce qu'il voit et s'en va (`scrapers/sonde-ged.js`, journal
 demanderait 4 088 sessions de navigateur, soit exactement le trafic dont la Ville nous a dit
 qu'il a décuplé cette année.
 
-La réponse du 16 septembre est reproduite telle quelle à la fin de `courriel-donnees-ouvertes.md`,
-avec ce qu'elle change pour nous. Deux choses à en retenir. La première : le calendrier des
+La réponse du 16 septembre, et ce qu'elle change pour nous : deux choses à en retenir. La première : le calendrier des
 arrondissements n'est pas un refus mais un chantier, donc notre reconstitution par sondage
 d'adresses a une date de péremption — c'est exactement ce qu'on voulait. La seconde : la Ville a
 remercié pour le respect de son `robots.txt`, en précisant que le trafic des agents automatisés a
@@ -332,7 +331,7 @@ et l'icône « VDM » de l'en-tête de DossierQuébec sont ses seules attaches a
   sur tous les ordres du jour lus, puis vérifié à la main dans un navigateur le 13 septembre
   2026 sur `CA_Rpp_ODJ_LP_ORDI_2025-05-05_19h00_FR.pdf` : rien n'est cliquable. C'est ce qui
   prive le volet de tout lien vers les sommaires décisionnels, alors qu'il en connaît le
-  numéro de dossier pour 2 877 décisions. Demandé à la Ville, voir `courriel-sommaires.md`.
+  numéro de dossier pour 2 877 décisions. Demandé à la Ville.
   Les pages web autour de ces documents n'en portent pas davantage : vérifié le même jour,
   il n'y a ni « Sommaire décisionnel » ni « Pièces jointes » à côté des points de l'ordre du
   jour. Les trois voies vers les sommaires sont donc fermées — l'ordre du jour, la page web,
@@ -373,8 +372,6 @@ test/pv.test.js          les lecteurs, hors ligne (npm test)
 assets/style.css assets/app.js
 index.html decisions.html votes.html conseil.html lexique.html sources.html
 courriel-greffe.md       le modèle du courriel au greffe, sur les droits d'usage
-courriel-donnees-ouvertes.md  demander le calendrier des arrondissements et un index
-courriel-sommaires.md    suite : l'adresse d'un sommaire depuis son numéro de dossier
 data/                    sorties JSON (data/textes/ = cache, hors dépôt)
 ../.github/workflows/refresh-villedemontreal.yml   le workflow quotidien
 ../.vercelignore         garde lib/, scrapers/, scripts/, test/ hors du site servi
