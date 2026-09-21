@@ -294,8 +294,12 @@
     const d = r ? await r.json().catch(() => ({})) : {};
     if (d.url) { location.assign(d.url); return; }
     bouton.disabled = false;
+    // Chaque refus a SON message. Tout ramener à « Stripe ne répond pas » a déjà envoyé chercher
+    // une panne de Stripe là où l'offre était simplement fermée (21 septembre 2026).
     etatOffrir.textContent = d.erreur === 'adresse invalide' ? tr('Cette adresse courriel ne semble pas valide.', 'That email address doesn’t look valid.')
       : d.erreur === 'nom requis' ? tr('Indiquez votre nom, ou cochez « Rester anonyme ».', 'Enter your name, or tick “Stay anonymous”.')
+      : d.erreur === 'cadeau fermé' ? tr('L’offre n’est pas encore ouverte : rien n’a été débité.', 'Gifting isn’t open yet: nothing was charged.')
+      : d.erreur === 'paiement non configuré' ? tr('Le paiement n’est pas configuré sur ce site.', 'Payment is not set up on this site.')
       : tr('Stripe ne répond pas pour l’instant. Réessayez dans une minute.', 'Stripe is not responding right now. Try again in a minute.');
   });
   // Au retour de Stripe.
