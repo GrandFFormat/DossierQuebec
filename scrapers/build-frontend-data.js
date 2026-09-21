@@ -24,7 +24,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 const IN_PATH = 'data/bills.json';
-const HTML_PATH = 'index.html';
+const HTML_PATH = 'gabarit.html';   // le MODÈLE, jamais servi : les pages en sont tirées
 const START_MARKER = '/* BILLS_DATA_START';
 const END_MARKER = '/* BILLS_DATA_END */';
 

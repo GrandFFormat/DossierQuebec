@@ -16,7 +16,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import * as cheerio from 'cheerio';
 
 const INDEX_URL = 'https://www.assnat.qc.ca/fr/deputes/index.html';
-const HTML_PATH = 'index.html';
+const HTML_PATH = 'gabarit.html';   // le MODÈLE, jamais servi : les pages en sont tirées
 const OUT_PATH = 'data/deputes.json';
 const USER_AGENT = 'veille-assnat-scraper/0.1 (projet citoyen independant, usage non commercial)';
 const START_MARKER = '/* DEPUTES_DATA_START';

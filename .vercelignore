@@ -1,3 +1,8 @@
+# Le MODÈLE de DossierQuébec. Les sept pages en sont tirées par
+# scripts/build-section-pages.js ; lui-même ne doit pas être servi : il pèse 567 ko et
+# ferait doublon avec index.html aux yeux de Google.
+gabarit.html
+
 # Outillage du volet municipal : dans le dépôt pour le rafraîchissement automatique
 # (GitHub Actions), inutile au site servi. Les pages, assets/ et data/ restent publiés.
 quebec/lib

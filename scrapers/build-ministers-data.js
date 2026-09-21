@@ -4,7 +4,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const IN_PATH = 'data/ministers.json';
-const HTML_PATH = 'index.html';
+const HTML_PATH = 'gabarit.html';   // le MODÈLE, jamais servi : les pages en sont tirées
 const START_MARKER = '/* MINISTERS_DATA_START';
 const END_MARKER = '/* MINISTERS_DATA_END */';
 
