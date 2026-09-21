@@ -37,6 +37,12 @@ export const PROJETS = {
     // Les trois premiers figurent quand même dans l'exclusion : « jeux d'eau », « chaudière à
     // eau » et « ponceau » sont assez proches du vocabulaire de la règle pour qu'un objet
     // futur les y fasse entrer par accident.
+    //
+    // « ponceau » NE SE TRANSPOSE PAS. Essayée telle quelle sur Laval, cette exclusion y
+    // rejetait quatre vrais chantiers d'aqueduc (rang Saint-Elzéar, montée Rouville) où un
+    // ponceau est remplacé en passant. Ici elle est juste parce que le seul ponceau de
+    // Longueuil en 2026 est un ouvrage de voirie sur un ruisseau. Une exclusion se relit sur
+    // les décisions de SA ville.
     exclusion: /[ée]quipements motoris[ée]s ou roulants|jeux d.eau|chaudi[èe]res? [àa] eau|ponceau/i,
   },
 };
