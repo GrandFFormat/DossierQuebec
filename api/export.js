@@ -44,9 +44,9 @@ async function abonneDe(jeton) {
   if (!utilisateur.ok && ![401, 403].includes(utilisateur.statut)) return { indisponible: true };
   const id = utilisateur.ok ? utilisateur.donnees?.id : null;
   if (!id || !/^[0-9a-f-]{36}$/.test(id)) return null;
-  const r = await supabase(`/rest/v1/abonnements?user_id=eq.${id}&select=statut,fin`);
+  const r = await supabase(`/rest/v1/abonnements?user_id=eq.${id}&select=statut,fin,lecture_seule`);
   if (!r.ok) return { id, indisponible: true };
-  return { id, abonne: estActive(r.donnees?.[0]) };
+  return { id, abonne: estActive(r.donnees?.[0]), lectureSeule: r.donnees?.[0]?.lecture_seule === true };
 }
 
 const refus = (res, qui) => (qui?.indisponible
@@ -80,6 +80,13 @@ export default async function handler(req, res) {
   const jeton = (req.headers.authorization ?? '').replace(/^Bearer\s+/i, '') || null;
   const qui = await abonneDe(jeton);
   if (!qui?.abonne) return refus(res, qui);
+
+  // Compte de consultation (une bibliothèque, ouvert sur un poste public) : il peut voir ce
+  // qu'il reste, mais pas consommer le quota de l'abonnement. GET et DELETE ne réservent rien,
+  // donc seul POST est refusé.
+  if (qui.lectureSeule && req.method === 'POST') {
+    return res.status(403).json({ erreur: 'compte de consultation' });
+  }
 
   const { debut, suivant } = mois();
   const faits = await faitsCeMois(qui.id, debut);

@@ -658,3 +658,29 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 .ab-zone-arr .ab-courriel { border-top-color: transparent; padding-top: 6px; }
 .ab-zone-arr .ab-arr-suivis { margin-top: 4px; }
 .ab-zone-arr .ab-arr-choix { margin-top: 8px; }
+
+/* ---------- comptes de consultation (bibliothèques) ---------- */
+/* Un abonnement « lecture seule » reste ouvert sur les postes publics d'une bibliothèque. Toute
+   commande qui ÉCRIT disparaît : suivre un projet, ajouter une alerte, demander un détail de
+   l'argent, exporter, écrire à Martin, changer les infolettres, se déconnecter du poste.
+
+   Ce masquage n'est qu'une politesse — il évite des boutons qui échouent. La PROTECTION, elle,
+   vit dans Postgres (déclencheurs refus_lecture_seule) et dans les points d'API. Un usager de
+   neuf ans qui ouvre la console ne contourne rien en retirant cette classe. */
+.dq-consultation .ab-etoile,
+.dq-consultation .ab-demande,
+.dq-consultation .ab-signaler,
+.dq-consultation .ab-message-boite,
+.dq-consultation .ab-export,
+.dq-consultation .ab-mots,
+.dq-consultation .ab-organismes,
+.dq-consultation .ab-infolettre-boite,
+.dq-consultation #deconnexion,
+.dq-consultation .follow-btn { display: none !important; }
+
+/* Le bandeau qui dit où l'on est. Sans lui, quelqu'un cherche les boutons disparus. */
+.ab-consultation-avis {
+  margin: 0 0 14px; padding: 10px 14px; border-radius: 10px;
+  background: var(--accent-fond, #E6F6EC); border: 1px solid var(--accent, #0B8A4B);
+  font-size: 13px; line-height: 1.5;
+}

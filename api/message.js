@@ -42,8 +42,15 @@ async function supabase(chemin, { methode = 'GET', corps, jeton, entetes = {} } 
   }
 }
 
+// Le drapeau « consultation » d’un compte : une bibliothèque dont le compte reste ouvert sur
+// un poste public ne doit pas pouvoir écrire à Martin en son nom.
+async function estLectureSeule(id) {
+  const r = await supabase(`/rest/v1/abonnements?user_id=eq.${id}&select=lecture_seule`);
+  return r.ok && r.donnees?.[0]?.lecture_seule === true;
+}
+
 async function estAbonne(id) {
-  const r = await supabase(`/rest/v1/abonnements?user_id=eq.${id}&select=statut,fin`);
+  const r = await supabase(`/rest/v1/abonnements?user_id=eq.${id}&select=statut,fin,lecture_seule`);
   const ligne = r.ok ? r.donnees?.[0] : null;
   return Boolean(ligne && ligne.statut === 'actif' && (!ligne.fin || new Date(ligne.fin) > new Date()));
 }
@@ -92,6 +99,8 @@ export default async function handler(req, res) {
   const id = utilisateur.ok ? utilisateur.donnees?.id : null;
   const email = utilisateur.ok ? utilisateur.donnees?.email : null;
   if (!id || !/^[0-9a-f-]{36}$/.test(id) || !email) return res.status(401).json({ erreur: 'connexion requise' });
+  // Compte de consultation : il lit le site, il n’écrit pas au nom de la bibliothèque.
+  if (await estLectureSeule(id)) return res.status(403).json({ erreur: 'compte de consultation' });
 
   let corps = req.body;
   if (typeof corps === 'string') {

@@ -318,3 +318,37 @@ export async function demanderDetail(bouton, ville, dossier, s) {
   }
   bouton.disabled = false;
 }
+
+// ---------- comptes de consultation (bibliothèques) ----------
+// Un abonnement « lecture seule » reste ouvert sur les postes publics d'une bibliothèque : il
+// ouvre la lecture payante et ne peut rien modifier. On pose une classe sur la page pour que la
+// feuille de style retire les commandes qui écrivent (voir abonnes.css), et on affiche un
+// bandeau — sans lui, quelqu'un cherche les boutons disparus.
+//
+// CE N'EST PAS LA PROTECTION. Celle-ci vit dans Postgres (déclencheurs refus_lecture_seule) et
+// dans les points d'API. Retirer cette classe depuis la console ne donne aucun droit de plus.
+let _consultation = null;
+export async function estConsultation() {
+  if (_consultation !== null) return _consultation;
+  const { data } = await client.from('abonnements').select('lecture_seule').maybeSingle();
+  _consultation = data?.lecture_seule === true;
+  return _consultation;
+}
+
+export async function marquerConsultation() {
+  if (!(await estConsultation())) return false;
+  document.documentElement.classList.add('dq-consultation');
+  return true;
+}
+
+// Le bandeau, à poser en tête de la zone qu'on veut expliquer. Sans effet si le compte est normal.
+export async function avisConsultation(ou) {
+  if (!ou || !(await marquerConsultation()) || ou.querySelector('.ab-consultation-avis')) return;
+  const p = document.createElement('p');
+  p.className = 'ab-consultation-avis';
+  p.innerHTML = tr(
+    '<strong>Poste de consultation.</strong> Ce compte donne accès à la lecture, y compris au détail de l’argent. Les projets suivis, les alertes et les infolettres sont gérés par l’abonné — ils ne peuvent pas être modifiés ici.',
+    '<strong>Reading station.</strong> This account gives read access, including the money detail. Followed projects, alerts and newsletters are managed by the subscriber — they cannot be changed here.',
+  );
+  ou.prepend(p);
+}

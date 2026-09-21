@@ -62,7 +62,7 @@
   boutonRetourEnHaut();
 </script>
 <script type="module">
-  import { client, VILLES, VILLES_PROJETS, VILLES_EN, VILLES_ATTENDUES, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, limiteSuivis, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, mesurer, formulaireMessage, dernierVolet, EN, tr } from '/commun/abonnes-client.js';
+  import { client, VILLES, VILLES_PROJETS, VILLES_EN, VILLES_ATTENDUES, avisConsultation, marquerConsultation, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, limiteSuivis, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, mesurer, formulaireMessage, dernierVolet, EN, tr } from '/commun/abonnes-client.js';
   import { boiteInfolettre } from '/commun/infolettre.js';
   const pl = (n, sing, plur) => (n > 1 ? plur : sing);
   import { libelleEn, themeEn } from '/quebec/assets/libelles-en.js';
@@ -1492,6 +1492,8 @@ ${liste.map(fiche).join('')}
     const abonne = await statutAbonnement(s).catch(() => false);
     $('#compte').innerHTML = `${merciAbonnement(s, abonne)}<p class="ab-note">${tr('Connecté comme', 'Signed in as')} <strong>${echapper(s.user.email)}</strong> · ${abonne ? tr('abonnement actif — <a class="ab-lien" href="/abonnement">gérer</a>', 'active subscription — <a class="ab-lien" href="/abonnement">manage</a>') : tr('pas d\'abonnement — <a class="ab-lien" href="/abonnement">voir l\'abonnement</a>', 'no subscription — <a class="ab-lien" href="/abonnement">see the subscription</a>')} · <button type="button" class="ab-lien-bouton" id="deconnexion">${tr('Se déconnecter', 'Sign out')}</button></p>`;
     $('#deconnexion').addEventListener('click', async () => { await client.auth.signOut(); });
+    // Compte de consultation : on retire les commandes qui écrivent et on dit pourquoi.
+    avisConsultation($('#compte'));
 
     motsCles(s, abonne).catch((e) => console.error('mots-clés :', e));
     organismesSuivis(s, abonne).catch((e) => console.error('organismes :', e));
