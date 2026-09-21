@@ -1891,7 +1891,7 @@ function billCard(b, ctx){
   const isEn = currentLang === 'en';
   const title = isEn ? (b.titleEn||b.title) : b.title;
   const note = isEn ? (b.noteEn||b.note) : b.note;
-  const summary = isEn ? (b.summaryEn||b.summary) : b.summary;
+  // Le résumé n'est plus dans `b` : il arrive au dépliement (voir resumesProjets).
   const url = isEn ? (b.urlEn||b.url) : b.url;
   const billLabel = isEn ? `Bill ${b.num}` : `PL Nº ${b.num}`;
   const sponsorLabel = isEn ? 'Sponsor' : 'Parrain';
@@ -1990,11 +1990,11 @@ function billCard(b, ctx){
         }).join('')}
       </div>
       <div class="expand-hint" id="hint-${domId}">${t('btn.viewSummary')}</div>
-      <div class="bill-summary" id="${domId}">
+      <div class="bill-summary" id="${domId}" data-bill="${b.id}">
         <div class="bill-open-grid">
           <div>
             <div class="open-label">${isEn ? 'What it does, plainly' : 'Ce que ça fait, en clair'}</div>
-            ${summary}
+            <div class="bill-summary-body"></div>
             <p class="src-note">${b.summaryAiGenerated ? (isEn ? '⚙ AI-generated summary of the bill as introduced — may not reflect amendments made since.' : '⚙ Résumé généré par IA à partir du texte tel que présenté — peut ne pas refléter les amendements adoptés depuis.') : srcNote}</p>
           </div>
           <div class="bill-open-side">
@@ -2010,11 +2010,58 @@ function billCard(b, ctx){
   `;
 }
 
+// Les résumés en clair des projets de loi — le cœur de l'onglet, mais aussi 177 ko bruts et
+// 55 ko compressés, soit plus du tiers du poids de la page pour du texte qui ne s'affiche que
+// dans la carte dépliée. Ils vivent donc dans data/bills-resumes-<langue>.json et arrivent au
+// premier besoin : un dépliement de carte, ou une recherche par mot-clé (qui les fouille).
+// Un fichier par langue : on n'a jamais besoin des deux à la fois.
+const _resumes = new Map();
+function resumesProjets(langue){
+  const cle = langue === 'en' ? 'en' : 'fr';
+  if(_resumes.has(cle)) return _resumes.get(cle);
+  const p = fetch(`/data/bills-resumes-${cle}.json`)
+    .then(r => r.ok ? r.json() : null)
+    // Un échec ne doit pas rester collé : on l'oublie pour que la prochaine tentative réessaie.
+    .catch(() => null)
+    .then(d => { if(!d) _resumes.delete(cle); return d; });
+  _resumes.set(cle, p);
+  return p;
+}
+// Ce qu'on a DÉJÀ sous la main, sans attendre. Sert à la recherche, qui doit rester synchrone.
+let _resumesFr = null, _resumesEn = null;
+function resumeConnu(b, isEn){
+  const m = isEn ? _resumesEn : _resumesFr;
+  return (m && m[b.id]) || (isEn && _resumesFr ? _resumesFr[b.id] : null) || null;
+}
+async function chargerResumes(langue){
+  const m = await resumesProjets(langue);
+  if(!m) return null;
+  if(langue === 'en') _resumesEn = m; else _resumesFr = m;
+  return m;
+}
+
+async function remplirResume(el){
+  if(el.dataset.rempli) return;
+  const isEn = currentLang === 'en';
+  const corps = el.querySelector('.bill-summary-body');
+  if(!corps) return;
+  const dejaLa = resumeConnu({ id: el.dataset.bill }, isEn);
+  if(!dejaLa) corps.innerHTML = `<p><em>${isEn ? 'Loading the summary…' : 'Chargement du résumé…'}</em></p>`;
+  const m = await chargerResumes(isEn ? 'en' : 'fr');
+  // L'anglais n'existe pas pour tous les projets : on retombe sur le français, comme avant.
+  let texte = m ? m[el.dataset.bill] : null;
+  if(!texte && isEn) texte = (await chargerResumes('fr'))?.[el.dataset.bill] || null;
+  corps.innerHTML = texte
+    || `<p><em>${isEn ? 'Summary not available for this bill.' : 'Résumé non disponible pour ce projet de loi.'}</em></p>`;
+  if(texte) el.dataset.rempli = '1';
+}
+
 function toggleBillSummary(domId, evt){
   if(evt) evt.stopPropagation();
   const el = document.getElementById(domId);
   const hint = document.getElementById('hint-'+domId);
   const willOpen = !el.classList.contains('open');
+  if(willOpen) remplirResume(el);
   if(willOpen){
     // Accordéon (maquette) : un seul résumé ouvert à la fois.
     document.querySelectorAll('.bill-summary.open').forEach(other=>{
@@ -2202,6 +2249,11 @@ function renderBills(keyword){
   const kw = norm(keyword);
   const isEn = currentLang === 'en';
   const ch = challengedCache || [];
+  // La recherche fouille les résumés, qui ne sont plus dans la page. Dès qu'on cherche vraiment
+  // quelque chose, on va les chercher et on refait le rendu une fois arrivés — plutôt que de
+  // faire payer 55 ko à tous ceux qui ne cherchent jamais rien. Entre les deux, la recherche
+  // porte déjà sur le titre, la note, le parrain et le numéro.
+  if(kw && !_resumesFr) chargerResumes('fr').then(m => { if(m) renderBills(keyword); });
   // « 3 », « pl 3 », « PL Nº 3 », « projet de loi n° 3 » désignent tous le PROJET
   // NUMÉRO 3, et rien d'autre. Sans cette règle, « 3 » renvoyait 75 projets (tout
   // résumé ou toute date contenant un 3) et « pl 3 » en renvoyait 14, parce que
@@ -2212,7 +2264,7 @@ function renderBills(keyword){
       || (billsQuickFilter === 'encours' && (ASSEMBLY.dissolved ? b.status !== 'sanctionne' : b.status === 'encours'))
       || (billsQuickFilter === 'adoptes' && b.status === 'sanctionne')
       || (billsQuickFilter === 'challenges' && ch.some(c => Number(c.bill_id) === b.id));
-    const summaryText = (b.summary||'').replace(/<[^>]+>/g, ' ');
+    const summaryText = ((_resumesFr && _resumesFr[b.id]) || '').replace(/<[^>]+>/g, ' ');
     // On cherche dans : le titre, le résumé en clair, la ligne de statut, le nom
     // du parrain, le numéro sous toutes ses écritures, et le PARTI du parrain
     // (sigle + nom complet). Sans le parti, taper « CAQ » ne donnait rien alors
