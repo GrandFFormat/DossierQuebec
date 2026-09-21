@@ -8,7 +8,7 @@
 //   STRIPE_SECRET_KEY      sk_test_… en essai, sk_live_… en réel
 //   STRIPE_WEBHOOK_SECRET  whsec_… du point de terminaison https://dossierquebec.ca/api/stripe-webhook
 //   STRIPE_PRIX            price_… du forfait mensuel (10 $ CA par mois, récurrent)
-//   STRIPE_PRIX_ANNUEL     price_… du forfait annuel (80 $ CA par an, récurrent) — facultatif : sans
+//   STRIPE_PRIX_ANNUEL     price_… du forfait annuel (96 $ CA par an, récurrent) — facultatif : sans
 //                          lui, seul le mensuel est offert
 //   STRIPE_OUVERT          « 1 » : le paiement est offert à tout le monde. Sinon, seulement aux
 //                          adresses de STRIPE_ESSAI (séparées par des virgules) — pour essayer en
@@ -47,11 +47,12 @@ export async function stripe(chemin, parametres) {
   return donnees;
 }
 
-// Les forfaits (Martin, 18 sept. 2026 : 10 $ par mois ou 80 $ par an). Le navigateur n'envoie que
+// Les forfaits (Martin : 10 $ par mois ou 96 $ par an, soit 8 $ par mois — annuel révisé le
+// 20 sept. 2026, il était à 80 $). Le navigateur n'envoie que
 // « mensuel » ou « annuel » : l'identifiant du prix Stripe ne vient jamais de lui.
 export const FORFAITS = {
   mensuel: { variable: 'STRIPE_PRIX', montant: 1000, intervalle: 'month' },
-  annuel: { variable: 'STRIPE_PRIX_ANNUEL', montant: 8000, intervalle: 'year' },
+  annuel: { variable: 'STRIPE_PRIX_ANNUEL', montant: 9600, intervalle: 'year' },
 };
 export const prixDe = (forfait) => (Object.hasOwn(FORFAITS, forfait) ? process.env[FORFAITS[forfait].variable] || null : null);
 
