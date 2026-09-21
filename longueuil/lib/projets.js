@@ -1,35 +1,45 @@
-// Les projets de Longueuil qu'on pourrait suivre dans leur ensemble, plutôt qu'une décision à
-// la fois.
+// Les projets de Longueuil qu'on peut suivre dans leur ensemble, plutôt qu'une décision à la fois.
 //
-// LA LISTE EST VIDE, ET C'EST VOULU. Même mécanique qu'à Québec et à Lévis (quebec/lib/projets.js,
-// levis/lib/projets.js) : chaque projet y est défini À LA MAIN par une règle sur l'objet des
-// décisions, relue sur ses résultats avant d'être ajoutée, avec la trace de ce qui a été écarté
-// et pourquoi. Ce n'est pas une donnée qu'on dérive : c'est quelqu'un qui lit les décisions
-// d'une ville et y reconnaît une histoire — « Stations d'épuration », « Jeux du Québec 2030 »,
-// « Projet Guillaume-Couture ».
+// Même mécanique qu'à Québec et à Lévis (quebec/lib/projets.js, levis/lib/projets.js) : chaque
+// projet est défini À LA MAIN par une règle sur l'objet des décisions, relue sur ses résultats
+// avant d'être ajoutée. Relevé du 21 septembre 2026 sur les 901 décisions de 2026, avec ce qui a
+// été écarté et pourquoi.
 //
-// Sur les 901 décisions de Longueuil relevées le 21 septembre 2026, ce qui revient le plus
-// souvent est de la mécanique administrative, pas un projet identifiable :
-//
-//     56  services professionnels          23  équipements motorisés
-//     37  honoraires professionnels        20  entente concernant
-//     36  aide financière                  15  entente intermunicipale
-//     36  eaux usées                       14  virements budgétaires
-//     29  eau potable                      13  divers parcs
-//
-// Deux sujets tiennent peut-être : l'assainissement (« eaux usées », 36) et l'eau potable (29).
-// Les inscrire suppose de lire ces 65 décisions et de vérifier qu'elles racontent bien une même
-// chose — c'est le travail éditorial fait ailleurs, pas une règle qu'on pose à la fréquence.
-//
-// Tant que la liste est vide, le reste fonctionne quand même : data/dossiers.json,
-// data/recentes.json et data/organismes.json sont produits à partir des vraies décisions, et
-// Mes dossiers y trouve les décisions récentes, la vue par année et les organismes à suivre.
-// Seule la section « projets » de Longueuil reste absente, ce qui est exact.
-//
-// Pour en ajouter un : reprendre la forme de levis/lib/projets.js
-//     'cle-du-projet': { titre, description, regle: /…/i, exclusion?: /…/i }
-// puis vérifier ce que la règle attrape avant de committer.
-export const PROJETS = {};
+// Un seul projet pour l'instant. Le reste de ce que Longueuil décide en 2026 est de la mécanique
+// administrative qui ne raconte pas d'histoire suivable : « services professionnels » (56),
+// « honoraires professionnels » (37), « aide financière » (36). Poser une règle sur une
+// fréquence, ce serait inventer un projet là où il n'y en a pas.
+
+export const PROJETS = {
+  eau: {
+    titre: 'Eau potable et eaux usées',
+    description:
+      "Les réseaux d'eau de l'agglomération et leur capacité : le Centre d'épuration Rive-Sud, la mise à niveau des stations de pompage, le prolongement du collecteur Sud-Est, les conduites et les compteurs — et le contrôle provisoire qui limite les nouvelles constructions là où les réseaux ne suivent plus.",
+    // 72 décisions, 43 dossiers. Elles se tiennent : les travaux au centre d'épuration, les
+    // stations de pompage locales et d'agglomération, l'aqueduc et l'égout sanitaire, les
+    // compteurs d'eau, et le règlement CO-2025-1311 de contrôle provisoire — qui dit noir sur
+    // blanc que certaines interventions créeraient « des besoins excédant la capacité des
+    // réseaux municipaux d'aqueduc ou d'égout ». C'est la même histoire que les stations
+    // d'épuration de Lévis : un réseau à bout de souffle et ce que la Ville fait avec.
+    regle: /eaux us[ée]es|eau potable|assainissement des eaux|[Cc]entre d.[ée]puration|conduite d.eau|[ée]gout sanitaire|aqueduc|stations? de pompage|instruments de mesure de quantit[ée] d.eau|compteurs d.eau|capacit[ée] d.alimentation|gestion de l.eau/i,
+    // Écarté — le Règlement CA-2026-458 et ses quatre étapes : il achète des « équipements
+    // motorisés ou roulants relevant de la compétence en matière d'assainissement des eaux
+    // usées ». C'est du parc de véhicules, pas les réseaux. (Lévis écarte de même l'entretien
+    // courant de son réseau.)
+    //
+    // Écartés aussi, sans avoir besoin d'exclusion parce que la règle ne les attrape pas :
+    //   • les « jeux d'eau » des parcs Immaculée-Conception et Jean-Louis, et la « gestion des
+    //     eaux » du parc Mégantic — des aires de jeu et du pluvial, pas les réseaux ;
+    //   • le ponceau Maricourt sur le ruisseau Daigneault — de la voirie ;
+    //   • les chaudières à eau chaude des bâtiments municipaux ;
+    //   • l'appui à l'organisme de bassin versant SCABRIC sur les pénuries d'eau souterraine —
+    //     la Ville appuie la démarche d'un tiers, elle ne décide pas de ses réseaux.
+    // Les trois premiers figurent quand même dans l'exclusion : « jeux d'eau », « chaudière à
+    // eau » et « ponceau » sont assez proches du vocabulaire de la règle pour qu'un objet
+    // futur les y fasse entrer par accident.
+    exclusion: /[ée]quipements motoris[ée]s ou roulants|jeux d.eau|chaudi[èe]res? [àa] eau|ponceau/i,
+  },
+};
 
 // Les projets dont parle un objet de décision (clés), ou un tableau vide.
 export function projetsDe(objet) {

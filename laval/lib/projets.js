@@ -16,10 +16,17 @@
 //    115  services professionnels          44  traces québec
 //    100  aide financière                  42  soutien technique
 //
-// Un seul candidat sérieux ressort : « Traces Québec » (44 décisions, contrat DOS-3497), le
-// suivi de la traçabilité des sols excavés. L'inscrire suppose de lire ces 44 décisions et de
-// vérifier qu'elles racontent bien une même chose — c'est le travail éditorial fait ailleurs,
-// pas une règle qu'on pose à la fréquence.
+// « Traces Québec » (44 décisions) avait l'air d'un candidat. Les 48 décisions qui le
+// mentionnent ont été lues le 21 septembre 2026 : ce n'en est pas un. Ce sont 44 autorisations
+// de paiement identiques — « Autorisation - paiement - traces québec - contrat DOS-XXXX » —
+// une par contrat de construction, pour le service de traçabilité des sols excavés. Les 44
+// contrats n'ont rien à voir entre eux, et DOS-3497, qui revient le plus, est la construction
+// d'un chalet et de jeux d'eau dans un parc. C'est une ligne de frais récurrente, pas une
+// histoire. En faire un projet suivable enverrait le lecteur vers 44 paiements sans rapport.
+//
+// Longueuil, lui, a bien un projet (voir longueuil/lib/projets.js) : ses décisions sur l'eau
+// se tiennent parce qu'un règlement de contrôle provisoire y limite la construction là où les
+// réseaux sont saturés. Rien d'équivalent ne ressort à Laval pour 2026.
 //
 // Tant que la liste est vide, le reste fonctionne quand même : data/dossiers.json,
 // data/recentes.json et data/organismes.json sont produits à partir des vraies décisions, et
