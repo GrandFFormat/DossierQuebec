@@ -38,7 +38,7 @@ import { join } from 'node:path';
 const VOTES_PATH = 'data/votes.json';
 const BILLS_PATH = 'data/bills.json';
 const NOMINAL_DIR = 'data/votes';
-const HTML_PATH = 'index.html';
+const HTML_PATH = 'gabarit.html';   // le MODÈLE, jamais servi : les pages en sont tirées
 const START_MARKER = '/* VOTES_DATA_START */';
 const END_MARKER = '/* VOTES_DATA_END */';
 

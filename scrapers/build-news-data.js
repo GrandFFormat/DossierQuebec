@@ -16,7 +16,7 @@
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 
-const HTML_PATH = 'index.html';
+const HTML_PATH = 'gabarit.html';   // le MODÈLE, jamais servi : les pages en sont tirées
 // Le XML vit sous api/ et NON à la racine : Vercel sert le système de fichiers
 // avant les réécritures, donc un /feed.xml statique court-circuiterait la
 // fonction api/feed.js qui compte les lectures. api/ n'est pas servi tel quel.

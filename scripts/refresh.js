@@ -11,7 +11,7 @@
 // Politique de sortie :
 //   - Un scraper qui échoue N'ARRÊTE PAS la chaîne (données partielles = publiables).
 //   - Le garde-fou anti-corruption OU un build qui échoue EST fatal : on ne publie
-//     pas un index.html cassé (exit 1 → le workflow saute le commit).
+//     pas un site cassé (exit 1 → le workflow saute le commit).
 //   - En CI, on écrit `builds_ok` et `failed` dans $GITHUB_OUTPUT : le workflow
 //     committe les données fraîches si builds_ok, PUIS marque le run en échec si
 //     « failed » n'est pas vide (alerte visuelle sans perdre les données).
@@ -106,26 +106,26 @@ function sanityCheck() {
   console.log('\n✓ Garde-fou OK : ' + checks.map(([l, n]) => `${l}=${n}`).join(', '));
 }
 
-// 2) Builds (data/*.json -> index.html) — FATAL : on ne publie pas un site cassé.
+// 2) Builds (data/*.json -> gabarit.html) — FATAL : on ne publie pas un site cassé.
 let publishOk = true;
 try {
   sanityCheck();
   const BUILDS = [
-    ['Build : projets de loi -> index.html', ['scrapers/build-frontend-data.js']],
-    ['Build : députés -> index.html', ['scrapers/build-deputes-data.js']],
-    ['Build : courriels -> index.html', ['scrapers/build-depute-emails-data.js']],
-    ['Build : votes -> index.html', ['scrapers/build-votes-data.js']],
-    ['Build : ministres -> index.html', ['scrapers/build-ministers-data.js']],
-    ...(doPetitions ? [['Build : pétitions -> index.html (hebdo)', ['scrapers/build-petitions-data.js']]] : []),
+    ['Build : projets de loi -> gabarit.html', ['scrapers/build-frontend-data.js']],
+    ['Build : députés -> gabarit.html', ['scrapers/build-deputes-data.js']],
+    ['Build : courriels -> gabarit.html', ['scrapers/build-depute-emails-data.js']],
+    ['Build : votes -> gabarit.html', ['scrapers/build-votes-data.js']],
+    ['Build : ministres -> gabarit.html', ['scrapers/build-ministers-data.js']],
+    ...(doPetitions ? [['Build : pétitions -> gabarit.html (hebdo)', ['scrapers/build-petitions-data.js']]] : []),
     // Promesses électorales : données saisies à la main (data/promises.json),
     // pas scrapées. Le build tourne quand même chaque jour pour que toute
     // édition du JSON se retrouve dans la page sans étape manuelle.
-    ['Build : promesses -> index.html', ['scrapers/build-promises-data.js']],
+    ['Build : promesses -> gabarit.html', ['scrapers/build-promises-data.js']],
     // « Quoi de neuf » dérivé des projets de loi et des votes déjà scrapés —
     // APRÈS eux, donc, pour refléter les données du jour.
-    ['Build : quoi de neuf -> index.html', ['scrapers/build-news-data.js']],
+    ['Build : quoi de neuf -> gabarit.html', ['scrapers/build-news-data.js']],
     // Pages de section pré-rendues (SEO) : APRÈS toutes les injections ci-dessus.
-    ['Build : pages de section (SEO) -> *.html', ['scripts/build-section-pages.js']],
+    ['Build : les 7 pages, depuis gabarit.html', ['scripts/build-section-pages.js']],
   ];
   for (const [label, args] of BUILDS) runOrThrow(label, args);
 } catch (e) {

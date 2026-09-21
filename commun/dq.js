@@ -1,13 +1,75 @@
-// La logique de DossierQuébec.
+// La logique de DossierQuébec, partagée par les sept pages.
 //
-// Elle vivait en ligne dans index.html, donc recopiée à l'identique dans les six pages de la
-// racine. Ici, le navigateur la prend une seule fois et la garde pour toutes les pages.
+// Elle vivait en ligne dans index.html, donc recopiée à l'identique dans six pages de 2 Mo.
+// Ici, le navigateur la prend une seule fois et la garde.
 //
-// Script CLASSIQUE, jamais un module : les données restent en ligne dans la page (entre les
-// marqueurs que les scrapers réécrivent) et leurs `const` de premier niveau vivent dans la
-// portée globale lexicale, que ce fichier partage. Un module aurait sa propre portée et ne
-// verrait plus rien. Pour la même raison, la balise doit rester APRÈS celle des données et
-// à la même place dans le corps de page : le HTML est déjà analysé quand ce code démarre.
+// Script CLASSIQUE, jamais un module : les fonctions appelées depuis les attributs onclick du
+// HTML doivent vivre dans la portée globale. Il est posé après tout le HTML, donc le document
+// est déjà analysé quand ce code démarre.
+
+/* ---------------- LES DONNÉES DE LA PAGE ---------------- */
+//
+// Chaque page déclare dans <body data-donnees="…"> ce qu'elle affiche, et ne charge que ça.
+// Avant, les six pages de la racine portaient les neuf jeux en ligne, identiques : 500 ko par
+// page, dont la quasi-totalité ne servait pas à la vue affichée. Ouvrir /lexique téléchargeait
+// les 735 votes nominatifs.
+//
+// Ce sont des `let`, pas des `const` : ils sont vides jusqu'à l'arrivée des fichiers. Toute
+// fonction de rendu tourne APRÈS chargerDonnees(), et celles dont la vue n'est pas sur la page
+// sortent immédiatement (voir les gardes en tête de chacune).
+let ministers = [], bills = [], votes = [], presences = {}, deputesRaw = [],
+    deputeEmails = {}, newsItems = [], petitions = [], promises = [], stats = null;
+
+// Dérivés des précédents, recalculés une fois les fichiers arrivés.
+let deputes = [], deputeById = new Map(), voteById = new Map();
+
+// Nom déclaré dans data-donnees → variable à remplir. Trois noms visent `bills` avec des
+// contenus différents, et c'est voulu : l'accueil n'a besoin que des 4 projets récents, la page
+// des votes que des titres et parrains. Charger les 143 projets complets pour ça, c'était 113 ko.
+const _remplir = {
+  ministers: (v) => { ministers = v; },
+  bills: (v) => { bills = v; },
+  apercuBills: (v) => { bills = v; },
+  billsTitres: (v) => { bills = v; },
+  votes: (v) => { votes = v; },
+  presences: (v) => { presences = v; },
+  deputesRaw: (v) => { deputesRaw = v; },
+  deputeEmails: (v) => { deputeEmails = v; },
+  newsItems: (v) => { newsItems = v; },
+  petitions: (v) => { petitions = v; },
+  promises: (v) => { promises = v; },
+  stats: (v) => { stats = v; },
+};
+
+async function chargerDonnees(){
+  const demandes = (document.body.dataset.donnees || '').split(',').map(s => s.trim()).filter(Boolean);
+  // En parallèle : ces fichiers ne dépendent pas les uns des autres, les enchaîner coûterait
+  // un aller-retour par jeu.
+  await Promise.all(demandes.map(async (nom) => {
+    const poser = _remplir[nom];
+    if(!poser){ console.warn('jeu de données inconnu : ' + nom); return; }
+    try {
+      const r = await fetch(`/data/site/${nom}.json`);
+      if(!r.ok) throw new Error(r.status);
+      poser(await r.json());
+    } catch (e) {
+      // Une page à moitié vide vaut mieux qu'une page blanche : on note et on continue.
+      console.error(`données ${nom} non chargées :`, e.message);
+    }
+  }));
+  deputes = deputesRaw.map(d => ({ name: d[0], riding: d[1], region: d[2], party: d[3], assnatId: d[4] }));
+  deputeById = new Map(deputes.map(d => [d.assnatId, d]));
+  voteById = new Map(votes.map(v => [v.id, v]));
+  if(newsItems.length) newsAnchor = newsItems.reduce((max, n) => (n.date > max ? n.date : max), newsItems[0].date);
+  // Les trois compteurs de l'accueil étaient posés par renderMinistres, renderBills et
+  // renderVotes — des vues qui ne sont plus sur cette page. Ils viennent maintenant de stats.
+  if(stats){
+    const poser = (id, n) => { const e = document.getElementById(id); if(e) e.textContent = n; };
+    poser('statMinistres', stats.ministres);
+    poser('statProjets', stats.projets);
+    poser('statVotes', stats.votes);
+  }
+}
 
 /* ---------------- I18N ---------------- */
 const translations = {
@@ -341,14 +403,14 @@ function applyLanguage(){
     const entry = translations[currentLang] && translations[currentLang][key];
     if(entry !== undefined){ el.placeholder = entry; }
   });
-  document.getElementById('langToggle').textContent = currentLang === 'fr' ? 'English' : 'Français';
+  { const _e = document.getElementById('langToggle'); if(_e) _e.textContent = currentLang === 'fr' ? 'English' : 'Français'; }
   document.body.classList.toggle('lang-en', currentLang === 'en');
-  document.getElementById('footerLeft').textContent = t('footer.left');
-  document.getElementById('footerRight').textContent = t('footer.right');
+  { const _e = document.getElementById('footerLeft'); if(_e) _e.textContent = t('footer.left'); }
+  { const _e = document.getElementById('footerRight'); if(_e) _e.textContent = t('footer.right'); }
   // Re-render dynamic lists so their JS-generated buttons pick up the new language
   renderHemicycle();
   renderPartyFilters();
-  renderMinistres(document.getElementById('searchMinistres').value);
+  renderMinistres(document.getElementById('searchMinistres')?.value);
   renderStatusFilters();
   renderStepFilters();
   updateSortToggleLabel();  updateMinistresSortLabel();
@@ -358,7 +420,7 @@ function applyLanguage(){
   renderComparateurSelects();
   renderComparateurTable();
   renderBills();
-  renderDeputes(document.getElementById('searchMinistres').value);
+  renderDeputes(document.getElementById('searchMinistres')?.value);
   renderVotes();
   renderApercuBills();
   renderApercuPetitions();
@@ -429,7 +491,7 @@ function applyAssemblyState(){
     : 'L\'Assemblée a été dissoute le 27 août 2026 : ces 125 personnes ne sont plus députées — ce sont les sortant·e·s de la 43e législature (maintenant candidat·e·s, ou qui se retirent). Leur bilan de votes ci-dessous reste celui de cette législature.';
 }
 
-document.getElementById('langToggle').addEventListener('click', ()=>{
+document.getElementById('langToggle')?.addEventListener('click', ()=>{
   currentLang = currentLang === 'fr' ? 'en' : 'fr';
   applyLanguage();
   if(typeof renderTicker === 'function') renderTicker(); // le ticker suit la langue
@@ -482,7 +544,8 @@ function displayStep(step){
 
 
 
-const deputes = deputesRaw.map(d=>({name:d[0], riding:d[1], region:d[2], party:d[3], assnatId:d[4]}));
+// (le calcul de `deputes` a rejoint chargerDonnees, en haut : il ne peut plus tourner au
+//  chargement du script, puisque deputesRaw arrive par le réseau.)
 
 /* ---------------- STORAGE (favoris) ---------------- */
 // `window.storage` était une API propre à l'environnement Claude.ai, pas une vraie
@@ -517,7 +580,7 @@ async function toggleFollow(name){
   // En vue combinée (voir toggleMinistresSort), un ministre peut être affiché
   // dans la même grille qu'un·e député·e — les deux fonctions de rendu doivent
   // donc rafraîchir ensemble, peu importe qui a déclenché le suivi.
-  const kw = document.getElementById('searchMinistres').value;
+  const kw = document.getElementById('searchMinistres')?.value;
   renderMinistres(kw);
   renderDeputes(kw);
 }
@@ -536,7 +599,7 @@ async function toggleFollowDepute(id){
   } else {
     try{ await window.storage.set('followed-deputes', JSON.stringify(followedDeputes)); }catch(e){}
   }
-  const kw = document.getElementById('searchMinistres').value;
+  const kw = document.getElementById('searchMinistres')?.value;
   renderMinistres(kw);
   renderDeputes(kw);
 }
@@ -748,6 +811,7 @@ async function handleMagicLinkClick(){
 }
 
 function renderAccountBox(){
+  if(!document.getElementById('accountBox')) return;   // vue absente de cette page
   const box = document.getElementById('accountBox');
   if(!box) return;
   const isEn = currentLang === 'en';
@@ -828,6 +892,7 @@ async function checkMonthlyFlagCount(){
 }
 
 async function renderFlagBox(){
+  if(!document.getElementById('flagBox')) return;   // vue absente de cette page
   const box = document.getElementById('flagBox');
   if(!box) return;
   const isEn = currentLang === 'en';
@@ -938,6 +1003,7 @@ async function checkIsAdmin(){
 const PETITION_TIERS = [1000, 5000, 25000];
 
 async function renderAdminFlagCounts(){
+  if(!document.getElementById('adminFlagCounts')) return;   // vue absente de cette page
   const container = document.getElementById('adminFlagCounts');
   if(!container) return;
   const isAdmin = await checkIsAdmin();
@@ -1093,6 +1159,7 @@ function allerAuxComparateurs(){
 }
 
 function renderPromises(){
+  if(!document.getElementById('promisesList')) return;   // vue absente de cette page
   const el = document.getElementById('promisesList');
   if(!el) return;
   const isEn = currentLang === 'en';
@@ -1170,8 +1237,8 @@ function renderPartyFilters(){
 function setPartyFilter(p){
   partyFilter = (partyFilter === p) ? '' : p;
   renderPartyFilters();
-  renderMinistres(document.getElementById('searchMinistres').value);
-  renderDeputes(document.getElementById('searchMinistres').value);
+  renderMinistres(document.getElementById('searchMinistres')?.value);
+  renderDeputes(document.getElementById('searchMinistres')?.value);
 }
 
 let introCollapsed = false;
@@ -1241,9 +1308,9 @@ async function loadFontZoom(){
 function applyFontZoom(){
   document.body.style.zoom = fontZoom + '%';
   majMetriquesMiseEnPage();
-  document.getElementById('fontPct').textContent = fontZoom + '%';
-  document.getElementById('fontMinus').disabled = fontZoom <= 80;
-  document.getElementById('fontPlus').disabled = fontZoom >= 150;
+  { const _e = document.getElementById('fontPct'); if(_e) _e.textContent = fontZoom + '%'; }
+  { const _e = document.getElementById('fontMinus'); if(_e) _e.disabled = fontZoom <= 80; }
+  { const _e = document.getElementById('fontPlus'); if(_e) _e.disabled = fontZoom >= 150; }
 }
 async function changeFontZoom(delta){
   fontZoom = Math.max(80, Math.min(150, fontZoom + delta));
@@ -1282,9 +1349,9 @@ async function basculerTheme(){
   appliquerTheme();
   try{ await window.storage.set('theme', JSON.stringify(themeSombre ? 'dark' : 'light')); }catch(e){}
 }
-document.getElementById('themeToggle').addEventListener('click', basculerTheme);
-document.getElementById('fontMinus').addEventListener('click', ()=> changeFontZoom(-10));
-document.getElementById('fontPlus').addEventListener('click', ()=> changeFontZoom(10));
+document.getElementById('themeToggle')?.addEventListener('click', basculerTheme);
+document.getElementById('fontMinus')?.addEventListener('click', ()=> changeFontZoom(-10));
+document.getElementById('fontPlus')?.addEventListener('click', ()=> changeFontZoom(10));
 
 let snoozedSections = {};
 async function loadSnoozedSections(){
@@ -1326,13 +1393,17 @@ function initials(name){
 
 // Vrais éléments datés, tirés de la page d'accueil assnat.qc.ca (relevés le 12 juin 2026)
 
-const newsAnchor = newsItems.reduce((max,n)=> n.date > max ? n.date : max, newsItems[0].date);
+// La date la plus récente du fil d'actualité, qui sert de « aujourd'hui » aux barres de
+// progression. Calculée dans chargerDonnees : au chargement du script, newsItems est encore
+// vide — les données arrivent par le réseau.
+let newsAnchor = null;
 // Borne le nombre d'ÉVÉNEMENTS, pas de journées : une seule journée de fin de
 // session peut en contenir neuf et remplir l'écran à elle seule.
 const NEWS_STEP = 8;
 let newsShown = NEWS_STEP;
 
 function renderNews(){
+  if(!document.getElementById('newsList')) return;   // vue absente de cette page
   const isEn = currentLang === 'en';
   // Pagination par JOURNÉES, pas par fenêtres de 7 jours : une seule semaine de
   // fin de session peut contenir 20 événements et remplir tout l'écran. On
@@ -1396,6 +1467,9 @@ let petitionsShown = 3;
 function renderPetitions(targetId){
   targetId = targetId || 'petitionsList';
   const el = document.getElementById(targetId);
+  // Son conteneur est passé en paramètre, donc aucune garde automatique ne pouvait le couvrir :
+  // sur /ministres ou /votes, il n'existe pas.
+  if(!el) return;
   const isEn = currentLang === 'en';
   // DISSOLUTION : le Règlement de l'Assemblée interdit de signer une pétition
   // électronique quand l'Assemblée est dissoute — il n'y a donc AUCUNE pétition
@@ -1476,11 +1550,12 @@ function norm(s){
 }
 
 function renderDeputes(filter){
+  if(!document.getElementById('deputesList')) return;   // vue absente de cette page
   // En mode trié (voir toggleMinistresSort), renderMinistres() affiche tout le
   // monde (ministres + reste de l'Assemblée) fusionné dans une seule liste —
   // cette grille-ci reste donc vide et n'a rien à faire.
   if(ministresSortMode){
-    document.getElementById('deputesList').innerHTML = '';
+    { const _e = document.getElementById('deputesList'); if(_e) _e.innerHTML = ''; }
     return;
   }
   const f = norm(filter);
@@ -1609,6 +1684,7 @@ function personCard(p){
 }
 
 function renderHemicycle(){
+  if(!document.getElementById('compoBar')) return;   // vue absente de cette page
   // Refonte brutaliste : la composition est une barre empilée bordée (segments
   // proportionnels aux sièges, séparés par des bordures noires) + légende à
   // carrés — mêmes données réelles `seats` que l'ancien hémicycle SVG.
@@ -1630,10 +1706,11 @@ let ministresSortMode = null; // null (ordre par défaut) | 'desc' (+ actif) | '
 function toggleMinistresSort(){
   ministresSortMode = ministresSortMode === null ? 'desc' : (ministresSortMode === 'desc' ? 'asc' : null);
   updateMinistresSortLabel();
-  renderMinistres(document.getElementById('searchMinistres').value);
-  renderDeputes(document.getElementById('searchMinistres').value);
+  renderMinistres(document.getElementById('searchMinistres')?.value);
+  renderDeputes(document.getElementById('searchMinistres')?.value);
 }
 function updateMinistresSortLabel(){
+  if(!document.getElementById('ministresSortToggle')) return;   // vue absente de cette page
   const btn = document.getElementById('ministresSortToggle');
   if(!btn) return;
   const isEn = currentLang === 'en';
@@ -1670,17 +1747,19 @@ function sortByAttendance(list, dir){
 }
 
 function renderMinistres(filter){
+  if(!document.getElementById('ministresGrid')) return;   // vue absente de cette page
   const grid = document.getElementById('ministresGrid');
   const isEn = currentLang === 'en';
-  document.getElementById('statMinistres').textContent = ministers.length;
+  // (le compteur de l accueil vient de stats.json : voir chargerDonnees. Cette vue ne le
+  //  porte plus, et l ecrire ici plantait sur /ministres.)
 
   if(ministresSortMode){
     // Vue combinée : plus de priorité "Conseil des ministres" — tout le monde
     // (ministres + reste de l'Assemblée) sur un même pied d'égalité, classé
     // par présence. Voir toggleMinistresSort().
-    document.getElementById('ministresTitle').style.display = 'none';
-    document.getElementById('deputesTitle').style.display = 'none';
-    document.getElementById('deputesInfoBox').style.display = 'none';
+    { const _e = document.getElementById('ministresTitle'); if(_e) _e.style.display = 'none'; }
+    { const _e = document.getElementById('deputesTitle'); if(_e) _e.style.display = 'none'; }
+    { const _e = document.getElementById('deputesInfoBox'); if(_e) _e.style.display = 'none'; }
     const combinedTitle = document.getElementById('combinedTitle');
     combinedTitle.style.display = '';
 
@@ -1706,15 +1785,15 @@ function renderMinistres(filter){
 
   // Ordre par défaut : Conseil des ministres seulement dans cette grille (rang
   // de cabinet), le reste de l'Assemblée s'affiche séparément via renderDeputes().
-  document.getElementById('ministresTitle').style.display = '';
-  document.getElementById('deputesTitle').style.display = '';
-  document.getElementById('deputesInfoBox').style.display = '';
-  document.getElementById('combinedTitle').style.display = 'none';
+  { const _e = document.getElementById('ministresTitle'); if(_e) _e.style.display = ''; }
+  { const _e = document.getElementById('deputesTitle'); if(_e) _e.style.display = ''; }
+  { const _e = document.getElementById('deputesInfoBox'); if(_e) _e.style.display = ''; }
+  { const _e = document.getElementById('combinedTitle'); if(_e) _e.style.display = 'none'; }
 
   const f = norm(filter);
   const list = ministers.filter(m => (!partyFilter || m.party===partyFilter) && (!f || norm(m.name).includes(f) || norm(m.role).includes(f) || norm(m.roleEn||'').includes(f)));
   grid.innerHTML = list.map(m => personCard({ type:'minister', m, att: computeAttendance(m.name) })).join('');
-  document.getElementById('ministresCount').textContent = ministers.length;
+  { const _e = document.getElementById('ministresCount'); if(_e) _e.textContent = ministers.length; }
 }
 
 // Comparateur de deux ministres (voir onglet 5, item réglé une fois la
@@ -1722,6 +1801,7 @@ function renderMinistres(filter){
 // été volontairement écarté (LinkedIn et les bios officielles couvrent déjà
 // ça), donc pas de donnée inventée ici pour remplir cette case.
 function renderComparateurSelects(){
+  if(!document.getElementById('compareA')) return;   // vue absente de cette page
   const selA = document.getElementById('compareA');
   const selB = document.getElementById('compareB');
   if(!selA || !selB) return;
@@ -1741,11 +1821,12 @@ function billsSponsoredBy(ministerName){
 }
 
 function renderComparateurTable(){
+  if(!document.getElementById('comparateurTable')) return;   // vue absente de cette page
   const container = document.getElementById('comparateurTable');
   if(!container) return;
   const isEn = currentLang === 'en';
-  const nameA = document.getElementById('compareA').value;
-  const nameB = document.getElementById('compareB').value;
+  const nameA = document.getElementById('compareA')?.value;
+  const nameB = document.getElementById('compareB')?.value;
   if(!nameA || !nameB){
     // Placeholder tant que les deux ministres ne sont pas choisis
     container.innerHTML = `<div class="compare-placeholder">
@@ -2094,6 +2175,7 @@ let billsSortDir = 'desc';
 const billsStatusOrder = ['sanctionne','encours','laisse_de_cote'];
 
 function renderStatusFilters(){
+  if(!document.getElementById('statusFilters')) return;   // vue absente de cette page
   const el = document.getElementById('statusFilters');
   if(!el) return;
   const allLabel = currentLang==='en' ? 'All statuses' : 'Tous les statuts';
@@ -2126,6 +2208,7 @@ function setBillsStatusFilter(s){
 }
 
 function renderStepFilters(){
+  if(!document.getElementById('stepFilters')) return;   // vue absente de cette page
   const el = document.getElementById('stepFilters');
   if(!el) return;
   const labels = currentLang==='en' ? stepsEn : steps;
@@ -2139,6 +2222,7 @@ function setBillsStepFilter(n){
 }
 
 function updateSortToggleLabel(){
+  if(!document.getElementById('sortToggle')) return;   // vue absente de cette page
   const btn = document.getElementById('sortToggle');
   if(!btn) return;
   // Libellés courts : le bouton vit dans la rangée des contrôles, à côté de la
@@ -2191,6 +2275,7 @@ function voteAdmisParFiltre(v, filtre){
 // Les compteurs tiennent compte de la recherche en cours (comme sur Promesses) :
 // le chiffre d'un bouton doit correspondre à ce qu'on verrait en le pressant.
 function renderVotesQuickFilters(correspondRecherche){
+  if(!document.getElementById('votesQuickFilters')) return;   // vue absente de cette page
   const el = document.getElementById('votesQuickFilters');
   if(!el) return;
   const isEn = currentLang === 'en';
@@ -2230,6 +2315,7 @@ function setBillsQuickFilter(k){
   renderBills();
 }
 function renderBillsQuickFilters(){
+  if(!document.getElementById('billsQuickFilters')) return;   // vue absente de cette page
   const el = document.getElementById('billsQuickFilters');
   if(!el) return;
   const isEn = currentLang === 'en';
@@ -2245,6 +2331,7 @@ function renderBillsQuickFilters(){
 }
 
 function renderBills(keyword){
+  if(!document.getElementById('billsList')) return;   // vue absente de cette page
   keyword = keyword !== undefined ? keyword : (document.getElementById('searchBills')?.value || '');
   const kw = norm(keyword);
   const isEn = currentLang === 'en';
@@ -2316,7 +2403,7 @@ function renderBills(keyword){
     if(rest) rest.innerHTML = '';
     if(banner) banner.style.display = 'none'; // pas de bande sur « aucun résultat »
   }
-  document.getElementById('statProjets').textContent = bills.length;
+  // (idem : le compteur de l accueil vient de stats.json.)
   // Titre de résultats + note (suivent le filtre actif et la langue)
   renderBillsQuickFilters();
   const titles = {
@@ -2337,7 +2424,8 @@ function renderBills(keyword){
 }
 
 function renderApercuBills(){
-  document.getElementById('apercuBills').innerHTML = bills.slice(0,4).map(b=>billCard(b,'apercu')).join('');
+  if(!document.getElementById('apercuBills')) return;   // vue absente de cette page
+  { const _e = document.getElementById('apercuBills'); if(_e) _e.innerHTML = bills.slice(0,4).map(b=>billCard(b,'apercu')).join(''); }
 }
 
 // Projets « challengés » : affiche PUBLIQUEMENT les projets de loi ayant atteint
@@ -2476,6 +2564,7 @@ function openBillFromQuery(){
 }
 
 async function renderChallenged(){
+  if(!document.getElementById('challengedList')) return;   // vue absente de cette page
   const el = document.getElementById('challengedList');
   if(!el) return;
   const isEn = currentLang === 'en';
@@ -2599,8 +2688,8 @@ function showMoreChallenged(){
   });
 }
 
-const deputeById = new Map(deputes.map(d=>[d.assnatId, d]));
-const voteById = new Map(votes.map(v=>[v.id, v]));
+// (deputeById et voteById sont construits dans chargerDonnees.)
+
 
 // Proxy de présence : l'Assemblée ne publie pas d'assiduité en tant que telle
 // (voir onglet « D'où viennent ces données »). Le meilleur indicateur public est
@@ -2666,6 +2755,7 @@ let votesShown = 6; // on montre les 6 plus récents ; « Voir 6 de plus » ajou
 function loadMoreVotes(){ votesShown += 6; renderVotes(); }
 
 function renderVotes(keyword){
+  if(!document.getElementById('votesList')) return;   // vue absente de cette page
   const isEn = currentLang === 'en';
   keyword = keyword !== undefined ? keyword : (document.getElementById('searchVotes')?.value || '');
   const kw = norm(keyword);
@@ -2751,7 +2841,7 @@ function renderVotes(keyword){
   } else if(full.length > 6){
     el.innerHTML += `<div class="votes-more-note">${isEn ? `All ${full.length} shown` : `Les ${full.length} affichés`}</div>`;
   }
-  document.getElementById('statVotes').textContent = votes.length;
+  // (idem : le compteur de l accueil vient de stats.json.)
 }
 
 // Onglet Votes : ouvre/ferme le détail d'une carte (un seul ouvert à la fois).
@@ -2862,9 +2952,10 @@ function toggleVoteCard(id, evt){
    <title> propre, pour que Google les indexe séparément. Ici, côté client : on
    synchronise l'URL au clic et on ouvre le bon onglet si on arrive directement
    sur une de ces adresses. */
-const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', lexique:'/lexique', promesses:'/promesses' };
-const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'lexique':'lexique', 'promesses':'promesses' };
+const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', lexique:'/lexique', promesses:'/promesses', bd:'/sources' };
+const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd' };
 const PAGE_META = {
+  bd:        { fr:"D'où viennent ces données · DossierQuébec", en:"Where this data comes from · DossierQuébec" },
   apercu:    { fr:"DossierQuébec — ministres, projets de loi et votes de l'Assemblée nationale", en:"DossierQuébec — ministers, bills and votes of Quebec's National Assembly" },
   ministres: { fr:"Ministres du Québec — Conseil des ministres · DossierQuébec", en:"Quebec ministers — Cabinet · DossierQuébec" },
   projets:   { fr:"Projets de loi du Québec, expliqués en clair · DossierQuébec", en:"Quebec bills, explained in plain language · DossierQuébec" },
@@ -2883,10 +2974,17 @@ function syncTitle(viewName){
 
 function goToTab(viewName, opts){
   opts = opts || {};
+  const target = document.getElementById('view-'+viewName);
+  // Chaque vue a maintenant SA page. Si celle qu'on demande n'est pas ici, on y va pour de
+  // vrai — avant, tout vivait dans le même document et il suffisait de basculer une classe.
+  if(!target){
+    const url = VIEW_SLUGS[viewName];
+    if(url && !opts.fromHistory) location.href = url;
+    return;
+  }
   document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.view === viewName));
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  const target = document.getElementById('view-'+viewName);
-  if(target) target.classList.add('active');
+  target.classList.add('active');
   closeMobileMenu();
   if(!opts.noScroll) window.scrollTo({top:0, behavior: opts.fromHistory ? 'auto' : 'smooth'});
   // Met l'URL à jour au clic (mais pas quand on répond à un back/forward).
@@ -2915,34 +3013,34 @@ document.querySelectorAll('nav.tabs button').forEach(btn=>{
   btn.addEventListener('click', ()=> goToTab(btn.dataset.view));
 });
 
-document.querySelector('.brand-text').addEventListener('keydown', (e)=>{
+document.querySelector('.brand-text')?.addEventListener('keydown', (e)=>{
   if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); goToTab('apercu'); }
 });
 // (Le logo-dossier qui flippait vers DossierCanada a été retiré — le listener
 // et l'animation sont partis avec. À réintroduire ailleurs si souhaité.)
 
 function openMobileMenu(){
-  document.querySelector('nav.tabs').classList.add('open');
-  document.getElementById('hamburgerBtn').setAttribute('aria-expanded','true');
+  document.querySelector('nav.tabs')?.classList.add('open');
+  document.getElementById('hamburgerBtn')?.setAttribute('aria-expanded','true');
 }
 function closeMobileMenu(){
-  document.querySelector('nav.tabs').classList.remove('open');
-  document.getElementById('hamburgerBtn').setAttribute('aria-expanded','false');
+  document.querySelector('nav.tabs')?.classList.remove('open');
+  document.getElementById('hamburgerBtn')?.setAttribute('aria-expanded','false');
 }
-document.getElementById('hamburgerBtn').addEventListener('click', ()=>{
-  const isOpen = document.querySelector('nav.tabs').classList.contains('open');
+document.getElementById('hamburgerBtn')?.addEventListener('click', ()=>{
+  const isOpen = document.querySelector('nav.tabs')?.classList.contains('open');
   isOpen ? closeMobileMenu() : openMobileMenu();
 });
-document.getElementById('closeMenuBtn').addEventListener('click', closeMobileMenu);
+document.getElementById('closeMenuBtn')?.addEventListener('click', closeMobileMenu);
 
 const backToTopBtn = document.getElementById('backToTop');
 window.addEventListener('scroll', ()=>{
   backToTopBtn.classList.toggle('visible', window.scrollY > 400);
 });
 
-document.getElementById('searchMinistres').addEventListener('input', e=> { renderMinistres(e.target.value); renderDeputes(e.target.value); });
-document.getElementById('searchBills').addEventListener('input', ()=> { billsShown = BILLS_STEP; renderBills(); });
-document.getElementById('searchVotes').addEventListener('input', ()=> { votesShown = 6; renderVotes(); });
+document.getElementById('searchMinistres')?.addEventListener('input', e=> { renderMinistres(e.target.value); renderDeputes(e.target.value); });
+document.getElementById('searchBills')?.addEventListener('input', ()=> { billsShown = BILLS_STEP; renderBills(); });
+document.getElementById('searchVotes')?.addEventListener('input', ()=> { votesShown = 6; renderVotes(); });
 
 /* ---------------- INIT ---------------- */
 function sortRoadmapItems(){
@@ -2968,6 +3066,7 @@ function sortRoadmapItems(){
 // .calendar-box). Le contenu est dupliqué dans deux spans identiques pour
 // que l'animation translateX(-50%) boucle sans couture.
 function renderTicker(){
+  if(!document.getElementById('tickerA')) return;   // vue absente de cette page
   const isEn = currentLang === 'en';
   const parts = [];
   const cal = document.querySelector('.calendar-box .status');
@@ -2982,6 +3081,9 @@ function renderTicker(){
 }
 
 (async function init(){
+  // D'abord les données : tout ce qui suit en dépend, et elles arrivent maintenant par le
+  // réseau plutôt que d'être écrites dans la page.
+  await chargerDonnees();
   await loadFollowed();
   await loadIntroState();
   await loadFontZoom();

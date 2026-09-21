@@ -10,7 +10,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const IN_PATH = 'data/promises.json';
-const HTML_PATH = 'index.html';
+const HTML_PATH = 'gabarit.html';   // le MODÈLE, jamais servi : les pages en sont tirées
 const START_MARKER = '/* PROMISES_DATA_START';
 const END_MARKER = '/* PROMISES_DATA_END */';
 
