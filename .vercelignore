@@ -69,3 +69,18 @@ laval/data/sources
 laval/data/index-documents.json
 laval/data/lancement.log
 laval/data/seances.json
+
+# Fichiers de travail : dans le dépôt, jamais servis (21 sept. 2026). Tant que les volets étaient
+# en noindex, leur en-tête X-Robots-Tag couvrait aussi ces fichiers ; ouverts aux moteurs, ils
+# devenaient indexables — dont des courriels échangés avec la Ville de Montréal. Aucune page ni
+# aucune fonction api/ ne lit de .md, de .log, de .cmd ni de .sql.
+**/*.md
+**/*.log
+**/*.cmd
+**/*.sql
+# L'outillage de l'Assemblée, à la racine : même règle que celui des volets plus haut. Sauf le
+# script que Vercel lance lui-même pour décider s'il redéploie (vercel.json → ignoreCommand).
+/scrapers
+/scripts/*
+!/scripts/vercel-deployer.sh
+/.github

@@ -288,6 +288,13 @@ remercié pour le respect de son `robots.txt`, en précisant que le trafic des a
 décuplé cette année. Le throttle, le User-Agent identifiable et le délai de 10 secondes ne sont
 pas de la décoration : ils sont ce qui nous distingue de ce trafic-là. On n'y touche pas.
 
+> **21 sept. 2026 : verrous levés.** Martin a ouvert les cinq volets aux moteurs de recherche,
+> avant la réponse de la Ville. Plus de `noindex` ni d'en-tête `X-Robots-Tag` sur `/montreal/`, plus
+> de `rel="nofollow"` vers le volet ; ses six pages sont dans `sitemap.xml`, que
+> `scripts/build-section-pages.js` écrit lui-même (liste `VILLES`). Pour reverrouiller, remettre la
+> balise et l'en-tête : le build sort alors la page du sitemap, avec un avertissement, sans bloquer
+> la publication quotidienne. Le passage qui suit décrit l'état d'avant.
+
 Tant que les droits d'usage ne sont pas confirmés, les pages portent `<meta name="robots"
 content="noindex, nofollow">`, le `vercel.json` du dépôt ajoute `X-Robots-Tag` sur `/montreal/`, et
 le volet n'est pas dans le sitemap. Le jour où ça débloque : retirer ces verrous, ajouter les pages

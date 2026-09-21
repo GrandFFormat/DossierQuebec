@@ -1,11 +1,10 @@
 User-agent: *
 Allow: /
 
-# Les volets municipaux (/quebec/, /montreal/, /levis/, /longueuil/, /laval/) sont volontairement hors des moteurs de recherche
-# en attendant la réponse de la Ville de Québec. Il n'est PAS bloqué ici, et c'est
-# délibéré : un robot à qui l'on interdit de lire la page ne voit jamais la balise
-# « noindex » qu'elle contient, et peut alors lister l'adresse toute nue. On le laisse
-# donc lire, et on lui dit de ne pas indexer — par l'en-tête X-Robots-Tag (vercel.json)
-# et par la balise meta robots de chaque page.
+# Tout le site est ouvert aux moteurs de recherche, volets municipaux compris (/quebec/, /montreal/,
+# /levis/, /longueuil/, /laval/) depuis le 21 septembre 2026. Les pages de compte (mes-dossiers,
+# abonnement) portent leur propre balise noindex, et /api/ un en-tête X-Robots-Tag (vercel.json) :
+# on ne les bloque pas ici, parce qu'un robot à qui l'on interdit de lire une page ne voit jamais
+# le noindex qu'elle contient.
 
 Sitemap: https://dossierquebec.ca/sitemap.xml

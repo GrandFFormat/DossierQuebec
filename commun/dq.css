@@ -127,7 +127,7 @@
   html[data-theme="dark"] .sort-toggle:hover,
   html[data-theme="dark"] .filter-hamburger:hover,
   html[data-theme="dark"] .qf-btn:hover:not(.active),
-  html[data-theme="dark"] nav.tabs button:hover:not(.active),
+  html[data-theme="dark"] nav.tabs a:hover:not(.active),
   html[data-theme="dark"] .brutal-search .bs-icon{ color:var(--sur-clair); }
   html[data-theme="dark"] ::selection{ background:var(--yellow); color:var(--sur-clair); }
   /* Pastilles « adopté » : leur texte est un vert foncé figé, illisible une fois
@@ -207,7 +207,10 @@
   nav.tabs::-webkit-scrollbar-thumb{background:#c1c1c1; border-radius:16px; border:8px solid var(--paper);}
   nav.tabs::-webkit-scrollbar-thumb:hover{background:#a8a8a8;}
   nav.tabs{scrollbar-width:auto;}
-  nav.tabs button{
+  /* Des liens depuis le chantier SEO (c'étaient des <button>) : on neutralise ce qu'un lien a
+     de plus qu'un bouton, pour que rien ne bouge à l'écran. */
+  nav.tabs a{text-decoration:none; line-height:normal; display:inline-block;}
+  nav.tabs a{
     font-family:'Archivo',sans-serif;
     font-size:13.5px; font-weight:600;
     letter-spacing:0.01em;
@@ -218,12 +221,12 @@
     border-bottom:2px solid transparent;
     white-space:nowrap;
   }
-  nav.tabs button .n{
+  nav.tabs a .n{
     font-family:'Archivo Narrow',sans-serif; font-weight:500; font-size:11px;
     color:var(--slate); margin-right:6px;
   }
-  nav.tabs button.active{color:var(--ink); border-bottom-color:var(--gold);}
-  nav.tabs button:hover{color:var(--ink);}
+  nav.tabs a.active{color:var(--ink); border-bottom-color:var(--gold);}
+  nav.tabs a:hover{color:var(--ink);}
 
   nav.tabs .close-menu{display:none;}
 
@@ -815,17 +818,17 @@
 
   /* ---------- NAV : pilules carrées ---------- */
   nav.tabs{gap:8px; border-bottom:none; align-items:center;}
-  nav.tabs button{
+  nav.tabs a{
     font-family:'Archivo Narrow',sans-serif; font-size:13.5px; font-weight:700;
     text-transform:uppercase; letter-spacing:0.04em; color:var(--ink);
     padding:6px 12px; border:2px solid transparent; border-bottom:2px solid transparent;
     white-space:nowrap;
   }
-  nav.tabs button .n{display:none;} /* fini la numérotation 01/02/03 */
-  nav.tabs button.active{
+  nav.tabs a .n{display:none;} /* fini la numérotation 01/02/03 */
+  nav.tabs a.active{
     color:var(--card); background:var(--ink); border-color:var(--ink); border-bottom-color:var(--ink);
   }
-  nav.tabs button:hover:not(.active){background:var(--yellow); border-color:var(--sur-clair); color:var(--sur-clair);}
+  nav.tabs a:hover:not(.active){background:var(--yellow); border-color:var(--sur-clair); color:var(--sur-clair);}
 
   /* ---------- TITRES DE SECTION ---------- */
   .section-head h2, .view h2{
@@ -1712,11 +1715,11 @@
       padding:20px 0 40px; border-bottom:none;
     }
     nav.tabs.open{display:flex;}
-    nav.tabs button{
+    nav.tabs a{
       padding:16px 24px; border-bottom:1px solid var(--line); border-left:3px solid transparent;
       text-align:left; font-size:15px;
     }
-    nav.tabs button.active{background:var(--ink-bg); color:var(--sur-fonce); border-left-color:var(--yellow); border-bottom-color:var(--ink);}
+    nav.tabs a.active{background:var(--ink-bg); color:var(--sur-fonce); border-left-color:var(--yellow); border-bottom-color:var(--ink);}
     nav.tabs .close-menu{
       display:flex; justify-content:flex-end; padding:0 18px 12px;
       font-family:'Archivo Narrow',sans-serif; font-size:12px; color:var(--slate); cursor:pointer;
@@ -1787,3 +1790,68 @@
   @media (max-width:560px){
     .maj-entree{grid-template-columns:1fr; gap:2px;}
   }
+
+  /* ---------- SEO : le sujet dans chaque titre, fil d'Ariane, portes d'entrée de l'accueil,
+     plan du site en pied de page, et les listes écrites dans le HTML ---------- */
+  /* Le sujet de la page, en tête de son <h1> : le slogan reste l'affiche, mais le titre dit
+     enfin de quoi parle la page, avec les mots qu'on tape dans un moteur de recherche. */
+  .hero-h1 .hero-sujet{
+    display:block; width:max-content; max-width:100%;
+    font-family:'Archivo Narrow',sans-serif; font-size:14px; font-weight:700; line-height:1.25;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--sur-clair); -webkit-text-stroke:0;
+    background:var(--yellow); border:2px solid var(--ink); padding:5px 10px 4px; margin:0 0 18px;
+  }
+  .fil-ariane{
+    font-family:'Archivo Narrow',sans-serif; font-size:12.5px; font-weight:700;
+    text-transform:uppercase; letter-spacing:0.06em; color:var(--slate); padding:20px 0 0;
+  }
+  .fil-ariane a{color:var(--ink); text-decoration:none; border-bottom:2px solid var(--yellow);}
+  .fil-ariane a:hover{color:var(--gold);}
+  .fil-ariane .sep{margin:0 8px;}
+  .fil-ariane + .view-hero{padding-top:20px;}
+  .fil-ariane + .section-head{margin-top:14px;}
+
+  .hub{padding:34px 0 10px;}
+  .view .hub-titre{font-size:clamp(20px, 2.6vw, 28px); margin:0 0 16px;}
+  /* Cinq cartes : 5 de front sur grand écran, 3 + 2 au milieu, 2 + 2 + 1 sur téléphone (la
+     dernière prend toute la largeur). auto-fit donnait 4 + 1, une carte orpheline. */
+  .hub-cartes{display:grid; grid-template-columns:repeat(5, 1fr); gap:14px;}
+  @media (max-width:1100px){ .hub-cartes{grid-template-columns:repeat(3, 1fr);} }
+  @media (max-width:640px){
+    .hub-cartes{grid-template-columns:repeat(2, 1fr); gap:10px;}
+    .hub-carte:last-child:nth-child(odd){grid-column:1 / -1;}
+    .hub-carte{padding:12px 14px;}
+  }
+  .hub-carte{
+    display:flex; flex-direction:column; gap:6px; padding:16px 18px;
+    background:var(--card); color:var(--ink); border:3px solid var(--ink); box-shadow:var(--shadow-sm);
+    text-decoration:none;
+  }
+  .hub-carte b{font-family:'Archivo',sans-serif; font-weight:900; font-size:17px; text-transform:uppercase; letter-spacing:-0.01em;}
+  .hub-carte span{font-size:13.5px; line-height:1.45; color:var(--slate);}
+  .hub-carte:hover{background:var(--yellow); color:var(--sur-clair);}
+  .hub-carte:hover span{color:var(--sur-clair);}
+
+  .footer-nav{
+    max-width:1280px; margin:0 auto 22px; padding:0 28px 22px;
+    display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 20px;
+    border-bottom:1px solid var(--slate);
+  }
+  .footer-nav a{color:var(--paper); font-weight:700; text-decoration:none;}
+  .footer-nav a:hover{color:var(--yellow);}
+  .footer-nav-villes{display:inline-flex; flex-wrap:wrap; align-items:baseline; gap:8px 14px;}
+
+  /* Les listes écrites par le build (scripts/build-section-pages.js) : ce qu'un robot, ou un
+     navigateur sans JavaScript, lit dans le HTML. commun/dq.js les retire dès que les vraies
+     cartes sont affichées. */
+  .prerendu{font-size:14px; line-height:1.5; color:var(--ink); margin:6px 0 24px; max-width:900px;}
+  .prerendu ul{margin:0; padding-left:20px;}
+  .prerendu li{margin:0 0 6px;}
+  .prerendu .pr-meta{color:var(--slate);}
+  .prerendu .pr-note{font-size:12.5px; color:var(--slate); margin:10px 0 0;}
+  /* Ces quatre éléments étaient des <a role=button> ou des <span> sans adresse ; devenus de vrais
+     liens, le navigateur les soulignait. Leur survol garde ses propres règles, plus précises. */
+  .hero-cta, .legend-link, .bd-back, .footer-etmoi{text-decoration:none;}
+  /* « Villes : » prend la couleur des liens du pied de page : le gris hérité du footer tombait à
+     un contraste de 1,8:1 en thème sombre, où le pied de page est clair. */
+  .footer-nav-villes > span:first-child{color:var(--paper); font-weight:400;}

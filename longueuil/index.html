@@ -3,10 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
-<meta name="robots" content="noindex, nofollow">
 <title>DossierVilleDeLongueuil — les décisions de la Ville de Longueuil, lisibles</title>
 <meta name="description" content="Site citoyen indépendant qui rend lisibles les décisions de la Ville de Longueuil : résolutions du conseil de ville et du conseil d'agglomération, résumés des sommaires décisionnels, votes nominatifs et membres du conseil.">
+<link rel="canonical" href="https://dossierquebec.ca/longueuil/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DossierQuébec">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:title" content="DossierVilleDeLongueuil — les décisions de la Ville de Longueuil, lisibles">
+<meta property="og:description" content="Site citoyen indépendant qui rend lisibles les décisions de la Ville de Longueuil : résolutions du conseil de ville et du conseil d'agglomération, résumés des sommaires décisionnels, votes nominatifs et membres du conseil.">
+<meta property="og:url" content="https://dossierquebec.ca/longueuil/">
+<meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
+<meta property="og:image:width" content="1702">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DossierVilleDeLongueuil — les décisions de la Ville de Longueuil, lisibles">
+<meta name="twitter:description" content="Site citoyen indépendant qui rend lisibles les décisions de la Ville de Longueuil : résolutions du conseil de ville et du conseil d'agglomération, résumés des sommaires décisionnels, votes nominatifs et membres du conseil.">
+<meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
@@ -42,10 +54,10 @@
     </p>
     <nav>
       <a href="./" aria-current="page">Accueil</a>
-      <a href="decisions.html">Décisions</a>
-      <a href="votes.html">Votes nominatifs</a>
-      <a href="conseil.html">Conseil de ville</a>
-      <a href="lexique.html">Lexique</a>
+      <a href="decisions">Décisions</a>
+      <a href="votes">Votes nominatifs</a>
+      <a href="conseil">Conseil de ville</a>
+      <a href="lexique">Lexique</a>
       <a href="https://longueuil.quebec/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Longueuil (nouvel onglet)">Ville de Longueuil ↗</a>
       <div class="outils">
         <div class="taille-texte" role="group" aria-label="Taille du texte">
@@ -69,25 +81,25 @@
   <div id="fil"></div>
   <button class="plus" id="plus-fil" hidden>Afficher plus</button>
   <p style="margin-top:14px">
-    <a href="decisions.html">Toutes les décisions →</a> &nbsp;·&nbsp;
-    <a href="votes.html">Tous les votes nominatifs →</a>
+    <a href="decisions">Toutes les décisions →</a> &nbsp;·&nbsp;
+    <a href="votes">Tous les votes nominatifs →</a>
   </p>
 
   <h2 class="page">Par où commencer</h2>
   <div class="cartes-liens">
-    <a class="lien-section" href="decisions.html">
+    <a class="lien-section" href="decisions">
       <h3>Décisions</h3>
       <p>Les résolutions du conseil de ville et du conseil d'agglomération de l'année en cours, lues dans les procès-verbaux, avec le résumé du sommaire décisionnel qui les explique.</p>
     </a>
-    <a class="lien-section" href="votes.html">
+    <a class="lien-section" href="votes">
       <h3>Votes nominatifs</h3>
       <p>Quand un membre demande le vote, le procès-verbal nomme qui a voté pour et qui a voté contre. Le décompte, par personne.</p>
     </a>
-    <a class="lien-section" href="conseil.html">
+    <a class="lien-section" href="conseil">
       <h3>Conseil de ville</h3>
       <p>La carte des districts et des trois arrondissements : cliquez sur le vôtre pour savoir qui vous représente et comment le joindre. Et les membres du conseil d'agglomération.</p>
     </a>
-    <a class="lien-section" href="sources.html">
+    <a class="lien-section" href="sources">
       <h3>Sources et limites</h3>
       <p>D'où viennent les données, comment elles sont obtenues, et ce que ce prototype ne fait pas encore.</p>
     </a>
@@ -100,7 +112,7 @@
 <footer>
   <div class="contenu">
     <p>Site citoyen indépendant. Aucun lien avec la Ville de Longueuil, aucun caractère officiel.
-    En cas d'écart, le document PDF d'origine fait foi. <a href="sources.html">Sources</a>.</p>
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources">Sources</a>.</p>
   </div>
 </footer>
 

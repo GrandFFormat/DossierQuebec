@@ -452,7 +452,7 @@ function carteElu(m) {
         ${[
           m.courriel ? `<a href="mailto:${echapper(m.courriel)}">Écrire</a>` : '',
           m.biographie ? `<a href="${echapper(m.biographie)}" target="_blank" rel="noopener">Sa fiche sur le site de la Ville</a>` : '',
-          arr ? `<a href="decisions.html?instance=${encodeURIComponent(arr.instance)}">${arr.n} décisions de l'arrondissement</a>` : '',
+          arr ? `<a href="decisions?instance=${encodeURIComponent(arr.instance)}">${arr.n} décisions de l'arrondissement</a>` : '',
         ].filter(Boolean).join(' · ')}
       </p>
     </div>
@@ -698,7 +698,7 @@ function ligneEvenement(e) {
     const corps = `<p class="compte" style="margin:0">
         ${v.decomptePour ?? v.pour.length} pour, ${v.decompteContre ?? v.contre.length} contre${
           v.contre.length ? ' — ' + v.contre.map(echapper).join(', ') : ''
-        }. <a href="votes.html">Voir le détail</a>
+        }. <a href="votes">Voir le détail</a>
       </p>`;
     return carteRepliable(entete, corps);
   }
@@ -742,16 +742,16 @@ function rendreFil() {
 function rendreAccueil() {
   const chiffres = [];
   if (etat.decisions) {
-    chiffres.push({ n: nombreFr(etat.decisions.totalDisponible), quoi: `décisions publiées en ${etat.decisions.parametres.annee}`, lien: 'decisions.html' });
+    chiffres.push({ n: nombreFr(etat.decisions.totalDisponible), quoi: `décisions publiées en ${etat.decisions.parametres.annee}`, lien: 'decisions' });
   }
   if (etat.votes) {
-    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: `votes nominatifs consignés depuis ${etat.votes.parametres.annees?.[0] ?? etat.votes.parametres.annee}`, lien: 'votes.html' });
+    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: `votes nominatifs consignés depuis ${etat.votes.parametres.annees?.[0] ?? etat.votes.parametres.annee}`, lien: 'votes' });
   }
   if (etat.resumes) {
-    chiffres.push({ n: nombreFr(etat.resumes.nombre), quoi: 'sommaires décisionnels résumés en langage clair', lien: 'decisions.html' });
+    chiffres.push({ n: nombreFr(etat.resumes.nombre), quoi: 'sommaires décisionnels résumés en langage clair', lien: 'decisions' });
   }
   if (etat.elus) {
-    chiffres.push({ n: etat.elus.nombre, quoi: 'membres du conseil de ville', lien: 'conseil.html' });
+    chiffres.push({ n: etat.elus.nombre, quoi: 'membres du conseil de ville', lien: 'conseil' });
   }
   if ($('#chiffres')) {
     $('#chiffres').innerHTML = chiffres

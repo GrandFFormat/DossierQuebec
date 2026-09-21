@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DossierQuébec — ministres, projets de loi et votes de l'Assemblée nationale</title>
-<meta name="description" content="Veille citoyenne indépendante de l'Assemblée nationale du Québec : ministres et député·e·s, projets de loi et leur statut réel, votes nominatifs — vraies données publiques.">
+<title>L'Assemblée nationale du Québec en clair — DossierQuébec</title>
+<meta name="description" content="Suivez l'Assemblée nationale du Québec en langage clair : projets de loi résumés, votes nominatifs de chaque député·e, ministres et promesses électorales 2026.">
 <link rel="canonical" href="https://dossierquebec.ca/">
 <!-- Flux RSS de « Quoi de neuf », généré au build par scrapers/build-news-data.js.
      C'est ainsi que journalistes et agrégateurs suivent un site sans le visiter. -->
@@ -16,8 +16,8 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DossierQuébec">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:title" content="DossierQuébec — ministres, projets de loi et votes de l'Assemblée nationale">
-<meta property="og:description" content="Veille citoyenne indépendante de l'Assemblée nationale du Québec : ministres et député·e·s, projets de loi et leur statut réel, votes nominatifs — vraies données publiques.">
+<meta property="og:title" content="L'Assemblée nationale du Québec en clair — DossierQuébec">
+<meta property="og:description" content="Suivez l'Assemblée nationale du Québec en langage clair : projets de loi résumés, votes nominatifs de chaque député·e, ministres et promesses électorales 2026.">
 <meta property="og:url" content="https://dossierquebec.ca/">
 <meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <meta property="og:image:width" content="1702">
@@ -26,8 +26,8 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="DossierQuébec — ministres, projets de loi et votes de l'Assemblée nationale">
-<meta name="twitter:description" content="Veille citoyenne indépendante de l'Assemblée nationale du Québec : ministres et député·e·s, projets de loi et leur statut réel, votes nominatifs — vraies données publiques.">
+<meta name="twitter:title" content="L'Assemblée nationale du Québec en clair — DossierQuébec">
+<meta name="twitter:description" content="Suivez l'Assemblée nationale du Québec en langage clair : projets de loi résumés, votes nominatifs de chaque député·e, ministres et promesses électorales 2026.">
 <meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 
 <link rel="icon" type="image/svg+xml" href="/commun/dq.svg">
@@ -38,17 +38,35 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "DossierQuébec",
-  "url": "https://dossierquebec.ca/",
-  "description": "Veille citoyenne indépendante de l'Assemblée nationale du Québec : ministres et député·e·s, projets de loi et leur statut réel, votes nominatifs — vraies données publiques.",
-  "inLanguage": "fr-CA",
-  "publisher": {
-    "@type": "Organization",
-    "name": "DossierQuébec",
-    "url": "https://dossierquebec.ca/",
-    "logo": "https://dossierquebec.ca/commun/dq-512.png"
-  }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://dossierquebec.ca/#site",
+      "name": "DossierQuébec",
+      "url": "https://dossierquebec.ca/",
+      "description": "Suivez l'Assemblée nationale du Québec en langage clair : projets de loi résumés, votes nominatifs de chaque député·e, ministres et promesses électorales 2026.",
+      "inLanguage": "fr-CA",
+      "publisher": {
+        "@id": "https://dossierquebec.ca/#organisation"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://dossierquebec.ca/#organisation",
+      "name": "DossierQuébec",
+      "url": "https://dossierquebec.ca/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://dossierquebec.ca/commun/dq-512.png",
+        "width": 512,
+        "height": 512
+      },
+      "sameAs": [
+        "https://www.facebook.com/dossierquebec",
+        "https://github.com/GrandFFormat/DossierQuebec"
+      ]
+    }
+  ]
 }
 </script>
 <!-- Les DEUX préconnexions sont nécessaires et ce n'est pas un doublon :
@@ -108,19 +126,19 @@
          Vrais liens <a href> : le clavier, le clic du milieu et « ouvrir dans un
          nouvel onglet » fonctionnent sans une ligne de code. La barre oblique finale
          est OBLIGATOIRE — sans elle, les chemins relatifs du volet (assets/, data/)
-         se résolvent depuis la racine du site. rel="nofollow" tant que les volets sont
-         des prototypes hors des moteurs de recherche. Le chemin dit /quebec/ : c'est la
+         se résolvent depuis la racine du site. Plus de rel="nofollow" depuis le
+         21 sept. 2026 : les volets sont ouverts aux moteurs de recherche. Le chemin dit /quebec/ : c'est la
          liste, sous « Villes », qui dit qu'il s'agit de la ville. -->
     <details class="villes-menu" id="villesMenu">
       <summary class="city-flip" title="Les volets municipaux" aria-label="Les volets municipaux">
         <span data-i18n="nav.villes">Villes</span>
       </summary>
       <ul>
-        <li><a href="/quebec/" rel="nofollow">Québec <small>DossierVilleDeQuébec</small></a></li>
-        <li><a href="/montreal/" rel="nofollow">Montréal <small>DossierVilleDeMontréal</small></a></li>
-        <li><a href="/levis/" rel="nofollow">Lévis <small>DossierVilleDeLévis · prototype</small></a></li>
-        <li><a href="/longueuil/" rel="nofollow">Longueuil <small>DossierVilleDeLongueuil · prototype</small></a></li>
-        <li><a href="/laval/" rel="nofollow">Laval <small>DossierVilleDeLaval · prototype</small></a></li>
+        <li><a href="/quebec/">Québec <small>DossierVilleDeQuébec</small></a></li>
+        <li><a href="/montreal/">Montréal <small>DossierVilleDeMontréal</small></a></li>
+        <li><a href="/levis/">Lévis <small>DossierVilleDeLévis · prototype</small></a></li>
+        <li><a href="/longueuil/">Longueuil <small>DossierVilleDeLongueuil · prototype</small></a></li>
+        <li><a href="/laval/">Laval <small>DossierVilleDeLaval · prototype</small></a></li>
       </ul>
     </details>
   </div>
@@ -129,11 +147,13 @@
        du hamburger (position:fixed), peu importe où il vit dans le DOM. -->
   <nav class="tabs">
     <div class="close-menu" id="closeMenuBtn"><span data-i18n="nav.close">Fermer</span> ✕</div>
-    <button class="active" data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></button>
-    <button data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></button>
-    <button data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></button>
-    <button data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></button>
-    <button data-view="lexique"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></button>
+    <!-- De vrais liens, pas des <button> : un moteur de recherche ne suit pas un bouton, et
+         /ministres, /projets-de-loi, /votes et /lexique n'avaient aucun lien qu'il puisse suivre. -->
+    <a class="active" aria-current="page" href="/" data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></a>
+    <a href="/ministres" data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></a>
+    <a href="/projets-de-loi" data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></a>
+    <a href="/votes" data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></a>
+    <a href="/lexique" data-view="lexique"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></a>
   </nav>
   <div class="header-ctrls">
     <div class="font-size-ctrl" id="fontSizeCtrl">
@@ -218,6 +238,7 @@ function goToFederal(evt){
          (La ligne du header .brand-text p est masquée en échange.) -->
     <div class="hero-poster">
       <h1 class="hero-h1">
+        <span class="hero-sujet" data-i18n="sujet.apercu">L'Assemblée nationale du Québec en clair</span>
         <span data-i18n="hero.l1">Qui siège,</span>
         <span class="hero-outline" data-i18n="hero.l2">qui légifère,</span>
         <span class="hero-blue" data-i18n="hero.l3">qui vote quoi.</span>
@@ -226,16 +247,29 @@ function goToFederal(evt){
         <div class="hero-manifesto">
           <p data-i18n="hero.manifesto">L'Assemblée nationale du Québec, réorganisée <b>par personne</b> et traduite <b>en langage clair</b> — sans jugement ni verdict. Site citoyen indépendant, vraies données publiques.</p>
         </div>
-        <a class="hero-cta" role="button" tabindex="0" onclick="goToTab('projets')" data-i18n="hero.cta">Explorer →</a>
+        <a class="hero-cta" href="/projets-de-loi" data-i18n="hero.cta">Explorer →</a>
       </div>
     </div>
 
     <!-- Bande de stats (vraies données — mêmes ids qu'avant, peuplés par le JS) -->
     <div class="stat-band bleed">
-      <div class="stat-cell"><b id="statMinistres">—</b><span data-i18n="stat.ministres">Ministres au Conseil</span></div>
-      <div class="stat-cell"><b id="statProjets">—</b><span data-i18n="stat.projets">Projets de loi suivis</span></div>
-      <div class="stat-cell"><b id="statVotes">—</b><span data-i18n="stat.votes">Votes nominatifs</span></div>
+      <div class="stat-cell"><b id="statMinistres">29</b><span data-i18n="stat.ministres">Ministres au Conseil</span></div>
+      <div class="stat-cell"><b id="statProjets">143</b><span data-i18n="stat.projets">Projets de loi suivis</span></div>
+      <div class="stat-cell"><b id="statVotes">735</b><span data-i18n="stat.votes">Votes nominatifs</span></div>
     </div>
+
+    <!-- Porte d'entrée : une carte par section, en vrais liens. Le menu du haut se replie sur
+         téléphone, et une page qui annonce ses parties se comprend mieux, moteurs compris. -->
+    <nav class="hub" aria-labelledby="hubTitre">
+      <h2 class="hub-titre" id="hubTitre" data-i18n="hub.h">Par où commencer</h2>
+      <div class="hub-cartes">
+        <a class="hub-carte" href="/projets-de-loi"><b data-i18n="hub.projets.h">Projets de loi</b><span data-i18n="hub.projets.p">Les projets de loi résumés en langage clair, avec leur étape réelle.</span></a>
+        <a class="hub-carte" href="/votes"><b data-i18n="hub.votes.h">Votes nominatifs</b><span data-i18n="hub.votes.p">Qui a voté pour, contre ou s'est abstenu, député·e par député·e.</span></a>
+        <a class="hub-carte" href="/ministres"><b data-i18n="hub.ministres.h">Ministres et député·e·s</b><span data-i18n="hub.ministres.p">Le Conseil des ministres et toute l'Assemblée, avec la présence aux votes.</span></a>
+        <a class="hub-carte" href="/promesses"><b data-i18n="hub.promesses.h">Promesses 2026</b><span data-i18n="hub.promesses.p">Les engagements des partis pour le 5 octobre, chacun avec sa source.</span></a>
+        <a class="hub-carte" href="/lexique"><b data-i18n="hub.lexique.h">Lexique</b><span data-i18n="hub.lexique.p">Le jargon parlementaire, expliqué simplement.</span></a>
+      </div>
+    </nav>
 
     <!-- Section signature du handoff : bande JAUNE pleine largeur -->
     <div class="band band-yellow bleed" id="band-challenged">
@@ -257,6 +291,15 @@ function goToFederal(evt){
     </div>
     <div id="body-projets-recents">
     <div id="apercuBills"></div>
+    <div class="prerendu" data-prerendu="apercuBills">
+      <ul aria-label="Projets de loi récemment actifs">
+        <li><b>Projet de loi n° 3</b> — Loi visant à assurer la représentation effective des électeurs <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
+        <li><b>Projet de loi n° 10</b> — Loi protégeant les consommateurs contre les pratiques abusives de revente de billets et de renouvellement d’abonnements en ligne <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
+        <li><b>Projet de loi n° 17</b> — Loi modifiant la Loi sur le stockage de gaz naturel et sur les conduites de gaz naturel et de pétrole aux fins d'autoriser la mise en œuvre d'un projet pilote relatif à la recherche ou à l'exploitation d'un réservoir souterrain ou de certains fluides (titre modifié) <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
+        <li><b>Projet de loi n° 22</b> — Loi bonifiant les pouvoirs d’intervention des municipalités et modifiant d’autres dispositions législatives <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
+      </ul>
+      <p class="pr-note">Source officielle : <a href="https://www.assnat.qc.ca/" rel="noopener">assnat.qc.ca</a>.</p>
+    </div>
     </div>
 
     <!-- Bande blanche : Quoi de neuf + Pétitions côte à côte (maquette) -->
@@ -270,6 +313,19 @@ function goToFederal(evt){
 
     <div id="body-quoideneuf">
     <div id="newsList"></div>
+    <div class="prerendu" data-prerendu="newsItems">
+      <ul aria-label="Quoi de neuf à l’Assemblée nationale">
+        <li><span class="pr-meta">12 juin 2026 —</span> Dépôt du projet de loi n° 692 — Loi visant à créer un nouvel outil de conservation volontaire des milieux naturels</li>
+        <li><span class="pr-meta">12 juin 2026 —</span> Sanction du projet de loi n° 24 — Loi protégeant le consommateur contre l’utilisation trompeuse ou frauduleuse de l’identité ou de l’image…</li>
+        <li><span class="pr-meta">12 juin 2026 —</span> Sanction du projet de loi n° 23 — Loi visant principalement à mieux accompagner les personnes dont l’état mental pourrait représenter un r…</li>
+        <li><span class="pr-meta">12 juin 2026 —</span> Sanction du projet de loi n° 22 — Loi bonifiant les pouvoirs d’intervention des municipalités et modifiant d’autres dispositions législati…</li>
+        <li><span class="pr-meta">12 juin 2026 —</span> Sanction du projet de loi n° 17 — Loi modifiant la Loi sur le stockage de gaz naturel et sur les conduites de gaz naturel et de pétrole au…</li>
+        <li><span class="pr-meta">12 juin 2026 —</span> Sanction du projet de loi n° 10 — Loi protégeant les consommateurs contre les pratiques abusives de revente de billets et de renouvellemen…</li>
+        <li><span class="pr-meta">12 juin 2026 —</span> Sanction du projet de loi n° 3 — Loi visant à assurer la représentation effective des électeurs</li>
+        <li><span class="pr-meta">11 juin 2026 —</span> 6 votes nominatifs tenus à l'Assemblée.</li>
+      </ul>
+      <p class="pr-note">Source officielle : <a href="https://www.assnat.qc.ca/" rel="noopener">assnat.qc.ca</a>.</p>
+    </div>
     <!-- Encadré noir compact (maquette) — le même statut réel que le ticker.
          renderTicker() lit .calendar-box .status : NE PAS renommer. -->
     <div class="calendar-box">
@@ -351,8 +407,25 @@ function goToFederal(evt){
 <!-- Footer maquette : texte à gauche (avec « construit avec Claude » suivi du
      lien caché « et moi » vers la BD), liens texte en majuscules à droite. -->
 <footer>
+  <nav class="footer-nav" aria-label="Plan du site">
+    <a href="/" data-i18n="nav.apercu">Aperçu</a>
+    <a href="/ministres" data-i18n="nav.ministres">Ministres</a>
+    <a href="/projets-de-loi" data-i18n="nav.projets">Projets de loi</a>
+    <a href="/votes" data-i18n="nav.votes">Votes</a>
+    <a href="/promesses" data-i18n="fil.promesses">Promesses</a>
+    <a href="/lexique" data-i18n="nav.lexique">Lexique</a>
+    <a href="/sources" data-i18n="fil.bd">Mises à jour du site</a>
+    <a href="/abonnement" data-i18n="footer.abonnement">Abonnement</a>
+    <span class="footer-nav-villes"><span data-i18n="footer.villes">Villes :</span>
+      <a href="/quebec/">Québec</a>
+      <a href="/montreal/">Montréal</a>
+      <a href="/levis/">Lévis</a>
+      <a href="/longueuil/">Longueuil</a>
+      <a href="/laval/">Laval</a>
+    </span>
+  </nav>
   <div class="footer-inner">
-  <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">construit avec Claude</span> <a class="footer-etmoi" role="button" tabindex="0" onclick="goToTab('bd')" data-i18n="footer.etmoi">et moi</a></span>
+  <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">construit avec Claude</span> <a class="footer-etmoi" href="/sources" data-i18n="footer.etmoi">et moi</a></span>
   <span class="footer-right-group">
     <a class="footer-gh" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook">Facebook</a>
     <a class="footer-gh footer-coffee" href="https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00" target="_blank" rel="noopener" aria-label="Offre-moi un café" data-i18n="footer.coffee">Offre-moi un café</a>

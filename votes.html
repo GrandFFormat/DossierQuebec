@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Votes nominatifs à l'Assemblée nationale du Québec · DossierQuébec</title>
-<meta name="description" content="Les votes nominatifs des député·e·s à l'Assemblée nationale du Québec : qui a voté pour, contre ou s'est abstenu. Vraies données publiques.">
+<title>Votes nominatifs à l'Assemblée nationale — DossierQuébec</title>
+<meta name="description" content="Le registre des votes nominatifs de l'Assemblée nationale du Québec : qui a voté pour, contre ou s'est abstenu, député·e par député·e, sans interprétation.">
 <link rel="canonical" href="https://dossierquebec.ca/votes">
 <!-- Flux RSS de « Quoi de neuf », généré au build par scrapers/build-news-data.js.
      C'est ainsi que journalistes et agrégateurs suivent un site sans le visiter. -->
@@ -16,8 +16,8 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DossierQuébec">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:title" content="Votes nominatifs à l'Assemblée nationale du Québec · DossierQuébec">
-<meta property="og:description" content="Les votes nominatifs des député·e·s à l'Assemblée nationale du Québec : qui a voté pour, contre ou s'est abstenu. Vraies données publiques.">
+<meta property="og:title" content="Votes nominatifs à l'Assemblée nationale — DossierQuébec">
+<meta property="og:description" content="Le registre des votes nominatifs de l'Assemblée nationale du Québec : qui a voté pour, contre ou s'est abstenu, député·e par député·e, sans interprétation.">
 <meta property="og:url" content="https://dossierquebec.ca/votes">
 <meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <meta property="og:image:width" content="1702">
@@ -26,8 +26,8 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Votes nominatifs à l'Assemblée nationale du Québec · DossierQuébec">
-<meta name="twitter:description" content="Les votes nominatifs des député·e·s à l'Assemblée nationale du Québec : qui a voté pour, contre ou s'est abstenu. Vraies données publiques.">
+<meta name="twitter:title" content="Votes nominatifs à l'Assemblée nationale — DossierQuébec">
+<meta name="twitter:description" content="Le registre des votes nominatifs de l'Assemblée nationale du Québec : qui a voté pour, contre ou s'est abstenu, député·e par député·e, sans interprétation.">
 <meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 
 <link rel="icon" type="image/svg+xml" href="/commun/dq.svg">
@@ -38,17 +38,21 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "DossierQuébec",
-  "url": "https://dossierquebec.ca/",
-  "description": "Veille citoyenne indépendante de l'Assemblée nationale du Québec : ministres et député·e·s, projets de loi et leur statut réel, votes nominatifs — vraies données publiques.",
-  "inLanguage": "fr-CA",
-  "publisher": {
-    "@type": "Organization",
-    "name": "DossierQuébec",
-    "url": "https://dossierquebec.ca/",
-    "logo": "https://dossierquebec.ca/commun/dq-512.png"
-  }
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Accueil",
+      "item": "https://dossierquebec.ca/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Votes",
+      "item": "https://dossierquebec.ca/votes"
+    }
+  ]
 }
 </script>
 <!-- Les DEUX préconnexions sont nécessaires et ce n'est pas un doublon :
@@ -108,19 +112,19 @@
          Vrais liens <a href> : le clavier, le clic du milieu et « ouvrir dans un
          nouvel onglet » fonctionnent sans une ligne de code. La barre oblique finale
          est OBLIGATOIRE — sans elle, les chemins relatifs du volet (assets/, data/)
-         se résolvent depuis la racine du site. rel="nofollow" tant que les volets sont
-         des prototypes hors des moteurs de recherche. Le chemin dit /quebec/ : c'est la
+         se résolvent depuis la racine du site. Plus de rel="nofollow" depuis le
+         21 sept. 2026 : les volets sont ouverts aux moteurs de recherche. Le chemin dit /quebec/ : c'est la
          liste, sous « Villes », qui dit qu'il s'agit de la ville. -->
     <details class="villes-menu" id="villesMenu">
       <summary class="city-flip" title="Les volets municipaux" aria-label="Les volets municipaux">
         <span data-i18n="nav.villes">Villes</span>
       </summary>
       <ul>
-        <li><a href="/quebec/" rel="nofollow">Québec <small>DossierVilleDeQuébec</small></a></li>
-        <li><a href="/montreal/" rel="nofollow">Montréal <small>DossierVilleDeMontréal</small></a></li>
-        <li><a href="/levis/" rel="nofollow">Lévis <small>DossierVilleDeLévis · prototype</small></a></li>
-        <li><a href="/longueuil/" rel="nofollow">Longueuil <small>DossierVilleDeLongueuil · prototype</small></a></li>
-        <li><a href="/laval/" rel="nofollow">Laval <small>DossierVilleDeLaval · prototype</small></a></li>
+        <li><a href="/quebec/">Québec <small>DossierVilleDeQuébec</small></a></li>
+        <li><a href="/montreal/">Montréal <small>DossierVilleDeMontréal</small></a></li>
+        <li><a href="/levis/">Lévis <small>DossierVilleDeLévis · prototype</small></a></li>
+        <li><a href="/longueuil/">Longueuil <small>DossierVilleDeLongueuil · prototype</small></a></li>
+        <li><a href="/laval/">Laval <small>DossierVilleDeLaval · prototype</small></a></li>
       </ul>
     </details>
   </div>
@@ -129,11 +133,13 @@
        du hamburger (position:fixed), peu importe où il vit dans le DOM. -->
   <nav class="tabs">
     <div class="close-menu" id="closeMenuBtn"><span data-i18n="nav.close">Fermer</span> ✕</div>
-    <button data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></button>
-    <button data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></button>
-    <button data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></button>
-    <button class="active" data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></button>
-    <button data-view="lexique"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></button>
+    <!-- De vrais liens, pas des <button> : un moteur de recherche ne suit pas un bouton, et
+         /ministres, /projets-de-loi, /votes et /lexique n'avaient aucun lien qu'il puisse suivre. -->
+    <a href="/" data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></a>
+    <a href="/ministres" data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></a>
+    <a href="/projets-de-loi" data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></a>
+    <a class="active" aria-current="page" href="/votes" data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></a>
+    <a href="/lexique" data-view="lexique"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></a>
   </nav>
   <div class="header-ctrls">
     <div class="font-size-ctrl" id="fontSizeCtrl">
@@ -199,9 +205,11 @@ function goToFederal(evt){
 
   <!-- APERÇU -->
   <section class="view active" id="view-votes">
+    <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/" data-i18n="fil.accueil">Accueil</a><span class="sep" aria-hidden="true">›</span><span aria-current="page" data-i18n="fil.votes">Votes</span></nav>
     <!-- Hero de vue (refonte brutaliste) -->
     <div class="view-hero">
       <h1 class="hero-h1 hero-h1-md">
+        <span class="hero-sujet" data-i18n="sujet.votes">Votes nominatifs à l'Assemblée nationale</span>
         <span data-i18n="votehero.l1">Qui a voté</span>
         <span class="hero-outline" data-i18n="votehero.l2">pour, contre, absent.</span>
       </h1>
@@ -221,6 +229,41 @@ function goToFederal(evt){
     </div>
 
     <div id="votesList"></div>
+    <div class="prerendu" data-prerendu="votes">
+      <ul aria-label="Votes nominatifs récents">
+        <li><span class="pr-meta">11 juin 2026 —</span> Adoption — Projet de loi n° 4, Loi sur la communication de renseignements aux fins de protection contre la violence d’un partenaire intime et modifiant diverses dispositions législatives <span class="pr-meta">· pour 75, contre 0, abstentions 0</span></li>
+        <li><span class="pr-meta">11 juin 2026 —</span> Nomination — Motion proposée par Mme Fréchette, première ministre, afin de nommer Mme Nicole Léger membre à temps partiel de la Commission des droits de la personne et des droits de la jeunesse <span class="pr-meta">· pour 105, contre 0, abstentions 0</span></li>
+        <li><span class="pr-meta">11 juin 2026 —</span> Nomination — Motion proposée par Mme Fréchette, première ministre, afin de nommer Mme Marie-Claude Girard membre à temps partiel de la Commission des droits de la personne et des droits de la jeunesse <span class="pr-meta">· pour 97, contre 7, abstentions 0</span></li>
+        <li><span class="pr-meta">11 juin 2026 —</span> Adoption — Projet de loi n° 10, Loi protégeant les consommateurs contre les pratiques abusives de revente de billets et de renouvellement d’abonnements en ligne <span class="pr-meta">· pour 103, contre 1, abstentions 1</span></li>
+        <li><span class="pr-meta">11 juin 2026 —</span> Adoption — Projet de loi n° 11, Loi modifiant diverses dispositions principalement aux fins d’allègement du fardeau réglementaire et administratif <span class="pr-meta">· pour 89, contre 7, abstentions 9</span></li>
+        <li><span class="pr-meta">11 juin 2026 —</span> Adoption — Projet de loi n° 9, Loi visant à prévenir les effets nocifs de la boisson énergisante sur la santé des jeunes <span class="pr-meta">· pour 103, contre 1, abstentions 2</span></li>
+        <li><span class="pr-meta">10 juin 2026 —</span> Motion sans préavis — Motion proposée par M. Arseneau (Îles-de-la-Madeleine) afin de demander à Santé Québec de prendre les mesures nécessaires afin d’assurer le maintien des services d’urgence au CLSC de Portneuf <span class="pr-meta">· pour 96, contre 0, abstentions 0</span></li>
+        <li><span class="pr-meta">10 juin 2026 —</span> Motion sans préavis — Motion proposée par M. Ciccone (Marquette) afin de rendre hommage à l’équipe de la Victoire de Montréal, gagnante de la Coupe Walter <span class="pr-meta">· pour 101, contre 0, abstentions 0</span></li>
+        <li><span class="pr-meta">10 juin 2026 —</span> Adoption du principe — Projet de loi n° 2, Loi permettant au Parlement du Québec de préserver le principe de la souveraineté parlementaire à l’égard de la Charte de la langue française et de la Loi sur la langue officielle et commune du Québec, le français <span class="pr-meta">· pour 76, contre 26, abstentions 3</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Motion sans préavis — Motion proposée par Mme Ghazal, cheffe du deuxième groupe d’opposition, afin de réaffirmer la pertinence d’encadrer la vente de boissons énergisantes aux mineurs <span class="pr-meta">· pour 78, contre 0, abstentions 0</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Motion proposant que l’Assemblée approuve la politique générale du gouvernement <span class="pr-meta">· pour 62, contre 25, abstentions 0</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de M. Arseneau (Îles-de-la-Madeleine) <span class="pr-meta">· pour 24, contre 63, abstentions 0</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de M. Tanguay, leader de l’opposition officielle <span class="pr-meta">· pour 24, contre 63, abstentions 0</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de Mme Gentilcore (Terrebonne) <span class="pr-meta">· pour 25, contre 62, abstentions 0</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de Mme Laflamme (Chicoutimi) <span class="pr-meta">· pour 26, contre 62, abstentions 0</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de Mme Dufour (Mille-Îles) <span class="pr-meta">· pour 24, contre 63, abstentions 1</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de M. Grandmont (Taschereau) <span class="pr-meta">· pour 24, contre 63, abstentions 1</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de M. Boissonneault (Arthabaska) <span class="pr-meta">· pour 25, contre 63, abstentions 0</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de Mme Maccarone (Westmount–Saint-Louis) <span class="pr-meta">· pour 25, contre 63, abstentions 1</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de Mme Caron (La Pinière) <span class="pr-meta">· pour 25, contre 64, abstentions 0</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de M. Bouazzi (Maurice-Richard) <span class="pr-meta">· pour 25, contre 64, abstentions 0</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de Mme McGraw (Notre-Dame-de-Grâce) <span class="pr-meta">· pour 26, contre 63, abstentions 0</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de Mme Massé (Sainte-Marie–Saint-Jacques) <span class="pr-meta">· pour 24, contre 64, abstentions 1</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de Mme Rotiroti (Jeanne-Mance–Viger) <span class="pr-meta">· pour 25, contre 64, abstentions 0</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de M. Paradis (Jean-Talon) <span class="pr-meta">· pour 24, contre 65, abstentions 0</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de M. Beauchemin (Marguerite-Bourgeoys) <span class="pr-meta">· pour 25, contre 63, abstentions 1</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de M. Zanetti (Jean-Lesage) <span class="pr-meta">· pour 21, contre 66, abstentions 2</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de M. Kelley (Jacques-Cartier) <span class="pr-meta">· pour 25, contre 63, abstentions 1</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de M. Fontecilla (Laurier-Dorion) <span class="pr-meta">· pour 25, contre 64, abstentions 0</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Débat sur le discours d’ouverture — Motion pour formuler un grief de M. Morin (Acadie) <span class="pr-meta">· pour 24, contre 63, abstentions 2</span></li>
+      </ul>
+      <p class="pr-note">Les 30 votes les plus récents, sur 735. Source officielle : le registre des votes, <a href="https://www.assnat.qc.ca/" rel="noopener">assnat.qc.ca</a>.<noscript> Les filtres, la recherche et le détail de chaque fiche demandent JavaScript.</noscript></p>
+    </div>
     <div class="info-box">
       <b data-i18n="votes.info.b">Sur le détail « qui a voté quoi »</b> <span data-i18n="votes.info.text">— l'Assemblée nationale publie le nom de chaque député pour chaque vote nominal dans son registre des votes officiel. Le détail nominatif ci-dessus (bouton « Voir le détail nominatif ») vient de ce registre officiel, pas d'une estimation. Le parti affiché à côté de chaque nom est celui inscrit au registre au moment du vote — il peut différer du parti actuel d'un·e député·e ayant changé d'allégeance depuis.</span>
     </div>
@@ -274,8 +317,25 @@ function goToFederal(evt){
 <!-- Footer maquette : texte à gauche (avec « construit avec Claude » suivi du
      lien caché « et moi » vers la BD), liens texte en majuscules à droite. -->
 <footer>
+  <nav class="footer-nav" aria-label="Plan du site">
+    <a href="/" data-i18n="nav.apercu">Aperçu</a>
+    <a href="/ministres" data-i18n="nav.ministres">Ministres</a>
+    <a href="/projets-de-loi" data-i18n="nav.projets">Projets de loi</a>
+    <a href="/votes" data-i18n="nav.votes">Votes</a>
+    <a href="/promesses" data-i18n="fil.promesses">Promesses</a>
+    <a href="/lexique" data-i18n="nav.lexique">Lexique</a>
+    <a href="/sources" data-i18n="fil.bd">Mises à jour du site</a>
+    <a href="/abonnement" data-i18n="footer.abonnement">Abonnement</a>
+    <span class="footer-nav-villes"><span data-i18n="footer.villes">Villes :</span>
+      <a href="/quebec/">Québec</a>
+      <a href="/montreal/">Montréal</a>
+      <a href="/levis/">Lévis</a>
+      <a href="/longueuil/">Longueuil</a>
+      <a href="/laval/">Laval</a>
+    </span>
+  </nav>
   <div class="footer-inner">
-  <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">construit avec Claude</span> <a class="footer-etmoi" role="button" tabindex="0" onclick="goToTab('bd')" data-i18n="footer.etmoi">et moi</a></span>
+  <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">construit avec Claude</span> <a class="footer-etmoi" href="/sources" data-i18n="footer.etmoi">et moi</a></span>
   <span class="footer-right-group">
     <a class="footer-gh" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook">Facebook</a>
     <a class="footer-gh footer-coffee" href="https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00" target="_blank" rel="noopener" aria-label="Offre-moi un café" data-i18n="footer.coffee">Offre-moi un café</a>
