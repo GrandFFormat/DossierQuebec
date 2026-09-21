@@ -2129,28 +2129,11 @@ function setVotesQuickFilter(k){
   votesShown = 6;
   renderVotes();
 }
-// Calculé UNE fois par vote et mis en cache — sinon 735 votes × ~120 voix à
-// chaque frappe. Le nominal injecté est en forme compacte [[idDéputé, parti], …].
-let _voteDivise = null;
+// Calculé au build, plus au chargement : c'est scrapers/build-votes-data.js qui parcourt le
+// détail nominatif et pose `divise` sur chaque vote. Avant, le navigateur relisait 1 032 ko de
+// nominatif à la première frappe dans le champ de recherche — pour en tirer 735 booléens.
 function voteDivise(v){
-  if(!_voteDivise){
-    _voteDivise = new Map();
-    const PARTIS = ['CAQ','PLQ','QS','PQ','PCQ'];
-    for(const x of votes){
-      const pos = {};
-      for(const camp of ['pour','contre','abstentions']){
-        for(const entree of ((x.nominal && x.nominal[camp]) || [])){
-          const parti = entree[1];
-          if(!PARTIS.includes(parti)) continue;
-          pos[parti] = pos[parti] || { pour:0, contre:0, abstentions:0 };
-          pos[parti][camp]++;
-        }
-      }
-      const camps = new Set(Object.values(pos).map(o => Object.entries(o).sort((a,b)=>b[1]-a[1])[0][0]));
-      _voteDivise.set(x.id, camps.size > 1);
-    }
-  }
-  return _voteDivise.get(v.id) === true;
+  return v.divise === true;
 }
 function voteAdmisParFiltre(v, filtre){
   if(filtre === 'divises') return voteDivise(v);
@@ -2573,15 +2556,9 @@ const voteById = new Map(votes.map(v=>[v.id, v]));
 // médias (ex. Radio-Canada). Calculé depuis le premier vote où la personne
 // apparaît (approximation honnête du début de son mandat actuel, sans donnée
 // externe inventée), jusqu'au dernier vote scrapé.
-const sortedVotesByDate = votes.filter(v=>v.date).slice().sort((a,b)=>a.date.localeCompare(b.date));
-const votesByAssnatId = new Map();
-for(const v of votes){
-  const ids = new Set([...v.nominal.pour, ...v.nominal.contre, ...v.nominal.abstentions].map(([id])=>id));
-  for(const id of ids){
-    if(!votesByAssnatId.has(id)) votesByAssnatId.set(id, new Set());
-    votesByAssnatId.get(id).add(v.id);
-  }
-}
+// L'index « qui a participé à quels votes » se reconstruisait ici à chaque chargement de page,
+// en parcourant le détail nominatif des 735 votes. Il est maintenant calculé au build et livré
+// sous forme de taux déjà faits, dans `presences` (voir scrapers/build-votes-data.js).
 // La présidence et les 3 vice-présidences de l'Assemblée ne votent généralement
 // pas quand elles président une séance, pour préserver leur neutralité — un vrai
 // taux de présence très bas ou nul pour ces 4 personnes ne veut donc pas dire
@@ -2601,13 +2578,8 @@ function presidingRoleNote(name, isEn){
 
 function attendanceForAssnatId(assnatId){
   if(assnatId == null) return null;
-  const appeared = votesByAssnatId.get(assnatId);
-  if(!appeared || appeared.size === 0) return null;
-  const appearedVotes = sortedVotesByDate.filter(v => appeared.has(v.id));
-  const firstDate = appearedVotes[0].date;
-  const eligible = sortedVotesByDate.filter(v => v.date >= firstDate);
-  const participated = eligible.filter(v => appeared.has(v.id)).length;
-  return { participated, total: eligible.length, rate: Math.round(participated / eligible.length * 100) };
+  // Les clés de `presences` viennent d'un JSON : ce sont des chaînes, pas des nombres.
+  return (typeof presences !== 'undefined' && presences[assnatId]) || null;
 }
 function resolveDepute(name){
   // Même convention que sponsorParty()/findDeputeEmail() : un nom peut porter un
@@ -2685,41 +2657,6 @@ function renderVotes(keyword){
     const headTitle = (v.stage ? v.stage + ' — ' : '') + (v.billNum ? `${isEn ? 'Bill' : 'PL'} ${v.billNum}, ` : '') + title;
     const metaLine = `${v.date} · ${isEn ? 'Recorded division' : 'Vote nominal'}${v.stage ? ' · ' + v.stage : ''}`;
     const seg = (g) => total ? (v.totals[g]/total*100).toFixed(1) : 0;
-    const nominal = v.nominal || {pour:[], contre:[], abstentions:[]};
-
-    // Boîtes par parti : une par parti RÉELLEMENT présent dans ce vote
-    // (Pour/Contre/Abstentions comptés sur le détail nominatif officiel).
-    const perParty = {};
-    ['pour','contre','abstentions'].forEach(g => (nominal[g]||[]).forEach(([id,party])=>{
-      (perParty[party] = perParty[party] || {pour:0, contre:0, abstentions:0})[g]++;
-    }));
-    const partiesPresent = Object.keys(partyColors).filter(p => perParty[p])
-      .concat(Object.keys(perParty).filter(p => !(p in partyColors)));
-    const partyBoxes = partiesPresent.map(p => `
-      <div class="vc-pbox">
-        <div class="vc-phead" style="background:${partyColors[p]||'#999'}; color:${partyText(p)}">${p}</div>
-        <div class="vc-pbody">
-          <div class="vc-prow"><span style="color:var(--green)">${isEn?'Yea':'Pour'}</span><b>${perParty[p].pour}</b></div>
-          <div class="vc-prow"><span style="color:var(--red)">${isEn?'Nay':'Contre'}</span><b>${perParty[p].contre}</b></div>
-          <div class="vc-prow"><span style="color:var(--slate)">${isEn?'Abst.':'Abst.'}</span><b>${perParty[p].abstentions}</b></div>
-        </div>
-      </div>`).join('');
-
-    // 3 colonnes nominatives défilables (nom + pastille de parti)
-    const heads = isEn ? ['Yea','Nay','Abstentions'] : ['Pour','Contre','Abstentions'];
-    const nominalCols = ['pour','contre','abstentions'].map((g,i)=>{
-      const pairs = nominal[g] || [];
-      const cls = ['pour','contre','abst'][i];
-      const body = pairs.length ? pairs.map(([id,party])=>{
-        const dep = deputeById.get(id);
-        const name = dep ? dep.name : ('#'+id);
-        return `<div class="vc-nrow"><span class="vc-chip" style="background:${partyColors[party]||'#999'}"></span>${name}</div>`;
-      }).join('') : `<div class="vc-empty">${isEn ? 'None' : 'Personne'}</div>`;
-      return `<div class="vc-ncol">
-        <div class="vc-nhead ${cls}">${heads[i]} — ${v.totals[g]}</div>
-        <div class="vc-nbody">${body}</div>
-      </div>`;
-    }).join('');
 
     return `
       <div class="vote-card">
@@ -2741,9 +2678,9 @@ function renderVotes(keyword){
           <div class="seg contre" style="width:${seg('contre')}%"></div>
           <div class="seg abst" style="width:${seg('abstentions')}%"></div>
         </div>
-        <div class="vc-detail" id="vc-${v.id}">
-          <div class="vc-pgrid">${partyBoxes}</div>
-          <div class="vc-ncols">${nominalCols}</div>
+        <div class="vc-detail" id="vc-${v.id}" data-vote="${v.id}">
+          <div class="vc-pgrid"></div>
+          <div class="vc-ncols"></div>
           <div class="vc-foot">
             <span class="vc-foot-note">${isEn ? 'An abstention is not a « no » vote — mission, illness, scheduling.' : 'Une abstention n\'est pas un vote « non » — mission, maladie, horaire.'}</span>
             <a class="bill-more" href="${v.url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${isEn ? 'Full record → assnat.qc.ca' : 'Procès-verbal complet → assnat.qc.ca'}</a>
@@ -2766,11 +2703,91 @@ function renderVotes(keyword){
 }
 
 // Onglet Votes : ouvre/ferme le détail d'une carte (un seul ouvert à la fois).
+// Le détail nominatif d'un vote — qui a voté quoi — ne voyage plus dans la page. Il pèse
+// 1 032 ko pour les 735 votes, soit 61 % du poids de la page, alors qu'il ne s'affiche que
+// dans la carte qu'on déplie. Il vit donc dans data/votes/<id>.json (~1,4 ko) et arrive au
+// moment où on en a besoin. Une fois chargé, il reste en mémoire.
+const _nominalCache = new Map();
+async function nominalDuVote(voteId){
+  if(_nominalCache.has(voteId)) return _nominalCache.get(voteId);
+  const p = fetch(`/data/votes/${encodeURIComponent(voteId)}.json`)
+    .then(r => r.ok ? r.json() : null)
+    // Un réseau qui tombe ne doit pas laisser la carte bloquée sur « chargement » pour
+    // toujours : on oublie l'échec pour que la prochaine ouverture réessaie.
+    .catch(() => null)
+    .then(d => { if(!d) _nominalCache.delete(voteId); return d; });
+  _nominalCache.set(voteId, p);
+  return p;
+}
+
+// Les deux moitiés du détail : les boîtes par parti, puis les trois colonnes de noms.
+function contenuNominal(v, nominal, isEn){
+  // Boîtes par parti : une par parti RÉELLEMENT présent dans ce vote
+  // (Pour/Contre/Abstentions comptés sur le détail nominatif officiel).
+  const perParty = {};
+  ['pour','contre','abstentions'].forEach(g => (nominal[g]||[]).forEach(([id,party])=>{
+    (perParty[party] = perParty[party] || {pour:0, contre:0, abstentions:0})[g]++;
+  }));
+  const partiesPresent = Object.keys(partyColors).filter(p => perParty[p])
+    .concat(Object.keys(perParty).filter(p => !(p in partyColors)));
+  const partyBoxes = partiesPresent.map(p => `
+    <div class="vc-pbox">
+      <div class="vc-phead" style="background:${partyColors[p]||'#999'}; color:${partyText(p)}">${p}</div>
+      <div class="vc-pbody">
+        <div class="vc-prow"><span style="color:var(--green)">${isEn?'Yea':'Pour'}</span><b>${perParty[p].pour}</b></div>
+        <div class="vc-prow"><span style="color:var(--red)">${isEn?'Nay':'Contre'}</span><b>${perParty[p].contre}</b></div>
+        <div class="vc-prow"><span style="color:var(--slate)">${isEn?'Abst.':'Abst.'}</span><b>${perParty[p].abstentions}</b></div>
+      </div>
+    </div>`).join('');
+
+  // 3 colonnes nominatives défilables (nom + pastille de parti)
+  const heads = isEn ? ['Yea','Nay','Abstentions'] : ['Pour','Contre','Abstentions'];
+  const nominalCols = ['pour','contre','abstentions'].map((g,i)=>{
+    const pairs = nominal[g] || [];
+    const cls = ['pour','contre','abst'][i];
+    const body = pairs.length ? pairs.map(([id,party])=>{
+      const dep = deputeById.get(id);
+      const name = dep ? dep.name : ('#'+id);
+      return `<div class="vc-nrow"><span class="vc-chip" style="background:${partyColors[party]||'#999'}"></span>${name}</div>`;
+    }).join('') : `<div class="vc-empty">${isEn ? 'None' : 'Personne'}</div>`;
+    return `<div class="vc-ncol">
+      <div class="vc-nhead ${cls}">${heads[i]} — ${v.totals[g]}</div>
+      <div class="vc-nbody">${body}</div>
+    </div>`;
+  }).join('');
+  return { partyBoxes, nominalCols };
+}
+
+// Remplit le détail d'une carte, une seule fois. Rendu synchrone si le nominatif est déjà là,
+// pour que le cas courant (rouvrir une carte) n'ait aucune latence.
+async function remplirDetailVote(el){
+  if(el.dataset.rempli) return;
+  const voteId = el.dataset.vote;
+  const v = votes.find(x => x.id === voteId);
+  if(!v) return;
+  const isEn = currentLang === 'en';
+  const grille = el.querySelector('.vc-pgrid');
+  const colonnes = el.querySelector('.vc-ncols');
+  if(!_nominalCache.has(voteId)){
+    colonnes.innerHTML = `<div class="vc-empty">${isEn ? 'Loading the names…' : 'Chargement des noms…'}</div>`;
+  }
+  const nominal = await nominalDuVote(voteId);
+  if(!nominal){
+    colonnes.innerHTML = `<div class="vc-empty">${isEn ? 'Could not load the names. Open the official record below.' : 'Les noms n\'ont pas pu être chargés. Le procès-verbal officiel est en dessous.'}</div>`;
+    return;
+  }
+  const { partyBoxes, nominalCols } = contenuNominal(v, nominal, isEn);
+  grille.innerHTML = partyBoxes;
+  colonnes.innerHTML = nominalCols;
+  el.dataset.rempli = '1';
+}
+
 function toggleVoteCard(id, evt){
   if(evt) evt.stopPropagation();
   const el = document.getElementById(id);
   if(!el) return;
   const willOpen = !el.classList.contains('open');
+  if(willOpen) remplirDetailVote(el);
   document.querySelectorAll('.vc-detail.open').forEach(other=>{
     if(other === el) return;
     other.classList.remove('open');
@@ -2782,32 +2799,9 @@ function toggleVoteCard(id, evt){
   if(tog) tog.textContent = willOpen ? '−' : '+';
 }
 
-function toggleNominalGroup(domId, voteId, group){
-  const el = document.getElementById(domId + '-' + group);
-  const plus = document.getElementById('plus-' + domId + '-' + group);
-  const isOpen = el.classList.toggle('open');
-  if(isOpen && !el.dataset.built){
-    const v = voteById.get(voteId);
-    const isEn = currentLang === 'en';
-    const pairs = (v.nominal[group] || []);
-    const byParty = {};
-    for(const [assnatId, party] of pairs) (byParty[party] = byParty[party] || []).push(assnatId);
-    el.innerHTML = pairs.length
-      ? Object.keys(partyColors).filter(p => byParty[p]).map(p => `
-          <div class="nominal-party-group">
-            <div class="nominal-party-header" style="color:${partyColors[p]}">${p} (${byParty[p].length})</div>
-            <div class="nominal-grid">${byParty[p].map(assnatId=>{
-              const dep = deputeById.get(assnatId);
-              const name = dep ? dep.name : ('#'+assnatId);
-              return `<div class="nominal-row"><span>${name}</span></div>`;
-            }).join('')}</div>
-          </div>
-        `).join('')
-      : `<p style="font-size:12px; color:var(--slate); margin:8px 0 0;">${isEn ? 'No one in this category.' : 'Personne dans cette catégorie.'}</p>`;
-    el.dataset.built = '1';
-  }
-  plus.textContent = isOpen ? '−' : '+';
-}
+// (Ici vivait toggleNominalGroup, qui dépliait un camp d'un vote parti par parti. Plus aucun
+//  appelant depuis que la carte de vote affiche ses trois colonnes d'un coup — et c'était le
+//  dernier endroit à lire v.nominal, qui ne voyage plus dans la page. Retiré le 21 sept. 2026.)
 
 /* ---------------- NAV ---------------- */
 /* ---------- Routage par URL (SEO : chaque onglet a sa propre adresse) ----------
