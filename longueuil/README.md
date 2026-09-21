@@ -196,6 +196,13 @@ par exécution.
 
 ## Où ce volet vit
 
+> **21 sept. 2026 : verrous levés.** Martin a ouvert les cinq volets aux moteurs de recherche,
+> avant la réponse de la Ville. Plus de `noindex` ni d'en-tête `X-Robots-Tag` sur `/longueuil/`, plus
+> de `rel="nofollow"` vers le volet ; ses six pages sont dans `sitemap.xml`, que
+> `scripts/build-section-pages.js` écrit lui-même (liste `VILLES`). Pour reverrouiller, remettre la
+> balise et l'en-tête : le build sort alors la page du sitemap, avec un avertissement, sans bloquer
+> la publication quotidienne. Le passage qui suit décrit l'état d'avant.
+
 Sous-dossier du dépôt de DossierQuébec, servi par Vercel sous `/longueuil/` (redirection de
 `/longueuil` dans `vercel.json`). Verrous en attendant la réponse de la Ville : `noindex` sur chaque
 page, `X-Robots-Tag` dans `vercel.json`, mention dans `robots.txt` (sans `Disallow`). Longueuil est dans
@@ -207,7 +214,7 @@ site servi.
 ## Ce qui n'est pas encore là
 
 - **Le courriel à la Ville** (`courriel-greffe.md`) : à envoyer à accesinformation@longueuil.quebec (Me Audrey Paquet, pour transmission à la greffière), relance à 20 jours ouvrables. Les
-  verrous `noindex` restent jusqu'à la réponse.
+  verrous `noindex` ont été levés le 21 sept. 2026, avant la réponse (décision de Martin).
 - **Le comité exécutif, le comité exécutif d'agglomération et les trois arrondissements** : même
   gabarit de PV ; il suffit de passer `actif: true` dans `lib/lgl.js` et de vérifier le découpage. Seuls
   Vieux-Longueuil et Saint-Hubert ont un document de séance, donc des sommaires.

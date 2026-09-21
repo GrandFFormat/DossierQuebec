@@ -99,6 +99,13 @@ Le style et la logique sont partagés (`assets/style.css`, `assets/app.js`) et l
 lues à l'exécution depuis `data/*.json` : chaque page fait quelques kilo-octets, et une seule
 extraction met tout le site à jour.
 
+> **21 sept. 2026 : verrous levés.** Martin a ouvert les cinq volets aux moteurs de recherche,
+> avant la réponse de la Ville. Plus de `noindex` ni d'en-tête `X-Robots-Tag` sur `/quebec/`, plus
+> de `rel="nofollow"` vers le volet ; ses six pages sont dans `sitemap.xml`, que
+> `scripts/build-section-pages.js` écrit lui-même (liste `VILLES`). Pour reverrouiller, remettre la
+> balise et l'en-tête : le build sort alors la page du sitemap, avec un avertissement, sans bloquer
+> la publication quotidienne. Le passage qui suit décrit l'état d'avant.
+
 Tant que la Ville n'a pas répondu, les pages portent `<meta name="robots" content="noindex,
 nofollow">`, le `vercel.json` de DossierQuébec ajoute `X-Robots-Tag` sur `/quebec/`, et
 le lien depuis DossierQuébec est en `rel="nofollow"`. Le jour où ça débloque : retirer ces trois

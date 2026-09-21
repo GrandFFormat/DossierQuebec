@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projets de loi du Québec, expliqués en clair · DossierQuébec</title>
-<meta name="description" content="Chaque projet de loi de l'Assemblée nationale du Québec résumé en langage courant, avec son étape réelle dans le processus. Données publiques.">
+<title>Projets de loi du Québec expliqués en clair — DossierQuébec</title>
+<meta name="description" content="Les projets de loi de l'Assemblée nationale du Québec résumés en langage courant, avec leur étape réelle dans le processus et le lien vers le texte officiel.">
 <link rel="canonical" href="https://dossierquebec.ca/projets-de-loi">
 <!-- Flux RSS de « Quoi de neuf », généré au build par scrapers/build-news-data.js.
      C'est ainsi que journalistes et agrégateurs suivent un site sans le visiter. -->
@@ -16,8 +16,8 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DossierQuébec">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:title" content="Projets de loi du Québec, expliqués en clair · DossierQuébec">
-<meta property="og:description" content="Chaque projet de loi de l'Assemblée nationale du Québec résumé en langage courant, avec son étape réelle dans le processus. Données publiques.">
+<meta property="og:title" content="Projets de loi du Québec expliqués en clair — DossierQuébec">
+<meta property="og:description" content="Les projets de loi de l'Assemblée nationale du Québec résumés en langage courant, avec leur étape réelle dans le processus et le lien vers le texte officiel.">
 <meta property="og:url" content="https://dossierquebec.ca/projets-de-loi">
 <meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <meta property="og:image:width" content="1702">
@@ -26,8 +26,8 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Projets de loi du Québec, expliqués en clair · DossierQuébec">
-<meta name="twitter:description" content="Chaque projet de loi de l'Assemblée nationale du Québec résumé en langage courant, avec son étape réelle dans le processus. Données publiques.">
+<meta name="twitter:title" content="Projets de loi du Québec expliqués en clair — DossierQuébec">
+<meta name="twitter:description" content="Les projets de loi de l'Assemblée nationale du Québec résumés en langage courant, avec leur étape réelle dans le processus et le lien vers le texte officiel.">
 <meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 
 <link rel="icon" type="image/svg+xml" href="/commun/dq.svg">
@@ -38,17 +38,21 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "DossierQuébec",
-  "url": "https://dossierquebec.ca/",
-  "description": "Veille citoyenne indépendante de l'Assemblée nationale du Québec : ministres et député·e·s, projets de loi et leur statut réel, votes nominatifs — vraies données publiques.",
-  "inLanguage": "fr-CA",
-  "publisher": {
-    "@type": "Organization",
-    "name": "DossierQuébec",
-    "url": "https://dossierquebec.ca/",
-    "logo": "https://dossierquebec.ca/commun/dq-512.png"
-  }
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Accueil",
+      "item": "https://dossierquebec.ca/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Projets de loi",
+      "item": "https://dossierquebec.ca/projets-de-loi"
+    }
+  ]
 }
 </script>
 <!-- Les DEUX préconnexions sont nécessaires et ce n'est pas un doublon :
@@ -108,19 +112,19 @@
          Vrais liens <a href> : le clavier, le clic du milieu et « ouvrir dans un
          nouvel onglet » fonctionnent sans une ligne de code. La barre oblique finale
          est OBLIGATOIRE — sans elle, les chemins relatifs du volet (assets/, data/)
-         se résolvent depuis la racine du site. rel="nofollow" tant que les volets sont
-         des prototypes hors des moteurs de recherche. Le chemin dit /quebec/ : c'est la
+         se résolvent depuis la racine du site. Plus de rel="nofollow" depuis le
+         21 sept. 2026 : les volets sont ouverts aux moteurs de recherche. Le chemin dit /quebec/ : c'est la
          liste, sous « Villes », qui dit qu'il s'agit de la ville. -->
     <details class="villes-menu" id="villesMenu">
       <summary class="city-flip" title="Les volets municipaux" aria-label="Les volets municipaux">
         <span data-i18n="nav.villes">Villes</span>
       </summary>
       <ul>
-        <li><a href="/quebec/" rel="nofollow">Québec <small>DossierVilleDeQuébec</small></a></li>
-        <li><a href="/montreal/" rel="nofollow">Montréal <small>DossierVilleDeMontréal</small></a></li>
-        <li><a href="/levis/" rel="nofollow">Lévis <small>DossierVilleDeLévis · prototype</small></a></li>
-        <li><a href="/longueuil/" rel="nofollow">Longueuil <small>DossierVilleDeLongueuil · prototype</small></a></li>
-        <li><a href="/laval/" rel="nofollow">Laval <small>DossierVilleDeLaval · prototype</small></a></li>
+        <li><a href="/quebec/">Québec <small>DossierVilleDeQuébec</small></a></li>
+        <li><a href="/montreal/">Montréal <small>DossierVilleDeMontréal</small></a></li>
+        <li><a href="/levis/">Lévis <small>DossierVilleDeLévis · prototype</small></a></li>
+        <li><a href="/longueuil/">Longueuil <small>DossierVilleDeLongueuil · prototype</small></a></li>
+        <li><a href="/laval/">Laval <small>DossierVilleDeLaval · prototype</small></a></li>
       </ul>
     </details>
   </div>
@@ -129,11 +133,13 @@
        du hamburger (position:fixed), peu importe où il vit dans le DOM. -->
   <nav class="tabs">
     <div class="close-menu" id="closeMenuBtn"><span data-i18n="nav.close">Fermer</span> ✕</div>
-    <button data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></button>
-    <button data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></button>
-    <button class="active" data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></button>
-    <button data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></button>
-    <button data-view="lexique"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></button>
+    <!-- De vrais liens, pas des <button> : un moteur de recherche ne suit pas un bouton, et
+         /ministres, /projets-de-loi, /votes et /lexique n'avaient aucun lien qu'il puisse suivre. -->
+    <a href="/" data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></a>
+    <a href="/ministres" data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></a>
+    <a class="active" aria-current="page" href="/projets-de-loi" data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></a>
+    <a href="/votes" data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></a>
+    <a href="/lexique" data-view="lexique"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></a>
   </nav>
   <div class="header-ctrls">
     <div class="font-size-ctrl" id="fontSizeCtrl">
@@ -199,6 +205,7 @@ function goToFederal(evt){
 
   <!-- APERÇU -->
   <section class="view active" id="view-projets">
+    <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/" data-i18n="fil.accueil">Accueil</a><span class="sep" aria-hidden="true">›</span><span aria-current="page" data-i18n="fil.projets">Projets de loi</span></nav>
     <!-- Rappel de dissolution : sans ça, les projets non sanctionnés seraient lus
          comme « encore en cours ». À retirer avec l'autre bande le 17 nov. 2026. -->
     <div class="band band-yellow bleed" id="band-dissolution-projets">
@@ -209,6 +216,7 @@ function goToFederal(evt){
     <!-- Hero de vue (refonte brutaliste) -->
     <div class="view-hero">
       <h1 class="hero-h1 hero-h1-md">
+        <span class="hero-sujet" data-i18n="sujet.projets">Projets de loi du Québec</span>
         <span data-i18n="projhero.l1">Projets de loi,</span>
         <span class="hero-outline" data-i18n="projhero.l2">traduits en clair.</span>
       </h1>
@@ -236,7 +244,7 @@ function goToFederal(evt){
         <span class="bstep">Étude détaillée</span><span class="legend-arrow">→</span>
         <span class="bstep">Adoption / Sanction</span>
       </span>
-      <a class="legend-link" role="button" tabindex="0" onclick="goToTab('lexique')" data-i18n="legend.link">C'est quoi ces étapes ? → Lexique</a>
+      <a class="legend-link" href="/lexique" data-i18n="legend.link">C'est quoi ces étapes ? → Lexique</a>
     </div>
 
     <!-- Titre de résultats (change avec le filtre actif) -->
@@ -246,6 +254,154 @@ function goToFederal(evt){
     </div>
 
     <div id="billsList"></div>
+    <div class="prerendu" data-prerendu="bills">
+      <ul aria-label="Projets de loi">
+        <li><b>Projet de loi n° 3</b> — Loi visant à assurer la représentation effective des électeurs <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
+        <li><b>Projet de loi n° 10</b> — Loi protégeant les consommateurs contre les pratiques abusives de revente de billets et de renouvellement d’abonnements en ligne <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
+        <li><b>Projet de loi n° 17</b> — Loi modifiant la Loi sur le stockage de gaz naturel et sur les conduites de gaz naturel et de pétrole aux fins d'autoriser la mise en œuvre d'un projet pilote relatif à la recherche ou à l'exploitation d'un réservoir souterrain ou de certains fluides (titre modifié) <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
+        <li><b>Projet de loi n° 22</b> — Loi bonifiant les pouvoirs d’intervention des municipalités et modifiant d’autres dispositions législatives <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
+        <li><b>Projet de loi n° 23</b> — Loi visant principalement à mieux accompagner les personnes dont l’état mental pourrait représenter un risque pour leur propre sécurité ou celle d’autrui <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
+        <li><b>Projet de loi n° 24</b> — Loi protégeant le consommateur contre l’utilisation trompeuse ou frauduleuse de l’identité ou de l’image d’une personne <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
+        <li><b>Projet de loi n° 692</b> — Loi visant à créer un nouvel outil de conservation volontaire des milieux naturels <span class="pr-meta">· Présenté le 2026-06-12</span></li>
+        <li><b>Projet de loi n° 2</b> — Loi permettant au Parlement du Québec de préserver le principe de la souveraineté parlementaire à l’égard de la Charte de la langue française et de la Loi sur la langue officielle et commune du Québec, le français <span class="pr-meta">· Étude détaillée entreprise le 2026-06-11</span></li>
+        <li><b>Projet de loi n° 4</b> — Loi sur la communication de renseignements aux fins de protection contre la violence d’un partenaire intime et modifiant diverses dispositions législatives <span class="pr-meta">· Sanctionné le 2026-06-11</span></li>
+        <li><b>Projet de loi n° 9</b> — Loi visant à prévenir les effets nocifs de la boisson énergisante sur la santé des jeunes <span class="pr-meta">· Sanctionné le 2026-06-11</span></li>
+        <li><b>Projet de loi n° 11</b> — Loi modifiant diverses dispositions principalement aux fins d’allègement du fardeau réglementaire et administratif <span class="pr-meta">· Sanctionné le 2026-06-11</span></li>
+        <li><b>Projet de loi n° 12</b> — Loi instituant la prestation de services de garde éducatifs à l’enfance par les personnes reconnues à titre de responsables d’un service de garde éducatif en communauté <span class="pr-meta">· Sanctionné le 2026-06-11</span></li>
+        <li><b>Projet de loi n° 200</b> — Loi concernant Le Country Club de Montréal <span class="pr-meta">· Sanctionné le 2026-06-11</span></li>
+        <li><b>Projet de loi n° 201</b> — Loi concernant le Monastère des Ursulines de Québec <span class="pr-meta">· Sanctionné le 2026-06-11</span></li>
+        <li><b>Projet de loi n° 204</b> — Loi concernant la Ville de Gatineau <span class="pr-meta">· Sanctionné le 2026-06-11</span></li>
+        <li><b>Projet de loi n° 205</b> — Loi concernant un immeuble situé sur le territoire de la Ville de Québec <span class="pr-meta">· Sanctionné le 2026-06-11</span></li>
+        <li><b>Projet de loi n° 13</b> — Loi instaurant la charge de greffier spécial <span class="pr-meta">· Présenté le 2026-06-10</span></li>
+        <li><b>Projet de loi n° 691</b> — Loi sur le maintien de l’autonomie des personnes aînées <span class="pr-meta">· Présenté le 2026-06-05</span></li>
+        <li><b>Projet de loi n° 796</b> — Loi visant à protéger les jeunes contre les effets néfastes des écrans notamment en encadrant les médias sociaux et les jeux vidéo <span class="pr-meta">· Présenté le 2026-06-05</span></li>
+        <li><b>Projet de loi n° 7</b> — Loi n° 2 sur les crédits, 2026-2027 <span class="pr-meta">· Sanctionné le 2026-06-04</span></li>
+        <li><b>Projet de loi n° 8</b> — Loi encadrant la langue de l’enseignement en formation professionnelle et en formation générale des adultes <span class="pr-meta">· Présenté le 2026-06-04</span></li>
+        <li><b>Projet de loi n° 698</b> — Loi sur la coconstruction des mesures législatives et réglementaires touchant les Premières Nations et les Inuit <span class="pr-meta">· Présenté le 2026-05-28</span></li>
+        <li><b>Projet de loi n° 791</b> — Loi modifiant la Loi électorale aux fins de protéger de manière permanente les circonscriptions de Gaspé et de Bonaventure <span class="pr-meta">· Présenté le 2026-05-27</span></li>
+        <li><b>Projet de loi n° 599</b> — Loi proclamant la Journée nationale de sensibilisation aux enjeux vécus par les personnes immunosupprimées <span class="pr-meta">· Présenté le 2026-05-14</span></li>
+        <li><b>Projet de loi n° 690</b> — Loi sur le droit à l’alimentation <span class="pr-meta">· Présenté le 2026-05-14</span></li>
+        <li><b>Projet de loi n° 696</b> — Loi visant à garantir la liberté des personnes exploitant un établissement d’hébergement touristique quant à la détermination des prix et des conditions applicables à la location d’unités d’hébergement <span class="pr-meta">· Présenté le 2026-05-13</span></li>
+        <li><b>Projet de loi n° 6</b> — Loi donnant suite à des mesures fiscales annoncées lors du discours sur le budget du 18 mars 2026 et du point sur la situation économique et financière du Québec du 25 novembre 2025 ainsi qu’à certaines autres mesures <span class="pr-meta">· Présenté le 2026-05-12</span></li>
+        <li><b>Projet de loi n° 596</b> — Loi renforçant l’intégrité et la protection des droits et libertés de la personne <span class="pr-meta">· Présenté le 2026-05-07</span></li>
+        <li><b>Projet de loi n° 191</b> — Loi mettant en place des mesures concernant les approches complémentaires et intégratives en santé <span class="pr-meta">· Présenté le 2026-05-06</span></li>
+        <li><b>Projet de loi n° 3</b> — Loi visant à améliorer la transparence, la gouvernance et le processus démocratique de diverses associations en milieu de travail <span class="pr-meta">· Sanctionné le 2026-04-02</span></li>
+        <li><b>Projet de loi n° 7</b> — Loi visant à réduire la bureaucratie, à accroître l’efficacité de l’État et à renforcer l’imputabilité des hauts fonctionnaires <span class="pr-meta">· Sanctionné le 2026-04-02</span></li>
+        <li><b>Projet de loi n° 9</b> — Loi sur le renforcement de la laïcité au Québec <span class="pr-meta">· Sanctionné le 2026-04-02</span></li>
+        <li><b>Projet de loi n° 13</b> — Loi visant à favoriser la sécurité et le sentiment de sécurité de la population et modifiant diverses dispositions <span class="pr-meta">· Sanctionné le 2026-04-02</span></li>
+        <li><b>Projet de loi n° 15</b> — Loi modifiant le Code des professions et d’autres dispositions principalement afin d’alléger les processus réglementaires du système professionnel et d’élargir certaines pratiques professionnelles dans le domaine de la santé et des services sociaux <span class="pr-meta">· Sanctionné le 2026-04-02</span></li>
+        <li><b>Projet de loi n° 18</b> — Loi modifiant les critères du vote de l’électeur hors Québec <span class="pr-meta">· Sanctionné le 2026-04-02</span></li>
+        <li><b>Projet de loi n° 590</b> — Loi modifiant la Loi sur le drapeau et les emblèmes du Québec afin de reconnaître le tartan du Québec <span class="pr-meta">· Présenté le 2026-04-02</span></li>
+        <li><b>Projet de loi n° 598</b> — Loi visant à protéger l’enfant et le parent victimes de violence familiale <span class="pr-meta">· Présenté le 2026-04-02</span></li>
+        <li><b>Projet de loi n° 1</b> — Loi constitutionnelle de 2025 sur le Québec <span class="pr-meta">· Adoption du principe le 2026-04-01</span></li>
+        <li><b>Projet de loi n° 20</b> — Loi édictant la Loi visant à favoriser l’accès au logement et modifiant diverses dispositions concernant le domaine de l’habitation <span class="pr-meta">· Déposé en commission pour consultations particulières le 2026-04-01</span></li>
+        <li><b>Projet de loi n° 27</b> — Loi modifiant diverses dispositions concernant les décrets de convention collective et l’industrie de la construction <span class="pr-meta">· Présenté le 2026-04-01</span></li>
+        <li><b>Projet de loi n° 595</b> — Loi sur l’assistance personnelle autodirigée pour les personnes handicapées <span class="pr-meta">· Présenté le 2026-04-01</span></li>
+        <li><b>Projet de loi n° 26</b> — Loi n° 1 sur les crédits, 2026-2027 <span class="pr-meta">· Sanctionné le 2026-03-20</span></li>
+        <li><b>Projet de loi n° 25</b> — Loi visant à accroître la confiance du public envers le système de justice en modernisant la déontologie judiciaire et mettant en œuvre certaines recommandations du comité de la rémunération des juges pour la période 2023-2027 <span class="pr-meta">· Présenté le 2026-03-18</span></li>
+        <li><b>Projet de loi n° 19</b> — Loi visant notamment l’amélioration de l’accès aux services médicaux et la prise en charge médicale de la population <span class="pr-meta">· Sanctionné le 2026-02-26</span></li>
+        <li><b>Projet de loi n° 592</b> — Loi édictant la Loi sur la régionalisation de l’immigration afin d’instituer des tables régionales de l’immigration et d’affirmer le rôle des régions dans l’accueil et l’intégration des personnes immigrantes <span class="pr-meta">· Présenté le 2026-02-26</span></li>
+        <li><b>Projet de loi n° 392</b> — Loi visant à lutter contre le gaspillage alimentaire <span class="pr-meta">· Présenté le 2026-02-25</span></li>
+        <li><b>Projet de loi n° 497</b> — Loi visant à assurer la qualité de l’air <span class="pr-meta">· Présenté le 2026-02-25</span></li>
+        <li><b>Projet de loi n° 111</b> — Loi modernisant la Loi sur les coopératives et modifiant d’autres dispositions <span class="pr-meta">· Sanctionné le 2026-02-24</span></li>
+        <li><b>Projet de loi n° 496</b> — Loi visant à reconnaître l’amiral blanc en tant qu’insecte emblématique du Québec <span class="pr-meta">· Adoption du principe le 2026-02-24</span></li>
+        <li><b>Projet de loi n° 5</b> — Loi visant à accélérer l’octroi des autorisations requises pour la réalisation des projets prioritaires et d’envergure nationale <span class="pr-meta">· Adoption du principe le 2026-02-17</span></li>
+        <li><b>Projet de loi n° 498</b> — Loi retirant des freins à l’efficacité du système de santé <span class="pr-meta">· Présenté le 2026-02-17</span></li>
+        <li><b>Projet de loi n° 6</b> — Loi donnant suite à des mesures fiscales annoncées à l’occasion du discours sur le budget du 25 mars 2025 et à certaines autres mesures <span class="pr-meta">· Sanctionné le 2025-12-12</span></li>
+        <li><b>Projet de loi n° 14</b> — Loi visant à renforcer l’intégrité du vote dans le cadre des campagnes à la direction d’un parti politique et des courses à l’investiture <span class="pr-meta">· Sanctionné le 2025-12-12</span></li>
+        <li><b>Projet de loi n° 16</b> — Loi reportant l’entrée en vigueur de certaines dispositions de la Loi visant principalement à instaurer la responsabilité collective quant à l’amélioration de l’accès aux services médicaux et à assurer la continuité de la prestation de ces services <span class="pr-meta">· Sanctionné le 2025-12-12</span></li>
+        <li><b>Projet de loi n° 108</b> — Loi modifiant la Loi sur la Société de développement des entreprises culturelles afin de moderniser son offre de services financiers et de reconnaître le domaine de la créativité numérique <span class="pr-meta">· Sanctionné le 2025-12-12</span></li>
+        <li><b>Projet de loi n° 109</b> — Loi affirmant la souveraineté culturelle du Québec et édictant la Loi sur la découvrabilité des contenus culturels francophones dans l’environnement numérique <span class="pr-meta">· Sanctionné le 2025-12-12</span></li>
+        <li><b>Projet de loi n° 202</b> — Loi concernant le regroupement de Mutuelle Beneva et de La Compagnie mutuelle d’assurance Gore <span class="pr-meta">· Sanctionné le 2025-12-12</span></li>
+        <li><b>Projet de loi n° 495</b> — Loi modifiant la Loi sur la gouvernance du système de santé et de services sociaux pour garantir l’accès d’un organisme ayant un projet d’économie sociale aux subventions allouées aux organismes communautaires <span class="pr-meta">· Présenté le 2025-12-10</span></li>
+        <li><b>Projet de loi n° 203</b> — Loi visant à octroyer certains pouvoirs temporaires à la Ville de Rivière-du-Loup <span class="pr-meta">· Présenté le 2025-12-09</span></li>
+        <li><b>Projet de loi n° 395</b> — Loi modifiant la Loi sur la Société de l’assurance automobile du Québec et d’autres dispositions législatives concernant les droits consentis sur un véhicule <span class="pr-meta">· Présenté le 2025-12-04</span></li>
+        <li><b>Projet de loi n° 195</b> — Loi limitant le recours aux services d’une agence de placement de personnel et à de la main-d’œuvre indépendante dans le secteur des services de garde éducatifs à l’enfance <span class="pr-meta">· Présenté le 2025-12-03</span></li>
+        <li><b>Projet de loi n° 492</b> — Loi modifiant certaines dispositions réglementaires afin de favoriser la protection des concurrents professionnels de sports de combat <span class="pr-meta">· Présenté le 2025-12-02</span></li>
+        <li><b>Projet de loi n° 220</b> — Loi concernant Joseph Paul-Émile Daniel Michel Marcil <span class="pr-meta">· Sanctionné le 2025-11-27</span></li>
+        <li><b>Projet de loi n° 393</b> — Loi modifiant la Loi sur le vérificateur général relativement à sa nomination <span class="pr-meta">· Présenté le 2025-11-26</span></li>
+        <li><b>Projet de loi n° 103</b> — Loi visant à réglementer les sites de consommation supervisée afin de favoriser une cohabitation harmonieuse avec la communauté (titre modifié) <span class="pr-meta">· Sanctionné le 2025-11-13</span></li>
+        <li><b>Projet de loi n° 4</b> — Loi concernant la mise en œuvre de certaines dispositions du discours sur le budget du 25 mars 2025 et modifiant d’autres dispositions <span class="pr-meta">· Sanctionné le 2025-11-12</span></li>
+        <li><b>Projet de loi n° 8</b> — Loi concernant l’entrée en vigueur de la Loi visant à considérer davantage les besoins de la population en cas de grève ou de lock-out <span class="pr-meta">· Présenté le 2025-11-12</span></li>
+        <li><b>Projet de loi n° 104</b> — Loi modifiant diverses dispositions afin notamment de donner suite à certaines demandes du milieu municipal <span class="pr-meta">· Sanctionné le 2025-11-12</span></li>
+        <li><b>Projet de loi n° 199</b> — Loi établissant un nouveau mode de scrutin <span class="pr-meta">· Présenté le 2025-11-12</span></li>
+        <li><b>Projet de loi n° 191</b> — Loi modifiant la Loi sur le Cercle des ex-parlementaires de l’Assemblée nationale du Québec <span class="pr-meta">· Sanctionné le 2025-11-04</span></li>
+        <li><b>Projet de loi n° 94</b> — Loi visant notamment à renforcer la laïcité dans le réseau de l’éducation et modifiant diverses dispositions législatives <span class="pr-meta">· Sanctionné le 2025-10-30</span></li>
+        <li><b>Projet de loi n° 112</b> — Loi favorisant le commerce des produits et la mobilité de la main-d’œuvre en provenance des autres provinces et des territoires du Canada <span class="pr-meta">· Sanctionné le 2025-10-30</span></li>
+        <li><b>Projet de loi n° 82</b> — Loi concernant l’identité numérique nationale et modifiant d’autres dispositions <span class="pr-meta">· Sanctionné le 2025-10-28</span></li>
+        <li><b>Projet de loi n° 99</b> — Loi donnant suite à des mesures fiscales annoncées lors du point sur la situation économique et financière du Québec du 21 novembre 2024 et du discours sur le budget du 25 mars 2025 ainsi qu’à certaines autres mesures <span class="pr-meta">· Sanctionné le 2025-10-28</span></li>
+        <li><b>Projet de loi n° 101</b> — Loi visant l’amélioration de certaines lois du travail <span class="pr-meta">· Sanctionné le 2025-10-28</span></li>
+        <li><b>Projet de loi n° 2</b> — Loi visant principalement à instaurer la responsabilité collective quant à l’amélioration de l’accès aux services médicaux et à assurer la continuité de la prestation de ces services <span class="pr-meta">· Sanctionné le 2025-10-25</span></li>
+        <li><b>Projet de loi n° 198</b> — Loi proclamant la Journée nationale de sensibilisation à l’itinérance <span class="pr-meta">· Présenté le 2025-10-09</span></li>
+        <li><b>Projet de loi n° 190</b> — Loi sur la mise en place en milieu de travail de comités paritaires de transition juste vers une économie écologiquement durable <span class="pr-meta">· Présenté le 2025-10-08</span></li>
+        <li><b>Projet de loi n° 97</b> — Loi visant principalement à moderniser le régime forestier <span class="pr-meta">· Resté à l'étape « dépôt en commission (consultations particulières) » (session 1) — non réinscrit depuis, dernière activité le 2025-06-05</span></li>
+        <li><b>Projet de loi n° 106</b> — Loi visant principalement à instaurer la responsabilité collective et l’imputabilité des médecins quant à l’amélioration de l’accès aux services médicaux <span class="pr-meta">· Adoption du principe le 2025-06-03</span></li>
+        <li><b>Projet de loi n° 110</b> — Loi concernant l’Office franco-québécois pour la jeunesse et l’Office Québec-Monde pour la jeunesse <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2025-05-29</span></li>
+        <li><b>Projet de loi n° 991</b> — Loi sur la procédure de sélection et de nomination des décideurs administratifs indépendants et de renouvellement de leur mandat <span class="pr-meta">· Présenté le 2025-05-27</span></li>
+        <li><b>Projet de loi n° 107</b> — Loi modifiant diverses dispositions concernant principalement le Comité consultatif sur l’accessibilité financière aux études et la Commission d’évaluation de l’enseignement collégial <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2025-05-22</span></li>
+        <li><b>Projet de loi n° 995</b> — Loi visant à établir un cadre de surveillance et de régulation des polluants éternels <span class="pr-meta">· Présenté le 2025-05-22</span></li>
+        <li><b>Projet de loi n° 217</b> — Loi visant à octroyer certains pouvoirs temporaires à la Ville de Rivière-du-Loup <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2025-05-07</span></li>
+        <li><b>Projet de loi n° 994</b> — Loi favorisant la santé sexuelle et reproductive par un accès amélioré à la contraception <span class="pr-meta">· Présenté le 2025-05-07</span></li>
+        <li><b>Projet de loi n° 990</b> — Loi modifiant la Loi sur les normes du travail afin d’encadrer l’exercice du télétravail <span class="pr-meta">· Présenté le 2025-05-01</span></li>
+        <li><b>Projet de loi n° 993</b> — Loi modifiant le Code du travail afin d’assurer des pratiques syndicales transparentes et démocratiques <span class="pr-meta">· Présenté le 2025-04-30</span></li>
+        <li><b>Projet de loi n° 992</b> — Loi visant à créer un comité chargé de formuler des recommandations sur les critères de fixation ou de réajustement de loyer <span class="pr-meta">· Présenté le 2025-04-24</span></li>
+        <li><b>Projet de loi n° 898</b> — Loi visant à renforcer l’encadrement des augmentations de loyer d’un bail de logement <span class="pr-meta">· Présenté le 2025-04-03</span></li>
+        <li><b>Projet de loi n° 899</b> — Loi modifiant le Code de la sécurité routière afin d’obliger la Société de l’assurance automobile du Québec à conclure des ententes avec des ministères ou organismes en vue de l’application de certaines lois <span class="pr-meta">· Présenté le 2025-04-03</span></li>
+        <li><b>Projet de loi n° 897</b> — Loi modifiant le Code de la sécurité routière afin de prévoir la délivrance obligatoire d’un avis de paiement au propriétaire d’un véhicule routier immatriculé ou au titulaire de certains permis <span class="pr-meta">· Présenté le 2025-03-19</span></li>
+        <li><b>Projet de loi n° 895</b> — Loi établissant un réseau scolaire commun afin de garantir l’égalité des chances <span class="pr-meta">· Présenté le 2025-02-19</span></li>
+        <li><b>Projet de loi n° 896</b> — Loi visant à indemniser les municipalités locales lors de la cession de terrains destinés à la construction ou à l’agrandissement d’écoles <span class="pr-meta">· Présenté le 2025-02-13</span></li>
+        <li><b>Projet de loi n° 894</b> — Loi visant à étendre l’admissibilité au régime d’assurance maladie et au régime général d’assurance médicaments à toutes les femmes ou à toutes les personnes enceintes vivant au Québec sans égard à leur statut migratoire <span class="pr-meta">· Présenté le 2024-12-04</span></li>
+        <li><b>Projet de loi n° 893</b> — Loi sur le maintien de l’autonomie des personnes aînées <span class="pr-meta">· Présenté le 2024-12-03</span></li>
+        <li><b>Projet de loi n° 793</b> — Loi sur le processus de publication des documents issus de l’enquête menée par Bernard Grenier au sujet des activités d’Option Canada à l’occasion du référendum tenu au Québec en octobre 1995 <span class="pr-meta">· Présenté le 2024-11-27</span></li>
+        <li><b>Projet de loi n° 892</b> — Loi visant à interdire l’offre de services de consommation supervisée à proximité d’un service de garde éducatif à l’enfance en installation ou d’un établissement d’enseignement offrant une formation de niveau préscolaire, primaire ou secondaire <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2024-11-27</span></li>
+        <li><b>Projet de loi n° 794</b> — Loi déclarant l’engagement du Québec d’atteindre la carboneutralité d’ici 2050 <span class="pr-meta">· Présenté le 2024-11-07</span></li>
+        <li><b>Projet de loi n° 699</b> — Loi modifiant la Charte des droits et libertés de la personne afin d’y consacrer le droit à un logement décent <span class="pr-meta">· Présenté le 2024-06-04</span></li>
+        <li><b>Projet de loi n° 792</b> — Loi visant à accroître la présence du drapeau du Québec <span class="pr-meta">· Présenté le 2024-05-30</span></li>
+        <li><b>Projet de loi n° 796</b> — Loi remplaçant le nom de la circonscription électorale d’Arthabaska par celui d’« Arthabaska-L’Érable » <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2024-05-30</span></li>
+        <li><b>Projet de loi n° 790</b> — Loi visant à étendre aux usagers hébergés dans une résidence à assistance continue l’application du Règlement concernant les modalités d’utilisation de mécanismes de surveillance par un usager hébergé dans une installation maintenue par un établissement qui exploite un centre d’hébergement et de soins de longue durée <span class="pr-meta">· Présenté le 2024-05-22</span></li>
+        <li><b>Projet de loi n° 791</b> — Loi permettant à des organismes publics de transport en commun de développer des projets immobiliers aux abords ou au-dessus de leurs infrastructures de transport en commun <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2024-05-01</span></li>
+        <li><b>Projet de loi n° 697</b> — Loi visant à lutter contre le gaspillage <span class="pr-meta">· Présenté le 2024-04-23</span></li>
+        <li><b>Projet de loi n° 591</b> — Loi visant principalement à renforcer le contrôle de l’action gouvernementale par un député en lui reconnaissant un droit de visite des institutions administratives <span class="pr-meta">· Présenté le 2024-03-21</span></li>
+        <li><b>Projet de loi n° 694</b> — Loi modifiant le Code de la sécurité routière afin de lutter plus efficacement contre l’alcool au volant <span class="pr-meta">· Présenté le 2024-03-19</span></li>
+        <li><b>Projet de loi n° 695</b> — Loi sur le directeur parlementaire du budget <span class="pr-meta">· Présenté le 2024-03-14</span></li>
+        <li><b>Projet de loi n° 693</b> — Loi favorisant la contribution active à la société des prestataires du Programme de solidarité sociale <span class="pr-meta">· Présenté le 2024-02-22</span></li>
+        <li><b>Projet de loi n° 599</b> — Loi modifiant principalement la Loi sur le régime de rentes du Québec afin d’abolir la réduction de la rente de retraite de la personne qui bénéficie d’une rente d’invalidité entre 60 ans et 65 ans <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2024-02-20</span></li>
+        <li><b>Projet de loi n° 597</b> — Loi modifiant la Loi sur la qualité de l’environnement pour instaurer un droit d’initiative citoyenne en environnement et renforcer les pouvoirs et l’indépendance du Bureau d’audiences publiques sur l’environnement <span class="pr-meta">· Présenté le 2024-02-01</span></li>
+        <li><b>Projet de loi n° 691</b> — Loi modifiant diverses dispositions législatives relatives à l’aide financière aux études <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2023-12-07</span></li>
+        <li><b>Projet de loi n° 394</b> — Loi concernant la mise en place de politiques de conciliation études-famille-travail notamment dans les établissements d’enseignement supérieur <span class="pr-meta">· Présenté le 2023-12-05</span></li>
+        <li><b>Projet de loi n° 690</b> — Loi modifiant la Loi sur le régime de rentes du Québec afin de corriger une iniquité envers les retraités invalides <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2023-11-23</span></li>
+        <li><b>Projet de loi n° 596</b> — Loi modifiant principalement la Loi sur l’aménagement et l’urbanisme afin de permettre aux municipalités d’adopter un règlement relatif au zonage différencié visant à accroître et à pérenniser l’offre de logements sociaux ou abordables <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2023-10-24</span></li>
+        <li><b>Projet de loi n° 499</b> — Loi établissant un nouveau mode de scrutin <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2023-10-05</span></li>
+        <li><b>Projet de loi n° 593</b> — Loi modifiant le Code civil afin d’interdire les évictions faites en vue de convertir un logement en hébergement touristique de courte durée <span class="pr-meta">· Présenté le 2023-10-04</span></li>
+        <li><b>Projet de loi n° 495</b> — Loi visant à lutter contre l’accaparement des terres agricoles <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2023-09-26</span></li>
+        <li><b>Projet de loi n° 491</b> — Loi visant à modifier la Loi sur les infrastructures publiques afin de soumettre les projets inscrits au plan québécois des infrastructures à un test climat <span class="pr-meta">· Présenté le 2023-09-14</span></li>
+        <li><b>Projet de loi n° 194</b> — Loi instaurant une présomption de consentement au don d’organes ou de tissus après le décès <span class="pr-meta">· Adoption du principe le 2023-06-09</span></li>
+        <li><b>Projet de loi n° 494</b> — Loi modifiant le Code civil afin de rendre sans effet les clauses d’un bail de logement qui tendent à interdire les animaux de compagnie <span class="pr-meta">· Présenté le 2023-05-25</span></li>
+        <li><b>Projet de loi n° 493</b> — Loi modifiant la Loi sur l’immigration au Québec pour tenir compte des résidents temporaires aux fins de la planification de l’immigration <span class="pr-meta">· Présenté le 2023-05-10</span></li>
+        <li><b>Projet de loi n° 397</b> — Loi visant à prévenir et à combattre les violences à caractère sexuel dans les établissements d’enseignement dispensant des services de l’éducation préscolaire, d’enseignement au primaire ou d’enseignement en formation générale ou professionnelle au secondaire, incluant les services éducatifs pour les adultes <span class="pr-meta">· Présenté le 2023-04-27</span></li>
+        <li><b>Projet de loi n° 399</b> — Loi modifiant la Loi sur la Caisse de dépôt et placement du Québec afin d’obliger la Caisse de dépôt et placement du Québec à faire des investissements ayant des impacts sociaux et environnementaux durables et à en rendre compte <span class="pr-meta">· Présenté le 2023-04-27</span></li>
+        <li><b>Projet de loi n° 201</b> — Loi concernant la Municipalité de Morin-Heights <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2023-04-20</span></li>
+        <li><b>Projet de loi n° 398</b> — Loi modifiant la Loi sur l’instruction publique afin de consacrer le droit des élèves handicapés ou en difficulté d’adaptation ou d’apprentissage de recevoir des services éducatifs équivalents à ceux dispensés par l’école <span class="pr-meta">· Présenté le 2023-04-20</span></li>
+        <li><b>Projet de loi n° 203</b> — Loi concernant les fins et les pouvoirs de la Corporation archiépiscopale catholique romaine de Montréal <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2023-04-19</span></li>
+        <li><b>Projet de loi n° 392</b> — Loi concernant la suspension de la délivrance de nouveaux claims miniers et mettant fin à la préséance des droits miniers et gaziers sur les autres usages du territoire <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2023-04-18</span></li>
+        <li><b>Projet de loi n° 490</b> — Loi renforçant la majorité qualifiée requise pour la nomination et la destitution des personnes nommées par l’Assemblée nationale <span class="pr-meta">· Présenté le 2023-04-18</span></li>
+        <li><b>Projet de loi n° 492</b> — Loi visant à lutter contre le gaspillage <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2023-04-18</span></li>
+        <li><b>Projet de loi n° 393</b> — Loi visant à lutter contre le gaspillage alimentaire <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2023-04-06</span></li>
+        <li><b>Projet de loi n° 390</b> — Loi favorisant la prise en compte de l’égalité des sexes et de la diversité dans une perspective intersectionnelle dans le processus budgétaire <span class="pr-meta">· Présenté le 2023-03-21</span></li>
+        <li><b>Projet de loi n° 391</b> — Loi modifiant la Loi sur l'instruction publique afin de consacrer le droit à la gratuité des projets pédagogiques particuliers offerts dans les écoles où est dispensé le service de l’éducation préscolaire ou de l’enseignement primaire et secondaire ainsi que de limiter la distance entre les immeubles d’une école à projet particulier <span class="pr-meta">· Présenté le 2023-03-16</span></li>
+        <li><b>Projet de loi n° 396</b> — Loi modifiant la Loi sur la réduction de la dette et instituant le Fonds des générations afin d’y prévoir l’atteinte d’une capitalisation de 100 milliards de dollars <span class="pr-meta">· Présenté le 2023-03-16</span></li>
+        <li><b>Projet de loi n° 196</b> — Loi modifiant la Loi sur les services de garde éducatifs à l’enfance afin de garantir le droit de recevoir des services de garde <span class="pr-meta">· Présenté le 2023-03-14</span></li>
+        <li><b>Projet de loi n° 199</b> — Loi visant une meilleure protection du consommateur contre les contrats de crédit abusifs <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2023-02-23</span></li>
+        <li><b>Projet de loi n° 198</b> — Loi modifiant le Code civil afin d’assurer une plus grande protection aux locataires aînés contre les reprises de logement ou les évictions <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2023-02-21</span></li>
+        <li><b>Projet de loi n° 195</b> — Loi modifiant la Loi sur la protection du consommateur afin de lutter contre l’obsolescence programmée et de faire valoir le droit à la réparation des biens <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2023-02-02</span></li>
+        <li><b>Projet de loi n° 193</b> — Loi modifiant la Charte des droits et libertés de la personne afin de reconnaître le droit à un environnement sain à titre de droit fondamental <span class="pr-meta">· Présenté le 2023-02-01</span></li>
+        <li><b>Projet de loi n° 191</b> — Loi modifiant la Loi sur la sécurité dans les sports afin d’interdire les batailles dans les activités sportives auxquelles des personnes de moins de 18 ans participent <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2022-12-08</span></li>
+        <li><b>Projet de loi n° 192</b> — Loi visant à assurer la santé et la sécurité des élèves en classe en encadrant la qualité de l’air ambiant dans les écoles <span class="pr-meta">· Présenté le 2022-12-07</span></li>
+        <li><b>Projet de loi n° 197</b> — Loi visant à améliorer la qualité des soins par la fixation de ratios dans certains établissements visés par la Loi sur les services de santé et les services sociaux <span class="pr-meta">· Présenté le 2022-12-06</span></li>
+        <li><b>Projet de loi n° 190</b> — Loi visant à reconnaître le serment des députés envers le peuple du Québec comme seul serment obligatoire à leur entrée en fonction <span class="pr-meta">· Resté à l'étape « présentation » (session 1) — non réinscrit depuis, dernière activité le 2022-12-01</span></li>
+      </ul>
+      <p class="pr-note">Les 143 projets de loi, du plus récemment actif au plus ancien. Texte intégral de chacun : <a href="https://www.assnat.qc.ca/" rel="noopener">assnat.qc.ca</a>.<noscript> Les filtres, la recherche et le détail de chaque fiche demandent JavaScript.</noscript></p>
+    </div>
 
     <!-- Explainer « challenger » : adapté au VRAI mécanisme du site (compte
          requis, 1 demande par personne, paliers 500/1000) — la maquette disait
@@ -290,8 +446,25 @@ function goToFederal(evt){
 <!-- Footer maquette : texte à gauche (avec « construit avec Claude » suivi du
      lien caché « et moi » vers la BD), liens texte en majuscules à droite. -->
 <footer>
+  <nav class="footer-nav" aria-label="Plan du site">
+    <a href="/" data-i18n="nav.apercu">Aperçu</a>
+    <a href="/ministres" data-i18n="nav.ministres">Ministres</a>
+    <a href="/projets-de-loi" data-i18n="nav.projets">Projets de loi</a>
+    <a href="/votes" data-i18n="nav.votes">Votes</a>
+    <a href="/promesses" data-i18n="fil.promesses">Promesses</a>
+    <a href="/lexique" data-i18n="nav.lexique">Lexique</a>
+    <a href="/sources" data-i18n="fil.bd">Mises à jour du site</a>
+    <a href="/abonnement" data-i18n="footer.abonnement">Abonnement</a>
+    <span class="footer-nav-villes"><span data-i18n="footer.villes">Villes :</span>
+      <a href="/quebec/">Québec</a>
+      <a href="/montreal/">Montréal</a>
+      <a href="/levis/">Lévis</a>
+      <a href="/longueuil/">Longueuil</a>
+      <a href="/laval/">Laval</a>
+    </span>
+  </nav>
   <div class="footer-inner">
-  <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">construit avec Claude</span> <a class="footer-etmoi" role="button" tabindex="0" onclick="goToTab('bd')" data-i18n="footer.etmoi">et moi</a></span>
+  <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">construit avec Claude</span> <a class="footer-etmoi" href="/sources" data-i18n="footer.etmoi">et moi</a></span>
   <span class="footer-right-group">
     <a class="footer-gh" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook">Facebook</a>
     <a class="footer-gh footer-coffee" href="https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00" target="_blank" rel="noopener" aria-label="Offre-moi un café" data-i18n="footer.coffee">Offre-moi un café</a>

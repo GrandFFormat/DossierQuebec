@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ministres du Québec — Conseil des ministres · DossierQuébec</title>
-<meta name="description" content="Qui sont les ministres du gouvernement du Québec, leurs responsabilités et leurs coordonnées. Données publiques, site citoyen indépendant.">
+<title>Ministres et député·e·s du Québec — DossierQuébec</title>
+<meta name="description" content="Les ministres du gouvernement du Québec et les député·e·s de l'Assemblée nationale : rôles, circonscriptions, présence aux votes et coordonnées officielles.">
 <link rel="canonical" href="https://dossierquebec.ca/ministres">
 <!-- Flux RSS de « Quoi de neuf », généré au build par scrapers/build-news-data.js.
      C'est ainsi que journalistes et agrégateurs suivent un site sans le visiter. -->
@@ -16,8 +16,8 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DossierQuébec">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:title" content="Ministres du Québec — Conseil des ministres · DossierQuébec">
-<meta property="og:description" content="Qui sont les ministres du gouvernement du Québec, leurs responsabilités et leurs coordonnées. Données publiques, site citoyen indépendant.">
+<meta property="og:title" content="Ministres et député·e·s du Québec — DossierQuébec">
+<meta property="og:description" content="Les ministres du gouvernement du Québec et les député·e·s de l'Assemblée nationale : rôles, circonscriptions, présence aux votes et coordonnées officielles.">
 <meta property="og:url" content="https://dossierquebec.ca/ministres">
 <meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <meta property="og:image:width" content="1702">
@@ -26,8 +26,8 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Ministres du Québec — Conseil des ministres · DossierQuébec">
-<meta name="twitter:description" content="Qui sont les ministres du gouvernement du Québec, leurs responsabilités et leurs coordonnées. Données publiques, site citoyen indépendant.">
+<meta name="twitter:title" content="Ministres et député·e·s du Québec — DossierQuébec">
+<meta name="twitter:description" content="Les ministres du gouvernement du Québec et les député·e·s de l'Assemblée nationale : rôles, circonscriptions, présence aux votes et coordonnées officielles.">
 <meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 
 <link rel="icon" type="image/svg+xml" href="/commun/dq.svg">
@@ -38,17 +38,21 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "DossierQuébec",
-  "url": "https://dossierquebec.ca/",
-  "description": "Veille citoyenne indépendante de l'Assemblée nationale du Québec : ministres et député·e·s, projets de loi et leur statut réel, votes nominatifs — vraies données publiques.",
-  "inLanguage": "fr-CA",
-  "publisher": {
-    "@type": "Organization",
-    "name": "DossierQuébec",
-    "url": "https://dossierquebec.ca/",
-    "logo": "https://dossierquebec.ca/commun/dq-512.png"
-  }
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Accueil",
+      "item": "https://dossierquebec.ca/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Ministres et député·e·s",
+      "item": "https://dossierquebec.ca/ministres"
+    }
+  ]
 }
 </script>
 <!-- Les DEUX préconnexions sont nécessaires et ce n'est pas un doublon :
@@ -108,19 +112,19 @@
          Vrais liens <a href> : le clavier, le clic du milieu et « ouvrir dans un
          nouvel onglet » fonctionnent sans une ligne de code. La barre oblique finale
          est OBLIGATOIRE — sans elle, les chemins relatifs du volet (assets/, data/)
-         se résolvent depuis la racine du site. rel="nofollow" tant que les volets sont
-         des prototypes hors des moteurs de recherche. Le chemin dit /quebec/ : c'est la
+         se résolvent depuis la racine du site. Plus de rel="nofollow" depuis le
+         21 sept. 2026 : les volets sont ouverts aux moteurs de recherche. Le chemin dit /quebec/ : c'est la
          liste, sous « Villes », qui dit qu'il s'agit de la ville. -->
     <details class="villes-menu" id="villesMenu">
       <summary class="city-flip" title="Les volets municipaux" aria-label="Les volets municipaux">
         <span data-i18n="nav.villes">Villes</span>
       </summary>
       <ul>
-        <li><a href="/quebec/" rel="nofollow">Québec <small>DossierVilleDeQuébec</small></a></li>
-        <li><a href="/montreal/" rel="nofollow">Montréal <small>DossierVilleDeMontréal</small></a></li>
-        <li><a href="/levis/" rel="nofollow">Lévis <small>DossierVilleDeLévis · prototype</small></a></li>
-        <li><a href="/longueuil/" rel="nofollow">Longueuil <small>DossierVilleDeLongueuil · prototype</small></a></li>
-        <li><a href="/laval/" rel="nofollow">Laval <small>DossierVilleDeLaval · prototype</small></a></li>
+        <li><a href="/quebec/">Québec <small>DossierVilleDeQuébec</small></a></li>
+        <li><a href="/montreal/">Montréal <small>DossierVilleDeMontréal</small></a></li>
+        <li><a href="/levis/">Lévis <small>DossierVilleDeLévis · prototype</small></a></li>
+        <li><a href="/longueuil/">Longueuil <small>DossierVilleDeLongueuil · prototype</small></a></li>
+        <li><a href="/laval/">Laval <small>DossierVilleDeLaval · prototype</small></a></li>
       </ul>
     </details>
   </div>
@@ -129,11 +133,13 @@
        du hamburger (position:fixed), peu importe où il vit dans le DOM. -->
   <nav class="tabs">
     <div class="close-menu" id="closeMenuBtn"><span data-i18n="nav.close">Fermer</span> ✕</div>
-    <button data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></button>
-    <button class="active" data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></button>
-    <button data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></button>
-    <button data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></button>
-    <button data-view="lexique"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></button>
+    <!-- De vrais liens, pas des <button> : un moteur de recherche ne suit pas un bouton, et
+         /ministres, /projets-de-loi, /votes et /lexique n'avaient aucun lien qu'il puisse suivre. -->
+    <a href="/" data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></a>
+    <a class="active" aria-current="page" href="/ministres" data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></a>
+    <a href="/projets-de-loi" data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></a>
+    <a href="/votes" data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></a>
+    <a href="/lexique" data-view="lexique"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></a>
   </nav>
   <div class="header-ctrls">
     <div class="font-size-ctrl" id="fontSizeCtrl">
@@ -199,9 +205,11 @@ function goToFederal(evt){
 
   <!-- APERÇU -->
   <section class="view active" id="view-ministres">
+    <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/" data-i18n="fil.accueil">Accueil</a><span class="sep" aria-hidden="true">›</span><span aria-current="page" data-i18n="fil.ministres">Ministres et député·e·s</span></nav>
     <!-- Hero de vue (refonte brutaliste) -->
     <div class="view-hero">
       <h1 class="hero-h1 hero-h1-md">
+        <span class="hero-sujet" data-i18n="sujet.ministres">Ministres et député·e·s du Québec</span>
         <span data-i18n="minhero.l1">Conseil des ministres</span>
         <span class="hero-outline" data-i18n="minhero.l2">&amp; toute l'Assemblée.</span>
       </h1>
@@ -242,6 +250,40 @@ function goToFederal(evt){
       <span class="head-note"><span id="ministresCount"></span><span data-i18n="min.sub2b"> ministres — liste officielle quebec.ca</span></span>
     </div>
     <div class="grid" id="ministresGrid"></div>
+    <div class="prerendu" data-prerendu="ministers">
+      <ul aria-label="Conseil des ministres">
+        <li><b>Christine Fréchette</b> — Première ministre <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Ian Lafrenière</b> — Vice-premier ministre · Ministre de la Sécurité intérieure · Ministre responsable des Relations avec les Premières Nations et les Inuit <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Eric Girard (Groulx)</b> — Ministre des Finances · Ministre responsable des Infrastructures <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Sonia LeBel</b> — Ministre de l’Éducation · Leader parlementaire adjointe du gouvernement <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Bernard Drainville</b> — Ministre de l’Économie, de l’Innovation et de l’Énergie · Ministre responsable de la Stratégie maritime <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Simon Jolin-Barrette</b> — Ministre de la Justice · Ministre responsable des Affaires constitutionnelles <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Sonia Bélanger</b> — Ministre de la Santé · Ministre responsable des Aînés et des Proches aidants <span class="pr-meta">(CAQ)</span></li>
+        <li><b>France-Élaine Duranceau</b> — Ministre responsable de l’Administration gouvernementale et de l’Efficacité de l’État et présidente du Conseil du trésor · Ministre de la Cybersécurité et du Numérique <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Mathieu Lacombe</b> — Ministre de la Culture et des Communications <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Jean-François Roberge</b> — Ministre de la Langue française · Ministre responsable de la Francophonie canadienne · Ministre responsable de la Laïcité · Ministre responsable des Institutions démocratiques · Ministre responsable de l’Accès à l’information et de la Protection des renseignements personnels <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Jean Boulet</b> — Ministre du Travail · Ministre responsable des Relations canadiennes <span class="pr-meta">(CAQ)</span></li>
+        <li><b>François Bonnardel</b> — Ministre de l’Immigration, de la Francisation et de l’Intégration · Leader parlementaire du gouvernement <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Kateri Champagne Jourdain</b> — Ministre des Ressources naturelles et des Forêts <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Pascale Déry</b> — Ministre de l’Environnement, de la Lutte contre les changements climatiques, de la Faune et des Parcs <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Martine Biron</b> — Ministre de l’Enseignement supérieur · Ministre responsable de la Condition féminine <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Samuel Poulin</b> — Ministre des Affaires municipales <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Catherine Blouin</b> — Ministre de la Famille <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Donald Martel</b> — Ministre de l’Agriculture, des Pêcheries et de l’Alimentation <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Christopher Skeete</b> — Ministre des Relations internationales et de la Francophonie · Ministre responsable des Relations avec les Québécois d’expression anglaise · Ministre responsable de la Lutte contre le racisme <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Benoit Charette</b> — Ministre des Transports et de la Mobilité durable <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Amélie Dionne</b> — Ministre du Tourisme <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Jean-François Simard</b> — Ministre de l‘Emploi · Ministre responsable de la région de la Capitale-Nationale <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Chantal Rouleau</b> — Ministre responsable de la Solidarité sociale et de l’Action communautaire · Ministre responsable de la Métropole et de la région de Montréal <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Lionel Carmant</b> — Ministre responsable des Services sociaux et de la Lutte contre l’itinérance <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Karine Boivin Roy</b> — Ministre responsable de l’Habitation <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Kariane Bourassa</b> — Ministre responsable du Sport, du Loisir et du Plein air <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Mathieu Lévesque</b> — Ministre responsable de la Jeunesse · Ministre délégué aux Régions <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Eric Girard (Lac-Saint-Jean)</b> — Ministre délégué au Développement économique régional <span class="pr-meta">(CAQ)</span></li>
+        <li><b>Daniel Bernard</b> — Ministre délégué à l’Économie et aux Petites et Moyennes Entreprises <span class="pr-meta">(CAQ)</span></li>
+      </ul>
+      <p class="pr-note">Les 29 membres du Conseil des ministres. Source officielle : <a href="https://www.quebec.ca/premiere-ministre/equipe/conseil-des-ministres" rel="noopener">quebec.ca</a>.<noscript> Les filtres, la recherche et le détail de chaque fiche demandent JavaScript.</noscript></p>
+    </div>
 
     <!-- Comparateur : bande BLEUE pleine largeur (maquette) — entre le Conseil
          des ministres et le reste de l'Assemblée. Jamais un classement, une
@@ -265,6 +307,107 @@ function goToFederal(evt){
       <span class="head-note" data-i18n="min.restNote">Tous les partis — 125 sièges au total</span>
     </div>
     <div class="grid" id="deputesList"></div>
+    <div class="prerendu" data-prerendu="deputesRaw">
+      <ul aria-label="Le reste de l’Assemblée">
+        <li>Éric Caire — La Peltrie <span class="pr-meta">(CAQ)</span></li>
+        <li>Pascal Bérubé — Matane-Matapédia <span class="pr-meta">(PQ)</span></li>
+        <li>Christian Dubé — La Prairie <span class="pr-meta">(IND)</span></li>
+        <li>Geneviève Guilbault — Louis-Hébert <span class="pr-meta">(CAQ)</span></li>
+        <li>Caroline Proulx — Berthier <span class="pr-meta">(CAQ)</span></li>
+        <li>André Bachand — Richmond <span class="pr-meta">(CAQ)</span></li>
+        <li>Christine Labrie — Sherbrooke <span class="pr-meta">(QS)</span></li>
+        <li>Denis Lamothe — Ungava <span class="pr-meta">(CAQ)</span></li>
+        <li>Gilles Bélanger — Orford <span class="pr-meta">(IND)</span></li>
+        <li>Guillaume Cliche-Rivard — Saint-Henri–Sainte-Anne <span class="pr-meta">(QS)</span></li>
+        <li>Catherine Gentilcore — Terrebonne <span class="pr-meta">(PQ)</span></li>
+        <li>Alex Boissonneault — Arthabaska <span class="pr-meta">(PQ)</span></li>
+        <li>Marie-Karlynn Laflamme — Chicoutimi <span class="pr-meta">(PQ)</span></li>
+        <li>Suzanne Blais — Abitibi-Ouest <span class="pr-meta">(CAQ)</span></li>
+        <li>André Albert Morin — Acadie <span class="pr-meta">(PLQ)</span></li>
+        <li>Agnès Grondin — Argenteuil <span class="pr-meta">(CAQ)</span></li>
+        <li>Luc Provençal — Beauce-Nord <span class="pr-meta">(CAQ)</span></li>
+        <li>Claude Reid — Beauharnois <span class="pr-meta">(CAQ)</span></li>
+        <li>Stéphanie Lachance — Bellechasse <span class="pr-meta">(CAQ)</span></li>
+        <li>Mario Laframboise — Blainville <span class="pr-meta">(CAQ)</span></li>
+        <li>Isabelle Charest — Brome-Missisquoi <span class="pr-meta">(CAQ)</span></li>
+        <li>Paul St-Pierre Plamondon — Camille-Laurin <span class="pr-meta">(PQ)</span></li>
+        <li>Jonatan Julien — Charlesbourg <span class="pr-meta">(CAQ)</span></li>
+        <li>Marie-Belle Gendron — Châteauguay <span class="pr-meta">(CAQ)</span></li>
+        <li>Sylvain Lévesque — Chauveau <span class="pr-meta">(CAQ)</span></li>
+        <li>Mathieu Rivest — Côte-du-Sud <span class="pr-meta">(CAQ)</span></li>
+        <li>Elisabeth Prass — D'Arcy-McGee <span class="pr-meta">(PLQ)</span></li>
+        <li>Sébastien Schneeberger — Drummond–Bois-Francs <span class="pr-meta">(CAQ)</span></li>
+        <li>Stéphane Sainte-Croix — Gaspé <span class="pr-meta">(CAQ)</span></li>
+        <li>Robert Bussière — Gatineau <span class="pr-meta">(CAQ)</span></li>
+        <li>Gabriel Nadeau-Dubois — Gouin <span class="pr-meta">(QS)</span></li>
+        <li>Alexandre Leduc — Hochelaga-Maisonneuve <span class="pr-meta">(QS)</span></li>
+        <li>Suzanne Tremblay — Hull <span class="pr-meta">(CAQ)</span></li>
+        <li>Carole Mallette — Huntingdon <span class="pr-meta">(CAQ)</span></li>
+        <li>Audrey Bogemans — Iberville <span class="pr-meta">(CAQ)</span></li>
+        <li>Joël Arseneau — Îles-de-la-Madeleine <span class="pr-meta">(PQ)</span></li>
+        <li>Gregory Kelley — Jacques-Cartier <span class="pr-meta">(PLQ)</span></li>
+        <li>Sol Zanetti — Jean-Lesage <span class="pr-meta">(QS)</span></li>
+        <li>Filomena Rotiroti — Jeanne-Mance–Viger <span class="pr-meta">(PLQ)</span></li>
+        <li>André Lamontagne — Johnson <span class="pr-meta">(CAQ)</span></li>
+        <li>François St-Louis — Joliette <span class="pr-meta">(CAQ)</span></li>
+        <li>Yannick Gagnon — Jonquière <span class="pr-meta">(CAQ)</span></li>
+        <li>Linda Caron — La Pinière <span class="pr-meta">(PLQ)</span></li>
+        <li>Chantale Jeannotte — Labelle <span class="pr-meta">(CAQ)</span></li>
+        <li>Marc Tanguay — LaFontaine <span class="pr-meta">(PLQ)</span></li>
+        <li>François Legault — L'Assomption <span class="pr-meta">(CAQ)</span></li>
+        <li>Andrés Fontecilla — Laurier-Dorion <span class="pr-meta">(QS)</span></li>
+        <li>Céline Haytayan — Laval-des-Rapides <span class="pr-meta">(CAQ)</span></li>
+        <li>Marie-Louise Tardif — Laviolette–Saint-Maurice <span class="pr-meta">(CAQ)</span></li>
+        <li>Isabelle Lecours — Lotbinière-Frontenac <span class="pr-meta">(CAQ)</span></li>
+        <li>Shirley Dorismond — Marie-Victorin <span class="pr-meta">(CAQ)</span></li>
+        <li>Enrico Ciccone — Marquette <span class="pr-meta">(PLQ)</span></li>
+        <li>Simon Allaire — Maskinongé <span class="pr-meta">(CAQ)</span></li>
+        <li>Mathieu Lemay — Masson <span class="pr-meta">(CAQ)</span></li>
+        <li>Haroun Bouazzi — Maurice-Richard <span class="pr-meta">(QS)</span></li>
+        <li>François Jacques — Mégantic <span class="pr-meta">(CAQ)</span></li>
+        <li>Ruba Ghazal — Mercier <span class="pr-meta">(QS)</span></li>
+        <li>Sylvie D'Amours — Mirabel <span class="pr-meta">(CAQ)</span></li>
+        <li>Suzanne Roy — Verchères <span class="pr-meta">(CAQ)</span></li>
+        <li>Michelle Setlakwe — Mont-Royal–Outremont <span class="pr-meta">(PLQ)</span></li>
+        <li>Monsef Derraji — Nelligan <span class="pr-meta">(PLQ)</span></li>
+        <li>Désirée McGraw — Notre-Dame-de-Grâce <span class="pr-meta">(PLQ)</span></li>
+        <li>André Fortin — Pontiac <span class="pr-meta">(PLQ)</span></li>
+        <li>Vincent Caron — Portneuf <span class="pr-meta">(CAQ)</span></li>
+        <li>Yves Montigny — René-Lévesque <span class="pr-meta">(CAQ)</span></li>
+        <li>Jean-Bernard Émond — Richelieu <span class="pr-meta">(CAQ)</span></li>
+        <li>Brigitte B. Garceau — Robert-Baldwin <span class="pr-meta">(PLQ)</span></li>
+        <li>Nancy Guillemette — Roberval <span class="pr-meta">(CAQ)</span></li>
+        <li>Louis-Charles Thouin — Rousseau <span class="pr-meta">(CAQ)</span></li>
+        <li>Manon Massé — Sainte-Marie–Saint-Jacques <span class="pr-meta">(QS)</span></li>
+        <li>Louis Lemieux — Saint-Jean <span class="pr-meta">(CAQ)</span></li>
+        <li>Etienne Grandmont — Taschereau <span class="pr-meta">(QS)</span></li>
+        <li>Mario Asselin — Vanier-Les Rivières <span class="pr-meta">(CAQ)</span></li>
+        <li>Alejandra Zaga Mendez — Verdun <span class="pr-meta">(QS)</span></li>
+        <li>Frantz Benjamin — Viau <span class="pr-meta">(PLQ)</span></li>
+        <li>Valérie Schmaltz — Vimont <span class="pr-meta">(CAQ)</span></li>
+        <li>Alice Abou-Khalil — Fabre <span class="pr-meta">(CAQ)</span></li>
+        <li>Frédéric Beauchemin — Marguerite-Bourgeoys <span class="pr-meta">(PLQ)</span></li>
+        <li>Pascal Paradis — Jean-Talon <span class="pr-meta">(PQ)</span></li>
+        <li>Youri Chassin — Saint-Jérôme <span class="pr-meta">(IND)</span></li>
+        <li>Marie-Claude Nichols — Vaudreuil <span class="pr-meta">(PLQ)</span></li>
+        <li>Pierre Dufour — Abitibi-Est <span class="pr-meta">(IND)</span></li>
+        <li>Isabelle Poulet — Laporte <span class="pr-meta">(IND)</span></li>
+        <li>Vincent Marissal — Rosemont <span class="pr-meta">(IND)</span></li>
+        <li>Marwah Rizqy — Saint-Laurent <span class="pr-meta">(IND)</span></li>
+        <li>Sona Lakhoyan Olivier — Chomedey <span class="pr-meta">(IND)</span></li>
+        <li>François Tremblay — Dubuc <span class="pr-meta">(IND)</span></li>
+        <li>Maïté Blanchette Vézina — Rimouski <span class="pr-meta">(PCQ)</span></li>
+        <li>Nathalie Roy — Montarville <span class="pr-meta">(CAQ)</span></li>
+        <li>Marilyne Picard — Soulanges <span class="pr-meta">(CAQ)</span></li>
+        <li>Geneviève Hébert — Saint-François <span class="pr-meta">(CAQ)</span></li>
+        <li>Jennifer Maccarone — Westmount–Saint-Louis <span class="pr-meta">(PLQ)</span></li>
+        <li>Virginie Dufour — Mille-Îles <span class="pr-meta">(PLQ)</span></li>
+        <li>Madwa-Nika Cadet — Bourassa-Sauvé <span class="pr-meta">(PLQ)</span></li>
+        <li>Lucie Lecours — Les Plaines <span class="pr-meta">(CAQ)</span></li>
+        <li>Chantal Soucy — Saint-Hyacinthe <span class="pr-meta">(CAQ)</span></li>
+      </ul>
+      <p class="pr-note">Les 96 autres député·e·s. Source officielle : <a href="https://www.assnat.qc.ca/" rel="noopener">assnat.qc.ca</a>.<noscript> Les filtres, la recherche et le détail de chaque fiche demandent JavaScript.</noscript></p>
+    </div>
     <div class="info-box" id="deputesInfoBox" data-i18n="trouve.info">Ces 125 entrées viennent directement de la liste officielle des députés en fonction de l'Assemblée nationale. Certains sièges peuvent changer entre deux mises à jour (démission, élection partielle) — cette liste est une photo prise au moment de la dernière mise à jour, pas un flux automatiquement à jour.</div>
   </section>
 
@@ -297,8 +440,25 @@ function goToFederal(evt){
 <!-- Footer maquette : texte à gauche (avec « construit avec Claude » suivi du
      lien caché « et moi » vers la BD), liens texte en majuscules à droite. -->
 <footer>
+  <nav class="footer-nav" aria-label="Plan du site">
+    <a href="/" data-i18n="nav.apercu">Aperçu</a>
+    <a href="/ministres" data-i18n="nav.ministres">Ministres</a>
+    <a href="/projets-de-loi" data-i18n="nav.projets">Projets de loi</a>
+    <a href="/votes" data-i18n="nav.votes">Votes</a>
+    <a href="/promesses" data-i18n="fil.promesses">Promesses</a>
+    <a href="/lexique" data-i18n="nav.lexique">Lexique</a>
+    <a href="/sources" data-i18n="fil.bd">Mises à jour du site</a>
+    <a href="/abonnement" data-i18n="footer.abonnement">Abonnement</a>
+    <span class="footer-nav-villes"><span data-i18n="footer.villes">Villes :</span>
+      <a href="/quebec/">Québec</a>
+      <a href="/montreal/">Montréal</a>
+      <a href="/levis/">Lévis</a>
+      <a href="/longueuil/">Longueuil</a>
+      <a href="/laval/">Laval</a>
+    </span>
+  </nav>
   <div class="footer-inner">
-  <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">construit avec Claude</span> <a class="footer-etmoi" role="button" tabindex="0" onclick="goToTab('bd')" data-i18n="footer.etmoi">et moi</a></span>
+  <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">construit avec Claude</span> <a class="footer-etmoi" href="/sources" data-i18n="footer.etmoi">et moi</a></span>
   <span class="footer-right-group">
     <a class="footer-gh" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook">Facebook</a>
     <a class="footer-gh footer-coffee" href="https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00" target="_blank" rel="noopener" aria-label="Offre-moi un café" data-i18n="footer.coffee">Offre-moi un café</a>

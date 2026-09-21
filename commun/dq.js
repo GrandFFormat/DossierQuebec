@@ -46,6 +46,9 @@ const _remplir = {
 // mises à jour, lui, est écrit À LA MAIN : il vit à part, pour que personne ne le croie fabriqué.
 const _chemins = { journal: '/data/journal.json' };
 
+// Les jeux qui n'ont pas pu arriver. Leur liste écrite dans le HTML par le build (div.prerendu)
+// reste alors affichée : c'est justement le cas où elle sert. Voir retirerPrerendus().
+const _echecs = new Set();
 async function chargerDonnees(){
   const demandes = (document.body.dataset.donnees || '').split(',').map(s => s.trim()).filter(Boolean);
   // En parallèle : ces fichiers ne dépendent pas les uns des autres, les enchaîner coûterait
@@ -60,6 +63,7 @@ async function chargerDonnees(){
     } catch (e) {
       // Une page à moitié vide vaut mieux qu'une page blanche : on note et on continue.
       console.error(`données ${nom} non chargées :`, e.message);
+      _echecs.add(nom);
     }
   }));
   deputes = deputesRaw.map(d => ({ name: d[0], riding: d[1], region: d[2], party: d[3], assnatId: d[4] }));
@@ -286,6 +290,32 @@ const translations = {
     'apercu.composition.sub':"43rd Legislature · breakdown by parliamentary group",
     'apercu.recent.sub':"↓ Click anywhere in the white square to see the summary ↓",
     'maj.h':"Site updates",
+    'sujet.apercu':"Quebec's National Assembly in plain language",
+    'sujet.ministres':"Quebec ministers and MNAs",
+    'sujet.projets':"Quebec bills",
+    'sujet.votes':"Recorded divisions at the National Assembly",
+    'sujet.promesses':"2026 election promises",
+    'sujet.lexique':"National Assembly glossary",
+    'fil.accueil':"Home",
+    'fil.ministres':"Ministers and MNAs",
+    'fil.projets':"Bills",
+    'fil.votes':"Votes",
+    'fil.promesses':"Promises",
+    'fil.lexique':"Glossary",
+    'fil.bd':"Site updates",
+    'hub.h':"Where to start",
+    'hub.projets.h':"Bills",
+    'hub.projets.p':"Bills summarized in plain language, with their real stage.",
+    'hub.votes.h':"Recorded divisions",
+    'hub.votes.p':"Who voted for, against or abstained, member by member.",
+    'hub.ministres.h':"Ministers and MNAs",
+    'hub.ministres.p':"Cabinet and the whole Assembly, with attendance at votes.",
+    'hub.promesses.h':"2026 promises",
+    'hub.promesses.p':"Party commitments for October 5, each with its source.",
+    'hub.lexique.h':"Glossary",
+    'hub.lexique.p':"Parliamentary jargon, explained simply.",
+    'footer.abonnement':"Subscription",
+    'footer.villes':"Cities:",
     'maj.sub':"What changed on DossierQuébec, newest first",
     'bd.intro1':"Hi! My name is",
     'bd.intro3':"I'm 45, and I'm the idea behind this site.",
@@ -405,6 +435,7 @@ function applyLanguage(){
   });
   { const _e = document.getElementById('langToggle'); if(_e) _e.textContent = currentLang === 'fr' ? 'English' : 'Français'; }
   document.body.classList.toggle('lang-en', currentLang === 'en');
+  document.documentElement.lang = currentLang === 'en' ? 'en' : 'fr';
   { const _e = document.getElementById('footerLeft'); if(_e) _e.textContent = t('footer.left'); }
   { const _e = document.getElementById('footerRight'); if(_e) _e.textContent = t('footer.right'); }
   // Re-render dynamic lists so their JS-generated buttons pick up the new language
@@ -826,6 +857,7 @@ function renderAccountBox(){
       <div class="account-note">${isEn ? 'The ministers, MNAs, and bills you follow are now synced to your account, across devices.' : 'Les ministres, député·e·s et projets de loi que vous suivez sont maintenant synchronisés à votre compte, entre tous vos appareils.'}</div>
     `;
   } else {
+    const saisie = document.getElementById('accountEmailInput')?.value || '';
     box.innerHTML = `
       <div class="account-row">
         <input type="email" id="accountEmailInput" placeholder="${isEn ? 'Your email' : 'Votre courriel'}">
@@ -833,6 +865,8 @@ function renderAccountBox(){
       </div>
       <div class="account-note" id="accountStatusNote">${isEn ? 'Sign in to sync the ministers, MNAs, and bills you follow across devices.' : 'Connectez-vous pour synchroniser les ministres, député·e·s et projets de loi que vous suivez entre vos appareils.'}</div>
     `;
+    const champ = document.getElementById('accountEmailInput');
+    if(champ && saisie) champ.value = saisie;
   }
 }
 
@@ -1096,6 +1130,11 @@ function readableOn(hex){
 
 let promParty = 'tous';
 let promTheme = 'tous';
+// Levé par init juste avant son propre renderPromises(). Avant, un clic sur un filtre (écrit dans
+// le HTML par le build) redessinait tout avec une liste encore vide : « Tous 0 », des rangées qui
+// rétrécissent, « Aucune promesse » au-dessus de la liste du build. Le choix est retenu, et
+// appliqué dès que les données sont là.
+let promPret = false;
 function setPromParty(p){ promParty = p; renderPromises(); }
 function setPromTheme(t){ promTheme = t; renderPromises(); }
 
@@ -1161,6 +1200,7 @@ function allerAuxComparateurs(){
 
 function renderPromises(){
   if(!document.getElementById('promisesList')) return;   // vue absente de cette page
+  if(!promPret) return;   // données pas encore là : filtres et liste du build restent tels quels
   const el = document.getElementById('promisesList');
   if(!el) return;
   const isEn = currentLang === 'en';
@@ -2955,22 +2995,24 @@ function toggleVoteCard(id, evt){
    sur une de ces adresses. */
 const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', lexique:'/lexique', promesses:'/promesses', bd:'/sources' };
 const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd' };
+// Titres ANGLAIS seulement : le français vient du <title> de la page (voir syncTitle).
 const PAGE_META = {
-  bd:        { fr:"Mises à jour du site · DossierQuébec", en:"Site updates · DossierQuébec" },
-  apercu:    { fr:"DossierQuébec — ministres, projets de loi et votes de l'Assemblée nationale", en:"DossierQuébec — ministers, bills and votes of Quebec's National Assembly" },
-  ministres: { fr:"Ministres du Québec — Conseil des ministres · DossierQuébec", en:"Quebec ministers — Cabinet · DossierQuébec" },
-  projets:   { fr:"Projets de loi du Québec, expliqués en clair · DossierQuébec", en:"Quebec bills, explained in plain language · DossierQuébec" },
-  votes:     { fr:"Votes nominatifs à l'Assemblée nationale du Québec · DossierQuébec", en:"Recorded divisions at Quebec's National Assembly · DossierQuébec" },
-  lexique:   { fr:"Lexique et compte citoyen · DossierQuébec", en:"Glossary and citizen account · DossierQuébec" },
-  promesses: { fr:"Promesses électorales 2026 · DossierQuébec", en:"2026 election promises · DossierQuébec" },
+  bd:        { en:"Site updates — DossierQuébec" },
+  apercu:    { en:"Quebec's National Assembly in plain language — DossierQuébec" },
+  ministres: { en:"Quebec ministers and MNAs — DossierQuébec" },
+  projets:   { en:"Quebec bills explained in plain language — DossierQuébec" },
+  votes:     { en:"Recorded divisions at the National Assembly — DossierQuébec" },
+  lexique:   { en:"National Assembly glossary in plain language — DossierQuébec" },
+  promesses: { en:"2026 Quebec election promises — DossierQuébec" },
 };
 function viewFromPath(){
   const seg = location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '');
   return SLUG_VIEWS[seg] || 'apercu';
 }
+const _titreFr = document.title;
 function syncTitle(viewName){
   const m = PAGE_META[viewName]; if(!m) return;
-  document.title = (typeof currentLang !== 'undefined' && currentLang === 'en') ? m.en : m.fr;
+  document.title = (typeof currentLang !== 'undefined' && currentLang === 'en') ? m.en : _titreFr;
 }
 
 function goToTab(viewName, opts){
@@ -2983,7 +3025,11 @@ function goToTab(viewName, opts){
     if(url && !opts.fromHistory) location.href = url;
     return;
   }
-  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.view === viewName));
+  document.querySelectorAll('nav.tabs a[data-view]').forEach(a=>{
+    const actif = a.dataset.view === viewName;
+    a.classList.toggle('active', actif);
+    if(actif) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+  });
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   target.classList.add('active');
   closeMobileMenu();
@@ -3010,8 +3056,13 @@ function goToAccount(){
   }, 80);
 }
 
-document.querySelectorAll('nav.tabs button').forEach(btn=>{
-  btn.addEventListener('click', ()=> goToTab(btn.dataset.view));
+document.querySelectorAll('nav.tabs a[data-view]').forEach(lien=>{
+  lien.addEventListener('click', (e)=>{
+    if(e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    if(!document.getElementById('view-' + lien.dataset.view)) return;   // une autre page : le lien s'en charge
+    e.preventDefault();
+    goToTab(lien.dataset.view);
+  });
 });
 
 document.querySelector('.brand-text')?.addEventListener('keydown', (e)=>{
@@ -3060,6 +3111,22 @@ function sortRoadmapItems(){
     .map((item, i) => ({ item, i, p: getPriority(item) }))
     .sort((a,b) => a.p - b.p || a.i - b.i)
     .forEach(({item}) => container.appendChild(item));
+}
+
+/* Retire les listes que le build a écrites dans le HTML (div.prerendu[data-prerendu="<jeu>"]),
+   une fois les vraies cartes dessinées — sauf celles dont le jeu n'a pas pu être chargé. */
+function retirerPrerendus(jeux){
+  document.querySelectorAll('[data-prerendu]').forEach(e => {
+    const jeu = e.dataset.prerendu;
+    if(jeux && !jeux.includes(jeu)) return;
+    if(_echecs.has(jeu)){
+      // Pas .hidden : #deputesList{display:block} et .grid{display:grid} l'emporteraient.
+      const c = e.previousElementSibling;
+      if(c) c.style.display = 'none';
+      return;
+    }
+    e.remove();
+  });
 }
 
 /* ---------------- MISES À JOUR DU SITE (/sources) ----------------
@@ -3173,13 +3240,18 @@ function renderTicker(){
   renderVotes();
   renderDeputes();
   renderNews();
+  // Les listes du HTML s'effacent dès que leurs cartes sont là — AVANT l'appel réseau de
+  // renderChallenged, sinon l'accueil montrait les deux versions le temps de sa réponse.
+  retirerPrerendus(['apercuBills', 'newsItems', 'bills', 'votes', 'ministers', 'deputesRaw']);
   // Attendu : renderChallenged charge le cache PUIS re-rend la liste des projets.
   // Sans l'attendre, ce re-rendu tardif referme la carte ouverte par le lien
   // profond (?pl=NUM) — d'où le await avant openBillFromQuery plus bas.
   await renderChallenged();
+  promPret = true;
   renderPromises();
   await loadSnoozedSections();
   applyLanguage();
+  retirerPrerendus();   // le reste (promesses, journal) : ils viennent d'être dessinés
   // Ouvre l'onglet correspondant à l'adresse d'arrivée (/votes, /ministres…).
   const bootView = viewFromPath();
   history.replaceState({ view: bootView }, '', location.pathname + location.search);

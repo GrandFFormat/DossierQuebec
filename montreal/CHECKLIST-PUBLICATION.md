@@ -1,8 +1,8 @@
 # Avant d'ouvrir le volet Montréal aux moteurs de recherche
 
 L'étiquette « Prototype » est retirée depuis le 18 septembre 2026. Ce qui reste sous clé,
-c'est le `noindex` : le site ne se laisse pas indexer tant que les droits d'usage des
-documents ne sont pas confirmés par le greffe.
+c'était le `noindex`. **Levé le 21 sept. 2026** par décision de Martin, avant la confirmation du
+greffe : le volet est ouvert aux moteurs de recherche et dans le sitemap.
 
 Une case cochée = vérifié à la date indiquée, par qui. On ne coche pas de mémoire : on
 regarde. Quand tout est coché, la dernière section dit quoi changer pour publier.
@@ -62,9 +62,9 @@ Pour chacune de : Accueil, Décisions, Votes nominatifs, Conseil municipal, Lexi
 
 ## 6. Publier (à faire d'un coup, une fois tout coché)
 
-- [ ] Retirer `<meta name="robots" content="noindex, nofollow">` des six pages de montreal/
-- [ ] Retirer l'en-tête `X-Robots-Tag` sur `/montreal/` dans vercel.json
-- [ ] Ajouter les six pages à sitemap.xml
+- [x] Retirer `<meta name="robots" content="noindex, nofollow">` des six pages de montreal/ *(21 sept. 2026)*
+- [x] Retirer l'en-tête `X-Robots-Tag` sur `/montreal/` dans vercel.json *(21 sept. 2026)*
+- [x] Ajouter les six pages à sitemap.xml *(21 sept. 2026 — écrit par scripts/build-section-pages.js, ne plus le modifier à la main)*
 - [x] Retirer l'étiquette « Prototype » (les six en-têtes) *(18 sept. 2026)*
 - [ ] Image de partage (og-image) propre à Montréal, testée sur un lien partagé
 - [ ] Une dernière capture de chaque page, clair et sombre, jointe au commit de publication

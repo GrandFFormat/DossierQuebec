@@ -200,6 +200,13 @@ l'identifiant sans lien.
 
 ## Où ce dossier vit
 
+> **21 sept. 2026 : verrous levés.** Martin a ouvert les cinq volets aux moteurs de recherche,
+> avant la réponse de la Ville. Plus de `noindex` ni d'en-tête `X-Robots-Tag` sur `/levis/`, plus
+> de `rel="nofollow"` vers le volet ; ses six pages sont dans `sitemap.xml`, que
+> `scripts/build-section-pages.js` écrit lui-même (liste `VILLES`). Pour reverrouiller, remettre la
+> balise et l'en-tête : le build sort alors la page du sitemap, avec un avertissement, sans bloquer
+> la publication quotidienne. Le passage qui suit décrit l'état d'avant.
+
 Sous-dossier de dossierquebec.ca, même dépôt, même Vercel, même analytics. Verrous en place
 jusqu'à la réponse de la Ville : `noindex` sur chaque page, `X-Robots-Tag` sur `/levis/` dans
 `vercel.json`, absent du sitemap, pas de lien depuis l'accueil de DQ (le menu « Ville : … » des

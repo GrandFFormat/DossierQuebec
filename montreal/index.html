@@ -3,10 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- PRÉVISUALISATION : à retirer pour la mise en ligne publique (voir robots.txt). -->
-<meta name="robots" content="noindex, nofollow">
 <title data-en="DossierVilleDeMontréal — the City of Montréal's decisions, made readable">DossierVilleDeMontréal — les décisions de la Ville de Montréal, lisibles</title>
 <meta data-en-content="Independent citizen site that makes the decisions of the City of Montréal readable: resolutions of the city council, the urban agglomeration council and the executive committee, recorded votes and council members." name="description" content="Site citoyen indépendant qui rend lisibles les décisions de la Ville de Montréal : résolutions du conseil municipal, du conseil d'agglomération et du comité exécutif, votes enregistrés et membres du conseil.">
+<link rel="canonical" href="https://dossierquebec.ca/montreal/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DossierQuébec">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:title" content="DossierVilleDeMontréal — les décisions de la Ville de Montréal, lisibles">
+<meta property="og:description" content="Site citoyen indépendant qui rend lisibles les décisions de la Ville de Montréal : résolutions du conseil municipal, du conseil d'agglomération et du comité exécutif, votes enregistrés et membres du conseil.">
+<meta property="og:url" content="https://dossierquebec.ca/montreal/">
+<meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
+<meta property="og:image:width" content="1702">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DossierVilleDeMontréal — les décisions de la Ville de Montréal, lisibles">
+<meta name="twitter:description" content="Site citoyen indépendant qui rend lisibles les décisions de la Ville de Montréal : résolutions du conseil municipal, du conseil d'agglomération et du comité exécutif, votes enregistrés et membres du conseil.">
+<meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
@@ -47,10 +59,10 @@
     </p>
     <nav>
       <a data-en="Home" href="./" aria-current="page">Accueil</a>
-      <a data-en="Decisions" href="decisions.html">Décisions</a>
-      <a data-en="Recorded votes" href="votes.html">Votes nominatifs</a>
-      <a data-en="City Council" href="conseil.html">Conseil municipal</a>
-      <a data-en="Glossary" href="lexique.html">Lexique</a>
+      <a data-en="Decisions" href="decisions">Décisions</a>
+      <a data-en="Recorded votes" href="votes">Votes nominatifs</a>
+      <a data-en="City Council" href="conseil">Conseil municipal</a>
+      <a data-en="Glossary" href="lexique">Lexique</a>
       <a data-en-title="The official City of Montréal website (new tab)" href="https://montreal.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Montréal (nouvel onglet)">Ville de Montréal ↗</a>
       <div class="outils">
         <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
@@ -74,29 +86,29 @@
   <div id="fil"></div>
   <button data-en="Show more" class="plus" id="plus-fil" hidden>Afficher plus</button>
   <p style="margin-top:14px">
-    <a data-en="All decisions →" href="decisions.html">Toutes les décisions →</a> &nbsp;·&nbsp;
-    <a data-en="All recorded votes →" href="votes.html">Tous les votes nominatifs →</a>
+    <a data-en="All decisions →" href="decisions">Toutes les décisions →</a> &nbsp;·&nbsp;
+    <a data-en="All recorded votes →" href="votes">Tous les votes nominatifs →</a>
   </p>
 
   <h2 data-en="Where to start" class="page">Par où commencer</h2>
   <div class="cartes-liens">
     <a data-en="<h3>Decisions</h3>
-      <p>This year's resolutions of the city council, the urban agglomeration council and the executive committee, read from the minutes, with search and filters.</p>" class="lien-section" href="decisions.html">
+      <p>This year's resolutions of the city council, the urban agglomeration council and the executive committee, read from the minutes, with search and filters.</p>" class="lien-section" href="decisions">
       <h3>Décisions</h3>
       <p>Les résolutions du conseil municipal, du conseil d'agglomération et du comité exécutif de l'année en cours, lues dans les procès-verbaux, avec recherche et filtres.</p>
     </a>
     <a data-en="<h3>Recorded votes</h3>
-      <p>When a recorded vote is called, we know who voted for and who voted against. The count, person by person.</p>" class="lien-section" href="votes.html">
+      <p>When a recorded vote is called, we know who voted for and who voted against. The count, person by person.</p>" class="lien-section" href="votes">
       <h3>Votes nominatifs</h3>
       <p>Quand un vote enregistré est demandé, on sait qui a voté pour et qui a voté contre. Le décompte, par personne.</p>
     </a>
     <a data-en="<h3>City Council</h3>
-      <p>The map of the 58 districts and the 19 boroughs: click yours to see who represents you, their party, their roles and how to reach them.</p>" class="lien-section" href="conseil.html">
+      <p>The map of the 58 districts and the 19 boroughs: click yours to see who represents you, their party, their roles and how to reach them.</p>" class="lien-section" href="conseil">
       <h3>Conseil municipal</h3>
       <p>La carte des 58 districts et des 19 arrondissements : cliquez sur le vôtre pour savoir qui vous représente, son parti, ses fonctions et comment le joindre.</p>
     </a>
     <a data-en="<h3>Sources and limits</h3>
-      <p>Where the data comes from, how it is obtained, and what the site doesn't do yet.</p>" class="lien-section" href="sources.html">
+      <p>Where the data comes from, how it is obtained, and what the site doesn't do yet.</p>" class="lien-section" href="sources">
       <h3>Sources et limites</h3>
       <p>D'où viennent les données, comment elles sont obtenues, et ce que le site ne fait pas encore.</p>
     </a>
@@ -108,8 +120,8 @@
 
 <footer>
   <div class="contenu">
-    <p data-en="Independent citizen site. No connection with the City of Montréal, no official status. If anything differs, the original PDF document prevails. <a href=&quot;sources.html&quot;>Sources</a>.">Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
-    En cas d'écart, le document PDF d'origine fait foi. <a href="sources.html">Sources</a>.</p>
+    <p data-en="Independent citizen site. No connection with the City of Montréal, no official status. If anything differs, the original PDF document prevails. <a href=&quot;sources&quot;>Sources</a>.">Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources">Sources</a>.</p>
   </div>
 </footer>
 

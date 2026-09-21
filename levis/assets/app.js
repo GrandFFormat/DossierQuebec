@@ -164,7 +164,7 @@ function carteDecision(d) {
     ${!resumePour(d) && d.dispositif?.length ? blocDispositif(d.dispositif) : ''}
     ${d.annotation ? `<p class="compte" style="margin:0 0 8px">Résolution ${echapper(d.annotation)}.</p>` : ''}
     ${d.sommaires?.length ? `<p class="compte" style="margin:0 0 8px">Sommaire décisionnel ${d.sommaires.map(echapper).join(', ')}</p>` : ''}
-    ${d.voteEnregistre ? `<p class="compte" style="margin:0 0 8px"><a href="votes.html?q=${encodeURIComponent(d.numero ?? '')}">Voir qui a voté pour et contre</a></p>` : ''}
+    ${d.voteEnregistre ? `<p class="compte" style="margin:0 0 8px"><a href="votes?q=${encodeURIComponent(d.numero ?? '')}">Voir qui a voté pour et contre</a></p>` : ''}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${d.numero ? 'Procès-verbal officiel (PDF)' : 'Document officiel (PDF)'} ↗</a>` : ''}
     ${d.sommairePdf ? ` &nbsp;<a class="lien-pdf" href="${echapper(d.sommairePdf)}" target="_blank" rel="noopener">Sommaire décisionnel (PDF) ↗</a>` : ''}`;
   // Espace abonnés (/commun/abonnes.js) : « Suivre ce dossier » et le détail de l'argent. La clé
@@ -471,7 +471,7 @@ function carteElu(m) {
       <p style="margin:4px 0 0; font-size:13px">
         ${m.formulaireCourriel ? `<a href="${echapper(m.formulaireCourriel)}" target="_blank" rel="noopener">Écrire</a>` : ''}
         ${m.biographie ? ` · <a href="${echapper(m.biographie)}" target="_blank" rel="noopener">Biographie</a>` : ''}
-        ${arr ? ` · <a href="decisions.html?instance=${encodeURIComponent(arr.instance)}">${arr.n} décisions de l'arrondissement</a>` : ''}
+        ${arr ? ` · <a href="decisions?instance=${encodeURIComponent(arr.instance)}">${arr.n} décisions de l'arrondissement</a>` : ''}
       </p>
     </div>
   </article>`;
@@ -546,7 +546,7 @@ function rendreArrondissements() {
     if (!seances) return '';
     const n = etat.decisions?.facettes.instance.find((f) => f.valeur === nom)?.n;
     return `<h2 class="section">${echapper(nom.replace("Conseil d'arrondissement ", 'Arrondissement '))}</h2>
-      <p class="compte">${membres.length} membres nommés dans les ${seances} procès-verbaux de l'année${n ? ` · <a href="decisions.html?instance=${encodeURIComponent(nom)}">${nombreFr(n)} décisions</a>` : ''}</p>
+      <p class="compte">${membres.length} membres nommés dans les ${seances} procès-verbaux de l'année${n ? ` · <a href="decisions?instance=${encodeURIComponent(nom)}">${nombreFr(n)} décisions</a>` : ''}</p>
       <div class="grille-elus">${membres.map((m) => carteMembreInstance(m, seances)).join('')}</div>`;
   }).join('');
 }
@@ -766,7 +766,7 @@ function ligneEvenement(e) {
     const corps = `<p class="compte" style="margin:0">
         ${v.decomptePour ?? v.pour.length} pour, ${v.decompteContre ?? v.contre.length} contre${
           v.contre.length ? ' — ' + v.contre.map(echapper).join(', ') : ''
-        }. <a href="votes.html">Voir le détail</a>
+        }. <a href="votes">Voir le détail</a>
       </p>`;
     return carteRepliable(entete, corps);
   }
@@ -810,16 +810,16 @@ function rendreFil() {
 function rendreAccueil() {
   const chiffres = [];
   if (etat.decisions) {
-    chiffres.push({ n: nombreFr(etat.decisions.totalDisponible), quoi: `décisions publiées en ${etat.decisions.parametres.annee}`, lien: 'decisions.html' });
+    chiffres.push({ n: nombreFr(etat.decisions.totalDisponible), quoi: `décisions publiées en ${etat.decisions.parametres.annee}`, lien: 'decisions' });
   }
   if (etat.votes) {
-    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: 'votes nominatifs consignés cette année', lien: 'votes.html' });
+    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: 'votes nominatifs consignés cette année', lien: 'votes' });
   }
   if (etat.resumes) {
-    chiffres.push({ n: nombreFr(etat.resumes.nombre), quoi: 'décisions résumées en langage clair', lien: 'decisions.html' });
+    chiffres.push({ n: nombreFr(etat.resumes.nombre), quoi: 'décisions résumées en langage clair', lien: 'decisions' });
   }
   if (etat.elus) {
-    chiffres.push({ n: etat.elus.nombre, quoi: 'membres du conseil municipal', lien: 'conseil.html' });
+    chiffres.push({ n: etat.elus.nombre, quoi: 'membres du conseil municipal', lien: 'conseil' });
   }
   if ($('#chiffres')) {
     $('#chiffres').innerHTML = chiffres
@@ -918,7 +918,7 @@ async function init() {
       etat.projet = projet;
       $('#compte-decisions')?.insertAdjacentHTML(
         'beforebegin',
-        `<p class="compte" id="filtre-projet">Projet : <strong>${echapper(etat.decisions.projets[projet].titre)}</strong> — ${nombreFr(etat.decisions.projets[projet].n)} décisions. <a href="decisions.html">Voir toutes les décisions</a></p>`
+        `<p class="compte" id="filtre-projet">Projet : <strong>${echapper(etat.decisions.projets[projet].titre)}</strong> — ${nombreFr(etat.decisions.projets[projet].n)} décisions. <a href="decisions">Voir toutes les décisions</a></p>`
       );
     }
     rendreDecisions();

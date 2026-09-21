@@ -222,7 +222,7 @@ function corpsDecision(d) {
     ${s?.service ? `<p class="faits">Au sommaire décisionnel&nbsp;: service responsable, ${echapper(s.service)}${s.montant && !d.montant ? `&nbsp;; montant, ${echapper(s.montant)}` : ''}.</p>` : ''}
     ${d.proposeur ? `<p class="faits">Proposée par ${echapper(d.proposeur)}${d.appuyeur ? `, appuyée par ${echapper(d.appuyeur)}` : ''}.</p>` : ''}
     ${d.ct ? `<p class="faits">Certificat de trésorerie ${echapper(d.ct)}.</p>` : ''}
-    ${d.voteEnregistre && d.numero ? `<p class="faits">Vote nominal consigné&nbsp;: <a href="votes.html?q=${encodeURIComponent(d.numero)}">qui a voté pour, qui a voté contre</a>.</p>` : ''}
+    ${d.voteEnregistre && d.numero ? `<p class="faits">Vote nominal consigné&nbsp;: <a href="votes?q=${encodeURIComponent(d.numero)}">qui a voté pour, qui a voté contre</a>.</p>` : ''}
     ${d.dossier && !d.sommairePublie ? `<p class="faits">Sommaire décisionnel ${echapper(d.dossier)} — non publié par la Ville${comiteExecutif ? ' (les sommaires du comité exécutif ne le sont pas)' : ''}.</p>` : ''}
     <p class="liens-pdf">
       ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">Procès-verbal (PDF)${page ? `, page ${page}` : ''} ↗</a>` : ''}
@@ -299,7 +299,7 @@ function rendreDecisions() {
     chip = document.createElement('p');
     chip.id = 'filtre-district';
     chip.className = 'filtre-actif';
-    chip.innerHTML = `Décisions dont l'ordre du jour nomme le district ${echapper(libelleDistrict({ numero: district, nom: nom ?? '' }))} · <a href="decisions.html">retirer ce filtre</a>`;
+    chip.innerHTML = `Décisions dont l'ordre du jour nomme le district ${echapper(libelleDistrict({ numero: district, nom: nom ?? '' }))} · <a href="decisions">retirer ce filtre</a>`;
     $('#compte-decisions').before(chip);
   }
 
@@ -462,7 +462,7 @@ function carteVote(v) {
     <details><summary>Voir le passage d'origine</summary><p>${echapper(v.brut)}</p></details>
     <p class="liens-pdf">
       ${v.pdf ? `<a class="lien-pdf" href="${echapper(v.pdf)}" target="_blank" rel="noopener">Procès-verbal (PDF)${page ? `, page ${page}` : ''} ↗</a>` : ''}
-      ${v.numero && !v.voteDeProcedure ? `<a class="lien-pdf" href="decisions.html?q=${encodeURIComponent(v.numero)}">La décision ${echapper(v.numero)}</a>` : ''}
+      ${v.numero && !v.voteDeProcedure ? `<a class="lien-pdf" href="decisions?q=${encodeURIComponent(v.numero)}">La décision ${echapper(v.numero)}</a>` : ''}
     </p>`;
 
   return carteRepliable(entete, corps);
@@ -654,13 +654,13 @@ function carteElu(m) {
       </div>
       ${habitants ? `<p class="compte" style="margin:6px 0 0">${echapper(habitants)} habitants dans le district, selon la Ville.</p>` : ''}
       ${presences ? `<p class="compte" style="margin:6px 0 0"><span class="presences"><span class="p-present">présent${e} à ${presences.presences} séance${presences.presences > 1 ? 's' : ''}</span><span class="p-absent">absent${e} à ${presences.absences}</span></span> sur ${presences.seances} où la personne est nommée${anneePresences ? ` en ${echapper(anneePresences)}` : ''}${presences.inconnu ? ` (${presences.inconnu} sans mention)` : ''}.</p>` : ''}
-      ${votesContre ? `<p class="compte" style="margin:6px 0 0">${votesContre} vote${votesContre > 1 ? 's' : ''} contre consigné${votesContre > 1 ? 's' : ''}${etat.votes?.parametres?.annee ? ` en ${echapper(etat.votes.parametres.annee)}` : ''} — <a href="votes.html?q=${encodeURIComponent(m.nomComplet)}">les voir</a>.</p>` : ''}
+      ${votesContre ? `<p class="compte" style="margin:6px 0 0">${votesContre} vote${votesContre > 1 ? 's' : ''} contre consigné${votesContre > 1 ? 's' : ''}${etat.votes?.parametres?.annee ? ` en ${echapper(etat.votes.parametres.annee)}` : ''} — <a href="votes?q=${encodeURIComponent(m.nomComplet)}">les voir</a>.</p>` : ''}
       <p class="coordonnees">
         ${[
           m.courriel ? `<a href="mailto:${echapper(m.courriel)}">${echapper(m.courriel)}</a>` : '',
           m.telephone ? `<a href="tel:${echapper(String(m.telephone).replace(/[^\d+]/g, ''))}">${echapper(m.telephone)}</a>` : '',
           m.profil ? `<a href="${echapper(m.profil)}" target="_blank" rel="noopener">Son profil sur laval.ca ↗</a>` : '',
-          decisions ? `<a href="decisions.html?district=${numero}">${decisions} décision${decisions > 1 ? 's' : ''} de l'année nomme${decisions > 1 ? 'nt' : ''} le district</a>` : '',
+          decisions ? `<a href="decisions?district=${numero}">${decisions} décision${decisions > 1 ? 's' : ''} de l'année nomme${decisions > 1 ? 'nt' : ''} le district</a>` : '',
         ].filter(Boolean).join(' · ')}
       </p>
     </div>
@@ -957,7 +957,7 @@ function ligneEvenement(e) {
     const corps = `<p class="compte" style="margin:0">
         ${v.decomptePour ?? v.pour.length} pour, ${v.decompteContre ?? v.contre.length} contre${
           v.contre.length ? ' — contre : ' + v.contre.map(echapper).join(', ') : ''
-        }. <a href="votes.html${v.numero ? `?q=${encodeURIComponent(v.numero)}` : ''}">Voir le détail</a>
+        }. <a href="votes${v.numero ? `?q=${encodeURIComponent(v.numero)}` : ''}">Voir le détail</a>
       </p>`;
     return carteRepliable(entete, corps);
   }
@@ -991,16 +991,16 @@ function rendreAccueil() {
   const chiffres = [];
   if (etat.decisions) {
     const decisions = etat.decisions.decisions.filter((d) => !estDocument(d)).length;
-    chiffres.push({ n: nombreFr(decisions), quoi: `décisions lues dans les procès-verbaux de ${etat.decisions.parametres.annee}`, lien: 'decisions.html' });
+    chiffres.push({ n: nombreFr(decisions), quoi: `décisions lues dans les procès-verbaux de ${etat.decisions.parametres.annee}`, lien: 'decisions' });
   }
   if (etat.votes) {
-    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: `votes nominaux au conseil municipal en ${etat.votes.parametres?.annee ?? ''}`.trim(), lien: 'votes.html' });
+    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: `votes nominaux au conseil municipal en ${etat.votes.parametres?.annee ?? ''}`.trim(), lien: 'votes' });
   }
   if (etat.resumes) {
-    chiffres.push({ n: nombreFr(etat.resumes.nombre ?? etat.parSommaire.size), quoi: 'sommaires décisionnels résumés en langage clair', lien: 'decisions.html' });
+    chiffres.push({ n: nombreFr(etat.resumes.nombre ?? etat.parSommaire.size), quoi: 'sommaires décisionnels résumés en langage clair', lien: 'decisions' });
   }
   if (etat.elus) {
-    chiffres.push({ n: etat.elus.nombre ?? etat.elus.membres?.length ?? 0, quoi: 'membres du conseil municipal', lien: 'conseil.html' });
+    chiffres.push({ n: etat.elus.nombre ?? etat.elus.membres?.length ?? 0, quoi: 'membres du conseil municipal', lien: 'conseil' });
   }
   if ($('#chiffres')) {
     $('#chiffres').innerHTML = chiffres

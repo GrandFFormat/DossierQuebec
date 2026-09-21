@@ -57,7 +57,11 @@ const page = () => location.pathname.replace(/\.html$/, '').replace(/\/index$/, 
 
 // Le HTML de la page, une fois. Idempotent : un élément déjà traduit est marqué.
 export function traduirePage(racine = document) {
-  if (!EN) return;
+  // Page qui n'a pas d'anglais (Québec depuis le 21 sept. 2026, et les volets prototypes) : le
+  // script en ligne du <head> a pu poser lang="en" et .dvq-en d'après le choix mémorisé ailleurs
+  // (?lang=en, ou la pastille EN de Montréal). La page reste en français : on le lui redit, sinon
+  // un moteur ou un lecteur d'écran lit du français annoncé comme de l'anglais.
+  if (!EN) { document.documentElement.lang = 'fr'; document.documentElement.classList.remove('dvq-en'); return; }
   document.documentElement.lang = 'en';
   for (const el of racine.querySelectorAll('[data-en]:not([data-en-fait])')) {
     el.innerHTML = el.dataset.en;

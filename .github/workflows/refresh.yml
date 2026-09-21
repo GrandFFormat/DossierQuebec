@@ -69,12 +69,11 @@ jobs:
           if git diff --cached --quiet; then
             echo "Aucun changement — rien à committer."
           else
-            # Le contenu a changé aujourd'hui -> on date le sitemap (signal SEO
-            # « la page a changé »). Fait ici, pas à chaque exécution, pour ne
-            # jamais produire de commit fantôme les jours sans changement.
+            # Le sitemap est daté par scripts/build-section-pages.js : seules les pages
+            # dont le HTML a vraiment changé prennent la date du jour. Le dater ici,
+            # comme avant, avançait TOUTES les dates chaque matin (les horodatages des
+            # données changent toujours) — et Google finit par ignorer un lastmod faux.
             TODAY=$(date -u +%Y-%m-%d)
-            node scripts/update-sitemap-lastmod.js "$TODAY"
-            git add sitemap.xml
             git commit -m "Rafraîchissement auto des données ($TODAY)"
             # Quelqu'un a pu pousser pendant les scrapers (un volet, ou du travail à la main) :
             # on se remet à jour avant de réessayer, comme les workflows des volets.

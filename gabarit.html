@@ -108,19 +108,19 @@
          Vrais liens <a href> : le clavier, le clic du milieu et « ouvrir dans un
          nouvel onglet » fonctionnent sans une ligne de code. La barre oblique finale
          est OBLIGATOIRE — sans elle, les chemins relatifs du volet (assets/, data/)
-         se résolvent depuis la racine du site. rel="nofollow" tant que les volets sont
-         des prototypes hors des moteurs de recherche. Le chemin dit /quebec/ : c'est la
+         se résolvent depuis la racine du site. Plus de rel="nofollow" depuis le
+         21 sept. 2026 : les volets sont ouverts aux moteurs de recherche. Le chemin dit /quebec/ : c'est la
          liste, sous « Villes », qui dit qu'il s'agit de la ville. -->
     <details class="villes-menu" id="villesMenu">
       <summary class="city-flip" title="Les volets municipaux" aria-label="Les volets municipaux">
         <span data-i18n="nav.villes">Villes</span>
       </summary>
       <ul>
-        <li><a href="/quebec/" rel="nofollow">Québec <small>DossierVilleDeQuébec</small></a></li>
-        <li><a href="/montreal/" rel="nofollow">Montréal <small>DossierVilleDeMontréal</small></a></li>
-        <li><a href="/levis/" rel="nofollow">Lévis <small>DossierVilleDeLévis · prototype</small></a></li>
-        <li><a href="/longueuil/" rel="nofollow">Longueuil <small>DossierVilleDeLongueuil · prototype</small></a></li>
-        <li><a href="/laval/" rel="nofollow">Laval <small>DossierVilleDeLaval · prototype</small></a></li>
+        <li><a href="/quebec/">Québec <small>DossierVilleDeQuébec</small></a></li>
+        <li><a href="/montreal/">Montréal <small>DossierVilleDeMontréal</small></a></li>
+        <li><a href="/levis/">Lévis <small>DossierVilleDeLévis · prototype</small></a></li>
+        <li><a href="/longueuil/">Longueuil <small>DossierVilleDeLongueuil · prototype</small></a></li>
+        <li><a href="/laval/">Laval <small>DossierVilleDeLaval · prototype</small></a></li>
       </ul>
     </details>
   </div>
@@ -129,11 +129,13 @@
        du hamburger (position:fixed), peu importe où il vit dans le DOM. -->
   <nav class="tabs">
     <div class="close-menu" id="closeMenuBtn"><span data-i18n="nav.close">Fermer</span> ✕</div>
-    <button class="active" data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></button>
-    <button data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></button>
-    <button data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></button>
-    <button data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></button>
-    <button data-view="lexique"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></button>
+    <!-- De vrais liens, pas des <button> : un moteur de recherche ne suit pas un bouton, et
+         /ministres, /projets-de-loi, /votes et /lexique n'avaient aucun lien qu'il puisse suivre. -->
+    <a href="/" data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></a>
+    <a href="/ministres" data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></a>
+    <a href="/projets-de-loi" data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></a>
+    <a href="/votes" data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></a>
+    <a href="/lexique" data-view="lexique"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></a>
   </nav>
   <div class="header-ctrls">
     <div class="font-size-ctrl" id="fontSizeCtrl">
@@ -218,6 +220,7 @@ function goToFederal(evt){
          (La ligne du header .brand-text p est masquée en échange.) -->
     <div class="hero-poster">
       <h1 class="hero-h1">
+        <span class="hero-sujet" data-i18n="sujet.apercu">L'Assemblée nationale du Québec en clair</span>
         <span data-i18n="hero.l1">Qui siège,</span>
         <span class="hero-outline" data-i18n="hero.l2">qui légifère,</span>
         <span class="hero-blue" data-i18n="hero.l3">qui vote quoi.</span>
@@ -226,7 +229,7 @@ function goToFederal(evt){
         <div class="hero-manifesto">
           <p data-i18n="hero.manifesto">L'Assemblée nationale du Québec, réorganisée <b>par personne</b> et traduite <b>en langage clair</b> — sans jugement ni verdict. Site citoyen indépendant, vraies données publiques.</p>
         </div>
-        <a class="hero-cta" role="button" tabindex="0" onclick="goToTab('projets')" data-i18n="hero.cta">Explorer →</a>
+        <a class="hero-cta" href="/projets-de-loi" data-i18n="hero.cta">Explorer →</a>
       </div>
     </div>
 
@@ -236,6 +239,19 @@ function goToFederal(evt){
       <div class="stat-cell"><b id="statProjets">—</b><span data-i18n="stat.projets">Projets de loi suivis</span></div>
       <div class="stat-cell"><b id="statVotes">—</b><span data-i18n="stat.votes">Votes nominatifs</span></div>
     </div>
+
+    <!-- Porte d'entrée : une carte par section, en vrais liens. Le menu du haut se replie sur
+         téléphone, et une page qui annonce ses parties se comprend mieux, moteurs compris. -->
+    <nav class="hub" aria-labelledby="hubTitre">
+      <h2 class="hub-titre" id="hubTitre" data-i18n="hub.h">Par où commencer</h2>
+      <div class="hub-cartes">
+        <a class="hub-carte" href="/projets-de-loi"><b data-i18n="hub.projets.h">Projets de loi</b><span data-i18n="hub.projets.p">Les projets de loi résumés en langage clair, avec leur étape réelle.</span></a>
+        <a class="hub-carte" href="/votes"><b data-i18n="hub.votes.h">Votes nominatifs</b><span data-i18n="hub.votes.p">Qui a voté pour, contre ou s'est abstenu, député·e par député·e.</span></a>
+        <a class="hub-carte" href="/ministres"><b data-i18n="hub.ministres.h">Ministres et député·e·s</b><span data-i18n="hub.ministres.p">Le Conseil des ministres et toute l'Assemblée, avec la présence aux votes.</span></a>
+        <a class="hub-carte" href="/promesses"><b data-i18n="hub.promesses.h">Promesses 2026</b><span data-i18n="hub.promesses.p">Les engagements des partis pour le 5 octobre, chacun avec sa source.</span></a>
+        <a class="hub-carte" href="/lexique"><b data-i18n="hub.lexique.h">Lexique</b><span data-i18n="hub.lexique.p">Le jargon parlementaire, expliqué simplement.</span></a>
+      </div>
+    </nav>
 
     <!-- Section signature du handoff : bande JAUNE pleine largeur -->
     <div class="band band-yellow bleed" id="band-challenged">
@@ -257,6 +273,7 @@ function goToFederal(evt){
     </div>
     <div id="body-projets-recents">
     <div id="apercuBills"></div>
+    <!--PRERENDU:apercuBills-->
     </div>
 
     <!-- Bande blanche : Quoi de neuf + Pétitions côte à côte (maquette) -->
@@ -270,6 +287,7 @@ function goToFederal(evt){
 
     <div id="body-quoideneuf">
     <div id="newsList"></div>
+    <!--PRERENDU:newsList-->
     <!-- Encadré noir compact (maquette) — le même statut réel que le ticker.
          renderTicker() lit .calendar-box .status : NE PAS renommer. -->
     <div class="calendar-box">
@@ -327,6 +345,7 @@ function goToFederal(evt){
     <!-- Hero de vue (refonte brutaliste) -->
     <div class="view-hero">
       <h2 class="hero-h1 hero-h1-md">
+        <span class="hero-sujet" data-i18n="sujet.ministres">Ministres et député·e·s du Québec</span>
         <span data-i18n="minhero.l1">Conseil des ministres</span>
         <span class="hero-outline" data-i18n="minhero.l2">&amp; toute l'Assemblée.</span>
       </h2>
@@ -367,6 +386,7 @@ function goToFederal(evt){
       <span class="head-note"><span id="ministresCount"></span><span data-i18n="min.sub2b"> ministres — liste officielle quebec.ca</span></span>
     </div>
     <div class="grid" id="ministresGrid"></div>
+    <!--PRERENDU:ministresGrid-->
 
     <!-- Comparateur : bande BLEUE pleine largeur (maquette) — entre le Conseil
          des ministres et le reste de l'Assemblée. Jamais un classement, une
@@ -390,6 +410,7 @@ function goToFederal(evt){
       <span class="head-note" data-i18n="min.restNote">Tous les partis — 125 sièges au total</span>
     </div>
     <div class="grid" id="deputesList"></div>
+    <!--PRERENDU:deputesList-->
     <div class="info-box" id="deputesInfoBox" data-i18n="trouve.info">Ces 125 entrées viennent directement de la liste officielle des députés en fonction de l'Assemblée nationale. Certains sièges peuvent changer entre deux mises à jour (démission, élection partielle) — cette liste est une photo prise au moment de la dernière mise à jour, pas un flux automatiquement à jour.</div>
   </section>
 
@@ -405,6 +426,7 @@ function goToFederal(evt){
     <!-- Hero de vue (refonte brutaliste) -->
     <div class="view-hero">
       <h2 class="hero-h1 hero-h1-md">
+        <span class="hero-sujet" data-i18n="sujet.projets">Projets de loi du Québec</span>
         <span data-i18n="projhero.l1">Projets de loi,</span>
         <span class="hero-outline" data-i18n="projhero.l2">traduits en clair.</span>
       </h2>
@@ -432,7 +454,7 @@ function goToFederal(evt){
         <span class="bstep">Étude détaillée</span><span class="legend-arrow">→</span>
         <span class="bstep">Adoption / Sanction</span>
       </span>
-      <a class="legend-link" role="button" tabindex="0" onclick="goToTab('lexique')" data-i18n="legend.link">C'est quoi ces étapes ? → Lexique</a>
+      <a class="legend-link" href="/lexique" data-i18n="legend.link">C'est quoi ces étapes ? → Lexique</a>
     </div>
 
     <!-- Titre de résultats (change avec le filtre actif) -->
@@ -442,6 +464,7 @@ function goToFederal(evt){
     </div>
 
     <div id="billsList"></div>
+    <!--PRERENDU:billsList-->
 
     <!-- Explainer « challenger » : adapté au VRAI mécanisme du site (compte
          requis, 1 demande par personne, paliers 500/1000) — la maquette disait
@@ -462,6 +485,7 @@ function goToFederal(evt){
     <!-- Hero de vue (refonte brutaliste) -->
     <div class="view-hero">
       <h2 class="hero-h1 hero-h1-md">
+        <span class="hero-sujet" data-i18n="sujet.votes">Votes nominatifs à l'Assemblée nationale</span>
         <span data-i18n="votehero.l1">Qui a voté</span>
         <span class="hero-outline" data-i18n="votehero.l2">pour, contre, absent.</span>
       </h2>
@@ -481,6 +505,7 @@ function goToFederal(evt){
     </div>
 
     <div id="votesList"></div>
+    <!--PRERENDU:votesList-->
     <div class="info-box">
       <b data-i18n="votes.info.b">Sur le détail « qui a voté quoi »</b> <span data-i18n="votes.info.text">— l'Assemblée nationale publie le nom de chaque député pour chaque vote nominal dans son registre des votes officiel. Le détail nominatif ci-dessus (bouton « Voir le détail nominatif ») vient de ce registre officiel, pas d'une estimation. Le parti affiché à côté de chaque nom est celui inscrit au registre au moment du vote — il peut différer du parti actuel d'un·e député·e ayant changé d'allégeance depuis.</span>
     </div>
@@ -514,6 +539,7 @@ function goToFederal(evt){
   <section class="view" id="view-promesses">
     <div class="view-hero">
       <h2 class="hero-h1 hero-h1-md">
+        <span class="hero-sujet" data-i18n="sujet.promesses">Promesses électorales 2026</span>
         <span data-i18n="prom.l1">Ce qu'ils promettent,</span>
         <span class="hero-outline" data-i18n="prom.l2">ce qu'ils en feront.</span>
       </h2>
@@ -550,6 +576,7 @@ function goToFederal(evt){
     </div>
 
     <div id="promisesList"></div>
+    <!--PRERENDU:promisesList-->
 
     <!-- Légende de provenance. Une liste de citations sans son mode d'emploi
          invite à de fausses déductions : compter 8 cartes et croire que le parti
@@ -596,6 +623,7 @@ function goToFederal(evt){
     <!-- Hero de vue (refonte brutaliste) -->
     <div class="view-hero">
       <h2 class="hero-h1 hero-h1-md">
+        <span class="hero-sujet" data-i18n="sujet.lexique">Lexique de l'Assemblée nationale</span>
         <span data-i18n="lexhero.l1">Le jargon,</span>
         <span class="hero-outline" data-i18n="lexhero.l2">décodé.</span>
       </h2>
@@ -604,7 +632,17 @@ function goToFederal(evt){
 
     <!-- Connexion — remontee tout en haut de Lexique -->
     <div class="section-head" id="sec-compte"><div><h2 data-i18n="h.compte">Compte</h2></div></div>
-    <div class="account-box" id="accountBox"></div>
+    <!-- Contenu de départ = la branche « non connecté » de renderAccountBox() (commun/dq.js), qui le
+         remplace : la boîte a sa hauteur finale dès le premier affichage (CLS). Désactivé tant que
+         la connexion n'est pas prête : un clic avant ce moment enverrait un lien dont la
+         confirmation s'écrirait dans des éléments déjà remplacés. -->
+    <div class="account-box" id="accountBox">
+      <div class="account-row">
+        <input type="email" id="accountEmailInput" placeholder="Votre courriel" disabled>
+        <button class="account-btn" id="magicLinkBtn" onclick="handleMagicLinkClick()" disabled>Envoyer un lien de connexion</button>
+      </div>
+      <div class="account-note" id="accountStatusNote">Connectez-vous pour synchroniser les ministres, député·e·s et projets de loi que vous suivez entre vos appareils.</div>
+    </div>
     <div id="adminFlagCounts"></div>
 
     <!-- Entrée permanente vers /promesses (la vue n'a pas d'onglet — voir la
@@ -829,7 +867,7 @@ function goToFederal(evt){
         <h2 data-i18n="maj.h">Mises à jour du site</h2>
         <div class="sub" data-i18n="maj.sub">Ce qui a changé sur DossierQuébec, du plus récent au plus ancien</div>
       </div>
-      <span class="bd-back" onclick="goToTab('apercu')" data-i18n="bd.back">← Retour à l'aperçu</span>
+      <a class="bd-back" href="/" data-i18n="bd.back">← Retour à l'aperçu</a>
     </div>
     <div class="createur">
       <img class="createur-photo" src="/commun/martin.jpg" width="120" height="120" alt="Martin Archambault">
@@ -841,6 +879,7 @@ function goToFederal(evt){
     </div>
     <div class="maj" id="journal">
       <ol class="maj-liste" id="journalListe" aria-live="polite"></ol>
+    <!--PRERENDU:journal-->
       <button type="button" class="maj-plus" id="journalPlus" hidden></button>
     </div>
   </section>
@@ -850,8 +889,25 @@ function goToFederal(evt){
 <!-- Footer maquette : texte à gauche (avec « construit avec Claude » suivi du
      lien caché « et moi » vers la BD), liens texte en majuscules à droite. -->
 <footer>
+  <nav class="footer-nav" aria-label="Plan du site">
+    <a href="/" data-i18n="nav.apercu">Aperçu</a>
+    <a href="/ministres" data-i18n="nav.ministres">Ministres</a>
+    <a href="/projets-de-loi" data-i18n="nav.projets">Projets de loi</a>
+    <a href="/votes" data-i18n="nav.votes">Votes</a>
+    <a href="/promesses" data-i18n="fil.promesses">Promesses</a>
+    <a href="/lexique" data-i18n="nav.lexique">Lexique</a>
+    <a href="/sources" data-i18n="fil.bd">Mises à jour du site</a>
+    <a href="/abonnement" data-i18n="footer.abonnement">Abonnement</a>
+    <span class="footer-nav-villes"><span data-i18n="footer.villes">Villes :</span>
+      <a href="/quebec/">Québec</a>
+      <a href="/montreal/">Montréal</a>
+      <a href="/levis/">Lévis</a>
+      <a href="/longueuil/">Longueuil</a>
+      <a href="/laval/">Laval</a>
+    </span>
+  </nav>
   <div class="footer-inner">
-  <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">construit avec Claude</span> <a class="footer-etmoi" role="button" tabindex="0" onclick="goToTab('bd')" data-i18n="footer.etmoi">et moi</a></span>
+  <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">construit avec Claude</span> <a class="footer-etmoi" href="/sources" data-i18n="footer.etmoi">et moi</a></span>
   <span class="footer-right-group">
     <a class="footer-gh" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook">Facebook</a>
     <a class="footer-gh footer-coffee" href="https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00" target="_blank" rel="noopener" aria-label="Offre-moi un café" data-i18n="footer.coffee">Offre-moi un café</a>

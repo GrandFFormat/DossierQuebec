@@ -15,7 +15,8 @@ c'est Laval. » Le présent README est le journal du projet.
 > n'est pas un navigateur. Le volet vit avec : l'index vient d'une **capture manuelle** (section
 > « Rafraîchir l'index à la main »), les PDF se lisent normalement. Le courriel à la Ville est
 > parti le 14 septembre (étape 2). Tout ce qui est en ligne est en français seulement et sous
-> verrou `noindex` en attendant sa réponse.
+> verrou `noindex` en attendant sa réponse — verrou levé le 21 sept. 2026, avant la réponse, par
+> décision de Martin : le volet est dans `sitemap.xml` (écrit par `scripts/build-section-pages.js`).
 
 ## Démarrage
 
@@ -342,7 +343,9 @@ chaque matin sans que personne l'ait décidé.
 
 ## Ce qui n'est pas encore là
 
-- **La réponse de la Ville** : verrous `noindex` en place, relance programmée le 13 octobre 2026.
+- **La réponse de la Ville** : relance programmée le 13 octobre 2026. Les verrous `noindex` ont été levés le
+  21 sept. 2026, avant la réponse, par décision de Martin ; pour les remettre, voir la note du même jour
+  dans `quebec/README.md`.
   L'index reste une capture à refaire à la main d'ici là.
 - **Les résumés** : estimés, éteints, en attente d'une décision de modèle et de budget.
 - **L'espace abonnés** (guide, section 9) : les pages portent `data-ville="laval"` et chaque fiche sa
