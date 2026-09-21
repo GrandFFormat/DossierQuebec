@@ -1,0 +1,338 @@
+[
+  {
+    "date": "2026-09-21",
+    "volet": "compte",
+    "fr": {
+      "titre": "Vous pouvez maintenant offrir un abonnement",
+      "texte": "Offrez 1 mois (10 $) ou 12 mois (96 $), payé en ligne, à votre nom ou de façon anonyme. La personne reçoit un code par courriel et l’active sur la page d’abonnement."
+    },
+    "en": {
+      "titre": "You can now give a subscription",
+      "texte": "Give 1 month ($10) or 12 months ($96), paid online, under your name or anonymously. The recipient gets a code by email and activates it on the subscription page."
+    },
+    "commits": [
+      "0829023",
+      "632e4d5",
+      "71259cd"
+    ]
+  },
+  {
+    "date": "2026-09-21",
+    "volet": "laval",
+    "fr": {
+      "titre": "Nouveau volet : Laval, en version prototype",
+      "texte": "Le site couvre maintenant Laval : décisions du conseil et du comité exécutif, votes nominatifs, carte des 22 districts avec vos élus et leur présence aux séances, lexique. Mes dossiers propose deux projets à suivre : l’eau, et le logement social et abordable."
+    },
+    "en": {
+      "titre": "New section: Laval, as a prototype",
+      "texte": "The site now covers Laval: decisions of the council and executive committee, recorded votes, a map of the 22 districts with your councillors and their attendance, a glossary. My files offers two projects to follow: water, and social and affordable housing."
+    },
+    "commits": [
+      "98fb4bb",
+      "a0241f0",
+      "6525932",
+      "da3d0a1"
+    ]
+  },
+  {
+    "date": "2026-09-21",
+    "volet": "longueuil",
+    "fr": {
+      "titre": "Nouveau volet : Longueuil, en version prototype",
+      "texte": "Le site couvre maintenant Longueuil : décisions du conseil de ville et de l’agglomération, votes nominatifs, membres du conseil, lexique et résumés en langage clair. Mes dossiers propose un projet à suivre : l’eau potable et les eaux usées."
+    },
+    "en": {
+      "titre": "New section: Longueuil, as a prototype",
+      "texte": "The site now covers Longueuil: decisions of the city and agglomeration councils, recorded votes, council members, a glossary and plain-language summaries. My files offers one project to follow: drinking water and wastewater."
+    },
+    "commits": [
+      "1b288ed",
+      "a0241f0",
+      "47d103b"
+    ]
+  },
+  {
+    "date": "2026-09-21",
+    "volet": "site",
+    "fr": {
+      "titre": "Site principal : des pages beaucoup plus légères",
+      "texte": "Chaque page du site principal ne charge plus que ce qu’elle affiche : qui a voté quoi et les résumés des projets de loi arrivent quand vous dépliez une fiche."
+    },
+    "en": {
+      "titre": "Main site: much lighter pages",
+      "texte": "Each page of the main site now loads only what it shows: who voted how and bill summaries arrive when you open an entry."
+    },
+    "commits": [
+      "a0dd5cb",
+      "307b907",
+      "5abdf1e",
+      "4a55018"
+    ]
+  },
+  {
+    "date": "2026-09-20",
+    "volet": "compte",
+    "fr": {
+      "titre": "Abonnement : 10 $ par mois ou 96 $ par an, et des limites claires",
+      "texte": "L’abonnement coûte 10 $ par mois ou 96 $ par an, et s’annule en deux clics. Un compte gratuit permet de suivre 3 projets, l’abonnement 10, avec 5 alertes par mot-clé, 3 organismes et 10 exports par mois."
+    },
+    "en": {
+      "titre": "Subscription: $10 a month or $96 a year, with clear limits",
+      "texte": "A subscription costs $10 a month or $96 a year, and you can cancel in two clicks. A free account lets you follow 3 projects; a subscription allows 10, plus 5 keyword alerts, 3 organizations and 10 exports a month."
+    },
+    "commits": [
+      "c976916",
+      "cd83238",
+      "eecc554",
+      "74a6fb4",
+      "4c38f70"
+    ]
+  },
+  {
+    "date": "2026-09-20",
+    "volet": "quebec",
+    "fr": {
+      "titre": "Québec : les décisions de la Ville par courriel",
+      "texte": "Inscrivez-vous gratuitement au compte rendu du mois ou à un courriel après chaque séance du conseil ou de votre arrondissement. L’édition des abonnés ajoute le détail de l’argent : celle d’août se lit en ligne, en exemple."
+    },
+    "en": {
+      "titre": "Québec City: council decisions by email",
+      "texte": "Sign up for free for the monthly roundup or for an email after each meeting of city council or your borough council. The subscribers’ edition adds the money details: the August issue can be read online as a sample."
+    },
+    "commits": [
+      "726c7fc",
+      "df17203",
+      "517c993",
+      "03613b4",
+      "161e3dc",
+      "f9ec9d6",
+      "c33a856",
+      "e8f539a",
+      "9efac9b",
+      "7e5c2bd",
+      "693e1ff",
+      "b3d5033",
+      "cfb683b",
+      "d1f4c11",
+      "4c38f70"
+    ]
+  },
+  {
+    "date": "2026-09-19",
+    "volet": "site",
+    "fr": {
+      "titre": "Une navigation commune aux cinq villes, mieux adaptée au téléphone",
+      "texte": "Un menu dans l’en-tête du site principal et de chaque volet mène aux cinq villes, et Mes dossiers prend la marque de la ville d’où vous venez. Sur téléphone, la page ne glisse plus de côté quand vous dépliez une fiche ou ouvrez un menu."
+    },
+    "en": {
+      "titre": "The same navigation across all five cities, better suited to phones",
+      "texte": "A menu in the header of the main site and of each city section leads to all five cities, and My files takes on the branding of the city you came from. On phones, the page no longer slides sideways when you open an entry or a menu."
+    },
+    "commits": [
+      "d8eb4ad",
+      "ea91c8a",
+      "29f6a13",
+      "6088258",
+      "d5c9398",
+      "cdbd5e2",
+      "9751676",
+      "46db04d",
+      "3096885"
+    ]
+  },
+  {
+    "date": "2026-09-18",
+    "volet": "montreal",
+    "fr": {
+      "titre": "Montréal n’est plus un prototype",
+      "texte": "Le volet Montréal couvre ses 19 conseils d’arrondissement, dont le Plateau-Mont-Royal et huit autres qui n’affichaient aucune décision. Inscrivez-vous à ses courriels : compte rendu du mois (dès fin septembre), séances du conseil et « Mon arrondissement »."
+    },
+    "en": {
+      "titre": "Montréal is no longer a prototype",
+      "texte": "The Montréal section now covers all 19 borough councils, including Le Plateau-Mont-Royal and eight others that showed no decisions. Sign up for its emails: the monthly roundup (starting in late September), council meetings and “My borough”."
+    },
+    "commits": [
+      "e3c2cec",
+      "9118aaa",
+      "c48ac7a",
+      "72a8618",
+      "f3c2f62",
+      "b151ab4",
+      "9d098d4",
+      "1c70b87",
+      "1905ff9",
+      "fc8355a",
+      "6c1782f",
+      "c193f58",
+      "a5a9769",
+      "6a520a1"
+    ]
+  },
+  {
+    "date": "2026-09-18",
+    "volet": "montreal",
+    "fr": {
+      "titre": "Montréal : des résumés en langage clair et 16 sujets à suivre",
+      "texte": "La plupart des décisions de Montréal ont maintenant un résumé en langage clair, rédigé par IA à partir du sommaire décisionnel quand la Ville le publie, sinon du texte de la résolution. Mes dossiers propose 16 sujets à suivre, dont l’écoquartier Louvain Est."
+    },
+    "en": {
+      "titre": "Montréal: plain-language summaries and 16 topics to follow",
+      "texte": "Most Montréal decisions now have a plain-language summary, written by AI from the decision summary when the City publishes it, or otherwise from the text of the resolution. My files offers 16 topics to follow, including the Louvain Est eco-district."
+    },
+    "commits": [
+      "5675668",
+      "a3b8cc5",
+      "96b01f0",
+      "ecaf19e",
+      "d5dbd00",
+      "ddcd51a",
+      "3bec4a9",
+      "665fec0",
+      "aff7e9a",
+      "00a95e9",
+      "9dccd03",
+      "99f7f94"
+    ]
+  },
+  {
+    "date": "2026-09-18",
+    "volet": "site",
+    "fr": {
+      "titre": "Montréal, Mes dossiers et l’abonnement, aussi en anglais",
+      "texte": "Un bouton EN permet de lire le volet Montréal, Mes dossiers et la page Abonnement en anglais, résumés et lexique compris, et le site retient votre choix. Le français reste la langue par défaut et celle des documents officiels."
+    },
+    "en": {
+      "titre": "Montréal, My files and Subscription, now in English",
+      "texte": "An EN button lets you read the Montréal section, My files and the Subscription page in English, summaries and glossary included, and the site remembers your choice. French remains the default and the language of official documents."
+    },
+    "commits": [
+      "cddd741",
+      "f95d3cc",
+      "20fab24",
+      "92d2c25",
+      "3ce16ca",
+      "67d5ff5"
+    ]
+  },
+  {
+    "date": "2026-09-17",
+    "volet": "quebec",
+    "fr": {
+      "titre": "Québec n’est plus un prototype, et le détail de l’argent s’étend",
+      "texte": "L’étiquette « Prototype » quitte le volet Québec, où le détail de l’argent est lu pour les projets à suivre et les nouveaux dossiers avec un montant. Pour un autre dossier, un abonné peut le demander : sa demande passe en priorité."
+    },
+    "en": {
+      "titre": "Québec City is no longer a prototype, and money details expand",
+      "texte": "The “Prototype” label is gone from the Québec City section, where money details are read for the projects you can follow and for new files with an amount. For any other file, a subscriber can request them: the request goes to the front of the line."
+    },
+    "commits": [
+      "9025be2",
+      "8342c24",
+      "b1820ca",
+      "04f0771",
+      "de39434",
+      "e0d9aa4",
+      "0b8eca6"
+    ]
+  },
+  {
+    "date": "2026-09-16",
+    "volet": "compte",
+    "fr": {
+      "titre": "Mes dossiers : suivez des projets, avec « Où en est le projet »",
+      "texte": "Vous suivez maintenant des projets, proposés par ville : chiffres, graphiques et, pour la plupart, « Où en est le projet », récapitulatif rédigé par IA et vérifié automatiquement. Connecté, vous pouvez aussi nous écrire ou signaler une erreur dans une fiche."
+    },
+    "en": {
+      "titre": "My files: follow projects, with “Where the project stands”",
+      "texte": "You now follow projects, suggested by city: figures, charts and, for most, “Where the project stands”, a recap written by AI and checked automatically. Once signed in, you can also write to us or report an error in an item."
+    },
+    "commits": [
+      "c1fbe66",
+      "f503849",
+      "a10fba6",
+      "d4579f7",
+      "5e5c3f6",
+      "5fb9b41",
+      "624af8d",
+      "cfa703e",
+      "205d2dc",
+      "a2e6f6b",
+      "dc708d0",
+      "24d8051",
+      "c942e1f"
+    ]
+  },
+  {
+    "date": "2026-09-14",
+    "volet": "levis",
+    "fr": {
+      "titre": "Nouveau volet : Lévis, en version prototype",
+      "texte": "Le site couvre maintenant Lévis : décisions, votes nominatifs, membres du conseil, lexique et résumés en langage clair. Mes dossiers propose quatre projets à suivre, dont les stations d’épuration de Saint-Nicolas et de Desjardins."
+    },
+    "en": {
+      "titre": "New section: Lévis, as a prototype",
+      "texte": "The site now covers Lévis: decisions, recorded votes, council members, a glossary and plain-language summaries. My files offers four projects to follow, including the Saint-Nicolas and Desjardins wastewater treatment plants."
+    },
+    "commits": [
+      "c56a983",
+      "1ff0f9c",
+      "50cdf8c"
+    ]
+  },
+  {
+    "date": "2026-09-14",
+    "volet": "compte",
+    "fr": {
+      "titre": "Alertes du matin : vos projets, vos mots-clés, vos organismes",
+      "texte": "Les abonnés reçoivent un courriel le matin quand un projet suivi bouge, quand une nouvelle décision contient un de leurs mots-clés (une rue, un quartier) ou nomme un organisme qu’ils suivent. Rien les jours sans nouveauté."
+    },
+    "en": {
+      "titre": "Morning alerts: your projects, your keywords, your organizations",
+      "texte": "Subscribers get a morning email when a project they follow moves, or when a new decision contains one of their keywords (a street, a neighbourhood) or names an organization they follow. Nothing on days without news."
+    },
+    "commits": [
+      "3ebd8b3",
+      "adadbc7",
+      "c56f72b",
+      "16807d3",
+      "4939f63",
+      "8bfb8a2",
+      "55ef50a",
+      "a21427a",
+      "075b172",
+      "2d74973",
+      "d58ef98",
+      "4427bd1"
+    ]
+  },
+  {
+    "date": "2026-09-14",
+    "volet": "compte",
+    "fr": {
+      "titre": "Abonnés : exporter un projet et voir ce qui attend un vote",
+      "texte": "Les abonnés peuvent exporter les décisions d’un projet en Excel, en CSV ou en PDF à imprimer. Ils voient aussi les dossiers de Québec qui attendent encore un vote, et ceux qui passeront probablement à la prochaine séance (une estimation)."
+    },
+    "en": {
+      "titre": "Subscribers: export a project and see what awaits a vote",
+      "texte": "Subscribers can export a project’s decisions to Excel, CSV or a printable PDF. They also see the Québec City files still awaiting a vote, and those likely to come up at the next meeting (an estimate)."
+    },
+    "commits": [
+      "242bb35",
+      "bde9223",
+      "6b20410",
+      "208d9ec",
+      "7e21195",
+      "61d13fd",
+      "ab282ef",
+      "c38b075",
+      "f30d0af",
+      "a1bb8e7",
+      "8868d8e",
+      "37545e4",
+      "b8d096a",
+      "2bd61b3",
+      "0e22513",
+      "f699714"
+    ]
+  }
+]
