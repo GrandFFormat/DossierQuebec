@@ -13,17 +13,20 @@ export { EN, tr } from './langue.js';
 export const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis', longueuil: 'Longueuil', laval: 'Laval' };
 
 // Les volets dont les données alimentent Mes dossiers : l'index de projets
-// (data/projets/index.json), les décisions récentes (recentes.json) et les organismes
-// (organismes.json). Les trois fichiers sont écrits par scripts/projets-publics.js, et les
-// trois manquent exactement aux mêmes volets — Longueuil et Laval, restés au stade prototype :
-// leurs décisions existent, mais rien n'en est dérivé.
+// (data/projets/index.json), les dossiers de l'année (dossiers.json), les décisions récentes
+// (recentes.json) et les organismes (organismes.json). Les quatre fichiers sortent du même
+// scripts/projets-publics.js, et se tiennent donc ensemble.
 //
-// Sans cette liste, Mes dossiers demandait ces fichiers aux CINQ villes et récoltait des 404 à
-// chaque visite. Le code les avalait proprement ; le vrai coût n'est pas les octets, c'est que
-// des erreurs permanentes dans la console masquent celles qui comptent.
+// Longueuil et Laval l'ont reçu le 21 septembre 2026 : leurs décisions récentes, leurs dossiers
+// et leurs organismes existent maintenant comme ailleurs. Leur liste de PROJETS reste vide,
+// parce qu'elle ne se dérive pas — c'est un travail éditorial, voir leur lib/projets.js.
+//
+// Sans cette liste, Mes dossiers demandait ces fichiers aux CINQ villes avant qu'ils existent
+// et récoltait des 404 à chaque visite. Le code les avalait proprement ; le vrai coût n'était
+// pas les octets, c'est que des erreurs permanentes dans la console masquent celles qui comptent.
 //
 // À faire quand un volet reçoit son scripts/projets-publics.js : ajouter sa clé ici.
-export const VILLES_PROJETS = ['quebec', 'montreal', 'levis'];
+export const VILLES_PROJETS = ['quebec', 'montreal', 'levis', 'longueuil', 'laval'];
 
 // Les volets traduits en anglais (data/resumes-en.json). Lévis n'y est pas encore : sa liste
 // est donc plus courte que celle du dessus, et pas une copie.

@@ -77,6 +77,10 @@ const ETAPES = [
         },
       ]
     : []),
+  // Espace abonnés : les petits fichiers que lit Mes dossiers (décisions récentes, dossiers de
+  // l année, organismes). Pas de projets suivables ici : la liste de lib/projets.js est vide,
+  // et elle ne se dérive pas — voir le commentaire de ce fichier.
+  { nom: 'Fichiers pour « Mes dossiers »', argv: ['scripts/projets-publics.js'] },
 ];
 
 try {
