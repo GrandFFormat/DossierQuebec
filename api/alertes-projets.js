@@ -105,27 +105,60 @@ export const sansFormeJuridique = (nom) => String(nom ?? '').trim().replace(/[\s
 //   - un projet de loi présenté par un ministre ou un·e député·e que l'abonné suit (table follows,
 //     la même que les boutons « Suivre » de l'onglet Ministres et député·e·s).
 // Même mémoire que les villes (alertes_etat, ville « assemblee ») : un suivi tout neuf part d'ici,
-// sans courriel. Le CSV de l'Assemblée a parfois un jour ou deux de retard sur son site : l'alerte
-// arrive le matin qui suit la mise à jour du CSV, pas celui qui suit la séance.
+// sans courriel. Les étapes viennent du CSV de Données Québec, remplacées par celles des fiches du
+// site de l'Assemblée quand elles sont plus récentes (scrapers/bill-details.js).
 export const ASSEMBLEE = 'assemblee';
 export const LOI = /^pl:(\d{1,9})$/;
 export const cleLoi = (id) => `pl-${id}`;
-export const etatLoi = (b) => ({ statut: b.status ?? '', note: b.note ?? '' });
-export const loiABouge = (b, ancien) => Boolean(ancien) && (ancien.statut !== (b.status ?? '') || ancien.note !== (b.note ?? ''));
+// L'ordre des étapes, du plus précis au plus général (libellés du CSV et des fiches du site :
+// voir scrapers/bills.js et scrapers/bill-details.js). Seule une étape PLUS AVANCÉE vaut un courriel :
+// - un recul vient toujours des données (bill-details en panne : retour aux étapes du CSV, déjà
+//   vu les 27 août et 19 sept. 2026), jamais de l'Assemblée ; on garde alors l'état le plus avancé ;
+// - une nouvelle date à la même étape (une autre séance d'étude détaillée) n'est pas une étape ;
+// - « laissé de côté » (non réinscrit à une nouvelle session) n'est pas une étape non plus.
+const RANGS = [
+  [/sanction/i, 50],
+  [/^adoption\b(?! du principe)/i, 45],
+  [/prise en considération/i, 40],
+  [/dépôt du rapport de commission\s*-\s*étude détaillée/i, 33],
+  [/étude détaillée/i, 30],
+  [/adoption du principe/i, 20],
+  [/dépôt du rapport de commission\s*-\s*consultation/i, 17],
+  [/consultation/i, 15],
+  [/présent/i, 10],
+];
+export const rangLoi = (b) => {
+  const note = String(b.note ?? '');
+  for (const [motif, rang] of RANGS) if (motif.test(note)) return rang;
+  return (Number(b.step) || 0) * 10;
+};
+export const etatLoi = (b) => ({ statut: b.status ?? '', note: b.note ?? '', rang: rangLoi(b) });
+const rangMemorise = (a) => (typeof a?.rang === 'number' ? a.rang : rangLoi({ note: a?.note }));
+export const loiARecule = (b, a) => Boolean(a) && (rangLoi(b) < rangMemorise(a) || (a.statut === 'sanctionne' && b.status !== 'sanctionne'));
+export const loiABouge = (b, a) => Boolean(a) && (rangLoi(b) > rangMemorise(a) || (b.status === 'sanctionne' && a.statut !== 'sanctionne'));
 // Le résumé arrive en HTML (data/bills-resumes-fr.json) : on n'en garde que le texte.
 const texteResume = (html) => {
   const t = String(html ?? '').replace(/<[^>]+>/g, ' ').replace(/&(?:[a-z]+|#\d+);/gi, ' ');
   return /r[ée]sum[ée] non disponible/i.test(t) ? '' : t;
 };
 export const loiContientMot = (b, resume, mot) => contientMot({ objet: b.title, puces: [texteResume(resume)] }, mot);
-// Une personne suivie : « Nom » pour un ministre, « Nom|Circonscription » pour un·e député·e.
-export const nomSuivi = (f) => String(f.person_key ?? '').split('|')[0].trim();
-export const clePersonne = (nom) => `per_${crypto.createHash('sha1').update(normaliserTexte(nom)).digest('hex').slice(0, 20)}`;
+// Une personne suivie : « Nom » ou « Nom (Circonscription) » pour un ministre (homonymes),
+// « Nom|Circonscription » pour un·e député·e. Les parrains, eux, sont écrits « Nom » tout court.
+export const personneSuivie = (f) => {
+  const cle = String(f.person_key ?? '').trim();
+  const [avant, circoBarre] = cle.split('|');
+  const circoParenthese = /\(([^)]+)\)\s*$/.exec(avant)?.[1];
+  const nom = avant.replace(/\s*\([^)]*\)\s*$/, '').trim();
+  return { nom, circo: (circoBarre ?? circoParenthese ?? '').trim(), titre: circoBarre ? `${nom} (${circoBarre.trim()})` : avant.trim() };
+};
+export const clePersonne = (cle) => `per_${crypto.createHash('sha1').update(normaliserTexte(cle)).digest('hex').slice(0, 20)}`;
 const recentesD = (lois) => [...lois].sort((a, b) => String(b.lastActivity ?? '').localeCompare(String(a.lastActivity ?? '')));
 const etapeFr = (b) => String(b.note ?? '').replace(/\d{4}-\d{2}-\d{2}/g, (d) => dateFr(d));
 
 function ligneLoi(b, precision) {
-  const lien = `${site()}/projets-de-loi?pl=${encodeURIComponent(b.num)}`;
+  // Le numéro seul n'est pas unique (le Québec réutilise PL 1, PL 2… à chaque session) : l'id
+  // choisit le bon projet (commun/dq.js, openBillFromQuery).
+  const lien = `${site()}/projets-de-loi?pl=${encodeURIComponent(b.num)}&id=${encodeURIComponent(b.id)}`;
   return `<li style="margin:0 0 12px">
     <a href="${echapper(lien)}" style="font-family:Consolas,monospace;font-size:13px;font-weight:bold;color:#076338;text-decoration:none">PL ${echapper(b.num)}</a>
     <span style="font-size:13px;color:#5B6570"> · ${echapper(precision)}</span><br>
@@ -141,12 +174,16 @@ const sectionLois = (titre, sousTitre, lois, precision, mot) => ({
 
 // Tout ce qui concerne l'Assemblée pour UN abonné. Pur : aucune lecture ni écriture, pour qu'on
 // puisse l'essayer sur des données inventées (voir le commit qui l'a ajoutée).
-//   lois      le contenu de /data/site/bills.json
-//   resumes   { id: html } de /data/bills-resumes-fr.json (peut manquer : titres seulement)
-//   suivies   ids des projets de loi suivis, en texte
-//   mots      [{ cle, cherche }]      personnes  [{ cle, nom }]
-//   dejaVu    (cle) => l'état déjà mémorisé, ou undefined
-export function alertesAssemblee({ lois, resumes, suivies = [], mots = [], personnes = [], dejaVu, essai = false }) {
+//   lois       le contenu de /data/site/bills.json
+//   resumes    { id: html } de /data/bills-resumes-fr.json, ou null s'il est illisible : les
+//              mots-clés sont alors sautés ce matin-là (ni signalés ni mémorisés)
+//   suivies    ids des projets de loi suivis, en texte
+//   mots       [{ cle, cherche }]
+//   personnes  [{ cle, nom, titre, roles }] — roles : null si le nom est sans ambiguïté ; sinon les
+//              rôles ministériels de CETTE personne (homonymes), [] si on ne peut pas trancher
+//   rolesParrains  Map id → rôle du parrain (« Ministre des Finances »), de /data/bills.json
+//   dejaVu     (cle) => l'état déjà mémorisé, ou undefined
+export function alertesAssemblee({ lois, resumes, suivies = [], mots = [], personnes = [], rolesParrains = null, dejaVu, essai = false }) {
   const sections = [];
   const aMemoriser = [];
   const parId = new Map(lois.map((b) => [String(b.id), b]));
@@ -157,26 +194,42 @@ export function alertesAssemblee({ lois, resumes, suivies = [], mots = [], perso
     const b = parId.get(String(id));
     if (!b) continue; // plus dans les données (nouvelle législature) : rien à dire
     if (essai) { bouges.push(b); continue; }
+    const ancien = dejaVu(cleLoi(b.id));
+    if (loiARecule(b, ancien)) continue; // on garde l'état le plus avancé, sans courriel
     aMemoriser.push({ projet: cleLoi(b.id), etat: etatLoi(b) });
-    if (loiABouge(b, dejaVu(cleLoi(b.id)))) bouges.push(b);
+    if (loiABouge(b, ancien)) bouges.push(b);
   }
   if (bouges.length) {
     for (const b of bouges) deja.add(b.id);
     sections.push(sectionLois('Projets de loi suivis', essai ? 'Où ils en sont' : 'Nouvelle étape', bouges, (b) => etapeFr(b) || 'étape non précisée'));
   }
 
+  const memeNom = (b, nom) => b.sponsor && normaliserTexte(b.sponsor).trim() === normaliserTexte(nom).trim();
+  const roleDe = (b) => normaliserTexte(rolesParrains?.get(String(b.id)) ?? '').trim();
   const cibles = [
-    ...mots.map((m) => ({ cle: m.cle, titre: `Mot-clé « ${m.cherche} »`, sousTitre: 'Projets de loi qui le mentionnent', trouve: (b) => loiContientMot(b, resumes?.[b.id], m.cherche) })),
-    ...personnes.map((p) => ({ cle: p.cle, titre: p.nom, sousTitre: 'Projets de loi présentés', trouve: (b) => b.sponsor && normaliserTexte(b.sponsor).trim() === normaliserTexte(p.nom).trim() })),
+    ...(resumes ? mots : []).map((m) => ({ cle: m.cle, titre: `Mot-clé « ${m.cherche} »`, sousTitre: 'Projets de loi qui le mentionnent', trouve: (b) => loiContientMot(b, resumes[b.id], m.cherche) })),
+    ...personnes.map((p) => ({
+      cle: p.cle,
+      titre: p.titre ?? p.nom,
+      sousTitre: 'Projets de loi présentés',
+      // Un homonyme (deux Eric Girard) : le nom ne suffit pas, il faut que le rôle du parrain soit
+      // un rôle de CETTE personne. Sans rôle pour trancher, on ne dit rien plutôt que de prêter
+      // les lois de l'un à l'autre — et on ne mémorise rien, pour ne pas partir d'une liste vide.
+      indisponible: Array.isArray(p.roles) && (!p.roles.length || !rolesParrains),
+      trouve: (b) => memeNom(b, p.nom) && (!Array.isArray(p.roles) || p.roles.includes(roleDe(b))),
+    })),
   ];
   for (const cible of cibles) {
+    if (cible.indisponible) continue;
     const trouves = recentesD(lois.filter(cible.trouve));
     let aDire;
     if (essai) {
       aDire = trouves.slice(0, 3);
     } else {
-      aMemoriser.push({ projet: cible.cle, etat: { vus: trouves.map((b) => b.id) } });
       const ancien = dejaVu(cible.cle);
+      // La liste des projets déjà vus ne fait que grandir : un matin où une donnée manque, elle ne
+      // doit pas rapetisser, sinon de vieux projets repasseraient pour neufs le lendemain.
+      aMemoriser.push({ projet: cible.cle, etat: { vus: [...new Set([...(ancien?.vus ?? []), ...trouves.map((b) => b.id)])] } });
       if (!ancien) continue; // ajouté depuis la dernière exécution : on part d'ici
       const vus = new Set(ancien.vus ?? []);
       aDire = trouves.filter((b) => !vus.has(b.id) && !deja.has(b.id));
@@ -395,9 +448,22 @@ export default async function handler(req, res) {
 
   try {
     const maintenant = new Date();
+    // Supabase coupe toute réponse à « Max rows » (1000 par défaut) SANS le signaler : un état
+    // manquant dans alertes_etat se lit « suivi tout neuf », on mémorise sans courriel, et la
+    // nouveauté du jour est perdue. Chaque liste est donc lue page par page, dans un ordre stable,
+    // jusqu'à une page vide (et non « jusqu'à une page de moins de 1000 » : si le plafond du
+    // serveur est plus bas, on croirait avoir tout lu).
+    const toutLire = async (chemin, ordre) => {
+      const lignes = [];
+      for (;;) {
+        const page = await supabase(`${chemin}&order=${ordre}&limit=1000&offset=${lignes.length}`);
+        if (!page?.length) return lignes;
+        lignes.push(...page);
+      }
+    };
     const abonnes = pourSoi
       ? [pourSoi.uid]
-      : (await supabase('/rest/v1/abonnements?statut=eq.actif&select=user_id,fin'))
+      : (await toutLire('/rest/v1/abonnements?statut=eq.actif&select=user_id,fin', 'user_id'))
           .filter((a) => !a.fin || new Date(a.fin) > maintenant)
           .map((a) => a.user_id)
           .filter((id) => /^[0-9a-f-]{36}$/.test(id));
@@ -409,21 +475,21 @@ export default async function handler(req, res) {
 
     const liste = abonnes.join(',');
     const [suivis, suivisLois, personnesSuivies, preferences, etats, mots, organismes] = await Promise.all([
-      supabase(`/rest/v1/dossiers_suivis?select=user_id,ville,dossier_id&user_id=in.(${liste})&dossier_id=like.projet:*`),
-      supabase(`/rest/v1/dossiers_suivis?select=user_id,dossier_id&user_id=in.(${liste})&ville=eq.${ASSEMBLEE}&dossier_id=like.pl:*`),
+      toutLire(`/rest/v1/dossiers_suivis?select=user_id,ville,dossier_id&user_id=in.(${liste})&dossier_id=like.projet:*`, 'user_id,ville,dossier_id'),
+      toutLire(`/rest/v1/dossiers_suivis?select=user_id,dossier_id&user_id=in.(${liste})&ville=eq.${ASSEMBLEE}&dossier_id=like.pl:*`, 'user_id,dossier_id'),
       // Les ministres et député·e·s suivis : une panne ici n'empêche rien d'autre de partir.
-      supabase(`/rest/v1/follows?select=user_id,person_key&user_id=in.(${liste})&person_type=in.(minister,depute)`).catch((e) => {
+      toutLire(`/rest/v1/follows?select=user_id,person_key&user_id=in.(${liste})&person_type=in.(minister,depute)`, 'user_id,person_type,person_key').catch((e) => {
         rapport.erreurs.push(`personnes suivies ignorées : ${e.message}`);
         return [];
       }),
-      supabase(`/rest/v1/alertes_preferences?select=user_id,actif&user_id=in.(${liste})`),
-      supabase(`/rest/v1/alertes_etat?select=user_id,ville,projet,etat&user_id=in.(${liste})`),
+      toutLire(`/rest/v1/alertes_preferences?select=user_id,actif&user_id=in.(${liste})`, 'user_id'),
+      toutLire(`/rest/v1/alertes_etat?select=user_id,ville,projet,etat&user_id=in.(${liste})`, 'user_id,ville,projet'),
       // Table des mots-clés absente (SQL pas encore exécuté) : les alertes de projets partent quand même.
-      supabase(`/rest/v1/alertes_mots_cles?select=id,user_id,mot&user_id=in.(${liste})&order=created_at`).catch((e) => {
+      toutLire(`/rest/v1/alertes_mots_cles?select=id,user_id,mot&user_id=in.(${liste})`, 'created_at,id').catch((e) => {
         rapport.erreurs.push(`mots-clés ignorés : ${e.message}`);
         return [];
       }),
-      supabase(`/rest/v1/organismes_suivis?select=id,user_id,nom&user_id=in.(${liste})&order=created_at`).catch((e) => {
+      toutLire(`/rest/v1/organismes_suivis?select=id,user_id,nom&user_id=in.(${liste})`, 'created_at,id').catch((e) => {
         rapport.erreurs.push(`organismes ignorés : ${e.message}`);
         return [];
       }),
@@ -480,27 +546,58 @@ export default async function handler(req, res) {
       if (!loisDe.has(s.user_id)) loisDe.set(s.user_id, []);
       loisDe.get(s.user_id).push(id);
     }
+    // Une personne par clé suivie (« Eric Girard (Groulx) » et « Eric Girard (Lac-Saint-Jean) »
+    // restent deux personnes) ; un même compte qui suit la même personne comme ministre ET comme
+    // député·e n'en garde qu'une.
     const personnesDe = new Map();
     for (const f of personnesSuivies) {
-      const nom = nomSuivi(f);
-      if (nom.length < 3) continue;
+      const p = personneSuivie(f);
+      if (p.nom.length < 3) continue;
+      const cle = clePersonne(p.circo ? `${p.nom}|${p.circo}` : p.nom);
       if (!personnesDe.has(f.user_id)) personnesDe.set(f.user_id, []);
       const deja = personnesDe.get(f.user_id);
-      if (!deja.some((p) => p.cle === clePersonne(nom))) deja.push({ cle: clePersonne(nom), nom });
+      if (!deja.some((x) => x.cle === cle)) deja.push({ ...p, cle });
     }
     // Lus une seule fois, et seulement s'il y a quelque chose à comparer. Un fichier illisible ou
     // vide : on saute l'Assemblée pour ce matin SANS rien mémoriser, sinon un projet déjà signalé
-    // repasserait pour neuf le lendemain.
+    // repasserait pour neuf le lendemain. Les résumés, eux, ne servent qu'aux mots-clés : illisibles,
+    // ce sont les mots-clés de l'Assemblée qui sont sautés (voir alertesAssemblee).
+    const lireJson = (chemin) => fetch(`${site()}${chemin}`, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
     let assemblee = null;
     const lireAssemblee = () => (assemblee ??= Promise.all([
-      fetch(`${site()}/data/site/bills.json`, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
-      fetch(`${site()}/data/bills-resumes-fr.json`, { cache: 'no-store' }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
-    ]).then(([lois, resumes]) => {
+      lireJson('/data/site/bills.json'),
+      lireJson('/data/bills-resumes-fr.json'),
+      lireJson('/data/bills.json'),
+      lireJson('/data/site/ministers.json'),
+      lireJson('/data/site/deputesRaw.json'),
+    ]).then(([lois, resumes, brut, ministres, deputes]) => {
       if (!Array.isArray(lois) || !lois.length) {
         rapport.erreurs.push('projets de loi illisibles : Assemblée sautée ce matin');
         return null;
       }
-      return { lois, resumes };
+      const resumesLisibles = resumes && typeof resumes === 'object' && !Array.isArray(resumes) && Object.keys(resumes).length ? resumes : null;
+      if (!resumesLisibles) rapport.erreurs.push("résumés des projets de loi illisibles : mots-clés de l'Assemblée sautés ce matin");
+      // Le rôle du parrain (« Girard, Eric — Ministre des Finances ») et les homonymes : de quoi
+      // attribuer un projet au bon Eric Girard, ou à personne.
+      const rolesParrains = Array.isArray(brut?.bills)
+        ? new Map(brut.bills.map((b) => [String(b.id), String(b.sponsor ?? '').split(' — ')[1] ?? '']))
+        : null;
+      const compte = new Map();
+      for (const d of Array.isArray(deputes) ? deputes : []) {
+        const n = normaliserTexte(d?.[0]).trim();
+        compte.set(n, (compte.get(n) ?? 0) + 1);
+      }
+      const listeMinistres = Array.isArray(ministres) ? ministres : [];
+      for (const m of listeMinistres) {
+        if (/\([^)]+\)\s*$/.test(m.name ?? '')) compte.set(normaliserTexte(m.name.replace(/\s*\([^)]*\)\s*$/, '')).trim(), 2);
+      }
+      const rolesDe = (p) => {
+        const n = normaliserTexte(p.nom).trim();
+        if ((compte.get(n) ?? 0) < 2) return null; // sans ambiguïté : le nom suffit
+        const m = p.circo && listeMinistres.find((x) => normaliserTexte(x.name).trim() === normaliserTexte(`${p.nom} (${p.circo})`).trim());
+        return m ? String(m.role ?? '').split('·').map((r) => normaliserTexte(r).trim()).filter(Boolean) : [];
+      };
+      return { lois, resumes: resumesLisibles, rolesParrains, rolesDe };
     }));
     rapport.loisMemorisees = 0;
 
@@ -562,10 +659,12 @@ export default async function handler(req, res) {
           const donnees = await lireAssemblee();
           if (donnees) {
             const a = alertesAssemblee({
-              ...donnees,
+              lois: donnees.lois,
+              resumes: donnees.resumes,
+              rolesParrains: donnees.rolesParrains,
               suivies: loisDe.get(uid) ?? [],
               mots: motsAssemblee,
-              personnes: personnesDe.get(uid) ?? [],
+              personnes: (personnesDe.get(uid) ?? []).map((p) => ({ ...p, roles: donnees.rolesDe(p) })),
               dejaVu: (cle) => dejaVu.get(`${uid}|${ASSEMBLEE}|${cle}`),
               essai: Boolean(essai),
             });

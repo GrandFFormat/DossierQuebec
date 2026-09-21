@@ -112,9 +112,11 @@ export function enteteVolet() {
 // dvq:theme) que dans les volets.
 export function enteteCommune() {
   traduirePage();
-  const ville = new URLSearchParams(location.search).get('ville');
-  // Une ville demandée dans l'adresse l'emporte sur la dernière visitée.
-  const cible = Object.hasOwn(VILLES, ville ?? '') ? ville : dernierVolet();
+  const params = new URLSearchParams(location.search);
+  const ville = params.get('ville');
+  // Une ville demandée dans l'adresse l'emporte sur la dernière visitée. Venu du site provincial
+  // (?de=assemblee) : l'en-tête reste DossierQuébec, même si on a visité une ville avant.
+  const cible = Object.hasOwn(VILLES, ville ?? '') ? ville : params.get('de') === 'assemblee' ? null : dernierVolet();
 
   const marque = document.querySelector('.ab-marque');
   if (marque && cible) {

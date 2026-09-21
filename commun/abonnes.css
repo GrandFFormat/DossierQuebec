@@ -600,6 +600,18 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 .ab-abo .ab-cta-bas .ab-note { margin: 10px 0 0; }
 #inclus { scroll-margin-top: 16px; }
 
+/* Deux discours, un abonnement : <html data-contexte="assemblee|villes"> (script du <head> de
+   abonnement.html). Chaque contexte cache ce qui est à l'autre et met le sien en premier. */
+[data-contexte="assemblee"] .ab-abo .pour-villes,
+[data-contexte="villes"] .ab-abo .pour-assemblee { display: none !important; }
+.ab-abo .ab-blocs-offre { display: flex; flex-direction: column; }
+[data-contexte="villes"] .ab-abo .ab-bloc-villes { order: -1; }
+[data-contexte="villes"] .ab-abo .ab-bloc-villes .ab-groupe { margin-top: 4px; }
+[data-contexte="villes"] .ab-abo .ab-bloc-assemblee .ab-groupe { margin-top: 16px; }
+.ab-abo ul.ab-coches { display: flex; flex-direction: column; }
+[data-contexte="villes"] .ab-abo ul.ab-coches .li-assemblee { order: 1; }
+.ab-abo ul.ab-coches .li-compte { order: 2; }
+
 /* Offrir et liste d'attente */
 .ab-abo .ab-offrir { border-top: 5px solid var(--c-violet); background: color-mix(in srgb, var(--c-violet) 8%, var(--carte)); }
 .ab-abo .ab-attente { border-top: 5px solid var(--c-vert); background: color-mix(in srgb, var(--c-vert) 8%, var(--carte)); }

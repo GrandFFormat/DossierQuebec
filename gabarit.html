@@ -240,18 +240,35 @@ function goToFederal(evt){
       <div class="stat-cell"><b id="statVotes">—</b><span data-i18n="stat.votes">Votes nominatifs</span></div>
     </div>
 
-    <!-- Porte d'entrée : une carte par section, en vrais liens. Le menu du haut se replie sur
-         téléphone, et une page qui annonce ses parties se comprend mieux, moteurs compris. -->
-    <nav class="hub" aria-labelledby="hubTitre">
-      <h2 class="hub-titre" id="hubTitre" data-i18n="hub.h">Par où commencer</h2>
-      <div class="hub-cartes">
-        <a class="hub-carte" href="/projets-de-loi"><b data-i18n="hub.projets.h">Projets de loi</b><span data-i18n="hub.projets.p">Les projets de loi résumés en langage clair, avec leur étape réelle.</span></a>
-        <a class="hub-carte" href="/votes"><b data-i18n="hub.votes.h">Votes nominatifs</b><span data-i18n="hub.votes.p">Qui a voté pour, contre ou s'est abstenu, député·e par député·e.</span></a>
-        <a class="hub-carte" href="/ministres"><b data-i18n="hub.ministres.h">Ministres et député·e·s</b><span data-i18n="hub.ministres.p">Le Conseil des ministres et toute l'Assemblée, avec la présence aux votes.</span></a>
-        <a class="hub-carte" href="/promesses"><b data-i18n="hub.promesses.h">Promesses 2026</b><span data-i18n="hub.promesses.p">Les engagements des partis pour le 5 octobre, chacun avec sa source.</span></a>
-        <a class="hub-carte" href="/lexique"><b data-i18n="hub.lexique.h">Lexique</b><span data-i18n="hub.lexique.p">Le jargon parlementaire, expliqué simplement.</span></a>
+    <!-- À la place de « Par où commencer » (Martin, 21 sept. 2026) : l'abonnement, la connexion
+         et Mes dossiers. Les sections restent liées par le menu du haut et le pied de page.
+         #promoCompte est rempli par dq.js (renderPromoCompte) ; d'ici là, champ et bouton
+         restent désactivés, comme la boîte de Lexique. -->
+    <div class="band band-blue bleed promo-alertes promo-accueil" id="band-alertes-accueil" role="region" aria-labelledby="promoAccueilTitre">
+      <div class="promo-accueil-grille">
+        <div>
+          <p class="promo-sur" data-i18n="promo.sur">Abonnement DossierQuébec</p>
+          <h2 id="promoAccueilTitre" data-i18n="promo.h">Soyez alerté quand un projet de loi change de statut</h2>
+          <p class="promo-texte" data-i18n="promo.p">Suivez un projet de loi d'un clic : un courriel le matin quand il change d'étape, quand un élu que vous suivez en présente un, ou quand un nouveau projet contient vos mots-clés. Un seul courriel, tout réuni, rien les jours où rien ne bouge.</p>
+          <p class="promo-texte promo-dissolution" data-i18n="promo.diss">L'Assemblée étant dissoute, les premières alertes partiront avec les projets de loi de la nouvelle législature, convoquée le 17 novembre 2026.</p>
+          <div class="promo-cta">
+            <a class="hero-cta" href="/abonnement?de=assemblee" data-i18n="promo.cta">Recevoir mes alertes — 10 $/mois</a>
+            <span class="promo-prix" data-i18n="promo.prix">ou 96 $ par an · annulable en tout temps</span>
+          </div>
+        </div>
+        <div class="promo-compte">
+          <b class="promo-compte-titre" data-i18n="promo.compte.h">Votre compte</b>
+          <div id="promoCompte">
+            <div class="promo-compte-ligne">
+              <input type="email" id="promoEmail" placeholder="Votre courriel" aria-label="Votre courriel" disabled>
+              <button class="account-btn" id="promoLienBtn" onclick="handlePromoLink()" disabled>Recevoir le lien</button>
+            </div>
+            <p class="promo-compte-note" id="promoNote">Pas de mot de passe : un lien de connexion arrive par courriel. Le compte gratuit suit jusqu'à 3 projets.</p>
+          </div>
+          <a class="promo-mes-dossiers" href="/mes-dossiers" data-i18n="promo.mesdossiers">Mes dossiers →</a>
+        </div>
       </div>
-    </nav>
+    </div>
 
     <!-- Section signature du handoff : bande JAUNE pleine largeur -->
     <div class="band band-yellow bleed" id="band-challenged">
@@ -455,6 +472,21 @@ function goToFederal(evt){
         <span class="bstep">Adoption / Sanction</span>
       </span>
       <a class="legend-link" href="/lexique" data-i18n="legend.link">C'est quoi ces étapes ? → Lexique</a>
+    </div>
+
+    <!-- L'abonnement vendu par les projets de loi, sur le site provincial (Martin, 21 sept. 2026 :
+         « si on parle de pdl, c'est au provincial qu'il faut faire la publicité »). Le lien ouvre la
+         version provinciale de /abonnement (?de=assemblee). La phrase de dissolution est cachée par
+         dq.js dès que ASSEMBLY.dissolved repasse à false. -->
+    <div class="band band-blue bleed promo-alertes" id="band-alertes-pl">
+      <p class="promo-sur" data-i18n="promo.sur">Abonnement DossierQuébec</p>
+      <h2 data-i18n="promo.h">Soyez alerté quand un projet de loi change de statut</h2>
+      <p class="promo-texte" data-i18n="promo.p">Suivez un projet de loi d'un clic : un courriel le matin quand il change d'étape, quand un élu que vous suivez en présente un, ou quand un nouveau projet contient vos mots-clés. Un seul courriel, tout réuni, rien les jours où rien ne bouge.</p>
+      <p class="promo-texte promo-dissolution" id="promoDissolution" data-i18n="promo.diss">L'Assemblée étant dissoute, les premières alertes partiront avec les projets de loi de la nouvelle législature, convoquée le 17 novembre 2026.</p>
+      <div class="promo-cta">
+        <a class="hero-cta" href="/abonnement?de=assemblee" data-i18n="promo.cta">Recevoir mes alertes — 10 $/mois</a>
+        <span class="promo-prix" data-i18n="promo.prix">ou 96 $ par an · annulable en tout temps</span>
+      </div>
     </div>
 
     <!-- Titre de résultats (change avec le filtre actif) -->
@@ -897,7 +929,7 @@ function goToFederal(evt){
     <a href="/promesses" data-i18n="fil.promesses">Promesses</a>
     <a href="/lexique" data-i18n="nav.lexique">Lexique</a>
     <a href="/sources" data-i18n="fil.bd">Mises à jour du site</a>
-    <a href="/abonnement" data-i18n="footer.abonnement">Abonnement</a>
+    <a href="/abonnement?de=assemblee" data-i18n="footer.abonnement">Abonnement</a>
     <span class="footer-nav-villes"><span data-i18n="footer.villes">Villes :</span>
       <a href="/quebec/">Québec</a>
       <a href="/montreal/">Montréal</a>

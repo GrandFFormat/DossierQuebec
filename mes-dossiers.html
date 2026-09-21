@@ -1269,9 +1269,17 @@ ${liste.map(fiche).join('')}
   // « assemblee », dossier_id « pl:<id> ». Leur étape vient du même fichier que la page publique.
   const ASSEMBLEE = 'assemblee';
   const idLoi = (dossier) => /^pl:(\d+)$/.exec(dossier ?? '')?.[1] ?? null;
+  // null quand le fichier n'a pas pu être lu : « introuvable » et « pas chargé » ne disent pas la
+  // même chose. Un échec n'est pas gardé en mémoire : la prochaine ouverture réessaie.
   let lois = null;
-  const loisAssemblee = () => (lois ??= fetch('/data/site/bills.json').then((r) => (r.ok ? r.json() : [])).catch(() => []));
-  const loiDe = async (dossier) => (await loisAssemblee()).find((b) => String(b.id) === idLoi(dossier)) ?? null;
+  const loisAssemblee = () => (lois ??= fetch('/data/site/bills.json')
+    .then((r) => (r.ok ? r.json() : null))
+    .catch(() => null)
+    .then((liste) => { if (!Array.isArray(liste)) lois = null; return Array.isArray(liste) ? liste : null; }));
+  const loiDe = async (dossier) => {
+    const liste = await loisAssemblee();
+    return liste ? (liste.find((b) => String(b.id) === idLoi(dossier)) ?? false) : null; // false : plus dans les données
+  };
   const etapeLoi = (b) => String(tr(b.note, b.noteEn ?? b.note) ?? '').replace(/\d{4}-\d{2}-\d{2}/g, (d) => dateFr(d));
   const statutLoi = (b) => ({
     sanctionne: tr('Sanctionné — devenu loi', 'Assented to — now law'),
@@ -1282,6 +1290,12 @@ ${liste.map(fiche).join('')}
   async function ouvrirLoi(carte, corps) {
     const b = await loiDe(carte.dataset.dossier);
     const retirer = `<button type="button" class="ab-lien-bouton" data-action="retirer">${tr('Ne plus suivre ce projet de loi', 'Stop following this bill')}</button>`;
+    if (b === null) {
+      // Le fichier n'a pas pu être lu : on le dit, et la carte se rouvrira pour réessayer.
+      delete corps.dataset.pret;
+      corps.innerHTML = `<p class="ab-note" style="margin-top:0">${tr("Les données de l'Assemblée n'ont pas pu être chargées. Refermez et rouvrez pour réessayer.", "The Assembly's data couldn't be loaded. Close and reopen to try again.")}</p>`;
+      return;
+    }
     if (!b) {
       corps.innerHTML = `<p class="ab-note" style="margin-top:0">${tr("Ce projet de loi n'est plus dans les données de la législature en cours : il est mort au feuilleton, ou sa législature est terminée.", 'This bill is no longer in the current legislature’s data: it died on the Order Paper, or its legislature is over.')}</p>
         <div class="ab-liens">${retirer}</div>`;
@@ -1290,11 +1304,11 @@ ${liste.map(fiche).join('')}
     corps.innerHTML = `<div class="ab-meta"><span class="ab-etiquette${b.status === 'encours' ? ' ab-en-cours' : ''}">${echapper(statutLoi(b))}</span>${b.sponsor ? `<span>${tr('Présenté par', 'Introduced by')} ${echapper(b.sponsor)}</span>` : ''}</div>
       <p style="margin:8px 0">${echapper(etapeLoi(b)) || tr('Étape non précisée.', 'Stage not specified.')}</p>
       <div class="ab-liens">
-        <a href="/projets-de-loi?pl=${encodeURIComponent(b.num)}">${tr('Sa fiche et son résumé', 'Its card and summary')}</a>
+        <a href="/projets-de-loi?pl=${encodeURIComponent(b.num)}&amp;id=${encodeURIComponent(b.id)}">${tr('Sa fiche et son résumé', 'Its card and summary')}</a>
         ${b.url ? `<a href="${echapper(tr(b.url, b.urlEn ?? b.url))}" target="_blank" rel="noopener">${tr('Sur le site de l’Assemblée ↗', 'On the Assembly’s website ↗')}</a>` : ''}
         ${retirer}
       </div>
-      <p class="ab-note">${tr("Étapes tirées des données ouvertes de l'Assemblée nationale (Données Québec), qui ont parfois un jour ou deux de retard sur son site. Avec l'abonnement, un courriel le matin où il passe une étape.", 'Stages from the National Assembly’s open data (Données Québec), sometimes a day or two behind its website. With the subscription, an email the morning it moves to a new stage.')}</p>`;
+      <p class="ab-note">${tr("Étapes tirées des données de l'Assemblée nationale (ses données ouvertes et les fiches de son site), relues chaque matin. Avec l'abonnement, un courriel le matin où il passe à une étape plus avancée.", 'Stages from the National Assembly’s data (its open data and the bill pages on its website), reread every morning. With the subscription, an email the morning it moves to a later stage.')}</p>`;
     mesurer('ouvrir_loi_suivie', {});
   }
 
@@ -1560,7 +1574,7 @@ ${liste.map(fiche).join('')}
     pourquoi({ connecte: true, abonne });
     suggestions(s, new Set(suivis.map((x) => `${x.ville}|${x.dossier_id}`)));
     if (!suivis.length) {
-      $('#liste').innerHTML = `<p class="ab-vide">${tr("Vous ne suivez aucun projet pour l'instant. Choisissez-en un ci-dessus, dans « Des projets à suivre », ou un projet de loi à l'étude, depuis la page <a class=\"ab-lien\" href=\"/projets-de-loi\">Projets de loi</a>.", "You aren't following any project yet. Pick one above, in “Projects to follow”, or a bill under study, from the <a class=\"ab-lien\" href=\"/projets-de-loi\">Bills</a> page.")}</p>`;
+      $('#liste').innerHTML = `<p class="ab-vide">${tr("Vous ne suivez aucun projet pour l'instant. Choisissez-en un ci-dessus, dans « Des projets à suivre ». Les projets de loi, eux, se suivront depuis la page <a class=\"ab-lien\" href=\"/projets-de-loi\">Projets de loi</a> dès les premiers projets de la nouvelle législature, convoquée le 17 novembre 2026.", "You aren't following any project yet. Pick one above, in “Projects to follow”. Bills can be followed from the <a class=\"ab-lien\" href=\"/projets-de-loi\">Bills</a> page as soon as the new legislature, convened on November 17, 2026, introduces its first ones.")}</p>`;
       return;
     }
     const parVille = new Map();
