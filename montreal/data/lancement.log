@@ -2,10 +2,52 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 2ec0024 — Node v22.23.2
+Code : commit 70db4ee — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
+
+=== Élus de la Ville ===
+Source : https://donnees.montreal.ca/dataset/381d74ca-dadd-459f-95c9-db255b5f4480/resource/211f6903-1440-438a-9f6c-9718ecf2d3ee/download/liste_elus_montreal.csv (Liste des élu-es de la Ville de Montréal au 2 novembre 2025, modifié 2025-12-15T20:15:52.959031)
+Colonnes : Appellation | Prénom | Nom | Fonction élective | Fonctions additionnelles | Responsabilités CE | Arrondissement | District | Parti | Bureau | Téléphone | Courriel officiel | Historique des changements d'allégeance | Historique des fonctions terminées
+65 membres du conseil municipal (103 élus au total) écrits dans data/elus.json
+  Ensemble Montréal : 34
+  Projet Montréal : 25
+  Équipe LaSalle : 3
+  Équipe Anjou : 2
+  Équipe St-Léonard : 1
+
+=== Conseil d'agglomération ===
+Source : https://donnees.montreal.ca/dataset/da0e81ae-5a30-4919-9b89-ddf66a5e177b/resource/f0fa1aec-71fd-4c77-84e7-025f0bd8c410/download/liste_des-elus-es_aglomeration_elections_2-novembre_2025.csv (modifié 2025-12-15T20:18:51.406683)
+Colonnes : Appellation | Prénom | Nom | Fonction élective | Fonctions additionnelles | Arrondissement / Ville liée | District | Bureau | Téléphone | Courriel officiel | Historique des fonctions terminées
+(pour les Villes liées uniquement)
+
+30 membres écrits dans data/agglomeration.json
+  Montréal : 16
+  Baie-D'Urfé : 1
+  Beaconsfield : 1
+  Côte-Saint-Luc : 1
+  Dollard-Des Ormeaux : 1
+  Dorval : 1
+  Hampstead : 1
+  Kirkland : 1
+  Montréal-Est : 1
+  Montréal-Ouest : 1
+  Mont-Royal : 1
+  Pointe-Claire : 1
+  Sainte-Anne-de-Bellevue : 1
+  Senneville : 1
+  Westmount : 1
+⚠ 30 membres au lieu des 32 sièges attendus — vacance, ou jeu de données modifié.
+
+=== Districts électoraux ===
+Source : https://donnees.montreal.ca/dataset/70acec75-c2b4-4d26-a399-facc7b0ad9bf/resource/fa1f8cfc-cdbf-42fd-9979-32c16b68b5ca/download/districts-electoraux-2025.json (Districts électoraux 2025, modifié 2025-10-20T15:36:15.229218)
+Propriétés : NO_DISTRICT | CODE_DISTRICT | NOM_DISTRICT | NOM_ARR
+58 districts écrits dans data/districts.json
+Contours : 161343 points -> 4716 (6722 ko -> 118 ko)
+
+⚠ Écarts entre les deux sources de la Ville :
+  District « Est » : aucun élu de ville correspondant dans data/elus.json
 
 === robots.txt des sites de la Ville ===
 https://ville.montreal.qc.ca/robots.txt : règles sur nos chemins : allow /
@@ -13,7 +55,7 @@ https://donnees.montreal.ca/robots.txt : règles sur nos chemins : disallow /dat
 https://montreal.ca/robots.txt : rien qui concerne nos chemins
 
 === Calendrier des séances ===
-Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-09-19T23:31:12.179220)
+Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-09-20T23:30:56.069380)
 Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_video_seance
 71 séance(s) de 2026 lue(s) dans le calendrier.
 
@@ -27,12 +69,12 @@ Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_vide
     Anjou : 29 document(s) sur sa page, 0 daté(s) aujourd'hui, 10 date(s) de séance connues.
     Anjou : 8 ordre(s) du jour repris de sa page, sommaires compris.
   Anjou                                       8 séance(s)  (43 requêtes)
-  Côte-des-Neiges–Notre-Dame-de-Grâce         6 séance(s)  (234 requêtes)
+  Côte-des-Neiges–Notre-Dame-de-Grâce         6 séance(s)  (236 requêtes)
   Lachine                                     7 séance(s)  (82 requêtes)
   LaSalle                                     8 séance(s)  (41 requêtes)
   L'Île-Bizard–Sainte-Geneviève               7 séance(s)  (82 requêtes)
-  Mercier–Hochelaga-Maisonneuve               5 séance(s)  (159 requêtes)
-  Montréal-Nord                               5 séance(s)  (159 requêtes)
+  Mercier–Hochelaga-Maisonneuve               5 séance(s)  (160 requêtes)
+  Montréal-Nord                               5 séance(s)  (160 requêtes)
   Outremont                                   7 séance(s)  (82 requêtes)
     Pierrefonds-Roxboro : 29 document(s) sur sa page, 0 daté(s) aujourd'hui, 10 date(s) de séance connues.
     Pierrefonds-Roxboro : 8 ordre(s) du jour repris de sa page, sommaires compris.
@@ -42,16 +84,17 @@ Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_vide
   Rivière-des-Prairies–Pointe-aux-Trembles    7 séance(s)  (82 requêtes)
   Rosemont–La Petite-Patrie                   7 séance(s)  (82 requêtes)
   Saint-Laurent                               7 séance(s)  (84 requêtes)
-  Saint-Léonard                               6 séance(s)  (117 requêtes)
-  Le Sud-Ouest                                6 séance(s)  (117 requêtes)
+  Saint-Léonard                               6 séance(s)  (118 requêtes)
+  Le Sud-Ouest                                6 séance(s)  (118 requêtes)
   Verdun                                      6 séance(s)  (124 requêtes)
   Ville-Marie                                 7 séance(s)  (82 requêtes)
   Villeray–Saint-Michel–Parc-Extension        7 séance(s)  (82 requêtes)
 
-129 séance(s) d'arrondissement pour 2026, en 1779 requête(s).
+129 séance(s) d'arrondissement pour 2026, en 1785 requête(s).
 
 === Décisions de l'année ===
 129 séance(s) d'arrondissement au calendrier.
+CM_2026-09-21_13h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-09-16_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-09-09_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-09-02_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -86,7 +129,7 @@ CA_Ahu_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 
 CA_Las_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Pir_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 
-5806 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 33 en attente de procès-verbal.
+5806 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 34 en attente de procès-verbal.
 0 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
@@ -109,8 +152,8 @@ Pastilles thématiques :
      81  Ressources humaines
     182  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes enregistrés (depuis 2026-07-22) ===
-Fenêtre depuis 2026-07-22 : 0 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
+=== Votes enregistrés (depuis 2026-07-23) ===
+Fenêtre depuis 2026-07-23 : 0 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
 
 14 votes enregistrés écrits dans data/votes.json (0 procès-verbaux analysés).
 1 portent un avertissement d'extraction (à vérifier à la main).
@@ -174,12 +217,14 @@ Résumés : 3753 déjà traduits, 0 à faire, 0 cette fois.
 Titres  : 5433 déjà traduits, 23 à faire, 23 cette fois en 2 paquet(s).
 Étiquettes : 1022 déjà traduites, 1 à faire en 1 paquet(s).
 ~0.03 $ US estimés (lot, moitié prix).
-Lot msgbatch_01VnVFgi8gY633v8Tkk4qxBz envoyé (0 résumés, 2 paquets de titres, 1 paquets d'étiquettes).
+Lot msgbatch_011DQCRgAvFvn4YASuwDmvFh envoyé (0 résumés, 2 paquets de titres, 1 paquets d'étiquettes).
   in_progress — 0 réussis, 3 en cours, 0 en erreur
   in_progress — 0 réussis, 3 en cours, 0 en erreur
   in_progress — 0 réussis, 3 en cours, 0 en erreur
   ended — 3 réussis, 0 en cours, 0 en erreur
-Traductions : 0 résumés et 0 titres et 0 étiquettes faits (24 refusés ou en échec) — 3753 résumés et 5433 titres au total, 0.03 $ US.
+Traductions : 0 résumés et 2 titres et 0 étiquettes faits (22 refusés ou en échec) — 3753 résumés et 5435 titres au total, 0.03 $ US.
+  ⚠ titre CE26 0008 : nombres différents
+  ⚠ étiquette « Autoriser le transfert de 14/036,01/$, t » refusée
   ⚠ titre CA26 28 084 : nombres différents
   ⚠ titre CA26 25 0167 : nombres différents
   ⚠ titre CE26 0772 : nombres différents
@@ -193,15 +238,13 @@ Traductions : 0 résumés et 0 titres et 0 étiquettes faits (24 refusés ou en 
   ⚠ titre CE26 0300 : nombres différents
   ⚠ titre CE26 0307 : nombres différents
   ⚠ titre CG26 0105 : nombres différents
-  ⚠ titre CM26 0161 : nombres différents
-  ⚠ titre CA26 09 0005 : nombres différents
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-22 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-07-23 pas encore résumés (plafond : 120)…
 7871 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
 === Bilan ===
-  étapes         : 13
+  étapes         : 16
   échecs         : aucun
   avertissements : aucun
