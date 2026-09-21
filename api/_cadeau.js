@@ -14,7 +14,10 @@ import { supabase, site } from './_alertes.js';
 import { echapper } from './_infolettre.js';
 import { FORFAITS, modeStripe } from './_stripe.js';
 
-export const cadeauOuvert = () => process.env.CADEAU_OUVERT === '1';
+// Tolérant sur la façon d'écrire « oui » : `1`, `true`, `oui`, avec ou sans espace. Une valeur
+// saisie à la main dans Vercel ne doit pas laisser l'offre fermée pour une espace en trop — c'est
+// une panne invisible, puisque la page affiche simplement l'ancienne formule.
+export const cadeauOuvert = () => ['1', 'true', 'oui', 'yes'].includes(String(process.env.CADEAU_OUVERT ?? '').trim().toLowerCase());
 
 // Les durées qu'on peut offrir. Les MONTANTS viennent de FORFAITS : un prix ne vit qu'à un seul
 // endroit, et un cadeau coûte exactement ce que coûte l'abonnement qu'il remplace.
