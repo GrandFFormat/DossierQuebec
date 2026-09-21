@@ -63,6 +63,15 @@ export async function suivre(s, { ville, dossier, numero, objet }) {
   return error;
 }
 
+// Le plafond de projets suivis (3 sans abonnement, 10 pour un abonné) vient d'un trigger Postgres,
+// dont le message dit « limite de N projets suivis atteinte ». On le reconnaît pour expliquer au
+// lecteur ce qui s'est passé : lui dire « réessayez » l'enverrait recommencer pour rien.
+// Renvoie le plafond atteint, ou null si l'erreur est autre chose.
+export function limiteSuivis(erreur) {
+  const m = /limite de (\d+) projets suivis/.exec(erreur?.message ?? '');
+  return m ? Number(m[1]) : null;
+}
+
 export async function nePlusSuivre(s, { ville, dossier }) {
   const { error } = await client.from('dossiers_suivis').delete().eq('user_id', s.user.id).eq('ville', ville).eq('dossier_id', dossier);
   return error;
