@@ -247,6 +247,21 @@ function goToFederal(evt){
       <a class="legend-link" href="/lexique" data-i18n="legend.link">C'est quoi ces étapes ? → Lexique</a>
     </div>
 
+    <!-- L'abonnement vendu par les projets de loi, sur le site provincial (Martin, 21 sept. 2026 :
+         « si on parle de pdl, c'est au provincial qu'il faut faire la publicité »). Le lien ouvre la
+         version provinciale de /abonnement (?de=assemblee). La phrase de dissolution est cachée par
+         dq.js dès que ASSEMBLY.dissolved repasse à false. -->
+    <div class="band band-blue bleed promo-alertes" id="band-alertes-pl">
+      <p class="promo-sur" data-i18n="promo.sur">Abonnement DossierQuébec</p>
+      <h2 data-i18n="promo.h">Soyez alerté quand un projet de loi change de statut</h2>
+      <p class="promo-texte" data-i18n="promo.p">Suivez un projet de loi d'un clic : un courriel le matin quand il change d'étape, quand un élu que vous suivez en présente un, ou quand un nouveau projet contient vos mots-clés. Un seul courriel, tout réuni, rien les jours où rien ne bouge.</p>
+      <p class="promo-texte promo-dissolution" id="promoDissolution" data-i18n="promo.diss">L'Assemblée étant dissoute, les premières alertes partiront avec les projets de loi de la nouvelle législature, convoquée le 17 novembre 2026.</p>
+      <div class="promo-cta">
+        <a class="hero-cta" href="/abonnement?de=assemblee" data-i18n="promo.cta">Recevoir mes alertes — 10 $/mois</a>
+        <span class="promo-prix" data-i18n="promo.prix">ou 96 $ par an · annulable en tout temps</span>
+      </div>
+    </div>
+
     <!-- Titre de résultats (change avec le filtre actif) -->
     <div class="section-head min-group-head" id="billsResultHead">
       <div><h2 id="billsResultTitle">Tous les projets</h2></div>
@@ -454,7 +469,7 @@ function goToFederal(evt){
     <a href="/promesses" data-i18n="fil.promesses">Promesses</a>
     <a href="/lexique" data-i18n="nav.lexique">Lexique</a>
     <a href="/sources" data-i18n="fil.bd">Mises à jour du site</a>
-    <a href="/abonnement" data-i18n="footer.abonnement">Abonnement</a>
+    <a href="/abonnement?de=assemblee" data-i18n="footer.abonnement">Abonnement</a>
     <span class="footer-nav-villes"><span data-i18n="footer.villes">Villes :</span>
       <a href="/quebec/">Québec</a>
       <a href="/montreal/">Montréal</a>

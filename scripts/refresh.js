@@ -22,7 +22,7 @@
 // La clé API vient de api.env en local (chargé si le fichier existe) ou des
 // variables d'environnement en CI (secret GitHub) — jamais codée en dur.
 
-import { spawnSync } from 'node:child_process';
+import { spawnSync, execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, appendFileSync } from 'node:fs';
 
 // Lance un script node. Lève une erreur si le code de sortie n'est pas 0.
@@ -90,8 +90,22 @@ function sanityCheck() {
     catch { return []; }
   };
   const deputes = arr('data/deputes.json', 'deputes');
+  // Projets de loi : scrapers/bills.js ne garde que la législature la plus récente. Au premier
+  // projet de la 44e (après le 17 nov. 2026), la liste passe de ~143 à 1, puis grandit : un
+  // plancher fixe de 50 bloquerait TOUT le rafraîchissement pendant des semaines. Le plancher
+  // suit donc la veille (git HEAD) : 1 le jour où la législature change, sinon min(50, veille).
+  // Une législature qui recule, ou absente, reste suspecte.
+  const bills = arr('data/bills.json', 'bills');
+  let plancherBills = 50;
+  try {
+    const veille = JSON.parse(execFileSync('git', ['show', 'HEAD:data/bills.json'], { encoding: 'utf-8', maxBuffer: 64 * 1024 * 1024 })).bills || [];
+    const leg = bills[0]?.legislature, legVeille = veille[0]?.legislature;
+    if (!leg || (legVeille && leg < legVeille)) plancherBills = Infinity;
+    else if (legVeille && leg > legVeille) plancherBills = 1;
+    else plancherBills = Math.max(1, Math.min(50, veille.length));
+  } catch { /* pas de veille lisible : on garde 50 */ }
   const checks = [
-    ['projets de loi', arr('data/bills.json', 'bills').length, 50],
+    ['projets de loi', bills.length, plancherBills],
     ['députés', deputes.length, 100],
     ['députés avec région', deputes.filter((d) => d.region).length, 100],
     ['votes', arr('data/votes.json', 'votes').length, 100],

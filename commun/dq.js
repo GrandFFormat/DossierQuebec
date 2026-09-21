@@ -303,18 +303,15 @@ const translations = {
     'fil.promesses':"Promises",
     'fil.lexique':"Glossary",
     'fil.bd':"Site updates",
-    'hub.h':"Where to start",
-    'hub.projets.h':"Bills",
-    'hub.projets.p':"Bills summarized in plain language, with their real stage.",
-    'hub.votes.h':"Recorded divisions",
-    'hub.votes.p':"Who voted for, against or abstained, member by member.",
-    'hub.ministres.h':"Ministers and MNAs",
-    'hub.ministres.p':"Cabinet and the whole Assembly, with attendance at votes.",
-    'hub.promesses.h':"2026 promises",
-    'hub.promesses.p':"Party commitments for October 5, each with its source.",
-    'hub.lexique.h':"Glossary",
-    'hub.lexique.p':"Parliamentary jargon, explained simply.",
     'footer.abonnement':"Subscription",
+    'promo.sur':"DossierQuébec subscription",
+    'promo.h':"Get alerted when a bill changes status",
+    'promo.p':"Follow a bill in one click: an email in the morning when it changes stage, when an elected member you follow introduces one, or when a new bill contains your keywords. One email, everything together, nothing on the days when nothing moves.",
+    'promo.diss':"With the Assembly dissolved, the first alerts will go out with the bills of the new legislature, convened on November 17, 2026.",
+    'promo.cta':"Get my alerts — $10/month",
+    'promo.prix':"or $96 a year · cancel anytime",
+    'promo.compte.h':"Your account",
+    'promo.mesdossiers':"My files →",
     'footer.villes':"Cities:",
     'maj.sub':"What changed on DossierQuébec, newest first",
     'bd.intro1':"Hi! My name is",
@@ -687,9 +684,22 @@ async function toggleFollowBill(billId, btnId){
     return;
   }
   followedBills[billId] = !followedBills[billId];
-  renderBills();
-  renderApercuBills();
+  // Sur place, sans redessiner la liste : la carte ouverte doit le rester, avec le nouvel état.
+  for(const bouton of document.querySelectorAll(`button[id^="suivre-"][id$="-${billId}"]`)){
+    bouton.textContent = libelleSuivreLoi(followedBills[billId], isEn);
+    bouton.classList.toggle('on', !!followedBills[billId]);
+    bouton.disabled = false;
+  }
 }
+const libelleSuivreLoi = (suivi, isEn) => suivi
+  ? (isEn ? '★ Following — stop' : '★ Suivi — retirer')
+  : (isEn ? '☆ Follow this bill' : '☆ Suivre ce projet de loi');
+// Un projet de loi « vivant » : pas de dissolution en cours, ET de la législature en cours. Le
+// 17 nov. 2026, dissolved repasse à false alors que bills.json porte encore les 143 projets de la
+// 43e, tous morts le 27 août, jusqu'à ce que Données Québec publie le premier de la 44e. Aucun
+// projet de la 43e n'a d'activité après la dissolution ; tout projet de la 44e en a une après
+// newLegislatureOn.
+const loiVivante = (b) => !ASSEMBLY.dissolved && String(b.lastActivity || '') >= ASSEMBLY.newLegislatureOn;
 
 /* ---------------- COMPTES (Supabase) ---------------- */
 // Auth par lien magique (courriel) — voir scripts/supabase-schema.sql pour la
@@ -872,7 +882,53 @@ async function handleMagicLinkClick(){
   }
 }
 
+// La boîte « Votre compte » de l'encadré d'abonnement, sur l'accueil (gabarit.html,
+// #promoCompte). Même connexion par lien que Lexique (signInWithMagicLink), ses propres ids :
+// les deux boîtes ne sont jamais sur la même page, mais le gabarit les porte toutes les deux.
+function renderPromoCompte(){
+  const box = document.getElementById('promoCompte');
+  if(!box) return;
+  const isEn = currentLang === 'en';
+  if(currentUser){
+    const nom = (currentUser.email || '').split('@')[0] || currentUser.email;
+    const echappe = String(nom).replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+    box.innerHTML = `<p class="promo-compte-note" style="margin:0">${isEn ? 'Signed in as' : 'Connecté comme'} <b>${echappe}</b>. ${isEn ? 'Your followed bills and projects are in My files.' : 'Vos projets de loi et projets suivis sont dans Mes dossiers.'}</p>`;
+    return;
+  }
+  const saisie = document.getElementById('promoEmail')?.value || '';
+  box.innerHTML = `<div class="promo-compte-ligne">
+      <input type="email" id="promoEmail" placeholder="${isEn ? 'Your email' : 'Votre courriel'}" aria-label="${isEn ? 'Your email' : 'Votre courriel'}">
+      <button class="account-btn" id="promoLienBtn" onclick="handlePromoLink()">${isEn ? 'Get the link' : 'Recevoir le lien'}</button>
+    </div>
+    <p class="promo-compte-note" id="promoNote">${isEn ? 'No password: a sign-in link arrives by email. A free account follows up to 3 projects.' : 'Pas de mot de passe : un lien de connexion arrive par courriel. Le compte gratuit suit jusqu’à 3 projets.'}</p>`;
+  const champ = document.getElementById('promoEmail');
+  if(champ && saisie) champ.value = saisie;
+  champ?.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') handlePromoLink(); });
+}
+
+async function handlePromoLink(){
+  const input = document.getElementById('promoEmail');
+  const note = document.getElementById('promoNote');
+  const btn = document.getElementById('promoLienBtn');
+  const isEn = currentLang === 'en';
+  const email = input ? input.value.trim() : '';
+  if(!email || !note || !btn){ input?.focus(); return; }
+  btn.disabled = true;
+  note.textContent = isEn ? 'Sending…' : 'Envoi en cours…';
+  const error = await signInWithMagicLink(email);
+  if(error){
+    btn.disabled = false;
+    note.textContent = error.code === 'over_email_send_rate_limit'
+      ? (isEn ? 'A link was already sent recently — check your inbox, or wait a bit.' : 'Un lien a déjà été envoyé récemment — vérifiez vos courriels, ou attendez un peu.')
+      : (isEn ? 'Something went wrong. Try again.' : 'Une erreur est survenue. Réessayez.');
+    return;
+  }
+  btn.textContent = isEn ? '✓ Link sent' : '✓ Lien envoyé';
+  note.textContent = isEn ? `Check your inbox (${email}) for the sign-in link.` : `Vérifiez vos courriels (${email}) : le lien de connexion vous attend.`;
+}
+
 function renderAccountBox(){
+  renderPromoCompte();
   if(!document.getElementById('accountBox')) return;   // vue absente de cette page
   const box = document.getElementById('accountBox');
   if(!box) return;
@@ -2072,7 +2128,7 @@ function billCard(b, ctx){
   // réactivé, auquel cas la personne qui le suit voudra être avertie. Caché aussi
   // pendant une dissolution : tout projet non sanctionné est mort au feuilleton,
   // le suivre promettrait une alerte qui ne viendra jamais.
-  const canFollow = !ASSEMBLY.dissolved && (b.status === 'encours' || b.status === 'laisse_de_cote');
+  const canFollow = loiVivante(b) && (b.status === 'encours' || b.status === 'laisse_de_cote');
   const followBtnId = 'suivre-' + ctx + '-' + b.id;
   const followRow = !canFollow ? '' : `<div class="bill-follow-row">
       <span class="follow-hint">${!currentUser
@@ -2080,7 +2136,7 @@ function billCard(b, ctx){
         : (isEn ? 'In My files · subscribers get an email the morning it moves' : 'Dans Mes dossiers · les abonnés reçoivent un courriel le matin où il avance')}</span>
       <button class="follow-btn ${isFollowed?'on':''}" id="${followBtnId}" onclick="event.stopPropagation(); ${currentUser ? `toggleFollowBill(${b.id}, '${followBtnId}')` : 'goToAccount()'}">${!currentUser
         ? (isEn ? '🔒 Sign in to follow' : '🔒 Se connecter pour suivre')
-        : isFollowed ? (isEn ? '★ Following — stop' : '★ Suivi — retirer') : (isEn ? '☆ Follow this bill' : '☆ Suivre ce projet de loi')}</button>
+        : libelleSuivreLoi(isFollowed, isEn)}</button>
     </div>`;
   // Bouton « Demander une explication » (remplace l'ancien « Suivre » pour les
   // projets de loi — le suivi des personnes reste intact ailleurs). 3 états :
@@ -2088,7 +2144,7 @@ function billCard(b, ctx){
   // projets ACTIFS (status 'encours') : un projet sanctionné ou laissé de côté
   // ne se « challenge » plus.
   const isFlagged = !!myFlaggedBills[b.id];
-  const canFlag = b.status === 'encours' && !ASSEMBLY.dissolved;
+  const canFlag = b.status === 'encours' && loiVivante(b);
   const flagBtnId = 'demand-' + ctx + '-' + b.id;
   const mailHint = isEn
     ? 'One email at the moments that count (500 & 1,000 requests, or if it becomes law)'
@@ -2616,9 +2672,13 @@ function shareBill(billId, platform, evt){
 
 // Lien profond : /projets-de-loi?pl=NUM → ouvre directement ce projet.
 function openBillFromQuery(){
-  const pl = new URLSearchParams(location.search).get('pl');
+  const params = new URLSearchParams(location.search);
+  const pl = params.get('pl');
   if(!pl) return;
-  const b = bills.find(x => String(x.num) === String(pl));
+  // Le numéro n'est pas unique (PL 1, PL 2… reviennent à chaque session) : quand le lien porte
+  // aussi l'id (courriels d'alerte, Mes dossiers), c'est lui qui choisit.
+  const id = params.get('id');
+  const b = (id && bills.find(x => String(x.id) === id)) || bills.find(x => String(x.num) === String(pl));
   if(!b) return;
   // S'assurer qu'on est bien sur l'onglet Projets (au cas où le lien arrive
   // ailleurs, ex. /?pl=NUM) — sans toucher à l'URL (fromHistory).
@@ -2704,10 +2764,10 @@ async function renderChallenged(){
       const flames = '🔥'.repeat(Math.max(1, CHALLENGE_TIERS.filter(t => cnt >= t).length));
       const stepLabels = isEn ? stepsEn : steps;
       const stageIdx = Math.max(0, Math.min(stepLabels.length - 1, displayStep(b.step) - 1));
-      const stageLabel = b.status === 'encours' && !ASSEMBLY.dissolved ? stepLabels[stageIdx] : statusLabel(b.status, b.step);
+      const stageLabel = b.status === 'encours' && loiVivante(b) ? stepLabels[stageIdx] : statusLabel(b.status, b.step);
       const petition = cnt >= PETITION_THRESHOLD
         ? `<div class="ch-petition">⚑ ${isEn ? 'Petition threshold reached' : 'Seuil de pétition atteint'}</div>` : '';
-      const canFlag = b.status === 'encours' && !ASSEMBLY.dissolved;
+      const canFlag = b.status === 'encours' && loiVivante(b);
       const isFlagged = !!myFlaggedBills[b.id];
       const flagBtnId = 'demand-ch-' + b.id;
       let demandBtn = '';
@@ -3281,6 +3341,8 @@ function renderTicker(){
   renderComparateurTable();
   renderBills();
   renderApercuBills();
+  // L'encadré de l'abonnement : sa phrase de dissolution tombe d'elle-même.
+  for(const d of document.querySelectorAll('.promo-dissolution')) d.hidden = !ASSEMBLY.dissolved;
   renderVotes();
   renderDeputes();
   renderNews();
