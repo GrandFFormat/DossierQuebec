@@ -683,3 +683,15 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
   background: var(--accent-fond, #E6F6EC); border: 1px solid var(--accent, #0B8A4B);
   font-size: 13px; line-height: 1.5;
 }
+
+/* ---------- offrir un abonnement ---------- */
+/* Plusieurs champs empilés, là où .ab-form est une simple rangée « champ + bouton ». */
+.ab-form-cadeau { flex-direction: column; align-items: stretch; gap: 12px; max-width: 460px; }
+.ab-form-cadeau .ab-champ { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 600; }
+.ab-form-cadeau .ab-champ input { flex: none; font-weight: 400; }
+.ab-form-cadeau input:disabled { opacity: .45; }
+.ab-durees { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; }
+.ab-durees legend { font-size: 13px; font-weight: 600; margin-bottom: 4px; padding: 0; }
+.ab-durees label, .ab-case { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; }
+.ab-form-cadeau .ab-durees input, .ab-form-cadeau .ab-case input { flex: none; width: 17px; height: 17px; accent-color: var(--accent, #0B8A4B); }
+.ab-form-cadeau .ab-bouton { align-self: flex-start; }
