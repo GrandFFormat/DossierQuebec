@@ -347,8 +347,8 @@ export async function avisConsultation(ou) {
   const p = document.createElement('p');
   p.className = 'ab-consultation-avis';
   p.innerHTML = tr(
-    '<strong>Poste de consultation.</strong> Ce compte donne accès à la lecture, y compris au détail de l’argent. Les projets suivis, les alertes et les infolettres sont gérés par l’abonné — ils ne peuvent pas être modifiés ici.',
-    '<strong>Reading station.</strong> This account gives read access, including the money detail. Followed projects, alerts and newsletters are managed by the subscriber — they cannot be changed here.',
+    '<strong>Poste de consultation.</strong> Ce compte donne accès à la lecture, y compris au détail de l’argent. Les projets suivis affichés ici sont <strong>ceux choisis par le compte responsable</strong> ; ils ne peuvent pas être modifiés depuis ce poste, pas plus que les alertes ou les infolettres.',
+    '<strong>Reading station.</strong> This account gives read access, including the money detail. The followed projects shown here are <strong>the ones chosen by the lead account</strong>; they cannot be changed from this station, nor can the alerts or newsletters.',
   );
   ou.prepend(p);
 }

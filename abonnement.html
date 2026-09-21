@@ -253,6 +253,11 @@
     utilise: () => tr('Ce code a déjà été utilisé.', 'This code has already been used.'),
     stripe: () => tr('Vous avez déjà un abonnement payant en cours. Gardez ce code pour plus tard, ou offrez-le.', 'You already have a paid subscription running. Keep this code for later, or give it away.'),
     permanent: () => tr('Votre accès n’a pas de date de fin : ce code n’y ajouterait rien. Gardez-le, ou offrez-le.', 'Your access has no end date: this code would add nothing. Keep it, or give it away.'),
+    deja_normal: () => tr('Ce code est prévu pour un poste de consultation, et ce compte peut déjà modifier ses suivis. L’activer ici lui retirerait ce droit.', 'This code is meant for a reading station, and this account can already change its follows. Using it here would take that away.'),
+    // Les codes d’une succursale partent par lot : le responsable active le sien en premier,
+    // les postes s’y rattachent ensuite. Le dire plutôt que de rattacher à rien en silence.
+    maitre_absent: () => tr('Le compte responsable de cette succursale doit activer son code avant les postes.', 'The branch’s lead account must activate its code before the stations.'),
+    maitre_lui_meme: () => tr('Ce compte est déjà le responsable de cette succursale : utilisez ce code sur un poste.', 'This account is already the branch lead: use this code on a station.'),
   };
   formCadeau?.addEventListener('submit', async (e) => {
     e.preventDefault();
