@@ -1297,7 +1297,7 @@ ${liste.map(fiche).join('')}
       return;
     }
     if (!b) {
-      corps.innerHTML = `<p class="ab-note" style="margin-top:0">${tr("Ce projet de loi n'est plus dans les données de la législature en cours : il est mort au feuilleton, ou sa législature est terminée.", 'This bill is no longer in the current legislature’s data: it died on the Order Paper, or its legislature is over.')}</p>
+      corps.innerHTML = `<p class="ab-note" style="margin-top:0">${tr("Ce projet de loi n'est plus dans les données de la législature en cours : sa législature s'est terminée avant qu'il soit adopté.", 'This bill is no longer in the current legislature’s data: its legislature ended before it was passed.')}</p>
         <div class="ab-liens">${retirer}</div>`;
       return;
     }
