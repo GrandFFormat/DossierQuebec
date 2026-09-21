@@ -105,9 +105,27 @@
       <p class="ab-note" data-en="Every subscription keeps all of this free for everyone. Figures counted in the published data, updated every morning.">Chaque abonnement garde tout ça gratuit pour tout le monde. Chiffres comptés dans les données publiées, mis à jour chaque matin.</p>
     </section>
 
-    <section class="ab-carte ab-offrir">
+    <section class="ab-carte ab-offrir" id="offrir">
       <h3 data-en="<span class=&quot;ab-icone&quot; aria-hidden=&quot;true&quot;>🎁</span> Give a subscription"><span class="ab-icone" aria-hidden="true">🎁</span> Offrir un abonnement</h3>
-      <p data-en="To someone who follows what's happening in their city, a community group, a neighbourhood association or a library. Write to us and we'll send you a code to pass on.">À un proche qui suit ce qui se passe dans sa ville, à un groupe communautaire, à une association de quartier ou à une bibliothèque. <a class="ab-lien" href="/mes-dossiers#ecrire">Écrivez-nous</a> et on vous envoie un code à remettre.</p>
+      <p data-en="To someone who follows what's happening in their city, a community group, a neighbourhood association or a library.">À un proche qui suit ce qui se passe dans sa ville, à un groupe communautaire, à une association de quartier ou à une bibliothèque.</p>
+      <!-- Tant que CADEAU_OUVERT n'est pas allumé côté serveur, le formulaire reste caché et la
+           phrase « Écrivez-nous » s'affiche : l'offre manuelle continue de fonctionner. -->
+      <p id="offrir-manuel" data-en="Write to us and we'll send you a code to pass on."><a class="ab-lien" href="/mes-dossiers#ecrire">Écrivez-nous</a> et on vous envoie un code à remettre.</p>
+      <form class="ab-form ab-form-cadeau" id="form-offrir" hidden>
+        <label class="ab-champ"><span data-en="Their email">Son adresse courriel</span>
+          <input type="email" name="destinataire" required autocomplete="off" maxlength="200" placeholder="nom@exemple.ca"></label>
+        <fieldset class="ab-durees">
+          <legend data-en="How long">Pour combien de temps</legend>
+          <label><input type="radio" name="forfait" value="annuel" checked> <span data-en="12 months — $96">12 mois — 96 $</span></label>
+          <label><input type="radio" name="forfait" value="mensuel"> <span data-en="1 month — $10">1 mois — 10 $</span></label>
+        </fieldset>
+        <label class="ab-champ"><span data-en="Your name, as they'll see it">Votre nom, tel qu’il le verra</span>
+          <input type="text" name="expediteur" maxlength="80" autocomplete="name"></label>
+        <label class="ab-case"><input type="checkbox" name="anonyme"> <span data-en="Stay anonymous">Rester anonyme</span></label>
+        <button type="submit" class="ab-bouton" data-mesure="cadeau_offrir" data-en="Give it — pay with Stripe">Offrir — payer chez Stripe</button>
+        <p class="ab-note" data-en="The code is emailed to them as soon as the payment goes through. Nothing renews: it's a one-time payment.">Le code lui est envoyé par courriel dès que le paiement passe. Rien ne se renouvelle : c’est un paiement unique.</p>
+      </form>
+      <p class="ab-note" id="etat-offrir" aria-live="polite"></p>
     </section>
 
     <!-- Faire valoir un code reçu. La fonction Postgres utiliser_code_cadeau fait tout le
@@ -241,7 +259,54 @@
   sAbonner();
   client.auth.onAuthStateChange((evenement) => { if (evenement === 'SIGNED_IN') sAbonner(); });
 
+  // ---------- offrir un abonnement, payé en ligne ----------
+  // Le formulaire ne s'affiche que si le serveur dit que c'est ouvert (CADEAU_OUVERT) : tant que
+  // l'interrupteur est éteint, la phrase « Écrivez-nous » reste et l'offre manuelle continue.
+  const formOffrir = document.querySelector('#form-offrir');
+  const etatOffrir = document.querySelector('#etat-offrir');
+  fetch('/api/cadeau').then((r) => (r.ok ? r.json() : null)).catch(() => null).then((c) => {
+    if (!c?.ouvert) return;
+    formOffrir.hidden = false;
+    document.querySelector('#offrir-manuel').hidden = true;
+  });
+  // Cocher « anonyme » rend le nom inutile : on le grise plutôt que de le laisser rempli pour rien.
+  formOffrir?.anonyme.addEventListener('change', () => {
+    formOffrir.expediteur.disabled = formOffrir.anonyme.checked;
+    formOffrir.expediteur.required = !formOffrir.anonyme.checked;
+  });
+  if (formOffrir) formOffrir.expediteur.required = true;
+  formOffrir?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const bouton = formOffrir.querySelector('button');
+    bouton.disabled = true;
+    etatOffrir.textContent = tr('Ouverture de Stripe…', 'Opening Stripe…');
+    const r = await fetch('/api/cadeau', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        destinataire: formOffrir.destinataire.value,
+        forfait: formOffrir.forfait.value,
+        expediteur: formOffrir.expediteur.value,
+        anonyme: formOffrir.anonyme.checked,
+        langue: EN ? 'en' : 'fr',
+      }),
+    }).catch(() => null);
+    const d = r ? await r.json().catch(() => ({})) : {};
+    if (d.url) { location.assign(d.url); return; }
+    bouton.disabled = false;
+    etatOffrir.textContent = d.erreur === 'adresse invalide' ? tr('Cette adresse courriel ne semble pas valide.', 'That email address doesn’t look valid.')
+      : d.erreur === 'nom requis' ? tr('Indiquez votre nom, ou cochez « Rester anonyme ».', 'Enter your name, or tick “Stay anonymous”.')
+      : tr('Stripe ne répond pas pour l’instant. Réessayez dans une minute.', 'Stripe is not responding right now. Try again in a minute.');
+  });
+  // Au retour de Stripe.
+  const retourCadeau = new URLSearchParams(location.search).get('cadeau');
+  if (retourCadeau === 'merci') etatOffrir.textContent = tr('Merci ! Le code part par courriel dans la minute.', 'Thank you! The code is on its way by email.');
+  if (retourCadeau === 'annule') etatOffrir.textContent = tr('Paiement annulé : rien n’a été débité.', 'Payment cancelled: nothing was charged.');
+
   // ---------- faire valoir un code cadeau ----------
+  // Le lien du courriel porte le code (?code=…) : on le pré-remplit, la personne n'a qu'à cliquer.
+  const codeRecu = new URLSearchParams(location.search).get('code');
+  if (codeRecu) document.querySelector('#form-cadeau input').value = codeRecu.slice(0, 40);
   // Tout se décide dans Postgres (utiliser_code_cadeau) : la page ne connaît aucun code et ne
   // peut pas en deviner. Elle envoie ce qui est tapé et traduit la raison du refus — dire
   // « ça n'a pas marché » enverrait la personne réessayer pour rien.

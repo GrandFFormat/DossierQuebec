@@ -10,6 +10,7 @@
 // signature, avant tout décodage JSON. Une erreur répond 500 : Stripe réessaie pendant trois jours.
 
 import { signatureStripeValide, stripeConfigure, synchroniser } from './_stripe.js';
+import { livrerCadeau } from './_cadeau.js';
 
 const TYPES = new Set([
   'checkout.session.completed',
@@ -40,6 +41,25 @@ export async function POST(request) {
     return new Response('corps invalide', { status: 400 });
   }
   const objet = evenement.data?.object ?? {};
+
+  // Un abonnement OFFERT, payé en une fois (voir api/cadeau.js). Il n'a pas d'abonnement Stripe
+  // derrière lui : sans cette branche, la ligne suivante l'ignorerait et personne ne recevrait
+  // son code. On ne livre que ce qui est réellement PAYÉ — une session terminée peut l'être sans
+  // l'être (paiement différé), et un code ne doit jamais partir avant l'argent.
+  if (evenement.type === 'checkout.session.completed' && objet.mode === 'payment' && objet.metadata?.type === 'cadeau') {
+    if (objet.payment_status !== 'paid') return Response.json({ recu: true, ignore: 'cadeau non payé' });
+    try {
+      const resultat = await livrerCadeau(objet);
+      console.log(`Stripe cadeau ${objet.id} → ${resultat}`);
+      return Response.json({ recu: true, resultat });
+    } catch (e) {
+      // 500 : Stripe réessaiera. livrerCadeau est idempotente — elle reprend le code déjà
+      // fabriqué au lieu d'en créer un second, et ne renvoie le courriel que s'il n'est pas parti.
+      console.error(`Stripe cadeau ${objet.id} :`, e.message);
+      return new Response('erreur', { status: 500 });
+    }
+  }
+
   const abonnement = abonnementDe(objet);
   if (!TYPES.has(evenement.type) || !abonnement) return Response.json({ recu: true, ignore: true });
 
