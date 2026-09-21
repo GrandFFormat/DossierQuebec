@@ -24,7 +24,7 @@ const corpsDe = (req) => {
 function page(titre, message) {
   return `<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
-    <link rel="icon" type="image/svg+xml" href="/commun/icone.svg">
+    <link rel="icon" type="image/svg+xml" href="/commun/dq.svg">
     <title>${titre} — DossierQuébec</title>
     <style>body{font-family:Arial,sans-serif;background:#F7F8FA;color:#16191D;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;padding:24px}
     .carte{background:#fff;border:1px solid #DDE2E7;border-top:5px solid #0B8A4B;border-radius:12px;padding:32px;max-width:460px;text-align:center;line-height:1.55}

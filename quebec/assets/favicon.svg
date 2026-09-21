@@ -1,0 +1,43 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VDQ">
+  <!--
+    Marque du volet Ville de Québec (21 septembre 2026).
+    Elle remplace commun/icone.svg, qui était une pomme croquée avec sa feuille : le logo
+    d'Apple. Construction de Montréal, pour que les deux volets se reconnaissent comme frères :
+    disque crème, lettres encre, barre d'accent arrondie.
+
+      disque  #FFFDF7  le même crème que le favicon de Montréal
+      lettres #16191D  l'encre du volet (jeton encre de quebec/assets/style.css)
+      barre   #0B8A4B  l'accent vert du volet (jeton accent)
+
+    V, D et Q sont trois lettres LARGES, là où MTL n'en a qu'une (le T et le L sont étroits).
+    À chasse normale les trois ne tenaient dans le disque qu'en rapetissant tout, et la marque
+    devenait timide à côté de celle de Montréal. Elles sont donc condensées à 0,78 : la maison
+    le fait déjà en texte avec Archivo Narrow.
+
+    Deux défauts du favicon de Montréal ne sont PAS repris. Ses lettres débordent du disque sur
+    les côtés et sa barre verte dépasse aux deux bouts : sur une barre d'onglets sombre, ce qui
+    sort du disque flotte dans le vide. Ici tout reste dedans, à toutes les tailles.
+
+    Le PNG jumeau (favicon-512.png) se refabrique en rendant ce fichier à 512 px, fond
+    transparent gardé.
+  -->
+  <circle cx="32" cy="32" r="32" fill="#FFFDF7"/>
+  <g fill="#16191D" transform="translate(6.64,17) scale(0.8125)">
+    <!-- V -->
+    <g transform="scale(0.78,1)">
+      <path d="M0,0 L8.5,0 L11,22 L13.5,0 L22,0 L15.5,32 L6.5,32 Z"/>
+    </g>
+    <!-- D : le contrepoinçon est un trou (règle pair-impair). -->
+    <g transform="translate(20.16,0) scale(0.78,1)">
+      <path fill-rule="evenodd" d="M0,0 H12 C19.2,0 23,5.4 23,16 C23,26.6 19.2,32 12,32 H0 Z
+                                   M8,7 H11.5 C14.4,7 15.8,9.8 15.8,16 C15.8,22.2 14.4,25 11.5,25 H8 Z"/>
+    </g>
+    <!-- Q : bol, contrepoinçon, puis la queue qui sort du bol et l'empêche de se lire comme un O. -->
+    <g transform="translate(18.48,0) scale(0.78,1)">
+      <path fill-rule="evenodd" d="M40.5,0 A11.5,16 0 1,1 40.5,32 A11.5,16 0 1,1 40.5,0 Z
+                                   M40.5,7.2 A4.3,8.8 0 1,0 40.5,24.8 A4.3,8.8 0 1,0 40.5,7.2 Z"/>
+      <path d="M47.85,20.8 L56.35,31.8 L50.65,36.2 L42.15,25.2 Z"/>
+    </g>
+  </g>
+  <rect x="10.5" y="50" width="43" height="4.5" rx="2.25" fill="#0B8A4B"/>
+</svg>
