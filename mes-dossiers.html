@@ -266,19 +266,21 @@
   }
 
   const AVANTAGES_PAYANTS = EN ? `
-        <li><strong>An email alert when your projects move</strong>: a new decision, an item awaiting a vote, an updated recap — and nothing in the weeks when nothing moves.</li>
+        <li><strong>An email alert when your projects move</strong>: a new decision, an item awaiting a vote, an updated recap — and, at the National Assembly, a bill you follow that moves to its next stage. Nothing in the weeks when nothing moves.</li>
+        <li><strong>The elected members you follow</strong>: an email when a minister or MNA you follow introduces a bill.</li>
         <li><strong>Money details</strong>: who receives, who pays, the bids and the City's estimate, the breakdown by year, the conditions.
           <br><span class="ab-note">Included as soon as it is read: the major projects followed, and every new item. In Québec City, anything else on request — normally read the next day.</span></li>
-        <li><strong>Alerts for your neighbourhood, your street or a keyword</strong>: “everything the City decides about 1re Avenue”, “in Limoilou”, “about snow removal”.</li>
+        <li><strong>Alerts for your neighbourhood, your street or a keyword</strong>: “everything the City decides about 1re Avenue”, “in Limoilou”, “about snow removal” — and every new bill that mentions it.</li>
         <li><strong>Follow an organization or a company</strong>: this year's decisions that name it — contracts, grants, agreements — with each amount as written, and an alert when a new one names it.</li>
         <li><strong>What's coming up at council</strong>: the items on the agenda of each meeting, with their summary — estimated from the documents the City publishes.</li>
         <li><strong>The monthly recap, subscriber edition</strong>: everything the City decided in the month, in plain language. <a class="ab-lien" href="/exemple-compte-rendu-aout-2026">See the August 2026 issue</a> (in French).</li>
         <li><strong>Export to a spreadsheet or PDF</strong> (Excel, CSV or printable PDF): you choose a project, a word or a name and the columns, with the money details when they have been read.</li>
         <li class="ab-note">Per account: 10 projects followed, 5 keyword alerts, 3 organizations, 10 exports a month.</li>` : `
-        <li><strong>Une alerte par courriel quand vos projets bougent</strong> : une nouvelle décision, un dossier qui attend un vote, un récapitulatif mis à jour — et rien les semaines où rien n'avance.</li>
+        <li><strong>Une alerte par courriel quand vos projets bougent</strong> : une nouvelle décision, un dossier qui attend un vote, un récapitulatif mis à jour — et, à l'Assemblée nationale, un projet de loi suivi qui passe une étape. Rien les semaines où rien n'avance.</li>
+        <li><strong>Les élus que vous suivez</strong> : un courriel quand un ministre ou un député que vous suivez présente un projet de loi.</li>
         <li><strong>Le détail de l'argent</strong> : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions.
           <br><span class="ab-note">Inclus dès qu'il est lu : les grands projets suivis, et chaque nouveau dossier. À Québec, le reste sur demande — normalement lu le lendemain.</span></li>
-        <li><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : « tout ce que la Ville décide sur la 1re Avenue », « dans Limoilou », « sur le déneigement ».</li>
+        <li><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : « tout ce que la Ville décide sur la 1re Avenue », « dans Limoilou », « sur le déneigement » — et chaque nouveau projet de loi qui en parle.</li>
         <li><strong>Suivre un organisme ou une entreprise</strong> : les décisions de l'année qui le nomment — contrats, subventions, ententes — avec le montant de chacune tel qu'écrit, et une alerte quand une nouvelle le nomme.</li>
         <li><strong>Ce qui s'en vient au conseil</strong> : les dossiers à l'ordre du jour de chaque séance, avec leur résumé — estimé d'après les documents publiés par la Ville.</li>
         <li><strong>Le compte rendu mensuel, édition abonnés</strong> : tout ce que la Ville a décidé dans le mois, en langage clair. <a class="ab-lien" href="/exemple-compte-rendu-aout-2026">Voir l'édition d'août 2026</a>.</li>
@@ -297,7 +299,7 @@
           <span class="ab-courriel-cadenas" aria-hidden="true">🔒</span>
           <span class="ab-courriel-texte">
             <span class="ab-courriel-nom">🔔 ${tr('Mon alerte du matin', 'My morning alert')}</span><span class="ab-courriel-rythme">${tr('réservée aux abonnés', 'subscribers only')}</span>
-            <span class="ab-courriel-quoi">${tr("Chaque matin, s'il y a du nouveau dans vos projets suivis, vos mots-clés ou vos organismes — un seul courriel pour tout. <a class=\"ab-lien\" href=\"/abonnement\">Voir l'abonnement</a>", 'Every morning, if there is something new in your followed projects, keywords or organizations — one email for everything. <a class="ab-lien" href="/abonnement">See the subscription</a>')}</span>
+            <span class="ab-courriel-quoi">${tr("Chaque matin, s'il y a du nouveau dans vos projets et projets de loi suivis, vos mots-clés, vos organismes ou chez les élus que vous suivez — un seul courriel pour tout. <a class=\"ab-lien\" href=\"/abonnement\">Voir l'abonnement</a>", 'Every morning, if there is something new in your followed projects and bills, keywords, organizations or from the elected members you follow — one email for everything. <a class="ab-lien" href="/abonnement">See the subscription</a>')}</span>
           </span>
         </div>`,
         cabler: () => {},
@@ -313,7 +315,7 @@
       <input type="checkbox" id="alertes-actif"${actif ? ' checked' : ''}>
       <span class="ab-courriel-texte">
         <label class="ab-courriel-nom" for="alertes-actif">🔔 ${tr('Mon alerte du matin', 'My morning alert')}</label><span class="ab-courriel-rythme">${tr("chaque matin, s'il y a du nouveau", 'every morning, if something is new')}</span>
-        <span class="ab-courriel-quoi">${tr('Vos projets suivis, vos mots-clés et vos organismes — un seul courriel pour tout. Rien les jours où rien n’avance.', 'Your followed projects, keywords and organizations — one email for everything. Nothing on days when nothing moves. (Alert emails are in French for now.)')}${derniere ? ` ${tr('Dernière alerte :', 'Last alert:')} ${dateFr(derniere)}.` : ''}</span>
+        <span class="ab-courriel-quoi">${tr('Vos projets et projets de loi suivis, vos mots-clés, vos organismes et les élus que vous suivez — un seul courriel pour tout. Rien les jours où rien n’avance.', 'Your followed projects and bills, keywords, organizations and the elected members you follow — one email for everything. Nothing on days when nothing moves. (Alert emails are in French for now.)')}${derniere ? ` ${tr('Dernière alerte :', 'Last alert:')} ${dateFr(derniere)}.` : ''}</span>
         <span class="ab-liens"><button type="button" class="ab-lien-bouton" id="alertes-essai">${tr("M'envoyer un courriel d'essai", 'Send me a test email')}</button><button type="button" class="ab-lien-bouton ab-lien-doux" id="alertes-retirer"></button><span class="ab-note" id="alertes-etat" aria-live="polite" style="margin:0"></span></span>
       </span>
     </div>`;
@@ -351,7 +353,7 @@
       etat.textContent = res?.ok
         ? corps.envoyes
           ? tr(`Courriel d'essai envoyé à ${s.user.email}. Pensez à vérifier vos courriels indésirables.`, `Test email sent to ${s.user.email}. Check your spam folder.`)
-          : tr("Suivez au moins un projet, ou ajoutez un mot-clé ou un organisme présent dans une décision récente, pour recevoir un courriel d'essai.", 'Follow at least one project, or add a keyword or organization found in a recent decision, to get a test email.')
+          : tr("Suivez au moins un projet ou un projet de loi, ou ajoutez un mot-clé ou un organisme présent dans une décision récente, pour recevoir un courriel d'essai.", 'Follow at least one project or bill, or add a keyword or organization found in a recent decision, to get a test email.')
         : res?.status === 429 ? tr("Trois courriels d'essai déjà envoyés dans les dernières 24 heures. Réessayez demain.", 'Three test emails already sent in the last 24 hours. Try again tomorrow.') : tr("L'envoi n'a pas fonctionné. Réessayez dans un moment.", "Sending didn't work. Try again in a moment.");
       mesurer('alertes_essai');
     });
@@ -383,10 +385,10 @@
     zone.innerHTML = `<details class="ab-carte ab-pliable ab-mots"${ouvertMots}>
       <summary><h2>${tr('Mots-clés', 'Keywords')}</h2><span class="ab-etiquette" id="mots-compte">${(data ?? []).length}</span></summary>
       <div class="ab-pliable-corps">
-      <p class="ab-chapeau" style="margin-bottom:10px">${tr("Une rue, un quartier, une école, un parc, un sujet : « 1re Avenue », « Limoilou », « Rochebelle », « déneigement »… Les nouvelles décisions qui le contiennent s'ajoutent à votre alerte du matin.", 'A street, a neighbourhood, a school, a park, a topic: “1re Avenue”, “Limoilou”, “Rochebelle”, “déneigement” (snow removal)… New decisions that contain it are added to your morning alert. The decisions are in French, so use French words.')}</p>
+      <p class="ab-chapeau" style="margin-bottom:10px">${tr("Une rue, un quartier, une école, un parc, un sujet : « 1re Avenue », « Limoilou », « Rochebelle », « déneigement »… Les nouvelles décisions des villes et les nouveaux projets de loi de l'Assemblée qui le contiennent s'ajoutent à votre alerte du matin.", 'A street, a neighbourhood, a school, a park, a topic: “1re Avenue”, “Limoilou”, “Rochebelle”, “déneigement” (snow removal)… New city decisions and new National Assembly bills that contain it are added to your morning alert. The documents are in French, so use French words.')}</p>
       <ul class="ab-mots-liste" id="mots-liste"></ul>
       <form class="ab-form" id="mots-form"><input type="text" id="mots-champ" maxlength="60" placeholder="${tr('Ajouter un mot-clé', 'Add a keyword')}" aria-label="${tr('Nouveau mot-clé', 'New keyword')}"><button type="submit" class="ab-bouton">${tr('Ajouter', 'Add')}</button></form>
-      <p class="ab-note">${tr("Cherché dans l'objet et le résumé de chaque décision, sans tenir compte des accents ni des majuscules. Jusqu'à 5.", "Searched in each decision's subject and French summary, ignoring accents and capitals. Up to 5.")}</p>
+      <p class="ab-note">${tr("Cherché dans l'objet et le résumé de chaque décision, et dans le titre et le résumé de chaque projet de loi, sans tenir compte des accents ni des majuscules. Jusqu'à 5.", "Searched in each decision's subject and French summary, and in each bill's title and French summary, ignoring accents and capitals. Up to 5.")}</p>
       <p class="ab-note" id="mots-etat" aria-live="polite"></p>
       <div class="ab-pistes" id="mots-pistes" hidden></div>
       <p class="ab-astuce">${tr("<strong>Astuce :</strong> pas sûr de l'orthographe d'une rue ou d'un lieu ? Cherchez-le dans Google pour trouver son nom officiel (« boulevard Wilfrid-Hamel », « 1re Avenue ») : c'est celui qu'emploient les documents de la Ville.", '<strong>Tip:</strong> not sure how a street or place is spelled? Look it up on Google to find its official French name (“boulevard Wilfrid-Hamel”, “1re Avenue”): that is the one the City uses in its documents.')}</p>
@@ -1262,6 +1264,40 @@ ${liste.map(fiche).join('')}
 
   const estProjet = (id) => id.startsWith('projet:');
 
+  // ---------- projets de loi suivis (Assemblée nationale) ----------
+  // Suivis depuis les cartes de /projets-de-loi (commun/dq.js, toggleFollowBill) : ville
+  // « assemblee », dossier_id « pl:<id> ». Leur étape vient du même fichier que la page publique.
+  const ASSEMBLEE = 'assemblee';
+  const idLoi = (dossier) => /^pl:(\d+)$/.exec(dossier ?? '')?.[1] ?? null;
+  let lois = null;
+  const loisAssemblee = () => (lois ??= fetch('/data/site/bills.json').then((r) => (r.ok ? r.json() : [])).catch(() => []));
+  const loiDe = async (dossier) => (await loisAssemblee()).find((b) => String(b.id) === idLoi(dossier)) ?? null;
+  const etapeLoi = (b) => String(tr(b.note, b.noteEn ?? b.note) ?? '').replace(/\d{4}-\d{2}-\d{2}/g, (d) => dateFr(d));
+  const statutLoi = (b) => ({
+    sanctionne: tr('Sanctionné — devenu loi', 'Assented to — now law'),
+    laisse_de_cote: tr('Laissé de côté', 'Set aside'),
+    encours: tr('À l’étude', 'Under study'),
+  }[b.status] ?? '');
+
+  async function ouvrirLoi(carte, corps) {
+    const b = await loiDe(carte.dataset.dossier);
+    const retirer = `<button type="button" class="ab-lien-bouton" data-action="retirer">${tr('Ne plus suivre ce projet de loi', 'Stop following this bill')}</button>`;
+    if (!b) {
+      corps.innerHTML = `<p class="ab-note" style="margin-top:0">${tr("Ce projet de loi n'est plus dans les données de la législature en cours : il est mort au feuilleton, ou sa législature est terminée.", 'This bill is no longer in the current legislature’s data: it died on the Order Paper, or its legislature is over.')}</p>
+        <div class="ab-liens">${retirer}</div>`;
+      return;
+    }
+    corps.innerHTML = `<div class="ab-meta"><span class="ab-etiquette${b.status === 'encours' ? ' ab-en-cours' : ''}">${echapper(statutLoi(b))}</span>${b.sponsor ? `<span>${tr('Présenté par', 'Introduced by')} ${echapper(b.sponsor)}</span>` : ''}</div>
+      <p style="margin:8px 0">${echapper(etapeLoi(b)) || tr('Étape non précisée.', 'Stage not specified.')}</p>
+      <div class="ab-liens">
+        <a href="/projets-de-loi?pl=${encodeURIComponent(b.num)}">${tr('Sa fiche et son résumé', 'Its card and summary')}</a>
+        ${b.url ? `<a href="${echapper(tr(b.url, b.urlEn ?? b.url))}" target="_blank" rel="noopener">${tr('Sur le site de l’Assemblée ↗', 'On the Assembly’s website ↗')}</a>` : ''}
+        ${retirer}
+      </div>
+      <p class="ab-note">${tr("Étapes tirées des données ouvertes de l'Assemblée nationale (Données Québec), qui ont parfois un jour ou deux de retard sur son site. Avec l'abonnement, un courriel le matin où il passe une étape.", 'Stages from the National Assembly’s open data (Données Québec), sometimes a day or two behind its website. With the subscription, an email the morning it moves to a new stage.')}</p>`;
+    mesurer('ouvrir_loi_suivie', {});
+  }
+
   function pastilleStatut(d) {
     if (!d?.statutDossier) return '';
     if (d.statutDossier === 'termine') return `<span class="ab-etiquette">${tr('Décision finale', 'Final decision')}${d.etapeFinale ? ` — ${echapper(lib(d.etapeFinale))}` : ''}</span>`;
@@ -1271,6 +1307,21 @@ ${liste.map(fiche).join('')}
   // L'en-tête d'un dossier ou d'un projet : ce qu'on voit replié. Le reste se charge à l'ouverture.
   async function entete(suivi) {
     const attributs = `class="ab-carte ab-dossier" name="dossiers" data-ville="${echapper(suivi.ville)}" data-dossier="${echapper(suivi.dossier_id)}"`;
+    if (suivi.ville === ASSEMBLEE) {
+      const b = await loiDe(suivi.dossier_id);
+      return `<details ${attributs}>
+        <summary>
+          <div class="ab-meta">
+            <span class="ab-etiquette ab-type-projet">${tr('Projet de loi', 'Bill')}</span>
+            ${suivi.numero ? `<span>${echapper(suivi.numero)}</span>` : ''}
+            ${b ? `<span>${echapper(statutLoi(b))}</span>` : ''}
+            <span>${tr('Suivi depuis le', 'Followed since')} ${dateFr(suivi.created_at)}</span>
+          </div>
+          <h3>${echapper((b ? tr(b.title, b.titleEn ?? b.title) : null) ?? suivi.objet ?? suivi.dossier_id)}</h3>
+        </summary>
+        <div class="ab-dossier-corps"></div>
+      </details>`;
+    }
     if (estProjet(suivi.dossier_id)) {
       const cle = suivi.dossier_id.slice(7);
       const p = (await indexVille(suivi.ville))?.projets?.[cle];
@@ -1471,6 +1522,7 @@ ${liste.map(fiche).join('')}
     if (corps.dataset.pret === '1') return;
     corps.dataset.pret = '1';
     corps.innerHTML = `<p class="ab-note">${tr('Chargement…', 'Loading…')}</p>`;
+    if (carte.dataset.ville === ASSEMBLEE) return ouvrirLoi(carte, corps);
     if (estProjet(carte.dataset.dossier)) return ouvrirProjet(carte, corps);
     // Une décision seule, suivie avant l'arrivée des projets. Son résumé et son parcours sont dans
     // le volet ; ici, seulement le détail de l'argent (une petite requête) et les liens.
@@ -1508,7 +1560,7 @@ ${liste.map(fiche).join('')}
     pourquoi({ connecte: true, abonne });
     suggestions(s, new Set(suivis.map((x) => `${x.ville}|${x.dossier_id}`)));
     if (!suivis.length) {
-      $('#liste').innerHTML = `<p class="ab-vide">${tr("Vous ne suivez aucun projet pour l'instant. Choisissez-en un ci-dessus, dans « Des projets à suivre ».", "You aren't following any project yet. Pick one above, in “Projects to follow”.")}</p>`;
+      $('#liste').innerHTML = `<p class="ab-vide">${tr("Vous ne suivez aucun projet pour l'instant. Choisissez-en un ci-dessus, dans « Des projets à suivre », ou un projet de loi à l'étude, depuis la page <a class=\"ab-lien\" href=\"/projets-de-loi\">Projets de loi</a>.", "You aren't following any project yet. Pick one above, in “Projects to follow”, or a bill under study, from the <a class=\"ab-lien\" href=\"/projets-de-loi\">Bills</a> page.")}</p>`;
       return;
     }
     const parVille = new Map();
@@ -1518,7 +1570,8 @@ ${liste.map(fiche).join('')}
     }
     const sections = [];
     for (const [ville, liste] of parVille) {
-      sections.push(`<h2>${echapper(VILLES[ville] ?? ville)} <span class="ab-note">(${liste.length})</span></h2>${(await Promise.all(liste.map(entete))).join('')}`);
+      const nom = ville === ASSEMBLEE ? tr('Assemblée nationale', 'National Assembly') : (VILLES[ville] ?? ville);
+      sections.push(`<h2>${echapper(nom)} <span class="ab-note">(${liste.length})</span></h2>${(await Promise.all(liste.map(entete))).join('')}`);
     }
     $('#liste').innerHTML = sections.join('');
     // Un seul dossier suivi : on l'ouvre d'office, mais seulement à l'arrivée sur la page — pas

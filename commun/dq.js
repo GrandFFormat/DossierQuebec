@@ -636,25 +636,57 @@ async function toggleFollowDepute(id){
   renderDeputes(kw);
 }
 
-// Suivi des projets de loi — même mécanique que ministres/députés (localStorage
-// pour les visiteurs anonymes, Supabase pour les comptes). Sert de fondation
-// aux alertes courriel : la liste de qui suit quoi est ce qui permet, plus tard,
-// d'envoyer un digest hebdomadaire aux bonnes personnes. Clé = l'id stable du
-// projet de loi (bills[].id), stocké comme texte côté Supabase.
+// Suivi des projets de loi (21 sept. 2026). Rangé avec les projets des villes, dans
+// dossiers_suivis (ville « assemblee », dossier_id « pl:<id> ») : même limite (3 sans
+// abonnement, 10 avec, trigger Postgres), même protection des comptes de consultation,
+// visible dans Mes dossiers, et l'alerte du matin des abonnés le lit
+// (api/alertes-projets.js). Connexion requise : un suivi anonyme ne recevrait rien.
+// (L'ancien suivi par `follows` type 'bill' n'a jamais pu s'enregistrer : la contrainte de
+// la table n'accepte que 'minister' et 'depute'.)
 let followedBills = {};
 async function loadFollowedBills(){
-  try{
-    const res = await window.storage.get('followed-bills');
-    followedBills = res ? JSON.parse(res.value) : {};
-  }catch(e){ followedBills = {}; }
-}
-async function toggleFollowBill(billId){
-  followedBills[billId] = !followedBills[billId];
-  if(currentUser){
-    await upsertFollow('bill', String(billId), followedBills[billId]);
-  } else {
-    try{ await window.storage.set('followed-bills', JSON.stringify(followedBills)); }catch(e){}
+  followedBills = {};
+  if(!currentUser) return;
+  const { data, error } = await supabaseClient.from('dossiers_suivis')
+    .select('dossier_id').eq('user_id', currentUser.id).eq('ville', 'assemblee');
+  if(error){ console.error('loadFollowedBills:', error); return; }
+  for(const row of (data || [])){
+    const m = /^pl:(\d+)$/.exec(row.dossier_id);
+    if(m) followedBills[m[1]] = true;
   }
+}
+async function toggleFollowBill(billId, btnId){
+  if(!currentUser){ goToAccount(); return; }
+  const isEn = currentLang === 'en';
+  const btn = document.getElementById(btnId);
+  const b = bills.find(x => x.id === billId);
+  if(!b) return;
+  if(btn) btn.disabled = true;
+  const cle = { user_id: currentUser.id, ville: 'assemblee', dossier_id: 'pl:' + billId };
+  const { error } = followedBills[billId]
+    ? await supabaseClient.from('dossiers_suivis').delete().eq('user_id', cle.user_id).eq('ville', cle.ville).eq('dossier_id', cle.dossier_id)
+    : await supabaseClient.from('dossiers_suivis').upsert(
+        { ...cle, numero: 'PL ' + b.num, objet: String(b.title || '').slice(0, 600) },
+        { onConflict: 'user_id,ville,dossier_id', ignoreDuplicates: true });
+  if(error){
+    console.error('toggleFollowBill:', error);
+    if(btn) btn.disabled = false;
+    // Le plafond vient du trigger : « limite de N projets suivis atteinte ».
+    const plafond = Number(/limite de (\d+) projets suivis/.exec(error.message || '')?.[1]) || 0;
+    if(plafond === 3){
+      if(confirm(isEn
+        ? 'Without a subscription, you can follow 3 projects or bills (10 with one, plus a morning email when they move). See the subscription?'
+        : 'Sans abonnement, on suit 3 projets ou projets de loi (10 avec, et un courriel le matin quand ils avancent). Voir l’abonnement ?')) location.href = '/abonnement';
+    } else if(plafond){
+      alert(isEn ? `Limit reached: ${plafond} projects or bills followed. Remove one in My files first.` : `Limite atteinte : ${plafond} projets ou projets de loi suivis. Retirez-en un dans Mes dossiers d’abord.`);
+    } else if(/consultation/i.test(error.message || '')){
+      alert(isEn ? 'This is a reading-station account: it cannot change what it follows.' : 'Ce compte est un poste de consultation : il ne peut pas modifier ses suivis.');
+    } else {
+      alert(isEn ? "Couldn't save. Try again." : 'Impossible d’enregistrer. Réessayez.');
+    }
+    return;
+  }
+  followedBills[billId] = !followedBills[billId];
   renderBills();
   renderApercuBills();
 }
@@ -698,11 +730,9 @@ async function loadFollowsFromSupabase(){
   if(error){ console.error(error); return; }
   followed = {};
   followedDeputes = {};
-  followedBills = {};
   for(const row of (data || [])){
     if(row.person_type === 'minister') followed[row.person_key] = true;
     else if(row.person_type === 'depute') followedDeputes[row.person_key] = true;
-    else if(row.person_type === 'bill') followedBills[row.person_key] = true;
   }
 }
 
@@ -878,6 +908,7 @@ async function initAuth(){
     const { data: { session } } = await supabaseClient.auth.getSession();
     currentUser = session?.user ?? null;
     if(currentUser) await loadFollowsFromSupabase();
+    await loadFollowedBills();
     await loadMyFlagsFromSupabase();
   }catch(e){
     console.error('initAuth failed:', e);
@@ -891,6 +922,7 @@ async function initAuth(){
     try{
       currentUser = newSession?.user ?? null;
       if(currentUser) await loadFollowsFromSupabase();
+      await loadFollowedBills();
       await loadMyFlagsFromSupabase();
     }catch(e){
       console.error('onAuthStateChange failed:', e);
@@ -2037,7 +2069,19 @@ function billCard(b, ctx){
   // Le suivi (et les alertes courriel) est caché sur les projets sanctionnés :
   // ils sont finaux, ne changeront plus d'étape, donc rien à suivre. Gardé sur
   // les « sur la glace » (laissés de côté) : un projet dormant pourrait être
-  // réactivé, auquel cas la personne qui le suit voudra être avertie.
+  // réactivé, auquel cas la personne qui le suit voudra être avertie. Caché aussi
+  // pendant une dissolution : tout projet non sanctionné est mort au feuilleton,
+  // le suivre promettrait une alerte qui ne viendra jamais.
+  const canFollow = !ASSEMBLY.dissolved && (b.status === 'encours' || b.status === 'laisse_de_cote');
+  const followBtnId = 'suivre-' + ctx + '-' + b.id;
+  const followRow = !canFollow ? '' : `<div class="bill-follow-row">
+      <span class="follow-hint">${!currentUser
+        ? (isEn ? 'Sign in to follow it in My files' : 'Connexion requise — il s’ajoute à Mes dossiers')
+        : (isEn ? 'In My files · subscribers get an email the morning it moves' : 'Dans Mes dossiers · les abonnés reçoivent un courriel le matin où il avance')}</span>
+      <button class="follow-btn ${isFollowed?'on':''}" id="${followBtnId}" onclick="event.stopPropagation(); ${currentUser ? `toggleFollowBill(${b.id}, '${followBtnId}')` : 'goToAccount()'}">${!currentUser
+        ? (isEn ? '🔒 Sign in to follow' : '🔒 Se connecter pour suivre')
+        : isFollowed ? (isEn ? '★ Following — stop' : '★ Suivi — retirer') : (isEn ? '☆ Follow this bill' : '☆ Suivre ce projet de loi')}</button>
+    </div>`;
   // Bouton « Demander une explication » (remplace l'ancien « Suivre » pour les
   // projets de loi — le suivi des personnes reste intact ailleurs). 3 états :
   // déconnecté (mène au compte), à demander, déjà demandé. Seulement sur les
@@ -2123,6 +2167,7 @@ function billCard(b, ctx){
             <div class="open-label side">${lastActivityLabel}</div>
             <div class="last-event-box">${lastActivityValue}${note ? ` — ${note}` : ''}</div>
             <a class="bill-more" href="${url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${t('btn.viewFull')}</a>
+            ${followRow}
             ${flagRow}
             ${shareRow}
           </div>
@@ -3222,8 +3267,7 @@ function renderTicker(){
   await loadFontZoom();
   await loadTheme();
   await loadFollowedDeputes();
-  await loadFollowedBills();
-  await initAuth();
+  await initAuth();   // charge aussi les projets de loi suivis (compte requis)
   renderHemicycle();
   sortRoadmapItems();
   renderMinistres();
