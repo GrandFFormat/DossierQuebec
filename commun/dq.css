@@ -1821,8 +1821,16 @@
   .promo-alertes .hero-cta{background:var(--yellow); color:var(--sur-clair); border-color:var(--sur-clair); padding:16px 24px; text-decoration:none;}
   .promo-alertes .hero-cta:hover{background:var(--card); color:var(--sur-clair);}
   .promo-alertes .promo-prix{font-size:14.5px; font-weight:600; color:var(--sur-fonce);}
+  .promo-alertes .promo-limites{margin:16px 0 0; max-width:62ch; font-size:15px; line-height:1.5; color:var(--sur-fonce);}
+  .promo-alertes .promo-limites b{color:var(--yellow);}
   .promo-accueil-grille{display:grid; grid-template-columns:minmax(0, 1.6fr) minmax(260px, 1fr); gap:28px; align-items:start;}
   @media (max-width:860px){ .promo-accueil-grille{grid-template-columns:1fr;} }
+  .promo-cote{display:flex; flex-direction:column; gap:16px;}
+  .promo-villes{background:var(--yellow); color:#131313; border:3px solid #131313; box-shadow:var(--shadow); padding:16px 20px;}
+  .promo-villes-titre{display:block; margin:0 0 6px; font-family:'Archivo',sans-serif; font-weight:900; font-size:17px; text-transform:uppercase; letter-spacing:-0.01em;}
+  .promo-villes p{margin:0; font-size:14.5px; line-height:1.5; color:#131313;}
+  .promo-villes a{color:#131313; font-weight:800; text-decoration:underline;}
+  .promo-villes a:hover{color:#0E4FC1;}
   .promo-compte{background:#FFFFFF; color:#131313; border:3px solid #131313; box-shadow:var(--shadow); padding:18px 20px;}
   .promo-compte-titre{display:block; margin:0 0 10px; font-family:'Archivo',sans-serif; font-weight:900; font-size:17px; text-transform:uppercase;}
   .promo-compte-ligne{display:flex; flex-wrap:wrap; gap:8px;}

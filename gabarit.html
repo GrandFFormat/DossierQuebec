@@ -255,6 +255,17 @@ function goToFederal(evt){
             <a class="hero-cta" href="/abonnement?de=assemblee" data-i18n="promo.cta">Recevoir mes alertes — 10 $/mois</a>
             <span class="promo-prix" data-i18n="promo.prix">ou 96 $ par an · annulable en tout temps</span>
           </div>
+          <!-- Les limites appliquées par Postgres (scripts/supabase-schema-limites.sql) ; les élus
+               suivis (table follows) n'en ont pas. -->
+          <p class="promo-limites" data-i18n="promo.limites"><b>Avec l'abonnement :</b> jusqu'à 10 projets de loi suivis (3 sans abonnement), 5 mots-clés, et les ministres et député·e·s de votre choix.</p>
+        </div>
+        <div class="promo-cote">
+        <!-- Martin, 21 sept. 2026 : dire, à côté du titre, que l'abonnement du provincial donne aussi
+             le suivi des villes. Seulement ce qui vaut pour les cinq : projets, rue ou quartier,
+             organismes (le détail de l'argent n'existe qu'à Québec, voir detail-argent-prototypes). -->
+        <div class="promo-villes">
+          <b class="promo-villes-titre" data-i18n="promo.villes.h">Aussi inclus : le suivi des villes</b>
+          <p data-i18n="promo.villes.p">Le même abonnement vous alerte aussi sur les décisions de <a href="/quebec/">Québec</a>, <a href="/montreal/">Montréal</a>, <a href="/levis/">Lévis</a>, <a href="/longueuil/">Longueuil</a> et <a href="/laval/">Laval</a> : les projets que vous suivez, votre rue, votre quartier, un organisme. Un seul abonnement, pas un par ville : vos 10 suivis se partagent entre projets de loi et projets des villes.</p>
         </div>
         <div class="promo-compte">
           <b class="promo-compte-titre" data-i18n="promo.compte.h">Votre compte</b>
@@ -266,6 +277,7 @@ function goToFederal(evt){
             <p class="promo-compte-note" id="promoNote">Pas de mot de passe : un lien de connexion arrive par courriel. Le compte gratuit suit jusqu'à 3 projets.</p>
           </div>
           <a class="promo-mes-dossiers" href="/mes-dossiers" data-i18n="promo.mesdossiers">Mes dossiers →</a>
+        </div>
         </div>
       </div>
     </div>
@@ -487,6 +499,7 @@ function goToFederal(evt){
         <a class="hero-cta" href="/abonnement?de=assemblee" data-i18n="promo.cta">Recevoir mes alertes — 10 $/mois</a>
         <span class="promo-prix" data-i18n="promo.prix">ou 96 $ par an · annulable en tout temps</span>
       </div>
+      <p class="promo-limites" data-i18n="promo.limites"><b>Avec l'abonnement :</b> jusqu'à 10 projets de loi suivis (3 sans abonnement), 5 mots-clés, et les ministres et député·e·s de votre choix.</p>
     </div>
 
     <!-- Titre de résultats (change avec le filtre actif) -->
