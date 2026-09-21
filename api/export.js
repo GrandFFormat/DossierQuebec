@@ -1,8 +1,11 @@
 // Le compteur d'exports du palier citoyen : 10 fichiers par mois civil, réservé aux abonnés.
 //
-//   GET  /api/export    → { limite: 10, faits, reste }   ce qu'il reste ce mois-ci
-//   POST /api/export    → { limite: 10, faits, reste }   réserve un export (à appeler AVANT de
+//   GET    /api/export  → { limite: 10, faits, reste }   ce qu'il reste ce mois-ci
+//   POST   /api/export  → { limite: 10, faits, reste }   réserve un export (à appeler AVANT de
 //                         fabriquer le fichier), corps { format: 'xlsx' | 'csv' | 'pdf' }
+//   DELETE /api/export  → { limite: 10, faits, reste }   rend la dernière réservation si le
+//                         fichier n'est jamais sorti (moins de 10 minutes) : on ne décompte pas
+//                         un export que le lecteur n'a pas eu
 //   Authorization: Bearer <jeton de session Supabase>
 //
 //   429 { erreur: 'limite atteinte', limite, faits, reste: 0, reprise } quand le mois est épuisé ;
@@ -71,7 +74,7 @@ async function faitsCeMois(userId, debut) {
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'private, no-store');
-  if (!['GET', 'POST'].includes(req.method)) return res.status(405).json({ erreur: 'méthode non permise' });
+  if (!['GET', 'POST', 'DELETE'].includes(req.method)) return res.status(405).json({ erreur: 'méthode non permise' });
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) return res.status(503).json({ erreur: 'service non configuré' });
 
   const jeton = (req.headers.authorization ?? '').replace(/^Bearer\s+/i, '') || null;
@@ -84,6 +87,19 @@ export default async function handler(req, res) {
 
   if (req.method === 'GET') {
     return res.status(200).json({ limite: LIMITE_MOIS, faits, reste: Math.max(0, LIMITE_MOIS - faits) });
+  }
+
+  // Rendre la dernière réservation : le navigateur l'appelle quand le fichier n'est jamais sorti
+  // (import raté, fenêtre fermée, panne en cours de route). Bornée à dix minutes et à la dernière
+  // ligne, pour qu'elle ne serve pas à effacer l'historique du mois.
+  if (req.method === 'DELETE') {
+    const recent = new Date(Date.now() - 10 * 60 * 1000).toISOString();
+    const r = await supabase(`/rest/v1/exports?user_id=eq.${qui.id}&created_at=gte.${encodeURIComponent(recent)}&select=id&order=created_at.desc&limit=1`);
+    const id = r.ok ? r.donnees?.[0]?.id : null;
+    if (!id) return res.status(200).json({ limite: LIMITE_MOIS, faits, reste: Math.max(0, LIMITE_MOIS - faits) });
+    const efface = await supabase(`/rest/v1/exports?id=eq.${id}`, { methode: 'DELETE', entetes: { Prefer: 'return=minimal' } });
+    const total = efface.ok ? Math.max(0, faits - 1) : faits;
+    return res.status(200).json({ limite: LIMITE_MOIS, faits: total, reste: Math.max(0, LIMITE_MOIS - total) });
   }
 
   if (faits >= LIMITE_MOIS) {

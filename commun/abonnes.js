@@ -216,11 +216,26 @@ document.addEventListener('click', async (e) => {
   if (erreur) {
     console.error(erreur);
     const plafond = limiteSuivis(erreur);
-    etoile.title = plafond === 3
-      ? tr('Limite atteinte : 3 projets suivis sans abonnement (10 avec)', 'Limit reached: 3 projects followed without a subscription (10 with)')
+    // Le message doit se LIRE : une infobulle ne s'affiche jamais au doigt, et l'aria-label posé
+    // par etatEtoile() masquerait un title mis à jour tout seul. On ouvre donc la fiche et on
+    // écrit dans sa zone, comme pour la connexion — d'autant que le plafond du compte gratuit est
+    // justement le moment où l'abonnement a quelque chose à offrir.
+    const texte = plafond === 3
+      ? tr('Limite atteinte : 3 projets suivis avec un compte gratuit. L’abonnement en donne 10.', 'Limit reached: 3 projects followed with a free account. The subscription raises it to 10.')
       : plafond
-        ? tr(`Limite atteinte : ${plafond} projets suivis`, `Limit reached: ${plafond} projects followed`)
+        ? tr(`Limite atteinte : ${plafond} projets suivis.`, `Limit reached: ${plafond} projects followed.`)
         : tr("Impossible d'enregistrer — réessayez", "Couldn't save — try again");
+    etoile.title = texte;
+    etoile.setAttribute('aria-label', texte);
+    if (plafond) {
+      await peupler(zone);
+      fiche.open = true;
+      const boite = zone.querySelector('.ab-connexion');
+      if (boite) {
+        boite.hidden = false;
+        boite.innerHTML = `<p class="ab-note" role="status">${echapper(texte)} <a class="ab-lien" href="/abonnement">${tr("Voir l'abonnement", 'See the subscription')}</a></p>`;
+      }
+    }
     return;
   }
   if (dejaSuivi) suivis.delete(cle(VILLE, cible.dossier));
