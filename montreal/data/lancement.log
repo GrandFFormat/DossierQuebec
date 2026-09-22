@@ -2,52 +2,10 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 70db4ee — Node v22.23.2
+Code : commit ff68a93 — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
-
-=== Élus de la Ville ===
-Source : https://donnees.montreal.ca/dataset/381d74ca-dadd-459f-95c9-db255b5f4480/resource/211f6903-1440-438a-9f6c-9718ecf2d3ee/download/liste_elus_montreal.csv (Liste des élu-es de la Ville de Montréal au 2 novembre 2025, modifié 2025-12-15T20:15:52.959031)
-Colonnes : Appellation | Prénom | Nom | Fonction élective | Fonctions additionnelles | Responsabilités CE | Arrondissement | District | Parti | Bureau | Téléphone | Courriel officiel | Historique des changements d'allégeance | Historique des fonctions terminées
-65 membres du conseil municipal (103 élus au total) écrits dans data/elus.json
-  Ensemble Montréal : 34
-  Projet Montréal : 25
-  Équipe LaSalle : 3
-  Équipe Anjou : 2
-  Équipe St-Léonard : 1
-
-=== Conseil d'agglomération ===
-Source : https://donnees.montreal.ca/dataset/da0e81ae-5a30-4919-9b89-ddf66a5e177b/resource/f0fa1aec-71fd-4c77-84e7-025f0bd8c410/download/liste_des-elus-es_aglomeration_elections_2-novembre_2025.csv (modifié 2025-12-15T20:18:51.406683)
-Colonnes : Appellation | Prénom | Nom | Fonction élective | Fonctions additionnelles | Arrondissement / Ville liée | District | Bureau | Téléphone | Courriel officiel | Historique des fonctions terminées
-(pour les Villes liées uniquement)
-
-30 membres écrits dans data/agglomeration.json
-  Montréal : 16
-  Baie-D'Urfé : 1
-  Beaconsfield : 1
-  Côte-Saint-Luc : 1
-  Dollard-Des Ormeaux : 1
-  Dorval : 1
-  Hampstead : 1
-  Kirkland : 1
-  Montréal-Est : 1
-  Montréal-Ouest : 1
-  Mont-Royal : 1
-  Pointe-Claire : 1
-  Sainte-Anne-de-Bellevue : 1
-  Senneville : 1
-  Westmount : 1
-⚠ 30 membres au lieu des 32 sièges attendus — vacance, ou jeu de données modifié.
-
-=== Districts électoraux ===
-Source : https://donnees.montreal.ca/dataset/70acec75-c2b4-4d26-a399-facc7b0ad9bf/resource/fa1f8cfc-cdbf-42fd-9979-32c16b68b5ca/download/districts-electoraux-2025.json (Districts électoraux 2025, modifié 2025-10-20T15:36:15.229218)
-Propriétés : NO_DISTRICT | CODE_DISTRICT | NOM_DISTRICT | NOM_ARR
-58 districts écrits dans data/districts.json
-Contours : 161343 points -> 4716 (6722 ko -> 118 ko)
-
-⚠ Écarts entre les deux sources de la Ville :
-  District « Est » : aucun élu de ville correspondant dans data/elus.json
 
 === robots.txt des sites de la Ville ===
 https://ville.montreal.qc.ca/robots.txt : règles sur nos chemins : allow /
@@ -55,7 +13,7 @@ https://donnees.montreal.ca/robots.txt : règles sur nos chemins : disallow /dat
 https://montreal.ca/robots.txt : rien qui concerne nos chemins
 
 === Calendrier des séances ===
-Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-09-20T23:30:56.069380)
+Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-09-21T23:30:51.883791)
 Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_video_seance
 71 séance(s) de 2026 lue(s) dans le calendrier.
 
@@ -63,18 +21,18 @@ Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_vide
 
 === Calendrier des séances d'arrondissement ===
 129 séance(s) de 2026 déjà connue(s).
-    Ahuntsic-Cartierville : 20 document(s) sur sa page, 0 daté(s) aujourd'hui, 8 date(s) de séance connues.
+    Ahuntsic-Cartierville : 22 document(s) sur sa page, 2 daté(s) aujourd'hui, 8 date(s) de séance connues.
     Ahuntsic-Cartierville : 7 ordre(s) du jour repris de sa page, sommaires compris.
-  Ahuntsic-Cartierville                       7 séance(s)  (83 requêtes)
+  Ahuntsic-Cartierville                       7 séance(s)  (85 requêtes)
     Anjou : 29 document(s) sur sa page, 0 daté(s) aujourd'hui, 10 date(s) de séance connues.
     Anjou : 8 ordre(s) du jour repris de sa page, sommaires compris.
   Anjou                                       8 séance(s)  (43 requêtes)
-  Côte-des-Neiges–Notre-Dame-de-Grâce         6 séance(s)  (236 requêtes)
+  Côte-des-Neiges–Notre-Dame-de-Grâce         6 séance(s)  (238 requêtes)
   Lachine                                     7 séance(s)  (82 requêtes)
   LaSalle                                     8 séance(s)  (41 requêtes)
   L'Île-Bizard–Sainte-Geneviève               7 séance(s)  (82 requêtes)
-  Mercier–Hochelaga-Maisonneuve               5 séance(s)  (160 requêtes)
-  Montréal-Nord                               5 séance(s)  (160 requêtes)
+  Mercier–Hochelaga-Maisonneuve               5 séance(s)  (161 requêtes)
+  Montréal-Nord                               5 séance(s)  (161 requêtes)
   Outremont                                   7 séance(s)  (82 requêtes)
     Pierrefonds-Roxboro : 29 document(s) sur sa page, 0 daté(s) aujourd'hui, 10 date(s) de séance connues.
     Pierrefonds-Roxboro : 8 ordre(s) du jour repris de sa page, sommaires compris.
@@ -84,16 +42,17 @@ Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_vide
   Rivière-des-Prairies–Pointe-aux-Trembles    7 séance(s)  (82 requêtes)
   Rosemont–La Petite-Patrie                   7 séance(s)  (82 requêtes)
   Saint-Laurent                               7 séance(s)  (84 requêtes)
-  Saint-Léonard                               6 séance(s)  (118 requêtes)
-  Le Sud-Ouest                                6 séance(s)  (118 requêtes)
+  Saint-Léonard                               6 séance(s)  (119 requêtes)
+  Le Sud-Ouest                                6 séance(s)  (119 requêtes)
   Verdun                                      6 séance(s)  (124 requêtes)
   Ville-Marie                                 7 séance(s)  (82 requêtes)
   Villeray–Saint-Michel–Parc-Extension        7 séance(s)  (82 requêtes)
 
-129 séance(s) d'arrondissement pour 2026, en 1785 requête(s).
+129 séance(s) d'arrondissement pour 2026, en 1793 requête(s).
 
 === Décisions de l'année ===
 129 séance(s) d'arrondissement au calendrier.
+CM_2026-09-22_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CM_2026-09-21_13h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-09-16_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-09-09_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -110,9 +69,9 @@ CM_2026-02-17_09h00 : procès-verbal non publié — pas un PDF — page « 404 
 CM_2026-01-27_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Ver_2026-04-07_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Out_2026-06-02_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Rpp_2026-06-08_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Ahu_2026-07-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Rpp_2026-07-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Rpp_2026-06-08_19h00 : 19 pages, 36 résolutions, 0 points à l'ordre du jour, 33 liens vers un sommaire, 33 sommaires annexés à l'ordre du jour
+CA_Ahu_2026-07-06_19h00 : 26 pages, 44 résolutions, 49 points à l'ordre du jour, 0 liens vers un sommaire
+CA_Rpp_2026-07-06_19h00 : 15 pages, 26 résolutions, 0 points à l'ordre du jour, 23 liens vers un sommaire, 23 sommaires annexés à l'ordre du jour
 CA_Out_2026-07-07_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Anj_2026-09-01_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Ibs_2026-09-01_19h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -129,48 +88,48 @@ CA_Ahu_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 
 CA_Las_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Pir_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 
-5806 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 34 en attente de procès-verbal.
-0 nouveauté(s) depuis la dernière exécution.
+5918 décisions écrites dans data/decisions.json — 3 séance(s) lue(s) cette fois, 32 en attente de procès-verbal.
+74 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
-   1046  Procédure
-    783  Urbanisme
-    731  Transport
-    430  Environnement
-    385  Administration
-    376  Contrats
-    301  Loisirs et communauté
-    244  Culture et patrimoine
-    237  Subventions
-    207  Immobilier
-    192  Motions et hommages
-    191  Finances
-    184  Développement économique
-    178  Travaux et infrastructures
+   1068  Procédure
+    804  Urbanisme
+    750  Transport
+    438  Environnement
+    389  Administration
+    381  Contrats
+    305  Loisirs et communauté
+    250  Culture et patrimoine
+    240  Subventions
+    210  Immobilier
+    195  Finances
+    195  Motions et hommages
+    187  Développement économique
+    184  Travaux et infrastructures
     153  Logement et social
      87  Sécurité publique
-     81  Ressources humaines
-    182  (classées par défaut — aucune règle n'a tranché)
+     82  Ressources humaines
+    183  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes enregistrés (depuis 2026-07-23) ===
-Fenêtre depuis 2026-07-23 : 0 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
+=== Votes enregistrés (depuis 2026-07-24) ===
+Fenêtre depuis 2026-07-24 : 0 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
 
 14 votes enregistrés écrits dans data/votes.json (0 procès-verbaux analysés).
 1 portent un avertissement d'extraction (à vérifier à la main).
 
 === Lexique, mesuré sur les procès-verbaux ===
-Mesure de 33 termes sur 145 procès-verbaux de 2026 en cache et 5806 décisions…
+Mesure de 33 termes sur 148 procès-verbaux de 2026 en cache et 5918 décisions…
 
-    85 PV    2886 résolutions   Résolution
-    61 PV     395 résolutions   Sommaire décisionnel
-   145 PV    4809 résolutions   Dossier décisionnel
-   145 PV     383 résolutions   Procès-verbal
-   145 PV     587 résolutions   Ordre du jour
-   114 PV     410 résolutions   Avis de motion
-    65 PV     185 résolutions   Règlement
-    86 PV     979 résolutions   Conseil municipal
-    61 PV    1101 résolutions   Comité exécutif
-   129 PV    1976 résolutions   Conseil d'arrondissement
+    88 PV    2990 résolutions   Résolution
+    62 PV     396 résolutions   Sommaire décisionnel
+   148 PV    4905 résolutions   Dossier décisionnel
+   148 PV     386 résolutions   Procès-verbal
+   148 PV     593 résolutions   Ordre du jour
+   117 PV     420 résolutions   Avis de motion
+    67 PV     188 résolutions   Règlement
+    87 PV     980 résolutions   Conseil municipal
+    62 PV    1102 résolutions   Comité exécutif
+   132 PV    2037 résolutions   Conseil d'arrondissement
     72 PV      75 résolutions   Conseiller d'arrondissement
     43 PV     128 résolutions   Greffier
     22 PV     135 résolutions   Présidence du conseil
@@ -178,73 +137,120 @@ Mesure de 33 termes sur 145 procès-verbaux de 2026 en cache et 5806 décisions�
     19 PV      27 résolutions   Ville liée
      6 PV       9 résolutions   Compétence d'agglomération
     18 PV     105 résolutions   Vote enregistré
-   118 PV    4398 résolutions   Adoptée à l'unanimité
+   121 PV    4502 résolutions   Adoptée à l'unanimité
     20 PV      32 résolutions   Adoptée à la majorité des voix
      7 PV       8 résolutions   Dissidence
-    87 PV     195 résolutions   Prise d’acte
-    42 PV      78 résolutions   Mairesse suppléante
-    70 PV     124 résolutions   Dérogation mineure
+    90 PV     200 résolutions   Prise d’acte
+    45 PV      81 résolutions   Mairesse suppléante
+    71 PV     126 résolutions   Dérogation mineure
     48 PV      85 résolutions   Projet particulier
      3 PV       3 résolutions   Article 89
-    76 PV     247 résolutions   Zonage
-    53 PV     250 résolutions   Accorder un contrat
-   125 PV     646 résolutions   Appel d'offres
-    40 PV     128 résolutions   Gré à gré
-   118 PV     497 résolutions   Contribution financière
-    36 PV      60 résolutions   Programme décennal d'immobilisations
-    34 PV      70 résolutions   Règlement d'emprunt
+    77 PV     249 résolutions   Zonage
+    55 PV     254 résolutions   Accorder un contrat
+   128 PV     653 résolutions   Appel d'offres
+    43 PV     132 résolutions   Gré à gré
+   121 PV     514 résolutions   Contribution financière
+    37 PV      61 résolutions   Programme décennal d'immobilisations
+    35 PV      71 résolutions   Règlement d'emprunt
      9 PV      13 résolutions   Expropriation
 
 33 entrées écrites dans data/lexique.json
 
 === Récapitulatifs des sujets suivables ===
-Récapitulatifs des sujets : rien de nouveau.
+Récapitulatifs des sujets : louvain-est (12 dossiers), securite-publique (43 dossiers), plan-urbanisme (17 dossiers), itinerance (26 dossiers), deneigement (22 dossiers)
+  louvain-est              6 étape(s), 5 à surveiller · retirés : 0 mécanique, 2 contre-lecture
+  securite-publique        3 étape(s), 4 à surveiller · retirés : 0 mécanique, 3 contre-lecture
+  plan-urbanisme           6 étape(s), 4 à surveiller · retirés : 0 mécanique, 1 contre-lecture
+  itinerance               5 étape(s), 2 à surveiller · retirés : 0 mécanique, 1 contre-lecture
+  deneigement              5 étape(s), 5 à surveiller · retirés : 0 mécanique, 3 contre-lecture
+  coût ≈ 2.14 $ US
 
 === Sujets suivables et dossiers, pour Mes dossiers ===
-Projets publics : 16 sujets · index 15.3 Ko · fichiers de sujet 660 Ko au total.
-Décisions récentes : 537 dossiers depuis le 2026-06-20 · 750 Ko.
-Dossiers de l'année : 4554 · 2637 Ko · organismes suggérés : 449.
+Projets publics : 16 sujets · index 15.4 Ko · fichiers de sujet 666 Ko au total.
+Décisions récentes : 607 dossiers depuis le 2026-06-20 · 864 Ko.
+Dossiers de l'année : 4648 · 2694 Ko · organismes suggérés : 457.
 
 === Sujets suivables en anglais ===
-Sujets en anglais : 0 déjà traduits, 16 à faire — ~0.26 $ US estimés.
-Sujets en anglais : 16 traduits (0 refusés), 16 au total — 0.29 $ US.
+Sujets en anglais : 0 déjà traduits, 16 à faire — ~0.27 $ US estimés.
+Sujets en anglais : 16 traduits (0 refusés), 16 au total — 0.30 $ US.
 
 === Lexique en anglais ===
 Lexique anglais : à jour.
 
 === Traductions anglaises ===
 Résumés : 3753 déjà traduits, 0 à faire, 0 cette fois.
-Titres  : 5433 déjà traduits, 23 à faire, 23 cette fois en 2 paquet(s).
-Étiquettes : 1022 déjà traduites, 1 à faire en 1 paquet(s).
-~0.03 $ US estimés (lot, moitié prix).
-Lot msgbatch_011DQCRgAvFvn4YASuwDmvFh envoyé (0 résumés, 2 paquets de titres, 1 paquets d'étiquettes).
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  ended — 3 réussis, 0 en cours, 0 en erreur
-Traductions : 0 résumés et 2 titres et 0 étiquettes faits (22 refusés ou en échec) — 3753 résumés et 5435 titres au total, 0.03 $ US.
-  ⚠ titre CE26 0008 : nombres différents
+Titres  : 5435 déjà traduits, 127 à faire, 127 cette fois en 7 paquet(s).
+Étiquettes : 1022 déjà traduites, 31 à faire en 2 paquet(s).
+~0.10 $ US estimés (lot, moitié prix).
+Lot msgbatch_017g2JU7gnupcqm66uxvw5cq envoyé (0 résumés, 7 paquets de titres, 2 paquets d'étiquettes).
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  in_progress — 0 réussis, 9 en cours, 0 en erreur
+  ended — 9 réussis, 0 en cours, 0 en erreur
+Traductions : 0 résumés et 105 titres et 9 étiquettes faits (44 refusés ou en échec) — 3753 résumés et 5540 titres au total, 0.11 $ US.
+  ⚠ titre CA26 26 0095 : nombres différents
   ⚠ étiquette « Autoriser le transfert de 14/036,01/$, t » refusée
-  ⚠ titre CA26 28 084 : nombres différents
-  ⚠ titre CA26 25 0167 : nombres différents
-  ⚠ titre CE26 0772 : nombres différents
-  ⚠ titre CE26 0778 : nombres différents
-  ⚠ titre CA26 09 0110 : nombres différents
-  ⚠ titre CE26 0472 : nombres différents
-  ⚠ titre CA26 12047 : nombres différents
-  ⚠ titre CE26 0286 : nombres différents
-  ⚠ titre CE26 0289 : nombres différents
-  ⚠ titre CE26 0294 : nombres différents
-  ⚠ titre CE26 0300 : nombres différents
-  ⚠ titre CE26 0307 : nombres différents
-  ⚠ titre CG26 0105 : nombres différents
+  ⚠ étiquette « Adopter l'ordre du jour de la séance du  » refusée
+  ⚠ étiquette « Approuver le procès-verbal de la séance  » refusée
+  ⚠ étiquette « Accorder un contrat de gré à gré à 3087- » refusée
+  ⚠ étiquette « Accorder un soutien financier non récurr » refusée
+  ⚠ étiquette « Accorder un soutien financier totalisant » refusée
+  ⚠ étiquette « Accorder un soutien financier non récurr » refusée
+  ⚠ étiquette « Accorder un soutien financier non récurr » refusée
+  ⚠ étiquette « Accorder un soutien financier totalisant » refusée
+  ⚠ étiquette « Accorder un soutien financier non récurr » refusée
+  ⚠ étiquette « Accorder un soutien financier non récurr » refusée
+  ⚠ étiquette « Accorder un soutien financier non récurr » refusée
+  ⚠ étiquette « Affecter un montant de 75 000 $, taxes i » refusée
+  ⚠ étiquette « Octroyer un don à l'organisme Les Amis d » refusée
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-23 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-07-24 pas encore résumés (plafond : 120)…
 7871 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
 === Bilan ===
-  étapes         : 16
+  étapes         : 13
   échecs         : aucun
   avertissements : aucun
