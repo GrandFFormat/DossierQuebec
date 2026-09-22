@@ -2919,21 +2919,36 @@ function tauxPresence(){
     .filter(r => typeof r === 'number')
     .sort((a, b) => a - b);
   if(!taux.length) return null;   // données pas encore là : on ne garde rien en mémoire
-  const milieu = Math.floor(taux.length / 2);
-  const mediane = taux.length % 2 ? taux[milieu] : Math.round((taux[milieu - 1] + taux[milieu]) / 2);
-  return (_tauxPresence = { taux, min: taux[0], max: taux[taux.length - 1], mediane });
+  const medianeDe = (a) => { const m = Math.floor(a.length / 2); return a.length % 2 ? a[m] : Math.round((a[m - 1] + a[m]) / 2); };
+  const mediane = medianeDe(taux);
+  // Le second seuil : la médiane de ceux qui sont sous la médiane de l'Assemblée (Martin : « médiane
+  // jaune et plus » en jaune, « médiane jaune et moins » sans couleur).
+  const sous = taux.filter(r => r < mediane);
+  const medianeJaune = sous.length ? medianeDe(sous) : mediane;
+  return (_tauxPresence = { taux, min: taux[0], max: taux[taux.length - 1], mediane, medianeJaune });
 }
-// Le pourcentage d'un élu dans une pastille verte (médiane ou plus) ou jaune (sous la médiane).
-// Pas de rouge : un vote manqué n'en dit pas la raison. Sans médiane connue, le chiffre seul.
+// Trois groupes, tous calculés à partir des données (Martin, 22 sept. 2026) :
+//   vert          à la médiane de l'Assemblée ou au-dessus ;
+//   jaune         sous elle, mais à la médiane de ce groupe-là ou au-dessus ;
+//   sans couleur  sous la médiane du jaune — une pastille neutre, pas de rouge : un vote manqué
+//                 n'en dit pas la raison.
+// Sans médiane connue, le chiffre seul.
+function groupePresence(rate){
+  const t = tauxPresence();
+  if(!t || typeof rate !== 'number') return null;
+  return rate >= t.mediane ? 'haute' : rate >= t.medianeJaune ? 'moyenne' : 'neutre';
+}
 function pastillePresence(rate, isEn){
   const texte = isEn ? `${rate}%` : `${rate} %`;
+  const groupe = groupePresence(rate);
+  if(!groupe) return texte;
   const t = tauxPresence();
-  if(!t || typeof rate !== 'number') return texte;
-  const haute = rate >= t.mediane;
-  const titre = haute
-    ? (isEn ? `At or above the Assembly's median (${t.mediane}%)` : `À la médiane de l'Assemblée (${t.mediane} %) ou au-dessus`)
-    : (isEn ? `Below the Assembly's median (${t.mediane}%)` : `Sous la médiane de l'Assemblée (${t.mediane} %)`);
-  return `<span class="presence-pastille ${haute ? 'presence-haute' : 'presence-basse'}" title="${titre}">${texte}</span>`;
+  const titre = {
+    haute: isEn ? `At or above the Assembly's median (${t.mediane}%)` : `À la médiane de l'Assemblée (${t.mediane} %) ou au-dessus`,
+    moyenne: isEn ? `Below the Assembly's median (${t.mediane}%), at or above ${t.medianeJaune}%` : `Sous la médiane de l'Assemblée (${t.mediane} %), à ${t.medianeJaune} % ou plus`,
+    neutre: isEn ? `Below ${t.medianeJaune}%` : `Sous ${t.medianeJaune} %`,
+  }[groupe];
+  return `<span class="presence-pastille presence-${groupe}" title="${titre}">${texte}</span>`;
 }
 
 function renderLegendePresence(){
@@ -2942,25 +2957,27 @@ function renderLegendePresence(){
   const isEn = currentLang === 'en';
   const t = tauxPresence();
   if(!t){ boite.innerHTML = ''; return; }
-  const { taux, min, max, mediane } = t;
+  const { taux, min, max, mediane, medianeJaune } = t;
   const pct = (n) => isEn ? `${n}%` : `${n} %`;
-  // Combien d'élu·e·s dans chaque couleur (même règle que pastillePresence).
-  const nbVert = taux.filter(r => r >= mediane).length;
-  const nbJaune = taux.length - nbVert;
+  // Combien d'élu·e·s dans chaque groupe (même règle que les pastilles : groupePresence).
+  const nbVert = taux.filter(r => groupePresence(r) === 'haute').length;
+  const nbJaune = taux.filter(r => groupePresence(r) === 'moyenne').length;
+  const nbNeutre = taux.length - nbVert - nbJaune;
   // L'étiquette de la médiane, au-dessus de la barre, ancrée du côté où il y a de la place
   // (à 86 %, centrée, elle débordait à droite sur téléphone).
   const ancre = mediane > 60 ? 'droite' : mediane < 40 ? 'gauche' : 'centre';
   boite.innerHTML = `
     <div class="lp-repere-ligne" aria-hidden="true"><span class="lp-repere lp-ancre-${ancre}" style="left:${mediane}%">${isEn ? 'median' : 'médiane'} ${pct(mediane)}</span></div>
-    <div class="lp-barre" aria-hidden="true" style="--mediane:${mediane}%">
+    <div class="lp-barre" aria-hidden="true" style="--mediane:${mediane}%; --mediane-jaune:${medianeJaune}%">
       <span class="lp-mediane" style="left:${mediane}%"></span>
+      <span class="lp-mediane lp-mediane-jaune" style="left:${medianeJaune}%"></span>
     </div>
     <div class="lp-bornes" aria-hidden="true"><span>${pct(0)}</span><span>${pct(100)}</span></div>
-    <p class="lp-couleurs">
-      <span class="presence-pastille presence-haute">${isEn ? 'Green' : 'Vert'} (${nbVert})</span> ${isEn ? `at or above the median (${pct(mediane)})` : `à la médiane (${pct(mediane)}) ou au-dessus`}
-      <span class="lp-sep" aria-hidden="true">·</span>
-      <span class="presence-pastille presence-basse">${isEn ? 'Yellow' : 'Jaune'} (${nbJaune})</span> ${isEn ? 'below the median' : 'sous la médiane'}
-    </p>
+    <ul class="lp-groupes">
+      <li><span class="presence-pastille presence-haute">${isEn ? 'Green' : 'Vert'} (${nbVert})</span> ${isEn ? `${pct(mediane)} or more — the Assembly's median` : `${pct(mediane)} et plus — la médiane de l'Assemblée`}</li>
+      <li><span class="presence-pastille presence-moyenne">${isEn ? 'Yellow' : 'Jaune'} (${nbJaune})</span> ${isEn ? `${pct(medianeJaune)} to ${pct(mediane - 1)} — ${pct(medianeJaune)} is the median of those below ${pct(mediane)}` : `de ${pct(medianeJaune)} à ${pct(mediane - 1)} — ${pct(medianeJaune)} est la médiane des élu·e·s sous ${pct(mediane)}`}</li>
+      <li><span class="presence-pastille presence-neutre">${isEn ? 'No colour' : 'Sans couleur'} (${nbNeutre})</span> ${isEn ? `below ${pct(medianeJaune)}` : `moins de ${pct(medianeJaune)}`}</li>
+    </ul>
     <p class="lp-legende-chiffres">${isEn
       ? `Across the ${taux.length} members counted: from ${pct(min)} to ${pct(max)}; half are at ${pct(mediane)} or more.`
       : `Chez les ${taux.length} élu·e·s comptés : de ${pct(min)} à ${pct(max)} ; la moitié est à ${pct(mediane)} ou plus.`}</p>`;
