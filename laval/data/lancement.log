@@ -3,7 +3,7 @@
 > node scripts/refresh.js
 
 Résumés : sautés : étape payante, à demander explicitement (--avec-resumes, ou LAV_RESUMES=oui dans le workflow).
-Code : commit 1dbb516 — Node v22.23.2
+Code : commit b650fd5 — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -41,41 +41,14 @@ Pastilles thématiques :
       0  (classées par défaut — aucune règle n'a tranché)
 (0 s)
 
-=== Votes nominaux (depuis 2026-07-23) ===
+=== Votes nominaux (depuis 2026-07-24) ===
 CM-20260901-ORD-18h30 : 12 vote(s) nominal(aux)
 CM-20260811-ORD-18h30 : 5 vote(s) nominal(aux)
-Fenêtre depuis 2026-07-23 : 16 séance(s) relue(s), 29 vote(s) conservé(s) du fichier précédent.
+Fenêtre depuis 2026-07-24 : 16 séance(s) relue(s), 29 vote(s) conservé(s) du fichier précédent.
 
 46 votes nominaux écrits dans data/votes.json (16 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
 (0 s)
-
-=== Districts électoraux (Données Québec) ===
-22 districts écrits dans data/districts.json (jeu mis à jour le 2026-05-20).
-Contours : 8089 points -> 1162 (359 ko -> 31 ko)
-
-⚠ Écarts entre les deux sources de la Ville (consignés, rien d'écrasé) :
-  District 9 (Saint-Bruno) : « Davis De Cotis » dans le GeoJSON, « David De Cotis » sur la page des élus — la page fait foi
-  District 3 (Duvernay) : téléphone « 514 827-3093 » dans le GeoJSON, « 450 341-3093 » sur la page des élus — la page fait foi
-(1 s)
-
-=== Élus de la Ville ===
-laval.ca refuse le robot (HTTP 403 sur https://www.laval.ca/vie-democratique/hotel-de-ville-personnes-elues/membres-conseil-municipal/) : lecture de la capture.
-23 membres du conseil municipal écrits dans data/elus.json (capture manuelle dans un navigateur, 17 sept. 2026).
-Partis : Mouvement lavallois 17 · Action Laval 2 · Parti Laval 2 · Indépendante 1
-Comité exécutif : Stéphane Boyer (Président du comité exécutif) ; Christine Poirier (Membre du comité exécutif) ; Ray Khalil (Vice-président du comité exécutif) ; Nicholas Borne (Membre du comité exécutif) ; Flavia Alexandra Novac (Membre du comité exécutif) — d'après CE-20260909-PUB-09h00
-(0 s)
-
-=== Présences aux séances (Données Québec) ===
-6008 lignes lues (2016-01-12 -> 2025-11-18, jeu modifié le 2026-09-04) ; data/presences.json écrit.
-2026 : 0 séance(s), 0 personne(s), 0 ligne(s)
-  ⚠ Le jeu ne couvre aucune séance de 2026 (dernière séance couverte : 2025-11-18).
-2025 : 40 séance(s), 29 personne(s), 420 ligne(s) ; 22 jointes à la page des élus
-  ⚠ 2025-05-20 : 22 séance(s) « extraordinaire » avec 22 heure(s) différente(s) (17 h 30 … 38 h 30), 15 invalide(s) ; 22 ligne(s) au total — compté tel que le jeu l'écrit, à vérifier auprès de la Ville
-  ⚠ Noms absents de la page des élus (data/elus.json), sans district joint : Mohammed Bâ (2 séances, jusqu'au 2025-11-18) ; Sandra Desmeules (17 séances, jusqu'au 2025-10-01) ; Alexandre Warnet (17 séances, jusqu'au 2025-10-01) ; Achille Cifelli (17 séances, jusqu'au 2025-10-01) ; Paolo Galati (17 séances, jusqu'au 2025-10-01) ; Jocelyne Frédéric-Gauthier (17 séances, jusqu'au 2025-10-01) ; Claude Larochelle (17 séances, jusqu'au 2025-10-01)
-Statuts bruts : « présent » 3572 · « present » 1428 · « absent » 675 · « présente » 217 · « absente » 62 · « presente » 38 · « vacant » 7 · « présnet » 4 · « absent  » 1 · « adsent » 1 · « asbent » 1 · « présete » 1 · « prsente » 1
-⚠ Le jeu s'arrête au 2025-11-18 : aucune séance de 2026 encore publiée (mise à jour annoncée mensuelle, jeu modifié le 2026-09-04).
-(1 s)
 
 === Lexique, mesuré sur les procès-verbaux ===
 Mesure de 49 termes sur 87 procès-verbaux de 2026 (12 conseil municipal, 75 comité exécutif) et 2892 décisions…
@@ -137,15 +110,15 @@ Mesure de 49 termes sur 87 procès-verbaux de 2026 (12 conseil municipal, 75 com
 
 === Sommaires décisionnels (120 par jour au plus) ===
 511 sommaire(s) publié(s) cité(s) par les décisions de 2026 ; 1027 cité(s) mais non publié(s).
-240 déjà en cache, 0 réextrait(s) du cache, 271 à télécharger (au plus 120 cette fois).
+360 déjà en cache, 0 réextrait(s) du cache, 151 à télécharger (au plus 120 cette fois).
   … 25/120 (15 s)
-  … 50/120 (29 s)
-  … 75/120 (44 s)
-  … 100/120 (59 s)
+  … 50/120 (30 s)
+  … 75/120 (45 s)
+  … 100/120 (60 s)
 
-120 sommaire(s) téléchargé(s) et lu(s) en 71 s, 0 introuvable(s), 0 échec(s) ; 511 sommaires dans data/sommaires.json.
+120 sommaire(s) téléchargé(s) et lu(s) en 72 s, 0 introuvable(s), 0 échec(s) ; 511 sommaires dans data/sommaires.json.
 Champs lus : 511 avec un service, 428 avec des districts, 235 avec un montant sûr, 242 avec un bloc contrat, 41 avec un bloc règlement, 0 avec au moins un avertissement.
-151 sommaire(s) attendent la prochaine exécution.
+31 sommaire(s) attendent la prochaine exécution.
 (72 s)
 
 === Fichiers pour « Mes dossiers » ===
@@ -155,6 +128,6 @@ Décisions récentes : 298 dossiers depuis le 2026-07-26 · 198 Ko.
 (0 s)
 
 === Bilan ===
-  étapes         : 10
+  étapes         : 7
   échecs         : aucun
   avertissements : aucun
