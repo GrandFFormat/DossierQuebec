@@ -311,6 +311,7 @@ const translations = {
     'lp.formule':"<b>88%</b>: out of 100 recorded votes held since their first vote of the legislature, the person voted in 88 — yea, nay or abstention, whichever way.",
     'lp.debut':"The count starts at each person's first vote: someone elected mid-term is not counted absent from votes held before they arrived.",
     'lp.pres':"<b>—</b>: the Assembly's President* and its three Vice-Presidents. To stay neutral, they vote little or not at all: a low rate would not mean they were absent.",
+    'lp.aster2':"** Updated every morning: the site rereads the Assembly's register of votes and recalculates each person's rate, then the median, the colours and the numbers above. A vote held one day shows up the next; during the dissolution, nothing changes.",
     'lp.aster':"* The Assembly's President is not the same as the Premier: the President runs the debates and stays neutral, while the Premier heads the government and votes like the other members. <a href=\"/lexique#role-presidence\">See the Assembly's presidency in the Glossary →</a>",
     'lp.nd':"<b>n/a</b>: no recorded vote for this person.",
     'lp.officiel':"This is not an official measure: the Assembly does not publish attendance, and a missed vote does not tell why.",
@@ -2979,8 +2980,8 @@ function renderLegendePresence(){
       <li><span class="presence-pastille presence-neutre">${isEn ? 'No colour' : 'Sans couleur'} (${nbNeutre})</span> ${isEn ? `below ${pct(medianeJaune)}` : `moins de ${pct(medianeJaune)}`}</li>
     </ul>
     <p class="lp-legende-chiffres">${isEn
-      ? `Across the ${taux.length} members counted: from ${pct(min)} to ${pct(max)}; half are at ${pct(mediane)} or more.`
-      : `Chez les ${taux.length} élu·e·s comptés : de ${pct(min)} à ${pct(max)} ; la moitié est à ${pct(mediane)} ou plus.`}</p>`;
+      ? `Across the ${taux.length} members counted: from ${pct(min)} to ${pct(max)}; half are at ${pct(mediane)} or more.**`
+      : `Chez les ${taux.length} élu·e·s comptés : de ${pct(min)} à ${pct(max)} ; la moitié est à ${pct(mediane)} ou plus.**`}</p>`;
 }
 
 function attendanceForAssnatId(assnatId){
