@@ -4,7 +4,7 @@
 // langue×sorte = un envoi distinct. Québec : cases plates, FR seulement.
 
 import { session, mesurer, echapper, tr } from './abonnes-client.js';
-import { dernierVolet } from './navigation.js';
+import { dernierVolet, vientDuProvincial } from './navigation.js';
 
 const ICONES = { mensuel: '🗓️', conseil: '🏛️', arrondissement: '📍' };
 
@@ -302,17 +302,35 @@ export async function boiteInfolettre(zone, s, { premiereLigne = null } = {}) {
   etat ??= { villes: [], inscriptions: {}, courriel: s.user?.email ?? '' };
   const volet = dernierVolet();
   const villesIci = etat.villes.filter((v) => v.cle === volet);
-  const villes = villesIci.length ? villesIci : etat.villes;
+  // Venu du site provincial (« ce qui est sur DQ reste sur DQ », 22 sept. 2026) : aucune ville
+  // n'est « la sienne ». On garde en vue les villes où la personne est déjà inscrite ; les autres
+  // passent dans un menu replié, au lieu de tout déplier (Montréal s'ouvrait sur « 1. Langues »).
+  const dq = vientDuProvincial();
+  const aDesInscriptions = (v) => Object.entries(etat.inscriptions ?? {}).some(([cle, statut]) => statut && cle.startsWith(`${v.cle}:`));
+  const villes = villesIci.length ? villesIci : dq ? etat.villes.filter(aDesInscriptions) : etat.villes;
+  const villesRepliees = !villesIci.length && dq ? etat.villes.filter((v) => !aDesInscriptions(v)) : [];
   const titreBoite = villesIci.length
     ? tr(`Mes courriels de ${echapper(villesIci[0].nom)}`, `My ${echapper(villesIci[0].nom)} emails`)
     : tr('Mes courriels', 'My emails');
+  const blocVille = (v, plusieurs) => `${plusieurs ? `<h3 class="ab-sous-titre">${echapper(v.nom)}</h3>` : ''}${noteDe(v)}${listePourVille(etat, v, { cocherSuivis: true, retirable: true, mode: 'boite' })}`;
 
   const dessiner = (message = '') => {
+    // Le menu replié garde son état quand la boîte se redessine (chaque case enregistre et redessine).
+    const ouvert = zone.querySelector('details.ab-courriels-villes')?.open ? ' open' : '';
     zone.innerHTML = `<section class="ab-carte ab-infolettre-boite">
       <h2 style="margin-top:0">📬 ${titreBoite}</h2>
-      <p class="ab-chapeau" style="margin-bottom:12px">${tr('Cochez ce que vous voulez recevoir. Pour Montréal : langues, lettres de la Ville, puis arrondissements. Chaque changement s’enregistre tout de suite.', 'Check what you want to receive. For Montréal: languages, city letters, then boroughs. Each change is saved right away.')}</p>
+      <p class="ab-chapeau" style="margin-bottom:12px">${dq && !villesIci.length
+        ? tr('Cochez ce que vous voulez recevoir. Chaque changement s’enregistre tout de suite.', 'Check what you want to receive. Each change is saved right away.')
+        : tr('Cochez ce que vous voulez recevoir. Pour Montréal : langues, lettres de la Ville, puis arrondissements. Chaque changement s’enregistre tout de suite.', 'Check what you want to receive. For Montréal: languages, city letters, then boroughs. Each change is saved right away.')}</p>
       ${premiereLigne?.html ?? ''}
-      ${villes.map((v) => `${villes.length > 1 ? `<h3 class="ab-sous-titre">${echapper(v.nom)}</h3>` : ''}${noteDe(v)}${listePourVille(etat, v, { cocherSuivis: true, retirable: true, mode: 'boite' })}`).join('')}
+      ${villes.map((v) => blocVille(v, villes.length > 1 || villesRepliees.length > 0)).join('')}
+      ${villesRepliees.length ? `<details class="ab-pliable ab-courriels-villes"${ouvert}>
+        <summary><h3 class="ab-sous-titre" style="margin:0">${tr('Courriels des villes', 'City emails')}</h3><span class="ab-etiquette">${villesRepliees.length}</span></summary>
+        <div class="ab-pliable-corps">
+          <p class="ab-note" style="margin-top:6px">${tr('Les comptes rendus des conseils municipaux, ville par ville. Pour Montréal : langues, lettres de la Ville, puis arrondissements.', 'City council recaps, city by city. For Montréal: languages, city letters, then boroughs.')}</p>
+          ${villesRepliees.map((v) => blocVille(v, true)).join('')}
+        </div>
+      </details>` : ''}
       <p class="ab-note" aria-live="polite">${message || tr(`Envoyé à ${echapper(etat.courriel ?? '')}.`, `Sent to ${echapper(etat.courriel ?? '')}.`)}</p>
     </section>`;
     premiereLigne?.cabler?.(zone);
