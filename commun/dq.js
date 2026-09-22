@@ -1760,7 +1760,7 @@ function renderDeputes(filter){
         const att = attendanceForAssnatId(d.assnatId);
         const presidingNote = presidingRoleNote(d.name, isEn);
         const attNote = presidingNote ? presidingNote : att
-          ? (isEn ? `attendance: ${att.rate}%` : `présence : ${att.rate} %`)
+          ? `${isEn ? 'attendance:' : 'présence :'} ${pastillePresence(att.rate, isEn)}`
           : (isEn ? 'attendance: n/a' : 'présence : n/d');
         return `
         <div class="dep-row">
@@ -1818,7 +1818,7 @@ function personCard(p){
   const dep = isMin ? resolveDepute(name) : p.d;
   const riding = dep ? dep.riding : (isEn ? 'n/a' : 'n/d');
   const presidingShort = presidingNote ? '—' : null;
-  const attShort = presidingShort ? presidingShort : (p.att ? `${p.att.rate} %` : (isEn ? 'n/a' : 'n/d'));
+  const attShort = presidingShort ? presidingShort : (p.att ? pastillePresence(p.att.rate, isEn) : (isEn ? 'n/a' : 'n/d'));
   const plCount = billsSponsoredBy(name).length;
   const labels = isEn
     ? { riding:'Riding', att:'Vote attendance', bills:'Bills sponsored' }
@@ -2020,7 +2020,7 @@ function renderComparateurTable(){
   const billsB = billsSponsoredBy(nameB);
 
   // Valeurs concises comme la maquette (pas de listes de titres qui débordent).
-  const attCell = (att, pres) => pres ? '—' : (att ? `${att.rate} %` : (isEn ? 'n/a' : 'n/d'));
+  const attCell = (att, pres) => pres ? '—' : (att ? pastillePresence(att.rate, isEn) : (isEn ? 'n/a' : 'n/d'));
   const rows = [
     [isEn?'Portfolio':'Portefeuille', isEn?(mA.roleEn||mA.role):mA.role, isEn?(mB.roleEn||mB.role):mB.role],
     [isEn?'Party':'Parti', mA.party, mB.party],
@@ -2907,30 +2907,57 @@ function presidingRoleNote(name, isEn){
 // une échelle 0-100 % avec l'étendue réelle et la médiane, calculées ici à partir de `presences`.
 // La présidence et les vice-présidences sont laissées de côté (elles ne votent pas en présidant).
 // Pas de couleur de jugement : des faits, pour situer un chiffre, rien de plus.
-function renderLegendePresence(){
-  const boite = document.getElementById('lpEchelle');
-  if(!boite) return;
-  const isEn = currentLang === 'en';
+// Les taux de l'Assemblée, présidence exclue, et leur médiane : calculés une fois, partagés par la
+// légende et par la couleur de chaque élu (vert à la médiane ou au-dessus, jaune en dessous —
+// Martin, 22 sept. 2026). Le seuil suit donc les données, sans chiffre fixé à la main.
+let _tauxPresence = null;
+function tauxPresence(){
+  if(_tauxPresence) return _tauxPresence;
   const taux = (typeof deputesRaw !== 'undefined' ? deputesRaw : [])
     .filter(d => !presidingRoleNote(d[0], false))
     .map(d => attendanceForAssnatId(d[4])?.rate)
     .filter(r => typeof r === 'number')
     .sort((a, b) => a - b);
-  if(!taux.length){ boite.innerHTML = ''; return; }
-  const min = taux[0], max = taux[taux.length - 1];
+  if(!taux.length) return null;   // données pas encore là : on ne garde rien en mémoire
   const milieu = Math.floor(taux.length / 2);
   const mediane = taux.length % 2 ? taux[milieu] : Math.round((taux[milieu - 1] + taux[milieu]) / 2);
+  return (_tauxPresence = { taux, min: taux[0], max: taux[taux.length - 1], mediane });
+}
+// Le pourcentage d'un élu dans une pastille verte (médiane ou plus) ou jaune (sous la médiane).
+// Pas de rouge : un vote manqué n'en dit pas la raison. Sans médiane connue, le chiffre seul.
+function pastillePresence(rate, isEn){
+  const texte = isEn ? `${rate}%` : `${rate} %`;
+  const t = tauxPresence();
+  if(!t || typeof rate !== 'number') return texte;
+  const haute = rate >= t.mediane;
+  const titre = haute
+    ? (isEn ? `At or above the Assembly's median (${t.mediane}%)` : `À la médiane de l'Assemblée (${t.mediane} %) ou au-dessus`)
+    : (isEn ? `Below the Assembly's median (${t.mediane}%)` : `Sous la médiane de l'Assemblée (${t.mediane} %)`);
+  return `<span class="presence-pastille ${haute ? 'presence-haute' : 'presence-basse'}" title="${titre}">${texte}</span>`;
+}
+
+function renderLegendePresence(){
+  const boite = document.getElementById('lpEchelle');
+  if(!boite) return;
+  const isEn = currentLang === 'en';
+  const t = tauxPresence();
+  if(!t){ boite.innerHTML = ''; return; }
+  const { taux, min, max, mediane } = t;
   const pct = (n) => isEn ? `${n}%` : `${n} %`;
   // L'étiquette de la médiane, au-dessus de la barre, ancrée du côté où il y a de la place
   // (à 86 %, centrée, elle débordait à droite sur téléphone).
   const ancre = mediane > 60 ? 'droite' : mediane < 40 ? 'gauche' : 'centre';
   boite.innerHTML = `
     <div class="lp-repere-ligne" aria-hidden="true"><span class="lp-repere lp-ancre-${ancre}" style="left:${mediane}%">${isEn ? 'median' : 'médiane'} ${pct(mediane)}</span></div>
-    <div class="lp-barre" aria-hidden="true">
-      <span class="lp-plage" style="left:${min}%; width:${Math.max(1, max - min)}%"></span>
+    <div class="lp-barre" aria-hidden="true" style="--mediane:${mediane}%">
       <span class="lp-mediane" style="left:${mediane}%"></span>
     </div>
     <div class="lp-bornes" aria-hidden="true"><span>${pct(0)}</span><span>${pct(100)}</span></div>
+    <p class="lp-couleurs">
+      <span class="presence-pastille presence-haute">${isEn ? 'Green' : 'Vert'}</span> ${isEn ? `at or above the median (${pct(mediane)})` : `à la médiane (${pct(mediane)}) ou au-dessus`}
+      <span class="lp-sep" aria-hidden="true">·</span>
+      <span class="presence-pastille presence-basse">${isEn ? 'Yellow' : 'Jaune'}</span> ${isEn ? 'below the median' : 'sous la médiane'}
+    </p>
     <p class="lp-legende-chiffres">${isEn
       ? `Across the ${taux.length} members counted: from ${pct(min)} to ${pct(max)}; half are at ${pct(mediane)} or more.`
       : `Chez les ${taux.length} élu·e·s comptés : de ${pct(min)} à ${pct(max)} ; la moitié est à ${pct(mediane)} ou plus.`}</p>`;
