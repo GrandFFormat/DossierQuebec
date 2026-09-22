@@ -31,6 +31,8 @@ const _remplir = {
   bills: (v) => { bills = v; },
   apercuBills: (v) => { bills = v; },
   billsTitres: (v) => { bills = v; },
+  // Page Ministres : le parrain et son rôle, rien d'autre (« PL parrainés », billsSponsoredBy).
+  billsParrains: (v) => { bills = v; },
   votes: (v) => { votes = v; },
   presences: (v) => { presences = v; },
   deputesRaw: (v) => { deputesRaw = v; },
@@ -1975,7 +1977,16 @@ function renderComparateurSelects(){
 
 function billsSponsoredBy(ministerName){
   const bareName = norm(ministerName.replace(/\s*\([^)]*\)\s*/g, ''));
-  return bills.filter(b => b.sponsor && norm(b.sponsor) === bareName);
+  const memeNom = bills.filter(b => b.sponsor && norm(b.sponsor) === bareName);
+  // Homonymes (les deux Eric Girard) : le nom du parrain ne suffit pas, il faut que son rôle
+  // (« Ministre des Finances », jeu billsParrains) soit un rôle de CETTE personne. Sans rôle pour
+  // trancher, on n'attribue rien plutôt que de prêter les lois de l'un à l'autre.
+  const homonymes = deputes.filter(d => norm(d.name) === bareName).length > 1
+    || ministers.some(m => m.name !== ministerName && norm(m.name.replace(/\s*\([^)]*\)\s*/g, '')) === bareName);
+  if(!homonymes) return memeNom;
+  const fiche = ministers.find(m => m.name === ministerName);
+  const roles = fiche ? String(fiche.role || '').split('·').map(r => norm(r)).filter(Boolean) : [];
+  return memeNom.filter(b => b.role && roles.includes(norm(b.role)));
 }
 
 function renderComparateurTable(){
