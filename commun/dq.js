@@ -2944,6 +2944,9 @@ function renderLegendePresence(){
   if(!t){ boite.innerHTML = ''; return; }
   const { taux, min, max, mediane } = t;
   const pct = (n) => isEn ? `${n}%` : `${n} %`;
+  // Combien d'élu·e·s dans chaque couleur (même règle que pastillePresence).
+  const nbVert = taux.filter(r => r >= mediane).length;
+  const nbJaune = taux.length - nbVert;
   // L'étiquette de la médiane, au-dessus de la barre, ancrée du côté où il y a de la place
   // (à 86 %, centrée, elle débordait à droite sur téléphone).
   const ancre = mediane > 60 ? 'droite' : mediane < 40 ? 'gauche' : 'centre';
@@ -2954,9 +2957,9 @@ function renderLegendePresence(){
     </div>
     <div class="lp-bornes" aria-hidden="true"><span>${pct(0)}</span><span>${pct(100)}</span></div>
     <p class="lp-couleurs">
-      <span class="presence-pastille presence-haute">${isEn ? 'Green' : 'Vert'}</span> ${isEn ? `at or above the median (${pct(mediane)})` : `à la médiane (${pct(mediane)}) ou au-dessus`}
+      <span class="presence-pastille presence-haute">${isEn ? 'Green' : 'Vert'} (${nbVert})</span> ${isEn ? `at or above the median (${pct(mediane)})` : `à la médiane (${pct(mediane)}) ou au-dessus`}
       <span class="lp-sep" aria-hidden="true">·</span>
-      <span class="presence-pastille presence-basse">${isEn ? 'Yellow' : 'Jaune'}</span> ${isEn ? 'below the median' : 'sous la médiane'}
+      <span class="presence-pastille presence-basse">${isEn ? 'Yellow' : 'Jaune'} (${nbJaune})</span> ${isEn ? 'below the median' : 'sous la médiane'}
     </p>
     <p class="lp-legende-chiffres">${isEn
       ? `Across the ${taux.length} members counted: from ${pct(min)} to ${pct(max)}; half are at ${pct(mediane)} or more.`
