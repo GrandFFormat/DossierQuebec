@@ -1826,15 +1826,20 @@
   .lp-ancre-centre{transform:translateX(-50%);}
   .lp-ancre-droite{transform:translateX(-100%); padding-right:6px;}
   .lp-ancre-gauche{padding-left:6px;}
-  /* La barre peinte : jaune de 0 à la médiane, vert de la médiane à 100 (--mediane posé par dq.js). */
-  .lp-barre{position:relative; height:14px; border:2px solid var(--ink); background:linear-gradient(to right, #FFD24D 0 var(--mediane, 50%), #1E7B45 var(--mediane, 50%) 100%);}
-  .lp-couleurs{display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px; margin:10px 0 0; font-size:14px;}
-  .lp-sep{color:var(--slate);}
+  /* La barre peinte (--mediane et --mediane-jaune posés par dq.js) : neutre de 0 à la médiane du
+     jaune, jaune jusqu'à la médiane de l'Assemblée, vert jusqu'à 100. */
+  .lp-barre{position:relative; height:14px; border:2px solid var(--ink); background:linear-gradient(to right, var(--card) 0 var(--mediane-jaune, 0%), #FFD24D var(--mediane-jaune, 0%) var(--mediane, 50%), #1E7B45 var(--mediane, 50%) 100%);}
+  .lp-mediane-jaune{width:2px; margin-left:-1px; top:-4px; bottom:-4px;}
+  .lp-groupes{list-style:none; margin:10px 0 0; padding:0; display:grid; gap:6px; font-size:14px;}
+  .lp-groupes li{display:flex; flex-wrap:wrap; align-items:center; gap:4px 8px;}
+  .lp-groupes .presence-pastille{min-width:132px; text-align:center;}
   /* Le pourcentage d'un élu : vert à la médiane de l'Assemblée ou au-dessus, jaune en dessous.
      Couleurs fixes (pas de jeton du thème) : elles se lisent pareil en clair et en sombre. */
   .presence-pastille{display:inline-block; padding:1px 7px; border:2px solid #131313; font-weight:800; line-height:1.3; white-space:nowrap;}
   .presence-haute{background:#1E7B45; color:#FFFFFF;}
-  .presence-basse{background:#FFD24D; color:#131313;}
+  .presence-moyenne{background:#FFD24D; color:#131313;}
+  /* « Sans couleur » : le chiffre dans une pastille neutre, aux couleurs de la carte. */
+  .presence-neutre{background:var(--card); color:var(--ink); border-color:var(--ink);}
   .lp-mediane{position:absolute; top:-8px; bottom:-8px; width:3px; margin-left:-1.5px; background:var(--ink);}
   .lp-bornes{display:flex; justify-content:space-between; margin-top:8px; font-size:12.5px; font-weight:700; color:var(--slate);}
   .lp-legende-chiffres{margin:8px 0 0; font-size:14px;}
