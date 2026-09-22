@@ -308,7 +308,8 @@ const translations = {
     'lp.lien':"Full definition → Glossary",
     'lp.formule':"<b>88%</b>: out of 100 recorded votes held since their first vote of the legislature, the person voted in 88 — yea, nay or abstention, whichever way.",
     'lp.debut':"The count starts at each person's first vote: someone elected mid-term is not counted absent from votes held before they arrived.",
-    'lp.pres':"<b>—</b>: the President and the three Vice-Presidents generally do not vote while presiding a sitting, to stay neutral.",
+    'lp.pres':"<b>—</b>: the Assembly's President* and its three Vice-Presidents. To stay neutral, they vote little or not at all: a low rate would not mean they were absent.",
+    'lp.aster':"* The Assembly's President is not the same as the Premier: the President runs the debates and stays neutral, while the Premier heads the government and votes like the other members. <a href=\"/lexique#role-presidence\">See the Assembly's presidency in the Glossary →</a>",
     'lp.nd':"<b>n/a</b>: no recorded vote for this person.",
     'lp.officiel':"This is not an official measure: the Assembly does not publish attendance, and a missed vote does not tell why.",
     'promo.sur':"DossierQuébec subscription",
@@ -1805,7 +1806,7 @@ function personCard(p){
     ? (isEn ? `attendance: ${p.att.rate}% (${p.att.participated}/${p.att.total})` : `présence : ${p.att.rate} % (${p.att.participated}/${p.att.total})`)
     : (isEn ? 'attendance: not available' : 'présence : non disponible');
   const attTitle = presidingNote
-    ? (isEn ? 'The President and Vice-Presidents generally do not vote while presiding a sitting, to preserve their neutrality — so a low or absent vote count does not mean they were absent.' : 'La présidence et les vice-présidences ne votent généralement pas quand elles président une séance, pour préserver leur neutralité — un faible taux ou une absence de vote ne veut donc pas dire qu\'elles étaient absentes.')
+    ? (isEn ? 'The Assembly\'s President and Vice-Presidents referee the debates (nothing to do with the Premier). To stay neutral, they vote little or not at all — so a low or absent vote count does not mean they were absent.' : 'La présidence et les vice-présidences de l\'Assemblée arbitrent les débats (rien à voir avec la ou le premier ministre). Par neutralité, elles votent peu ou pas du tout — un faible taux ou une absence de vote ne veut donc pas dire qu\'elles étaient absentes.')
     : isEn
     ? 'Share of recorded votes (all 3 sessions of the 43rd Legislature) this MNA appears in (Yea/Nay/Abstention), counted since their first recorded vote — a proxy for attendance, since the Assembly does not publish attendance directly.'
     : "Part des votes nominaux enregistrés (3 sessions de la 43e législature) où cette personne apparaît (Pour/Contre/Abstention), comptée depuis son premier vote enregistré — un indicateur de présence, l'Assemblée ne publiant pas l'assiduité directement.";
