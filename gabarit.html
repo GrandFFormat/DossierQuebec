@@ -423,10 +423,11 @@ function goToFederal(evt){
       <div class="lp-echelle" id="lpEchelle"></div>
       <ul class="lp-notes">
         <li data-i18n="lp.debut">Le compte part du premier vote de chacun : une personne élue en cours de mandat n'est pas comptée absente des votes tenus avant son arrivée.</li>
-        <li data-i18n="lp.pres"><b>—</b> : la présidence et les trois vice-présidences ne votent généralement pas quand elles président une séance, par neutralité.</li>
+        <li data-i18n="lp.pres"><b>—</b> : la présidence de l'Assemblée* et ses trois vice-présidences. Par neutralité, elles votent peu ou pas du tout : un taux bas ne voudrait pas dire une absence.</li>
         <li data-i18n="lp.nd"><b>n/d</b> : aucun vote enregistré pour cette personne.</li>
         <li data-i18n="lp.officiel">Ce n'est pas une mesure officielle : l'Assemblée ne publie pas d'assiduité, et un vote manqué n'en dit pas la raison.</li>
       </ul>
+      <p class="lp-asterisque" data-i18n="lp.aster">* La présidence de l'Assemblée n'est pas la même chose que le ou la première ministre : elle dirige les débats et reste neutre, alors que le ou la première ministre dirige le gouvernement et vote comme les autres élus. <a href="/lexique#role-presidence">Voir la présidence de l'Assemblée dans le Lexique →</a></p>
     </div>
 
     <div class="role-group-title" id="combinedTitle" style="display:none;"></div>
@@ -732,7 +733,9 @@ function goToFederal(evt){
     <div id="body-personnes">
 
     <div class="role-group-title" data-i18n="pers.g1">À l'intérieur de l'Assemblée</div>
-    <div class="role-card">
+    <!-- #role-presidence : la légende de la présence aux votes (page Ministres) y renvoie, parce que
+         « la présidence » s'y confondait avec la première ministre (Martin, 22 sept. 2026). -->
+    <div class="role-card" id="role-presidence">
       <div>
         <div class="role" data-i18n="pers.1.role">Présidente de l'Assemblée nationale</div>
         <h3>Nathalie Roy</h3>
