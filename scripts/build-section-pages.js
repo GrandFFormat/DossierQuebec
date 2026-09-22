@@ -113,6 +113,18 @@ function extraireDonnees() {
     },
     apercuBills: valeurs.bills.slice(0, 4),
     billsTitres: valeurs.bills.map((b) => ({ id: b.id, title: b.title, titleEn: b.titleEn, sponsor: b.sponsor })),
+    // billsParrains : le parrain de chaque projet et son rôle, pour « PL parrainés » de la page
+    // Ministres (qui affichait 0 partout depuis le découpage : elle ne chargeait aucun projet). Le
+    // rôle (« Ministre des Finances ») vient des données brutes, data/bills.json (« Girard, Eric —
+    // Ministre des Finances ») : il départage les homonymes, les deux Eric Girard.
+    billsParrains: (() => {
+      let roles = new Map();
+      try {
+        const brut = JSON.parse(readFileSync('data/bills.json', 'utf8')).bills ?? [];
+        roles = new Map(brut.map((b) => [b.id, String(b.sponsor ?? '').split(' — ')[1] ?? '']));
+      } catch { /* sans données brutes : pas de rôle, et les homonymes ne reçoivent rien */ }
+      return valeurs.bills.filter((b) => b.sponsor).map((b) => ({ id: b.id, sponsor: b.sponsor, role: roles.get(b.id) || null }));
+    })(),
   };
   for (const [nom, valeur] of Object.entries(derives)) {
     const contenu = JSON.stringify(valeur);
@@ -149,7 +161,7 @@ const PAGES = [
   },
   {
     fichier: 'ministres.html', vue: 'ministres', onglet: 'ministres', url: '/ministres',
-    donnees: ['ministers', 'deputesRaw', 'deputeEmails', 'presences'],
+    donnees: ['ministers', 'deputesRaw', 'deputeEmails', 'presences', 'billsParrains'],
     title: 'Ministres et député·e·s du Québec — DossierQuébec',
     desc: "Les ministres du gouvernement du Québec et les député·e·s de l'Assemblée nationale : rôles, circonscriptions, présence aux votes et coordonnées officielles.",
     fil: 'Ministres et député·e·s', cle: 'fil.ministres', frequence: 'weekly', priorite: '0.8',
