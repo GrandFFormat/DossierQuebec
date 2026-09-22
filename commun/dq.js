@@ -304,6 +304,13 @@ const translations = {
     'fil.lexique':"Glossary",
     'fil.bd':"Site updates",
     'footer.abonnement':"Subscription",
+    'lp.titre':"How to read vote attendance",
+    'lp.lien':"Full definition → Glossary",
+    'lp.formule':"<b>88%</b>: out of 100 recorded votes held since their first vote of the legislature, the person voted in 88 — yea, nay or abstention, whichever way.",
+    'lp.debut':"The count starts at each person's first vote: someone elected mid-term is not counted absent from votes held before they arrived.",
+    'lp.pres':"<b>—</b>: the President and the three Vice-Presidents generally do not vote while presiding a sitting, to stay neutral.",
+    'lp.nd':"<b>n/a</b>: no recorded vote for this person.",
+    'lp.officiel':"This is not an official measure: the Assembly does not publish attendance, and a missed vote does not tell why.",
     'promo.sur':"DossierQuébec subscription",
     'promo.h':"Get alerted when a bill changes status",
     'promo.p':"Follow a bill in one click: an email in the morning when it moves to its next stage, when an elected member you follow introduces one, or when a new bill contains your keywords. One email, everything together, nothing on the days when nothing moves.",
@@ -441,6 +448,7 @@ function applyLanguage(){
   { const _e = document.getElementById('footerRight'); if(_e) _e.textContent = t('footer.right'); }
   // Re-render dynamic lists so their JS-generated buttons pick up the new language
   renderHemicycle();
+  renderLegendePresence();
   renderPartyFilters();
   renderMinistres(document.getElementById('searchMinistres')?.value);
   renderStatusFilters();
@@ -2883,6 +2891,39 @@ function presidingRoleNote(name, isEn){
   return role ? (isEn ? role.en : role.fr) : null;
 }
 
+// La légende de la présence (gabarit.html, #legendePresence), sous la composition de l'Assemblée :
+// une échelle 0-100 % avec l'étendue réelle et la médiane, calculées ici à partir de `presences`.
+// La présidence et les vice-présidences sont laissées de côté (elles ne votent pas en présidant).
+// Pas de couleur de jugement : des faits, pour situer un chiffre, rien de plus.
+function renderLegendePresence(){
+  const boite = document.getElementById('lpEchelle');
+  if(!boite) return;
+  const isEn = currentLang === 'en';
+  const taux = (typeof deputesRaw !== 'undefined' ? deputesRaw : [])
+    .filter(d => !presidingRoleNote(d[0], false))
+    .map(d => attendanceForAssnatId(d[4])?.rate)
+    .filter(r => typeof r === 'number')
+    .sort((a, b) => a - b);
+  if(!taux.length){ boite.innerHTML = ''; return; }
+  const min = taux[0], max = taux[taux.length - 1];
+  const milieu = Math.floor(taux.length / 2);
+  const mediane = taux.length % 2 ? taux[milieu] : Math.round((taux[milieu - 1] + taux[milieu]) / 2);
+  const pct = (n) => isEn ? `${n}%` : `${n} %`;
+  // L'étiquette de la médiane, au-dessus de la barre, ancrée du côté où il y a de la place
+  // (à 86 %, centrée, elle débordait à droite sur téléphone).
+  const ancre = mediane > 60 ? 'droite' : mediane < 40 ? 'gauche' : 'centre';
+  boite.innerHTML = `
+    <div class="lp-repere-ligne" aria-hidden="true"><span class="lp-repere lp-ancre-${ancre}" style="left:${mediane}%">${isEn ? 'median' : 'médiane'} ${pct(mediane)}</span></div>
+    <div class="lp-barre" aria-hidden="true">
+      <span class="lp-plage" style="left:${min}%; width:${Math.max(1, max - min)}%"></span>
+      <span class="lp-mediane" style="left:${mediane}%"></span>
+    </div>
+    <div class="lp-bornes" aria-hidden="true"><span>${pct(0)}</span><span>${pct(100)}</span></div>
+    <p class="lp-legende-chiffres">${isEn
+      ? `Across the ${taux.length} members counted: from ${pct(min)} to ${pct(max)}; half are at ${pct(mediane)} or more.`
+      : `Chez les ${taux.length} élu·e·s comptés : de ${pct(min)} à ${pct(max)} ; la moitié est à ${pct(mediane)} ou plus.`}</p>`;
+}
+
 function attendanceForAssnatId(assnatId){
   if(assnatId == null) return null;
   // Les clés de `presences` viennent d'un JSON : ce sont des chaînes, pas des nombres.
@@ -3359,6 +3400,7 @@ try{ localStorage.setItem('dq:dernier-volet', JSON.stringify({ ville: 'assemblee
   await loadFollowedDeputes();
   await initAuth();   // charge aussi les projets de loi suivis (compte requis)
   renderHemicycle();
+  renderLegendePresence();
   sortRoadmapItems();
   renderMinistres();
   renderStatusFilters();

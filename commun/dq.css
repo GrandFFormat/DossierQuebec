@@ -1811,6 +1811,29 @@
   .fil-ariane + .view-hero{padding-top:20px;}
   .fil-ariane + .section-head{margin-top:14px;}
 
+  /* Légende de la présence aux votes (page Ministres, sous la composition). Neutre : ni rouge ni
+     vert, le site ne juge pas ; la barre montre l'étendue réelle et la médiane. */
+  .legende-presence{margin:28px 0 10px; padding:18px 20px; border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow-sm);}
+  .lp-tete{display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:6px 16px; margin-bottom:10px;}
+  .lp-titre{font-family:'Archivo',sans-serif; font-weight:900; font-size:17px; text-transform:uppercase; letter-spacing:-0.01em;}
+  .lp-lien{font-weight:700; font-size:13.5px; color:var(--gold); text-decoration:underline;}
+  .lp-formule{margin:0 0 16px; font-size:15px; line-height:1.55; max-width:78ch;}
+  .lp-formule b{display:inline-block; padding:0 6px; border:2px solid var(--ink); background:var(--yellow); color:var(--sur-clair);}
+  .lp-echelle{max-width:640px; margin:0 0 14px;}
+  .lp-repere-ligne{position:relative; height:20px;}
+  .lp-repere{position:absolute; bottom:2px; font-size:12.5px; font-weight:800; white-space:nowrap;}
+  .lp-ancre-centre{transform:translateX(-50%);}
+  .lp-ancre-droite{transform:translateX(-100%); padding-right:6px;}
+  .lp-ancre-gauche{padding-left:6px;}
+  .lp-barre{position:relative; height:14px; border:2px solid var(--ink); background:var(--paper);}
+  .lp-plage{position:absolute; top:0; bottom:0; background:color-mix(in srgb, var(--ink) 22%, transparent);}
+  .lp-mediane{position:absolute; top:-8px; bottom:-8px; width:3px; margin-left:-1.5px; background:var(--ink);}
+  .lp-bornes{display:flex; justify-content:space-between; margin-top:8px; font-size:12.5px; font-weight:700; color:var(--slate);}
+  .lp-legende-chiffres{margin:8px 0 0; font-size:14px;}
+  .lp-notes{margin:0; padding-left:18px; font-size:14px; line-height:1.55; color:var(--ink);}
+  .lp-notes li{margin:0 0 4px;}
+  .lp-notes b{font-weight:900;}
+
   /* L'abonnement vendu par les projets de loi (accueil et page Projets de loi). Bande bleue :
      un bloc sombre dans les deux thèmes (voir html[data-theme="dark"] .band-blue). */
   .promo-alertes .promo-sur{margin:0 0 8px; font-weight:800; font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:var(--yellow);}

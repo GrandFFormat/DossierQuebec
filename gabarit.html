@@ -409,6 +409,26 @@ function goToFederal(evt){
     </div>
     </div>
 
+    <!-- Légende de la présence aux votes (Martin, 22 sept. 2026 : « faudrait une légende de
+         pourcentage de présence au vote »). Elle vaut pour les cartes des ministres et pour la liste
+         du reste de l'Assemblée, en dessous. L'échelle et les chiffres (étendue, médiane) sont
+         calculés par dq.js (renderLegendePresence) à partir de `presences`. Aucune couleur de
+         jugement : le site ne donne pas de verdict. -->
+    <div class="legende-presence" id="legendePresence">
+      <div class="lp-tete">
+        <b class="lp-titre" data-i18n="lp.titre">Lire la présence aux votes</b>
+        <a class="lp-lien" href="/lexique" data-i18n="lp.lien">Définition complète → Lexique</a>
+      </div>
+      <p class="lp-formule" data-i18n="lp.formule"><b>88 %</b> : sur 100 votes par appel nominal tenus depuis son premier vote de la législature, la personne a voté à 88 — pour, contre ou abstention, peu importe le sens.</p>
+      <div class="lp-echelle" id="lpEchelle"></div>
+      <ul class="lp-notes">
+        <li data-i18n="lp.debut">Le compte part du premier vote de chacun : une personne élue en cours de mandat n'est pas comptée absente des votes tenus avant son arrivée.</li>
+        <li data-i18n="lp.pres"><b>—</b> : la présidence et les trois vice-présidences ne votent généralement pas quand elles président une séance, par neutralité.</li>
+        <li data-i18n="lp.nd"><b>n/d</b> : aucun vote enregistré pour cette personne.</li>
+        <li data-i18n="lp.officiel">Ce n'est pas une mesure officielle : l'Assemblée ne publie pas d'assiduité, et un vote manqué n'en dit pas la raison.</li>
+      </ul>
+    </div>
+
     <div class="role-group-title" id="combinedTitle" style="display:none;"></div>
 
     <div class="section-head min-group-head" id="ministresTitle">
