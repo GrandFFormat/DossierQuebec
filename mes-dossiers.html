@@ -221,14 +221,14 @@
   // ajoute (le compte, il l'a déjà). Abonné : rien.
   const AVANTAGES_COMPTE = EN
     ? `<ul>
-        <li><strong>Follow up to 3 projects</strong>, in any city — the tramway, housing… — and find them here. The subscription raises it to 10.</li>
+        <li><strong>Follow 3 things in all</strong> — city projects in any city, bills at the Assembly — and find them here. The subscription raises it to 10, keywords and organizations included.</li>
         <li><strong>“Where the project stands”</strong>: the recap, the timeline, decisions by month and what is still awaiting a decision.</li>
         <li><strong>Every city covered</strong>, with the same account.</li>
         <li><strong>Write to us</strong> and <strong>report an error</strong> on an item.</li>
       </ul>
       <p class="ab-note" style="margin:0">No password: a sign-in link by email.</p>`
     : `<ul>
-        <li><strong>Suivre jusqu'à 3 projets</strong>, dans la ville de votre choix — le tramway, le logement… — et les retrouver ici. L'abonnement en donne 10.</li>
+        <li><strong>Suivre 3 choses en tout</strong> — des projets dans la ville de votre choix, des projets de loi à l'Assemblée — et les retrouver ici. L'abonnement en donne 10, mots-clés et organismes compris.</li>
         <li><strong>« Où en est le projet »</strong> : le récapitulatif, la ligne du temps, les décisions par mois et ce qui attend encore une décision.</li>
         <li><strong>Toutes les villes couvertes</strong>, avec le même compte.</li>
         <li><strong>Nous écrire</strong> et <strong>signaler une erreur</strong> sur une fiche.</li>
@@ -274,7 +274,7 @@
         <li><strong>What's coming up at council</strong>: the items on the agenda of each meeting, with their summary — estimated from the documents the City publishes.</li>
         <li><strong>The monthly recap, subscriber edition</strong>: everything the City decided in the month, in plain language. <a class="ab-lien" href="/exemple-compte-rendu-aout-2026">See the August 2026 issue</a> (in French).</li>
         <li><strong>Export to a spreadsheet or PDF</strong> (Excel, CSV or printable PDF): you choose a project, a word or a name and the columns, with the money details when they have been read.</li>
-        <li class="ab-note">Per account, for the cities: 10 projects followed, 5 keywords, 3 organizations, 10 exports a month. The same subscription covers the National Assembly, which has its own follows in <a class="ab-lien" href="/mon-dossier">My file</a>.</li>` : `
+        <li class="ab-note">Per account: 10 follows in all — city projects, bills, keywords and organizations together — and 10 exports a month. The same subscription covers the National Assembly, whose follows live in <a class="ab-lien" href="/mon-dossier">My file</a> and share the same count.</li>` : `
         <li><strong>Une alerte par courriel quand vos projets bougent</strong> : un nouveau dossier, une nouvelle décision — et, à Québec et à Lévis, un dossier qui reçoit sa décision finale — avec le récapitulatif mis à jour s'il y en a un. Rien les semaines où rien n'avance.</li>
         <li><strong>Le détail de l'argent</strong> : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions.
           <br><span class="ab-note">À Québec seulement pour l'instant. Inclus dès qu'il est lu : les grands projets suivis, et chaque nouveau dossier. À Québec, le reste sur demande — normalement lu le lendemain.</span></li>
@@ -283,7 +283,7 @@
         <li><strong>Ce qui s'en vient au conseil</strong> : les dossiers à l'ordre du jour de chaque séance, avec leur résumé — estimé d'après les documents publiés par la Ville.</li>
         <li><strong>Le compte rendu mensuel, édition abonnés</strong> : tout ce que la Ville a décidé dans le mois, en langage clair. <a class="ab-lien" href="/exemple-compte-rendu-aout-2026">Voir l'édition d'août 2026</a>.</li>
         <li><strong>L'export en tableur ou en PDF</strong> (Excel, CSV ou PDF à imprimer) : vous choisissez un projet, un mot ou un nom et les colonnes, avec le détail de l'argent quand il est lu.</li>
-        <li class="ab-note">Par compte, pour les villes : 10 projets suivis, 5 mots-clés, 3 organismes, 10 exports par mois. Le même abonnement couvre l'Assemblée nationale, qui a ses propres suivis dans <a class="ab-lien" href="/mon-dossier">Mon dossier</a>.</li>`;
+        <li class="ab-note">Par compte : 10 suivis en tout — projets de ville, projets de loi, mots-clés et organismes ensemble — et 10 exports par mois. Le même abonnement couvre l'Assemblée nationale, dont les suivis vivent dans <a class="ab-lien" href="/mon-dossier">Mon dossier</a> et comptent dans le même total.</li>`;
 
   // ---------- l'alerte du matin (abonnés) ----------
   // La première ligne de la boîte « Mes courriels » : l'interrupteur (alertes_preferences), la date
@@ -380,6 +380,37 @@
   // boîte de l'Assemblée reste cachée.
   const porteeDe = (m) => m.portee ?? 'villes';
 
+  // UN SEUL quota pour tout ce qu'on suit (Martin, 23 sept. 2026 : « 10 suivis en tout, tous
+  // mélangés ») : projets de ville, projets de loi, mots-clés et organismes ensemble — 10 avec
+  // l'abonnement, 3 sans. Tant que scripts/supabase-schema-mots-cles-portee.sql n'est pas exécuté,
+  // la base applique encore les anciens plafonds par sorte (5 mots-clés, 3 organismes) : `sur` reste
+  // alors null et l'écran garde ces plafonds-là. La colonne `portee`, ajoutée par le même script,
+  // sert de témoin.
+  let quota = { total: 0, sur: null };
+  const quotaPlein = () => quota.sur != null && quota.total >= quota.sur;
+  async function majQuota(abonne) {
+    const [temoin, dossiers, mots, organismes] = await Promise.all([
+      client.from('alertes_mots_cles').select('portee').limit(1),
+      client.from('dossiers_suivis').select('id'),
+      client.from('alertes_mots_cles').select('id'),
+      client.from('organismes_suivis').select('id'),
+    ]);
+    quota = temoin.error || dossiers.error || mots.error || organismes.error
+      ? { total: 0, sur: null }
+      : { total: (dossiers.data?.length ?? 0) + (mots.data?.length ?? 0) + (organismes.data?.length ?? 0), sur: abonne ? 10 : 3 };
+  }
+  // La même phrase partout : ce qui est plein, et quoi retirer pour faire de la place.
+  const phraseQuota = (n) => tr(
+    `Vos ${n} suivis sont utilisés. Retirez un projet, un mot-clé, un organisme ou un projet de loi pour en ajouter un autre.`,
+    `All ${n} of your follows are used. Remove a project, a keyword, an organization or a bill to add another.`);
+  const phrasePlein = () => phraseQuota(quota.sur);
+  // Le déclencheur dit « limite de N suivis atteinte » (quota commun) ; avant le script SQL, il dit
+  // encore l'ancienne phrase, par sorte, qu'on garde telle quelle.
+  const messageLimite = (erreur, ancien) => {
+    const m = /limite de (\d+) suivis/.exec(erreur?.message ?? '');
+    return m ? phraseQuota(m[1]) : ancien;
+  };
+
   async function motsCles(s, abonne) {
     const zone = $('#mots');
     if (!s || !abonne) { zone.innerHTML = ''; return; }
@@ -393,7 +424,9 @@
       <p class="ab-chapeau" style="margin-bottom:10px">${tr("Une rue, un quartier, une école, un parc, un sujet : « 1re Avenue », « Limoilou », « Rochebelle », « déneigement »… Les nouvelles décisions qui le contiennent s'ajoutent à votre alerte du matin.", 'A street, a neighbourhood, a school, a park, a topic: “1re Avenue”, “Limoilou”, “Rochebelle”, “déneigement” (snow removal)… New decisions that contain it are added to your morning alert. The decisions are in French, so use French words.')}</p>
       <ul class="ab-mots-liste" id="mots-liste"></ul>
       <form class="ab-form" id="mots-form"><input type="text" id="mots-champ" maxlength="60" placeholder="${tr('Ajouter un mot-clé', 'Add a keyword')}" aria-label="${tr('Nouveau mot-clé', 'New keyword')}"><button type="submit" class="ab-bouton">${tr('Ajouter', 'Add')}</button></form>
-      <p class="ab-note">${tr("Cherché dans l'objet et le résumé de chaque décision, sans tenir compte des accents ni des majuscules. Jusqu'à 5.", "Searched in each decision's subject and French summary, ignoring accents and capitals. Up to 5.")}</p>
+      <p class="ab-note">${tr("Cherché dans l'objet et le résumé de chaque décision, sans tenir compte des accents ni des majuscules.", "Searched in each decision's subject and French summary, ignoring accents and capitals.")} ${quota.sur != null
+        ? tr('Un mot-clé prend une place dans vos suivis.', 'A keyword takes one of your follows.')
+        : tr("Jusqu'à 5.", 'Up to 5.')}</p>
       <p class="ab-note" id="mots-etat" aria-live="polite"></p>
       <div class="ab-pistes" id="mots-pistes" hidden></div>
       <p class="ab-astuce">${tr("<strong>Astuce :</strong> pas sûr de l'orthographe d'une rue ou d'un lieu ? Cherchez-le dans Google pour trouver son nom officiel (« boulevard Wilfrid-Hamel », « 1re Avenue ») : c'est celui qu'emploient les documents de la Ville.", '<strong>Tip:</strong> not sure how a street or place is spelled? Look it up on Google to find its official French name (“boulevard Wilfrid-Hamel”, “1re Avenue”): that is the one the City uses in its documents.')}</p>
@@ -413,7 +446,8 @@
             return `<li class="ab-mot"><span class="ab-mot-texte">${echapper(m.mot)}</span><span class="ab-note" style="margin:0">${n == null ? '' : n ? tr(`${n} décision${n > 1 ? 's' : ''} récente${n > 1 ? 's' : ''}`, `${n} recent ${pl(n, 'decision', 'decisions')}`) : tr('aucune décision récente', 'no recent decision')}</span><button type="button" class="ab-mot-retirer" data-mot="${echapper(m.id)}" aria-label="${tr('Retirer le mot-clé', 'Remove keyword')} ${echapper(m.mot)}">×</button></li>`;
           }).join('')
         : `<li class="ab-note" style="list-style:none;margin:0">${tr('Aucun mot-clé pour l’instant.', 'No keywords yet.')}</li>`;
-      form.querySelector('button').disabled = mots.length >= 5;
+      form.querySelector('button').disabled = quota.sur != null ? quotaPlein() : mots.length >= 5;
+      if (quotaPlein() && !etat.textContent) etat.textContent = phrasePlein();
       $('#mots-compte').textContent = mots.length;
     };
     dessiner();
@@ -475,8 +509,9 @@
       // Sans `portee` : la valeur par défaut de la colonne est « villes » (et avant le script SQL,
       // la colonne n'existe pas encore).
       const { data: ajoute, error: erreur } = await client.from('alertes_mots_cles').insert({ user_id: s.user.id, mot }).select('*').single();
-      if (erreur) { etat.textContent = /limite de/i.test(erreur.message) ? tr('Limite de 5 alertes par mot-clé atteinte.', 'Limit of 5 keyword alerts reached.') : tr("Impossible d'ajouter ce mot-clé. Réessayez.", "Couldn't add this keyword. Try again."); return null; }
+      if (erreur) { etat.textContent = /limite de/i.test(erreur.message) ? messageLimite(erreur, tr('Limite de 5 alertes par mot-clé atteinte.', 'Limit of 5 keyword alerts reached.')) : tr("Impossible d'ajouter ce mot-clé. Réessayez.", "Couldn't add this keyword. Try again."); return null; }
       mots = [...mots, ajoute];
+      quota.total += 1;
       dessiner();
       pistes.hidden = true;
       if (!recentes) { recentes = await chargerRecentes(); dessiner(); }
@@ -508,6 +543,7 @@
       const { error: erreur } = await client.from('alertes_mots_cles').delete().eq('id', b.dataset.remplacer);
       if (erreur) { b.disabled = false; etat.textContent = tr('Impossible de remplacer ce mot-clé. Réessayez.', "Couldn't replace this keyword. Try again."); return; }
       mots = mots.filter((m) => m.id !== b.dataset.remplacer);
+      quota.total -= 1;
       dessiner();
       await ajouter(b.dataset.par);
       mesurer('mot_cle_remplace');
@@ -519,6 +555,8 @@
       const { error: erreur } = await client.from('alertes_mots_cles').delete().eq('id', bouton.dataset.mot);
       if (erreur) { bouton.disabled = false; etat.textContent = tr('Impossible de retirer ce mot-clé. Réessayez.', "Couldn't remove this keyword. Try again."); return; }
       mots = mots.filter((m) => m.id !== bouton.dataset.mot);
+      quota.total -= 1;
+      etat.textContent = '';
       dessiner();
       etat.textContent = tr('Mot-clé retiré.', 'Keyword removed.');
     });
@@ -556,7 +594,9 @@
         <datalist id="org-suggestions"></datalist>
         <button type="submit" class="ab-bouton">${tr('Suivre', 'Follow')}</button>
       </form>
-      <p class="ab-note" id="org-etat" aria-live="polite">${tr("Le nom est cherché dans l'objet et le résumé des décisions, sans sa forme juridique (« inc. », « ltée »), sans accents ni majuscules. Jusqu'à 3.", 'The name is searched in the subject and French summary of the decisions, without its legal form (“inc.”, “ltée”), ignoring accents and capitals. Up to 3.')}</p>
+      <p class="ab-note" id="org-etat" aria-live="polite">${tr("Le nom est cherché dans l'objet et le résumé des décisions, sans sa forme juridique (« inc. », « ltée »), sans accents ni majuscules.", 'The name is searched in the subject and French summary of the decisions, without its legal form (“inc.”, “ltée”), ignoring accents and capitals.')} ${quota.sur != null
+        ? tr('Un organisme prend une place dans vos suivis.', 'An organization takes one of your follows.')
+        : tr("Jusqu'à 3.", 'Up to 3.')}</p>
       <div id="org-liste"></div>
       </div>
     </details>`;
@@ -605,7 +645,7 @@
             </details>`;
           }).join('')
         : `<p class="ab-note">${tr('Vous ne suivez aucun organisme pour l’instant.', "You aren't following any organization yet.")}</p>`;
-      $('#org-form button').disabled = suivis.length >= 3;
+      $('#org-form button').disabled = quota.sur != null ? quotaPlein() : suivis.length >= 3;
       $('#org-compte').textContent = suivis.length;
     };
     dessiner();
@@ -625,8 +665,9 @@
       if (sansFormeJuridique(nom).length < 3) { etat.textContent = tr('Écrivez au moins 3 caractères, sans compter « inc. » ou « ltée ».', 'Write at least 3 characters, not counting “inc.” or “ltée”.'); return; }
       if (suivis.some((o) => normaliserTexte(sansFormeJuridique(o.nom)) === normaliserTexte(sansFormeJuridique(nom)))) { etat.textContent = tr('Vous suivez déjà cet organisme.', 'You already follow this organization.'); return; }
       const { data: ajoute, error: erreur } = await client.from('organismes_suivis').insert({ user_id: s.user.id, nom }).select('id, nom').single();
-      if (erreur) { etat.textContent = /limite de/i.test(erreur.message) ? tr('Limite de 3 organismes suivis atteinte.', 'Limit of 3 organizations followed reached.') : tr('Impossible de suivre cet organisme. Réessayez.', "Couldn't follow this organization. Try again."); return; }
+      if (erreur) { etat.textContent = /limite de/i.test(erreur.message) ? messageLimite(erreur, tr('Limite de 3 organismes suivis atteinte.', 'Limit of 3 organizations followed reached.')) : tr('Impossible de suivre cet organisme. Réessayez.', "Couldn't follow this organization. Try again."); return; }
       suivis = [...suivis, ajoute];
+      quota.total += 1;
       await chargerAnnee();
       $('#org-champ').value = '';
       dessiner();
@@ -645,6 +686,7 @@
         const { error: erreur } = await client.from('organismes_suivis').delete().eq('id', retirer.dataset.retirer);
         if (erreur) { retirer.disabled = false; etat.textContent = tr('Impossible de retirer cet organisme. Réessayez.', "Couldn't remove this organization. Try again."); return; }
         suivis = suivis.filter((o) => o.id !== retirer.dataset.retirer);
+        quota.total -= 1;
         dessiner();
         etat.textContent = tr('Organisme retiré.', 'Organization removed.');
         return;
@@ -1502,6 +1544,8 @@ ${liste.map(fiche).join('')}
     // Compte de consultation : on retire les commandes qui écrivent et on dit pourquoi.
     avisConsultation($('#compte'));
 
+    // Le quota est commun : on le relit avant les boîtes qui ajoutent quelque chose.
+    await majQuota(abonne).catch((e) => console.error('quota :', e));
     motsCles(s, abonne).catch((e) => console.error('mots-clés :', e));
     organismesSuivis(s, abonne).catch((e) => console.error('organismes :', e));
     exportTableur(s, abonne).catch((e) => console.error('export :', e));
@@ -1558,8 +1602,8 @@ ${liste.map(fiche).join('')}
         suggestion.disabled = false;
         const plafond = limiteSuivis(erreur);
         suggestion.textContent = plafond === 3
-          ? tr('Limite : 3 projets sans abonnement', 'Limit: 3 projects without a subscription')
-          : plafond ? tr(`Limite : ${plafond} projets suivis`, `Limit: ${plafond} projects followed`)
+          ? tr('Limite : 3 suivis sans abonnement', 'Limit: 3 follows without a subscription')
+          : plafond ? tr(`Limite : ${plafond} suivis en tout`, `Limit: ${plafond} follows in all`)
             : tr('Impossible — réessayez', "Couldn't — try again");
         return;
       }
