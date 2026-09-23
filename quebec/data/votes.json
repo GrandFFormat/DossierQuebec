@@ -1,16 +1,16 @@
 {
- "generatedAt": "2026-09-22T13:31:28.662Z",
+ "generatedAt": "2026-09-23T13:45:13.484Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "methode": "Extraction par analyse du texte des résolutions (champ « content » de l'index de la Ville). Les noms sont lus dans les passages « Ont voté en faveur / Ont voté contre ». Chaque vote conserve le texte brut et signale tout écart avec le décompte officiel.",
  "parametres": {
   "annee": "2026",
   "max": 1000,
-  "depuis": "2026-07-24"
+  "depuis": "2026-07-25"
  },
- "totalDisponible": 227,
- "documentsAnalyses": 16,
- "nombre": 227,
- "nouveauxDepuisDerniereExecution": 0,
+ "totalDisponible": 241,
+ "documentsAnalyses": 30,
+ "nombre": 241,
+ "nouveauxDepuisDerniereExecution": 14,
  "avecAvertissement": 10,
  "themes": {
   "procedure": {
@@ -83,6 +83,440 @@
   }
  },
  "votes": [
+  {
+   "id": "CA-2026-0479.pdf",
+   "numero": "CA-2026-0479",
+   "objet": "Entente entre la Ville de Québec et La Parade des jouets inc. relativement au versement d'une subvention, à la fourniture à titre gratuit de services municipaux et à l'achat de biens et services, à titre d'assistance, dans le cadre de la tenue de l'événement Parade des jouets, en 2026",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0479.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Catherine Vallières–Roland",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Catherine Deschamps, Elainie Lepage, Catherine Vallières–Roland et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0480.pdf",
+   "numero": "CA-2026-0480",
+   "objet": "Adjudication de contrats pour la fourniture de pièces et d'outillage pour les unités du parc véhiculaire (Appel d'offres public 95715)",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0480.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Catherine Vallières–Roland",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Catherine Deschamps, Elainie Lepage, Catherine Vallières–Roland et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "loisirs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0482.pdf",
+   "numero": "CA-2026-0482",
+   "objet": "Entente entre la Ville de Québec et 8348871 Canada inc. (Terapro Construction) pour le service de réparation d'équipements de génie civil incluant les pièces chez le concessionnaire du fabricant Case (Dossier 95942)",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0482.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Catherine Vallières–Roland",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Catherine Deschamps, Elainie Lepage, Catherine Vallières–Roland et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0486.pdf",
+   "numero": "CA-2026-0486",
+   "objet": "Règlement hors tribunal du dossier relatif à l'expropriation de servitudes sur des parties du lot 1 302 593 du cadastre du Québec, situé au 1092, rue du Parc-Thornhill (Ville de Québec c. Axel Benhamed et Amaury Gossiôme, SAI-Q-282121-2506)",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0486.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Catherine Vallières–Roland",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Catherine Deschamps, Elainie Lepage, Catherine Vallières–Roland et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0487.pdf",
+   "numero": "CA-2026-0487",
+   "objet": "Règlement hors tribunal du dossier relatif à l'expropriation du lot 6 697 154 du cadastre du Québec, situé sur le boulevard René¿Lévesque Ouest (Ville de Québec c. Renée Lévesque et Ginette Goulet, SAI-Q-280543-2503)",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0487.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Catherine Vallières–Roland",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Catherine Deschamps, Elainie Lepage, Catherine Vallières–Roland et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0488.pdf",
+   "numero": "CA-2026-0488",
+   "objet": "Adjudication de contrats pour l'opération des dépôts à neige Jonquière, Saint-Thomas-d'Aquin et Godin (Appel d'offres public 94888)",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0488.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Catherine Vallières–Roland",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Catherine Deschamps, Elainie Lepage, Catherine Vallières–Roland et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0489.pdf",
+   "numero": "CA-2026-0489",
+   "objet": "Adjudication d'un contrat de services professionnels d'accompagnement pour l'intégration des pratiques d'affaires en lien avec la modélisation des données des infrastructures (Appel d'offres public 96079)",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0489.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Catherine Vallières–Roland",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Catherine Deschamps, Elainie Lepage, Catherine Vallières–Roland et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "travaux",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0491.pdf",
+   "numero": "CA-2026-0491",
+   "objet": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur un immeuble situé en bordure de la 1re Avenue, connu et désigné comme étant une partie du lot 6 460 865 du cadastre du Québec, relativement au projet de réseau structurant de transport en commun de la Ville d",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0491.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Catherine Vallières–Roland",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Catherine Deschamps, Elainie Lepage, Catherine Vallières–Roland et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0492.pdf",
+   "numero": "CA-2026-0492",
+   "objet": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'un immeuble situé en bordure de la 1re Avenue, connu et désigné comme étant une partie du lot 5 213 647 du cadastre du Québec, relativement au projet de réseau structurant de transport en commun de la Ville de Québec (projet T",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0492.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Catherine Vallières–Roland",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Catherine Deschamps, Elainie Lepage, Catherine Vallières–Roland et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0494.pdf",
+   "numero": "CA-2026-0494",
+   "objet": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur une partie d'une ruelle, connue et désignée comme étant une partie du lot 1 317 747 du cadastre du Québec, relativement au projet de réseau structurant de transport en commun de la Ville de Québec (projet Tra",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0494.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Catherine Vallières–Roland",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Catherine Deschamps, Elainie Lepage, Catherine Vallières–Roland et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0496.pdf",
+   "numero": "CA-2026-0496",
+   "objet": "Acquisition à des fins municipales d'un immeuble situé en bordure du boulevard Pierre-Bertrand, connu et désigné comme étant le lot 6 090 872 du cadastre du Québec - Arrondissement des Rivières",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0496.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Catherine Vallières–Roland",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Catherine Deschamps, Elainie Lepage, Catherine Vallières–Roland et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0497.pdf",
+   "numero": "CA-2026-0497",
+   "objet": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'immeubles et d'une servitude situés en bordure de la 1re Avenue, connus et désignés comme étant des parties du lot 3 940 826 du cadastre du Québec, relativement au projet de réseau structurant de transport en commun de la Vill",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0497.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Catherine Vallières–Roland",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Catherine Deschamps, Elainie Lepage, Catherine Vallières–Roland et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0509.pdf",
+   "numero": "CA-2026-0509",
+   "objet": "Règlement de l'agglomération sur des travaux de nature mixte de caractérisation et d'amélioration de la qualité du milieu et sur l'emprunt nécessaire au paiement des coûts qui y sont rattachés, R.A.V.Q. 1877",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0509.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Catherine Vallières–Roland",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Catherine Deschamps, Elainie Lepage, Catherine Vallières–Roland et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "finances",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0510.pdf",
+   "numero": "CA-2026-0510",
+   "objet": "Règlement de l'agglomération de nature mixte sur des interventions relatives à la mise en place d'une stratégie de suivi de la qualité de l'air du territoire de la ville de Québec et sur l'emprunt nécessaire au paiement des coûts qui y sont rattachés, R.A.V.Q. 1878",
+   "date": "2026-09-16",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0510.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Catherine Vallières–Roland",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Catherine Deschamps, Elainie Lepage, Catherine Vallières–Roland et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "finances",
+   "themeSource": "objet"
+  },
   {
    "id": "CA-2026-0435.pdf",
    "numero": "CA-2026-0435",
