@@ -221,9 +221,9 @@ document.addEventListener('click', async (e) => {
     // écrit dans sa zone, comme pour la connexion — d'autant que le plafond du compte gratuit est
     // justement le moment où l'abonnement a quelque chose à offrir.
     const texte = plafond === 3
-      ? tr('Limite atteinte : 3 projets suivis avec un compte gratuit. L’abonnement en donne 10.', 'Limit reached: 3 projects followed with a free account. The subscription raises it to 10.')
+      ? tr('Limite atteinte : 3 suivis avec un compte gratuit — projets de ville et projets de loi ensemble. L’abonnement en donne 10.', 'Limit reached: 3 follows with a free account — city projects and bills together. The subscription raises it to 10.')
       : plafond
-        ? tr(`Limite atteinte : ${plafond} projets suivis.`, `Limit reached: ${plafond} projects followed.`)
+        ? tr(`Limite atteinte : ${plafond} suivis en tout.`, `Limit reached: ${plafond} follows in all.`)
         : tr("Impossible d'enregistrer — réessayez", "Couldn't save — try again");
     etoile.title = texte;
     etoile.setAttribute('aria-label', texte);

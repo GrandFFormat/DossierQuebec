@@ -63,12 +63,14 @@ export async function suivre(s, { ville, dossier, numero, objet }) {
   return error;
 }
 
-// Le plafond de projets suivis (3 sans abonnement, 10 pour un abonné) vient d'un trigger Postgres,
-// dont le message dit « limite de N projets suivis atteinte ». On le reconnaît pour expliquer au
-// lecteur ce qui s'est passé : lui dire « réessayez » l'enverrait recommencer pour rien.
+// Le plafond de suivis (3 sans abonnement, 10 pour un abonné) vient d'un trigger Postgres, dont le
+// message dit « limite de N suivis atteinte ». On le reconnaît pour expliquer au lecteur ce qui
+// s'est passé : lui dire « réessayez » l'enverrait recommencer pour rien.
+// Le « projets » facultatif est l'ancien message, encore en place tant que le nouveau script SQL
+// n'est pas exécuté : les deux doivent être compris.
 // Renvoie le plafond atteint, ou null si l'erreur est autre chose.
 export function limiteSuivis(erreur) {
-  const m = /limite de (\d+) projets suivis/.exec(erreur?.message ?? '');
+  const m = /limite de (\d+) (?:projets )?suivis/.exec(erreur?.message ?? '');
   return m ? Number(m[1]) : null;
 }
 
