@@ -329,9 +329,9 @@ const translations = {
     'promo.prix':"or $96 a year · cancel anytime",
     'promo.compte.h':"Your account",
     'promo.villes.h':"And the cities?",
-    'promo.villes.p':"The <b>Ville</b> plan covers decisions in <a href=\"/quebec/\">Québec City</a>, <a href=\"/montreal/\">Montréal</a>, <a href=\"/levis/\">Lévis</a>, <a href=\"/longueuil/\">Longueuil</a> and <a href=\"/laval/\">Laval</a>: the projects you follow, your street, your neighbourhood, an organization. <b>Duo</b> covers the cities and the Assembly, without taking two subscriptions.",
+    'promo.villes.p':"Decisions in <a href=\"/quebec/\">Québec City</a>, <a href=\"/montreal/\">Montréal</a>, <a href=\"/levis/\">Lévis</a>, <a href=\"/longueuil/\">Longueuil</a> and <a href=\"/laval/\">Laval</a> are free to read in their own section.",
     'promo.villes.lien':"Pick a city project in My files →",
-    'promo.limites':"<b>With Province or Duo:</b> up to 10 bills followed (3 without a subscription), 5 Assembly keywords, and the ministers and MNAs of your choice.",
+    'promo.limites':"<b>With the subscription:</b> up to 10 bills followed (3 without a subscription), 5 Assembly keywords, and the ministers and MNAs of your choice.",
     'promo.mesdossiers':"My file →",
     'footer.villes':"Cities:",
     'maj.sub':"What changed on DossierQuébec, newest first",
@@ -969,24 +969,23 @@ async function handlePromoLink(){
 const mdH = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 let mdPorteeOk = null;   // la colonne portee existe-t-elle ? (scripts/supabase-schema-mots-cles-portee.sql)
 
-// L'abonnement a trois produits : Ville, Province et Duo (api/_stripe.js). Ici, ce qui compte est
-// l'accès au côté PROVINCE : plein (Province ou Duo) ou croisé (Ville seul : 1 projet de loi et
-// 1 mot-clé). Le serveur le dit lui-même — la page ne devine pas à partir du statut.
+// Deux abonnements INDÉPENDANTS (Martin, 23 sept. 2026) : celui des villes et celui de
+// l'Assemblée. Aucun ne donne accès à l'autre, et aucune page n'en promet rien — celui de DQ
+// pourrait disparaître. Cette page ne regarde donc qu'une chose : l'accès au côté Assemblée, tel
+// que le serveur le dit (api/abonnement.js).
 async function mdAccesProvince(){
-  if(!currentUser) return { plein: false, croise: false, produit: null };
+  if(!currentUser) return { plein: false };
   const { data: { session } } = await supabaseClient.auth.getSession();
   const r = await fetch('/api/abonnement', { headers: { Authorization: `Bearer ${session?.access_token ?? ''}` }, cache: 'no-store' }).catch(() => null);
   const e = r?.ok ? await r.json().catch(() => null) : null;
-  // Tant que les trois produits ne sont pas déployés, le serveur ne renvoie pas `acces` : un
-  // abonnement actif donne alors tout, comme avant. Après, c'est le produit qui décide.
-  if(e && !e.acces) return { plein: Boolean(e.abonne), croise: false, produit: e.produit ?? null };
-  return { plein: Boolean(e?.acces?.province), croise: Boolean(e?.acces?.croiseProvince), produit: e?.produit ?? null };
+  // Tant que le serveur ne distingue pas les deux abonnements (pas de champ `acces`), un
+  // abonnement actif ouvre tout, comme avant.
+  return { plein: e?.acces ? Boolean(e.acces.province) : Boolean(e?.abonne) };
 }
-const MD_PRODUITS = { ville: 'Ville', province: 'Province', duo: 'Duo' };
 
 function mdVerrou(titre, phrase, isEn){
   return `<div class="md-carte md-verrou">
-    <div class="md-carte-tete"><h2>${titre}</h2><span class="md-etiquette">${isEn ? 'Province or Duo' : 'Province ou Duo'}</span></div>
+    <div class="md-carte-tete"><h2>${titre}</h2><span class="md-etiquette">${isEn ? 'subscribers' : 'abonnés'}</span></div>
     <p>${phrase} <a class="md-lien" href="/abonnement?de=assemblee">${isEn ? 'See the subscription' : "Voir l'abonnement"}</a></p>
   </div>`;
 }
@@ -1003,7 +1002,7 @@ async function renderMonDossier(){
 }
 
 function mdCompte(isEn, acces){
-  const abonne = acces.plein || acces.croise;
+  const abonne = acces.plein;
   const zone = document.getElementById('mdCompte');
   if(!currentUser){
     zone.innerHTML = `<div class="md-carte md-connexion">
@@ -1025,9 +1024,9 @@ function mdCompte(isEn, acces){
       <button class="md-bouton-doux" onclick="signOutUser()">${isEn ? 'Sign out' : 'Se déconnecter'}</button>
     </div>
     <p>${mdH(currentUser.email)} · ${abonne
-      ? `${isEn ? 'subscription' : 'abonnement'} ${mdH(MD_PRODUITS[acces.produit] ?? acces.produit ?? '')} — <a class="md-lien" href="/abonnement?de=assemblee">${isEn ? 'manage' : 'gérer'}</a>`
+      ? `${isEn ? 'Assembly subscription active' : 'abonnement de l’Assemblée actif'} — <a class="md-lien" href="/abonnement?de=assemblee">${isEn ? 'manage' : 'gérer'}</a>`
       : `${isEn ? 'no subscription' : 'pas d’abonnement'} — <a class="md-lien" href="/abonnement?de=assemblee">${isEn ? 'see the subscription' : 'voir l’abonnement'}</a>`}</p>
-    ${acces.croise ? `<p class="md-note">${isEn ? 'Your Ville subscription opens a taste of the Assembly: 1 bill followed and 1 keyword. Province or Duo opens all of it.' : 'Votre abonnement Ville donne un aperçu de l’Assemblée : 1 projet de loi suivi et 1 mot-clé. Province ou Duo ouvre tout.'}</p>` : ''}
+    <p class="md-note">${isEn ? 'The cities have their own page, My files.' : 'Les villes ont leur propre page, Mes dossiers.'}</p>
     ${merci && !abonne ? `<p class="md-note">${isEn ? 'Thank you! Waiting for Stripe to confirm the payment, a few seconds… Reload the page.' : 'Merci ! On attend la confirmation du paiement par Stripe, quelques secondes… Rechargez la page.'}</p>` : ''}
     ${merci && abonne ? `<p class="md-note">${isEn ? 'Thank you: your subscription is active. Alerts, keywords and followed members are below.' : 'Merci : votre abonnement est actif. Les alertes, les mots-clés et les élus suivis sont plus bas.'}</p>` : ''}
   </div>`;
@@ -1057,8 +1056,8 @@ async function mdEnvoyerLien(){
 function mdLois(isEn, acces){
   const zone = document.getElementById('mdLois');
   const ids = Object.keys(followedBills).filter((id) => followedBills[id]);
-  // Province ou Duo : 10. Ville seul (accès croisé) : 1. Sans abonnement : 3.
-  const plafond = acces.plein ? 10 : acces.croise ? 1 : 3;
+  // 10 projets de loi avec l'abonnement de l'Assemblée, 3 sans. Les villes comptent à part.
+  const plafond = acces.plein ? 10 : 3;
   const suivables = bills.filter((b) => loiVivante(b) && (b.status === 'encours' || b.status === 'laisse_de_cote')).length;
   const vide = !currentUser
     ? (isEn ? 'Sign in to follow bills: what you follow stays with your account, on every device.' : 'Connectez-vous pour suivre des projets de loi : vos suivis restent sur votre compte, sur tous vos appareils.')
@@ -1089,10 +1088,8 @@ function mdLois(isEn, acces){
     </div>
     ${ids.length ? `<ul class="md-liste">${lignes}</ul>` : `<p>${vide}</p>`}
     <p class="md-note">${acces.plein
-      ? (isEn ? 'With Province or Duo: an email the morning a followed bill moves to a later stage. Up to 10 bills.' : 'Avec Province ou Duo : un courriel le matin où un projet suivi passe à une étape plus avancée. Jusqu’à 10 projets de loi.')
-      : acces.croise
-        ? (isEn ? 'With Ville alone: 1 bill followed, and its morning alert. Province or Duo raises it to 10.' : 'Avec Ville seul : 1 projet de loi suivi, et son alerte du matin. Province ou Duo monte à 10.')
-        : (isEn ? 'Up to 3 bills without a subscription. Province or Duo: 10, plus the morning alert.' : 'Jusqu’à 3 projets de loi sans abonnement. Province ou Duo : 10, et l’alerte du matin.')}</p>
+      ? (isEn ? 'With the subscription: an email the morning a followed bill moves to a later stage. Up to 10 bills.' : 'Avec l’abonnement : un courriel le matin où un projet suivi passe à une étape plus avancée. Jusqu’à 10 projets de loi.')
+      : (isEn ? 'Up to 3 bills without a subscription, 10 with one — plus the morning alert.' : 'Jusqu’à 3 projets de loi sans abonnement, 10 avec — et l’alerte du matin.')}</p>
   </div>`;
 }
 
@@ -1129,8 +1126,8 @@ async function mdRetirerElu(type, cle){
 async function mdMots(isEn, acces){
   const zone = document.getElementById('mdMots');
   const titre = isEn ? 'Your Assembly keywords' : 'Vos mots-clés de l’Assemblée';
-  const plafondMots = acces.plein ? 5 : 1;   // Ville seul : 1 mot-clé de l'Assemblée (accès croisé)
-  if(!currentUser || !(acces.plein || acces.croise)){
+  const plafondMots = 5;
+  if(!currentUser || !acces.plein){
     zone.innerHTML = mdVerrou(titre, isEn
       ? 'A topic — “logement”, “forêt”, “électricité” — searched in the title and summary of every new bill. A separate list from your city keywords.'
       : 'Un sujet — « logement », « forêt », « électricité » — cherché dans le titre et le résumé de chaque nouveau projet de loi. Une liste à part de vos mots-clés de ville.', isEn);
@@ -1196,7 +1193,7 @@ async function mdRetirerMot(id){
 async function mdAlerte(isEn, acces){
   const zone = document.getElementById('mdAlerte');
   const titre = isEn ? 'My morning alert' : 'Mon alerte du matin';
-  if(!currentUser || !(acces.plein || acces.croise)){
+  if(!currentUser || !acces.plein){
     zone.innerHTML = mdVerrou(titre, isEn
       ? 'One email in the morning when a followed bill moves, when someone you follow introduces one, or when a new bill contains your keywords. Nothing on the days when nothing moves.'
       : 'Un courriel le matin quand un projet suivi avance, quand une personne suivie en présente un, ou quand un nouveau projet contient vos mots-clés. Rien les jours où rien ne bouge.', isEn);
