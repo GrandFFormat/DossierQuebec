@@ -140,6 +140,7 @@
     <a href="/projets-de-loi" data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></a>
     <a class="active" aria-current="page" href="/votes" data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></a>
     <a href="/lexique" data-view="lexique"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></a>
+    <a href="/mon-dossier" data-view="mondossier" class="nav-mondossier"><span class="n">★</span><span data-i18n="nav.mondossier">Mon dossier</span></a>
   </nav>
   <div class="header-ctrls">
     <div class="font-size-ctrl" id="fontSizeCtrl">
@@ -310,6 +311,12 @@ function goToFederal(evt){
   <!-- PAGE CACHÉE — la BD « l'idée derrière le site ». Aucun onglet n'y mène :
        accessible seulement par le « et moi » du bas de page (à côté de
        « Construit avec Claude »). goToTab('bd') fonctionne sans bouton d'onglet. -->
+  <!-- /mon-dossier : l'espace de la personne connectée, côté ASSEMBLÉE seulement (Martin,
+       22 sept. 2026 : « mes dossiers provincial et les villes doivent être complètement séparés »).
+       Les villes gardent leur propre page, /mes-dossiers, avec le style des volets. Tout le contenu
+       est rempli par commun/dq.js (renderMonDossier) : rien de personnel n'est dans le HTML. -->
+  
+
   
 
 </div>
@@ -325,6 +332,7 @@ function goToFederal(evt){
     <a href="/promesses" data-i18n="fil.promesses">Promesses</a>
     <a href="/lexique" data-i18n="nav.lexique">Lexique</a>
     <a href="/sources" data-i18n="fil.bd">Mises à jour du site</a>
+    <a href="/mon-dossier" data-i18n="nav.mondossier">Mon dossier</a>
     <a href="/abonnement?de=assemblee" data-i18n="footer.abonnement">Abonnement</a>
     <span class="footer-nav-villes"><span data-i18n="footer.villes">Villes :</span>
       <a href="/quebec/">Québec</a>

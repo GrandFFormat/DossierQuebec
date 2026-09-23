@@ -195,6 +195,18 @@ const PAGES = [
     fil: 'Lexique', cle: 'fil.lexique', frequence: 'monthly', priorite: '0.6',
   },
   {
+    // Page PRIVÉE (`prive`) : l'espace de la personne connectée, côté Assemblée. Elle porte un
+    // noindex, reste hors du sitemap, et les contrôles de référencement la laissent tranquille sur
+    // ce point. Son pendant municipal est /mes-dossiers (fichier à part, style des volets) :
+    // Martin, 22 sept. 2026, « mes dossiers provincial et les villes doivent être complètement
+    // séparés ».
+    fichier: 'mon-dossier.html', vue: 'mondossier', onglet: null, url: '/mon-dossier', prive: true,
+    donnees: ['bills'],
+    title: 'Mon dossier — DossierQuébec',
+    desc: "Votre espace à l'Assemblée nationale : les projets de loi que vous suivez, les ministres et député·e·s suivis, vos mots-clés et votre alerte du matin.",
+    fil: 'Mon dossier', cle: 'fil.mondossier', frequence: 'weekly', priorite: '0.1',
+  },
+  {
     fichier: 'sources.html', vue: 'bd', onglet: null, url: '/sources',
     donnees: ['journal'],
     title: 'Mises à jour du site — DossierQuébec',
@@ -344,7 +356,7 @@ function decouper() {
     must(fin !== -1, `</section> introuvable pour view-${m[1]}`);
     bornes.push({ nom: m[1], a: m.index, b: fin + '</section>'.length });
   }
-  must(bornes.length === 7, `attendu 7 vues, trouvé ${bornes.length}`);
+  must(bornes.length === PAGES.length, `attendu ${PAGES.length} vues (une par page), trouvé ${bornes.length}`);
   // Aucune imbrication : on vérifie qu'il y a exactement autant de <section> que de </section>
   // dans chaque vue, sinon la découpe emporterait du HTML voisin.
   for (const v of bornes) {
@@ -385,6 +397,7 @@ function fabriquer(page, tronc, vues, REPERE, pre) {
   h = h.replace(/(<meta property="og:title" content=")[^"]*(">)/, `$1${esc(page.title)}$2`);
   h = h.replace(/(<meta property="og:description" content=")[^"]*(">)/, `$1${esc(page.desc)}$2`);
   h = h.replace(/(<meta property="og:url" content=")[^"]*(">)/, `$1${url}$2`);
+  if (page.prive) h = h.replace(/<meta name="robots" content="[^"]*">/, '<meta name="robots" content="noindex, follow">');
   h = h.replace(/(<meta name="twitter:title" content=")[^"]*(">)/, `$1${esc(page.title)}$2`);
   h = h.replace(/(<meta name="twitter:description" content=")[^"]*(">)/, `$1${esc(page.desc)}$2`);
 
@@ -563,7 +576,9 @@ for (const { page, html } of produites) {
     try { JSON.parse(ld[0][1]); } catch (e) { must(false, `${f} : JSON-LD invalide (${e.message})`); }
     must(!html.includes('<!--PRERENDU:'), `${f} : un repère PRERENDU n'a pas été remplacé`);
     must(!/<button[^>]*data-view=/.test(html), `${f} : un onglet du menu est encore un <button>, pas un lien`);
-    must(!/<meta name="robots" content="[^"]*noindex/.test(html), `${f} : une page de l'Assemblée ne peut pas être en noindex`);
+    // Une page publique ne peut pas être en noindex ; une page privée DOIT l'être.
+    must(/<meta name="robots" content="[^"]*noindex/.test(html) === Boolean(page.prive),
+      page.prive ? `${f} : page privée sans noindex` : `${f} : une page de l'Assemblée ne peut pas être en noindex`);
     // La description et les balises de partage sont lues DANS la page produite : si une regex de
     // fabriquer() ne trouvait plus sa balise, le remplacement ne ferait rien, en silence, et les
     // sept pages garderaient celles du modèle — des clones.
@@ -631,7 +646,7 @@ const sitemap = (function preparerSitemap(){
     for (const m of readFileSync('sitemap.xml', 'utf8').matchAll(/<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>/g)) dates.set(m[1], m[2]);
   }
   const aujourdhui = new Date().toISOString().slice(0, 10);
-  const entrees = produites.map(({ page: p, html }) => {
+  const entrees = produites.filter(({ page }) => !page.prive).map(({ page: p, html }) => {
     const loc = p.url === '/' ? `${BASE}/` : BASE + p.url;
     const lastmod = changees.has(p.fichier) ? aujourdhui : (dates.get(loc) || aujourdhui);
     return { loc, fichier: p.fichier, html, lastmod, frequence: p.frequence, priorite: p.priorite };
