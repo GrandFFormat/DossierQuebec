@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-18T13:03:48.345Z",
+ "generatedAt": "2026-09-23T13:45:32.298Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,144 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-07-20",
+  "depuis": "2026-07-25",
   "plafond": 120
  },
- "nombre": 1539,
- "genereCetteFois": 24,
+ "nombre": 1544,
+ "genereCetteFois": 5,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.915,
-  "jetonsEntree": 126605,
-  "jetonsSortie": 11278
+  "montant": 0.1733,
+  "jetonsEntree": 23515,
+  "jetonsSortie": 2228
  },
  "resumes": [
+  {
+   "id": "TM2026-184.pdf",
+   "numero": "TM2026-184",
+   "date": "2026-09-22",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-588 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à l'avenue de la Rivière-Jaune - Arrondissement de Charlesbourg - District électoral des Monts",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-184.pdf",
+   "puces": [
+    "La Ville change les règles de stationnement sur l'avenue de la Rivière-Jaune, côté est, entre la rue Jacques-Bédard et la rue du Conseil (arrondissement de Charlesbourg).",
+    "Devant le 1400, avenue de la Rivière-Jaune, une zone de stationnement limitée à 15 minutes est créée sur 15 mètres.",
+    "Sur les 19 premiers mètres au nord de la rue Jacques-Bédard, le stationnement devient interdit en tout temps, pour dégager l'approche de l'intersection avec feux et assurer la visibilité.",
+    "Sur les 47 mètres suivants, l'interdiction de stationner de 8 h à 18 h du lundi au vendredi est maintenue.",
+    "Résultat : deux espaces de plus en semaine de 8 h à 18 h, deux espaces de moins le soir, la nuit et la fin de semaine.",
+    "Le changement fait suite à la demande d'un gestionnaire de l'entreprise Services-Conseils Aqua Ingenium, qui voulait faciliter l'accès de sa clientèle."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-23T13:45:26.005Z",
+   "jetons": {
+    "entree": 4217,
+    "sortie": 472
+   }
+  },
+  {
+   "id": "DE2026-338.pdf",
+   "numero": "DE2026-338",
+   "date": "2026-09-21",
+   "unite": "Développement économique et grands projets",
+   "objet": "Règlement modifiant le Règlement intérieur du conseil d'arrondissement de La Haute-Saint-Charles sur la délégation de pouvoirs relativement au pouvoir d'autoriser l'occupation du domaine public, R.C.A.6V.Q. 374",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-338.pdf",
+   "puces": [
+    "Le conseil d'arrondissement de La Haute-Saint-Charles transfère à des fonctionnaires le pouvoir d'autoriser l'occupation du domaine public sur son territoire.",
+    "Ça touche les terrains publics, trottoirs, rues et ruelles relevant du conseil, autant au-dessus qu'au-dessous du sol.",
+    "Pour les occupations temporaires, le pouvoir va au directeur général, à un directeur général adjoint, au directeur du Service du développement économique et des grands projets, au directeur de la Division des activités et de l'expertise immobilières et à un directeur de section de cette division.",
+    "Pour les occupations permanentes, le pouvoir va au directeur du même service, au directeur de la Division des activités et de l'expertise immobilières et à un directeur de section.",
+    "Ces personnes fixent les conditions et le loyer, peuvent imposer la façon de faire les travaux et les matériaux, et peuvent révoquer une autorisation après un avis écrit au propriétaire, un mois d'avance.",
+    "Les occupations permanentes autorisées doivent être rapportées au comité exécutif chaque trimestre, avec la nature de l'occupation, le nom du bénéficiaire et le montant du loyer.",
+    "La Ville explique le changement par la hausse des demandes liées aux transactions immobilières et par la volonté d'uniformiser les pratiques dans l'agglomération."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-23T13:45:26.693Z",
+   "jetons": {
+    "entree": 5132,
+    "sortie": 573
+   }
+  },
+  {
+   "id": "GT2026-293.pdf",
+   "numero": "GT2026-293",
+   "date": "2026-09-21",
+   "unite": "Gestion du territoire",
+   "objet": "Demande visant un règlement relatif aux usages conditionnels - 14445, boulevard de la Colline, lot 6 718 773, quartier de Loretteville, district électoral de Loretteville-Les Châtels, Arrondissement de La Haute-Saint-Charles",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-293.pdf",
+   "puces": [
+    "La Ville autorise une entreprise de construction à s'installer au 14445, boulevard de la Colline, dans le quartier de Loretteville (arrondissement de La Haute-Saint-Charles).",
+    "L'autorisation permet de stationner ou d'entreposer dehors des véhicules de 3 000 kilogrammes et plus, des véhicules-outils et de la machinerie liés à l'entreprise de construction.",
+    "Elle permet aussi l'entreposage extérieur de bois, de pièces de métal ou de plastique, de conteneurs, de blocs de béton et de blocs de remblai.",
+    "L'analyse note que des entrepreneurs en construction sont déjà présents dans le secteur et que l'entreposage respecte les règles de protection des prises d'eau potable des bassins des rivières Saint-Charles et Montmorency.",
+    "La gestion des eaux se fera sur le site, selon un plan et un devis d'ingénieur.",
+    "Le comité consultatif d'urbanisme a recommandé l'approbation à l'unanimité le 2 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-23T13:45:26.346Z",
+   "jetons": {
+    "entree": 5964,
+    "sortie": 456
+   }
+  },
+  {
+   "id": "A6DA2026-004.pdf",
+   "numero": "A6DA2026-004",
+   "date": "2026-09-21",
+   "unite": "Arrondissement de La Haute-Saint-Charles",
+   "objet": "Versement d'une subvention de 250 $ au Club de pétanques de Val-Bélair",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A6DA2026-004.pdf",
+   "puces": [
+    "L'arrondissement de La Haute-Saint-Charles verse 250 $ au Club de pétanques de Val-Bélair.",
+    "L'argent provient du budget du conseil d'arrondissement (fonds de la Ville).",
+    "La subvention a été proposée par le conseiller du district de Val-Bélair, Stéphane Lachance.",
+    "Le club regroupe 165 membres actifs et organise des activités de pétanque pour des aînés, dehors l'été à l'école Val-Joli et à l'intérieur l'automne et l'hiver à la salle Georges-D'or.",
+    "Le club demandait une commandite pour maintenir ses activités; l'analyse confirme qu'il répond aux critères."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "250 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-23T13:45:24.830Z",
+   "jetons": {
+    "entree": 3386,
+    "sortie": 331
+   }
+  },
+  {
+   "id": "GT2026-294.pdf",
+   "numero": "GT2026-294",
+   "date": "2026-09-21",
+   "unite": "Gestion du territoire",
+   "objet": "Demande visant un règlement relatif aux usages conditionnels - 507, rue Roussin, lot 1 022 744, quartier de Lac-Saint-Charles, district électoral de Lac-Saint-Charles-Saint-Émile, Arrondissement de La Haute-Saint-Charles",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-294.pdf",
+   "puces": [
+    "La Ville autorise une entreprise de construction à s'installer au 507, rue Roussin, dans le quartier de Lac-Saint-Charles (arrondissement de La Haute-Saint-Charles).",
+    "Le projet prévoit la démolition d'une maison et la construction d'un nouveau bâtiment pour un entrepreneur en construction.",
+    "Les activités de l'entreprise se dérouleront à l'intérieur du bâtiment, dans un secteur décrit comme majoritairement industriel.",
+    "Des puits percolants seront installés pour limiter les effets des eaux de ruissellement sur les cours d'eau et les lacs.",
+    "Le terrain comptera une seule case de stationnement extérieure; les véhicules seront stationnés à l'intérieur.",
+    "Le comité consultatif d'urbanisme a recommandé l'approbation à l'unanimité le 2 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-23T13:45:32.297Z",
+   "jetons": {
+    "entree": 4816,
+    "sortie": 396
+   }
+  },
   {
    "id": "AP2026-328.pdf",
    "numero": "AP2026-328",
