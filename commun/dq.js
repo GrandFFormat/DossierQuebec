@@ -328,8 +328,8 @@ const translations = {
     'promo.cta':"Get my alerts — $10/month",
     'promo.prix':"or $96 a year · cancel anytime",
     'promo.compte.h':"Your account",
-    'promo.villes.h':"And the cities?",
-    'promo.villes.p':"Decisions in <a href=\"/quebec/\">Québec City</a>, <a href=\"/montreal/\">Montréal</a>, <a href=\"/levis/\">Lévis</a>, <a href=\"/longueuil/\">Longueuil</a> and <a href=\"/laval/\">Laval</a> are free to read in their own section.",
+    'promo.villes.h':"Also included: following the cities",
+    'promo.villes.p':"The same subscription also alerts you to decisions in <a href=\"/quebec/\">Québec City</a>, <a href=\"/montreal/\">Montréal</a>, <a href=\"/levis/\">Lévis</a>, <a href=\"/longueuil/\">Longueuil</a> and <a href=\"/laval/\">Laval</a>: the projects you follow, your street, your neighbourhood, an organization. One subscription, not one per city — the cities have their own page, My files.",
     'promo.villes.lien':"Pick a city project in My files →",
     'promo.limites':"<b>With the subscription:</b> up to 10 bills followed (3 without a subscription), 5 Assembly keywords, and the ministers and MNAs of your choice.",
     'promo.mesdossiers':"My file →",
@@ -1024,9 +1024,9 @@ function mdCompte(isEn, acces){
       <button class="md-bouton-doux" onclick="signOutUser()">${isEn ? 'Sign out' : 'Se déconnecter'}</button>
     </div>
     <p>${mdH(currentUser.email)} · ${abonne
-      ? `${isEn ? 'Assembly subscription active' : 'abonnement de l’Assemblée actif'} — <a class="md-lien" href="/abonnement?de=assemblee">${isEn ? 'manage' : 'gérer'}</a>`
+      ? `${isEn ? 'subscription active' : 'abonnement actif'} — <a class="md-lien" href="/abonnement?de=assemblee">${isEn ? 'manage' : 'gérer'}</a>`
       : `${isEn ? 'no subscription' : 'pas d’abonnement'} — <a class="md-lien" href="/abonnement?de=assemblee">${isEn ? 'see the subscription' : 'voir l’abonnement'}</a>`}</p>
-    <p class="md-note">${isEn ? 'The cities have their own page, My files.' : 'Les villes ont leur propre page, Mes dossiers.'}</p>
+    <p class="md-note">${isEn ? 'The same subscription also covers the cities, in My files.' : 'Le même abonnement couvre aussi les villes, dans Mes dossiers.'}</p>
     ${merci && !abonne ? `<p class="md-note">${isEn ? 'Thank you! Waiting for Stripe to confirm the payment, a few seconds… Reload the page.' : 'Merci ! On attend la confirmation du paiement par Stripe, quelques secondes… Rechargez la page.'}</p>` : ''}
     ${merci && abonne ? `<p class="md-note">${isEn ? 'Thank you: your subscription is active. Alerts, keywords and followed members are below.' : 'Merci : votre abonnement est actif. Les alertes, les mots-clés et les élus suivis sont plus bas.'}</p>` : ''}
   </div>`;
