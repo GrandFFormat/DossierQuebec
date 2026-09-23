@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mises à jour du site — DossierQuébec</title>
-<meta name="description" content="Ce qui change sur DossierQuébec, site citoyen indépendant qui rend lisibles l'Assemblée nationale et les conseils municipaux du Québec, et qui est derrière.">
-<link rel="canonical" href="https://dossierquebec.ca/sources">
+<title>Mon dossier — DossierQuébec</title>
+<meta name="description" content="Votre espace à l'Assemblée nationale : les projets de loi que vous suivez, les ministres et député·e·s suivis, vos mots-clés et votre alerte du matin.">
+<link rel="canonical" href="https://dossierquebec.ca/mon-dossier">
 <!-- Flux RSS de « Quoi de neuf », généré au build par scrapers/build-news-data.js.
      C'est ainsi que journalistes et agrégateurs suivent un site sans le visiter. -->
 <link rel="alternate" type="application/rss+xml" title="DossierQuébec — Quoi de neuf" href="https://dossierquebec.ca/feed.xml">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="noindex, follow">
 <meta name="theme-color" content="#16213E">
 
 <!-- Open Graph (aperçu au partage : Facebook, LinkedIn, iMessage…) -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DossierQuébec">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:title" content="Mises à jour du site — DossierQuébec">
-<meta property="og:description" content="Ce qui change sur DossierQuébec, site citoyen indépendant qui rend lisibles l'Assemblée nationale et les conseils municipaux du Québec, et qui est derrière.">
-<meta property="og:url" content="https://dossierquebec.ca/sources">
+<meta property="og:title" content="Mon dossier — DossierQuébec">
+<meta property="og:description" content="Votre espace à l'Assemblée nationale : les projets de loi que vous suivez, les ministres et député·e·s suivis, vos mots-clés et votre alerte du matin.">
+<meta property="og:url" content="https://dossierquebec.ca/mon-dossier">
 <meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <meta property="og:image:width" content="1702">
 <meta property="og:image:height" content="630">
@@ -26,8 +26,8 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Mises à jour du site — DossierQuébec">
-<meta name="twitter:description" content="Ce qui change sur DossierQuébec, site citoyen indépendant qui rend lisibles l'Assemblée nationale et les conseils municipaux du Québec, et qui est derrière.">
+<meta name="twitter:title" content="Mon dossier — DossierQuébec">
+<meta name="twitter:description" content="Votre espace à l'Assemblée nationale : les projets de loi que vous suivez, les ministres et député·e·s suivis, vos mots-clés et votre alerte du matin.">
 <meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 
 <link rel="icon" type="image/svg+xml" href="/commun/dq.svg">
@@ -49,8 +49,8 @@
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Mises à jour du site",
-      "item": "https://dossierquebec.ca/sources"
+      "name": "Mon dossier",
+      "item": "https://dossierquebec.ca/mon-dossier"
     }
   ]
 }
@@ -75,7 +75,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/commun/dq.css">
 </head>
-<body data-page="bd" data-donnees="journal,stats">
+<body data-page="mondossier" data-donnees="bills,stats">
 
 <!-- Ticker brutaliste : bande noire défilante — contenu rempli avec les VRAIES
      données par renderTicker() (appelé une fois les datasets chargés). -->
@@ -205,56 +205,22 @@ function goToFederal(evt){
 <div class="app">
 
   <!-- APERÇU -->
-  <section class="view active" id="view-bd">
-    <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/" data-i18n="fil.accueil">Accueil</a><span class="sep" aria-hidden="true">›</span><span aria-current="page" data-i18n="fil.bd">Mises à jour du site</span></nav>
-    <!-- La page /sources : le créateur, puis les mises à jour du site. Elle portait une bande
-         dessinée (Ti-Jo) ; Martin n'a gardé que la case de sa photo, refaite en HTML pour qu'elle
-         reste lisible sur un téléphone et suive le thème sombre. La liste vient de
-         data/journal.json, tenu à la main : voir renderJournal dans commun/dq.js. -->
-    <div class="section-head">
-      <div>
-        <h1 data-i18n="maj.h">Mises à jour du site</h1>
-        <div class="sub" data-i18n="maj.sub">Ce qui a changé sur DossierQuébec, du plus récent au plus ancien</div>
-      </div>
-      <a class="bd-back" href="/" data-i18n="bd.back">← Retour à l'aperçu</a>
+  <section class="view active" id="view-mondossier">
+    <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/" data-i18n="fil.accueil">Accueil</a><span class="sep" aria-hidden="true">›</span><span aria-current="page" data-i18n="fil.mondossier">Mon dossier</span></nav>
+    <div class="view-hero">
+      <h1 class="hero-h1 hero-h1-md">
+        <span class="hero-sujet" data-i18n="sujet.mondossier">Mon dossier</span>
+        <span data-i18n="mdhero.l1">Vos projets de loi,</span>
+        <span class="hero-outline" data-i18n="mdhero.l2">vos élus, vos alertes.</span>
+      </h1>
+      <p class="view-hero-sub" data-i18n="mdhero.sub">Ce que vous suivez à l'Assemblée nationale, et ce qui vous est envoyé. <b>Les décisions de votre ville vivent dans <a class="md-lien" href="/mes-dossiers">Mes dossiers</a>, à part.</b></p>
     </div>
-    <div class="createur">
-      <img class="createur-photo" src="/commun/martin.jpg" width="120" height="120" alt="Martin Archambault">
-      <div class="createur-bulle">
-        <span data-i18n="bd.intro1">Bonjour, moi c'est</span>
-        <strong class="createur-nom">Martin Archambault</strong>
-        <span data-i18n="bd.intro3">j'ai 45 ans et c'est moi l'idée derrière le site.</span>
-      </div>
-    </div>
-    <div class="maj" id="journal">
-      <ol class="maj-liste" id="journalListe" aria-live="polite"></ol>
-    <div class="prerendu" data-prerendu="journal">
-      <ul aria-label="Mises à jour du site">
-        <li><span class="pr-meta">23 septembre 2026 —</span> <b>Mon dossier : l’Assemblée d’un côté, les villes de l’autre</b> Le provincial a maintenant sa propre page, Mon dossier : les projets de loi suivis, les ministres et députés suivis, les mots-clés de l’Assemblée et l’alerte du matin. Mes dossiers redevient la page des villes seulement. Les suivis sont comptés à part : 10 projets de loi et 10 projets de ville avec l’abonnement, 3 et 3 sans.</li>
-        <li><span class="pr-meta">22 septembre 2026 —</span> <b>Les projets de loi parrainés reviennent sur les cartes des ministres</b> Depuis le découpage du site en pages, chaque ministre affichait « PL parrainés : 0 ». Les vrais nombres sont de retour, et les lois des Finances vont au bon Eric Girard : celui de Groulx, pas son homonyme de Lac-Saint-Jean.</li>
-        <li><span class="pr-meta">22 septembre 2026 —</span> <b>Une légende pour la présence aux votes</b> Sous la composition de l’Assemblée, une légende explique le pourcentage affiché pour chaque élu : ce qu’il compte, d’où il part, et ce qu’il ne dit pas. Chaque pourcentage est vert à la médiane de l’Assemblée ou au-dessus, jaune jusqu’à la médiane des élus qui sont sous elle, sans couleur en dessous — sur les cartes, dans la liste et dans le comparateur.</li>
-        <li><span class="pr-meta">21 septembre 2026 —</span> <b>Suivez un projet de loi, sachez quand il avance</b> Un bouton « Suivre » sur chaque projet de loi à l’étude l’ajoute à Mes dossiers. Avec l’abonnement, un courriel le matin quand il passe à une étape plus avancée, quand un élu que vous suivez en présente un, ou quand un nouveau projet contient vos mots-clés de l’Assemblée — une liste à part de vos mots-clés de ville. Les boutons apparaîtront avec les premiers projets de la nouvelle législature, convoquée le 17 novembre.</li>
-        <li><span class="pr-meta">21 septembre 2026 —</span> <b>Un site plus facile à parcourir</b> Chaque page affiche son chemin (Accueil › Votes) et le pied de page mène partout. Les listes apparaissent aussi avant la fin du chargement.</li>
-        <li><span class="pr-meta">21 septembre 2026 —</span> <b>Vous pouvez maintenant offrir un abonnement</b> Offrez 1 mois (10 $) ou 12 mois (96 $), payé en ligne, à votre nom ou de façon anonyme. La personne reçoit un code par courriel et l’active sur la page d’abonnement.</li>
-        <li><span class="pr-meta">21 septembre 2026 —</span> <b>Nouveau volet : Laval, en version prototype</b> Le site couvre maintenant Laval : décisions du conseil et du comité exécutif, votes nominatifs, carte des 22 districts avec vos élus et leur présence aux séances, lexique. Mes dossiers propose deux projets à suivre : l’eau, et le logement social et abordable.</li>
-        <li><span class="pr-meta">21 septembre 2026 —</span> <b>Nouveau volet : Longueuil, en version prototype</b> Le site couvre maintenant Longueuil : décisions du conseil de ville et de l’agglomération, votes nominatifs, membres du conseil, lexique et résumés en langage clair. Mes dossiers propose un projet à suivre : l’eau potable et les eaux usées.</li>
-        <li><span class="pr-meta">21 septembre 2026 —</span> <b>Site principal : des pages beaucoup plus légères</b> Chaque page du site principal ne charge plus que ce qu’elle affiche : qui a voté quoi et les résumés des projets de loi arrivent quand vous dépliez une fiche.</li>
-        <li><span class="pr-meta">20 septembre 2026 —</span> <b>Abonnement : 10 $ par mois ou 96 $ par an, et des limites claires</b> L’abonnement coûte 10 $ par mois ou 96 $ par an, et s’annule en deux clics. Un compte gratuit permet de suivre 3 projets, l’abonnement 10, avec 5 alertes par mot-clé, 3 organismes et 10 exports par mois.</li>
-        <li><span class="pr-meta">20 septembre 2026 —</span> <b>Québec : les décisions de la Ville par courriel</b> Inscrivez-vous gratuitement au compte rendu du mois ou à un courriel après chaque séance du conseil ou de votre arrondissement. L’édition des abonnés ajoute le détail de l’argent : celle d’août se lit en ligne, en exemple.</li>
-        <li><span class="pr-meta">19 septembre 2026 —</span> <b>Une navigation commune aux cinq villes, mieux adaptée au téléphone</b> Un menu dans l’en-tête du site principal et de chaque volet mène aux cinq villes, et Mes dossiers prend la marque de la ville d’où vous venez. Sur téléphone, la page ne glisse plus de côté quand vous dépliez une fiche ou ouvrez un menu.</li>
-        <li><span class="pr-meta">18 septembre 2026 —</span> <b>Montréal n’est plus un prototype</b> Le volet Montréal couvre ses 19 conseils d’arrondissement, dont le Plateau-Mont-Royal et huit autres qui n’affichaient aucune décision. Inscrivez-vous à ses courriels : compte rendu du mois (dès fin septembre), séances du conseil et « Mon arrondissement ».</li>
-        <li><span class="pr-meta">18 septembre 2026 —</span> <b>Montréal : des résumés en langage clair et 16 sujets à suivre</b> La plupart des décisions de Montréal ont maintenant un résumé en langage clair, rédigé par IA à partir du sommaire décisionnel quand la Ville le publie, sinon du texte de la résolution. Mes dossiers propose 16 sujets à suivre, dont l’écoquartier Louvain Est.</li>
-        <li><span class="pr-meta">18 septembre 2026 —</span> <b>Montréal, Mes dossiers et l’abonnement, aussi en anglais</b> Un bouton EN permet de lire le volet Montréal, Mes dossiers et la page Abonnement en anglais, résumés et lexique compris, et le site retient votre choix. Le français reste la langue par défaut et celle des documents officiels.</li>
-        <li><span class="pr-meta">17 septembre 2026 —</span> <b>Québec n’est plus un prototype, et le détail de l’argent s’étend</b> L’étiquette « Prototype » quitte le volet Québec, où le détail de l’argent est lu pour les projets à suivre et les nouveaux dossiers avec un montant. Pour un autre dossier, un abonné peut le demander : sa demande passe en priorité.</li>
-        <li><span class="pr-meta">16 septembre 2026 —</span> <b>Mes dossiers : suivez des projets, avec « Où en est le projet »</b> Vous suivez maintenant des projets, proposés par ville : chiffres, graphiques et, pour la plupart, « Où en est le projet », récapitulatif rédigé par IA et vérifié automatiquement. Connecté, vous pouvez aussi nous écrire ou signaler une erreur dans une fiche.</li>
-        <li><span class="pr-meta">14 septembre 2026 —</span> <b>Nouveau volet : Lévis, en version prototype</b> Le site couvre maintenant Lévis : décisions, votes nominatifs, membres du conseil, lexique et résumés en langage clair. Mes dossiers propose quatre projets à suivre, dont les stations d’épuration de Saint-Nicolas et de Desjardins.</li>
-        <li><span class="pr-meta">14 septembre 2026 —</span> <b>Alertes du matin : vos projets, vos mots-clés, vos organismes</b> Les abonnés reçoivent un courriel le matin quand un projet suivi bouge, quand une nouvelle décision contient un de leurs mots-clés (une rue, un quartier) ou nomme un organisme qu’ils suivent. Rien les jours sans nouveauté.</li>
-        <li><span class="pr-meta">14 septembre 2026 —</span> <b>Abonnés : exporter un projet et voir ce qui attend un vote</b> Les abonnés peuvent exporter les décisions d’un projet en Excel, en CSV ou en PDF à imprimer. Ils voient aussi les dossiers de Québec qui attendent encore un vote, et ceux qui passeront probablement à la prochaine séance (une estimation).</li>
-      </ul>
-      <p class="pr-note">Du plus récent au plus ancien.</p>
-    </div>
-      <button type="button" class="maj-plus" id="journalPlus" hidden></button>
-    </div>
+
+    <div id="mdCompte" class="md-bloc"></div>
+    <div id="mdLois" class="md-bloc"></div>
+    <div id="mdElus" class="md-bloc"></div>
+    <div id="mdMots" class="md-bloc"></div>
+    <div id="mdAlerte" class="md-bloc"></div>
   </section>
 
   <!-- MINISTRES & DÉPUTÉS -->

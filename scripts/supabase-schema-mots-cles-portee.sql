@@ -29,22 +29,27 @@ begin
   return new;
 end $$;
 
--- 4. Les projets suivis : même limite qu'avant (3 sans abonnement, 10 avec, projets des villes et
---    projets de loi confondus), mais sous verrou. Sans lui, dix ajouts envoyés en même temps
---    comptaient chacun les lignes déjà enregistrées sans voir les autres, et passaient tous
---    (relecture du 21 sept. 2026). Le verrou ne vaut que pour ce compte et tombe à la fin de
---    l'ajout ; le texte de l'erreur ne change pas (Mes dossiers et dq.js le reconnaissent).
+-- 4. Les projets suivis : DEUX limites séparées (Martin, 22 sept. 2026 : « mes dossiers provincial
+--    et les villes doivent être complètement séparés »). 3 projets de loi sans abonnement et 10
+--    avec, PLUS 3 projets de ville sans abonnement et 10 avec — un côté ne mange plus les places
+--    de l'autre, sinon quelqu'un verrait « limite atteinte » sur /mon-dossier à cause de projets de
+--    ville qu'il n'y voit même pas.
+--    Le verrou : sans lui, dix ajouts envoyés en même temps comptaient chacun les lignes déjà
+--    enregistrées sans voir les autres, et passaient tous (relecture du 21 sept. 2026). Il ne vaut
+--    que pour ce compte et ce côté, et tombe à la fin de l'ajout. Le texte de l'erreur ne change
+--    pas : Mes dossiers, Mon dossier et dq.js le reconnaissent.
 create or replace function public.limite_dossiers_suivis() returns trigger language plpgsql set search_path = '' as $$
-declare plafond int;
+declare plafond int; assemblee boolean := (new.ville = 'assemblee');
 begin
-  perform pg_advisory_xact_lock(hashtext('dossiers_suivis:' || new.user_id::text));
+  perform pg_advisory_xact_lock(hashtext('dossiers_suivis:' || new.user_id::text || case when assemblee then ':assemblee' else ':villes' end));
   -- Suivre un projet déjà suivi passe par un upsert « ignoreDuplicates » : ce n'est pas un ajout.
   if exists (select 1 from public.dossiers_suivis
               where user_id = new.user_id and ville = new.ville and dossier_id = new.dossier_id) then
     return new;
   end if;
   plafond := case when public.est_abonne(new.user_id) then 10 else 3 end;
-  if (select count(*) from public.dossiers_suivis where user_id = new.user_id) >= plafond then
+  if (select count(*) from public.dossiers_suivis
+       where user_id = new.user_id and (ville = 'assemblee') = assemblee) >= plafond then
     raise exception 'limite de % projets suivis atteinte', plafond;
   end if;
   return new;
