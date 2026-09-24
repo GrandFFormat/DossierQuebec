@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #F2F0EA; }
+  a { color: #0E4FC1; text-decoration: none; }
+  a:hover { color: #08307A; }
+  ::selection { background: #FFD24D; }
+  @keyframes dqTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes dqUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+<div style="font-family: 'Archivo', system-ui, sans-serif; color: #131313; background: #F2F0EA; min-height: 100vh; font-size: {{ rootSize }}px; -webkit-font-smoothing: antialiased;">
+
+  <!-- ticker -->
+  <div style="background: #131313; color: #F2F0EA; overflow: hidden; border-bottom: 3px solid #131313;">
+    <div style="display: flex; white-space: nowrap; animation: dqTicker 26s linear infinite; width: max-content;">
+      <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 0;">● 120 projets de loi suivis&nbsp;&nbsp;&nbsp;● Résumés en langage clair — jamais un avis juridique&nbsp;&nbsp;&nbsp;● 38 demandes citoyennes sur le PL nº 7&nbsp;&nbsp;&nbsp;● Texte intégral toujours lié vers assnat.qc.ca&nbsp;&nbsp;&nbsp;● Site citoyen indépendant · vraies données publiques&nbsp;&nbsp;&nbsp;</span>
+      <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 0;">● 120 projets de loi suivis&nbsp;&nbsp;&nbsp;● Résumés en langage clair — jamais un avis juridique&nbsp;&nbsp;&nbsp;● 38 demandes citoyennes sur le PL nº 7&nbsp;&nbsp;&nbsp;● Texte intégral toujours lié vers assnat.qc.ca&nbsp;&nbsp;&nbsp;● Site citoyen indépendant · vraies données publiques&nbsp;&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- header -->
+  <header style="border-bottom: 3px solid #131313; background: #F2F0EA; position: sticky; top: 0; z-index: 50;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+      <a href="Apercu.dc.html" style="font-family: 'Archivo'; font-weight: 900; font-size: 24px; letter-spacing: -0.03em; color: #131313; text-transform: uppercase;">Dossier<span style="color: #0E4FC1;">Québec</span></a>
+      <nav style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="5">
+          <a href="{{ tab.href }}" style="{{ tab.style }}">{{ tab.label }}</a>
+        </sc-for>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button onClick="{{ dec }}" style="background: #F2F0EA; border: 2px solid #131313; color: #131313; width: 30px; height: 30px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700;">A−</button>
+        <button onClick="{{ inc }}" style="background: #F2F0EA; border: 2px solid #131313; color: #131313; width: 30px; height: 30px; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 700;">A+</button>
+        <a href="#" style="border: 2px solid #131313; padding: 5px 12px; font-size: 13px; font-weight: 700; color: #131313; text-transform: uppercase;">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- page title + search + filters -->
+  <section style="border-bottom: 3px solid #131313;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 46px 32px 40px;">
+      <h1 style="margin: 0 0 18px; text-transform: uppercase; font-weight: 900; letter-spacing: -0.02em; line-height: 0.94;">
+        <span style="display: block; font-size: 72px; color: #131313;">Projets de loi,</span>
+        <span style="display: block; font-size: 72px; color: transparent; -webkit-text-stroke: 3px #131313;">traduits en clair.</span>
+      </h1>
+      <p style="font-size: 17px; font-weight: 500; margin: 0 0 28px; max-width: 640px; line-height: 1.45;">Chaque projet résumé en langage courant, avec son étape réelle dans le processus. <strong>Le texte intégral reste toujours à un clic sur assnat.qc.ca.</strong></p>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: stretch;">
+        <div style="display: flex; gap: 0; flex: 1; min-width: 320px; max-width: 560px; border: 3px solid #131313; background: #fff; box-shadow: 6px 6px 0 #131313;">
+          <span style="display: flex; align-items: center; padding: 0 16px; font-size: 18px; border-right: 3px solid #131313; background: #FFD24D;">🔍</span>
+          <input value="{{ query }}" onChange="{{ setQuery }}" placeholder="Numéro, titre ou mot-clé…" style="flex: 1; border: none; outline: none; background: #fff; font-family: 'Archivo', sans-serif; font-size: 16px; font-weight: 500; padding: 16px 18px; color: #131313;">
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+          <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4">
+            <button onClick="{{ f.onPick }}" style="{{ f.style }}">{{ f.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- legend strip -->
+  <section style="border-bottom: 3px solid #131313; background: #fff;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 18px 32px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+      <span style="font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #555;">Le chemin d'un projet de loi :</span>
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <sc-for list="{{ legendSteps }}" as="ls" hint-placeholder-count="5">
+          <span style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-family: 'Archivo Narrow'; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; border: 2px solid #131313; background: #F2F0EA; padding: 3px 10px;">{{ ls.name }}</span>
+            <span style="{{ ls.arrow }}">→</span>
+          </span>
+        </sc-for>
+      </div>
+      <a href="Lexique.dc.html" style="font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-left: auto;">C'est quoi ces étapes ? → Lexique</a>
+    </div>
+  </section>
+
+  <!-- bills list -->
+  <section style="border-bottom: 3px solid #131313;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 40px 32px 50px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; flex-wrap: wrap;">
+        <h2 style="font-size: 34px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; margin: 0;">{{ resultTitle }}</h2>
+        <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #555;">{{ resultCount }} · cliquez une carte → résumé en clair</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <sc-for list="{{ bills }}" as="b" hint-placeholder-count="5">
+          <div onClick="{{ b.onToggle }}" style="background: #fff; border: 3px solid #131313; box-shadow: 6px 6px 0 #131313; cursor: pointer;">
+            <div style="padding: 20px 26px;">
+              <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+                <span style="font-family: 'Archivo Narrow'; font-size: 14px; font-weight: 700; color: #fff; background: #0E4FC1; border: 2px solid #131313; padding: 5px 12px; white-space: nowrap;">{{ b.num }}</span>
+                <div style="flex: 1; min-width: 240px;">
+                  <div style="font-size: 18px; font-weight: 800; line-height: 1.25; letter-spacing: -0.01em;">{{ b.title }}</div>
+                  <div style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; color: #666; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.04em;">{{ b.sponsor }} · déposé le {{ b.tabled }}</div>
+                </div>
+                <sc-if value="{{ b.hot }}" hint-placeholder-val="{{ false }}">
+                  <span style="background: #131313; color: #FFD24D; font-family: 'Archivo Narrow'; font-size: 12px; font-weight: 700; padding: 5px 11px; text-transform: uppercase; letter-spacing: 0.04em;">🔥 {{ b.demands }} demandes</span>
+                </sc-if>
+                <span style="{{ b.badgeStyle }}">{{ b.status }}</span>
+                <span style="font-weight: 900; font-size: 22px; min-width: 20px; text-align: center;">{{ b.mark }}</span>
+              </div>
+              <!-- progress chips -->
+              <div style="display: flex; gap: 6px; margin-top: 16px; flex-wrap: wrap;">
+                <sc-for list="{{ b.steps }}" as="st" hint-placeholder-count="5">
+                  <span style="{{ st.chip }}">{{ st.name }}</span>
+                </sc-for>
+              </div>
+              <sc-if value="{{ b.isOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #E5E2DA; animation: dqUp 0.25s ease;">
+                  <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px;">
+                    <div>
+                      <div style="font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #0E4FC1; margin-bottom: 12px;">Ce que ça fait, en clair</div>
+                      <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 15.5px; line-height: 1.5; font-weight: 500;">
+                        <sc-for list="{{ b.summary }}" as="pt" hint-placeholder-count="3">
+                          <li>{{ pt }}</li>
+                        </sc-for>
+                      </ul>
+                      <div style="font-family: 'Archivo Narrow'; font-size: 12.5px; color: #666; margin-top: 14px; text-transform: uppercase; letter-spacing: 0.04em;">Résumé du texte tel que déposé — pas la version finale amendée</div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                      <div style="font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #666;">Dernier événement</div>
+                      <div style="border: 2px solid #131313; background: #F2F0EA; padding: 14px 16px; font-size: 14px; font-weight: 600; line-height: 1.4;">{{ b.lastEvent }}</div>
+                      <a href="#" style="border: 3px solid #131313; background: #FFD24D; color: #131313; padding: 12px 18px; font-weight: 800; font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.03em; text-align: center; box-shadow: 4px 4px 0 #131313;">Texte intégral → assnat.qc.ca</a>
+                      <button onClick="{{ b.onChallenge }}" style="{{ b.challengeStyle }}">{{ b.challengeLabel }}</button>
+                    </div>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+        <div style="border: 3px solid #131313; background: #fff; padding: 40px; text-align: center; font-size: 17px; font-weight: 700; text-transform: uppercase;">Aucun projet ne correspond — essayez un autre mot-clé</div>
+      </sc-if>
+      <div style="margin-top: 24px; border: 3px solid #131313; background: #FFD24D; padding: 14px 20px; font-family: 'Archivo Narrow'; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; text-align: center;">Maquette : 8 projets affichés sur 120 — la vraie page les liste tous</div>
+    </div>
+  </section>
+
+  <!-- challenge explainer -->
+  <section style="background: #FFD24D; border-bottom: 3px solid #131313;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 46px 32px 50px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 44px; align-items: center;">
+      <div>
+        <h2 style="font-size: 40px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 14px;">✋ C'est quoi, « challenger » ?</h2>
+        <p style="font-size: 16.5px; font-weight: 500; line-height: 1.5; margin: 0 0 12px;">Un clic sur « Challenger ce projet » = une demande citoyenne pour qu'on priorise son résumé en langage clair et qu'on le garde à l'œil.</p>
+        <p style="font-size: 16.5px; font-weight: 500; line-height: 1.5; margin: 0;">Pas de compte requis, pas de pétition — juste un signal. Les projets les plus demandés montent dans la section « Projets challengés » de l'accueil.</p>
+      </div>
+      <div style="border: 3px solid #131313; background: #fff; box-shadow: 8px 8px 0 #131313; padding: 26px 28px;">
+        <div style="font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #666; margin-bottom: 16px;">Top demandes en ce moment</div>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <sc-for list="{{ topChallenged }}" as="tc" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; border-bottom: 2px solid #E5E2DA; padding-bottom: 12px;">
+              <span style="font-size: 14.5px; font-weight: 700; line-height: 1.3;">{{ tc.num }} — {{ tc.short }}</span>
+              <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 700; white-space: nowrap;">🔥 {{ tc.demands }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer style="background: #131313; color: #B8B4AA;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 34px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+      <span style="font-family: 'Archivo Narrow'; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;">Site non officiel — données publiques ANQ &amp; Données Québec · construit avec Claude</span>
+      <div style="display: flex; gap: 18px; font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+        <a href="#" style="color: #F2F0EA;">Facebook</a>
+        <a href="#" style="color: #F2F0EA;">Offre-moi un café</a>
+        <a href="#" style="color: #F2F0EA;">Code source</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { scale: 1, query: "", filter: "tous", openBill: -1, challenges: {} };
+
+  renderVals() {
+    const scale = this.state.scale;
+    const q = this.state.query.trim().toLowerCase();
+
+    const tabBase = "font-family: 'Archivo Narrow'; font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #131313; padding: 6px 12px; border: 2px solid transparent;";
+    const tabActive = "font-family: 'Archivo Narrow'; font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; background: #131313; padding: 6px 12px; border: 2px solid #131313;";
+    const tabs = [
+      { label: "Aperçu", href: "Apercu.dc.html", active: false },
+      { label: "Ministres", href: "Ministres.dc.html", active: false },
+      { label: "Projets de loi", href: "Projets de loi.dc.html", active: true },
+      { label: "Votes", href: "Votes.dc.html", active: false },
+      { label: "Lexique", href: "Lexique.dc.html", active: false },
+    ].map(t => ({ ...t, style: t.active ? tabActive : tabBase }));
+
+    const filterDefs = [
+      { key: "tous", label: "Tous" },
+      { key: "actifs", label: "En cours" },
+      { key: "adoptes", label: "Adoptés" },
+      { key: "challenges", label: "🔥 Challengés" },
+    ];
+    const fBase = "font-family: 'Archivo Narrow'; font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; border: 3px solid #131313; background: #fff; color: #131313; padding: 10px 16px; cursor: pointer;";
+    const fActive = "font-family: 'Archivo Narrow'; font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; border: 3px solid #131313; background: #131313; color: #FFD24D; padding: 10px 16px; cursor: pointer;";
+    const filters = filterDefs.map(f => ({
+      ...f,
+      style: this.state.filter === f.key ? fActive : fBase,
+      onPick: () => this.setState({ filter: f.key }),
+    }));
+
+    const stepNames = ["Présentation", "Principe", "Étude", "Adoption", "Sanction"];
+    const legendSteps = stepNames.map((name, i) => ({ name, arrow: i === 4 ? "display: none;" : "font-weight: 900;" }));
+
+    const mkSteps = (reached) => {
+      const on = "font-family: 'Archivo Narrow'; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; background: #0E4FC1; color: #fff; border: 2px solid #131313; padding: 3px 9px;";
+      const now = "font-family: 'Archivo Narrow'; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; background: #FFD24D; color: #131313; border: 2px solid #131313; padding: 3px 9px;";
+      const off = "font-family: 'Archivo Narrow'; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; background: #fff; color: #999; border: 2px solid #CCC; padding: 3px 9px;";
+      return stepNames.map((name, i) => ({ name, chip: i < reached ? on : (i === reached ? now : off) }));
+    };
+
+    const badge = (bg, fg) => `font-family: 'Archivo Narrow'; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: ${fg}; background: ${bg}; border: 2px solid #131313; padding: 4px 11px; white-space: nowrap;`;
+
+    const billsData = [
+      { num: "PL 1", title: "Loi sur la réforme du mode de scrutin", sponsor: "Ministre responsable des Institutions démocratiques", tabled: "12 févr. 2026", status: "Présentation", reached: 0, badge: badge("#E5E2DA", "#131313"), hot: true, demands: 26, done: false,
+        lastEvent: "Présenté à l'Assemblée le 12 février 2026 — en attente du débat sur le principe.",
+        summary: ["Remplace le mode de scrutin actuel par un système mixte avec compensation régionale.", "Prévoit un référendum de validation lors des prochaines élections générales.", "Crée un comité indépendant pour dessiner les nouvelles régions électorales."] },
+      { num: "PL 3", title: "Loi modifiant diverses dispositions en matière d'éducation", sponsor: "Ministre de l'Éducation", tabled: "18 sept. 2025", status: "Sanctionnée", reached: 5, badge: badge("#BFE8CD", "#14532D"), hot: false, demands: 0, done: true,
+        lastEvent: "Sanctionnée le 10 juin 2026 — la loi est en vigueur.",
+        summary: ["Révise le financement des services aux élèves à besoins particuliers.", "Encadre l'usage des appareils numériques en classe.", "Ajuste le calendrier scolaire et les journées pédagogiques."] },
+      { num: "PL 7", title: "Loi sur l'aménagement du territoire et l'urbanisme", sponsor: "Ministre des Affaires municipales", tabled: "4 nov. 2025", status: "Étude détaillée", reached: 2, badge: badge("#FFD24D", "#131313"), hot: true, demands: 38, done: false,
+        lastEvent: "Étude détaillée en commission — 14 articles sur 122 adoptés au 12 juin 2026.",
+        summary: ["Oblige les municipalités à adopter un plan d'urbanisme conforme aux orientations gouvernementales.", "Encadre l'étalement urbain en zone agricole avec de nouvelles obligations de densité.", "Prévoit des sanctions pour les projets non conformes aux schémas d'aménagement."] },
+      { num: "PL 13", title: "Loi encadrant l'accès aux soins et l'organisation des services de santé", sponsor: "Ministre de la Santé", tabled: "21 janv. 2026", status: "Principe adopté", reached: 1, badge: badge("#D6E4FF", "#0E4FC1"), hot: true, demands: 31, done: false,
+        lastEvent: "Principe adopté par vote nominal le 6 juin 2026 (68 pour, 37 contre).",
+        summary: ["Crée une agence centrale chargée de coordonner les établissements de santé du réseau.", "Fixe des cibles d'accès à un médecin de famille dans un délai déterminé.", "Modifie les règles d'affectation du personnel entre établissements d'une même région."] },
+      { num: "PL 17", title: "Loi sur la sécurité des barrages et infrastructures hydriques", sponsor: "Ministre de l'Environnement", tabled: "3 mars 2026", status: "Présentation", reached: 0, badge: badge("#E5E2DA", "#131313"), hot: false, demands: 4, done: false,
+        lastEvent: "Présenté le 3 mars 2026 — en attente du débat sur le principe.",
+        summary: ["Resserre les inspections obligatoires des barrages de forte contenance.", "Oblige les exploitants à publier leurs plans de mesures d'urgence.", "Hausse les amendes en cas de manquement aux normes de sécurité."] },
+      { num: "PL 22", title: "Loi visant à renforcer la protection des renseignements personnels", sponsor: "Ministre de la Cybersécurité", tabled: "3 juin 2026", status: "Adoption", reached: 3, badge: badge("#D6E4FF", "#0E4FC1"), hot: false, demands: 9, done: false,
+        lastEvent: "Prise en considération du rapport de commission prévue à la reprise des travaux.",
+        summary: ["Impose une notification obligatoire en cas de fuite de données touchant des citoyen·ne·s.", "Augmente les amendes maximales pour les organismes fautifs.", "Crée un droit de portabilité des données pour les particuliers."] },
+      { num: "PL 28", title: "Loi favorisant l'achat local dans les marchés publics", sponsor: "Ministre de l'Économie", tabled: "14 avr. 2026", status: "Principe adopté", reached: 1, badge: badge("#D6E4FF", "#0E4FC1"), hot: false, demands: 12, done: false,
+        lastEvent: "Principe adopté le 28 mai 2026 — renvoyé en commission des finances publiques.",
+        summary: ["Accorde une marge préférentielle aux fournisseurs québécois dans les appels d'offres publics.", "Oblige les organismes publics à publier la part locale de leurs achats.", "Crée un registre des fournisseurs régionaux certifiés."] },
+      { num: "PL 31", title: "Loi modifiant le régime forestier", sponsor: "Ministre des Ressources naturelles et Forêts", tabled: "5 mai 2026", status: "Présentation", reached: 0, badge: badge("#E5E2DA", "#131313"), hot: false, demands: 7, done: false,
+        lastEvent: "Présenté le 5 mai 2026 — consultations particulières demandées par l'opposition.",
+        summary: ["Révise le calcul des garanties d'approvisionnement des scieries.", "Introduit des zones de sylviculture intensive encadrées.", "Renforce la consultation des communautés autochtones sur les plans forestiers."] },
+    ];
+
+    const matchQ = (b) => !q || b.num.toLowerCase().includes(q) || b.title.toLowerCase().includes(q) || b.sponsor.toLowerCase().includes(q);
+    const matchF = (b) => {
+      if (this.state.filter === "actifs") return !b.done;
+      if (this.state.filter === "adoptes") return b.done;
+      if (this.state.filter === "challenges") return b.hot;
+      return true;
+    };
+
+    const chOn = "border: 3px solid #131313; background: #131313; color: #FFD24D; padding: 12px 18px; font-weight: 800; font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.03em; cursor: pointer; font-family: 'Archivo', sans-serif;";
+    const chOff = "border: 3px solid #131313; background: #fff; color: #131313; padding: 12px 18px; font-weight: 800; font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.03em; cursor: pointer; font-family: 'Archivo', sans-serif;";
+
+    const filtered = billsData.filter(b => matchQ(b) && matchF(b));
+    const bills = filtered.map((b) => {
+      const i = billsData.indexOf(b);
+      const challenged = !!this.state.challenges[b.num];
+      return {
+        ...b,
+        steps: mkSteps(b.reached),
+        badgeStyle: b.badge,
+        isOpen: this.state.openBill === i,
+        mark: this.state.openBill === i ? "−" : "+",
+        onToggle: () => this.setState(s => ({ openBill: s.openBill === i ? -1 : i })),
+        challengeLabel: challenged ? "✋ Challengé ✓ (" + (b.demands + 1) + ")" : "✋ Challenger ce projet (" + b.demands + ")",
+        challengeStyle: challenged ? chOn : chOff,
+        onChallenge: (e) => { e.stopPropagation(); this.setState(s => ({ challenges: { ...s.challenges, [b.num]: !s.challenges[b.num] } })); },
+      };
+    });
+
+    const topChallenged = [
+      { num: "PL 7", short: "Aménagement du territoire", demands: 38 },
+      { num: "PL 13", short: "Accès aux soins", demands: 31 },
+      { num: "PL 1", short: "Mode de scrutin", demands: 26 },
+    ];
+
+    const filterLabels = { tous: "Tous les projets", actifs: "En cours", adoptes: "Adoptés", challenges: "Challengés" };
+
+    return {
+      rootSize: Math.round(16 * scale),
+      inc: () => this.setState(s => ({ scale: Math.min(1.3, s.scale + 0.1) })),
+      dec: () => this.setState(s => ({ scale: Math.max(0.85, s.scale - 0.1) })),
+      query: this.state.query,
+      setQuery: (e) => this.setState({ query: e.target.value }),
+      resultTitle: filterLabels[this.state.filter],
+      resultCount: bills.length + " affiché·s",
+      noResults: bills.length === 0,
+      tabs, filters, legendSteps, bills, topChallenged,
+    };
+  }
+}
+</script>
+</body>
+</html>

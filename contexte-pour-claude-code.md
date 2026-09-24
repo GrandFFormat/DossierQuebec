@@ -1,5 +1,11 @@
 # Contexte du projet — DossierQuébec (anciennement « Veille de l'Assemblée nationale du Québec »)
 
+> ⚠️ **Document du 6 juillet 2026, gardé pour l'histoire.** Il décrit « une maquette en un seul
+> fichier » : ce n'est plus le site. Pour l'apparence et la fabrication d'aujourd'hui — et pour
+> tout nouveau site de la famille — lire **`CHARTE-DOSSIER.md`** à la racine ; le cahier de design
+> et ses maquettes sont dans `design/handoff-2026-07/`. Une copie de ce document traîne dans
+> `dossiercanada/` : elle est tout aussi périmée.
+
 ## Ce que c'est
 Un site citoyen indépendant pour suivre l'activité de l'Assemblée nationale du Québec — ministres, projets de loi, votes, députés — dans l'esprit de nosdeputes.fr ou datan.fr en France. Ce genre de site n'existe pas encore pour le Québec ; le vide est réel.
 
