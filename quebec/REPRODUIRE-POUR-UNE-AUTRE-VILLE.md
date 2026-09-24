@@ -17,7 +17,7 @@ Mis à jour le 14 sept. 2026 : espace abonnés (alertes, mots-clés, organismes,
 détail de l'argent et demandes). La version anglaise n'est **pas** à reproduire (section 11).
 
 Mis à jour le 24 sept. 2026 : la campagne « demander une explication » (section 10) — tables,
-agrégats publics, digest, et ce que le découpage multipage y casse.
+agrégats publics, digest, et ce que le découpage multipage y avait cassé.
 
 ---
 
@@ -352,16 +352,22 @@ seuil. Secrets : `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, 
 `CRON_SECRET`, `PUBLIC_SITE_URL`. Le lien de désabonnement est un jeton HMAC signé avec
 `CRON_SECRET`.
 
-**⚠️ Ce que le découpage multipage casse — état au 24 septembre 2026, pas encore corrigé.** Le
-palmarès ne renvoie que des `bill_id` : il faut les rejoindre à des titres, et sur DQ cette
-jointure se fait sur la variable `bills` de la page. Or l'accueil ne charge que 4 projets
-(`apercuBills` remplit la même variable que la liste complète). Tout projet challengé hors de ces
-quatre-là disparaît en silence, et l'accueil affiche « Personne n'a encore demandé
-d'explication » — une phrase que le site n'est pas en mesure de savoir vraie. Sur la page des
-projets, la fonction sort immédiatement faute de son conteneur : `flag_counts()` n'y est jamais
-appelée, donc le filtre « 🔥 Challengés » ne renvoie rien et aucun badge n'apparaît. Et
-`renderFlagBox()` (demande par numéro, compteur de demandes restantes) n'a plus de conteneur
-dans aucune page.
+**⚠️ Ce que le découpage multipage avait cassé — corrigé le 24 septembre 2026.** Le palmarès ne
+renvoie que des `bill_id` : il faut les rejoindre à des titres, et cette jointure se faisait sur
+la variable `bills` de la page. Or l'accueil n'en charge que 4 (`apercuBills` remplit la même
+variable que la liste complète). **Neuf** projets challengés, treize demandes, étaient jetés en
+silence pendant que l'accueil affirmait « Personne n'a encore demandé d'explication » — une
+phrase que le site n'était pas en mesure de savoir vraie. Deux effets du même enfermement : sur
+la page des projets, la fonction sortait faute de son conteneur, donc `flag_counts()` n'y était
+jamais appelée (filtre « 🔥 Challengés » toujours vide, aucun badge sur les cartes) ; et le
+panneau admin, sur une page qui ne charge aucun projet, n'affichait que des « #27053 ». Depuis,
+le chargement du palmarès est séparé du rendu, et les titres viennent d'un
+`data/site/challengeBills.json` maigre (sept champs, 12,5 ko compressés) chargé à la demande.
+
+**Reste ouvert.** Aucune page ne porte plus `id="flagBox"` : la demande par NUMÉRO, avec le
+compteur de demandes restantes du mois, ne s'affiche donc nulle part. Le bouton des cartes fait
+le même travail — reste à décider si la boîte revient sur la page du compte ou si la fonction
+part.
 
 ➜ **La règle à retenir pour toute reproduction : ne jamais faire dépendre un palmarès public de
 ce que la page a chargé.** Publier une liste maigre (id, numéro, titre, statut, étape) et l'aller
