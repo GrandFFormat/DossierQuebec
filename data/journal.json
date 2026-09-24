@@ -1,6 +1,19 @@
 [
   {
     "date": "2026-09-24",
+    "volet": "site",
+    "fr": {
+      "titre": "La version anglaise tient d’une page à l’autre, et se voit dans l’adresse",
+      "texte": "Choisir « English » ne valait que pour la page ouverte : le clic suivant ramenait au français, et rien dans l’adresse ne disait la langue. Maintenant, le choix est gardé d’une page à l’autre et une adresse en anglais porte « ?lang=en » — copiée et ouverte ailleurs, elle garde la langue. C’est aussi le même choix que Mes dossiers et Abonnement : on ne choisit plus sa langue qu’une fois. La page Mon dossier, elle, porte enfin son propre titre en anglais."
+    },
+    "en": {
+      "titre": "The English version now carries from page to page, and shows in the address",
+      "texte": "Choosing “English” only lasted for the page you were on: the next click brought you back to French, and nothing in the address told the language. Now the choice carries from page to page, and an English address ends with “?lang=en” — copied and opened elsewhere, it keeps the language. It is also the same choice as My files and Subscription: you pick your language only once. The My file page finally has its own English title too."
+    },
+    "commits": []
+  },
+  {
+    "date": "2026-09-24",
     "volet": "assemblee",
     "fr": {
       "titre": "On peut de nouveau challenger un projet de loi",
