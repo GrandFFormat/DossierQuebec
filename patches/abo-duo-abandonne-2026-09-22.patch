@@ -1,0 +1,663 @@
+Abonnements Ville / Province / Duo — travail ABANDONNÉ, gardé au cas où.
+
+Écrit le 22 septembre 2026 à 11 h 51 par un outil qui n'est pas Claude (cinq fichiers en
+2,5 secondes ; aucune trace dans les transcriptions de Claude Code). Jamais commité, jamais
+déployé.
+
+Martin a tranché le 23 septembre : « revenons à un seul abonnement ». Le même abonnement couvre
+donc les villes et l'Assemblée, sans accès croisé ni forfait Duo.
+
+Pour le ressortir un jour, depuis la racine du dépôt :
+    git apply docs/abo-duo-abandonne.patch
+Attention : il a été fait contre bc37b2f et touche des fichiers qui ont bougé depuis.
+
+diff --git a/abonnement.html b/abonnement.html
+index bb41119..58561e7 100644
+--- a/abonnement.html
++++ b/abonnement.html
+@@ -33,6 +33,21 @@
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="/commun/abonnes.css">
++
++<style>
++  /* Forfaits Ville | Province + bandeau Duo */
++  .ab-payer-grille { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
++  @media (max-width: 720px) { .ab-payer-grille { grid-template-columns: 1fr; } }
++  .ab-payer-col, .ab-payer-duo {
++    border: 1px solid var(--ab-bordure, #d0d5dd); border-radius: 12px; padding: 1rem 1.1rem;
++    background: var(--ab-carte, #fff);
++  }
++  .ab-payer-col-focus { border-color: var(--ab-accent, #1a6bb5); box-shadow: 0 0 0 2px color-mix(in srgb, var(--ab-accent, #1a6bb5) 25%, transparent); }
++  .ab-payer-col h4, .ab-payer-duo h4 { margin: 0 0 0.4rem; font-size: 1.15rem; }
++  .ab-prix-ligne { margin: 0.25rem 0 0.6rem; }
++  .ab-payer-boutons { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 0; }
++  .ab-payer-duo { margin-top: 0.5rem; border-style: dashed; }
++</style>
+ </head>
+ <body class="ab-page">
+ <div class="ab-contenu">
+@@ -105,11 +120,11 @@
+           <li data-en="Plain-language summaries (in English and French)">Les résumés en langage clair</li>
+           <li data-en="Recorded votes and council members">Les votes nominatifs et les membres des conseils</li>
+           <li data-en="The link to each official document (in French)">Le lien vers chaque document officiel</li>
+-          <li class="li-compte" data-en="With a free account: follow up to 3 projects or bills in <a class=&quot;ab-lien&quot; href=&quot;/mes-dossiers&quot;>My files</a> and see where they stand">Avec un compte gratuit : suivre jusqu'à 3 projets ou projets de loi dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a> et voir où ils en sont</li>
++          <li class="li-compte" data-en="With a free account: follow up to 3 bills in <a class=&quot;ab-lien&quot; href=&quot;/mon-dossier&quot;>My file</a> and 3 city projects in <a class=&quot;ab-lien&quot; href=&quot;/mes-dossiers&quot;>My files</a>, and see where they stand">Avec un compte gratuit : suivre jusqu'à 3 projets de loi dans <a class="ab-lien" href="/mon-dossier">Mon dossier</a> et 3 projets de ville dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a>, et voir où ils en sont</li>
+         </ul>
+       </section>
+       <section class="ab-carte ab-offre ab-offre-payant">
+-        <div class="ab-offre-tete"><h3 data-en="With the paid subscription">Avec l'abonnement payant</h3><span class="ab-pastille-offre" data-en="$10 / month · $96 / year">10 $ / mois · 96 $ / an</span></div>
++        <div class="ab-offre-tete"><h3 data-en="With a paid plan">Avec un forfait payant</h3><span class="ab-pastille-offre" data-en="From $10 / month">À partir de 10 $ / mois</span></div>
+         <p class="ab-note" style="margin:0 0 10px" data-en="Everything free, plus:">Tout le gratuit, plus :</p>
+         <div class="ab-blocs-offre">
+         <div class="ab-bloc-offre ab-bloc-assemblee">
+@@ -141,10 +156,11 @@
+         </div>
+         </div>
+         <p class="ab-prix" id="prix" data-en="<span class=&quot;ab-prix-montant&quot;>$10</span> <span class=&quot;ab-note&quot;>a month, or $96 a year — $8 a month, more than two months free</span>"><span class="ab-prix-montant">10 $</span> <span class="ab-note">par mois, ou 96 $ par an — soit 8 $ par mois, plus de deux mois offerts</span></p>
+-        <p class="ab-note" data-en="No commitment: cancel anytime, in two clicks; it stays active until the end of the paid period. Want to try first? A free account already follows 3 projects or bills.">Sans engagement : annulable en tout temps, en deux clics ; il reste actif jusqu'à la fin de la période payée. Envie d'essayer d'abord ? Un compte gratuit suit déjà 3 projets ou projets de loi.</p>
+-        <p class="ab-note" data-en="Per account: 10 projects or bills followed, 5 city keywords and 5 Assembly keywords, 3 organizations, 10 exports a month.">Par compte : 10 projets ou projets de loi suivis, 5 mots-clés de ville et 5 de l'Assemblée, 3 organismes, 10 exports par mois.</p>
++        <p class="ab-note" data-en="No commitment: cancel anytime, in two clicks; it stays active until the end of the paid period. Want to try first? A free account already follows 3 bills and 3 city projects.">Sans engagement : annulable en tout temps, en deux clics ; il reste actif jusqu'à la fin de la période payée. Envie d'essayer d'abord ? Un compte gratuit suit déjà 3 projets de loi et 3 projets de ville.</p>
++        <p class="ab-note" data-en="Per account: 10 bills and 10 city projects followed, 5 city keywords and 5 Assembly keywords, 3 organizations, 10 exports a month.">Par compte : 10 projets de loi et 10 projets de ville suivis, 5 mots-clés de ville et 5 de l'Assemblée, 3 organismes, 10 exports par mois.</p>
+         <p class="ab-note" data-en="Made for engaged residents, neighbourhood associations and freelance journalists.">Pensé pour le citoyen engagé, l'association de quartier, le ou la journaliste à la pige.</p>
+-        <p class="ab-note" data-en="One subscription for every city covered — not one per city.">Un seul abonnement pour toutes les villes couvertes — pas un abonnement par ville.</p>
++        <p class="ab-note" data-en="Ville covers every city on the site. Province covers the National Assembly. Duo covers both.">Ville couvre toutes les villes du site. Province couvre l'Assemblée nationale. Duo couvre les deux.</p>
++        <p class="ab-note" data-en="Cross-access is limited: with Ville alone, you can follow 1 bill or 1 Assembly keyword; with Province alone, 1 city project or 1 neighbourhood keyword.">L'accès croisé est limité : avec Ville seul, vous pouvez suivre 1 projet de loi ou 1 mot-clé de l'Assemblée ; avec Province seul, 1 projet de ville ou 1 mot-clé de quartier.</p>
+       </section>
+     </div>
+ 
+@@ -262,29 +278,67 @@
+     const s = await session();
+     const etat = await etatAbonnement(s);
+     const annule = new URLSearchParams(location.search).get('abonnement') === 'annule';
++    const prefereVille = document.documentElement.dataset.contexte === 'villes' || Boolean(ville && VILLES[ville]);
++    const f = etat?.forfaits || {};
++    const aVille = f.ville;
++    const aProvince = f.province;
++    const aDuo = f.duo;
++    const libProduit = (pr) => ({ ville: tr('Ville', 'City'), province: tr('Province', 'Province'), duo: tr('Duo', 'Duo') })[pr] || pr;
++
+     if (etat?.ouvert) {
+-      document.querySelector('#prix').innerHTML = `<span class="ab-prix-montant">${tr('10 $', '$10')}</span> <span class="ab-note">${etat.forfaits?.annuel ? tr('par mois, ou 96 $ par an — soit 8 $ par mois, plus de deux mois offerts', 'a month, or $96 a year — $8 a month, more than two months free') : tr('par mois', 'a month')}</span>`;
++      document.querySelector('#prix').innerHTML = `<span class="ab-prix-montant">${tr('10 $', '$10')}</span> <span class="ab-note">${tr('par mois (Ville ou Province), ou 15 $ pour le Duo — 96 $ / 144 $ par an', 'a month (City or Province), or $15 for Duo — $96 / $144 a year')}</span>`;
+     }
+     if (!etat || !(etat.abonne || etat.peutPayer || etat.ouvert)) return;
+ 
+     if (etat.abonne) {
++      const pr = etat.produit || 'duo';
++      const upgradeDuo = pr !== 'duo' && aDuo;
+       payer.innerHTML = `<h3><span class="ab-icone" aria-hidden="true">✅</span> ${tr('Votre abonnement est actif', 'Your subscription is active')}</h3>
++        <p>${tr('Forfait :', 'Plan:')} <strong>${libProduit(pr)}</strong>${pr === 'ville' ? tr(' — plein accès aux villes ; accès croisé Assemblée limité (1 suivi ou 1 mot-clé).', ' — full city access; limited Assembly cross-access (1 follow or 1 keyword).') : pr === 'province' ? tr(' — plein accès à l\'Assemblée ; accès croisé ville limité (1 projet ou 1 mot-clé).', ' — full Assembly access; limited city cross-access (1 project or 1 keyword).') : tr(' — plein accès villes + Assemblée.', ' — full city + Assembly access.')}</p>
+         <p>${etat.annulationPrevue && etat.fin
+           ? tr(`Annulé : il reste actif jusqu'au ${dateFr(new Date(etat.fin).toLocaleDateString('en-CA'))}, puis il s'arrête sans autre frais.`, `Cancelled: it stays active until ${dateFr(new Date(etat.fin).toLocaleDateString('en-CA'))}, then stops with no further charge.`)
+           : tr('Merci : il garde le reste du site gratuit pour tout le monde. Les alertes, le détail de l\'argent, l\'agenda et l\'export sont dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a>.', 'Thank you: it keeps the rest of the site free for everyone. Alerts, money details, agendas and export are in <a class="ab-lien" href="/mes-dossiers">My files</a>.')}</p>
++        ${upgradeDuo ? `<p class="ab-note">${tr('Vous avez Ville ou Province seul.', 'You have City or Province alone.')} <button type="button" class="ab-lien-bouton" data-action="payer" data-produit="duo" data-forfait="mensuel">${tr('Passer au duo — 15 $/mois', 'Upgrade to Duo — $15/month')}</button> <span class="ab-note">${tr('(le portail Stripe gérera le changement ; pour l\'instant, écrivez-nous si le bouton renvoie déjà abonné)', '(the Stripe portal will handle the change; for now, write to us if the button says already subscribed)')}</span></p>` : ''}
+         ${etat.gerable ? `<p><button type="button" class="ab-bouton ab-bouton-second" data-action="portail">${tr('Gérer mon abonnement', 'Manage my subscription')}</button> <span class="ab-note">${tr('carte, factures', 'card, invoices')}</span></p>` : ''}
+         ${etat.annulable ? `<p><button type="button" class="ab-lien-bouton" data-action="annuler">${tr('Annuler mon abonnement', 'Cancel my subscription')}</button> <span class="ab-note">${tr('en deux clics, sans justification ; il reste actif jusqu’à la fin de la période payée', 'two clicks, no questions asked; it stays active until the end of the paid period')}</span></p>` : ''}
+         <p class="ab-note ab-payer-etat" aria-live="polite"></p>`;
+     } else if (etat.peutPayer) {
+-      payer.innerHTML = `<h3><span class="ab-icone" aria-hidden="true">💳</span> ${tr("S'abonner", 'Subscribe')}</h3>
++      const boutons = (produit, mensuelLabel, annuelLabel, mensuelEn, annuelEn) => {
++        const pf = f[produit];
++        if (!pf) return `<p class="ab-note">${tr('Bientôt disponible', 'Coming soon')}</p>`;
++        return `<p class="ab-payer-boutons">
++          ${pf.mensuel ? `<button type="button" class="ab-bouton" data-action="payer" data-produit="${produit}" data-forfait="mensuel">${tr(mensuelLabel, mensuelEn)}</button>` : ''}
++          ${pf.annuel ? `<button type="button" class="ab-bouton ab-bouton-second" data-action="payer" data-produit="${produit}" data-forfait="annuel">${tr(annuelLabel, annuelEn)}</button>` : ''}
++        </p>`;
++      };
++      const colVille = `<div class="ab-payer-col ${prefereVille ? 'ab-payer-col-focus' : ''}" data-produit-col="ville">
++        <h4>${tr('🏙️ Ville', '🏙️ City')}</h4>
++        <p class="ab-prix-ligne"><strong>10 $</strong> ${tr('/ mois · 96 $ / an', '/ month · $96 / year')}</p>
++        <p>${tr('Plein accès à toutes les villes couvertes : alertes projets, mots-clés, organismes, détail de l\'argent, export…', 'Full access to every city covered: project alerts, keywords, organizations, money details, export…')}</p>
++        <p class="ab-note">${tr('Accès croisé Assemblée limité : 1 projet de loi suivi ou 1 mot-clé AN, plus un digest court « ce qui touche votre ville ».', 'Limited Assembly cross-access: 1 followed bill or 1 Assembly keyword, plus a short digest of what touches your city.')}</p>
++        ${boutons('ville', "S'abonner — 10 $/mois", "S'abonner — 96 $/an", 'Subscribe — $10/mo', 'Subscribe — $96/yr')}
++      </div>`;
++      const colProvince = `<div class="ab-payer-col ${!prefereVille ? 'ab-payer-col-focus' : ''}" data-produit-col="province">
++        <h4>${tr('🏛️ Province', '🏛️ Province')}</h4>
++        <p class="ab-prix-ligne"><strong>10 $</strong> ${tr('/ mois · 96 $ / an', '/ month · $96 / year')}</p>
++        <p>${tr('Plein accès à l\'Assemblée : alertes de statut des projets de loi, mots-clés AN, élus suivis…', 'Full Assembly access: bill status alerts, Assembly keywords, followed elected members…')}</p>
++        <p class="ab-note">${tr('Accès croisé ville limité : 1 projet de ville ou 1 mot-clé/quartier, plus un aperçu.', 'Limited city cross-access: 1 city project or 1 neighbourhood keyword, plus a preview.')}</p>
++        ${boutons('province', "S'abonner — 10 $/mois", "S'abonner — 96 $/an", 'Subscribe — $10/mo', 'Subscribe — $96/yr')}
++      </div>`;
++      const bandeauDuo = aDuo ? `<div class="ab-payer-duo">
++        <h4>${tr('🎁 Duo — villes + Assemblée', '🎁 Duo — cities + Assembly')}</h4>
++        <p class="ab-prix-ligne"><strong>15 $</strong> ${tr('/ mois · 144 $ / an', '/ month · $144 / year')}</p>
++        <p>${tr('Plein accès Ville et Province. Un seul abonnement, pas besoin d\'acheter les deux.', 'Full City and Province access. One subscription — no need to buy both.')}</p>
++        ${boutons('duo', "S'abonner au duo — 15 $/mois", "S'abonner au duo — 144 $/an", 'Subscribe to Duo — $15/mo', 'Subscribe to Duo — $144/yr')}
++      </div>` : '';
++      payer.innerHTML = `<h3><span class="ab-icone" aria-hidden="true">💳</span> ${tr('Choisissez votre forfait', 'Choose your plan')}</h3>
+         ${annule ? `<p class="ab-note">${tr('Paiement interrompu : rien n\'a été débité.', 'Payment interrupted: nothing was charged.')}</p>` : ''}
+-        <p>${etat.forfaits?.annuel ? tr('10 $ par mois, ou 96 $ par an — soit 8 $ par mois', '$10 a month, or $96 a year — that is $8 a month') : tr('10 $ par mois', '$10 a month')}${tr(', pour toutes les villes couvertes. Le paiement se fait sur la page sécurisée de Stripe ; la carte n\'est jamais vue par DossierQuébec. <strong>Annulable en tout temps</strong>, depuis cette page ou Mes dossiers : l\'abonnement reste actif jusqu\'à la fin de la période payée.', ', for every city covered. Payment happens on Stripe\'s secure page; DossierQuébec never sees your card. <strong>Cancel anytime</strong>, from this page or My files: the subscription stays active until the end of the paid period.')}</p>
++        <p>${tr('Un compte choisit Ville, Province ou Duo — un seul abonnement Stripe actif à la fois. Le paiement se fait sur la page sécurisée de Stripe ; la carte n\'est jamais vue par DossierQuébec. <strong>Annulable en tout temps</strong>.', 'An account chooses City, Province or Duo — one active Stripe subscription at a time. Payment happens on Stripe\'s secure page; DossierQuébec never sees your card. <strong>Cancel anytime</strong>.')}</p>
+         ${bandeauEssai(etat)}
+-        <p><button type="button" class="ab-bouton" data-action="payer" data-forfait="mensuel">${tr("S'abonner — 10 $ par mois", 'Subscribe — $10 a month')}</button>
+-          ${etat.forfaits?.annuel ? `<button type="button" class="ab-bouton ab-bouton-second" data-action="payer" data-forfait="annuel">${tr("S'abonner — 96 $ par an", 'Subscribe — $96 a year')}</button>` : ''}</p>
++        <div class="ab-payer-grille">${colVille}${colProvince}</div>
++        ${bandeauDuo}
+         <p class="ab-note ab-payer-etat" aria-live="polite"></p>`;
+     } else if (!etat.connecte) {
+-      // Ouvert à tous, mais pas connecté : le lien de connexion ramène ici.
+       payer.innerHTML = `<h3><span class="ab-icone" aria-hidden="true">💳</span> ${tr("S'abonner", 'Subscribe')}</h3>
+         <p>${tr("L'abonnement se rattache à votre compte : entrez votre courriel, on vous envoie un lien de connexion qui ramène ici.", 'The subscription is tied to your account: enter your email and we\'ll send you a sign-in link that brings you back here.')}</p>
+         <form class="ab-form" id="form-payer-lien">
+@@ -313,29 +367,32 @@
+     const bouton = e.target.closest('[data-action="payer"], [data-action="portail"], [data-action="annuler"]');
+     if (!bouton) return;
+     const action = bouton.dataset.action === 'payer' ? 'paiement' : bouton.dataset.action;
+-    const etat = payer.querySelector('.ab-payer-etat');
++    const etatEl = payer.querySelector('.ab-payer-etat');
+     const s = await session();
+     if (!s) { location.assign('/mes-dossiers'); return; }
+     bouton.disabled = true;
+-    etat.textContent = tr('Ouverture de Stripe…', 'Opening Stripe…');
++    etatEl.textContent = tr('Ouverture de Stripe…', 'Opening Stripe…');
+     const forfait = bouton.dataset.forfait === 'annuel' ? 'annuel' : 'mensuel';
+-    mesurer(action === 'paiement' ? 'abonnement_payer' : action === 'annuler' ? 'abonnement_annuler' : 'abonnement_portail', { ville: VILLES[ville] ? ville : 'aucune', ...(action === 'paiement' ? { forfait } : {}) });
++    const produit = ['ville', 'province', 'duo'].includes(bouton.dataset.produit) ? bouton.dataset.produit : 'duo';
++    mesurer(action === 'paiement' ? 'abonnement_payer' : action === 'annuler' ? 'abonnement_annuler' : 'abonnement_portail', { ville: VILLES[ville] ? ville : 'aucune', ...(action === 'paiement' ? { forfait, produit } : {}) });
+     const r = await fetch(`/api/abonnement?action=${action}`, {
+       method: 'POST',
+       headers: { Authorization: `Bearer ${s.access_token}`, 'Content-Type': 'application/json' },
+-      body: JSON.stringify({ langue: EN ? 'en' : 'fr', forfait }),
++      body: JSON.stringify({ langue: EN ? 'en' : 'fr', forfait, ...(action === 'paiement' ? { produit } : {}) }),
+     }).catch(() => null);
+     const donnees = r ? await r.json().catch(() => ({})) : {};
+     if (donnees.url) { location.assign(donnees.url); return; }
+     bouton.disabled = false;
+-    etat.textContent = r?.status === 409
+-      ? tr('Votre abonnement est déjà actif.', 'Your subscription is already active.')
+-      // Le serveur a refusé d'ouvrir Stripe : le prix configuré ne vaut pas celui annoncé ici.
+-      : donnees.erreur === 'prix mal configuré' || donnees.erreur === 'forfait indisponible'
++    etatEl.textContent = r?.status === 409
++      ? (donnees.suggestion === 'duo'
++        ? tr('Vous êtes déjà abonné à un autre forfait. Passez au Duo (15 $/mois) pour les deux accès, ou gérez votre abonnement.', 'You already subscribe to another plan. Switch to Duo ($15/month) for both, or manage your subscription.')
++        : tr('Votre abonnement est déjà actif.', 'Your subscription is already active.'))
++      : donnees.erreur === 'prix mal configuré' || donnees.erreur === 'forfait indisponible' || donnees.erreur === 'prix mal configuré'
+         ? tr('Le paiement est en cours de configuration : rien n’a été débité. Réessayez un peu plus tard.', 'Payment is being set up: nothing was charged. Try again a little later.')
+       : tr('Stripe ne répond pas pour l\'instant. Réessayez dans une minute.', 'Stripe is not responding right now. Try again in a minute.');
+   });
+ 
++
+   sAbonner();
+   client.auth.onAuthStateChange((evenement) => { if (evenement === 'SIGNED_IN') sAbonner(); });
+ 
+diff --git a/api/_stripe.js b/api/_stripe.js
+index e14fe5c..0c0bbf6 100644
+--- a/api/_stripe.js
++++ b/api/_stripe.js
+@@ -7,9 +7,11 @@
+ // Variables Vercel :
+ //   STRIPE_SECRET_KEY      sk_test_… en essai, sk_live_… en réel
+ //   STRIPE_WEBHOOK_SECRET  whsec_… du point de terminaison https://dossierquebec.ca/api/stripe-webhook
+-//   STRIPE_PRIX            price_… du forfait mensuel (10 $ CA par mois, récurrent)
+-//   STRIPE_PRIX_ANNUEL     price_… du forfait annuel (96 $ CA par an, récurrent) — facultatif : sans
+-//                          lui, seul le mensuel est offert
++//   Produits (cad, récurrents) — un prix manquant = ce forfait n'est pas offert :
++//   STRIPE_PRIX_VILLE / STRIPE_PRIX_VILLE_ANNUEL       10 $/mois · 96 $/an
++//   STRIPE_PRIX_PROVINCE / STRIPE_PRIX_PROVINCE_ANNUEL 10 $/mois · 96 $/an
++//   STRIPE_PRIX_DUO / STRIPE_PRIX_DUO_ANNUEL           15 $/mois · 144 $/an
++//   STRIPE_PRIX / STRIPE_PRIX_ANNUEL                   alias/fallback duo (legacy)
+ //   STRIPE_OUVERT          « 1 » : le paiement est offert à tout le monde. Sinon, seulement aux
+ //                          adresses de STRIPE_ESSAI (séparées par des virgules) — pour essayer en
+ //                          production sans ouvrir l'abonnement.
+@@ -17,7 +19,33 @@
+ import crypto from 'node:crypto';
+ import { supabase } from './_alertes.js';
+ 
+-export const stripeConfigure = () => Boolean(process.env.STRIPE_SECRET_KEY && process.env.STRIPE_PRIX && process.env.STRIPE_WEBHOOK_SECRET);
++const PRODUITS = ['ville', 'province', 'duo'];
++const PERIODES = ['mensuel', 'annuel'];
++
++// Grille produit × période. Montants en cents CAD.
++export const FORFAITS = {
++  'ville-mensuel': { produit: 'ville', periode: 'mensuel', variable: 'STRIPE_PRIX_VILLE', montant: 1000, intervalle: 'month' },
++  'ville-annuel': { produit: 'ville', periode: 'annuel', variable: 'STRIPE_PRIX_VILLE_ANNUEL', montant: 9600, intervalle: 'year' },
++  'province-mensuel': { produit: 'province', periode: 'mensuel', variable: 'STRIPE_PRIX_PROVINCE', montant: 1000, intervalle: 'month' },
++  'province-annuel': { produit: 'province', periode: 'annuel', variable: 'STRIPE_PRIX_PROVINCE_ANNUEL', montant: 9600, intervalle: 'year' },
++  'duo-mensuel': { produit: 'duo', periode: 'mensuel', variable: 'STRIPE_PRIX_DUO', montant: 1500, intervalle: 'month', alias: 'STRIPE_PRIX' },
++  'duo-annuel': { produit: 'duo', periode: 'annuel', variable: 'STRIPE_PRIX_DUO_ANNUEL', montant: 14400, intervalle: 'year', alias: 'STRIPE_PRIX_ANNUEL' },
++};
++
++export const CROISE_MAX_SUIVIS = 1;
++export const CROISE_MAX_MOTS_CLES = 1;
++
++const cleForfait = (produit, periode) => `${produit}-${periode}`;
++
++export const prixDe = (produit, periode = 'mensuel') => {
++  const f = FORFAITS[cleForfait(produit, periode)];
++  if (!f) return null;
++  return process.env[f.variable] || (f.alias ? process.env[f.alias] : null) || null;
++};
++
++const unPrixConfigure = () => PRODUITS.some((p) => PERIODES.some((per) => prixDe(p, per)));
++
++export const stripeConfigure = () => Boolean(process.env.STRIPE_SECRET_KEY && process.env.STRIPE_WEBHOOK_SECRET && unPrixConfigure());
+ export const modeStripe = () => (/^[sr]k_live_/.test(process.env.STRIPE_SECRET_KEY ?? '') ? 'reel' : 'test');
+ // STRIPE_OUVERT ne vaut qu'avec une clé du mode RÉEL. Posé par-dessus des clés d'essai — le geste
+ // littéral de « débarrer » — il donnerait l'accès payant à n'importe qui contre la carte 4242, que la
+@@ -47,31 +75,55 @@ export async function stripe(chemin, parametres) {
+   return donnees;
+ }
+ 
+-// Les forfaits (Martin : 10 $ par mois ou 96 $ par an, soit 8 $ par mois — annuel révisé le
+-// 20 sept. 2026, il était à 80 $). Le navigateur n'envoie que
+-// « mensuel » ou « annuel » : l'identifiant du prix Stripe ne vient jamais de lui.
+-export const FORFAITS = {
+-  mensuel: { variable: 'STRIPE_PRIX', montant: 1000, intervalle: 'month' },
+-  annuel: { variable: 'STRIPE_PRIX_ANNUEL', montant: 9600, intervalle: 'year' },
+-};
+-export const prixDe = (forfait) => (Object.hasOwn(FORFAITS, forfait) ? process.env[FORFAITS[forfait].variable] || null : null);
+-
+ // Avant d'envoyer quelqu'un payer : le prix configuré dans Vercel vaut-il ce que la page annonce ?
+-// Un vieux price_… oublié (l'ancien 3 $) vendrait au mauvais montant. Un prix conforme le reste
++// Un vieux price_… oublié vendrait au mauvais montant. Un prix conforme le reste
+ // (Stripe ne permet pas d'en changer le montant) : on ne le redemande pas à chaque paiement.
+ const conformes = new Set();
+-export async function prixConforme(forfait) {
+-  const id = prixDe(forfait);
+-  if (!id) return false;
++export async function prixConforme(produit, periode) {
++  const id = prixDe(produit, periode);
++  const f = FORFAITS[cleForfait(produit, periode)];
++  if (!id || !f) return false;
+   if (conformes.has(id)) return true;
+   const p = await stripe(`/prices/${encodeURIComponent(id)}`);
+-  const { montant, intervalle } = FORFAITS[forfait];
+-  const ok = Boolean(p.active && p.currency === 'cad' && p.unit_amount === montant && p.recurring?.interval === intervalle && (p.recurring?.interval_count ?? 1) === 1);
++  const ok = Boolean(p.active && p.currency === 'cad' && p.unit_amount === f.montant && p.recurring?.interval === f.intervalle && (p.recurring?.interval_count ?? 1) === 1);
+   if (ok) conformes.add(id);
+-  else console.error(`Stripe : le prix du forfait ${forfait} (${FORFAITS[forfait].variable}) ne vaut pas ${montant / 100} $ CA par ${intervalle} — paiement refusé.`);
++  else console.error(`Stripe : le prix ${produit}/${periode} (${f.variable}) ne vaut pas ${f.montant / 100} $ CA par ${f.intervalle} — paiement refusé.`);
+   return ok;
+ }
+ 
++/** Ce que GET /api/abonnement expose : seulement les forfaits dont le price_… est posé. */
++export function forfaitsDisponibles() {
++  const out = {};
++  for (const produit of PRODUITS) {
++    const mensuel = Boolean(prixDe(produit, 'mensuel'));
++    const annuel = Boolean(prixDe(produit, 'annuel'));
++    if (mensuel || annuel) out[produit] = { mensuel, annuel };
++  }
++  return out;
++}
++
++export function produitValide(p) {
++  return PRODUITS.includes(p) ? p : null;
++}
++
++/** Map price id → produit. Legacy STRIPE_PRIX* → duo. */
++export function produitDepuisPrix(priceId) {
++  if (!priceId) return null;
++  for (const f of Object.values(FORFAITS)) {
++    const id = process.env[f.variable] || (f.alias ? process.env[f.alias] : null);
++    if (id && id === priceId) return f.produit;
++  }
++  return null;
++}
++
++export function produitDepuisSub(sub) {
++  const meta = produitValide(sub?.metadata?.produit);
++  if (meta) return meta;
++  const priceId = sub?.items?.data?.[0]?.price?.id
++    ?? (typeof sub?.items?.data?.[0]?.price === 'string' ? sub.items.data[0].price : null);
++  return produitDepuisPrix(priceId);
++}
++
+ // Stripe-Signature: t=<horodatage>,v1=<hmac>[,v1=…] ; HMAC-SHA256 de « t.corps brut ». Cinq minutes
+ // de tolérance, comme la bibliothèque officielle.
+ export function signatureStripeValide(brut, entete, maintenant = Date.now()) {
+@@ -106,6 +158,30 @@ export async function ligneAbonnement(userId) {
+ 
+ export const estActive = (l) => Boolean(l && l.statut === 'actif' && (!l.fin || new Date(l.fin) > new Date()));
+ 
++/** Produit effectif : metadata/colonne, sinon duo pour manuel actif ou legacy sans produit. */
++export function produitDe(l) {
++  if (!l) return null;
++  const p = produitValide(l.produit);
++  if (p) return p;
++  if (estActive(l) && (l.source === 'manuel' || !l.produit)) return 'duo';
++  return null;
++}
++
++/** Plein accès au scope (ville ou province) : actif et (même produit, duo, ou legacy sans produit). */
++export function aAccesPlein(l, scope) {
++  if (!estActive(l) || (scope !== 'ville' && scope !== 'province')) return false;
++  const p = produitDe(l);
++  return p === scope || p === 'duo' || !l.produit;
++}
++
++/** Accès croisé limité : actif et abonné à l'autre scope seul (pas duo). */
++export function aAccesCroise(l, scope) {
++  if (!estActive(l) || (scope !== 'ville' && scope !== 'province')) return false;
++  const p = produitDe(l);
++  if (!p || p === 'duo') return false;
++  return p !== scope;
++}
++
+ const GRACE = 2 * 24 * 3600; // un renouvellement dont le webhook tarde ne coupe pas l'accès
+ const JOURS_IMPAYE = 3 * 24 * 3600; // carte refusée : Stripe réessaie, l'accès tient trois jours
+ 
+@@ -155,6 +231,10 @@ export async function synchroniser(abonnementId, indiceUtilisateur) {
+   else if (finPeriode) fin = (annulationPrevue ? (sub.cancel_at ?? finPeriode) : finPeriode + GRACE) * 1000;
+   else fin = null;
+ 
++  // Produit : metadata Stripe, sinon price id, sinon duo si actif et indéterminable (legacy).
++  let produit = produitDepuisSub(sub);
++  if (!produit && actif) produit = 'duo';
++
+   let orphelin = false;
+   await supabase('/rest/v1/abonnements?on_conflict=user_id', {
+     methode: 'POST',
+@@ -167,6 +247,7 @@ export async function synchroniser(abonnementId, indiceUtilisateur) {
+       stripe_customer_id: typeof sub.customer === 'string' ? sub.customer : sub.customer?.id ?? null,
+       stripe_subscription_id: sub.id,
+       annulation_prevue: annulationPrevue,
++      produit: produit ?? null,
+       updated_at: new Date().toISOString(),
+     },
+   }).catch((e) => {
+diff --git a/api/abonnement.js b/api/abonnement.js
+index 298f494..1a4af48 100644
+--- a/api/abonnement.js
++++ b/api/abonnement.js
+@@ -1,24 +1,24 @@
+ // L'abonnement payant, côté abonné : l'état, le paiement (Stripe Checkout) et la gestion (portail Stripe).
+ //
+ //   GET  /api/abonnement                     Authorization: Bearer <jeton Supabase> (facultatif)
+-//        → { ouvert, mode, peutPayer, abonne, source, fin, annulationPrevue, gerable, annulable, forfaits }
+-//   POST /api/abonnement?action=paiement     (connecté, pas déjà abonné) { langue?, forfait? } → { url } de
+-//                                             Stripe Checkout ; forfait = « mensuel » (défaut) ou « annuel ».
++//        → { ouvert, mode, peutPayer, abonne, produit, source, fin, annulationPrevue, gerable, annulable, forfaits }
++//          forfaits: { ville?: {mensuel,annuel}, province?: {...}, duo?: {...} } — seulement les prix configurés
++//   POST /api/abonnement?action=paiement     (connecté) { langue?, forfait: mensuel|annuel, produit: ville|province|duo }
++//                                             → { url } Checkout ; ou 409 { erreur:'deja_abonne', produit, suggestion? }
+ //                                             Un abonnement impayé que Stripe relance encore : { url, portail }
+-//                                             du portail, pour changer de carte — jamais un second abonnement.
+ //   POST /api/abonnement?action=portail      (abonné par Stripe) → { url } du portail client Stripe
+-//                                             (carte, factures, annulation)
+-//   POST /api/abonnement?action=annuler      (abonné par Stripe) → { url } du portail, ouvert directement
+-//                                             sur l'annulation : le bouton « Annuler mon abonnement » que
+-//                                             la loi exige pour un abonnement conclu en ligne (Loi 10,
+-//                                             en vigueur le 12 sept. 2026)
++//   POST /api/abonnement?action=annuler      (abonné par Stripe) → { url } du portail, ouvert sur l'annulation
+ //
+ // Le paiement n'est offert qu'avec STRIPE_OUVERT=1 ET des clés du mode réel, ou aux adresses de
+ // STRIPE_ESSAI (voir _stripe.js). L'accès n'est jamais donné ici : seul le webhook
+ // (api/stripe-webhook.js) écrit l'abonnement, une fois le paiement confirmé par Stripe.
+ 
+ import { site } from './_alertes.js';
+-import { adresseEssai, estActive, ligneAbonnement, modeStripe, paiementOuvert, prixConforme, prixDe, stripe, stripeConfigure, synchroniser, utilisateurDe } from './_stripe.js';
++import {
++  aAccesCroise, aAccesPlein, adresseEssai, estActive, forfaitsDisponibles, ligneAbonnement, modeStripe,
++  paiementOuvert, prixConforme, prixDe, produitDe, produitValide, stripe, stripeConfigure,
++  synchroniser, utilisateurDe,
++} from './_stripe.js';
+ 
+ const jetonDe = (req) => String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '') || null;
+ // L'objet n'existe pas dans CE mode (une ligne écrite en mode essai, lue avec les clés réelles), ou plus du tout.
+@@ -72,6 +72,7 @@ export default async function handler(req, res) {
+     }
+   }
+   const abonne = estActive(ligne);
++  const produit = abonne ? produitDe(ligne) : null;
+   const peutPayer = Boolean(configure && u && !illisible && !abonne && (paiementOuvert() || adresseEssai(u.email)));
+   const gerable = Boolean(configure && ligne?.source === 'stripe' && ligne.stripe_customer_id);
+ 
+@@ -82,13 +83,20 @@ export default async function handler(req, res) {
+       connecte: Boolean(u),
+       peutPayer,
+       abonne,
++      produit,
++      acces: abonne ? {
++        ville: aAccesPlein(ligne, 'ville'),
++        province: aAccesPlein(ligne, 'province'),
++        croiseVille: aAccesCroise(ligne, 'ville'),
++        croiseProvince: aAccesCroise(ligne, 'province'),
++      } : null,
+       source: ligne?.source ?? null,
+       fin: abonne ? ligne.fin : null,
+       annulationPrevue: Boolean(abonne && ligne.annulation_prevue),
+       gerable,
+       annulable: Boolean(gerable && abonne && ligne.stripe_subscription_id && !ligne.annulation_prevue),
+-      // Ce que la page peut offrir : l'annuel seulement si son prix est configuré.
+-      forfaits: { mensuel: configure, annuel: Boolean(configure && prixDe('annuel')) },
++      // Ce que la page peut offrir : un produit n'apparaît que si au moins un de ses prix est posé.
++      forfaits: forfaitsDisponibles(),
+     });
+   }
+   if (req.method !== 'POST') return res.status(405).json({ erreur: 'méthode non permise' });
+@@ -99,36 +107,54 @@ export default async function handler(req, res) {
+   const action = String(req.query?.action ?? '');
+   try {
+     if (action === 'paiement') {
+-      if (abonne) return res.status(409).json({ erreur: 'déjà abonné' });
+-      if (!peutPayer) return res.status(403).json({ erreur: "l'abonnement n'est pas encore ouvert" });
+-      if (!u.email) return res.status(400).json({ erreur: 'compte sans courriel' });
+       let corps = req.body;
+       if (typeof corps === 'string') { try { corps = JSON.parse(corps || '{}'); } catch { corps = {}; } }
+       const anglais = String(corps?.langue ?? '') === 'en';
+       const forfait = String(corps?.forfait ?? 'mensuel');
+-      if (!prixDe(forfait)) return res.status(400).json({ erreur: 'forfait indisponible' });
+-      if (!(await prixConforme(forfait))) return res.status(503).json({ erreur: 'prix mal configuré' });
++      const produitDemande = produitValide(String(corps?.produit ?? ''));
++      if (!produitDemande) return res.status(400).json({ erreur: 'produit invalide' });
++      if (forfait !== 'mensuel' && forfait !== 'annuel') return res.status(400).json({ erreur: 'forfait invalide' });
++      if (!prixDe(produitDemande, forfait)) return res.status(400).json({ erreur: 'forfait indisponible' });
++
++      // Déjà abonné : pas de double sub. Ville↔province → suggérer le duo (MVP).
++      if (abonne) {
++        const actuel = produitDe(ligne);
++        const croise = (actuel === 'ville' && produitDemande === 'province')
++          || (actuel === 'province' && produitDemande === 'ville');
++        return res.status(409).json({
++          erreur: 'deja_abonne',
++          produit: actuel,
++          ...(croise || (actuel !== 'duo' && produitDemande === 'duo') ? { suggestion: 'duo' } : {}),
++        });
++      }
++      if (!peutPayer) return res.status(403).json({ erreur: "l'abonnement n'est pas encore ouvert" });
++      if (!u.email) return res.status(400).json({ erreur: 'compte sans courriel' });
++      if (!(await prixConforme(produitDemande, forfait))) return res.status(503).json({ erreur: 'prix mal configuré' });
+ 
+       const vivant = await abonnementVivant(ligne);
+       if (vivant && ['active', 'trialing'].includes(vivant.status)) {
+         // Payé chez Stripe, mais la ligne ne le dit pas (un webhook perdu) : on répare au lieu de revendre.
+         await synchroniser(vivant.id, u.id);
+-        return res.status(409).json({ erreur: 'déjà abonné' });
++        return res.status(409).json({ erreur: 'deja_abonne', produit: produitDepuisVivant(vivant) });
+       }
+       if (vivant) {
+         const portail = await stripe('/billing_portal/sessions', { customer: clientDe(vivant), return_url: `${site()}/abonnement` });
+         return res.status(200).json({ url: portail.url, portail: true });
+       }
+ 
++      const priceId = prixDe(produitDemande, forfait);
+       const session = await stripe('/checkout/sessions', {
+         mode: 'subscription',
+-        'line_items[0][price]': prixDe(forfait),
++        'line_items[0][price]': priceId,
+         'line_items[0][quantity]': '1',
+         success_url: `${site()}/mes-dossiers?abonnement=merci`,
+         cancel_url: `${site()}/abonnement?abonnement=annule`,
+         client_reference_id: u.id,
+         'metadata[user_id]': u.id,
++        'metadata[produit]': produitDemande,
++        'metadata[forfait]': forfait,
+         'subscription_data[metadata][user_id]': u.id,
++        'subscription_data[metadata][produit]': produitDemande,
+         'subscription_data[metadata][forfait]': forfait,
+         locale: anglais ? 'en' : 'fr-CA',
+         customer: await clientStripe(u, ligne, anglais),
+@@ -168,3 +194,8 @@ export default async function handler(req, res) {
+     return res.status(502).json({ erreur: 'Stripe indisponible' });
+   }
+ }
++
++
++function produitDepuisVivant(vivant) {
++  return produitValide(vivant?.metadata?.produit) || 'duo';
++}
+diff --git a/api/alertes-projets.js b/api/alertes-projets.js
+index 78b71d7..8cd8b0e 100644
+--- a/api/alertes-projets.js
++++ b/api/alertes-projets.js
+@@ -33,7 +33,7 @@
+ import crypto from 'node:crypto';
+ import { supabase, signature, site } from './_alertes.js';
+ import { PAR_JOUR, envoyerNumerosEnAttente } from './_infolettre.js';
+-import { estActive } from './_stripe.js';
++import { aAccesCroise, aAccesPlein, estActive } from './_stripe.js';
+ 
+ const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis', longueuil: 'Longueuil', laval: 'Laval' };
+ const CLE = /^[\w-]{1,60}$/;
+@@ -475,12 +475,16 @@ export default async function handler(req, res) {
+         lignes.push(...page);
+       }
+     };
+-    const abonnes = pourSoi
+-      ? [pourSoi.uid]
+-      : (await toutLire('/rest/v1/abonnements?statut=eq.actif&select=user_id,fin', 'user_id'))
+-          .filter((a) => !a.fin || new Date(a.fin) > maintenant)
+-          .map((a) => a.user_id)
+-          .filter((id) => /^[0-9a-f-]{36}$/.test(id));
++    const lignesAbo = pourSoi
++      ? (await supabase(`/rest/v1/abonnements?user_id=eq.${pourSoi.uid}&select=user_id,fin,produit,source`)) ?? []
++      : await toutLire('/rest/v1/abonnements?statut=eq.actif&select=user_id,fin,produit,source', 'user_id');
++    const aboParUser = new Map();
++    for (const a of lignesAbo) {
++      if (!a?.user_id || !/^[0-9a-f-]{36}$/.test(a.user_id)) continue;
++      if (a.fin && new Date(a.fin) <= maintenant) continue;
++      aboParUser.set(a.user_id, a);
++    }
++    const abonnes = [...aboParUser.keys()];
+     rapport.abonnes = abonnes.length;
+     if (!abonnes.length) {
+       await puisInfolettre();
+@@ -639,6 +643,16 @@ export default async function handler(req, res) {
+     rapport.loisMemorisees = 0;
+ 
+     for (const uid of new Set([...projetsDe.keys(), ...ciblesDe.keys(), ...loisDe.keys(), ...personnesDe.keys(), ...motsAssembleeDe.keys()])) {
++      const ligneAbo = aboParUser.get(uid);
++      const pleinVille = aAccesPlein(ligneAbo, 'ville');
++      const pleinProvince = aAccesPlein(ligneAbo, 'province');
++      const croiseVille = aAccesCroise(ligneAbo, 'ville');
++      const croiseProvince = aAccesCroise(ligneAbo, 'province');
++      // MVP : plein = tout ; croisé = on laisse passer (plafonds 1 suivi/mot-clé à appliquer côté écriture).
++      if (!pleinVille && !croiseVille) { projetsDe.delete(uid); ciblesDe.delete(uid); }
++      if (!pleinProvince && !croiseProvince) { loisDe.delete(uid); personnesDe.delete(uid); motsAssembleeDe.delete(uid); }
++      if (!projetsDe.has(uid) && !ciblesDe.has(uid) && !loisDe.has(uid) && !personnesDe.has(uid) && !motsAssembleeDe.has(uid)) continue;
++
+       const projets = projetsDe.get(uid) ?? [];
+       if (coupees.has(uid) && !essai) continue;
+       try {
+diff --git a/docs/abo-ville-province.md b/docs/abo-ville-province.md
+new file mode 100644
+index 0000000..5ab0954
+--- /dev/null
++++ b/docs/abo-ville-province.md
+@@ -0,0 +1,77 @@
++# Abonnements Ville / Province / Duo
++
++## Produits
++
++| Produit | Mensuel | Annuel | Accès |
++|--------|---------|--------|--------|
++| **ville** | 10 $ | 96 $ | Plein accès villes. Croisé Assemblée : 1 projet de loi **ou** 1 mot-clé AN + digest court. |
++| **province** | 10 $ | 96 $ | Plein accès Assemblée. Croisé ville : 1 projet ville **ou** 1 mot-clé/quartier + aperçu. |
++| **duo** | 15 $ | 144 $ | Plein accès ville + province. |
++
++Un compte choisit **un** abonnement Stripe (table `abonnements`, 1 ligne / `user_id`).
++
++## Héritage
++
++- Abonnés Stripe actuels (anciens `STRIPE_PRIX` / `STRIPE_PRIX_ANNUEL` sans `metadata.produit`) → traités comme **duo**.
++- `source = manuel` actif → **duo**.
++- Colonne `produit` nulle + abonnement actif → **duo** côté app (`produitDe` / `aAccesPlein`).
++
++## À faire côté Martin
++
++### 1. SQL (Supabase → SQL Editor)
++
++Coller et exécuter `scripts/supabase-schema-abo-produits.sql` (ajoute `abonnements.produit` + contrainte).
++
++### 2. Stripe — 6 prix CAD récurrents
++
++Créer dans Stripe (CAD) :
++
++1. Ville mensuel — 10,00 $ / mois → `STRIPE_PRIX_VILLE`
++2. Ville annuel — 96,00 $ / an → `STRIPE_PRIX_VILLE_ANNUEL`
++3. Province mensuel — 10,00 $ / mois → `STRIPE_PRIX_PROVINCE`
++4. Province annuel — 96,00 $ / an → `STRIPE_PRIX_PROVINCE_ANNUEL`
++5. Duo mensuel — 15,00 $ / mois → `STRIPE_PRIX_DUO`
++6. Duo annuel — 144,00 $ / an → `STRIPE_PRIX_DUO_ANNUEL`
++
++Garder `STRIPE_PRIX` + `STRIPE_PRIX_ANNUEL` comme **alias/fallback duo** (legacy) tant que les nouveaux IDs ne sont pas posés partout.
++
++Si un price env manque, ce produit (ou cette période) **n’apparaît pas** dans `GET /api/abonnement` → `forfaits`.
++
++### 3. Variables Vercel
++
++```
++STRIPE_PRIX_VILLE=
++STRIPE_PRIX_VILLE_ANNUEL=
++STRIPE_PRIX_PROVINCE=
++STRIPE_PRIX_PROVINCE_ANNUEL=
++STRIPE_PRIX_DUO=
++STRIPE_PRIX_DUO_ANNUEL=
++# legacy duo (fallback) :
++STRIPE_PRIX=
++STRIPE_PRIX_ANNUEL=
++```
++
++(Les clés `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_OUVERT`, `STRIPE_ESSAI` restent inchangées.)
++
++## Tester
++
++1. Ouvrir `/abonnement?ville=quebec` → colonne Ville mise en avant (`data-contexte=villes`).
++2. Se connecter avec une adresse d’essai (ou `STRIPE_OUVERT=1` en live).
++3. Cliquer un CTA Ville / Province / Duo → Checkout Stripe ; vérifier `metadata.produit` + `metadata.forfait` sur la session et la subscription.
++4. Après paiement, `abonnements.produit` = ville|province|duo.
++5. Déjà abonné ville + demande province → `409 { erreur: 'deja_abonne', produit, suggestion: 'duo' }`.
++
++## Gating (état)
++
++- Helpers : `estActive`, `aAccesPlein(l,'ville'|'province')`, `aAccesCroise(...)`, `CROISE_MAX_SUIVIS=1`, `CROISE_MAX_MOTS_CLES=1`.
++- `api/alertes-projets.js` : filtre plein/croisé par scope (ville vs Assemblée).
++- **TODO restant** : appliquer les plafonds croisés (1 suivi / 1 mot-clé) dans le trigger Postgres / `limiteSuivis`, et remplacer les `estActive` restants dans `detail.js`, export, message, ODJ, etc. (fichiers hors de cette passe) par `aAccesPlein || aAccesCroise` selon le scope.
++
++## Fichiers touchés
++
++- `scripts/supabase-schema-abo-produits.sql` (nouveau)
++- `api/_stripe.js`
++- `api/abonnement.js`
++- `api/alertes-projets.js`
++- `abonnement.html`
++- `docs/abo-ville-province.md` (ce fichier)
+diff --git a/scripts/supabase-schema-abo-produits.sql b/scripts/supabase-schema-abo-produits.sql
+new file mode 100644
+index 0000000..401c473
+--- /dev/null
++++ b/scripts/supabase-schema-abo-produits.sql
+@@ -0,0 +1,21 @@
++-- Produits d'abonnement DossierQuébec : ville | province | duo
++-- À coller dans Supabase → SQL Editor → Run.
++--
++-- Un compte choisit ville OU province OU duo (une seule ligne / user_id dans `abonnements`).
++-- Les abonnés Stripe legacy (anciens STRIPE_PRIX / STRIPE_PRIX_ANNUEL sans metadata produit)
++-- et les abonnements source=manuel actifs sont traités comme **duo** côté applicatif
++-- (api/_stripe.js : aAccesPlein, synchroniser).
++--
++-- Après exécution : créer 6 prix Stripe CAD (voir docs/abo-ville-province.md) et poser
++-- les variables Vercel STRIPE_PRIX_VILLE, _VILLE_ANNUEL, _PROVINCE, _PROVINCE_ANNUEL,
++-- _DUO, _DUO_ANNUEL. STRIPE_PRIX + STRIPE_PRIX_ANNUEL restent des alias/fallback duo.
++
++alter table public.abonnements
++  add column if not exists produit text;
++-- valeurs: ville | province | duo
++alter table public.abonnements drop constraint if exists abonnements_produit_check;
++alter table public.abonnements add constraint abonnements_produit_check
++  check (produit is null or produit in ('ville','province','duo'));
++
++comment on column public.abonnements.produit is
++  'ville | province | duo ; null = legacy (traité comme duo côté app)';
