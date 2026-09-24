@@ -1,5 +1,19 @@
 /* La feuille de style de DossierQuébec.
  *
+ * ⚠️ POUR COPIER CE SITE, LIRE CECI D'ABORD (CHARTE-DOSSIER.md à la racine dit le reste).
+ *
+ *   Cette feuille est en DEUX COUCHES. Tout ce qui précède le bloc « REFONTE BRUTALISTE —
+ *   FONDATION » (cherchez ce titre ; ligne 697 au 24 sept. 2026) est l'ANCIEN design — gélules
+ *   arrondies, cartes à filet de 1 px, ombres douces — encore là parce que les pages s'y
+ *   appuient, mais il NE GAGNE PLUS. Le design réel commence à ce bloc et à sa première règle,
+ *   *{border-radius:0 !important}.
+ *   Qui lit par le début apprend le mauvais design : c'est arrivé à deux sites frères.
+ *
+ *   La PALETTE, c'est le bloc :root juste en dessous et son jumeau html[data-theme="dark"] :
+ *   un autre site change ces deux blocs (au minimum --gold, --gold-bg, --gold-soft) et rien
+ *   d'autre. Tout le reste — polices, formes, grille, meubles, noms de classes — se copie tel
+ *   quel. « Pour la couleur, chacun sa palette ; pour le design, ça pardonne moins. »
+ *
  * Elle vivait en ligne dans index.html, donc recopiée à l identique dans les six pages de la
  * racine : 94 ko téléchargés six fois, jamais mis en cache. Ici, le navigateur la prend une
  * seule fois et la garde pour toutes les pages.
@@ -35,6 +49,13 @@
        s'éclaircir pour rester lisible sur fond foncé, le bloc doit rester
        profond pour garder son texte blanc. D'où deux jetons. */
     --gold-bg:#0E4FC1;
+    /* Les teintes dérivées de l'accent. Elles vivent SUR un bloc d'accent (bande bleue, bouton
+       principal), qui reste bleu dans les deux thèmes : elles ne basculent donc pas. Un site
+       qui change d'accent change ces trois-là avec --gold et --gold-bg, et rien n'est en dur
+       ailleurs dans la feuille. */
+    --gold-hover:#08307A;   /* l'accent au survol d'un bloc plein */
+    --gold-pale:#A9C6FF;    /* texte secondaire posé sur un bloc d'accent */
+    --gold-paler:#D6E4FF;   /* texte courant posé sur un bloc d'accent */
     /* Même raisonnement pour le noir : là où il sert de SURFACE sous du texte
        jaune (pastilles actives, onglet courant), il doit rester sombre dans les
        deux thèmes — sinon le jaune se retrouve sur du clair. */
@@ -82,6 +103,7 @@
     --slate:#A9A498;
     --gold:#7BA9FF;
     --gold-bg:#0E4FC1;   /* identique au clair : un bloc bleu saturé se tient très bien sur fond sombre, et l'éclaircir faisait passer son texte sous le seuil de lisibilité */
+    --gold-hover:#08307A; --gold-pale:#A9C6FF; --gold-paler:#D6E4FF;   /* posées sur le bloc bleu, qui ne bascule pas : identiques au clair */
     --ink-bg:#0E0D0B;
     --gold-soft:#1C2C4C;
     --yellow:#FFD24D;
@@ -893,7 +915,7 @@
     padding:20px 30px; font-weight:800; font-size:17px; text-transform:uppercase;
     letter-spacing:0.02em; box-shadow:var(--shadow); cursor:pointer;
   }
-  .hero-cta:hover{background:#08307A; color:var(--card);}
+  .hero-cta:hover{background:var(--gold-hover); color:var(--card);}
 
   .stat-band{background:var(--card); border-block:3px solid var(--ink); display:grid; grid-template-columns:repeat(3,1fr); padding-block:0;}
   .stat-cell{display:flex; flex-direction:column; padding:26px 28px; border-right:3px solid var(--ink);}
@@ -992,7 +1014,7 @@
     text-transform:uppercase; letter-spacing:0.03em; padding:10px 14px;
     cursor:pointer; box-shadow:var(--shadow-sm);
   }
-  .ch-demand:hover{background:#08307A;}
+  .ch-demand:hover{background:var(--gold-hover);}
   .ch-demand.on, .ch-demand:disabled{background:var(--ink-bg); color:var(--yellow); cursor:default; box-shadow:none;}
   .ch-share{display:flex; align-items:center; gap:6px; margin-top:10px;}
   .ch-share span{
@@ -1022,7 +1044,7 @@
   .band-blue .mission-box{background:transparent; border:none; box-shadow:none; padding:0; margin:0;}
   .mission-eyebrow{
     font-family:'Archivo Narrow',sans-serif; font-size:14px; font-weight:700;
-    text-transform:uppercase; letter-spacing:0.1em; color:#A9C6FF; margin-bottom:18px;
+    text-transform:uppercase; letter-spacing:0.1em; color:var(--gold-pale); margin-bottom:18px;
   }
   .mission-statement{
     font-family:'Archivo',sans-serif; font-size:clamp(22px, 2.8vw, 34px);
@@ -1041,7 +1063,7 @@
   .band-blue .compare-col{border:3px solid var(--card); background:transparent;}
   .band-blue .compare-col:last-child{border-color:var(--yellow); background:rgba(255,210,77,0.08);}
   .band-blue .compare-col .tag{
-    background:transparent; border:none; padding:0; color:#A9C6FF;
+    background:transparent; border:none; padding:0; color:var(--gold-pale);
     font-family:'Archivo Narrow',sans-serif; font-weight:700;
     text-transform:uppercase; letter-spacing:0.08em;
   }
@@ -1196,7 +1218,7 @@
     color:var(--gold); cursor:pointer; white-space:nowrap; flex:none; padding-left:4px;
   }
   .bstep{white-space:nowrap;}
-  .legend-link:hover{color:#08307A;}
+  .legend-link:hover{color:var(--gold-hover);}
 
   /* Chips d'étapes des cartes (remplacent les barres de progression) */
   .bstep-row{display:flex; gap:6px; margin-top:16px; flex-wrap:wrap;}
@@ -1365,7 +1387,7 @@
   .lire-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;}
   .lire-box{border:3px solid var(--card); padding:22px 24px;}
   .lire-box h3{font-size:24px; font-weight:900; margin:0 0 10px; color:var(--card); letter-spacing:-0.01em;}
-  .lire-box p{font-size:15px; line-height:1.5; margin:0; color:#D6E4FF; font-weight:500;}
+  .lire-box p{font-size:15px; line-height:1.5; margin:0; color:var(--gold-paler); font-weight:500;}
   .lire-box.hl{border-color:var(--yellow); background:rgba(255,210,77,0.08);}
   .lire-box.hl h3{color:var(--yellow);}
   .lire-box.hl p{color:var(--card);}
@@ -1493,7 +1515,7 @@
   /* Comparateur sur bande bleue */
   #band-comparateur{margin-top:34px;}
   #band-comparateur .section-head h2{color:var(--card);}
-  #band-comparateur .section-head .sub{color:#A9C6FF;}
+  #band-comparateur .section-head .sub{color:var(--gold-pale);}
   .comparateur-toolbar{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:24px;}
   .comparateur-toolbar select{
     border:3px solid var(--ink); background:var(--yellow); color:var(--sur-clair);
@@ -1530,11 +1552,11 @@
   .cp-txt{font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:0.03em; color:var(--card); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
   .cp-vs{
     flex:none; align-self:center; font-family:'Archivo',sans-serif; font-weight:900;
-    font-size:18px; color:#A9C6FF; letter-spacing:0.04em;
+    font-size:18px; color:var(--gold-pale); letter-spacing:0.04em;
   }
   .cp-hint{
     margin-top:16px; font-family:'Archivo Narrow',sans-serif; font-size:13px; font-weight:600;
-    text-transform:uppercase; letter-spacing:0.04em; color:#A9C6FF;
+    text-transform:uppercase; letter-spacing:0.04em; color:var(--gold-pale);
   }
   @media (max-width:760px){ .cp-cols{flex-direction:column;} }
 
@@ -1899,21 +1921,21 @@
   .promo-villes-titre{display:block; margin:0 0 6px; font-family:'Archivo',sans-serif; font-weight:900; font-size:17px; text-transform:uppercase; letter-spacing:-0.01em;}
   .promo-villes p{margin:0; font-size:14.5px; line-height:1.5; color:#131313;}
   .promo-villes a{color:#131313; font-weight:800; text-decoration:underline;}
-  .promo-villes a:hover{color:#0E4FC1;}
+  .promo-villes a:hover{color:var(--gold-bg);}
   .promo-villes .promo-villes-lien{display:inline-block; margin-top:10px; font-weight:900; text-decoration:underline;}
   .promo-compte{background:#FFFFFF; color:#131313; border:3px solid #131313; box-shadow:var(--shadow); padding:18px 20px;}
   .promo-compte-titre{display:block; margin:0 0 10px; font-family:'Archivo',sans-serif; font-weight:900; font-size:17px; text-transform:uppercase;}
   .promo-compte-ligne{display:flex; flex-wrap:wrap; gap:8px;}
   .promo-compte-ligne input{flex:1 1 180px; min-width:0; font:inherit; font-size:15px; padding:9px 10px; border:2px solid #131313; background:#FFFFFF; color:#131313;}
   .promo-compte .account-btn{font-family:'Archivo',sans-serif; font-size:15px; font-weight:800; line-height:1.2; padding:9px 16px; background:#131313; color:#FFFFFF; border:2px solid #131313; cursor:pointer; flex:none;}
-  .promo-compte .account-btn:not(:disabled):hover{background:#0E4FC1; border-color:#0E4FC1;}
+  .promo-compte .account-btn:not(:disabled):hover{background:var(--gold-bg); border-color:var(--gold-bg);}
   .promo-compte .account-btn:disabled{opacity:.6; cursor:default;}
   /* En sombre, une règle générale des survols jaunes force l'encre claire : le libellé du bouton
      jaune devenait blanc sur blanc. */
   html[data-theme="dark"] .promo-alertes .hero-cta:hover{color:var(--sur-clair);}
   .promo-compte-note{margin:10px 0 0; font-size:13.5px; line-height:1.45; color:#555550;}
-  .promo-compte-note .promo-lien{color:#0E4FC1; font-weight:700; text-decoration:underline;}
-  .promo-mes-dossiers{display:inline-block; margin-top:12px; font-weight:800; color:#0E4FC1; text-decoration:underline;}
+  .promo-compte-note .promo-lien{color:var(--gold-bg); font-weight:700; text-decoration:underline;}
+  .promo-mes-dossiers{display:inline-block; margin-top:12px; font-weight:800; color:var(--gold-bg); text-decoration:underline;}
 
   .footer-nav{
     max-width:1280px; margin:0 auto 22px; padding:0 28px 22px;
