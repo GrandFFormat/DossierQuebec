@@ -23,6 +23,9 @@ import { adresseEssai, estActive, ligneAbonnement, modeStripe, paiementOuvert, p
 const jetonDe = (req) => String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '') || null;
 // L'objet n'existe pas dans CE mode (une ligne écrite en mode essai, lue avec les clés réelles), ou plus du tout.
 const absent = (e) => e?.code === 'resource_missing';
+// La page où revenir après Stripe. Deux valeurs possibles, et rien d'autre : l'adresse est fabriquée
+// ici, jamais recopiée depuis le navigateur.
+const retourDe = (req, corps) => (String(corps?.retour ?? req.query?.retour ?? '') === 'mon-dossier' ? 'mon-dossier' : 'mes-dossiers');
 const clientDe = (o) => (typeof o?.customer === 'string' ? o.customer : o?.customer?.id ?? null);
 
 // L'abonnement Stripe de la ligne, s'il vit encore chez Stripe. On ne vend jamais par-dessus : un
@@ -106,6 +109,11 @@ export default async function handler(req, res) {
       if (typeof corps === 'string') { try { corps = JSON.parse(corps || '{}'); } catch { corps = {}; } }
       const anglais = String(corps?.langue ?? '') === 'en';
       const forfait = String(corps?.forfait ?? 'mensuel');
+      // Où ramener la personne après le paiement : son espace, celui d'où elle vient. Qui s'abonne
+      // depuis le provincial retrouve ses projets de loi, ses mots-clés d'Assemblée et ses élus dans
+      // /mon-dossier ; les villes sont dans /mes-dossiers. Liste blanche : l'adresse vient du
+      // navigateur, on ne la recopie pas telle quelle.
+      const retour = retourDe(req, corps);
       if (!prixDe(forfait)) return res.status(400).json({ erreur: 'forfait indisponible' });
       if (!(await prixConforme(forfait))) return res.status(503).json({ erreur: 'prix mal configuré' });
 
@@ -124,7 +132,7 @@ export default async function handler(req, res) {
         mode: 'subscription',
         'line_items[0][price]': prixDe(forfait),
         'line_items[0][quantity]': '1',
-        success_url: `${site()}/mes-dossiers?abonnement=merci`,
+        success_url: `${site()}/${retour}?abonnement=merci`,
         cancel_url: `${site()}/abonnement?abonnement=annule`,
         client_reference_id: u.id,
         'metadata[user_id]': u.id,
@@ -148,7 +156,7 @@ export default async function handler(req, res) {
       if (!gerable || (action === 'annuler' && !ligne.stripe_subscription_id)) return res.status(404).json({ erreur: 'aucun abonnement Stripe' });
       const portail = await stripe('/billing_portal/sessions', {
         customer: ligne.stripe_customer_id,
-        return_url: `${site()}/${action === 'annuler' ? 'abonnement' : 'mes-dossiers'}`,
+        return_url: `${site()}/${action === 'annuler' ? 'abonnement' : retourDe(req, null)}`,
         ...(action === 'annuler'
           ? {
             'flow_data[type]': 'subscription_cancel',
