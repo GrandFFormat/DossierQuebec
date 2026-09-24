@@ -16,7 +16,7 @@ code fait foi** : c'est lui qui est en ligne. Et quand la feuille de DQ s'écart
 règle, la charte le dit : ces écarts **ne font pas modèle**.
 
 *Les numéros de ligne de ce document sont ceux du 24 septembre 2026 au soir (`commun/dq.css` :
-1 967 lignes ; recalculés après l'ajout de la langue dans l'adresse). Ils glissent à chaque
+1 977 lignes ; recalculés après la langue dans l'adresse et l'en-tête sur deux rangées). Ils glissent à chaque
 retouche ; les noms de sélecteurs, eux, ne bougent pas — au doute,
 `grep -n "<sélecteur>" commun/dq.css`.*
 
@@ -198,7 +198,7 @@ lignes 84-85) :
 - Les bandes pleine largeur passent par **`.bleed`** (`commun/dq.css:895`) : elles débordent la
   colonne mais leur contenu reste aligné dessus. Elle ne se fie pas à `100vw` (barre de
   défilement, zoom A+) : la largeur vient d'une variable `--vw` publiée sur `<body>` par
-  `commun/dq.js` (`majMetriquesMiseEnPage`, l. 1881-1894) ; `100vw` n'est que le repli d'avant le
+  `commun/dq.js` (`majMetriquesMiseEnPage`, l. 1787-1801) ; `100vw` n'est que le repli d'avant le
   script, ce qui oblige toute page qui a une bande à charger `dq.js`.
 - Chaque section pleine largeur est fermée par un trait de 3 px ; les fonds alternent crème,
   blanc, et couleur pleine (jaune, accent, encre).
@@ -223,12 +223,12 @@ JavaScript).
 
 | Meuble | Style | Balisage |
 |---|---|---|
-| Bandeau défilant `.ticker` en haut de chaque page (26 s, pause au survol, rempli par `renderTicker`, `dq.js:3900`) | 708 | 103 |
-| En-tête collant `#dq-topbar`, fermé par un trait de 3 px | 259, 721 | 110 |
+| Bandeau défilant `.ticker` en haut de chaque page (26 s, pause au survol, rempli par `renderTicker`, `dq.js:3843`) | 708 | 103 |
+| En-tête collant `#dq-topbar`, fermé par un trait de 3 px. Une seule rangée quand logo, onglets et boutons tiennent côte à côte (1 256 px en français, dans une colonne de 1 280) ; sinon deux rangées propres — logo et boutons en haut, onglets dessous (`majEnteteDeuxRangees`, `dq.js:1810`, qui mesure langue et zoom compris ; `.entete-deux-rangees`, fin de dq.css) | 259, 721 | 110 |
 | Marque `.brand` : `.brand-title` en Archivo 900, capitales, `letter-spacing:-0.03em`, deuxième moitié du nom dans l'accent (`.brand-blue`, l. 727) — pas de logo-image | 723-727 | 112-122 |
 | Feuille d'érable `.maple-flip` vers le site fédéral (bascule jaune ↔ rouge toutes les 20 s) | 729 | 126 |
-| Onglets `nav.tabs` : pilules carrées, **actif = fond d'encre** (noir sur mobile), survol jaune, sans numérotation | 842-853 | 155 |
-| Contrôles A− / A+ (`.font-size-ctrl`) : `zoom` de 80 à 150 % par pas de 10 sur `<body>` (`dq.js:1915`) | 789, 1687 | 167 |
+| Onglets `nav.tabs` : pilules carrées espacées de 4 px (10 px de marge intérieure), **actif = fond d'encre** (noir sur mobile), survol jaune, sans numérotation | 842-853 | 155 |
+| Contrôles A− / A+ (`.font-size-ctrl`) : `zoom` de 80 à 150 % par pas de 10 sur `<body>` (`dq.js:1851`) | 789, 1687 | 167 |
 | Bouton de thème `.theme-toggle` (icône dessinée en CSS) et bouton de langue `.lang-toggle`, tous à la hauteur `--h-ctrl` (36 px, posée par `.header-ctrls > *`) | 810, 796 ; 1712-1718 | 174-175 |
 | Affiche `.hero-poster` : `.hero-sujet` + H1 trois lignes + manifeste encadré `.hero-manifesto` + bouton `.hero-cta` | 897-918 | 247-261 |
 | Bande de chiffres `.stat-band` : **un seul bloc** à trois cellules séparées par des traits, chiffre 54 px / 900 | 920 | 263 |
@@ -266,7 +266,7 @@ recommence.
 
 Dans l'ordre. C'est court parce qu'on copie.
 
-1. **Copier `commun/dq.css` au complet** — ses quelque 1 970 lignes, sans trier, sans « nettoyer »
+1. **Copier `commun/dq.css` au complet** — ses quelque 1 980 lignes, sans trier, sans « nettoyer »
    la première couche. Le nommer comme vous voulez (`commun/on.css`) ; ne pas le réécrire.
 2. **Changer la palette, et seulement elle** : les trois blocs de jetons (§ 1), la `theme-color`,
    le favicon (même construction, vos couleurs).
@@ -282,10 +282,10 @@ Dans l'ordre. C'est court parce qu'on copie.
 5. **Extraire de `commun/dq.js`** ce qui porte le design, en le rebranchant sur vos données : la
    langue — les textes (`translations`, l. 86) et sa mécanique : la lecture au démarrage, la langue
    écrite dans l'adresse (`?lang=en`) et gardée sous `dvq:langue` (`langueDeDepart`,
-   `langueDansAdresse`, `paramLangue`, les liens qui emportent la langue et le suivi entre onglets, l. 433-512), la traduction des textes fixes
-   (`traduireTextesFixes`, l. 524) ; `window.storage` (l. 696, dont dépendent le zoom et le thème) ;
-   `majMetriquesMiseEnPage` + zoom + thème (l. 1874-1953, en partant de `let fontZoom = 100;`) ;
-   `renderTicker` (l. 3900). Le reste (données, abonnés) selon le site. La règle
+   `langueDansAdresse`, `paramLangue`, les liens qui emportent la langue et le suivi entre onglets, l. 440-519), la traduction des textes fixes
+   (`traduireTextesFixes`, l. 531) ; `window.storage` (l. 704, dont dépendent le zoom et le thème) ;
+   `majMetriquesMiseEnPage` + zoom + thème (l. 1780-1889, en partant de `let fontZoom = 100;`) ;
+   `renderTicker` (l. 3843). Le reste (données, abonnés) selon le site. La règle
    `html.dq-en:not(.dq-pret) body`, en fin de `dq.css`, vient avec le script du `<head>` : elle
    cache la page anglaise le temps de la traduire.
 6. **Reprendre les garde-fous du build.** `verifierCss` et `verifierJs` (l. 492-526) se copient
