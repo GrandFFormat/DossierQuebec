@@ -21,8 +21,10 @@ on:
 permissions:
   contents: write
 
+# Le même groupe que le rafraîchissement de Montréal : ces outils écrivent eux aussi dans
+# montreal/data, deux à la fois se marcheraient sur les pieds au rebase.
 concurrency:
-  group: refresh-data
+  group: refresh-montreal
   cancel-in-progress: false
 
 jobs:
@@ -94,6 +96,12 @@ jobs:
             echo "Aucun journal à committer."
           else
             git commit -m "Découverte du portail documentaire de Montréal ($(date -u +%Y-%m-%d))"
-            git pull --rebase
-            git push
+            # Un refus de poussée (GitHub renvoie parfois une erreur interne) jetterait tout le
+            # sondage, et il faudrait le redemander à la Ville : on réessaie avant d'abandonner.
+            for essai in 1 2 3; do
+              git pull --rebase && git push && break
+              [ "$essai" = 3 ] && { echo "::error::Push refusé trois fois — la découverte est perdue."; exit 1; }
+              echo "Push refusé (essai $essai) — nouvel essai dans $((essai * 10)) s."
+              sleep $((essai * 10))
+            done
           fi

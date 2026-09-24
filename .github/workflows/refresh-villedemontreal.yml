@@ -14,8 +14,8 @@ name: Rafraîchissement quotidien — volet Montréal
 
 on:
   schedule:
-    # 09:00 UTC, après DossierQuébec (08:00) et le volet Québec (08:30). Le groupe de concurrence
-    # ci-dessous garantit de toute façon qu'ils ne se chevauchent pas.
+    # 09:00 UTC, après DossierQuébec (08:00) et le volet Québec (08:30), pour que les journaux du
+    # matin se lisent dans l'ordre. Chaque volet a maintenant son propre groupe (voir plus bas).
     - cron: '0 9 * * *'
   workflow_dispatch: # bouton « Run workflow » pour lancer à la main
     inputs:
@@ -27,8 +27,12 @@ on:
 permissions:
   contents: write
 
+# Son propre groupe (24 septembre 2026, comme Québec depuis le 18) : ce job peut durer des
+# heures, et avec le groupe partagé « refresh-data » il faisait annuler sans bruit les runs des
+# autres volets restés en attente. Les outils de découverte de Montréal partagent ce groupe :
+# eux aussi écrivent dans montreal/data.
 concurrency:
-  group: refresh-data
+  group: refresh-montreal
   cancel-in-progress: false
 
 jobs:
@@ -76,7 +80,7 @@ jobs:
       # depuis le run précédent.
       - name: Restaurer le cache de texte des PDF
         if: ${{ steps.volet.outputs.present == 'oui' }}
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: montreal/data/textes
           key: textes-montreal-${{ github.run_id }}
@@ -107,17 +111,43 @@ jobs:
             echo "Aucun changement — rien à committer."
           else
             git commit -m "Rafraîchissement auto du volet Montréal ($(date -u +%Y-%m-%d))"
-            git pull --rebase
-            git push
+            # Deux raisons de réessayer : un autre workflow a pu pousser pendant le job, et
+            # GitHub refuse parfois le push sur une erreur interne de son côté — c'est ce qui
+            # a perdu la journée du 24 septembre 2026, sans rien de cassé chez nous.
+            for essai in 1 2 3; do
+              git pull --rebase && git push && break
+              [ "$essai" = 3 ] && { echo "::error::Push refusé trois fois — rien n'est publié aujourd'hui."; exit 1; }
+              echo "Push refusé (essai $essai) — nouvel essai dans $((essai * 10)) s."
+              sleep $((essai * 10))
+            done
           fi
 
+      # L'action actions/cache ne sauvegarde rien quand le job finit rouge — et nos alertes le
+      # mettent en rouge exprès. Le texte des PDF était donc jeté, et le lendemain le robot les
+      # redemandait à la Ville pour rien. On enregistre à part, même en cas d'échec ; si ce n'est
+      # pas possible (dossier absent), tant pis, ça ne doit jamais faire échouer le run.
+      - name: Enregistrer le cache de texte des PDF
+        if: ${{ !cancelled() && steps.volet.outputs.present == 'oui' }}
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: montreal/data/textes
+          key: textes-montreal-${{ github.run_id }}
+
+      # !cancelled() : ces deux alertes passent après la poussée, donc un push refusé les
+      # sautait — une source tombée passait inaperçue. Le texte vient de stderr : il passe par
+      # une variable d'environnement, jamais par ${{ }} dans le script, que bash relirait.
       - name: Signaler les étapes secondaires en échec
-        if: ${{ steps.volet.outputs.present == 'oui' && steps.refresh.outputs.warnings != '' }}
+        if: ${{ !cancelled() && steps.volet.outputs.present == 'oui' && steps.refresh.outputs.warnings != '' }}
+        env:
+          AVERTISSEMENTS: ${{ steps.refresh.outputs.warnings }}
         run: |
-          echo "::warning::Étapes secondaires en échec (données de la veille conservées) : ${{ steps.refresh.outputs.warnings }}"
+          echo "::warning::Étapes secondaires en échec (données de la veille conservées) : $AVERTISSEMENTS"
 
       - name: Alerter si une extraction principale a échoué
-        if: ${{ steps.volet.outputs.present == 'oui' && steps.refresh.outputs.failed != '' }}
+        if: ${{ !cancelled() && steps.volet.outputs.present == 'oui' && steps.refresh.outputs.failed != '' }}
+        env:
+          ECHECS: ${{ steps.refresh.outputs.failed }}
         run: |
-          echo "::error::Extractions en échec (données de la veille conservées) : ${{ steps.refresh.outputs.failed }}"
+          echo "::error::Extractions en échec (données de la veille conservées) : $ECHECS"
           exit 1
