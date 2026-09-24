@@ -472,7 +472,6 @@ function applyLanguage(){
   renderStepFilters();
   updateSortToggleLabel();  updateMinistresSortLabel();
   renderAccountBox();
-  renderFlagBox();
   renderAdminFlagCounts();
   renderComparateurSelects();
   renderComparateurTable();
@@ -1360,7 +1359,6 @@ async function initAuth(){
     console.error('initAuth failed:', e);
   }finally{
     renderAccountBox();
-    renderFlagBox();
     renderAdminFlagCounts();
   }
 
@@ -1378,7 +1376,6 @@ async function initAuth(){
       console.error('onAuthStateChange failed:', e);
     }finally{
       renderAccountBox();
-      renderFlagBox();
       renderAdminFlagCounts();
     }
     const kw = document.getElementById('searchMinistres')?.value || '';
@@ -1394,119 +1391,6 @@ async function initAuth(){
 // données : un compte ne peut demander qu'une fois par projet de loi. Le
 // numéro entré est toujours vérifié contre les vraies données `bills` avant
 // d'accepter la demande — jamais de projet de loi deviné ou inventé.
-
-const FLAG_MONTHLY_LIMIT = 10; // même limite appliquée côté serveur (RLS) — voir scripts/supabase-schema-flags.sql
-
-async function checkMonthlyFlagCount(){
-  if(!currentUser) return 0;
-  const thirtyDaysAgo = new Date(Date.now() - 30*24*60*60*1000).toISOString();
-  const { count, error } = await supabaseClient.from('bill_flags')
-    .select('id', { count: 'exact', head: true })
-    .eq('user_id', currentUser.id)
-    .gte('created_at', thirtyDaysAgo);
-  if(error){ console.error('checkMonthlyFlagCount failed:', error); return 0; }
-  return count ?? 0;
-}
-
-// ⚠️ Aucune page ne porte plus `id="flagBox"` depuis le découpage multipage : cette boîte
-// (demander une explication par NUMÉRO, avec le compteur de demandes restantes du mois) ne
-// s'affiche donc nulle part. Le bouton des cartes fait le même travail ; reste à décider si
-// on la remet sur la page du compte ou si on retire la fonction. Constaté le 24 sept. 2026.
-async function renderFlagBox(){
-  if(!document.getElementById('flagBox')) return;   // vue absente de cette page
-  const box = document.getElementById('flagBox');
-  if(!box) return;
-  const isEn = currentLang === 'en';
-  if(!currentUser){
-    box.innerHTML = `
-      <div class="account-note">${isEn
-        ? `Sign in (Account tab) to ask a bill's sponsor for an explanation (up to ${FLAG_MONTHLY_LIMIT} requests per month, to prevent abuse). At 1,000 requests for the same bill, a public post goes up — hoping an MNA agrees to open a petition.`
-        : `Connectez-vous (onglet Compte) pour demander des explications sur un projet de loi (jusqu'à ${FLAG_MONTHLY_LIMIT} demandes par mois, pour éviter les abus). À 1000 demandes pour un même projet, une publication publique sera faite — dans l'espoir qu'un·e élu·e accepte d'ouvrir une pétition.`}</div>
-    `;
-    return;
-  }
-
-  // Vérifié côté navigateur pour un message clair — la vraie limite est
-  // appliquée par une règle de sécurité côté serveur, impossible à contourner.
-  const usedThisMonth = await checkMonthlyFlagCount();
-  if(usedThisMonth >= FLAG_MONTHLY_LIMIT){
-    box.innerHTML = `
-      <div class="account-note">${isEn
-        ? `You've reached your limit of ${FLAG_MONTHLY_LIMIT} requests this month. Come back later to ask about another bill.`
-        : `Vous avez atteint votre limite de ${FLAG_MONTHLY_LIMIT} demandes ce mois-ci. Revenez plus tard pour demander des explications sur un autre projet de loi.`}</div>
-    `;
-    return;
-  }
-
-  const remaining = FLAG_MONTHLY_LIMIT - usedThisMonth;
-  box.innerHTML = `
-    <div class="account-note">${isEn
-      ? `Enter the number of an active bill (not yet enacted) to ask its sponsor for an explanation. At 1,000 requests for the same bill, a public Facebook post goes up — hoping an MNA agrees to open a petition. (${remaining} of ${FLAG_MONTHLY_LIMIT} requests left this month.)`
-      : `Entrez le numéro d'un projet de loi actif (pas encore sanctionné) pour demander des explications à son parrain. À 1000 demandes pour un même projet, une publication publique sera faite sur Facebook — dans l'espoir qu'un·e élu·e accepte d'ouvrir une pétition. (${remaining} demande${remaining>1?'s':''} sur ${FLAG_MONTHLY_LIMIT} restante${remaining>1?'s':''} ce mois-ci.)`}</div>
-    <div class="account-row" style="margin-top:10px;">
-      <input type="text" id="flagBillNumberInput" inputmode="numeric" placeholder="${isEn ? 'Bill number (e.g. 24)' : 'Numéro du projet de loi (ex. 24)'}" oninput="checkBillNumberInput()">
-      <button class="account-btn" id="flagSubmitBtn" onclick="submitBillFlag()" disabled>${isEn ? 'Ask for an explanation' : 'Demander des explications'}</button>
-    </div>
-    <div class="account-note" id="flagPreview"></div>
-  `;
-}
-
-function checkBillNumberInput(){
-  const input = document.getElementById('flagBillNumberInput');
-  const preview = document.getElementById('flagPreview');
-  const btn = document.getElementById('flagSubmitBtn');
-  if(!input || !preview || !btn) return;
-  const isEn = currentLang === 'en';
-  const num = parseInt(input.value, 10);
-  if(!input.value.trim() || Number.isNaN(num)){
-    preview.textContent = '';
-    btn.disabled = true;
-    delete btn.dataset.billId;
-    return;
-  }
-  const candidates = bills.filter(b => b.num === num && b.status !== 'sanctionne');
-  if(candidates.length === 1){
-    const b = candidates[0];
-    preview.textContent = (isEn ? 'Bill found: ' : 'Projet de loi trouvé : ') + (isEn ? (b.titleEn || b.title) : b.title);
-    btn.disabled = false;
-    btn.dataset.billId = b.id;
-  } else {
-    preview.textContent = isEn
-      ? 'No active (not yet enacted) bill found with this number.'
-      : 'Aucun projet de loi actif (pas encore sanctionné) trouvé avec ce numéro.';
-    btn.disabled = true;
-    delete btn.dataset.billId;
-  }
-}
-
-async function submitBillFlag(){
-  const btn = document.getElementById('flagSubmitBtn');
-  const preview = document.getElementById('flagPreview');
-  const input = document.getElementById('flagBillNumberInput');
-  if(!btn || !preview || !input || !currentUser) return;
-  const isEn = currentLang === 'en';
-  const billId = Number(btn.dataset.billId);
-  if(!billId) return;
-  btn.disabled = true;
-  const { error } = await supabaseClient.from('bill_flags').insert({ user_id: currentUser.id, bill_id: billId });
-  if(error){
-    if(error.code === '23505'){
-      preview.textContent = isEn ? "You've already asked for an explanation on this bill." : "Vous avez déjà demandé des explications sur ce projet de loi.";
-      btn.disabled = false;
-    } else {
-      // Inclut le cas où la limite mensuelle est atteinte (refusée par la
-      // règle de sécurité côté serveur) — on ne devine pas le message précis,
-      // on relaisse renderFlagBox() vérifier le vrai décompte et l'afficher.
-      console.error('bill flag insert error:', error);
-      await renderFlagBox();
-      return;
-    }
-  } else {
-    preview.textContent = isEn ? '✓ Request recorded. Thanks!' : '✓ Demande enregistrée. Merci !';
-    input.value = '';
-    setTimeout(renderFlagBox, 1200);
-  }
-}
 
 // Réservé aux comptes listés dans la table `admins` (voir
 // scripts/supabase-schema-flags.sql) — les vrais chiffres de demandes par
@@ -3880,7 +3764,6 @@ try{ localStorage.setItem('dq:dernier-volet', JSON.stringify({ ville: 'assemblee
   renderStepFilters();
   updateSortToggleLabel();  updateMinistresSortLabel();
   renderAccountBox();
-  renderFlagBox();
   renderAdminFlagCounts();
   renderComparateurSelects();
   renderComparateurTable();
