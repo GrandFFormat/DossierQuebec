@@ -1001,14 +1001,6 @@ function mdVerrou(titre, phrase, isEn){
 async function mdQuota(acces){
   const plafond = acces.plein ? 10 : 3;
   if(!currentUser) return { total: 0, sur: null, parties: null };
-  // Tant que scripts/supabase-schema-mots-cles-portee.sql n'est pas exécuté, la base applique encore
-  // les anciens plafonds par sorte : aucun total commun à afficher. La colonne `portee`, ajoutée par
-  // ce script, sert de témoin.
-  if(mdPorteeOk === null){
-    const essai = await supabaseClient.from('alertes_mots_cles').select('portee').limit(1);
-    mdPorteeOk = !essai.error;
-  }
-  if(!mdPorteeOk) return { total: 0, sur: null, parties: null };
   const [d, m, o] = await Promise.all([
     supabaseClient.from('dossiers_suivis').select('ville'),
     supabaseClient.from('alertes_mots_cles').select('portee'),
@@ -1173,9 +1165,23 @@ async function mdMots(isEn, acces, quota){
   // il n'en reste plus. Si le total n'a pas pu être lu, on laisse essayer — la base tranchera.
   const plein = quota?.sur ? quota.total >= quota.sur : false;
   if(!currentUser || !acces.plein){
-    zone.innerHTML = mdVerrou(titre, isEn
+    const verrou = mdVerrou(titre, isEn
       ? 'A topic — “logement”, “forêt”, “électricité” — searched in the title and summary of every new bill. A separate list from your city keywords.'
       : 'Un sujet — « logement », « forêt », « électricité » — cherché dans le titre et le résumé de chaque nouveau projet de loi. Une liste à part de vos mots-clés de ville.', isEn);
+    // Un abonnement qui s'arrête ne supprime pas les mots-clés : ils dorment, mais ils occupent
+    // toujours une place dans le quota commun. On les montre donc, avec de quoi les retirer —
+    // sinon la personne reste bloquée sans comprendre ce qui prend ses places.
+    let dormants = [];
+    if(currentUser){
+      const { data } = await supabaseClient.from('alertes_mots_cles').select('*').order('created_at');
+      dormants = (data ?? []).filter((m) => (m.portee ?? 'villes') === 'assemblee');
+    }
+    zone.innerHTML = verrou + (dormants.length ? `<div class="md-carte">
+      <div class="md-carte-tete"><h2>${isEn ? 'Your keywords, asleep' : 'Vos mots-clés, en sommeil'}</h2><span class="md-etiquette">${dormants.length}</span></div>
+      <p class="md-note">${isEn ? 'They no longer trigger anything, but they still take up your follows. Remove one to follow a bill instead.' : 'Ils ne déclenchent plus rien, mais ils occupent toujours une place dans vos suivis. Retirez-en un pour suivre un projet de loi à la place.'}</p>
+      <ul class="md-mots">${dormants.map((m) => `<li><span class="md-mot">${mdH(m.mot)}</span>
+        <button class="md-bouton-doux" onclick="mdRetirerMot('${mdH(m.id)}')" aria-label="${isEn ? 'Remove' : 'Retirer'} ${mdH(m.mot)}">×</button></li>`).join('')}</ul>
+    </div>` : '');
     return;
   }
   if(mdPorteeOk === null){

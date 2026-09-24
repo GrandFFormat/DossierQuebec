@@ -85,7 +85,7 @@
         <a class="ab-bouton ab-bouton-second ab-bouton-grand" href="#inclus" data-en="See what's included">Voir ce qui est inclus</a>
       </div>
       <ul class="ab-promesses">
-        <li data-en="<strong>An email when a bill you follow moves to its next stage</strong>: introduction, consultations, passage in principle, detailed study, assent."><strong>Un courriel quand un projet de loi suivi passe à l'étape suivante</strong> : présentation, consultations, adoption du principe, étude détaillée, sanction.</li>
+        <li data-en="<strong>An email when a bill you follow moves to its next stage</strong>: consultations, passage in principle, detailed study, consideration of the report, passage, assent."><strong>Un courriel quand un projet de loi suivi passe à l'étape suivante</strong> : consultations, adoption du principe, étude détaillée, prise en considération, adoption, sanction.</li>
         <li data-en="<strong>Keywords or elected members</strong>: you choose what matters — a topic, your MNA, a minister."><strong>Mots-clés ou élus</strong> : vous choisissez ce qui compte — un sujet, votre député, un ministre.</li>
         <li data-en="<strong>One clear email in the morning, everything together</strong> — not an inbox flood. Nothing on the days when nothing moves."><strong>Un seul courriel le matin, tout réuni</strong> — pas une avalanche. Rien les jours où rien ne bouge.</li>
       </ul>
@@ -105,11 +105,11 @@
           <li data-en="Plain-language summaries (in English and French)">Les résumés en langage clair</li>
           <li data-en="Recorded votes and council members">Les votes nominatifs et les membres des conseils</li>
           <li data-en="The link to each official document (in French)">Le lien vers chaque document officiel</li>
-          <li class="li-compte" data-en="With a free account: follow up to 3 projects or bills in <a class=&quot;ab-lien&quot; href=&quot;/mes-dossiers&quot;>My files</a> and see where they stand">Avec un compte gratuit : suivre jusqu'à 3 projets ou projets de loi dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a> et voir où ils en sont</li>
+          <li class="li-compte" data-en="With a free account: follow 3 things in all — bills in <a class=&quot;ab-lien&quot; href=&quot;/mon-dossier&quot;>My file</a>, city projects in <a class=&quot;ab-lien&quot; href=&quot;/mes-dossiers&quot;>My files</a> — and see where they stand">Avec un compte gratuit : suivre 3 choses en tout — des projets de loi dans <a class="ab-lien" href="/mon-dossier">Mon dossier</a>, des projets de ville dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a> — et voir où ils en sont</li>
         </ul>
       </section>
       <section class="ab-carte ab-offre ab-offre-payant">
-        <div class="ab-offre-tete"><h3 data-en="With the paid subscription">Avec l'abonnement payant</h3><span class="ab-pastille-offre" data-en="$10 / month · $96 / year">10 $ / mois · 96 $ / an</span></div>
+        <div class="ab-offre-tete"><h3 data-en="With the paid subscription">Avec l'abonnement payant</h3><span class="ab-pastille-offre" id="pastille-prix" data-en="$10 / month · $96 / year">10 $ / mois · 96 $ / an</span></div>
         <p class="ab-note" style="margin:0 0 10px" data-en="Everything free, plus:">Tout le gratuit, plus :</p>
         <div class="ab-blocs-offre">
         <div class="ab-bloc-offre ab-bloc-assemblee">
@@ -127,24 +127,29 @@
         <p class="ab-groupe" data-en="<span aria-hidden=&quot;true&quot;>🏙️</span> <span class=&quot;pour-assemblee&quot;>Also included: </span>In your city — Québec City, Montréal, Lévis, Longueuil, Laval"><span aria-hidden="true">🏙️</span> <span class="pour-assemblee">Aussi inclus : </span>Dans votre ville — Québec, Montréal, Lévis, Longueuil, Laval</p>
         <ul class="ab-avantages">
           <li class="ab-av-bleu"><span class="ab-icone" aria-hidden="true">🔔</span><div data-en="<strong>An email alert when your projects move</strong>: a new item or a new decision — and, in Québec City and Lévis, an item that gets its final decision — with the updated recap when there is one. Nothing in the weeks when nothing moves — no need to keep checking."><strong>Une alerte par courriel quand vos projets bougent</strong> : un nouveau dossier, une nouvelle décision — et, à Québec et à Lévis, un dossier qui reçoit sa décision finale — avec le récapitulatif mis à jour s'il y en a un. Rien les semaines où rien n'avance — plus besoin de revenir vérifier.</div></li>
-          <li class="ab-av-violet"><span class="ab-icone" aria-hidden="true">📍</span><div data-en="<strong>Alerts for your neighbourhood, your street or a keyword</strong>: everything the City decides about 1re Avenue, in Limoilou, about snow removal…"><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : tout ce que la Ville décide sur la 1re Avenue, dans Limoilou, sur le déneigement…</div></li>
+          <li class="ab-av-violet"><span class="ab-icone" aria-hidden="true">📍</span><div data-en="<strong>Alerts for your neighbourhood, your street or a keyword</strong>: 1re Avenue, Limoilou, snow removal…
+            <br><span class=&quot;ab-note&quot;>The word is searched in each new decision's subject and French summary — a decision that does not name it goes unnoticed.</span>"><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : la 1re Avenue, Limoilou, le déneigement…
+            <br><span class="ab-note">Le mot est cherché dans l'objet et le résumé de chaque nouvelle décision — une décision qui ne le nomme pas passe inaperçue.</span></div></li>
           <li class="ab-av-orange"><span class="ab-icone" aria-hidden="true">🏢</span><div data-en="<strong>Follow an organization or a company</strong>: this year's decisions that name it — contracts, grants, agreements — with each amount as written, and an alert when a new one names it"><strong>Suivre un organisme ou une entreprise</strong> : les décisions de l'année qui le nomment — contrats, subventions, ententes — avec le montant de chacune tel qu'écrit, et une alerte quand une nouvelle le nomme</div></li>
           <li class="ab-av-vert"><span class="ab-icone" aria-hidden="true">🗓️</span><div data-en="<strong>What's coming up at council</strong>: the items on the agenda of each meeting, with their summary.
-            <br><span class=&quot;ab-note&quot;>Estimated from the documents the City publishes — a meeting can always change its agenda.</span>"><strong>Ce qui s'en vient au conseil</strong> : les dossiers à l'ordre du jour de chaque séance, avec leur résumé.
-            <br><span class="ab-note">Estimé d'après les documents publiés par la Ville — une séance peut toujours changer son ordre du jour.</span></div></li>
+            <br><span class=&quot;ab-note&quot;>In Québec City and Lévis only for now. Estimated from the documents the City publishes — a meeting can always change its agenda.</span>"><strong>Ce qui s'en vient au conseil</strong> : les dossiers à l'ordre du jour de chaque séance, avec leur résumé.
+            <br><span class="ab-note">À Québec et à Lévis seulement pour l'instant. Estimé d'après les documents publiés par la Ville — une séance peut toujours changer son ordre du jour.</span></div></li>
           <li class="ab-av-jaune"><span class="ab-icone" aria-hidden="true">💵</span><div data-en="<strong>Money details</strong>: who receives, who pays, the bids and the City's estimate, the breakdown by year, the conditions, what changes
-            <br><span class=&quot;ab-note&quot;>In Québec City only for now. Included as soon as it is read: the major projects followed (tramway, housing…) and every new item, the day after it is published. In Québec City, anything else on request — normally read the next day. Quoted in French, as in the documents.</span>"><strong>Le détail de l'argent</strong> : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions, ce qui change
-            <br><span class="ab-note">À Québec seulement pour l'instant. Inclus dès qu'il est lu : les grands projets suivis (tramway, logement…) et chaque nouveau dossier, dès le lendemain de sa publication. À Québec, le reste sur demande — normalement lu le lendemain.</span></div></li>
-          <li class="ab-av-bleu"><span class="ab-icone" aria-hidden="true">📰</span><div data-en="<strong>The monthly recap, subscriber edition</strong>: everything the City decided in the month, in plain language, each decision linked to its official document. <a class=&quot;ab-lien&quot; href=&quot;/exemple-compte-rendu-aout-2026&quot;>See the August 2026 issue</a> (in French)"><strong>Le compte rendu mensuel, édition abonnés</strong> : tout ce que la Ville a décidé dans le mois, en langage clair, chaque décision liée à son document officiel. <a class="ab-lien" href="/exemple-compte-rendu-aout-2026">Voir l'édition d'août 2026</a></div></li>
+            <br><span class=&quot;ab-note&quot;>In Québec City only for now. Included as soon as it is read: the major projects followed (tramway, housing…) and new items, normally the next day — about thirty documents are read each morning, and a busy day catches up the next. In Québec City, anything else on request. Quoted in French, as in the documents.</span>"><strong>Le détail de l'argent</strong> : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions, ce qui change
+            <br><span class="ab-note">À Québec seulement pour l'instant. Inclus dès qu'il est lu : les grands projets suivis (tramway, logement…) et les nouveaux dossiers, normalement dès le lendemain — une trentaine de documents sont lus chaque matin, et un jour chargé se rattrape le lendemain. À Québec, le reste sur demande.</span></div></li>
+          <li class="ab-av-bleu"><span class="ab-icone" aria-hidden="true">📰</span><div data-en="<strong>The monthly recap, subscriber edition</strong>: everything the City decided in the month, in plain language, each decision linked to its official document. <a class=&quot;ab-lien&quot; href=&quot;/exemple-compte-rendu-aout-2026&quot;>See the August 2026 issue</a> (in French)
+            <br><span class=&quot;ab-note&quot;>Québec City and Montréal only for now, and it is sent on request: tick it in My files, under “My emails”.</span>"><strong>Le compte rendu mensuel, édition abonnés</strong> : tout ce que la Ville a décidé dans le mois, en langage clair, chaque décision liée à son document officiel. <a class="ab-lien" href="/exemple-compte-rendu-aout-2026">Voir l'édition d'août 2026</a>
+            <br><span class="ab-note">À Québec et à Montréal seulement pour l'instant, et sur demande : la case est dans Mes dossiers, sous « Mes courriels ».</span></div></li>
           <li class="ab-av-rose"><span class="ab-icone" aria-hidden="true">📊</span><div data-en="<strong>Export to a spreadsheet or PDF</strong> (Excel, CSV or printable PDF): you choose a project, a word or a name and the columns, with the money details when they have been read"><strong>L'export en tableur ou en PDF</strong> (Excel, CSV ou PDF à imprimer) : vous choisissez un projet, un mot ou un nom et les colonnes, avec le détail de l'argent quand il est lu</div></li>
         </ul>
         </div>
         </div>
         <p class="ab-prix" id="prix" data-en="<span class=&quot;ab-prix-montant&quot;>$10</span> <span class=&quot;ab-note&quot;>a month, or $96 a year — $8 a month, more than two months free</span>"><span class="ab-prix-montant">10 $</span> <span class="ab-note">par mois, ou 96 $ par an — soit 8 $ par mois, plus de deux mois offerts</span></p>
-        <p class="ab-note" data-en="No commitment: cancel anytime, in two clicks; it stays active until the end of the paid period. Want to try first? A free account already follows 3 projects or bills.">Sans engagement : annulable en tout temps, en deux clics ; il reste actif jusqu'à la fin de la période payée. Envie d'essayer d'abord ? Un compte gratuit suit déjà 3 projets ou projets de loi.</p>
-        <p class="ab-note" data-en="Per account: 10 projects or bills followed, 5 city keywords and 5 Assembly keywords, 3 organizations, 10 exports a month.">Par compte : 10 projets ou projets de loi suivis, 5 mots-clés de ville et 5 de l'Assemblée, 3 organismes, 10 exports par mois.</p>
+        <p class="ab-note" data-en="No commitment: cancel anytime, in two clicks; it stays active until the end of the paid period. Want to try first? A free account already follows 3 bills or city projects.">Sans engagement : annulable en tout temps, en deux clics ; il reste actif jusqu'à la fin de la période payée. Envie d'essayer d'abord ? Un compte gratuit suit déjà 3 projets de loi ou projets de ville.</p>
+        <p class="ab-note" data-en="Per account: 10 follows in all — bills, city projects, keywords and organizations share one count, split however you like — plus 10 exports a month. The ministers and MNAs you follow are not part of that count.">Par compte : 10 suivis en tout — projets de loi, projets de ville, mots-clés et organismes comptent ensemble, répartis comme vous le voulez — et 10 exports par mois. Les ministres et député·e·s suivis ne comptent pas dans ce total.</p>
+        <p class="ab-note" data-en="The alert emails themselves are written in French, whichever language you read the site in.">Les courriels d'alerte sont écrits en français, quelle que soit la langue dans laquelle vous lisez le site.</p>
         <p class="ab-note" data-en="Made for engaged residents, neighbourhood associations and freelance journalists.">Pensé pour le citoyen engagé, l'association de quartier, le ou la journaliste à la pige.</p>
-        <p class="ab-note" data-en="One subscription for every city covered — not one per city.">Un seul abonnement pour toutes les villes couvertes — pas un abonnement par ville.</p>
+        <p class="ab-note" data-en="One subscription for the whole site: every city covered and the National Assembly — not one per city.">Un seul abonnement pour tout le site : toutes les villes couvertes et l'Assemblée nationale — pas un abonnement par ville.</p>
       </section>
     </div>
 
@@ -205,7 +210,7 @@
          qui est tapé et traduire sa réponse. Aucun code n'est lisible depuis le navigateur. -->
     <section class="ab-carte ab-cadeau" id="cadeau">
       <h3 data-en="<span class=&quot;ab-icone&quot; aria-hidden=&quot;true&quot;>🎟️</span> You were given a subscription?"><span class="ab-icone" aria-hidden="true">🎟️</span> On vous a offert un abonnement ?</h3>
-      <p data-en="Enter the code you received. It adds to whatever time you have left — no card, no payment.">Entrez le code reçu. Il s'ajoute au temps qu'il vous reste, sans carte ni paiement.</p>
+      <p data-en="Enter the code you received: no card, no payment. It adds to whatever gift time you have left; if you already pay by card, keep it for later — it cannot be added to a paid subscription.">Entrez le code reçu, sans carte ni paiement. Il s'ajoute au temps offert qu'il vous reste ; si vous payez déjà par carte, gardez-le pour plus tard — il ne s'ajoute pas à un abonnement payant.</p>
       <form class="ab-form" id="form-cadeau">
         <input required placeholder="Votre code" data-en-placeholder="Your code" autocomplete="off" spellcheck="false" maxlength="40">
         <button type="submit" class="ab-bouton" data-mesure="cadeau_utiliser" data-en="Use it">Utiliser</button>
@@ -227,7 +232,7 @@
       <p class="ab-cta-titre pour-assemblee" data-en="Never miss the stage that matters.">Ne manquez plus l'étape qui compte.</p>
       <p class="ab-cta-titre pour-villes" data-en="Never miss the decision that matters.">Ne manquez plus la décision qui compte.</p>
       <a class="ab-bouton ab-bouton-grand" href="#payer" data-cta="payer" data-ou="bas" data-en="Get my alerts — $10/month">Recevoir mes alertes — 10 $/mois</a>
-      <p class="ab-note" data-en="or $96 a year · cancel anytime">ou 96 $ par an · annulable en tout temps</p>
+      <p class="ab-note" id="prix-bas" data-en="or $96 a year · cancel anytime">ou 96 $ par an · annulable en tout temps</p>
     </section>
 
     <p class="ab-note" data-en="Independent citizen site, ad-free. No connection with the National Assembly or the cities covered; if anything differs, the official documents prevail.">Site citoyen indépendant, sans publicité. Aucun lien avec l'Assemblée nationale ni avec les villes couvertes ; en cas d'écart, les documents officiels font foi.</p>
@@ -262,23 +267,42 @@
     const s = await session();
     const etat = await etatAbonnement(s);
     const annule = new URLSearchParams(location.search).get('abonnement') === 'annule';
+    // Retour du parcours d'annulation de Stripe (api/abonnement.js). L'état de cette page vient de
+    // notre table, écrite par le webhook : quelques secondes plus tard. Sans ce mot, on revenait sur
+    // « Votre abonnement est actif » et son bouton « Annuler », comme si le clic n'avait rien fait.
+    const revientAnnulation = new URLSearchParams(location.search).get('abonnement') === 'annulation';
+    const avisAnnulation = revientAnnulation
+      ? `<p class="ab-note">${tr('Annulation transmise à Stripe. Si cette page dit encore que l’abonnement est actif, c’est que la confirmation arrive dans quelques secondes : rechargez-la. Votre accès reste ouvert jusqu’à la fin de la période déjà payée.', 'Cancellation sent to Stripe. If this page still says the subscription is active, the confirmation is a few seconds away: reload it. Your access stays open until the end of the period already paid for.')}</p>`
+      : '';
     if (etat?.ouvert) {
       document.querySelector('#prix').innerHTML = `<span class="ab-prix-montant">${tr('10 $', '$10')}</span> <span class="ab-note">${etat.forfaits?.annuel ? tr('par mois, ou 96 $ par an — soit 8 $ par mois, plus de deux mois offerts', 'a month, or $96 a year — $8 a month, more than two months free') : tr('par mois', 'a month')}</span>`;
+      // Le forfait annuel dépend d'un prix configuré chez Stripe (api/_stripe.js) : s'il manque, le
+      // serveur refuse « annuel ». Les deux endroits où 96 $ est écrit en dur doivent suivre, sinon
+      // la page vendrait un forfait qu'on ne peut pas acheter.
+      if (!etat.forfaits?.annuel) {
+        // On change aussi data-en : sinon le bouton de langue remettrait la phrase d'origine.
+        const pastille = document.querySelector('#pastille-prix');
+        if (pastille) { pastille.dataset.en = '$10 / month'; pastille.textContent = tr('10 $ / mois', '$10 / month'); }
+        const bas = document.querySelector('#prix-bas');
+        if (bas) { bas.dataset.en = 'cancel anytime'; bas.textContent = tr('annulable en tout temps', 'cancel anytime'); }
+      }
     }
     if (!etat || !(etat.abonne || etat.peutPayer || etat.ouvert)) return;
 
     if (etat.abonne) {
       payer.innerHTML = `<h3><span class="ab-icone" aria-hidden="true">✅</span> ${tr('Votre abonnement est actif', 'Your subscription is active')}</h3>
+        ${avisAnnulation}
         <p>${etat.annulationPrevue && etat.fin
           ? tr(`Annulé : il reste actif jusqu'au ${dateFr(new Date(etat.fin).toLocaleDateString('en-CA'))}, puis il s'arrête sans autre frais.`, `Cancelled: it stays active until ${dateFr(new Date(etat.fin).toLocaleDateString('en-CA'))}, then stops with no further charge.`)
-          : tr('Merci : il garde le reste du site gratuit pour tout le monde. Les alertes, le détail de l\'argent, l\'agenda et l\'export sont dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a>.', 'Thank you: it keeps the rest of the site free for everyone. Alerts, money details, agendas and export are in <a class="ab-lien" href="/mes-dossiers">My files</a>.')}</p>
+          : tr('Merci : il garde le reste du site gratuit pour tout le monde. Vos projets de loi, vos mots-clés de l\'Assemblée et vos élus suivis sont dans <a class="ab-lien" href="/mon-dossier">Mon dossier</a> ; les alertes des villes, le détail de l\'argent, l\'agenda et l\'export dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a>.', 'Thank you: it keeps the rest of the site free for everyone. Your followed bills, Assembly keywords and followed members are in <a class="ab-lien" href="/mon-dossier">My file</a>; city alerts, money details, agendas and export are in <a class="ab-lien" href="/mes-dossiers">My files</a>.')}</p>
         ${etat.gerable ? `<p><button type="button" class="ab-bouton ab-bouton-second" data-action="portail">${tr('Gérer mon abonnement', 'Manage my subscription')}</button> <span class="ab-note">${tr('carte, factures', 'card, invoices')}</span></p>` : ''}
         ${etat.annulable ? `<p><button type="button" class="ab-lien-bouton" data-action="annuler">${tr('Annuler mon abonnement', 'Cancel my subscription')}</button> <span class="ab-note">${tr('en deux clics, sans justification ; il reste actif jusqu’à la fin de la période payée', 'two clicks, no questions asked; it stays active until the end of the paid period')}</span></p>` : ''}
         <p class="ab-note ab-payer-etat" aria-live="polite"></p>`;
     } else if (etat.peutPayer) {
       payer.innerHTML = `<h3><span class="ab-icone" aria-hidden="true">💳</span> ${tr("S'abonner", 'Subscribe')}</h3>
         ${annule ? `<p class="ab-note">${tr('Paiement interrompu : rien n\'a été débité.', 'Payment interrupted: nothing was charged.')}</p>` : ''}
-        <p>${etat.forfaits?.annuel ? tr('10 $ par mois, ou 96 $ par an — soit 8 $ par mois', '$10 a month, or $96 a year — that is $8 a month') : tr('10 $ par mois', '$10 a month')}${tr(', pour toutes les villes couvertes. Le paiement se fait sur la page sécurisée de Stripe ; la carte n\'est jamais vue par DossierQuébec. <strong>Annulable en tout temps</strong>, depuis cette page ou Mes dossiers : l\'abonnement reste actif jusqu\'à la fin de la période payée.', ', for every city covered. Payment happens on Stripe\'s secure page; DossierQuébec never sees your card. <strong>Cancel anytime</strong>, from this page or My files: the subscription stays active until the end of the paid period.')}</p>
+        ${avisAnnulation}
+        <p>${etat.forfaits?.annuel ? tr('10 $ par mois, ou 96 $ par an — soit 8 $ par mois', '$10 a month, or $96 a year — that is $8 a month') : tr('10 $ par mois', '$10 a month')}${tr(', pour toutes les villes couvertes et l\'Assemblée nationale. Le paiement se fait sur la page sécurisée de Stripe ; la carte n\'est jamais vue par DossierQuébec. <strong>Annulable en tout temps</strong>, depuis cette page : l\'abonnement reste actif jusqu\'à la fin de la période payée.', ', for every city covered and the National Assembly. Payment happens on Stripe\'s secure page; DossierQuébec never sees your card. <strong>Cancel anytime</strong>, from this page: the subscription stays active until the end of the paid period.')}</p>
         ${bandeauEssai(etat)}
         <p><button type="button" class="ab-bouton" data-action="payer" data-forfait="mensuel">${tr("S'abonner — 10 $ par mois", 'Subscribe — $10 a month')}</button>
           ${etat.forfaits?.annuel ? `<button type="button" class="ab-bouton ab-bouton-second" data-action="payer" data-forfait="annuel">${tr("S'abonner — 96 $ par an", 'Subscribe — $96 a year')}</button>` : ''}</p>
@@ -320,10 +344,13 @@
     etat.textContent = tr('Ouverture de Stripe…', 'Opening Stripe…');
     const forfait = bouton.dataset.forfait === 'annuel' ? 'annuel' : 'mensuel';
     mesurer(action === 'paiement' ? 'abonnement_payer' : action === 'annuler' ? 'abonnement_annuler' : 'abonnement_portail', { ville: VILLES[ville] ? ville : 'aucune', ...(action === 'paiement' ? { forfait } : {}) });
-    const r = await fetch(`/api/abonnement?action=${action}`, {
+    // Après Stripe, on revient dans l'espace d'où l'on vient : /mon-dossier côté Assemblée (les
+    // projets de loi suivis, les mots-clés et les élus y sont), /mes-dossiers côté villes.
+    const retour = contexte === 'assemblee' ? 'mon-dossier' : 'mes-dossiers';
+    const r = await fetch(`/api/abonnement?action=${action}&retour=${retour}`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${s.access_token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ langue: EN ? 'en' : 'fr', forfait }),
+      body: JSON.stringify({ langue: EN ? 'en' : 'fr', forfait, retour }),
     }).catch(() => null);
     const donnees = r ? await r.json().catch(() => ({})) : {};
     if (donnees.url) { location.assign(donnees.url); return; }
