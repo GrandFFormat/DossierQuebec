@@ -96,7 +96,7 @@ function extraireDonnees() {
     }
   }
 
-  // Trois jeux DÉRIVÉS, pour que l'accueil et la page des votes n'aient pas à charger des
+  // Des jeux DÉRIVÉS, pour que l'accueil et la page des votes n'aient pas à charger des
   // tableaux entiers dont elles n'utilisent qu'une poignée de champs.
   //
   //   stats        les trois compteurs de l'accueil. Ils étaient posés par renderMinistres,
@@ -125,6 +125,17 @@ function extraireDonnees() {
       } catch { /* sans données brutes : pas de rôle, et les homonymes ne reçoivent rien */ }
       return valeurs.bills.filter((b) => b.sponsor).map((b) => ({ id: b.id, sponsor: b.sponsor, role: roles.get(b.id) || null }));
     })(),
+    // challengeBills : de quoi NOMMER un projet challengé sans charger les 143 complets.
+    // flag_counts() ne renvoie que des bill_id, et l'accueil n'a que ses 4 projets récents —
+    // la carte a besoin du numéro, des deux titres, du statut, de l'étape, et de lastActivity
+    // (loiVivante() en dépend pour savoir si le projet se challenge encore).
+    // ⚠️ Volontairement ABSENT de `donnees` : commun/dq.js ne va le chercher que si l'agrégat
+    // renvoie un projet dont la page n'a pas le titre. Une page où rien n'est challengé ne
+    // paie rien.
+    challengeBills: valeurs.bills.map((b) => ({
+      id: b.id, num: b.num, title: b.title, titleEn: b.titleEn,
+      status: b.status, step: b.step, lastActivity: b.lastActivity,
+    })),
   };
   for (const [nom, valeur] of Object.entries(derives)) {
     const contenu = JSON.stringify(valeur);

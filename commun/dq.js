@@ -1388,6 +1388,10 @@ async function checkMonthlyFlagCount(){
   return count ?? 0;
 }
 
+// ⚠️ Aucune page ne porte plus `id="flagBox"` depuis le découpage multipage : cette boîte
+// (demander une explication par NUMÉRO, avec le compteur de demandes restantes du mois) ne
+// s'affiche donc nulle part. Le bouton des cartes fait le même travail ; reste à décider si
+// on la remet sur la page du compte ou si on retire la fonction. Constaté le 24 sept. 2026.
 async function renderFlagBox(){
   if(!document.getElementById('flagBox')) return;   // vue absente de cette page
   const box = document.getElementById('flagBox');
@@ -1505,6 +1509,9 @@ async function renderAdminFlagCounts(){
   if(!container) return;
   const isAdmin = await checkIsAdmin();
   if(!isAdmin){ container.innerHTML = ''; return; }
+  // La page du compte ne charge aucun projet : sans les titres, ce panneau n'affichait que
+  // des « #27053 ». Admins seulement, donc jamais payé par un visiteur ordinaire.
+  await chargerChallenges();
 
   const { data, error } = await supabaseClient.from('bill_flags').select('bill_id');
   if(error){ console.error('renderAdminFlagCounts failed:', error); container.innerHTML = ''; return; }
@@ -1518,7 +1525,7 @@ async function renderAdminFlagCounts(){
   const entries = Object.entries(counts).sort((a,b) => b[1] - a[1]);
 
   const rowsHtml = entries.length ? entries.map(([billId, count]) => {
-    const bill = bills.find(b => b.id === Number(billId));
+    const bill = projetChallenge(billId);
     const title = bill ? (isEn ? (bill.titleEn || bill.title) : bill.title) : `#${billId}`;
     const c = camp[billId];
     const threshold = c ? c.threshold : PETITION_TIERS[0];
@@ -2978,6 +2985,51 @@ let challengedPage = 0;
 const nextChallengeTier = cnt => CHALLENGE_TIERS.find(t => cnt < t) ?? null;
 let challengedCache = null;
 
+// flag_counts() ne renvoie que des `bill_id` : il faut des titres pour en faire des cartes.
+// Jusqu'au 24 septembre 2026 cette jointure se faisait sur la variable `bills` de la page —
+// or l'accueil n'en charge que 4 (`apercuBills` remplit la MÊME variable que la liste
+// complète, voir _remplir en haut). Tout projet challengé hors de ces quatre-là disparaissait
+// en silence, et l'accueil affirmait « Personne n'a encore demandé d'explication » : une
+// phrase qu'il n'était pas en mesure de savoir vraie. D'où cette liste maigre (sept champs
+// par projet), qui n'est PAS déclarée dans data-donnees et n'arrive que si l'agrégat renvoie
+// au moins un projet dont la page n'a pas le titre. Une page où rien n'est challengé ne paie
+// rien.
+let _challengeBillsP = null, _challengeParId = new Map();
+function chargerChallengeBills(){
+  if(_challengeBillsP) return _challengeBillsP;
+  _challengeBillsP = fetch('/data/site/challengeBills.json')
+    .then(r => r.ok ? r.json() : null)
+    // Un échec ne doit pas rester collé : on l'oublie pour que la prochaine tentative réessaie.
+    .catch(() => null)
+    .then(d => { if(!d) _challengeBillsP = null; return d; });
+  return _challengeBillsP;
+}
+// Le projet derrière un bill_id : d'abord ce que la page a chargé (la page des projets a les
+// 143 complets, avec parrain et note), sinon la liste maigre.
+const projetChallenge = (billId) =>
+  bills.find(b => b.id === Number(billId)) || _challengeParId.get(Number(billId)) || null;
+
+// Charge le palmarès public : des TOTAUX par projet, jamais d'identités (la RLS de
+// bill_flags protège qui a demandé quoi). Séparée du rendu le 24 septembre 2026 — enfermée
+// dans renderChallenged(), elle ne tournait que sur l'accueil, et la page des projets gardait
+// donc un filtre « 🔥 Challengés » qui ne renvoyait jamais rien et des cartes sans badge.
+async function chargerChallenges(){
+  if(challengedCache !== null) return challengedCache;
+  try{
+    const { data, error } = await supabaseClient.rpc('flag_counts');
+    challengedCache = (!error && Array.isArray(data)) ? data : [];
+  }catch(e){ challengedCache = []; }
+  if(challengedCache.some(c => !bills.some(b => b.id === Number(c.bill_id)))){
+    const maigres = await chargerChallengeBills();
+    if(maigres) _challengeParId = new Map(maigres.map(b => [Number(b.id), b]));
+  }
+  // Le cache vient d'arriver : re-rend les listes de projets pour que les badges
+  // « 🔥 N demandes » apparaissent (billCard les lit) et que le filtre ait de quoi filtrer.
+  renderBills();
+  renderApercuBills();
+  return challengedCache;
+}
+
 // Partage social d'un projet challengé — accès DIRECT en un clic (pas de
 // copier-coller). Message : « X personnes contestent le projet de loi n° N —
 // [titre]. Connectez-vous pour appuyer cette demande : [lien] ». X et « Copier »
@@ -2986,7 +3038,7 @@ let challengedCache = null;
 function shareChallenge(billId, count, platform, evt){
   if(evt) evt.stopPropagation();
   const isEn = currentLang === 'en';
-  const b = bills.find(x => x.id === Number(billId));
+  const b = projetChallenge(billId);
   const num = b ? b.num : '';
   const title = b ? (isEn ? (b.titleEn || b.title) : b.title) : '';
   const n = Number(count).toLocaleString(isEn ? 'en-CA' : 'fr-CA');
@@ -3093,9 +3145,12 @@ function openBillFromQuery(){
 }
 
 async function renderChallenged(){
-  if(!document.getElementById('challengedList')) return;   // vue absente de cette page
   const el = document.getElementById('challengedList');
-  if(!el) return;
+  // Le palmarès se charge MÊME quand la section n'est pas sur cette page : la page des
+  // projets en a besoin pour son filtre « 🔥 Challengés » et pour les badges de ses cartes.
+  // Les pages qui n'affichent ni l'un ni l'autre (votes, ministres…) n'appellent rien.
+  if(el || document.getElementById('billsList')) await chargerChallenges();
+  if(!el) return;   // vue absente de cette page
   const isEn = currentLang === 'en';
   const fmt = n => n.toLocaleString(isEn ? 'en-CA' : 'fr-CA');
   const titleEl = document.getElementById('challengedTitle');
@@ -3113,19 +3168,8 @@ async function renderChallenged(){
         ? `The moment one person asks for an explanation, the bill appears here — pile on in one click; at ${fmt(PETITION_THRESHOLD)}, we push for a petition`
         : `Dès qu'une personne demande une explication, le projet apparaît ici — appuyez en un clic ; à ${fmt(PETITION_THRESHOLD)}, on pousse pour une pétition`);
 
-  if(challengedCache === null){
-    try{
-      const { data, error } = await supabaseClient.rpc('flag_counts');
-      challengedCache = (!error && Array.isArray(data)) ? data : [];
-    }catch(e){ challengedCache = []; }
-    // Le cache vient d'arriver : re-rend les listes de projets pour que les
-    // badges « 🔥 N demandes » des cartes apparaissent (billCard le lit).
-    renderBills();
-    renderApercuBills();
-  }
-
-  const challenged = challengedCache
-    .map(c => ({ cnt: Number(c.cnt), bill: bills.find(b => b.id === Number(c.bill_id)) }))
+  const challenged = (challengedCache || [])
+    .map(c => ({ cnt: Number(c.cnt), bill: projetChallenge(c.bill_id) }))
     .filter(c => c.bill && c.cnt >= CHALLENGE_DISPLAY_MIN)
     .sort((a, b) => b.cnt - a.cnt)
     .slice(0, CHALLENGE_DISPLAY_MAX);
