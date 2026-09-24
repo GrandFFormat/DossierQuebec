@@ -2,38 +2,12 @@
 > dossiervillelevis@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 70db4ee — Node v22.23.2
+Code : commit 8c45d0a — Node v22.23.2
 
 === Syntaxe du JavaScript du site ===
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
-
-=== Membres du conseil ===
-16 membres écrits dans data/elus.json :
-  maire        Steven Blaney                                                                Prospérité Lévis — Équipe Steven Blaney
-  district  1  Anthony Dufour             Saint-Étienne      Chutes-de-la-Chaudière-Ouest   Repensons Lévis — Équipe Serge Bonin
-  district  2  Isabelle Lefebvre          Saint-Nicolas      Chutes-de-la-Chaudière-Ouest   Repensons Lévis — Équipe Serge Bonin
-  district  3  Audrey Bédard              Villieu            Chutes-de-la-Chaudière-Ouest   Repensons Lévis — Équipe Serge Bonin
-  district  4  Benoit Forget-Chiasson     Saint-Rédempteur   Chutes-de-la-Chaudière-Ouest   Lévis Force 10 — Équipe Isabelle Demers
-  district  5  Daniel Saindon             Charny             Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
-  district  6  Karine Lavertu             Breakeyville       Chutes-de-la-Chaudière-Est     Lévis Force 10 — Équipe Isabelle Demers
-  district  7  Alain Quirion              Saint-Jean         Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
-  district  8  Erik Bilodeau              Taniata            Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
-  district  9  Anick Tremblay             Saint-Romuald      Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
-  district 10  Anne-Marie Tremblay        Notre-Dame         Desjardins                     Prospérité Lévis — Équipe Steven Blaney
-  district 11  Jean Demers                Saint-David        Desjardins                     Prospérité Lévis — Équipe Steven Blaney
-  district 12  Jean Leblond               Christ-Roi         Desjardins                     Prospérité Lévis — Équipe Steven Blaney
-  district 13  Olivier Biron              Bienville          Desjardins                     Prospérité Lévis — Équipe Steven Blaney
-  district 14  Mélanie Sicotte            Lauzon             Desjardins                     Prospérité Lévis — Équipe Steven Blaney
-  district 15  Éric Nadeau                Pintendre          Desjardins                     Repensons Lévis — Équipe Serge Bonin
-Partis : {"Prospérité Lévis — Équipe Steven Blaney":10,"Repensons Lévis — Équipe Serge Bonin":4,"Lévis Force 10 — Équipe Isabelle Demers":2}
-
-=== Districts électoraux ===
-Source : https://www.donneesquebec.ca/recherche/dataset/e53425f2-e4cc-4eec-b978-0b862c7a0c56/resource/ee12484f-cc90-4340-9edc-8e17de3e1422/download/districts-electoraux.json (mise à jour du 2022-07-21)
-15 districts écrits dans data/districts.json
-Contours : 9465 points -> 1116 (392 ko -> 33 ko)
-  ⚠ Contours du jeu ouvert mis à jour le 2022-07-21, antérieurs au Règlement RV-2024-34-65 et aux ajustements annoncés par la Ville : carte indicative.
 
 === robots.txt des sites lus ===
 https://levis.ca/robots.txt : rien qui concerne nos chemins
@@ -45,18 +19,19 @@ https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt : HTTP 403 Fo
   CAD     12 séances, 7 avec procès-verbal
   CV      19 séances, 13 avec procès-verbal
   CACCO   12 séances, 7 avec procès-verbal
-  CACCE   12 séances, 7 avec procès-verbal
+  CACCE   12 séances, 8 avec procès-verbal
   CE      17 séances, 17 avec procès-verbal
 
 === Décisions de l'année ===
+CACCE_2026-08-12 : 10 pages, 21 résolutions, 0 liées à un sommaire, 0 vote(s) nominal(aux)
 
-1836 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 4 en attente de procès-verbal.
-0 nouveauté(s) depuis la dernière exécution.
+1858 décisions écrites dans data/decisions.json — 1 séance(s) lue(s) cette fois, 4 en attente de procès-verbal.
+22 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
-    641  Urbanisme
-    450  Procédure
-    142  Administration
+    656  Urbanisme
+    456  Procédure
+    143  Administration
     104  Transport
      77  Finances
      64  Contrats
@@ -71,41 +46,41 @@ Pastilles thématiques :
      19  Développement économique
      17  Immobilier
      16  Culture et patrimoine
-    107  (classées par défaut — aucune règle n'a tranché)
+    108  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-07-23) ===
-Fenêtre depuis 2026-07-23 : 4 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-07-26) ===
+Fenêtre depuis 2026-07-26 : 4 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
 
 17 votes nominaux écrits dans data/votes.json (4 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
 
 === Lexique, mesuré sur les procès-verbaux ===
-Mesure de 29 termes sur 4 procès-verbaux de 2026 en cache et 1836 décisions…
+Mesure de 29 termes sur 5 procès-verbaux de 2026 en cache et 1858 décisions…
 
-     4 PV      56 résolutions   Résolution
+     5 PV      56 résolutions   Résolution
      4 PV     101 résolutions   Document d’aide à la décision
-     4 PV       8 résolutions   Procès-verbal
-     4 PV       4 résolutions   Ordre du jour
+     5 PV       9 résolutions   Procès-verbal
+     5 PV       5 résolutions   Ordre du jour
      3 PV      10 résolutions   Avis de motion
-     3 PV      32 résolutions   Règlement
-     3 PV      20 résolutions   Dépôt
+     4 PV      47 résolutions   Règlement
+     4 PV      21 résolutions   Dépôt
      3 PV      90 résolutions   Conseil de la Ville
      4 PV      62 résolutions   Comité exécutif
-     0 PV       0 résolutions   Conseil d'arrondissement
+     1 PV       1 résolutions   Conseil d'arrondissement
      2 PV      10 résolutions   Président du conseil
      4 PV      32 résolutions   Greffière
      2 PV       4 résolutions   Commission
-     2 PV      59 résolutions   Il est proposé par… Appuyé par…
+     3 PV      78 résolutions   Il est proposé par… Appuyé par…
      1 PV       1 résolutions   Appeler le vote
-     2 PV      58 résolutions   Adoptée à l'unanimité
+     3 PV      77 résolutions   Adoptée à l'unanimité
      1 PV       1 résolutions   Adoptée à la majorité
      1 PV       1 résolutions   Proposition d’amendement
      0 PV       0 résolutions   Conflit d'intérêts
-     0 PV       0 résolutions   Dérogation mineure
-     0 PV       0 résolutions   PIIA
+     1 PV       2 résolutions   Dérogation mineure
+     1 PV      15 résolutions   PIIA
      0 PV       0 résolutions   Usage conditionnel
-     3 PV      11 résolutions   Zonage et lotissement
-     1 PV       1 résolutions   Consultation écrite
+     4 PV      12 résolutions   Zonage et lotissement
+     2 PV       2 résolutions   Consultation écrite
      4 PV       9 résolutions   Attribution du contrat
      3 PV       7 résolutions   Appel d'offres
      3 PV      16 résolutions   Aide financière
@@ -114,15 +89,12 @@ Mesure de 29 termes sur 4 procès-verbaux de 2026 en cache et 1836 décisions…
 
 29 entrées écrites dans data/lexique.json
 
-⚠ 5 terme(s) sans aucune occurrence — la formulation cherchée ne colle pas :
-  Conseil d'arrondissement  (recherche : conseil d['’]arrondissement)
+⚠ 2 terme(s) sans aucune occurrence — la formulation cherchée ne colle pas :
   Conflit d'intérêts  (recherche : conflit d['’]int[ée]r[êe]ts)
-  Dérogation mineure  (recherche : d[ée]rogations? mineures?)
-  PIIA  (recherche : \bPIIA\b|plans? d['’]implantation et d['’]int[ée]gration architecturale)
   Usage conditionnel  (recherche : usages? conditionnels?)
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-23 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-07-26 pas encore résumés (plafond : 120)…
 525 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
@@ -132,13 +104,13 @@ Récapitulatifs des projets : rien de nouveau.
 === Projets pour « Mes dossiers » ===
 Projets publics : 4 projets · index 2.8 Ko · fichiers de projet 45 Ko au total.
 Décisions attendues : 32 dossiers en attente, dont 0 avec une date cible · 45.4 Ko.
-Dossiers de l'année : 1384 · 1045 Ko · organismes suggérés : 89.
-Décisions récentes : 102 dossiers depuis le 2026-08-01 · 114 Ko.
+Dossiers de l'année : 1405 · 1055 Ko · organismes suggérés : 89.
+Décisions récentes : 123 dossiers depuis le 2026-08-01 · 127 Ko.
 
 === Chiffres de la page Abonnement ===
-Travail public : 2375 documents, 482 résumés, 17 votes, 4 projets.
+Travail public : 2397 documents, 482 résumés, 17 votes, 4 projets.
 
 === Bilan ===
-  étapes         : 13
+  étapes         : 11
   échecs         : aucun
   avertissements : aucun
