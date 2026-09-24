@@ -1,5 +1,9 @@
 # Reproduire DossierVilleDeQuébec pour une autre ville
 
+> **Version de référence depuis le 24 sept. 2026 :** ce guide vit désormais dans un document Claude,
+> <https://claude.ai/code/artifact/3e9746c3-3c92-4271-9bc4-363866a35d3f>. Ce fichier n'est qu'une copie ;
+> en cas d'écart, le document fait foi.
+
 Ce document est fait pour être **collé tel quel au début d'une nouvelle session**, avec une
 seule phrase en plus : « La ville, c'est ___. » Il dit ce qu'on a construit pour Québec, ce
 qui se réutilise sans y toucher, ce qui doit être réécrit pour une autre source, comment
@@ -51,6 +55,10 @@ l'exécution. Aucun framework, aucune dépendance sauf le SDK Anthropic pour les
 | `conseil.html` | carte SVG des districts, membres du conseil, puis les instances sans page « membres » (agglomération, commission d'urbanisme) |
 | `lexique.html` | 30 termes du vocabulaire décisionnel, avec décompte réel et un exemple vivant |
 | `sources.html` | provenance, méthode, limites, état des données, archive |
+
+> ⚠️ Ceci vaut pour un **volet de ville** à l'intérieur du dépôt de DQ. Pour un **site séparé**
+> (DossierOntario, DossierCanada…), ne pas partir d'ici ni de `assets/style.css` — c'est le design
+> des volets, vert et arrondi, pas celui de DQ. Lire `CHARTE-DOSSIER.md` à la racine.
 
 **À garder tel quel** (ça ne dépend pas de la ville) : les six pages et `assets/app.js`,
 `assets/style.css` (deux thèmes, pastilles, accordéon `<details name="fiches">`, taille du

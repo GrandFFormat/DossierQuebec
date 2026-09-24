@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #F2F0EA; }
+  a { color: #0E4FC1; text-decoration: none; }
+  a:hover { color: #08307A; }
+  ::selection { background: #FFD24D; }
+  @keyframes dqTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes dqUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+<div style="font-family: 'Archivo', system-ui, sans-serif; color: #131313; background: #F2F0EA; min-height: 100vh; font-size: {{ rootSize }}px; -webkit-font-smoothing: antialiased;">
+
+  <!-- ticker -->
+  <div style="background: #131313; color: #F2F0EA; overflow: hidden; border-bottom: 3px solid #131313;">
+    <div style="display: flex; white-space: nowrap; animation: dqTicker 26s linear infinite; width: max-content;">
+      <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 0;">● 735 votes nominatifs enregistrés cette législature&nbsp;&nbsp;&nbsp;● Chaque vote : qui a dit oui, qui a dit non, qui était absent&nbsp;&nbsp;&nbsp;● Aucun jugement — juste le registre&nbsp;&nbsp;&nbsp;● Source : Journal des débats, assnat.qc.ca&nbsp;&nbsp;&nbsp;● Site citoyen indépendant · vraies données publiques&nbsp;&nbsp;&nbsp;</span>
+      <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 0;">● 735 votes nominatifs enregistrés cette législature&nbsp;&nbsp;&nbsp;● Chaque vote : qui a dit oui, qui a dit non, qui était absent&nbsp;&nbsp;&nbsp;● Aucun jugement — juste le registre&nbsp;&nbsp;&nbsp;● Source : Journal des débats, assnat.qc.ca&nbsp;&nbsp;&nbsp;● Site citoyen indépendant · vraies données publiques&nbsp;&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- header -->
+  <header style="border-bottom: 3px solid #131313; background: #F2F0EA; position: sticky; top: 0; z-index: 50;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+      <a href="Apercu.dc.html" style="font-family: 'Archivo'; font-weight: 900; font-size: 24px; letter-spacing: -0.03em; color: #131313; text-transform: uppercase;">Dossier<span style="color: #0E4FC1;">Québec</span></a>
+      <nav style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="5">
+          <a href="{{ tab.href }}" style="{{ tab.style }}">{{ tab.label }}</a>
+        </sc-for>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button onClick="{{ dec }}" style="background: #F2F0EA; border: 2px solid #131313; color: #131313; width: 30px; height: 30px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700;">A−</button>
+        <button onClick="{{ inc }}" style="background: #F2F0EA; border: 2px solid #131313; color: #131313; width: 30px; height: 30px; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 700;">A+</button>
+        <a href="#" style="border: 2px solid #131313; padding: 5px 12px; font-size: 13px; font-weight: 700; color: #131313; text-transform: uppercase;">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- page title -->
+  <section style="border-bottom: 3px solid #131313;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 46px 32px 40px;">
+      <h1 style="margin: 0 0 18px; text-transform: uppercase; font-weight: 900; letter-spacing: -0.02em; line-height: 0.94;">
+        <span style="display: block; font-size: 72px; color: #131313;">Qui a voté</span>
+        <span style="display: block; font-size: 72px; color: transparent; -webkit-text-stroke: 3px #131313;">pour, contre, absent.</span>
+      </h1>
+      <p style="font-size: 17px; font-weight: 500; margin: 0; max-width: 640px; line-height: 1.45;">Le registre des votes nominatifs, tel quel. <strong>On n'interprète pas — on montre.</strong> Une absence peut être une mission officielle, une maladie, un conflit d'horaire.</p>
+    </div>
+  </section>
+
+  <!-- votes list -->
+  <section style="border-bottom: 3px solid #131313;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 40px 32px 50px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; flex-wrap: wrap;">
+        <h2 style="font-size: 34px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; margin: 0;">Derniers votes nominatifs</h2>
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #555;">cliquez un vote → détail par parti</span>
+          <button onClick="{{ toggleMotions }}" style="{{ motionsStyle }}">{{ motionsLabel }}</button>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <sc-for list="{{ votes }}" as="v" hint-placeholder-count="5">
+          <div onClick="{{ v.onToggle }}" style="background: #fff; border: 3px solid #131313; box-shadow: 6px 6px 0 #131313; cursor: pointer;">
+            <div style="padding: 20px 26px;">
+              <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+                <span style="{{ v.resultBadge }}">{{ v.result }}</span>
+                <div style="flex: 1; min-width: 260px;">
+                  <div style="font-size: 17.5px; font-weight: 800; line-height: 1.3; letter-spacing: -0.01em;">{{ v.subject }}</div>
+                  <div style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; color: #666; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.04em;">{{ v.date }} · {{ v.kind }}</div>
+                </div>
+                <div style="display: flex; gap: 14px; align-items: baseline;">
+                  <span style="font-size: 22px; font-weight: 900; color: #1E6A3C;">{{ v.pour }} <span style="font-family: 'Archivo Narrow'; font-size: 11.5px; font-weight: 700; text-transform: uppercase; color: #666;">pour</span></span>
+                  <span style="font-size: 22px; font-weight: 900; color: #C22B1D;">{{ v.contre }} <span style="font-family: 'Archivo Narrow'; font-size: 11.5px; font-weight: 700; text-transform: uppercase; color: #666;">contre</span></span>
+                  <span style="font-size: 22px; font-weight: 900; color: #8B8578;">{{ v.absents }} <span style="font-family: 'Archivo Narrow'; font-size: 11.5px; font-weight: 700; text-transform: uppercase; color: #666;">abs.</span></span>
+                </div>
+                <span style="font-weight: 900; font-size: 22px; min-width: 20px; text-align: center;">{{ v.mark }}</span>
+              </div>
+              <!-- result bar -->
+              <div style="display: flex; height: 16px; border: 2px solid #131313; margin-top: 16px;">
+                <div style="width: {{ v.pourPct }}; background: #2E9958;"></div>
+                <div style="width: {{ v.contrePct }}; background: #D9442F; border-left: 2px solid #131313;"></div>
+                <div style="flex: 1; background: #D8D4C8; border-left: 2px solid #131313;"></div>
+              </div>
+              <sc-if value="{{ v.isOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #E5E2DA; animation: dqUp 0.25s ease;">
+                  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
+                    <sc-for list="{{ v.byParty }}" as="bp" hint-placeholder-count="4">
+                      <div style="border: 2px solid #131313;">
+                        <div style="{{ bp.head }}">{{ bp.party }}</div>
+                        <div style="padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; background: #fff;">
+                          <div style="display: flex; justify-content: space-between; font-size: 13.5px;"><span style="font-family: 'Archivo Narrow'; font-weight: 600; text-transform: uppercase; color: #1E6A3C;">Pour</span><span style="font-weight: 800;">{{ bp.pour }}</span></div>
+                          <div style="display: flex; justify-content: space-between; font-size: 13.5px;"><span style="font-family: 'Archivo Narrow'; font-weight: 600; text-transform: uppercase; color: #C22B1D;">Contre</span><span style="font-weight: 800;">{{ bp.contre }}</span></div>
+                          <div style="display: flex; justify-content: space-between; font-size: 13.5px;"><span style="font-family: 'Archivo Narrow'; font-weight: 600; text-transform: uppercase; color: #8B8578;">Absents</span><span style="font-weight: 800;">{{ bp.abs }}</span></div>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                  <!-- nominal detail: everyone -->
+                  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 16px;">
+                    <div style="border: 2px solid #131313; background: #fff;">
+                      <div style="padding: 8px 14px; font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: #2E9958; color: #fff; border-bottom: 2px solid #131313;">{{ v.pourHead }}</div>
+                      <div style="padding: 10px 14px; max-height: 260px; overflow-y: auto; display: flex; flex-direction: column; gap: 5px;">
+                        <sc-for list="{{ v.pourList }}" as="pp" hint-placeholder-count="6">
+                          <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600;"><span style="{{ pp.chip }}"></span>{{ pp.name }}</div>
+                        </sc-for>
+                      </div>
+                    </div>
+                    <div style="border: 2px solid #131313; background: #fff;">
+                      <div style="padding: 8px 14px; font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: #D9442F; color: #fff; border-bottom: 2px solid #131313;">{{ v.contreHead }}</div>
+                      <div style="padding: 10px 14px; max-height: 260px; overflow-y: auto; display: flex; flex-direction: column; gap: 5px;">
+                        <sc-for list="{{ v.contreList }}" as="pc" hint-placeholder-count="6">
+                          <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600;"><span style="{{ pc.chip }}"></span>{{ pc.name }}</div>
+                        </sc-for>
+                      </div>
+                    </div>
+                    <div style="border: 2px solid #131313; background: #fff;">
+                      <div style="padding: 8px 14px; font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: #8B8578; color: #fff; border-bottom: 2px solid #131313;">{{ v.absHead }}</div>
+                      <div style="padding: 10px 14px; max-height: 260px; overflow-y: auto; display: flex; flex-direction: column; gap: 5px;">
+                        <sc-for list="{{ v.absList }}" as="pa2" hint-placeholder-count="6">
+                          <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600;"><span style="{{ pa2.chip }}"></span>{{ pa2.name }}</div>
+                        </sc-for>
+                      </div>
+                    </div>
+                  </div>
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 16px; flex-wrap: wrap;">
+                    <span style="font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #666;">Une absence n'est pas un vote « non » — mission, maladie, horaire.</span>
+                    <a href="#" style="border: 3px solid #131313; background: #FFD24D; color: #131313; padding: 10px 16px; font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 0.03em; box-shadow: 4px 4px 0 #131313;">Procès-verbal complet → assnat.qc.ca</a>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top: 24px; border: 3px solid #131313; background: #FFD24D; padding: 14px 20px; font-family: 'Archivo Narrow'; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; text-align: center;">Maquette : 6 votes affichés sur 735 — la vraie page les liste tous avec pagination</div>
+    </div>
+  </section>
+
+  <!-- how to read -->
+  <section style="background: #0E4FC1; color: #fff; border-bottom: 3px solid #131313;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 50px 32px 56px;">
+      <h2 style="font-size: 40px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 30px;">Comment lire un vote</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+        <div style="border: 3px solid #fff; padding: 22px 24px;">
+          <div style="font-size: 26px; font-weight: 900; margin-bottom: 10px;">Vote nominal</div>
+          <p style="font-size: 15px; line-height: 1.5; margin: 0; color: #D6E4FF; font-weight: 500;">Chaque député·e se lève et son choix est consigné au Journal des débats. C'est le seul type de vote qu'on peut attribuer à une personne.</p>
+        </div>
+        <div style="border: 3px solid #fff; padding: 22px 24px;">
+          <div style="font-size: 26px; font-weight: 900; margin-bottom: 10px;">Adopté ≠ loi</div>
+          <p style="font-size: 15px; line-height: 1.5; margin: 0; color: #D6E4FF; font-weight: 500;">Un vote gagné fait avancer le projet d'une étape. Il ne devient loi qu'après la sanction du lieutenant-gouverneur.</p>
+        </div>
+        <div style="border: 3px solid #FFD24D; background: rgba(255,210,77,0.08); padding: 22px 24px;">
+          <div style="font-size: 26px; font-weight: 900; margin-bottom: 10px; color: #FFD24D;">Ligne de parti</div>
+          <p style="font-size: 15px; line-height: 1.5; margin: 0; font-weight: 500;">La plupart des votes suivent la consigne du parti. Les votes libres sont rares — et c'est là que le détail nominatif devient intéressant.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer style="background: #131313; color: #B8B4AA;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 34px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+      <span style="font-family: 'Archivo Narrow'; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;">Site non officiel — données publiques ANQ &amp; Données Québec · construit avec Claude</span>
+      <div style="display: flex; gap: 18px; font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+        <a href="#" style="color: #F2F0EA;">Facebook</a>
+        <a href="#" style="color: #F2F0EA;">Offre-moi un café</a>
+        <a href="#" style="color: #F2F0EA;">Code source</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { scale: 1, openVote: 0, showMotions: false };
+
+  renderVals() {
+    const scale = this.state.scale;
+
+    const tabBase = "font-family: 'Archivo Narrow'; font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #131313; padding: 6px 12px; border: 2px solid transparent;";
+    const tabActive = "font-family: 'Archivo Narrow'; font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; background: #131313; padding: 6px 12px; border: 2px solid #131313;";
+    const tabs = [
+      { label: "Aperçu", href: "Apercu.dc.html", active: false },
+      { label: "Ministres", href: "Ministres.dc.html", active: false },
+      { label: "Projets de loi", href: "Projets de loi.dc.html", active: false },
+      { label: "Votes", href: "Votes.dc.html", active: true },
+      { label: "Lexique", href: "Lexique.dc.html", active: false },
+    ].map(t => ({ ...t, style: t.active ? tabActive : tabBase }));
+
+    const partyColors = { CAQ: "#00A5CF", PLQ: "#E23A3A", QS: "#FF7B33", PQ: "#12429B" };
+    const partyText = { CAQ: "#131313", PLQ: "#fff", QS: "#131313", PQ: "#fff" };
+    const mkParty = (party, pour, contre, abs) => ({
+      party, pour, contre, abs,
+      head: `padding: 8px 14px; font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: ${partyColors[party]}; color: ${partyText[party]}; border-bottom: 2px solid #131313;`,
+    });
+
+    const badgeAdopte = "font-family: 'Archivo Narrow'; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #14532D; background: #BFE8CD; border: 2px solid #131313; padding: 5px 12px; white-space: nowrap;";
+    const badgeRejete = "font-family: 'Archivo Narrow'; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; background: #C22B1D; border: 2px solid #131313; padding: 5px 12px; white-space: nowrap;";
+
+    const votesData = [
+      { subject: "Adoption du principe — PL 13, Loi encadrant l'accès aux soins", date: "6 juin 2026", kind: "Vote nominal · adoption du principe", result: "Adopté", adopted: true, pour: 68, contre: 37, absents: 20,
+        byParty: [mkParty("CAQ", 68, 0, 18), mkParty("PLQ", 0, 19, 0), mkParty("QS", 0, 11, 0), mkParty("PQ", 0, 7, 0)] },
+      { subject: "Adoption finale — PL 3, dispositions en matière d'éducation", date: "10 juin 2026", kind: "Vote nominal · adoption finale", result: "Adopté", adopted: true, pour: 102, contre: 9, absents: 14,
+        byParty: [mkParty("CAQ", 80, 0, 6), mkParty("PLQ", 15, 0, 4), mkParty("QS", 0, 9, 2), mkParty("PQ", 7, 0, 0)] },
+      { subject: "Motion — consultations particulières élargies sur le PL 7", date: "4 juin 2026", kind: "Vote nominal · motion de l'opposition", result: "Rejeté", adopted: false, pour: 37, contre: 74, absents: 14,
+        byParty: [mkParty("CAQ", 0, 74, 12), mkParty("PLQ", 19, 0, 0), mkParty("QS", 11, 0, 0), mkParty("PQ", 7, 0, 0)] },
+      { subject: "Motion — hausse du financement des banques alimentaires", date: "28 mai 2026", kind: "Vote nominal · motion du mercredi", result: "Adopté", adopted: true, pour: 112, contre: 0, absents: 13,
+        byParty: [mkParty("CAQ", 78, 0, 8), mkParty("PLQ", 17, 0, 2), mkParty("QS", 10, 0, 1), mkParty("PQ", 7, 0, 0)] },
+      { subject: "Adoption du principe — PL 28, achat local dans les marchés publics", date: "28 mai 2026", kind: "Vote nominal · adoption du principe", result: "Adopté", adopted: true, pour: 95, contre: 11, absents: 19,
+        byParty: [mkParty("CAQ", 75, 0, 11), mkParty("PLQ", 13, 0, 6), mkParty("QS", 0, 11, 0), mkParty("PQ", 7, 0, 0)] },
+      { subject: "Motion de censure — gestion du réseau de la santé", date: "21 mai 2026", kind: "Vote nominal · motion de censure", result: "Rejeté", adopted: false, pour: 36, contre: 79, absents: 10,
+        byParty: [mkParty("CAQ", 0, 79, 7), mkParty("PLQ", 19, 0, 0), mkParty("QS", 10, 0, 1), mkParty("PQ", 7, 0, 0)] },
+    ];
+
+    const isMotion = (v) => v.kind.toLowerCase().includes("motion");
+    const motionCount = votesData.filter(isMotion).length;
+    const shown = votesData.filter(v => this.state.showMotions || !isMotion(v));
+
+    // deterministic full roster (demo names) — 86 CAQ, 19 PLQ, 11 QS, 7 PQ, 2 IND
+    const firstNames = ["Marie", "Jean", "Sophie", "Luc", "Isabelle", "Marc", "Julie", "Pierre", "Nathalie", "Simon", "Caroline", "François", "Mélanie", "Éric", "Valérie", "Patrick", "Geneviève", "Alexandre", "Chantal", "Martin", "Annie", "Sébastien", "Josée", "David", "Karine", "Stéphane", "Manon", "Olivier", "Lucie", "Hugo"];
+    const lastNames = ["Tremblay", "Gagnon", "Roy", "Côté", "Bouchard", "Gauthier", "Morin", "Lavoie", "Fortin", "Gagné", "Ouellet", "Pelletier", "Bélanger", "Lévesque", "Bergeron", "Leblanc", "Paquette", "Girard", "Simard", "Boucher", "Caron", "Beaulieu", "Cloutier", "Dubé", "Poirier", "Fournier", "Lapointe", "Leclerc", "Lefebvre", "Poulin"];
+    const mkRoster = (party, count, seed) => Array.from({ length: count }, (_, k) => ({
+      party,
+      name: firstNames[(seed * 7 + k * 3) % firstNames.length] + " " + lastNames[(seed * 11 + k * 5) % lastNames.length],
+    }));
+    const rosters = { CAQ: mkRoster("CAQ", 86, 1), PLQ: mkRoster("PLQ", 19, 2), QS: mkRoster("QS", 11, 3), PQ: mkRoster("PQ", 7, 4), IND: mkRoster("IND", 2, 5) };
+    const chipColors = { CAQ: "#00A5CF", PLQ: "#E23A3A", QS: "#FF7B33", PQ: "#12429B", IND: "#8B8578" };
+    const mkPerson = (p) => ({ ...p, chip: `width: 10px; height: 10px; background: ${chipColors[p.party]}; border: 1.5px solid #131313; flex-shrink: 0;` });
+
+    const votes = shown.map((v) => {
+      const i = votesData.indexOf(v);
+      const total = 125;
+      const pourList = [], contreList = [], absList = [];
+      v.byParty.forEach(bp => {
+        const r = rosters[bp.party];
+        pourList.push(...r.slice(0, bp.pour));
+        contreList.push(...r.slice(bp.pour, bp.pour + bp.contre));
+        absList.push(...r.slice(bp.pour + bp.contre, bp.pour + bp.contre + bp.abs));
+      });
+      absList.push(...rosters.IND); // indépendants absents dans cette maquette
+      return {
+        ...v,
+        resultBadge: v.adopted ? badgeAdopte : badgeRejete,
+        pourPct: Math.round(v.pour / total * 100) + "%",
+        contrePct: Math.round(v.contre / total * 100) + "%",
+        isOpen: this.state.openVote === i,
+        mark: this.state.openVote === i ? "−" : "+",
+        onToggle: () => this.setState(s => ({ openVote: s.openVote === i ? -1 : i })),
+        pourList: pourList.map(mkPerson),
+        contreList: contreList.map(mkPerson),
+        absList: absList.map(mkPerson),
+        pourHead: "Pour — " + pourList.length,
+        contreHead: "Contre — " + contreList.length,
+        absHead: "Absent·e·s — " + absList.length,
+      };
+    });
+
+    const mBase = "font-family: 'Archivo Narrow'; font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; border: 3px solid #131313; background: #fff; color: #131313; padding: 10px 16px; cursor: pointer; box-shadow: 4px 4px 0 #131313;";
+    const mActive = "font-family: 'Archivo Narrow'; font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; border: 3px solid #131313; background: #131313; color: #FFD24D; padding: 10px 16px; cursor: pointer; box-shadow: 4px 4px 0 #131313;";
+
+    return {
+      rootSize: Math.round(16 * scale),
+      inc: () => this.setState(s => ({ scale: Math.min(1.3, s.scale + 0.1) })),
+      dec: () => this.setState(s => ({ scale: Math.max(0.85, s.scale - 0.1) })),
+      tabs, votes,
+      motionsLabel: this.state.showMotions ? "Masquer les motions" : "Montrer les motions (" + motionCount + ")",
+      motionsStyle: this.state.showMotions ? mActive : mBase,
+      toggleMotions: () => this.setState(s => ({ showMotions: !s.showMotions, openVote: -1 })),
+    };
+  }
+}
+</script>
+</body>
+</html>
