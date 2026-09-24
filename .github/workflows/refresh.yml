@@ -23,9 +23,11 @@ on:
 permissions:
   contents: write
 
-# Deux exécutions ne doivent pas se marcher dessus.
+# Deux exécutions de CE workflow ne doivent pas se marcher dessus, mais rien n'empêche un
+# volet de tourner en même temps : chacun n'écrit que son dossier, et la boucle de poussée
+# plus bas rebase et réessaie. Un groupe partagé faisait annuler les runs en attente.
 concurrency:
-  group: refresh-data
+  group: refresh-assemblee
   cancel-in-progress: false
 
 jobs:
@@ -62,6 +64,7 @@ jobs:
       # déjà échoué et le commit est sauté. Sinon on committe les données fraîches
       # des sources qui ont fonctionné.
       - name: Committer et pousser s'il y a des changements
+        id: publication
         run: |
           git config user.name "dossierquebec-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -78,20 +81,27 @@ jobs:
             # Quelqu'un a pu pousser pendant les scrapers (un volet, ou du travail à la main) :
             # on se remet à jour avant de réessayer, comme les workflows des volets.
             for essai in 1 2 3; do
-              git push && break
-              echo "Push refusé (essai $essai) — on rebase sur l'état du dépôt."
-              git pull --rebase
+              git pull --rebase && git push && break
+              [ "$essai" = 3 ] && { echo "::error::Push refusé trois fois — rien n'est publié aujourd'hui."; exit 1; }
+              echo "Push refusé (essai $essai) — nouvel essai dans $((essai * 10)) s."
+              sleep $((essai * 10))
             done
           fi
 
-      # Après le commit : si un ou des scrapers ont échoué (mais que le build a
-      # réussi), on marque quand même le run en échec pour être alerté qu'une
-      # source est tombée — les données des autres sont déjà publiées.
+      # Après le commit : si un ou des scrapers ont échoué, on marque quand même le run en
+      # échec pour être alerté qu'une source est tombée. Le !cancelled() fait que l'étape parle
+      # aussi quand le commit a été sauté ou la poussée refusée — dans ce cas, rien n'a été
+      # publié, et il ne faut pas écrire le contraire : on lit l'issue de l'étape de poussée.
       - name: Alerter si des scrapers ont échoué
-        if: ${{ steps.refresh.outputs.failed != '' }}
+        if: ${{ !cancelled() && steps.refresh.outputs.failed != '' }}
         env:
           FAILED: ${{ steps.refresh.outputs.failed }}
+          PUBLICATION: ${{ steps.publication.outcome }}
         run: |
           echo "::warning::Scrapers en échec (données de la veille conservées) : $FAILED"
-          echo "Le reste des données a été publié. Vérifier la ou les sources en panne."
+          if [ "$PUBLICATION" = "success" ]; then
+            echo "Le reste des données a été publié. Vérifier la ou les sources en panne."
+          else
+            echo "Rien n'a été publié ce matin : la poussée n'a pas abouti. Voir l'étape plus haut."
+          fi
           exit 1

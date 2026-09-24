@@ -80,7 +80,8 @@ jobs:
             # bouge ici, donc pas de conflit).
             for essai in 1 2 3; do
               git pull --rebase && git push && break
-              [ "$essai" = 3 ] && exit 1
+              [ "$essai" = 3 ] && { echo "::error::Push refusé trois fois — rien n'est publié aujourd'hui."; exit 1; }
+              echo "Push refusé (essai $essai) — nouvel essai dans $((essai * 10)) s."
               sleep $((essai * 10))
             done
           fi
@@ -88,7 +89,7 @@ jobs:
       # Le texte vient de stderr (messages d'erreur, guillemets compris) : il passe par une variable
       # d'environnement, jamais par ${{ }} dans le script, que bash réinterpréterait.
       - name: Signaler les étapes secondaires en échec
-        if: ${{ steps.refresh.outputs.warnings != '' }}
+        if: ${{ !cancelled() && steps.refresh.outputs.warnings != '' }}
         env:
           AVERTISSEMENTS: ${{ steps.refresh.outputs.warnings }}
         run: |
@@ -97,15 +98,17 @@ jobs:
       # Après le commit : une extraction principale en échec rend le run rouge pour qu'on
       # le voie — les données des autres étapes sont déjà publiées.
       - name: Alerter si une extraction principale a échoué
-        if: ${{ steps.refresh.outputs.failed != '' }}
+        if: ${{ !cancelled() && steps.refresh.outputs.failed != '' }}
+        env:
+          ECHECS: ${{ steps.refresh.outputs.failed }}
         run: |
-          echo "::error::Extractions en échec (données de la veille conservées) : ${{ steps.refresh.outputs.failed }}"
+          echo "::error::Extractions en échec (données de la veille conservées) : $ECHECS"
           exit 1
 
       # Même règle pour ce qui est promis aux abonnés payants (le détail de l'argent « dès le
       # lendemain ») : run rouge, donc courriel de GitHub à Martin.
       - name: Alerter si une étape promise aux abonnés a échoué
-        if: ${{ steps.refresh.outputs.paid_failed != '' }}
+        if: ${{ !cancelled() && steps.refresh.outputs.paid_failed != '' }}
         env:
           PAYANTS: ${{ steps.refresh.outputs.paid_failed }}
         run: |
