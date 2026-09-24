@@ -14,7 +14,10 @@ commune : `commun/`, `api/`, `mes-dossiers.html`, `abonnement.html`). Le README 
 journal détaillé : ce guide y renvoie pour les formats exacts.
 
 Mis à jour le 14 sept. 2026 : espace abonnés (alertes, mots-clés, organismes, agenda, export,
-détail de l'argent et demandes). La version anglaise n'est **pas** à reproduire (section 10).
+détail de l'argent et demandes). La version anglaise n'est **pas** à reproduire (section 11).
+
+Mis à jour le 24 sept. 2026 : la campagne « demander une explication » (section 10) — tables,
+agrégats publics, digest, et ce que le découpage multipage y casse.
 
 ---
 
@@ -247,7 +250,7 @@ parfois littéralement dans ses chaînes.
   `.titre-ligne`, un `<details class="ab-villes" id="villes">` rempli par
   `/commun/entete-volet.js`. Sur cellulaire, le sous-titre ne reste que sur l'accueil et les
   outils tiennent sur une ligne.
-- **Espace abonnés** : section 9. **Version anglaise** : pas pour l'instant, section 10.
+- **Espace abonnés** : section 9. **Version anglaise** : pas pour l'instant, section 11.
 
 ## 9. Étape 7 — Brancher la ville sur l'espace abonnés
 
@@ -305,7 +308,73 @@ montants jamais additionnés, chaque nombre vérifié contre le texte.
 projet, ajouter un mot-clé et un organisme, ouvrir l'agenda, exporter en Excel et en PDF,
 s'envoyer un courriel d'essai d'alerte, demander un détail de l'argent.
 
-## 10. La version anglaise : pas pour une nouvelle ville (pour l'instant)
+## 10. Étape 8 — La campagne « demander une explication »
+
+Sur DossierQuébec, une personne connectée demande des explications sur un projet de loi actif.
+Le total par projet est public ; **qui** a demandé quoi ne l'est jamais. À 1000 demandes sur un
+même projet, on pousse pour une pétition. Cette chaîne n'existe **pas** dans les volets de ville :
+elle est décrite ici parce qu'une ville qui la reprend part de là, et parce qu'elle se confond
+facilement avec « Demander le détail de l'argent » (section 9.4), qui est réservé aux abonnés et
+porte sur un montant. Le challenge, lui, est gratuit, public en total, et porte sur une décision.
+
+**Les tables** — `scripts/supabase-schema-flags.sql` et `scripts/supabase-schema-campaign.sql`.
+
+- `bill_flags` : une ligne = une personne + un projet, `unique (user_id, bill_id)`. RLS : chacun
+  ne voit que ses propres lignes ; les admins voient tout, parce qu'il faut bien compter.
+- La limite anti-troll (10 demandes par compte par 30 jours) est dans la **policy d'insertion**,
+  pas dans le navigateur — sinon elle se contourne. ⚠️ Elle passe par `my_recent_flag_count()`
+  en `security definer` : une sous-requête directe sur `bill_flags` à l'intérieur d'une policy
+  de `bill_flags` déclenche « infinite recursion detected in policy » dès qu'il y a des lignes.
+- `admins (user_id)` : les seuls comptes autorisés à voir les vrais chiffres.
+- `bill_campaign` : la mémoire du digest — `last_count` (compte au dernier envoi, pour détecter
+  les paliers franchis), `threshold` (seuil de pétition courant), `escalation_pending` (posé par
+  le bouton admin), `terminal_notified`.
+
+**Les agrégats, et pourquoi il en faut deux.** `flag_counts()` est ouverte à `anon` et
+`authenticated`, mais ne renvoie que `bill_id` et `cnt` (`having count(*) >= 1`) : c'est ce qui
+permet un palmarès public sans trahir personne. `flag_counts_all()` fait la même chose sans seuil
+et n'est donnée qu'à `service_role`, pour le cron — Postgres accorde `execute` à PUBLIC à la
+création, il faut le révoquer explicitement.
+
+**Le site.** Un bouton sur chaque carte, trois états en bascule : se connecter / ✋ Demander une
+explication / ✓ Challengé — retirer. Une section « Projets challengés » sur l'accueil : bande
+jaune, grille de trois cartes, « Voir plus » qui remplace les trois visibles et reboucle, partage
+direct 𝕏 / Facebook / copier. Un badge « 🔥 N demandes » sur les cartes, un filtre rapide
+« 🔥 Challengés », et un panneau admin (Resend ↑ / Reset) sur la page du compte. Paliers
+`[500, 1000, 2500, 5000, 25000]`, affichage dès la **première** demande (montrer l'élan plutôt
+qu'une liste vide), seuil de pétition à 1000.
+
+**Le digest.** `api/weekly-digest.js`, cron Vercel hebdomadaire qui n'envoie qu'une semaine sur
+deux (semaines ISO paires ; `?force=1` pour forcer) : un courriel par personne, ses projets
+challengés, le total actuel de chacun, et une note quand un palier a été franchi depuis le
+dernier envoi, quand l'admin a déclenché une escalade, ou quand le projet est devenu loi sous le
+seuil. Secrets : `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `DIGEST_FROM`,
+`CRON_SECRET`, `PUBLIC_SITE_URL`. Le lien de désabonnement est un jeton HMAC signé avec
+`CRON_SECRET`.
+
+**⚠️ Ce que le découpage multipage casse — état au 24 septembre 2026, pas encore corrigé.** Le
+palmarès ne renvoie que des `bill_id` : il faut les rejoindre à des titres, et sur DQ cette
+jointure se fait sur la variable `bills` de la page. Or l'accueil ne charge que 4 projets
+(`apercuBills` remplit la même variable que la liste complète). Tout projet challengé hors de ces
+quatre-là disparaît en silence, et l'accueil affiche « Personne n'a encore demandé
+d'explication » — une phrase que le site n'est pas en mesure de savoir vraie. Sur la page des
+projets, la fonction sort immédiatement faute de son conteneur : `flag_counts()` n'y est jamais
+appelée, donc le filtre « 🔥 Challengés » ne renvoie rien et aucun badge n'apparaît. Et
+`renderFlagBox()` (demande par numéro, compteur de demandes restantes) n'a plus de conteneur
+dans aucune page.
+
+➜ **La règle à retenir pour toute reproduction : ne jamais faire dépendre un palmarès public de
+ce que la page a chargé.** Publier une liste maigre (id, numéro, titre, statut, étape) et l'aller
+chercher seulement si l'agrégat renvoie au moins une ligne — une page où rien n'est challengé ne
+paie rien.
+
+**Si une ville reprend le mécanisme.** Remplacer `bill_id` par la clé de dossier
+(`data-dossier`, section 9.1), ajouter une colonne `ville` comme aux autres tables, allonger les
+listes VILLES (section 9.2) — et décider ce qu'on promet à 1000 demandes : au municipal, la
+pétition n'a pas le statut qu'elle a à l'Assemblée. Ne rien promettre sur le site qu'on ne puisse
+tenir.
+
+## 11. La version anglaise : pas pour une nouvelle ville (pour l'instant)
 
 La version anglaise est un essai, sur Québec seulement : on attend de voir dans Vercel Analytics
 si des gens s'en servent (événements `langue_choisie` et `page_en`) avant de la reproduire
@@ -324,7 +393,7 @@ français seulement** :
 Si l'anglais est retenu un jour, la mécanique et ses coûts sont dans le README de Québec
 (« La version anglaise »).
 
-## 11. Étape 9 — L'automatisation
+## 12. Étape 9 — L'automatisation
 
 Un workflow GitHub Actions par volet, dans le dépôt de DQ, même groupe de concurrence que le
 rafraîchissement de DQ (jamais deux pushes en même temps), `permissions: contents: write`,
@@ -339,7 +408,7 @@ en échec rend le run rouge après avoir publié ce qui a marché.
 lecture que la ville publie elle-même) : la lire à l'exécution dans le code du portail, comme
 un navigateur, ou la mettre en secret.
 
-## 12. Pièges déjà rencontrés (ne pas les refaire)
+## 13. Pièges déjà rencontrés (ne pas les refaire)
 
 - `\w` ne couvre pas les accents : `conseill\w+` attrape « conseiller » et jamais
   « conseillère » — toutes les femmes disparaissent sans erreur. Écrire `conseill[a-zà-ÿ]*`.
@@ -380,7 +449,7 @@ un navigateur, ou la mettre en secret.
 - **Un compte ou une liste qui ne se voit qu'une fois connecté** se teste avec un faux client
   Supabase dans le navigateur, et le vrai aller-retour se vérifie après le déploiement.
 
-## 13. Ordre de travail conseillé
+## 14. Ordre de travail conseillé
 
 1. Étude de faisabilité (section 3), avec chiffres. Décider.
 2. Client de source + `decisions.js` : d'abord un échantillon, puis l'année.
@@ -394,10 +463,12 @@ un navigateur, ou la mettre en secret.
 10. `refresh.js` + workflow ; vérifier un run planifié le lendemain.
 11. Espace abonnés (section 9) : attributs des fiches, listes de villes, projets suivables et
     fichiers de Mes dossiers, puis le détail de l'argent ; vérifier avec un compte abonné.
-12. README à jour à chaque étape : chaque décision technique y a sa raison.
-13. Le jour de la réponse de la ville : retirer les trois verrous, sitemap.
+12. Campagne « demander une explication » (section 10), si la ville la reprend : tables et
+    agrégats d'abord, section publique ensuite, digest en dernier.
+13. README à jour à chaque étape : chaque décision technique y a sa raison.
+14. Le jour de la réponse de la ville : retirer les trois verrous, sitemap.
 
-## 14. Conventions de travail
+## 15. Conventions de travail
 
 - Le terminal de Martin est **PowerShell 5.1** : pas de `&&`, une commande par ligne. Quand
   une commande doit tourner, Claude la lance lui-même et pousse lui-même ; on ne demande pas
@@ -412,7 +483,7 @@ un navigateur, ou la mettre en secret.
 - Les clés et les secrets ne passent jamais dans la conversation : Martin les entre lui-même
   (Vercel, GitHub, `api.env`). Le SQL à exécuter lui est donné prêt à coller.
 
-## 15. Liste de vérification de fin de mise en place
+## 16. Liste de vérification de fin de mise en place
 
 - [ ] `https://dossierquebec.ca/<cle>/` s'ouvre (barre oblique finale) ; pages en `noindex`, lien
       depuis DQ en `nofollow`, courriel au greffe envoyé et relance programmée.
@@ -425,5 +496,7 @@ un navigateur, ou la mettre en secret.
 - [ ] Cellulaire 375 px : aucun débordement horizontal, outils sur une ligne ; thème clair et
       sombre.
 - [ ] README du volet à jour ; ce guide aussi, s'il a appris quelque chose.
-- [ ] Pas de traduction anglaise qui tourne pour la ville (section 10).
+- [ ] Pas de traduction anglaise qui tourne pour la ville (section 11).
+- [ ] Si le challenge est repris : une demande faite depuis un compte apparaît dans la section
+      publique **et** dans le filtre « 🔥 Challengés ».
 - [ ] Plus tard : retrait des verrous le jour de la réponse de la ville.
