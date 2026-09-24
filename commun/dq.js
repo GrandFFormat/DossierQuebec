@@ -547,6 +547,8 @@ function traduireTextesFixes(){
   { const _e = document.getElementById('footerRight'); if(_e) _e.textContent = t('footer.right'); }
   if(typeof syncTitle === 'function') syncTitle(viewFromPath());
   if(typeof applyAssemblyState === 'function') applyAssemblyState();
+  // Les noms d'onglets changent de longueur avec la langue : l'en-tête se remesure.
+  if(typeof majEnteteDeuxRangees === 'function') majEnteteDeuxRangees();
 }
 function applyLanguage(){
   traduireTextesFixes();
@@ -1795,7 +1797,37 @@ function majMetriquesMiseEnPage(){
   document.documentElement.classList.toggle('etroit', effective < 360);
   // La rangée du logo a besoin de 411 px : voir .entete-etroite dans le CSS.
   document.documentElement.classList.toggle('entete-etroite', effective < 420);
+  majEnteteDeuxRangees();
 }
+// L'en-tête tient-il sur UNE rangée ? Logo + onglets + boutons côte à côte demandent environ
+// 1 330 px en français et 1 260 en anglais (mesuré le 24 sept. 2026). En dessous, la rangée
+// passait à la ligne toute seule et les boutons tombaient seuls sous le logo, à gauche — un
+// en-tête cassé en français sur un portable de 1 280 px. On passe alors proprement à deux
+// rangées (.entete-deux-rangees dans dq.css) : logo et boutons en haut, onglets dessous.
+// Mesuré plutôt que fixé : la largeur dépend de la langue, du zoom A+ et de la police une fois
+// chargée — un @media ne voit ni l'une ni l'autre. Toutes les mesures sont des offsetWidth /
+// clientWidth : dans le même repère, zoom compris. Sous 640 px, le menu mobile prend le relais.
+function majEnteteDeuxRangees(){
+  const racine = document.documentElement;
+  const entete = document.querySelector('#dq-topbar header.top');
+  const onglets = entete && entete.querySelector('nav.tabs');
+  const logo = entete && entete.querySelector('.brand');
+  const boutons = entete && entete.querySelector('.header-ctrls');
+  if(!entete || !onglets || !logo || !boutons) return;
+  if(getComputedStyle(onglets).position === 'fixed'){ racine.classList.remove('entete-deux-rangees'); return; }
+  const style = getComputedStyle(entete);
+  const dispo = entete.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+  if(dispo < 200) return;   // onglet caché, vignette : rien de crédible à mesurer
+  const liens = [...onglets.querySelectorAll('a[data-view]')];
+  const ecart = parseFloat(getComputedStyle(onglets).columnGap) || 0;
+  const largeurOnglets = liens.reduce((s, a) => s + a.offsetWidth, 0) + Math.max(0, liens.length - 1) * ecart;
+  const besoin = logo.offsetWidth + largeurOnglets + boutons.offsetWidth + 2 * (parseFloat(style.columnGap) || 0);
+  // 4 px de marge : les offsetWidth sont arrondis.
+  racine.classList.toggle('entete-deux-rangees', besoin + 4 > dispo);
+}
+majEnteteDeuxRangees();
+// La police arrive après le premier dessin (display=swap) et change la largeur des onglets.
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(majEnteteDeuxRangees);
 window.addEventListener('resize', majMetriquesMiseEnPage);
 // Rattrapage : si la page a été construite alors qu'elle n'avait pas encore de
 // largeur, on remesure dès qu'elle devient visible.

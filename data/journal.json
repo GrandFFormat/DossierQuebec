@@ -3,6 +3,19 @@
     "date": "2026-09-24",
     "volet": "site",
     "fr": {
+      "titre": "L’en-tête ne se casse plus en français",
+      "texte": "Depuis l’ajout de l’onglet « Mon dossier », le logo, les onglets et les boutons ne tenaient plus côte à côte en français : les boutons de taille, de thème et de langue tombaient seuls sous le logo, sur tous les écrans. Les onglets sont un peu resserrés et l’en-tête tient de nouveau sur une ligne. Quand la fenêtre est plus étroite, ou le texte agrandi avec A+, il passe proprement sur deux rangées : le logo et les boutons en haut, les onglets dessous."
+    },
+    "en": {
+      "titre": "The header no longer breaks in French",
+      "texte": "Since the “My file” tab was added, the logo, tabs and buttons no longer fit side by side in French: the size, theme and language buttons dropped alone below the logo, on every screen. The tabs are a little tighter and the header fits on one line again. When the window is narrower, or the text enlarged with A+, it switches cleanly to two rows: logo and buttons on top, tabs below."
+    },
+    "commits": []
+  },
+  {
+    "date": "2026-09-24",
+    "volet": "site",
+    "fr": {
       "titre": "La version anglaise tient d’une page à l’autre, et se voit dans l’adresse",
       "texte": "Choisir « English » ne valait que pour la page ouverte : le clic suivant ramenait au français, et rien dans l’adresse ne disait la langue. Maintenant, le choix est gardé d’une page à l’autre et une adresse en anglais porte « ?lang=en » — copiée et ouverte ailleurs, elle garde la langue. C’est aussi le même choix que Mes dossiers et Abonnement : on ne choisit plus sa langue qu’une fois. La page Mon dossier, elle, porte enfin son propre titre en anglais."
     },

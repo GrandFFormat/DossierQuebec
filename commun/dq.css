@@ -719,7 +719,7 @@
 
   /* ---------- HEADER ---------- */
   #dq-topbar{border-bottom:3px solid var(--ink);}
-  header.top{align-items:center;}
+  header.top{align-items:center; column-gap:16px;} /* 16 et non 24 : voir nav.tabs plus bas */
   .brand-text .brand-title{
     font-family:'Archivo',sans-serif; font-weight:900; font-size:24px;
     letter-spacing:-0.03em; text-transform:uppercase;
@@ -839,11 +839,11 @@
   .hamburger{border:2px solid var(--ink); background:var(--paper);}
 
   /* ---------- NAV : pilules carrées ---------- */
-  nav.tabs{gap:8px; border-bottom:none; align-items:center;}
+  nav.tabs{gap:4px; border-bottom:none; align-items:center;} /* 24 sept. 2026 : resserré (8 → 4, et 12 → 10 dans les pilules) pour que l'en-tête tienne en français dans la colonne de 1 280 px — il lui en fallait 1 317 depuis l'onglet « Mon dossier » */
   nav.tabs a{
     font-family:'Archivo Narrow',sans-serif; font-size:13.5px; font-weight:700;
     text-transform:uppercase; letter-spacing:0.04em; color:var(--ink);
-    padding:6px 12px; border:2px solid transparent; border-bottom:2px solid transparent;
+    padding:6px 10px; border:2px solid transparent; border-bottom:2px solid transparent;
     white-space:nowrap;
   }
   nav.tabs a .n{display:none;} /* fini la numérotation 01/02/03 */
@@ -1734,7 +1734,7 @@
     nav.tabs{
       display:none; position:fixed; inset:0; z-index:100;
       flex-direction:column; overflow-y:auto; background:var(--paper);
-      padding:20px 0 40px; border-bottom:none;
+      padding:20px 0 40px; border-bottom:none; gap:8px;
     }
     nav.tabs.open{display:flex;}
     nav.tabs a{
@@ -1965,3 +1965,13 @@
      <head> de gabarit.html, qui la montre de toute façon après 1,5 s). Sans ça, un lecteur
      anglophone voyait chaque page en français avant qu'elle ne bascule. */
   html.dq-en:not(.dq-pret) body{visibility:hidden;}
+
+  /* L'en-tête sur deux rangées, quand logo, onglets et boutons ne tiennent pas côte à côte
+     (commun/dq.js, majEnteteDeuxRangees, qui pose la classe) : logo et boutons en haut,
+     onglets dessous, alignés sur le logo. Sans ça, la rangée passait à la ligne toute seule et
+     les boutons tombaient seuls sous le logo, à gauche. La barre collante grandit : les cibles
+     de saut réservent plus de place sous elle. */
+  .entete-deux-rangees #dq-topbar header.top{row-gap:10px;}
+  .entete-deux-rangees #dq-topbar .header-ctrls{order:1; margin-left:auto;}
+  .entete-deux-rangees #dq-topbar nav.tabs{order:2; flex:1 1 100%; justify-content:flex-start;}
+  .entete-deux-rangees .view, .entete-deux-rangees [id^="sec-"]{scroll-margin-top:120px;}
