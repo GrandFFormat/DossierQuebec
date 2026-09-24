@@ -3,7 +3,7 @@
 > node scripts/refresh.js
 
 Résumés : sautés : étape payante, à demander explicitement (--avec-resumes, ou LAV_RESUMES=oui dans le workflow).
-Code : commit c7e7004 — Node v22.23.2
+Code : commit dda232c — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -41,10 +41,10 @@ Pastilles thématiques :
       0  (classées par défaut — aucune règle n'a tranché)
 (0 s)
 
-=== Votes nominaux (depuis 2026-07-25) ===
+=== Votes nominaux (depuis 2026-07-26) ===
 CM-20260901-ORD-18h30 : 12 vote(s) nominal(aux)
 CM-20260811-ORD-18h30 : 5 vote(s) nominal(aux)
-Fenêtre depuis 2026-07-25 : 16 séance(s) relue(s), 29 vote(s) conservé(s) du fichier précédent.
+Fenêtre depuis 2026-07-26 : 16 séance(s) relue(s), 29 vote(s) conservé(s) du fichier précédent.
 
 46 votes nominaux écrits dans data/votes.json (16 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
@@ -110,12 +110,11 @@ Mesure de 49 termes sur 87 procès-verbaux de 2026 (12 conseil municipal, 75 com
 
 === Sommaires décisionnels (120 par jour au plus) ===
 511 sommaire(s) publié(s) cité(s) par les décisions de 2026 ; 1027 cité(s) mais non publié(s).
-480 déjà en cache, 0 réextrait(s) du cache, 31 à télécharger.
-  … 25/31 (14 s)
+511 déjà en cache, 0 réextrait(s) du cache, 0 à télécharger.
 
-31 sommaire(s) téléchargé(s) et lu(s) en 18 s, 0 introuvable(s), 0 échec(s) ; 511 sommaires dans data/sommaires.json.
+0 sommaire(s) téléchargé(s) et lu(s) en 0 s, 0 introuvable(s), 0 échec(s) ; 511 sommaires dans data/sommaires.json.
 Champs lus : 511 avec un service, 428 avec des districts, 235 avec un montant sûr, 242 avec un bloc contrat, 41 avec un bloc règlement, 0 avec au moins un avertissement.
-(18 s)
+(0 s)
 
 === Fichiers pour « Mes dossiers » ===
 Projets publics : 2 projets · index 1.9 Ko · fichiers de projet 82 Ko au total.
