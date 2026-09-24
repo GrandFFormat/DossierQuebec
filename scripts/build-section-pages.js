@@ -211,7 +211,7 @@ const PAGES = [
     // ce point. Son pendant municipal est /mes-dossiers (fichier à part, style des volets) :
     // Martin, 22 sept. 2026, « mes dossiers provincial et les villes doivent être complètement
     // séparés ».
-    fichier: 'mon-dossier.html', vue: 'mondossier', onglet: null, url: '/mon-dossier', prive: true,
+    fichier: 'mon-dossier.html', vue: 'mondossier', onglet: 'mondossier', url: '/mon-dossier', prive: true,
     donnees: ['bills'],
     title: 'Mon dossier — DossierQuébec',
     desc: "Votre espace à l'Assemblée nationale : les projets de loi que vous suivez, les ministres et député·e·s suivis, vos mots-clés et votre alerte du matin.",
@@ -470,10 +470,11 @@ function fabriquer(page, tronc, vues, REPERE, pre) {
   }
 
   // L'onglet courant. Certaines pages n'en ont pas (promesses, sources) : personne n'est actif.
+  // Le lien peut porter sa propre classe (« ★ Mon dossier » : nav-mondossier) : on la garde.
   if (page.onglet) {
-    const de = new RegExp(`<a href="([^"]*)" data-view="${page.onglet}">`);
+    const de = new RegExp(`<a href="([^"]*)" data-view="${page.onglet}"(?: class="([^"]*)")?>`);
     must(de.test(h), `lien de nav data-view="${page.onglet}" introuvable`);
-    h = h.replace(de, (_, href) => `<a class="active" aria-current="page" href="${href}" data-view="${page.onglet}">`);
+    h = h.replace(de, (_, href, classe) => `<a class="${classe ? `${classe} ` : ''}active" aria-current="page" href="${href}" data-view="${page.onglet}">`);
   }
 
   // Ce que la page doit charger, et qui elle est.

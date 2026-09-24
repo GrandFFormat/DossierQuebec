@@ -1960,3 +1960,8 @@
   /* « Villes : » prend la couleur des liens du pied de page : le gris hérité du footer tombait à
      un contraste de 1,8:1 en thème sombre, où le pied de page est clair. */
   .footer-nav-villes > span:first-child{color:var(--paper); font-weight:400;}
+
+  /* Anglais choisi : la page reste cachée le temps que commun/dq.js la traduise (script du
+     <head> de gabarit.html, qui la montre de toute façon après 1,5 s). Sans ça, un lecteur
+     anglophone voyait chaque page en français avant qu'elle ne bascule. */
+  html.dq-en:not(.dq-pret) body{visibility:hidden;}

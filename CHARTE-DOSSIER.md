@@ -15,8 +15,9 @@ qu'on change, et ce qu'on ne fait jamais. **Quand le cahier de design et le code
 code fait foi** : c'est lui qui est en ligne. Et quand la feuille de DQ s'écarte elle-même de sa
 règle, la charte le dit : ces écarts **ne font pas modèle**.
 
-*Les numéros de ligne de ce document sont ceux du 24 septembre 2026 (`commun/dq.css` : 1 962
-lignes). Ils glissent à chaque retouche ; les noms de sélecteurs, eux, ne bougent pas — au doute,
+*Les numéros de ligne de ce document sont ceux du 24 septembre 2026 au soir (`commun/dq.css` :
+1 967 lignes ; recalculés après l'ajout de la langue dans l'adresse). Ils glissent à chaque
+retouche ; les noms de sélecteurs, eux, ne bougent pas — au doute,
 `grep -n "<sélecteur>" commun/dq.css`.*
 
 ---
@@ -75,7 +76,7 @@ Toute la couleur passe par **trois blocs de jetons**, et un autre site ne touche
 
 **Pour un nouveau site, le minimum** : `--gold`, `--gold-bg`, `--gold-soft`, `--gold-hover`,
 `--gold-pale`, `--gold-paler` dans les deux blocs, les deux lignes d'accent des bandes sombres
-(l. 133 et 141), la `theme-color` du `<head>` (`gabarit.html:13`, à votre `--gold-bg`) et la tuile
+(l. 133 et 141), la `theme-color` du `<head>` (`gabarit.html:38`, à votre `--gold-bg`) et la tuile
 du favicon. Depuis le 24 septembre, **plus aucun bleu Québec n'est écrit en dur dans la couche
 design** : changer ces jetons change tout l'accent. Reste une paire cyan `#CFF0F7` / `#0A6E85`
 (l. 1588, le badge « Outils citoyens » du lexique) qu'un site frère remplace par ses propres
@@ -122,8 +123,8 @@ awk 'NR>705' commun/dq.css | grep -on "#[0-9A-Fa-f]\{3,6\}\b"   # 38 occurrences
 
 ### Typographie
 
-Une seule balise, exactement celle-ci (`gabarit.html:71`, précédée des deux `preconnect` des
-lignes 59-60) :
+Une seule balise, exactement celle-ci (`gabarit.html:96`, précédée des deux `preconnect` des
+lignes 84-85) :
 
 ```html
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
@@ -149,7 +150,7 @@ lignes 59-60) :
   contour de 2 px (l. 1104-1105, l'accueil seulement). Les pages de section (Ministres, Projets de
   loi, Votes, Promesses, Lexique, Mon dossier) portent en plus `.hero-h1-md` (l. 1114) :
   `clamp(36px, 5.6vw, 72px)`, interligne 0,94, 30 px en `.etroit` (l. 1679). En tête du H1, une
-  étiquette jaune bordée, `.hero-sujet`, dit le sujet de la page (`gabarit.html:224`).
+  étiquette jaune bordée, `.hero-sujet`, dit le sujet de la page (`gabarit.html:249`).
 - Pas d'autre police, pas d'Archivo Black, pas de chasse fixe.
 
 ### Formes
@@ -184,8 +185,8 @@ lignes 59-60) :
   l. 1032-1033), la bascule de la feuille d'érable (l. 732) et le léger agrandissement du bouton
   Villes au survol et à l'ouverture (`scale(1.06)`, l. 769).
 - Les icônes de contenu sont des émojis (🔍 ✋ 🔥 ✉ ●) ; celles de l'en-tête et du bouton
-  « remonter » sont dessinées — feuille d'érable et flèche en SVG en ligne (`gabarit.html:105`,
-  `1015`), lune / soleil et triangle du bouton Villes en CSS (l. 818-838, 764). Jamais une image,
+  « remonter » sont dessinées — feuille d'érable et flèche en SVG en ligne (`gabarit.html:130`,
+  `1040`), lune / soleil et triangle du bouton Villes en CSS (l. 818-838, 764). Jamais une image,
   jamais une police d'icônes.
 
 ### Grille
@@ -197,7 +198,7 @@ lignes 59-60) :
 - Les bandes pleine largeur passent par **`.bleed`** (`commun/dq.css:895`) : elles débordent la
   colonne mais leur contenu reste aligné dessus. Elle ne se fie pas à `100vw` (barre de
   défilement, zoom A+) : la largeur vient d'une variable `--vw` publiée sur `<body>` par
-  `commun/dq.js` (`majMetriquesMiseEnPage`, l. 1785-1794) ; `100vw` n'est que le repli d'avant le
+  `commun/dq.js` (`majMetriquesMiseEnPage`, l. 1881-1894) ; `100vw` n'est que le repli d'avant le
   script, ce qui oblige toute page qui a une bande à charger `dq.js`.
 - Chaque section pleine largeur est fermée par un trait de 3 px ; les fonds alternent crème,
   blanc, et couleur pleine (jaune, accent, encre).
@@ -205,7 +206,7 @@ lignes 59-60) :
 ### Thème sombre
 
 Posé par `html[data-theme="dark"]` (`commun/dq.css:95`), **jamais** par `prefers-color-scheme` ;
-l'attribut est mis par `commun/dq.js` et le bouton `.theme-toggle` (l. 810, `gabarit.html:149`).
+l'attribut est mis par `commun/dq.js` et le bouton `.theme-toggle` (l. 810, `gabarit.html:174`).
 Le jeu de jetons sombre, les deux règles (ombres noires, bordures inversées), les redéfinitions
 des bandes (l. 129-142) et les rattrapages par composant (l. 143-162, plus le soleil du bouton de
 thème, l. 828-838, et le survol du bouton d'abonnement, l. 1935) se copient avec le reste. Le
@@ -222,38 +223,38 @@ JavaScript).
 
 | Meuble | Style | Balisage |
 |---|---|---|
-| Bandeau défilant `.ticker` en haut de chaque page (26 s, pause au survol, rempli par `renderTicker`, `dq.js:3764`) | 708 | 78 |
-| En-tête collant `#dq-topbar`, fermé par un trait de 3 px | 259, 721 | 85 |
-| Marque `.brand` : `.brand-title` en Archivo 900, capitales, `letter-spacing:-0.03em`, deuxième moitié du nom dans l'accent (`.brand-blue`, l. 727) — pas de logo-image | 723-727 | 87-97 |
-| Feuille d'érable `.maple-flip` vers le site fédéral (bascule jaune ↔ rouge toutes les 20 s) | 729 | 101 |
-| Onglets `nav.tabs` : pilules carrées, **actif = fond d'encre** (noir sur mobile), survol jaune, sans numérotation | 842-853 | 130 |
-| Contrôles A− / A+ (`.font-size-ctrl`) : `zoom` de 80 à 150 % par pas de 10 sur `<body>` (`dq.js:1819`) | 789, 1687 | 142 |
-| Bouton de thème `.theme-toggle` (icône dessinée en CSS) et bouton de langue `.lang-toggle`, tous à la hauteur `--h-ctrl` (36 px, posée par `.header-ctrls > *`) | 810, 796 ; 1712-1718 | 149-150 |
-| Affiche `.hero-poster` : `.hero-sujet` + H1 trois lignes + manifeste encadré `.hero-manifesto` + bouton `.hero-cta` | 897-918 | 222-236 |
-| Bande de chiffres `.stat-band` : **un seul bloc** à trois cellules séparées par des traits, chiffre 54 px / 900 | 920 | 238 |
-| Bandes de couleur `.band-yellow` / `.band-blue`, toujours sur `.bleed` | 930, 980 | 209, 248 |
+| Bandeau défilant `.ticker` en haut de chaque page (26 s, pause au survol, rempli par `renderTicker`, `dq.js:3900`) | 708 | 103 |
+| En-tête collant `#dq-topbar`, fermé par un trait de 3 px | 259, 721 | 110 |
+| Marque `.brand` : `.brand-title` en Archivo 900, capitales, `letter-spacing:-0.03em`, deuxième moitié du nom dans l'accent (`.brand-blue`, l. 727) — pas de logo-image | 723-727 | 112-122 |
+| Feuille d'érable `.maple-flip` vers le site fédéral (bascule jaune ↔ rouge toutes les 20 s) | 729 | 126 |
+| Onglets `nav.tabs` : pilules carrées, **actif = fond d'encre** (noir sur mobile), survol jaune, sans numérotation | 842-853 | 155 |
+| Contrôles A− / A+ (`.font-size-ctrl`) : `zoom` de 80 à 150 % par pas de 10 sur `<body>` (`dq.js:1915`) | 789, 1687 | 167 |
+| Bouton de thème `.theme-toggle` (icône dessinée en CSS) et bouton de langue `.lang-toggle`, tous à la hauteur `--h-ctrl` (36 px, posée par `.header-ctrls > *`) | 810, 796 ; 1712-1718 | 174-175 |
+| Affiche `.hero-poster` : `.hero-sujet` + H1 trois lignes + manifeste encadré `.hero-manifesto` + bouton `.hero-cta` | 897-918 | 247-261 |
+| Bande de chiffres `.stat-band` : **un seul bloc** à trois cellules séparées par des traits, chiffre 54 px / 900 | 920 | 263 |
+| Bandes de couleur `.band-yellow` / `.band-blue`, toujours sur `.bleed` | 930, 980 | 234, 273 |
 | Cartes principales — même patron : fond `--card`, 3 px, `--shadow` : `.bill` 1076, `.vote-card` 1315, `.m-card` 1433 | | |
 | Cartes secondaires — même cadre, `--shadow-sm` : `.role-card` 1607, `.md-carte` 1839, `.legende-presence` 1866 | | |
 | Pastilles d'état `.status-pill` : Archivo Narrow 700, capitales, 2 px | 1282 | — |
-| Recherche `.brutal-search` : 3 px, ombre, loupe sur fond jaune séparée par un trait | 1398 | 389 |
+| Recherche `.brutal-search` : 3 px, ombre, loupe sur fond jaune séparée par un trait | 1398 | 414 |
 | Filtres `.qf-btn` : 3 px, **actif = jaune sur noir** (`--yellow` sur `--ink-bg`), survol jaune | 1142-1149 | — |
-| Bouton « remonter » `.dq-remonter` : carré jaune, 3 px, `--shadow-sm` | 879 | 1014 |
-| Pied de page en `--ink` pleine largeur, Archivo Narrow en capitales, avec le plan du site `.footer-nav` | 862, 870, 1940 | 984-985 |
-| Favicon `commun/dq.svg` : tuile, lettres dessinées, bandeau jaune | — | 33-34 |
+| Bouton « remonter » `.dq-remonter` : carré jaune, 3 px, `--shadow-sm` | 879 | 1039 |
+| Pied de page en `--ink` pleine largeur, Archivo Narrow en capitales, avec le plan du site `.footer-nav` | 862, 870, 1940 | 1009-1010 |
+| Favicon `commun/dq.svg` : tuile, lettres dessinées, bandeau jaune | — | 58-59 |
 
 ### La fabrication
 
 - **`gabarit.html` n'est jamais servi.** C'est le modèle : toutes les vues, un tronc commun.
-- **`scripts/build-section-pages.js`** le découpe en pages (`decouper`, l. 349), sort les données
-  vers `data/site/*.json`, remplit les repères `<!--PRERENDU:…-->` (`prerendus`, l. 286) pour les
+- **`scripts/build-section-pages.js`** le découpe en pages (`decouper`, l. 360), sort les données
+  vers `data/site/*.json`, remplit les repères `<!--PRERENDU:…-->` (`prerendus`, l. 297) pour les
   robots et les navigateurs sans JavaScript, fabrique le sitemap, et **refuse de publier** si :
   - la feuille n'est pas `/commun/dq.css`, s'il reste un `<style>` dans le modèle, si les
     accolades ou les commentaires ne sont pas équilibrés, si une variable CSS est orpheline
-    (`verifierCss`, l. 480 ; `verifierJs` juste après) ;
+    (`verifierCss`, l. 492 ; `verifierJs` juste après) ;
   - un titre est en double ou dépasse 65 caractères, une description est en double ou sort de
     120-165 caractères, un `<h1>` est absent, multiple ou en double, s'il manque un canonical ou
-    un JSON-LD (`verifierReferencement`, l. 557).
-- La liste des pages est `PAGES` (l. 154) ; une page privée porte `prive: true` (noindex, hors
+    un JSON-LD (`verifierReferencement`, l. 569).
+- La liste des pages est `PAGES` (l. 165) ; une page privée porte `prive: true` (noindex, hors
   sitemap).
 
 Ces garde-fous **font partie du design** : sans eux, la feuille se casse en silence et la dérive
@@ -265,7 +266,7 @@ recommence.
 
 Dans l'ordre. C'est court parce qu'on copie.
 
-1. **Copier `commun/dq.css` au complet** — ses quelque 1 960 lignes, sans trier, sans « nettoyer »
+1. **Copier `commun/dq.css` au complet** — ses quelque 1 970 lignes, sans trier, sans « nettoyer »
    la première couche. Le nommer comme vous voulez (`commun/on.css`) ; ne pas le réécrire.
 2. **Changer la palette, et seulement elle** : les trois blocs de jetons (§ 1), la `theme-color`,
    le favicon (même construction, vos couleurs).
@@ -274,19 +275,25 @@ Dans l'ordre. C'est court parce qu'on copie.
    l'anglais, parfois le français). C'est là que DossierOntario s'est perdu : près d'une centaine
    de classes en français (94 définies, 43 utilisées) contre plus de quatre cents chez DQ, trois
    en commun — un site à réécrire au complet.
-4. **Copier `gabarit.html`** : le `<head>` (polices, favicon, canonical), le ticker, `#dq-topbar`
-   avec sa marque, ses onglets et ses contrôles, l'affiche, la bande de chiffres, le pied, le
-   bouton « remonter ». Puis remplacer le **contenu** des vues — pas leur structure.
+4. **Copier `gabarit.html`** : le `<head>` (le script de langue des l. 6-30, polices, favicon,
+   canonical), le ticker, `#dq-topbar` avec sa marque, ses onglets et ses contrôles, l'affiche, la
+   bande de chiffres, le pied, le bouton « remonter ». Puis remplacer le **contenu** des vues — pas
+   leur structure.
 5. **Extraire de `commun/dq.js`** ce qui porte le design, en le rebranchant sur vos données : la
-   langue (`translations`, l. 86, et sa mécanique), `window.storage` (l. 607, dont dépendent le
-   zoom et le thème), `majMetriquesMiseEnPage` + zoom + thème (l. 1778-1857, en partant de
-   `let fontZoom = 100;`), `renderTicker` (l. 3764). Le reste (données, abonnés) selon le site.
-6. **Reprendre les garde-fous du build.** `verifierCss` et `verifierJs` (l. 480-514) se copient
-   seuls, en changeant `SRC`, `CSS_PATH` et `JS_PATH`. `verifierReferencement` (l. 557-601), non :
-   il lit `produites` (l. 544), donc tout le build. Soit on reprend le build entier en récrivant
-   `BASE` (l. 20), le suffixe « — DossierQuébec » (l. 567), les `title` de `PAGES` (l. 154),
-   `ORGANISATION` (l. 228-235), les marqueurs de données (l. 34-43), les repères PRERENDU de votre
-   modèle et `VILLES` (l. 622) ; soit on réécrit le contrôle sur ses propres pages produites, avec
+   langue — les textes (`translations`, l. 86) et sa mécanique : la lecture au démarrage, la langue
+   écrite dans l'adresse (`?lang=en`) et gardée sous `dvq:langue` (`langueDeDepart`,
+   `langueDansAdresse`, `paramLangue`, les liens qui emportent la langue et le suivi entre onglets, l. 433-512), la traduction des textes fixes
+   (`traduireTextesFixes`, l. 524) ; `window.storage` (l. 696, dont dépendent le zoom et le thème) ;
+   `majMetriquesMiseEnPage` + zoom + thème (l. 1874-1953, en partant de `let fontZoom = 100;`) ;
+   `renderTicker` (l. 3900). Le reste (données, abonnés) selon le site. La règle
+   `html.dq-en:not(.dq-pret) body`, en fin de `dq.css`, vient avec le script du `<head>` : elle
+   cache la page anglaise le temps de la traduire.
+6. **Reprendre les garde-fous du build.** `verifierCss` et `verifierJs` (l. 492-526) se copient
+   seuls, en changeant `SRC`, `CSS_PATH` et `JS_PATH`. `verifierReferencement` (l. 569-613), non :
+   il lit `produites` (l. 556), donc tout le build. Soit on reprend le build entier en récrivant
+   `BASE` (l. 20), le suffixe « — DossierQuébec » (l. 579), les `title` de `PAGES` (l. 165),
+   `ORGANISATION` (l. 239-246), les marqueurs de données (l. 34-43), les repères PRERENDU de votre
+   modèle et `VILLES` (l. 634) ; soit on réécrit le contrôle sur ses propres pages produites, avec
    les mêmes critères.
 7. **Comparer à une maquette** de `design/handoff-2026-07/` avant de publier : si votre accueil
    ne ressemble pas à `Apercu.dc.html` avec d'autres couleurs, quelque chose n'a pas été copié.

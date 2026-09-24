@@ -437,7 +437,86 @@ const translations = {
     'rm.17.p':"Done: the \u201cEnglish\u201d button (top of the site) translates the whole interface, plus the detailed content — bills, ministers, votes, glossary, petitions, roadmap. The official titles for Bills 1, 7, and 13 come from the real English pages on assnat.qc.ca; the other titles and summaries are my own translation, not yet checked word-for-word against the official site.",
   }
 };
-let currentLang = 'fr';
+// La langue du site. Elle ne vit plus seulement en mémoire (Martin, 24 sept. 2026 : « EN et
+// français, on ne voit pas de différence dans l'URL ») ; elle est à deux endroits :
+//   - dans l'ADRESSE : « ?lang=en » en anglais, rien en français (la langue par défaut). Une
+//     adresse copiée ou partagée ouvre la page dans la même langue ;
+//   - dans le NAVIGATEUR : dvq:langue, la même clé que Mes dossiers, Abonnement et le volet de
+//     Montréal (commun/langue.js) — un seul choix pour tout le site. Depuis que chaque onglet est
+//     une vraie page (21 sept.), sans elle chaque clic ramenait au français.
+// L'adresse l'emporte sur le choix gardé, et le remplace — sauf en revenant par Précédent ou
+// Suivant : une ANCIENNE adresse « ?lang=en » ne doit pas défaire le français choisi depuis, pour
+// tout le site (relecture du 24 sept. 2026). Le <head> de gabarit.html refait la même lecture pour
+// cacher la page le temps de la traduire : les deux doivent décider exactement pareil.
+const CLE_LANGUE = 'dvq:langue';
+const langueValide = (l) => l === 'en' || l === 'fr';
+function langueGardee(){ try{ return localStorage.getItem(CLE_LANGUE); }catch(e){ return null; } }
+function arriveeParHistorique(){
+  try{ const n = performance.getEntriesByType('navigation')[0]; return !!n && n.type === 'back_forward'; }catch(e){ return false; }
+}
+function langueDeDepart(){
+  let demandee = null;
+  try{ demandee = new URLSearchParams(location.search).get('lang'); }catch(e){}
+  const gardee = langueGardee();
+  if(arriveeParHistorique() && langueValide(gardee)) return gardee;
+  if(langueValide(demandee)){
+    try{ localStorage.setItem(CLE_LANGUE, demandee); }catch(e){}
+    return demandee;
+  }
+  return gardee === 'en' ? 'en' : 'fr';
+}
+let currentLang = langueDeDepart();
+
+// Écrit la langue dans l'adresse, sans recharger ni ajouter d'entrée à l'historique.
+function langueDansAdresse(){
+  try{
+    const url = new URL(location.href);
+    if(currentLang === 'en') url.searchParams.set('lang', 'en'); else url.searchParams.delete('lang');
+    const cible = url.pathname + url.search + url.hash;
+    if(cible !== location.pathname + location.search + location.hash) history.replaceState(history.state, '', cible);
+  }catch(e){}
+}
+// Ce qu'un lien vers une page du site doit porter pour garder la langue : rien en français.
+// premier : le lien n'a pas encore de « ? ».
+function paramLangue(premier){ return currentLang === 'en' ? (premier ? '?lang=en' : '&lang=en') : ''; }
+langueDansAdresse();
+
+// Tout lien vers une page du site emporte la langue — clic, clic du milieu, « copier l'adresse du
+// lien » — même quand le navigateur ne garde rien (données de site bloquées). Réécrit au moment du
+// geste plutôt qu'au dessin : les listes dessinées plus tard sont couvertes aussi. On ne touche un
+// lien que s'il le faut, pour ne pas réencoder ses autres paramètres.
+function lienDansLaLangue(e){
+  const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+  if(!a) return;
+  let url;
+  try{ url = new URL(a.href); }catch(_){ return; }
+  if(url.origin !== location.origin) return;
+  if(currentLang === 'en'){
+    if(url.searchParams.get('lang') === 'en') return;
+    url.searchParams.set('lang', 'en');
+  }else{
+    if(!url.searchParams.has('lang')) return;
+    url.searchParams.delete('lang');
+  }
+  a.href = url.href;
+}
+['click', 'auxclick', 'contextmenu'].forEach((type) => document.addEventListener(type, lienDansLaLangue, true));
+
+// Un seul choix pour tout le site, même déjà ouvert : cette page suit le choix gardé quand il
+// change dans un autre onglet (storage), ou pendant qu'elle dormait dans le cache aller-retour
+// (pageshow). Avant la fin du démarrage, init() dessinera de toute façon dans la bonne langue.
+let demarrageFini = false;
+function suivreLaLangueGardee(){
+  const gardee = langueGardee();
+  if(!langueValide(gardee) || gardee === currentLang) return;
+  currentLang = gardee;
+  langueDansAdresse();
+  if(!demarrageFini) return;
+  applyLanguage();
+  if(typeof renderTicker === 'function') renderTicker();
+}
+window.addEventListener('storage', (e) => { if(e.key === CLE_LANGUE) suivreLaLangueGardee(); });
+window.addEventListener('pageshow', (e) => { if(e.persisted) suivreLaLangueGardee(); });
 
 function t(key){ return (translations[currentLang] && translations[currentLang][key]) || key; }
 
@@ -446,7 +525,10 @@ function t(key){ return (translations[currentLang] && translations[currentLang][
 // pas d'entrée française explicite (le français venait du HTML inline, écrasé
 // par l'anglais et jamais restauré). On restaure maintenant cet original.
 const i18nOriginals = new WeakMap();
-function applyLanguage(){
+// Les textes fixes de la page (data-i18n) et ce qui les accompagne. À part du reste
+// d'applyLanguage pour pouvoir passer dès le démarrage, avant les données : en anglais, le <head>
+// garde la page cachée le temps de la traduire, et ce qui se montre doit déjà être traduit.
+function traduireTextesFixes(){
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key = el.getAttribute('data-i18n');
     if(!i18nOriginals.has(el)) i18nOriginals.set(el, el.innerHTML);
@@ -463,6 +545,11 @@ function applyLanguage(){
   document.documentElement.lang = currentLang === 'en' ? 'en' : 'fr';
   { const _e = document.getElementById('footerLeft'); if(_e) _e.textContent = t('footer.left'); }
   { const _e = document.getElementById('footerRight'); if(_e) _e.textContent = t('footer.right'); }
+  if(typeof syncTitle === 'function') syncTitle(viewFromPath());
+  if(typeof applyAssemblyState === 'function') applyAssemblyState();
+}
+function applyLanguage(){
+  traduireTextesFixes();
   // Re-render dynamic lists so their JS-generated buttons pick up the new language
   renderHemicycle();
   renderLegendePresence();
@@ -550,6 +637,8 @@ function applyAssemblyState(){
 
 document.getElementById('langToggle')?.addEventListener('click', ()=>{
   currentLang = currentLang === 'fr' ? 'en' : 'fr';
+  try{ localStorage.setItem(CLE_LANGUE, currentLang); }catch(e){}
+  langueDansAdresse();
   applyLanguage();
   if(typeof renderTicker === 'function') renderTicker(); // le ticker suit la langue
 });
@@ -2953,7 +3042,7 @@ function shareChallenge(billId, count, platform, evt){
   const num = b ? b.num : '';
   const title = b ? (isEn ? (b.titleEn || b.title) : b.title) : '';
   const n = Number(count).toLocaleString(isEn ? 'en-CA' : 'fr-CA');
-  const url = 'https://dossierquebec.ca/';
+  const url = 'https://dossierquebec.ca/' + paramLangue(true);
   const text = isEn
     ? `${n} people are challenging Bill no. ${num} — ${title}. Sign in to support this request:`
     : `${n} personnes contestent le projet de loi n° ${num} — ${title}. Connectez-vous pour appuyer cette demande :`;
@@ -3003,7 +3092,7 @@ function shareBill(billId, platform, evt){
   const b = bills.find(x => x.id === Number(billId));
   if(!b) return;
   const title = isEn ? (b.titleEn || b.title) : b.title;
-  const url = `https://dossierquebec.ca/projets-de-loi?pl=${encodeURIComponent(b.num)}`;
+  const url = `https://dossierquebec.ca/projets-de-loi?pl=${encodeURIComponent(b.num)}` + paramLangue(false);
   const text = isEn
     ? `Bill no. ${b.num} — ${title}. Plain-language summary on DossierQuébec:`
     : `Projet de loi n° ${b.num} — ${title}. Résumé en clair sur DossierQuébec :`;
@@ -3516,8 +3605,10 @@ function toggleVoteCard(id, evt){
    <title> propre, pour que Google les indexe séparément. Ici, côté client : on
    synchronise l'URL au clic et on ouvre le bon onglet si on arrive directement
    sur une de ces adresses. */
-const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', lexique:'/lexique', promesses:'/promesses', bd:'/sources' };
-const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd' };
+// /mon-dossier y est aussi : sans lui, la page se prenait pour l'accueil et portait son titre
+// anglais (arrivé avec l'anglais qui suit enfin la navigation, 24 sept. 2026).
+const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier' };
+const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier' };
 // Titres ANGLAIS seulement : le français vient du <title> de la page (voir syncTitle).
 const PAGE_META = {
   bd:        { en:"Site updates — DossierQuébec" },
@@ -3527,6 +3618,7 @@ const PAGE_META = {
   votes:     { en:"Recorded divisions at the National Assembly — DossierQuébec" },
   lexique:   { en:"National Assembly glossary in plain language — DossierQuébec" },
   promesses: { en:"2026 Quebec election promises — DossierQuébec" },
+  mondossier:{ en:"My file — DossierQuébec" },
 };
 function viewFromPath(){
   const seg = location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '');
@@ -3545,7 +3637,7 @@ function goToTab(viewName, opts){
   // vrai — avant, tout vivait dans le même document et il suffisait de basculer une classe.
   if(!target){
     const url = VIEW_SLUGS[viewName];
-    if(url && !opts.fromHistory) location.href = url;
+    if(url && !opts.fromHistory) location.href = url + paramLangue(true);
     return;
   }
   document.querySelectorAll('nav.tabs a[data-view]').forEach(a=>{
@@ -3561,7 +3653,7 @@ function goToTab(viewName, opts){
   if(!opts.fromHistory && VIEW_SLUGS[viewName]){
     const url = VIEW_SLUGS[viewName];
     const here = (location.pathname.replace(/\.html$/, '') || '/');
-    if(here !== url){ history.pushState({ view: viewName }, '', url); }
+    if(here !== url){ history.pushState({ view: viewName }, '', url + paramLangue(true)); }
   }
   syncTitle(viewName);
 }
@@ -3743,6 +3835,9 @@ function renderTicker(){
 try{ localStorage.setItem('dq:dernier-volet', JSON.stringify({ ville: 'assemblee' })); }catch(e){}
 
 (async function init(){
+  // Anglais : les textes fixes tout de suite, avant même les données. Le <head> garde la page
+  // cachée 1,5 s au plus ; si le réseau traîne plus longtemps, elle se montre déjà traduite.
+  if(currentLang === 'en') traduireTextesFixes();
   // D'abord les données : tout ce qui suit en dépend, et elles arrivent maintenant par le
   // réseau plutôt que d'être écrites dans la page.
   await chargerDonnees();
@@ -3775,6 +3870,11 @@ try{ localStorage.setItem('dq:dernier-volet', JSON.stringify({ ville: 'assemblee
   // Les listes du HTML s'effacent dès que leurs cartes sont là — AVANT l'appel réseau de
   // renderChallenged, sinon l'accueil montrait les deux versions le temps de sa réponse.
   retirerPrerendus(['apercuBills', 'newsItems', 'bills', 'votes', 'ministers', 'deputesRaw']);
+  // Textes traduits, listes dessinées : la page anglaise peut se montrer (le <head> la cache).
+  // Pas plus tard : la suite attend Supabase, et la page restait cachée jusqu'à 0,9 s de plus.
+  // Sur /promesses et /sources, ce qui suit ne fait pas d'appel réseau : leurs listes sont
+  // dessinées avant le premier affichage.
+  document.documentElement.classList.add('dq-pret');
   // Attendu : renderChallenged charge le cache PUIS re-rend la liste des projets.
   // Sans l'attendre, ce re-rendu tardif referme la carte ouverte par le lien
   // profond (?pl=NUM) — d'où le await avant openBillFromQuery plus bas.
@@ -3792,4 +3892,5 @@ try{ localStorage.setItem('dq:dernier-volet', JSON.stringify({ ville: 'assemblee
   // Lien profond partagé (/projets-de-loi?pl=NUM) : ouvre le projet ciblé.
   openBillFromQuery();
   renderTicker();
+  demarrageFini = true;
 })();

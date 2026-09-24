@@ -3,6 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+/* La langue, avant d'afficher quoi que ce soit — EXACTEMENT la décision de langueDeDepart
+   (commun/dq.js) : « ?lang=en » dans l'adresse, sinon le choix gardé dans dvq:langue (commun à
+   tout le site) ; en revenant par Précédent ou Suivant, le choix gardé passe avant l'adresse.
+   En anglais, la page reste cachée le temps que dq.js la traduise : 1,5 s au plus, même s'il
+   échoue. lang="en" n'est posé qu'au moment de traduire (dq.js) : si la traduction n'arrive pas,
+   la page française ne s'annonce pas en anglais.
+   Tout est dans une fonction : une variable globale ici entrerait en collision avec les
+   déclarations de dq.js et le ferait planter en entier. */
+(function(){
+  try{
+    var valide = function(l){ return l === 'en' || l === 'fr'; };
+    var gardee = null;
+    try{ gardee = localStorage.getItem('dvq:langue'); }catch(e){}
+    var q = new URLSearchParams(location.search).get('lang');
+    var nav = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+    var parHistorique = !!nav && nav.type === 'back_forward';
+    var choix = (parHistorique && valide(gardee)) ? gardee : (valide(q) ? q : gardee);
+    if(choix !== 'en') return;
+    var racine = document.documentElement;
+    racine.classList.add('dq-en');
+    setTimeout(function(){ racine.classList.add('dq-pret'); }, 1500);
+  }catch(e){}
+})();
+</script>
 <title>Mises à jour du site — DossierQuébec</title>
 <meta name="description" content="Ce qui change sur DossierQuébec, site citoyen indépendant qui rend lisibles l'Assemblée nationale et les conseils municipaux du Québec, et qui est derrière.">
 <link rel="canonical" href="https://dossierquebec.ca/sources">
@@ -230,6 +255,7 @@ function goToFederal(evt){
       <ol class="maj-liste" id="journalListe" aria-live="polite"></ol>
     <div class="prerendu" data-prerendu="journal">
       <ul aria-label="Mises à jour du site">
+        <li><span class="pr-meta">24 septembre 2026 —</span> <b>La version anglaise tient d’une page à l’autre, et se voit dans l’adresse</b> Choisir « English » ne valait que pour la page ouverte : le clic suivant ramenait au français, et rien dans l’adresse ne disait la langue. Maintenant, le choix est gardé d’une page à l’autre et une adresse en anglais porte « ?lang=en » — copiée et ouverte ailleurs, elle garde la langue. C’est aussi le même choix que Mes dossiers et Abonnement : on ne choisit plus sa langue qu’une fois. La page Mon dossier, elle, porte enfin son propre titre en anglais.</li>
         <li><span class="pr-meta">24 septembre 2026 —</span> <b>On peut de nouveau challenger un projet de loi</b> Depuis la dissolution de l’Assemblée, le bouton « Demander une explication » avait disparu de toutes les cartes : le site tenait qu’un projet mort au feuilleton ne se challenge plus. Le geste central du site était donc impossible pendant toute la campagne électorale — précisément le moment où on veut des explications. Il est de retour sur les 102 projets qui ne sont pas devenus lois. Un compte reste requis, une demande par personne, et la bande jaune dit maintenant ce qui arrive vraiment à une demande faite aujourd’hui : elle est enregistrée et comptée, et elle dira à la rentrée du 17 novembre ce que les gens voulaient voir expliqué. Un projet déjà sanctionné, lui, ne se challenge pas.</li>
         <li><span class="pr-meta">24 septembre 2026 —</span> <b>Les projets challengés réapparaissent sur l’accueil</b> Neuf projets de loi avaient reçu des demandes d’explication, et l’accueil affichait pourtant « Personne n’a encore demandé d’explication ». La section ne cherchait les titres que parmi les quatre projets récents chargés par la page : les neuf autres disparaissaient sans un mot. Ils sont de retour, avec leur nombre de demandes. Le filtre « Challengés » de la page des projets de loi, qui ne renvoyait jamais rien, fonctionne lui aussi, et les cartes portent de nouveau leur compteur.</li>
         <li><span class="pr-meta">23 septembre 2026 —</span> <b>Page Abonnement : ce qui est promis, et rien de plus</b> Une relecture ligne par ligne a corrigé ce que la page promettait de trop : l’ordre du jour du conseil n’existe qu’à Québec et à Lévis, le compte rendu mensuel qu’à Québec et à Montréal et seulement si on coche la case, les courriels d’alerte sont écrits en français, un mot-clé ne trouve que les décisions qui le nomment, et un code cadeau ne s’ajoute pas à un abonnement payant. La liste des étapes d’un projet de loi correspond maintenant aux alertes vraiment envoyées. Après le paiement, on revient dans son espace : Mon dossier du côté de l’Assemblée, Mes dossiers du côté des villes. Enfin, un compte dont l’abonnement s’arrête peut retirer ses mots-clés et ses organismes, qui occupaient une place dans ses suivis sans qu’il puisse rien y faire.</li>
@@ -249,9 +275,8 @@ function goToFederal(evt){
         <li><span class="pr-meta">18 septembre 2026 —</span> <b>Montréal n’est plus un prototype</b> Le volet Montréal couvre ses 19 conseils d’arrondissement, dont le Plateau-Mont-Royal et huit autres qui n’affichaient aucune décision. Inscrivez-vous à ses courriels : compte rendu du mois (dès fin septembre), séances du conseil et « Mon arrondissement ».</li>
         <li><span class="pr-meta">18 septembre 2026 —</span> <b>Montréal : des résumés en langage clair et 16 sujets à suivre</b> La plupart des décisions de Montréal ont maintenant un résumé en langage clair, rédigé par IA à partir du sommaire décisionnel quand la Ville le publie, sinon du texte de la résolution. Mes dossiers propose 16 sujets à suivre, dont l’écoquartier Louvain Est.</li>
         <li><span class="pr-meta">18 septembre 2026 —</span> <b>Montréal, Mes dossiers et l’abonnement, aussi en anglais</b> Un bouton EN permet de lire le volet Montréal, Mes dossiers et la page Abonnement en anglais, résumés et lexique compris, et le site retient votre choix. Le français reste la langue par défaut et celle des documents officiels.</li>
-        <li><span class="pr-meta">17 septembre 2026 —</span> <b>Québec n’est plus un prototype, et le détail de l’argent s’étend</b> L’étiquette « Prototype » quitte le volet Québec, où le détail de l’argent est lu pour les projets à suivre et les nouveaux dossiers avec un montant. Pour un autre dossier, un abonné peut le demander : sa demande passe en priorité.</li>
       </ul>
-      <p class="pr-note">Les 20 plus récentes, sur 24.</p>
+      <p class="pr-note">Les 20 plus récentes, sur 25.</p>
     </div>
       <button type="button" class="maj-plus" id="journalPlus" hidden></button>
     </div>
