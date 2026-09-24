@@ -105,6 +105,10 @@ const translations = {
     'h.apropos':"D'où viennent ces données, et comment aller plus loin",
     'ph.searchMinistres':"Nom, circonscription, région ou ministère…",
     'ph.searchBills':"Numéro, titre ou mot-clé…",
+    // Voir la note du côté anglais : la bande « C'est quoi, challenger ? » change de deuxième
+    // ligne pendant la dissolution. Le français a besoin de SA clé, sinon applyLanguage
+    // retombe sur le texte écrit dans le HTML — celui qui promet une pétition.
+    'chexp.p2.dissous':"<b>Un compte (courriel) est requis</b> — une demande par personne, aucune demande anonyme. L'Assemblée est dissoute : ces projets sont morts au feuilleton. Les demandes restent enregistrées et comptées — elles diront, à la rentrée du 17 novembre, ce que les gens voulaient voir expliqué.",
     'filter.statuts':"Statuts", 'filter.etapes':"Étapes",
     'ph.searchDeputes':"Nom, circonscription ou région…",
     'ph.searchVotes':"Mot-clé : sujet, numéro de projet de loi…",
@@ -166,6 +170,9 @@ const translations = {
     'chexp.h':"✋ What is “challenging”?",
     'chexp.p1':"One click on “Ask for an explanation” = a citizen request for the bill's sponsor to explain it in plain language, and for us to keep an eye on it together.",
     'chexp.p2':"An account (email) is required — one request per person, no anonymous requests. 🔥 At 1,000, we push for an official petition.",
+    // Pendant la dissolution : même geste, promesse différente. Aucune Assemblée ne peut
+    // recevoir une pétition avant la rentrée — on dit donc ce qui arrive vraiment aux demandes.
+    'chexp.p2.dissous':"<b>An account (email) is required</b> — one request per person, no anonymous requests. The Assembly is dissolved: these bills died on the order paper. Requests are still recorded and counted — when it returns on 17 November, they will show what people wanted explained.",
     'lire.h':"How to read a vote",
     'lire.1.h':"Recorded division",
     'lire.1.p':"Each MNA stands and their choice is recorded in the Journal des débats. It's the only kind of vote that can be attributed to a person.",
@@ -724,6 +731,19 @@ const libelleSuivreLoi = (suivi, isEn) => suivi
 // projet de la 43e n'a d'activité après la dissolution ; tout projet de la 44e en a une après
 // newLegislatureOn.
 const loiVivante = (b) => !ASSEMBLY.dissolved && String(b.lastActivity || '') >= ASSEMBLY.newLegislatureOn;
+
+// Un projet se « challenge » tant qu'il n'est pas devenu loi.
+//
+// ⚠️ Cette règle passait par loiVivante(), qui est faux pour TOUS les projets pendant la
+// dissolution : le bouton « Demander une explication » avait donc disparu de chaque carte du
+// site, et plus personne ne pouvait challenger quoi que ce soit — alors que c'est le geste
+// central de DossierQuébec, et qu'une campagne électorale est précisément le moment où les
+// gens veulent des explications. On laisse donc challenger les projets morts au feuilleton :
+// la demande est enregistrée, comptée, et elle dira à la rentrée ce que les gens voulaient
+// voir expliqué. Seul un projet SANCTIONNÉ (devenu loi) ne se challenge pas.
+const peutEtreChallenge = (b) => ASSEMBLY.dissolved
+  ? b.status !== 'sanctionne'
+  : (b.status === 'encours' && loiVivante(b));
 
 /* ---------------- COMPTES (Supabase) ---------------- */
 // Auth par lien magique (courriel) — voir scripts/supabase-schema.sql pour la
@@ -2530,15 +2550,17 @@ function billCard(b, ctx){
     </div>`;
   // Bouton « Demander une explication » (remplace l'ancien « Suivre » pour les
   // projets de loi — le suivi des personnes reste intact ailleurs). 3 états :
-  // déconnecté (mène au compte), à demander, déjà demandé. Seulement sur les
-  // projets ACTIFS (status 'encours') : un projet sanctionné ou laissé de côté
-  // ne se « challenge » plus.
+  // déconnecté (mène au compte), à demander, déjà demandé. Voir peutEtreChallenge().
   const isFlagged = !!myFlaggedBills[b.id];
-  const canFlag = b.status === 'encours' && loiVivante(b);
+  const canFlag = peutEtreChallenge(b);
   const flagBtnId = 'demand-' + ctx + '-' + b.id;
-  const mailHint = isEn
-    ? 'One email at the moments that count (500 & 1,000 requests, or if it becomes law)'
-    : 'Un courriel aux moments qui comptent (500 et 1000 demandes, ou si ça devient loi)';
+  // Pendant la dissolution, on ne promet pas un courriel « si ça devient loi » : ça ne peut
+  // pas arriver avant la rentrée. On dit ce qui se passe vraiment — la demande est comptée.
+  const mailHint = ASSEMBLY.dissolved
+    ? (isEn ? 'Recorded and counted — it waits for the new legislature on 17 November'
+            : 'Enregistrée et comptée — elle attend la rentrée du 17 novembre')
+    : (isEn ? 'One email at the moments that count (500 & 1,000 requests, or if it becomes law)'
+            : 'Un courriel aux moments qui comptent (500 et 1000 demandes, ou si ça devient loi)');
   let flagRow = '';
   if(canFlag){
     let hint, label, onclick = '', title = '';
@@ -2927,9 +2949,14 @@ function renderBills(keyword){
           ? `All ${list.length} shown` : `Les ${list.length} affichés`}</div>`;
       }
     }
-    // Pendant la dissolution, on n'affiche pas l'explication du « challenge » :
-    // la fonction est désactivée (on n'interpelle pas le parrain d'un projet mort).
-    if(banner) banner.style.display = ASSEMBLY.dissolved ? 'none' : '';
+    // La bande explicative suit le bouton : tant qu'on peut challenger, on explique ce que
+    // ça veut dire. Pendant la dissolution, la deuxième ligne change — on ne promet pas une
+    // pétition qu'aucune Assemblée ne peut recevoir avant la rentrée.
+    if(banner){
+      banner.style.display = '';
+      const p2 = banner.querySelector('[data-i18n^="chexp.p2"]');
+      if(p2) p2.setAttribute('data-i18n', ASSEMBLY.dissolved ? 'chexp.p2.dissous' : 'chexp.p2');
+    }
   } else {
     el.innerHTML = `<div class="no-results">${isEn ? 'No bill matches this search.' : 'Aucun projet de loi ne correspond à cette recherche.'}</div>`;
     if(rest) rest.innerHTML = '';
@@ -3194,7 +3221,7 @@ async function renderChallenged(){
       const stageLabel = b.status === 'encours' && loiVivante(b) ? stepLabels[stageIdx] : statusLabel(b.status, b.step);
       const petition = cnt >= PETITION_THRESHOLD
         ? `<div class="ch-petition">⚑ ${isEn ? 'Petition threshold reached' : 'Seuil de pétition atteint'}</div>` : '';
-      const canFlag = b.status === 'encours' && loiVivante(b);
+      const canFlag = peutEtreChallenge(b);
       const isFlagged = !!myFlaggedBills[b.id];
       const flagBtnId = 'demand-ch-' + b.id;
       let demandBtn = '';
