@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #F2F0EA; }
+  a { color: #0E4FC1; text-decoration: none; }
+  a:hover { color: #08307A; }
+  ::selection { background: #FFD24D; }
+  @keyframes dqTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes dqUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+<div style="font-family: 'Archivo', system-ui, sans-serif; color: #131313; background: #F2F0EA; min-height: 100vh; font-size: {{ rootSize }}px; -webkit-font-smoothing: antialiased;">
+
+  <!-- ticker -->
+  <div style="background: #131313; color: #F2F0EA; overflow: hidden; border-bottom: 3px solid #131313;">
+    <div style="display: flex; white-space: nowrap; animation: dqTicker 26s linear infinite; width: max-content;">
+      <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 0;">● 27 ministres au Conseil&nbsp;&nbsp;&nbsp;● 125 député·e·s, tous partis confondus&nbsp;&nbsp;&nbsp;● Liste des ministres scrapée en direct de quebec.ca&nbsp;&nbsp;&nbsp;● Présence calculée sur 735 votes nominatifs&nbsp;&nbsp;&nbsp;● Site citoyen indépendant · vraies données publiques&nbsp;&nbsp;&nbsp;</span>
+      <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 0;">● 27 ministres au Conseil&nbsp;&nbsp;&nbsp;● 125 député·e·s, tous partis confondus&nbsp;&nbsp;&nbsp;● Liste des ministres scrapée en direct de quebec.ca&nbsp;&nbsp;&nbsp;● Présence calculée sur 735 votes nominatifs&nbsp;&nbsp;&nbsp;● Site citoyen indépendant · vraies données publiques&nbsp;&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- header -->
+  <header style="border-bottom: 3px solid #131313; background: #F2F0EA; position: sticky; top: 0; z-index: 50;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+      <a href="Apercu.dc.html" style="font-family: 'Archivo'; font-weight: 900; font-size: 24px; letter-spacing: -0.03em; color: #131313; text-transform: uppercase;">Dossier<span style="color: #0E4FC1;">Québec</span></a>
+      <nav style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="5">
+          <a href="{{ tab.href }}" style="{{ tab.style }}">{{ tab.label }}</a>
+        </sc-for>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button onClick="{{ dec }}" style="background: #F2F0EA; border: 2px solid #131313; color: #131313; width: 30px; height: 30px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700;">A−</button>
+        <button onClick="{{ inc }}" style="background: #F2F0EA; border: 2px solid #131313; color: #131313; width: 30px; height: 30px; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 700;">A+</button>
+        <a href="#" style="border: 2px solid #131313; padding: 5px 12px; font-size: 13px; font-weight: 700; color: #131313; text-transform: uppercase;">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- page title -->
+  <section style="border-bottom: 3px solid #131313;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 46px 32px 40px;">
+      <h1 style="margin: 0 0 18px; text-transform: uppercase; font-weight: 900; letter-spacing: -0.02em; line-height: 0.94;">
+        <span style="display: block; font-size: 72px; color: #131313;">Conseil des ministres</span>
+        <span style="display: block; font-size: 72px; color: transparent; -webkit-text-stroke: 3px #131313;">&amp; toute l'Assemblée.</span>
+      </h1>
+      <p style="font-size: 17px; font-weight: 500; margin: 0 0 28px; max-width: 640px; line-height: 1.45;">Les 27 ministres, puis les 125 député·e·s de tous les partis — <strong>une seule recherche pour les deux.</strong></p>
+      <!-- search -->
+      <div style="display: flex; gap: 0; max-width: 640px; border: 3px solid #131313; background: #fff; box-shadow: 6px 6px 0 #131313;">
+        <span style="display: flex; align-items: center; padding: 0 16px; font-size: 18px; border-right: 3px solid #131313; background: #FFD24D;">🔍</span>
+        <input value="{{ query }}" onChange="{{ setQuery }}" placeholder="Nom, portefeuille ou circonscription…" style="flex: 1; border: none; outline: none; background: #fff; font-family: 'Archivo', sans-serif; font-size: 16px; font-weight: 500; padding: 16px 18px; color: #131313;">
+      </div>
+    </div>
+  </section>
+
+  <!-- composition -->
+  <section style="border-bottom: 3px solid #131313; background: #fff;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 40px 32px 46px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; flex-wrap: wrap;">
+        <h2 style="font-size: 34px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; margin: 0;">Composition — 125 sièges</h2>
+        <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #555;">43e législature · répartition par groupe</span>
+      </div>
+      <div style="display: flex; height: 56px; border: 3px solid #131313;">
+        <sc-for list="{{ parties }}" as="pa" hint-placeholder-count="5">
+          <div style="{{ pa.barStyle }}"></div>
+        </sc-for>
+      </div>
+      <div style="display: flex; gap: 20px; margin-top: 16px; flex-wrap: wrap;">
+        <sc-for list="{{ parties }}" as="pa" hint-placeholder-count="5">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="{{ pa.swatch }}"></span>
+            <span style="font-family: 'Archivo Narrow'; font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;">{{ pa.name }} — {{ pa.seats }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ministers -->
+  <section style="border-bottom: 3px solid #131313;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 46px 32px 50px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 10px; flex-wrap: wrap;">
+        <h2 style="font-size: 46px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; margin: 0;">Les ministres</h2>
+        <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #555;">{{ ministerCount }}</span>
+      </div>
+      <div style="font-family: 'Archivo Narrow'; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 28px;">Liste officielle scrapée en direct de quebec.ca — pas maintenue à la main. « Suivre » s'enregistre dans votre navigateur.</div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+        <sc-for list="{{ ministers }}" as="m" hint-placeholder-count="6">
+          <div style="background: #fff; border: 3px solid #131313; box-shadow: 6px 6px 0 #131313; display: flex; flex-direction: column;">
+            <div style="padding: 20px 22px 16px; border-bottom: 2px solid #131313;">
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px;">
+                <span style="{{ m.partyBadge }}">{{ m.party }}</span>
+                <button onClick="{{ m.onFollow }}" style="{{ m.followStyle }}">{{ m.followLabel }}</button>
+              </div>
+              <div style="font-size: 20px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.15; text-transform: uppercase;">{{ m.name }}</div>
+              <div style="font-family: 'Archivo Narrow'; font-size: 13.5px; font-weight: 700; color: #0E4FC1; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 5px;">{{ m.portfolio }}</div>
+            </div>
+            <div style="padding: 14px 22px 18px; display: flex; flex-direction: column; gap: 8px; margin-top: auto;">
+              <div style="display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px;">
+                <span style="font-family: 'Archivo Narrow'; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #666;">Circonscription</span>
+                <span style="font-weight: 700;">{{ m.riding }}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px;">
+                <span style="font-family: 'Archivo Narrow'; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #666;">Présence votes</span>
+                <span style="font-weight: 800; color: #0E4FC1;">{{ m.presence }}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px;">
+                <span style="font-family: 'Archivo Narrow'; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #666;">PL parrainés</span>
+                <span style="font-weight: 700;">{{ m.bills }}</span>
+              </div>
+              <a href="#" style="font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 700; letter-spacing: 0.03em; margin-top: 6px; border-top: 2px solid #E5E2DA; padding-top: 10px;">✉ {{ m.email }}</a>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- rest of assembly -->
+  <section style="border-bottom: 3px solid #131313; background: #fff;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 46px 32px 50px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 28px; flex-wrap: wrap;">
+        <h2 style="font-size: 46px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; margin: 0;">Le reste de l'Assemblée</h2>
+        <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #555;">{{ deputyCount }}</span>
+      </div>
+      <div style="border: 3px solid #131313; box-shadow: 8px 8px 0 #131313;">
+        <div style="display: grid; grid-template-columns: 1fr 220px 60px; gap: 16px; padding: 12px 22px; background: #131313; color: #F2F0EA; font-family: 'Archivo Narrow'; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;">
+          <span>Nom</span><span>Circonscription</span><span>Suivre</span>
+        </div>
+        <sc-for list="{{ deputyGroups }}" as="g" hint-placeholder-count="3">
+          <div>
+            <div style="{{ g.headerStyle }}">
+              <span style="font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.02em;">{{ g.name }}</span>
+              <span style="font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">{{ g.seatNote }}</span>
+            </div>
+            <sc-for list="{{ g.members }}" as="d" hint-placeholder-count="3">
+              <div style="display: grid; grid-template-columns: 1fr 220px 60px; gap: 16px; padding: 14px 22px; border-top: 2px solid #E5E2DA; align-items: center; background: #fff;">
+                <div>
+                  <div style="font-size: 15.5px; font-weight: 700;">{{ d.name }}</div>
+                  <a href="#" style="font-family: 'Archivo Narrow'; font-size: 12px; font-weight: 600; letter-spacing: 0.02em;">✉ {{ d.email }}</a>
+                </div>
+                <span style="font-size: 13.5px; font-weight: 600;">{{ d.riding }}</span>
+                <button onClick="{{ d.onFollow }}" style="{{ d.followStyle }}">{{ d.followLabel }}</button>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top: 20px; font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #666; text-align: center;">Maquette : 10 député·e·s affichés sur 125 — photo prise à la dernière mise à jour, pas un flux automatique</div>
+    </div>
+  </section>
+
+  <!-- comparator -->
+  <section style="background: #0E4FC1; color: #fff; border-bottom: 3px solid #131313;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 50px 32px 56px;">
+      <h2 style="font-size: 46px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 10px;">Comparateur</h2>
+      <div style="font-family: 'Archivo Narrow'; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #A9C6FF; margin-bottom: 30px;">Deux ministres, les mêmes faits, côte à côte — jamais un classement</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+        <select value="{{ compareA }}" onChange="{{ setA }}" style="border: 3px solid #131313; background: #FFD24D; color: #131313; font-family: 'Archivo Narrow', sans-serif; font-size: 15px; font-weight: 700; text-transform: uppercase; padding: 14px 16px; cursor: pointer; box-shadow: 5px 5px 0 #131313;">
+          <sc-for list="{{ options }}" as="o" hint-placeholder-count="9">
+            <option value="{{ o.i }}">{{ o.name }}</option>
+          </sc-for>
+        </select>
+        <select value="{{ compareB }}" onChange="{{ setB }}" style="border: 3px solid #131313; background: #fff; color: #131313; font-family: 'Archivo Narrow', sans-serif; font-size: 15px; font-weight: 700; text-transform: uppercase; padding: 14px 16px; cursor: pointer; box-shadow: 5px 5px 0 #131313;">
+          <sc-for list="{{ options }}" as="o" hint-placeholder-count="9">
+            <option value="{{ o.i }}">{{ o.name }}</option>
+          </sc-for>
+        </select>
+      </div>
+      <div style="border: 3px solid #131313; background: #fff; color: #131313; box-shadow: 8px 8px 0 #131313;">
+        <div style="display: grid; grid-template-columns: 200px 1fr 1fr; gap: 0; border-bottom: 3px solid #131313; background: #131313; color: #F2F0EA;">
+          <span style="padding: 14px 20px; font-family: 'Archivo Narrow'; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;"></span>
+          <span style="padding: 14px 20px; font-size: 17px; font-weight: 800; text-transform: uppercase; border-left: 2px solid #444;">{{ compAName }}</span>
+          <span style="padding: 14px 20px; font-size: 17px; font-weight: 800; text-transform: uppercase; border-left: 2px solid #444;">{{ compBName }}</span>
+        </div>
+        <sc-for list="{{ compareRows }}" as="r" hint-placeholder-count="5">
+          <div style="display: grid; grid-template-columns: 200px 1fr 1fr; border-top: 2px solid #E5E2DA;">
+            <span style="padding: 14px 20px; font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #666;">{{ r.label }}</span>
+            <span style="padding: 14px 20px; font-size: 14.5px; font-weight: 600; border-left: 2px solid #E5E2DA;">{{ r.a }}</span>
+            <span style="padding: 14px 20px; font-size: 14.5px; font-weight: 600; border-left: 2px solid #E5E2DA;">{{ r.b }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer style="background: #131313; color: #B8B4AA;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 34px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+      <span style="font-family: 'Archivo Narrow'; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;">Site non officiel — données publiques ANQ &amp; Données Québec · construit avec Claude</span>
+      <div style="display: flex; gap: 18px; font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+        <a href="#" style="color: #F2F0EA;">Facebook</a>
+        <a href="#" style="color: #F2F0EA;">Offre-moi un café</a>
+        <a href="#" style="color: #F2F0EA;">Code source</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { scale: 1, query: "", follows: {}, compareA: 0, compareB: 4 };
+
+  renderVals() {
+    const scale = this.state.scale;
+    const q = this.state.query.trim().toLowerCase();
+
+    const tabBase = "font-family: 'Archivo Narrow'; font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #131313; padding: 6px 12px; border: 2px solid transparent;";
+    const tabActive = "font-family: 'Archivo Narrow'; font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; background: #131313; padding: 6px 12px; border: 2px solid #131313;";
+    const tabs = [
+      { label: "Aperçu", href: "Apercu.dc.html", active: false },
+      { label: "Ministres", href: "Ministres.dc.html", active: true },
+      { label: "Projets de loi", href: "Projets de loi.dc.html", active: false },
+      { label: "Votes", href: "Votes.dc.html", active: false },
+      { label: "Lexique", href: "Lexique.dc.html", active: false },
+    ].map(t => ({ ...t, style: t.active ? tabActive : tabBase }));
+
+    const partyColors = { CAQ: "#00A5CF", PLQ: "#E23A3A", QS: "#FF7B33", PQ: "#12429B", IND: "#8B8578" };
+    const partiesData = [
+      { name: "CAQ", seats: 86 },
+      { name: "PLQ", seats: 19 },
+      { name: "QS", seats: 11 },
+      { name: "PQ", seats: 7 },
+      { name: "IND", seats: 2 },
+    ];
+    const parties = partiesData.map((p, i) => ({
+      ...p,
+      barStyle: `flex: ${p.seats}; background: ${partyColors[p.name]}; ${i > 0 ? "border-left: 3px solid #131313;" : ""}`,
+      swatch: `width: 16px; height: 16px; background: ${partyColors[p.name]}; border: 2px solid #131313; flex-shrink: 0;`,
+    }));
+
+    const partyBadge = (party) => `font-family: 'Archivo Narrow'; font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: #fff; background: ${partyColors[party] || "#8B8578"}; border: 2px solid #131313; padding: 3px 9px; white-space: nowrap; align-self: center; justify-self: start;`;
+    const followOn = "background: #131313; color: #FFD24D; border: 2px solid #131313; font-family: 'Archivo Narrow'; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 5px 10px; cursor: pointer;";
+    const followOff = "background: #fff; color: #131313; border: 2px solid #131313; font-family: 'Archivo Narrow'; font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 5px 10px; cursor: pointer;";
+
+    const ministersData = [
+      { name: "Christine Fréchette", portfolio: "Première ministre", party: "CAQ", riding: "Sanguinet", presence: "92 % (676/735)", bills: "—", email: "christine.frechette@assnat.qc.ca" },
+      { name: "Geneviève Guilbault", portfolio: "Vice-première ministre · Transports et Mobilité durable", party: "CAQ", riding: "Louis-Hébert", presence: "91 % (669/735)", bills: "—", email: "genevieve.guilbault@assnat.qc.ca" },
+      { name: "Éric Girard", portfolio: "Finances", party: "CAQ", riding: "Groulx", presence: "90 % (662/735)", bills: "—", email: "eric.girard@assnat.qc.ca" },
+      { name: "François Bonnardel", portfolio: "Immigration, Francisation et Intégration", party: "CAQ", riding: "Granby", presence: "88 % (647/735)", bills: "—", email: "francois.bonnardel@assnat.qc.ca" },
+      { name: "Bernard Drainville", portfolio: "Éducation", party: "CAQ", riding: "Lévis", presence: "85 % (625/735)", bills: "PL 3", email: "bernard.drainville@assnat.qc.ca" },
+      { name: "Christian Dubé", portfolio: "Santé", party: "CAQ", riding: "La Prairie", presence: "87 % (640/735)", bills: "PL 13", email: "christian.dube@assnat.qc.ca" },
+      { name: "Simon Jolin-Barrette", portfolio: "Justice", party: "CAQ", riding: "Borduas", presence: "94 % (691/735)", bills: "PL 22", email: "simon.jolin-barrette@assnat.qc.ca" },
+      { name: "Andrée Laforest", portfolio: "Affaires municipales", party: "CAQ", riding: "Chicoutimi", presence: "89 % (654/735)", bills: "PL 7", email: "andree.laforest@assnat.qc.ca" },
+      { name: "Kateri Champagne Jourdain", portfolio: "Emploi", party: "CAQ", riding: "Duplessis", presence: "86 % (632/735)", bills: "—", email: "kateri.champagnejourdain@assnat.qc.ca" },
+      { name: "Sonia LeBel", portfolio: "Présidente du Conseil du trésor", party: "CAQ", riding: "Champlain", presence: "90 % (661/735)", bills: "—", email: "sonia.lebel@assnat.qc.ca" },
+      { name: "Jean-François Roberge", portfolio: "Langue française", party: "CAQ", riding: "Chambly", presence: "88 % (649/735)", bills: "—", email: "jean-francois.roberge@assnat.qc.ca" },
+      { name: "Mathieu Lacombe", portfolio: "Culture et Communications", party: "CAQ", riding: "Papineau", presence: "87 % (639/735)", bills: "—", email: "mathieu.lacombe@assnat.qc.ca" },
+      { name: "Benoit Charette", portfolio: "Environnement, Lutte contre les changements climatiques", party: "CAQ", riding: "Deux-Montagnes", presence: "89 % (652/735)", bills: "—", email: "benoit.charette@assnat.qc.ca" },
+      { name: "Christopher Skeete", portfolio: "Économie, Innovation et Énergie", party: "CAQ", riding: "Sainte-Rose", presence: "85 % (628/735)", bills: "—", email: "christopher.skeete@assnat.qc.ca" },
+      { name: "Lionel Carmant", portfolio: "Services sociaux", party: "CAQ", riding: "Taillon", presence: "90 % (658/735)", bills: "—", email: "lionel.carmant@assnat.qc.ca" },
+      { name: "Suzanne Roy", portfolio: "Famille", party: "CAQ", riding: "Verchères", presence: "91 % (666/735)", bills: "—", email: "suzanne.roy@assnat.qc.ca" },
+      { name: "Martine Biron", portfolio: "Relations internationales et Francophonie", party: "CAQ", riding: "Chutes-de-la-Chaudière", presence: "84 % (618/735)", bills: "—", email: "martine.biron@assnat.qc.ca" },
+      { name: "Ian Lafrenière", portfolio: "Sécurité publique", party: "CAQ", riding: "Vachon", presence: "92 % (674/735)", bills: "—", email: "ian.lafreniere@assnat.qc.ca" },
+      { name: "Isabelle Charest", portfolio: "Sport, Loisir et Plein air", party: "CAQ", riding: "Brome-Missisquoi", presence: "88 % (645/735)", bills: "—", email: "isabelle.charest@assnat.qc.ca" },
+      { name: "Gilles Bélanger", portfolio: "Cybersécurité et Numérique", party: "CAQ", riding: "Orford", presence: "83 % (612/735)", bills: "—", email: "gilles.belanger@assnat.qc.ca" },
+      { name: "André Lamontagne", portfolio: "Agriculture, Pêcheries et Alimentation", party: "CAQ", riding: "Johnson", presence: "89 % (656/735)", bills: "—", email: "andre.lamontagne@assnat.qc.ca" },
+      { name: "Jonatan Julien", portfolio: "Infrastructures", party: "CAQ", riding: "Charlesbourg", presence: "90 % (660/735)", bills: "—", email: "jonatan.julien@assnat.qc.ca" },
+      { name: "Maïté Blanchette Vézina", portfolio: "Ressources naturelles et Forêts", party: "CAQ", riding: "Rimouski", presence: "86 % (633/735)", bills: "—", email: "maite.blanchettevezina@assnat.qc.ca" },
+      { name: "France-Élaine Duranceau", portfolio: "Habitation", party: "CAQ", riding: "Bertrand", presence: "87 % (642/735)", bills: "—", email: "france-elaine.duranceau@assnat.qc.ca" },
+      { name: "Chantal Rouleau", portfolio: "Solidarité sociale et Action communautaire", party: "CAQ", riding: "Pointe-aux-Trembles", presence: "85 % (627/735)", bills: "—", email: "chantal.rouleau@assnat.qc.ca" },
+      { name: "Sonia Bélanger", portfolio: "Aînés", party: "CAQ", riding: "Prévost", presence: "88 % (648/735)", bills: "—", email: "sonia.belanger@assnat.qc.ca" },
+      { name: "Caroline Proulx", portfolio: "Tourisme", party: "CAQ", riding: "Berthier", presence: "86 % (635/735)", bills: "—", email: "caroline.proulx@assnat.qc.ca" },
+    ];
+
+    const deputiesData = [
+      { name: "Marc Tanguay", party: "PLQ", riding: "LaFontaine", email: "marc.tanguay@assnat.qc.ca" },
+      { name: "Gabriel Nadeau-Dubois", party: "QS", riding: "Gouin", email: "gabriel.nadeau-dubois@assnat.qc.ca" },
+      { name: "Paul St-Pierre Plamondon", party: "PQ", riding: "Camille-Laurin", email: "paul.spp@assnat.qc.ca" },
+      { name: "Manon Massé", party: "QS", riding: "Sainte-Marie–Saint-Jacques", email: "manon.masse@assnat.qc.ca" },
+      { name: "Monsef Derraji", party: "PLQ", riding: "Nelligan", email: "monsef.derraji@assnat.qc.ca" },
+      { name: "Pascal Bérubé", party: "PQ", riding: "Matane-Matapédia", email: "pascal.berube@assnat.qc.ca" },
+      { name: "Ruba Ghazal", party: "QS", riding: "Mercier", email: "ruba.ghazal@assnat.qc.ca" },
+      { name: "Frédéric Beauchemin", party: "PLQ", riding: "Marguerite-Bourgeoys", email: "frederic.beauchemin@assnat.qc.ca" },
+      { name: "Joël Arseneau", party: "PQ", riding: "Îles-de-la-Madeleine", email: "joel.arseneau@assnat.qc.ca" },
+      { name: "Brigitte Garceau", party: "PLQ", riding: "Robert-Baldwin", email: "brigitte.garceau@assnat.qc.ca" },
+    ];
+
+    const match = (o) => !q || o.name.toLowerCase().includes(q) || (o.portfolio || "").toLowerCase().includes(q) || o.riding.toLowerCase().includes(q);
+
+    const mkFollow = (key) => {
+      const followed = !!this.state.follows[key];
+      return {
+        followLabel: followed ? "Suivi ✓" : "Suivre",
+        followStyle: followed ? followOn : followOff,
+        onFollow: (e) => { e.stopPropagation(); this.setState(s => ({ follows: { ...s.follows, [key]: !s.follows[key] } })); },
+      };
+    };
+
+    const ministers = ministersData.filter(match).map(m => ({ ...m, partyBadge: partyBadge(m.party), ...mkFollow("m-" + m.name) }));
+    const deputies = deputiesData.filter(match).map(d => ({ ...d, partyBadge: partyBadge(d.party), ...mkFollow("d-" + d.name) }));
+
+    const groupOrder = ["CAQ", "PLQ", "QS", "PQ", "IND"];
+    const groupNames = { CAQ: "Coalition Avenir Québec", PLQ: "Parti libéral du Québec", QS: "Québec solidaire", PQ: "Parti québécois", IND: "Indépendant·e·s" };
+    const seatTotals = { CAQ: 86, PLQ: 19, QS: 11, PQ: 7, IND: 2 };
+    const darkText = { CAQ: "#131313", PLQ: "#fff", QS: "#131313", PQ: "#fff", IND: "#fff" };
+    const deputyGroups = groupOrder
+      .map(p => ({
+        name: groupNames[p],
+        seatNote: seatTotals[p] + " sièges",
+        headerStyle: `display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 12px 22px; background: ${partyColors[p]}; color: ${darkText[p]}; border-top: 3px solid #131313;`,
+        members: deputies.filter(d => d.party === p),
+      }))
+      .filter(g => g.members.length > 0);
+
+    const options = ministersData.map((m, i) => ({ i, name: m.name }));
+    const A = ministersData[this.state.compareA] || ministersData[0];
+    const B = ministersData[this.state.compareB] || ministersData[1];
+    const compareRows = [
+      { label: "Portefeuille", a: A.portfolio, b: B.portfolio },
+      { label: "Parti", a: A.party, b: B.party },
+      { label: "Circonscription", a: A.riding, b: B.riding },
+      { label: "Présence aux votes", a: A.presence, b: B.presence },
+      { label: "PL parrainés", a: A.bills, b: B.bills },
+    ];
+
+    return {
+      rootSize: Math.round(16 * scale),
+      inc: () => this.setState(s => ({ scale: Math.min(1.3, s.scale + 0.1) })),
+      dec: () => this.setState(s => ({ scale: Math.max(0.85, s.scale - 0.1) })),
+      query: this.state.query,
+      setQuery: (e) => this.setState({ query: e.target.value }),
+      ministerCount: ministers.length + (q ? " résultat·s" : " affichés · 27 au total"),
+      deputyCount: deputies.length + (q ? " résultat·s" : " affichés · 125 au total"),
+      compareA: this.state.compareA,
+      compareB: this.state.compareB,
+      setA: (e) => this.setState({ compareA: Number(e.target.value) }),
+      setB: (e) => this.setState({ compareB: Number(e.target.value) }),
+      compAName: A.name,
+      compBName: B.name,
+      tabs, parties, ministers, deputies, deputyGroups, options, compareRows,
+    };
+  }
+}
+</script>
+</body>
+</html>

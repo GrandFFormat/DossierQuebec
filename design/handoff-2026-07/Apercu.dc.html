@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #F2F0EA; }
+  a { color: #0E4FC1; text-decoration: none; }
+  a:hover { color: #08307A; }
+  ::selection { background: #FFD24D; }
+  @keyframes dqTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes dqUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+</helmet>
+<div style="font-family: 'Archivo', system-ui, sans-serif; color: #131313; background: #F2F0EA; min-height: 100vh; font-size: {{ rootSize }}px; -webkit-font-smoothing: antialiased;">
+
+  <!-- ticker -->
+  <div style="background: #131313; color: #F2F0EA; overflow: hidden; border-bottom: 3px solid #131313;">
+    <div style="display: flex; white-space: nowrap; animation: dqTicker 26s linear infinite; width: max-content;">
+      <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 0;">● Travaux ajournés depuis le 12 juin 2026 — reprise le 15 septembre&nbsp;&nbsp;&nbsp;● 735 votes nominatifs enregistrés&nbsp;&nbsp;&nbsp;● 120 projets de loi suivis&nbsp;&nbsp;&nbsp;● 27 ministres au Conseil&nbsp;&nbsp;&nbsp;● Site citoyen indépendant · vraies données publiques&nbsp;&nbsp;&nbsp;</span>
+      <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 0;">● Travaux ajournés depuis le 12 juin 2026 — reprise le 15 septembre&nbsp;&nbsp;&nbsp;● 735 votes nominatifs enregistrés&nbsp;&nbsp;&nbsp;● 120 projets de loi suivis&nbsp;&nbsp;&nbsp;● 27 ministres au Conseil&nbsp;&nbsp;&nbsp;● Site citoyen indépendant · vraies données publiques&nbsp;&nbsp;&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- header -->
+  <header style="border-bottom: 3px solid #131313; background: #F2F0EA; position: sticky; top: 0; z-index: 50;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+      <a href="#" style="font-family: 'Archivo'; font-weight: 900; font-size: 24px; letter-spacing: -0.03em; color: #131313; text-transform: uppercase;">Dossier<span style="color: #0E4FC1;">Québec</span></a>
+      <nav style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="5">
+          <a href="{{ tab.href }}" style="{{ tab.style }}">{{ tab.label }}</a>
+        </sc-for>
+      </nav>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button onClick="{{ dec }}" style="background: #F2F0EA; border: 2px solid #131313; color: #131313; width: 30px; height: 30px; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700;">A−</button>
+        <button onClick="{{ inc }}" style="background: #F2F0EA; border: 2px solid #131313; color: #131313; width: 30px; height: 30px; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 700;">A+</button>
+        <a href="#" style="border: 2px solid #131313; padding: 5px 12px; font-size: 13px; font-weight: 700; color: #131313; text-transform: uppercase;">EN</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- hero poster -->
+  <section style="border-bottom: 3px solid #131313;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 54px 32px 46px;">
+      <h1 style="margin: 0; text-transform: uppercase; font-weight: 900; letter-spacing: -0.02em; line-height: 0.92;">
+        <span style="display: block; font-size: 92px; color: #131313;">Qui siège,</span>
+        <span style="display: block; font-size: 92px; color: transparent; -webkit-text-stroke: 3px #131313;">qui légifère,</span>
+        <span style="display: block; font-size: 92px; color: #0E4FC1;">qui vote quoi.</span>
+      </h1>
+      <div style="display: flex; align-items: stretch; gap: 16px; margin-top: 40px; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 300px; border: 3px solid #131313; background: #fff; padding: 20px 24px; box-shadow: 6px 6px 0 #131313;">
+          <p style="font-size: 17px; line-height: 1.45; margin: 0; font-weight: 500;">L'Assemblée nationale du Québec, réorganisée <strong>par personne</strong> et traduite <strong>en langage clair</strong> — sans jugement ni verdict. Site citoyen indépendant, vraies données publiques.</p>
+        </div>
+        <a href="#" style="display: flex; align-items: center; justify-content: center; background: #0E4FC1; color: #fff; border: 3px solid #131313; padding: 20px 30px; font-weight: 800; font-size: 17px; text-transform: uppercase; letter-spacing: 0.02em; box-shadow: 6px 6px 0 #131313;">Explorer →</a>
+      </div>
+    </div>
+    <!-- stat band -->
+    <div style="border-top: 3px solid #131313; background: #fff;">
+      <div style="max-width: 1180px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: repeat(3, 1fr);">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="3">
+          <div style="{{ s.cell }}">
+            <span style="font-size: 54px; font-weight: 900; letter-spacing: -0.03em; line-height: 1;">{{ s.value }}</span>
+            <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 8px;">{{ s.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- challenged (KEEP) -->
+  <section style="background: #FFD24D; border-bottom: 3px solid #131313;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 46px 32px 50px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 8px; flex-wrap: wrap;">
+        <h2 style="font-size: 46px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; margin: 0;">Projets challengés</h2>
+        <a href="#" style="border: 3px solid #131313; background: #fff; color: #131313; padding: 10px 18px; font-weight: 800; font-size: 14px; text-transform: uppercase; box-shadow: 4px 4px 0 #131313;">Voir plus →</a>
+      </div>
+      <div style="font-family: 'Archivo Narrow'; font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 28px;">✋ Demandé par les citoyen·ne·s — c'est vous qui décidez ce qu'on éclaire</div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+        <sc-for list="{{ challenged }}" as="c" hint-placeholder-count="3">
+          <div style="background: #fff; border: 3px solid #131313; padding: 22px 24px; box-shadow: 6px 6px 0 #131313; display: flex; flex-direction: column;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+              <span style="font-weight: 900; font-size: 15px; color: #0E4FC1;">{{ c.num }}</span>
+              <span style="background: #131313; color: #FFD24D; font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 700; padding: 4px 10px; text-transform: uppercase;">🔥 {{ c.demands }}</span>
+            </div>
+            <div style="font-size: 17px; font-weight: 700; line-height: 1.3; margin-bottom: 10px;">{{ c.title }}</div>
+            <div style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #555; margin-top: auto; padding-top: 12px; border-top: 2px solid #131313;">{{ c.stage }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- bills registry -->
+  <section style="border-bottom: 3px solid #131313; background: #F2F0EA;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 46px 32px 50px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 26px; flex-wrap: wrap;">
+        <h2 style="font-size: 46px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; margin: 0;">Projets de loi</h2>
+        <span style="font-family: 'Archivo Narrow'; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #555;">cliquez une ligne → résumé en clair</span>
+      </div>
+      <div style="border: 3px solid #131313; background: #fff; box-shadow: 8px 8px 0 #131313;">
+        <sc-for list="{{ bills }}" as="b" hint-placeholder-count="4">
+          <div onClick="{{ b.onToggle }}" style="border-bottom: 2px solid #131313; padding: 20px 26px; cursor: pointer; background: {{ b.rowBg }};">
+            <div style="display: flex; align-items: center; gap: 20px;">
+              <span style="font-weight: 900; font-size: 15px; color: #0E4FC1; min-width: 72px;">{{ b.num }}</span>
+              <div style="flex: 1;">
+                <div style="font-size: 17px; font-weight: 700; line-height: 1.3;">{{ b.title }}</div>
+                <div style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 600; color: #666; margin-top: 3px; text-transform: uppercase; letter-spacing: 0.04em;">{{ b.sponsor }}</div>
+              </div>
+              <span style="{{ b.badgeStyle }}">{{ b.status }}</span>
+              <span style="font-weight: 900; font-size: 20px;">{{ b.mark }}</span>
+            </div>
+            <sc-if value="{{ b.isOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="margin: 18px 0 6px 92px; animation: dqUp 0.25s ease; max-width: 760px;">
+                <div style="display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap;">
+                  <sc-for list="{{ b.steps }}" as="st" hint-placeholder-count="5">
+                    <span style="{{ st.chip }}">{{ st.name }}</span>
+                  </sc-for>
+                </div>
+                <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 15.5px; line-height: 1.5; font-weight: 500;">
+                  <sc-for list="{{ b.summary }}" as="pt" hint-placeholder-count="3">
+                    <li>{{ pt }}</li>
+                  </sc-for>
+                </ul>
+                <div style="font-family: 'Archivo Narrow'; font-size: 13px; color: #666; margin-top: 12px; text-transform: uppercase; letter-spacing: 0.04em;">Résumé du texte tel que déposé — pas la version finale amendée</div>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- quoi de neuf + petitions -->
+  <section style="border-bottom: 3px solid #131313; background: #fff;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 46px 32px 50px; display: grid; grid-template-columns: 1fr 1.4fr; gap: 44px;">
+      <div>
+        <h2 style="font-size: 34px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 24px;">Quoi de neuf</h2>
+        <sc-for list="{{ news }}" as="n" hint-placeholder-count="4">
+          <div style="border-left: 4px solid #0E4FC1; padding: 4px 0 4px 18px; margin-bottom: 20px;">
+            <div style="font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #0E4FC1; margin-bottom: 4px;">{{ n.date }}</div>
+            <div style="font-size: 15px; font-weight: 500; line-height: 1.45;">{{ n.text }}</div>
+          </div>
+        </sc-for>
+        <div style="border: 3px solid #131313; background: #131313; color: #F2F0EA; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+          <span style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;">Reprise des travaux</span>
+          <span style="font-weight: 900; font-size: 18px;">15 SEPT. 2026</span>
+        </div>
+      </div>
+      <div>
+        <h2 style="font-size: 34px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; margin: 0 0 24px;">Pétitions ouvertes</h2>
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <sc-for list="{{ petitions }}" as="p" hint-placeholder-count="4">
+            <div style="border: 3px solid #131313; padding: 16px 20px; background: #F2F0EA;">
+              <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 10px;">
+                <div style="font-size: 15px; font-weight: 700; line-height: 1.35; flex: 1;">{{ p.title }}</div>
+                <span style="font-weight: 900; font-size: 20px; color: #0E4FC1; white-space: nowrap;">{{ p.signatures }}</span>
+              </div>
+              <div style="height: 12px; border: 2px solid #131313; background: #fff;">
+                <div style="height: 100%; background: #0E4FC1; width: {{ p.pct }};"></div>
+              </div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 8px;">
+                <a href="#" style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">Voir et signer →</a>
+                <span style="font-family: 'Archivo Narrow'; font-size: 12.5px; font-weight: 600; color: #666; text-transform: uppercase;">échéance {{ p.deadline }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- mission -->
+  <section style="background: #0E4FC1; color: #fff; border-bottom: 3px solid #131313;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 50px 32px 54px;">
+      <div style="font-family: 'Archivo Narrow'; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #A9C6FF; margin-bottom: 18px;">Notre mission</div>
+      <p style="font-size: 34px; line-height: 1.25; font-weight: 800; letter-spacing: -0.015em; margin: 0 0 34px; max-width: 860px; text-transform: uppercase;">Le site officiel de l'Assemblée est la source la plus fiable qui existe. Celui-ci la rend juste <span style="background: #FFD24D; color: #131313; padding: 0 8px;">plus facile à suivre.</span></p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 860px;">
+        <div style="border: 3px solid #fff; padding: 20px 24px;">
+          <div style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #A9C6FF; margin-bottom: 12px;">assnat.qc.ca fait</div>
+          <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 500; line-height: 1.4;">
+            <li>— Organise tout par document officiel</li>
+            <li>— La source légale et complète de tout</li>
+            <li>— Neutre : ne compare ni ne résume jamais</li>
+          </ul>
+        </div>
+        <div style="border: 3px solid #FFD24D; background: rgba(255,210,77,0.08); padding: 20px 24px;">
+          <div style="font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #FFD24D; margin-bottom: 12px;">ce site essaie de faire</div>
+          <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 15px; font-weight: 600; line-height: 1.4;">
+            <li>— Une fiche par personne, tous ses dossiers</li>
+            <li>— Le jargon traduit en langage clair</li>
+            <li>— Vous suivez ce qui vous touche</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer style="background: #131313; color: #B8B4AA;">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 34px 32px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+      <span style="font-family: 'Archivo Narrow'; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;">Site non officiel — données publiques ANQ &amp; Données Québec · construit avec Claude</span>
+      <div style="display: flex; gap: 18px; font-family: 'Archivo Narrow'; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+        <a href="#" style="color: #F2F0EA;">Facebook</a>
+        <a href="#" style="color: #F2F0EA;">Offre-moi un café</a>
+        <a href="#" style="color: #F2F0EA;">Code source</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { scale: 1, openBill: 0 };
+
+  renderVals() {
+    const scale = this.state.scale;
+    const tabBase = "font-family: 'Archivo Narrow'; font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #131313; padding: 6px 12px; border: 2px solid transparent;";
+    const tabActive = "font-family: 'Archivo Narrow'; font-size: 13.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; background: #131313; padding: 6px 12px; border: 2px solid #131313;";
+    const tabs = [
+      { label: "Aperçu", href: "Apercu.dc.html", active: true },
+      { label: "Ministres", href: "Ministres.dc.html", active: false },
+      { label: "Projets de loi", href: "Projets de loi.dc.html", active: false },
+      { label: "Votes", href: "Votes.dc.html", active: false },
+      { label: "Lexique", href: "Lexique.dc.html", active: false },
+    ].map(t => ({ ...t, style: t.active ? tabActive : tabBase }));
+
+    const statCell = (extra) => `display: flex; flex-direction: column; padding: 26px 28px; ${extra}`;
+    const stats = [
+      { value: "27", label: "ministres au Conseil", cell: statCell("border-right: 3px solid #131313;") },
+      { value: "120", label: "projets de loi suivis", cell: statCell("border-right: 3px solid #131313;") },
+      { value: "735", label: "votes nominatifs", cell: statCell("") },
+    ];
+
+    const challenged = [
+      { num: "PL Nº 7", title: "Loi sur l'aménagement du territoire et l'urbanisme", demands: "38", stage: "Étude détaillée en commission" },
+      { num: "PL Nº 13", title: "Loi encadrant l'accès aux soins et l'organisation des services", demands: "31", stage: "Principe adopté" },
+      { num: "PL Nº 1", title: "Loi sur la réforme du mode de scrutin", demands: "26", stage: "Présentation" },
+    ];
+
+    const stepNames = ["Présentation", "Principe", "Étude", "Adoption", "Sanction"];
+    const mkSteps = (reached) => {
+      const on = "font-family: 'Archivo Narrow'; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; background: #0E4FC1; color: #fff; border: 2px solid #131313; padding: 4px 10px;";
+      const now = "font-family: 'Archivo Narrow'; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; background: #FFD24D; color: #131313; border: 2px solid #131313; padding: 4px 10px;";
+      const off = "font-family: 'Archivo Narrow'; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; background: #fff; color: #999; border: 2px solid #CCC; padding: 4px 10px;";
+      return stepNames.map((name, i) => ({
+        name,
+        chip: i < reached ? on : (i === reached ? now : off),
+      }));
+    };
+
+    const badge = (bg, fg) => `font-family: 'Archivo Narrow'; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: ${fg}; background: ${bg}; border: 2px solid #131313; padding: 4px 11px; white-space: nowrap;`;
+
+    const billsData = [
+      { num: "PL Nº 13", title: "Loi encadrant l'accès aux soins et l'organisation des services de santé", sponsor: "Ministre de la Santé", status: "Principe", reached: 1, badge: badge("#D6E4FF", "#0E4FC1"),
+        summary: ["Crée une agence centrale chargée de coordonner les établissements de santé du réseau.", "Fixe des cibles d'accès à un médecin de famille dans un délai déterminé.", "Modifie les règles d'affectation du personnel entre établissements d'une même région."] },
+      { num: "PL Nº 7", title: "Loi sur l'aménagement du territoire et l'urbanisme", sponsor: "Ministre des Affaires municipales", status: "Étude", reached: 2, badge: badge("#FFD24D", "#131313"),
+        summary: ["Oblige les municipalités à adopter un plan d'urbanisme conforme aux orientations gouvernementales.", "Encadre l'étalement urbain en zone agricole avec de nouvelles obligations de densité.", "Prévoit des sanctions pour les projets non conformes aux schémas d'aménagement."] },
+      { num: "PL Nº 22", title: "Loi visant à renforcer la protection des renseignements personnels", sponsor: "Ministre de la Cybersécurité", status: "Adoption", reached: 3, badge: badge("#BFE8CD", "#14532D"),
+        summary: ["Impose une notification obligatoire en cas de fuite de données touchant des citoyen·ne·s.", "Augmente les amendes maximales pour les organismes fautifs.", "Crée un droit de portabilité des données pour les particuliers."] },
+      { num: "PL Nº 3", title: "Loi modifiant diverses dispositions en matière d'éducation", sponsor: "Ministre de l'Éducation", status: "Sanctionnée", reached: 5, badge: badge("#E5E2DA", "#131313"),
+        summary: ["Révise le financement des services aux élèves à besoins particuliers.", "Encadre l'usage des appareils numériques en classe.", "Ajuste le calendrier scolaire et les journées pédagogiques."] },
+    ];
+    const bills = billsData.map((b, i) => ({
+      ...b,
+      steps: mkSteps(b.reached),
+      badgeStyle: b.badge,
+      isOpen: this.state.openBill === i,
+      mark: this.state.openBill === i ? "−" : "+",
+      rowBg: this.state.openBill === i ? "#FDFCF9" : "#fff",
+      onToggle: () => this.setState(s => ({ openBill: s.openBill === i ? -1 : i })),
+    }));
+
+    const news = [
+      { date: "12 juin 2026", text: "Ajournement des travaux de la session du printemps — reprise à l'automne." },
+      { date: "10 juin 2026", text: "Adoption finale du PL nº 3 en matière d'éducation." },
+      { date: "6 juin 2026", text: "Vote nominal sur le principe du PL nº 13 (Santé)." },
+      { date: "3 juin 2026", text: "Dépôt du PL nº 22 sur les renseignements personnels." },
+    ];
+
+    const petitions = [
+      { title: "Pour un meilleur accès aux services de santé mentale dans les régions", signatures: "8 412", deadline: "20 août", pct: "68%" },
+      { title: "Contre la hausse des tarifs de transport en commun", signatures: "5 190", deadline: "2 sept.", pct: "42%" },
+      { title: "Pour la protection des milieux humides en zone périurbaine", signatures: "12 875", deadline: "14 août", pct: "84%" },
+      { title: "Pour la gratuité des manuels scolaires au primaire", signatures: "3 604", deadline: "9 sept.", pct: "29%" },
+    ];
+
+    return {
+      rootSize: Math.round(16 * scale),
+      inc: () => this.setState(s => ({ scale: Math.min(1.3, s.scale + 0.1) })),
+      dec: () => this.setState(s => ({ scale: Math.max(0.85, s.scale - 0.1) })),
+      tabs, stats, challenged, bills, news, petitions,
+    };
+  }
+}
+</script>
+</body>
+</html>
