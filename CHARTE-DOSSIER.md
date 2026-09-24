@@ -49,7 +49,8 @@ Toute la couleur passe par **trois blocs de jetons**, et un autre site ne touche
 - le bloc sombre `html[data-theme="dark"]` (`commun/dq.css:95-118`) ;
 - les redéfinitions des bandes en thème sombre (`commun/dq.css:129-142`), qui répètent des
   valeurs claires **en dur** : la bande jaune y rétablit toute la palette claire (l. 131-134),
-  la bande bleue y force une encre claire sur ses six jetons de texte (l. 140-141).
+  la bande bleue y force des valeurs claires sur six jetons — encre, encre secondaire, carte,
+  trait, ardoise et accent (l. 140-141).
 
 | Jeton | Chez DQ | Rôle |
 |---|---|---|
@@ -93,13 +94,14 @@ se négocient pas, même avec d'autres couleurs) :
   marque de famille ; sa couleur est votre `--yellow`.
 
 **Ce qui reste en dur dans la couche design** : 38 codes hexadécimaux après la ligne 705 — le
-`#131313` des jetons d'ombre et de quelques surfaces qui doivent rester noires, les verts, rouges
-et gris des pastilles d'état (`#14532D`, `#2E9958`, `#D9442F`, `#8B8578`…), deux `#FFD24D`, le gris
-`#B8B4AA` du pied de page. Un site qui change **plus que l'accent** (le jaune, les verts, les
-rouges) les passe en revue une fois :
+`#131313` (douze fois) des pastilles de présence (l. 1888-1890) et des encarts de l'accueil
+`.promo-villes` / `.promo-compte` (l. 1920-1930), des surfaces qui doivent rester noires sur jaune
+ou sur blanc ; les verts, rouges et gris des pastilles d'état (`#14532D`, `#2E9958`, `#D9442F`,
+`#8B8578`…) ; deux `#FFD24D` ; le gris `#B8B4AA` du pied de page. Un site qui change **plus que
+l'accent** (le jaune, les verts, les rouges) les passe en revue une fois :
 
 ```bash
-awk 'NR>705' commun/dq.css | grep -n "#[0-9A-Fa-f]\{3,6\}\b"
+awk 'NR>705' commun/dq.css | grep -on "#[0-9A-Fa-f]\{3,6\}\b"   # 38 occurrences sur 23 lignes
 ```
 
 ---
@@ -133,14 +135,15 @@ lignes 59-60) :
 - **Tout est carré** : `*{border-radius:0 !important;}` (`commun/dq.css:705`). Trois exceptions
   assumées chez DQ, à copier telles quelles et pas une de plus : la pastille « Villes »
   `.city-flip` (l. 756), l'icône lune / soleil du bouton de thème (`.theme-toggle::before/::after`,
-  l. 818-822 — la règle `*` ne touche pas les pseudo-éléments) et le portrait rond de la page
+  l. 818-826 — la règle `*` ne touche pas les pseudo-éléments) et le portrait rond de la page
   Mises à jour (l. 1763).
 - **Bordures** : `3px solid var(--ink)` pour les conteneurs (cartes, bandes, boutons principaux,
   champ de recherche), `2px` pour les éléments internes (pastilles, sous-blocs, en-têtes de
   tableau), `1px` pour les filets et les contrôles de l'en-tête. Trois épaisseurs avec leur rôle —
   pas du 3 px partout, c'est la hiérarchie qui fait respirer la page. Deux écarts restent dans la
   feuille et ne font pas modèle : la barre de 4 px des actualités (l. 1080) et les cadres de
-  1,5 px de la page Mises à jour (l. 1634, 1757, 1768, 1807).
+  1,5 px de la page Mises à jour (l. 1757, 1768, 1807) et du bouton de filtres mobile
+  `.filter-hamburger` (l. 1634).
 - **Ombres dures** : `var(--shadow)` sur les cartes principales, `--shadow-lg` sur les gros blocs,
   `--shadow-sm` sur les petits boutons et les cartes secondaires. Décalage égal en x et en y,
   **sans flou**. Deux ombres floues survivent (le menu Villes, l. 774 ; l'en-tête compacte au
@@ -180,11 +183,11 @@ JavaScript).
 |---|---|---|
 | Bandeau défilant `.ticker` en haut de chaque page (26 s, pause au survol, rempli par `renderTicker`, `dq.js:3764`) | 708 | 78 |
 | En-tête collant `#dq-topbar`, fermé par un trait de 3 px | 259, 721 | 85 |
-| Marque `.brand` : `.brand-title` en Archivo, casse normale, deuxième moitié du nom dans l'accent (`.brand-blue`) — pas de logo-image | 723 | 87-97 |
+| Marque `.brand` : `.brand-title` en Archivo 900, capitales, `letter-spacing:-0.03em`, deuxième moitié du nom dans l'accent (`.brand-blue`, l. 727) — pas de logo-image | 723-727 | 87-97 |
 | Feuille d'érable `.maple-flip` vers le site fédéral (bascule jaune ↔ rouge toutes les 20 s) | 729 | 101 |
-| Onglets `nav.tabs` : pilules carrées, **actif = fond d'encre**, survol jaune, sans numérotation | 843-850 | 130 |
+| Onglets `nav.tabs` : pilules carrées, **actif = fond d'encre**, survol jaune, sans numérotation | 842-853 | 130 |
 | Contrôles A− / A+ (`.font-size-ctrl`) : `zoom` de 80 à 150 % par pas de 10 sur `<body>` (`dq.js:1819`) | 789, 1687 | 142 |
-| Bouton de thème `.theme-toggle` (icône dessinée en CSS) et bouton de langue `.lang-toggle`, tous à la hauteur `--h-ctrl` (36 px) | 810, 1718 | 149-150 |
+| Bouton de thème `.theme-toggle` (icône dessinée en CSS) et bouton de langue `.lang-toggle`, tous à la hauteur `--h-ctrl` (36 px, posée par `.header-ctrls > *`) | 810, 796 ; 1712-1718 | 149-150 |
 | Affiche `.hero-poster` : `.hero-sujet` + H1 trois lignes + manifeste encadré `.hero-manifesto` + bouton `.hero-cta` | 897-918 | 222-236 |
 | Bande de chiffres `.stat-band` : **un seul bloc** à trois cellules séparées par des traits, chiffre 54 px / 900 | 920 | 238 |
 | Bandes de couleur `.band-yellow` / `.band-blue`, toujours sur `.bleed` | 930, 980 | 209, 248 |
@@ -192,7 +195,7 @@ JavaScript).
 | Cartes secondaires — même cadre, `--shadow-sm` : `.role-card` 1607, `.md-carte` 1839, `.legende-presence` 1866 | | |
 | Pastilles d'état `.status-pill` : Archivo Narrow 700, capitales, 2 px | 1282 | — |
 | Recherche `.brutal-search` : 3 px, ombre, loupe sur fond jaune séparée par un trait | 1398 | 389 |
-| Filtres `.qf-btn` : 3 px, **actif = jaune sur noir** (`--yellow` sur `--ink-bg`), survol jaune | 1142-1148 | — |
+| Filtres `.qf-btn` : 3 px, **actif = jaune sur noir** (`--yellow` sur `--ink-bg`), survol jaune | 1142-1149 | — |
 | Bouton « remonter » `.dq-remonter` : carré jaune, 3 px, `--shadow-sm` | 879 | 1014 |
 | Pied de page en `--ink` pleine largeur, Archivo Narrow en capitales, avec le plan du site `.footer-nav` | 862, 870, 1940 | 984-985 |
 | Favicon `commun/dq.svg` : tuile, lettres dessinées, bandeau jaune | — | 33-34 |
@@ -232,7 +235,7 @@ Dans l'ordre. C'est court parce qu'on copie.
    bouton « remonter ». Puis remplacer le **contenu** des vues — pas leur structure.
 5. **Extraire de `commun/dq.js`** ce qui porte le design, en le rebranchant sur vos données : la
    langue (`translations`, l. 86, et sa mécanique), `window.storage` (l. 607, dont dépendent le
-   zoom et le thème), `majMetriquesMiseEnPage` + zoom + thème (l. 1785-1860), `renderTicker`
+   zoom et le thème), `majMetriquesMiseEnPage` + zoom + thème (l. 1785-1857), `renderTicker`
    (l. 3764). Le reste (données, abonnés) selon le site.
 6. **Copier les garde-fous du build** : `verifierCss` et `verifierJs` (l. 480-514) en changeant
    `SRC`, `CSS_PATH` et `JS_PATH` ; `verifierReferencement` (l. 557-601) en changeant aussi `BASE`
