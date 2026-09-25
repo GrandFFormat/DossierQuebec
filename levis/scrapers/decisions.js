@@ -237,7 +237,7 @@ async function main() {
     const payload = {
       generatedAt: new Date().toISOString(),
       source: PAGE_ARCHIVES,
-      licence: 'Documents publics de la Ville de Lévis — reproduits avec mention de la source et lien vers le document officiel, sans usage commercial (voir README).',
+      licence: 'Documents publics de la Ville de Lévis — reproduits avec mention de la source et lien vers le document officiel, lecture gratuite (voir README).',
       parametres: { annee: year, instances: Object.keys(INSTANCES) },
       partiel,
       totalDisponible: liste.length,

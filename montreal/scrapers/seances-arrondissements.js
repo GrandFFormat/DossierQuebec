@@ -306,7 +306,7 @@ async function ecrire(annee, seances, precedent, bilan, compteur, definitif) {
   const payload = {
     generatedAt: new Date().toISOString(),
     source: DOCUMENTS,
-    licence: 'Documents publics de la Ville de Montréal — reproduction avec mention de la source, usage non commercial (voir README).',
+    licence: 'Documents publics de la Ville de Montréal — reproduction avec mention de la source, lecture gratuite (voir README).',
     methode:
       "Sondage des noms de fichiers publiés : l'existence du document prouve la séance. Les séances extraordinaires, dont l'heure est imprévisible, ne sont pas couvertes. Le Plateau-Mont-Royal, qui publie par sa page et non sous Adi_Public, est lu depuis cette page : la date vient du document lui-même (voir lib/plateau.js).",
     annee,
