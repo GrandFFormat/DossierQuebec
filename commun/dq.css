@@ -1982,7 +1982,8 @@
   /* Omnibus : une tête par loi touchée, comme les annexes de DossierOntario. */
   .volet-titre{margin:16px 0 4px; font-size:15px; line-height:1.35; font-weight:700;}
   .volet-titre span{display:inline-block; font-family:'Archivo Narrow',sans-serif; text-transform:uppercase; letter-spacing:.04em; font-size:11px; background:var(--gold); color:#fff; padding:2px 6px; margin-right:6px; vertical-align:2px;}
-  .bill-lois{cursor:pointer; margin-top:12px; border-top:1px solid var(--line-soft); padding-top:8px;}
+  .bill-lois{cursor:pointer; margin-top:12px; border:1px solid var(--line-soft); padding:12px 14px; background:var(--paper-2);}
+  .bill-lois:hover{border-color:var(--ink);}
   /* Un + à gauche pour déplier la liste, un − une fois ouverte (25 sept. 2026). */
   .bill-lois summary{list-style:none;}
   .bill-lois summary::-webkit-details-marker{display:none;}
