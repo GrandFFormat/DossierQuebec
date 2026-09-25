@@ -3,7 +3,7 @@
 > node scripts/refresh.js
 
 Résumés : sautés : étape payante, à demander explicitement (--avec-resumes, ou LAV_RESUMES=oui dans le workflow).
-Code : commit dda232c — Node v22.23.2
+Code : commit eced2e7 — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -41,10 +41,10 @@ Pastilles thématiques :
       0  (classées par défaut — aucune règle n'a tranché)
 (0 s)
 
-=== Votes nominaux (depuis 2026-07-26) ===
+=== Votes nominaux (depuis 2026-07-27) ===
 CM-20260901-ORD-18h30 : 12 vote(s) nominal(aux)
 CM-20260811-ORD-18h30 : 5 vote(s) nominal(aux)
-Fenêtre depuis 2026-07-26 : 16 séance(s) relue(s), 29 vote(s) conservé(s) du fichier précédent.
+Fenêtre depuis 2026-07-27 : 16 séance(s) relue(s), 29 vote(s) conservé(s) du fichier précédent.
 
 46 votes nominaux écrits dans data/votes.json (16 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
@@ -106,7 +106,7 @@ Mesure de 49 termes sur 87 procès-verbaux de 2026 (12 conseil municipal, 75 com
 49 entrées écrites dans data/lexique.json
 
 10 terme(s) sans exemple (la formulation est dans le corps des résolutions, pas dans leur objet) : Résolution · Sommaire décisionnel · Certificat de trésorerie · Séance publique et séance à huis clos · Maire et président du comité exécutif · « IL EST PROPOSÉ PAR … APPUYÉ PAR … » · Résolu à l'unanimité · Demander le vote · Dissidence · Période de questions du public
-(2 s)
+(1 s)
 
 === Sommaires décisionnels (120 par jour au plus) ===
 511 sommaire(s) publié(s) cité(s) par les décisions de 2026 ; 1027 cité(s) mais non publié(s).
