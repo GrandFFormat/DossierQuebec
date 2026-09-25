@@ -347,7 +347,7 @@ async function main() {
     const payload = {
       generatedAt: new Date().toISOString(),
       source: 'https://ville.montreal.qc.ca/documents/Adi_Public/',
-      licence: 'Documents publics de la Ville de Montréal — reproduction avec mention de la source, usage non commercial (voir README).',
+      licence: 'Documents publics de la Ville de Montréal — reproduction avec mention de la source, lecture gratuite (voir README).',
       parametres: { annee: year, instances: Object.keys(INSTANCES) },
       partiel,
       totalDisponible: liste.length,
