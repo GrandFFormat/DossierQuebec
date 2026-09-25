@@ -2870,6 +2870,10 @@ function renderVotesQuickFilters(correspondRecherche){
 
 // Filtre rapide des projets (maquette) : Tous / En cours / Adoptés / 🔥 Challengés
 let billsQuickFilter = 'tous';
+// Challengés et Omnibus se cumulent avec le statut (Tous / Non adoptés / Adoptés) et entre eux
+// (Martin, 25 sept. 2026) : « Adoptés » + « Omnibus » = les omnibus adoptés.
+const BILLS_EXTRAS = ['challenges', 'omnibus'];
+const billsExtras = new Set();
 // On n'affiche pas les 143 projets d'un coup : 10, puis « + 10 » à la demande.
 // ⚠️ Toute action qui change la LISTE (filtre, recherche, tri) doit remettre ce
 // compteur à BILLS_STEP — sinon on garde une fenêtre ouverte sur une liste qui
@@ -2878,7 +2882,8 @@ const BILLS_STEP = 10;
 let billsShown = BILLS_STEP;
 function loadMoreBills(){ billsShown += BILLS_STEP; renderBills(); }
 function setBillsQuickFilter(k){
-  billsQuickFilter = k;
+  if(BILLS_EXTRAS.includes(k)){ billsExtras.has(k) ? billsExtras.delete(k) : billsExtras.add(k); }
+  else billsQuickFilter = k;
   billsShown = BILLS_STEP;
   renderBills();
 }
@@ -2896,7 +2901,7 @@ function renderBillsQuickFilters(){
     ['omnibus', 'Omnibus'],
   ];
   el.innerHTML = defs.map(([k, label]) =>
-    `<button class="qf-btn ${billsQuickFilter===k?'active':''}" onclick="setBillsQuickFilter('${k}')">${label}</button>`
+    `<button class="qf-btn ${(billsQuickFilter===k || billsExtras.has(k))?'active':''}"${BILLS_EXTRAS.includes(k) ? ` aria-pressed="${billsExtras.has(k)}"` : ''} onclick="setBillsQuickFilter('${k}')">${label}</button>`
   ).join('');
 }
 
@@ -2917,11 +2922,11 @@ function renderBills(keyword){
   // « pl 30 », « pl 31 »… contiennent « pl 3 » comme sous-chaîne.
   const numCherche = (kw.match(/^(?:pl|projet de loi)?\s*(?:n[°ºo]?\s*)?(\d+)$/) || [])[1] ?? null;
   const list = bills.filter(b => {
-    const quickOk = billsQuickFilter === 'tous'
+    const quickOk = (billsQuickFilter === 'tous'
       || (billsQuickFilter === 'encours' && (ASSEMBLY.dissolved ? b.status !== 'sanctionne' : b.status === 'encours'))
-      || (billsQuickFilter === 'adoptes' && b.status === 'sanctionne')
-      || (billsQuickFilter === 'challenges' && ch.some(c => Number(c.bill_id) === b.id))
-      || (billsQuickFilter === 'omnibus' && b.omnibus);
+      || (billsQuickFilter === 'adoptes' && b.status === 'sanctionne'))
+      && (!billsExtras.has('challenges') || ch.some(c => Number(c.bill_id) === b.id))
+      && (!billsExtras.has('omnibus') || b.omnibus);
     const summaryText = ((_resumesFr && _resumesFr[b.id]) || '').replace(/<[^>]+>/g, ' ');
     // On cherche dans : le titre, le résumé en clair, la ligne de statut, le nom
     // du parrain, le numéro sous toutes ses écritures, et le PARTI du parrain
@@ -2991,7 +2996,12 @@ function renderBills(keyword){
   };
   const titleEl = document.getElementById('billsResultTitle');
   const noteEl = document.getElementById('billsResultNote');
-  if(titleEl) titleEl.textContent = titles[billsQuickFilter];
+  // Le statut, puis les filtres cumulés : « Adoptés · Omnibus ». Seul un filtre cumulé sur « Tous »
+  // garde son titre complet.
+  const extras = BILLS_EXTRAS.filter(k => billsExtras.has(k));
+  const titre = extras.length === 1 && billsQuickFilter === 'tous' ? titles[extras[0]]
+    : [billsQuickFilter === 'tous' && extras.length ? null : titles[billsQuickFilter], ...extras.map(k => k === 'omnibus' ? 'Omnibus' : (isEn ? 'Challenged' : 'Challengés'))].filter(Boolean).join(' · ');
+  if(titleEl) titleEl.textContent = titre;
   // La note dit ce qui est À L'ÉCRAN sur le total filtré — sinon annoncer « 143 »
   // au-dessus de 10 cartes laisse croire à un bogue d'affichage.
   if(noteEl){
@@ -3165,6 +3175,7 @@ function openBillFromQuery(){
   if(viewFromPath() !== 'projets'){ goToTab('projets', { fromHistory: true, noScroll: true }); }
   // Le projet doit passer le filtre courant : on force « tous » + recherche vide.
   billsQuickFilter = 'tous';
+  billsExtras.clear();
   // ⚠️ ET il doit être DANS LA FENÊTRE affichée. Depuis que la liste se limite à
   // 10 projets, un lien partagé vers un projet plus bas ne trouvait plus sa carte
   // dans le DOM : le lien semblait simplement ne rien faire. On ouvre donc assez
