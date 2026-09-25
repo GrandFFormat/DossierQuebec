@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-24T13:39:37.251Z",
+ "generatedAt": "2026-09-25T13:59:57.604Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,274 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-07-26",
+  "depuis": "2026-07-27",
   "plafond": 120
  },
- "nombre": 1549,
- "genereCetteFois": 5,
+ "nombre": 1559,
+ "genereCetteFois": 10,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.1795,
-  "jetonsEntree": 25232,
-  "jetonsSortie": 2134
+  "montant": 0.3885,
+  "jetonsEntree": 54574,
+  "jetonsSortie": 4625
  },
  "resumes": [
+  {
+   "id": "DE2026-326.pdf",
+   "numero": "DE2026-326",
+   "date": "2026-09-23",
+   "unite": "Développement économique et grands projets",
+   "objet": "Édiction d'une ordonnance indiquant les dates de début et de fin des travaux ainsi que le territoire d'application du boul. René-Lévesque (Turnbull - Amérique-Française) 2026, dans le cadre du Règlement de l'agglomération sur le programme de soutien financier aux entreprises situées dans un secteur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-326.pdf",
+   "puces": [
+    "La Ville délimite officiellement le secteur du boulevard René-Lévesque, entre l'avenue Turnbull et la rue d'Amérique-Française, comme zone de travaux majeurs pour 2026.",
+    "Les entreprises de ce secteur pourront demander l'aide financière prévue au programme de soutien lié aux travaux du projet TramCité.",
+    "Les travaux s'étendent approximativement du 1er septembre au 31 décembre 2026, soit plus de trois mois.",
+    "L'exercice financier 2026 est celui qui donne droit à l'aide pour les entreprises et établissements du secteur désigné.",
+    "Un plan joint à l'ordonnance fixe les limites du secteur désigné et du secteur d'influence.",
+    "Le sommaire n'indique aucun montant d'aide ni impact financier chiffré."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T13:59:40.687Z",
+   "jetons": {
+    "entree": 6715,
+    "sortie": 375
+   }
+  },
+  {
+   "id": "AP2026-327.pdf",
+   "numero": "AP2026-327",
+   "date": "2026-09-23",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat à commande pour des travaux d'entretien et de remise à neuf des pelles et des grappins de ponts roulants pour le Complexe de valorisation énergétique (Appel d'offres public 96222)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-327.pdf",
+   "puces": [
+    "La Ville confie à Industries Dodec inc., de Chicoutimi, l'entretien et la remise à neuf des pelles et des grappins des ponts roulants du Complexe de valorisation énergétique.",
+    "Le contrat court de la date d'adjudication jusqu'au 30 septembre 2027, avec deux options de renouvellement de 12 mois chacune.",
+    "Le paiement autorisé atteint 458 547,69 $ (avant taxes) pour la période initiale, et jusqu'à 1 181 108,99 $ si les renouvellements sont exercés.",
+    "Les travaux incluent le transport des équipements vers l'atelier du fournisseur, le remplacement des pièces d'usure, les réparations, la révision des systèmes hydrauliques, la peinture et des essais de charge.",
+    "Trois entreprises ont soumissionné : Motion Industries a été jugée non conforme, Industries Dodec a présenté le plus bas prix conforme et Construction Deric a soumis 586 300 $.",
+    "Le prix retenu dépasse de 17,6 % l'estimation du service demandeur, qui était de 390 000 $ avant taxes.",
+    "Les sommes prévues pour 2027 à 2029 dépendent de l'adoption des budgets par les autorités compétentes."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "458 547,69 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T13:59:42.068Z",
+   "jetons": {
+    "entree": 4245,
+    "sortie": 534
+   }
+  },
+  {
+   "id": "AP2026-338.pdf",
+   "numero": "AP2026-338",
+   "date": "2026-09-23",
+   "unite": "Approvisionnements",
+   "objet": "Dépôt de la liste hebdomadaire des autorisations de dépenser par avis de modification de plus de 250 000 $ accordées par un titulaire d'une délégation de dépenser pour la semaine du 30 août 2026",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-338.pdf",
+   "puces": [
+    "Le comité exécutif prend acte de la liste hebdomadaire des dépenses supplémentaires de plus de 250 000 $ autorisées par des employés ayant une délégation de pouvoir, pour la semaine du 30 août 2026.",
+    "Une seule modification de contrat figure sur la liste, pour les travaux d'enduits à la Maison Pierre-Rainville.",
+    "Cette modification ajoute 221 785,97 $ (avant taxes) : le contrat passe de 149 500 $ à 371 285,97 $.",
+    "Justification donnée : il a fallu démonter et remonter une plus grande partie du mur, dont le noyau était en mauvais état.",
+    "La dépense relève du Service de la gestion des immeubles."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "221 785,97$",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T13:59:40.884Z",
+   "jetons": {
+    "entree": 3233,
+    "sortie": 345
+   }
+  },
+  {
+   "id": "AP2026-314.pdf",
+   "numero": "AP2026-314",
+   "date": "2026-09-23",
+   "unite": "Approvisionnements",
+   "objet": "Approbation de contrats à commande - Service de remorquage de véhicules lors des opérations de déneigement de nuit et du nettoyage printanier - Lots 1 et 2 (Appel d'offres public 96307)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-314.pdf",
+   "puces": [
+    "La Ville retient une liste de remorqueurs pour tirer les véhicules stationnés illégalement pendant le déneigement de nuit (hiver 2026-2027) dans les six arrondissements.",
+    "Une deuxième liste couvre le remorquage lors du nettoyage printanier 2027 dans les arrondissements des Rivières, de Sainte-Foy–Sillery–Cap-Rouge, de Charlesbourg, de Beauport et de La Haute-Saint-Charles.",
+    "La dépense nette est estimée à 1 803 165,91 $, sous réserve de l'adoption du budget 2027.",
+    "La Ville fera appel aux entreprises selon l'ordre croissant des tarifs horaires soumis, au fur et à mesure des besoins.",
+    "Pour le déneigement de nuit, les tarifs horaires conformes vont de 144,49 $ (Services H24) à 235,00 $ l'heure, avant taxes.",
+    "Pour le nettoyage printanier, les tarifs conformes vont de 73,97 $ (Services Routiers PPP inc.) à 250,00 $ l'heure, avant taxes.",
+    "Une soumission (Transport remorquage TRJ inc.) a été écartée des deux lots parce que l'entreprise a déposé deux versions de son offre."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 803 165,91 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T13:59:43.298Z",
+   "jetons": {
+    "entree": 5922,
+    "sortie": 542
+   }
+  },
+  {
+   "id": "AP2026-325.pdf",
+   "numero": "AP2026-325",
+   "date": "2026-09-23",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat pour des travaux de réfection de la toiture du Palais Montcalm (Appel d'offres public 96247)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-325.pdf",
+   "puces": [
+    "La Ville confie à Toitures Jules Chabot inc., de Saint-Jacques-de-Leeds, la réfection de la toiture du Palais Montcalm, dans l'arrondissement de La Cité-Limoilou.",
+    "Le contrat vaut 387 000 $ (plus TPS et TVQ), une dépense nette de 387 000 $ puisque les taxes sont récupérables à 100 %.",
+    "Le contrat couvre les matériaux, la main-d'œuvre, l'outillage, l'équipement et les éléments de protection nécessaires aux travaux.",
+    "Trois entreprises ont soumissionné. Une soumission de 378 300 $ a été jugée non conforme, faute de licence de la Régie du bâtiment du Québec; la troisième offre s'élevait à 490 200 $.",
+    "Le prix retenu est inférieur de 3,5 % à l'estimation du service demandeur, fixée à 401 200 $.",
+    "L'argent vient de deux règlements d'emprunt d'agglomération : 260 000 $ du R.A.V.Q. 1438 et 127 000 $ du R.A.V.Q. 1620.",
+    "Le comité exécutif devait trancher le 16 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "387 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T13:59:49.890Z",
+   "jetons": {
+    "entree": 3521,
+    "sortie": 513
+   }
+  },
+  {
+   "id": "CU2026-076.pdf",
+   "numero": "CU2026-076",
+   "date": "2026-09-23",
+   "unite": "Culture et patrimoine",
+   "objet": "Entente de fourniture de services entre la Ville de Québec et Culture Capitale-Nationale et Chaudière- Appalaches relative à la gestion du projet « Campagne promotionnelle - On sort ensemble? »",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-076.pdf",
+   "puces": [
+    "La Ville confie à l'organisme Culture Capitale-Nationale et Chaudière-Appalaches la gestion de la campagne « On sort ensemble? » pour 2026.",
+    "Formule : un 2e billet gratuit à l'achat d'un billet de spectacle à prix régulier chez les diffuseurs participants.",
+    "Coût total évalué à 194 760 $ : 160 000 $ pour rembourser les billets gratuits et 34 760 $ (plus taxes) en frais de gestion, de promotion et de communication.",
+    "La dépense nette pour la Ville s'élève à 196 493,65 $, financée par le règlement d'emprunt R.V.Q. 3525.",
+    "Le déploiement est prévu à l'automne 2026 et l'entente se termine au plus tard le 1er avril 2027.",
+    "Les 160 000 $ seront répartis entre les diffuseurs participants selon leur capacité de vente.",
+    "Les trois éditions précédentes (2022, 2023, 2025) ont mené à la vente de plus de 37 000 billets et à 1,5 M$ de revenus pour les diffuseurs."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "194 760 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T13:59:50.082Z",
+   "jetons": {
+    "entree": 7664,
+    "sortie": 478
+   }
+  },
+  {
+   "id": "LS2026-243.pdf",
+   "numero": "LS2026-243",
+   "date": "2026-09-23",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement d'une subvention d'une somme maximale de 3 000 $ à l'Unité de loisir et de sport de la Capitale-Nationale (ULSCN), pour l'année 2026-2027, afin de soutenir la réalisation du projet « Concertation immigration » en vue d'assurer l'inclusion et la pleine participation des personnes immigrant",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-243.pdf",
+   "puces": [
+    "La Ville verse jusqu'à 3 000 $ à l'Unité de loisir et de sport de la Capitale-Nationale (ULSCN) pour 2026-2027.",
+    "L'argent sert au projet « Concertation immigration », qui vise l'inclusion des personnes immigrantes dans les activités de sport et de loisir à Québec.",
+    "L'ULSCN organisera une journée régionale de concertation et de réseautage à l'hiver 2027 pour les organisations de loisir et de sport.",
+    "À la fin du projet, l'organisme remettra un bilan, une synthèse des besoins, une compilation de pratiques et des recommandations de formation.",
+    "L'organisme devra rendre des comptes chaque année et mentionner la Ville et le ministère de l'Immigration, de la Francisation et de l'Intégration dans ses publications.",
+    "Les fonds proviennent du budget de fonctionnement du Service des loisirs, des sports et de la vie communautaire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T13:59:48.827Z",
+   "jetons": {
+    "entree": 4004,
+    "sortie": 424
+   }
+  },
+  {
+   "id": "AP2026-333.pdf",
+   "numero": "AP2026-333",
+   "date": "2026-09-23",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat pour l'acquisition et l'installation de bennes et de plateformes en aluminium - Lot 4 (Appel d'offres public 95949)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-333.pdf",
+   "puces": [
+    "La Ville confie à Twin Equipment Limited (Anjou) un contrat de 519 935 $ (avant TPS et TVQ) pour fournir et installer des plateformes en aluminium avec grue de manutention.",
+    "Il s'agit de 13 plateformes destinées au Service des travaux publics, pour remplacer des équipements en fin de vie utile.",
+    "La dépense nette pour la Ville s'élève à 545 866,75 $, payée par deux règlements d'emprunt d'agglomération.",
+    "Le contrat prévoit une option pour quatre unités supplémentaires à prix ferme, que la Ville pourra exercer selon l'argent disponible.",
+    "Trois entreprises ont soumissionné pour ce lot; une soumission a été rejetée parce qu'elle n'était pas signée.",
+    "Le prix retenu est 25,9 % sous l'estimation du service demandeur (918 000 $ avant taxes, option incluse).",
+    "Les lots 1, 2 et 3 du même appel d'offres ont déjà été accordés par délégation de pouvoirs."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "519 935 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T13:59:49.936Z",
+   "jetons": {
+    "entree": 3919,
+    "sortie": 461
+   }
+  },
+  {
+   "id": "PA2026-133.pdf",
+   "numero": "PA2026-133",
+   "date": "2026-09-23",
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "objet": "Conclusion d'ententes de partenariats et de commandites entre la Ville de Québec et cinq (5) organismes partenaires relatives au versement de commandites et de revenus de location de kiosques dans le cadre de la Conférence canadienne sur la forêt urbaine 2026",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-133.pdf",
+   "puces": [
+    "La Ville de Québec organise la Conférence canadienne sur la forêt urbaine, du 13 au 16 octobre 2026 au Centre des congrès de Québec.",
+    "Le comité exécutif autorise des ententes avec cinq nouveaux partenaires pour financer l'événement.",
+    "Alto verse une commandite de 5 500 $ (forfait Connexion), incluant 148,25 $ de taxes sur la valeur du billet offert.",
+    "Quatre organismes louent chacun un kiosque simple à 1 250 $ : Idverde Bomendienst, G.D.G. Environnement ltée, Ontario Professionnal Foresters Association et GreenBlue Urban.",
+    "Ces ententes rapportent 10 351,75 $ à la Ville, net des taxes sur la valeur des billets offerts.",
+    "La Ville est responsable de l'organisation, de la logistique et du financement de la conférence, selon sa convention avec Arbres Canada."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "10 351,75 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T13:59:56.592Z",
+   "jetons": {
+    "entree": 7610,
+    "sortie": 424
+   }
+  },
+  {
+   "id": "PA2026-130.pdf",
+   "numero": "PA2026-130",
+   "date": "2026-09-23",
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "objet": "Conclusion d'une entente relative au versement d'une subvention maximale de 75 000 $ entre la Ville de Québec et Gîte Jeunesse inc., dans le cadre du « Fonds de démarrage pour les projets de logements sociaux » pour un projet d'habitation situé au 3364, rue Rochambeau à Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-130.pdf",
+   "puces": [
+    "La Ville de Québec accorde une subvention maximale de 75 000 $ à l'organisme Gîte Jeunesse inc.",
+    "L'argent sert à préparer un projet de 12 à 15 logements au 3364, rue Rochambeau, à Québec (projet « Gîte jeunesse - Sainte-Foy »).",
+    "La subvention vient du « Fonds de démarrage pour les projets de logements sociaux » et couvre des frais comme les études environnementales, les tests de sol, l'arpentage, l'examen de titres, l'évaluation du terrain, les esquisses d'architecte et les honoraires du développeur.",
+    "L'organisme a 6 mois après la signature pour utiliser l'argent et 12 mois pour déposer son projet dans un programme d'aide reconnu par la Ville.",
+    "Seuls les frais facturés après le 1er juin 2026 sont remboursables, et le montant sera déduit d'une future contribution de la Ville si le projet est retenu dans un programme.",
+    "Gîte Jeunesse inc. offre de l'hébergement temporaire et de l'aide psychosociale aux personnes de 12 à 35 ans en difficulté.",
+    "Les fonds proviennent du règlement d'emprunt R.A.V.Q. 1779."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "75 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T13:59:57.603Z",
+   "jetons": {
+    "entree": 7741,
+    "sortie": 529
+   }
+  },
   {
    "id": "TM2026-184.pdf",
    "numero": "TM2026-184",
