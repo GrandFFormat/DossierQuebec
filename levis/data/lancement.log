@@ -2,7 +2,7 @@
 > dossiervillelevis@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 8c45d0a — Node v22.23.2
+Code : commit 9a83455 — Node v22.23.2
 
 === Syntaxe du JavaScript du site ===
 
@@ -18,20 +18,20 @@ https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt : HTTP 403 Fo
 72 séance(s) en 2026 écrites dans data/seances.json.
   CAD     12 séances, 7 avec procès-verbal
   CV      19 séances, 13 avec procès-verbal
-  CACCO   12 séances, 7 avec procès-verbal
+  CACCO   12 séances, 8 avec procès-verbal
   CACCE   12 séances, 8 avec procès-verbal
   CE      17 séances, 17 avec procès-verbal
 
 === Décisions de l'année ===
-CACCE_2026-08-12 : 10 pages, 21 résolutions, 0 liées à un sommaire, 0 vote(s) nominal(aux)
+CACCO_2026-08-19 : 6 pages, 13 résolutions, 0 liées à un sommaire, 0 vote(s) nominal(aux)
 
-1858 décisions écrites dans data/decisions.json — 1 séance(s) lue(s) cette fois, 4 en attente de procès-verbal.
-22 nouveauté(s) depuis la dernière exécution.
+1872 décisions écrites dans data/decisions.json — 1 séance(s) lue(s) cette fois, 3 en attente de procès-verbal.
+14 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
-    656  Urbanisme
-    456  Procédure
-    143  Administration
+    662  Urbanisme
+    462  Procédure
+    144  Administration
     104  Transport
      77  Finances
      64  Contrats
@@ -39,48 +39,48 @@ Pastilles thématiques :
      57  Subventions
      42  Motions et hommages
      35  Sécurité publique
-     33  Loisirs et communauté
+     34  Loisirs et communauté
      31  Travaux et infrastructures
      26  Ressources humaines
      24  Logement et social
      19  Développement économique
      17  Immobilier
      16  Culture et patrimoine
-    108  (classées par défaut — aucune règle n'a tranché)
+    109  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-07-26) ===
-Fenêtre depuis 2026-07-26 : 4 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-07-27) ===
+Fenêtre depuis 2026-07-27 : 4 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
 
 17 votes nominaux écrits dans data/votes.json (4 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
 
 === Lexique, mesuré sur les procès-verbaux ===
-Mesure de 29 termes sur 5 procès-verbaux de 2026 en cache et 1858 décisions…
+Mesure de 29 termes sur 6 procès-verbaux de 2026 en cache et 1872 décisions…
 
-     5 PV      56 résolutions   Résolution
+     6 PV      57 résolutions   Résolution
      4 PV     101 résolutions   Document d’aide à la décision
-     5 PV       9 résolutions   Procès-verbal
-     5 PV       5 résolutions   Ordre du jour
+     6 PV      10 résolutions   Procès-verbal
+     6 PV       6 résolutions   Ordre du jour
      3 PV      10 résolutions   Avis de motion
-     4 PV      47 résolutions   Règlement
+     5 PV      54 résolutions   Règlement
      4 PV      21 résolutions   Dépôt
      3 PV      90 résolutions   Conseil de la Ville
      4 PV      62 résolutions   Comité exécutif
-     1 PV       1 résolutions   Conseil d'arrondissement
+     2 PV       3 résolutions   Conseil d'arrondissement
      2 PV      10 résolutions   Président du conseil
      4 PV      32 résolutions   Greffière
      2 PV       4 résolutions   Commission
-     3 PV      78 résolutions   Il est proposé par… Appuyé par…
+     4 PV      89 résolutions   Il est proposé par… Appuyé par…
      1 PV       1 résolutions   Appeler le vote
-     3 PV      77 résolutions   Adoptée à l'unanimité
+     4 PV      88 résolutions   Adoptée à l'unanimité
      1 PV       1 résolutions   Adoptée à la majorité
      1 PV       1 résolutions   Proposition d’amendement
      0 PV       0 résolutions   Conflit d'intérêts
-     1 PV       2 résolutions   Dérogation mineure
-     1 PV      15 résolutions   PIIA
+     2 PV       5 résolutions   Dérogation mineure
+     2 PV      20 résolutions   PIIA
      0 PV       0 résolutions   Usage conditionnel
-     4 PV      12 résolutions   Zonage et lotissement
-     2 PV       2 résolutions   Consultation écrite
+     5 PV      15 résolutions   Zonage et lotissement
+     3 PV       3 résolutions   Consultation écrite
      4 PV       9 résolutions   Attribution du contrat
      3 PV       7 résolutions   Appel d'offres
      3 PV      16 résolutions   Aide financière
@@ -94,7 +94,7 @@ Mesure de 29 termes sur 5 procès-verbaux de 2026 en cache et 1858 décisions…
   Usage conditionnel  (recherche : usages? conditionnels?)
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-26 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-07-27 pas encore résumés (plafond : 120)…
 525 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
@@ -104,11 +104,11 @@ Récapitulatifs des projets : rien de nouveau.
 === Projets pour « Mes dossiers » ===
 Projets publics : 4 projets · index 2.8 Ko · fichiers de projet 45 Ko au total.
 Décisions attendues : 32 dossiers en attente, dont 0 avec une date cible · 45.4 Ko.
-Dossiers de l'année : 1405 · 1055 Ko · organismes suggérés : 89.
-Décisions récentes : 123 dossiers depuis le 2026-08-01 · 127 Ko.
+Dossiers de l'année : 1418 · 1061 Ko · organismes suggérés : 89.
+Décisions récentes : 136 dossiers depuis le 2026-08-01 · 135 Ko.
 
 === Chiffres de la page Abonnement ===
-Travail public : 2397 documents, 482 résumés, 17 votes, 4 projets.
+Travail public : 2411 documents, 482 résumés, 17 votes, 4 projets.
 
 === Bilan ===
   étapes         : 11
