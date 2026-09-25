@@ -125,7 +125,7 @@ function main() {
   // La liste officielle des textes touchés, repliée sous le résumé. Les titres restent en
   // français en anglais : ce sont les titres officiels, il n'en existe pas d'autre ici.
   const listeLois = (b, en) => b._lois.length < 2 ? '' :
-    `<details class="bill-lois"${b.omnibus ? ' open' : ''}><summary>${en ? `Laws and regulations affected (${b._lois.length}) — official French titles` : `Lois et règlements touchés (${b._lois.length})`}</summary><ul>${b._lois.map((l) => `<li>${echapper(l)}</li>`).join('')}</ul></details>`;
+    `<details class="bill-lois"><summary>${en ? `Laws and regulations affected (${b._lois.length}) — official French titles` : `Lois et règlements touchés (${b._lois.length})`}</summary><ul>${b._lois.map((l) => `<li>${echapper(l)}</li>`).join('')}</ul></details>`;
   for (const b of bills) {
     if (b.summary) resumes.fr[b.id] = b.summary + listeLois(b, false);
     if (b.summaryEn) resumes.en[b.id] = b.summaryEn + listeLois(b, true);

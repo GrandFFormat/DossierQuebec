@@ -1983,5 +1983,10 @@
   .volet-titre{margin:16px 0 4px; font-size:15px; line-height:1.35; font-weight:700;}
   .volet-titre span{display:inline-block; font-family:'Archivo Narrow',sans-serif; text-transform:uppercase; letter-spacing:.04em; font-size:11px; background:var(--gold); color:#fff; padding:2px 6px; margin-right:6px; vertical-align:2px;}
   .bill-lois{margin-top:12px; border-top:1px solid var(--line-soft); padding-top:8px;}
+  /* Un + à gauche pour déplier la liste, un − une fois ouverte (25 sept. 2026). */
+  .bill-lois summary{list-style:none;}
+  .bill-lois summary::-webkit-details-marker{display:none;}
+  .bill-lois summary::before{content:"+"; display:inline-block; width:1.1em; font-size:15px; font-weight:800; color:var(--gold);}
+  .bill-lois[open] summary::before{content:"\2212";}
   .bill-lois summary{cursor:pointer; font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:0.04em;}
   .bill-lois ul{margin:8px 0 0; padding-left:20px; font-size:14px; line-height:1.45; columns:2 260px; column-gap:24px;}
