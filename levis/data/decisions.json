@@ -1,7 +1,7 @@
 {
- "generatedAt": "2026-09-24T14:34:26.032Z",
+ "generatedAt": "2026-09-25T14:39:39.881Z",
  "source": "https://levis.ca/fr/ville/conseil-municipal/seances-du-conseil-municipal/archives-des-seances-du-conseil-municipal",
- "licence": "Documents publics de la Ville de Lévis — reproduits avec mention de la source et lien vers le document officiel, sans usage commercial (voir README).",
+ "licence": "Documents publics de la Ville de Lévis — reproduits avec mention de la source et lien vers le document officiel, lecture gratuite (voir README).",
  "parametres": {
   "annee": "2026",
   "instances": [
@@ -13,11 +13,11 @@
   ]
  },
  "partiel": false,
- "totalDisponible": 1858,
- "nombre": 1858,
- "nouveauxDepuisDerniereExecution": 22,
- "seancesLues": 52,
- "seancesEnAttente": 4,
+ "totalDisponible": 1872,
+ "nombre": 1872,
+ "nouveauxDepuisDerniereExecution": 14,
+ "seancesLues": 53,
+ "seancesEnAttente": 3,
  "themes": {
   "procedure": {
    "libelle": "Procédure",
@@ -88,16 +88,16 @@
    "couleur": "#0D9488"
   }
  },
- "sansTheme": 108,
+ "sansTheme": 109,
  "facettes": {
   "type": [
    {
     "valeur": "Résolution",
-    "n": 1164
+    "n": 1172
    },
    {
     "valeur": "Procédure",
-    "n": 284
+    "n": 289
    },
    {
     "valeur": "Dépôt",
@@ -112,12 +112,12 @@
     "n": 95
    },
    {
-    "valeur": "Projet de règlement",
+    "valeur": "Procès-verbal",
     "n": 53
    },
    {
-    "valeur": "Procès-verbal",
-    "n": 52
+    "valeur": "Projet de règlement",
+    "n": 53
    }
   ],
   "instance": [
@@ -139,22 +139,22 @@
    },
    {
     "valeur": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
-    "n": 135
+    "n": 149
    }
   ],
   "unite": [],
   "theme": [
    {
     "valeur": "urbanisme",
-    "n": 656
+    "n": 662
    },
    {
     "valeur": "procedure",
-    "n": 456
+    "n": 462
    },
    {
     "valeur": "administration",
-    "n": 143
+    "n": 144
    },
    {
     "valeur": "transport",
@@ -186,7 +186,7 @@
    },
    {
     "valeur": "loisirs",
-    "n": 33
+    "n": 34
    },
    {
     "valeur": "travaux",
@@ -337,11 +337,14 @@
    "titre": "Séance ordinaire du 19 août 2026",
    "page": "https://levis.ca/fr/ville/organisation-municipale/participation-citoyenne/calendrier-participation-citoyenne/seance-ordinaire-du19-aout-2026",
    "annulee": false,
-   "pv": null,
-   "pvModifieLe": null,
+   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf",
+   "pvModifieLe": "2026-09-24T10:58:15-04:00",
    "odj": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Ordres-du-jour/2026/2026-08-19_CACCO_Ordre_du_jour.pdf",
    "documents": [],
-   "etat": "procès-verbal non publié"
+   "etat": "lue",
+   "versionLecture": 10,
+   "nombreResolutions": 13,
+   "lueLe": "2026-09-25"
   },
   {
    "id": "CACCE_2026-08-12",
@@ -3782,6 +3785,354 @@
    "themeSource": "objet"
   },
   {
+   "id": "CACCO_2026-08-19_PV",
+   "numero": null,
+   "objet": "Procès-verbal — Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest, séance ordinaire du 19 août 2026",
+   "date": "2026-08-19",
+   "annee": "2026",
+   "type": "Procès-verbal",
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "instanceCode": "CACCO",
+   "seanceId": "CACCO_2026-08-19",
+   "variante": "ORDI",
+   "unite": null,
+   "dossier": null,
+   "sommaires": [],
+   "sommaireId": null,
+   "sommairePdf": null,
+   "resultat": null,
+   "voteEnregistre": false,
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf",
+   "nombreResolutions": 13,
+   "nombrePages": 6,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CACCO-2026-0129",
+   "numero": "CACCO-2026-0129",
+   "objet": "Adoption de l’ordre du jour",
+   "date": "2026-08-19",
+   "annee": "2026",
+   "type": "Procédure",
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "instanceCode": "CACCO",
+   "seanceId": "CACCO_2026-08-19",
+   "variante": "ORDI",
+   "unite": null,
+   "dossier": null,
+   "sommaires": [],
+   "sommaireId": null,
+   "sommairePdf": null,
+   "resultat": "Adoptée à l'unanimité",
+   "voteEnregistre": false,
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf#page=1",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CACCO-2026-0130",
+   "numero": "CACCO-2026-0130",
+   "objet": "Période de questions du public",
+   "date": "2026-08-19",
+   "annee": "2026",
+   "type": "Procédure",
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "instanceCode": "CACCO",
+   "seanceId": "CACCO_2026-08-19",
+   "variante": "ORDI",
+   "unite": null,
+   "dossier": null,
+   "sommaires": [],
+   "sommaireId": null,
+   "sommairePdf": null,
+   "resultat": null,
+   "voteEnregistre": false,
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf#page=1",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CACCO-2026-0131",
+   "numero": "CACCO-2026-0131",
+   "objet": "Approbation du procès-verbal de la séance ordinaire du 22 juillet 2026",
+   "date": "2026-08-19",
+   "annee": "2026",
+   "type": "Procédure",
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "instanceCode": "CACCO",
+   "seanceId": "CACCO_2026-08-19",
+   "variante": "ORDI",
+   "unite": null,
+   "dossier": null,
+   "sommaires": [],
+   "sommaireId": null,
+   "sommairePdf": null,
+   "resultat": "Adoptée à l'unanimité",
+   "voteEnregistre": false,
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf#page=1",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CACCO-2026-0132",
+   "numero": "CACCO-2026-0132",
+   "objet": "Rapport sur la consultation écrite",
+   "date": "2026-08-19",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "instanceCode": "CACCO",
+   "seanceId": "CACCO_2026-08-19",
+   "variante": "ORDI",
+   "unite": null,
+   "dossier": null,
+   "sommaires": [],
+   "sommaireId": null,
+   "sommairePdf": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dispositif": [
+    "DE PRENDRE ACTE du rapport sur la consultation écrite à l’égard de ces demandes."
+   ],
+   "voteEnregistre": false,
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf#page=1",
+   "nouveau": true,
+   "theme": "administration",
+   "themeSource": "defaut"
+  },
+  {
+   "id": "CACCO-2026-0133",
+   "numero": "CACCO-2026-0133",
+   "objet": "Demande de dérogation mineure – Marge de recul avant - Agrandissement d’un bâtiment principal en cour avant – 2810, chemin Sainte-Anne (secteur Saint-Étienne-de-Lauzon) – Lot 2 848 555 du cadastre du Québec",
+   "date": "2026-08-19",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "instanceCode": "CACCO",
+   "seanceId": "CACCO_2026-08-19",
+   "variante": "ORDI",
+   "unite": null,
+   "dossier": null,
+   "sommaires": [],
+   "sommaireId": null,
+   "sommairePdf": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dispositif": [
+    "D’ACCORDER la dérogation mineure visant à rendre conforme, la marge de recul avant de 6,61 mètres d’un bâtiment principal au lieu de 7,5 mètres tel que prescrit par l’article 18, en référence à la grille des spécifications de la zone H0978 du Règlement RV-2011-11-23 sur le zonage et le lotissement selon les plans joints à la demande de dérogation mineure (pour l’objet de la dérogation mineure uniquement), pour les motifs suivants : - l’application du règlement aurait pour effet de causer un préjudice sérieux au requérant ; - l’acceptation de la demande ne porte pas atteinte à la jouissance du droit de propriété des propriétaires voisins ; - le caractère mineur de la demande."
+   ],
+   "voteEnregistre": false,
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf#page=2",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CACCO-2026-0134",
+   "numero": "CACCO-2026-0134",
+   "objet": "Demande de dérogation mineure – Marge de recul latérale - Agrandissement d’un bâtiment principal (construction d’un garage intégré) – 1377, rue de la Sapinière (secteur Saint-Rédempteur) – Lot 2 284 436 du cadastre du Québec",
+   "date": "2026-08-19",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "instanceCode": "CACCO",
+   "seanceId": "CACCO_2026-08-19",
+   "variante": "ORDI",
+   "unite": null,
+   "dossier": null,
+   "sommaires": [],
+   "sommaireId": null,
+   "sommairePdf": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dispositif": [
+    "D’ACCORDER la dérogation mineure, visant à rendre conforme, pour un bâtiment principal et son agrandissement (construction d’un garage intégré), la marge de recul latérale à 2,13 mètres au lieu de 2,5 mètres tel que prescrit par l’article 18, en référence à la grille des spécifications de la zone H0601 du Règlement RV-2011-11-23 sur le zonage et le lotissement (et ses amendements), selon les plans d’architecture de TEKpur Architecture Design, datés du 23 juin 2026 et joints à la demande de dérogation mineure signée par le requérant le 18 juin 2026 et le certificat de localisation de Éric Chouinard, daté du 24 mars 2016, minute : 1355 (pour l’objet de la dérogation mineure uniquement), pour les motifs suivants : - le respect des objectifs du plan d’urbanisme ; - le caractère mineur de la demande."
+   ],
+   "voteEnregistre": false,
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf#page=3",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CACCO-2026-0135",
+   "numero": "CACCO-2026-0135",
+   "objet": "PIIA – Installation d’une enseigne appliquée – 102-430, route Marie-Victorin (secteur Saint-Nicolas) – Subway",
+   "date": "2026-08-19",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "instanceCode": "CACCO",
+   "seanceId": "CACCO_2026-08-19",
+   "variante": "ORDI",
+   "unite": null,
+   "dossier": null,
+   "sommaires": [],
+   "sommaireId": null,
+   "sommairePdf": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dispositif": [
+    "D’APPROUVER les plans suivants, en lien avec la demande de permis numéro 285906 : - les plans de Enseignes ESM, datés du 14 juillet 2026, plan #26.0714.01."
+   ],
+   "voteEnregistre": false,
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf#page=3",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CACCO-2026-0136",
+   "numero": "CACCO-2026-0136",
+   "objet": "PIIA – Installation d’une enseigne appliquée – 100-990, chemin Olivier (secteur Saint-Nicolas) – VanLife Campers",
+   "date": "2026-08-19",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "instanceCode": "CACCO",
+   "seanceId": "CACCO_2026-08-19",
+   "variante": "ORDI",
+   "unite": null,
+   "dossier": null,
+   "sommaires": [],
+   "sommaireId": null,
+   "sommairePdf": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dispositif": [
+    "D’APPROUVER les plans suivants, en lien avec la demande de permis numéro 339328 : - les plans d’Enseignes Simon, datés du 5 mai 2026, document de 3 pages."
+   ],
+   "voteEnregistre": false,
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf#page=3",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CACCO-2026-0137",
+   "numero": "CACCO-2026-0137",
+   "objet": "PIIA patrimonial – Rénovations extérieures – 1414, rue des Pionniers (secteur Saint-Nicolas)",
+   "date": "2026-08-19",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "instanceCode": "CACCO",
+   "seanceId": "CACCO_2026-08-19",
+   "variante": "ORDI",
+   "unite": null,
+   "dossier": null,
+   "sommaires": [],
+   "sommaireId": null,
+   "sommairePdf": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dispositif": [
+    "D'APPROUVER des travaux de remplacement de la fenêtre située sur le mur latéral gauche en lien avec la demande de permis numéro 411595, incluant les documents annexés, dont les soumissions suivantes : - Garon et Guay portes et fenêtres, numéro 235-01720, datée du 15 juillet 2026 ; - Lorendo portes et fenêtres, numéro 177750, datée du 15 juillet 2026."
+   ],
+   "voteEnregistre": false,
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf#page=4",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CACCO-2026-0138",
+   "numero": "CACCO-2026-0138",
+   "objet": "PIIA patrimonial – Rénovations extérieures – 4083, route des Rivières (secteur Saint-Nicolas)",
+   "date": "2026-08-19",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "instanceCode": "CACCO",
+   "seanceId": "CACCO_2026-08-19",
+   "variante": "ORDI",
+   "unite": null,
+   "dossier": null,
+   "sommaires": [],
+   "sommaireId": null,
+   "sommairePdf": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dispositif": [
+    "D'APPROUVER des travaux de rénovation suivants, en lien avec la demande de permis numéro 411715, incluant les documents annexés : - remplacement du recouvrement de toiture en bardeau d'asphalte par un recouvrement de toiture en tôle à joint debout en « galvalume » ; - remplacement du soffite d'aluminium de couleur brune par un nouveau soffite d'aluminium de couleur blanche ; - remplacement du fascia d'aluminium de couleur brune par un nouveau fascia d'aluminium de couleur blanche ; - les gouttières seraient repeintes en blanc afin d'harmoniser le tout."
+   ],
+   "voteEnregistre": false,
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf#page=4",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CACCO-2026-0139",
+   "numero": "CACCO-2026-0139",
+   "objet": "Restriction à la délivrance - Construction d’une piscine creusée – Secteur à fortes pentes associé au talus rocheux – 205, rue de la Mission (secteur Saint-Nicolas)",
+   "date": "2026-08-19",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "instanceCode": "CACCO",
+   "seanceId": "CACCO_2026-08-19",
+   "variante": "ORDI",
+   "unite": null,
+   "dossier": null,
+   "sommaires": [],
+   "sommaireId": null,
+   "sommairePdf": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dispositif": [
+    "D'AUTORISER la délivrance du permis ou du certificat pour des travaux de construction d’une piscine creusée (uniquement pour les travaux identifiés aux documents remis), et ce, aux conditions énoncées aux documents suivants : - la demande de permis numéro 314220 (incluant les documents s’y rattachant) ; - le rapport de Serge Gagné, ingénieur, signé le 16 juillet 2026 ; - les plans d'aménagement de « Les Embellissements La Chaudière inc. » révision numéro 3, datés de juillet 2026, à la condition que la Direction du génie de la Ville approuve tous les documents soumis et requis avant l’émission du permis ou du certificat."
+   ],
+   "voteEnregistre": false,
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf#page=5",
+   "nouveau": true,
+   "theme": "loisirs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CACCO-2026-0140",
+   "numero": "CACCO-2026-0140",
+   "objet": "Période d’intervention des membres du conseil",
+   "date": "2026-08-19",
+   "annee": "2026",
+   "type": "Procédure",
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "instanceCode": "CACCO",
+   "seanceId": "CACCO_2026-08-19",
+   "variante": "ORDI",
+   "unite": null,
+   "dossier": null,
+   "sommaires": [],
+   "sommaireId": null,
+   "sommairePdf": null,
+   "resultat": null,
+   "voteEnregistre": false,
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf#page=5",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CACCO-2026-0141",
+   "numero": "CACCO-2026-0141",
+   "objet": "Levée de la séance",
+   "date": "2026-08-19",
+   "annee": "2026",
+   "type": "Procédure",
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "instanceCode": "CACCO",
+   "seanceId": "CACCO_2026-08-19",
+   "variante": "ORDI",
+   "unite": null,
+   "dossier": null,
+   "sommaires": [],
+   "sommaireId": null,
+   "sommairePdf": null,
+   "resultat": "Adoptée à l'unanimité",
+   "voteEnregistre": false,
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf#page=5",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
    "id": "CACCE_2026-08-12_PV",
    "numero": null,
    "objet": "Procès-verbal — Conseil d'arrondissement des Chutes-de-la-Chaudière-Est, séance ordinaire du 12 août 2026",
@@ -3802,7 +4153,7 @@
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf",
    "nombreResolutions": 21,
    "nombrePages": 10,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
@@ -3825,7 +4176,7 @@
    "resultat": "Adoptée à l'unanimité",
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=1",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
@@ -3848,7 +4199,7 @@
    "resultat": null,
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=1",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
@@ -3871,7 +4222,7 @@
    "resultat": "Adoptée à l'unanimité",
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=1",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
@@ -3897,7 +4248,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=2",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "administration",
    "themeSource": "defaut"
   },
@@ -3923,7 +4274,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=2",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -3949,7 +4300,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=3",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -3975,7 +4326,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=3",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -4001,7 +4352,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=4",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -4027,7 +4378,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=4",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -4053,7 +4404,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=5",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -4079,7 +4430,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=5",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -4105,7 +4456,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=5",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -4131,7 +4482,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=6",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -4157,7 +4508,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=7",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -4183,7 +4534,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=7",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -4209,7 +4560,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=8",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -4235,7 +4586,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=8",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -4261,7 +4612,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=9",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -4287,7 +4638,7 @@
    ],
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=9",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -4310,7 +4661,7 @@
    "resultat": null,
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=10",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
@@ -4333,7 +4684,7 @@
    "resultat": "Adoptée à l'unanimité",
    "voteEnregistre": false,
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf#page=10",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
