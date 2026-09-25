@@ -17,8 +17,8 @@
 //
 // Le contenu : le mois en chiffres, les plus gros montants (avec les puces du résumé), toutes les
 // subventions et tous les contrats avec un montant, les votes divisés, les sujets. Le détail de
-// l'argent (soumissions, estimation de la Ville, répartition par année) reste aux abonnés : il
-// sert seulement ici à reconnaître la nature d'un montant — une valeur au rôle ou une fermeture
+// l'argent (soumissions, estimation de la Ville, répartition par année) est dans l'édition abonnés seulement ; dans
+// l'édition gratuite, il sert seulement à reconnaître la nature d'un montant — une valeur au rôle ou une fermeture
 // d'emprunt n'a rien à faire parmi les plus gros montants.
 //
 // Une même décision traverse plusieurs documents — le sommaire, la résolution du comité
@@ -345,7 +345,7 @@ async function main() {
   titreMd(SECTIONS.sujets);
   L.push(sujets.map((s) => `${s.libelle} (${s.n})`).join(' · '), '');
   L.push('---', '');
-  L.push(`Le détail de l'argent de chaque dossier — qui a soumissionné, l'estimation de la Ville, la répartition par année — et les alertes quand vos projets bougent : ${RACINE}/abonnement`, '');
+  L.push(`Les alertes quand vos projets bougent, les suivis et l'export : ${RACINE}/abonnement`, '');
   L.push(`Les montants sont ceux des documents. Les résumés sont générés par IA à partir des sommaires décisionnels ; chaque lien mène au PDF officiel de la Ville, qui fait foi. Toutes les décisions : ${SITE}decisions.html — site indépendant, sans publicité, aucun caractère officiel.`);
   const md = L.join('\n');
 
@@ -413,6 +413,9 @@ async function main() {
     const retenues = soumissions.filter((s) => s.retenue);
     const autres = soumissions.filter((s) => !s.retenue && s.entreprise);
     const entreprise = (s) => `${s.entreprise}${villeSeule(s.ville) ? ` (${villeSeule(s.ville)})` : ''}`;
+    // Édition gratuite : rien. Le détail de l'argent est gratuit sur le site depuis le 25 sept. 2026 ;
+    // l'édition abonnés le garde (Martin). Le bloc verrouillé ci-dessous ne sert plus.
+    if (!payant) return '';
     if (!payant) {
       const morceaux = [
         retenues.length ? `l'entreprise retenue et son prix` : null,
@@ -440,6 +443,9 @@ async function main() {
     if (f.theme === 'contrats') return blocContrat(f, d);
     const morceaux = [];
     const entreprises = new Set((d.soumissions ?? []).map((s) => s.entreprise)).size;
+    // Édition gratuite : rien. Le détail de l'argent est gratuit sur le site depuis le 25 sept. 2026 ;
+    // l'édition abonnés le garde (Martin). Le bloc verrouillé ci-dessous ne sert plus.
+    if (!payant) return '';
     if (!payant) {
       if (entreprises) morceaux.push(`${pluriel(entreprises, 'soumission', 'soumissions')}${d.estimationVille ? ` comparée${entreprises > 1 ? 's' : ''} à l'estimation de la Ville` : ''}`);
       else if (d.chiffresCles?.some((c) => /co[uû]t|budget|pr[ée]vision/i.test(c.libelle ?? ''))) morceaux.push('le coût total du projet');
@@ -484,6 +490,9 @@ async function main() {
     const d = natureParId.get(f.cle);
     if (!d) return '';
     const entreprises = new Set((d.soumissions ?? []).map((s) => s.entreprise)).size;
+    // Édition gratuite : rien. Le détail de l'argent est gratuit sur le site depuis le 25 sept. 2026 ;
+    // l'édition abonnés le garde (Martin). Le bloc verrouillé ci-dessous ne sert plus.
+    if (!payant) return '';
     if (!payant) {
       const contenu = [d.beneficiaire ? 'qui reçoit' : null, d.payeur ? 'qui paie' : null, entreprises ? pluriel(entreprises, 'soumissionnaire comparé', 'soumissionnaires comparés') : null, d.estimationVille ? "l'estimation de la Ville" : null, d.repartitionAnnuelle?.length ? 'la répartition par année' : null].filter(Boolean);
       return boiteOr(`🔒 <strong>Détail de l'argent</strong> ${marque}<br>${contenu.length ? `Dans ce dossier : ${echapper(contenu.join(', '))}.` : "Lu et vérifié dans le document."} ${lienOr("S'abonner", `${RACINE}/abonnement`)}`);
@@ -517,8 +526,8 @@ async function main() {
   H.push(`<tr><td style="padding:22px 4px 4px">${paragraphes.join('')}<p style="${POLICE};margin:0;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(introduction)}</p>${abonne
     ? boiteOr(`${marque} <strong>Votre édition abonnés.</strong> Merci : c'est votre abonnement qui garde le reste gratuit pour tout le monde.`, '14px 0 0')
     : vitrine
-      ? boiteOr(`${marque} <strong>Ce mois-ci, l'édition abonnés pour tout le monde.</strong> Les encadrés dorés — le détail de l'argent de chaque montant et l'agenda des conseils — sont d'habitude réservés aux abonnés. ${lienOr("Voir l'abonnement", `${RACINE}/abonnement`)}`, '14px 0 0')
-      : boiteOr(`${marque} <strong>Les encadrés dorés sont réservés aux abonnés :</strong> le détail de l'argent de chaque montant — qui reçoit, les soumissions, l'estimation de la Ville — et l'agenda des conseils du mois qui vient. ${lienOr("Voir l'abonnement", `${RACINE}/abonnement`)}`, '14px 0 0')}</td></tr>`);
+      ? boiteOr(`${marque} <strong>Ce mois-ci, l'édition abonnés pour tout le monde.</strong> Les encadrés dorés et l'agenda des conseils sont d'habitude dans l'édition abonnés. ${lienOr("Voir l'abonnement", `${RACINE}/abonnement`)}`, '14px 0 0')
+      : boiteOr(`${marque} <strong>L'édition abonnés ajoute</strong> l'agenda des conseils du mois qui vient et un encadré doré sous chaque gros montant. ${lienOr("Voir l'abonnement", `${RACINE}/abonnement`)}`, '14px 0 0')}</td></tr>`);
 
   // Le mois en chiffres : quatre tuiles de couleur, deux par rangée (lisible sur cellulaire).
   const tuile = (n, libelle, couleur) => `<td width="50%" valign="top" style="padding:6px">

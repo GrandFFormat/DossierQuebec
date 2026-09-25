@@ -437,6 +437,8 @@ async function main() {
     const retenues = soumissions.filter((s) => s.retenue);
     const autres = soumissions.filter((s) => !s.retenue && s.entreprise);
     const entreprise = (s) => `${s.entreprise}${villeSeule(s.ville) ? ` (${villeSeule(s.ville)})` : ''}`;
+    // Édition gratuite : rien (25 sept. 2026, comme Québec : le détail de l'argent n'est plus vendu en teaser).
+    if (!payant) return '';
     if (!payant) {
       const morceaux = [
         retenues.length ? `l'entreprise retenue et son prix` : null,
@@ -464,6 +466,8 @@ async function main() {
     if (f.theme === 'contrats') return blocContrat(f, d);
     const morceaux = [];
     const entreprises = new Set((d.soumissions ?? []).map((s) => s.entreprise)).size;
+    // Édition gratuite : rien (25 sept. 2026, comme Québec : le détail de l'argent n'est plus vendu en teaser).
+    if (!payant) return '';
     if (!payant) {
       if (entreprises) morceaux.push(`${pluriel(entreprises, 'soumission', 'soumissions')}${d.estimationVille ? ` comparée${entreprises > 1 ? 's' : ''} à l'estimation de la Ville` : ''}`);
       else if (d.chiffresCles?.some((c) => /co[uû]t|budget|pr[ée]vision/i.test(c.libelle ?? ''))) morceaux.push('le coût total du projet');
@@ -508,6 +512,8 @@ async function main() {
     const d = natureParId.get(f.cle);
     if (!d) return '';
     const entreprises = new Set((d.soumissions ?? []).map((s) => s.entreprise)).size;
+    // Édition gratuite : rien (25 sept. 2026, comme Québec : le détail de l'argent n'est plus vendu en teaser).
+    if (!payant) return '';
     if (!payant) {
       const contenu = [d.beneficiaire ? 'qui reçoit' : null, d.payeur ? 'qui paie' : null, entreprises ? pluriel(entreprises, 'soumissionnaire comparé', 'soumissionnaires comparés') : null, d.estimationVille ? "l'estimation de la Ville" : null, d.repartitionAnnuelle?.length ? 'la répartition par année' : null].filter(Boolean);
       return boiteOr(`🔒 <strong>Détail de l'argent</strong> ${marque}<br>${contenu.length ? `Dans ce dossier : ${echapper(contenu.join(', '))}.` : "Lu et vérifié dans le document."} ${lienOr("S'abonner", `${RACINE}/abonnement`)}`);
@@ -627,7 +633,7 @@ async function main() {
   else H.push(`<tr><td style="padding:26px 0 0">
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#FFF7E0;border:1px solid #F5D78A;border-radius:10px;border-collapse:separate"><tr><td style="${POLICE};padding:16px 18px;font-size:15px;line-height:1.55;color:${ENCRE}">
       <div style="font-size:17px;font-weight:800;color:#B7791F;margin-bottom:4px">🔔 Aller plus loin</div>
-      Suivez un projet, une rue ou une entreprise dans <a href="${RACINE}/mes-dossiers" style="color:#0B8A4B;font-weight:700">Mes dossiers</a>. L'abonnement ajoute les alertes quand ils bougent et le détail de l'argent de chaque dossier : qui a soumissionné, l'estimation de la Ville, la répartition par année.
+      Suivez un projet, une rue ou une entreprise dans <a href="${RACINE}/mes-dossiers" style="color:#0B8A4B;font-weight:700">Mes dossiers</a>. L'abonnement ajoute les alertes quand ils bougent, les suivis et l'export.
       <div style="margin-top:12px"><a href="${RACINE}/abonnement" style="display:inline-block;padding:9px 16px;border-radius:6px;background:#0B8A4B;color:#ffffff;font-weight:700;text-decoration:none">Voir l'abonnement</a></div>
     </td></tr></table>
   </td></tr>`);
