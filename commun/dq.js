@@ -2617,6 +2617,7 @@ function billCard(b, ctx){
         </div>
         <div class="bill-head-right">
           ${hotBadge}
+          ${b.omnibus ? `<span class="status-pill omnibus-pill" title="${isEn ? 'Changes several laws under one title' : 'Modifie plusieurs lois sous un seul titre'}">Omnibus${b.nbLois ? ` · ${b.nbLois} ${isEn ? 'laws' : 'lois'}` : ''}</span>` : ''}
           ${partyBadge}
           <span class="status-pill ${statusClass(b.status)}">${statusLabel(b.status, b.step)}</span>
         </div>
@@ -2633,6 +2634,7 @@ function billCard(b, ctx){
         <div class="bill-open-grid">
           <div>
             <div class="open-label">${isEn ? 'What it does, plainly' : 'Ce que ça fait, en clair'}</div>
+            ${b.omnibus ? `<p class="omnibus-avis">${isEn ? `<strong>Omnibus bill:</strong> it changes ${b.nbLois || 'several'} laws and regulations, and its title names only part of them. The summary below covers them all, law by law.` : `<strong>Projet omnibus :</strong> il modifie ${b.nbLois || 'plusieurs'} lois et règlements, et son titre n’en nomme qu’une partie. Le résumé ci-dessous les couvre toutes, loi par loi.`}</p>` : ''}
             <div class="bill-summary-body"></div>
             <p class="src-note">${b.summaryAiGenerated ? (isEn ? '⚙ AI-generated summary of the bill as introduced — may not reflect amendments made since.' : '⚙ Résumé généré par IA à partir du texte tel que présenté — peut ne pas refléter les amendements adoptés depuis.') : srcNote}</p>
           </div>
@@ -2883,6 +2885,8 @@ function renderBillsQuickFilters(){
     ['encours', ASSEMBLY.dissolved ? (isEn ? 'Not passed' : 'Non adoptés') : (isEn ? 'Active' : 'En cours')],
     ['adoptes', isEn ? 'Passed' : 'Adoptés'],
     ['challenges', isEn ? '🔥 Challenged' : '🔥 Challengés'],
+    // Omnibus (25 sept. 2026) : un projet qui touche plusieurs lois sous un seul titre.
+    ['omnibus', 'Omnibus'],
   ];
   el.innerHTML = defs.map(([k, label]) =>
     `<button class="qf-btn ${billsQuickFilter===k?'active':''}" onclick="setBillsQuickFilter('${k}')">${label}</button>`
@@ -2909,7 +2913,8 @@ function renderBills(keyword){
     const quickOk = billsQuickFilter === 'tous'
       || (billsQuickFilter === 'encours' && (ASSEMBLY.dissolved ? b.status !== 'sanctionne' : b.status === 'encours'))
       || (billsQuickFilter === 'adoptes' && b.status === 'sanctionne')
-      || (billsQuickFilter === 'challenges' && ch.some(c => Number(c.bill_id) === b.id));
+      || (billsQuickFilter === 'challenges' && ch.some(c => Number(c.bill_id) === b.id))
+      || (billsQuickFilter === 'omnibus' && b.omnibus);
     const summaryText = ((_resumesFr && _resumesFr[b.id]) || '').replace(/<[^>]+>/g, ' ');
     // On cherche dans : le titre, le résumé en clair, la ligne de statut, le nom
     // du parrain, le numéro sous toutes ses écritures, et le PARTI du parrain
@@ -2975,6 +2980,7 @@ function renderBills(keyword){
     encours:    ASSEMBLY.dissolved ? (isEn ? 'Bills that never passed' : 'Projets non adoptés') : (isEn ? 'Active bills' : 'En cours'),
     adoptes:    isEn ? 'Passed bills' : 'Adoptés',
     challenges: isEn ? 'Challenged bills' : 'Challengés',
+    omnibus:    isEn ? 'Omnibus bills — several laws under one title' : 'Projets omnibus — plusieurs lois sous un seul titre',
   };
   const titleEl = document.getElementById('billsResultTitle');
   const noteEl = document.getElementById('billsResultNote');

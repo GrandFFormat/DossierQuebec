@@ -1975,3 +1975,10 @@
   .entete-deux-rangees #dq-topbar .header-ctrls{order:1; margin-left:auto;}
   .entete-deux-rangees #dq-topbar nav.tabs{order:2; flex:1 1 100%; justify-content:flex-start;}
   .entete-deux-rangees .view, .entete-deux-rangees [id^="sec-"]{scroll-margin-top:120px;}
+
+  /* Projets omnibus (25 sept. 2026) : pastille, avis dans la carte ouverte, liste des lois touchées. */
+  .omnibus-pill{background:var(--yellow); color:var(--sur-clair); border-color:var(--ink);}
+  .omnibus-avis{margin:0 0 12px; padding:10px 12px; border:2px solid var(--ink); background:var(--paper-2); font-size:14.5px; line-height:1.45;}
+  .bill-lois{margin-top:12px; border-top:1px solid var(--line-soft); padding-top:8px;}
+  .bill-lois summary{cursor:pointer; font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:0.04em;}
+  .bill-lois ul{margin:8px 0 0; padding-left:20px; font-size:14px; line-height:1.45; columns:2 260px; column-gap:24px;}
