@@ -50,7 +50,35 @@ function bulletsToHtml(text, emptyValue) {
   return `<ul class="bill-summary-list">${lines.map((l) => `<li>${l}</li>`).join('')}</ul>`;
 }
 
+// Un omnibus se lit comme en Ontario (Martin, 25 sept. 2026) : l'aperçu, puis une tête par loi
+// touchée (« Volet 1 · Loi sur le bâtiment ») et ses puces dessous. Le résumé d'un omnibus
+// (bill-summaries.js, SYSTEM_OMNIBUS) est déjà fait ainsi : l'aperçu, une ligne vide, puis une puce
+// « Nom de la loi : ce qui change » par loi. Une puce sans « : » reste une puce ordinaire.
+function omnibusToHtml(text, en) {
+  if (!text) return null;
+  const [apercu, ...reste] = text.split(/\n\s*\n/);
+  const puces = (bloc) => bloc.split('\n').map((l) => l.trim()).filter((l) => l.startsWith('- ')).map((l) => l.slice(2).trim());
+  const lois = puces(reste.join('\n'));
+  if (!lois.length) return bulletsToHtml(text, null);
+  const groupes = [];
+  for (const l of lois) {
+    const m = l.match(en ? /^([^:]{3,160}):\s+(.+)$/ : /^([^:]{3,160}?)\s*:\s+(.+)$/);
+    const nom = m ? m[1].trim() : null;
+    // Une loi qui revient plus loin (le résumé suit l'ordre des notes, pas des lois) rejoint sa tête.
+    const meme = nom && groupes.find((g) => g.nom === nom);
+    if (meme) meme.puces.push(m[2]);
+    else groupes.push({ nom, puces: [m ? m[2] : l] });
+  }
+  let n = 0;
+  const html = groupes.map((g) => (g.nom
+    ? `<h5 class="volet-titre"><span>${en ? 'Part' : 'Volet'} ${++n}</span> ${g.nom}</h5><ul class="bill-summary-list">${g.puces.map((p) => `<li>${p.charAt(0).toUpperCase() + p.slice(1)}</li>`).join('')}</ul>`
+    : `<ul class="bill-summary-list">${g.puces.map((p) => `<li>${p}</li>`).join('')}</ul>`)).join('');
+  const tete = puces(apercu);
+  return (tete.length ? `<ul class="bill-summary-list">${tete.map((l) => `<li>${l}</li>`).join('')}</ul>` : '') + html;
+}
+
 function summaryToHtml(bill) {
+  if (bill.omnibus && bill.summary) return omnibusToHtml(bill.summary, false);
   return bulletsToHtml(bill.summary, '<p><em>Résumé non disponible pour ce projet de loi.</em></p>');
 }
 
@@ -71,7 +99,7 @@ function main() {
     urlEn: b.urlEn || null,
     titleEn: b.titleEn || null,
     noteEn: b.noteEn || null,
-    summaryEn: b.summaryEn ? bulletsToHtml(b.summaryEn, null) : null,
+    summaryEn: b.summaryEn ? (b.omnibus ? omnibusToHtml(b.summaryEn, true) : bulletsToHtml(b.summaryEn, null)) : null,
     lastActivity: b.lastActivity,
     presentedOn: b.presentedOn || null,
     // Omnibus (25 sept. 2026, scrapers/bill-summaries.js) : combien de lois et règlements le
