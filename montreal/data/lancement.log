@@ -2,7 +2,7 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit c7e7004 — Node v22.23.2
+Code : commit 9a83455 — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -13,7 +13,7 @@ https://donnees.montreal.ca/robots.txt : règles sur nos chemins : disallow /dat
 https://montreal.ca/robots.txt : rien qui concerne nos chemins
 
 === Calendrier des séances ===
-Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-09-22T23:31:10.193257)
+Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-09-24T23:30:52.314215)
 Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_video_seance
 71 séance(s) de 2026 lue(s) dans le calendrier.
 
@@ -27,12 +27,12 @@ Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_vide
     Anjou : 29 document(s) sur sa page, 0 daté(s) aujourd'hui, 10 date(s) de séance connues.
     Anjou : 8 ordre(s) du jour repris de sa page, sommaires compris.
   Anjou                                       8 séance(s)  (43 requêtes)
-  Côte-des-Neiges–Notre-Dame-de-Grâce         6 séance(s)  (240 requêtes)
+  Côte-des-Neiges–Notre-Dame-de-Grâce         6 séance(s)  (242 requêtes)
   Lachine                                     7 séance(s)  (82 requêtes)
   LaSalle                                     8 séance(s)  (41 requêtes)
   L'Île-Bizard–Sainte-Geneviève               7 séance(s)  (82 requêtes)
-  Mercier–Hochelaga-Maisonneuve               5 séance(s)  (162 requêtes)
-  Montréal-Nord                               5 séance(s)  (162 requêtes)
+  Mercier–Hochelaga-Maisonneuve               5 séance(s)  (163 requêtes)
+  Montréal-Nord                               5 séance(s)  (163 requêtes)
   Outremont                                   7 séance(s)  (82 requêtes)
     Pierrefonds-Roxboro : 29 document(s) sur sa page, 0 daté(s) aujourd'hui, 10 date(s) de séance connues.
     Pierrefonds-Roxboro : 8 ordre(s) du jour repris de sa page, sommaires compris.
@@ -42,16 +42,17 @@ Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_vide
   Rivière-des-Prairies–Pointe-aux-Trembles    7 séance(s)  (82 requêtes)
   Rosemont–La Petite-Patrie                   7 séance(s)  (82 requêtes)
   Saint-Laurent                               7 séance(s)  (84 requêtes)
-  Saint-Léonard                               6 séance(s)  (120 requêtes)
-  Le Sud-Ouest                                6 séance(s)  (120 requêtes)
+  Saint-Léonard                               6 séance(s)  (121 requêtes)
+  Le Sud-Ouest                                6 séance(s)  (121 requêtes)
   Verdun                                      6 séance(s)  (124 requêtes)
   Ville-Marie                                 7 séance(s)  (82 requêtes)
   Villeray–Saint-Michel–Parc-Extension        7 séance(s)  (82 requêtes)
 
-129 séance(s) d'arrondissement pour 2026, en 1797 requête(s).
+129 séance(s) d'arrondissement pour 2026, en 1803 requête(s).
 
 === Décisions de l'année ===
 129 séance(s) d'arrondissement au calendrier.
+CG_2026-09-24_16h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CM_2026-09-22_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CM_2026-09-21_13h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-09-16_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -85,7 +86,7 @@ CA_Ahu_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 
 CA_Las_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Pir_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 
-5918 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 32 en attente de procès-verbal.
+5918 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 33 en attente de procès-verbal.
 0 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
@@ -108,8 +109,8 @@ Pastilles thématiques :
      82  Ressources humaines
     183  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes enregistrés (depuis 2026-07-25) ===
-Fenêtre depuis 2026-07-25 : 0 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
+=== Votes enregistrés (depuis 2026-07-27) ===
+Fenêtre depuis 2026-07-27 : 0 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
 
 14 votes enregistrés écrits dans data/votes.json (0 procès-verbaux analysés).
 1 portent un avertissement d'extraction (à vérifier à la main).
@@ -163,545 +164,42 @@ Dossiers de l'année : 4648 · 2694 Ko · organismes suggérés : 457.
 
 === Sujets suivables en anglais ===
 Sujets en anglais : 0 déjà traduits, 16 à faire — ~0.27 $ US estimés.
-Sujets en anglais : 16 traduits (0 refusés), 16 au total — 0.30 $ US.
+Sujets en anglais : 15 traduits (1 refusés), 15 au total — 0.30 $ US.
+  ⚠ logement : 2384 étapes au lieu de 6
 
 === Lexique en anglais ===
 Lexique anglais : à jour.
 
 === Traductions anglaises ===
 Résumés : 3753 déjà traduits, 0 à faire, 0 cette fois.
-Titres  : 5540 déjà traduits, 22 à faire, 22 cette fois en 2 paquet(s).
+Titres  : 5541 déjà traduits, 21 à faire, 21 cette fois en 2 paquet(s).
 Étiquettes : 1031 déjà traduites, 22 à faire en 1 paquet(s).
 ~0.03 $ US estimés (lot, moitié prix).
-Lot msgbatch_01GmhMsiXk7nfa13NRddWm6d envoyé (0 résumés, 2 paquets de titres, 1 paquets d'étiquettes).
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
-  in_progress — 0 réussis, 3 en cours, 0 en erreur
+Lot msgbatch_01UWbxBoskPaVFczfxrZ2tVr envoyé (0 résumés, 2 paquets de titres, 1 paquets d'étiquettes).
   in_progress — 0 réussis, 3 en cours, 0 en erreur
   in_progress — 0 réussis, 3 en cours, 0 en erreur
   in_progress — 0 réussis, 3 en cours, 0 en erreur
   in_progress — 0 réussis, 3 en cours, 0 en erreur
   ended — 3 réussis, 0 en cours, 0 en erreur
-Traductions : 0 résumés et 1 titres et 0 étiquettes faits (43 refusés ou en échec) — 3753 résumés et 5541 titres au total, 0.03 $ US.
-  ⚠ étiquette « Adopter l'ordre du jour de la séance du  » refusée
-  ⚠ étiquette « Approuver le procès-verbal de la séance  » refusée
-  ⚠ étiquette « Accorder un contrat de gré à gré à 3087- » refusée
-  ⚠ étiquette « Accorder un soutien financier non récurr » refusée
-  ⚠ étiquette « Accorder un soutien financier totalisant » refusée
-  ⚠ étiquette « Accorder un soutien financier non récurr » refusée
-  ⚠ étiquette « Accorder un soutien financier non récurr » refusée
-  ⚠ étiquette « Accorder un soutien financier totalisant » refusée
-  ⚠ étiquette « Accorder un soutien financier non récurr » refusée
-  ⚠ étiquette « Accorder un soutien financier non récurr » refusée
-  ⚠ étiquette « Accorder un soutien financier non récurr » refusée
-  ⚠ étiquette « Affecter un montant de 75 000 $, taxes i » refusée
-  ⚠ étiquette « Octroyer un don à l'organisme Les Amis d » refusée
-  ⚠ étiquette « Accorder un soutien financier totalisant » refusée
-  ⚠ étiquette « Affecter un montant total de 4 598 900 $ » refusée
+Traductions : 0 résumés et 1 titres et 0 étiquettes faits (42 refusés ou en échec) — 3753 résumés et 5542 titres au total, 0.03 $ US.
+  ⚠ titre CA26 28 084 : nombres différents
+  ⚠ titre CA26 25 0167 : nombres différents
+  ⚠ titre CE26 0772 : nombres différents
+  ⚠ titre CE26 0778 : nombres différents
+  ⚠ titre CA26 09 0110 : nombres différents
+  ⚠ titre CE26 0472 : nombres différents
+  ⚠ titre CA26 12047 : nombres différents
+  ⚠ titre CE26 0286 : nombres différents
+  ⚠ titre CE26 0289 : nombres différents
+  ⚠ titre CE26 0294 : nombres différents
+  ⚠ titre CE26 0300 : nombres différents
+  ⚠ titre CE26 0307 : nombres différents
+  ⚠ titre CG26 0105 : nombres différents
+  ⚠ titre CM26 0161 : nombres différents
+  ⚠ titre CE26 0156 : nombres différents
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-25 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-07-27 pas encore résumés (plafond : 120)…
 7871 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
