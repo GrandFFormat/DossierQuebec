@@ -1,25 +1,2256 @@
 {
- "generatedAt": "2026-09-14T23:14:56.617Z",
+ "generatedAt": "2026-09-25T15:05:26.602Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
  "parametres": {
   "annee": "2026",
-  "max": 1,
+  "max": 40,
   "batch": false,
-  "depuis": null,
+  "depuis": "2026-07-27",
   "plafond": 120
  },
- "nombre": 467,
- "genereCetteFois": 1,
+ "nombre": 549,
+ "genereCetteFois": 82,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.0226,
-  "jetonsEntree": 2545,
-  "jetonsSortie": 396
+  "montant": 2.2454,
+  "jetonsEntree": 265430,
+  "jetonsSortie": 36729
  },
  "resumes": [
+  {
+   "id": "SD-2026-1120",
+   "numero": "SD-2026-1120",
+   "resolution": "CO-260818-2.2",
+   "date": "2026-08-18",
+   "unite": "Aménagement et urbanisme",
+   "objet": "Dépôt du procès-verbal de la réunion du Conseil local du patrimoine tenue le 11 juin 2026",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 75,
+   "puces": [
+    "La Ville dépose le procès-verbal de la réunion du Conseil local du patrimoine tenue le 11 juin 2026, sans autre décision."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:02:45.343Z",
+   "jetons": {
+    "entree": 1989,
+    "sortie": 143
+   }
+  },
+  {
+   "id": "SD-2026-1274",
+   "numero": "SD-2026-1274",
+   "resolution": "CO-260818-2.3",
+   "date": "2026-08-18",
+   "unite": "Aménagement et urbanisme",
+   "objet": "Dépôt du procès-verbal de la réunion du Conseil local du patrimoine tenue le 6 juillet 2026",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 82,
+   "puces": [
+    "La Ville dépose le procès-verbal (26-07) de la réunion du Conseil local du patrimoine tenue le 6 juillet 2026, sans aucune décision ni dépense rattachée."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:02:47.090Z",
+   "jetons": {
+    "entree": 1969,
+    "sortie": 159
+   }
+  },
+  {
+   "id": "SD-2026-1138",
+   "numero": "SD-2026-1138",
+   "resolution": "CO-260818-2.4",
+   "date": "2026-08-18",
+   "unite": "Greffe",
+   "objet": "Dépôt du rapport de la greffière concernant des déclarations de participation à une formation sur l'éthique et la déontologie en matière municipale",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 88,
+   "puces": [
+    "Le conseil prend acte d'un rapport de la greffière listant les déclarations de participation à une formation sur l'éthique et la déontologie municipale suivie par du personnel de cabinet.",
+    "La loi oblige le personnel de cabinet à suivre cette formation dans les six mois d'un premier mandat, ou dans les neuf mois d'un mandat suivant.",
+    "Ces personnes doivent déclarer leur formation à la greffière dans les 30 jours, et celle-ci en fait rapport au conseil.",
+    "Un deuxième rapport sera déposé plus tard pour le personnel qui dispose du délai de neuf mois.",
+    "Aucune dépense n'est associée à ce dépôt."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:02:48.180Z",
+   "jetons": {
+    "entree": 2298,
+    "sortie": 442
+   }
+  },
+  {
+   "id": "SD-2026-1462",
+   "numero": "SD-2026-1462",
+   "resolution": "CO-260818-2.5",
+   "date": "2026-08-18",
+   "unite": "Greffe",
+   "objet": "Avis de la date du scrutin pour l'élection partielle au poste de conseiller municipal du district du Parc-Michel-Chartrand",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 92,
+   "puces": [
+    "Une élection partielle aura lieu le 6 décembre 2026 dans le district du Parc-Michel-Chartrand pour choisir un conseiller municipal.",
+    "Le poste est vacant depuis la démission de Jonathan Tabarah, le 22 juin 2026, constatée par le conseil le 7 juillet.",
+    "Normalement, le vote devait se tenir au plus tard le 1er novembre 2026, ce qui aurait fait chevaucher la campagne municipale avec celle du scrutin provincial du 5 octobre.",
+    "La Ville a demandé au ministre des Affaires municipales un délai supplémentaire pour éviter la confusion entre les deux campagnes; l'autorisation a été accordée le 28 juillet 2026.",
+    "L'avis public d'élection sera publié au plus tard le 23 octobre 2026.",
+    "Aucun coût n'est rattaché à cette décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:02:47.633Z",
+   "jetons": {
+    "entree": 2685,
+    "sortie": 393
+   }
+  },
+  {
+   "id": "SD-2026-1370",
+   "numero": "SD-2026-1370",
+   "resolution": "CO-260818-2.6",
+   "date": "2026-08-18",
+   "unite": "Greffe",
+   "objet": "Dépôt de correspondance pour le conseil de ville",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 96,
+   "puces": [
+    "Le conseil de ville prend acte d'une pétition de citoyens contre le projet de suppression du stationnement sur la rue Bagot.",
+    "Aucune décision n'est prise sur le fond : le document ne fait que déposer la correspondance reçue.",
+    "Le conseil peut donner des instructions au directeur général au sujet de cette correspondance.",
+    "Aucun montant ni aspect financier n'est rattaché à ce dépôt."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:02:52.290Z",
+   "jetons": {
+    "entree": 2078,
+    "sortie": 239
+   }
+  },
+  {
+   "id": "SD-2026-1118",
+   "numero": "SD-2026-1118",
+   "resolution": "CO-260818-2.7",
+   "date": "2026-08-18",
+   "unite": "Culture, sport et développement des communautés",
+   "objet": "Adoption de la reddition de comptes 2025 et de la mise à jour 2026 du Plan d'action à l'égard des personnes handicapées et mesures en matière d'accessibilité universelle 2024-2026",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 103,
+   "puces": [
+    "La Ville adopte le bilan 2025 et la mise à jour 2026 de son plan d'action pour éliminer les obstacles que rencontrent les personnes handicapées.",
+    "Le plan 2024-2026 contient 47 actions : 23 sont terminées et 18 se poursuivent en 2026.",
+    "3 actions sont reportées au prochain plan et 3 autres n'ont pas été réalisées, faute de collaboration externe.",
+    "Parmi les chantiers en cours : un guide du mobilier urbain, du mobilier ajouté pour les cheminements piétonniers, des outils promotionnels adaptés, des activités inclusives en bibliothèque et un comité interne sur l'accès à l'emploi.",
+    "Le plan couvre quatre axes : accessibilité des bâtiments et de l'aménagement, des services et de l'emploi, des communications et de la vie démocratique, ainsi que la sensibilisation et la formation.",
+    "Le document doit être déposé à l'Office des personnes handicapées du Québec avec une résolution du conseil municipal, comme l'exige la loi pour les villes de 15 000 habitants et plus.",
+    "Aucun aspect financier n'est rattaché à cette décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:02:53.782Z",
+   "jetons": {
+    "entree": 3306,
+    "sortie": 503
+   }
+  },
+  {
+   "id": "SD-2026-1367",
+   "numero": "SD-2026-1367",
+   "resolution": "CO-260818-4.1",
+   "date": "2026-08-18",
+   "unite": "Finances",
+   "objet": "Approbation des virements budgétaires par le Conseil ordinaire.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 360,
+   "puces": [
+    "Le conseil autorise des virements budgétaires figurant sur une liste datée du 17 juillet 2026.",
+    "Ces transferts d'argent entre différents postes budgétaires servent à dégager les crédits nécessaires à certaines dépenses déjà prévues.",
+    "Le document ne précise aucun montant : le détail se trouve dans la liste jointe.",
+    "Aucune activité de communication ni intervention juridique n'était requise."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:02:52.853Z",
+   "jetons": {
+    "entree": 1964,
+    "sortie": 238
+   }
+  },
+  {
+   "id": "SD-2026-1220",
+   "numero": "SD-2026-1220",
+   "resolution": "CO-260818-4.2",
+   "date": "2026-08-18",
+   "unite": "Culture, sport et développement des communautés",
+   "objet": "Demande d'une aide financière pour l'acquisition de biens meubles pour les bibliothèques auprès du ministère de la Culture et des Communications",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 365,
+   "puces": [
+    "La Ville demandera une aide financière au ministère de la Culture et des Communications pour acheter du mobilier (fauteuils, tables, chaises) dans ses bibliothèques.",
+    "La demande est estimée à 160 150 $ : le Ministère paierait 50 %, et la Ville assumerait environ 80 075 $ (taxes nettes).",
+    "Le dépôt doit se faire entre le 7 septembre et le 1er octobre 2026, via la plateforme en ligne du Ministère.",
+    "Le chef du Bureau de la culture et des bibliothèques est désigné mandataire et pourra signer la demande et les documents requis.",
+    "En déposant la demande, la Ville s'engage à réaliser le projet et à payer sa part si la subvention est accordée.",
+    "La part de la Ville n'a pas encore été approuvée : elle fait partie de la préparation du budget 2027, et les montants pourront être ajustés.",
+    "Le document mentionne que des bibliothèques manquent de places assises et que du mobilier de 20 à 40 ans est en fin de vie utile."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "160 150 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:02:53.589Z",
+   "jetons": {
+    "entree": 3181,
+    "sortie": 458
+   }
+  },
+  {
+   "id": "SD-2026-1374",
+   "numero": "SD-2026-1374",
+   "resolution": "CO-260818-4.3",
+   "date": "2026-08-18",
+   "unite": "Infrastructures urbaines et mobilité durable",
+   "objet": "Autorisation de déposer une demande d’aide financière au ministère des Transports et de la Mobilité durable dans le cadre du Programme d’aide financière du Fonds de la sécurité routière pour le déploiement du programme « Ça marche ! Vers des déplacements à pied sécuritaires »",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 369,
+   "puces": [
+    "La Ville demande une aide financière de 16 000 $ au ministère des Transports et de la Mobilité durable pour un programme de sécurité piétonne dans les écoles.",
+    "Le projet coûte 20 000 $ au total; la Ville paie les 4 000 $ restants, soit 20 %.",
+    "L'organisme Piétons Québec offrirait la formation « Ça marche ! » dans 15 classes de 3e et 4e année des écoles primaires de Longueuil pendant l'année scolaire 2026-2027.",
+    "La formation comprend un volet théorique en classe, une marche exploratoire autour de l'école et un volet de mobilisation citoyenne.",
+    "Le chef de service mobilité durable et éclairage est désigné pour signer la demande et les documents requis.",
+    "La contribution municipale de 4 000 $ fera l'objet d'une demande de budget récurrent pour 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "20 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:00.034Z",
+   "jetons": {
+    "entree": 3838,
+    "sortie": 540
+   }
+  },
+  {
+   "id": "SD-2026-1381",
+   "numero": "SD-2026-1381",
+   "resolution": "CO-260818-4.4",
+   "date": "2026-08-18",
+   "unite": "Grands projets et infrastructures eau et bâtiment",
+   "objet": "Demande d’aide financière au ministère de la Culture et des Communications dans le cadre du Programme d’ententes en patrimoine – Restauration et préservation des biens patrimoniaux protégés par le gouvernement du Québec, pour le projet visant la Maison Lamarre.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 426,
+   "puces": [
+    "La Ville demande une aide financière au ministère de la Culture et des Communications pour restaurer la Maison Lamarre, au 255, rue St-Charles Est, dans le Vieux-Longueuil.",
+    "Les travaux visent la réfection de la toiture, de la galerie et des fenêtres de ce bâtiment classé en vertu de la Loi sur le patrimoine culturel.",
+    "La demande porte sur 350 000 $ du Ministère, avec une contribution égale de 350 000 $ de la Ville.",
+    "Le programme rembourse jusqu'à 50 % des coûts admissibles, à concurrence de 750 000 $ par année, soit un maximum de 2,25 M$ sur trois ans.",
+    "La Ville s'engage à payer tout dépassement de coûts et à ne dépenser ni accorder aucun contrat avant de recevoir la lettre d'annonce de l'aide.",
+    "La directrice des grands projets et infrastructures en eau et bâtiments est désignée pour signer les documents liés à la demande.",
+    "Aucune autre demande de subvention n'est présentée pour ce projet pour le moment."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "350 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:00.243Z",
+   "jetons": {
+    "entree": 4237,
+    "sortie": 478
+   }
+  },
+  {
+   "id": "SD-2026-1223",
+   "numero": "SD-2026-1223",
+   "resolution": "CO-260818-6.1",
+   "date": "2026-08-18",
+   "unite": "Approvisionnement",
+   "objet": "Attribution du contrat LONG-26-0074 (ÉQ-21-25) pour l'achat d'un camion fourgon pour la division Aqueduc et des égouts de la Direction de l'entretien des infrastructures (DEI)",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 486,
+   "puces": [
+    "La Ville achète un camion fourgon pour la division Aqueduc et égouts de la Direction de l'entretien des infrastructures.",
+    "Le contrat va à Précisions Provençal Inc., qui a déposé la soumission la plus basse, pour 294 856,41 $ taxes comprises.",
+    "Cinq entreprises ont pris les documents d'appel d'offres et cinq ont déposé une offre.",
+    "Le prix retenu est 0,24 % sous l'estimation de la Ville, établie à 295 562,64 $ taxes comprises.",
+    "Le camion remplace un Ford F-550 de 2006, âgé de 20 ans, avec 205 666 kilomètres au compteur.",
+    "L'achat, prévu au départ dans le programme d'immobilisations 2020-2022, avait été reporté; la dépense est maintenant inscrite en 2026.",
+    "Le financement vient d'un règlement d'emprunt adopté en juillet 2020 pour l'acquisition d'équipements motorisés."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "294 856,41 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:02:58.161Z",
+   "jetons": {
+    "entree": 3071,
+    "sortie": 439
+   }
+  },
+  {
+   "id": "SD-2026-0748",
+   "numero": "SD-2026-0748",
+   "resolution": "CO-260818-6.2",
+   "date": "2026-08-18",
+   "unite": "Infrastructures urbaines et mobilité durable",
+   "objet": "Attribution du contrat LONG-26-0128 pour le réaménagement de la place Charles-Le Moyne",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 490,
+   "puces": [
+    "La Ville accorde à Bau-Québec Ltée le contrat de réaménagement de la place Charles-Le Moyne, près du métro Longueuil, pour 5 950 929,37 $ taxes comprises.",
+    "Sept entreprises ont soumissionné lors de l'appel d'offres public tenu du 23 avril au 25 juin 2026; Bau-Québec était la plus basse conforme.",
+    "Les travaux se feront en deux phases : de l'été 2026 à l'automne 2027 entre la rue Saint-Charles Ouest et l'entrée du métro, puis du printemps 2028 à l'été 2028, une fois les terrains libérés par le promoteur.",
+    "Le projet prévoit la gestion des eaux pluviales, plus d'arbres, des œuvres d'art public et une station BIXI électrifiée.",
+    "Du pavé de béton et d'autres éléments existants en bon état seront récupérés et réutilisés, ce qui réduit le coût d'achat de matériaux.",
+    "Le prix retenu est 11,4 % sous l'estimation de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "5 950 929,37 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:02:58.865Z",
+   "jetons": {
+    "entree": 3498,
+    "sortie": 470
+   }
+  },
+  {
+   "id": "SD-2026-1197",
+   "numero": "SD-2026-1197",
+   "resolution": "CO-260818-6.3",
+   "date": "2026-08-18",
+   "unite": "Entretien des infrastructures",
+   "objet": "Attribution du contrat LONG-26-0150 (2026-BI545) pour l'entretien préventif et correctif des systèmes mécaniques de neuf bâtiments municipaux.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 497,
+   "puces": [
+    "La Ville confie à Tecksol DGE inc. l'entretien préventif et correctif des systèmes mécaniques (ventilation, climatisation, chauffage, régulation) de neuf bâtiments municipaux.",
+    "Le contrat vaut 340 277,33 $ taxes comprises et court du 1er septembre 2026 au 31 août 2030.",
+    "Les bâtiments visés sont situés aux 100, rue Saint-Laurent Ouest; 300, rue Saint-Charles Ouest; 1 et 1720, boul. Curé-Poirier Est; 2760, ch. Chambly; 2027, rue Daniel; 1660, rue Bourassa; 1175, chemin du Coteau-Rouge; 2255, rue Cartier.",
+    "Tecksol DGE inc. a déposé le prix le plus bas parmi les sept soumissions reçues, sur dix fournisseurs ayant pris les documents d'appel d'offres.",
+    "Le prix est inférieur de 10,39 % à l'estimation de la Ville, notamment parce que l'indexation annuelle prévue est de 1,3 % plutôt que de 2,5 %.",
+    "Comparé à la dernière année du contrat précédent, le prix soumis pour 2026-2027 est inférieur de 2,7 %, surtout à cause de taux horaires plus bas pour les mécaniciens en réfrigération.",
+    "Le contrat en vigueur, détenu par un autre entrepreneur, prend fin le 31 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "340 277,33 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:08.821Z",
+   "jetons": {
+    "entree": 3461,
+    "sortie": 612
+   }
+  },
+  {
+   "id": "SD-2026-1250",
+   "numero": "SD-2026-1250",
+   "resolution": "CO-260818-6.4",
+   "date": "2026-08-18",
+   "unite": "Infrastructures urbaines et mobilité durable",
+   "objet": "Attribution du contrat LONG-26-0162 pour le réaménagement des aires de jeu pour enfants au parc D.-E.-Joyal.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 502,
+   "puces": [
+    "La Ville confie à Réalisation Dynamique Inc. le contrat de réaménagement des aires de jeu pour enfants du parc D.-E.-Joyal, pour environ 401 791,54 $ taxes comprises.",
+    "L'entreprise a déposé le plus bas prix parmi les six soumissions reçues lors de l'appel d'offres public tenu du 14 mai au 4 juin 2026.",
+    "Les travaux de cette première phase se feront à l'automne 2026 : réfection des aires de jeu, réaménagement d'un sentier, ajout de mobilier urbain et d'un abri-solaire.",
+    "Des éléments existants seront réutilisés (bordures de béton, un banc de parc, un grimpeur filet) et les arbres matures seront conservés et protégés.",
+    "Une deuxième phase est prévue en 2027, avec un appel d'offres distinct : placette inondable pour la gestion des eaux pluviales du parc et du secteur résidentiel voisin, nouvel éclairage et plantations.",
+    "Le prix obtenu est 11 % sous l'estimation de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "401 791,54 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:06.338Z",
+   "jetons": {
+    "entree": 3125,
+    "sortie": 474
+   }
+  },
+  {
+   "id": "SD-2026-1224",
+   "numero": "SD-2026-1224",
+   "resolution": "CO-260818-6.5",
+   "date": "2026-08-18",
+   "unite": "Infrastructures urbaines et mobilité durable",
+   "objet": "Attribution du contrat LONG-26-0174 pour le réaménagement des aires de jeu pour enfants au parc Quévillon",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 508,
+   "puces": [
+    "La Ville confie à Aménagement Sud-Ouest le réaménagement des aires de jeu pour enfants du parc Quévillon, dans le secteur de Saint-Hubert, pour environ 597 285,93 $ taxes incluses.",
+    "Les travaux prévoient de nouvelles aires de jeu, un espace d'entraînement multigénérationnel, un mini-terrain de basketball, un abri-soleil, des sentiers, du mobilier urbain, des plantations et de l'éclairage.",
+    "Un stationnement existant dans le parc sera retiré.",
+    "Les travaux se feront à l'automne 2026; si la météo nuit, des finitions pourraient être reportées au printemps 2027. Le projet devait initialement être fait en 2025.",
+    "L'appel d'offres public s'est tenu du 21 mai au 18 juin 2026 et cinq soumissions ont été reçues; la firme retenue offrait le plus bas prix.",
+    "Le prix retenu est 18 % sous l'estimation de la Ville et 9 % sous la moyenne des soumissions (657 014,52 $ taxes incluses)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "597 285,93 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:07.417Z",
+   "jetons": {
+    "entree": 3313,
+    "sortie": 480
+   }
+  },
+  {
+   "id": "SD-2026-1358",
+   "numero": "SD-2026-1358",
+   "resolution": "CO-260818-6.6",
+   "date": "2026-08-18",
+   "unite": "Approvisionnement",
+   "objet": "Attribution du contrat LONG-26-0196 pour la fourniture et la livraison de matériel de signalisation",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 515,
+   "puces": [
+    "La Ville accorde à Signel Services inc. le contrat de fourniture et de livraison de matériel de signalisation, pour environ 263 790,02 $, taxes comprises.",
+    "Le matériel visé : cônes, balises, pieds de balise et pesées, utilisés par la Division du déneigement, de la réglementation et de la signalisation.",
+    "Le contrat dure deux ans et prend fin le 31 août 2028; l'entente actuelle se terminait le 19 août 2026.",
+    "Signel Services inc. a déposé la soumission la plus basse parmi trois soumissionnaires; cinq entreprises avaient pris les documents d'appel d'offres.",
+    "Le prix dépasse de 2,48 % l'estimation faite par la Ville.",
+    "Les sommes prévues se répartissent ainsi : 39 651,68 $ en 2026, 119 943,49 $ en 2027 et 81 280,27 $ en 2028 (taxes nettes)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "263 790,02 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:05.114Z",
+   "jetons": {
+    "entree": 2850,
+    "sortie": 424
+   }
+  },
+  {
+   "id": "SD-2026-1145",
+   "numero": "SD-2026-1145",
+   "resolution": "CO-260818-6.7",
+   "date": "2026-08-18",
+   "unite": "Infrastructures urbaines et mobilité durable",
+   "objet": "Attribution du contrat LONG-26-0202 (2026-GEN-209) pour la Réfection du pont Roland-Therrien (P- 16137) et de la passerelle Edna-Maricourt (P-15863B), situés à Longueuil",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 519,
+   "puces": [
+    "La Ville confie à Construction Interlag inc. la réfection du pont Roland-Therrien et de la passerelle Edna-Maricourt, pour un montant estimé à 2 406 533,68 $, taxes incluses.",
+    "Le pont P-16137 permet au boulevard Roland-Therrien de franchir la rue Saint-Charles Est; la passerelle Edna-Maricourt sert aux cyclistes qui traversent la route 116 et les voies ferrées du CN Southwark, dans l'arrondissement de Saint-Hubert.",
+    "Des inspections récentes ont relevé des défauts sur les deux structures; les travaux visent à prolonger leur durée de vie et à maintenir la sécurité des déplacements.",
+    "L'appel d'offres public s'est tenu du 2 juin au 9 juillet 2026 et a reçu deux soumissions; Interlag a déposé le prix le plus bas et conforme.",
+    "Le prix retenu dépasse de 17,43 % l'estimation révisée de 2 049 333,95 $; la Ville attribue en partie cet écart à la hausse de 30 à 40 % du prix du bitume entre janvier et juin 2026.",
+    "Le projet est inscrit au programme de réfection des ouvrages d'art du PTI 2026-2027-2028."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 406 533,68 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:16.604Z",
+   "jetons": {
+    "entree": 3804,
+    "sortie": 544
+   }
+  },
+  {
+   "id": "SD-2026-0867",
+   "numero": "SD-2026-0867",
+   "resolution": "CO-260818-6.8",
+   "date": "2026-08-18",
+   "unite": "Infrastructures urbaines et mobilité durable",
+   "objet": "Attribution du contrat LONG-26-0209 pour les travaux de réaménagement des aires de jeu et démolition de la pataugeoire au parc Roberval.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 524,
+   "puces": [
+    "La Ville confie à Gestion Dexsen Inc. les travaux de réaménagement du parc Roberval, dans le secteur du Vieux-Longueuil, pour environ 648 971,10 $ taxes comprises.",
+    "La pataugeoire du parc sera démolie et les aires de jeux pour enfants refaites au complet.",
+    "Le parc recevra un espace d'entraînement multigénérationnel, un abri-soleil, des sentiers, du mobilier urbain, des plantations, de l'éclairage et une station BIXI électrifiée.",
+    "Les arbres matures existants seront conservés et protégés pendant les travaux.",
+    "Les travaux sont prévus à l'automne 2026; en cas de mauvais temps, des finitions pourraient être reportées au printemps 2027.",
+    "Sept entreprises ont soumissionné à l'appel d'offres public tenu du 11 juin au 9 juillet 2026; Dexsen a offert le prix le plus bas, soit 10 % sous l'estimation."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "648 971,10 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:14.522Z",
+   "jetons": {
+    "entree": 3043,
+    "sortie": 442
+   }
+  },
+  {
+   "id": "SD-2026-1208",
+   "numero": "SD-2026-1208",
+   "resolution": "CO-260818-6.9",
+   "date": "2026-08-18",
+   "unite": "Infrastructures urbaines et mobilité durable",
+   "objet": "Autorisation d'une dépense au contrat-cadre APP-24-004 pour des services professionnels en ingénierie (Contrat 2) (SD-2024-0956).",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 530,
+   "puces": [
+    "La Ville autorise une dépense de 309 827,73 $, taxes comprises, pour des services professionnels en ingénierie confiés à Stantec Experts-conseils ltée.",
+    "Le mandat couvre les études préparatoires, les plans et devis, le soutien technique pendant l'appel d'offres et le phasage des travaux.",
+    "Les travaux visent les rues Châteauguay, Jean-Béliveau et certains services sur la rue Bord-de-l'Eau, près de l'usine d'eau potable Mario-Petrone.",
+    "Au programme : remplacement de la conduite d'eau potable, séparation des égouts, réfection de la chaussée, des trottoirs et bordures, nouvel éclairage et ajout de verdure.",
+    "La valeur estimée du projet de travaux est de 9 500 000 $, taxes comprises; les honoraires équivalent à 3,26 % de ce montant.",
+    "Avec cette dépense, le contrat-cadre APP-24-007 est utilisé à 92,52 %, laissant un solde de 414 699,64 $.",
+    "Les travaux figurent au programme d'investissements 2027-2028-2029 et sont arrimés au calendrier de reconstruction de l'usine."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "309 827,73 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:14.931Z",
+   "jetons": {
+    "entree": 3594,
+    "sortie": 513
+   }
+  },
+  {
+   "id": "SD-2026-1332",
+   "numero": "SD-2026-1332",
+   "resolution": "CO-260818-6.10",
+   "date": "2026-08-18",
+   "unite": "Approvisionnement",
+   "objet": "Autorisation de vendre des biens appartenant à la Ville",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 544,
+   "puces": [
+    "La Ville de Longueuil autorise la vente d'équipements dont elle n'a plus besoin, inscrits sur une liste appelée « Liste des biens à disposer ».",
+    "La valeur totale estimée de ces biens dépasse 10 000 $.",
+    "Les ventes passeront par le Centre d'acquisitions gouvernementales (CAG) plutôt que par un encan, pour vendre plus vite et rejoindre plus d'acheteurs.",
+    "Il s'agit de véhicules, d'équipements et d'autres biens matériels remplacés, brisés ou accidentés dont la réparation coûterait trop cher.",
+    "Ces biens servaient à l'entretien des infrastructures et à la Direction de la culture, du sport et du développement des communautés.",
+    "L'argent des ventes ira dans un poste budgétaire de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "10 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:13.760Z",
+   "jetons": {
+    "entree": 2388,
+    "sortie": 381
+   }
+  },
+  {
+   "id": "SD-2026-1281",
+   "numero": "SD-2026-1281",
+   "resolution": "CO-260818-6.11",
+   "date": "2026-08-18",
+   "unite": "Entretien des infrastructures",
+   "objet": "Attribution du contrat LONG-26-0143 (2026-TP448-1.3) pour la location de machinerie lourde (niveleuse) avec opérateur pour les opérations de déneigement et d'entretien.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 548,
+   "puces": [
+    "La Ville loue une niveleuse sur pneus avec aile de côté et son opérateur pour le déneigement et l'entretien, faute de posséder la machinerie et la main-d'œuvre nécessaires.",
+    "Le contrat va à Paysagiste Rive-Sud ltée, du 1er novembre 2026 au 30 avril 2029, avec une reconduction automatique de six mois.",
+    "Coût estimé : 265 017,37 $ taxes comprises, soit 84 794,06 $ en 2026-2027, 88 243,31 $ en 2027-2028 et 91 980,00 $ en 2028-2029.",
+    "Deux entreprises ont soumissionné pour ce lot; l'autre a été écartée parce que sa seule niveleuse est déjà affectée à un autre lot.",
+    "Le prix dépasse l'estimation de la Ville de 38,6 % et celui du contrat précédent de 45,7 %, ce que la Ville attribue à la hausse des coûts d'exploitation (main-d'œuvre, équipements, assurances, carburant).",
+    "Le prix soumis pour la première année est inférieur de 0,9 % au taux de référence du gouvernement du Québec pour une niveleuse."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "265 017,37 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:25.399Z",
+   "jetons": {
+    "entree": 3713,
+    "sortie": 511
+   }
+  },
+  {
+   "id": "SD-2026-1286",
+   "numero": "SD-2026-1286",
+   "resolution": "CO-260818-6.12",
+   "date": "2026-08-18",
+   "unite": "Entretien des infrastructures",
+   "objet": "Attribution du contrat LONG-26-0143 (2026-TP448-1.4) pour la location de machinerie lourde (niveleuse) avec opérateur pour les opérations de déneigement et d'entretien.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 554,
+   "puces": [
+    "La Ville loue une niveleuse sur pneus avec aile de côté et son opérateur à Excavation Jonda inc. pour le déneigement et l'entretien, au coût estimé de 219 889,69 $ taxes comprises.",
+    "Le contrat court du 1er novembre 2026 au 30 avril 2029, avec une reconduction tacite de six mois.",
+    "Excavation Jonda inc. était la seule entreprise à soumissionner sur ce lot; trois entreprises sur six ont déposé une soumission pour l'ensemble du contrat.",
+    "Les lots 1.1 et 1.2 ne seront pas attribués, les prix reçus dépassant de plus de 91 % l'estimation de la Ville.",
+    "Le prix est 15 % plus élevé que l'estimation et 24,4 % plus élevé que la moyenne de la dernière année des contrats précédents.",
+    "La Ville a tenté de négocier une baisse de prix, mais l'entreprise a maintenu son offre.",
+    "La Ville explique qu'elle ne possède ni la machinerie ni la main-d'œuvre qualifiée pour faire tout le déneigement sur son territoire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "219 889,69 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:23.331Z",
+   "jetons": {
+    "entree": 3977,
+    "sortie": 493
+   }
+  },
+  {
+   "id": "SD-2026-1287",
+   "numero": "SD-2026-1287",
+   "resolution": "CO-260818-6.13",
+   "date": "2026-08-18",
+   "unite": "Entretien des infrastructures",
+   "objet": "Attribution du contrat LONG-26-0143 (2026-TP448-2.1) pour la location de machinerie lourde (chargeuse) avec opérateur pour les opérations de déneigement et d'entretien.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 560,
+   "puces": [
+    "La Ville confie à Paysagiste Rive-Sud ltée la location de chargeuses sur pneus avec aile de côté et opérateur pour le déneigement et l'entretien, pour 362 171,26 $ taxes incluses.",
+    "Le contrat couvre du 1er novembre 2026 au 30 avril 2029, avec une reconduction tacite de six mois.",
+    "Le contrat prévoit deux chargeuses sur pneus avec aile de côté de 3,35 mètres et opérateur; la Ville dit ne posséder ni la machinerie ni la main-d'œuvre pour faire tout le déneigement elle-même.",
+    "L'entreprise a déposé le prix le plus bas parmi trois soumissions reçues; six entreprises avaient pris les documents d'appel d'offres.",
+    "Le prix dépasse de 15 % l'estimation de la Ville et de 35,9 % le prix de la dernière année des contrats précédents.",
+    "La Ville attribue l'écart à la hausse des coûts d'exploitation : main-d'œuvre, équipements, assurances, entretien mécanique et carburant.",
+    "Le coût annuel passe de 117 849,38 $ en 2026-2027 à 123 598,13 $ en 2028-2029, taxes incluses."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "362 171,26 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:25.132Z",
+   "jetons": {
+    "entree": 3524,
+    "sortie": 531
+   }
+  },
+  {
+   "id": "SD-2026-1288",
+   "numero": "SD-2026-1288",
+   "resolution": "CO-260818-6.14",
+   "date": "2026-08-18",
+   "unite": "Entretien des infrastructures",
+   "objet": "Attribution du contrat LONG-26-0143 (2026-TP448-2.2) pour la location de machinerie lourde (chargeuse) avec opérateur pour les opérations de déneigement et d'entretien.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 565,
+   "puces": [
+    "La Ville confie à Paysagiste Rive-Sud Ltée la location de chargeuses sur pneus avec aile de côté et opérateur pour le déneigement et l'entretien, au coût estimé de 362 171,26 $ taxes comprises.",
+    "Le contrat couvre du 1er novembre 2026 au 30 avril 2029, avec une reconduction tacite de six mois.",
+    "Il s'agit de deux chargeuses sur pneus avec aile de côté de 3,35 mètres et leur opérateur; la Ville dit ne pas posséder la machinerie ni la main-d'œuvre pour faire tout le déneigement sur son territoire.",
+    "Paysagiste Rive-Sud a soumis le prix le plus bas parmi les trois soumissions reçues, sur six entreprises ayant pris les documents.",
+    "Le prix dépasse de 15 % l'estimation de la Ville et de 35,9 % le prix de la dernière année des contrats précédents.",
+    "La Ville attribue la hausse aux coûts de main-d'œuvre spécialisée, au financement et au remplacement des équipements, aux assurances, à l'entretien mécanique et au prix du carburant.",
+    "Le contrat actuel prend fin le 30 avril 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "362 171,26 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:24.201Z",
+   "jetons": {
+    "entree": 3528,
+    "sortie": 525
+   }
+  },
+  {
+   "id": "SD-2026-1173",
+   "numero": "SD-2026-1173",
+   "resolution": "CO-260818-8.1",
+   "date": "2026-08-18",
+   "unite": "Greffe",
+   "objet": "Dépôt des certificats de l'assistante-greffière concernant le résultat de la procédure d'enregistrement des personnes habiles à voter sur les règlements CO-2026-1343, CO-2026-1349, CO-2026-1352 et CO-2026-1356.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 570,
+   "puces": [
+    "La Ville dépose les certificats confirmant le résultat de la consultation des personnes habiles à voter sur quatre règlements d'emprunt adoptés le 26 mai 2026.",
+    "Aucune demande de référendum n'a été reçue durant la période d'enregistrement tenue du 8 au 12 juin 2026, de 9 h à 19 h, à l'hôtel de ville.",
+    "Les règlements visés portent sur des emprunts pour des honoraires professionnels : études et inspections d'infrastructures, travaux dans diverses rues et stationnements, rénovation du Centre sportif Rosanne-Laflamme, et aménagement de parcs, espaces verts et pistes cyclables.",
+    "Le document ne prévoit aucun montant ni aspect financier."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:30.446Z",
+   "jetons": {
+    "entree": 2623,
+    "sortie": 353
+   }
+  },
+  {
+   "id": "SD-2026-0598",
+   "numero": "SD-2026-0598",
+   "resolution": "CO-260818-8.2",
+   "date": "2026-08-18",
+   "unite": "Approvisionnement",
+   "objet": "Adopter le Règlement CO-2026-1358 modifiant le Règlement CO-2020-1090 sur la gestion contractuelle - Compétence locale",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 577,
+   "puces": [
+    "La Ville modifie son règlement sur la gestion contractuelle, qui encadre la façon dont elle octroie ses contrats.",
+    "Le changement vise à harmoniser le vocabulaire du règlement avec la nouvelle Loi sur les contrats des organismes municipaux (LCOM).",
+    "Le règlement devra inclure des mesures favorisant l'acquisition responsable, selon les principes de la Loi sur le développement durable.",
+    "La Ville en profite pour ajuster les responsabilités du Bureau de l'éthique et de la gestion contractuelle.",
+    "Aucun montant n'est rattaché à cette décision et aucune activité de communication n'est prévue.",
+    "Un avis de motion avait déjà été donné le 26 mai 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:31.219Z",
+   "jetons": {
+    "entree": 2331,
+    "sortie": 347
+   }
+  },
+  {
+   "id": "SD-2026-1210",
+   "numero": "SD-2026-1210",
+   "resolution": "CO-260818-8.3",
+   "date": "2026-08-18",
+   "unite": "Culture, sport et développement des communautés",
+   "objet": "Approbation d'une convention d'aide financière à intervenir avec Zone Loisir Montérégie Inc. dans le cadre du Programme d'assistance financière au loisir des personnes handicapées - Volet soutien à l'accompagnement 2026-2027",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 598,
+   "puces": [
+    "La Ville reçoit 34 500 $ de Zone Loisir Montérégie inc. pour payer une partie des salaires d'accompagnateurs d'enfants à besoins particuliers dans les camps de jour.",
+    "L'argent couvre 30 accompagnateurs : 26 dans l'arrondissement de Saint-Hubert et 4 dans celui de Greenfield Park.",
+    "La somme se répartit ainsi : 29 900 $ pour Saint-Hubert et 4 600 $ pour Greenfield Park en 2026.",
+    "La Ville approuve la convention d'aide financière et autorise la greffière à la signer.",
+    "La convention est exigée parce que l'aide dépasse 10 000 $.",
+    "Le service d'accompagnement vise à faciliter la participation des enfants aux activités de loisir."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "34 500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:31.209Z",
+   "jetons": {
+    "entree": 2625,
+    "sortie": 373
+   }
+  },
+  {
+   "id": "SD-2026-1174",
+   "numero": "SD-2026-1174",
+   "resolution": "CO-260818-8.4",
+   "date": "2026-08-18",
+   "unite": "Culture, sport et développement des communautés",
+   "objet": "Demande d'autorisation pour l'installation et l'utilisation temporaire de braseros au parc St. Mark et sur la placette éphémère du 300, rue Saint-Charles Ouest dans le cadre du Marché de Noël et des traditions de Longueuil 2026",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 608,
+   "puces": [
+    "La Ville autorise l'installation et l'utilisation de braseros pendant le Marché de Noël et des traditions de Longueuil 2026.",
+    "Les braseros seront installés au parc St. Mark et sur la placette éphémère du stationnement au 300, rue Saint-Charles Ouest.",
+    "L'organisme Métiers & Traditions, promoteur de l'événement, installera et opérera lui-même les braseros.",
+    "Les feux extérieurs sont normalement interdits par le règlement sur les nuisances, sauf autorisation du conseil pour un événement sur un terrain de la Ville.",
+    "Le document ne prévoit aucune dépense ni revenu pour la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:30.094Z",
+   "jetons": {
+    "entree": 2721,
+    "sortie": 323
+   }
+  },
+  {
+   "id": "SD-2026-0578",
+   "numero": "SD-2026-0578",
+   "resolution": "CO-260818-8.5",
+   "date": "2026-08-18",
+   "unite": "Culture, sport et développement des communautés",
+   "objet": "Approbation de l'entente à intervenir entre la Ville et l'Association des bibliothèques publiques du Québec (ABPQ) pour l'adhésion au programme Biblio-Santé pour la période du 1er janvier 2026 au 31 décembre 2028",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 611,
+   "puces": [
+    "Les bibliothèques de Longueuil renouvellent leur participation au programme Biblio-Santé, du 1er janvier 2026 au 31 décembre 2028.",
+    "Ce programme, coordonné par l'Association des bibliothèques publiques du Québec, donne accès à de l'information validée en matière de santé; il est déployé dans plus de 600 bibliothèques.",
+    "La Ville signera une lettre d'entente avec l'ABPQ, qui l'exige pour permettre la participation.",
+    "Coût total d'environ 8 110 $ pour les trois ans : environ 2 637 $ en 2026, 2 703 $ en 2027 et 2 770 $ en 2028, avec une indexation annuelle de 2,5 %.",
+    "La facture combine des frais annuels de base et un montant de 0,0090 $ par habitant, calculé sur 271 667 personnes desservies.",
+    "L'entente comporte une portion rétroactive, les bibliothèques participant déjà au programme depuis plusieurs années."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "8 110,00 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:36.572Z",
+   "jetons": {
+    "entree": 3009,
+    "sortie": 441
+   }
+  },
+  {
+   "id": "SD-2026-0470",
+   "numero": "SD-2026-0470",
+   "resolution": "CO-260818-8.6",
+   "date": "2026-08-18",
+   "unite": "Culture, sport et développement des communautés",
+   "objet": "Autorisation d'une entente intermunicipale avec la Ville de Boucherville relativement au prêt d'équipement d'urgence lors de l'ouverture d'un centre d'hébergement d'urgence.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 625,
+   "puces": [
+    "Longueuil signera une entente avec Boucherville pour lui prêter ses équipements d'urgence quand Boucherville doit ouvrir un centre d'hébergement d'urgence.",
+    "Le matériel comprend entre autres des lits de camp, de la signalisation, des trousses d'urgence, des radios portatives et des fournitures pour personnes à mobilité réduite.",
+    "L'entente dure 5 ans et le prêt se fait gratuitement.",
+    "Boucherville doit aller chercher et rapporter le matériel à ses frais, le nettoyer et le désinfecter, et remplacer ce qui est perdu ou brisé.",
+    "Si Longueuil doit acheter ou louer du matériel parce que le sien est prêté, Boucherville lui rembourse ces frais.",
+    "Longueuil peut refuser un prêt, notamment s'il la priverait de plus de la moitié de ses propres équipements d'urgence.",
+    "La mairesse et la greffière sont autorisées à signer l'entente."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:36.061Z",
+   "jetons": {
+    "entree": 2842,
+    "sortie": 432
+   }
+  },
+  {
+   "id": "SD-2026-1023",
+   "numero": "SD-2026-1023",
+   "resolution": "CO-260818-8.7",
+   "date": "2026-08-18",
+   "unite": "Culture, sport et développement des communautés",
+   "objet": "Approbation d'une prolongation et d'un amendement de l'accord conclu avec la Corporation de l'Église Saint-Paul du diocèse anglican de Montréal",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 635,
+   "puces": [
+    "La Ville prolonge jusqu'au 30 juin 2027 son entente avec la Corporation de l'Église Saint-Paul pour utiliser des locaux au 321, rue Empire, dans l'arrondissement de Greenfield Park.",
+    "Ces locaux servent aux activités du Club FADOQ Greenfield Park et à l'entreposage de son matériel.",
+    "La location coûtera au maximum 2 790 $ par année, taxes et frais inclus, soit 1 395 $ en 2026 et 1 395 $ en 2027.",
+    "L'église a révisé ses tarifs à partir du 1er juillet 2026 : une hausse de 5 $ par séance, entreposage du matériel inclus.",
+    "L'organisme sera facturé pour l'utilisation des espaces selon la tarification en vigueur.",
+    "La greffière est autorisée à signer la prolongation et l'amendement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 790,00 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:36.433Z",
+   "jetons": {
+    "entree": 2836,
+    "sortie": 401
+   }
+  },
+  {
+   "id": "SD-2026-1259",
+   "numero": "SD-2026-1259",
+   "resolution": "CO-260818-8.8",
+   "date": "2026-08-18",
+   "unite": "Environnement et transition écologique",
+   "objet": "Résiliation de l’entente relative à l’implantation d’une microforêt dans un parc de la Ville de Longueuil.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 648,
+   "puces": [
+    "La Ville met fin à l'entente conclue avec Arbre-Évolution, coopérative de solidarité, pour planter une microforêt dans un parc de Longueuil.",
+    "Le projet devait se faire gratuitement, financé par un don citoyen.",
+    "Le citoyen donateur a demandé que la Ville lui remette un reçu d'impôt officiel, ce qui change les conditions de départ.",
+    "Pour émettre un tel reçu, la Ville devrait passer par un acte notarié, obtenir des autorisations du conseil municipal et lancer un appel d'offres, sans garantie qu'Arbre-Évolution soit retenue.",
+    "La Ville invoque une clause de l'entente qui lui permet d'y mettre fin en tout temps, sans indemnité, avec un préavis écrit de 30 jours.",
+    "La résiliation n'entraîne aucune implication financière et la microforêt ne sera pas plantée selon les modalités prévues."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:36.848Z",
+   "jetons": {
+    "entree": 2845,
+    "sortie": 415
+   }
+  },
+  {
+   "id": "SD-2026-1285",
+   "numero": "SD-2026-1285",
+   "resolution": "CO-260818-8.10",
+   "date": "2026-08-18",
+   "unite": "Environnement et transition écologique",
+   "objet": "Adoption du Règlement CO-2026-1360 ordonnant des travaux de réhabilitation environnementale de divers lots et décrétant, à cette fin et pour le paiement des honoraires professionnels, un emprunt.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 667,
+   "puces": [
+    "La Ville adopte un règlement d'emprunt pour financer la décontamination de terrains qu'elle possède, à l'est de l'intersection du boulevard Nobert et de la rue Champlain.",
+    "Les études ont révélé des sols contaminés au-delà des critères d'usage prévus et des matières résiduelles enfouies sur ces lots.",
+    "L'emprunt couvre les travaux de réhabilitation et les honoraires professionnels; aucun montant d'emprunt n'est précisé dans le document.",
+    "Québec verse une aide financière de 3 878 633 $ par le programme ClimatSol-Plus (volet 2) pour ces travaux.",
+    "La Ville a aussi accepté une promesse de vente pour acquérir des terrains voisins de 48 129 m².",
+    "Une fois décontaminés, les terrains pourraient accueillir un projet commercial, industriel ou de services publics.",
+    "Le projet est inscrit au programme triennal d'immobilisations 2026-2028 déjà adopté."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 878 633 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:42.744Z",
+   "jetons": {
+    "entree": 2937,
+    "sortie": 441
+   }
+  },
+  {
+   "id": "SD-2026-1234",
+   "numero": "SD-2026-1234",
+   "resolution": "CO-260818-8.11",
+   "date": "2026-08-18",
+   "unite": "Grands projets et infrastructures eau et bâtiment",
+   "objet": "Adoption du Règlement CO-2026-1363 ordonnant des travaux de reconstruction de l'installation aquatique, située au 2095, rue Laurier et décrétant, à cette fin, un emprunt.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 675,
+   "puces": [
+    "La Ville adopte un règlement d'emprunt de 14 600 000 $ pour reconstruire l'installation aquatique du parc Laurier, au 2095, rue Laurier.",
+    "Le bassin, construit entre 1966 et 1967, est hors service depuis trois ans en raison de son état de vétusté.",
+    "Les travaux prévoient la démolition et la reconstruction de la piscine extérieure, une aire de jeux aquatique, un nouveau pavillon de service et des espaces de détente et de promenade.",
+    "Le projet doit respecter les normes de sécurité et d'accessibilité universelle en vigueur.",
+    "Le projet est à l'étape des plans et devis; l'ouverture est prévue pour l'été 2028.",
+    "Les honoraires professionnels sont couverts par un règlement adopté en 2023; le projet est inscrit au plan triennal d'immobilisations 2027-2028-2029."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "14 600 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:42.937Z",
+   "jetons": {
+    "entree": 2822,
+    "sortie": 408
+   }
+  },
+  {
+   "id": "SD-2026-1302",
+   "numero": "SD-2026-1302",
+   "resolution": "CO-260818-8.12",
+   "date": "2026-08-18",
+   "unite": "Grands projets et infrastructures eau et bâtiment",
+   "objet": "Adoption du Règlement CO-2026-1364 ordonnant des travaux de reconstruction de l'installation aquatique Lecavalier, située au 2030, rue Brébeuf, ainsi que des travaux de construction d’un stationnement et décrétant, à ces fins, un emprunt.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 688,
+   "puces": [
+    "La Ville adopte un règlement d'emprunt de 11 000 000 $ pour reconstruire l'installation aquatique du parc Lecavalier, au 2030, rue Brébeuf.",
+    "La piscine, construite en 1965, est fermée définitivement depuis 2022 en raison de son état.",
+    "Les travaux prévoient la démolition et la reconstruction du bassin, de la pataugeoire, du bâtiment de service, des surfaces extérieures et des infrastructures souterraines (égout, aqueduc).",
+    "Le projet ajoute la rétention des eaux pluviales sur le site et deux places de stationnement pour personnes à mobilité réduite le long de la rue Brébeuf.",
+    "Les locaux existants du bâtiment de la Maison de la famille, accessibles depuis la promenade de la piscine, seront rénovés.",
+    "L'ouverture de la nouvelle installation est prévue pour l'été 2028; le projet figure au PTI 2027-2028-2029.",
+    "Les honoraires professionnels sont couverts par un règlement antérieur (CO-2023-1246)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "11 000 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:41.855Z",
+   "jetons": {
+    "entree": 3094,
+    "sortie": 471
+   }
+  },
+  {
+   "id": "SD-2026-1351",
+   "numero": "SD-2026-1351",
+   "resolution": "CO-260818-8.13",
+   "date": "2026-08-18",
+   "unite": "Aménagement et urbanisme",
+   "objet": "Avis de motion et adoption du projet de règlement CO-2026-1365 modifiant le Règlement CO-2024- 1285 sur les permis et certificats",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 701,
+   "puces": [
+    "La Ville modifie son règlement sur les permis et certificats pour faciliter les tournages de films et d'émissions de télévision sur son territoire.",
+    "Le changement précise les cas où un certificat d'autorisation ne sera plus exigé pour un tournage temporaire sur un terrain privé.",
+    "La modification vise à harmoniser le règlement avec la Politique d'occupation du domaine public à des fins de tournage, adoptée en 2025.",
+    "La plupart des demandes de tournage touchent à la fois le domaine public et le domaine privé, ce que le règlement actuel encadrait mal.",
+    "Il s'agit d'un avis de motion et de l'adoption d'un projet de règlement : aucune dépense n'y est associée."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:41.863Z",
+   "jetons": {
+    "entree": 2319,
+    "sortie": 339
+   }
+  },
+  {
+   "id": "SD-2026-1230",
+   "numero": "SD-2026-1230",
+   "resolution": "CO-260818-10.1",
+   "date": "2026-08-18",
+   "unite": "Environnement et transition écologique",
+   "objet": "Demande de reconnaissance du lot 2 878 119 au Registre des aires protégées et des autres mesures de conservation efficaces au Québec",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 773,
+   "puces": [
+    "La Ville demande au gouvernement du Québec de reconnaître un terrain du boisé Maricourt (lot 2 878 119) comme « autre mesure de conservation efficace » et de l'inscrire au registre provincial des aires protégées.",
+    "Ce terrain a été reçu en don écologique par la Ville en 2025, pour conserver la biodiversité à perpétuité.",
+    "La reconnaissance ne fait que confirmer les pratiques de gestion déjà en place : elle n'ajoute aucune nouvelle contrainte réglementaire ou légale.",
+    "L'organisme Nature-Action Québec préparera et déposera la demande au ministère de l'Environnement au nom de la Ville, et assurera le suivi.",
+    "La démarche se fait sans frais pour la Ville.",
+    "La cheffe de service Environnement est autorisée à signer les documents nécessaires.",
+    "La Ville est aussi en démarche pour obtenir ce statut pour d'autres territoires, dont les parcs-nature, avec la Communauté métropolitaine de Montréal."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:49.507Z",
+   "jetons": {
+    "entree": 4181,
+    "sortie": 451
+   }
+  },
+  {
+   "id": "SD-2026-1340",
+   "numero": "SD-2026-1340",
+   "resolution": "CO-260818-10.2",
+   "date": "2026-08-18",
+   "unite": "Aménagement et urbanisme",
+   "objet": "Adoption de la résolution autorisant le Projet immobilier PI-2026-010 visant la construction d’un bâtiment mixte, de structure isolée, comportant 4 étages, aux futurs 820-830, chemin de Chambly et 25, rue de Gentilly Ouest (lot 2 008 225 et lot 2 008 462)",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 778,
+   "puces": [
+    "La Ville autorise la construction d'un immeuble mixte de 4 étages à l'intersection du chemin de Chambly et de la rue de Gentilly Ouest, dans le Vieux-Longueuil (district Saint-Charles).",
+    "Le bâtiment comptera 19 logements (16 de 2 chambres, 3 de 3 chambres) et 2 locaux commerciaux au rez-de-chaussée, face au cégep Édouard-Montpetit.",
+    "Le projet déroge à 13 règles d'urbanisme, dont le nombre de logements (19 au lieu de 3 permis), la hauteur (4 étages au lieu de 3) et des marges de recul réduites à 3,03 m au lieu de 4,5 m.",
+    "Les deux terrains seront regroupés en un seul lot; les futures adresses seront le 820 et le 830, chemin de Chambly et le 25, rue de Gentilly Ouest.",
+    "Une assemblée publique de consultation était prévue le 21 juillet 2026.",
+    "Deux bâtiments commerciaux vacants occupaient le site et ont été démolis en 2025 après avoir subi des dommages.",
+    "Le sommaire indique qu'il n'y a aucun aspect financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:51.034Z",
+   "jetons": {
+    "entree": 4333,
+    "sortie": 511
+   }
+  },
+  {
+   "id": "SD-2026-1128",
+   "numero": "SD-2026-1128",
+   "resolution": "CO-260818-12.1",
+   "date": "2026-08-18",
+   "unite": "Aménagement et urbanisme",
+   "objet": "Demande d'exclusion formulée à la Commission de protection du territoire agricole du Québec (CPTAQ) pour le lot 2 419 054",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 790,
+   "puces": [
+    "La Ville de Longueuil dépose une nouvelle demande à la Commission de protection du territoire agricole du Québec pour retirer de la zone agricole un terrain situé à Saint-Bruno-de-Montarville (lot 2 419 054).",
+    "Le but : permettre des activités commerciales sur ce terrain, aujourd'hui inutilisé après l'abandon des activités de pépinière.",
+    "Le terrain se trouve dans le périmètre urbain, coincé entre le boulevard Sir-Wilfrid-Laurier (116), la voie ferrée et des commerces, avec des secteurs résidentiels autour.",
+    "Une première exclusion avait été accordée le 11 décembre 2023, à condition de modifier les documents d'aménagement dans les 24 mois; ce délai n'a pas été respecté, d'où la nouvelle demande.",
+    "Le Plan métropolitain d'aménagement et de développement révisé, en vigueur depuis décembre 2025, a déjà retiré ce terrain de sa zone agricole permanente.",
+    "Selon l'analyse de la Ville, la demande n'a pas d'effet négatif sur les activités agricoles voisines, aucune ne se trouvant à proximité.",
+    "Le conseil de Saint-Bruno-de-Montarville a appuyé la demande le 29 avril 2026. Aucun coût n'est associé au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:50.537Z",
+   "jetons": {
+    "entree": 3263,
+    "sortie": 563
+   }
+  },
+  {
+   "id": "SD-2026-1137",
+   "numero": "SD-2026-1137",
+   "resolution": "CO-260818-12.2",
+   "date": "2026-08-18",
+   "unite": "Service de police de l'agglomération de Longueuil",
+   "objet": "Attribution de gré à gré du contrat LONG-26-0124 pour la fourniture de services de formation au Service de police de l'agglomération de Longueuil pour l'année 2026.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 812,
+   "puces": [
+    "La Ville confie à l'École nationale de police du Québec (ENPQ) la formation des policiers du Service de police de l'agglomération de Longueuil pour 2026.",
+    "Le contrat est estimé à 228 985 $ taxes comprises, soit 209 093,83 $ en taxes nettes.",
+    "Le contrat est accordé sans appel d'offres, une exception permise pour un contrat conclu avec un organisme public.",
+    "L'ENPQ est l'organisme prescrit par la Loi sur la police pour former les policiers.",
+    "Les formations servent à maintenir les compétences des policiers et à renouveler des certifications exigées par les normes provinciales.",
+    "La dépense sera payée par le budget du Service de police et le budget corporatif de formation des ressources humaines.",
+    "Un contrat semblable avait été attribué pour l'année 2025."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "228 985,00 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:49.334Z",
+   "jetons": {
+    "entree": 2685,
+    "sortie": 384
+   }
+  },
+  {
+   "id": "SD-2026-1139",
+   "numero": "SD-2026-1139",
+   "resolution": "CO-260818-12.3",
+   "date": "2026-08-18",
+   "unite": "Service de sécurité incendie de l'agglomération de Longueuil",
+   "objet": "Attribution du contrat LONG-26-0156 pour la fourniture et l'installation de cabinets de séchage pour le Service de sécurité incendie de l'agglomération de Longueuil et emprunt au fonds de roulement de l’agglomération",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 816,
+   "puces": [
+    "La Ville accorde à Équipements incendies CMP Mayer inc. un contrat estimé à 281 688,75 $ (taxes incluses) pour fournir et installer des cabinets de séchage au Service de sécurité incendie de l'agglomération de Longueuil.",
+    "Les nouveaux cabinets remplaceront des équipements en fin de vie dans les casernes 11, 14, 23, 33 et 43, ainsi qu'à la division logistique — soit les casernes sans tour à boyaux.",
+    "À la logistique, les séchoirs pourront aussi servir à sécher les vêtements de protection des pompiers (manteaux, pantalons, gants, bottes, cagoules).",
+    "La Ville emprunte au fonds de roulement de l'agglomération un maximum de 265 172,51 $ (taxes nettes), remboursable sur cinq ans.",
+    "L'emprunt dépasse le montant du contrat parce que des travaux électriques mineurs sont requis, dont le passage à des disjoncteurs de 40 ampères, évalués à 8 709,71 $ taxes incluses.",
+    "Il s'agit de la seule soumission reçue; le prix est de 24 500 $ par cabinet, soit 34 % sous l'estimation de la Ville, pour un achat de dix cabinets."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "281 688,75 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:04.572Z",
+   "jetons": {
+    "entree": 4084,
+    "sortie": 540
+   }
+  },
+  {
+   "id": "SD-2026-1404",
+   "numero": "SD-2026-1404",
+   "resolution": "CO-260818-12.4",
+   "date": "2026-08-18",
+   "unite": "Affaires externes",
+   "objet": "Approbation de la Politique d’investissement commune - Fonds locaux d’investissement et Fonds local de solidarité de Développement économique de l’agglomération de Longueuil",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 822,
+   "puces": [
+    "La Ville approuve la Politique d'investissement 2026 encadrant les Fonds locaux d'investissement (FLI) et le Fonds local de solidarité (FLS), gérés par Développement économique de l'agglomération de Longueuil (DEL).",
+    "Le directeur général de la Ville est autorisé à signer cette politique.",
+    "Ces fonds prêtent de l'argent aux entreprises du territoire qui ont de la difficulté à obtenir du financement auprès des prêteurs traditionnels, souvent pour leur fonds de roulement.",
+    "L'aide sert de complément à d'autres sources de financement : prêt bancaire, subvention, mise de fonds ou autre capital.",
+    "La politique tient compte de l'avenant approuvé le 30 avril, qui fixe les conditions du prêt du ministère de l'Économie à la Ville à compter du 17 février 2026.",
+    "Adopter une telle politique chaque année est une obligation prévue aux contrats entre la Ville et le gouvernement du Québec.",
+    "Le document ne prévoit aucun aspect financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:56.400Z",
+   "jetons": {
+    "entree": 3359,
+    "sortie": 458
+   }
+  },
+  {
+   "id": "SD-2026-1325",
+   "numero": "SD-2026-1325",
+   "resolution": "CO-260818-12.5",
+   "date": "2026-08-18",
+   "unite": "Environnement et transition écologique",
+   "objet": "Affectation d'une somme en provenance du fonds d'immobilisation de l'agglomération afin de prévoir les crédits requis pour l'attribution de gré à gré d’un contrat de services professionnels. Ce contrat est requis pour la production d’un avis d’impraticabilité technique visant la finalisation des travaux de réhabilitation in situ à la station de pompage sise au 850, rue Saint-Charles Ouest.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 847,
+   "puces": [
+    "La Ville réserve 84 676 $ du fonds d'immobilisation de l'agglomération pour payer un contrat de services professionnels lié à la station de pompage du 850, rue Saint-Charles Ouest.",
+    "Ce contrat, accordé de gré à gré, servira à produire un « avis d'impraticabilité technique » exigé par le ministère de l'Environnement pour clore les travaux de décontamination.",
+    "Une fuite de diesel survenue en 2015 avait contaminé les sols et l'eau souterraine de ce poste de pompage qui alimente les usines d'eau potable locale et régionale.",
+    "Après plus de cinq ans de traitement par bioremédiation, les travaux sont terminés, mais une contamination résiduelle d'hydrocarbures de faible volume demeure sur le site.",
+    "L'avis est nécessaire pour toucher la subvention ClimatSol-Plus de 807 550 $, qui sera remise au fonds d'immobilisation une fois encaissée.",
+    "Avec cet ajout de 92 730,79 $ (taxes incluses), le mandat professionnel passe de 92 659,51 $ à 455 722,29 $, une hausse de 391,82 % par rapport au mandat initial.",
+    "Un suivi environnemental de l'eau souterraine est anticipé et fait l'objet d'un dossier distinct (SD-2026-1369)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "84 676 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:03:58.896Z",
+   "jetons": {
+    "entree": 4801,
+    "sortie": 567
+   }
+  },
+  {
+   "id": "SD-2026-1369",
+   "numero": "SD-2026-1369",
+   "resolution": "CO-260818-12.6",
+   "date": "2026-08-18",
+   "unite": "Environnement et transition écologique",
+   "objet": "Affectation d'une somme en provenance du fonds d'immobilisation de l'agglomération afin de prévoir les crédits requis pour la réalisation d’un suivi environnemental de l’eau souterraine à la station de pompage située au 850, rue Saint-Charles Ouest.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 866,
+   "puces": [
+    "La Ville réserve 36 364 $ (39 823,32 $ taxes incluses) du fonds d'immobilisation de l'agglomération pour surveiller la qualité de l'eau souterraine à la station de pompage du 850, rue Saint-Charles Ouest.",
+    "Ce budget couvre trois suivis annuels sur trois ans; le mandat sera donné dans le cadre du contrat-cadre APP-23-133 (contrat 2).",
+    "Une fuite de diesel survenue en 2015 à ce poste de pompage, qui alimente les usines d'eau potable locale et régionale, avait contaminé des sols et l'eau souterraine.",
+    "Les travaux de décontamination par bioremédiation sont terminés, mais une contamination résiduelle de faible volume demeure sur le site.",
+    "Le coût total du projet passe d'environ 1 548 222,29 $ à 1 588 045,61 $, une hausse de 2,57 %.",
+    "La fin des travaux doit être confirmée avant la fin de 2026 pour toucher la subvention ClimatSol-Plus de 807 550 $, qui sera ensuite remise au fonds d'immobilisation."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "36 364 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:03.665Z",
+   "jetons": {
+    "entree": 4225,
+    "sortie": 493
+   }
+  },
+  {
+   "id": "SD-2025-2381",
+   "numero": "SD-2025-2381",
+   "resolution": "CO-260818-12.7",
+   "date": "2026-08-18",
+   "unite": "Grands projets et infrastructures eau et bâtiment",
+   "objet": "Affectation d'une somme en provenance du fonds d’immobilisations de l’agglomération afin de prévoir les crédits requis pour la déconstruction de la passerelle P14143 dans le cadre du projet de Reconstruction de l'usine d'eau potable Mario-Petrone et obtention d’un permis de voirie auprès du ministère des Transports et de la Mobilité durable du Québec.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 873,
+   "puces": [
+    "La Ville réserve 617 000 $ (taxes nettes) du fonds d'immobilisations de l'agglomération pour démolir la passerelle P14143.",
+    "La passerelle doit disparaître avant le début des travaux de reconstruction de l'usine d'eau potable Mario-Petrone, prévus à l'automne 2027, car elle nuit à l'implantation de la nouvelle usine.",
+    "La passerelle appartient au ministère des Transports et de la Mobilité durable du Québec : la Ville doit obtenir un permis de voirie pour la déconstruire.",
+    "Le Ministère ne verse rien pour la démolition, estimant la valeur résiduelle de la passerelle à zéro; la Ville assume tous les coûts.",
+    "La directrice des grands projets et des infrastructures en eau et bâtiments est autorisée à signer les documents liés au permis de voirie.",
+    "La Ville dit vouloir poursuivre les discussions avec le Ministère pour une reconstruction de la passerelle, qui donne accès aux berges du fleuve.",
+    "L'avance de fonds sera remboursée à l'adoption du règlement d'emprunt prévu à l'automne 2026; la résolution CEA-250212-8.1 est abrogée."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "617 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:10.946Z",
+   "jetons": {
+    "entree": 3500,
+    "sortie": 519
+   }
+  },
+  {
+   "id": "SD-2026-1412",
+   "numero": "SD-2026-1412",
+   "resolution": "CO-260818-12.8",
+   "date": "2026-08-18",
+   "unite": "Finances",
+   "objet": "Liste du 24 juillet 2026 des virements budgétaires et affectation de surplus non affecté pour approbation du conseil d'agglomération.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 878,
+   "puces": [
+    "Le conseil d'agglom\ration doit approuver une liste de virements budg\taires dat\ne du 24 juillet 2026.",
+    "Ces virements d\nplacent de l'argent entre diff\nrents postes du budget pour payer des d\npenses d\nj\n pr\nvues.",
+    "La liste inclut aussi une affectation de surplus non affect\n.",
+    "Le d\ntail des sommes se trouve dans une liste jointe au document, qui n'est pas reproduite ici.",
+    "Aucun montant global n'est indiqu\n dans le sommaire."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:10.581Z",
+   "jetons": {
+    "entree": 2012,
+    "sortie": 284
+   }
+  },
+  {
+   "id": "SD-2026-1490",
+   "numero": "SD-2026-1490",
+   "resolution": "CO-260818-12.9",
+   "date": "2026-08-18",
+   "unite": "Ressources humaines",
+   "objet": "Embauche du directeur des finances et trésorier",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 886,
+   "puces": [
+    "La Ville embauche Rémi Dubois comme directeur des finances et trésorier.",
+    "Son entrée en fonction est fixée au 8 septembre 2026.",
+    "L'embauche fait suite au départ de la directrice des finances prévu le 31 décembre 2026.",
+    "Un comité de sélection a recommandé sa candidature après évaluation et entrevues.",
+    "Le directeur général est autorisé à signer le contrat de travail au nom de la Ville.",
+    "Le document ne mentionne aucun montant ni aspect financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:08.559Z",
+   "jetons": {
+    "entree": 2565,
+    "sortie": 270
+   }
+  },
+  {
+   "id": "SD-2026-1331",
+   "numero": "SD-2026-1331",
+   "resolution": "CO-260818-12.10",
+   "date": "2026-08-18",
+   "unite": "Approvisionnement",
+   "objet": "Autorisation de vendre des biens appartenant à la Ville",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 896,
+   "puces": [
+    "La Ville de Longueuil se départit d'équipements qui ne servent plus : biens remplacés, brisés ou accidentés dont la réparation coûterait trop cher.",
+    "La vente passera par le Centre d'acquisitions gouvernementales (CAG) plutôt que par un encan.",
+    "La valeur totale estimée des biens inscrits sur la liste dépasse 10 000 $.",
+    "Les biens visés ont servi au Service de police et au Service de sécurité incendie de l'agglomération de Longueuil.",
+    "La Ville dit que le CAG permet de vendre plus vite et de rejoindre plus d'acheteurs, donc d'obtenir de meilleurs prix.",
+    "Les revenus de la vente iront dans un poste budgétaire de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "10 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:09.624Z",
+   "jetons": {
+    "entree": 2399,
+    "sortie": 357
+   }
+  },
+  {
+   "id": "SD-2026-1214",
+   "numero": "SD-2026-1214",
+   "resolution": "CO-260818-12.11",
+   "date": "2026-08-18",
+   "unite": "Approvisionnement",
+   "objet": "Adhésion de la Ville de Longueuil à une entente d’achat regroupé avec le Centre d’acquisitions gouvernementales pour l’acquisition de véhicules légers pour l'année 2027",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 900,
+   "puces": [
+    "La Ville de Longueuil se joint à un achat regroupé du Centre d'acquisitions gouvernementales (CAG) pour acheter des véhicules légers, du 1er novembre 2026 au 31 octobre 2027.",
+    "Le montant estimé de l'adhésion est de 4 396 644,00 $, taxes comprises, et c'est le CAG qui mènera l'appel d'offres.",
+    "Environ 68 véhicules sont prévus : 52 pour l'agglomération, 11 pour le local et 5 mixtes, pour 3 824 000,00 $ avant taxes.",
+    "Les véhicules vont de la voiture compacte à la camionnette, incluant véhicules de patrouille, fourgonnettes et VUS, avec leurs versions hybrides et électriques quand elles existent.",
+    "La Ville s'engage à respecter les conditions du contrat comme si elle avait contracté directement avec les fournisseurs retenus.",
+    "L'entente n'engage aucune dépense immédiate : les achats devront être autorisés plus tard par les instances concernées.",
+    "Le chef de la Division des acquisitions est autorisé à signer les documents nécessaires, sans signature de la greffière."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "4 396 644,00 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:16.818Z",
+   "jetons": {
+    "entree": 3735,
+    "sortie": 506
+   }
+  },
+  {
+   "id": "SD-2026-1392",
+   "numero": "SD-2026-1392",
+   "resolution": "CO-260818-12.12",
+   "date": "2026-08-18",
+   "unite": "Ressources humaines",
+   "objet": "Attribution du contrat LONG-26-0040 pour l’implantation et les services professionnels d’intégration d’un système de gestion des apprentissages.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 905,
+   "puces": [
+    "La Ville confie à SVI eSolutions inc. l'implantation d'un système de gestion des apprentissages (plateforme de formation en ligne) pour ses employés, au coût estimé de 228 239,59 $, taxes comprises.",
+    "SVI eSolutions inc. a soumis le prix le plus bas parmi les trois soumissions reçues, analysées par un comité de sélection le 14 juillet.",
+    "Le contrat dure cinq ans et se renouvelle automatiquement pour deux ans de plus, soit sept ans au total.",
+    "Le système regroupera au même endroit les formations en ligne et en présentiel de toutes les directions, avec des catalogues adaptés à certaines d'entre elles.",
+    "La Ville pourra suivre la participation et la réussite aux formations obligatoires (santé-sécurité, éthique, police, sécurité incendie) et conserver les preuves de complétion.",
+    "Le prix retenu est environ 47 % sous l'estimation de la Ville; le fournisseur précédent coûtait 41 863 $ par année.",
+    "Les dépenses s'étalent de 2026 à 2033 et sont partagées entre la Ville et l'agglomération."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "228 239,59 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:16.579Z",
+   "jetons": {
+    "entree": 3655,
+    "sortie": 498
+   }
+  },
+  {
+   "id": "SD-2026-1187",
+   "numero": "SD-2026-1187",
+   "resolution": "CO-260818-12.13",
+   "date": "2026-08-18",
+   "unite": "Grands projets et infrastructures eau et bâtiment",
+   "objet": "Attribution du contrat LONG-26-0050 pour le remplacement de la vanne de la prise d'eau principale de la station de pompage du 850, rue Saint-Charles Ouest",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 911,
+   "puces": [
+    "La Ville accorde à 9298-3972 Québec inc Service Sous-Marin le contrat de remplacement de la vanne principale de la prise d'eau, à la station de pompage du 850, rue Saint-Charles Ouest, pour environ 666 981,42 $ taxes comprises.",
+    "C'est cette entreprise qui a soumis le prix le plus bas et sa soumission est jugée conforme.",
+    "La vanne, installée en 1980, alimente en eau brute les usines Louise-Gravel et Mario-Petrone; elle a déjà été réparée et doit maintenant être changée.",
+    "Les travaux se feront en plongée, car l'alimentation en eau ne peut pas être interrompue pendant l'intervention.",
+    "Le prix dépasse de 30 % l'estimation de la Ville, un écart attribué surtout à la conception et à la fourniture de la vanne (202 % de plus que prévu).",
+    "Un budget de 609 042,93 $ (taxes nettes) est prévu en 2026; le projet est inscrit au plan d'immobilisations 2027-2028-2029."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "666 981,42 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:18.721Z",
+   "jetons": {
+    "entree": 3502,
+    "sortie": 469
+   }
+  },
+  {
+   "id": "SD-2026-1267",
+   "numero": "SD-2026-1267",
+   "resolution": "CO-260818-12.14",
+   "date": "2026-08-18",
+   "unite": "Service de police de l'agglomération de Longueuil",
+   "objet": "Attribution du contrat LONG-26-0076 relatif à l'acquisition de souliers, bottines et bottes d'hiver destinés au Service de police de l'agglomération de Longueuil.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 917,
+   "puces": [
+    "La Ville accorde à L'Équipeur 3633501 Canada Inc. le contrat de fourniture de souliers, bottines et bottes d'hiver pour les policières et policiers de l'agglomération de Longueuil.",
+    "Le contrat couvre trois ans, à prix unitaires, pour un montant estimé à 448 461,95 $ taxes comprises (409 505,53 $ taxes nettes).",
+    "L'Équipeur a déposé le prix le plus bas : 10 fournisseurs ont pris les documents d'appel d'offres, 2 ont soumissionné.",
+    "La dépense sera payée à même le budget de fonctionnement du Service de police, répartie de 2026 à 2029 (42 858,45 $ en 2026, 131 348,74 $ en 2027, 139 275,23 $ en 2028, 96 023,11 $ en 2029).",
+    "Le prix obtenu est inférieur de 27,13 % à l'estimation de la Ville, et le prix moyen par paire de chaussures baisse de 7,69 % par rapport au contrat précédent.",
+    "Le contrat précédent a pris fin le 1er mai 2026; la convention collective oblige la Ville à fournir ces équipements aux policiers."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "448 461,95 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:18.682Z",
+   "jetons": {
+    "entree": 3477,
+    "sortie": 515
+   }
+  },
+  {
+   "id": "SD-2026-1226",
+   "numero": "SD-2026-1226",
+   "resolution": "CO-260818-12.15",
+   "date": "2026-08-18",
+   "unite": "Gestion des eaux",
+   "objet": "Attribution du contrat LONG-26-0107 pour le remplacement de la membrane d’étanchéité des réservoirs de coagulant au Centre d’épuration Rive-Sud (2019-GDE-605).",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 922,
+   "puces": [
+    "La Ville confie à l'entreprise Le Groupe Lefebvre M.R.P inc. le remplacement de la membrane d'étanchéité des deux réservoirs de coagulant au Centre d'épuration Rive-Sud.",
+    "Le contrat est estimé à 505 186,35 $, taxes comprises, sur une base forfaitaire et unitaire.",
+    "Cette entreprise a déposé le prix le plus bas parmi les quatre soumissions reçues lors de l'appel d'offres public.",
+    "Le montant est 13 % plus bas que l'estimation faite par la Ville avant l'appel d'offres.",
+    "Les travaux commencent le jour de l'avis d'adjudication et se terminent quand toutes les obligations sont exécutées.",
+    "La membrane, installée à la construction de l'usine, a dépassé sa durée de vie de 20 ans; elle empêche le coagulant de dégrader le béton des réservoirs.",
+    "Le projet fait partie du programme de mise à niveau des ouvrages d'assainissement des eaux usées du plan triennal 2026-2028."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "505 186,35 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:24.763Z",
+   "jetons": {
+    "entree": 3012,
+    "sortie": 468
+   }
+  },
+  {
+   "id": "SD-2026-1354",
+   "numero": "SD-2026-1354",
+   "resolution": "CO-260818-12.16",
+   "date": "2026-08-18",
+   "unite": "Grands projets et infrastructures eau et bâtiment",
+   "objet": "Attribution du contrat LONG-26-0153 pour la construction de chambres d'accès aux conduites d'eau brute dans le cadre du projet de mise à niveau de la station de pompage du 850 Saint-Charles Ouest et des inspections des conduites d'eau brute",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 926,
+   "puces": [
+    "La Ville confie à Eurovia Québec Grands Projets inc. la construction de chambres d'accès aux conduites d'eau brute, pour un montant estimé à 1 148 200 $, taxes comprises.",
+    "Ces chambres permettront d'inspecter les conduites sans arrêter la station de pompage du 850, rue Saint-Charles Ouest, qui alimente les usines d'eau potable Louise-Gravel (1700, rue Bourassa) et Mario-Petrone (20, rue de Châteauguay).",
+    "Les conduites de refoulement ont plus de 60 ans; la Ville veut évaluer leur état et leur durée de vie restante.",
+    "Le prix dépasse de 21 % l'estimation de la Ville, notamment à cause du remblayage d'un fossé dans un espace restreint, du coût des chambres préfabriquées et des raccordements sous pression.",
+    "Trois entreprises ont soumissionné; Eurovia a offert le prix le plus bas, soit 13 % sous la moyenne des soumissions.",
+    "Les travaux sont financés par le règlement d'emprunt CA-2023-393 et pourraient s'étaler sur deux saisons."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 148 200,00 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:26.565Z",
+   "jetons": {
+    "entree": 3926,
+    "sortie": 503
+   }
+  },
+  {
+   "id": "SD-2026-1265",
+   "numero": "SD-2026-1265",
+   "resolution": "CO-260818-12.17",
+   "date": "2026-08-18",
+   "unite": "Entretien des infrastructures",
+   "objet": "Attribution du contrat LONG-26-0188 (2026-BI552) pour l'entretien préventif et correctif des systèmes mécaniques de dix (10) casernes.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 933,
+   "puces": [
+    "La Ville confie à J. P. Lessard climatisation inc. l'entretien préventif et correctif des systèmes mécaniques (ventilation, climatisation, chauffage, régulation) de 10 casernes, pour 448 535,87 $ taxes comprises.",
+    "Le contrat couvre du 1er septembre 2026 au 31 août 2030.",
+    "Les casernes visées se trouvent notamment sur les boulevards Curé-Poirier Est, Moïse-Vincent, Lapinière et Matte, ainsi que rues Saint-Georges, Bellevue, Soucy, d'Avaugour, Boudreau et chemin du Lac.",
+    "Nouveauté : la caserne du 2655, boul. Matte s'ajoute au contrat, et le montant prévu pour les pièces augmente.",
+    "La facture finale variera selon les pièces réellement utilisées.",
+    "Quatre des six fournisseurs ayant pris les documents ont soumissionné; le prix retenu est 15,7 % sous l'estimation et 8,2 % sous les prix de la dernière année du contrat précédent.",
+    "Le contrat précédent, détenu par la même entreprise, se termine le 31 août 2026 parce que les quantités prévues ont été atteintes."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "448 535,87 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:24.907Z",
+   "jetons": {
+    "entree": 3749,
+    "sortie": 524
+   }
+  },
+  {
+   "id": "SD-2026-1304",
+   "numero": "SD-2026-1304",
+   "resolution": "CO-260818-12.18",
+   "date": "2026-08-18",
+   "unite": "Gestion des eaux",
+   "objet": "Attribution du contrat LONG-26-0189 (2026-GDE-590) pour la manipulation et inspection de vannes et chambres de vannes sur le réseau d'aqueduc",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 938,
+   "puces": [
+    "La Ville confie à Simo Management Inc. la manipulation et l'inspection des vannes et chambres de vannes du réseau d'aqueduc, pour un montant estimé à 372 392,53 $ taxes comprises.",
+    "Le contrat dure 28 mois et se termine le 31 décembre 2028.",
+    "Les travaux visent le réseau de conduites maîtresses de 99 km qui dessert Longueuil, Boucherville, Brossard, Saint-Bruno-de-Montarville et Saint-Lambert.",
+    "Environ 330 vannes et 241 chambres sont concernées, avec des diamètres de 250 à 1200 millimètres.",
+    "Deux soumissions ont été reçues; Simo Management offrait le plus bas prix, l'autre étant 16,7 % plus élevée.",
+    "Le prix dépasse de 3,67 % l'estimation, et de 5,21 % le prix de la dernière année du contrat précédent, à quantité égale.",
+    "Les sommes prévues aux budgets : 104 646,29 $ en 2026, 113 222,72 $ en 2027 et 122 175,00 $ en 2028 (taxes nettes)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "372 392,53 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:24.754Z",
+   "jetons": {
+    "entree": 2970,
+    "sortie": 495
+   }
+  },
+  {
+   "id": "SD-2026-1189",
+   "numero": "SD-2026-1189",
+   "resolution": "CO-260818-12.19",
+   "date": "2026-08-18",
+   "unite": "Grands projets et infrastructures eau et bâtiment",
+   "objet": "Attribution du contrat LONG-26-0194 pour le bétonnage de conduites d'eau brute abandonnées dans le cadre du projet d'abandon des structures souterraines de l'ancienne usine Mario-Petrone",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 942,
+   "puces": [
+    "La Ville confie à Constructions BSL INC. le contrat de bétonnage d'anciennes conduites d'eau brute, pour un montant estimé à 285 065,57 $, taxes comprises. C'est la soumission conforme la plus basse.",
+    "Les travaux visent la chambre E, située sur la Route 132 : on y installera un obturateur permanent sur l'ancienne prise d'eau brute no 1 et on bétonnera une conduite menant à une autre chambre désaffectée.",
+    "Ces infrastructures, abandonnées depuis la mise en service de la station de pompage du 850, rue Saint-Charles Ouest vers 1980, alimentaient l'ancienne usine d'eau potable Mario-Petrone, au 20, rue de Châteauguay.",
+    "Il s'agit d'une première phase, préalable au démantèlement de l'ancienne prise d'eau no 2 et du puits de pompage sur le terrain de l'usine.",
+    "Les travaux seront intégrés au contrat principal d'agrandissement de l'usine de production d'eau potable Mario-Petrone.",
+    "Le prix soumis est 51 % plus bas que l'estimation, un écart attribué surtout au coût du béton anti-lessivage, évalué par le consultant à près de cinq fois le prix soumis.",
+    "Le budget disponible est de 260 302,86 $ (taxes nettes); le projet est inscrit au PTI 2027-2028-2029."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "285 065,57 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:33.167Z",
+   "jetons": {
+    "entree": 3725,
+    "sortie": 591
+   }
+  },
+  {
+   "id": "SD-2026-1305",
+   "numero": "SD-2026-1305",
+   "resolution": "CO-260818-12.20",
+   "date": "2026-08-18",
+   "unite": "Grands projets et infrastructures eau et bâtiment",
+   "objet": "Attribution du contrat LONG-26-0203 pour la démolition de la passerelle Victoria dans le cadre du projet de Reconstruction de l'usine d'eau potable Mario-Petrone",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 947,
+   "puces": [
+    "La Ville confie à Excavation René St-Pierre inc. la démolition de la passerelle Victoria (P14143), pour un montant estimé à 431 026,01 $, taxes comprises.",
+    "L'entreprise a déposé la soumission la plus basse et conforme aux exigences de l'appel d'offres.",
+    "La passerelle doit être démantelée parce qu'elle nuit à la construction de la nouvelle usine d'eau potable Mario-Petrone, dont les travaux commencent à l'automne 2027.",
+    "Le prix retenu dépasse de 2,2 % l'estimation faite par la Ville.",
+    "Le contrat ne tient que si la Ville approuve l'argent venant du fonds d'immobilisations de l'agglomération et les démarches pour le permis de voirie.",
+    "Des activités de communication sont prévues; leur contenu reste à définir."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "431 026,01 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:33.371Z",
+   "jetons": {
+    "entree": 2767,
+    "sortie": 391
+   }
+  },
+  {
+   "id": "SD-2026-1414",
+   "numero": "SD-2026-1414",
+   "resolution": "CO-260818-12.21",
+   "date": "2026-08-18",
+   "unite": "Approvisionnement",
+   "objet": "Attribution du contrat LONG-26-0211 (ÉQ-25-03) pour l'acquisition d'une embarcation professionnelle de sauvetage nautique (SSIAL)",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 952,
+   "puces": [
+    "La Ville achète une embarcation professionnelle de sauvetage nautique pour le Service de sécurité incendie de l'agglomération de Longueuil (SSIAL).",
+    "Le contrat va à Nautic & Art inc., seule entreprise à avoir déposé une offre, pour environ 887 540,29 $ taxes comprises.",
+    "Deux entreprises s'étaient procuré les documents d'appel d'offres, une seule a soumissionné.",
+    "La Ville a négocié le prix à la baisse : de 895 508,05 $ à 887 540,29 $, taxes comprises.",
+    "Le montant est 7,79 % sous l'estimation de 962 480,76 $ préparée par la Ville.",
+    "L'embarcation remplace une Airsolid modèle 23 de 2016.",
+    "L'achat est financé par le règlement d'emprunt adopté en mai 2024; le déboursé est prévu en 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "887 540,29 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:33.518Z",
+   "jetons": {
+    "entree": 3248,
+    "sortie": 408
+   }
+  },
+  {
+   "id": "SD-2026-0835",
+   "numero": "SD-2026-0835",
+   "resolution": "CO-260818-12.22",
+   "date": "2026-08-18",
+   "unite": "Technologies de l’information",
+   "objet": "Adjudication du contrat LONG-26-0069 pour le Renouvellement du service de téléphonie Centrex.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 956,
+   "puces": [
+    "La Ville accorde à Bell Canada un contrat de 499 370,69 $ (taxes incluses) pour renouveler son service de téléphonie Centrex pendant 3 ans.",
+    "Le service soutient environ 305 lignes téléphoniques analogiques dans plusieurs bâtiments administratifs et opérationnels de la Ville.",
+    "Bell Canada était le seul soumissionnaire conforme à l'appel d'offres public : le marché est limité et le fournisseur actuel est le seul à pouvoir maintenir les numéros et services existants.",
+    "Le prix dépasse d'environ 28 % l'estimation de la Ville, le fournisseur ayant haussé ses tarifs à cause du déclin de la technologie Centrex.",
+    "Le prix de la première année ressemble à celui de la dernière année du contrat précédent; les hausses touchent les années 2 et 3.",
+    "La dépense se répartit entre le local (256 329,63 $), les dépenses mixtes (82 456,39 $) et l'agglomération (160 584,66 $), et est financée par le budget d'opération des technologies de l'information."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "499 370,69 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:31.933Z",
+   "jetons": {
+    "entree": 3657,
+    "sortie": 476
+   }
+  },
+  {
+   "id": "SD-2026-0792",
+   "numero": "SD-2026-0792",
+   "resolution": "CO-260818-12.23",
+   "date": "2026-08-18",
+   "unite": "Grands projets et infrastructures eau et bâtiment",
+   "objet": "Modification au contrat APP-24-048 pour les travaux de remplacement des lamelles et des supports des décanteurs de l'usine d'eau potable Louise-Gravel - autorisation préalable",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 961,
+   "puces": [
+    "La Ville autorise une modification de 405 770,46 $ (taxes incluses) au contrat de Groupe Mécano inc. pour l'usine d'eau potable Louise-Gravel, au 1700, rue Bourassa à Longueuil.",
+    "Des inspections ont montré qu'une section du mur de béton entre les décanteurs 1 et 2 se dégrade; la firme d'inspection recommande de la sécuriser sans délai.",
+    "Les travaux consistent à poser des plaques étanches de renfort de chaque côté du mur, une solution temporaire en attendant une réparation permanente.",
+    "Ces travaux se feront à l'automne 2026, ce qui décale de quelques semaines les travaux prévus au décanteur 2 (prévus de septembre 2026 à la fin janvier 2027).",
+    "Le contrat passe à 2 946 807,72 $, soit une hausse totale de 19,4 % par rapport au montant initial de 2 467 546 $. Les travaux sont avancés à environ 67 %.",
+    "Sans cette réparation, le nettoyage des décanteurs deviendrait non sécuritaire et l'accumulation de boues réduirait la capacité de production de l'usine.",
+    "La solution permanente attendra l'augmentation de la capacité de décantation de l'usine, dont les études commencent en 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "405 770,46 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:41.442Z",
+   "jetons": {
+    "entree": 4204,
+    "sortie": 550
+   }
+  },
+  {
+   "id": "SD-2026-1380",
+   "numero": "SD-2026-1380",
+   "resolution": "CO-260818-12.24",
+   "date": "2026-08-18",
+   "unite": "Ressources humaines",
+   "objet": "Attribution de gré à gré du contrat LONG-26-0133 pour la fourniture d'une solution en ligne de recrutement avec LinkedIn Technology Canada Inc pour une durée de 36 mois.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 972,
+   "puces": [
+    "La Ville accorde de gré à gré un contrat de 195 300 $, taxes comprises, à LinkedIn Technology Canada inc. pour une plateforme de recrutement en ligne.",
+    "Le contrat couvre 36 mois, du 1er juin 2026 au 31 mai 2029, soit environ 65 100 $ par année.",
+    "Cette décision remplace celle du conseil du 28 mai 2026, qui fixait le contrat à 186 000 $ : la taxe fédérale de 9 300 $ avait été oubliée.",
+    "L'outil sert aux recruteurs de la Ville pour approcher directement des candidats, cibler des profils et développer la page LinkedIn de la Ville.",
+    "La dépense est payée à même le budget des honoraires professionnels de la Direction des ressources humaines.",
+    "Le contrat précédent avec LinkedIn est échu depuis le 23 avril 2026; l'entreprise est traitée comme fournisseur d'exception (fourniture d'espaces médias)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "195 300 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:39.732Z",
+   "jetons": {
+    "entree": 3782,
+    "sortie": 439
+   }
+  },
+  {
+   "id": "SD-2026-1289",
+   "numero": "SD-2026-1289",
+   "resolution": "CO-260818-12.25",
+   "date": "2026-08-18",
+   "unite": "Gestion des eaux",
+   "objet": "Attribuer de gré à gré le contrat LONG-26-0146 (2026-GDE-575) pour la fourniture de pièces de rechange pour les systèmes de désinfection UV des usines de production d'eau potable Louise-Gravel et Mario-Petrone",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 980,
+   "puces": [
+    "La Ville achète des pièces de rechange pour les systèmes de désinfection aux rayons ultraviolets des usines d'eau potable Louise-Gravel et Mario-Petrone.",
+    "Le contrat va à Brault Maxtech inc., pour un montant estimé à 151 086,85 $, taxes comprises.",
+    "Le contrat est accordé sans appel d'offres : Brault Maxtech est le seul fournisseur au Québec des pièces Trojan, fabricant des équipements installés.",
+    "Le contrat est valide jusqu'au 8 juillet 2027, et les dépenses sont réparties sur les budgets 2026 et 2027.",
+    "Les pièces servent à l'entretien préventif et au remplacement des pièces défectueuses à l'étape de désinfection de l'eau potable.",
+    "Le coût est 11,9 % plus bas que l'estimation de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "151 086,85 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:48.937Z",
+   "jetons": {
+    "entree": 2871,
+    "sortie": 400
+   }
+  },
+  {
+   "id": "SD-2026-1341",
+   "numero": "SD-2026-1341",
+   "resolution": "CO-260818-12.26",
+   "date": "2026-08-18",
+   "unite": "Technologies de l’information",
+   "objet": "Attribution de gré à gré du contrat LONG-26-0232 pour la souscription pour 3 années au service SIEM Microsoft Sentinel auprès du courtier infonuagique (MCN).",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 984,
+   "puces": [
+    "La Ville renouvelle pour 3 ans son abonnement au service de surveillance informatique Microsoft Sentinel, pour un montant estimé à 923 795,24 $, taxes comprises.",
+    "Le contrat est accordé sans appel d'offres à Microsoft Canada, par l'entremise du ministère de la Cybersécurité et du Numérique du Québec.",
+    "La Ville paiera en plus 18 475,91 $ de frais de courtage au ministère, soit 2 % du coût du contrat.",
+    "Le service sert à surveiller en continu les cybermenaces sur les systèmes de la Ville, 24 heures sur 24, 365 jours par année.",
+    "Les paiements s'échelonnent de novembre 2026 à octobre 2029, de 47 488,54 $ en 2026 à environ 294 943,92 $ en 2029.",
+    "Selon le document, le coût est en baisse de 10,73 % par rapport à l'entente précédente, grâce à une optimisation des coûts et à une méthode de stockage moins chère.",
+    "Le directeur des technologies de l'information est autorisé à signer l'entente et les documents nécessaires."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "923 795,24 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:39.107Z",
+   "jetons": {
+    "entree": 3996,
+    "sortie": 487
+   }
+  },
+  {
+   "id": "SD-2026-1378",
+   "numero": "SD-2026-1378",
+   "resolution": "CO-260818-12.27",
+   "date": "2026-08-18",
+   "unite": "Grands projets et infrastructures eau et bâtiment",
+   "objet": "Attribution de gré à gré du contrat LONG-26-0256 (2026-DGPIEB-022) pour les travaux de déplacement d'infrastructures appartenant à Hydro-Québec, requis dans le cadre de la construction du nouveau poste de police à Brossard.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1023,
+   "puces": [
+    "La Ville accorde un contrat de gré à gré à Hydro-Québec pour déplacer des installations électriques sur le terrain du futur poste de police de Brossard, au 6840, boulevard Milan.",
+    "Le montant estimé est de 363 140,51 $ taxes incluses (315 843,02 $ avant taxes), dont 298 843,02 $ pour les ouvrages civils et 17 000 $ ± 30 % pour les travaux électriques.",
+    "Les travaux visent à libérer l'emprise nécessaire à la construction et à maintenir l'alimentation électrique des équipements desservis.",
+    "Le contrat va directement à Hydro-Québec sans appel d'offres, parce que la loi le permet quand les installations à déplacer appartiennent au fournisseur de services publics.",
+    "La directrice des grands projets et des infrastructures en eau et bâtiments est autorisée à signer l'entente avec Hydro-Québec.",
+    "Le nouveau poste de police du SPAL aura environ 3 970 m² hors-sol; le projet est prévu au programme d'immobilisations 2027-2028-2029."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "363 140,51 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:55.914Z",
+   "jetons": {
+    "entree": 3631,
+    "sortie": 478
+   }
+  },
+  {
+   "id": "SD-2026-1339",
+   "numero": "SD-2026-1339",
+   "resolution": "CO-260818-12.28",
+   "date": "2026-08-18",
+   "unite": "Grands projets et infrastructures eau et bâtiment",
+   "objet": "Autorisation d'une dépense au contrat-cadre APP-23-030 (2023-GEN-608 Contrat n°3) pour des services professionnels en ingénierie et en architecture pour des travaux d'infrastructures d’eau potable et d’eaux usées dans le cadre du projet de mise à niveau et augmentation de la capacité de la station de pompage d'eaux usées Marie-Victorin",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1038,
+   "puces": [
+    "La Ville autorise une dépense de 530 331,79 $ (taxes comprises) pour des services professionnels d'ingénierie et d'architecture liés à la station de pompage d'eaux usées Marie-Victorin, au 8464, boulevard Marie-Victorin à Brossard.",
+    "Le mandat va aux firmes FNX-Innov inc. et NFOE inc., qui ont déjà conçu le projet : 446 646,08 $ pour la surveillance de bureau et 83 685,70 $ pour la coordination de sous-consultants.",
+    "La surveillance de chantier sera confiée à un autre consultant. Lasalle NHC fera une modélisation des fluides, VTEK suivra la nouvelle génératrice et Canopée la protection incendie.",
+    "Les travaux prévoient de remplacer les pompes et d'en ajouter une, de motoriser les vannes murales, de remplacer la génératrice et de construire un bâtiment pour l'abriter.",
+    "Ils incluent aussi la modernisation du système de contrôle, le remplacement de la distribution électrique et la réparation du béton du puits humide, en gardant la station en fonction.",
+    "Les travaux sont estimés à 11 396 620,36 $ et devraient durer 24 mois; le projet est inscrit au plan d'investissement 2027-2028-2029.",
+    "Avec cette dépense, le contrat-cadre APP-23-030 est utilisé à 97,2 %, laissant un solde de 89 946,89 $."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "530 331,79 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:57.515Z",
+   "jetons": {
+    "entree": 3980,
+    "sortie": 607
+   }
+  },
+  {
+   "id": "SD-2026-1413",
+   "numero": "SD-2026-1413",
+   "resolution": "CO-260818-12.29",
+   "date": "2026-08-18",
+   "unite": "Infrastructures urbaines et mobilité durable",
+   "objet": "Autorisation d'une dépense au contrat-cadre APP-247-004 pour des services professionnels en ingénierie (Contrat 3) (SD-2024-0957).",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1047,
+   "puces": [
+    "La Ville autorise une dépense de 163 933,08 $, taxes comprises, à la firme Atkins Réalis inc. pour des services d'ingénierie.",
+    "Le mandat porte sur les plans et devis de l'éclairage de rue et d'une chambre de compteur sur la rue Boudreau, et sur le soutien technique pendant l'appel d'offres.",
+    "Le projet de réfection de la rue Boudreau prévoit le remplacement de la conduite d'eau potable, la séparation des égouts, la réfection de la chaussée et du pavage, la reconstruction des trottoirs et bordures, l'ajout d'une chambre de compteur et l'amélioration de la canopée urbaine.",
+    "Ces travaux répondent à la croissance résidentielle attendue dans le secteur, notamment avec le développement du site de l'ancien Motel Oscar.",
+    "La Ville vise à publier l'appel d'offres vers la fin de l'automne, pour des travaux dès le printemps 2027.",
+    "La valeur totale du projet est estimée à 950 000 $, taxes comprises; la dépense porte à 92,73 % l'utilisation du contrat-cadre, dont le solde s'élève à 449 005,46 $.",
+    "Comme la chambre de compteur est un actif d'agglomération, le conseil d'agglomération doit adopter l'octroi du mandat."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "163 933,08 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:56.676Z",
+   "jetons": {
+    "entree": 3371,
+    "sortie": 564
+   }
+  },
+  {
+   "id": "SD-2026-1424",
+   "numero": "SD-2026-1424",
+   "resolution": "CO-260818-12.30",
+   "date": "2026-08-18",
+   "unite": "Infrastructures urbaines et mobilité durable",
+   "objet": "Autorisation d'une dépense au contrat-cadre LONG-25-0489 pour les services professionnels en contrôle de projet (PCO) pour l’année 2026",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1056,
+   "puces": [
+    "La Ville autorise une dépense additionnelle de 114 975 $, taxes comprises, pour des services de contrôle de projet en 2026.",
+    "Le contrat va à la firme COFOMO, dans le cadre du contrat-cadre LONG-25-0489.",
+    "Ces ressources suivent les coûts, les risques et l'avancement des projets d'infrastructures inscrits au Plan triennal d'immobilisations 2026-2027-2028.",
+    "Un premier montant de 574 875 $ avait déjà été autorisé pour 2026; ce nouveau montant couvre les projets de compétence mixte jusqu'à la fin de l'année.",
+    "Avec cette dépense, 29,79 % du contrat-cadre de 2 315 741,13 $ est engagé; il reste 1 625 891,13 $.",
+    "La dépense passe par le budget d'opération de la direction, avec récupération par règlement d'emprunt pour la portion admissible au fonds d'investissement.",
+    "Un nouveau sommaire sera présenté pour l'année 2027, puis pour les années suivantes selon les besoins."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "114 975 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:04:56.893Z",
+   "jetons": {
+    "entree": 3935,
+    "sortie": 468
+   }
+  },
+  {
+   "id": "SD-2026-1260",
+   "numero": "SD-2026-1260",
+   "resolution": "CO-260818-12.31",
+   "date": "2026-08-18",
+   "unite": "Culture, sport et développement des communautés",
+   "objet": "Adoption du plan d’action municipal en immigration de l’agglomération de Longueuil (2026-2029) et approbation d’une convention d'aide financière à intervenir avec le ministère de l'Immigration, de la Francisation et de l'Intégration (MIFI)",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1060,
+   "puces": [
+    "La Ville de Longueuil adopte un plan d'action en immigration pour l'ensemble de l'agglomération, couvrant 2026-2029.",
+    "Elle signe une entente d'aide financière avec le ministère de l'Immigration, de la Francisation et de l'Intégration (MIFI), en vigueur du 1er août 2026 au 31 juillet 2029.",
+    "La Ville verse 475 000 $, soit la moitié du budget total de 950 000 $; le MIFI doit fournir l'autre moitié.",
+    "L'argent de la Ville vient du Fonds régions et ruralité : 150 000 $ en 2026, 160 000 $ en 2027 et 165 000 $ en 2028.",
+    "Le financement du MIFI passe de 1 200 000 $ à 950 000 $ : le ministère a changé ses règles, rendant certaines actions prévues inadmissibles et ajoutant de nouveaux indicateurs.",
+    "Le plan vise l'attraction, l'intégration, l'établissement durable et la participation des personnes immigrantes et d'autres minorités ethnoculturelles, en collaboration avec les villes de l'agglomération et des partenaires locaux.",
+    "La greffière est autorisée à signer la convention et les documents nécessaires au nom de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "475 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:05:07.912Z",
+   "jetons": {
+    "entree": 3728,
+    "sortie": 678
+   }
+  },
+  {
+   "id": "SD-2026-1352",
+   "numero": "SD-2026-1352",
+   "resolution": "CO-260818-12.32",
+   "date": "2026-08-18",
+   "unite": "Aménagement et urbanisme",
+   "objet": "Adoption du document identifiant des modifications aux règlements d'urbanisme locaux à la suite de l'entrée en vigueur du Règlement CA-2025-445 modifiant le Règlement CA-2016-255 révisant le Schéma d'aménagement et de développement de l'agglomération de Longueuil",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1134,
+   "puces": [
+    "La Ville adopte un document qui indique quelles modifications les villes liées de l'agglomération devraient apporter à leurs règlements d'urbanisme.",
+    "Conclusion du document : aucune modification n'est nécessaire dans la réglementation d'urbanisme des villes liées.",
+    "Cette étape découle du Règlement CA-2025-445, qui modifie le schéma d'aménagement de l'agglomération pour se conformer à la nouvelle orientation gouvernementale en habitation.",
+    "Ce règlement a été adopté le 30 avril 2026 et est entré en vigueur le 25 juin 2026, après les certificats de conformité de la Communauté métropolitaine de Montréal et du ministre des Affaires municipales et de l'Habitation.",
+    "Aucun coût n'est associé à cette décision et aucune activité de communication n'est prévue."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:05:03.368Z",
+   "jetons": {
+    "entree": 2640,
+    "sortie": 382
+   }
+  },
+  {
+   "id": "SD-2026-1418",
+   "numero": "SD-2026-1418",
+   "resolution": "CO-260818-12.33",
+   "date": "2026-08-18",
+   "unite": "Affaires externes",
+   "objet": "Approbation d'un projet d’étude de faisabilité dans le cadre du volet 2 du Fonds régions et ruralité 2026",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1151,
+   "puces": [
+    "La Ville approuve le financement d'une étude de faisabilité pour un incubateur industriel dans l'agglomération de Longueuil.",
+    "Coût maximal de 60 000 $, pris entièrement dans la part du Fonds régions et ruralité accordée à Développement économique de l'agglomération de Longueuil (DEL).",
+    "L'étude débute le 1er septembre 2026 et doit se terminer au plus tard le 30 juin 2027.",
+    "DEL confiera le mandat à un spécialiste de l'immobilier industriel; l'étude doit identifier un lieu, les partenaires possibles et un montage financier.",
+    "Le document indique que les espaces industriels modulables pour jeunes entreprises et sociétés étrangères sont rares ou absents sur le territoire.",
+    "Le projet est rattaché à la priorité 1 du Fonds régions et ruralité (dynamisme économique et attractivité du territoire)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "60 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:05:02.938Z",
+   "jetons": {
+    "entree": 3418,
+    "sortie": 409
+   }
+  },
+  {
+   "id": "SD-2026-1212",
+   "numero": "SD-2026-1212",
+   "resolution": "CO-260818-12.34",
+   "date": "2026-08-18",
+   "unite": "Service de police de l'agglomération de Longueuil",
+   "objet": "Approbation de l'entente à intervenir entre la Ville de Longueuil, le ministère de la Sécurité intérieure (MSI), la Régie des alcools, des courses et des jeux (RACJ) et l'Association des directeurs de police du Québec (ADPQ) relative au versement d'une subvention à la Ville de Longueuil, pour la participation du Service de police de l'agglomération de Longueuil au comité ACCES Alcool, pour l'exercice financier 2025-2026.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1154,
+   "puces": [
+    "La Ville de Longueuil recevra une subvention maximale de 103 550 $ du ministère de la Sécurité intérieure pour l'année financière 2025-2026.",
+    "L'argent sert à payer la participation du Service de police de l'agglomération de Longueuil au comité ACCES Alcool, qui lutte contre le commerce illégal de boissons alcoolisées.",
+    "Des policiers à temps plein font des inspections dans les établissements qui détiennent un permis d'alcool, sous la supervision d'un capitaine de la section Renseignement.",
+    "La subvention est calculée à 475 $ par inspection et 400 $ par mise sous scellés de boissons alcoolisées lors d'une suspension de permis.",
+    "L'entente couvre du 1er avril 2025 au 31 mars 2026 et entre en vigueur de façon rétroactive, le document ayant été reçu en fin d'exercice.",
+    "Le directeur du Service de police est autorisé à signer l'entente, sans signature de la greffière."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "103 550 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:05:02.851Z",
+   "jetons": {
+    "entree": 3851,
+    "sortie": 437
+   }
+  },
+  {
+   "id": "SD-2026-1263",
+   "numero": "SD-2026-1263",
+   "resolution": "CO-260818-12.35",
+   "date": "2026-08-18",
+   "unite": "Service de police de l'agglomération de Longueuil",
+   "objet": "Approbation d’une entente de service entre la Ville de Longueuil et Bell Canada visant à assurer la prestation des services 9-1-1 de prochaine génération (9-1-1 PG) pour la centrale d’urgence 911.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1176,
+   "puces": [
+    "La Ville de Longueuil signe une entente avec Bell Canada pour le service 9-1-1 de prochaine génération (9-1-1 PG) à la centrale d'urgence 911 de l'agglomération.",
+    "L'entente dure 10 ans au départ et se renouvelle automatiquement, sauf résiliation selon les modalités prévues.",
+    "La Ville annule deux résolutions déjà adoptées : la version transmise par Bell pour signature diffère de celle approuvée (frais, lois applicables, articles 8 et 9 de l'annexe E, ajout de l'annexe G).",
+    "Le changement à l'article 9 de l'annexe E ajoute le paiement d'une indemnité en cas d'omission.",
+    "Le CRTC fixe au 31 mars 2027 la date limite pour que les fournisseurs soient prêts à offrir les services vocaux 9-1-1 PG.",
+    "Les frais suivent les tarifs approuvés par le CRTC et peuvent être récupérés auprès des abonnés, par ligne d'accès au réseau ou par numéro de téléphone en service.",
+    "La greffière Sophie Deslauriers est autorisée à signer l'entente au nom de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:05:15.160Z",
+   "jetons": {
+    "entree": 3953,
+    "sortie": 502
+   }
+  },
+  {
+   "id": "SD-2026-1110",
+   "numero": "SD-2026-1110",
+   "resolution": "CO-260818-12.36",
+   "date": "2026-08-18",
+   "unite": "Culture, sport et développement des communautés",
+   "objet": "Approbation d’une entente de financement à intervenir avec la Société d’habitation du Québec et l’Office d’habitation de Longueuil et octroi d'une aide financière",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1197,
+   "puces": [
+    "La Ville verse 33 333 $ à l'Office d'habitation de Longueuil (OHL) dans le cadre d'un programme québécois d'hébergement temporaire et d'aide à la recherche de logement.",
+    "Cette contribution représente la part municipale de 10 % des dépenses autorisées, estimées à 333 333 $ pour 2026-2027; elle permet à l'OHL d'aller chercher 300 000 $ de la Société d'habitation du Québec.",
+    "L'argent finance un service permanent d'aide à la recherche de logement, offert 12 mois par année.",
+    "Le service s'adresse aux ménages sans logis ou sur le point de l'être dans les cinq villes de l'agglomération de Longueuil : information, orientation et accompagnement.",
+    "L'entente couvre la période du 1er avril 2026 au 31 mars 2027, de façon rétroactive.",
+    "La somme provient du budget de fonctionnement de l'agglomération; la greffière est autorisée à signer l'entente."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "33 333 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:05:13.356Z",
+   "jetons": {
+    "entree": 2885,
+    "sortie": 437
+   }
+  },
+  {
+   "id": "SD-2026-1401",
+   "numero": "SD-2026-1401",
+   "resolution": "CO-260818-12.37",
+   "date": "2026-08-18",
+   "unite": "Affaires externes",
+   "objet": "Approbation d’une entente sectorielle de développement en développement économique dans la région de la Montérégie 2026-2029",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1210,
+   "puces": [
+    "La Ville de Longueuil approuve une entente de développement économique pour la Montérégie couvrant 2026 à 2029, avec plusieurs ministères québécois, les 12 MRC de la région et des organismes régionaux.",
+    "Longueuil versera au maximum 222 347,98 $ sur trois ans : 72 320,39 $ en 2026, 74 213,06 $ en 2027 et 75 904,53 $ en 2028.",
+    "L'argent viendra de la part du volet 2 du Fonds régions et ruralité accordée à Développement économique de l'agglomération de Longueuil (DEL).",
+    "Montérégie Économique est désigné comme organisme responsable de la mise en œuvre et doit produire un plan d'action dans les trois mois suivant l'adoption de l'entente.",
+    "La mairesse est autorisée à signer l'entente, sans autre signature requise, et la direction générale de la Ville siégera au comité de gestion.",
+    "L'entente remplace une version de transition adoptée en 2025 et élargit le groupe de partenaires, notamment au ministère de l'Agriculture, à l'UPA de la Montérégie, à Tourisme Montérégie et aux trois pôles d'économie sociale."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "222 347,98 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:05:15.188Z",
+   "jetons": {
+    "entree": 4326,
+    "sortie": 511
+   }
+  },
+  {
+   "id": "SD-2026-1366",
+   "numero": "SD-2026-1366",
+   "resolution": "CO-260818-12.38",
+   "date": "2026-08-18",
+   "unite": "Grands projets et infrastructures eau et bâtiment",
+   "objet": "Adoption du Règlement CA-2026-465 décrétant un emprunt pour le paiement d'honoraires professionnels pour la réalisation d'études préparatoires pour des travaux relatifs aux ouvrages d'assainissement des eaux usées.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1235,
+   "puces": [
+    "La Ville emprunte 4 100 000 $ pour payer des firmes professionnelles qui réaliseront des études préparatoires sur les installations de traitement des eaux usées.",
+    "Ces études (préliminaires, faisabilité, notes techniques, analyses d'options) serviront à préciser la portée, les coûts, les risques et l'échéancier des projets avant les plans et devis.",
+    "Au Centre d'épuration Rive-Sud, au 2999, rue de l'Île-Charron, il faut remplacer le système d'évacuation du sable, optimiser les incinérateurs et refaire les épaississeurs, en fin de vie utile et fonctionnant à capacité réduite.",
+    "La capacité de décantation du Centre a atteint sa limite de conception : un décanteur doit être ajouté à la chaîne de traitement pour traiter les eaux usées des prochaines années.",
+    "À la station de pompage Lafrance, au 33, rue Lafrance, les équipements ont atteint leur fin de vie utile et doivent être remplacés.",
+    "Les travaux du Plan de gestion des débordements des eaux usées doivent respecter les délais fixés par l'attestation d'assainissement du ministère de l'Environnement.",
+    "Les études sont inscrites au programme triennal d'immobilisation 2026-2027-2028."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "4 100 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:05:15.884Z",
+   "jetons": {
+    "entree": 3125,
+    "sortie": 546
+   }
+  },
+  {
+   "id": "SD-2026-0856",
+   "numero": "SD-2026-0856",
+   "resolution": "CO-260818-12.40",
+   "date": "2026-08-18",
+   "unite": "Approvisionnement",
+   "objet": "Adoption du Règlement CA-2026-470 ordonnant l'acquisition d'équipements motorisés ou roulants et décrétant, à cette fin, un emprunt, dans le cadre des activités d'agglomération en matière de sécurité incendie",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1248,
+   "puces": [
+    "La Ville adopte un règlement d'emprunt pour acheter des véhicules et équipements motorisés destinés au Service de sécurité incendie de l'agglomération de Longueuil (SSIAL).",
+    "L'emprunt couvre le remplacement de quatre véhicules, l'achat de petits équipements et l'aménagement de certains véhicules.",
+    "Le montant des investissements prévu au Programme décennal d'immobilisations 2027-2036 est de 13 985 000 $, taxes nettes, frais de financement et contingence inclus.",
+    "Les déboursés sont répartis ainsi : 1 véhicule en 2031 pour 3 264 000 $ et 3 véhicules en 2032 pour 8 929 280 $, avant taxes et frais.",
+    "Le règlement doit être soumis à l'approbation des personnes habiles à voter.",
+    "Les véhicules et équipements remplacés seront vendus par encan ou par demande de proposition.",
+    "Le financement est demandé maintenant en raison des longs délais de production de ce type d'équipement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "13 985 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:05:20.654Z",
+   "jetons": {
+    "entree": 3198,
+    "sortie": 454
+   }
+  },
+  {
+   "id": "SD-2026-1006",
+   "numero": "SD-2026-1006",
+   "resolution": "CO-260818-12.41",
+   "date": "2026-08-18",
+   "unite": "Aménagement et urbanisme",
+   "objet": "Avis d’une décision rendue par le comité d’étude des demandes de démolition d’immeubles concernant un immeuble patrimonial situé au 405, rue Jean-Béliveau dans l'arrondissement du Vieux-Longueuil",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1254,
+   "puces": [
+    "Le comité d'étude des demandes de démolition a autorisé, le 26 mai 2026, la démolition complète de la maison unifamiliale située au 405, rue Jean-Béliveau, dans le Vieux-Longueuil.",
+    "Le bâtiment, construit en 1927, est considéré comme patrimonial; une nouvelle maison unifamiliale isolée doit être construite à sa place.",
+    "La demande vient du propriétaire, Carl Belisle.",
+    "Le conseil local du patrimoine et le comité consultatif d'urbanisme ont tous deux donné un avis favorable à la démolition.",
+    "Le conseil d'agglomération doit maintenant dire s'il compte ou non annuler cette décision, un pouvoir que lui donne la Loi sur l'aménagement et l'urbanisme.",
+    "Aucun coût n'est associé à ce dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:05:21.323Z",
+   "jetons": {
+    "entree": 2896,
+    "sortie": 387
+   }
+  },
+  {
+   "id": "SD-2026-1361",
+   "numero": "SD-2026-1361",
+   "resolution": "CO-260818-12.42",
+   "date": "2026-08-18",
+   "unite": "Aménagement et urbanisme",
+   "objet": "Avis d’une décision rendue par le conseil ordinaire de la ville de Boucherville d'une demande de démolition d’immeuble concernant un immeuble patrimonial.",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1312,
+   "puces": [
+    "Boucherville autorise la démolition partielle d'une maison patrimoniale située au 660, rue Sainte-Famille.",
+    "Les travaux visent les toitures du bâtiment et de ses annexes, l'accès au sous-sol à l'arrière, les murs et le plancher de l'étage, et une partie des murs du rez-de-chaussée.",
+    "Le but est de déplacer les ouvertures et de reconstruire partiellement le bâtiment pour mettre en valeur son style architectural.",
+    "Le bâtiment figure à l'inventaire des immeubles construits avant 1940 ayant une valeur patrimoniale dans l'agglomération de Longueuil.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable le 29 avril 2026 et le conseil de Boucherville a accepté la demande le 25 mai 2026.",
+    "Le conseil d'agglomération prend acte de la décision et annonce qu'il n'utilisera pas son pouvoir de la renverser.",
+    "Aucun coût n'est associé à ce dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:05:21.432Z",
+   "jetons": {
+    "entree": 2976,
+    "sortie": 451
+   }
+  },
+  {
+   "id": "SD-2026-1355",
+   "numero": "SD-2026-1355",
+   "resolution": "CO-260818-12.43",
+   "date": "2026-08-18",
+   "unite": "Aménagement et urbanisme",
+   "objet": "Approbation de la conformité au Schéma d'aménagement et de développement de l'agglomération de Longueuil du Règlement URB-Z2017-095 modifiant le Règlement de zonage URB-Z2017 afin d’ajouter des normes spécifiques aux bâtiments contigus, d’ajouter la zone HA-448 à même une partie de la zone HA-440 et d’ajouter le tableau des spécifications de la zone HA-448 de la Ville de Saint-Bruno-de-Montarville",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1329,
+   "puces": [
+    "L'agglomération de Longueuil confirme qu'un changement de zonage adopté par Saint-Bruno-de-Montarville respecte le schéma d'aménagement régional.",
+    "Le règlement de la ville ajoute des normes propres aux bâtiments contigus (maisons ou immeubles collés les uns aux autres).",
+    "Il crée une nouvelle zone, HA-448, en découpant une partie de la zone HA-440, et lui donne son propre tableau de normes.",
+    "Le conseil de Saint-Bruno-de-Montarville avait adopté ce règlement le 2 juillet 2026.",
+    "Une fois le règlement approuvé, la greffière délivre le certificat de conformité.",
+    "Le dossier n'entraîne aucune dépense ni revenu."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:05:20.729Z",
+   "jetons": {
+    "entree": 2768,
+    "sortie": 353
+   }
+  },
+  {
+   "id": "SD-2026-1353",
+   "numero": "SD-2026-1353",
+   "resolution": "CO-260818-12.44",
+   "date": "2026-08-18",
+   "unite": "Aménagement et urbanisme",
+   "objet": "Approbation de la conformité au Schéma d'aménagement et de développement de l'agglomération de Longueuil du Règlement URB-Z2017-093 modifiant le Règlement de zonage URB-Z2017 afin d'harmoniser entre les diverses dispositions la distance minimale exigée entre une thermopompe et une ligne de terrain, de revoir les distances minimales entre une construction accessoire et la limite d'une rive et de clarifier les dispositions encadrant l'abattage d'arbres sur les lots vacants dans le cadre d'une demande de permis de construction de la Ville de Saint-Bruno-de-Montarville",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1343,
+   "puces": [
+    "L'agglomération de Longueuil confirme que le nouveau règlement de zonage de Saint-Bruno-de-Montarville respecte son schéma d'aménagement.",
+    "Le règlement uniformise la distance minimale à respecter entre une thermopompe et une ligne de terrain.",
+    "Il révise aussi les distances minimales entre une construction accessoire (cabanon, remise, etc.) et la limite d'une rive.",
+    "Il précise les règles d'abattage d'arbres sur les terrains vacants lors d'une demande de permis de construction.",
+    "L'analyse de conformité portait sur le contrôle de l'abattage d'arbres dans les boisés d'intérêt.",
+    "Le conseil de Saint-Bruno-de-Montarville avait adopté ce règlement le 2 juillet 2026; la greffière délivrera le certificat de conformité.",
+    "Aucun coût n'est associé à cette décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:05:26.602Z",
+   "jetons": {
+    "entree": 2963,
+    "sortie": 396
+   }
+  },
+  {
+   "id": "SD-2026-1446",
+   "numero": "SD-2026-1446",
+   "resolution": "CO-260818-12.45",
+   "date": "2026-08-18",
+   "unite": "Aménagement et urbanisme",
+   "objet": "Approbation de la conformité au Schéma d'aménagement et de développement de l'agglomération de Longueuil du Projet particulier PPVL-2026-35 visant à permettre la construction d'une habitation multifamiliale de structure isolée de 5 logements au 1269, rue Front (lot 2 629 758) de l'arrondissement du Vieux-Longueuil",
+   "pdf": "https://longueuilqc.sharepoint.com/:b:/s/Documentsdeseance/IQAhsn_avRuETa97QE6mK04nAc00JnJs8aLyctdtbfRJ6AM?e=DK8Rfk",
+   "page": 1354,
+   "puces": [
+    "La Ville confirme qu'un projet de construction au 1269, rue Front, dans l'arrondissement du Vieux-Longueuil, respecte le schéma d'aménagement de l'agglomération.",
+    "Le projet permet de bâtir un immeuble isolé de 5 logements sur le terrain visé (lot 2 629 758).",
+    "Le projet comporte certaines dérogations, autorisées par le mécanisme des projets particuliers.",
+    "Le conseil d'arrondissement du Vieux-Longueuil avait adopté ce projet le 20 mai 2026.",
+    "La vérification portait sur les usages autorisés et sur les seuils minimaux de densité résidentielle.",
+    "Si le conseil d'agglomération approuve, la greffière délivrera le certificat de conformité.",
+    "Aucun coût n'est associé à cette décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-25T15:05:26.437Z",
+   "jetons": {
+    "entree": 2665,
+    "sortie": 376
+   }
+  },
   {
    "id": "SD-2026-1127",
    "numero": "SD-2026-1127",
