@@ -258,7 +258,7 @@
     }
     $('#pourquoi').innerHTML = `<section class="ab-carte ab-pourquoi">
       <h2 style="margin-top:0">${tr("Ce que l'abonnement payant ajoute à votre compte", 'What the paid subscription adds to your account')}</h2>
-      <p class="ab-chapeau" style="margin-bottom:10px">${tr("Votre compte gratuit vous montre tout quand vous venez voir. L'abonnement payant vous dit <strong>quand</strong> il y a quelque chose à voir, et ce que les documents disent de l'argent.", 'Your free account shows you everything when you come to look. The paid subscription tells you <strong>when</strong> there is something to see, and what the documents say about the money.')}</p>
+      <p class="ab-chapeau" style="margin-bottom:10px">${tr("Votre compte gratuit vous montre tout quand vous venez voir. L'abonnement payant vous dit <strong>quand</strong> il y a quelque chose à voir, et vous donne les outils pour suivre et exporter.", 'Your free account shows you everything when you come to look. The paid subscription tells you <strong>when</strong> there is something to see, and gives you the tools to follow and export.')}</p>
       <ul>${AVANTAGES_PAYANTS}</ul>
       <p class="ab-note" style="margin:0 0 14px">${tr('10 $ par mois ou 96 $ par an. Un seul abonnement vaut pour toutes les villes couvertes et pour l’Assemblée nationale — pas un abonnement par ville. Et chaque abonnement garde le reste du site gratuit pour tout le monde.', '$10 a month or $96 a year. One subscription covers every city and the National Assembly — not one per city. And every subscription keeps the rest of the site free for everyone.')}</p>
       <a class="ab-bouton" href="/abonnement" data-mesure="mes_dossiers_voir_abonnement">${tr("Voir l'abonnement", 'See the subscription')}</a>
@@ -267,8 +267,6 @@
 
   const AVANTAGES_PAYANTS = EN ? `
         <li><strong>An email alert when your projects move</strong>: a new item or a new decision — and, in Québec City and Lévis, an item that gets its final decision — with the updated recap when there is one. Nothing in the weeks when nothing moves.</li>
-        <li><strong>Money details</strong>: who receives, who pays, the bids and the City's estimate, the breakdown by year, the conditions.
-          <br><span class="ab-note">In Québec City only for now. Included as soon as it is read: the major projects followed, and every new item. In Québec City, anything else on request — normally read the next day.</span></li>
         <li><strong>Alerts for your neighbourhood, your street or a keyword</strong>: “everything the City decides about 1re Avenue”, “in Limoilou”, “about snow removal”.</li>
         <li><strong>Follow an organization or a company</strong>: this year's decisions that name it — contracts, grants, agreements — with each amount as written, and an alert when a new one names it.</li>
         <li><strong>What's coming up at council</strong>: the items on the agenda of each meeting, with their summary — estimated from the documents the City publishes.</li>
@@ -276,8 +274,6 @@
         <li><strong>Export to a spreadsheet or PDF</strong> (Excel, CSV or printable PDF): you choose a project, a word or a name and the columns, with the money details when they have been read.</li>
         <li class="ab-note">Per account: 10 follows in all — city projects, bills, keywords and organizations together — and 10 exports a month. The same subscription covers the National Assembly, whose follows live in <a class="ab-lien" href="/mon-dossier">My file</a> and share the same count.</li>` : `
         <li><strong>Une alerte par courriel quand vos projets bougent</strong> : un nouveau dossier, une nouvelle décision — et, à Québec et à Lévis, un dossier qui reçoit sa décision finale — avec le récapitulatif mis à jour s'il y en a un. Rien les semaines où rien n'avance.</li>
-        <li><strong>Le détail de l'argent</strong> : qui reçoit, qui paie, les soumissions et l'estimation de la Ville, la répartition par année, les conditions.
-          <br><span class="ab-note">À Québec seulement pour l'instant. Inclus dès qu'il est lu : les grands projets suivis, et chaque nouveau dossier. À Québec, le reste sur demande — normalement lu le lendemain.</span></li>
         <li><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : « tout ce que la Ville décide sur la 1re Avenue », « dans Limoilou », « sur le déneigement ».</li>
         <li><strong>Suivre un organisme ou une entreprise</strong> : les décisions de l'année qui le nomment — contrats, subventions, ententes — avec le montant de chacune tel qu'écrit, et une alerte quand une nouvelle le nomme.</li>
         <li><strong>Ce qui s'en vient au conseil</strong> : les dossiers à l'ordre du jour de chaque séance, avec leur résumé — estimé d'après les documents publiés par la Ville.</li>

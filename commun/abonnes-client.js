@@ -205,21 +205,12 @@ export function formulaireMessage(boite, s, { sujet = 'idee', ville = null, nume
 const ligne = (etiquette, texte) => (texte ? `<li><strong>${echapper(etiquette)}${EN ? ':' : ' :'}</strong> ${echapper(texte)}</li>` : '');
 // En anglais : les libellés du détail sont traduits, son contenu (extrait des documents) reste en français.
 const NATURES_EN = { 'dépense': 'expense', 'subvention maximale': 'maximum grant', 'reçu par la Ville': 'received by the City', 'prêt': 'loan', "valeur au rôle d'évaluation": 'assessed value', 'revenu pour la Ville': 'revenue for the City', 'investissement privé': 'private investment', "fermeture d'emprunts": 'loan closing', 'montant': 'amount', 'aucun montant': 'no amount' };
-const SECTIONS_EN = [[/qui reçoit et qui paie/, 'who receives and who pays'], [/soumission\(s\) comparée\(s\)/, 'bid(s) compared'], [/l'estimation de la Ville/, "the City's estimate"], [/la répartition par année/, 'the breakdown by year'], [/d'où vient l'argent/, 'where the money comes from'], [/les conditions/, 'the conditions'], [/ce qui change/, 'what changes'], [/la durée/, 'the duration']];
 const nature = (n) => (EN ? NATURES_EN[n] ?? n : n);
-const section = (texte) => (EN ? SECTIONS_EN.reduce((t, [a, b]) => t.replace(a, b), texte) : texte);
 
 export function rendreDetail(reponse, ville) {
   if (!reponse?.existe) return '';
-  if (reponse.acces === 'apercu') {
-    const a = reponse.apercu;
-    return `<div class="ab-detail ab-verrou">
-      <div class="ab-detail-titre">${tr("Détail de l'argent", 'Money details')} <span class="ab-etiquette">${tr('réservé aux abonnés', 'subscribers only')}</span></div>
-      <p class="ab-apercu">${tr('Nature du montant :', 'Type of amount:')} <strong>${echapper(nature(a.nature))}</strong>${a.beneficiaire ? ` · ${echapper(a.beneficiaire)}` : ''}</p>
-      ${a.sections.length ? `<p class="ab-apercu">${tr("L'abonnement débloque", 'A subscription unlocks')} ${echapper(a.sections.map(section).join(', '))}.</p>` : ''}
-      <a class="ab-bouton" href="/abonnement?ville=${encodeURIComponent(ville)}" data-mesure="clic_abonnez_vous">${tr('Abonnez-vous', 'Subscribe')}</a>
-    </div>`;
-  }
+  // Gratuit pour tous depuis le 25 sept. 2026 : le serveur ne sert plus d'aperçu verrouillé.
+  if (!reponse.detail) return '';
   const d = reponse.detail;
   const soumissions = (d.soumissions ?? [])
     .map((s) => `<li><strong>${s.retenue ? tr('Soumission retenue', 'Winning bid') : tr('Autre soumission', 'Other bid')}${EN ? ':' : ' :'}</strong> ${echapper(s.entreprise)}${s.ville ? ` (${echapper(s.ville)})` : ''}${s.prix ? ` · ${echapper(s.prix)}` : ''}${s.conforme === false ? ` · ${tr('non conforme', 'non-compliant')}` : ''}</li>`)
@@ -265,13 +256,13 @@ export function rendreDemande(reponse, ville) {
   if (!reponse || reponse.existe) return '';
   if (reponse.lu) return `<div class="ab-demande"><p class="ab-note" style="margin:0">${tr('Ce document a été lu, mais on n’a pas pu en tirer un détail de l’argent fiable. Le PDF officiel fait foi.', "This document was read, but no reliable money details could be drawn from it. The official PDF prevails.")}</p></div>`;
   if (reponse.sansMontant) return `<div class="ab-demande"><p class="ab-note" style="margin:0">${tr('Ce dossier n’a pas de montant à détailler.', 'This item has no amount to detail.')}</p></div>`;
-  // Visible pour tous, utilisable par les abonnés seulement (Martin, 17 sept. 2026) : un visiteur ou
-  // un compte gratuit voit la fonction, fermée, avec le chemin vers l'abonnement. Rien sur les volets
+  // Visible pour tous, utilisable avec un compte gratuit (25 sept. 2026 ; avant : abonnés seulement) :
+  // un visiteur voit la fonction, avec le chemin vers la connexion. Rien sur les volets
   // hors de VILLES_DETAIL_LU, où les demandes ne sont pas encore lues : on n'y vend pas ce qui
   // n'existe pas.
   if (!reponse.demandable) {
     if (!VILLES_DETAIL_LU.has(ville)) return '';
-    return `<div class="ab-demande"><p class="ab-demande-verrou"><span aria-hidden="true">🔒</span> <span class="ab-demande-verrou-nom">${tr('Demander le détail de l’argent', 'Request the money details')}</span> · <a class="ab-lien" href="/abonnement?ville=${encodeURIComponent(ville)}" data-mesure="clic_demande_verrou">${tr('réservé aux abonnés', 'subscribers only')}</a></p></div>`;
+    return `<div class="ab-demande"><p class="ab-demande-verrou"><span aria-hidden="true">🔒</span> <span class="ab-demande-verrou-nom">${tr('Demander le détail de l’argent', 'Request the money details')}</span> · <a class="ab-lien" href="/mes-dossiers?ville=${encodeURIComponent(ville)}" data-mesure="clic_demande_verrou">${tr('connectez-vous (gratuit)', 'sign in (free)')}</a></p></div>`;
   }
   return `<div class="ab-demande">${contenuDemande(reponse.demande, ville)}</div>`;
 }
@@ -283,8 +274,8 @@ function contenuDemande(demande, ville) {
   }
   if (demande) {
     return EN
-      ? `<p class="ab-demande-etat">Money details ${demande.parVous ? 'requested' : 'already requested by a subscriber'} on ${echapper(dateFr(new Date(demande.le).toLocaleDateString('en-CA')))}: read as a priority, normally ${HEURE_LECTURE}.</p>`
-      : `<p class="ab-demande-etat">Détail de l’argent ${demande.parVous ? 'demandé' : 'déjà demandé par un abonné'} le ${echapper(dateFr(new Date(demande.le).toLocaleDateString('en-CA')))} : lu en priorité, normalement ${HEURE_LECTURE}.</p>`;
+      ? `<p class="ab-demande-etat">Money details ${demande.parVous ? 'requested' : 'already requested by someone'} on ${echapper(dateFr(new Date(demande.le).toLocaleDateString('en-CA')))}: read as a priority, normally ${HEURE_LECTURE}.</p>`
+      : `<p class="ab-demande-etat">Détail de l’argent ${demande.parVous ? 'demandé' : 'déjà demandé par quelqu’un'} le ${echapper(dateFr(new Date(demande.le).toLocaleDateString('en-CA')))} : lu en priorité, normalement ${HEURE_LECTURE}.</p>`;
   }
   // Exactement comme « Signaler une erreur dans cette fiche » : un lien seul, sans phrase autour
   // (un bouton vert, puis une phrase grise, étaient de trop).
@@ -311,10 +302,8 @@ export async function demanderDetail(bouton, ville, dossier, s) {
     message.innerHTML = res.status === 429 ? tr('Vous avez déjà fait 10 demandes dans les dernières 24 heures. Réessayez demain.', "You've already made 10 requests in the last 24 hours. Try again tomorrow.")
       : res.status === 409 && corps.erreur === 'sans montant' ? tr('Ce dossier n’a pas de montant à détailler.', 'This item has no amount to detail.')
       : res.status === 409 ? tr('Ce détail vient d’être lu : rechargez la page pour l’afficher.', 'These details were just read: reload the page to see them.')
-      // « n'est plus actif » seulement quand le serveur a vraiment lu un abonnement inactif — pas
-      // pour une session absente ni une panne (503 : « réessayez »).
-      : res.status === 403 && corps.erreur === 'abonnement inactif' ? tr(`Réservé aux abonnés — votre abonnement n’est plus actif. <a class="ab-lien" href="/abonnement?ville=${encodeURIComponent(ville)}">Voir l’abonnement</a>`, `Subscribers only — your subscription is no longer active. <a class="ab-lien" href="/abonnement?ville=${encodeURIComponent(ville)}">See the subscription</a>`)
-      : res.status === 403 ? tr(`Réservé aux abonnés. <a class="ab-lien" href="/abonnement?ville=${encodeURIComponent(ville)}">Voir l’abonnement</a>`, `Subscribers only. <a class="ab-lien" href="/abonnement?ville=${encodeURIComponent(ville)}">See the subscription</a>`) : tr('La demande n’a pas fonctionné. Réessayez dans un moment.', "The request didn't work. Try again in a moment.");
+      : res.status === 403 && corps.erreur === 'compte de consultation' ? tr('Un compte de consultation ne fait pas de demandes.', "A reading-room account can't make requests.")
+      : res.status === 403 ? tr(`Connectez-vous d’abord (compte gratuit). <a class="ab-lien" href="/mes-dossiers?ville=${encodeURIComponent(ville)}">Mes dossiers</a>`, `Sign in first (free account). <a class="ab-lien" href="/mes-dossiers?ville=${encodeURIComponent(ville)}">My files</a>`) : tr('La demande n’a pas fonctionné. Réessayez dans un moment.', "The request didn't work. Try again in a moment.");
   } catch {
     message.textContent = tr('La demande n’a pas fonctionné. Réessayez dans un moment.', "The request didn't work. Try again in a moment.");
   }
