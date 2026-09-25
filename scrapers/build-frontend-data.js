@@ -74,6 +74,12 @@ function main() {
     summaryEn: b.summaryEn ? bulletsToHtml(b.summaryEn, null) : null,
     lastActivity: b.lastActivity,
     presentedOn: b.presentedOn || null,
+    // Omnibus (25 sept. 2026, scrapers/bill-summaries.js) : combien de lois et règlements le
+    // projet touche, d'après sa liste officielle, et s'il est un omnibus. La liste elle-même
+    // suit le résumé (chargé à l'ouverture de la carte).
+    nbLois: Array.isArray(b.loisTouchees) ? b.loisTouchees.length : null,
+    omnibus: Boolean(b.omnibus),
+    _lois: Array.isArray(b.loisTouchees) ? b.loisTouchees : [],
   }));
 
   bills.sort((a, b) => {
@@ -87,9 +93,14 @@ function main() {
   // poids compressé de la page, pour un texte qui ne s'affiche que dans la carte qu'on déplie.
   // Un fichier par langue, parce qu'on n'a jamais besoin des deux en même temps.
   const resumes = { fr: {}, en: {} };
+  const echapper = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  // La liste officielle des textes touchés, repliée sous le résumé. Les titres restent en
+  // français en anglais : ce sont les titres officiels, il n'en existe pas d'autre ici.
+  const listeLois = (b, en) => b._lois.length < 2 ? '' :
+    `<details class="bill-lois"${b.omnibus ? ' open' : ''}><summary>${en ? `Laws and regulations affected (${b._lois.length}) — official French titles` : `Lois et règlements touchés (${b._lois.length})`}</summary><ul>${b._lois.map((l) => `<li>${echapper(l)}</li>`).join('')}</ul></details>`;
   for (const b of bills) {
-    if (b.summary) resumes.fr[b.id] = b.summary;
-    if (b.summaryEn) resumes.en[b.id] = b.summaryEn;
+    if (b.summary) resumes.fr[b.id] = b.summary + listeLois(b, false);
+    if (b.summaryEn) resumes.en[b.id] = b.summaryEn + listeLois(b, true);
   }
   for (const [langue, map] of Object.entries(resumes)) {
     const chemin = `data/bills-resumes-${langue}.json`;
@@ -100,7 +111,7 @@ function main() {
   }
 
   // Ce qui part dans la page : tout sauf les résumés.
-  const allege = bills.map(({ summary, summaryEn, ...reste }) => reste);
+  const allege = bills.map(({ summary, summaryEn, _lois, ...reste }) => reste);
 
   const html = readFileSync(HTML_PATH, 'utf-8');
   const startIdx = html.indexOf(START_MARKER);

@@ -53,12 +53,47 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function downloadPdfText(url) {
+async function downloadPdfRaw(url) {
   const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
   if (!res.ok) throw new Error(`HTTP ${res.status} en téléchargeant le PDF`);
   const buffer = Buffer.from(await res.arrayBuffer());
-  const parsed = await pdfParse(buffer);
-  return parsed.text.replace(/\s+/g, ' ').trim();
+  return (await pdfParse(buffer)).text;
+}
+async function downloadPdfText(url) {
+  return (await downloadPdfRaw(url)).replace(/\s+/g, ' ').trim();
+}
+
+// --- Omnibus (25 sept. 2026) ------------------------------------------------
+// Un projet de loi québécois se termine par la liste officielle de ce qu'il touche :
+// « LOIS MODIFIÉES PAR CE PROJET DE LOI : », « RÈGLEMENTS MODIFIÉS… », « LOI ABROGÉE… ».
+// On la relève pour tous les projets (texte public, aucun coût d'API) : la carte dit
+// « Touche N lois ». Presque tout projet modifie quelques lois au passage ; on ne parle
+// d'omnibus que quand l'Assemblée l'annonce elle-même dans le titre (« diverses
+// dispositions », « d'autres dispositions ») ET que la liste compte au moins 3 textes, ou
+// quand elle en compte au moins 10 (un titre « diverses dispositions » sur 2 lois n'en est pas un).
+// Pour ceux-là, et pour tout texte trop long pour être lu en entier, le résumé part des
+// NOTES EXPLICATIVES, qui décrivent officiellement tout le projet, au lieu d'un texte
+// coupé à 60 000 caractères : un résumé tronqué laissait croire au lecteur qu'il avait
+// tout le projet (PL 11 : 74 lois touchées, 92 000 caractères).
+const ENTETE_LISTE = /(LOIS?|RÈGLEMENTS?|CODES?|CHARTES?|DÉCRETS?)[^\n]{0,40}(MODIFIÉ|ABROGÉ|ÉDICTÉ|REMPLAC)[^\n]*PAR CE PROJET DE LOI\s*:?/g;
+const SEUIL_OMNIBUS = 10;
+export function analyserTexteLoi(brut, titre) {
+  const entetes = [...brut.matchAll(ENTETE_LISTE)];
+  const lois = [];
+  for (const [i, m] of entetes.entries()) {
+    const debut = m.index + m[0].length;
+    const fin = i + 1 < entetes.length ? entetes[i + 1].index : Math.min(brut.length, debut + 8000);
+    for (const morceau of brut.slice(debut, fin).split(/\n(?=\s*[–—-]\s)/)) {
+      const x = morceau.replace(/\s+/g, ' ').trim().replace(/^[–—-]\s*/, '');
+      if (/^(Loi|Code|Charte|Règlement|Décret)/.test(x)) lois.push(x.split(/ ?\((chapitre|RLRQ|c\. )/)[0].trim().slice(0, 200));
+    }
+  }
+  const uniques = [...new Set(lois)];
+  const d = brut.search(/NOTES? EXPLICATIVES?/i);
+  const f = entetes.length ? entetes[0].index : -1;
+  const notes = d >= 0 && f > d ? brut.slice(d, f).replace(/\s+/g, ' ').trim() : null;
+  const annonce = /diverses dispositions|d[’']autres dispositions/i.test(titre || '');
+  return { lois: uniques, notes, omnibus: (annonce && uniques.length >= 3) || uniques.length >= SEUIL_OMNIBUS };
 }
 
 async function summarizeText(title, text) {
@@ -82,18 +117,69 @@ async function summarizeText(title, text) {
   return textBlock ? textBlock.text.trim() : null;
 }
 
+// Un omnibus, ou un texte trop long pour être lu en entier : on résume les notes explicatives,
+// qui couvrent tout le projet, avec la liste officielle des lois touchées.
+const doitPartirDesNotes = (bill, longueur) => (bill.omnibus || longueur > MAX_PDF_CHARS);
+
+// Un omnibus n'a PAS le plafond de 7 puces (Martin, 25 sept. 2026 : « sur ON, les omnibus, on
+// met les annexes et on étend le texte passé 10 lignes ») : un aperçu, puis les changements
+// regroupés par loi touchée. Chaque puce reste une ligne « - » : l'affichage n'a rien à apprendre.
+const SYSTEM_OMNIBUS = SYSTEM_PROMPT
+  .replace(/Format obligatoire :[\s\S]*?Pas de phrase d'intro ni de conclusion — seulement les puces\./,
+    `Format obligatoire (projet de loi OMNIBUS : il touche plusieurs lois) :
+- D'abord 1 ou 2 puces d'aperçu : ce que le projet fait dans l'ensemble.
+- Puis, pour chaque loi ou groupe de lois dont le changement compte pour le public, une puce qui commence par le nom court de la loi suivi de « : » (ex. « - Loi sur le bâtiment : … »). Plusieurs puces par loi si nécessaire.
+- Pas de plafond de puces : couvre TOUT le projet, pas seulement ce que le titre annonce. Regroupe en une puce les simples ajustements techniques de concordance.
+- Chaque ligne = une seule idée concrète, en langage simple, 25 mots au plus.
+- Pas de phrase d'intro ni de conclusion — seulement les puces.`);
+
+async function summarizeFromNotes(title, notes, lois, omnibus) {
+  const userContent = `Titre : ${title}\n\n[Projet de loi qui touche ${lois.length} lois ou règlements. Tu reçois ses NOTES EXPLICATIVES officielles, qui décrivent tout le projet, et la liste des textes touchés. Couvre l'ensemble du projet, pas seulement son sujet principal : si le titre n'annonce qu'une partie, les puces doivent aussi dire le reste.]\n\nNOTES EXPLICATIVES :\n${notes.slice(0, MAX_PDF_CHARS)}\n\nTEXTES TOUCHÉS :\n${lois.map((l) => `- ${l}`).join('\n')}`;
+  const response = await client.messages.create({
+    model: MODEL,
+    max_tokens: omnibus ? 3000 : 700,
+    thinking: { type: 'disabled' },
+    output_config: { effort: 'low' },
+    system: omnibus ? SYSTEM_OMNIBUS : SYSTEM_PROMPT,
+    messages: [{ role: 'user', content: userContent }],
+  });
+  const textBlock = response.content.find((b) => b.type === 'text');
+  return textBlock ? textBlock.text.trim() : null;
+}
+
+// Relève la liste officielle des lois touchées (sans API). Refait seulement si le PDF change.
+async function releverLois(bill) {
+  if (!bill.presentationPdfUrl) return null;
+  if (bill.loisSource === bill.presentationPdfUrl && Array.isArray(bill.loisTouchees)) return null;
+  const brut = await downloadPdfRaw(bill.presentationPdfUrl);
+  const a = analyserTexteLoi(brut, bill.title);
+  bill.loisTouchees = a.lois;
+  bill.omnibus = a.omnibus;
+  bill.loisSource = bill.presentationPdfUrl;
+  return { brut, ...a };
+}
+
 async function summarizeBill(bill) {
   if (!bill.presentationPdfUrl) return { skipped: 'pas de PDF trouvé' };
 
-  const pdfText = await downloadPdfText(bill.presentationPdfUrl);
+  const brut = await downloadPdfRaw(bill.presentationPdfUrl);
+  const pdfText = brut.replace(/\s+/g, ' ').trim();
   if (pdfText.length < 200) return { skipped: 'texte extrait trop court/vide' };
+  const a = analyserTexteLoi(brut, bill.title);
+  bill.loisTouchees = a.lois;
+  bill.omnibus = a.omnibus;
+  bill.loisSource = bill.presentationPdfUrl;
 
-  const summary = await summarizeText(bill.title, pdfText);
+  const parNotes = doitPartirDesNotes(bill, pdfText.length) && a.notes && a.notes.length > 300;
+  const summary = parNotes ? await summarizeFromNotes(bill.title, a.notes, a.lois, a.omnibus) : await summarizeText(bill.title, pdfText);
   if (!summary) return { skipped: 'réponse vide du modèle' };
 
   bill.summary = summary;
   bill.summaryAiGenerated = true;
-  bill.summarySource = 'texte tel que présenté (PDF), peut différer de la version finale amendée';
+  bill.summaryFrom = parNotes ? 'notes' : (pdfText.length > MAX_PDF_CHARS ? 'texte-tronque' : 'texte');
+  bill.summarySource = parNotes
+    ? 'notes explicatives du texte tel que présenté (PDF), qui couvrent tout le projet ; peut différer de la version finale amendée'
+    : 'texte tel que présenté (PDF), peut différer de la version finale amendée';
   bill.summaryGeneratedAt = new Date().toISOString();
   return { summarized: true };
 }
@@ -123,7 +209,8 @@ async function translateBill(bill) {
 
   const response = await client.messages.create({
     model: MODEL,
-    max_tokens: 700,
+    // Un résumé d'omnibus peut compter une trentaine de puces : 700 jetons le coupaient.
+    max_tokens: bill.omnibus ? 3500 : 700,
     thinking: { type: 'disabled' },
     output_config: { effort: 'low' },
     system: TRANSLATE_SYSTEM,
@@ -196,7 +283,26 @@ async function translatePetitions() {
 async function main() {
   const data = JSON.parse(readFileSync(BILLS_PATH, 'utf-8'));
 
-  const targets = data.bills.filter((b) => b.status !== 'laisse_de_cote' && !b.summary);
+  // --- Passe 0 : les lois touchées, pour TOUS les projets (texte public, sans API) ---
+  const aRelever = data.bills.filter((b) => b.presentationPdfUrl && !(b.loisSource === b.presentationPdfUrl && Array.isArray(b.loisTouchees)));
+  if (aRelever.length) console.log(`${aRelever.length} projet(s) : relevé des lois touchées.`);
+  const texteLong = new Set();   // ids dont le texte dépasse ce que le résumé lit
+  for (const [i, bill] of aRelever.entries()) {
+    try {
+      const r = await releverLois(bill);
+      if (r && r.brut.replace(/\s+/g, ' ').length > MAX_PDF_CHARS) texteLong.add(bill.id);
+    } catch (err) {
+      console.error(`  ⚠ lois de PL ${bill.num} (id ${bill.id}) : ${err.message}`);
+    }
+    if ((i + 1) % 20 === 0) writeFileSync(BILLS_PATH, JSON.stringify(data, null, 2));
+    await sleep(REQUEST_DELAY_MS);
+  }
+  if (aRelever.length) writeFileSync(BILLS_PATH, JSON.stringify(data, null, 2));
+
+  // Un résumé déjà fait sur un texte coupé, ou sur un omnibus lu en entier au lieu de ses notes :
+  // on le refait une fois depuis les notes explicatives (summaryFrom le retient ensuite).
+  const aRefaire = (b) => b.summary && b.summaryFrom !== 'notes' && (b.omnibus || texteLong.has(b.id) || b.summaryFrom === 'texte-tronque');
+  const targets = data.bills.filter((b) => b.status !== 'laisse_de_cote' && (!b.summary || aRefaire(b)));
   const limit = process.env.SCRAPE_LIMIT ? Number(process.env.SCRAPE_LIMIT) : targets.length;
   const bills = targets.slice(0, limit);
 
