@@ -215,7 +215,7 @@
       <p class="ab-note" id="etat-cadeau" aria-live="polite"></p>
     </section>
 
-    <section class="ab-carte ab-attente" id="attente">
+    <section class="ab-carte ab-attente" id="attente" hidden>
       <h3 data-en="<span class=&quot;ab-icone&quot; aria-hidden=&quot;true&quot;>✉️</span> The subscription is not open yet"><span class="ab-icone" aria-hidden="true">✉️</span> L'abonnement n'est pas encore ouvert</h3>
       <p data-en="Leave your email: we'll write to you once, the day it opens. In the meantime, you can already follow projects with a free account, in <a class=&quot;ab-lien&quot; href=&quot;/mes-dossiers&quot;>My files</a>.">Laissez votre courriel : on vous écrit une seule fois, le jour où il ouvre. En attendant, vous pouvez déjà suivre des projets avec un compte gratuit, dans <a class="ab-lien" href="/mes-dossiers">Mes dossiers</a>.</p>
       <form class="ab-form" id="form-attente">
@@ -284,7 +284,14 @@
         if (bas) { bas.dataset.en = 'cancel anytime'; bas.textContent = tr('annulable en tout temps', 'cancel anytime'); }
       }
     }
-    if (!etat || !(etat.abonne || etat.peutPayer || etat.ouvert)) return;
+    // La liste d'attente est cachée par défaut (25 sept. 2026) : visible seulement quand le serveur dit
+    // vraiment « pas ouvert ». Avant, elle s'affichait pendant le chargement, ou si l'API ne répondait pas.
+    if (!etat) {
+      payer.innerHTML = `<p class="ab-note">${tr('Le paiement ne répond pas pour l’instant. Rechargez la page dans un moment.', 'Payment isn’t responding right now. Reload the page in a moment.')}</p>`;
+      payer.hidden = false;
+      return;
+    }
+    if (!(etat.abonne || etat.peutPayer || etat.ouvert)) { document.querySelector('#attente').hidden = false; return; }
 
     if (etat.abonne) {
       payer.innerHTML = `<h3><span class="ab-icone" aria-hidden="true">✅</span> ${tr('Votre abonnement est actif', 'Your subscription is active')}</h3>

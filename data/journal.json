@@ -1,6 +1,18 @@
 [
   {
     "date": "2026-09-25",
+    "volet": "general",
+    "fr": {
+      "titre": "Abonnement : plus de faux « pas encore ouvert »",
+      "texte": "La page Abonnement affichait « L’abonnement n’est pas encore ouvert » le temps de son chargement, ou quand le paiement ne répondait pas, alors qu’il est ouvert depuis le 20 septembre. Ce message ne s’affiche plus que si l’abonnement est vraiment fermé."
+    },
+    "en": {
+      "titre": "Subscription: no more false “not open yet”",
+      "texte": "The Subscription page showed “The subscription is not open yet” while it loaded, or when payment didn’t respond, although it has been open since September 20. That message now only shows if the subscription is really closed."
+    }
+  },
+  {
+    "date": "2026-09-25",
     "volet": "quebec",
     "fr": {
       "titre": "Le compte rendu gratuit ne vend plus le détail de l’argent",
