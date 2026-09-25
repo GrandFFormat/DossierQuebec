@@ -2700,6 +2700,8 @@ async function remplirResume(el){
 
 function toggleBillSummary(domId, evt){
   if(evt) evt.stopPropagation();
+  // Un clic dans la liste des lois touchées (son + ou la liste dépliée) ne ferme pas la carte.
+  if(evt && evt.target && evt.target.closest && evt.target.closest('.bill-lois')) return;
   const el = document.getElementById(domId);
   const hint = document.getElementById('hint-'+domId);
   const willOpen = !el.classList.contains('open');
