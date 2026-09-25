@@ -16,7 +16,7 @@
 // cache local. Au plus --plafond documents par exécution (30 par défaut, ~8 $ US au pire) : un
 // jour chargé se rattrape le lendemain.
 //
-// EN PREMIER : les demandes des abonnés (table demandes_details, « Demander ce détail » sur une
+// EN PREMIER : les demandes des comptes (abonnés ou non depuis le 25 sept. 2026 ; table demandes_details, « Demander ce détail » sur une
 // fiche), les plus anciennes d'abord, dans le même plafond. Une demande est notée traitée
 // (traite_le, resultat) quand le détail est lu (« lu »), l'était déjà (« deja-lu ») ou que le
 // résumé n'a pas de montant (« sans-montant ») ; une lecture qui échoue reste en attente.
@@ -31,7 +31,6 @@
 import { readFile, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { chargerCles } from './publier-details.js';
-import { estActive } from '../../api/_stripe.js';
 
 process.chdir(fileURLToPath(new URL('..', import.meta.url)));
 
@@ -98,17 +97,14 @@ async function main() {
   // api/detail.js refuserait ce dossier pour toujours, avec un texte devenu faux).
   if (!args.has('essai')) await rouvrirSansMontant(avecMontant, deja).catch((err) => console.warn(`⚠ Demandes « sans-montant » non rouvertes : ${err.message}`));
   const demandes = await demandesEnAttente();
-  // Seulement celles d'abonnés ENCORE actifs ce matin : une demande faite avant une annulation ou
-  // une expiration attend, sans coûter une lecture (elle revient si la personne se réabonne).
-  // Et au plus DEMANDES_PAR_ABONNE par personne, les plus anciennes d'abord.
-  const actifs = await abonnesActifs();
+  // Le détail de l'argent est gratuit depuis le 25 sept. 2026 : toutes les demandes comptent, au
+  // plus DEMANDES_PAR_ABONNE par personne, les plus anciennes d'abord, dans le même plafond.
   const parAbonne = new Map();
   const retenues = demandes.filter((d) => {
-    if (!actifs.has(d.user_id)) return false;
     parAbonne.set(d.user_id, (parAbonne.get(d.user_id) ?? 0) + 1);
     return parAbonne.get(d.user_id) <= DEMANDES_PAR_ABONNE;
   });
-  if (retenues.length < demandes.length) console.log(`Demandes mises de côté : ${demandes.length - retenues.length} (abonnement inactif, ou plus de ${DEMANDES_PAR_ABONNE} par abonné).`);
+  if (retenues.length < demandes.length) console.log(`Demandes mises de côté : ${demandes.length - retenues.length} (plus de ${DEMANDES_PAR_ABONNE} par personne).`);
   const demandees = [...new Set(retenues.map((d) => d.dossier_id))];
   const traiter = async (ids, resultat) => {
     if (!ids.length || args.has('essai')) return;
@@ -141,24 +137,6 @@ async function demandesEnAttente() {
     return [];
   }
   return res.json();
-}
-
-// Les abonnés actifs, selon la même règle que le site (api/_stripe.js, estActive). Par pages de
-// 1000, comme details_argent plus haut : Supabase ne rend jamais plus d'un coup.
-async function abonnesActifs() {
-  const actifs = new Set();
-  for (let debut = 0; ; debut += 1000) {
-    const res = await fetch(`${process.env.SUPABASE_URL}/rest/v1/abonnements?statut=eq.actif&select=user_id,statut,fin&order=user_id`, {
-      headers: { ...entetesSupabase(), Range: `${debut}-${debut + 999}` },
-    });
-    if (!res.ok) {
-      console.warn(`⚠ Abonnements illisibles (${res.status}) : aucune demande lue ce matin.`);
-      return new Set();
-    }
-    const lot = await res.json();
-    for (const a of lot) if (estActive(a)) actifs.add(a.user_id);
-    if (lot.length < 1000) return actifs;
-  }
 }
 
 // Les demandes classées « sans-montant » dont le dossier a maintenant un résumé avec montant (et

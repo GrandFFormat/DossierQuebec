@@ -9,8 +9,8 @@
 //   - si la décision fait partie d'un projet suivable (tramway, logement…), un bouton
 //     « ☆ Projet : … » dans la ligne des pastilles, cliquable sans déplier la fiche ;
 //     une décision seule ne se suit pas : ce qui a du sens à suivre, c'est le projet ;
-//   - à l'ouverture, le « Détail de l'argent » s'il existe — complet pour un abonné, aperçu et
-//     « Abonnez-vous » sinon. Rien n'est chargé tant qu'on n'ouvre pas une fiche ;
+//   - à l'ouverture, le « Détail de l'argent » s'il existe — gratuit pour
+//     tous depuis le 25 sept. 2026. Rien n'est chargé tant qu'on n'ouvre pas une fiche ;
 //   - au bas de la fiche ouverte, « Signaler une erreur dans cette fiche » (compte requis).
 
 import { VILLES, echapper, mesurer, session, envoyerLien, chargerSuivis, suivre, limiteSuivis, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, formulaireMessage, client , marquerConsultation } from './abonnes-client.js';

@@ -1,28 +1,26 @@
-// Le détail de l'argent d'un dossier, réservé aux abonnés — pour tous les volets municipaux.
+// Le détail de l'argent d'un dossier — pour tous les volets municipaux. GRATUIT pour tout le monde
+// depuis le 25 sept. 2026 (Martin) : les conditions des Villes interdisent de vendre leurs données
+// sans autorisation ; l'abonnement ne vend plus que des outils (alertes, suivis, export, agenda).
 //
 //   GET /api/detail?ville=quebec&dossier=AP2026-271.pdf
 //   Authorization: Bearer <jeton de session Supabase>   (facultatif)
 //
 // Réponses :
 //   { existe: false, lu: false }               aucun détail pour ce dossier
-//     + pour un abonné : demandable: true et demande: { le, parVous } s'il est déjà demandé
+//     + pour un compte connecté : demandable: true et demande: { le, parVous } s'il est déjà demandé
 //   { existe: false, lu: true }                lu, mais le document ne donne pas un détail fiable
-//   { existe: true, acces: 'apercu', apercu }  visiteur ou compte non abonné
-//   { existe: true, acces: 'complet', detail } compte abonné
+//   { existe: true, acces: 'complet', detail } tout le monde (l'aperçu n'est plus servi)
 //
-//   POST /api/detail?ville=quebec&dossier=AP2026-271.pdf   (abonné)
+//   POST /api/detail?ville=quebec&dossier=AP2026-271.pdf   (compte connecté, abonné ou non)
 //   Demande que ce détail soit lu en priorité (table demandes_details, au plus 10 par 24 h) :
 //   { ok: true, demande: { le, parVous: true } }. Le matin, quebec/scripts/details-du-jour.js lit
 //   les demandes avant les nouveaux dossiers.
 //
-//   Refus : 403 { erreur: 'réservé aux abonnés' } sans session, 403 { erreur: 'abonnement inactif' }
-//   pour un compte sans abonnement actif, 503 { erreur: 'abonnement non vérifiable' } si Supabase
+//   Refus (demande seulement) : 403 { erreur: 'compte requis' } sans session, 503 { erreur: 'abonnement non vérifiable' } si Supabase
 //   ne répond pas (le client dit alors « réessayez », jamais « votre abonnement n'est plus actif »).
 //
 // Le détail vit dans la table Supabase `details_argent` (voir scripts/supabase-schema-abonnes.sql),
-// jamais dans le site ni dans le dépôt GitHub public : c'est ce qui le rend réellement réservé.
-// L'abonnement est vérifié ici, côté serveur, avec la clé service_role ; le navigateur ne voit
-// jamais la table.
+// jamais dans le dépôt GitHub public ; le navigateur ne voit jamais la table (clé service_role ici).
 
 import { estActive } from './_stripe.js';
 
@@ -75,8 +73,8 @@ async function abonneDe(jeton) {
 // inactif » pour un compte reconnu sans abonnement actif (le client peut alors le dire) ; 403
 // « réservé aux abonnés » sans session.
 const refus = (res, qui) => (qui?.indisponible
-  ? res.status(503).json({ erreur: 'abonnement non vérifiable' })
-  : res.status(403).json({ erreur: qui ? 'abonnement inactif' : 'réservé aux abonnés' }));
+  ? res.status(503).json({ erreur: 'compte non vérifiable' })
+  : res.status(403).json({ erreur: 'compte requis' }));
 
 // Une demande déjà classée « sans-montant » par le script du matin : le dossier n'a pas de montant à
 // détailler. On ne la repropose pas, et on ne fait pas croire à une lecture. Le matin la rouvre de
@@ -95,44 +93,25 @@ async function demandeEnAttente(ville, dossier, userId) {
   if (!r.ok) return undefined;
   const sienne = r.donnees?.find((x) => x.user_id === userId);
   if (sienne) return { le: sienne.created_at, parVous: true };
-  const autres = [...new Set((r.donnees ?? []).map((x) => x.user_id))].filter((id) => /^[0-9a-f-]{36}$/.test(id));
-  if (!autres.length) return null;
-  const a = await supabase(`/rest/v1/abonnements?user_id=in.(${autres.join(',')})&select=user_id,statut,fin`);
-  const actifs = new Set((a.ok ? a.donnees ?? [] : []).filter(estActive).map((x) => x.user_id));
-  const autre = r.donnees.find((x) => actifs.has(x.user_id));
+  // Depuis le 25 sept. 2026, le matin lit les demandes de tous les comptes, abonnés ou non.
+  const autre = r.donnees?.[0];
   return autre ? { le: autre.created_at, parVous: false } : null;
 }
 
-// Ce qu'un visiteur voit : de quoi il s'agit et ce qu'il débloquerait, sans les chiffres.
-function apercu(d) {
-  const sections = [
-    d.beneficiaire || d.payeur ? 'qui reçoit et qui paie' : null,
-    d.soumissions?.length ? `${new Set(d.soumissions.map((s) => s.entreprise)).size} soumission(s) comparée(s)` : null,
-    d.estimationVille ? "l'estimation de la Ville" : null,
-    d.repartitionAnnuelle?.length ? 'la répartition par année' : null,
-    d.sourceFinancement ? "d'où vient l'argent" : null,
-    d.conditions?.length ? 'les conditions' : null,
-    d.changementsNotables?.length ? 'ce qui change' : null,
-    d.duree ? 'la durée' : null,
-  ].filter(Boolean);
-  return { nature: NATURES[d.typeMontant] ?? 'montant', beneficiaire: d.beneficiaire ?? null, sections };
-}
-
-// Ce qu'un abonné voit : les champs publiables, sans la mécanique interne.
+// Ce que tout le monde voit : les champs publiables, sans la mécanique interne.
 function complet(d) {
   const { verification, jetons, modele, genereLe, ...champs } = d;
   return { ...champs, nature: NATURES[d.typeMontant] ?? 'montant', extraitLe: genereLe ?? null };
 }
 
-// Export en tableur (Mes dossiers) : le détail de plusieurs dossiers d'un coup, abonnés seulement.
+// Export en tableur (Mes dossiers) : le détail de plusieurs dossiers d'un coup. Ouvert : le détail est
+// public ; c'est le compteur d'exports (api/export.js) qui réserve l'outil aux abonnés.
 //   GET /api/detail?ville=quebec&dossiers=AP2026-271.pdf,DE2026-256.pdf   (200 au plus par appel)
 //   → { details: { 'AP2026-271.pdf': {…champs publiables…} } } — seulement les détails utilisables.
 const LOT_MAX = 200;
 async function lot(res, { ville, liste, jeton }) {
   const ids = [...new Set(liste.split(','))];
   if (!ids.length || ids.length > LOT_MAX || !ids.every((id) => DOSSIER.test(id))) return res.status(400).json({ erreur: 'paramètres invalides' });
-  const qui = await abonneDe(jeton);
-  if (!qui?.abonne) return refus(res, qui);
   const filtre = encodeURIComponent(`(${ids.map((id) => `"${id}"`).join(',')})`);
   const r = await supabase(`/rest/v1/details_argent?ville=eq.${ville}&dossier_id=in.${filtre}&select=dossier_id,detail`);
   if (!r.ok) return res.status(502).json({ erreur: 'détail indisponible' });
@@ -159,24 +138,21 @@ export default async function handler(req, res) {
   if (req.method === 'POST') return demander(res, { ville, dossier, d, jeton });
   if (req.method !== 'GET') return res.status(405).json({ erreur: 'méthode non permise' });
 
-  // Abonnement invérifiable : ni l'aperçu ni le verrou à un abonné — le client dira « réessayez ».
-  const qui = await abonneDe(jeton);
-  if (qui?.indisponible) return refus(res, qui);
   if (!d || d.verification?.utilisable === false) {
     const reponse = { existe: false, lu: Boolean(d) };
-    if (!d && qui?.abonne) {
+    const qui = d ? null : await abonneDe(jeton);
+    if (!d && qui?.id && !qui.indisponible) {
       if (await sansMontant(ville, dossier)) reponse.sansMontant = true;
       else Object.assign(reponse, { demandable: true, demande: await demandeEnAttente(ville, dossier, qui.id) });
     }
     return res.status(200).json(reponse);
   }
-  if (qui?.abonne) return res.status(200).json({ existe: true, acces: 'complet', detail: complet(d) });
-  return res.status(200).json({ existe: true, acces: 'apercu', apercu: apercu(d) });
+  return res.status(200).json({ existe: true, acces: 'complet', detail: complet(d) });
 }
 
 async function demander(res, { ville, dossier, d, jeton }) {
   const qui = await abonneDe(jeton);
-  if (!qui?.abonne) return refus(res, qui);
+  if (!qui?.id || qui.indisponible) return refus(res, qui);
   // Compte de consultation (une bibliothèque, ouvert sur un poste public) : il LIT le détail
   // déjà produit, mais n'en commande pas de nouveaux. Sinon le premier usager venu épuise le
   // quota quotidien de l'abonnement pour le plaisir.
