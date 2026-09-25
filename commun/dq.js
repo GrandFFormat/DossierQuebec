@@ -2701,7 +2701,12 @@ async function remplirResume(el){
 function toggleBillSummary(domId, evt){
   if(evt) evt.stopPropagation();
   // Un clic dans la liste des lois touchées (son + ou la liste dépliée) ne ferme pas la carte.
-  if(evt && evt.target && evt.target.closest && evt.target.closest('.bill-lois')) return;
+  // Ailleurs dans son encadré que sur le +, le clic ouvre ou ferme la liste, et seulement elle.
+  const lois = evt && evt.target && evt.target.closest ? evt.target.closest('.bill-lois') : null;
+  if(lois){
+    if(!evt.target.closest('summary') && !evt.target.closest('a')) lois.open = !lois.open;
+    return;
+  }
   const el = document.getElementById(domId);
   const hint = document.getElementById('hint-'+domId);
   const willOpen = !el.classList.contains('open');
