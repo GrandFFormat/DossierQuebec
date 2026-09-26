@@ -2,7 +2,7 @@
 > dossiervillelongueuil@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 8a325f1 — Node v22.23.2
+Code : commit 29efa1c — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -11,13 +11,12 @@ data/decisions.json porte l'année courante (2026) — rien à archiver.
 Conseil de ville : 96 séances (94 avec procès-verbal, 66 avec document de séance)
 Conseil d'agglomération : 87 séances (84 avec procès-verbal, 50 avec document de séance)
 
-183 séances écrites dans data/seances.json — 1 procès-verbal(aux) nouvellement publié(s).
+183 séances écrites dans data/seances.json — 0 procès-verbal(aux) nouvellement publié(s).
 
 === Décisions de l'année ===
-CO-260818 : 37 pages, 99 résolutions, 95 titres pris à l'ordre du jour, 51 sommaires cités, 0 vote(s) nominal(aux)
 
-1002 décisions écrites dans data/decisions.json — 1 séance(s) lue(s) cette fois, 3 en attente de procès-verbal.
-101 nouveauté(s) depuis la dernière exécution.
+1002 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 3 en attente de procès-verbal.
+0 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
     231  Procédure
@@ -39,8 +38,8 @@ Pastilles thématiques :
       3  Motions et hommages
       2  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-07-27) ===
-Fenêtre depuis 2026-07-27 : 1 séance(s) relue(s), 22 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-07-28) ===
+Fenêtre depuis 2026-07-28 : 1 séance(s) relue(s), 22 vote(s) conservé(s) du fichier précédent.
 
 22 votes nominaux écrits dans data/votes.json (2025 : 22, 2026 : 0 ; 1 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
@@ -103,51 +102,15 @@ Mesure de 32 termes sur 47 procès-verbaux de 2025 et 2026 et 1002 décisions…
 32 entrées écrites dans data/lexique.json
 
 === Sommaires décisionnels (documents de séance) ===
-2 document(s) de séance à lire (au plus 4 cette fois).
-CA-260924 (jamais lu) : 730 pages, 51 Mo, 39 sommaires ; 0 cité(s) au procès-verbal mais absent(s) du document — 7 s
-CO-260922 (jamais lu) : 1491 pages, 111 Mo, 83 sommaires ; 0 cité(s) au procès-verbal mais absent(s) du document — 11 s
+0 document(s) de séance à lire (au plus 4 cette fois).
 
-2 document(s) lu(s) ; 639 sommaires indexés dans data/sommaires.json.
+0 document(s) lu(s) ; 639 sommaires indexés dans data/sommaires.json.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-27 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-07-28 pas encore résumés (plafond : 120)…
 5 sommaire(s) cité(s) sans texte extrait (absents du document de séance, ou document pas encore lu).
-467 déjà résumés, 82 à faire.
-
---- Estimation ---
-Documents à résumer  : 82
-Modèle               : claude-opus-5
-Ratio mesuré         : 1.18 caractères/jeton (sur 12 documents)
-Jetons d'entrée      : ~289 991
-Jetons de sortie     : ~26 240
-Coût estimé          : ~2.11 $ US
-                       (moitié moins avec --batch, résultats en moins d'une heure)
-
-Génération…
-  … 4/82
-  … 8/82
-  … 12/82
-  … 16/82
-  … 20/82
-  … 24/82
-  … 28/82
-  … 32/82
-  … 36/82
-  … 40/82
-  … 44/82
-  … 48/82
-  … 52/82
-  … 56/82
-  … 60/82
-  … 64/82
-  … 68/82
-  … 72/82
-  … 76/82
-  … 80/82
-  … 82/82
-
-82 résumés générés, 549 au total dans data/resumes.json
-Coût réel : 2.25 $ US
+549 déjà résumés, 0 à faire.
+Rien à générer. (--force pour tout regénérer.)
 
 === Fichiers pour « Mes dossiers » ===
 Projets publics : 1 projets · index 0.8 Ko · fichiers de projet 81 Ko au total.
