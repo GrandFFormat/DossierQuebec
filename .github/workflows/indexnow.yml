@@ -1,0 +1,36 @@
+# Avertit Bing (protocole IndexNow) que les pages ont changé : voir scripts/indexnow.js.
+#
+# Deux déclencheurs :
+#   - un push sur master qui touche une page ou le sitemap. On attend 4 minutes : le temps que
+#     Vercel ait déployé, sinon Bing relirait l'ancienne version.
+#   - chaque matin après le rafraîchissement automatique (refresh.yml, 08:00 UTC). Les pushs du
+#     robot ne déclenchent pas d'autre workflow (règle de GitHub), d'où l'horaire.
+
+name: IndexNow (Bing)
+
+on:
+  push:
+    branches: [master]
+    paths: ['**.html', 'sitemap.xml']
+  schedule:
+    - cron: '30 9 * * *'
+  workflow_dispatch: {}
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: true
+
+jobs:
+  avertir:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Attendre le déploiement Vercel
+        if: github.event_name == 'push'
+        run: sleep 240
+      - name: Avertir IndexNow
+        run: node scripts/indexnow.js
