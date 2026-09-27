@@ -2,16 +2,17 @@
 > dossiervillelongueuil@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 29efa1c — Node v22.23.2
+Code : commit 94dfead — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
 
 === Calendrier des séances ===
-Conseil de ville : 96 séances (94 avec procès-verbal, 66 avec document de séance)
-Conseil d'agglomération : 87 séances (84 avec procès-verbal, 50 avec document de séance)
+⚠ Conseil de ville : fetch failed
+⚠ Conseil d'agglomération : fetch failed
 
 183 séances écrites dans data/seances.json — 0 procès-verbal(aux) nouvellement publié(s).
+✖ « Calendrier des séances » a échoué (code 1) — données précédentes conservées.
 
 === Décisions de l'année ===
 
@@ -38,8 +39,8 @@ Pastilles thématiques :
       3  Motions et hommages
       2  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-07-28) ===
-Fenêtre depuis 2026-07-28 : 1 séance(s) relue(s), 22 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-07-29) ===
+Fenêtre depuis 2026-07-29 : 1 séance(s) relue(s), 22 vote(s) conservé(s) du fichier précédent.
 
 22 votes nominaux écrits dans data/votes.json (2025 : 22, 2026 : 0 ; 1 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
@@ -107,7 +108,7 @@ Mesure de 32 termes sur 47 procès-verbaux de 2025 et 2026 et 1002 décisions…
 0 document(s) lu(s) ; 639 sommaires indexés dans data/sommaires.json.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-28 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-07-29 pas encore résumés (plafond : 120)…
 5 sommaire(s) cité(s) sans texte extrait (absents du document de séance, ou document pas encore lu).
 549 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
@@ -119,5 +120,5 @@ Décisions récentes : 200 dossiers depuis le 2026-07-04 · 228 Ko.
 
 === Bilan ===
   étapes         : 9
-  échecs         : aucun
+  échecs         : Calendrier des séances
   avertissements : aucun
