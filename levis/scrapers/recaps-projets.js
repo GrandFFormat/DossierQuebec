@@ -227,30 +227,53 @@ async function lireJson(url, repli) {
   }
 }
 
+// Les deux entrées sont obligatoires : data/projets-recaps.json est réécrit en entier, et une
+// source lue de travers ferait rédiger les récapitulatifs sur le tiers de leur matière avant
+// d'écraser les bons, en sortant à 0 (27 septembre 2026). Une lecture ratée fait donc échouer
+// l'étape, et les données de la veille restent. Le fichier de sortie, lui, garde son repli : une
+// première exécution n'en a pas.
+const lireSource = async (url) => JSON.parse(await readFile(url, 'utf8'));
+
 export async function rediger({ seulement = null, force = false } = {}) {
   const [{ decisions = [], projets: resumeProjets = {} }, { resumes = [] }, existant] = await Promise.all([
-    lireJson(new URL('../data/decisions.json', import.meta.url), {}),
-    lireJson(new URL('../data/resumes.json', import.meta.url), {}),
+    lireSource(new URL('../data/decisions.json', import.meta.url)),
+    lireSource(new URL('../data/resumes.json', import.meta.url)),
     lireJson(OUT, { recaps: {} }),
   ]);
   const recaps = existant.recaps ?? {};
+  // Lisible mais vide : aucune exception, et toutes les signatures changent (un résumé absent se
+  // lit comme un résumé refait). On ne rédige pas sur les seuls objets — et on le décide avant
+  // d'ouvrir le client, pour ne rien dépenser.
+  if (Object.keys(recaps).length && (!decisions.length || !resumes.length)) {
+    console.error(`✖ sources incomplètes (${decisions.length} décisions, ${resumes.length} résumés) alors que ${Object.keys(recaps).length} récapitulatif(s) sont publiés — rien réécrit.`);
+    process.exitCode = 1;
+    return recaps;
+  }
   const client = new Anthropic();
   let entree = 0;
   let sortie = 0;
   const echecs = [];
+  const sousLeSeuil = [];
 
   const aFaire = [];
   for (const cle of Object.keys(PROJETS)) {
     if (seulement && cle !== seulement) continue;
     const dossiers = dossiersDuProjet(decisions, resumes, cle);
     const signature = createHash('sha256').update(`${VERSION}\n${dossiers.map((d) => d.signature).join('\n')}`).digest('hex').slice(0, 16);
+    // Un récapitulatif déjà publié repose sur des dossiers qui existaient hier : une baisse sous le
+    // seuil vient d'un decisions.json amputé (séance illisible, relecture interrompue), pas de la
+    // Ville. On garde celui de la veille et on le signale, plutôt que de le faire disparaître de la
+    // page sans un mot. Un projet vraiment vide (bascule d'année) se supprime, comme avant.
     if (dossiers.length < MIN_DOSSIERS) {
-      delete recaps[cle];
+      if (dossiers.length === 0) delete recaps[cle];
+      else if (recaps[cle]) sousLeSeuil.push({ cle, avant: recaps[cle].dossiers, apres: dossiers.length });
       continue;
     }
     if (!force && recaps[cle]?.signature === signature) continue;
     aFaire.push({ cle, dossiers, signature });
   }
+  for (const { cle, avant, apres } of sousLeSeuil) console.warn(`⚠ ${cle} : ${apres} dossier(s) au lieu de ${avant} — récapitulatif de la veille conservé, data/decisions.json est peut-être amputé.`);
+  if (sousLeSeuil.length) process.exitCode = 1;
   if (!aFaire.length) {
     console.log('Récapitulatifs des projets : rien de nouveau.');
     return recaps;
@@ -324,7 +347,10 @@ export async function rediger({ seulement = null, force = false } = {}) {
   }
   console.log(`  coût ≈ ${cout.toFixed(2)} $ US`);
   for (const e of echecs) console.warn(`⚠ ${e}`);
-  if (echecs.length === aFaire.length) process.exitCode = 1;
+  // Un seul projet raté doit se voir : l'étape est secondaire dans scripts/refresh.js, un code non
+  // nul la range en avertissement. Le projet garde son récapitulatif de la veille et sera repris au
+  // prochain run, sa signature n'ayant pas changé.
+  if (echecs.length) process.exitCode = 1;
   return recaps;
 }
 

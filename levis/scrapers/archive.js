@@ -14,6 +14,7 @@
 // procès-verbaux n'est jamais conservé.
 
 import { writeFile, readFile, mkdir, readdir, stat } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { gzipSync } from 'node:zlib';
 
 const DOSSIER = new URL('../data/archives/', import.meta.url);
@@ -96,6 +97,10 @@ async function archiver(courant) {
 async function rotation() {
   const courant = await lireJson(DECISIONS, null);
   if (!courant) {
+    // Un volet neuf n'a pas encore de decisions.json : rien à faire. Mais un fichier présent et
+    // illisible n'est jamais normal — on sort en erreur plutôt que de laisser l'étape suivante
+    // repartir sur l'année neuve et perdre l'année révolue sans archive.
+    if (existsSync(DECISIONS)) throw new Error('data/decisions.json est présent mais illisible — rotation impossible.');
     console.log('Aucun data/decisions.json à faire tourner.');
     return;
   }

@@ -44,6 +44,10 @@ export async function appeler(client, { system, outil, effort, texte }) {
   });
   const message = await flux.finalMessage();
   if (message.stop_reason === 'refusal') throw new Error('refus du modèle');
+  // Tronqué à max_tokens : le SDK répare en silence le JSON coupé de l'outil, donc une
+  // contre-lecture amputée reviendrait en liste vide — c'est-à-dire « tout est exact ». On échoue
+  // plutôt que de publier un récapitulatif vérifié à moitié (27 septembre 2026).
+  if (message.stop_reason === 'max_tokens') throw new Error(`réponse tronquée à max_tokens — ${outil.name}`);
   const bloc = message.content.find((b) => b.type === 'tool_use' && b.name === outil.name);
   if (!bloc) throw new Error(`le modèle n'a pas appelé ${outil.name} (${message.stop_reason})`);
   return { entree: decoder(bloc.input), usage: message.usage, modele: message.model };

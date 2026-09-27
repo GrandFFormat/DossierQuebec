@@ -41,6 +41,10 @@ async function main() {
   const precedent = await lireJson(OUT);
   const parId = new Map((precedent?.seances ?? []).filter((s) => s.date.startsWith(annee)).map((s) => [s.id, s]));
   const nonReconnues = [];
+  // Le plancher du jour : ce que le fichier précédent comptait pour la MÊME année (parId est déjà
+  // filtré sur `annee`, donc le passage à l'année suivante ne le déclenche pas). Voir la fin.
+  const connuesAvant = parId.size;
+  const vides = [];
   for (const s of lues) {
     if (!s.instance) {
       nonReconnues.push(s);
@@ -50,7 +54,20 @@ async function main() {
     // ordinaire, par exemple) : la seconde prend un suffixe plutôt que d'écraser la première.
     let id = s.id;
     for (let n = 2; lues.some((a) => a !== s && a.id === id && lues.indexOf(a) < lues.indexOf(s)); n++) id = `${s.id}_${n}`;
-    parId.set(id, { ...(parId.get(id) ?? {}), ...s, id });
+    // « Le calendrier n'est pas une source d'effacement » vaut aussi pour les CHAMPS d'une séance
+    // déjà connue : l'API peut répondre 200 avec une relation d'assets vide (procès-verbal délié
+    // ou remplacé en cours de téléversement dans Craft), et le lien qu'on avait disparaîtrait
+    // alors en silence — decisions.js rangerait la séance en « procès-verbal non publié » sous ses
+    // propres décisions. On garde la valeur de la veille, et on le dit (27 septembre 2026).
+    const connue = parId.get(id);
+    const fusion = { ...(connue ?? {}), ...s, id };
+    let perdu = false;
+    for (const champ of ['pv', 'pvModifieLe', 'odj']) {
+      if (connue?.[champ] && !s[champ]) (fusion[champ] = connue[champ]), (perdu = true);
+    }
+    if (connue?.documents?.length && !s.documents?.length) (fusion.documents = connue.documents), (perdu = true);
+    if (perdu) vides.push(id);
+    parId.set(id, fusion);
   }
   const seances = [...parId.values()].sort((a, b) => b.date.localeCompare(a.date) || a.instance.localeCompare(b.instance));
 
@@ -82,6 +99,18 @@ async function main() {
   console.log(`${seances.length} séance(s) en ${annee} écrites dans data/seances.json.`);
   for (const [code, c] of Object.entries(compte)) console.log(`  ${code.padEnd(6)} ${String(c.seances).padStart(3)} séances, ${c.avecProcesVerbal} avec procès-verbal`);
   if (nonReconnues.length) console.warn(`⚠ ${nonReconnues.length} entrée(s) sans instance reconnue : ${nonReconnues.map((s) => s.titre).join(' | ')}`);
+  if (vides.length) {
+    console.warn(`⚠ ${vides.length} séance(s) dont l'API n'a plus rendu les documents — liens de la veille conservés : ${vides.join(' ')}`);
+    process.exitCode = 1;
+  }
+  // Une lecture qui ne rapporte AUCUNE séance reconnue rendait le fichier de la veille avec un
+  // horodatage neuf, en code 0 : rien ne distinguait « la Ville n'a rien publié » de « l'API n'a
+  // rien répondu d'exploitable » (liste vide en 200, ou fragment GraphQL qui ne colle plus). Les
+  // données restent, le calendrier n'efface pas ; mais le run doit rougir.
+  if (connuesAvant > 0 && !lues.some((s) => s.instance)) {
+    console.error(`✖ aucune séance reconnue en ${annee}, alors que le fichier précédent en comptait ${connuesAvant} — l'API de levis.ca n'a rien rendu d'exploitable. Données de la veille conservées.`);
+    process.exitCode = 1;
+  }
 }
 
 main().catch((err) => {

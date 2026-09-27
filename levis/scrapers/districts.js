@@ -79,6 +79,9 @@ async function main() {
   console.log(`Source : ${ressource.url} (mise à jour du ${MIS_A_JOUR})`);
   const brut = await (await requete(ressource.url, { notFoundIsNull: false })).text();
   const geo = JSON.parse(brut);
+  // Un 200 qui rend du JSON d'une autre forme ne doit pas écrire une carte vide : rien à lire,
+  // on n'écrit pas (même garde-fou qu'à Laval et à Longueuil).
+  if (!geo.features?.length) throw new Error('le GeoJSON des districts ne contient aucune entité');
 
   let elus = [];
   try {
@@ -134,6 +137,20 @@ async function main() {
     if (y < sud) sud = y;
     if (y > nord) nord = y;
   }
+
+  // Les entités dont la propriété d'identifiant a été renommée sont écartées en silence par la
+  // boucle ci-dessus (`if (!f.geometry || !numero) continue`), et un cadre incalculable donnerait
+  // une carte qui ne s'affiche pas. On compare au relevé de la veille plutôt que de publier un jeu
+  // amputé : le fichier de la veille reste, et l'étape passe en avertissement (27 septembre 2026).
+  let nombrePrecedent = 0;
+  try {
+    nombrePrecedent = JSON.parse(await readFile(OUT, 'utf8')).nombre ?? 0;
+  } catch {
+    // premier passage : pas de relevé précédent
+  }
+  if (districts.length === 0 || districts.length < nombrePrecedent)
+    throw new Error(`${districts.length} district(s) lu(s) contre ${nombrePrecedent} dans data/districts.json — forme du jeu changée ? le fichier n'est pas touché`);
+  if (![ouest, est, sud, nord].every(Number.isFinite)) throw new Error("cadre incalculable : aucun point lu — data/districts.json n'est pas touché");
 
   const payload = {
     generatedAt: new Date().toISOString(),

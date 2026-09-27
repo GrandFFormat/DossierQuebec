@@ -46,6 +46,22 @@ async function main() {
     documents.push({ id: f.replace('.json', ''), texte: recoller(lignesUtiles(doc.pages)), blocs: decouperResolutions(doc.pages).map((r) => r.texte) });
   }
   const decisions = JSON.parse(await readFile(DECISIONS, 'utf8').catch(() => '{"decisions":[]}')).decisions ?? [];
+  // data/textes/ est hors dépôt et vient du cache de GitHub ; decisions.js est incrémental et ne
+  // redescend que les procès-verbaux du jour. Un cache perdu ou à moitié restauré mesurait donc des
+  // zéros et les publiait comme un fait (« terme que la Ville n'emploie pas ») : on garde le
+  // lexique de la veille, et l'étape passe en avertissement (27 septembre 2026). Le plancher est
+  // celui de la MÊME année, sinon le 1er janvier bloquerait pour toujours.
+  const precedent = JSON.parse(await readFile(OUT, 'utf8').catch(() => 'null'));
+  const plancher = precedent?.parametres?.annee === year ? precedent.parametres.procesVerbauxMesures ?? 0 : 0;
+  if (!documents.length || documents.length < plancher) {
+    console.error(
+      `✖ ${documents.length} procès-verbal/aux de ${year} en cache` +
+        (plancher ? ` (la dernière mesure en portait ${plancher})` : '') +
+        ' — cache de texte incomplet : data/lexique.json de la veille est conservé.'
+    );
+    process.exitCode = 1;
+    return;
+  }
   console.log(`Mesure de ${TERMES.length} termes sur ${documents.length} procès-verbaux de ${year} en cache et ${decisions.length} décisions…\n`);
 
   const entrees = [];

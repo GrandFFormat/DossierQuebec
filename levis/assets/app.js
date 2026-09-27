@@ -59,6 +59,26 @@ function messageSansDonnees() {
     "(Ouvrir le fichier par double-clic ne fonctionne pas&nbsp;: le navigateur bloque la lecture des fichiers JSON.)";
 }
 
+// Un fichier peut être là et n'affirmer rien de vrai : une extraction qui n'a lu aucun procès-verbal
+// alors que la Ville en offre publierait des zéros — « 0 décision sur 0 lues » — avec l'air d'un
+// fait. On l'avoue plutôt que de les afficher (27 septembre 2026).
+// Le test porte sur la contradiction, pas sur un zéro : des procès-verbaux publiés par la Ville et
+// aucune décision. Un début d'année sans procès-verbal publié n'est pas une panne, c'est un fait.
+function extractionEnPanne(jeu) {
+  return Boolean(jeu?.seances?.some((s) => s.pv) && !jeu.decisions?.length);
+}
+
+function messageExtractionEnPanne(jeu) {
+  const zone = $('#chargement');
+  if (!zone) return;
+  const le = String(jeu?.generatedAt ?? '').slice(0, 10);
+  zone.innerHTML =
+    "<strong>Extraction en panne.</strong> Aucun procès-verbal n'a pu être lu" +
+    (le ? ` lors du dernier passage (${le})` : '') +
+    '. Les chiffres de cette page ne sont pas à jour&nbsp;; la source officielle reste ' +
+    '<a href="https://levis.ca/fr/ville/conseil-municipal/seances-du-conseil-municipal/archives-des-seances-du-conseil-municipal">les archives des séances de la Ville</a>.';
+}
+
 // ---------- décisions ----------
 function remplirSelect(select, valeurs) {
   for (const { valeur, n, libelle } of valeurs) {
@@ -520,6 +540,16 @@ function membresDInstance(code) {
   return { seances: seances.length, membres: [...parNom.values()].sort((a, b) => b.presences - a.presences || a.nom.localeCompare(b.nom)) };
 }
 
+// Le dénominateur ne peut pas se lire dans presences.json seul : une séance dont l'en-tête n'a pas
+// été reconnu n'y a AUCUNE entrée, et le compte rétrécirait numérateur ET dénominateur — « présent à
+// 7 séances sur 7 » pour un arrondissement qui en a tenu 8, au nom d'une personne nommée. On compte
+// donc les procès-verbaux réellement lus. Math.max : une séance lue puis annulée sort de
+// decisions.json mais garde son entrée de présences, et le dénominateur ne doit jamais passer sous
+// le numérateur (27 septembre 2026).
+function pvLus(code, auMoins) {
+  return Math.max((etat.decisions?.seances ?? []).filter((s) => s.instance === code && s.etat === 'lue').length, auMoins);
+}
+
 function carteMembreInstance(m, seances) {
   const elu = (etat.elus?.membres ?? []).find((e) => cleNom(e.nomComplet) === cleNom(m.nom));
   return `<article class="carte elu">
@@ -543,11 +573,12 @@ function rendreArrondissements() {
   if (!$('#liste-arrondissements') || !etat.presences) return;
   $('#liste-arrondissements').innerHTML = ARRONDISSEMENTS.map(([code, nom]) => {
     const { seances, membres } = membresDInstance(code);
-    if (!seances) return '';
+    const lus = pvLus(code, seances);
+    if (!lus) return '';
     const n = etat.decisions?.facettes.instance.find((f) => f.valeur === nom)?.n;
     return `<h2 class="section">${echapper(nom.replace("Conseil d'arrondissement ", 'Arrondissement '))}</h2>
-      <p class="compte">${membres.length} membres nommés dans les ${seances} procès-verbaux de l'année${n ? ` · <a href="decisions?instance=${encodeURIComponent(nom)}">${nombreFr(n)} décisions</a>` : ''}</p>
-      <div class="grille-elus">${membres.map((m) => carteMembreInstance(m, seances)).join('')}</div>`;
+      <p class="compte">${membres.length} membres nommés dans ${lus === seances ? `les ${seances} procès-verbaux` : `${seances} des ${lus} procès-verbaux`} de l'année${lus > seances ? ` — la liste des présences de ${lus - seances} d'entre eux n'a pas été reconnue` : ''}${n ? ` · <a href="decisions?instance=${encodeURIComponent(nom)}">${nombreFr(n)} décisions</a>` : ''}</p>
+      <div class="grille-elus">${membres.map((m) => carteMembreInstance(m, lus)).join('')}</div>`;
   }).join('');
 }
 
@@ -902,6 +933,13 @@ async function init() {
   const requis = { accueil: 'decisions', decisions: 'decisions', votes: 'votes', conseil: 'elus', lexique: 'lexique', sources: null }[page];
   if (requis && !etat[requis]) {
     messageSansDonnees();
+    return;
+  }
+  // Les pages qui vivent des procès-verbaux : si la dernière extraction n'en a lu aucun, on ne
+  // remplit pas la page de zéros, on dit ce qui s'est passé. (La page des votes, elle, est tenue par
+  // scrapers/votes.js, qui refuse d'écrire un registre vide qui contredirait la veille.)
+  if (['accueil', 'decisions'].includes(page) && extractionEnPanne(etat.decisions)) {
+    messageExtractionEnPanne(etat.decisions);
     return;
   }
   if ($('#chargement')) $('#chargement').hidden = true;

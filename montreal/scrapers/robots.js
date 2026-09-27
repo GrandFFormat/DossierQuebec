@@ -7,11 +7,17 @@
 // dit pour les chemins qu'on lit — et le garder avec les données, daté, pour que la
 // réponse soit dans le dépôt plutôt que dans la mémoire de quelqu'un.
 
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { texte } from '../lib/mtl.js';
 
 const OUT = new URL('../data/robots.json', import.meta.url);
-const SITES = ['https://ville.montreal.qc.ca/robots.txt', 'https://donnees.montreal.ca/robots.txt', 'https://montreal.ca/robots.txt'];
+// « principal » : les deux hôtes dont nos scrapers lisent quelque chose. S'ils restent muets, la
+// routine le dit plutôt que d'effacer leur relevé (voir main).
+const SITES = [
+  { url: 'https://ville.montreal.qc.ca/robots.txt', principal: true },
+  { url: 'https://donnees.montreal.ca/robots.txt', principal: true },
+  { url: 'https://montreal.ca/robots.txt' },
+];
 // Les chemins que nos scrapers lisent.
 const CHEMINS = ['/documents/Adi_Public/', '/api/3/action/', '/dataset/'];
 
@@ -36,8 +42,17 @@ export function analyser(contenu) {
 }
 
 async function main() {
+  // Le relevé de la veille, pour ne pas le perdre quand un site ne répond pas. Le 27 septembre
+  // 2026, à Lévis, une minute d'indisponibilité a remplacé le bon relevé par « introuvable,
+  // texte : aucun » sans que rien ne le signale ; ce fichier avait le même défaut, mot pour mot.
+  const ancien = await readFile(OUT, 'utf8')
+    .then(JSON.parse)
+    .catch(() => null);
+  const avant = new Map((ancien?.sites ?? []).map((s) => [s.url, s]));
+
   const sites = [];
-  for (const url of SITES) {
+  const muets = [];
+  for (const { url, principal } of SITES) {
     let contenu = null;
     let erreur = null;
     try {
@@ -45,11 +60,27 @@ async function main() {
     } catch (err) {
       erreur = String(err.message ?? err);
     }
+    // Deux absences à ne pas confondre : un 404 (texte() rend null sans erreur) est un fait sur le
+    // site, on le consigne ; une erreur réseau ou HTTP, après les tentatives de requete(), ne dit
+    // rien du site — on garde alors le dernier relevé, daté, et on le signale.
+    const precedent = avant.get(url);
+    if (erreur && precedent?.present) {
+      if (principal) muets.push(url);
+      sites.push({ ...precedent, releveDe: precedent.releveDe ?? ancien.generatedAt, dernierEchec: { le: new Date().toISOString(), erreur } });
+      console.log(`${url} : non lu (${erreur}) — relevé du ${(precedent.releveDe ?? ancien.generatedAt).slice(0, 10)} conservé`);
+      continue;
+    }
+    if (erreur && principal) muets.push(url);
     const a = contenu ? analyser(contenu) : null;
     sites.push({ url, present: Boolean(contenu), erreur, toutInterdit: a?.toutInterdit ?? null, reglesConcernantNosChemins: a?.reglesConcernantNosChemins ?? null, texte: contenu ? contenu.slice(0, 4000) : null });
     console.log(`${url} : ${contenu ? (a.toutInterdit ? 'INTERDIT À TOUS' : a.reglesConcernantNosChemins.length ? 'règles sur nos chemins : ' + a.reglesConcernantNosChemins.map((r) => `${r.type} ${r.chemin}`).join(', ') : 'rien qui concerne nos chemins') : erreur ?? 'absent (404)'}`);
   }
   await writeFile(OUT, JSON.stringify({ generatedAt: new Date().toISOString(), cheminsLus: CHEMINS, sites }, null, 1), 'utf8');
+
+  if (muets.length) {
+    console.warn(`⚠ ${muets.join(', ')} : pas de réponse aujourd'hui — les conditions de lecture n'ont pas pu être vérifiées.`);
+    process.exitCode = 1;
+  }
 }
 
 if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split(/[\\/]/).pop())) {
