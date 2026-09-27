@@ -2,7 +2,7 @@
 > dossiervillelevis@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 9e4ef2a — Node v22.23.2
+Code : commit 0b86cd4 — Node v22.23.2
 
 === Syntaxe du JavaScript du site ===
 
@@ -10,17 +10,30 @@ Code : commit 9e4ef2a — Node v22.23.2
 data/decisions.json porte l'année courante (2026) — rien à archiver.
 
 === robots.txt des sites lus ===
-https://levis.ca/robots.txt : rien qui concerne nos chemins
+https://levis.ca/robots.txt : fetch failed
 https://www.donneesquebec.ca/robots.txt : règles sur nos chemins : disallow /recherche/dataset/*?, disallow /recherche/dataset/rate/, disallow /recherche/dataset/*/history, disallow /recherche/api/
 https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt : HTTP 403 Forbidden sur https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt
 
 === Calendrier des séances ===
-72 séance(s) en 2026 écrites dans data/seances.json.
-  CAD     12 séances, 7 avec procès-verbal
-  CV      19 séances, 13 avec procès-verbal
-  CACCO   12 séances, 8 avec procès-verbal
-  CACCE   12 séances, 8 avec procès-verbal
-  CE      17 séances, 17 avec procès-verbal
+TypeError: fetch failed
+    at node:internal/deps/undici/undici:15157:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async requete (file:///home/runner/work/DossierQuebec/DossierQuebec/levis/lib/levis.js:54:13)
+    at async texte (file:///home/runner/work/DossierQuebec/DossierQuebec/levis/lib/levis.js:79:15)
+    at async file:///home/runner/work/DossierQuebec/DossierQuebec/levis/lib/levis.js:104:18
+    at async graphql (file:///home/runner/work/DossierQuebec/DossierQuebec/levis/lib/levis.js:122:87)
+    at async seancesDeLAnnee (file:///home/runner/work/DossierQuebec/DossierQuebec/levis/lib/levis.js:175:19)
+    at async main (file:///home/runner/work/DossierQuebec/DossierQuebec/levis/scrapers/seances.js:39:16) {
+  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: levis.ca:443, timeout: 10000ms)
+      at onConnectTimeout (node:internal/deps/undici/undici:2761:28)
+      at Immediate._onImmediate (node:internal/deps/undici/undici:2742:11)
+      at process.processImmediate (node:internal/timers:484:21) {
+    code: 'UND_ERR_CONNECT_TIMEOUT',
+    [Symbol(undici.error.UND_ERR)]: true,
+    [Symbol(undici.error.UND_ERR_CONNECT_TIMEOUT)]: true
+  }
+}
+✖ « Calendrier des séances » a échoué (code 1) — données précédentes conservées.
 
 === Décisions de l'année ===
 
@@ -47,8 +60,8 @@ Pastilles thématiques :
      16  Culture et patrimoine
     109  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-07-28) ===
-Fenêtre depuis 2026-07-28 : 4 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-07-29) ===
+Fenêtre depuis 2026-07-29 : 4 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
 
 17 votes nominaux écrits dans data/votes.json (4 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
@@ -93,7 +106,7 @@ Mesure de 29 termes sur 6 procès-verbaux de 2026 en cache et 1872 décisions…
   Usage conditionnel  (recherche : usages? conditionnels?)
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-28 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-07-29 pas encore résumés (plafond : 120)…
 525 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
@@ -111,5 +124,5 @@ Travail public : 2411 documents, 482 résumés, 17 votes, 4 projets.
 
 === Bilan ===
   étapes         : 11
-  échecs         : aucun
+  échecs         : Calendrier des séances
   avertissements : aucun
