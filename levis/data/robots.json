@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-26T13:47:27.541Z",
+ "generatedAt": "2026-09-27T14:46:11.494Z",
  "cheminsLus": [
   "/graphql/",
   "/fr/ville/",
@@ -11,11 +11,11 @@
  "sites": [
   {
    "url": "https://levis.ca/robots.txt",
-   "present": true,
-   "erreur": null,
-   "toutInterdit": false,
-   "reglesConcernantNosChemins": [],
-   "texte": "# robots.txt for https://levis.ca/\n\nsitemap: https://levis.ca/fr/sitemaps-1-sitemap.xml\n\n# live - don't allow web crawlers to index cpresources/ or vendor/\n\nUser-agent: *\nDisallow: /cpresources/\nDisallow: /vendor/\nDisallow: /.env\nDisallow: /cache/\n\n"
+   "present": false,
+   "erreur": "fetch failed",
+   "toutInterdit": null,
+   "reglesConcernantNosChemins": null,
+   "texte": null
   },
   {
    "url": "https://www.donneesquebec.ca/robots.txt",
