@@ -71,7 +71,7 @@ jobs:
         run: |
           git config user.name "dossierquebec-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add quebec/data
+          git add quebec/data quebec/decisions.html
           if git diff --cached --quiet; then
             echo "Aucun changement — rien à committer."
           else

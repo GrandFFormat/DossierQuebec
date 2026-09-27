@@ -111,6 +111,9 @@ const ETAPES = [
   { nom: 'Projets pour « Mes dossiers »', argv: ['scripts/projets-publics.js'] },
   // Les chiffres de « Le travail derrière le site » (page Abonnement).
   { nom: 'Chiffres de la page Abonnement', argv: ['scripts/travail-public.js'], secondaire: true },
+  // Les décisions récentes écrites dans decisions.html, pour Google (27 sept. 2026) : après les
+  // résumés du jour, sinon la page porterait ceux de la veille.
+  { nom: 'Décisions récentes dans la page (Google)', argv: ['../scripts/prerendu-villes.js', 'quebec'], secondaire: true },
 ];
 
 const echecs = [];
