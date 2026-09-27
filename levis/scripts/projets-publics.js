@@ -48,6 +48,14 @@ if (!decisions?.decisions) {
   console.error('data/decisions.json introuvable : rien à publier.');
   process.exit(1);
 }
+// Un tableau vide est « truthy » : le garde ci-dessus ne l'arrêtait pas. Une relecture complète
+// (forcée le 1er du mois) dont toutes les séances auraient échoué écrit « decisions: [] » en
+// sortant 0, et les fichiers de Mes dossiers étaient alors réécrits à zéro en silence — projets
+// vidés, agenda vide, dossiers disparus. On refuse d'écrire, et le run rougit (27 septembre 2026).
+if (decisions.decisions.length === 0) {
+  console.error("data/decisions.json ne contient aucune décision : rien n'est réécrit.");
+  process.exit(1);
+}
 const { resumes = [] } = await lire('data/resumes.json', {});
 const { recaps = {} } = await lire('data/projets-recaps.json', {});
 const resumeDe = new Map(resumes.map((r) => [r.id, r]));

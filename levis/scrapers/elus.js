@@ -14,7 +14,7 @@
 // LEQUEL la personne a été élue le 2 novembre 2025 — un changement d'allégeance depuis n'y
 // serait pas ; `partiSource` le dit.
 
-import { writeFile } from 'node:fs/promises';
+import { writeFile, readFile } from 'node:fs/promises';
 import { texte, PAGE_MEMBRES } from '../lib/levis.js';
 import { cleNom } from '../lib/pv.js';
 
@@ -118,6 +118,17 @@ async function main() {
   // Parti et arrondissement, depuis la page Élections. Un nom qui ne correspond pas entre les
   // deux pages est consigné, pas corrigé.
   const ecarts = [];
+  const veille = await readFile(OUT, 'utf8')
+    .then(JSON.parse)
+    .catch(() => null);
+  // Une page à moitié reconnue (un bloc de membre dont le gabarit a bougé est sauté) sortait dix ou
+  // douze membres sans que rien ne le dise. Une baisse est maintenant consignée et visible — sans
+  // bloquer une vraie démission, qui est un fait à publier.
+  if (veille?.nombre > membres.length) {
+    ecarts.push(`${membres.length} membre(s) reconnu(s) contre ${veille.nombre} au relevé du ${String(veille.generatedAt).slice(0, 10)} — départ réel, ou gabarit de la page changé ?`);
+    console.warn(`⚠ ${ecarts.at(-1)}`);
+    process.exitCode = 1;
+  }
   try {
     const elections = lireElections(await texte(PAGE_ELECTIONS, { notFoundIsNull: false }));
     for (const m of membres) {
@@ -130,6 +141,29 @@ async function main() {
     }
   } catch (err) {
     ecarts.push(`Page Élections illisible : ${err.message}`);
+  }
+  // La page Élections en panne — ou son gabarit changé, qui ne lève rien — ne doit pas publier un
+  // conseil sans parti ni arrondissement : on reprend ce que disait le relevé de la veille, et
+  // l'étape passe en avertissement pour que ça se voie dans le run (27 septembre 2026). La clé de
+  // report n'est pas le seul numéro de district : le maire n'en a pas.
+  if (!membres.some((m) => m.parti)) {
+    const avant = new Map((veille?.membres ?? []).map((m) => [m.districtNumero ?? m.nomComplet, m]));
+    let reportes = 0;
+    for (const m of membres) {
+      const a = avant.get(m.districtNumero ?? m.nomComplet);
+      if (!a) continue;
+      m.parti = a.parti ?? null;
+      if (a.partiSource) m.partiSource = a.partiSource;
+      m.arrondissement = a.arrondissement ?? null;
+      if (a.parti || a.arrondissement) reportes++;
+    }
+    ecarts.push(
+      reportes
+        ? `Parti et arrondissement repris du relevé du ${String(veille.generatedAt).slice(0, 10)} (${reportes} membre(s)) : la page Élections n'a rien donné aujourd'hui.`
+        : "Aucun parti lu sur la page Élections et aucun relevé précédent à reprendre."
+    );
+    console.warn(`⚠ ${ecarts.at(-1)}`);
+    process.exitCode = 1;
   }
   const partis = {};
   for (const m of membres) if (m.parti) partis[m.parti] = (partis[m.parti] ?? 0) + 1;

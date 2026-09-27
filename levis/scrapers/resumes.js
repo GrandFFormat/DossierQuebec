@@ -25,7 +25,7 @@
 //     la fiche renvoie toujours au PDF officiel.
 
 import Anthropic from '@anthropic-ai/sdk';
-import { writeFile, readFile } from 'node:fs/promises';
+import { writeFile, readFile, rename } from 'node:fs/promises';
 import { pdf as telechargerPdf } from '../lib/levis.js';
 import { lirePdf } from '../lib/pdf.js';
 import { ecrireCache, lireCache } from './decisions.js';
@@ -40,6 +40,7 @@ export function directionDuSommaire(texte) {
 }
 
 const OUT = new URL('../data/resumes.json', import.meta.url);
+const OUT_TMP = new URL('../data/resumes.json.tmp', import.meta.url);
 const DECISIONS = new URL('../data/decisions.json', import.meta.url);
 
 // Tarifs $ US par million de jetons, pour l'estimation de coût.
@@ -53,6 +54,12 @@ const MODELE_DEFAUT = 'claude-opus-5';
 // Un sommaire dépasse rarement 12 000 caractères ; au-delà on tronque par la fin en le
 // disant, plutôt que de payer pour des annexes répétitives.
 const MAX_CARACTERES = 14000;
+
+// Et en dessous de ce plancher, ce n'est plus un sommaire : un PDF numérisé, ou un document dont
+// pdf.js ne rend que les sauts de page et le tableau d'approbation. Mesuré sur les 493 sommaires
+// du volet : une poignée sont dans ce cas. On ne les résume pas — un résumé sans source, même
+// exact, viole la première règle du projet.
+const PLANCHER_CARACTERES = 400;
 
 const CONSIGNE = `Tu résumes des sommaires décisionnels de la Ville de Lévis pour un site
 d'information citoyenne. Ton lecteur est une personne pressée qui n'a aucune formation en
@@ -148,13 +155,20 @@ function lireResultat(message) {
   return null;
 }
 
+// Une lecture ratée ne doit JAMAIS passer pour un cache vide : le fichier serait réécrit avec la
+// seule fenêtre du jour — 73 fiches au lieu de 525 — et 452 résumés déjà payés disparaîtraient du
+// site sans un mot, en code 0. Fichier absent = premier passage ; toute autre erreur arrête le
+// script et le fichier reste intact (27 septembre 2026).
 async function chargerCache() {
+  let brut;
   try {
-    const precedent = JSON.parse(await readFile(OUT, 'utf8'));
-    return new Map((precedent.resumes ?? []).map((r) => [r.id, r]));
-  } catch {
-    return new Map();
+    brut = await readFile(OUT, 'utf8');
+  } catch (err) {
+    if (err.code === 'ENOENT') return new Map();
+    throw err;
   }
+  const precedent = JSON.parse(brut); // JSON abîmé : on échoue, on n'ampute pas
+  return new Map((precedent.resumes ?? []).map((r) => [r.id, r]));
 }
 
 // Le texte d'un sommaire : cache local d'abord, PDF de la Ville ensuite.
@@ -184,6 +198,8 @@ async function candidats({ depuis = null, plafond = Infinity, cache }) {
   }
   const liste = [...parDossier.values()].sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '')).slice(0, plafond);
   const docs = [];
+  const sautes = []; // sommaires que la Ville n'a pas servis aujourd'hui : on réessaiera
+  const sansTexte = []; // sommaires lus mais sans texte exploitable : aucun résumé possible
   for (const d of liste) {
     let texte = null;
     try {
@@ -193,11 +209,23 @@ async function candidats({ depuis = null, plafond = Infinity, cache }) {
     }
     if (!texte) {
       console.warn(`⚠ sommaire introuvable pour le dossier ${d.dossier} (${d.sommairePdf}) — on réessaiera.`);
+      sautes.push(d.dossier);
       continue;
     }
-    docs.push({ id: d.dossier, numero: d.dossier, resolution: d.numero, date: d.date, unite: directionDuSommaire(texte) ?? d.unite, objet: d.objet, pdf: d.sommairePdf, texte: preparerTexte(texte) });
+    // Un PDF qui ne rend que ses sauts de page ou son tableau de signatures n'est pas un sommaire
+    // lisible : le modèle ne verrait que la ligne « Objet : » de la consigne et rendrait des puces
+    // sans source — des faits peut-être vrais, mais qui ne viennent pas du document. On n'écrit
+    // alors aucun résumé (27 septembre 2026).
+    const prepare = preparerTexte(texte);
+    if (prepare.length < PLANCHER_CARACTERES) {
+      const raison = prepare.length ? `texte du sommaire trop court (${prepare.length} caractères)` : 'aucun texte extrait du PDF du sommaire';
+      console.warn(`⚠ ${d.dossier} : ${raison} — pas de résumé.`);
+      sansTexte.push({ id: d.dossier, raison, pdf: d.sommairePdf });
+      continue;
+    }
+    docs.push({ id: d.dossier, numero: d.dossier, resolution: d.numero, date: d.date, unite: directionDuSommaire(texte) ?? d.unite, objet: d.objet, pdf: d.sommairePdf, texte: prepare, caracteres: prepare.length });
   }
-  return docs;
+  return { docs, sautes, sansTexte };
 }
 
 async function estimer(client, docs, modele) {
@@ -236,11 +264,16 @@ function afficherEstimation(estimation, docs, modele, batch) {
 // Des débris d'échappement que le décodage ne sait pas défaire (« L\tévis », « r\nde9glement »,
 // « biblioth\ru00e8ques ») : 13 résumés sur 492 du lot Batches du 14 sept. 2026. Un résumé
 // abîmé n'est pas gardé : il compte comme un échec et sera redemandé à la prochaine exécution.
-const DEBRIS = /[\t\r\n\\]|u00[0-9a-f]{2}|[a-zà-ÿ]de[89]/i;
+// Le décodage fabrique aussi des sauts de page et d'autres caractères de contrôle
+// (« p\ferdiatrie », « co\fbt ») : deux fiches du même lot sont passées à travers, la classe
+// couvre donc tout C0.
+const DEBRIS = /[\x00-\x1f\x7f\\]|u00[0-9a-f]{2}|[a-zà-ÿ]de[89]/i;
 
 function ficheResume(doc, sortie, modele, usage) {
   const puces = (sortie.puces ?? []).map(decoderEchappements);
-  if (puces.some((p) => DEBRIS.test(p))) throw new Error("résumé abîmé (séquences d'échappement illisibles) — sera redemandé");
+  const montant = decoderEchappements(sortie.montantPrincipal ?? null);
+  // Le montant part seul en pastille sur la fiche : il subit le même examen que les puces.
+  if (puces.some((p) => DEBRIS.test(p)) || DEBRIS.test(montant ?? '')) throw new Error("résumé abîmé (séquences d'échappement illisibles) — sera redemandé");
   return {
     id: doc.id,
     numero: doc.numero,
@@ -251,7 +284,7 @@ function ficheResume(doc, sortie, modele, usage) {
     pdf: doc.pdf,
     puces,
     sansContenuSubstantiel: sortie.sansContenuSubstantiel,
-    montantPrincipal: decoderEchappements(sortie.montantPrincipal ?? null),
+    montantPrincipal: montant,
     genereParIA: true,
     modele,
     genereLe: new Date().toISOString(),
@@ -332,8 +365,17 @@ async function main() {
 
   const cache = args.force ? new Map() : await chargerCache();
   console.log(depuis ? `Sommaires depuis ${depuis} pas encore résumés (plafond : ${plafond})…` : `Sommaires de ${year} pas encore résumés (au plus ${max})…`);
-  const aFaire = await candidats({ depuis, plafond: depuis ? plafond : max, cache });
+  const { docs: aFaire, sautes, sansTexte } = await candidats({ depuis, plafond: depuis ? plafond : max, cache });
   console.log(`${cache.size} déjà résumés, ${aFaire.length} à faire.`);
+  // Une source en panne garde les données de la veille, mais ça doit se VOIR : l'étape est
+  // secondaire, un code non nul la met en avertissement. Sans ça, le « Rien à générer » d'un jour
+  // calme et un gisement de sommaires injoignable se ressemblaient trait pour trait — et personne
+  // ne lit data/lancement.log. Posé AVANT le retour anticipé, qui sinon l'empêcherait.
+  if (sautes.length) {
+    console.warn(`⚠ ${sautes.length} sommaire(s) non servis par la Ville : ${sautes.join(', ')}`);
+    process.exitCode = 1;
+  }
+  if (sansTexte.length) console.warn(`⚠ ${sansTexte.length} sommaire(s) sans texte lisible — aucun résumé publié pour eux : ${sansTexte.map((s) => s.id).join(', ')}`);
   if (aFaire.length === 0) {
     console.log('Rien à générer. (--force pour tout regénérer.)');
     return;
@@ -356,8 +398,11 @@ async function main() {
   const tarif = TARIFS[modele];
   const coutReel = tarif ? ((jetonsEntree / 1e6) * tarif.entree + (jetonsSortie / 1e6) * tarif.sortie) * (batch ? 0.5 : 1) : null;
 
+  // Écriture en deux temps : un run interrompu en pleine écriture laissait un fichier tronqué, que
+  // chargerCache() relisait le lendemain comme un cache vide. On écrit à côté, puis on renomme d'un
+  // coup (27 septembre 2026).
   await writeFile(
-    OUT,
+    OUT_TMP,
     JSON.stringify(
       {
         generatedAt: new Date().toISOString(),
@@ -370,6 +415,7 @@ async function main() {
         nombre: tous.length,
         genereCetteFois: resumes.length,
         echecs,
+        sansTexte,
         cout: coutReel != null ? { devise: 'USD', montant: Number(coutReel.toFixed(4)), jetonsEntree, jetonsSortie } : null,
         resumes: tous,
       },
@@ -378,9 +424,13 @@ async function main() {
     ),
     'utf8'
   );
+  await rename(OUT_TMP, OUT);
   console.log(`\n${resumes.length} résumés générés, ${tous.length} au total dans data/resumes.json`);
   if (coutReel != null) console.log(`Coût réel : ${coutReel.toFixed(2)} $ US`);
+  // Un échec isolé se reprend tout seul au prochain run ; un lot entier en échec, non — c'est le
+  // modèle ou la clé, et il faut que le run le dise (même règle que recaps-projets.js).
   if (echecs.length) console.log(`${echecs.length} échec(s) — relancer la commande les reprendra.`);
+  if (echecs.length && echecs.length === aFaire.length) process.exitCode = 1;
 }
 
 main().catch((err) => {

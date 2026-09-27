@@ -103,6 +103,11 @@ async function main() {
   votes.sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '') || (a.id ?? '').localeCompare(b.id ?? '', 'fr', { numeric: true }));
 
   const douteux = votes.filter((v) => v.avertissements.length > 0);
+  // Une panne de levis.ca fait échouer chaque procès-verbal en silence (chaque erreur est avalée
+  // dans la boucle) : sans ce refus, on publierait un registre de votes vide avec l'air d'un fait.
+  // Le fichier de la veille garde ses votes et le run rougit (27 septembre 2026).
+  if (!votes.length && seances.length && precedent?.votes?.length)
+    throw new Error(`Aucun vote lu sur ${seances.length} séance(s) alors que le fichier précédent en portait ${precedent.votes.length} — rien n'est écrit.`);
   await writeFile(
     OUT,
     JSON.stringify(

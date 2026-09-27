@@ -54,7 +54,11 @@ const ETAPES = [
   // les pages du volet pendant une nuit, sans que rien ne le signale : une erreur de syntaxe dans
   // le JavaScript du site rend maintenant le run rouge.
   { nom: 'Syntaxe du JavaScript du site', argv: ['--check', 'assets/app.js'] },
-  { nom: 'Archivage des années révolues', argv: ['scrapers/archive.js', '--rotate'], secondaire: true },
+  // Pas « secondaire » : la promesse des étapes secondaires (« on garde les données précédentes »)
+  // est justement fausse pour celle-ci. Un archivage raté le 1er janvier, et l'année révolue
+  // disparaît des données publiées sans copie — decisions.js refuse maintenant de repartir sans
+  // archive, mais le run doit rougir dès le premier jour.
+  { nom: 'Archivage des années révolues', argv: ['scrapers/archive.js', '--rotate'] },
   ...(conseil
     ? [
         { nom: 'Membres du conseil', argv: ['scrapers/elus.js'], secondaire: true },

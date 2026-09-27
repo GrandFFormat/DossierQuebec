@@ -211,6 +211,16 @@ async function main() {
   const seances = calendrier.seances.filter((s) => s.date.startsWith(year) && s.date <= aujourdhui && !s.annulee && (!args.seance || s.id === args.seance));
 
   const precedent = await lireJson(OUT);
+  // Une année révolue ne se laisse pas écraser avant d'être dans l'archive. Le 1er janvier, ce
+  // fichier repart sur l'année neuve (`d.annee === year`) : si l'étape d'archivage n'a pas pu
+  // tourner, l'année écoulée disparaîtrait des données publiées sans copie. On s'arrête alors ici —
+  // les données de la veille restent, le run rougit, et archive.js --rotate a sa chance demain.
+  const anneePrecedente = precedent?.parametres?.annee;
+  if (anneePrecedente && String(anneePrecedente) !== year) {
+    const manifeste = await lireJson(new URL('../data/archives/index.json', import.meta.url));
+    if (!(manifeste?.annees ?? []).some((a) => String(a.annee) === String(anneePrecedente)))
+      throw new Error(`${anneePrecedente} n'est pas dans data/archives/index.json — lancez « node scrapers/archive.js --rotate » avant de repartir sur ${year}.`);
+  }
   const connues = new Map((precedent?.seances ?? []).map((s) => [s.id, s]));
   const decisionsConnues = new Map((precedent?.decisions ?? []).map((d) => [d.id, d]));
   const decisions = new Map(args.complet ? [] : decisionsConnues);
@@ -218,6 +228,12 @@ async function main() {
   const presences = new Map((presencesPrecedentes?.seances ?? []).map((p) => [p.seanceId, p]));
   const etatSeances = [];
   let lues = 0;
+  let illisibles = 0; // séances qu'on n'a pas pu lire cette fois : le run doit rougir
+  // Une séance qu'on n'a pas pu relire garde ses décisions de la veille — y compris en relecture
+  // complète (--complet), où la carte repart vide : sans ça le run publierait une séance vidée.
+  const garderLesConnues = (seanceId) => {
+    for (const [id, d] of decisionsConnues) if (d.seanceId === seanceId) decisions.set(id, d);
+  };
 
   const ecrire = async (partiel) => {
     const liste = [...decisions.values()].filter((d) => d.annee === year);
@@ -256,6 +272,13 @@ async function main() {
       seances: etats.sort((a, b) => b.date.localeCompare(a.date)),
       decisions: liste,
     };
+    // Dernier verrou avant la publication : on ne remplace jamais une année pleine par du vide. Une
+    // relecture complète dont tous les procès-verbaux auraient échoué écrivait « decisions: [] » en
+    // sortant 0, et le site annonçait « 0 décision » comme un fait. Le compte se fait dans la MÊME
+    // année, pour ne pas bloquer le passage au 1er janvier (27 septembre 2026).
+    const connuesDeLAnnee = [...decisionsConnues.values()].filter((d) => d.annee === year).length;
+    if (liste.length === 0 && connuesDeLAnnee > 0)
+      throw new Error(`aucune décision à écrire alors que le fichier précédent en portait ${connuesDeLAnnee} pour ${year} — rien n'est réécrit.`);
     await writeFile(OUT, JSON.stringify(payload, null, 1), 'utf8');
     await writeFile(
       PRESENCES,
@@ -292,16 +315,34 @@ async function main() {
     } catch (err) {
       console.warn(`⚠ ${seance.id} : ${err.message}`);
       etatSeances.push({ ...seance, etat: 'erreur', erreur: String(err.message ?? err), essaye: aujourdhui });
+      illisibles++;
+      garderLesConnues(seance.id);
       continue;
     }
     if (!pv?.url) {
       etatSeances.push({ ...seance, etat: 'erreur', erreur: pv?.erreur ?? 'procès-verbal illisible', essaye: aujourdhui });
+      illisibles++;
+      garderLesConnues(seance.id);
+      continue;
+    }
+    const { decisions: nouvelles, resolutions, presences: p } = decisionsDeSeance(seance, pv);
+    // Une relecture beaucoup plus maigre que la précédente n'est pas une relecture : un PDF
+    // tronqué côté Ville passe estPdf() (« %PDF » suffit) et pdf.js rend les pages qu'il retrouve
+    // au lieu de planter. On comparait la lecture à rien du tout ; on la compare maintenant au
+    // compte connu DE CETTE SÉANCE, on garde les décisions de la veille, et le run rougit. La
+    // marge d'un quart laisse passer un procès-verbal corrigé à une résolution près, et
+    // « --seance= » reste le geste manuel qui accepte une vraie baisse (27 septembre 2026).
+    const maigre = deja?.etat === 'lue' && deja.nombreResolutions > 0 && resolutions.length < deja.nombreResolutions * 0.75;
+    if (maigre && !args.seance) {
+      console.warn(`⚠ ${seance.id} : ${resolutions.length} résolutions relues contre ${deja.nombreResolutions} connues — lecture écartée, décisions précédentes conservées.`);
+      etatSeances.push({ ...deja, etat: 'suspecte', pv: seance.pv, pvModifieLe: seance.pvModifieLe ?? null, nombreResolutionsRelu: resolutions.length, essaye: aujourdhui });
+      illisibles++;
+      garderLesConnues(seance.id);
       continue;
     }
     // Les décisions déjà connues de cette séance sont remplacées, pas additionnées : une
     // relecture qui ne trouve plus une résolution ne doit pas la laisser traîner.
     for (const [id, d] of decisions) if (d.seanceId === seance.id) decisions.delete(id);
-    const { decisions: nouvelles, resolutions, presences: p } = decisionsDeSeance(seance, pv);
     for (const d of nouvelles) decisions.set(d.id, d);
     if (p) presences.set(seance.id, { seanceId: seance.id, date: seance.date, instance: seance.nom, instanceCode: seance.instance, pdf: pv.url, ...p });
     lues++;
@@ -321,6 +362,15 @@ async function main() {
   console.log('\nPastilles thématiques :');
   for (const { valeur, n } of payload.facettes.theme) console.log(`  ${String(n).padStart(5)}  ${THEMES[valeur]?.libelle ?? valeur}`);
   console.log(`  ${String(payload.sansTheme).padStart(5)}  (classées par défaut — aucune règle n'a tranché)`);
+
+  // Une séance illisible ou suspecte garde ses décisions de la veille — mais ça doit SE VOIR.
+  // « Décisions de l'année » n'est pas une étape secondaire dans scripts/refresh.js : un code de
+  // sortie non nul la met dans `failed` et le workflow fait rougir le run. Avant, une séance
+  // pouvait rester en « erreur » des semaines avec des runs tout verts (27 septembre 2026).
+  if (illisibles) {
+    console.error(`\n⚠ ${illisibles} séance(s) non lue(s) cette fois — décisions précédentes conservées, voir data/decisions.json (etat « erreur » ou « suspecte »).`);
+    process.exitCode = 1;
+  }
 }
 
 if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split(/[\\/]/).pop())) {
