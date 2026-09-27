@@ -130,6 +130,9 @@ const ETAPES = [
         },
       ]
     : []),
+  // Les décisions récentes écrites dans decisions.html, pour Google (27 sept. 2026) : après les
+  // résumés du jour, sinon la page porterait ceux de la veille.
+  { nom: 'Décisions récentes dans la page (Google)', argv: ['../scripts/prerendu-villes.js', 'montreal'], secondaire: true },
 ];
 
 // La version du code qui tourne, en tête du journal : la première question quand un
