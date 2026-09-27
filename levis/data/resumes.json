@@ -1,23 +1,60 @@
 {
- "generatedAt": "2026-09-18T14:01:23.177Z",
+ "generatedAt": "2026-09-27T18:45:06.860Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
  "parametres": {
   "annee": "2026",
-  "max": 40,
+  "max": 12,
   "batch": false,
-  "depuis": "2026-07-20",
+  "depuis": null,
   "plafond": 120
  },
- "nombre": 525,
+ "nombre": 518,
  "genereCetteFois": 2,
  "echecs": [],
+ "sansTexte": [
+  {
+   "id": "DEI-2026-012",
+   "raison": "texte du sommaire trop court (156 caractères)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DEI-2026-012-R-1.pdf"
+  },
+  {
+   "id": "ENV-2026-014",
+   "raison": "aucun texte extrait du PDF du sommaire",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/ENV-2026-014.pdf"
+  },
+  {
+   "id": "URBA-SAT-2026-071",
+   "raison": "aucun texte extrait du PDF du sommaire",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-071.pdf"
+  },
+  {
+   "id": "URBA-SAT-2026-067",
+   "raison": "aucun texte extrait du PDF du sommaire",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-067.pdf"
+  },
+  {
+   "id": "URBA-SAT-2026-033",
+   "raison": "texte du sommaire trop court (160 caractères)",
+   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/URBA-SAT-2026-033.pdf"
+  },
+  {
+   "id": "URBA-SAT-2026-027",
+   "raison": "texte du sommaire trop court (154 caractères)",
+   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/URBA-SAT-2026-027.pdf"
+  },
+  {
+   "id": "URBA-SAT-2026-002",
+   "raison": "texte du sommaire trop court (155 caractères)",
+   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/URBA-SAT-2026-002.pdf"
+  }
+ ],
  "cout": {
   "devise": "USD",
-  "montant": 0.0559,
-  "jetonsEntree": 6863,
-  "jetonsSortie": 864
+  "montant": 0.0556,
+  "jetonsEntree": 7132,
+  "jetonsSortie": 799
  },
  "resumes": [
   {
@@ -1388,29 +1425,6 @@
    }
   },
   {
-   "id": "DEI-2026-012",
-   "numero": "DEI-2026-012",
-   "resolution": "CV3629",
-   "date": "2026-08-25",
-   "unite": null,
-   "objet": "Avis de motion du Règlement RV3626 décrétant des emprunts pour financer les dépenses relatives à l’acquisition de véhicules incendie et dépôt du projet de règlement",
-   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DEI-2026-012-R-1.pdf",
-   "puces": [
-    "La Ville annonce qu'elle adoptera plus tard un règlement d'emprunt (RV3626) pour payer l'achat de véhicules incendie.",
-    "Le projet de règlement est déposé en même temps que cet avis; aucune décision finale n'est prise à cette étape.",
-    "Le document ne précise ni les montants, ni le nombre de véhicules, ni l'échéancier."
-   ],
-   "sansContenuSubstantiel": true,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T22:59:08.216Z",
-   "jetons": {
-    "entree": 1530,
-    "sortie": 223
-   }
-  },
-  {
    "id": "TMD-2026-030",
    "numero": "TMD-2026-030",
    "resolution": "CV3630",
@@ -2720,28 +2734,6 @@
    }
   },
   {
-   "id": "ENV-2026-014",
-   "numero": "ENV-2026-014",
-   "resolution": "CV3553",
-   "date": "2026-07-14",
-   "unite": null,
-   "objet": "Financement de dépenses relatives au programme de soutien aux initiatives des organismes en environnement",
-   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/ENV-2026-014.pdf",
-   "puces": [
-    "Le document porte sur le financement de dépenses liées au programme de soutien aux initiatives des organismes en environnement.",
-    "Le texte du sommaire décisionnel n'a pas été fourni : aucun montant, aucun organisme ni aucune échéance ne peut être rapporté."
-   ],
-   "sansContenuSubstantiel": true,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.778Z",
-   "jetons": {
-    "entree": 1408,
-    "sortie": 187
-   }
-  },
-  {
    "id": "DEV-2026-030",
    "numero": "DEV-2026-030",
    "resolution": "CV3584",
@@ -3247,30 +3239,6 @@
    }
   },
   {
-   "id": "URBA-SAT-2026-071",
-   "numero": "URBA-SAT-2026-071",
-   "resolution": "CV3578",
-   "date": "2026-07-14",
-   "unite": null,
-   "objet": "Adoption du Second projet de règlement RV3615 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (ajout des classes d’usages C300, C304, C310, C311, C312, C314, C315, C320 et du groupe d’usages C8 dans la zone C2404, chemin des Îles, à proximité de l’intersection avec le boulevard Guillaume-Couture, secteur Lévis)",
-   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-071.pdf",
-   "puces": [
-    "La Ville adopte le second projet de règlement RV3615, qui modifie son règlement de zonage et de lotissement.",
-    "Le changement vise la zone C2404, sur le chemin des Îles, près de l'intersection avec le boulevard Guillaume-Couture, dans le secteur Lévis.",
-    "Le règlement ajoute dans cette zone les classes d'usages C300, C304, C310, C311, C312, C314, C315 et C320, ainsi que le groupe d'usages C8.",
-    "Il s'agit d'une étape du processus d'adoption : le règlement n'est pas encore en vigueur."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-15T00:39:17.555Z",
-   "jetons": {
-    "entree": 1528,
-    "sortie": 297
-   }
-  },
-  {
    "id": "URBA-SAT-2026-077",
    "numero": "URBA-SAT-2026-077",
    "resolution": "CV3582",
@@ -3749,30 +3717,6 @@
    "jetons": {
     "entree": 5588,
     "sortie": 648
-   }
-  },
-  {
-   "id": "URBA-SAT-2026-067",
-   "numero": "URBA-SAT-2026-067",
-   "resolution": "CE3214",
-   "date": "2026-07-07",
-   "unite": null,
-   "objet": "Demande d’autorisation 453397 de la Commission de protection du territoire agricole du Québec pour une utilisation à une fin autre que l’agriculture, soit la construction d’une gloriette et l’utilisation d’un chemin d’accès sur une partie du lot 1 964 711 du cadastre du Québec (2434, route Marie-Victorin, secteur Saint-Nicolas)",
-   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-067.pdf",
-   "puces": [
-    "La Ville transmet à la Commission de protection du territoire agricole du Québec une demande d'autorisation (dossier 453397) pour utiliser à une fin autre que l'agriculture une partie du lot 1 964 711.",
-    "Le projet visé : construire une gloriette et utiliser un chemin d'accès sur le terrain du 2434, route Marie-Victorin, dans le secteur Saint-Nicolas.",
-    "Comme le terrain est en zone agricole, la décision finale revient à la Commission, pas à la Ville.",
-    "Le document ne mentionne aucune somme d'argent."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.802Z",
-   "jetons": {
-    "entree": 1513,
-    "sortie": 292
    }
   },
   {
@@ -4618,28 +4562,6 @@
    }
   },
   {
-   "id": "DEV-2026-027",
-   "numero": "DEV-2026-027",
-   "resolution": "CV3492",
-   "date": "2026-06-16",
-   "unite": "Développement économique et de la promotion",
-   "objet": "Aide financière à Centre de pédiatrie sociale de Lévis",
-   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/DEV-2026-027.pdf",
-   "puces": [
-    "La Ville verse 150 000 $ au Centre de p\ferdiatrie sociale de L\fevis pour son projet de rel\focalisation.",
-    "placeholder"
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": "150 000 $",
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.803Z",
-   "jetons": {
-    "entree": 4001,
-    "sortie": 153
-   }
-  },
-  {
    "id": "DVC-DIR-2026-003",
    "numero": "DVC-DIR-2026-003",
    "resolution": "CV3500",
@@ -4922,6 +4844,33 @@
    "jetons": {
     "entree": 7447,
     "sortie": 412
+   }
+  },
+  {
+   "id": "DEV-2026-027",
+   "numero": "DEV-2026-027",
+   "resolution": "CV3492",
+   "date": "2026-06-16",
+   "unite": "Développement économique et de la promotion",
+   "objet": "Aide financière à Centre de pédiatrie sociale de Lévis",
+   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/DEV-2026-027.pdf",
+   "puces": [
+    "La Ville verse 150 000 $ au Centre de pédiatrie sociale de Lévis pour l'aider à déménager dans de nouveaux locaux.",
+    "Le déménagement vise à améliorer l'accessibilité, la capacité d'accueil et l'intégration des services aux enfants et aux familles vulnérables.",
+    "Le projet coûte au total 1 871 000 $; l'aide de la Ville couvre 8 % de la facture.",
+    "L'argent vient du Programme Vitalité Territoriale (Fonds régions et ruralité) et du budget de la Direction du développement économique et de la promotion.",
+    "L'argent ne sera versé que si l'organisme obtient les permis municipaux nécessaires.",
+    "Les travaux sont prévus de juin à septembre 2026.",
+    "Le conseil de la Ville doit trancher à sa séance du 16 juin 2026, après présentation au comité exécutif le 2 juin."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "150 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-27T18:45:05.857Z",
+   "jetons": {
+    "entree": 4001,
+    "sortie": 411
    }
   },
   {
@@ -6773,29 +6722,6 @@
    "jetons": {
     "entree": 2496,
     "sortie": 420
-   }
-  },
-  {
-   "id": "URBA-SAT-2026-033",
-   "numero": "URBA-SAT-2026-033",
-   "resolution": "CV3401",
-   "date": "2026-05-12",
-   "unite": null,
-   "objet": "Avis de motion du Règlement RV3616 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (précisions relatives aux lots dérogatoires protégés par droits acquis) et dépôt de projet de règlement",
-   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/URBA-SAT-2026-033.pdf",
-   "puces": [
-    "Un conseiller annonce à l'avance (avis de motion) un futur règlement qui modifierait le règlement de zonage et de lotissement de la Ville.",
-    "Le projet de règlement est déposé en même temps : il apporterait des précisions sur les lots dérogatoires protégés par droits acquis.",
-    "Aucune décision n'est prise à cette étape et le document ne contient ni montant, ni échéance, ni secteur visé."
-   ],
-   "sansContenuSubstantiel": true,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.803Z",
-   "jetons": {
-    "entree": 1557,
-    "sortie": 238
    }
   },
   {
@@ -10102,29 +10028,6 @@
    }
   },
   {
-   "id": "URBA-SAT-2026-027",
-   "numero": "URBA-SAT-2026-027",
-   "resolution": "CE2892",
-   "date": "2026-03-17",
-   "unite": null,
-   "objet": "Demande de modification au Règlement RV-2011-11-23 sur le zonage et le lotissement (ajout de classes d’usages résidentielles dans la zone C0470, rue du Grand-Tronc, secteur Saint-Rédempteur)",
-   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/URBA-SAT-2026-027.pdf",
-   "puces": [
-    "Le document est une fiche de suivi d'approbation d'un dossier d'urbanisme : il ne contient que des dates, des noms et des statuts d'approbation, sans le détail de la décision.",
-    "Son objet annoncé est une demande de modification du règlement de zonage et de lotissement pour ajouter des classes d'usages résidentielles dans la zone C0470, rue du Grand-Tronc, secteur Saint-Rédempteur.",
-    "Les approbations ont été données par la Direction le 4 mars 2026 et par la Direction générale le 6 mars 2026."
-   ],
-   "sansContenuSubstantiel": true,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.775Z",
-   "jetons": {
-    "entree": 1551,
-    "sortie": 285
-   }
-  },
-  {
    "id": "FIN-2026-017",
    "numero": "FIN-2026-017",
    "resolution": "CE2881",
@@ -12746,57 +12649,6 @@
    }
   },
   {
-   "id": "URBA-SAT-2026-002",
-   "numero": "URBA-SAT-2026-002",
-   "resolution": "CV3114",
-   "date": "2026-01-27",
-   "unite": null,
-   "objet": "Adoption du Règlement RV3561 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (création de la zone M2889 à partir de la zone M2888 et d’une partie des zones H2885 et M2882 à proximité de la rue de l’Hôtel-Des-Plaines et de la route du Président-Kennedy, secteur Pintendre)",
-   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/URBA-SAT-2026-002.pdf",
-   "puces": [
-    "La Ville adopte un règlement qui modifie son zonage dans le secteur Pintendre.",
-    "Le changement crée une nouvelle zone appelée M2889.",
-    "Cette nouvelle zone est formée à partir de la zone M2888 et de parties des zones H2885 et M2882.",
-    "Les terrains touchés se trouvent près de la rue de l'Hôtel-Des-Plaines et de la route du Président-Kennedy.",
-    "Le document fourni ne précise pas les usages ni les normes qui s'appliqueront dans la nouvelle zone."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.778Z",
-   "jetons": {
-    "entree": 1598,
-    "sortie": 281
-   }
-  },
-  {
-   "id": "APGI-GI-2026-006",
-   "numero": "APGI-GI-2026-006",
-   "resolution": "CV3109",
-   "date": "2026-01-27",
-   "unite": "Approvisionnement et gestion immobilière",
-   "objet": "Mainlevée et radiation d’un droit de résolution affectant le lot 6 357 985 du cadastre du Québec (rue Albert-Dion, secteur Lévis)",
-   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/APGI-GI-2026-006.pdf",
-   "puces": [
-    "La Ville renonce à son droit de reprendre un terrain de la rue Albert-Dion (lot 6 357 985), dans le secteur L\ficvis.",
-    "Ce terrain avait \ft\fc vendu \ff Four-Way Holdings LTD en juillet 2020, avec des conditions \ff respecter, dont une obligation de construire.",
-    "Le d\filai de cinq ans pr\fivu par la loi est \ficoul\fi et la Ville constate que les obligations de l\fachat ont \fit\fi respect\fies.",
-    "La Ville autorise donc la radiation de cette clause au registre foncier, \ff la demande du propri\fitaire actuel.",
-    "Les frais de radiation sont pay\fis par le propri\fitaire du terrain, sans co\fbt pour la Ville.",
-    "Le dossier passe au comit\fi ex\ficutif le 13 janvier 2026 et au conseil de la Ville le 27 janvier 2026; la publication de l\facte notari\fi prend environ six semaines."
-   ],
-   "sansContenuSubstantiel": false,
-   "montantPrincipal": null,
-   "genereParIA": true,
-   "modele": "claude-opus-5",
-   "genereLe": "2026-09-14T23:10:42.779Z",
-   "jetons": {
-    "entree": 3131,
-    "sortie": 442
-   }
-  },
-  {
    "id": "GCH-2026-001",
    "numero": "GCH-2026-001",
    "resolution": "CV3099",
@@ -13261,6 +13113,31 @@
    "jetons": {
     "entree": 3480,
     "sortie": 496
+   }
+  },
+  {
+   "id": "APGI-GI-2026-006",
+   "numero": "APGI-GI-2026-006",
+   "resolution": "CV3109",
+   "date": "2026-01-27",
+   "unite": "Approvisionnement et gestion immobilière",
+   "objet": "Mainlevée et radiation d’un droit de résolution affectant le lot 6 357 985 du cadastre du Québec (rue Albert-Dion, secteur Lévis)",
+   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/APGI-GI-2026-006.pdf",
+   "puces": [
+    "La Ville renonce à son droit de reprendre un terrain de la rue Albert-Dion (lot 6 357 985), dans le secteur Lévis, qu'elle avait vendu en juillet 2020 à Four-Way Holdings LTD.",
+    "Ce droit lui permettait d'annuler la vente si l'acheteur ne respectait pas ses obligations, notamment celle de construire.",
+    "Le délai de cinq ans prévu au Code civil est expiré et les obligations de l'acheteur ont été respectées, selon le document.",
+    "Le propriétaire actuel du terrain paie lui-même les frais de radiation; la Ville n'a aucun impact financier.",
+    "Le dossier passe au comité exécutif le 13 janvier 2026, puis au conseil de la Ville le 27 janvier 2026, avec publication de l'acte notarié sur environ six semaines."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-27T18:45:06.859Z",
+   "jetons": {
+    "entree": 3131,
+    "sortie": 388
    }
   },
   {
