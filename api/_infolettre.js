@@ -174,29 +174,14 @@ export async function envoyerCourriels(messages) {
   }
 }
 
-// Les adresses des abonnés payants actifs : elles reçoivent l'édition abonnés.
-export async function courrielsAbonnes() {
-  const maintenant = new Date();
-  const actifs = (await supabase('/rest/v1/abonnements?statut=eq.actif&select=user_id,fin')).filter((a) => (!a.fin || new Date(a.fin) > maintenant) && UUID.test(a.user_id));
-  const courriels = new Set();
-  await Promise.all(actifs.map(async ({ user_id: id }) => {
-    const r = await fetch(`${process.env.SUPABASE_URL}/auth/v1/admin/users/${id}`, {
-      headers: { apikey: process.env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}` },
-    }).catch(() => null);
-    const u = r?.ok ? await r.json() : null;
-    if (u?.email) courriels.add(u.email.toLowerCase());
-  }));
-  return courriels;
-}
-
 // Le plus récent numéro publié d'une sorte (et d'un arrondissement, s'il y a lieu).
 export const dernierNumero = async ({ ville, type = 'mensuel', arrondissement = '', langue = 'fr' }) => {
-  const q = (lang) => supabase(`/rest/v1/infolettre_numeros?ville=eq.${ville}&type=eq.${type}&arrondissement=eq.${arrondissement}&langue=eq.${lang}&publie_le=not.is.null&select=ville,type,arrondissement,langue,mois,titre,html,html_abonnes&order=mois.desc&limit=1`);
+  const q = (lang) => supabase(`/rest/v1/infolettre_numeros?ville=eq.${ville}&type=eq.${type}&arrondissement=eq.${arrondissement}&langue=eq.${lang}&publie_le=not.is.null&select=ville,type,arrondissement,langue,mois,titre,html&order=mois.desc&limit=1`);
   return (await q(langue))[0] ?? (langue !== 'fr' ? (await q('fr'))[0] : null) ?? null;
 };
 
 // Le courriel, prêt à partir : le bandeau de bienvenue (s'il y a lieu) et les liens de désinscription.
-export function composer(numero, { id, abonne, bienvenue }) {
+export function composer(numero, { id, bienvenue }) {
   const mensuel = (numero.type ?? 'mensuel') === 'mensuel';
   const quoi = nomComplet({ ville: numero.ville, type: numero.type ?? 'mensuel', arrondissement: numero.arrondissement ?? '' });
   const bandeau = bienvenue
@@ -205,21 +190,20 @@ export function composer(numero, { id, abonne, bienvenue }) {
   const pied = `<br><br>Vous recevez ce courriel parce que vous vous y êtes inscrit sur dossierquebec.ca.
     <a href="${lienSigne('desinscrire', [id])}" style="color:#5B6470">Ne plus recevoir « ${echapper(quoi)} »</a> ·
     <a href="${lienSigne('desinscrire', [id], '&tout=1')}" style="color:#5B6470">me désinscrire de tout</a>`;
-  return (abonne ? numero.html_abonnes : numero.html).replace('<!--BANDEAU-->', bandeau).replace('<!--DESINSCRIPTION-->', pied);
+  return numero.html.replace('<!--BANDEAU-->', bandeau).replace('<!--DESINSCRIPTION-->', pied);
 }
 
 // À la confirmation (ou à la case cochée dans Mes dossiers) : le plus récent compte rendu de chaque
 // ville, avec le bandeau de bienvenue. Sans compte rendu publié, un court mot qui dit quand il arrive.
 export async function envoyerBienvenue(inscriptions) {
   if (!inscriptions.length) return 0;
-  const abonnes = await courrielsAbonnes();
   const messages = [];
   const envoyesPour = new Map(); // mois → ids
   for (const i of inscriptions) {
     const numero = await dernierNumero(i);
     const quoi = nomComplet(i);
     if (numero) {
-      messages.push({ a: i.email, sujet: `Bienvenue — ${numero.titre}`, html: composer(numero, { id: i.id, abonne: abonnes.has(i.email), bienvenue: true }), desinscription: lienSigne('desinscrire', [i.id]) });
+      messages.push({ a: i.email, sujet: `Bienvenue — ${numero.titre}`, html: composer(numero, { id: i.id, bienvenue: true }), desinscription: lienSigne('desinscrire', [i.id]) });
       envoyesPour.set(numero.mois, [...(envoyesPour.get(numero.mois) ?? []), i.id]);
     } else {
       const quand = (i.type ?? 'mensuel') === 'mensuel' ? prochainEnvoi() : 'après la prochaine séance';
@@ -239,14 +223,12 @@ export async function envoyerBienvenue(inscriptions) {
 }
 
 // Le cron : chaque compte rendu publié et pas encore parti, aux inscrits confirmés qui ne l'ont pas
-// reçu (ceux qui l'ont eu en bienvenue sont sautés), `plafond` au plus — ce que les alertes des
-// abonnés payants, parties avant, ont laissé du quota quotidien.
+// reçu (ceux qui l'ont eu en bienvenue sont sautés), `plafond` au plus (le quota quotidien de Resend).
 export async function envoyerNumerosEnAttente(plafond = PAR_JOUR) {
   const rapport = { numeros: 0, envoyes: 0, termines: 0, plafond };
   if (plafond <= 0) return rapport;
-  const numeros = await supabase('/rest/v1/infolettre_numeros?publie_le=not.is.null&envoye_le=is.null&select=ville,type,arrondissement,mois,titre,html,html_abonnes,envoyes&order=mois');
+  const numeros = await supabase('/rest/v1/infolettre_numeros?publie_le=not.is.null&envoye_le=is.null&select=ville,type,arrondissement,mois,titre,html,envoyes&order=mois');
   if (!numeros.length) return rapport;
-  const abonnes = await courrielsAbonnes();
   let reste = Math.min(plafond, PAR_JOUR);
   for (const numero of numeros) {
     if (reste <= 0) break;
@@ -254,7 +236,7 @@ export async function envoyerNumerosEnAttente(plafond = PAR_JOUR) {
     const inscrits = await supabase(`/rest/v1/infolettre_inscriptions?ville=eq.${numero.ville}&type=eq.${numero.type ?? 'mensuel'}&arrondissement=eq.${numero.arrondissement ?? ''}&statut=eq.confirme&or=(dernier_mois.is.null,dernier_mois.lt.${numero.mois})&select=id,email&order=confirme_le&limit=${reste + 1}`);
     const lot = inscrits.slice(0, reste);
     if (lot.length) {
-      await envoyerCourriels(lot.map((i) => ({ a: i.email, sujet: numero.titre, html: composer(numero, { id: i.id, abonne: abonnes.has(i.email), bienvenue: false }), desinscription: lienSigne('desinscrire', [i.id]) })));
+      await envoyerCourriels(lot.map((i) => ({ a: i.email, sujet: numero.titre, html: composer(numero, { id: i.id, bienvenue: false }), desinscription: lienSigne('desinscrire', [i.id]) })));
       await supabase(`/rest/v1/infolettre_inscriptions?id=in.(${lot.map((i) => i.id).join(',')})`, { methode: 'PATCH', corps: { dernier_mois: numero.mois }, entetes: { Prefer: 'return=minimal' } });
       reste -= lot.length;
       rapport.envoyes += lot.length;

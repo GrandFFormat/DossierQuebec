@@ -12,7 +12,16 @@
 // formulaire est la même qu'une adresse soit déjà inscrite ou non.
 
 import { supabase, site } from './_alertes.js';
-import { ligneAbonnement, utilisateurDe } from './_stripe.js';
+// Le compte derrière un jeton de session Supabase : { id, email } ou null. (Vivait dans
+// api/_stripe.js, retiré avec l'abonnement payant le 27 sept. 2026.)
+async function utilisateurDe(jeton) {
+  if (!jeton) return null;
+  const res = await fetch(`${process.env.SUPABASE_URL}/auth/v1/user`, {
+    headers: { apikey: process.env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${jeton}` },
+  }).catch(() => null);
+  const u = res?.ok ? await res.json() : null;
+  return u?.id && /^[0-9a-f-]{36}$/.test(u.id) ? { id: u.id, email: u.email ?? '' } : null;
+}
 import { COURRIEL, VILLES_INFOLETTRE, LANGUES_PAR_VILLE, choixValide, deMois, dernierNumero, echapper, envoyerBienvenue, envoyerCourriels, idsSignes, lienSigne, nomComplet, offreDe, prochainEnvoi, NOTES_INFOLETTRE } from './_infolettre.js';
 
 const jetonDe = (req) => String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '') || null;
@@ -193,7 +202,6 @@ export default async function handler(req, res) {
       if (!u?.email) return res.status(401).json({ erreur: 'connexion requise' });
       // Compte de consultation (une bibliothèque sur un poste public) : il ne change pas les
       // infolettres auxquelles la bibliothèque est inscrite.
-      if ((await ligneAbonnement(u.id))?.lecture_seule) return res.status(403).json({ erreur: 'compte de consultation' });
       const email = u.email.toLowerCase();
       // { choix: [{ ville, type, arrondissement, actif }] }
       const oui = choixDe({ choix: (corps.choix ?? []).filter((c) => c?.actif === true) });

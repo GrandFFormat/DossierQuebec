@@ -63,7 +63,7 @@ export async function suivre(s, { ville, dossier, numero, objet }) {
   return error;
 }
 
-// Le plafond de suivis (3 sans abonnement, 10 pour un abonné) vient d'un trigger Postgres, dont le
+// Le plafond de suivis (3 pour tout le monde depuis le 27 sept. 2026) vient d'un trigger Postgres, dont le
 // message dit « limite de N suivis atteinte ». On le reconnaît pour expliquer au lecteur ce qui
 // s'est passé : lui dire « réessayez » l'enverrait recommencer pour rien.
 // Le « projets » facultatif est l'ancien message, encore en place tant que le nouveau script SQL

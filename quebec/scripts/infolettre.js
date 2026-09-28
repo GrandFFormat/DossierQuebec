@@ -345,7 +345,6 @@ async function main() {
   titreMd(SECTIONS.sujets);
   L.push(sujets.map((s) => `${s.libelle} (${s.n})`).join(' · '), '');
   L.push('---', '');
-  L.push(`Les alertes quand vos projets bougent, les suivis et l'export : ${RACINE}/abonnement`, '');
   L.push(`Les montants sont ceux des documents. Les résumés sont générés par IA à partir des sommaires décisionnels ; chaque lien mène au PDF officiel de la Ville, qui fait foi. Toutes les décisions : ${SITE}decisions.html — site indépendant, sans publicité, aucun caractère officiel.`);
   const md = L.join('\n');
 
@@ -523,11 +522,7 @@ async function main() {
   H.push('<!--BANDEAU-->');
   // Le mot du mois, puis l'introduction
   const paragraphes = [...mot.map((p) => `<p style="${POLICE};margin:0 0 12px;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(p)}</p>`)];
-  H.push(`<tr><td style="padding:22px 4px 4px">${paragraphes.join('')}<p style="${POLICE};margin:0;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(introduction)}</p>${abonne
-    ? boiteOr(`${marque} <strong>Votre édition abonnés.</strong> Merci : c'est votre abonnement qui garde le reste gratuit pour tout le monde.`, '14px 0 0')
-    : vitrine
-      ? boiteOr(`${marque} <strong>Ce mois-ci, l'édition abonnés pour tout le monde.</strong> Les encadrés dorés et l'agenda des conseils sont d'habitude dans l'édition abonnés. ${lienOr("Voir l'abonnement", `${RACINE}/abonnement`)}`, '14px 0 0')
-      : boiteOr(`${marque} <strong>L'édition abonnés ajoute</strong> l'agenda des conseils du mois qui vient et un encadré doré sous chaque gros montant. ${lienOr("Voir l'abonnement", `${RACINE}/abonnement`)}`, '14px 0 0')}</td></tr>`);
+  H.push(`<tr><td style="padding:22px 4px 4px">${paragraphes.join('')}<p style="${POLICE};margin:0;font-size:16px;line-height:1.6;color:${ENCRE}">${echapper(introduction)}</p></td></tr>`);
 
   // Le mois en chiffres : quatre tuiles de couleur, deux par rangée (lisible sur cellulaire).
   const tuile = (n, libelle, couleur) => `<td width="50%" valign="top" style="padding:6px">
@@ -581,38 +576,17 @@ async function main() {
   }
   if (!votesDivises.length) H.push(`<tr><td style="${POLICE};color:${DOUX};padding:0 0 8px">Aucun vote divisé publié pour ce mois.</td></tr>`);
 
-  // L'agenda des conseils du mois qui vient : rempli pour l'abonné, fermé pour les autres.
-  H.push(enTete(SECTIONS.agenda, null, marque));
-  if (payant) {
-    const lignes = agendaProchain.slice(0, 8).map((d, i) => `<tr style="background:${i % 2 ? '#FFFBEF' : '#ffffff'}">
-        <td valign="top" width="1" style="${POLICE};padding:10px 10px 10px 12px;white-space:nowrap"><span style="display:inline-block;padding:3px 9px;border-radius:6px;background:#D99A06;color:#fff;font-weight:800;font-size:13px">${echapper(jourMois(d.echeance))}</span></td>
-        <td valign="top" style="${POLICE};padding:10px 12px 10px 0;font-size:14px;line-height:1.5;color:${ENCRE}">${echapper(d.phrase ?? court(d.objet))}<div style="margin-top:3px;font-size:12px;color:${DOUX}">${echapper(INSTANCE_COURTE(d.groupe ?? d.instance))} · ${lienOr(d.numero, fiche(d.numero))}</div></td>
-      </tr>`).join('');
-    H.push(agendaProchain.length
-      ? `<tr><td style="padding:0 0 6px"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px dashed #E9B949;border-top:4px solid #D99A06;border-radius:8px;border-collapse:separate;overflow:hidden">${lignes}</table>
-          <p style="${POLICE};margin:8px 4px 0;font-size:13px;color:${DOUX}"><em><strong><u>Approximatif</u></strong></em> : tiré des dates cibles écrites dans les sommaires. ${pluriel(agendaTotal, 'dossier attend', 'dossiers attendent')} un vote en tout : ${lienOr("tout l'agenda dans Mes dossiers", `${RACINE}/mes-dossiers`)}</p></td></tr>`
-      : `<tr><td>${boiteOr(`Aucune date cible à venir dans les sommaires pour l'instant. ${pluriel(agendaTotal, 'dossier attend', 'dossiers attendent')} un vote : ${lienOr("l'agenda dans Mes dossiers", `${RACINE}/mes-dossiers`)}`, '0')}</td></tr>`);
-  } else {
-    H.push(`<tr><td>${boiteOr(`🔒 <strong>${pluriel(agendaTotal, 'dossier attend', 'dossiers attendent')} un vote</strong>${agendaProchain.length ? `, dont ${pluriel(agendaProchain.length, 'avec une date cible dans les prochaines semaines', 'avec une date cible dans les prochaines semaines')}` : ''}${agendaInstances ? ` — ${echapper(agendaInstances)}` : ''}. Leur résumé et leur date cible sont réservés aux abonnés. ${lienOr("S'abonner", `${RACINE}/abonnement`)}`, '0')}</td></tr>`);
-  }
 
   // Les sujets, dans leurs couleurs du site
   H.push(enTete(SECTIONS.sujets));
   H.push(`<tr><td style="padding:0 0 6px;line-height:2.1">${sujets.map((s) => `<span style="${POLICE};display:inline-block;margin:0 6px 6px 0;padding:4px 11px;border-radius:999px;background:${s.couleur};color:#fff;font-size:13px;font-weight:700;white-space:nowrap">${echapper(s.libelle)} <span style="opacity:.85">${s.n}</span></span>`).join('')}</td></tr>`);
 
-  // L'invitation (gratuit) ou le rappel de ce que l'abonnement donne (abonnés), puis le pied
-  if (abonne) H.push(`<tr><td style="padding:26px 0 0">
+  // L'invitation à suivre un projet (gratuit ; l'abonnement payant a été retiré le 27 sept. 2026), puis le pied
+  H.push(`<tr><td style="padding:26px 0 0">
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#E8F6EE;border:1px solid #9FD9B6;border-radius:10px;border-collapse:separate"><tr><td style="${POLICE};padding:16px 18px;font-size:15px;line-height:1.55;color:${ENCRE}">
-      <div style="font-size:17px;font-weight:800;color:#0B8A4B;margin-bottom:4px">📂 Dans vos dossiers</div>
-      Vos alertes du matin continuent chaque jour où vos projets, vos mots-clés ou vos organismes bougent. Dans <a href="${RACINE}/mes-dossiers" style="color:#0B8A4B;font-weight:700">Mes dossiers</a> : l'agenda des conseils, l'export en tableur ou en PDF, et le détail de l'argent de chaque dossier.
-      <div style="margin-top:12px"><a href="${RACINE}/mes-dossiers" style="display:inline-block;padding:9px 16px;border-radius:6px;background:#0B8A4B;color:#ffffff;font-weight:700;text-decoration:none">Ouvrir Mes dossiers</a> <a href="${RACINE}/abonnement" style="margin-left:10px;color:${DOUX};font-size:13px">Gérer mon abonnement</a></div>
-    </td></tr></table>
-  </td></tr>`);
-  else H.push(`<tr><td style="padding:26px 0 0">
-    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#FFF7E0;border:1px solid #F5D78A;border-radius:10px;border-collapse:separate"><tr><td style="${POLICE};padding:16px 18px;font-size:15px;line-height:1.55;color:${ENCRE}">
-      <div style="font-size:17px;font-weight:800;color:#B7791F;margin-bottom:4px">🔔 Aller plus loin</div>
-      Suivez un projet, une rue ou une entreprise dans <a href="${RACINE}/mes-dossiers" style="color:#0B8A4B;font-weight:700">Mes dossiers</a>. L'abonnement ajoute les alertes quand ils bougent et le détail de l'argent de chaque dossier : qui a soumissionné, l'estimation de la Ville, la répartition par année.
-      <div style="margin-top:12px"><a href="${RACINE}/abonnement" style="display:inline-block;padding:9px 16px;border-radius:6px;background:#0B8A4B;color:#ffffff;font-weight:700;text-decoration:none">Voir l'abonnement</a></div>
+      <div style="font-size:17px;font-weight:800;color:#0B8A4B;margin-bottom:4px">📂 Suivre un projet</div>
+      Avec un compte gratuit, suivez jusqu'à 3 projets dans <a href="${RACINE}/mes-dossiers" style="color:#0B8A4B;font-weight:700">Mes dossiers</a> : leur récapitulatif, leur ligne du temps et ce qui attend encore une décision.
+      <div style="margin-top:12px"><a href="${RACINE}/mes-dossiers" style="display:inline-block;padding:9px 16px;border-radius:6px;background:#0B8A4B;color:#ffffff;font-weight:700;text-decoration:none">Ouvrir Mes dossiers</a></div>
     </td></tr></table>
   </td></tr>`);
   H.push(`<tr><td style="${POLICE};padding:22px 4px 0;font-size:12px;line-height:1.55;color:${DOUX}">
@@ -627,18 +601,14 @@ async function main() {
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td style="padding:0 16px"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">${H.slice(1).join('')}</table></td></tr></table>` +
     `</td></tr></table></td></tr></table></body></html>`;
   };
-  // --pour-tous : l'édition envoyée aux non-abonnés est celle des abonnés, en vitrine (Martin,
-  // 17 sept. 2026, pour le numéro d'août). L'édition abonnés, elle, ne change pas.
-  const vitrine = Boolean(args['pour-tous']);
-  const page = pageHtml(false, { vitrine });
-  const pageAbonnes = pageHtml(true);
+  // Une seule édition, pour tout le monde, depuis le retrait de l'abonnement payant (27 sept. 2026).
+  const page = pageHtml(false);
 
   await mkdir(SORTIE, { recursive: true });
   await writeFile(new URL(`${fichier}.md`, SORTIE), md, 'utf8');
   await writeFile(new URL(`${fichier}.html`, SORTIE), page, 'utf8');
-  await writeFile(new URL(`${fichier}-abonnes.html`, SORTIE), pageAbonnes, 'utf8');
   console.log(`${nomPeriode} : ${liste.length} dossiers, ${nbSeances} séances, ${subventions.length} subventions, ${contrats.length} contrats, ${nbVotesDivises} votes divisés${mot.length ? ', mot du mois inclus' : ''}.`);
-  console.log(`→ infolettres/${fichier}.html (${vitrine ? 'édition abonnés offerte à tous' : 'gratuit'}), ${fichier}-abonnes.html et ${fichier}.md`);
+  console.log(`→ infolettres/${fichier}.html et ${fichier}.md`);
 
   // --publier : le compte rendu relu part dans Supabase. Il sera envoyé aux inscrits confirmés au
   // prochain passage du cron (11 h UTC), et il devient celui que reçoit chaque nouvel inscrit.
@@ -658,7 +628,7 @@ async function main() {
     const r = await fetch(`${url}?on_conflict=ville,type,arrondissement,mois`, {
       method: 'POST',
       headers: { ...h, Prefer: 'resolution=merge-duplicates,return=minimal' },
-      body: JSON.stringify([{ ...cleNumero, titre: titreCourriel, html: page, html_abonnes: pageAbonnes, publie_le: new Date().toISOString(), updated_at: new Date().toISOString() }]),
+      body: JSON.stringify([{ ...cleNumero, titre: titreCourriel, html: page, html_abonnes: page, publie_le: new Date().toISOString(), updated_at: new Date().toISOString() }]),
     });
     if (!r.ok) throw new Error(`Publication → ${r.status} ${(await r.text()).slice(0, 200)}`);
     console.log(`Publié : ${fichier}. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.`);

@@ -22,8 +22,6 @@
 // Le détail vit dans la table Supabase `details_argent` (voir scripts/supabase-schema-abonnes.sql),
 // jamais dans le dépôt GitHub public ; le navigateur ne voit jamais la table (clé service_role ici).
 
-import { estActive } from './_stripe.js';
-
 const VILLES = new Set(['quebec', 'montreal', 'levis', 'longueuil', 'laval']);
 const DOSSIER = /^[\w.\-]{1,120}$/;
 
@@ -54,19 +52,15 @@ async function supabase(chemin, { jeton, methode = 'GET', corps, entetes = {} } 
   return { ok: true, donnees: texte ? JSON.parse(texte) : null, entetes: res.headers };
 }
 
-// L'abonné derrière le jeton : { id, abonne }, null sans session valable, ou { indisponible: true }
-// quand Supabase ne répond pas — une panne n'est pas « pas abonné », et le client ne doit pas dire à
-// un abonné payant que son abonnement n'est plus actif.
+// Le compte derrière le jeton : { id }, null sans session valable, ou { indisponible: true } quand
+// Supabase ne répond pas. (Il lisait aussi l'abonnement, retiré le 27 sept. 2026.)
 async function abonneDe(jeton) {
   if (!jeton) return null;
   const utilisateur = await supabase('/auth/v1/user', { jeton });
   if (!utilisateur.ok && ![401, 403].includes(utilisateur.statut)) return { indisponible: true };
   const id = utilisateur.ok ? utilisateur.donnees?.id : null;
   if (!id || !/^[0-9a-f-]{36}$/.test(id)) return null;
-  const r = await supabase(`/rest/v1/abonnements?user_id=eq.${id}&select=statut,fin,lecture_seule`);
-  if (!r.ok) return { id, indisponible: true };
-  // La même règle que tout le site : api/_stripe.js, estActive.
-  return { id, abonne: estActive(r.donnees?.[0]), lectureSeule: r.donnees?.[0]?.lecture_seule === true };
+  return { id };
 }
 
 // 503 quand l'abonnement n'a pas pu être vérifié (le client dit « réessayez ») ; 403 « abonnement
@@ -153,10 +147,6 @@ export default async function handler(req, res) {
 async function demander(res, { ville, dossier, d, jeton }) {
   const qui = await abonneDe(jeton);
   if (!qui?.id || qui.indisponible) return refus(res, qui);
-  // Compte de consultation (une bibliothèque, ouvert sur un poste public) : il LIT le détail
-  // déjà produit, mais n'en commande pas de nouveaux. Sinon le premier usager venu épuise le
-  // quota quotidien de l'abonnement pour le plaisir.
-  if (qui.lectureSeule) return res.status(403).json({ erreur: 'compte de consultation' });
   if (d) return res.status(409).json({ erreur: 'déjà lu' });
   if (await sansMontant(ville, dossier)) return res.status(409).json({ erreur: 'sans montant' });
   const depuis = new Date(Date.now() - 864e5).toISOString();

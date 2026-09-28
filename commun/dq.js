@@ -312,13 +312,12 @@ const translations = {
     'fil.promesses':"Promises",
     'fil.lexique':"Glossary",
     'fil.bd':"Site updates",
-    'footer.abonnement':"Subscription",
     'nav.mondossier':"My file",
     'sujet.mondossier':"My file",
     'fil.mondossier':"My file",
     'mdhero.l1':"Your bills,",
-    'mdhero.l2':"your members, your alerts.",
-    'mdhero.sub':"What you follow at the National Assembly, and what gets sent to you. <b>Your city's decisions live in <a class=\"md-lien\" href=\"/mes-dossiers\">My files</a>, separately.</b>",
+    'mdhero.l2':"the members you follow.",
+    'mdhero.sub':"What you follow at the National Assembly. <b>Your city's decisions live in <a class=\"md-lien\" href=\"/mes-dossiers\">My files</a>, separately.</b>",
     'lp.titre':"How to read vote attendance",
     'lp.lien':"Full definition → Glossary",
     'lp.formule':"<b>88%</b>: out of 100 recorded votes held since their first vote of the legislature, the person voted in 88 — yea, nay or abstention, whichever way.",
@@ -328,17 +327,11 @@ const translations = {
     'lp.aster':"* The Assembly's President is not the same as the Premier: the President runs the debates and stays neutral, while the Premier heads the government and votes like the other members. <a href=\"/lexique#role-presidence\">See the Assembly's presidency in the Glossary →</a>",
     'lp.nd':"<b>n/a</b>: no recorded vote for this person.",
     'lp.officiel':"This is not an official measure: the Assembly does not publish attendance, and a missed vote does not tell why.",
-    'promo.sur':"DossierQuébec subscription",
-    'promo.h':"Get alerted when a bill changes status",
-    'promo.p':"Follow a bill in one click: an email in the morning when it moves to its next stage, when an elected member you follow introduces one, or when a new bill contains your keywords. One email, everything together, nothing on the days when nothing moves.",
-    'promo.diss':"The bills of the 43rd legislature died when the Assembly was dissolved on August 27: following and alerts will start with the first bills of the new legislature, convened on November 17, 2026.",
-    'promo.cta':"Get my alerts — $10/month",
-    'promo.prix':"or $96 a year · cancel anytime",
+    'promo.sur':"Free account",
+    'promo.h':"Follow the bills that matter to you",
+    'promo.p':"A free account, no password: follow up to 3 bills or city projects, and find them in My file, with their current stage.",
+    'promo.diss':"The bills of the 43rd legislature died when the Assembly was dissolved on August 27: following will resume with the first bills of the new legislature, convened on November 17, 2026.",
     'promo.compte.h':"Your account",
-    'promo.villes.h':"Also included: following the cities",
-    'promo.villes.p':"The same subscription also alerts you to decisions in <a href=\"/quebec/\">Québec City</a>, <a href=\"/montreal/\">Montréal</a>, <a href=\"/levis/\">Lévis</a>, <a href=\"/longueuil/\">Longueuil</a> and <a href=\"/laval/\">Laval</a>: the projects you follow, your street, your neighbourhood, an organization. One subscription, not one per city — the cities have their own page, My files.",
-    'promo.villes.lien':"Pick a city project in My files →",
-    'promo.limites':"<b>With the subscription:</b> 10 follows in all — bills, city projects, keywords and organizations share one count — plus the ministers and MNAs of your choice, with no limit. Without a subscription: 3 bills or city projects.",
     'promo.mesdossiers':"My file →",
     'footer.villes':"Cities:",
     'maj.sub':"What changed on DossierQuébec, newest first",
@@ -757,10 +750,8 @@ async function toggleFollowDepute(id){
 }
 
 // Suivi des projets de loi (21 sept. 2026). Rangé avec les projets des villes, dans
-// dossiers_suivis (ville « assemblee », dossier_id « pl:<id> ») : même limite (3 sans
-// abonnement, 10 avec, trigger Postgres), même protection des comptes de consultation,
-// visible dans Mes dossiers, et l'alerte du matin des abonnés le lit
-// (api/alertes-projets.js). Connexion requise : un suivi anonyme ne recevrait rien.
+// dossiers_suivis (ville « assemblee », dossier_id « pl:<id> ») : même limite (3 en tout,
+// trigger Postgres), visible dans Mon dossier. Connexion requise : un suivi anonyme se perdrait.
 // (L'ancien suivi par `follows` type 'bill' n'a jamais pu s'enregistrer : la contrainte de
 // la table n'accepte que 'minister' et 'depute'.)
 let followedBills = {};
@@ -795,12 +786,8 @@ async function toggleFollowBill(billId, btnId){
     // qu'on suit — projets de loi, projets de ville, mots-clés, organismes. (« projets » est
     // l'ancien message, gardé tant que le nouveau script SQL n'est pas exécuté.)
     const plafond = Number(/limite de (\d+) (?:projets )?suivis/.exec(error.message || '')?.[1]) || 0;
-    if(plafond === 3){
-      if(confirm(isEn
-        ? 'Without a subscription, you can follow 3 things in all — bills and city projects together (10 with one, plus a morning email when they move). See the subscription?'
-        : 'Sans abonnement, on suit 3 choses en tout — projets de loi et projets de ville ensemble (10 avec l’abonnement, et un courriel le matin quand ça bouge). Voir l’abonnement ?')) location.href = '/abonnement?de=assemblee';
-    } else if(plafond){
-      alert(isEn ? `Limit reached: ${plafond} things followed in all (bills, city projects, keywords, organizations). Remove one in My file first.` : `Limite atteinte : ${plafond} suivis en tout (projets de loi, projets de ville, mots-clés, organismes). Retirez-en un dans Mon dossier d’abord.`);
+    if(plafond){
+      alert(isEn ? `Limit reached: ${plafond} things followed in all (bills and city projects together). Remove one in My file first.` : `Limite atteinte : ${plafond} suivis en tout (projets de loi et projets de ville ensemble). Retirez-en un dans Mon dossier d’abord.`);
     } else if(/consultation/i.test(error.message || '')){
       alert(isEn ? 'This is a reading-station account: it cannot change what it follows.' : 'Ce compte est un poste de consultation : il ne peut pas modifier ses suivis.');
     } else {
@@ -1020,7 +1007,7 @@ async function handleMagicLinkClick(){
   }
 }
 
-// La boîte « Votre compte » de l'encadré d'abonnement, sur l'accueil (gabarit.html,
+// La boîte « Votre compte » de l'encadré du compte gratuit, sur l'accueil (gabarit.html,
 // #promoCompte). Même connexion par lien que Lexique (signInWithMagicLink), ses propres ids :
 // les deux boîtes ne sont jamais sur la même page, mais le gabarit les porte toutes les deux.
 // L'état de l'envoi du lien vit hors de la boîte : un changement de langue la redessine, et
@@ -1085,35 +1072,15 @@ async function handlePromoLink(){
 const mdH = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
 let mdPorteeOk = null;   // la colonne portee existe-t-elle ? (scripts/supabase-schema-mots-cles-portee.sql)
 
-// UN SEUL abonnement (Martin, 23 sept. 2026 : « revenons à un seul abonnement ») : il couvre les
-// villes et l'Assemblée. Cette page regarde quand même l'accès par le serveur (api/abonnement.js),
-// et comprend un champ `acces` s'il apparaît un jour.
-async function mdAccesProvince(){
-  if(!currentUser) return { plein: false };
-  const { data: { session } } = await supabaseClient.auth.getSession();
-  const r = await fetch('/api/abonnement', { headers: { Authorization: `Bearer ${session?.access_token ?? ''}` }, cache: 'no-store' }).catch(() => null);
-  const e = r?.ok ? await r.json().catch(() => null) : null;
-  // Tant que le serveur ne distingue pas les deux abonnements (pas de champ `acces`), un
-  // abonnement actif ouvre tout, comme avant.
-  return { plein: e?.acces ? Boolean(e.acces.province) : Boolean(e?.abonne) };
-}
-
-function mdVerrou(titre, phrase, isEn){
-  return `<div class="md-carte md-verrou">
-    <div class="md-carte-tete"><h2>${titre}</h2><span class="md-etiquette">${isEn ? 'subscribers' : 'abonnés'}</span></div>
-    <p>${phrase} <a class="md-lien" href="/abonnement?de=assemblee">${isEn ? 'See the subscription' : "Voir l'abonnement"}</a></p>
-  </div>`;
-}
-
-// UN SEUL quota pour tout ce qu'on suit (Martin, 23 sept. 2026 : « 10 suivis en tout, tous
-// mélangés ») : projets de loi, projets de ville, mots-clés et organismes ensemble — 10 avec
-// l'abonnement, 3 sans. Les élus suivis n'en font pas partie : ils n'ont jamais eu de plafond, et
-// leur en donner un retirerait quelque chose aux comptes existants.
+// UN SEUL quota pour tout ce qu'on suit : 3, projets de loi et projets de ville ensemble. (Il
+// montait à 10 avec l'abonnement payant, retiré le 27 sept. 2026 ; les mots-clés et organismes
+// d'avant comptent encore tant qu'ils existent.) Les élus suivis n'en font pas partie.
 // Le compte vient de la base, pas de l'écran : cette page ne voit pas les suivis de ville. Si une
 // des trois lectures échoue, on renvoie `sur: null` et la page n'affiche aucun total plutôt qu'un
 // total faux.
-async function mdQuota(acces){
-  const plafond = acces.plein ? 10 : 3;
+const MD_PLAFOND = 3;
+async function mdQuota(){
+  const plafond = MD_PLAFOND;
   if(!currentUser) return { total: 0, sur: null, parties: null };
   const [d, m, o] = await Promise.all([
     supabaseClient.from('dossiers_suivis').select('ville'),
@@ -1135,17 +1102,13 @@ async function mdQuota(acces){
 async function renderMonDossier(){
   if(!document.getElementById('mdCompte')) return;   // pas sur cette page
   const isEn = currentLang === 'en';
-  const acces = await mdAccesProvince();
-  const quota = await mdQuota(acces);
-  mdCompte(isEn, acces, quota);
-  mdLois(isEn, acces, quota);
+  const quota = await mdQuota();
+  mdCompte(isEn, quota);
+  mdLois(isEn, quota);
   mdElus(isEn);
-  await mdMots(isEn, acces, quota);
-  await mdAlerte(isEn, acces);
 }
 
-function mdCompte(isEn, acces, quota){
-  const abonne = acces.plein;
+function mdCompte(isEn, quota){
   const zone = document.getElementById('mdCompte');
   if(!currentUser){
     zone.innerHTML = `<div class="md-carte md-connexion">
@@ -1155,28 +1118,22 @@ function mdCompte(isEn, acces, quota){
         <input type="email" id="mdEmail" placeholder="${isEn ? 'Your email' : 'Votre courriel'}" aria-label="${isEn ? 'Your email' : 'Votre courriel'}">
         <button class="account-btn" id="mdLienBtn" onclick="mdEnvoyerLien()">${isEn ? 'Get the link' : 'Recevoir le lien'}</button>
       </div>
-      <p class="md-note" id="mdNote">${isEn ? 'A free account follows 3 things in all — bills and city projects. The subscription takes it to 10, keywords and organizations included, and adds the alerts.' : 'Un compte gratuit suit 3 choses en tout — projets de loi et projets de ville. L’abonnement monte à 10, mots-clés et organismes compris, et ajoute les alertes.'}</p>
+      <p class="md-note" id="mdNote">${isEn ? 'A free account follows 3 things in all — bills and city projects together.' : 'Un compte gratuit suit 3 choses en tout — projets de loi et projets de ville ensemble.'}</p>
     </div>`;
     document.getElementById('mdEmail')?.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); mdEnvoyerLien(); } });
     return;
   }
-  const merci = new URLSearchParams(location.search).get('abonnement') === 'merci';
   zone.innerHTML = `<div class="md-carte md-compte">
     <div class="md-carte-tete">
       <h2>${isEn ? 'Your account' : 'Votre compte'}</h2>
       <button class="md-bouton-doux" onclick="signOutUser()">${isEn ? 'Sign out' : 'Se déconnecter'}</button>
     </div>
-    <p>${mdH(currentUser.email)} · ${abonne
-      ? `${isEn ? 'subscription active' : 'abonnement actif'} — <a class="md-lien" href="/abonnement?de=assemblee">${isEn ? 'manage' : 'gérer'}</a>`
-      : `${isEn ? 'no subscription' : 'pas d’abonnement'} — <a class="md-lien" href="/abonnement?de=assemblee">${isEn ? 'see the subscription' : 'voir l’abonnement'}</a>`}</p>
-    <p class="md-note">${isEn ? 'The same subscription also covers the cities, in My files.' : 'Le même abonnement couvre aussi les villes, dans Mes dossiers.'}</p>
+    <p>${mdH(currentUser.email)}</p>
     ${quota?.sur ? `<p class="md-note md-quota"><b>${isEn ? `${quota.total} of ${quota.sur} follows used` : `${quota.total} suivis sur ${quota.sur}`}</b> — ${isEn
-      ? 'bills, city projects, keywords and organizations share the same count.' : 'projets de loi, projets de ville, mots-clés et organismes comptent ensemble.'}
+      ? 'bills and city projects share the same count.' : 'projets de loi et projets de ville comptent ensemble.'}
       ${quota.parties?.villes || quota.parties?.motsVilles || quota.parties?.organismes
         ? `<a class="md-lien" href="/mes-dossiers">${isEn ? 'Your city follows' : 'Vos suivis de ville'}</a>` : ''}
       <br>${isEn ? 'Members you follow are not counted.' : 'Les élus suivis ne comptent pas dans ce total.'}</p>` : ''}
-    ${merci && !abonne ? `<p class="md-note">${isEn ? 'Thank you! Waiting for Stripe to confirm the payment, a few seconds… Reload the page.' : 'Merci ! On attend la confirmation du paiement par Stripe, quelques secondes… Rechargez la page.'}</p>` : ''}
-    ${merci && abonne ? `<p class="md-note">${isEn ? 'Thank you: your subscription is active. Alerts, keywords and followed members are below.' : 'Merci : votre abonnement est actif. Les alertes, les mots-clés et les élus suivis sont plus bas.'}</p>` : ''}
   </div>`;
 }
 
@@ -1201,12 +1158,12 @@ async function mdEnvoyerLien(){
   note.textContent = isEn ? `Check your inbox (${email}).` : `Vérifiez vos courriels (${email}).`;
 }
 
-function mdLois(isEn, acces, quota){
+function mdLois(isEn, quota){
   const zone = document.getElementById('mdLois');
   const ids = Object.keys(followedBills).filter((id) => followedBills[id]);
   // Le plafond est commun à tout ce qu'on suit : il est affiché une seule fois, dans la carte du
   // compte. Ici, juste le nombre de projets de loi.
-  const plafond = quota?.sur ?? (acces.plein ? 10 : 3);
+  const plafond = quota?.sur ?? MD_PLAFOND;
   const suivables = bills.filter((b) => loiVivante(b) && (b.status === 'encours' || b.status === 'laisse_de_cote')).length;
   const vide = !currentUser
     ? (isEn ? 'Sign in to follow bills: what you follow stays with your account, on every device.' : 'Connectez-vous pour suivre des projets de loi : vos suivis restent sur votre compte, sur tous vos appareils.')
@@ -1236,9 +1193,7 @@ function mdLois(isEn, acces, quota){
       <span class="md-etiquette">${ids.length}</span>
     </div>
     ${ids.length ? `<ul class="md-liste">${lignes}</ul>` : `<p>${vide}</p>`}
-    <p class="md-note">${acces.plein
-      ? (isEn ? `With the subscription: an email the morning a followed bill moves to a later stage. ${plafond} follows in all${quota?.sur != null ? ', of any kind' : ' — bills and city projects together'}.` : `Avec l’abonnement : un courriel le matin où un projet suivi passe à une étape plus avancée. ${plafond} suivis en tout${quota?.sur != null ? ', de n’importe quelle sorte' : ' — projets de loi et projets de ville ensemble'}.`)
-      : (isEn ? `${plafond} follows in all without a subscription — bills and city projects together. 10 with one, keywords and organizations included, plus the morning alert.` : `${plafond} suivis en tout sans abonnement — projets de loi et projets de ville ensemble. 10 avec l’abonnement, mots-clés et organismes compris, et l’alerte du matin.`)}</p>
+    <p class="md-note">${isEn ? `${plafond} follows in all — bills and city projects together.` : `${plafond} suivis en tout — projets de loi et projets de ville ensemble.`}</p>
   </div>`;
 }
 
@@ -1263,7 +1218,6 @@ function mdElus(isEn){
       <span class="md-etiquette">${ministres.length + deps.length}</span>
     </div>
     ${lignes ? `<ul class="md-liste">${lignes}</ul>` : `<p>${isEn ? 'No minister or MNA followed yet.' : 'Aucun ministre ni député suivi.'} <a class="md-lien" href="/ministres">${isEn ? 'Follow someone from the Ministers and MNAs page' : 'Suivez quelqu’un depuis la page Ministres et député·e·s'}</a></p>`}
-    <p class="md-note">${isEn ? 'With the subscription: an email when someone you follow introduces a bill.' : 'Avec l’abonnement : un courriel quand une personne suivie présente un projet de loi.'}</p>
   </div>`;
 }
 
@@ -1272,143 +1226,6 @@ async function mdRetirerElu(type, cle){
   renderMonDossier();
 }
 
-async function mdMots(isEn, acces, quota){
-  const zone = document.getElementById('mdMots');
-  const titre = isEn ? 'Your Assembly keywords' : 'Vos mots-clés de l’Assemblée';
-  // Un mot-clé prend une place dans le même quota que les projets suivis : on ferme le champ quand
-  // il n'en reste plus. Si le total n'a pas pu être lu, on laisse essayer — la base tranchera.
-  const plein = quota?.sur ? quota.total >= quota.sur : false;
-  if(!currentUser || !acces.plein){
-    const verrou = mdVerrou(titre, isEn
-      ? 'A topic — “logement”, “forêt”, “électricité” — searched in the title and summary of every new bill. A separate list from your city keywords.'
-      : 'Un sujet — « logement », « forêt », « électricité » — cherché dans le titre et le résumé de chaque nouveau projet de loi. Une liste à part de vos mots-clés de ville.', isEn);
-    // Un abonnement qui s'arrête ne supprime pas les mots-clés : ils dorment, mais ils occupent
-    // toujours une place dans le quota commun. On les montre donc, avec de quoi les retirer —
-    // sinon la personne reste bloquée sans comprendre ce qui prend ses places.
-    let dormants = [];
-    if(currentUser){
-      const { data } = await supabaseClient.from('alertes_mots_cles').select('*').order('created_at');
-      dormants = (data ?? []).filter((m) => (m.portee ?? 'villes') === 'assemblee');
-    }
-    zone.innerHTML = verrou + (dormants.length ? `<div class="md-carte">
-      <div class="md-carte-tete"><h2>${isEn ? 'Your keywords, asleep' : 'Vos mots-clés, en sommeil'}</h2><span class="md-etiquette">${dormants.length}</span></div>
-      <p class="md-note">${isEn ? 'They no longer trigger anything, but they still take up your follows. Remove one to follow a bill instead.' : 'Ils ne déclenchent plus rien, mais ils occupent toujours une place dans vos suivis. Retirez-en un pour suivre un projet de loi à la place.'}</p>
-      <ul class="md-mots">${dormants.map((m) => `<li><span class="md-mot">${mdH(m.mot)}</span>
-        <button class="md-bouton-doux" onclick="mdRetirerMot('${mdH(m.id)}')" aria-label="${isEn ? 'Remove' : 'Retirer'} ${mdH(m.mot)}">×</button></li>`).join('')}</ul>
-    </div>` : '');
-    return;
-  }
-  if(mdPorteeOk === null){
-    const essai = await supabaseClient.from('alertes_mots_cles').select('portee').limit(1);
-    mdPorteeOk = !essai.error;
-  }
-  if(!mdPorteeOk){
-    zone.innerHTML = `<div class="md-carte"><h2>${titre}</h2><p class="md-note">${isEn ? 'Coming soon: the two keyword lists (cities and Assembly) are not set up on the database yet.' : 'Bientôt : les deux listes de mots-clés (villes et Assemblée) ne sont pas encore en place dans la base.'}</p></div>`;
-    return;
-  }
-  const { data, error } = await supabaseClient.from('alertes_mots_cles').select('*').order('created_at');
-  const mots = (data ?? []).filter((m) => (m.portee ?? 'villes') === 'assemblee');
-  if(error){ zone.innerHTML = ''; return; }
-  const compte = (mot) => bills.filter((b) => mdContientMot(b, mot)).length;
-  zone.innerHTML = `<div class="md-carte">
-    <div class="md-carte-tete"><h2>${titre}</h2><span class="md-etiquette">${mots.length}</span></div>
-    <ul class="md-mots">${mots.length ? mots.map((m) => {
-      const n = compte(m.mot);
-      return `<li><span class="md-mot">${mdH(m.mot)}</span><span class="md-note">${n ? (isEn ? `${n} bill${n > 1 ? 's' : ''} today` : `${n} projet${n > 1 ? 's' : ''} de loi aujourd’hui`) : (isEn ? 'no bill yet' : 'aucun projet de loi pour l’instant')}</span>
-        <button class="md-bouton-doux" onclick="mdRetirerMot('${mdH(m.id)}')" aria-label="${isEn ? 'Remove' : 'Retirer'} ${mdH(m.mot)}">×</button></li>`;
-    }).join('') : `<li class="md-note">${isEn ? 'No keyword yet.' : 'Aucun mot-clé pour l’instant.'}</li>`}</ul>
-    <div class="md-ligne">
-      <input type="text" id="mdMotChamp" maxlength="60" placeholder="${isEn ? 'Add a keyword' : 'Ajouter un mot-clé'}" aria-label="${isEn ? 'New keyword' : 'Nouveau mot-clé'}"${plein ? ' disabled' : ''}>
-      <button class="account-btn" id="mdMotBtn" onclick="mdAjouterMot()"${plein ? ' disabled' : ''}>${isEn ? 'Add' : 'Ajouter'}</button>
-    </div>
-    <p class="md-note" id="mdMotEtat">${plein
-      ? (isEn ? `All ${quota.sur} follows are used. Remove a bill, a keyword or a city project to add another.` : `Vos ${quota.sur} suivis sont utilisés. Retirez un projet de loi, un mot-clé ou un projet de ville pour en ajouter un autre.`)
-      : (isEn ? 'Searched in each bill’s title and French summary, ignoring accents and capitals. A keyword takes one of your follows.' : 'Cherché dans le titre et le résumé de chaque projet de loi, sans tenir compte des accents ni des majuscules. Un mot-clé prend une place dans vos suivis.')}</p>
-  </div>`;
-  document.getElementById('mdMotChamp')?.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); mdAjouterMot(); } });
-}
-
-// Même recherche que le serveur (api/alertes-projets.js, contientMot) : mot entier, sans accents.
-function mdNorm(s){ return String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[’`]/g, "'").replace(/\s+/g, ' '); }
-function mdContientMot(b, mot){
-  const m = mdNorm(mot).trim();
-  if(m.length < 2) return false;
-  return new RegExp(`(^|[^a-z0-9])${m.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}($|[^a-z0-9])`).test(mdNorm(b.title));
-}
-
-async function mdAjouterMot(){
-  const champ = document.getElementById('mdMotChamp');
-  const etat = document.getElementById('mdMotEtat');
-  const isEn = currentLang === 'en';
-  const mot = champ ? champ.value.trim().replace(/\s+/g, ' ') : '';
-  if(mot.length < 2){ etat.textContent = isEn ? 'A keyword needs at least 2 characters.' : 'Un mot-clé compte au moins 2 caractères.'; return; }
-  const { error } = await supabaseClient.from('alertes_mots_cles').insert({ user_id: currentUser.id, mot, portee: 'assemblee' });
-  if(error){
-    etat.textContent = /limite de/i.test(error.message)
-      ? (isEn ? 'Your follows are all used. Remove one first — bills, city projects, keywords and organizations share the same count.' : 'Vos suivis sont tous utilisés. Retirez-en un d’abord — projets de loi, projets de ville, mots-clés et organismes comptent ensemble.')
-      : /duplicate|unique/i.test(error.message) ? (isEn ? 'This keyword is already in your list.' : 'Ce mot-clé est déjà dans votre liste.')
-      : (isEn ? "Couldn't add this keyword. Try again." : "Impossible d'ajouter ce mot-clé. Réessayez.");
-    return;
-  }
-  renderMonDossier();
-}
-
-async function mdRetirerMot(id){
-  await supabaseClient.from('alertes_mots_cles').delete().eq('id', id);
-  renderMonDossier();
-}
-
-async function mdAlerte(isEn, acces){
-  const zone = document.getElementById('mdAlerte');
-  const titre = isEn ? 'My morning alert' : 'Mon alerte du matin';
-  if(!currentUser || !acces.plein){
-    zone.innerHTML = mdVerrou(titre, isEn
-      ? 'One email in the morning when a followed bill moves, when someone you follow introduces one, or when a new bill contains your keywords. Nothing on the days when nothing moves.'
-      : 'Un courriel le matin quand un projet suivi avance, quand une personne suivie en présente un, ou quand un nouveau projet contient vos mots-clés. Rien les jours où rien ne bouge.', isEn);
-    return;
-  }
-  const [pref, envois] = await Promise.all([
-    supabaseClient.from('alertes_preferences').select('actif').eq('user_id', currentUser.id).maybeSingle(),
-    supabaseClient.from('alertes_envois').select('envoye_le').eq('user_id', currentUser.id).eq('essai', false).order('envoye_le', { ascending: false }).limit(1),
-  ]);
-  const actif = pref.data?.actif !== false;
-  const derniere = envois.data?.[0]?.envoye_le;
-  zone.innerHTML = `<div class="md-carte">
-    <div class="md-carte-tete"><h2>🔔 ${titre}</h2><span class="md-etiquette">${isEn ? 'every morning' : 'chaque matin'}</span></div>
-    <label class="md-case"><input type="checkbox" id="mdAlerteActif"${actif ? ' checked' : ''} onchange="mdBasculerAlerte(this.checked)">
-      <span>${isEn ? 'Send me the morning email when something moves' : 'M’envoyer le courriel du matin quand quelque chose bouge'}</span></label>
-    <p class="md-note">${isEn ? 'The same email also carries your city follows, if you have any.' : 'Le même courriel porte aussi vos suivis des villes, si vous en avez.'}${derniere ? ` ${isEn ? 'Last alert:' : 'Dernière alerte :'} ${mdH(new Date(derniere).toLocaleDateString(isEn ? 'en-CA' : 'fr-CA'))}.` : ''}</p>
-    <div class="md-liens"><button class="md-bouton-doux" id="mdEssaiBtn" onclick="mdCourrielEssai()">${isEn ? 'Send me a test email' : 'M’envoyer un courriel d’essai'}</button>
-      <span class="md-note" id="mdAlerteEtat" aria-live="polite"></span></div>
-  </div>`;
-}
-
-async function mdBasculerAlerte(voulu){
-  const etat = document.getElementById('mdAlerteEtat');
-  const isEn = currentLang === 'en';
-  const { error } = await supabaseClient.from('alertes_preferences').upsert({ user_id: currentUser.id, actif: voulu, updated_at: new Date().toISOString() });
-  if(etat) etat.textContent = error
-    ? (isEn ? "Couldn't save. Try again." : "Impossible d'enregistrer. Réessayez.")
-    : voulu ? (isEn ? 'Saved: you will get the morning email.' : 'Enregistré : vous recevrez le courriel du matin.')
-      : (isEn ? 'Saved: no more morning email. Your follows stay.' : 'Enregistré : plus de courriel du matin. Vos suivis restent.');
-}
-
-async function mdCourrielEssai(){
-  const btn = document.getElementById('mdEssaiBtn');
-  const etat = document.getElementById('mdAlerteEtat');
-  const isEn = currentLang === 'en';
-  if(btn) btn.disabled = true;
-  if(etat) etat.textContent = isEn ? 'Sending…' : 'Envoi…';
-  const { data: { session } } = await supabaseClient.auth.getSession();
-  const r = await fetch('/api/alertes-projets?essai=moi', { method: 'POST', headers: { Authorization: `Bearer ${session?.access_token ?? ''}` } }).catch(() => null);
-  const corps = r ? await r.json().catch(() => ({})) : {};
-  if(btn) btn.disabled = false;
-  if(etat) etat.textContent = r?.ok
-    ? (corps.envoyes ? (isEn ? `Test email sent to ${currentUser.email}. Check your spam folder.` : `Courriel d'essai envoyé à ${currentUser.email}. Pensez à vérifier vos courriels indésirables.`)
-      : (isEn ? 'Follow at least one bill, a member or a keyword to get a test email.' : 'Suivez au moins un projet de loi, une personne ou un mot-clé pour recevoir un courriel d’essai.'))
-    : r?.status === 429 ? (isEn ? 'Three test emails already sent in the last 24 hours. Try again tomorrow.' : "Trois courriels d'essai déjà envoyés dans les dernières 24 heures. Réessayez demain.")
-      : (isEn ? "Sending didn't work. Try again in a moment." : "L'envoi n'a pas fonctionné. Réessayez dans un moment.");
-}
 
 function renderAccountBox(){
   renderPromoCompte();
@@ -2552,7 +2369,7 @@ function billCard(b, ctx){
   const followRow = !canFollow ? '' : `<div class="bill-follow-row">
       <span class="follow-hint">${!currentUser
         ? (isEn ? 'Sign in to follow it — it goes to My file' : 'Connexion requise — il s’ajoute à Mon dossier')
-        : (isEn ? 'In My file · subscribers get an email the morning it moves' : 'Dans Mon dossier · les abonnés reçoivent un courriel le matin où il avance')}</span>
+        : (isEn ? 'It goes to My file' : 'Il s’ajoute à Mon dossier')}</span>
       <button class="follow-btn ${isFollowed?'on':''}" id="${followBtnId}" onclick="event.stopPropagation(); ${currentUser ? `toggleFollowBill(${b.id}, '${followBtnId}')` : 'goToAccount()'}">${!currentUser
         ? (isEn ? '🔒 Sign in to follow' : '🔒 Se connecter pour suivre')
         : libelleSuivreLoi(isFollowed, isEn)}</button>
@@ -3817,7 +3634,7 @@ const JOURNAL_VOLETS = {
   levis:     ['Lévis', 'Lévis'],
   longueuil: ['Longueuil', 'Longueuil'],
   laval:     ['Laval', 'Laval'],
-  compte:    ['Compte et abonnement', 'Account and subscription'],
+  compte:    ['Compte', 'Account'],
   site:      ['Tout le site', 'Whole site'],
 };
 const JOURNAL_PREMIERES = 20;   // au-delà, un bouton ouvre le reste

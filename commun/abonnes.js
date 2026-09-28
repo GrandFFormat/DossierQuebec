@@ -1,11 +1,11 @@
-// L'espace abonnés dans chaque volet municipal. Une page de volet n'a que deux choses à faire :
+// L'espace compte dans chaque volet municipal (gratuit ; l'abonnement payant a été retiré le 27 sept. 2026). Une page de volet n'a que deux choses à faire :
 //   1. porter data-ville="quebec" (ou montreal…) sur <body> et charger ce module ;
 //   2. mettre dans chaque fiche de décision un
 //        <div class="ab-fiche" data-dossier="…" data-numero="…" data-objet="…"></div>
 //      où data-dossier est la clé qui suit la décision d'une instance à l'autre (le sommaire à
 //      Québec, le numéro de dossier à Montréal).
 //
-// Le module ajoute « Mes dossiers » et « Abonnement » dans l'en-tête de la page et, sur chaque fiche :
+// Le module ajoute « Mes dossiers » dans l'en-tête de la page et, sur chaque fiche :
 //   - si la décision fait partie d'un projet suivable (tramway, logement…), un bouton
 //     « ☆ Projet : … » dans la ligne des pastilles, cliquable sans déplier la fiche ;
 //     une décision seule ne se suit pas : ce qui a du sens à suivre, c'est le projet ;
@@ -23,23 +23,19 @@ let suivis = new Set(); // clés « ville|dossier »
 const cle = (ville, dossier) => `${ville}|${dossier}`;
 const zoneDe = (fiche) => fiche?.querySelector(':scope > .corps > .ab-fiche');
 
-// « Mes dossiers » et « Abonnement » en tête des outils du menu (nav .outils), dans tous les
-// volets. La ville est mémorisée : Mes dossiers et Abonnement prennent la marque de ce volet.
+// « Mes dossiers » en tête des outils du menu (nav .outils), dans tous les volets. La ville est
+// mémorisée : Mes dossiers prend la marque de ce volet.
 function boutonsEntete() {
   if (document.querySelector('.ab-mes-dossiers')) return;
   const mesDossiers = document.createElement('a');
   mesDossiers.className = 'ab-mes-dossiers';
   mesDossiers.href = '/mes-dossiers';
   mesDossiers.innerHTML = `${tr('Mes dossiers', 'My files')} <span class="ab-compte" hidden></span>`;
-  const abonnement = document.createElement('a');
-  abonnement.className = 'ab-lien-abonnement';
-  abonnement.href = `/abonnement?ville=${encodeURIComponent(VILLE)}`;
-  abonnement.textContent = tr('Abonnement', 'Subscription');
   const outils = document.querySelector('header nav .outils');
   const repere = document.querySelector('header .taille-texte') ?? document.querySelector('header .bascule-theme');
-  if (outils) outils.prepend(mesDossiers, abonnement);
-  else if (repere) repere.before(mesDossiers, abonnement);
-  else document.querySelector('header nav')?.append(mesDossiers, abonnement);
+  if (outils) outils.prepend(mesDossiers);
+  else if (repere) repere.before(mesDossiers);
+  else document.querySelector('header nav')?.append(mesDossiers);
 }
 
 function majCompte() {
@@ -218,12 +214,9 @@ document.addEventListener('click', async (e) => {
     const plafond = limiteSuivis(erreur);
     // Le message doit se LIRE : une infobulle ne s'affiche jamais au doigt, et l'aria-label posé
     // par etatEtoile() masquerait un title mis à jour tout seul. On ouvre donc la fiche et on
-    // écrit dans sa zone, comme pour la connexion — d'autant que le plafond du compte gratuit est
-    // justement le moment où l'abonnement a quelque chose à offrir.
-    const texte = plafond === 3
-      ? tr('Limite atteinte : 3 suivis avec un compte gratuit — projets de ville et projets de loi ensemble. L’abonnement en donne 10.', 'Limit reached: 3 follows with a free account — city projects and bills together. The subscription raises it to 10.')
-      : plafond
-        ? tr(`Limite atteinte : ${plafond} suivis en tout.`, `Limit reached: ${plafond} follows in all.`)
+    // écrit dans sa zone, comme pour la connexion.
+    const texte = plafond
+        ? tr(`Limite atteinte : ${plafond} suivis en tout — projets de ville et projets de loi ensemble. Retirez-en un dans Mes dossiers.`, `Limit reached: ${plafond} follows in all — city projects and bills together. Remove one in My files.`)
         : tr("Impossible d'enregistrer — réessayez", "Couldn't save — try again");
     etoile.title = texte;
     etoile.setAttribute('aria-label', texte);
@@ -233,7 +226,7 @@ document.addEventListener('click', async (e) => {
       const boite = zone.querySelector('.ab-connexion');
       if (boite) {
         boite.hidden = false;
-        boite.innerHTML = `<p class="ab-note" role="status">${echapper(texte)} <a class="ab-lien" href="/abonnement">${tr("Voir l'abonnement", 'See the subscription')}</a></p>`;
+        boite.innerHTML = `<p class="ab-note" role="status">${echapper(texte)} <a class="ab-lien" href="/mes-dossiers">${tr('Mes dossiers', 'My files')}</a></p>`;
       }
     }
     return;
