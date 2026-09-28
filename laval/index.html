@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DossierVilleDeLaval — les décisions de la Ville de Laval, lisibles</title>
-<meta name="description" content="Site citoyen indépendant qui rend lisibles les décisions de la Ville de Laval : résolutions du conseil municipal et du comité exécutif, sommaires décisionnels, votes nominaux et membres du conseil.">
+<meta name="description" content="Site citoyen indépendant qui rend lisibles les décisions de la Ville de Laval : résolutions du conseil municipal et du comité exécutif, sommaires décisionnels, votes nominatifs et membres du conseil.">
 <link rel="canonical" href="https://dossierquebec.ca/laval/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DossierQuébec">
 <meta property="og:locale" content="fr_CA">
 <meta property="og:title" content="DossierVilleDeLaval — les décisions de la Ville de Laval, lisibles">
-<meta property="og:description" content="Site citoyen indépendant qui rend lisibles les décisions de la Ville de Laval : résolutions du conseil municipal et du comité exécutif, sommaires décisionnels, votes nominaux et membres du conseil.">
+<meta property="og:description" content="Site citoyen indépendant qui rend lisibles les décisions de la Ville de Laval : résolutions du conseil municipal et du comité exécutif, sommaires décisionnels, votes nominatifs et membres du conseil.">
 <meta property="og:url" content="https://dossierquebec.ca/laval/">
 <meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <meta property="og:image:width" content="1702">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="DossierVilleDeLaval — les décisions de la Ville de Laval, lisibles">
-<meta name="twitter:description" content="Site citoyen indépendant qui rend lisibles les décisions de la Ville de Laval : résolutions du conseil municipal et du comité exécutif, sommaires décisionnels, votes nominaux et membres du conseil.">
+<meta name="twitter:description" content="Site citoyen indépendant qui rend lisibles les décisions de la Ville de Laval : résolutions du conseil municipal et du comité exécutif, sommaires décisionnels, votes nominatifs et membres du conseil.">
 <meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,6 +36,26 @@
       if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
     } catch (e) {}
   })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "DossierQuébec",
+      "item": "https://dossierquebec.ca/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Ville de Laval",
+      "item": "https://dossierquebec.ca/laval/"
+    }
+  ]
+}
 </script>
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="/commun/abonnes.css">
@@ -56,7 +76,7 @@
     <nav>
       <a href="./" aria-current="page">Accueil</a>
       <a href="decisions">Décisions</a>
-      <a href="votes">Votes nominaux</a>
+      <a href="votes">Votes nominatifs</a>
       <a href="conseil">Conseil municipal</a>
       <a href="lexique">Lexique</a>
       <a href="https://www.laval.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Laval (nouvel onglet)">Ville de Laval ↗</a>
@@ -83,7 +103,7 @@
   <button class="plus" id="plus-fil" hidden>Afficher plus</button>
   <p style="margin-top:14px">
     <a href="decisions">Toutes les décisions →</a> &nbsp;·&nbsp;
-    <a href="votes">Tous les votes nominaux →</a>
+    <a href="votes">Tous les votes nominatifs →</a>
   </p>
 
   <h2 class="page">Par où commencer</h2>
@@ -93,7 +113,7 @@
       <p>Les résolutions du conseil municipal et du comité exécutif de l'année en cours, lues dans les procès-verbaux, avec les districts touchés et le montant que donne l'ordre du jour, et le sommaire décisionnel qui les explique.</p>
     </a>
     <a class="lien-section" href="votes">
-      <h3>Votes nominaux</h3>
+      <h3>Votes nominatifs</h3>
       <p>Quand un membre demande le vote, le procès-verbal nomme qui a voté pour et qui a voté contre, avec le décompte. Par vote et par personne.</p>
     </a>
     <a class="lien-section" href="conseil">

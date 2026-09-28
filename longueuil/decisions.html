@@ -36,6 +36,32 @@
     } catch (e) {}
   })();
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "DossierQuébec",
+      "item": "https://dossierquebec.ca/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Ville de Longueuil",
+      "item": "https://dossierquebec.ca/longueuil/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Décisions",
+      "item": "https://dossierquebec.ca/longueuil/decisions"
+    }
+  ]
+}
+</script>
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="/commun/abonnes.css">
 </head>
@@ -44,7 +70,7 @@
 <header>
   <div class="contenu">
     <div class="titre-ligne">
-      <a href="./"><h1>Dossier<span class="marque">VilleDeLongueuil</span></h1></a>
+      <a href="./"><p class="logo-titre">Dossier<span class="marque">VilleDeLongueuil</span></p></a>
       <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
       <details class="ab-villes" id="villes"></details>
     </div>
@@ -75,7 +101,7 @@
 <main class="contenu">
   <div id="chargement" class="avis">Chargement des données…</div>
 
-  <h2 class="page">Décisions</h2>
+  <h1 data-en="Longueuil decisions" class="page">Décisions de la Ville de Longueuil</h1>
   <p class="chapeau">
     Chaque fiche est une <strong>résolution</strong> — la décision elle-même — lue dans le
     <strong>procès-verbal</strong> officiel d'une séance du conseil de ville ou du conseil

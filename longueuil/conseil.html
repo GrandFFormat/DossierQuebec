@@ -36,6 +36,32 @@
     } catch (e) {}
   })();
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "DossierQuébec",
+      "item": "https://dossierquebec.ca/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Ville de Longueuil",
+      "item": "https://dossierquebec.ca/longueuil/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Conseil de ville",
+      "item": "https://dossierquebec.ca/longueuil/conseil"
+    }
+  ]
+}
+</script>
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="/commun/abonnes.css">
 </head>
@@ -44,7 +70,7 @@
 <header>
   <div class="contenu">
     <div class="titre-ligne">
-      <a href="./"><h1>Dossier<span class="marque">VilleDeLongueuil</span></h1></a>
+      <a href="./"><p class="logo-titre">Dossier<span class="marque">VilleDeLongueuil</span></p></a>
       <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
       <details class="ab-villes" id="villes"></details>
     </div>
@@ -75,7 +101,7 @@
 <main class="contenu">
   <div id="chargement" class="avis">Chargement des données…</div>
 
-  <h2 class="page">Le conseil de ville</h2>
+  <h1 data-en="Longueuil City Council" class="page">Le conseil de ville de Longueuil</h1>
   <nav class="raccourcis" aria-label="Sections de cette page">
     <a href="#membres">Les membres du conseil</a>
     <a href="#agglomeration">Le conseil d'agglomération</a>
