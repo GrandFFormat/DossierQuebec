@@ -274,3 +274,17 @@ if (VILLE && VILLES[VILLE]) {
 if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
   setInterval(() => { for (const f of document.querySelectorAll('.titre-ligne .lien-dq')) f.classList.toggle('retournee'); }, 20000);
 }
+
+// Une fiche qu'on ouvre reste sous le curseur (Martin, 28 sept. 2026). Les fiches forment un
+// accordéon (<details name="…">) : en ouvrir une referme celle du dessus, la page remontait
+// d'autant et la fiche cliquée s'ouvrait ailleurs. On mesure l'en-tête cliqué avant, puis après
+// le changement, et on compense l'écart.
+document.addEventListener('click', (e) => {
+  const entete = e.target.closest?.('details[name] > summary');
+  if (!entete) return;
+  const avant = entete.getBoundingClientRect().top;
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const ecart = entete.getBoundingClientRect().top - avant;
+    if (Math.abs(ecart) > 1) window.scrollBy({ top: ecart, behavior: 'instant' });
+  }));
+}, true);
