@@ -2,38 +2,51 @@
 > dossiervillelevis@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 0b86cd4 — Node v22.23.2
+Code : commit 3022e4a — Node v22.23.2
 
 === Syntaxe du JavaScript du site ===
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
 
+=== Membres du conseil ===
+16 membres écrits dans data/elus.json :
+  maire        Steven Blaney                                                                Prospérité Lévis — Équipe Steven Blaney
+  district  1  Anthony Dufour             Saint-Étienne      Chutes-de-la-Chaudière-Ouest   Repensons Lévis — Équipe Serge Bonin
+  district  2  Isabelle Lefebvre          Saint-Nicolas      Chutes-de-la-Chaudière-Ouest   Repensons Lévis — Équipe Serge Bonin
+  district  3  Audrey Bédard              Villieu            Chutes-de-la-Chaudière-Ouest   Repensons Lévis — Équipe Serge Bonin
+  district  4  Benoit Forget-Chiasson     Saint-Rédempteur   Chutes-de-la-Chaudière-Ouest   Lévis Force 10 — Équipe Isabelle Demers
+  district  5  Daniel Saindon             Charny             Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
+  district  6  Karine Lavertu             Breakeyville       Chutes-de-la-Chaudière-Est     Lévis Force 10 — Équipe Isabelle Demers
+  district  7  Alain Quirion              Saint-Jean         Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
+  district  8  Erik Bilodeau              Taniata            Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
+  district  9  Anick Tremblay             Saint-Romuald      Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
+  district 10  Anne-Marie Tremblay        Notre-Dame         Desjardins                     Prospérité Lévis — Équipe Steven Blaney
+  district 11  Jean Demers                Saint-David        Desjardins                     Prospérité Lévis — Équipe Steven Blaney
+  district 12  Jean Leblond               Christ-Roi         Desjardins                     Prospérité Lévis — Équipe Steven Blaney
+  district 13  Olivier Biron              Bienville          Desjardins                     Prospérité Lévis — Équipe Steven Blaney
+  district 14  Mélanie Sicotte            Lauzon             Desjardins                     Prospérité Lévis — Équipe Steven Blaney
+  district 15  Éric Nadeau                Pintendre          Desjardins                     Repensons Lévis — Équipe Serge Bonin
+Partis : {"Prospérité Lévis — Équipe Steven Blaney":10,"Repensons Lévis — Équipe Serge Bonin":4,"Lévis Force 10 — Équipe Isabelle Demers":2}
+
+=== Districts électoraux ===
+Source : https://www.donneesquebec.ca/recherche/dataset/e53425f2-e4cc-4eec-b978-0b862c7a0c56/resource/ee12484f-cc90-4340-9edc-8e17de3e1422/download/districts-electoraux.json (mise à jour du 2022-07-21)
+15 districts écrits dans data/districts.json
+Contours : 9465 points -> 1116 (392 ko -> 33 ko)
+  ⚠ Contours du jeu ouvert mis à jour le 2022-07-21, antérieurs au Règlement RV-2024-34-65 et aux ajustements annoncés par la Ville : carte indicative.
+
 === robots.txt des sites lus ===
-https://levis.ca/robots.txt : fetch failed
+https://levis.ca/robots.txt : rien qui concerne nos chemins
 https://www.donneesquebec.ca/robots.txt : règles sur nos chemins : disallow /recherche/dataset/*?, disallow /recherche/dataset/rate/, disallow /recherche/dataset/*/history, disallow /recherche/api/
 https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt : HTTP 403 Forbidden sur https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt
 
 === Calendrier des séances ===
-TypeError: fetch failed
-    at node:internal/deps/undici/undici:15157:13
-    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
-    at async requete (file:///home/runner/work/DossierQuebec/DossierQuebec/levis/lib/levis.js:54:13)
-    at async texte (file:///home/runner/work/DossierQuebec/DossierQuebec/levis/lib/levis.js:79:15)
-    at async file:///home/runner/work/DossierQuebec/DossierQuebec/levis/lib/levis.js:104:18
-    at async graphql (file:///home/runner/work/DossierQuebec/DossierQuebec/levis/lib/levis.js:122:87)
-    at async seancesDeLAnnee (file:///home/runner/work/DossierQuebec/DossierQuebec/levis/lib/levis.js:175:19)
-    at async main (file:///home/runner/work/DossierQuebec/DossierQuebec/levis/scrapers/seances.js:39:16) {
-  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: levis.ca:443, timeout: 10000ms)
-      at onConnectTimeout (node:internal/deps/undici/undici:2761:28)
-      at Immediate._onImmediate (node:internal/deps/undici/undici:2742:11)
-      at process.processImmediate (node:internal/timers:484:21) {
-    code: 'UND_ERR_CONNECT_TIMEOUT',
-    [Symbol(undici.error.UND_ERR)]: true,
-    [Symbol(undici.error.UND_ERR_CONNECT_TIMEOUT)]: true
-  }
-}
-✖ « Calendrier des séances » a échoué (code 1) — données précédentes conservées.
+72 séance(s) en 2026 écrites dans data/seances.json.
+  CAD     12 séances, 7 avec procès-verbal
+  CV      19 séances, 13 avec procès-verbal
+  CACCO   12 séances, 8 avec procès-verbal
+  CACCE   12 séances, 8 avec procès-verbal
+  CE      17 séances, 17 avec procès-verbal
 
 === Décisions de l'année ===
 
@@ -60,8 +73,8 @@ Pastilles thématiques :
      16  Culture et patrimoine
     109  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-07-29) ===
-Fenêtre depuis 2026-07-29 : 4 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-07-30) ===
+Fenêtre depuis 2026-07-30 : 4 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
 
 17 votes nominaux écrits dans data/votes.json (4 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
@@ -106,8 +119,10 @@ Mesure de 29 termes sur 6 procès-verbaux de 2026 en cache et 1872 décisions…
   Usage conditionnel  (recherche : usages? conditionnels?)
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-29 pas encore résumés (plafond : 120)…
-525 déjà résumés, 0 à faire.
+Sommaires depuis 2026-07-30 pas encore résumés (plafond : 120)…
+⚠ DEI-2026-012 : texte du sommaire trop court (156 caractères) — pas de résumé.
+518 déjà résumés, 0 à faire.
+⚠ 1 sommaire(s) sans texte lisible — aucun résumé publié pour eux : DEI-2026-012
 Rien à générer. (--force pour tout regénérer.)
 
 === Récapitulatifs des projets ===
@@ -115,14 +130,14 @@ Récapitulatifs des projets : rien de nouveau.
 
 === Projets pour « Mes dossiers » ===
 Projets publics : 4 projets · index 2.8 Ko · fichiers de projet 45 Ko au total.
-Décisions attendues : 32 dossiers en attente, dont 0 avec une date cible · 45.4 Ko.
-Dossiers de l'année : 1418 · 1061 Ko · organismes suggérés : 89.
+Décisions attendues : 32 dossiers en attente, dont 0 avec une date cible · 45.2 Ko.
+Dossiers de l'année : 1418 · 1060 Ko · organismes suggérés : 89.
 Décisions récentes : 136 dossiers depuis le 2026-08-01 · 135 Ko.
 
 === Chiffres de la page Abonnement ===
-Travail public : 2411 documents, 482 résumés, 17 votes, 4 projets.
+Travail public : 2411 documents, 479 résumés, 17 votes, 4 projets.
 
 === Bilan ===
-  étapes         : 11
-  échecs         : Calendrier des séances
+  étapes         : 13
+  échecs         : aucun
   avertissements : aucun
