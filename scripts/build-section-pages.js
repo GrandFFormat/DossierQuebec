@@ -634,7 +634,8 @@ for (const { page, html } of produites) {
 const VILLES = ['quebec', 'montreal', 'levis', 'longueuil', 'laval'];
 const PAGES_VILLE = [
   { page: 'index', frequence: 'daily', priorite: '0.8', jeu: 'decisions' },
-  { page: 'decisions', frequence: 'daily', priorite: '0.8', jeu: 'decisions' },
+  // Chaque ville a son adresse : « Décisions de la Ville de Québec » donne decisions-de-la-ville-de-quebec.
+  { page: 'decisions', parVille: Object.fromEntries(VILLES.map((v) => [v, `decisions-de-la-ville-de-${v}`])), frequence: 'daily', priorite: '0.8', jeu: 'decisions' },
   // Longueuil n'a pas de conseil municipal mais un conseil de ville : son adresse le dit, comme son titre.
   { page: 'conseil-municipal', parVille: { longueuil: 'conseil-de-ville' }, frequence: 'weekly', priorite: '0.6', jeu: 'decisions' },
   { page: 'votes-nominatifs', frequence: 'weekly', priorite: '0.6', jeu: 'votes' },

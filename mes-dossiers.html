@@ -401,7 +401,7 @@
             ${phrase ? `<p class="ab-derniere">${enBref ? '' : `<strong>${tr('Le plus récent :', 'Most recent:')}</strong> `}${echapper(phrase.length > 260 ? phrase.slice(0, 259) + '…' : phrase)}</p>` : ''}
             <div class="ab-liens">
               <button type="button" class="ab-bouton" data-action="suivre-projet" data-ville="${echapper(ville)}" data-cle="${echapper(cle)}" data-titre="${echapper(p.titre)}">☆ ${tr('Suivre ce projet', 'Follow this project')}</button>
-              <a href="/${echapper(ville)}/decisions.html?projet=${encodeURIComponent(cle)}">${tr('Voir ses décisions', 'See its decisions')}</a>
+              <a href="/${echapper(ville)}/decisions-de-la-ville-de-${echapper(ville)}?projet=${encodeURIComponent(cle)}">${tr('Voir ses décisions', 'See its decisions')}</a>
             </div>
           </article>`;
         })
@@ -507,7 +507,7 @@
           : ''}
         <div class="ab-liens">
           ${principal.pdf ? `<a href="${echapper(principal.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}
-          <a href="/${echapper(ville)}/decisions.html?q=${encodeURIComponent(principal.numero ?? numero)}">${tr('Voir dans le volet', 'See in the city section:')} ${echapper(VILLES[ville] ?? '')}</a>
+          <a href="/${echapper(ville)}/decisions-de-la-ville-de-${echapper(ville)}?q=${encodeURIComponent(principal.numero ?? numero)}">${tr('Voir dans le volet', 'See in the city section:')} ${echapper(VILLES[ville] ?? '')}</a>
         </div>`;
     }
     // Le clic a pu se refermer entre-temps (double clic rapide).
@@ -628,7 +628,7 @@
         ? `<details class="ab-toutes"><summary>${tr("Toutes les décisions, les plus récentes d'abord", 'All decisions, most recent first')} <span class="ab-etiquette">${lignes.length} ${tr('dossier(s)', 'item(s)')}</span></summary><ol class="ab-liste-projet">${lignes.map(ligne).join('')}</ol></details>`
         : `<p class="ab-note">${tr("Aucune décision de ce projet dans l'année en cours pour l'instant.", 'No decision for this project in the current year yet.')}</p>`}
       <div class="ab-liens">
-        <a href="/${echapper(ville)}/decisions.html?projet=${encodeURIComponent(cle)}">${tr(`Voir les ${chiffres.decisions} décisions dans le volet ${echapper(VILLES[ville] ?? '')}`, `See the ${chiffres.decisions} decisions in the ${echapper(VILLES[ville] ?? '')} section`)}</a>
+        <a href="/${echapper(ville)}/decisions-de-la-ville-de-${echapper(ville)}?projet=${encodeURIComponent(cle)}">${tr(`Voir les ${chiffres.decisions} décisions dans le volet ${echapper(VILLES[ville] ?? '')}`, `See the ${chiffres.decisions} decisions in the ${echapper(VILLES[ville] ?? '')} section`)}</a>
         <button type="button" class="ab-lien-bouton" data-action="retirer">${tr('Ne plus suivre ce projet', 'Stop following this project')}</button>
       </div>`;
     mesurer('ouvrir_projet_suivi', { ville, projet: cle });
@@ -647,7 +647,7 @@
     corps.innerHTML = `<p class="ab-note" style="margin-top:0">${tr(`On suit maintenant des projets plutôt que des décisions seules. Le résumé et le parcours de cette décision sont dans le volet ${echapper(VILLES[ville] ?? '')}.`, `We now follow projects rather than single decisions. This decision's summary and path are in the ${echapper(VILLES[ville] ?? '')} section.`)}</p>
       ${rendreDetail(detail, ville)}
       <div class="ab-liens">
-        ${numero ? `<a href="/${echapper(ville)}/decisions.html?q=${encodeURIComponent(numero)}">${tr('Voir dans le volet', 'See in the city section:')} ${echapper(VILLES[ville] ?? '')}</a>` : ''}
+        ${numero ? `<a href="/${echapper(ville)}/decisions-de-la-ville-de-${echapper(ville)}?q=${encodeURIComponent(numero)}">${tr('Voir dans le volet', 'See in the city section:')} ${echapper(VILLES[ville] ?? '')}</a>` : ''}
         <button type="button" class="ab-lien-bouton" data-action="retirer">${tr('Ne plus suivre', 'Stop following')}</button>
       </div>`;
     mesurer('ouvrir_dossier_suivi', { ville });

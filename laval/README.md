@@ -280,7 +280,7 @@ avertissement d'extraction, **511 sommaires décisionnels** lus (235 avec un mon
 districts), 23 membres du conseil, 22 districts (359 ko de GeoJSON ramenés à 31 ko), 49 termes de
 lexique. `npm test` : 54 tests.
 
-Les pages : `index.html`, `decisions.html`, `votes-nominatifs.html`, `conseil-municipal.html` (carte des districts
+Les pages : `index.html`, `decisions-de-la-ville-de-laval.html`, `votes-nominatifs.html`, `conseil-municipal.html` (carte des districts
 colorée par parti, fiches des élus, présences), `lexique-municipal.html`, `sources-des-donnees.html`.
 
 ### L'ordre du jour du comité exécutif

@@ -440,7 +440,7 @@ function carteElu(m) {
       <p style="margin:4px 0 0; font-size:13px">
         ${m.formulaireCourriel ? `<a href="${echapper(m.formulaireCourriel)}" target="_blank" rel="noopener">${tr('Écrire', 'Write')}</a>` : ''}
         ${m.biographie ? ` · <a href="${echapper(m.biographie)}" target="_blank" rel="noopener">${tr('Biographie', 'Biography')}</a>` : ''}
-        ${arr ? ` · <a href="decisions?instance=${encodeURIComponent(arr.instance)}">${arr.n} ${tr("décisions de l'arrondissement", 'borough decisions')}</a>` : ''}
+        ${arr ? ` · <a href="decisions-de-la-ville-de-quebec?instance=${encodeURIComponent(arr.instance)}">${arr.n} ${tr("décisions de l'arrondissement", 'borough decisions')}</a>` : ''}
       </p>
     </div>
   </article>`;
@@ -761,13 +761,13 @@ function rendreFil() {
 function rendreAccueil() {
   const chiffres = [];
   if (etat.decisions) {
-    chiffres.push({ n: nombreFr(etat.decisions.totalDisponible), quoi: tr(`décisions publiées en ${etat.decisions.parametres.annee}`, `decisions published in ${etat.decisions.parametres.annee}`), lien: 'decisions' });
+    chiffres.push({ n: nombreFr(etat.decisions.totalDisponible), quoi: tr(`décisions publiées en ${etat.decisions.parametres.annee}`, `decisions published in ${etat.decisions.parametres.annee}`), lien: 'decisions-de-la-ville-de-quebec' });
   }
   if (etat.votes) {
     chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: tr('votes nominatifs consignés cette année', 'recorded votes this year'), lien: 'votes-nominatifs' });
   }
   if (etat.resumes) {
-    chiffres.push({ n: nombreFr(etat.resumes.nombre), quoi: tr('décisions résumées en langage clair', 'decisions summarized in plain language'), lien: 'decisions' });
+    chiffres.push({ n: nombreFr(etat.resumes.nombre), quoi: tr('décisions résumées en langage clair', 'decisions summarized in plain language'), lien: 'decisions-de-la-ville-de-quebec' });
   }
   if (etat.elus) {
     chiffres.push({ n: etat.elus.nombre, quoi: tr('membres du conseil municipal', 'members of City Council'), lien: 'conseil-municipal' });
@@ -880,7 +880,7 @@ async function init() {
       etat.projet = projet;
       $('#compte-decisions')?.insertAdjacentHTML(
         'beforebegin',
-        `<p class="compte" id="filtre-projet">${tr('Projet', 'Project')} : <strong>${echapper(etat.decisions.projets[projet].titre)}</strong> — ${nombreFr(etat.decisions.projets[projet].n)} ${tr('décisions', 'decisions')}. <a href="decisions">${tr('Voir toutes les décisions', 'See all decisions')}</a></p>`
+        `<p class="compte" id="filtre-projet">${tr('Projet', 'Project')} : <strong>${echapper(etat.decisions.projets[projet].titre)}</strong> — ${nombreFr(etat.decisions.projets[projet].n)} ${tr('décisions', 'decisions')}. <a href="decisions-de-la-ville-de-quebec">${tr('Voir toutes les décisions', 'See all decisions')}</a></p>`
       );
     }
     rendreDecisions();

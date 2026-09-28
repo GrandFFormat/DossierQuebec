@@ -53,7 +53,7 @@ l'exécution. Aucun framework, aucune dépendance sauf le SDK Anthropic pour les
 | Page | Contenu |
 |---|---|
 | `index.html` | ce qui a changé depuis la dernière extraction (5 fiches, bouton « de plus ») |
-| `decisions.html` | toutes les décisions de l'année, groupées par séance, repliées ; recherche, filtres par type / sujet / instance |
+| `decisions-de-la-ville-de-quebec.html` | toutes les décisions de l'année, groupées par séance, repliées ; recherche, filtres par type / sujet / instance |
 | `votes-nominatifs.html` | les appels nominaux : qui vote pour, qui vote contre, décompte des votes contre par personne |
 | `conseil-municipal.html` | carte SVG des districts, membres du conseil, puis les instances sans page « membres » (agglomération, commission d'urbanisme) |
 | `lexique-municipal.html` | 30 termes du vocabulaire décisionnel, avec décompte réel et un exemple vivant |

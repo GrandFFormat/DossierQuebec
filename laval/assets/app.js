@@ -299,7 +299,7 @@ function rendreDecisions() {
     chip = document.createElement('p');
     chip.id = 'filtre-district';
     chip.className = 'filtre-actif';
-    chip.innerHTML = `Décisions dont l'ordre du jour nomme le district ${echapper(libelleDistrict({ numero: district, nom: nom ?? '' }))} · <a href="decisions">retirer ce filtre</a>`;
+    chip.innerHTML = `Décisions dont l'ordre du jour nomme le district ${echapper(libelleDistrict({ numero: district, nom: nom ?? '' }))} · <a href="decisions-de-la-ville-de-laval">retirer ce filtre</a>`;
     $('#compte-decisions').before(chip);
   }
 
@@ -462,7 +462,7 @@ function carteVote(v) {
     <details><summary>Voir le passage d'origine</summary><p>${echapper(v.brut)}</p></details>
     <p class="liens-pdf">
       ${v.pdf ? `<a class="lien-pdf" href="${echapper(v.pdf)}" target="_blank" rel="noopener">Procès-verbal (PDF)${page ? `, page ${page}` : ''} ↗</a>` : ''}
-      ${v.numero && !v.voteDeProcedure ? `<a class="lien-pdf" href="decisions?q=${encodeURIComponent(v.numero)}">La décision ${echapper(v.numero)}</a>` : ''}
+      ${v.numero && !v.voteDeProcedure ? `<a class="lien-pdf" href="decisions-de-la-ville-de-laval?q=${encodeURIComponent(v.numero)}">La décision ${echapper(v.numero)}</a>` : ''}
     </p>`;
 
   return carteRepliable(entete, corps);
@@ -660,7 +660,7 @@ function carteElu(m) {
           m.courriel ? `<a href="mailto:${echapper(m.courriel)}">${echapper(m.courriel)}</a>` : '',
           m.telephone ? `<a href="tel:${echapper(String(m.telephone).replace(/[^\d+]/g, ''))}">${echapper(m.telephone)}</a>` : '',
           m.profil ? `<a href="${echapper(m.profil)}" target="_blank" rel="noopener">Son profil sur laval.ca ↗</a>` : '',
-          decisions ? `<a href="decisions?district=${numero}">${decisions} décision${decisions > 1 ? 's' : ''} de l'année nomme${decisions > 1 ? 'nt' : ''} le district</a>` : '',
+          decisions ? `<a href="decisions-de-la-ville-de-laval?district=${numero}">${decisions} décision${decisions > 1 ? 's' : ''} de l'année nomme${decisions > 1 ? 'nt' : ''} le district</a>` : '',
         ].filter(Boolean).join(' · ')}
       </p>
     </div>
@@ -991,13 +991,13 @@ function rendreAccueil() {
   const chiffres = [];
   if (etat.decisions) {
     const decisions = etat.decisions.decisions.filter((d) => !estDocument(d)).length;
-    chiffres.push({ n: nombreFr(decisions), quoi: `décisions lues dans les procès-verbaux de ${etat.decisions.parametres.annee}`, lien: 'decisions' });
+    chiffres.push({ n: nombreFr(decisions), quoi: `décisions lues dans les procès-verbaux de ${etat.decisions.parametres.annee}`, lien: 'decisions-de-la-ville-de-laval' });
   }
   if (etat.votes) {
     chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: `votes nominaux au conseil municipal en ${etat.votes.parametres?.annee ?? ''}`.trim(), lien: 'votes-nominatifs' });
   }
   if (etat.resumes) {
-    chiffres.push({ n: nombreFr(etat.resumes.nombre ?? etat.parSommaire.size), quoi: 'sommaires décisionnels résumés en langage clair', lien: 'decisions' });
+    chiffres.push({ n: nombreFr(etat.resumes.nombre ?? etat.parSommaire.size), quoi: 'sommaires décisionnels résumés en langage clair', lien: 'decisions-de-la-ville-de-laval' });
   }
   if (etat.elus) {
     chiffres.push({ n: etat.elus.nombre ?? etat.elus.membres?.length ?? 0, quoi: 'membres du conseil municipal', lien: 'conseil-municipal' });

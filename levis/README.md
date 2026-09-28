@@ -238,7 +238,7 @@ ou qu'un règlement n'en est qu'à ses étapes préliminaires ; sinon, décidé 
 **Les fichiers de Mes dossiers** : `scripts/projets-publics.js` (copié de Québec, adapté : un
 dossier = un sommaire et ses résolutions, présenté par sa résolution la plus récente, `numeros[]`
 avec l'identifiant du sommaire) et `scripts/travail-public.js`, appelés par `refresh.js`.
-La recherche du volet trouve aussi l'identifiant du sommaire (`decisions.html?q=FIN-2026-035`).
+La recherche du volet trouve aussi l'identifiant du sommaire (`decisions-de-la-ville-de-levis.html?q=FIN-2026-035`).
 
 **Résumés abîmés.** 13 des 492 résumés du lot Batches portaient des débris d'échappement
 illisibles (« L\tévis », « r\nde9glement ») : retirés et régénérés (0,38 $). `resumes.js` refuse
