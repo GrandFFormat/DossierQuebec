@@ -3,21 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-en="Recorded votes at Montréal city council — DossierVilleDeMontréal">Votes enregistrés au conseil municipal de Montréal — DossierVilleDeMontréal</title>
-<meta data-en-content="Who voted for and who voted against at Montréal's city council and urban agglomeration council: the recorded votes set down in the official minutes." name="description" content="Qui a voté pour et qui a voté contre au conseil municipal et au conseil d'agglomération de Montréal : les votes enregistrés consignés dans les procès-verbaux officiels.">
-<link rel="canonical" href="https://dossierquebec.ca/montreal/votes">
+<link rel="icon" type="image/svg+xml" href="/quebec/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="512x512" href="/quebec/assets/favicon-512.png">
+<link rel="apple-touch-icon" href="/quebec/assets/favicon-512.png">
+<title data-en="Recorded votes of Québec City Council — DossierVilleDeQuébec">Votes nominatifs du conseil municipal de Québec — DossierVilleDeQuébec</title>
+<meta data-en-content="Who voted for and who voted against at Québec City Council and the urban agglomeration council: the recorded votes in the official resolutions." name="description" content="Qui a voté pour et qui a voté contre au conseil municipal et au conseil d'agglomération de Québec : les appels nominaux consignés dans les résolutions officielles.">
+<link rel="canonical" href="https://dossierquebec.ca/quebec/votes-nominatifs">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DossierQuébec">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:title" content="Votes enregistrés au conseil municipal de Montréal — DossierVilleDeMontréal">
-<meta property="og:description" content="Qui a voté pour et qui a voté contre au conseil municipal et au conseil d'agglomération de Montréal : les votes enregistrés consignés dans les procès-verbaux officiels.">
-<meta property="og:url" content="https://dossierquebec.ca/montreal/votes">
+<meta property="og:title" content="Votes nominatifs du conseil municipal de Québec — DossierVilleDeQuébec">
+<meta property="og:description" content="Qui a voté pour et qui a voté contre au conseil municipal et au conseil d'agglomération de Québec : les appels nominaux consignés dans les résolutions officielles.">
+<meta property="og:url" content="https://dossierquebec.ca/quebec/votes-nominatifs">
 <meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <meta property="og:image:width" content="1702">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Votes enregistrés au conseil municipal de Montréal — DossierVilleDeMontréal">
-<meta name="twitter:description" content="Qui a voté pour et qui a voté contre au conseil municipal et au conseil d'agglomération de Montréal : les votes enregistrés consignés dans les procès-verbaux officiels.">
+<meta name="twitter:title" content="Votes nominatifs du conseil municipal de Québec — DossierVilleDeQuébec">
+<meta name="twitter:description" content="Qui a voté pour et qui a voté contre au conseil municipal et au conseil d'agglomération de Québec : les appels nominaux consignés dans les résolutions officielles.">
 <meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,9 +42,6 @@
     } catch (e) {}
   })();
 </script>
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="assets/favicon-512.png" type="image/png" sizes="512x512">
-<link rel="apple-touch-icon" href="assets/favicon-512.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -56,14 +56,14 @@
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Ville de Montréal",
-      "item": "https://dossierquebec.ca/montreal/"
+      "name": "Ville de Québec",
+      "item": "https://dossierquebec.ca/quebec/"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": "Votes nominatifs",
-      "item": "https://dossierquebec.ca/montreal/votes"
+      "item": "https://dossierquebec.ca/quebec/votes-nominatifs"
     }
   ]
 }
@@ -71,25 +71,25 @@
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="/commun/abonnes.css">
 </head>
-<body data-page="votes" data-ville="montreal">
+<body data-page="votes" data-ville="quebec">
 
 <header>
   <div class="contenu">
     <div class="titre-ligne">
-      <a href="./"><p class="logo-titre">Dossier<span class="marque">VilleDeMontréal</span></p></a>
+      <a href="./"><p class="logo-titre">Dossier<span class="marque">VilleDeQuébec</span></p></a>
       <details class="ab-villes" id="villes"></details>
     </div>
-    <p data-en="The City of Montréal's decisions, made readable. Public data, taken as is from the City's official minutes and its open data portal." class="sous-titre">
-      Les décisions de la Ville de Montréal, lisibles. Données publiques, reprises telles quelles
-      des procès-verbaux officiels de la Ville et de son portail de données ouvertes.
+    <p data-en="The City of Québec's decisions, made readable. Public data, taken as is from the City's decision-document portal." class="sous-titre">
+      Les décisions de la Ville de Québec, lisibles. Données publiques, reprises telles quelles
+      du portail des documents décisionnels de la Ville.
     </p>
     <nav>
       <a data-en="Home" href="./">Accueil</a>
       <a data-en="Decisions" href="decisions">Décisions</a>
-      <a data-en="Recorded votes" href="votes" aria-current="page">Votes nominatifs</a>
-      <a data-en="City Council" href="conseil">Conseil municipal</a>
-      <a data-en="Glossary" href="lexique">Lexique</a>
-      <a data-en-title="The official City of Montréal website (new tab)" href="https://montreal.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Montréal (nouvel onglet)">Ville de Montréal ↗</a>
+      <a data-en="Recorded votes" href="votes-nominatifs" aria-current="page">Votes nominatifs</a>
+      <a data-en="City Council" href="conseil-municipal">Conseil municipal</a>
+      <a data-en="Glossary" href="lexique-municipal">Lexique</a>
+      <a data-en="Ville de Québec <span aria-hidden=&quot;true&quot;>↗</span><span class=&quot;sr-only&quot;> (official site, new tab)</span>" href="https://www.ville.quebec.qc.ca/" class="externe" target="_blank" rel="noopener">Ville de Québec <span aria-hidden="true">↗</span><span class="sr-only"> (site officiel, nouvel onglet)</span></a>
       <div class="outils">
         <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
           <button data-en-aria-label="Smaller text" type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
@@ -106,15 +106,13 @@
 <main class="contenu">
   <div data-en="Loading data…" id="chargement" class="avis">Chargement des données…</div>
 
-  <h1 data-en="Recorded votes, Montréal council" class="page">Votes nominatifs du conseil de Montréal</h1>
-  <div data-en="<strong>How these votes are obtained.</strong> At the City of Montréal, most decisions are adopted by a show of hands, without anyone being named. When a member calls for a <strong>recorded vote</strong>, the clerk calls the roll and the minutes set down by name who votes for and who votes against. These names are extracted from the text of the minutes by automatic reading: each vote keeps the original passage, and any gap with the official count in the document is flagged rather than corrected. A <em>dissidence</em> — an objection recorded without a full roll call — appears on the items of the Decisions page, not here." class="avis">
-    <strong>Comment ces votes sont obtenus.</strong> À la Ville de Montréal, la plupart des décisions
-    sont adoptées à main levée, sans que personne ne soit nommé. Quand un membre demande un
-    <strong>vote enregistré</strong>, le greffier fait l'appel et le procès-verbal consigne nommément
-    qui vote pour et qui vote contre. Ces noms sont extraits du texte des procès-verbaux par lecture
-    automatique&nbsp;: chaque vote garde le passage d'origine et tout écart avec le décompte officiel
-    du document est signalé plutôt que corrigé. Les <em>dissidences</em> — une opposition consignée
-    sans appel nominal complet — figurent sur les fiches de la page Décisions, pas ici.
+  <h1 data-en="Recorded votes, Québec City council" class="page">Votes nominatifs du conseil de Québec</h1>
+  <div data-en="<strong>How these votes are obtained.</strong> At the City of Québec, most decisions are adopted without a recorded vote. When a member &quot;calls for the vote&quot;, the minutes record by name who votes for and who votes against. These names are extracted from the text of the resolutions by automatic reading: each vote keeps the original passage, and any gap with the official count in the document is flagged rather than corrected." class="avis">
+    <strong>Comment ces votes sont obtenus.</strong> À la Ville de Québec, la plupart des décisions
+    sont adoptées sans appel nominal. Quand un membre « demande le vote », le procès-verbal consigne
+    nommément qui vote pour et qui vote contre. Ces noms sont extraits du texte des résolutions
+    par lecture automatique&nbsp;: chaque vote garde le passage d'origine et tout écart avec le décompte
+    officiel du document est signalé plutôt que corrigé.
   </div>
 
   <details class="carte pliante bloc-tableau">
@@ -134,7 +132,7 @@
     </div>
   </details>
 
-  <h2 data-en="The recorded votes" class="section">Les votes enregistrés</h2>
+  <h2 data-en="The recorded votes" class="section">Les appels nominaux</h2>
   <div class="barre-outils">
     <input data-en-placeholder="Search subjects or names…" type="search" id="rech-votes" placeholder="Rechercher dans l'objet ou les noms…">
     <select id="filtre-theme-votes"><option data-en="All topics" value="">Tous les sujets</option></select>
@@ -148,8 +146,8 @@
 
 <footer>
   <div class="contenu">
-    <p data-en="Independent citizen site. No connection with the City of Montréal, no official status. If anything differs, the original PDF document prevails. <a href=&quot;sources&quot;>Sources</a>.">Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
-    En cas d'écart, le document PDF d'origine fait foi. <a href="sources">Sources</a>.</p>
+    <p data-en="Independent citizen site. No connection with the City of Québec, no official status. If anything differs, the original PDF document prevails. <a href=&quot;sources&quot;>Sources</a>.">Site citoyen indépendant. Aucun lien avec la Ville de Québec, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees">Sources</a>.</p>
   </div>
 </footer>
 
@@ -157,7 +155,7 @@
 <script type="module" src="/commun/entete-volet.js"></script>
 <script type="module" src="/commun/abonnes.js"></script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
-     Même projet Vercel : les pages vues de /montreal/ s'ajoutent au même tableau de
+     Même projet Vercel : les pages vues de /quebec/ s'ajoutent au même tableau de
      bord. En local le script n'existe pas (404 sans conséquence). -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>

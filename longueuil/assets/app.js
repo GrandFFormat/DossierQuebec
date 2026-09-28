@@ -698,7 +698,7 @@ function ligneEvenement(e) {
     const corps = `<p class="compte" style="margin:0">
         ${v.decomptePour ?? v.pour.length} pour, ${v.decompteContre ?? v.contre.length} contre${
           v.contre.length ? ' — ' + v.contre.map(echapper).join(', ') : ''
-        }. <a href="votes">Voir le détail</a>
+        }. <a href="votes-nominatifs">Voir le détail</a>
       </p>`;
     return carteRepliable(entete, corps);
   }
@@ -745,13 +745,13 @@ function rendreAccueil() {
     chiffres.push({ n: nombreFr(etat.decisions.totalDisponible), quoi: `décisions publiées en ${etat.decisions.parametres.annee}`, lien: 'decisions' });
   }
   if (etat.votes) {
-    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: `votes nominatifs consignés depuis ${etat.votes.parametres.annees?.[0] ?? etat.votes.parametres.annee}`, lien: 'votes' });
+    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: `votes nominatifs consignés depuis ${etat.votes.parametres.annees?.[0] ?? etat.votes.parametres.annee}`, lien: 'votes-nominatifs' });
   }
   if (etat.resumes) {
     chiffres.push({ n: nombreFr(etat.resumes.nombre), quoi: 'sommaires décisionnels résumés en langage clair', lien: 'decisions' });
   }
   if (etat.elus) {
-    chiffres.push({ n: etat.elus.nombre, quoi: 'membres du conseil de ville', lien: 'conseil' });
+    chiffres.push({ n: etat.elus.nombre, quoi: 'membres du conseil de ville', lien: 'conseil-de-ville' });
   }
   if ($('#chiffres')) {
     $('#chiffres').innerHTML = chiffres

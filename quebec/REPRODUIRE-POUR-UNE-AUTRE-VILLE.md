@@ -54,10 +54,10 @@ l'exécution. Aucun framework, aucune dépendance sauf le SDK Anthropic pour les
 |---|---|
 | `index.html` | ce qui a changé depuis la dernière extraction (5 fiches, bouton « de plus ») |
 | `decisions.html` | toutes les décisions de l'année, groupées par séance, repliées ; recherche, filtres par type / sujet / instance |
-| `votes.html` | les appels nominaux : qui vote pour, qui vote contre, décompte des votes contre par personne |
-| `conseil.html` | carte SVG des districts, membres du conseil, puis les instances sans page « membres » (agglomération, commission d'urbanisme) |
-| `lexique.html` | 30 termes du vocabulaire décisionnel, avec décompte réel et un exemple vivant |
-| `sources.html` | provenance, méthode, limites, état des données, archive |
+| `votes-nominatifs.html` | les appels nominaux : qui vote pour, qui vote contre, décompte des votes contre par personne |
+| `conseil-municipal.html` | carte SVG des districts, membres du conseil, puis les instances sans page « membres » (agglomération, commission d'urbanisme) |
+| `lexique-municipal.html` | 30 termes du vocabulaire décisionnel, avec décompte réel et un exemple vivant |
+| `sources-des-donnees.html` | provenance, méthode, limites, état des données, archive |
 
 > ⚠️ Ceci vaut pour un **volet de ville** à l'intérieur du dépôt de DQ. Pour un **site séparé**
 > (DossierOntario, DossierCanada…), ne pas partir d'ici ni de `assets/style.css` — c'est le design

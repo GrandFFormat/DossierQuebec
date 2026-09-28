@@ -1,4 +1,4 @@
-// Version anglaise du lexique (page lexique.html en anglais).
+// Version anglaise du lexique (page lexique-municipal.html en anglais).
 //
 //   node --env-file=../api.env scrapers/lexique-en.js          traduit si le lexique français a changé
 //   node --env-file=../api.env scrapers/lexique-en.js --force

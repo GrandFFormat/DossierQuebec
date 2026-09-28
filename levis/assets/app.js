@@ -184,7 +184,7 @@ function carteDecision(d) {
     ${!resumePour(d) && d.dispositif?.length ? blocDispositif(d.dispositif) : ''}
     ${d.annotation ? `<p class="compte" style="margin:0 0 8px">Résolution ${echapper(d.annotation)}.</p>` : ''}
     ${d.sommaires?.length ? `<p class="compte" style="margin:0 0 8px">Sommaire décisionnel ${d.sommaires.map(echapper).join(', ')}</p>` : ''}
-    ${d.voteEnregistre ? `<p class="compte" style="margin:0 0 8px"><a href="votes?q=${encodeURIComponent(d.numero ?? '')}">Voir qui a voté pour et contre</a></p>` : ''}
+    ${d.voteEnregistre ? `<p class="compte" style="margin:0 0 8px"><a href="votes-nominatifs?q=${encodeURIComponent(d.numero ?? '')}">Voir qui a voté pour et contre</a></p>` : ''}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${d.numero ? 'Procès-verbal officiel (PDF)' : 'Document officiel (PDF)'} ↗</a>` : ''}
     ${d.sommairePdf ? ` &nbsp;<a class="lien-pdf" href="${echapper(d.sommairePdf)}" target="_blank" rel="noopener">Sommaire décisionnel (PDF) ↗</a>` : ''}`;
   // Espace abonnés (/commun/abonnes.js) : « Suivre ce dossier » et le détail de l'argent. La clé
@@ -797,7 +797,7 @@ function ligneEvenement(e) {
     const corps = `<p class="compte" style="margin:0">
         ${v.decomptePour ?? v.pour.length} pour, ${v.decompteContre ?? v.contre.length} contre${
           v.contre.length ? ' — ' + v.contre.map(echapper).join(', ') : ''
-        }. <a href="votes">Voir le détail</a>
+        }. <a href="votes-nominatifs">Voir le détail</a>
       </p>`;
     return carteRepliable(entete, corps);
   }
@@ -844,13 +844,13 @@ function rendreAccueil() {
     chiffres.push({ n: nombreFr(etat.decisions.totalDisponible), quoi: `décisions publiées en ${etat.decisions.parametres.annee}`, lien: 'decisions' });
   }
   if (etat.votes) {
-    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: 'votes nominatifs consignés cette année', lien: 'votes' });
+    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: 'votes nominatifs consignés cette année', lien: 'votes-nominatifs' });
   }
   if (etat.resumes) {
     chiffres.push({ n: nombreFr(etat.resumes.nombre), quoi: 'décisions résumées en langage clair', lien: 'decisions' });
   }
   if (etat.elus) {
-    chiffres.push({ n: etat.elus.nombre, quoi: 'membres du conseil municipal', lien: 'conseil' });
+    chiffres.push({ n: etat.elus.nombre, quoi: 'membres du conseil municipal', lien: 'conseil-municipal' });
   }
   if ($('#chiffres')) {
     $('#chiffres').innerHTML = chiffres
