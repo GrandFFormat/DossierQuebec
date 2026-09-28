@@ -286,33 +286,6 @@ function goToFederal(evt){
       <div class="stat-cell"><b id="statVotes">735</b><span data-i18n="stat.votes">Votes nominatifs</span></div>
     </div>
 
-    <!-- À la place de « Par où commencer » (Martin, 21 sept. 2026) : le compte gratuit et Mon dossier.
-         L'abonnement payant qu'elle vendait a été retiré le 27 sept. 2026. #promoCompte est rempli
-         par dq.js (renderPromoCompte) ; d'ici là, champ et bouton restent désactivés. -->
-    <div class="band band-blue bleed promo-alertes promo-accueil" id="band-alertes-accueil" role="region" aria-labelledby="promoAccueilTitre">
-      <div class="promo-accueil-grille">
-        <div>
-          <p class="promo-sur" data-i18n="promo.sur">Compte gratuit</p>
-          <h2 id="promoAccueilTitre" data-i18n="promo.h">Suivez les projets de loi qui vous touchent</h2>
-          <p class="promo-texte" data-i18n="promo.p">Un compte gratuit, sans mot de passe : suivez jusqu'à 3 projets de loi ou projets de ville, et retrouvez-les dans Mon dossier, avec leur étape du moment.</p>
-          <p class="promo-texte promo-dissolution" data-i18n="promo.diss">Les projets de loi de la 43e législature sont morts à la dissolution du 27 août : le suivi reprendra avec les premiers projets de loi de la nouvelle législature, convoquée le 17 novembre 2026.</p>
-        </div>
-        <div class="promo-cote">
-        <div class="promo-compte">
-          <b class="promo-compte-titre" data-i18n="promo.compte.h">Votre compte</b>
-          <div id="promoCompte">
-            <div class="promo-compte-ligne">
-              <input type="email" id="promoEmail" placeholder="Votre courriel" aria-label="Votre courriel" disabled>
-              <button class="account-btn" id="promoLienBtn" onclick="handlePromoLink()" disabled>Recevoir le lien</button>
-            </div>
-            <p class="promo-compte-note" id="promoNote">Pas de mot de passe : un lien de connexion arrive par courriel. Le compte gratuit suit 3 choses en tout.</p>
-          </div>
-          <a class="promo-mes-dossiers" href="/mon-dossier" data-i18n="promo.mesdossiers">Mon dossier →</a>
-        </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Section signature du handoff : bande JAUNE pleine largeur -->
     <div class="band band-yellow bleed" id="band-challenged">
     <div class="section-head" id="sec-challenged">
@@ -342,6 +315,33 @@ function goToFederal(evt){
       </ul>
       <p class="pr-note">Source officielle : <a href="https://www.assnat.qc.ca/" rel="noopener">assnat.qc.ca</a>.</p>
     </div>
+    </div>
+
+    <!-- À la place de « Par où commencer » (Martin, 21 sept. 2026) : le compte gratuit et Mon dossier.
+         L'abonnement payant qu'elle vendait a été retiré le 27 sept. 2026. #promoCompte est rempli
+         par dq.js (renderPromoCompte) ; d'ici là, champ et bouton restent désactivés. -->
+    <div class="band band-blue bleed promo-alertes promo-accueil" id="band-alertes-accueil" role="region" aria-labelledby="promoAccueilTitre">
+      <div class="promo-accueil-grille">
+        <div>
+          <p class="promo-sur" data-i18n="promo.sur">Compte gratuit</p>
+          <h2 id="promoAccueilTitre" data-i18n="promo.h">Suivez les projets de loi qui vous touchent</h2>
+          <p class="promo-texte" data-i18n="promo.p">Un compte gratuit, sans mot de passe : suivez jusqu'à 3 projets de loi ou projets de ville, et retrouvez-les dans Mon dossier, avec leur étape du moment.</p>
+          <p class="promo-texte promo-dissolution" data-i18n="promo.diss">Les projets de loi de la 43e législature sont morts à la dissolution du 27 août : le suivi reprendra avec les premiers projets de loi de la nouvelle législature, convoquée le 17 novembre 2026.</p>
+        </div>
+        <div class="promo-cote">
+        <div class="promo-compte">
+          <b class="promo-compte-titre" data-i18n="promo.compte.h">Votre compte</b>
+          <div id="promoCompte">
+            <div class="promo-compte-ligne">
+              <input type="email" id="promoEmail" placeholder="Votre courriel" aria-label="Votre courriel" disabled>
+              <button class="account-btn" id="promoLienBtn" onclick="handlePromoLink()" disabled>Recevoir le lien</button>
+            </div>
+            <p class="promo-compte-note" id="promoNote">Pas de mot de passe : un lien de connexion arrive par courriel. Le compte gratuit suit 3 choses en tout.</p>
+          </div>
+          <a class="promo-mes-dossiers" href="/mon-dossier" data-i18n="promo.mesdossiers">Mon dossier →</a>
+        </div>
+        </div>
+      </div>
     </div>
 
     <!-- Bande blanche : Quoi de neuf + Pétitions côte à côte (maquette) -->
