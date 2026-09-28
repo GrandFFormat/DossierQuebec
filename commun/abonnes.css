@@ -736,8 +736,9 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 .titre-ligne .lien-dq {
   display: inline-flex; align-items: center; justify-content: center; margin-left: -4px;
   font-family: 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'Apple Symbols', 'DejaVu Sans', sans-serif;
-  font-size: 26px; line-height: 1; color: #0E4FC1; text-decoration: none; transition: transform .15s ease;
+  font-size: 34px; line-height: 1; color: #0047D6; text-decoration: none; transition: transform .15s ease;
+  -webkit-text-stroke: 1px currentColor; /* le glyphe de Windows est fin : on l'épaissit (Martin : « plus bleu et plus gros ») */
 }
 .titre-ligne .lien-dq:hover, .titre-ligne .lien-dq:focus-visible { transform: scale(1.15); }
-:root[data-theme="sombre"] .titre-ligne .lien-dq { color: #7FA8F0; }
-@media (max-width: 620px) { .titre-ligne .lien-dq { font-size: 21px; } }
+:root[data-theme="sombre"] .titre-ligne .lien-dq { color: #6FA0FF; }
+@media (max-width: 620px) { .titre-ligne .lien-dq { font-size: 27px; } }
