@@ -90,10 +90,10 @@ donc elle peut être indexée et partagée telle quelle.
 |---|---|
 | `index.html` | accueil : le fil de ce qui a changé depuis la dernière extraction |
 | `decisions-de-la-ville-de-quebec.html` | toutes les décisions, recherche, filtres, résumés |
-| `votes-nominatifs.html` | appels nominaux et décompte des votes contre par personne |
-| `conseil-municipal.html` | la carte des 21 districts, les 22 membres, et le conseil d'agglomération |
-| `lexique-municipal.html` | 30 termes du vocabulaire décisionnel, chiffrés sur le corpus |
-| `sources-des-donnees.html` | provenance, méthode, limites, état des données |
+| `votes-nominatifs-du-conseil-de-quebec.html` | appels nominaux et décompte des votes contre par personne |
+| `conseil-municipal-de-quebec.html` | la carte des 21 districts, les 22 membres, et le conseil d'agglomération |
+| `lexique-municipal-de-quebec.html` | 30 termes du vocabulaire décisionnel, chiffrés sur le corpus |
+| `sources-des-donnees-de-quebec.html` | provenance, méthode, limites, état des données |
 
 Le style et la logique sont partagés (`assets/style.css`, `assets/app.js`) et les données sont
 lues à l'exécution depuis `data/*.json` : chaque page fait quelques kilo-octets, et une seule
@@ -852,7 +852,7 @@ commentaire dans le fichier parce que le piège est facile à refaire ailleurs.
 
 ## Le lexique
 
-Le vocabulaire décisionnel municipal est opaque par habitude, pas par nécessité. `lexique-municipal.html`
+Le vocabulaire décisionnel municipal est opaque par habitude, pas par nécessité. `lexique-municipal-de-quebec.html`
 explique 30 termes — résolution, sommaire décisionnel, avis de motion, ordonnance, dérogation
 mineure, ville reconstituée, adjudication, gré à gré… — en six catégories.
 
@@ -942,7 +942,7 @@ scripts/static-server.js serveur statique local
 scripts/reparer-echappements.js  répare les accents échappés (\uXXXX) dans les résumés
 assets/style.css         style commun à toutes les pages
 assets/app.js            logique commune ; chaque page charge ce dont elle a besoin
-index.html decisions-de-la-ville-de-quebec.html votes-nominatifs.html conseil-municipal.html lexique-municipal.html sources-des-donnees.html
+index.html decisions-de-la-ville-de-quebec.html votes-nominatifs-du-conseil-de-quebec.html conseil-municipal-de-quebec.html lexique-municipal-de-quebec.html sources-des-donnees-de-quebec.html
 data/                    sorties JSON
 ../.github/workflows/refresh-villedequebec.yml   le workflow quotidien (racine du dépôt DossierQuébec)
 ../.vercelignore         garde lib/, scrapers/ et scripts/ hors du site servi

@@ -143,8 +143,8 @@ Premier lancement, 14 septembre 2026 : 16 séances de 2026, **870 résolutions**
 et documents de séance), 0 sans pastille de sujet ; 22 votes nominatifs (2025) ; 18 districts ; 10
 membres de l'agglomération.
 
-Les pages : `index.html`, `decisions-de-la-ville-de-longueuil.html`, `votes-nominatifs.html`, `conseil-de-ville.html` (carte, élus, agglomération —
-pas de section comité exécutif : aucune donnée pour l'instant), `lexique-municipal.html`, `sources-des-donnees.html`.
+Les pages : `index.html`, `decisions-de-la-ville-de-longueuil.html`, `votes-nominatifs-du-conseil-de-longueuil.html`, `conseil-de-ville-de-longueuil.html` (carte, élus, agglomération —
+pas de section comité exécutif : aucune donnée pour l'instant), `lexique-municipal-de-longueuil.html`, `sources-des-donnees-de-longueuil.html`.
 `assets/app.js` vient de Montréal, adapté : lien vers le sommaire dans le document de séance (avec la
 page), résolutions modifiées plus tard, votes sur deux années et étiquette du vote (proposition
 technique, principale), poste vacant, carte colorée par arrondissement (pas par parti : un seul parti).

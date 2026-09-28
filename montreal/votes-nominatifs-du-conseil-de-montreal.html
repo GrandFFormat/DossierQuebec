@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-en="Glossary of municipal vocabulary — DossierVilleDeMontréal">Lexique du vocabulaire municipal — DossierVilleDeMontréal</title>
-<meta data-en-content="Resolution, decision summary, decision file, recorded vote, dissidence, related city: the vocabulary of the City of Montréal's decisions, explained and counted on the official minutes." name="description" content="Résolution, sommaire décisionnel, dossier décisionnel, vote enregistré, dissidence, ville liée : le vocabulaire des décisions de la Ville de Montréal, expliqué et chiffré sur les procès-verbaux officiels.">
-<link rel="canonical" href="https://dossierquebec.ca/montreal/lexique-municipal">
+<title data-en="Recorded votes at Montréal city council — DossierVilleDeMontréal">Votes enregistrés au conseil municipal de Montréal — DossierVilleDeMontréal</title>
+<meta data-en-content="Who voted for and who voted against at Montréal's city council and urban agglomeration council: the recorded votes set down in the official minutes." name="description" content="Qui a voté pour et qui a voté contre au conseil municipal et au conseil d'agglomération de Montréal : les votes enregistrés consignés dans les procès-verbaux officiels.">
+<link rel="canonical" href="https://dossierquebec.ca/montreal/votes-nominatifs-du-conseil-de-montreal">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DossierQuébec">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:title" content="Lexique du vocabulaire municipal — DossierVilleDeMontréal">
-<meta property="og:description" content="Résolution, sommaire décisionnel, dossier décisionnel, vote enregistré, dissidence, ville liée : le vocabulaire des décisions de la Ville de Montréal, expliqué et chiffré sur les procès-verbaux officiels.">
-<meta property="og:url" content="https://dossierquebec.ca/montreal/lexique-municipal">
+<meta property="og:title" content="Votes enregistrés au conseil municipal de Montréal — DossierVilleDeMontréal">
+<meta property="og:description" content="Qui a voté pour et qui a voté contre au conseil municipal et au conseil d'agglomération de Montréal : les votes enregistrés consignés dans les procès-verbaux officiels.">
+<meta property="og:url" content="https://dossierquebec.ca/montreal/votes-nominatifs-du-conseil-de-montreal">
 <meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <meta property="og:image:width" content="1702">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lexique du vocabulaire municipal — DossierVilleDeMontréal">
-<meta name="twitter:description" content="Résolution, sommaire décisionnel, dossier décisionnel, vote enregistré, dissidence, ville liée : le vocabulaire des décisions de la Ville de Montréal, expliqué et chiffré sur les procès-verbaux officiels.">
+<meta name="twitter:title" content="Votes enregistrés au conseil municipal de Montréal — DossierVilleDeMontréal">
+<meta name="twitter:description" content="Qui a voté pour et qui a voté contre au conseil municipal et au conseil d'agglomération de Montréal : les votes enregistrés consignés dans les procès-verbaux officiels.">
 <meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,8 +62,8 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Lexique",
-      "item": "https://dossierquebec.ca/montreal/lexique-municipal"
+      "name": "Votes nominatifs",
+      "item": "https://dossierquebec.ca/montreal/votes-nominatifs-du-conseil-de-montreal"
     }
   ]
 }
@@ -71,7 +71,7 @@
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="/commun/abonnes.css">
 </head>
-<body data-page="lexique" data-ville="montreal">
+<body data-page="votes" data-ville="montreal">
 
 <header>
   <div class="contenu">
@@ -86,9 +86,9 @@
     <nav>
       <a data-en="Home" href="./">Accueil</a>
       <a data-en="Decisions" href="decisions-de-la-ville-de-montreal">Décisions</a>
-      <a data-en="Recorded votes" href="votes-nominatifs">Votes nominatifs</a>
-      <a data-en="City Council" href="conseil-municipal">Conseil municipal</a>
-      <a data-en="Glossary" href="lexique-municipal" aria-current="page">Lexique</a>
+      <a data-en="Recorded votes" href="votes-nominatifs-du-conseil-de-montreal" aria-current="page">Votes nominatifs</a>
+      <a data-en="City Council" href="conseil-municipal-de-montreal">Conseil municipal</a>
+      <a data-en="Glossary" href="lexique-municipal-de-montreal">Lexique</a>
       <a data-en-title="The official City of Montréal website (new tab)" href="https://montreal.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Montréal (nouvel onglet)">Ville de Montréal ↗</a>
       <div class="outils">
         <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
@@ -106,23 +106,51 @@
 <main class="contenu">
   <div data-en="Loading data…" id="chargement" class="avis">Chargement des données…</div>
 
-  <h1 data-en="Montréal municipal glossary" class="page">Lexique municipal de Montréal</h1>
-  <p data-en="Here is the Montréal municipal glossary: the French terms you'll see on this site, and what they mean. The official documents are in French, and the vocabulary of municipal decisions is opaque out of habit, not necessity." class="chapeau">
-    Voici le lexique municipal de Montréal&nbsp;: les mots que vous croisez sur ce site, et ce qu'ils
-    veulent dire. Le vocabulaire des décisions municipales est opaque par habitude, pas par nécessité.
-  </p>
-
-  <div class="barre-outils">
-    <input data-en-placeholder="Search for a term…" type="search" id="rech-lexique" placeholder="Chercher un terme…">
+  <h1 data-en="Recorded votes, Montréal council" class="page">Votes nominatifs du conseil de Montréal</h1>
+  <div data-en="<strong>How the recorded votes of Montréal council are obtained.</strong> At the City of Montréal, most decisions are adopted by a show of hands, without anyone being named. When a member calls for a <strong>recorded vote</strong>, the clerk calls the roll and the minutes set down by name who votes for and who votes against. These names are extracted from the text of the minutes by automatic reading: each vote keeps the original passage, and any gap with the official count in the document is flagged rather than corrected. A <em>dissidence</em> — an objection recorded without a full roll call — appears on the items of the Decisions page, not here." class="avis">
+    <strong>Comment les votes nominatifs du conseil de Montréal sont obtenus.</strong> À la Ville de
+    Montréal, la plupart des décisions sont adoptées à main levée, sans que personne ne soit nommé.
+    Quand un membre demande un <strong>vote enregistré</strong>, le greffier fait l'appel et le
+    procès-verbal consigne nommément qui vote pour et qui vote contre. Ces noms sont extraits du
+    texte des procès-verbaux par lecture automatique&nbsp;: chaque vote garde le passage d'origine et
+    tout écart avec le décompte officiel du document est signalé plutôt que corrigé. Les
+    <em>dissidences</em> — une opposition consignée sans appel nominal complet — figurent sur les
+    fiches de la page Décisions, pas ici.
   </div>
-  <p class="compte" id="compte-lexique"></p>
-  <div id="liste-lexique"></div>
+
+  <details class="carte pliante bloc-tableau">
+    <summary>
+      <div class="meta">
+        <span data-en="table" class="puce">tableau</span>
+        <span id="resume-dissidence"></span>
+      </div>
+      <p data-en="Votes against, by person" class="objet">Votes contre, par personne</p>
+    </summary>
+    <div class="corps">
+  <p data-en="Raw count, without interpretation. Voting against is neither a flaw nor a merit: it is a position." class="compte">Décompte brut, sans interprétation. Voter contre n'est ni un défaut ni un mérite&nbsp;: c'est une position.</p>
+  <table id="table-dissidence">
+    <thead><tr><th data-en="Person">Personne</th><th data-en="Most frequent body">Instance la plus fréquente</th><th data-en="Votes against" class="n">Votes contre</th></tr></thead>
+    <tbody></tbody>
+  </table>
+    </div>
+  </details>
+
+  <h2 data-en="The recorded votes" class="section">Les votes enregistrés</h2>
+  <div class="barre-outils">
+    <input data-en-placeholder="Search subjects or names…" type="search" id="rech-votes" placeholder="Rechercher dans l'objet ou les noms…">
+    <select id="filtre-theme-votes"><option data-en="All topics" value="">Tous les sujets</option></select>
+    <select id="filtre-instance-votes"><option data-en="All bodies" value="">Toutes les instances</option></select>
+    <button data-en="Expand all" type="button" class="bouton-lien" id="tout-deplier">Tout déplier</button>
+  </div>
+  <p class="compte" id="compte-votes"></p>
+  <div id="liste-votes"></div>
+  <button data-en="10 more" class="plus" id="plus-votes" hidden>10 de plus</button>
 </main>
 
 <footer>
   <div class="contenu">
     <p data-en="Independent citizen site. No connection with the City of Montréal, no official status. If anything differs, the original PDF document prevails. <a href=&quot;sources&quot;>Sources</a>.">Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
-    En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees">Sources</a>.</p>
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees-de-montreal">Sources</a>.</p>
   </div>
 </footer>
 

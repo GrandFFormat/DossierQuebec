@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Votes nominatifs au conseil de Longueuil — DossierVilleDeLongueuil</title>
-<meta name="description" content="Qui a voté pour et qui a voté contre au conseil de ville et au conseil d'agglomération de Longueuil : les votes nominatifs consignés dans les procès-verbaux officiels.">
-<link rel="canonical" href="https://dossierquebec.ca/longueuil/votes-nominatifs">
+<title>Votes nominatifs au conseil de la Ville de Lévis — DossierVilleDeLévis</title>
+<meta name="description" content="Qui a voté pour et qui a voté contre au conseil de la Ville de Lévis : les votes nominatifs consignés dans les procès-verbaux officiels.">
+<link rel="canonical" href="https://dossierquebec.ca/levis/votes-nominatifs-du-conseil-de-levis">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DossierQuébec">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:title" content="Votes nominatifs au conseil de Longueuil — DossierVilleDeLongueuil">
-<meta property="og:description" content="Qui a voté pour et qui a voté contre au conseil de ville et au conseil d'agglomération de Longueuil : les votes nominatifs consignés dans les procès-verbaux officiels.">
-<meta property="og:url" content="https://dossierquebec.ca/longueuil/votes-nominatifs">
+<meta property="og:title" content="Votes nominatifs au conseil de la Ville de Lévis — DossierVilleDeLévis">
+<meta property="og:description" content="Qui a voté pour et qui a voté contre au conseil de la Ville de Lévis : les votes nominatifs consignés dans les procès-verbaux officiels.">
+<meta property="og:url" content="https://dossierquebec.ca/levis/votes-nominatifs-du-conseil-de-levis">
 <meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <meta property="og:image:width" content="1702">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Votes nominatifs au conseil de Longueuil — DossierVilleDeLongueuil">
-<meta name="twitter:description" content="Qui a voté pour et qui a voté contre au conseil de ville et au conseil d'agglomération de Longueuil : les votes nominatifs consignés dans les procès-verbaux officiels.">
+<meta name="twitter:title" content="Votes nominatifs au conseil de la Ville de Lévis — DossierVilleDeLévis">
+<meta name="twitter:description" content="Qui a voté pour et qui a voté contre au conseil de la Ville de Lévis : les votes nominatifs consignés dans les procès-verbaux officiels.">
 <meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,10 +28,10 @@
      du système ensuite. */
   (function () {
     try {
-      var t = localStorage.getItem('dvm:theme');
+      var t = localStorage.getItem('dvq:theme');
       if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
       document.documentElement.dataset.theme = t;
-      var z = parseInt(localStorage.getItem('dvm:zoom'), 10);
+      var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
       if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
     } catch (e) {}
   })();
@@ -50,14 +50,14 @@
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Ville de Longueuil",
-      "item": "https://dossierquebec.ca/longueuil/"
+      "name": "Ville de Lévis",
+      "item": "https://dossierquebec.ca/levis/"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": "Votes nominatifs",
-      "item": "https://dossierquebec.ca/longueuil/votes-nominatifs"
+      "item": "https://dossierquebec.ca/levis/votes-nominatifs-du-conseil-de-levis"
     }
   ]
 }
@@ -65,26 +65,26 @@
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="/commun/abonnes.css">
 </head>
-<body data-page="votes" data-ville="longueuil">
+<body data-page="votes" data-ville="levis">
 
 <header>
   <div class="contenu">
     <div class="titre-ligne">
-      <a href="./"><p class="logo-titre">Dossier<span class="marque">VilleDeLongueuil</span></p></a><a class="lien-dq" href="/" title="DossierQuébec — l'Assemblée nationale en clair" aria-label="DossierQuébec — l'Assemblée nationale en clair" data-en-title="DossierQuébec — Quebec's National Assembly in plain language" data-en-aria-label="DossierQuébec — Quebec's National Assembly in plain language"></a>
+      <a href="./"><p class="logo-titre">Dossier<span class="marque">VilleDeLévis</span></p></a><a class="lien-dq" href="/" title="DossierQuébec — l'Assemblée nationale en clair" aria-label="DossierQuébec — l'Assemblée nationale en clair" data-en-title="DossierQuébec — Quebec's National Assembly in plain language" data-en-aria-label="DossierQuébec — Quebec's National Assembly in plain language"></a>
       <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
       <details class="ab-villes" id="villes"></details>
     </div>
     <p class="sous-titre">
-      Les décisions de la Ville de Longueuil, lisibles. Données publiques, reprises telles quelles
-      des procès-verbaux et des documents de séance officiels de la Ville.
+      Les décisions de la Ville de Lévis, lisibles. Données publiques, reprises telles quelles
+      des procès-verbaux officiels de la Ville.
     </p>
     <nav>
       <a href="./">Accueil</a>
-      <a href="decisions-de-la-ville-de-longueuil">Décisions</a>
-      <a href="votes-nominatifs" aria-current="page">Votes nominatifs</a>
-      <a href="conseil-de-ville">Conseil de ville</a>
-      <a href="lexique-municipal">Lexique</a>
-      <a href="https://longueuil.quebec/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Longueuil (nouvel onglet)">Ville de Longueuil ↗</a>
+      <a href="decisions-de-la-ville-de-levis">Décisions</a>
+      <a href="votes-nominatifs-du-conseil-de-levis" aria-current="page">Votes nominatifs</a>
+      <a href="conseil-municipal-de-levis">Conseil municipal</a>
+      <a href="lexique-municipal-de-levis">Lexique</a>
+      <a href="https://levis.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Lévis (nouvel onglet)">Ville de Lévis ↗</a>
       <div class="outils">
         <div class="taille-texte" role="group" aria-label="Taille du texte">
           <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
@@ -101,22 +101,17 @@
 <main class="contenu">
   <div id="chargement" class="avis">Chargement des données…</div>
 
-  <h1 data-en="Recorded votes, Longueuil council" class="page">Votes nominatifs du conseil de Longueuil</h1>
+  <h1 data-en="Recorded votes, Lévis council" class="page">Votes nominatifs du conseil de Lévis</h1>
   <div class="avis">
-    <strong>Comment les votes nominatifs du conseil de Longueuil sont obtenus.</strong> À la Ville de
-    Longueuil, presque toutes les décisions sont « adoptées à l'unanimité », sans que personne ne
-    soit nommé. Quand un membre <strong>demande le vote</strong>, le procès-verbal consigne nommément
-    qui vote en faveur et qui vote contre. Ces noms sont extraits du texte des procès-verbaux par
-    lecture automatique&nbsp;: chaque vote garde le passage d'origine et tout écart avec le décompte
-    imprimé est signalé plutôt que corrigé. Les <em>dissidences</em> — « X exprime sa dissidence »,
-    sans appel nominal — figurent sur les fiches de la page Décisions, pas ici.
-  </div>
-  <div class="avis">
-    <strong>Deux années, pas une.</strong> Depuis l'élection municipale de novembre 2025, le conseil
-    de ville et le conseil d'agglomération n'ont tenu aucun vote divisé&nbsp;: tout ce qui a été
-    décidé en 2026 l'a été à l'unanimité. Pour que cette page montre quelque chose, elle couvre aussi
-    2025, avec le conseil de l'époque. Au conseil d'agglomération, où chaque ville pèse selon sa
-    population, le procès-verbal nomme les votants mais n'imprime pas de décompte.
+    <strong>Comment les votes nominatifs du conseil de Lévis sont obtenus.</strong> Au conseil de la
+    Ville, la plupart des décisions sont «&nbsp;adoptées à l'unanimité&nbsp;», sans que personne ne
+    soit nommé. Quand un membre le demande, le président du conseil <strong>appelle le vote</strong>
+    et le procès-verbal consigne nommément qui vote en faveur et qui vote en défaveur. Ces noms sont
+    extraits du texte des procès-verbaux par lecture automatique. La Ville n'imprime pas de
+    décompte&nbsp;: chaque nom est recoupé avec la liste des présences de la séance, et le résultat
+    avec celui que déclare le président&nbsp;; tout écart est signalé plutôt que corrigé, et chaque
+    vote garde le passage d'origine. Les conseils d'arrondissement notent «&nbsp;adoptée à la
+    majorité&nbsp;» sans nommer personne&nbsp;: ces décisions figurent sur la page Décisions, pas ici.
   </div>
 
   <details class="carte pliante bloc-tableau">
@@ -136,7 +131,7 @@
     </div>
   </details>
 
-  <h2 class="section">Les votes nominatifs</h2>
+  <h2 class="section">Les votes enregistrés</h2>
   <div class="barre-outils">
     <input type="search" id="rech-votes" placeholder="Rechercher dans l'objet ou les noms…">
     <select id="filtre-theme-votes"><option value="">Tous les sujets</option></select>
@@ -150,8 +145,8 @@
 
 <footer>
   <div class="contenu">
-    <p>Site citoyen indépendant. Aucun lien avec la Ville de Longueuil, aucun caractère officiel.
-    En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees">Sources</a>.</p>
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Lévis, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees-de-levis">Sources</a>.</p>
   </div>
 </footer>
 
@@ -159,7 +154,7 @@
 <script type="module" src="/commun/entete-volet.js"></script>
 <script type="module" src="/commun/abonnes.js"></script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
-     Même projet Vercel : les pages vues de /longueuil/ s'ajoutent au même tableau de
+     Même projet Vercel : les pages vues de /levis/ s'ajoutent au même tableau de
      bord. En local le script n'existe pas (404 sans conséquence). -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>

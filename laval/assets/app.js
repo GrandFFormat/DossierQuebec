@@ -222,7 +222,7 @@ function corpsDecision(d) {
     ${s?.service ? `<p class="faits">Au sommaire décisionnel&nbsp;: service responsable, ${echapper(s.service)}${s.montant && !d.montant ? `&nbsp;; montant, ${echapper(s.montant)}` : ''}.</p>` : ''}
     ${d.proposeur ? `<p class="faits">Proposée par ${echapper(d.proposeur)}${d.appuyeur ? `, appuyée par ${echapper(d.appuyeur)}` : ''}.</p>` : ''}
     ${d.ct ? `<p class="faits">Certificat de trésorerie ${echapper(d.ct)}.</p>` : ''}
-    ${d.voteEnregistre && d.numero ? `<p class="faits">Vote nominal consigné&nbsp;: <a href="votes-nominatifs?q=${encodeURIComponent(d.numero)}">qui a voté pour, qui a voté contre</a>.</p>` : ''}
+    ${d.voteEnregistre && d.numero ? `<p class="faits">Vote nominal consigné&nbsp;: <a href="votes-nominatifs-du-conseil-de-laval?q=${encodeURIComponent(d.numero)}">qui a voté pour, qui a voté contre</a>.</p>` : ''}
     ${d.dossier && !d.sommairePublie ? `<p class="faits">Sommaire décisionnel ${echapper(d.dossier)} — non publié par la Ville${comiteExecutif ? ' (les sommaires du comité exécutif ne le sont pas)' : ''}.</p>` : ''}
     <p class="liens-pdf">
       ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">Procès-verbal (PDF)${page ? `, page ${page}` : ''} ↗</a>` : ''}
@@ -654,7 +654,7 @@ function carteElu(m) {
       </div>
       ${habitants ? `<p class="compte" style="margin:6px 0 0">${echapper(habitants)} habitants dans le district, selon la Ville.</p>` : ''}
       ${presences ? `<p class="compte" style="margin:6px 0 0"><span class="presences"><span class="p-present">présent${e} à ${presences.presences} séance${presences.presences > 1 ? 's' : ''}</span><span class="p-absent">absent${e} à ${presences.absences}</span></span> sur ${presences.seances} où la personne est nommée${anneePresences ? ` en ${echapper(anneePresences)}` : ''}${presences.inconnu ? ` (${presences.inconnu} sans mention)` : ''}.</p>` : ''}
-      ${votesContre ? `<p class="compte" style="margin:6px 0 0">${votesContre} vote${votesContre > 1 ? 's' : ''} contre consigné${votesContre > 1 ? 's' : ''}${etat.votes?.parametres?.annee ? ` en ${echapper(etat.votes.parametres.annee)}` : ''} — <a href="votes-nominatifs?q=${encodeURIComponent(m.nomComplet)}">les voir</a>.</p>` : ''}
+      ${votesContre ? `<p class="compte" style="margin:6px 0 0">${votesContre} vote${votesContre > 1 ? 's' : ''} contre consigné${votesContre > 1 ? 's' : ''}${etat.votes?.parametres?.annee ? ` en ${echapper(etat.votes.parametres.annee)}` : ''} — <a href="votes-nominatifs-du-conseil-de-laval?q=${encodeURIComponent(m.nomComplet)}">les voir</a>.</p>` : ''}
       <p class="coordonnees">
         ${[
           m.courriel ? `<a href="mailto:${echapper(m.courriel)}">${echapper(m.courriel)}</a>` : '',
@@ -994,13 +994,13 @@ function rendreAccueil() {
     chiffres.push({ n: nombreFr(decisions), quoi: `décisions lues dans les procès-verbaux de ${etat.decisions.parametres.annee}`, lien: 'decisions-de-la-ville-de-laval' });
   }
   if (etat.votes) {
-    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: `votes nominaux au conseil municipal en ${etat.votes.parametres?.annee ?? ''}`.trim(), lien: 'votes-nominatifs' });
+    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: `votes nominaux au conseil municipal en ${etat.votes.parametres?.annee ?? ''}`.trim(), lien: 'votes-nominatifs-du-conseil-de-laval' });
   }
   if (etat.resumes) {
     chiffres.push({ n: nombreFr(etat.resumes.nombre ?? etat.parSommaire.size), quoi: 'sommaires décisionnels résumés en langage clair', lien: 'decisions-de-la-ville-de-laval' });
   }
   if (etat.elus) {
-    chiffres.push({ n: etat.elus.nombre ?? etat.elus.membres?.length ?? 0, quoi: 'membres du conseil municipal', lien: 'conseil-municipal' });
+    chiffres.push({ n: etat.elus.nombre ?? etat.elus.membres?.length ?? 0, quoi: 'membres du conseil municipal', lien: 'conseil-municipal-de-laval' });
   }
   if ($('#chiffres')) {
     $('#chiffres').innerHTML = chiffres
