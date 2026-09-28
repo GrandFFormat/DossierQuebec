@@ -268,3 +268,9 @@ if (VILLE && VILLES[VILLE]) {
   equiperTout();
   rafraichirSession();
 }
+
+// La fleur de lys à côté du logo (lien vers DossierQuébec) se retourne toutes les 20 secondes, comme
+// la feuille d'érable de DQ. Pas pour qui a demandé moins d'animations.
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  setInterval(() => { for (const f of document.querySelectorAll('.titre-ligne .lien-dq')) f.classList.toggle('retournee'); }, 20000);
+}

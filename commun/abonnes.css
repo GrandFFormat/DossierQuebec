@@ -738,7 +738,11 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
   background-color: var(--accent);
   -webkit-mask: url(/commun/fleur-de-lys.png) center / contain no-repeat;
   mask: url(/commun/fleur-de-lys.png) center / contain no-repeat;
-  transition: transform .15s ease;
+  transition: transform .7s ease-in-out;
 }
+/* Comme la feuille d'érable de DQ : elle se retourne toutes les 20 secondes (commun/abonnes.js). */
+.titre-ligne .lien-dq.retournee { transform: rotateY(180deg); }
 .titre-ligne .lien-dq:hover, .titre-ligne .lien-dq:focus-visible { transform: scale(1.15); }
+.titre-ligne .lien-dq.retournee:hover, .titre-ligne .lien-dq.retournee:focus-visible { transform: rotateY(180deg) scale(1.15); }
+@media (prefers-reduced-motion: reduce) { .titre-ligne .lien-dq { transition: none; } }
 @media (max-width: 620px) { .titre-ligne .lien-dq { width: 19px; height: 19px; } }
