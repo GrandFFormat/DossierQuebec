@@ -266,6 +266,7 @@ function goToFederal(evt){
       <ol class="maj-liste" id="journalListe" aria-live="polite"></ol>
     <div class="prerendu" data-prerendu="journal">
       <ul aria-label="Mises à jour du site">
+        <li><span class="pr-meta">27 septembre 2026 —</span> <b>Plus d’abonnement payant : DossierQuébec est entièrement gratuit</b> L’abonnement payant est retiré, sur DossierQuébec comme dans les villes, avec ce qu’il vendait : les alertes par courriel, les mots-clés, les organismes suivis, l’agenda des conseils et l’export. Tout le reste est gratuit : lire, le détail de l’argent, l’infolettre mensuelle, et un compte gratuit qui suit jusqu’à 3 projets de loi ou projets de ville.</li>
         <li><span class="pr-meta">27 septembre 2026 —</span> <b>L’adresse de chaque page dit ce qu’on y trouve</b> Dans les cinq volets municipaux, l’adresse d’une page reprend son titre : /quebec/votes devient /quebec/votes-nominatifs, /quebec/conseil devient /quebec/conseil-municipal (/longueuil/conseil-de-ville, puisque Longueuil a un conseil de ville), /quebec/lexique devient /quebec/lexique-municipal et /quebec/sources devient /quebec/sources-des-donnees. Les décisions gardent /quebec/decisions. Les anciennes adresses continuent de fonctionner pour toujours : un lien reçu par courriel ou mis en signet mène à la nouvelle page.</li>
         <li><span class="pr-meta">27 septembre 2026 —</span> <b>Lévis, Longueuil et Laval : un titre par page, et le fil d’Ariane partout</b> Comme Québec et Montréal ce matin, les trois autres volets annoncent le sujet de la page en grand titre — « Décisions de la Ville de Lévis », « Le conseil de ville de Longueuil » — au lieu du nom du site, répété d’une page à l’autre. Les trente pages des cinq volets portent aussi leur fil d’Ariane, pour que les moteurs de recherche affichent « DossierQuébec › Ville de Québec › Conseil municipal » plutôt que l’adresse nue. Laval parlait de « votes nominaux » : c’est « votes nominatifs », comme partout ailleurs.</li>
         <li><span class="pr-meta">27 septembre 2026 —</span> <b>Québec et Montréal : imprimer une séance entière</b> Sur ordinateur, chaque séance de la page des décisions a une icône d’imprimante à gauche du +. Elle imprime cette séance seulement, avec toutes ses décisions dépliées. Chaque page intérieure porte aussi un titre qui dit son sujet (« Décisions de la Ville de Montréal »…).</li>
@@ -285,9 +286,8 @@ function goToFederal(evt){
         <li><span class="pr-meta">24 septembre 2026 —</span> <b>Les projets challengés réapparaissent sur l’accueil</b> Neuf projets de loi avaient reçu des demandes d’explication, et l’accueil affichait pourtant « Personne n’a encore demandé d’explication ». La section ne cherchait les titres que parmi les quatre projets récents chargés par la page : les neuf autres disparaissaient sans un mot. Ils sont de retour, avec leur nombre de demandes. Le filtre « Challengés » de la page des projets de loi, qui ne renvoyait jamais rien, fonctionne lui aussi, et les cartes portent de nouveau leur compteur.</li>
         <li><span class="pr-meta">23 septembre 2026 —</span> <b>Page Abonnement : ce qui est promis, et rien de plus</b> Une relecture ligne par ligne a corrigé ce que la page promettait de trop : l’ordre du jour du conseil n’existe qu’à Québec et à Lévis, le compte rendu mensuel qu’à Québec et à Montréal et seulement si on coche la case, les courriels d’alerte sont écrits en français, un mot-clé ne trouve que les décisions qui le nomment, et un code cadeau ne s’ajoute pas à un abonnement payant. La liste des étapes d’un projet de loi correspond maintenant aux alertes vraiment envoyées. Après le paiement, on revient dans son espace : Mon dossier du côté de l’Assemblée, Mes dossiers du côté des villes. Enfin, un compte dont l’abonnement s’arrête peut retirer ses mots-clés et ses organismes, qui occupaient une place dans ses suivis sans qu’il puisse rien y faire.</li>
         <li><span class="pr-meta">23 septembre 2026 —</span> <b>Un seul compte de suivis : 10 en tout</b> Projets de ville, projets de loi, mots-clés et organismes comptent maintenant ensemble : 10 suivis avec l’abonnement, 3 sans, répartis comme vous le voulez. Les ministres et députés suivis, eux, ne comptent pas dans ce total.</li>
-        <li><span class="pr-meta">23 septembre 2026 —</span> <b>Mon dossier : l’Assemblée d’un côté, les villes de l’autre</b> Le provincial a maintenant sa propre page, Mon dossier : les projets de loi suivis, les ministres et députés suivis, les mots-clés de l’Assemblée et l’alerte du matin. Mes dossiers redevient la page des villes seulement.</li>
       </ul>
-      <p class="pr-note">Les 20 plus récentes, sur 39.</p>
+      <p class="pr-note">Les 20 plus récentes, sur 40.</p>
     </div>
       <button type="button" class="maj-plus" id="journalPlus" hidden></button>
     </div>
@@ -337,7 +337,6 @@ function goToFederal(evt){
     <a href="/lexique" data-i18n="nav.lexique">Lexique</a>
     <a href="/sources" data-i18n="fil.bd">Mises à jour du site</a>
     <a href="/mon-dossier" data-i18n="nav.mondossier">Mon dossier</a>
-    <a href="/abonnement?de=assemblee" data-i18n="footer.abonnement">Abonnement</a>
     <span class="footer-nav-villes"><span data-i18n="footer.villes">Villes :</span>
       <a href="/quebec/">Québec</a>
       <a href="/montreal/">Montréal</a>

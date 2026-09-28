@@ -3,7 +3,7 @@ Allow: /
 
 # Tout le site est ouvert aux moteurs de recherche, volets municipaux compris (/quebec/, /montreal/,
 # /levis/, /longueuil/, /laval/) depuis le 21 septembre 2026. Les pages de compte (mes-dossiers,
-# abonnement) portent leur propre balise noindex, et /api/ un en-tête X-Robots-Tag (vercel.json) :
+# mon-dossier) portent leur propre balise noindex, et /api/ un en-tête X-Robots-Tag (vercel.json) :
 # on ne les bloque pas ici, parce qu'un robot à qui l'on interdit de lire une page ne voit jamais
 # le noindex qu'elle contient.
 

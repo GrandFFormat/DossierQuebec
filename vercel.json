@@ -7,7 +7,7 @@
       "schedule": "0 13 * * 1"
     },
     {
-      "path": "/api/alertes-projets",
+      "path": "/api/infolettre-envoi",
       "schedule": "0 11 * * *"
     }
   ],
@@ -287,6 +287,16 @@
       "source": "/laval/sources.html",
       "destination": "/laval/sources-des-donnees",
       "permanent": true
+    },
+    {
+      "source": "/abonnement",
+      "destination": "/mes-dossiers",
+      "permanent": false
+    },
+    {
+      "source": "/exemple-compte-rendu-aout-2026",
+      "destination": "/",
+      "permanent": false
     }
   ]
 }

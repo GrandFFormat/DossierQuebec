@@ -268,35 +268,18 @@ function goToFederal(evt){
       <div class="stat-cell"><b id="statVotes">—</b><span data-i18n="stat.votes">Votes nominatifs</span></div>
     </div>
 
-    <!-- À la place de « Par où commencer » (Martin, 21 sept. 2026) : l'abonnement, la connexion
-         et Mes dossiers. Les sections restent liées par le menu du haut et le pied de page.
-         #promoCompte est rempli par dq.js (renderPromoCompte) ; d'ici là, champ et bouton
-         restent désactivés, comme la boîte de Lexique. -->
+    <!-- À la place de « Par où commencer » (Martin, 21 sept. 2026) : le compte gratuit et Mon dossier.
+         L'abonnement payant qu'elle vendait a été retiré le 27 sept. 2026. #promoCompte est rempli
+         par dq.js (renderPromoCompte) ; d'ici là, champ et bouton restent désactivés. -->
     <div class="band band-blue bleed promo-alertes promo-accueil" id="band-alertes-accueil" role="region" aria-labelledby="promoAccueilTitre">
       <div class="promo-accueil-grille">
         <div>
-          <p class="promo-sur" data-i18n="promo.sur">Abonnement DossierQuébec</p>
-          <h2 id="promoAccueilTitre" data-i18n="promo.h">Soyez alerté quand un projet de loi change de statut</h2>
-          <p class="promo-texte" data-i18n="promo.p">Suivez un projet de loi d'un clic : un courriel le matin quand il passe à l'étape suivante, quand un élu que vous suivez en présente un, ou quand un nouveau projet contient vos mots-clés. Un seul courriel, tout réuni, rien les jours où rien ne bouge.</p>
-          <p class="promo-texte promo-dissolution" data-i18n="promo.diss">Les projets de loi de la 43e législature sont morts à la dissolution du 27 août : le suivi et les alertes commenceront avec les premiers projets de loi de la nouvelle législature, convoquée le 17 novembre 2026.</p>
-          <div class="promo-cta">
-            <a class="hero-cta" href="/abonnement?de=assemblee" data-i18n="promo.cta">Recevoir mes alertes — 10 $/mois</a>
-            <span class="promo-prix" data-i18n="promo.prix">ou 96 $ par an · annulable en tout temps</span>
-          </div>
-          <!-- Un seul quota, appliqué par Postgres (scripts/supabase-schema-mots-cles-portee.sql) :
-               10 suivis en tout, 3 sans abonnement, toutes sortes confondues. Les élus suivis
-               (table follows) n'en font pas partie. -->
-          <p class="promo-limites" data-i18n="promo.limites"><b>Avec l'abonnement :</b> 10 suivis en tout — projets de loi, projets de ville, mots-clés et organismes comptent ensemble — et les ministres et député·e·s de votre choix, sans limite. Sans abonnement : 3 projets de loi ou projets de ville.</p>
+          <p class="promo-sur" data-i18n="promo.sur">Compte gratuit</p>
+          <h2 id="promoAccueilTitre" data-i18n="promo.h">Suivez les projets de loi qui vous touchent</h2>
+          <p class="promo-texte" data-i18n="promo.p">Un compte gratuit, sans mot de passe : suivez jusqu'à 3 projets de loi ou projets de ville, et retrouvez-les dans Mon dossier, avec leur étape du moment.</p>
+          <p class="promo-texte promo-dissolution" data-i18n="promo.diss">Les projets de loi de la 43e législature sont morts à la dissolution du 27 août : le suivi reprendra avec les premiers projets de loi de la nouvelle législature, convoquée le 17 novembre 2026.</p>
         </div>
         <div class="promo-cote">
-        <!-- Martin, 21 sept. 2026 : dire, à côté du titre, que l'abonnement du provincial donne aussi
-             le suivi des villes. Seulement ce qui vaut pour les cinq : projets, rue ou quartier,
-             organismes (le détail de l'argent n'existe qu'à Québec, voir detail-argent-prototypes). -->
-        <div class="promo-villes">
-          <b class="promo-villes-titre" data-i18n="promo.villes.h">Aussi inclus : le suivi des villes</b>
-          <p data-i18n="promo.villes.p">Le même abonnement vous alerte aussi sur les décisions de <a href="/quebec/">Québec</a>, <a href="/montreal/">Montréal</a>, <a href="/levis/">Lévis</a>, <a href="/longueuil/">Longueuil</a> et <a href="/laval/">Laval</a> : les projets que vous suivez, votre rue, votre quartier, un organisme. Un seul abonnement, pas un par ville — les villes ont leur propre page, Mes dossiers.</p>
-          <a class="promo-villes-lien" href="/mes-dossiers#suggestions" data-i18n="promo.villes.lien">Choisir un projet de ville dans Mes dossiers →</a>
-        </div>
         <div class="promo-compte">
           <b class="promo-compte-titre" data-i18n="promo.compte.h">Votre compte</b>
           <div id="promoCompte">
@@ -536,22 +519,6 @@ function goToFederal(evt){
         <span class="bstep">Adoption / Sanction</span>
       </span>
       <a class="legend-link" href="/lexique" data-i18n="legend.link">C'est quoi ces étapes ? → Lexique</a>
-    </div>
-
-    <!-- L'abonnement vendu par les projets de loi, sur le site provincial (Martin, 21 sept. 2026 :
-         « si on parle de pdl, c'est au provincial qu'il faut faire la publicité »). Le lien ouvre la
-         version provinciale de /abonnement (?de=assemblee). La phrase de dissolution est cachée par
-         dq.js dès que ASSEMBLY.dissolved repasse à false. -->
-    <div class="band band-blue bleed promo-alertes" id="band-alertes-pl">
-      <p class="promo-sur" data-i18n="promo.sur">Abonnement DossierQuébec</p>
-      <h2 data-i18n="promo.h">Soyez alerté quand un projet de loi change de statut</h2>
-      <p class="promo-texte" data-i18n="promo.p">Suivez un projet de loi d'un clic : un courriel le matin quand il passe à l'étape suivante, quand un élu que vous suivez en présente un, ou quand un nouveau projet contient vos mots-clés. Un seul courriel, tout réuni, rien les jours où rien ne bouge.</p>
-      <p class="promo-texte promo-dissolution" id="promoDissolution" data-i18n="promo.diss">Les projets de loi de la 43e législature sont morts à la dissolution du 27 août : le suivi et les alertes commenceront avec les premiers projets de loi de la nouvelle législature, convoquée le 17 novembre 2026.</p>
-      <div class="promo-cta">
-        <a class="hero-cta" href="/abonnement?de=assemblee" data-i18n="promo.cta">Recevoir mes alertes — 10 $/mois</a>
-        <span class="promo-prix" data-i18n="promo.prix">ou 96 $ par an · annulable en tout temps</span>
-      </div>
-      <p class="promo-limites" data-i18n="promo.limites"><b>Avec l'abonnement :</b> 10 suivis en tout — projets de loi, projets de ville, mots-clés et organismes comptent ensemble — et les ministres et député·e·s de votre choix, sans limite. Sans abonnement : 3 projets de loi ou projets de ville.</p>
     </div>
 
     <!-- Titre de résultats (change avec le filtre actif) -->
@@ -965,16 +932,14 @@ function goToFederal(evt){
       <h2 class="hero-h1 hero-h1-md">
         <span class="hero-sujet" data-i18n="sujet.mondossier">Mon dossier</span>
         <span data-i18n="mdhero.l1">Vos projets de loi,</span>
-        <span class="hero-outline" data-i18n="mdhero.l2">vos élus, vos alertes.</span>
+        <span class="hero-outline" data-i18n="mdhero.l2">vos élus suivis.</span>
       </h2>
-      <p class="view-hero-sub" data-i18n="mdhero.sub">Ce que vous suivez à l'Assemblée nationale, et ce qui vous est envoyé. <b>Les décisions de votre ville vivent dans <a class="md-lien" href="/mes-dossiers">Mes dossiers</a>, à part.</b></p>
+      <p class="view-hero-sub" data-i18n="mdhero.sub">Ce que vous suivez à l'Assemblée nationale. <b>Les décisions de votre ville vivent dans <a class="md-lien" href="/mes-dossiers">Mes dossiers</a>, à part.</b></p>
     </div>
 
     <div id="mdCompte" class="md-bloc"></div>
     <div id="mdLois" class="md-bloc"></div>
     <div id="mdElus" class="md-bloc"></div>
-    <div id="mdMots" class="md-bloc"></div>
-    <div id="mdAlerte" class="md-bloc"></div>
   </section>
 
   <section class="view" id="view-bd">
@@ -1027,7 +992,6 @@ function goToFederal(evt){
     <a href="/lexique" data-i18n="nav.lexique">Lexique</a>
     <a href="/sources" data-i18n="fil.bd">Mises à jour du site</a>
     <a href="/mon-dossier" data-i18n="nav.mondossier">Mon dossier</a>
-    <a href="/abonnement?de=assemblee" data-i18n="footer.abonnement">Abonnement</a>
     <span class="footer-nav-villes"><span data-i18n="footer.villes">Villes :</span>
       <a href="/quebec/">Québec</a>
       <a href="/montreal/">Montréal</a>

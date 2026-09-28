@@ -49,23 +49,18 @@ async function estLectureSeule(id) {
   return r.ok && r.donnees?.[0]?.lecture_seule === true;
 }
 
-async function estAbonne(id) {
-  const r = await supabase(`/rest/v1/abonnements?user_id=eq.${id}&select=statut,fin,lecture_seule`);
-  const ligne = r.ok ? r.donnees?.[0] : null;
-  return Boolean(ligne && ligne.statut === 'actif' && (!ligne.fin || new Date(ligne.fin) > new Date()));
-}
 
 async function envoyerCourriel(m) {
   const { RESEND_API_KEY, DIGEST_FROM, MESSAGES_A } = process.env;
   if (!RESEND_API_KEY || !DIGEST_FROM || !MESSAGES_A) return false;
   const lieu = [VILLES[m.ville], m.numero].filter(Boolean).join(' ');
-  const sujet = `[DossierQuébec] ${SUJETS[m.sujet]}${lieu ? ` — ${lieu}` : ''}${m.abonne ? ' (abonné)' : ''}`;
+  const sujet = `[DossierQuébec] ${SUJETS[m.sujet]}${lieu ? ` — ${lieu}` : ''}`;
   const ligne = (etiquette, valeur) => (valeur ? `<tr><td style="padding:2px 12px 2px 0;vertical-align:top">${etiquette}</td><td style="padding:2px 0">${valeur}</td></tr>` : '');
   const fiche = m.ville && m.numero ? `${SITE}/${m.ville}/decisions.html?q=${encodeURIComponent(m.numero)}` : null;
   const html = `<div style="font-family:Arial,sans-serif;max-width:560px;color:#16191D;line-height:1.5">
     <p style="white-space:pre-wrap;margin:0 0 16px;font-size:15px">${echapper(m.message)}</p>
     <table style="font-size:13px;color:#5B6570;border-collapse:collapse">
-      ${ligne('De', `${echapper(m.email)} · ${m.abonne ? '<b style="color:#076338">abonné</b>' : 'pas abonné'}`)}
+      ${ligne('De', `${echapper(m.email)}`)}
       ${ligne('Sujet', SUJETS[m.sujet])}
       ${ligne('Décision', fiche ? `<a href="${echapper(fiche)}">${echapper(lieu)}</a>` : '')}
       ${ligne('Page', m.page ? `<a href="${echapper(SITE + m.page)}">${echapper(m.page)}</a>` : '')}
@@ -122,7 +117,7 @@ export default async function handler(req, res) {
   if (!recents.ok) return res.status(503).json({ erreur: 'service indisponible' });
   if (recents.donnees.length >= PAR_JOUR) return res.status(429).json({ erreur: 'limite atteinte' });
 
-  const m = { user_id: id, email, abonne: await estAbonne(id), sujet, message, ville, numero, page };
+  const m = { user_id: id, email, abonne: false, sujet, message, ville, numero, page };
   const courrielEnvoye = await envoyerCourriel(m);
   let insertion = await supabase('/rest/v1/messages_utilisateurs', {
     methode: 'POST',

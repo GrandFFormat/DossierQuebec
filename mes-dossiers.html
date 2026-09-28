@@ -29,10 +29,9 @@
     <div class="ab-haut-ligne">
       <a class="ab-marque" href="/">Dossier<span>Québec</span></a>
     </div>
-    <nav class="ab-nav" aria-label="Espace abonnés" data-en-aria-label="Subscriber area">
+    <nav class="ab-nav" aria-label="Mon compte" data-en-aria-label="My account">
       <div class="ab-onglets">
         <a href="/mes-dossiers" aria-current="page" data-en="My files">Mes dossiers</a>
-        <a href="/abonnement" data-en="Subscription">Abonnement</a>
         <a href="/mes-dossiers#ecrire" data-en="Write to us">Nous écrire</a>
       </div>
       <div class="ab-outils" id="outils"></div>
@@ -46,8 +45,6 @@
     <div id="infolettre"></div>
     <div id="mots"></div>
     <div id="organismes"></div>
-    <div id="export"></div>
-    <div id="ouverts"></div>
     <div id="suggestions"></div>
     <div id="liste"><p class="ab-vide" data-en="Loading…">Chargement…</p></div>
     <div id="pourquoi"></div>
@@ -182,8 +179,6 @@
     boiteInfolettre($('#infolettre'), null);
     motsCles(null, false);
     organismesSuivis(null, false);
-    exportTableur(null, false);
-    dossiersOuverts(null, false);
     $('#liste').innerHTML = `<div class="ab-carte">
       <h3>${tr('Connectez-vous', 'Sign in')}</h3>
       <p>${tr('Un seul compte pour DossierQuébec et toutes les villes. On vous envoie un lien par courriel, sans mot de passe.', 'One account for DossierQuébec and every city. We email you a link, no password needed.')}</p>
@@ -192,7 +187,7 @@
       <p class="ab-note">${tr('Un seul lien peut être envoyé toutes les 5 minutes. Pensez à vérifier vos courriels indésirables.', 'Only one link can be sent every 5 minutes. Check your spam folder.')}</p>
       <p class="ab-note" id="etat-lien" aria-live="polite"></p>
     </div>`;
-    pourquoi({ connecte: false, abonne: false });
+    pourquoi({ connecte: false });
     suggestions(null, new Set());
     ecrire(null);
     $('#form-lien').addEventListener('submit', async (e) => {
@@ -213,144 +208,30 @@
     });
   }
 
-  // ---------- compte gratuit et abonnement payant ----------
-  // Deux choses différentes, à ne jamais confondre :
-  //   - le compte gratuit (un lien par courriel) : suivre des projets, leur récapitulatif, écrire ;
-  //   - l'abonnement payant : les alertes, le détail de l'argent, etc.
-  // Pas connecté : les deux, côte à côte. Connecté sans abonnement : seulement ce que le payant
-  // ajoute (le compte, il l'a déjà). Abonné : rien.
+  // ---------- le compte gratuit ----------
+  // Ce que le compte donne, montré à qui n'est pas connecté. (Il y avait à côté l'abonnement payant,
+  // retiré le 27 sept. 2026 avec tout ce qu'il vendait : alertes, mots-clés, organismes, agenda, export.)
   const AVANTAGES_COMPTE = EN
     ? `<ul>
-        <li><strong>Follow 3 things in all</strong> — city projects, in any city, right here; bills at the Assembly, in <a class="ab-lien" href="/mon-dossier">My file</a>. The subscription raises it to 10, keywords and organizations included.</li>
+        <li><strong>Follow 3 things in all</strong> — city projects, in any city, right here; bills at the Assembly, in <a class="ab-lien" href="/mon-dossier">My file</a>.</li>
         <li><strong>“Where the project stands”</strong>: the recap, the timeline, decisions by month and what is still awaiting a decision.</li>
         <li><strong>Every city covered</strong>, with the same account.</li>
         <li><strong>Write to us</strong> and <strong>report an error</strong> on an item.</li>
       </ul>
       <p class="ab-note" style="margin:0">No password: a sign-in link by email.</p>`
     : `<ul>
-        <li><strong>Suivre 3 choses en tout</strong> — des projets de ville, dans la ville de votre choix, ici même ; des projets de loi de l'Assemblée, dans <a class="ab-lien" href="/mon-dossier">Mon dossier</a>. L'abonnement en donne 10, mots-clés et organismes compris.</li>
+        <li><strong>Suivre 3 choses en tout</strong> — des projets de ville, dans la ville de votre choix, ici même ; des projets de loi de l'Assemblée, dans <a class="ab-lien" href="/mon-dossier">Mon dossier</a>.</li>
         <li><strong>« Où en est le projet »</strong> : le récapitulatif, la ligne du temps, les décisions par mois et ce qui attend encore une décision.</li>
         <li><strong>Toutes les villes couvertes</strong>, avec le même compte.</li>
         <li><strong>Nous écrire</strong> et <strong>signaler une erreur</strong> sur une fiche.</li>
       </ul>
       <p class="ab-note" style="margin:0">Sans mot de passe : un lien de connexion par courriel.</p>`;
 
-  function pourquoi({ connecte, abonne }) {
-    if (abonne) { $('#pourquoi').innerHTML = ''; return; }
-    if (!connecte) {
-      $('#pourquoi').innerHTML = `<section class="ab-pourquoi-deux">
-        <h2>${tr('Compte gratuit ou abonnement payant', 'Free account or paid subscription')}</h2>
-        <div class="ab-grille">
-          <div class="ab-carte">
-            <h3>${tr('Avec un compte gratuit', 'With a free account')}</h3>
-            ${AVANTAGES_COMPTE}
-          </div>
-          <div class="ab-carte ab-pourquoi">
-            <h3>${tr("Avec l'abonnement payant", 'With the paid subscription')} <span class="ab-note">${tr('(10 $ par mois ou 96 $ par an)', '($10 a month or $96 a year)')}</span></h3>
-            <p class="ab-note" style="margin:0 0 8px">${tr('Tout le compte gratuit, plus :', 'Everything in the free account, plus:')}</p>
-            <ul>${AVANTAGES_PAYANTS}</ul>
-            <a class="ab-bouton" href="/abonnement" data-mesure="mes_dossiers_voir_abonnement">${tr("Voir l'abonnement", 'See the subscription')}</a>
-          </div>
-        </div>
-        <p class="ab-note">${tr('Un seul abonnement vaut pour toutes les villes couvertes — pas un abonnement par ville. Et chaque abonnement garde le reste du site gratuit pour tout le monde.', 'One subscription covers every city — not one subscription per city. And every subscription keeps the rest of the site free for everyone.')}</p>
+  function pourquoi({ connecte }) {
+    $('#pourquoi').innerHTML = connecte ? '' : `<section class="ab-carte">
+        <h2 style="margin-top:0">${tr('Avec un compte gratuit', 'With a free account')}</h2>
+        ${AVANTAGES_COMPTE}
       </section>`;
-      return;
-    }
-    $('#pourquoi').innerHTML = `<section class="ab-carte ab-pourquoi">
-      <h2 style="margin-top:0">${tr("Ce que l'abonnement payant ajoute à votre compte", 'What the paid subscription adds to your account')}</h2>
-      <p class="ab-chapeau" style="margin-bottom:10px">${tr("Votre compte gratuit vous montre tout quand vous venez voir. L'abonnement payant vous dit <strong>quand</strong> il y a quelque chose à voir, et vous donne les outils pour suivre et exporter.", 'Your free account shows you everything when you come to look. The paid subscription tells you <strong>when</strong> there is something to see, and gives you the tools to follow and export.')}</p>
-      <ul>${AVANTAGES_PAYANTS}</ul>
-      <p class="ab-note" style="margin:0 0 14px">${tr('10 $ par mois ou 96 $ par an. Un seul abonnement vaut pour toutes les villes couvertes et pour l’Assemblée nationale — pas un abonnement par ville. Et chaque abonnement garde le reste du site gratuit pour tout le monde.', '$10 a month or $96 a year. One subscription covers every city and the National Assembly — not one per city. And every subscription keeps the rest of the site free for everyone.')}</p>
-      <a class="ab-bouton" href="/abonnement" data-mesure="mes_dossiers_voir_abonnement">${tr("Voir l'abonnement", 'See the subscription')}</a>
-    </section>`;
-  }
-
-  const AVANTAGES_PAYANTS = EN ? `
-        <li><strong>An email alert when your projects move</strong>: a new item or a new decision — and, in Québec City and Lévis, an item that gets its final decision — with the updated recap when there is one. Nothing in the weeks when nothing moves.</li>
-        <li><strong>Alerts for your neighbourhood, your street or a keyword</strong>: “everything the City decides about 1re Avenue”, “in Limoilou”, “about snow removal”.</li>
-        <li><strong>Follow an organization or a company</strong>: this year's decisions that name it — contracts, grants, agreements — with each amount as written, and an alert when a new one names it.</li>
-        <li><strong>What's coming up at council</strong>: the items on the agenda of each meeting, with their summary — estimated from the documents the City publishes.</li>
-        <li><strong>The monthly recap, subscriber edition</strong>: everything the City decided in the month, in plain language. <a class="ab-lien" href="/exemple-compte-rendu-aout-2026">See the August 2026 issue</a> (in French).</li>
-        <li><strong>Export to a spreadsheet or PDF</strong> (Excel, CSV or printable PDF): you choose a project, a word or a name and the columns, with the money details when they have been read.</li>
-        <li class="ab-note">Per account: 10 follows in all — city projects, bills, keywords and organizations together — and 10 exports a month. The same subscription covers the National Assembly, whose follows live in <a class="ab-lien" href="/mon-dossier">My file</a> and share the same count.</li>` : `
-        <li><strong>Une alerte par courriel quand vos projets bougent</strong> : un nouveau dossier, une nouvelle décision — et, à Québec et à Lévis, un dossier qui reçoit sa décision finale — avec le récapitulatif mis à jour s'il y en a un. Rien les semaines où rien n'avance.</li>
-        <li><strong>Des alertes pour votre quartier, votre rue ou un mot-clé</strong> : « tout ce que la Ville décide sur la 1re Avenue », « dans Limoilou », « sur le déneigement ».</li>
-        <li><strong>Suivre un organisme ou une entreprise</strong> : les décisions de l'année qui le nomment — contrats, subventions, ententes — avec le montant de chacune tel qu'écrit, et une alerte quand une nouvelle le nomme.</li>
-        <li><strong>Ce qui s'en vient au conseil</strong> : les dossiers à l'ordre du jour de chaque séance, avec leur résumé — estimé d'après les documents publiés par la Ville.</li>
-        <li><strong>Le compte rendu mensuel, édition abonnés</strong> : tout ce que la Ville a décidé dans le mois, en langage clair. <a class="ab-lien" href="/exemple-compte-rendu-aout-2026">Voir l'édition d'août 2026</a>.</li>
-        <li><strong>L'export en tableur ou en PDF</strong> (Excel, CSV ou PDF à imprimer) : vous choisissez un projet, un mot ou un nom et les colonnes, avec le détail de l'argent quand il est lu.</li>
-        <li class="ab-note">Par compte : 10 suivis en tout — projets de ville, projets de loi, mots-clés et organismes ensemble — et 10 exports par mois. Le même abonnement couvre l'Assemblée nationale, dont les suivis vivent dans <a class="ab-lien" href="/mon-dossier">Mon dossier</a> et comptent dans le même total.</li>`;
-
-  // ---------- l'alerte du matin (abonnés) ----------
-  // La première ligne de la boîte « Mes courriels » : l'interrupteur (alertes_preferences), la date
-  // de la dernière alerte (alertes_envois) et un courriel d'essai (api/alertes-projets.js?essai=moi).
-  // Rendue par /commun/infolettre.js avec les infolettres : tous les courriels se cochent au même endroit.
-  async function ligneAlerte(s, abonne) {
-    if (!s) return null;
-    if (!abonne) {
-      return {
-        html: `<div class="ab-courriel ab-courriel-verrou">
-          <span class="ab-courriel-cadenas" aria-hidden="true">🔒</span>
-          <span class="ab-courriel-texte">
-            <span class="ab-courriel-nom">🔔 ${tr('Mon alerte du matin', 'My morning alert')}</span><span class="ab-courriel-rythme">${tr('réservée aux abonnés', 'subscribers only')}</span>
-            <span class="ab-courriel-quoi">${tr("Chaque matin, s'il y a du nouveau dans vos projets suivis, vos mots-clés ou vos organismes — un seul courriel pour tout. <a class=\"ab-lien\" href=\"/abonnement\">Voir l'abonnement</a>", 'Every morning, if there is something new in your followed projects, keywords or organizations — one email for everything. <a class="ab-lien" href="/abonnement">See the subscription</a>')}</span>
-          </span>
-        </div>`,
-        cabler: () => {},
-      };
-    }
-    const [preference, envois] = await Promise.all([
-      client.from('alertes_preferences').select('actif').eq('user_id', s.user.id).maybeSingle(),
-      client.from('alertes_envois').select('envoye_le').eq('user_id', s.user.id).eq('essai', false).order('envoye_le', { ascending: false }).limit(1),
-    ]);
-    const actif = preference.data?.actif !== false;
-    const derniere = envois.data?.[0]?.envoye_le;
-    const html = `<div class="ab-courriel">
-      <input type="checkbox" id="alertes-actif"${actif ? ' checked' : ''}>
-      <span class="ab-courriel-texte">
-        <label class="ab-courriel-nom" for="alertes-actif">🔔 ${tr('Mon alerte du matin', 'My morning alert')}</label><span class="ab-courriel-rythme">${tr("chaque matin, s'il y a du nouveau", 'every morning, if something is new')}</span>
-        <span class="ab-courriel-quoi">${tr('Vos projets suivis, vos mots-clés et vos organismes — un seul courriel pour tout, qui porte aussi vos suivis de l’Assemblée s’il y en a. Rien les jours où rien n’avance.', 'Your followed projects, keywords and organizations — one email for everything, which also carries your Assembly follows if you have any. Nothing on days when nothing moves. (Alert emails are in French for now.)')}${derniere ? ` ${tr('Dernière alerte :', 'Last alert:')} ${dateFr(derniere)}.` : ''}</span>
-        <span class="ab-liens"><button type="button" class="ab-lien-bouton" id="alertes-essai">${tr("M'envoyer un courriel d'essai", 'Send me a test email')}</button><button type="button" class="ab-lien-bouton ab-lien-doux" id="alertes-retirer"></button><span class="ab-note" id="alertes-etat" aria-live="polite" style="margin:0"></span></span>
-      </span>
-    </div>`;
-    return { html, cabler: () => cablerAlerte(s) };
-  }
-
-  function cablerAlerte(s) {
-    const etat = $('#alertes-etat');
-    const caseActif = $('#alertes-actif');
-    const retirer = $('#alertes-retirer');
-    // La case et le lien « Retirer mon courriel des alertes » font la même chose (alertes_preferences.actif) ;
-    // le lien est là pour qui cherche comment arrêter. Rien d'autre n'est effacé : les projets, mots-clés et
-    // organismes restent, et on peut remettre son courriel d'un clic.
-    const libelleRetirer = () => { retirer.textContent = caseActif.checked ? tr('Retirer mon courriel des alertes', 'Remove my email from alerts') : tr('Remettre mon courriel dans les alertes', 'Put my email back in alerts'); };
-    libelleRetirer();
-    const enregistrer = async (voulu) => {
-      const { error } = await client.from('alertes_preferences').upsert({ user_id: s.user.id, actif: voulu, updated_at: new Date().toISOString() });
-      if (error) { caseActif.checked = !voulu; libelleRetirer(); etat.textContent = tr("Impossible d'enregistrer. Réessayez.", "Couldn't save. Try again."); return; }
-      caseActif.checked = voulu;
-      libelleRetirer();
-      etat.textContent = voulu
-        ? tr(`Votre courriel est de retour dans les alertes : ${s.user.email}.`, `Your email is back in the alerts: ${s.user.email}.`)
-        : tr("Votre courriel est retiré des alertes : plus aucun courriel du matin. Vos projets, mots-clés et organismes restent là.", 'Your email is removed from alerts: no more morning emails. Your projects, keywords and organizations stay here.');
-      mesurer(voulu ? 'alertes_activees' : 'alertes_arretees');
-    };
-    caseActif.addEventListener('change', (e) => enregistrer(e.target.checked));
-    retirer.addEventListener('click', () => enregistrer(!caseActif.checked));
-    $('#alertes-essai').addEventListener('click', async (e) => {
-      e.target.disabled = true;
-      etat.textContent = tr('Envoi…', 'Sending…');
-      const courante = await session();
-      const res = await fetch('/api/alertes-projets?essai=moi', { method: 'POST', headers: { Authorization: `Bearer ${courante?.access_token ?? ''}` } }).catch(() => null);
-      const corps = res ? await res.json().catch(() => ({})) : {};
-      e.target.disabled = false;
-      etat.textContent = res?.ok
-        ? corps.envoyes
-          ? tr(`Courriel d'essai envoyé à ${s.user.email}. Pensez à vérifier vos courriels indésirables.`, `Test email sent to ${s.user.email}. Check your spam folder.`)
-          : tr("Suivez au moins un projet, ou ajoutez un mot-clé ou un organisme présent dans une décision récente, pour recevoir un courriel d'essai.", 'Follow at least one project, or add a keyword or organization found in a recent decision, to get a test email.')
-        : res?.status === 429 ? tr("Trois courriels d'essai déjà envoyés dans les dernières 24 heures. Réessayez demain.", 'Three test emails already sent in the last 24 hours. Try again tomorrow.') : tr("L'envoi n'a pas fonctionné. Réessayez dans un moment.", "Sending didn't work. Try again in a moment.");
-      mesurer('alertes_essai');
-    });
   }
 
   // ---------- mots-clés des alertes ----------
@@ -376,16 +257,12 @@
   // boîte de l'Assemblée reste cachée.
   const porteeDe = (m) => m.portee ?? 'villes';
 
-  // UN SEUL quota pour tout ce qu'on suit (Martin, 23 sept. 2026 : « 10 suivis en tout, tous
-  // mélangés ») : projets de ville, projets de loi, mots-clés et organismes ensemble — 10 avec
-  // l'abonnement, 3 sans. C'est la base qui tranche (scripts/supabase-schema-mots-cles-portee.sql,
-  // exécuté le 23 septembre) ; l'écran ne fait que l'annoncer et fermer les champs quand c'est plein.
-  // `sur` à null veut dire « je n'ai pas pu compter » : dans ce cas on ne bloque rien et on laisse la
-  // base refuser, avec son message. Bloquer sur un compte qu'on n'a pas pu lire refuserait un ajout
-  // que la base aurait accepté.
+  // UN SEUL quota pour tout ce qu'on suit : 3 en tout (10 avec l'abonnement payant, retiré le
+  // 27 sept. 2026). C'est la base qui tranche (trigger Postgres) ; l'écran ne fait que l'annoncer.
+  // `sur` à null veut dire « je n'ai pas pu compter » : on laisse alors la base refuser.
   let quota = { total: 0, sur: null };
   const quotaPlein = () => quota.sur != null && quota.total >= quota.sur;
-  async function majQuota(abonne) {
+  async function majQuota() {
     const [dossiers, mots, organismes] = await Promise.all([
       client.from('dossiers_suivis').select('id'),
       client.from('alertes_mots_cles').select('id'),
@@ -393,7 +270,7 @@
     ]);
     quota = dossiers.error || mots.error || organismes.error
       ? { total: 0, sur: null }
-      : { total: (dossiers.data?.length ?? 0) + (mots.data?.length ?? 0) + (organismes.data?.length ?? 0), sur: abonne ? 10 : 3 };
+      : { total: (dossiers.data?.length ?? 0) + (mots.data?.length ?? 0) + (organismes.data?.length ?? 0), sur: 3 };
   }
   // La même phrase partout : ce qui est plein, et quoi retirer pour faire de la place.
   const phraseQuota = (n) => tr(
@@ -407,10 +284,9 @@
     return m ? phraseQuota(m[1]) : ancien;
   };
 
-  // Un compte dont l'abonnement s'est arrêté GARDE ses mots-clés et ses organismes : ils ne
-  // déclenchent plus d'alerte, mais ils occupent toujours une place dans le quota commun. Sans cette
-  // carte, leurs boîtes disparaissaient avec l'abonnement : plus aucun bouton pour les retirer, et
-  // la personne restait bloquée (« 5 suivis sur 3 ») sans pouvoir suivre quoi que ce soit d'autre.
+  // Les mots-clés et organismes d'avant le retrait de l'abonnement occupent encore une place dans
+  // le quota commun. Sans cette carte, plus aucun bouton pour les retirer, et la personne restait
+  // bloquée (« 5 suivis sur 3 ») sans pouvoir suivre quoi que ce soit d'autre.
   function carteDormante(zone, { titre, phrase, elements, table }) {
     if (!elements.length) { zone.innerHTML = ''; return; }
     zone.innerHTML = `<div class="ab-carte">
@@ -435,790 +311,33 @@
     });
   }
 
-  async function motsCles(s, abonne) {
+  // Les mots-clés d'avant le 27 sept. 2026 (abonnement payant, retiré) : ils ne déclenchent plus
+  // rien, mais ils occupent une place dans le quota commun. On les montre pour qu'on puisse les retirer.
+  async function motsCles(s) {
     const zone = $('#mots');
     if (!s) { zone.innerHTML = ''; return; }
     const { data: tous, error } = await client.from('alertes_mots_cles').select('*').order('created_at');
-    if (error) { zone.innerHTML = ''; return; } // table pas encore créée
-    const data = (tous ?? []).filter((m) => porteeDe(m) === 'villes');
-    if (!abonne) {
-      carteDormante(zone, {
-        titre: tr('Mots-clés des villes', 'City keywords'),
-        phrase: tr("Sans abonnement, ces mots-clés ne déclenchent plus d'alerte, mais ils occupent une place dans vos suivis. Retirez-en pour suivre un projet à la place, ou reprenez l'abonnement pour les réveiller.", 'Without a subscription these keywords no longer trigger alerts, but they still take up your follows. Remove some to follow a project instead, or subscribe again to wake them up.'),
-        elements: data.map((m) => ({ id: m.id, nom: m.mot })),
-        table: 'alertes_mots_cles',
-      });
-      return;
-    }
-    const ouvertMots = zone.querySelector('details.ab-pliable')?.open ? ' open' : '';
-    zone.innerHTML = `<details class="ab-carte ab-pliable ab-mots"${ouvertMots}>
-      <summary><h2>${tr('Mots-clés des villes', 'City keywords')}</h2><span class="ab-etiquette" id="mots-compte">${(data ?? []).length}</span></summary>
-      <div class="ab-pliable-corps">
-      <p class="ab-chapeau" style="margin-bottom:10px">${tr("Une rue, un quartier, une école, un parc, un sujet : « 1re Avenue », « Limoilou », « Rochebelle », « déneigement »… Les nouvelles décisions qui le contiennent s'ajoutent à votre alerte du matin.", 'A street, a neighbourhood, a school, a park, a topic: “1re Avenue”, “Limoilou”, “Rochebelle”, “déneigement” (snow removal)… New decisions that contain it are added to your morning alert. The decisions are in French, so use French words.')}</p>
-      <ul class="ab-mots-liste" id="mots-liste"></ul>
-      <form class="ab-form" id="mots-form"><input type="text" id="mots-champ" maxlength="60" placeholder="${tr('Ajouter un mot-clé', 'Add a keyword')}" aria-label="${tr('Nouveau mot-clé', 'New keyword')}"><button type="submit" class="ab-bouton">${tr('Ajouter', 'Add')}</button></form>
-      <p class="ab-note">${tr("Cherché dans l'objet et le résumé de chaque décision, sans tenir compte des accents ni des majuscules.", "Searched in each decision's subject and French summary, ignoring accents and capitals.")} ${tr('Un mot-clé prend une place dans vos suivis.', 'A keyword takes one of your follows.')}</p>
-      <p class="ab-note" id="mots-etat" aria-live="polite"></p>
-      <div class="ab-pistes" id="mots-pistes" hidden></div>
-      <p class="ab-astuce">${tr("<strong>Astuce :</strong> pas sûr de l'orthographe d'une rue ou d'un lieu ? Cherchez-le dans Google pour trouver son nom officiel (« boulevard Wilfrid-Hamel », « 1re Avenue ») : c'est celui qu'emploient les documents de la Ville.", '<strong>Tip:</strong> not sure how a street or place is spelled? Look it up on Google to find its official French name (“boulevard Wilfrid-Hamel”, “1re Avenue”): that is the one the City uses in its documents.')}</p>
-      <p class="ab-vers-ecrire"><button type="button" class="ab-lien-bouton" id="mots-vers-ecrire">${tr('Vous avez des suggestions ?', 'Have suggestions?')}</button> ${tr('Un mot-clé qui ne donne rien, un lieu, une idée : écrivez-nous.', 'A keyword that finds nothing, a place, an idea: write to us.')}</p>
-      </div>
-    </details>`;
-    const liste = $('#mots-liste');
-    const etat = $('#mots-etat');
-    const form = $('#mots-form');
-    let mots = data ?? [];
-    let recentes = null; // chargées à l'ouverture de la boîte
-
-    const dessiner = () => {
-      liste.innerHTML = mots.length
-        ? mots.map((m) => {
-            const n = recentes?.dossiers.filter((d) => contientMot(d, m.mot)).length;
-            return `<li class="ab-mot"><span class="ab-mot-texte">${echapper(m.mot)}</span><span class="ab-note" style="margin:0">${n == null ? '' : n ? tr(`${n} décision${n > 1 ? 's' : ''} récente${n > 1 ? 's' : ''}`, `${n} recent ${pl(n, 'decision', 'decisions')}`) : tr('aucune décision récente', 'no recent decision')}</span><button type="button" class="ab-mot-retirer" data-mot="${echapper(m.id)}" aria-label="${tr('Retirer le mot-clé', 'Remove keyword')} ${echapper(m.mot)}">×</button></li>`;
-          }).join('')
-        : `<li class="ab-note" style="list-style:none;margin:0">${tr('Aucun mot-clé pour l’instant.', 'No keywords yet.')}</li>`;
-      form.querySelector('button').disabled = quotaPlein();
-      if (quotaPlein() && !etat.textContent) etat.textContent = phrasePlein();
-      $('#mots-compte').textContent = mots.length;
-    };
-    dessiner();
-    aLOuverture(zone.querySelector('details.ab-mots'), async () => {
-      recentes = await chargerRecentes();
-      dessiner();
-      if (recentes.depuis && !etat.textContent) etat.textContent = tr(`« Décisions récentes » : depuis le ${dateFr(recentes.depuis)}.`, `“Recent decisions”: since ${dateFr(recentes.depuis)}.`);
-    });
-
-    // Quand un mot-clé ne donne rien : les gens écrivent « École Rochebelle » là où la décision dit
-    // « école secondaire De Rochebelle ». On cherche dans toute l'année des bouts plus courts du mot,
-    // sans les mots trop généraux (école, parc, rue…), et on propose ceux qui apparaissent vraiment.
-    const pistes = $('#mots-pistes');
-    const MOTS_GENERAUX = new Set(['ecole', 'primaire', 'secondaire', 'parc', 'rue', 'avenue', 'boulevard', 'chemin', 'route', 'place', 'centre', 'eglise', 'pavillon', 'arena', 'bibliotheque', 'quartier', 'secteur', 'ville', 'quebec', 'de', 'du', 'des', 'la', 'le', 'les', 'et', 'a', 'au', 'aux', 'en', 'sur', 'pour', 'st', 'ste']);
-    const bouts = (mot) => {
-      const jetons = mot.split(' ').map((t) => t.replace(/^[ldLD]['’]/, ''));
-      const utile = (t) => !MOTS_GENERAUX.has(normaliserTexte(t).replace(/[^a-z0-9-]/g, ''));
-      const candidats = new Set();
-      for (let i = 0; i < jetons.length; i++) {
-        for (let j = i; j < jetons.length; j++) {
-          if (!utile(jetons[i]) || !utile(jetons[j])) continue; // pas de bout qui commence ou finit par « école »
-          const bout = jetons.slice(i, j + 1).join(' ');
-          if (normaliserTexte(bout).replace(/[^a-z0-9]/g, '').length >= 4 && normaliserTexte(bout) !== normaliserTexte(mot)) candidats.add(bout);
-        }
-      }
-      return [...candidats];
-    };
-    const proposer = async (motId, mot) => {
-      pistes.hidden = true;
-      const annee = await chargerDossiersAnnee();
-      const compte = (m) => annee.filter((d) => contientMot(d, m)).length;
-      const plusTot = compte(mot);
-      if (plusTot) {
-        etat.textContent = tr(`Ajouté. Aucune décision récente ne le contient, mais ${plusTot} dossier${plusTot > 1 ? 's' : ''} plus tôt en 2026 : vous serez alerté des prochains.`, `Added. No recent decision contains it, but ${plusTot} earlier ${pl(plusTot, 'item', 'items')} in 2026 do: you'll be alerted about the next ones.`);
-        return;
-      }
-      const trouves = bouts(mot).map((b) => [b, compte(b)]).filter(([, n]) => n > 0)
-        .sort((a, b) => b[0].split(' ').length - a[0].split(' ').length || b[1] - a[1]).slice(0, 3);
-      etat.textContent = tr(`Ajouté, mais aucune décision de 2026 ne contient « ${mot} » tel quel.`, `Added, but no 2026 decision contains “${mot}” exactly.`);
-      pistes.hidden = false;
-      pistes.innerHTML = trouves.length
-        ? `<p>${tr("<strong>Les décisions l'écrivent peut-être autrement.</strong> Ces bouts apparaissent en 2026 :", '<strong>The decisions may spell it differently.</strong> These parts appear in 2026:')}</p>
-           <div class="ab-pistes-choix">${trouves.map(([b, n]) => `<button type="button" class="ab-piste" data-remplacer="${echapper(motId)}" data-par="${echapper(b)}">${tr('Remplacer par', 'Replace with')} « ${echapper(b)} » <span>${n} ${tr(pl(n, 'dossier', 'dossiers'), pl(n, 'item', 'items'))}</span></button>`).join('')}</div>
-           <p class="ab-note">${tr(`Ou gardez « ${echapper(mot)} » : vous serez alerté si une décision l'écrit un jour tel quel.`, `Or keep “${echapper(mot)}”: you'll be alerted if a decision ever writes it exactly that way.`)}</p>`
-        : EN
-          ? `<p><strong>Nothing found in 2026, not even in part.</strong> A few ideas:</p>
-           <ul><li>a single distinctive word, without “école”, “parc” or “rue” (“Rochebelle” rather than “École secondaire Rochebelle”);</li>
-           <li>the official French name, as the City writes it (see the tip below);</li>
-           <li>or keep it as is: you'll be alerted if a decision ever mentions it.</li></ul>`
-          : `<p><strong>Rien trouvé en 2026, même en partie.</strong> Quelques pistes :</p>
-           <ul><li>un seul mot distinctif, sans « école », « parc » ou « rue » (« Rochebelle » plutôt que « École secondaire Rochebelle ») ;</li>
-           <li>le nom officiel, tel qu'écrit par la Ville (voir l'astuce plus bas) ;</li>
-           <li>ou gardez-le tel quel : vous serez alerté si une décision le mentionne un jour.</li></ul>`;
-    };
-
-    const ajouter = async (mot) => {
-      if (mot.length < 2) { etat.textContent = tr('Un mot-clé compte au moins 2 caractères.', 'A keyword needs at least 2 characters.'); return null; }
-      if (mots.some((m) => normaliserTexte(m.mot) === normaliserTexte(mot))) { etat.textContent = tr('Ce mot-clé est déjà dans votre liste.', 'This keyword is already in your list.'); return null; }
-      // Sans `portee` : la valeur par défaut de la colonne est « villes » (et avant le script SQL,
-      // la colonne n'existe pas encore).
-      const { data: ajoute, error: erreur } = await client.from('alertes_mots_cles').insert({ user_id: s.user.id, mot }).select('*').single();
-      if (erreur) { etat.textContent = /limite de/i.test(erreur.message) ? messageLimite(erreur, tr('Vos suivis sont tous utilisés. Retirez-en un d’abord.', 'All your follows are used. Remove one first.')) : tr("Impossible d'ajouter ce mot-clé. Réessayez.", "Couldn't add this keyword. Try again."); return null; }
-      mots = [...mots, ajoute];
-      quota.total += 1;
-      dessiner();
-      pistes.hidden = true;
-      if (!recentes) { recentes = await chargerRecentes(); dessiner(); }
-      const n = recentes.dossiers.filter((d) => contientMot(d, mot)).length;
-      if (n) etat.textContent = tr(`Ajouté. ${n} décision${n > 1 ? 's' : ''} récente${n > 1 ? 's' : ''} le contien${n > 1 ? 'nent' : 't'} déjà ; vous serez alerté des prochaines.`, `Added. ${n} recent ${pl(n, 'decision already contains', 'decisions already contain')} it; you'll be alerted about the next ones.`);
-      else await proposer(ajoute.id, mot);
-      mesurer('mot_cle_ajoute');
-      return ajoute;
-    };
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const champ = $('#mots-champ');
-      if (await ajouter(champ.value.trim().replace(/\s+/g, ' '))) champ.value = '';
-    });
-    // « Vous avez des suggestions ? » : descend jusqu'à « Nous écrire », sujet « Une suggestion » choisi.
-    $('#mots-vers-ecrire').addEventListener('click', () => {
-      const boite = document.getElementById('ecrire');
-      const choix = boite?.querySelector('select[name="sujet"]');
-      if (choix) { choix.value = 'suggestion'; choix.dispatchEvent(new Event('change', { bubbles: true })); }
-      boite?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      boite?.querySelector('textarea')?.focus({ preventScroll: true });
-      mesurer('mots_cles_vers_suggestion');
-    });
-    pistes.addEventListener('click', async (e) => {
-      const b = e.target.closest('[data-remplacer]');
-      if (!b) return;
-      b.disabled = true;
-      const { error: erreur } = await client.from('alertes_mots_cles').delete().eq('id', b.dataset.remplacer);
-      if (erreur) { b.disabled = false; etat.textContent = tr('Impossible de remplacer ce mot-clé. Réessayez.', "Couldn't replace this keyword. Try again."); return; }
-      mots = mots.filter((m) => m.id !== b.dataset.remplacer);
-      quota.total -= 1;
-      dessiner();
-      await ajouter(b.dataset.par);
-      mesurer('mot_cle_remplace');
-    });
-    liste.addEventListener('click', async (e) => {
-      const bouton = e.target.closest('[data-mot]');
-      if (!bouton) return;
-      bouton.disabled = true;
-      const { error: erreur } = await client.from('alertes_mots_cles').delete().eq('id', bouton.dataset.mot);
-      if (erreur) { bouton.disabled = false; etat.textContent = tr('Impossible de retirer ce mot-clé. Réessayez.', "Couldn't remove this keyword. Try again."); return; }
-      mots = mots.filter((m) => m.id !== bouton.dataset.mot);
-      quota.total -= 1;
-      etat.textContent = '';
-      dessiner();
-      etat.textContent = tr('Mot-clé retiré.', 'Keyword removed.');
+    if (error) { zone.innerHTML = ''; return; } // table absente
+    carteDormante(zone, {
+      titre: tr('Anciens mots-clés', 'Former keywords'),
+      phrase: tr("Les alertes par mot-clé ont été retirées : ces mots-clés ne servent plus, mais ils occupent une place dans vos suivis. Retirez-les pour suivre un projet à la place.", 'Keyword alerts have been removed: these keywords no longer do anything, but they still take up your follows. Remove them to follow a project instead.'),
+      elements: (tous ?? []).map((m) => ({ id: m.id, nom: m.mot })),
+      table: 'alertes_mots_cles',
     });
   }
 
-  // ---------- organismes et entreprises suivis (abonnés) ----------
-  // Table organismes_suivis (scripts/supabase-schema-organismes.sql). Pour chacun, tous les dossiers
-  // de l'année qui le mentionnent (/<ville>/data/dossiers.json, chargé seulement ici), cherché sans
-  // sa forme juridique — même recherche que les alertes du matin. Suggestions de noms :
-  // /<ville>/data/organismes.json (repérées automatiquement, donc imparfaites). Les montants sont
-  // ceux des résumés, chacun pour son dossier : jamais additionnés, ils ne sont pas de même nature.
-  const sansFormeJuridique = (nom) => String(nom ?? '').trim().replace(/[\s,]+(?:inc|ltée|limitée|s\.?e\.?n\.?c|s\.?e\.?c|enr|coop)\.?$/i, '').trim();
-  let dossiersAnnee = null;
-  const chargerDossiersAnnee = () => {
-    dossiersAnnee ??= Promise.all(VILLES_PROJETS.map(async (ville) => {
-      const f = await fetch(`/${ville}/data/dossiers.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
-      return (f?.dossiers ?? []).map((d) => ({ ...d, ville, themeInfo: f.themes?.[d.theme] ?? null }));
-    })).then((listes) => enAnglais(listes.flat()));
-    return dossiersAnnee;
-  };
-
-  async function organismesSuivis(s, abonne) {
+  // Les organismes suivis d'avant le 27 sept. 2026 : même traitement que les anciens mots-clés.
+  async function organismesSuivis(s) {
     const zone = $('#organismes');
     if (!s) { zone.innerHTML = ''; return; }
     const { data, error } = await client.from('organismes_suivis').select('id, nom').order('created_at');
-    if (error) { zone.innerHTML = ''; return; } // table pas encore créée
-    if (!abonne) {
-      carteDormante(zone, {
-        titre: tr('Organismes et entreprises suivis', 'Organizations and companies followed'),
-        phrase: tr("Sans abonnement, ces organismes ne déclenchent plus d'alerte, mais ils occupent une place dans vos suivis. Retirez-en pour suivre un projet à la place, ou reprenez l'abonnement pour les réveiller.", 'Without a subscription these organizations no longer trigger alerts, but they still take up your follows. Remove some to follow a project instead, or subscribe again to wake them up.'),
-        elements: data ?? [],
-        table: 'organismes_suivis',
-      });
-      return;
-    }
-    let suivis = data ?? [];
-    const ouvertOrg = zone.querySelector('details.ab-pliable')?.open ? ' open' : '';
-    zone.innerHTML = `<details class="ab-carte ab-pliable ab-organismes"${ouvertOrg}>
-      <summary><h2>${tr('Organismes et entreprises suivis', 'Organizations and companies followed')}</h2><span class="ab-etiquette" id="org-compte">${suivis.length}</span></summary>
-      <div class="ab-pliable-corps">
-      <p class="ab-chapeau" style="margin-bottom:10px">${tr("Les décisions de l'année qui nomment un organisme ou une entreprise : contrats, subventions, ententes. Les nouvelles s'ajoutent à votre alerte du matin.", "This year's decisions that name an organization or a company: contracts, grants, agreements. New ones are added to your morning alert.")}</p>
-      <form class="ab-form" id="org-form">
-        <input type="text" id="org-champ" list="org-suggestions" maxlength="120" placeholder="${tr("Nom de l'organisme ou de l'entreprise", 'Name of the organization or company')}" aria-label="${tr('Organisme ou entreprise à suivre', 'Organization or company to follow')}">
-        <datalist id="org-suggestions"></datalist>
-        <button type="submit" class="ab-bouton">${tr('Suivre', 'Follow')}</button>
-      </form>
-      <p class="ab-note" id="org-etat" aria-live="polite">${tr("Le nom est cherché dans l'objet et le résumé des décisions, sans sa forme juridique (« inc. », « ltée »), sans accents ni majuscules.", 'The name is searched in the subject and French summary of the decisions, without its legal form (“inc.”, “ltée”), ignoring accents and capitals.')} ${tr('Un organisme prend une place dans vos suivis.', 'An organization takes one of your follows.')}</p>
-      <div id="org-liste"></div>
-      </div>
-    </details>`;
-    const etat = $('#org-etat');
-    let annee = null; // les dossiers de l'année, chargés à l'ouverture de la boîte
-    const chargerAnnee = async () => (annee ??= await chargerDossiersAnnee());
-    const trouves = (nom) => (annee ?? []).filter((d) => contientMot(d, sansFormeJuridique(nom)));
-
-    // Même fiche dépliante que l'agenda des conseils ; une seule ouverte à la fois.
-    const ligneDossier = (d) => {
-      const fichier = /\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1];
-      return `<details class="ab-ouvert" name="org-dossiers">
-        <summary>
-          <div class="ab-meta ab-pastilles">
-            ${d.themeInfo ? `<span class="ab-pastille-theme" style="background:${/^#[0-9a-f]{6}$/i.test(d.themeInfo.couleur ?? '') ? d.themeInfo.couleur : 'var(--doux)'}">${echapper(libTheme(d.theme, d.themeInfo.libelle))}</span>` : ''}
-            <span>${dateFr(d.derniere ?? d.date)}</span>
-            ${d.instances.length ? `<span class="ab-etiquette">${echapper(libInstances(d.instances))}</span>` : ''}
-            ${d.statutDossier === 'termine' ? `<span class="ab-etiquette">${tr('Décision finale', 'Final decision')}</span>` : d.statutDossier ? `<span class="ab-etiquette ab-en-cours">${tr('En cours', 'In progress')}</span>` : ''}
-            <span class="ab-numero">${echapper(d.numero)}</span>
-            ${d.montant ? `<span class="ab-etiquette">${echapper(d.montant)}</span>` : ''}
-          </div>
-          <div class="ab-ouvert-phrase">${echapper(d.puces[0] ?? d.objet ?? '')}</div>
-        </summary>
-        <div class="ab-ouvert-corps">
-          ${d.puces.length ? `<ul>${d.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul><p class="ab-note">${tr('Résumé généré par IA à partir du sommaire décisionnel. Le document officiel fait foi.', 'AI-generated summary of the decision summary. The official document (in French) prevails.')}</p>` : `<p>${echapper(d.objet ?? '')}</p>`}
-          ${d.montant ? `<p class="ab-note">${tr(`Montant principal indiqué dans le résumé de ce dossier : ${echapper(d.montant)}. Les montants de dossiers différents ne s’additionnent pas (engagement, emprunt, subvention…).`, `Main amount stated in this item's summary: ${echapper(d.montant)}. Amounts from different items don't add up (commitment, loan, grant…).`)}</p>` : ''}
-          <div class="ab-liens">
-            ${d.pdf ? `<a href="${echapper(d.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}
-            <a href="/${echapper(d.ville)}/decisions.html?q=${encodeURIComponent(d.numero)}">${tr('Voir dans le volet', 'See in the city section:')} ${echapper(VILLES[d.ville] ?? '')}</a>
-            ${fichier ? `<button type="button" class="ab-lien-bouton" data-detail="${echapper(fichier)}" data-ville="${echapper(d.ville)}" data-montant="${d.montant ? (d.procedure ? 'procedure' : 1) : 0}" aria-expanded="false">${tr("Détail de l'argent", 'Money details')}</button>` : ''}
-          </div>
-          <div class="ab-detail-org" hidden></div>
-        </div>
-      </details>`;
-    };
-
-    const dessiner = () => {
-      $('#org-liste').innerHTML = suivis.length && !annee
-        ? CHARGEMENT()
-        : suivis.length
-        ? suivis.map((o) => {
-            const liste = trouves(o.nom);
-            return `<details class="ab-section-agenda ab-organisme" name="organismes">
-              <summary><span class="ab-organisme-nom">${echapper(o.nom)}</span><span class="ab-etiquette">${liste.length} ${tr(pl(liste.length, 'dossier', 'dossiers'), pl(liste.length, 'item', 'items'))}</span><button type="button" class="ab-mot-retirer" data-retirer="${echapper(o.id)}" aria-label="${tr('Ne plus suivre', 'Stop following')} ${echapper(o.nom)}">×</button></summary>
-              ${liste.length ? `<div class="ab-organisme-dossiers">${liste.sort((a, b) => (b.derniere ?? b.date ?? '').localeCompare(a.derniere ?? a.date ?? '')).map(ligneDossier).join('')}</div>` : `<p class="ab-note">${tr('Aucune décision de cette année ne mentionne ce nom. Vous serez alerté dès qu’une le mentionnera.', "No decision this year mentions this name. You'll be alerted as soon as one does.")}</p>`}
-            </details>`;
-          }).join('')
-        : `<p class="ab-note">${tr('Vous ne suivez aucun organisme pour l’instant.', "You aren't following any organization yet.")}</p>`;
-      $('#org-form button').disabled = quotaPlein();
-      $('#org-compte').textContent = suivis.length;
-    };
-    dessiner();
-    aLOuverture(zone.querySelector('details.ab-organismes'), async () => {
-      const [suggestions] = await Promise.all([
-        Promise.all(VILLES_PROJETS.map((v) => fetch(`/${v}/data/organismes.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)))
-          .then((fichiers) => fichiers.flatMap((f) => f?.organismes ?? [])),
-        suivis.length ? chargerAnnee() : null,
-      ]);
-      $('#org-suggestions').innerHTML = suggestions.map((o) => `<option value="${echapper(o.nom)}">${o.dossiers} ${tr(pl(o.dossiers, 'dossier', 'dossiers'), pl(o.dossiers, 'item', 'items'))}</option>`).join('');
-      dessiner();
+    if (error) { zone.innerHTML = ''; return; } // table absente
+    carteDormante(zone, {
+      titre: tr('Anciens organismes suivis', 'Former followed organizations'),
+      phrase: tr("Le suivi d'organismes a été retiré : ces noms ne servent plus, mais ils occupent une place dans vos suivis. Retirez-les pour suivre un projet à la place.", 'Following organizations has been removed: these names no longer do anything, but they still take up your follows. Remove them to follow a project instead.'),
+      elements: data ?? [],
+      table: 'organismes_suivis',
     });
-
-    $('#org-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const nom = $('#org-champ').value.trim().replace(/\s+/g, ' ');
-      if (sansFormeJuridique(nom).length < 3) { etat.textContent = tr('Écrivez au moins 3 caractères, sans compter « inc. » ou « ltée ».', 'Write at least 3 characters, not counting “inc.” or “ltée”.'); return; }
-      if (suivis.some((o) => normaliserTexte(sansFormeJuridique(o.nom)) === normaliserTexte(sansFormeJuridique(nom)))) { etat.textContent = tr('Vous suivez déjà cet organisme.', 'You already follow this organization.'); return; }
-      const { data: ajoute, error: erreur } = await client.from('organismes_suivis').insert({ user_id: s.user.id, nom }).select('id, nom').single();
-      if (erreur) { etat.textContent = /limite de/i.test(erreur.message) ? messageLimite(erreur, tr('Vos suivis sont tous utilisés. Retirez-en un d’abord.', 'All your follows are used. Remove one first.')) : tr('Impossible de suivre cet organisme. Réessayez.', "Couldn't follow this organization. Try again."); return; }
-      suivis = [...suivis, ajoute];
-      quota.total += 1;
-      await chargerAnnee();
-      $('#org-champ').value = '';
-      dessiner();
-      const n = trouves(nom).length;
-      etat.textContent = n
-        ? tr(`Suivi. ${n} dossier${n > 1 ? 's' : ''} de 2026 le mentionne${n > 1 ? 'nt' : ''} ; les prochaines décisions s'ajouteront à votre alerte.`, `Following. ${n} 2026 ${pl(n, 'item mentions', 'items mention')} it; the next decisions will be added to your alert.`)
-        : tr("Suivi. Aucune décision de 2026 ne le mentionne encore : vous serez alerté dès qu'une le mentionnera.", "Following. No 2026 decision mentions it yet: you'll be alerted as soon as one does.");
-      mesurer('organisme_suivi');
-    });
-
-    $('#org-liste').addEventListener('click', async (e) => {
-      const retirer = e.target.closest('[data-retirer]');
-      if (retirer) {
-        e.preventDefault(); // le bouton est dans le résumé : ne pas déplier
-        retirer.disabled = true;
-        const { error: erreur } = await client.from('organismes_suivis').delete().eq('id', retirer.dataset.retirer);
-        if (erreur) { retirer.disabled = false; etat.textContent = tr('Impossible de retirer cet organisme. Réessayez.', "Couldn't remove this organization. Try again."); return; }
-        suivis = suivis.filter((o) => o.id !== retirer.dataset.retirer);
-        quota.total -= 1;
-        dessiner();
-        etat.textContent = tr('Organisme retiré.', 'Organization removed.');
-        return;
-      }
-      const demande = e.target.closest('[data-action="demander-detail"]');
-      if (demande) {
-        const source = demande.closest('.ab-ouvert-corps').querySelector('[data-detail]');
-        return demanderDetail(demande, source.dataset.ville, source.dataset.detail, await session());
-      }
-      const bouton = e.target.closest('[data-detail]');
-      if (!bouton) return;
-      const boite = bouton.closest('.ab-ouvert-corps').querySelector('.ab-detail-org');
-      if (!boite.hidden) { boite.hidden = true; bouton.setAttribute('aria-expanded', 'false'); return; }
-      bouton.disabled = true;
-      const reponse = await chargerDetail(bouton.dataset.ville, bouton.dataset.detail, await session());
-      bouton.disabled = false;
-      boite.hidden = false;
-      bouton.setAttribute('aria-expanded', 'true');
-      // Pas de détail : l'abonné peut le demander, si le résumé a trouvé un montant (data-montant = 1 ;
-      // « procedure » : un montant affiché, mais un document de procédure, dont on ne tire pas de détail).
-      const montant = bouton.dataset.montant;
-      boite.innerHTML = !reponse ? `<p class="ab-note">${tr('Le détail de l’argent ne répond pas pour l’instant. Réessayez dans un moment.', "Money details aren't responding right now. Try again in a moment.")}</p>`
-        : rendreDetail(reponse, bouton.dataset.ville)
-          || (montant === '1' || reponse.lu ? rendreDemande(reponse, bouton.dataset.ville) : '')
-          || (montant === '1'
-            ? `<p class="ab-note">${tr('Pas encore de détail de l’argent pour ce dossier.', 'No money details for this item yet.')}</p>`
-            : montant === 'procedure'
-              ? `<p class="ab-note">${tr('Pas de détail de l’argent pour ce dossier : c’est un document de procédure.', 'No money details for this item: it is a procedural document.')}</p>`
-              : `<p class="ab-note">${tr('Pas de détail de l’argent pour ce dossier : son résumé ne mentionne pas de montant.', "No money details for this item: its summary doesn't mention an amount.")}</p>`);
-      mesurer('organisme_detail_argent', { ville: bouton.dataset.ville });
-    });
-  }
-
-  // ---------- export en tableur (abonnés) ----------
-  // L'abonné choisit lui-même ce qu'il veut : quelles décisions (l'année, un projet), un mot ou un
-  // nom facultatif, les groupes de colonnes, puis Excel ou CSV. Le fichier se fabrique dans le
-  // navigateur (commun/tableur.js) à partir de /<ville>/data/dossiers.json ; seul le détail de
-  // l'argent vient du serveur (api/detail.js, par lots, abonnés seulement). Les montants restent du
-  // texte tel qu'écrit : jamais convertis, jamais additionnés.
-  const GROUPES_EXPORT = [
-    { g: 'resume', libelle: tr('Le résumé en langage clair (IA)', 'The plain-language summary (AI)') },
-    { g: 'montant', libelle: tr('Le montant indiqué dans le résumé', 'The amount stated in the summary') },
-    { g: 'argent', libelle: tr("Le détail de l'argent : nature, montant, qui reçoit, qui paie, durée, attribution, estimation, soumissions", 'Money details: type, amount, who receives, who pays, duration, award, estimate, bids'), note: tr('seulement pour les dossiers déjà lus', 'only for items already read') },
-    { g: 'liens', libelle: tr('Les liens : document officiel (PDF) et fiche sur le site', 'The links: official document (PDF) and item on the site') },
-  ];
-  const texteSoumissions = (x) => (x?.soumissions ?? []).map((so) => `${so.retenue ? tr('Retenue', 'Winning') : tr('Autre', 'Other')} : ${so.entreprise ?? ''}${so.prix ? ` (${so.prix})` : ''}${so.conforme === false ? tr(', non conforme', ', non-compliant') : ''}`).join('\n');
-  const COLONNES_EXPORT = [
-    { g: 'dossier', titre: tr('Ville', 'City'), largeur: 10, v: (d) => VILLES[d.ville] ?? d.ville },
-    { g: 'dossier', titre: tr('Numéro', 'Number'), largeur: 13, v: (d) => d.numero },
-    { g: 'dossier', titre: tr('Préparé le', 'Prepared on'), largeur: 12, v: (d) => d.date },
-    { g: 'dossier', titre: tr('Dernière décision', 'Latest decision'), largeur: 13, v: (d) => d.derniere },
-    { g: 'dossier', titre: tr('Instances', 'Bodies'), largeur: 26, v: (d) => libInstances(d.instances) },
-    { g: 'dossier', titre: tr('Statut', 'Status'), largeur: 14, v: (d) => (d.statutDossier === 'termine' ? tr('Décision finale', 'Final decision') : d.statutDossier ? tr('En cours', 'In progress') : '') },
-    { g: 'dossier', titre: tr('Sujet', 'Topic'), largeur: 16, v: (d) => libTheme(d.theme, d.themeInfo?.libelle) },
-    { g: 'dossier', titre: tr('Objet', 'Subject (French)'), largeur: 60, v: (d) => d.objet },
-    { g: 'resume', titre: tr('Résumé en langage clair (IA)', 'Plain-language summary (AI)'), largeur: 80, v: (d) => d.puces.map((p) => `• ${p}`).join('\n') },
-    { g: 'montant', titre: tr('Montant indiqué dans le résumé (IA)', 'Amount stated in the summary (AI)'), largeur: 20, v: (d) => d.montant },
-    { g: 'argent', titre: tr('Détail : nature du montant', 'Details: type of amount'), largeur: 18, v: (d, x) => x?.nature },
-    { g: 'argent', titre: tr('Détail : montant', 'Details: amount'), largeur: 22, v: (d, x) => x?.montantPrincipal },
-    { g: 'argent', titre: tr('Détail : en une phrase', 'Details: in one sentence'), largeur: 50, v: (d, x) => x?.enUnePhrase },
-    { g: 'argent', titre: tr('Détail : qui reçoit', 'Details: who receives'), largeur: 30, v: (d, x) => [x?.beneficiaire, x?.beneficiaireVille].filter(Boolean).join(', ') },
-    { g: 'argent', titre: tr('Détail : qui paie', 'Details: who pays'), largeur: 24, v: (d, x) => x?.payeur },
-    { g: 'argent', titre: tr('Détail : durée', 'Details: duration'), largeur: 26, v: (d, x) => x?.duree },
-    { g: 'argent', titre: tr("Détail : mode d'attribution", 'Details: award method'), largeur: 24, v: (d, x) => x?.modeAttribution },
-    { g: 'argent', titre: tr('Détail : estimation de la Ville', "Details: City's estimate"), largeur: 22, v: (d, x) => x?.estimationVille },
-    { g: 'argent', titre: tr('Détail : soumissions', 'Details: bids'), largeur: 40, v: (d, x) => texteSoumissions(x) },
-    { g: 'liens', titre: tr('Document officiel (PDF)', 'Official document (PDF)'), largeur: 40, v: (d) => d.pdf },
-    { g: 'liens', titre: tr('Fiche sur le site', 'Item on the site'), largeur: 40, v: (d) => `${location.origin}/${d.ville}/decisions.html?q=${encodeURIComponent(d.numero)}` },
-  ];
-  const nomFichier = (s) => normaliserTexte(s).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
-
-  // Le « PDF » : une page autonome, mise en page pour l'impression, une fiche par dossier avec les
-  // groupes cochés. Elle lance l'impression d'elle-même ; « Enregistrer au format PDF » fait le
-  // fichier, avec les liens cliquables. Tout le texte passe par echapper().
-  function rapportImprimable({ liste, details, groupes, description, aLire, titre }) {
-    const e = echapper;
-    const cleDetail = (d) => `${d.ville}|${/\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1]}`;
-    const ligneDl = (libelle, valeur) => (valeur ? `<dt>${e(libelle)}</dt><dd>${e(valeur).replace(/\n/g, '<br>')}</dd>` : '');
-    const fiche = (d) => {
-      const x = details.get(cleDetail(d));
-      const statut = d.statutDossier === 'termine' ? tr('Décision finale', 'Final decision') : d.statutDossier ? tr('En cours', 'In progress') : '';
-      const meta = [`<span class="num">${e(d.numero)}</span>`, d.themeInfo ? `<span class="sujet">${e(libTheme(d.theme, d.themeInfo.libelle))}</span>` : '', d.date ? `${tr('préparé le', 'prepared on')} ${e(dateFr(d.date))}` : '', d.derniere && d.derniere !== d.date ? `${tr('dernière décision le', 'latest decision on')} ${e(dateFr(d.derniere))}` : '', d.instances.length ? e(libInstances(d.instances)) : '', statut ? `<strong>${e(statut)}</strong>` : ''].filter(Boolean).join(' <span class="sep">·</span> ');
-      return `<article>
-        <div class="meta">${meta}</div>
-        <h2>${e(d.objet ?? '')}</h2>
-        ${groupes.has('resume') && d.puces.length ? `<ul>${d.puces.map((p) => `<li>${e(p)}</li>`).join('')}</ul>` : ''}
-        ${groupes.has('montant') && d.montant ? `<p class="montant">${tr('Montant indiqué dans le résumé :', 'Amount stated in the summary:')} <strong>${e(d.montant)}</strong></p>` : ''}
-        ${groupes.has('argent') && x ? `<div class="argent"><div class="titre-argent">${tr("Détail de l'argent", 'Money details')}${x.nature ? ` — ${e(x.nature)}` : ''}</div><dl>
-          ${ligneDl(tr('En une phrase', 'In one sentence'), x.enUnePhrase)}${ligneDl(tr('Montant', 'Amount'), x.montantPrincipal)}${ligneDl(tr('Qui reçoit', 'Who receives'), [x.beneficiaire, x.beneficiaireVille].filter(Boolean).join(', '))}${ligneDl(tr('Qui paie', 'Who pays'), x.payeur)}${ligneDl(tr('Durée', 'Duration'), x.duree)}${ligneDl(tr("Mode d'attribution", 'Award method'), x.modeAttribution)}${ligneDl(tr('Estimation de la Ville', "City's estimate"), x.estimationVille)}${ligneDl(tr('Soumissions', 'Bids'), texteSoumissions(x))}
-        </dl></div>` : ''}
-        ${groupes.has('liens') ? `<p class="liens">${d.pdf ? `<a href="${e(d.pdf)}">${tr('Document officiel (PDF)', 'Official document (PDF, in French)')}</a> <span class="sep">·</span> ` : ''}<a href="${e(`${location.origin}/${d.ville}/decisions.html?q=${encodeURIComponent(d.numero)}`)}">${tr('Fiche sur le site', 'Item on the site')}</a></p>` : ''}
-      </article>`;
-    };
-    return `<!doctype html><html lang="${EN ? 'en' : 'fr'}"><head><meta charset="utf-8"><title>${e(titre)}</title>
-<style>
-  @page { size: letter; margin: 16mm 15mm; }
-  * { box-sizing: border-box; }
-  body { margin: 0 auto; max-width: 780px; padding: 24px; font: 11pt/1.6 Georgia, 'Times New Roman', serif; color: #16191D; background: #fff; }
-  .barre { position: sticky; top: 0; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 12px 14px; margin: -24px -24px 20px; background: #E6F6EC; font: 14px system-ui, sans-serif; }
-  .barre button { font: 700 14px system-ui, sans-serif; padding: 8px 14px; border: 0; border-radius: 6px; background: #0B8A4B; color: #fff; cursor: pointer; }
-  header { border-bottom: 2px solid #16191D; padding-bottom: 12px; margin-bottom: 18px; }
-  header .marque { font: 800 13pt system-ui, sans-serif; letter-spacing: -.01em; }
-  header h1 { font: 700 17pt/1.25 system-ui, sans-serif; margin: 6px 0 4px; }
-  header p { margin: 0; color: #5B6570; font: 10pt system-ui, sans-serif; }
-  .alire { font: 8.5pt/1.5 system-ui, sans-serif; color: #5B6570; margin: 0 0 22px; display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; }
-  .alire dt { font-weight: 700; }
-  .alire dd { margin: 0; }
-  /* De l'air (demandé par Martin après un premier PDF du tramway trop compact). */
-  article { border-top: 1px solid #C2CAD2; padding: 18px 0 16px; break-inside: avoid; page-break-inside: avoid; }
-  .meta { font: 8.5pt/1.5 system-ui, sans-serif; color: #5B6570; }
-  .meta .num { font: 700 9pt ui-monospace, Consolas, monospace; color: #16191D; }
-  .meta .sujet { font-weight: 700; color: #076338; }
-  .sep { color: #C2CAD2; }
-  h2 { font: 700 11.5pt/1.4 system-ui, sans-serif; margin: 6px 0 12px; }
-  ul { margin: 0 0 12px; padding-left: 20px; }
-  li { margin: 0 0 7px; padding-left: 2px; }
-  .montant { margin: 10px 0; font: 10pt/1.5 system-ui, sans-serif; }
-  .argent { margin: 12px 0; padding: 10px 14px; border-left: 3px solid #0B8A4B; background: #F4F6F8; font: 9pt/1.55 system-ui, sans-serif; }
-  .titre-argent { font-weight: 800; margin-bottom: 6px; }
-  .argent dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0; }
-  .argent dt { font-weight: 700; color: #5B6570; }
-  .argent dd { margin: 0; }
-  .liens { margin: 10px 0 0; font: 8.5pt system-ui, sans-serif; }
-  .liens a { color: #076338; }
-  footer { margin-top: 24px; border-top: 2px solid #16191D; padding-top: 10px; font: 8.5pt system-ui, sans-serif; color: #5B6570; }
-  @media print { .barre { display: none; } body { padding: 0; max-width: none; } }
-</style></head><body>
-<div class="barre"><button type="button" onclick="print()">${tr('Enregistrer en PDF ou imprimer', 'Save as PDF or print')}</button><span>${tr("Dans la fenêtre d'impression, choisissez « Enregistrer au format PDF ».", 'In the print window, choose “Save as PDF”.')}</span></div>
-<header>
-  <div class="marque">${e(location.host)}</div>
-  <h1>${e(description)}</h1>
-  <p>${EN ? `${liste.length.toLocaleString('en-CA')} ${pl(liste.length, 'item', 'items')}, most recent first · exported on ${e(dateFr(new Date().toLocaleDateString('en-CA')))}` : `${liste.length.toLocaleString('fr-CA')} dossier${liste.length > 1 ? 's' : ''}, les plus récents d'abord · exporté le ${e(dateFr(new Date().toLocaleDateString('en-CA')))}`}</p>
-</header>
-<dl class="alire">${aLire.slice(3).map(([k, v]) => `<dt>${e(k)}</dt><dd>${e(v)}</dd>`).join('')}</dl>
-${liste.map(fiche).join('')}
-<footer>${tr("Site citoyen indépendant, sans lien avec les villes couvertes. Résumés générés par IA ; en cas d'écart, le document officiel fait foi.", 'Independent citizen site, with no connection to the cities covered. AI-generated summaries; if anything differs, the official document (in French) prevails.')}</footer>
-<script>addEventListener('load', () => setTimeout(() => print(), 400));<\/script>
-</body></html>`;
-  }
-
-  // Le compteur d'exports du mois (api/export.js) : 10 par mois civil. Le serveur compte, parce
-  // qu'un compteur gardé dans le navigateur se viderait avec le cache. On ne bloque que sur un
-  // refus explicite (429 limite atteinte, 403 abonnement inactif) : si le compteur ne répond pas,
-  // l'export part quand même.
-  const LIMITE_EXPORTS = 10;
-  async function compteurExports(methode, format) {
-    const s = await session();
-    if (!s?.access_token) return null;
-    const r = await fetch('/api/export', {
-      method: methode,
-      headers: { Authorization: `Bearer ${s.access_token}`, ...(format ? { 'Content-Type': 'application/json' } : {}) },
-      body: format ? JSON.stringify({ format }) : undefined,
-    }).catch(() => null);
-    const corps = r ? await r.json().catch(() => null) : null;
-    return r && corps ? { statut: r.status, ...corps } : null;
-  }
-  async function reserverExport(format) {
-    const c = await compteurExports('POST', format);
-    if (c?.statut === 429) {
-      const reprise = c.reprise ? new Date(c.reprise).toLocaleDateString(EN ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'long', timeZone: 'UTC' }) : null;
-      return { refuse: true, compteur: c, texte: EN
-        ? `You have used your ${c.limite ?? LIMITE_EXPORTS} exports for this month${reprise ? `. The counter starts again on ${reprise}` : ''}.`
-        : `Vous avez utilisé vos ${c.limite ?? LIMITE_EXPORTS} exports du mois${reprise ? `. Le compteur repart le ${reprise}` : ''}.` };
-    }
-    if (c?.statut === 403) {
-      return { refuse: true, texte: c.erreur === 'abonnement inactif'
-        ? tr("L'export est réservé aux abonnés : votre abonnement n'est plus actif.", 'Export is for subscribers: your subscription is no longer active.')
-        : tr("L'export est réservé aux abonnés.", 'Export is for subscribers.') };
-    }
-    return c?.statut === 200 ? c : null;
-  }
-  // Rendre la réservation quand le fichier n’est jamais sorti (api/export.js, DELETE).
-  async function annulerExport() {
-    const c = await compteurExports('DELETE');
-    return c?.statut === 200 ? c : null;
-  }
-  // La ligne « il vous reste N exports » sous le formulaire ; muette si le compteur ne répond pas.
-  function ecrireResteExports(c) {
-    const zone = $('#exp-reste');
-    if (!zone) return;
-    zone.textContent = c && Number.isFinite(c.reste)
-      ? (EN ? `${c.reste} of ${c.limite} exports left this month.` : `Il vous reste ${c.reste} export${c.reste > 1 ? 's' : ''} sur ${c.limite} ce mois-ci.`)
-      : '';
-  }
-  // Le 429 comme le 200 portent déjà faits/reste : on écrit la ligne sans un aller-retour de plus.
-  async function afficherResteExports(connu) {
-    if (connu) return ecrireResteExports(connu);
-    const c = await compteurExports('GET');
-    ecrireResteExports(c?.statut === 200 ? c : null);
-  }
-
-  async function exportTableur(s, abonne) {
-    const zone = $('#export');
-    if (!s || !abonne) { zone.innerHTML = ''; return; }
-    const index = await Promise.all(VILLES_PROJETS.map(async (ville) => [ville, await indexVille(ville)]));
-    // Les projets, rangés par ville, les plus fournis d'abord, avec leur nombre de dossiers.
-    const projets = index.flatMap(([ville, idx]) => Object.entries(idx?.projets ?? {}).filter(([, p]) => p.decisions > 0).map(([cle, p]) => ({ ville, cle, titre: p.titre, dossiers: p.dossiers ?? 0 })))
-      .sort((a, b) => b.dossiers - a.dossiers);
-    const groupesProjets = VILLES_PROJETS.map((ville) => [ville, projets.filter((p) => p.ville === ville)]).filter(([, ps]) => ps.length);
-    if (!groupesProjets.length) { zone.innerHTML = ''; return; }
-    const ouvertExport = zone.querySelector('details.ab-pliable')?.open ? ' open' : '';
-    zone.innerHTML = `<details class="ab-carte ab-pliable ab-export"${ouvertExport}>
-      <summary><h2>${tr('Export en tableur ou en PDF', 'Export to a spreadsheet or PDF')}</h2></summary>
-      <div class="ab-pliable-corps" id="exp-corps">${CHARGEMENT()}</div>
-    </details>`;
-    const carte = zone.querySelector('.ab-export');
-    aLOuverture(carte, () => remplirExport(carte, groupesProjets));
-  }
-
-  // Le formulaire de l'export, construit à la première ouverture de la boîte : c'est lui qui a
-  // besoin de toutes les décisions de l'année (dossiers.json).
-  async function remplirExport(carte, groupesProjets) {
-    const [annee, mots, orgs] = await Promise.all([
-      chargerDossiersAnnee(),
-      // L'export porte sur les décisions des villes : seulement les mots-clés de ville.
-      client.from('alertes_mots_cles').select('*').then((r) => (r.data ?? []).filter((m) => porteeDe(m) === 'villes')),
-      client.from('organismes_suivis').select('nom').then((r) => r.data ?? []),
-    ]);
-    if (!annee.length) {
-      $('#exp-corps').innerHTML = `<p class="ab-note">${tr("Les décisions de l'année ne répondent pas pour l'instant. Rechargez la page dans un moment.", "This year's decisions aren't responding right now. Reload the page in a moment.")}</p>`;
-      return;
-    }
-    const an = annee.map((d) => (d.derniere ?? d.date ?? '').slice(0, 4)).sort().at(-1);
-    $('#exp-corps').innerHTML = `      <p class="ab-chapeau" style="margin-bottom:14px">${tr('Choisissez ce que vous voulez dans le fichier. Il se fabrique dans votre navigateur, en quelques secondes.', 'Choose what you want in the file. It is built in your browser, in a few seconds.')}</p>
-      <div class="ab-export-grille">
-        <label class="ab-champ"><span>${tr('1. Quelles décisions', '1. Which decisions')}</span>
-          <select id="exp-portee">
-            <option value="" disabled>${tr(`Toutes les décisions de ${echapper(an)} — non disponible, trop volumineux`, `All ${echapper(an)} decisions — not available, too large`)}</option>
-            ${groupesProjets.map(([ville, ps], g) => `<optgroup label="${tr('Projets de la Ville de', 'Projects of the City of')} ${echapper(VILLES[ville] ?? ville)}">${ps.map((p, i) => `<option value="${echapper(`${p.ville}|${p.cle}`)}" data-titre="${echapper(p.titre)}"${g === 0 && i === 0 ? ' selected' : ''}>${echapper(p.titre)} (${p.dossiers} ${tr(pl(p.dossiers, 'dossier', 'dossiers'), pl(p.dossiers, 'item', 'items'))})</option>`).join('')}</optgroup>`).join('')}
-          </select>
-        </label>
-        <label class="ab-champ"><span>${tr('2. Qui contiennent ce mot ou ce nom <em>(facultatif)</em>', '2. Containing this word or name <em>(optional, in French)</em>')}</span>
-          <input type="text" id="exp-mot" list="exp-suggestions" maxlength="120" placeholder="${tr('ex. 1re Avenue, déneigement, Groupe Colas Québec', 'e.g. 1re Avenue, déneigement, Groupe Colas Québec')}">
-          <datalist id="exp-suggestions">${[...mots.map((m) => m.mot), ...orgs.map((o) => o.nom)].map((t) => `<option value="${echapper(t)}">`).join('')}</datalist>
-        </label>
-        <fieldset class="ab-champ">
-          <legend>${tr('3. Quelles colonnes', '3. Which columns')}</legend>
-          <label class="ab-case"><input type="checkbox" checked disabled> <span>${tr('Le dossier : ville, numéro, dates, instances, statut, sujet, objet', 'The item: city, number, dates, bodies, status, topic, subject')}</span></label>
-          ${GROUPES_EXPORT.map((c) => `<label class="ab-case"><input type="checkbox" data-groupe="${c.g}" checked> <span>${echapper(c.libelle)}${c.note ? ` <span class="ab-doux">(${echapper(c.note)})</span>` : ''}</span></label>`).join('')}
-          <label class="ab-case ab-case-filtre"><input type="checkbox" id="exp-avec-montant"> <span>${tr('Seulement les dossiers avec un montant', 'Only items with an amount')}</span></label>
-        </fieldset>
-      </div>
-      <p class="ab-export-compte" id="exp-compte" aria-live="polite"></p>
-      <div class="ab-liens">
-        <button type="button" class="ab-bouton" data-format="xlsx">${tr('Télécharger Excel (.xlsx)', 'Download Excel (.xlsx)')}</button>
-        <button type="button" class="ab-bouton ab-bouton-second" data-format="csv">${tr('Télécharger CSV', 'Download CSV')}</button>
-        <button type="button" class="ab-bouton ab-bouton-second" data-format="pdf">${tr('PDF à imprimer', 'Printable PDF')}</button>
-      </div>
-      <p class="ab-note" id="exp-pdf-note"></p>
-      <p class="ab-note" id="exp-reste"></p>
-      <p class="ab-note" id="exp-etat" aria-live="polite"></p>
-      <p class="ab-note">${tr('Il vous manque une colonne ou un autre genre d\'export ? <a class="ab-lien" href="#ecrire">Dites-le-nous</a> : on ajoute ce que les abonnés demandent.', 'Missing a column or another kind of export? <a class="ab-lien" href="#ecrire">Tell us</a>: we add what subscribers ask for.')}</p>
-`;
-
-    afficherResteExports();
-
-    let fichiers = new Map(); // ville|cle → Set des numéros du projet
-    // Toujours un projet : toute l'année ne sort sous aucune forme (Martin, 14 sept. 2026 — un PDF
-    // d'environ 815 pages figerait la fenêtre d'impression, et un fichier de l'année entière
-    // n'est pas ce que l'export veut offrir). L'option reste visible, grisée.
-    const selection = async () => {
-      const portee = $('#exp-portee').value;
-      if (!portee) return [];
-      let liste = annee;
-      {
-        if (!fichiers.has(portee)) {
-          const [ville, cle] = portee.split('|');
-          const f = await fichierProjet(ville, cle);
-          fichiers.set(portee, new Set((f?.dossiers ?? []).flatMap((d) => [d.numero, ...(d.numeros ?? [])]).filter(Boolean)));
-        }
-        const numeros = fichiers.get(portee);
-        const ville = portee.split('|')[0];
-        liste = liste.filter((d) => d.ville === ville && (numeros.has(d.numero) || (d.numeros ?? []).some((n) => numeros.has(n))));
-      }
-      const mot = sansFormeJuridique($('#exp-mot').value.trim());
-      if (mot.length >= 2) liste = liste.filter((d) => contientMot(d, mot));
-      if ($('#exp-avec-montant').checked) liste = liste.filter((d) => d.montant);
-      return [...liste].sort((a, b) => (b.derniere ?? '').localeCompare(a.derniere ?? '') || (b.numero ?? '').localeCompare(a.numero ?? ''));
-    };
-    const pdfPermis = () => Boolean($('#exp-portee').value);
-    const compter = async () => {
-      const n = (await selection()).length;
-      $('#exp-compte').textContent = tr(`${n.toLocaleString('fr-CA')} dossier${n > 1 ? 's' : ''} dans le fichier`, `${n.toLocaleString('en-CA')} ${pl(n, 'item', 'items')} in the file`);
-      carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = !n || !pdfPermis(); });
-      $('#exp-pdf-note').textContent = tr("Un projet à la fois. Le PDF s'ouvre dans une nouvelle fenêtre, une fiche par dossier : dans la fenêtre d'impression, choisissez « Enregistrer au format PDF ».", 'One project at a time. The PDF opens in a new window, one card per item: in the print window, choose “Save as PDF”.');
-    };
-    let delai;
-    carte.addEventListener('input', () => { clearTimeout(delai); delai = setTimeout(compter, 200); });
-    carte.addEventListener('change', compter);
-    compter();
-
-    carte.addEventListener('click', async (e) => {
-      const bouton = e.target.closest('[data-format]');
-      if (!bouton) return;
-      const etat = $('#exp-etat');
-      const format = bouton.dataset.format;
-      if (!pdfPermis()) return; // aucun format pour toute l'année
-      // Le PDF passe par l'impression du navigateur, dans une nouvelle fenêtre. Elle doit s'ouvrir
-      // pendant le clic, avant toute attente : plus tard, le bloqueur de fenêtres la refuserait.
-      const fenetre = format === 'pdf' ? window.open('', '_blank') : null;
-      if (format === 'pdf') {
-        if (!fenetre) { etat.textContent = tr('Votre navigateur a bloqué la fenêtre du PDF : autorisez les fenêtres pour ce site, puis réessayez.', 'Your browser blocked the PDF window: allow pop-ups for this site, then try again.'); return; }
-        fenetre.document.write(`<!doctype html><meta charset="utf-8"><title>${tr('Préparation…', 'Preparing…')}</title><p style="font:16px system-ui,sans-serif;padding:24px">${tr('Préparation du PDF…', 'Preparing the PDF…')}</p>`);
-      }
-      const groupes = new Set(['dossier', ...[...carte.querySelectorAll('[data-groupe]:checked')].map((c) => c.dataset.groupe)]);
-      const colonnes = COLONNES_EXPORT.filter((c) => groupes.has(c.g));
-      const liste = await selection();
-      carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = true; });
-      etat.textContent = tr('Préparation du fichier…', 'Preparing the file…');
-
-      // Le compteur du mois (api/export.js) : on réserve AVANT de fabriquer, pour ne pas produire
-      // un fichier qu'on refuserait ensuite. Une panne du compteur ne bloque pas l'export : on
-      // aime mieux donner un fichier de trop que de punir un abonné pour une panne de notre côté.
-      const reserve = await reserverExport(format);
-      if (reserve?.refuse) {
-        fenetre?.close();
-        etat.textContent = reserve.texte;
-        afficherResteExports(reserve.compteur);
-        carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = !pdfPermis(); });
-        return;
-      }
-      try {
-
-        // Le détail de l'argent : seulement pour les dossiers avec un montant, par lots de 150.
-        const details = new Map();
-        let detailManque = false;
-        let detailRefuse = false; // 403 « abonnement inactif » : il a expiré pendant que la page était ouverte
-        if (groupes.has('argent')) {
-          const fichierDe = (d) => /\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1];
-          const parVille = new Map();
-          for (const d of liste) if (d.montant && fichierDe(d)) parVille.set(d.ville, [...(parVille.get(d.ville) ?? []), fichierDe(d)]);
-          const courante = await session();
-          for (const [ville, ids] of parVille) {
-            for (let i = 0; i < ids.length; i += 150) {
-              etat.textContent = `${tr("Détail de l'argent", 'Money details')} : ${Math.min(i + 150, ids.length)} / ${ids.length}…`;
-              const r = await fetch(`/api/detail?ville=${encodeURIComponent(ville)}&dossiers=${encodeURIComponent(ids.slice(i, i + 150).join(','))}`, { headers: { Authorization: `Bearer ${courante?.access_token ?? ''}` }, cache: 'no-store' }).catch(() => null);
-              const corps = r ? await r.json().catch(() => null) : null;
-              // Seul un abonnement vérifié et inactif le dit ; une panne (503) ou une session absente
-              // restent « réessayez ».
-              if (r?.status === 403 && corps?.erreur === 'abonnement inactif') { detailRefuse = true; continue; }
-              if (!r?.ok || !corps) { detailManque = true; continue; }
-              for (const [id, x] of Object.entries(corps.details ?? {})) details.set(`${ville}|${id}`, x);
-            }
-          }
-        }
-        const lignes = liste.map((d) => {
-          const x = details.get(`${d.ville}|${/\/([\w-]+\.pdf)$/i.exec(d.pdf ?? '')?.[1]}`);
-          return colonnes.map((c) => c.v(d, x) ?? '');
-        });
-
-        const portee = $('#exp-portee');
-        const titrePortee = portee.selectedOptions[0]?.dataset.titre ?? tr(`Toutes les décisions de ${an}`, `All ${an} decisions`);
-        const mot = $('#exp-mot').value.trim();
-        const description = `${titrePortee}${mot ? tr(`, qui contiennent « ${mot} »`, `, containing “${mot}”`) : ''}${$('#exp-avec-montant').checked ? tr(', avec un montant', ', with an amount') : ''}`;
-        const nom = `dossierville-${nomFichier(portee.value ? titrePortee : String(an))}${mot ? `-${nomFichier(mot)}` : ''}-${new Date().toLocaleDateString('en-CA')}`;
-        const aLire = EN
-          ? [
-            ['Selection', description],
-            ['Items', `${liste.length} (one ${format === 'pdf' ? 'card' : 'row'} per item: the decision summary and its resolutions)`],
-            ['Exported on', new Date().toLocaleString('en-CA')],
-            ['Source', `Decision documents published by the City, taken up by ${location.host}. The official document (PDF, in French) prevails.`],
-            ['Summary and summary amount', 'AI-generated from the decision summary, then translated into English.'],
-            ['Money details', "Extracted automatically from the decision summary, then checked automatically against its text; anything that couldn't be verified was removed. Quoted in French. Empty if the item hasn't been read yet: you can request it on its item page."],
-            ['Amounts', "Each amount applies to its own item and keeps its nature (expense, loan, grant, revenue…). They don't add up."],
-          ]
-          : [
-            ['Sélection', description],
-            ['Dossiers', `${liste.length} (une ${format === 'pdf' ? 'fiche' : 'ligne'} par dossier : le sommaire décisionnel et ses résolutions)`],
-            ['Exporté le', new Date().toLocaleString('fr-CA')],
-            ['Source', `Documents décisionnels publiés par la Ville, repris par ${location.host}. Le document officiel (PDF) fait foi.`],
-            ['Résumé et montant du résumé', 'Générés par IA à partir du sommaire décisionnel.'],
-            ["Détail de l'argent", "Extrait automatiquement du sommaire décisionnel, puis vérifié automatiquement contre son texte ; ce qui ne se vérifiait pas a été retiré. Vide si le dossier n'a pas encore été lu : vous pouvez le demander sur sa fiche."],
-            ['Montants', "Chaque montant vaut pour son dossier et garde sa nature (dépense, emprunt, subvention, revenu…). Ils ne s'additionnent pas entre eux."],
-          ];
-        if (format === 'pdf') {
-          fenetre.document.open();
-          fenetre.document.write(rapportImprimable({ liste, details, groupes, description, aLire, titre: nom }));
-          fenetre.document.close();
-          fenetre.focus();
-        }
-        const { fichierXlsx, fichierCsv, telecharger } = format === 'pdf' ? {} : await import('/commun/tableur.js');
-        if (format === 'pdf') {
-          // rien à télécharger : la fenêtre imprime d'elle-même
-        } else if (format === 'xlsx') {
-          telecharger(fichierXlsx([
-            { nom: tr('Dossiers', 'Items'), colonnes, lignes },
-            { nom: tr('À lire', 'Read me'), colonnes: [{ largeur: 28 }, { largeur: 110 }], lignes: aLire, entete: false },
-          ]), `${nom}.xlsx`);
-        } else {
-          telecharger(fichierCsv(colonnes.map((c) => c.titre), lignes), `${nom}.csv`);
-        }
-        etat.textContent = EN
-          ? `${format === 'pdf' ? 'PDF opened in a new window' : 'File ready'}: ${liste.length.toLocaleString('en-CA')} ${pl(liste.length, 'item', 'items')}${groupes.has('argent') ? `, ${details.size} with money details` : ''}.${detailRefuse ? ' Money details are for subscribers only: your subscription is no longer active.' : detailManque ? " Some money details couldn't be loaded: try again in a moment." : ''}`
-          : `${format === 'pdf' ? 'PDF ouvert dans une nouvelle fenêtre' : 'Fichier prêt'} : ${liste.length.toLocaleString('fr-CA')} dossier${liste.length > 1 ? 's' : ''}${groupes.has('argent') ? `, dont ${details.size} avec le détail de l'argent` : ''}.${detailRefuse ? ' Le détail de l’argent est réservé aux abonnés : votre abonnement n’est plus actif.' : detailManque ? " Une partie du détail de l'argent n'a pas pu être chargée : réessayez dans un moment." : ''}`;
-        carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = !pdfPermis(); });
-        mesurer('export_tableur', { format, groupes: [...groupes].join(',') });
-        afficherResteExports();
-      } catch (e) {
-        // Le fichier n’est jamais sorti : on rend l’export plutôt que de le décompter.
-        console.error('export :', e);
-        fenetre?.close();
-        const rendu = await annulerExport();
-        etat.textContent = tr("Le fichier n’a pas pu être produit. Réessayez.", "The file couldn’t be produced. Try again.");
-        afficherResteExports(rendu ?? undefined);
-      } finally {
-        carte.querySelectorAll('[data-format]').forEach((b) => { b.disabled = !pdfPermis(); });
-      }
-    });
-  }
-
-  // ---------- à l'agenda des conseils (abonnés) ----------
-  // Ce que chaque instance a à son agenda : les dossiers préparés par l'administration et encore en
-  // attente d'une décision (/<ville>/data/attendues.json), avec leurs pastilles et leur résumé IA.
-  // Ceux qui ont une date cible à venir seront probablement présentés à la prochaine séance —
-  // jamais « seront ».
-  async function dossiersOuverts(s, abonne) {
-    const zone = $('#ouverts');
-    if (!s || !abonne) { zone.innerHTML = ''; return; }
-    const fichiers = await Promise.all(VILLES_ATTENDUES.map(async (ville) => [ville, await fetch(`/${ville}/data/attendues.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null)]));
-    // attendues.json est léger (le compte du titre en vient) ; les résumés anglais, eux, attendent l'ouverture.
-    const tous = fichiers.flatMap(([ville, f]) => (f?.decisions ?? []).map((d) => ({ ...d, ville, themeInfo: f.themes?.[d.theme] ?? null, titresProjets: d.projets.map((cle) => f.projets?.[cle] ?? cle) })));
-    let traduction = null;
-    const traduire = () => (traduction ??= enAnglais(tous));
-    if (!tous.length) { zone.innerHTML = ''; return; }
-    const auj = new Date().toISOString().slice(0, 10);
-    const plusieursVilles = new Set(tous.map((d) => d.ville)).size > 1;
-    const cleGroupe = (d) => (plusieursVilles ? `${d.ville}|${d.groupe}` : d.groupe);
-    const groupes = new Map();
-    for (const d of tous) {
-      const k = cleGroupe(d);
-      if (!groupes.has(k)) groupes.set(k, { ville: d.ville, nom: d.groupe, dossiers: [] });
-      groupes.get(k).dossiers.push(d);
-    }
-    const ordre = ['Conseil de la ville', "Conseil d'agglomération", 'Comité exécutif', "Conseils d'arrondissement"];
-    const rang = (nom) => (ordre.includes(nom) ? ordre.indexOf(nom) : 99);
-    const cles = [...groupes.keys()].sort((a, b) => groupes.get(a).ville.localeCompare(groupes.get(b).ville) || rang(groupes.get(a).nom) - rang(groupes.get(b).nom));
-    // Par défaut : l'instance dont la prochaine date cible est la plus proche, sinon la plus chargée.
-    const prochaine = (g) => g.dossiers.map((d) => d.echeance).filter((e) => e && e >= auj).sort()[0] ?? null;
-    let choisie = [...cles].sort((a, b) => (prochaine(groupes.get(a)) ?? '9999').localeCompare(prochaine(groupes.get(b)) ?? '9999') || groupes.get(b).dossiers.length - groupes.get(a).dossiers.length)[0];
-
-    const item = (d) => `<details class="ab-ouvert" name="ouverts">
-        <summary>
-          <div class="ab-meta ab-pastilles">
-            ${d.themeInfo ? `<span class="ab-pastille-theme" style="background:${/^#[0-9a-f]{6}$/i.test(d.themeInfo.couleur ?? '') ? d.themeInfo.couleur : 'var(--doux)'}">${echapper(libTheme(d.theme, d.themeInfo.libelle))}</span>` : ''}
-            ${d.echeance ? `<span class="ab-etiquette${d.echeance >= auj ? ' ab-en-cours' : ''}">${tr('date cible', 'target date')} ${dateFr(d.echeance)}${d.echeance < auj ? tr(' (passée)', ' (past)') : ''}</span>` : `<span class="ab-etiquette">${tr('date non indiquée', 'no date given')}</span>`}
-            ${d.titresProjets.map((t) => `<span class="ab-etiquette ab-type-projet">${echapper(t)}</span>`).join('')}
-            <span class="ab-numero">${echapper(d.numero)}</span>
-            <span>${tr('préparé le', 'prepared on')} ${dateFr(d.date)}</span>
-            ${d.unite ? `<span class="ab-etiquette">${echapper(d.unite)}</span>` : ''}
-          </div>
-          <div class="ab-ouvert-phrase">${echapper(d.phrase)}</div>
-        </summary>
-        <div class="ab-ouvert-corps">
-          ${d.puces.length ? `<ul>${d.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul><p class="ab-note">${tr('Résumé généré par IA à partir du sommaire décisionnel. Le document officiel fait foi.', 'AI-generated summary of the decision summary. The official document (in French) prevails.')}</p>` : `<p class="ab-note">${tr('Pas de résumé pour ce dossier : voir le document officiel.', 'No summary for this item: see the official document.')}</p>`}
-          <div class="ab-liens">
-            ${d.pdf ? `<a href="${echapper(d.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}
-            <a href="/${echapper(d.ville)}/decisions.html?q=${encodeURIComponent(d.numero)}">${tr('Voir dans le volet', 'See in the city section:')} ${echapper(VILLES[d.ville] ?? '')}</a>
-          </div>
-        </div>
-      </details>`;
-
-    const dessiner = () => {
-      const g = groupes.get(choisie);
-      const probables = g.dossiers.filter((d) => d.echeance && d.echeance >= auj).sort((a, b) => a.echeance.localeCompare(b.echeance));
-      const autres = g.dossiers.filter((d) => !(d.echeance && d.echeance >= auj)).sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
-      // Deux menus dépliants, fermés au départ (le reste de l'agenda s'ouvre seulement s'il n'y a
-      // rien de daté, puisqu'il est alors seul).
-      $('#ouverts-liste').innerHTML = `
-        ${probables.length ? `<details class="ab-section-agenda">
-          <summary>${tr('Probablement à la prochaine séance', 'Probably at the next meeting')} <span class="ab-etiquette ab-en-cours">${probables.length}</span></summary>
-          <p class="ab-note" style="margin:0 0 8px">${tr('Date cible la plus proche écrite dans les sommaires :', 'Nearest target date written in the decision summaries:')} ${dateFr(prochaine(g))}.</p>
-          ${probables.map(item).join('')}
-        </details>` : ''}
-        <details class="ab-section-agenda"${probables.length ? '' : ' open'}>
-          <summary>${probables.length ? tr('Aussi à l’agenda, sans date prévue', 'Also on the agenda, no date set') : tr('À l’agenda, sans date prévue', 'On the agenda, no date set')} <span class="ab-etiquette">${autres.length}</span></summary>
-          ${probables.length ? '' : `<p class="ab-note" style="margin:0 0 8px">${tr('Aucun de ces dossiers n’indique de date cible : on ne peut pas dire lesquels seront présentés à la prochaine séance.', "None of these items gives a target date: we can't tell which ones will be presented at the next meeting.")}</p>`}
-          ${autres.length ? autres.map(item).join('') : `<p class="ab-note">${tr('Rien d’autre à l’agenda de cette instance.', 'Nothing else on this body’s agenda.')}</p>`}
-        </details>`;
-    };
-
-    const ouvertAgenda = zone.querySelector('details.ab-pliable')?.open ? ' open' : '';
-    zone.innerHTML = `<details class="ab-carte ab-pliable ab-ouverts"${ouvertAgenda}>
-      <summary><h2>${tr("Ce qui s'en vient au conseil", "What's coming up at council")} <span class="ab-h2-precision">(<em class="ab-mise-en-garde">${tr('estimé', 'estimated')}</em>)</span></h2><span class="ab-etiquette">${tous.length}</span></summary>
-      <div class="ab-pliable-corps">
-      <p class="ab-note" style="margin:0 0 12px">${tr('Tiré des documents PDF et du portail de la Ville.', "Drawn from the City's PDF documents and portal.")}</p>
-      <p class="ab-chapeau" style="margin-bottom:12px">${tr("Les dossiers qui attendent encore le vote d'un conseil. Ceux qui ont une date cible passeront <em class=\"ab-mise-en-garde\">probablement</em> à la prochaine séance, mais <em class=\"ab-mise-en-garde\">ce n'est pas l'ordre du jour officiel</em> : un dossier peut être reporté.", 'Items still awaiting a council vote. Those with a target date will <em class="ab-mise-en-garde">probably</em> come up at the next meeting, but <em class="ab-mise-en-garde">this is not the official agenda</em>: an item can be postponed.')}</p>
-      <label class="ab-choix-instance">${tr('Instance', 'Body')}
-        <select id="ouverts-instance">${cles.map((k) => { const g = groupes.get(k); return `<option value="${echapper(k)}"${k === choisie ? ' selected' : ''}>${plusieursVilles ? `${echapper(VILLES[g.ville] ?? g.ville)} — ` : ''}${echapper(lib(g.nom))} (${g.dossiers.length})</option>`; }).join('')}</select>
-      </label>
-      <div id="ouverts-liste">${CHARGEMENT()}</div>
-      </div>
-    </details>`;
-    aLOuverture(zone.querySelector('details.ab-ouverts'), async () => { await traduire(); dessiner(); });
-    $('#ouverts-instance').addEventListener('change', async (e) => { choisie = e.target.value; await traduire(); dessiner(); mesurer('agenda_conseils_instance'); });
   }
 
   // ---------- nous écrire ----------
@@ -1252,14 +371,12 @@ ${liste.map(fiche).join('')}
     setTimeout(arreter, 5000);
   }
   if (location.hash === '#ecrire') garderEnVue('ecrire');
-  // Le lien « Choisir un projet de ville » de l'encadré d'abonnement (accueil de DQ) : la boîte des
-  // projets à suivre, ouverte (voir suggestions).
+  // Un lien vers #suggestions : la boîte des projets à suivre, ouverte (voir suggestions).
   if (location.hash === '#suggestions') garderEnVue('suggestions');
   // Déjà sur la page : le lien « Nous écrire » change seulement l'ancre.
   addEventListener('hashchange', () => { if (location.hash === '#ecrire') document.getElementById('ecrire')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
 
   // ---------- projets à suivre, par ville ----------
-  // Pour tout le monde : aux abonnés, du contenu de plus ; aux autres, une raison de s'abonner.
   // Une couleur par ville, la même partout où la ville a sa boîte ; une ville à venir prend la suivante.
   const COULEURS_VILLES = { quebec: '#2563EB', levis: '#0B8A4B', montreal: '#DC2626', longueuil: '#7C3AED', laval: '#0F766E' };
   const PALETTE_VILLES = ['#EA580C', '#DB2777', '#0891B2', '#B7791F'];
@@ -1315,42 +432,6 @@ ${liste.map(fiche).join('')}
          </div>
        </details>`
       : '';
-  }
-
-  // Retour de Stripe (?abonnement=merci) : le webhook confirme en quelques secondes. On revérifie
-  // seulement le statut, toutes les 2 secondes pendant 30 secondes, et on redessine la page une fois
-  // l'abonnement actif.
-  let attenteMerci = null;
-  const MERCI = {
-    actif: () => tr("<strong>Merci, votre abonnement est actif.</strong> Les alertes par courriel, les mots-clés, les organismes suivis, l'export et ce qui s'en vient au conseil sont ouverts ci-dessous. Stripe vous envoie le reçu par courriel.", '<strong>Thank you, your subscription is active.</strong> Email alerts, keywords, followed organizations, export and council agendas are open below. Stripe is emailing you the receipt.'),
-    attente: () => tr('<strong>Merci !</strong> On attend la confirmation du paiement par Stripe, quelques secondes…', '<strong>Thank you!</strong> Waiting for Stripe to confirm the payment, a few seconds…'),
-    tard: () => tr('<strong>Merci !</strong> La confirmation du paiement tarde : rechargez la page dans une minute. Si rien ne change, <a class="ab-lien" href="#ecrire">écrivez-nous</a> — rien ne sera perdu.', '<strong>Thank you!</strong> The payment confirmation is taking a while: reload the page in a minute. If nothing changes, <a class="ab-lien" href="#ecrire">write to us</a> — nothing will be lost.'),
-  };
-  function merciAbonnement(s, abonne) {
-    const params = new URLSearchParams(location.search);
-    if (params.get('abonnement') !== 'merci') return '';
-    if (abonne) {
-      params.delete('abonnement');
-      history.replaceState(null, '', location.pathname + (params.size ? `?${params}` : '') + location.hash);
-      mesurer('abonnement_confirme', {});
-    } else if (!attenteMerci) {
-      let essais = 0;
-      attenteMerci = setInterval(async () => {
-        essais++;
-        if (await statutAbonnement(s).catch(() => false)) { clearInterval(attenteMerci); return afficher(); }
-        if (essais >= 15) {
-          clearInterval(attenteMerci);
-          const boite = document.querySelector('.ab-merci');
-          if (boite) boite.innerHTML = MERCI.tard();
-        }
-      }, 2000);
-    }
-    return `<div class="ab-carte ab-merci" role="status">${abonne ? MERCI.actif() : MERCI.attente()}</div>`;
-  }
-
-  async function statutAbonnement(s) {
-    const { data } = await client.from('abonnements').select('statut, fin').eq('user_id', s.user.id).maybeSingle();
-    return data && data.statut === 'actif' && (!data.fin || new Date(data.fin) > new Date());
   }
 
   const estProjet = (id) => id.startsWith('projet:');
@@ -1576,26 +657,21 @@ ${liste.map(fiche).join('')}
   async function afficher() {
     const s = await session();
     if (!s) return connexion();
-    const abonne = await statutAbonnement(s).catch(() => false);
-    $('#compte').innerHTML = `${merciAbonnement(s, abonne)}<p class="ab-note">${tr('Connecté comme', 'Signed in as')} <strong>${echapper(s.user.email)}</strong> · ${abonne ? tr('abonnement actif — <a class="ab-lien" href="/abonnement">gérer</a>', 'active subscription — <a class="ab-lien" href="/abonnement">manage</a>') : tr('pas d\'abonnement — <a class="ab-lien" href="/abonnement">voir l\'abonnement</a>', 'no subscription — <a class="ab-lien" href="/abonnement">see the subscription</a>')} · <button type="button" class="ab-lien-bouton" id="deconnexion">${tr('Se déconnecter', 'Sign out')}</button></p>`;
+    $('#compte').innerHTML = `<p class="ab-note">${tr('Connecté comme', 'Signed in as')} <strong>${echapper(s.user.email)}</strong> · <button type="button" class="ab-lien-bouton" id="deconnexion">${tr('Se déconnecter', 'Sign out')}</button></p>`;
     $('#deconnexion').addEventListener('click', async () => { await client.auth.signOut(); });
     // Compte de consultation : on retire les commandes qui écrivent et on dit pourquoi.
     avisConsultation($('#compte'));
 
     // Le quota est commun : on le relit avant les boîtes qui ajoutent quelque chose.
-    await majQuota(abonne).catch((e) => console.error('quota :', e));
-    motsCles(s, abonne).catch((e) => console.error('mots-clés :', e));
-    organismesSuivis(s, abonne).catch((e) => console.error('organismes :', e));
-    exportTableur(s, abonne).catch((e) => console.error('export :', e));
-    dossiersOuverts(s, abonne).catch((e) => console.error('dossiers ouverts :', e));
-    // Le compte rendu du mois : pour tous les comptes, gratuits ou abonnés.
-    ligneAlerte(s, abonne)
-      .then((premiereLigne) => boiteInfolettre($('#infolettre'), s, { premiereLigne }))
-      .catch((e) => console.error('courriels :', e));
+    await majQuota().catch((e) => console.error('quota :', e));
+    motsCles(s).catch((e) => console.error('mots-clés :', e));
+    organismesSuivis(s).catch((e) => console.error('organismes :', e));
+    // Le compte rendu du mois : pour tous les comptes.
+    boiteInfolettre($('#infolettre'), s).catch((e) => console.error('courriels :', e));
     ecrire(s);
     // Cette page est celle des VILLES : les projets de loi suivis vivent dans /mon-dossier.
     const suivis = (await chargerSuivis()).filter((x) => x.ville !== 'assemblee');
-    pourquoi({ connecte: true, abonne });
+    pourquoi({ connecte: true });
     suggestions(s, new Set(suivis.map((x) => `${x.ville}|${x.dossier_id}`)));
     if (!suivis.length) {
       $('#liste').innerHTML = `<p class="ab-vide">${tr("Vous ne suivez aucun projet de ville pour l'instant. Choisissez-en un ci-dessus, dans « Des projets à suivre ».", "You aren't following any city project yet. Pick one above, in “Projects to follow”.")}</p>`;
@@ -1639,10 +715,8 @@ ${liste.map(fiche).join('')}
       if (erreur) {
         suggestion.disabled = false;
         const plafond = limiteSuivis(erreur);
-        suggestion.textContent = plafond === 3
-          ? tr('Limite : 3 suivis sans abonnement', 'Limit: 3 follows without a subscription')
-          : plafond ? tr(`Limite : ${plafond} suivis en tout`, `Limit: ${plafond} follows in all`)
-            : tr('Impossible — réessayez', "Couldn't — try again");
+        suggestion.textContent = plafond ? tr(`Limite : ${plafond} suivis en tout`, `Limit: ${plafond} follows in all`)
+          : tr('Impossible — réessayez', "Couldn't — try again");
         return;
       }
       mesurer('suggestion_suivre_projet', { ville: suggestion.dataset.ville, projet: suggestion.dataset.cle });
