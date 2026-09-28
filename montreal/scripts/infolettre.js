@@ -369,7 +369,7 @@ async function main() {
   titreMd(SECTIONS.sujets);
   L.push(sujets.map((s) => `${s.libelle} (${s.n})`).join(' · '), '');
   L.push('---', '');
-  L.push(`Les montants sont ceux des documents. Les résumés sont générés par IA à partir des sommaires décisionnels ; chaque lien mène au PDF officiel de la Ville, qui fait foi. Toutes les décisions : ${SITE}decisions.html — site indépendant, sans publicité, aucun caractère officiel.`);
+  L.push(`Les montants sont ceux des documents. Les résumés sont générés par IA à partir des sommaires décisionnels ; chaque lien mène au PDF officiel de la Ville, qui fait foi. Toutes les décisions : ${SITE}decisions-de-la-ville-de-montreal — site indépendant, sans publicité, aucun caractère officiel.`);
   const md = L.join('\n');
 
   // ---------- HTML pour le courriel ----------
@@ -419,7 +419,7 @@ async function main() {
   const marque = `<span style="display:inline-block;padding:2px 8px;border-radius:999px;background:#D99A06;color:#ffffff;font-size:11px;font-weight:800;letter-spacing:.04em;white-space:nowrap;vertical-align:middle">★ ABONNÉS</span>`;
   const boiteOr = (contenu, marge = '10px 0 0') => `<div style="${POLICE};margin:${marge};padding:10px 12px;border-radius:8px;background:#FFF7E0;border:1px dashed #E9B949;font-size:14px;line-height:1.55;color:${ENCRE}">${contenu}</div>`;
   const lienOr = (texte, url) => `<a href="${echapper(url)}" style="color:${OR};font-weight:700;text-decoration:none;white-space:nowrap">${texte}&nbsp;↗</a>`;
-  const fiche = (numero) => `${SITE}decisions.html?q=${encodeURIComponent(numero)}`;
+  const fiche = (numero) => `${SITE}decisions-de-la-ville-de-montreal?q=${encodeURIComponent(numero)}`;
   // Le détail de l'argent d'un gros montant : quelques lignes pour l'abonné, ce qu'il contient pour les
   // autres (sans les chiffres). Rien, dans les deux éditions, s'il n'est pas lu.
   // Sous une subvention ou un contrat, l'essentiel du détail en une ligne dorée (abonnés seulement) :
@@ -612,7 +612,7 @@ async function main() {
   </td></tr>`);
   H.push(`<tr><td style="${POLICE};padding:22px 4px 0;font-size:12px;line-height:1.55;color:${DOUX}">
     Les montants sont ceux des documents. Les résumés sont générés par IA à partir des sommaires décisionnels ; chaque lien mène au PDF officiel de la Ville, qui fait foi.
-    <a href="${SITE}decisions.html" style="color:${DOUX}">Toutes les décisions</a> · site indépendant, sans publicité, aucun caractère officiel.<!--DESINSCRIPTION-->
+    <a href="${SITE}decisions-de-la-ville-de-montreal" style="color:${DOUX}">Toutes les décisions</a> · site indépendant, sans publicité, aucun caractère officiel.<!--DESINSCRIPTION-->
   </td></tr>`);
 
   return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${echapper(titreCourriel)}</title></head>` +

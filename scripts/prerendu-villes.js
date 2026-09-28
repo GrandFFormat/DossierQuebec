@@ -50,16 +50,16 @@ function prerendre(ville) {
 <p><a href="${echapper(d.pdf ?? r.pdf)}" rel="noopener">Document officiel (PDF)</a> — résumé généré par IA, le PDF fait foi.</p>
 </article>`).join('\n');
 
-  const chemin = `${RACINE}${ville}/decisions.html`;
+  const chemin = `${RACINE}${ville}/decisions-de-la-ville-de-${ville}.html`;
   const page = readFileSync(chemin, 'utf8');
   const nl = page.includes('\r\n') ? '\r\n' : '\n';
   const bloc = `${DEBUT}${nl}<h2 class="prerendu-titre">Les ${retenues.length} décisions les plus récentes, en clair</h2>${nl}${html.split('\n').join(nl)}${nl}${FIN}`;
   let neuve;
   if (page.includes(DEBUT)) neuve = page.slice(0, page.indexOf(DEBUT)) + bloc + page.slice(page.indexOf(FIN) + FIN.length);
   else if (page.includes('<div id="liste-decisions"></div>')) neuve = page.replace('<div id="liste-decisions"></div>', `<div id="liste-decisions">${bloc}</div>`);
-  else throw new Error(`${ville}/decisions.html : ni marqueurs ni <div id="liste-decisions"></div>`);
+  else throw new Error(`${ville}/decisions-de-la-ville-de-${ville}.html : ni marqueurs ni <div id="liste-decisions"></div>`);
   if (neuve !== page) writeFileSync(chemin, neuve);
-  console.log(`${ville} : ${retenues.length} décisions écrites dans decisions.html${neuve === page ? ' (inchangé)' : ''}.`);
+  console.log(`${ville} : ${retenues.length} décisions écrites dans la page des décisions${neuve === page ? ' (inchangé)' : ''}.`);
 }
 
 const demandes = process.argv.slice(2);

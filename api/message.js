@@ -56,7 +56,7 @@ async function envoyerCourriel(m) {
   const lieu = [VILLES[m.ville], m.numero].filter(Boolean).join(' ');
   const sujet = `[DossierQuébec] ${SUJETS[m.sujet]}${lieu ? ` — ${lieu}` : ''}`;
   const ligne = (etiquette, valeur) => (valeur ? `<tr><td style="padding:2px 12px 2px 0;vertical-align:top">${etiquette}</td><td style="padding:2px 0">${valeur}</td></tr>` : '');
-  const fiche = m.ville && m.numero ? `${SITE}/${m.ville}/decisions.html?q=${encodeURIComponent(m.numero)}` : null;
+  const fiche = m.ville && m.numero ? `${SITE}/${m.ville}/decisions-de-la-ville-de-${m.ville}?q=${encodeURIComponent(m.numero)}` : null;
   const html = `<div style="font-family:Arial,sans-serif;max-width:560px;color:#16191D;line-height:1.5">
     <p style="white-space:pre-wrap;margin:0 0 16px;font-size:15px">${echapper(m.message)}</p>
     <table style="font-size:13px;color:#5B6570;border-collapse:collapse">

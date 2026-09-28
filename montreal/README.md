@@ -370,7 +370,7 @@ scripts/static-server.js serveur statique local
 scripts/reparer-echappements.js  répare les accents échappés dans les résumés
 test/pv.test.js          les lecteurs, hors ligne (npm test)
 assets/style.css assets/app.js
-index.html decisions.html votes-nominatifs.html conseil-municipal.html lexique-municipal.html sources-des-donnees.html
+index.html decisions-de-la-ville-de-montreal.html votes-nominatifs.html conseil-municipal.html lexique-municipal.html sources-des-donnees.html
 courriel-greffe.md       le modèle du courriel au greffe, sur les droits d'usage
 data/                    sorties JSON (data/textes/ = cache, hors dépôt)
 ../.github/workflows/refresh-villedemontreal.yml   le workflow quotidien
