@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DossierVilleDeLongueuil — les décisions de la Ville de Longueuil, lisibles</title>
-<meta name="description" content="Site citoyen indépendant qui rend lisibles les décisions de la Ville de Longueuil : résolutions du conseil de ville et du conseil d'agglomération, résumés des sommaires décisionnels, votes nominatifs et membres du conseil.">
-<link rel="canonical" href="https://dossierquebec.ca/longueuil/">
+<title>Lexique du vocabulaire municipal — DossierVilleDeLongueuil</title>
+<meta name="description" content="Résolution, sommaire décisionnel, document de séance, vote nominal, dissidence, ville liée : le vocabulaire des décisions de la Ville de Longueuil, expliqué et vérifié sur les procès-verbaux officiels.">
+<link rel="canonical" href="https://dossierquebec.ca/longueuil/lexique-municipal-de-longueuil">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DossierQuébec">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:title" content="DossierVilleDeLongueuil — les décisions de la Ville de Longueuil, lisibles">
-<meta property="og:description" content="Site citoyen indépendant qui rend lisibles les décisions de la Ville de Longueuil : résolutions du conseil de ville et du conseil d'agglomération, résumés des sommaires décisionnels, votes nominatifs et membres du conseil.">
-<meta property="og:url" content="https://dossierquebec.ca/longueuil/">
+<meta property="og:title" content="Lexique du vocabulaire municipal — DossierVilleDeLongueuil">
+<meta property="og:description" content="Résolution, sommaire décisionnel, document de séance, vote nominal, dissidence, ville liée : le vocabulaire des décisions de la Ville de Longueuil, expliqué et vérifié sur les procès-verbaux officiels.">
+<meta property="og:url" content="https://dossierquebec.ca/longueuil/lexique-municipal-de-longueuil">
 <meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <meta property="og:image:width" content="1702">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="DossierVilleDeLongueuil — les décisions de la Ville de Longueuil, lisibles">
-<meta name="twitter:description" content="Site citoyen indépendant qui rend lisibles les décisions de la Ville de Longueuil : résolutions du conseil de ville et du conseil d'agglomération, résumés des sommaires décisionnels, votes nominatifs et membres du conseil.">
+<meta name="twitter:title" content="Lexique du vocabulaire municipal — DossierVilleDeLongueuil">
+<meta name="twitter:description" content="Résolution, sommaire décisionnel, document de séance, vote nominal, dissidence, ville liée : le vocabulaire des décisions de la Ville de Longueuil, expliqué et vérifié sur les procès-verbaux officiels.">
 <meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,6 +52,12 @@
       "position": 2,
       "name": "Ville de Longueuil",
       "item": "https://dossierquebec.ca/longueuil/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Lexique",
+      "item": "https://dossierquebec.ca/longueuil/lexique-municipal-de-longueuil"
     }
   ]
 }
@@ -59,12 +65,12 @@
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="/commun/abonnes.css">
 </head>
-<body data-page="accueil" data-ville="longueuil">
+<body data-page="lexique" data-ville="longueuil">
 
 <header>
   <div class="contenu">
     <div class="titre-ligne">
-      <a href="./"><h1>Dossier<span class="marque">VilleDeLongueuil</span></h1></a><a class="lien-dq" href="/" title="DossierQuébec — l'Assemblée nationale en clair" aria-label="DossierQuébec — l'Assemblée nationale en clair" data-en-title="DossierQuébec — Quebec's National Assembly in plain language" data-en-aria-label="DossierQuébec — Quebec's National Assembly in plain language"></a>
+      <a href="./"><p class="logo-titre">Dossier<span class="marque">VilleDeLongueuil</span></p></a><a class="lien-dq" href="/" title="DossierQuébec — l'Assemblée nationale en clair" aria-label="DossierQuébec — l'Assemblée nationale en clair" data-en-title="DossierQuébec — Quebec's National Assembly in plain language" data-en-aria-label="DossierQuébec — Quebec's National Assembly in plain language"></a>
       <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
       <details class="ab-villes" id="villes"></details>
     </div>
@@ -73,11 +79,11 @@
       des procès-verbaux et des documents de séance officiels de la Ville.
     </p>
     <nav>
-      <a href="./" aria-current="page">Accueil</a>
+      <a href="./">Accueil</a>
       <a href="decisions-de-la-ville-de-longueuil">Décisions</a>
       <a href="votes-nominatifs-du-conseil-de-longueuil">Votes nominatifs</a>
       <a href="conseil-de-ville-de-longueuil">Conseil de ville</a>
-      <a href="lexique-municipal-de-longueuil">Lexique</a>
+      <a href="lexique-municipal-de-longueuil" aria-current="page">Lexique</a>
       <a href="https://longueuil.quebec/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Longueuil (nouvel onglet)">Ville de Longueuil ↗</a>
       <div class="outils">
         <div class="taille-texte" role="group" aria-label="Taille du texte">
@@ -95,38 +101,18 @@
 <main class="contenu">
   <div id="chargement" class="avis">Chargement des données…</div>
 
-  <div class="chiffres" id="chiffres"></div>
-
-  <h2 class="page" id="titre-fil">Ce qui a changé</h2>
-  <div id="fil"></div>
-  <button class="plus" id="plus-fil" hidden>Afficher plus</button>
-  <p style="margin-top:14px">
-    <a href="decisions-de-la-ville-de-longueuil">Toutes les décisions →</a> &nbsp;·&nbsp;
-    <a href="votes-nominatifs-du-conseil-de-longueuil">Tous les votes nominatifs →</a>
+  <h1 data-en="Longueuil municipal glossary" class="page">Lexique municipal de Longueuil</h1>
+  <p class="chapeau">
+    Voici le lexique municipal de Longueuil&nbsp;: les mots que vous croisez sur ce site, et ce
+    qu'ils veulent dire. Le vocabulaire des décisions municipales est opaque par habitude, pas par
+    nécessité.
   </p>
 
-  <h2 class="page">Par où commencer</h2>
-  <div class="cartes-liens">
-    <a class="lien-section" href="decisions-de-la-ville-de-longueuil">
-      <h3>Décisions</h3>
-      <p>Les résolutions du conseil de ville et du conseil d'agglomération de l'année en cours, lues dans les procès-verbaux, avec le résumé du sommaire décisionnel qui les explique.</p>
-    </a>
-    <a class="lien-section" href="votes-nominatifs-du-conseil-de-longueuil">
-      <h3>Votes nominatifs</h3>
-      <p>Quand un membre demande le vote, le procès-verbal nomme qui a voté pour et qui a voté contre. Le décompte, par personne.</p>
-    </a>
-    <a class="lien-section" href="conseil-de-ville-de-longueuil">
-      <h3>Conseil de ville</h3>
-      <p>La carte des districts et des trois arrondissements : cliquez sur le vôtre pour savoir qui vous représente et comment le joindre. Et les membres du conseil d'agglomération.</p>
-    </a>
-    <a class="lien-section" href="sources-des-donnees-de-longueuil">
-      <h3>Sources et limites</h3>
-      <p>D'où viennent les données, comment elles sont obtenues, et ce que ce prototype ne fait pas encore.</p>
-    </a>
+  <div class="barre-outils">
+    <input type="search" id="rech-lexique" placeholder="Chercher un terme…">
   </div>
-
-  <!-- Les courriels de la ville : rempli par /commun/infolettre.js, caché tant qu'elle n'en a pas. -->
-  <div id="infolettre" hidden></div>
+  <p class="compte" id="compte-lexique"></p>
+  <div id="liste-lexique"></div>
 </main>
 
 <footer>
@@ -139,10 +125,6 @@
 <script type="module" src="assets/app.js"></script>
 <script type="module" src="/commun/entete-volet.js"></script>
 <script type="module" src="/commun/abonnes.js"></script>
-<script type="module">
-  import { formulaireInfolettre } from '/commun/infolettre.js';
-  formulaireInfolettre(document.getElementById('infolettre'), { ville: document.body.dataset.ville });
-</script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
      Même projet Vercel : les pages vues de /longueuil/ s'ajoutent au même tableau de
      bord. En local le script n'existe pas (404 sans conséquence). -->

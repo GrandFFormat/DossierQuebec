@@ -637,10 +637,10 @@ const PAGES_VILLE = [
   // Chaque ville a son adresse : « Décisions de la Ville de Québec » donne decisions-de-la-ville-de-quebec.
   { page: 'decisions', parVille: Object.fromEntries(VILLES.map((v) => [v, `decisions-de-la-ville-de-${v}`])), frequence: 'daily', priorite: '0.8', jeu: 'decisions' },
   // Longueuil n'a pas de conseil municipal mais un conseil de ville : son adresse le dit, comme son titre.
-  { page: 'conseil-municipal', parVille: { longueuil: 'conseil-de-ville' }, frequence: 'weekly', priorite: '0.6', jeu: 'decisions' },
-  { page: 'votes-nominatifs', frequence: 'weekly', priorite: '0.6', jeu: 'votes' },
-  { page: 'lexique-municipal', frequence: 'monthly', priorite: '0.4' },
-  { page: 'sources-des-donnees', frequence: 'monthly', priorite: '0.3' },
+  { page: 'conseil', parVille: {"quebec":"conseil-municipal-de-quebec","montreal":"conseil-municipal-de-montreal","levis":"conseil-municipal-de-levis","longueuil":"conseil-de-ville-de-longueuil","laval":"conseil-municipal-de-laval"}, frequence: 'weekly', priorite: '0.6', jeu: 'decisions' },
+  { page: 'votes', parVille: {"quebec":"votes-nominatifs-du-conseil-de-quebec","montreal":"votes-nominatifs-du-conseil-de-montreal","levis":"votes-nominatifs-du-conseil-de-levis","longueuil":"votes-nominatifs-du-conseil-de-longueuil","laval":"votes-nominatifs-du-conseil-de-laval"}, frequence: 'weekly', priorite: '0.6', jeu: 'votes' },
+  { page: 'lexique', parVille: {"quebec":"lexique-municipal-de-quebec","montreal":"lexique-municipal-de-montreal","levis":"lexique-municipal-de-levis","longueuil":"lexique-municipal-de-longueuil","laval":"lexique-municipal-de-laval"}, frequence: 'monthly', priorite: '0.4' },
+  { page: 'sources', parVille: {"quebec":"sources-des-donnees-de-quebec","montreal":"sources-des-donnees-de-montreal","levis":"sources-des-donnees-de-levis","longueuil":"sources-des-donnees-de-longueuil","laval":"sources-des-donnees-de-laval"}, frequence: 'monthly', priorite: '0.3' },
 ];
 function derniereDate(ville, jeu) {
   const chemin = `${ville}/data/${jeu}.json`;

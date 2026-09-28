@@ -872,7 +872,7 @@ function ligneEvenement(e) {
     const corps = `<p class="compte" style="margin:0">
         ${v.decomptePour ?? v.pour.length} ${tr('pour', 'for')}, ${v.decompteContre ?? v.contre.length} ${tr('contre', 'against')}${
           v.contre.length ? ' — ' + v.contre.map(echapper).join(', ') : ''
-        }. <a href="votes-nominatifs">${tr('Voir le détail', 'See details')}</a>
+        }. <a href="votes-nominatifs-du-conseil-de-montreal">${tr('Voir le détail', 'See details')}</a>
       </p>`;
     return carteRepliable(entete, corps);
   }
@@ -921,13 +921,13 @@ function rendreAccueil() {
     chiffres.push({ n: nombreFr(totalDecisions()), quoi: tr(`décisions publiées en ${etat.decisions.parametres.annee}`, `decisions published in ${etat.decisions.parametres.annee}`), lien: 'decisions-de-la-ville-de-montreal' });
   }
   if (etat.votes) {
-    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: tr('votes nominatifs consignés cette année', 'recorded votes this year'), lien: 'votes-nominatifs' });
+    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: tr('votes nominatifs consignés cette année', 'recorded votes this year'), lien: 'votes-nominatifs-du-conseil-de-montreal' });
   }
   if (etat.resumes) {
     chiffres.push({ n: nombreFr(etat.resumes.nombre), quoi: tr('décisions résumées en langage clair', 'decisions summarized in plain language'), lien: 'decisions-de-la-ville-de-montreal' });
   }
   if (etat.elus) {
-    chiffres.push({ n: etat.elus.nombre, quoi: tr('membres du conseil municipal', 'members of City Council'), lien: 'conseil-municipal' });
+    chiffres.push({ n: etat.elus.nombre, quoi: tr('membres du conseil municipal', 'members of City Council'), lien: 'conseil-municipal-de-montreal' });
   }
   if ($('#chiffres')) {
     $('#chiffres').innerHTML = chiffres
