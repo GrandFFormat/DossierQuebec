@@ -268,6 +268,29 @@ function goToFederal(evt){
       <div class="stat-cell"><b id="statVotes">—</b><span data-i18n="stat.votes">Votes nominatifs</span></div>
     </div>
 
+    <!-- Section signature du handoff : bande JAUNE pleine largeur -->
+    <div class="band band-yellow bleed" id="band-challenged">
+    <div class="section-head" id="sec-challenged">
+      <div>
+        <h2 id="challengedTitle">Projets challengés par les citoyen·ne·s</h2>
+        <div class="sub" id="challengedSub"></div>
+      </div>
+      <a class="ch-more" id="chMoreBtn" role="button" tabindex="0" onclick="showMoreChallenged()" data-i18n="ch.more" style="display:none;">Voir plus →</a>
+    </div>
+    <div id="challengedList"></div>
+    </div>
+
+    <div class="section-head" id="sec-projets-recents">
+      <div>
+        <h2 data-i18n="h.billsrecent">Projets de loi récemment actifs</h2>
+        <div class="sub" data-i18n="apercu.recent.sub">↓ Cliquez n'importe où dans le carré blanc pour voir le résumé ↓</div>
+      </div>
+    </div>
+    <div id="body-projets-recents">
+    <div id="apercuBills"></div>
+    <!--PRERENDU:apercuBills-->
+    </div>
+
     <!-- À la place de « Par où commencer » (Martin, 21 sept. 2026) : le compte gratuit et Mon dossier.
          L'abonnement payant qu'elle vendait a été retiré le 27 sept. 2026. #promoCompte est rempli
          par dq.js (renderPromoCompte) ; d'ici là, champ et bouton restent désactivés. -->
@@ -293,29 +316,6 @@ function goToFederal(evt){
         </div>
         </div>
       </div>
-    </div>
-
-    <!-- Section signature du handoff : bande JAUNE pleine largeur -->
-    <div class="band band-yellow bleed" id="band-challenged">
-    <div class="section-head" id="sec-challenged">
-      <div>
-        <h2 id="challengedTitle">Projets challengés par les citoyen·ne·s</h2>
-        <div class="sub" id="challengedSub"></div>
-      </div>
-      <a class="ch-more" id="chMoreBtn" role="button" tabindex="0" onclick="showMoreChallenged()" data-i18n="ch.more" style="display:none;">Voir plus →</a>
-    </div>
-    <div id="challengedList"></div>
-    </div>
-
-    <div class="section-head" id="sec-projets-recents">
-      <div>
-        <h2 data-i18n="h.billsrecent">Projets de loi récemment actifs</h2>
-        <div class="sub" data-i18n="apercu.recent.sub">↓ Cliquez n'importe où dans le carré blanc pour voir le résumé ↓</div>
-      </div>
-    </div>
-    <div id="body-projets-recents">
-    <div id="apercuBills"></div>
-    <!--PRERENDU:apercuBills-->
     </div>
 
     <!-- Bande blanche : Quoi de neuf + Pétitions côte à côte (maquette) -->
