@@ -8,6 +8,9 @@
 // Version anglaise (commun/langue.js) : tr('français', 'English'), lib() pour les libellés de la Ville.
 import { EN, tr } from '/commun/langue.js';
 import { libelleEn, themeEn } from './libelles-en.js';
+import { boutonImprimer, brancherImpression } from '/commun/imprimer-seance.js';
+
+brancherImpression();
 const lib = (texte) => (EN ? libelleEn(texte) : texte);
 
 const PAS = 60; // fiches affichées par palier
@@ -276,6 +279,7 @@ function rendreSeance(g) {
         <span class="seance-date">${dateFr(g.date)}</span>
         <span class="puce">${g.lignes.length} ${tr(s(g.lignes.length, 'décision', 'décisions'), s(g.lignes.length, 'decision', 'decisions'))}</span>
         ${g.tronquee ? `<span class="puce procedural">${tr('journée partiellement chargée', 'day partly loaded')}</span>` : ''}
+        ${boutonImprimer(tr('Imprimer cette séance, toutes ses décisions dépliées', 'Print this meeting, with all its decisions expanded'))}
       </summary>
       <div class="seance-corps">${g.lignes.map(carteDecision).join('')}</div>
     </details>`;

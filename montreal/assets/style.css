@@ -134,7 +134,7 @@ body {
 header { background: var(--entete-fond); border-bottom: 1px solid var(--entete-ligne); }
 .titre-ligne { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 26px 0 2px; }
 .titre-ligne a { text-decoration: none; color: inherit; }
-h1 { font-size: 27px; margin: 0; font-weight: 800; letter-spacing: -0.025em; color: var(--entete-encre); }
+h1, .logo-titre { font-size: 27px; margin: 0; font-weight: 800; letter-spacing: -0.025em; color: var(--entete-encre); }
 .marque { color: var(--accent); }
 
 .sous-titre { color: var(--entete-doux); margin: 6px 0 18px; font-size: 14.5px; max-width: 66ch; }
@@ -161,7 +161,7 @@ nav .outils { flex-basis: 100%; justify-content: center; margin-left: 0; padding
    ne reste que sur l'accueil, les onglets se resserrent, et les outils prennent leur ligne. */
 @media (max-width: 620px) {
   .titre-ligne { padding-top: 16px; gap: 14px 8px; }
-  h1 { font-size: 21px; }
+  h1, .logo-titre { font-size: 21px; }
   .titre-ligne > a:first-child::after { margin-left: 8px; font-size: 21px; }
   body:not([data-page="accueil"]) .sous-titre { display: none; }
   body:not([data-page="accueil"]) .titre-ligne { padding-bottom: 10px; }
@@ -182,7 +182,8 @@ nav .outils { flex-basis: 100%; justify-content: center; margin-left: 0; padding
 
 
 /* ---------- TITRES ---------- */
-h2.page { font-size: 30px; margin: 36px 0 8px; font-weight: 800; letter-spacing: -0.028em; line-height: 1.15; }
+/* h1.page : le titre de chaque page intérieure depuis le 27 sept. 2026 (le logo n'est plus un <h1>). */
+h2.page, h1.page { color: var(--encre); font-size: 30px; margin: 36px 0 8px; font-weight: 800; letter-spacing: -0.028em; line-height: 1.15; }
 h2.section {
   font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.09em;
   color: var(--doux); font-weight: 700; margin: 34px 0 12px;
@@ -380,7 +381,7 @@ body[data-page="sources"] main > ul { margin: 0 0 28px; padding-left: 22px; }
 body[data-page="sources"] main > ul > li { margin-bottom: 16px; }
 body[data-page="sources"] main > ul > li:last-child { margin-bottom: 0; }
 body[data-page="sources"] h3 { margin: 40px 0 14px; }
-body[data-page="sources"] h2.page { margin-bottom: 14px; }
+body[data-page="sources"] h2.page, body[data-page="sources"] h1.page { margin-bottom: 14px; }
 /* Le tableau garde une largeur minimale ; sur un téléphone il défile seul plutôt que de
    pousser toute la page. */
 body[data-page="sources"] .bloc-tableau { margin: 24px 0 28px; overflow-x: auto; }
@@ -632,7 +633,7 @@ h2.section[class*="cat-"] {
   border: 1px solid var(--ligne); border-radius: 999px; padding: 4px 12px; background: var(--carte);
 }
 .raccourcis a:hover { color: var(--encre); border-color: var(--ligne-forte); }
-h2.page[id] { scroll-margin-top: 16px; }
+h2.page[id], h1.page[id] { scroll-margin-top: 16px; }
 
 /* ---------- retour en haut ---------- */
 .haut {
