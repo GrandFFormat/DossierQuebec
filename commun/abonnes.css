@@ -731,14 +731,14 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 .ab-form-cadeau .ab-bouton { align-self: flex-start; }
 
 /* La fleur de lys à droite du logo de chaque volet : un lien vers DossierQuébec, l'Assemblée
-   nationale (Martin, 27 sept. 2026). En bleu Québec, comme la marque de DQ, quelle que soit la
-   palette du volet. ⚜ + U+FE0E : le glyphe texte, pas l'émoji en couleur. */
+   nationale (Martin, 27 sept. 2026). La forme vient de l'image choisie par Martin
+   (commun/fleur-de-lys.png, utilisée comme masque) ; la couleur est celle du volet (--accent). */
 .titre-ligne .lien-dq {
-  display: inline-flex; align-items: center; justify-content: center; margin-left: -4px;
-  font-family: 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'Apple Symbols', 'DejaVu Sans', sans-serif;
-  font-size: 34px; line-height: 1; color: #0047D6; text-decoration: none; transition: transform .15s ease;
-  -webkit-text-stroke: 1px currentColor; /* le glyphe de Windows est fin : on l'épaissit (Martin : « plus bleu et plus gros ») */
+  display: inline-block; flex: none; width: 34px; height: 34px; margin-left: -2px;
+  background-color: var(--accent);
+  -webkit-mask: url(/commun/fleur-de-lys.png) center / contain no-repeat;
+  mask: url(/commun/fleur-de-lys.png) center / contain no-repeat;
+  transition: transform .15s ease;
 }
 .titre-ligne .lien-dq:hover, .titre-ligne .lien-dq:focus-visible { transform: scale(1.15); }
-:root[data-theme="sombre"] .titre-ligne .lien-dq { color: #6FA0FF; }
-@media (max-width: 620px) { .titre-ligne .lien-dq { font-size: 27px; } }
+@media (max-width: 620px) { .titre-ligne .lien-dq { width: 27px; height: 27px; } }
