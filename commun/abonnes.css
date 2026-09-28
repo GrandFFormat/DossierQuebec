@@ -734,11 +734,11 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
    nationale (Martin, 27 sept. 2026). La forme vient de l'image choisie par Martin
    (commun/fleur-de-lys.png, utilisée comme masque) ; la couleur est celle du volet (--accent). */
 .titre-ligne .lien-dq {
-  display: inline-block; flex: none; width: 34px; height: 34px; margin-left: -2px;
+  display: inline-block; flex: none; width: 24px; height: 24px; margin-left: -4px; /* à peu près la hauteur des lettres du logo (27 px) */
   background-color: var(--accent);
   -webkit-mask: url(/commun/fleur-de-lys.png) center / contain no-repeat;
   mask: url(/commun/fleur-de-lys.png) center / contain no-repeat;
   transition: transform .15s ease;
 }
 .titre-ligne .lien-dq:hover, .titre-ligne .lien-dq:focus-visible { transform: scale(1.15); }
-@media (max-width: 620px) { .titre-ligne .lien-dq { width: 27px; height: 27px; } }
+@media (max-width: 620px) { .titre-ligne .lien-dq { width: 19px; height: 19px; } }
