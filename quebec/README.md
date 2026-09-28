@@ -90,10 +90,10 @@ donc elle peut être indexée et partagée telle quelle.
 |---|---|
 | `index.html` | accueil : le fil de ce qui a changé depuis la dernière extraction |
 | `decisions.html` | toutes les décisions, recherche, filtres, résumés |
-| `votes.html` | appels nominaux et décompte des votes contre par personne |
-| `conseil.html` | la carte des 21 districts, les 22 membres, et le conseil d'agglomération |
-| `lexique.html` | 30 termes du vocabulaire décisionnel, chiffrés sur le corpus |
-| `sources.html` | provenance, méthode, limites, état des données |
+| `votes-nominatifs.html` | appels nominaux et décompte des votes contre par personne |
+| `conseil-municipal.html` | la carte des 21 districts, les 22 membres, et le conseil d'agglomération |
+| `lexique-municipal.html` | 30 termes du vocabulaire décisionnel, chiffrés sur le corpus |
+| `sources-des-donnees.html` | provenance, méthode, limites, état des données |
 
 Le style et la logique sont partagés (`assets/style.css`, `assets/app.js`) et les données sont
 lues à l'exécution depuis `data/*.json` : chaque page fait quelques kilo-octets, et une seule
@@ -852,7 +852,7 @@ commentaire dans le fichier parce que le piège est facile à refaire ailleurs.
 
 ## Le lexique
 
-Le vocabulaire décisionnel municipal est opaque par habitude, pas par nécessité. `lexique.html`
+Le vocabulaire décisionnel municipal est opaque par habitude, pas par nécessité. `lexique-municipal.html`
 explique 30 termes — résolution, sommaire décisionnel, avis de motion, ordonnance, dérogation
 mineure, ville reconstituée, adjudication, gré à gré… — en six catégories.
 
@@ -942,7 +942,7 @@ scripts/static-server.js serveur statique local
 scripts/reparer-echappements.js  répare les accents échappés (\uXXXX) dans les résumés
 assets/style.css         style commun à toutes les pages
 assets/app.js            logique commune ; chaque page charge ce dont elle a besoin
-index.html decisions.html votes.html conseil.html lexique.html sources.html
+index.html decisions.html votes-nominatifs.html conseil-municipal.html lexique-municipal.html sources-des-donnees.html
 data/                    sorties JSON
 ../.github/workflows/refresh-villedequebec.yml   le workflow quotidien (racine du dépôt DossierQuébec)
 ../.vercelignore         garde lib/, scrapers/ et scripts/ hors du site servi

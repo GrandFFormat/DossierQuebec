@@ -3,21 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-en="Glossary of municipal vocabulary — DossierVilleDeMontréal">Lexique du vocabulaire municipal — DossierVilleDeMontréal</title>
-<meta data-en-content="Resolution, decision summary, decision file, recorded vote, dissidence, related city: the vocabulary of the City of Montréal's decisions, explained and counted on the official minutes." name="description" content="Résolution, sommaire décisionnel, dossier décisionnel, vote enregistré, dissidence, ville liée : le vocabulaire des décisions de la Ville de Montréal, expliqué et chiffré sur les procès-verbaux officiels.">
-<link rel="canonical" href="https://dossierquebec.ca/montreal/lexique">
+<link rel="icon" type="image/svg+xml" href="/quebec/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="512x512" href="/quebec/assets/favicon-512.png">
+<link rel="apple-touch-icon" href="/quebec/assets/favicon-512.png">
+<title data-en="Glossary of municipal terms — DossierVilleDeQuébec">Lexique du vocabulaire municipal — DossierVilleDeQuébec</title>
+<meta data-en-content="Résolution, sommaire décisionnel, avis de motion, dérogation mineure, ville reconstituée: the vocabulary of City of Québec decisions, explained in English." name="description" content="Résolution, sommaire décisionnel, avis de motion, dérogation mineure, ville reconstituée : le vocabulaire des décisions de la Ville de Québec, expliqué et chiffré sur les documents officiels.">
+<link rel="canonical" href="https://dossierquebec.ca/quebec/lexique-municipal">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DossierQuébec">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:title" content="Lexique du vocabulaire municipal — DossierVilleDeMontréal">
-<meta property="og:description" content="Résolution, sommaire décisionnel, dossier décisionnel, vote enregistré, dissidence, ville liée : le vocabulaire des décisions de la Ville de Montréal, expliqué et chiffré sur les procès-verbaux officiels.">
-<meta property="og:url" content="https://dossierquebec.ca/montreal/lexique">
+<meta property="og:title" content="Lexique du vocabulaire municipal — DossierVilleDeQuébec">
+<meta property="og:description" content="Résolution, sommaire décisionnel, avis de motion, dérogation mineure, ville reconstituée : le vocabulaire des décisions de la Ville de Québec, expliqué et chiffré sur les documents officiels.">
+<meta property="og:url" content="https://dossierquebec.ca/quebec/lexique-municipal">
 <meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <meta property="og:image:width" content="1702">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lexique du vocabulaire municipal — DossierVilleDeMontréal">
-<meta name="twitter:description" content="Résolution, sommaire décisionnel, dossier décisionnel, vote enregistré, dissidence, ville liée : le vocabulaire des décisions de la Ville de Montréal, expliqué et chiffré sur les procès-verbaux officiels.">
+<meta name="twitter:title" content="Lexique du vocabulaire municipal — DossierVilleDeQuébec">
+<meta name="twitter:description" content="Résolution, sommaire décisionnel, avis de motion, dérogation mineure, ville reconstituée : le vocabulaire des décisions de la Ville de Québec, expliqué et chiffré sur les documents officiels.">
 <meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,9 +42,6 @@
     } catch (e) {}
   })();
 </script>
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="assets/favicon-512.png" type="image/png" sizes="512x512">
-<link rel="apple-touch-icon" href="assets/favicon-512.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -56,14 +56,14 @@
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Ville de Montréal",
-      "item": "https://dossierquebec.ca/montreal/"
+      "name": "Ville de Québec",
+      "item": "https://dossierquebec.ca/quebec/"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": "Lexique",
-      "item": "https://dossierquebec.ca/montreal/lexique"
+      "item": "https://dossierquebec.ca/quebec/lexique-municipal"
     }
   ]
 }
@@ -71,25 +71,25 @@
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="/commun/abonnes.css">
 </head>
-<body data-page="lexique" data-ville="montreal">
+<body data-page="lexique" data-ville="quebec">
 
 <header>
   <div class="contenu">
     <div class="titre-ligne">
-      <a href="./"><p class="logo-titre">Dossier<span class="marque">VilleDeMontréal</span></p></a>
+      <a href="./"><p class="logo-titre">Dossier<span class="marque">VilleDeQuébec</span></p></a>
       <details class="ab-villes" id="villes"></details>
     </div>
-    <p data-en="The City of Montréal's decisions, made readable. Public data, taken as is from the City's official minutes and its open data portal." class="sous-titre">
-      Les décisions de la Ville de Montréal, lisibles. Données publiques, reprises telles quelles
-      des procès-verbaux officiels de la Ville et de son portail de données ouvertes.
+    <p data-en="The City of Québec's decisions, made readable. Public data, taken as is from the City's decision-document portal." class="sous-titre">
+      Les décisions de la Ville de Québec, lisibles. Données publiques, reprises telles quelles
+      du portail des documents décisionnels de la Ville.
     </p>
     <nav>
       <a data-en="Home" href="./">Accueil</a>
       <a data-en="Decisions" href="decisions">Décisions</a>
-      <a data-en="Recorded votes" href="votes">Votes nominatifs</a>
-      <a data-en="City Council" href="conseil">Conseil municipal</a>
-      <a data-en="Glossary" href="lexique" aria-current="page">Lexique</a>
-      <a data-en-title="The official City of Montréal website (new tab)" href="https://montreal.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Montréal (nouvel onglet)">Ville de Montréal ↗</a>
+      <a data-en="Recorded votes" href="votes-nominatifs">Votes nominatifs</a>
+      <a data-en="City Council" href="conseil-municipal">Conseil municipal</a>
+      <a data-en="Glossary" href="lexique-municipal" aria-current="page">Lexique</a>
+      <a data-en="Ville de Québec <span aria-hidden=&quot;true&quot;>↗</span><span class=&quot;sr-only&quot;> (official site, new tab)</span>" href="https://www.ville.quebec.qc.ca/" class="externe" target="_blank" rel="noopener">Ville de Québec <span aria-hidden="true">↗</span><span class="sr-only"> (site officiel, nouvel onglet)</span></a>
       <div class="outils">
         <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
           <button data-en-aria-label="Smaller text" type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
@@ -106,7 +106,7 @@
 <main class="contenu">
   <div data-en="Loading data…" id="chargement" class="avis">Chargement des données…</div>
 
-  <h1 data-en="Montréal municipal glossary" class="page">Lexique municipal de Montréal</h1>
+  <h1 data-en="Québec City municipal glossary" class="page">Lexique municipal de Québec</h1>
   <p data-en="The official documents are in French, and the vocabulary of municipal decisions is opaque out of habit, not necessity. Here is what the French terms you'll see on this site mean." class="chapeau">
     Le vocabulaire des décisions municipales est opaque par habitude, pas par nécessité. Voici ce
     que veulent dire les mots que vous croisez sur ce site.
@@ -121,8 +121,8 @@
 
 <footer>
   <div class="contenu">
-    <p data-en="Independent citizen site. No connection with the City of Montréal, no official status. If anything differs, the original PDF document prevails. <a href=&quot;sources&quot;>Sources</a>.">Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
-    En cas d'écart, le document PDF d'origine fait foi. <a href="sources">Sources</a>.</p>
+    <p data-en="Independent citizen site. No connection with the City of Québec, no official status. If anything differs, the original PDF document prevails. <a href=&quot;sources&quot;>Sources</a>.">Site citoyen indépendant. Aucun lien avec la Ville de Québec, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees">Sources</a>.</p>
   </div>
 </footer>
 
@@ -130,7 +130,7 @@
 <script type="module" src="/commun/entete-volet.js"></script>
 <script type="module" src="/commun/abonnes.js"></script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
-     Même projet Vercel : les pages vues de /montreal/ s'ajoutent au même tableau de
+     Même projet Vercel : les pages vues de /quebec/ s'ajoutent au même tableau de
      bord. En local le script n'existe pas (404 sans conséquence). -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>

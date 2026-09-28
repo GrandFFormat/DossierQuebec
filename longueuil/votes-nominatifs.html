@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Le conseil de ville de Longueuil — DossierVilleDeLongueuil</title>
-<meta name="description" content="Carte des 18 districts électoraux de Longueuil et fiches des membres du conseil de ville et du conseil d'agglomération : district, arrondissement, parti et présences aux séances.">
-<link rel="canonical" href="https://dossierquebec.ca/longueuil/conseil">
+<title>Votes nominatifs au conseil de Longueuil — DossierVilleDeLongueuil</title>
+<meta name="description" content="Qui a voté pour et qui a voté contre au conseil de ville et au conseil d'agglomération de Longueuil : les votes nominatifs consignés dans les procès-verbaux officiels.">
+<link rel="canonical" href="https://dossierquebec.ca/longueuil/votes-nominatifs">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DossierQuébec">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:title" content="Le conseil de ville de Longueuil — DossierVilleDeLongueuil">
-<meta property="og:description" content="Carte des 18 districts électoraux de Longueuil et fiches des membres du conseil de ville et du conseil d'agglomération : district, arrondissement, parti et présences aux séances.">
-<meta property="og:url" content="https://dossierquebec.ca/longueuil/conseil">
+<meta property="og:title" content="Votes nominatifs au conseil de Longueuil — DossierVilleDeLongueuil">
+<meta property="og:description" content="Qui a voté pour et qui a voté contre au conseil de ville et au conseil d'agglomération de Longueuil : les votes nominatifs consignés dans les procès-verbaux officiels.">
+<meta property="og:url" content="https://dossierquebec.ca/longueuil/votes-nominatifs">
 <meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <meta property="og:image:width" content="1702">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Le conseil de ville de Longueuil — DossierVilleDeLongueuil">
-<meta name="twitter:description" content="Carte des 18 districts électoraux de Longueuil et fiches des membres du conseil de ville et du conseil d'agglomération : district, arrondissement, parti et présences aux séances.">
+<meta name="twitter:title" content="Votes nominatifs au conseil de Longueuil — DossierVilleDeLongueuil">
+<meta name="twitter:description" content="Qui a voté pour et qui a voté contre au conseil de ville et au conseil d'agglomération de Longueuil : les votes nominatifs consignés dans les procès-verbaux officiels.">
 <meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,8 +56,8 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Conseil de ville",
-      "item": "https://dossierquebec.ca/longueuil/conseil"
+      "name": "Votes nominatifs",
+      "item": "https://dossierquebec.ca/longueuil/votes-nominatifs"
     }
   ]
 }
@@ -65,7 +65,7 @@
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="/commun/abonnes.css">
 </head>
-<body data-page="conseil" data-ville="longueuil">
+<body data-page="votes" data-ville="longueuil">
 
 <header>
   <div class="contenu">
@@ -81,9 +81,9 @@
     <nav>
       <a href="./">Accueil</a>
       <a href="decisions">Décisions</a>
-      <a href="votes">Votes nominatifs</a>
-      <a href="conseil" aria-current="page">Conseil de ville</a>
-      <a href="lexique">Lexique</a>
+      <a href="votes-nominatifs" aria-current="page">Votes nominatifs</a>
+      <a href="conseil-de-ville">Conseil de ville</a>
+      <a href="lexique-municipal">Lexique</a>
       <a href="https://longueuil.quebec/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Longueuil (nouvel onglet)">Ville de Longueuil ↗</a>
       <div class="outils">
         <div class="taille-texte" role="group" aria-label="Taille du texte">
@@ -101,56 +101,57 @@
 <main class="contenu">
   <div id="chargement" class="avis">Chargement des données…</div>
 
-  <h1 data-en="Longueuil City Council" class="page">Le conseil de ville de Longueuil</h1>
-  <nav class="raccourcis" aria-label="Sections de cette page">
-    <a href="#membres">Les membres du conseil</a>
-    <a href="#agglomeration">Le conseil d'agglomération</a>
-  </nav>
-  <p class="chapeau">
-    Le conseil compte 19 sièges&nbsp;: la mairesse, élue au suffrage universel, et 18 conseillères et
-    conseillers de ville, un par district, répartis dans trois arrondissements.
-    <strong>Cliquez sur votre district</strong> pour aller directement à la fiche de la personne qui
-    vous représente. Greenfield Park élit en plus deux conseillers <em>d'arrondissement</em>, qui ne
-    siègent qu'à leur conseil d'arrondissement&nbsp;; ils figurent sous leur arrondissement, marqués
-    comme tels.
-  </p>
+  <h1 data-en="Recorded votes, Longueuil council" class="page">Votes nominatifs du conseil de Longueuil</h1>
+  <div class="avis">
+    <strong>Comment ces votes sont obtenus.</strong> À la Ville de Longueuil, presque toutes les
+    décisions sont « adoptées à l'unanimité », sans que personne ne soit nommé. Quand un membre
+    <strong>demande le vote</strong>, le procès-verbal consigne nommément qui vote en faveur et qui
+    vote contre. Ces noms sont extraits du texte des procès-verbaux par lecture automatique&nbsp;:
+    chaque vote garde le passage d'origine et tout écart avec le décompte imprimé est signalé
+    plutôt que corrigé. Les <em>dissidences</em> — « X exprime sa dissidence », sans appel
+    nominal — figurent sur les fiches de la page Décisions, pas ici.
+  </div>
+  <div class="avis">
+    <strong>Deux années, pas une.</strong> Depuis l'élection municipale de novembre 2025, le conseil
+    de ville et le conseil d'agglomération n'ont tenu aucun vote divisé&nbsp;: tout ce qui a été
+    décidé en 2026 l'a été à l'unanimité. Pour que cette page montre quelque chose, elle couvre aussi
+    2025, avec le conseil de l'époque. Au conseil d'agglomération, où chaque ville pèse selon sa
+    population, le procès-verbal nomme les votants mais n'imprime pas de décompte.
+  </div>
 
-  <div class="zone-carte" id="carte"></div>
-  <div class="legende" id="legende"></div>
-  <p class="compte" style="margin-top:12px">
-    Contours&nbsp;: couche publique «&nbsp;Districts électoraux (2025-2029)&nbsp;» de la Ville de Longueuil,
-    simplifiés et dessinés en SVG — aucune requête vers un service de cartographie externe.
-    <strong>Ce que la carte ne dit pas&nbsp;:</strong> les décisions du conseil ne sont pas
-    géolocalisées, donc impossible de dire «&nbsp;voici ce qui s'est décidé dans votre district&nbsp;».
-  </p>
+  <details class="carte pliante bloc-tableau">
+    <summary>
+      <div class="meta">
+        <span class="puce">tableau</span>
+        <span id="resume-dissidence"></span>
+      </div>
+      <p class="objet">Votes contre, par personne</p>
+    </summary>
+    <div class="corps">
+  <p class="compte">Décompte brut, sans interprétation. Voter contre n'est ni un défaut ni un mérite&nbsp;: c'est une position.</p>
+  <table id="table-dissidence">
+    <thead><tr><th>Personne</th><th>Instance la plus fréquente</th><th class="n">Votes contre</th></tr></thead>
+    <tbody></tbody>
+  </table>
+    </div>
+  </details>
 
-  <h2 class="page" id="membres" style="margin-top:34px">Les membres du conseil de ville</h2>
-  <p class="compte" id="compte-elus"></p>
-  <div id="liste-elus"></div>
-
-  <h2 class="page" id="agglomeration" style="margin-top:40px">Le conseil d'agglomération</h2>
-  <p class="chapeau">
-    C'est une <strong>instance distincte</strong> du conseil de ville, et elle décide des services
-    partagés des cinq villes de l'agglomération&nbsp;: police, sécurité incendie, transport en commun,
-    eau potable, évaluation foncière, développement économique. Y siègent la mairesse de Longueuil,
-    des élus de Longueuil qu'elle désigne, et les maires des quatre <strong>villes liées</strong>&nbsp;:
-    Boucherville, Brossard, Saint-Bruno-de-Montarville et Saint-Lambert. Le vote y est pondéré selon
-    la population de chaque ville.
-    <a href="decisions?instance=Conseil%20d'agglom%C3%A9ration">Voir ses décisions</a>.
-  </p>
-  <p class="chapeau" style="margin-bottom:14px">
-    La Ville ne publie pas de liste des membres de ce conseil. Celle-ci est <strong>reconstituée</strong>
-    à partir des listes de présences des procès-verbaux de l'année&nbsp;: la composition est celle de la
-    dernière séance, les présences comptent toutes les séances.
-  </p>
-  <p class="compte" id="compte-agglo"></p>
-  <div id="liste-agglo"></div>
+  <h2 class="section">Les votes nominatifs</h2>
+  <div class="barre-outils">
+    <input type="search" id="rech-votes" placeholder="Rechercher dans l'objet ou les noms…">
+    <select id="filtre-theme-votes"><option value="">Tous les sujets</option></select>
+    <select id="filtre-instance-votes"><option value="">Toutes les instances</option></select>
+    <button type="button" class="bouton-lien" id="tout-deplier">Tout déplier</button>
+  </div>
+  <p class="compte" id="compte-votes"></p>
+  <div id="liste-votes"></div>
+  <button class="plus" id="plus-votes" hidden>10 de plus</button>
 </main>
 
 <footer>
   <div class="contenu">
     <p>Site citoyen indépendant. Aucun lien avec la Ville de Longueuil, aucun caractère officiel.
-    En cas d'écart, la page officielle fait foi. <a href="sources">Sources</a>.</p>
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees">Sources</a>.</p>
   </div>
 </footer>
 

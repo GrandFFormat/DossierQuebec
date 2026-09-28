@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lexique du vocabulaire municipal — DossierVilleDeLaval</title>
-<meta name="description" content="Résolution, sommaire décisionnel, comité exécutif, avis de motion, vote nominal, certificat de trésorerie : le vocabulaire des décisions de la Ville de Laval, expliqué et vérifié sur les procès-verbaux officiels.">
-<link rel="canonical" href="https://dossierquebec.ca/laval/lexique">
+<title>Le conseil municipal de Laval — DossierVilleDeLaval</title>
+<meta name="description" content="Carte des 22 districts électoraux de Laval colorée par parti, et fiches du maire et des 22 membres du conseil municipal : district, parti, rôles au comité exécutif, coordonnées, présences aux séances et votes consignés.">
+<link rel="canonical" href="https://dossierquebec.ca/laval/conseil-municipal">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DossierQuébec">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:title" content="Lexique du vocabulaire municipal — DossierVilleDeLaval">
-<meta property="og:description" content="Résolution, sommaire décisionnel, comité exécutif, avis de motion, vote nominal, certificat de trésorerie : le vocabulaire des décisions de la Ville de Laval, expliqué et vérifié sur les procès-verbaux officiels.">
-<meta property="og:url" content="https://dossierquebec.ca/laval/lexique">
+<meta property="og:title" content="Le conseil municipal de Laval — DossierVilleDeLaval">
+<meta property="og:description" content="Carte des 22 districts électoraux de Laval colorée par parti, et fiches du maire et des 22 membres du conseil municipal : district, parti, rôles au comité exécutif, coordonnées, présences aux séances et votes consignés.">
+<meta property="og:url" content="https://dossierquebec.ca/laval/conseil-municipal">
 <meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <meta property="og:image:width" content="1702">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Lexique du vocabulaire municipal — DossierVilleDeLaval">
-<meta name="twitter:description" content="Résolution, sommaire décisionnel, comité exécutif, avis de motion, vote nominal, certificat de trésorerie : le vocabulaire des décisions de la Ville de Laval, expliqué et vérifié sur les procès-verbaux officiels.">
+<meta name="twitter:title" content="Le conseil municipal de Laval — DossierVilleDeLaval">
+<meta name="twitter:description" content="Carte des 22 districts électoraux de Laval colorée par parti, et fiches du maire et des 22 membres du conseil municipal : district, parti, rôles au comité exécutif, coordonnées, présences aux séances et votes consignés.">
 <meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,8 +56,8 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Lexique",
-      "item": "https://dossierquebec.ca/laval/lexique"
+      "name": "Conseil municipal",
+      "item": "https://dossierquebec.ca/laval/conseil-municipal"
     }
   ]
 }
@@ -65,7 +65,7 @@
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="/commun/abonnes.css">
 </head>
-<body data-page="lexique" data-ville="laval">
+<body data-page="conseil" data-ville="laval">
 
 <header>
   <div class="contenu">
@@ -81,9 +81,9 @@
     <nav>
       <a href="./">Accueil</a>
       <a href="decisions">Décisions</a>
-      <a href="votes">Votes nominatifs</a>
-      <a href="conseil">Conseil municipal</a>
-      <a href="lexique" aria-current="page">Lexique</a>
+      <a href="votes-nominatifs">Votes nominatifs</a>
+      <a href="conseil-municipal" aria-current="page">Conseil municipal</a>
+      <a href="lexique-municipal">Lexique</a>
       <a href="https://www.laval.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Laval (nouvel onglet)">Ville de Laval ↗</a>
       <div class="outils">
         <div class="taille-texte" role="group" aria-label="Taille du texte">
@@ -101,25 +101,49 @@
 <main class="contenu">
   <div id="chargement" class="avis">Chargement des données…</div>
 
-  <h1 data-en="Laval municipal glossary" class="page">Lexique municipal de Laval</h1>
+  <h1 data-en="Laval City Council" class="page">Le conseil municipal de Laval</h1>
+  <nav class="raccourcis" aria-label="Sections de cette page">
+    <a href="#carte">La carte des districts</a>
+    <a href="#membres">Les membres du conseil</a>
+  </nav>
   <p class="chapeau">
-    Le vocabulaire des décisions municipales est opaque par habitude, pas par nécessité. Voici ce
-    que veulent dire les mots que vous croisez sur ce site. Les définitions sont les nôtres&nbsp;;
-    chaque terme est vérifié sur les procès-verbaux de l'année, et renvoie quand c'est possible à
-    un vrai document de la Ville où on le lit.
+    Le conseil compte 23 sièges&nbsp;: le maire, élu au suffrage universel, et 22 conseillères et
+    conseillers, un par district. Le <strong>comité exécutif</strong>, qui prend la plupart des
+    décisions du quotidien, compte cinq membres en 2026&nbsp;: le maire, qui le préside, et quatre
+    membres du conseil — tels que les nomme l'en-tête de son procès-verbal. Les fiches disent qui y
+    siège. <strong>Cliquez sur votre district</strong> pour aller directement à la fiche de la
+    personne qui vous représente.
   </p>
 
-  <div class="barre-outils">
-    <input type="search" id="rech-lexique" placeholder="Chercher un terme…">
-  </div>
-  <p class="compte" id="compte-lexique"></p>
-  <div id="liste-lexique"></div>
+  <div class="zone-carte" id="carte"></div>
+  <div class="legende" id="legende"></div>
+  <p class="compte" style="margin-top:12px" id="note-carte">
+    Contours&nbsp;: jeu «&nbsp;Limites des districts électoraux des dernières élections
+    municipales&nbsp;» de la Ville de Laval sur Données Québec (licence CC-BY 4.0), simplifiés et
+    dessinés en SVG — aucune requête vers un service de cartographie externe. La couleur est celle
+    du parti de la personne élue, dans des teintes neutres qui ne sont pas celles des partis.
+    <strong>Ce que la carte ne dit pas&nbsp;:</strong> les décisions ne sont pas géolocalisées.
+    L'ordre du jour du conseil nomme toutefois les districts touchés par chaque point&nbsp;: chaque
+    fiche renvoie aux décisions de l'année qui nomment son district.
+  </p>
+
+  <h2 class="page" id="membres" style="margin-top:34px">Les membres du conseil municipal</h2>
+  <p class="chapeau">
+    Les coordonnées, le parti, les rôles et le nombre d'habitants viennent de la page
+    «&nbsp;Membres du conseil municipal&nbsp;» de laval.ca et des fiches de profil qu'elle relie.
+    Les présences viennent du jeu ouvert «&nbsp;Présence des élus au conseil municipal&nbsp;»
+    (Données Québec, CC-BY 4.0), tenu par la Ville et mis à jour chaque mois. Les votes consignés
+    sont comptés sur la page <a href="votes-nominatifs">Votes nominatifs</a>. Faits bruts, aucune
+    interprétation.
+  </p>
+  <p class="compte" id="compte-elus"></p>
+  <div id="liste-elus"></div>
 </main>
 
 <footer>
   <div class="contenu">
     <p>Site citoyen indépendant. Aucun lien avec la Ville de Laval, aucun caractère officiel.
-    En cas d'écart, le document PDF d'origine fait foi. <a href="sources">Sources</a>.</p>
+    En cas d'écart, la page officielle fait foi. <a href="sources-des-donnees">Sources</a>.</p>
   </div>
 </footer>
 

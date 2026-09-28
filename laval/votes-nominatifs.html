@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Le conseil municipal de Laval — DossierVilleDeLaval</title>
-<meta name="description" content="Carte des 22 districts électoraux de Laval colorée par parti, et fiches du maire et des 22 membres du conseil municipal : district, parti, rôles au comité exécutif, coordonnées, présences aux séances et votes consignés.">
-<link rel="canonical" href="https://dossierquebec.ca/laval/conseil">
+<title>Votes nominatifs au conseil municipal de Laval — DossierVilleDeLaval</title>
+<meta name="description" content="Qui a voté pour et qui a voté contre au conseil municipal de Laval : les votes nominatifs consignés dans les procès-verbaux officiels, avec le décompte imprimé et le passage d'origine.">
+<link rel="canonical" href="https://dossierquebec.ca/laval/votes-nominatifs">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DossierQuébec">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:title" content="Le conseil municipal de Laval — DossierVilleDeLaval">
-<meta property="og:description" content="Carte des 22 districts électoraux de Laval colorée par parti, et fiches du maire et des 22 membres du conseil municipal : district, parti, rôles au comité exécutif, coordonnées, présences aux séances et votes consignés.">
-<meta property="og:url" content="https://dossierquebec.ca/laval/conseil">
+<meta property="og:title" content="Votes nominatifs au conseil municipal de Laval — DossierVilleDeLaval">
+<meta property="og:description" content="Qui a voté pour et qui a voté contre au conseil municipal de Laval : les votes nominatifs consignés dans les procès-verbaux officiels, avec le décompte imprimé et le passage d'origine.">
+<meta property="og:url" content="https://dossierquebec.ca/laval/votes-nominatifs">
 <meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <meta property="og:image:width" content="1702">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Le conseil municipal de Laval — DossierVilleDeLaval">
-<meta name="twitter:description" content="Carte des 22 districts électoraux de Laval colorée par parti, et fiches du maire et des 22 membres du conseil municipal : district, parti, rôles au comité exécutif, coordonnées, présences aux séances et votes consignés.">
+<meta name="twitter:title" content="Votes nominatifs au conseil municipal de Laval — DossierVilleDeLaval">
+<meta name="twitter:description" content="Qui a voté pour et qui a voté contre au conseil municipal de Laval : les votes nominatifs consignés dans les procès-verbaux officiels, avec le décompte imprimé et le passage d'origine.">
 <meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,8 +56,8 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "Conseil municipal",
-      "item": "https://dossierquebec.ca/laval/conseil"
+      "name": "Votes nominatifs",
+      "item": "https://dossierquebec.ca/laval/votes-nominatifs"
     }
   ]
 }
@@ -65,7 +65,7 @@
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="/commun/abonnes.css">
 </head>
-<body data-page="conseil" data-ville="laval">
+<body data-page="votes" data-ville="laval">
 
 <header>
   <div class="contenu">
@@ -81,9 +81,9 @@
     <nav>
       <a href="./">Accueil</a>
       <a href="decisions">Décisions</a>
-      <a href="votes">Votes nominatifs</a>
-      <a href="conseil" aria-current="page">Conseil municipal</a>
-      <a href="lexique">Lexique</a>
+      <a href="votes-nominatifs" aria-current="page">Votes nominatifs</a>
+      <a href="conseil-municipal">Conseil municipal</a>
+      <a href="lexique-municipal">Lexique</a>
       <a href="https://www.laval.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Laval (nouvel onglet)">Ville de Laval ↗</a>
       <div class="outils">
         <div class="taille-texte" role="group" aria-label="Taille du texte">
@@ -101,49 +101,57 @@
 <main class="contenu">
   <div id="chargement" class="avis">Chargement des données…</div>
 
-  <h1 data-en="Laval City Council" class="page">Le conseil municipal de Laval</h1>
-  <nav class="raccourcis" aria-label="Sections de cette page">
-    <a href="#carte">La carte des districts</a>
-    <a href="#membres">Les membres du conseil</a>
-  </nav>
-  <p class="chapeau">
-    Le conseil compte 23 sièges&nbsp;: le maire, élu au suffrage universel, et 22 conseillères et
-    conseillers, un par district. Le <strong>comité exécutif</strong>, qui prend la plupart des
-    décisions du quotidien, compte cinq membres en 2026&nbsp;: le maire, qui le préside, et quatre
-    membres du conseil — tels que les nomme l'en-tête de son procès-verbal. Les fiches disent qui y
-    siège. <strong>Cliquez sur votre district</strong> pour aller directement à la fiche de la
-    personne qui vous représente.
-  </p>
+  <h1 data-en="Recorded votes, Laval council" class="page">Votes nominatifs du conseil de Laval</h1>
+  <div class="avis">
+    <strong>Comment ces votes sont obtenus.</strong> Au conseil municipal de Laval, presque toutes
+    les décisions sont «&nbsp;adoptées à l'unanimité&nbsp;», sans que personne ne soit nommé. Quand
+    un membre <strong>demande le vote</strong>, le procès-verbal écrit, dans la même phrase, le
+    décompte et les noms&nbsp;: «&nbsp;… laquelle est adoptée par un compte de 16 en faveur et de 4
+    contre&nbsp;: M. Stéphane Boyer, maire, et les conseillers … se prononcent en faveur de la
+    proposition&nbsp;; les conseillers … se prononcent contre la proposition.&nbsp;» Ces noms sont
+    extraits du texte par lecture automatique&nbsp;: chaque vote garde le passage d'origine, et
+    tout écart entre les noms lus et le décompte imprimé est signalé plutôt que corrigé.
+  </div>
+  <div class="avis">
+    <strong>Le comité exécutif n'est pas ici.</strong> Ses procès-verbaux disent «&nbsp;à
+    l'unanimité&nbsp;» partout&nbsp;: aucun vote nominal à y lire. Le vote peut porter sur la
+    proposition elle-même, sur un amendement, sur une demande de report ou sur la prolongation de
+    la séance&nbsp;: chaque fiche dit sur quoi on a voté.
+  </div>
 
-  <div class="zone-carte" id="carte"></div>
-  <div class="legende" id="legende"></div>
-  <p class="compte" style="margin-top:12px" id="note-carte">
-    Contours&nbsp;: jeu «&nbsp;Limites des districts électoraux des dernières élections
-    municipales&nbsp;» de la Ville de Laval sur Données Québec (licence CC-BY 4.0), simplifiés et
-    dessinés en SVG — aucune requête vers un service de cartographie externe. La couleur est celle
-    du parti de la personne élue, dans des teintes neutres qui ne sont pas celles des partis.
-    <strong>Ce que la carte ne dit pas&nbsp;:</strong> les décisions ne sont pas géolocalisées.
-    L'ordre du jour du conseil nomme toutefois les districts touchés par chaque point&nbsp;: chaque
-    fiche renvoie aux décisions de l'année qui nomment son district.
-  </p>
+  <details class="carte pliante bloc-tableau">
+    <summary>
+      <div class="meta">
+        <span class="puce">tableau</span>
+        <span id="resume-dissidence"></span>
+      </div>
+      <p class="objet">Votes contre, par personne</p>
+    </summary>
+    <div class="corps">
+  <p class="compte">Décompte brut, sans interprétation. Voter contre n'est ni un défaut ni un mérite&nbsp;: c'est une position.</p>
+  <table id="table-dissidence">
+    <thead><tr><th>Personne</th><th class="n">Votes contre</th><th class="n">Votes pour</th><th class="n">Votes où la personne est nommée</th></tr></thead>
+    <tbody></tbody>
+  </table>
+    </div>
+  </details>
 
-  <h2 class="page" id="membres" style="margin-top:34px">Les membres du conseil municipal</h2>
-  <p class="chapeau">
-    Les coordonnées, le parti, les rôles et le nombre d'habitants viennent de la page
-    «&nbsp;Membres du conseil municipal&nbsp;» de laval.ca et des fiches de profil qu'elle relie.
-    Les présences viennent du jeu ouvert «&nbsp;Présence des élus au conseil municipal&nbsp;»
-    (Données Québec, CC-BY 4.0), tenu par la Ville et mis à jour chaque mois. Les votes consignés
-    sont comptés sur la page <a href="votes">Votes nominatifs</a>. Faits bruts, aucune
-    interprétation.
-  </p>
-  <p class="compte" id="compte-elus"></p>
-  <div id="liste-elus"></div>
+  <h2 class="section">Les votes nominatifs</h2>
+  <div class="barre-outils">
+    <input type="search" id="rech-votes" placeholder="Rechercher dans l'objet ou les noms…">
+    <select id="filtre-theme-votes"><option value="">Tous les sujets</option></select>
+    <select id="filtre-resultat-votes"><option value="">Tous les résultats</option></select>
+    <button type="button" class="bouton-lien" id="tout-deplier">Tout déplier</button>
+  </div>
+  <p class="compte" id="compte-votes"></p>
+  <div id="liste-votes"></div>
+  <button class="plus" id="plus-votes" hidden>10 de plus</button>
 </main>
 
 <footer>
   <div class="contenu">
     <p>Site citoyen indépendant. Aucun lien avec la Ville de Laval, aucun caractère officiel.
-    En cas d'écart, la page officielle fait foi. <a href="sources">Sources</a>.</p>
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees">Sources</a>.</p>
   </div>
 </footer>
 

@@ -635,10 +635,11 @@ const VILLES = ['quebec', 'montreal', 'levis', 'longueuil', 'laval'];
 const PAGES_VILLE = [
   { page: 'index', frequence: 'daily', priorite: '0.8', jeu: 'decisions' },
   { page: 'decisions', frequence: 'daily', priorite: '0.8', jeu: 'decisions' },
-  { page: 'conseil', frequence: 'weekly', priorite: '0.6', jeu: 'decisions' },
-  { page: 'votes', frequence: 'weekly', priorite: '0.6', jeu: 'votes' },
-  { page: 'lexique', frequence: 'monthly', priorite: '0.4' },
-  { page: 'sources', frequence: 'monthly', priorite: '0.3' },
+  // Longueuil n'a pas de conseil municipal mais un conseil de ville : son adresse le dit, comme son titre.
+  { page: 'conseil-municipal', parVille: { longueuil: 'conseil-de-ville' }, frequence: 'weekly', priorite: '0.6', jeu: 'decisions' },
+  { page: 'votes-nominatifs', frequence: 'weekly', priorite: '0.6', jeu: 'votes' },
+  { page: 'lexique-municipal', frequence: 'monthly', priorite: '0.4' },
+  { page: 'sources-des-donnees', frequence: 'monthly', priorite: '0.3' },
 ];
 function derniereDate(ville, jeu) {
   const chemin = `${ville}/data/${jeu}.json`;
@@ -665,10 +666,11 @@ const sitemap = (function preparerSitemap(){
   });
   for (const v of VILLES) {
     for (const p of PAGES_VILLE) {
-      const fichier = `${v}/${p.page}.html`;
+      const nom = p.parVille?.[v] ?? p.page;
+      const fichier = `${v}/${nom}.html`;
       if (!existsSync(fichier)) { console.warn(`⚠ sitemap : ${fichier} introuvable — hors du sitemap`); continue; }
       entrees.push({
-        ville: true, loc: `${BASE}/${v}/${p.page === 'index' ? '' : p.page}`, fichier,
+        ville: true, loc: `${BASE}/${v}/${nom === 'index' ? '' : nom}`, fichier,
         html: readFileSync(fichier, 'utf8'),
         lastmod: p.jeu ? derniereDate(v, p.jeu) : null, frequence: p.frequence, priorite: p.priorite,
       });
