@@ -66,10 +66,13 @@ jobs:
         if: ${{ inputs.sommaires == '' && inputs.pdf == '' }}
         env:
           MTL_CONTACT: ${{ vars.MTL_CONTACT }}
+          # Même règle que les deux étapes ci-dessus : l'adresse passe par une variable
+          # d'environnement, jamais par ${{ }} dans le script, que bash réinterpréterait.
+          MTL_URL: ${{ inputs.url }}
         run: |
           set -o pipefail
-          if [ -n "${{ inputs.url }}" ]; then
-            node scrapers/decouverte-page.js "${{ inputs.url }}" 2>&1 | tee data/page-decouverte.log
+          if [ -n "$MTL_URL" ]; then
+            node scrapers/decouverte-page.js "$MTL_URL" 2>&1 | tee data/page-decouverte.log
           else
             node scrapers/decouverte-plateau.js 2>&1 | tee data/plateau-decouverte.log
           fi
@@ -79,7 +82,13 @@ jobs:
         run: |
           git config user.name "dossierquebec-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add montreal/data/page-decouverte.json montreal/data/page-decouverte.log montreal/data/plateau-decouverte.json montreal/data/plateau-decouverte.log montreal/data/sonde-sommaires.json montreal/data/sonde-sommaires.log montreal/data/sonde-pdf.json montreal/data/sonde-pdf.log 2>/dev/null || true
+          # Une seule des trois étapes tourne : les autres fichiers manquent, et un seul chemin
+          # manquant fait échouer tout le « git add » (« fatal: pathspec … »), si bien que le
+          # journal n'était jamais committé. Un « git add » par chemin.
+          for f in page-decouverte plateau-decouverte sonde-sommaires sonde-pdf; do
+            git add "montreal/data/$f.json" 2>/dev/null || true
+            git add "montreal/data/$f.log" 2>/dev/null || true
+          done
           if git diff --cached --quiet; then echo "Rien à committer."; else
             git commit -m "Découverte d'une page de la Ville de Montréal ($(date -u +%Y-%m-%d))"
             # Un refus de poussée (GitHub renvoie parfois une erreur interne) jetterait tout le
