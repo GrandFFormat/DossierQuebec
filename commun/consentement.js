@@ -1,12 +1,12 @@
 // Consentement aux témoins de Google Analytics (Loi 25), sur toutes les pages : DQ et les villes.
-// Martin, 29 sept. 2026. Google Analytics (G-W34WHBC1ES) ne se charge QU'APRÈS « Accepter » ;
+// Martin, 29 sept. 2026. Google Analytics (G-87R1S6SR9Y) ne se charge QU'APRÈS « Accepter » ;
 // « Refuser » a le même poids. Le choix est gardé dans le navigateur (localStorage « dq:temoins »)
 // et peut être changé avec le lien « Témoins » du pied de page, ou n'importe quel élément
 // portant data-temoins (voir plus bas).
 // Script classique et autonome : il pose lui-même son style, sa bannière et, s'il y a lieu, gtag.
 (function () {
   var CLE = 'dq:temoins';
-  var ID = 'G-W34WHBC1ES';
+  var ID = 'G-87R1S6SR9Y';
 
   function lire() { try { return localStorage.getItem(CLE); } catch (e) { return null; } }
   function ecrire(v) { try { localStorage.setItem(CLE, v); } catch (e) { /* navigation privée */ } }
