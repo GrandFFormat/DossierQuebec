@@ -71,6 +71,12 @@ export async function requete(url, { accept, notFoundIsNull = true } = {}) {
     }
     throw new Error(`HTTP ${res.status} ${res.statusText} sur ${url}`);
   }
+  // « fetch failed » ne dit rien : la raison est dans err.cause (délai de connexion, refus, DNS,
+  // TLS). On la remonte dans le message, sinon le journal ne distingue pas une Ville qui ne
+  // répond plus d'une page qui a changé de forme. Les 27 et 28 septembre 2026, longueuil.quebec
+  // refusait les connexions venant des serveurs de GitHub, et le journal disait seulement ça.
+  const cause = lastError?.cause;
+  if (cause) throw new Error(`${lastError.message} — ${cause.code ? `${cause.code} : ` : ''}${cause.message} (${url})`, { cause: lastError });
   throw lastError ?? new Error(`échec après 4 tentatives : ${url}`);
 }
 
