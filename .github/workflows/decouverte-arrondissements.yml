@@ -69,10 +69,13 @@ jobs:
         if: ${{ steps.volet.outputs.present == 'oui' }}
         env:
           MTL_CONTACT: ${{ vars.MTL_CONTACT }}
+          # L'année vient du bouton « Run workflow » : elle passe par une variable
+          # d'environnement, jamais par ${{ }} dans le script, que bash réinterpréterait.
+          MTL_ANNEE: ${{ inputs.annee }}
         # Le journal part avec le rapport : on le lit sur GitHub sans ouvrir le run.
         run: |
           set -o pipefail
-          npm run decouvrir:arrondissements -- ${{ inputs.annee }} 2>&1 | tee data/decouverte.log
+          npm run decouvrir:arrondissements -- "$MTL_ANNEE" 2>&1 | tee data/decouverte.log
 
       - name: Committer le rapport
         if: ${{ always() && steps.volet.outputs.present == 'oui' }}
@@ -80,7 +83,12 @@ jobs:
         run: |
           git config user.name "dossierquebec-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add montreal/data/arrondissements-decouverte.json montreal/data/decouverte.log || true
+          # Un seul chemin manquant faisait échouer tout le « git add », et le rapport
+          # n'était jamais committé : « fatal: pathspec … did not match any files », puis
+          # « Aucun rapport à committer », alors que la sonde avait bien travaillé — jusqu'à
+          # une heure de sondage chez la Ville à refaire. Un « git add » par chemin.
+          git add montreal/data/arrondissements-decouverte.json 2>/dev/null || true
+          git add montreal/data/decouverte.log 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Aucun rapport à committer."
           else
