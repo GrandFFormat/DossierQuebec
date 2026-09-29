@@ -2,55 +2,14 @@
 > dossiervillelongueuil@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 6a2bae3 — Node v22.23.2
+Code : commit 6ea1d2e — Node v22.23.2
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
 
-=== Élus de la Ville ===
-TypeError: fetch failed
-    at node:internal/deps/undici/undici:15157:13
-    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
-    at async requete (file:///home/runner/work/DossierQuebec/DossierQuebec/longueuil/lib/lgl.js:58:13)
-    at async texte (file:///home/runner/work/DossierQuebec/DossierQuebec/longueuil/lib/lgl.js:78:15)
-    at async main (file:///home/runner/work/DossierQuebec/DossierQuebec/longueuil/scrapers/elus.js:119:16) {
-  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: longueuil.quebec:443, timeout: 10000ms)
-      at onConnectTimeout (node:internal/deps/undici/undici:2761:28)
-      at Immediate._onImmediate (node:internal/deps/undici/undici:2742:11)
-      at process.processImmediate (node:internal/timers:484:21) {
-    code: 'UND_ERR_CONNECT_TIMEOUT',
-    [Symbol(undici.error.UND_ERR)]: true,
-    [Symbol(undici.error.UND_ERR_CONNECT_TIMEOUT)]: true
-  }
-}
-⚠ « Élus de la Ville » a échoué (code 1) — on garde les données précédentes, ça attendra.
-
-=== Districts électoraux ===
-18 districts écrits dans data/districts.json
-Contours : 8343 points -> 874 (307 ko -> 29 ko)
-Aucun écart entre la couche des districts et la liste des élus.
-
-=== Élus de la Ville (numéros de district) ===
-TypeError: fetch failed
-    at node:internal/deps/undici/undici:15157:13
-    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
-    at async requete (file:///home/runner/work/DossierQuebec/DossierQuebec/longueuil/lib/lgl.js:58:13)
-    at async texte (file:///home/runner/work/DossierQuebec/DossierQuebec/longueuil/lib/lgl.js:78:15)
-    at async main (file:///home/runner/work/DossierQuebec/DossierQuebec/longueuil/scrapers/elus.js:119:16) {
-  [cause]: ConnectTimeoutError: Connect Timeout Error (attempted address: longueuil.quebec:443, timeout: 10000ms)
-      at onConnectTimeout (node:internal/deps/undici/undici:2761:28)
-      at Immediate._onImmediate (node:internal/deps/undici/undici:2742:11)
-      at process.processImmediate (node:internal/timers:484:21) {
-    code: 'UND_ERR_CONNECT_TIMEOUT',
-    [Symbol(undici.error.UND_ERR)]: true,
-    [Symbol(undici.error.UND_ERR_CONNECT_TIMEOUT)]: true
-  }
-}
-⚠ « Élus de la Ville (numéros de district) » a échoué (code 1) — on garde les données précédentes, ça attendra.
-
 === Calendrier des séances ===
-⚠ Conseil de ville : fetch failed
-⚠ Conseil d'agglomération : fetch failed
+⚠ Conseil de ville : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: longueuil.quebec:443, timeout: 10000ms) (https://longueuil.quebec/fr/services/instances-decisionnelles-et-consultatives/conseil-de-ville)
+⚠ Conseil d'agglomération : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: longueuil.quebec:443, timeout: 10000ms) (https://longueuil.quebec/fr/services/instances-decisionnelles-et-consultatives/conseil-agglomeration)
 
 183 séances écrites dans data/seances.json — 0 procès-verbal(aux) nouvellement publié(s).
 ✖ « Calendrier des séances » a échoué (code 1) — données précédentes conservées.
@@ -80,8 +39,8 @@ Pastilles thématiques :
       3  Motions et hommages
       2  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-07-30) ===
-Fenêtre depuis 2026-07-30 : 1 séance(s) relue(s), 22 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-07-31) ===
+Fenêtre depuis 2026-07-31 : 1 séance(s) relue(s), 22 vote(s) conservé(s) du fichier précédent.
 
 22 votes nominaux écrits dans data/votes.json (2025 : 22, 2026 : 0 ; 1 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
@@ -149,7 +108,7 @@ Mesure de 32 termes sur 47 procès-verbaux de 2025 et 2026 et 1002 décisions…
 0 document(s) lu(s) ; 639 sommaires indexés dans data/sommaires.json.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-07-30 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-07-31 pas encore résumés (plafond : 120)…
 5 sommaire(s) cité(s) sans texte extrait (absents du document de séance, ou document pas encore lu).
 549 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
@@ -160,6 +119,6 @@ Dossiers de l'année : 735 · 763 Ko · organismes suggérés : 113.
 Décisions récentes : 200 dossiers depuis le 2026-07-04 · 228 Ko.
 
 === Bilan ===
-  étapes         : 12
+  étapes         : 9
   échecs         : Calendrier des séances
-  avertissements : Élus de la Ville | Élus de la Ville (numéros de district)
+  avertissements : aucun
