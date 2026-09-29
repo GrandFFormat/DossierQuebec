@@ -819,8 +819,28 @@ const BESOINS = {
   sources: ['decisions', 'votes', 'elus', 'resumes', 'districts', 'agglomeration'],
 };
 
+// Quand la Ville ne répond plus à notre robot (écrit par scrapers/seances.js), un bandeau le dit
+// sur chaque page : le lecteur doit savoir que les données peuvent avoir du retard, et depuis quand.
+async function bandeauAccesVille() {
+  const acces = await charger('acces-ville');
+  if (!acces?.echecDepuis) return;
+  const avis = document.createElement('div');
+  avis.className = 'avis';
+  avis.setAttribute('role', 'status');
+  const depuis = dateFr(acces.echecDepuis.slice(0, 10));
+  const reussite = acces.derniereReussite ? dateFr(acces.derniereReussite.slice(0, 10)) : null;
+  avis.innerHTML =
+    `<strong>Mise à jour interrompue depuis le ${depuis}.</strong> Le site de la Ville de Longueuil ne répond plus ` +
+    'à notre outil de mise à jour automatique. Les données de cette page peuvent donc avoir du retard' +
+    (reussite ? `&nbsp;: la dernière lecture réussie du calendrier des séances date du ${reussite}.` : '.') +
+    ' Nous vérifions chaque jour et reprendrons dès que la Ville répondra de nouveau.';
+  const repere = $('#chargement') ?? document.querySelector('main') ?? document.body.firstElementChild;
+  repere?.parentNode?.insertBefore(avis, repere);
+}
+
 async function init() {
   const page = document.body.dataset.page;
+  bandeauAccesVille();
   const noms = BESOINS[page] ?? [];
   const jeux = await Promise.all(noms.map(charger));
   noms.forEach((nom, i) => {

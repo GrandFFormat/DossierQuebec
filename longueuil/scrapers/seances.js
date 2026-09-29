@@ -11,6 +11,10 @@ import { writeFile, readFile } from 'node:fs/promises';
 import { INSTANCES, INSTANCES_ACTIVES, seancesInstance } from '../lib/lgl.js';
 
 const OUT = new URL('../data/seances.json', import.meta.url);
+// Ce que le site affiche quand la Ville ne répond plus : un bandeau sur chaque page (assets/app.js).
+// Depuis le 27 septembre 2026, longueuil.quebec refuse les connexions venant des serveurs de
+// GitHub ; le lecteur doit savoir que les données peuvent avoir du retard, et depuis quand.
+const ACCES = new URL('../data/acces-ville.json', import.meta.url);
 
 async function lireJson(url) {
   try {
@@ -48,6 +52,15 @@ async function main() {
     'utf8'
   );
   console.log(`\n${seances.length} séances écrites dans data/seances.json${precedent ? ` — ${nouveauxPv.length} procès-verbal(aux) nouvellement publié(s)` : ''}.`);
+  const acces = (await lireJson(ACCES)) ?? { derniereReussite: null, echecDepuis: null };
+  const maintenant = new Date().toISOString();
+  if (echecs.length === INSTANCES_ACTIVES.length) {
+    acces.echecDepuis ??= maintenant;
+  } else {
+    acces.derniereReussite = maintenant;
+    acces.echecDepuis = null;
+  }
+  await writeFile(ACCES, JSON.stringify(acces, null, 1) + '\n', 'utf8');
   if (echecs.length === INSTANCES_ACTIVES.length) process.exitCode = 1;
 }
 
