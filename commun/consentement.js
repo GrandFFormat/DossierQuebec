@@ -1,12 +1,11 @@
 // Consentement aux témoins de Google Analytics (Loi 25), sur toutes les pages : DQ et les villes.
-// Martin, 29 sept. 2026. Google Analytics (G-87R1S6SR9Y) ne se charge QU'APRÈS « Accepter » ;
+// Martin, 29 sept. 2026. Google Analytics ne dépose de témoins QU'APRÈS « Accepter » ;
 // « Refuser » a le même poids. Le choix est gardé dans le navigateur (localStorage « dq:temoins »)
 // et peut être changé avec le lien « Témoins » du pied de page, ou n'importe quel élément
 // portant data-temoins (voir plus bas).
 // Script classique et autonome : il pose lui-même son style, sa bannière et, s'il y a lieu, gtag.
 (function () {
   var CLE = 'dq:temoins';
-  var ID = 'G-87R1S6SR9Y';
 
   function lire() { try { return localStorage.getItem(CLE); } catch (e) { return null; } }
   function ecrire(v) { try { localStorage.setItem(CLE, v); } catch (e) { /* navigation privée */ } }
@@ -18,18 +17,10 @@
     } catch (e) { return false; }
   }
 
-  var charge = false;
+  // La balise Google est dans le <head> de chaque page, avec un consentement « denied » par défaut
+  // (Consent Mode de Google). « Accepter » l'ouvre ; « Refuser » le laisse fermé.
   function chargerAnalytics() {
-    if (charge) return;
-    charge = true;
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function () { window.dataLayer.push(arguments); };
-    window.gtag('js', new Date());
-    window.gtag('config', ID);
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
-    document.head.appendChild(s);
+    if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: 'granted' });
   }
 
   var STYLE = '#dq-temoins{position:fixed;left:16px;right:16px;bottom:16px;z-index:2147483000;max-width:640px;margin:0 auto;'
@@ -64,7 +55,7 @@
       var v = choix.getAttribute('data-choix');
       ecrire(v);
       b.remove();
-      if (v === 'oui') chargerAnalytics();
+      if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: v === 'oui' ? 'granted' : 'denied' });
     });
     document.body.appendChild(b);
   }
@@ -95,6 +86,5 @@
   auChargement(lienPied);
 
   var choix = lire();
-  if (choix === 'oui') chargerAnalytics();
-  else if (choix !== 'non') auChargement(banniere);
+  if (choix !== 'oui' && choix !== 'non') auChargement(banniere);
 })();
