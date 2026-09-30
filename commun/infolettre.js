@@ -325,7 +325,7 @@ export async function boiteInfolettre(zone, s, { premiereLigne = null } = {}) {
       ${premiereLigne?.html ?? ''}
       ${villes.map((v) => blocVille(v, villes.length > 1 || villesRepliees.length > 0)).join('')}
       ${villesRepliees.length ? `<details class="ab-pliable ab-courriels-villes"${ouvert}>
-        <summary><h3 class="ab-sous-titre" style="margin:0">${tr('Courriels des villes', 'City emails')}</h3><span class="ab-etiquette">${villesRepliees.length}</span></summary>
+        <summary><h3 class="ab-sous-titre" style="margin:0">+ ${tr('Autres villes', 'Other cities')}</h3><span class="ab-etiquette">${villesRepliees.length}</span></summary>
         <div class="ab-pliable-corps">
           <p class="ab-note" style="margin-top:6px">${tr('Les comptes rendus des conseils municipaux, ville par ville. Pour Montréal : langues, lettres de la Ville, puis arrondissements.', 'City council recaps, city by city. For Montréal: languages, city letters, then boroughs.')}</p>
           ${villesRepliees.map((v) => blocVille(v, true)).join('')}
