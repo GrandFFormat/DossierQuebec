@@ -2356,7 +2356,9 @@ function billCard(b, ctx){
   // AGRÉGÉ public (challengedCache) ; absent tant que le cache n'est pas chargé
   // (renderChallenged re-rend les listes une fois le cache arrivé).
   const chEntry = (challengedCache || []).find(c => Number(c.bill_id) === b.id);
-  const hotBadge = chEntry ? `<span class="hot-badge">🔥 ${Number(chEntry.cnt).toLocaleString(isEn ? 'en-CA' : 'fr-CA')} ${isEn ? (Number(chEntry.cnt) > 1 ? 'requests' : 'request') : (Number(chEntry.cnt) > 1 ? 'demandes' : 'demande')}</span>` : '';
+  // Juste l'icône sur la carte (Martin, 29 sept. 2026) ; le nombre de demandes reste dans l'infobulle.
+  const nbDemandes = chEntry ? `${Number(chEntry.cnt).toLocaleString(isEn ? 'en-CA' : 'fr-CA')} ${isEn ? (Number(chEntry.cnt) > 1 ? 'requests' : 'request') : (Number(chEntry.cnt) > 1 ? 'demandes' : 'demande')}` : '';
+  const hotBadge = chEntry ? `<span class="hot-badge hot-badge-icone" title="${isEn ? 'Challenged: ' : 'Challengé : '}${nbDemandes}" aria-label="${isEn ? 'Challenged: ' : 'Challengé : '}${nbDemandes}">🔥</span>` : '';
   const isFollowed = !!followedBills[b.id];
   // Le suivi (et les alertes courriel) est caché sur les projets sanctionnés :
   // ils sont finaux, ne changeront plus d'étape, donc rien à suivre. Gardé sur
