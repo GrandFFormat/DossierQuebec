@@ -1262,6 +1262,7 @@
     font-family:'Archivo Narrow',sans-serif; font-size:12px; font-weight:700;
     padding:5px 11px; text-transform:uppercase; letter-spacing:0.04em; white-space:nowrap;
   }
+  .hot-badge-icone{padding:4px 7px; font-size:14px; line-height:1; cursor:help;} /* juste l'icône ; le nombre est dans l'infobulle */
   /* Résumé ouvert en 2 colonnes (maquette) : « en clair » + dernier événement */
   .bill-open-grid{display:grid; grid-template-columns:1.5fr 1fr; gap:32px; align-items:start;}
   .open-label{
