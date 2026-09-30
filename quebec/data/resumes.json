@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-25T13:59:57.604Z",
+ "generatedAt": "2026-09-30T15:03:18.625Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,573 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-07-27",
+  "depuis": "2026-08-01",
   "plafond": 120
  },
- "nombre": 1559,
- "genereCetteFois": 10,
- "echecs": [],
+ "nombre": 1581,
+ "genereCetteFois": 22,
+ "echecs": [
+  {
+   "id": "GT2026-309.pdf",
+   "raison": "caractères de contrôle dans le résumé (lettres perdues) — refusé, sera redemandé. Brut : \"La Ville approuve les plans pour construire un b\\tatiment isol\\ted de deux logements au 3190, avenue Duval, dans le quartier de Lairet (arrondissement de La Cit\\te\""
+  }
+ ],
  "cout": {
   "devise": "USD",
-  "montant": 0.3885,
-  "jetonsEntree": 54574,
-  "jetonsSortie": 4625
+  "montant": 0.8301,
+  "jetonsEntree": 118919,
+  "jetonsSortie": 9422
  },
  "resumes": [
+  {
+   "id": "DE2026-340.pdf",
+   "numero": "DE2026-340",
+   "date": "2026-09-29",
+   "unite": "Développement économique et grands projets",
+   "objet": "Règlement modifiant le Règlement intérieur du conseil d'arrondissement des Rivières sur la délégation de pouvoirs relativement au pouvoir d'autoriser l'occupation du domaine public, R.C.A.2V.Q. 445",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-340.pdf",
+   "puces": [
+    "Le conseil d'arrondissement des Rivières confie à des fonctionnaires le pouvoir d'autoriser l'occupation du domaine public : terrains publics, trottoirs, rues et ruelles, au-dessus comme au-dessous.",
+    "Pour les occupations temporaires, la délégation va au directeur général, à un directeur général adjoint, au directeur du Service du développement économique et des grands projets, au directeur de la Division des activités et de l'expertise immobilières et à un directeur de section de cette division.",
+    "Pour les occupations permanentes, la délégation se limite au directeur du Service du développement économique et des grands projets, au directeur de la Division des activités et de l'expertise immobilières et à un directeur de section.",
+    "Ces personnes fixent les conditions et le loyer, peuvent imposer la façon de faire les travaux et les matériaux, et peuvent révoquer une autorisation avec un avis écrit au propriétaire au moins un mois d'avance.",
+    "Les autorisations d'occupation permanente doivent être rapportées au comité exécutif chaque trimestre, avec la nature de l'occupation, le nom du bénéficiaire et le montant du loyer.",
+    "La Ville dit vouloir uniformiser ses pratiques dans l'agglomération, après une hausse des demandes liées aux transactions immobilières."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:02:35.756Z",
+   "jetons": {
+    "entree": 5028,
+    "sortie": 545
+   }
+  },
+  {
+   "id": "A2DA2026-005.pdf",
+   "numero": "A2DA2026-005",
+   "date": "2026-09-29",
+   "unite": "Arrondissement des Rivières",
+   "objet": "Versement d'une subvention de 200 $ au Club des Aînés Les Saules",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A2DA2026-005.pdf",
+   "puces": [
+    "L'arrondissement des Rivières verse une subvention de 200 $ au Club des Aînés Les Saules.",
+    "La proposition vient de la conseillère Catherine Deschamps.",
+    "L'argent provient du budget du conseil d'arrondissement, à l'activité « Soutenir les conseils d'arrondissements ».",
+    "Les fonds sont entièrement municipaux (aucune part fédérale ou provinciale).",
+    "Le conseil d'arrondissement a adopté la décision (résolution CA2-2026-0153)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "200 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:02:34.188Z",
+   "jetons": {
+    "entree": 2285,
+    "sortie": 272
+   }
+  },
+  {
+   "id": "GT2026-298.pdf",
+   "numero": "GT2026-298",
+   "date": "2026-09-29",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 9060, rue Chauvet, lot 3 452 995, quartier de Neufchâtel Est-Lebourgneuf, district électoral de Neufchâtel-Lebourgneuf, Arrondissement des Rivières",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-298.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure au 9060, rue Chauvet, dans le quartier de Neufchâtel Est-Lebourgneuf (Arrondissement des Rivières).",
+    "La marge arrière de cette maison unifamiliale isolée est ramenée à 7,5 mètres au lieu des 9 mètres exigés par le règlement d'urbanisme de l'arrondissement.",
+    "Cette dérogation permet au propriétaire d'agrandir sa maison en cour arrière avec un solarium qui empiète d'environ 1,5 mètre dans la marge.",
+    "Le comité consultatif d'urbanisme a recommandé d'accorder la dérogation à l'unanimité le 8 septembre 2026.",
+    "Selon l'analyse, les marges restent adéquates et le terrain situé à l'arrière appartient à Hydro-Québec.",
+    "Le conseil d'arrondissement a adopté la décision le 29 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:02:34.316Z",
+   "jetons": {
+    "entree": 5020,
+    "sortie": 419
+   }
+  },
+  {
+   "id": "GT2026-303.pdf",
+   "numero": "GT2026-303",
+   "date": "2026-09-29",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 8100, rue Armand-Viau Nord, lot 6 579 972, quartier de Duberger-Les Saules, district électoral des Saules-Les Méandres, Arrondissement des Rivières",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-303.pdf",
+   "puces": [
+    "La Ville autorise une clôture de 2,44 mètres (8 pieds) tout autour du terrain industriel situé au 8100, rue Armand-Viau Nord, dans le quartier de Duberger-Les Saules.",
+    "Le règlement d'urbanisme de l'arrondissement des Rivières limite normalement les clôtures à 1,2 mètre en cour avant et à 2 mètres en cours latérale et arrière.",
+    "L'entreprise pharmaceutique GlaxoSmithKline (GSK) demande cette hauteur parce que ses clients exigent des clôtures d'au moins 8 pieds pour sécuriser le site et contrôler les accès.",
+    "La clôture sera en mailles de chaîne recouvertes de vinyle noir, de calibre robuste.",
+    "Le comité consultatif d'urbanisme s'est dit favorable à la demande le 8 septembre 2026, et le conseil d'arrondissement accorde la dérogation.",
+    "Aucun permis n'est requis pour installer une clôture."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:02:47.174Z",
+   "jetons": {
+    "entree": 5547,
+    "sortie": 441
+   }
+  },
+  {
+   "id": "LS2026-256.pdf",
+   "numero": "LS2026-256",
+   "date": "2026-09-29",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement de subventions totalisant un montant de 4 300 $ à deux (2) organismes pour des demandes déposées dans le cadre du programme de soutien financier à un événement de proximité pour l'organisation d'événements à l'automne 2026 - Arrondissement des Rivières",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-256.pdf",
+   "puces": [
+    "L'arrondissement des Rivières verse 4 300 $ en subventions à deux organismes pour des fêtes d'Halloween.",
+    "Loisirs Duberger-Les Saules inc. reçoit 1 300 $ pour « Duberger-Les Saules hanté », le vendredi 30 octobre 2026, de 18 h à 21 h, sur le site de la Maison O'Neill (annulé en cas de mauvais temps).",
+    "Loisirs Vanier reçoit 3 000 $ pour « Le gentil voisin t'invite à l'Halloween », le 30 octobre 2026, de 18 h à 22 h, au parc Jean-Paul-Nolin (repli au centre communautaire Fernand-Dufour si mauvais temps).",
+    "Les deux événements offrent des parcours animés avec défis, personnages costumés et distribution de bonbons; celui de Vanier ajoute un DJ, des jeux gonflables, un concours de déguisements et de la décoration de citrouilles.",
+    "La Ville accorde aussi un soutien technique selon les ressources disponibles; les services de police et d'incendie sont favorables.",
+    "L'argent vient du budget de fonctionnement de l'arrondissement des Rivières."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "4 300 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:02:46.544Z",
+   "jetons": {
+    "entree": 3898,
+    "sortie": 514
+   }
+  },
+  {
+   "id": "TM2026-162.pdf",
+   "numero": "TM2026-162",
+   "date": "2026-09-29",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-614 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Rageot - Arrondissement des Rivières - District électoral de Vanier-Duberger",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-162.pdf",
+   "puces": [
+    "La Ville interdit le stationnement en tout temps du côté sud de la rue Rageot, entre la rue Sainte-Élisabeth et l'avenue Raymond-Blouin.",
+    "Environ 10 cases de stationnement disparaissent sur ce tronçon.",
+    "Le secteur touché est l'Arrondissement des Rivières, district de Vanier-Duberger.",
+    "La rue fait 7 mètres de large : quand des voitures sont garées des deux côtés, la circulation à double sens ne passe pas.",
+    "Le changement fait suite à des demandes de citoyens et vise à améliorer la circulation.",
+    "Selon le document, les résidants du secteur ont accès à des stationnements privés."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:02:52.306Z",
+   "jetons": {
+    "entree": 3615,
+    "sortie": 330
+   }
+  },
+  {
+   "id": "GT2026-289.pdf",
+   "numero": "GT2026-289",
+   "date": "2026-09-29",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement des Rivières sur l'urbanisme relativement à plusieurs zones situées dans le quartier de Neufchâtel Est-Lebourgneuf, R.C.A.2V.Q. 447 (Omnibus marge et logement, quartier de Neufchâtel Est-Lebourgneuf, district électoral de Neufchâtel-Le",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-289.pdf",
+   "puces": [
+    "La Ville modifie le zonage d'une quatre-vingtaine de zones résidentielles du quartier Neufchâtel Est–Lebourgneuf, dans l'arrondissement des Rivières.",
+    "La marge arrière à respecter passe de 9 mètres (ou 8 mètres dans quatre zones) à 7,5 mètres, ce qui laisse plus de place pour agrandir une maison vers la cour arrière.",
+    "Dans 27 zones, les bâtiments isolés pourront compter 2 logements au lieu d'un seul.",
+    "Dans une trentaine d'autres zones, les bâtiments jumelés pourront aussi passer de 1 à 2 logements.",
+    "Les zones visées se trouvent au nord du boulevard Lebourgneuf, au sud de la rue Auguste-Renoir, à l'est du boulevard Saint-Jacques et à l'ouest de l'autoroute Laurentienne.",
+    "Le conseil de quartier donnera son opinion et tiendra une assemblée publique de consultation; les personnes intéressées auront ensuite trois jours pour envoyer leurs commentaires par écrit.",
+    "Le règlement ne contient aucune disposition pouvant faire l'objet d'un référendum; l'adoption visée est le 29 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:02:57.345Z",
+   "jetons": {
+    "entree": 9353,
+    "sortie": 679
+   }
+  },
+  {
+   "id": "GT2026-292.pdf",
+   "numero": "GT2026-292",
+   "date": "2026-09-29",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement des Rivières sur l'urbanisme relativement à la zone 21318Aa, R.C.A.2V.Q. 446 (1610, boulevard Bastien, quartier de Neufchâtel Est-Lebourgneuf, district électoral de Neufchâtel-Lebourgneuf)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-292.pdf",
+   "puces": [
+    "La Ville modifie le zonage de la zone 21318Aa, au 1610, boulevard Bastien, dans le quartier de Neufchâtel Est-Lebourgneuf.",
+    "Le changement assouplit les règles sur les droits acquis pour permettre des travaux d'entretien sur la propriété, dont le rehaussement de la fondation.",
+    "Le bâtiment résidentiel du site aurait été construit entre 1800 et 1849 et relève de la Commission d'urbanisme et de conservation de Québec.",
+    "Les règles actuelles ne permettaient pas la reconstruction en cas d'incendie; le nouveau règlement autorise la réparation ou la reconstruction malgré une implantation dérogatoire.",
+    "Le règlement permet aussi l'agrandissement d'une habitation d'au plus trois logements et le maintien de l'usage dérogatoire.",
+    "Le conseil de quartier de Neufchâtel Est-Lebourgneuf est appelé à donner son opinion et à tenir l'assemblée publique de consultation.",
+    "Le règlement ne peut pas faire l'objet d'une approbation par référendum."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:03:03.502Z",
+   "jetons": {
+    "entree": 8612,
+    "sortie": 478
+   }
+  },
+  {
+   "id": "GT2026-286.pdf",
+   "numero": "GT2026-286",
+   "date": "2026-09-29",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 4795, avenue Erlanger, lot 1 229 204, quartier de Duberger-Les Saules, district électoral des Saules-Les Méandres, Arrondissement des Rivières",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-286.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure au 4795, avenue Erlanger, dans le quartier de Duberger-Les Saules (arrondissement des Rivières).",
+    "Le garage attenant de la maison est situé à 0,25 mètre de la limite du terrain, alors que le règlement d'urbanisme exige 0,5 mètre.",
+    "La dérogation rend cette marge réputée conforme, ce qui régularise la situation.",
+    "Le propriétaire a fait la demande parce qu'il veut vendre sa propriété, construite en 1966.",
+    "Le comité consultatif d'urbanisme s'est prononcé en faveur de la demande le 3 août 2026, à l'unanimité.",
+    "Selon l'analyse, la situation existe depuis des années, n'affecte pas le voisin et n'a pas d'effet sur la sécurité, la santé publique ou l'environnement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:03:10.639Z",
+   "jetons": {
+    "entree": 4856,
+    "sortie": 387
+   }
+  },
+  {
+   "id": "GT2026-285.pdf",
+   "numero": "GT2026-285",
+   "date": "2026-09-29",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement des Rivières sur l'urbanisme relativement à une autorisation personnelle à Conseil de direction de l'Armée du Salut du Canada sur le lot numéro 1 941 572 du cadastre du Québec, R.C.A.2V.Q. 449 (735, boulevard Wilfrid-Hamel, quartier de",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-285.pdf",
+   "puces": [
+    "La Ville d'arrondissement des Rivières autorise l'Armée du Salut à utiliser le 735, boulevard Wilfrid-Hamel comme lieu de culte, dans le quartier de Vanier.",
+    "L'autorisation vaut pour 100 ans et ne peut pas être transférée à un autre organisme.",
+    "L'organisme doit déménager parce que son local actuel, au 815, boulevard Wilfrid-Hamel, sera démoli pour faire place à un immeuble résidentiel de 5 à 8 étages et de 370 logements.",
+    "Le zonage actuel permet déjà ses autres activités (aide alimentaire, friperie, café, alphabétisation, francisation, soutien), mais pas les célébrations religieuses.",
+    "La Ville passe par une autorisation personnelle prévue à sa charte, ce qui évite de modifier d'abord le programme particulier d'urbanisme Wilfrid-Hamel – Laurentienne.",
+    "Le conseil de quartier de Vanier donnera son opinion et tiendra une assemblée publique de consultation; la décision n'est pas soumise à un référendum."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:03:11.463Z",
+   "jetons": {
+    "entree": 8516,
+    "sortie": 477
+   }
+  },
+  {
+   "id": "GT2026-288.pdf",
+   "numero": "GT2026-288",
+   "date": "2026-09-29",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement des Rivières sur l'urbanisme relativement à plusieurs zones situées dans le quartier de Duberger-Les Saules, R.C.A.2V.Q. 448 (Omnibus marge et logement, quartier de Duberger-Les Saules, district électoral des Saules-Les Méandres)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-288.pdf",
+   "puces": [
+    "La Ville modifie les règles d'urbanisme dans 46 zones résidentielles du quartier Duberger–Les Saules, dans l'arrondissement des Rivières.",
+    "La marge arrière minimale passe de 9 mètres à 7,5 mètres dans 44 de ces zones, ce qui laisse plus de place pour agrandir une maison vers l'arrière.",
+    "Dans 4 zones (22036Ha, 22101Ha, 22311Ha, 22324Ha), le nombre maximal de logements d'un bâtiment isolé passe de 1 à 2.",
+    "Dans 20 zones, le nombre maximal de logements d'un bâtiment jumelé passe de 1 à 2.",
+    "Le document explique que la norme de 9 mètres avait mené au refus de plusieurs demandes d'agrandissement en cour arrière.",
+    "Le conseil de quartier de Duberger–Les Saules doit donner son opinion et tenir une assemblée publique de consultation; les personnes intéressées ont trois jours après l'assemblée pour envoyer leurs observations par écrit.",
+    "Le règlement ne contient aucune disposition susceptible d'approbation référendaire. Date cible d'adoption : 29 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:03:18.361Z",
+   "jetons": {
+    "entree": 8780,
+    "sortie": 513
+   }
+  },
+  {
+   "id": "LS2026-255.pdf",
+   "numero": "LS2026-255",
+   "date": "2026-09-28",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement d'une subvention de 2 600 $ à l'organisme « L'Engrenage Saint-Roch » dans le cadre du programme de soutien financier à un événement de proximité pour l'organisation de l'événement « Fête d'Halloween dans Saint-Roch », le vendredi 30 octobre 2026, au parvis de l'église Saint-Roch, devant le",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-255.pdf",
+   "puces": [
+    "La Ville verse 2 600 $ à l'organisme L'Engrenage Saint-Roch pour organiser la « Fête d'Halloween dans Saint-Roch ».",
+    "L'événement se tient le vendredi 30 octobre 2026, de 16 h à 19 h, beau temps mauvais temps.",
+    "Les activités se déroulent au parvis de l'église Saint-Roch, devant le YMCA, aux places Jacques-Cartier et Lorenzo-Verret et au parc des Pékans.",
+    "Le parcours de bonbons est remplacé par des animations à plusieurs endroits; des repas froids, collations et breuvages chauds sont servis sur le parvis de l'église.",
+    "La subvention baisse par rapport à 2025 (3 500 $) parce que les dépenses admissibles diminuent avec la transformation de l'événement.",
+    "Les Services de police et de protection contre l'incendie sont favorables, et la Ville fournira un soutien technique selon les ressources disponibles."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 600 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:02:39.288Z",
+   "jetons": {
+    "entree": 3811,
+    "sortie": 435
+   }
+  },
+  {
+   "id": "GT2026-297.pdf",
+   "numero": "GT2026-297",
+   "date": "2026-09-28",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 420, rue Saint-Mathias, lot 5 344 283, quartier de Saint-Sauveur, district électoral de Saint-Roch-Saint-Sauveur, Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-297.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure au 420, rue Saint-Mathias, dans le quartier Saint-Sauveur (Arrondissement de La Cité-Limoilou).",
+    "Le bâtiment existant garde une marge latérale de 0 mètre, alors que le règlement d'urbanisme exige une marge nulle ou d'au moins 1,5 mètre.",
+    "La situation dure depuis 2015 : la marge réelle mesurée est de 0,28 mètre.",
+    "Selon l'analyse, corriger l'alignement du mur exigerait de démolir une partie du bâtiment et risquerait d'endommager la construction voisine.",
+    "Le comité consultatif d'urbanisme s'est dit favorable à l'unanimité le 8 septembre 2026, et le conseil d'arrondissement a accordé la dérogation."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:02:45.540Z",
+   "jetons": {
+    "entree": 5135,
+    "sortie": 374
+   }
+  },
+  {
+   "id": "GT2026-296.pdf",
+   "numero": "GT2026-296",
+   "date": "2026-09-28",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise aux 218-222, rue des Saules Est, lot 6 727 950, quartier de Lairet, district électoral de Maizerets-Lairet, Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-296.pdf",
+   "puces": [
+    "La Ville refuse la demande de dérogation mineure pour les 218-222, rue des Saules Est, dans le quartier de Lairet (arrondissement de La Cité-Limoilou).",
+    "Le propriétaire voulait reconstruire un garage détaché à 0,25 m de la ligne latérale et à 0,15 m de la ligne arrière, alors que le règlement d'urbanisme exige 0,75 m.",
+    "Le nouveau garage serait situé à peu près au même endroit que l'ancien, mais serait plus haut.",
+    "Motif du refus : le terrain est de forme et de dimensions standards, sans contrainte particulière, et peut accueillir un garage conforme.",
+    "Autre motif : la hauteur plus élevée du bâtiment projeté cause un préjudice plus grand au voisinage.",
+    "Le comité consultatif d'urbanisme avait recommandé le refus à l'unanimité le 8 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:02:45.575Z",
+   "jetons": {
+    "entree": 6286,
+    "sortie": 411
+   }
+  },
+  {
+   "id": "GT2026-302.pdf",
+   "numero": "GT2026-302",
+   "date": "2026-09-28",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise aux 766 à 770, rue Sainte-Marie, lot projeté 6 722 340, quartier de Saint-Jean-Baptiste, district électoral du Cap-aux-Diamants, Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-302.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure pour l'immeuble du 766-770, rue Sainte-Marie, dans le quartier Saint-Jean-Baptiste.",
+    "Le lot projeté 6 722 340 pourra avoir une largeur de 5,11 mètres, alors que le règlement d'urbanisme de La Cité-Limoilou en exige 6 mètres.",
+    "La demande sert à régulariser l'usage d'une aire de stationnement partagée entre deux lots, utilisée par l'immeuble depuis plus de 15 ans alors que le titre de propriété est rattaché au lot du 591-597, rue Richelieu.",
+    "Aucune modification des bâtiments principaux n'est prévue.",
+    "Le comité consultatif d'urbanisme s'est prononcé en faveur de la demande le 8 septembre 2026, à la majorité.",
+    "Le document ne fait état d'aucun impact financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:02:53.829Z",
+   "jetons": {
+    "entree": 5011,
+    "sortie": 406
+   }
+  },
+  {
+   "id": "TM2026-206.pdf",
+   "numero": "TM2026-206",
+   "date": "2026-09-28",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1592 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Père-Grenier - Arrondissement de La Cité-Limoilou - District de Saint-Roch-Saint-Sauveur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-206.pdf",
+   "puces": [
+    "La Ville retire l'interdiction de stationner devant le 259, rue Père-Grenier, dans Saint-Roch–Saint-Sauveur.",
+    "Le changement ajoute deux espaces de stationnement sur rue.",
+    "L'immeuble commercial à cette adresse (ancien Lave-auto Chénier) a été démoli pour faire place à un nouvel immeuble résidentiel; les portes de garage qui justifiaient l'interdiction ont disparu.",
+    "Sur le côté est de la rue Père-Grenier, entre Saint-Vallier Ouest et Chénier, le stationnement reste interdit sur 15 mètres à partir de Saint-Vallier Ouest, puis sur 6 mètres à compter de 35 mètres au sud de Saint-Vallier Ouest.",
+    "Le conseil d'arrondissement de La Cité-Limoilou édicte l'ordonnance O-1592 pour appliquer ces nouvelles règles."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:02:53.061Z",
+   "jetons": {
+    "entree": 3916,
+    "sortie": 421
+   }
+  },
+  {
+   "id": "TM2026-216.pdf",
+   "numero": "TM2026-216",
+   "date": "2026-09-28",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1605 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Bayard - Arrondissement de La Cité-Limoilou - District électoral de Saint-Roch-Saint-Sauveur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-216.pdf",
+   "puces": [
+    "La Ville crée une zone de stationnement limité à 20 minutes sur la rue Bayard, côté ouest, entre la rue Bagot et le boulevard Charest Ouest.",
+    "La limite de 20 minutes s'applique de 8 h à 18 h, du lundi au vendredi.",
+    "La zone occupe une seule case de stationnement et aucun espace de stationnement sur rue n'est retiré.",
+    "Le changement fait suite à une demande du commerce Marché Écono, situé au 442, boulevard Charest Ouest.",
+    "Le secteur touché est l'arrondissement de La Cité-Limoilou, district de Saint-Roch–Saint-Sauveur."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:03:01.968Z",
+   "jetons": {
+    "entree": 3710,
+    "sortie": 322
+   }
+  },
+  {
+   "id": "TM2026-246.pdf",
+   "numero": "TM2026-246",
+   "date": "2026-09-28",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement de La Cité-Limoilou sur le stationnement dans un garage, un parc de stationnement et sur un terrain géré par la Ville relativement à une case de stationnement pour laquelle un tarif est imposé par un parcomètre, R.C.A.1V.Q. 575",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-246.pdf",
+   "puces": [
+    "La Ville modifie son règlement pour offrir 3 heures de stationnement gratuit aux véhicules munis d'une vignette pour personnes handicapées délivrée par la SAAQ.",
+    "La gratuité s'applique aux cases de stationnement tarifées par parcomètre dans les parcs de stationnement gérés par la Ville.",
+    "Dans l'arrondissement de La Cité-Limoilou, la mesure vise le parc de stationnement de l'Esplanade.",
+    "La gratuité ne s'applique pas quand le stationnement est interdit pour entretien de la rue, travaux, signalisation temporaire ou sur ordre d'un agent de la paix.",
+    "Cette gratuité de 3 heures existe depuis plus de 20 ans dans les rues tarifées par parcomètre; la Ville l'étend pour harmoniser la pratique.",
+    "La modification découle du Plan d'action en accessibilité universelle 2025-2030 et touchera au total huit règlements municipaux sur le stationnement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:03:04.828Z",
+   "jetons": {
+    "entree": 8310,
+    "sortie": 436
+   }
+  },
+  {
+   "id": "TM2026-203.pdf",
+   "numero": "TM2026-203",
+   "date": "2026-09-28",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1591 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue De La Salle - Arrondissement de La Cité-Limoilou - District électoral de Saint-Roch-Saint-Sauveur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-203.pdf",
+   "puces": [
+    "La Ville réserve un espace de stationnement aux personnes à mobilité réduite sur la rue De La Salle, côté sud, entre les rues Caron et Dorchester.",
+    "L'espace de 7 mètres se situe à 121 mètres à l'est de la rue Caron, vis-à-vis l'immeuble du 312, rue Dorchester.",
+    "La demande vient d'une résidante du 312, rue Dorchester qui détient une vignette pour personnes à mobilité réduite de la SAAQ.",
+    "Le reste du tronçon garde la limite de 60 minutes de 9 h à 17 h, du lundi au vendredi, sauf pour les détenteurs d'un permis de la zone 14.",
+    "Aucun espace de stationnement existant n'est retiré.",
+    "La décision touche l'arrondissement de La Cité-Limoilou, district de Saint-Roch–Saint-Sauveur."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:03:12.169Z",
+   "jetons": {
+    "entree": 4259,
+    "sortie": 399
+   }
+  },
+  {
+   "id": "GT2026-295.pdf",
+   "numero": "GT2026-295",
+   "date": "2026-09-28",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 1390, avenue Saint-Pascal, lot 1 571 364, quartier de Maizerets, district électoral de Maizerets-Lairet, Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-295.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure au 1390, avenue Saint-Pascal, dans le quartier de Maizerets (arrondissement de La Cité-Limoilou).",
+    "La dérogation permet un agrandissement avec une marge avant de 1,68 mètre sur la rue de la Trinité, au lieu des 3,1 mètres exigés par le règlement d'urbanisme.",
+    "Les propriétaires veulent reconstruire la véranda arrière, détériorée, et l'agrandir pour l'intégrer à l'espace habitable.",
+    "Selon l'analyse au dossier, la maison a été construite en 1948 et est implantée à une distance quasi nulle de la ligne avant du lot.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable le 8 septembre 2026, adopté à l'unanimité.",
+    "Aucun impact financier n'est indiqué au sommaire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:03:11.202Z",
+   "jetons": {
+    "entree": 5361,
+    "sortie": 404
+   }
+  },
+  {
+   "id": "GT2026-310.pdf",
+   "numero": "GT2026-310",
+   "date": "2026-09-28",
+   "unite": "Gestion du territoire",
+   "objet": "Demandes assujetties à un règlement relatif aux PIIA - Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-310.pdf",
+   "puces": [
+    "Le conseil d'arrondissement de La Cité-Limoilou approuve deux demandes de permis liées à l'apparence et à l'implantation des bâtiments (PIIA).",
+    "Au 2995, avenue Valmont-Martin, la Ville autorise la construction d'un bâtiment isolé d'un logement (district du Cap-aux-Diamants).",
+    "Au 1725, 24e Rue, la Ville autorise la modification du revêtement extérieur d'un bâtiment isolé mixte (district de Maizerets–Lairet).",
+    "Les deux demandes ont reçu un avis favorable du comité consultatif d'urbanisme lors de sa séance du 8 septembre 2026.",
+    "Le document ne mentionne aucun impact financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:03:16.536Z",
+   "jetons": {
+    "entree": 3386,
+    "sortie": 347
+   }
+  },
+  {
+   "id": "TM2026-257.pdf",
+   "numero": "TM2026-257",
+   "date": "2026-09-28",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1626 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Gérard-Morisset - Arrondissement de La Cité-Limoilou - District électoral de Montcalm-Saint-Sacrement",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-257.pdf",
+   "puces": [
+    "La Ville change les règles de stationnement sur la rue Gérard-Morisset, dans le quartier Montcalm-Saint-Sacrement.",
+    "Environ 66 cases passent à un maximum de 90 minutes, de 9 h à 17 h du lundi au vendredi, sauf pour les détenteurs d'un permis de la zone 6.",
+    "Environ 34 autres cases seront limitées à 90 minutes, de 9 h à 17 h du lundi au vendredi, sans exception de permis.",
+    "Le stationnement devient interdit près de certaines intersections, dans les courbes et de chaque côté de certains accès privés.",
+    "Environ 33 cases restent sans réglementation.",
+    "Le sens unique et les nouvelles règles ajoutent six espaces de stationnement dans le secteur.",
+    "La décision suit une séance publique le 26 mai 2026 et un questionnaire en ligne du 27 mai au 3 juin 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-09-30T15:03:18.624Z",
+   "jetons": {
+    "entree": 4224,
+    "sortie": 412
+   }
+  },
   {
    "id": "DE2026-326.pdf",
    "numero": "DE2026-326",
