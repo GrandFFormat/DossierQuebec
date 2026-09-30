@@ -1305,12 +1305,12 @@
   .bill-more:hover{background:var(--ink-bg); color:var(--yellow);}
 
   /* Explainer jaune */
-  #band-challenge-explainer{margin-top:34px; text-align:center;} /* centré (Martin, 29 sept. 2026) */
+  #band-challenge-explainer{margin-top:34px; margin-bottom:34px;} /* autant d'air au-dessus qu'au-dessous, entre les cartes (Martin, 29 sept. 2026) */
   #band-challenge-explainer h2{
     font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase;
     letter-spacing:-0.02em; font-size:clamp(26px, 3.2vw, 40px); margin:0 0 14px;
   }
-  #band-challenge-explainer p{font-size:16.5px; font-weight:500; line-height:1.5; max-width:760px; margin:0 auto 12px;}
+  #band-challenge-explainer p{font-size:16.5px; font-weight:500; line-height:1.5; max-width:760px; margin:0 0 12px;}
 
   /* ---------- PHASE 4 : VOTES (carte détaillée, maquette) ---------- */
   .vote-card{border:3px solid var(--ink); box-shadow:var(--shadow); background:var(--card); margin-bottom:16px;}
