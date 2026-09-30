@@ -2781,7 +2781,10 @@ function renderBills(keyword){
   const banner = document.getElementById('band-challenge-explainer');
   const visibles = list.slice(0, billsShown);
   if(list.length){
-    el.innerHTML = visibles.slice(0, 2).map(b=>billCard(b,'full')).join('');
+    // Entre la 1re et la 2e carte, l'astuce de l'accueil (Martin, 30 sept. 2026) : on ne devine pas
+    // qu'une carte s'ouvre d'un clic.
+    const astuce = `<div class="bills-astuce">${isEn ? '↓ Click anywhere in the white square to see the summary ↓' : '↓ Cliquez n’importe où dans le carré blanc pour voir le résumé ↓'}</div>`;
+    el.innerHTML = visibles.slice(0, 2).map((b, i)=>(i === 1 ? astuce : '') + billCard(b,'full')).join('');
     if(rest){
       rest.innerHTML = visibles.slice(2).map(b=>billCard(b,'full')).join('');
       // Barre « + 10 », même patron que celle des votes.
