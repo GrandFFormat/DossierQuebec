@@ -315,9 +315,11 @@ const translations = {
     'nav.mondossier':"My file",
     'sujet.mondossier':"My file",
     'fil.mondossier':"My file",
+    'mdvilles.h':"Your city projects",
+    'mdvilles.sub':"The projects you follow, all cities combined. Click a project to see its decisions, most recent first. To add one, pick it further down, or click “Project: …” on a decision in a city section.",
     'mdhero.l1':"Your bills,",
     'mdhero.l2':"the members you follow.",
-    'mdhero.sub':"What you follow at the National Assembly. <b>Your city's decisions live in <a class=\"md-lien\" href=\"/mes-dossiers\">My files</a>, separately.</b>",
+    'mdhero.sub':"What you follow at the National Assembly and in the cities, with one account. <b><a class=\"md-lien\" href=\"#villes\">Your city projects</a> are further down.</b>",
     'lp.titre':"How to read vote attendance",
     'lp.lien':"Full definition → Glossary",
     'lp.formule':"<b>88%</b>: out of 100 recorded votes held since their first vote of the legislature, the person voted in 88 — yea, nay or abstention, whichever way.",
@@ -1020,7 +1022,7 @@ function renderPromoCompte(){
   if(currentUser){
     const nom = (currentUser.email || '').split('@')[0] || currentUser.email;
     const echappe = String(nom).replace(/[&<>"']/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
-    box.innerHTML = `<p class="promo-compte-note" style="margin:0">${isEn ? 'Signed in as' : 'Connecté comme'} <b>${echappe}</b>. ${isEn ? 'Your followed bills are in <a class="promo-lien" href="/mon-dossier">My file</a>, your city projects in <a class="promo-lien" href="/mes-dossiers">My files</a>.' : 'Vos projets de loi suivis sont dans <a class="promo-lien" href="/mon-dossier">Mon dossier</a>, vos projets de ville dans <a class="promo-lien" href="/mes-dossiers">Mes dossiers</a>.'}</p>`;
+    box.innerHTML = `<p class="promo-compte-note" style="margin:0">${isEn ? 'Signed in as' : 'Connecté comme'} <b>${echappe}</b>. ${isEn ? 'Your followed bills are in <a class="promo-lien" href="/mon-dossier">My file</a>, your city projects too, <a class="promo-lien" href="/mon-dossier#villes">further down</a>.' : 'Vos projets de loi suivis sont dans <a class="promo-lien" href="/mon-dossier">Mon dossier</a>, vos projets de ville aussi, <a class="promo-lien" href="/mon-dossier#villes">plus bas</a>.'}</p>`;
     return;
   }
   const saisie = promoEnvoi?.email || document.getElementById('promoEmail')?.value || '';
@@ -1065,7 +1067,7 @@ async function handlePromoLink(){
 }
 
 /* ---------------- /mon-dossier — l'espace de la personne, côté ASSEMBLÉE ----------------
-   Les villes ont leur propre page, /mes-dossiers (Martin, 22 sept. 2026 : « complètement
+   Les villes y ont leur section depuis le 30 sept. 2026 (#villes, commun/mes-dossiers.js) ; avant, /mes-dossiers (Martin, 22 sept. 2026 : « complètement
    séparés »). Ici : les projets de loi suivis, les élus suivis, les mots-clés de l'Assemblée et
    l'alerte du matin. Rien de personnel n'est écrit dans le HTML : tout arrive de Supabase, avec
    les règles de sécurité qui font que chaque compte ne voit que ses propres lignes. */
@@ -1132,7 +1134,7 @@ function mdCompte(isEn, quota){
     ${quota?.sur ? `<p class="md-note md-quota"><b>${isEn ? `${quota.total} of ${quota.sur} follows used` : `${quota.total} suivis sur ${quota.sur}`}</b> — ${isEn
       ? 'bills and city projects share the same count.' : 'projets de loi et projets de ville comptent ensemble.'}
       ${quota.parties?.villes || quota.parties?.motsVilles || quota.parties?.organismes
-        ? `<a class="md-lien" href="/mes-dossiers">${isEn ? 'Your city follows' : 'Vos suivis de ville'}</a>` : ''}
+        ? `<a class="md-lien" href="#villes">${isEn ? 'Your city follows' : 'Vos suivis de ville'}</a>` : ''}
       <br>${isEn ? 'Members you follow are not counted.' : 'Les élus suivis ne comptent pas dans ce total.'}</p>` : ''}
   </div>`;
 }

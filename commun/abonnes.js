@@ -29,8 +29,8 @@ function boutonsEntete() {
   if (document.querySelector('.ab-mes-dossiers')) return;
   const mesDossiers = document.createElement('a');
   mesDossiers.className = 'ab-mes-dossiers';
-  mesDossiers.href = '/mes-dossiers';
-  mesDossiers.innerHTML = `${tr('Mes dossiers', 'My files')} <span class="ab-compte" hidden></span>`;
+  mesDossiers.href = '/mon-dossier#villes';
+  mesDossiers.innerHTML = `${tr('Mon dossier', 'My file')} <span class="ab-compte" hidden></span>`;
   const outils = document.querySelector('header nav .outils');
   const repere = document.querySelector('header .taille-texte') ?? document.querySelector('header .bascule-theme');
   if (outils) outils.prepend(mesDossiers);
@@ -216,7 +216,7 @@ document.addEventListener('click', async (e) => {
     // par etatEtoile() masquerait un title mis à jour tout seul. On ouvre donc la fiche et on
     // écrit dans sa zone, comme pour la connexion.
     const texte = plafond
-        ? tr(`Limite atteinte : ${plafond} suivis en tout — projets de ville et projets de loi ensemble. Retirez-en un dans Mes dossiers.`, `Limit reached: ${plafond} follows in all — city projects and bills together. Remove one in My files.`)
+        ? tr(`Limite atteinte : ${plafond} suivis en tout — projets de ville et projets de loi ensemble. Retirez-en un dans Mon dossier.`, `Limit reached: ${plafond} follows in all — city projects and bills together. Remove one in My file.`)
         : tr("Impossible d'enregistrer — réessayez", "Couldn't save — try again");
     etoile.title = texte;
     etoile.setAttribute('aria-label', texte);
@@ -226,7 +226,7 @@ document.addEventListener('click', async (e) => {
       const boite = zone.querySelector('.ab-connexion');
       if (boite) {
         boite.hidden = false;
-        boite.innerHTML = `<p class="ab-note" role="status">${echapper(texte)} <a class="ab-lien" href="/mes-dossiers">${tr('Mes dossiers', 'My files')}</a></p>`;
+        boite.innerHTML = `<p class="ab-note" role="status">${echapper(texte)} <a class="ab-lien" href="/mon-dossier#villes">${tr('Mon dossier', 'My file')}</a></p>`;
       }
     }
     return;

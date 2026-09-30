@@ -90,7 +90,7 @@
     },
     {
       "source": "/abonnement",
-      "destination": "/mes-dossiers",
+      "destination": "/mon-dossier#villes",
       "permanent": false
     },
     {
@@ -546,6 +546,11 @@
     {
       "source": "/laval/sources-des-donnees.html",
       "destination": "/laval/sources-des-donnees-de-laval",
+      "permanent": true
+    },
+    {
+      "source": "/mes-dossiers",
+      "destination": "/mon-dossier#villes",
       "permanent": true
     }
   ]

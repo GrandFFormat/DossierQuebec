@@ -606,8 +606,8 @@ async function main() {
   H.push(`<tr><td style="padding:26px 0 0">
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#E8F6EE;border:1px solid #9FD9B6;border-radius:10px;border-collapse:separate"><tr><td style="${POLICE};padding:16px 18px;font-size:15px;line-height:1.55;color:${ENCRE}">
       <div style="font-size:17px;font-weight:800;color:#0B8A4B;margin-bottom:4px">📂 Suivre un projet</div>
-      Avec un compte gratuit, suivez jusqu'à 3 projets dans <a href="${RACINE}/mes-dossiers" style="color:#0B8A4B;font-weight:700">Mes dossiers</a> : leur récapitulatif, leur ligne du temps et ce qui attend encore une décision.
-      <div style="margin-top:12px"><a href="${RACINE}/mes-dossiers" style="display:inline-block;padding:9px 16px;border-radius:6px;background:#0B8A4B;color:#ffffff;font-weight:700;text-decoration:none">Ouvrir Mes dossiers</a></div>
+      Avec un compte gratuit, suivez jusqu'à 3 projets dans <a href="${RACINE}/mon-dossier#villes" style="color:#0B8A4B;font-weight:700">Mon dossier</a> : leur récapitulatif, leur ligne du temps et ce qui attend encore une décision.
+      <div style="margin-top:12px"><a href="${RACINE}/mon-dossier#villes" style="display:inline-block;padding:9px 16px;border-radius:6px;background:#0B8A4B;color:#ffffff;font-weight:700;text-decoration:none">Ouvrir Mon dossier</a></div>
     </td></tr></table>
   </td></tr>`);
   H.push(`<tr><td style="${POLICE};padding:22px 4px 0;font-size:12px;line-height:1.55;color:${DOUX}">
