@@ -256,12 +256,29 @@ function goToFederal(evt){
         <span data-i18n="mdhero.l1">Vos projets de loi,</span>
         <span class="hero-outline" data-i18n="mdhero.l2">vos élus suivis.</span>
       </h1>
-      <p class="view-hero-sub" data-i18n="mdhero.sub">Ce que vous suivez à l'Assemblée nationale. <b>Les décisions de votre ville vivent dans <a class="md-lien" href="/mes-dossiers">Mes dossiers</a>, à part.</b></p>
+      <p class="view-hero-sub" data-i18n="mdhero.sub">Ce que vous suivez à l'Assemblée nationale et dans les villes, avec un seul compte. <b><a class="md-lien" href="#villes">Vos projets de ville</a> sont plus bas.</b></p>
     </div>
 
     <div id="mdCompte" class="md-bloc"></div>
     <div id="mdLois" class="md-bloc"></div>
     <div id="mdElus" class="md-bloc"></div>
+
+    <!-- Vos projets de ville : l'ancienne page /mes-dossiers, fusionnée ici le 30 sept. 2026 (Martin).
+         Même compte, même connexion (la carte « Se connecter » plus haut). Rempli par
+         commun/mes-dossiers.js ; .ab-page lui donne les couleurs des villes (commun/abonnes.css). -->
+    <div class="md-villes ab-page" id="villes" role="region" aria-labelledby="mdVillesTitre">
+      <h2 class="md-villes-titre" id="mdVillesTitre" data-i18n="mdvilles.h">Vos projets de ville</h2>
+      <p class="ab-chapeau" data-i18n="mdvilles.sub">Les projets que vous suivez, toutes villes confondues. Cliquez sur un projet pour voir ses décisions, les plus récentes d'abord. Pour en ajouter un, choisissez-le plus bas, ou cliquez « Projet : … » sur une décision dans une ville.</p>
+      <div id="compte" hidden></div>
+      <div id="infolettre"></div>
+      <div id="mots"></div>
+      <div id="organismes"></div>
+      <div id="suggestions"></div>
+      <div id="liste"><p class="ab-vide">Chargement…</p></div>
+      <div id="pourquoi"></div>
+      <div id="ecrire"></div>
+    </div>
+    <script type="module" src="/commun/mes-dossiers.js"></script>
   </section>
 
   <!-- MINISTRES & DÉPUTÉS -->
@@ -288,7 +305,7 @@ function goToFederal(evt){
        « Construit avec Claude »). goToTab('bd') fonctionne sans bouton d'onglet. -->
   <!-- /mon-dossier : l'espace de la personne connectée, côté ASSEMBLÉE seulement (Martin,
        22 sept. 2026 : « mes dossiers provincial et les villes doivent être complètement séparés »).
-       Les villes gardent leur propre page, /mes-dossiers, avec le style des volets. Tout le contenu
+       Les villes y ont leur section (#villes) depuis le 30 sept. 2026 ; avant, /mes-dossiers. Tout le contenu
        est rempli par commun/dq.js (renderMonDossier) : rien de personnel n'est dans le HTML. -->
   
 

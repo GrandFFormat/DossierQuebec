@@ -282,6 +282,7 @@ function goToFederal(evt){
       <ol class="maj-liste" id="journalListe" aria-live="polite"></ol>
     <div class="prerendu" data-prerendu="journal">
       <ul aria-label="Mises à jour du site">
+        <li><span class="pr-meta">30 septembre 2026 —</span> <b>Une seule page « Mon dossier » pour l’Assemblée et les villes</b> « Mon dossier » et « Mes dossiers » ne font plus qu’une page : vos projets de loi et vos élus en haut, vos projets de ville plus bas, avec une seule connexion par courriel. L’ancienne adresse /mes-dossiers mène à la section des villes, et le bouton des villes s’appelle maintenant « Mon dossier ».</li>
         <li><span class="pr-meta">29 septembre 2026 —</span> <b>Longueuil : un bandeau quand la Ville ne répond plus</b> Depuis le 27 septembre, le site de la Ville de Longueuil ne répond plus à notre outil de mise à jour automatique. Chaque page du volet le dit maintenant dans un bandeau, avec la date de la dernière lecture réussie ; il disparaît de lui-même dès que la Ville répond de nouveau.</li>
         <li><span class="pr-meta">29 septembre 2026 —</span> <b>Mesure des visites : seulement si vous acceptez</b> Le site peut maintenant compter ses visites avec Google Analytics, mais seulement si vous l’acceptez : une bannière le demande à la première visite, « Refuser » ne change rien d’autre, et le lien « Témoins » au bas de chaque page permet de changer d’avis.</li>
         <li><span class="pr-meta">27 septembre 2026 —</span> <b>Chaque adresse dit le titre de sa page, au complet</b> Dans les cinq villes, l’adresse d’une page reprend maintenant son titre entier : /quebec/votes-nominatifs-du-conseil-de-quebec, /quebec/conseil-municipal-de-quebec, /longueuil/conseil-de-ville-de-longueuil, /quebec/lexique-municipal-de-quebec, /quebec/sources-des-donnees-de-quebec. Toutes les adresses précédentes mènent directement à la bonne page, sans détour, et les liens reçus par courriel gardent le dossier qu’ils désignaient.</li>
@@ -301,9 +302,8 @@ function goToFederal(evt){
         <li><span class="pr-meta">25 septembre 2026 —</span> <b>Le compte rendu gratuit ne vend plus le détail de l’argent</b> Le compte rendu mensuel gratuit (Québec et Montréal) n’affiche plus d’encadrés verrouillés « Détail de l’argent — S’abonner » : ce détail est maintenant gratuit sur le site. L’édition abonnés garde ses encadrés dorés sous chaque gros montant, et l’agenda des conseils.</li>
         <li><span class="pr-meta">25 septembre 2026 —</span> <b>Montréal et Lévis : les sources disent ce que vend l’abonnement</b> Les pages Sources de Montréal et de Lévis disaient « sans usage commercial », alors que DossierQuébec offre un abonnement payant. Elles disent maintenant la vérité : les procès-verbaux et leurs résumés restent gratuits à lire, et l’abonnement vend des outils (alertes, suivis, export), jamais l’accès à ces documents.</li>
         <li><span class="pr-meta">25 septembre 2026 —</span> <b>Le détail de l’argent devient gratuit pour tout le monde</b> À Québec, le détail de l’argent d’une décision — qui reçoit, qui paie, les soumissions, l’estimation de la Ville, la répartition par année — s’affiche maintenant pour tout le monde, sans abonnement. Pour demander la lecture d’un dossier pas encore lu, un compte gratuit suffit (10 demandes par 24 heures). L’abonnement vend des outils : les alertes, les suivis, l’agenda du conseil et l’export.</li>
-        <li><span class="pr-meta">25 septembre 2026 —</span> <b>Les projets omnibus sont repérés, et résumés en entier</b> Certains projets de loi modifient des dizaines de lois sous un seul titre — le PL 11 en touche 74. Leur résumé ne lisait que le début du texte et s’arrêtait à 7 puces : il passait à côté de la plus grande partie du projet. Les 24 projets omnibus portent maintenant une pastille « Omnibus » avec le nombre de lois touchées, un filtre les regroupe, et leur résumé, refait à partir des notes explicatives officielles, couvre tout le projet loi par loi. Sous chaque résumé, la liste officielle des lois et règlements touchés.</li>
       </ul>
-      <p class="pr-note">Les 20 plus récentes, sur 46.</p>
+      <p class="pr-note">Les 20 plus récentes, sur 47.</p>
     </div>
       <button type="button" class="maj-plus" id="journalPlus" hidden></button>
     </div>
@@ -333,7 +333,7 @@ function goToFederal(evt){
        « Construit avec Claude »). goToTab('bd') fonctionne sans bouton d'onglet. -->
   <!-- /mon-dossier : l'espace de la personne connectée, côté ASSEMBLÉE seulement (Martin,
        22 sept. 2026 : « mes dossiers provincial et les villes doivent être complètement séparés »).
-       Les villes gardent leur propre page, /mes-dossiers, avec le style des volets. Tout le contenu
+       Les villes y ont leur section (#villes) depuis le 30 sept. 2026 ; avant, /mes-dossiers. Tout le contenu
        est rempli par commun/dq.js (renderMonDossier) : rien de personnel n'est dans le HTML. -->
   
 

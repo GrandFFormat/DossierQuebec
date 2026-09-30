@@ -1869,6 +1869,17 @@
   .md-case{display:flex; align-items:flex-start; gap:10px; font-size:15px; line-height:1.45;}
   .md-case input{width:18px; height:18px; margin-top:2px; accent-color:var(--gold);}
   @media (max-width:640px){ .md-carte{padding:16px 14px;} }
+  /* Vos projets de ville (ancienne page /mes-dossiers, fusionnée le 30 sept. 2026). La section porte
+     .ab-page pour les couleurs des villes (commun/abonnes.css) ; on lui retire le fond et la police
+     de page entière, et son titre prend le style des cartes de Mon dossier. */
+  .md-villes.ab-page{background:transparent; font-family:inherit; margin:34px 0 0; padding-top:24px; border-top:3px solid var(--ink);}
+  .md-villes-titre{font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; letter-spacing:-0.02em; font-size:clamp(22px,2.6vw,30px); margin:0 0 10px; color:var(--ink);}
+  #villes{scroll-margin-top:120px;}
+  /* Le thème de la section suit celui de DQ (html[data-theme=dark], jamais prefers-color-scheme), pas celui des villes (clair/sombre) :
+     sans ça, un ordinateur en mode sombre la mettait en sombre dans une page claire. L'id bat
+     « :root:not([data-theme=clair]) .ab-page » d'abonnes.css. */
+  #villes.ab-page{--fond:#F7F8FA; --carte:#FFFFFF; --encre:#16191D; --doux:#5B6570; --ligne:#DDE2E7; --ligne-forte:#C2CAD2; --accent:#0B8A4B; --accent-fond:#E6F6EC; --accent-encre:#076338; --fond-2:#EEF1F4;}
+  html[data-theme="dark"] #villes.ab-page{--fond:#0E1116; --carte:#161B22; --encre:#E6EAEE; --doux:#9AA5B1; --ligne:#262D36; --ligne-forte:#36404B; --accent:#3DD68C; --accent-fond:#0F2A1D; --accent-encre:#7BE7B2; --fond-2:#1C232C;}
 
   /* Légende de la présence aux votes (page Ministres, sous la composition). Neutre : ni rouge ni
      vert, le site ne juge pas ; la barre montre l'étendue réelle et la médiane. */
