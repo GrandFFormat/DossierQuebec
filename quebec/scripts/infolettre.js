@@ -7,6 +7,7 @@
 //   npm run infolettre -- --mois=2026-08 --publier   après relecture : publié, il part aux inscrits (api/_infolettre.js)
 //   npm run infolettre -- --seance=2026-08-25                        le courriel après une séance du conseil
 //   npm run infolettre -- --seance=2026-08-31 --instance=charlesbourg  après une séance d'arrondissement
+//   --si-nouveau : avec --publier, ne fait rien si ce numéro existe déjà (publication automatique)
 //
 // Tout vient des données déjà extraites : aucun appel à la Ville, aucun appel IA. Écrit
 // infolettres/AAAA-MM.html (le courriel, en couleur, styles en ligne) et AAAA-MM.md (la version
@@ -328,19 +329,19 @@ async function main() {
   const autresSub = subventions.filter((f) => !dejaVues.has(f.cle));
   titreMd(SECTIONS.subventions, subventions.length);
   autresSub.forEach(ligneMd);
-  if (!subventions.length) L.push('Aucune ce mois-ci.');
+  if (!subventions.length) L.push(seance ? 'Aucune à cette séance.' : 'Aucune ce mois-ci.');
   L.push('');
   const autresCon = contrats.filter((f) => !dejaVues.has(f.cle));
   titreMd(SECTIONS.contrats, contrats.length);
   autresCon.forEach(ligneMd);
-  if (!contrats.length) L.push('Aucun ce mois-ci.');
+  if (!contrats.length) L.push(seance ? 'Aucun à cette séance.' : 'Aucun ce mois-ci.');
   L.push('');
   titreMd(SECTIONS.votes, nbVotesDivises);
   for (const b of votesDivises) {
     L.push(`- **${b.instance}, ${jourMois(b.date)}** — ont voté ${b.cote} : ${b.noms.join(', ')}`);
     for (const r of b.resolutions) L.push(`  - ${r.phrase} *(${r.resultat ?? ''}, ${r.pour} pour, ${r.contre} contre)* [${r.numero}](${r.pdf})`);
   }
-  if (!votesDivises.length) L.push('Aucun vote divisé publié pour ce mois.');
+  if (!votesDivises.length) L.push(seance ? 'Aucun vote divisé à cette séance.' : 'Aucun vote divisé publié pour ce mois.');
   L.push('');
   titreMd(SECTIONS.sujets);
   L.push(sujets.map((s) => `${s.libelle} (${s.n})`).join(' · '), '');
@@ -561,9 +562,9 @@ async function main() {
       </tr>`).join('');
     H.push(`<tr><td style="padding:0 0 6px"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid ${teinte(s.couleur, 0.25)};border-top:4px solid ${s.couleur};border-radius:8px;border-collapse:separate;overflow:hidden">${lignes}</table></td></tr>`);
   };
-  liste2(SECTIONS.subventions, autresSub, subventions.length, 'Aucune ce mois-ci.');
+  liste2(SECTIONS.subventions, autresSub, subventions.length, seance ? 'Aucune à cette séance.' : 'Aucune ce mois-ci.');
   if (subventions.length !== autresSub.length) H.push(`<tr><td style="${POLICE};font-size:12px;color:${DOUX};padding:0 4px 4px">Plus ${subventions.length - autresSub.length} déjà dans les plus gros montants.</td></tr>`);
-  liste2(SECTIONS.contrats, autresCon, contrats.length, 'Aucun ce mois-ci.');
+  liste2(SECTIONS.contrats, autresCon, contrats.length, seance ? 'Aucun à cette séance.' : 'Aucun ce mois-ci.');
   if (contrats.length !== autresCon.length) H.push(`<tr><td style="${POLICE};font-size:12px;color:${DOUX};padding:0 4px 4px">Plus ${contrats.length - autresCon.length} déjà dans les plus gros montants.</td></tr>`);
 
   // Les votes divisés
@@ -574,7 +575,7 @@ async function main() {
       <div style="font-size:14px"><strong>Ont voté ${b.cote} :</strong> ${echapper(b.noms.join(', '))}</div>
       <ul style="margin:8px 0 0;padding-left:18px;font-size:14px;color:#374151">${b.resolutions.map((r) => `<li style="margin:0 0 6px">${echapper(r.phrase)} <span style="color:${DOUX};font-size:13px">— ${echapper(r.resultat ?? '')}, ${r.pour} pour, ${r.contre} contre</span> ${lien(r.numero, r.pdf, SECTIONS.votes.couleur)}</li>`).join('')}</ul>`));
   }
-  if (!votesDivises.length) H.push(`<tr><td style="${POLICE};color:${DOUX};padding:0 0 8px">Aucun vote divisé publié pour ce mois.</td></tr>`);
+  if (!votesDivises.length) H.push(`<tr><td style="${POLICE};color:${DOUX};padding:0 0 8px">${seance ? 'Aucun vote divisé à cette séance.' : 'Aucun vote divisé publié pour ce mois.'}</td></tr>`);
 
 
   // Les sujets, dans leurs couleurs du site
@@ -614,7 +615,7 @@ async function main() {
   // prochain passage du cron (11 h UTC), et il devient celui que reçoit chaque nouvel inscrit.
   if (args.publier) {
     if (!seance && !/^\d{4}-\d{2}$/.test(fichier)) throw new Error('--publier demande un mois complet (--mois=AAAA-MM) ou une séance (--seance=AAAA-MM-JJ).');
-    const cleNumero = { ville: VILLE, type: seance?.type ?? 'mensuel', arrondissement: seance?.arrondissement ?? '', mois: seance ? depuis : fichier };
+    const cleNumero = { ville: VILLE, type: seance?.type ?? 'mensuel', arrondissement: seance?.arrondissement ?? '', mois: seance ? depuis : fichier, langue: 'fr' }; // la clé de la table inclut la langue (supabase-schema-infolettre-langue.sql)
     if (!process.env.SUPABASE_URL) {
       const racine = fileURLToPath(new URL('../', import.meta.url));
       const cle = [racine + 'api.env', racine + '../api.env'].find((f) => existsSync(f));
@@ -623,9 +624,11 @@ async function main() {
     if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) throw new Error('--publier : SUPABASE_URL et SUPABASE_SERVICE_ROLE_KEY manquent (api.env).');
     const h = { apikey: process.env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`, 'Content-Type': 'application/json' };
     const url = `${process.env.SUPABASE_URL}/rest/v1/infolettre_numeros`;
-    const existant = await fetch(`${url}?ville=eq.${VILLE}&type=eq.${cleNumero.type}&arrondissement=eq.${cleNumero.arrondissement}&mois=eq.${cleNumero.mois}&select=envoye_le,envoyes`, { headers: h }).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`Supabase ${r.status} — scripts/supabase-schema-infolettre.sql a-t-il été exécuté ?`))));
+    const existant = await fetch(`${url}?ville=eq.${VILLE}&type=eq.${cleNumero.type}&arrondissement=eq.${cleNumero.arrondissement}&mois=eq.${cleNumero.mois}&langue=eq.${cleNumero.langue}&select=envoye_le,envoyes`, { headers: h }).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`Supabase ${r.status} — scripts/supabase-schema-infolettre.sql a-t-il été exécuté ?`))));
+    // --si-nouveau (publication automatique, scripts/infolettres-auto.js) : un numéro déjà publié n'est jamais remplacé.
+    if (args['si-nouveau'] && existant.length) { console.log(`Déjà publié : ${fichier}. Rien à faire.`); return; }
     if (existant[0]?.envoyes > 0) throw new Error(`Le compte rendu ${fichier} est déjà parti vers ${existant[0].envoyes} personne(s) : on ne le remplace pas.`);
-    const r = await fetch(`${url}?on_conflict=ville,type,arrondissement,mois`, {
+    const r = await fetch(`${url}?on_conflict=ville,type,arrondissement,mois,langue`, {
       method: 'POST',
       headers: { ...h, Prefer: 'resolution=merge-duplicates,return=minimal' },
       body: JSON.stringify([{ ...cleNumero, titre: titreCourriel, html: page, html_abonnes: page, publie_le: new Date().toISOString(), updated_at: new Date().toISOString() }]),
