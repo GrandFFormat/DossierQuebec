@@ -71,6 +71,52 @@ function messageSansDonnees() {
   );
 }
 
+// L'archive des années passées. La page ne charge que l'année en cours ; un lien reçu par courriel
+// il y a des mois peut viser un document plus vieux. Dans ce cas seulement, on va lire l'année
+// archivée : un fichier compressé, demandé une fois, et jamais pour une visite ordinaire.
+async function lireAnneeArchivee(fichier) {
+  try {
+    const res = await fetch(`data/${fichier}`, { cache: 'force-cache' });
+    if (!res.ok) return null;
+    if (!('DecompressionStream' in window) || !res.body) return await res.json();
+    const flux = res.body.pipeThrough(new DecompressionStream('gzip'));
+    return JSON.parse(await new Response(flux).text());
+  } catch {
+    // Si l'hébergeur a décompressé le fichier en route, c'est du JSON ordinaire.
+    try { return await (await fetch(`data/${fichier}`, { cache: 'force-cache' })).json(); } catch { return null; }
+  }
+}
+
+async function chercherDansArchive(q) {
+  const liste = $('#liste-decisions');
+  if (!liste) return;
+  const manifeste = await charger('archives/index');
+  const annees = [...(manifeste?.annees ?? [])].sort((a, b) => (a.annee < b.annee ? 1 : -1));
+  if (!annees.length) return;
+  const avis = document.createElement('p');
+  avis.className = 'compte';
+  avis.id = 'avis-archive';
+  avis.textContent = tr('Rien dans l\u2019année en cours. Lecture des années archivées…', 'Nothing in the current year. Reading the archived years…');
+  liste.before(avis);
+  const cherche = q.trim().toLowerCase();
+  for (const a of annees) {
+    const annee = await lireAnneeArchivee(a.fichier);
+    const trouvees = (annee?.decisions ?? []).filter((d) => ((d.objet ?? '') + ' ' + (d.numero ?? '') + ' ' + (d.id ?? '')).toLowerCase().includes(cherche));
+    if (!trouvees.length) continue;
+    avis.textContent = tr(
+      `Ce document n\u2019est pas de l\u2019année en cours : ${nombreFr(trouvees.length)} trouvé(s) dans l\u2019archive de ${a.annee}. Les résumés en langage clair ne couvrent pas les années archivées.`,
+      `This document is not from the current year: ${nombreFr(trouvees.length)} found in the ${a.annee} archive. Plain-language summaries do not cover archived years.`
+    );
+    liste.innerHTML = trouvees.slice(0, 50).map(carteDecision).join('');
+    // Le décompte et le bouton « afficher plus » parlent de l'année en cours : ils mentiraient
+    // au-dessus d'une fiche venue de l'archive. L'avis dit tout ce qu'il y a à dire.
+    if ($('#compte-decisions')) $('#compte-decisions').textContent = '';
+    if ($('#plus-decisions')) $('#plus-decisions').hidden = true;
+    return;
+  }
+  avis.textContent = tr('Ce document n\u2019est ni dans l\u2019année en cours, ni dans les années archivées.', 'This document is in neither the current year nor the archived years.');
+}
+
 // ---------- décisions ----------
 function remplirSelect(select, valeurs) {
   for (const { valeur, n, libelle } of valeurs) {
@@ -890,6 +936,9 @@ async function init() {
       $('#filtre-instance').value = instance;
       rendreDecisions();
     }
+    // Un lien de courriel peut viser un document d'une année passée : la recherche venue de
+    // l'adresse n'a rien trouvé, donc on va voir dans l'archive avant de dire qu'il n'y a rien.
+    if (recherche && !$('#liste-decisions').querySelector('.carte')) chercherDansArchive(recherche);
   }
   if (page === 'votes') rendreVotes();
   if (page === 'conseil') {
