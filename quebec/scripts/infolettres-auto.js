@@ -40,7 +40,7 @@ const jour = (decalage) => new Date(Date.now() - decalage * 864e5).toISOString()
 const { decisions } = JSON.parse(readFileSync('data/decisions.json', 'utf8'));
 const seances = new Map();
 for (const d of decisions) {
-  const cle = CLES[d.instance];
+  const cle = CLES[(d.instance ?? '').trim()];
   if (!cle || !d.date || d.date > jour(2) || d.date < jour(14)) continue;
   seances.set(`${cle}|${d.date}`, { cle, date: d.date });
 }
