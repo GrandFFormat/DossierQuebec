@@ -67,7 +67,9 @@ function normalise(row) {
     date: row.Date ?? null,
     annee: row.Annee ?? null,
     type: decode(row.Type),
-    instance: decode(row.Instance) === 'null' ? null : decode(row.Instance),
+    // trim : la Ville écrit « ␣Conseil de l'Arrondissement de La Haute-Saint-Charles », avec une espace
+    // devant ; sans elle, le nom ne correspondait à rien (courriels de l'arrondissement jamais publiés).
+    instance: decode(row.Instance) === 'null' ? null : decode(row.Instance).trim(),
     unite: decode(row.Uniteadministrative) === 'null' ? null : decode(row.Uniteadministrative),
     pdf: nom ? PDF_BASE + nom : null,
   };
