@@ -2975,7 +2975,8 @@ function shareBill(billId, platform, evt){
   const b = bills.find(x => x.id === Number(billId));
   if(!b) return;
   const title = isEn ? (b.titleEn || b.title) : b.title;
-  const url = `https://dossierquebec.ca/projets-de-loi?pl=${encodeURIComponent(b.num)}` + paramLangue(false);
+  // L'adresse de la page du projet (scripts/build-bill-pages.js) : c'est elle que Google indexe.
+  const url = (b.legislature && b.introSession ? `https://dossierquebec.ca/projets-de-loi/${b.num}-${b.legislature}-${b.introSession}` : `https://dossierquebec.ca/projets-de-loi?pl=${encodeURIComponent(b.num)}`) + paramLangue(false);
   const text = isEn
     ? `Bill no. ${b.num} — ${title}. Plain-language summary on DossierQuébec:`
     : `Projet de loi n° ${b.num} — ${title}. Résumé en clair sur DossierQuébec :`;
@@ -2991,12 +2992,15 @@ function shareBill(billId, platform, evt){
 // Lien profond : /projets-de-loi?pl=NUM → ouvre directement ce projet.
 function openBillFromQuery(){
   const params = new URLSearchParams(location.search);
-  const pl = params.get('pl');
+  // Page d'un projet : /projets-de-loi/NUM-LÉGISLATURE-SESSION (scripts/build-bill-pages.js).
+  const page = location.pathname.match(/^\/projets-de-loi\/(\d+)-(\d+)-(\d+)\/?(?:\.html)?$/);
+  const pl = page ? page[1] : params.get('pl');
   if(!pl) return;
   // Le numéro n'est pas unique (PL 1, PL 2… reviennent à chaque session) : quand le lien porte
   // aussi l'id (courriels d'alerte, Mes dossiers), c'est lui qui choisit.
   const id = params.get('id');
-  const b = (id && bills.find(x => String(x.id) === id)) || bills.find(x => String(x.num) === String(pl));
+  const b = (page && bills.find(x => String(x.num) === page[1] && String(x.legislature) === page[2] && String(x.introSession) === page[3]))
+    || (id && bills.find(x => String(x.id) === id)) || bills.find(x => String(x.num) === String(pl));
   if(!b) return;
   // S'assurer qu'on est bien sur l'onglet Projets (au cas où le lien arrive
   // ailleurs, ex. /?pl=NUM) — sans toucher à l'URL (fromHistory).
@@ -3506,6 +3510,8 @@ const PAGE_META = {
 };
 function viewFromPath(){
   const seg = location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '');
+  // Une page de projet de loi (/projets-de-loi/3-43-3, scripts/build-bill-pages.js) est la vue Projets.
+  if(seg.startsWith('projets-de-loi/')) return 'projets';
   return SLUG_VIEWS[seg] || 'apercu';
 }
 const _titreFr = document.title;

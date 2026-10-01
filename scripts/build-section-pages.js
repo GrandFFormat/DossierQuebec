@@ -720,3 +720,8 @@ for (const { page, html } of produites) {
 console.log(`✓ ${PAGES.length} pages fabriquées depuis ${SRC}.`);
 if (!existsSync('sitemap.xml') || readFileSync('sitemap.xml', 'utf8').replace(/\r\n/g, '\n') !== sitemap.xml) writeFileSync('sitemap.xml', sitemap.xml, 'utf8');
 console.log(`✓ sitemap.xml : ${sitemap.n} adresses (${sitemap.n - sitemap.villes} de l'Assemblée, ${sitemap.villes} des volets), aucune en noindex`);
+
+// Une page par projet de loi (/projets-de-loi/3-43-3), à partir de projets-de-loi.html qui vient
+// d'être écrit, et ajoutée au sitemap : scripts/build-bill-pages.js.
+const { construirePagesProjets } = await import('./build-bill-pages.js');
+construirePagesProjets();
