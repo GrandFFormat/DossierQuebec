@@ -362,6 +362,8 @@ async function main() {
   const DOUX = '#5B6470';
   const POLICE = "font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
   const lien = (texte, url, couleur) => `<a href="${echapper(url)}" style="color:${couleur};font-weight:600;text-decoration:none;white-space:nowrap">${echapper(texte)}&nbsp;↗</a>`;
+  // Un lien vers DossierQuébec, pas vers un site extérieur : la flèche est droite, pas oblique.
+  const lienSite = (texte, url, couleur) => `<a href="${echapper(url)}" style="color:${couleur};font-weight:600;text-decoration:none;white-space:nowrap">${echapper(texte)}&nbsp;→</a>`;
   const pastille = (texte, couleur) => `<span style="display:inline-block;padding:2px 8px;border-radius:999px;background:${teinte(couleur, 0.14)};color:${couleur};font-size:12px;font-weight:700;white-space:nowrap">${echapper(texte)}</span>`;
   const montant = (f, couleur) => `<span style="display:inline-block;padding:3px 10px;border-radius:6px;background:${couleur};color:#fff;font-weight:800;font-size:14px;white-space:nowrap">${f.montant != null ? echapper(argent(f.montant)) : 'Montant non précisé'}</span>`;
   const sujetDe = (f) => (THEMES[f.theme] ? pastille(THEMES[f.theme].libelle, THEMES[f.theme].couleur) : '');
@@ -536,7 +538,7 @@ async function main() {
       <tr>${seance ? `${tuile(nombreFr(nbResolutions), 'résolutions adoptées', '#0B8A4B')}${tuile(nombreFr(liste.length), 'dossiers', '#2563EB')}` : `${tuile(nombreFr(liste.length), 'dossiers devant les instances', '#0B8A4B')}${tuile(nombreFr(nbSeances), 'séances', '#2563EB')}`}</tr>
       <tr>${tuile(totalSubventions ? argent(totalSubventions) : nombreFr(accordees.length), `en ${pluriel(accordees.length, 'subvention accordée', 'subventions accordées')}`, '#EA580C')}${tuile(nombreFr(nbVotesDivises), nbVotesDivises > 1 ? 'votes divisés' : 'vote divisé', '#7C3AED')}</tr>
     </table>
-    <p style="${POLICE};margin:10px 6px 0;font-size:13px;line-height:1.5;color:${DOUX}">${seance ? (documentsSeance.length ? `<strong style="color:${ENCRE}">Les documents de la séance :</strong> ${documentsSeance.map((d) => lien(d.type === 'Procès-verbaux' ? 'procès-verbal' : 'tableau des décisions', d.pdf, '#0B8A4B')).join(' · ')}` : '') : `<strong style="color:${ENCRE}">Séances :</strong> ${echapper(seances.join(' · '))}.`}</p>
+    <p style="${POLICE};margin:10px 6px 0;font-size:13px;line-height:1.5;color:${DOUX}">${seance ? (documentsSeance.length ? `<strong style="color:${ENCRE}">Les documents de la séance :</strong> ${documentsSeance.map((d) => lienSite(d.type === 'Procès-verbaux' ? 'procès-verbal' : 'tableau des décisions', fiche(d.id), '#0B8A4B')).join(' · ')}` : '') : `<strong style="color:${ENCRE}">Séances :</strong> ${echapper(seances.join(' · '))}.`}</p>
   </td></tr>`);
 
   // Les plus gros montants, avec les puces du résumé
