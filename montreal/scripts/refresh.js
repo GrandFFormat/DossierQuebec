@@ -133,6 +133,9 @@ const ETAPES = [
   // Les décisions récentes écrites dans decisions-de-la-ville-de-montreal.html, pour Google (27 sept. 2026) : après les
   // résumés du jour, sinon la page porterait ceux de la veille.
   { nom: 'Décisions récentes dans la page (Google)', argv: ['../scripts/prerendu-villes.js', 'montreal'], secondaire: true },
+  // Les courriels de Montréal, publiés tout seuls quand un procès-verbal arrive (1er oct. 2026) :
+  // scripts/infolettres-auto.js. L'envoi aux inscrits suit, par le cron du site.
+  { nom: 'Courriels de Montréal publiés', argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scripts/infolettres-auto.js'], secondaire: true },
 ];
 
 // La version du code qui tourne, en tête du journal : la première question quand un
