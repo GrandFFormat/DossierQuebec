@@ -18,8 +18,8 @@ export const VILLES_INFOLETTRE = { quebec: 'Québec', montreal: 'Montréal' };
 // (Martin, 18 septembre 2026 : « cette légende tu l'enlèveras quand la newsletter sera créée »).
 export const NOTES_INFOLETTRE = {
   montreal: {
-    fr: "<strong>Montréal commence :</strong> le premier compte rendu du mois arrive à la fin de septembre 2026. Il n'y en a pas encore pour août. Les courriels après chaque séance partent à compter des prochaines séances.",
-    en: "<strong>Montréal is starting:</strong> the first monthly roundup arrives at the end of September 2026. There isn't one for August yet. After-meeting emails start with the upcoming meetings.",
+    fr: "<strong>Montréal commence :</strong> la Ville publie ses procès-verbaux environ deux mois après la séance — le plus récent en ligne est celui du 4 août 2026. Le premier compte rendu du mois partira dès que les séances de septembre seront publiées. Les courriels après chaque séance partent à compter des prochaines séances.",
+    en: "<strong>Montréal is starting:</strong> the City publishes its minutes about two months after the meeting — the most recent one online is from August 4, 2026. The first monthly roundup goes out as soon as the September meetings are published. After-meeting emails start with the upcoming meetings.",
   },
 };
 
