@@ -29,6 +29,7 @@
 
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import { fileURLToPath } from 'node:url';
 // Montréal n'a pas encore de lecture du détail de l'argent (soumissions, estimation) : les
 // crochets restent, vides, pour que le gabarit soit le même que celui de Québec.
@@ -75,7 +76,8 @@ const ARRONDISSEMENTS_MTL = [
 // L'instance telle que decisions.json l'écrit : « Conseil d'arrondissement de Verdun »,
 // « du Plateau-Mont-Royal », « du Sud-Ouest » (lib/mtl.js, nomConseil).
 const instanceDe = (nom) => `Conseil d'arrondissement ${/^du /.test(nom) ? nom : `de ${nom}`}`;
-const INSTANCES = {
+// Exporté pour scripts/infolettres-auto.js (qui retrouve la clé d'une instance par son nom).
+export const INSTANCES = {
   conseil: { type: 'conseil', arrondissement: '', instance: 'Conseil municipal', sujet: 'le conseil municipal', groupe: 'Conseil municipal' },
   ...Object.fromEntries(ARRONDISSEMENTS_MTL.map(([cle, de, nom]) => [cle, ARR(cle, de, instanceDe(nom))])),
 };
@@ -652,6 +654,8 @@ async function main() {
     const h = { apikey: process.env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`, 'Content-Type': 'application/json' };
     const url = `${process.env.SUPABASE_URL}/rest/v1/infolettre_numeros`;
     const existant = await fetch(`${url}?ville=eq.${VILLE}&type=eq.${cleNumero.type}&arrondissement=eq.${cleNumero.arrondissement}&mois=eq.${cleNumero.mois}&langue=eq.${cleNumero.langue}&select=envoye_le,envoyes`, { headers: h }).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`Supabase ${r.status} — scripts/supabase-schema-infolettre.sql a-t-il été exécuté ?`))));
+    // --si-nouveau (publication automatique, scripts/infolettres-auto.js) : un numéro déjà publié n'est jamais remplacé.
+    if (args['si-nouveau'] && existant.length) { console.log(`Déjà publié : ${fichier}. Rien à faire.`); return; }
     if (existant[0]?.envoyes > 0) throw new Error(`Le compte rendu ${fichier} est déjà parti vers ${existant[0].envoyes} personne(s) : on ne le remplace pas.`);
     const r = await fetch(`${url}?on_conflict=ville,type,arrondissement,mois,langue`, {
       method: 'POST',
@@ -663,7 +667,10 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+// Lancé directement (pas importé par infolettres-auto.js) : on fabrique le courriel.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
