@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-30T15:03:18.625Z",
+ "generatedAt": "2026-10-01T15:34:32.272Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,24 +7,926 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-08-01",
+  "depuis": "2026-08-02",
   "plafond": 120
  },
- "nombre": 1581,
- "genereCetteFois": 22,
+ "nombre": 1617,
+ "genereCetteFois": 36,
  "echecs": [
   {
-   "id": "GT2026-309.pdf",
-   "raison": "caractères de contrôle dans le résumé (lettres perdues) — refusé, sera redemandé. Brut : \"La Ville approuve les plans pour construire un b\\tatiment isol\\ted de deux logements au 3190, avenue Duval, dans le quartier de Lairet (arrondissement de La Cit\\te\""
+   "id": "CS2026-014.pdf",
+   "raison": "caractères de contrôle dans le résumé (lettres perdues) — refusé, sera redemandé. Brut : \"La Ville autorise deux représentants \\ber à se rendre \\ber Ottawa le 15 octobre 2026 pour l'allumage de la flamme des Jeux du Canada.\""
+  },
+  {
+   "id": "DE2026-365.pdf",
+   "raison": "caractères de contrôle dans le résumé (lettres perdues) — refusé, sera redemandé. Brut : \"La Ville de Qu\\bébec ach\\bète un terrain de 127 m\\ba\\brr\\be en bordure du chemin Sainte-Foy, dans l'arrondissement de Sainte-Foy\\bSillery\\bCap-Rouge.\""
   }
  ],
  "cout": {
   "devise": "USD",
-  "montant": 0.8301,
-  "jetonsEntree": 118919,
-  "jetonsSortie": 9422
+  "montant": 1.4199,
+  "jetonsEntree": 194225,
+  "jetonsSortie": 17951
  },
  "resumes": [
+  {
+   "id": "PA2026-129.pdf",
+   "numero": "PA2026-129",
+   "date": "2026-09-30",
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "objet": "Conclusion d'une entente à intervenir entre la Ville de Québec et Socialim, relative au versement d'une subvention de 7 512 782 $ dans le cadre du Programme d'habitation abordable Québec afin de permettre la construction d'un bâtiment de 222 unités de logements sociaux situé au 1075, chemin Sainte-F",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-129.pdf",
+   "puces": [
+    "La Ville de Québec versera 7 512 782 $ à l'organisme sans but lucratif Socialim pour un projet de logements sociaux.",
+    "Le projet prévoit la reconversion d'un bâtiment de 15 étages et son agrandissement sur 12 étages, au 1075, chemin Sainte-Foy, dans La Cité-Limoilou.",
+    "Il comptera 222 logements : 104 abordables et 118 abordables intermédiaires, pour des familles, des personnes seules et des personnes âgées autonomes.",
+    "L'argent vient du Programme d'habitation abordable Québec : la Ville doit payer au moins 40 % de la subvention de la Société d'habitation du Québec et 20 % du prêt à capital patient.",
+    "Socialim devra respecter les conditions de location (loyers abordables) pendant 35 ans après la fin des travaux.",
+    "Les fonds proviennent d'un règlement d'emprunt de l'agglomération (R.A.V.Q. 1866).",
+    "La décision doit être prise par le conseil d'agglomération le 7 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "7 512 782 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:32:59.355Z",
+   "jetons": {
+    "entree": 7803,
+    "sortie": 610
+   }
+  },
+  {
+   "id": "AP2026-326.pdf",
+   "numero": "AP2026-326",
+   "date": "2026-09-30",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat pour l'acquisition de fourgons légers tronqués avec caisses et monte-charges (Appel d'offres public 96121)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-326.pdf",
+   "puces": [
+    "La Ville achète deux fourgons légers tronqués avec caisses et monte-charges pour 245 740 $ (avant TPS et TVQ); la dépense nette est de 257 996,28 $.",
+    "Le contrat va à 9081-0060 Québec inc. (Fourgons Élite), de Québec, seule des deux soumissions jugée conforme.",
+    "Les camions remplacent des véhicules en fin de vie utile et serviront au Service des loisirs, des sports et de la vie communautaire, notamment pour transporter des équipements dans les parcs et lors d'événements.",
+    "Le contrat prévoit une option d'achat d'un véhicule supplémentaire à prix ferme, portant le total possible à 368 691 $, si le budget le permet.",
+    "Après négociation, le fournisseur a révisé son prix à la baisse (de 253 072 $ à 245 740 $ pour le contrat initial).",
+    "Le prix conforme dépasse de 36,6 % l'estimation du service demandeur, qui était de 270 000 $ avec l'option.",
+    "Les fonds proviennent d'un règlement d'emprunt de l'agglomération pour l'acquisition de véhicules et d'équipements motorisés."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "245 740 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:32:58.150Z",
+   "jetons": {
+    "entree": 3617,
+    "sortie": 505
+   }
+  },
+  {
+   "id": "AP2026-343.pdf",
+   "numero": "AP2026-343",
+   "date": "2026-09-30",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication de contrats pour l'entretien hivernal hors rue - Lots 5, 6, 7, 12 et 15 (Appel d'offres public 95823)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-343.pdf",
+   "puces": [
+    "La Ville confie à quatre entreprises le déneigement hors rue de cinq secteurs, pour trois hivers, du 1er novembre 2026 au 30 avril 2029.",
+    "Secteurs touchés : Val-Bélair (lot 5), des Rivières Nord-Est (lot 6), Caserne Sainte-Foy (lot 7), Haute-Ville (lot 12) et Roland-Beaudin (lot 15).",
+    "Montants des contrats avant taxes : 9064-3818 Québec inc. 388 500 $ (lot 5); 9249-5266 Québec inc. 306 906,75 $ (lot 6); Entreprises Zachary Lavigueur inc. 290 721 $ (lot 7) et 535 545 $ (lot 15); Groupe GCH inc. 1 036 170 $ (lot 12).",
+    "Les travaux comprennent le déneigement, le déglaçage, l'épandage de fondants, l'enlèvement de la neige, la protection des équipements et l'entretien des surfaces et du drainage.",
+    "La dépense nette totale est de 2 685 415,17 $, répartie de 2026 à 2029, sous réserve de l'adoption des budgets 2027 à 2029.",
+    "Les contrats prévoient des ajustements de prix selon le carburant et les précipitations de neige.",
+    "Un seul soumissionnaire s'est présenté pour le lot 12 (Haute-Ville); le lot 10 (Chapdelaine) a été annulé."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 685 415,17 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:32:57.535Z",
+   "jetons": {
+    "entree": 7042,
+    "sortie": 610
+   }
+  },
+  {
+   "id": "DE2026-381.pdf",
+   "numero": "DE2026-381",
+   "date": "2026-09-30",
+   "unite": "Développement économique et grands projets",
+   "objet": "Bail entre la Ville de Québec (locataire) et la Fabrique de la paroisse de Saint-Pierre-Julien-Eymard (locateur) relativement à la location d'espaces au 1330, chemin Sainte-Foy à Québec Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-381.pdf",
+   "puces": [
+    "La Ville loue des espaces au 1330, chemin Sainte-Foy, dans La Cité-Limoilou, auprès de la Fabrique de la paroisse de Saint-Pierre-Julien-Eymard.",
+    "Le bail dure deux ans, du 15 octobre 2026 au 14 octobre 2028, au coût de 59 600 $ par année (sans TPS ni TVQ), soit 119 200 $ au total.",
+    "Ces locaux serviront à relocaliser temporairement le club de croquet, qui occupait le centre communautaire Ferland.",
+    "Le centre Ferland fait l'objet depuis juin 2026 de travaux de réfection et de réaménagement.",
+    "Le local retenu coûte 4 $ le pied carré, contre un loyer médian de 23 $ le pied carré pour les trois autres locaux analysés.",
+    "Les critères recherchés incluaient environ 4 000 pieds carrés au rez-de-chaussée ou au sous-sol, une position centrale, du stationnement à proximité, une cuisinette et des toilettes."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "59 600 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:32:55.306Z",
+   "jetons": {
+    "entree": 4847,
+    "sortie": 460
+   }
+  },
+  {
+   "id": "LS2026-168.pdf",
+   "numero": "LS2026-168",
+   "date": "2026-09-30",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement d'une subvention d'une somme maximale de 57 878 $ à Initiative 1-2-3- GO! Limoilou, pour l'année 2026-2027, afin de réaliser le projet d'agent du vivre-ensemble interculturel dans le secteur de Lairet",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-168.pdf",
+   "puces": [
+    "La Ville verse jusqu'à 57 878 $ à l'organisme Initiative 1-2-3 GO! Limoilou pour 2026-2027.",
+    "L'argent sert à embaucher un agent du vivre-ensemble interculturel dans le secteur Lairet, à Limoilou.",
+    "L'agent doit organiser et animer des activités favorisant la cohésion sociale et les relations interculturelles, d'octobre 2026 à mars 2027.",
+    "Le secteur visé est celui des rues autour de l'école primaire Sainte-Odile, où la population immigrante est passée de 2,8 % en 2001 à 14,4 % en 2021.",
+    "Des agents semblables existent déjà à Limoilou, Saint-Roch, Sainte-Foy, Vanier et dans La Haute-Saint-Charles.",
+    "Le projet est un pilote; une entente de trois ans pourrait suivre.",
+    "Les fonds viennent d'une entente entre la Ville et le ministère de l'Immigration, de la Francisation et de l'Intégration; l'organisme devra rendre des comptes chaque année."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "57 878 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:07.019Z",
+   "jetons": {
+    "entree": 5631,
+    "sortie": 472
+   }
+  },
+  {
+   "id": "PA2026-134.pdf",
+   "numero": "PA2026-134",
+   "date": "2026-09-30",
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "objet": "Prise d'acte de la modification à l'entente de contribution entre la Ville de Québec et Sentier Transcanadien relativement au versement d'une aide financière supplémentaire de 30 000 $ à la Ville pour le projet Piste cyclopiétonne - Rue Abraham-Martin, dans le cadre du Programme de financement des s",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-134.pdf",
+   "puces": [
+    "Sentier Transcanadien verse 30 000 $ de plus à la Ville de Québec pour la piste cyclopiétonne de la rue Abraham-Martin.",
+    "L'aide financière totale passe de 60 000 $ à 90 000 $ pour ce projet.",
+    "L'argent provient du Programme de financement des sentiers, volet infrastructures de sentier et travaux de réparation majeurs.",
+    "Le comité exécutif prend acte de la modification à l'entente signée le 17 juillet 2026; les autres conditions restent les mêmes.",
+    "La somme sera inscrite en revenus aux financements de la fiche 38003."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "30 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:04.888Z",
+   "jetons": {
+    "entree": 4015,
+    "sortie": 311
+   }
+  },
+  {
+   "id": "TM2026-214.pdf",
+   "numero": "TM2026-214",
+   "date": "2026-09-30",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Règlement modifiant le Règlement sur le stationnement sur le campus de l'Université Laval relativement au règlement interne de l'université, R.V.Q. 3574",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-214.pdf",
+   "puces": [
+    "La Ville intègre à sa réglementation la nouvelle version du règlement de stationnement de l'Université Laval, ce qui permet à ses agents de le faire appliquer sur le campus.",
+    "Les 30 premières minutes deviennent gratuites dans les espaces réservés aux personnes handicapées, à condition de détenir et d'afficher une vignette de la SAAQ.",
+    "Un permis de stationnement valide devient obligatoire pour les motos, partout sur le campus.",
+    "Les permis quotidiens ne pourront servir que dans les aires de type Régulière ou Économique.",
+    "Il devient interdit de passer la nuit dans un véhicule récréatif, une voiture, une tente ou une tente-roulotte sur le campus.",
+    "L'Université peut interdire le stationnement entre le 1er décembre et le 1er avril pour l'entretien et le déneigement; le stationnement est alors permis dans les aires S et les stationnements intérieurs.",
+    "Les agents utiliseront sur le campus le système automatisé de lecture des plaques installé sur leurs véhicules."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:08.987Z",
+   "jetons": {
+    "entree": 7035,
+    "sortie": 458
+   }
+  },
+  {
+   "id": "PA2026-138.pdf",
+   "numero": "PA2026-138",
+   "date": "2026-09-30",
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "objet": "Autorisation de déposer une programmation de projets au ministère des Affaires municipales et de l'Habitation dans le cadre du volet 2 du programme Accélérer la transition climatique locale",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-138.pdf",
+   "puces": [
+    "La Ville de Québec dépose 16 projets climatiques au ministère des Affaires municipales et de l'Habitation pour obtenir une aide financière du programme Accélérer la transition climatique locale.",
+    "Les projets représentent 11,7 M$ de coûts admissibles et la Ville attend une subvention de 9,3 M$ (80 % des coûts).",
+    "Des rues seront déminéralisées et verdies : Saint-Luc, Kirouac, Christophe-Colomb, Saint-François-Ouest, Laviolette et Lafayette.",
+    "Un projet de 2 647 048 $ prévoit planter plus d'arbres d'alignement dans les secteurs prioritaires touchés par les îlots de chaleur.",
+    "D'autres projets visent les ateliers climat dans les écoles primaires, la mobilisation des gens d'affaires, la transition énergétique des bâtiments et le suivi de la qualité de l'eau en temps réel.",
+    "L'appel de projets se déroule du 17 août au 2 octobre 2026; la Ville n'indique aucun impact financier pour elle à cette étape.",
+    "Si la subvention est confirmée, la Ville devra signer une convention avec le ministère."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "9,3 M$",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:08.567Z",
+   "jetons": {
+    "entree": 4588,
+    "sortie": 507
+   }
+  },
+  {
+   "id": "GT2026-312.pdf",
+   "numero": "GT2026-312",
+   "date": "2026-09-30",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption d'une résolution autorisant un projet immobilier dérogatoire sur le lot 4 991 540 du cadastre du Québec (La Cité Verte îlot FGH, quartier de Saint-Sacrement, district électoral Montcalm-Saint-Sacrement) en vertu de l'article 145.45 de la Loi sur l'aménagement et l'urbanisme et approbation d",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-312.pdf",
+   "puces": [
+    "La Ville veut autoriser la construction d'un immeuble résidentiel de 457 logements sur l'avenue des Jésuites, dans le secteur La Cité Verte (quartier Saint-Sacrement).",
+    "Le bâtiment aurait 15 étages et jusqu'à 49 mètres de haut, alors que la réglementation du secteur limite la hauteur à 30 mètres et le nombre de logements à 75 par bâtiment.",
+    "La proportion de grands logements exigée est abaissée : au moins 40 % de logements de deux chambres et plus (au lieu de 75 %) et 15 % de trois chambres et plus (au lieu de 20 %).",
+    "Le promoteur devrait respecter des conditions : au moins 450 logements, 35 % d'aire verte, 200 mètres carrés de toit végétalisé, 200 places de vélo intérieures, 17 bornes de recharge et deux liens piétonniers publics traversant le site.",
+    "Des espaces communs de 500 à 1 500 mètres carrés seraient aménagés pour les résidents, et pourraient être ouverts aux autres résidents de La Cité Verte.",
+    "Une assemblée publique de consultation est prévue, avec trois jours après pour envoyer des commentaires par écrit; le projet n'est pas soumis à l'approbation référendaire.",
+    "Qui ne respecte pas les conditions s'expose à une amende de 1 000 $ (personne physique) ou 2 000 $ (autres cas), doublée en cas de récidive."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:18.883Z",
+   "jetons": {
+    "entree": 7793,
+    "sortie": 850
+   }
+  },
+  {
+   "id": "AP2026-304.pdf",
+   "numero": "AP2026-304",
+   "date": "2026-09-30",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat pour la location de camions écureurs d'égout combinés et de camions d'hydro-excavation - Lot 2 (Appel d'offres public 95959)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-304.pdf",
+   "puces": [
+    "La Ville loue deux camions d'hydro-excavation de l'entreprise FST Canada inc. (Équipement Joe Johnson), d'Anjou, pour 1 296 000 $ avant taxes.",
+    "La location couvre 36 mois, du 1er mai 2027 au 30 avril 2030, avec possibilité de deux renouvellements de 12 mois (jusqu'à 2 172 000 $ au total avant taxes).",
+    "Ces camions remplacent des véhicules en fin de vie utile et serviront au Service des travaux publics pour l'entretien des réseaux d'égouts.",
+    "La dépense nette pour la Ville est de 1 360 638 $, répartie de 2027 à 2030 (302 364 $, 453 546 $, 453 546 $ et 151 182 $).",
+    "Les sommes doivent encore être approuvées lors de l'adoption des budgets 2027 à 2030.",
+    "Une seule soumission a été reçue; après négociation, le fournisseur a réduit son prix de 1 314 000 $ à 1 296 000 $, soit le montant estimé par la Ville.",
+    "Le lot 1, portant sur des camions écureurs d'égout combinés, a été annulé."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 296 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:19.567Z",
+   "jetons": {
+    "entree": 4118,
+    "sortie": 663
+   }
+  },
+  {
+   "id": "AP2026-337.pdf",
+   "numero": "AP2026-337",
+   "date": "2026-09-30",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat à commande pour la réalisation de sondages et de groupes de discussion auprès de la population (Appel d'offres public 96051)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-337.pdf",
+   "puces": [
+    "La Ville confie à Marketing Léger inc. (Québec) le mandat de réaliser des sondages et des groupes de discussion auprès de la population, du 1er janvier 2027 au 31 décembre 2028.",
+    "Le contrat prévoit un paiement pouvant atteindre 434 955 $ (avant taxes) pour la période initiale de deux ans.",
+    "Avec trois renouvellements possibles d'un an chacun (jusqu'en 2031), le total pourrait atteindre 1 058 550 $ avant taxes, avec indexation annuelle selon l'indice des prix à la consommation.",
+    "Les sondages mesureront la satisfaction des gens envers les services municipaux : questionnaires de 25 ou 40 questions auprès de 500 ou 1 000 répondants, par panel Web ou par téléphone, plus des groupes de discussion de 6 à 8 personnes.",
+    "Deux entreprises ont soumissionné; Marketing Léger a déposé le prix le plus bas, devant SOM inc. (559 375 $ pour la période initiale).",
+    "La dépense nette pour la période initiale est estimée à 456 648,38 $, sous réserve de l'approbation des budgets de 2027 à 2031."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "434 955 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:14.923Z",
+   "jetons": {
+    "entree": 4078,
+    "sortie": 513
+   }
+  },
+  {
+   "id": "DE2026-335.pdf",
+   "numero": "DE2026-335",
+   "date": "2026-09-30",
+   "unite": "Développement économique et grands projets",
+   "objet": "Règlement modifiant le Règlement intérieur du comité exécutif sur la délégation de pouvoirs relativement à certains pouvoirs délégués au Service du développement économique et des grands projets, R.C.E.V.Q. 227",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-335.pdf",
+   "puces": [
+    "La Ville modifie son règlement de délégation de pouvoirs pour permettre à des gestionnaires du Service du développement économique et des grands projets d'approuver eux-mêmes plus de transactions immobilières, sans passer par le comité exécutif.",
+    "Le directeur de la Division des activités et de l'expertise immobilières obtient toutes les délégations déjà accordées au directeur du Service; un directeur de section en obtient aussi, pour des montants plus bas.",
+    "Plusieurs seuils financiers augmentent, dont un qui passe de 50 000 $ à 100 000 $; les directeurs de section peuvent agir jusqu'à 25 000 $ ou 50 000 $ selon le type de dossier.",
+    "Nouveaux pouvoirs délégués : louer ou autoriser l'occupation du domaine public au prix du marché, autoriser des travaux sur un immeuble appartenant à un tiers, accorder des permissions et signer des ententes de confidentialité pendant des négociations.",
+    "Les directeurs pourront conclure des ententes avec des propriétaires pour que la Ville réalise des travaux sur leur terrain, avec indemnisation possible jusqu'à 100 000 $ (directeur de service ou de division) ou 50 000 $ (directeur de section).",
+    "La Ville pourra louer un immeuble gratuitement ou à coût réduit à une personne, un organisme ou une fondation poursuivant des fins d'intérêt public.",
+    "La Ville justifie le changement par la hausse du nombre et de la valeur des transactions immobilières et par l'ajout de postes de gestion."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:17.698Z",
+   "jetons": {
+    "entree": 7357,
+    "sortie": 639
+   }
+  },
+  {
+   "id": "LS2026-253.pdf",
+   "numero": "LS2026-253",
+   "date": "2026-09-30",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement d'une subvention à l'organisme « Jeunes musiciens du monde » pour une demande déposée dans le cadre du Programme de soutien aux organismes propriétaires pour des travaux d'entretien et d'accessibilité",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-253.pdf",
+   "puces": [
+    "La Ville verse 19 548 $ à l'organisme « Jeunes musiciens du monde » pour des travaux à sa propriété.",
+    "Les travaux prévus : imperméabiliser les fondations, réparer la toiture, réaménager les sorties de secours et les espaces sanitaires.",
+    "L'argent vient du Programme de soutien aux organismes propriétaires pour des travaux d'entretien et d'accessibilité, qui couvre jusqu'à 80 000 $ et 80 % des coûts admissibles.",
+    "Le versement se fait en deux temps : 90 % après l'adoption de la résolution, 10 % à la fin des travaux sur présentation des preuves justificatives.",
+    "Les fonds proviennent du règlement d'emprunt R.V.Q. 3261 (travaux sur bâtiments, parcs et équipements récréatifs).",
+    "Le comité exécutif devait trancher le 7 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "19 548 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:26.461Z",
+   "jetons": {
+    "entree": 3494,
+    "sortie": 413
+   }
+  },
+  {
+   "id": "PA2026-128.pdf",
+   "numero": "PA2026-128",
+   "date": "2026-09-30",
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "objet": "Conclusion d'une entente à intervenir entre la Ville de Québec et Les Résidences Populaires de Québec inc., relative au versement d'une subvention de 1 879 449 $ dans le cadre du Programme d'habitation abordable Québec afin de permettre la construction d'un bâtiment 62 unités de logements sociaux si",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-128.pdf",
+   "puces": [
+    "La Ville de Québec versera 1 879 449 $ à l'organisme à but non lucratif Les Résidences Populaires de Québec inc.",
+    "L'argent sert à construire un immeuble de cinq étages avec 62 logements sociaux au 2150, boulevard Père-Lelièvre, dans l'arrondissement des Rivières.",
+    "Les logements s'adressent à des familles, des personnes seules et des personnes âgées autonomes : 31 logements abordables et 31 logements abordables intermédiaires.",
+    "Le projet a été retenu le 11 novembre 2025 dans le Programme d'habitation abordable Québec et a reçu son acceptation finale le 27 août 2026.",
+    "La contribution de la Ville correspond à 40 % de la subvention de la Société d'habitation du Québec pour les logements abordables, plus 20 % du prêt à capital patient pour les logements abordables intermédiaires.",
+    "L'organisme devra respecter la vocation de logement abordable pendant 35 ans après la fin des travaux.",
+    "Les fonds proviennent d'un règlement d'emprunt de l'agglomération (R.A.V.Q. 1866)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 879 449 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:26.955Z",
+   "jetons": {
+    "entree": 7746,
+    "sortie": 493
+   }
+  },
+  {
+   "id": "AP2026-335.pdf",
+   "numero": "AP2026-335",
+   "date": "2026-09-30",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication de contrats pour la location de pelles hydrauliques sur chenilles (Appel d'offres public 95974)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-335.pdf",
+   "puces": [
+    "La Ville loue quatre pelles hydrauliques sur chenilles auprès de Cimi inc., de Lévis, jusqu'au 30 mars 2029.",
+    "Deux contrats : 350 254,72 $ pour le lot 1 (pelles 3 godets) et 300 343,28 $ pour le lot 2 (pelles 1 godet), avant taxes.",
+    "La dépense nette totale est de 683 046,58 $, répartie sur 2027 (290 426,64 $), 2028 (341 523,29 $) et 2029 (51 096,65 $).",
+    "Les pelles remplacent des équipements en fin de vie utile du Service des travaux publics.",
+    "Chaque lot comprend deux pelles : une louée 16 mois (avril à novembre 2027 et 2028) et une autre 24 mois (avril 2027 à mars 2029).",
+    "Le contrat prévoit une option de renouvellement de 12 mois supplémentaires.",
+    "Les sommes restent conditionnelles à l'adoption des budgets 2027 à 2029."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "683 046,58 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:29.504Z",
+   "jetons": {
+    "entree": 5059,
+    "sortie": 526
+   }
+  },
+  {
+   "id": "AP2026-336.pdf",
+   "numero": "AP2026-336",
+   "date": "2026-09-30",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication de contrats pour la location de camions-bennes 12 roues (Appel d'offres public 95978)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-336.pdf",
+   "puces": [
+    "La Ville loue huit camions-bennes 12 roues pour remplacer des véhicules en fin de vie utile au Service des travaux publics.",
+    "Le contrat va de la date d'adjudication jusqu'au 30 novembre 2028, avec une option de renouvellement de 12 mois.",
+    "Les camions seront utilisés durant deux saisons : du 1er avril au 30 novembre 2027, puis du 1er avril au 30 novembre 2028.",
+    "Les quatre lots de deux camions vont tous à Location de camions Eureka inc. (Boucherville), à 236 640 $ chacun avant taxes.",
+    "La dépense nette totale est de 993 769,68 $, soit 496 884,84 $ en 2027 et autant en 2028.",
+    "Deux entreprises ont soumissionné; Eureka a offert le prix le plus bas, 2,7 % sous l'estimation de la Ville.",
+    "Les sommes restent conditionnelles à l'adoption des budgets 2027 et 2028."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "993 769,68 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:25.995Z",
+   "jetons": {
+    "entree": 5057,
+    "sortie": 438
+   }
+  },
+  {
+   "id": "CU2026-079.pdf",
+   "numero": "CU2026-079",
+   "date": "2026-09-30",
+   "unite": "Culture et patrimoine",
+   "objet": "Approbation de l'état des résultats de la première année - période du 1er avril 2025 au 31 mars 2026 - de la convention d'aide financière intervenue entre la Ville de Québec et le ministre responsable de la région de la Capitale-Nationale, relative à la réception d'une aide en soutien au dossier cin",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-079.pdf",
+   "puces": [
+    "Le conseil municipal approuve l'état des résultats de la première année (1er avril 2025 au 31 mars 2026) de l'entente de trois ans entre la Ville et le ministre responsable de la Capitale-Nationale pour le cinéma et la télévision.",
+    "L'entente, qui se termine le 31 mars 2028, prévoit une aide de 930 000 $ du Secrétariat à la Capitale-Nationale pour le Bureau du cinéma et de la télévision de la Ville.",
+    "Pour 2025-2026, le Bureau a encaissé 1 402 554,44 $ de revenus et dépensé 1 395 531,24 $, soit des revenus nets de 7 023,20 $.",
+    "L'argent sert au guichet d'accueil, à la Mesure d'aide au démarrage, au soutien aux longs métrages et séries télé ainsi qu'aux courts métrages et webséries.",
+    "En 2025, 875 000 $ ont été répartis entre 10 projets : 5 projets en démarrage (200 000 $), 3 longs métrages ou séries (575 000 $) et 2 courts métrages ou webséries (100 000 $).",
+    "L'état des résultats a été préparé par un comptable professionnel agréé, comme l'exige la convention."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "930 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:35.403Z",
+   "jetons": {
+    "entree": 5839,
+    "sortie": 526
+   }
+  },
+  {
+   "id": "DE2026-271.pdf",
+   "numero": "DE2026-271",
+   "date": "2026-09-30",
+   "unite": "Développement économique et grands projets",
+   "objet": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur une partie d'une ruelle, connue et désignée comme étant une partie du lot 6 666 052 du cadastre du Québec, circonscription foncière de Québec, relativement au projet de Réseau structurant de transport en comm",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-271.pdf",
+   "puces": [
+    "La Ville veut obtenir une servitude permanente sur une partie d'une ruelle (lot 6 666 052), dans le secteur de la rue des Chênes Est et de la 1re Avenue, dans La Cité-Limoilou.",
+    "La superficie visée est d'environ 217,40 mètres carrés.",
+    "Cette servitude servira à déplacer des conduits et des réseaux d'utilités publiques pour le projet de tramway TramCité.",
+    "L'acquisition se fera à l'amiable ou par expropriation; le Service des affaires juridiques est autorisé à lancer les procédures.",
+    "Si le projet n'a plus besoin de la servitude, la Ville pourra se retirer des procédures d'expropriation, en tout ou en partie.",
+    "Le terrain complet est inscrit au rôle d'évaluation 2025-2026-2027 à 16 000 $, soit 16,17 $ le mètre carré.",
+    "Les fonds proviennent du règlement d'emprunt d'agglomération R.A.V.Q. 1342 lié au réseau structurant de transport en commun."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "16 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:36.875Z",
+   "jetons": {
+    "entree": 5795,
+    "sortie": 464
+   }
+  },
+  {
+   "id": "GT2026-311.pdf",
+   "numero": "GT2026-311",
+   "date": "2026-09-30",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption d'une résolution autorisant un projet immobilier dérogatoire sur les lots 3 467 593 et 4 243 232 du cadastre du Québec (2140, chemin Saint-Louis, quartier de Sillery, district électoral de Saint-Louis-Sillery) en vertu de l'article 145.45 de la Loi sur l'aménagement et l'urbanisme et approb",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-311.pdf",
+   "puces": [
+    "La Ville veut autoriser l'agrandissement de l'immeuble du 2140, chemin Saint-Louis, dans Sillery, pour y ajouter environ 312 logements.",
+    "Le bâtiment compterait alors environ 400 logements, alors que la réglementation en permet un maximum de 160 par bâtiment isolé : la Ville lève cette limite pour ce projet.",
+    "Le projet ajoute environ 233 logements de plus que les 160 permis actuellement; la Ville le relie au contexte de crise du logement et à son plan en habitation.",
+    "Conditions imposées : recul minimal de 10 mètres côté rue De Lino et avenue Belcourt, hauteurs limitées à trois ou cinq étages selon les ailes, et toiture végétalisée d'au moins 2 800 m².",
+    "Autres conditions : sentiers piétonniers accessibles au public autour du site et vers le domaine Cataraqui, espace végétalisé et arbres conservés au nord, aucun accès pour autos vers la rue De Lino ou l'avenue Belcourt (sauf accès temporaire).",
+    "Le projet reste soumis à la Commission d'urbanisme et de conservation de Québec, le bâtiment étant à l'inventaire patrimonial.",
+    "Une assemblée publique de consultation aura lieu, suivie de sept jours pour envoyer des observations écrites; le projet n'est pas soumis à un référendum. Les amendes en cas de non-respect des conditions sont de 1 000 $ (personne physique) ou 2 000 $ (autres cas), doublées en cas de récidive."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:40.216Z",
+   "jetons": {
+    "entree": 7774,
+    "sortie": 860
+   }
+  },
+  {
+   "id": "AP2026-332.pdf",
+   "numero": "AP2026-332",
+   "date": "2026-09-30",
+   "unite": "Approvisionnements",
+   "objet": "Approbation de la mise à jour de la liste de fournisseurs qualifiés pour le lot 1 - Qualification de services professionnels en technologies de l'information (Appel de qualification 95647)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-332.pdf",
+   "puces": [
+    "La Ville met à jour sa liste d'entreprises qualifiées pour offrir des services professionnels en technologies de l'information, volet « gestion de projet et agilité ».",
+    "La mise à jour ajoute un fournisseur qui avait été oublié dans la liste approuvée le 29 juillet 2026.",
+    "Neuf entreprises sont déclarées qualifiées, dont Levio, Cofomo, CGI, Groupe LGS, Alithya et Systematix.",
+    "Une entreprise, Delan inc., est jugée non conforme aux exigences administratives obligatoires.",
+    "La qualification vaut pour le reste de la période de trois ans qui court depuis la publication de la liste sur le site SEAO.",
+    "Être sur la liste permet aux entreprises d'être sollicitées par la Ville pour ce type de services."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:34.352Z",
+   "jetons": {
+    "entree": 3901,
+    "sortie": 371
+   }
+  },
+  {
+   "id": "AP2026-334.pdf",
+   "numero": "AP2026-334",
+   "date": "2026-09-30",
+   "unite": "Approvisionnements",
+   "objet": "Conclusion d'un contrat pour la fourniture de fonds de filtre Leopold pour l'usine de traitement de l'eau potable (UTE Québec) (Dossier 96544)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-334.pdf",
+   "puces": [
+    "La Ville accorde un contrat de 183 820 $ (plus TPS et TVQ) à Xylem Canada Ltd. pour fournir des fonds de filtre Leopold.",
+    "Le matériel servira à l'usine de traitement de l'eau potable (UTE Québec), dans l'arrondissement de La Haute-Saint-Charles.",
+    "Il s'agit de remplacer les fonds de filtre installés en 2010, qui ont atteint leur fin de vie utile.",
+    "Le contrat est conclu sans appel d'offres public : Xylem Canada est le représentant exclusif de ces produits au Québec.",
+    "La dépense nette, après récupération de la TVQ, s'élève à 192 988,02 $, financée par un règlement d'emprunt de l'agglomération.",
+    "La livraison est prévue de 16 à 20 semaines après l'approbation des dessins, eux-mêmes soumis 10 à 12 semaines après la commande.",
+    "Le fournisseur enverra un technicien sur place six jours pour encadrer l'installation."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "183 820 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:47.141Z",
+   "jetons": {
+    "entree": 6855,
+    "sortie": 451
+   }
+  },
+  {
+   "id": "CS2026-012.pdf",
+   "numero": "CS2026-012",
+   "date": "2026-09-30",
+   "unite": "Coordination stratégique et relations internationales",
+   "objet": "Ratification du protocole de collaboration 2026-2029 intervenu entre la Ville de Québec et la Ville de Namur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CS2026-012.pdf",
+   "puces": [
+    "Québec renouvelle son entente de collaboration avec la Ville de Namur, en Belgique, pour la période 2026-2029.",
+    "Le maire de Québec a signé le protocole le 9 juin 2026; le conseil de la ville en ratifie la signature après coup.",
+    "La coopération visera trois domaines : les savoirs et l'innovation dans les politiques publiques, la culture et la francophonie, puis le patrimoine et la mémoire.",
+    "Les deux villes veulent échanger des connaissances et des pratiques entre leurs administrations municipales et leurs partenaires.",
+    "Le Bureau des relations internationales assurera le suivi du côté de Québec, et le Commissariat aux Relations internationales du côté de Namur.",
+    "Les projets qui demanderont de l'argent seront inscrits chaque année au budget du Service de la coordination stratégique et des relations internationales.",
+    "L'entente s'inscrit dans la suite de la Déclaration Namur-Québec de 1991, du jumelage de 1999 et des protocoles précédents."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:45.570Z",
+   "jetons": {
+    "entree": 3490,
+    "sortie": 446
+   }
+  },
+  {
+   "id": "AP2026-345.pdf",
+   "numero": "AP2026-345",
+   "date": "2026-09-30",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat pour l'entretien hivernal hors rue - Lot 11 (Appel d'offres public 95823)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-345.pdf",
+   "puces": [
+    "La Ville confie à M et G Grenier inc. le déneigement hors rue du secteur Saint-David (lot 11) pour 298 680 $ avant taxes.",
+    "Le contrat couvre trois hivers, du 1er novembre 2026 au 30 avril 2029.",
+    "Les travaux comprennent le déneigement, le déglaçage, l'épandage de fondants, l'enlèvement de la neige et l'entretien des surfaces et du drainage.",
+    "Six entreprises ont soumissionné; M et G Grenier inc. a déposé le prix le plus bas, 12,8 % sous l'estimation de la Ville.",
+    "La dépense nette atteint 313 576,65 $, répartie de 2026 à 2029, sous réserve de l'adoption des budgets des années 2027 à 2029.",
+    "Des clauses permettent d'ajuster les prix selon le carburant et les précipitations de neige.",
+    "Ce lot fait partie d'un appel d'offres de 15 lots : 7 lots déjà adjugés, le lot 10 annulé et 6 autres traités séparément."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "298 680 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:46.350Z",
+   "jetons": {
+    "entree": 4344,
+    "sortie": 464
+   }
+  },
+  {
+   "id": "AP2026-347.pdf",
+   "numero": "AP2026-347",
+   "date": "2026-09-30",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat à commande pour des travaux d'inspection, de certification, d'installation et d'entretien mécanique et électrique sur des équipements de levage - Lot 2 (Appel d'offres public 96155)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-347.pdf",
+   "puces": [
+    "La Ville confie à Fives Services inc. (Québec) l'inspection, la certification, l'installation et l'entretien mécanique et électrique des équipements de levage du Complexe de valorisation énergétique.",
+    "Le contrat couvre du 1er octobre 2026 au 30 septembre 2028, avec deux options de renouvellement d'un an chacune, indexées à l'indice des prix à la consommation.",
+    "Les paiements sont autorisés jusqu'à 433 482,50 $ (avant taxes) pour la période initiale, et jusqu'à 885 022,50 $ si tous les renouvellements sont exercés.",
+    "Deux entreprises ont soumissionné : celle de Pro-Levage inc. (437 050 $) a été jugée non conforme, faute de répondre aux critères d'admissibilité.",
+    "Le prix retenu dépasse de 3,7 % l'estimation du service demandeur, qui était de 418 202 $ avant taxes.",
+    "La dépense nette pour l'agglomération est estimée à 455 102,44 $ pour la période initiale, sous réserve de l'adoption des budgets 2027 à 2030.",
+    "Le lot 1, destiné au Service du traitement des eaux, fait l'objet d'une décision distincte."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "433 482,50 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:55.141Z",
+   "jetons": {
+    "entree": 4019,
+    "sortie": 525
+   }
+  },
+  {
+   "id": "GA2026-012.pdf",
+   "numero": "GA2026-012",
+   "date": "2026-09-30",
+   "unite": "Greffe et archives",
+   "objet": "Requête en modification des limites du district de la Société de développement commercial Centre-Ville de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GA2026-012.pdf",
+   "puces": [
+    "La Société de développement commercial (SDC) Centre-Ville de Québec demande d'agrandir son district commercial; la Ville prend acte de la requête reçue le 17 septembre.",
+    "Les membres de la SDC ont approuvé cette demande à l'unanimité en assemblée générale spéciale le 31 mars 2026.",
+    "L'agrandissement se fait à l'intérieur de la zone commerciale Centre-Ville, dont les limites ont été révisées par la Ville le 25 août 2026.",
+    "Le greffier doit écrire par poste recommandée à tous les commerçants ayant un établissement dans le territoire qu'on veut ajouter.",
+    "Ces commerçants seront avisés qu'un registre sera ouvert pour signer s'ils s'opposent à l'agrandissement.",
+    "Le registre se tiendra le 3 novembre 2026 à l'hôtel de ville de Québec."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:53.210Z",
+   "jetons": {
+    "entree": 5925,
+    "sortie": 399
+   }
+  },
+  {
+   "id": "LS2026-244.pdf",
+   "numero": "LS2026-244",
+   "date": "2026-09-30",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Participation de monsieur Mehdi Jaouhari, conseiller au Service des loisirs, des sports et de la vie communautaire, à une mission de recrutement de main-d'oeuvre spécialisée et d'étudiants qui se déroulera à Paris, en France, du 11 au 16 novembre 2026",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-244.pdf",
+   "puces": [
+    "La Ville envoie un conseiller du Service des loisirs, des sports et de la vie communautaire à une mission de recrutement à Paris, du 11 au 16 novembre 2026.",
+    "Elle autorise une dépense de 6 113 $ pour l'avion, le transport terrestre, les repas et l'hébergement, remboursés sur pièces justificatives.",
+    "La mission est coordonnée par Québec International, avec Montréal International et Drummondville économique.",
+    "De 8 à 10 employeurs et établissements d'enseignement de Québec y participeront pour pourvoir environ 50 postes, surtout en hôtellerie, transport maritime et construction.",
+    "Environ 40 programmes scolaires seront promus auprès d'étudiants français; plus de 3 000 candidats sont attendus aux deux journées d'entretiens.",
+    "Le représentant de la Ville présentera les services, la qualité de vie à Québec et les emplois disponibles à la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "6 113 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:53.487Z",
+   "jetons": {
+    "entree": 4394,
+    "sortie": 421
+   }
+  },
+  {
+   "id": "DE2026-270.pdf",
+   "numero": "DE2026-270",
+   "date": "2026-09-30",
+   "unite": "Développement économique et grands projets",
+   "objet": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur une partie d'une ruelle, connue et désignée comme étant une partie du lot 1 317 743 du cadastre du Québec, circonscription foncière de Québec, relativement au projet de Réseau structurant de transport en comm",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-270.pdf",
+   "puces": [
+    "La Ville veut obtenir une servitude permanente sur une partie d'une ruelle (lot 1 317 743), près de la rue Sir-Thomas-Chapais, dans l'arrondissement de La Cité-Limoilou.",
+    "La superficie visée est d'environ 179,50 mètres carrés.",
+    "Cette servitude servirait à déplacer des conduits et réseaux d'utilités publiques pour le projet de tramway TramCité.",
+    "La Ville tentera d'abord une entente de gré à gré avec le propriétaire, sinon elle procédera par expropriation.",
+    "Le Service des affaires juridiques pourra abandonner les procédures si le projet n'a plus besoin de la servitude.",
+    "Le terrain complet est inscrit au rôle d'évaluation 2025-2026-2027 à 8 000 $, soit 16,26 $ le mètre carré.",
+    "Les fonds proviennent du règlement d'emprunt de l'agglomération lié au réseau structurant de transport en commun."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "8 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:34:17.740Z",
+   "jetons": {
+    "entree": 5109,
+    "sortie": 437
+   }
+  },
+  {
+   "id": "AP2026-318.pdf",
+   "numero": "AP2026-318",
+   "date": "2026-09-30",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat à commande pour des travaux d'inspection, de certification, d'installation et d'entretien mécanique et électrique sur des équipements de levage - Lot 1 (Appel d'offres public 96155)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-318.pdf",
+   "puces": [
+    "La Ville confie à Fives Services inc. (Québec) l'inspection, la certification, l'installation et l'entretien mécanique et électrique d'équipements de levage du Service du traitement des eaux.",
+    "Le contrat court du 1er octobre 2026 au 30 septembre 2028, avec deux options de renouvellement de 12 mois chacune et une indexation selon l'indice des prix à la consommation.",
+    "Les paiements peuvent atteindre 726 215 $ (avant taxes) pour la période initiale, et 1 392 918 $ (avant taxes) si les renouvellements sont exercés.",
+    "La dépense nette est estimée à 762 434,97 $ pour la période initiale et à 699 954,81 $ en cas de renouvellement.",
+    "Deux entreprises ont soumissionné : Pro-Levage inc. a offert 716 290 $ mais a été jugée non conforme, faute de répondre aux critères d'admissibilité.",
+    "La soumission retenue dépasse de 2,1 % l'estimation du service demandeur (711 088,95 $).",
+    "Le lot 2 de l'appel d'offres, lié au Complexe de valorisation énergétique, est traité dans un autre dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "726 215 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:34:01.646Z",
+   "jetons": {
+    "entree": 4010,
+    "sortie": 506
+   }
+  },
+  {
+   "id": "DQ2026-004.pdf",
+   "numero": "DQ2026-004",
+   "date": "2026-09-30",
+   "unite": "Destination Québec cité",
+   "objet": "Conclusion d'une entente entre la Ville de Québec (Destination Québec cité) et l'Alliance de l'industrie touristique du Québec relativement à un partenariat d'affaires par principe de subsidiarité pour l'exécution d'activités de mise en marché de la région porte d'entrée Québec pour l'année 2026-202",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DQ2026-004.pdf",
+   "puces": [
+    "La Ville de Québec, via Destination Québec cité, conclut une entente avec l'Alliance de l'industrie touristique du Québec pour promouvoir la région de Québec à l'extérieur du Québec en 2026-2027.",
+    "L'Alliance verse 1 200 000 $ et Destination Québec cité doit investir le même montant, soit 1 200 000 $.",
+    "L'argent sert à des campagnes de commercialisation hors Québec et à la production de contenus, du 1er avril 2026 au 31 mars 2027.",
+    "La répartition prévue : 444 000 $ pour les campagnes aux États-Unis, 329 000 $ pour la France, 275 000 $ pour le développement croisière, 121 000 $ pour le luxe, 25 000 $ pour l'accueil croisière et 3 000 $ chacun pour le symposium CCNE et un événement signature.",
+    "Les sommes sont déjà prévues aux budgets.",
+    "Il s'agit du renouvellement d'ententes semblables conclues pour 2023-2024, 2024-2025 et 2025-2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 200 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:34:00.820Z",
+   "jetons": {
+    "entree": 7820,
+    "sortie": 467
+   }
+  },
+  {
+   "id": "PA2026-136.pdf",
+   "numero": "PA2026-136",
+   "date": "2026-09-30",
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "objet": "Autorisation pour le dépôt d'une demande d'aide financière au Fonds municipal vert de la Fédération canadienne des municipalités (FCM) dans le cadre de l'appel de projets du programme Croissance de la canopée dans les collectivités canadiennes (volet plantation d'arbres)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-136.pdf",
+   "puces": [
+    "La Ville de Québec demande une aide financière au Fonds municipal vert de la Fédération canadienne des municipalités pour planter des arbres.",
+    "Le projet coûte 9 089 555 $ en dépenses admissibles : la Ville réclame 4 544 770 $ en subvention et paierait 4 544 785 $ de sa poche.",
+    "En tout, 13 785 arbres et 6 716 arbustes seraient plantés.",
+    "Volet 1 : 7 000 arbres en bordure de rues et dans les parcs, soit 3 500 en 2027 et 3 500 en 2028.",
+    "Volet 2 : plantations au Centre de valorisation des surplus de matériaux d'excavation (parc industriel de Beauport) et au Lieu d'élimination de la neige Raymond, près du secteur Villeneuve.",
+    "Volet 3 : trois microforêts, sur l'avenue Giguère (Vanier), au parc Clérin entre la rue Clérin et le boulevard du Versant-Nord, et au parc Saint-Jean-Baptiste-De La Salle sur l'avenue Montbray.",
+    "La Ville s'engage à payer sa part des coûts si la subvention lui est accordée."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "9 089 555 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:34:04.053Z",
+   "jetons": {
+    "entree": 6163,
+    "sortie": 510
+   }
+  },
+  {
+   "id": "LS2026-203.pdf",
+   "numero": "LS2026-203",
+   "date": "2026-09-30",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement de plusieurs subventions dans le cadre du « Programme de soutien financier aux athlètes et clubs sportifs » qui participent à des compétitions canadiennes ou internationales",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-203.pdf",
+   "puces": [
+    "La Ville verse 5 800 $ en subventions à 12 athlètes et clubs sportifs de Québec.",
+    "Neuf athlètes reçoivent 400 $ chacun pour des compétitions au Canada, hors Québec (judo, hockey, natation artistique, football, volleyball, vélo de montagne).",
+    "Deux athlètes reçoivent 600 $ chacun pour des compétitions à l'étranger : escalade sportive en Italie et taekwondo au Brésil.",
+    "L'équipe U17 féminine PLSJQ Royal Beauport (soccer) reçoit 1 000 $ pour la Gothia Cup, en Suède.",
+    "Les demandes couvrent des compétitions tenues entre avril et août 2026.",
+    "L'argent provient du budget de fonctionnement du Service des loisirs, des sports et de la vie communautaire.",
+    "Les demandes au programme sont analysées trois fois par année : en mai, en août et en décembre."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "5 800 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:34:23.872Z",
+   "jetons": {
+    "entree": 4499,
+    "sortie": 422
+   }
+  },
+  {
+   "id": "LS2026-226.pdf",
+   "numero": "LS2026-226",
+   "date": "2026-09-30",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Dépôt d'une demande d'aide financière pour contribuer à la réalisation de l'événement Réverbère, qui se tiendra du 9 au 12 octobre 2026, dans le cadre du Programme d'appui aux actions régionales du Secrétariat à la Capitale-Nationale pour l'année financière 2026",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-226.pdf",
+   "puces": [
+    "La Ville de Québec tiendra la troisième édition de Réverbère du 9 au 12 octobre 2026, dans le Vieux-Québec, pendant le week-end de l'Action de grâce.",
+    "L'événement d'arts de la rue est gratuit et prévoit près de 200 représentations sur plusieurs sites : cirque, musique, théâtre, danse, arts visuels.",
+    "La Ville demande une aide financière au Secrétariat à la Capitale-Nationale, qui l'a informée qu'un montant de 24 000 $ pourra être versé.",
+    "Le coût total de l'événement est estimé à 775 000 $ (taxes nettes).",
+    "L'édition 2026 ajoutera des activités dans certains quartiers et renforcera le volet cirque et la parade.",
+    "La Ville autorise la signature de la convention d'aide financière, qui devra être validée par le Service des affaires juridiques."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "24 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:34:24.782Z",
+   "jetons": {
+    "entree": 3809,
+    "sortie": 404
+   }
+  },
+  {
+   "id": "DE2026-275.pdf",
+   "numero": "DE2026-275",
+   "date": "2026-09-30",
+   "unite": "Développement économique et grands projets",
+   "objet": "Entente sectorielle sur le développement des activités agricoles et agroalimentaires de la région de la Capitale-Nationale et de Lévis 2027-2029, entre la Ville de Québec, la Communauté métropolitaine de Québec et plusieurs autres partenaires, relative au versement d'une subvention maximale de 495 0",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-275.pdf",
+   "puces": [
+    "La Ville de Québec verse 495 000 $ sur trois ans (165 000 $ par année en 2027, 2028 et 2029) pour une entente sur l'agriculture et l'agroalimentaire dans la région de la Capitale-Nationale et à Lévis.",
+    "L'argent vient du Fonds régions et ruralité et relève des compétences d'agglomération.",
+    "L'entente réunit quinze partenaires, dont le MAPAQ, le Secrétariat à la Capitale-Nationale, la Ville de Lévis, six MRC, la Communauté métropolitaine de Québec et l'UPA Capitale-Nationale–Côte-Nord.",
+    "Le budget total de l'entente triennale atteint 3 690 063 $, dont 2 428 500 $ du provincial.",
+    "L'entente prévoit une vingtaine de projets visant la rentabilité des entreprises bioalimentaires, le renouvellement des générations de producteurs, le bien-être des producteurs, la valorisation des produits régionaux et la concertation territoriale.",
+    "La Communauté métropolitaine de Québec gère l'entente; un comité directeur en assure la gouvernance et le conseiller municipal Gabriel Dusablon y représente la Ville.",
+    "Le partenariat, en place depuis 2017 et renouvelé en 2020 et 2023, se poursuit ainsi de 2027 à 2029."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "495 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:34:24.712Z",
+   "jetons": {
+    "entree": 7726,
+    "sortie": 571
+   }
+  },
+  {
+   "id": "AP2026-339.pdf",
+   "numero": "AP2026-339",
+   "date": "2026-09-30",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat pour la fourniture de vannes à double clapet - Complexe de valorisation énergétique (Appel d'offres public 96380)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-339.pdf",
+   "puces": [
+    "La Ville accorde un contrat de 465 689,42 $ (avant taxes) à l'entreprise R. L. Doucet inc., de Terrebonne, pour fournir 14 vannes à double clapet.",
+    "Ces vannes servent au système de manutention des cendres volantes du Complexe de valorisation énergétique, dans l'arrondissement de La Cité-Limoilou.",
+    "Elles remplacent des vannes arrivées à la fin de leur vie utile.",
+    "Une seule entreprise a soumissionné : aucun autre fournisseur n'a pris les documents d'appel d'offres sur SEAO.",
+    "La soumission est inférieure de 12,5 % à l'estimation du service, qui était de 532 000 $ avant taxes.",
+    "La dépense nette pour la Ville, après récupération de la TVQ, s'élève à 478 974,84 $, financée par un règlement d'emprunt."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "465 689,42 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:34:32.004Z",
+   "jetons": {
+    "entree": 3324,
+    "sortie": 405
+   }
+  },
+  {
+   "id": "AP2026-344.pdf",
+   "numero": "AP2026-344",
+   "date": "2026-09-30",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat pour l'entretien hivernal hors rue - Lot 14 (Appel d'offres public 95823)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-344.pdf",
+   "puces": [
+    "La Ville confie à Groupe GCH inc. le déneigement hors rue du secteur de la Centrale de police (lot 14) pour 414 973 $ avant taxes.",
+    "Le contrat couvre deux hivers, du 1er novembre 2026 au 30 avril 2028.",
+    "Les travaux incluent le déneigement, le déglaçage, l'épandage de fondants, l'enlèvement de la neige et l'entretien des surfaces et du drainage.",
+    "Six soumissions conformes ont été reçues; Groupe GCH a déposé le prix le plus bas, devant Eddy Wagner (451 092 $) et Zachary Lavigueur (486 843,50 $).",
+    "Le prix retenu est inférieur de 39,1 % à l'estimation de la Ville (681 944,30 $).",
+    "La dépense nette atteint 435 669,78 $, répartie sur 2026 (71 885,52 $), 2027 (217 834,89 $) et 2028 (145 949,37 $).",
+    "Les sommes de 2027 et 2028 restent conditionnelles à l'adoption des budgets de ces années."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "414 973 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:34:32.272Z",
+   "jetons": {
+    "entree": 4375,
+    "sortie": 474
+   }
+  },
   {
    "id": "DE2026-340.pdf",
    "numero": "DE2026-340",
@@ -572,6 +1474,31 @@
    "jetons": {
     "entree": 4224,
     "sortie": 412
+   }
+  },
+  {
+   "id": "GT2026-309.pdf",
+   "numero": "GT2026-309",
+   "date": "2026-09-28",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de permis assujettie à un règlement relatif au PIIA - 3190, avenue Duval, lot projeté 6 722 995, quartier de Lairet, district électoral de Limoilou, Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-309.pdf",
+   "puces": [
+    "La Ville approuve les plans d'un bâtiment isolé de deux logements au 3190, avenue Duval, dans le quartier de Lairet (Limoilou).",
+    "Le promoteur devra couvrir au moins 75 % de la façade principale en maçonnerie.",
+    "Cette exigence vise à harmoniser le bâtiment avec les voisins, dont les façades sont surtout en maçonnerie.",
+    "Le projet déposé prévoyait une façade entièrement en déclin, sans maçonnerie.",
+    "Si le demandeur ne respecte pas la condition, la demande sera suspendue et il devra présenter un autre projet à une séance ultérieure.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable le 8 septembre 2026, avec la même condition."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T15:33:51.695Z",
+   "jetons": {
+    "entree": 5774,
+    "sortie": 360
    }
   },
   {
