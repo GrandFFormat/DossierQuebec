@@ -48,6 +48,11 @@ export function memoriserVolet(ville) {
     localStorage.setItem(CLE_VOLET, JSON.stringify({ ville }));
   } catch {}
 }
+// L'adresse de « Mon dossier » vue d'un volet : la ville est écrite dedans. Le site provincial
+// réinscrit « assemblee » comme dernier volet à chaque chargement, et /mon-dossier est une de ses
+// pages depuis la fusion du 30 sept. 2026 : sans la ville dans l'adresse, on repartait sur DQ.
+export const lienMonDossier = (ville) =>
+  ville && Object.hasOwn(VILLES, ville) ? `/mon-dossier?ville=${encodeURIComponent(ville)}#villes` : '/mon-dossier#villes';
 export function dernierVolet() {
   try {
     const v = JSON.parse(localStorage.getItem(CLE_VOLET) ?? 'null');

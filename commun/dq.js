@@ -3716,7 +3716,10 @@ function renderTicker(){
 // Abonnement) prennent la marque du DERNIER site visité. Les volets y inscrivent leur ville
 // (commun/abonnes.js, memoriserVolet) ; le provincial y inscrit « assemblee » — même clé, lue par
 // commun/navigation.js (dernierVolet, vientDuProvincial) et par le <head> de abonnement.html.
-try{ localStorage.setItem('dq:dernier-volet', JSON.stringify({ ville: 'assemblee' })); }catch(e){}
+// Sauf quand l'adresse nomme une ville (/mon-dossier?ville=montreal, venu d'un volet) : depuis la
+// fusion du 30 sept. 2026, Mon dossier EST une page du provincial, et cette ligne effaçait le volet
+// d'où l'on arrivait — on repartait sur DQ.
+try{ if(!new URLSearchParams(location.search).get('ville')) localStorage.setItem('dq:dernier-volet', JSON.stringify({ ville: 'assemblee' })); }catch(e){}
 
 (async function init(){
   // Anglais : les textes fixes tout de suite, avant même les données. Le <head> garde la page
@@ -3770,7 +3773,9 @@ try{ localStorage.setItem('dq:dernier-volet', JSON.stringify({ ville: 'assemblee
   retirerPrerendus();   // le reste (promesses, journal) : ils viennent d'être dessinés
   // Ouvre l'onglet correspondant à l'adresse d'arrivée (/votes, /ministres…).
   const bootView = viewFromPath();
-  history.replaceState({ view: bootView }, '', location.pathname + location.search);
+  // L'ancre fait partie de l'adresse reçue (/mon-dossier?ville=montreal#villes) : l'effacer
+  // renvoyait en haut de la page, sur les projets de loi.
+  history.replaceState({ view: bootView }, '', location.pathname + location.search + location.hash);
   if(bootView !== 'apercu'){ goToTab(bootView, { fromHistory: true, noScroll: true }); }
   else { syncTitle('apercu'); }
   // Lien profond partagé (/projets-de-loi?pl=NUM) : ouvre le projet ciblé.
