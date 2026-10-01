@@ -11,10 +11,20 @@ if (!document.querySelector('link[href="/commun/abonnes.css"]')) {
   css.href = '/commun/abonnes.css';
   document.head.appendChild(css);
 }
-import { client, VILLES, VILLES_PROJETS, VILLES_EN, VILLES_ATTENDUES, avisConsultation, marquerConsultation, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, limiteSuivis, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, mesurer, formulaireMessage, dernierVolet, EN, tr } from '/commun/abonnes-client.js';
+import { client, VILLES, VILLES_PROJETS, VILLES_EN, VILLES_ATTENDUES, avisConsultation, marquerConsultation, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, limiteSuivis, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, mesurer, formulaireMessage, dernierVolet, memoriserVolet, EN, tr } from '/commun/abonnes-client.js';
 import { boiteInfolettre } from '/commun/infolettre.js';
 const pl = (n, sing, plur) => (n > 1 ? plur : sing);
 import { libelleEn, themeEn } from '/quebec/assets/libelles-en.js';
+
+// La ville d'où l'on arrive. Le site provincial réécrit « dernier volet » à chaque chargement, et
+// cette page est une des siennes : la mémoire dit toujours « assemblee ». L'adresse, elle, ne ment
+// pas — on la croit, et on la retient pour la suite de la visite.
+const villeDArrivee = (() => {
+  const v = new URLSearchParams(location.search).get('ville');
+  if (!v || !Object.hasOwn(VILLES, v)) return null;
+  memoriserVolet(v);
+  return v;
+})();
 // Libellés de la Ville (instances, sujets) et résumés IA en anglais quand l'anglais est choisi.
 const lib = (texte) => (EN ? libelleEn(texte) : texte);
 const libTheme = (cle, libelle) => (EN ? themeEn(cle, libelle) : libelle);
@@ -297,17 +307,25 @@ function garderEnVue(id) {
   const cible = document.getElementById(id);
   if (!cible) return;
   const suivre = () => cible.scrollIntoView({ block: 'start' });
+  // Le cadre qui grandit sous nos pieds : <main> dans les volets, le corps de la page sur
+  // /mon-dossier, qui n'en a pas. Sans ce repli, l'observateur levait une erreur et le reste du
+  // module ne tournait plus du tout.
+  const cadre = document.querySelector('main') ?? document.body;
   const observateur = new ResizeObserver(suivre);
-  observateur.observe(document.querySelector('main'));
+  observateur.observe(cadre);
   const arreter = () => observateur.disconnect();
   for (const evenement of ['wheel', 'touchstart', 'keydown', 'mousedown']) addEventListener(evenement, arreter, { once: true, passive: true });
   setTimeout(arreter, 5000);
 }
 if (location.hash === '#ecrire') garderEnVue('ecrire');
+// Arriver d'un volet (/mon-dossier?ville=montreal#villes) : la section des villes est en bas de
+// la page de l’Assemblée et se remplit après coup, comme « Nous écrire ».
+if (location.hash === '#villes') garderEnVue('villes');
 // Un lien vers #suggestions : la boîte des projets à suivre, ouverte (voir suggestions).
 if (location.hash === '#suggestions') garderEnVue('suggestions');
 // Déjà sur la page : le lien « Nous écrire » change seulement l'ancre.
 addEventListener('hashchange', () => { if (location.hash === '#ecrire') document.getElementById('ecrire')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+
 
 // ---------- projets à suivre, par ville ----------
 // Une couleur par ville, la même partout où la ville a sa boîte ; une ville à venir prend la suivante.
@@ -350,11 +368,15 @@ async function suggestions(s, suivisIds) {
   // son état quand la page se redessine.
   const avant = new Map([...document.querySelectorAll('#suggestions details[data-ville]')].map((d) => [d.dataset.ville, d.open]));
   const boiteAvant = $('#suggestions details.ab-suggestions');
-  const aOuvrir = suivisIds.size ? null : (blocs.find((b) => b.ville === dernierVolet()) ?? blocs[0])?.ville;
+  // La ville reçue dans l’adresse s’ouvre toujours, même pour qui suit déjà des projets : c’est
+  // elle qu’on est venu voir.
+  const aOuvrir = blocs.some((b) => b.ville === villeDArrivee)
+    ? villeDArrivee
+    : suivisIds.size ? null : (blocs.find((b) => b.ville === dernierVolet()) ?? blocs[0])?.ville;
   const total = blocs.reduce((n, b) => n + b.nombre, 0);
   // La même boîte que les autres (Export, Agenda…) ; dedans, une ville par menu dépliant.
   $('#suggestions').innerHTML = blocs.length
-    ? `<details class="ab-carte ab-pliable ab-suggestions"${(boiteAvant ? boiteAvant.open : (!suivisIds.size || location.hash === '#suggestions')) ? ' open' : ''}>
+    ? `<details class="ab-carte ab-pliable ab-suggestions"${(boiteAvant ? boiteAvant.open : (!suivisIds.size || villeDArrivee || location.hash === '#suggestions')) ? ' open' : ''}>
        <summary><h2>${tr('Des projets à suivre', 'Projects to follow')}</h2><span class="ab-etiquette">${total}</span></summary>
        <div class="ab-pliable-corps">
        <p class="ab-chapeau">${tr('Les grands dossiers de chaque ville, qui reviennent de séance en séance. Suivez-en un pour garder le fil de toutes ses décisions.', "Each city's major files, which come back meeting after meeting. Follow one to keep track of all its decisions. (Project descriptions and recaps are in French for now.)")}</p>

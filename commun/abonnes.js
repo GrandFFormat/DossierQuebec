@@ -14,7 +14,7 @@
 //   - au bas de la fiche ouverte, « Signaler une erreur dans cette fiche » (compte requis).
 
 import { VILLES, echapper, mesurer, session, envoyerLien, chargerSuivis, suivre, limiteSuivis, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, formulaireMessage, client , marquerConsultation } from './abonnes-client.js';
-import { memoriserVolet } from './navigation.js';
+import { memoriserVolet, lienMonDossier } from './navigation.js';
 import { tr } from './langue.js';
 
 const VILLE = document.body.dataset.ville;
@@ -29,7 +29,7 @@ function boutonsEntete() {
   if (document.querySelector('.ab-mes-dossiers')) return;
   const mesDossiers = document.createElement('a');
   mesDossiers.className = 'ab-mes-dossiers';
-  mesDossiers.href = '/mon-dossier#villes';
+  mesDossiers.href = lienMonDossier(VILLE);
   mesDossiers.innerHTML = `${tr('Mon dossier', 'My file')} <span class="ab-compte" hidden></span>`;
   const outils = document.querySelector('header nav .outils');
   const repere = document.querySelector('header .taille-texte') ?? document.querySelector('header .bascule-theme');
@@ -226,7 +226,7 @@ document.addEventListener('click', async (e) => {
       const boite = zone.querySelector('.ab-connexion');
       if (boite) {
         boite.hidden = false;
-        boite.innerHTML = `<p class="ab-note" role="status">${echapper(texte)} <a class="ab-lien" href="/mon-dossier#villes">${tr('Mon dossier', 'My file')}</a></p>`;
+        boite.innerHTML = `<p class="ab-note" role="status">${echapper(texte)} <a class="ab-lien" href="${lienMonDossier(VILLE)}">${tr('Mon dossier', 'My file')}</a></p>`;
       }
     }
     return;

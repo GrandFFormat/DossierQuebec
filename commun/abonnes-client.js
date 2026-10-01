@@ -12,9 +12,9 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 export const client = createClient('https://wfgcqftgtmptfutrbujz.supabase.co', 'sb_publishable_CutVYEz29QYUV3tCDsAhSQ_RvZUQ3G6');
 
 // VILLES, echapper et la navigation vivent dans navigation.js (sans dépendance extérieure).
-import { VILLES, echapper } from './navigation.js';
+import { VILLES, echapper, lienMonDossier } from './navigation.js';
 import { EN, tr } from './langue.js';
-export { VILLES, VILLES_PROJETS, VILLES_EN, VILLES_ATTENDUES, echapper, memoriserVolet, dernierVolet, vientDuProvincial, enteteCommune, boutonRetourEnHaut } from './navigation.js';
+export { VILLES, VILLES_PROJETS, VILLES_EN, VILLES_ATTENDUES, echapper, memoriserVolet, dernierVolet, lienMonDossier, vientDuProvincial, enteteCommune, boutonRetourEnHaut } from './navigation.js';
 export { EN, tr } from './langue.js';
 
 const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
@@ -262,7 +262,7 @@ export function rendreDemande(reponse, ville) {
   // n'existe pas.
   if (!reponse.demandable) {
     if (!VILLES_DETAIL_LU.has(ville)) return '';
-    return `<div class="ab-demande"><p class="ab-demande-verrou"><span aria-hidden="true">🔒</span> <span class="ab-demande-verrou-nom">${tr('Demander le détail de l’argent', 'Request the money details')}</span> · <a class="ab-lien" href="/mon-dossier#villes" data-mesure="clic_demande_verrou">${tr('connectez-vous (gratuit)', 'sign in (free)')}</a></p></div>`;
+    return `<div class="ab-demande"><p class="ab-demande-verrou"><span aria-hidden="true">🔒</span> <span class="ab-demande-verrou-nom">${tr('Demander le détail de l’argent', 'Request the money details')}</span> · <a class="ab-lien" href="${lienMonDossier(ville)}" data-mesure="clic_demande_verrou">${tr('connectez-vous (gratuit)', 'sign in (free)')}</a></p></div>`;
   }
   return `<div class="ab-demande">${contenuDemande(reponse.demande, ville)}</div>`;
 }
@@ -303,7 +303,7 @@ export async function demanderDetail(bouton, ville, dossier, s) {
       : res.status === 409 && corps.erreur === 'sans montant' ? tr('Ce dossier n’a pas de montant à détailler.', 'This item has no amount to detail.')
       : res.status === 409 ? tr('Ce détail vient d’être lu : rechargez la page pour l’afficher.', 'These details were just read: reload the page to see them.')
       : res.status === 403 && corps.erreur === 'compte de consultation' ? tr('Un compte de consultation ne fait pas de demandes.', "A reading-room account can't make requests.")
-      : res.status === 403 ? tr(`Connectez-vous d’abord (compte gratuit). <a class="ab-lien" href="/mon-dossier#villes">Mes dossiers</a>`, `Sign in first (free account). <a class="ab-lien" href="/mon-dossier#villes">My files</a>`) : tr('La demande n’a pas fonctionné. Réessayez dans un moment.', "The request didn't work. Try again in a moment.");
+      : res.status === 403 ? tr(`Connectez-vous d’abord (compte gratuit). <a class="ab-lien" href="${lienMonDossier(ville)}">Mes dossiers</a>`, `Sign in first (free account). <a class="ab-lien" href="${lienMonDossier(ville)}">My files</a>`) : tr('La demande n’a pas fonctionné. Réessayez dans un moment.', "The request didn't work. Try again in a moment.");
   } catch {
     message.textContent = tr('La demande n’a pas fonctionné. Réessayez dans un moment.', "The request didn't work. Try again in a moment.");
   }
