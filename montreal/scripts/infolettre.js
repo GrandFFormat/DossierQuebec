@@ -40,6 +40,12 @@ const extraireDetails = async () => {};
 const DATA = new URL('../data/', import.meta.url);
 const SORTIE = new URL('../infolettres/', import.meta.url);
 const SITE = 'https://dossierquebec.ca/montreal/';
+
+// La fiche d'un document sur le site : c'est là que mènent tous les liens du courriel, et c'est
+// elle qui porte le PDF officiel de la Ville. Un numéro de résolution la trouve ; un document qui
+// n'en a pas (procès-verbal, ordre du jour) se trouve par son identifiant.
+const fiche = (quoi) => `${SITE}decisions-de-la-ville-de-montreal?q=${encodeURIComponent(quoi)}`;
+const ficheDe = (f) => fiche(f.numero ?? f.cle);
 const VILLE = 'montreal';
 
 // Les instances qui ont leur courriel après chaque séance (mêmes clés que api/_infolettre.js) :
@@ -343,12 +349,12 @@ async function main() {
   const titreMd = (s, n) => { L.push(`## ${s.icone} ${s.titre}${n != null ? ` (${nombreFr(n)})` : ''}`, '', `*${s.chapeau}*`, ''); };
   titreMd(SECTIONS.montants);
   for (const f of lourdes) {
-    L.push(`- **${argent(f.montant)}**${natureDe(f) ? ` *(${natureDe(f)})*` : ''} — ${phraseDe(f)} *(${ouVu(f)})* [${f.numero}](${f.pdf})`);
+    L.push(`- **${argent(f.montant)}**${natureDe(f) ? ` *(${natureDe(f)})*` : ''} — ${phraseDe(f)} *(${ouVu(f)})* [${f.numero}](${ficheDe(f)})`);
     for (const p of (f.resume?.puces ?? []).slice(1, 3)) L.push(`  - ${p}`);
   }
   if (!lourdes.length) L.push('Aucun montant relevé dans les résumés du mois.');
   L.push('');
-  const ligneMd = (f) => L.push(`- **${f.montant != null ? argent(f.montant) : 'Montant non précisé'}**${natureDe(f) ? ` *(${natureDe(f)})*` : ''} — ${phraseDe(f)} [${f.numero}](${f.pdf})`);
+  const ligneMd = (f) => L.push(`- **${f.montant != null ? argent(f.montant) : 'Montant non précisé'}**${natureDe(f) ? ` *(${natureDe(f)})*` : ''} — ${phraseDe(f)} [${f.numero}](${ficheDe(f)})`);
   const autresSub = subventions.filter((f) => !dejaVues.has(f.cle));
   titreMd(SECTIONS.subventions, subventions.length);
   autresSub.forEach(ligneMd);
@@ -362,7 +368,7 @@ async function main() {
   titreMd(SECTIONS.votes, nbVotesDivises);
   for (const b of votesDivises) {
     L.push(`- **${b.instance}, ${jourMois(b.date)}** — ont voté ${b.cote} : ${b.noms.join(', ')}`);
-    for (const r of b.resolutions) L.push(`  - ${r.phrase} *(${r.resultat ?? ''}, ${r.pour} pour, ${r.contre} contre)* [${r.numero}](${r.pdf})`);
+    for (const r of b.resolutions) L.push(`  - ${r.phrase} *(${r.resultat ?? ''}, ${r.pour} pour, ${r.contre} contre)* [${r.numero}](${fiche(r.numero)})`);
   }
   if (!votesDivises.length) L.push(seance ? 'Aucun vote divisé à cette séance.' : 'Aucun vote divisé publié pour ce mois.');
   L.push('');
@@ -385,6 +391,8 @@ async function main() {
   const DOUX = '#5B6470';
   const POLICE = "font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
   const lien = (texte, url, couleur) => `<a href="${echapper(url)}" style="color:${couleur};font-weight:600;text-decoration:none;white-space:nowrap">${echapper(texte)}&nbsp;↗</a>`;
+  // Un lien vers DossierQuébec, pas vers un site extérieur : la flèche est droite, pas oblique.
+  const lienSite = (texte, url, couleur) => `<a href="${echapper(url)}" style="color:${couleur};font-weight:600;text-decoration:none;white-space:nowrap">${echapper(texte)}&nbsp;→</a>`;
   const pastille = (texte, couleur) => `<span style="display:inline-block;padding:2px 8px;border-radius:999px;background:${teinte(couleur, 0.14)};color:${couleur};font-size:12px;font-weight:700;white-space:nowrap">${echapper(texte)}</span>`;
   const montant = (f, couleur) => `<span style="display:inline-block;padding:3px 10px;border-radius:6px;background:${couleur};color:#fff;font-weight:800;font-size:14px;white-space:nowrap">${f.montant != null ? echapper(argent(f.montant)) : 'Montant non précisé'}</span>`;
   const sujetDe = (f) => (THEMES[f.theme] ? pastille(THEMES[f.theme].libelle, THEMES[f.theme].couleur) : '');
@@ -419,7 +427,6 @@ async function main() {
   const marque = `<span style="display:inline-block;padding:2px 8px;border-radius:999px;background:#D99A06;color:#ffffff;font-size:11px;font-weight:800;letter-spacing:.04em;white-space:nowrap;vertical-align:middle">★ ABONNÉS</span>`;
   const boiteOr = (contenu, marge = '10px 0 0') => `<div style="${POLICE};margin:${marge};padding:10px 12px;border-radius:8px;background:#FFF7E0;border:1px dashed #E9B949;font-size:14px;line-height:1.55;color:${ENCRE}">${contenu}</div>`;
   const lienOr = (texte, url) => `<a href="${echapper(url)}" style="color:${OR};font-weight:700;text-decoration:none;white-space:nowrap">${texte}&nbsp;↗</a>`;
-  const fiche = (numero) => `${SITE}decisions-de-la-ville-de-montreal?q=${encodeURIComponent(numero)}`;
   // Le détail de l'argent d'un gros montant : quelques lignes pour l'abonné, ce qu'il contient pour les
   // autres (sans les chiffres). Rien, dans les deux éditions, s'il n'est pas lu.
   // Sous une subvention ou un contrat, l'essentiel du détail en une ligne dorée (abonnés seulement) :
@@ -556,7 +563,7 @@ async function main() {
       <tr>${seance ? `${tuile(nombreFr(nbResolutions), 'résolutions adoptées', '#0B8A4B')}${tuile(nombreFr(liste.length), 'dossiers', '#2563EB')}` : `${tuile(nombreFr(liste.length), 'dossiers devant les instances', '#0B8A4B')}${tuile(nombreFr(nbSeances), 'séances', '#2563EB')}`}</tr>
       <tr>${tuile(totalSubventions ? argent(totalSubventions) : nombreFr(accordees.length), `en ${pluriel(accordees.length, 'subvention accordée', 'subventions accordées')}`, '#EA580C')}${tuile(nombreFr(nbVotesDivises), nbVotesDivises > 1 ? 'votes divisés' : 'vote divisé', '#7C3AED')}</tr>
     </table>
-    <p style="${POLICE};margin:10px 6px 0;font-size:13px;line-height:1.5;color:${DOUX}">${seance ? (documentsSeance.length ? `<strong style="color:${ENCRE}">Les documents de la séance :</strong> ${documentsSeance.map((d) => lien(d.type === 'Procès-verbaux' ? 'procès-verbal' : 'tableau des décisions', d.pdf, '#0B8A4B')).join(' · ')}` : '') : `<strong style="color:${ENCRE}">Séances :</strong> ${echapper(seances.join(' · '))}.`}</p>
+    <p style="${POLICE};margin:10px 6px 0;font-size:13px;line-height:1.5;color:${DOUX}">${seance ? (documentsSeance.length ? `<strong style="color:${ENCRE}">Les documents de la séance :</strong> ${documentsSeance.map((d) => lienSite(d.type === 'Procès-verbal' ? 'procès-verbal' : 'ordre du jour', fiche(d.id), '#0B8A4B')).join(' · ')}` : '') : `<strong style="color:${ENCRE}">Séances :</strong> ${echapper(seances.join(' · '))}.`}</p>
   </td></tr>`);
 
   // Les plus gros montants, avec les puces du résumé
@@ -567,7 +574,7 @@ async function main() {
       <div style="margin:0 0 6px">${montant(f, SECTIONS.montants.couleur)} ${natureDe(f) ? pastille(natureDe(f), SECTIONS.montants.couleur) : ''} ${sujetDe(f)}</div>
       <div style="font-weight:600">${echapper(phraseDe(f))}</div>
       ${puces.length ? `<ul style="margin:6px 0 0;padding-left:18px;color:#374151;font-size:14px">${puces.map((p) => `<li style="margin:0 0 3px">${echapper(p)}</li>`).join('')}</ul>` : ''}
-      <div style="margin-top:8px;font-size:13px;color:${DOUX}">${echapper(ouVu(f))} · ${lien(f.numero, f.pdf, SECTIONS.montants.couleur)}</div>
+      <div style="margin-top:8px;font-size:13px;color:${DOUX}">${echapper(ouVu(f))} · ${lienSite(f.numero, ficheDe(f), SECTIONS.montants.couleur)}</div>
       ${detailOr(f)}`));
   }
   if (!lourdes.length) H.push(`<tr><td style="${POLICE};color:${DOUX}">Aucun montant relevé dans les résumés du mois.</td></tr>`);
@@ -578,7 +585,7 @@ async function main() {
     if (!dossiers.length) { H.push(`<tr><td style="${POLICE};color:${DOUX};padding:0 0 8px">${vide}</td></tr>`); return; }
     const lignes = dossiers.map((f, i) => `<tr style="background:${i % 2 ? teinte(s.couleur, 0.05) : '#ffffff'}">
         <td valign="top" width="1" style="${POLICE};padding:10px 10px 10px 12px;white-space:nowrap">${montant(f, s.couleur)}</td>
-        <td valign="top" style="${POLICE};padding:10px 12px 10px 0;font-size:14px;line-height:1.5;color:${ENCRE}">${echapper(phraseDe(f))}${natureDe(f) ? ` ${pastille(natureDe(f), s.couleur)}` : ''}<div style="margin-top:3px;font-size:12px">${lien(f.numero, f.pdf, s.couleur)}</div>${ligneOr(f)}</td>
+        <td valign="top" style="${POLICE};padding:10px 12px 10px 0;font-size:14px;line-height:1.5;color:${ENCRE}">${echapper(phraseDe(f))}${natureDe(f) ? ` ${pastille(natureDe(f), s.couleur)}` : ''}<div style="margin-top:3px;font-size:12px">${lienSite(f.numero, ficheDe(f), s.couleur)}</div>${ligneOr(f)}</td>
       </tr>`).join('');
     H.push(`<tr><td style="padding:0 0 6px"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid ${teinte(s.couleur, 0.25)};border-top:4px solid ${s.couleur};border-radius:8px;border-collapse:separate;overflow:hidden">${lignes}</table></td></tr>`);
   };
@@ -593,7 +600,7 @@ async function main() {
     H.push(carte(SECTIONS.votes.couleur, `
       <div style="margin:0 0 6px">${pastille(`${b.instance} · ${jourMois(b.date)}`, SECTIONS.votes.couleur)} ${pastille(pluriel(b.resolutions.length, 'résolution', 'résolutions'), '#6b7280')}</div>
       <div style="font-size:14px"><strong>Ont voté ${b.cote} :</strong> ${echapper(b.noms.join(', '))}</div>
-      <ul style="margin:8px 0 0;padding-left:18px;font-size:14px;color:#374151">${b.resolutions.map((r) => `<li style="margin:0 0 6px">${echapper(r.phrase)} <span style="color:${DOUX};font-size:13px">— ${echapper(r.resultat ?? '')}, ${r.pour} pour, ${r.contre} contre</span> ${lien(r.numero, r.pdf, SECTIONS.votes.couleur)}</li>`).join('')}</ul>`));
+      <ul style="margin:8px 0 0;padding-left:18px;font-size:14px;color:#374151">${b.resolutions.map((r) => `<li style="margin:0 0 6px">${echapper(r.phrase)} <span style="color:${DOUX};font-size:13px">— ${echapper(r.resultat ?? '')}, ${r.pour} pour, ${r.contre} contre</span> ${lienSite(r.numero, fiche(r.numero), SECTIONS.votes.couleur)}</li>`).join('')}</ul>`));
   }
   if (!votesDivises.length) H.push(`<tr><td style="${POLICE};color:${DOUX};padding:0 0 8px">${seance ? 'Aucun vote divisé à cette séance.' : 'Aucun vote divisé publié pour ce mois.'}</td></tr>`);
 

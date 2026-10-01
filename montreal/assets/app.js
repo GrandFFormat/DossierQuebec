@@ -275,7 +275,9 @@ function decisionsFiltrees() {
     if (instance && d.instance !== instance) return false;
     if (theme && d.theme !== theme) return false;
     if (avecResume && !resumePour(d)) return false;
-    if (q && !((d.objet ?? '') + ' ' + (d.numero ?? '')).toLowerCase().includes(q)) return false;
+    // L'identifiant du document entre aussi dans la recherche : un procès-verbal n'a pas de numéro,
+    // et c'est par son identifiant que le courriel ouvre sa fiche (?q=PV_CA4_OR_…).
+    if (q && !((d.objet ?? '') + ' ' + (d.numero ?? '') + ' ' + (d.id ?? '')).toLowerCase().includes(q)) return false;
     return true;
   });
 }
