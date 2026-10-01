@@ -58,7 +58,7 @@ Pour chacune de : Accueil, Décisions, Votes nominatifs, Conseil municipal, Lexi
 - [ ] Sources › « Ce qu'on a demandé à la Ville » est à jour (dernier échange, dernière date)
 - [ ] Le lexique n'a pas de terme vide
 - [ ] Le pied de page dit « site citoyen indépendant, aucun caractère officiel »
-- [ ] La légende « Montréal commence… » (api/_infolettre.js, NOTES_INFOLETTRE) est retirée dès que le premier compte rendu du mois est publié (`npm run infolettre -- --mois=2026-09 --publier`) — elle s'affiche sur l'accueil et dans Mes dossiers
+- [ ] La légende « Montréal commence… » (api/_infolettre.js, NOTES_INFOLETTRE) est retirée dès que le premier compte rendu du mois est publié — elle s'affiche sur l'accueil et dans Mes dossiers. En attente : la Ville publie ses procès-verbaux environ deux mois après la séance, le plus récent en ligne est celui du 4 août 2026, et septembre est donc encore vide (0 dossier). Rien ne part tant que les séances de septembre ne sont pas publiées.
 
 ## 6. Publier (à faire d'un coup, une fois tout coché)
 
