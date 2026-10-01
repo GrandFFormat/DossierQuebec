@@ -1,62 +1,682 @@
 {
- "generatedAt": "2026-09-27T18:45:06.860Z",
+ "generatedAt": "2026-10-01T16:36:29.110Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
  "parametres": {
   "annee": "2026",
-  "max": 12,
+  "max": 40,
   "batch": false,
-  "depuis": null,
+  "depuis": "2026-08-02",
   "plafond": 120
  },
- "nombre": 518,
- "genereCetteFois": 2,
+ "nombre": 562,
+ "genereCetteFois": 44,
  "echecs": [],
  "sansTexte": [
   {
    "id": "DEI-2026-012",
    "raison": "texte du sommaire trop court (156 caractères)",
    "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DEI-2026-012-R-1.pdf"
-  },
-  {
-   "id": "ENV-2026-014",
-   "raison": "aucun texte extrait du PDF du sommaire",
-   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/ENV-2026-014.pdf"
-  },
-  {
-   "id": "URBA-SAT-2026-071",
-   "raison": "aucun texte extrait du PDF du sommaire",
-   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-071.pdf"
-  },
-  {
-   "id": "URBA-SAT-2026-067",
-   "raison": "aucun texte extrait du PDF du sommaire",
-   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-067.pdf"
-  },
-  {
-   "id": "URBA-SAT-2026-033",
-   "raison": "texte du sommaire trop court (160 caractères)",
-   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/URBA-SAT-2026-033.pdf"
-  },
-  {
-   "id": "URBA-SAT-2026-027",
-   "raison": "texte du sommaire trop court (154 caractères)",
-   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/URBA-SAT-2026-027.pdf"
-  },
-  {
-   "id": "URBA-SAT-2026-002",
-   "raison": "texte du sommaire trop court (155 caractères)",
-   "pdf": "https://www.ville.levis.qc.ca/fileadmin/documents/fpd/2026/URBA-SAT-2026-002.pdf"
   }
  ],
  "cout": {
   "devise": "USD",
-  "montant": 0.0556,
-  "jetonsEntree": 7132,
-  "jetonsSortie": 799
+  "montant": 1.6572,
+  "jetonsEntree": 234804,
+  "jetonsSortie": 19327
  },
  "resumes": [
+  {
+   "id": "GRE-2026-035",
+   "numero": "GRE-2026-035",
+   "resolution": "CV3699",
+   "date": "2026-09-29",
+   "unite": "Greffe",
+   "objet": "Calendriers des séances ordinaires du conseil de la Ville pour les années 2027, 2028 et 2029",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/GRE-2026-035.pdf",
+   "puces": [
+    "La Ville fixe d'avance les dates de ses séances publiques du conseil pour 2027, 2028 et 2029.",
+    "Toutes les séances se tiennent un mardi, de 17 h à 20 h, mais l'heure de fin peut varier selon la longueur des débats.",
+    "Règle générale : deux séances par mois, sauf en janvier, mars, juin, juillet, août et décembre, où il n'y en a qu'une.",
+    "En 2029, octobre et novembre n'ont aussi qu'une séance chacun, à cause de l'élection générale municipale du 4 novembre 2029.",
+    "Le conseil doit adopter ces calendriers à sa séance du 29 septembre 2026.",
+    "La décision n'entraîne aucune dépense."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:07.256Z",
+   "jetons": {
+    "entree": 4515,
+    "sortie": 345
+   }
+  },
+  {
+   "id": "GRE-2026-037",
+   "numero": "GRE-2026-037",
+   "resolution": "CV3700",
+   "date": "2026-09-29",
+   "unite": "Greffe",
+   "objet": "Calendriers des séances ordinaires du comité exécutif pour les années 2027, 2028 et 2029",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/GRE-2026-037.pdf",
+   "puces": [
+    "La Ville fixe à l'avance les dates des séances ordinaires du comité exécutif pour 2027, 2028 et 2029 : 55 séances au total.",
+    "Les séances ont lieu le mardi, de 9 h 30 à 15 h, à raison de deux par mois, sauf en janvier, mars, juin, juillet, août et décembre où il n'y en a qu'une.",
+    "En 2029, le calendrier est ajusté en raison de l'élection générale municipale du 4 novembre : une séance le lundi 1er octobre et une seule en novembre, le 20.",
+    "Le maire peut modifier ou annuler une séance ordinaire selon les affaires à traiter.",
+    "Le conseil de la Ville doit adopter ces calendriers à sa séance du 29 septembre 2026.",
+    "La décision n'entraîne aucun impact financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:07.588Z",
+   "jetons": {
+    "entree": 4753,
+    "sortie": 378
+   }
+  },
+  {
+   "id": "TMD-2026-034",
+   "numero": "TMD-2026-034",
+   "resolution": "CV3701",
+   "date": "2026-09-29",
+   "unite": "Transports et mobilité durable",
+   "objet": "Dépôt des amendements budgétaires et virements de fonds de la Société de transport de Lévis pour la période du 1 avril au 30 juin 2026",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/TMD-2026-034.pdf",
+   "puces": [
+    "La Société de transport de Lévis (STLévis) présente au conseil de la Ville son rapport des virements de fonds faits entre le 1er avril et le 30 juin 2026.",
+    "Les virements totalisent 1 229 $, loin sous la limite de 1 000 000 $ que la Ville a autorisée en janvier 2026.",
+    "Le montant de 1 229 $ a été retiré des contrats de transport adapté pour payer des uniformes.",
+    "Un autre ajustement de 13 050 $ en revenus et en dépenses correspond à une facture payée directement par l'assureur de la STLévis, après qu'un autobus a endommagé un poteau d'Hydro-Québec en décembre dernier.",
+    "Aucun virement n'avait été effectué lors du premier trimestre de 2026.",
+    "La décision n'a aucun impact financier pour la Ville : il s'agit d'une prise d'acte."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 229 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:07.726Z",
+   "jetons": {
+    "entree": 4931,
+    "sortie": 401
+   }
+  },
+  {
+   "id": "GRE-2026-040",
+   "numero": "GRE-2026-040",
+   "resolution": "CV3702",
+   "date": "2026-09-29",
+   "unite": "Greffe",
+   "objet": "Dépôt de l’avis de changement à la déclaration des intérêts pécuniaires d’un membre du conseil de la Ville",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/GRE-2026-040.pdf",
+   "puces": [
+    "Le conseil de la Ville prend acte du dépôt d'un avis de changement à la déclaration des intérêts pécuniaires d'une élue du district 10 (Notre-Dame). Aucune dépense n'est rattachée à ce dépôt."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:04.739Z",
+   "jetons": {
+    "entree": 2858,
+    "sortie": 177
+   }
+  },
+  {
+   "id": "GRE-2026-041",
+   "numero": "GRE-2026-041",
+   "resolution": "CV3703",
+   "date": "2026-09-29",
+   "unite": "Greffe",
+   "objet": "Dépôt du rapport sur la déclaration de participation à la formation obligatoire en matière d’éthique et de déontologie municipale par un membre du personnel d’un cabinet",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/GRE-2026-041.pdf",
+   "puces": [
+    "La Ville dépose au conseil un rapport confirmant qu'un membre du personnel du cabinet Lévis Force 10 a suivi la formation obligatoire en éthique et déontologie municipale; la déclaration a été reçue le 31 août 2026. Aucun impact financier."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:10.907Z",
+   "jetons": {
+    "entree": 2770,
+    "sortie": 188
+   }
+  },
+  {
+   "id": "DEV-2026-047",
+   "numero": "DEV-2026-047",
+   "resolution": "CV3704",
+   "date": "2026-09-29",
+   "unite": "Développement économique et de la promotion",
+   "objet": "Nomination d’un membre du comité d’investissement et de soutien aux entreprises et remerciements",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DEV-2026-047.pdf",
+   "puces": [
+    "La Ville nomme Cédric Lachance au Comité d'investissement et de soutien aux entreprises (CISE), comme représentant de l'économie sociale et du mouvement coopératif.",
+    "Il remplace Alain Marcoux, nommé en mai 2024, qui a démissionné récemment.",
+    "Cédric Lachance est conseiller stratégique en démarrages et reprises collectives à la Coopérative de développement régional du Québec, pour la Capitale-Nationale et la Chaudière-Appalaches.",
+    "Le conseil adopte aussi une motion de remerciements à Alain Marcoux pour son implication au comité.",
+    "Passage au comité exécutif le 22 septembre 2026 et au conseil de la Ville le 29 septembre 2026.",
+    "Aucun impact financier n'est associé à cette décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:12.120Z",
+   "jetons": {
+    "entree": 3018,
+    "sortie": 371
+   }
+  },
+  {
+   "id": "DEV-2026-045",
+   "numero": "DEV-2026-045",
+   "resolution": "CV3705",
+   "date": "2026-09-29",
+   "unite": "Développement économique et de la promotion",
+   "objet": "Approbation du cadre normatif relatif au Programme d’aide d’urgence aux petites et moyennes entreprises sur les tarifs douaniers 2027-2028 et contrat de prêt relatif au Programme d’aide d’urgence aux petites et moyennes entreprises relatif aux tarifs douaniers américains à intervenir avec le ministre de l’Économie, de l’Innovation et de l’Énergie",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DEV-2026-045.pdf",
+   "puces": [
+    "La Ville de Lévis gère un programme de prêts d'urgence du gouvernement du Québec pour les PME touchées par les tarifs douaniers américains.",
+    "Les entreprises admissibles peuvent emprunter jusqu'à 150 000 $, avec 0 % d'intérêt et aucun remboursement du capital pendant les 12 premiers mois.",
+    "Après 12 mois, le taux d'intérêt correspondra au coût des fonds du gouvernement (taux encore à venir); le remboursement s'étale sur un maximum de 60 mois.",
+    "Sont visées les PME exportatrices et leurs fournisseurs avec un chiffre d'affaires entre 250 000 $ et 2 M$, dont au moins 25 % des revenus viennent des exportations vers les États-Unis.",
+    "Lévis pourra utiliser 4 600 000 $ dès la signature du contrat avec le ministre de l'Économie, de l'Innovation et de l'Énergie, puis le solde une fois confirmé.",
+    "Le programme est en vigueur depuis le 22 août 2026 et se termine le 31 mars 2028.",
+    "Les prêts doivent être garantis ou cautionnés, et le Comité d'investissement et de soutien aux entreprises décide qui les obtient."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "4 600 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:13.901Z",
+   "jetons": {
+    "entree": 7033,
+    "sortie": 533
+   }
+  },
+  {
+   "id": "DEV-2026-048",
+   "numero": "DEV-2026-048",
+   "resolution": "CV3706",
+   "date": "2026-09-29",
+   "unite": "Développement économique et de la promotion",
+   "objet": "Entente sectorielle de développement en économie circulaire dans la région de la Chaudière-Appalaches 2026-2030 à intervenir avec le ministre délégué aux Régions, le ministre de l’Économie, de l’innovation et de l’Énergie et autres partenaires",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DEV-2026-048.pdf",
+   "puces": [
+    "La Ville de Lévis signe une entente d'économie circulaire pour la région de la Chaudière-Appalaches, valable jusqu'au 31 mars 2030.",
+    "Elle s'associe aux neuf MRC de la région, au ministère des Affaires municipales et au ministère de l'Économie, de l'Innovation et de l'Énergie.",
+    "Lévis verse 8 500 $ au total : 4 250 $ en 2026 et 4 250 $ en 2027, pris à même le budget existant, sans nouveaux crédits.",
+    "L'entente dispose d'un budget global de 525 000 $ pour 2026-2030; Chaudière-Appalaches Économique gère les fonds.",
+    "Les actions prévues : gouvernance régionale d'ici 2029, analyses de flux de matières, outils de diagnostic, projets pilotes entre entreprises, cohortes d'accompagnement et valorisation de matières organiques.",
+    "La Ville siégerait au comité de gestion de l'entente et pourrait y repositionner son projet Entotech, qui valorise des matières organiques à l'aide d'insectes.",
+    "Dépôt au comité exécutif le 22 septembre 2026, au conseil de la Ville le 29 septembre 2026, signature dans la semaine du 29 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "8 500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:15.737Z",
+   "jetons": {
+    "entree": 7814,
+    "sortie": 538
+   }
+  },
+  {
+   "id": "ENV-2026-015",
+   "numero": "ENV-2026-015",
+   "resolution": "CV3707",
+   "date": "2026-09-29",
+   "unite": "Environnement",
+   "objet": "Avenant à l’entente de collaboration à intervenir avec la Ville de Québec et la Communauté métropolitaine de Québec concernant une étude de vulnérabilité actuelle et anticipée de sources d’eau potable au fleuve Saint-Laurent",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/ENV-2026-015.pdf",
+   "puces": [
+    "Lévis récupère 47 310,33 $ qui dormaient à la Communauté métropolitaine de Québec depuis une étude terminée.",
+    "En 2017, Lévis avait versé 100 000 $ à la CMQuébec pour une étude sur la salinité de l'eau du fleuve près des prises d'eau potable; une partie n'a pas été dépensée.",
+    "L'étude a mesuré la conductivité et les chlorures aux prises d'eau de Sainte-Foy, Saint-Romuald et Lévis–Desjardins et modélisé le déplacement possible de la zone d'eau salée.",
+    "Un avenant signé avec la Ville de Québec et la CMQuébec vient encadrer le sort de l'argent restant : réaffectation à d'autres projets liés à l'eau potable, sinon remboursement aux villes.",
+    "Comme aucun projet n'est prêt à court terme, la somme est remboursée à Lévis et entrera comme revenu en 2026, sans dépense additionnelle.",
+    "Le maire et la greffière sont autorisés à signer l'avenant; passage au comité exécutif le 22 septembre 2026 et au conseil de Ville le 29 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "47 310,33 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:22.298Z",
+   "jetons": {
+    "entree": 7906,
+    "sortie": 502
+   }
+  },
+  {
+   "id": "URBA-CUMB-2026-016",
+   "numero": "URBA-CUMB-2026-016",
+   "resolution": "CV3708",
+   "date": "2026-09-29",
+   "unite": "Urbanisme",
+   "objet": "Engagement de contribution municipale pour la rénovation de l’ensemble immobilier place Pierre-George-Roy (rue Pie-X) et place Renaissance (rue Bossuet) dans le cadre du Programme de rénovation des habitations à loyer modique de la Société d’habitation du Québec",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-CUMB-2026-016.pdf",
+   "puces": [
+    "La Ville s'engage à payer 514 474 $ pour rénover les HLM de la place Pierre-George-Roy (boulevard Pie-X) et de la place Renaissance (rue Bossuet).",
+    "Les travaux sont évalués à 5 144 743 $ : la Ville paie 10 % et la Société d'habitation du Québec verse le reste, soit 4 630 269 $.",
+    "Les logements visés sont situés aux 5420 à 5540, rue Bossuet et aux 12 à 26, boulevard Pie-X. Les travaux doivent débuter et se terminer en 2026.",
+    "La contribution de la Ville pourra changer selon le coût réel des travaux.",
+    "L'engagement est conditionnel à une entente entre la Ville, la SHQ et l'Office municipal d'habitation de Lévis, et à un règlement d'emprunt approuvé par le ministère.",
+    "Une autre phase de rénovation du même ensemble sera présentée plus tard au conseil.",
+    "Au total, l'Office a ciblé 12 projets de rénovation (85,8 M$ de travaux), ce qui représenterait environ 8,6 M$ pour la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "514 474 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:23.038Z",
+   "jetons": {
+    "entree": 7544,
+    "sortie": 493
+   }
+  },
+  {
+   "id": "URBA-CUMB-2026-017",
+   "numero": "URBA-CUMB-2026-017",
+   "resolution": "CV3709",
+   "date": "2026-09-29",
+   "unite": "Urbanisme",
+   "objet": "Intention de contribution municipale pour la rénovation de l’ensemble immobilier place Pierre-George-Roy (rue Pie-X) et place Renaissance (rue Bossuet) dans le cadre du Programme de rénovation des habitations à loyer modique de la Société d’habitation du Québec",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-CUMB-2026-017.pdf",
+   "puces": [
+    "La Ville annonce son intention de payer 10 % des travaux de rénovation de deux ensembles de HLM : place Pierre-George-Roy (rue Pie-X) et place Renaissance (rue Bossuet).",
+    "Les travaux sont estimés à 30 351 285 $, dont une contribution municipale estimée à 3 035 129 $; le reste vient de la Société d'habitation du Québec.",
+    "Aucun argent n'est versé maintenant : cette étape sert à permettre à l'Office municipal d'habitation de Lévis d'obtenir son allocation de démarrage et de préparer l'appel d'offres public.",
+    "La Ville s'engage à adopter plus tard une résolution confirmant sa contribution, et le montant final variera selon les coûts réels des travaux.",
+    "Conditions : une convention avec la SHQ et l'OMH, un règlement d'emprunt approuvé par le ministère, et une estimation actualisée qui ne dépasse pas de plus de 20 % celle d'aujourd'hui.",
+    "Calendrier prévu : appel d'offres en décembre 2026, travaux de 2027 à 2030.",
+    "À l'échelle de Lévis, 12 projets de rénovation de HLM sont identifiés, soit environ 85,8 M$ de travaux et 8,6 M$ pour la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 035 129 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:27.718Z",
+   "jetons": {
+    "entree": 7263,
+    "sortie": 551
+   }
+  },
+  {
+   "id": "TMD-2026-033",
+   "numero": "TMD-2026-033",
+   "resolution": "CV3710",
+   "date": "2026-09-29",
+   "unite": "Transports et mobilité durable",
+   "objet": "Approbation de la résolution numéro 2026-096 de la Société de transport de Lévis relative à la désignation d’inspectrices et d’inspecteurs",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/TMD-2026-033.pdf",
+   "puces": [
+    "La Ville approuve la nouvelle liste des inspecteurs de la Société de transport de Lévis (STLévis), qui passe de 21 à 13 personnes désignées.",
+    "Ces inspecteurs font appliquer deux règlements de la STLévis : celui sur les titres de transport (134) et celui sur la sécurité et le comportement des passagers dans les autobus et les immeubles (192).",
+    "Seuls les inspecteurs peuvent remettre des constats d'infraction; les amendes prévues vont de 50 à 1 000 $.",
+    "Le document précise qu'aucune amende n'a été émise depuis l'entrée en vigueur de ces règlements, les interventions misant sur le renforcement positif.",
+    "Les policiers du Service de police de Lévis agissent automatiquement comme inspecteurs de la STLévis.",
+    "Le directeur général de la STLévis remettra à chaque personne désignée un certificat attestant son statut d'inspecteur.",
+    "Le dossier passe au comité exécutif le 22 septembre 2026 et au conseil de la Ville le 29 septembre 2026, sans impact financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:21.614Z",
+   "jetons": {
+    "entree": 6643,
+    "sortie": 472
+   }
+  },
+  {
+   "id": "APGI-GI-2026-007",
+   "numero": "APGI-GI-2026-007",
+   "resolution": "CV3711",
+   "date": "2026-09-29",
+   "unite": "Approvisionnement et gestion immobilière",
+   "objet": "Abrogation de la résolution CV-2024-03-23 « Financement de la dépense relative à l’acquisition du lot 3 574 042 du cadastre du Québec (chemin des Iles, enviroparc de l’Auberivière) »",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/APGI-GI-2026-007.pdf",
+   "puces": [
+    "La Ville annule une décision de mai 2024 qui prévoyait payer jusqu'à 18 123 $ pour acquérir un terrain du chemin des Îles, à l'enviroparc de l'Auberivière (secteur Lévis).",
+    "Après vérification, la Ville est déjà propriétaire de ce terrain : aucun paiement n'est nécessaire.",
+    "Les 18 123 $ retournent à la réserve financière pour le développement du territoire (économique, environnemental, patrimonial et historique).",
+    "Le dossier passe au comité exécutif le 22 septembre 2026, puis au conseil de la Ville le 29 septembre 2026.",
+    "Aucun nouvel impact financier n'est prévu."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "18 123 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:32.321Z",
+   "jetons": {
+    "entree": 3458,
+    "sortie": 339
+   }
+  },
+  {
+   "id": "GCH-2026-030",
+   "numero": "GCH-2026-030",
+   "resolution": "CV3712",
+   "date": "2026-09-29",
+   "unite": "Gestion du capital humain",
+   "objet": "Nomination d’un Directeur adjoint aux opérations par intérim à la Direction du service de police",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/GCH-2026-030.pdf",
+   "puces": [
+    "La Ville nomme Martin Savoie directeur adjoint aux opérations par intérim au service de police, à partir du 2 octobre 2026.",
+    "Il occupe actuellement le poste d'inspecteur à la division des enquêtes criminelles.",
+    "Le poste se libère parce que le directeur adjoint aux opérations prend sa retraite en octobre.",
+    "L'intérim dure jusqu'à ce que le poste soit comblé, et au plus tard jusqu'au 28 mai 2027.",
+    "Comme le remplacement dépasse 30 jours, le conseil de la Ville doit l'approuver.",
+    "Le document indique qu'il n'y a aucun impact financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:31.846Z",
+   "jetons": {
+    "entree": 2904,
+    "sortie": 321
+   }
+  },
+  {
+   "id": "DVC-BIB-2026-005",
+   "numero": "DVC-BIB-2026-005",
+   "resolution": "CV3713",
+   "date": "2026-09-29",
+   "unite": "Vie communautaire",
+   "objet": "Demande de subvention au ministère de la Culture et des Communications dans le cadre du Programme Aide aux immobilisations (volet 2.1) relatif au maintien des équipements non intégrés",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DVC-BIB-2026-005.pdf",
+   "puces": [
+    "La Ville de Lévis demande une subvention au ministère de la Culture et des Communications pour renouveler les équipements RFID de ses bibliothèques.",
+    "Le projet prévoit le remplacement d'un portique antivol et l'achat d'une borne de prêt libre-service à la bibliothèque La Clé, ainsi que le remplacement d'une borne à la bibliothèque Anne-Marie-Filteau.",
+    "Le document mentionne aussi l'ajout d'une nouvelle borne à la bibliothèque La Pintellect, qui reçoit des groupes scolaires chaque semaine.",
+    "Le coût total du projet est évalué à 50 978,42 $, partagé à parts égales : environ 25 489,21 $ du ministère et 25 489,21 $ de la Ville.",
+    "La demande doit être déposée au plus tard le 1er octobre 2026; le montant accordé sera confirmé par lettre en 2027.",
+    "Les travaux sont prévus entre le 15 janvier et le 1er mars 2027.",
+    "Le maire et la greffière seraient autorisés à signer les documents, dont les conditions d'octroi de l'aide."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "50 978,42 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:34.897Z",
+   "jetons": {
+    "entree": 7737,
+    "sortie": 489
+   }
+  },
+  {
+   "id": "DVC-DIR-2026-011",
+   "numero": "DVC-DIR-2026-011",
+   "resolution": "CV3714",
+   "date": "2026-09-29",
+   "unite": "Vie communautaire",
+   "objet": "Reconnaissance d’organismes",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DVC-DIR-2026-011.pdf",
+   "puces": [
+    "La Ville retire sa reconnaissance à quatre organismes, ce qui met fin au lien officiel qui leur donnait accès au soutien municipal.",
+    "Trois d'entre eux ont cessé leurs activités : le Centre d'information et de référence 211 (fusionné avec le Centre de référence du Grand Montréal le 1er juillet 2026), la Corporation du patrimoine et du tourisme religieux de Lévis et la Maison de la musique Bernard-Bonnier, toutes deux dissoutes au Registraire des entreprises.",
+    "Le Club Air Modéliste, lui, a demandé lui-même son retrait : il a avisé la Ville qu'il ne voulait plus être reconnu et n'a pas renouvelé son dossier pour 2026.",
+    "Le comité exécutif doit recommander la décision le 22 septembre 2026, et le conseil de la Ville doit l'approuver le 29 septembre 2026.",
+    "Aucune dépense ni aucun revenu n'est associé à cette décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:32.984Z",
+   "jetons": {
+    "entree": 6230,
+    "sortie": 440
+   }
+  },
+  {
+   "id": "DVC-DSC-2026-018",
+   "numero": "DVC-DSC-2026-018",
+   "resolution": "CV3715",
+   "date": "2026-09-29",
+   "unite": "Vie communautaire",
+   "objet": "Convention d’aide financière 2026-2027 à intervenir avec l’Association régionale de loisir pour personnes handicapées Chaudière-Appalaches",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DVC-DSC-2026-018.pdf",
+   "puces": [
+    "La Ville de Lévis accepte une subvention de 25 000 $ pour l'accompagnement d'enfants handicapés ou ayant des besoins particuliers au camp de jour.",
+    "La somme vient du ministère de l'Éducation, versée par l'Association régionale de loisirs pour personnes handicapées – Chaudière-Appalaches.",
+    "C'est 10 000 $ de plus que les 15 000 $ prévus au budget initial de 2026.",
+    "L'argent sert à payer une partie du personnel accompagnateur et à acheter du matériel spécialisé.",
+    "En 2026, 114 enfants ont participé au camp de jour avec un accompagnement individualisé.",
+    "Le maire est autorisé à signer la convention d'aide financière 2026-2027.",
+    "Le comité exécutif devait se prononcer le 22 septembre 2026 et le conseil de la Ville, le 29 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "25 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:39.094Z",
+   "jetons": {
+    "entree": 3505,
+    "sortie": 406
+   }
+  },
+  {
+   "id": "DVC-DSC-2026-019",
+   "numero": "DVC-DSC-2026-019",
+   "resolution": "CV3716",
+   "date": "2026-09-29",
+   "unite": "Vie communautaire",
+   "objet": "Entente de collaboration et de versement d’une aide financière relative au service de travail de milieu à intervenir avec Centre aide et prévention jeunesse",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DVC-DSC-2026-019.pdf",
+   "puces": [
+    "La Ville verse 14 730 $ au Centre aide et prévention jeunesse pour poursuivre un service de travail de milieu jusqu'en décembre 2026.",
+    "Les intervenants travaillent dans le secteur autour de la ressource Le 55 Accueil Inconditionnel, pour réduire les tensions entre les usagers, les citoyens et les commerçants.",
+    "L'entente couvre du 1er septembre au 31 décembre 2026, sans possibilité de renouvellement.",
+    "L'argent vient du Fonds fédéral pour bâtir des communautés plus sécuritaires, dans le cadre d'une subvention de 1 111 514 $ accordée à Lévis par le ministère de la Sécurité publique.",
+    "L'organisme reçoit 80 % du montant dans les 30 jours suivant la signature, et le reste après la remise de son bilan annuel.",
+    "L'organisme doit rembourser toute somme non utilisée ou dépensée à d'autres fins, et conserver ses pièces justificatives cinq ans.",
+    "Le versement de la Ville dépend du fait que Québec lui verse bien les sommes prévues."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "14 730 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:42.355Z",
+   "jetons": {
+    "entree": 7393,
+    "sortie": 484
+   }
+  },
+  {
+   "id": "DEI-2026-013",
+   "numero": "DEI-2026-013",
+   "resolution": "CV3717",
+   "date": "2026-09-29",
+   "unite": "Entretien des infrastructures",
+   "objet": "Demande d’aide financière auprès du ministère des Transports et de la Mobilité durable relative à l’entretien de la Route verte et de ses embranchements dans le cadre du Programme d’aide aux infrastructures de transport actif Véloce III (volet 3), engagement de la Ville et désignation d’une représentante",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DEI-2026-013.pdf",
+   "puces": [
+    "La Ville demande au ministère des Transports et de la Mobilité durable jusqu'à 113 872 $ pour entretenir la Route verte et ses embranchements à Lévis en 2027.",
+    "L'argent viendrait du programme Véloce III (volet 3) et servirait uniquement à l'entretien de 87,393 km de voies cyclables sur le territoire.",
+    "Pour toucher le montant maximal, la Ville doit dépenser au moins 227 744 $ en entretien; le projet est estimé à 414 004 $ taxes incluses.",
+    "Les dépenses couvertes incluent le salaire des employés, la tonte, le lignage, le pavage, les toilettes chimiques, les blocs sanitaires et l'achat de bollards.",
+    "La Ville recevrait 80 % de la subvention en 2027 et le reste (20 %) en 2028, après l'acceptation du rapport des travaux par le Ministère.",
+    "Annie Gaudreault, directrice générale adjointe, est désignée pour signer les documents avec le Ministère.",
+    "Les documents doivent être envoyés au Ministère au plus tard le 9 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "113 872 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:40.396Z",
+   "jetons": {
+    "entree": 7438,
+    "sortie": 485
+   }
+  },
+  {
+   "id": "DEI-2026-014",
+   "numero": "DEI-2026-014",
+   "resolution": "CV3718",
+   "date": "2026-09-29",
+   "unite": "Entretien des infrastructures",
+   "objet": "Contrat concernant le déneigement, le déglaçage, le balayage et le nettoyage d’une partie de la route 132, de la route Monseigneur-Bourget et du chemin des Iles (arrondissement de Desjardins), ainsi que des routes 116, 132 et 171 (arrondissement des Chutes-de-la-Chaudière-Ouest) à intervenir avec le ministère des Transports et de la Mobilité durable",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DEI-2026-014.pdf",
+   "puces": [
+    "La Ville renouvelle son entente avec le ministère des Transports et de la Mobilité durable pour déneiger, déglacer, balayer et nettoyer des routes provinciales sur son territoire.",
+    "Le Ministère versera 576 300 $ à la Ville par saison hivernale, pendant 5 ans, soit 2 881 500 $ au total.",
+    "De ce montant, 525 000 $ par année vont à l'entretien hivernal et 51 300 $ au balayage; les sommes des années 2 à 5 seront indexées selon l'indice des prix à la consommation.",
+    "Les routes visées : une partie de la route 132, la route Monseigneur-Bourget et le chemin des Iles (arrondissement de Desjardins), ainsi que les routes 116, 132 et 171 (arrondissement des Chutes-de-la-Chaudière-Ouest).",
+    "La saison d'entretien hivernal s'étend du 19 octobre au 28 avril inclusivement, chaque année.",
+    "Le circuit de déneigement passe de 50,80 km en 2022 à 25,41 km, ce qui explique la baisse du montant du contrat."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "576 300 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:41.198Z",
+   "jetons": {
+    "entree": 3844,
+    "sortie": 483
+   }
+  },
+  {
+   "id": "GCH-2026-026",
+   "numero": "GCH-2026-026",
+   "resolution": "CV3719",
+   "date": "2026-09-29",
+   "unite": "Gestion du capital humain",
+   "objet": "Ajustement structurel à la Direction des communications et de l’interaction citoyenne",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/GCH-2026-026.pdf",
+   "puces": [
+    "La Ville veut créer un poste de coordonnateur aux communications à la Direction des communications et de l'interaction citoyenne.",
+    "Ce coordonnateur encadrerait les conseillers en communication et gérerait les opérations quotidiennes.",
+    "Le chef de service, qui supervise plus de 16 professionnels, pourrait ainsi se concentrer sur les dossiers stratégiques.",
+    "La directrice des communications s'occupera de la coordination de la mise en candidature des Jeux du Québec.",
+    "Le poste coûterait 24 768 $ en 2026 et 148 606 $ en 2027, financé par l'excédent réservé aux Jeux du Québec.",
+    "Le comité exécutif du 22 septembre 2026 doit recommander la décision au conseil de la Ville du 29 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "148 606$",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:46.928Z",
+   "jetons": {
+    "entree": 2931,
+    "sortie": 372
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-038",
+   "numero": "URBA-SAT-2026-038",
+   "resolution": "CV3723",
+   "date": "2026-09-29",
+   "unite": "Urbanisme",
+   "objet": "Adoption du Règlement RV3620 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (agrandissement de la zone A1805 à même une partie de la zone H1974, avenue Saint-Augustin, secteur Sainte-Hélène-de-Breakeyville)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-038.pdf",
+   "puces": [
+    "La Ville adopte un règlement qui agrandit la zone agricole A1805 à même une partie de la zone résidentielle H1974, près de l'avenue Saint-Augustin, dans le secteur Sainte-Hélène-de-Breakeyville.",
+    "Le but est d'aligner la limite de la zone H1974 sur celle de la zone verte définie par la Loi sur la protection du territoire et des activités agricoles.",
+    "Concrètement, l'interdiction d'exploiter un « établissement de résidence principale » (location touristique de sa résidence principale, sans repas) est retirée dans cette partie de zone.",
+    "Une assemblée publique de consultation a eu lieu le 2 juillet 2026 dans l'arrondissement des Chutes-de-la-Chaudière-Est; aucun commentaire n'a été formulé.",
+    "Les personnes habiles à voter devront approuver la modification : un registre sera tenu dans la zone H1974 et les zones contiguës (A1805, I1969, H1972, R1975, R1978, H1979).",
+    "Si assez de signatures sont recueillies au registre, le conseil pourra tenir un référendum.",
+    "Le document indique qu'il n'y a aucun impact financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:49.774Z",
+   "jetons": {
+    "entree": 6063,
+    "sortie": 504
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-084",
+   "numero": "URBA-SAT-2026-084",
+   "resolution": "CV3724",
+   "date": "2026-09-29",
+   "unite": "Urbanisme",
+   "objet": "Adoption du Règlement RV3621 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (agrandissement de la zone H1974 à même une partie de la zone A1805, avenue Saint-Augustin, secteur Sainte-Hélène- de-Breakeyville)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-084.pdf",
+   "puces": [
+    "La Ville agrandit la zone résidentielle H1974 en y intégrant une partie de la zone agricole A1805, près de l'avenue Saint-Augustin, dans le secteur Sainte-Hélène-de-Breakeyville.",
+    "Le but est de faire coïncider la limite de la zone H1974 avec celle de la zone verte définie par la Loi sur la protection du territoire et des activités agricoles.",
+    "Concrètement, la location touristique de sa résidence principale (type une seule réservation, sans repas servi) devient interdite dans la partie de la zone A1805 visée.",
+    "Une consultation publique a eu lieu le 2 juillet 2026 dans l'arrondissement des Chutes-de-la-Chaudière-Est; aucun commentaire n'a été formulé.",
+    "Le règlement doit ensuite être approuvé par les personnes habiles à voter : un registre sera tenu dans la zone A1805 et les zones contiguës, avec possibilité de référendum si assez de signatures sont recueillies.",
+    "Le dossier ne prévoit aucun impact financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:47.889Z",
+   "jetons": {
+    "entree": 5573,
+    "sortie": 460
+   }
+  },
+  {
+   "id": "URBA-CUMB-2026-003",
+   "numero": "URBA-CUMB-2026-003",
+   "resolution": "CV3725",
+   "date": "2026-09-29",
+   "unite": "Urbanisme",
+   "objet": "Avis de motion du Règlement RV3628 décrétant un emprunt pour financer les dépenses relatives à la contribution municipale requise pour les travaux réalisés par l’Office municipal d’habitation de Lévis dans le cadre du Programme de rénovation des habitations à loyer modique de la Société d’habitation du Québec et dépôt du projet de règlement",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-CUMB-2026-003.pdf",
+   "puces": [
+    "La Ville veut emprunter jusqu'à 10 580 000 $, sur 10 ans, pour payer sa part des rénovations des habitations à loyer modique (HLM) de Lévis.",
+    "L'argent servira à couvrir la contribution municipale de 8,7 M$, à laquelle s'ajoutent imprévus, taxes et frais de financement.",
+    "Les travaux sont réalisés par l'Office municipal d'habitation de Lévis dans le cadre d'un programme de la Société d'habitation du Québec, qui paie 90 % des dépenses admissibles et la Ville 10 %.",
+    "L'Office a ciblé 12 projets de rénovation touchant 10 ensembles immobiliers, pour environ 87,2 M$ de travaux. Le parc compte 21 ensembles, 36 bâtiments et 899 logements.",
+    "Sans la participation de la Ville, la Société d'habitation du Québec ne verse pas sa part et les travaux ne se font pas.",
+    "Les dépenses sont réparties de 2027 à 2030 : 2,45 M$, 1,88 M$, 4,79 M$ et 1,46 M$.",
+    "Étapes prévues : avis de motion le 25 août 2026, adoption le 15 septembre 2026, puis approbation des personnes habiles à voter de toute la ville et du ministère."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "10 580 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:49.855Z",
+   "jetons": {
+    "entree": 7714,
+    "sortie": 555
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-100",
+   "numero": "URBA-SAT-2026-100",
+   "resolution": "CV3726",
+   "date": "2026-09-29",
+   "unite": "Urbanisme",
+   "objet": "Avis de motion du Règlement RV3633 modifiant le Règlement RV-2011-11-23 sur le zonage et le lotissement (usages, constructions et équipements temporaires, zones M2160 et P2158, rue Saint-Laurent, secteur Lévis) et dépôt du projet de règlement",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-100.pdf",
+   "puces": [
+    "La Ville amorce une modification du règlement de zonage pour permettre des usages, activités, constructions et équipements temporaires dans les zones M2160 et P2158, en bordure de la rue Saint-Laurent, dans le Vieux-Lévis (secteur de la Traverse).",
+    "Les règles actuelles empêchent ces installations; le changement vise entre autres une vitrine de produits locaux et régionaux dans l'ancienne gare intermodale au 5995, rue Saint-Laurent, et un pôle commercial éphémère sur un terrain municipal du secteur.",
+    "Les installations temporaires (kiosques, chapiteaux, scènes, gradins, roulottes, installations sanitaires, etc.) seraient permises même sans bâtiment principal sur le terrain.",
+    "Les normes de hauteur, de superficie et de nombre de constructions accessoires ne s'appliqueraient pas, à condition que les installations restent en place seulement pendant l'activité, le montage et le démontage, ou en cas de reprise dans les 8 mois.",
+    "Une distance minimale de 30 cm devra être gardée entre toute construction temporaire et le trottoir ou le pavage de la rue, et le nombre de cases de stationnement requis pour les autres usages devra être maintenu.",
+    "La Ville prévoit confier ces projets à un ou plusieurs organismes ou entreprises et pourra imposer des conditions plus strictes dans les ententes (affichage, type d'installation, durée).",
+    "Prochaines étapes : adoption du projet de règlement, assemblée publique de consultation dans l'arrondissement de Desjardins, second projet, demande d'approbation référendaire, puis adoption finale."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:56.822Z",
+   "jetons": {
+    "entree": 7322,
+    "sortie": 668
+   }
+  },
   {
    "id": "FIN-2026-040",
    "numero": "FIN-2026-040",
@@ -926,6 +1546,505 @@
    "jetons": {
     "entree": 2642,
     "sortie": 382
+   }
+  },
+  {
+   "id": "DG-2026-033",
+   "numero": "DG-2026-033",
+   "resolution": "CE3333",
+   "date": "2026-09-08",
+   "unite": "Direction générale",
+   "objet": "Dépôt du procès-verbal de la réunion de la commission des finances et de l’administration tenue le 27 juillet 2026",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DG-2026-033.pdf",
+   "puces": [
+    "Le conseil de la Ville prend simplement acte du dépôt du procès-verbal de la réunion du 27 juillet 2026 de la Commission des finances et de l'administration; aucune décision ni dépense n'en découle.",
+    "Lors de cette réunion, le directeur des finances a présenté une première version du budget 2027, des projections, le calendrier d'adoption du budget et la politique budgétaire.",
+    "Les membres envisagent une séance extraordinaire le 9 novembre 2026 pour préparer la recommandation du budget 2027, à confirmer en septembre ou octobre.",
+    "Les membres ont aussi discuté du calendrier d'adoption du programme quinquennal d'immobilisations (PQI) et d'un ajustement à la Direction de la gestion du capital humain.",
+    "Ils ont demandé à l'administration la politique interne sur le remboursement des frais de repas et de déplacement."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:55.203Z",
+   "jetons": {
+    "entree": 4233,
+    "sortie": 398
+   }
+  },
+  {
+   "id": "DG-2026-040",
+   "numero": "DG-2026-040",
+   "resolution": "CE3334",
+   "date": "2026-09-08",
+   "unite": "Direction générale",
+   "objet": "Dépôt du procès-verbal de la réunion de la commission de l’eau et de l’environnement tenue le 10 juillet 2026",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DG-2026-040.pdf",
+   "puces": [
+    "La Ville dépose le procès-verbal de la réunion du 10 juillet 2026 de la Commission de l'eau et de l'environnement; le conseil est invité à en prendre acte le 15 septembre 2026.",
+    "La commission a demandé à l'unanimité de recevoir un suivi tous les trois mois sur les surverses et les dérivations des stations de traitement des eaux usées.",
+    "Les membres demandent des scénarios de tarification graduelle et modulée pour la collecte des matières résiduelles, avec de la sensibilisation et de la communication.",
+    "Ils demandent aussi d'évaluer la possibilité d'utiliser les revenus de cette tarification pour des projets de matières résiduelles, dont l'amélioration des écocentres.",
+    "Une présentation sur la démarche d'adaptation du Plan climat a eu lieu; l'analyse des risques sera présentée à l'automne.",
+    "Le CRECA propose un événement de mobilisation sur la réduction des GES en Chaudière-Appalaches; une présentation pourrait avoir lieu à l'automne.",
+    "Pour une participation financière à la chaire de recherche CRAUM, les membres réclament des précisions avant l'envoi du dossier au comité exécutif et au conseil."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:58.106Z",
+   "jetons": {
+    "entree": 4406,
+    "sortie": 517
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-098",
+   "numero": "URBA-SAT-2026-098",
+   "resolution": "CE3336",
+   "date": "2026-09-08",
+   "unite": "Urbanisme",
+   "objet": "Dépôt du rapport de la réunion du comité consultatif agricole tenue le 20 mai 2026",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-098.pdf",
+   "puces": [
+    "Le comité exécutif prend acte du rapport de la réunion du comité consultatif agricole tenue le 20 mai 2026.",
+    "À cette réunion, le comité a examiné une demande d'hébergement de travailleurs agricoles sur le chemin Lambert, dans le secteur Saint-Nicolas.",
+    "Il a aussi examiné une demande de vente et d'utilisation commerciale de trois terrains du chemin des Couture, dans le secteur Pintendre.",
+    "Ces demandes visent des autorisations à obtenir de la Commission de protection du territoire agricole du Québec.",
+    "Aucune décision n'est prise ici : chaque dossier fera l'objet d'un sommaire décisionnel distinct.",
+    "Le document n'entraîne aucune dépense."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:35:54.377Z",
+   "jetons": {
+    "entree": 3059,
+    "sortie": 355
+   }
+  },
+  {
+   "id": "FIN-2026-039",
+   "numero": "FIN-2026-039",
+   "resolution": "CE3337",
+   "date": "2026-09-08",
+   "unite": "Finances et trésorerie",
+   "objet": "Dépôt des listes de déboursés pour la période du 1 au 31 mai 2026",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/FIN-2026-039.pdf",
+   "puces": [
+    "Le trésorier dépose au comité exécutif la liste des déboursés de la Ville pour la période du 1er au 31 mai 2026.",
+    "Le total des déboursés inscrits pour cette période s'élève à 18 792 413,88 $.",
+    "La liste a déjà été déposée à la commission des finances et de l'administration le 29 juin 2026.",
+    "Le comité exécutif est invité à en prendre acte : aucune nouvelle dépense n'est autorisée par ce dépôt."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": "18 792 413,88 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:04.957Z",
+   "jetons": {
+    "entree": 8490,
+    "sortie": 265
+   }
+  },
+  {
+   "id": "FIN-2026-042",
+   "numero": "FIN-2026-042",
+   "resolution": "CE3340",
+   "date": "2026-09-08",
+   "unite": "Finances et trésorerie",
+   "objet": "Dépôt des listes des déboursés pour la période du 1 juin au 31 juillet 2026",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/FIN-2026-042.pdf",
+   "puces": [
+    "Le trésorier dépose au comité exécutif la liste des sommes payées par la Ville entre le 1er juin et le 31 juillet 2026.",
+    "Les déboursés totalisent 64 415 047,58 $ : 33 731 709,84 $ en juin et 30 683 337,74 $ en juillet.",
+    "Le comité exécutif est invité à en prendre acte, à titre d'information et de reddition de comptes. Aucune nouvelle dépense n'est autorisée ici.",
+    "Ces listes ont déjà été déposées à la commission des finances et de l'administration le 17 août 2026."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": "64 415 047,58 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:04.136Z",
+   "jetons": {
+    "entree": 8561,
+    "sortie": 302
+   }
+  },
+  {
+   "id": "FIN-2026-044",
+   "numero": "FIN-2026-044",
+   "resolution": "CE3342",
+   "date": "2026-09-08",
+   "unite": "Finances et trésorerie",
+   "objet": "Dépôt de la liste des contrats accordés relativement à tout financement par émission d’obligations ou par billets pour 2026",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/FIN-2026-044.pdf",
+   "puces": [
+    "La Ville dépose au comité exécutif la liste des emprunts par obligations qu'elle a contractés en 2026, à titre d'information.",
+    "Émission du 25 février 2026 : 31 415 000 $ auprès de Financière Banque Nationale inc., à un taux réel de 3,7206 %.",
+    "Émission du 26 mai 2026 : 24 129 000 $ auprès de Valeurs mobilières Desjardins inc., à 4,0382 %.",
+    "Émission du 25 août 2026 : 23 000 000 $ auprès de RBC Dominion Valeurs Mobilières inc., à 4,1541 %.",
+    "Chaque émission combine du nouveau financement et du refinancement de dettes existantes.",
+    "Le trésorier a accordé ces contrats en vertu d'une délégation de pouvoirs; la liste est déposée chaque trimestre."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:03.762Z",
+   "jetons": {
+    "entree": 3283,
+    "sortie": 388
+   }
+  },
+  {
+   "id": "APGI-APP-2026-089",
+   "numero": "APGI-APP-2026-089",
+   "resolution": "CE3346",
+   "date": "2026-09-08",
+   "unite": "Approvisionnement et gestion immobilière",
+   "objet": "Option de renouvellement du contrat relatif aux services professionnels pour la réalisation d’analyses d’échantillons de sols, d’eau et de matériaux pour divers besoins municipaux",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/APGI-APP-2026-089.pdf",
+   "puces": [
+    "La Ville renouvelle pour un an son contrat avec Bureau Veritas Canada inc. pour l'analyse d'échantillons de sols, d'eau et de matériaux.",
+    "Le renouvellement couvre du 1er janvier au 31 décembre 2027.",
+    "La dépense estimée est de 445 139,32 $ avant TPS et TVQ, plus l'indexation prévue au contrat.",
+    "Avec les taxes nettes, le coût inscrit au budget est de 467 340,64 $, payé à même le budget de fonctionnement.",
+    "Il s'agit de la deuxième et dernière option de renouvellement du contrat attribué en octobre 2023 à la suite de l'appel d'offres 2023-55-81.",
+    "La direction qui utilise ces services se dit satisfaite de l'entreprise; le comité exécutif doit trancher à sa séance du 8 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "445 139,32 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:04.381Z",
+   "jetons": {
+    "entree": 3455,
+    "sortie": 519
+   }
+  },
+  {
+   "id": "DEV-2026-044",
+   "numero": "DEV-2026-044",
+   "resolution": "CE3347",
+   "date": "2026-09-08",
+   "unite": "Développement économique et de la promotion",
+   "objet": "Aide financière au Groupe scout de Saint-Étienne, district Rive-Sud/Beauce inc.",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DEV-2026-044.pdf",
+   "puces": [
+    "La Ville verse 6 532 $ au Groupe scout de Saint-Étienne, district Rive-Sud/Beauce inc., une aide non remboursable qui n'a pas à être rendue.",
+    "L'argent sert à rénover le local scout du 90, rue Marois, à Lévis : remplacement des luminaires fluorescents par des DEL et réfection des plafonds et des surfaces touchées.",
+    "Les travaux sont prévus de septembre à décembre 2026.",
+    "Le projet coûte 13 333,41 $ au total; l'aide de la Ville en couvre environ 49 %. S'ajoutent 4 301,41 $ de l'organisme et 2 500 $ de Desjardins.",
+    "L'organisme doit obtenir les permis municipaux requis et respecter la réglementation avant de recevoir l'argent.",
+    "Le groupe scout offre des activités aux jeunes de 7 à 25 ans.",
+    "L'aide provient du Programme Vitalité Territoriale, financé par le Fonds régions et ruralité."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "6 532 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:12.535Z",
+   "jetons": {
+    "entree": 3859,
+    "sortie": 448
+   }
+  },
+  {
+   "id": "DEV-2026-046",
+   "numero": "DEV-2026-046",
+   "resolution": "CE3348",
+   "date": "2026-09-08",
+   "unite": "Développement économique et de la promotion",
+   "objet": "Aide financière à Rose mystique boutique atelier inc.",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DEV-2026-046.pdf",
+   "puces": [
+    "La Ville verse une aide financière d'au plus 20 000 $ à Rose Mystique Boutique Atelier inc., au 227, rue Saint-Joseph, à Lévis.",
+    "L'argent est versé en deux parts de 10 000 $, en 2026 et en 2027, et n'a pas à être remboursé.",
+    "L'aide vient du Programme de revitalisation des quartiers anciens, adopté le 14 juillet 2026, qui couvre jusqu'à 100 % des frais d'occupation et d'adaptation d'un local commercial pour la première année.",
+    "Les secteurs visés par le programme sont le Vieux-Charny, le Vieux-Lauzon, le Vieux-Lévis, le Vieux-Saint-Romuald et le village de Saint-Nicolas.",
+    "Pour être admissible, un commerce doit être neuf, occuper un rez-de-chaussée, détenir un bail de trois ans ou plus (ou être propriétaire-occupant) et être inscrit au Registraire des entreprises du Québec.",
+    "L'entreprise reçoit aussi un accompagnement des conseillers en développement économique de la Ville et doit signer une entente écrite avec celle-ci.",
+    "Le comité exécutif examine le dossier le 22 septembre 2026; les sommes sont déjà prévues au budget."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "20 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:10.932Z",
+   "jetons": {
+    "entree": 4030,
+    "sortie": 549
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-083",
+   "numero": "URBA-SAT-2026-083",
+   "resolution": "CE3352",
+   "date": "2026-09-08",
+   "unite": "Urbanisme",
+   "objet": "Demande d’autorisation 455054 de la Commission de protection du territoire agricole du Québec pour une utilisation à une fin autre que l’agriculture, soit le renouvellement d’une autorisation pour une sablière, son agrandissement, autoriser des activités accessoires ou complémentaires à l'exploitation de la sablière et son remblai sur une partie du lot 2 849 041 du cadastre du Québec (chemin de la Savane, secteur Saint-Étienne-de-Lauzon)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-083.pdf",
+   "puces": [
+    "La Ville recommande à la Commission de protection du territoire agricole du Québec (CPTAQ) d'accepter une demande visant une sablière sur le chemin de la Savane, dans le secteur Saint-Étienne-de-Lauzon.",
+    "La demande couvre le renouvellement de l'autorisation d'exploitation, un agrandissement de 4 194 m², des activités liées à la sablière et le remblayage du site.",
+    "En 2021, la CPTAQ avait autorisé la sablière, mais avait refusé le remblai; la Ville note que la Commission accorde de telles autorisations depuis 2022.",
+    "La Ville juge que le projet respecte sa réglementation d'urbanisme : le terrain est dans une zone d'extraction et le remblai est permis partout sur le territoire.",
+    "Selon le document, le secteur compte déjà plusieurs sablières en exploitation et aucune agriculture active à proximité.",
+    "Le site devra être remblayé et recouvert de sol arable après l'extraction, en vertu du Règlement sur les carrières et sablières.",
+    "La décision finale revient à la CPTAQ; la Ville a 60 jours pour transmettre son avis."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:10.628Z",
+   "jetons": {
+    "entree": 5861,
+    "sortie": 492
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-090",
+   "numero": "URBA-SAT-2026-090",
+   "resolution": "CE3354",
+   "date": "2026-09-08",
+   "unite": "Urbanisme",
+   "objet": "Demande d’autorisation 455785 de la Commission de protection du territoire agricole du Québec pour une utilisation à une fin autre que l’agriculture, soit le renouvellement d’autorisation pour réaliser la réhabilitation agricole d’une ancienne sablière sur les lots 2 059 611 et 2 059 613 du cadastre du Québec (chemin des Sables, secteur Pintendre)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-090.pdf",
+   "puces": [
+    "La Ville recommande à la Commission de protection du territoire agricole du Québec (CPTAQ) d'accepter le renouvellement d'une autorisation de remblai sur le chemin des Sables, dans le secteur Pintendre.",
+    "Le projet vise à remblayer une ancienne sablière d'environ 22 hectares (21,84 ha) pour la remettre en culture.",
+    "Le renouvellement demandé couvre 10 ans; l'autorisation obtenue en 2021 valait 5 ans à partir du 14 septembre 2021.",
+    "À ce jour, seulement 1 hectare a été remblayé.",
+    "Le promoteur est Construction Gely inc., propriétaire des lots 2 059 611 et 2 059 613.",
+    "Le comité consultatif agricole a appuyé la demande à l'unanimité le 20 août 2026.",
+    "La décision finale revient à la CPTAQ; la Ville a 60 jours pour transmettre son avis. Aucun impact financier pour la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:11.832Z",
+   "jetons": {
+    "entree": 8528,
+    "sortie": 432
+   }
+  },
+  {
+   "id": "URBA-SAT-2026-094",
+   "numero": "URBA-SAT-2026-094",
+   "resolution": "CE3355",
+   "date": "2026-09-08",
+   "unite": "Urbanisme",
+   "objet": "Demande d’autorisation 455539 de la Commission de protection du territoire agricole du Québec pour le lotissement et l’aliénation du lot 2 849 291 du cadastre du Québec (chemin Sainte-Anne, secteur Saint-Étienne-de-Lauzon)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-SAT-2026-094.pdf",
+   "puces": [
+    "La Ville de Lévis recommande d'envoyer un avis favorable à la Commission de protection du territoire agricole du Québec (CPTAQ) pour la demande 455539.",
+    "La demande vise à diviser et vendre un terrain situé en bordure du chemin Sainte-Anne, dans le secteur Saint-Étienne-de-Lauzon.",
+    "Deux copropriétaires veulent séparer ce terrain en deux pour que chacun devienne seul propriétaire de la partie voisine de sa propre propriété.",
+    "La parcelle concernée fait 0,07682 hectare, elle est en friche et ne sert à aucune production agricole active.",
+    "La Ville invoque le faible potentiel agricole du sol (classe 4) et l'absence d'effet négatif sur les activités agricoles du secteur.",
+    "C'est la CPTAQ qui tranchera; la Ville a 60 jours pour lui transmettre son avis.",
+    "Aucun impact financier pour la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:17.899Z",
+   "jetons": {
+    "entree": 4637,
+    "sortie": 425
+   }
+  },
+  {
+   "id": "URBA-BP-2026-005",
+   "numero": "URBA-BP-2026-005",
+   "resolution": "CE3356",
+   "date": "2026-09-08",
+   "unite": "Urbanisme",
+   "objet": "Approbation du plan de cadastre pour le prolongement des rues Froment, du Lin et de l’Escaut et ouverture de la rue de Carpiquet (secteur Saint-Étienne-de-Lauzon), entente relative à des travaux municipaux à intervenir avec Constructions Huot et Bouchard inc., acquisition de lots, confirmation relative à l’utilisation de lots et financement afférent",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/URBA-BP-2026-005.pdf",
+   "puces": [
+    "La Ville approuve le prolongement des rues Froment, du Lin et de l'Escaut et l'ouverture de la rue de Carpiquet, dans le secteur Saint-Étienne-de-Lauzon.",
+    "Elle signe une entente avec Constructions Huot et Bouchard inc., qui paie les travaux municipaux, sauf ceux devant le futur parc et ceux de surdimensionnement.",
+    "La Ville paie un maximum de 400 253 $ : marquage d'une piste cyclable sur la rue Froment existante, travaux devant le parc, surdimensionnement de la rue Froment avec banquette et du pavage d'un cercle de virage temporaire.",
+    "Cette dépense se répartit sur 2027 (240 152 $) et 2028 (160 101 $) et devra figurer au prochain plan d'investissement 2027-2031 avant les travaux.",
+    "Une fois les travaux acceptés par la Ville, celle-ci reçoit gratuitement les rues, un parc, un bassin de rétention et des servitudes, le promoteur assumant les frais.",
+    "Un terrain prévu pour un immeuble multilogement sera grevé d'une servitude interdisant d'y construire, à cause de la capacité limitée des étangs aérés de Saint-Étienne-de-Lauzon.",
+    "La Ville s'engage envers le ministère de l'Environnement à entretenir les ouvrages de gestion des eaux pluviales et à tenir un registre d'entretien."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "400 253 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:21.226Z",
+   "jetons": {
+    "entree": 5396,
+    "sortie": 602
+   }
+  },
+  {
+   "id": "DAJG-2026-016",
+   "numero": "DAJG-2026-016",
+   "resolution": "CE3361",
+   "date": "2026-09-08",
+   "unite": ": affaires juridiques et greffe",
+   "objet": "Demande de reconnaissance aux fins d’exemption de taxes foncières présentée par le Centre de pédiatrie sociale de Lévis auprès de la Commission municipale du Québec (immeuble situé au 298, rue Saint-Joseph, Lévis)",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DAJG-2026-016.pdf",
+   "puces": [
+    "Le Centre de pédiatrie sociale de Lévis demande d'être exempté des taxes foncières pour son immeuble du 298, rue Saint-Joseph, à Lévis.",
+    "La Ville recommande de donner une opinion favorable à cette demande auprès de la Commission municipale du Québec.",
+    "Les taxes foncières de l'organisme s'élèvent à 6 233,82 $ pour l'année 2026.",
+    "La Ville indique qu'elle ne souhaite pas être présente si la Commission tient une audience.",
+    "La décision finale revient à la Commission municipale du Québec, qui a reçu la demande le 15 juillet 2026.",
+    "La Ville a 90 jours pour transmettre sa position; une décision du comité exécutif est visée pour la séance du 8 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "6 233,82 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:17.185Z",
+   "jetons": {
+    "entree": 4875,
+    "sortie": 370
+   }
+  },
+  {
+   "id": "GRE-2026-038",
+   "numero": "GRE-2026-038",
+   "resolution": "CE3363",
+   "date": "2026-09-08",
+   "unite": "Greffe",
+   "objet": "Aide financière au bénéfice d’organismes de la communauté",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/GRE-2026-038.pdf",
+   "puces": [
+    "La Ville verse 31 325 $ en aides financières à 13 organismes sans but lucratif de Lévis.",
+    "Les sommes vont de 350 $ à 5 000 $ par organisme; Vivre UMANO reçoit deux montants (5 000 $ et 500 $).",
+    "Les plus gros montants : Les Amis du Juvénat (5 000 $), Alliance-Jeunesse Chutes-de-la-Chaudière (5 000 $), Vivre UMANO (5 000 $) et la Fondation Hôtel-Dieu de Lévis (4 575 $).",
+    "La plupart des aides soutiennent des activités-bénéfice tenues entre juillet et novembre 2026.",
+    "Trois organismes reçoivent un soutien pour le maintien de leurs activités : Club de marche Desjardins de Lévis (350 $), Cercle des philanthropes de Lévis (2 250 $) et Le Reflet Entraide (500 $).",
+    "L'argent provient du budget de fonctionnement 2026, qui est déjà disponible.",
+    "La décision revient au comité exécutif, qui doit l'adopter dans les meilleurs délais."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "31 325 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:19.455Z",
+   "jetons": {
+    "entree": 3217,
+    "sortie": 489
+   }
+  },
+  {
+   "id": "APGI-APP-2026-082",
+   "numero": "APGI-APP-2026-082",
+   "resolution": "CE3365",
+   "date": "2026-09-08",
+   "unite": "Approvisionnement et gestion immobilière",
+   "objet": "Attribution du contrat relatif à la fourniture d’enrobé bitumineux pour la période hivernale et printanière",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/APGI-APP-2026-082.pdf",
+   "puces": [
+    "La Ville accorde à Les entreprises L.T. ltée (Québec) le contrat de fourniture d'enrobé bitumineux pour les périodes hivernale et printanière, au coût estimé de 771 120 $ avant taxes.",
+    "Le contrat dure trois ans, avec une option de renouvellement de deux ans.",
+    "Une seule entreprise a soumissionné, alors que trois s'étaient procuré les documents d'appel d'offres.",
+    "Le prix soumis dépasse l'estimation de la Ville, qui était de 742 940,80 $ avant taxes.",
+    "Les prix seront ajustés chaque mois selon le prix du bitume, en prenant celui d'avril 2026 comme référence.",
+    "La dépense totale avec taxes nettes est évaluée à 809 579,61 $, répartie de 2026 aux années suivantes."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "771 120,00 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:25.741Z",
+   "jetons": {
+    "entree": 3554,
+    "sortie": 387
+   }
+  },
+  {
+   "id": "APGI-APP-2026-087",
+   "numero": "APGI-APP-2026-087",
+   "resolution": "CE3366",
+   "date": "2026-09-08",
+   "unite": "Approvisionnement et gestion immobilière",
+   "objet": "Attribution du contrat relatif à la fourniture d’assurances de dommages du regroupement des organismes bénévoles",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/APGI-APP-2026-087.pdf",
+   "puces": [
+    "La Ville confie à AON Parizeau inc. le contrat d'assurances de dommages pour le regroupement des organismes bénévoles de Lévis.",
+    "Le contrat vaut 487 613,00 $ avant taxes, pour un an, à partir du 1er octobre 2026.",
+    "Il peut être renouvelé quatre fois, d'un an chaque fois, avec un prix négocié avant chaque renouvellement.",
+    "Une seule entreprise a soumissionné, même si deux avaient pris les documents d'appel d'offres.",
+    "Le prix dépasse l'estimation de la Ville (418 418,00 $), un écart expliqué par plus de véhicules et des valeurs assurées plus élevées.",
+    "La Ville paie 9 000 $ de plus pour hausser la couverture de 4 M$ à 10 M$ par sinistre.",
+    "Coût total avec taxes nettes : 541 308,17 $, réparti sur 2026 (135 327,04 $) et 2027 (405 981,13 $)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "487 613,00 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:27.279Z",
+   "jetons": {
+    "entree": 3842,
+    "sortie": 442
+   }
+  },
+  {
+   "id": "DVC-ART-2026-013",
+   "numero": "DVC-ART-2026-013",
+   "resolution": "CE3371",
+   "date": "2026-09-08",
+   "unite": "Vie communautaire",
+   "objet": "Aide financière à l’Orchestre symphonique de Lévis",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DVC-ART-2026-013.pdf",
+   "puces": [
+    "La Ville verserait 9 524 $ de plus à l'Orchestre symphonique de Lévis, en plus des 62 233 $ déjà accordés en février 2026.",
+    "De cette somme, 4 524 $ servent à augmenter l'aide au loyer pour juillet à décembre 2026, après la vente de l'église Saint-David-de-l'Auberivière et la signature d'un nouveau bail.",
+    "Les 5 000 $ restants financent un projet ponctuel de communication et de marketing numérique (réseaux sociaux, infolettre, collecte de données), dont le budget total est de 14 300 $.",
+    "La Ville indique qu'aucune autre salle convenant aux besoins de l'organisme n'est disponible à un coût raisonnable.",
+    "Le comité exécutif se prononce le 8 septembre 2026, le conseil de la Ville le 15 septembre 2026, et l'argent serait versé en octobre 2026.",
+    "L'aide totale de 2026 passerait ainsi à 71 757 $; la dépense est prévue au budget de fonctionnement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "9 524 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:26.905Z",
+   "jetons": {
+    "entree": 4657,
+    "sortie": 461
+   }
+  },
+  {
+   "id": "DVC-BIB-2026-004",
+   "numero": "DVC-BIB-2026-004",
+   "resolution": "CE3372",
+   "date": "2026-09-08",
+   "unite": "Vie communautaire",
+   "objet": "Demande de crédits additionnels relative à l’achat et l’ajout de documents à la collection de la bibliothèque La Pintellect",
+   "pdf": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/SD/2026/DVC-BIB-2026-004.pdf",
+   "puces": [
+    "Le Centre de services scolaire des Navigateurs verse 2 500 $ par année à la Ville pour acheter des livres à la bibliothèque La Pintellect, située à l'école du Boisé (400, rue Pamphile-Le May, secteur Pintendre).",
+    "Le comité exécutif doit approuver le transfert de ces crédits le 8 septembre 2026; la somme pour 2025-2026 a déjà été payée le 18 juin 2026.",
+    "Les nouveaux documents doivent être achetés et ajoutés à la collection d'ici le 31 décembre 2026.",
+    "L'entente dure 5 ans à partir du 16 décembre 2025, avec une contribution scolaire indexée de 2 % par année, renégociable après cinq ans.",
+    "La Ville continue d'opérer la bibliothèque, fixe les heures d'ouverture et dessert la clientèle scolaire; l'école est propriétaire du bâtiment.",
+    "Les élèves accèdent à la bibliothèque pendant les heures régulières, accompagnés de leur enseignant; les heures en dehors de l'horaire sont facturées au Centre de services scolaire.",
+    "La Ville partage avec l'école le stationnement adjacent, en rendant disponibles jusqu'à 14 cases."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-01T16:36:29.109Z",
+   "jetons": {
+    "entree": 7701,
+    "sortie": 531
    }
   },
   {
