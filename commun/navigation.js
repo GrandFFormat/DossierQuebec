@@ -136,7 +136,6 @@ export function enteteCommune() {
   if (marque && cible) {
     marque.href = `/${cible}/`;
     marque.innerHTML = `Dossier<span>VilleDe${echapper(VILLES[cible])}</span>`;
-    document.title = document.title.replace(/— DossierQuébec$/, `— DossierVilleDe${VILLES[cible]}`);
   }
   menuVilles(document.querySelector('#villes'), cible);
   // La pastille de langue : à côté du menu des villes, ou au bout de la ligne du logo (Mes dossiers

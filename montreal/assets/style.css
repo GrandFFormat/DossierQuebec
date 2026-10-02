@@ -409,7 +409,7 @@ td.n { font-variant-numeric: tabular-nums; text-align: right; width: 1%; white-s
 
 /* ---------- PROSE ---------- */
 .prose { max-width: 74ch; }
-.prose h3 { margin: 32px 0 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.015em; }
+.prose h2, .prose h3 { margin: 32px 0 8px; font-size: 19px; font-weight: 700; letter-spacing: -0.015em; }
 .prose li { margin-bottom: 6px; }
 code { font-family: ui-monospace, Consolas, monospace; font-size: 13px; background: var(--fond-2); padding: 2px 6px; border-radius: 4px; }
 
