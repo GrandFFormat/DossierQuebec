@@ -37,6 +37,9 @@ export function construirePagesProjets() {
     vues.add(slug);
     const url = `${SITE}/${DOSSIER}/${slug}`;
     const resumeHtml = resumes[b.id] ?? '';
+    // Les sous-titres du résumé (h4 à h6) passent en h3 sous le h2 du projet : un moteur lit un plan
+    // sans niveau sauté. Seule la copie écrite dans la page change ; commun/dq.js refait la carte.
+    const resumePage = resumeHtml.replace(/<(\/?)h[4-6]\b/g, '<$1h3');
     const resume = texte(resumeHtml);
     const titreLong = `Projet de loi no ${b.num} — ${b.title}`;
     const titreCourt = b.title.length > 60 ? `${b.title.slice(0, 57).replace(/\s+\S*$/, '')}…` : b.title;
@@ -72,7 +75,7 @@ export function construirePagesProjets() {
     const fiche = `<article class="bill-prerendu">
 <h2>${echapper(titreLong)}</h2>
 <p>${echapper(b.note ?? '')}${b.sponsor ? ` · Parrain : ${echapper(b.sponsor)}` : ''}</p>
-${resumeHtml}
+${resumePage}
 <p><a href="${echapper(b.url)}" rel="noopener">Le projet de loi sur le site de l'Assemblée nationale</a></p>
 </article>`;
     remplacer(/<div id="billsList"><\/div>/, `<div id="billsList">${fiche}</div>`);
