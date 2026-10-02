@@ -2263,11 +2263,24 @@ const ASSEMBLY = {
 // abandonné. Le jour du vote compte encore comme campagne (on vote jusqu'à
 // 20 h). Le retour à « legislature » reste MANUEL : dissolved = false le
 // 17 novembre, quand la nouvelle Assemblée siège.
+// Le soir du vote compte déjà comme « après » : les bureaux ferment à 20 h, heure du Québec
+// (1er oct. 2026 — avant, la phase ne changeait que le 6, et un résultat écrit le soir du 5
+// restait invisible pendant toute la soirée électorale, au moment du plus fort trafic).
+// Un résultat écrit dans ASSEMBLY.resultat s'affiche aussi, quelle que soit l'heure.
 ASSEMBLY.phase = (function(){
   if(!ASSEMBLY.dissolved) return 'legislature';
-  const d = new Date();
-  const local = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  return local > ASSEMBLY.electionOn ? 'entre-deux' : 'campagne';
+  if(ASSEMBLY.resultat) return 'entre-deux';
+  let jour, heure;
+  try {
+    const p = Object.fromEntries(new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Toronto', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hourCycle: 'h23' }).formatToParts(new Date()).map((x) => [x.type, x.value]));
+    jour = `${p.year}-${p.month}-${p.day}`;
+    heure = Number(p.hour);
+  } catch(e) {
+    const d = new Date();
+    jour = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    heure = d.getHours();
+  }
+  return (jour > ASSEMBLY.electionOn || (jour === ASSEMBLY.electionOn && heure >= 20)) ? 'entre-deux' : 'campagne';
 })();
 
 function statusLabel(s, step){
