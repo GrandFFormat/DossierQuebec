@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-01T15:34:32.272Z",
+ "generatedAt": "2026-10-02T14:50:26.540Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,26 +7,17 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-08-02",
+  "depuis": "2026-08-03",
   "plafond": 120
  },
- "nombre": 1617,
- "genereCetteFois": 36,
- "echecs": [
-  {
-   "id": "CS2026-014.pdf",
-   "raison": "caractères de contrôle dans le résumé (lettres perdues) — refusé, sera redemandé. Brut : \"La Ville autorise deux représentants \\ber à se rendre \\ber Ottawa le 15 octobre 2026 pour l'allumage de la flamme des Jeux du Canada.\""
-  },
-  {
-   "id": "DE2026-365.pdf",
-   "raison": "caractères de contrôle dans le résumé (lettres perdues) — refusé, sera redemandé. Brut : \"La Ville de Qu\\bébec ach\\bète un terrain de 127 m\\ba\\brr\\be en bordure du chemin Sainte-Foy, dans l'arrondissement de Sainte-Foy\\bSillery\\bCap-Rouge.\""
-  }
- ],
+ "nombre": 1619,
+ "genereCetteFois": 2,
+ "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 1.4199,
-  "jetonsEntree": 194225,
-  "jetonsSortie": 17951
+  "montant": 0.0793,
+  "jetonsEntree": 11159,
+  "jetonsSortie": 940
  },
  "resumes": [
   {
@@ -925,6 +916,55 @@
    "jetons": {
     "entree": 4375,
     "sortie": 474
+   }
+  },
+  {
+   "id": "CS2026-014.pdf",
+   "numero": "CS2026-014",
+   "date": "2026-09-30",
+   "unite": "Coordination stratégique et relations internationales",
+   "objet": "Participation de monsieur le conseiller Raphaël Lebailly et monsieur Olivier Therrien Bergeron à l'évènement de l'allumage de la flamme dans le cadre des Jeux du Canada, qui se tiendra à Ottawa le jeudi 15 octobre 2026",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CS2026-014.pdf",
+   "puces": [
+    "La Ville autorise deux personnes — le conseiller Raphaël Lebailly et Olivier Therrien Bergeron — à se rendre à Ottawa le jeudi 15 octobre 2026.",
+    "Ils y représenteront Québec à l'allumage de la flamme des Jeux du Canada, une activité de préparation des Jeux du Canada 2027 à Québec.",
+    "La Ville remboursera leurs dépenses (inscription, train, hébergement, repas) jusqu'à 1 324 $ taxes incluses, sur présentation des pièces justificatives.",
+    "L'argent provient du budget de fonctionnement du Service de la coordination stratégique et des relations internationales.",
+    "Un dépassement d'au plus 10 % du montant autorisé sera accepté sans autre autorisation."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 324 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-02T14:50:26.539Z",
+   "jetons": {
+    "entree": 3200,
+    "sortie": 497
+   }
+  },
+  {
+   "id": "DE2026-365.pdf",
+   "numero": "DE2026-365",
+   "date": "2026-09-30",
+   "unite": "Développement économique et grands projets",
+   "objet": "Acquisition à des fins municipales d'un immeuble situé en bordure du chemin Sainte-Foy, connu et désigné comme étant une partie du lot 6 074 558 du cadastre du Québec, circonscription foncière de Québec Arrondissement de Sainte-Foy-Sillery-Cap-Rouge",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-365.pdf",
+   "puces": [
+    "La Ville de Québec achète une bande de terrain d'environ 127 mètres carrés en bordure du chemin Sainte-Foy, dans l'arrondissement de Sainte-Foy–Sillery–Cap-Rouge.",
+    "Elle paie 124 000 $, plus les taxes applicables, au Centre culturel Islamique de Québec, propriétaire du terrain.",
+    "Ce montant inclut une indemnité de 56 690 $ couvrant les réclamations, dommages, inconvénients, frais et intérêts.",
+    "Le terrain servira au réaménagement de l'intersection du chemin Sainte-Foy et de la route de l'Église, dont l'ajout d'un trottoir.",
+    "L'achat permet aussi d'élargir et de corriger le tracé du chemin aux approches des travaux de reconstruction du pont Henri-IV.",
+    "L'argent vient du règlement d'emprunt R.A.V.Q. 1465 de l'agglomération; la décision revient au conseil d'agglomération."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "124 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-02T14:50:25.770Z",
+   "jetons": {
+    "entree": 7959,
+    "sortie": 443
    }
   },
   {
