@@ -2,7 +2,7 @@
 > dossiervillelongueuil@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit aa08d88 — Node v22.23.3
+Code : commit 28c2c6e — Node v22.23.3
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -14,42 +14,52 @@ data/decisions.json porte l'année courante (2026) — rien à archiver.
 183 séances écrites dans data/seances.json — 0 procès-verbal(aux) nouvellement publié(s).
 ✖ « Calendrier des séances » a échoué (code 1) — données précédentes conservées.
 
-=== Décisions de l'année (relecture complète) ===
-⚠ CO-260818 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-09/CO-260818-PV.pdf)
-⚠ CA-260709 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-09/CA-260709-PV.pdf)
-⚠ CAX-260709 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-09/CAX-260709-PV.pdf)
-⚠ CO-260707 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-08/CO-260707-PV.pdf)
-⚠ COX-260707 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-08/COX-260707-PV.pdf)
-⚠ CA-260618 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-07/CA-260618-PV.pdf)
-⚠ CO-260616 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-07/CO-260616-PV.pdf)
-⚠ CA-260528 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-06/CA-260528-PV.pdf)
-⚠ CO-260526 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-06/CO-260526-PV.pdf)
-⚠ CA-260430 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-06/CA-260430-PV.pdf)
-⚠ CO-260428 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-05/CO-260428-PV.pdf)
-⚠ CA-260319 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-05/CA-260319-PV.pdf)
-⚠ CO-260317 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-04/CO-260317-PV.pdf)
-⚠ CA-260219 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-03/CA-260219-PV.pdf)
-⚠ CO-260217 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-03/CO-260217-PV.pdf)
-⚠ CA-260122 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-02/CA-260122-PV.pdf)
-⚠ CO-260120 : fetch failed — UND_ERR_CONNECT_TIMEOUT : Connect Timeout Error (attempted address: cms.longueuil.quebec:443, timeout: 10000ms) (https://cms.longueuil.quebec/sites/default/files/medias/2026-02/CO-260120-PV.pdf)
+=== Décisions de l'année ===
+CO-260818 : 37 pages, 99 résolutions, 95 titres pris à l'ordre du jour, 51 sommaires cités, 0 vote(s) nominal(aux) (cache)
+CA-260709 : 13 pages, 37 résolutions, 0 titres pris à l'ordre du jour, 15 sommaires cités, 0 vote(s) nominal(aux) (cache)
+CAX-260709 : 3 pages, 7 résolutions, 0 titres pris à l'ordre du jour, 1 sommaires cités, 0 vote(s) nominal(aux) (cache)
+CO-260707 : 31 pages, 78 résolutions, 0 titres pris à l'ordre du jour, 44 sommaires cités, 0 vote(s) nominal(aux) (cache)
+COX-260707 : 4 pages, 6 résolutions, 0 titres pris à l'ordre du jour, 1 sommaires cités, 0 vote(s) nominal(aux) (cache)
+CA-260618 : 9 pages, 27 résolutions, 0 titres pris à l'ordre du jour, 18 sommaires cités, 0 vote(s) nominal(aux) (cache)
+CO-260616 : 26 pages, 77 résolutions, 0 titres pris à l'ordre du jour, 53 sommaires cités, 0 vote(s) nominal(aux) (cache)
+CA-260528 : 13 pages, 42 résolutions, 0 titres pris à l'ordre du jour, 25 sommaires cités, 0 vote(s) nominal(aux) (cache)
+CO-260526 : 31 pages, 88 résolutions, 0 titres pris à l'ordre du jour, 56 sommaires cités, 0 vote(s) nominal(aux) (cache)
+CA-260430 : 18 pages, 58 résolutions, 0 titres pris à l'ordre du jour, 33 sommaires cités, 0 vote(s) nominal(aux) (cache)
+CO-260428 : 40 pages, 116 résolutions, 0 titres pris à l'ordre du jour, 74 sommaires cités, 0 vote(s) nominal(aux) (cache)
+CA-260319 : 16 pages, 48 résolutions, 0 titres pris à l'ordre du jour, 36 sommaires cités, 0 vote(s) nominal(aux) (cache)
+CO-260317 : 28 pages, 71 résolutions, 0 titres pris à l'ordre du jour, 50 sommaires cités, 0 vote(s) nominal(aux) (cache)
+CA-260219 : 11 pages, 32 résolutions, 0 titres pris à l'ordre du jour, 20 sommaires cités, 0 vote(s) nominal(aux) (cache)
+CO-260217 : 22 pages, 62 résolutions, 0 titres pris à l'ordre du jour, 41 sommaires cités, 0 vote(s) nominal(aux) (cache)
+CA-260122 : 14 pages, 44 résolutions, 0 titres pris à l'ordre du jour, 30 sommaires cités, 0 vote(s) nominal(aux) (cache)
+CO-260120 : 31 pages, 78 résolutions, 0 titres pris à l'ordre du jour, 52 sommaires cités, 0 vote(s) nominal(aux) (cache)
 
-0 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 3 en attente de procès-verbal.
-0 nouveauté(s) depuis la dernière exécution.
+1002 décisions écrites dans data/decisions.json — 17 séance(s) lue(s) cette fois, 3 en attente de procès-verbal.
+1002 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
-      0  (classées par défaut — aucune règle n'a tranché)
+    231  Procédure
+    131  Contrats
+    102  Environnement
+     95  Urbanisme
+     78  Travaux et infrastructures
+     73  Finances
+     71  Transport
+     61  Administration
+     42  Loisirs et communauté
+     35  Sécurité publique
+     30  Culture et patrimoine
+     17  Subventions
+     10  Logement et social
+      9  Immobilier
+      9  Ressources humaines
+      5  Développement économique
+      3  Motions et hommages
+      2  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (deux années complètes) ===
-CA-251002 : 1 vote(s) nominal(aux)
-CO-251001 : 3 vote(s) nominal(aux)
-CO-250708 : 1 vote(s) nominal(aux)
-CO-250610 : 3 vote(s) nominal(aux)
-CO-250513 : 4 vote(s) nominal(aux)
-CO-250415 : 2 vote(s) nominal(aux)
-CO-250318 : 6 vote(s) nominal(aux)
-CO-250121 : 2 vote(s) nominal(aux)
+=== Votes nominatifs (depuis 2026-08-03) ===
+Fenêtre depuis 2026-08-03 : 1 séance(s) relue(s), 22 vote(s) conservé(s) du fichier précédent.
 
-22 votes nominaux écrits dans data/votes.json (2025 : 22, 2026 : 0 ; 47 procès-verbaux analysés).
+22 votes nominaux écrits dans data/votes.json (2025 : 22, 2026 : 0 ; 1 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
 
 === Conseil d'agglomération (listes de présences) ===
@@ -72,7 +82,7 @@ Ne siègent plus : Jonathan Tabarah (dernière séance CA-260528)
 Remplaçants : Carl Lévesque pour Jonathan Tabarah (1) ; Stéphanie Verreault pour Loïc Blancquaert (2) ; Andrée Savard pour Jean Martel (1) ; Nancy Cormier pour Ludovic Grisé Farand (2) ; Christian Gaudette pour Doreen Assaad (1)
 
 === Lexique, mesuré sur les procès-verbaux ===
-Mesure de 32 termes sur 47 procès-verbaux de 2025 et 2026 et 0 décisions…
+Mesure de 32 termes sur 47 procès-verbaux de 2025 et 2026 et 1002 décisions…
 
     47 PV    1923 résolutions   Résolution
     47 PV     580 résolutions   Sommaire décisionnel
@@ -115,14 +125,15 @@ Mesure de 32 termes sur 47 procès-verbaux de 2025 et 2026 et 0 décisions…
 0 document(s) lu(s) ; 639 sommaires indexés dans data/sommaires.json.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-08-02 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-08-03 pas encore résumés (plafond : 120)…
+5 sommaire(s) cité(s) sans texte extrait (absents du document de séance, ou document pas encore lu).
 549 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
 === Fichiers pour « Mes dossiers » ===
-Projets publics : 1 projets · index 0.5 Ko · fichiers de projet 1 Ko au total.
-Dossiers de l'année : 0 · 1 Ko · organismes suggérés : 0.
-Décisions récentes : 0 dossiers depuis le 2026-08-17 · 0 Ko.
+Projets publics : 1 projets · index 0.8 Ko · fichiers de projet 80 Ko au total.
+Dossiers de l'année : 802 · 697 Ko · organismes suggérés : 96.
+Décisions récentes : 213 dossiers depuis le 2026-07-04 · 213 Ko.
 
 === Bilan ===
   étapes         : 9
