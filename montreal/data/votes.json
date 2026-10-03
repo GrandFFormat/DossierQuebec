@@ -1,18 +1,18 @@
 {
- "generatedAt": "2026-09-29T15:56:14.184Z",
+ "generatedAt": "2026-10-03T14:37:51.221Z",
  "source": "https://ville.montreal.qc.ca/documents/Adi_Public/",
  "methode": "Extraction par analyse du texte des procès-verbaux (PDF de la Ville). Les noms sont lus dans les passages « Votent en faveur / Votent contre ». Chaque vote conserve le texte brut et signale tout écart avec le décompte officiel.",
  "parametres": {
   "annee": "2026",
-  "depuis": "2026-07-31",
+  "depuis": "2026-08-04",
   "complet": false
  },
  "versionLecture": 3,
- "totalDisponible": 14,
- "documentsAnalyses": 0,
- "nombre": 14,
- "nouveauxDepuisDerniereExecution": 0,
- "avecAvertissement": 1,
+ "totalDisponible": 15,
+ "documentsAnalyses": 5,
+ "nombre": 15,
+ "nouveauxDepuisDerniereExecution": 1,
+ "avecAvertissement": 2,
  "themes": {
   "procedure": {
    "libelle": "Procédure",
@@ -84,6 +84,33 @@
   }
  },
  "votes": [
+  {
+   "id": "CM26 0749",
+   "numero": "CM26 0749",
+   "objet": "Motion des élus-es - Résolution pour la paix civile, la sécurité publique et la cohésion sociale",
+   "date": "2026-08-24",
+   "annee": "2026",
+   "instance": "Conseil municipal",
+   "seanceId": "CM_2026-08-24_13h00",
+   "dossier": null,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf",
+   "resultat": "Adoptée à l'unanimité",
+   "pour": [],
+   "contre": [],
+   "decomptePour": null,
+   "decompteContre": null,
+   "abstention": null,
+   "demandeParVote": null,
+   "texteSourceDegrade": false,
+   "avertissements": [
+    "Fragment ignoré : « de la motion inscrite au point 80.01 (65.01). Séance ordinaire du conseil municipal du lundi 24 août 2026 à 13 h 23 Enfin »"
+   ],
+   "notes": [],
+   "brut": "Votent en faveur : de la motion inscrite au point 80.01 (65.01). Séance ordinaire du conseil municipal du lundi 24 août 2026 à 13 h 23 Enfin,",
+   "theme": "honneurs",
+   "themeSource": "objet",
+   "nouveau": true
+  },
   {
    "id": "CM26 0570",
    "numero": "CM26 0570",
