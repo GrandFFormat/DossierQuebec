@@ -2,7 +2,7 @@
 > dossiervillelongueuil@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 28c2c6e — Node v22.23.3
+Code : commit cd9ceb9 — Node v22.23.3
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -15,26 +15,9 @@ data/decisions.json porte l'année courante (2026) — rien à archiver.
 ✖ « Calendrier des séances » a échoué (code 1) — données précédentes conservées.
 
 === Décisions de l'année ===
-CO-260818 : 37 pages, 99 résolutions, 95 titres pris à l'ordre du jour, 51 sommaires cités, 0 vote(s) nominal(aux) (cache)
-CA-260709 : 13 pages, 37 résolutions, 0 titres pris à l'ordre du jour, 15 sommaires cités, 0 vote(s) nominal(aux) (cache)
-CAX-260709 : 3 pages, 7 résolutions, 0 titres pris à l'ordre du jour, 1 sommaires cités, 0 vote(s) nominal(aux) (cache)
-CO-260707 : 31 pages, 78 résolutions, 0 titres pris à l'ordre du jour, 44 sommaires cités, 0 vote(s) nominal(aux) (cache)
-COX-260707 : 4 pages, 6 résolutions, 0 titres pris à l'ordre du jour, 1 sommaires cités, 0 vote(s) nominal(aux) (cache)
-CA-260618 : 9 pages, 27 résolutions, 0 titres pris à l'ordre du jour, 18 sommaires cités, 0 vote(s) nominal(aux) (cache)
-CO-260616 : 26 pages, 77 résolutions, 0 titres pris à l'ordre du jour, 53 sommaires cités, 0 vote(s) nominal(aux) (cache)
-CA-260528 : 13 pages, 42 résolutions, 0 titres pris à l'ordre du jour, 25 sommaires cités, 0 vote(s) nominal(aux) (cache)
-CO-260526 : 31 pages, 88 résolutions, 0 titres pris à l'ordre du jour, 56 sommaires cités, 0 vote(s) nominal(aux) (cache)
-CA-260430 : 18 pages, 58 résolutions, 0 titres pris à l'ordre du jour, 33 sommaires cités, 0 vote(s) nominal(aux) (cache)
-CO-260428 : 40 pages, 116 résolutions, 0 titres pris à l'ordre du jour, 74 sommaires cités, 0 vote(s) nominal(aux) (cache)
-CA-260319 : 16 pages, 48 résolutions, 0 titres pris à l'ordre du jour, 36 sommaires cités, 0 vote(s) nominal(aux) (cache)
-CO-260317 : 28 pages, 71 résolutions, 0 titres pris à l'ordre du jour, 50 sommaires cités, 0 vote(s) nominal(aux) (cache)
-CA-260219 : 11 pages, 32 résolutions, 0 titres pris à l'ordre du jour, 20 sommaires cités, 0 vote(s) nominal(aux) (cache)
-CO-260217 : 22 pages, 62 résolutions, 0 titres pris à l'ordre du jour, 41 sommaires cités, 0 vote(s) nominal(aux) (cache)
-CA-260122 : 14 pages, 44 résolutions, 0 titres pris à l'ordre du jour, 30 sommaires cités, 0 vote(s) nominal(aux) (cache)
-CO-260120 : 31 pages, 78 résolutions, 0 titres pris à l'ordre du jour, 52 sommaires cités, 0 vote(s) nominal(aux) (cache)
 
-1002 décisions écrites dans data/decisions.json — 17 séance(s) lue(s) cette fois, 3 en attente de procès-verbal.
-1002 nouveauté(s) depuis la dernière exécution.
+1002 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 3 en attente de procès-verbal.
+0 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
     231  Procédure
@@ -56,8 +39,8 @@ Pastilles thématiques :
       3  Motions et hommages
       2  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-08-03) ===
-Fenêtre depuis 2026-08-03 : 1 séance(s) relue(s), 22 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-08-04) ===
+Fenêtre depuis 2026-08-04 : 1 séance(s) relue(s), 22 vote(s) conservé(s) du fichier précédent.
 
 22 votes nominaux écrits dans data/votes.json (2025 : 22, 2026 : 0 ; 1 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
@@ -125,7 +108,7 @@ Mesure de 32 termes sur 47 procès-verbaux de 2025 et 2026 et 1002 décisions…
 0 document(s) lu(s) ; 639 sommaires indexés dans data/sommaires.json.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-08-03 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-08-04 pas encore résumés (plafond : 120)…
 5 sommaire(s) cité(s) sans texte extrait (absents du document de séance, ou document pas encore lu).
 549 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
