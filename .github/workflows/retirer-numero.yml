@@ -39,4 +39,7 @@ jobs:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           MOIS: ${{ inputs.mois }}
-        run: node scripts/retirer-numero.js --mois="$MOIS" ${{ inputs.essai == true && '' || '--retirer' }}
+        # Les deux branches doivent être non vides : dans une expression GitHub, '' est faux, donc
+        # `essai && '' || '--retirer'` retombait toujours sur --retirer. L'essai du 4 octobre 2026
+        # a retiré le numéro pour de vrai (sans dégât : il l'était déjà).
+        run: node scripts/retirer-numero.js --mois="$MOIS" ${{ inputs.essai == true && '--essai' || '--retirer' }}
