@@ -59,7 +59,10 @@ if (!args.retirer) { console.log('\nEssai seulement. Ajouter --retirer pour le f
 const r = await fetch(`${url}?${filtre}`, {
   method: 'PATCH',
   headers: { ...h, Prefer: 'return=minimal' },
-  body: JSON.stringify({ publie_le: null, updated_at: new Date().toISOString() }),
+  // envoye_le et envoyes repartent à zéro : un numéro retiré est un numéro qui n'a jamais paru.
+  // Sans ça, infolettre.js refuserait de republier ce mois plus tard (« déjà parti vers N
+  // personne(s) : on ne le remplace pas ») — or c'est précisément ce qu'on veut pouvoir faire.
+  body: JSON.stringify({ publie_le: null, envoye_le: null, envoyes: 0, updated_at: new Date().toISOString() }),
 });
 if (!r.ok) throw new Error(`Retrait → ${r.status} ${(await r.text()).slice(0, 200)}`);
 console.log(`\nRetiré de la diffusion : ${trouves.length} édition(s) de ${cle.type} ${cle.mois}. Plus aucun nouvel inscrit ne le recevra.`);

@@ -1,0 +1,42 @@
+# Retirer de la diffusion un compte rendu de Montréal parti par erreur.
+#
+# À la main seulement. Le script ne touche qu'à Supabase : il vide la date de publication du
+# numéro, qui cesse d'être servi aux nouveaux inscrits (api/_infolettre.js filtre dessus) et
+# redevient republiable. Rien n'est écrit dans le dépôt, d'où son propre groupe : il n'attend
+# pas le rafraîchissement, qui dure des heures.
+#
+# Secrets : SUPABASE_URL et SUPABASE_SERVICE_ROLE_KEY.
+
+name: Retirer un compte rendu — volet Montréal
+
+on:
+  workflow_dispatch:
+    inputs:
+      mois:
+        description: 'Le mois du compte rendu à retirer (AAAA-MM)'
+        type: string
+        required: true
+      essai:
+        description: "Essai : dire ce qui serait retiré, sans rien changer"
+        type: boolean
+        default: true
+
+concurrency:
+  group: retirer-numero-montreal
+  cancel-in-progress: false
+
+jobs:
+  retirer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Retirer le numéro
+        working-directory: montreal
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          MOIS: ${{ inputs.mois }}
+        run: node scripts/retirer-numero.js --mois="$MOIS" ${{ inputs.essai == true && '' || '--retirer' }}
