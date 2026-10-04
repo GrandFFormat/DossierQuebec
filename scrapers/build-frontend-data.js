@@ -102,6 +102,12 @@ function main() {
     summaryEn: b.summaryEn ? (b.omnibus ? omnibusToHtml(b.summaryEn, true) : bulletsToHtml(b.summaryEn, null)) : null,
     lastActivity: b.lastActivity,
     presentedOn: b.presentedOn || null,
+    // La législature et la session de dépôt : l'adresse de la page du projet (/projets-de-loi/3-43-3,
+    // scripts/build-bill-pages.js) et le choix de l'archive (commun/dq.js). Le numéro seul ne suffit
+    // pas : il recommence à 1 à chaque session. Absents jusqu'au 4 oct. 2026 : le partage retombait
+    // sur ?pl=, et /projets-de-loi/3-43-1 ouvrait le premier « PL 3 » venu.
+    legislature: b.legislature ?? null,
+    introSession: b.introSession ?? null,
     // Omnibus (25 sept. 2026, scrapers/bill-summaries.js) : combien de lois et règlements le
     // projet touche, d'après sa liste officielle, et s'il est un omnibus. La liste elle-même
     // suit le résumé (chargé à l'ouverture de la carte).
