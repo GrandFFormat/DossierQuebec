@@ -1,8 +1,13 @@
-// Retire un numéro publié par erreur de la table infolettre_numeros (Supabase).
+// Retire de la diffusion un numéro publié par erreur (table infolettre_numeros, Supabase).
 //
 // Sert quand un courriel est parti alors qu'il n'aurait pas dû — un compte rendu vide, par
 // exemple. Le retirer n'annule pas les envois déjà faits : il empêche les envois à venir, et
 // surtout il cesse d'être le numéro que reçoit chaque nouvel inscrit.
+//
+// On ne supprime pas la ligne : on vide publie_le. Les deux requêtes qui servent un numéro
+// (api/_infolettre.js) filtrent sur publie_le=not.is.null, donc la ligne disparaît de la
+// diffusion tout en gardant son compte d'envois. C'est aussi réversible, et le rôle
+// service_role n'a pas le droit DELETE sur cette table (403 du 4 octobre 2026).
 //
 //   node scripts/retirer-numero.js --mois=2026-09              dit ce qu'il retirerait
 //   node scripts/retirer-numero.js --mois=2026-09 --retirer    retire pour de vrai
@@ -51,6 +56,10 @@ for (const n of trouves) {
 }
 if (!args.retirer) { console.log('\nEssai seulement. Ajouter --retirer pour le faire.'); process.exit(0); }
 
-const r = await fetch(`${url}?${filtre}`, { method: 'DELETE', headers: { ...h, Prefer: 'return=minimal' } });
+const r = await fetch(`${url}?${filtre}`, {
+  method: 'PATCH',
+  headers: { ...h, Prefer: 'return=minimal' },
+  body: JSON.stringify({ publie_le: null, updated_at: new Date().toISOString() }),
+});
 if (!r.ok) throw new Error(`Retrait → ${r.status} ${(await r.text()).slice(0, 200)}`);
-console.log(`\nRetiré : ${trouves.length} édition(s) de ${cle.type} ${cle.mois}. Plus aucun nouvel inscrit ne le recevra.`);
+console.log(`\nRetiré de la diffusion : ${trouves.length} édition(s) de ${cle.type} ${cle.mois}. Plus aucun nouvel inscrit ne le recevra.`);
