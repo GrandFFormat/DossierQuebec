@@ -82,6 +82,54 @@ async function chargerDonnees(){
   }
 }
 
+// ARCHIVES DES PROJETS DE LOI (4 oct. 2026). scrapers/bills.js ne garde que la législature la plus
+// récente ; scripts/build-bill-pages.js recopie donc chaque législature dans data/archives/<n>/.
+// Tant que l'archive EST la législature en direct (aujourd'hui : la 43e), rien ne change ici.
+// Ensuite, /projets-de-loi/3-43-3 et /projets-de-loi?archives=43 chargent l'archive à la place
+// des projets en direct, et la page des projets en cours porte un lien vers elle.
+let archiveLeg = null;      // la législature archivée affichée, sinon null
+let archivesDispo = [];     // les législatures archivées, sauf celle en direct
+async function chargerArchive(){
+  if(!document.getElementById('billsList')) return;   // vue absente de cette page
+  const enDirect = Math.max(0, ...bills.map(b => Number(b.legislature) || 0));
+  const page = location.pathname.match(/^\/projets-de-loi\/\d+-(\d+)-\d+/);
+  const demandee = Number(page ? page[1] : new URLSearchParams(location.search).get('archives')) || 0;
+  try {
+    const idx = await fetch('/data/archives/index.json').then(r => r.ok ? r.json() : null);
+    archivesDispo = ((idx && idx.legislatures) || []).filter(l => l !== enDirect);
+  } catch (e) { /* sans index : pas de lien d'archives, la page marche comme avant */ }
+  if(!demandee || !archivesDispo.includes(demandee)) return;
+  try {
+    const r = await fetch(`/data/archives/${demandee}/bills.json`);
+    if(!r.ok) throw new Error(r.status);
+    bills = await r.json();
+    archiveLeg = demandee;
+  } catch (e) { console.error('archive non chargée :', e.message); }
+}
+// Une législature terminée : les projets non sanctionnés y sont morts, dissolution en cours ou non.
+const legislatureFinie = () => ASSEMBLY.dissolved || archiveLeg !== null;
+// La ligne d'archives, au-dessus de la liste : « vous êtes dans les archives » ou « voir les archives ».
+function renderArchivesNote(){
+  const tete = document.getElementById('billsResultHead');
+  if(!tete) return;
+  let note = document.getElementById('archivesNote');
+  if(!archiveLeg && !archivesDispo.length){ if(note) note.remove(); return; }
+  if(!note){
+    note = document.createElement('p');
+    note.id = 'archivesNote';
+    note.className = 'archives-note';
+    tete.before(note);
+  }
+  const isEn = currentLang === 'en';
+  const lang = isEn ? '?lang=en' : '';
+  const nom = (l) => isEn ? `${l}${l % 10 === 1 && l % 100 !== 11 ? 'st' : l % 10 === 2 && l % 100 !== 12 ? 'nd' : l % 10 === 3 && l % 100 !== 13 ? 'rd' : 'th'} legislature` : `${l}<sup>e</sup> législature`;
+  note.innerHTML = archiveLeg
+    ? (isEn
+        ? `<b>Archives: ${nom(archiveLeg)}.</b> These bills belong to a legislature that has ended. <a href="/projets-de-loi${lang}">← Current bills</a>`
+        : `<b>Archives de la ${nom(archiveLeg)}.</b> Ces projets datent d'une législature terminée. <a href="/projets-de-loi">← Projets de loi en cours</a>`)
+    : archivesDispo.slice().reverse().map(l => `<a href="/projets-de-loi?archives=${l}${isEn ? '&lang=en' : ''}">${isEn ? `Archives: ${nom(l)}` : `Archives de la ${nom(l)}`} →</a>`).join(' · ');
+}
+
 /* ---------------- I18N ---------------- */
 const translations = {
   fr: {
@@ -824,7 +872,7 @@ const loiVivante = (b) => !ASSEMBLY.dissolved && String(b.lastActivity || '') >=
 // gens veulent des explications. On laisse donc challenger les projets morts au feuilleton :
 // la demande est enregistrée, comptée, et elle dira à la rentrée ce que les gens voulaient
 // voir expliqué. Seul un projet SANCTIONNÉ (devenu loi) ne se challenge pas.
-const peutEtreChallenge = (b) => ASSEMBLY.dissolved
+const peutEtreChallenge = (b) => archiveLeg !== null ? false : ASSEMBLY.dissolved
   ? b.status !== 'sanctionne'
   : (b.status === 'encours' && loiVivante(b));
 
@@ -2291,7 +2339,7 @@ function statusLabel(s, step){
   // On distingue selon l'étape atteinte, sinon le libellé contredirait les chips
   // d'étapes affichées juste en dessous : 95 des 102 projets n'ont jamais dépassé
   // la présentation, 7 s'étaient rendus à l'adoption du principe.
-  if(ASSEMBLY.dissolved && s !== 'sanctionne'){
+  if(legislatureFinie() && s !== 'sanctionne'){
     // Appel sans étape (chips de filtre, qui portent sur un statut, pas un projet).
     if(step === undefined || step === null){
       return isEn ? 'Not passed' : 'Non adopté';
@@ -2306,7 +2354,7 @@ function statusLabel(s, step){
   return s==='sanctionne' ? 'Sanctionnée' : s==='laisse_de_cote' ? 'Sur la glace' : 'À l\'étude';
 }
 function statusClass(s){
-  if(ASSEMBLY.dissolved && s !== 'sanctionne') return 'status-mort';
+  if(legislatureFinie() && s !== 'sanctionne') return 'status-mort';
   return s==='sanctionne' ? 'status-sanctionne' : s==='laisse_de_cote' ? 'status-glace' : 'status-encours';
 }
 
@@ -2499,7 +2547,7 @@ const _resumes = new Map();
 function resumesProjets(langue){
   const cle = langue === 'en' ? 'en' : 'fr';
   if(_resumes.has(cle)) return _resumes.get(cle);
-  const p = fetch(`/data/bills-resumes-${cle}.json`)
+  const p = fetch(archiveLeg ? `/data/archives/${archiveLeg}/bills-resumes-${cle}.json` : `/data/bills-resumes-${cle}.json`)
     .then(r => r.ok ? r.json() : null)
     // Un échec ne doit pas rester collé : on l'oublie pour que la prochaine tentative réessaie.
     .catch(() => null)
@@ -2732,7 +2780,7 @@ function renderBillsQuickFilters(){
   const isEn = currentLang === 'en';
   const defs = [
     ['tous', isEn ? 'All' : 'Tous'],
-    ['encours', ASSEMBLY.dissolved ? (isEn ? 'Not passed' : 'Non adoptés') : (isEn ? 'Active' : 'En cours')],
+    ['encours', legislatureFinie() ? (isEn ? 'Not passed' : 'Non adoptés') : (isEn ? 'Active' : 'En cours')],
     ['adoptes', isEn ? 'Passed' : 'Adoptés'],
     ['challenges', isEn ? '🔥 Challenged' : '🔥 Challengés'],
     // Omnibus (25 sept. 2026) : un projet qui touche plusieurs lois sous un seul titre.
@@ -2745,6 +2793,7 @@ function renderBillsQuickFilters(){
 
 function renderBills(keyword){
   if(!document.getElementById('billsList')) return;   // vue absente de cette page
+  renderArchivesNote();
   keyword = keyword !== undefined ? keyword : (document.getElementById('searchBills')?.value || '');
   const kw = norm(keyword);
   const isEn = currentLang === 'en';
@@ -2761,7 +2810,7 @@ function renderBills(keyword){
   const numCherche = (kw.match(/^(?:pl|projet de loi)?\s*(?:n[°ºo]?\s*)?(\d+)$/) || [])[1] ?? null;
   const list = bills.filter(b => {
     const quickOk = (billsQuickFilter === 'tous'
-      || (billsQuickFilter === 'encours' && (ASSEMBLY.dissolved ? b.status !== 'sanctionne' : b.status === 'encours'))
+      || (billsQuickFilter === 'encours' && (legislatureFinie() ? b.status !== 'sanctionne' : b.status === 'encours'))
       || (billsQuickFilter === 'adoptes' && b.status === 'sanctionne'))
       && (!billsExtras.has('challenges') || ch.some(c => Number(c.bill_id) === b.id))
       && (!billsExtras.has('omnibus') || b.omnibus);
@@ -2830,7 +2879,7 @@ function renderBills(keyword){
   renderBillsQuickFilters();
   const titles = {
     tous:       isEn ? 'All bills' : 'Tous les projets',
-    encours:    ASSEMBLY.dissolved ? (isEn ? 'Bills that never passed' : 'Projets non adoptés') : (isEn ? 'Active bills' : 'En cours'),
+    encours:    legislatureFinie() ? (isEn ? 'Bills that never passed' : 'Projets non adoptés') : (isEn ? 'Active bills' : 'En cours'),
     adoptes:    isEn ? 'Passed bills' : 'Adoptés',
     challenges: isEn ? 'Challenged bills' : 'Challengés',
     omnibus:    isEn ? 'Omnibus bills — several laws under one title' : 'Projets omnibus — plusieurs lois sous un seul titre',
@@ -3747,6 +3796,7 @@ try{ if(!new URLSearchParams(location.search).get('ville')) localStorage.setItem
   // D'abord les données : tout ce qui suit en dépend, et elles arrivent maintenant par le
   // réseau plutôt que d'être écrites dans la page.
   await chargerDonnees();
+  await chargerArchive();
   // L'encadré de l'abonnement : sa phrase « le suivi commencera avec la nouvelle législature »
   // tombe quand un projet de loi suivable existe VRAIMENT dans les données (loiVivante), pas à une
   // date : le 17 nov., dissolved=false ne suffit pas, il faut le premier projet de la 44e.
