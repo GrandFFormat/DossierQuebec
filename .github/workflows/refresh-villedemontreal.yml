@@ -23,6 +23,10 @@ on:
         description: "Résumés IA de toute l'année, par lots (moitié prix) — pour rattraper d'un coup"
         type: boolean
         default: false
+      retirer_numero:
+        description: "Retirer un compte rendu parti par erreur (AAAA-MM) — il cesse d'être envoyé aux nouveaux inscrits"
+        type: string
+        default: ''
 
 permissions:
   contents: write
@@ -86,6 +90,16 @@ jobs:
           key: textes-montreal-${{ github.run_id }}
           restore-keys: |
             textes-montreal-
+
+      # Un compte rendu parti par erreur (un mois vide, par exemple) : on le retire avant tout
+      # le reste, pour qu'il cesse d'être celui que reçoit chaque nouvel inscrit.
+      - name: Retirer un compte rendu parti par erreur
+        if: ${{ steps.volet.outputs.present == 'oui' && inputs.retirer_numero != '' }}
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          MOIS: ${{ inputs.retirer_numero }}
+        run: node scripts/retirer-numero.js --mois="$MOIS" --retirer
 
       - name: Rafraîchir les données municipales
         if: ${{ steps.volet.outputs.present == 'oui' }}

@@ -644,6 +644,15 @@ async function main() {
   // prochain passage du cron (11 h UTC), et il devient celui que reçoit chaque nouvel inscrit.
   if (args.publier) {
     if (!seance && !/^\d{4}-\d{2}$/.test(fichier)) throw new Error('--publier demande un mois complet (--mois=AAAA-MM) ou une séance (--seance=AAAA-MM-JJ).');
+    // Jamais un numéro vide. Montréal publie ses procès-verbaux des semaines après la séance :
+    // le 2 du mois, le mois précédent peut n'avoir aucun dossier lisible. C'est arrivé le
+    // 3 octobre 2026 — le compte rendu de septembre est parti aux inscrits avec « 0 dossier ».
+    // On attend que la Ville publie ; la publication automatique repassera.
+    if (!liste.length) {
+      const pourquoi = `${fichier} : aucun dossier. La Ville n'a pas encore publié les procès-verbaux de cette période.`;
+      if (args['si-nouveau']) { console.log(`Rien à publier — ${pourquoi}`); return; }
+      throw new Error(`${pourquoi} Rien n'est publié.`);
+    }
     const cleNumero = { ville: VILLE, type: seance?.type ?? 'mensuel', arrondissement: seance?.arrondissement ?? '', mois: seance ? depuis : fichier, langue: 'fr' }; // la clé de la table inclut la langue (supabase-schema-infolettre-langue.sql)
     if (!process.env.SUPABASE_URL) {
       const racine = fileURLToPath(new URL('../', import.meta.url));
