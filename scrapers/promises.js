@@ -71,7 +71,7 @@ const CHEVAUCHEMENT = 1500;  // une phrase à cheval sur deux tranches reste lis
 // d'où 2 promesses au PQ contre 6 aux partis à plateforme. Cet écart venait de
 // NOTRE méthode, pas des partis, et sur un site qui se veut non partisan c'est
 // exactement le genre de biais qu'un lecteur attribuerait au parti.
-const SOURCES = [
+export const SOURCES = [
   { party:'QS',  type:'pdf',  url:'https://cdn.prod.website-files.com/6a58006e8d06c0d8d7cc521d/6a9c07ae1aa790d59dc5ccee_Cestpossible_PlateformeQs2026-WEB.pdf',
     label:'Québec solidaire — Plateforme électorale 2026 (PDF officiel)', page:'https://quebecsolidaire.net/' },
   { party:'PLQ', type:'html', url:'https://plq.org/engagements/',
@@ -144,7 +144,37 @@ function normaliser(s) {
   return String(s).toLowerCase().replace(/[^a-z0-9àâäéèêëîïôöùûüç]/gi, '');
 }
 
-async function texteSource(src) {
+// LA CITATION EST-ELLE COUPÉE EN PLEIN MOT ? (5 oct. 2026.) Le modèle recopie parfois une phrase
+// jusqu'au bord de la tranche qu'on lui donne : « …tout nouveau projet d'exploration, d'extraction,
+// de t ». Mot pour mot dans la source, donc acceptée par le garde-fou, mais illisible. On retrouve
+// donc la citation dans le document ENTIER et on regarde le caractère qui la suit : une lettre ou
+// un chiffre collé = le mot continue = coupée. Une citation qui s'arrête à une virgule ou devant
+// « et » reste acceptée : elle est fidèle et se lit seule (vérifié sur les 372 du 5 oct. : 96
+// s'arrêtent ainsi, une seule était coupée en plein mot).
+// Rend 'ok', 'tronquee' ou 'introuvable'.
+export function finDeCitation(texte, citation) {
+  const carte = [];   // position dans le texte normalisé → position dans le texte d'origine
+  let norm = '';
+  for (let i = 0; i < texte.length; i++) {
+    const c = texte[i].toLowerCase();
+    if (/[a-z0-9àâäéèêëîïôöùûüç]/i.test(c)) { norm += c; carte.push(i); }
+  }
+  const q = normaliser(citation);
+  if (!q) return 'introuvable';
+  let depart = norm.indexOf(q);
+  if (depart === -1) return 'introuvable';
+  // La même suite de mots peut revenir ailleurs : la citation est bonne si UNE occurrence finit bien.
+  for (; depart !== -1; depart = norm.indexOf(q, depart + 1)) {
+    const suivant = texte[carte[depart + q.length - 1] + 1] ?? '';
+    if (!/[a-zà-ÿ0-9]/i.test(suivant)) return 'ok';
+  }
+  return 'tronquee';
+}
+// Un mot-outil en dernière position (ponctuation finale mise à part) trahit aussi une coupe :
+// « …à tous les élèves du primaire à la fin de chaque. »
+export const MOT_PENDANT = /(\s|['’])(de|du|des|d|la|le|les|l|et|ou|à|au|aux|en|pour|par|sur|un|une|que|qui|dont|avec|sans|chaque|leur|leurs|son|sa|ses|ce|cet|cette|ces|notre|nos)[\s.,;:!?»”"]*$/i;
+
+export async function texteSource(src) {
   const res = await fetch(src.url, { headers: { 'User-Agent': USER_AGENT } });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   if (src.type === 'pdf') {
@@ -170,7 +200,7 @@ async function pagesDuFil(src) {
     .slice(0, src.maxPages || 20);
 }
 
-async function textePage(url) {
+export async function textePage(url) {
   const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const $ = cheerio.load(await res.text());
@@ -211,7 +241,12 @@ async function traiterParti(src, ancien) {
   let rejets = 0;
   const vus = new Set();
   for (let debut = 0; debut < texte.length; debut += TRANCHE - CHEVAUCHEMENT) {
-    const r = await verifier(src, texte.slice(debut, debut + TRANCHE), empreinte, src.page, src.label, PAR_TRANCHE, texte);
+    let fin = Math.min(texte.length, debut + TRANCHE);
+    if (fin < texte.length) {
+      const point = texte.lastIndexOf('. ', fin);
+      if (point > debut + TRANCHE / 2) fin = point + 1;
+    }
+    const r = await verifier(src, texte.slice(debut, fin), empreinte, src.page, src.label, PAR_TRANCHE, texte);
     rejets += r.rejets;
     for (const g of r.gardes) if (!vus.has(g.id)) { vus.add(g.id); gardes.push(g); }
     if (debut + TRANCHE >= texte.length) break;
@@ -241,6 +276,8 @@ async function verifier(src, texte, empreinte, url, label, combien, entier = tex
     if (!autonome(q)) { jeter('fragment'); continue; }
     // ⚠️ LE GARDE-FOU : la citation doit exister littéralement dans la source.
     if (!texteNorm.includes(normaliser(q))) { jeter('introuvable dans la source'); continue; }
+    // …et s'y arrêter en fin de phrase, pas au bord d'une tranche.
+    if (MOT_PENDANT.test(q) || finDeCitation(entier, q) !== 'ok') { jeter('tronquée'); continue; }
     gardes.push({
       id: `${src.party.toLowerCase()}-${createHash('sha256').update(q).digest('hex').slice(0, 8)}`,
       party: src.party,
