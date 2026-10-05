@@ -2024,3 +2024,12 @@
 .prom-parti-puce{width:16px; height:16px; border:2px solid var(--ink); flex:none;}
 .prom-parti-n{margin-left:auto; font-size:12px; font-weight:800; letter-spacing:0.06em;}
 .prom-parti-role{font-size:11px; font-weight:800; letter-spacing:0.06em; padding:3px 8px; background:var(--ink); color:var(--card);}
+
+/* La page /regles : les règles de sources du site, une carte par règle. */
+.regles-liste{list-style:none; margin:28px 0 0; padding:0; display:grid; gap:16px;}
+.regle{border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow); padding:20px 24px;}
+.regle-titre{display:flex; align-items:baseline; gap:14px; margin:0 0 10px; font-family:'Archivo',sans-serif; font-size:21px; font-weight:900; line-height:1.2; letter-spacing:-0.01em; color:var(--ink);}
+.regle-no{flex:none; min-width:34px; padding:2px 8px; background:var(--ink); color:var(--card); font-size:17px; text-align:center;}
+.regle p{margin:0; font-size:15.5px; line-height:1.6; color:var(--ink); max-width:75ch;}
+.regles-suite{margin:26px 0 0; font-size:15px; line-height:1.6; color:var(--ink);}
+.regles-suite a{color:var(--ink); font-weight:800; text-decoration:underline; text-underline-offset:3px;}

@@ -394,6 +394,31 @@ const translations = {
     'h.petitionsrecent':"Petitions open right now",
     'apercu.petitions.sub':"Click the \u201cPetitions\u201d tab for the full list",
     'quicknav.label':"Jump to:",
+    'footer.regles':"The rules",
+    'fil.regles':"The rules",
+    'sujet.regles':"DossierQuébec's sourcing rules",
+    'regleshero.l1':"The rules,",
+    'regleshero.l2':"in black and white.",
+    'regleshero.sub':"The site only publishes what an institution or a party has itself published, as is, with a link to the original. <b>And it says clearly what is missing.</b>",
+    'regles.1.h':"No invented data",
+    'regles.1.p':"This is rule number one. If a piece of information is missing, the field stays empty or the site says so. We do not guess and we do not fill in.",
+    'regles.2.h':"Primary sources only",
+    'regles.2.p':"We quote the institution or the party itself, never someone talking about it: the <b>National Assembly</b> and <b>Données Québec</b> for bills, votes and MNAs; the <b>cities</b> (decision portals, minutes) for municipal decisions; <b>Élections Québec</b> for election results; the <b>parties' official documents</b> (platform, commitments page, announcements on their website) for promises.",
+    'regles.3.h':"No news media",
+    'regles.3.p':"Nothing is taken from the Québec or Canadian press. News outlets have withdrawn their content from use by artificial intelligence, and our requests for permission went unanswered. A promise made at a press conference but never published by the party therefore does not appear on the site.",
+    'regles.4.h':"We respect a website's refusal",
+    'regles.4.p':"If a website asks automated tools not to read it, we do not read it, even when it would be technically possible: that is why the <b>Coalition avenir Québec</b> is absent from the promises page. We never work around a CAPTCHA or an anti-bot protection. When access is blocked, we write to the organization to ask for permission.",
+    'regles.5.h':"Promises are quoted word for word",
+    'regles.5.p':"Every promise is an exact quote from the party's document. A quote that cannot be found as is in the source is rejected automatically, and so is a quote cut off mid-word. Every card carries a “See the source” link to the original document. This safeguard exists because, in the very first batch, two promises out of four were wrong.",
+    'regles.6.h':"The same rule for every party",
+    'regles.6.p':"We publish every concrete commitment each party has put on its website, with no cap and no ranking by importance. The number of cards varies from party to party: it reflects what each one has published, not a choice made by the site.",
+    'regles.7.h':"No verdict",
+    'regles.7.p':"The site never says “promise kept” or “promise broken”. It places the promise and the action side by side, each with its source. You are the judge.",
+    'regles.8.h':"The official text always prevails",
+    'regles.8.p':"Plain-language summaries are made from the official text, and the full text is always one click away. If anything differs, the original document is the one that counts. The site is independent and has no official status.",
+    'regles.9.h':"We explain what is missing",
+    'regles.9.p':"When a source is absent or incomplete, the page says so and says why. An absence must never be read as silence from the party or the city.",
+    'regles.suite':"These rules apply everywhere on the site. See them at work on the <a href=\"/promesses\">Promises</a> page, and follow what changes in the <a href=\"/sources\">site updates</a>.",
     'footer.rss':"RSS feed",
     'quicknav.mission':"Our mission",
     'quicknav.composition':"Composition",
@@ -3580,8 +3605,8 @@ function toggleVoteCard(id, evt){
    sur une de ces adresses. */
 // /mon-dossier y est aussi : sans lui, la page se prenait pour l'accueil et portait son titre
 // anglais (arrivé avec l'anglais qui suit enfin la navigation, 24 sept. 2026).
-const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier' };
-const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier' };
+const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier', regles:'/regles' };
+const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier', 'regles':'regles' };
 // Titres ANGLAIS seulement : le français vient du <title> de la page (voir syncTitle).
 const PAGE_META = {
   bd:        { en:"Site updates — DossierQuébec" },
@@ -3592,6 +3617,7 @@ const PAGE_META = {
   lexique:   { en:"National Assembly glossary in plain language — DossierQuébec" },
   promesses: { en:"2026 Quebec election promises — DossierQuébec" },
   mondossier:{ en:"My file — DossierQuébec" },
+  regles:    { en:"DossierQuébec's sourcing rules — DossierQuébec" },
 };
 function viewFromPath(){
   const seg = location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '');

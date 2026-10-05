@@ -282,6 +282,7 @@ function goToFederal(evt){
       <ol class="maj-liste" id="journalListe" aria-live="polite"></ol>
     <div class="prerendu" data-prerendu="journal">
       <ul aria-label="Mises à jour du site">
+        <li><span class="pr-meta">5 octobre 2026 —</span> <b>Une page pour les règles du site</b> Les règles que DossierQuébec suit pour choisir ses sources ont maintenant leur page : dossierquebec.ca/regles. Neuf règles, dont jamais de donnée inventée, sources primaires seulement, aucun média, promesses citées mot pour mot et aucun verdict. Le lien « Les règles » se trouve dans le pied de page, à côté de Facebook.</li>
         <li><span class="pr-meta">5 octobre 2026 —</span> <b>Le lien vers les promesses revient sur l’accueil</b> La bande jaune de l’élection, sur la page d’accueil, mène de nouveau à la page Promesses par le lien « Ce que les partis promettent ». La page présente maintenant tous les engagements concrets de chaque parti.</li>
         <li><span class="pr-meta">5 octobre 2026 —</span> <b>Toutes les promesses des partis, classées par parti</b> La page Promesses ne se limite plus à 8 engagements par parti : elle présente tous les engagements concrets trouvés dans les documents officiels de chaque parti, soit 369 au lieu de 31 (Parti Québécois 147, Parti libéral 111, Québec solidaire 86, Parti conservateur 25). Chaque citation reste vérifiée mot pour mot contre sa source. Les promesses sont maintenant regroupées par parti ; une fois le résultat officiel connu, le parti qui forme le gouvernement passera en tête. La Coalition avenir Québec reste absente : son site demande aux outils automatisés de ne pas le lire.</li>
         <li><span class="pr-meta">4 octobre 2026 —</span> <b>Les projets de loi de la 43e législature sont archivés</b> Les 143 projets de loi de la 43e législature sont maintenant conservés dans une archive. Quand la nouvelle Assemblée déposera ses premiers projets, la page « Projets de loi » montrera les nouveaux, et les anciens resteront accessibles par le lien « Archives de la 43e législature », chacun à la même adresse qu’aujourd’hui, avec son résumé en clair. Correction au passage : la page d’un projet ouvre maintenant toujours le bon projet, même quand deux projets de sessions différentes portent le même numéro, et le bouton de partage donne l’adresse de cette page.</li>
@@ -301,9 +302,8 @@ function goToFederal(evt){
         <li><span class="pr-meta">27 septembre 2026 —</span> <b>Lévis, Longueuil et Laval : un titre par page, et le fil d’Ariane partout</b> Comme Québec et Montréal ce matin, les trois autres volets annoncent le sujet de la page en grand titre — « Décisions de la Ville de Lévis », « Le conseil de ville de Longueuil » — au lieu du nom du site, répété d’une page à l’autre. Les trente pages des cinq volets portent aussi leur fil d’Ariane, pour que les moteurs de recherche affichent « DossierQuébec › Ville de Québec › Conseil municipal » plutôt que l’adresse nue. Laval parlait de « votes nominaux » : c’est « votes nominatifs », comme partout ailleurs.</li>
         <li><span class="pr-meta">27 septembre 2026 —</span> <b>Québec et Montréal : imprimer une séance entière</b> Sur ordinateur, chaque séance de la page des décisions a une icône d’imprimante à gauche du +. Elle imprime cette séance seulement, avec toutes ses décisions dépliées. Chaque page intérieure porte aussi un titre qui dit son sujet (« Décisions de la Ville de Montréal »…).</li>
         <li><span class="pr-meta">27 septembre 2026 —</span> <b>Québec et Montréal : les décisions récentes lisibles par Google</b> Les pages de décisions de Québec et de Montréal portent maintenant les 30 décisions les plus récentes et leur résumé en clair directement dans la page, pour que les moteurs de recherche les lisent sans attendre le chargement. Elles se mettent à jour chaque matin avec les données.</li>
-        <li><span class="pr-meta">27 septembre 2026 —</span> <b>« Et moi » : pourquoi DossierQuébec existe</b> La page « et moi », au bas du site, porte maintenant le mot de Martin : pourquoi il faut ramener la politique au niveau des gens, et comment l’IA et le lexique servent à ça.</li>
       </ul>
-      <p class="pr-note">Les 20 plus récentes, sur 54.</p>
+      <p class="pr-note">Les 20 plus récentes, sur 55.</p>
     </div>
       <button type="button" class="maj-plus" id="journalPlus" hidden></button>
     </div>
@@ -335,6 +335,11 @@ function goToFederal(evt){
        22 sept. 2026 : « mes dossiers provincial et les villes doivent être complètement séparés »).
        Les villes y ont leur section (#villes) depuis le 30 sept. 2026 ; avant, /mes-dossiers. Tout le contenu
        est rempli par commun/dq.js (renderMonDossier) : rien de personnel n'est dans le HTML. -->
+  <!-- LES RÈGLES (Martin, 5 oct. 2026 : « on pourrait quasiment faire une page de ça… à côté de
+       Facebook »). Les règles de sources du site, écrites une fois pour être montrées à quelqu'un :
+       tout ce que les encadrés de méthode disent page par page, réuni. Lien dans le pied de page. -->
+  
+
   
 
   
@@ -364,6 +369,7 @@ function goToFederal(evt){
   <div class="footer-inner">
   <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">construit avec Claude</span> <a class="footer-etmoi" href="/sources" data-i18n="footer.etmoi">et moi</a></span>
   <span class="footer-right-group">
+    <a class="footer-gh" href="/regles" data-i18n="footer.regles">Les règles</a>
     <a class="footer-gh" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook">Facebook</a>
     <a class="footer-gh footer-coffee" href="https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00" target="_blank" rel="noopener" aria-label="Offre-moi un café" data-i18n="footer.coffee">Offre-moi un café</a>
     <a class="footer-gh" href="/feed.xml" data-i18n="footer.rss" title="Flux RSS de « Quoi de neuf »">Flux RSS</a>
