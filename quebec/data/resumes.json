@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-02T14:50:26.540Z",
+ "generatedAt": "2026-10-05T17:16:15.322Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,148 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-08-03",
+  "depuis": "2026-08-06",
   "plafond": 120
  },
- "nombre": 1619,
- "genereCetteFois": 2,
+ "nombre": 1624,
+ "genereCetteFois": 5,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.0793,
-  "jetonsEntree": 11159,
-  "jetonsSortie": 940
+  "montant": 0.2184,
+  "jetonsEntree": 32272,
+  "jetonsSortie": 2280
  },
  "resumes": [
+  {
+   "id": "PA2026-137.pdf",
+   "numero": "PA2026-137",
+   "date": "2026-10-02",
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "objet": "Conclusion d'une convention entre la Ville de Québec et le ministre des Affaires municipales relativement à la réception d'une aide financière d'un montant de 5 629 757 $ dans le cadre du volet 2 du programme Accélérer la transition climatique locale (ATCL)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-137.pdf",
+   "puces": [
+    "La Ville de Québec signe une entente avec le ministre des Affaires municipales pour recevoir une aide financière de 5 629 757 $.",
+    "L'argent vient du volet 2 du programme Accélérer la transition climatique locale (ATCL), lié aux plans climat.",
+    "Cette somme servira à réaliser 12 projets de la Ville.",
+    "La Ville avait déposé sa programmation lors de l'appel de projets tenu du 3 décembre 2025 au 31 janvier 2026, et a reçu une promesse d'aide le 14 juillet 2026.",
+    "Le ministère verse jusqu'à 80 % du montant après la signature, et le solde une fois la reddition de comptes finale approuvée.",
+    "La Ville doit réaliser chaque projet dans un délai maximal de cinq ans après le début de sa mise en œuvre.",
+    "François Trudel, directeur du Service de la planification de l'aménagement et de l'environnement, représentera la Ville au comité de suivi de l'entente."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "5 629 757 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-05T17:16:06.721Z",
+   "jetons": {
+    "entree": 7800,
+    "sortie": 438
+   }
+  },
+  {
+   "id": "DE2026-399.pdf",
+   "numero": "DE2026-399",
+   "date": "2026-10-02",
+   "unite": "Développement économique et grands projets",
+   "objet": "Avenant relatif à la modification de certaines obligations de l'offre d'achat intervenue entre la Ville de Québec et l'entreprise Beaudoin Picard immobilier inc., en vertu de la résolution CA-2026-0420 autorisant la vente d'un immeuble connu et désigné comme étant le lot 1 213 514 du cadastre du Qu",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-399.pdf",
+   "puces": [
+    "La Ville de Québec modifie l'entente de vente d'un immeuble situé aux 25 à 27, rue Saint-Stanislas et aux 1075 à 1085, rue Saint-Jean, dans le Vieux-Québec.",
+    "L'acheteur, Beaudoin Picard immobilier inc., obtient plus de temps : sa période d'inspection et de vérifications est prolongée jusqu'au 15 décembre 2026 inclusivement.",
+    "L'acheteur dit vouloir toujours réaliser son projet.",
+    "La vente avait été approuvée le 8 juillet 2026 par le conseil d'agglomération, au prix de 3 007 000 $ pour un terrain de 363,50 mètres carrés.",
+    "L'offre d'achat prévoit un dépôt de 150 000 $ et un solde de 2 857 000 $ payable chez le notaire.",
+    "L'acheteur doit commencer les travaux d'aménagement intérieur dans les 36 mois suivant la signature, sinon il paiera 3 000 $ par mois à la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 007 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-05T17:16:07.272Z",
+   "jetons": {
+    "entree": 8121,
+    "sortie": 461
+   }
+  },
+  {
+   "id": "RH2026-774.pdf",
+   "numero": "RH2026-774",
+   "date": "2026-10-02",
+   "unite": "Ressources humaines",
+   "objet": "Approbation du contrat d'engagement entre la Ville de Québec et monsieur Martin Lefebvre à titre de directeur associé du Service des relations citoyennes et des communications",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/RH2026-774.pdf",
+   "puces": [
+    "La Ville de Québec engage Martin Lefebvre comme directeur associé du Service des relations citoyennes et des communications.",
+    "Le contrat court du 11 octobre 2026 au 1er février 2027.",
+    "Son salaire annuel est fixé à 249 955 $ (échelle 2026), selon l'échelle de traitement des cadres de la Direction générale et des directeurs de service.",
+    "Il relève de la directrice générale adjointe – citoyen et vitalité urbaine et doit travailler exclusivement pour la Ville.",
+    "Il a droit aux assurances et au régime de retraite des cadres; les frais de déplacement et de représentation lui sont remboursés selon la politique en vigueur.",
+    "S'il démissionne, il doit donner un préavis de quatre semaines; si la Ville met fin au contrat, le préavis va de 3 à 12 mois.",
+    "Le contrat doit être approuvé par le conseil d'agglomération de Québec."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "249 955 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-05T17:16:06.754Z",
+   "jetons": {
+    "entree": 5417,
+    "sortie": 419
+   }
+  },
+  {
+   "id": "RH2026-775.pdf",
+   "numero": "RH2026-775",
+   "date": "2026-10-02",
+   "unite": "Ressources humaines",
+   "objet": "Approbation du contrat d'engagement entre la Ville de Québec et madame Marie-Claude Brousseau à titre de directrice du Service des relations citoyennes et des communications",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/RH2026-775.pdf",
+   "puces": [
+    "La Ville de Québec embauche Marie-Claude Brousseau comme directrice du Service des relations citoyennes et des communications, à compter du 11 octobre 2026.",
+    "Elle occupait jusqu'ici le poste de directrice associée, classe 1, dans ce même service.",
+    "Son salaire annuel est fixé à 186 101 $, selon l'échelle de traitement 2026 des directeurs de service.",
+    "Le contrat est à durée indéterminée; elle relève de la directrice générale adjointe – citoyen et vitalité urbaine.",
+    "Elle doit travailler exclusivement pour la Ville et peut quitter avec un préavis écrit de quatre semaines.",
+    "Si la Ville met fin au contrat, le préavis (ou l'indemnité équivalente) va de 3 à 12 mois, soit un mois par année de service.",
+    "Les fonds nécessaires, avantages sociaux inclus, sont déjà prévus au budget du service."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "186 101 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-05T17:16:06.426Z",
+   "jetons": {
+    "entree": 5531,
+    "sortie": 421
+   }
+  },
+  {
+   "id": "TM2026-268.pdf",
+   "numero": "TM2026-268",
+   "date": "2026-10-02",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Avis de proposition déposé par monsieur le conseiller Marc Roussin, lors de la séance du conseil de la ville tenue le 15 septembre 2026, portant sur l'amélioration de la mobilité dans le district de Lac-Saint-Charles-Saint-Émile durant les travaux majeurs à trois (3) des quatre (4) accès au secteur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-268.pdf",
+   "puces": [
+    "Des travaux majeurs sont en cours sur la rue de la Faune, la rue Élizabeth-II et la rue Jacques-Bédard, dans le district de Lac-Saint-Charles–Saint-Émile.",
+    "Le conseiller Marc Roussin a déposé un avis de proposition demandant notamment d'arrêter les nouveaux chantiers, d'ajouter de la signalisation contre les véhicules lourds, plus de policiers et une compensation pour les commerçants.",
+    "La Ville propose de remplacer ce texte par deux demandes : poursuivre la planification et l'ordonnancement intégrés des travaux, et analyser la pertinence d'un programme de soutien financier aux entreprises touchées.",
+    "Des policiers sont déjà déployés à 2 intersections le matin et à 6 carrefours en après-midi dans le secteur.",
+    "La Ville précise qu'aucune rue n'est complètement fermée : l'accès aux commerces, aux piétons et aux cyclistes est maintenu.",
+    "Aucune demande d'interdiction de circulation des véhicules lourds n'a été reçue par le Service du transport et de la mobilité intelligente.",
+    "La coordination avec le ministère des Transports se fait lors de 3 rencontres stratégiques par année et de rencontres hebdomadaires."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-05T17:16:15.321Z",
+   "jetons": {
+    "entree": 5403,
+    "sortie": 541
+   }
+  },
   {
    "id": "PA2026-129.pdf",
    "numero": "PA2026-129",
