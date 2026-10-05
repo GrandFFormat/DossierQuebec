@@ -39,7 +39,20 @@ const MAX_CHARS = 60000;
 // entièrement fabriqué par notre méthode, que le lecteur aurait mis au compte
 // des partis. On retient donc au plus PAR_PARTI engagements par parti, les plus
 // récents d'abord pour les fils d'annonces.
-const PAR_PARTI = 8;
+//
+// ⚠️ RENVERSÉ PAR MARTIN LE 5 OCT. 2026 : « pousse toutes les promesses du PQ, qu'ils ont sur leur
+// site. Même chose pour les autres partis. » La règle n'est donc plus « 8 chacun » mais « TOUT ce
+// que chaque parti a publié de concret » : la même règle pour tous, sans plafond. Les nombres
+// diffèrent alors d'un parti à l'autre, et c'est le reflet de ce que chacun a publié. Un document
+// long est lu en entier, par tranches (voir traiterParti) ; avant, seuls ses 60 000 premiers
+// caractères l'étaient.
+const PAR_PARTI = Infinity;
+// Tranches COURTES, de la taille d'une annonce : lue d'un bloc (55 000 caractères), la plateforme du
+// PCQ ne donnait que 20 engagements quand les 56 annonces du PQ, lues une à une, en donnaient 147.
+// L'écart venait de notre découpage, pas des partis.
+const TRANCHE = 12000;
+const PAR_TRANCHE = 40;      // engagements demandés par tranche de document
+const CHEVAUCHEMENT = 1500;  // une phrase à cheval sur deux tranches reste lisible dans l'une
 
 // Sources accessibles seulement.
 //
@@ -68,7 +81,7 @@ const SOURCES = [
   { party:'PQ',  type:'sitemap', sitemap:'https://pq.org/nouvelles-sitemap.xml',
     depuis:'2026-08-27',                              // dissolution = début de la campagne
     exclure:/candidat|candidatur|investiture/i,       // investitures : pas des engagements
-    parPage:1, maxPages:20,
+    parPage:10, maxPages:300,
     label:'Parti Québécois — annonce de campagne (site officiel)', page:'https://pq.org/nouvelles/' },
 ];
 
@@ -82,6 +95,8 @@ Règles absolues :
 - Neutralité : aucun commentaire, aucun jugement, aucune mise en contexte.
 
 Réponds UNIQUEMENT avec un tableau JSON : [{"quote":"...","theme":"..."}]`;
+
+const THEMES = ['Santé', 'Logement', 'Transport', 'Éducation', 'Environnement', 'Économie', 'Fiscalité', 'Finances publiques', 'Famille', 'Immigration', 'Culture', 'Aînés', 'Énergie', 'Infrastructures', 'Justice', 'Agriculture'];
 
 const client = new Anthropic();
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -167,11 +182,11 @@ async function extraire(src, texte, combien = PAR_PARTI) {
   const clip = texte.length > MAX_CHARS ? texte.slice(0, MAX_CHARS) : texte;
   const res = await client.messages.create({
     model: MODEL,
-    max_tokens: 1500,
+    max_tokens: 8000,
     thinking: { type: 'disabled' },
     output_config: { effort: 'low' },
     system: SYSTEM,
-    messages: [{ role: 'user', content: `Parti : ${src.party}\nExtrais jusqu'à ${combien} engagements.\n\n${clip}` }],
+    messages: [{ role: 'user', content: `Parti : ${src.party}\nExtrais TOUS les engagements concrets de ce texte (au plus ${combien}). S'il n'y en a aucun, réponds [].\n\n${clip}` }],
   });
   const bloc = res.content.find((b) => b.type === 'text');
   if (!bloc) return [];
@@ -189,18 +204,30 @@ async function traiterParti(src, ancien) {
     console.log(`  = ${src.party} : source inchangée, ${dejaVu.length} promesse(s) conservée(s).`);
     return dejaVu;
   }
-  const { gardes, rejets } = await verifier(src, texte, empreinte, src.page, src.label);
+  // Le document entier, par tranches : chaque tranche est vérifiée contre LE DOCUMENT COMPLET
+  // (une citation à cheval sur deux tranches reste valable), et un engagement trouvé deux fois
+  // (chevauchement) n'est gardé qu'une fois.
+  const gardes = [];
+  let rejets = 0;
+  const vus = new Set();
+  for (let debut = 0; debut < texte.length; debut += TRANCHE - CHEVAUCHEMENT) {
+    const r = await verifier(src, texte.slice(debut, debut + TRANCHE), empreinte, src.page, src.label, PAR_TRANCHE, texte);
+    rejets += r.rejets;
+    for (const g of r.gardes) if (!vus.has(g.id)) { vus.add(g.id); gardes.push(g); }
+    if (debut + TRANCHE >= texte.length) break;
+    await sleep(600);
+  }
   console.log(`  + ${src.party} : ${gardes.length} retenue(s), ${rejets} rejetée(s) (citation introuvable dans la source).`);
   return gardes;
 }
 
 // Extraction PUIS vérification. Séparé pour être partagé entre un document
 // consolidé et une page de fil d'annonces — le garde-fou doit être le même.
-async function verifier(src, texte, empreinte, url, label, combien) {
+async function verifier(src, texte, empreinte, url, label, combien, entier = texte) {
   const brut = await extraire(src, texte, combien);
   const gardes = [];
   let rejets = 0;
-  const texteNorm = normaliser(texte);
+  const texteNorm = normaliser(entier);
   for (const p of brut) {
     const q = String(p.quote || '').trim();
     const jeter = (raison) => { rejets++; if (DEBUG) console.log(`      ✗ [${raison}] ${q.slice(0, 90)}`); };
@@ -217,7 +244,9 @@ async function verifier(src, texte, empreinte, url, label, combien) {
     gardes.push({
       id: `${src.party.toLowerCase()}-${createHash('sha256').update(q).digest('hex').slice(0, 8)}`,
       party: src.party,
-      theme: String(p.theme || 'Économie').trim(),
+      // Un sujet hors de la liste demandée (le modèle en invente parfois un) devient « Autres » :
+      // on ne range pas une promesse sous un sujet qu'on aurait choisi à sa place.
+      theme: THEMES.includes(String(p.theme || '').trim()) ? String(p.theme).trim() : 'Autres',
       quote: q,
       sourceLabel: label,
       sourceUrl: url,
@@ -268,7 +297,11 @@ async function traiterFil(src, ancien, pagesVues) {
 async function main() {
   const avant = existsSync(OUT_PATH) ? JSON.parse(readFileSync(OUT_PATH, 'utf-8')) : {};
   const ancien = avant.promises || [];
-  const pagesVues = Array.isArray(avant.pagesVues) ? [...avant.pagesVues] : [];
+  // PROMISES_REFAIRE=1 : tout relire, comme si rien n'avait été lu (changement de règle d'extraction).
+  // Les anciennes promesses ne servent alors que de repli si une source ne répond pas.
+  const refaire = process.env.PROMISES_REFAIRE === '1';
+  const base = refaire ? [] : ancien;
+  const pagesVues = (!refaire || SEUL) && Array.isArray(avant.pagesVues) ? [...avant.pagesVues] : [];
   // ⚠️ Plus aucune entrée manuelle depuis le 2026-09-09. Le mécanisme reste, mais
   // une entrée `manual` échappe au garde-fou ET survit à toutes les exécutions :
   // elle n'est donc jamais réexaminée. N'en ajouter qu'en toute connaissance de
@@ -282,8 +315,8 @@ async function main() {
     if (SEUL && src.party !== SEUL) { resultat.push(...ancien.filter((p) => p.party === src.party)); continue; }
     try {
       resultat.push(...(src.type === 'sitemap'
-        ? await traiterFil(src, ancien, pagesVues)
-        : await traiterParti(src, ancien)));
+        ? await traiterFil(src, base, pagesVues)
+        : await traiterParti(src, base)));
     } catch (e) {
       echecs++;
       console.error(`  ⚠ ${src.party} : ${e.message} — anciennes promesses conservées.`);

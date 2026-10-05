@@ -281,10 +281,10 @@ const translations = {
     'prom.m1':"Exact quote",
     'prom.m2':"Source linked",
     'prom.m3':"No judgment",
-    'prom.caq':"Only one source is accepted here: the <b>party's own official documents</b>, quoted word for word. <b>At most 8 commitments per party</b>, and the <b>Coalition avenir Québec</b> does not appear at all — its website asks automated tools like ours not to read it, and we honour that request rather than work around it.",
+    'prom.caq':"Only one source is accepted here: the <b>party's own official documents</b>, quoted word for word. <b>Every concrete commitment found there</b>, and the <b>Coalition avenir Québec</b> does not appear at all — its website asks automated tools like ours not to read it, and we honour that request rather than work around it.",
     'prom.meth.h':"Where these promises come from",
     'prom.meth.1':"<b>From the parties themselves.</b> Every quote is taken from a document the party published — an electoral platform or a campaign announcement — and reproduced word for word. A quote that cannot be found verbatim in the source is rejected automatically. The “See the source” link on each card leads to the original.",
-    'prom.meth.2':"<b>These are not the “flagship” promises.</b> At most 8 per party, selected automatically from the most concrete ones — amounts, targets, deadlines. Nothing here ranks commitments by importance. A central commitment stated without a figure may therefore be missing, and the parties have published more.",
+    'prom.meth.2':"<b>Everything concrete each party has published.</b> Commitments are picked out automatically: amounts, targets, deadlines, things created or abolished. Nothing here ranks them by importance. A commitment stated with nothing concrete may be missing. The number of cards varies from party to party: it reflects how much text each one has published.",
     'prom.meth.3':"<b>The period covered is not the same for everyone.</b> Québec solidaire, the Liberal Party and the Conservative Party publish a full platform, read in its entirety. The Parti Québécois does not: its commitments are read from its campaign announcements since the August 27 dissolution.",
     'prom.meth.4':"<b>The Coalition avenir Québec is absent.</b> It has published commitments on its website, but that site asks automated tools not to read it. We do not work around that request. It will be added as soon as a readable source exists.",
     'prom.meth.5':"<b>Nothing is taken from the news media.</b> A commitment announced at a press conference but never published by the party does not appear here. Quebec news organizations have opted their content out of AI use, and our permission requests remain unanswered.",
@@ -1487,8 +1487,8 @@ function renderPromFilters(){
   // Compteurs CROISÉS : le nombre affiché sur un bouton de parti tient compte du
   // sujet sélectionné, et inversement. Sinon le chiffre ne correspondrait pas aux
   // cartes visibles à l'écran. Un « 0 » est donc possible et il est honnête : ce
-  // parti n'a rien dans ce sujet PARMI CE QU'ON PUBLIE — le plafond de 8 par
-  // parti est expliqué juste au-dessus, dans l'encadré.
+  // parti n'a rien dans ce sujet parmi ce qu'on a trouvé dans ses documents
+  // (plus de plafond par parti depuis le 5 oct. 2026).
   const nb = (f) => promises.filter(f).length;
   const compteur = (n) => ` <span class="qf-n">${n}</span>`;
 
@@ -1557,7 +1557,16 @@ function renderPromises(){
     el.innerHTML = `<div class="no-results">${isEn ? 'No promise matches these filters.' : 'Aucune promesse ne correspond à ces filtres.'}</div>`;
     return;
   }
-  el.innerHTML = liste.map(p => {
+  // Une section par parti (Martin, 5 oct. 2026) : le parti qui forme le gouvernement en tête
+  // (ASSEMBLY.gagnant, vide tant que le résultat n'est pas officiel), les autres ensuite.
+  const nomParti = (sigle) => {
+    const s = seats.find(x => x.party === sigle);
+    // Sans le rôle entre parenthèses (« opposition officielle ») : il date de la législature dissoute.
+    return s ? (isEn ? s.labelEn : s.label).replace(/\s*\(.*\)$/, '') : sigle;
+  };
+  const partisListe = [...new Set(liste.map(p => p.party))]
+    .sort((a, b) => (b === ASSEMBLY.gagnant) - (a === ASSEMBLY.gagnant));
+  const carte = (p) => {
     const couleur = partyColors[p.party] || '#8B8578';
     const badge = `<span class="depute-party" style="background:${couleur}; color:${partyText(p.party)}">${p.party}</span>`;
     const brouillon = p.draft ? `<span class="prom-draft">${isEn ? 'To verify' : 'À vérifier'}</span>` : '';
@@ -1582,6 +1591,15 @@ function renderPromises(){
         </div>
       </div>
     </div>`;
+  };
+  el.innerHTML = partisListe.map(sigle => {
+    const cartes = liste.filter(p => p.party === sigle);
+    const gouv = sigle === ASSEMBLY.gagnant;
+    const n = `${cartes.length} ${isEn ? (cartes.length > 1 ? 'promises' : 'promise') : (cartes.length > 1 ? 'promesses' : 'promesse')}`;
+    return `<section class="prom-parti${gouv ? ' prom-parti-gouv' : ''}">
+      <h3 class="prom-parti-titre"><span class="prom-parti-puce" style="background:${partyColors[sigle] || '#8B8578'}"></span>${nomParti(sigle)}${gouv ? ` <span class="prom-parti-role">${isEn ? 'Forms the government' : 'Forme le gouvernement'}</span>` : ''} <span class="prom-parti-n">${n}</span></h3>
+      ${cartes.map(carte).join('')}
+    </section>`;
   }).join('');
 }
 
@@ -2304,6 +2322,11 @@ const ASSEMBLY = {
   // passé toute seule (voir phase), mais n'invente jamais de résultat.
   resultat: '',
   resultatEn: '',
+  // Le sigle du parti qui forme le gouvernement ('PQ', 'PLQ', 'CAQ', 'QS', 'PCQ'), à remplir en même
+  // temps que resultat, d'après Élections Québec. Sur la page Promesses, ses engagements passent
+  // alors en tête, les autres partis plus bas (Martin, 5 oct. 2026). Vide : aucun parti n'est mis
+  // devant, l'ordre reste celui des sources.
+  gagnant: '',
 };
 // Phase déduite de la DATE LOCALE du visiteur, pour que le site ne dise pas
 // « élections le 5 octobre » le matin du 6 sans que personne n'ait à y toucher —

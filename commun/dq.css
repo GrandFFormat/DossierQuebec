@@ -2016,3 +2016,11 @@
 /* La ligne d'archives des projets de loi (commun/dq.js, renderArchivesNote). */
 .archives-note{margin:18px 0 0; font-size:15px; line-height:1.5; color:var(--ink);}
 .archives-note a{color:var(--ink); font-weight:800; text-decoration:underline; text-underline-offset:3px;}
+
+/* Promesses : une section par parti, celui qui forme le gouvernement en tête (renderPromises). */
+.prom-parti{margin-top:34px;}
+.prom-parti:first-child{margin-top:0;}
+.prom-parti-titre{display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin:0 0 16px; padding-bottom:10px; border-bottom:3px solid var(--ink); font-family:'Archivo',sans-serif; font-size:24px; font-weight:900; text-transform:uppercase; letter-spacing:-0.01em; color:var(--ink);}
+.prom-parti-puce{width:16px; height:16px; border:2px solid var(--ink); flex:none;}
+.prom-parti-n{margin-left:auto; font-size:12px; font-weight:800; letter-spacing:0.06em;}
+.prom-parti-role{font-size:11px; font-weight:800; letter-spacing:0.06em; padding:3px 8px; background:var(--ink); color:var(--card);}
