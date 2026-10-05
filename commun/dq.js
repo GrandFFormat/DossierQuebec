@@ -3063,8 +3063,8 @@ function shareBill(billId, platform, evt){
   // L'adresse de la page du projet (scripts/build-bill-pages.js) : c'est elle que Google indexe.
   const url = (b.legislature && b.introSession ? `https://dossierquebec.ca/projets-de-loi/${b.num}-${b.legislature}-${b.introSession}` : `https://dossierquebec.ca/projets-de-loi?pl=${encodeURIComponent(b.num)}`) + paramLangue(false);
   const text = isEn
-    ? `Bill no. ${b.num} — ${title}. Plain-language summary on DossierQuébec:`
-    : `Projet de loi n° ${b.num} — ${title}. Résumé en clair sur DossierQuébec :`;
+    ? `Bill no. ${b.num} — ${title}`
+    : `Projet de loi n° ${b.num} — ${title}`;
   if(platform === 'x'){
     window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank', 'noopener,width=600,height=520');
   } else if(platform === 'fb'){
