@@ -943,6 +943,59 @@ function goToFederal(evt){
        22 sept. 2026 : « mes dossiers provincial et les villes doivent être complètement séparés »).
        Les villes y ont leur section (#villes) depuis le 30 sept. 2026 ; avant, /mes-dossiers. Tout le contenu
        est rempli par commun/dq.js (renderMonDossier) : rien de personnel n'est dans le HTML. -->
+  <!-- LES RÈGLES (Martin, 5 oct. 2026 : « on pourrait quasiment faire une page de ça… à côté de
+       Facebook »). Les règles de sources du site, écrites une fois pour être montrées à quelqu'un :
+       tout ce que les encadrés de méthode disent page par page, réuni. Lien dans le pied de page. -->
+  <section class="view" id="view-regles">
+    <div class="view-hero">
+      <h2 class="hero-h1 hero-h1-md">
+        <span class="hero-sujet" data-i18n="sujet.regles">Les règles de sources de DossierQuébec</span>
+        <span data-i18n="regleshero.l1">Les règles,</span>
+        <span class="hero-outline" data-i18n="regleshero.l2">noir sur blanc.</span>
+      </h2>
+      <p class="view-hero-sub" data-i18n="regleshero.sub">Le site ne publie que ce qu'une institution ou un parti a lui-même publié, tel quel, avec un lien vers l'original. <b>Et il dit clairement ce qui manque.</b></p>
+    </div>
+    <ol class="regles-liste">
+      <li class="regle">
+        <h2 class="regle-titre"><span class="regle-no">1</span><span data-i18n="regles.1.h">Jamais de donnée inventée</span></h2>
+        <p data-i18n="regles.1.p">C'est la règle numéro un. Si une information manque, la case reste vide ou le site le dit. On ne devine pas et on ne complète pas.</p>
+      </li>
+      <li class="regle">
+        <h2 class="regle-titre"><span class="regle-no">2</span><span data-i18n="regles.2.h">Sources primaires seulement</span></h2>
+        <p data-i18n="regles.2.p">On cite l'institution ou le parti lui-même, jamais quelqu'un qui en parle : l'<b>Assemblée nationale</b> et <b>Données Québec</b> pour les projets de loi, les votes et les député·e·s ; les <b>Villes</b> (portails de décisions, procès-verbaux) pour les décisions municipales ; <b>Élections Québec</b> pour les résultats électoraux ; les <b>documents officiels des partis</b> (plateforme, page d'engagements, annonces sur leur site) pour les promesses.</p>
+      </li>
+      <li class="regle">
+        <h2 class="regle-titre"><span class="regle-no">3</span><span data-i18n="regles.3.h">Aucun média</span></h2>
+        <p data-i18n="regles.3.p">Rien n'est tiré de la presse québécoise ou canadienne. Les médias ont retiré leur contenu de l'usage par l'intelligence artificielle, et nos demandes d'autorisation sont restées sans réponse. Une promesse faite en conférence de presse, mais jamais publiée par le parti, n'apparaît donc pas sur le site.</p>
+      </li>
+      <li class="regle">
+        <h2 class="regle-titre"><span class="regle-no">4</span><span data-i18n="regles.4.h">On respecte les refus des sites</span></h2>
+        <p data-i18n="regles.4.p">Si un site demande aux outils automatisés de ne pas le lire, on ne le lit pas, même quand ce serait techniquement possible : c'est pour cette raison que la <b>Coalition avenir Québec</b> est absente de la page des promesses. On ne contourne jamais un CAPTCHA ni une protection contre les robots. Quand l'accès est bloqué, on écrit à l'organisme pour demander la permission.</p>
+      </li>
+      <li class="regle">
+        <h2 class="regle-titre"><span class="regle-no">5</span><span data-i18n="regles.5.h">Les promesses sont citées mot pour mot</span></h2>
+        <p data-i18n="regles.5.p">Chaque promesse est une citation exacte du document du parti. Une citation qui ne se retrouve pas telle quelle dans la source est rejetée automatiquement, tout comme une citation coupée en plein mot. Chaque carte porte un lien « Voir la source », qui mène au document d'origine. Ce garde-fou existe parce qu'à la toute première saisie, deux promesses sur quatre étaient fausses.</p>
+      </li>
+      <li class="regle">
+        <h2 class="regle-titre"><span class="regle-no">6</span><span data-i18n="regles.6.h">La même règle pour tous les partis</span></h2>
+        <p data-i18n="regles.6.p">On publie tous les engagements concrets que chaque parti a mis sur son site, sans plafond et sans tri par importance. Le nombre de cartes varie d'un parti à l'autre : il reflète ce que chacun a publié, pas un choix du site.</p>
+      </li>
+      <li class="regle">
+        <h2 class="regle-titre"><span class="regle-no">7</span><span data-i18n="regles.7.h">Aucun verdict</span></h2>
+        <p data-i18n="regles.7.p">Le site ne dit jamais « promesse tenue » ou « promesse brisée ». Il met côte à côte la promesse et l'action, chacune avec sa source. C'est vous qui jugez.</p>
+      </li>
+      <li class="regle">
+        <h2 class="regle-titre"><span class="regle-no">8</span><span data-i18n="regles.8.h">Le texte officiel fait toujours foi</span></h2>
+        <p data-i18n="regles.8.p">Les résumés en langage clair sont faits à partir du texte officiel, et le texte intégral reste à un clic. En cas d'écart, c'est le document d'origine qui compte. Le site est indépendant et n'a aucun caractère officiel.</p>
+      </li>
+      <li class="regle">
+        <h2 class="regle-titre"><span class="regle-no">9</span><span data-i18n="regles.9.h">On explique ce qui manque</span></h2>
+        <p data-i18n="regles.9.p">Quand une source est absente ou incomplète, la page le dit et dit pourquoi. Une absence ne doit jamais être lue comme un silence du parti ou de la Ville.</p>
+      </li>
+    </ol>
+    <p class="regles-suite" data-i18n="regles.suite">Ces règles s'appliquent partout sur le site. Voyez-les à l'œuvre sur la page <a href="/promesses">Promesses</a>, et suivez ce qui change dans les <a href="/sources">mises à jour du site</a>.</p>
+  </section>
+
   <section class="view" id="view-mondossier">
     <div class="view-hero">
       <h2 class="hero-h1 hero-h1-md">
@@ -1036,6 +1089,7 @@ function goToFederal(evt){
   <div class="footer-inner">
   <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">construit avec Claude</span> <a class="footer-etmoi" href="/sources" data-i18n="footer.etmoi">et moi</a></span>
   <span class="footer-right-group">
+    <a class="footer-gh" href="/regles" data-i18n="footer.regles">Les règles</a>
     <a class="footer-gh" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook">Facebook</a>
     <a class="footer-gh footer-coffee" href="https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00" target="_blank" rel="noopener" aria-label="Offre-moi un café" data-i18n="footer.coffee">Offre-moi un café</a>
     <a class="footer-gh" href="/feed.xml" data-i18n="footer.rss" title="Flux RSS de « Quoi de neuf »">Flux RSS</a>

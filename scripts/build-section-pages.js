@@ -218,6 +218,14 @@ const PAGES = [
     fil: 'Mon dossier', cle: 'fil.mondossier', frequence: 'weekly', priorite: '0.1',
   },
   {
+    // Les règles de sources du site (5 oct. 2026), lien dans le pied de page.
+    fichier: 'regles.html', vue: 'regles', onglet: null, url: '/regles',
+    donnees: [],
+    title: 'Les règles de sources du site — DossierQuébec',
+    desc: "Les neuf règles de DossierQuébec sur ses sources : jamais de donnée inventée, sources primaires seulement, aucun média, citations mot pour mot, aucun verdict.",
+    fil: 'Les règles', cle: 'fil.regles', frequence: 'monthly', priorite: '0.5',
+  },
+  {
     fichier: 'sources.html', vue: 'bd', onglet: null, url: '/sources',
     donnees: ['journal'],
     title: 'Mises à jour du site — DossierQuébec',
