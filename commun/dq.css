@@ -2033,3 +2033,14 @@
 .regle p{margin:0; font-size:15.5px; line-height:1.6; color:var(--ink); max-width:75ch;}
 .regles-suite{margin:26px 0 0; font-size:15px; line-height:1.6; color:var(--ink);}
 .regles-suite a{color:var(--ink); font-weight:800; text-decoration:underline; text-underline-offset:3px;}
+
+/* Promesses : les autres partis, repliés sous celui qui a le plus de sièges (un menu par parti). */
+.prom-parti-repli{margin-top:16px; border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow);}
+.prom-parti-repli > summary.prom-parti-titre{margin:0; padding:16px 20px; border-bottom:0; cursor:pointer; list-style:none; font-size:20px;}
+.prom-parti-repli > summary::-webkit-details-marker{display:none;}
+.prom-parti-repli > summary .prom-parti-n::after{content:" +"; font-size:18px;}
+.prom-parti-repli[open] > summary .prom-parti-n::after{content:" −";}
+.prom-parti-repli[open] > summary.prom-parti-titre{border-bottom:3px solid var(--ink); margin-bottom:16px;}
+.prom-parti-repli[open]{padding-bottom:4px;}
+.prom-parti-repli > .prom-card{margin-left:16px; margin-right:16px;}
+.prom-parti-repli > summary:focus-visible{outline:3px solid var(--ink); outline-offset:3px;}
