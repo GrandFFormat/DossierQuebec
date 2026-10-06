@@ -282,7 +282,7 @@ function goToFederal(evt){
       <ol class="maj-liste" id="journalListe" aria-live="polite"></ol>
     <div class="prerendu" data-prerendu="journal">
       <ul aria-label="Mises à jour du site">
-        <li><span class="pr-meta">6 octobre 2026 —</span> <b>Une vraie page pour les adresses introuvables</b> Une adresse qui n’existe pas menait au message brut de l’hébergeur, en anglais. Elle mène maintenant à une page du site : « Cette page est morte dans l’œuf », avec un faux vote (0 pour, 404 contre) clairement présenté comme une blague, et des liens vers les projets de loi, les votes, les promesses et l’accueil.</li>
+        <li><span class="pr-meta">6 octobre 2026 —</span> <b>Une vraie page pour les adresses introuvables</b> Une adresse qui n’existe pas menait au message brut de l’hébergeur, en anglais. Elle mène maintenant à une page du site : « Cette page est morte dans l’œuf », avec l’en-tête et le menu du site, un faux vote (0 pour, 404 contre) clairement présenté comme une blague, et des liens vers les projets de loi, les votes, les promesses et l’accueil.</li>
         <li><span class="pr-meta">6 octobre 2026 —</span> <b>Le site expliqué aux assistants (llms.txt)</b> DossierQuébec publie maintenant un fichier dossierquebec.ca/llms.txt, destiné aux assistants comme ChatGPT, Claude ou Perplexity. Il leur dit ce qu’est le site (indépendant et non officiel), d’où viennent les données, quelles pages lire, et leur demande de citer la source officielle avec le site.</li>
         <li><span class="pr-meta">6 octobre 2026 —</span> <b>Le résultat de l’élection est sur l’accueil</b> La bande de l’élection, sur la page d’accueil, donne maintenant le résultat du 5 octobre d’après Élections Québec : le Parti Québécois a remporté le plus de sièges, 59 sur 127 ; le Parti libéral en a 40, le Parti conservateur 19 et Québec solidaire 9.</li>
         <li><span class="pr-meta">6 octobre 2026 —</span> <b>Promesses : le Parti Québécois en tête, les autres partis en menus</b> Selon les résultats finaux d’Élections Québec, le Parti Québécois a remporté le plus de sièges à l’élection du 5 octobre : 59 sur 127. Ses 147 engagements sont maintenant en tête de la page Promesses. Ceux du Parti libéral, du Parti conservateur et de Québec solidaire restent tous disponibles, plus bas, dans un menu par parti qui s’ouvre d’un clic.</li>
@@ -338,6 +338,15 @@ function goToFederal(evt){
   <!-- LES RÈGLES (Martin, 5 oct. 2026 : « on pourrait quasiment faire une page de ça… à côté de
        Facebook »). Les règles de sources du site, écrites une fois pour être montrées à quelqu'un :
        tout ce que les encadrés de méthode disent page par page, réuni. Lien dans le pied de page. -->
+  
+
+  <!-- LA PAGE 404 (Martin, 6 oct. 2026 : « faut une page drôle 404 », puis : avec le jaune et tout
+       le kit du site, « morte dans l'œuf », et pas de blanc sur noir). Vercel sert 404.html, avec le
+       code 404, pour toute adresse qui n'existe pas ; avant, c'était le message brut de l'hébergeur,
+       en anglais. Fabriquée comme les autres pages (scripts/build-section-pages.js, vue
+       « introuvable »), donc avec l'en-tête, le menu et le pied du site.
+       « Morte dans l'œuf » est le libellé des projets de loi jamais rendus plus loin que la
+       présentation. Le faux vote est ÉTIQUETÉ comme une blague : ce site n'invente jamais de donnée. -->
   
 
   

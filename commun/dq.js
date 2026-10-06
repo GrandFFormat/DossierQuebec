@@ -419,6 +419,29 @@ const translations = {
     'regles.9.h':"We explain what is missing",
     'regles.9.p':"When a source is absent or incomplete, the page says so and says why. An absence must never be read as silence from the party or the city.",
     'regles.suite':"These rules apply everywhere on the site. See them at work on the <a href=\"/promesses\">Promises</a> page, and follow what changes in the <a href=\"/sources\">site updates</a>.",
+    'fil.introuvable':"Page not found",
+    'sujet.introuvable':"Page not found",
+    'p404.bande.h':"⚠️ Error 404 — this address leads nowhere",
+    'p404.bande.p':"The page you asked for does not exist on DossierQuébec, or its address has changed. No harm done: <b>the real bills are one click away.</b>",
+    'p404.l1':"This page was dead",
+    'p404.l2':"on arrival.",
+    'p404.sub':"Like many bills: introduced with the best intentions, never passed. <b>Or the address has a typo, which happens even to legislative drafters.</b>",
+    'p404.vote.sur':"Recorded division",
+    'p404.vote.motion':"“That this page exist.”",
+    'p404.pour':"Yeas",
+    'p404.contre':"Nays",
+    'p404.abst':"Abstentions",
+    'p404.verdict':"Motion defeated. Not even close.",
+    'p404.e1':"Introduction ✓",
+    'p404.e2':"Passage in principle",
+    'p404.e3':"Clause-by-clause study",
+    'p404.e4':"Assent",
+    'p404.blague':"This vote is a joke: it never took place, and there are not 404 MNAs. On this site, it is the only invented data. <a href=\"/votes\">The real votes are here.</a>",
+    'p404.lien1':"The ones that actually exist, in plain language.",
+    'p404.lien2':"Who voted for what, MNA by MNA.",
+    'p404.lien3':"What the parties promised, word for word.",
+    'p404.accueil':"Home",
+    'p404.lien4':"Let's start over, no hard feelings.",
     'footer.rss':"RSS feed",
     'quicknav.mission':"Our mission",
     'quicknav.composition':"Composition",
@@ -3637,9 +3660,13 @@ const PAGE_META = {
   lexique:   { en:"National Assembly glossary in plain language — DossierQuébec" },
   promesses: { en:"2026 Quebec election promises — DossierQuébec" },
   mondossier:{ en:"My file — DossierQuébec" },
+  introuvable:{ en:"Page not found (404) — DossierQuébec" },
   regles:    { en:"DossierQuébec's sourcing rules — DossierQuébec" },
 };
 function viewFromPath(){
+  // La page 404 est servie à N'IMPORTE quelle adresse inconnue : c'est sa présence qui la désigne,
+  // pas le chemin (sinon elle se prendrait pour l'accueil).
+  if(document.getElementById('view-introuvable')) return 'introuvable';
   const seg = location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '');
   // Une page de projet de loi (/projets-de-loi/3-43-3, scripts/build-bill-pages.js) est la vue Projets.
   if(seg.startsWith('projets-de-loi/')) return 'projets';

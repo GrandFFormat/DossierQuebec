@@ -1,136 +1,382 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<!-- LA PAGE 404 (Martin, 6 oct. 2026 : « faut une page drôle 404 »). Vercel la sert d'elle-même,
-     avec le code 404, pour toute adresse qui n'existe pas : avant, le visiteur recevait le message
-     brut de l'hébergeur, en anglais, sans menu. Page autonome, écrite à la main : elle ne passe ni
-     par gabarit.html ni par commun/dq.js (qui prendrait une adresse inconnue pour l'accueil). Elle
-     emprunte seulement les couleurs et les polices de commun/dq.css.
-     La blague est celle du site : une page introuvable est « morte dans l'œuf », le libellé des cartes
-     de projets de loi jamais rendus plus loin que la présentation (Martin : « sonnerait mieux »). Le faux vote est
-     ÉTIQUETÉ comme une blague, parce que ce site n'invente jamais de donnée. -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
+<!-- Consentement (Loi 25) : par défaut, Google Analytics n'a PAS le droit de déposer de témoins.
+     La bannière (commun/consentement.js) passe analytics_storage à « granted » après « Accepter ». -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: (function(){ try { return localStorage.getItem('dq:temoins') === 'oui' ? 'granted' : 'denied'; } catch (e) { return 'denied'; } })(), ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-87R1S6SR9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-87R1S6SR9Y', { content_group: 'Assemblée' });
+</script>
+<script src="/commun/consentement.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+/* La langue, avant d'afficher quoi que ce soit — EXACTEMENT la décision de langueDeDepart
+   (commun/dq.js) : « ?lang=en » dans l'adresse, sinon le choix gardé dans dvq:langue (commun à
+   tout le site) ; en revenant par Précédent ou Suivant, le choix gardé passe avant l'adresse.
+   En anglais, la page reste cachée le temps que dq.js la traduise : 1,5 s au plus, même s'il
+   échoue. lang="en" n'est posé qu'au moment de traduire (dq.js) : si la traduction n'arrive pas,
+   la page française ne s'annonce pas en anglais.
+   Tout est dans une fonction : une variable globale ici entrerait en collision avec les
+   déclarations de dq.js et le ferait planter en entier. */
+(function(){
+  try{
+    var valide = function(l){ return l === 'en' || l === 'fr'; };
+    var gardee = null;
+    try{ gardee = localStorage.getItem('dvq:langue'); }catch(e){}
+    var q = new URLSearchParams(location.search).get('lang');
+    var nav = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+    var parHistorique = !!nav && nav.type === 'back_forward';
+    var choix = (parHistorique && valide(gardee)) ? gardee : (valide(q) ? q : gardee);
+    if(choix !== 'en') return;
+    var racine = document.documentElement;
+    racine.classList.add('dq-en');
+    setTimeout(function(){ racine.classList.add('dq-pret'); }, 1500);
+  }catch(e){}
+})();
+</script>
 <title>Page introuvable (404) — DossierQuébec</title>
+<meta name="description" content="Cette page n'existe pas sur DossierQuébec, ou son adresse a changé. Les projets de loi, les votes et les promesses électorales sont à un clic d'ici.">
+<link rel="canonical" href="https://dossierquebec.ca/404">
+<!-- Flux RSS de « Quoi de neuf », généré au build par scrapers/build-news-data.js.
+     C'est ainsi que journalistes et agrégateurs suivent un site sans le visiter. -->
+<link rel="alternate" type="application/rss+xml" title="DossierQuébec — Quoi de neuf" href="https://dossierquebec.ca/feed.xml">
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#0E4FC1">
+
+<!-- Open Graph (aperçu au partage : Facebook, LinkedIn, iMessage…) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DossierQuébec">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:title" content="Page introuvable (404) — DossierQuébec">
+<meta property="og:description" content="Cette page n'existe pas sur DossierQuébec, ou son adresse a changé. Les projets de loi, les votes et les promesses électorales sont à un clic d'ici.">
+<meta property="og:url" content="https://dossierquebec.ca/404">
+<meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
+<meta property="og:image:width" content="1702">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DossierQuébec — veille citoyenne de l'Assemblée nationale du Québec">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Page introuvable (404) — DossierQuébec">
+<meta name="twitter:description" content="Cette page n'existe pas sur DossierQuébec, ou son adresse a changé. Les projets de loi, les votes et les promesses électorales sont à un clic d'ici.">
+<meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
+
 <link rel="icon" type="image/svg+xml" href="/commun/dq.svg">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
-<script>
-  // Le thème et la langue choisis ailleurs sur le site (mêmes clés que commun/dq.js).
-  (function(){
-    try { if (JSON.parse(localStorage.getItem('dossierquebec:theme') || '""') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}
-    var en = false;
-    try { en = /[?&]lang=en\b/.test(location.search) || (!/[?&]lang=fr\b/.test(location.search) && localStorage.getItem('dvq:langue') === 'en'); } catch (e) {}
-    if (en) { document.documentElement.lang = 'en'; document.title = 'Page not found (404) — DossierQuébec'; }
-  })();
+<link rel="icon" type="image/png" sizes="48x48" href="/commun/dq-48.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/commun/dq-512.png">
+<link rel="apple-touch-icon" href="/commun/dq-512.png">
+
+<!-- Données structurées (aide Google à comprendre le site) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Accueil",
+      "item": "https://dossierquebec.ca/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Page introuvable",
+      "item": "https://dossierquebec.ca/404"
+    }
+  ]
+}
 </script>
+<!-- Les DEUX préconnexions sont nécessaires et ce n'est pas un doublon :
+     googleapis.com sert la feuille CSS, gstatic.com sert les ~258 ko de
+     fichiers de police. Sans la seconde, le navigateur n'ouvre la connexion
+     vers gstatic qu'APRÈS avoir lu le CSS — un DNS + TLS en série, soit 100 à
+     300 ms perdus sur mobile à la première visite. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- ⚠️ « wght@400..900 » (deux points) demande la POLICE VARIABLE : un seul
+     fichier couvrant toutes les graisses, au lieu d'un fichier par graisse.
+     Mesuré : Archivo passe de 6 fichiers / 205 ko à 1 fichier / 34 ko, et
+     Archivo Narrow de 3 fichiers / 55 ko à 1 fichier / 18 ko — 260 ko et
+     9 requêtes ramenés à 52 ko et 2 requêtes, sans perdre aucune graisse.
+     Ne pas revenir à la liste « 400;500;600 » (points-virgules) : c'est la
+     syntaxe des fichiers statiques.
+     IBM Plex Mono a été retirée : utilisée nulle part. Aucun octet économisé
+     pour autant — un navigateur ne télécharge une police que si elle sert au
+     rendu, donc elle ne partait déjà pas. C'était du ménage, pas un gain. -->
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/commun/dq.css">
-<style>
-  html:lang(en) [lang="fr"], html:lang(fr) [lang="en"]{display:none;}
-  body.p404{margin:0; background:var(--paper); color:var(--ink); font-family:'Archivo',system-ui,sans-serif;}
-  .p404-haut{border-bottom:3px solid var(--ink); padding:16px 20px;}
-  .p404-marque{font-weight:900; font-size:20px; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink); text-decoration:none;}
-  .p404-marque span{color:#0E4FC1;}
-  html[data-theme="dark"] .p404-marque span{color:#7FA8FF;}
-  .p404-corps{max-width:860px; margin:0 auto; padding:36px 20px 64px;}
-  .p404-etiquette{display:inline-block; background:var(--yellow); color:#131313; border:2px solid #131313; padding:4px 10px; font-size:12px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase;}
-  .p404-titre{margin:18px 0 0; font-size:clamp(40px, 9vw, 84px); line-height:0.95; font-weight:900; letter-spacing:-0.03em; text-transform:uppercase;}
-  .p404-titre .creux{display:block; color:transparent; -webkit-text-stroke:2px var(--ink);}
-  .p404-sous{margin:22px 0 0; font-size:18px; line-height:1.5; max-width:60ch;}
-  .p404-carte{margin:32px 0 0; border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow); padding:20px 24px;}
-  .p404-carte h2{margin:0 0 4px; font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase;}
-  .p404-motion{margin:0 0 16px; font-size:21px; font-weight:800; line-height:1.25;}
-  .p404-decompte{display:flex; flex-wrap:wrap; gap:10px; margin:0; padding:0; list-style:none;}
-  .p404-decompte li{flex:1 1 130px; border:2px solid var(--ink); padding:10px 12px;}
-  .p404-decompte b{display:block; font-size:34px; font-weight:900; line-height:1;}
-  .p404-decompte span{font-size:12px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase;}
-  .p404-contre{background:var(--ink);}
-  .p404-contre b, .p404-contre span{color:var(--card);}
-  .p404-verdict{margin:16px 0 0; font-size:15px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em;}
-  .p404-etapes{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 0; padding:0; list-style:none; font-size:12.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em;}
-  .p404-etapes li{border:2px solid var(--ink); padding:4px 9px;}
-  .p404-etapes .fait{background:var(--yellow); color:#131313; border-color:#131313;}
-  .p404-etapes .rate{opacity:0.55; text-decoration:line-through;}
-  .p404-blague{margin:14px 0 0; font-size:13px; line-height:1.5;}
-  .p404-liens{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin:32px 0 0; padding:0; list-style:none;}
-  .p404-liens a{display:block; border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow); padding:14px 16px; color:var(--ink); text-decoration:none; font-weight:800; font-size:16px;}
-  .p404-liens a small{display:block; margin-top:4px; font-weight:500; font-size:13px; line-height:1.4;}
-  .p404-liens a:hover, .p404-liens a:focus-visible{background:var(--yellow); color:#131313;}
-  .p404-langue{margin:28px 0 0; font-size:14px;}
-  .p404-langue a, .p404-blague a{color:var(--ink); font-weight:800; text-decoration:underline; text-underline-offset:3px;}
-</style>
 </head>
-<body class="p404">
-<header class="p404-haut"><a class="p404-marque" href="/">Dossier<span>Québec</span></a></header>
-<main class="p404-corps">
+<body data-page="introuvable" data-donnees="stats">
 
-  <div lang="fr">
-    <span class="p404-etiquette">Erreur 404 · page introuvable</span>
-    <h1 class="p404-titre">Cette page est morte<span class="creux">dans l'œuf.</span></h1>
-    <p class="p404-sous">Comme bien des projets de loi : présentée avec de belles intentions, jamais adoptée. Ou alors l'adresse a une faute de frappe, ça arrive même aux légistes.</p>
+<!-- Ticker brutaliste : bande noire défilante — contenu rempli avec les VRAIES
+     données par renderTicker() (appelé une fois les datasets chargés). -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-text" id="tickerA">● DossierQuébec — site citoyen indépendant · vraies données publiques&nbsp;&nbsp;&nbsp;</span>
+    <span class="ticker-text" id="tickerB">● DossierQuébec — site citoyen indépendant · vraies données publiques&nbsp;&nbsp;&nbsp;</span>
+  </div>
+</div>
 
-    <section class="p404-carte" aria-label="Faux vote, pour rire">
-      <h2>Vote par appel nominal</h2>
-      <p class="p404-motion">« Que cette page existe. »</p>
+<div id="dq-topbar">
+<header class="top">
+  <div class="brand">
+    <div class="brand-text" role="button" tabindex="0" aria-label="Retour à l'aperçu" onclick="goToTab('apercu')">
+      <!-- Volontairement un div, et non un titre de niveau 1 : le nom du site se
+           répète sur chaque page, alors que le titre de niveau 1 doit annoncer
+           le sujet de LA page. C'est le titre de une de la vue active qui joue
+           ce rôle, et le générateur de pages de section s'en assure.
+           (Pas de balise écrite en toutes lettres dans ce commentaire : elle
+           fausserait les outils qui comptent les titres à l'expression
+           régulière.) -->
+      <div class="brand-title">Dossier<span class="brand-blue">Québec</span></div>
+      <p>Qui siège, qui légifère, qui vote quoi</p>
+    </div>
+    <!-- Feuille d'érable : passerelle vers le site fédéral DossierCanada.
+         Flippe jaune ↔ rouge toutes les 20 s (voir le script plus bas). -->
+    <a class="maple-flip" id="mapleFlip" role="button" tabindex="0"
+       title="Aller au site fédéral — DossierCanada"
+       aria-label="Aller au site fédéral — DossierCanada"
+       onclick="goToFederal(event)">
+      <svg viewBox="-2015 -2000 4030 4030" aria-hidden="true"><path fill="currentColor" d="m-90 2030 45-863a95 95 0 0 0-111-98l-859 151 116-320a65 65 0 0 0-20-73l-941-762 212-99a65 65 0 0 0 34-79l-186-572 542 115a65 65 0 0 0 73-38l105-247 423 454a65 65 0 0 0 111-57l-204-1052 327 189a65 65 0 0 0 91-27l332-652 332 652a65 65 0 0 0 91 27l327-189-204 1052a65 65 0 0 0 111 57l423-454 105 247a65 65 0 0 0 73 38l542-115-186 572a65 65 0 0 0 34 79l212 99-941 762a65 65 0 0 0-20 73l116 320-859-151a95 95 0 0 0-111 98l45 863z"/></svg>
+    </a>
+    <!-- Les volets municipaux (DossierVille) : un bouton « Villes » qui ouvre la liste.
+         Vrais liens <a href> : le clavier, le clic du milieu et « ouvrir dans un
+         nouvel onglet » fonctionnent sans une ligne de code. La barre oblique finale
+         est OBLIGATOIRE — sans elle, les chemins relatifs du volet (assets/, data/)
+         se résolvent depuis la racine du site. Plus de rel="nofollow" depuis le
+         21 sept. 2026 : les volets sont ouverts aux moteurs de recherche. Le chemin dit /quebec/ : c'est la
+         liste, sous « Villes », qui dit qu'il s'agit de la ville. -->
+    <details class="villes-menu" id="villesMenu">
+      <summary class="city-flip" title="Les volets municipaux" aria-label="Les volets municipaux">
+        <span data-i18n="nav.villes">Villes</span>
+      </summary>
+      <ul>
+        <li><a href="/quebec/">Québec <small>DossierVilleDeQuébec</small></a></li>
+        <li><a href="/montreal/">Montréal <small>DossierVilleDeMontréal</small></a></li>
+        <li><a href="/levis/">Lévis <small>DossierVilleDeLévis · prototype</small></a></li>
+        <li><a href="/longueuil/">Longueuil <small>DossierVilleDeLongueuil · prototype</small></a></li>
+        <li><a href="/laval/">Laval <small>DossierVilleDeLaval · prototype</small></a></li>
+      </ul>
+    </details>
+  </div>
+  <!-- Nav DANS la ligne du header (maquette : logo | menu | contrôles sur
+       UNE seule rangée). Sur mobile, le nav devient le panneau plein écran
+       du hamburger (position:fixed), peu importe où il vit dans le DOM. -->
+  <nav class="tabs">
+    <div class="close-menu" id="closeMenuBtn"><span data-i18n="nav.close">Fermer</span> ✕</div>
+    <!-- De vrais liens, pas des <button> : un moteur de recherche ne suit pas un bouton, et
+         /ministres, /projets-de-loi, /votes et /lexique n'avaient aucun lien qu'il puisse suivre. -->
+    <a href="/" data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></a>
+    <a href="/ministres" data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></a>
+    <a href="/projets-de-loi" data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></a>
+    <a href="/votes" data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></a>
+    <a href="/lexique" data-view="lexique"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></a>
+    <a href="/mon-dossier" data-view="mondossier" class="nav-mondossier"><span class="n">★</span><span data-i18n="nav.mondossier">Mon dossier</span></a>
+  </nav>
+  <div class="header-ctrls">
+    <div class="font-size-ctrl" id="fontSizeCtrl">
+      <button id="fontMinus" aria-label="Réduire le texte">A−</button>
+      <span id="fontPct">100%</span>
+      <button id="fontPlus" aria-label="Agrandir le texte">A+</button>
+    </div>
+    <!-- Aucun contenu textuel : l'icône est dessinée en CSS. Le nom accessible
+         vient donc entièrement de aria-label, que le JS tient à jour. -->
+    <button class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="Passer au thème sombre" title="Passer au thème sombre"></button>
+    <button class="lang-toggle" id="langToggle">English</button>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+</div>
+
+<script>
+/* Bascule le bloc logo+menu en mode compact après un peu de défilement.
+   Hystérésis (80 vs 20) pour éviter le clignotement autour du seuil. */
+(function(){
+  var bar = document.getElementById('dq-topbar');
+  var compact = false;
+  function onScroll(){
+    var y = window.scrollY;
+    if(!compact && y > 80){ compact = true; bar.classList.add('compact'); }
+    else if(compact && y < 20){ compact = false; bar.classList.remove('compact'); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+// Ouvre le site fédéral DossierCanada dans un nouvel onglet.
+function goToFederal(evt){
+  if(evt) evt.stopPropagation();
+  window.open('https://dossiercanada.ca/', '_blank', 'noopener');
+}
+// Feuille d'érable : flippe jaune ↔ rouge toutes les 20 secondes.
+(function(){
+  var leaf = document.getElementById('mapleFlip');
+  if(!leaf) return;
+  setInterval(function(){ leaf.classList.toggle('is-red'); }, 20000);
+})();
+
+// Menu « Villes » : compte les clics vers chaque volet municipal (événement
+// personnalisé Vercel Web Analytics — onglet « Events » du tableau de bord), et
+// referme le menu quand on clique ailleurs ou qu'on appuie sur Échap.
+(function(){
+  var menu = document.getElementById('villesMenu');
+  if(!menu) return;
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      if(window.va) window.va('event', { name: 'clic_icone_ville', data: { ville: a.getAttribute('href') } });
+    });
+  });
+  document.addEventListener('click', function(e){ if(menu.open && !menu.contains(e.target)) menu.open = false; });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && menu.open){ menu.open = false; menu.querySelector('summary').focus(); } });
+})();
+</script>
+
+<div class="app">
+
+  <!-- APERÇU -->
+  <section class="view active" id="view-introuvable">
+    <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/" data-i18n="fil.accueil">Accueil</a><span class="sep" aria-hidden="true">›</span><span aria-current="page" data-i18n="fil.introuvable">Page introuvable</span></nav>
+    <div class="band band-yellow bleed">
+      <h2 data-i18n="p404.bande.h">⚠️ Erreur 404 — cette adresse ne mène nulle part</h2>
+      <p data-i18n="p404.bande.p">La page demandée n'existe pas sur DossierQuébec, ou elle a changé d'adresse. Rien de grave : <b>les vrais projets de loi, eux, sont à un clic.</b></p>
+    </div>
+    <div class="view-hero">
+      <h1 class="hero-h1 hero-h1-md">
+        <span class="hero-sujet" data-i18n="sujet.introuvable">Page introuvable</span>
+        <span data-i18n="p404.l1">Cette page est morte</span>
+        <span class="hero-outline" data-i18n="p404.l2">dans l'œuf.</span>
+      </h1>
+      <p class="view-hero-sub" data-i18n="p404.sub">Comme bien des projets de loi : présentée avec de belles intentions, jamais adoptée. <b>Ou alors l'adresse a une faute de frappe, ça arrive même aux légistes.</b></p>
+    </div>
+
+    <div class="p404-carte">
+      <div class="p404-surtitre" data-i18n="p404.vote.sur">Vote par appel nominal</div>
+      <p class="p404-motion" data-i18n="p404.vote.motion">« Que cette page existe. »</p>
       <ul class="p404-decompte">
-        <li><b>0</b><span>Pour</span></li>
-        <li class="p404-contre"><b>404</b><span>Contre</span></li>
-        <li><b>0</b><span>Abstention</span></li>
+        <li><b>0</b><span data-i18n="p404.pour">Pour</span></li>
+        <li class="p404-contre"><b>404</b><span data-i18n="p404.contre">Contre</span></li>
+        <li><b>0</b><span data-i18n="p404.abst">Abstention</span></li>
       </ul>
-      <p class="p404-verdict">Motion rejetée. Même pas proche.</p>
-      <ul class="p404-etapes" aria-label="Étapes franchies par cette page">
-        <li class="fait">Présentation ✓</li>
-        <li class="rate">Adoption du principe</li>
-        <li class="rate">Étude détaillée</li>
-        <li class="rate">Sanction</li>
+      <p class="p404-verdict" data-i18n="p404.verdict">Motion rejetée. Même pas proche.</p>
+      <ul class="p404-etapes">
+        <li class="fait" data-i18n="p404.e1">Présentation ✓</li>
+        <li class="rate" data-i18n="p404.e2">Adoption du principe</li>
+        <li class="rate" data-i18n="p404.e3">Étude détaillée</li>
+        <li class="rate" data-i18n="p404.e4">Sanction</li>
       </ul>
-      <p class="p404-blague">Ce vote est une blague : il n'a jamais eu lieu, et il n'y a pas 404 député·e·s. Sur ce site, c'est la seule donnée inventée. <a href="/votes">Les vrais votes sont ici.</a></p>
-    </section>
+      <p class="p404-blague" data-i18n="p404.blague">Ce vote est une blague : il n'a jamais eu lieu, et il n'y a pas 404 député·e·s. Sur ce site, c'est la seule donnée inventée. <a href="/votes">Les vrais votes sont ici.</a></p>
+    </div>
 
     <ul class="p404-liens">
-      <li><a href="/projets-de-loi">Projets de loi<small>Ceux qui existent pour vrai, résumés en clair.</small></a></li>
-      <li><a href="/votes">Votes<small>Qui a voté quoi, député·e par député·e.</small></a></li>
-      <li><a href="/promesses">Promesses<small>Ce que les partis ont promis, mot pour mot.</small></a></li>
-      <li><a href="/">Accueil<small>On recommence du début, sans rancune.</small></a></li>
+      <li><a href="/projets-de-loi"><span data-i18n="nav.projets">Projets de loi</span><small data-i18n="p404.lien1">Ceux qui existent pour vrai, résumés en clair.</small></a></li>
+      <li><a href="/votes"><span data-i18n="nav.votes">Votes</span><small data-i18n="p404.lien2">Qui a voté quoi, député·e par député·e.</small></a></li>
+      <li><a href="/promesses"><span data-i18n="fil.promesses">Promesses</span><small data-i18n="p404.lien3">Ce que les partis ont promis, mot pour mot.</small></a></li>
+      <li><a href="/"><span data-i18n="p404.accueil">Accueil</span><small data-i18n="p404.lien4">On recommence du début, sans rancune.</small></a></li>
     </ul>
-    <p class="p404-langue"><a href="?lang=en">English</a></p>
+  </section>
+
+  <!-- MINISTRES & DÉPUTÉS -->
+  
+
+  <!-- PROJETS DE LOI -->
+  
+
+  <!-- VOTES -->
+  
+
+  <!-- COMPTE & ABONNEMENT -->
+
+  <!-- LEXIQUE (fusion : personnes, lexique, apropos) -->
+  <!-- PROMESSES — vue sans onglet (comme view-bd). Accessible par /promesses,
+       par le bouton de la bande de dissolution et par le bloc du Lexique.
+       Contenu saisi à la main dans data/promises.json (voir la note du fichier). -->
+  
+
+  
+
+  <!-- PAGE CACHÉE — la BD « l'idée derrière le site ». Aucun onglet n'y mène :
+       accessible seulement par le « et moi » du bas de page (à côté de
+       « Construit avec Claude »). goToTab('bd') fonctionne sans bouton d'onglet. -->
+  <!-- /mon-dossier : l'espace de la personne connectée, côté ASSEMBLÉE seulement (Martin,
+       22 sept. 2026 : « mes dossiers provincial et les villes doivent être complètement séparés »).
+       Les villes y ont leur section (#villes) depuis le 30 sept. 2026 ; avant, /mes-dossiers. Tout le contenu
+       est rempli par commun/dq.js (renderMonDossier) : rien de personnel n'est dans le HTML. -->
+  <!-- LES RÈGLES (Martin, 5 oct. 2026 : « on pourrait quasiment faire une page de ça… à côté de
+       Facebook »). Les règles de sources du site, écrites une fois pour être montrées à quelqu'un :
+       tout ce que les encadrés de méthode disent page par page, réuni. Lien dans le pied de page. -->
+  
+
+  <!-- LA PAGE 404 (Martin, 6 oct. 2026 : « faut une page drôle 404 », puis : avec le jaune et tout
+       le kit du site, « morte dans l'œuf », et pas de blanc sur noir). Vercel sert 404.html, avec le
+       code 404, pour toute adresse qui n'existe pas ; avant, c'était le message brut de l'hébergeur,
+       en anglais. Fabriquée comme les autres pages (scripts/build-section-pages.js, vue
+       « introuvable »), donc avec l'en-tête, le menu et le pied du site.
+       « Morte dans l'œuf » est le libellé des projets de loi jamais rendus plus loin que la
+       présentation. Le faux vote est ÉTIQUETÉ comme une blague : ce site n'invente jamais de donnée. -->
+  
+
+  
+
+  
+
+</div>
+
+<!-- Footer maquette : texte à gauche (avec « construit avec Claude » suivi du
+     lien caché « et moi » vers la BD), liens texte en majuscules à droite. -->
+<footer>
+  <nav class="footer-nav" aria-label="Plan du site">
+    <a href="/" data-i18n="nav.apercu">Aperçu</a>
+    <a href="/ministres" data-i18n="nav.ministres">Ministres</a>
+    <a href="/projets-de-loi" data-i18n="nav.projets">Projets de loi</a>
+    <a href="/votes" data-i18n="nav.votes">Votes</a>
+    <a href="/promesses" data-i18n="fil.promesses">Promesses</a>
+    <a href="/lexique" data-i18n="nav.lexique">Lexique</a>
+    <a href="/sources" data-i18n="fil.bd">Mises à jour du site</a>
+    <a href="/mon-dossier" data-i18n="nav.mondossier">Mon dossier</a>
+    <span class="footer-nav-villes"><span data-i18n="footer.villes">Villes :</span>
+      <a href="/quebec/">Québec</a>
+      <a href="/montreal/">Montréal</a>
+      <a href="/levis/">Lévis</a>
+      <a href="/longueuil/">Longueuil</a>
+      <a href="/laval/">Laval</a>
+    </span>
+  </nav>
+  <div class="footer-inner">
+  <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">construit avec Claude</span> <a class="footer-etmoi" href="/sources" data-i18n="footer.etmoi">et moi</a></span>
+  <span class="footer-right-group">
+    <a class="footer-gh" href="/regles" data-i18n="footer.regles">Les règles</a>
+    <a class="footer-gh" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook">Facebook</a>
+    <a class="footer-gh footer-coffee" href="https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00" target="_blank" rel="noopener" aria-label="Offre-moi un café" data-i18n="footer.coffee">Offre-moi un café</a>
+    <a class="footer-gh" href="/feed.xml" data-i18n="footer.rss" title="Flux RSS de « Quoi de neuf »">Flux RSS</a>
+    <a class="footer-gh" href="https://github.com/GrandFFormat/DossierQuebec" target="_blank" rel="noopener" data-i18n="footer.source">Code source</a>
+  </span>
   </div>
+</footer>
 
-  <div lang="en">
-    <span class="p404-etiquette">Error 404 · page not found</span>
-    <h1 class="p404-titre">This page was dead<span class="creux">on arrival.</span></h1>
-    <p class="p404-sous">Like many bills: introduced with the best intentions, never passed. Or the address has a typo, which happens even to legislative drafters.</p>
+<button id="backToTop" class="dq-remonter" aria-label="Remonter en haut" title="Remonter en haut" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
 
-    <section class="p404-carte" aria-label="Fake vote, for fun">
-      <h2>Recorded division</h2>
-      <p class="p404-motion">“That this page exist.”</p>
-      <ul class="p404-decompte">
-        <li><b>0</b><span>Yeas</span></li>
-        <li class="p404-contre"><b>404</b><span>Nays</span></li>
-        <li><b>0</b><span>Abstentions</span></li>
-      </ul>
-      <p class="p404-verdict">Motion defeated. Not even close.</p>
-      <ul class="p404-etapes" aria-label="Stages this page went through">
-        <li class="fait">Introduction ✓</li>
-        <li class="rate">Passage in principle</li>
-        <li class="rate">Clause-by-clause study</li>
-        <li class="rate">Assent</li>
-      </ul>
-      <p class="p404-blague">This vote is a joke: it never took place, and there are not 404 MNAs. On this site, it is the only invented data. <a href="/votes?lang=en">The real votes are here.</a></p>
-    </section>
-
-    <ul class="p404-liens">
-      <li><a href="/projets-de-loi?lang=en">Bills<small>The ones that actually exist, in plain language.</small></a></li>
-      <li><a href="/votes?lang=en">Votes<small>Who voted for what, MNA by MNA.</small></a></li>
-      <li><a href="/promesses?lang=en">Promises<small>What the parties promised, word for word.</small></a></li>
-      <li><a href="/?lang=en">Home<small>Let's start over, no hard feelings.</small></a></li>
-    </ul>
-    <p class="p404-langue"><a href="?lang=fr">Français</a></p>
-  </div>
-
-</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/commun/dq.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle (donc pas de
+     bannière de consentement requise). Le script est servi automatiquement par
+     Vercel quand Web Analytics est activé dans le tableau de bord du projet. -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

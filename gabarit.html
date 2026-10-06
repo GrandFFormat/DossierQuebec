@@ -996,6 +996,53 @@ function goToFederal(evt){
     <p class="regles-suite" data-i18n="regles.suite">Ces règles s'appliquent partout sur le site. Voyez-les à l'œuvre sur la page <a href="/promesses">Promesses</a>, et suivez ce qui change dans les <a href="/sources">mises à jour du site</a>.</p>
   </section>
 
+  <!-- LA PAGE 404 (Martin, 6 oct. 2026 : « faut une page drôle 404 », puis : avec le jaune et tout
+       le kit du site, « morte dans l'œuf », et pas de blanc sur noir). Vercel sert 404.html, avec le
+       code 404, pour toute adresse qui n'existe pas ; avant, c'était le message brut de l'hébergeur,
+       en anglais. Fabriquée comme les autres pages (scripts/build-section-pages.js, vue
+       « introuvable »), donc avec l'en-tête, le menu et le pied du site.
+       « Morte dans l'œuf » est le libellé des projets de loi jamais rendus plus loin que la
+       présentation. Le faux vote est ÉTIQUETÉ comme une blague : ce site n'invente jamais de donnée. -->
+  <section class="view" id="view-introuvable">
+    <div class="band band-yellow bleed">
+      <h2 data-i18n="p404.bande.h">⚠️ Erreur 404 — cette adresse ne mène nulle part</h2>
+      <p data-i18n="p404.bande.p">La page demandée n'existe pas sur DossierQuébec, ou elle a changé d'adresse. Rien de grave : <b>les vrais projets de loi, eux, sont à un clic.</b></p>
+    </div>
+    <div class="view-hero">
+      <h2 class="hero-h1 hero-h1-md">
+        <span class="hero-sujet" data-i18n="sujet.introuvable">Page introuvable</span>
+        <span data-i18n="p404.l1">Cette page est morte</span>
+        <span class="hero-outline" data-i18n="p404.l2">dans l'œuf.</span>
+      </h2>
+      <p class="view-hero-sub" data-i18n="p404.sub">Comme bien des projets de loi : présentée avec de belles intentions, jamais adoptée. <b>Ou alors l'adresse a une faute de frappe, ça arrive même aux légistes.</b></p>
+    </div>
+
+    <div class="p404-carte">
+      <div class="p404-surtitre" data-i18n="p404.vote.sur">Vote par appel nominal</div>
+      <p class="p404-motion" data-i18n="p404.vote.motion">« Que cette page existe. »</p>
+      <ul class="p404-decompte">
+        <li><b>0</b><span data-i18n="p404.pour">Pour</span></li>
+        <li class="p404-contre"><b>404</b><span data-i18n="p404.contre">Contre</span></li>
+        <li><b>0</b><span data-i18n="p404.abst">Abstention</span></li>
+      </ul>
+      <p class="p404-verdict" data-i18n="p404.verdict">Motion rejetée. Même pas proche.</p>
+      <ul class="p404-etapes">
+        <li class="fait" data-i18n="p404.e1">Présentation ✓</li>
+        <li class="rate" data-i18n="p404.e2">Adoption du principe</li>
+        <li class="rate" data-i18n="p404.e3">Étude détaillée</li>
+        <li class="rate" data-i18n="p404.e4">Sanction</li>
+      </ul>
+      <p class="p404-blague" data-i18n="p404.blague">Ce vote est une blague : il n'a jamais eu lieu, et il n'y a pas 404 député·e·s. Sur ce site, c'est la seule donnée inventée. <a href="/votes">Les vrais votes sont ici.</a></p>
+    </div>
+
+    <ul class="p404-liens">
+      <li><a href="/projets-de-loi"><span data-i18n="nav.projets">Projets de loi</span><small data-i18n="p404.lien1">Ceux qui existent pour vrai, résumés en clair.</small></a></li>
+      <li><a href="/votes"><span data-i18n="nav.votes">Votes</span><small data-i18n="p404.lien2">Qui a voté quoi, député·e par député·e.</small></a></li>
+      <li><a href="/promesses"><span data-i18n="fil.promesses">Promesses</span><small data-i18n="p404.lien3">Ce que les partis ont promis, mot pour mot.</small></a></li>
+      <li><a href="/"><span data-i18n="p404.accueil">Accueil</span><small data-i18n="p404.lien4">On recommence du début, sans rancune.</small></a></li>
+    </ul>
+  </section>
+
   <section class="view" id="view-mondossier">
     <div class="view-hero">
       <h2 class="hero-h1 hero-h1-md">
