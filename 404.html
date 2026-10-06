@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<!-- LA PAGE 404 (Martin, 6 oct. 2026 : « faut une page drôle 404 »). Vercel la sert d'elle-même,
+     avec le code 404, pour toute adresse qui n'existe pas : avant, le visiteur recevait le message
+     brut de l'hébergeur, en anglais, sans menu. Page autonome, écrite à la main : elle ne passe ni
+     par gabarit.html ni par commun/dq.js (qui prendrait une adresse inconnue pour l'accueil). Elle
+     emprunte seulement les couleurs et les polices de commun/dq.css.
+     La blague est celle du site : une page introuvable est « morte au feuilleton ». Le faux vote est
+     ÉTIQUETÉ comme une blague, parce que ce site n'invente jamais de donnée. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Page introuvable (404) — DossierQuébec</title>
+<link rel="icon" type="image/svg+xml" href="/commun/dq.svg">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<script>
+  // Le thème et la langue choisis ailleurs sur le site (mêmes clés que commun/dq.js).
+  (function(){
+    try { if (JSON.parse(localStorage.getItem('dossierquebec:theme') || '""') === 'dark') document.documentElement.setAttribute('data-theme', 'dark'); } catch (e) {}
+    var en = false;
+    try { en = /[?&]lang=en\b/.test(location.search) || (!/[?&]lang=fr\b/.test(location.search) && localStorage.getItem('dvq:langue') === 'en'); } catch (e) {}
+    if (en) { document.documentElement.lang = 'en'; document.title = 'Page not found (404) — DossierQuébec'; }
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/commun/dq.css">
+<style>
+  html:lang(en) [lang="fr"], html:lang(fr) [lang="en"]{display:none;}
+  body.p404{margin:0; background:var(--paper); color:var(--ink); font-family:'Archivo',system-ui,sans-serif;}
+  .p404-haut{border-bottom:3px solid var(--ink); padding:16px 20px;}
+  .p404-marque{font-weight:900; font-size:20px; letter-spacing:-0.01em; text-transform:uppercase; color:var(--ink); text-decoration:none;}
+  .p404-marque span{color:#0E4FC1;}
+  html[data-theme="dark"] .p404-marque span{color:#7FA8FF;}
+  .p404-corps{max-width:860px; margin:0 auto; padding:36px 20px 64px;}
+  .p404-etiquette{display:inline-block; background:var(--yellow); color:#131313; border:2px solid #131313; padding:4px 10px; font-size:12px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase;}
+  .p404-titre{margin:18px 0 0; font-size:clamp(40px, 9vw, 84px); line-height:0.95; font-weight:900; letter-spacing:-0.03em; text-transform:uppercase;}
+  .p404-titre .creux{display:block; color:transparent; -webkit-text-stroke:2px var(--ink);}
+  .p404-sous{margin:22px 0 0; font-size:18px; line-height:1.5; max-width:60ch;}
+  .p404-carte{margin:32px 0 0; border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow); padding:20px 24px;}
+  .p404-carte h2{margin:0 0 4px; font-size:13px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase;}
+  .p404-motion{margin:0 0 16px; font-size:21px; font-weight:800; line-height:1.25;}
+  .p404-decompte{display:flex; flex-wrap:wrap; gap:10px; margin:0; padding:0; list-style:none;}
+  .p404-decompte li{flex:1 1 130px; border:2px solid var(--ink); padding:10px 12px;}
+  .p404-decompte b{display:block; font-size:34px; font-weight:900; line-height:1;}
+  .p404-decompte span{font-size:12px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase;}
+  .p404-contre{background:var(--ink);}
+  .p404-contre b, .p404-contre span{color:var(--card);}
+  .p404-verdict{margin:16px 0 0; font-size:15px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em;}
+  .p404-etapes{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 0; padding:0; list-style:none; font-size:12.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em;}
+  .p404-etapes li{border:2px solid var(--ink); padding:4px 9px;}
+  .p404-etapes .fait{background:var(--yellow); color:#131313; border-color:#131313;}
+  .p404-etapes .rate{opacity:0.55; text-decoration:line-through;}
+  .p404-blague{margin:14px 0 0; font-size:13px; line-height:1.5;}
+  .p404-liens{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin:32px 0 0; padding:0; list-style:none;}
+  .p404-liens a{display:block; border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow); padding:14px 16px; color:var(--ink); text-decoration:none; font-weight:800; font-size:16px;}
+  .p404-liens a small{display:block; margin-top:4px; font-weight:500; font-size:13px; line-height:1.4;}
+  .p404-liens a:hover, .p404-liens a:focus-visible{background:var(--yellow); color:#131313;}
+  .p404-langue{margin:28px 0 0; font-size:14px;}
+  .p404-langue a, .p404-blague a{color:var(--ink); font-weight:800; text-decoration:underline; text-underline-offset:3px;}
+</style>
+</head>
+<body class="p404">
+<header class="p404-haut"><a class="p404-marque" href="/">Dossier<span>Québec</span></a></header>
+<main class="p404-corps">
+
+  <div lang="fr">
+    <span class="p404-etiquette">Erreur 404 · page introuvable</span>
+    <h1 class="p404-titre">Cette page est morte<span class="creux">au feuilleton.</span></h1>
+    <p class="p404-sous">Comme bien des projets de loi : présentée avec de belles intentions, jamais adoptée. Ou alors l'adresse a une faute de frappe, ça arrive même aux légistes.</p>
+
+    <section class="p404-carte" aria-label="Faux vote, pour rire">
+      <h2>Vote par appel nominal</h2>
+      <p class="p404-motion">« Que cette page existe. »</p>
+      <ul class="p404-decompte">
+        <li><b>0</b><span>Pour</span></li>
+        <li class="p404-contre"><b>404</b><span>Contre</span></li>
+        <li><b>0</b><span>Abstention</span></li>
+      </ul>
+      <p class="p404-verdict">Motion rejetée. Même pas proche.</p>
+      <ul class="p404-etapes" aria-label="Étapes franchies par cette page">
+        <li class="fait">Présentation ✓</li>
+        <li class="rate">Adoption du principe</li>
+        <li class="rate">Étude détaillée</li>
+        <li class="rate">Sanction</li>
+      </ul>
+      <p class="p404-blague">Ce vote est une blague : il n'a jamais eu lieu, et il n'y a pas 404 député·e·s. Sur ce site, c'est la seule donnée inventée. <a href="/votes">Les vrais votes sont ici.</a></p>
+    </section>
+
+    <ul class="p404-liens">
+      <li><a href="/projets-de-loi">Projets de loi<small>Ceux qui existent pour vrai, résumés en clair.</small></a></li>
+      <li><a href="/votes">Votes<small>Qui a voté quoi, député·e par député·e.</small></a></li>
+      <li><a href="/promesses">Promesses<small>Ce que les partis ont promis, mot pour mot.</small></a></li>
+      <li><a href="/">Accueil<small>On recommence du début, sans rancune.</small></a></li>
+    </ul>
+    <p class="p404-langue"><a href="?lang=en">English</a></p>
+  </div>
+
+  <div lang="en">
+    <span class="p404-etiquette">Error 404 · page not found</span>
+    <h1 class="p404-titre">This page died<span class="creux">on the order paper.</span></h1>
+    <p class="p404-sous">Like many bills: introduced with the best intentions, never passed. Or the address has a typo, which happens even to legislative drafters.</p>
+
+    <section class="p404-carte" aria-label="Fake vote, for fun">
+      <h2>Recorded division</h2>
+      <p class="p404-motion">“That this page exist.”</p>
+      <ul class="p404-decompte">
+        <li><b>0</b><span>Yeas</span></li>
+        <li class="p404-contre"><b>404</b><span>Nays</span></li>
+        <li><b>0</b><span>Abstentions</span></li>
+      </ul>
+      <p class="p404-verdict">Motion defeated. Not even close.</p>
+      <ul class="p404-etapes" aria-label="Stages this page went through">
+        <li class="fait">Introduction ✓</li>
+        <li class="rate">Passage in principle</li>
+        <li class="rate">Clause-by-clause study</li>
+        <li class="rate">Assent</li>
+      </ul>
+      <p class="p404-blague">This vote is a joke: it never took place, and there are not 404 MNAs. On this site, it is the only invented data. <a href="/votes?lang=en">The real votes are here.</a></p>
+    </section>
+
+    <ul class="p404-liens">
+      <li><a href="/projets-de-loi?lang=en">Bills<small>The ones that actually exist, in plain language.</small></a></li>
+      <li><a href="/votes?lang=en">Votes<small>Who voted for what, MNA by MNA.</small></a></li>
+      <li><a href="/promesses?lang=en">Promises<small>What the parties promised, word for word.</small></a></li>
+      <li><a href="/?lang=en">Home<small>Let's start over, no hard feelings.</small></a></li>
+    </ul>
+    <p class="p404-langue"><a href="?lang=fr">Français</a></p>
+  </div>
+
+</main>
+</body>
+</html>
