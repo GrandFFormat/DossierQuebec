@@ -218,6 +218,15 @@ const PAGES = [
     fil: 'Mon dossier', cle: 'fil.mondossier', frequence: 'weekly', priorite: '0.1',
   },
   {
+    // La page 404 (6 oct. 2026) : Vercel sert 404.html pour toute adresse inconnue. `prive` : noindex,
+    // hors du sitemap.
+    fichier: '404.html', vue: 'introuvable', onglet: null, url: '/404', prive: true,
+    donnees: [],
+    title: 'Page introuvable (404) — DossierQuébec',
+    desc: "Cette page n'existe pas sur DossierQuébec, ou son adresse a changé. Les projets de loi, les votes et les promesses électorales sont à un clic d'ici.",
+    fil: 'Page introuvable', cle: 'fil.introuvable', frequence: 'yearly', priorite: '0.1',
+  },
+  {
     // Les règles de sources du site (5 oct. 2026), lien dans le pied de page.
     fichier: 'regles.html', vue: 'regles', onglet: null, url: '/regles',
     donnees: [],

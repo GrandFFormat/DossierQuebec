@@ -2044,3 +2044,25 @@
 .prom-parti-repli[open]{padding-bottom:4px;}
 .prom-parti-repli > .prom-card{margin-left:16px; margin-right:16px;}
 .prom-parti-repli > summary:focus-visible{outline:3px solid var(--ink); outline-offset:3px;}
+
+/* La page 404 (vue « introuvable ») : le faux vote et les liens. Du jaune, pas de blanc sur noir. */
+.p404-carte{margin:28px 0 0; border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow); padding:20px 24px;}
+.p404-surtitre{font-size:12px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink);}
+.p404-motion{margin:4px 0 16px; font-family:'Archivo',sans-serif; font-size:22px; font-weight:800; line-height:1.25; color:var(--ink);}
+.p404-decompte{display:flex; flex-wrap:wrap; gap:10px; margin:0; padding:0; list-style:none;}
+.p404-decompte li{flex:1 1 130px; border:3px solid var(--ink); padding:10px 14px; color:var(--ink);}
+.p404-decompte b{display:block; font-family:'Archivo',sans-serif; font-size:38px; font-weight:900; line-height:1;}
+.p404-decompte span{font-size:12px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase;}
+.p404-decompte .p404-contre{background:var(--yellow); border-color:#131313; color:#131313; flex-grow:2;}
+.p404-decompte .p404-contre b{font-size:58px;}
+.p404-verdict{margin:16px 0 0; font-size:15px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink);}
+.p404-etapes{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 0; padding:0; list-style:none; font-size:12.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.04em; color:var(--ink);}
+.p404-etapes li{border:2px solid var(--ink); padding:4px 9px;}
+.p404-etapes .fait{background:var(--yellow); color:#131313; border-color:#131313;}
+.p404-etapes .rate{opacity:0.55; text-decoration:line-through;}
+.p404-blague{margin:14px 0 0; font-size:13px; line-height:1.5; color:var(--ink);}
+.p404-blague a{color:var(--ink); font-weight:800; text-decoration:underline; text-underline-offset:3px;}
+.p404-liens{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; margin:28px 0 0; padding:0; list-style:none;}
+.p404-liens a{display:block; border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow); padding:14px 16px; color:var(--ink); text-decoration:none; font-family:'Archivo',sans-serif; font-weight:900; font-size:17px; text-transform:uppercase;}
+.p404-liens a small{display:block; margin-top:5px; font-weight:500; font-size:13px; line-height:1.4; text-transform:none;}
+.p404-liens a:hover, .p404-liens a:focus-visible{background:var(--yellow); color:#131313;}
