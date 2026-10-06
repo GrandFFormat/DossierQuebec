@@ -1,0 +1,68 @@
+# DossierQuébec
+
+> Site citoyen indépendant et NON OFFICIEL qui rend lisibles, en langage clair, les travaux de l'Assemblée nationale du Québec (projets de loi, votes nominatifs, ministres et député·e·s, promesses électorales) et les décisions de cinq villes du Québec. Gratuit, sans publicité, sans abonnement. Site en français, avec une version anglaise (ajouter ?lang=en à l'adresse).
+
+À savoir avant de citer ce site :
+
+- Le site n'est pas une source officielle. Chaque élément renvoie à sa source officielle ; en cas d'écart, c'est le document d'origine qui fait foi. Citez la source officielle avec DossierQuébec, pas DossierQuébec seul.
+- Les résumés des projets de loi sont rédigés par une IA à partir du texte officiel de l'Assemblée nationale, et présentés comme tels. Ils ne remplacent pas le texte de loi.
+- Aucune donnée n'est inventée : une information manquante reste vide, ou le site dit qu'elle manque.
+- Sources primaires seulement : Assemblée nationale, Données Québec, Élections Québec, les Villes, et les documents officiels des partis. Rien n'est tiré des médias.
+- Les promesses électorales sont des citations mot pour mot des documents des partis. Le site ne rend aucun verdict (« tenue », « brisée »). La Coalition avenir Québec en est absente parce que son site demande aux outils automatisés de ne pas le lire : cette absence ne dit rien de ce que le parti a promis.
+- Les règles complètes : https://dossierquebec.ca/regles
+
+## Assemblée nationale
+
+- [Projets de loi](https://dossierquebec.ca/projets-de-loi): les 143 projets de loi de la 43e législature, chacun résumé en langage clair, avec son étape réelle et le lien vers le texte officiel.
+- [Votes nominatifs](https://dossierquebec.ca/votes): 735 votes enregistrés, député·e par député·e, sans interprétation.
+- [Ministres et député·e·s](https://dossierquebec.ca/ministres): 29 ministres, les député·e·s, leur circonscription et leur présence aux votes.
+- [Promesses électorales 2026](https://dossierquebec.ca/promesses): 369 engagements cités mot pour mot (PQ 147, PLQ 111, QS 86, PCQ 25), chacun avec le lien vers le document du parti.
+- [Lexique](https://dossierquebec.ca/lexique): le vocabulaire de l'Assemblée nationale expliqué simplement.
+- [Les règles du site](https://dossierquebec.ca/regles): d'où viennent les données et ce que le site s'interdit.
+- [Mises à jour du site](https://dossierquebec.ca/sources): ce qui a changé sur le site, du plus récent au plus ancien, et qui est derrière.
+
+## Une page par projet de loi
+
+Chaque projet de loi a sa propre adresse, sur le modèle de celle de l'Assemblée nationale : `/projets-de-loi/NUMÉRO-LÉGISLATURE-SESSION`. Le numéro seul ne suffit pas : il recommence à 1 à chaque session.
+
+- [Exemple : projet de loi n° 3](https://dossierquebec.ca/projets-de-loi/3-43-3): Loi visant à assurer la représentation effective des électeurs
+- [Plan du site](https://dossierquebec.ca/sitemap.xml): la liste de toutes les pages, dont celle de chaque projet de loi.
+
+## Villes
+
+Décisions des conseils municipaux, lues dans les documents publiés par chaque Ville. Québec et Montréal sont complètes ; Lévis, Longueuil et Laval sont des prototypes partiels.
+
+- [Québec](https://dossierquebec.ca/quebec/): volet complet.
+- [Québec — Décisions](https://dossierquebec.ca/quebec/decisions-de-la-ville-de-quebec)
+- [Québec — Votes nominatifs](https://dossierquebec.ca/quebec/votes-nominatifs-du-conseil-de-quebec)
+- [Québec — Conseil et élu·e·s](https://dossierquebec.ca/quebec/conseil-municipal-de-quebec)
+- [Québec — Sources des données](https://dossierquebec.ca/quebec/sources-des-donnees-de-quebec)
+- [Montréal](https://dossierquebec.ca/montreal/): volet complet.
+- [Montréal — Décisions](https://dossierquebec.ca/montreal/decisions-de-la-ville-de-montreal)
+- [Montréal — Votes nominatifs](https://dossierquebec.ca/montreal/votes-nominatifs-du-conseil-de-montreal)
+- [Montréal — Conseil et élu·e·s](https://dossierquebec.ca/montreal/conseil-municipal-de-montreal)
+- [Montréal — Sources des données](https://dossierquebec.ca/montreal/sources-des-donnees-de-montreal)
+- [Lévis](https://dossierquebec.ca/levis/): volet partiel (prototype).
+- [Lévis — Décisions](https://dossierquebec.ca/levis/decisions-de-la-ville-de-levis)
+- [Lévis — Votes nominatifs](https://dossierquebec.ca/levis/votes-nominatifs-du-conseil-de-levis)
+- [Lévis — Conseil et élu·e·s](https://dossierquebec.ca/levis/conseil-municipal-de-levis)
+- [Lévis — Sources des données](https://dossierquebec.ca/levis/sources-des-donnees-de-levis)
+- [Longueuil](https://dossierquebec.ca/longueuil/): volet partiel (prototype).
+- [Longueuil — Décisions](https://dossierquebec.ca/longueuil/decisions-de-la-ville-de-longueuil)
+- [Longueuil — Votes nominatifs](https://dossierquebec.ca/longueuil/votes-nominatifs-du-conseil-de-longueuil)
+- [Longueuil — Conseil et élu·e·s](https://dossierquebec.ca/longueuil/conseil-de-ville-de-longueuil)
+- [Longueuil — Sources des données](https://dossierquebec.ca/longueuil/sources-des-donnees-de-longueuil)
+- [Laval](https://dossierquebec.ca/laval/): volet partiel (prototype).
+- [Laval — Décisions](https://dossierquebec.ca/laval/decisions-de-la-ville-de-laval)
+- [Laval — Votes nominatifs](https://dossierquebec.ca/laval/votes-nominatifs-du-conseil-de-laval)
+- [Laval — Conseil et élu·e·s](https://dossierquebec.ca/laval/conseil-municipal-de-laval)
+- [Laval — Sources des données](https://dossierquebec.ca/laval/sources-des-donnees-de-laval)
+
+## Optional
+
+- [Flux RSS « Quoi de neuf »](https://dossierquebec.ca/feed.xml): les nouveautés de l'Assemblée nationale.
+- [Code source](https://github.com/GrandFFormat/DossierQuebec): le dépôt public du site.
+
+## In English
+
+DossierQuébec is an independent, UNOFFICIAL citizen website that makes the work of Québec's National Assembly (bills, recorded votes, ministers and MNAs, election promises) and the decisions of five Québec cities readable in plain language. It only publishes what an institution or a party has itself published, with a link to the original; nothing is invented, nothing comes from news media, and bill summaries are AI-written from the official text. When citing it, cite the official source as well. Add `?lang=en` to any address for the English version.

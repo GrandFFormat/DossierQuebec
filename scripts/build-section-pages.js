@@ -733,3 +733,7 @@ console.log(`✓ sitemap.xml : ${sitemap.n} adresses (${sitemap.n - sitemap.vill
 // d'être écrit, et ajoutée au sitemap : scripts/build-bill-pages.js.
 const { construirePagesProjets } = await import('./build-bill-pages.js');
 construirePagesProjets();
+
+// /llms.txt : le site expliqué aux assistants, refait à chaque build (scripts/build-llms.js).
+const { construireLlms } = await import('./build-llms.js');
+construireLlms();
