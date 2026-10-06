@@ -66,6 +66,11 @@ function loadExistingRegions() {
   const rows = [...block.matchAll(/\["([^"]+)","([^"]+)","([^"]+)","([^"]+)"[,\]]/g)];
   const regionByName = new Map();
   for (const [, name, , region] of rows) regionByName.set(foldName(name), region);
+  // La région d'une CIRCONSCRIPTION ne change pas quand son député change : après une élection,
+  // un·e nouvel·le élu·e (nom inconnu de nous) reprend la région de sa circonscription. Sans ça,
+  // toute la nouvelle députation arrivait sans région et le garde-fou du rafraîchissement
+  // (« députés avec région ») bloquait tout (6 oct. 2026, lendemain de l'élection).
+  for (const [, , riding, region] of rows) if (region && region !== 'null') regionByName.set('circ:' + foldName(riding), region);
   return regionByName;
 }
 
@@ -89,7 +94,7 @@ async function main() {
     const partyFull = $(cells[2]).text().replace(/\s+/g, ' ').trim();
     const party = PARTY_CODES[partyFull] ?? null;
 
-    const region = regionByName.get(foldName(name)) ?? null;
+    const region = regionByName.get(foldName(name)) ?? regionByName.get('circ:' + foldName(riding)) ?? null;
 
     // ID numérique interne assnat.qc.ca (ex. "/fr/deputes/bachand-andre-17859/index.html"
     // -> 17859). Sert de clé fiable pour rapprocher chaque député·e du détail nominatif
@@ -101,6 +106,19 @@ async function main() {
 
     deputes.push({ name, riding, region, party, partyFull, assnatId });
   });
+
+  // ENTRE DEUX LÉGISLATURES, la liste de l'Assemblée est VIDE, et c'est normal : après l'élection
+  // du 5 oct. 2026, la page n'affiche plus aucun·e député·e tant que le secrétaire général n'a pas
+  // reçu la liste des candidats proclamés élus (« environ une semaine », dit la page). Écrire 0
+  // député·e faisait tomber le garde-fou du rafraîchissement, qui bloquait TOUT le reste chaque
+  // matin. On garde donc le fichier précédent, sans erreur, seulement si la page dit elle-même
+  // qu'elle attend cette liste ; une liste vide sans cet avis reste une panne.
+  if (deputes.length === 0) {
+    const avis = /candidats proclam[ée]s [ée]lus/i.test($('body').text());
+    if (!avis) throw new Error("aucun·e député·e dans la page, et aucun avis d'entre-deux-législatures : format changé ?");
+    console.log("Liste des député·e·s vide à l'Assemblée (en attente des candidats proclamés élus) : fichier précédent conservé.");
+    return;
+  }
 
   const missingRegion = deputes.filter((d) => !d.region);
   const missingParty = deputes.filter((d) => !d.party);

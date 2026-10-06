@@ -45,6 +45,13 @@ async function main() {
     if (name) contacts.push({ name, email });
   });
 
+  // Entre deux législatures, l'Assemblée n'affiche plus aucun·e député·e (voir scrapers/deputes.js,
+  // 6 oct. 2026) : on garde alors le fichier précédent plutôt que d'effacer tous les courriels.
+  if (contacts.length === 0) {
+    console.log("Aucun·e député·e dans la page des coordonnées : fichier précédent conservé.");
+    return;
+  }
+
   writeFileSync(
     OUT_PATH,
     JSON.stringify(
