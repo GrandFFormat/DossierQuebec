@@ -1590,7 +1590,9 @@ function renderPromises(){
     return s ? (isEn ? s.labelEn : s.label).replace(/\s*\(.*\)$/, '') : sigle;
   };
   const partisListe = [...new Set(liste.map(p => p.party))]
-    .sort((a, b) => (b === ASSEMBLY.gagnant) - (a === ASSEMBLY.gagnant));
+    // Dans l'ordre des sièges obtenus (ASSEMBLY.ordrePartis), le premier en tête ; un parti absent de
+    // cette liste va à la fin.
+    .sort((a, b) => { const o = ASSEMBLY.ordrePartis || [], r = (x) => (x === ASSEMBLY.gagnant ? -1 : o.includes(x) ? o.indexOf(x) : 99); return r(a) - r(b); });
   const carte = (p) => {
     const couleur = partyColors[p.party] || '#8B8578';
     const badge = `<span class="depute-party" style="background:${couleur}; color:${partyText(p.party)}">${p.party}</span>`;
@@ -1621,8 +1623,18 @@ function renderPromises(){
     const cartes = liste.filter(p => p.party === sigle);
     const gouv = sigle === ASSEMBLY.gagnant;
     const n = `${cartes.length} ${isEn ? (cartes.length > 1 ? 'promises' : 'promise') : (cartes.length > 1 ? 'promesses' : 'promesse')}`;
+    const titre = `<span class="prom-parti-puce" style="background:${partyColors[sigle] || '#8B8578'}"></span>${nomParti(sigle)}${gouv && ASSEMBLY.gagnantNote ? ` <span class="prom-parti-role">${isEn ? (ASSEMBLY.gagnantNoteEn || ASSEMBLY.gagnantNote) : ASSEMBLY.gagnantNote}</span>` : ''} <span class="prom-parti-n">${n}</span>`;
+    // Les autres partis : repliés sous celui qui a remporté le plus de sièges (Martin, 6 oct. 2026),
+    // un menu par parti. Dépliés d'office si on a filtré sur un seul parti, ou tant qu'aucun parti
+    // n'est mis en tête.
+    if (ASSEMBLY.gagnant && !gouv && promParty === 'tous') {
+      return `<details class="prom-parti prom-parti-repli">
+      <summary class="prom-parti-titre">${titre}</summary>
+      ${cartes.map(carte).join('')}
+    </details>`;
+    }
     return `<section class="prom-parti${gouv ? ' prom-parti-gouv' : ''}">
-      <h3 class="prom-parti-titre"><span class="prom-parti-puce" style="background:${partyColors[sigle] || '#8B8578'}"></span>${nomParti(sigle)}${gouv ? ` <span class="prom-parti-role">${isEn ? 'Forms the government' : 'Forme le gouvernement'}</span>` : ''} <span class="prom-parti-n">${n}</span></h3>
+      <h3 class="prom-parti-titre">${titre}</h3>
       ${cartes.map(carte).join('')}
     </section>`;
   }).join('');
@@ -2351,7 +2363,14 @@ const ASSEMBLY = {
   // temps que resultat, d'après Élections Québec. Sur la page Promesses, ses engagements passent
   // alors en tête, les autres partis plus bas (Martin, 5 oct. 2026). Vide : aucun parti n'est mis
   // devant, l'ordre reste celui des sources.
-  gagnant: '',
+  // 6 oct. 2026, données d'Élections Québec (donnees.electionsquebec.qc.ca, résultats finaux,
+  // mise à jour du 6 oct. à 11 h 18) : PQ 59 circonscriptions sur 127, PLQ 40, PCQ 19, QS 9.
+  // Élections Québec dit qui a remporté le plus de sièges, PAS qui forme le gouvernement : la
+  // mention affichée s'en tient donc au nombre de sièges (gagnantNote).
+  gagnant: 'PQ',
+  gagnantNote: 'Le plus de sièges : 59 sur 127',
+  gagnantNoteEn: 'Most seats: 59 of 127',
+  ordrePartis: ['PQ', 'PLQ', 'PCQ', 'QS'],   // par nombre de sièges : 59, 40, 19, 9
 };
 // Phase déduite de la DATE LOCALE du visiteur, pour que le site ne dise pas
 // « élections le 5 octobre » le matin du 6 sans que personne n'ait à y toucher —
