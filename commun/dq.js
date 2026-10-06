@@ -2357,8 +2357,9 @@ const ASSEMBLY = {
   // adjectif — p. ex. « Le Parti Québécois forme un gouvernement majoritaire
   // (63 sièges). » Vide tant que ce n'est pas officiel : la bande passe au
   // passé toute seule (voir phase), mais n'invente jamais de résultat.
-  resultat: '',
-  resultatEn: '',
+  // Publiée le 6 oct. 2026 sur l'OK de Martin, d'après les résultats finaux d'Élections Québec.
+  resultat: "Selon les résultats d'Élections Québec, le Parti Québécois a remporté le plus de sièges : 59 sur 127. Le Parti libéral en a 40, le Parti conservateur 19 et Québec solidaire 9.",
+  resultatEn: "According to Élections Québec's results, the Parti Québécois won the most seats: 59 of 127. The Liberal Party has 40, the Conservative Party 19 and Québec solidaire 9.",
   // Le sigle du parti qui forme le gouvernement ('PQ', 'PLQ', 'CAQ', 'QS', 'PCQ'), à remplir en même
   // temps que resultat, d'après Élections Québec. Sur la page Promesses, ses engagements passent
   // alors en tête, les autres partis plus bas (Martin, 5 oct. 2026). Vide : aucun parti n'est mis
