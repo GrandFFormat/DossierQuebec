@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-05T17:15:56.850Z",
+ "generatedAt": "2026-10-06T15:20:23.604Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "licence": "Documents publics de la Ville de Québec — reproduction avec mention de la source, usage non commercial.",
  "parametres": {
@@ -12,9 +12,9 @@
    "Tableaux des décisions"
   ]
  },
- "totalDisponible": 5209,
- "nombre": 5209,
- "nouveauxDepuisDerniereExecution": 6,
+ "totalDisponible": 5220,
+ "nombre": 5220,
+ "nouveauxDepuisDerniereExecution": 11,
  "themes": {
   "procedure": {
    "libelle": "Procédure",
@@ -95,12 +95,12 @@
   "logement": {
    "titre": "Logement social et abordable",
    "description": "Programmes, réserves, subventions et prêts aux organismes, terrains pour du logement social ou abordable.",
-   "n": 60
+   "n": 61
   },
   "matieres-residuelles": {
    "titre": "Matières résiduelles",
    "description": "Collectes, incinérateur (Complexe de valorisation énergétique), biométhanisation et centre de tri.",
-   "n": 55
+   "n": 56
   },
   "expocite": {
    "titre": "ExpoCité et Centre Vidéotron",
@@ -124,15 +124,15 @@
   }
  },
  "statuts": {
-  "termines": 1500,
-  "enCours": 124,
+  "termines": 1509,
+  "enCours": 115,
   "inconnus": 0
  },
  "facettes": {
   "type": [
    {
     "valeur": "Résolutions",
-    "n": 3335
+    "n": 3345
    },
    {
     "valeur": "Sommaires et mémoires",
@@ -140,7 +140,7 @@
    },
    {
     "valeur": "Procès-verbaux",
-    "n": 167
+    "n": 168
    },
    {
     "valeur": "Tableaux des décisions",
@@ -150,7 +150,7 @@
   "instance": [
    {
     "valeur": "Comité exécutif",
-    "n": 1284
+    "n": 1295
    },
    {
     "valeur": "Conseil de la ville",
@@ -342,19 +342,19 @@
    },
    {
     "valeur": "procedure",
-    "n": 704
+    "n": 706
    },
    {
     "valeur": "subventions",
-    "n": 597
+    "n": 599
    },
    {
     "valeur": "transport",
-    "n": 553
+    "n": 554
    },
    {
     "valeur": "contrats",
-    "n": 512
+    "n": 515
    },
    {
     "valeur": "immobilier",
@@ -362,7 +362,7 @@
    },
    {
     "valeur": "loisirs",
-    "n": 264
+    "n": 265
    },
    {
     "valeur": "finances",
@@ -370,7 +370,7 @@
    },
    {
     "valeur": "travaux",
-    "n": 196
+    "n": 197
    },
    {
     "valeur": "rh",
@@ -382,7 +382,7 @@
    },
    {
     "valeur": "environnement",
-    "n": 146
+    "n": 147
    },
    {
     "valeur": "culture",
@@ -417,7 +417,7 @@
    "instance": "Comité exécutif",
    "unite": null,
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CE_PL_2026-10-02_00h00.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "theme": "procedure",
    "themeSource": "objet"
@@ -432,10 +432,9 @@
    "instance": null,
    "unite": "Développement économique et grands projets",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-399.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil d'agglomération de Québec",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Conseil d'agglomération de Québec",
    "theme": "contrats",
@@ -451,7 +450,7 @@
    "instance": null,
    "unite": "Planification de l'aménagement et de l'environnement",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-137.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
    "dateCible": "2026-09-30",
@@ -471,10 +470,9 @@
    "instance": null,
    "unite": "Ressources humaines",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/RH2026-774.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil d'agglomération de Québec",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Conseil d'agglomération de Québec",
    "theme": "rh",
@@ -490,10 +488,9 @@
    "instance": null,
    "unite": "Ressources humaines",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/RH2026-775.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil d'agglomération de Québec",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Conseil d'agglomération de Québec",
    "theme": "rh",
@@ -509,10 +506,9 @@
    "instance": null,
    "unite": "Transport et mobilité intelligente",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-268.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil de la ville",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Conseil de la ville",
    "theme": "procedure",
@@ -2474,6 +2470,21 @@
    "themeSource": "objet"
   },
   {
+   "id": "PV_CE_PL_2026-09-23_00h00.pdf",
+   "numero": null,
+   "objet": "Procès-verbal de la séance planifiée du comité exécutif tenue le mercredi 23 septembre 2026",
+   "date": "2026-09-23",
+   "annee": "2026",
+   "type": "Procès-verbaux",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CE_PL_2026-09-23_00h00.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
    "id": "TD_CE_PL_2026-09-23_00h00.pdf",
    "numero": null,
    "objet": "Tableau des décisions de la séance planifiée du comité exécutif tenue le mercredi 23 septembre 2026",
@@ -2501,7 +2512,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "transport",
    "themeSource": "objet"
@@ -2520,7 +2531,7 @@
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
    "dateCible": "2026-09-16",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "echeance": "2026-09-16",
    "theme": "travaux",
@@ -2540,7 +2551,7 @@
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
    "dateCible": "2026-09-23",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "echeance": "2026-09-23",
    "projets": [
@@ -2562,7 +2573,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "environnement",
    "themeSource": "objet"
@@ -2580,9 +2591,188 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1178.pdf",
+   "numero": "CE-2026-1178",
+   "objet": "Entente de fourniture de services entre la Ville de Québec et Culture Capitale-Nationale et Chaudière-Appalaches, relative à la gestion du projet Campagne promotionnelle - On sort ensemble?",
+   "date": "2026-09-23",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1178.pdf",
+   "nouveau": true,
+   "sommaireId": "CU2026-076.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1179.pdf",
+   "numero": "CE-2026-1179",
+   "objet": "Approbation de contrats à commande - Service de remorquage de véhicules lors des opérations de déneigement de nuit et du nettoyage printanier - Lots 1 et 2 (Appel d'offres public 96307)",
+   "date": "2026-09-23",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1179.pdf",
+   "nouveau": true,
+   "sommaireId": "AP2026-314.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1180.pdf",
+   "numero": "CE-2026-1180",
+   "objet": "Adjudication d'un contrat pour des travaux de réfection de la toiture du Palais Montcalm (Appel d'offres public 96247)",
+   "date": "2026-09-23",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1180.pdf",
+   "nouveau": true,
+   "sommaireId": "AP2026-325.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "echeance": "2026-09-16",
+   "theme": "travaux",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1181.pdf",
+   "numero": "CE-2026-1181",
+   "objet": "Adjudication d'un contrat à commande pour des travaux d'entretien et de remise à neuf des pelles et des grappins de ponts roulants pour le Complexe de valorisation énergétique (Appel d'offres public 96222)",
+   "date": "2026-09-23",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1181.pdf",
+   "nouveau": true,
+   "sommaireId": "AP2026-327.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "echeance": "2026-09-23",
+   "projets": [
+    "matieres-residuelles"
+   ],
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1182.pdf",
+   "numero": "CE-2026-1182",
+   "objet": "Adjudication d'un contrat pour l'acquisition et l'installation de bennes et de plateformes en aluminium - Lot 4 (Appel d'offres public 95949)",
+   "date": "2026-09-23",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1182.pdf",
+   "nouveau": true,
+   "sommaireId": "AP2026-333.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "environnement",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1183.pdf",
+   "numero": "CE-2026-1183",
+   "objet": "Dépôt de la liste hebdomadaire des autorisations de dépenser par avis de modification de plus de 250 000 $ accordées par un titulaire d'une délégation de dépenser pour la semaine du 30 août 2026",
+   "date": "2026-09-23",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1183.pdf",
+   "nouveau": true,
+   "sommaireId": "AP2026-338.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1184.pdf",
+   "numero": "CE-2026-1184",
+   "objet": "Ordonnance indiquant les dates de début et de fin des travaux ainsi que le territoire d'application du boulevard René-Lévesque (Turnbull ¿ Amérique¿Française) 2026, dans le cadre du Règlement de l'agglomération sur le programme de soutien financier aux entreprises situées dans un secteur dans lequel",
+   "date": "2026-09-23",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1184.pdf",
+   "nouveau": true,
+   "sommaireId": "DE2026-326.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1185.pdf",
+   "numero": "CE-2026-1185",
+   "objet": "Subvention à l'Unité de loisir et de sport de la Capitale-Nationale, pour l'année 2026-2027, afin de soutenir la réalisation du projet Concertation immigration en vue d'assurer l'inclusion et la pleine participation des personnes immigrantes aux activités sportives et de loisir",
+   "date": "2026-09-23",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1185.pdf",
+   "nouveau": true,
+   "sommaireId": "LS2026-243.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "loisirs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1186.pdf",
+   "numero": "CE-2026-1186",
+   "objet": "Entente relative au versement d'une subvention entre la Ville de Québec et Gîte Jeunesse inc., dans le cadre du Fonds de démarrage pour les projets de logements sociaux pour un projet d'habitation situé au 3364, rue Rochambeau à Québec",
+   "date": "2026-09-23",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1186.pdf",
+   "nouveau": true,
+   "sommaireId": "PA2026-130.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "echeance": "2026-09-23",
+   "projets": [
+    "logement"
+   ],
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1187.pdf",
+   "numero": "CE-2026-1187",
+   "objet": "Ententes de partenariats et de commandites entre la Ville de Québec et cinq organismes partenaires relatives au versement de commandites et de revenus de location de kiosques dans le cadre de la Conférence canadienne sur la forêt urbaine 2026",
+   "date": "2026-09-23",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1187.pdf",
+   "nouveau": true,
+   "sommaireId": "PA2026-133.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "contrats",
    "themeSource": "objet"
   },
   {
@@ -2616,7 +2806,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "subventions",
    "themeSource": "objet"
@@ -2634,7 +2824,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "loisirs",
    "themeSource": "objet"
@@ -2653,7 +2843,7 @@
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
    "dateCible": "2026-09-23",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "echeance": "2026-09-23",
    "projets": [
@@ -2675,7 +2865,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "contrats",
    "themeSource": "objet"
@@ -25155,21 +25345,6 @@
    "themeSource": "objet"
   },
   {
-   "id": "PV_CA3_OR_2026-07-06_00h00.pdf",
-   "numero": null,
-   "objet": "Procès-verbal de la séance planifiée du conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge tenue le lundi 06 juillet 2026 à 17h30",
-   "date": "2026-07-06",
-   "annee": "2026",
-   "type": "Procès-verbaux",
-   "instance": "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
-   "unite": null,
-   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA3_OR_2026-07-06_00h00.pdf",
-   "nouveau": false,
-   "sommaireId": null,
-   "theme": "procedure",
-   "themeSource": "objet"
-  },
-  {
    "id": "PV_CA2_OR_2026-07-06_17h30.pdf",
    "numero": null,
    "objet": "Procès-verbal de la séance planifiée du conseil de l'Arrondissement des Rivières tenue le lundi 06 juillet 2026 à 17h30",
@@ -25179,6 +25354,21 @@
    "instance": "Conseil de l'Arrondissement des Rivières",
    "unite": null,
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA2_OR_2026-07-06_17h30.pdf",
+   "nouveau": false,
+   "sommaireId": null,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "PV_CA3_OR_2026-07-06_00h00.pdf",
+   "numero": null,
+   "objet": "Procès-verbal de la séance planifiée du conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge tenue le lundi 06 juillet 2026 à 17h30",
+   "date": "2026-07-06",
+   "annee": "2026",
+   "type": "Procès-verbaux",
+   "instance": "Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA3_OR_2026-07-06_00h00.pdf",
    "nouveau": false,
    "sommaireId": null,
    "theme": "procedure",
