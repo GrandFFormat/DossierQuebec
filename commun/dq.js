@@ -963,7 +963,7 @@ function finEvolution(r, isEn){
       <tr><th></th>${annees.map(a => `<th>${a}</th>`).join('')}</tr>
       ${postes.map(lib => `<tr><td>${lib}</td>${annees.map(a => cellule(a, lib)).join('')}</tr>`).join('')}
     </table></div>
-    <p class="fin-note">${isEn ? 'Amounts rounded to the dollar, as published in each disclosure. A dash: no report under this name that year.' : 'Montants arrondis au dollar, tels que publiés dans chaque divulgation. Un tiret : pas de rapport à ce nom cette année-là.'}</p>
+    <p class="fin-note">${isEn ? 'Amounts rounded to the dollar, as published in each disclosure. A dash: this line does not appear in that year’s report, or there is no report under this name. The Assembly has renamed some lines over the years: the site keeps each name as published, without merging them.' : 'Montants arrondis au dollar, tels que publiés dans chaque divulgation. Un tiret : ce poste n’apparaît pas dans le rapport de cette année-là, ou il n’y a pas de rapport à ce nom. L’Assemblée a renommé certains postes au fil des ans : le site garde chaque nom tel que publié, sans les fusionner.'}</p>
   </div>`;
 }
 // « Le cabinet au complet » : quand plusieurs personnes ont un rapport pour le même cabinet, la
