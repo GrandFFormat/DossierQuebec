@@ -2425,8 +2425,8 @@ function renderMinistres(filter){
     combinedTitle.innerHTML = `<span>${isEn
       ? `All elected members — ${ministresSortMode === 'desc' ? 'most present at votes first' : 'least present at votes first'} (${combined.length} shown)`
       : `Tou·te·s les élu·e·s — ${ministresSortMode === 'desc' ? 'les plus présents aux votes d’abord' : 'les moins présents aux votes d’abord'} (${combined.length} affiché·e·s)`}</span><span class="tri-vote">${triVoteHtml()}</span><span class="tri-vote-avis">${isEn
-      ? '<b>A low rank does not always mean absent by choice.</b> A missed vote can be an official mission, an illness or a scheduling conflict: the Assembly’s register does not give the reason. The Speaker and Deputy Speakers vote little or not at all, out of neutrality.'
-      : '<b>Un bas de classement ne veut pas toujours dire absent par choix.</b> Un vote manqué peut être une mission officielle, une maladie ou un conflit d’horaire : le registre de l’Assemblée n’en donne pas la raison. La présidence et les vice-présidences votent peu ou pas du tout, par neutralité.'}</span>`;
+      ? '<b>A low rank does not always mean absent by choice.</b> A missed vote can be an official mission, an illness or a scheduling conflict: the Assembly’s register does not give the reason. Distance can also play a part: some ridings are very far from Québec City. The Speaker and Deputy Speakers vote little or not at all, out of neutrality.'
+      : '<b>Un bas de classement ne veut pas toujours dire absent par choix.</b> Un vote manqué peut être une mission officielle, une maladie ou un conflit d’horaire : le registre de l’Assemblée n’en donne pas la raison. La distance peut entrer en compte aussi : certaines circonscriptions sont très loin de Québec. La présidence et les vice-présidences votent peu ou pas du tout, par neutralité.'}</span>`;
     grid.innerHTML = combined.length
       ? combined.map(personCard).join('')
       : `<div class="no-results">${isEn ? 'No results for this search.' : 'Aucun résultat pour cette recherche.'}</div>`;
