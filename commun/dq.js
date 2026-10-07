@@ -181,6 +181,8 @@ const translations = {
     'min.restTitle':"The rest of the Assembly",
     'min.restNote':"Every party — 125 seats total",
     'h.comparateur':"Comparator",
+    'h.finances':"Public finances",
+    'fin.sub':"Pick a person: what they earn, what is allocated to them, what they reported spending — never a ranking",
     'comp.sub':"Two ministers, the same facts, side by side — never a ranking",
     'h.projets':"Bills",
     'h.votes':"Vote registry",
@@ -659,6 +661,8 @@ function applyLanguage(){
   renderAdminFlagCounts();
   renderComparateurSelects();
   renderComparateurTable();
+  renderFinancesSelect();
+  renderFinances();
   renderBills();
   renderDeputes(document.getElementById('searchMinistres')?.value);
   renderVotes();
@@ -923,6 +927,136 @@ const loiVivante = (b) => !ASSEMBLY.dissolved && String(b.lastActivity || '') >=
 const peutEtreChallenge = (b) => archiveLeg !== null ? false : ASSEMBLY.dissolved
   ? b.status !== 'sanctionne'
   : (b.status === 'encours' && loiVivante(b));
+
+/* ---------------- FINANCES PUBLIQUES ---------------- */
+// Le tableau de la bande bleue (page Ministres et député·e·s) : une personne, trois blocs. Tout sort
+// de data/finances.json, que scrapers/finances.js recopie de l'Assemblée nationale. Le fichier pèse
+// près de 300 ko : il n'arrive qu'à cette page, après le reste, et le menu se remplit à son arrivée.
+// Rien n'est additionné ni classé ici : les montants sont ceux que l'Assemblée publie.
+let _finances = null, _financesP = null;
+function chargerFinances(){
+  if(_financesP) return _financesP;
+  _financesP = fetch('/data/finances.json').then(r => r.ok ? r.json() : null).catch(() => null)
+    .then(d => { _finances = d; if(!d) _financesP = null; return d; });
+  return _financesP;
+}
+const finCle = (s) => norm(String(s || '')).replace(/[^a-z0-9]+/g, ' ').trim();
+const finArgent = (n, cents) => Number(n).toLocaleString(currentLang === 'en' ? 'en-CA' : 'fr-CA',
+  { style:'currency', currency:'CAD', minimumFractionDigits: cents ? 2 : 0, maximumFractionDigits: cents ? 2 : 0 });
+// Les rapports de dépenses d'une personne : ceux à son nom, et celui de sa circonscription quand
+// l'Assemblée écrit son nom un peu autrement (« Brigitte Garceau » / « Brigitte B. Garceau »).
+function finRapportsDe(nom, circ){
+  if(!_finances) return [];
+  const k = finCle(nom), dernier = k.split(' ').pop();
+  return _finances.depenses.rapports.filter(r => r.type !== 'vacant' && (finCle(r.nom) === k
+    || (r.type === 'depute' && circ && finCle(r.entite) === finCle(circ) && finCle(r.nom).split(' ').pop() === dernier)));
+}
+// L'indemnité additionnelle qu'on peut rattacher SANS deviner : celle d'un·e ministre en poste.
+function finFonctionDe(nom){
+  const m = ministers.find(x => x.name === nom);
+  if(!m || !_finances) return null;
+  const pm = /^premi[eè]re? ministre/i.test(m.role || '');
+  const f = _finances.bareme.fonctions.find(x => pm ? /^Premi[èe]re ou premier ministre/i.test(x.fonction) : /^Ministre\b/i.test(x.fonction));
+  return f ? { ...f, role: m.role, roleEn: m.roleEn } : null;
+}
+function renderFinancesSelect(){
+  const sel = document.getElementById('financesSelect');
+  if(!sel) return;
+  const isEn = currentLang === 'en';
+  const garde = sel.value;
+  const noms = new Map();   // clé normalisée → nom affiché
+  for(const d of deputes) noms.set(finCle(d.name), d.name);
+  for(const m of ministers) if(!noms.has(finCle(m.name))) noms.set(finCle(m.name), m.name);
+  if(_finances) for(const r of _finances.depenses.rapports){
+    if(r.type === 'vacant') continue;
+    const k = finCle(r.nom);
+    // Un rapport au nom légèrement différent de celui de la liste des député·e·s : on ne double pas.
+    if(!noms.has(k) && ![...noms.keys()].some(x => x.split(' ').pop() === k.split(' ').pop() && deputes.some(d => finCle(d.name) === x && r.type === 'depute' && finCle(d.riding) === finCle(r.entite)))) noms.set(k, r.nom);
+  }
+  const tri = [...noms.values()].sort((a, b) => a.split(' ').pop().localeCompare(b.split(' ').pop(), 'fr'));
+  sel.innerHTML = `<option value="">${isEn ? 'Choose a person…' : 'Choisir une personne…'}</option>`
+    + tri.map(n => `<option value="${n.replace(/"/g, '&quot;')}">${n}</option>`).join('');
+  sel.setAttribute('aria-label', isEn ? 'Choose an MNA' : 'Choisir un·e député·e');
+  if(garde && tri.includes(garde)) sel.value = garde;
+}
+function renderFinances(){
+  const boite = document.getElementById('financesTable');
+  const sel = document.getElementById('financesSelect');
+  if(!boite || !sel) return;   // vue absente de cette page
+  const isEn = currentLang === 'en';
+  const nom = sel.value;
+  if(!_finances){
+    boite.innerHTML = `<div class="fin-vide">${isEn ? 'Loading the Assembly’s figures…' : 'Chargement des chiffres de l’Assemblée…'}</div>`;
+    chargerFinances().then(d => { renderFinancesSelect(); if(d) renderFinances(); else boite.innerHTML = `<div class="fin-vide">${isEn ? 'The figures could not be loaded. Try again later.' : 'Les chiffres n’ont pas pu être chargés. Réessayez plus tard.'}</div>`; });
+    return;
+  }
+  const F = _finances, B = F.bareme;
+  if(!nom){
+    boite.innerHTML = `<div class="fin-vide">${isEn
+      ? 'Pick a name above, or press the <b>$</b> button on any card.'
+      : 'Choisissez un nom ci-dessus, ou touchez le bouton <b>$</b> d’une fiche.'}</div>`;
+    return;
+  }
+  const dep = deputes.find(d => d.name === nom);
+  const rapports = finRapportsDe(nom, dep && dep.riding);
+  const circ = (dep && dep.riding) || (rapports.find(r => r.type === 'depute') || {}).entite || null;
+  const groupe = circ ? F.groupes[Object.keys(F.groupes).find(g => finCle(g) === finCle(circ))] : null;
+  const fonction = finFonctionDe(nom);
+  const src = (url, texte) => `<a href="${url}" target="_blank" rel="noopener">${texte} ↗</a>`;
+  const ligne = (lib, val, cls) => `<tr class="${cls || ''}"><td>${lib}</td><td>${val}</td></tr>`;
+
+  // 1. Ce que la personne gagne (barème).
+  const gagne = `<section class="fin-bloc">
+    <h3>${isEn ? 'What this person earns' : 'Ce que cette personne gagne'}</h3>
+    <table class="fin-table">
+      ${ligne(isEn ? 'Basic annual indemnity' : 'Indemnité annuelle de base', finArgent(B.base))}
+      ${fonction ? ligne(`${isEn ? 'Additional indemnity' : 'Indemnité additionnelle'} — ${isEn ? (fonction.roleEn || fonction.role) : fonction.role} (${fonction.pourcentage})`, finArgent(fonction.additionnelle)) : ''}
+      ${fonction ? ligne(isEn ? 'Total, as shown by the Assembly' : 'Total, tel qu’affiché par l’Assemblée', finArgent(fonction.total), 'fin-total') : ''}
+    </table>
+    <p class="fin-note">${fonction
+      ? (isEn ? 'Worked out from the function: the Assembly publishes a scale by function, not a pay slip per person.' : 'Déduit de la fonction : l’Assemblée publie un barème par fonction, pas une paie par personne.')
+      : (isEn ? 'A parliamentary function (whip, House leader, committee chair, parliamentary assistant…) adds an indemnity. The site only attaches it when the function is certain: see the scale.' : 'Une fonction parlementaire (whip, leader, présidence de commission, adjoint·e parlementaire…) ajoute une indemnité. Le site ne la rattache que lorsque la fonction est certaine : voir le barème.')}
+      ${isEn ? 'Scale in force since' : 'Barème en vigueur depuis le'} ${B.depuis}. ${src(B.source, isEn ? 'National Assembly, indemnities and allowances' : 'Assemblée nationale, indemnités et allocations')}</p>
+  </section>`;
+
+  // 2. Ce qui est alloué à sa circonscription (barème, selon le groupe).
+  const alloue = groupe ? `<section class="fin-bloc">
+    <h3>${isEn ? 'What is allocated to the riding' : 'Ce qui est alloué à sa circonscription'}</h3>
+    <table class="fin-table">
+      ${B.allocations.filter(a => a.parGroupe[groupe] != null).map(a => ligne(a.libelle, finArgent(a.parGroupe[groupe]))).join('')}
+    </table>
+    <p class="fin-note">${circ}, ${isEn ? 'group' : 'groupe'} ${groupe} ${isEn ? '(ridings are grouped by area, 1 to 5). Annual amounts from the scale: a ceiling, not a spending.' : '(les circonscriptions sont groupées selon leur superficie, de 1 à 5). Montants annuels du barème : un plafond, pas une dépense.'} ${src(B.source, isEn ? 'National Assembly' : 'Assemblée nationale')}</p>
+  </section>` : '';
+
+  // 3. Ce qu'elle a déclaré avoir dépensé (ses rapports).
+  const TYPE = isEn ? { depute:'Riding', cabinet:'Office (cabinet)', recherche:'Research service' } : { depute:'Circonscription', cabinet:'Cabinet', recherche:'Service de recherche' };
+  const depense = rapports.length ? rapports.map(r => `<section class="fin-bloc">
+    <h3>${isEn ? 'What was reported as spent' : 'Ce qui a été déclaré comme dépensé'} <span class="fin-tag">${TYPE[r.type]}</span></h3>
+    <p class="fin-entite">${r.entite}</p>
+    <table class="fin-table">
+      ${r.lignes.map(l => ligne(l.libelle + (l.note ? ` <span class="fin-petit">· ${l.note}</span>` : ''), finArgent(l.montant, true), 'fin-n' + l.niveau)).join('')}
+    </table>
+    <p class="fin-note">${isEn ? 'Expense report' : 'Rapport de dépenses'} ${F.depenses.periode}, ${isEn ? 'amounts as published' : 'montants tels que publiés'}${r.type !== 'depute' ? (isEn ? '. The Assembly puts this report under this person’s name; several people can be named for the same office in one year' : '. L’Assemblée place ce rapport sous le nom de cette personne ; plusieurs personnes peuvent être nommées pour un même cabinet dans l’année') : ''}. ${isEn ? 'Line names are shown in French, as published. ' : ''}${src(F.depenses.source, isEn ? 'National Assembly, expense reports' : 'Assemblée nationale, rapports de dépenses')}</p>
+  </section>`).join('') : `<section class="fin-bloc"><h3>${isEn ? 'What was reported as spent' : 'Ce qui a été déclaré comme dépensé'}</h3>
+    <p class="fin-note">${isEn ? `No expense report under this name in the Assembly’s ${F.depenses.periode} disclosure.` : `Aucun rapport de dépenses à ce nom dans la divulgation ${F.depenses.periode} de l’Assemblée.`}</p></section>`;
+
+  boite.innerHTML = `<div class="fin-tete"><b>${nom}</b>${circ ? ` · ${circ}` : ''}</div><div class="fin-grille">${gagne}${alloue}${depense}</div>`;
+}
+// Le bouton « $ » d'une fiche : choisit la personne et amène au tableau.
+function voirFinances(nom){
+  const sel = document.getElementById('financesSelect');
+  if(!sel) return;
+  const poser = () => {
+    if(![...sel.options].some(o => o.value === nom)) sel.add(new Option(nom, nom));
+    sel.value = nom;
+    renderFinances();
+    document.getElementById('band-finances')?.scrollIntoView({ behavior:'smooth', block:'start' });
+  };
+  if(_finances) poser(); else { renderFinances(); chargerFinances().then(() => { renderFinancesSelect(); poser(); }); }
+}
+window.renderFinances = renderFinances;
+window.voirFinances = voirFinances;
+const finBouton = (nom) => `<button class="fin-btn" type="button" title="${currentLang === 'en' ? 'Public finances' : 'Finances publiques'}" aria-label="${currentLang === 'en' ? 'Public finances of' : 'Finances publiques de'} ${nom.replace(/"/g, '&quot;')}" onclick="voirFinances('${nom.replace(/'/g, "\\'")}')">$</button>`;
 
 /* ---------------- COMPTES (Supabase) ---------------- */
 // Auth par lien magique (courriel) — voir scripts/supabase-schema.sql pour la
@@ -2096,7 +2230,8 @@ function renderDeputes(filter){
             <div class="dep-riding">${d.riding} — ${d.region}</div>
             <div class="dep-att">${attNote}</div>
           </div>
-          <button class="follow-btn dep-follow ${isFollowed?'on':''}" onclick="toggleFollowDepute('${followKey.replace(/'/g,"\\'")}')">${isFollowed ? t('btn.following') : t('btn.follow')}</button>
+          <div class="dep-actions">${finBouton(d.name)}
+          <button class="follow-btn dep-follow ${isFollowed?'on':''}" onclick="toggleFollowDepute('${followKey.replace(/'/g,"\\'")}')">${isFollowed ? t('btn.following') : t('btn.follow')}</button></div>
         </div>`;
       }).join('')}`;
     }).join('')}
@@ -2152,6 +2287,7 @@ function personCard(p){
       <div class="m-card-top">
         <div class="m-top-row">
           <span class="depute-party" style="background:${partyColors[party]}; color:${partyText(party)}">${party}</span>
+          ${finBouton(name)}
           <button class="follow-btn ${isFollowed?'on':''}" onclick="${followOnclick}">${isFollowed ? t('btn.following') : t('btn.follow')}</button>
         </div>
         <div class="m-name">${name}</div>
@@ -3914,6 +4050,8 @@ try{ if(!new URLSearchParams(location.search).get('ville')) localStorage.setItem
   renderAdminFlagCounts();
   renderComparateurSelects();
   renderComparateurTable();
+  renderFinancesSelect();
+  renderFinances();
   renderBills();
   renderApercuBills();
   renderVotes();

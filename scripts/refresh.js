@@ -66,6 +66,10 @@ const SCRAPERS = [
   ['Scrape : courriels des députés (assnat)', ['scrapers/depute-emails.js']],
   ['Scrape : votes (assnat)', ['scrapers/votes.js']],
   ['Scrape : ministres (quebec.ca)', ['scrapers/ministers.js']],
+  // Finances publiques (barème des indemnités, groupes de circonscriptions, rapports de dépenses) :
+  // « soft », une panne garde le fichier précédent. Le PDF des dépenses (une cinquantaine de Mo)
+  // n'est retéléchargé que si l'Assemblée en publie un nouveau.
+  ['Scrape : finances publiques (assnat)', ['scrapers/finances.js'], { soft: true }],
 ];
 
 const failed = [];      // sources critiques → déclenchent l'alerte (run rouge)
