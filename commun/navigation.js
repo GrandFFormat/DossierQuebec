@@ -10,7 +10,20 @@ export { EN, tr } from './langue.js';
 
 // Les villes couvertes : clé du sous-dossier → nom. La marque d'un volet en découle
 // (« DossierVilleDeQuébec »).
-export const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis', longueuil: 'Longueuil', laval: 'Laval' };
+export const VILLES = { quebec: 'Québec', montreal: 'Montréal' };
+
+// LES VOLETS EN PAUSE (Martin, 7 oct. 2026 : arrêter les scripts de Lévis, Longueuil et Laval et les
+// retirer de la liste « pour l'instant », pour ne plus dépenser là-dessus). Leurs pages restent en
+// ligne, mais sortent des menus, de Mon dossier et du sitemap, et portent un avis : leurs données
+// ne sont plus mises à jour depuis `depuis`. Pour en rallumer un : le remettre dans VILLES (et dans
+// VILLES_PROJETS / VILLES_ATTENDUES s'il y était), dans VILLES de scripts/build-section-pages.js et
+// de scripts/build-llms.js, dans les deux listes de gabarit.html, et rendre son `schedule` au
+// workflow .github/workflows/refresh-villede<ville>.yml.
+export const VILLES_EN_PAUSE = {
+  levis: { nom: 'Lévis', depuis: '2026-10-07' },
+  longueuil: { nom: 'Longueuil', depuis: '2026-10-07' },
+  laval: { nom: 'Laval', depuis: '2026-10-07' },
+};
 
 // Les volets dont les données alimentent Mes dossiers : l'index de projets
 // (data/projets/index.json), les dossiers de l'année (dossiers.json), les décisions récentes
@@ -26,7 +39,7 @@ export const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis
 // pas les octets, c'est que des erreurs permanentes dans la console masquent celles qui comptent.
 //
 // À faire quand un volet reçoit son scripts/projets-publics.js : ajouter sa clé ici.
-export const VILLES_PROJETS = ['quebec', 'montreal', 'levis', 'longueuil', 'laval'];
+export const VILLES_PROJETS = ['quebec', 'montreal'];   // levis, longueuil, laval : en pause (VILLES_EN_PAUSE)
 
 // Les volets traduits en anglais (data/resumes-en.json). Lévis n'y est pas encore : sa liste
 // est donc plus courte que celle du dessus, et pas une copie.
@@ -35,7 +48,7 @@ export const VILLES_EN = ['quebec', 'montreal'];
 // Les volets qui annoncent les décisions À VENIR (data/attendues.json). Encore un autre
 // ensemble : Montréal n'y est pas, alors qu'il est dans les deux listes précédentes. Chaque
 // fonction a été bâtie volet par volet ; ces trois listes disent l'état réel, pas un idéal.
-export const VILLES_ATTENDUES = ['quebec', 'levis'];
+export const VILLES_ATTENDUES = ['quebec'];   // levis : en pause (VILLES_EN_PAUSE)
 
 export const echapper = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -88,11 +101,30 @@ export function menuVilles(details, villeActuelle) {
   });
 }
 
+// L'avis d'un volet en pause, en tête de chacune de ses pages : sans lui, des données figées se
+// liraient comme des données du jour. Il masque aussi l'inscription au courriel de la ville.
+function avisPause() {
+  const p = VILLES_EN_PAUSE[document.body.dataset.ville ?? ''];
+  if (!p || document.getElementById('avis-pause')) return;
+  const jour = new Date(p.depuis + 'T12:00:00').toLocaleDateString(EN ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'long', year: 'numeric' });
+  const avis = document.createElement('div');
+  avis.id = 'avis-pause';
+  avis.setAttribute('role', 'note');
+  avis.style.cssText = 'background:#FFD24D;color:#131313;border-bottom:3px solid #131313;padding:12px 18px;font-size:15px;line-height:1.5;text-align:center;';
+  avis.innerHTML = tr(
+    `<strong>Ce volet est en pause.</strong> Les données de ${echapper(p.nom)} ne sont plus mises à jour depuis le ${jour} : ce que vous lisez date de ce jour-là ou d'avant. <a href="/" style="color:#131313;font-weight:700">Retour à DossierQuébec</a>`,
+    `<strong>This section is on hold.</strong> ${echapper(p.nom)} data has not been updated since ${jour}: what you are reading dates from that day or earlier. <a href="/" style="color:#131313;font-weight:700">Back to DossierQuébec</a>`);
+  document.body.prepend(avis);
+  const infolettre = document.getElementById('infolettre');
+  if (infolettre) infolettre.remove();
+}
+
 // L'en-tête d'un volet : le menu des villes, sa ville cochée. Chargé par chaque page de volet
 // (<script type="module" src="/commun/entete-volet.js">), à part de Supabase pour ne pas attendre.
 export function enteteVolet() {
   const ville = Object.hasOwn(VILLES, document.body.dataset.ville ?? '') ? document.body.dataset.ville : null;
   traduirePage();
+  avisPause();
   menuVilles(document.querySelector('#villes'), ville);
   if (PAGE_BILINGUE) document.querySelector('#villes')?.after(pastilleLangue());
   // Sur cellulaire, le menu en haut à droite passerait seul sur une ligne : un second exemplaire

@@ -19,9 +19,10 @@ const lire = (chemin, defaut) => (existsSync(chemin) ? JSON.parse(readFileSync(c
 const VILLES = [
   { nom: 'Québec', dossier: 'quebec', etat: 'volet complet', pages: ['decisions-de-la-ville-de-quebec', 'votes-nominatifs-du-conseil-de-quebec', 'conseil-municipal-de-quebec', 'sources-des-donnees-de-quebec'] },
   { nom: 'Montréal', dossier: 'montreal', etat: 'volet complet', pages: ['decisions-de-la-ville-de-montreal', 'votes-nominatifs-du-conseil-de-montreal', 'conseil-municipal-de-montreal', 'sources-des-donnees-de-montreal'] },
-  { nom: 'Lévis', dossier: 'levis', etat: 'volet partiel (prototype)', pages: ['decisions-de-la-ville-de-levis', 'votes-nominatifs-du-conseil-de-levis', 'conseil-municipal-de-levis', 'sources-des-donnees-de-levis'] },
-  { nom: 'Longueuil', dossier: 'longueuil', etat: 'volet partiel (prototype)', pages: ['decisions-de-la-ville-de-longueuil', 'votes-nominatifs-du-conseil-de-longueuil', 'conseil-de-ville-de-longueuil', 'sources-des-donnees-de-longueuil'] },
-  { nom: 'Laval', dossier: 'laval', etat: 'volet partiel (prototype)', pages: ['decisions-de-la-ville-de-laval', 'votes-nominatifs-du-conseil-de-laval', 'conseil-municipal-de-laval', 'sources-des-donnees-de-laval'] },
+  // `pause` : volets arrêtés le 7 oct. 2026 (commun/navigation.js, VILLES_EN_PAUSE), hors du fichier.
+  { nom: 'Lévis', dossier: 'levis', pause: true, etat: 'volet partiel (prototype)', pages: ['decisions-de-la-ville-de-levis', 'votes-nominatifs-du-conseil-de-levis', 'conseil-municipal-de-levis', 'sources-des-donnees-de-levis'] },
+  { nom: 'Longueuil', dossier: 'longueuil', pause: true, etat: 'volet partiel (prototype)', pages: ['decisions-de-la-ville-de-longueuil', 'votes-nominatifs-du-conseil-de-longueuil', 'conseil-de-ville-de-longueuil', 'sources-des-donnees-de-longueuil'] },
+  { nom: 'Laval', dossier: 'laval', pause: true, etat: 'volet partiel (prototype)', pages: ['decisions-de-la-ville-de-laval', 'votes-nominatifs-du-conseil-de-laval', 'conseil-municipal-de-laval', 'sources-des-donnees-de-laval'] },
 ];
 const LIBELLES = [
   [/^decisions/, 'Décisions'], [/^votes/, 'Votes nominatifs'], [/^conseil/, 'Conseil et élu·e·s'], [/^sources/, 'Sources des données'],
@@ -39,11 +40,11 @@ export function construireLlms() {
   const exemple = bills.find((b) => b.legislature && b.introSession);
   const adresseExemple = exemple ? `${SITE}/projets-de-loi/${exemple.num}-${exemple.legislature}-${exemple.introSession}` : null;
 
-  const villes = VILLES.filter((v) => v.pages.every((p) => existsSync(`${v.dossier}/${p}.html`)));
+  const villes = VILLES.filter((v) => !v.pause && v.pages.every((p) => existsSync(`${v.dossier}/${p}.html`)));
   const lignes = [
     '# DossierQuébec',
     '',
-    "> Site citoyen indépendant et NON OFFICIEL qui rend lisibles, en langage clair, les travaux de l'Assemblée nationale du Québec (projets de loi, votes nominatifs, ministres et député·e·s, promesses électorales) et les décisions de cinq villes du Québec. Gratuit, sans publicité, sans abonnement. Site en français, avec une version anglaise (ajouter ?lang=en à l'adresse).",
+    "> Site citoyen indépendant et NON OFFICIEL qui rend lisibles, en langage clair, les travaux de l'Assemblée nationale du Québec (projets de loi, votes nominatifs, ministres et député·e·s, promesses électorales) et les décisions des villes de Québec et de Montréal. Gratuit, sans publicité, sans abonnement. Site en français, avec une version anglaise (ajouter ?lang=en à l'adresse).",
     '',
     'À savoir avant de citer ce site :',
     '',
@@ -73,7 +74,7 @@ export function construireLlms() {
     '',
     '## Villes',
     '',
-    "Décisions des conseils municipaux, lues dans les documents publiés par chaque Ville. Québec et Montréal sont complètes ; Lévis, Longueuil et Laval sont des prototypes partiels.",
+    "Décisions des conseils municipaux, lues dans les documents publiés par chaque Ville : Québec et Montréal. Les volets de Lévis, Longueuil et Laval sont en pause depuis le 7 octobre 2026 : leurs données ne sont plus mises à jour, ne les citez pas comme à jour.",
     '',
     ...villes.flatMap((v) => [
       `- [${v.nom}](${SITE}/${v.dossier}/): ${v.etat}.`,
@@ -87,7 +88,7 @@ export function construireLlms() {
     '',
     '## In English',
     '',
-    "DossierQuébec is an independent, UNOFFICIAL citizen website that makes the work of Québec's National Assembly (bills, recorded votes, ministers and MNAs, election promises) and the decisions of five Québec cities readable in plain language. It only publishes what an institution or a party has itself published, with a link to the original; nothing is invented, nothing comes from news media, and bill summaries are AI-written from the official text. When citing it, cite the official source as well. Add `?lang=en` to any address for the English version.",
+    "DossierQuébec is an independent, UNOFFICIAL citizen website that makes the work of Québec's National Assembly (bills, recorded votes, ministers and MNAs, election promises) and the decisions of the cities of Québec and Montréal readable in plain language. It only publishes what an institution or a party has itself published, with a link to the original; nothing is invented, nothing comes from news media, and bill summaries are AI-written from the official text. When citing it, cite the official source as well. Add `?lang=en` to any address for the English version.",
     '',
   ];
   const contenu = lignes.join('\n');
