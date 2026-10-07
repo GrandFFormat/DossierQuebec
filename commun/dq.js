@@ -1027,7 +1027,7 @@ function renderFinances(){
     <table class="fin-table">
       ${B.allocations.filter(a => a.parGroupe[groupe] != null).map(a => ligne(a.libelle, finArgent(a.parGroupe[groupe]))).join('')}
     </table>
-    <p class="fin-note">${circ}, ${isEn ? 'group' : 'groupe'} ${groupe} ${isEn ? '(ridings are grouped by area, 1 to 5). Annual amounts from the scale: a ceiling, not a spending.' : '(les circonscriptions sont groupées selon leur superficie, de 1 à 5). Montants annuels du barème : un plafond, pas une dépense.'} ${src(B.source, isEn ? 'National Assembly' : 'Assemblée nationale')}</p>
+    <p class="fin-note">${circ}, ${isEn ? 'group' : 'groupe'} ${groupe} ${isEn ? '(ridings are grouped by area, 1 to 5). Annual amounts from the scale: a ceiling, not a spending. This scale has been in force since ' + B.depuis + ', while the reported expenses cover ' + F.depenses.periode + ': the two cannot be compared line by line.' : '(les circonscriptions sont groupées selon leur superficie, de 1 à 5). Montants annuels du barème : un plafond, pas une dépense. Ce barème est en vigueur depuis le ' + B.depuis + ', alors que les dépenses déclarées portent sur ' + F.depenses.periode + ' : les deux ne se comparent pas ligne à ligne.'} ${src(B.source, isEn ? 'National Assembly' : 'Assemblée nationale')}</p>
   </section>` : '';
 
   // 3. Ce qu'elle a déclaré avoir dépensé (ses rapports).
