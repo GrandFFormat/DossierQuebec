@@ -489,9 +489,10 @@ function goToFederal(evt){
     </div>
     <div class="toolbar comparateur-toolbar finances-toolbar">
       <select id="financesSelect" aria-label="Choisir un·e député·e" onchange="renderFinances()"></select>
-      <!-- Le bouton « $ » d'une fiche fait descendre jusqu'ici : cette flèche ramène en haut de la page
-           d'un clic (Martin, 6 oct. 2026). -->
-      <button type="button" class="fin-haut" id="financesHaut" aria-label="Revenir en haut de la page" title="Revenir en haut de la page" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">↑</button>
+      <!-- Le bouton « $ » d'une fiche fait descendre jusqu'ici : cette flèche ramène aux ministres d'un
+           clic (Martin, 6 oct. 2026 : d'abord en haut de la page, puis « faudrait que ça ramène aux
+           ministres »). -->
+      <button type="button" class="fin-haut" id="financesHaut" aria-label="Revenir aux ministres" title="Revenir aux ministres" onclick="retourMinistres()">↑</button>
     </div>
     <div id="financesTable"></div>
     </div>

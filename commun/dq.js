@@ -978,7 +978,7 @@ function renderFinancesSelect(){
     + tri.map(n => `<option value="${n.replace(/"/g, '&quot;')}">${n}</option>`).join('');
   sel.setAttribute('aria-label', isEn ? 'Choose an MNA' : 'Choisir un·e député·e');
   const haut = document.getElementById('financesHaut');
-  if(haut){ const e = isEn ? 'Back to the top of the page' : 'Revenir en haut de la page'; haut.title = e; haut.setAttribute('aria-label', e); }
+  if(haut){ const e = isEn ? 'Back to the ministers' : 'Revenir aux ministres'; haut.title = e; haut.setAttribute('aria-label', e); }
   if(garde && tri.includes(garde)) sel.value = garde;
 }
 function renderFinances(){
@@ -1056,6 +1056,14 @@ function voirFinances(nom){
   };
   if(_finances) poser(); else { renderFinances(); chargerFinances().then(() => { renderFinancesSelect(); poser(); }); }
 }
+// La flèche à côté du menu : remonte au titre « Les ministres », ou à celui de la vue classée par
+// présence quand c'est elle qui est affichée (« Les ministres » est alors caché).
+function retourMinistres(){
+  const titre = document.getElementById('ministresTitle');
+  const cible = titre && titre.offsetParent ? titre : (document.getElementById('combinedTitle') || titre);
+  if(cible) cible.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+window.retourMinistres = retourMinistres;
 window.renderFinances = renderFinances;
 window.voirFinances = voirFinances;
 const finBouton = (nom) => `<button class="fin-btn" type="button" title="${currentLang === 'en' ? 'Public finances' : 'Finances publiques'}" aria-label="${currentLang === 'en' ? 'Public finances of' : 'Finances publiques de'} ${nom.replace(/"/g, '&quot;')}" onclick="voirFinances('${nom.replace(/'/g, "\\'")}')">$</button>`;
