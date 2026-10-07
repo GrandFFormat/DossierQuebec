@@ -977,6 +977,8 @@ function renderFinancesSelect(){
   sel.innerHTML = `<option value="">${isEn ? 'Choose a person…' : 'Choisir une personne…'}</option>`
     + tri.map(n => `<option value="${n.replace(/"/g, '&quot;')}">${n}</option>`).join('');
   sel.setAttribute('aria-label', isEn ? 'Choose an MNA' : 'Choisir un·e député·e');
+  const haut = document.getElementById('financesHaut');
+  if(haut){ const e = isEn ? 'Back to the top of the page' : 'Revenir en haut de la page'; haut.title = e; haut.setAttribute('aria-label', e); }
   if(garde && tri.includes(garde)) sel.value = garde;
 }
 function renderFinances(){
