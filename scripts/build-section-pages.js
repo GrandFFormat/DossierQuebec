@@ -648,7 +648,9 @@ for (const { page, html } of produites) {
 // volet, un avertissement, et la page SORT du sitemap : ce build tourne dans la chaîne quotidienne
 // de l'Assemblée, et un volet qu'on reverrouille (si une Ville refuse) ou dont les données arrivent
 // abîmées ne doit pas empêcher la publication des votes et des projets de loi du jour.
-const VILLES = ['quebec', 'montreal', 'levis', 'longueuil', 'laval'];
+// Lévis, Longueuil et Laval sont en pause depuis le 7 oct. 2026 (commun/navigation.js, VILLES_EN_PAUSE) :
+// leurs pages restent en ligne, avec un avis, mais sortent du sitemap. Les rendre ici pour les y remettre.
+const VILLES = ['quebec', 'montreal'];
 const PAGES_VILLE = [
   { page: 'index', frequence: 'daily', priorite: '0.8', jeu: 'decisions' },
   // Chaque ville a son adresse : « Décisions de la Ville de Québec » donne decisions-de-la-ville-de-quebec.

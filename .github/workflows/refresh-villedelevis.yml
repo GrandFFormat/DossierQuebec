@@ -13,10 +13,14 @@
 name: Rafraîchissement quotidien — volet Lévis
 
 on:
-  schedule:
-    # 09:30 UTC, après DossierQuébec (08:00), le volet Québec (08:30) et Montréal (09:00), pour
-    # que les journaux se lisent dans l'ordre. Ce volet a son propre groupe (voir plus bas).
-    - cron: '30 9 * * *'
+  # EN PAUSE depuis le 7 oct. 2026 (Martin : « on va arrêter les scripts de Longueuil, Laval et Lévis…
+  # on va arrêter de dépenser de l'argent pour ça »). Le déclenchement quotidien est retiré ; le
+  # bouton « Run workflow » reste. Pour repartir : remettre le bloc `schedule` ci-dessous, et rendre
+  # la ville à VILLES dans commun/navigation.js (voir VILLES_EN_PAUSE).
+  # schedule:
+  #   # 09:30 UTC, après DossierQuébec (08:00), le volet Québec (08:30) et Montréal (09:00), pour
+  #   # que les journaux se lisent dans l'ordre. Ce volet a son propre groupe (voir plus bas).
+  #   - cron: '30 9 * * *'
   workflow_dispatch: {} # bouton « Run workflow » pour lancer à la main
 
 permissions:
