@@ -94,7 +94,7 @@ export const TERMES = [
     categorie: 'instances',
     recherche: '"comité exécutif"',
     definition:
-      "Un petit groupe d'élus — 9 à Québec — à qui le conseil a délégué une large part de ses pouvoirs. C'est l'instance qui prend le plus de décisions, et de loin.",
+      "Un petit groupe d'élus à qui le conseil a délégué une large part de ses pouvoirs : à Québec, 10 membres, dont le maire qui le préside, et 1 conseiller associé (octobre 2026). Il siège environ une fois par semaine, à huis clos. C'est l'instance qui prend le plus de décisions, et de loin. Ce n'est pas le conseil de la ville, où siègent tous les élus : la liste de ses membres est sur la page du conseil.",
     ouVousLeVoyez:
       "Plus de 70 000 documents du portail viennent du comité exécutif, contre environ 35 000 pour le conseil de la ville.",
   },
