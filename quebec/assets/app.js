@@ -466,6 +466,29 @@ function rendreVotes() {
 }
 
 // ---------- élus ----------
+// LA LÉGENDE DU COMITÉ EXÉCUTIF (Martin, 7 oct. 2026). Le conseil et le comité exécutif se confondent
+// facilement : la légende dit ce qu'est chacun, et qui siège au comité EN CE MOMENT, calculé sur les
+// données lues à la Ville (data/elus.json) plutôt qu'écrit en dur, pour rester vraie après un
+// remaniement. Aucun rôle au comité dans les données (page de la Ville en panne) : pas de légende.
+function rendreLegendeExecutif(membres) {
+  const boite = $('#legende-executif');
+  if (!boite) return;
+  const ex = membres.filter((m) => m.executif);
+  if (!ex.length) { boite.hidden = true; return; }
+  const associes = ex.filter((m) => /associ/i.test(m.executif.role));
+  const titulaires = ex.length - associes.length;
+  const partisEx = [...new Set(ex.map((m) => m.parti).filter(Boolean))];
+  const absents = [...new Set(membres.map((m) => m.parti).filter(Boolean))].filter((p) => !partisEx.includes(p));
+  const source = etat.elus.executif?.source;
+  const fr = `<strong>Le comité exécutif n'est pas le conseil.</strong> Le conseil municipal réunit les ${membres.length} élus, en séance publique : c'est là qu'on débat et qu'on vote devant les citoyens. Le comité exécutif est un petit groupe : ${titulaires} membres${associes.length ? ` et ${associes.length} conseiller${associes.length > 1 ? 's' : ''} associé${associes.length > 1 ? 's' : ''}` : ''}, qui siègent à huis clos, environ une fois par semaine, et prennent la plupart des décisions courantes de la Ville. Sur les fiches ci-dessous, leur rôle au comité est sur une pastille jaune, avec leurs responsabilités. ${partisEx.length === 1
+    ? `En ce moment, ses membres sont tous de ${partisEx[0]}${absents.length ? ` ; aucun élu de ${absents.join(' ni de ')} n'y siège` : ''}.`
+    : `En ce moment, y siègent des élus de ${partisEx.join(' et de ')}.`}`;
+  const en = `<strong>The executive committee is not the council.</strong> City Council brings together all ${membres.length} elected members, in public session: that is where debates and votes take place in front of citizens. The executive committee is a small group: ${titulaires} members${associes.length ? ` and ${associes.length} associate councillor${associes.length > 1 ? 's' : ''}` : ''}, who sit behind closed doors about once a week and make most of the City's day-to-day decisions. On the cards below, their role on the committee is on a yellow tag, with their responsibilities. ${partisEx.length === 1
+    ? `At the moment, its members are all from ${partisEx[0]}${absents.length ? `; no member of ${absents.join(' or ')} sits on it` : ''}.`
+    : `At the moment, members of ${partisEx.join(' and ')} sit on it.`}`;
+  boite.hidden = false;
+  boite.innerHTML = tr(fr, en) + (source ? ` <a href="${echapper(source)}" target="_blank" rel="noopener">${tr('La liste, sur le site de la Ville', 'The list, on the City’s website')}</a>.` : '');
+}
 function carteElu(m) {
   const roles = m.roles.filter((r) => r !== 'Maire');
   // Décompte réel tiré du registre des appels nominaux, sans interprétation.
@@ -482,7 +505,9 @@ function carteElu(m) {
       <div class="meta">
         ${m.parti ? `<span class="puce">${echapper(m.parti)}</span>` : ''}
         ${roles.map((r) => `<span class="puce">${echapper(lib(r))}</span>`).join('')}
+        ${m.executif ? `<span class="puce puce-executif">${echapper(lib(m.executif.role))}</span>` : ''}
       </div>
+      ${m.executif && m.executif.responsabilites.length ? `<p class="responsabilites"><strong>${tr('Responsabilités au comité exécutif :', 'Responsibilities on the executive committee:')}</strong> ${m.executif.responsabilites.map(echapper).join(' · ')}</p>` : ''}
       <p class="compte" style="margin:6px 0 0">${echapper(m.telephone ?? '')}</p>
       ${votesContre ? `<p class="compte" style="margin:2px 0 0">${votesContre} ${tr('vote(s) contre consigné(s) cette année.', 'vote(s) against recorded this year.')}</p>` : ''}
       <p style="margin:4px 0 0; font-size:13px">
@@ -498,6 +523,7 @@ function rendreElus() {
   const membres = etat.elus.membres;
   const partis = Object.entries(etat.elus.partis).sort((a, b) => b[1] - a[1]);
   $('#compte-elus').textContent = `${membres.length} ${tr('membres', 'members')} — ` + partis.map(([p, n]) => `${p} : ${n}`).join(' · ');
+  rendreLegendeExecutif(membres);
 
   const groupes = new Map();
   for (const m of membres) {

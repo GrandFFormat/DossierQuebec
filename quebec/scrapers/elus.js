@@ -7,7 +7,7 @@
 // prénom, district, affiliation, téléphone. On lit ces balises plutôt que la mise en page,
 // ce qui rend le scraper beaucoup moins fragile.
 
-import { writeFile } from 'node:fs/promises';
+import { writeFile, readFile } from 'node:fs/promises';
 
 const URL_MEMBRES = 'https://www.ville.quebec.qc.ca/apropos/gouvernance/conseil-municipal/membres.aspx';
 const RACINE = 'https://www.ville.quebec.qc.ca';
@@ -107,6 +107,32 @@ function parserMembre(bloc, arrondissement) {
   };
 }
 
+// LE COMITÉ EXÉCUTIF (Martin, 7 oct. 2026). La Ville publie ses membres, leur rôle au comité et leurs
+// responsabilités dans un tableau (#tab_membres_ce) : une ligne par personne, le nom en gras, puis
+// ses fonctions, puis une liste de responsabilités. Ce n'est PAS le conseil : un petit groupe d'élus
+// qui siège à huis clos. On rattache à chaque membre du conseil son rôle au comité, lu ici, sans
+// rien déduire : qui n'est pas dans ce tableau n'a pas de rôle au comité.
+const URL_EXECUTIF = 'https://www.ville.quebec.qc.ca/apropos/gouvernance/comite-executif/membres.aspx';
+const sansBalises = (s) => decoderEntites(String(s ?? '').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
+async function lireExecutif() {
+  const res = await fetch(URL_EXECUTIF, { headers: { 'User-Agent': UA } });
+  if (!res.ok) throw new Error('HTTP ' + res.status + ' sur la page du comité exécutif');
+  const html = await res.text();
+  const table = html.match(/<table id="tab_membres_ce"[\s\S]*?<\/table>/);
+  if (!table) throw new Error('tableau #tab_membres_ce introuvable : la page du comité exécutif a changé');
+  const membres = [];
+  for (const ligne of table[0].matchAll(/<tr[^>]*>([\s\S]*?)<\/tr>/g)) {
+    const cellules = [...ligne[1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)].map((c) => c[1]);
+    if (cellules.length < 2) continue;
+    const nom = sansBalises((cellules[0].match(/<strong>([\s\S]*?)<\/strong>/) || [])[1]);
+    const role = [...cellules[0].matchAll(/<p>([\s\S]*?)<\/p>/g)].map((p) => sansBalises(p[1])).find((t) => /comité exécutif/i.test(t));
+    if (!nom || !role) continue;
+    membres.push({ nom, role, responsabilites: [...cellules[1].matchAll(/<li>([\s\S]*?)<\/li>/g)].map((l) => sansBalises(l[1])).filter(Boolean) });
+  }
+  if (membres.length < 5) throw new Error('seulement ' + membres.length + ' membres lus au comité exécutif');
+  return membres;
+}
+
 async function main() {
   console.log('Source : ' + URL_MEMBRES);
   const res = await fetch(URL_MEMBRES, { headers: { 'User-Agent': UA } });
@@ -137,11 +163,33 @@ async function main() {
   const partis = {};
   for (const m of membres) if (m.parti) partis[m.parti] = (partis[m.parti] ?? 0) + 1;
 
+  // Le comité exécutif. Une panne de cette page ne doit pas vider les fiches : on garde alors
+  // ce que le fichier précédent disait.
+  let executif;
+  try {
+    executif = { source: URL_EXECUTIF, membres: await lireExecutif() };
+  } catch (err) {
+    console.warn('⚠ Comité exécutif : ' + err.message + ' — rôles précédents conservés.');
+    try { executif = JSON.parse(await readFile(OUT, 'utf8')).executif ?? null; } catch { executif = null; }
+  }
+  if (executif) {
+    const cleNom = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z]/g, '');
+    const inconnus = [];
+    for (const e of executif.membres) {
+      const m = membres.find((x) => cleNom(x.nomComplet) === cleNom(e.nom));
+      if (m) m.executif = { role: e.role, responsabilites: e.responsabilites };
+      else inconnus.push(e.nom);
+    }
+    console.log('Comité exécutif : ' + executif.membres.length + ' personnes, ' + membres.filter((m) => m.executif).length + ' rattachées à une fiche.');
+    if (inconnus.length) console.warn('⚠ Au comité exécutif mais absents du conseil : ' + inconnus.join(', '));
+  }
+
   const payload = {
     generatedAt: new Date().toISOString(),
     source: URL_MEMBRES,
     nombre: membres.length,
     partis,
+    ...(executif ? { executif: { source: executif.source, nombre: executif.membres.length } } : {}),
     membres,
   };
 

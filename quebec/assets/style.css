@@ -581,3 +581,8 @@ h2.page[id], h1.page[id] { scroll-margin-top: 16px; }
 nav a.externe { color: var(--entete-doux); font-weight: 500; }
 nav a.externe span[aria-hidden] { font-size: 12px; margin-left: 2px; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* Le comité exécutif sur la page du conseil : la légende, la pastille et les responsabilités. */
+.legende-executif { border-left: 6px solid #FFD24D; padding: 10px 14px; margin: 10px 0 18px; }
+.puce.puce-executif { background: #FFD24D; color: #131313; border-color: #131313; font-weight: 700; }
+.elu .responsabilites { margin: 6px 0 0; font-size: 13px; line-height: 1.45; }
