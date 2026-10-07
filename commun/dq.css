@@ -2095,3 +2095,8 @@
 .dep-row{grid-template-columns:1fr 280px 156px;}
 @media (max-width:760px){ .dep-row{grid-template-columns:1fr;} }
 #band-finances .section-head .sub{color:var(--sur-fonce); opacity:1;}
+/* La flèche « en haut » à côté du menu des finances publiques. */
+.finances-toolbar{grid-template-columns:minmax(0, 520px) auto; justify-content:start; align-items:stretch; gap:12px;}
+.fin-haut{width:54px; min-height:48px; padding:0; border:3px solid var(--ink); background:var(--card); color:var(--ink); box-shadow:var(--shadow); font-family:'Archivo',sans-serif; font-size:24px; font-weight:900; line-height:1; cursor:pointer;}
+.fin-haut:hover, .fin-haut:focus-visible{background:var(--yellow); color:#131313;}
+@media (max-width:760px){ .finances-toolbar{grid-template-columns:minmax(0, 1fr) auto;} }
