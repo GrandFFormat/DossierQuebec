@@ -933,12 +933,60 @@ const peutEtreChallenge = (b) => archiveLeg !== null ? false : ASSEMBLY.dissolve
 // de data/finances.json, que scrapers/finances.js recopie de l'Assemblée nationale. Le fichier pèse
 // près de 300 ko : il n'arrive qu'à cette page, après le reste, et le menu se remplit à son arrivée.
 // Rien n'est additionné ni classé ici : les montants sont ceux que l'Assemblée publie.
-let _finances = null, _financesP = null;
+let _finances = null, _financesP = null, _finHist = null;
 function chargerFinances(){
   if(_financesP) return _financesP;
+  // Les années précédentes (data/finances-historique.json) arrivent en même temps ; leur absence
+  // n'empêche rien : le tableau s'affiche sans le bloc « d'une année à l'autre ».
+  const hist = fetch('/data/finances-historique.json').then(r => r.ok ? r.json() : null).catch(() => null);
   _financesP = fetch('/data/finances.json').then(r => r.ok ? r.json() : null).catch(() => null)
-    .then(d => { _finances = d; if(!d) _financesP = null; return d; });
+    .then(async d => { _finances = d; _finHist = d ? await hist : null; if(!d) _financesP = null; return d; });
   return _financesP;
+}
+// Un même cabinet peut avoir plusieurs rapports dans l'année, un par personne qui l'a dirigé, et
+// l'Assemblée l'écrit au masculin ou au féminin selon la personne (« du chef » / « de la cheffe »).
+// Cette clé les réunit. Un cabinet de vice-présidence porte le nom de sa ou son titulaire : il reste seul.
+const finCleCabinet = (entite) => finCle(entite).replace(/^cabinet (du|de la|de l) ?/, '')
+  .replace(/\bcheffe\b/g, 'chef').replace(/\bvice presidente\b/g, 'vice president').replace(/\bpresidente\b/g, 'president');
+// « D'une année à l'autre » : les postes principaux d'un rapport, période par période.
+function finEvolution(r, isEn){
+  const h = _finHist && _finHist.rapports[`${finCle(r.nom)}|${finCle(r.entite)}`];
+  const annees = h ? Object.keys(h.annees).sort() : [];
+  if(annees.length < 2) return '';
+  const postes = [];
+  for(const l of r.lignes) if(l.niveau === 0 && !postes.includes(l.libelle)) postes.push(l.libelle);
+  for(const a of annees) for(const lib of Object.keys(h.annees[a])) if(!postes.includes(lib) && !r.lignes.some(l => l.libelle === lib && l.niveau > 0)) postes.push(lib);
+  const cellule = (a, lib) => h.annees[a][lib] == null ? '<td class="fin-rien">—</td>' : `<td>${finArgent(h.annees[a][lib])}</td>`;
+  return `<div class="fin-evol">
+    <h4>${isEn ? 'From one year to the next' : 'D’une année à l’autre'}</h4>
+    <div class="fin-evol-defile"><table class="fin-table fin-table-evol">
+      <tr><th></th>${annees.map(a => `<th>${a}</th>`).join('')}</tr>
+      ${postes.map(lib => `<tr><td>${lib}</td>${annees.map(a => cellule(a, lib)).join('')}</tr>`).join('')}
+    </table></div>
+    <p class="fin-note">${isEn ? 'Amounts rounded to the dollar, as published in each disclosure. A dash: no report under this name that year.' : 'Montants arrondis au dollar, tels que publiés dans chaque divulgation. Un tiret : pas de rapport à ce nom cette année-là.'}</p>
+  </div>`;
+}
+// « Le cabinet au complet » : quand plusieurs personnes ont un rapport pour le même cabinet, la
+// somme de leurs postes principaux. C'est le SEUL calcul du site sur ces données, il porte sur des
+// postes de même nature, et il est étiqueté comme tel.
+function finCabinetComplet(r, isEn){
+  if(r.type !== 'cabinet') return '';
+  const k = finCleCabinet(r.entite);
+  const tous = _finances.depenses.rapports.filter(x => x.type === 'cabinet' && finCleCabinet(x.entite) === k);
+  if(tous.length < 2) return '';
+  const postes = [];
+  for(const x of tous) for(const l of x.lignes) if(l.niveau === 0 && !postes.includes(l.libelle)) postes.push(l.libelle);
+  const de = (x, lib) => (x.lignes.find(l => l.niveau === 0 && l.libelle === lib) || {}).montant;
+  return `<div class="fin-evol">
+    <h4>${isEn ? 'The whole office this year' : 'Le cabinet au complet cette année'}</h4>
+    <div class="fin-evol-defile"><table class="fin-table fin-table-evol">
+      <tr><th></th>${tous.map(x => `<th>${x.nom}</th>`).join('')}<th>${isEn ? 'Added up' : 'Additionné'}</th></tr>
+      ${postes.map(lib => `<tr><td>${lib}</td>${tous.map(x => de(x, lib) == null ? '<td class="fin-rien">—</td>' : `<td>${finArgent(de(x, lib))}</td>`).join('')}<td class="fin-somme">${finArgent(tous.reduce((s, x) => s + (de(x, lib) || 0), 0))}</td></tr>`).join('')}
+    </table></div>
+    <p class="fin-note">${isEn
+      ? `The Assembly publishes ${tous.length} reports for this office in ${_finances.depenses.periode}, one per person named. The last column is added up by the site, line by line; the Assembly does not publish it.`
+      : `L’Assemblée publie ${tous.length} rapports pour ce cabinet en ${_finances.depenses.periode}, un par personne nommée. La dernière colonne est additionnée par le site, poste par poste ; l’Assemblée ne la publie pas.`}</p>
+  </div>`;
 }
 const finCle = (s) => norm(String(s || '')).replace(/[^a-z0-9]+/g, ' ').trim();
 const finArgent = (n, cents) => Number(n).toLocaleString(currentLang === 'en' ? 'en-CA' : 'fr-CA',
@@ -1032,14 +1080,15 @@ function renderFinances(){
 
   // 3. Ce qu'elle a déclaré avoir dépensé (ses rapports).
   const TYPE = isEn ? { depute:'Riding', cabinet:'Office (cabinet)', recherche:'Research service' } : { depute:'Circonscription', cabinet:'Cabinet', recherche:'Service de recherche' };
-  const depense = rapports.length ? rapports.map(r => `<section class="fin-bloc">
+  const depense = rapports.length ? rapports.map(r => { const plus = finCabinetComplet(r, isEn) + finEvolution(r, isEn); return `<section class="fin-bloc${plus ? ' fin-bloc-large' : ''}"><div class="fin-col">
     <h3>${isEn ? 'What was reported as spent' : 'Ce qui a été déclaré comme dépensé'} <span class="fin-tag">${TYPE[r.type]}</span></h3>
     <p class="fin-entite">${r.entite}</p>
     <table class="fin-table">
       ${r.lignes.map(l => ligne(l.libelle + (l.note ? ` <span class="fin-petit">· ${l.note}</span>` : ''), finArgent(l.montant, true), 'fin-n' + l.niveau)).join('')}
     </table>
     <p class="fin-note">${isEn ? 'Expense report' : 'Rapport de dépenses'} ${F.depenses.periode}, ${isEn ? 'amounts as published' : 'montants tels que publiés'}${r.type !== 'depute' ? (isEn ? '. The Assembly puts this report under this person’s name; several people can be named for the same office in one year' : '. L’Assemblée place ce rapport sous le nom de cette personne ; plusieurs personnes peuvent être nommées pour un même cabinet dans l’année') : ''}. ${isEn ? 'Line names are shown in French, as published. ' : ''}${src(F.depenses.source, isEn ? 'National Assembly, expense reports' : 'Assemblée nationale, rapports de dépenses')}</p>
-  </section>`).join('') : `<section class="fin-bloc"><h3>${isEn ? 'What was reported as spent' : 'Ce qui a été déclaré comme dépensé'}</h3>
+    </div>${plus ? `<div class="fin-col fin-col-plus">${plus}</div>` : ''}
+  </section>`; }).join('') : `<section class="fin-bloc"><h3>${isEn ? 'What was reported as spent' : 'Ce qui a été déclaré comme dépensé'}</h3>
     <p class="fin-note">${isEn ? `No expense report under this name in the Assembly’s ${F.depenses.periode} disclosure.` : `Aucun rapport de dépenses à ce nom dans la divulgation ${F.depenses.periode} de l’Assemblée.`}</p></section>`;
 
   boite.innerHTML = `<div class="fin-tete"><b>${nom}</b>${circ ? ` · ${circ}` : ''}</div><div class="fin-grille">${gagne}${alloue}${depense}</div>`;

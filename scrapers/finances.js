@@ -129,7 +129,12 @@ async function lireGroupes(url) {
 // sous « Bureau », de niveau 1 sinon (cabinets et services de recherche).
 const LIBELLES = {
   'Fraisdelogement àQuébecoudanslacirconscription': ['Frais de logement à Québec ou dans la circonscription', 0],
-  'Voyagecirconscription -hôtelduParlement': ['Voyages entre la circonscription et l’hôtel du Parlement', 0],
+  // Deux libellés des divulgations 2020-2021 et 2021-2022 : l'ancien nom du poste de logement (gardé
+  // tel quel : le site ne décide pas que c'est le même poste que « Frais de logement à Québec ou dans
+  // la circonscription ») et un poste propre à la pandémie.
+  'Allocation delogement àQuébec': ['Allocation de logement à Québec', 0],
+  'Mesuresliéesàlapandémie -COVID-19': ['Mesures liées à la pandémie – COVID-19', 1],
+  'Voyagecirconscription -hôtelduParlement':['Voyages entre la circonscription et l’hôtel du Parlement', 0],
   'Massesalariale': ['Masse salariale', 0],
   'Fraisdedéplacement dupersonnel': ['Frais de déplacement du personnel', 0],
   'Fraisdedéplacement dupersonnel dutitulairedecabinet': ['Frais de déplacement du personnel du titulaire de cabinet', 0],
@@ -172,11 +177,14 @@ function lireRapports(pages) {
     // « Chicoutimi - Vacant » de l'Assemblée, lui, a une espace des DEUX côtés et reste tel quel.
     rapports.push({ periode, nom: net(m[1]), entite: net(m[2]).replace(/(\S)- (?=\S)/g, '$1-'), corps: suite.slice(0, fin) });
   }
+  const inconnus = new Set();
   for (const r of rapports) {
     r.lignes = [];
     let sousBureau = false;
     // « Nombre de voyages • 23 » (ou « 22,5 ») est un compte, pas un montant : on le rattache au poste.
-    const corps = r.corps.replace(/Nombre de voyages • ([\d,]+)/g, (_, n) => { r.voyages = n; return ''; });
+    // Certaines années, le compte est vide (« Nombre de voyages • » sans chiffre).
+    // Les plus anciennes écrivent la demie avec un point (« 23.5 »).
+    const corps = r.corps.replace(/Nombre de voyages •(?: (\d+(?:[.,]\d+)?)(?= |$))?/g, (_, n) => { if (n) r.voyages = n.replace('.', ','); return ''; });
     for (const m of corps.matchAll(/([^$]+?)\s(-?[\d ]+,\d\d) \$/g)) {
       let libelle = net(m[1]);
       const valeur = montant(m[2]);
@@ -186,13 +194,16 @@ function lireRapports(pages) {
         continue;
       }
       const connu = LIBELLES[libelle];
-      if (!connu) throw new Error(`libellé inconnu dans le PDF des dépenses : « ${libelle} » (${r.nom}). L'ajouter à LIBELLES après vérification dans le PDF.`);
+      if (!connu) { inconnus.add(libelle); continue; }
       sousBureau = connu[0] === 'Bureau';
       r.lignes.push({ libelle: connu[0], montant: valeur, niveau: connu[1], ...(connu[0].startsWith('Voyages') && r.voyages ? { note: `${r.voyages} voyage(s)` } : {}) });
     }
-    if (!r.lignes.length) throw new Error(`aucune ligne lue pour ${r.nom} — ${r.entite}`);
+    if (!r.lignes.length && !inconnus.size) throw new Error(`aucune ligne lue pour ${r.nom} — ${r.entite}`);
     delete r.corps; delete r.voyages;
   }
+  // Un libellé absent de LIBELLES arrête la lecture du document : on ne publie pas un poste à
+  // moitié deviné. Ils sont tous rapportés d'un coup, pour les vérifier dans le PDF en une fois.
+  if (inconnus.size) throw new Error(`${inconnus.size} libellé(s) inconnu(s) dans le PDF des dépenses, à ajouter à LIBELLES après vérification : ${[...inconnus].map((x) => `« ${x} »`).join(' ; ')}`);
   return rapports;
 }
 
@@ -211,19 +222,24 @@ async function lireDepenses(precedent) {
   const recent = liens[0];
   if (!force && precedent?.document === recent.id && precedent.rapports?.length) {
     console.log(`Dépenses : le PDF n'a pas changé (document ${recent.id}), rapports conservés.`);
-    return precedent;
+    return { ...precedent, liens };
   }
-  console.log(`Dépenses : téléchargement du PDF ${recent.id}…`);
+  return { ...(await lireDocument(recent)), liens };
+}
+
+// Un PDF de divulgation, lu en entier : ses rapports, sa période.
+async function lireDocument(lien) {
+  console.log(`Dépenses : téléchargement du PDF ${lien.id}…`);
   await sleep(3000);
-  const res = await fetch(recent.url, { headers: { 'User-Agent': USER_AGENT } });
-  if (!res.ok) throw new Error(`HTTP ${res.status} pour le PDF des dépenses`);
+  const res = await fetch(lien.url, { headers: { 'User-Agent': USER_AGENT } });
+  if (!res.ok) throw new Error(`HTTP ${res.status} pour le PDF des dépenses ${lien.id}`);
   const tampon = Buffer.from(await res.arrayBuffer());
   const pages = [];
   await pdfParse(tampon, { pagerender: async (p) => { const t = await p.getTextContent(); const s = t.items.map((i) => i.str).join(' '); pages.push(s); return s; } });
   const rapports = lireRapports(pages);
   const periodes = [...new Set(rapports.map((r) => r.periode))];
   return {
-    source: URL_DEPENSES, document: recent.id, pdf: recent.url, mo: Math.round(tampon.length / 1e6), pages: pages.length,
+    source: URL_DEPENSES, document: lien.id, pdf: lien.url, mo: Math.round(tampon.length / 1e6), pages: pages.length,
     periode: periodes.length === 1 ? periodes[0] : periodes.join(', '),
     rapports: rapports.map((r) => ({
       nom: nomUsuel(r.nom), entite: r.entite,
@@ -237,6 +253,43 @@ async function lireDepenses(precedent) {
   };
 }
 
+// ---------------------------------------------------------------- 4. les années précédentes
+// L'Assemblée garde en ligne plusieurs opérations de divulgation. Pour montrer comment les dépenses
+// d'un·e député·e ou d'un cabinet ont bougé d'une année à l'autre (Martin, 6 oct. 2026), on lit
+// chacune UNE fois et on n'en garde que les postes principaux (niveau 0, sans les composantes ni le détail à
+// puces) : data/finances-historique.json. Un document déjà lu n'est jamais retéléchargé.
+//   rapports : { « nom|entité » : { nom, entite, type, annees : { « 2024-2025 » : { libellé : montant } } } }
+const HIST_PATH = 'data/finances-historique.json';
+async function historique(liens, courant) {
+  const hist = existsSync(HIST_PATH) ? JSON.parse(readFileSync(HIST_PATH, 'utf8')) : { source: URL_DEPENSES, documents: {}, rapports: {} };
+  const verser = (doc) => {
+    // Deux documents pour une même période (une divulgation refaite) : le plus récent l'emporte.
+    const deja = Object.entries(hist.documents).find(([, d]) => d.periode === doc.periode);
+    if (deja && Number(deja[0]) > doc.document) return;
+    if (deja && Number(deja[0]) !== doc.document) { delete hist.documents[deja[0]]; for (const r of Object.values(hist.rapports)) delete r.annees[doc.periode]; }
+    hist.documents[doc.document] = { periode: doc.periode, pages: doc.pages, mo: doc.mo };
+    for (const r of doc.rapports) {
+      const k = `${cle(r.nom)}|${cle(r.entite)}`;
+      hist.rapports[k] ??= { nom: r.nom, entite: r.entite, type: r.type, annees: {} };
+      hist.rapports[k].annees[doc.periode] = Object.fromEntries(r.lignes.filter((l) => l.niveau === 0).map((l) => [l.libelle, l.montant]));
+    }
+  };
+  let change = false;
+  if (!hist.documents[courant.document] || force) { verser(courant); change = true; }
+  for (const lien of liens) {
+    // Un document d'une ancienne mise en page, qu'on n'a pas su lire, n'est pas retéléchargé chaque
+    // matin (une cinquantaine de Mo) : il est noté dans `illisibles`. `--force` le retente.
+    if (lien.id === courant.document || hist.documents[lien.id] || (!force && hist.illisibles?.[lien.id])) continue;
+    try { verser(await lireDocument(lien)); change = true; if (hist.illisibles) delete hist.illisibles[lien.id]; }
+    catch (e) { console.error(`⚠ historique, document ${lien.id} : ${e.message}`); (hist.illisibles ??= {})[lien.id] = e.message.slice(0, 400); change = true; }
+  }
+  for (const r of Object.values(hist.rapports)) if (!Object.keys(r.annees).length) delete hist.rapports[`${cle(r.nom)}|${cle(r.entite)}`];
+  if (change) {
+    writeFileSync(HIST_PATH, JSON.stringify(hist));
+    console.log(`Historique : ${Object.values(hist.documents).map((d) => d.periode).sort().join(', ')} — ${Object.keys(hist.rapports).length} rapports suivis → ${HIST_PATH}`);
+  }
+}
+
 async function main() {
   const avant = existsSync(OUT_PATH) ? JSON.parse(readFileSync(OUT_PATH, 'utf8')) : {};
   const bareme = lireBareme(await page(URL_INDEMNITES));
@@ -247,7 +300,8 @@ async function main() {
     catch (e) { console.error(`⚠ groupes de circonscriptions : ${e.message} — liste précédente conservée.`); }
   }
   await sleep(3000);
-  const depenses = await lireDepenses(avant.depenses);
+  const { liens, ...depenses } = await lireDepenses(avant.depenses);
+  await historique(liens, depenses);
 
   const data = { lu: new Date().toISOString().slice(0, 10), bareme, groupes, depenses };
   // Ne réécrire que si quelque chose a changé (hors date de lecture) : le diff quotidien reste vide.

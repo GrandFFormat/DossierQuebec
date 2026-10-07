@@ -2112,3 +2112,22 @@
 #combinedTitle{display:flex; align-items:center; flex-wrap:wrap; gap:14px;}
 #ministresTitle, #combinedTitle{scroll-margin-top:90px;}
 .tri-vote-avis{flex:1 1 100%; border-left:6px solid var(--yellow); background:var(--card); padding:10px 14px; font-family:'Archivo',sans-serif; font-size:14px; font-weight:500; line-height:1.5; text-transform:none; letter-spacing:0; color:var(--ink);}
+
+/* Finances publiques : « le cabinet au complet » et « d'une année à l'autre », sous un rapport. */
+.fin-evol{margin-top:16px; padding-top:14px; border-top:3px solid var(--ink);}
+.fin-evol h4{margin:0 0 8px; font-family:'Archivo',sans-serif; font-size:13px; font-weight:900; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink);}
+.fin-evol-defile{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+.fin-table-evol{font-size:13px; min-width:100%;}
+.fin-table-evol th{padding:5px 0 5px 12px; text-align:right; font-size:11.5px; font-weight:900; white-space:nowrap; border-bottom:2px solid var(--ink); color:var(--ink);}
+.fin-table-evol td{padding:5px 0; font-weight:500;}
+.fin-table-evol td:first-child{font-weight:700; min-width:150px;}
+.fin-table-evol td:not(:first-child){text-align:right; white-space:nowrap; padding-left:12px; font-variant-numeric:tabular-nums; font-weight:500;}
+.fin-table-evol .fin-somme{font-weight:900; background:var(--yellow); color:#131313; padding-right:6px;}
+.fin-table-evol .fin-rien{opacity:0.6;}
+.fin-grille:has(.fin-evol){grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));}
+.fin-bloc-large{grid-column:1 / -1; display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1.25fr); gap:28px; align-items:start;}
+.fin-col{min-width:0;}
+.fin-col-plus .fin-evol:first-child{margin-top:0; padding-top:0; border-top:0;}
+.fin-grille:has(.fin-evol){grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));}
+.fin-table-evol td:first-child{min-width:120px;}
+@media (max-width:900px){ .fin-bloc-large{grid-template-columns:minmax(0, 1fr); gap:0;} .fin-col-plus .fin-evol:first-child{margin-top:16px; padding-top:14px; border-top:3px solid var(--ink);} }
