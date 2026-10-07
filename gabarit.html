@@ -462,7 +462,11 @@ function goToFederal(evt){
     <div class="role-group-title" id="combinedTitle" style="display:none;"></div>
 
     <div class="section-head min-group-head" id="ministresTitle">
-      <div><h2 data-i18n="h.ministres2">Les ministres</h2></div>
+      <!-- La capsule « Votes ↑ ↓ » (Martin, 6 oct. 2026) : classe TOUT le monde, ministres et
+           député·e·s, par présence aux votes. ↑ : les plus présents d'abord ; ↓ : les moins présents
+           d'abord ; un second clic sur la flèche active revient à l'ordre habituel. Remplie par
+           updateMinistresSortLabel (commun/dq.js). -->
+      <div class="tri-vote-rang"><h2 data-i18n="h.ministres2">Les ministres</h2><span class="tri-vote" id="triVoteMinistres"></span></div>
       <span class="head-note"><span id="ministresCount"></span><span data-i18n="min.sub2b"> ministres — liste officielle quebec.ca</span></span>
     </div>
     <div class="grid" id="ministresGrid"></div>

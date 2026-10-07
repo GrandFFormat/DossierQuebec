@@ -2331,7 +2331,25 @@ function toggleMinistresSort(){
   renderMinistres(document.getElementById('searchMinistres')?.value);
   renderDeputes(document.getElementById('searchMinistres')?.value);
 }
+// La capsule « Votes ↑ ↓ » : à côté de « Les ministres », et dans le titre de la vue classée (où
+// « Les ministres » est caché). ↑ = les plus présents d'abord (desc), ↓ = les moins présents d'abord
+// (asc) ; recliquer la flèche active revient à l'ordre habituel.
+function setMinistresSort(mode){
+  ministresSortMode = ministresSortMode === mode ? null : mode;
+  updateMinistresSortLabel();
+  renderMinistres(document.getElementById('searchMinistres')?.value);
+  renderDeputes(document.getElementById('searchMinistres')?.value);
+}
+window.setMinistresSort = setMinistresSort;
+function triVoteHtml(){
+  const isEn = currentLang === 'en';
+  const b = (mode, fleche, etiquette) => `<button type="button" class="tri-vote-btn${ministresSortMode === mode ? ' on' : ''}" aria-pressed="${ministresSortMode === mode}" title="${etiquette}" aria-label="${etiquette}" onclick="setMinistresSort('${mode}')">${fleche}</button>`;
+  return `<span class="tri-vote-lbl">${isEn ? 'Votes' : 'Votes'}</span>`
+    + b('desc', '↑', isEn ? 'Sort everyone by vote attendance, most present first' : 'Classer tout le monde par présence aux votes, les plus présents d’abord')
+    + b('asc', '↓', isEn ? 'Sort everyone by vote attendance, least present first' : 'Classer tout le monde par présence aux votes, les moins présents d’abord');
+}
 function updateMinistresSortLabel(){
+  { const c = document.getElementById('triVoteMinistres'); if(c) c.innerHTML = triVoteHtml(); }
   if(!document.getElementById('ministresSortToggle')) return;   // vue absente de cette page
   const btn = document.getElementById('ministresSortToggle');
   if(!btn) return;
@@ -2396,9 +2414,9 @@ function renderMinistres(filter){
       .map(d => ({ type:'depute', d, att: attendanceForAssnatId(d.assnatId) }));
     const combined = sortByAttendance([...minList, ...depList], ministresSortMode);
 
-    combinedTitle.textContent = isEn
-      ? `All elected members — sorted by attendance (${combined.length} shown)`
-      : `Tou·te·s les élu·e·s — triés par présence (${combined.length} affiché·e·s)`;
+    combinedTitle.innerHTML = `<span>${isEn
+      ? `All elected members — ${ministresSortMode === 'desc' ? 'most present at votes first' : 'least present at votes first'} (${combined.length} shown)`
+      : `Tou·te·s les élu·e·s — ${ministresSortMode === 'desc' ? 'les plus présents aux votes d’abord' : 'les moins présents aux votes d’abord'} (${combined.length} affiché·e·s)`}</span><span class="tri-vote">${triVoteHtml()}</span>`;
     grid.innerHTML = combined.length
       ? combined.map(personCard).join('')
       : `<div class="no-results">${isEn ? 'No results for this search.' : 'Aucun résultat pour cette recherche.'}</div>`;
