@@ -1091,7 +1091,39 @@ function renderFinances(){
   </section>`; }).join('') : `<section class="fin-bloc"><h3>${isEn ? 'What was reported as spent' : 'Ce qui a été déclaré comme dépensé'}</h3>
     <p class="fin-note">${isEn ? `No expense report under this name in the Assembly’s ${F.depenses.periode} disclosure.` : `Aucun rapport de dépenses à ce nom dans la divulgation ${F.depenses.periode} de l’Assemblée.`}</p></section>`;
 
-  boite.innerHTML = `<div class="fin-tete"><b>${nom}</b>${circ ? ` · ${circ}` : ''}</div><div class="fin-grille">${gagne}${alloue}${depense}</div>`;
+  boite.innerHTML = `<div class="fin-tete"><b>${nom}</b>${circ ? ` · ${circ}` : ''}</div><div class="fin-grille">${gagne}${alloue}${depense}</div>${finLegende(isEn)}`;
+}
+// LA LÉGENDE du tableau (Martin, 6 oct. 2026 : « s'il y a des précisions comme ça, du cas par cas,
+// hésite pas à rajouter une légende pour que l'utilisateur comprenne »). Toutes les précisions qui
+// évitent une mauvaise lecture, réunies au même endroit, sous le tableau. À TENIR À JOUR : chaque
+// cas particulier découvert dans ces données s'ajoute ici, pas seulement dans une note de code.
+function finLegende(isEn){
+  const F = _finances, B = F.bareme;
+  const vacants = F.depenses.rapports.filter(r => r.type === 'vacant').map(r => r.entite.replace(/\s*-\s*Vacant$/i, ''));
+  const annees = _finHist ? Object.values(_finHist.documents).map(d => d.periode).sort() : [];
+  const P = isEn ? [
+    ['What this person earns', `The Assembly publishes a scale by function, not a pay slip per person. The site shows the basic indemnity for everyone and adds the indemnity for a function only for ministers, the one function it knows for certain. For a whip, a House leader, a committee chair or a parliamentary assistant, only the basic indemnity is shown: see the Assembly’s scale for theirs.`],
+    ['What is allocated', `Annual ceilings, not amounts spent. They depend on the riding’s group, from 1 to 5, set by its area: a very large riding gets more for travel. This scale has been in force since ${B.depuis}; the expenses shown cover ${F.depenses.periode}. The two are not from the same year and cannot be compared line by line.`],
+    ['What was reported as spent', `Amounts copied as published in the Assembly’s expense report. The site gives no grand total: the Assembly gives none, and adding up a rent and a payroll means nothing.`],
+    ['A line at $0', `The report says $0 and gives no reason. The site does not guess it: to know it, one has to ask the Assembly.`],
+    ['Office and research service', `The Assembly files these reports under a person’s name. When several people are named for the same office in the same year, “The whole office” puts them side by side. Its last column, in yellow, is added up by the site line by line: it is the only calculation the site makes on these figures, and the Assembly does not publish it.`],
+    ['From one year to the next', `${annees.length} disclosures are online at the Assembly${annees.length ? ` (${annees[0]} to ${annees[annees.length - 1]})` : ''}. A dash means the line does not appear that year, or there is no report under this name. The Assembly has renamed some lines over time: the site keeps each name as published and does not merge them. For an office, the history follows the person, not the office.`],
+    ...(vacants.length ? [['Vacant ridings', `${vacants.join(' and ')} are listed as “vacant” in the Assembly’s report. Their report carries the name of the person who administered the riding: the site does not put it under that person’s name.`]] : []),
+    ['No ranking', `The amounts depend on the area of the riding, local rents and the distance from Québec City. The site shows them and does not rank anyone.`],
+  ] : [
+    ['Ce que cette personne gagne', `L’Assemblée publie un barème par fonction, pas une paie par personne. Le site affiche l’indemnité de base pour tout le monde et n’ajoute l’indemnité de fonction que pour les ministres, la seule fonction qu’il connaît avec certitude. Pour un·e whip, un·e leader, une présidence de commission ou un·e adjoint·e parlementaire, seule l’indemnité de base est affichée : voir le barème de l’Assemblée pour la leur.`],
+    ['Ce qui est alloué', `Des plafonds annuels, pas des montants dépensés. Ils dépendent du groupe de la circonscription, de 1 à 5, fixé selon sa superficie : une très grande circonscription reçoit davantage pour les déplacements. Ce barème est en vigueur depuis le ${B.depuis} ; les dépenses affichées portent sur ${F.depenses.periode}. Les deux ne sont pas de la même année et ne se comparent pas ligne à ligne.`],
+    ['Ce qui a été déclaré comme dépensé', `Les montants sont recopiés tels que publiés dans le rapport de dépenses de l’Assemblée. Le site ne donne aucun grand total : l’Assemblée n’en donne pas, et additionner un loyer et une masse salariale ne veut rien dire.`],
+    ['Une ligne à 0 $', `Le rapport indique 0 $ et n’en donne pas la raison. Le site ne la devine pas : pour la connaître, il faut la demander à l’Assemblée.`],
+    ['Cabinet et service de recherche', `L’Assemblée place ces rapports sous le nom d’une personne. Quand plusieurs personnes sont nommées pour le même cabinet la même année, « Le cabinet au complet » les met côte à côte. Sa dernière colonne, en jaune, est additionnée par le site poste par poste : c’est le seul calcul que le site fait sur ces chiffres, et l’Assemblée ne le publie pas.`],
+    ['D’une année à l’autre', `${annees.length} divulgations sont en ligne à l’Assemblée${annees.length ? ` (${annees[0]} à ${annees[annees.length - 1]})` : ''}. Un tiret veut dire que le poste n’apparaît pas cette année-là, ou qu’il n’y a pas de rapport à ce nom. L’Assemblée a renommé certains postes au fil des ans : le site garde chaque nom tel que publié et ne les fusionne pas. Pour un cabinet, l’historique suit la personne, pas le cabinet.`],
+    ...(vacants.length ? [['Circonscriptions vacantes', `${vacants.join(' et ')} figurent comme « vacantes » dans le rapport de l’Assemblée. Leur rapport porte le nom de la personne qui administrait la circonscription : le site ne le range pas sous le nom de cette personne.`]] : []),
+    ['Aucun classement', `Les montants dépendent de la superficie de la circonscription, du prix des loyers et de la distance de Québec. Le site les montre et ne classe personne.`],
+  ];
+  return `<details class="fin-legende" open>
+    <summary>${isEn ? 'How to read this table' : 'Comment lire ce tableau'}</summary>
+    <dl>${P.map(([t, d]) => `<dt>${t}</dt><dd>${d}</dd>`).join('')}</dl>
+  </details>`;
 }
 // Le bouton « $ » d'une fiche : choisit la personne et amène au tableau.
 function voirFinances(nom){
