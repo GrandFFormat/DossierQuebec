@@ -2131,3 +2131,11 @@
 .fin-grille:has(.fin-evol){grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));}
 .fin-table-evol td:first-child{min-width:120px;}
 @media (max-width:900px){ .fin-bloc-large{grid-template-columns:minmax(0, 1fr); gap:0;} .fin-col-plus .fin-evol:first-child{margin-top:16px; padding-top:14px; border-top:3px solid var(--ink);} }
+
+/* Finances publiques : la légende « Comment lire ce tableau », sous les blocs. */
+.fin-legende{margin-top:18px; background:var(--card); color:var(--ink); border:3px solid var(--ink); box-shadow:var(--shadow); padding:16px 20px;}
+.fin-legende summary{cursor:pointer; font-family:'Archivo',sans-serif; font-size:16px; font-weight:900; text-transform:uppercase; letter-spacing:0.01em; color:var(--ink);}
+.fin-legende dl{margin:12px 0 0; display:grid; grid-template-columns:minmax(150px, 220px) minmax(0, 1fr); gap:10px 20px;}
+.fin-legende dt{font-size:13.5px; font-weight:800; line-height:1.4; color:var(--ink);}
+.fin-legende dd{margin:0; font-size:13.5px; line-height:1.55; color:var(--ink);}
+@media (max-width:700px){ .fin-legende dl{grid-template-columns:minmax(0, 1fr); gap:4px 0;} .fin-legende dd{margin-bottom:10px;} }
