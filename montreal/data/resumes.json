@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-04T18:24:29.847Z",
+ "generatedAt": "2026-10-07T18:51:42.139Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel quand il est publié (source « sommaire »), sinon du texte de la résolution elle-même (source « resolution »), sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,2758 @@
   "annee": "2026",
   "max": 40,
   "batch": true,
-  "depuis": "2026-08-05",
+  "depuis": "2026-08-08",
   "plafond": 120
  },
- "nombre": 8111,
+ "nombre": 8231,
  "genereCetteFois": 120,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 2.5338,
-  "jetonsEntree": 720180,
-  "jetonsSortie": 58664
+  "montant": 1.8253,
+  "jetonsEntree": 489755,
+  "jetonsSortie": 48070
  },
  "resumes": [
+  {
+   "id": "1265815002",
+   "numero": "1265815002",
+   "resolution": "CA26 29 0188",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_services administratifs et greffe",
+   "objet": "ADOPTION DE L’ORDRE DU JOUR",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17532#page=8",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro déplace sa séance ordinaire du conseil d'octobre 2026.",
+    "La séance passe du lundi 5 octobre 2026 à 19 h au mardi 6 octobre 2026 à 19 h.",
+    "Le changement est fait parce que les élections générales provinciales ont lieu le lundi 5 octobre 2026.",
+    "Un avis public sera publié après la séance du conseil pour informer les citoyens de la nouvelle date."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 3596,
+    "sortie": 261
+   }
+  },
+  {
+   "id": "1262155020",
+   "numero": "1262155020",
+   "resolution": "CA26 29 0193",
+   "date": "2026-09-14",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "e TH 58 JOURNÉE « FÈVES AU LARD » FRATERNITÉ DES POLICIERS ET POLICIÈRES DE MONTRÉAL",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17532#page=15",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro achète 100 repas à 10 $ chacun, pour un total de 1 000 $, taxes incluses.",
+    "Les repas servent à la 58e Journée « Fèves au lard » de la Fraternité des policiers et policières de Montréal, le vendredi 23 octobre 2026.",
+    "Les policiers et policières du poste de quartier 3 remettront les repas à l'organisme « Meals on Wheels/Popote roulante ».",
+    "L'activité vise à aider les personnes défavorisées du secteur.",
+    "La dépense est prise à même le budget de fonctionnement de l'arrondissement.",
+    "L'arrondissement participe à cet événement depuis plusieurs années, selon les dossiers antérieurs cités."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 2775,
+    "sortie": 359
+   }
+  },
+  {
+   "id": "1266936025",
+   "numero": "1266936025",
+   "resolution": "CA26 29 0194",
+   "date": "2026-09-14",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "Séance ordinaire du conseil d'arrondissement du lundi 14 septembre 2026 à 19 h DEMANDE D'AIDE FINANCIÈRE – PROGRAMME D'AIDE FINANCIÈRE DU FONDS DE LA SÉCURITÉ ROUTIÈRE",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17532#page=17",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro demande une subvention au Fonds de la sécurité routière du ministère des Transports et de la Mobilité durable.",
+    "L'argent servirait à installer 49 dos d'âne un peu partout dans l'arrondissement, sur des tronçons choisis par le comité de circulation.",
+    "Les emplacements visés sont près d'écoles et de parcs, et sur des rues collectrices ou de transit où la vitesse pose problème.",
+    "Coût estimé du projet : 417 864,00 $ taxes incluses, dont environ 334 000 $ viendraient de la subvention (80 %) et 84 000 $ de l'arrondissement (20 %).",
+    "La demande doit être déposée au plus tard le 31 août 2026; les travaux seraient préparés et réalisés en 2027, selon le délai de réponse.",
+    "Le directeur d'arrondissement, Dominique Jacob, est désigné comme mandataire et signataire pour ce dossier.",
+    "Le montant final de la dépense sera présenté plus tard dans un autre dossier, au moment d'approuver l'installation des dos d'âne."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "417 864,00 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 4546,
+    "sortie": 487
+   }
+  },
+  {
+   "id": "1262155017",
+   "numero": "1262155017",
+   "resolution": "CA26 29 0189",
+   "date": "2026-09-14",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "PROCÈS-VERBAL",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17532#page=11",
+   "source": "sommaire",
+   "puces": [
+    "Le maire de l'arrondissement de Pierrefonds-Roxboro dépose son rapport sur la situation financière de l'arrondissement au 31 décembre 2025, lors d'une séance du conseil tenue en juin, comme l'exige la Charte de la Ville de Montréal.",
+    "Le rapport présente les résultats financiers 2025 (revenus et dépenses), le Programme décennal d'immobilisations 2025-2034 et des indicateurs préliminaires sur le budget 2026.",
+    "Le rapport doit être diffusé sur le territoire de l'arrondissement selon les modalités fixées par le conseil d'arrondissement.",
+    "Il s'agit d'un simple dépôt de document : aucune dépense ni obligation nouvelle n'est décidée."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 2659,
+    "sortie": 355
+   }
+  },
+  {
+   "id": "1268707015",
+   "numero": "1268707015",
+   "resolution": "CA26 29 0199",
+   "date": "2026-09-14",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "P.I.I.A. – LOT 6 634 189 4 866, RUE HARRY-WORTH",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17532#page=37",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro approuve les plans d'un nouvel immeuble résidentiel au 4866, rue Harry-Worth (adresse projetée).",
+    "Le bâtiment comptera 5 étages et 184 logements.",
+    "Les revêtements prévus sont de la brique (trois finis : Kentville, charbon mat, auburn mat), des panneaux métalliques, des fenêtres et portes-patio hybrides et des garde-corps en verre clair.",
+    "Le projet avait déjà fait l'objet d'une résolution en 2024 en vertu du règlement sur les projets particuliers (PPCMOI).",
+    "Le comité consultatif d'urbanisme a recommandé l'acceptation à l'unanimité le 5 août 2026.",
+    "Aucun aspect financier n'est indiqué au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 3346,
+    "sortie": 380
+   }
+  },
+  {
+   "id": "CA26 29 0187",
+   "numero": null,
+   "resolution": "CA26 29 0187",
+   "date": "2026-09-14",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "SUSPENSION ET PROLONGATION DE LA PÉRIODE DE QUESTIONS",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-09-14_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de Pierrefonds-Roxboro suspend la période de questions du public pendant sa séance.",
+    "La période de questions reprendra après l'étude complète de l'ordre du jour et sera prolongée de 30 minutes."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 1729,
+    "sortie": 178
+   }
+  },
+  {
+   "id": "CA26 29 0204",
+   "numero": null,
+   "resolution": "CA26 29 0204",
+   "date": "2026-09-14",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": null,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-09-14_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "Le conseil met fin à la séance ordinaire en cours."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 1568,
+    "sortie": 113
+   }
+  },
+  {
+   "id": "1262155014",
+   "numero": "1262155014",
+   "resolution": "CA26 29 0192",
+   "date": "2026-09-14",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "SUBVENTION – BAL ANNUEL DE LA FONDATION DE L’HÔPITAL GÉNÉRAL DU LAKESHORE",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17532#page=13",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro achète trois billets, au coût total de 2 700 $, pour le 24e bal annuel du Lakeshore.",
+    "L'événement est une collecte de fonds au profit de la Fondation de l'Hôpital général du Lakeshore; les profits serviront à acheter de l'équipement médical.",
+    "Le bal aura lieu le samedi 24 octobre 2026 à la Gare Windsor.",
+    "Trois élus y assisteront : le maire d'arrondissement Dimitrios Jim Beis, la conseillère de Ville Sophie Mohsen et le conseiller d'arrondissement Chahi Tarakjian (district du Cap-Saint-Jacques).",
+    "L'arrondissement achète des billets pour ce bal depuis plusieurs années, selon la liste des décisions antérieures."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 700 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2795,
+    "sortie": 387
+   }
+  },
+  {
+   "id": "CA26 29 0186",
+   "numero": null,
+   "resolution": "CA26 29 0186",
+   "date": "2026-09-14",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "PROLONGATION DE LA PÉRIODE DE QUESTIONS",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-09-14_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de Pierrefonds-Roxboro prolonge de 15 minutes la période de questions de la séance."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 1681,
+    "sortie": 139
+   }
+  },
+  {
+   "id": "1266936024",
+   "numero": "1266936024",
+   "resolution": "CA26 29 0195",
+   "date": "2026-09-14",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "CONTRAT NUMÉRO 261600-ST – TRAVAUX DE RÉFECTION DE LA TOITURE DU CENTRE COMMUNAUTAIRE DE L’OUEST",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17532#page=21",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro accorde un contrat à J. Raymond Maîtres Couvreurs pour refaire la toiture du centre communautaire de l'Ouest, au 17760, rue Meloche.",
+    "La dépense totale atteint 335 058,77 $, taxes incluses : 279 215,64 $ pour le contrat et 55 843,13 $ en contingences (20 % de la soumission).",
+    "Les travaux touchent la toiture du bâtiment ainsi que les appareils au toit, drains, évents, ventilateurs et tôles.",
+    "La soumission retenue est d'environ 2 % moins élevée que la dernière estimation de la Ville (285 554,06 $).",
+    "Sur neuf entreprises ayant pris le cahier des charges, trois ont déposé un prix après l'appel d'offres public lancé le 4 août 2026.",
+    "Les travaux doivent commencer à la mi-octobre 2026 et se terminer à la fin d'octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "335 058,77 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 3876,
+    "sortie": 441
+   }
+  },
+  {
+   "id": "1263050012",
+   "numero": "1263050012",
+   "resolution": "CA26 29 0202",
+   "date": "2026-09-14",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "COMITÉ DE CIRCULATION ET DE SÉCURITÉ ROUTIÈRE",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17532#page=47",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Pierrefonds-Roxboro approuve le procès-verbal du comité de circulation et de sécurité routière du 20 août 2026.",
+    "En l'approuvant, le conseil accepte les conclusions et recommandations du comité.",
+    "Cette approbation modifie l'annexe « A » du règlement 868 sur la circulation et la sécurité publique (ancienne ville de Pierrefonds) et le règlement 98-596 sur le stationnement dans les rues (ancienne ville de Roxboro).",
+    "Le document ne précise pas le contenu des recommandations; il indique seulement qu'elles visent la sécurité des usagers du réseau routier de l'arrondissement.",
+    "Aucun montant n'est associé à la décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 2807,
+    "sortie": 351
+   }
+  },
+  {
+   "id": "1268707014",
+   "numero": "1268707014",
+   "resolution": "CA26 29 0203",
+   "date": "2026-09-14",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "PROCÈS-VERBAL – COMITÉ CONSULTATIF D’URBANISME",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17532#page=50",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Pierrefonds-Roxboro prend acte du procès-verbal de la réunion du comité consultatif d'urbanisme du 5 août 2026 et le dépose aux archives. Aucune dépense ni mesure concrète n'y est rattachée."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 2450,
+    "sortie": 191
+   }
+  },
+  {
+   "id": "1266781001",
+   "numero": "1266781001",
+   "resolution": "CA26 29 0196",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_services administratifs et greffe",
+   "objet": "DÉPÔT DU RAPPORT DE L’ÉVOLUTION BUDGÉTAIRE AU 30 JUIN 2026",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17532#page=25",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement Pierrefonds-Roxboro dépose son portrait financier au 30 juin 2026, comme l'exige la Loi sur les cités et villes.",
+    "Le budget de dépenses 2026 passe à 43 770 600 $, après une hausse de 3 772 700 $ pour la prévention Montréal, la collecte mécanisée et l'ouverture du complexe aquatique.",
+    "Le budget de revenus monte à 1 652 300 $, soit 158 000 $ de plus, en raison d'un ajustement de la dotation du fonds de l'eau.",
+    "Par rapport à la même période en 2025, les dépenses sont plus élevées de 963 200 $ (surtout la rémunération) et les revenus de 93 400 $.",
+    "L'arrondissement prévoit atteindre ses objectifs de dépenses et de revenus pour 2026.",
+    "Les réserves au 30 juin 2026 : 2 926 400 $ au fonds de parcs et 9 471 000 $ en surplus libre."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "43 770 600 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 3983,
+    "sortie": 444
+   }
+  },
+  {
+   "id": "1268388007",
+   "numero": "1268388007",
+   "resolution": "CA26 29 0197",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_services administratifs et greffe",
+   "objet": "REDDITION DES COMPTES DES DEMANDES DE PAIEMENT ET ENGAGEMENTS",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17532#page=29",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro dépose son rapport de dépenses pour la période du 4 au 31 juillet 2026.",
+    "Le rapport fait état de 205 364,52 $ d'engagements et de 85 397,93 $ de demandes de paiement, soit 290 762,45 $ au total.",
+    "S'y ajoutent 126 014,74 $ de dépenses par imputations directes pour les périodes de transactions de juillet.",
+    "Ce dépôt découle de l'obligation faite aux fonctionnaires de rendre compte chaque mois au conseil d'arrondissement des dépenses qu'ils ont autorisées.",
+    "Le document désigne aussi Marie-Pier Cloutier pour remplacer la directrice des relations avec les citoyens du 21 août 2026, 12 h 30, au 31 août 2026, 8 h."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": "290 762.45 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 3177,
+    "sortie": 394
+   }
+  },
+  {
+   "id": "1268707017",
+   "numero": "1268707017",
+   "resolution": "CA26 29 0201",
+   "date": "2026-09-14",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "P.I.I.A. – LOT 3 188 178 925, RUE SARAGUAY EST",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17532#page=43",
+   "source": "sommaire",
+   "puces": [
+    "Une propriété riveraine du 925, rue Saraguay Est, à Pierrefonds-Roxboro, a installé des clôtures autour de sa piscine sans respecter les plans approuvés en 2024.",
+    "Au lieu de la clôture ornementale autorisée face à la rue, le propriétaire a posé une clôture en bois, visible de la voie publique et débordant en partie sur la ligne latérale du terrain.",
+    "Le comité consultatif d'urbanisme recommande de refuser la clôture en bois face à la rue : elle bloque la percée visuelle vers le plan d'eau exigée pour les terrains riverains.",
+    "Le même comité recommande d'accepter la clôture en verre autour de la piscine et la clôture à mailles de chaîne.",
+    "Le conseil d'arrondissement doit trancher sur cette nouvelle demande de certificat d'autorisation déposée en 2026.",
+    "Aucun montant d'argent n'est rattaché à ce dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 3946,
+    "sortie": 424
+   }
+  },
+  {
+   "id": "1268707016",
+   "numero": "1268707016",
+   "resolution": "CA26 29 0200",
+   "date": "2026-09-14",
+   "unite": "Direction du développement du territoire et études techniques",
+   "objet": "P.I.I.A. – LOT 3 093 429 18 198, BOULEVARD GOUIN OUEST",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17532#page=40",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro approuve la division en deux du terrain situé au 18198, boulevard Gouin Ouest, en bordure du parcours riverain.",
+    "Le propriétaire veut démolir une annexe d'un étage ajoutée au bâtiment principal après sa construction.",
+    "Il veut aussi construire une maison unifamiliale isolée sur le nouveau terrain vacant créé par la division.",
+    "Le bâtiment principal datant d'avant 1940, un avis et une étude patrimoniale ont été envoyés au ministère de la Culture et des Communications, qui ne s'est pas opposé à la démolition de l'annexe.",
+    "La démolition partielle n'est pas soumise au comité d'étude des demandes de démolition de l'arrondissement.",
+    "Le comité consultatif d'urbanisme a recommandé le projet à l'unanimité le 3 décembre 2025."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 3291,
+    "sortie": 405
+   }
+  },
+  {
+   "id": "1260645001",
+   "numero": "1260645001",
+   "resolution": "CA26 25 209",
+   "date": "2026-09-08",
+   "unite": "Direction des services administratifs",
+   "objet": "Addenda 2 à la convention de contribution financière de 55 000$, toutes taxes applicables, conclue avec l'organisme sans but lucratif Coalition Mobilité Active Montréal pour la réalisation du projet lauréat Vélos-cargos pour le Plateau, dans le cadre du budget participatif et approbation de l'addenda à cet effet",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=23",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal prolonge jusqu'au 31 mai 2027 l'entente de 55 000 $ (taxes et frais inclus) avec l'organisme sans but lucratif Coalition Mobilité Active Montréal.",
+    "L'argent sert au projet « Vélos-cargos pour le Plateau », choisi par vote citoyen dans le budget participatif de l'arrondissement.",
+    "Le groupe Locomotion Plateau, qui prête déjà gratuitement des remorques à vélo, veut ajouter 4 vélos-cargos électriques à son offre de partage.",
+    "C'est la deuxième prolongation : l'échéance était d'abord le 3 avril 2025, puis le 31 mai 2026. L'organisme n'a pas pu réaliser le projet à temps.",
+    "Le versement se fait en deux temps : 45 000 $ en 2024 et 10 000 $ en 2027, à la remise du rapport final.",
+    "Le budget participatif disposait de 250 000 $ tirés des surplus de l'arrondissement; 195 000 $ sont allés à deux autres projets (paniers collectifs et dépôt de denrées)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "55 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.134Z",
+   "jetons": {
+    "entree": 6053,
+    "sortie": 501
+   }
+  },
+  {
+   "id": "1268413006",
+   "numero": "1268413006",
+   "resolution": "CA26 25 227",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Modification des ordonnances C-41, o. 364 et P-1, o. 134 relatives à la fermeture de la rue à la circulation des avenues du Mont-Royal et Duluth ainsi qu'à la vente sur le domaine public dans le cadre des piétonnisations estivales 2026",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=138",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal change le calendrier de réouverture de l'avenue du Mont-Royal, piétonnisée depuis le 25 mai 2026.",
+    "Nouveau découpage en trois tronçons : réouverture entre Resther et De Lorimier le 10 septembre, entre Saint-Denis et Resther le 30 septembre (au lieu du 15 octobre), et entre Saint-Laurent et Saint-Denis le 15 octobre.",
+    "La rue piétonne est maintenue près du métro Mont-Royal pendant les Championnats du Monde Route UCI, pour des raisons de sécurité.",
+    "Le changement répond à une demande de la SDC Mont-Royal, en raison de chantiers de construction de longue durée et de leurs effets sur la circulation.",
+    "L'avenue Duluth reste fermée à l'auto entre Saint-Laurent et Saint-Hubert du 16 juin au 15 octobre 2026.",
+    "Vélos et engins légers (trottinettes, planches, patins) peuvent circuler; les vélos de type moto, scooters à plancher plat et cyclomoteurs électriques sont interdits. Livraison et entretien permis de 7 h à 11 h, tous les jours.",
+    "La vente, l'étalage (max. 2,5 m² de chaussée) et la préparation d'aliments sont autorisés dans l'emprise des rues piétonnes, avec un couloir de sécurité de 6 m au centre."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.134Z",
+   "jetons": {
+    "entree": 7400,
+    "sortie": 600
+   }
+  },
+  {
+   "id": "CA26 25 206",
+   "numero": null,
+   "resolution": "CA26 25 206",
+   "date": "2026-09-08",
+   "unite": "Direction des services administratifs",
+   "objet": "Résolution demandant aux partis politiques provinciaux et à leurs candidat·es de présenter un plan de réduction de la consommation de pétrole au Québec, notamment celui issu des sables bitumineux",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8508#page=4",
+   "source": "resolution",
+   "puces": [
+    "Le conseil demande aux partis politiques provinciaux et à leurs candidat·es de présenter un plan de réduction de la consommation de pétrole au Québec, en particulier celui issu des sables bitumineux.",
+    "La résolution invoque la menace des changements climatiques pour la santé et la sécurité de la population : chaleurs extrêmes, feux de forêt, inondations et événements météorologiques extrêmes.",
+    "Elle rappelle que le Québec s'est fixé des cibles de réduction des gaz à effet de serre et a mis fin à l'exploration et à l'exploitation des hydrocarbures sur son territoire.",
+    "Elle souligne que le Québec a en parallèle augmenté ses achats de pétrole des sables bitumineux de l'Alberta et ses exportations de carburants pétroliers vers les États-Unis.",
+    "Elle rappelle que l'extraction des sables bitumineux émet plus de GES que plusieurs sources de pétrole conventionnel et affecte les milieux naturels, l'eau et la biodiversité.",
+    "Elle évoque aussi les risques du transport de pétrole par oléoduc pour les cours d'eau et les sources d'eau potable."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 2907,
+    "sortie": 497
+   }
+  },
+  {
+   "id": "1267566009",
+   "numero": "1267566009",
+   "resolution": "CA26 25 235",
+   "date": "2026-09-08",
+   "unite": "Direction des services administratifs",
+   "objet": "Dépôt des rapports de délégation de pouvoirs aux fonctionnaires et employés pour les périodes du 1er au 30 juin et du 1er au 31 juillet 2026 Conformément à l'article 477.2 de la Loi sur les cités et villes (chapitre C-19), le trésorier a déposé les certificats attestant l'existence des crédits suffisants aux fins mentionnées aux présentes.",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=171",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil de l'arrondissement du Plateau-Mont-Royal prend acte du dépôt des rapports des décisions prises par les fonctionnaires et employés dans le cadre des pouvoirs qui leur sont délégués, pour juin et juillet 2026.",
+    "Il s'agit d'une formalité de reddition de comptes : aucune dépense ni nouvelle mesure n'est décidée par ce document."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 3230,
+    "sortie": 234
+   }
+  },
+  {
+   "id": "1267896010",
+   "numero": "1267896010",
+   "resolution": "CA26 25 228",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Adoption du calendrier des promotions commerciales devant se tenir sur l'avenue Duluth à l'automne 2026 et édiction des ordonnances afférentes",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=144",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal autorise une promotion commerciale « Duluth Pop » sur l'avenue Duluth, entre le boulevard Saint-Laurent et la rue Saint-Hubert, du 19 au 27 septembre 2026.",
+    "L'événement est organisé par l'Association des commerçants de l'avenue Duluth (ACAD) et coïncide avec les Championnats du monde de cyclisme sur route UCI 2026.",
+    "Les ordonnances permettent la vente et la consommation d'alcool sur le domaine public, l'étalage et la vente de biens, d'aliments et de services, les panneaux sandwiches et la distribution d'échantillons.",
+    "La musique d'ambiance sur les terrasses et un concert extérieur sont permis malgré le règlement sur le bruit; les heures d'exploitation des cafés-terrasses sont prolongées.",
+    "Les musiciens ambulants, bateleurs, sculpteurs de ballons et maquilleurs sont autorisés sur le domaine public.",
+    "Aucune fermeture de rue supplémentaire n'est requise : l'avenue Duluth est déjà piétonnisée, et la prolongation des heures d'ouverture des commerces a déjà été approuvée.",
+    "Le dossier n'entraîne aucune dépense; l'étape suivante est l'émission du permis."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 5404,
+    "sortie": 560
+   }
+  },
+  {
+   "id": "1264950006",
+   "numero": "1264950006",
+   "resolution": "CA26 25 213",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Demander au Conseil municipal de majorer la dotation de l'arrondissement du Plateau-Mont- Royal, par l'entremise du programme du passif environnemental des sols contaminés, pour un montant de 733 409,62 $ taxes nettes, afin de financer les coûts liés à la réhabilitation environnementale pour le projet de réaménagement du secteur sud du parc Baldwin, situé sur le lot 1 424 067 dans le district de De Lorimier à l'intersection des rues Fullum et Rachel Est",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=48",
+   "source": "sommaire",
+   "puces": [
+    "La Ville centrale verserait 733 409,62 $ (taxes nettes) à l'arrondissement du Plateau-Mont-Royal pour décontaminer les sols du secteur sud du parc Baldwin, à l'angle des rues Fullum et Rachel Est, dans le district De Lorimier.",
+    "L'argent provient de la réserve du passif environnemental des sols contaminés et couvre seulement la réhabilitation des sols; les autres volets du réaménagement sont exclus.",
+    "Le montant inclut 15 % de contingences et 49 704,15 $ de frais du ministère (Traces-Québec et redevances). Le coût total avec taxes est de 798 450,78 $.",
+    "L'arrondissement veut octroyer le contrat de travaux à Limoges et Fils Inc. : décontamination, démolition des surfaces existantes, terrain de soccer en gazon naturel, sentiers, mobilier urbain, éclairage, structure d'escalade, équipements d'exercices et remise en état du jardin communautaire Baldwin.",
+    "Le secteur visé fait environ 6 000 m²; les travaux se dérouleraient en 2026 et 2027.",
+    "L'arrondissement devra rendre des comptes chaque trimestre au Service de l'environnement; la somme est un maximum estimé et les dépenses finales pourraient être moindres."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "733 409,62 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 6347,
+    "sortie": 559
+   }
+  },
+  {
+   "id": "1268413007",
+   "numero": "1268413007",
+   "resolution": "CA26 25 226",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Ordonnance modifiant le sens de la circulation de la rue Marquette, entre l'avenue du Mont-Royal Est et la rue Gilford, pour la mettre en direction nord",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=132",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal rend permanent le sens unique vers le nord sur la rue Marquette, entre l'avenue du Mont-Royal Est et la rue Gilford.",
+    "Ce sens était déjà inversé chaque été pendant la piétonnisation du Mont-Royal Est; il restera en place après la fin de la piétonnisation, le 10 septembre 2026.",
+    "La chaussée désignée pour vélos en direction sud (entre Gilford et Mont-Royal) est retirée; une chaussée désignée vers le nord est ajoutée entre Marie-Anne Est et Gilford.",
+    "Une case de stationnement disparaît au coin nord-est de Mont-Royal Est et Marquette, pour faciliter le virage des camions du Service de sécurité incendie.",
+    "L'arrondissement dit avoir agi à la suite de requêtes de citoyens et estime l'impact limité : la circulation y est locale, environ 500 véhicules par jour vers le nord.",
+    "Les comptages recensent près de 400 cyclistes vers le nord sur ce tronçon entre 7 h et 19 h un jour de semaine.",
+    "Les coûts de marquage et de signalisation sont estimés à moins de 1 000 $."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "moins de 1 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 5975,
+    "sortie": 529
+   }
+  },
+  {
+   "id": "1268950003",
+   "numero": "1268950003",
+   "resolution": "CA26 25 223",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Approuver les plans conformément au Règlement sur les plans d'implantation et d'intégration architecturale de l'arrondissement du Plateau-Mont-Royal (2005-18) - Construction d'une nouvelle cour de services et d'un bâtiment principal de deux étages au 5425, rue de Mentana",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=116",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal approuve les plans de construction d'une cour de services et d'un bâtiment principal de deux étages au 5425, rue de Mentana, sur un terrain actuellement vacant.",
+    "Le revêtement extérieur prévu est en briques d'argile rouge de format traditionnel, jugées compatibles avec le secteur Village-de-Lorimier (zone industrielle).",
+    "Une rampe sera aménagée devant l'entrée pour rendre l'établissement universellement accessible.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable avec conditions le 18 août 2026; les plans révisés reçus le 24 août intègrent ces conditions.",
+    "Les dessins d'exécution en architecture et en structure étaient avancés à environ 70 % au moment de la décision.",
+    "Le conseil d'arrondissement adopte la proposition le 8 septembre 2026. Aucun aspect financier n'est rattaché au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 4291,
+    "sortie": 431
+   }
+  },
+  {
+   "id": "CA26 25 238",
+   "numero": null,
+   "resolution": "CA26 25 238",
+   "date": "2026-09-08",
+   "unite": "Direction des services administratifs",
+   "objet": null,
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8508#page=25",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement met fin à sa séance ordinaire du 8 septembre 2026, à 20 h 41."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 1591,
+    "sortie": 136
+   }
+  },
+  {
+   "id": "1269239011",
+   "numero": "1269239011",
+   "resolution": "CA26 25 222",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Autoriser, l'aménagement de deux suites destinées à l'exploitation d'établissements d'hébergement touristique adjacents à un bar et à une salle de spectacle, situé au 2e étage du 3435-3439 boulevard Saint-Laurent, en vertu du Règlement sur les usages conditionnels de l'arrondissement du Plateau-Mont-Royal (2023-02)",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=110",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal autorise l'aménagement de deux suites d'hébergement touristique au 2e étage du 3435-3439 boulevard Saint-Laurent, au-dessus et à côté d'un bar et d'une salle de spectacle.",
+    "Normalement, un usage d'habitation ne peut pas être adjacent à un bar ou à une salle de spectacle; la Ville accorde ici une dérogation.",
+    "Les suites compteraient respectivement deux et quatre chambres; le local est vacant depuis plusieurs années et aucun logement n'est perdu.",
+    "Une étude acoustique a mesuré des niveaux de bruit de 44 à 46 dB(A), alors que la réglementation exige un maximum de 38 dB(A) dans une chambre.",
+    "Le propriétaire devra isoler le plancher-plafond entre le rez-de-chaussée et le 2e étage et remplacer les portes coulissantes côté Saint-Laurent par du vitrage plus performant.",
+    "Avant d'obtenir son certificat d'occupation, il devra déposer une étude démontrant que le bruit dans les suites respecte le règlement sur les nuisances sonores.",
+    "Aucune mesure d'accessibilité universelle n'est prévue, faute d'ascenseur et à cause des contraintes du bâtiment."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 6458,
+    "sortie": 552
+   }
+  },
+  {
+   "id": "CA26 25 204",
+   "numero": null,
+   "resolution": "CA26 25 204",
+   "date": "2026-09-08",
+   "unite": "Direction des services administratifs",
+   "objet": "Adoption de l'ordre du jour de la séance du conseil d'arrondissement",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8508#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement du Plateau-Mont-Royal adopte l'ordre du jour de sa séance ordinaire du 8 septembre 2026, avec deux ajouts.",
+    "Premier ajout : un point pour suspendre l'application des interdictions de stationnement liées au nettoyage des rues durant les mondiaux cyclistes de septembre 2026.",
+    "Deuxième ajout : un point pour modifier les heures de collectes et de livraisons sur une partie du territoire pendant les Championnats du monde de cyclisme sur route UCI 2026, du 19 au 27 septembre 2026.",
+    "Il s'agit ici seulement de l'adoption de l'ordre du jour : les deux mesures seront décidées dans des points distincts."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 2020,
+    "sortie": 347
+   }
+  },
+  {
+   "id": "1269226001",
+   "numero": "1269226001",
+   "resolution": "CA26 25 211",
+   "date": "2026-09-08",
+   "unite": "Direction de la culture, des sports, des loisirs et du développement social",
+   "objet": "Approbation du dépôt d'une demande de subvention auprès du Secrétariat à la jeunesse du gouvernement du Québec dans le cadre du volet 1 du « Programme des stratégies jeunesse en milieu municipal » au montant de 50 000 $ pour la création et la consolidation d'un comité consultatif au Plateau Mont-Royal de 2027 à 2028",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=39",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal demande 50 000 $ au Secrétariat à la jeunesse du Québec pour créer un comité consultatif jeunesse.",
+    "L'aide se répartit en 25 000 $ pour 2027 et 25 000 $ pour 2028; le projet se réaliserait de janvier 2027 à décembre 2028.",
+    "Le comité donnerait aux jeunes du quartier un espace de consultation sur des enjeux comme la culture, l'aménagement, la sécurité, les sports et les loisirs.",
+    "L'arrondissement s'engage à payer sa part des coûts admissibles, les coûts non admissibles et tout dépassement.",
+    "Le directeur d'arrondissement est mandaté pour signer les documents de la demande.",
+    "La date limite de dépôt de la demande est le 25 septembre 2026; sans la subvention, le projet ne se fait pas."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "50 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 5077,
+    "sortie": 407
+   }
+  },
+  {
+   "id": "1260406006",
+   "numero": "1260406006",
+   "resolution": "CA26 25 224",
+   "date": "2026-09-08",
+   "unite": "Direction de la culture, des sports, des loisirs et du développement social",
+   "objet": "Ordonnances relatives à la programmation d'événements publics et autorisation conformément à la Loi favorisant le vivre-ensemble et encadrant les accommodements pour un motif religieux, la procession « La fête de Notre-Dame du Mont » organisée par la Communauté des catholiques portugais de Montréal",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=120",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal autorise l'occupation du domaine public pour 24 événements publics : 11 nouveaux et 13 déjà tenus qui sont ratifiés.",
+    "Pour ces événements, l'arrondissement lève certaines règles : bruit des appareils sonores à l'extérieur, vente d'articles promotionnels, de nourriture et d'alcool, et fermeture temporaire de rues et de boulevards.",
+    "Le conseil autorise la procession « La fête de Notre-Dame du Mont », organisée par la Communauté des catholiques portugais de Montréal, le dimanche 6 septembre 2026.",
+    "C'est la première application locale de la Loi favorisant le vivre-ensemble (loi 9) : l'arrondissement dit avoir vérifié que la procession est sécuritaire, courte, ouverte à tous et qu'elle ne bloque pas l'accès au domaine public.",
+    "Le poste de quartier 38 encadre la procession pour la sécurité des déplacements.",
+    "Les événements sont gratuits. Les coûts et les risques sont assumés par les organisateurs; le soutien de la Ville sort des budgets de fonctionnement existants.",
+    "Les organisateurs doivent afficher les fermetures de rues dix jours à l'avance et fournir une assurance responsabilité civile couvrant aussi la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 6293,
+    "sortie": 564
+   }
+  },
+  {
+   "id": "1263945012",
+   "numero": "1263945012",
+   "resolution": "CA26 25 207",
+   "date": "2026-09-08",
+   "unite": "Direction des services administratifs",
+   "objet": "Octroi d'une contribution financière de 600 $, toutes taxes applicables, à Helem Protection libanaise pour gais, lesbiennes, transgenres, bisexuels et bisexuelles, pour l'organisation d'activités célébrant la diversité sexuelle et de genre dans le cadre de la Wild Pride/Fierté indomptable À la demande du cabinet de la mairesse, et en vertu de l'article 137 de la Charte de la Ville de Montréal, métropole du Québec (chapitre C-11.4);",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=13",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal verse 600 $ à l'organisme Helem Montréal (Protection libanaise pour gais, lesbiennes, transgenres, bisexuels et bisexuelles).",
+    "L'argent sert à organiser des activités célébrant la diversité sexuelle et de genre dans le cadre du festival Wild Pride / Fierté Indomptable.",
+    "Le festival est présenté comme un événement alternatif organisé par et pour les communautés 2SLGBTQIA+, racisées et marginalisées.",
+    "La deuxième édition aura lieu à l'été 2026 et proposera une centaine d'activités, dont plusieurs sur le territoire du Plateau-Mont-Royal.",
+    "La somme est non récurrente et provient du budget de soutien aux élus de l'arrondissement.",
+    "La demande vient du cabinet de la mairesse, en vertu de l'article 137 de la Charte de la Ville de Montréal."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "600 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 3794,
+    "sortie": 424
+   }
+  },
+  {
+   "id": "1269240012",
+   "numero": "1269240012",
+   "resolution": "CA26 25 221",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Autoriser la réduction d'un logement dans le bâtiment situé au 4548-4550, rue de Bordeaux, en vertu du Règlement sur les usages conditionnels de l'arrondissement du Plateau-Mont- Royal (2023-02)",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=104",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal autorise la fusion des deux logements du 4548-4550, rue de Bordeaux en un seul logement d'environ 122 m² avec quatre chambres.",
+    "Le bâtiment est vacant depuis des années : une partie du mur de façade s'est effondrée en 2020, il n'a plus de plomberie ni d'électricité fonctionnelles. Les nouveaux propriétaires l'ont acheté en novembre 2025 et les deux logements étaient vides, donc aucun locataire n'est touché.",
+    "Le projet prévoit la démolition du hangar arrière, l'ajout d'un sous-sol habitable avec cour anglaise et la restauration des éléments d'origine de la façade.",
+    "Conditions imposées : 60 % de la cour en surfaces perméables (50 % de végétaux en pleine terre, 10 % de pavés alvéolés), plantation de deux arbres et stationnement pour quatre vélos avec supports métalliques fixés au sol.",
+    "La cour arrière se trouve dans un secteur de cuvette de rétention des eaux de pluie : le propriétaire doit installer un puisard avec drain français, une membrane d'étanchéité, des portes et fenêtres anti-inondation au sous-sol et des clapets anti-retour.",
+    "Avant que des résidents emménagent, un architecte doit déposer à l'arrondissement une attestation signée et scellée confirmant que ces mesures anti-inondation sont faites.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable le 30 juin 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 7251,
+    "sortie": 640
+   }
+  },
+  {
+   "id": "1263945010",
+   "numero": "1263945010",
+   "resolution": "CA26 25 212",
+   "date": "2026-09-08",
+   "unite": "Direction des services administratifs",
+   "objet": "Affectation d'un montant de 4 311 600 $ au surplus libre de gestion de l'Arrondissement du Plateau-Mont-Royal pour l'exercice 2025",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=44",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal a terminé l'année financière 2025 avec un surplus de 4 311 600 $.",
+    "Le conseil d'arrondissement verse cette somme au surplus libre, ce qui la rend disponible pour des usages futurs non encore déterminés.",
+    "Le surplus vient notamment d'une hausse des revenus de tarification, d'une compensation liée aux déficits de gestion des matières résiduelles et d'ajustements en santé et sécurité au travail.",
+    "D'autres sources citées : la mutualisation des revenus de construction et de modification, et la répartition des charges liées à l'escouade de l'hébergement touristique et à l'entretien de l'éclairage, de la signalisation et du marquage.",
+    "L'opération suit la politique sur les surplus 2025 adoptée par le conseil municipal le 16 juin 2026.",
+    "L'an dernier, le même exercice avait porté sur un surplus de 5 409 900 $ pour 2024."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "4 311 600 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 3987,
+    "sortie": 436
+   }
+  },
+  {
+   "id": "1269330001",
+   "numero": "1269330001",
+   "resolution": "CA26 25 236",
+   "date": "2026-09-08",
+   "unite": "Direction des services administratifs",
+   "objet": "Dépôt du rapport final d'information pour l'exécution des travaux urgents de démolition du bâtiment dangereux situé au 5986-5992 avenue du Parc (Article 199 de l'annexe C de la Charte de la Ville de Montréal, métropole du Québec) Conformément à l'article 199 de l'annexe C de la Charte de la Ville de Montréal, métropole du Québec, le rapport final d'information faisant état des dépenses engagées pour l'exécution de travaux urgents de démolition du bâtiment dangereux situé au 5986 - 5992, avenue du Parc, pour une somme de 710 717,18 $, taxes incluses, est déposé au conseil.",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=175",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal a démoli d'urgence le bâtiment vacant du 5986-5992, avenue du Parc, et dépose au conseil le rapport final des dépenses : 710 717,18 $, taxes incluses.",
+    "Le propriétaire n'a jamais réalisé les travaux malgré un constat d'infraction, un rapport d'ingénieur recommandant la démolition complète en avril 2023 et un ordre de démolition signifié en avril 2024.",
+    "Le 17 mars 2025, l'effondrement partiel du mur nord a forcé l'évacuation d'une douzaine de locataires du 6000, avenue du Parc; une évacuation partielle d'un immeuble voisin avait déjà eu lieu en mars 2024.",
+    "L'arrondissement a installé des clôtures et des périmètres de sécurité, occupant une partie de l'avenue du Parc, puis a accordé les contrats sans appel d'offres en invoquant la force majeure.",
+    "Les travaux de décontamination et de démolition se sont terminés en mai 2026.",
+    "Les coûts réels sont de 183 726,45 $ inférieurs au budget autorisé de 894 443,63 $ : Demospec Déconstruction (621 324,36 $), CIMA + (74 581,38 $), Geninovation (11 872,69 $), Bell (2 874,38 $) et Traces Québec (64,37 $).",
+    "Les sommes proviennent du surplus de gestion de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "710 717,18 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 7680,
+    "sortie": 615
+   }
+  },
+  {
+   "id": "1264950005",
+   "numero": "1264950005",
+   "resolution": "CA26 25 210",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Attribution d'un contrat à Limoges et Fils Inc. au montant de 3 406 915,53 $, taxes incluses, pour les travaux de réaménagement du parc Baldwin et autorisation d'une dépense totale à cette fin de 4 222 952,86 $, taxes incluses, incluant les incidences de 305 000 $ et les contingences de 511 037,33 $, taxes incluses - Appel d'offres public DDTET54-26-02 - 5 soumissionnaires conformes - Autoriser un financement d'un montant net de 1 904 067,84 $ à même les revenus reportés parcs et terrains de jeux pour la portion financée par l'arrondissement",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=29",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal confie à Limoges et Fils Inc. les travaux de réaménagement du parc Baldwin pour 3 406 915,53 $, taxes incluses; la dépense totale autorisée atteint 4 222 952,86 $ (incidences de 305 000 $ et contingences de 511 037,33 $).",
+    "Au sud du parc, à l'angle des rues Fullum et Rachel Est, environ 6 000 m² seront transformés : terrain de soccer en gazon naturel à la place de l'ancienne piscine démolie, structure d'escalade et équipements d'exercices là où se trouvait le pavillon des baigneurs, et remise en état du jardin communautaire Baldwin.",
+    "Au nord, devant le chalet du parc entre les rues Fullum et Chapleau, environ 210 m² de jeux d'eau vétustes seront remplacés par de nouveaux équipements.",
+    "Les travaux incluent aussi la réhabilitation environnementale, des sentiers, du mobilier urbain (bancs, fontaine à boire, supports à vélo, tables), de l'éclairage, des clôtures et des plantations.",
+    "Les sols du futur terrain de soccer sont contaminés et contiennent du biogaz : l'arrondissement attend une autorisation du ministère avant de commencer les travaux sur cette portion.",
+    "Financement : 49,04 % par les revenus reportés des parcs et terrains de jeux de l'arrondissement (1 904 067,84 $ net), 29,45 % par le Service de la culture, des sports et loisirs, et 20,33 % par deux projets du budget participatif de Montréal (« Montréal grimpe » et « Gym de quartier à ciel ouvert »).",
+    "Sur six soumissions reçues lors de l'appel d'offres public tenu du 22 juin au 18 août 2026, cinq étaient conformes; l'offre retenue est la plus basse, à 4,61 % au-dessus de l'estimation."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 406 915,53 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 7960,
+    "sortie": 786
+   }
+  },
+  {
+   "id": "1267370004",
+   "numero": "1267370004",
+   "resolution": "CA26 25 214",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Demander au Conseil municipal de majorer la dotation de l'arrondissement du Plateau-Mont- Royal, par l'entremise de la réserve du passif environnemental, pour un montant de 19 438,55 $ taxes nettes, afin de retenir les services professionnels requis pour la réalisation des études environnementales complémentaires nécessaires pour effectuer l'estimation des coûts reliés à la décontamination et à la réhabilitation des sols du projet d'aménagement des allées Alma et du Carmel, situées dans l'arrondissement du Plateau-Mont-Royal",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=54",
+   "source": "sommaire",
+   "puces": [
+    "La Ville ajoute 19 438,55 $ (taxes nettes) au budget de l'arrondissement du Plateau-Mont-Royal, pris à même la réserve du passif environnemental; la dépense est payée à 100 % par la ville-centre.",
+    "L'argent sert à payer un avenant à la firme Groupe ABS inc., qui doit faire des analyses chimiques supplémentaires et creuser trois puits d'observation, comme l'exige le Ministère.",
+    "Ces études mettent à jour la caractérisation environnementale des sols des futures allées piétonnes Alma et du Carmel, dans le secteur Saint-Viateur Est.",
+    "Les études antérieures indiquent une contamination au-delà du critère « C » du Guide d'intervention et la présence de couches de matières résiduelles.",
+    "Les allées piétonnes suivront l'axe de la rue Alma (entre Maguire et l'allée Saint-Viateur) et l'axe de l'avenue du Carmel (entre la future allée Alma et l'avenue Henri-Julien).",
+    "Échéancier prévu : études en 2026, plans et devis en 2026-2027, début des travaux à l'été 2028.",
+    "Le contrat initial avec Groupe ABS inc. était de 51 203,16 $ taxes incluses; l'avenant porte sur 21 287,75 $ taxes incluses, contingences comprises."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "19 438,55 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 6493,
+    "sortie": 572
+   }
+  },
+  {
+   "id": "1265680008",
+   "numero": "1265680008",
+   "resolution": "CA26 25 229",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Adoption de la résolution, en vertu du paragraphe 8 de l'article 4 du Règlement sur la circulation et le stationnement (R.R.V.M., chapitre C-4.1), afin d'ajouter 6 places de stationnement interdit excepté véhicules électriques en recharge dans l'arrondissement du Plateau-Mont-Royal",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=149",
+   "source": "sommaire",
+   "puces": [
+    "Le Plateau-Mont-Royal réserve 6 places de stationnement aux véhicules électriques en recharge, en tout temps, à trois endroits.",
+    "Les emplacements : boulevard Saint-Laurent côté est au nord du boulevard Saint-Joseph, rue Berri côté est au sud de Gilford, et rue Saint-Hubert côté est au sud de Rachel Est.",
+    "Sur Saint-Laurent, la zone réservée aux véhicules de la Ville (7 h à 22 h 30) est déplacée plus au nord; le parcomètre PM346 est retiré et trois nouveaux parcomètres (PM347, PM349, PM350) sont ajoutés, désignés Parcovert avec recharge.",
+    "Les cases avec bornes restent payantes pour éviter l'occupation prolongée des espaces de recharge.",
+    "Sur la rue Berri, les deux places prises étaient réservées aux résidents; des espaces compensatoires seront trouvés dans le secteur, ce qui fera perdre deux cases non réglementées.",
+    "L'Agence de mobilité durable estime un gain de revenus de 8 000 $ par année, dont 65 % iraient à l'arrondissement.",
+    "Les bornes seront installées progressivement en 2026; la nouvelle signalisation sera accompagnée de panonceaux « Nouvelle signalisation » pendant environ 30 jours."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "8 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 6919,
+    "sortie": 576
+   }
+  },
+  {
+   "id": "1263945007",
+   "numero": "1263945007",
+   "resolution": "CA26 25 203",
+   "date": "2026-09-08",
+   "unite": "Direction des services administratifs",
+   "objet": "Présentation et dépôt du rapport de la mairesse sur la situation financière de l'arrondissement du Plateau-Mont-Royal pour l'année financière se terminant le 31 décembre 2025 ainsi que le rapport de reddition de comptes concernant les contributions aux fins de parcs, terrains de jeux et espaces naturels en date du 31 décembre 2025 Selon l'article 144.7 de la Charte de la Ville de Montréal, métropole du Québec, la mairesse de l'arrondissement fait rapport aux citoyens des faits saillants des résultats financiers de l'arrondissement et, le cas échéant, du rapport du vérificateur général et de celui du vérificateur externe si des éléments relatifs à l'arrondissement y sont mentionnés. Le",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=9",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement du Plateau-Mont-Royal prend acte du rapport de la mairesse sur la situation financière de l'arrondissement pour l'année se terminant le 31 décembre 2025.",
+    "Le rapport couvre les derniers résultats financiers, le dernier programme d'immobilisations et des indications préliminaires sur l'exercice en cours.",
+    "Le conseil prend aussi acte d'un rapport de reddition de comptes sur les contributions versées pour les parcs, terrains de jeux et espaces naturels au 31 décembre 2025.",
+    "Le rapport sera diffusé sur le site web de l'arrondissement, annoncé dans l'infolettre et sur les médias sociaux, avec une affiche au conseil indiquant le lien.",
+    "Le vérificateur général et le vérificateur externe concluent que les états financiers consolidés de la Ville, incluant les arrondissements, donnent une image fidèle de la situation au 31 décembre 2025, sans réserve."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 4351,
+    "sortie": 434
+   }
+  },
+  {
+   "id": "1267272007",
+   "numero": "1267272007",
+   "resolution": "CA26 25 231",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Adoption de la résolution, en vertu du paragraphe 12 de l'article 4 du Règlement sur la circulation et le stationnement (R.R.V.M., chapitre C-4.1), afin de suspendre l'application de la signalisation d'interdiction de stationnement pour le nettoyage des rues sur une partie de l'avenue du Parc-La Fontaine, durant les Championnats du monde Route UCI à Montréal en septembre 2026",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=160",
+   "source": "sommaire",
+   "puces": [
+    "Le Plateau-Mont-Royal suspend l'interdiction de stationner pour le nettoyage des rues sur une partie de l'avenue du Parc-La Fontaine pendant les Championnats du monde Route UCI, en septembre 2026.",
+    "Le SPVM occupera le bâtiment du 1301, rue Sherbrooke, dans le parc La Fontaine, comme centre d'opérations temporaire et utilisera le terrain de stationnement no 139 (Sherbrooke Est et Émile-Duployé).",
+    "Les 38 détenteurs de vignette du terrain no 139 seront relogés dans 38 places tarifées réservées sur l'avenue du Parc-La Fontaine, du 19 au 27 septembre ou selon les dates d'occupation du terrain par le SPVM.",
+    "L'Agence de mobilité durable suivra l'occupation réelle des places et pourra réduire le nombre d'espaces réservés au besoin.",
+    "La Ville estime à 1 220 $ la perte de revenus de parcomètres sur l'avenue du Parc-La Fontaine.",
+    "L'AMD installera la signalisation temporaire et avisera les détenteurs de vignette 30 jours avant l'événement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 220 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 6443,
+    "sortie": 514
+   }
+  },
+  {
+   "id": "CA26 25 205",
+   "numero": null,
+   "resolution": "CA26 25 205",
+   "date": "2026-09-08",
+   "unite": "Direction des services administratifs",
+   "objet": "Approbation du procès-verbal de la séance ordinaire du conseil d'arrondissement tenue le 6 juillet 2026",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8508#page=4",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement approuve le procès-verbal de sa séance ordinaire du 6 juillet 2026, une formalité qui n'entraîne aucune mesure nouvelle."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 1658,
+    "sortie": 159
+   }
+  },
+  {
+   "id": "CA26 25 232",
+   "numero": "1267272008",
+   "resolution": "CA26 25 232",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Abrogation de la résolution CA26 250159 et adoption de la résolution, en vertu du paragraphe 12 de l'article 4 du Règlement sur la circulation et le stationnement (R.R.V.M., chapitre C-4.1), afin de suspendre l'application de la signalisation d'interdiction de stationnement pour le nettoyage des rues durant les mondiaux cyclistes à Montréal en septembre 2026",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8508#page=23",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement suspend l'application des panneaux interdisant le stationnement pour le nettoyage des rues pendant les Championnats du monde de cyclisme sur route, à Montréal, en septembre 2026.",
+    "Concrètement, les automobilistes ne seront pas visés par cette signalisation de nettoyage durant l'événement.",
+    "La décision remplace une autorisation du même type adoptée le 1er juin 2026 (résolution CA26 250159), qui est abrogée.",
+    "Le conseil explique ce remplacement par « les derniers développements » liés à l'événement.",
+    "La mesure est présentée comme une mesure d'atténuation en matière de stationnement pendant l'événement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 2391,
+    "sortie": 326
+   }
+  },
+  {
+   "id": "1269519006",
+   "numero": "1269519006",
+   "resolution": "CA26 25 208",
+   "date": "2026-09-08",
+   "unite": "Direction de la culture, des sports, des loisirs et du développement social",
+   "objet": "Octroi d'un soutien financier de 15 000 $, toutes taxes applicables, à l'école Laurier dans le cadre du Fonds des jeunes - volet Écoles de quartier et approbation de la convention à cet effet",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=17",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal verse 15 000 $ à l'école primaire Laurier pour un projet d'aménagement extérieur.",
+    "L'argent vient du Fonds des jeunes, volet Écoles de quartier, qui soutient des projets scolaires ouverts sur la communauté.",
+    "Le projet comprend trois volets : des bacs de jardinage le long de la clôture sur l'avenue Laurier, un voile d'ombrage au-dessus du coin calme extérieur et des supports à trottinettes du côté de la rue Saint-Hubert.",
+    "Les travaux doivent être réalisés entre le 9 septembre et le 31 décembre 2026, avec une reddition de compte le 30 janvier 2027.",
+    "Le conseil d'arrondissement approuve aussi la convention entre l'école et l'arrondissement.",
+    "Selon le sommaire, le projet ne pourrait pas se réaliser cette année sans cette contribution."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "15 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 5885,
+    "sortie": 427
+   }
+  },
+  {
+   "id": "1269240013",
+   "numero": "1269240013",
+   "resolution": "CA26 25 219",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Autoriser la réduction d'un logement dans le bâtiment situé au 5202-5204, rue Marquette, en vertu du Règlement sur les usages conditionnels de l'arrondissement du Plateau-Mont-Royal (2023-02)",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=92",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal autorise la fusion de deux logements au 5202-5204, rue Marquette, ce qui fait passer le bâtiment de deux logements à un seul.",
+    "Les propriétaires occupent le rez-de-chaussée depuis 2015 et ont acheté le logement du 2e étage en 2024; celui-ci est vacant, donc aucun locataire n'est touché.",
+    "Le logement fusionné ferait environ 175 m² et compterait trois chambres, reliées par un nouvel escalier intérieur.",
+    "Condition : au moins 60 % de la surface au sol de la cour doit être végétalisée en pleine terre.",
+    "Condition : si la place de stationnement est gardée, elle doit être désasphaltée et recouverte de pavés alvéolés, sans dépasser 3 m sur 6,5 m.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable le 14 juillet 2026; la décision déroge à l'interdiction habituelle de réduire le nombre de logements.",
+    "Aucune mesure d'accessibilité universelle n'est prévue, le bâtiment ne permettant pas une rampe conforme ni un accès de plain-pied."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 5865,
+    "sortie": 510
+   }
+  },
+  {
+   "id": "1269239010",
+   "numero": "1269239010",
+   "resolution": "CA26 25 216",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Adoption du premier projet de résolution, en vertu du Règlement sur les projets particuliers de construction, de modification ou d'occupation d'un immeuble (2003-08), afin d'autoriser la construction d'un bâtiment de 4 étages comportant 31 logements pour l'immeuble situé au 4403- 4423, avenue de l'Esplanade",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=65",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal autorise un immeuble de 4 étages et 31 logements au 4403-4423, avenue de l'Esplanade, en bordure du parc Jeanne-Mance.",
+    "Le projet dépasse les règles du secteur, qui limitent les bâtiments à 3 étages et à un maximum de 8 logements; la hauteur reste plafonnée à 14 mètres.",
+    "Les façades d'origine en pierre calcaire des bâtiments démolis (construits en 1905-1906) doivent être réintégrées, comme l'exige le ministère de la Culture et des Communications.",
+    "Le bâtiment formera un « U » avec cour centrale verdie : 1 studio, 19 logements d'une chambre, 6 de deux chambres, 5 de trois chambres, dont 7 adaptables (23 %).",
+    "Autres conditions : local à déchets de 30 m² minimum au sous-sol, 31 places de vélo, conservation de 2 arbres matures et plantation de 12 arbres, étude archéologique avant l'approbation des plans.",
+    "Une consultation publique est fixée au 15 septembre 2026, à 18 h, au 201, avenue Laurier Est (salle Le Plateau); le projet comporte des dispositions pouvant mener à un référendum.",
+    "L'autorisation devient nulle si elle n'est pas utilisée dans les 60 mois."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 7575,
+    "sortie": 574
+   }
+  },
+  {
+   "id": "1263945013",
+   "numero": "1263945013",
+   "resolution": "CA26 25 234",
+   "date": "2026-09-08",
+   "unite": "Direction des services administratifs",
+   "objet": "État de l'évolution budgétaire de l'arrondissement au 30 juin 2026 - Dépôt des deux états comparatifs (Article 105.4 de la Loi sur les cités et villes(chapitre C-19)) Selon l’article 105.4 de la Loi sur les cités et villes, le trésorier dépose, lors de la dernière séance ordinaire du conseil tenue au moins quatre semaines avant la séance où le budget de l’exercice financier suivant doit être adopté, deux états comparatifs. Conformément à l’article précité, les deux états comparatifs sont déposés au Conseil.",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=166",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal dépose son état de l'évolution budgétaire au 30 juin 2026, comme l'exige la Loi sur les cités et villes.",
+    "Pour 2026, l'arrondissement prévoit 12 856,3 k$ de revenus et 73 044,6 k$ de dépenses, soit un déficit projeté de 352,9 k$ (un surplus de 177,5 k$ si on exclut le Fonds de l'eau et la gestion des matières résiduelles).",
+    "Le budget original de 67 228,8 k$ a été porté à 72 682,4 k$, une hausse de 5 453,6 k$ venant notamment de 3 457,9 k$ de surplus affectés (graffitis, propreté, sécurisation du 5986-5992 avenue du Parc) et de 1 006,0 k$ pour la piétonnisation d'artères commerciales.",
+    "La rémunération affiche un déficit anticipé de 362,2 k$, surtout à cause de la nouvelle mesure de collecte sélective (-501,7 k$) et du temps supplémentaire lié aux travaux de chaussées et trottoirs (-129,6 k$).",
+    "D'autres sommes transférées visent la prévention (374,8 k$), la revitalisation commerciale hors SDC (164,0 k$), les rues-écoles (122,5 k$) et le colmatage des nids-de-poule (125,0 k$).",
+    "L'arrondissement indique que les données observées depuis le 30 juin pointent vers un résultat meilleur que prévu, sans pouvoir le chiffrer; une mise à jour suivra au troisième trimestre."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "72 682,4 k$",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 6016,
+    "sortie": 665
+   }
+  },
+  {
+   "id": "1266235003",
+   "numero": "1266235003",
+   "resolution": "CA26 25 230",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Adoption de la résolution, en vertu du paragraphe 12 de l'article 4 du Règlement sur la circulation et le stationnement (R.R.V.M., chapitre C-4.1), afin de lever l'interdiction de stationnement à des fins d'entretien, uniquement durant les fêtes juives se déroulant le 21 septembre 2026, sur les rues de l'Esplanade, Jeanne-Mance et Hutchison, entre les avenues Laurier et Van Horne",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=155",
+   "source": "sommaire",
+   "puces": [
+    "Le Plateau-Mont-Royal suspend l'interdiction de stationner pour l'entretien le lundi 21 septembre 2026, le temps d'une fête juive.",
+    "La levée touche le côté est de la rue de l'Esplanade et le côté ouest de Jeanne-Mance entre Fairmount et Laurier, ainsi que le côté est de Hutchison entre Van Horne et Laurier.",
+    "Les panneaux seront masqués dès le 21 septembre 2026 et démasqués dès le 22 septembre.",
+    "Le balayage mécanique ne pourra pas se faire à ces endroits durant cette journée.",
+    "L'arrondissement paiera 1 660 $ pour l'installation et le retrait du masquage, fait par les équipes de Rosemont–La Petite-Patrie.",
+    "La demande vient du Conseil des Juifs Hassidiques du Québec : les personnes pratiquantes ne peuvent déplacer leur véhicule les jours de fête et risquaient des constats d'infraction.",
+    "L'Agence de mobilité durable, qui applique la réglementation, sera avisée."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 660 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 5168,
+    "sortie": 623
+   }
+  },
+  {
+   "id": "1260341007",
+   "numero": "1260341007",
+   "resolution": "CA26 25 225",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Ordonnance établissant l'aménagement d'un passage pour personnes sur la rue Saint-Grégoire à l'intersection avec la rue Chambord",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=126",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal aménage un passage pour personnes sur la rue Saint-Grégoire, du côté est de l'intersection avec la rue Chambord.",
+    "Des citoyens avaient demandé ce passage par des requêtes à l'arrondissement pour traverser la rue Saint-Grégoire.",
+    "Les travaux incluent du marquage jaune au sol, des panneaux de passage pour personnes et des feux rectangulaires à clignotement rapide.",
+    "Des travaux de génie civil en cours à l'été 2026 ajoutent des rampes d'accès universel au passage.",
+    "Coûts : environ 1 000 $ pour le marquage et la signalisation, plus 11 830,94 $ (taxes incluses) pour le système de feux clignotants, financés par le contrat de construction de trottoir DDTET54-26-06.",
+    "Échéancier : adoption en septembre 2026, mise en place de septembre à octobre 2026.",
+    "Des panneaux « nouvelle signalisation » seront affichés pendant 30 à 60 jours après l'entrée en vigueur."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "11 830,94 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 4779,
+    "sortie": 477
+   }
+  },
+  {
+   "id": "1260562001",
+   "numero": "1260562001",
+   "resolution": "CA26 25 215",
+   "date": "2026-09-08",
+   "unite": "Direction des services administratifs",
+   "objet": "Avis de motion et dépôt du projet de Règlement intérieur sur la délégation de pouvoirs aux fonctionnaires et employés (2026-05) (abrogeant et remplaçant le Règlement intérieur sur la délégation de pouvoirs aux fonctionnaires et employés (2011-02)) Avis de motion est donné par la mairesse de l’arrondissement, Madame Cathy Wong, qu’à une prochaine séance du conseil, sera adopté le Règlement intérieur sur la délégation de pouvoirs aux fonctionnaires et employés (2026-05). Le projet de règlement est déposé avec le dossier décisionnel.",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=59",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal remplace son règlement de 2011 sur la délégation de pouvoirs aux fonctionnaires par un nouveau règlement (2026-05); presque tous les chapitres sont modifiés.",
+    "Les seuils de dépenses que les gestionnaires peuvent autoriser sans passer par le conseil sont uniformisés et relevés : 5 000 $ pour un chef de section, 10 000 $ pour un chef de division, 50 000 $ pour un directeur. Le directeur d'arrondissement pourra approuver toute entente-cadre.",
+    "Un chef de division pourra approuver des plans d'implantation et d'intégration architecturale (PIIA) pour la construction d'un nouveau bâtiment, seulement si la direction et le comité consultatif d'urbanisme ont donné un avis favorable.",
+    "Nouveaux pouvoirs délégués en urbanisme pour les ententes sur le logement social, abordable et familial.",
+    "En circulation et stationnement : un chef de division pourra fixer l'affichage préalable des interdictions de stationnement lors de travaux ou d'événements, la distance par rapport au trottoir et les allées de stationnement; le directeur d'arrondissement pourra suspendre les interdictions de stationnement lors d'événements spéciaux.",
+    "Un directeur pourra donner gratuitement à un organisme sans but lucratif des biens mobiliers de moins de 1 000 $ l'unité (sauf le matériel informatique); un chef de section de la culture et des loisirs pourra donner des livres usagés.",
+    "Le mot « placottoir » devient « terrasse mutualisée ». Adoption prévue le 6 octobre 2026, entrée en vigueur le 7 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 6115,
+    "sortie": 693
+   }
+  },
+  {
+   "id": "1269240011",
+   "numero": "1269240011",
+   "resolution": "CA26 25 220",
+   "date": "2026-09-08",
+   "unite": "Direction du développement du territoire et des études techniques",
+   "objet": "Autoriser la réduction d'un logement dans le bâtiment situé au 4603-4605, rue Chabot, en vertu du Règlement sur les usages conditionnels de l'arrondissement du Plateau-Mont-Royal (2023-02)",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17502#page=98",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal autorise la transformation du duplex situé au 4603-4605, rue Chabot en un seul logement, ce qui retire une unité d'habitation.",
+    "Le logement unique fera environ 130 m², avec trois chambres et un bureau; l'enveloppe du bâtiment ne sera pas modifiée.",
+    "L'autorisation est conditionnelle à du verdissement : au moins 60 % de la surface au sol d'une autre cour en végétaux en pleine terre, remplacement de l'asphalte de la cour avant par des végétaux, et plantation d'au moins un arbre (tronc d'au moins 3 cm de diamètre à 1,3 m du sol).",
+    "Le règlement d'urbanisme interdit normalement de réduire le nombre de logements d'un bâtiment existant; la Ville accorde une dérogation via le règlement sur les usages conditionnels.",
+    "Selon le dossier, les deux logements sont occupés par les propriétaires et aucun locataire n'est touché.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable le 30 juin 2026.",
+    "Aucune mesure d'accessibilité universelle n'est prévue, en raison de la surélévation du rez-de-chaussée et de la proximité du bâtiment avec la limite de propriété."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 5732,
+    "sortie": 550
+   }
+  },
+  {
+   "id": "CA26 25 233",
+   "numero": "1269987002",
+   "resolution": "CA26 25 233",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Ordonnance, en vertu du Règlement sur le bruit à l'égard de l'arrondissement le Plateau-Mont- Royal (2026-01), modifiant les heures de collectes et de livraisons sur une portion du territoire pendant les Championnats du monde de cyclisme sur Route UCI 2026 du 19 au 27 septembre 2026",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8508#page=24",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal autorise la collecte des matières résiduelles et les livraisons en tout temps, sans restriction d'heures, sur une partie de son territoire.",
+    "L'autorisation vaut du 19 au 27 septembre 2026, pendant les Championnats du monde de cyclisme sur route UCI 2026.",
+    "La mesure passe par une ordonnance prise en vertu du Règlement sur le bruit de l'arrondissement (2026-01, article 34).",
+    "Le document ne précise pas quelles rues ou quel secteur exact sont visés."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 1901,
+    "sortie": 290
+   }
+  },
+  {
+   "id": "1265676005",
+   "numero": "1265676005",
+   "resolution": "CA26 210173",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Édicter les ordonnances relatives à divers événements publics. (1265676005)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=67",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Verdun autorise la tenue d'événements publics sur son domaine public, aux dates, lieux et horaires inscrits sur une liste annexée au dossier.",
+    "Pour permettre ces événements, le conseil lève certaines règles locales : occupation du domaine public, cuisine de rue, circulation et stationnement, propreté, nuisances et parcs, et tarifs 2026.",
+    "Les événements peuvent occuper en tout ou en partie une place ou un parc, fermer une ou plusieurs rues, ou les deux à la fois.",
+    "Les événements visés sont de nature communautaire, sociale, sportive, éducative, multiculturelle, civique, commémorative ou de collecte de fonds, et sont gratuits et ouverts à tous.",
+    "Les organisateurs doivent obtenir eux-mêmes toutes les autres autorisations nécessaires.",
+    "Les services fournis par la Ville sont facturés selon le Règlement sur les tarifs 2026, avec certaines gratuités selon le cas."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.134Z",
+   "jetons": {
+    "entree": 4086,
+    "sortie": 443
+   }
+  },
+  {
+   "id": "1267203007",
+   "numero": "1267203007",
+   "resolution": "CA26 12201",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Dépôt par la secrétaire d'arrondissement du procès-verbal de correction concernant divers textes réglementaires Dépôt est fait, par la secrétaire d'arrondissement, du procès-verbal de correction concernant divers textes réglementaires.",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=303",
+   "source": "sommaire",
+   "puces": [
+    "La secrétaire d'arrondissement d'Anjou dépose un procès-verbal corrigeant des erreurs d'écriture dans deux textes adoptés le 4 août 2026.",
+    "Dans l'ordonnance 1333-O.230 sur la signalisation, la date du « 7 avril 2026 » est remplacée par celle du « 4 août 2026 ».",
+    "Dans la résolution CA26 12179 (agrandissement d'un bâtiment industriel au 7951-7961, rue Vauban), « une résolution » devient « un premier projet de résolution ».",
+    "Les corrections ont été faites le 5 août 2026 pour éviter la confusion; aucune dépense n'est en jeu."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 4546,
+    "sortie": 330
+   }
+  },
+  {
+   "id": "1267203010",
+   "numero": "1267203010",
+   "resolution": "CA26 12190",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Prendre acte du rapport des décisions déléguées, de la liste des bons de commande approuvés, des demandes de paiement et des virements er budgétaires pour la période comptable du 1 juin 2026 au 30 juin 2026",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=96",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement d'Anjou prend acte du rapport mensuel des décisions prises par les fonctionnaires pour juin 2026.",
+    "Le rapport couvre les décisions déléguées, les bons de commande approuvés, les demandes de paiement et les virements budgétaires du 1er juin au 30 juin 2026.",
+    "Aucune nouvelle dépense n'est autorisée : il s'agit d'un dépôt d'information exigé par le règlement de délégation de pouvoirs (RCA 50)."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 8293,
+    "sortie": 272
+   }
+  },
+  {
+   "id": "1267203011",
+   "numero": "1267203011",
+   "resolution": "CA26 12191",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Prendre acte de la reddition de compte du mois d'août 2026, liée au recours à l'affectation du surplus de l'arrondissement afin d'effectuer les paiements jugés prioritaires durant la période de mesures d'urgence",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=113",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement d'Anjou prend acte du bilan d'août 2026 sur l'utilisation temporaire du surplus de l'arrondissement.",
+    "Une intrusion dans les systèmes informatiques de l'arrondissement a été constatée le 23 juillet 2026, bloquant notamment l'accès aux applications financières.",
+    "Le 4 août 2026, le conseil avait autorisé l'usage de 3 000 000 $ du surplus pour payer ce qui était jugé prioritaire pendant les mesures d'urgence.",
+    "Entre le 4 et le 27 août 2026, un seul paiement a été fait : 444 414 $ aux Entreprises Daniel Robert inc. pour le contrat du parc Spalding. Il reste 2 555 586 $.",
+    "L'arrondissement indique que toutes les sommes utilisées retourneront au surplus par des écritures de régularisation quand la situation sera rétablie.",
+    "La Division des finances doit faire ce bilan à chaque séance du conseil jusqu'au remboursement complet.",
+    "Un communiqué de presse a été émis le 28 juillet 2026 pour informer la population que les opérations, y compris la téléphonie, sont affectées depuis le 24 juillet."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 000 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 5715,
+    "sortie": 525
+   }
+  },
+  {
+   "id": "1263178019",
+   "numero": "1263178019",
+   "resolution": "CA26 12193",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Édicter l'ordonnance 1333-O.231, en vertu du Règlement relatif à la circulation dans les limites de l'arrondissement d'Anjou (1333), visant à réduire la vitesse autorisée de 40 km/h à 30 km/h sur la place d'Antioche",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=132",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Anjou abaisse la limite de vitesse de 40 km/h à 30 km/h sur la place d'Antioche, entre la rue Saint-Zotique et la limite sud du parc d'Antioche.",
+    "Le comité de circulation justifie le changement par la présence du parc à proximité et l'absence de signalisation à 30 km/h.",
+    "Le comité recommande aussi d'installer un afficheur de vitesse près du parc, en direction nord.",
+    "Une signalisation de préavis sera installée 30 jours avant la nouvelle signalisation; les responsables de l'application du règlement en seront informés.",
+    "L'arrondissement d'Anjou assume la totalité des coûts à même un budget déjà prévu pour ce type d'activité.",
+    "L'ordonnance entre en vigueur le jour de sa publication, annoncée sur le site Internet de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 5115,
+    "sortie": 396
+   }
+  },
+  {
+   "id": "CA26 08 0335",
+   "numero": null,
+   "resolution": "CA26 08 0335",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Soumis sommaire décisionnel numéro 1258433013 visant à approuver une entente de développement à intervenir entre la Ville de Montréal – Arrondissement de Saint-Laurent et Les Investissements 650 Wellington ltée visant divers sujets dont la constitution d'une servitude de passage public et d'un engagement pour un projet logement social pour la propriété située au 455, boulevard de la Côte-Vertu (ci-après le « Site »).",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=6",
+   "source": "resolution",
+   "puces": [
+    "Saint-Laurent approuve à l'unanimité une entente de développement avec Les Investissements 650 Wellington ltée pour le terrain du 455, boulevard de la Côte-Vertu.",
+    "Le projet prévoit quatre immeubles multifamiliaux d'environ 800 logements sur un terrain de 11 568 m², déjà autorisés par deux résolutions de décembre 2025 et janvier 2026.",
+    "Le promoteur accordera gratuitement une servitude de passage public permanente en bordure du boulevard Jules-Poitras, en vue d'un réaménagement favorisant le transport actif et collectif.",
+    "L'entente inclut un engagement lié à un projet de logement social sur le site.",
+    "Le promoteur s'engage à faire tous les efforts commercialement raisonnables pour obtenir une certification LEED Or pour les nouveaux bâtiments.",
+    "L'entente fixe aussi les modalités de démolition du bâtiment existant et de construction du premier nouvel immeuble."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 2481,
+    "sortie": 436
+   }
+  },
+  {
+   "id": "1265612013",
+   "numero": "1265612013",
+   "resolution": "CA26 12197",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Donner avis de motion et déposer le projet de règlement RCA 191-2 intitulé « Règlement modifiant le Règlement sur les tarifs de l'arrondissement d'Anjou - Exercice financier 2026 (RCA 191) » La conseillère d’arrondissement, madame Marie-Josée Dubé, donne avis de motion de l’inscription pour adoption, à une séance subséquente du conseil d’arrondissement, du règlement RCA 191-2 intitulé « Règlement modifiant le Règlement sur les tarifs de l'arrondissement d'Anjou - Exercice financier 2026 (RCA 191) » et dépose le projet de règlement.",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=175",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Anjou propose de baisser les frais payés pour chaque case de stationnement exemptée : de 2 500 $ à 1 000 $ pour une habitation de trois logements et moins.",
+    "Pour une habitation de plus de trois logements ou un usage commercial, industriel ou institutionnel, le tarif par case exemptée passerait de 5 000 $ à 2 000 $.",
+    "Les frais d'étude d'une demande d'exemption de stationnement ne changent pas (500 $ ou 1 000 $ selon le cas).",
+    "Le mot « pataugeoires » est retiré de la grille des tarifs d'accès aux bains libres; les tarifs restent 0 $ pour les résidents de Montréal, 4 $ pour un adulte non-résident et 2 $ pour un enfant non-résident.",
+    "Il s'agit pour l'instant d'un avis de motion et du dépôt du projet de règlement RCA 191-2 : l'adoption se fera à une séance ultérieure, suivie d'un avis public d'entrée en vigueur."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 6951,
+    "sortie": 452
+   }
+  },
+  {
+   "id": "CA26 08 0343",
+   "numero": null,
+   "resolution": "CA26 08 0343",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Soumis sommaire décisionnel numéro 1261469004 visant à autoriser l’abolition et la création de postes cols bleus à la Division de la voirie et de la signalisation de la Direction des travaux publics de l'arrondissement de Saint-Laurent.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=18",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Saint-Laurent abolit un poste permanent de chauffeur(se) de camion – appels d'urgence à la Division de la voirie et de la signalisation.",
+    "Il crée à la place un poste permanent de chauffeur(se) opérateur(trice) d'appareils motorisés B, dans la même division.",
+    "Le poste aboli était vacant depuis le 1er août 2026, après le départ définitif de son titulaire.",
+    "Les deux postes sont dans le même groupe de traitement (10); le changement se fait selon l'article 4.06 de la convention collective des cols bleus.",
+    "Selon le document, l'opération ne change ni le nombre d'employés en année-personne ni le budget de fonctionnement.",
+    "Décision adoptée à l'unanimité."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 2404,
+    "sortie": 355
+   }
+  },
+  {
+   "id": "1260130016",
+   "numero": "1260130016",
+   "resolution": "CA26 210167",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Dépôt de la liste des bons de commande approuvés, de la liste des factures non associées à un bon de commande, ainsi que la liste des transactions de la carte d'achat pour les périodes de juin et juillet 2026. (1260130016)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=30",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Verdun prend acte du dépôt des listes de dépenses faites par les fonctionnaires pour juin et juillet 2026 : bons de commande approuvés, factures sans bon de commande et transactions par carte d'achat.",
+    "Il s'agit d'un suivi exigé parce que le conseil a délégué certains pouvoirs de dépenser à ses fonctionnaires.",
+    "Aucun montant, aucune nouvelle dépense ni obligation ne découle de ce dépôt."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 3420,
+    "sortie": 270
+   }
+  },
+  {
+   "id": "CA26 08 0340",
+   "numero": null,
+   "resolution": "CA26 08 0340",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Soumis sommaire décisionnel 1268433002 visant à approuver un projet particulier pour la construction de 10 habitations multifamiliales dans le projet des Terrasses du Nouveau Saint- Laurent, en vertu du Règlement sur les projets particuliers de construction, de modification ou d'occupation d'un immeuble (RCA10-08-05). Proposé par la conseillère Vana Nazarian; Appuyé par le conseiller Jacques Cohen, il est RÉSOLU À L’UNANIMITÉ :",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=11",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de Saint-Laurent approuve, en première résolution, la construction de 10 habitations multifamiliales dans le projet des Terrasses du Nouveau Saint-Laurent.",
+    "Le projet touche neuf lots identifiés dans la résolution, délimités sur les plans joints en annexes A et B.",
+    "Le projet pourra s'écarter du règlement de zonage de l'arrondissement quant aux marges minimales, aux hauteurs, au nombre de logements et au coefficient d'occupation du sol.",
+    "D'autres dérogations sont permises : accès et voies véhiculaires partagés entre plusieurs terrains, voies extérieures menant à un sous-sol, emplacement des entrées principales et distance entre une construction souterraine et une ligne de lot.",
+    "Le nombre minimal et maximal de cases de stationnement peut aussi varier, et des cases extérieures pour visiteurs sont autorisées.",
+    "Les autres règles de zonage compatibles avec la résolution continuent de s'appliquer.",
+    "Décision adoptée à l'unanimité à la séance du conseil d'arrondissement du 1er septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 2748,
+    "sortie": 491
+   }
+  },
+  {
+   "id": "CA26 08 0339",
+   "numero": null,
+   "resolution": "CA26 08 0339",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Soumis sommaire décisionnel 1258433010 visant à approuver un projet particulier pour la construction d'habitations multifamiliales sur les lots 1 985 292 et 6 650 754 du cadastre du Québec, situés au 455, boulevard de la Côte-Vertu, en vertu du Règlement sur les projets particuliers de construction, de modification ou d'occupation d'un immeuble (RCA10-08-5). Proposé par le conseiller Aref Salem; Appuyé par la conseillère Annie Gagnier, il est RÉSOLU À L’UNANIMITÉ : D’adopter une résolution afin d’approuver un projet particulier pour autoriser la construction d'habitations multifamiliales sur les lots 1 985 292 et 6 650 754 du cadastre du Québec, situés au 455, boulevard de la Côte-Vertu, en",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=8",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement approuve à l'unanimité un projet particulier permettant la construction d'habitations multifamiliales au 455, boulevard de la Côte-Vertu (lots 1 985 292 et 6 650 754).",
+    "Le projet déroge au règlement de zonage en vigueur : usages permis, marges minimales, hauteur maximale en étages et en mètres, nombre maximal de logements, coefficient d'occupation du sol et rapport espace vert / terrain.",
+    "Il déroge aussi aux règles sur le calcul des espaces verts, le nombre de bâtiments par terrain, le nombre de cases de stationnement et de cases de livraison, le stationnement pour vélos et les normes d'affichage.",
+    "L'usage « habitation multifamiliale (h4) » est autorisé malgré la grille des usages et normes de la zone I13-062, et certains usages commerciaux le sont également.",
+    "La résolution ne s'applique qu'à la partie du terrain ombragée sur le plan joint en annexe A.",
+    "Les autres dispositions réglementaires qui ne sont pas incompatibles avec cette résolution continuent de s'appliquer."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 2984,
+    "sortie": 489
+   }
+  },
+  {
+   "id": "1267185001",
+   "numero": "1267185001",
+   "resolution": "CA26 21 0170",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Dépôt de la projection des résultats de l'exercice financier 2026 ainsi que de l'état des revenus et des dépenses réels au 30 juin 2026, comparativement à la même période l'an dernier, soit au 30 juin 2025. (1267185001)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=42",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Verdun dépose son bilan financier à mi-année : état des revenus et dépenses réels au 30 juin 2026, comparés au 30 juin 2025, et projection pour toute l'année 2026.",
+    "Verdun prévoit atteindre l'équilibre budgétaire en 2026, si aucun événement majeur ne survient.",
+    "Le budget autorisé a augmenté de 1,8 M$ depuis son adoption, pour atteindre 43,4 M$ : 1,2 M$ vient de la Ville-centre et 0,6 M$ des surplus de l'arrondissement, surtout pour payer le déneigement.",
+    "Les 1,2 M$ de la Ville-centre servent entre autres à la piétonnisation de la rue Wellington (0,6 M$), à la prévention jeunesse et sécurité urbaine (0,2 M$), à la culture et aux bibliothèques (0,2 M$), à la revitalisation commerciale (0,1 M$) et au colmatage des nids-de-poule (0,1 M$).",
+    "Les permis de construction rapportent plus que prévu (2,2 M$ perçus en six mois contre une cible annuelle de 1,1 M$), ce qui compense une baisse de 0,5 M$ des autres revenus locaux, notamment à l'Auditorium et au Quai 5160.",
+    "Les dépenses de six mois totalisent 18,8 M$, en baisse de 0,1 M$ par rapport à 2025, en bonne partie à cause des grèves et du ralentissement des embauches."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1, 8 M$",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 7448,
+    "sortie": 629
+   }
+  },
+  {
+   "id": "1265614004",
+   "numero": "1265614004",
+   "resolution": "CA26 12200",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Adopter le règlement RCA 1333-40 intitulé « Règlement modifiant le règlement relatif à la circulation dans les limites de l'arrondissement d'Anjou (1333), afin d'encadrer le stationnement des véhicules sur les terrains privés ainsi que le changement de pneus et les activités de mécanique sur le domaine public »",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=289",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Anjou modifie son règlement sur la circulation (1333) pour encadrer le stationnement dans les stationnements privés accessibles au public, comme ceux des centres commerciaux.",
+    "Dans ces stationnements, il devient interdit de se stationner contre la signalisation en place ou hors des espaces prévus, si cela gêne la circulation des autres véhicules.",
+    "Le but invoqué : éviter que des véhicules mal stationnés bloquent l'accès des véhicules d'urgence.",
+    "Ces changements permettent aux policiers du SPVM de remettre des constats d'infraction aux propriétaires fautifs, ce que l'ancien texte ne permettait pas.",
+    "Toute mécanique sur un véhicule est désormais interdite sur un chemin public; le changement de pneu est interdit sauf s'il est impossible de déplacer le véhicule ailleurs.",
+    "Les noms des lois citées dans la définition de « véhicule d'urgence » sont mis à jour, et des amendes sont rattachées aux nouvelles interdictions.",
+    "Le règlement entre en vigueur le jour de sa publication; aucun impact financier n'est prévu."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 7817,
+    "sortie": 651
+   }
+  },
+  {
+   "id": "CA26 08 0336",
+   "numero": null,
+   "resolution": "CA26 08 0336",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Soumis sommaire décisionnel numéro 1260299018 relatif à une contribution financière en soutien aux activités régulières de l’Association des retraités municipaux de Saint-Laurent pour l’année 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=7",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Saint-Laurent verse 1 500 $ à l'Association des retraités municipaux de Saint-Laurent pour ses activités régulières de 2026.",
+    "L'argent soutient des sessions de formation et d'information aux membres, ainsi que des rassemblements culturels, récréatifs et sociaux.",
+    "Les motifs invoqués : favoriser le sentiment d'appartenance des ex-employés envers l'arrondissement et contribuer aux engagements de Montréal 2030 en inclusion, équité et accessibilité universelle.",
+    "La décision a été adoptée à l'unanimité, sur proposition de la conseillère Annie Gagnier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2005,
+    "sortie": 326
+   }
+  },
+  {
+   "id": "1267203004",
+   "numero": "1267203004",
+   "resolution": "CA26 12192",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Autoriser la secrétaire d'arrondissement à présenter à la Bibliothèque et Archives nationales du Québec (BAnQ) une demande afin d'éliminer deux (2) boîtes de documents irrémédiablement endommagés et destinés à être conservés selon les indications du calendrier de délais de conservation de la Ville de Montréal",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=122",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Anjou demande à Bibliothèque et Archives nationales du Québec (BAnQ) la permission de détruire deux boîtes d'archives (boîtes 5068 et 3920).",
+    "Ces boîtes contiennent des dossiers liés aux décisions du conseil municipal de la Ville d'Anjou de mars à juin 1991 et de septembre à décembre 1997.",
+    "Les documents ont été abîmés lors de la pluie torrentielle du 13 septembre 2022; une tentative de les sauver a échoué.",
+    "L'arrondissement invoque un problème de santé et de sécurité à cause de l'odeur de moisissure qui s'en dégage.",
+    "Le contenu avait été numérisé entre octobre et novembre 2021 et reste accessible sous forme numérique.",
+    "La secrétaire d'arrondissement est autorisée à déposer la demande; la destruction dépend de l'accord de BAnQ."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 5909,
+    "sortie": 415
+   }
+  },
+  {
+   "id": "CA26 08 0345",
+   "numero": null,
+   "resolution": "CA26 08 0345",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Soumis sommaire décisionnel numéro 1264893006 relatif à la titularisation d'un employé col bleu au poste de préposé aux travaux et à l'entretien à la Division de la voirie et de la signalisation de la Direction des travaux publics de l'arrondissement de Saint-Laurent.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=19",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de Saint-Laurent confirme (titularise) un employé col bleu au poste de préposé aux travaux et à l'entretien.",
+    "Le poste relève de la Division de la voirie et de la signalisation, à la Direction des travaux publics.",
+    "La nomination prend effet le 5 septembre 2026.",
+    "Le poste était devenu vacant après un départ définitif; la Ville dit vouloir maintenir le plancher d'emploi prévu à la convention collective des cols bleus.",
+    "Un processus de sélection a été tenu selon la convention collective du Syndicat des cols bleus regroupés de Montréal.",
+    "La décision a été adoptée à l'unanimité."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2137,
+    "sortie": 329
+   }
+  },
+  {
+   "id": "1265291002",
+   "numero": "1265291002",
+   "resolution": "CA26 210171",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Adoption d'un premier projet de résolution, en vertu du Règlement sur les projets particuliers de construction, de modification ou d'occupation d'un immeuble (RCA08 210003) (PPCMOI), afin de permettre la transformation d'un bâtiment de 3 étages et le remplacement de 4 logements situés au 3782, rue Wellington, à des fins de bureau d'accueil, de consultation et de locaux d'enseignement en francisation. (1265291002)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=50",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Verdun fait un premier pas pour autoriser la transformation complète du bâtiment de 3 étages situé au 3782-3790, rue Wellington.",
+    "Le Centre social d'aide aux immigrants (CSAI), propriétaire depuis 2023, veut y regrouper son accueil, ses bureaux, ses salles de formation et ses cours de francisation.",
+    "Les 4 logements des étages seraient supprimés : 3 sont vacants, 1 est encore occupé et une entente de compensation est en négociation avec le locataire.",
+    "Aucun permis ne pourra être délivré avant le départ du dernier locataire et la fin complète de l'usage résidentiel.",
+    "Le projet prévoit un accès universel vers le rez-de-chaussée, la rénovation des étages, la réfection de la toiture et l'amélioration des systèmes mécaniques.",
+    "Les travaux devront commencer dans les 36 mois suivant l'entrée en vigueur de la résolution, sinon l'autorisation tombe.",
+    "Prochaines étapes : avis public, soirée de consultation publique, puis adoption prévue au conseil d'arrondissement du 6 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 7469,
+    "sortie": 499
+   }
+  },
+  {
+   "id": "CA26 210162",
+   "numero": null,
+   "resolution": "CA26 210162",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Résolution visant à souligner la Journée internationale de la démocratie",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-09-01_19h00_FR.pdf#page=4",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de Verdun adopte une résolution pour souligner la Journée internationale de la démocratie, proclamée par l'ONU en 2007 et fixée au 15 septembre.",
+    "La résolution rappelle que Montréal compte 103 personnes élues dans ses 19 arrondissements, dont sept à Verdun.",
+    "Elle affirme que la participation citoyenne fait partie des priorités des membres du conseil d'arrondissement.",
+    "Elle énumère des conditions d'accès à l'information : avis de convocation diffusés à temps, séances publiques en personne et en ligne, périodes de questions de durée adéquate et consultations publiques rigoureuses.",
+    "Le texte mentionne la campagne « S'informer à Verdun », déployée cette année pour faire connaître les services municipaux, les projets en cours et les occasions de participation.",
+    "Les motifs évoquent un effritement de certaines pratiques démocratiques et la nécessité de protéger les institutions contre l'opacité.",
+    "Aucune somme d'argent ni nouvelle obligation n'est rattachée à cette résolution; le texte du document est incomplet."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2767,
+    "sortie": 710
+   }
+  },
+  {
+   "id": "CA26 08 0338",
+   "numero": null,
+   "resolution": "CA26 08 0338",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Dépôt par la directrice d’arrondissement des rapports globaux sur l’exercice des pouvoirs délégués en vertu du Règlement numéro RCA07-08-0012 sur la délégation de pouvoirs et ses amendements (sommaire décisionnel numéro 1260219010). Proposé par la conseillère Annie Gagnier; Appuyé par le conseiller Jacques Cohen, il est RÉSOLU À L'UNANIMITÉ : De prendre acte des rapports globaux sur l’exercice des pouvoirs délégués entre le 22 juillet et le 21 août 2026, en vertu du Règlement numéro RCA07-08-0012 sur la délégation de pouvoirs et ses amendements.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=8",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement prend acte des rapports sur les décisions prises par les fonctionnaires à qui des pouvoirs sont délégués, pour la période du 22 juillet au 21 août 2026.",
+    "Les rapports sont déposés par la directrice d'arrondissement et versés aux archives.",
+    "Aucune dépense ni aucune nouvelle mesure ne découle de ce dépôt : il s'agit d'une reddition de comptes périodique."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2186,
+    "sortie": 250
+   }
+  },
+  {
+   "id": "1264422006",
+   "numero": "1264422006",
+   "resolution": "CA26 210177",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Dépôt, pour information, de la liste des décisions déléguées prises par la Direction du er développement du territoire et des études techniques (DDTET) pour la période du 1 avril au 30 juin 2026. (1264422005)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=84",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Verdun prend acte du dépôt d'une liste de décisions prises par sa Direction du développement du territoire et des études techniques, entre le 1er avril et le 30 juin 2026. Aucune nouvelle décision n'est prise ici."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 3876,
+    "sortie": 187
+   }
+  },
+  {
+   "id": "CA26 08 0337",
+   "numero": null,
+   "resolution": "CA26 08 0337",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Soumis sommaire décisionnel numéro 1267433001 visant à autoriser des virements budgétaires pour un montant total de 26 296 000 $ à la suite du report des surplus relatifs aux dépenses en immobilisation 2025 non réalisées.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=7",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Saint-Laurent autorise des virements budgétaires totalisant 26 296 000 $.",
+    "Cet argent vient de budgets d'immobilisations prévus en 2025 mais non dépensés au 31 décembre 2025.",
+    "Les sommes servent à payer les contrats accordés en 2025 et toujours en cours, ainsi que les projets prévus en 2026.",
+    "Une partie du montant sera gardée pour des projets à venir, qui seront choisis lors de la planification du programme d'immobilisations 2026-2035 de l'arrondissement.",
+    "Le comité exécutif et le conseil municipal avaient approuvé ce report les 10 et 15 juin 2026.",
+    "Décision adoptée à l'unanimité lors de la séance du conseil d'arrondissement du 1er septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "26 296 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2242,
+    "sortie": 375
+   }
+  },
+  {
+   "id": "CA26 210161",
+   "numero": null,
+   "resolution": "CA26 210161",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Déclaration pour demander au prochain gouvernement du Québec un engagement ferme pour une école secondaire à L'Île-des-Sœurs",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-09-01_19h00_FR.pdf#page=3",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Verdun demande aux candidats aux élections provinciales et au prochain gouvernement du Québec de s'engager à construire une école secondaire à L'Île-des-Sœurs.",
+    "Le texte rappelle que L'Île-des-Sœurs compte plus de 21 500 personnes, deux écoles primaires et aucune école secondaire.",
+    "Environ un millier d'élèves de 12 à 17 ans quittent l'île chaque jour pour aller à l'école.",
+    "L'arrondissement demande à la Ville de Montréal d'inclure ce dossier dans ses demandes formelles au prochain gouvernement.",
+    "Verdun dit vouloir continuer à collaborer avec le gouvernement du Québec et à agir au sein de la Coalition pour une école secondaire publique à L'Île-des-Sœurs.",
+    "La motion est déposée au conseil municipal de la Ville de Montréal."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2701,
+    "sortie": 406
+   }
+  },
+  {
+   "id": "1267449001",
+   "numero": "1267449001",
+   "resolution": "CA26 210165",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Accorder un contrat à Pierre Brossard (1981) Ltée ayant pour objet l'exécution des travaux d'éclairage dans les rues Leclair et Crawford dans l'arrondissement de Verdun / Dépense totale de 202 807,14 $ (contrat : 174 833,74 $, contingences : 17 483,37 $ et incidences : 10 490,02 $), taxes incluses / Appel d'offres public S26-006 (4 soumissionnaires). (1267449001)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=19",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Verdun accorde un contrat de 174 833,74 $ (taxes incluses) à Pierre Brossard (1981) Ltée pour des travaux d'éclairage dans les rues Leclair et Crawford.",
+    "Avec les contingences (17 483,37 $) et les incidences (10 490,02 $), la dépense totale autorisée atteint 202 807,14 $, payée entièrement par l'arrondissement.",
+    "Les travaux prévoient le remplacement de 4 lampadaires jugés non sécuritaires sur la rue Leclair, avec de nouvelles bases en béton.",
+    "Un nouveau lampadaire sera ajouté sur la rue Crawford, près de l'intersection du boulevard Champlain, à la suite de demandes de citoyens signalant un manque d'éclairage.",
+    "Le remplacement des lampadaires de type Washington découle d'un rapport d'expertise de la firme OG consultants sur l'intégrité des structures dans le secteur Crawford.",
+    "Les travaux doivent commencer en septembre 2026 et se terminer en octobre 2026.",
+    "Quatre entreprises ont soumissionné sur dix qui ont obtenu les documents; la plus basse soumission dépasse de 44,61 % l'estimation des professionnels (120 901,96 $)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "202 807,14 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 7129,
+    "sortie": 548
+   }
+  },
+  {
+   "id": "1269855006",
+   "numero": "1269855006",
+   "resolution": "CA26 210172",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Demande d'approbation d'un plan d'implantation et d'intégration architecturale (PIIA) afin de permettre la construction d'un bâtiment principal situé au 434, rue Hickson (lots 1 153 720 et 1 153 719). (1269855006)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=58",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Verdun approuve les plans d'architecture permettant la construction d'un nouvel immeuble au 434, rue Hickson, sur un terrain vacant depuis la démolition d'un immeuble de 6 logements en 1994.",
+    "Le projet prévoit un bâtiment jumelé de 6 logements : deux au rez-de-chaussée universellement accessibles, et des logements de 3 chambres aux étages, avec une construction hors toit.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable assorti de 9 conditions : revoir les matériaux et la volumétrie de la façade, ajouter un couronnement, modifier l'éclairage extérieur, préciser les bacs de plantation en toiture et utiliser du pavé perméable.",
+    "Les demandeurs ont déposé des dessins montrant qu'ils respectent les conditions; la recommandation d'installer un bouton-poussoir à l'entrée principale n'a pas été suivie.",
+    "L'aménagement extérieur comprend deux érables rouges, un tulipier de Virginie, des arbustes et des terrasses arrière pour les logements du rez-de-chaussée.",
+    "Le dossier passe au conseil d'arrondissement plutôt qu'en décision déléguée en raison de la valeur des travaux.",
+    "Le document ne mentionne aucun aspect financier pour la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 7257,
+    "sortie": 566
+   }
+  },
+  {
+   "id": "1269573015",
+   "numero": "1269573015",
+   "resolution": "CA26 12186",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "er Proclamer le 1 octobre 2026, « Journée internationale pour les personnes âgées »",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=42",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Anjou proclame le 1er octobre 2026 « Journée internationale pour les personnes âgées ».",
+    "La date reprend celle désignée par l'Assemblée générale des Nations Unies, soulignée dans le monde depuis le 1er octobre 1991.",
+    "Anjou dit vouloir donner de la visibilité à cette journée et agir contre l'âgisme.",
+    "L'arrondissement rappelle sa consultation citoyenne de 2024, qui a mené à son plan d'action Municipalité amie des aînés (MADA) 2025-2029.",
+    "Une mention sera publiée dans « Regards sur Anjou » et sur le site Internet de l'arrondissement.",
+    "Aucune dépense n'est rattachée à cette décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 5347,
+    "sortie": 353
+   }
+  },
+  {
+   "id": "CA26 08 0342",
+   "numero": null,
+   "resolution": "CA26 08 0342",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Soumis sommaire décisionnel numéro 1260075008 visant à donner un avis de motion et déposer le projet de règlement numéro 878-52 modifiant le règlement 878 sur la sécurité routière afin d'encadrer la circulation des appareils de transport personnel motorisés dans les parcs publics relevant de l'arrondissement de Saint-Laurent. Le conseiller Aref Salem donne avis de motion qu’à une prochaine séance, il sera proposé le règlement numéro 878-52 modifiant le règlement 878 sur la sécurité routière afin d'encadrer la circulation des appareils de transport personnel motorisés dans les parcs publics relevant de l'arrondissement de Saint-Laurent.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=17",
+   "source": "resolution",
+   "puces": [
+    "Saint-Laurent annonce un futur règlement pour encadrer la circulation des appareils de transport personnel motorisés dans les parcs publics de l'arrondissement.",
+    "À cette séance, le conseil se limite à donner l'avis de motion et à prendre acte du dépôt du projet de règlement; rien n'est adopté pour l'instant.",
+    "Le texte ne précise pas les règles qui s'appliqueront : l'adoption est prévue à une séance ultérieure.",
+    "Décision prise à l'unanimité lors de la séance ordinaire du conseil d'arrondissement du 1er septembre 2026."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2246,
+    "sortie": 301
+   }
+  },
+  {
+   "id": "1265612015",
+   "numero": "1265612015",
+   "resolution": "CA26 12188",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Autoriser une dépense totale de 111 985,65 $, contingences, incidences et taxes incluses, pour le raccordement électrique desservant la caserne 28 ainsi que la bibliothèque Jean-Corbeil dans l'arrondissement d'Anjou - Attribuer, à cette fin, un contrat à Quantum électrique inc., au montant de 96 579 $, taxes incluses - Appel d'offres public 2025-05-TR (6 soumissionnaires)",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=72",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Anjou refait l'entrée électrique du 7500, rue Goncourt, qui alimente la caserne de pompiers 28 et la bibliothèque Jean-Corbeil.",
+    "Les travaux font suite à plusieurs infiltrations d'eau; sans eux, le bâtiment n'est pas jugé sécuritaire, conforme et fonctionnel.",
+    "Le contrat va à Quantum électrique inc., plus bas soumissionnaire conforme, pour 96 579 $ taxes incluses, sur 6 soumissions reçues.",
+    "La dépense totale autorisée atteint 111 985,65 $ : le contrat, 9 657,90 $ de contingences et 5 748,75 $ d'incidences (contrôle de la qualité).",
+    "La soumission retenue est 4 231 $ (4,38 %) sous l'estimation de la Ville.",
+    "Les travaux sont prévus de septembre à octobre 2026, avec une garantie jusqu'à l'automne 2027.",
+    "Le rendement de l'entreprise sera évalué à la fin du contrat."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "111 985,65 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 8377,
+    "sortie": 473
+   }
+  },
+  {
+   "id": "1265163002",
+   "numero": "1265163002",
+   "resolution": "CA26 210166",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Approuver les conventions de bail à intervenir entre la Ville de Montréal, arrondissement de Verdun, et deux (2) organismes, relatives à l'utilisation des locaux situés au 4400, boulevard LaSalle, à Verdun, pour une période se terminant le 31 décembre 2027. (1265163002)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=26",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Verdun loue des locaux du Centre Enfance Famille, au 4400, boulevard LaSalle, à deux organismes, jusqu'au 31 décembre 2027.",
+    "Le Centre de pédiatrie sociale Les petits renards, déjà sur place, voit son bail modifié dès le 1er juillet 2026 pour tenir compte de ses nouveaux espaces : loyer de 7 510 $ pour 2026.",
+    "La Maison du Réconfort, qui héberge et aide des femmes victimes de violence conjugale, s'installe au 1er septembre 2026 : loyer de 1 849 $ pour 2026.",
+    "Les loyers correspondent aux coûts énergétiques réels du bâtiment, répartis selon l'espace occupé, avec une indexation annuelle d'au moins 2 % (ou l'IPC de Montréal s'il est plus élevé).",
+    "Les organismes paient eux-mêmes la téléphonie, l'informatique et l'entretien ménager de leurs espaces.",
+    "Ces locaux étaient vacants depuis le départ d'un organisme et ont été attribués après un appel d'intérêt auprès des organismes de Verdun."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "7 510 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 4699,
+    "sortie": 507
+   }
+  },
+  {
+   "id": "CA26 08 0326",
+   "numero": null,
+   "resolution": "CA26 08 0326",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "La première période des questions du public a lieu de 19 h 56 à 21 h 03. À 20 h 26",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement a prolongé de 30 minutes sa première période de questions du public, qui s'est tenue de 19 h 56 à 21 h 03.",
+    "Les citoyens présents ont questionné les élus sur les inondations dans le secteur Cosmos, la sécurité routière rue Marlatt, les parcs à chiens et le suivi d'une séance précédente.",
+    "D'autres interventions ont porté sur la réorganisation du réseau de la STM après la mise en service du REM, la gestion des eaux pluviales, les parcs éponges et le prolongement de la ligne orange.",
+    "Deux personnes ont interrogé les élus sur la position de l'arrondissement concernant une motion présentée et leur vote.",
+    "Les questions soumises en ligne ont visé les pucerons dans les tilleuls, la fréquence des ventes-débarras dans le secteur industriel et l'échéancier des travaux dans la portion est du parc Bois-Franc."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2284,
+    "sortie": 421
+   }
+  },
+  {
+   "id": "CA26 12203",
+   "numero": null,
+   "resolution": "CA26 12203",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "er Lever la séance ordinaire du conseil d'arrondissement du 1 septembre 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-09-01_19h00_FR.pdf#page=14",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement met fin à sa séance ordinaire du 1er septembre 2026 à 19 h 36."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 1638,
+    "sortie": 136
+   }
+  },
+  {
+   "id": "1267203009",
+   "numero": "1267203009",
+   "resolution": "CA26 12194",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Édicter l'ordonnance 1333-O.232, en vertu du Règlement relatif à la circulation dans les limites de l'arrondissement d'Anjou (1333), visant à modifier la signalisation du côté nord de la rue Grenache",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=142",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Anjou interdit l'arrêt en tout temps du côté nord de la rue Grenache, entre la rue Edison et le boulevard Parkway.",
+    "La zone d'interdiction ira du premier poteau de bois à l'est du quai de chargement du 8290, rue Grenache jusqu'à l'ouest de la première entrée charretière à l'est du 8155, rue Grenache.",
+    "Motif invoqué : les voitures stationnées forçaient les camions à faire des manœuvres dangereuses pour atteindre leur quai de chargement, et nuisaient à la visibilité de l'entreprise du 8155, rue Grenache.",
+    "L'arrondissement paie l'installation des deux panneaux à même son budget; aucun montant n'est précisé.",
+    "L'interdiction prend effet le jour de la publication de l'avis public, qui sera mis en ligne sur le site de l'arrondissement.",
+    "Le document inclut aussi une résolution distincte : ajout de places de stationnement pour personnes à mobilité réduite face au 5522, boulevard Roi-René et au 6333, boulevard des Galeries-d'Anjou, et retrait de celle face au 7770, avenue de Ronceray."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 5421,
+    "sortie": 504
+   }
+  },
+  {
+   "id": "CA26 08 0344",
+   "numero": null,
+   "resolution": "CA26 08 0344",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Soumis sommaire décisionnel numéro 1264893005 relatif à la nomination d’un contremaître horticulture et parcs à la Section horticulture et parcs de la Division des parcs et des espaces verts de la Direction des travaux publics de l'arrondissement de Saint-Laurent.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=18",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de Saint-Laurent nomme Cédric Hostiou contremaître horticulture et parcs, à la Direction des travaux publics.",
+    "L'entrée en poste est fixée au 5 septembre 2026.",
+    "Le poste était vacant et a fait l'objet d'un affichage de concours géré par le Service des ressources humaines de la Ville.",
+    "Ses conditions de travail suivent le cahier des conditions et avantages des cadres administratifs et la Politique de rémunération des cadres.",
+    "La décision a été adoptée à l'unanimité."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2248,
+    "sortie": 289
+   }
+  },
+  {
+   "id": "CA26 12183",
+   "numero": null,
+   "resolution": "CA26 12183",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Adopter l'ordre du jour de la séance ordinaire du conseil d'arrondissement er du 1 septembre 2026, à 19 h, avec l’ajout des points 20.02 et 20.03",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-09-01_19h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement adopte l'ordre du jour de sa séance ordinaire du 1er septembre 2026, à 19 h.",
+    "Deux points sont ajoutés à cet ordre du jour avant la séance.",
+    "Premier ajout : un contrat de raccordement électrique pour la caserne 28 et la bibliothèque Jean-Corbeil, à Anjou, confié à Quantum électrique inc. pour 96 579 $, taxes incluses, dans une dépense totale de 111 985,65 $.",
+    "Second ajout : un addenda à l'entente entre l'arrondissement d'Anjou et Concertation Anjou pour le projet « Table de quartier », du 5 août 2026 au 31 mars 2027."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": "111 985,65 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2008,
+    "sortie": 350
+   }
+  },
+  {
+   "id": "CA26 08 0324",
+   "numero": null,
+   "resolution": "CA26 08 0324",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Soumis les procès-verbaux des séances ordinaire et extraordinaire des 4 et 17 août 2026 du conseil d’arrondissement. Proposé par le conseiller Jacques Cohen; Appuyé par la conseillère Annie Gagnier, il est RÉSOLU À L’UNANIMITÉ : D’adopter, tels que soumis, les procès-verbaux des séance ordinaire et extraordinaire des 4 et 17 août 2026 du conseil d’arrondissement. ADOPTÉ.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement approuve à l'unanimité les procès-verbaux de ses séances des 4 et 17 août 2026, sans aucune modification."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 1978,
+    "sortie": 148
+   }
+  },
+  {
+   "id": "1267203008",
+   "numero": "1267203008",
+   "resolution": "CA26 12195",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Édicter l'ordonnance 1333-O.233, en vertu du Règlement relatif à la circulation dans les limites de l'arrondissement d'Anjou (1333), visant l'installation d'une zone de stationnement dédiée aux personnes à mobilité réduite face au 5522, boulevard Roi-René et face au 6333, boulevard des Galeries-d'Anjou, ainsi que le retrait d'une zone de stationnement dédiée aux personnes à mobilité réduite face au 7770, avenue de Ronceray - Abroger l'ordonnance 1333-O.114",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=150",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Anjou ajoute deux espaces de stationnement réservés aux personnes à mobilité réduite : devant le 5522, boulevard Roi-René et devant le 6333, boulevard des Galeries-d'Anjou.",
+    "Il retire l'espace réservé devant le 7770, avenue de Ronceray, parce que le locataire qui l'avait demandé a déménagé.",
+    "Chaque demande venait d'un citoyen via le 311 et devait être appuyée par l'évaluation d'un professionnel de la santé attestant que la personne ne peut marcher plus de 50 mètres sur terrain plat avec une canne.",
+    "Les espaces de stationnement feront environ 4,5 mètres de longueur.",
+    "Les travaux de signalisation (pose et retrait de panneaux) sont payés en entier par l'arrondissement, à même un budget déjà prévu pour ce type d'activité.",
+    "Après l'adoption, l'arrondissement publie l'avis public, fait installer la signalisation et informe les responsables de l'application du règlement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 7459,
+    "sortie": 454
+   }
+  },
+  {
+   "id": "1260130018",
+   "numero": "1260130018",
+   "resolution": "CA26 210169",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Dépôt des rapports budgétaires pour les périodes de juin et juillet 2026. (1260130018)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=38",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Verdun prend acte du dépôt des rapports budgétaires des mois de juin et juillet 2026, à titre informatif seulement.",
+    "Ces rapports sont produits chaque mois par la Direction des services administratifs, à partir du système d'approvisionnement SIMON.",
+    "Aucune dépense, aucun engagement financier ni aucun changement de service n'est rattaché à ce dépôt."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 3150,
+    "sortie": 240
+   }
+  },
+  {
+   "id": "1260130017",
+   "numero": "1260130017",
+   "resolution": "CA26 210168",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Dépôt du rapport des virements de crédits du budget de fonctionnement et du programme décennal d'immobilisations (PDI) pour les périodes de juin et juillet 2026. (1260130017)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=34",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Verdun prend acte du dépôt, pour information seulement, de la liste des virements de crédits faits par les gestionnaires en juin et juillet 2026.",
+    "Ces virements touchent le budget de fonctionnement et le programme décennal d'immobilisations (PDI) de l'arrondissement.",
+    "Aucune somme n'est votée ici : il s'agit d'un suivi des modifications apportées au budget initial, sans effet sur le niveau des emprunts payés par les contribuables."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 3865,
+    "sortie": 270
+   }
+  },
+  {
+   "id": "CA26 210159",
+   "numero": null,
+   "resolution": "CA26 210159",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Adoption de l'ordre du jour de la séance du conseil d'arrondissement",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-09-01_19h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement adopte l'ordre du jour de sa séance ordinaire.",
+    "Un point est ajouté : le dépôt, pour information, d'une lettre de la mairesse d'arrondissement Céline-Audrey Beauregard adressée aux candidats à l'élection provinciale du 5 octobre 2026 dans la circonscription de Verdun."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 1734,
+    "sortie": 220
+   }
+  },
+  {
+   "id": "CA26 08 0334",
+   "numero": null,
+   "resolution": "CA26 08 0334",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Soumis sommaire décisionnel numéro 1268843004 autorisant une dépense n’excédant pas la somme de 793 319,43 $ en faveur de Les services EXP inc., pour les services professionnels de dépistage des raccordements inversés (RI), de préparation de plans et devis des travaux de correction ponctuelle de RI, de remplacement d'entrées de service en plomb (RESEP), ainsi que de réfection de la chaussée sur diverses rues appartenant au réseau résidentiel local de l’arrondissement de Saint-Laurent - Entente-cadre 1694713.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=6",
+   "source": "resolution",
+   "puces": [
+    "Le conseil autorise une dépense d'au plus 793 319,43 $ en faveur de Les services EXP inc., dont 744 068,01 $ pour les services et 49 251,42 $ en contingences (taxes incluses).",
+    "La firme doit dépister les raccordements inversés et préparer les plans et devis pour les corriger, remplacer les entrées d'eau en plomb et refaire la chaussée.",
+    "Les travaux visent diverses rues du réseau résidentiel local de l'arrondissement de Saint-Laurent.",
+    "Le contrat s'appuie sur l'entente-cadre 1694713.",
+    "L'arrondissement prend en charge la conception, la coordination et la réalisation de ces travaux, y compris les entrées d'eau en plomb situées sur des terrains privés, dans le cadre des programmes de réfection routière et de maintien des infrastructures 2026.",
+    "Le conseil invoque que les raccordements inversés rejettent des eaux contaminées dans le réseau pluvial et contaminent les cours d'eau."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "793 319,43 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2784,
+    "sortie": 451
+   }
+  },
+  {
+   "id": "CA26 12184",
+   "numero": null,
+   "resolution": "CA26 12184",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Approuver le procès-verbal de la séance ordinaire du conseil d'arrondissement tenue le 4 août 2026, à 19 h",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-09-01_19h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement approuve le procès-verbal de sa séance ordinaire du 4 août 2026, tenue à 19 h.",
+    "Une copie du procès-verbal avait été remise aux élus dans les délais prévus par la Loi sur les cités et villes."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 1750,
+    "sortie": 186
+   }
+  },
+  {
+   "id": "CA26 210178",
+   "numero": null,
+   "resolution": "CA26 210178",
+   "date": "2026-09-01",
+   "unite": "22 210182 Dépôt de la projection des résultats de l'exercice financier 2022 ainsi que de",
+   "objet": "Dépôt, pour information, d'une lettre de la mairesse d'arrondissement Céline-Audrey Beauregard aux candidats à l'élection provinciale du 5 octobre 2026 - Circonscription de Verdun.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-09-01_19h00_FR.pdf#page=12",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement prend acte du dépôt, pour information, d'une lettre de la mairesse d'arrondissement Céline-Audrey Beauregard adressée aux candidats à l'élection provinciale du 5 octobre 2026 dans la circonscription de Verdun.",
+    "Aucune décision ni dépense n'accompagne ce dépôt : le contenu de la lettre n'est pas détaillé dans le document."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 1784,
+    "sortie": 240
+   }
+  },
+  {
+   "id": "CA26 08 0341",
+   "numero": null,
+   "resolution": "CA26 08 0341",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Donner un avis de motion et déposer le premier projet de règlement numéro RCA08-08-0001- 184 modifiant le règlement RCA08-08-0001 sur le zonage afin de modifier les zones et les grilles des normes et usages pour permettre le développement de la dernière phase du projet Nouveau Saint-Laurent (sommaire décisionnel 1268433005). La conseillère Vana Nazarian donne avis de motion qu’à une prochaine séance, il sera proposé le règlement numéro RCA08-08-0001-184 modifiant le règlement numéro RCA08-08-0001 sur le zonage.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=17",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Saint-Laurent amorce une modification de son règlement de zonage pour permettre la dernière phase du projet Nouveau Saint-Laurent.",
+    "La modification touche les zones ainsi que les grilles des normes et des usages du secteur visé.",
+    "Un avis de motion a été donné et le premier projet de règlement a été déposé à la séance.",
+    "Une consultation publique se tiendra le 15 septembre 2026 à 19 h; le maire ou un élu désigné y expliquera l'objet et les conséquences du règlement.",
+    "La décision a été adoptée à l'unanimité."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2256,
+    "sortie": 298
+   }
+  },
+  {
+   "id": "1255291004",
+   "numero": "1255291004",
+   "resolution": "CA26 210174",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Avis de motion et dépôt d'un projet de règlement - Règlement modifiant le Règlement intérieur du conseil d'arrondissement sur la délégation de pouvoirs aux fonctionnaires et employés (RCA17 210005) concernant la délégation de l'approbation des plans d'implantation et d'intégration architecturale (PIIA), en vue de la délivrance d'un permis ou d'un certificat. (1255291004) Un avis de motion est donné par la conseillère Stefana Lamasanu de l’inscription pour adoption à une séance subséquente du conseil d’arrondissement du règlement intitulé « Règlement modifiant le règlement intérieur du conseil d'arrondissement sur la délégation de pouvoirs aux fonctionnaires et employés » lequel est déposé",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=71",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Verdun veut permettre à ses fonctionnaires d'approuver eux-mêmes certains permis liés à l'apparence des bâtiments (PIIA), sans passer par un vote du conseil d'arrondissement.",
+    "La délégation couvrirait les travaux touchant la façade : ouvertures, vitrines et accès commerciaux au rez-de-chaussée, alcôves, murs de maçonnerie, entablements et couronnements, saillies.",
+    "La valeur maximale des travaux visés reste à 499 999 $ pour les permis de transformation.",
+    "Le Comité consultatif d'urbanisme n'aurait plus à recommander un projet à l'unanimité : un avis favorable suffirait, ce qui élargit le nombre de dossiers délégués. L'avis favorable de la Direction du développement du territoire reste exigé.",
+    "La Ville dit répondre aux recommandations de sa Direction de l'habitation pour accélérer la construction résidentielle et réduire les délais de permis.",
+    "Les règles sur les enseignes et l'occupation du domaine public ne changent pas.",
+    "Échéancier prévu : avis de motion le 1er septembre 2026, adoption le 6 octobre 2026, entrée en vigueur à la date de l'avis public."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "499 999 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 5218,
+    "sortie": 533
+   }
+  },
+  {
+   "id": "CA26 08 0323",
+   "numero": null,
+   "resolution": "CA26 08 0323",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "er Soumis l'ordre du jour de la séance ordinaire du 1 septembre 2026. Proposé par le conseiller Jacques Cohen; Appuyé par la conseillère Annie Gagnier, il est RÉSOLU À L’UNANIMITÉ : er D'adopter, tel que soumis, l'ordre du jour de la séance ordinaire du 1 septembre 2026. ADOPTÉ.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le conseil adopte à l'unanimité l'ordre du jour de sa séance ordinaire du 1er septembre 2026, tel que présenté."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 1883,
+    "sortie": 143
+   }
+  },
+  {
+   "id": "CA26 08 0348",
+   "numero": null,
+   "resolution": "CA26 08 0348",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Proposé par le conseiller Aref Salem; Appuyé par le conseiller Jacques Cohen, il est RÉSOLU À L’UNANIMITÉ : De lever la séance à 21 h 54. ADOPTÉ.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=20",
+   "source": "resolution",
+   "puces": [
+    "Le conseil met fin à la séance à 21 h 54, à l'unanimité."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 1729,
+    "sortie": 120
+   }
+  },
+  {
+   "id": "1269573012",
+   "numero": "1269573012",
+   "resolution": "CA26 12185",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Proclamer les 25, 26 et 27 septembre 2026, « Journées de la culture », afin de manifester, de façon tangible, l'attachement que l'arrondissement d'Anjou porte à la culture",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=36",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Anjou proclame les 25, 26 et 27 septembre 2026 « Journées de la culture », un événement tenu partout au Québec.",
+    "Pour souligner l'occasion, l'arrondissement offre un concert d'Adam El Moura au Centre communautaire d'Anjou le 25 septembre à 19 h 30.",
+    "Le dossier n'implique aucune dépense : la section financière indique « ne s'applique pas ».",
+    "L'événement sera annoncé dans le journal Regards sur Anjou de septembre, l'infolettre, les réseaux sociaux et le site web de l'arrondissement.",
+    "Le même conseil a aussi proclamé le 1er octobre 2026 « Journée internationale pour les personnes âgées », en lien avec sa consultation auprès des citoyens aînés."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 4834,
+    "sortie": 373
+   }
+  },
+  {
+   "id": "1267203006",
+   "numero": "1267203006",
+   "resolution": "CA26 12196",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Édicter l'ordonnance 1607-O.120, en vertu du Règlement concernant la paix, le bon ordre et les nuisances (1607), afin de permettre la tenue des événements spéciaux organisés par le Service d'aide et de référencement aîné d'Anjou (SARA d'Anjou), le Cercle Amitié Anjou, Le Bel Âge d'Anjou inc., l'Association Au Fil du temps d'Anjou et le 150e groupe scout Notre-Dame-d'Anjou, pendant les mois d'octobre, novembre et décembre 2026",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=161",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Anjou autorise cinq organismes à servir et à consommer de l'alcool lors d'événements tenus au Centre Roger-Rousseau, au 7501, avenue Rondeau.",
+    "Les dates visées : souper du SARA d'Anjou le 1er octobre; Cercle Amitié Anjou les 16 octobre et 27 novembre; Le Bel Âge d'Anjou les 24 octobre et du 31 décembre jusqu'à 2 h le 1er janvier 2027.",
+    "L'Association Au Fil du temps d'Anjou est aussi visée, les 31 octobre et 18 décembre 2026, de 13 h à minuit.",
+    "Le 150e groupe scout Notre-Dame d'Anjou pourra en plus vendre des aliments lors de son souper spaghetti du 7 novembre 2026.",
+    "Les organismes doivent payer eux-mêmes les coûts des événements et obtenir au besoin un « permis de réunion » de la Régie des alcools, des courses et des jeux.",
+    "L'autorisation n'est pas transférable et entre en vigueur dès la publication de l'avis public."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 7750,
+    "sortie": 485
+   }
+  },
+  {
+   "id": "1254501008",
+   "numero": "1254501008",
+   "resolution": "CA26 12187",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Approuver un projet d'acte par lequel la Ville de Montréal acquiert une servitude réelle et perpétuelle du Centre de services scolaire de la Pointe-de-l'Île, à des fins de passage public et de stationnement, d'une superficie de 8 128 m², situé au 9400, boulevard Métropolitain, dans l'arrondissement d'Anjou, sans considération monétaire. N/Réf. : 31H12-005-3972-05 / Mandat 21-0076-T.",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=48",
+   "source": "sommaire",
+   "puces": [
+    "La Ville de Montréal obtient du Centre de services scolaire de la Pointe-de-l'Île un droit de passage et de stationnement permanent sur un terrain de 8 128 m² au 9400, boulevard Métropolitain, dans Anjou.",
+    "Ce droit permet au public d'accéder à pied, à vélo et en voiture au parc local et au terrain de soccer voisins de l'école secondaire Irma-LeVasseur.",
+    "Dix cases de stationnement sont réservées en tout temps aux usagers du parc et du terrain de soccer; d'autres cases sont accessibles en dehors des heures scolaires.",
+    "La Ville n'achète rien : la servitude est accordée sans considération monétaire, et le centre de services scolaire paie l'entretien, les réparations, la signalisation et le déneigement.",
+    "Le centre de services scolaire s'était engagé à accorder ce droit quand la Ville lui a cédé le terrain de l'école en 2023; l'école a été inaugurée en novembre 2024 et les aménagements sont terminés.",
+    "La servitude ne peut pas être rachetée avant 30 ans et doit d'abord être autorisée par le ministre de l'Éducation (prévu entre l'automne 2026 et l'hiver 2027), la signature de l'acte étant prévue à l'hiver 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 7971,
+    "sortie": 548
+   }
+  },
+  {
+   "id": "1260102003",
+   "numero": "1260102003",
+   "resolution": "CA26 210175",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "er Désigner le maire suppléant de l'arrondissement de Verdun pour la période du 1 octobre 2026 au 30 juin 2027. (1260102003)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=76",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Verdun désigne le conseiller Benoît Gratton comme maire suppléant.",
+    "Son mandat court du 1er octobre 2026 au 30 juin 2027.",
+    "Le maire suppléant remplace la mairesse en cas d'absence.",
+    "Aucune dépense n'est associée à cette désignation."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 3646,
+    "sortie": 210
+   }
+  },
+  {
+   "id": "CA26 210160",
+   "numero": null,
+   "resolution": "CA26 210160",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Approbation du procès-verbal de la séance ordinaire du conseil d'arrondissement tenue le 30 juin 2026, à 19 h",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-09-01_19h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement approuve le procès-verbal de sa séance ordinaire du 30 juin 2026, dont copie avait été remise d'avance aux membres du conseil."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 1719,
+    "sortie": 156
+   }
+  },
+  {
+   "id": "1267077014",
+   "numero": "1267077014",
+   "resolution": "CA26 12198",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Adopter, en vertu du Règlement sur les projets particuliers de construction, de modification ou d'occupation d'un immeuble (RCA 138), un premier projet de résolution visant à autoriser deux (2) logements au sous-sol, un nombre de cases de stationnement en dessous du minimum exigé et une case de stationnement empiétant sur le domaine public au 8251, boulevard du Haut-Anjou, lot 1 004 997 du cadastre du Québec, circonscription foncière de Montréal (PP-079-032)",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=184",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Anjou autorise l'ajout d'un deuxième logement au sous-sol du 8251, boulevard du Haut-Anjou, en dérogation au zonage qui l'interdit dans un immeuble de trois étages.",
+    "Le propriétaire veut murer la porte de garage menant au sous-sol, qu'il dit avoir été inondé à répétition; son assureur pourrait annuler la couverture dès décembre 2026.",
+    "L'espace du garage (trois cases intérieures) devient un logement de type 4 ½ d'environ 92 m²; l'immeuble passerait de sept à huit logements, maximum fixé à huit.",
+    "Le minimum de stationnement passe de six cases à une seule, et cette case pourra empiéter de 0,72 m sur le domaine public.",
+    "La Division des études techniques dit ne relever aucun problème de stationnement sur rue dans le secteur.",
+    "Toute demande de permis devra inclure un plan de gestion des eaux pluviales fait par un professionnel, et les travaux devront commencer dans les 24 mois suivant l'entrée en vigueur.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable après analyse les 1er juin, 29 juin et 10 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 7535,
+    "sortie": 524
+   }
+  },
+  {
+   "id": "1267203005",
+   "numero": "1267203005",
+   "resolution": "CA26 12202",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Dépôt par la secrétaire d'arrondissement du procès-verbal de l'assemblée de consultation publique tenue le 4 août 2026, à 18 h 30, concernant le projet de règlement RCA 193 Dépôt est fait, par la secrétaire d'arrondissement, du procès-verbal de l'assemblée de consultation publique tenue le 4 août 2026, à 18 h 30, concernant le projet de règlement RCA 193.",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17485#page=310",
+   "source": "sommaire",
+   "puces": [
+    "La secrétaire d'arrondissement d'Anjou dépose le procès-verbal de l'assemblée de consultation publique du 4 août 2026, tenue à 18 h 30 au 7701, boulevard Louis-H.-La Fontaine.",
+    "Cette assemblée portait sur le premier projet de règlement RCA 193, « Règlement sur les plans d'aménagement d'ensemble de l'arrondissement d'Anjou ».",
+    "Trois personnes étaient présentes; aucune question n'a été posée et l'assemblée a été levée à 18 h 45.",
+    "Le dépôt est une formalité : le conseil prend acte du document, sans nouvelle décision ni dépense."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 4374,
+    "sortie": 327
+   }
+  },
+  {
+   "id": "CA26 08 0333",
+   "numero": null,
+   "resolution": "CA26 08 0333",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Soumis sommaire décisionnel numéro 1265485015 relatif à l’octroi de contrats pour la location d'appareils avec opérateurs servant aux opérations de déneigement pour trois saisons hivernales 2026-2029, avec la possibilité de prolongation d'une année - Appel d'offres public 26- 21417.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-09-01_19h30_FR.pdf#page=5",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement loue des appareils avec opérateurs pour le déneigement pendant trois saisons hivernales (2026-2029), avec une possibilité de prolongation d'un an.",
+    "Deux contrats sont accordés aux plus bas soumissionnaires conformes : 1 089 963 $ à Gragon Constructions ltée (lots 1.1.4 et 1.1.5) et 1 495 594,80 $ à Paysagistes Ramco inc. (lots 1.1.1, 1.1.2 et 1.1.3).",
+    "Les montants incluent les taxes.",
+    "Motif invoqué : l'arrondissement n'a pas assez d'employés ni d'équipement pour déblayer et charger la neige sur tout son territoire et complète ses équipes avec des entreprises privées.",
+    "Quatre firmes ont soumissionné à l'appel d'offres public 26-21417.",
+    "Décision prise à l'unanimité au conseil d'arrondissement du 1er septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 495 594,80 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 2307,
+    "sortie": 438
+   }
+  },
+  {
+   "id": "1269127001",
+   "numero": "1269127001",
+   "resolution": "CA26 210163",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Accorder un contrat à Les Terrassements Multi-Paysages inc. ayant pour objet l'exécution des travaux d'aménagement d'un gym à ciel ouvert au parc Beurling dans l'arrondissement de Verdun / Dépense totale de 197 472,63 $ (contrat : 167 216,31 $, contingences : 25 082,45 $ et incidences : 5 173,87 $), taxes incluses. / Appel d'offres public S26-012 (4 soumissionnaires). (1269127001)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=4",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Verdun confie à Les Terrassements Multi-Paysages inc. l'aménagement d'un gym à ciel ouvert au parc Beurling, dans le quartier Desmarchais-Crawford.",
+    "La dépense totale atteint 197 472,63 $ taxes incluses : 167 216,31 $ pour le contrat, 25 082,45 $ de contingences et 5 173,87 $ d'incidences. La ville centre assume la facture.",
+    "Le projet vient du budget participatif de Montréal (2e édition) et découle du projet lauréat « Gym de quartier à ciel ouvert ».",
+    "Les travaux prévoient 6 équipements d'entraînement, 2 bancs actifs, 2 tables à pique-nique, des sentiers piétonniers et la conversion de 80 m² d'asphalte en surfaces vertes.",
+    "Mesures d'accessibilité prévues : sentier piéton, une table à pique-nique adaptée aux fauteuils roulants, rampe d'accès et revêtement en criblure de pierre.",
+    "Les travaux doivent commencer le 14 septembre 2026 et se terminer le 13 octobre 2026; neuf arbres seront plantés par les travaux publics à l'automne 2026.",
+    "Quatre entreprises ont soumissionné; l'offre retenue dépasse de 13,30 % l'estimation administrative, ce que l'arrondissement attribue à l'appel d'offres tardif et aux coûts de sécurité liés à l'achalandage du parc."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "197 472,63 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 7629,
+    "sortie": 623
+   }
+  },
+  {
+   "id": "1264422005",
+   "numero": "1264422005",
+   "resolution": "CA26 210176",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Dépôt, pour information, des comptes rendus, approuvés par les membres, des séances du er comité consultatif d'urbanisme (CCU) tenues du 1 janvier au 30 juin 2026. (1264422005)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=80",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Verdun prend acte du dépôt des comptes rendus des séances de son comité consultatif d'urbanisme (CCU) tenues du 1er janvier au 30 juin 2026 — un dépôt pour information seulement, sans décision ni dépense.",
+    "Les neuf séances visées ont eu lieu les 20 janvier, 10 et 24 février, 17 et 31 mars, 14 et 28 avril, 12 mai et 9 juin 2026."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 3721,
+    "sortie": 261
+   }
+  },
+  {
+   "id": "1269336005",
+   "numero": "1269336005",
+   "resolution": "CA26 210164",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Accorder un contrat à Indy-Co inc. ayant pour objet l'exécution des travaux de rehaussement du muret aquatique de la plage urbaine dans l'arrondissement de Verdun / Dépense totale de 318 475,81 $ (contrat : 271 936,57 $, contingences : 40 790,49 $ et incidences : 5 748,75 $), taxes incluses / Appel d'offres public S26-013 (1 soumissionnaire). (1269336005)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=11",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Verdun accorde un contrat de 271 936,57 $ (taxes incluses) à Indy-Co inc. pour rehausser le muret aquatique de la plage urbaine.",
+    "La dépense totale autorisée atteint 318 475,81 $, dont 40 790,49 $ de contingences et 5 748,75 $ d'incidences (communications), payés à 100 % par l'arrondissement.",
+    "Les travaux visent à retenir le sable de la plage, qui s'érode : le ministère des Pêches et Océans exige cette correction avant d'autoriser une recharge de sable.",
+    "Les travaux doivent se faire après la fin de la saison de baignade (14 septembre) et hors de la période de reproduction des poissons (juin à août); ils sont prévus à l'automne 2026.",
+    "Un seul entrepreneur a soumissionné sur les 10 qui ont pris les documents d'appel d'offres; son prix est de 113 686,48 $ (-26 %) sous l'estimation interne.",
+    "La plage, ouverte au public en 2019, accueille plus de 100 000 baigneurs par année; des travaux contre le ruissellement ont déjà été faits en 2025."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "318 475,81 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 7798,
+    "sortie": 506
+   }
+  },
   {
    "id": "1268956001",
    "numero": "1268956001",
@@ -5283,6 +8022,398 @@
    "jetons": {
     "entree": 2140,
     "sortie": 307
+   }
+  },
+  {
+   "id": "CM26 0780",
+   "numero": null,
+   "resolution": "CM26 0780",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Accorder un contrat à 9103-7143 Québec inc., pour les services techniques de contrôle des populations de cerfs de Virginie dans le secteur du parc-nature de la Pointe-aux-Prairies, pour une période de sept mois - Dépense totale de 236 675,80 $, taxes incluses - Appel d'offres public 26-21442 (1 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=41",
+   "source": "resolution",
+   "puces": [
+    "La Ville confie à l'entreprise 9103-7143 Québec inc. le contrôle des populations de cerfs de Virginie dans le secteur du parc-nature de la Pointe-aux-Prairies.",
+    "Le contrat couvre une période de sept mois.",
+    "Le contrat vaut 197 229,84 $, taxes incluses, soit le prix de la soumission.",
+    "La Ville ajoute 19 722,98 $ pour les contingences et 19 722,98 $ pour les variations de quantités, ce qui porte la dépense totale à 236 675,80 $.",
+    "Une seule entreprise a soumissionné à l'appel d'offres public 26-21442, et sa soumission a été jugée conforme.",
+    "Il s'agit d'une orientation du conseil municipal, prise à la séance du 24 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "236 675,80 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 2143,
+    "sortie": 375
+   }
+  },
+  {
+   "id": "CM26 0785",
+   "numero": null,
+   "resolution": "CM26 0785",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Conclure une entente-cadre avec ESI Technologies de l'information inc., pour la fourniture de capacité de stockage supplémentaire et compatible, d'une durée de 12 mois, incluant une option de prolongation de 12 mois - Montant estimé de l'entente : 757 894,60 $, taxes incluses - Appel d'offres public 26-21368 (1 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=44",
+   "source": "resolution",
+   "puces": [
+    "La Ville conclut une entente-cadre de 12 mois avec ESI Technologies de l'information inc. pour fournir, sur demande, de la capacité de stockage informatique supplémentaire et compatible.",
+    "Montant maximal de l'entente : 757 894,60 $, taxes incluses. L'entente peut être prolongée de 12 mois.",
+    "ESI Technologies de l'information inc. était la seule entreprise à soumissionner à l'appel d'offres public 26-21368, et sa soumission a été jugée conforme.",
+    "La Ville évaluera le rendement de l'entreprise.",
+    "Les dépenses seront prises à même le budget du Service des technologies de l'information, au fur et à mesure des besoins."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "757 894,60 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 2062,
+    "sortie": 341
+   }
+  },
+  {
+   "id": "CM26 0781",
+   "numero": null,
+   "resolution": "CM26 0781",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Exercer l'option de la première prolongation de 36 mois / Autoriser une dépense additionnelle de 330 478,16 $, taxes incluses, pour les services d'utilisation et d'entretien de la solution en infonuagique de gestion d'autorisation de déversement des matières résiduelles, dans le cadre du contrat accordé à Diffusion Solutions Intégrées inc. (CE22 1618), majorant ainsi le montant total du contrat à 829 643,27 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=42",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge de 36 mois son contrat avec l'entreprise Diffusion Solutions Intégrées inc.",
+    "Le contrat porte sur l'utilisation et l'entretien d'une solution infonuagique qui gère les autorisations de déversement des matières résiduelles.",
+    "Une dépense additionnelle de 330 478,16 $, taxes incluses, est autorisée pour cette prolongation.",
+    "Le montant total du contrat passe ainsi à 829 643,27 $, taxes incluses.",
+    "Il s'agit d'une orientation transmise au conseil municipal; la dépense sera imputée selon les informations financières du dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "330 478,16 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.135Z",
+   "jetons": {
+    "entree": 2083,
+    "sortie": 319
+   }
+  },
+  {
+   "id": "CM26 0773",
+   "numero": null,
+   "resolution": "CM26 0773",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Approuver le projet d'entente par lequel la Ville mandate Hydro-Québec pour les travaux d'enfouissement du réseau électrique existant sur le site archéologique de Fort-Lorette, dans le cadre du projet d'aménagement d'un futur parc, dans l'arrondissement d'Ahuntsic-Cartierville, financé en partie par l'Entente sur le développement culturel de Montréal - Dépense totale de 589 539,17 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=37",
+   "source": "resolution",
+   "puces": [
+    "La Ville confie à Hydro-Québec l'enfouissement du réseau électrique existant sur le site archéologique de Fort-Lorette, dans Ahuntsic-Cartierville.",
+    "Ces travaux s'inscrivent dans le projet d'aménagement d'un futur parc à cet endroit.",
+    "Le contrat avec Hydro-Québec est d'un maximum de 504 058,34 $, taxes incluses.",
+    "S'ajoutent 50 405,83 $ en contingences et 35 075 $ en incidences, pour une dépense totale de 589 539,17 $, taxes incluses.",
+    "Le projet est financé en partie par l'Entente sur le développement culturel de Montréal."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "589 539,17 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2178,
+    "sortie": 336
+   }
+  },
+  {
+   "id": "CM26 0775",
+   "numero": null,
+   "resolution": "CM26 0775",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Autoriser une dépense additionnelle de 34 214,25 $, taxes incluses, pour l'ajout des taxes applicables, dans le cadre du contrat accordé à Supergravity inc. (CG25 0441), majorant ainsi le montant total du contrat à 394 364,25 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=38",
+   "source": "resolution",
+   "puces": [
+    "La Ville ajoute 34 214,25 $ (taxes incluses) au contrat déjà accordé à l'entreprise Supergravity inc.",
+    "Cette somme sert uniquement à couvrir les taxes applicables, qui n'avaient pas été incluses au départ.",
+    "Le contrat passe ainsi à un total de 394 364,25 $, taxes incluses.",
+    "Le directeur de la Direction sécurité publique et justice, au Service des technologies de l'information, est autorisé à signer les documents liés au contrat au nom de la Ville.",
+    "La dépense est imputée selon les informations financières au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "34 214,25 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 1954,
+    "sortie": 306
+   }
+  },
+  {
+   "id": "CM26 0771",
+   "numero": null,
+   "resolution": "CM26 0771",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Exercer l'option de la deuxième prolongation de 12 mois, sans dépense additionnelle, pour les services professionnels multidisciplinaires en conception et en surveillance de travaux d'infrastructures municipales dans le cadre du contrat accordé à Stantec Experts-conseils ltée (CG23 0158)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=36",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge de 12 mois, une deuxième fois, le contrat de services professionnels accordé à Stantec Experts-conseils ltée.",
+    "Ce contrat couvre la conception et la surveillance de travaux d'infrastructures municipales, avec des services multidisciplinaires.",
+    "La prolongation se fait sans dépense additionnelle : aucun montant nouveau n'est engagé.",
+    "Il s'agit de l'orientation que le conseil municipal est appelé à adopter concernant le contrat CG23 0158."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 1885,
+    "sortie": 273
+   }
+  },
+  {
+   "id": "CM26 0783",
+   "numero": null,
+   "resolution": "CM26 0783",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Exercer l'option de la deuxième prolongation de 12 mois / Autoriser une dépense additionnelle de 4 694 063,56 $, taxes incluses, pour les services de téléphonie, d'appareils de communication et de services connexes pour répondre aux besoins de communications de l'agglomération (lots 1 et 2) dans le cadre des ententes-cadres conclues avec Bell Canada (CG22 0645), majorant ainsi le montant total des ententes à 22 988 387,68 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=43",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge de 12 mois, pour une deuxième fois, ses ententes-cadres avec Bell Canada pour les services de téléphonie et d'appareils de communication.",
+    "Elle autorise une dépense additionnelle de 4 694 063,56 $, taxes incluses, pour les lots 1 et 2.",
+    "Avec cet ajout, la valeur totale des ententes atteint 22 988 387,68 $, taxes incluses.",
+    "Les services couvrent les besoins de communication de l'ensemble de l'agglomération de Montréal.",
+    "La dépense sera imputée selon les informations financières inscrites au dossier décisionnel."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "4 694 063,56 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2101,
+    "sortie": 320
+   }
+  },
+  {
+   "id": "CM26 0776",
+   "numero": null,
+   "resolution": "CM26 0776",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Exercer l'option de la première prolongation de 12 mois / Autoriser une dépense additionnelle de 831 509,29 $, taxes incluses, pour la location sur demande d'équipements lourds avec opérateur au lieu d'enfouissement technique de la station d'épuration des eaux usées Jean-R.-Marcotte, dans le cadre des contrats accordés à Dragon Construction ltée (lots 1, 2, 3 et 5) et à Construction Camara (lot 4), (CE23 1417 et CG23 0493), majorant ainsi le montant total des contrats à 2 981 590,48 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=39",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge de 12 mois les contrats de location d'équipements lourds avec opérateur au lieu d'enfouissement technique de la station d'épuration Jean-R.-Marcotte.",
+    "Elle autorise une dépense additionnelle de 831 509,29 $, taxes incluses, ce qui porte le total des contrats à 2 981 590,48 $.",
+    "De ce montant, 728 841,08 $ servent à la prolongation des contrats comme telle.",
+    "Les 102 668,21 $ restants couvrent une variation des quantités, pour combler le déficit accumulé au cours des dernières années.",
+    "Les contrats vont à Dragon Construction ltée (lots 1, 2, 3 et 5) et à Construction Camara (lot 4)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "831 509,29 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.136Z",
+   "jetons": {
+    "entree": 2283,
+    "sortie": 357
+   }
+  },
+  {
+   "id": "CM26 0774",
+   "numero": null,
+   "resolution": "CM26 0774",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Approuver le projet de convention d'exploitation d'un restaurant, à titre gratuit, entre la Ville de er Montréal et le Café des Amis, pour un terme de trois ans, à compter du 1 mai 2026, pour des er locaux d'une superficie de 162,1 mètres carrés, au 1 étage de l'immeuble situé au 2000, chemin Remembrance, dans l'arrondissement de Ville-Marie. Le montant total de la subvention immobilière est estimé à 219 851,37 $",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=37",
+   "source": "resolution",
+   "puces": [
+    "La Ville laisse le Café des Amis exploiter un restaurant au 2000, chemin Remembrance, dans l'arrondissement de Ville-Marie.",
+    "Les locaux occupent 162,1 mètres carrés au 1er étage de l'immeuble.",
+    "L'occupation est accordée à titre gratuit, pour trois ans, à partir du 1er mai 2026.",
+    "La Ville évalue à 219 851,37 $ la valeur de cette subvention immobilière.",
+    "L'entente suit les termes et conditions prévus au projet de convention."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "219 851,37 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 2109,
+    "sortie": 286
+   }
+  },
+  {
+   "id": "CM26 0772",
+   "numero": null,
+   "resolution": "CM26 0772",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Accorder un contrat de gré à gré à Sports Montréal inc., pour les services de gestion des Jeux de Montréal, pour les éditions 2027 à 2029 - Dépense totale de 1 347 010,35 $, taxes incluses / Approuver le projet de convention à cet effet",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=36",
+   "source": "resolution",
+   "puces": [
+    "La Ville confie à Sports Montréal inc. la gestion des Jeux de Montréal pour les éditions 2027, 2028 et 2029.",
+    "Le contrat est accordé de gré à gré, sans appel d'offres, pour 1 347 010,35 $, taxes incluses.",
+    "Le conseil municipal approuve aussi la convention de services qui encadre ce contrat.",
+    "La dépense sera imputée selon les informations financières au dossier décisionnel.",
+    "La décision a été prise à la séance ordinaire du conseil municipal du 24 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 347 010,35 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 1954,
+    "sortie": 291
+   }
+  },
+  {
+   "id": "CM26 0779",
+   "numero": null,
+   "resolution": "CM26 0779",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Exercer l'option de prolongation de 12 mois / Autoriser une dépense additionnelle de 319 943,77 $, taxes incluses, pour les services d'inspection, d'entretien et de réparation des appareils de levage ainsi que des accessoires de levage et d'accrochage (lots 1 et 2), dans le cadre du contrat accordé à Pont Roulant Protech inc. (CG23 0546), majorant ainsi le montant total du contrat à 1 471 741,34 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=40",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge de 12 mois son contrat avec Pont Roulant Protech inc. pour l'inspection, l'entretien et la réparation des appareils de levage et des accessoires de levage et d'accrochage.",
+    "Elle autorise une dépense supplémentaire de 319 943,77 $, taxes incluses.",
+    "De cette somme, 186 534,79 $ vont à la Direction de l'eau potable (lot 1) et 133 408,98 $ à la Direction de l'épuration des eaux usées (lot 2).",
+    "Le contrat total atteint ainsi 1 471 741,34 $, taxes incluses.",
+    "La décision a été prise à la séance ordinaire du conseil municipal du 24 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "319 943,77 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 2225,
+    "sortie": 428
+   }
+  },
+  {
+   "id": "CM26 0777",
+   "numero": null,
+   "resolution": "CM26 0777",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Conclure une entente-cadre avec Globocam (Anjou) inc., pour la fourniture de pièces authentiques de marque Freightliner, d'une durée de cinq ans, incluant deux options de prolongation de 12 mois - Montant estimé de l'entente : 1 848 798,00 $, taxes incluses - Appel d'offres public 26-21365 (1 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=39",
+   "source": "resolution",
+   "puces": [
+    "La Ville conclut une entente de cinq ans avec Globocam (Anjou) inc. pour lui fournir sur demande des pièces authentiques de marque Freightliner.",
+    "L'entente prévoit une somme maximale de 1 540 665 $, taxes incluses, plus 308 133 $ de contingences, pour un total estimé de 1 848 798 $.",
+    "L'entente peut être prolongée deux fois, de 12 mois chacune.",
+    "Globocam (Anjou) inc. était la seule entreprise à soumissionner à l'appel d'offres public 26-21365, et sa soumission a été jugée conforme.",
+    "La Ville évaluera le rendement de l'entreprise.",
+    "Les dépenses seront payées à même les budgets du Service du matériel roulant et des ateliers, au fur et à mesure des besoins."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 848 798,00 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 2140,
+    "sortie": 381
+   }
+  },
+  {
+   "id": "CM26 0784",
+   "numero": null,
+   "resolution": "CM26 0784",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Accorder un contrat à Axia Services, pour les services d'entretien ménager et de conciergerie des bâtiments de la station d'épuration des eaux usées Jean-R.-Marcotte, pour une période de 36 mois, incluant une option de prolongation de 24 mois - Dépense totale de 1 235 857,65 $, taxes incluses - Appel d'offres public 26-21432 (5 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=43",
+   "source": "resolution",
+   "puces": [
+    "La Ville confie à Axia Services l'entretien ménager et la conciergerie des bâtiments de la station d'épuration des eaux usées Jean-R.-Marcotte.",
+    "Le contrat couvre 36 mois, au prix de 1 123 506,96 $ taxes incluses.",
+    "Une somme additionnelle de 112 350,69 $ taxes incluses est réservée pour les variations de quantités, pour une dépense totale de 1 235 857,65 $.",
+    "Axia Services est le plus bas soumissionnaire conforme parmi les 5 soumissions reçues à l'appel d'offres public 26-21432.",
+    "Le rendement d'Axia Services sera évalué.",
+    "Le directeur de la Direction de l'épuration des eaux usées peut prolonger le contrat de 24 mois aux mêmes conditions, sans dépense supplémentaire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 235 857,65 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 2238,
+    "sortie": 394
+   }
+  },
+  {
+   "id": "CM26 0782",
+   "numero": null,
+   "resolution": "CM26 0782",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Exercer les deux options de prolongation de 12 mois chacune / Autoriser une dépense additionnelle de 4 118 128,81 $, taxes incluses, pour la fourniture de matériaux et de services de câblage en télécommunications dans le cadre du contrat accordé à TELECON inc. (CG23 0433), majorant ainsi le montant total du contrat à 8 401 077,92 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=42",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge de deux ans (deux options de 12 mois) son contrat avec TELECON inc. pour la fourniture de matériaux et de services de câblage en télécommunications.",
+    "Elle autorise une dépense additionnelle totale de 4 118 128,81 $, taxes incluses.",
+    "Cette somme se divise en 3 022 336,04 $ pour les matériaux et services, et 1 095 792,77 $ en budget de contingences (imprévus).",
+    "Avec cet ajout, la valeur totale du contrat passe à 8 401 077,92 $, taxes incluses.",
+    "La décision est présentée comme l'orientation du conseil municipal, à la séance ordinaire du lundi 24 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "4 118 128,81 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 2075,
+    "sortie": 345
+   }
+  },
+  {
+   "id": "CM26 0778",
+   "numero": null,
+   "resolution": "CM26 0778",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Accorder un contrat de gré à gré à Oracle Canada ULC, par l'entremise de son entente avec le ministère de la Cybersécurité et du Numérique (MCN), pour l'abonnement à la plateforme er infonuagique Oracle Cloud Infrastructure, pour la période du 1 novembre 2026 au 31 octobre 2027 - Dépense totale de 728 261,70 $, taxes incluses / Autoriser une dépense de 14 565,23 $, taxes incluses, à titre de frais de gestion, payables au MCN",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=40",
+   "source": "resolution",
+   "puces": [
+    "La Ville confie un contrat de gré à gré à Oracle Canada ULC pour l'abonnement à la plateforme infonuagique Oracle Cloud Infrastructure.",
+    "Le contrat passe par l'entente du ministère de la Cybersécurité et du Numérique (MCN), qui agit comme courtier en infonuagique pour les organismes publics.",
+    "L'abonnement couvre la période du 1er novembre 2026 au 31 octobre 2027, pour 728 261,70 $, taxes incluses.",
+    "La Ville paie en plus 14 565,23 $, taxes incluses, en frais de gestion au MCN.",
+    "Le directeur de la Direction infrastructures et opérations, au Service des technologies de l'information, est autorisé à signer les documents du contrat."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "728 261,70 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-07T18:51:42.137Z",
+   "jetons": {
+    "entree": 2263,
+    "sortie": 363
    }
   },
   {
