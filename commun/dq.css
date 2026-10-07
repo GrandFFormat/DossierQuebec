@@ -2066,3 +2066,32 @@
 .p404-liens a{display:block; border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow); padding:14px 16px; color:var(--ink); text-decoration:none; font-family:'Archivo',sans-serif; font-weight:900; font-size:17px; text-transform:uppercase;}
 .p404-liens a small{display:block; margin-top:5px; font-weight:500; font-size:13px; line-height:1.4; text-transform:none;}
 .p404-liens a:hover, .p404-liens a:focus-visible{background:var(--yellow); color:#131313;}
+
+/* FINANCES PUBLIQUES : le tableau de la bande bleue (renderFinances) et le bouton $ des fiches. */
+.finances-toolbar{grid-template-columns:minmax(0, 520px);}
+.fin-vide{border:3px dashed var(--card); padding:22px 24px; font-size:15px; line-height:1.5; color:var(--sur-fonce);}
+.fin-tete{margin:0 0 16px; font-family:'Archivo',sans-serif; font-size:22px; font-weight:900; text-transform:uppercase; letter-spacing:-0.01em; color:var(--sur-fonce);}
+.fin-tete b{font-weight:900;}
+.fin-grille{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:18px; align-items:start;}
+.fin-bloc{background:var(--card); color:var(--ink); border:3px solid var(--ink); box-shadow:var(--shadow); padding:18px 20px;}
+.fin-bloc h3{margin:0 0 10px; font-family:'Archivo',sans-serif; font-size:16px; font-weight:900; text-transform:uppercase; letter-spacing:0.01em; line-height:1.25; color:var(--ink);}
+.fin-tag{display:inline-block; margin-left:6px; padding:2px 7px; background:var(--yellow); color:#131313; border:2px solid #131313; font-size:10.5px; letter-spacing:0.05em; vertical-align:2px;}
+.fin-entite{margin:0 0 8px; font-size:13.5px; font-weight:700; color:var(--ink);}
+.fin-table{width:100%; border-collapse:collapse; font-size:14px;}
+.fin-table td{padding:6px 0; border-bottom:1px solid var(--line-soft, #E5E2DA); vertical-align:top; color:var(--ink);}
+.fin-table td:last-child{text-align:right; white-space:nowrap; padding-left:14px; font-variant-numeric:tabular-nums; font-weight:700;}
+.fin-table .fin-total td{font-weight:900; border-top:2px solid var(--ink); border-bottom:0;}
+.fin-table .fin-n1 td:first-child{padding-left:14px;}
+.fin-table .fin-n2 td:first-child{padding-left:28px; font-size:13px;}
+.fin-table .fin-n2 td:last-child{font-weight:500; font-size:13px;}
+.fin-table .fin-n0 td{font-weight:800;}
+.fin-petit{font-weight:500; font-size:12px;}
+.fin-note{margin:12px 0 0; font-size:12.5px; line-height:1.5; color:var(--ink);}
+.fin-note a{color:var(--ink); font-weight:800; text-decoration:underline; text-underline-offset:2px;}
+.fin-btn{flex:none; width:34px; height:34px; padding:0; border:2px solid var(--ink); background:var(--yellow); color:#131313; font-family:'Archivo',sans-serif; font-size:17px; font-weight:900; line-height:1; cursor:pointer;}
+.fin-btn:hover, .fin-btn:focus-visible{background:var(--ink); color:var(--card);}
+.m-top-row .fin-btn{margin-left:auto; margin-right:8px;}
+.dep-actions{display:flex; align-items:center; gap:8px;}
+.dep-row{grid-template-columns:1fr 280px 156px;}
+@media (max-width:760px){ .dep-row{grid-template-columns:1fr;} }
+#band-finances .section-head .sub{color:var(--sur-fonce); opacity:1;}

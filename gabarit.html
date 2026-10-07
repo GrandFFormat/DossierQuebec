@@ -468,21 +468,25 @@ function goToFederal(evt){
     <div class="grid" id="ministresGrid"></div>
     <!--PRERENDU:ministresGrid-->
 
-    <!-- Comparateur : bande BLEUE pleine largeur (maquette) — entre le Conseil
-         des ministres et le reste de l'Assemblée. Jamais un classement, une
-         présentation factuelle côte à côte. -->
-    <div class="band band-blue bleed" id="band-comparateur">
-    <div class="section-head" id="sec-comparateur">
+    <!-- FINANCES PUBLIQUES : bande BLEUE pleine largeur, à la place de l'ancien comparateur de
+         ministres (Martin, 6 oct. 2026 : « au lieu d'avoir un comparateur qui sert à rien, un tableau
+         où on sélectionne un député et toutes les finances publiques attachées à lui ou à sa
+         fonction »). On choisit une personne ; trois blocs : ce qu'elle gagne (barème), ce qui est
+         alloué à sa circonscription (barème), ce qu'elle a déclaré avoir dépensé (son rapport).
+         Données : data/finances.json (scrapers/finances.js), tout vient de l'Assemblée nationale.
+         JAMAIS un classement, jamais un total que l'Assemblée ne donne pas. Le bouton « $ » de
+         chaque fiche mène ici (voirFinances, commun/dq.js). -->
+    <div class="band band-blue bleed" id="band-finances">
+    <div class="section-head" id="sec-finances">
       <div>
-        <h2 data-i18n="h.comparateur">Comparateur</h2>
-        <div class="sub" data-i18n="comp.sub">Deux ministres, les mêmes faits, côte à côte — jamais un classement</div>
+        <h2 data-i18n="h.finances">Finances publiques</h2>
+        <div class="sub" data-i18n="fin.sub">Choisissez une personne : ce qu'elle gagne, ce qui lui est alloué, ce qu'elle a déclaré avoir dépensé — jamais un classement</div>
       </div>
     </div>
-    <div class="toolbar comparateur-toolbar">
-      <select id="compareA" onchange="renderComparateurTable()"></select>
-      <select id="compareB" onchange="renderComparateurTable()"></select>
+    <div class="toolbar comparateur-toolbar finances-toolbar">
+      <select id="financesSelect" aria-label="Choisir un·e député·e" onchange="renderFinances()"></select>
     </div>
-    <div id="comparateurTable"></div>
+    <div id="financesTable"></div>
     </div>
 
     <div class="section-head min-group-head" id="deputesTitle">
