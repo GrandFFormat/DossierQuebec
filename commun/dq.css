@@ -2110,3 +2110,4 @@
 .tri-vote-btn:hover, .tri-vote-btn:focus-visible{background:var(--yellow); color:#131313;}
 .tri-vote-btn.on{background:var(--yellow); color:#131313;}
 #combinedTitle{display:flex; align-items:center; flex-wrap:wrap; gap:14px;}
+#ministresTitle, #combinedTitle{scroll-margin-top:90px;}
