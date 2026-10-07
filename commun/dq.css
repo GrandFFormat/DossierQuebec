@@ -2111,3 +2111,4 @@
 .tri-vote-btn.on{background:var(--yellow); color:#131313;}
 #combinedTitle{display:flex; align-items:center; flex-wrap:wrap; gap:14px;}
 #ministresTitle, #combinedTitle{scroll-margin-top:90px;}
+.tri-vote-avis{flex:1 1 100%; border-left:6px solid var(--yellow); background:var(--card); padding:10px 14px; font-family:'Archivo',sans-serif; font-size:14px; font-weight:500; line-height:1.5; text-transform:none; letter-spacing:0; color:var(--ink);}
