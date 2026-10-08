@@ -2,7 +2,7 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 6655dcd — Node v22.23.3
+Code : commit a776bdd — Node v22.23.3
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -13,42 +13,42 @@ https://donnees.montreal.ca/robots.txt : règles sur nos chemins : disallow /dat
 https://montreal.ca/robots.txt : rien qui concerne nos chemins
 
 === Calendrier des séances ===
-Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-10-06T23:30:55.827261)
+Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-10-07T23:30:54.581358)
 Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_video_seance
 71 séance(s) de 2026 lue(s) dans le calendrier.
 
 71 séance(s) de 2026 dans data/seances.json (0 de plus qu'avant) — CE : 36, CG : 13, CM : 22
 
 === Calendrier des séances d'arrondissement ===
-130 séance(s) de 2026 déjà connue(s).
+145 séance(s) de 2026 déjà connue(s).
     Ahuntsic-Cartierville : 26 document(s) sur sa page, 0 daté(s) aujourd'hui, 9 date(s) de séance connues.
     Ahuntsic-Cartierville : 8 ordre(s) du jour repris de sa page, sommaires compris.
-  Ahuntsic-Cartierville                       8 séance(s), 1 nouvelle(s)  (103 requêtes)
-    Anjou : 28 document(s) sur sa page, 3 daté(s) aujourd'hui, 11 date(s) de séance connues.
+  Ahuntsic-Cartierville                       8 séance(s)  (83 requêtes)
+    Anjou : 28 document(s) sur sa page, 0 daté(s) aujourd'hui, 11 date(s) de séance connues.
     Anjou : 9 ordre(s) du jour repris de sa page, sommaires compris.
-  Anjou                                       9 séance(s), 1 nouvelle(s)  (54 requêtes)
-  Côte-des-Neiges–Notre-Dame-de-Grâce         7 séance(s), 1 nouvelle(s)  (289 requêtes)
-  Lachine                                     8 séance(s), 1 nouvelle(s)  (89 requêtes)
-  LaSalle                                     9 séance(s), 1 nouvelle(s)  (60 requêtes)
-  L'Île-Bizard–Sainte-Geneviève               8 séance(s), 1 nouvelle(s)  (90 requêtes)
-  Mercier–Hochelaga-Maisonneuve               5 séance(s)  (194 requêtes)
-  Montréal-Nord                               6 séance(s), 1 nouvelle(s)  (185 requêtes)
-  Outremont                                   8 séance(s), 1 nouvelle(s)  (90 requêtes)
-    Pierrefonds-Roxboro : 28 document(s) sur sa page, 3 daté(s) aujourd'hui, 11 date(s) de séance connues.
+  Anjou                                       9 séance(s)  (43 requêtes)
+  Côte-des-Neiges–Notre-Dame-de-Grâce         7 séance(s)  (248 requêtes)
+  Lachine                                     8 séance(s)  (82 requêtes)
+  LaSalle                                     9 séance(s)  (41 requêtes)
+  L'Île-Bizard–Sainte-Geneviève               8 séance(s)  (82 requêtes)
+  Mercier–Hochelaga-Maisonneuve               5 séance(s)  (195 requêtes)
+  Montréal-Nord                               6 séance(s)  (166 requêtes)
+  Outremont                                   8 séance(s)  (82 requêtes)
+    Pierrefonds-Roxboro : 28 document(s) sur sa page, 0 daté(s) aujourd'hui, 11 date(s) de séance connues.
     Pierrefonds-Roxboro : 9 ordre(s) du jour repris de sa page, sommaires compris.
-  Pierrefonds-Roxboro                         9 séance(s), 1 nouvelle(s)  (66 requêtes)
-    Le Plateau-Mont-Royal : 18 document(s) sur la page, 2 daté(s) aujourd'hui, 9 séance(s) en 2026.
-  Le Plateau-Mont-Royal                       9 séance(s)  (3 requêtes)
-  Rivière-des-Prairies–Pointe-aux-Trembles    8 séance(s), 1 nouvelle(s)  (89 requêtes)
-  Rosemont–La Petite-Patrie                   8 séance(s), 1 nouvelle(s)  (89 requêtes)
-  Saint-Laurent                               8 séance(s), 1 nouvelle(s)  (93 requêtes)
-  Saint-Léonard                               7 séance(s), 1 nouvelle(s)  (143 requêtes)
-  Le Sud-Ouest                                6 séance(s)  (152 requêtes)
-  Verdun                                      7 séance(s), 1 nouvelle(s)  (132 requêtes)
-  Ville-Marie                                 7 séance(s)  (110 requêtes)
-  Villeray–Saint-Michel–Parc-Extension        8 séance(s), 1 nouvelle(s)  (89 requêtes)
+  Pierrefonds-Roxboro                         9 séance(s)  (43 requêtes)
+    Le Plateau-Mont-Royal : 18 document(s) sur la page, 0 daté(s) aujourd'hui, 9 séance(s) en 2026.
+  Le Plateau-Mont-Royal                       9 séance(s)  (1 requêtes)
+  Rivière-des-Prairies–Pointe-aux-Trembles    8 séance(s)  (82 requêtes)
+  Rosemont–La Petite-Patrie                   8 séance(s)  (82 requêtes)
+  Saint-Laurent                               8 séance(s)  (84 requêtes)
+  Saint-Léonard                               7 séance(s)  (124 requêtes)
+  Le Sud-Ouest                                6 séance(s)  (153 requêtes)
+  Verdun                                      7 séance(s)  (124 requêtes)
+  Ville-Marie                                 7 séance(s)  (111 requêtes)
+  Villeray–Saint-Michel–Parc-Extension        8 séance(s)  (82 requêtes)
 
-145 séance(s) d'arrondissement pour 2026, en 2120 requête(s).
+145 séance(s) d'arrondissement pour 2026, en 1908 requête(s).
 
 === Décisions de l'année ===
 145 séance(s) d'arrondissement au calendrier.
@@ -68,20 +68,15 @@ CM_2026-01-27_09h00 : procès-verbal non publié — pas un PDF — page « 404 
 CA_Ver_2026-04-07_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Out_2026-06-02_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Out_2026-07-07_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Anj_2026-09-01_19h00 : 14 pages, 21 résolutions, 67 points à l'ordre du jour, 18 liens vers un sommaire, 18 sommaires annexés à l'ordre du jour
 CA_Ibs_2026-09-01_19h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Lac_2026-09-01_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Lac_2026-09-01_19h00 : 17 pages, 30 résolutions, 31 points à l'ordre du jour, 23 liens vers un sommaire, 23 sommaires annexés à l'ordre du jour
 CA_Out_2026-09-01_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Rdp_2026-09-01_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Slt_2026-09-01_19h30 : 21 pages, 27 résolutions, 27 points à l'ordre du jour, 0 liens vers un sommaire
-CA_Ver_2026-09-01_19h00 : 13 pages, 20 résolutions, 26 points à l'ordre du jour, 15 liens vers un sommaire, 15 sommaires annexés à l'ordre du jour
+CA_Rdp_2026-09-01_19h00 : 18 pages, 28 résolutions, 31 points à l'ordre du jour, 21 liens vers un sommaire, 21 sommaires annexés à l'ordre du jour
 CA_Vma_2026-09-01_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Vsm_2026-09-01_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Pmr_2026-09-08_18h30 : 26 pages, 36 résolutions, 37 points à l'ordre du jour, 29 liens vers un sommaire, 29 sommaires annexés à l'ordre du jour
+CA_Vsm_2026-09-01_18h30 : 18 pages, 30 résolutions, 195 points à l'ordre du jour, 17 liens vers un sommaire, 19 sommaires annexés à l'ordre du jour
 CA_Rpp_2026-09-08_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Ahu_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Las_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Pir_2026-09-14_19h00 : 17 pages, 19 résolutions, 19 points à l'ordre du jour, 16 liens vers un sommaire, 14 sommaires annexés à l'ordre du jour
 CA_Ahu_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Anj_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Cdn_2026-10-06_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -99,68 +94,68 @@ CA_Slt_2026-10-06_19h30 : procès-verbal non publié — pas un PDF — page « 
 CA_Ver_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Vsm_2026-10-06_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 
-6601 décisions écrites dans data/decisions.json — 5 séance(s) lue(s) cette fois, 41 en attente de procès-verbal.
-133 nouveauté(s) depuis la dernière exécution.
+6694 décisions écrites dans data/decisions.json — 3 séance(s) lue(s) cette fois, 38 en attente de procès-verbal.
+93 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
-   1141  Procédure
-    861  Urbanisme
-    825  Transport
-    540  Environnement
-    440  Administration
-    434  Contrats
-    345  Loisirs et communauté
-    288  Culture et patrimoine
-    273  Subventions
-    228  Immobilier
+   1166  Procédure
+    875  Urbanisme
+    834  Transport
+    545  Environnement
+    446  Administration
+    435  Contrats
+    353  Loisirs et communauté
+    291  Culture et patrimoine
+    279  Subventions
+    230  Immobilier
+    216  Motions et hommages
     216  Travaux et infrastructures
-    212  Finances
-    211  Développement économique
-    209  Motions et hommages
-    167  Logement et social
+    215  Finances
+    214  Développement économique
+    168  Logement et social
     114  Sécurité publique
      97  Ressources humaines
-    218  (classées par défaut — aucune règle n'a tranché)
+    220  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes enregistrés (depuis 2026-08-08) ===
-Fenêtre depuis 2026-08-08 : 4 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
+=== Votes enregistrés (depuis 2026-08-09) ===
+Fenêtre depuis 2026-08-09 : 4 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
 
 15 votes enregistrés écrits dans data/votes.json (4 procès-verbaux analysés).
 2 portent un avertissement d'extraction (à vérifier à la main).
 
 === Lexique, mesuré sur les procès-verbaux ===
-Mesure de 33 termes sur 157 procès-verbaux de 2026 en cache et 6601 décisions…
+Mesure de 33 termes sur 160 procès-verbaux de 2026 en cache et 6694 décisions…
 
-    91 PV    3284 résolutions   Résolution
-    66 PV     415 résolutions   Sommaire décisionnel
-   157 PV    5473 résolutions   Dossier décisionnel
-   157 PV     399 résolutions   Procès-verbal
-   157 PV     683 résolutions   Ordre du jour
+    93 PV    3315 résolutions   Résolution
+    67 PV     416 résolutions   Sommaire décisionnel
+   160 PV    5534 résolutions   Dossier décisionnel
+   160 PV     409 résolutions   Procès-verbal
+   160 PV     693 résolutions   Ordre du jour
    126 PV     460 résolutions   Avis de motion
-    71 PV     198 résolutions   Règlement
-    93 PV    1220 résolutions   Conseil municipal
-    68 PV    1370 résolutions   Comité exécutif
-   138 PV    2102 résolutions   Conseil d'arrondissement
-    74 PV      77 résolutions   Conseiller d'arrondissement
+    72 PV     201 résolutions   Règlement
+    95 PV    1223 résolutions   Conseil municipal
+    69 PV    1372 résolutions   Comité exécutif
+   141 PV    2156 résolutions   Conseil d'arrondissement
+    76 PV      77 résolutions   Conseiller d'arrondissement
     48 PV     151 résolutions   Greffier
     24 PV     159 résolutions   Présidence du conseil
     51 PV    1215 résolutions   Conseil d'agglomération
     22 PV      30 résolutions   Ville liée
      9 PV      12 résolutions   Compétence d'agglomération
     18 PV     105 résolutions   Vote enregistré
-   128 PV    5038 résolutions   Adoptée à l'unanimité
-    21 PV      34 résolutions   Adoptée à la majorité des voix
+   129 PV    5068 résolutions   Adoptée à l'unanimité
+    22 PV      35 résolutions   Adoptée à la majorité des voix
      7 PV       8 résolutions   Dissidence
-    94 PV     213 résolutions   Prise d’acte
+    96 PV     221 résolutions   Prise d’acte
     46 PV      82 résolutions   Mairesse suppléante
-    71 PV     126 résolutions   Dérogation mineure
-    52 PV      92 résolutions   Projet particulier
+    73 PV     129 résolutions   Dérogation mineure
+    55 PV      97 résolutions   Projet particulier
      5 PV       5 résolutions   Article 89
-    82 PV     259 résolutions   Zonage
+    85 PV     269 résolutions   Zonage
     61 PV     336 résolutions   Accorder un contrat
-   136 PV     779 résolutions   Appel d'offres
-    48 PV     160 résolutions   Gré à gré
-   129 PV     603 résolutions   Contribution financière
+   138 PV     781 résolutions   Appel d'offres
+    49 PV     162 résolutions   Gré à gré
+   132 PV     613 résolutions   Contribution financière
     43 PV      68 résolutions   Programme décennal d'immobilisations
     40 PV      85 résolutions   Règlement d'emprunt
      9 PV      13 résolutions   Expropriation
@@ -168,44 +163,50 @@ Mesure de 33 termes sur 157 procès-verbaux de 2026 en cache et 6601 décisions�
 33 entrées écrites dans data/lexique.json
 
 === Récapitulatifs des sujets suivables ===
-Récapitulatifs des sujets : namur-hippodrome (12 dossiers), eau-egouts (87 dossiers), securite-publique (54 dossiers), logement (24 dossiers), parcs (28 dossiers), deneigement (25 dossiers), pietonnisation (22 dossiers)
-  namur-hippodrome         4 étape(s), 3 à surveiller · retirés : 0 mécanique, 1 contre-lecture
-  eau-egouts               3 étape(s), 5 à surveiller · retirés : 0 mécanique, 3 contre-lecture
-  securite-publique        3 étape(s), 5 à surveiller · retirés : 0 mécanique, 3 contre-lecture
-  logement                 4 étape(s), 3 à surveiller · retirés : 0 mécanique, 3 contre-lecture
-  parcs                    4 étape(s), 6 à surveiller · retirés : 0 mécanique, 2 contre-lecture
-  deneigement              5 étape(s), 3 à surveiller · retirés : 0 mécanique, 2 contre-lecture
-  pietonnisation           4 étape(s), 4 à surveiller · retirés : 0 mécanique, 3 contre-lecture
-  coût ≈ 3.79 $ US
+Récapitulatifs des sujets : parcs (30 dossiers), transport-collectif (40 dossiers), itinerance (31 dossiers), pietonnisation (22 dossiers)
+  parcs                    2 étape(s), 5 à surveiller · retirés : 0 mécanique, 5 contre-lecture
+  transport-collectif      4 étape(s), 5 à surveiller · retirés : 0 mécanique, 3 contre-lecture
+  itinerance               5 étape(s), 3 à surveiller · retirés : 0 mécanique, 1 contre-lecture
+  pietonnisation           5 étape(s), 5 à surveiller · retirés : 0 mécanique, 1 contre-lecture
+  coût ≈ 1.90 $ US
 
 === Sujets suivables et dossiers, pour Mes dossiers ===
-Projets publics : 16 sujets · index 17.4 Ko · fichiers de sujet 801 Ko au total.
-Décisions récentes : 601 dossiers depuis le 2026-07-31 · 945 Ko.
-Dossiers de l'année : 5113 · 2989 Ko · organismes suggérés : 511.
+Projets publics : 16 sujets · index 17.8 Ko · fichiers de sujet 809 Ko au total.
+Décisions récentes : 689 dossiers depuis le 2026-07-31 · 1073 Ko.
+Dossiers de l'année : 5197 · 3039 Ko · organismes suggérés : 511.
 
 === Sujets suivables en anglais ===
 Sujets en anglais : 0 déjà traduits, 16 à faire — ~0.26 $ US estimés.
-Sujets en anglais : 14 traduits (2 refusés), 14 au total — 0.30 $ US.
+Sujets en anglais : 14 traduits (2 refusés), 14 au total — 0.29 $ US.
   ⚠ deneigement : nombres différents : 200000,2025,2025,2026,2026,2026,2610086,26130121 ≠ 200000,2025,2026,2026,20262025,2610086,26130121
-  ⚠ pietonnisation : 1830 étapes au lieu de 4
+  ⚠ transport-collectif : nombres différents : 10,115000,2026,2026,24,257425,31,3643,495150 ≠ 10,115000,2026,2026,257425,31,3643,495150
 
 === Lexique en anglais ===
 Lexique anglais : à jour.
 
 === Traductions anglaises ===
-Résumés : 3753 déjà traduits, 233 à faire, 233 cette fois.
-Titres  : 6078 déjà traduits, 143 à faire, 143 cette fois en 8 paquet(s).
-Étiquettes : 1121 déjà traduites, 41 à faire en 2 paquet(s).
-~0.70 $ US estimés (lot, moitié prix).
-Lot msgbatch_019aM1VUsb4DpNQWY1dXrEzY envoyé (233 résumés, 8 paquets de titres, 2 paquets d'étiquettes).
-  in_progress — 0 réussis, 243 en cours, 0 en erreur
-  in_progress — 0 réussis, 243 en cours, 0 en erreur
-  in_progress — 0 réussis, 243 en cours, 0 en erreur
-  in_progress — 0 réussis, 243 en cours, 0 en erreur
-  in_progress — 0 réussis, 243 en cours, 0 en erreur
-  in_progress — 0 réussis, 243 en cours, 0 en erreur
-  in_progress — 0 réussis, 243 en cours, 0 en erreur
-  ended — 243 réussis, 0 en cours, 0 en erreur
+Résumés : 3753 déjà traduits, 322 à faire, 322 cette fois.
+Titres  : 6078 déjà traduits, 229 à faire, 229 cette fois en 12 paquet(s).
+Étiquettes : 1121 déjà traduites, 43 à faire en 2 paquet(s).
+~0.94 $ US estimés (lot, moitié prix).
+Lot msgbatch_01YQcidRj5JxCwwLVKveDqMM envoyé (322 résumés, 12 paquets de titres, 2 paquets d'étiquettes).
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  in_progress — 0 réussis, 336 en cours, 0 en erreur
+  ended — 336 réussis, 0 en cours, 0 en erreur
 file:///home/runner/work/DossierQuebec/DossierQuebec/montreal/scrapers/traductions.js:175
   const puces = (sortie?.puces ?? []).map(decoder).map((p) => String(p).trim());
                                       ^
@@ -221,234 +222,20 @@ Node.js v22.23.3
 ⚠ « Traductions anglaises » a échoué (code 1) — on garde les données précédentes, ça attendra.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-08-08 pas encore résumés (plafond : 120)…
-8111 déjà résumés, 120 à faire.
+Sommaires depuis 2026-08-09 pas encore résumés (plafond : 120)…
+8231 déjà résumés, 120 à faire.
 
 --- Estimation ---
 Documents à résumer  : 120
 Modèle               : claude-opus-5
-Ratio mesuré         : 1.17 caractères/jeton (sur 12 documents)
-Jetons d'entrée      : ~574 369
+Ratio mesuré         : 1.55 caractères/jeton (sur 12 documents)
+Jetons d'entrée      : ~400 854
 Jetons de sortie     : ~38 400
-Coût estimé          : ~3.83 $ US (1.92 $ via l'API Batches)
+Coût estimé          : ~2.96 $ US (1.48 $ via l'API Batches)
 
 Génération…
 Envoi à l'API Batches (50 % du tarif, résultats en moins d'une heure en général)…
-Lot msgbatch_01JmJ33bwcAyn5dJeugiPRCq — statut in_progress
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
-  in_progress — 0 réussis, 120 en cours, 0 en erreur
+Lot msgbatch_01W9KXK7atL7HDojYdHxDe8N — statut in_progress
   in_progress — 0 réussis, 120 en cours, 0 en erreur
   in_progress — 0 réussis, 120 en cours, 0 en erreur
   in_progress — 0 réussis, 120 en cours, 0 en erreur
@@ -481,18 +268,16 @@ Lot msgbatch_01JmJ33bwcAyn5dJeugiPRCq — statut in_progress
   in_progress — 0 réussis, 120 en cours, 0 en erreur
   ended — 120 réussis, 0 en cours, 0 en erreur
 
-120 résumés générés, 8231 au total dans data/resumes.json
-Coût réel : 1.83 $ US
+120 résumés générés, 8351 au total dans data/resumes.json
+Coût réel : 1.78 $ US
 
 === Décisions récentes dans la page (Google) ===
-montreal : 30 décisions écrites dans la page des décisions.
+montreal : 30 décisions écrites dans la page des décisions (inchangé).
 
 === Courriels de Montréal publiés ===
---seance=2026-09-01 --instance=anjou → Publié : anjou-2026-09-01. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
---seance=2026-09-01 --instance=saint-laurent → Publié : saint-laurent-2026-09-01. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
---seance=2026-09-01 --instance=verdun → Publié : verdun-2026-09-01. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
---seance=2026-09-08 --instance=plateau-mont-royal → Publié : plateau-mont-royal-2026-09-08. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
---seance=2026-09-14 --instance=pierrefonds-roxboro → Publié : pierrefonds-roxboro-2026-09-14. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
+--seance=2026-09-01 --instance=lachine → Publié : lachine-2026-09-01. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
+--seance=2026-09-01 --instance=riviere-des-prairies-pointe-aux-trembles → Publié : riviere-des-prairies-pointe-aux-trembles-2026-09-01. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
+--seance=2026-09-01 --instance=villeray-saint-michel-parc-extension → Publié : villeray-saint-michel-parc-extension-2026-09-01. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
 --mois=2026-09 → Déjà publié : 2026-09. Rien à faire.
 
 === Bilan ===
