@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-05T17:16:15.322Z",
+ "generatedAt": "2026-10-08T15:45:56.338Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,472 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-08-06",
+  "depuis": "2026-08-09",
   "plafond": 120
  },
- "nombre": 1624,
- "genereCetteFois": 5,
+ "nombre": 1642,
+ "genereCetteFois": 18,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.2184,
-  "jetonsEntree": 32272,
-  "jetonsSortie": 2280
+  "montant": 0.7304,
+  "jetonsEntree": 103960,
+  "jetonsSortie": 8424
  },
  "resumes": [
+  {
+   "id": "AP2026-348.pdf",
+   "numero": "AP2026-348",
+   "date": "2026-10-07",
+   "unite": "Approvisionnements",
+   "objet": "Dépôt des listes des contrats octroyés, des dépenses autorisées et d'autres pouvoirs exercés par un employé pour le mois d'août 2026",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-348.pdf",
+   "puces": [
+    "Le conseil de ville prend acte des listes de contrats et de dépenses autorisés par des employés de la Ville pour le mois d'août 2026.",
+    "En août 2026, la Ville a accordé 104 contrats de plus de 25 000 $, pour un total de 83 124 769,37 $.",
+    "Des employés détenant une délégation ont autorisé des dépenses totalisant 18 773 725,07 $ pendant le même mois.",
+    "Les listes déposées couvrent aussi les contrats résiliés, les appels d'offres annulés après l'ouverture des soumissions et les dépenses supplémentaires par avis de modification.",
+    "Les montants inscrits excluent les taxes; pour les ententes, ils sont estimatifs et les fonds sont versés selon les besoins.",
+    "La liste des contrats de 25 000 $ et plus en bons de commande et ententes est publiée sur le site Internet de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "83 124 769,37 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:22.704Z",
+   "jetons": {
+    "entree": 8535,
+    "sortie": 551
+   }
+  },
+  {
+   "id": "AP2026-324.pdf",
+   "numero": "AP2026-324",
+   "date": "2026-10-07",
+   "unite": "Approvisionnements",
+   "objet": "Avis de modification numéro 2 relatif au contrat de services professionnels - Surveillance de la reconstruction de l'écocentre Val-Bélair (POA220188) (Appel d'offres public 94445)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-324.pdf",
+   "puces": [
+    "La Ville ajoute 11 000 $ (avant taxes) au contrat de surveillance des travaux de l'écocentre Val-Bélair, dans l'arrondissement de La Haute-Saint-Charles.",
+    "Le contrat est confié à la firme Les Consultants Gen+ inc., de Lévis.",
+    "Avec cet ajout, le contrat passe de 233 440 $ à 244 440 $ (avant taxes), alors qu'il était de 148 090 $ au départ en février 2026.",
+    "La raison invoquée : des travaux et des correctifs ont été ajoutés aux plans et devis, ce qui exige plus de surveillance sur le chantier.",
+    "La dépense nette pour la Ville est de 11 548,63 $, payée à même un règlement d'emprunt lié à la gestion des matières résiduelles.",
+    "Le comité exécutif a adopté la décision le 7 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "11 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:18.877Z",
+   "jetons": {
+    "entree": 4140,
+    "sortie": 406
+   }
+  },
+  {
+   "id": "AP2026-351.pdf",
+   "numero": "AP2026-351",
+   "date": "2026-10-07",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication de contrats pour la fourniture de chlorure de sodium (sel de déglaçage) - Lots 1 et 3 à 7 (Appel d'offres public 95907)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-351.pdf",
+   "puces": [
+    "La Ville de Québec achète du sel de déglaçage auprès de Sel Windsor ltée (Pointe-Claire) pour épandre dans les rues, pendant un an à partir de l'adjudication.",
+    "Le contrat couvre six secteurs : La Cité-Limoilou (Marie-de-l'Incarnation), Les Rivières, Sainte-Foy–Sillery–Cap-Rouge, Charlesbourg, Beauport et La Haute-Saint-Charles.",
+    "Montants estimés par lot (avant taxes) : 357 665 $, 327 008 $, 510 950 $, 547 172 $, 433 608 $ et 449 636 $.",
+    "La dépense nette totale est estimée à 2 757 012,70 $, soit 1 102 805,08 $ en 2026 et 1 654 207,62 $ en 2027.",
+    "La portion de 2027 dépend de l'approbation du budget de l'an prochain.",
+    "Sel Windsor a déposé la plus basse soumission conforme dans chacun des six lots, devant Sel Frigon inc. et Selto Distribution inc.",
+    "L'appel d'offres était partagé avec Lévis, qui gère elle-même ses trois lots; le lot de la Canardière a été adjugé à part."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 757 012,70 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:21.961Z",
+   "jetons": {
+    "entree": 6007,
+    "sortie": 531
+   }
+  },
+  {
+   "id": "SO2026-003.pdf",
+   "numero": "SO2026-003",
+   "date": "2026-10-07",
+   "unite": "S.O.M.H.A.C.",
+   "objet": "Renouvellement des mandats de deux administratrices au sein du conseil d'administration de la Société municipale d'habitation Champlain",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/SO2026-003.pdf",
+   "puces": [
+    "La Ville renouvelle pour deux ans les mandats d'Hélène Gauthier et de Chantal Gilbert au conseil d'administration de la Société municipale d'habitation Champlain.",
+    "Leurs mandats actuels se terminent le 6 novembre 2026; elles resteront en poste jusqu'à la nomination d'un remplaçant si nécessaire.",
+    "Elles y siègent comme représentantes de la Ville de Québec.",
+    "La SOMHAC loue des logements à des prix légèrement sous ceux du marché aux gens de Québec et peut accorder des subventions au logement selon ses moyens.",
+    "Son administration est confiée à l'Office municipal d'habitation de Québec; les nominations relèvent du conseil d'agglomération."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:17.643Z",
+   "jetons": {
+    "entree": 2639,
+    "sortie": 349
+   }
+  },
+  {
+   "id": "RH2026-765.pdf",
+   "numero": "RH2026-765",
+   "date": "2026-10-07",
+   "unite": "Ressources humaines",
+   "objet": "Création d'un poste temporaire de directeur de projet, classe 3, à la Division de la foresterie urbaine et de l'horticulture de la direction de l'Arrondissement de Charlesbourg, responsable de la prévention et de la qualité du milieu et affectation de monsieur François Légaré (17497)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/RH2026-765.pdf",
+   "puces": [
+    "La Ville crée un poste temporaire de directeur de projet (classe 3) à la Division de la foresterie urbaine et de l'horticulture de l'Arrondissement de Charlesbourg.",
+    "Elle y affecte François Légaré, employé permanent, jusqu'à son départ à la retraite.",
+    "L'affectation s'applique de façon rétroactive au 28 août 2026.",
+    "Son salaire reste le même; il occupait jusque-là le poste de directeur de section - foresterie.",
+    "Les fonds, incluant les avantages sociaux, sont déjà prévus au budget de la foresterie urbaine et de l'horticulture."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:27.558Z",
+   "jetons": {
+    "entree": 2994,
+    "sortie": 308
+   }
+  },
+  {
+   "id": "AP2026-340.pdf",
+   "numero": "AP2026-340",
+   "date": "2026-10-07",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat pour l'acquisition de fourgonnettes utilitaires (Appel d'offres public 96341)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-340.pdf",
+   "puces": [
+    "La Ville achète quatre fourgonnettes utilitaires pour remplacer des véhicules en fin de vie utile du Service des travaux publics.",
+    "Le contrat va à 9552-5663 Québec inc. (Mercedes-Benz de Québec), rue Bouvier, pour 365 812,52 $ avant taxes.",
+    "Une seule entreprise a déposé une soumission; l'autre fournisseur ayant pris les documents n'a pas expliqué son abstention.",
+    "Le contrat prévoit une option pour quatre fourgonnettes de plus au même prix, qui sera exercée seulement si le budget le permet.",
+    "La soumission se situe 8,6 % sous l'estimation du service demandeur, qui était de 800 000 $ avant taxes (option incluse).",
+    "La dépense nette atteint 384 057,32 $, financée par deux règlements d'emprunt d'agglomération (288 042,99 $ et 96 014,33 $)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "365 812,52 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:29.459Z",
+   "jetons": {
+    "entree": 3692,
+    "sortie": 422
+   }
+  },
+  {
+   "id": "CU2026-074.pdf",
+   "numero": "CU2026-074",
+   "date": "2026-10-07",
+   "unite": "Culture et patrimoine",
+   "objet": "Versement de subventions totalisant une somme maximale de 375 000 $ à plusieurs organismes culturels dans le cadre de l'appel Projets numériques de l'Entente de développement culturel",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-074.pdf",
+   "puces": [
+    "La Ville verse 375 000 $ en subventions à 6 organismes culturels de Québec pour des projets qui utilisent le numérique.",
+    "Les sommes vont à Interférences, arts et technologies (75 000 $), Productions Recto-Verso (75 000 $), Productions Rhizome (75 000 $), Théâtre Rude Ingénierie (64 000 $), Centre de valorisation du patrimoine vivant (50 000 $) et Musée ambulant (36 000 $ en deux versements).",
+    "Les projets touchent entre autres la danse contemporaine archivée en numérique, le conte en projections immersives, la réalité virtuelle présentée dans trois lieux extérieurs et le volet numérique de la Biennale Extra!.",
+    "Le projet de Théâtre Rude Ingénierie se déroule dans le quartier Saint-Roch; celui du Musée ambulant se fait avec des jeunes adultes en partenariat avec Le Piolet.",
+    "L'argent provient de l'Entente de développement culturel entre la Ville et le ministère de la Culture et des Communications : 125 000 $ d'un règlement d'emprunt (2024) et 250 000 $ de transferts (2025 et 2026).",
+    "Un comité formé de gens du milieu et d'employés de la Ville a évalué les demandes avant de recommander ces projets."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "375 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:31.723Z",
+   "jetons": {
+    "entree": 7298,
+    "sortie": 556
+   }
+  },
+  {
+   "id": "DE2026-355.pdf",
+   "numero": "DE2026-355",
+   "date": "2026-10-07",
+   "unite": "Développement économique et grands projets",
+   "objet": "Entente entre la Ville de Québec et le Laboratoire sur l'agriculture urbaine, relative au versement d'une subvention maximale de 176 027 $, dans le cadre du volet Développement et mise en valeur du système alimentaire de l'agglomération de Québec de la Vision entrepreneuriale Québec 2030, pour réali",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-355.pdf",
+   "puces": [
+    "La Ville de Québec versera une subvention d'au plus 176 027 $ au Laboratoire sur l'agriculture urbaine, un organisme à but non lucratif créé en 2014.",
+    "L'argent servira au projet « QuébeCulteurs 2026-2027 », qui accompagne des entreprises agricoles urbaines sur le territoire de l'agglomération de Québec.",
+    "Le projet coûte 234 633 $ en tout : l'organisme ajoute 30 858 $ de revenus autonomes et 27 748 $ de revenus privés.",
+    "Au programme : accompagnement par un technicien agricole et un agronome, formations, guichet unique d'information, incubateur de fermes urbaines avec parcelles maraîchères, kiosques et espaces de vente.",
+    "L'organisme vise à faire passer le nombre de fermes urbaines de 23 à 30 d'ici la fin du projet, et cible 50 % de femmes entrepreneures et 50 % de personnes issues de l'immigration parmi les participants.",
+    "Le projet prévoit la création de 2 emplois; le siège social se trouve dans l'arrondissement de La Cité-Limoilou.",
+    "Les fonds proviennent du Fonds de la région de la Capitale-Nationale, délégué à la Ville par le gouvernement du Québec."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "176 027 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:28.821Z",
+   "jetons": {
+    "entree": 7540,
+    "sortie": 545
+   }
+  },
+  {
+   "id": "DE2026-382.pdf",
+   "numero": "DE2026-382",
+   "date": "2026-10-07",
+   "unite": "Développement économique et grands projets",
+   "objet": "Contrat de prêt du Programme d'aide d'urgence aux petites et moyennes entreprises - Tarifs douaniers américains, entre le ministre de l'Économie, de l'Innovation et de l'Énergie et la Ville de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-382.pdf",
+   "puces": [
+    "La Ville de Québec signe un contrat de prêt avec le ministre de l'Économie, de l'Innovation et de l'Énergie pour aider les PME touchées par les tarifs douaniers américains.",
+    "Un premier montant de 8 000 000 $ est disponible tout de suite; la Ville évalue le total à environ 20 000 000 $, pris dans le Fonds local d'investissement.",
+    "Le programme s'applique rétroactivement au 22 août 2026.",
+    "Sont visées les entreprises avec un chiffre d'affaires de 200 000 $ à 2 000 000 $ dont au moins 25 % des revenus viennent d'exportations vers les États-Unis.",
+    "L'aide prend la forme d'un prêt d'au plus 150 000 $, couvrant 75 % des besoins en fonds de roulement sur 12 mois.",
+    "Taux d'intérêt de 0 % pendant les 12 mois suivant le premier versement, puis 3,86 %, avec moratoire sur le capital durant ces 12 mois et amortissement sur 60 mois maximum.",
+    "La Ville remboursera le gouvernement à partir de 2028, avec un versement final prévu le 30 juin 2035."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "8 000 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:37.762Z",
+   "jetons": {
+    "entree": 7523,
+    "sortie": 508
+   }
+  },
+  {
+   "id": "TM2026-227.pdf",
+   "numero": "TM2026-227",
+   "date": "2026-10-07",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Validation des dépenses et des travaux réalisés en 2024 et 2025 pour trois (3) projets de cheminement scolaire subventionnés dans le cadre du Programme d'aide financière au développement des transports actifs dans les périmètres urbains (TAPU) du ministère des Transports et de la Mobilité durable du",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-227.pdf",
+   "puces": [
+    "La Ville a terminé en 2024 et 2025 la sécurisation des parcours scolaires de trois écoles : de la Myriade, Stadacona et Marie-Renouard.",
+    "Les travaux ont coûté 1 636 418 $ au total : 799 041,25 $ pour l'école de la Myriade, 745 026,73 $ pour Stadacona et 92 349,66 $ pour Marie-Renouard.",
+    "Québec avait accordé une subvention maximale de 727 109 $ pour ces trois projets, dont 581 687 $ déjà reçus en premiers versements.",
+    "La Ville adopte les rapports de travaux et de dépenses pour aller chercher le solde de 145 422 $ auprès du ministère des Transports et de la Mobilité durable.",
+    "Les travaux comprennent surtout de la voirie, en plus de plantations et de signaux lumineux à Stadacona et Marie-Renouard.",
+    "Le document indique qu'il n'y a aucun impact financier; la décision revient au conseil d'agglomération."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "145 422 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:38.188Z",
+   "jetons": {
+    "entree": 4743,
+    "sortie": 449
+   }
+  },
+  {
+   "id": "AP2026-341.pdf",
+   "numero": "AP2026-341",
+   "date": "2026-10-07",
+   "unite": "Approvisionnements",
+   "objet": "Conclusion d'un contrat pour la fourniture de services pour la formation, la qualification, la mise à niveau et le perfectionnement du corps de police de la Ville de Québec (Dossier 96366)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-341.pdf",
+   "puces": [
+    "La Ville de Québec confie à l'École nationale de police du Québec (ENPQ), à Nicolet, la formation de ses policiers du 1er janvier 2027 au 31 décembre 2031.",
+    "Le contrat est estimé à 2 685 457 $, plus TPS et TVQ; la dépense nette d'agglomération est évaluée à 2 819 394,17 $.",
+    "Les formations visent la patrouille-gendarmerie, l'enquête, la gestion policière et le perfectionnement sur mesure.",
+    "Sont notamment prévus : l'accueil des recrues, les fonctions spécialisées (groupe tactique d'intervention, surveillance physique), l'emploi de la force (arme de service, arme à impulsion électrique) et le maintien des qualifications des instructeurs.",
+    "Aucun appel d'offres n'a eu lieu : la loi permet d'accorder un contrat sans mise en concurrence à un organisme public, et l'ENPQ détient l'exclusivité de la formation policière initiale.",
+    "Les tarifs de formation sont les mêmes pour tous les corps policiers du Québec.",
+    "Les sommes restent conditionnelles à l'adoption des budgets 2027 à 2031."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 685 457 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:37.157Z",
+   "jetons": {
+    "entree": 7637,
+    "sortie": 513
+   }
+  },
+  {
+   "id": "AJ2026-023.pdf",
+   "numero": "AJ2026-023",
+   "date": "2026-10-07",
+   "unite": "Affaires juridiques",
+   "objet": "Radiation des créances conformément à la Politique de gestion de la fermeture de certains dossiers de perception de la cour municipale pour l'année 2026",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AJ2026-023.pdf",
+   "puces": [
+    "La Ville de Québec efface de ses livres 740 688,83 $ de créances de la cour municipale jugées irrécouvrables pour 2026.",
+    "La somme se répartit ainsi : 336 801,50 $ pour la Ville de Québec, 398 642,33 $ pour l'agglomération, 3 715,00 $ pour L'Ancienne-Lorette, 650,00 $ pour Saint-Augustin-de-Desmaures et 880,00 $ pour le Réseau de transport de la Capitale.",
+    "Les dossiers sont fermés pour six motifs : décès, personne morale dissoute, faillite, solde minime, débiteur non localisable et tentative d'exécution infructueuse depuis plus de 10 ans.",
+    "Les créances visées sont des amendes, des frais et des suramendes de dossiers pénaux et criminels.",
+    "Aucun impact sur le budget 2026, car les sommes avaient déjà été provisionnées.",
+    "Le Service des finances fera les écritures comptables; la décision doit passer au conseil de la ville et au conseil d'agglomération."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "740 688,83 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:40.603Z",
+   "jetons": {
+    "entree": 10196,
+    "sortie": 468
+   }
+  },
+  {
+   "id": "AP2026-346.pdf",
+   "numero": "AP2026-346",
+   "date": "2026-10-07",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat à commande pour l'installation, la réparation et la mise aux normes de glissières semi-rigides (Appel d'offres public 96448)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-346.pdf",
+   "puces": [
+    "La Ville confie à Les Glissières Desbiens inc., de Trois-Rivières, un contrat pour installer, réparer et mettre aux normes des glissières semi-rigides (les barrières de sécurité le long des routes).",
+    "Le contrat court de la date d'adjudication jusqu'au 30 novembre 2027, avec deux options de renouvellement de 12 mois chacune, indexées selon l'inflation (IPC).",
+    "Les paiements sont autorisés jusqu'à 202 810 $ avant taxes pour la période initiale, et jusqu'à 608 430 $ avant taxes si les renouvellements sont exercés.",
+    "Après récupération de la TVQ, la dépense nette est estimée à 212 925,15 $ pour la période initiale et à 425 850,30 $ avec les renouvellements.",
+    "Trois entreprises ont soumissionné; Les Glissières Desbiens inc. a déposé le prix le plus bas et sa soumission est conforme.",
+    "La soumission retenue dépasse de 20,4 % l'estimation du service demandeur, qui était de 168 476 $ avant taxes.",
+    "Les fonds viendront du budget du Service des travaux publics, sous réserve de l'adoption des budgets 2027 à 2029."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "202 810 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:48.696Z",
+   "jetons": {
+    "entree": 3812,
+    "sortie": 524
+   }
+  },
+  {
+   "id": "CU2026-075.pdf",
+   "numero": "CU2026-075",
+   "date": "2026-10-07",
+   "unite": "Culture et patrimoine",
+   "objet": "Versement de subventions totalisant une somme maximale de 121 620 $ à plusieurs organismes culturels dans le cadre de l'Entente de développement culturel",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-075.pdf",
+   "puces": [
+    "La Ville verse jusqu'à 121 620 $ en subventions à des organismes culturels de Québec, dans le cadre de l'Entente de développement culturel avec le ministère de la Culture et des Communications.",
+    "L'argent se répartit entre 17 projets, classés en trois volets : achat d'équipement et accessibilité (Organiser), locaux de répétition (Produire), et prospection et vitrines à l'étranger (Rayonner).",
+    "Sept organismes reçoivent de 5 000 $ à 13 000 $ chacun pour louer leurs locaux de répétition à tarif préférentiel : Recto-Verso, Premier Acte, Manivelle, Groupe Danse Partout, GRT-Arts, Le Pantoum et La Charpente des fauves.",
+    "Quatre organismes reçoivent 10 000 $ chacun pour de l'équipement ou l'accessibilité : Interférences, Les Gros Becs (représentations adaptées pour enfants handicapés), Théâtre À Tempo et la radio CKRL.",
+    "Six subventions de 1 720 $ à 7 000 $ servent à des missions de prospection et des vitrines en Asie, en Californie, en France et en Belgique.",
+    "Le financement vient d'un règlement d'emprunt (65 620 $) et de transferts en culture et patrimoine (56 000 $)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "121 620 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:48.112Z",
+   "jetons": {
+    "entree": 8012,
+    "sortie": 559
+   }
+  },
+  {
+   "id": "TI2026-004.pdf",
+   "numero": "TI2026-004",
+   "date": "2026-10-07",
+   "unite": "Technologies de l'information",
+   "objet": "Prolongation de l'entente intermunicipale entre la Ville de Québec et la Communauté métropolitaine de Québec relativement à la fourniture de biens et de services en matière de technologies de l'information",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TI2026-004.pdf",
+   "puces": [
+    "La Ville de Québec prolonge de 12 mois, pour l'année 2027, son entente de services informatiques avec la Communauté métropolitaine de Québec (CMQ).",
+    "La Ville continue de fournir à la CMQ le centre d'assistance bureautique, l'accès au réseau, à Internet, à la messagerie et à la téléphonie.",
+    "La Ville estime facturer environ 336 538,76 $ à la CMQ pour 2027, sans TPS ni TVQ.",
+    "En 2026, la CMQ payait 27 541 $ par mois, facturés chaque trimestre; ce tarif inclut 4 % pour financer les améliorations et 15 % de frais administratifs.",
+    "Les tarifs seront ajustés selon l'indice des prix à la consommation à partir du 1er janvier 2027.",
+    "L'entente conclue en 2024 couvrait le 1er janvier 2024 au 31 décembre 2026 et permettait deux prolongations d'un an; c'est la première qui est utilisée.",
+    "Les sommes perçues iront au fonds général de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "336 538,76 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:49.261Z",
+   "jetons": {
+    "entree": 3756,
+    "sortie": 467
+   }
+  },
+  {
+   "id": "TM2026-185.pdf",
+   "numero": "TM2026-185",
+   "date": "2026-10-07",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'agglomération sur le stationnement dans un garage, un parc de stationnement et sur un terrain géré par la Ville relativement à une case de stationnement pour laquelle un tarif est imposé par un parcomètre, R.A.V.Q. 1872",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-185.pdf",
+   "puces": [
+    "La Ville accorde 3 heures de stationnement gratuit aux véhicules affichant une vignette pour personnes handicapées délivrée par la SAAQ, dans les cases tarifées par parcomètre des stationnements municipaux.",
+    "Pour ce règlement d'agglomération, la mesure vise le stationnement de l'édifice F.-X. Drolet et celui du Centre sportif de Sainte-Foy.",
+    "La gratuité ne s'applique pas quand le stationnement est interdit pour l'entretien de la rue, des travaux, une signalisation temporaire ou sur ordre d'un agent de la paix.",
+    "Cette gratuité de 3 heures existe depuis plus de 20 ans dans les rues tarifées par parcomètre; la Ville l'étend aux parcs de stationnement.",
+    "La Ville dit vouloir modifier huit règlements municipaux sur le stationnement pour harmoniser la règle.",
+    "Le règlement met aussi à jour l'annexe listant les types de réglementation et les moyens de contrôle du stationnement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:45.528Z",
+   "jetons": {
+    "entree": 8234,
+    "sortie": 453
+   }
+  },
+  {
+   "id": "AP2026-354.pdf",
+   "numero": "AP2026-354",
+   "date": "2026-10-07",
+   "unite": "Approvisionnements",
+   "objet": "Dépôt de la liste hebdomadaire des autorisations de dépenser par avis de modification de plus de 250 000 $ accordées par un titulaire d'une délégation de dépenser pour la semaine du 6 septembre 2026",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-354.pdf",
+   "puces": [
+    "Le comité exécutif prend acte de la liste des dépenses supplémentaires de plus de 250 000 $ autorisées par des employés délégués, pour la semaine du 6 au 12 septembre 2026.",
+    "Deux dépassements de coûts y figurent, tous deux au Service de l'ingénierie, pour un total de 559 144,75 $ avant taxes.",
+    "Travaux sur les rues de la Couronne et du Chalutier : ajout de 220 000 $ pour revoir la gestion de la circulation sur la rue Dorchester; le contrat passe de 2 222 908 $ à 2 442 908 $.",
+    "Reconstruction de l'écocentre Val-Bélair : ajout de 339 144,75 $ pour des quantités supplémentaires d'excavation (sol, roc, déboisement, dynamitage) et l'installation de panneaux de chantier; le contrat passe de 2 845 462,89 $ à 3 184 607,64 $.",
+    "Le Service des approvisionnements publie cette liste chaque semaine, montants excluant les taxes."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "559 144,75$",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:55.639Z",
+   "jetons": {
+    "entree": 3645,
+    "sortie": 461
+   }
+  },
+  {
+   "id": "RC2026-009.pdf",
+   "numero": "RC2026-009",
+   "date": "2026-10-07",
+   "unite": "Relations citoyennes et communications",
+   "objet": "Autoriser la Commission consultative pour la mobilité dans le Vieux-Québec à tenir une démarche de consultation publique",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/RC2026-009.pdf",
+   "puces": [
+    "La Ville autorise la Commission consultative pour la mobilité dans le Vieux-Québec à tenir une consultation publique sous forme de forum.",
+    "Le forum aura lieu le 26 novembre 2026 au Monastère des Augustines.",
+    "Des résidents et des acteurs du Vieux-Québec seront invités à une journée de réflexion menée par les commissaires citoyens et les élus.",
+    "L'exercice vise à amorcer une Vision 2036 de la mobilité dans le Vieux-Québec intra-muros.",
+    "Les échanges serviront à orienter le futur Plan de mobilité 2026-2036.",
+    "La Commission avait été créée par le conseil de ville le 10 mars 2026 et a tenu sa première séance le 24 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-08T15:45:56.337Z",
+   "jetons": {
+    "entree": 3557,
+    "sortie": 354
+   }
+  },
   {
    "id": "PA2026-137.pdf",
    "numero": "PA2026-137",
