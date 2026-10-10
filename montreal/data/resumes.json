@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-09T19:57:28.082Z",
+ "generatedAt": "2026-10-10T15:53:38.536Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel quand il est publié (source « sommaire »), sinon du texte de la résolution elle-même (source « resolution »), sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,17 +7,17 @@
   "annee": "2026",
   "max": 40,
   "batch": true,
-  "depuis": "2026-08-10",
+  "depuis": "2026-08-11",
   "plafond": 120
  },
- "nombre": 8471,
- "genereCetteFois": 120,
+ "nombre": 8577,
+ "genereCetteFois": 106,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 2.8357,
-  "jetonsEntree": 822818,
-  "jetonsSortie": 62292
+  "montant": 1.2569,
+  "jetonsEntree": 315054,
+  "jetonsSortie": 37540
  },
  "resumes": [
   {
@@ -1254,6 +1254,50 @@
    "jetons": {
     "entree": 5010,
     "sortie": 391
+   }
+  },
+  {
+   "id": "CA26 09 0223",
+   "numero": null,
+   "resolution": "CA26 09 0223",
+   "date": "2026-09-14",
+   "unite": null,
+   "objet": "Adopter l'ordre du jour de la séance ordinaire du conseil d'arrondissement du 14 septembre 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-09-14_19h00_FR.pdf#page=3",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement adopte l'ordre du jour de sa séance ordinaire du 14 septembre 2026, tel que présenté."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 1675,
+    "sortie": 143
+   }
+  },
+  {
+   "id": "CA26 09 0224",
+   "numero": null,
+   "resolution": "CA26 09 0224",
+   "date": "2026-09-14",
+   "unite": null,
+   "objet": "Approuver les procès-verbaux des séances ordinaire et extraordinaire du conseil d'arrondissement tenues respectivement les 6 juillet et 19 août 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-09-14_19h00_FR.pdf#page=3",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement approuve les procès-verbaux de deux séances passées : la séance ordinaire du 6 juillet 2026 et la séance extraordinaire du 19 août 2026."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 1730,
+    "sortie": 161
    }
   },
   {
@@ -3278,6 +3322,99 @@
    }
   },
   {
+   "id": "CE26 1318",
+   "numero": null,
+   "resolution": "CE26 1318",
+   "date": "2026-09-09",
+   "unite": null,
+   "objet": "Ce dossier concerne l'adoption de l'ordre du jour de l'assemblée du prochain conseil municipal. Il sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-09-09_09h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal adopte l'ordre du jour de sa séance ordinaire du 21 septembre 2026."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.527Z",
+   "jetons": {
+    "entree": 1682,
+    "sortie": 132
+   }
+  },
+  {
+   "id": "CE26 1359",
+   "numero": "1264501004",
+   "resolution": "CE26 1359",
+   "date": "2026-09-09",
+   "unite": null,
+   "objet": "Ce dossier concerne une acquisition, une cession ou une vente d'immeuble par la Ville ou un organisme lié. En vertu du paragraphe 7 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), il sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-09-09_09h00_FR.pdf#page=19",
+   "source": "resolution",
+   "puces": [
+    "La Ville s'engage à acheter un terrain vacant d'environ 400 m² dans l'arrondissement de Montréal-Nord, pour en faire un parc local.",
+    "Le terrain est adjacent à la bâtisse située aux 12265 à 12295, boulevard Rolland.",
+    "Prix d'achat : 500 000 $, plus les taxes applicables.",
+    "Les vendeurs sont Claudio et Giorgio Masciotra et Michelina Fiorda (Les immeubles C.G.A. s.e.n.c.) ainsi que Michelina Fiorda à titre personnel.",
+    "Une fois la vente signée et publiée au registre foncier, le terrain passera au domaine public comme parc local.",
+    "Le comité exécutif recommande la décision au conseil municipal; le dossier est traité à huis clos parce qu'il porte sur une transaction immobilière."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.529Z",
+   "jetons": {
+    "entree": 2470,
+    "sortie": 393
+   }
+  },
+  {
+   "id": "CE26 1317",
+   "numero": null,
+   "resolution": "CE26 1317",
+   "date": "2026-09-09",
+   "unite": "Direction générale, Cabinet du directeur général",
+   "objet": "Adoption de l'ordre du jour de la séance du comité exécutif",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-09-09_09h00_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif adopte l'ordre du jour de sa séance ordinaire du 9 septembre 2026, sans autre décision de fond."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.529Z",
+   "jetons": {
+    "entree": 1626,
+    "sortie": 142
+   }
+  },
+  {
+   "id": "CE26 1319",
+   "numero": null,
+   "resolution": "CE26 1319",
+   "date": "2026-09-09",
+   "unite": null,
+   "objet": "Ce dossier concerne l'adoption de l'ordre du jour de l'assemblée du prochain conseil d'agglomération. Il sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-09-09_09h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil adopte l'ordre du jour de l'assemblée ordinaire du conseil d'agglomération du 24 septembre 2026, sans autre décision de fond."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.533Z",
+   "jetons": {
+    "entree": 1694,
+    "sortie": 151
+   }
+  },
+  {
    "id": "1260645001",
    "numero": "1260645001",
    "resolution": "CA26 25 209",
@@ -4605,6 +4742,270 @@
    "jetons": {
     "entree": 7746,
     "sortie": 449
+   }
+  },
+  {
+   "id": "1268848009",
+   "numero": "1268848009",
+   "resolution": "CE26 1308",
+   "date": "2026-09-02",
+   "unite": "Service de l'urbanisme et de la mobilité, Direction des projets d'aménagement urbain",
+   "objet": "Accorder un budget supplémentaire équivalent de revenus et de dépenses d'un montant de 2 230 000 $ au budget de fonctionnement 2026 de la Division Innovation et gestion des déplacements du Service de l'urbanisme et de la mobilité pour la gestion du réseau de bornes de recharge publiques pour véhicules électriques",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_ODJ_LPP_ORDI_2026-09-02_09h00_FR.pdf#page=423",
+   "source": "sommaire",
+   "puces": [
+    "La Ville ajoute 2 230 000 $ de revenus et autant de dépenses à son budget 2026 pour faire fonctionner les bornes de recharge publiques pour véhicules électriques.",
+    "L'argent sert à rembourser aux arrondissements les frais d'électricité des bornes, ainsi qu'à payer l'entretien, les réparations et les frais de télécommunications.",
+    "Le budget prévu pour 2026 (4,77 M$) allait bientôt être épuisé, ce qui aurait empêché la Ville de payer ces frais jusqu'au 31 décembre 2026.",
+    "Les dépenses sont entièrement couvertes par les revenus que les usagers paient à la borne : aucun effet sur les taxes, selon le document.",
+    "Le tarif d'utilisation des bornes a augmenté de 0,10 $ l'heure en 2026, pour atteindre 1,10 $ l'heure.",
+    "La Ville compte 1 860 bornes installées et prévoit dépasser les 2 000 bornes d'ici la fin de 2026, avec environ 1 550 600 recharges prévues cette année.",
+    "Les bornes sont exploitées en partenariat avec Hydro-Québec, le Circuit Électrique et AXSO, qui perçoit les sommes et les reverse à la Ville chaque trimestre."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 230 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.529Z",
+   "jetons": {
+    "entree": 7712,
+    "sortie": 551
+   }
+  },
+  {
+   "id": "1267227003",
+   "numero": "1267227003",
+   "resolution": "CE26 1312",
+   "date": "2026-09-02",
+   "unite": "Service de l'Espace pour la vie_des Grand parcs et du Mont-Royal",
+   "objet": "Adopter le Règlement autorisant un emprunt de 10 430 000 $ pour le financement des travaux de mise à niveau de la Biosphère",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_ODJ_LPP_ORDI_2026-09-02_09h00_FR.pdf#page=444",
+   "source": "sommaire",
+   "puces": [
+    "La Ville veut emprunter 10 430 000 $ pour financer des travaux de mise à niveau de la Biosphère, dans le parc Jean-Drapeau.",
+    "Les travaux sont prévus de 2027 à 2031 : nouvelle exposition permanente, aménagement paysager, entretien des espaces intérieurs et réfection des toilettes du rez-de-chaussée.",
+    "L'emprunt couvre aussi les honoraires professionnels, les études, la conception, la surveillance des travaux et les imprévus; il devra être remboursé en 20 ans au maximum.",
+    "Ces travaux découlent de l'entente annoncée le 13 juillet 2026 : Ottawa, Québec et Montréal versent 27 M$ sur trois ans (9 M$ chacun) pour la Biosphère.",
+    "Québec et Ottawa paient le fonctionnement du musée; Montréal, elle, assume les dépenses d'immobilisation.",
+    "Des investissements déjà prévus au programme décennal sont devancés, ce qui porte à 9 M$ les sommes prévues entre 2027 et 2029, sans argent neuf au budget d'agglomération.",
+    "La décision revient au conseil d'agglomération, avec un avis de motion prévu le 27 septembre 2026, puis une approbation par le ministère des Affaires municipales."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "10 430 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.529Z",
+   "jetons": {
+    "entree": 7485,
+    "sortie": 555
+   }
+  },
+  {
+   "id": "CE26 1289",
+   "numero": null,
+   "resolution": "CE26 1289",
+   "date": "2026-09-02",
+   "unite": "Direction générale, Cabinet du directeur général",
+   "objet": "Adoption de l'ordre du jour de la séance du comité exécutif",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-09-02_09h00_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif adopte l'ordre du jour de sa séance ordinaire du 2 septembre 2026, en retirant les points 12.001 à 12.004 et 20.012 et en ajoutant le point 50.001."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 1665,
+    "sortie": 169
+   }
+  },
+  {
+   "id": "1266599005",
+   "numero": "1266599005",
+   "resolution": "CE26 1316",
+   "date": "2026-09-02",
+   "unite": "Service de la stratégie immobilière et de l'habitation",
+   "objet": "Prendre acte du rapport des décisions déléguées visées aux articles 19 à 28 du Règlement intérieur du comité exécutif sur la délégation de pouvoirs aux fonctionnaires et employés (RCE02-004), rendues par le fonctionnaire de niveau A du Service de la stratégie immobilière et de l'habitation, pour la période du 1er au 31 juillet 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_ODJ_LPP_ORDI_2026-09-02_09h00_FR.pdf#page=484",
+   "source": "sommaire",
+   "puces": [
+    "Le comité exécutif prend acte d'un rapport listant 8 décisions signées en juillet 2026 par une gestionnaire du Service de la stratégie immobilière et de l'habitation, sans nouvelle dépense.",
+    "La Ville prolonge de deux ans (1er novembre 2026 au 31 octobre 2028) son droit de passage sur un terrain de 278 m² derrière le Centre commercial Maisonneuve, rue Sherbrooke Est, pour 25 177,73 $ taxes incluses.",
+    "La Ville loue un terrain de 2 479 m² à Eurovia Construction Québec du 1er août au 15 novembre 2026 pour 14 749 $, et des bureaux au 2300, boulevard Alfred Nobel à BAYSTREAM (20 400 $ pour un an) et à 433638 Ontario inc. (recette révisée de 10 800 $).",
+    "L'organisme Aux Trois Sentiers-Soins Palliactifs loue 885 pi² au 251, avenue des Pins Ouest pendant 12 mois à partir du 1er août 2026, pour 21 024 $.",
+    "Une partie de terrain sur l'île Notre-Dame a été louée 800 $ du 6 au 28 juillet 2026 pour l'installation d'équipements de l'International des Feux Loto-Québec.",
+    "La Ville vend un terrain résiduel de 19,7 m² au coin des rues King et William (Ville-Marie) à Quam Groupe Conseil pour 17 730 $, et un terrain de 46,50 m² près des avenues Dupuis et Mountain Sights (Côte-des-Neiges–Notre-Dame-de-Grâce) à deux particuliers pour 26 970 $."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 5987,
+    "sortie": 688
+   }
+  },
+  {
+   "id": "CE26 1292",
+   "numero": "1267360004",
+   "resolution": "CE26 1292",
+   "date": "2026-09-02",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-09-02_09h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif recommande au conseil d'agglomération de signer une entente-cadre de 24 mois avec Granulat Provincial pour fournir et livrer des abrasifs à la Ville, sur demande.",
+    "Le contrat vaut au maximum 2 720 166,91 $, taxes incluses, et a été attribué au plus bas soumissionnaire conforme de l'appel d'offres public 26-21467.",
+    "Une somme additionnelle de 408 025,04 $, taxes incluses, est prévue si les quantités commandées varient.",
+    "La Ville évaluera le rendement de Granulat Provincial.",
+    "Les dépenses seront payées par les budgets des arrondissements et des villes liées qui participent, au fur et à mesure de leurs besoins.",
+    "Le dossier est traité à huis clos au comité exécutif."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 720 166,91 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 2005,
+    "sortie": 382
+   }
+  },
+  {
+   "id": "CE26 1309",
+   "numero": "1269445008",
+   "resolution": "CE26 1309",
+   "date": "2026-09-02",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-09-02_09h00_FR.pdf#page=9",
+   "source": "resolution",
+   "puces": [
+    "La Ville transfère 17 000 000 $ de la réserve de déneigement vers le budget de fonctionnement du Service de la concertation des arrondissements et de l'expérience citoyenne.",
+    "Cet argent sert à payer des dépenses supplémentaires de déneigement des rues et des trottoirs.",
+    "Il couvre aussi l'élimination de la neige et l'entretien des sites où elle est déversée.",
+    "Le virement vise le reste de l'année 2026.",
+    "Le dossier est traité à huis clos par le comité exécutif."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "17 000 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 1860,
+    "sortie": 281
+   }
+  },
+  {
+   "id": "1265703010",
+   "numero": "1265703010",
+   "resolution": "CE26 1311",
+   "date": "2026-09-02",
+   "unite": "Service de la culture_des sports et des loisirs, Direction Cinéma-Festivals-Événements",
+   "objet": "Approuver des initiatives culturelles et sportives / Autoriser l'occupation du domaine public du 11 septembre au 18 octobre 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_ODJ_LPP_ORDI_2026-09-02_09h00_FR.pdf#page=437",
+   "source": "sommaire",
+   "puces": [
+    "La Ville autorise 15 événements culturels et sportifs à occuper le domaine public entre le 11 septembre et le 18 octobre 2026.",
+    "Les activités se tiennent surtout au parc du Mont-Royal et au parc Frédéric-Back : courses de cross-country d'écoles et de collèges, marches de collectes de fonds, spectacles de danse.",
+    "Le Grand Prix Cycliste de Montréal (11 au 13 septembre) et les Championnats du Monde Route UCI Montréal 2026 (19 au 27 septembre) partagent le même parcours, avec fermetures sur Côte-Sainte-Catherine, Camillien-Houde, Remembrance et le chemin de la Côte-des-Neiges.",
+    "Les organisateurs obtiennent des dérogations aux règlements sur le bruit et sur la paix et l'ordre, ce qui permet la diffusion sonore extérieure et la vente d'aliments et d'articles promotionnels.",
+    "Les événements sont gratuits et ouverts à tous; la gratuité est inscrite aux conventions du Grand Prix Cycliste, du Festival Quartiers Danses et des Championnats du Monde Route UCI.",
+    "Aucune dépense nouvelle : les coûts des services de la Ville sont absorbés par les budgets de fonctionnement des services et des arrondissements concernés."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.533Z",
+   "jetons": {
+    "entree": 7513,
+    "sortie": 560
+   }
+  },
+  {
+   "id": "CE26 1301",
+   "numero": "1265639001",
+   "resolution": "CE26 1301",
+   "date": "2026-09-02",
+   "unite": null,
+   "objet": "Ce dossier concerne une acquisition, une cession ou une vente d'immeuble par la Ville ou un organisme lié. En vertu du paragraphe 7 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), il sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-09-02_09h00_FR.pdf#page=6",
+   "source": "resolution",
+   "puces": [
+    "La Ville rembourse 251 559,16 $ à HZT Acquisitions inc. pour les dépenses engagées dans le cadre de sa promesse d'achat d'immeubles.",
+    "Le remboursement découle du fait que la Ville a exercé son droit de préemption sur ces immeubles, ce qui a fait tomber la transaction privée.",
+    "Les immeubles visés se trouvent dans l'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce, sur les avenues Barclay, Bedford et de Darlington, la rue Goyer et le chemin Hudson.",
+    "La dépense est imputée selon les informations financières au dossier.",
+    "Le dossier est traité à huis clos par le comité exécutif parce qu'il porte sur une transaction immobilière."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "251 559,16 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.533Z",
+   "jetons": {
+    "entree": 2137,
+    "sortie": 370
+   }
+  },
+  {
+   "id": "CE26 1313",
+   "numero": "1266991001",
+   "resolution": "CE26 1313",
+   "date": "2026-09-02",
+   "unite": null,
+   "objet": null,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-09-02_09h00_FR.pdf#page=10",
+   "source": "resolution",
+   "puces": [
+    "La Ville nomme David McDuff directeur de l'Exploitation des bâtiments et de l'énergie.",
+    "L'entrée en poste est prévue le 2 septembre 2026, ou à une autre date convenue entre les parties.",
+    "Le poste est à durée indéterminée et la rémunération se situe dans la fourchette salariale FM11.",
+    "La nomination s'appuie sur la Politique de dotation et de gestion de la main-d'œuvre et sur les conditions de travail des cadres de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.533Z",
+   "jetons": {
+    "entree": 1728,
+    "sortie": 264
+   }
+  },
+  {
+   "id": "1264957004",
+   "numero": "1264957004",
+   "resolution": "CE26 1310",
+   "date": "2026-09-02",
+   "unite": "Service des affaires juridiques, Direction des affaires civiles",
+   "objet": "Décréter qu'il en va de l'intérêt général de la Ville que le pouvoir d'ester en justice, dans le cadre du litige opposant la Clinique juridique itinérante et la Ville, relatif aux campements de personnes en situation d'itinérance présents à proximité du parc de planche à roulettes et du terrain de basket-ball situés sous le viaduc Van Horne dans l'arrondissement du Plateau-Mont-Royal soit exercé par le comité exécutif / Autoriser le dépôt à la Cour d'appel d'une requête pour permission d'en appeler du jugement rendu le 8 juin 2026 par le juge de la Cour supérieure Alexander Pless ainsi que d'une déclaration d'appel",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_ODJ_LPP_ORDI_2026-09-02_09h00_FR.pdf#page=432",
+   "source": "sommaire",
+   "puces": [
+    "La Ville veut porter en appel un jugement de la Cour supérieure du 8 juin 2026 qui lui interdit de déplacer les campements de personnes en situation d'itinérance situés près du skatepark et du terrain de basketball, sous le viaduc Van Horne, dans le Plateau-Mont-Royal.",
+    "Le comité exécutif, plutôt que l'arrondissement, prendrait en main la conduite de ce litige opposant la Ville à la Clinique juridique itinérante.",
+    "L'arrondissement avait donné un préavis de déplacement des campements le 13 mai 2026, avec une date butoir au 21 mai; la Clinique juridique itinérante a déposé des demandes d'injonction le 20 mai.",
+    "L'ordonnance du juge reste en vigueur jusqu'au jugement sur le fond, attendu vraisemblablement en 2027.",
+    "Les avocats de la Ville soutiennent que le juge a mal appliqué les critères d'apparence de droit et de prépondérance des inconvénients, et qu'il a ignoré les règles sur l'occupation du domaine public.",
+    "Le document invoque que l'ordonnance prive des citoyens de l'usage des deux plateaux sportifs en haute saison et qu'un événement sportif prévu en mai 2026 a été annulé et déplacé.",
+    "Le litige ne comporte aucune réclamation d'argent contre la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.534Z",
+   "jetons": {
+    "entree": 6325,
+    "sortie": 574
    }
   },
   {
@@ -8255,6 +8656,843 @@
    "jetons": {
     "entree": 3264,
     "sortie": 280
+   }
+  },
+  {
+   "id": "1267905011",
+   "numero": "1267905011",
+   "resolution": "CA26 28 151",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant la modification d'éléments végétaux sur la propriété située au 15 615, boulevard Gouin ouest, correspondant au lot 3 678 955 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=102",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard–Sainte-Geneviève autorise l'abattage de trois arbres sur le terrain du Cégep Gérald-Godin, au 15 615, boulevard Gouin Ouest.",
+    "Les arbres visés sont deux érables de Norvège très abîmés (dépérissement, carie, tige rompue) et une épinette de Norvège morte.",
+    "Une évaluation arboricole datée du 13 juillet 2026 conclut que ces arbres risquent de casser et de blesser des usagers ou d'endommager les installations.",
+    "En remplacement, quatre arbres indigènes seront plantés : deux micocouliers occidentaux et un érable de Freeman le long du chemin de ceinture, et un chêne rouge en façade du cégep.",
+    "La demande de permis d'abattage avait été déposée le 30 juin 2026; le comité consultatif d'urbanisme s'est dit favorable le 18 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.528Z",
+   "jetons": {
+    "entree": 4926,
+    "sortie": 420
+   }
+  },
+  {
+   "id": "1269452020",
+   "numero": "1269452020",
+   "resolution": "CA26 28 158",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Déposer le procès-verbal de correction signé par la secrétaire d'arrondissement concernant le règlement numéro CA28 0023-53 consignée au procès-verbal de la séance ordinaire du conseil d'arrondissement tenue le 7 juillet 2026. La secrétaire d'arrondissement dépose une copie d'un procès-verbal de correction, signé le 16 juillet 2026, concernant le règlement numéro CA28 0023-53 consignée au procès-verbal de la séance ordinaire du conseil d'arrondissement tenue le 7 juillet 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=129",
+   "source": "sommaire",
+   "puces": [
+    "La secrétaire d'arrondissement de L'Île-Bizard–Sainte-Geneviève dépose au conseil un procès-verbal de correction, signé le 16 juillet 2026, qui corrige une erreur de transcription à l'annexe I du règlement CA28 0023-53 adopté le 7 juillet 2026.",
+    "Le document de correction sera annexé au procès-verbal de la séance du 7 juillet 2026; aucune dépense n'est prévue."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.528Z",
+   "jetons": {
+    "entree": 3532,
+    "sortie": 252
+   }
+  },
+  {
+   "id": "1269606024",
+   "numero": "1269606024",
+   "resolution": "CA26 28 146",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, relativement à une demande de P.I.I.A. visant les travaux de rénovation extérieure de la maison unifamiliale située au 128, rue Saint-Joseph, correspondant au lot 4 589 394 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=81",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard–Sainte-Geneviève approuve la rénovation extérieure d'une maison unifamiliale au 128, rue Saint-Joseph, dans le noyau villageois de L'Île-Bizard.",
+    "Les travaux prévoient le remplacement du panneau intermédiaire, du pare-air, des portes et fenêtres, et du revêtement extérieur par du vinyle de marque Kaycan.",
+    "Une rampe d'accès universel sera ajoutée pour améliorer l'accès à la résidence.",
+    "L'approbation est conditionnelle : la galerie et l'avant-toit devront être prolongés sur toute la largeur de la façade avant.",
+    "Rien ne change à l'implantation, au gabarit ni au volume du bâtiment.",
+    "Le comité consultatif d'urbanisme s'est prononcé en faveur du projet le 21 juillet 2026; le conseil d'arrondissement statue le 1er septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.529Z",
+   "jetons": {
+    "entree": 4761,
+    "sortie": 429
+   }
+  },
+  {
+   "id": "1269606012",
+   "numero": "1269606012",
+   "resolution": "CA26 28 140",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Règlement numéro CA28 0023-54 modifiant le Règlement de zonage CA28 0023 à l'effet de réduire les marges avant et arrière à la grille des usages et normes de la zone C2-320 et de modifier la largeur minimale de l'allée d'accès.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=53",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement L'Île-Bizard–Sainte-Geneviève modifie son règlement de zonage pour la zone C2-320, dans le secteur ouest de Sainte-Geneviève (entre les rues Chauret et Barbeau).",
+    "La marge avant passe de 7,6 m à 2 m, la marge arrière de 7,6 m à 5 m, et la largeur minimale d'une allée d'accès est réduite à 3 m.",
+    "Le changement vise un projet au 16 312, boulevard Gouin Ouest : la démolition d'un bâtiment jugé en très mauvais état et dangereux, puis la construction d'une résidence de 4 logements.",
+    "Le terrain fait 502,9 m² (15,11 m de front sur 25,71 m de profondeur) et le bâtiment projeté en occuperait environ 36 %.",
+    "Selon l'arrondissement, la modification régularise aussi des bâtiments existants qui dérogent déjà aux marges prescrites.",
+    "Étapes franchies : avis de motion et premier projet le 2 juin 2026, consultation publique et second projet le 7 juillet 2026; aucune demande d'approbation référendaire valide n'a été reçue.",
+    "L'entrée en vigueur est prévue en septembre, après l'avis de conformité de la Ville de Montréal."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.529Z",
+   "jetons": {
+    "entree": 6812,
+    "sortie": 544
+   }
+  },
+  {
+   "id": "1267905016",
+   "numero": "1267905016",
+   "resolution": "CA26 28 156",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant à permettre le remplacement de la toiture du bâtiment principal sur la propriété située au 1255, montée Wilson, correspondant au lot 4 590 137 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=122",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard - Sainte-Geneviève autorise le remplacement de la toiture de la maison située au 1255, montée Wilson.",
+    "La toiture actuelle en tôle à la canadienne sera remplacée par une tôle à baguette noire.",
+    "Le bâtiment figure sur la liste des immeubles d'intérêt patrimonial de l'arrondissement : il a été construit en 1899 et a abrité l'école du Cap jusqu'en 1957, avant d'être converti en résidence.",
+    "Comme la toiture est visible de la rue, le projet devait passer par le comité consultatif d'urbanisme, qui s'est dit favorable.",
+    "Le document ne prévoit aucune dépense pour la Ville.",
+    "Le comité a étudié la demande le 18 août 2026 et le conseil d'arrondissement a tranché le 1er septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 4211,
+    "sortie": 397
+   }
+  },
+  {
+   "id": "1264364029",
+   "numero": "1264364029",
+   "resolution": "CA26 28 132",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Autoriser une dépense additionnelle maximale 11 520,50 $, taxes incluses, pour des services d'entretien ménager supplémentaires au chalet du parc Robert-Sauvé, dans le cadre du contrat accordé à la firme UNIVAP (CA24 28065) majorant ainsi le montant total du contrat de 450 649,69 $ à 462 170,19 $, taxes incluses, pour la période du 2 octobre 2026 au 31 mai 2027 inclusivement.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=15",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard–Sainte-Geneviève ajoute 11 520,50 $ (taxes incluses) au contrat d'entretien ménager de la firme UNIVAP inc., pour un total de 462 170,19 $.",
+    "L'argent sert à nettoyer plus souvent le bloc sanitaire du chalet du parc Robert-Sauvé, utilisé par les étudiants et le personnel du Cégep Gérald-Godin installés dans quatre classes modulaires au parc.",
+    "Ces classes modulaires n'ont pas de toilettes : les usagers se servent de celles du chalet du parc.",
+    "Le service supplémentaire couvre la période du 2 octobre 2026 au 31 mai 2027, soit la fin du contrat initial signé avec UNIVAP.",
+    "Le tarif est forfaitaire : 60 $ par visite de nettoyage, pour 167 jours de présence d'usagers du Cégep, soit 10 020 $ avant taxes.",
+    "En mars 2027, l'arrondissement devra décider de prolonger le contrat et d'ajouter de nouvelles heures d'entretien pour l'année scolaire suivante."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "11 520,50 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 6425,
+    "sortie": 499
+   }
+  },
+  {
+   "id": "1267905009",
+   "numero": "1267905009",
+   "resolution": "CA26 28 149",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard-Sainte-Geneviève, concernant la demande de P.I.I.A. visant à permettre la rénovation d'éléments extérieurs du bâtiment principal sur la propriété située au 406, rue Closse, correspondant au lot 4 295 567 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=93",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard–Sainte-Geneviève autorise la rénovation extérieure de la maison située au 406, rue Closse.",
+    "Les travaux remplacent la toiture, la porte d'entrée, les fenêtres et le parement extérieur, selon des plans déposés le 23 juillet 2026.",
+    "Le stuc fissuré, qui laissait entrer l'eau, cède la place à un revêtement acrylique; la toiture de tôle bleue sera remplacée par un modèle semblable de couleur noire.",
+    "Les nouvelles fenêtres reprennent les mêmes dimensions, proportions et style que les actuelles.",
+    "La propriété fait partie du secteur résidentiel développé par Campeau dans les années 1970 (rues Blaise, Closse et une partie de Pierre-Boileau), reconnu comme secteur d'intérêt particulier au règlement sur les P.I.I.A.",
+    "Le comité consultatif d'urbanisme s'est dit favorable le 18 août 2026; le conseil d'arrondissement a statué le 1er septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 4928,
+    "sortie": 465
+   }
+  },
+  {
+   "id": "1269452018",
+   "numero": "1269452018",
+   "resolution": "CA26 28 135",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Prendre acte du dépôt des rapports sur l'exercice des pouvoirs délégués aux fonctionnaires et employé.es, pour la période du 1er au 30 juin et du 1er au 31 juillet 2026, en vertu du règlement CA28 0074.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=29",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de L'Île-Bizard - Sainte-Geneviève prend acte du dépôt des rapports sur les décisions prises par les fonctionnaires et employé.es à qui des pouvoirs ont été délégués, pour juin et juillet 2026."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 3007,
+    "sortie": 189
+   }
+  },
+  {
+   "id": "1269606021",
+   "numero": "1269606021",
+   "resolution": "CA26 28 142",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, relativement à une demande de P.I.I.A. visant à autoriser l'agrandissement d'une maison unifamiliale située sur la propriété sise au 1963, chemin Bord-du- Lac, correspondant au lot numéro 4 589 735 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=65",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard–Sainte-Geneviève autorise l'agrandissement d'une maison unifamiliale au 1963, chemin Bord-du-Lac.",
+    "L'ajout se fera sur le côté droit du bâtiment, pour créer de nouveaux espaces habitables, sans changer l'implantation générale sur le terrain.",
+    "Le terrain fait 1 546,8 m² et la maison d'un étage a été construite en 1978.",
+    "Les matériaux prévus : brique rouge comme le bâtiment existant et toiture en bardeaux d'asphalte; la maison reste de plain-pied avec toit à deux versants.",
+    "La propriété se trouve dans le secteur du parcours riverain du chemin du Bord-du-Lac; selon le document, le projet s'intègre au cadre bâti voisin.",
+    "Le comité consultatif d'urbanisme a étudié le projet le 21 juillet 2026 et s'est dit favorable; le conseil d'arrondissement a statué le 1er septembre 2026.",
+    "Aucun aspect financier n'est associé au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 4378,
+    "sortie": 466
+   }
+  },
+  {
+   "id": "1267905014",
+   "numero": "1267905014",
+   "resolution": "CA26 28 154",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant à permettre l'installation d'une enseigne commerciale sur la propriété située au 387, rue Cherrier, correspondant au lot 4 298 930 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=114",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard – Sainte-Geneviève autorise l'installation d'une enseigne commerciale au 387, rue Cherrier.",
+    "L'enseigne annoncera le restaurant « MAISON DÉLICIEUSE », avec les mentions « Restaurant », « Cuisine iranienne » et « Internationale ».",
+    "Elle sera posée dans le fronton avant de toit du bâtiment : lettres découpées en PVC de 2,54 cm, peintes en blanc et doré, non lumineuses, sur un panneau d'aluminium composite de 3 mm.",
+    "L'immeuble, construit en 1976 et rénové dans les années 90, est en zone de commerce de quartier (C-2), dans le secteur de valeur exceptionnelle et le parcours riverain de L'Île-Bizard.",
+    "Le comité consultatif d'urbanisme s'est dit favorable le 18 août 2026; le conseil d'arrondissement a tranché le 1er septembre 2026.",
+    "La demande de certificat d'autorisation avait été déposée le 15 juillet, avec un plan révisé daté du 11 août 2026.",
+    "Aucun montant n'est rattaché à cette décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 4439,
+    "sortie": 509
+   }
+  },
+  {
+   "id": "1267905013",
+   "numero": "1267905013",
+   "resolution": "CA26 28 153",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant à permettre la construction d'un bâtiment accessoire sur la propriété située au 925, rue de Cherrier, correspondant au lot 4 589 478 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=110",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard–Sainte-Geneviève autorise la construction d'un garage détaché au 925, rue de Cherrier, dans le secteur agricole de l'île.",
+    "Le bâtiment mesurera 9,53 m de longueur sur 8,35 m de largeur, pour 79,58 m² au sol et 8,2 m de hauteur.",
+    "Le garage sera implanté du côté gauche de la cour avant, devant une maison de 1923 jugée d'intérêt patrimonial.",
+    "Le terrain est soumis aux règles d'intégration architecturale du parcours riverain, de l'écoterritoire et du paysage agricole.",
+    "Selon l'analyse, la végétation mature préserve les vues vers la maison et l'architecture du garage rappelle les anciennes granges.",
+    "La demande de permis a été déposée le 15 juillet; le comité consultatif d'urbanisme s'est montré favorable le 18 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 4975,
+    "sortie": 422
+   }
+  },
+  {
+   "id": "1269606023",
+   "numero": "1269606023",
+   "resolution": "CA26 28 143",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, relativement à une demande de P.I.I.A. visant à autoriser la rénovation du balcon existant en cour avant de la maison unifamiliale située au 101, rue Pierre- Foretier, correspondant au lot 4 297 696 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=69",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard - Sainte-Geneviève autorise la rénovation du balcon en cour avant d'une maison unifamiliale au 101, rue Pierre-Foretier.",
+    "Les travaux prévoient le remplacement de la structure, de nouvelles fondations sur pieux vissés, la reconstruction du plancher, de nouveaux garde-corps et des panneaux de fermeture sous le balcon.",
+    "Matériaux retenus : plancher en composite de couleur Biscayne, panneaux de fermeture en composite gris et garde-corps en aluminium noir.",
+    "Le balcon garde ses dimensions, son emplacement et sa fonction : pas d'agrandissement ni de changement de volumétrie.",
+    "Le comité consultatif d'urbanisme s'est dit favorable le 21 juillet 2026; le conseil d'arrondissement statue le 1er septembre 2026.",
+    "Aucun montant n'est associé à cette décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 4532,
+    "sortie": 426
+   }
+  },
+  {
+   "id": "1269606020",
+   "numero": "1269606020",
+   "resolution": "CA26 28 141",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, relativement à une demande de P.I.I.A. visant à autoriser l'agrandissement d'une maison unifamiliale située sur la propriété sise au 20 chemin North Ridge, correspondant au lot numéro 4 589 880 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=61",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard - Sainte-Geneviève autorise l'agrandissement d'une maison unifamiliale au 20, chemin North Ridge.",
+    "Les travaux consistent à ajouter un étage au-dessus du garage intégré existant, sans modifier l'implantation au sol du bâtiment construit en 1961.",
+    "Le nouvel étage ajoute environ 57 m² habitables : chambre principale, salle de bain, salle de lavage et balcon privé.",
+    "Le chemin North Ridge est une rue sans issue entre les terrains de golf Saint-Raphaël et Royal Montréal, un secteur de grands terrains boisés.",
+    "Selon le document, le projet respecte les règles d'occupation du sol, de rapport plancher-terrain et de marges, et reprend les éléments architecturaux de la maison (toitures à versants, pignons, lucarnes, revêtements de teintes neutres).",
+    "Le comité consultatif d'urbanisme s'est prononcé en faveur le 21 juillet 2026; le conseil d'arrondissement a statué le 1er septembre 2026.",
+    "Aucun aspect financier n'est rattaché au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 4657,
+    "sortie": 493
+   }
+  },
+  {
+   "id": "1267905010",
+   "numero": "1267905010",
+   "resolution": "CA26 28 150",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant à permettre l'agrandissement et la rénovation d'éléments extérieurs du bâtiment principal sur la propriété située au 57, rue de la Plage-Riviera, correspondant au lot 1 843 465 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=97",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard – Sainte-Geneviève approuve les travaux d'agrandissement et de rénovation extérieure d'une maison au 57, rue de la Plage-Riviera.",
+    "Le projet ajoute un vestibule à l'entrée principale et un nouvel espace habitable à l'étage au-dessus, agrandissant le bâtiment au sol et en hauteur.",
+    "Le revêtement de bois vertical sera remplacé par du bois torréfié posé à l'horizontale ou un parement métallique; les fenêtres, la porte d'entrée et la porte de garage seront remplacées par des modèles contemporains, les volets retirés et la cheminée enlevée.",
+    "La propriété se trouve dans un secteur d'intérêt particulier développé dans les années 1980, avec des résidences de type californien et des garages en avancée de la façade.",
+    "Selon le document, la volumétrie, la combinaison maçonnerie-bois et l'avancée du garage sont conservées, et le projet s'intègre au cadre bâti environnant.",
+    "Le comité consultatif d'urbanisme s'est dit favorable le 18 août 2026; le conseil d'arrondissement statue le 1er septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 5161,
+    "sortie": 513
+   }
+  },
+  {
+   "id": "1264364025",
+   "numero": "1264364025",
+   "resolution": "CA26 28 136",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Affecter un montant supplémentaire total maximal de 747 700 $, incluant les taxes afin de couvrir les achats et les derniers éléments du projet de réaménagement à la bibliothèque de L'Île-Bizard - Sainte-Geneviève - Éliane-Labastrou.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=32",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard - Sainte-Geneviève ajoute jusqu'à 747 700 $ (taxes incluses) pour terminer le réaménagement de la bibliothèque Éliane-Labastrou, au 500, montée de L'Église.",
+    "La facture est payée à 100 % par l'arrondissement, à même son programme d'investissement; au moins 320 000 $ seraient dépensés en 2027.",
+    "Les plus gros postes : toiture et puits de lumière (300 000 $), nouveau rayonnage (240 000 $), marquise extérieure (30 000 $) et services professionnels liés à une infiltration d'eau (35 200 $).",
+    "Autres achats prévus : 55 chaises (8 500 $), recouvrement de 9 fauteuils (15 000 $), stores (20 000 $), deux bornes d'auto-prêt (6 500 $), affichage au nouveau nom (10 000 $).",
+    "Travaux aussi à l'extérieur : trottoir, plates-bandes et mobilier urbain (20 000 $), et branchement des systèmes de chauffage, climatisation et ventilation (16 000 $).",
+    "La Ville dit que sans cette somme, le projet resterait inachevé et la bibliothèque ne pourrait pas rouvrir dans ses locaux.",
+    "Les achats et installations sont prévus sur les 20 prochains mois; la mise en œuvre est confiée à la direction des projets immobiliers de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "747 700 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 6435,
+    "sortie": 605
+   }
+  },
+  {
+   "id": "1269606022",
+   "numero": "1269606022",
+   "resolution": "CA26 28 147",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant le remplacement du revêtement de toiture de la propriété située au 445, rue Closse, correspondant au lot 4 296 413 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=85",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève doit se prononcer sur le remplacement du revêtement de toiture au 445, rue Closse.",
+    "La toiture d'origine en tôle à baguette a été remplacée par des bardeaux d'asphalte noirs deux tons.",
+    "Le comité consultatif d'urbanisme a donné un avis défavorable : selon lui, le nouveau matériau ne respecte pas le caractère architectural d'origine et banalise le secteur.",
+    "La maison fait partie du développement Campeau (rues Blaise et Closse), un ensemble des années 1970 encadré par le règlement sur les PIIA pour protéger son caractère.",
+    "La recommandation inscrite dans le dossier est de refuser; le texte de résolution proposé, lui, est formulé pour approuver la demande.",
+    "Étapes : comité consultatif d'urbanisme le 21 juillet 2026, conseil d'arrondissement le 1er septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 4505,
+    "sortie": 432
+   }
+  },
+  {
+   "id": "1267905012",
+   "numero": "1267905012",
+   "resolution": "CA26 28 152",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant à permettre la construction d'un bâtiment accessoire sur la propriété située au 901, rue de Cherrier, correspondant au lot 4 589 763 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=106",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard – Sainte-Geneviève autorise la construction d'une remise au 901, rue de Cherrier, dans le secteur agricole de L'Île-Bizard.",
+    "La remise mesurera 4,9 m sur 6,1 m, pour 29,89 m² et une hauteur de 3,65 m, contre 127 m² au sol pour la maison existante.",
+    "Elle sera implantée dans la cour arrière, à 1 mètre de la ligne latérale droite, à peu près là où se trouvait l'ancienne remise démolie.",
+    "Les matériaux de revêtement seront semblables à ceux de la maison, avec une couleur différente.",
+    "Le terrain est soumis aux règles d'intégration architecturale du parcours riverain, de l'écoterritoire et du paysage agricole; selon le rapport, le projet ne porte pas atteinte au caractère rural du secteur.",
+    "Le comité consultatif d'urbanisme s'est dit favorable le 18 août 2026; la décision du conseil d'arrondissement est prévue le 1er septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 4540,
+    "sortie": 469
+   }
+  },
+  {
+   "id": "1264364028",
+   "numero": "1264364028",
+   "resolution": "CA26 28 134",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Autoriser la section bibliothèque et animation culturelle à faire don des livres et documents de généalogie à la Société d'histoire des familles du Québec et à la Société patrimoine et histoire de l'Île Bizard et Sainte-Geneviève.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=25",
+   "source": "sommaire",
+   "puces": [
+    "La bibliothèque de L'Île-Bizard retire environ 400 documents de sa collection de généalogie et les donne à deux organismes plutôt que de les garder en entrepôt.",
+    "La Société d'histoire des familles du Québec reçoit environ 400 documents; la Société patrimoine et histoire de l'Île-Bizard et Sainte-Geneviève en reçoit environ 15.",
+    "Les documents ont déjà été retirés du catalogue des bibliothèques de Montréal; le public pourra y accéder par l'entremise des deux sociétés d'histoire.",
+    "Un appel d'intérêt a été lancé auprès de sociétés d'histoire du Québec: seuls ces deux organismes se sont manifestés.",
+    "Le don est prévu en septembre 2026. La Société d'histoire des familles du Québec organisera une journée portes ouvertes pour présenter la collection.",
+    "Aucune dépense n'est associée au dossier (aspect financier indiqué comme non applicable)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 4660,
+    "sortie": 425
+   }
+  },
+  {
+   "id": "1267905008",
+   "numero": "1267905008",
+   "resolution": "CA26 28 148",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant à permettre la rénovation d'éléments extérieurs du bâtiment principal sur la propriété située au 461, Place Blaise, correspondant au lot 4 296 163 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=89",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard – Sainte-Geneviève accepte les rénovations extérieures déjà faites à la maison du 461, rue Blaise (fenêtres, porte d'entrée, retrait des volets).",
+    "L'approbation vient avec deux conditions : installer des volets bruns aux fenêtres du 2e étage en façade avant et peindre en brun le contour de la porte d'entrée.",
+    "Les travaux avaient été réalisés sans permis; l'arrondissement est intervenu en juin après une plainte visant notamment le style des nouvelles fenêtres.",
+    "La propriété se trouve dans le secteur résidentiel développé par Campeau dans les années 1970 (rues Blaise, Closse et une partie de Pierre-Boileau), identifié comme secteur d'intérêt particulier au règlement sur les P.I.I.A.",
+    "Selon le document, les nouveaux matériaux atténuent l'authenticité de la résidence, sans nuire de façon importante à son intégration dans le voisinage.",
+    "Le comité consultatif d'urbanisme a étudié la demande le 18 août 2026; le conseil d'arrondissement statue le 1er septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 4848,
+    "sortie": 503
+   }
+  },
+  {
+   "id": "1269452016",
+   "numero": "1269452016",
+   "resolution": "CA26 28 129",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Adopter le procès-verbal de la séance ordinaire du conseil d'arrondissement de L'Île-Bizard - Sainte-Geneviève du mardi 7 juillet 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=5",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de L'Île-Bizard - Sainte-Geneviève approuve le procès-verbal de sa séance ordinaire du 7 juillet 2026, une formalité exigée à la séance suivante."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 2933,
+    "sortie": 171
+   }
+  },
+  {
+   "id": "1269452017",
+   "numero": "1269452017",
+   "resolution": "CA26 28 130",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Prendre acte des procès-verbaux et des comptes rendus des comités de l'arrondissement de L'Île- Bizard - Sainte-Geneviève.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=8",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de L'Île-Bizard - Sainte-Geneviève prend acte du dépôt des procès-verbaux et comptes rendus de trois de ses comités.",
+    "Sont déposés : les procès-verbaux du comité consultatif d'urbanisme des 16 juin et 21 juillet 2026, le compte rendu du comité consultatif sur la culture, les sports, les loisirs et le développement social du 27 mai 2026, et ceux du comité de sécurité publique, circulation et mesures d'urgence des 25 mai et 8 juin 2026.",
+    "Aucune dépense ni aucune nouvelle obligation ne découle de ce dépôt."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 3053,
+    "sortie": 326
+   }
+  },
+  {
+   "id": "1269452019",
+   "numero": "1269452019",
+   "resolution": "CA26 28 157",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Désigner un maire suppléant pour l'arrondissement de L'Île-Bizard - Sainte-Geneviève.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=126",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard - Sainte-Geneviève désigne la conseillère Julie Forgues comme mairesse suppléante.",
+    "Son mandat court du 2 septembre 2026 au 1er décembre 2026.",
+    "Aucune somme d'argent n'est en jeu; il s'agit du renouvellement périodique de cette désignation."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 3041,
+    "sortie": 217
+   }
+  },
+  {
+   "id": "CA26 28 128",
+   "numero": null,
+   "resolution": "CA26 28 128",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Adoption de l'ordre du jour de la séance du conseil d'arrondissement",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-09-01_19h30_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève adopte l'ordre du jour de sa séance ordinaire du 1er septembre 2026, en retirant l'item 30.06."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 1675,
+    "sortie": 169
+   }
+  },
+  {
+   "id": "1266983002",
+   "numero": "1266983002",
+   "resolution": "CA26 28 137",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Déposer le rapport du maire sur les faits saillants des résultats financiers de l'arrondissement de L'Île-Bizard - Sainte-Geneviève au 31 décembre 2025.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=37",
+   "source": "sommaire",
+   "puces": [
+    "Le maire de L'Île-Bizard - Sainte-Geneviève dépose son rapport sur les faits saillants des résultats financiers de l'arrondissement pour l'année 2025 (au 31 décembre 2025).",
+    "Ce dépôt se fait lors d'une séance ordinaire du conseil d'arrondissement tenue en septembre, comme l'exigent la Charte de la Ville de Montréal et la Loi sur les cités et villes.",
+    "Le rapport sera publié sur le site internet de la Ville de Montréal.",
+    "Le document ne contient aucun chiffre ni résultat financier détaillé : il autorise seulement le dépôt et la diffusion du rapport."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 3338,
+    "sortie": 325
+   }
+  },
+  {
+   "id": "CA26 28 159",
+   "numero": null,
+   "resolution": "CA26 28 159",
+   "date": "2026-09-01",
+   "unite": "24 28159 - 19 septembre 2024 - Autoriser la signature d'une entente sur l'occupation du",
+   "objet": "Système de gestion des CA : 10.07 décisions des instances 2026/09/01 RECOMMANDATION 19:30 Dossier # : 1269452016 Unité administrative Arrondissement L'Île-Bizard - Sainte-Geneviève , Direction L'Île- responsable : Bizard - Sainte-Geneviève , Division secrétariat d'arrondissement Niveau décisionnel Conseil d'arrondissement proposé : Projet : - Objet : Adopter le procès-verbal de la séance ordinaire du conseil d'arrondissement de L'Île-Bizard - Sainte-Geneviève du mardi 7 juillet 2026. Il est recommandé : D'adopter le procès-verbal de la séance ordinaire du conseil d'arrondissement de L'Île-Bizard - Sainte-Geneviève du mardi 7 juillet 2026. Signé par Pierre Yves MORIN Le 2026-08-28 11:30",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-09-01_19h30_FR.pdf#page=16",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de L'Île-Bizard - Sainte-Geneviève adopte le procès-verbal de sa séance ordinaire du 7 juillet 2026, une formalité sans effet concret pour les résidents."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 2248,
+    "sortie": 173
+   }
+  },
+  {
+   "id": "1269606026",
+   "numero": "1269606026",
+   "resolution": "CA26 28 145",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, relativement à une demande de P.I.I.A. visant la reconstruction d'un garage détaché accessoire à une résidence unifamiliale isolée sise au 344, rue Daniel- Johnson, sur le lot 4 299 145 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=77",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard–Sainte-Geneviève autorise la reconstruction d'un garage détaché au 344, rue Daniel-Johnson, dont le bâtiment précédent a été détruit par un incendie.",
+    "Le nouveau garage mesurera 6,16 m sur 7,62 m, reposera sur une dalle de béton et aura une toiture à deux versants avec revêtement de vinyle.",
+    "La façade comprendra une porte de garage de 9 pi x 7 pi, une porte de service et une fenêtre.",
+    "Seule condition imposée : le pignon de la façade avant doit être de couleur blanche pour s'harmoniser avec la maison.",
+    "La propriété se trouve dans un secteur patrimonial de valeur exceptionnelle de L'Île-Bizard, ce qui soumet le projet à un examen d'intégration architecturale.",
+    "Le comité consultatif d'urbanisme s'est prononcé en faveur du projet le 21 juillet 2026; le conseil d'arrondissement statue le 1er septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.533Z",
+   "jetons": {
+    "entree": 4717,
+    "sortie": 460
+   }
+  },
+  {
+   "id": "1264364026",
+   "numero": "1264364026",
+   "resolution": "CA26 28 139",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Autoriser l'occupation du domaine public sur le territoire de l'arrondissement de L'Île-Bizard - Sainte-Geneviève selon le site et l'horaire prévus pour chaque événement identifié au tableau intitulé: \"Liste des événements publics pour le conseil d'arrondissement du 1 septembre 2026\", jointe au sommaire décisionnel, et édicter les ordonnances applicables.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=49",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard–Sainte-Geneviève autorise l'occupation du domaine public pour une liste d'événements publics, selon le site et l'horaire prévus pour chacun (liste jointe au dossier).",
+    "Les événements autorisés peuvent être de nature communautaire, culturelle, sociale, sportive, éducative, multiculturelle, civique, commémorative ou de collecte de fonds.",
+    "Des dérogations aux règlements de l'arrondissement sur la propreté et les nuisances et sur l'occupation du domaine public sont accordées : cuisson d'aliments, musique et bruit, vente de produits dérivés ou levée de fonds.",
+    "Les coûts des services de soutien de la Ville sont absorbés par les budgets de fonctionnement des services concernés, selon le Règlement sur les tarifs 2026 de l'arrondissement.",
+    "Les organisateurs devront aussi obtenir les autorisations des tiers concernés, comme le service incendie, le SPVM, la sécurité publique de l'arrondissement, les ambulanciers et la STM.",
+    "Sans ces autorisations, les événements prévus ne pourraient pas avoir lieu.",
+    "Les citoyens seront informés au besoin des impacts des événements sur leur quotidien."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.533Z",
+   "jetons": {
+    "entree": 4988,
+    "sortie": 527
+   }
+  },
+  {
+   "id": "1260392006",
+   "numero": "1260392006",
+   "resolution": "CA26 28 138",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Approuver l'accueil d'une fermette au Parc Jacques-Cardinal le 4 octobre 2026 dans le cadre de la fête des couleurs organisée par la Société patrimoine et histoire l'Île-Bizard et Sainte-Geneviève.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=45",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard–Sainte-Geneviève autorise l'accueil d'une fermette au parc Jacques-Cardinal le 4 octobre 2026, de 13 h à 16 h.",
+    "La fermette comprendra des canards, des poules, des lapins, des chèvres et des alpagas.",
+    "L'activité s'inscrit dans la Fête des couleurs organisée par la Société patrimoine et histoire de L'Île-Bizard et Sainte-Geneviève.",
+    "L'événement est gratuit et ouvert à tous; du bruit est autorisé, mais pas de vente ni de fermeture de rue.",
+    "L'autorisation repose sur une ordonnance permettant la garde d'animaux de ferme lors d'événements spéciaux dans l'arrondissement.",
+    "Sans cette autorisation, l'événement ne pourrait pas avoir lieu; aucun coût n'est associé au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.533Z",
+   "jetons": {
+    "entree": 3969,
+    "sortie": 413
+   }
+  },
+  {
+   "id": "1269606025",
+   "numero": "1269606025",
+   "resolution": "CA26 28 144",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, relativement à une demande de P.I.I.A. visant des travaux de transformation de l'entrée latérale droite de la maison unifamiliale située au 344, rue Daniel- Johnson, correspondant au lot 4 299 145 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=73",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard – Sainte-Geneviève approuve des travaux sur une maison unifamiliale du 344, rue Daniel-Johnson.",
+    "Le propriétaire remplacera la structure qui couvre le perron de l'entrée latérale droite par une nouvelle structure fermée, posée sur la dalle de béton déjà là.",
+    "Les travaux prévoient des fenêtres en vinyle de type 4-track, une porte cabana, une toiture en panneaux acryliques et une nouvelle gouttière avec descente pluviale.",
+    "Le perron et les escaliers en béton existants sont conservés; il n'y a ni agrandissement au sol ni changement notable du volume du bâtiment.",
+    "Le comité consultatif d'urbanisme, réuni le 21 juillet 2026, s'est dit favorable au projet; le conseil d'arrondissement statue le 1er septembre 2026.",
+    "Aucun montant d'argent n'est en jeu pour la Ville dans ce dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.533Z",
+   "jetons": {
+    "entree": 4591,
+    "sortie": 442
+   }
+  },
+  {
+   "id": "1267905015",
+   "numero": "1267905015",
+   "resolution": "CA26 28 155",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant à permettre l'installation",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=118",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard–Sainte-Geneviève autorise l'installation d'une clôture au 15 195, boulevard Gouin Ouest.",
+    "Le propriétaire veut remplacer une clôture de bois par une clôture en frost avec lattes blanches.",
+    "La Ville impose une condition : la clôture devra être brune ou noire.",
+    "Les travaux touchent les sections visibles de la rue, soit la ligne latérale droite et deux sections en façade.",
+    "La propriété se trouve dans un secteur de valeur exceptionnelle et sur le parcours riverain, ce qui soumet le projet à l'examen du comité consultatif d'urbanisme.",
+    "Le comité consultatif d'urbanisme s'est dit favorable le 18 août 2026; le conseil d'arrondissement tranche le 1er septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.534Z",
+   "jetons": {
+    "entree": 4213,
+    "sortie": 380
+   }
+  },
+  {
+   "id": "1262714006",
+   "numero": "1262714006",
+   "resolution": "CA26 28 131",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Motion de reconnaissance à Louis-Damien Douce et Alexis Wilson à la suite d'un sauvetage nautique le 7 juillet 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=11",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève adopte une motion de reconnaissance envers deux citoyens, Louis-Damien Douce et Alexis Wilson.",
+    "Le 7 juillet 2026, une jeune fille est tombée dans la rivière des Prairies, près du pont Guy-Lafleur.",
+    "Selon le document, M. Douce s'est jeté à l'eau pour lui porter secours, tandis que M. Wilson a alerté les services d'urgence et est resté sur place.",
+    "La motion sera remise aux deux hommes en témoignage de la reconnaissance du conseil et de la communauté.",
+    "L'arrondissement annonce une publication sur sa page Facebook et dans la prochaine édition de son journal.",
+    "Aucune dépense n'est associée à cette décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.534Z",
+   "jetons": {
+    "entree": 3535,
+    "sortie": 373
+   }
+  },
+  {
+   "id": "1264364030",
+   "numero": "1264364030",
+   "resolution": "CA26 28 133",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Approuver la demande de reconnaissance d'un organisme à but non lucratif de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, dans le cadre de la Politique de reconnaissance et de soutien des organismes à but non lucratif, pour la période du 2 septembre 2026 au 31 décembre 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-09-01_19h30_FR.pdf#page=20",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard - Sainte-Geneviève reconnaît l'organisme à but non lucratif La Coupe Internationale Les Enfants Jouent Pour Les Enfants, du 2 septembre au 31 décembre 2026.",
+    "L'organisme obtient le statut de reconnaissance « externe » selon la Politique de reconnaissance et de soutien des OBNL de l'arrondissement.",
+    "Cette reconnaissance lui donne accès au soutien de l'arrondissement : locaux et espaces d'activités, salles de rencontres, soutien financier et promotionnel.",
+    "En échange, l'organisme doit respecter les politiques et règlements de l'arrondissement et participer au processus annuel de reddition de comptes.",
+    "Aucune dépense n'est rattachée à ce dossier.",
+    "L'arrondissement enverra une lettre officialisant la reconnaissance et ses modalités."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.534Z",
+   "jetons": {
+    "entree": 5143,
+    "sortie": 409
    }
   },
   {
@@ -14859,6 +16097,822 @@
    }
   },
   {
+   "id": "CM26 0846",
+   "numero": null,
+   "resolution": "CM26 0846",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Approuver le Règlement R-216-1, modifiant le Règlement R-216 autorisant un emprunt de 500 000 000 $ pour financer le projet « Réno-Systèmes - phase 6 » / Approuver la modification du livre Programme des immobilisations (PI) 2026-2035",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=99",
+   "source": "resolution",
+   "puces": [
+    "La Ville appuie une modification du règlement d'emprunt de la Société de transport de Montréal (STM) pour le projet « Réno-Systèmes – phase 6 ».",
+    "Le montant de l'emprunt passe de 500 000 000 $ à 710 000 000 $, taxes nettes de ristournes et frais financiers inclus.",
+    "L'emprunt est contracté pour un terme de 20 ans.",
+    "L'objet et le libellé du règlement d'emprunt sont aussi modifiés.",
+    "Le conseil approuve en même temps une modification au Programme des immobilisations (PI) 2026-2035."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "710 000 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.527Z",
+   "jetons": {
+    "entree": 2020,
+    "sortie": 306
+   }
+  },
+  {
+   "id": "CM26 0826",
+   "numero": null,
+   "resolution": "CM26 0826",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Prendre connaissance du rapport de la Commission permanente sur l'examen des contrats Accorder un contrat à AtkinsRéalis Canada inc., pour les services professionnels relatifs au projet de construction de la phase II du poste électrique 315 kilovolts à la station d'épuration des eaux usées Jean-R.-Marcotte, pour une période de sept ans, incluant deux options de prolongation de 12 mois - Dépense totale de 4 153 259,18 $, taxes incluses - Appel d'offres public 26-21317 (1 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=70",
+   "source": "resolution",
+   "puces": [
+    "La Ville accorde à AtkinsRéalis Canada inc. un contrat de services professionnels pour la construction de la phase II du poste électrique de 315 kilovolts à la station d'épuration des eaux usées Jean-R.-Marcotte.",
+    "Le contrat couvre sept ans, au prix de la soumission révisée de 3 955 484,93 $, taxes incluses, pour une dépense totale de 4 153 259,18 $.",
+    "Une somme de 197 774,25 $, taxes incluses, est prévue comme budget de variation de quantités.",
+    "AtkinsRéalis était le seul soumissionnaire de l'appel d'offres public 26-21317 et a obtenu la note de passage.",
+    "Le directeur de la Direction des projets majeurs pourra prolonger le contrat deux fois 12 mois, sans dépense additionnelle.",
+    "Le rendement de l'entreprise fera l'objet d'une évaluation.",
+    "Le conseil prend aussi connaissance du rapport de la Commission permanente sur l'examen des contrats."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "4 153 259,18 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.528Z",
+   "jetons": {
+    "entree": 2363,
+    "sortie": 457
+   }
+  },
+  {
+   "id": "CM26 0827",
+   "numero": null,
+   "resolution": "CM26 0827",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Prendre connaissance du rapport de la Commission permanente sur l'examen des contrats Accorder un contrat au regroupement de firmes composé de AtkinsRéalis Canada inc. et Atelier SENS architecture fondamentale inc., pour les services professionnels en ingénierie et en architecture pour la surveillance des travaux de construction de l'unité de production d'oxygène à la station d'épuration des eaux usées Jean-R.-Marcotte, pour une période de cinq ans - Dépense totale de 10 012 105,30 $, taxes incluses - Appel d'offres public 26-21326 (2 soum., 1 conforme)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=70",
+   "source": "resolution",
+   "puces": [
+    "La Ville confie à AtkinsRéalis Canada inc. et Atelier SENS architecture fondamentale inc. la surveillance des travaux de construction d'une unité de production d'oxygène à la station d'épuration Jean-R.-Marcotte.",
+    "Le contrat couvre des services d'ingénierie et d'architecture sur cinq ans, pour 9 535 338,38 $ taxes incluses.",
+    "S'ajoute un budget de contingences de 476 766,92 $ taxes incluses, pour une dépense totale de 10 012 105,30 $.",
+    "L'appel d'offres public 26-21326 a reçu 2 soumissions, dont une seule conforme; ce soumissionnaire a atteint la note de passage.",
+    "La Ville évaluera le rendement du regroupement de firmes.",
+    "Le conseil municipal prend d'abord connaissance du rapport de la Commission sur l'examen des contrats."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "10 012 105,30 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.528Z",
+   "jetons": {
+    "entree": 2442,
+    "sortie": 413
+   }
+  },
+  {
+   "id": "CM26 0842",
+   "numero": null,
+   "resolution": "CM26 0842",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Adoption - Règlement fixant le taux au mètre cube de l'eau en fonction des coûts réels relatifs à l'alimentation en eau potable aux fins de la quote-part tarifaire pour l'alimentation en eau potable (exercice financier 2025)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=97",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal donne son orientation : adopter un règlement qui fixe le taux au mètre cube de l'eau potable pour l'exercice financier 2025.",
+    "Ce taux est établi en fonction des coûts réels de l'alimentation en eau potable.",
+    "Il sert à calculer la quote-part tarifaire pour l'alimentation en eau potable.",
+    "Le texte ne précise ni le montant du taux, ni les sommes en jeu."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.529Z",
+   "jetons": {
+    "entree": 1835,
+    "sortie": 245
+   }
+  },
+  {
+   "id": "CM26 0828",
+   "numero": null,
+   "resolution": "CM26 0828",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Prendre connaissance du rapport de la Commission permanente sur l'examen des contrats Accorder un contrat à 9140-2594 Québec inc. (Construction Arcade), pour les travaux de mise à niveau de la station de surpression de l'Île-Bizard - Dépense totale de 5 726 733,20 $, taxes incluses - Appel d'offres public DEP-P2611-194601-C (1 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=71",
+   "source": "resolution",
+   "puces": [
+    "La Ville accorde un contrat à 9140-2594 Québec inc. (Construction Arcade) pour mettre à niveau la station de surpression de l'Île-Bizard.",
+    "Le contrat lui-même vaut au maximum 4 772 277,67 $, taxes incluses.",
+    "S'ajoutent 715 841,65 $ pour les imprévus et 238 613,88 $ pour les frais connexes, taxes incluses.",
+    "La dépense totale atteint 5 726 733,20 $, taxes incluses.",
+    "L'appel d'offres public n'a reçu qu'une seule soumission, jugée conforme.",
+    "La Ville fera une évaluation du rendement de l'entreprise.",
+    "Le conseil prend connaissance du rapport de la Commission permanente sur l'examen des contrats."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "5 726 733,20 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.529Z",
+   "jetons": {
+    "entree": 2238,
+    "sortie": 371
+   }
+  },
+  {
+   "id": "CM26 0850",
+   "numero": null,
+   "resolution": "CM26 0850",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Approuver le Règlement R-200-1 modifiant le Règlement R-200 de la Société de transport de Montréal autorisant un emprunt de 120 900 925 $ pour financer le projet « Programme de réfection des infrastructures (PRI Surface) - phase 2 » / Approuver la modification du livre Programme des immobilisations (PI) 2026-2035",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=101",
+   "source": "resolution",
+   "puces": [
+    "La Ville approuve une modification au règlement d'emprunt R-200 de la Société de transport de Montréal (STM).",
+    "L'emprunt passe de 120 900 925 $ à 190 300 925 $, taxes nettes de ristournes et frais financiers inclus.",
+    "L'argent finance le projet « Programme de réfection des infrastructures (PRI Surface) - phase 2 ».",
+    "L'emprunt est remboursable sur un terme de 20 ans.",
+    "L'objet et le libellé du règlement d'emprunt sont aussi modifiés.",
+    "La Ville approuve du même coup une modification au livre Programme des immobilisations (PI) 2026-2035."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "190 300 925 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.529Z",
+   "jetons": {
+    "entree": 2079,
+    "sortie": 325
+   }
+  },
+  {
+   "id": "CM26 0834",
+   "numero": null,
+   "resolution": "CM26 0834",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Modifier la source de financement d'un montant de 187 845 $, compris dans le soutien financier total de 581 845 $ accordé à la Coopérative d'habitation Monde-Uni pour la réalisation du projet Acadie (CG26 0178), afin que cette somme soit désormais financée dans le cadre du Programme d'habitation abordable Québec et fasse l'objet d'un remboursement par la Communauté métropolitaine de Montréal",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=92",
+   "source": "resolution",
+   "puces": [
+    "La Ville change la provenance de l'argent pour 187 845 $ du soutien déjà accordé à la Coopérative d'habitation Monde-Uni.",
+    "Ce soutien total de 581 845 $ sert à réaliser le projet Acadie; son montant ne change pas.",
+    "Les 187 845 $ seront désormais financés par le Programme d'habitation abordable Québec.",
+    "La Communauté métropolitaine de Montréal remboursera cette somme à la Ville.",
+    "Il s'agit de l'orientation que le conseil municipal est appelé à adopter."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "187 845 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.529Z",
+   "jetons": {
+    "entree": 2011,
+    "sortie": 288
+   }
+  },
+  {
+   "id": "CM26 0825",
+   "numero": null,
+   "resolution": "CM26 0825",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Prendre connaissance du rapport de la Commission permanente sur l'examen des contrats Accorder un contrat à Construction Deric inc., pour les travaux de construction pour l'unité de production d'oxygène dans le cadre du projet de désinfection de la station d'épuration des eaux usées Jean-R.-Marcotte (lot 8b) - Dépense totale de 135 532 950 $, taxes incluses - Appel d'offres public DPM-P2548-188999-C (2 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=69",
+   "source": "resolution",
+   "puces": [
+    "La Ville accorde à Construction Deric inc. un contrat de 127 984 000 $, taxes incluses, pour construire une unité de production d'oxygène.",
+    "Ces travaux font partie du projet de désinfection de la station d'épuration des eaux usées Jean-R.-Marcotte (lot 8b).",
+    "Construction Deric inc. était le plus bas soumissionnaire conforme; l'appel d'offres public a reçu 2 soumissions.",
+    "La Ville ajoute 6 399 200 $ en contingences et 1 149 750 $ en incidences, pour une dépense totale de 135 532 950 $, taxes incluses.",
+    "Le rendement de Construction Deric inc. sera évalué.",
+    "Le conseil prend aussi connaissance du rapport de la Commission permanente sur l'examen des contrats."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "135 532 950 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 2248,
+    "sortie": 378
+   }
+  },
+  {
+   "id": "CM26 0824",
+   "numero": null,
+   "resolution": "CM26 0824",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Approuver la première convention de modification du bail par laquelle la Ville de Montréal et la Société d'habitation et de développement de Montréal souhaitent apporter une modification à la clause 4.5 - Allocation monétaire du bail intervenu le 25 septembre 2025 (CG25 0593) / Autoriser un budget de revenus et de dépenses de 22 500 000 $, net de ristournes, afin de permettre l'utilisation de l'allocation monétaire offerte par la Société d'habitation et de développement de Montréal pour les travaux de réaménagement de l'édifice Chaussegros-de-Léry exécutés par le Service de la gestion et de la planification des immeubles, lesquels sont remboursables par la Société d'habitation et de",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=68",
+   "source": "resolution",
+   "puces": [
+    "La Ville modifie le bail signé le 25 septembre 2025 avec la Société d'habitation et de développement de Montréal (SHDM), en changeant la clause sur l'allocation monétaire.",
+    "Elle autorise un budget de revenus et de dépenses de 22 500 000 $, net de ristourne, pour la durée du bail de 23 ans.",
+    "Cet argent sert aux travaux de réaménagement de l'édifice Chaussegros-de-Léry, réalisés par le Service de la gestion et de la planification des immeubles.",
+    "La SHDM rembourse ces travaux à la Ville, via l'allocation monétaire qu'elle offre.",
+    "Les revenus et dépenses sont imputés selon les informations financières du dossier décisionnel."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "22 500 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 2406,
+    "sortie": 355
+   }
+  },
+  {
+   "id": "CM26 0836",
+   "numero": null,
+   "resolution": "CM26 0836",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Autoriser la réception d'une subvention de 161 281 $ provenant du ministère de l'Emploi et de la Solidarité sociale, pour couvrir une partie des frais inhérents à la tenue d'ÉCO-RDV 2026 au Marché Bonsecours / Autoriser un budget additionnel de dépenses équivalent au revenu additionnel correspondant / Approuver le projet d'entente à cet effet",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=93",
+   "source": "resolution",
+   "puces": [
+    "La Ville accepte une subvention de 161 281 $ du ministère de l'Emploi et de la Solidarité sociale.",
+    "L'argent sert à payer une partie des frais de l'événement ÉCO-RDV 2026, tenu au Marché Bonsecours.",
+    "La Ville approuve une entente avec le ministère, qui fixe les conditions de versement de la subvention.",
+    "Elle ajoute à son budget une dépense égale à ce nouveau revenu.",
+    "Le Service du développement économique est chargé d'utiliser cette somme pour organiser l'événement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "161 281 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 2111,
+    "sortie": 289
+   }
+  },
+  {
+   "id": "CM26 0822",
+   "numero": null,
+   "resolution": "CM26 0822",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Accorder trois contrats à Baulne inc., pour un service d'entretien d'équipements de mécanique du bâtiment - CVAC (chauffage, ventilation, et air climatisé) pour divers bâtiments de la Ville, pour une période de 34 mois, incluant avec deux options de prolongation de 12 mois chacune - Dépense totale de 2 874 122,94 $ - Appel d'offres public 26-21391 (2 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=67",
+   "source": "resolution",
+   "puces": [
+    "La Ville confie à Baulne inc. l'entretien des équipements de chauffage, ventilation et air climatisé (CVAC) de divers bâtiments municipaux.",
+    "Le contrat couvre 34 mois, avec deux possibilités de prolongation de 12 mois chacune.",
+    "Trois lots sont accordés : 903 360,71 $, 678 201,04 $ et 813 540,70 $, taxes incluses.",
+    "S'ajoute un budget de contingences de 479 020,49 $, taxes incluses, pour une dépense totale de 2 874 122,94 $.",
+    "Baulne inc. était le plus bas soumissionnaire conforme de l'appel d'offres public 26-21391, qui a reçu 2 soumissions.",
+    "La Ville procédera à une évaluation du rendement de l'entreprise."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 874 122,94 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 2213,
+    "sortie": 374
+   }
+  },
+  {
+   "id": "CM26 0847",
+   "numero": null,
+   "resolution": "CM26 0847",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Approuver le Règlement R-227 de la Société de transport de Montréal autorisant un emprunt de 6 968 923 $ pour financer le projet « Programme de gestion des risques technologiques et de sécurité - phase 4 (PGRTS4) » / Approuver la modification du livre Programme des immobilisations (PI) 2026-2035",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=99",
+   "source": "resolution",
+   "puces": [
+    "La Ville approuve un règlement d'emprunt de la Société de transport de Montréal (STM) de 6 968 923 $.",
+    "L'argent servira à financer la phase 4 du « Programme de gestion des risques technologiques et de sécurité » de la STM.",
+    "Le montant inclut les taxes nettes de ristournes et les frais financiers, pour un emprunt d'une durée de cinq ans.",
+    "La Ville approuve aussi une modification au livre du Programme des immobilisations (PI) 2026-2035.",
+    "La décision est portée à la séance ordinaire du conseil municipal du 25 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "6 968 923 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 2032,
+    "sortie": 306
+   }
+  },
+  {
+   "id": "CM26 0830",
+   "numero": null,
+   "resolution": "CM26 0830",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Prendre connaissance du rapport de la Commission permanente sur l'examen des contrats Conclure une entente-cadre avec Aréo-Feu ltée, pour la fourniture d'appareils de protection respiratoire isolants autonomes, incluant leurs composantes, accessoires, services connexes, l'entretien ainsi que l'approvisionnement en pièces de rechange, d'une durée de dix ans, dans le cadre d'un appel d'offres regroupé réalisé en vertu d'une entente intermunicipale avec la Ville de Longueuil (CE26 1027) - Montant estimé de l'entente : 28 412 011,46 $, taxes incluses - Appel d'offres public 26-21409 (2 soum., 1 conforme)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=73",
+   "source": "resolution",
+   "puces": [
+    "La Ville conclut une entente-cadre de 10 ans avec Aréo-Feu ltée pour fournir des appareils de protection respiratoire autonomes aux pompiers, avec les accessoires, l'entretien et les pièces de rechange.",
+    "Le contrat lui-même vaut au maximum 21 855 393,44 $, taxes incluses.",
+    "S'y ajoutent 3 278 309,01 $ pour les contingences et 3 278 309,01 $ pour les variations de quantités, ce qui porte l'entente estimée à 28 412 011,46 $.",
+    "L'appel d'offres public 26-21409 a été réalisé conjointement avec la Ville de Longueuil; sur 2 soumissions, une seule était conforme et Aréo-Feu est la seule firme à avoir atteint la note de passage.",
+    "Les achats seront payés à même les budgets du Service de sécurité incendie de Montréal, au fur et à mesure des besoins.",
+    "La Ville évaluera le rendement d'Aréo-Feu ltée.",
+    "Le conseil prend aussi connaissance du rapport de la Commission permanente sur l'examen des contrats."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "28 412 011,46 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 2585,
+    "sortie": 492
+   }
+  },
+  {
+   "id": "CM26 0839",
+   "numero": null,
+   "resolution": "CM26 0839",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Autoriser la réception d'une subvention de 9 000 000 $ provenant du gouvernement du Québec pour assurer la poursuite de la mission du musée de la Biosphère de 2026 à 2029 / Autoriser un budget additionnel de dépenses équivalent au revenu additionnel correspondant / Approuver le projet de convention à cet effet",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=95",
+   "source": "resolution",
+   "puces": [
+    "La Ville accepte une subvention de 9 000 000 $ du gouvernement du Québec pour le musée de la Biosphère.",
+    "L'argent servira à poursuivre la mission du musée de 2026 à 2029.",
+    "La Ville approuve une convention avec Québec qui fixe les modalités et conditions de versement de la subvention.",
+    "Un budget de dépenses additionnel de 9 000 000 $ est autorisé, équivalent au revenu reçu.",
+    "Le Service de l'Espace pour la vie, des grands parcs et du Mont-Royal est autorisé à affecter cette somme au musée."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "9 000 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 2081,
+    "sortie": 304
+   }
+  },
+  {
+   "id": "CM26 0841",
+   "numero": null,
+   "resolution": "CM26 0841",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Adoption - Règlement modifiant le Règlement du conseil d'agglomération sur la délégation de l'entretien du réseau principal d'aqueduc et d'égout aux municipalités liées (RCG 05-002)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=96",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal fixe son orientation en vue d'une décision du conseil d'agglomération.",
+    "Cette orientation est d'adopter un règlement qui modifie les règles de délégation de l'entretien du réseau principal d'aqueduc et d'égout aux municipalités liées.",
+    "Le texte fourni ne précise pas en quoi consistent les modifications, ni les montants ou échéances en jeu."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 1790,
+    "sortie": 317
+   }
+  },
+  {
+   "id": "CM26 0829",
+   "numero": null,
+   "resolution": "CM26 0829",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Prendre connaissance du rapport de la Commission permanente sur l'examen des contrats Approuver le projet de bail par lequel la Ville loue de Place Dupuis fiducie commerciale, pour une e e e e e période de dix ans, à compter du 1er octobre 2026, des espaces aux 16 , 17 , 18 , 19 , 20 et e 21 étages de l'immeuble situé au 855, rue Sainte-Catherine Est, dans l'arrondissement de Ville- Marie, d'une superficie de 111 390 pieds carrés, à des fins de bureaux, pour un loyer total de 43 678 781 $, taxes incluses / Autoriser un virement budgétaire de 114 542 $, net de ristourne, pour 2026, en provenance des dépenses contingentes imprévues d'administration / Approuver l'ajustement récurrent de la base",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=72",
+   "source": "resolution",
+   "puces": [
+    "La Ville louera six étages (16e à 21e) de l'immeuble du 855, rue Sainte-Catherine Est, dans Ville-Marie, pour en faire des bureaux.",
+    "Le bail couvre 111 390 pieds carrés, pour 10 ans à partir du 1er octobre 2026, au coût total de 43 678 781 $, taxes incluses.",
+    "Le propriétaire est Place Dupuis fiducie commerciale.",
+    "Pour payer le loyer de 2026, la Ville vire 114 542 $ (net de ristourne) des dépenses imprévues vers le Service de la stratégie immobilière et de l'habitation.",
+    "Le budget de ce service est rehaussé de façon récurrente : 2 519 917 $ en 2027 et 1 618 202 $ en 2028, nets de ristourne.",
+    "Un montant de 1 665 000 $ est viré en 2026, plus 1 400 000 $ en 2027, au Service de la gestion et de la planification des immeubles pour déménager les employés.",
+    "Le conseil prend aussi connaissance du rapport de la Commission sur l'examen des contrats."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "43 678 781 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 2967,
+    "sortie": 483
+   }
+  },
+  {
+   "id": "CM26 0840",
+   "numero": null,
+   "resolution": "CM26 0840",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Accorder un soutien financier totalisant 1 892 000 $ à huit villes liées dans le cadre du programme Accélérer la transition climatique locale pour appuyer la planification et la mise en œuvre des projets issus des plans climats du ministère des Affaires municipales et de l'Habitation / Approuver la convention de subvention financière entre les villes de Montréal et de Pointe-Claire, remplaçant la convention approuvée par la résolution CG26-0382",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=95",
+   "source": "resolution",
+   "puces": [
+    "Montréal verse 1 892 000 $ à huit villes liées pour planifier et réaliser des projets tirés de leurs plans climats, dans le cadre du programme Accélérer la transition climatique locale du ministère des Affaires municipales et de l'Habitation.",
+    "Les montants par ville : Pointe-Claire 600 000 $, Dollard-des-Ormeaux 528 000 $, Westmount 332 000 $, Côte-Saint-Luc 112 000 $, Sainte-Anne-de-Bellevue 112 000 $, Beaconsfield 96 000 $, Kirkland 80 000 $, Montréal-Ouest 32 000 $.",
+    "La Ville approuve une nouvelle convention de subvention avec Pointe-Claire, qui remplace celle déjà adoptée (résolution CG26-0382).",
+    "La dépense sera imputée selon les informations financières du dossier décisionnel.",
+    "Décision prise à la séance ordinaire du conseil municipal du 25 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 892 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 2301,
+    "sortie": 444
+   }
+  },
+  {
+   "id": "CM26 0831",
+   "numero": null,
+   "resolution": "CM26 0831",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Prendre connaissance du rapport de la Commission permanente sur l'examen des contrats Accorder un contrat à Les Entreprises Charles Maisonneuve ltée., pour les travaux de réfection des infrastructures et des aménagements ainsi que pour les travaux de la Commission des services électriques de Montréal sur les rues William entre la rue Ann et le boulevard Robert- Bourassa, et de l'Inspecteur entre les rues Notre-Dame et William, incluant l'ajout de travaux d'éclairage sur les rues William et Ottawa - Dépense totale de 18 342 120,64 $, taxes incluses - Appel d'offres public 518601 (4 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=74",
+   "source": "resolution",
+   "puces": [
+    "La Ville accorde à Les Entreprises Charles Maisonneuve ltée un contrat de 14 202 774,14 $, taxes incluses, comme plus bas soumissionnaire conforme (appel d'offres public 518601, 4 soumissions).",
+    "Les travaux touchent la rue William, entre la rue Ann et le boulevard Robert-Bourassa, et la rue de l'Inspecteur, entre les rues Notre-Dame et William.",
+    "Ils comprennent la réfection des infrastructures et des aménagements, des travaux de la Commission des services électriques de Montréal, ainsi que de l'éclairage sur les rues William et Ottawa.",
+    "La Ville ajoute 2 130 416,12 $ en contingences et 2 008 930,38 $ en incidences, pour une dépense totale de 18 342 120,64 $, taxes incluses.",
+    "Le conseil prend connaissance du rapport de la Commission permanente sur l'examen des contrats.",
+    "Le rendement de l'entreprise sera évalué."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "18 342 120,64 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 2469,
+    "sortie": 451
+   }
+  },
+  {
+   "id": "CM26 0838",
+   "numero": null,
+   "resolution": "CM26 0838",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Adopter le Plan régional des milieux humides et hydriques de l'agglomération de Montréal",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=94",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal recommande d'adopter le Plan régional des milieux humides et hydriques de l'agglomération de Montréal.",
+    "Il s'agit d'une prise de position du conseil municipal (orientation) sur ce plan régional.",
+    "Le texte de la décision ne précise ni échéance, ni montant, ni mesures concrètes rattachées au plan."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 1655,
+    "sortie": 216
+   }
+  },
+  {
+   "id": "CM26 0921",
+   "numero": null,
+   "resolution": "CM26 0921",
+   "date": "2026-08-24",
+   "unite": "Service du greffe",
+   "objet": "Motion de l'Opposition officielle - Pour l'installation de radars photo devant chaque école primaire afin d'améliorer la sécurité des enfants aux abords des établissements scolaires Le leader adjoint de l’Opposition officielle, Christopher McCray, et le conseiller Alan DeSousa déposent une nouvelle version consensuelle du point 65.03. La nouvelle version se lit comme suit :",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=146",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal demande à l'administration de déposer, dans les meilleurs délais, un plan de déploiement de radars photo devant toutes les écoles primaires et secondaires de Montréal, avec un ordre de priorité.",
+    "Ce plan doit suivre les orientations du plan d'action Vision zéro 2025-2027, qui vise à sécuriser les déplacements des usagers les plus vulnérables.",
+    "Les revenus des constats d'infraction doivent continuer d'être réinvestis dans la sécurité routière, dont des aménagements près des écoles.",
+    "Le conseil veut profiter de la campagne électorale provinciale pour demander aux partis politiques d'appuyer publiquement l'accélération de l'implantation de radars photo en zone scolaire.",
+    "Les motifs invoqués : vitesse excessive récurrente dans plusieurs secteurs, et efficacité démontrée des radars photo ailleurs au Canada pour réduire la vitesse.",
+    "La motion vient de l'Opposition officielle; une version consensuelle a été déposée par Christopher McCray et Alan DeSousa."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 2644,
+    "sortie": 471
+   }
+  },
+  {
+   "id": "CM26 0833",
+   "numero": null,
+   "resolution": "CM26 0833",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Motion de l'Opposition officielle - Motion pour démontrer la solidarité de la Ville de Montréal au peuple palestinien et aux victimes civiles du conflit en Asie de l'Ouest, communément appelée le Moyen-Orient",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=80",
+   "source": "resolution",
+   "puces": [
+    "L'Opposition officielle dépose au conseil municipal une motion pour exprimer la solidarité de la Ville de Montréal avec le peuple palestinien et les victimes civiles du conflit au Moyen-Orient.",
+    "La motion s'appuie sur la diversité de la population montréalaise et sur l'engagement de la Ville envers l'accueil et l'inclusion des personnes immigrantes.",
+    "Elle rappelle l'adhésion de Montréal au réseau international Mayors for Peace et son engagement pour la paix et les droits de la personne.",
+    "Elle cite les engagements de la Ville contre le racisme et la discrimination : Déclaration de Montréal contre la discrimination raciale, Déclaration pour la diversité culturelle et l'inclusion, Déclaration sur le caractère systémique du racisme, Charte montréalaise des droits et responsabilités.",
+    "Elle évoque les prises de position passées de la Ville contre des régimes d'oppression, dont l'apartheid sud-africain.",
+    "Le texte fourni s'arrête avant l'énoncé des demandes concrètes de la motion : le dispositif n'est pas disponible."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 2172,
+    "sortie": 485
+   }
+  },
+  {
+   "id": "CM26 0920",
+   "numero": null,
+   "resolution": "CM26 0920",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Motion de l'Opposition officielle - Pour la conservation du tunnelier « Lisette » afin de soutenir le développement futur du réseau de transport collectif de la région métropolitaine La cheffe de l’Opposition officielle, Ericka Alneus, et le conseiller Aref Salem déposent une nouvelle version consensuelle du point 65.02. La nouvelle version se lit comme suit :",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=144",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal demande au gouvernement du Québec d'étudier les conditions pour garder à Montréal le tunnelier « Lisette » après la fin des travaux du prolongement de la ligne bleue, prévue vers 2028.",
+    "Il demande aussi d'évaluer toutes les options pour préserver l'expertise développée au Bureau de projet du prolongement de la ligne bleue.",
+    "L'évaluation devrait porter sur les bénéfices économiques, techniques et environnementaux de réutiliser le tunnelier pour d'autres projets de métro ou d'infrastructures souterraines.",
+    "Le conseil invite Québec, l'Autorité régionale de transport métropolitain, la STM et d'autres partenaires à repérer ensemble les prolongements de métro qui pourraient réutiliser le tunnelier.",
+    "Le conseil réitère l'urgence de maintenir les actifs du métro de Montréal et de poursuivre le développement du transport collectif dans la région.",
+    "Le conseil souligne le rôle de pionnière de Lisette St-Onge, première femme opératrice du métro de Montréal.",
+    "La motion sera transmise au gouvernement du Québec et aux organismes concernés."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 3003,
+    "sortie": 504
+   }
+  },
+  {
+   "id": "CM26 0823",
+   "numero": null,
+   "resolution": "CM26 0823",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Approuver le projet de bail par lequel la Ville loue de 888 De Maisonneuve Fiducie Commerciale, er représentée par Busac inc., pour une durée de dix ans, à compter du 1 février 2027, un local au rez-de-chaussée de l'immeuble situé au 888, boulevard De Maisonneuve Est, dans l'arrondissement de Ville-Marie, d'une superficie de 12 684 pieds carrés, pour les besoins de l'unité métro du Poste de quartier 50 du Service de police de la Ville de Montréal, pour un loyer total de 4 836 594,23 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=67",
+   "source": "resolution",
+   "puces": [
+    "La Ville va louer un local au rez-de-chaussée du 888, boulevard De Maisonneuve Est, dans Ville-Marie.",
+    "Le bail dure 10 ans et commence le 1er février 2027.",
+    "Le local fait 12 684 pieds carrés et servira à l'unité métro du Poste de quartier 50 du SPVM.",
+    "Le loyer total s'élève à 4 836 594,23 $, taxes incluses.",
+    "Le propriétaire est 888 De Maisonneuve Fiducie Commerciale, représentée par Busac inc."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "4 836 594,23 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 2277,
+    "sortie": 291
+   }
+  },
+  {
+   "id": "CM26 0851",
+   "numero": null,
+   "resolution": "CM26 0851",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Nommer Leslie Roberts à titre de représentant de l'arrondissement de Ville-Marie au sein du conseil d'administration de PME MTL Centre-Ville",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=101",
+   "source": "resolution",
+   "puces": [
+    "Le conseil nomme Leslie Roberts comme représentant élu de l'arrondissement de Ville-Marie au conseil d'administration de PME MTL Centre-Ville.",
+    "Aucune somme d'argent n'est rattachée à cette décision."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 1731,
+    "sortie": 178
+   }
+  },
+  {
+   "id": "CM26 0844",
+   "numero": null,
+   "resolution": "CM26 0844",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Approuver le Règlement R-015-3 modifiant le Règlement CA-113, tel que modifié par les Règlements R-015, R-015-1 et R-015-2 de la Société de transport de Montréal autorisant un emprunt additionnel de 28 423 532 $ pour financer le projet « Programme mesures préférentielles pour bus (MPB) » / Approuver la modification du livre Programme des immobilisations (PI) 2026- 2035",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=98",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal est invité à approuver un emprunt additionnel de 28 423 532 $ de la Société de transport de Montréal pour son « Programme mesures préférentielles pour bus (MPB) ».",
+    "Avec cet ajout, le montant total autorisé de l'emprunt passe à 123 235 302 $, taxes nettes de ristournes et frais financiers inclus.",
+    "L'emprunt est contracté pour un terme de 10 ans.",
+    "La modification change aussi l'objet et le libellé du règlement d'emprunt de la STM.",
+    "Le livre du Programme des immobilisations (PI) 2026-2035 est modifié en conséquence."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "28 423 532 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 2162,
+    "sortie": 319
+   }
+  },
+  {
+   "id": "CM26 0845",
+   "numero": null,
+   "resolution": "CM26 0845",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Approuver le Règlement R-215-1, modifiant le Règlement R-215 de la Société de transport de Montréal autorisant un emprunt de 400 000 000 $ pour financer le projet « Réno-Infrastructures - phase 4 » / Approuver la modification du livre Programme des immobilisations (PI) 2026-2035",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=98",
+   "source": "resolution",
+   "puces": [
+    "La Ville approuve une modification au règlement d'emprunt R-215 de la Société de transport de Montréal (STM), qui finance le projet « Réno-Infrastructures - phase 4 ».",
+    "Le montant de l'emprunt passe de 400 000 000 $ à 640 000 000 $, taxes nettes de ristournes et frais financiers inclus.",
+    "L'emprunt est contracté pour un terme de 20 ans.",
+    "L'objet et le libellé du règlement d'emprunt sont aussi modifiés.",
+    "Le conseil approuve également la modification du livre Programme des immobilisations (PI) 2026-2035.",
+    "La décision est prise à la séance ordinaire du conseil municipal du 25 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "640 000 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 2080,
+    "sortie": 345
+   }
+  },
+  {
+   "id": "CM26 0843",
+   "numero": null,
+   "resolution": "CM26 0843",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Adoption, avec changements, du Règlement autorisant la construction, la transformation et l'occupation d'un bâtiment à des fins d'hébergement pour personnes ayant besoin d'aide et d'assistance sur le lot 2 242 423 du cadastre du Québec",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=97",
+   "source": "resolution",
+   "puces": [
+    "La Ville recommande au conseil d'agglomération d'adopter un règlement qui autorise la construction, la transformation et l'occupation d'un bâtiment sur le lot 2 242 423.",
+    "Le bâtiment servirait à l'hébergement de personnes ayant besoin d'aide et d'assistance.",
+    "Le règlement est adopté avec des changements par rapport au projet déposé; le texte ne précise pas lesquels.",
+    "Le projet s'appuie sur l'article 89 de la Charte de la Ville de Montréal, qui permet d'autoriser ce type de projet malgré la réglementation d'urbanisme locale.",
+    "Le document ne mentionne ni montant, ni échéancier, ni arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 1902,
+    "sortie": 338
+   }
+  },
+  {
+   "id": "CM26 0837",
+   "numero": null,
+   "resolution": "CM26 0837",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Approuver la conformité aux objectifs du Schéma d'aménagement et de développement de l'agglomération de Montréal du projet du Centre intégré universitaire de santé et de services sociaux de l'Est-de-l'Île-de-Montréal visant la construction, l'agrandissement et le réaménagement du complexe hospitalier de l'Hôpital Maisonneuve-Rosemont",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=94",
+   "source": "resolution",
+   "puces": [
+    "La Ville confirme que le projet de l'Hôpital Maisonneuve-Rosemont respecte les objectifs du Schéma d'aménagement et de développement de l'agglomération de Montréal.",
+    "Le projet prévoit la construction, l'agrandissement et le réaménagement du complexe hospitalier.",
+    "Il a été soumis par le ministère de la Santé et des Services sociaux, pour le compte du CIUSSS de l'Est-de-l'Île-de-Montréal.",
+    "Le projet touche une dizaine de lots du cadastre du Québec, circonscription foncière de Montréal.",
+    "Le greffier doit transmettre l'avis de conformité à la ministre de la Santé, et l'envoyer pour information à la répondante du ministère."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.533Z",
+   "jetons": {
+    "entree": 2199,
+    "sortie": 349
+   }
+  },
+  {
+   "id": "CM26 0848",
+   "numero": null,
+   "resolution": "CM26 0848",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Approuver le Règlement R-228 de la Société de transport de Montréal autorisant un emprunt de 22 722 616 $ pour financer le projet « Prolongation de la durée de vie des MR-73 Phase 3 (PPVU) » / Approuver la modification du livre Programme des immobilisations (PI) 2026-2035",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=100",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal donne son accord à un emprunt de 22 722 616 $ de la Société de transport de Montréal (STM).",
+    "L'argent servira au projet « Prolongation de la durée de vie des MR-73 Phase 3 », les voitures de métro MR-73.",
+    "Le montant inclut les taxes nettes de ristournes et les frais financiers.",
+    "L'emprunt est contracté sur un terme de 10 ans.",
+    "Le conseil approuve aussi une modification du Programme des immobilisations (PI) 2026-2035 de la STM."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "22 722 616 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.533Z",
+   "jetons": {
+    "entree": 1986,
+    "sortie": 287
+   }
+  },
+  {
+   "id": "CM26 0835",
+   "numero": null,
+   "resolution": "CM26 0835",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Autoriser le paiement de la facture du Groupe CH inc., d'un montant de 245 313,26 $, taxes incluses, pour la location de salles au Centre Bell, ainsi que des services de traiteur, de production audiovisuelle et de production d'événement dans le cadre de la cérémonie commémorative tenue le 7 juillet 2026 en hommage à l'agent Mohamed Lamine Benredouane / Autoriser un budget additionnel d'un montant de 224 003,71 $, taxes nettes, pour 2026, en provenance du budget de contingences",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=92",
+   "source": "resolution",
+   "puces": [
+    "La Ville paie une facture de 245 313,26 $, taxes incluses, au Groupe CH inc.",
+    "La facture couvre la location de salles au Centre Bell, le traiteur, la production audiovisuelle et la production de l'événement.",
+    "Il s'agit de la cérémonie commémorative du 7 juillet 2026 en hommage à l'agent Mohamed Lamine Benredouane.",
+    "La Ville débloque un budget additionnel de 224 003,71 $, taxes nettes, pour 2026.",
+    "Cette somme additionnelle provient du budget de contingences."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "245 313,26 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.534Z",
+   "jetons": {
+    "entree": 2186,
+    "sortie": 294
+   }
+  },
+  {
+   "id": "CM26 0849",
+   "numero": null,
+   "resolution": "CM26 0849",
+   "date": "2026-08-24",
+   "unite": null,
+   "objet": "Approuver le Règlement R-229 autorisant un emprunt de 23 901 463 $ pour financer le projet « Prolongation de la durée de vie BUS diesel 12 mètres » / Approuver la modification du livre Programme des immobilisations (PI) 2026-2035",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-24_13h00_FR.pdf#page=100",
+   "source": "resolution",
+   "puces": [
+    "La Ville approuve un emprunt de 23 901 463 $ de la Société de transport de Montréal (STM).",
+    "L'argent servira à financer le projet « Prolongation de la durée de vie BUS diesel 12 mètres ».",
+    "Le montant inclut les taxes nettes de ristournes et les frais financiers.",
+    "L'emprunt est contracté pour un terme de cinq ans.",
+    "La Ville approuve aussi la modification du livre du Programme des immobilisations (PI) 2026-2035."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "23 901 463 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.534Z",
+   "jetons": {
+    "entree": 1945,
+    "sortie": 269
+   }
+  },
+  {
    "id": "1260136006",
    "numero": "1260136006",
    "resolution": "CE26 1283",
@@ -15051,6 +17105,331 @@
    "jetons": {
     "entree": 7260,
     "sortie": 699
+   }
+  },
+  {
+   "id": "CE26 1250",
+   "numero": null,
+   "resolution": "CE26 1250",
+   "date": "2026-08-19",
+   "unite": null,
+   "objet": "Ce dossier concerne l'adoption de l'ordre du jour de l'assemblée du prochain conseil municipal. Il sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-19_09h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal adopte l'ordre du jour de son assemblée ordinaire du 24 août 2026."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.527Z",
+   "jetons": {
+    "entree": 1687,
+    "sortie": 131
+   }
+  },
+  {
+   "id": "CE26 1249",
+   "numero": null,
+   "resolution": "CE26 1249",
+   "date": "2026-08-19",
+   "unite": "Direction générale, Cabinet du directeur général",
+   "objet": "Adoption de l'ordre du jour de la séance du comité exécutif",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-19_09h00_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif adopte l'ordre du jour de sa séance ordinaire du 19 août 2026, en y ajoutant le point 50.001."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.529Z",
+   "jetons": {
+    "entree": 1638,
+    "sortie": 144
+   }
+  },
+  {
+   "id": "CE26 1284",
+   "numero": "1266750001",
+   "resolution": "CE26 1284",
+   "date": "2026-08-19",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-19_09h00_FR.pdf#page=17",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif demande d'inscrire à l'ordre du jour du conseil d'agglomération un projet de règlement interdisant les comportements inappropriés envers les employés de la Ville de Montréal.",
+    "Il s'agit pour l'instant d'un avis de motion et d'un dépôt : le règlement n'est pas encore adopté.",
+    "Le comité exécutif recommande son adoption lors d'une assemblée ultérieure.",
+    "Le dossier a été traité à huis clos, en vertu du règlement intérieur du comité exécutif."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.529Z",
+   "jetons": {
+    "entree": 1803,
+    "sortie": 278
+   }
+  },
+  {
+   "id": "CE26 1254",
+   "numero": "1268788004",
+   "resolution": "CE26 1254",
+   "date": "2026-08-19",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-19_09h00_FR.pdf#page=3",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif recommande au conseil municipal d'accorder des contrats de déneigement clé en main pour quatre saisons hivernales dans les arrondissements de Côte-des-Neiges–Notre-Dame-de-Grâce, Lachine, Outremont et Le Sud-Ouest.",
+    "Cinq entreprises sont retenues comme plus bas soumissionnaires conformes : CMS - Entrepreneurs généraux (8 999 704,92 $ et 19 596 782,80 $), 175784 Canada inc. / Bricon (20 968 089,50 $), Ecovrac 2024 (5 600 680,93 $ et 4 336 387,43 $), Pépinière Michel Tanguay (11 497 499,98 $) et 9055-0344 Québec inc. / DM Choquette (7 636 179,60 $ et 13 141 353,68 $), taxes incluses.",
+    "S'ajoutent 4 588 833,94 $ en contingences et 13 766 501,83 $ pour les variations de quantités, taxes incluses.",
+    "La Ville prévoit évaluer le rendement des cinq entreprises retenues.",
+    "Les contrats découlent de l'appel d'offres public 26-21431 et le conseil doit prendre connaissance du rapport de la Commission sur l'examen des contrats.",
+    "Le dossier est traité à huis clos au comité exécutif, séance du 19 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "20 968 089,50 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 2494,
+    "sortie": 580
+   }
+  },
+  {
+   "id": "CE26 1253",
+   "numero": "1264922003",
+   "resolution": "CE26 1253",
+   "date": "2026-08-19",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-19_09h00_FR.pdf#page=3",
+   "source": "resolution",
+   "puces": [
+    "La Ville confie à Environnement Routier NRJ inc. l'exploitation du lieu d'élimination de la neige Langelier, dans l'arrondissement de Saint-Léonard.",
+    "Le contrat dure quatre ans et vaut 3 896 502,75 $, taxes incluses.",
+    "L'entreprise est le plus bas soumissionnaire conforme de l'appel d'offres public 26-21383.",
+    "La Ville ajoute 779 300,55 $ en contingences et 584 475,41 $ pour les variations de quantités, taxes incluses.",
+    "Le rendement de l'entreprise sera évalué.",
+    "Le dossier est traité à huis clos au comité exécutif, qui recommande son adoption au conseil municipal après lecture du rapport de la Commission sur l'examen des contrats."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 896 502,75 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 2052,
+    "sortie": 373
+   }
+  },
+  {
+   "id": "CE26 1267",
+   "numero": "1260431008",
+   "resolution": "CE26 1267",
+   "date": "2026-08-19",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-19_09h00_FR.pdf#page=9",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif recommande au conseil municipal d'accorder à Globocam (Montréal) inc. un contrat de 1 592 638,30 $, taxes incluses, pour quatre camions 6 x 4.",
+    "Ces camions sont munis d'une boîte à asphalte basculante, isolée et chauffante.",
+    "Le contrat découle de l'appel d'offres public 26-21464; Globocam a obtenu le plus haut pointage final selon les critères de sélection.",
+    "Une somme additionnelle de 159 263,83 $, taxes incluses, est autorisée comme budget de contingences.",
+    "La Ville évaluera le rendement de Globocam (Montréal) inc.",
+    "La décision a été prise à la séance du comité exécutif du 19 août 2026 et le dossier est traité à huis clos."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 592 638,30 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 2012,
+    "sortie": 375
+   }
+  },
+  {
+   "id": "CE26 1251",
+   "numero": null,
+   "resolution": "CE26 1251",
+   "date": "2026-08-19",
+   "unite": null,
+   "objet": "Ce dossier concerne l'adoption de l'ordre du jour de l'assemblée du prochain conseil d'agglomération. Il sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-19_09h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil adopte l'ordre du jour de l'assemblée ordinaire du conseil d'agglomération du 27 août 2026. Aucune mesure concrète pour les citoyens n'est décidée ici."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 1696,
+    "sortie": 165
+   }
+  },
+  {
+   "id": "CE26 1266",
+   "numero": "1260431007",
+   "resolution": "CE26 1266",
+   "date": "2026-08-19",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-19_09h00_FR.pdf#page=9",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif recommande au conseil municipal d'accorder à J.A. Larue inc. un contrat de 710 419,03 $, taxes incluses, pour la fourniture de deux colmateuses mécanisées à nids-de-poule.",
+    "L'entreprise a été retenue comme plus bas soumissionnaire conforme à l'appel d'offres public 26-21476.",
+    "Une somme additionnelle de 71 041,90 $, taxes incluses, est prévue comme budget de contingences.",
+    "La Ville procédera à une évaluation du rendement de J.A. Larue inc.",
+    "Le dossier est traité à huis clos par le comité exécutif."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "710 419,03 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 1937,
+    "sortie": 322
+   }
+  },
+  {
+   "id": "CE26 1263",
+   "numero": "1264069003",
+   "resolution": "CE26 1263",
+   "date": "2026-08-19",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-19_09h00_FR.pdf#page=8",
+   "source": "resolution",
+   "puces": [
+    "La Ville louera 111 390 pieds carrés de bureaux à Place Dupuis fiducie commerciale, au 855, rue Sainte-Catherine Est, dans Ville-Marie.",
+    "Le bail couvre les 16e, 17e, 18e, 19e, 20e et 21e étages, pour 10 ans à partir du 1er octobre 2026.",
+    "Le loyer total s'élève à 43 678 781 $, taxes incluses.",
+    "Pour payer le loyer de 2026, la Ville transfère 114 542 $ (net de ristourne) des dépenses imprévues vers le Service de la stratégie immobilière et de l'habitation, puis ajoute 2 519 917 $ en 2027 et 1 618 202 $ en 2028.",
+    "Elle consacre aussi 1 665 000 $ en 2026 et 1 400 000 $ en 2027 au Service de la gestion et de la planification des immeubles pour déménager les employés.",
+    "Le dossier est traité à huis clos et sera recommandé au conseil d'agglomération, après prise de connaissance du rapport de la Commission sur l'examen des contrats."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "43 678 781 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 2519,
+    "sortie": 484
+   }
+  },
+  {
+   "id": "CE26 1286",
+   "numero": "1268044006",
+   "resolution": "CE26 1286",
+   "date": "2026-08-19",
+   "unite": null,
+   "objet": null,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-19_09h00_FR.pdf#page=17",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif approuve la nomination de Vincent Guimont Hébert comme directeur du Biodôme.",
+    "Le poste relève du Service de l'Espace pour la vie, des grands parcs et du Mont-Royal.",
+    "La nomination est à durée indéterminée, dans l'échelle salariale FM11, à une date convenue entre les parties.",
+    "Décision prise à la séance ordinaire du comité exécutif du 19 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 1780,
+    "sortie": 245
+   }
+  },
+  {
+   "id": "CE26 1271",
+   "numero": "1263074003",
+   "resolution": "CE26 1271",
+   "date": "2026-08-19",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-19_09h00_FR.pdf#page=11",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif a traité ce dossier à huis clos, lors de sa séance du 19 août 2026.",
+    "Il recommande au conseil municipal de prendre connaissance de la projection des résultats financiers de la Ville pour 2026 (volet municipal), en date du 30 juin 2026.",
+    "Il recommande aussi au conseil de prendre connaissance de l'état des revenus et des charges réels au 30 juin 2026, comparé à ceux du 30 juin 2025.",
+    "Aucune dépense ni aucune mesure concrète n'est décidée : il s'agit d'une prise de connaissance de documents financiers."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.533Z",
+   "jetons": {
+    "entree": 1842,
+    "sortie": 305
+   }
+  },
+  {
+   "id": "CE26 1272",
+   "numero": "1263074004",
+   "resolution": "CE26 1272",
+   "date": "2026-08-19",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-19_09h00_FR.pdf#page=12",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif recommande au conseil d'agglomération de prendre connaissance de la projection des résultats financiers de 2026, en date du 30 juin 2026, pour le volet agglomération.",
+    "Il recommande aussi de prendre connaissance de l'état des revenus et des dépenses réels de la Ville au 30 juin 2026, comparé au 30 juin 2025.",
+    "Le dossier est traité à huis clos, en vertu du règlement intérieur du comité exécutif.",
+    "Aucune dépense, obligation ou échéance n'est créée par cette décision."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.534Z",
+   "jetons": {
+    "entree": 1811,
+    "sortie": 286
+   }
+  },
+  {
+   "id": "CE26 1270",
+   "numero": "1263302003",
+   "resolution": "CE26 1270",
+   "date": "2026-08-19",
+   "unite": null,
+   "objet": "Ce dossier concerne le règlement d'un litige. En vertu du paragraphe 5 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), il sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-19_09h00_FR.pdf#page=11",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif approuve une entente sur les modalités de paiement d'une somme de 38 739 187 $ que l'Association de bienfaisance et de retraites des policiers et policières de la Ville de Montréal doit verser à la Ville.",
+    "Cette somme correspond aux intérêts et à l'indemnité additionnelle accordés à la Ville par la Cour supérieure dans un jugement daté du 20 février 2026.",
+    "La directrice des Relations de travail et négociatrice en chef du Service des ressources humaines est autorisée à signer l'entente.",
+    "Le dossier porte sur le règlement d'un litige et a été traité à huis clos."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "38 739 187 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.534Z",
+   "jetons": {
+    "entree": 1893,
+    "sortie": 320
    }
   },
   {
@@ -15489,6 +17868,365 @@
    "jetons": {
     "entree": 7603,
     "sortie": 427
+   }
+  },
+  {
+   "id": "CE26 1230",
+   "numero": "1264521007",
+   "resolution": "CE26 1230",
+   "date": "2026-08-12",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-12_09h00_FR.pdf#page=38",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif envoie au conseil municipal un projet de règlement visant à reconnaître l'incendie du Laurier Palace comme événement historique.",
+    "Le projet sera d'abord présenté au conseil pour avis de motion et dépôt, puis adopté lors d'une séance ultérieure.",
+    "Le comité exécutif recommande aussi au conseil de confier au Comité consultatif en reconnaissance l'organisation d'une séance publique sur cette identification.",
+    "Le dossier a été traité à huis clos par le comité exécutif."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.527Z",
+   "jetons": {
+    "entree": 1841,
+    "sortie": 274
+   }
+  },
+  {
+   "id": "CE26 1140",
+   "numero": null,
+   "resolution": "CE26 1140",
+   "date": "2026-08-12",
+   "unite": "Direction générale, Cabinet du directeur général",
+   "objet": "Adoption de l'ordre du jour de la séance du comité exécutif",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-12_09h00_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif adopte l'ordre du jour de sa séance ordinaire du 12 août 2026, en y ajoutant le point 50.002."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.527Z",
+   "jetons": {
+    "entree": 1638,
+    "sortie": 144
+   }
+  },
+  {
+   "id": "CE26 1142",
+   "numero": null,
+   "resolution": "CE26 1142",
+   "date": "2026-08-12",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-12_09h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif adopte l'ordre du jour de l'assemblée ordinaire du conseil d'agglomération du 27 août 2026.",
+    "Le dossier est traité à huis clos, en vertu du règlement intérieur du comité exécutif."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.529Z",
+   "jetons": {
+    "entree": 1728,
+    "sortie": 178
+   }
+  },
+  {
+   "id": "CE26 1164",
+   "numero": "1265382001",
+   "resolution": "CE26 1164",
+   "date": "2026-08-12",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-12_09h00_FR.pdf#page=11",
+   "source": "resolution",
+   "puces": [
+    "La Ville loue des camions avec opérateurs pour transporter la neige dans les arrondissements de L'Île-Bizard–Sainte-Geneviève et de Pierrefonds-Roxboro.",
+    "Les contrats durent deux ans, avec une option de prolongation de 12 mois, et vont aux plus bas soumissionnaires conformes de l'appel d'offres public 26-21462.",
+    "Montants maximaux, taxes incluses : 9297-9236 Québec inc. (Groupe A1) 183 040,20 $, Gestion Dumont et fils inc. 275 940 $, Paysagiste Timberland inc. 127 852,20 $, Drapeau S. Transport inc. 188 559 $ (inscrit deux fois).",
+    "La Ville ajoute 48 197,52 $ en contingences et 144 592,56 $ pour les variations de quantités, taxes incluses.",
+    "Le rendement des quatre firmes sera évalué.",
+    "Le dossier est traité à huis clos par le comité exécutif."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.529Z",
+   "jetons": {
+    "entree": 2218,
+    "sortie": 440
+   }
+  },
+  {
+   "id": "CE26 1152",
+   "numero": "1260352002",
+   "resolution": "CE26 1152",
+   "date": "2026-08-12",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-12_09h00_FR.pdf#page=6",
+   "source": "resolution",
+   "puces": [
+    "La Ville accorde un contrat de 197 229,84 $ (taxes incluses) à 9103-7143 Québec inc. pour des services techniques de contrôle des populations de cerfs de Virginie.",
+    "Les travaux visent le secteur du parc-nature de la Pointe-aux-Prairies, pour une période de sept mois.",
+    "L'entreprise était le seul soumissionnaire à l'appel d'offres public 26-21442, et sa soumission a été jugée conforme.",
+    "Deux montants de 19 722,98 $ (taxes incluses) chacun s'ajoutent : un budget de contingences et un budget de variation de quantités.",
+    "La décision est une recommandation au conseil d'agglomération, qui doit l'approuver.",
+    "Le dossier est traité à huis clos au comité exécutif."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "197 229,84 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.529Z",
+   "jetons": {
+    "entree": 2003,
+    "sortie": 366
+   }
+  },
+  {
+   "id": "CE26 1141",
+   "numero": null,
+   "resolution": "CE26 1141",
+   "date": "2026-08-12",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-12_09h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif adopte l'ordre du jour de la séance ordinaire du conseil municipal du 24 août 2026.",
+    "Le dossier est traité à huis clos, en vertu du règlement intérieur du comité exécutif.",
+    "Aucune mesure concrète pour les citoyens n'est annoncée dans ce document."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.530Z",
+   "jetons": {
+    "entree": 1722,
+    "sortie": 204
+   }
+  },
+  {
+   "id": "CE26 1246",
+   "numero": "1265645001",
+   "resolution": "CE26 1246",
+   "date": "2026-08-12",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-12_09h00_FR.pdf#page=43",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif ratifie le dépôt d'un grief patronal (2026-05) contre le Syndicat des cols bleus regroupés de Montréal (SCFP, section locale 301).",
+    "La Ville réclame des sommes qui lui seraient dues pour les libérations d'employés cols bleus consacrées à des activités syndicales en 2023.",
+    "Aucun montant n'est précisé dans le document.",
+    "Le dossier a été traité à huis clos lors de la séance du comité exécutif du 12 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 1832,
+    "sortie": 269
+   }
+  },
+  {
+   "id": "CE26 1163",
+   "numero": "1269445007",
+   "resolution": "CE26 1163",
+   "date": "2026-08-12",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-12_09h00_FR.pdf#page=10",
+   "source": "resolution",
+   "puces": [
+    "La Ville accorde des contrats de remorquage pour les opérations de déneigement, pour trois saisons hivernales, suite à l'appel d'offres public 26-21465.",
+    "Remorquage Marco Enr. obtient deux lots : 134 865,68 $ (Rivière-des-Prairies–Pointe-aux-Trembles) et 309 397,73 $ (Saint-Léonard), taxes incluses.",
+    "M.J. Contach s.e.n.c. obtient un lot à 213 991,47 $, taxes incluses, dans Rivière-des-Prairies–Pointe-aux-Trembles.",
+    "Pour ces trois lots, la Ville ajoute 131 650,98 $ en contingences et 98 738,23 $ pour la variation des quantités.",
+    "Le comité exécutif recommande au conseil municipal d'accorder le lot de Montréal-Nord à 9519-4668 Québec inc. (Remorquage Gladiateur) pour 502 900,65 $, plus 100 580,13 $ en contingences et 75 435,10 $ en variation de quantités.",
+    "Le rendement des trois entreprises retenues sera évalué.",
+    "Le dossier est traité à huis clos par le comité exécutif."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "502 900,65 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.531Z",
+   "jetons": {
+    "entree": 2554,
+    "sortie": 509
+   }
+  },
+  {
+   "id": "CE26 1160",
+   "numero": "1269445006",
+   "resolution": "CE26 1160",
+   "date": "2026-08-12",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-12_09h00_FR.pdf#page=9",
+   "source": "resolution",
+   "puces": [
+    "La Ville recommande au conseil municipal d'accorder un contrat de gré à gré (sans appel d'offres) à Transvrac Montréal-Laval inc.",
+    "Le contrat couvre le transport de la neige dans les arrondissements de Montréal-Nord et du Plateau-Mont-Royal.",
+    "Montant : 3 463 376,77 $, taxes incluses, pour une saison hivernale.",
+    "Le contrat peut être prolongé de 12 mois.",
+    "Le dossier a été traité à huis clos par le comité exécutif."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 463 376,77 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 1892,
+    "sortie": 285
+   }
+  },
+  {
+   "id": "CE26 1226",
+   "numero": "1263302004",
+   "resolution": "CE26 1226",
+   "date": "2026-08-12",
+   "unite": null,
+   "objet": "Ce dossier concerne le règlement d'un litige. En vertu du paragraphe 5 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), il sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-12_09h00_FR.pdf#page=37",
+   "source": "resolution",
+   "puces": [
+    "La Ville paiera 8 800 000 $ à l'ordre du cabinet Woods s.e.n.c.r.l., en fidéicommis, pour régler un litige.",
+    "En échange, le demandeur dans le dossier judiciaire CSM 500-17-134025-2562 accorde une quittance totale et finale.",
+    "L'argent viendra des dépenses contingentes imprévues, par des virements budgétaires faits en 2026.",
+    "Le directeur du Service des affaires juridiques et avocat en chef de la Ville est autorisé à signer les documents nécessaires.",
+    "Le dossier est traité à huis clos par le comité exécutif, parce qu'il porte sur le règlement d'un litige."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "8 800 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 1958,
+    "sortie": 335
+   }
+  },
+  {
+   "id": "CE26 1247",
+   "numero": "1264716002",
+   "resolution": "CE26 1247",
+   "date": "2026-08-12",
+   "unite": null,
+   "objet": null,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-12_09h00_FR.pdf#page=44",
+   "source": "resolution",
+   "puces": [
+    "La Ville nomme Manon Lemay directrice Projets spéciaux, soutien général et service à la clientèle.",
+    "L'entrée en poste est prévue le 12 août 2026, ou à une autre date convenue entre les parties.",
+    "La nomination est d'une durée indéterminée.",
+    "La rémunération suit l'échelle salariale 2026 - FM11."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 1747,
+    "sortie": 214
+   }
+  },
+  {
+   "id": "CE26 1217",
+   "numero": "1267157011",
+   "resolution": "CE26 1217",
+   "date": "2026-08-12",
+   "unite": null,
+   "objet": "Ce dossier concerne l'évaluation de rendement insatisfaisant d'un fournisseur. En vertu du paragraphe 7.2 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), il sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-12_09h00_FR.pdf#page=33",
+   "source": "resolution",
+   "puces": [
+    "La Ville juge insatisfaisant le rendement du fournisseur Tecksol DGE inc.",
+    "Le contrat visé portait sur l'entretien des équipements de chauffage, ventilation et air climatisé (CVAC) d'immeubles de la Ville de Montréal.",
+    "Les motifs invoqués : non-respect de plusieurs obligations contractuelles et piètre qualité des services fournis.",
+    "L'entreprise est inscrite sur la liste des firmes à rendement insatisfaisant pour deux ans, à partir du 12 août 2026.",
+    "L'évaluation a été faite par le Service de la gestion et de la planification des immeubles.",
+    "Le dossier est traité à huis clos par le comité exécutif."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.532Z",
+   "jetons": {
+    "entree": 2169,
+    "sortie": 338
+   }
+  },
+  {
+   "id": "CE26 1170",
+   "numero": "1265593032",
+   "resolution": "CE26 1170",
+   "date": "2026-08-12",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-12_09h00_FR.pdf#page=14",
+   "source": "resolution",
+   "puces": [
+    "La Ville achète trois remorques munies d'une boîte à asphalte chauffante.",
+    "Le contrat va à Solution GRB inc., la firme qui a obtenu le plus haut pointage selon les critères de sélection, pour 199 021,73 $ taxes incluses.",
+    "Un budget supplémentaire de 19 902,17 $ taxes incluses est prévu pour les imprévus (contingences).",
+    "Le contrat a été attribué à la suite de l'appel d'offres public 26-21452.",
+    "La Ville évaluera le rendement de Solution GRB inc.",
+    "Le dossier est traité à huis clos par le comité exécutif."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "199 021,73 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.533Z",
+   "jetons": {
+    "entree": 1935,
+    "sortie": 315
+   }
+  },
+  {
+   "id": "CE26 1161",
+   "numero": "1264922006",
+   "resolution": "CE26 1161",
+   "date": "2026-08-12",
+   "unite": null,
+   "objet": "En vertu du paragraphe 8 de l'article 8 du Règlement intérieur du comité exécutif relatif à la conduite de ses affaires (RCE 04-008), ce dossier sera traité à huis clos",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-08-12_09h00_FR.pdf#page=9",
+   "source": "resolution",
+   "puces": [
+    "Le comité exécutif recommande au conseil municipal d'accorder à Centre Investigation & sécurité Canada inc. le contrat de services de commis de guérite dans les lieux d'élimination de la neige.",
+    "Le contrat vaut 448 574,96 $, taxes incluses, pour deux ans, avec deux options de prolongation.",
+    "L'entreprise était le plus bas soumissionnaire conforme à l'appel d'offres public 26-21454.",
+    "La Ville ajoute 89 714,99 $ en contingences et 67 286,24 $ pour les variations de quantités, taxes incluses.",
+    "Le rendement de l'entreprise sera évalué.",
+    "Le dossier est traité à huis clos en vertu du règlement intérieur du comité exécutif."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "448 574,96 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-10T15:53:38.534Z",
+   "jetons": {
+    "entree": 2050,
+    "sortie": 358
    }
   },
   {
