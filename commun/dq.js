@@ -264,11 +264,11 @@ const translations = {
     'trouve.sub':"125 ridings — full list, real National Assembly data",
     'trouve.info':"These 125 entries come directly from the official list of sitting MNAs at the National Assembly. Some seats may change between updates (resignation, by-election) — this list is a snapshot taken at the last update, not an automatically updated feed.",
     // What's new / calendar
-    'cal.status':"\u25CF Assembly dissolved on August 27, 2026 \u00B7 general election October 5 · new legislature November 17",
+    'cal.status':"\u25CF Assembly dissolved on August 27, 2026 \u00B7 election held October 5 · new legislature November 17",
     'cal.title':"Sitting calendar",
     // Dissolution de la 43e législature (2026-08-27) — à retirer le 17 nov. 2026.
-    'diss.h':"⚠️ The Assembly is dissolved — election October 5",
-    'diss.p1':"On <b>August 27, 2026</b>, the National Assembly was dissolved: the 43rd legislature is over. There are no sitting members anymore — those who sat are now candidates or are stepping down. The government stays in place for the duration of the campaign.",
+    'diss.h':"⚠️ The Assembly is dissolved — the election was held on October 5",
+    'diss.p1':"On <b>August 27, 2026</b>, the National Assembly was dissolved and the 43rd legislature ended. The general election was held on <b>October 5</b>. The new Assembly is convened on <b>November 17, 2026</b>; until then, the government stays in place to handle current business.",
     'diss.p2':"Direct consequence: <b>every bill that had not been assented to died with it.</b> They will have to start over before the new Assembly, convened on <b>November 17, 2026</b>. What remains here is the full record of the 43rd legislature: the laws that passed, how each member voted, and the bills that did not make it.",
     'diss.cta':"What the parties are promising →",
     'prom.l1':"What they promise,",
@@ -732,8 +732,8 @@ function applyAssemblyState(){
   if(note) note.textContent = isEn ? 'All parties — 125 seats before dissolution' : 'Tous les partis — 125 sièges avant la dissolution';
   const box = document.getElementById('deputesInfoBox');
   if(box) box.textContent = isEn
-    ? 'The Assembly was dissolved on August 27, 2026: these 125 people are no longer members — they are the outgoing members of the 43rd legislature (now candidates, or stepping down). Their voting record below is the record of that legislature.'
-    : 'L\'Assemblée a été dissoute le 27 août 2026 : ces 125 personnes ne sont plus députées — ce sont les sortant·e·s de la 43e législature (maintenant candidat·e·s, ou qui se retirent). Leur bilan de votes ci-dessous reste celui de cette législature.';
+    ? 'The Assembly was dissolved on August 27, 2026: these 125 people are no longer members — they are the outgoing members of the 43rd legislature. The members elected on October 5 will appear here when the new Assembly opens on November 17. Their voting record below is the record of that legislature.'
+    : 'L\'Assemblée a été dissoute le 27 août 2026 : ces 125 personnes ne sont plus députées — ce sont les sortant·e·s de la 43e législature. Les personnes élues le 5 octobre paraîtront ici à l\'ouverture de la nouvelle Assemblée, le 17 novembre. Leur bilan de votes ci-dessous reste celui de cette législature.';
 }
 
 document.getElementById('langToggle')?.addEventListener('click', ()=>{

@@ -248,12 +248,11 @@ function goToFederal(evt){
          À RETIRER (ici et dans view-projets) quand la nouvelle Assemblée
          commencera le 17 novembre 2026 ; voir l'objet ASSEMBLY dans le script. -->
     <div class="band band-yellow bleed" id="band-dissolution">
-      <h2 data-i18n="diss.h">⚠️ L'Assemblée est dissoute — élections le 5 octobre</h2>
-      <!-- Résultat du scrutin : rempli par applyAssemblyState() depuis
-           ASSEMBLY.resultat, seulement après le 5 octobre et seulement si la
-           phrase a été écrite. Caché sinon. -->
-      <p class="diss-resultat" id="dissResultat" hidden></p>
-      <p data-i18n="diss.p1">Le <b>27 août 2026</b>, l'Assemblée nationale a été dissoute : la 43<sup>e</sup> législature est terminée. Il n'y a plus de député·e·s en poste — celles et ceux qui siégeaient sont maintenant candidat·e·s ou se retirent. Le gouvernement, lui, reste en place le temps de la campagne.</p>
+      <h2 data-i18n="diss.h">⚠️ L'Assemblée est dissoute — l'élection a eu lieu le 5 octobre</h2>
+      <!-- Résultat du scrutin : la même phrase que ASSEMBLY.resultat (commun/dq.js), écrite aussi
+           ici pour qui lit la page sans exécuter le script (moteurs, assistants). Changer les deux. -->
+      <p class="diss-resultat" id="dissResultat">Selon les résultats d'Élections Québec, le Parti Québécois a remporté le plus de sièges : 59 sur 127. Le Parti libéral en a 40, le Parti conservateur 19 et Québec solidaire 9.</p>
+      <p data-i18n="diss.p1">Le <b>27 août 2026</b>, l'Assemblée nationale a été dissoute et la 43<sup>e</sup> législature a pris fin. L'élection générale a eu lieu le <b>5 octobre</b>. La nouvelle Assemblée est convoquée le <b>17 novembre 2026</b> ; d'ici là, le gouvernement reste en place pour expédier les affaires courantes.</p>
       <p data-i18n="diss.p2">Conséquence directe : <b>tous les projets de loi qui n'avaient pas été sanctionnés sont morts avec elle.</b> Ils devront repartir de zéro devant la nouvelle Assemblée, convoquée le <b>17 novembre 2026</b>. Ce qui reste ici, c'est le bilan complet de la 43<sup>e</sup> législature : les lois adoptées, les votes de chaque député·e, et les projets qui n'ont pas abouti.</p>
       <a class="diss-cta" href="/promesses" data-i18n="diss.cta">Ce que les partis promettent →</a>
     </div>
@@ -347,7 +346,7 @@ function goToFederal(evt){
     <!-- Encadré noir compact (maquette) — le même statut réel que le ticker.
          renderTicker() lit .calendar-box .status : NE PAS renommer. -->
     <div class="calendar-box">
-      <div class="status" data-i18n="cal.status">● Assemblée dissoute le 27 août 2026 · élections générales le 5 octobre · nouvelle législature le 17 novembre</div>
+      <div class="status" data-i18n="cal.status">● Assemblée dissoute le 27 août 2026 · élection tenue le 5 octobre · nouvelle législature le 17 novembre</div>
     </div>
     </div>
     </div>
