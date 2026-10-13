@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-12T18:04:48.359Z",
+ "generatedAt": "2026-10-13T16:11:03.081Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "licence": "Documents publics de la Ville de Québec — reproduction avec mention de la source, usage non commercial.",
  "parametres": {
@@ -12,9 +12,9 @@
    "Tableaux des décisions"
   ]
  },
- "totalDisponible": 5286,
- "nombre": 5286,
- "nouveauxDepuisDerniereExecution": 0,
+ "totalDisponible": 5288,
+ "nombre": 5288,
+ "nouveauxDepuisDerniereExecution": 2,
  "themes": {
   "procedure": {
    "libelle": "Procédure",
@@ -125,7 +125,7 @@
  },
  "statuts": {
   "termines": 1523,
-  "enCours": 119,
+  "enCours": 120,
   "inconnus": 0
  },
  "facettes": {
@@ -136,7 +136,7 @@
    },
    {
     "valeur": "Sommaires et mémoires",
-    "n": 1642
+    "n": 1643
    },
    {
     "valeur": "Procès-verbaux",
@@ -144,13 +144,13 @@
    },
    {
     "valeur": "Tableaux des décisions",
-    "n": 86
+    "n": 87
    }
   ],
   "instance": [
    {
     "valeur": "Comité exécutif",
-    "n": 1341
+    "n": 1342
    },
    {
     "valeur": "Conseil de la ville",
@@ -216,7 +216,7 @@
    },
    {
     "valeur": "Culture et patrimoine",
-    "n": 63
+    "n": 64
    },
    {
     "valeur": "Ressources humaines",
@@ -342,7 +342,7 @@
    },
    {
     "valeur": "procedure",
-    "n": 716
+    "n": 717
    },
    {
     "valeur": "subventions",
@@ -394,7 +394,7 @@
    },
    {
     "valeur": "economie",
-    "n": 86
+    "n": 87
    },
    {
     "valeur": "honneurs",
@@ -407,6 +407,41 @@
   ]
  },
  "decisions": [
+  {
+   "id": "TD_CE_PL_2026-10-09_00h00.pdf",
+   "numero": null,
+   "objet": "Tableau des décisions de la séance spéciale du comité exécutif tenue le vendredi 09 octobre 2026 à 08h30",
+   "date": "2026-10-09",
+   "annee": "2026",
+   "type": "Tableaux des décisions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CE_PL_2026-10-09_00h00.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CU2026-082.pdf",
+   "numero": "CU2026-082",
+   "objet": "Entente de contribution entre la Ville de Québec et Sa Majesté le Roi du Chef du Canada, représenté par le ministre du Logement et de l'Infrastructure et ministre responsable de Développement économique Canada pour le Pacifique, dans le cadre du Programme pour les bâtiments communautaires verts et i",
+   "date": "2026-10-09",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Culture et patrimoine",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-082.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": "2026-10-07",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "echeance": "2026-10-07",
+   "theme": "economie",
+   "themeSource": "objet"
+  },
   {
    "id": "TD_CE_PL_2026-10-07_00h00.pdf",
    "numero": null,

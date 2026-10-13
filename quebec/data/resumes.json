@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-08T15:45:56.338Z",
+ "generatedAt": "2026-10-13T16:11:15.923Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,44 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-08-09",
+  "depuis": "2026-08-14",
   "plafond": 120
  },
- "nombre": 1642,
- "genereCetteFois": 18,
+ "nombre": 1643,
+ "genereCetteFois": 1,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.7304,
-  "jetonsEntree": 103960,
-  "jetonsSortie": 8424
+  "montant": 0.0482,
+  "jetonsEntree": 7303,
+  "jetonsSortie": 466
  },
  "resumes": [
+  {
+   "id": "CU2026-082.pdf",
+   "numero": "CU2026-082",
+   "date": "2026-10-09",
+   "unite": "Culture et patrimoine",
+   "objet": "Entente de contribution entre la Ville de Québec et Sa Majesté le Roi du Chef du Canada, représenté par le ministre du Logement et de l'Infrastructure et ministre responsable de Développement économique Canada pour le Pacifique, dans le cadre du Programme pour les bâtiments communautaires verts et i",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-082.pdf",
+   "puces": [
+    "La Ville signe une entente avec le gouvernement du Canada pour financer la transformation de l'église Saint-Jean-Baptiste, au 470, rue Saint-Jean, en pôle culturel, communautaire et touristique.",
+    "Ottawa versera jusqu'à 25 000 000 $, soit un maximum de 41,67 % des dépenses admissibles du projet.",
+    "Le coût total du projet est estimé de façon préliminaire à 60 000 000 $; la Ville et d'autres partenaires paieront le reste.",
+    "Les travaux comprennent la restauration de composantes patrimoniales, des interventions sur l'enveloppe du bâtiment, l'amélioration de la performance énergétique, la mise aux normes pour l'accessibilité universelle et l'aménagement d'espaces communautaires, culturels et touristiques.",
+    "La subvention sera disponible de 2026 à 2031; l'entente se termine le 31 mars 2029.",
+    "Le gouvernement du Québec avait autorisé la Ville à conclure cette entente par décret le 8 avril 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "25 000 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-13T16:11:15.921Z",
+   "jetons": {
+    "entree": 7303,
+    "sortie": 466
+   }
+  },
   {
    "id": "AP2026-348.pdf",
    "numero": "AP2026-348",
