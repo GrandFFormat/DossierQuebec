@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-10-12T19:10:57.423Z",
+ "generatedAt": "2026-10-13T17:10:02.210Z",
  "source": "https://ville.montreal.qc.ca/documents/Adi_Public/",
  "licence": "Documents publics de la Ville de Montréal — reproduction avec mention de la source, lecture gratuite (voir README).",
  "methode": "Sondage des noms de fichiers publiés : l'existence du document prouve la séance. Les séances extraordinaires, dont l'heure est imprévisible, ne sont pas couvertes. Le Plateau-Mont-Royal, qui publie par sa page et non sous Adi_Public, est lu depuis cette page : la date vient du document lui-même (voir lib/plateau.js).",
  "annee": 2026,
  "partiel": false,
- "nombre": 145,
- "requetes": 1911,
+ "nombre": 146,
+ "requetes": 1899,
  "parArrondissement": [
   {
    "arrondissement": "Ahuntsic-Cartierville",
@@ -48,7 +48,7 @@
    "arrondissement": "Mercier–Hochelaga-Maisonneuve",
    "seances": 5,
    "nouvelles": 0,
-   "requetes": 196
+   "requetes": 197
   },
   {
    "arrondissement": "Montréal-Nord",
@@ -102,7 +102,7 @@
    "arrondissement": "Le Sud-Ouest",
    "seances": 6,
    "nouvelles": 0,
-   "requetes": 154
+   "requetes": 155
   },
   {
    "arrondissement": "Verdun",
@@ -112,9 +112,9 @@
   },
   {
    "arrondissement": "Ville-Marie",
-   "seances": 7,
-   "nouvelles": 0,
-   "requetes": 112
+   "seances": 8,
+   "nouvelles": 1,
+   "requetes": 98
   },
   {
    "arrondissement": "Villeray–Saint-Michel–Parc-Extension",
@@ -1857,6 +1857,17 @@
    "variante": "ORDI",
    "source": "sondage des documents publiés",
    "preuve": "CA_Vsm_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf"
+  },
+  {
+   "id": "CA_Vma_2026-10-13_18h30",
+   "instance": "CA_Vma",
+   "arrondissement": "Ville-Marie",
+   "nomInstance": "Conseil d'arrondissement de Ville-Marie",
+   "date": "2026-10-13",
+   "heure": "18h30",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Vma_ODJ_LPP_ORDI_2026-10-13_18h30_FR.pdf"
   }
  ]
 }
