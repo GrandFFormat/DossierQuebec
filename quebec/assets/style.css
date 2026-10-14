@@ -201,6 +201,22 @@ p.chapeau { color: var(--doux); margin: 0 0 6px; max-width: 74ch; font-size: 15.
 .avis strong { color: var(--accent-encre); font-weight: 700; }
 :root[data-theme="sombre"] .avis strong { color: var(--accent); }
 
+/* L'avis sur l'avenir des volets municipaux (14 oct. 2026). Ni le vert de l'accent, qui dirait
+   que tout va bien, ni le rouge, qui dirait que c'est déjà fermé : l'ambre de --vedette dit
+   « à surveiller ». Il s'affiche en haut de l'accueil des volets, au-dessus des chiffres. */
+.avis-avenir {
+  background: var(--fond-2); border-left-color: var(--vedette);
+  margin: 26px 0 32px; padding: 16px 20px; max-width: 76ch;
+}
+.avis-avenir h2 {
+  margin: 0 0 9px; font-size: 16.5px; font-weight: 800; letter-spacing: -0.012em;
+  line-height: 1.3; color: var(--encre); text-transform: none;
+}
+.avis-avenir p { margin: 0 0 10px; line-height: 1.62; max-width: none; }
+.avis-avenir p:last-child { margin-bottom: 0; }
+.avis-avenir strong { color: var(--encre); }
+:root[data-theme="sombre"] .avis-avenir strong { color: var(--encre); }
+
 /* ---------- OUTILS ---------- */
 .barre-outils { display: flex; gap: 9px; flex-wrap: wrap; align-items: center; margin: 24px 0 10px; }
 input[type="search"], select {
