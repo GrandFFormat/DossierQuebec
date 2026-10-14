@@ -459,6 +459,26 @@ code { font-family: ui-monospace, Consolas, monospace; font-size: 13px; backgrou
 .lien-section h3 { margin: 0 0 6px; font-size: 18px; font-weight: 700; letter-spacing: -0.015em; color: var(--accent); }
 .lien-section p { margin: 0; font-size: 14.5px; color: var(--doux); }
 
+
+/* « Offre-moi un café », au bas de l'accueil des volets (14 oct. 2026). Le même lien Stripe que
+   le pied de DossierQuébec. Une carte, une phrase, un bouton : on demande, on n'insiste pas. */
+.cafe {
+  background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon);
+  box-shadow: var(--ombre); padding: 22px 24px; margin: 46px 0 0; max-width: 76ch;
+}
+.cafe h2 {
+  margin: 0 0 7px; font-size: 19px; font-weight: 800; letter-spacing: -0.015em;
+  line-height: 1.25; color: var(--encre); text-transform: none;
+}
+.cafe p { margin: 0 0 15px; font-size: 14.5px; line-height: 1.6; color: var(--doux); }
+.bouton-cafe {
+  display: inline-block; font-weight: 700; font-size: 15px; text-decoration: none;
+  background: var(--accent); color: #FFFFFF; border-radius: var(--rayon); padding: 11px 19px;
+}
+.bouton-cafe:hover { background: var(--accent-encre); }
+/* Le vert du thème sombre est clair : le texte du bouton y passe en encre foncée. */
+:root[data-theme="sombre"] .bouton-cafe { color: #101419; }
+
 footer { border-top: 1px solid var(--ligne); margin-top: 52px; padding: 22px 0 0; font-size: 13.5px; color: var(--doux); }
 footer a { color: var(--doux); }
 
