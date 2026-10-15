@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-13T16:11:15.923Z",
+ "generatedAt": "2026-10-15T13:35:17.898Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,639 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-08-14",
+  "depuis": "2026-08-16",
   "plafond": 120
  },
- "nombre": 1643,
- "genereCetteFois": 1,
+ "nombre": 1668,
+ "genereCetteFois": 25,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.0482,
-  "jetonsEntree": 7303,
-  "jetonsSortie": 466
+  "montant": 0.9645,
+  "jetonsEntree": 139378,
+  "jetonsSortie": 10705
  },
  "resumes": [
+  {
+   "id": "GT2026-308.pdf",
+   "numero": "GT2026-308",
+   "date": "2026-10-13",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 1530, rue Camus, lot 1 780 354, quartier de l'Aéroport, district électoral de Cap-Rouge-Laurentien, Arrondissement de Sainte-Foy-Sillery-Cap-Rouge",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-308.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure au 1530, rue Camus, dans le quartier de l'Aéroport (Sainte-Foy–Sillery–Cap-Rouge).",
+    "La maison existante se trouve à 5,6 mètres de la rue au lieu des 6 mètres exigés par le règlement d'urbanisme; cette distance devient réputée conforme.",
+    "La situation existe depuis 1975 selon l'analyse au dossier.",
+    "Sans la dérogation, le bâtiment devrait être partiellement démoli ou déplacé, ce qui causerait un préjudice au propriétaire.",
+    "L'analyse conclut que la dérogation n'affecte pas les voisins, la sécurité, la santé publique ni l'environnement.",
+    "Le comité consultatif d'urbanisme s'est prononcé en faveur à l'unanimité le 8 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:39.190Z",
+   "jetons": {
+    "entree": 5030,
+    "sortie": 401
+   }
+  },
+  {
+   "id": "TM2026-278.pdf",
+   "numero": "TM2026-278",
+   "date": "2026-10-13",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Projet demandant à être exempté de l'obligation de fournir des cases de stationnement requises par le Règlement de l'Arrondissement de Sainte-Foy-Sillery-Cap-Rouge sur l'urbanisme - R.C.A.3V.Q. 4 pour l'immeuble localisé au 934, avenue du Chanoine-Scott - Arrondissement de Sainte-Foy-Sillery-Cap-Rou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-278.pdf",
+   "puces": [
+    "La Ville dispense le propriétaire du 934, avenue du Chanoine-Scott (arrondissement de Sainte-Foy–Sillery–Cap-Rouge) de fournir 3 cases de stationnement.",
+    "En échange, le propriétaire doit verser 5 500 $ au « Fonds de stationnement », au plus tard 30 jours après l'adoption de la résolution.",
+    "Le projet consiste à ajouter un étage et à réaménager l'intérieur de l'immeuble, occupé par l'organisme communautaire Le Verger.",
+    "Le règlement exige 8 cases; le projet en prévoit 5. Le même terrain avait déjà obtenu une exemption de 4 cases en 2018.",
+    "Sur ce tronçon de l'avenue du Chanoine-Scott, le stationnement est interdit de 8 h à 18 h du lundi au vendredi en alternance, et limité à 120 minutes les jours permis, sauf avec un permis de la zone A3-27.",
+    "La Ville évalue à 163 les places sur rue pour résidants dans la zone A3-27, où 10 permis ont été délivrés."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "5 500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:39.523Z",
+   "jetons": {
+    "entree": 4234,
+    "sortie": 482
+   }
+  },
+  {
+   "id": "GT2026-326.pdf",
+   "numero": "GT2026-326",
+   "date": "2026-10-13",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement de La Cité-Limoilou sur l'urbanisme relativement à la zone 19204Mb, R.C.A.1V.Q. 586 (Révision de l'hébergement touristique commercial, quartier du Vieux-Limoilou, district électoral de Limoilou)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-326.pdf",
+   "puces": [
+    "Le conseil d'arrondissement de La Cité-Limoilou adopte un règlement qui change les règles d'urbanisme dans la zone 19204Mb, de part et d'autre de la 3e Avenue, entre la 13e Rue et la 3e Rue, dans le Vieux-Limoilou.",
+    "Transformer un logement en un autre type d'usage devient interdit aux étages au-dessus du rez-de-chaussée, sauf exceptions (commerces, restaurants, usages publics et industrie artisanale qui s'étendent depuis le rez-de-chaussée).",
+    "L'hébergement touristique général (groupe C10) n'est plus permis au rez-de-chaussée des bâtiments.",
+    "La limite de cinq unités par établissement d'hébergement touristique général est supprimée.",
+    "Une clinique de santé sans hébergement (groupe P5) pourra s'installer au rez-de-chaussée, jusqu'à 800 mètres carrés par bâtiment, au lieu de 400 m² ailleurs dans le bâtiment; une clinique dentaire est visée au 801, 3e Avenue.",
+    "Ce règlement découle de la scission d'un règlement plus large après des demandes de citoyens de soumettre ces dispositions à l'approbation des personnes habiles à voter."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:39.909Z",
+   "jetons": {
+    "entree": 7926,
+    "sortie": 534
+   }
+  },
+  {
+   "id": "GT2026-304.pdf",
+   "numero": "GT2026-304",
+   "date": "2026-10-13",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 91, rue Langevin, lot 1 474 741, quartier du Vieux-Bourg, district électoral de Robert-Giffard, Arrondissement de Beauport",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-304.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure au 91, rue Langevin, dans le quartier du Vieux-Bourg, à Beauport.",
+    "La maison, construite en 1962, est trop près de la rue et du voisin du nord selon le règlement d'urbanisme de l'arrondissement.",
+    "La marge avant est reconnue conforme à 5,5 mètres au lieu des 6 mètres exigés.",
+    "La marge latérale nord est reconnue conforme à 2 mètres au lieu des 3 mètres exigés.",
+    "Selon l'analyse, respecter le règlement aurait exigé une démolition partielle du bâtiment, et aucune plainte n'a été déposée par les voisins.",
+    "Le comité consultatif d'urbanisme s'est dit favorable à l'unanimité le 24 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:39.236Z",
+   "jetons": {
+    "entree": 4948,
+    "sortie": 372
+   }
+  },
+  {
+   "id": "GT2026-306.pdf",
+   "numero": "GT2026-306",
+   "date": "2026-10-13",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 878, avenue Sainte-Thérèse, lot 6 475 431, quartier de Sainte-Thérèse-de-Lisieux, district électoral de Sainte-Thérèse-de-Lisieux, Arrondissement de Beauport",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-306.pdf",
+   "puces": [
+    "Le conseil d'arrondissement de Beauport accorde une dérogation mineure au 878, avenue Sainte-Thérèse, dans le quartier Sainte-Thérèse-de-Lisieux.",
+    "La dérogation permet d'ajouter des logements dans le bâtiment existant, construit en 2025 et comptant trois logements.",
+    "Trois écarts aux règles d'urbanisme sont acceptés : une marge latérale est de 1,5 mètre au lieu de 4,5 mètres, un stationnement qui empiète de 1 mètre devant la façade (normalement interdit) et un espace végétalisé de 0,5 mètre au lieu de 1 mètre entre le stationnement et le bâtiment.",
+    "Le conseil tranche à l'inverse du comité consultatif d'urbanisme, qui recommandait le 24 septembre 2026 de refuser la demande.",
+    "Le comité invoquait qu'un projet conforme de trois logements restait possible sur le terrain et que le projet s'écartait beaucoup de la réglementation.",
+    "Sans la dérogation sur le stationnement, seulement cinq cases pourraient être aménagées, alors que sept sont exigées pour un bâtiment de six logements."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:45.805Z",
+   "jetons": {
+    "entree": 6847,
+    "sortie": 509
+   }
+  },
+  {
+   "id": "A3DA2026-008.pdf",
+   "numero": "A3DA2026-008",
+   "date": "2026-10-13",
+   "unite": "Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
+   "objet": "Versement d'une subvention totalisant 500 $ à l'organisme « La Baratte »",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A3DA2026-008.pdf",
+   "puces": [
+    "L'arrondissement de Sainte-Foy–Sillery–Cap-Rouge verse 500 $ à l'organisme « La Baratte ».",
+    "La demande vient de la conseillère Marianne White, qui souhaite soutenir l'organisme.",
+    "L'argent provient du budget de fonctionnement du conseil d'arrondissement, où les fonds sont disponibles.",
+    "Le conseil d'arrondissement a adopté la décision le 13 octobre 2026 (résolution CA3-2026-0173)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:43.809Z",
+   "jetons": {
+    "entree": 2501,
+    "sortie": 269
+   }
+  },
+  {
+   "id": "TM2026-195.pdf",
+   "numero": "TM2026-195",
+   "date": "2026-10-13",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-790 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue de Tripoli - Arrondissement de Sainte-Foy-Sillery-Cap-Rouge - District électoral du Plateau",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-195.pdf",
+   "puces": [
+    "La Ville interdit le stationnement en tout temps du côté nord de la rue de Tripoli, entre l'avenue De Mézy et l'avenue Wilfrid-Pelletier, dans Sainte-Foy–Sillery–Cap-Rouge.",
+    "Environ 11 cases de stationnement disparaissent sur ce tronçon.",
+    "La rue mesure 8,5 mètres de large et ne permettait pas la circulation dans les deux sens quand des véhicules étaient garés des deux côtés.",
+    "Avant ce changement, aucune règle de stationnement ne s'appliquait sur ce tronçon.",
+    "La Ville dit que l'impact sera limité parce que les résidants du secteur ont des stationnements privés.",
+    "La demande vient d'une citoyenne; le Service du transport et de la mobilité intelligente a fait l'analyse."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:44.665Z",
+   "jetons": {
+    "entree": 3746,
+    "sortie": 383
+   }
+  },
+  {
+   "id": "TM2026-236.pdf",
+   "numero": "TM2026-236",
+   "date": "2026-10-13",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Projet demandant à être exempté de l'obligation de fournir des cases de stationnement requises par le Règlement de l'Arrondissement de Sainte-Foy-Sillery-Cap-Rouge sur l'urbanisme - R.C.A.3V.Q. 4 pour l'immeuble localisé au 851, avenue Myrand - Arrondissement de Sainte-Foy-Sillery-Cap-Rouge - Distri",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-236.pdf",
+   "puces": [
+    "Le propriétaire du 851, avenue Myrand, dans Sainte-Foy–Sillery–Cap-Rouge, veut transformer un local commercial du rez-de-chaussée pour y ajouter un service de bar.",
+    "Le règlement de zonage exige 4 cases de stationnement, mais le terrain n'en compte aucune et le projet n'en prévoit aucune.",
+    "La Ville dispense le propriétaire de fournir ces 4 cases, à condition qu'il verse 2 000 $ au « Fonds de stationnement ».",
+    "Le paiement doit être fait au plus tard 30 jours après l'adoption de la résolution par le conseil d'arrondissement.",
+    "Dans ce secteur de l'avenue Myrand, le stationnement sur rue est tarifé et son taux d'occupation est élevé; la Ville y a délivré 229 permis de stationnement pour 1 436 espaces destinés aux résidants."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:44.971Z",
+   "jetons": {
+    "entree": 3862,
+    "sortie": 415
+   }
+  },
+  {
+   "id": "GT2026-301.pdf",
+   "numero": "GT2026-301",
+   "date": "2026-10-13",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 1479-A, rue Negabamat, lot projeté 6 739 532, quartier de Sillery, district électoral de Saint-Louis-Sillery, Arrondissement de Sainte-Foy-Sillery-Cap-Rouge",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-301.pdf",
+   "puces": [
+    "La Ville autorise un garage détaché de 88 m² au 1479-A, rue Negabamat, à Sillery, alors que le règlement limite ce type de bâtiment à 60 m².",
+    "Les propriétaires veulent agrandir leur terrain en y rattachant une partie d'un lot voisin et le garage qui s'y trouve; sans cette autorisation, ils auraient dû démolir le garage.",
+    "Aucune modification extérieure du bâtiment n'est prévue.",
+    "La permission vaut seulement pour le garage actuel : s'il est démoli, toute nouvelle construction devra respecter la norme de 60 m².",
+    "Les propriétaires affirment que le bâtiment occupe l'emplacement de l'ancienne écurie du Manoir Kilmarnock.",
+    "Le comité consultatif d'urbanisme de l'arrondissement Sainte-Foy–Sillery–Cap-Rouge a appuyé la demande à l'unanimité le 8 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:51.547Z",
+   "jetons": {
+    "entree": 5880,
+    "sortie": 430
+   }
+  },
+  {
+   "id": "TM2026-248.pdf",
+   "numero": "TM2026-248",
+   "date": "2026-10-13",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement de Sainte-Foy-Sillery-Cap-Rouge sur le stationnement dans un garage, un parc de stationnement et sur un terrain géré par la Ville relativement à une case de stationnement pour laquelle un tarif est imposé par un parcomètre, R.C.A.3V.Q.",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-248.pdf",
+   "puces": [
+    "Les véhicules avec une vignette pour personnes handicapées délivrée par la SAAQ pourront se stationner gratuitement jusqu'à 3 heures dans les cases à parcomètre des stationnements municipaux de l'arrondissement de Sainte-Foy–Sillery–Cap-Rouge.",
+    "Dans cet arrondissement, la mesure vise le stationnement de la Bibliothèque Charles-H. Blais.",
+    "La gratuité ne s'applique pas si le stationnement est interdit pour de l'entretien de rue, des travaux, une signalisation temporaire ou sur ordre d'un agent de la paix.",
+    "Cette gratuité de 3 heures existe depuis plus de 20 ans dans les rues tarifées par parcomètre; la Ville l'étend aux parcs de stationnement pour harmoniser la règle.",
+    "La mesure découle du Plan d'action en accessibilité universelle 2025-2030 de la Ville de Québec.",
+    "Huit règlements municipaux sur le stationnement doivent être modifiés pour appliquer cet engagement partout.",
+    "Le règlement met aussi à jour l'annexe listant les types de réglementation et de contrôle du stationnement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:51.705Z",
+   "jetons": {
+    "entree": 8376,
+    "sortie": 505
+   }
+  },
+  {
+   "id": "GT2026-307.pdf",
+   "numero": "GT2026-307",
+   "date": "2026-10-13",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 210, rue Bertrand, lot projeté 6 736 608, quartier de Sainte-Thérèse-de-Lisieux, district électoral de Sainte-Thérèse-de-Lisieux, Arrondissement de Beauport",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-307.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure pour le 210, rue Bertrand, dans Beauport (quartier Sainte-Thérèse-de-Lisieux).",
+    "Le lot projeté 6 736 608 pourra avoir une largeur de 12,82 mètres au lieu des 18 mètres exigés par le règlement d'urbanisme de l'arrondissement.",
+    "La dérogation permet un projet de lotissement créant quatre lots pour des bâtiments jumelés et un lot pour un bâtiment isolé.",
+    "C'est ce dernier lot, dont la largeur est réduite à cause de la forme en courbe du lot voisin, qui ne respecte pas la norme.",
+    "Le comité consultatif d'urbanisme s'est dit favorable à l'unanimité le 24 septembre 2026, jugeant les effets négligeables sur le voisinage, la sécurité et l'environnement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:50.574Z",
+   "jetons": {
+    "entree": 5167,
+    "sortie": 400
+   }
+  },
+  {
+   "id": "GT2026-327.pdf",
+   "numero": "GT2026-327",
+   "date": "2026-10-13",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement de La Cité-Limoilou sur l'urbanisme relativement à la zone 19230Cb, R.C.A.1V.Q. 587 (Révision de l'hébergement touristique commercial, quartier du Vieux-Limoilou, district électoral de Limoilou)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-327.pdf",
+   "puces": [
+    "Le conseil d'arrondissement de La Cité-Limoilou adopte un règlement qui interdit l'hébergement touristique commercial (usages C10) dans la zone 19230Cb du Vieux-Limoilou.",
+    "Cette zone se trouve approximativement à l'est de la 1re Avenue, au sud de la 6e Rue, à l'ouest de la 2e Avenue et au nord de la 3e Rue.",
+    "Le changement se fait en remplaçant la grille de spécifications de la zone dans le règlement d'urbanisme de l'arrondissement.",
+    "Ce règlement vient de la scission d'un règlement plus large (R.C.A.1V.Q. 567) après des demandes de citoyens pour soumettre certaines dispositions à un référendum.",
+    "Les dispositions touchant les autres zones du Vieux-Limoilou sont traitées dans des dossiers distincts (GT2026-326 et GT2026-323).",
+    "La Ville explique que cette révision, amorcée à l'automne 2024, vise à encadrer l'offre touristique et à protéger les logements existants dans un contexte de crise du logement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:50.801Z",
+   "jetons": {
+    "entree": 8111,
+    "sortie": 476
+   }
+  },
+  {
+   "id": "TM2026-230.pdf",
+   "numero": "TM2026-230",
+   "date": "2026-10-13",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Projet demandant à être exempté de l'obligation de fournir des cases de stationnement requises par le Règlement de l'Arrondissement de Beauport sur l'urbanisme - R.C.A.5V.Q. 4 pour l'immeuble localisé au 878, avenue Sainte-Thérèse - Arrondissement de Beauport - District électoral de Sainte-Thérèse-d",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-230.pdf",
+   "puces": [
+    "Le propriétaire du 878, avenue Sainte-Thérèse, dans Beauport, veut ajouter 3 logements au bâtiment, qui en compte déjà 3.",
+    "Le règlement exige 7 cases de stationnement; le projet n'en prévoit que 6.",
+    "La Ville dispense le propriétaire de fournir la case manquante s'il verse 500 $ au « Fonds de stationnement ».",
+    "Le paiement doit se faire dans les 30 jours suivant l'adoption de la résolution par le conseil d'arrondissement.",
+    "Selon l'analyse, le secteur (entre le boulevard Raymond et la rue Bertrand) est bien desservi par le transport en commun et le stationnement sur rue y est occupé de façon faible à modérée."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:56.081Z",
+   "jetons": {
+    "entree": 3641,
+    "sortie": 357
+   }
+  },
+  {
+   "id": "TM2026-202.pdf",
+   "numero": "TM2026-202",
+   "date": "2026-10-13",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-792 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement à la route du Vallon - Arrondissement de Sainte-Foy-Sillery-Cap-Rouge - District électoral Le Plateau",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-202.pdf",
+   "puces": [
+    "L'arrondissement de Sainte-Foy–Sillery–Cap-Rouge interdit les demi-tours sur la route du Vallon, aux approches nord et sud de l'intersection du chemin des Quatre-Bourgeois.",
+    "De nouveaux panneaux « demi-tour interdit » seront installés à ces deux endroits.",
+    "La Ville dit avoir constaté des conflits entre les véhicules qui font demi-tour au bout du terre-plein et les piétons qui traversent la route du Vallon.",
+    "L'intersection se trouve dans un secteur commercial et scolaire où circulent plus de 30 000 véhicules par jour.",
+    "À cause du terre-plein, les piétons qui traversent d'est en ouest doivent le faire en deux temps, avec une attente dans le terre-plein.",
+    "La mesure vise à réduire les risques pour les piétons et les cyclistes."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:56.720Z",
+   "jetons": {
+    "entree": 4041,
+    "sortie": 396
+   }
+  },
+  {
+   "id": "GT2026-323.pdf",
+   "numero": "GT2026-323",
+   "date": "2026-10-13",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement de La Cité-Limoilou sur l'urbanisme relativement aux zones 19209Mc, 19214Mb, 19215Mb et 19216Mb, R.C.A.1V.Q. 567 (Révision de l'hébergement touristique commercial, quartier du Vieux-Limoilou, district électoral de Limoilou)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-323.pdf",
+   "puces": [
+    "Le conseil d'arrondissement de La Cité-Limoilou adopte un règlement qui change les règles d'urbanisme dans quatre zones du quartier du Vieux-Limoilou, situées de part et d'autre du chemin de la Canardière, entre la 3e Avenue et le boulevard des Capucins.",
+    "Dans les zones 19209Mc et 19215Mb, l'hébergement touristique général (groupe C10) et les auberges de jeunesse (C12) ne sont plus autorisés.",
+    "Dans les zones 19214Mb, 19215Mb et 19216Mb, une correction de forme est apportée aux grilles pour les logements protégés situés au-dessus du rez-de-chaussée, sans changer la norme applicable.",
+    "Les changements prévus pour les zones 19204Mb (3e Avenue) et 19230Cb sont retirés de ce règlement : des citoyens ont demandé qu'ils soient soumis à l'approbation des personnes habiles à voter.",
+    "Ces deux zones sont traitées séparément dans les dossiers GT2026-326 et GT2026-327.",
+    "Le règlement s'inscrit dans la révision de l'encadrement de l'hébergement touristique commercial amorcée par la Ville à l'automne 2024."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:59.647Z",
+   "jetons": {
+    "entree": 7958,
+    "sortie": 525
+   }
+  },
+  {
+   "id": "GT2026-318.pdf",
+   "numero": "GT2026-318",
+   "date": "2026-10-13",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement de Sainte-Foy-Sillery-Cap-Rouge sur l'urbanisme relativement aux zones 33023Hc, 33701Ha, 33704Ha et 33723Hb, R.C.A.3V.Q. 418 (Ajustement de marges et augmentation du nombre de logements, quartier de Saint-Louis, district électoral de S",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-318.pdf",
+   "puces": [
+    "Le conseil d'arrondissement de Sainte-Foy–Sillery–Cap-Rouge adopte une modification au règlement d'urbanisme touchant quatre zones du quartier de Saint-Louis (33023Hc, 33701Ha, 33704Ha et 33723Hb).",
+    "Dans les zones 33701Ha et 33704Ha, un bâtiment isolé pourra compter jusqu'à 3 logements au lieu de 2.",
+    "Dans la zone 33701Ha, une largeur minimale de lot de 16 mètres est imposée.",
+    "Les marges avant seront calculées à partir de l'axe du chemin Saint-Louis dans les zones 33023Hc et 33723Hb; la marge liée à la route de l'Église est retirée dans la zone 33723Hb.",
+    "Dans la zone 33023Hc, un bâtiment principal dérogatoire détruit ou endommagé par un sinistre pourra être reconstruit au même endroit.",
+    "Les dispositions visant les zones 33701Ha, 33704Ha et 33721Hb qui ont fait l'objet d'une demande d'approbation par des personnes habiles à voter sont retirées et feront l'objet de règlements distincts présentés à une séance ultérieure."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:34:58.176Z",
+   "jetons": {
+    "entree": 8116,
+    "sortie": 519
+   }
+  },
+  {
+   "id": "GT2026-321.pdf",
+   "numero": "GT2026-321",
+   "date": "2026-10-13",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement de Sainte-Foy-Sillery-Cap-Rouge sur l'urbanisme relativement au lot numéro 1 696 868 du cadastre du Québec, R.C.A.3V.Q. 419 (Création de la zone 37045Ha, quartier du Cap-Rouge, district électoral de Cap-Rouge-Laurentien)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-321.pdf",
+   "puces": [
+    "La Ville corrige une erreur de cartographie : le lot 1 696 868, dans le quartier du Cap-Rouge, n'apparaissait pas au plan de zonage de l'arrondissement de Sainte-Foy–Sillery–Cap-Rouge.",
+    "Le lot devient la nouvelle zone 37045Ha, où seront permis le logement (H1) et le parc (R1).",
+    "Les constructions permises : bâtiments isolés de 1 à 3 logements, jumelés de 1 à 2 logements, et en rangée de 1 à 2 logements, avec un maximum de 6 bâtiments par rangée.",
+    "Les bâtiments ne pourront dépasser 9 mètres de hauteur et au moins 30 % du terrain devra rester en aire verte.",
+    "Une bande de végétation de 20 mètres de profondeur devra être plantée le long de la voie ferrée, avec au moins 50 % d'arbres à feuillage persistant.",
+    "Le règlement contient des dispositions susceptibles d'approbation référendaire; la consultation publique a eu lieu le 21 septembre 2026 et la consultation écrite s'est terminée le 28 septembre 2026.",
+    "Après la consultation, le projet a été modifié pour ajouter un nombre minimal de logements par bâtiment en rangée."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:35:06.353Z",
+   "jetons": {
+    "entree": 8692,
+    "sortie": 540
+   }
+  },
+  {
+   "id": "TM2026-250.pdf",
+   "numero": "TM2026-250",
+   "date": "2026-10-13",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement de Beauport sur le stationnement dans un garage, un parc de stationnement et sur un terrain géré par la Ville relativement à une case de stationnement pour laquelle un tarif est imposé par un parcomètre, R.C.A.5V.Q. 365",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-250.pdf",
+   "puces": [
+    "Les véhicules avec une vignette pour personnes handicapées de la SAAQ pourront se stationner gratuitement jusqu'à 3 heures dans les cases tarifées par parcomètre des stationnements municipaux de l'arrondissement de Beauport.",
+    "La gratuité ne s'applique pas quand le stationnement est interdit pour l'entretien de la rue, des travaux, une signalisation temporaire ou sur ordre d'un agent de la paix.",
+    "Dans les faits, aucun parc de stationnement de Beauport n'est visé : la Ville modifie le règlement pour l'harmoniser avec les autres.",
+    "Cette gratuité de 3 heures existe déjà depuis plus de 20 ans pour le stationnement tarifé dans la rue.",
+    "La mesure découle du Plan d'action en accessibilité universelle 2025-2030 de la Ville, qui prévoit modifier huit règlements municipaux sur le stationnement.",
+    "La liste des types de réglementation de stationnement (annexe I) est remplacée pour être mise à jour."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:35:05.413Z",
+   "jetons": {
+    "entree": 8265,
+    "sortie": 454
+   }
+  },
+  {
+   "id": "GT2026-299.pdf",
+   "numero": "GT2026-299",
+   "date": "2026-10-13",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 1234, rue de Fenouillet, lot 1 407 648, quartier du Cap-Rouge, district électoral de Cap-Rouge-Laurentien, Arrondissement de Sainte-Foy-Sillery-Cap-Rouge",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-299.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure au 1234, rue de Fenouillet, dans le quartier du Cap-Rouge (arrondissement de Sainte-Foy–Sillery–Cap-Rouge).",
+    "La maison existante est située à 1,5 mètre de la limite latérale du terrain, alors que le règlement d'urbanisme en exige 2 mètres.",
+    "Avec cette décision, l'implantation du bâtiment devient réputée conforme, sans travaux à faire.",
+    "Selon l'analyse, sans la dérogation, le bâtiment devrait être déplacé ou démoli en partie.",
+    "La situation existe depuis 1983 et aucune plainte n'a été enregistrée.",
+    "Le comité consultatif d'urbanisme s'est prononcé en faveur à l'unanimité le 8 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:35:04.496Z",
+   "jetons": {
+    "entree": 5116,
+    "sortie": 379
+   }
+  },
+  {
+   "id": "GT2026-300.pdf",
+   "numero": "GT2026-300",
+   "date": "2026-10-13",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 2865, chemin Saint-Louis, lot 6 726 508, quartier de Saint-Louis, district électoral de Saint-Louis-Sillery, Arrondissement de Sainte-Foy-Sillery-Cap-Rouge",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-300.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure pour le 2865, chemin Saint-Louis, dans le quartier de Saint-Louis (arrondissement de Sainte-Foy–Sillery–Cap-Rouge).",
+    "Le stationnement souterrain du projet pourra dépasser le niveau du sol de 1,6 mètre au lieu du maximum de 0,75 mètre prévu par le règlement d'urbanisme.",
+    "La dérogation vise l'agrandissement d'un bâtiment principal existant pour y ajouter 68 logements sur quatre étages.",
+    "Selon l'analyse, le dénivelé du terrain, la position des entrées sur le chemin Saint-Louis et la route de l'Église et les exigences d'accessibilité du Code national du bâtiment obligent ce dépassement, du côté sud du bâtiment seulement.",
+    "L'analyse indique que l'impact visuel pour les voisins et les piétons sera atténué par le dénivelé du terrain et l'aménagement paysager.",
+    "Le comité consultatif d'urbanisme s'est dit favorable à l'unanimité le 8 septembre 2026, et le conseil d'arrondissement a adopté la décision le 13 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:35:05.346Z",
+   "jetons": {
+    "entree": 5626,
+    "sortie": 512
+   }
+  },
+  {
+   "id": "GT2026-305.pdf",
+   "numero": "GT2026-305",
+   "date": "2026-10-13",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour le lot 6 552 739 situé sur l'avenue Joseph-Giffard, quartier 5-2, district électoral de la Chute-Montmorency-Seigneurial, Arrondissement de Beauport",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-305.pdf",
+   "puces": [
+    "La Ville autorise une exception au règlement d'urbanisme pour un terrain vacant de l'avenue Joseph-Giffard, à Beauport (district de la Chute-Montmorency–Seigneurial).",
+    "Le propriétaire pourra aménager une allée d'accès devant la façade principale de sa future maison, ce que le règlement interdit normalement.",
+    "Le projet vise la construction d'une habitation d'un logement, avec garage attaché du côté est.",
+    "Selon l'analyse, la forme irrégulière du terrain rend impossible l'aménagement d'une allée conforme.",
+    "La partie de l'allée située devant la façade n'est pas visible de la rue, car elle se trouve derrière la propriété voisine.",
+    "Le comité consultatif d'urbanisme a appuyé la demande à l'unanimité le 24 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:35:13.903Z",
+   "jetons": {
+    "entree": 4984,
+    "sortie": 381
+   }
+  },
+  {
+   "id": "GT2026-315.pdf",
+   "numero": "GT2026-315",
+   "date": "2026-10-13",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 213, rue de la Plage, lot 3 720 161, quartier de Sainte-Thérèse-de-Lisieux, district électoral de Sainte-Thérèse-de-Lisieux, Arrondissement de Beauport",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-315.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure au 213, rue de la Plage, dans le quartier Sainte-Thérèse-de-Lisieux (Arrondissement de Beauport).",
+    "Le propriétaire pourra agrandir sa maison avec une marge latérale sud-ouest de 2 mètres plutôt que les 3 mètres exigés par le règlement d'urbanisme.",
+    "L'agrandissement se fait dans le prolongement du mur latéral existant.",
+    "Selon l'analyse, la forme irrégulière du terrain empêche d'agrandir en respectant la règle; agrandir de l'autre côté bloquerait une fenêtre d'évacuation d'une chambre au sous-sol.",
+    "L'analyse conclut que les effets sur les voisins, la sécurité et l'environnement seraient négligeables.",
+    "Le comité consultatif d'urbanisme a appuyé la demande à l'unanimité le 24 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:35:10.760Z",
+   "jetons": {
+    "entree": 5134,
+    "sortie": 412
+   }
+  },
+  {
+   "id": "A5DA2026-003.pdf",
+   "numero": "A5DA2026-003",
+   "date": "2026-10-13",
+   "unite": "Arrondissement de Beauport",
+   "objet": "Versement d'une subvention de 500 $ à l'organisme Fondation Ste-Thérèse-de-Lisieux",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A5DA2026-003.pdf",
+   "puces": [
+    "L'Arrondissement de Beauport verse 500 $ à la Fondation Ste-Thérèse-de-Lisieux pour appuyer sa mission et ses activités.",
+    "La demande vient de la conseillère Mélanie Sauvé, qui souligne l'engagement de l'organisme.",
+    "L'argent provient du budget du conseil d'arrondissement, à l'activité « Soutenir les conseils d'arrondissement ».",
+    "Le chèque est émis à l'organisme, situé au 158, rue Bertrand, à Québec.",
+    "Le conseil d'arrondissement a adopté la décision (résolution CA5-2026-0109)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:35:10.616Z",
+   "jetons": {
+    "entree": 2593,
+    "sortie": 313
+   }
+  },
+  {
+   "id": "GT2026-319.pdf",
+   "numero": "GT2026-319",
+   "date": "2026-10-13",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 123, rue des Feux-Follets, lot 1 709 223, quartier de Sainte-Thérèse-de-Lisieux, district électoral de Sainte-Thérèse-de-Lisieux, Arrondissement de Beauport",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-319.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure au 123, rue des Feux-Follets, dans le quartier Sainte-Thérèse-de-Lisieux (arrondissement de Beauport).",
+    "La maison, construite en 1977, est trop près de la limite arrière du terrain : 6,5 mètres au lieu des 7,5 mètres exigés par le règlement d'urbanisme.",
+    "La dérogation rend le bâtiment existant conforme, ce qui évite au propriétaire d'avoir à en démolir une partie.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable le 24 septembre 2026, à l'unanimité.",
+    "Selon l'analyse, aucune plainte n'a été déposée au sujet de cette marge arrière et le terrain n'est pas dans une zone de contraintes.",
+    "La décision revient au conseil d'arrondissement de Beauport."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:35:11.609Z",
+   "jetons": {
+    "entree": 4846,
+    "sortie": 397
+   }
+  },
+  {
+   "id": "TM2026-229.pdf",
+   "numero": "TM2026-229",
+   "date": "2026-10-13",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Projet demandant à être exempté de l'obligation de fournir des cases de stationnement requises par le Règlement de l'Arrondissement de Sainte-Foy-Sillery-Cap-Rouge sur l'urbanisme - R.C.A.3V.Q. 4 pour l'immeuble localisé au 3275, rue Alfred-Nobel - Arrondissement de Sainte-Foy-Sillery-Cap-Rouge - Di",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-229.pdf",
+   "puces": [
+    "Le propriétaire du 3275, rue Alfred-Nobel, dans Sainte-Foy–Sillery–Cap-Rouge, veut ajouter un logement au sous-sol d'un immeuble qui en compte déjà cinq.",
+    "Le règlement exige 7 cases de stationnement; le projet en prévoit 6.",
+    "La Ville le dispense de fournir la 7e case s'il paie 500 $ au « Fonds de stationnement ».",
+    "Le paiement doit être fait au plus tard 30 jours après l'adoption de la résolution par le conseil d'arrondissement.",
+    "Le service note que le secteur est desservi par le transport en commun et que l'occupation du stationnement sur rue y va de faible à modérée."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T13:35:17.898Z",
+   "jetons": {
+    "entree": 3738,
+    "sortie": 344
+   }
+  },
   {
    "id": "CU2026-082.pdf",
    "numero": "CU2026-082",
