@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-10T15:53:38.536Z",
+ "generatedAt": "2026-10-15T14:31:47.925Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel quand il est publié (source « sommaire »), sinon du texte de la résolution elle-même (source « resolution »), sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,474 @@
   "annee": "2026",
   "max": 40,
   "batch": true,
-  "depuis": "2026-08-11",
+  "depuis": "2026-08-16",
   "plafond": 120
  },
- "nombre": 8577,
- "genereCetteFois": 106,
+ "nombre": 8625,
+ "genereCetteFois": 48,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 1.2569,
-  "jetonsEntree": 315054,
-  "jetonsSortie": 37540
+  "montant": 0.8277,
+  "jetonsEntree": 229605,
+  "jetonsSortie": 20293
  },
  "resumes": [
+  {
+   "id": "1269001012",
+   "numero": "1269001012",
+   "resolution": "CA26 13 0251",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "APPROUVER LE PROJET DE CONVENTION ET ACCORDER UNE AIDE FINANCIÈRE MAXIMALE DE 50 000 $ À HABITATIONS COMMUNAUTAIRES SAINT-LÉONARD POUR LA RÉALISATION D'ÉTUDES DE PRÉDÉVELOPPEMENT DU LOT 1 125 337 DU CADASTRE DU QUÉBEC, À DES FINS DE DÉVELOPPEMENT D'UN PROJET DE 40 UNITÉS DE LOGEMENTS HORS MARCHÉ.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=16",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Saint-Léonard verse jusqu'à 50 000 $ à l'organisme Habitations communautaires de Saint-Léonard (HCSL) pour payer des études préalables à un projet de 40 logements hors marché.",
+    "Le terrain visé est un lot municipal situé à l'intersection des rues Bélanger et d'Avila; la Ville y a accordé à HCSL une priorité de développement en mars 2025, valide 24 mois.",
+    "L'argent servira à des études environnementales, géotechniques et archéologiques, des inspections et des forages; un premier mandat de 38 631,62 $ (taxes incluses) est déjà prévu.",
+    "HCSL doit déposer sa demande de financement au Programme d'habitation abordable Québec au plus tard le 14 octobre 2026; ce programme serait la source principale de financement de la construction.",
+    "Les versements se feront sur présentation de factures et de pièces justificatives, et l'organisme devra remettre à la Ville tous les rapports et études produits.",
+    "La convention prend fin le 14 mars 2027.",
+    "L'arrondissement invoque la faible part de logements hors marché sur son territoire (1,87 % des logements occupés en 2021) et 3 252 ménages ayant des besoins impérieux en logement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "50 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.920Z",
+   "jetons": {
+    "entree": 7100,
+    "sortie": 534
+   }
+  },
+  {
+   "id": "1267987003",
+   "numero": "1267987003",
+   "resolution": "CA26 13 0262",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "DÉSIGNATION D'UN MAIRE SUPPLÉANT D'ARRONDISSEMENT POUR LES MOIS DE NOVEMBRE ET DÉCEMBRE 2026 AINSI QUE JANVIER ET FÉVRIER 2027.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=85",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Saint-Léonard doit désigner un conseiller ou une conseillère comme maire suppléant pour novembre et décembre 2026, puis janvier et février 2027.",
+    "Le nom de la personne choisie n'est pas inscrit au document (indiqué « XX ») : il sera déterminé en séance.",
+    "La désignation découle de l'article 56 de la Loi sur les cités et villes, qui oblige le conseil à nommer un maire suppléant pour une période qu'il fixe.",
+    "La conseillère Gemma Marchione occupe ce rôle pour juillet, août, septembre et octobre 2026, depuis la séance du 1er juin 2026.",
+    "Aucun montant d'argent n'est rattaché à cette décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.920Z",
+   "jetons": {
+    "entree": 2873,
+    "sortie": 514
+   }
+  },
+  {
+   "id": "1269956011",
+   "numero": "1269956011",
+   "resolution": "CA26 13 0252",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs",
+   "objet": "DÉPÔT DES RAPPORTS FAISANT ÉTAT DES DÉCISIONS DÉLÉGUÉES EN MATIÈRE DE RESSOURCES FINANCIÈRES POUR LA PÉRIODE DU 1ER AU 31 AOÛT 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=22",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Saint-Léonard prend acte du dépôt des rapports sur les dépenses décidées par les fonctionnaires en août 2026.",
+    "Trois listes sont déposées : les bons de commande approuvés, les factures sans bon de commande par direction, et les virements budgétaires du mois d'août 2026.",
+    "Aucune nouvelle dépense ni obligation n'est créée : il s'agit d'une reddition de comptes mensuelle prévue par la réglementation."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.921Z",
+   "jetons": {
+    "entree": 2938,
+    "sortie": 263
+   }
+  },
+  {
+   "id": "1269698008",
+   "numero": "1269698008",
+   "resolution": "CA26 13 0253",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs",
+   "objet": "DÉPÔT DU RAPPORT FAISANT ÉTAT DES DÉCISIONS DÉLÉGUÉES EN MATIÈRE DE RESSOURCES HUMAINES POUR LA PÉRIODE DU 1ER AU 31 AOÛT 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=26",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Saint-Léonard prend acte du dépôt d'un rapport listant les décisions prises par des fonctionnaires en matière de ressources humaines, du 1er au 31 août 2026.",
+    "Ce dépôt est exigé par la Charte de la Ville de Montréal lorsque le conseil délègue des pouvoirs de gestion du personnel à ses employés."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.921Z",
+   "jetons": {
+    "entree": 2898,
+    "sortie": 229
+   }
+  },
+  {
+   "id": "1269073018",
+   "numero": "1269073018",
+   "resolution": "CA26 13 0255",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "PRÉSENTATION DU PLAN D'IMPLANTATION ET D'INTÉGRATION ARCHITECTURALE (PIIA) NUMÉRO 2026-17 - TRANSFORMATION D'UN MUR EXTÉRIEUR DONNANT SUR UNE COUR ADJACENTE À UNE VOIE PUBLIQUE D'UN BÂTIMENT COMMERCIAL – 5915-5993, RUE BÉLANGER - LOT NUMÉRO 1 125 265 DU CADASTRE DU QUÉBEC - DISTRICT SAINT-LÉONARD-EST.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=35",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Saint-Léonard approuve des travaux sur le bâtiment commercial du 5915-5993, rue Bélanger, dans le district Saint-Léonard-Est.",
+    "Le propriétaire veut agrandir une ouverture de porte pour installer une porte double sur le mur arrière, qui donne sur une cour adjacente à la rue de Vannes.",
+    "Le bâtiment, d'un étage, a été construit en 1964 et se trouve dans un secteur où se mêlent commerces de la rue Bélanger et habitations de deux à trois étages.",
+    "Les fonctionnaires de l'urbanisme donnent un avis favorable : la porte double s'intègre au mur arrière et l'aménagement vise à ne pas nuire à la quiétude des résidents.",
+    "Le comité consultatif d'urbanisme avait recommandé le projet favorablement le 16 septembre 2026.",
+    "Aucun montant n'est rattaché à cette décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.921Z",
+   "jetons": {
+    "entree": 4198,
+    "sortie": 422
+   }
+  },
+  {
+   "id": "1268469021",
+   "numero": "1268469021",
+   "resolution": "CA26 13 0250",
+   "date": "2026-10-06",
+   "unite": "Direction de la culture_des loisirs et des bâtiments",
+   "objet": "AUTORISER LE DÉPÔT DU PROJET « CONSEIL JEUNESSE DE SAINT-LÉONARD » DANS LE CADRE DU VOLET 2 DU « PROGRAMME DES STRATÉGIES JEUNESSE EN MILIEU MUNICIPAL » DU SECRÉTARIAT À LA JEUNESSE DU GOUVERNEMENT DU QUÉBEC.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=10",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Saint-Léonard demande une subvention pouvant atteindre 50 000 $ au Secrétariat à la jeunesse du Québec pour son Conseil jeunesse.",
+    "L'argent servirait à mettre en œuvre le plan d'action élaboré par les huit membres du Conseil jeunesse, qui oriente les interventions d'ici 2030.",
+    "Le plan vise quatre axes : donner une voix aux jeunes, améliorer l'accès aux services et activités, documenter le sentiment de sécurité et faire des jeunes des acteurs du changement.",
+    "L'arrondissement s'engage à payer sa part des coûts admissibles et 100 % des coûts non admissibles, y compris tout dépassement.",
+    "Les salaires de l'agente de développement et de l'intervenante loisir restent aux frais de l'arrondissement.",
+    "Le directeur d'arrondissement est mandaté pour signer tous les documents liés à la demande.",
+    "Objectifs visés : rejoindre plus de 400 jeunes de 12 à 25 ans et former 12 ambassadeurs de la jeunesse."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "50 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.921Z",
+   "jetons": {
+    "entree": 6723,
+    "sortie": 480
+   }
+  },
+  {
+   "id": "1269073019",
+   "numero": "1269073019",
+   "resolution": "CA26 13 0258",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "PRÉSENTATION DU PLAN D'IMPLANTATION ET D'INTÉGRATION ARCHITECTURALE (PIIA) NUMÉRO 2026-21 - AGRANDISSEMENT D'UN BÂTIMENT INDUSTRIEL - 6650-6690, RUE LOUIS-SICARD - LOTS NUMÉROS 4 646 446 ET 1 335 792 DU CADASTRE DU QUÉBEC - DISTRICT SAINT-LÉONARD-EST.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=49",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Saint-Léonard approuve l'agrandissement d'un bâtiment industriel aux 6650-6690, rue Louis-Sicard, dans le secteur industriel à l'est du boulevard Langelier (district Saint-Léonard-Est).",
+    "Le projet ajoute 421,52 m² au deuxième étage, portant la superficie de plancher totale à 1 749 m², et hausse le bâtiment de 2,13 m.",
+    "Des ouvertures sont ajoutées au deuxième étage et la couleur de la maçonnerie change; les façades seront en brique et les éléments architecturaux en aluminium.",
+    "Le stationnement perd une case afin d'aménager trois places pour personnes à mobilité réduite au lieu d'une seule; une exemption pour quatre cases avait été accordée le 6 juillet 2026.",
+    "L'aménagement paysager reste inchangé.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable le 16 septembre 2026, tout comme la direction de l'aménagement urbain."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.921Z",
+   "jetons": {
+    "entree": 4971,
+    "sortie": 456
+   }
+  },
+  {
+   "id": "1269012006",
+   "numero": "1269012006",
+   "resolution": "CA26 13 0249",
+   "date": "2026-10-06",
+   "unite": "Direction de la culture_des loisirs et des bâtiments",
+   "objet": "AUTORISER LE DÉPÔT DU PROJET « RUES CITOYENNES » DANS LE CADRE DU SOUS- VOLET INNOVATIONS TERRITORIALES, AXE INITIATIVES CIBLÉES DU VOLET 1 - RAYONNEMENT RÉGIONAL DU FONDS RÉGIONS ET RURALITÉ (FRR), DU MINISTÈRE DES AFFAIRES MUNICIPALES ET DE L'HABITATION.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=5",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Saint-Léonard demande une aide financière de Québec (Fonds régions et ruralité) pour son projet « Rues citoyennes ».",
+    "Le programme peut couvrir jusqu'à 400 000 $ de coûts admissibles par projet, avec une réalisation en trois ans maximum.",
+    "L'arrondissement s'engage à payer lui-même tous les coûts non admissibles, y compris les dépassements de coûts.",
+    "« Rues citoyennes » existe depuis près de 5 ans à Saint-Léonard avec Concertation Saint-Léonard, le Collectif jeunesse et le SPVM, autour de la cohabitation harmonieuse.",
+    "L'argent demandé servirait à embaucher une coordination, mener une recherche-action, faire une campagne d'habillage et organiser des événements de promotion.",
+    "Le directeur d'arrondissement est mandaté pour signer tous les documents liés à la demande.",
+    "Dépôt prévu en octobre 2026; le ministère doit annoncer les projets retenus à la fin de 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "400 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 6050,
+    "sortie": 463
+   }
+  },
+  {
+   "id": "1269001009",
+   "numero": "1269001009",
+   "resolution": "CA26 13 0254",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "PRÉSENTATION DU PLAN D'IMPLANTATION ET D'INTÉGRATION ARCHITECTURALE (PIIA) 2026-07 - AGRANDISSEMENT D'UN BÂTIMENT INDUSTRIEL - 6767, RUE LOUIS-SICARD - LOT NUMÉRO 1 335 796 DU CADASTRE DU QUÉBEC - DISTRICT SAINT-LÉONARD-EST.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=29",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Saint-Léonard approuve l'agrandissement d'un bâtiment industriel vacant au 6767, rue Louis-Sicard, dans le secteur industriel à l'est du boulevard Langelier (district Saint-Léonard-Est).",
+    "Le propriétaire ajoutera en cour latérale un volume de deux étages de 815,9 m² qui abritera l'entrée et des bureaux; la superficie de plancher totale passera à 2 130,99 m².",
+    "La façade sera faite d'un mur rideau en verre teinté, de brique blanche, de panneaux de béton préfabriqués noirs et de panneaux bruns; les murs latéral gauche et arrière recevront un revêtement d'acier noir.",
+    "Le toit comprendra une membrane blanche et 386,93 m² de toiture végétalisée.",
+    "Le terrain accueillera 21 cases de stationnement (dont 3 pour personnes à mobilité réduite), un support pour 7 vélos, une nouvelle entrée charretière, 47 arbres et 77 arbustes.",
+    "Les matières résiduelles seront entreposées dans la cour intérieure, cachées par une haie et un écran opaque, les camions manœuvrant sur la propriété privée.",
+    "Le comité consultatif d'urbanisme s'est prononcé en faveur le 9 juillet 2026; les plans ont ensuite été modifiés le 2 septembre 2026 pour déplacer 198,54 m² de verdure et 17 arbres dans la cour arrière."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 6970,
+    "sortie": 617
+   }
+  },
+  {
+   "id": "1269867004",
+   "numero": "1269867004",
+   "resolution": "CA26 13 0257",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "PRÉSENTATION DU PLAN D'IMPLANTATION ET D'INTÉGRATION ARCHITECTURALE (PIIA) NUMÉRO 2026-20 - MODIFICATION DE LA MARQUISE - 6200-6204, RUE DU VAL-MARIE - LOT NUMÉRO 1 334 526 DU CADASTRE DU QUÉBEC - DISTRICT SAINT-LÉONARD-EST.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=45",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Saint-Léonard autorise la modification de la marquise (l'auvent au-dessus des portes d'entrée) d'un immeuble du 6200-6204, rue du Val-Marie, dans le district Saint-Léonard-Est.",
+    "Le propriétaire remplacera la marquise en demi-cercle par une toiture à un versant, plus large, couvrant l'espace entre les deux balcons du deuxième étage.",
+    "La nouvelle marquise sera recouverte d'un parement métallique brun commercial et reposera en partie sur deux nouvelles colonnes de chaque côté de l'escalier.",
+    "Le bâtiment visé est un multiplex jumelé de 2 étages construit en 1974, avec 4 logements et 2 garages au sous-sol.",
+    "Le service d'urbanisme juge que l'ajout s'harmonise avec le style du bâtiment et les couleurs des immeubles du secteur; la fenêtre existante ne sera pas obstruée.",
+    "Le comité consultatif d'urbanisme avait donné un avis favorable à sa séance du 16 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 4418,
+    "sortie": 473
+   }
+  },
+  {
+   "id": "CA26 13 0248",
+   "numero": null,
+   "resolution": "CA26 13 0248",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "APPROBATION DU PROCÈS-VERBAL DE LA SÉANCE EXTRAORDINAIRE DU 17 SEPTEMBRE 2026 À 14 H.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_PV_ORDI_2026-10-06_19h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil approuve le procès-verbal de sa séance extraordinaire du 17 septembre 2026 à 14 h, tel que soumis."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 1724,
+    "sortie": 142
+   }
+  },
+  {
+   "id": "CA26 13 0246",
+   "numero": null,
+   "resolution": "CA26 13 0246",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "OUVERTURE DE LA SÉANCE.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_PV_ORDI_2026-10-06_19h00_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement ouvre sa séance à 19 h 02. Aucune autre décision n'est prise dans ce document."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 1609,
+    "sortie": 139
+   }
+  },
+  {
+   "id": "1260502003",
+   "numero": "1260502003",
+   "resolution": "CA26 13 0263",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "DÉPÔT DU PROCÈS-VERBAL DE LA SÉANCE DU COMITÉ CONSULTATIF D'URBANISME TENUE LE 16 SEPTEMBRE 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=88",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Saint-Léonard prend acte du dépôt du procès-verbal de la séance du comité consultatif d'urbanisme tenue le 16 septembre 2026.",
+    "Le document est déposé à titre d'information seulement : aucune dépense ni aucune autorisation n'y est rattachée."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 2756,
+    "sortie": 204
+   }
+  },
+  {
+   "id": "1263304004",
+   "numero": "1263304004",
+   "resolution": "CA26 13 0264",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "DÉPÔT DU RAPPORT ANNUEL 2025 DU COMITÉ CONSULTATIF D'URBANISME.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=91",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Saint-Léonard prend acte du dépôt du rapport annuel 2025 du comité consultatif d'urbanisme.",
+    "Il s'agit d'une formalité prévue par le règlement encadrant ce comité; aucune somme ni mesure n'est en jeu."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.923Z",
+   "jetons": {
+    "entree": 2591,
+    "sortie": 197
+   }
+  },
+  {
+   "id": "CA26 13 0247",
+   "numero": null,
+   "resolution": "CA26 13 0247",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "ADOPTION DE L'ORDRE DU JOUR.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_PV_ORDI_2026-10-06_19h00_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement adopte l'ordre du jour de sa séance : une formalité de début de réunion, sans décision de fond."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.923Z",
+   "jetons": {
+    "entree": 1611,
+    "sortie": 140
+   }
+  },
+  {
+   "id": "1269001011",
+   "numero": "1269001011",
+   "resolution": "CA26 13 0256",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "PRÉSENTATION DU PLAN D'IMPLANTATION ET D'INTÉGRATION ARCHITECTURALE (PIIA) NUMÉRO 2026-19 - CONSTRUCTION D'UN BÂTIMENT RÉSIDENTIEL - 6240, RUE JARRY EST - LOT NUMÉRO 1 125 002 DU CADASTRE DU QUÉBEC - DISTRICT SAINT-LÉONARD-EST.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=39",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Saint-Léonard approuve les plans d'un immeuble résidentiel de 7 étages au 6240, rue Jarry Est, district Saint-Léonard-Est.",
+    "Le projet prévoit 72 logements locatifs, dont 8 au rez-de-chaussée avec entrée distincte, plus une mezzanine avec terrasse commune, lounge et gym.",
+    "Le terrain, vacant depuis la démolition en 2025 d'une maison unifamiliale d'avant 1940, fait 1 659,2 m²; le bâtiment en occupera 50,8 %.",
+    "72 cases de stationnement et 90 places pour vélos seront aménagées sur trois niveaux de sous-sol; six cases seront réservées aux personnes à mobilité réduite.",
+    "Le toit sera végétalisé sur 624 m² (74 % de la toiture) et 9 arbres seront plantés, dont 3 en cour avant.",
+    "Les déchets seront entreposés dans une salle au sous-sol et sortis sur une dalle de propreté de 25 m² durant les heures de collecte.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable le 16 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.923Z",
+   "jetons": {
+    "entree": 7053,
+    "sortie": 507
+   }
+  },
+  {
+   "id": "CA26 13 0265",
+   "numero": null,
+   "resolution": "CA26 13 0265",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": null,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_PV_ORDI_2026-10-06_19h00_FR.pdf#page=12",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement met fin à la séance à 20 h 01."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.923Z",
+   "jetons": {
+    "entree": 1583,
+    "sortie": 119
+   }
+  },
+  {
+   "id": "1269073015",
+   "numero": "1269073015",
+   "resolution": "CA26 13 0259",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "DÉPÔT DU PROCÈS-VERBAL DE L'ASSEMBLÉE PUBLIQUE DE CONSULTATION ET ADOPTION DU SECOND PROJET DE RÉSOLUTION - PROJET PARTICULIER PPCMOI 2026-05 - 5834-5940, BOULEVARD MÉTROPOLITAIN EST - LOT NUMÉRO 1 124 216 DU CADASTRE DU QUÉBEC - DISTRICT SAINT-LÉONARD-EST.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=54",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Saint-Léonard autorise l'usage « salle d'amusement » dans un local du bâtiment commercial situé aux 5834-5940, boulevard Métropolitain Est (district Saint-Léonard-Est), où ce type d'usage est normalement interdit.",
+    "Le projet prévoit une salle de quilles de 26 allées (plus de 70 % de la superficie), un restaurant/casse-croûte (environ 10 %) et des aires de divertissement : arcades, cages de baseball intérieures, dards, laser tag, karaoké.",
+    "La salle d'amusement ne peut exister que comme complément à une salle de quilles et de billard, et les jeux de hasard et d'argent sont interdits.",
+    "Le promoteur doit déposer sa demande de certificat d'autorisation d'usage dans les 18 mois suivant l'entrée en vigueur de la résolution, sinon l'autorisation devient nulle.",
+    "L'arrondissement dépose le procès-verbal de la consultation publique du 17 septembre 2026 et adopte le second projet de résolution.",
+    "Le dossier contient des dispositions susceptibles d'approbation référendaire : les personnes de la zone visée et des zones voisines pourront demander un référendum après l'avis public du 7 octobre 2026; l'adoption finale est prévue le 2 novembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.924Z",
+   "jetons": {
+    "entree": 7454,
+    "sortie": 556
+   }
+  },
   {
    "id": "1265815002",
    "numero": "1265815002",
@@ -9493,6 +9948,801 @@
    "jetons": {
     "entree": 5143,
     "sortie": 409
+   }
+  },
+  {
+   "id": "1266737017",
+   "numero": "1266737017",
+   "resolution": "CA26 16 0202",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Édicter les ordonnances pour la programmation d'événements publics à venir sur le territoire de l'arrondissement d'Outremont de septembre à décembre 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=114",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement d'Outremont autorise 15 événements publics sur le domaine public entre septembre et décembre 2026, avec des dérogations aux règlements sur les parcs, le bruit, la propreté, la circulation et le stationnement.",
+    "Les parcs Beaubien, Saint-Viateur et Pratt, la place Micheline-Legendre et la place Kate-McGarrigle seront occupés en tout ou en partie pendant les événements.",
+    "Rues et ruelles fermées : avenue Durocher (entre Lajoie et Van Horne) pour deux parades Bagleiten les 13 septembre et 4 octobre; avenue Stuart et avenue Saint-Viateur pour le cross-country de Stanislas le 22 octobre; la ruelle à l'est de Rockland du 23 au 27 septembre.",
+    "Pendant les Mondiaux de cyclisme UCI, l'arrondissement tient un site d'activation près de l'hôtel de ville (23 au 27 septembre) et la SDC Laurier Ouest installe des kiosques sur les trottoirs du 19 au 27 septembre.",
+    "Parmi les autres activités : festival Grandes Oreilles (11 au 13 septembre, 2 000 personnes attendues), fête des récoltes, Halloween à la MIAM, parade des citrouilles au parc Pratt le 1er novembre, et deux séances de méditation au parc Saint-Viateur.",
+    "Les événements sur le domaine public sont gratuits et accessibles à tous; les organismes doivent obtenir tous les permis requis.",
+    "Les coûts du soutien de la Ville sont absorbés dans les budgets de fonctionnement des directions concernées."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.920Z",
+   "jetons": {
+    "entree": 7674,
+    "sortie": 678
+   }
+  },
+  {
+   "id": "1265069028",
+   "numero": "1265069028",
+   "resolution": "CA26 16 0196",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Avis de motion et dépôt d'un projet de règlement - Règlement modifiant le règlement relatif à la circulation et au stationnement (1171) - L'objet du règlement vise à implanter une zone de stationnement réservé pour les personnes à mobilité réduite sur le côté est de l'avenue de l'Épée au sud de l'avenue Saint-Viateur Le projet de règlement a été déposé aux élues avec le sommaire décisionnel et est disponible à l’entrée de la salle du conseil à l’attention du public ; Conformément à l’article 356 de la Loi sur les cités et villes, (RLRQ., chap. C-19), la mairesse Caroline Braun donne un avis de motion à l’effet qu’un projet de règlement intitulé « Règlement modifiant le règlement relatif à la",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=73",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont veut créer une place de stationnement réservée aux personnes à mobilité réduite sur le côté est de l'avenue de l'Épée, au sud de l'avenue Saint-Viateur.",
+    "L'espace ferait 5,5 mètres de long, à partir d'un point situé à 23 mètres au sud de l'avenue Saint-Viateur, près de la ruelle pour faciliter le déneigement.",
+    "La demande vient d'un résidant du 1134, avenue Saint-Viateur; la place ne lui sera pas réservée en exclusivité et il devra obtenir un permis annuel de stationnement de la zone 1.",
+    "Les règles existantes continuent de s'appliquer à cet endroit : stationnement de plus de 2 heures interdit de 8 h à 22 h sauf permis du secteur 1, et stationnement interdit le lundi de 13 h à 15 h du 1er avril au 30 novembre.",
+    "Les coûts de la nouvelle signalisation seront payés à même le fonds de stationnement.",
+    "Échéancier prévu : avis de motion le 1er septembre 2026, adoption du règlement le 6 octobre 2026, implantation en octobre ou novembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.920Z",
+   "jetons": {
+    "entree": 5079,
+    "sortie": 512
+   }
+  },
+  {
+   "id": "1265069030",
+   "numero": "1265069030",
+   "resolution": "CA26 16 0204",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Édicter, en vertu du Règlement relatif à la circulation et au stationnement (1171) une ordonnance autorisant la mise en place d'un projet visant les fermetures du boulevard Dollard, entre les avenues Van Horne et Lajoie, pour les saisons automnale 2026 à partir de la semaine du 17 août jusqu'à la semaine 30 novembre 2026 (sous réserve des conditions météorologiques), hivernale 2026-2027 à partir de la semaine du 30 novembre 2026 (sous réserve des conditions météorologiques) jusqu'à la semaine du 26 avril 2027 et printanière 2027 à partir de la semaine du 26 avril jusqu'à la semaine du 28 juin 2027",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=132",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont reconduit la fermeture du boulevard Dollard, entre les avenues Van Horne et Lajoie, pour trois saisons consécutives.",
+    "Fermeture complète à l'automne 2026, de la semaine du 17 août à la semaine du 30 novembre 2026, selon la météo.",
+    "Fermeture partielle durant l'hiver, de la semaine du 30 novembre 2026 à la semaine du 26 avril 2027, puis reprise au printemps jusqu'à la semaine du 28 juin 2027.",
+    "L'accès au garage souterrain près de Lajoie et au débarcadère d'autobus scolaires près de Van Horne est maintenu; des tables à pique-nique et des chaises seront installées sur le 2e terre-plein au sud de Van Horne.",
+    "Le conseil invoque la volonté de rendre les abords de l'école Guy-Drummond et du Collège Stanislas plus sécuritaires; les deux établissements appuient le projet.",
+    "Le SPVM et le SAMU s'y opposent (accès aux écoles, report de circulation sur les rues voisines, sécurité à l'intersection Lajoie–Dollard, confusion sur l'accès au garage); le SIM autorise la fermeture.",
+    "Selon l'arrondissement, la fermeture n'a aucune incidence sur le transport en commun à proximité."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.921Z",
+   "jetons": {
+    "entree": 7978,
+    "sortie": 565
+   }
+  },
+  {
+   "id": "1265395002",
+   "numero": "1265395002",
+   "resolution": "CA26 16 0194",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Déposer la projection des résultats de l'exercice financier 2026 ainsi que l'état des revenus et des dépenses réels au 30 juin 2026, comparativement à la même période l'an dernier DÉPOSER la projection des résultats de l'exercice financier 2026 en date du 30 juin 2026 et de l'état des revenus et des dépenses réelles au 30 juin 2026 comparé avec ceux du 30 juin 2025.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=62",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont dépose son suivi budgétaire au 30 juin 2026, comparé à la même date en 2025, ainsi que ses prévisions pour toute l'année 2026.",
+    "L'arrondissement prévoit un déficit entre ses revenus et ses dépenses pour 2026.",
+    "Les revenus sont inférieurs de 898 k$ aux prévisions : 250 k$ de moins en vignettes et parcomètres, 239 k$ de moins en sports et loisirs (location de salles, aréna), 209 k$ de moins en études et permis depuis la fin des travaux du quartier MIL, et environ 75 k$ de manque à gagner lié à la gratuité de la plupart des activités sportives.",
+    "Les dépenses sont inférieures de 608 k$ aux prévisions, surtout parce que 422 k$ de dépenses ont été financées par d'autres sources (fonds de stationnement, fonds de parc, programme décennal d'immobilisations) et grâce à un remboursement de 133 k$ pour le déneigement.",
+    "Des budgets additionnels de 3 596,7 k$ ont été autorisés en cours d'année pour la piétonnisation de rues, des mesures d'urgence climatique, la révision du plan de stationnement, le verdissement des parcs et la rénovation du chalet du parc Saint-Viateur.",
+    "La Ville centre a aussi versé des budgets pour le Théâtre Outremont, le Programme prévention Montréal, les bibliothèques et maisons de la culture, et la dynamisation des secteurs hors SDC."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.921Z",
+   "jetons": {
+    "entree": 5454,
+    "sortie": 635
+   }
+  },
+  {
+   "id": "CA26 16 0211",
+   "numero": null,
+   "resolution": "CA26 16 0211",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Motion de la conseillère Maude Choko - Installation exceptionnelle d'une plaque commémorative au parc Pierre-Dansereau en mémoire de Melina",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_PV_ORDI_2026-09-01_19h00_FR.pdf#page=16",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement d'Outremont autorise, à titre exceptionnel, la famille de Melina à installer une plaque commémorative sur un banc du parc Pierre-Dansereau.",
+    "La plaque portera le texte proposé par la famille : Melina « Elle a joué ici de tout son cœur. Son esprit perdure, porté par le rire des enfants et chaque âme qui y trouve sérénité et joie. »",
+    "La famille pourra aussi tenir une courte cérémonie de recueillement sur place, au moment de son choix, selon les règles d'utilisation du parc et l'accord des services concernés.",
+    "Les services de l'arrondissement accompagneront la famille pour fixer les modalités de l'installation et de la cérémonie.",
+    "L'autorisation est donnée en attendant le projet de commémoration de l'arrondissement, encore en élaboration, et ne crée pas de précédent pour d'autres demandes semblables.",
+    "La motion rappelle que la jeune fille, d'Outremont, a été retrouvée sans vie dans l'État de New York il y a plus d'un an."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.921Z",
+   "jetons": {
+    "entree": 2572,
+    "sortie": 461
+   }
+  },
+  {
+   "id": "1265069027",
+   "numero": "1265069027",
+   "resolution": "CA26 16 0210",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Informer le conseil de l'arrondissement de la suppression de trois espaces de stationnement tarifés sur l'avenue Van Horne en lien avec la Politique « Vision zéro » en matière de sécurité des usagers de la route élaborée par le Service de l'Urbanisme et de la Mobilité (SUM) de la Ville de Montréal INFORMER le conseil de la suppression des espaces de stationnement tarifés sur rue énoncés dans le présent dossier décisionnel.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=170",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont supprimera trois espaces de stationnement payants sur l'avenue Van Horne au cours de 2026.",
+    "Les espaces visés se trouvent entre la rue Hutchison et l'avenue Durocher, entre Durocher et Querbes, et entre Querbes et de l'Épée.",
+    "La mesure découle de la politique « Vision zéro » du Service de l'urbanisme et de la mobilité et vise à dégager la visibilité aux intersections pour les automobilistes et les piétons.",
+    "L'Agence de mobilité durable retirera le mobilier et en assumera les coûts; le règlement sur la circulation et le stationnement n'a pas besoin d'être modifié.",
+    "Le document note que la suppression touchera les commerçants de l'avenue Van Horne.",
+    "L'arrondissement annoncera le changement sur ses plateformes de communication; l'information est transmise au conseil le 1er septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.921Z",
+   "jetons": {
+    "entree": 3812,
+    "sortie": 411
+   }
+  },
+  {
+   "id": "1265723001",
+   "numero": "1265723001",
+   "resolution": "CA26 16 0191",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Autoriser une affectation au surplus de 15 000 $, taxes incluses, pour la réalisation d'une analyse et d'une mise à jour du plan d'action culturel d'Outremont pour la période de 2027-2032",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=44",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont pige 15 000 $ dans son surplus libre pour mettre à jour son plan d'action culturel, qui couvrira 2027-2032.",
+    "Un consultant externe sera embauché pour analyser les bilans du plan actuel et réévaluer les 24 actions prévues au plan 2021-2026.",
+    "Le consultant consultera les citoyens, les acteurs culturels, la Table arts et culture d'Outremont, la Table de quartier d'Outremont, des organismes partenaires et les élues.",
+    "Une partie du montant couvrira aussi les frais administratifs, la consultation, la communication et la rédaction du plan.",
+    "L'arrondissement vise à avoir le plan d'action révisé en main pour mars 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "15 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.921Z",
+   "jetons": {
+    "entree": 5187,
+    "sortie": 354
+   }
+  },
+  {
+   "id": "1265069032",
+   "numero": "1265069032",
+   "resolution": "CA26 16 0199",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Avis de motion et dépôt d'un projet de règlement - Règlement modifiant le règlement relatif à la circulation et au stationnement (1171) - L'objet du règlement vise à modifier la plage horaire de la zone de stationnement réservé pour le transport scolaire sur la partie du côté est de l'avenue Dollard comprise entre les avenues Ducharme et Thérèse-Lavoie-Roux Le projet de règlement a été déposé aux élues avec le sommaire décisionnel et est disponible à l’entrée de la salle du conseil à l’attention du public ; Conformément à l’article 356 de la Loi sur les cités et villes, (RLRQ, chap. C-19), la mairesse Caroline Braun donne un avis de motion à l’effet qu’un projet de règlement intitulé «",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=89",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont veut changer les heures de la zone réservée aux autobus scolaires sur le côté est de l'avenue Dollard, entre les avenues Ducharme et Thérèse-Lavoie-Roux.",
+    "Sur le tronçon près de l'avenue Thérèse-Lavoie-Roux (38 mètres vers le sud), l'arrêt serait interdit sauf pour les autobus scolaires de 7 h à 8 h 30 et de 14 h 30 à 16 h, du lundi au vendredi, du 15 août au 28 juin.",
+    "La zone avait été autorisée le 5 mai 2026 avec un horaire de 8 h à 16 h 30; la directrice de l'école Irma-Levasseur a demandé la révision.",
+    "Le stationnement reste prohibé de 13 h à 15 h le mercredi, du 1er avril au 30 novembre, sur ces portions de l'avenue.",
+    "Les coûts de la nouvelle signalisation seront payés à même le budget de fonctionnement de l'arrondissement.",
+    "Avis de motion et dépôt du projet le 1er septembre 2026; adoption prévue le 6 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.921Z",
+   "jetons": {
+    "entree": 4752,
+    "sortie": 501
+   }
+  },
+  {
+   "id": "CA26 16 0183",
+   "numero": null,
+   "resolution": "CA26 16 0183",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Approuver les procès-verbaux des séances ordinaire et extraordinaire du conseil d'arrondissement d'Outremont tenues les 7 juillet 2026 (ordinaire) à 19 h et 4 août 2026 (extraordinaire) à 11 h Copie des procès-verbaux ayant été remis à chaque membre du conseil d'arrondissement dans le délai requis par la Loi sur les cités et villes (RLRQ, chap. C-19).",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_PV_ORDI_2026-09-01_19h00_FR.pdf#page=3",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement d'Outremont approuve les procès-verbaux de deux de ses séances : celle du 7 juillet 2026 (ordinaire, 19 h) et celle du 4 août 2026 (extraordinaire, 11 h)."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.921Z",
+   "jetons": {
+    "entree": 1955,
+    "sortie": 181
+   }
+  },
+  {
+   "id": "1265430003",
+   "numero": "1265430003",
+   "resolution": "CA26 16 0186",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Autoriser une dépense additionnelle de 459 900 $, taxes incluses, à titre de contingences pour couvrir les travaux et les délais supplémentaires engendrés par les conditions de chantier dans le cadre du contrat accordé à Construction Di Paolo Inc. (CA25 16 0093) à la suite des travaux de rénovation et de mise aux normes de la mairie de l'arrondissement d'Outremont, majorant ainsi le montant total de la dépense 4 979 637,26 $, taxes incluses à 5 439 537,26 $, taxes incluses - Dépense provenant du programme décennal d'immobilisations (PDI) de l'arrondissement",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=20",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont ajoute 459 900 $ (taxes incluses) au contrat de rénovation de sa mairie, au 543, chemin de la Côte-Sainte-Catherine, confié à Construction Di Paolo inc.",
+    "La dépense totale du contrat passe de 4 979 637,26 $ à 5 439 537,26 $, et les contingences de 627 685,37 $ à 1 087 585,37 $.",
+    "Le bâtiment, construit en 1817, est restauré et mis aux normes : toiture métallique, stuc, portes extérieures, chauffage, ventilation, électricité, sécurité incendie et accessibilité universelle.",
+    "Les coûts additionnels viennent de travaux imprévus : retrait de vieux câblage en présence d'amiante, étanchéité du clocheton, climatisation du BAM, câblage informatique, systèmes d'intrusion, et hausse des prix liée aux tarifs douaniers américains.",
+    "Sans cette somme, l'arrondissement prévoit un arrêt du chantier et un litige avec l'entrepreneur.",
+    "La dépense est financée par le programme d'immobilisations de l'arrondissement; des subventions estimées à 150 000 $ (patrimoine) et 200 000 $ (Hydro-Québec) pourraient réduire la facture nette d'environ 350 000 $."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "459 900 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 7632,
+    "sortie": 564
+   }
+  },
+  {
+   "id": "1266737019",
+   "numero": "1266737019",
+   "resolution": "CA26 16 0203",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Édicter, en vertu Règlement sur l'occupation temporaire de la voie publique pour la tenue d'événements spéciaux (AO-204), une ordonnance autorisant la fermeture à la circulation automobile sur diverses rues de l'arrondissement dans le cadre de l'événement « Grand Prix cycliste de Montréal UCI World Tour » qui se tiendra le dimanche 13 septembre 2026 de 6 h à 17 h 30 et décrétant une interdiction de stationnement sur diverses rues de l'arrondissement le dimanche 13 septembre 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=124",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement d'Outremont autorise la fermeture de rues pour le Grand Prix cycliste de Montréal, le dimanche 13 septembre 2026, de 6 h à 17 h 30.",
+    "Les rues fermées à Outremont : Vincent-D'Indy, chemin de la Côte-Sainte-Catherine, Pagnuelo et Mont-Royal, selon des plages horaires de 8 h 15 à 17 h ou de 6 h à 17 h 30. D'autres avenues seront limitées à la circulation locale.",
+    "Le stationnement est interdit sur Vincent-D'Indy, Côte-Sainte-Catherine, Pagnuelo et Mont-Royal, ainsi que sur Van Horne (de 7 h à 18 h, pour la STM).",
+    "La course fait 209,1 km, soit 17 tours d'un circuit de 12,3 km autour du mont Royal; départ à 10 h 15, fin prévue vers 16 h 25.",
+    "Le parcours traverse quatre arrondissements : Ville-Marie, Le Plateau-Mont-Royal, Côte-des-Neiges–Notre-Dame-de-Grâce et Outremont.",
+    "La voirie de l'arrondissement doit vérifier et réparer la chaussée au besoin, nettoyer le parcours les 12 et 13 septembre, et déplacer les bases de béton du boulevard Mont-Royal avant le 11 septembre 13 h.",
+    "Le SPVM assure le service d'ordre et les points de fermeture."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 8215,
+    "sortie": 627
+   }
+  },
+  {
+   "id": "1266965005",
+   "numero": "1266965005",
+   "resolution": "CA26 16 0184",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Accorder un contrat d'un montant de 132 654,71 $, incluant les taxes, à Les Entrepreneurs Bucaro Inc. afin de réaliser des travaux de marquage et signalisation pour la mise à sens unique et l'ajout d'aménagement cyclable sur les avenues Bloomfield et Saint-Viateur dans le cadre du déploiement de la phase 2026 du Plan de mobilité durable de l'arrondissement d'Outremont à la suite de l'appel d'offres public 2675-AOP-TRV07 (2 soumissionnaires) - Autoriser une dépense totale de 152 552,92 $, incluant les taxes (contrat : 132 654,71 $ + contingences : 13 265,47 $ +",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=6",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont accorde un contrat de 132 654,71 $ (taxes incluses) à Les Entrepreneurs Bucaro inc. pour du marquage et de la signalisation sur les avenues Bloomfield et Saint-Viateur.",
+    "La dépense totale autorisée atteint 152 552,92 $ : le contrat, 13 265,47 $ de contingences et 6 632,74 $ d'incidences, le tout financé par le budget d'immobilisations de l'arrondissement.",
+    "L'avenue Bloomfield passe à sens unique vers le nord entre Fairmount et Bernard; deux bandes cyclables sont ajoutées entre Fairmount et Saint-Viateur, avec retrait du stationnement du côté ouest.",
+    "L'avenue Saint-Viateur passe à sens unique vers l'est entre Stuart et Hutchison, avec une piste cyclable bidirectionnelle du côté sud et le stationnement maintenu du côté nord.",
+    "Les travaux sur Bloomfield sont prévus à la fin septembre 2026 et ceux sur Saint-Viateur à la fin octobre 2026.",
+    "Une signalisation d'avertissement sera installée un mois avant les travaux et restera un mois après.",
+    "Deux entreprises ont soumissionné sur cinq qui ont pris le cahier des charges; l'offre retenue dépasse l'estimation de l'arrondissement de 9 %."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "132 654,71 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 7356,
+    "sortie": 596
+   }
+  },
+  {
+   "id": "1269943002",
+   "numero": "1269943002",
+   "resolution": "CA26 16 0205",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Édicter, en vertu du Règlement sur l'occupation du domaine public (AO-48), une ordonnance autorisant la vente de produits et services sur le domaine public à l'occasion d'une promotion commerciale organisée par la Société de développement commercial (SDC) Laurier Ouest du 24 au 27 septembre 2026 dans le cadre de l'événement « Grand Prix cycliste de Montréal UCI World Tour »",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=142",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont autorise la vente de produits et services sur le domaine public du 24 au 27 septembre 2026, entre 12 h et 17 h.",
+    "La vente se tiendra sur un site aménagé en bordure du chemin de la Côte-Sainte-Catherine, entre les avenues Davaar et Rockland.",
+    "Commerces, commerces invités et organismes pourront y tenir un kiosque et vendre produits, services, nourriture et boissons alcoolisées ou non.",
+    "La promotion commerciale est organisée par la SDC Laurier Ouest, partenaire de l'arrondissement depuis 2018.",
+    "Le tout s'inscrit dans les Championnats du monde Route UCI, dont des épreuves passent à Outremont du 23 au 27 septembre 2026 sur un circuit de 13,4 km autour du mont Royal.",
+    "Aucun aspect financier n'est rattaché à la décision.",
+    "L'arrondissement prévoit faire la promotion des initiatives liées à cet événement dans ses communications."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 4664,
+    "sortie": 450
+   }
+  },
+  {
+   "id": "1260564002",
+   "numero": "1260564002",
+   "resolution": "CA26 16 0189",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Déposer la liste des achats effectués par l'entremise de cartes de crédit pour les mois de juin et juillet 2026 DÉPOSER la liste des achats effectués par l'entremise de cartes de crédit pour les mois de juin et juillet 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=36",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont dépose devant son conseil la liste des achats faits avec les cartes de crédit de la Ville pour juin et juillet 2026.",
+    "Il s'agit d'un dépôt d'information, sans dépense ni montant rattaché.",
+    "La liste sera publiée sur Montreal.ca avec les ordres du jour et procès-verbaux de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 3604,
+    "sortie": 227
+   }
+  },
+  {
+   "id": "1265395003",
+   "numero": "1265395003",
+   "resolution": "CA26 16 0192",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Offrir au Conseil municipal de la Ville de Montréal, en vertu de l'article 85 de la Charte de la Ville de Montréal, de prendre en charge, par étapes, l'activité « Technologies de l'information - support bureautique et télécommunications » de l'arrondissement d'Outremont et autoriser le transfert des ressources et des budgets en conséquence - Autoriser un virement budgétaire de 17 300 $ en 2026 en provenance de l'arrondissement d'Outremont vers le Service des technologies de l'information (STI) et autoriser un ajustement récurent à la base budgétaire de 1 a-p (année- personne) et de 105 400 $ en provenance de l'arrondissement d'Outremont vers le STI à compter de 2027",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=50",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont transfère au Service des technologies de l'information (STI) de la Ville la gestion du support bureautique et des télécommunications.",
+    "Un poste permanent de technicien en bureautique passe de l'arrondissement au STI, avec maintien d'une présence sur place selon les règles en vigueur.",
+    "Outremont vire 17 300 $ au STI en 2026 (pour novembre et décembre), puis 105 400 $ par année à partir de 2027 pour financer le poste.",
+    "Le STI reprend les contrats de télécommunications, les équipements réseau, serveurs et postes de travail, ainsi que le processus de soutien informatique.",
+    "Outremont garde à sa charge les licences de logiciels opérationnels, les solutions développées à l'interne (stationnement, sécurité publique), la téléphonie cellulaire, les ajouts de couverture réseau, le contrôle des accès et la vidéosurveillance.",
+    "L'intégration, amorcée en novembre 2024, s'est faite en deux phases : transfert des infrastructures réseau, puis transfert des ressources humaines.",
+    "La Ville invoque le rehaussement de la sécurité informatique, une infrastructure plus robuste et l'accès au centre de services TI."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "105 400 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 5452,
+    "sortie": 523
+   }
+  },
+  {
+   "id": "1260246002",
+   "numero": "1260246002",
+   "resolution": "CA26 16 0185",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Accorder un soutien financier totalisant la somme de 4 000 $, toutes taxes applicables incluses le cas échéant, à la Table de concertation des ainés d'Outremont, dont le fiduciaire désigné est la Table de quartier d'Outremont dans le cadre de la réalisation du projet Forum des ainés du 15 octobre 2026 - Dépense provenant du surplus de l'arrondissement",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=14",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont verse 4 000 $ à la Table de concertation des aînés d'Outremont, avec la Table de quartier d'Outremont comme fiduciaire.",
+    "L'argent sert à organiser la deuxième édition du Forum des aînés, le 15 octobre 2026 au Centre communautaire intergénérationnel.",
+    "Le Forum est gratuit et propose des kiosques d'information et des mini-conférences sur la santé, la sécurité, les droits, la proche-aidance, le soutien à domicile, le logement et les loisirs.",
+    "La somme couvre des frais logistiques : la nourriture servie sur place et le matériel audiovisuel.",
+    "La dépense est financée en entier par le surplus libre de l'arrondissement.",
+    "L'an dernier, l'arrondissement avait accordé 10 000 $ au même organisme pour la première édition, qui avait réuni plus de 170 participants."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "4 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 5166,
+    "sortie": 407
+   }
+  },
+  {
+   "id": "CA26 16 0182",
+   "numero": null,
+   "resolution": "CA26 16 0182",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Adopter l'ordre du jour de la séance ordinaire du conseil d'arrondissement d'Outremont du 1er septembre 2026, à 19 h",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_PV_ORDI_2026-09-01_19h00_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement d'Outremont adopte l'ordre du jour de sa séance ordinaire du 1er septembre 2026, à 19 h.",
+    "Au point 40.04, les heures « 8 h à 11 h » sont remplacées par « 8 h à 10 h ».",
+    "Les points 47.01 et 47.02 sont retirés de l'ordre du jour."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 1801,
+    "sortie": 222
+   }
+  },
+  {
+   "id": "1266737012",
+   "numero": "1266737012",
+   "resolution": "CA26 16 0200",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Addenda - Édicter, en vertu du Règlement relatif à la circulation et au stationnement (1171), une ordonnance autorisant la fermeture à la circulation automobile sur diverses rues de l'arrondissement dans le cadre de l'événement Les Championnats du monde Route UCI Montréal 2026 qui se tiendra du 19 au 27 septembre 2026 et dont des compétitions se tiendront sur le territoire d'Outremont du 23 au 27 septembre 2026 en ajoutant à l'ordonnance CA26 160140 entérinée le 2 juin 2026 une autorisation de suspendre les règles relatives à l'entretien de la chaussée pour la période et sur les rues identifiées au dossier décisionnel addenda - L'objet de cet addenda est d'autoriser les détenteurs de la",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=94",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont ajuste ses règles de stationnement pour les Championnats du monde Route UCI, présentés à Montréal du 19 au 27 septembre 2026 (épreuves à Outremont du 23 au 27 septembre).",
+    "Les détenteurs de la vignette SRRR no 3 enclavés par le parcours pourront stationner dans toutes les zones SRRR de l'arrondissement du 23 au 27 septembre 2026, s'ils respectent les périodes d'interdiction pour l'entretien et le nettoyage de la chaussée.",
+    "Les règles d'entretien de la chaussée sont suspendues du 23 au 27 septembre 2026 sur l'avenue Bloomfield (Laurier Ouest à Fairmount Ouest), l'avenue de l'Épée et l'avenue Querbes (Saint-Joseph à Fairmount Ouest), et l'avenue Durocher (Laurier Ouest à Fairmount Ouest).",
+    "Ces ajouts modifient deux ordonnances déjà adoptées, le 2 juin et le 7 juillet 2026, qui prévoyaient la fermeture de rues à la circulation automobile et la suspension du stationnement limité à 2 heures et des vignettes SRRR 1, 3 et 4.",
+    "Le document indique que l'événement compte 13 épreuves, plus de 1 000 athlètes d'environ 75 pays et près de 500 000 spectateurs attendus.",
+    "À Outremont, seules les épreuves sur route se tiennent, sur le circuit autour du mont Royal; les contre-la-montre ont lieu du 19 au 22 septembre ailleurs."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 7792,
+    "sortie": 667
+   }
+  },
+  {
+   "id": "1265395001",
+   "numero": "1265395001",
+   "resolution": "CA26 16 0193",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Déposer le rapport de la Mairesse sur la situation financière de l'arrondissement d'Outremont au 31 décembre 2025 DÉPOSER le rapport de la Mairesse sur la situation financière de l'arrondissement au 31 décembre 2025; PUBLIER le rapport sur le site internet de la Ville de Montréal.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=57",
+   "source": "sommaire",
+   "puces": [
+    "La mairesse d'Outremont dépose au conseil d'arrondissement le rapport sur la situation financière de l'arrondissement au 31 décembre 2025.",
+    "Le rapport sera publié sur Montreal.ca en septembre 2026.",
+    "Le dépôt répond à une obligation légale de faire rapport aux citoyens au plus tard en septembre.",
+    "Les résultats financiers sont déposés sous réserve de l'approbation des états financiers par la Ville de Montréal.",
+    "Le document ne prévoit aucune dépense ni nouvelle mesure : il s'agit d'un dépôt d'information."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.922Z",
+   "jetons": {
+    "entree": 4072,
+    "sortie": 300
+   }
+  },
+  {
+   "id": "1265753021",
+   "numero": "1265753021",
+   "resolution": "CA26 16 0208",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Adopter, en vertu du Règlement concernant les plans d'implantation et d'intégration architecturale (AO-530), une résolution refusant une demande d'approbation d'un plan d'implantation et d'intégration architecturale (PIIA) visant le remplacement des fenêtres et de deux portes sur l'immeuble situé au 249, chemin de la Côte-Sainte-Catherine",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=160",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont refuse le projet de remplacement des fenêtres et de deux portes de la maison du 249, chemin de la Côte-Sainte-Catherine.",
+    "La résidence unifamiliale, construite en 1911, est classée « témoin architectural significatif » et se trouve dans l'unité de paysage « Côte-Sainte-Catherine ».",
+    "Le bâtiment a encore ses portes et fenêtres d'origine en bois, à guillotine, avec boiseries décoratives et impostes ornées de vitraux.",
+    "Le projet prévoyait des fenêtres hybrides bois/aluminium à battant, sans contre-fenêtres, avec récupération des vitraux; l'arrondissement juge que les profils seraient simplifiés et les vitraux moins visibles et plus exposés à se détériorer.",
+    "Le règlement de PIIA (AO-530) privilégie l'entretien des éléments d'origine ou, à défaut, leur remplacement à l'identique.",
+    "Le document mentionne qu'un projet de restauration pourrait être admissible au Programme d'aide à la restauration et à la rénovation des bâtiments patrimoniaux de la Ville.",
+    "Le comité consultatif d'urbanisme a recommandé le refus le 15 juillet 2026; le propriétaire a envoyé une lettre d'opposition et une proposition bonifiée le 12 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.923Z",
+   "jetons": {
+    "entree": 5753,
+    "sortie": 574
+   }
+  },
+  {
+   "id": "1265069024",
+   "numero": "1265069024",
+   "resolution": "CA26 16 0195",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Avis de motion et dépôt d'un projet de règlement - Règlement modifiant le règlement relatif à la circulation et au stationnement (1171) - L'objet du règlement vise à interdire le virage à gauche entre 7h et 9h du lundi au vendredi sur l'avenue Villeneuve à partir du chemin de la Côte-Sainte- Catherine Le projet de règlement a été déposé aux élues avec le sommaire décisionnel et est disponible à l’entrée de la salle du conseil à l’attention du public; Conformément à l’article 356 de la Loi sur les cités et villes, (RLRQ, chap. C-19), la mairesse Caroline Braun donne un avis de motion à l’effet qu’un projet de règlement intitulé « Règlement modifiant le règlement relatif à la circulation et au",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=68",
+   "source": "sommaire",
+   "puces": [
+    "Outremont veut interdire le virage à gauche du chemin de la Côte-Sainte-Catherine (en venant de l'ouest) vers l'avenue Villeneuve, de 7h à 9h, du lundi au vendredi.",
+    "Une enseigne interdisant ce virage en tout temps avait été installée dans le cadre du Plan de mobilité durable et du prolongement de la piste cyclable sur Côte-Sainte-Catherine, près du parc Ludger-Beauregard.",
+    "À la demande du Cabinet de la mairesse, l'interdiction serait ramenée aux seules heures de pointe du matin, pour réduire les détours imposés aux résidants.",
+    "Le sommaire note que l'interdiction en tout temps oblige les résidants des avenues McNider et Nelson à passer par l'avenue du Parc vers le sud, avec allongement des trajets et plus de circulation sur cet axe.",
+    "Étapes prévues : avis de motion et dépôt du projet le 1er septembre 2026, adoption le 6 octobre 2026, entrée en vigueur en octobre 2026.",
+    "Les coûts de modification de la signalisation seront payés à même le budget de fonctionnement de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.923Z",
+   "jetons": {
+    "entree": 4762,
+    "sortie": 508
+   }
+  },
+  {
+   "id": "1260564003",
+   "numero": "1260564003",
+   "resolution": "CA26 16 0190",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Déposer la liste des virements de crédits pour les mois de juin et juillet 2026 DÉPOSER la liste des virements de crédits pour les mois de juin et juillet 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=40",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont dépose devant son conseil la liste des virements de crédits effectués en juin et juillet 2026, pour que les élus puissent suivre les changements au budget initial.",
+    "Le document ne fait que présenter cette liste : aucune dépense ni aucun montant n'est décidé ici.",
+    "La liste sera publiée sur Montreal.ca, dans les ordres du jour et procès-verbaux de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.923Z",
+   "jetons": {
+    "entree": 3252,
+    "sortie": 245
+   }
+  },
+  {
+   "id": "1265753012",
+   "numero": "1265753012",
+   "resolution": "CA26 16 0206",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Informer le conseil d'arrondissement de la décision du Comité d'étude des demandes d'autorisation de démolition, rendue le 9 juin 2026, relativement à la demande d'autorisation de démolition des garages détachés situés au 798, avenue Outremont et confirmer la décision du Comité er",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=147",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement d'Outremont confirme la décision du comité de démolition du 9 juin 2026, qui autorise la démolition des deux garages détachés au 798, avenue Outremont.",
+    "À la place, un immeuble de 6 étages est prévu : commerce au rez-de-chaussée et 10 logements de 2 chambres aux étages.",
+    "Le comité justifie sa décision par la perte d'intégrité structurale du bâtiment, sa faible valeur patrimoniale et l'ajout de logements dans le secteur.",
+    "Avant d'obtenir le certificat de démolition, le promoteur doit déposer un plan de gestion des risques, un plan de protection des bâtiments voisins, un plan d'implantation des arbres à abattre et un concept d'habillage de chantier.",
+    "Une rencontre d'information avec le voisinage doit avoir lieu avant la délivrance du certificat, avec compte rendu déposé à l'arrondissement.",
+    "Six avis d'opposition ont été reçus et un appel a été déposé entre le 10 juin et le 10 juillet 2026, demandant de réduire le gabarit à cause de l'ensoleillement, des vues et de l'intégration dans un quartier d'au plus quatre étages."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.923Z",
+   "jetons": {
+    "entree": 7370,
+    "sortie": 519
+   }
+  },
+  {
+   "id": "1265069029",
+   "numero": "1265069029",
+   "resolution": "CA26 16 0197",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Avis de motion et dépôt d'un projet de règlement - Règlement modifiant le Règlement relatif à la circulation et au stationnement (1171) - Secteurs 3 et 4 - L'objet du règlement vise à modifier les règles de stationnement sur les avenues Glencoe, Hazelwood et Willowdale Le projet de règlement a été déposé aux élues avec le sommaire décisionnel et est disponible à l’entrée de la salle du conseil à l’attention du public ; Conformément à l’article 356 de la Loi sur les cités et villes, (RLRQ, chap. C-19), la mairesse Caroline Braun donne un avis de motion à l’effet qu’un projet de règlement intitulé « Règlement modifiant le Règlement relatif à la circulation et au stationnement (1171) » sera",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=78",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont dépose un projet de règlement pour changer les règles de stationnement sur les avenues Glencoe, Hazelwood et Willowdale (secteurs 3 et 4).",
+    "Sur Glencoe et Hazelwood (côté est), le stationnement serait réservé aux détenteurs de permis de résidant du secteur 4, de 8 h à 22 h, avec interdiction le vendredi de 9 h à 11 h du 1er avril au 30 novembre.",
+    "Sur Willowdale, le stationnement serait réservé aux détenteurs de permis selon les tronçons (secteurs 1 et 3), avec des plages d'interdiction les mardis et jeudis du 1er avril au 30 novembre; l'arrêt serait interdit en tout temps entre Vincent-d'Indy et Stirling (côté nord).",
+    "Les résidants des avenues visées ont reçu un avis le 27 juillet 2026 et pouvaient commenter jusqu'au 11 août 2026.",
+    "Après l'opposition de plusieurs résidants de l'avenue de la Brunante, les changements prévus sur cette avenue ont été retirés du projet.",
+    "Les coûts de la nouvelle signalisation seront payés à même le fonds de stationnement.",
+    "Adoption du règlement prévue le 6 octobre 2026, implantation en octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.923Z",
+   "jetons": {
+    "entree": 5939,
+    "sortie": 563
+   }
+  },
+  {
+   "id": "1266131017",
+   "numero": "1266131017",
+   "resolution": "CA26 16 0187",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Déposer le rapport des décisions déléguées pour les mois de juin et juillet 2026 DÉPOSER le rapport des décisions déléguées pour les mois de juin et juillet 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=28",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement d'Outremont prend acte du rapport des décisions prises par des fonctionnaires en juin et juillet 2026, sans nouvelle dépense ni nouvelle mesure.",
+    "Ce dépôt découle d'une obligation de reddition de comptes prévue au règlement sur la délégation de pouvoirs à certains fonctionnaires.",
+    "Le rapport sera publié avec les ordres du jour et procès-verbaux de l'arrondissement sur Montreal.ca."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.923Z",
+   "jetons": {
+    "entree": 3172,
+    "sortie": 267
+   }
+  },
+  {
+   "id": "1265753016",
+   "numero": "1265753016",
+   "resolution": "CA26 16 0207",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Adopter, en vertu du Règlement concernant les plans d'implantation et d'intégration architecturale (AO-530), une résolution visant une demande d'approbation d'un plan d'implantation et d'intégration architecturale (PIIA) pour l'immeuble situé au 798, avenue Outremont er",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=154",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont approuve le plan d'implantation et d'intégration architecturale pour l'immeuble du 798, avenue Outremont.",
+    "Le projet ajoute au bâtiment existant (4 étages, commerce au rez-de-chaussée, logements aux étages, construit en 1926) un nouveau volume de 6 étages avec commerce au rez-de-chaussée.",
+    "Dix logements de 2 chambres seront aménagés; les 5e et 6e étages sont en retrait en façade pour réduire l'impact visuel.",
+    "La démolition des deux garages détachés a été accordée le 9 juin 2026; le permis de transformation ne sera pas délivré avant le 9 septembre 2026, le bâtiment figurant à l'inventaire des immeubles patrimoniaux.",
+    "Le promoteur devra déposer un plan d'entretien des toits verts, incluant celui de la cour intérieure, et une estimation détaillée des coûts d'aménagement paysager.",
+    "Avant le permis, il devra fournir deux garanties financières de 10 % du coût estimé : une pour les travaux de construction, une pour l'aménagement paysager, celle-ci couvrant la survie des plantations pendant 3 ans."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.923Z",
+   "jetons": {
+    "entree": 5178,
+    "sortie": 514
+   }
+  },
+  {
+   "id": "1266737016",
+   "numero": "1266737016",
+   "resolution": "CA26 16 0201",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Édicter, en vertu Règlement sur l'occupation temporaire de la voie publique pour la tenue d'événements spéciaux (AO-204), une ordonnance autorisant la fermeture de l'avenue Laurier Ouest, entre la rue Hutchison et le Chemin de la Côte-Sainte-Catherine, des avenues Durocher et Querbes, entre les avenues Fairmount et Laurier et de l'avenue Fairmount, entre la rue Hutchison et l'avenue Querbes, le lundi 14 septembre 2026, de 17 h 30 à 22 h, dans le cadre de l'événement « Triptyque de Cycles Régis »",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=108",
+   "source": "sommaire",
+   "puces": [
+    "Outremont ferme l'avenue Laurier Ouest (entre Hutchison et le chemin de la Côte-Sainte-Catherine), les avenues Durocher et Querbes (entre Fairmount et Laurier) et l'avenue Fairmount (entre Hutchison et Querbes) le lundi 14 septembre 2026, de 17 h 30 à 22 h.",
+    "La fermeture sert à la course cycliste « Triptyque de Cycles Régis », un critérium sur un circuit de 1 km, présenté pour une 4e année.",
+    "Le stationnement sera interdit sur les avenues touchées de 16 h à 22 h ce jour-là; l'agence de mobilité remorquera les véhicules sur le parcours.",
+    "Les résidents des avenues Durocher et De l'Épée, entre Fairmount et Laurier, seront enclavés et ne pourront sortir en voiture qu'en cas d'urgence.",
+    "L'organisation occupera la Place Kate-McGarrigle de 14 h à 22 h avec des kiosques et un camion de cuisine de rue.",
+    "Des dérogations sont demandées : bruit de 17 h 30 à 22 h, vente sur l'espace public et vente-consommation d'alcool de 18 h à 21 h.",
+    "Les coûts des services de la Ville (transport, prêt de matériel, nettoyage, panneaux) sont absorbés par les budgets de fonctionnement existants."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.923Z",
+   "jetons": {
+    "entree": 6705,
+    "sortie": 750
+   }
+  },
+  {
+   "id": "1265069031",
+   "numero": "1265069031",
+   "resolution": "CA26 16 0198",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Avis de motion et dépôt d'un projet de règlement - Règlement modifiant le règlement relatif à la circulation et au stationnement (1171) - L'objet du règlement vise à modifier la plage horaire de la zone de livraison de 8h à 10h du lundi au vendredi sur le côté nord de l'avenue Bernard entre les avenues Querbes et Durocher Le projet de règlement a été déposé aux élues avec le sommaire décisionnel et est disponible à l’entrée de la salle du conseil à l’attention du public ; Conformément à l’article 356 de la Loi sur les cités et villes, (RLRQ, chap. C-19), la mairesse Caroline Braun donne un avis de motion à l’effet qu’un projet de règlement intitulé « Règlement modifiant le règlement relatif",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=84",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont veut décaler les heures de la zone de livraison sur le côté nord de l'avenue Bernard, entre Querbes et Durocher : de 8 h à 10 h du lundi au vendredi, au lieu de 7 h à 9 h.",
+    "La zone de livraison avait été créée en juin 2026; le changement fait suite à une demande du coordonnateur immobilier des commerces Renaissance.",
+    "Sur ce tronçon, le stationnement reste interdit sauf pour les livraisons pendant la plage horaire, et l'arrêt demeure interdit de 7 h à 9 h le lundi, du 1er avril au 30 novembre.",
+    "Les coûts de changement de la signalisation seront payés à même le budget de fonctionnement de l'arrondissement.",
+    "Étapes prévues : avis de motion et premier projet de règlement le 1er septembre 2026, adoption le 6 octobre 2026.",
+    "La modification sera diffusée sur les plateformes de communication de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.923Z",
+   "jetons": {
+    "entree": 4582,
+    "sortie": 443
+   }
+  },
+  {
+   "id": "1263711018",
+   "numero": "1263711018",
+   "resolution": "CA26 16 0209",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Désigner un deuxième secrétaire substitut d'arrondissement à la division du soutien administratif de la Direction d'arrondissement",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=166",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont désigne Olivier Salvas, secrétaire recherchiste, comme secrétaire substitut d'arrondissement à compter du 1er septembre 2026.",
+    "Il devient le deuxième substitut: il pourra exercer les pouvoirs et devoirs de la secrétaire d'arrondissement, Me Julie Desjardins, en son absence.",
+    "L'arrondissement explique vouloir assurer le suivi des dossiers du greffe et le bon déroulement des séances du conseil.",
+    "Aucun impact financier n'est associé à la décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.923Z",
+   "jetons": {
+    "entree": 3760,
+    "sortie": 288
+   }
+  },
+  {
+   "id": "1260564001",
+   "numero": "1260564001",
+   "resolution": "CA26 16 0188",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Déposer la liste des bons de commande et des paiements sans bon de commande pour les mois de juin et juillet 2026 DÉPOSER la liste des bons de commande et des paiements sans bon de commande pour les mois de juin et juillet 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_ODJP_ORDI_2026-09-01_19h00_FR.pdf#page=32",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement d'Outremont dépose devant son conseil la liste des bons de commande et des paiements faits sans bon de commande pour juin et juillet 2026.",
+    "Ce dépôt est un rapport obligatoire : les fonctionnaires qui autorisent des dépenses doivent en rendre compte chaque mois au conseil d'arrondissement.",
+    "Le document ne contient aucune somme ni nouvelle dépense à approuver; la liste sera publiée avec les ordres du jour et procès-verbaux de l'arrondissement sur Montreal.ca."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-15T14:31:47.923Z",
+   "jetons": {
+    "entree": 3395,
+    "sortie": 286
    }
   },
   {
