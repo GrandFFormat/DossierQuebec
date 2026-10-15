@@ -1,21 +1,32 @@
 {
- "generatedAt": "2026-10-08T15:55:57.015Z",
+ "generatedAt": "2026-10-15T13:38:59.341Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Récapitulatifs rédigés automatiquement à partir de l'objet, du résumé et des résolutions des dossiers de chaque projet, puis vérifiés automatiquement (numéros et nombres contre les dossiers cités, contre-lecture). Ce qui ne passe pas est retiré. En cas d'écart, les documents officiels font foi.",
  "recaps": {
   "tramway": {
    "titre": "Tramway (TramCité)",
-   "signature": "1634bd989e7708af",
-   "genereLe": "2026-10-08T15:55:34.881Z",
+   "signature": "3e5ed51e26df1ade",
+   "genereLe": "2026-10-15T13:38:59.341Z",
    "modele": "claude-opus-5",
    "dossiers": 54,
-   "enBref": "Cette année, la Ville achète des bandes de terrain et obtient des droits de passage (servitudes) le long du tracé du tramway, surtout sur la 1re Avenue, le boulevard Laurier, le boulevard René-Lévesque et des ruelles de La Cité-Limoilou. Elle accorde aussi des contrats pour préparer les chantiers et signe des ententes avec des propriétaires riverains au sujet des arbres. Des servitudes sur des ruelles attendent encore une décision du conseil d'agglomération.",
+   "enBref": "Cette année, la Ville prépare le terrain du tramway TramCité. Elle achète des bandes de terrain et obtient des droits de passage (servitudes) le long du tracé, surtout sur la 1re Avenue, le boulevard Laurier et dans des ruelles de La Cité-Limoilou. Elle accorde aussi des contrats de chantier, signe des ententes sur les arbres avec des propriétaires riverains, et conclut des ententes avec le Canadien National et l'Université Laval.",
    "etapes": [
     {
+     "periode": "Février à mars 2026",
+     "titre": "Contrats pour préparer les chantiers",
+     "texte": "La Ville confie des travaux d'arboriculture à Asplundh Canada ULC, pour une somme estimée à 2 840 827,31 $ avant taxes, jusqu'au 31 décembre 2027 [AP2026-018]. Elle accorde aussi la gestion de la santé et sécurité sur les chantiers des tronçons TW-01 à TW-06A, la fourniture de matériel d'aqueduc et d'égout du tronçon TW-03, et ajoute une somme au contrat de travaux de réseaux techniques urbains sous le chemin des Quatre-Bourgeois.",
+     "numeros": [
+      "AP2026-018",
+      "AP2026-056",
+      "AP2026-055",
+      "AP2026-068"
+     ]
+    },
+    {
      "periode": "Janvier à mars 2026",
-     "titre": "Premiers terrains et servitudes le long du tracé",
-     "texte": "La Ville autorise l'achat, à l'amiable ou par expropriation, de bandes de terrain en bordure de la 1re Avenue pour élargir l'emprise de la rue. Elle lance aussi des démarches pour obtenir des servitudes sur une ruelle près du boulevard René-Lévesque Ouest et sur des terrains de la rue Mendel, afin de déplacer des conduits et des réseaux d'utilités publiques.",
+     "titre": "Premiers terrains et servitudes",
+     "texte": "La Ville lance l'achat de bandes de terrain en bordure de la 1re Avenue pour élargir l'emprise de la rue, à l'amiable ou par expropriation. Elle vise aussi des servitudes sur une ruelle près du boulevard René-Lévesque Ouest et des servitudes temporaires de trois ans en bordure de la rue Mendel, pour déplacer des conduits et des réseaux d'utilités publiques.",
      "numeros": [
       "DE2026-022",
       "DE2026-063",
@@ -26,20 +37,9 @@
      ]
     },
     {
-     "periode": "Février à mars 2026",
-     "titre": "Contrats pour préparer les chantiers",
-     "texte": "La Ville confie des travaux d'arboriculture à tarifs horaires, la gestion de la santé et sécurité sur les chantiers des tronçons TW-01 à TW-06A et la fourniture de matériel d'aqueduc et d'égout pour le tronçon TW-03. Elle ajoute aussi 190 597,00 $ avant taxes à un contrat de réseaux techniques urbains, l'excavation ayant demandé des conduits et des raccordements sur une plus longue distance que prévu [AP2026-068].",
-     "numeros": [
-      "AP2026-018",
-      "AP2026-056",
-      "AP2026-055",
-      "AP2026-068"
-     ]
-    },
-    {
      "periode": "Février à septembre 2026",
-     "titre": "Ententes sur les arbres avec les riverains",
-     "texte": "Le comité exécutif prend acte, chaque trimestre, des ententes signées avec des propriétaires riverains du tracé : abattage, transplantation, élagage ou protection d'arbres, plantation par la Ville sur terrain privé et entretien à perpétuité. Un règlement ajoute le directeur d'arrondissement responsable de la prévention et de la qualité du milieu parmi les personnes autorisées à signer ces ententes [PQ2026-018].",
+     "titre": "Ententes sur les arbres du tracé",
+     "texte": "Le comité exécutif prend acte des rapports trimestriels des ententes de foresterie urbaine signées avec des propriétaires riverains du tracé, sur le boulevard René-Lévesque Ouest et Est, l'avenue Moncton, le boulevard Pie-XII et d'autres rues. Ces ententes portent sur l'abattage, la transplantation, l'élagage ou la protection d'arbres, la plantation par la Ville sur terrain privé et l'entretien à perpétuité; certaines prévoient une indemnité, par exemple 7 684 $ pour le 1001, avenue Bégon [DE2026-356].",
      "numeros": [
       "DE2026-069",
       "DE2026-181",
@@ -48,42 +48,30 @@
      ]
     },
     {
-     "periode": "Avril à juin 2026",
-     "titre": "Servitudes et libération d'emprises",
-     "texte": "La Ville lance des démarches pour obtenir des servitudes en bordure du boulevard Laurier, de l'avenue Moncton et du boulevard René-Lévesque Ouest. Elle annule l'autorisation qui permettait au Réseau de transport de la Capitale d'occuper une partie de l'emprise du boulevard Laurier et conclut une entente avec le Canadien National pour la construction d'un pont d'étagement dans le secteur de la rue Mendel.",
+     "periode": "Avril à mai 2026",
+     "titre": "Servitudes sur Laurier, Moncton et René-Lévesque",
+     "texte": "La Ville autorise des servitudes, à l'amiable ou par expropriation, sur des terrains du boulevard Laurier, de l'avenue Moncton, du boulevard René-Lévesque Ouest et de ruelles voisines, pour déplacer des conduits et des réseaux. Elle annule aussi l'autorisation qui permettait au Réseau de transport de la Capitale d'occuper 100,6 mètres carrés dans l'emprise du boulevard Laurier, où une station tempérée a été démolie [DE2026-150].",
      "numeros": [
       "CA-2026-0152",
       "CA-2026-0196",
       "CA-2026-0218",
       "CA-2026-0241",
-      "DE2026-150",
-      "AP2026-197"
+      "DE2026-179",
+      "DE2026-150"
      ]
     },
     {
-     "periode": "Septembre 2026",
-     "titre": "Nouvelles acquisitions et servitudes de ruelles",
-     "texte": "La Ville poursuit les achats de terrains et de servitudes en bordure de la 1re Avenue. Elle entame aussi des démarches pour obtenir des servitudes sur plusieurs ruelles de La Cité-Limoilou, notamment près de la rue Godbout et entre la rue des Pins Est et la rue des Peupliers Est.",
+     "periode": "Juin à juillet 2026",
+     "titre": "Ententes avec le CN et l'Université Laval",
+     "texte": "La Ville s'entend avec le Canadien National pour la construction d'un pont d'étagement dans le secteur de la rue Mendel, qui fera passer le tramway, un trottoir et une piste cyclable au-dessus d'une voie ferrée [AP2026-197]. Elle obtient de l'Université Laval des droits de passage sur le campus, contre 10 000 000 $ versés à la signature de l'acte notarié [DE2026-256], et pourra occuper une partie du parc de l'Amérique-Française pour son chantier.",
      "numeros": [
-      "DE2026-201",
-      "DE2026-213",
-      "DE2026-269",
-      "CA-2026-0497",
-      "DE2026-359",
-      "DE2026-360"
+      "AP2026-197",
+      "DE2026-256",
+      "DE2026-258"
      ]
     }
    ],
    "aSurveiller": [
-    {
-     "texte": "Quatre demandes de servitudes sur des ruelles de La Cité-Limoilou, près de la rue Godbout, de la rue Sir-Thomas-Chapais et de la rue des Chênes Est, attendent une décision du conseil d'agglomération.",
-     "numeros": [
-      "DE2026-270",
-      "DE2026-271",
-      "DE2026-359",
-      "DE2026-360"
-     ]
-    },
     {
      "texte": "Les actes notariés établissant les servitudes et le droit d'usage sur le campus de l'Université Laval doivent être signés au plus tard le 31 décembre 2026.",
      "numeros": [
@@ -91,13 +79,13 @@
      ]
     },
     {
-     "texte": "L'occupation d'une partie du parc de l'Amérique-Française s'étend du 6 juillet 2026 au 5 juillet 2033; une entente de servitude avec la Commission de la capitale nationale du Québec est encore en négociation.",
+     "texte": "Une entente de servitude reste à négocier entre la Ville et la Commission de la capitale nationale du Québec pour le parc de l'Amérique-Française; l'occupation du site de chantier est prévue du 6 juillet 2026 au 5 juillet 2033.",
      "numeros": [
       "DE2026-258"
      ]
     },
     {
-     "texte": "Les contrats d'arboriculture et de santé et sécurité sur les chantiers courent jusqu'au 31 décembre 2027.",
+     "texte": "Le contrat d'arboriculture et le contrat de santé et sécurité sur les chantiers des tronçons TW-01 à TW-06A courent jusqu'au 31 décembre 2027.",
      "numeros": [
       "AP2026-018",
       "AP2026-056"
@@ -110,24 +98,28 @@
     "retiresMecanique": [],
     "retiresContreLecture": [
      {
-      "element": "etapes[4]",
-      "raison": "Le texte dit que les acquisitions portent sur des terrains et servitudes « en bordure de la 1re Avenue et de la rue Berthiaume », mais aucun des dossiers cités (DE2026-203, CA-2026-0362, CA-2026-0383, CA-2026-0403, DE2026-256, DE2026-258) ne concerne la rue Berthiaume : ils visent tous la 1re Avenue, le campus de l'Université Laval ou le parc de l'Amérique-Française. La servitude de la rue Berthiaume relève du dossier CA-2026-0365, qui n'est pas cité. Le lieu est donc attribué aux mauvais dossiers."
+      "element": "etapes[5]",
+      "raison": "Le texte attribue aux dossiers cités (DE2026-203, CA-2026-0362, DE2026-219, DE2026-269, DE2026-270, DE2026-271) des lieux qui n'y figurent pas : la rue Berthiaume (dossier CA-2026-0365, non cité), la rue des Frênes Ouest (dossier CA-2026-0384, non cité) et la rue Godbout (dossiers DE2026-359 et DE2026-360, non cités). Aucun des dossiers listés dans « numeros » ne mentionne ces trois rues; les faits sont donc rattachés aux mauvais dossiers."
+     },
+     {
+      "element": "aSurveiller[3]",
+      "raison": "L'élément ne repose sur aucun dossier « en cours » (CA-2026-0362, DE2026-269 et DE2026-271 sont tous à décision finale prise) ni sur une date future écrite. De plus, il généralise à « chaque terrain ou servitude visé » du projet, portée que les trois dossiers cités ne couvrent pas."
      }
     ]
    }
   },
   "logement": {
    "titre": "Logement social et abordable",
-   "signature": "25c80771a5702c11",
-   "genereLe": "2026-10-08T15:55:57.015Z",
+   "signature": "23c22d6f687171e5",
+   "genereLe": "2026-10-15T13:38:50.131Z",
    "modele": "claude-opus-5",
    "dossiers": 22,
-   "enBref": "Cette année, la Ville de Québec finance la construction et la préparation de projets de logements sociaux et abordables. Elle verse des subventions aux organismes, prête de l'argent pour acheter des immeubles, met des sommes de côté dans un règlement d'emprunt et une réserve, et modifie des règlements pour permettre deux projets. Elle suit aussi le budget et les travaux de l'Office municipal d'habitation de Québec.",
+   "enBref": "Cette année, la Ville finance du logement social et abordable de plusieurs façons : subventions de démarrage aux organismes, prêts sans intérêts pour acheter des immeubles, subventions pour construire. Elle a aussi créé un emprunt d'agglomération et renfloué une réserve pour payer sa part des projets. En parallèle, elle modifie des règlements d'urbanisme pour permettre des projets précis et ajuste les délais d'ententes déjà signées.",
    "etapes": [
     {
      "periode": "Janvier à juillet 2026",
-     "titre": "Budget et travaux de l'Office d'habitation",
-     "texte": "La Ville soumet au conseil d'agglomération les prévisions budgétaires 2026 puis les états financiers 2025 de l'Office municipal d'habitation de Québec. Elle signe aussi une entente avec l'Office et la Société d'habitation du Québec pour financer la rénovation ou la reconstruction d'immeubles de HLM, en payant environ 10 % des dépenses reconnues.",
+     "titre": "Suivi de l'Office municipal d'habitation",
+     "texte": "La Ville soumet au conseil d'agglomération les prévisions budgétaires 2026 puis les états financiers 2025 de l'Office municipal d'habitation de Québec. Elle signe aussi une entente avec l'Office et la Société d'habitation du Québec pour financer des travaux dans les HLM, où elle paie environ 10 % des dépenses reconnues.",
      "numeros": [
       "CE-2026-0013",
       "CE-2026-0815",
@@ -136,30 +128,30 @@
     },
     {
      "periode": "Février à septembre 2026",
-     "titre": "Aide pour préparer des projets",
-     "texte": "La Ville verse des subventions pouvant atteindre 75 000 $ par projet pour payer des études, des tests de sol, de l'arpentage et des esquisses d'architecte, notamment pour des projets au 600, 60e Rue Est, au 3055 à 3065, 2e Avenue, sur l'avenue du Zoo et rue Rochambeau. Elle modifie aussi des ententes déjà signées pour allonger les délais ou élargir les dépenses couvertes, dont celle du projet mixte du 421, boulevard Langelier.",
+     "titre": "Ajustement d'ententes déjà signées",
+     "texte": "La Ville prolonge des délais et modifie des conditions pour plusieurs organismes et promoteurs : nouvelles dépenses admissibles, dates de versement repoussées, levée d'une garantie hypothécaire, délai de remboursement d'un prêt porté de 18 à 30 mois. Elle clarifie aussi qui acquerra l'immeuble de 100 logements du 9165, boulevard Saint-Jacques.",
      "numeros": [
       "PA2026-014",
-      "PA2026-090",
-      "PA2026-091",
-      "PA2026-094",
+      "PA2026-025",
       "PA2026-095",
-      "PA2026-130"
+      "PA2026-117",
+      "PA2026-124",
+      "CA-2026-0502"
      ]
     },
     {
      "periode": "Mai à juin 2026",
-     "titre": "Argent réservé au logement",
-     "texte": "La Ville adopte un règlement d'agglomération autorisant une dépense et un emprunt de 20 000 000 $ pour des projets de logements sociaux et de logements privés abordables. Elle transfère ensuite 5 000 000 $ de son surplus d'agglomération vers une réserve consacrée au logement social et abordable, et utilise cette somme pour son programme de logements.",
+     "titre": "Emprunt et réserve pour le logement",
+     "texte": "Le conseil d'agglomération adopte un règlement qui autorise une dépense et un emprunt de 20 000 000 $ pour des projets de logements sociaux et de logements privés abordables. La Ville transfère ensuite 5 000 000 $ de son surplus vers une réserve dédiée au logement social et abordable, et l'utilise aussitôt pour le programme inscrit au plan d'investissement.",
      "numeros": [
       "PA2026-062",
       "FN2026-028"
      ]
     },
     {
-     "periode": "Mai à juillet 2026",
-     "titre": "Règlements pour deux projets de quartier",
-     "texte": "La Ville adopte un règlement permettant des logements au rez-de-chaussée pour un immeuble d'environ 62 logements à l'angle du boulevard Père-Lelièvre et de la rue Labrecque. Elle modifie un autre règlement pour permettre 8 logements et 32 chambres au 1300, rue de la Pointe-aux-Lièvres, où un organisme hébergera des jeunes adultes en difficulté.",
+     "periode": "Mai à juin 2026",
+     "titre": "Règlements pour deux emplacements",
+     "texte": "La Ville adopte un règlement pour permettre un immeuble d'environ 62 logements à l'angle du boulevard Père-Lelièvre et de la rue Labrecque, en autorisant des logements au rez-de-chaussée. Elle modifie un autre règlement au 1300, rue de la Pointe-aux-Lièvres pour permettre 8 logements et 32 chambres destinés à des jeunes adultes en difficulté.",
      "numeros": [
       "GT2026-141",
       "GT2026-211"
@@ -167,37 +159,40 @@
     },
     {
      "periode": "Juillet à septembre 2026",
-     "titre": "Prêts pour acheter des immeubles",
-     "texte": "La Ville prête jusqu'à 2 000 000 $ sans intérêt à un organisme pour acheter l'immeuble du 3055 à 3065, 2e Avenue, où environ 251 logements sociaux sont prévus, avec une hypothèque de premier rang en garantie. Elle propose aussi de faire passer de 18 à 30 mois le délai de remboursement d'un prêt sans intérêts de 4 300 000 $ accordé pour l'immeuble du 2582-2600A, boulevard Montmorency.",
+     "titre": "Démarrage de projets et prêt d'achat",
+     "texte": "La Ville accorde des subventions de 75 000 $ à des organismes pour payer les études de départ : tests de sol, arpentage, examen de titres, esquisses d'architecte. Elle prête aussi jusqu'à 2 000 000 $ sans intérêts, remboursable en 18 mois, à un organisme qui achète l'immeuble du 3055 à 3065, 2e Avenue pour y prévoir environ 251 logements sociaux.",
      "numeros": [
       "PA2026-093",
-      "PA2026-124"
+      "PA2026-090",
+      "PA2026-091",
+      "PA2026-094",
+      "PA2026-130"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "Le conseil d'agglomération doit décider de la subvention de 7 512 782 $ pour les 222 logements du 1075, chemin Sainte-Foy, avec une date cible du 7 octobre 2026.",
+     "texte": "Le dossier des prévisions budgétaires 2026 de l'Office municipal d'habitation de Québec est encore marqué en cours, avec une décision attendue.",
      "numeros": [
-      "PA2026-129"
+      "CE-2026-0013"
      ]
     },
     {
-     "texte": "Le conseil d'agglomération doit aussi se prononcer sur la subvention de 1 879 449 $ pour les 62 logements du 2150, boulevard Père-Lelièvre.",
-     "numeros": [
-      "PA2026-128"
-     ]
-    },
-    {
-     "texte": "L'avenant qui allonge d'un an le délai de remboursement du prêt de 4 300 000 $ pour l'immeuble du boulevard Montmorency attend la décision du conseil d'agglomération.",
-     "numeros": [
-      "PA2026-124"
-     ]
-    },
-    {
-     "texte": "Pour le projet du 401, rue Saint-Paul, la demande de deuxième versement doit être faite entre le 1er septembre et le 30 novembre 2026, et le versement est prévu au plus tard le 31 mars 2027.",
+     "texte": "Pour le projet du 401, rue Saint-Paul, la demande de deuxième versement doit être faite entre le 1er septembre et le 30 novembre 2026, et le versement se fera au plus tard le 31 mars 2027.",
      "numeros": [
       "PA2026-117"
+     ]
+    },
+    {
+     "texte": "Pour le projet du 545, rue Kirouac, une deuxième part de 497 149,04 $ est prévue en 2027, financée par un règlement d'emprunt.",
+     "numeros": [
+      "CA-2026-0120"
+     ]
+    },
+    {
+     "texte": "Pour le projet de la rue de la Pointe-aux-Lièvres, la Ville verse 750 000 $ en 2026, puis le reste en 2027 et 2028.",
+     "numeros": [
+      "PA2026-098"
      ]
     }
    ],
@@ -208,7 +203,11 @@
     "retiresContreLecture": [
      {
       "element": "etapes[2]",
-      "raison": "L'élément affirme que « La Ville accorde des subventions » en incluant dans la même énumération les 1 879 449 $ pour les 62 logements du 2150, boulevard Père-Lelièvre (PA2026-128) et les 7 512 782 $ pour les 222 logements du 1075, chemin Sainte-Foy (PA2026-129). Or ces deux dossiers sont « en cours — décision attendue » du conseil d'agglomération : les dossiers disent que la Ville « versera » ces sommes, sous réserve de la décision. Présenter ces subventions comme déjà accordées déforme l'état réel des dossiers, d'autant que le récapitulatif les signale lui-même comme décisions à venir dans aSurveiller[0] et aSurveiller[1]."
+      "raison": "La phrase « Les organismes doivent respecter la vocation de logement abordable pendant 35 ans après les travaux » est présentée comme valant pour les quatre dossiers cités. Or l'obligation de 35 ans n'apparaît que dans PA2026-128 et PA2026-129; ni CA-2026-0120 (545, rue Kirouac) ni PA2026-098 (Pointe-aux-Lièvres) ne mentionnent une telle condition. Généralisation non appuyée par les dossiers."
+     },
+     {
+      "element": "etapes[2]",
+      "raison": "L'introduction « des organismes dont les projets sont retenus dans les programmes d'habitation » ne correspond pas à PA2026-098 : cette contribution de 4 000 000 $ à UTILE Québec 3 découle d'un projet retenu dans le cadre du Fonds immobilier de solidarité FTQ, et non d'un programme d'habitation (Programme d'habitation abordable Québec) comme pour les trois autres dossiers."
      }
     ]
    }
