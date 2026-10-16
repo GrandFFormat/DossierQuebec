@@ -2139,3 +2139,9 @@
 .fin-legende dt{font-size:13.5px; font-weight:800; line-height:1.4; color:var(--ink);}
 .fin-legende dd{margin:0; font-size:13.5px; line-height:1.55; color:var(--ink);}
 @media (max-width:700px){ .fin-legende dl{grid-template-columns:minmax(0, 1fr); gap:4px 0;} .fin-legende dd{margin-bottom:10px;} }
+
+/* Le retour de la recherche des ministres et député·e·s, sous la boîte. */
+.search-retour{margin-top:10px; padding:10px 14px; background:var(--card); color:var(--ink); border:3px solid var(--ink); font-size:14px; line-height:1.6;}
+.search-retour a{color:var(--ink); font-weight:700;}
+.search-retour-nom{margin:2px 4px; padding:2px 10px; background:#FFD24D; color:#131313; border:2px solid #131313; font:inherit; font-weight:700; cursor:pointer;}
+.fiche-trouvee{outline:4px solid #FFD24D; outline-offset:2px;}

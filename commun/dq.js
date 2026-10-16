@@ -736,6 +736,10 @@ function applyAssemblyState(){
   if(listeElus){
     const n = deputes.length;
     if(h) h.textContent = isEn ? 'Elected on October 5' : 'Les élu·e·s du 5 octobre';
+    const heroSub = document.querySelector('[data-i18n="minhero.sub"]');
+    if(heroSub) heroSub.innerHTML = isEn
+      ? 'The outgoing ministers, then the people elected on October 5 (<b>the elected members are further down</b>) — <b>one search for both.</b>'
+      : 'Les ministres sortant·e·s, puis les personnes élues le 5 octobre (<b>les élu·e·s sont plus bas</b>) — <b>une seule recherche pour les deux.</b>';
     if(note) note.textContent = isEn ? `${n} of 127 seats proclaimed` : `${n} sièges proclamés sur 127`;
     if(box) box.textContent = isEn
       ? 'List published by the National Assembly: the people proclaimed elected on October 5. They will sit when the new Assembly opens on November 17. The other seats are awaiting proclamation, notably where a judicial recount is under way. Attendance at votes will start again with the new legislature: the records of the 43rd do not apply to this list.'
@@ -2415,13 +2419,25 @@ function renderHemicycle(){
   const bar = document.getElementById('compoBar');
   const legend = document.getElementById('hemicycleLegend');
   if(!bar || !legend) return;
-  const total = seats.reduce((a,s)=>a+s.n,0);
   const isEn = currentLang === 'en';
-  bar.innerHTML = seats.map((s,i)=>
+  // Entre le scrutin et l'ouverture, la barre montre les sièges remportés le 5 octobre (ASSEMBLY.sieges,
+  // Élections Québec), pas ceux de la 43e législature.
+  const resultat = ASSEMBLY.phase === 'entre-deux' && ASSEMBLY.sieges;
+  const seatsAff = resultat
+    ? Object.entries(ASSEMBLY.sieges).map(([party, n]) => ({ ...(seats.find(s => s.party === party) || {}), party, n, label: (seats.find(s => s.party === party) || {}).label?.replace(/\s*\(.*\)$/, '') || party, labelEn: (seats.find(s => s.party === party) || {}).labelEn?.replace(/\s*\(.*\)$/, '') || party }))
+    : seats;
+  const total = seatsAff.reduce((a,s)=>a+s.n,0);
+  if(resultat){
+    const h = document.querySelector('[data-i18n="h.composition"]');
+    if(h) h.textContent = isEn ? `Composition — ${total} seats won on October 5` : `Composition — ${total} sièges remportés le 5 octobre`;
+    const sub = document.querySelector('#sec-composition [data-i18n="apercu.composition.sub"]');
+    if(sub) sub.textContent = isEn ? 'Élections Québec results · the new Assembly opens on November 17' : 'Résultats d’Élections Québec · la nouvelle Assemblée ouvre le 17 novembre';
+  }
+  bar.innerHTML = seatsAff.map((s,i)=>
     `<div class="compo-seg" title="${(isEn ? (s.labelEn||s.label) : s.label)} — ${s.n}" style="width:${(s.n/total*100).toFixed(2)}%; background:${partyColors[s.party] || '#999'};${i>0 ? ' border-left:3px solid var(--ink);' : ''}"></div>`
   ).join('');
   // Légende en ACRONYMES (le nom complet reste au survol des segments).
-  legend.innerHTML = seats.map(s=>`
+  legend.innerHTML = seatsAff.map(s=>`
     <div class="compo-row" title="${isEn ? (s.labelEn||s.label) : s.label}"><span class="compo-swatch" style="background:${partyColors[s.party]}"></span>${s.party} — <b>${s.n}</b></div>
   `).join('');
 }
@@ -2655,6 +2671,9 @@ const ASSEMBLY = {
   gagnantNote: 'Le plus de sièges : 59 sur 127',
   gagnantNoteEn: 'Most seats: 59 of 127',
   ordrePartis: ['PQ', 'PLQ', 'PCQ', 'QS'],   // par nombre de sièges : 59, 40, 19, 9
+  // Les mêmes chiffres, pour la barre « Composition » entre le scrutin et l'ouverture (16 oct. 2026).
+  // Ce sont des sièges REMPORTÉS, pas des députés assermentés : la barre le dit.
+  sieges: { PQ: 59, PLQ: 40, PCQ: 19, QS: 9 },
 };
 // Phase déduite de la DATE LOCALE du visiteur, pour que le site ne dise pas
 // « élections le 5 octobre » le matin du 6 sans que personne n'ait à y toucher —
@@ -4013,7 +4032,39 @@ window.addEventListener('scroll', ()=>{
   backToTopBtn.classList.toggle('visible', window.scrollY > 400);
 });
 
-document.getElementById('searchMinistres')?.addEventListener('input', e=> { renderMinistres(e.target.value); renderDeputes(e.target.value); });
+document.getElementById('searchMinistres')?.addEventListener('input', e=> { renderMinistres(e.target.value); renderDeputes(e.target.value); retourRecherche(e.target.value); });
+
+// LE RETOUR DE LA RECHERCHE (Martin, 16 oct. 2026 : « je marque Limoilou mais rien ne sort »). Les
+// fiches trouvées s'affichent plus bas, sous la composition et la légende : rien ne bougeait près de
+// la boîte. On liste ici les noms trouvés, chacun mène à sa fiche. Sans résultat, on le dit, et on
+// renvoie à la carte des circonscriptions d'Élections Québec (un quartier n'est pas une circonscription).
+function retourRecherche(valeur){
+  const boite = document.getElementById('searchRetour');
+  if(!boite) return;
+  const isEn = currentLang === 'en';
+  if(!norm(valeur)){ boite.hidden = true; boite.innerHTML = ''; return; }
+  const fiches = [...document.querySelectorAll('#ministresGrid .m-card, #deputesList .dep-row')];
+  boite.hidden = false;
+  if(!fiches.length){
+    boite.innerHTML = isEn
+      ? 'No name, riding, region or ministry matches. Looking for a neighbourhood or a town? <a href="https://www.electionsquebec.qc.ca/cartes-electorales/circonscriptions-provinciales/" target="_blank" rel="noopener">See the map of ridings on Élections Québec’s website</a>.'
+      : 'Aucun nom, circonscription, région ou ministère ne correspond. Vous cherchez un quartier ou une ville ? <a href="https://www.electionsquebec.qc.ca/cartes-electorales/circonscriptions-provinciales/" target="_blank" rel="noopener">Consultez la carte des circonscriptions sur le site d’Élections Québec</a>.';
+    return;
+  }
+  const MAX = 8;
+  const noms = fiches.slice(0, MAX).map((el, i) => {
+    const nom = (el.querySelector('.m-name, .dep-name')?.textContent || '').trim();
+    return `<button type="button" class="search-retour-nom" data-i="${i}">${nom.replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c])}</button>`;
+  }).join('');
+  const reste = fiches.length > MAX ? (isEn ? ` and ${fiches.length - MAX} more below` : ` et ${fiches.length - MAX} autres plus bas`) : '';
+  boite.innerHTML = `<b>${fiches.length} ${isEn ? (fiches.length > 1 ? 'results' : 'result') : (fiches.length > 1 ? 'résultats' : 'résultat')}</b> : ${noms}${reste}`;
+  boite.querySelectorAll('.search-retour-nom').forEach((b) => b.addEventListener('click', () => {
+    const cible = fiches[Number(b.dataset.i)];
+    cible.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    cible.classList.add('fiche-trouvee');
+    setTimeout(() => cible.classList.remove('fiche-trouvee'), 2000);
+  }));
+}
 document.getElementById('searchBills')?.addEventListener('input', ()=> { billsShown = BILLS_STEP; renderBills(); });
 document.getElementById('searchVotes')?.addEventListener('input', ()=> { votesShown = 6; renderVotes(); });
 

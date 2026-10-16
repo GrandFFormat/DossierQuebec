@@ -264,6 +264,9 @@ function goToFederal(evt){
           <span class="bs-icon" aria-hidden="true">🔍</span>
           <input type="text" id="searchMinistres" data-i18n-placeholder="ph.searchMinistres" placeholder="Nom, circonscription, région ou ministère…">
         </div>
+        <!-- Ce que la recherche a trouvé, juste sous la boîte (retourRecherche, commun/dq.js) : les
+             résultats s'affichent plus bas, hors de l'écran, et rien ne bougeait près de la boîte. -->
+        <div class="search-retour" id="searchRetour" aria-live="polite" hidden></div>
         <!-- Tri par assiduité aux votes. La logique (toggleMinistresSort) existait
              depuis le début, mais AUCUN bouton ne la déclenchait. -->
         <button class="sort-toggle" id="ministresSortToggle" onclick="toggleMinistresSort()">Trier : ordre par défaut</button>
