@@ -1165,34 +1165,34 @@ function goToFederal(evt){
    depuis quebec.ca/premiere-ministre/equipe/conseil-des-ministres. Ne pas éditer
    ce bloc à la main. */
 const ministers = [
-  {name:'Christine Fréchette', role:'Première ministre', party:'', roleEn:'Premier'},
-  {name:'Ian Lafrenière', role:'Vice-premier ministre · Ministre de la Sécurité intérieure · Ministre responsable des Relations avec les Premières Nations et les Inuit', party:'', roleEn:'Deputy Premier · Minister of Public Security · Relations with First Nations and Inuit'},
-  {name:'Eric Girard (Groulx)', role:'Ministre des Finances · Ministre responsable des Infrastructures', party:'', roleEn:'Minister of Finance · Minister Responsible for Infrastructure'},
-  {name:'Sonia LeBel', role:'Ministre de l’Éducation · Leader parlementaire adjointe du gouvernement', party:'', roleEn:'Minister of Education · Deputy Government House Leader'},
-  {name:'Bernard Drainville', role:'Ministre de l’Économie, de l’Innovation et de l’Énergie · Ministre responsable de la Stratégie maritime', party:'', roleEn:'Minister of Economy, Innovation and Energy · Maritime Strategy'},
-  {name:'Simon Jolin-Barrette', role:'Ministre de la Justice · Ministre responsable des Affaires constitutionnelles', party:'', roleEn:'Minister of Justice · Constitutional Affairs'},
-  {name:'Sonia Bélanger', role:'Ministre de la Santé · Ministre responsable des Aînés et des Proches aidants', party:'', roleEn:'Minister of Health · Seniors and Caregivers'},
-  {name:'France-Élaine Duranceau', role:'Ministre responsable de l’Administration gouvernementale et de l’Efficacité de l’État et présidente du Conseil du trésor · Ministre de la Cybersécurité et du Numérique', party:'', roleEn:'President of the Treasury Board · Minister of Cybersecurity and Digital Technology'},
-  {name:'Martine Biron', role:'Ministre de la Culture et des Communications · Ministre de l’Enseignement supérieur · Ministre responsable de la Condition féminine', party:'', roleEn:'Minister of Higher Education · Status of Women'},
-  {name:'Jean-François Roberge', role:'Ministre de la Langue française · Ministre responsable de la Francophonie canadienne · Ministre responsable de la Laïcité · Ministre responsable des Institutions démocratiques · Ministre responsable de l’Accès à l’information et de la Protection des renseignements personnels', party:'', roleEn:'Minister of the French Language · Secularism · Democratic Institutions · Access to Information'},
-  {name:'Jean Boulet', role:'Ministre du Travail · Ministre responsable des Relations canadiennes', party:'', roleEn:'Minister of Labour · Canadian Relations'},
-  {name:'François Bonnardel', role:'Ministre de l’Immigration, de la Francisation et de l’Intégration · Leader parlementaire du gouvernement', party:'', roleEn:'Minister of Immigration, Francization and Integration · Government House Leader'},
-  {name:'Kateri Champagne Jourdain', role:'Ministre des Ressources naturelles et des Forêts', party:'', roleEn:'Minister of Natural Resources and Forests'},
-  {name:'Pascale Déry', role:'Ministre de l’Environnement, de la Lutte contre les changements climatiques, de la Faune et des Parcs', party:'', roleEn:'Minister of the Environment, the Fight Against Climate Change, Wildlife and Parks'},
-  {name:'Samuel Poulin', role:'Ministre des Affaires municipales', party:'', roleEn:'Minister of Municipal Affairs'},
-  {name:'Catherine Blouin', role:'Ministre de la Famille', party:'', roleEn:'Minister of Family'},
-  {name:'Donald Martel', role:'Ministre de l’Agriculture, des Pêcheries et de l’Alimentation', party:'', roleEn:'Minister of Agriculture, Fisheries and Food'},
-  {name:'Christopher Skeete', role:'Ministre des Relations internationales et de la Francophonie · Ministre responsable des Relations avec les Québécois d’expression anglaise · Ministre responsable de la Lutte contre le racisme', party:'', roleEn:'Minister of International Relations and La Francophonie · Relations with English-speaking Quebecers'},
-  {name:'Benoit Charette', role:'Ministre des Transports et de la Mobilité durable', party:'', roleEn:'Minister of Transport and Sustainable Mobility'},
+  {name:'Christine Fréchette', role:'Première ministre', party:'', roleEn:''},
+  {name:'Ian Lafrenière', role:'Vice-premier ministre · Ministre de la Sécurité intérieure · Ministre responsable des Relations avec les Premières Nations et les Inuit', party:'', roleEn:''},
+  {name:'Eric Girard (Groulx)', role:'Ministre des Finances · Ministre responsable des Infrastructures', party:'', roleEn:''},
+  {name:'Sonia LeBel', role:'Ministre de l’Éducation · Leader parlementaire adjointe du gouvernement', party:'', roleEn:''},
+  {name:'Bernard Drainville', role:'Ministre de l’Économie, de l’Innovation et de l’Énergie · Ministre responsable de la Stratégie maritime', party:'', roleEn:''},
+  {name:'Simon Jolin-Barrette', role:'Ministre de la Justice · Ministre responsable des Affaires constitutionnelles', party:'', roleEn:''},
+  {name:'Sonia Bélanger', role:'Ministre de la Santé · Ministre responsable des Aînés et des Proches aidants', party:'', roleEn:''},
+  {name:'France-Élaine Duranceau', role:'Ministre responsable de l’Administration gouvernementale et de l’Efficacité de l’État et présidente du Conseil du trésor · Ministre de la Cybersécurité et du Numérique', party:'', roleEn:''},
+  {name:'Martine Biron', role:'Ministre de la Culture et des Communications · Ministre de l’Enseignement supérieur · Ministre responsable de la Condition féminine', party:'', roleEn:''},
+  {name:'Jean-François Roberge', role:'Ministre de la Langue française · Ministre responsable de la Francophonie canadienne · Ministre responsable de la Laïcité · Ministre responsable des Institutions démocratiques · Ministre responsable de l’Accès à l’information et de la Protection des renseignements personnels', party:'', roleEn:''},
+  {name:'Jean Boulet', role:'Ministre du Travail · Ministre responsable des Relations canadiennes', party:'', roleEn:''},
+  {name:'François Bonnardel', role:'Ministre de l’Immigration, de la Francisation et de l’Intégration · Leader parlementaire du gouvernement', party:'', roleEn:''},
+  {name:'Kateri Champagne Jourdain', role:'Ministre des Ressources naturelles et des Forêts', party:'', roleEn:''},
+  {name:'Pascale Déry', role:'Ministre de l’Environnement, de la Lutte contre les changements climatiques, de la Faune et des Parcs', party:'', roleEn:''},
+  {name:'Samuel Poulin', role:'Ministre des Affaires municipales', party:'', roleEn:''},
+  {name:'Catherine Blouin', role:'Ministre de la Famille', party:'', roleEn:''},
+  {name:'Donald Martel', role:'Ministre de l’Agriculture, des Pêcheries et de l’Alimentation', party:'', roleEn:''},
+  {name:'Christopher Skeete', role:'Ministre des Relations internationales et de la Francophonie · Ministre responsable des Relations avec les Québécois d’expression anglaise · Ministre responsable de la Lutte contre le racisme', party:'', roleEn:''},
+  {name:'Benoit Charette', role:'Ministre des Transports et de la Mobilité durable', party:'', roleEn:''},
   {name:'Amélie Dionne', role:'Ministre du Tourisme', party:'', roleEn:'Minister of Tourism'},
-  {name:'Jean-François Simard', role:'Ministre de l‘Emploi · Ministre responsable de la région de la Capitale-Nationale', party:'', roleEn:'Minister of Employment · Capitale-Nationale region'},
-  {name:'Chantal Rouleau', role:'Ministre responsable de la Solidarité sociale et de l’Action communautaire · Ministre responsable de la Métropole et de la région de Montréal', party:'', roleEn:'Minister Responsible for Social Solidarity and Community Action · Greater Montréal'},
-  {name:'Lionel Carmant', role:'Ministre responsable des Services sociaux et de la Lutte contre l’itinérance', party:'', roleEn:'Minister Responsible for Social Services and the Fight Against Homelessness'},
-  {name:'Karine Boivin Roy', role:'Ministre responsable de l’Habitation', party:'', roleEn:'Minister Responsible for Housing'},
-  {name:'Kariane Bourassa', role:'Ministre responsable du Sport, du Loisir et du Plein air', party:'', roleEn:'Minister Responsible for Sport, Recreation and Outdoor Activities'},
-  {name:'Mathieu Lévesque', role:'Ministre responsable de la Jeunesse · Ministre délégué aux Régions', party:'', roleEn:'Minister Responsible for Youth · Minister Delegate for Regions'},
-  {name:'Eric Girard (Lac-Saint-Jean)', role:'Ministre délégué au Développement économique régional', party:'', roleEn:'Minister Delegate for Regional Economic Development'},
-  {name:'Daniel Bernard', role:'Ministre délégué à l’Économie et aux Petites et Moyennes Entreprises', party:'', roleEn:'Minister Delegate for the Economy and Small and Medium-sized Businesses'},
+  {name:'Jean-François Simard', role:'Ministre de l‘Emploi · Ministre responsable de la région de la Capitale-Nationale', party:'', roleEn:''},
+  {name:'Chantal Rouleau', role:'Ministre responsable de la Solidarité sociale et de l’Action communautaire · Ministre responsable de la Métropole et de la région de Montréal', party:'', roleEn:''},
+  {name:'Lionel Carmant', role:'Ministre responsable des Services sociaux et de la Lutte contre l’itinérance', party:'', roleEn:''},
+  {name:'Karine Boivin Roy', role:'Ministre responsable de l’Habitation', party:'', roleEn:''},
+  {name:'Kariane Bourassa', role:'Ministre responsable du Sport, du Loisir et du Plein air', party:'', roleEn:''},
+  {name:'Mathieu Lévesque', role:'Ministre responsable de la Jeunesse · Ministre délégué aux Régions', party:'', roleEn:''},
+  {name:'Eric Girard (Lac-Saint-Jean)', role:'Ministre délégué au Développement économique régional', party:'', roleEn:''},
+  {name:'Daniel Bernard', role:'Ministre délégué à l’Économie et aux Petites et Moyennes Entreprises', party:'', roleEn:''},
 ];
 /* MINISTERS_DATA_END */
 
@@ -1201,7 +1201,7 @@ const ministers = [
    ce bloc à la main : relancer `node scrapers/build-frontend-data.js` à la place.
    Les résumés ne sont PAS ici : ils vivent dans data/bills-resumes-{fr,en}.json et se chargent
    au premier dépliement de carte ou à la première recherche.
-   Généré le 2026-10-15T13:25:07.690Z */
+   Généré le 2026-10-16T13:19:53.456Z */
 const bills = [
   {
     "id": 27463,
@@ -1254,7 +1254,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-17-43-2.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-17-43-2.html",
-    "titleEn": "An Act to amend the Act respecting the storage of natural gas and underground reservoirs and natural gas and oil pipelines for the purpose of authorizing the implementation of a pilot project relating to the exploration for or exploitation of an underground reservoir or certain fluids (title amended)",
+    "titleEn": "Act to amend the Act respecting the storage of natural gas and respecting natural gas and oil pipelines for the purpose of authorizing the implementation of a pilot project concerning the exploration or development of an underground reservoir or certain fluids (title amended)",
     "noteEn": "Assented to on 2026-06-12",
     "lastActivity": "2026-06-12",
     "presentedOn": "2026-02-05",
@@ -1294,7 +1294,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-23-43-2.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-23-43-2.html",
-    "titleEn": "Act mainly to better support persons whose mental state may pose a risk to their own safety or that of others",
+    "titleEn": "Act to better support persons whose mental state may pose a risk to their own safety or that of others",
     "noteEn": "Assented to on 2026-06-12",
     "lastActivity": "2026-06-12",
     "presentedOn": "2026-03-24",
@@ -1534,7 +1534,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-13-43-3.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-13-43-3.html",
-    "titleEn": "Act to establish the office of special clerk",
+    "titleEn": "Act establishing the office of special clerk",
     "noteEn": "Introduced on 2026-06-10",
     "lastActivity": "2026-06-10",
     "presentedOn": "2026-06-10",
@@ -1554,7 +1554,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-1-43-2.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-1-43-2.html",
-    "titleEn": "Constitutional Act of 2025 Respecting Québec",
+    "titleEn": "Constitutional Act of 2025 concerning Québec",
     "noteEn": "Detailed study in committee — 2026-06-10",
     "lastActivity": "2026-06-10",
     "presentedOn": "2025-10-09",
@@ -1774,7 +1774,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-6-43-3.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-6-43-3.html",
-    "titleEn": "Act giving effect to fiscal measures announced in the budget speech of 18 March 2026 and in the update on Québec's economic and financial situation of 25 November 2025, and to certain other measures",
+    "titleEn": "Act giving effect to fiscal measures announced in the budget speech of March 18, 2026 and in the update on Québec's economic and financial situation of November 25, 2025, and to certain other measures",
     "noteEn": "Introduced on 2026-05-12",
     "lastActivity": "2026-05-12",
     "presentedOn": "2026-03-18",
@@ -1854,7 +1854,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-7-43-2.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-7-43-2.html",
-    "titleEn": "Act to reduce bureaucracy, increase the efficiency of the State and strengthen the accountability of senior officials",
+    "titleEn": "Act to reduce bureaucracy, increase government efficiency and strengthen the accountability of senior public servants",
     "noteEn": "Assented to on 2026-04-02",
     "lastActivity": "2026-04-02",
     "presentedOn": "2025-11-05",
@@ -1894,7 +1894,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-13-43-2.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-13-43-2.html",
-    "titleEn": "Act to promote public safety and the sense of security of the population and amending various provisions",
+    "titleEn": "Act to promote public safety and the perception of safety and amending various provisions",
     "noteEn": "Assented to on 2026-04-02",
     "lastActivity": "2026-04-02",
     "presentedOn": "2025-12-10",
@@ -1914,7 +1914,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-15-43-2.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-15-43-2.html",
-    "titleEn": "Act to amend the Professional Code and other provisions mainly to streamline the regulatory processes of the professional system and to expand certain professional practices in the health and social services field",
+    "titleEn": "Act to amend the Professional Code and other provisions mainly to streamline the regulatory processes of the professional system and expand certain professional practices in the health and social services field",
     "noteEn": "Assented to on 2026-04-02",
     "lastActivity": "2026-04-02",
     "presentedOn": "2025-12-12",
@@ -1994,7 +1994,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-20-43-2.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-20-43-2.html",
-    "titleEn": "Act to enact the Act to Promote Access to Housing and to amend various provisions concerning the housing sector",
+    "titleEn": "Act enacting the Act to promote access to housing and amending various provisions concerning the housing sector",
     "noteEn": "Tabled in committee for special consultations on 2026-04-01",
     "lastActivity": "2026-04-01",
     "presentedOn": "2026-02-11",
@@ -2234,7 +2234,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-6-43-2.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-6-43-2.html",
-    "titleEn": "Act giving effect to fiscal measures announced in the Budget Speech of March 25, 2025 and to certain other measures",
+    "titleEn": "Act giving effect to fiscal measures announced in the budget speech of 25 March 2025 and to certain other measures",
     "noteEn": "Assented to on 2025-12-12",
     "lastActivity": "2025-12-12",
     "presentedOn": "2025-03-25",
@@ -2394,7 +2394,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-395-43-2.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-395-43-2.html",
-    "titleEn": "Act to amend the Act respecting the Société de l'assurance automobile du Québec and other legislative provisions concerning rights granted over a vehicle",
+    "titleEn": "An Act to amend the Act respecting the Société de l'assurance automobile du Québec and other legislative provisions concerning rights granted over a vehicle",
     "noteEn": "Introduced on 2025-12-04",
     "lastActivity": "2025-12-04",
     "presentedOn": "2025-12-04",
@@ -2514,7 +2514,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-4-43-2.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-4-43-2.html",
-    "titleEn": "An Act to implement certain provisions of the Budget Speech of 25 March 2025 and to amend other provisions",
+    "titleEn": "Act to implement certain provisions of the budget speech of 25 March 2025 and amending other provisions",
     "noteEn": "Assented to on 2025-11-12",
     "lastActivity": "2025-11-12",
     "presentedOn": "2025-03-25",
@@ -2614,7 +2614,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-94-43-1.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-94-43-1.html",
-    "titleEn": "Act to strengthen secularism in the education network and to amend various legislative provisions",
+    "titleEn": "Act mainly to strengthen secularism in the education network and amending various legislative provisions",
     "noteEn": "Assented to on 2025-10-30",
     "lastActivity": "2025-10-30",
     "presentedOn": "2025-03-20",
@@ -2654,7 +2654,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-82-43-1.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-82-43-1.html",
-    "titleEn": "Act respecting the national digital identity and amending other provisions",
+    "titleEn": "Act respecting national digital identity and amending other provisions",
     "noteEn": "Assented to on 2025-10-28",
     "lastActivity": "2025-10-28",
     "presentedOn": "2024-11-21",
@@ -2674,7 +2674,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-99-43-1.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-99-43-1.html",
-    "titleEn": "An Act to give effect to fiscal measures announced in the Québec update on the economic and financial situation of 21 November 2024 and the budget speech of 25 March 2025 and to certain other measures",
+    "titleEn": "Act giving effect to fiscal measures announced in the update on Québec's economic and financial situation of November 21, 2024 and the budget speech of March 25, 2025, and to certain other measures",
     "noteEn": "Assented to on 2025-10-28",
     "lastActivity": "2025-10-28",
     "presentedOn": "2024-11-21",
@@ -2714,7 +2714,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-2-43-2.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-2-43-2.html",
-    "titleEn": "An Act mainly to establish collective responsibility for improving access to medical services and to ensure the continuity of the provision of such services",
+    "titleEn": "Act to mainly establish collective responsibility for improving access to medical services and to ensure the continuity of the provision of such services",
     "noteEn": "Assented to on 2025-10-25",
     "lastActivity": "2025-10-25",
     "presentedOn": "2025-10-24",
@@ -2774,7 +2774,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-106-43-1.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-106-43-1.html",
-    "titleEn": "Act to mainly establish the collective responsibility and accountability of physicians for improving access to medical services",
+    "titleEn": "Act to mainly establish collective responsibility and accountability of physicians with respect to improving access to medical services",
     "noteEn": "Detailed study in committee — 2025-06-06",
     "lastActivity": "2025-06-06",
     "presentedOn": "2025-05-08",
@@ -2834,7 +2834,7 @@ const bills = [
     "summaryAiGenerated": true,
     "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-991-43-1.html",
     "urlEn": "https://www.assnat.qc.ca/en/travaux-parlementaires/projets-loi/projet-loi-991-43-1.html",
-    "titleEn": "Act respecting the selection and appointment procedure for independent administrative decision-makers and the renewal of their terms",
+    "titleEn": "Act respecting the selection and appointment process for independent administrative decision-makers and the renewal of their terms",
     "noteEn": "Introduced on 2025-05-27",
     "lastActivity": "2025-05-27",
     "presentedOn": "2025-05-27",
@@ -4082,9 +4082,9 @@ const presences = {"11":{"participated":519,"total":735,"rate":71},"13":{"partic
    L'ID assnat (5e valeur) sert à rapprocher chaque député·e du détail nominatif des
    votes (voir scrapers/votes.js) sans dépendre du nom, qui peut être ambigu.
    [Nom complet, Circonscription, Région, Parti, ID assnat]. Ne pas éditer ce bloc à la main.
-   Généré le 2026-10-15T13:25:07.729Z */
+   Généré le 2026-10-16T13:19:53.484Z */
 const deputesRaw = [
-["Stéphane Tremblay","Abitibi-Est","Abitibi-Témiscamingue","PQ",20319],["Sébastien D'Astous","Abitibi-Ouest","Abitibi-Témiscamingue","PQ",20497],["Nicolas Plourde","Anjou–Louis-Riel","Montréal","PLQ",20325],["Pierre Nantel","Argenteuil","Laurentides","PQ",20327],["Tarek Henoud","Arthabaska-L’Érable","","PCQ",20331],["Frantz Benjamin","Viau","Montréal","PLQ",17909],["Jennifer Maccarone","Westmount–Saint-Louis","Montréal","PLQ",17911],["Patricia Drouin","Beauce-Nord","Chaudière-Appalaches","PCQ",20335],["Jonathan Poulin","Beauce-Sud","Chaudière-Appalaches / Estrie","PCQ",20339],["Alexandre Daneau","Beauharnois","Montérégie","PQ",20341],["Antoine Dionne-Charest","Verdun","Montréal","PLQ",20323],["Éric Duhaime","Bellechasse","Chaudière-Appalaches","PCQ",20345],["Guy Jr Lapointe","Verchères","Montérégie","PQ",20329],["Audrey Bujold","Bellefeuille","","PQ",20349],["James Hughes","Vaudreuil","Montérégie","PLQ",20333],["Alexandre Girard-Duchaine","Bertrand","Lanaudière / Laurentides","PQ",20353],["Jean Pellerin","Trois-Rivières","Mauricie","PQ",20343],["Nadine Le Gal","Blainville","Laurentides","PQ",20357],["Pier-Luc Bujold","Bonaventure","Gaspésie–Îles-de-la-Madeleine","PQ",20363],["Cédric Gagnon-Ducharme","Borduas","Montérégie","PQ",20361],["Madwa-Nika Cadet","Bourassa-Sauvé","Montréal","PLQ",19261],["Sandra Hernandez","Taillon","Montérégie","PQ",20347],["Paul St-Pierre Plamondon","Camille-Laurin","Montréal","PQ",19289],["Olivier Bertin-Mahieux","Soulanges","Montérégie","PLQ",20377],["Julie Guyot","Chambly","Montérégie","PQ",20367],["Michel Langevin","Chapleau","Outaouais","PLQ",20369],["Stéphanie Vachon","Sherbrooke","Estrie","QS",20519],["Éloïse Coulombe","Charlesbourg","Capitale-Nationale","PCQ",20371],["Etienne Grandmont","Taschereau","Capitale-Nationale","QS",19267],["Caroline Simard","Charlevoix–Côte-de-Beaupré","Capitale-Nationale","PCQ",15367],["Félix Rhéaume","Châteauguay","Montérégie","PLQ",20375],["Alain Therrien","Sanguinet","Montérégie","PQ",12189],["Karim Elayoubi","Chauveau","Capitale-Nationale","PCQ",20379],["Marie-Karlynn Laflamme","Chicoutimi","Saguenay–Lac-Saint-Jean","PQ",20193],["Madeleine Féquière","Chomedey","Laval","PLQ",20383],["Dominique Dumas","Chutes-de-la-Chaudière","Chaudière-Appalaches","PCQ",20387],["Valérie Assouline","Saint-Laurent","Montréal","PLQ",20373],["Frédéric Poulin","Côte-du-Sud","Bas-Saint-Laurent / Chaudière-Appalaches","PCQ",20389],["Elisabeth Prass","D'Arcy-McGee","Montréal","PLQ",19301],["Sandrine Michon","Saint-Jérôme","Laurentides","PQ",20365],["Nathalie Boisclair","Daniel-Johnson","","PQ",20393],["Gaétan Bédard","Saint-Jean","Montérégie","PQ",20359],["Linda Vaillant","Deux-Montagnes","Laurentides","PQ",20397],["Simon-Pierre Savard-Tremblay","Saint-Hyacinthe","Montérégie","PQ",20355],["Charles Page","Drummond–Bois-Francs","Centre-du-Québec","PQ",20523],["Benoit Clermont","Saint-Henri–Sainte-Anne","Montréal","PLQ",20521],["Émile Simard","Dubuc","Saguenay–Lac-Saint-Jean","PQ",20401],["Sylvie Tanguay","Saint-François","Estrie","PQ",20351],["Marie Claude Fournier","Fabre","Laval","PLQ",20405],["Cécile Tremblay","Sainte-Rose","Laval","PLQ",20381],["Alexandre Boulerice","Gouin","Montréal","QS",20413],["Roxane Milot","Sainte-Marie–Saint-Jacques","Montréal","QS",20385],["Jean-François Arsenault","Granby","Estrie","PQ",20417],["Marie-Claude Sarrazin","Groulx","Saguenay–Lac-Saint-Jean","PQ",20419],["Diane Dallaire","Rouyn-Noranda–Témiscamingue","Abitibi-Témiscamingue","PQ",20399],["Alexandre Leduc","Hochelaga-Maisonneuve","Montréal","QS",17935],["Mathieu Lebrun","Rousseau","Lanaudière","PQ",20395],["Sacha Cannon","Hull","Outaouais","PLQ",20421],["Gisèle Pouhe Njall","Rosemont","Montréal","QS",20391],["Frédéric Laplante","Huntingdon","Montérégie","PQ",20425],["Isabelle Thibeault","Roberval","Saguenay–Lac-Saint-Jean","PQ",20407],["Camille Pellerin-Forget","Iberville","Montérégie","PQ",20429],["Gregory Kelley","Jacques-Cartier","Montréal","PLQ",17951],["Brigitte B. Garceau","Robert-Baldwin","Montréal","PLQ",19271],["Sol Zanetti","Jean-Lesage","Capitale-Nationale","QS",17955],["Filomena Rotiroti","Jeanne-Mance–Viger","Montréal","PLQ",1171],["Ariane Boyer","Rivière-du-Loup–Témiscouata–Les Basques","","PQ",20409],["Julie White","Jean-Talon","Capitale-Nationale","PLQ",20433],["Véronique Venne","Joliette","Lanaudière","PQ",20435],["Yohann St-Pierre","Rimouski","Bas-Saint-Laurent","PQ",20415],["Jimmy Bouchard","Jonquière","Saguenay–Lac-Saint-Jean","PQ",20439],["Maxime Laporte","L'Assomption","Lanaudière","PQ",20445],["Bernard Sévigny","Richmond","Estrie","PQ",20529],["Linda Caron","La Pinière","Montérégie","PLQ",19313],["Sonia Ziadé","La Prairie","Montérégie","PLQ",20447],["Catherine Drouin","Labelle","Laurentides","PQ",20451],["William Fradette","Lac-Saint-Jean","Saguenay–Lac-Saint-Jean","PQ",20453],["Marc Tanguay","LaFontaine","Montréal","PLQ",11789],["Andrés Fontecilla","Laurier-Dorion","Montréal","QS",17953],["Jocelyn Desjardins","Richelieu","Montérégie","PQ",20423],["Nicolas Girard","Repentigny","Lanaudière","PQ",1253],["Caroline De Guire","Laval-des-Rapides","Laval","PLQ",20455],["Odette Lavigne","René-Lévesque","Côte-Nord","PQ",20427],["Dieudonné Ella Oyono","Les Plaines","Lanaudière / Laurentides","PQ",20461],["Karine Laflamme","Lévis","Chaudière-Appalaches","PCQ",20465],["Anne Nguyen","Prévost","Laurentides","PQ",20431],["Marcel Bouchard","Portneuf","Capitale-Nationale","PCQ",20437],["Renaud Labrecque","Lotbinière-Frontenac","Chaudière-Appalaches","PCQ",20467],["Marcos Archambault","Louis-Hébert","Capitale-Nationale","PCQ",20471],["Michel Leblanc","Marguerite-Bourgeoys","Montréal","PLQ",20473],["André Fortin","Pontiac","Outaouais","PLQ",15383],["Natalie Bisaillon","Marie-Lacoste-Gérin-Lajoie","","PQ",20477],["Enrico Ciccone","Marquette","Montréal","PLQ",17943],["Stéphane Paquet","Pointe-aux-Trembles","Montréal","PQ",20441],["David Bowles","Pierre-Laporte","","PLQ",20443],["Isabelle Millette","Papineau","Outaouais","PQ",20457],["Stéphane Handfield","Masson","Lanaudière","PQ",20483],["Nada Boumeftah","Maurice-Richard","Montréal","PLQ",20515],["Jimmy Gagnon","Mégantic","Chaudière-Appalaches / Estrie","PCQ",20475],["Virginie Dufour","Mille-Îles","Laval","PLQ",19287],["Geneviève Couture","Mirabel","Laurentides","PQ",20481],["Mathieu Lavoie","Montarville","Montérégie","PLQ",20517],["Marie-Josée Hélie","Montmorency","Capitale-Nationale","PCQ",20469],["Michelle Setlakwe","Mont-Royal–Outremont","Montréal","PLQ",19285],["Monsef Derraji","Nelligan","Montréal","PLQ",17923],["Guillaume Langlois","Nicolet-Bécancour","Centre-du-Québec","PCQ",20463],["Désirée McGraw","Notre-Dame-de-Grâce","Montréal","PLQ",19283],["Louis Ialenti","Vimont-Auteuil","","PLQ",20321],["David Logue","Gatineau","Outaouais","PLQ",20411],["Pascal Bérubé","Matane-Matapédia-Mitis","Bas-Saint-Laurent","PQ",991],["Maïté Blanchette Vézina","La Peltrie","Bas-Saint-Laurent","PCQ",19275],["Frédéric Beauchemin","Brome-Missisquoi","Montréal","PLQ",19307],["Catherine Gentilcore","Terrebonne","Lanaudière","PQ",20131],["Elsie Lefebvre","Berthier","Lanaudière","PQ",5845],["Nicolas Marceau","Marie-Victorin","Montérégie","PQ",7289],["Patrick Paquet","Vanier-Les Rivières","Capitale-Nationale","PCQ",20527],["Ruba Ghazal","Mercier","Montréal","QS",17933],["Charles Milliard","Orford","Estrie","PLQ",20449],["Isabelle Blais","Maskinongé","Mauricie","PQ",20479],["André Albert A. Morin","Acadie","Montréal","PLQ",19253]
+["Pascal Bérubé","Matane-Matapédia-Mitis","Bas-Saint-Laurent","PQ",991],["Filomena Rotiroti","Jeanne-Mance–Viger","Montréal","PLQ",1171],["Nicolas Girard","Repentigny","Lanaudière","PQ",1253],["Elsie Lefebvre","Berthier","Lanaudière","PQ",5845],["Nicolas Marceau","Marie-Victorin","Montérégie","PQ",7289],["Marc Tanguay","LaFontaine","Montréal","PLQ",11789],["Alain Therrien","Sanguinet","Montérégie","PQ",12189],["Caroline Simard","Charlevoix–Côte-de-Beaupré","Capitale-Nationale","PCQ",15367],["André Fortin","Pontiac","Outaouais","PLQ",15383],["Frantz Benjamin","Viau","Montréal","PLQ",17909],["Jennifer Maccarone","Westmount–Saint-Louis","Montréal","PLQ",17911],["Monsef Derraji","Nelligan","Montréal","PLQ",17923],["Ruba Ghazal","Mercier","Montréal","QS",17933],["Alexandre Leduc","Hochelaga-Maisonneuve","Montréal","QS",17935],["Enrico Ciccone","Marquette","Montréal","PLQ",17943],["Gregory Kelley","Jacques-Cartier","Montréal","PLQ",17951],["Andrés Fontecilla","Laurier-Dorion","Montréal","QS",17953],["Sol Zanetti","Jean-Lesage","Capitale-Nationale","QS",17955],["Madwa-Nika Cadet","Bourassa-Sauvé","Montréal","PLQ",19261],["Etienne Grandmont","Taschereau","Capitale-Nationale","QS",19267],["Brigitte B. Garceau","Robert-Baldwin","Montréal","PLQ",19271],["Maïté Blanchette Vézina","La Peltrie","Bas-Saint-Laurent","PCQ",19275],["Désirée McGraw","Notre-Dame-de-Grâce","Montréal","PLQ",19283],["Michelle Setlakwe","Mont-Royal–Outremont","Montréal","PLQ",19285],["Virginie Dufour","Mille-Îles","Laval","PLQ",19287],["Paul St-Pierre Plamondon","Camille-Laurin","Montréal","PQ",19289],["Elisabeth Prass","D'Arcy-McGee","Montréal","PLQ",19301],["Frédéric Beauchemin","Brome-Missisquoi","Montréal","PLQ",19307],["Linda Caron","La Pinière","Montérégie","PLQ",19313],["Catherine Gentilcore","Terrebonne","Lanaudière","PQ",20131],["Marie-Karlynn Laflamme","Chicoutimi","Saguenay–Lac-Saint-Jean","PQ",20193],["Stéphane Tremblay","Abitibi-Est","Abitibi-Témiscamingue","PQ",20319],["Louis Ialenti","Vimont-Auteuil","","PLQ",20321],["Antoine Dionne-Charest","Verdun","Montréal","PLQ",20323],["Nicolas Plourde","Anjou–Louis-Riel","Montréal","PLQ",20325],["Pierre Nantel","Argenteuil","Laurentides","PQ",20327],["Guy Jr Lapointe","Verchères","Montérégie","PQ",20329],["Tarek Henoud","Arthabaska-L’Érable","","PCQ",20331],["James Hughes","Vaudreuil","Montérégie","PLQ",20333],["Patricia Drouin","Beauce-Nord","Chaudière-Appalaches","PCQ",20335],["Jonathan Poulin","Beauce-Sud","Chaudière-Appalaches / Estrie","PCQ",20339],["Alexandre Daneau","Beauharnois","Montérégie","PQ",20341],["Jean Pellerin","Trois-Rivières","Mauricie","PQ",20343],["Éric Duhaime","Bellechasse","Chaudière-Appalaches","PCQ",20345],["Sandra Hernández","Taillon","Montérégie","PQ",20347],["Audrey Bujold","Bellefeuille","","PQ",20349],["Sylvie Tanguay","Saint-François","Estrie","PQ",20351],["Alexandre Girard-Duchaine","Bertrand","Lanaudière / Laurentides","PQ",20353],["Simon-Pierre Savard-Tremblay","Saint-Hyacinthe","Montérégie","PQ",20355],["Nadine Le Gal","Blainville","Laurentides","PQ",20357],["Gaétan Bédard","Saint-Jean","Montérégie","PQ",20359],["Cédric Gagnon-Ducharme","Borduas","Montérégie","PQ",20361],["Pier-Luc Bujold","Bonaventure","Gaspésie–Îles-de-la-Madeleine","PQ",20363],["Sandrine Michon","Saint-Jérôme","Laurentides","PQ",20365],["Julie Guyot","Chambly","Montérégie","PQ",20367],["Michel Langevin","Chapleau","Outaouais","PLQ",20369],["Éloïse Coulombe","Charlesbourg","Capitale-Nationale","PCQ",20371],["Valérie Assouline","Saint-Laurent","Montréal","PLQ",20373],["Félix Rhéaume","Châteauguay","Montérégie","PLQ",20375],["Olivier Bertin-Mahieux","Soulanges","Montérégie","PLQ",20377],["Karim Elayoubi","Chauveau","Capitale-Nationale","PCQ",20379],["Cécile Tremblay","Sainte-Rose","Laval","PLQ",20381],["Madeleine Féquière","Chomedey","Laval","PLQ",20383],["Roxane Milot","Sainte-Marie–Saint-Jacques","Montréal","QS",20385],["Dominique Dumas","Chutes-de-la-Chaudière","Chaudière-Appalaches","PCQ",20387],["Frédéric Poulin","Côte-du-Sud","Bas-Saint-Laurent / Chaudière-Appalaches","PCQ",20389],["Gisèle Pouhe Njall","Rosemont","Montréal","QS",20391],["Nathalie Boisclair","Daniel-Johnson","","PQ",20393],["Mathieu Lebrun","Rousseau","Lanaudière","PQ",20395],["Linda Vaillant","Deux-Montagnes","Laurentides","PQ",20397],["Diane Dallaire","Rouyn-Noranda–Témiscamingue","Abitibi-Témiscamingue","PQ",20399],["Émile Simard","Dubuc","Saguenay–Lac-Saint-Jean","PQ",20401],["Marie Claude Fournier","Fabre","Laval","PLQ",20405],["Isabelle Thibeault","Roberval","Saguenay–Lac-Saint-Jean","PQ",20407],["Ariane Boyer","Rivière-du-Loup–Témiscouata–Les Basques","","PQ",20409],["David Logue","Gatineau","Outaouais","PLQ",20411],["Alexandre Boulerice","Gouin","Montréal","QS",20413],["Yohann St-Pierre","Rimouski","Bas-Saint-Laurent","PQ",20415],["Jean-François Arsenault","Granby","Estrie","PQ",20417],["Marie-Claude Sarrazin","Groulx","Saguenay–Lac-Saint-Jean","PQ",20419],["Sacha Cannon","Hull","Outaouais","PLQ",20421],["Jocelyn Desjardins","Richelieu","Montérégie","PQ",20423],["Frédéric Laplante","Huntingdon","Montérégie","PQ",20425],["Odette Lavigne","René-Lévesque","Côte-Nord","PQ",20427],["Camille Pellerin-Forget","Iberville","Montérégie","PQ",20429],["Anne Nguyen","Prévost","Laurentides","PQ",20431],["Julie White","Jean-Talon","Capitale-Nationale","PLQ",20433],["Véronique Venne","Joliette","Lanaudière","PQ",20435],["Marcel Bouchard","Portneuf","Capitale-Nationale","PCQ",20437],["Jimmy Bouchard","Jonquière","Saguenay–Lac-Saint-Jean","PQ",20439],["Stéphane Paquet","Pointe-aux-Trembles","Montréal","PQ",20441],["David Bowles","Pierre-Laporte","","PLQ",20443],["Maxime Laporte","L'Assomption","Lanaudière","PQ",20445],["Sonia Ziadé","La Prairie","Montérégie","PLQ",20447],["Charles Milliard","Orford","Estrie","PLQ",20449],["Catherine Drouin","Labelle","Laurentides","PQ",20451],["William Fradette","Lac-Saint-Jean","Saguenay–Lac-Saint-Jean","PQ",20453],["Caroline De Guire","Laval-des-Rapides","Laval","PLQ",20455],["Isabelle Millette","Papineau","Outaouais","PQ",20457],["Dieudonné Ella Oyono","Les Plaines","Lanaudière / Laurentides","PQ",20461],["Guillaume Langlois","Nicolet-Bécancour","Centre-du-Québec","PCQ",20463],["Karine Laflamme","Lévis","Chaudière-Appalaches","PCQ",20465],["Renaud Labrecque","Lotbinière-Frontenac","Chaudière-Appalaches","PCQ",20467],["Marie-Josée Hélie","Montmorency","Capitale-Nationale","PCQ",20469],["Marcos Archambault","Louis-Hébert","Capitale-Nationale","PCQ",20471],["Michel Leblanc","Marguerite-Bourgeoys","Montréal","PLQ",20473],["Jimmy Gagnon","Mégantic","Chaudière-Appalaches / Estrie","PCQ",20475],["Natalie Bisaillon","Marie-Lacoste-Gérin-Lajoie","","PQ",20477],["Isabelle Blais","Maskinongé","Mauricie","PQ",20479],["Geneviève Couture","Mirabel","Laurentides","PQ",20481],["Stéphane Handfield","Masson","Lanaudière","PQ",20483],["Sébastien D'Astous","Abitibi-Ouest","Abitibi-Témiscamingue","PQ",20497],["Nada Boumeftah","Maurice-Richard","Montréal","PLQ",20515],["Mathieu Lavoie","Montarville","Montérégie","PLQ",20517],["Stéphanie Vachon","Sherbrooke","Estrie","QS",20519],["Benoit Clermont","Saint-Henri–Sainte-Anne","Montréal","PLQ",20521],["Charles Page","Drummond–Bois-Francs","Centre-du-Québec","PQ",20523],["Patrick Paquet","Vanier-Les Rivières","Capitale-Nationale","PCQ",20527],["Bernard Sévigny","Richmond","Estrie","PQ",20529],["Joël Arseneau","Îles-de-la-Madeleine","","PQ",17947],["Méganne Perry Mélançon","Gaspé","","PQ",18217],["Meggie Richard","Duplessis","","PQ",20403],["Élodie Murphy-Gauthier","Laviolette–Saint-Maurice","","PQ",20459],["André Albert Morin","Acadie","Montréal","PLQ",19253]
 ];
 /* DEPUTES_DATA_END */
 
@@ -4093,39 +4093,40 @@ const deputesRaw = [
    officiel assnat.qc.ca uniquement — pas de réseaux sociaux (voir la conversation :
    pas de façon fiable de vérifier qu'un compte Google trouvé par nom appartient
    vraiment à la bonne personne). Ne pas éditer ce bloc à la main.
-   Généré le 2026-10-15T13:25:07.762Z */
+   Généré le 2026-10-16T13:19:53.509Z */
 const deputeEmails = {
+  "pascal berube": "Pascal.Berube.MATN@assnat.qc.ca",
+  "filomena rotiroti": "Filomena.Rotiroti.JMV@assnat.qc.ca",
+  "marc tanguay": "Marc.Tanguay-LAFO@assnat.qc.ca",
+  "andre fortin": "Andre.Fortin.PONT@assnat.qc.ca",
   "frantz benjamin": "Frantz.Benjamin.VIAU@assnat.qc.ca",
   "jennifer maccarone": "Jennifer.Maccarone.WSL@assnat.qc.ca",
-  "madwa nika cadet": "Madwa-Nika.Cadet.BOSA@assnat.qc.ca",
-  "paul st pierre plamondon": "pspp.CALA@assnat.qc.ca",
-  "etienne grandmont": "Etienne.Grandmont.TASC@assnat.qc.ca",
-  "marie karlynn laflamme": "Marie-Karlynn.Laflamme.CHIC@assnat.qc.ca",
-  "elisabeth prass": "Elisabeth.Prass.DMG@assnat.qc.ca",
-  "alexandre leduc": "Alexandre.Leduc.HOCH@assnat.qc.ca",
-  "gregory kelley": "Gregory.Kelley.JACA@assnat.qc.ca",
-  "brigitte b. garceau": "Brigitte.Garceau.ROBA@assnat.qc.ca",
-  "sol zanetti": "Sol.Zanetti.JELE@assnat.qc.ca",
-  "filomena rotiroti": "Filomena.Rotiroti.JMV@assnat.qc.ca",
-  "linda caron": "Linda.Caron.LAPI@assnat.qc.ca",
-  "marc tanguay": "Marc.Tanguay-LAFO@assnat.qc.ca",
-  "andres fontecilla": "Andres.Fontecilla.LADO@assnat.qc.ca",
-  "andre fortin": "Andre.Fortin.PONT@assnat.qc.ca",
-  "enrico ciccone": "Enrico.Ciccone.MARQ@assnat.qc.ca",
-  "virginie dufour": "Virginie.Dufour.MIIL@assnat.qc.ca",
-  "michelle setlakwe": "Michelle.Setlakwe.MROU@assnat.qc.ca",
   "monsef derraji": "Monsef.Derraji.NELL@assnat.qc.ca",
-  "desiree mcgraw": "Desiree.McGraw.NDG@assnat.qc.ca",
-  "pascal berube": "Pascal.Berube.MATN@assnat.qc.ca",
-  "catherine gentilcore": "Catherine.Gentilcore.TERR@assnat.qc.ca",
   "ruba ghazal": "Ruba.Ghazal.MERC@assnat.qc.ca",
-  "andre albert a. morin": "Andre-A.Morin.ACAD@assnat.qc.ca"
+  "alexandre leduc": "Alexandre.Leduc.HOCH@assnat.qc.ca",
+  "enrico ciccone": "Enrico.Ciccone.MARQ@assnat.qc.ca",
+  "gregory kelley": "Gregory.Kelley.JACA@assnat.qc.ca",
+  "andres fontecilla": "Andres.Fontecilla.LADO@assnat.qc.ca",
+  "sol zanetti": "Sol.Zanetti.JELE@assnat.qc.ca",
+  "madwa nika cadet": "Madwa-Nika.Cadet.BOSA@assnat.qc.ca",
+  "etienne grandmont": "Etienne.Grandmont.TASC@assnat.qc.ca",
+  "brigitte b. garceau": "Brigitte.Garceau.ROBA@assnat.qc.ca",
+  "desiree mcgraw": "Desiree.McGraw.NDG@assnat.qc.ca",
+  "michelle setlakwe": "Michelle.Setlakwe.MROU@assnat.qc.ca",
+  "virginie dufour": "Virginie.Dufour.MIIL@assnat.qc.ca",
+  "paul st pierre plamondon": "pspp.CALA@assnat.qc.ca",
+  "elisabeth prass": "Elisabeth.Prass.DMG@assnat.qc.ca",
+  "linda caron": "Linda.Caron.LAPI@assnat.qc.ca",
+  "catherine gentilcore": "Catherine.Gentilcore.TERR@assnat.qc.ca",
+  "marie karlynn laflamme": "Marie-Karlynn.Laflamme.CHIC@assnat.qc.ca",
+  "joel arseneau": "Joel.Arseneau.IDLM@assnat.qc.ca",
+  "andre albert morin": "Andre-A.Morin.ACAD@assnat.qc.ca"
 };
 /* DEPUTE_EMAILS_END */
 
 /* NEWS_DATA_START — généré par scrapers/build-news-data.js à partir de data/bills.json
    et data/votes.json. Ne pas éditer à la main : relancer le build.
-   Généré le 2026-10-15T13:25:08.093Z */
+   Généré le 2026-10-16T13:19:53.759Z */
 const newsItems = [
   {
     "date": "2026-06-12",
@@ -4150,7 +4151,7 @@ const newsItems = [
     "label": "12 juin 2026",
     "labelEn": "June 12, 2026",
     "text": "Sanction du projet de loi n° 17 — Loi modifiant la Loi sur le stockage de gaz naturel et sur les conduites de gaz naturel et de pétrole au…",
-    "textEn": "Bill 17 assented to — An Act to amend the Act respecting the storage of natural gas and underground reservoirs and natural gas…",
+    "textEn": "Bill 17 assented to — Act to amend the Act respecting the storage of natural gas and respecting natural gas and oil pipelines…",
     "link": "https://dossierquebec.ca/projets-de-loi?pl=17",
     "guid": "sanction-17-2026-06-12"
   },
@@ -4168,7 +4169,7 @@ const newsItems = [
     "label": "12 juin 2026",
     "labelEn": "June 12, 2026",
     "text": "Sanction du projet de loi n° 23 — Loi visant principalement à mieux accompagner les personnes dont l’état mental pourrait représenter un r…",
-    "textEn": "Bill 23 assented to — Act mainly to better support persons whose mental state may pose a risk to their own safety or that of o…",
+    "textEn": "Bill 23 assented to — Act to better support persons whose mental state may pose a risk to their own safety or that of others",
     "link": "https://dossierquebec.ca/projets-de-loi?pl=23",
     "guid": "sanction-23-2026-06-12"
   },
@@ -4276,7 +4277,7 @@ const newsItems = [
     "label": "10 juin 2026",
     "labelEn": "June 10, 2026",
     "text": "Dépôt du projet de loi n° 13 — Loi instaurant la charge de greffier spécial",
-    "textEn": "Bill 13 introduced — Act to establish the office of special clerk",
+    "textEn": "Bill 13 introduced — Act establishing the office of special clerk",
     "link": "https://dossierquebec.ca/projets-de-loi?pl=13",
     "guid": "depot-13-2026-06-10"
   },
@@ -4456,7 +4457,7 @@ const newsItems = [
     "label": "12 mai 2026",
     "labelEn": "May 12, 2026",
     "text": "Dépôt du projet de loi n° 6 — Loi donnant suite à des mesures fiscales annoncées lors du discours sur le budget du 18 mars 2026 et du…",
-    "textEn": "Bill 6 introduced — Act giving effect to fiscal measures announced in the budget speech of 18 March 2026 and in the update o…",
+    "textEn": "Bill 6 introduced — Act giving effect to fiscal measures announced in the budget speech of March 18, 2026 and in the update…",
     "link": "https://dossierquebec.ca/projets-de-loi?pl=6",
     "guid": "depot-6-2026-05-12"
   },
@@ -4519,7 +4520,7 @@ const newsItems = [
     "label": "2 avril 2026",
     "labelEn": "April 2, 2026",
     "text": "Sanction du projet de loi n° 7 — Loi visant à réduire la bureaucratie, à accroître l’efficacité de l’État et à renforcer l’imputabilité d…",
-    "textEn": "Bill 7 assented to — Act to reduce bureaucracy, increase the efficiency of the State and strengthen the accountability of sen…",
+    "textEn": "Bill 7 assented to — Act to reduce bureaucracy, increase government efficiency and strengthen the accountability of senior pu…",
     "link": "https://dossierquebec.ca/projets-de-loi?pl=7",
     "guid": "sanction-7-2026-04-02"
   },
@@ -4537,7 +4538,7 @@ const newsItems = [
     "label": "2 avril 2026",
     "labelEn": "April 2, 2026",
     "text": "Sanction du projet de loi n° 13 — Loi visant à favoriser la sécurité et le sentiment de sécurité de la population et modifiant diverses di…",
-    "textEn": "Bill 13 assented to — Act to promote public safety and the sense of security of the population and amending various provisions",
+    "textEn": "Bill 13 assented to — Act to promote public safety and the perception of safety and amending various provisions",
     "link": "https://dossierquebec.ca/projets-de-loi?pl=13",
     "guid": "sanction-13-2026-04-02"
   },
@@ -4900,7 +4901,7 @@ const petitions = [
 
 /* PROMISES_DATA_START — généré par scrapers/build-promises-data.js à partir de
    data/promises.json (saisi à la main). Éditer le JSON, pas ce bloc.
-   Généré le 2026-10-15T13:25:08.001Z */
+   Généré le 2026-10-16T13:19:53.688Z */
 const promises = [
   {
     "id": "qs-e77cd71a",
