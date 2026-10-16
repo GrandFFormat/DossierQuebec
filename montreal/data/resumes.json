@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-15T14:31:47.925Z",
+ "generatedAt": "2026-10-16T16:53:16.370Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel quand il est publié (source « sommaire »), sinon du texte de la résolution elle-même (source « resolution »), sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,17 +7,17 @@
   "annee": "2026",
   "max": 40,
   "batch": true,
-  "depuis": "2026-08-16",
+  "depuis": "2026-08-17",
   "plafond": 120
  },
- "nombre": 8625,
- "genereCetteFois": 48,
+ "nombre": 8663,
+ "genereCetteFois": 38,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.8277,
-  "jetonsEntree": 229605,
-  "jetonsSortie": 20293
+  "montant": 0.782,
+  "jetonsEntree": 230425,
+  "jetonsSortie": 16472
  },
  "resumes": [
   {
@@ -10743,6 +10743,1003 @@
    "jetons": {
     "entree": 3395,
     "sortie": 286
+   }
+  },
+  {
+   "id": "1267768036",
+   "numero": "1267768036",
+   "resolution": "CA26 240363",
+   "date": "2026-09-01",
+   "unite": "Direction des services administratifs",
+   "objet": "Prendre acte du dépôt des rapports sur l'exercice des pouvoirs délégués aux fonctionnaires er (systèmes « GDD » et « Simon »), pour la période du 1 au 31 juillet 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=566",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Ville-Marie prend acte du dépôt des rapports sur les décisions prises par les fonctionnaires en vertu de pouvoirs qui leur sont délégués.",
+    "Les rapports couvrent la période du 1er au 31 juillet 2026 et proviennent des systèmes « GDD » et « Simon ».",
+    "Sont jointes au dossier la liste des factures sans bon de commande et la liste des bons de commande approuvés par décisions déléguées en juillet 2026.",
+    "Aucune nouvelle dépense ni mesure n'est décidée : il s'agit d'une prise d'acte de dépenses déjà autorisées."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.365Z",
+   "jetons": {
+    "entree": 8909,
+    "sortie": 318
+   }
+  },
+  {
+   "id": "1268188015",
+   "numero": "1268188015",
+   "resolution": "CA26 240372",
+   "date": "2026-09-01",
+   "unite": "Direction de l'aménagement urbain et de la mobilité",
+   "objet": "Édicter une ordonnance sur le bruit relative à la piétonnisation de la rue Sainte-Catherine Ouest, entre le boulevard Saint-Laurent et la rue De Bleury, de la rue Jeanne-Mance, entre le boulevard De Maisonneuve Ouest et la rue Sainte-Catherine Ouest, et de la rue Balmoral, entre les rues Mayor et Sainte-Catherine Ouest, du 2 septembre 2026 au 2 septembre 2027",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=690",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie autorise la diffusion d'une ambiance sonore musicale sur les rues piétonnes du Quartier des spectacles, du 2 septembre 2026 au 2 septembre 2027.",
+    "Les rues visées : Sainte-Catherine Ouest entre Saint-Laurent et De Bleury, Jeanne-Mance entre De Maisonneuve Ouest et Sainte-Catherine Ouest, et Balmoral entre Mayor et Sainte-Catherine Ouest.",
+    "La musique peut jouer de midi à 21 h en semaine, et de 10 h à 23 h les fins de semaine et jours fériés.",
+    "Le volume ne doit pas dépasser 75 dBA et 90 dBC, mesurés à 5 mètres de la source; l'écart entre dBA et dBC ne peut excéder 20 dB.",
+    "Les mégaphones restent interdits, sauf pour des raisons de sécurité.",
+    "Le Partenariat du Quartier des Spectacles contrôle les appareils sonores et doit respecter ces limites.",
+    "L'ordonnance entre en vigueur le jour de la publication d'un avis dans Le Devoir; la résolution sera transmise au SPVM."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.365Z",
+   "jetons": {
+    "entree": 7194,
+    "sortie": 518
+   }
+  },
+  {
+   "id": "CA26 240379",
+   "numero": null,
+   "resolution": "CA26 240379",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Réunion, pour étude et adoption, d’articles à l’ordre du jour",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-09-01_18h30_FR.pdf#page=16",
+   "source": "resolution",
+   "puces": [
+    "Le conseil regroupe les articles 40.11 à 40.14 de l'ordre du jour pour les étudier et les adopter ensemble."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.365Z",
+   "jetons": {
+    "entree": 1620,
+    "sortie": 140
+   }
+  },
+  {
+   "id": "1267768033",
+   "numero": "1267768033",
+   "resolution": "CA26 240350",
+   "date": "2026-09-01",
+   "unite": "Direction des services administratifs",
+   "objet": "Prendre acte du dépôt des procès-verbaux des réunions du comité consultatif d'urbanisme tenues les 9 juillet et 13 août 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=52",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Ville-Marie prend acte du dépôt des procès-verbaux du comité consultatif d'urbanisme des réunions du 9 juillet et du 13 août 2026.",
+    "Il s'agit d'un dépôt de documents pour information : aucune autorisation ni dépense n'est décidée ici.",
+    "Les procès-verbaux joints rapportent les avis du comité sur des dossiers d'urbanisme du centre-ville (notamment un plan d'affichage pour la tour du 600, rue De La Gauchetière Ouest et des révisions de projet sur plusieurs immeubles)."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.365Z",
+   "jetons": {
+    "entree": 8203,
+    "sortie": 306
+   }
+  },
+  {
+   "id": "1265958003",
+   "numero": "1265958003",
+   "resolution": "CA26 240367",
+   "date": "2026-09-01",
+   "unite": "Direction des services administratifs",
+   "objet": "Déposer l'évolution des dépenses et des revenus projetés pour l'année 2026 en date du 30 juin 2026, pour l'arrondissement de Ville-Marie et l'état des revenus et des dépenses réels au 30 juin 2026 comparé au 30 juin 2025",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=619",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie dépose son suivi budgétaire au 30 juin 2026, comparé à la même date en 2025.",
+    "L'arrondissement prévoit terminer l'année 2026 avec un excédent de 100,7 K$.",
+    "Le budget de dépenses passe de 117 500,0 K$ à 136 016,4 K$, une hausse de 16 516,4 K$ (affectations de surplus pour divers projets, crédits additionnels, revenus reportés des parcs et terrains de jeux).",
+    "Le budget de revenus passe de 25 859,6 K$ à 26 734,3 K$, une hausse de 874,7 K$.",
+    "On anticipe un déficit de 3 519,3 K$ en rémunération, compensé par une économie de 3 620,0 K$ dans les autres familles de dépenses.",
+    "Au 30 juin 2026, les revenus réels dépassent de 1 403,8 K$ (7,4 %) ceux de 2025, et les dépenses réelles sont en hausse de 1 648,7 K$ (3,1 %).",
+    "Parmi les ajouts financés : 2,4 M$ pour la Brigade sociale et la propreté, 1,4 M$ pour l'Équipe de médiation communautaire, 450 K$ pour le colmatage des nids-de-poule."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "100,7 K$",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.366Z",
+   "jetons": {
+    "entree": 8392,
+    "sortie": 549
+   }
+  },
+  {
+   "id": "1260510003",
+   "numero": "1260510003",
+   "resolution": "CA26 240362",
+   "date": "2026-09-01",
+   "unite": "Direction des travaux publics",
+   "objet": "Offrir au conseil municipal, en vertu de l'article 85, alinéa 2, de la Charte de la Ville de Montréal, métropole du Québec (RLRQ, chapitre C-11.4), de prendre en charge la conception, la coordination et la réalisation des travaux de réfection du domaine public sur les rues Saint- Jacques, Gauvin et Notre-Dame Ouest",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=561",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie propose de prendre en charge lui-même la conception, la coordination et la réalisation de travaux sur trois rues qui relèvent normalement du conseil municipal : Saint-Jacques, Gauvin et Notre-Dame Ouest.",
+    "Sur Saint-Jacques (entre Robert-Bourassa et Square-Victoria) : reconstruction du trottoir sud, nouvel éclairage, plantation d'arbres, prolongement du REV côté nord, réfection de la chaussée et conversion de la voie cyclable du Square-Victoria en piste bidirectionnelle.",
+    "Sur Gauvin (entre Saint-Jacques et Notre-Dame) : trottoirs élargis, éclairage ajouté, arbres plantés où c'est possible et chaussée refaite.",
+    "Sur Notre-Dame Ouest (entre Robert-Bourassa et McGill) : réparation du trottoir nord, arbres, mise à jour de l'éclairage et réfection de la chaussée.",
+    "Les travaux font suite à la construction du siège social de la Banque Nationale et de projets immobiliers aux 628-634, 700 et 800, rue Saint-Jacques, qui ont abîmé le domaine public.",
+    "Les coûts seront partagés entre deux services centraux et l'arrondissement, dont la part sera payée à même les dépôts de garantie versés par le promoteur.",
+    "Échéancier : acceptation par le conseil municipal à l'automne 2026, appel d'offres au printemps 2027, début des travaux à l'été 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.366Z",
+   "jetons": {
+    "entree": 6267,
+    "sortie": 864
+   }
+  },
+  {
+   "id": "CA26 240368",
+   "numero": null,
+   "resolution": "CA26 240368",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Réunion, pour étude et adoption, d’articles à l’ordre du jour",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-09-01_18h30_FR.pdf#page=11",
+   "source": "resolution",
+   "puces": [
+    "Le conseil regroupe les articles 40.01 à 40.10 de son ordre du jour pour les étudier et les adopter ensemble."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.366Z",
+   "jetons": {
+    "entree": 1620,
+    "sortie": 139
+   }
+  },
+  {
+   "id": "1260462005",
+   "numero": "1260462005",
+   "resolution": "CA26 240370",
+   "date": "2026-09-01",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "e Autoriser la tenue de programmations diverses sur le domaine public (saison 2026, 7 partie A) et édicter les ordonnances",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=659",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie autorise une nouvelle série d'événements sur le domaine public pour la saison 2026 (7e partie A), aux dates, lieux et heures listés en annexe.",
+    "Ces événements peuvent occuper des parcs, places et squares, ou entraîner la fermeture de rues.",
+    "Le bruit d'appareils sonores à l'extérieur est permis pendant ces événements, jusqu'à 75 dBA et 90 dBC mesurés à 5 mètres des appareils; les mégaphones restent interdits sauf pour la sécurité.",
+    "La vente d'objets promotionnels, d'aliments et de boissons (alcoolisées ou non) et leur consommation sont permises sur les sites visés.",
+    "Les organisateurs peuvent peindre ou dessiner sur la chaussée, fixer des éléments au mobilier urbain et distribuer des échantillons de commanditaires à partir de kiosques.",
+    "Les événements sont gratuits et accessibles à tous; les coûts des services municipaux requis sont absorbés par les budgets de fonctionnement existants.",
+    "Les autorisations entrent en vigueur le jour de la publication d'un avis dans Le Devoir, et les organisateurs doivent pouvoir montrer leur autorisation écrite en tout temps sur place."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 7652,
+    "sortie": 542
+   }
+  },
+  {
+   "id": "1265372002",
+   "numero": "1265372002",
+   "resolution": "CA26 240360",
+   "date": "2026-09-01",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Approuver la deuxième modification de bail par laquelle la Ville de Montréal loue de François Xavier Gaudreault des locaux situés au sous-sol, au rez-de-chaussée et au 2e étage de l'immeuble sis au 2421, rue La Fontaine, pour une superficie de 4 798,07 pi² (445,8 m²), et ce, à des fins er communautaires, pour une période additionnelle de 10 ans débutant le 1 novembre 2027, moyennant un loyer total de 1 210 250,76 $, taxes incluses (Bâtiment 8241)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=507",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie prolonge de 10 ans le bail des locaux du 2421, rue La Fontaine, loués au propriétaire François-Xavier Gaudreault, du 1er novembre 2027 au 31 octobre 2037.",
+    "Le loyer total s'élève à 1 210 250,76 $, taxes incluses, soit environ 107 524 $ la première année; la dépense est assumée entièrement par l'arrondissement.",
+    "Les locaux (4 798,07 pi², au sous-sol, au rez-de-chaussée et au 2e étage) sont sous-loués au Centre récréatif Poupart inc., qui y offre des activités de loisir, de sport, d'art, de culture et d'entraide dans le quartier Sainte-Marie.",
+    "Le propriétaire doit réaliser à ses frais les travaux d'étanchéité du mur de fondation du côté de la ruelle au plus tard le 1er novembre 2027.",
+    "Le loyer de base augmente chaque année de 0,50 $/pi² pour le rez-de-chaussée et de 0,25 $/pi² pour le sous-sol; le taux brut négocié est de 21,94 $/pi².",
+    "L'organisme occupant assume l'entretien ménager des locaux."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 210 250,76 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 8028,
+    "sortie": 528
+   }
+  },
+  {
+   "id": "1267303004",
+   "numero": "1267303004",
+   "resolution": "CA26 240381",
+   "date": "2026-09-01",
+   "unite": "Direction de l'aménagement urbain et de la mobilité",
+   "objet": "Adopter, avec modifications, une résolution autorisant la réalisation d'un projet de redéveloppement pour l'immeuble situé au 810, rue Saint-Antoine Est sur les lots 2 746 057, 2 888 905 et 2 888 906, conformément à l'article 145.45 de la Loi sur l'aménagement et l'urbanisme (RLRQ, chapitre A-19.1) - Adoption",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=761",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie autorise un projet de redéveloppement au 810, rue Saint-Antoine Est, avec construction d'un bâtiment par phases selon les plans de BLTA architecture.",
+    "Le projet pourra dépasser la hauteur maximale en mètres prévue au règlement d'urbanisme de l'arrondissement.",
+    "Avant d'obtenir un permis, le promoteur devra signer une entente sur le logement social, abordable et familial : il s'engage à céder à un organisme désigné par la Ville un immeuble avec au moins 4 000 m² de logements sociaux ou abordables sur le site « Logements hors marché ».",
+    "Si cet engagement est impossible, le promoteur devra céder un terrain permettant 4 000 m² de tels logements dans les secteurs de valeur 1 à 3, ou verser une contribution financière.",
+    "Une garantie monétaire de 500 000 $ sera exigée avant la délivrance des permis de construction des phases; la Ville pourra l'encaisser si aucune phase n'est réalisée en 36 mois ou si une deuxième phase n'est pas entamée en 48 mois.",
+    "Les travaux doivent commencer dans les 24 mois, sinon l'autorisation devient nulle.",
+    "Des conditions s'ajoutent : étude d'impacts éoliens, traitement de façade des murs visibles de la rue, accessibilité universelle du passage au sol, et interface ouverte avec le parc sous le viaduc Notre-Dame."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 000, 00 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 7659,
+    "sortie": 612
+   }
+  },
+  {
+   "id": "1265662003",
+   "numero": "1265662003",
+   "resolution": "CA26 240386",
+   "date": "2026-09-01",
+   "unite": "Direction des services administratifs",
+   "objet": "Retirer, conformément à l'article 559 de la Loi sur les élections et les référendums dans les municipalités, la requête ayant pour objet l'agrandissement du district de la Société de développement commercial du Village",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=1007",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie abandonne le projet d'agrandir le territoire de la Société de développement commercial (SDC) du Village.",
+    "L'agrandissement visait à étendre le district commercial jusqu'à la rue Ontario au nord, la rue Berri à l'ouest, le boulevard René-Lévesque Est au sud et la rue De Lorimier à l'est.",
+    "Lors du registre tenu le 16 juillet 2026, 92 commerçants ont demandé un référendum, alors que 59 demandes suffisaient pour en déclencher un.",
+    "La loi permet au conseil de retirer la requête tant que l'avis de scrutin référendaire n'est pas publié : il n'y aura donc pas de référendum.",
+    "Un avis public informant les personnes concernées doit être publié au plus tard le 15 septembre 2026.",
+    "Le district commercial actuel reste inchangé et les commerçants du secteur visé ne subissent aucun effet."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 4931,
+    "sortie": 421
+   }
+  },
+  {
+   "id": "CA26 240355",
+   "numero": null,
+   "resolution": "CA26 240355",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Motion d'appui pour l'école FACE",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-09-01_18h30_FR.pdf#page=5",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Ville-Marie adopte une motion d'appui à l'école FACE, école publique avec programme intégré en arts située au centre-ville.",
+    "Il demande au gouvernement du Québec et au ministère de l'Éducation de rétablir les sommes nécessaires pour réaliser le projet de rénovation de l'école.",
+    "Le document indique que ce projet de rénovation a été mis sur pause en raison de contraintes budgétaires gouvernementales.",
+    "L'arrondissement rappelle que la construction et la rénovation des infrastructures scolaires relèvent du ministère de l'Éducation du Québec.",
+    "Il offre sa collaboration aux autorités gouvernementales et scolaires pour faire avancer le projet.",
+    "La motion n'engage aucune somme de la part de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 2356,
+    "sortie": 370
+   }
+  },
+  {
+   "id": "1266164003",
+   "numero": "1266164003",
+   "resolution": "CA26 240364",
+   "date": "2026-09-01",
+   "unite": "Direction des travaux publics",
+   "objet": "Autoriser une dépense additionnelle de 198 674,74 $, taxes et contingences incluses, dans le cadre de l'entente 1673569 (VMP-24-006) attribuée à Vlan Paysages inc., pour des services professionnels en architecture de paysage et en ingénierie pour l'élaboration des plans et devis ainsi que la surveillance des travaux de réaménagement du parc Percy-Walters - phase 2, majorant la dépense totale à 649 729,95 $, taxes, contingences et incidences incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=585",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie ajoute 198 674,74 $ (taxes et contingences incluses) au mandat de Vlan Paysages inc. pour le réaménagement du parc Percy-Walters, au pied du mont Royal.",
+    "La somme se divise en 165 562,28 $ d'honoraires professionnels et 33 112,46 $ de contingences; les professionnels sont payés à taux horaire.",
+    "Le mandat couvre la finition des plans et devis, la surveillance du chantier et l'accompagnement à la mise en service du parc.",
+    "La dépense totale pour ces services professionnels passe à 649 729,95 $, taxes, contingences et incidences incluses.",
+    "La hausse s'explique par une étude environnementale ajoutée, des ajustements pour la gestion des eaux pluviales et l'aménagement d'un parc canin temporaire dans le secteur sud-est.",
+    "Le chantier passe de 91 à 174 jours répartis sur deux saisons de construction, ce qui allonge la période de surveillance.",
+    "Les travaux eux-mêmes ont été confiés en juin 2026 à Les entreprises Ventec inc. pour 2 531 429,67 $."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "198 674,74 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 7767,
+    "sortie": 507
+   }
+  },
+  {
+   "id": "1267135010",
+   "numero": "1267135010",
+   "resolution": "CA26 240384",
+   "date": "2026-09-01",
+   "unite": "Direction des services administratifs",
+   "objet": "Adopter un règlement modifiant le Règlement sur les tarifs de l'arrondissement de Ville-Marie - exercice financier 2026 (CA-24-400) afin d'inclure des tarifs pour la célébration de mariage et union civile ainsi que pour la location d'une salle notamment à cette fin - Avis de motion et dépôt Avis de motion est donné par la mairesse Soraya Martinez Ferrada annonçant l’adoption d’un règlement intitulé « Règlement modifiant le Règlement sur les tarifs de l’arrondissement de Ville-Marie - exercice financier 2026 (CA-24-400) afin d'inclure les tarifs pour la célébration de mariage et union civile ainsi que pour la location d'une salle notamment à cette fin », et lequel est déposé avec le dossier",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=995",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie veut ajouter des tarifs pour la célébration de mariages civils et d'unions civiles.",
+    "Le tarif de célébration serait de 431 $, plus les taxes, soit celui prévu au Tarif judiciaire en matière civile.",
+    "Deux nouveaux tarifs de location s'ajoutent pour la salle Maisonneuve - Espace citoyen : 290 $ pour un minimum de 1 heure et 400 $ pour un minimum de 4 heures.",
+    "Cette salle pourra notamment servir à célébrer des mariages ou des unions civiles.",
+    "Étape franchie le 1er septembre 2026 : avis de motion et dépôt du règlement; l'adoption est prévue au conseil du 13 octobre 2026.",
+    "Un avis public annonçant l'entrée en vigueur sera publié dans Le Devoir."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "431 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 6810,
+    "sortie": 391
+   }
+  },
+  {
+   "id": "CA26 240356",
+   "numero": null,
+   "resolution": "CA26 240356",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Réunion, pour étude et adoption, d’articles à l’ordre du jour",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-09-01_18h30_FR.pdf#page=6",
+   "source": "resolution",
+   "puces": [
+    "Le conseil regroupe les articles 20.01 à 20.04 de l'ordre du jour pour les étudier et les adopter ensemble."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 1620,
+    "sortie": 140
+   }
+  },
+  {
+   "id": "1265289006",
+   "numero": "1265289006",
+   "resolution": "CA26 240383",
+   "date": "2026-09-01",
+   "unite": "Direction de l'aménagement urbain et de la mobilité",
+   "objet": "Adopter une résolution autorisant un plan d'affichage pour l'installation d'enseignes sur l'édifice situé au 600, rue De La Gauchetière Ouest, conformément au Règlement sur les projets particuliers de construction, de modification ou d'occupation d'un immeuble (CA-24-011) - Projet de résolution",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=973",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie autorise un plan d'affichage complet pour la tour à bureaux du 600, rue De La Gauchetière Ouest, dans le Quartier international.",
+    "La compagnie ferroviaire CN deviendra l'occupant principal : elle occupera les 18 premiers étages, soit 440 000 pi².",
+    "Deux enseignes « CN » seront installées en hauteur (121,92 m côté De La Gauchetière et 128,02 m côté Viger Ouest), d'une superficie maximale de 22,91 m² chacune.",
+    "S'ajoutent deux enseignes « Place CN » sur marquise (1 m² chacune), deux enseignes au sol de type stèle de 2,4 m de haut et une enseigne « CN » sur le muret de la rampe d'accès.",
+    "Les enseignes des commerces des trois premiers étages seront limitées à 10 m² chacune, avec un espacement minimal de 1,5 m.",
+    "Le projet déroge à une quinzaine d'articles du règlement d'urbanisme, notamment sur le nombre, la superficie et la hauteur des enseignes.",
+    "Le promoteur a 36 mois pour obtenir le certificat de la première enseigne, sinon l'autorisation devient nulle; adoption finale prévue le 13 octobre 2026 après une consultation publique le 23 septembre."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 7735,
+    "sortie": 561
+   }
+  },
+  {
+   "id": "1267135009",
+   "numero": "1267135009",
+   "resolution": "CA26 240352",
+   "date": "2026-09-01",
+   "unite": "Direction des services administratifs",
+   "objet": "Prendre acte du dépôt du certificat de la secrétaire d'arrondissement annonçant le résultat du registre tenu le 16 juillet 2026 relatif à la requête ayant pour objet l'agrandissement du district de la Société de développement commercial du Village reçue par le conseil d'arrondissement le 9 juin 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=203",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Ville-Marie prend acte du certificat déposé par la secrétaire d'arrondissement sur le registre tenu le 16 juillet 2026.",
+    "Le registre portait sur la demande d'agrandissement du district de la Société de développement commercial (SDC) du Village, reçue le 9 juin 2026.",
+    "Sur 481 établissements d'entreprise habiles à voter, 92 demandes ont été déposées, alors que 59 suffisaient pour déclencher un scrutin.",
+    "Résultat : la requête n'est pas réputée approuvée et un scrutin référendaire doit être tenu.",
+    "Le conseil pourrait plutôt retirer la requête par résolution, tant que l'avis de scrutin référendaire n'est pas publié.",
+    "Les résultats ont été publiés dans Le Devoir du 21 juillet 2026 et sur le site Internet de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 6575,
+    "sortie": 408
+   }
+  },
+  {
+   "id": "CA26 240346",
+   "numero": null,
+   "resolution": "CA26 240346",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "er Adopter l'ordre du jour de la séance du conseil d'arrondissement du 1 septembre 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-09-01_18h30_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement adopte l'ordre du jour de sa séance du 1er septembre 2026, en y ajoutant un point : une motion d'appui pour l'école FACE."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 1693,
+    "sortie": 157
+   }
+  },
+  {
+   "id": "1268188018",
+   "numero": "1268188018",
+   "resolution": "CA26 240374",
+   "date": "2026-09-01",
+   "unite": "Direction de l'aménagement urbain et de la mobilité",
+   "objet": "Édicter une ordonnance sur le bruit concernant la tenue d'événements sur le lot 1 180 610 pour le Marché de nuit asiatique du 3 au 7 septembre 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=706",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie autorise exceptionnellement la diffusion de musique à l'extérieur pour le Marché de nuit asiatique, dans le Quartier chinois (lot à l'angle du boulevard Saint-Laurent, du boulevard René-Lévesque Est et de la rue Saint-Dominique).",
+    "La musique d'ambiance est permise de 17 h à 22 h les 3 et 4 septembre 2026, puis de 12 h à 22 h du 5 au 7 septembre 2026.",
+    "Le bruit ne peut dépasser 75 dBA et 90 dBC (moyenne sur 15 minutes), mesuré à 5 mètres de la source; l'écart entre dBA et dBC ne peut excéder 20 dB.",
+    "Les mégaphones sont interdits, sauf pour des raisons de sécurité.",
+    "L'organisateur doit mettre en place un système de gestion des plaintes, prévoir des mesures pour réduire le bruit dans le voisinage et remettre un bilan des nuisances sonores dans les 30 jours suivant la fin de l'événement.",
+    "Le montage du site se fait les 1er et 2 septembre, le démontage les 8 et 9 septembre; l'ordonnance entre en vigueur le jour de la publication d'un avis dans Le Devoir."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 6262,
+    "sortie": 547
+   }
+  },
+  {
+   "id": "1265958002",
+   "numero": "1265958002",
+   "resolution": "CA26 240366",
+   "date": "2026-09-01",
+   "unite": "Direction des services administratifs",
+   "objet": "Prendre acte du rapport de la mairesse sur la situation financière de l'arrondissement de Ville- Marie pour l'année 2025",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=611",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Ville-Marie prend acte du rapport de la mairesse sur la situation financière de 2025 et le fera publier sur le site Internet de l'arrondissement.",
+    "En 2025, l'arrondissement a encaissé 109,3 M$ de revenus et dépensé 125,8 M$ en fonctionnement, pour un excédent de gestion de 5,7 M$ après affectations et ajustements.",
+    "20,4 M$ ont été investis en immobilisations : 10,2 M$ en parcs et espaces verts (dont la rue Larivère et l'achat du terrain de l'église St-Jax), 6,7 M$ en réfection routière et 3,4 M$ en bâtiments municipaux.",
+    "L'arrondissement a versé 3,6 M$ en contributions pour la culture, les sports, les loisirs et le développement social, et 3,3 M$ en soutien économique (propreté, mitigation du chantier Sainte-Catherine Ouest, vie nocturne, Vieux-Montréal).",
+    "2 104 permis ont été délivrés en 2025, correspondant à 1,03 G$ de travaux, et 309 dossiers ont été présentés au comité consultatif d'urbanisme.",
+    "Le centre Sanaaq a ouvert ses portes en mai 2025.",
+    "Pour 2026 : budget de dépenses de 117 000 000 $, revenus locaux visés de 25 859 600 $, et 15 461 000 $ d'investissements, dont 6 877 000 $ en réfection routière."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 7557,
+    "sortie": 826
+   }
+  },
+  {
+   "id": "1260413002",
+   "numero": "1260413002",
+   "resolution": "CA26 240365",
+   "date": "2026-09-01",
+   "unite": "Direction des travaux publics",
+   "objet": "Autoriser une dépense additionnelle de 165 316,39 $, taxes incluses, sur les ententes-cadres 1723030 et 1786660 attribuées à Béton Provincial ltée, pour la fourniture et la livraison de béton pré-mélangé et de remblai sans retrait, afin de compléter la réalisation des travaux de réfection mineures de trottoirs dans le cadre du Programme de réfection routière de l'arrondissement de Ville-Marie, majorant la dépense totale à 226 072,05 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=599",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie ajoute 165 316,39 $ (taxes incluses) aux achats de béton prémélangé et de remblai auprès de Béton Provincial ltée, portant la dépense totale à 226 072,05 $.",
+    "Cet argent sert à terminer les travaux de réfection mineure de trottoirs faits par les équipes de l'arrondissement, dans le cadre du Programme de réfection routière 2026.",
+    "Les travaux touchent une quinzaine de tronçons, dont les avenues Trafalgar et Lincoln, les rues Tupper, Wolfe, Robin, Saint-Timothée, Plessis, Alexandre-de-Sève, Lespérance et Hôtel-de-Ville.",
+    "La facture se divise en 84 737,76 $ pour les rues à l'est d'Atateken et 80 578,63 $ pour les rues à l'ouest.",
+    "Les travaux s'échelonnent d'avril à octobre 2026; la somme couvre notamment l'approvisionnement du 19 juin à la fin septembre 2026 ainsi que des factures restantes.",
+    "Selon le dossier, les chantiers sont petits et répartis sur le territoire; les résidents seront informés au besoin des accès limités et du bruit."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "165 316,39 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 8164,
+    "sortie": 533
+   }
+  },
+  {
+   "id": "1269184001",
+   "numero": "1269184001",
+   "resolution": "CA26 240385",
+   "date": "2026-09-01",
+   "unite": "Direction d'arrondissement",
+   "objet": "Demander au Directeur de l'état civil de désigner des membres du conseil d'arrondissement ainsi que certains fonctionnaires de l'Arrondissement de Ville-Marie, à titre de « célébrant(e)s compétent(e)s » afin de célébrer des mariages et des unions civiles sur le territoire de l'arrondissement de Ville-Marie",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=1002",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie demande au Directeur de l'état civil de désigner 5 élus et 11 fonctionnaires comme célébrants de mariages et d'unions civiles.",
+    "Les élus visés sont Claude Pinard (Saint-Jacques), Leslie Roberts (Peter-McGill), Christopher McCray (Sainte-Marie), Effie Giannou et Julien Héneault-Ratelle.",
+    "Une fois désignées, ces personnes pourront célébrer des mariages uniquement sur le territoire de Ville-Marie.",
+    "L'arrondissement dit répondre à des demandes de citoyens reçues au Bureau Accès Montréal de Ville-Marie.",
+    "Les célébrations auraient lieu à l'Espace Maisonneuve, voisin du Bureau Accès Montréal, aménagé pour des événements et réunions.",
+    "Prochaine étape : l'envoi de la résolution au Directeur de l'état civil, qui attribuera des numéros d'identification aux célébrants.",
+    "Aucun coût n'est indiqué au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 4642,
+    "sortie": 466
+   }
+  },
+  {
+   "id": "1265482008",
+   "numero": "1265482008",
+   "resolution": "CA26 240376",
+   "date": "2026-09-01",
+   "unite": "Direction de l'aménagement urbain et de la mobilité",
+   "objet": "Édicter, en vertu du règlement sur la circulation et le stationnement (R.R.V.M., chapitre C -4.1), une ordonnance déterminant l'obligation de virage à droite vers le sud dans la voie de droite de l'approche ouest de l'intersection des rues Saint-Antoine, de Bonsecours et Saint-Denis",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=724",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie rend le virage à droite vers le sud obligatoire dans la voie de droite venant de l'ouest, à l'intersection Saint-Antoine / de Bonsecours / Saint-Denis.",
+    "Les trois autres voies de cette approche serviront uniquement à aller tout droit.",
+    "La Ville ajoutera un feu pour cyclistes et une phase de feu séparant les virages à droite du passage des vélos, pour éviter les conflits entre autos et cyclistes sur la piste de la rue Saint-Antoine.",
+    "La demande vient de la STM, dans le cadre du projet de Réseau express vélo (REV) sur la rue Saint-Antoine.",
+    "Des comptages de l'été 2025 montrent plus de 400 véhicules à l'heure qui tournent à droite à la pointe du matin; le temps protégé pour piétons et cyclistes passera de 13 à 27 secondes.",
+    "Les travaux de marquage, de signalisation et de feux sont prévus à l'été-automne 2026, avec un avis de changement installé 30 jours avant la mise en œuvre.",
+    "Les coûts de marquage et de panneaux sont assumés par l'arrondissement; ceux du feu cycliste et de la programmation, par la Division de l'innovation et gestion des déplacements."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 7717,
+    "sortie": 545
+   }
+  },
+  {
+   "id": "1267768034",
+   "numero": "1267768034",
+   "resolution": "CA26 240353",
+   "date": "2026-09-01",
+   "unite": "Direction des services administratifs",
+   "objet": "Prendre acte du dépôt du rapport de la séance d'assemblée publique de consultation du 19 août 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=210",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Ville-Marie prend acte du dépôt du rapport (procès-verbal) de l'assemblée publique de consultation tenue le 19 août 2026.",
+    "Cette assemblée, à laquelle ont assisté environ 100 personnes, portait sur le projet de redéveloppement de l'immeuble du 810, rue Saint-Antoine Est.",
+    "Le rapport recense les questions et commentaires du public : hauteur et ampleur du projet, intégration au Vieux-Montréal, circulation, stationnement, perte d'ensoleillement et d'arbres matures.",
+    "Des citoyens y réclament le rejet du projet et l'abandon du recours à l'article 145.45 de la Loi sur l'aménagement et l'urbanisme, après le registre du 8 avril 2026 ayant recueilli 425 signatures sans référendum.",
+    "Plusieurs mémoires déposés sont annexés au rapport, dont celui de l'Association des résidants du Vieux-Montréal.",
+    "Le document lui-même ne décide rien sur le projet : il ne fait qu'acter le dépôt du compte rendu."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.367Z",
+   "jetons": {
+    "entree": 7678,
+    "sortie": 484
+   }
+  },
+  {
+   "id": "1262678007",
+   "numero": "1262678007",
+   "resolution": "CA26 240347",
+   "date": "2026-09-01",
+   "unite": "Direction des services administratifs",
+   "objet": "Période de questions du public - Prolongation",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=12",
+   "source": "sommaire",
+   "puces": [
+    "Il s'agit d'un dossier administratif de l'arrondissement de Ville-Marie, créé pour encadrer la période de questions du public et le regroupement d'articles lors des séances du conseil d'arrondissement.",
+    "Le document ne contient aucune information substantielle : toutes les sections (contexte, description, justification, aspects financiers, impacts) sont vides.",
+    "Aucune somme d'argent, aucune obligation ni échéance n'y est inscrite."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.368Z",
+   "jetons": {
+    "entree": 2305,
+    "sortie": 249
+   }
+  },
+  {
+   "id": "1269184002",
+   "numero": "1269184002",
+   "resolution": "CA26 240375",
+   "date": "2026-09-01",
+   "unite": "Direction d'arrondissement",
+   "objet": "Édicter, en vertu du Règlement sur les tarifs de l'arrondissement de Ville-Marie - exercice financier 2026 (CA-24-400), une ordonnance afin de délivrer gratuitement des vignettes temporaires permettant de se stationner dans les zones SRRR de l'arrondissement de Ville-Marie pour certaines adresses dont les résidents ne pourront pas accéder à leur stationnement privé dont l'entrée est située sur les parcours des Championnats du Monde Route UCI qui se dérouleront du 20 au 27 septembre 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=715",
+   "source": "sommaire",
+   "puces": [
+    "Ville-Marie offrira gratuitement des vignettes de stationnement temporaires aux résidents dont l'entrée de stationnement privé donne sur les parcours des Championnats du Monde Route UCI.",
+    "Le tarif normal d'un permis de stationnement réservé aux résidants (SRRR) passe à 0 $ pour ces personnes.",
+    "Les vignettes couvrent la période du 18 au 27 septembre 2026 inclusivement et permettent de se garer dans les zones SRRR de l'arrondissement.",
+    "Les championnats se tiennent du 20 au 27 septembre 2026; les quatre parcours empruntent des rues de Ville-Marie du 20 au 22 septembre, avec mise en place dès le 19 septembre pour la reconnaissance des athlètes.",
+    "Une liste de 30 adresses est visée, notamment sur Atateken, Ontario Est, Notre-Dame Est, Montcalm, De la Commune Ouest, De Callière et Saint-Antoine Est.",
+    "Pour obtenir la vignette, il faut se présenter au Bureau Accès Montréal de Ville-Marie avec l'immatriculation du véhicule et une preuve d'adresse.",
+    "Des avis seront distribués aux résidents ciblés; l'ordonnance entre en vigueur à la publication d'un avis dans Le Devoir et vaut jusqu'au 27 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "0 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.368Z",
+   "jetons": {
+    "entree": 8336,
+    "sortie": 579
+   }
+  },
+  {
+   "id": "1265377005",
+   "numero": "1265377005",
+   "resolution": "CA26 240358",
+   "date": "2026-09-01",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Approuver la convention, se terminant au plus tard le 31 mars 2027, avec La Fondation du refuge pour femmes Chez Doris inc. visant à soutenir et rendre autonome toute femme qui se trouve dans une situation précaire à réaliser son plein potentiel et accorder une contribution totale de 24 585 $ en provenance du « Fonds de soutien financier en développement social »",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=300",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie verse 24 585 $ à La Fondation du refuge pour femmes Chez Doris inc., une somme non récurrente tirée du Fonds de soutien financier en développement social.",
+    "L'argent finance le « Programme de participation active et de pair-aidance », un projet de 6 mois en 2026 destiné aux femmes en situation de précarité, d'itinérance ou d'exclusion sociale.",
+    "Une coordonnatrice ayant un vécu semblable encadrera quatre pairs aidantes réparties dans les points de service de Chez Doris, à Ville-Marie.",
+    "Ces pairs aidantes animeront des activités, offriront du soutien et du mentorat aux participantes et partageront leur expérience.",
+    "Le projet met en place un comité de participantes et des consultations régulières pour qu'elles influencent les services de l'organisme.",
+    "La convention se termine au plus tard le 31 mars 2027; l'arrondissement assurera un suivi du projet."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "24 585 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.368Z",
+   "jetons": {
+    "entree": 7440,
+    "sortie": 437
+   }
+  },
+  {
+   "id": "1267768032",
+   "numero": "1267768032",
+   "resolution": "CA26 240349",
+   "date": "2026-09-01",
+   "unite": "Direction des services administratifs",
+   "objet": "Adopter le procès-verbal de la séance du conseil d'arrondissement du 7 juillet 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=15",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Ville-Marie adopte le procès-verbal de sa séance du 7 juillet 2026, c'est-à-dire le compte rendu officiel de cette réunion.",
+    "Aucune nouvelle dépense, obligation ou interdiction ne découle de cette décision : il s'agit d'une étape de forme du greffe de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.368Z",
+   "jetons": {
+    "entree": 7659,
+    "sortie": 222
+   }
+  },
+  {
+   "id": "1269678007",
+   "numero": "1269678007",
+   "resolution": "CA26 240357",
+   "date": "2026-09-01",
+   "unite": "Direction d'arrondissement",
+   "objet": "Approuver la convention modifiée avec Espace LGBTQ+ pour en prolonger la durée jusqu'au 30 décembre 2028 afin de lui permettre de terminer les travaux pour le projet Espace + Village",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=286",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie prolonge jusqu'au 30 décembre 2028 son entente avec l'organisme Espace LGBTQ+, pour le projet Espace + Village au 929-935, rue Sainte-Catherine Est.",
+    "La contribution financière reste de 625 000 $, approuvée en juillet 2025, mais le calendrier des versements est revu : 475 000 $ au plus tard le 31 mars 2027, sur preuve du montage financier complet, et 125 000 $ après la reddition de comptes finale et la fin des travaux.",
+    "Le report s'explique par les délais pour confirmer le montage financier du projet, condition du premier décaissement.",
+    "La prolongation est conditionnelle au maintien de loyers abordables, à un maximum de 25 $/pi² avec indexation jusqu'à l'ouverture.",
+    "Échéancier annoncé : permis et démolition en 2026, construction en 2027, lancement en 2028.",
+    "Le bâtiment doit accueillir des locaux abordables, des services communautaires (santé, social) et des événements culturels liés au Village."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "625 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.368Z",
+   "jetons": {
+    "entree": 7498,
+    "sortie": 472
+   }
+  },
+  {
+   "id": "1264680008",
+   "numero": "1264680008",
+   "resolution": "CA26 240359",
+   "date": "2026-09-01",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Approuver les conventions, se terminant au plus tard le 30 juin 2027, avec différents organismes dans le cadre de l'édition 2026 du « Fonds de soutien aux organismes culturels œuvrant dans Ville-Marie » et accorder une contribution totale de 66 000 $",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=368",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie verse 66 000 $ à trois organismes culturels dans le cadre de l'édition 2026 du Fonds de soutien aux organismes culturels (FSOC).",
+    "Voies culturelles des faubourgs reçoit 44 000 $ pour son plan d'action 2026-2027 et La Nuit aux flambeaux, du 2 septembre 2026 au 30 juin 2027 dans le Centre-Sud.",
+    "Laboratoire de recherche et de création vocale reçoit 14 000 $ (sur 20 000 $ demandés) pour Le Grand chœur du Centre-Sud, du 13 septembre 2026 au 12 juin 2027 à l'église du Sacré-Cœur-de-Jésus (2000, rue Alexandre-de-Sève).",
+    "Montréal la plus heureuse reçoit 8 000 $ (sur 12 800 $ demandés) pour « Expression de joie dans le Village », le 4 novembre 2026, à la bibliothèque Père-Ambroise, au centre Yvon Deschamps et à la place du Village.",
+    "Les concerts du Grand chœur restent gratuits; une collecte de dons facultative est prévue à l'entrée.",
+    "Les conventions avec les organismes prennent fin au plus tard le 30 juin 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "66 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.368Z",
+   "jetons": {
+    "entree": 7555,
+    "sortie": 552
+   }
+  },
+  {
+   "id": "1268188017",
+   "numero": "1268188017",
+   "resolution": "CA26 240373",
+   "date": "2026-09-01",
+   "unite": "Direction de l'aménagement urbain et de la mobilité",
+   "objet": "Édicter une ordonnance concernant la tenue d'activités culturelles sur le terrain de Lespacemaker, au 2875 rue Hochelaga, du 2 septembre au 14 octobre 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=697",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie permet le bruit d'appareils sonores extérieurs sur le terrain de Lespacemaker, au 2875 rue Hochelaga, du 2 septembre au 14 octobre 2026.",
+    "Quatre événements sont visés : des soirées « Barbec & Trompettes » les 2 et 16 septembre et le 14 octobre (18 h à 21 h 30), et « Libre Cours » le 26 septembre (10 h à 21 h 30).",
+    "Le son ne peut dépasser 75 dBA et 90 dBC, mesurés à 5 mètres de la source; les mégaphones sont interdits sauf pour la sécurité.",
+    "Lespacemaker doit mettre en place un système de gestion des plaintes, remettre des rapports mensuels et déposer un bilan de la saison 2026 au plus tard le 15 novembre 2026.",
+    "L'organisme doit aussi prévoir des mesures pour réduire l'impact du bruit sur le voisinage.",
+    "La demande fait suite à un réaménagement du terrain en juillet 2026 qui éloigne les activités sonorisées des résidences voisines.",
+    "L'ordonnance entre en vigueur le jour de la publication d'un avis dans Le Devoir."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.368Z",
+   "jetons": {
+    "entree": 6793,
+    "sortie": 524
+   }
+  },
+  {
+   "id": "1267768035",
+   "numero": "1267768035",
+   "resolution": "CA26 240351",
+   "date": "2026-09-01",
+   "unite": "Direction des services administratifs",
+   "objet": "Prendre acte du dépôt du rapport de suivi des questions écrites des citoyens posées aux membres du conseil d'arrondissement durant la période du 2 au 7 juillet 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=194",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Ville-Marie prend acte du dépôt du rapport de suivi des questions écrites posées par des citoyens du 2 au 7 juillet 2026.",
+    "Le rapport recense 7 questions, avec les réponses données par l'arrondissement (aucune décision nouvelle n'est prise).",
+    "Parmi les suivis : une modification de la signalisation est prévue rue de la Commune Ouest, devant l'immeuble Haleco, pour permettre l'arrêt temporaire (embarquement de passagers et livraisons).",
+    "Sur le projet résidentiel du 810, rue Saint-Antoine Est : la consultation publique du 19 août est maintenue à la date annoncée, malgré la demande de report.",
+    "Sur la rue Bercy entre Ontario et De Rouen : l'arrondissement maintient le changement de sens, qu'il justifie par la sécurité aux abords de l'école Saint-Anselme et la réduction du transit.",
+    "Sur l'itinérance au centre-ville, la Ville cite ses mesures en cours : groupe d'intervention tactique, médiation sociale, brigades de propreté et répartition des ressources sur le territoire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.368Z",
+   "jetons": {
+    "entree": 7540,
+    "sortie": 501
+   }
+  },
+  {
+   "id": "1265703011",
+   "numero": "1265703011",
+   "resolution": "CA26 240369",
+   "date": "2026-09-01",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Approuver des initiatives culturelles, autoriser l'occupation du domaine public et édicter les ordonnances du 5 septembre au 18 octobre 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=646",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie autorise l'occupation du domaine public (parcs, places, rues fermées) pour des initiatives culturelles du 5 septembre au 18 octobre 2026.",
+    "Le bruit d'appareils sonores à l'extérieur est permis aux sites et heures prévus, jusqu'à 80 dBA et 100 dBC (mesurés à 35 mètres); les mégaphones restent interdits sauf pour la sécurité.",
+    "La vente d'objets promotionnels, d'aliments et de boissons alcoolisées ou non est permise sur les sites des événements, de même que la consommation de ces boissons.",
+    "Il devient permis de peindre et de dessiner sur la chaussée, d'installer des fanions sur les lampadaires (à retirer après l'événement) et de distribuer des échantillons de commanditaires depuis des kiosques.",
+    "Les événements visés sont gratuits et ouverts à tous, dont le Grand Prix Cycliste de Montréal, le Festival Quartiers Danse et les Championnats du Monde Route UCI Montréal 2026.",
+    "Les coûts des services de la Ville sont absorbés par les budgets de fonctionnement existants; aucun montant précis n'est indiqué.",
+    "Les ordonnances entrent en vigueur le jour de la publication d'un avis dans Le Devoir."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.368Z",
+   "jetons": {
+    "entree": 7807,
+    "sortie": 557
+   }
+  },
+  {
+   "id": "CA26 240348",
+   "numero": null,
+   "resolution": "CA26 240348",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Réunion, pour étude et adoption, d’articles à l’ordre du jour",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-09-01_18h30_FR.pdf#page=3",
+   "source": "resolution",
+   "puces": [
+    "Le conseil regroupe les articles 10.05 à 10.10 de son ordre du jour pour les étudier et les adopter ensemble."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.368Z",
+   "jetons": {
+    "entree": 1620,
+    "sortie": 139
+   }
+  },
+  {
+   "id": "1269051001",
+   "numero": "1269051001",
+   "resolution": "CA26 240377",
+   "date": "2026-09-01",
+   "unite": "Direction des travaux publics",
+   "objet": "Édicter, en vertu du Règlement sur le civisme, le respect et la propreté (CA-24-085), une ordonnance afin de permettre les collectes privées de nuit sur l'ensemble du territoire de l'arrondissement de Ville-Marie du 19 au 27 septembre 2026 dans le cadre des Championnats du Monde Route UCI",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=736",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie autorise les collectes privées d'ordures la nuit, entre 23 h et 7 h, partout sur son territoire du 19 au 27 septembre 2026.",
+    "Cette permission est temporaire et liée aux Championnats du Monde Route UCI, qui se tiennent à Montréal durant ces dates.",
+    "En temps normal, ces collectes de nuit sont interdites, sauf dans les districts commerciaux des sociétés de développement commercial (SDC).",
+    "L'arrondissement invoque les entraves à la circulation et les contraintes opérationnelles prévues pendant l'événement.",
+    "Le but énoncé : maintenir les services aux commerces et immeubles et éviter l'accumulation de matières résiduelles.",
+    "L'ordonnance entre en vigueur le jour de la publication d'un avis dans Le Devoir et sera transmise au SPVM."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.368Z",
+   "jetons": {
+    "entree": 4353,
+    "sortie": 400
+   }
+  },
+  {
+   "id": "CA26 240361",
+   "numero": null,
+   "resolution": "CA26 240361",
+   "date": "2026-09-01",
+   "unite": null,
+   "objet": "Réunion, pour étude et adoption, d’articles à l’ordre du jour",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-09-01_18h30_FR.pdf#page=8",
+   "source": "resolution",
+   "puces": [
+    "Le conseil regroupe les articles 30.01 à 30.06 de son ordre du jour pour les étudier et les adopter ensemble."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.368Z",
+   "jetons": {
+    "entree": 1620,
+    "sortie": 139
+   }
+  },
+  {
+   "id": "1267135011",
+   "numero": "1267135011",
+   "resolution": "CA26 240354",
+   "date": "2026-09-01",
+   "unite": "Direction des services administratifs",
+   "objet": "Prendre acte du dépôt du certificat de la secrétaire d'arrondissement annonçant le résultat du registre tenu le 20 août 2026 relatif à la résolution CA26 240335 modifiant la résolution CA25 240095 et autorisant l'ajout d'étages au-delà des densité et surhauteur maximales prescrites",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=280",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Ville-Marie prend acte du certificat de la secrétaire d'arrondissement sur le registre tenu le 20 août 2026.",
+    "Ce registre portait sur le projet particulier du site Molson, qui autorise l'ajout d'étages au-delà de la densité et de la hauteur maximales permises.",
+    "Les zones 0062, 0083, 0093, 0097 et 0582 du district de Saint-Jacques étaient visées, avec 1188 personnes habiles à voter.",
+    "Il fallait 130 demandes pour déclencher un référendum; 77 ont été déposées.",
+    "La résolution est donc réputée approuvée et aucun scrutin référendaire n'aura lieu."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.368Z",
+   "jetons": {
+    "entree": 4771,
+    "sortie": 339
+   }
+  },
+  {
+   "id": "1264680009",
+   "numero": "1264680009",
+   "resolution": "CA26 240371",
+   "date": "2026-09-01",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Édicter, en vertu du Règlement sur l'exposition et la vente d'œuvres artisanales, picturales ou graphiques sur le domaine public (R.R.V.M. c. E-7.1), une ordonnance permettant de fixer diverses dates concernant les activités des demandeurs de permis d'artiste et d'artisan pour la saison 2027",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_ODJ_LPP_ORDI_2026-09-01_18h30_FR.pdf#page=679",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Ville-Marie fixe le calendrier 2027 des permis d'artistes et d'artisans qui exposent et vendent leurs œuvres sur le domaine public.",
+    "Inscriptions du 21 septembre au 2 octobre 2026 : en ligne pour les anciens détenteurs, en personne pour les nouveaux demandeurs.",
+    "Comités d'évaluation, au besoin, le 20 octobre 2026 pour les artisans et le 21 octobre 2026 pour les artistes.",
+    "Attribution des emplacements le 18 novembre 2026 à 10 h (artisans), le 19 novembre à 10 h (artistes exposants) et le 19 novembre à 13 h (portraitistes et caricaturistes), en personne ou par visioconférence.",
+    "Permis émis du 4 janvier au 1er mars 2027, au 800, boulevard De Maisonneuve Est.",
+    "Les permis visent les emplacements du Vieux-Montréal et de la rue Sainte-Catherine Ouest, au centre-ville.",
+    "Aucune dépense n'est rattachée au dossier; un avis sera publié dans Le Devoir."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-16T16:53:16.368Z",
+   "jetons": {
+    "entree": 8077,
+    "sortie": 490
    }
   },
   {
