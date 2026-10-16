@@ -226,8 +226,13 @@ async function translateBill(bill) {
     return { skipped: 'JSON invalide' };
   }
 
+  // Le modèle renvoie parfois les puces en LISTE plutôt qu'en texte : String(liste) les collait avec
+  // des virgules (« ….,- … »), et 35 résumés anglais s'affichaient en un seul bloc (16 oct. 2026).
+  const puces = (v) => (Array.isArray(v)
+    ? v.map((x) => String(x).trim()).filter(Boolean).map((x) => (x.startsWith('- ') ? x : '- ' + x)).join('\n')
+    : String(v ?? '').trim());
   bill.titleEn = (parsed.titleEn && String(parsed.titleEn).trim()) || bill.title;
-  bill.summaryEn = bill.summary ? ((parsed.summaryEn && String(parsed.summaryEn).trim()) || null) : null;
+  bill.summaryEn = bill.summary ? (puces(parsed.summaryEn) || null) : null;
   bill.noteEn = bill.note ? ((parsed.noteEn && String(parsed.noteEn).trim()) || null) : null;
   bill.enSource = source;
   return { translated: true };
