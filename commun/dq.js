@@ -151,7 +151,7 @@ const translations = {
     'h.personnes':"Qui gravite autour de l'Assemblée",
     'h.petitions':"Pétitions ouvertes à l'Assemblée nationale",
     'h.apropos':"D'où viennent ces données, et comment aller plus loin",
-    'ph.searchMinistres':"Nom, circonscription, région ou ministère…",
+    'ph.searchMinistres':"Nom, circonscription, ville, code postal…",
     'ph.searchBills':"Numéro, titre ou mot-clé…",
     // Voir la note du côté anglais : la bande « C'est quoi, challenger ? » change de deuxième
     // ligne pendant la dissolution. Le français a besoin de SA clé, sinon applyLanguage
@@ -195,7 +195,7 @@ const translations = {
     'h.personnes':"Who's involved around the Assembly",
     'h.petitions':"Petitions open at the National Assembly",
     'h.apropos':"Where this data comes from, and how to go further",
-    'ph.searchMinistres':"Name, riding, region, or ministry…",
+    'ph.searchMinistres':"Name, riding, town, postal code…",
     'ph.searchBills':"Number, title or keyword…",
     // Refonte brutaliste — heroes de vues et bandes explicatives
     'hero.l1':"Who sits,",
@@ -405,7 +405,7 @@ const translations = {
     'regles.1.h':"No invented data",
     'regles.1.p':"This is rule number one. If a piece of information is missing, the field stays empty or the site says so. We do not guess and we do not fill in.",
     'regles.2.h':"Primary sources only",
-    'regles.2.p':"We quote the institution or the party itself, never someone talking about it: the <b>National Assembly</b> and <b>Données Québec</b> for bills, votes and MNAs; the <b>cities</b> (decision portals, minutes) for municipal decisions; <b>Élections Québec</b> for election results; the <b>parties' official documents</b> (platform, commitments page, announcements on their website) for promises.",
+    'regles.2.p':"We quote the institution or the party itself, never someone talking about it: the <b>National Assembly</b> and <b>Données Québec</b> for bills, votes and MNAs; the <b>cities</b> (decision portals, minutes) for municipal decisions; <b>Élections Québec</b> for election results and to find the riding of a postal code or a municipality (© Directeur général des élections du Québec, reproduced for non-profit purposes); the <b>parties' official documents</b> (platform, commitments page, announcements on their website) for promises.",
     'regles.3.h':"No news media",
     'regles.3.p':"Nothing is taken from the Québec or Canadian press. News outlets have withdrawn their content from use by artificial intelligence, and our requests for permission went unanswered. A promise made at a press conference but never published by the party therefore does not appear on the site.",
     'regles.4.h':"We respect a website's refusal",
@@ -4034,6 +4034,80 @@ window.addEventListener('scroll', ()=>{
 
 document.getElementById('searchMinistres')?.addEventListener('input', e=> { renderMinistres(e.target.value); renderDeputes(e.target.value); retourRecherche(e.target.value); });
 
+// CODE POSTAL ET MUNICIPALITÉ → CIRCONSCRIPTION (Martin, 16 oct. 2026 : « oui bâtis-le »). Les
+// fichiers data/cp/ viennent d'Élections Québec (carte du 5 octobre 2026) ; seul le morceau du code
+// tapé est téléchargé, et rien de ce qui est tapé ne quitte le navigateur. Chaque circonscription
+// trouvée devient un bouton qui la met dans la boîte : la fiche de son élu·e s'affiche alors.
+const SOURCE_CP = { fr: 'Source : Élections Québec, « Entités administratives et code postal », carte de 2026. © Directeur général des élections du Québec.', en: 'Source: Élections Québec, “Entités administratives et code postal”, 2026 map. © Directeur général des élections du Québec.' };
+const _cpCache = new Map();
+async function lireCp(chemin){
+  if(!_cpCache.has(chemin)) _cpCache.set(chemin, fetch(chemin).then(r => r.ok ? r.json() : null).catch(() => null));
+  return _cpCache.get(chemin);
+}
+function boutonsCirconscriptions(circs, isEn){
+  return circs.map(c => {
+    const d = deputes.find(x => x.riding === c);
+    const qui = d ? ` — ${d.name} (${d.party})` : (isEn ? ' — not yet proclaimed' : ' — pas encore proclamé·e');
+    return `<button type="button" class="search-retour-nom" data-circ="${c.replace(/"/g, '&quot;')}">${c}${qui}</button>`;
+  }).join('');
+}
+function brancherCirconscriptions(boite){
+  boite.querySelectorAll('.search-retour-nom[data-circ]').forEach((b) => b.addEventListener('click', () => {
+    const champ = document.getElementById('searchMinistres');
+    champ.value = b.dataset.circ;
+    champ.dataset.depuisCirc = '1';   // clic sur une circonscription : pas de municipalité homonyme dessous
+    champ.dispatchEvent(new Event('input', { bubbles: true }));
+  }));
+}
+async function circonscriptionsParCode(cp, boite){
+  const isEn = currentLang === 'en';
+  const lot = await lireCp(`/data/cp/${cp.slice(0, 3)}.json`);
+  if(document.getElementById('searchMinistres').value.toUpperCase().replace(/\s+/g, '') !== cp) return;   // tapé autre chose entre-temps
+  let circs = [];
+  if(lot) circs = cp.length === 6 ? (lot.p[cp.slice(3)] || []).map(i => lot.c[i]) : lot.c;
+  if(!circs.length){
+    boite.innerHTML = isEn ? `No riding found for <b>${cp}</b>. Check the postal code.` : `Aucune circonscription trouvée pour <b>${cp}</b>. Vérifiez le code postal.`;
+    return;
+  }
+  const debut = cp.length === 6
+    ? (isEn ? `<b>${cp.slice(0, 3)} ${cp.slice(3)}</b> is in:` : `<b>${cp.slice(0, 3)} ${cp.slice(3)}</b> est dans :`)
+    : (isEn ? `Postal codes starting with <b>${cp}</b> are in ${circs.length > 1 ? 'these ridings (type the full code to narrow it down)' : 'this riding'}:` : `Les codes postaux qui commencent par <b>${cp}</b> sont dans ${circs.length > 1 ? 'ces circonscriptions (tapez le code complet pour préciser)' : 'cette circonscription'} :`);
+  boite.innerHTML = `${debut} ${boutonsCirconscriptions(circs, isEn)}${circs.length > 1 && cp.length === 6 ? (isEn ? '<br>This postal code straddles two ridings: the civic address decides.' : '<br>Ce code postal chevauche deux circonscriptions : c’est l’adresse qui tranche.') : ''}<small class="search-retour-source">${isEn ? SOURCE_CP.en : SOURCE_CP.fr}</small>`;
+  brancherCirconscriptions(boite);
+}
+// Une recherche qui trouve des fiches ET qui est le nom exact d'une municipalité (« Lévis » : une
+// circonscription, mais aussi une ville partagée entre trois) : la ville s'ajoute sous les fiches.
+async function ajouterMunicipalite(valeur, boite){
+  const champ = document.getElementById('searchMinistres');
+  if(champ.dataset.depuisCirc){ delete champ.dataset.depuisCirc; return; }
+  const munis = await lireCp('/data/cp/municipalites.json');
+  if(!munis || document.getElementById('searchMinistres').value !== valeur) return;
+  const m = Object.keys(munis).find(x => norm(x) === norm(valeur));
+  if(!m) return;
+  const isEn = currentLang === 'en', circs = munis[m];
+  boite.insertAdjacentHTML('beforeend', `<br>${isEn ? 'The municipality' : 'La municipalité'} <b>${m}</b>${circs.length > 1 ? (isEn ? ` is split into ${circs.length} ridings (type your postal code to find yours)` : ` est partagée entre ${circs.length} circonscriptions (tapez votre code postal pour trouver la vôtre)`) : ''} : ${boutonsCirconscriptions(circs, isEn)}<small class="search-retour-source">${isEn ? SOURCE_CP.en : SOURCE_CP.fr}</small>`);
+  brancherCirconscriptions(boite);
+}
+async function circonscriptionsParMunicipalite(valeur, boite){
+  const isEn = currentLang === 'en';
+  const munis = await lireCp('/data/cp/municipalites.json');
+  if(document.getElementById('searchMinistres').value !== valeur) return;
+  const v = norm(valeur);
+  const noms = munis ? Object.keys(munis) : [];
+  const trouves = noms.filter(m => norm(m) === v).concat(noms.filter(m => norm(m) !== v && norm(m).startsWith(v))).slice(0, 4);
+  if(!trouves.length){
+    boite.innerHTML = isEn
+      ? 'No name, riding, region, ministry or municipality matches. Looking for a neighbourhood? Type your postal code: the box will give your riding.'
+      : 'Aucun nom, circonscription, région, ministère ou municipalité ne correspond. Vous cherchez un quartier ? Tapez votre code postal : la boîte donnera votre circonscription.';
+    return;
+  }
+  boite.innerHTML = trouves.map(m => {
+    const circs = munis[m];
+    return `<b>${m}</b>${circs.length > 1 ? (isEn ? ` is split into ${circs.length} ridings (type your postal code to find yours)` : ` est partagée entre ${circs.length} circonscriptions (tapez votre code postal pour trouver la vôtre)`) : ''} : ${boutonsCirconscriptions(circs, isEn)}`;
+  }).join('<br>') + `<small class="search-retour-source">${isEn ? SOURCE_CP.en : SOURCE_CP.fr}</small>`;
+  brancherCirconscriptions(boite);
+}
+
 // LE RETOUR DE LA RECHERCHE (Martin, 16 oct. 2026 : « je marque Limoilou mais rien ne sort »). Les
 // fiches trouvées s'affichent plus bas, sous la composition et la légende : rien ne bougeait près de
 // la boîte. On liste ici les noms trouvés, chacun mène à sa fiche. Sans résultat, on le dit, et on
@@ -4045,6 +4119,11 @@ function retourRecherche(valeur){
   if(!norm(valeur)){ boite.hidden = true; boite.innerHTML = ''; return; }
   const fiches = [...document.querySelectorAll('#ministresGrid .m-card, #deputesList .dep-row')];
   boite.hidden = false;
+  // Un code postal (ou ses 3 premiers caractères), ou une municipalité : la circonscription,
+  // d'après le fichier d'Élections Québec (scripts/build-codes-postaux.js).
+  const cp = String(valeur).toUpperCase().replace(/\s+/g, '');
+  if(/^[GHJK]\d[A-Z](\d[A-Z]\d)?$/.test(cp)){ circonscriptionsParCode(cp, boite); return; }
+  if(!fiches.length && norm(valeur).length >= 3){ circonscriptionsParMunicipalite(valeur, boite); return; }
   if(!fiches.length){
     boite.innerHTML = isEn
       ? 'No name, riding, region or ministry matches. Looking for a neighbourhood or a town? <a href="https://www.electionsquebec.qc.ca/cartes-electorales/circonscriptions-provinciales/" target="_blank" rel="noopener">See the map of ridings on Élections Québec’s website</a>.'
@@ -4058,12 +4137,13 @@ function retourRecherche(valeur){
   }).join('');
   const reste = fiches.length > MAX ? (isEn ? ` and ${fiches.length - MAX} more below` : ` et ${fiches.length - MAX} autres plus bas`) : '';
   boite.innerHTML = `<b>${fiches.length} ${isEn ? (fiches.length > 1 ? 'results' : 'result') : (fiches.length > 1 ? 'résultats' : 'résultat')}</b> : ${noms}${reste}`;
-  boite.querySelectorAll('.search-retour-nom').forEach((b) => b.addEventListener('click', () => {
+  boite.querySelectorAll('.search-retour-nom[data-i]').forEach((b) => b.addEventListener('click', () => {
     const cible = fiches[Number(b.dataset.i)];
     cible.scrollIntoView({ behavior: 'smooth', block: 'center' });
     cible.classList.add('fiche-trouvee');
     setTimeout(() => cible.classList.remove('fiche-trouvee'), 2000);
   }));
+  ajouterMunicipalite(valeur, boite);
 }
 document.getElementById('searchBills')?.addEventListener('input', ()=> { billsShown = BILLS_STEP; renderBills(); });
 document.getElementById('searchVotes')?.addEventListener('input', ()=> { votesShown = 6; renderVotes(); });
