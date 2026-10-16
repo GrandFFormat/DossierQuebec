@@ -2147,3 +2147,7 @@
 .fiche-trouvee{outline:4px solid #FFD24D; outline-offset:2px;}
 .search-retour-source{display:block; margin-top:6px; font-size:12px; opacity:.8;}
 .search-retour-vide{display:inline-block; background:transparent; border-style:dashed; cursor:default;}
+
+/* Sur téléphone, la bande jaune de la dissolution remplissait tout le premier écran de l’accueil :
+   on ne voyait pas à quoi sert le site (Martin, 16 oct. 2026 : « tu peux l’enlever »). */
+@media (max-width:640px){ #band-dissolution{display:none;} }
