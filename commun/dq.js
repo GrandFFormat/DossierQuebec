@@ -726,11 +726,24 @@ function applyAssemblyState(){
   if(pSub) pSub.textContent = isEn
     ? 'No petition can be signed while the Assembly is dissolved'
     : 'Aucune pétition ne peut être signée pendant la dissolution de l\'Assemblée';
+  // LA LISTE DES ÉLU·E·S (16 oct. 2026). Après le scrutin, l'Assemblée remplace sa liste par les
+  // personnes proclamées élues, avant l'ouverture. On le reconnaît à l'absence de la CAQ, qui avait
+  // des sièges dans l'Assemblée sortante et n'en a aucun dans la nouvelle (Élections Québec).
+  const listeElus = ASSEMBLY.phase === 'entre-deux' && deputes.length > 0 && !deputes.some(d => d.party === 'CAQ');
   const h = document.querySelector('#deputesTitle h2');
-  if(h) h.textContent = isEn ? 'The outgoing Assembly' : 'L\'Assemblée sortante';
   const note = document.querySelector('#deputesTitle .head-note');
-  if(note) note.textContent = isEn ? 'All parties — 125 seats before dissolution' : 'Tous les partis — 125 sièges avant la dissolution';
   const box = document.getElementById('deputesInfoBox');
+  if(listeElus){
+    const n = deputes.length;
+    if(h) h.textContent = isEn ? 'Elected on October 5' : 'Les élu·e·s du 5 octobre';
+    if(note) note.textContent = isEn ? `${n} of 127 seats proclaimed` : `${n} sièges proclamés sur 127`;
+    if(box) box.textContent = isEn
+      ? 'List published by the National Assembly: the people proclaimed elected on October 5. They will sit when the new Assembly opens on November 17. The other seats are awaiting proclamation, notably where a judicial recount is under way. Attendance at votes will start again with the new legislature: the records of the 43rd do not apply to this list.'
+      : 'Liste publiée par l\'Assemblée nationale : les personnes proclamées élues le 5 octobre. Elles siégeront à l\'ouverture de la nouvelle Assemblée, le 17 novembre. Les autres sièges attendent leur proclamation, entre autres là où un dépouillement judiciaire est en cours. La présence aux votes reprendra avec la nouvelle législature : celle de la 43e ne s\'applique pas à cette liste.';
+    return;
+  }
+  if(h) h.textContent = isEn ? 'The outgoing Assembly' : 'L\'Assemblée sortante';
+  if(note) note.textContent = isEn ? 'All parties — 125 seats before dissolution' : 'Tous les partis — 125 sièges avant la dissolution';
   if(box) box.textContent = isEn
     ? 'The Assembly was dissolved on August 27, 2026: these 125 people are no longer members — they are the outgoing members of the 43rd legislature. The members elected on October 5 will appear here when the new Assembly opens on November 17. Their voting record below is the record of that legislature.'
     : 'L\'Assemblée a été dissoute le 27 août 2026 : ces 125 personnes ne sont plus députées — ce sont les sortant·e·s de la 43e législature. Les personnes élues le 5 octobre paraîtront ici à l\'ouverture de la nouvelle Assemblée, le 17 novembre. Leur bilan de votes ci-dessous reste celui de cette législature.';
