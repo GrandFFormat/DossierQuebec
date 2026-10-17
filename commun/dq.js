@@ -270,6 +270,7 @@ const translations = {
     'diss.h':"⚠️ The Assembly is dissolved — the election was held on October 5",
     'diss.p1':"On <b>August 27, 2026</b>, the National Assembly was dissolved and the 43rd legislature ended. The general election was held on <b>October 5</b>. The new Assembly is convened on <b>November 17, 2026</b>; until then, the government stays in place to handle current business.",
     'diss.p2':"Direct consequence: <b>every bill that had not been assented to died with it.</b> They will have to start over before the new Assembly, convened on <b>November 17, 2026</b>. What remains here is the full record of the 43rd legislature: the laws that passed, how each member voted, and the bills that did not make it.",
+    'diss.p3':"<em>We can't wait for these bills to come in either, la la!</em>",
     'diss.cta':"What the parties are promising →",
     'prom.l1':"What they promise,",
     'prom.l2':"what they'll do with it.",
