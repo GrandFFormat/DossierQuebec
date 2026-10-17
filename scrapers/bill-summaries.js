@@ -56,6 +56,7 @@ Lisibilité (impératif — le site existe pour ça) :
 - Un nom de loi ou d'organisme peut rester tel quel, mais la PREMIÈRE fois, dis en quelques mots à quoi il sert (« la Commission d'accès à l'information, qui protège les renseignements personnels »).
 - « personne physique » → « un particulier » ; « personne morale », ou « dans les autres cas » après une personne physique → « une entreprise ou un organisme ».
 - Simplifier n'est jamais ajouter : aucun qualificatif absent du texte (« grande » entreprise, « petit » commerce, « riche »…). Ex. : une amende « de 5 000 $ à 62 500 $ dans les autres cas » vise toute entreprise ou tout organisme, pas les grandes entreprises.
+- Les amendes : ne laisse tomber aucune personne visée (un jeune, un adulte, un commerçant, une entreprise…), chacune avec son montant. Elles peuvent prendre plusieurs puces, placées l'une à la suite de l'autre ; ne fusionne pas deux montants différents en un seul.
 - Une seule idée par puce. Si une phrase contient « et » deux fois, coupe-la en deux puces.
 
 Réponds uniquement avec les puces, sans préambule.`;
