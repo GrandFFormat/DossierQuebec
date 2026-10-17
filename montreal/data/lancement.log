@@ -2,7 +2,7 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 3684d4b — Node v22.23.3
+Code : commit 142bb19 — Node v22.23.3
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -13,7 +13,7 @@ https://donnees.montreal.ca/robots.txt : règles sur nos chemins : disallow /dat
 https://montreal.ca/robots.txt : rien qui concerne nos chemins
 
 === Calendrier des séances ===
-Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-10-15T23:30:47.210210)
+Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-10-16T23:30:50.684115)
 Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_video_seance
 71 séance(s) de 2026 lue(s) dans le calendrier.
 
@@ -65,7 +65,6 @@ CM_2026-05-12_09h00 : procès-verbal non publié — pas un PDF — page « 404 
 CM_2026-02-17_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CM_2026-01-27_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Ver_2026-04-07_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Vma_2026-09-01_18h30 : 22 pages, 41 résolutions, 91 points à l'ordre du jour, 34 liens vers un sommaire, 34 sommaires annexés à l'ordre du jour
 CA_Rpp_2026-09-08_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Las_2026-09-14_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Ahu_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -85,8 +84,8 @@ CA_Ver_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 
 CA_Vsm_2026-10-06_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Vma_2026-10-13_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 
-7030 décisions écrites dans data/decisions.json — 1 séance(s) lue(s) cette fois, 31 en attente de procès-verbal.
-43 nouveauté(s) depuis la dernière exécution.
+7030 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 31 en attente de procès-verbal.
+0 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
    1238  Procédure
@@ -108,8 +107,8 @@ Pastilles thématiques :
      98  Ressources humaines
     228  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes enregistrés (depuis 2026-08-17) ===
-Fenêtre depuis 2026-08-17 : 5 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
+=== Votes enregistrés (depuis 2026-08-18) ===
+Fenêtre depuis 2026-08-18 : 5 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
 
 15 votes enregistrés écrits dans data/votes.json (5 procès-verbaux analysés).
 2 portent un avertissement d'extraction (à vérifier à la main).
@@ -155,17 +154,17 @@ Mesure de 33 termes sur 169 procès-verbaux de 2026 en cache et 7030 décisions�
 
 === Récapitulatifs des sujets suivables ===
 Récapitulatifs des sujets : parcs (33 dossiers), pietonnisation (23 dossiers)
-  parcs                    3 étape(s), 7 à surveiller · retirés : 0 mécanique, 4 contre-lecture
-  pietonnisation           4 étape(s), 5 à surveiller · retirés : 0 mécanique, 2 contre-lecture
-  coût ≈ 1.04 $ US
+  parcs                    3 étape(s), 9 à surveiller · retirés : 1 mécanique, 4 contre-lecture
+  pietonnisation           5 étape(s), 4 à surveiller · retirés : 0 mécanique, 1 contre-lecture
+  coût ≈ 1.02 $ US
 
 === Sujets suivables et dossiers, pour Mes dossiers ===
-Projets publics : 16 sujets · index 16.9 Ko · fichiers de sujet 853 Ko au total.
+Projets publics : 16 sujets · index 17.4 Ko · fichiers de sujet 854 Ko au total.
 Décisions récentes : 769 dossiers depuis le 2026-08-22 · 1212 Ko.
 Dossiers de l'année : 5489 · 3219 Ko · organismes suggérés : 533.
 
 === Sujets suivables en anglais ===
-Sujets en anglais : 0 déjà traduits, 16 à faire — ~0.24 $ US estimés.
+Sujets en anglais : 0 déjà traduits, 16 à faire — ~0.25 $ US estimés.
 Sujets en anglais : 14 traduits (2 refusés), 14 au total — 0.28 $ US.
   ⚠ logement : nombres différents : 2025,2026,2026,2026,2026,2026,260024,260114,393,5200,541,6056 ≠ 2025,2026,2026,2026,20262026,260024,260114,393,5200,541,6056
   ⚠ matieres-residuelles : nombres différents : 2020,2025,2025,2025,2026,2027,29,31,415,48,49 ≠ 2020,2025,2025,20262025,2027,29,31,415,48,49
@@ -174,175 +173,18 @@ Sujets en anglais : 14 traduits (2 refusés), 14 au total — 0.28 $ US.
 Lexique anglais : à jour.
 
 === Traductions anglaises ===
-Résumés : 3753 déjà traduits, 652 à faire, 652 cette fois.
+Résumés : 3753 déjà traduits, 679 à faire, 679 cette fois.
 Titres  : 6078 déjà traduits, 545 à faire, 545 cette fois en 28 paquet(s).
 Étiquettes : 1121 déjà traduites, 125 à faire en 5 paquet(s).
-~1.92 $ US estimés (lot, moitié prix).
-Lot msgbatch_01KofmnkS1mnn3boe61gkETV envoyé (652 résumés, 28 paquets de titres, 5 paquets d'étiquettes).
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  in_progress — 0 réussis, 685 en cours, 0 en erreur
-  ended — 685 réussis, 0 en cours, 0 en erreur
+~1.99 $ US estimés (lot, moitié prix).
+Lot msgbatch_01VmNz8Yyz2fBFyJBG7e8y5Z envoyé (679 résumés, 28 paquets de titres, 5 paquets d'étiquettes).
+  in_progress — 0 réussis, 712 en cours, 0 en erreur
+  in_progress — 0 réussis, 712 en cours, 0 en erreur
+  in_progress — 0 réussis, 712 en cours, 0 en erreur
+  in_progress — 0 réussis, 712 en cours, 0 en erreur
+  in_progress — 0 réussis, 712 en cours, 0 en erreur
+  in_progress — 0 réussis, 712 en cours, 0 en erreur
+  ended — 712 réussis, 0 en cours, 0 en erreur
 file:///home/runner/work/DossierQuebec/DossierQuebec/montreal/scrapers/traductions.js:175
   const puces = (sortie?.puces ?? []).map(decoder).map((p) => String(p).trim());
                                       ^
@@ -358,175 +200,14 @@ Node.js v22.23.3
 ⚠ « Traductions anglaises » a échoué (code 1) — on garde les données précédentes, ça attendra.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-08-17 pas encore résumés (plafond : 120)…
-8625 déjà résumés, 38 à faire.
-
---- Estimation ---
-Documents à résumer  : 38
-Modèle               : claude-opus-5
-Ratio mesuré         : 1.72 caractères/jeton (sur 12 documents)
-Jetons d'entrée      : ~216 731
-Jetons de sortie     : ~12 160
-Coût estimé          : ~1.39 $ US (0.69 $ via l'API Batches)
-
-Génération…
-Envoi à l'API Batches (50 % du tarif, résultats en moins d'une heure en général)…
-Lot msgbatch_01Q1YUGZAJmfkDzvYvUJHp1q — statut in_progress
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  in_progress — 0 réussis, 38 en cours, 0 en erreur
-  ended — 38 réussis, 0 en cours, 0 en erreur
-
-38 résumés générés, 8663 au total dans data/resumes.json
-Coût réel : 0.78 $ US
+Sommaires depuis 2026-08-18 pas encore résumés (plafond : 120)…
+8663 déjà résumés, 0 à faire.
+Rien à générer. (--force pour tout regénérer.)
 
 === Décisions récentes dans la page (Google) ===
 montreal : 30 décisions écrites dans la page des décisions (inchangé).
 
 === Courriels de Montréal publiés ===
---seance=2026-09-01 --instance=ville-marie → Publié : ville-marie-2026-09-01. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
 --mois=2026-09 → Déjà publié : 2026-09. Rien à faire.
 
 === Bilan ===
