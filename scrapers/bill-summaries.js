@@ -45,7 +45,20 @@ Règles de fond :
 - Priorise les changements concrets qui affectent les gens (chiffres, obligations, interdictions, nouveaux organismes) plutôt que le jargon juridique.
 - Si le texte est trop technique ou tronqué pour permettre un résumé fiable, dis-le en une seule ligne plutôt que d'inventer.
 
+Lisibilité (impératif — le site existe pour ça) :
+- Écris pour quelqu'un qui lit au niveau de la fin du primaire ou du début du secondaire. Phrases de 20 mots au plus. Mots de tous les jours.
+- Dis d'abord QUI est touché et CE QUI CHANGE pour cette personne ou cette organisation, puis les chiffres.
+- Aucune puce de procédure : ne dis pas qui a présenté le projet, quand, ni à quelle étape il est.
+- Remplace le jargon par des mots courants. Exemples à appliquer :
+  « par règlement » → « par une règle du gouvernement, sans nouveau vote à l'Assemblée » ; « le gouvernement » (le Conseil des ministres) plutôt que « le gouvernement en conseil » ;
+  « édicte la Loi sur X » → « crée une nouvelle loi, la Loi sur X » ; « abroge » → « supprime » ; « disposition » → « règle » ;
+  « entrée en vigueur » → « s'applique à partir de » ; « annexe » → « liste officielle » ; « assujetti » → « soumis » ; « municipalité régionale de comté » → « MRC (le regroupement des municipalités d'une région) ».
+- Un nom de loi ou d'organisme peut rester tel quel, mais la PREMIÈRE fois, dis en quelques mots à quoi il sert (« la Commission d'accès à l'information, qui protège les renseignements personnels »).
+- Une seule idée par puce. Si une phrase contient « et » deux fois, coupe-la en deux puces.
+
 Réponds uniquement avec les puces, sans préambule.`;
+// La lisibilité ci-dessus vient de DossierCanada (16 oct. 2026) : Martin, 17 oct. : « les
+// prochains projets de loi vont s'écrire de cette façon ». Les résumés existants restent tels quels.
 
 const client = new Anthropic();
 
@@ -96,13 +109,17 @@ export function analyserTexteLoi(brut, titre) {
   return { lois: uniques, notes, omnibus: (annonce && uniques.length >= 3) || uniques.length >= SEUIL_OMNIBUS };
 }
 
+// Le texte entre balises, puis la consigne répétée après lui : sur DossierCanada, un long texte
+// de loi coupé au milieu d'une énumération était CONTINUÉ par le modèle au lieu d'être résumé.
+const FIN_DU_TEXTE = 'Fin du texte officiel. Rédige maintenant le résumé selon les consignes : seulement les puces « - ».';
+
 async function summarizeText(title, text) {
   const truncated = text.length > MAX_PDF_CHARS;
   const clipped = truncated ? text.slice(0, MAX_PDF_CHARS) : text;
 
   const userContent = truncated
-    ? `Titre : ${title}\n\n[Texte tronqué aux ${MAX_PDF_CHARS} premiers caractères — le projet de loi est plus long que ça]\n\n${clipped}`
-    : `Titre : ${title}\n\n${clipped}`;
+    ? `Titre : ${title}\n\n[Texte tronqué aux ${MAX_PDF_CHARS} premiers caractères — le projet de loi est plus long que ça]\n\n<texte_officiel>\n${clipped}\n</texte_officiel>\n\n${FIN_DU_TEXTE}`
+    : `Titre : ${title}\n\n<texte_officiel>\n${clipped}\n</texte_officiel>\n\n${FIN_DU_TEXTE}`;
 
   const response = await client.messages.create({
     model: MODEL,
@@ -134,7 +151,7 @@ const SYSTEM_OMNIBUS = SYSTEM_PROMPT
 - Pas de phrase d'intro ni de conclusion — seulement les puces.`);
 
 async function summarizeFromNotes(title, notes, lois, omnibus) {
-  const userContent = `Titre : ${title}\n\n[Projet de loi qui touche ${lois.length} lois ou règlements. Tu reçois ses NOTES EXPLICATIVES officielles, qui décrivent tout le projet, et la liste des textes touchés. Couvre l'ensemble du projet, pas seulement son sujet principal : si le titre n'annonce qu'une partie, les puces doivent aussi dire le reste.]\n\nNOTES EXPLICATIVES :\n${notes.slice(0, MAX_PDF_CHARS)}\n\nTEXTES TOUCHÉS :\n${lois.map((l) => `- ${l}`).join('\n')}`;
+  const userContent = `Titre : ${title}\n\n[Projet de loi qui touche ${lois.length} lois ou règlements. Tu reçois ses NOTES EXPLICATIVES officielles, qui décrivent tout le projet, et la liste des textes touchés. Couvre l'ensemble du projet, pas seulement son sujet principal : si le titre n'annonce qu'une partie, les puces doivent aussi dire le reste.]\n\nNOTES EXPLICATIVES :\n${notes.slice(0, MAX_PDF_CHARS)}\n\nTEXTES TOUCHÉS :\n${lois.map((l) => `- ${l}`).join('\n')}\n\n${FIN_DU_TEXTE}`;
   const response = await client.messages.create({
     model: MODEL,
     max_tokens: omnibus ? 3000 : 700,
@@ -189,7 +206,7 @@ async function summarizeBill(bill) {
 // par IA en français. On les traduit vers l'anglais pour l'affichage bilingue.
 // Incrémental : on ne (re)traduit un projet que si son contenu source a changé
 // (signature enSource), donc pas de coût ni de churn quotidien inutile.
-const TRANSLATE_SYSTEM = `You are a professional French-to-English translator for an independent, non-partisan citizen watchdog site about Québec's National Assembly. Translate faithfully, neutrally and into clear, natural Canadian English. Do NOT add, omit, interpret or editorialize. If the source has bullet lines starting with "- ", keep exactly the same bullets, one idea per line, same order. Return ONLY valid JSON (no code fence, no preamble).`;
+const TRANSLATE_SYSTEM = `You are a professional French-to-English translator for an independent, non-partisan citizen watchdog site about Québec's National Assembly. Translate faithfully, neutrally and into clear, natural Canadian English. Do NOT add, omit, interpret or editorialize. Keep the plain, everyday wording of the source: short sentences, no legal jargon (e.g. "the Québec Cabinet" rather than "the Government in council", "creates" rather than "enacts", "removes" rather than "repeals", "rule" rather than "provision"). If the source has bullet lines starting with "- ", keep exactly the same bullets, one idea per line, same order, in ONE string with the bullets separated by line breaks (never a JSON array). Return ONLY valid JSON (no code fence, no preamble).`;
 
 function enSignature(bill) {
   return `${bill.title || ''}${bill.summary || ''}${bill.note || ''}`;
