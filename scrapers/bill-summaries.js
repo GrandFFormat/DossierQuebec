@@ -33,7 +33,7 @@ const MODEL = 'claude-sonnet-5';
 const SYSTEM_PROMPT = `Tu résumes des projets de loi de l'Assemblée nationale du Québec pour un site citoyen indépendant de veille parlementaire, pensé pour des lecteurs pressés ou ayant de la difficulté à lire de longs blocs de texte.
 
 Format obligatoire :
-- JAMAIS plus de 10 puces (« - »), peu importe la complexité du projet de loi. Si le texte contient plus de 10 changements importants, garde seulement les 10 plus significatifs pour le public et laisse tomber le reste.
+- Pas de plafond fixe de puces (« - »), mais seulement les GRANDES LIGNES : ce qu'un citoyen doit savoir pour comprendre le projet. Vise 5 à 10 puces ; au-delà de 12, c'est que tu détailles trop. Laisse tomber : les pouvoirs des inspecteurs, la récidive, les moyens de défense, les dates d'entrée en vigueur, les exceptions mineures, les ajustements de concordance, les définitions sauf si elles changent qui est touché.
 - Minimum 3 puces.
 - Chaque ligne = une seule idée concrète, en langage simple, une quinzaine de mots maximum.
 - Pas de phrase d'intro ni de conclusion — seulement les puces.
@@ -56,7 +56,7 @@ Lisibilité (impératif — le site existe pour ça) :
 - Un nom de loi ou d'organisme peut rester tel quel, mais la PREMIÈRE fois, dis en quelques mots à quoi il sert (« la Commission d'accès à l'information, qui protège les renseignements personnels »).
 - « personne physique » → « un particulier » ; « personne morale », ou « dans les autres cas » après une personne physique → « une entreprise ou un organisme ».
 - Simplifier n'est jamais ajouter : aucun qualificatif absent du texte (« grande » entreprise, « petit » commerce, « riche »…). Ex. : une amende « de 5 000 $ à 62 500 $ dans les autres cas » vise toute entreprise ou tout organisme, pas les grandes entreprises.
-- Les amendes : ne laisse tomber aucune personne visée (un jeune, un adulte, un commerçant, une entreprise…), chacune avec son montant. Elles peuvent prendre plusieurs puces, placées l'une à la suite de l'autre ; ne fusionne pas deux montants différents en un seul.
+- Les amendes : UNE puce, deux au plus, qui nomme chaque personne visée avec son montant (« Amendes : 100 $ pour un jeune, 500 $ à 1 500 $ pour un adulte, 2 500 $ à 62 500 $ pour un commerce »). N'en laisse tomber aucune. La récidive et l'entrave à un inspecteur ne méritent pas de puce à part.
 - Une seule idée par puce. Si une phrase contient « et » deux fois, coupe-la en deux puces.
 
 Réponds uniquement avec les puces, sans préambule.`;
@@ -126,7 +126,7 @@ async function summarizeText(title, text) {
 
   const response = await client.messages.create({
     model: MODEL,
-    max_tokens: 900,   // 10 puces au plus (Martin, 17 oct. 2026)
+    max_tokens: 2000,   // sans plafond de puces, les grandes lignes seulement (Martin, 17 oct. 2026)
     thinking: { type: 'disabled' },
     output_config: { effort: 'low' },
     system: SYSTEM_PROMPT,
@@ -141,7 +141,7 @@ async function summarizeText(title, text) {
 // qui couvrent tout le projet, avec la liste officielle des lois touchées.
 const doitPartirDesNotes = (bill, longueur) => (bill.omnibus || longueur > MAX_PDF_CHARS);
 
-// Un omnibus n'a PAS le plafond de 10 puces (Martin, 25 sept. 2026 : « sur ON, les omnibus, on
+// Un omnibus n'a PAS de plafond de puces (Martin, 25 sept. 2026 : « sur ON, les omnibus, on
 // met les annexes et on étend le texte passé 10 lignes ») : un aperçu, puis les changements
 // regroupés par loi touchée. Chaque puce reste une ligne « - » : l'affichage n'a rien à apprendre.
 const SYSTEM_OMNIBUS = SYSTEM_PROMPT
@@ -157,7 +157,7 @@ async function summarizeFromNotes(title, notes, lois, omnibus) {
   const userContent = `Titre : ${title}\n\n[Projet de loi qui touche ${lois.length} lois ou règlements. Tu reçois ses NOTES EXPLICATIVES officielles, qui décrivent tout le projet, et la liste des textes touchés. Couvre l'ensemble du projet, pas seulement son sujet principal : si le titre n'annonce qu'une partie, les puces doivent aussi dire le reste.]\n\nNOTES EXPLICATIVES :\n${notes.slice(0, MAX_PDF_CHARS)}\n\nTEXTES TOUCHÉS :\n${lois.map((l) => `- ${l}`).join('\n')}\n\n${FIN_DU_TEXTE}`;
   const response = await client.messages.create({
     model: MODEL,
-    max_tokens: omnibus ? 3000 : 900,
+    max_tokens: omnibus ? 3000 : 2000,
     thinking: { type: 'disabled' },
     output_config: { effort: 'low' },
     system: omnibus ? SYSTEM_OMNIBUS : SYSTEM_PROMPT,
@@ -230,7 +230,7 @@ async function translateBill(bill) {
   const response = await client.messages.create({
     model: MODEL,
     // Un résumé d'omnibus peut compter une trentaine de puces : 700 jetons le coupaient.
-    max_tokens: bill.omnibus ? 3500 : 900,
+    max_tokens: bill.omnibus ? 3500 : 2000,
     thinking: { type: 'disabled' },
     output_config: { effort: 'low' },
     system: TRANSLATE_SYSTEM,
