@@ -3409,7 +3409,7 @@ function copierLien(texte, evt, isEn){
 // LE BOUTON CAFÉ sous « Partager » (Martin, 18 oct. 2026) : bleu poudre, vers le même lien de don
 // que les volets de Québec et de Montréal. Seulement sur les projets de la 44e législature et des
 // suivantes : il apparaît tout seul avec les premiers projets de la nouvelle Assemblée.
-// Les libellés défilent DANS L'ORDRE, un projet après l'autre (« je veux pas que le client voie
+// Les libellés défilent un projet après l'autre, sans répétition (« je veux pas que le client voie
 // Appuyez-nous, Appuyez-nous, Appuyez-nous à chaque PL ») : renderBills remet le compteur à zéro,
 // chaque bouton affiché prend le libellé suivant.
 const LIEN_CAFE = 'https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00';
@@ -3433,10 +3433,14 @@ const LIBELLES_CAFE = [
   ['Latté ou espresso ?', 'Latte or espresso?'],
   ['Un double, peut-être ?', 'A double, maybe?'],
 ];
+// Mélangés une fois par chargement de page (Martin : « un shuffle à chaque fois ») : l'ordre change
+// d'une visite à l'autre, mais reste le même quand la liste se redessine, et jamais deux pareils de suite.
+const ORDRE_CAFE = LIBELLES_CAFE.map((_, i) => i);
+for(let i = ORDRE_CAFE.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [ORDRE_CAFE[i], ORDRE_CAFE[j]] = [ORDRE_CAFE[j], ORDRE_CAFE[i]]; }
 let _rangCafe = 0;
 function boutonCafe(b, isEn){
   if(!(Number(b.legislature) >= 44)) return '';
-  const [fr, en] = LIBELLES_CAFE[_rangCafe++ % LIBELLES_CAFE.length];
+  const [fr, en] = LIBELLES_CAFE[ORDRE_CAFE[_rangCafe++ % ORDRE_CAFE.length]];
   return `<div class="bill-cafe-row"><a class="bill-cafe-btn" href="${LIEN_CAFE}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="${isEn ? 'Buy us a coffee (opens in a new tab)' : 'Offrez-nous un café (s’ouvre dans un nouvel onglet)'}">☕ ${isEn ? en : fr}</a></div>`;
 }
 
