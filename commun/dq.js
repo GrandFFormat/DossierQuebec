@@ -381,9 +381,9 @@ const translations = {
     'lp.nd':"<b>n/a</b>: no recorded vote for this person.",
     'lp.officiel':"This is not an official measure: the Assembly does not publish attendance, and a missed vote does not tell why.",
     'promo.sur':"Free account",
-    'promo.h':"Follow the bills that matter to you",
-    'promo.p':"A free account, no password: follow up to 3 bills or city projects, and find them in My file, with their current stage.",
-    'promo.diss':"The bills of the 43rd legislature died when the Assembly was dissolved on August 27: following will resume with the first bills of the new legislature, convened on November 17, 2026.",
+    'promo.h':"Follow your city's projects",
+    'promo.p':"A free account, no password: follow up to 3 city projects, in Québec City or Montréal, and find their decisions in My file.",
+    'promo.diss':"Following bills and elected members is on hold. It will come back soon with the tools for subscribers.",
     'promo.compte.h':"Your account",
     'promo.mesdossiers':"My file →",
     'footer.villes':"Cities:",
@@ -1499,8 +1499,21 @@ async function mdEnvoyerLien(){
   note.textContent = isEn ? `Check your inbox (${email}).` : `Vérifiez vos courriels (${email}).`;
 }
 
+// LE SUIVI DES PROJETS DE LOI ET DES ÉLUS EN PAUSE (Martin, 18 oct. 2026 : il ira derrière
+// l'abonnement — « tu peux les disable pour l'instant »). Les boutons « Suivre » disparaissent des
+// fiches, et Mon dossier dit que c'est en pause. Rien n'est effacé : les suivis déjà faits restent
+// dans les comptes et reviendront tels quels. Pour rouvrir : SUIVI_LOIS_ELUS = true.
+const SUIVI_LOIS_ELUS = false;
+const avisSuiviEnPause = (isEn) => isEn
+  ? 'Following bills and elected members is on hold. It will come back soon with the tools for subscribers; what you already follow is kept.'
+  : 'Le suivi des projets de loi et des élus est en pause. Il reviendra bientôt avec les outils pour abonnés ; ce que vous suivez déjà est conservé.';
+
 function mdLois(isEn, quota){
   const zone = document.getElementById('mdLois');
+  if(zone && !SUIVI_LOIS_ELUS){
+    zone.innerHTML = `<div class="md-carte"><div class="md-carte-tete"><h2>${isEn ? 'Bills you follow' : 'Projets de loi suivis'}</h2></div><p>${avisSuiviEnPause(isEn)}</p></div>`;
+    return;
+  }
   const ids = Object.keys(followedBills).filter((id) => followedBills[id]);
   // Le plafond est commun à tout ce qu'on suit : il est affiché une seule fois, dans la carte du
   // compte. Ici, juste le nombre de projets de loi.
@@ -1545,6 +1558,10 @@ async function mdRetirerLoi(id){
 
 function mdElus(isEn){
   const zone = document.getElementById('mdElus');
+  if(zone && !SUIVI_LOIS_ELUS){
+    zone.innerHTML = `<div class="md-carte"><div class="md-carte-tete"><h2>${isEn ? 'Members you follow' : 'Élus suivis'}</h2></div><p>${avisSuiviEnPause(isEn)}</p></div>`;
+    return;
+  }
   const ministres = Object.keys(followed).filter((n) => followed[n]);
   const deps = Object.keys(followedDeputes).filter((k) => followedDeputes[k]);
   const ligne = (nom, sous, onclick) => `<li class="md-ligne-elu"><div><b>${mdH(nom)}</b>${sous ? `<div class="md-note">${mdH(sous)}</div>` : ''}</div>
@@ -2343,7 +2360,7 @@ function renderDeputes(filter){
             <div class="dep-att">${attNote}</div>
           </div>
           <div class="dep-actions">${finBouton(d.name)}
-          <button class="follow-btn dep-follow ${isFollowed?'on':''}" onclick="toggleFollowDepute('${followKey.replace(/'/g,"\\'")}')">${isFollowed ? t('btn.following') : t('btn.follow')}</button></div>
+          ${SUIVI_LOIS_ELUS ? `<button class="follow-btn dep-follow ${isFollowed?'on':''}" onclick="toggleFollowDepute('${followKey.replace(/'/g,"\\'")}')">${isFollowed ? t('btn.following') : t('btn.follow')}</button>` : ''}</div>
         </div>`;
       }).join('')}`;
     }).join('')}
@@ -2400,7 +2417,7 @@ function personCard(p){
         <div class="m-top-row">
           <span class="depute-party" style="background:${partyColors[party]}; color:${partyText(party)}">${party}</span>
           ${finBouton(name)}
-          <button class="follow-btn ${isFollowed?'on':''}" onclick="${followOnclick}">${isFollowed ? t('btn.following') : t('btn.follow')}</button>
+          ${SUIVI_LOIS_ELUS ? `<button class="follow-btn ${isFollowed?'on':''}" onclick="${followOnclick}">${isFollowed ? t('btn.following') : t('btn.follow')}</button>` : ''}
         </div>
         <div class="m-name">${name}</div>
         <div class="m-portfolio">${subtitle}</div>
@@ -2803,7 +2820,7 @@ function billCard(b, ctx){
   // réactivé, auquel cas la personne qui le suit voudra être avertie. Caché aussi
   // pendant une dissolution : tout projet non sanctionné est mort au feuilleton,
   // le suivre promettrait une alerte qui ne viendra jamais.
-  const canFollow = loiVivante(b) && (b.status === 'encours' || b.status === 'laisse_de_cote');
+  const canFollow = SUIVI_LOIS_ELUS && loiVivante(b) && (b.status === 'encours' || b.status === 'laisse_de_cote');
   const followBtnId = 'suivre-' + ctx + '-' + b.id;
   const followRow = !canFollow ? '' : `<div class="bill-follow-row">
       <span class="follow-hint">${!currentUser
@@ -4346,7 +4363,8 @@ try{ if(!new URLSearchParams(location.search).get('ville')) localStorage.setItem
   // L'encadré de l'abonnement : sa phrase « le suivi commencera avec la nouvelle législature »
   // tombe quand un projet de loi suivable existe VRAIMENT dans les données (loiVivante), pas à une
   // date : le 17 nov., dissolved=false ne suffit pas, il faut le premier projet de la 44e.
-  for(const d of document.querySelectorAll('.promo-dissolution')) d.hidden = bills.some(loiVivante);
+  // Tant que le suivi est en pause (SUIVI_LOIS_ELUS), la phrase dit la pause et reste affichée.
+  for(const d of document.querySelectorAll('.promo-dissolution')) d.hidden = SUIVI_LOIS_ELUS && bills.some(loiVivante);
   await loadFollowed();
   await loadIntroState();
   await loadFontZoom();
