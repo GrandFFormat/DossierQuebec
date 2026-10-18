@@ -1,0 +1,894 @@
+{
+ "source": "https://www.assnat.qc.ca/fr/deputes/index.html",
+ "note": "Nom et parti de chaque élu·e déjà vu dans la liste de l’Assemblée, par son numéro (assnatId). Jamais vidé : sert à nommer les ancien·ne·s élu·e·s dans les votes archivés (scrapers/build-frontend-data.js).",
+ "elus": {
+  "11": {
+   "name": "François Bonnardel",
+   "party": "CAQ"
+  },
+  "13": {
+   "name": "Daniel Bernard",
+   "party": "CAQ"
+  },
+  "195": {
+   "name": "Benoit Charette",
+   "party": "CAQ"
+  },
+  "209": {
+   "name": "Bernard Drainville",
+   "party": "CAQ"
+  },
+  "485": {
+   "name": "Éric Caire",
+   "party": "CAQ"
+  },
+  "991": {
+   "name": "Pascal Bérubé",
+   "party": "PQ"
+  },
+  "1171": {
+   "name": "Filomena Rotiroti",
+   "party": "PLQ"
+  },
+  "1253": {
+   "name": "Nicolas Girard",
+   "party": "PQ"
+  },
+  "4131": {
+   "name": "François Legault",
+   "party": "CAQ"
+  },
+  "5369": {
+   "name": "Jean-François Simard",
+   "party": "CAQ"
+  },
+  "5845": {
+   "name": "Elsie Lefebvre",
+   "party": "PQ"
+  },
+  "5909": {
+   "name": "Sébastien Schneeberger",
+   "party": "CAQ"
+  },
+  "7289": {
+   "name": "Nicolas Marceau",
+   "party": "PQ"
+  },
+  "11789": {
+   "name": "Marc Tanguay",
+   "party": "PLQ"
+  },
+  "12165": {
+   "name": "Donald Martel",
+   "party": "CAQ"
+  },
+  "12187": {
+   "name": "Nathalie Roy",
+   "party": "CAQ"
+  },
+  "12189": {
+   "name": "Alain Therrien",
+   "party": "PQ"
+  },
+  "12213": {
+   "name": "Sylvain Lévesque",
+   "party": "CAQ"
+  },
+  "12223": {
+   "name": "Christian Dubé",
+   "party": "IND"
+  },
+  "15357": {
+   "name": "Mario Laframboise",
+   "party": "CAQ"
+  },
+  "15359": {
+   "name": "Simon Jolin-Barrette",
+   "party": "CAQ"
+  },
+  "15361": {
+   "name": "Jean-François Roberge",
+   "party": "CAQ"
+  },
+  "15367": {
+   "name": "Caroline Simard",
+   "party": "PCQ"
+  },
+  "15383": {
+   "name": "André Fortin",
+   "party": "PLQ"
+  },
+  "15399": {
+   "name": "Sylvie D'Amours",
+   "party": "CAQ"
+  },
+  "15401": {
+   "name": "André Lamontagne",
+   "party": "CAQ"
+  },
+  "15403": {
+   "name": "Mathieu Lemay",
+   "party": "CAQ"
+  },
+  "15417": {
+   "name": "Chantal Soucy",
+   "party": "CAQ"
+  },
+  "15421": {
+   "name": "Manon Massé",
+   "party": "QS"
+  },
+  "15439": {
+   "name": "Marie-Claude Nichols",
+   "party": "PLQ"
+  },
+  "16827": {
+   "name": "Gabriel Nadeau-Dubois",
+   "party": "QS"
+  },
+  "16885": {
+   "name": "Geneviève Guilbault",
+   "party": "CAQ"
+  },
+  "17823": {
+   "name": "Pierre Dufour",
+   "party": "IND"
+  },
+  "17825": {
+   "name": "Suzanne Blais",
+   "party": "CAQ"
+  },
+  "17827": {
+   "name": "Agnès Grondin",
+   "party": "CAQ"
+  },
+  "17829": {
+   "name": "Luc Provençal",
+   "party": "CAQ"
+  },
+  "17831": {
+   "name": "Samuel Poulin",
+   "party": "CAQ"
+  },
+  "17833": {
+   "name": "Claude Reid",
+   "party": "CAQ"
+  },
+  "17835": {
+   "name": "Stéphanie Lachance",
+   "party": "CAQ"
+  },
+  "17837": {
+   "name": "Caroline Proulx",
+   "party": "CAQ"
+  },
+  "17845": {
+   "name": "Isabelle Charest",
+   "party": "CAQ"
+  },
+  "17847": {
+   "name": "Sonia LeBel",
+   "party": "CAQ"
+  },
+  "17849": {
+   "name": "Vincent Caron",
+   "party": "CAQ"
+  },
+  "17851": {
+   "name": "Mathieu Lévesque",
+   "party": "CAQ"
+  },
+  "17855": {
+   "name": "Jonatan Julien",
+   "party": "CAQ"
+  },
+  "17857": {
+   "name": "Jean-Bernard Émond",
+   "party": "CAQ"
+  },
+  "17859": {
+   "name": "André Bachand",
+   "party": "CAQ"
+  },
+  "17867": {
+   "name": "Vincent Marissal",
+   "party": "IND"
+  },
+  "17873": {
+   "name": "Christopher Skeete",
+   "party": "CAQ"
+  },
+  "17877": {
+   "name": "Geneviève Hébert",
+   "party": "CAQ"
+  },
+  "17879": {
+   "name": "Louis Lemieux",
+   "party": "CAQ"
+  },
+  "17881": {
+   "name": "Youri Chassin",
+   "party": "IND"
+  },
+  "17883": {
+   "name": "Marwah Rizqy",
+   "party": "IND"
+  },
+  "17889": {
+   "name": "Christine Labrie",
+   "party": "QS"
+  },
+  "17891": {
+   "name": "Marilyne Picard",
+   "party": "CAQ"
+  },
+  "17893": {
+   "name": "Lionel Carmant",
+   "party": "CAQ"
+  },
+  "17899": {
+   "name": "Jean Boulet",
+   "party": "CAQ"
+  },
+  "17901": {
+   "name": "Denis Lamothe",
+   "party": "CAQ"
+  },
+  "17903": {
+   "name": "Ian Lafrenière",
+   "party": "CAQ"
+  },
+  "17905": {
+   "name": "Mario Asselin",
+   "party": "CAQ"
+  },
+  "17909": {
+   "name": "Frantz Benjamin",
+   "party": "PLQ"
+  },
+  "17911": {
+   "name": "Jennifer Maccarone",
+   "party": "PLQ"
+  },
+  "17917": {
+   "name": "François Tremblay",
+   "party": "IND"
+  },
+  "17921": {
+   "name": "Robert Bussière",
+   "party": "CAQ"
+  },
+  "17923": {
+   "name": "Monsef Derraji",
+   "party": "PLQ"
+  },
+  "17925": {
+   "name": "Gilles Bélanger",
+   "party": "IND"
+  },
+  "17927": {
+   "name": "Mathieu Lacombe",
+   "party": "CAQ"
+  },
+  "17929": {
+   "name": "Eric Girard",
+   "party": "CAQ"
+  },
+  "17931": {
+   "name": "Chantal Rouleau",
+   "party": "CAQ"
+  },
+  "17933": {
+   "name": "Ruba Ghazal",
+   "party": "QS"
+  },
+  "17935": {
+   "name": "Alexandre Leduc",
+   "party": "QS"
+  },
+  "17937": {
+   "name": "François Jacques",
+   "party": "CAQ"
+  },
+  "17941": {
+   "name": "Simon Allaire",
+   "party": "CAQ"
+  },
+  "17943": {
+   "name": "Enrico Ciccone",
+   "party": "PLQ"
+  },
+  "17945": {
+   "name": "Isabelle Lecours",
+   "party": "CAQ"
+  },
+  "17947": {
+   "name": "Joël Arseneau",
+   "party": "PQ"
+  },
+  "17949": {
+   "name": "Lucie Lecours",
+   "party": "CAQ"
+  },
+  "17951": {
+   "name": "Gregory Kelley",
+   "party": "PLQ"
+  },
+  "17953": {
+   "name": "Andrés Fontecilla",
+   "party": "QS"
+  },
+  "17955": {
+   "name": "Sol Zanetti",
+   "party": "QS"
+  },
+  "17957": {
+   "name": "Eric Girard",
+   "party": "CAQ"
+  },
+  "17959": {
+   "name": "Chantale Jeannotte",
+   "party": "CAQ"
+  },
+  "18071": {
+   "name": "Marie-Louise Tardif",
+   "party": "CAQ"
+  },
+  "18073": {
+   "name": "Louis-Charles Thouin",
+   "party": "CAQ"
+  },
+  "18217": {
+   "name": "Méganne Perry Mélançon",
+   "party": "PQ"
+  },
+  "18247": {
+   "name": "Nancy Guillemette",
+   "party": "CAQ"
+  },
+  "19063": {
+   "name": "Shirley Dorismond",
+   "party": "CAQ"
+  },
+  "19251": {
+   "name": "Catherine Blouin",
+   "party": "CAQ"
+  },
+  "19253": {
+   "name": "André Albert Morin",
+   "party": "PLQ"
+  },
+  "19255": {
+   "name": "Karine Boivin Roy",
+   "party": "CAQ"
+  },
+  "19257": {
+   "name": "France-Élaine Duranceau",
+   "party": "CAQ"
+  },
+  "19259": {
+   "name": "Valérie Schmaltz",
+   "party": "CAQ"
+  },
+  "19261": {
+   "name": "Madwa-Nika Cadet",
+   "party": "PLQ"
+  },
+  "19263": {
+   "name": "Alejandra Zaga Mendez",
+   "party": "QS"
+  },
+  "19265": {
+   "name": "Suzanne Roy",
+   "party": "CAQ"
+  },
+  "19267": {
+   "name": "Etienne Grandmont",
+   "party": "QS"
+  },
+  "19269": {
+   "name": "Christine Fréchette",
+   "party": "CAQ"
+  },
+  "19271": {
+   "name": "Brigitte B. Garceau",
+   "party": "PLQ"
+  },
+  "19273": {
+   "name": "Amélie Dionne",
+   "party": "CAQ"
+  },
+  "19275": {
+   "name": "Maïté Blanchette Vézina",
+   "party": "PCQ"
+  },
+  "19277": {
+   "name": "Pascale Déry",
+   "party": "CAQ"
+  },
+  "19279": {
+   "name": "Yves Montigny",
+   "party": "CAQ"
+  },
+  "19281": {
+   "name": "Sonia Bélanger",
+   "party": "CAQ"
+  },
+  "19283": {
+   "name": "Désirée McGraw",
+   "party": "PLQ"
+  },
+  "19285": {
+   "name": "Michelle Setlakwe",
+   "party": "PLQ"
+  },
+  "19287": {
+   "name": "Virginie Dufour",
+   "party": "PLQ"
+  },
+  "19289": {
+   "name": "Paul St-Pierre Plamondon",
+   "party": "PQ"
+  },
+  "19291": {
+   "name": "Kariane Bourassa",
+   "party": "CAQ"
+  },
+  "19293": {
+   "name": "Marie-Belle Gendron",
+   "party": "CAQ"
+  },
+  "19295": {
+   "name": "Sona Lakhoyan Olivier",
+   "party": "IND"
+  },
+  "19297": {
+   "name": "Martine Biron",
+   "party": "CAQ"
+  },
+  "19299": {
+   "name": "Mathieu Rivest",
+   "party": "CAQ"
+  },
+  "19301": {
+   "name": "Elisabeth Prass",
+   "party": "PLQ"
+  },
+  "19303": {
+   "name": "Kateri Champagne Jourdain",
+   "party": "CAQ"
+  },
+  "19305": {
+   "name": "Haroun Bouazzi",
+   "party": "QS"
+  },
+  "19307": {
+   "name": "Frédéric Beauchemin",
+   "party": "PLQ"
+  },
+  "19309": {
+   "name": "Céline Haytayan",
+   "party": "CAQ"
+  },
+  "19311": {
+   "name": "Isabelle Poulet",
+   "party": "IND"
+  },
+  "19313": {
+   "name": "Linda Caron",
+   "party": "PLQ"
+  },
+  "19315": {
+   "name": "Alice Abou-Khalil",
+   "party": "CAQ"
+  },
+  "19317": {
+   "name": "Yannick Gagnon",
+   "party": "CAQ"
+  },
+  "19319": {
+   "name": "Stéphane Sainte-Croix",
+   "party": "CAQ"
+  },
+  "19321": {
+   "name": "François St-Louis",
+   "party": "CAQ"
+  },
+  "19323": {
+   "name": "Suzanne Tremblay",
+   "party": "CAQ"
+  },
+  "19325": {
+   "name": "Audrey Bogemans",
+   "party": "CAQ"
+  },
+  "19351": {
+   "name": "Carole Mallette",
+   "party": "CAQ"
+  },
+  "19593": {
+   "name": "Guillaume Cliche-Rivard",
+   "party": "QS"
+  },
+  "19999": {
+   "name": "Pascal Paradis",
+   "party": "PQ"
+  },
+  "20131": {
+   "name": "Catherine Gentilcore",
+   "party": "PQ"
+  },
+  "20141": {
+   "name": "Alex Boissonneault",
+   "party": "PQ"
+  },
+  "20193": {
+   "name": "Marie-Karlynn Laflamme",
+   "party": "PQ"
+  },
+  "20319": {
+   "name": "Stéphane Tremblay",
+   "party": "PQ"
+  },
+  "20321": {
+   "name": "Louis Ialenti",
+   "party": "PLQ"
+  },
+  "20323": {
+   "name": "Antoine Dionne Charest",
+   "party": "PLQ"
+  },
+  "20325": {
+   "name": "Nicolas Plourde",
+   "party": "PLQ"
+  },
+  "20327": {
+   "name": "Pierre Nantel",
+   "party": "PQ"
+  },
+  "20329": {
+   "name": "Guy Jr Lapointe",
+   "party": "PQ"
+  },
+  "20331": {
+   "name": "Tarek Henoud",
+   "party": "PCQ"
+  },
+  "20333": {
+   "name": "James Hughes",
+   "party": "PLQ"
+  },
+  "20335": {
+   "name": "Patricia Drouin",
+   "party": "PCQ"
+  },
+  "20337": {
+   "name": "Sonia Caron",
+   "party": "PQ"
+  },
+  "20339": {
+   "name": "Jonathan Poulin",
+   "party": "PCQ"
+  },
+  "20341": {
+   "name": "Alexandre Daneau",
+   "party": "PQ"
+  },
+  "20343": {
+   "name": "Jean Pellerin",
+   "party": "PQ"
+  },
+  "20345": {
+   "name": "Éric Duhaime",
+   "party": "PCQ"
+  },
+  "20347": {
+   "name": "Sandra Hernández",
+   "party": "PQ"
+  },
+  "20349": {
+   "name": "Audrey Bujold",
+   "party": "PQ"
+  },
+  "20351": {
+   "name": "Sylvie Tanguay",
+   "party": "PQ"
+  },
+  "20353": {
+   "name": "Alexandre Girard-Duchaine",
+   "party": "PQ"
+  },
+  "20355": {
+   "name": "Simon-Pierre Savard-Tremblay",
+   "party": "PQ"
+  },
+  "20357": {
+   "name": "Nadine Le Gal",
+   "party": "PQ"
+  },
+  "20359": {
+   "name": "Gaétan Bédard",
+   "party": "PQ"
+  },
+  "20361": {
+   "name": "Cédric Gagnon-Ducharme",
+   "party": "PQ"
+  },
+  "20363": {
+   "name": "Pier-Luc Bujold",
+   "party": "PQ"
+  },
+  "20365": {
+   "name": "Sandrine Michon",
+   "party": "PQ"
+  },
+  "20367": {
+   "name": "Julie Guyot",
+   "party": "PQ"
+  },
+  "20369": {
+   "name": "Michel Langevin",
+   "party": "PLQ"
+  },
+  "20371": {
+   "name": "Éloïse Coulombe",
+   "party": "PCQ"
+  },
+  "20373": {
+   "name": "Valérie Assouline",
+   "party": "PLQ"
+  },
+  "20375": {
+   "name": "Félix Rhéaume",
+   "party": "PLQ"
+  },
+  "20377": {
+   "name": "Olivier Bertin-Mahieux",
+   "party": "PLQ"
+  },
+  "20379": {
+   "name": "Karim Elayoubi",
+   "party": "PCQ"
+  },
+  "20381": {
+   "name": "Cécile Tremblay",
+   "party": "PLQ"
+  },
+  "20383": {
+   "name": "Madeleine Féquière",
+   "party": "PLQ"
+  },
+  "20385": {
+   "name": "Roxane Milot",
+   "party": "QS"
+  },
+  "20387": {
+   "name": "Dominique Dumas",
+   "party": "PCQ"
+  },
+  "20389": {
+   "name": "Frédéric Poulin",
+   "party": "PCQ"
+  },
+  "20391": {
+   "name": "Gisèle Pouhe Njall",
+   "party": "QS"
+  },
+  "20393": {
+   "name": "Nathalie Boisclair",
+   "party": "PQ"
+  },
+  "20395": {
+   "name": "Mathieu Lebrun",
+   "party": "PQ"
+  },
+  "20397": {
+   "name": "Linda Vaillant",
+   "party": "PQ"
+  },
+  "20399": {
+   "name": "Diane Dallaire",
+   "party": "PQ"
+  },
+  "20401": {
+   "name": "Émile Simard",
+   "party": "PQ"
+  },
+  "20403": {
+   "name": "Meggie Richard",
+   "party": "PQ"
+  },
+  "20405": {
+   "name": "Marie Claude Fournier",
+   "party": "PLQ"
+  },
+  "20407": {
+   "name": "Isabelle Thibeault",
+   "party": "PQ"
+  },
+  "20409": {
+   "name": "Ariane Boyer",
+   "party": "PQ"
+  },
+  "20411": {
+   "name": "David Logue",
+   "party": "PLQ"
+  },
+  "20413": {
+   "name": "Alexandre Boulerice",
+   "party": "QS"
+  },
+  "20415": {
+   "name": "Yohann St-Pierre",
+   "party": "PQ"
+  },
+  "20417": {
+   "name": "Jean-François Arsenault",
+   "party": "PQ"
+  },
+  "20419": {
+   "name": "Marie-Claude Sarrazin",
+   "party": "PQ"
+  },
+  "20421": {
+   "name": "Sacha Cannon",
+   "party": "PLQ"
+  },
+  "20423": {
+   "name": "Jocelyn Desjardins",
+   "party": "PQ"
+  },
+  "20425": {
+   "name": "Frédéric Laplante",
+   "party": "PQ"
+  },
+  "20427": {
+   "name": "Odette Lavigne",
+   "party": "PQ"
+  },
+  "20429": {
+   "name": "Camille Pellerin-Forget",
+   "party": "PQ"
+  },
+  "20431": {
+   "name": "Anne Nguyen",
+   "party": "PQ"
+  },
+  "20433": {
+   "name": "Julie White",
+   "party": "PLQ"
+  },
+  "20435": {
+   "name": "Véronique Venne",
+   "party": "PQ"
+  },
+  "20437": {
+   "name": "Marcel Bouchard",
+   "party": "PCQ"
+  },
+  "20439": {
+   "name": "Jimmy Bouchard",
+   "party": "PQ"
+  },
+  "20441": {
+   "name": "Stéphane Paquet",
+   "party": "PQ"
+  },
+  "20443": {
+   "name": "David Bowles",
+   "party": "PLQ"
+  },
+  "20445": {
+   "name": "Maxime Laporte",
+   "party": "PQ"
+  },
+  "20447": {
+   "name": "Sonia Ziadé",
+   "party": "PLQ"
+  },
+  "20449": {
+   "name": "Charles Milliard",
+   "party": "PLQ"
+  },
+  "20451": {
+   "name": "Catherine Drouin",
+   "party": "PQ"
+  },
+  "20453": {
+   "name": "William Fradette",
+   "party": "PQ"
+  },
+  "20455": {
+   "name": "Caroline De Guire",
+   "party": "PLQ"
+  },
+  "20457": {
+   "name": "Isabelle Millette",
+   "party": "PQ"
+  },
+  "20459": {
+   "name": "Élodie Murphy-Gauthier",
+   "party": "PQ"
+  },
+  "20461": {
+   "name": "Dieudonné Ella Oyono",
+   "party": "PQ"
+  },
+  "20463": {
+   "name": "Guillaume Langlois",
+   "party": "PCQ"
+  },
+  "20465": {
+   "name": "Karine Laflamme",
+   "party": "PCQ"
+  },
+  "20467": {
+   "name": "Renaud Labrecque",
+   "party": "PCQ"
+  },
+  "20469": {
+   "name": "Marie-Josée Hélie",
+   "party": "PCQ"
+  },
+  "20471": {
+   "name": "Marcos Archambault",
+   "party": "PCQ"
+  },
+  "20473": {
+   "name": "Michel Leblanc",
+   "party": "PLQ"
+  },
+  "20475": {
+   "name": "Jimmy Gagnon",
+   "party": "PCQ"
+  },
+  "20477": {
+   "name": "Natalie Bisaillon",
+   "party": "PQ"
+  },
+  "20479": {
+   "name": "Isabelle Blais",
+   "party": "PQ"
+  },
+  "20481": {
+   "name": "Geneviève Couture",
+   "party": "PQ"
+  },
+  "20483": {
+   "name": "Stéphane Handfield",
+   "party": "PQ"
+  },
+  "20497": {
+   "name": "Sébastien D'Astous",
+   "party": "PQ"
+  },
+  "20515": {
+   "name": "Nada Boumeftah",
+   "party": "PLQ"
+  },
+  "20517": {
+   "name": "Mathieu Lavoie",
+   "party": "PLQ"
+  },
+  "20519": {
+   "name": "Stéphanie Vachon",
+   "party": "QS"
+  },
+  "20521": {
+   "name": "Benoit Clermont",
+   "party": "PLQ"
+  },
+  "20523": {
+   "name": "Charles Page",
+   "party": "PQ"
+  },
+  "20527": {
+   "name": "Patrick Paquet",
+   "party": "PCQ"
+  },
+  "20529": {
+   "name": "Bernard Sévigny",
+   "party": "PQ"
+  }
+ }
+}
