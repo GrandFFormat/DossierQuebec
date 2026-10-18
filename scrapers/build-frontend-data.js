@@ -162,8 +162,8 @@ function main() {
       && Number(x.legislature) === Number(b.legislature) && Number(x.session) === Number(b.introSession));
     const titre = en ? 'Who voted for, against or abstained' : 'Qui a voté pour, contre ou s’est abstenu';
     if (!v) return `<details class="bill-votes"><summary>${titre}</summary><p class="bill-votes-note">${en
-      ? 'The Assembly passed this law without a recorded vote (unanimously or “on division”): there is no list of names for it.'
-      : 'L’Assemblée a adopté cette loi sans vote nom par nom (à l’unanimité ou « sur division ») : il n’existe pas de liste d’élu·e·s pour cette loi.'}</p></details>`;
+      ? 'The Assembly passed this law without a recorded vote (unanimously or by a majority, without a roll call): there is no list of names for it.'
+      : 'L’Assemblée a adopté cette loi sans vote nom par nom (à l’unanimité ou à la majorité des voix, sans appel nominal) : il n’existe pas de liste d’élu·e·s pour cette loi.'}</p></details>`;
     const objet = encodeURIComponent((en ? 'Bill ' : 'Projet de loi n° ') + b.num + ' — ' + (en ? (b.titleEn || b.title) : b.title));
     let anciens = 0;
     const nom = (p) => {
