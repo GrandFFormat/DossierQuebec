@@ -3168,6 +3168,7 @@ function renderBillsQuickFilters(){
 function renderBills(keyword){
   if(!document.getElementById('billsList')) return;   // vue absente de cette page
   renderArchivesNote();
+  _rangCafe = 0;   // les libellés du bouton café repartent du premier (boutonCafe)
   keyword = keyword !== undefined ? keyword : (document.getElementById('searchBills')?.value || '');
   const kw = norm(keyword);
   const isEn = currentLang === 'en';
@@ -3407,22 +3408,35 @@ function copierLien(texte, evt, isEn){
 // Trois destinations : 𝕏, Facebook, copier.
 // LE BOUTON CAFÉ sous « Partager » (Martin, 18 oct. 2026) : bleu poudre, vers le même lien de don
 // que les volets de Québec et de Montréal. Seulement sur les projets de la 44e législature et des
-// suivantes : il apparaît tout seul avec les premiers projets de la nouvelle Assemblée. Le libellé
-// vient de la liste de Martin, choisi par le numéro du projet pour ne pas changer à chaque affichage.
+// suivantes : il apparaît tout seul avec les premiers projets de la nouvelle Assemblée.
+// Les libellés défilent DANS L'ORDRE, un projet après l'autre (« je veux pas que le client voie
+// Appuyez-nous, Appuyez-nous, Appuyez-nous à chaque PL ») : renderBills remet le compteur à zéro,
+// chaque bouton affiché prend le libellé suivant.
 const LIEN_CAFE = 'https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00';
 const LIBELLES_CAFE = [
+  ['Soutenez-nous', 'Support us'],
+  ['Aidez DQ à rester gratuit', 'Help keep DQ free'],
+  ['Gardez DQ vivant', 'Keep DQ alive'],
+  ['Vive DQ libre', 'Long live a free DQ'],
+  ['Contribuez au site', 'Contribute to the site'],
+  ['Vive l’information publique', 'Long live public information'],
+  ['Donnez un coup de pouce', 'Give us a hand'],
+  ['Soutenez la cause', 'Support the cause'],
+  ['Un café pour l’équipe ?', 'A coffee for the team?'],
+  ['Cappuccino ou espresso ?', 'Cappuccino or espresso?'],
   ['Appuyez-nous', 'Back us'],
   ['La démocratie, lisible', 'Democracy, readable'],
   ['Un petit geste', 'A small gesture'],
-  ['Appuyer la cause', 'Back the cause'],
-  ['Croire au projet', 'Believe in the project'],
+  ['Appuyez la cause', 'Back the cause'],
+  ['Croyez au projet', 'Believe in the project'],
   ['Allongé ou serré ?', 'Long or short?'],
   ['Latté ou espresso ?', 'Latte or espresso?'],
   ['Un double, peut-être ?', 'A double, maybe?'],
 ];
+let _rangCafe = 0;
 function boutonCafe(b, isEn){
   if(!(Number(b.legislature) >= 44)) return '';
-  const [fr, en] = LIBELLES_CAFE[Math.abs(Number(b.id) || 0) % LIBELLES_CAFE.length];
+  const [fr, en] = LIBELLES_CAFE[_rangCafe++ % LIBELLES_CAFE.length];
   return `<div class="bill-cafe-row"><a class="bill-cafe-btn" href="${LIEN_CAFE}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="${isEn ? 'Buy us a coffee (opens in a new tab)' : 'Offrez-nous un café (s’ouvre dans un nouvel onglet)'}">☕ ${isEn ? en : fr}</a></div>`;
 }
 
