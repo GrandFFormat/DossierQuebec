@@ -2,7 +2,7 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 142bb19 — Node v22.23.3
+Code : commit 6a5a27c — Node v22.23.3
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -13,7 +13,7 @@ https://donnees.montreal.ca/robots.txt : règles sur nos chemins : disallow /dat
 https://montreal.ca/robots.txt : rien qui concerne nos chemins
 
 === Calendrier des séances ===
-Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-10-16T23:30:50.684115)
+Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-10-17T23:30:49.226928)
 Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_video_seance
 71 séance(s) de 2026 lue(s) dans le calendrier.
 
@@ -107,8 +107,8 @@ Pastilles thématiques :
      98  Ressources humaines
     228  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes enregistrés (depuis 2026-08-18) ===
-Fenêtre depuis 2026-08-18 : 5 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
+=== Votes enregistrés (depuis 2026-08-19) ===
+Fenêtre depuis 2026-08-19 : 5 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
 
 15 votes enregistrés écrits dans data/votes.json (5 procès-verbaux analysés).
 2 portent un avertissement d'extraction (à vérifier à la main).
@@ -153,10 +153,7 @@ Mesure de 33 termes sur 169 procès-verbaux de 2026 en cache et 7030 décisions�
 33 entrées écrites dans data/lexique.json
 
 === Récapitulatifs des sujets suivables ===
-Récapitulatifs des sujets : parcs (33 dossiers), pietonnisation (23 dossiers)
-  parcs                    3 étape(s), 9 à surveiller · retirés : 1 mécanique, 4 contre-lecture
-  pietonnisation           5 étape(s), 4 à surveiller · retirés : 0 mécanique, 1 contre-lecture
-  coût ≈ 1.02 $ US
+Récapitulatifs des sujets : rien de nouveau.
 
 === Sujets suivables et dossiers, pour Mes dossiers ===
 Projets publics : 16 sujets · index 17.4 Ko · fichiers de sujet 854 Ko au total.
@@ -177,7 +174,14 @@ Résumés : 3753 déjà traduits, 679 à faire, 679 cette fois.
 Titres  : 6078 déjà traduits, 545 à faire, 545 cette fois en 28 paquet(s).
 Étiquettes : 1121 déjà traduites, 125 à faire en 5 paquet(s).
 ~1.99 $ US estimés (lot, moitié prix).
-Lot msgbatch_01VmNz8Yyz2fBFyJBG7e8y5Z envoyé (679 résumés, 28 paquets de titres, 5 paquets d'étiquettes).
+Lot msgbatch_01A1ggP1PZY4D7BPkUTKB3Qf envoyé (679 résumés, 28 paquets de titres, 5 paquets d'étiquettes).
+  in_progress — 0 réussis, 712 en cours, 0 en erreur
+  in_progress — 0 réussis, 712 en cours, 0 en erreur
+  in_progress — 0 réussis, 712 en cours, 0 en erreur
+  in_progress — 0 réussis, 712 en cours, 0 en erreur
+  in_progress — 0 réussis, 712 en cours, 0 en erreur
+  in_progress — 0 réussis, 712 en cours, 0 en erreur
+  in_progress — 0 réussis, 712 en cours, 0 en erreur
   in_progress — 0 réussis, 712 en cours, 0 en erreur
   in_progress — 0 réussis, 712 en cours, 0 en erreur
   in_progress — 0 réussis, 712 en cours, 0 en erreur
@@ -200,7 +204,7 @@ Node.js v22.23.3
 ⚠ « Traductions anglaises » a échoué (code 1) — on garde les données précédentes, ça attendra.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-08-18 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-08-19 pas encore résumés (plafond : 120)…
 8663 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
