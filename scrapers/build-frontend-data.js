@@ -161,9 +161,13 @@ function main() {
     const v = votesNominaux.find((x) => x.stage === 'Adoption' && String(x.billNum) === String(b.num)
       && Number(x.legislature) === Number(b.legislature) && Number(x.session) === Number(b.introSession));
     const titre = en ? 'Who voted for, against or abstained' : 'Qui a voté pour, contre ou s’est abstenu';
+    // Sans vote nominal, on explique comment la loi a été adoptée (Martin, 18 oct. 2026 : « que les
+    // gens comprennent »). Le mode exact (unanimité ou majorité) est sur la fiche de l'Assemblée.
     if (!v) return `<details class="bill-votes"><summary>${titre}</summary><p class="bill-votes-note">${en
-      ? 'The Assembly passed this law without a recorded vote (unanimously or by a majority, without a roll call): there is no list of names for it.'
-      : 'L’Assemblée a adopté cette loi sans vote nom par nom (à l’unanimité ou à la majorité des voix, sans appel nominal) : il n’existe pas de liste d’élu·e·s pour cette loi.'}</p></details>`;
+      ? '<b>No list of names exists for this law.</b> It was passed by voice: the Speaker asks “Is this motion carried?” and members answer from their seats. If no one objects, it passes unanimously. If a party answers “On division”, it passes by a majority, without anyone being counted.'
+      : '<b>Il n’existe pas de liste de noms pour cette loi.</b> Elle a été adoptée de vive voix : le président demande « Cette motion est-elle adoptée ? » et les députés répondent de leur place. Si personne ne s’oppose, elle passe à l’unanimité. Si un parti répond « Sur division », elle passe à la majorité des voix, sans que personne soit compté.'}</p><p class="bill-votes-note">${en
+      ? 'A list of names exists only when a party asks for a <b>recorded division</b>: each member then stands for, against or abstaining, and their name is written down.'
+      : 'Une liste nom par nom existe seulement quand un parti demande un <b>vote par appel nominal</b> : chaque député se lève alors pour, contre ou abstention, et son nom est inscrit.'} <a href="${echapper(en ? (b.urlEn || b.url) : b.url)}" target="_blank" rel="noopener">${en ? 'How it was passed, on the Assembly’s website' : 'Comment elle a été adoptée, sur la fiche de l’Assemblée'}</a>.</p></details>`;
     const objet = encodeURIComponent((en ? 'Bill ' : 'Projet de loi n° ') + b.num + ' — ' + (en ? (b.titleEn || b.title) : b.title));
     let anciens = 0;
     const nom = (p) => {
