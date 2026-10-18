@@ -143,6 +143,18 @@ function main() {
   const contacts = existsSync('data/deputes-contacts.json') ? (JSON.parse(readFileSync('data/deputes-contacts.json', 'utf-8')).contacts || []) : [];
   const cleNom = (x) => String(x || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z]/g, '');
   const elusParId = new Map(elus.map((d) => [Number(d.assnatId), d]));
+  // Les ancien·ne·s élu·e·s : l'Assemblée ne donne que leur nom de famille dans ses votes, et ils
+  // sortent de sa liste à la législature suivante. data/elus-historique.json garde le nom et le
+  // parti de toute personne déjà vue dans la liste (jamais vidé), pour les nommer en entier dans
+  // les votes archivés « à la postérité » (Martin, 18 oct. 2026).
+  const HISTO = 'data/elus-historique.json';
+  const histo = existsSync(HISTO) ? JSON.parse(readFileSync(HISTO, 'utf-8')) : { elus: {} };
+  let histoChange = false;
+  for (const d of elus) {
+    const avant = histo.elus[d.assnatId];
+    if (!avant || avant.name !== d.name || avant.party !== d.party) { histo.elus[d.assnatId] = { name: d.name, party: d.party }; histoChange = true; }
+  }
+  if (histoChange) writeFileSync(HISTO, JSON.stringify(histo, null, 1));
   const courriels = new Map(contacts.map((c) => [cleNom(c.name), c.email]));
   const caseVotes = (b, en) => {
     if (b.status !== 'sanctionne') return '';
@@ -156,7 +168,7 @@ function main() {
     let anciens = 0;
     const nom = (p) => {
       const d = elusParId.get(Number(p.assnatId));
-      if (!d) { anciens++; return `<li class="bill-votes-ancien">${echapper(p.lastName)} <span>(${echapper(p.party || '')})</span></li>`; }
+      if (!d) { anciens++; const h = histo.elus[p.assnatId]; return `<li class="bill-votes-ancien">${echapper(h ? h.name : p.lastName)} <span>(${echapper(p.party || '')})</span></li>`; }
       const courriel = courriels.get(cleNom(d.name));
       return `<li>${echapper(d.name)} <span>(${echapper(d.party || p.party || '')})</span>${courriel ? ` <a class="bill-votes-mail" href="mailto:${echapper(courriel)}?subject=${objet}" aria-label="${en ? 'Email' : 'Écrire à'} ${echapper(d.name)}">✉</a>` : ''}</li>`;
     };
