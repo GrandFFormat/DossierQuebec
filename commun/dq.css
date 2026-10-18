@@ -2156,3 +2156,7 @@
 .bill-cafe-row{display:flex; justify-content:flex-end; margin-top:8px;}
 .bill-cafe-btn{display:inline-block; padding:6px 14px; background:#B0D4E8; color:#131313; border:2px solid #131313; box-shadow:3px 3px 0 #131313; font-family:'Archivo Narrow',sans-serif; font-size:13px; font-weight:700; text-decoration:none;}
 .bill-cafe-btn:hover{background:#FFD24D;}
+
+/* Mon dossier : la carte « Ce qui s'en vient » (outils pour abonné·e·s, annoncés d'avance). */
+.md-avenir-liste{margin:10px 0 0; padding-left:20px; display:grid; gap:8px; line-height:1.5;}
+.md-a-venir{border-style:dashed;}
