@@ -2171,3 +2171,11 @@
 .bill-votes-ancien{opacity:.55;}
 .bill-votes-mail{text-decoration:none; font-weight:700;}
 @media (max-width:640px){ .bill-votes-grille{grid-template-columns:minmax(0, 1fr);} }
+
+/* La case des votes prend l'allure de « Lois et règlements touchés » : un rectangle à part, un + / − (Martin, 18 oct. 2026). */
+.bill-votes{cursor:pointer; margin-top:12px; border:1px solid var(--line-soft); padding:12px 14px; background:var(--paper-2);}
+.bill-votes:hover{border-color:var(--ink);}
+.bill-votes summary{list-style:none; cursor:pointer; font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:0.04em;}
+.bill-votes summary::-webkit-details-marker{display:none;}
+.bill-votes summary::before{content:"+"; display:inline-block; width:1.1em; font-size:15px; font-weight:800; color:var(--gold);}
+.bill-votes[open] summary::before{content:"\2212";}
