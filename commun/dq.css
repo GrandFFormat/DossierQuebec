@@ -2160,3 +2160,14 @@
 /* Mon dossier : la carte « Ce qui s'en vient » (outils pour abonné·e·s, annoncés d'avance). */
 .md-avenir-liste{margin:10px 0 0; padding-left:20px; display:grid; gap:8px; line-height:1.5;}
 .md-a-venir{border-style:dashed;}
+
+/* Qui a voté quoi, sous une loi sanctionnée (scrapers/build-frontend-data.js, caseVotes). */
+.bill-votes{margin-top:12px;}
+.bill-votes summary{cursor:pointer; font-weight:700;}
+.bill-votes-note{font-size:13px; line-height:1.5; margin:8px 0;}
+.bill-votes-grille{display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:12px;}
+.bill-votes-col ul{list-style:none; margin:6px 0 0; padding:0; font-size:13px; line-height:1.6; max-height:320px; overflow:auto;}
+.bill-votes-col span{opacity:.7;}
+.bill-votes-ancien{opacity:.55;}
+.bill-votes-mail{text-decoration:none; font-weight:700;}
+@media (max-width:640px){ .bill-votes-grille{grid-template-columns:minmax(0, 1fr);} }

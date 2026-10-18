@@ -132,9 +132,45 @@ function main() {
   // français en anglais : ce sont les titres officiels, il n'en existe pas d'autre ici.
   const listeLois = (b, en) => b._lois.length < 2 ? '' :
     `<details class="bill-lois"><summary>${en ? `Laws and regulations affected (${b._lois.length}) — official French titles` : `Lois et règlements touchés (${b._lois.length})`}</summary><ul>${b._lois.map((l) => `<li>${echapper(l)}</li>`).join('')}</ul></details>`;
+  // QUI A VOTÉ QUOI, sous une loi sanctionnée (Martin, 18 oct. 2026 : « accountability »). Le vote
+  // nominal à l'adoption, en trois colonnes (pour, contre, abstention), chaque nom avec un lien
+  // courriel quand l'élu·e siège encore. Pas de message tout écrit : le courriel part vide, avec le
+  // nom de la loi en objet. Beaucoup de lois sont adoptées sans vote nom par nom (unanimité, « sur
+  // division ») : la case le dit, sans rien inventer. Rangé avec les résumés, chargés à l'ouverture
+  // de la carte, pour ne pas alourdir la page (125 noms par vote).
+  const votesNominaux = existsSync('data/votes.json') ? (JSON.parse(readFileSync('data/votes.json', 'utf-8')).votes || []) : [];
+  const elus = existsSync('data/deputes.json') ? (JSON.parse(readFileSync('data/deputes.json', 'utf-8')).deputes || []) : [];
+  const contacts = existsSync('data/deputes-contacts.json') ? (JSON.parse(readFileSync('data/deputes-contacts.json', 'utf-8')).contacts || []) : [];
+  const cleNom = (x) => String(x || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z]/g, '');
+  const elusParId = new Map(elus.map((d) => [Number(d.assnatId), d]));
+  const courriels = new Map(contacts.map((c) => [cleNom(c.name), c.email]));
+  const caseVotes = (b, en) => {
+    if (b.status !== 'sanctionne') return '';
+    const v = votesNominaux.find((x) => x.stage === 'Adoption' && String(x.billNum) === String(b.num)
+      && Number(x.legislature) === Number(b.legislature) && Number(x.session) === Number(b.introSession));
+    const titre = en ? 'Who voted for, against or abstained' : 'Qui a voté pour, contre ou s’est abstenu';
+    if (!v) return `<details class="bill-votes"><summary>${titre}</summary><p class="bill-votes-note">${en
+      ? 'The Assembly passed this law without a recorded vote (unanimously or “on division”): there is no list of names for it.'
+      : 'L’Assemblée a adopté cette loi sans vote nom par nom (à l’unanimité ou « sur division ») : il n’existe pas de liste d’élu·e·s pour cette loi.'}</p></details>`;
+    const objet = encodeURIComponent((en ? 'Bill ' : 'Projet de loi n° ') + b.num + ' — ' + (en ? (b.titleEn || b.title) : b.title));
+    let anciens = 0;
+    const nom = (p) => {
+      const d = elusParId.get(Number(p.assnatId));
+      if (!d) { anciens++; return `<li class="bill-votes-ancien">${echapper(p.lastName)} <span>(${echapper(p.party || '')})</span></li>`; }
+      const courriel = courriels.get(cleNom(d.name));
+      return `<li>${echapper(d.name)} <span>(${echapper(d.party || p.party || '')})</span>${courriel ? ` <a class="bill-votes-mail" href="mailto:${echapper(courriel)}?subject=${objet}" aria-label="${en ? 'Email' : 'Écrire à'} ${echapper(d.name)}">✉</a>` : ''}</li>`;
+    };
+    const colonne = (liste, t) => `<div class="bill-votes-col"><b>${t} (${liste.length})</b>${liste.length ? `<ul>${liste.map(nom).join('')}</ul>` : `<p>—</p>`}</div>`;
+    const cols = colonne(v.pour, en ? 'For' : 'Pour') + colonne(v.contre, en ? 'Against' : 'Contre') + colonne(v.abstentions, en ? 'Abstained' : 'Abstention');
+    return `<details class="bill-votes"><summary>${titre}</summary><p class="bill-votes-note">${en
+      ? `Recorded vote at the final passage, ${v.date}. ✉ writes to the member: the email opens empty, with the law’s name as subject.`
+      : `Vote nom par nom à l’adoption, le ${v.date}. ✉ écrit à l’élu·e : le courriel s’ouvre vide, avec le nom de la loi en objet.`} <a href="${echapper(v.url)}" target="_blank" rel="noopener">${en ? 'The vote on the Assembly’s website' : 'Le vote sur le site de l’Assemblée'}</a>.</p><div class="bill-votes-grille">${cols}</div>${anciens ? `<p class="bill-votes-note">${en
+      ? 'A name without ✉ and in grey: this person no longer sits in the Assembly.'
+      : 'Un nom en gris, sans ✉ : cette personne ne siège plus à l’Assemblée.'}</p>` : ''}</details>`;
+  };
   for (const b of bills) {
-    if (b.summary) resumes.fr[b.id] = b.summary + listeLois(b, false);
-    if (b.summaryEn) resumes.en[b.id] = b.summaryEn + listeLois(b, true);
+    if (b.summary) resumes.fr[b.id] = b.summary + listeLois(b, false) + caseVotes(b, false);
+    if (b.summaryEn) resumes.en[b.id] = b.summaryEn + listeLois(b, true) + caseVotes(b, true);
   }
   for (const [langue, map] of Object.entries(resumes)) {
     const chemin = `data/bills-resumes-${langue}.json`;
