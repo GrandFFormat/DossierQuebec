@@ -2151,3 +2151,8 @@
 /* Sur téléphone, la bande jaune de la dissolution remplissait tout le premier écran de l’accueil :
    on ne voyait pas à quoi sert le site (Martin, 16 oct. 2026 : « tu peux l’enlever »). */
 @media (max-width:640px){ #band-dissolution{display:none;} }
+
+/* Le bouton café sous « Partager », sur les projets de la 44e législature (boutonCafe, commun/dq.js). Bleu poudre. */
+.bill-cafe-row{display:flex; justify-content:flex-end; margin-top:8px;}
+.bill-cafe-btn{display:inline-block; padding:6px 14px; background:#B0D4E8; color:#131313; border:2px solid #131313; box-shadow:3px 3px 0 #131313; font-family:'Archivo Narrow',sans-serif; font-size:13px; font-weight:700; text-decoration:none;}
+.bill-cafe-btn:hover{background:#FFD24D;}

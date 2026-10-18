@@ -2864,7 +2864,7 @@ function billCard(b, ctx){
   const shareRow = `<div class="bill-share-row">
       <span class="bill-share-label">${isEn ? 'Share:' : 'Partager :'}</span>
       ${shareCtrls}
-    </div>`;
+    </div>${boutonCafe(b, isEn)}`;
   // Les votes ne sont plus affichés sur les cartes de projets de loi — le
   // détail complet (décomptes + qui a voté quoi) vit dans l'onglet Votes.
   return `
@@ -3405,6 +3405,27 @@ function copierLien(texte, evt, isEn){
 // Partage d'un projet de loi (onglet Projets). Message neutre + lien profond
 // /projets-de-loi?pl=NUM qui ouvre directement le projet à l'arrivée.
 // Trois destinations : 𝕏, Facebook, copier.
+// LE BOUTON CAFÉ sous « Partager » (Martin, 18 oct. 2026) : bleu poudre, vers le même lien de don
+// que les volets de Québec et de Montréal. Seulement sur les projets de la 44e législature et des
+// suivantes : il apparaît tout seul avec les premiers projets de la nouvelle Assemblée. Le libellé
+// vient de la liste de Martin, choisi par le numéro du projet pour ne pas changer à chaque affichage.
+const LIEN_CAFE = 'https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00';
+const LIBELLES_CAFE = [
+  ['Appuyez-nous', 'Back us'],
+  ['La démocratie, lisible', 'Democracy, readable'],
+  ['Un petit geste', 'A small gesture'],
+  ['Appuyer la cause', 'Back the cause'],
+  ['Croire au projet', 'Believe in the project'],
+  ['Allongé ou serré ?', 'Long or short?'],
+  ['Latté ou espresso ?', 'Latte or espresso?'],
+  ['Un double, peut-être ?', 'A double, maybe?'],
+];
+function boutonCafe(b, isEn){
+  if(!(Number(b.legislature) >= 44)) return '';
+  const [fr, en] = LIBELLES_CAFE[Math.abs(Number(b.id) || 0) % LIBELLES_CAFE.length];
+  return `<div class="bill-cafe-row"><a class="bill-cafe-btn" href="${LIEN_CAFE}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="${isEn ? 'Buy us a coffee (opens in a new tab)' : 'Offrez-nous un café (s’ouvre dans un nouvel onglet)'}">☕ ${isEn ? en : fr}</a></div>`;
+}
+
 function shareBill(billId, platform, evt){
   if(evt) evt.stopPropagation();
   const isEn = currentLang === 'en';
