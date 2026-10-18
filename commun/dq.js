@@ -2968,6 +2968,8 @@ function toggleBillSummary(domId, evt){
     if(!evt.target.closest('summary') && !evt.target.closest('a')) lois.open = !lois.open;
     return;
   }
+  // Même chose pour la case « Qui a voté » : un clic dedans (nom, ✉, liste) ne ferme pas la carte.
+  if(evt && evt.target && evt.target.closest && evt.target.closest('.bill-votes')) return;
   const el = document.getElementById(domId);
   const hint = document.getElementById('hint-'+domId);
   const willOpen = !el.classList.contains('open');
