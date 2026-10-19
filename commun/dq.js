@@ -1539,8 +1539,8 @@ async function renderAdminPreoccupations(){
       <td><button class="account-btn" onclick="adminPreocSpam('${m.id}', ${m.statut === 'spam' ? 'false' : 'true'})">${m.statut === 'spam' ? (isEn ? 'Not spam' : 'Pas du spam') : 'Spam'}</button></td>
     </tr>`).join('');
   zone.innerHTML = `<div class="account-note" style="margin:18px 0 10px;"><b>${isEn ? 'What worries visitors (admin only)' : 'Ce qui préoccupe les visiteurs (réservé aux admins)'}</b> — ${isEn
-    ? `${(data || []).length} most recent messages. The public table is recounted at the next morning sorting.`
-    : `les ${(data || []).length} messages les plus récents. Le tableau public se recompte au classement du lendemain matin.`}</div>
+    ? `${(data || []).length} most recent message(s). Every morning, the AI sorts the "new" messages: it files each one under a topic (or creates one) and sets spam aside; the public table is recounted at the same time. Nothing to approve: only fix what is misfiled.`
+    : `${(data || []).length > 1 ? `les ${(data || []).length} messages les plus récents` : `${(data || []).length} message`}. Chaque matin, l’IA classe les messages « nouveau » : elle range chacun dans un sujet (ou en crée un) et écarte le spam ; le tableau public se recompte en même temps. Rien à approuver : corrigez seulement ce qui est mal classé.`}</div>
     ${lignes ? `<div class="admin-preoc-defile"><table class="admin-preoc"><thead><tr><th>${isEn ? 'Date' : 'Date'}</th><th>Message</th><th>${isEn ? 'Status' : 'Statut'}</th><th>${isEn ? 'Topic' : 'Sujet'}</th><th></th></tr></thead><tbody>${lignes}</tbody></table></div>` : `<p class="account-note">${isEn ? 'No message yet.' : 'Aucun message pour l’instant.'}</p>`}`;
 }
 async function adminPreocSpam(id, spam){
