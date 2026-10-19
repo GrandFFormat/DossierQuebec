@@ -1448,7 +1448,57 @@ async function renderMonDossier(){
   mdCompte(isEn, quota);
   mdLois(isEn, quota);
   mdElus(isEn);
+  mdPreoccupations(isEn);
 }
+
+// « CE QUI VOUS PRÉOCCUPE » (Martin, 18 oct. 2026). Une boîte de texte pour les gens connectés,
+// le nombre de messages reçus, et le tableau des sujets en pourcentage. Les messages ne sont jamais
+// affichés : une fois par jour, scrapers/preoccupations.js les classe (Claude) et publie seulement
+// le tableau, data/preoccupations.json. Pour l'instant dans Mon dossier ; l'accueil plus tard.
+let _preoc = null;
+async function mdPreoccupations(isEn){
+  const zone = document.getElementById('mdPreoccupations');
+  if(!zone) return;
+  if(!_preoc){ try{ _preoc = await (await fetch('/data/preoccupations.json')).json(); }catch(e){ _preoc = { recus: 0, mentions: 0, sujets: [] }; } }
+  const p = _preoc;
+  const h = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  const lignes = (p.sujets || []).map((s) => {
+    const pc = p.mentions ? Math.round(s.n / p.mentions * 100) : 0;
+    return `<tr><td>${h(isEn ? (s.en || s.fr) : s.fr)}</td><td class="md-preoc-barre"><span style="width:${pc}%"></span></td><td class="md-preoc-pc">${pc} %</td></tr>`;
+  }).join('');
+  const formulaire = currentUser
+    ? `<label class="md-note" for="mdPreocTexte">${isEn ? 'In your own words: a problem, a topic, something that should change.' : 'En vos mots : un problème, un sujet, quelque chose qui devrait changer.'}</label>
+       <textarea id="mdPreocTexte" class="md-preoc-texte" maxlength="500" rows="3" placeholder="${isEn ? 'What worries you?' : 'Qu’est-ce qui vous préoccupe ?'}"></textarea>
+       <div class="md-preoc-envoi"><button class="account-btn" id="mdPreocBtn" onclick="mdEnvoyerPreoccupation()">${isEn ? 'Send' : 'Envoyer'}</button><span class="md-note" id="mdPreocNote">${isEn ? 'Your message is never published. 3 messages per day at most.' : 'Votre message n’est jamais publié. 3 messages par jour au plus.'}</span></div>`
+    : `<p>${isEn ? 'Sign in (above) to write what worries you.' : 'Connectez-vous (plus haut) pour écrire ce qui vous préoccupe.'}</p>`;
+  zone.innerHTML = `<div class="md-carte">
+    <div class="md-carte-tete"><h2>${isEn ? 'What worries you' : 'Ce qui vous préoccupe'}</h2><span class="md-etiquette">${p.recus || 0} ${isEn ? ((p.recus || 0) > 1 ? 'messages received' : 'message received') : ((p.recus || 0) > 1 ? 'messages reçus' : 'message reçu')}</span></div>
+    ${formulaire}
+    ${lignes ? `<table class="md-preoc-table"><tbody>${lignes}</tbody></table>` : `<p class="md-note">${isEn ? 'The table of topics will appear here once the first messages are sorted.' : 'Le tableau des sujets paraîtra ici quand les premiers messages auront été classés.'}</p>`}
+    <p class="md-note">${isEn
+      ? `Messages are grouped into topics once a day by an AI, and reviewed by hand from time to time. A person counts once per topic. This is not a poll: only visitors who wrote are counted.${p.majLe ? ` Last count: ${h(p.majLe)}.` : ''}`
+      : `Les messages sont regroupés en sujets une fois par jour par une IA, et révisés à la main à temps perdu. Une personne compte une fois par sujet. Ce n’est pas un sondage : seuls les visiteurs qui ont écrit sont comptés.${p.majLe ? ` Dernier compte : ${h(p.majLe)}.` : ''}`}</p>
+  </div>`;
+}
+async function mdEnvoyerPreoccupation(){
+  const isEn = currentLang === 'en';
+  const champ = document.getElementById('mdPreocTexte'), btn = document.getElementById('mdPreocBtn'), note = document.getElementById('mdPreocNote');
+  const texte = (champ?.value || '').trim();
+  if(texte.length < 3){ note.textContent = isEn ? 'Write a few words first.' : 'Écrivez quelques mots d’abord.'; return; }
+  btn.disabled = true;
+  const { error } = await supabaseClient.from('preoccupations').insert({ texte: texte.slice(0, 500) });
+  btn.disabled = false;
+  if(error){
+    console.error('preoccupations:', error);
+    note.textContent = /limite/.test(error.message || '')
+      ? (isEn ? 'You have reached 3 messages for today. Come back tomorrow.' : 'Vous avez atteint 3 messages pour aujourd’hui. Revenez demain.')
+      : (isEn ? 'The message could not be sent. Try again later.' : 'Le message n’a pas pu partir. Réessayez plus tard.');
+    return;
+  }
+  champ.value = '';
+  note.textContent = isEn ? '✓ Received, thank you. It will be counted at the next sorting.' : '✓ Reçu, merci. Il sera compté au prochain classement.';
+}
+window.mdEnvoyerPreoccupation = mdEnvoyerPreoccupation;
 
 function mdCompte(isEn, quota){
   const zone = document.getElementById('mdCompte');

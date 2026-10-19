@@ -2183,3 +2183,12 @@
 /* Le ⧉ qui copie l'adresse, à côté du ✉ (case des votes). */
 .bill-votes-copie{background:none; border:0; padding:0 2px; margin:0; font:inherit; font-weight:700; cursor:pointer; color:inherit;}
 .bill-votes-copie:hover{color:var(--gold, #b8860b);}
+
+/* Mon dossier : « Ce qui vous préoccupe » (mdPreoccupations, commun/dq.js). */
+.md-preoc-texte{width:100%; box-sizing:border-box; margin:6px 0; padding:10px; border:2px solid var(--ink); font:inherit; background:var(--card); color:var(--ink);}
+.md-preoc-envoi{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:12px;}
+.md-preoc-table{width:100%; border-collapse:collapse; margin:8px 0;}
+.md-preoc-table td{padding:6px 4px; border-bottom:1px solid var(--line-soft); vertical-align:middle;}
+.md-preoc-barre{width:40%;}
+.md-preoc-barre span{display:block; height:12px; background:#FFD24D; border:1px solid var(--ink);}
+.md-preoc-pc{width:4em; text-align:right; font-weight:700;}
