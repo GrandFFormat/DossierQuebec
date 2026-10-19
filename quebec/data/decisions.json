@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-18T12:41:22.204Z",
+ "generatedAt": "2026-10-19T15:45:53.969Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "licence": "Documents publics de la Ville de Québec — reproduction avec mention de la source, usage non commercial.",
  "parametres": {
@@ -12,9 +12,9 @@
    "Tableaux des décisions"
   ]
  },
- "totalDisponible": 5470,
- "nombre": 5470,
- "nouveauxDepuisDerniereExecution": 0,
+ "totalDisponible": 5482,
+ "nombre": 5482,
+ "nouveauxDepuisDerniereExecution": 12,
  "themes": {
   "procedure": {
    "libelle": "Procédure",
@@ -125,7 +125,7 @@
  },
  "statuts": {
   "termines": 1586,
-  "enCours": 107,
+  "enCours": 118,
   "inconnus": 0
  },
  "facettes": {
@@ -136,7 +136,7 @@
    },
    {
     "valeur": "Sommaires et mémoires",
-    "n": 1693
+    "n": 1704
    },
    {
     "valeur": "Procès-verbaux",
@@ -144,13 +144,13 @@
    },
    {
     "valeur": "Tableaux des décisions",
-    "n": 88
+    "n": 89
    }
   ],
   "instance": [
    {
     "valeur": "Comité exécutif",
-    "n": 1343
+    "n": 1344
    },
    {
     "valeur": "Conseil de la ville",
@@ -196,7 +196,7 @@
    },
    {
     "valeur": "Approvisionnements",
-    "n": 308
+    "n": 309
    },
    {
     "valeur": "Développement économique et grands projets",
@@ -208,11 +208,11 @@
    },
    {
     "valeur": "Transport et mobilité intelligente",
-    "n": 178
+    "n": 179
    },
    {
     "valeur": "Planification de l'aménagement et de l'environnement",
-    "n": 155
+    "n": 159
    },
    {
     "valeur": "Culture et patrimoine",
@@ -224,7 +224,7 @@
    },
    {
     "valeur": "Finances",
-    "n": 38
+    "n": 41
    },
    {
     "valeur": "Direction générale",
@@ -236,15 +236,15 @@
    },
    {
     "valeur": "Prévention et qualité du milieu",
-    "n": 16
+    "n": 17
+   },
+   {
+    "valeur": "Greffe et archives",
+    "n": 13
    },
    {
     "valeur": "Coordination stratégique et relations internationales",
     "n": 13
-   },
-   {
-    "valeur": "Greffe et archives",
-    "n": 12
    },
    {
     "valeur": "Ingénierie",
@@ -338,23 +338,23 @@
   "theme": [
    {
     "valeur": "urbanisme",
-    "n": 1029
+    "n": 1031
    },
    {
     "valeur": "procedure",
-    "n": 740
+    "n": 745
    },
    {
     "valeur": "subventions",
-    "n": 622
+    "n": 623
    },
    {
     "valeur": "transport",
-    "n": 573
+    "n": 574
    },
    {
     "valeur": "contrats",
-    "n": 559
+    "n": 560
    },
    {
     "valeur": "immobilier",
@@ -370,7 +370,7 @@
    },
    {
     "valeur": "travaux",
-    "n": 201
+    "n": 203
    },
    {
     "valeur": "rh",
@@ -407,6 +407,235 @@
   ]
  },
  "decisions": [
+  {
+   "id": "TD_CE_PL_2026-10-16_00h00.pdf",
+   "numero": null,
+   "objet": "Tableau des décisions de la séance spéciale du comité exécutif tenue le vendredi 16 octobre 2026 à 08h30",
+   "date": "2026-10-16",
+   "annee": "2026",
+   "type": "Tableaux des décisions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CE_PL_2026-10-16_00h00.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "AP2026-355.pdf",
+   "numero": "AP2026-355",
+   "objet": "Adjudication d'un contrat de services professionnels - Réfection du pont Drouin (POA186608) (Appel d'offres public 96402)",
+   "date": "2026-10-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Approvisionnements",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-355.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": "2026-10-14",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "echeance": "2026-10-14",
+   "theme": "travaux",
+   "themeSource": "objet"
+  },
+  {
+   "id": "FN2026-040.pdf",
+   "numero": "FN2026-040",
+   "objet": "Prise d'acte de l'état intérimaire du 31 août 2026 et approbation des virements et ajouts de crédits budgétaires pour la période du 1er mai au 31 août 2026 relevant de l'autorité du conseil de la ville",
+   "date": "2026-10-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Finances",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/FN2026-040.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif et conseil de la ville",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "FN2026-041.pdf",
+   "numero": "FN2026-041",
+   "objet": "Prise d'acte de la liste des virements de crédits budgétaires conformément à la délégation de pouvoirs prévue au chapitre II.1 du Règlement intérieur du comité exécutif sur la délégation de pouvoirs, R.R.C.E.V.Q. chapitre D-1 pour la période du 1er mai au 31 août 2026",
+   "date": "2026-10-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Finances",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/FN2026-041.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "FN2026-042.pdf",
+   "numero": "FN2026-042",
+   "objet": "Prise d'acte de l'état intérimaire du 31 août 2026 et approbation des virements budgétaires pour la période du 1er mai au 31 août 2026 relevant de l'autorité du conseil d'agglomération de Québec",
+   "date": "2026-10-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Finances",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/FN2026-042.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'agglomération de Québec",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "GA2026-014.pdf",
+   "numero": "GA2026-014",
+   "objet": "Avis de proposition déposé par monsieur le conseiller Stéphane Lachance, lors de la séance du conseil de la ville tenue le 6 octobre 2026, demandant d'ajouter des modalités de participation virtuelle des citoyens à la période de questions des séances du conseil de la ville",
+   "date": "2026-10-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Greffe et archives",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GA2026-014.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil de la ville",
+   "dateCible": "2026-10-20",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "echeance": "2026-10-20",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "PA2026-110.pdf",
+   "numero": "PA2026-110",
+   "objet": "Conclusion d'une entente de contribution entre la Ville de Québec et le gouvernement du Canada, dans le cadre du Fonds pour les infrastructures naturelles, relativement à la réception d'une contribution financière maximale de 760 207 $ pour la conservation, l'aménagement et la mise en valeur du parc",
+   "date": "2026-10-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-110.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": "2026-10-14",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "echeance": "2026-10-14",
+   "theme": "travaux",
+   "themeSource": "objet"
+  },
+  {
+   "id": "PA2026-141.pdf",
+   "numero": "PA2026-141",
+   "objet": "Modification avant adoption du Règlement modifiant le Règlement sur le Plan directeur d'aménagement et de développement relativement au Plan particulier d'urbanisme pour la colline Parlementaire, R.V.Q. 3559",
+   "date": "2026-10-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-141.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil de la ville",
+   "dateCible": "2026-10-20",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "echeance": "2026-10-20",
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "PA2026-142.pdf",
+   "numero": "PA2026-142",
+   "objet": "Modification avant adoption du Règlement modifiant le Règlement de l'Arrondissement de La Cité-Limoilou sur l'urbanisme aux fins de sa concordance au Plan particulier d'urbanisme pour la colline Parlementaire, R.V.Q. 3560",
+   "date": "2026-10-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-142.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil de la ville",
+   "dateCible": "2026-10-20",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "echeance": "2026-10-20",
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "PA2026-144.pdf",
+   "numero": "PA2026-144",
+   "objet": "Conclusion d'ententes de partenariats et de commandites entre la Ville de Québec et quatre (4) organismes partenaires relatives au versement de commandites et de revenus de location de kiosques dans le cadre de la Conférence canadienne sur la forêt urbaine 2026",
+   "date": "2026-10-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Planification de l'aménagement et de l'environnement",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-144.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Comité exécutif",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Comité exécutif",
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "PQ2026-017.pdf",
+   "numero": "PQ2026-017",
+   "objet": "Convention de prêt et de subvention entre la Ville de Québec et la Fédération canadienne des municipalités, en sa qualité de fiduciaire du Fonds municipal vert, pour un financement global d'un montant maximal de 11 500 000 $, composé d'un prêt (10 000 000 $) et d'une subvention (1 500 000 $), pour l",
+   "date": "2026-10-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Prévention et qualité du milieu",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PQ2026-017.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'agglomération de Québec",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "TM2026-280.pdf",
+   "numero": "TM2026-280",
+   "objet": "Modification avant adoption du Règlement modifiant le Règlement sur le stationnement sur le campus de l'Université Laval relativement au règlement interne de l'université, R.V.Q. 3574",
+   "date": "2026-10-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Transport et mobilité intelligente",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-280.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil de la ville",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
   {
    "id": "TD_CE_PL_2026-10-14_00h00.pdf",
    "numero": null,
