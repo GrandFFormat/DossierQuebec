@@ -174,13 +174,13 @@ function main() {
       const d = elusParId.get(Number(p.assnatId));
       if (!d) { anciens++; const h = histo.elus[p.assnatId]; return `<li class="bill-votes-ancien">${echapper(h ? h.name : p.lastName)} <span>(${echapper(p.party || '')})</span></li>`; }
       const courriel = courriels.get(cleNom(d.name));
-      return `<li>${echapper(d.name)} <span>(${echapper(d.party || p.party || '')})</span>${courriel ? ` <a class="bill-votes-mail" href="mailto:${echapper(courriel)}?subject=${objet}" aria-label="${en ? 'Email' : 'Écrire à'} ${echapper(d.name)}">✉</a>` : ''}</li>`;
+      return `<li>${echapper(d.name)} <span>(${echapper(d.party || p.party || '')})</span>${courriel ? ` <a class="bill-votes-mail" href="mailto:${echapper(courriel)}?subject=${objet}" aria-label="${en ? 'Email' : 'Écrire à'} ${echapper(d.name)}">✉</a><button type="button" class="bill-votes-copie" onclick="event.stopPropagation(); copierCourriel(this, '${echapper(courriel)}')" title="${en ? 'Copy the address' : 'Copier l’adresse'}" aria-label="${en ? 'Copy the address of' : 'Copier l’adresse de'} ${echapper(d.name)}">⧉</button>` : ''}</li>`;
     };
     const colonne = (liste, t) => `<div class="bill-votes-col"><b>${t} (${liste.length})</b>${liste.length ? `<ul>${liste.map(nom).join('')}</ul>` : `<p>—</p>`}</div>`;
     const cols = colonne(v.pour, en ? 'For' : 'Pour') + colonne(v.contre, en ? 'Against' : 'Contre') + colonne(v.abstentions, en ? 'Abstained' : 'Abstention');
     return `<details class="bill-votes"><summary>${titre}</summary><p class="bill-votes-note">${en
-      ? `Recorded vote at the final passage, ${v.date}. ✉ writes to the member: the email opens empty, with the law’s name as subject.`
-      : `Vote nom par nom à l’adoption, le ${v.date}. ✉ écrit à l’élu·e : le courriel s’ouvre vide, avec le nom de la loi en objet.`} <a href="${echapper(v.url)}" target="_blank" rel="noopener">${en ? 'The vote on the Assembly’s website' : 'Le vote sur le site de l’Assemblée'}</a>.</p><div class="bill-votes-grille">${cols}</div>${anciens ? `<p class="bill-votes-note">${en
+      ? `Recorded vote at the final passage, ${v.date}. ✉ opens your email app, with the law’s name as subject; ⧉ copies the address, to paste in Gmail or elsewhere.`
+      : `Vote nom par nom à l’adoption, le ${v.date}. ✉ ouvre votre logiciel de courriel, avec le nom de la loi en objet ; ⧉ copie l’adresse, à coller dans Gmail ou ailleurs.`} <a href="${echapper(v.url)}" target="_blank" rel="noopener">${en ? 'The vote on the Assembly’s website' : 'Le vote sur le site de l’Assemblée'}</a>.</p><div class="bill-votes-grille">${cols}</div>${anciens ? `<p class="bill-votes-note">${en
       ? 'A name without ✉ and in grey: this person no longer sits in the Assembly.'
       : 'Un nom en gris, sans ✉ : cette personne ne siège plus à l’Assemblée.'}</p>` : ''}</details>`;
   };
