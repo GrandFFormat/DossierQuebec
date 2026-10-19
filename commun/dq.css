@@ -2203,3 +2203,6 @@
 .admin-preoc th, .admin-preoc td{padding:6px 8px; border-bottom:1px solid var(--line-soft); text-align:left; vertical-align:top;}
 .admin-preoc td:nth-child(2){white-space:pre-wrap; max-width:520px;}
 .admin-preoc-spam td{opacity:.55;}
+
+.admin-preoc-actions{white-space:nowrap;}
+.admin-preoc-ok{font-weight:700; color:#1d7a3a;}
