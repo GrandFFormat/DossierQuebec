@@ -2194,3 +2194,12 @@
 .md-preoc-pc{width:4em; text-align:right; font-weight:700;}
 
 .md-preoc-alerte{color:var(--ink); background:#FFD24D; padding:6px 10px; border:2px solid var(--ink);}
+
+/* Mon dossier : compteur de mots ; Lexique : les messages côté admin (renderAdminPreoccupations). */
+.md-preoc-mots{margin-left:auto;}
+.md-preoc-trop{color:#b00020; font-weight:700;}
+.admin-preoc-defile{max-height:520px; overflow:auto; border:1px solid var(--line-soft);}
+.admin-preoc{width:100%; border-collapse:collapse; font-size:13.5px;}
+.admin-preoc th, .admin-preoc td{padding:6px 8px; border-bottom:1px solid var(--line-soft); text-align:left; vertical-align:top;}
+.admin-preoc td:nth-child(2){white-space:pre-wrap; max-width:520px;}
+.admin-preoc-spam td{opacity:.55;}

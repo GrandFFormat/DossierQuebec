@@ -1469,8 +1469,8 @@ async function mdPreoccupations(isEn){
   // La boîte reste visible sans compte ; c'est à l'envoi qu'on dit qu'il en faut un.
   const formulaire = true
     ? `<label class="md-note" for="mdPreocTexte">${isEn ? 'In your own words: a problem, a topic, something that should change.' : 'En vos mots : un problème, un sujet, quelque chose qui devrait changer.'}</label>
-       <textarea id="mdPreocTexte" class="md-preoc-texte" maxlength="500" rows="3" placeholder="${isEn ? 'What worries you?' : 'Qu’est-ce qui vous préoccupe ?'}"></textarea>
-       <div class="md-preoc-envoi"><button class="account-btn" id="mdPreocBtn" onclick="mdEnvoyerPreoccupation()">${isEn ? 'Send' : 'Envoyer'}</button><span class="md-note" id="mdPreocNote">${isEn ? 'Your message is never published. 3 messages per day at most. An account is needed to send.' : 'Votre message n’est jamais publié. 3 messages par jour au plus. Il faut un compte pour envoyer.'}</span></div>`
+       <textarea id="mdPreocTexte" class="md-preoc-texte" maxlength="2000" rows="4" oninput="mdCompterMots()" placeholder="${isEn ? 'What worries you?' : 'Qu’est-ce qui vous préoccupe ?'}"></textarea>
+       <div class="md-preoc-envoi"><button class="account-btn" id="mdPreocBtn" onclick="mdEnvoyerPreoccupation()">${isEn ? 'Send' : 'Envoyer'}</button><span class="md-note" id="mdPreocNote">${isEn ? 'Your message is never published. 300 words and 3 messages per day at most. An account is needed to send.' : 'Votre message n’est jamais publié. 300 mots et 3 messages par jour au plus. Il faut un compte pour envoyer.'}</span><span class="md-note md-preoc-mots" id="mdPreocMots"></span></div>`
     : `<p>${isEn ? 'Sign in (above) to write what worries you.' : 'Connectez-vous (plus haut) pour écrire ce qui vous préoccupe.'}</p>`;
   zone.innerHTML = `<div class="md-carte">
     <div class="md-carte-tete"><h2>${isEn ? 'What worries you' : 'Ce qui vous préoccupe'}</h2><span class="md-etiquette">${p.recus || 0} ${isEn ? ((p.recus || 0) > 1 ? 'messages received' : 'message received') : ((p.recus || 0) > 1 ? 'messages reçus' : 'message reçu')}</span></div>
@@ -1486,6 +1486,7 @@ async function mdEnvoyerPreoccupation(){
   const champ = document.getElementById('mdPreocTexte'), btn = document.getElementById('mdPreocBtn'), note = document.getElementById('mdPreocNote');
   const texte = (champ?.value || '').trim();
   if(texte.length < 3){ note.textContent = isEn ? 'Write a few words first.' : 'Écrivez quelques mots d’abord.'; return; }
+  if(nbMots(texte) > 300){ note.textContent = isEn ? `Your message has ${nbMots(texte)} words: 300 at most.` : `Votre message compte ${nbMots(texte)} mots : 300 au plus.`; return; }
   if(!currentUser){
     note.innerHTML = isEn
       ? '<b>An account is needed to send your message.</b> Enter your email in “Your account”, just above: a sign-in link arrives, no password. Your text stays here in the meantime.'
@@ -1495,7 +1496,7 @@ async function mdEnvoyerPreoccupation(){
     return;
   }
   btn.disabled = true;
-  const { error } = await supabaseClient.from('preoccupations').insert({ texte: texte.slice(0, 500) });
+  const { error } = await supabaseClient.from('preoccupations').insert({ texte: texte.slice(0, 2000) });
   btn.disabled = false;
   if(error){
     console.error('preoccupations:', error);
@@ -1508,6 +1509,52 @@ async function mdEnvoyerPreoccupation(){
   note.textContent = isEn ? '✓ Received, thank you. It will be counted at the next sorting.' : '✓ Reçu, merci. Il sera compté au prochain classement.';
 }
 window.mdEnvoyerPreoccupation = mdEnvoyerPreoccupation;
+const nbMots = (t) => (String(t).trim().match(/\S+/g) || []).length;
+function mdCompterMots(){
+  const n = nbMots(document.getElementById('mdPreocTexte')?.value || ''), z = document.getElementById('mdPreocMots');
+  if(z){ z.textContent = n ? `${n} / 300 ${currentLang === 'en' ? 'words' : 'mots'}` : ''; z.classList.toggle('md-preoc-trop', n > 300); }
+}
+window.mdCompterMots = mdCompterMots;
+
+// LES MESSAGES, CÔTÉ ADMIN (Martin, 18 oct. 2026 : sous « Demandes d'explications », page Lexique).
+// Les 200 plus récents, avec leur statut et leur sujet ; un admin peut marquer un message comme spam
+// (ou l'en sortir) et le changer de sujet. Le tableau public se recalcule au classement du matin.
+// Lecture et correction permises par scripts/supabase-schema-preoccupations-admin.sql.
+async function renderAdminPreoccupations(){
+  const zone = document.getElementById('adminPreoccupations');
+  if(!zone) return;
+  if(!(await checkIsAdmin())){ zone.innerHTML = ''; return; }
+  const isEn = currentLang === 'en';
+  const { data, error } = await supabaseClient.from('preoccupations').select('id, texte, statut, sujet, created_at').order('created_at', { ascending: false }).limit(200);
+  if(error){ console.error('renderAdminPreoccupations:', error); zone.innerHTML = `<div class="account-note">${isEn ? 'Messages could not be read.' : 'Les messages n’ont pas pu être lus.'}</div>`; return; }
+  let sujets = [];
+  try{ sujets = (await (await fetch('/data/preoccupations.json')).json()).sujets || []; }catch(e){}
+  const h = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  const choix = (m) => `<select onchange="adminPreocSujet('${m.id}', this.value)"><option value="">${isEn ? '— no topic —' : '— aucun sujet —'}</option>${sujets.map((s) => `<option value="${h(s.cle)}"${s.cle === m.sujet ? ' selected' : ''}>${h(s.fr)}</option>`).join('')}${m.sujet && !sujets.some((s) => s.cle === m.sujet) ? `<option value="${h(m.sujet)}" selected>${h(m.sujet)}</option>` : ''}</select>`;
+  const lignes = (data || []).map((m) => `<tr class="admin-preoc-${m.statut}">
+      <td>${h(String(m.created_at).slice(0, 10))}</td>
+      <td>${h(m.texte)}</td>
+      <td>${m.statut === 'spam' ? (isEn ? 'spam' : 'spam') : m.statut === 'classe' ? (isEn ? 'sorted' : 'classé') : (isEn ? 'new' : 'nouveau')}</td>
+      <td>${choix(m)}</td>
+      <td><button class="account-btn" onclick="adminPreocSpam('${m.id}', ${m.statut === 'spam' ? 'false' : 'true'})">${m.statut === 'spam' ? (isEn ? 'Not spam' : 'Pas du spam') : 'Spam'}</button></td>
+    </tr>`).join('');
+  zone.innerHTML = `<div class="account-note" style="margin:18px 0 10px;"><b>${isEn ? 'What worries visitors (admin only)' : 'Ce qui préoccupe les visiteurs (réservé aux admins)'}</b> — ${isEn
+    ? `${(data || []).length} most recent messages. The public table is recounted at the next morning sorting.`
+    : `les ${(data || []).length} messages les plus récents. Le tableau public se recompte au classement du lendemain matin.`}</div>
+    ${lignes ? `<div class="admin-preoc-defile"><table class="admin-preoc"><thead><tr><th>${isEn ? 'Date' : 'Date'}</th><th>Message</th><th>${isEn ? 'Status' : 'Statut'}</th><th>${isEn ? 'Topic' : 'Sujet'}</th><th></th></tr></thead><tbody>${lignes}</tbody></table></div>` : `<p class="account-note">${isEn ? 'No message yet.' : 'Aucun message pour l’instant.'}</p>`}`;
+}
+async function adminPreocSpam(id, spam){
+  const { error } = await supabaseClient.from('preoccupations').update(spam ? { statut: 'spam', sujet: null } : { statut: 'nouveau', sujet: null }).eq('id', id);
+  if(error){ console.error('adminPreocSpam:', error); alert(currentLang === 'en' ? 'Not saved.' : 'Pas enregistré.'); }
+  renderAdminPreoccupations();
+}
+async function adminPreocSujet(id, sujet){
+  const { error } = await supabaseClient.from('preoccupations').update(sujet ? { statut: 'classe', sujet } : { statut: 'nouveau', sujet: null }).eq('id', id);
+  if(error){ console.error('adminPreocSujet:', error); alert(currentLang === 'en' ? 'Not saved.' : 'Pas enregistré.'); }
+  renderAdminPreoccupations();
+}
+window.adminPreocSpam = adminPreocSpam;
+window.adminPreocSujet = adminPreocSujet;
 
 function mdCompte(isEn, quota){
   const zone = document.getElementById('mdCompte');
@@ -1721,6 +1768,7 @@ async function checkIsAdmin(){
 const PETITION_TIERS = [1000, 5000, 25000];
 
 async function renderAdminFlagCounts(){
+  renderAdminPreoccupations();   // le panneau des préoccupations suit celui des demandes, sur la même page
   if(!document.getElementById('adminFlagCounts')) return;   // vue absente de cette page
   const container = document.getElementById('adminFlagCounts');
   if(!container) return;
