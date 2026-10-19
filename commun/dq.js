@@ -4403,3 +4403,13 @@ try{ if(!new URLSearchParams(location.search).get('ville')) localStorage.setItem
   renderTicker();
   demarrageFini = true;
 })();
+
+// Le bouton ⧉ à côté du ✉ dans la case des votes (Martin, 18 oct. 2026 : « si j'ai un Gmail, j'ai
+// pas le goût d'utiliser Outlook ») : il copie l'adresse de l'élu·e, à coller dans n'importe quel
+// courriel. Le ✉, lui, ouvre le logiciel de courriel de l'appareil.
+function copierCourriel(bouton, adresse){
+  const fait = () => { const avant = bouton.textContent; bouton.textContent = '✓'; setTimeout(() => { bouton.textContent = avant; }, 1500); };
+  if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(adresse).then(fait).catch(() => window.prompt('', adresse));
+  else window.prompt('', adresse);
+}
+window.copierCourriel = copierCourriel;
