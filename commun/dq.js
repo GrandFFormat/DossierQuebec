@@ -1466,10 +1466,11 @@ async function mdPreoccupations(isEn){
     const pc = p.mentions ? Math.round(s.n / p.mentions * 100) : 0;
     return `<tr><td>${h(isEn ? (s.en || s.fr) : s.fr)}</td><td class="md-preoc-barre"><span style="width:${pc}%"></span></td><td class="md-preoc-pc">${pc} %</td></tr>`;
   }).join('');
-  const formulaire = currentUser
+  // La boîte reste visible sans compte ; c'est à l'envoi qu'on dit qu'il en faut un.
+  const formulaire = true
     ? `<label class="md-note" for="mdPreocTexte">${isEn ? 'In your own words: a problem, a topic, something that should change.' : 'En vos mots : un problème, un sujet, quelque chose qui devrait changer.'}</label>
        <textarea id="mdPreocTexte" class="md-preoc-texte" maxlength="500" rows="3" placeholder="${isEn ? 'What worries you?' : 'Qu’est-ce qui vous préoccupe ?'}"></textarea>
-       <div class="md-preoc-envoi"><button class="account-btn" id="mdPreocBtn" onclick="mdEnvoyerPreoccupation()">${isEn ? 'Send' : 'Envoyer'}</button><span class="md-note" id="mdPreocNote">${isEn ? 'Your message is never published. 3 messages per day at most.' : 'Votre message n’est jamais publié. 3 messages par jour au plus.'}</span></div>`
+       <div class="md-preoc-envoi"><button class="account-btn" id="mdPreocBtn" onclick="mdEnvoyerPreoccupation()">${isEn ? 'Send' : 'Envoyer'}</button><span class="md-note" id="mdPreocNote">${isEn ? 'Your message is never published. 3 messages per day at most. An account is needed to send.' : 'Votre message n’est jamais publié. 3 messages par jour au plus. Il faut un compte pour envoyer.'}</span></div>`
     : `<p>${isEn ? 'Sign in (above) to write what worries you.' : 'Connectez-vous (plus haut) pour écrire ce qui vous préoccupe.'}</p>`;
   zone.innerHTML = `<div class="md-carte">
     <div class="md-carte-tete"><h2>${isEn ? 'What worries you' : 'Ce qui vous préoccupe'}</h2><span class="md-etiquette">${p.recus || 0} ${isEn ? ((p.recus || 0) > 1 ? 'messages received' : 'message received') : ((p.recus || 0) > 1 ? 'messages reçus' : 'message reçu')}</span></div>
@@ -1485,6 +1486,14 @@ async function mdEnvoyerPreoccupation(){
   const champ = document.getElementById('mdPreocTexte'), btn = document.getElementById('mdPreocBtn'), note = document.getElementById('mdPreocNote');
   const texte = (champ?.value || '').trim();
   if(texte.length < 3){ note.textContent = isEn ? 'Write a few words first.' : 'Écrivez quelques mots d’abord.'; return; }
+  if(!currentUser){
+    note.innerHTML = isEn
+      ? '<b>An account is needed to send your message.</b> Enter your email in “Your account”, just above: a sign-in link arrives, no password. Your text stays here in the meantime.'
+      : '<b>Il faut un compte pour envoyer votre message.</b> Entrez votre courriel dans « Votre compte », juste au-dessus : un lien de connexion arrive, sans mot de passe. Votre texte reste ici en attendant.';
+    note.classList.add('md-preoc-alerte');
+    document.getElementById('mdCompte')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    return;
+  }
   btn.disabled = true;
   const { error } = await supabaseClient.from('preoccupations').insert({ texte: texte.slice(0, 500) });
   btn.disabled = false;
