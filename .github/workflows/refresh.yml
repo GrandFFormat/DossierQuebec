@@ -56,6 +56,8 @@ jobs:
         id: refresh
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: npm run refresh
 
       # Rafraîchissement tolérant : `npm run refresh` sort 0 même si un scraper a
