@@ -66,9 +66,9 @@ const SCRAPERS = [
   ['Scrape : courriels des députés (assnat)', ['scrapers/depute-emails.js']],
   ['Scrape : votes (assnat)', ['scrapers/votes.js']],
   ['Scrape : ministres (quebec.ca)', ['scrapers/ministers.js']],
-  // « Ce qui vous préoccupe » (Mon dossier) : classement des messages des visiteurs par Claude,
+  // « Ce qui vous préoccupe » (Mon dossier) : recompte des sujets rangés à la main par Martin,
   // tableau des sujets dans data/preoccupations.json. « soft » : une panne garde le tableau d'hier.
-  ['Préoccupations des visiteurs (Claude)', ['scrapers/preoccupations.js'], { soft: true }],
+  ['Préoccupations des visiteurs (recompte)', ['scrapers/preoccupations.js'], { soft: true }],
   // Finances publiques (barème des indemnités, groupes de circonscriptions, rapports de dépenses) :
   // « soft », une panne garde le fichier précédent. Le PDF des dépenses (une cinquantaine de Mo)
   // n'est retéléchargé que si l'Assemblée en publie un nouveau.

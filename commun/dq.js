@@ -1477,8 +1477,8 @@ async function mdPreoccupations(isEn){
     ${formulaire}
     ${lignes ? `<table class="md-preoc-table"><tbody>${lignes}</tbody></table>` : `<p class="md-note">${isEn ? 'The table of topics will appear here once the first messages are sorted.' : 'Le tableau des sujets paraîtra ici quand les premiers messages auront été classés.'}</p>`}
     <p class="md-note">${isEn
-      ? `Messages are grouped into topics once a day by an AI, and reviewed by hand from time to time. A person counts once per topic. This is not a poll: only visitors who wrote are counted.${p.majLe ? ` Last count: ${h(p.majLe)}.` : ''}`
-      : `Les messages sont regroupés en sujets une fois par jour par une IA, et révisés à la main à temps perdu. Une personne compte une fois par sujet. Ce n’est pas un sondage : seuls les visiteurs qui ont écrit sont comptés.${p.majLe ? ` Dernier compte : ${h(p.majLe)}.` : ''}`}</p>
+      ? `Messages are read and grouped into topics by hand, from time to time. A person counts once per topic. This is not a poll: only visitors who wrote are counted.${p.majLe ? ` Last count: ${h(p.majLe)}.` : ''}`
+      : `Les messages sont lus et regroupés en sujets à la main, à temps perdu. Une personne compte une fois par sujet. Ce n’est pas un sondage : seuls les visiteurs qui ont écrit sont comptés.${p.majLe ? ` Dernier compte : ${h(p.majLe)}.` : ''}`}</p>
   </div>`;
 }
 async function mdEnvoyerPreoccupation(){
@@ -1527,10 +1527,13 @@ async function renderAdminPreoccupations(){
   const isEn = currentLang === 'en';
   const { data, error } = await supabaseClient.from('preoccupations').select('id, texte, statut, sujet, created_at').order('created_at', { ascending: false }).limit(200);
   if(error){ console.error('renderAdminPreoccupations:', error); zone.innerHTML = `<div class="account-note">${isEn ? 'Messages could not be read.' : 'Les messages n’ont pas pu être lus.'}</div>`; return; }
-  let sujets = [];
-  try{ sujets = (await (await fetch('/data/preoccupations.json')).json()).sujets || []; }catch(e){}
+  // Les sujets : ceux déjà donnés à un message, plus ceux du tableau publié. Le sujet EST son libellé
+  // (« Coût du logement ») : Martin les crée et les range lui-même, sans IA (18 oct. 2026).
+  let publies = [];
+  try{ publies = (await (await fetch('/data/preoccupations.json')).json()).sujets || []; }catch(e){}
+  const sujets = [...new Set([...(data || []).map((m) => m.sujet).filter(Boolean), ...publies.map((p) => p.fr || p.cle)])].sort((a, b) => a.localeCompare(b, 'fr'));
   const h = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-  const choix = (m) => `<select onchange="adminPreocSujet('${m.id}', this.value)"><option value="">${isEn ? '— no topic —' : '— aucun sujet —'}</option>${sujets.map((s) => `<option value="${h(s.cle)}"${s.cle === m.sujet ? ' selected' : ''}>${h(s.fr)}</option>`).join('')}${m.sujet && !sujets.some((s) => s.cle === m.sujet) ? `<option value="${h(m.sujet)}" selected>${h(m.sujet)}</option>` : ''}</select>`;
+  const choix = (m) => `<select onchange="adminPreocSujet('${m.id}', this.value, this)"><option value="">${isEn ? '— no topic —' : '— aucun sujet —'}</option>${sujets.map((t) => `<option value="${h(t)}"${t === m.sujet ? ' selected' : ''}>${h(t)}</option>`).join('')}<option value="__nouveau__">${isEn ? '➕ New topic…' : '➕ Nouveau sujet…'}</option></select>`;
   const lignes = (data || []).map((m) => `<tr class="admin-preoc-${m.statut}">
       <td>${h(String(m.created_at).slice(0, 10))}</td>
       <td>${h(m.texte)}</td>
@@ -1539,8 +1542,8 @@ async function renderAdminPreoccupations(){
       <td><button class="account-btn" onclick="adminPreocSpam('${m.id}', ${m.statut === 'spam' ? 'false' : 'true'})">${m.statut === 'spam' ? (isEn ? 'Not spam' : 'Pas du spam') : 'Spam'}</button></td>
     </tr>`).join('');
   zone.innerHTML = `<div class="account-note" style="margin:18px 0 10px;"><b>${isEn ? 'What worries visitors (admin only)' : 'Ce qui préoccupe les visiteurs (réservé aux admins)'}</b> — ${isEn
-    ? `${(data || []).length} most recent message(s). Every morning, the AI sorts the "new" messages: it files each one under a topic (or creates one) and sets spam aside; the public table is recounted at the same time. Nothing to approve: only fix what is misfiled.`
-    : `${(data || []).length > 1 ? `les ${(data || []).length} messages les plus récents` : `${(data || []).length} message`}. Chaque matin, l’IA classe les messages « nouveau » : elle range chacun dans un sujet (ou en crée un) et écarte le spam ; le tableau public se recompte en même temps. Rien à approuver : corrigez seulement ce qui est mal classé.`}</div>
+    ? `${(data || []).length} most recent message(s). Pick a topic for each message (or create one with « ➕ New topic… »), or mark it as spam. The public table is recounted every morning.`
+    : `${(data || []).length > 1 ? `les ${(data || []).length} messages les plus récents` : `${(data || []).length} message`}. Choisissez un sujet pour chaque message (ou créez-en un avec « ➕ Nouveau sujet… »), ou marquez-le comme spam. Le tableau public se recompte chaque matin.`}</div>
     ${lignes ? `<div class="admin-preoc-defile"><table class="admin-preoc"><thead><tr><th>${isEn ? 'Date' : 'Date'}</th><th>Message</th><th>${isEn ? 'Status' : 'Statut'}</th><th>${isEn ? 'Topic' : 'Sujet'}</th><th></th></tr></thead><tbody>${lignes}</tbody></table></div>` : `<p class="account-note">${isEn ? 'No message yet.' : 'Aucun message pour l’instant.'}</p>`}`;
 }
 async function adminPreocSpam(id, spam){
@@ -1548,7 +1551,12 @@ async function adminPreocSpam(id, spam){
   if(error){ console.error('adminPreocSpam:', error); alert(currentLang === 'en' ? 'Not saved.' : 'Pas enregistré.'); }
   renderAdminPreoccupations();
 }
-async function adminPreocSujet(id, sujet){
+async function adminPreocSujet(id, sujet, menu){
+  if(sujet === '__nouveau__'){
+    const libelle = (window.prompt(currentLang === 'en' ? 'Name of the new topic (e.g. Cost of housing):' : 'Nom du nouveau sujet (ex. : Coût du logement) :') || '').trim().slice(0, 80);
+    if(libelle.length < 2){ if(menu) renderAdminPreoccupations(); return; }
+    sujet = libelle;
+  }
   const { error } = await supabaseClient.from('preoccupations').update(sujet ? { statut: 'classe', sujet } : { statut: 'nouveau', sujet: null }).eq('id', id);
   if(error){ console.error('adminPreocSujet:', error); alert(currentLang === 'en' ? 'Not saved.' : 'Pas enregistré.'); }
   renderAdminPreoccupations();
