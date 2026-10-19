@@ -1459,7 +1459,19 @@ let _preoc = null;
 async function mdPreoccupations(isEn){
   const zone = document.getElementById('mdPreoccupations');
   if(!zone) return;
-  if(!_preoc){ try{ _preoc = await (await fetch('/data/preoccupations.json')).json(); }catch(e){ _preoc = { recus: 0, mentions: 0, sujets: [] }; } }
+  // En direct d'abord (Martin, 19 oct. 2026 : le tableau suit ses approbations tout de suite) : la
+  // fonction Supabase preoccupations_tableau() ne rend que les totaux, jamais un message. Si elle
+  // manque ou tombe, on retombe sur le tableau publié chaque matin (data/preoccupations.json).
+  if(!_preoc){
+    try{
+      const { data, error } = await supabaseClient.rpc('preoccupations_tableau');
+      if(error || !data) throw error || new Error('vide');
+      const sujets = (data.sujets || []).map((s) => ({ fr: s.sujet, en: s.sujet, n: s.n }));
+      _preoc = { recus: data.recus || 0, mentions: sujets.reduce((t, s) => t + s.n, 0), sujets, direct: true };
+    }catch(e){
+      try{ _preoc = await (await fetch('/data/preoccupations.json')).json(); }catch(e2){ _preoc = { recus: 0, mentions: 0, sujets: [] }; }
+    }
+  }
   const p = _preoc;
   const h = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
   const lignes = (p.sujets || []).map((s) => {
@@ -1477,8 +1489,8 @@ async function mdPreoccupations(isEn){
     ${formulaire}
     ${lignes ? `<table class="md-preoc-table"><tbody>${lignes}</tbody></table>` : `<p class="md-note">${isEn ? 'The table of topics will appear here once the first messages are sorted.' : 'Le tableau des sujets paraîtra ici quand les premiers messages auront été classés.'}</p>`}
     <p class="md-note">${isEn
-      ? `Messages are read and grouped into topics by hand, from time to time. A person counts once per topic. This is not a poll: only visitors who wrote are counted.${p.majLe ? ` Last count: ${h(p.majLe)}.` : ''}`
-      : `Les messages sont lus et regroupés en sujets à la main, à temps perdu. Une personne compte une fois par sujet. Ce n’est pas un sondage : seuls les visiteurs qui ont écrit sont comptés.${p.majLe ? ` Dernier compte : ${h(p.majLe)}.` : ''}`}</p>
+      ? `Messages are read and grouped into topics by hand, from time to time. A person counts once per topic. This is not a poll: only visitors who wrote are counted.${p.direct ? ' Live count.' : p.majLe ? ` Last count: ${h(p.majLe)}.` : ''}`
+      : `Les messages sont lus et regroupés en sujets à la main, à temps perdu. Une personne compte une fois par sujet. Ce n’est pas un sondage : seuls les visiteurs qui ont écrit sont comptés.${p.direct ? ' Compte en direct.' : p.majLe ? ` Dernier compte : ${h(p.majLe)}.` : ''}`}</p>
   </div>`;
 }
 async function mdEnvoyerPreoccupation(){
