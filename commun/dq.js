@@ -1538,13 +1538,13 @@ async function renderAdminPreoccupations(){
       <td>${h(String(m.created_at).slice(0, 10))}</td>
       <td>${h(m.texte)}</td>
       <td>${m.statut === 'spam' ? (isEn ? 'spam' : 'spam') : m.statut === 'classe' ? (isEn ? 'sorted' : 'classé') : (isEn ? 'new' : 'nouveau')}</td>
-      <td>${choix(m)}</td>
-      <td><button class="account-btn" onclick="adminPreocSpam('${m.id}', ${m.statut === 'spam' ? 'false' : 'true'})">${m.statut === 'spam' ? (isEn ? 'Not spam' : 'Pas du spam') : 'Spam'}</button></td>
+      <td>${m.statut === 'classe' ? `<span class="admin-preoc-ok">✓ ${isEn ? 'Approved' : 'Approuvé'}</span>` : m.statut === 'spam' ? '—' : `<button class="account-btn" onclick="adminPreocApprouver('${m.id}', ${m.sujet ? 'true' : 'false'})">${isEn ? 'Approve' : 'Approuver'}</button>`}</td>
+      <td class="admin-preoc-actions">${choix(m)} <button class="account-btn" onclick="adminPreocSpam('${m.id}', ${m.statut === 'spam' ? 'false' : 'true'})">${m.statut === 'spam' ? (isEn ? 'Not spam' : 'Pas du spam') : 'Spam'}</button></td>
     </tr>`).join('');
   zone.innerHTML = `<div class="account-note" style="margin:18px 0 10px;"><b>${isEn ? 'What worries visitors (admin only)' : 'Ce qui préoccupe les visiteurs (réservé aux admins)'}</b> — ${isEn
-    ? `${(data || []).length} most recent message(s). Pick a topic for each message (or create one with « ➕ New topic… »), or mark it as spam. The public table is recounted every morning.`
-    : `${(data || []).length > 1 ? `les ${(data || []).length} messages les plus récents` : `${(data || []).length} message`}. Choisissez un sujet pour chaque message (ou créez-en un avec « ➕ Nouveau sujet… »), ou marquez-le comme spam. Le tableau public se recompte chaque matin.`}</div>
-    ${lignes ? `<div class="admin-preoc-defile"><table class="admin-preoc"><thead><tr><th>${isEn ? 'Date' : 'Date'}</th><th>Message</th><th>${isEn ? 'Status' : 'Statut'}</th><th>${isEn ? 'Topic' : 'Sujet'}</th><th></th></tr></thead><tbody>${lignes}</tbody></table></div>` : `<p class="account-note">${isEn ? 'No message yet.' : 'Aucun message pour l’instant.'}</p>`}`;
+    ? `${(data || []).length} most recent message(s). For each message: pick a topic (or create one with « ➕ New topic… »), then « Approve » so it counts in the public table; otherwise « Spam ». The public table is recounted every morning.`
+    : `${(data || []).length > 1 ? `les ${(data || []).length} messages les plus récents` : `${(data || []).length} message`}. Pour chaque message : choisissez un sujet (ou créez-en un avec « ➕ Nouveau sujet… »), puis « Approuver » pour qu’il compte dans le tableau public ; sinon « Spam ». Le tableau public se recompte chaque matin.`}</div>
+    ${lignes ? `<div class="admin-preoc-defile"><table class="admin-preoc"><thead><tr><th>${isEn ? 'Date' : 'Date'}</th><th>Message</th><th>${isEn ? 'Status' : 'Statut'}</th><th>${isEn ? 'Approved' : 'Approuvé'}</th><th>${isEn ? 'Topic' : 'Sujet'}</th></tr></thead><tbody>${lignes}</tbody></table></div>` : `<p class="account-note">${isEn ? 'No message yet.' : 'Aucun message pour l’instant.'}</p>`}`;
 }
 async function adminPreocSpam(id, spam){
   const { error } = await supabaseClient.from('preoccupations').update(spam ? { statut: 'spam', sujet: null } : { statut: 'nouveau', sujet: null }).eq('id', id);
@@ -1557,10 +1557,17 @@ async function adminPreocSujet(id, sujet, menu){
     if(libelle.length < 2){ if(menu) renderAdminPreoccupations(); return; }
     sujet = libelle;
   }
-  const { error } = await supabaseClient.from('preoccupations').update(sujet ? { statut: 'classe', sujet } : { statut: 'nouveau', sujet: null }).eq('id', id);
+  const { error } = await supabaseClient.from('preoccupations').update(sujet ? { sujet } : { statut: 'nouveau', sujet: null }).eq('id', id);
   if(error){ console.error('adminPreocSujet:', error); alert(currentLang === 'en' ? 'Not saved.' : 'Pas enregistré.'); }
   renderAdminPreoccupations();
 }
+async function adminPreocApprouver(id, aUnSujet){
+  if(!aUnSujet){ alert(currentLang === 'en' ? 'Pick a topic first, in the menu next to Spam.' : 'Choisissez d’abord un sujet, dans le menu à côté de Spam.'); return; }
+  const { error } = await supabaseClient.from('preoccupations').update({ statut: 'classe' }).eq('id', id);
+  if(error){ console.error('adminPreocApprouver:', error); alert(currentLang === 'en' ? 'Not saved.' : 'Pas enregistré.'); }
+  renderAdminPreoccupations();
+}
+window.adminPreocApprouver = adminPreocApprouver;
 window.adminPreocSpam = adminPreocSpam;
 window.adminPreocSujet = adminPreocSujet;
 
