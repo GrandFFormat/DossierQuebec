@@ -67,7 +67,7 @@ export function traduirePage(racine = document) {
     el.innerHTML = el.dataset.en;
     el.setAttribute('data-en-fait', '');
   }
-  const ATTRIBUTS = { 'data-en-placeholder': 'placeholder', 'data-en-title': 'title', 'data-en-aria-label': 'aria-label', 'data-en-content': 'content' };
+  const ATTRIBUTS = { 'data-en-placeholder': 'placeholder', 'data-en-title': 'title', 'data-en-aria-label': 'aria-label', 'data-en-content': 'content', 'data-en-href': 'href' };
   for (const [source, cible] of Object.entries(ATTRIBUTS)) {
     for (const el of racine.querySelectorAll(`[${source}]`)) el.setAttribute(cible, el.getAttribute(source));
   }
