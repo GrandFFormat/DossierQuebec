@@ -112,14 +112,39 @@ export async function ligneAbonnement(userId) {
 
 export const estActive = (l) => Boolean(l && l.statut === 'actif' && (!l.fin || new Date(l.fin) > new Date()));
 
+export const ACTIFS = ['active', 'trialing', 'past_due'];
 const GRACE = 2 * 24 * 3600; // un renouvellement dont le webhook tarde ne coupe pas l'accès
 const JOURS_IMPAYE = 3 * 24 * 3600; // carte refusée : Stripe réessaie, l'accès tient trois jours
+
+// La date de fin d'accès que donne un abonnement Stripe (en millisecondes, ou null). finAvant : la
+// fin déjà enregistrée pour CE même abonnement. Partagée avec les abonnements offerts (_offert.js).
+export function finDe(sub, finAvant) {
+  const actif = ACTIFS.includes(sub.status);
+  const item = sub.items?.data?.[0] ?? {};
+  const debut = sub.current_period_start ?? item.current_period_start;
+  const finPeriode = sub.current_period_end ?? item.current_period_end;
+  const annulationPrevue = Boolean(sub.cancel_at_period_end || sub.cancel_at);
+  if (!actif) return (sub.ended_at ?? Math.floor(Date.now() / 1000)) * 1000;
+  if (sub.status === 'past_due') {
+    // La grâce ne se renouvelle pas : si Stripe laisse l'abonnement impayé d'une période à l'autre,
+    // un accès déjà expiré le reste (sinon, trois jours gratuits reviendraient chaque mois).
+    const grace = ((debut ?? Math.floor(Date.now() / 1000)) + JOURS_IMPAYE) * 1000;
+    const avant = finAvant ? new Date(finAvant).getTime() : null;
+    return avant != null && Number.isFinite(avant) ? Math.min(grace, avant) : grace;
+  }
+  if (finPeriode) return (annulationPrevue ? (sub.cancel_at ?? finPeriode) : finPeriode + GRACE) * 1000;
+  return null;
+}
 
 // Recopie un abonnement Stripe dans la table. Relit toujours l'abonnement chez Stripe plutôt que de
 // se fier à l'événement : l'ordre d'arrivée des webhooks n'importe plus, et rejouer un événement ne
 // change rien.
 export async function synchroniser(abonnementId, indiceUtilisateur) {
   const sub = await stripe(`/subscriptions/${encodeURIComponent(abonnementId)}`);
+  // Un abonnement OFFERT (21 oct. 2026) : payé par un donateur au profit d'une autre personne. Il
+  // ne touche JAMAIS la ligne du donateur : api/_offert.js met à jour celle du destinataire.
+  // Importé à la demande : _offert.js importe ce fichier-ci.
+  if (sub.metadata?.type === 'offert') return (await import('./_offert.js')).synchroniserOffert(sub);
   const userId = sub.metadata?.user_id || indiceUtilisateur;
   if (!/^[0-9a-f-]{36}$/.test(userId ?? '')) {
     console.warn('Stripe : abonnement sans user_id, ignoré', sub.id);
@@ -131,7 +156,12 @@ export async function synchroniser(abonnementId, indiceUtilisateur) {
     console.warn('Stripe : abonnement manuel actif, laissé tel quel', userId);
     return 'manuel';
   }
-  const actif = ['active', 'trialing', 'past_due'].includes(sub.status);
+  // Un abonnement offert par quelqu'un d'autre, encore actif : il suit l'abonnement du donateur.
+  if (existant?.source === 'offert' && estActive(existant)) {
+    console.warn('Stripe : abonnement offert actif, laissé tel quel', userId);
+    return 'offert';
+  }
+  const actif = ACTIFS.includes(sub.status);
   // Un vieil abonnement annulé ne remplace pas celui, actif, qui l'a suivi.
   if (!actif && existant?.stripe_subscription_id && existant.stripe_subscription_id !== sub.id && estActive(existant)) return 'autre';
   // Deux abonnements vivants pour un même compte (deux paiements menés en parallèle) : la ligne n'en
@@ -145,21 +175,8 @@ export async function synchroniser(abonnementId, indiceUtilisateur) {
     }
   }
 
-  const item = sub.items?.data?.[0] ?? {};
-  const debut = sub.current_period_start ?? item.current_period_start;
-  const finPeriode = sub.current_period_end ?? item.current_period_end;
   const annulationPrevue = Boolean(sub.cancel_at_period_end || sub.cancel_at);
-  let fin;
-  if (!actif) fin = (sub.ended_at ?? Math.floor(Date.now() / 1000)) * 1000;
-  else if (sub.status === 'past_due') {
-    // La grâce ne se renouvelle pas : si Stripe laisse l'abonnement impayé d'une période à l'autre,
-    // un accès déjà expiré le reste (sinon, trois jours gratuits reviendraient chaque mois).
-    const grace = ((debut ?? Math.floor(Date.now() / 1000)) + JOURS_IMPAYE) * 1000;
-    const avant = existant?.stripe_subscription_id === sub.id && existant?.fin ? new Date(existant.fin).getTime() : null;
-    fin = avant != null && Number.isFinite(avant) ? Math.min(grace, avant) : grace;
-  }
-  else if (finPeriode) fin = (annulationPrevue ? (sub.cancel_at ?? finPeriode) : finPeriode + GRACE) * 1000;
-  else fin = null;
+  const fin = finDe(sub, existant?.stripe_subscription_id === sub.id ? existant?.fin : null);
 
   let orphelin = false;
   await supabase('/rest/v1/abonnements?on_conflict=user_id', {

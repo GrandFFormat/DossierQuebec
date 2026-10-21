@@ -62,7 +62,7 @@ export function courrielCadeau({ code, mois, langue }) {
   return { sujet, html };
 }
 
-async function envoyer({ a, sujet, html }) {
+export async function envoyer({ a, sujet, html }) {
   const { RESEND_API_KEY, DIGEST_FROM } = process.env;
   if (!RESEND_API_KEY || !DIGEST_FROM) throw new Error('envoi de courriel non configuré');
   const res = await fetch('https://api.resend.com/emails', {

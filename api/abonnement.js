@@ -21,9 +21,17 @@
 //                                             paiement UNIQUE ; duree = « mensuel », « trimestriel » ou
 //                                             « annuel ». Le code part par courriel à l'acheteur une fois
 //                                             le paiement reçu (webhook, api/_cadeau.js).
-//   GET  /api/abonnement?action=codes        (connecté) → { codes: [{ code, mois, achete, utilise }] }
+//   POST /api/abonnement?action=offrir       (connecté) { forfait, langue? } → { url } de Stripe Checkout :
+//                                             un abonnement RÉCURRENT payé par le donateur pour quelqu'un
+//                                             d'autre (21 oct. 2026), aux mêmes prix STRIPE_PRIX_*. Le code
+//                                             part par courriel au donateur (webhook, api/_offert.js).
+//   GET  /api/abonnement?action=codes        (connecté) → { codes: [{ code, mois, achete, utilise }],
+//                                             offerts: [{ code, forfait, actif, fin, annulationPrevue, utilise }] }
 //   POST /api/abonnement?action=code         (connecté) { code } → { ok, mois, fin } ou { ok:false, raison } :
-//                                             faire valoir un code (10 essais par heure par compte)
+//                                             faire valoir un code cadeau OU d'abonnement offert (10 essais
+//                                             par heure par compte ; tout se joue dans echanger_code_cadeau)
+//   POST /api/abonnement?action=portail|annuler  { offert: code } → le portail Stripe du donateur, ouvert
+//                                             sur CET abonnement offert (annuler : directement sur l'annulation)
 //
 // Le paiement n'est offert qu'avec STRIPE_OUVERT=1 ET des clés du mode réel, ou aux adresses de
 // STRIPE_ESSAI (voir _stripe.js). L'accès n'est jamais donné ici : seul le webhook
@@ -31,6 +39,7 @@
 
 import { site } from './_alertes.js';
 import { codesDe, DUREES, echangerCode, nomProduit } from './_cadeau.js';
+import { offertDuDonateur, offertsDe } from './_offert.js';
 import { adresseFlux, ministeres } from './_rss-abonnes.js';
 import { adresseEssai, estActive, FORFAITS, ligneAbonnement, modeStripe, paiementOuvert, prixConforme, prixDe, stripe, stripeConfigure, synchroniser, utilisateurDe } from './_stripe.js';
 
@@ -105,7 +114,10 @@ export default async function handler(req, res) {
   if (req.method === 'GET' && req.query?.action === 'codes') {
     if (!u) return res.status(401).json({ erreur: 'connexion requise' });
     try {
-      return res.status(200).json({ codes: await codesDe(u.id) });
+      // Les abonnements offerts à part : avant scripts/supabase-cadeau-recurrent.sql, la table
+      // n'existe pas, et les codes cadeaux doivent quand même paraître.
+      const offerts = await offertsDe(u.id).catch((e) => { console.error('abonnements offerts :', e.message); return []; });
+      return res.status(200).json({ codes: await codesDe(u.id), offerts });
     } catch (e) {
       console.error('codes cadeaux :', e.message);
       return res.status(503).json({ erreur: 'codes illisibles' });
@@ -230,6 +242,64 @@ export default async function handler(req, res) {
         expires_at: String(Math.floor(Date.now() / 1000) + 31 * 60),
       });
       return res.status(200).json({ url: session.url });
+    }
+    if (action === 'offrir') {
+      // Un abonnement RÉCURRENT au profit de quelqu'un d'autre. Mêmes protections et mêmes prix que
+      // l'abonnement personnel ; un abonné peut offrir, et offrir plusieurs fois. Ni
+      // client_reference_id ni metadata.user_id : rien ne doit pouvoir le rattacher à la ligne du
+      // donateur. synchroniser le reconnaît à metadata.type = « offert » (api/_offert.js).
+      if (!(paiementOuvert() || adresseEssai(u.email))) return res.status(403).json({ erreur: "le paiement n'est pas encore ouvert" });
+      if (!u.email) return res.status(400).json({ erreur: 'compte sans courriel' });
+      let corps = req.body;
+      if (typeof corps === 'string') { try { corps = JSON.parse(corps || '{}'); } catch { corps = {}; } }
+      const anglais = String(corps?.langue ?? '') === 'en';
+      const forfait = String(corps?.forfait ?? '');
+      if (!prixDe(forfait)) return res.status(400).json({ erreur: 'forfait indisponible' });
+      if (!(await prixConforme(forfait))) return res.status(503).json({ erreur: 'prix mal configuré' });
+      const session = await stripe('/checkout/sessions', {
+        mode: 'subscription',
+        'line_items[0][price]': prixDe(forfait),
+        'line_items[0][quantity]': '1',
+        success_url: `${site()}/${retourDe()}?offert=merci`,
+        cancel_url: `${site()}/abonnement?offert=annule#offrir-abonnement`,
+        'metadata[type]': 'offert',
+        'metadata[donateur]': u.id,
+        'metadata[forfait]': forfait,
+        'subscription_data[metadata][type]': 'offert',
+        'subscription_data[metadata][donateur]': u.id,
+        'subscription_data[metadata][forfait]': forfait,
+        'subscription_data[metadata][langue]': anglais ? 'en' : 'fr',
+        locale: anglais ? 'en' : 'fr-CA',
+        customer: await clientStripe(u, ligne?.source === 'stripe' ? ligne : null, anglais),
+        billing_address_collection: 'required',
+        'customer_update[address]': 'auto',
+        'customer_update[name]': 'auto',
+        'payment_method_types[0]': 'card',
+        expires_at: String(Math.floor(Date.now() / 1000) + 31 * 60),
+      });
+      return res.status(200).json({ url: session.url });
+    }
+    let corps = req.body;
+    if (typeof corps === 'string') { try { corps = JSON.parse(corps || '{}'); } catch { corps = {}; } }
+    if ((action === 'portail' || action === 'annuler') && corps?.offert) {
+      // Le portail du DONATEUR, pour un abonnement offert retrouvé par son code parmi les siens. Le
+      // portail montre tous ses abonnements ; « annuler » ouvre directement l'annulation de celui-ci
+      // (Loi 10 : un moyen clair d'annuler).
+      const offert = await offertDuDonateur(u.id, corps?.offert);
+      if (!offert?.stripe_customer_id) return res.status(404).json({ erreur: 'aucun abonnement offert' });
+      const portail = await stripe('/billing_portal/sessions', {
+        customer: offert.stripe_customer_id,
+        return_url: `${site()}/${retourDe()}`,
+        ...(action === 'annuler'
+          ? {
+            'flow_data[type]': 'subscription_cancel',
+            'flow_data[subscription_cancel][subscription]': offert.stripe_subscription_id,
+            'flow_data[after_completion][type]': 'redirect',
+            'flow_data[after_completion][redirect][return_url]': `${site()}/${retourDe()}?offert=annulation`,
+          }
+          : {}),
+      });
+      return res.status(200).json({ url: portail.url });
     }
     if (action === 'portail' || action === 'annuler') {
       if (!gerable || (action === 'annuler' && !ligne.stripe_subscription_id)) return res.status(404).json({ erreur: 'aucun abonnement Stripe' });

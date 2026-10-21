@@ -2253,6 +2253,7 @@
 
 /* « Offrir un abonnement » discret mais visuel, sous « Votre compte » de Mon dossier (abonné·e·s). */
 .md-cadeau-discret{margin-top:10px; padding:10px 14px; border:2px dashed var(--ink); background:var(--card); font-size:13.5px; display:block;}
+.md-cadeau-ligne{margin-top:6px; padding-top:6px; border-top:1px dashed var(--ink);}
 .md-cadeau-titre{font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; letter-spacing:.02em; margin-right:8px;}
 .md-cadeau-puce{background:var(--card); border:2px solid var(--ink); box-shadow:2px 2px 0 var(--ink); padding:3px 10px; margin:4px 6px 4px 0; font:inherit; font-size:13px; font-weight:700; cursor:pointer; color:var(--ink);}
 .md-cadeau-puce:hover, .md-cadeau-puce.ab-forfait-choisi{background:#FFD24D; color:#131313;}
