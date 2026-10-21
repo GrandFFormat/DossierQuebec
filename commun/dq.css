@@ -2215,3 +2215,6 @@
 
 .admin-preoc-actions{white-space:nowrap;}
 .admin-preoc-ok{font-weight:700; color:#1d7a3a;}
+
+/* Mon dossier : l'export des données (mdExport). */
+.md-export-boutons{display:grid; grid-template-columns:auto 1fr; gap:8px 12px; align-items:center;}

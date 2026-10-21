@@ -406,7 +406,7 @@ const translations = {
     'abhero.l2':"the tools are extra.",
     'abhero.sub':"All the text on the site is free and will stay free. The subscription is optional: it gives extra tools. <b>Cancel anytime, prices in Canadian dollars.</b>",
     'abgratuit.html':"<div class=\"md-carte-tete\"><h2>What stays free, for everyone</h2><span class=\"md-etiquette\">Free</span></div><p>Bills and their summaries, ministers and MNAs, votes, promises, the glossary, city decisions, and the features already on those pages. Following too: 3 follows per account, bills, members and city projects, subscriber or not.</p>",
-    'aboutils.html':"<div class=\"md-carte-tete\"><h2>What the subscription gives</h2></div><p>The planned tools, each with its status. A tool marked “Soon” does not exist yet: subscribers get it at no extra cost as soon as it is released, at the same price for as long as the subscription stays active. No tool covers city decisions.</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Custom RSS feeds</b> — a feed per keyword, per MNA or per ministry.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Data export</b> — the Assembly's votes, attendance and bills as Excel or CSV files.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site without any ads, should ads ever appear on it.</div></li></ul>",
+    'aboutils.html':"<div class=\"md-carte-tete\"><h2>What the subscription gives</h2></div><p>The planned tools, each with its status. A tool marked “Soon” does not exist yet: subscribers get it at no extra cost as soon as it is released, at the same price for as long as the subscription stays active. No tool covers city decisions.</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Custom RSS feeds</b> — a feed per keyword, per MNA or per ministry.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — the Assembly's votes, attendance and bills as Excel or CSV files.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site without any ads, should ads ever appear on it.</div></li></ul>",
     'abforfaits.html':"<div class=\"md-carte-tete\"><h2>The plans</h2></div><ul class=\"ab-forfaits\"><li><b class=\"ab-montant\">$9.99</b><span>a month</span></li><li><b class=\"ab-montant\">$26.99</b><span>every 3 months</span></li><li><b class=\"ab-montant\">$99</b><span>a year — two months free</span></li></ul><p class=\"md-note\">Prices in Canadian dollars. Card payment on Stripe's secure page: DossierQuébec never sees your card. Cancel anytime, from this page or My file, in two clicks: the subscription stays active until the end of the paid period, then stops with no further charge.</p>",
     'fil.regles':"The rules",
     'sujet.regles':"DossierQuébec's sourcing rules",
@@ -1459,6 +1459,7 @@ async function renderMonDossier(){
   mdLois(isEn, quota);
   mdElus(isEn);
   mdPreoccupations(isEn);
+  mdExport(isEn);
 }
 
 // « CE QUI VOUS PRÉOCCUPE » (Martin, 18 oct. 2026). Une boîte de texte pour les gens connectés,
@@ -1592,6 +1593,55 @@ async function adminPreocApprouver(id, aUnSujet){
 window.adminPreocApprouver = adminPreocApprouver;
 window.adminPreocSpam = adminPreocSpam;
 window.adminPreocSujet = adminPreocSujet;
+
+// L'EXPORT DES DONNÉES (21 oct. 2026), premier outil de l'abonnement. Trois fichiers CSV des données
+// de l'Assemblée : votes nominaux (une ligne par député·e et par vote), présences, projets de loi.
+// Le serveur (api/export.js) vérifie l'abonnement avant de fabriquer le fichier ; ici, on ne fait que
+// montrer les boutons aux abonné·e·s et le lien vers /abonnement aux autres.
+async function mdExport(isEn){
+  const zone = document.getElementById('mdExport');
+  if(!zone) return;
+  let abonne = false;
+  if(currentUser){
+    try{
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      const r = await fetch('/api/abonnement', { headers: session ? { Authorization: `Bearer ${session.access_token}` } : {} });
+      abonne = r.ok && (await r.json()).abonne === true;
+    }catch(e){}
+  }
+  const jeux = [
+    ['votes', isEn ? 'Recorded votes' : 'Votes nominaux', isEn ? 'one line per member and per vote' : 'une ligne par député·e et par vote'],
+    ['presences', isEn ? 'Attendance' : 'Présences', isEn ? 'per member, at votes' : 'par député·e, aux votes'],
+    ['projets', isEn ? 'Bills' : 'Projets de loi', isEn ? 'number, title, status, dates' : 'numéro, titre, statut, dates'],
+  ];
+  zone.innerHTML = `<div class="md-carte">
+    <div class="md-carte-tete"><h2>${isEn ? 'Data export' : 'Export des données'}</h2><span class="md-etiquette">${isEn ? 'Subscribers' : 'Abonné·e·s'}</span></div>
+    <p>${isEn ? 'National Assembly data as CSV files, ready for Excel or Google Sheets. Source: Assemblée nationale du Québec.' : 'Les données de l’Assemblée nationale en fichiers CSV, prêts pour Excel ou Google Sheets. Source : Assemblée nationale du Québec.'}</p>
+    ${abonne
+      ? `<div class="md-export-boutons">${jeux.map(([j, t, d]) => `<button class="account-btn" onclick="mdTelecharger('${j}', this)">${t}</button><span class="md-note">${d}</span>`).join('')}</div>`
+      : `<p class="md-note">${isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.'} <a class="md-lien" href="/abonnement">${isEn ? 'See the subscription' : 'Voir l’abonnement'}</a></p>`}
+  </div>`;
+}
+async function mdTelecharger(jeu, bouton){
+  const isEn = currentLang === 'en';
+  const avant = bouton.textContent;
+  bouton.disabled = true; bouton.textContent = isEn ? 'Preparing…' : 'Préparation…';
+  try{
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    const r = await fetch(`/api/export?jeu=${jeu}`, { headers: { Authorization: `Bearer ${session?.access_token || ''}` } });
+    if(!r.ok) throw new Error(r.status);
+    const blob = await r.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = (r.headers.get('Content-Disposition') || '').match(/filename="([^"]+)"/)?.[1] || `dossierquebec-${jeu}.csv`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  }catch(e){
+    alert(isEn ? 'The file could not be prepared. Try again later.' : 'Le fichier n’a pas pu être préparé. Réessayez plus tard.');
+  }
+  bouton.disabled = false; bouton.textContent = avant;
+}
+window.mdTelecharger = mdTelecharger;
 
 function mdCompte(isEn, quota){
   const zone = document.getElementById('mdCompte');
