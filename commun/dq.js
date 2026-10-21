@@ -1610,7 +1610,8 @@ async function mdExport(isEn){
     }catch(e){}
   }
   const jeux = [
-    ['votes', isEn ? 'Recorded votes' : 'Votes nominaux', isEn ? 'one line per member and per vote' : 'une ligne par député·e et par vote'],
+    ['votes', isEn ? 'Recorded votes' : 'Votes nominaux', isEn ? 'one line per vote: date, subject, totals' : 'une ligne par vote : date, sujet, totaux'],
+    ['votes-deputes', isEn ? 'Who voted what' : 'Qui a voté quoi', isEn ? 'one line per member and per vote, linked by the « vote » column' : 'une ligne par député·e et par vote, reliée par la colonne « vote »'],
     ['presences', isEn ? 'Attendance' : 'Présences', isEn ? 'per member, at votes' : 'par député·e, aux votes'],
     ['projets', isEn ? 'Bills' : 'Projets de loi', isEn ? 'number, title, status, dates' : 'numéro, titre, statut, dates'],
   ];
