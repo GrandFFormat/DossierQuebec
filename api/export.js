@@ -2,7 +2,7 @@
 // vérification se fait ICI, côté serveur, avant de fabriquer le fichier (l'ancien export, retiré le
 // 27 sept., fabriquait le fichier dans le navigateur : rien n'empêchait de s'en passer).
 //
-//   GET /api/export?jeu=votes|presences|projets      Authorization: Bearer <jeton de session Supabase>
+//   GET /api/export?jeu=votes|votes-deputes|presences|projets      Authorization: Bearer <jeton de session Supabase>
 //   → un fichier CSV (séparateur « ; », encodé UTF-8 avec BOM : Excel en français l'ouvre tel quel)
 //
 // Seulement des données de l'Assemblée nationale (aucune donnée municipale : conditions des Villes).
@@ -31,19 +31,28 @@ async function fabriquer(jeu) {
       bills.map((b) => [b.num, b.legislature, b.introSession, b.title, b.status, b.note, b.sponsor, b.presentedOn, b.lastActivity, b.url]),
     );
   }
+  // Les votes en DEUX fichiers, reliés par « vote » (législature-session-numéro) : une ligne par
+  // député·e et par vote avec le sujet et l'adresse répétés pesait 24 Mo, au-delà de ce qu'une
+  // fonction Vercel peut renvoyer (4,5 Mo).
   if (jeu === 'votes') {
-    // Une ligne par député·e et par vote nominal : ce qui se croise le mieux dans un tableur.
+    const { votes } = await lire('/data/votes.json');
+    return csv(
+      ['vote', 'date', 'etape', 'projet_de_loi', 'sujet', 'pour', 'contre', 'abstentions', 'adresse_assemblee'],
+      votes.map((v) => [`${v.legislature}-${v.session}-${v.num}`, v.date, v.stage, v.billNum, v.subject, (v.pour || []).length, (v.contre || []).length, (v.abstentions || []).length, v.url]),
+    );
+  }
+  if (jeu === 'votes-deputes') {
     const [{ votes }, histo] = await Promise.all([lire('/data/votes.json'), lire('/data/elus-historique.json').catch(() => ({ elus: {} }))]);
     const lignes = [];
     for (const v of votes) {
       for (const [choix, liste] of [['pour', v.pour], ['contre', v.contre], ['abstention', v.abstentions]]) {
         for (const p of liste || []) {
           const h = histo.elus?.[p.assnatId];
-          lignes.push([v.legislature, v.session, v.num, v.date, v.stage, v.billNum, v.subject, h ? h.name : p.lastName, p.party, choix, v.url]);
+          lignes.push([`${v.legislature}-${v.session}-${v.num}`, h ? h.name : p.lastName, p.party, choix]);
         }
       }
     }
-    return csv(['legislature', 'session', 'numero_vote', 'date', 'etape', 'projet_de_loi', 'sujet', 'depute', 'parti', 'vote', 'adresse_assemblee'], lignes);
+    return csv(['vote', 'depute', 'parti', 'choix'], lignes);
   }
   if (jeu === 'presences') {
     const [presences, histo] = await Promise.all([lire('/data/site/presences.json'), lire('/data/elus-historique.json').catch(() => ({ elus: {} }))]);
@@ -60,7 +69,7 @@ async function fabriquer(jeu) {
 
 export default async function handler(req, res) {
   const jeu = String(req.query?.jeu || '');
-  if (!['votes', 'presences', 'projets'].includes(jeu)) return res.status(400).json({ erreur: 'jeu inconnu' });
+  if (!['votes', 'votes-deputes', 'presences', 'projets'].includes(jeu)) return res.status(400).json({ erreur: 'jeu inconnu' });
   const jeton = (req.headers.authorization || '').replace(/^Bearer\s+/i, '') || null;
   const utilisateur = await utilisateurDe(jeton);
   if (!utilisateur) return res.status(401).json({ erreur: 'connexion requise' });
