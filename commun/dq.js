@@ -1758,10 +1758,12 @@ window.adminPreocSujet = adminPreocSujet;
 function moisExport(){
   try{ const m = new URL(location.href).searchParams.get('mois') || ''; return /^\d{4}-(0[1-9]|1[0-2])$/.test(m) ? m : null; }catch(e){ return null; }
 }
-// Les deux mois que le serveur accepte (api/export.js, moisPermis), heure de Montréal.
+// Les mois que le serveur accepte (api/export.js) : de novembre 2022 au mois en cours, heure de Montréal.
 function mdMoisPermis(){
-  const [a, m] = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit' }).format(new Date()).split('-').map(Number);
-  return [`${a}-${String(m).padStart(2, '0')}`, m === 1 ? `${a - 1}-12` : `${a}-${String(m - 1).padStart(2, '0')}`];
+  let [a, m] = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit' }).format(new Date()).split('-').map(Number);
+  const liste = [];
+  while(`${a}-${String(m).padStart(2, '0')}` >= '2022-11'){ liste.push(`${a}-${String(m).padStart(2, '0')}`); m--; if(m === 0){ m = 12; a--; } }
+  return liste;   // du plus récent au plus ancien
 }
 const mdNomMois = (m, isEn) => { const [a, n] = m.split('-').map(Number); const t = new Date(Date.UTC(a, n - 1, 15)).toLocaleDateString(isEn ? 'en-CA' : 'fr-CA', { month: 'long', year: 'numeric', timeZone: 'UTC' }); return t.charAt(0).toUpperCase() + t.slice(1); };
 async function mdExport(isEn){
@@ -1784,7 +1786,7 @@ async function mdExport(isEn){
   zone.innerHTML = `<div class="md-carte">
     <div class="md-carte-tete"><h2>${isEn ? 'Data export' : 'Export des données'}</h2><span class="md-etiquette">${isEn ? 'Subscribers' : 'Abonné·e·s'}</span></div>
     <p>${isEn ? 'National Assembly data as CSV files, ready for Excel or Google Sheets. Source: Assemblée nationale du Québec.' : 'Les données de l’Assemblée nationale en fichiers CSV, prêts pour Excel ou Google Sheets. Source : Assemblée nationale du Québec.'}</p>
-    ${abonne ? `<p class="md-ligne"><label class="md-note" for="mdExportMois">${isEn ? 'Month covered:' : 'Mois couvert :'}</label> <select id="mdExportMois">${mdMoisPermis().map((m) => `<option value="${m}"${m === (moisExport() || mdMoisPermis()[0]) ? ' selected' : ''}>${mdNomMois(m, isEn)}</option>`).join('')}</select></p><p class="md-note">${isEn ? 'One month at a time: the current month or the previous one. Bills: those introduced or that moved during the month.' : 'Un mois à la fois : le mois en cours ou le précédent. Projets de loi : ceux présentés ou qui ont bougé pendant le mois.'}</p>` : ''}
+    ${abonne ? `<p class="md-ligne"><label class="md-note" for="mdExportMois">${isEn ? 'Month covered:' : 'Mois couvert :'}</label> <select id="mdExportMois">${mdMoisPermis().map((m) => `<option value="${m}"${m === (moisExport() || mdMoisPermis()[0]) ? ' selected' : ''}>${mdNomMois(m, isEn)}</option>`).join('')}</select></p><p class="md-note">${isEn ? 'One month per file: pick the month, then the file. Bills: those introduced or that moved during the month.' : 'Un mois par fichier : choisissez le mois, puis le fichier. Projets de loi : ceux présentés ou qui ont bougé pendant le mois.'}</p>` : ''}
     ${abonne
       ? `<div class="md-export-boutons">${jeux.map(([j, t, d]) => `<button class="account-btn" onclick="mdTelecharger('${j}', this)">${t}</button><span class="md-note">${d}</span>`).join('')}</div>`
       : `<p class="md-note">${isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.'} <a class="md-lien" href="/abonnement">${isEn ? 'See the subscription' : 'Voir l’abonnement'}</a></p>`}
