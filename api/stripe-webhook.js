@@ -54,6 +54,9 @@ export async function POST(request) {
     }
   }
 
+  // Un abonnement RÉCURRENT offert à quelqu'un d'autre (21 oct. 2026) passe par synchroniser comme
+  // les autres : celui-ci le reconnaît à metadata.type = « offert » et le confie à api/_offert.js,
+  // qui fabrique le code et met à jour la ligne du destinataire — jamais celle du donateur.
   const abonnement = abonnementDe(objet);
   if (!TYPES.has(evenement.type) || !abonnement) return Response.json({ recu: true, ignore: true });
 
