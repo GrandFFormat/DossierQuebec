@@ -38,13 +38,24 @@ const cellule = (v) => {
 };
 const csv = (entetes, lignes) => '﻿' + [entetes, ...lignes].map((l) => l.map(cellule).join(';')).join('\r\n') + '\r\n';
 
+// UN MOIS À LA FOIS (Martin, 22 oct. 2026 : « je veux pas qu'ils partent avec toute la base de
+// données au complet »). Le serveur n'accepte que le mois en cours ou le précédent (heure de
+// Montréal) ; sans mois, c'est le mois en cours. Les projets de loi : ceux présentés ou qui ont
+// bougé ce mois-là. `mois = null` (toute la base) ne sert plus qu'aux essais hors ligne.
+export function moisPermis(maintenant = new Date()) {
+  const [a, m] = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Montreal', year: 'numeric', month: '2-digit' }).format(maintenant).split('-').map(Number);
+  const courant = `${a}-${String(m).padStart(2, '0')}`;
+  const precedent = m === 1 ? `${a - 1}-12` : `${a}-${String(m - 1).padStart(2, '0')}`;
+  return [courant, precedent];
+}
 export async function fabriquer(jeu, mois = null) {
   const duMois = (votes) => (mois ? votes.filter((v) => String(v.date ?? '').startsWith(mois)) : votes);
   if (jeu === 'projets') {
     const { bills } = await lire('/data/bills.json');
     return csv(
       ['numero', 'legislature', 'session', 'titre', 'statut', 'etape', 'parrain', 'presente_le', 'derniere_activite', 'adresse_assemblee'],
-      bills.map((b) => [b.num, b.legislature, b.introSession, b.title, b.status, b.note, b.sponsor, b.presentedOn, b.lastActivity, b.url]),
+      bills.filter((b) => !mois || String(b.presentedOn ?? '').startsWith(mois) || String(b.lastActivity ?? '').startsWith(mois))
+        .map((b) => [b.num, b.legislature, b.introSession, b.title, b.status, b.note, b.sponsor, b.presentedOn, b.lastActivity, b.url]),
     );
   }
   // Les votes en DEUX fichiers, reliés par « vote » (législature-session-numéro) : une ligne par
@@ -124,9 +135,12 @@ export default async function handler(req, res) {
     return res.status(200).json({ misAJour: index.misAJour, organismes: Object.fromEntries(cles.map((k) => [k, organisme(index, k)])) });
   }
   try {
-    const mois = /^\d{4}-(0[1-9]|1[0-2])$/.test(String(req.query?.mois ?? '')) && ['votes', 'votes-deputes', 'presences'].includes(jeu) ? String(req.query.mois) : null;
+    const permis = moisPermis();
+    const demande = String(req.query?.mois ?? '');
+    if (demande && !permis.includes(demande)) return res.status(400).json({ erreur: 'mois non permis', permis });
+    const mois = demande || permis[0];
     const fichier = await fabriquer(jeu, mois);
-    const jour = mois ?? new Date().toISOString().slice(0, 10);
+    const jour = mois;
     res.setHeader('Content-Type', 'text/csv; charset=utf-8');
     res.setHeader('Content-Disposition', `attachment; filename="dossierquebec-${jeu}-${jour}.csv"`);
     res.setHeader('Cache-Control', 'no-store');
