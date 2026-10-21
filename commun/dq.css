@@ -2178,6 +2178,11 @@
 .bill-votes-col ul{list-style:none; margin:6px 0 0; padding:0; font-size:13px; line-height:1.6; max-height:320px; overflow:auto;}
 .bill-votes-col span{opacity:.7;}
 .bill-votes-ancien{opacity:.55;}
+/* Mémoires déposés en commission (caseMemoires ; la liste vient du serveur pour les abonné·e·s). */
+.bill-memoires-liste{list-style:none; margin:6px 0 0; padding:0; font-size:13px; line-height:1.6; max-height:320px; overflow:auto;}
+.bill-memoires-liste span{opacity:.7;}
+.md-memoires{margin:8px 0;}
+.md-memoires summary{cursor:pointer;}
 .bill-votes-mail{text-decoration:none; font-weight:700;}
 @media (max-width:640px){ .bill-votes-grille{grid-template-columns:minmax(0, 1fr);} }
 
