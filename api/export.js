@@ -10,12 +10,18 @@
 //     2026) : les consultations à venir, et pour chaque projet demandé, ses mémoires déposés. Vient de
 //     api/consultations-data.json (api/_consultations.js), un fichier que Vercel ne sert pas.
 //
+//   GET /api/export?jeu=organismes&q=texte                          (même en-tête)
+//   GET /api/export?jeu=organismes&c=clé&c=clé…
+//   → du JSON pour Mon dossier (septième outil, 21 oct. 2026, api/_organismes.js) : chercher parmi les
+//     auteurs de mémoires (au plus 20 résultats), ou les mémoires des organismes suivis (au plus 10).
+//
 // Seulement des données de l'Assemblée nationale (aucune donnée municipale : conditions des Villes).
 // Les fichiers viennent des données publiques du site lui-même (dossierquebec.ca/data/…), la source
 // est rappelée dans le nom du fichier et dans la première colonne d'adresse.
 
 import { utilisateurDe, ligneAbonnement, estActive } from './_stripe.js';
 import { chargerConsultations, consultationsAVenir, memoiresDe } from './_consultations.js';
+import { indexOrganismes, chercherOrganismes, organisme, ORGANISMES_MAX, CLE_MAX } from './_organismes.js';
 
 const SITE = process.env.PUBLIC_SITE_URL || 'https://dossierquebec.ca';
 const lire = async (chemin) => {
@@ -75,7 +81,7 @@ async function fabriquer(jeu) {
 
 export default async function handler(req, res) {
   const jeu = String(req.query?.jeu || '');
-  if (!['votes', 'votes-deputes', 'presences', 'projets', 'consultations'].includes(jeu)) return res.status(400).json({ erreur: 'jeu inconnu' });
+  if (!['votes', 'votes-deputes', 'presences', 'projets', 'consultations', 'organismes'].includes(jeu)) return res.status(400).json({ erreur: 'jeu inconnu' });
   const jeton = (req.headers.authorization || '').replace(/^Bearer\s+/i, '') || null;
   const utilisateur = await utilisateurDe(jeton);
   if (!utilisateur) return res.status(401).json({ erreur: 'connexion requise' });
@@ -92,6 +98,16 @@ export default async function handler(req, res) {
       aVenir: consultationsAVenir(donnees),
       projets: Object.fromEntries(ids.map((id) => [id, memoiresDe(donnees, id)]).filter(([, v]) => v)),
     });
+  }
+  if (jeu === 'organismes') {
+    const index = indexOrganismes(chargerConsultations());
+    if (!index) return res.status(500).json({ erreur: 'données indisponibles' });
+    res.setHeader('Cache-Control', 'no-store');
+    const q = String(req.query?.q ?? '').slice(0, 120);
+    if (q) return res.status(200).json({ misAJour: index.misAJour, resultats: chercherOrganismes(index, q) });
+    const c = req.query?.c;
+    const cles = [...new Set((Array.isArray(c) ? c : c ? [c] : []).map(String).filter((x) => x.length <= CLE_MAX))].slice(0, ORGANISMES_MAX);
+    return res.status(200).json({ misAJour: index.misAJour, organismes: Object.fromEntries(cles.map((k) => [k, organisme(index, k)])) });
   }
   try {
     const fichier = await fabriquer(jeu);
