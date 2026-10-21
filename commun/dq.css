@@ -2226,3 +2226,9 @@
 .md-mot .md-bouton-doux{padding:0 8px; min-width:0;}
 
 .md-dispo{display:inline-block; font-size:11px; font-weight:800; text-transform:uppercase; padding:0 6px; background:#FFD24D; color:#131313; border:1px solid #131313;}
+
+/* Flux RSS par ministère : une ligne par ministère, le + en ajoute une (mdFluxAjouterMinistere). */
+.md-flux-min{display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-top:6px;}
+.md-flux-min select{max-width:100%;}
+.md-flux-min input{flex:1 1 220px; min-width:0;}
+.md-flux-plus{font-weight:800; min-width:2em;}
