@@ -381,7 +381,7 @@ const translations = {
     'lp.nd':"<b>n/a</b>: no recorded vote for this person.",
     'lp.officiel':"This is not an official measure: the Assembly does not publish attendance, and a missed vote does not tell why.",
     'promo.sur':"Free account",
-    'mdavenir.html':"<div class=\"md-carte-tete\"><h2>Coming soon</h2><span class=\"md-etiquette\">Soon</span></div><p>All the text on the site will stay free: bills and their summaries, ministers and MNAs, votes, promises. Extra tools are coming soon, for subscribers:</p><ul class=\"md-avenir-liste\"><li><b>Custom alerts</b> <span class=\"md-dispo\">available</span> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</li><li><b>Custom RSS feeds</b> — a feed per keyword, per MNA or per ministry, in your RSS reader.</li><li><b>Consultation deadlines</b> — for groups and lobbies: the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</li><li><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</li><li><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</li><li><b>Data export</b> <span class=\"md-dispo\">available</span> — votes, attendance and bills as Excel or CSV files, ready to analyze.</li><li><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</li><li><b>Ad-free</b> — the site, without any ads.</li></ul><p><a class=\"md-lien\" href=\"/abonnement\">See the optional subscription and the status of each tool →</a></p>",
+    'mdavenir.html':"<div class=\"md-carte-tete\"><h2>Coming soon</h2><span class=\"md-etiquette\">Soon</span></div><p>All the text on the site will stay free: bills and their summaries, ministers and MNAs, votes, promises. Extra tools are coming soon, for subscribers:</p><ul class=\"md-avenir-liste\"><li><b>Custom alerts</b> <span class=\"md-dispo\">available</span> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</li><li><b>Custom RSS feeds</b> <span class=\"md-dispo\">available</span> — the feed of all the news, and a feed per keyword, per MNA or per ministry, in your RSS reader.</li><li><b>Consultation deadlines</b> — for groups and lobbies: the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</li><li><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</li><li><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</li><li><b>Data export</b> <span class=\"md-dispo\">available</span> — votes, attendance and bills as Excel or CSV files, ready to analyze.</li><li><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</li><li><b>Ad-free</b> — the site, without any ads.</li></ul><p><a class=\"md-lien\" href=\"/abonnement\">See the optional subscription and the status of each tool →</a></p>",
     'promo.h':"Follow the bills that matter to you",
     'promo.p':"A free account, no password: follow up to 3 bills or city projects, and find them in My file, with their current stage.",
     'promo.diss':"The bills of the 43rd legislature died when the Assembly was dissolved on August 27: following will resume with the first bills of the new legislature, convened on November 17, 2026.",
@@ -406,7 +406,7 @@ const translations = {
     'abhero.l2':"the tools are extra.",
     'abhero.sub':"All the text on the site is free and will stay free. The subscription is optional: it gives extra tools. <b>Cancel anytime, prices in Canadian dollars.</b>",
     'abgratuit.html':"<div class=\"md-carte-tete\"><h2>What stays free, for everyone</h2><span class=\"md-etiquette\">Free</span></div><p>Bills and their summaries, ministers and MNAs, votes, promises, the glossary, city decisions, and the features already on those pages. Following too: 3 follows per account, bills, members and city projects, subscriber or not.</p>",
-    'aboutils.html':"<div class=\"md-carte-tete\"><h2>What the subscription gives</h2></div><p>The planned tools, each with its status. A tool marked “Soon” does not exist yet: subscribers get it at no extra cost as soon as it is released, at the same price for as long as the subscription stays active. No tool covers city decisions.</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Custom RSS feeds</b> — a feed per keyword, per MNA or per ministry.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — the Assembly's votes, attendance and bills as Excel or CSV files.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site without any ads, should ads ever appear on it.</div></li></ul>",
+    'aboutils.html':"<div class=\"md-carte-tete\"><h2>What the subscription gives</h2></div><p>The planned tools, each with its status. A tool marked “Soon” does not exist yet: subscribers get it at no extra cost as soon as it is released, at the same price for as long as the subscription stays active. No tool covers city decisions.</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>RSS feeds</b> — the feed of all the news, plus custom feeds per keyword, per MNA or per ministry.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — the Assembly's votes, attendance and bills as Excel or CSV files.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site without any ads, should ads ever appear on it.</div></li></ul>",
     'abforfaits.html':"<div class=\"md-carte-tete\"><h2>The plans</h2></div><ul class=\"ab-forfaits\"><li><b class=\"ab-montant\">$9.99</b><span>a month</span></li><li><b class=\"ab-montant\">$26.99</b><span>every 3 months</span></li><li><b class=\"ab-montant\">$99</b><span>a year — two months free</span></li></ul><p class=\"md-note\">Prices in Canadian dollars. Card payment on Stripe's secure page: DossierQuébec never sees your card. Cancel anytime, from this page or My file, in two clicks: the subscription stays active until the end of the paid period, then stops with no further charge.</p>",
     'fil.regles':"The rules",
     'sujet.regles':"DossierQuébec's sourcing rules",
@@ -1462,6 +1462,7 @@ async function renderMonDossier(){
   mdElus(isEn);
   mdPreoccupations(isEn);
   mdExport(isEn);
+  mdFlux(isEn);
   mdAlertes(isEn);
 }
 
@@ -1646,6 +1647,52 @@ async function mdTelecharger(jeu, bouton){
   bouton.disabled = false; bouton.textContent = avant;
 }
 window.mdTelecharger = mdTelecharger;
+
+// LES FLUX RSS (21 oct. 2026), troisième outil de l'abonnement, avec le flux général (réservé aux
+// abonné·e·s le même jour). L'adresse personnelle signée vient du serveur (api/abonnement.js,
+// ?action=flux) : le navigateur n'y ajoute que « &type=… », il ne connaît aucun secret. api/feed.js
+// revérifie l'abonnement à chaque lecture.
+let mdFluxAdresse = '';
+async function mdFlux(isEn){
+  const zone = document.getElementById('mdFlux');
+  if(!zone) return;
+  let donnees = null;
+  if(currentUser){
+    try{
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      const r = await fetch('/api/abonnement?action=flux', { headers: session ? { Authorization: `Bearer ${session.access_token}` } : {} });
+      if(r.ok) donnees = await r.json();
+    }catch(e){}
+  }
+  const tete = `<div class="md-carte-tete"><h2>${isEn ? 'Custom RSS feeds' : 'Flux RSS personnalisés'}</h2><span class="md-etiquette">${isEn ? 'Subscribers' : 'Abonné·e·s'}</span></div>
+    <p>${isEn ? 'National Assembly news in any RSS reader (Feedly, Inoreader, Thunderbird…). Source: Assemblée nationale du Québec. Feeds are in French.' : 'Les nouvelles de l’Assemblée nationale dans n’importe quel lecteur RSS (Feedly, Inoreader, Thunderbird…). Source : Assemblée nationale du Québec.'}</p>`;
+  if(!donnees?.adresse){
+    zone.innerHTML = `<div class="md-carte">${tete}<p class="md-note">${isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.'} <a class="md-lien" href="/abonnement">${isEn ? 'See the subscription' : 'Voir l’abonnement'}</a></p></div>`;
+    return;
+  }
+  mdFluxAdresse = donnees.adresse;
+  const copier = `<button class="md-bouton-doux" aria-label="${isEn ? 'Copy' : 'Copier'}" onclick="copierCourriel(this, this.previousElementSibling.value)">⧉</button>`;
+  const ligne = (titre, adresse) => `<li><b>${titre}</b><div class="md-ligne"><input type="text" readonly value="${mdH(adresse)}" aria-label="${mdH(titre)}" onfocus="this.select()">${copier}</div></li>`;
+  const min = donnees.ministeres || [];
+  zone.innerHTML = `<div class="md-carte">${tete}
+    <p class="md-note">${isEn ? 'Paste this address into your RSS reader. It is personal: do not share it.' : 'Collez cette adresse dans votre lecteur RSS. Elle est personnelle : ne la partagez pas.'}</p>
+    <ul class="md-avenir-liste">
+      ${ligne(isEn ? 'All National Assembly news' : 'Toutes les nouvelles de l’Assemblée', mdFluxAdresse)}
+      ${ligne(isEn ? 'Your keywords (bills that contain one of them)' : 'Vos mots-clés (projets de loi qui en contiennent un)', mdFluxAdresse + '&type=mots')}
+      ${ligne(isEn ? 'Your followed members (bills introduced and recorded votes)' : 'Vos élus suivis (projets de loi présentés et votes nominaux)', mdFluxAdresse + '&type=elus')}
+      ${min.length ? `<li><b>${isEn ? 'One ministry (bills it sponsors)' : 'Un ministère (projets de loi qu’il parraine)'}</b>
+        <div class="md-ligne"><select id="mdFluxMin" aria-label="${isEn ? 'Ministry' : 'Ministère'}" onchange="mdFluxMinistere()">${min.map((m) => `<option value="${mdH(m)}">${mdH(m)}</option>`).join('')}</select></div>
+        <div class="md-ligne"><input type="text" readonly id="mdFluxMinAdr" aria-label="${isEn ? 'Ministry feed' : 'Flux du ministère'}" onfocus="this.select()">${copier}</div></li>` : ''}
+    </ul>
+    <p class="md-note">${isEn ? 'Keywords are managed in the alerts card; followed members, from the ministers and MNAs pages.' : 'Les mots-clés se gèrent dans la carte des alertes ; les élus suivis, depuis les pages des ministres et des député·e·s.'}</p>
+  </div>`;
+  mdFluxMinistere();
+}
+function mdFluxMinistere(){
+  const s = document.getElementById('mdFluxMin'), a = document.getElementById('mdFluxMinAdr');
+  if(s && a) a.value = mdFluxAdresse + '&type=ministere&m=' + encodeURIComponent(s.value);
+}
+window.mdFluxMinistere = mdFluxMinistere;
 
 // LES ALERTES SUR MESURE (21 oct. 2026), deuxième outil de l'abonnement. Un courriel le matin quand,
 // à l'Assemblée nationale, un projet de loi contient un mot-clé, un élu suivi présente un projet ou

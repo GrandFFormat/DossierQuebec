@@ -3,6 +3,9 @@
 //
 //   GET  /api/abonnement                     Authorization: Bearer <jeton Supabase> (facultatif)
 //        → { ouvert, mode, peutPayer, abonne, source, fin, annulationPrevue, gerable, annulable, forfaits }
+//   GET  /api/abonnement?action=flux         (abonné) → { adresse, ministeres } : l'adresse personnelle
+//                                             signée des flux RSS (api/feed.js, api/_rss-abonnes.js) ;
+//                                             le navigateur n'y ajoute que « &type=… », jamais un secret
 //   POST /api/abonnement?action=paiement     (connecté, pas déjà abonné) { langue?, forfait? } → { url } de
 //                                             Stripe Checkout ; forfait = « mensuel » (défaut),
 //                                             « trimestriel » ou « annuel ».
@@ -20,6 +23,7 @@
 // (api/stripe-webhook.js) écrit l'abonnement, une fois le paiement confirmé par Stripe.
 
 import { site } from './_alertes.js';
+import { adresseFlux, ministeres } from './_rss-abonnes.js';
 import { adresseEssai, estActive, FORFAITS, ligneAbonnement, modeStripe, paiementOuvert, prixConforme, prixDe, stripe, stripeConfigure, synchroniser, utilisateurDe } from './_stripe.js';
 
 const jetonDe = (req) => String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '') || null;
@@ -80,6 +84,12 @@ export default async function handler(req, res) {
   const peutPayer = Boolean(configure && u && !illisible && !abonne && (paiementOuvert() || adresseEssai(u.email)));
   const gerable = Boolean(configure && ligne?.source === 'stripe' && ligne.stripe_customer_id);
 
+  if (req.method === 'GET' && req.query?.action === 'flux') {
+    if (!u) return res.status(401).json({ erreur: 'connexion requise' });
+    if (!abonne) return res.status(403).json({ erreur: 'réservé aux abonné·e·s' });
+    const brut = await fetch(`${site()}/data/bills.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+    return res.status(200).json({ adresse: adresseFlux(u.id), ministeres: ministeres(brut?.bills ?? []) });
+  }
   if (req.method === 'GET') {
     return res.status(200).json({
       ouvert: configure && paiementOuvert(),
