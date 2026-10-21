@@ -322,6 +322,7 @@ export async function boiteInfolettre(zone, s, { premiereLigne = null } = {}) {
       <p class="ab-chapeau" style="margin-bottom:12px">${dq && !villesIci.length
         ? tr('Cochez ce que vous voulez recevoir. Chaque changement s’enregistre tout de suite.', 'Check what you want to receive. Each change is saved right away.')
         : tr('Cochez ce que vous voulez recevoir. Pour Montréal : langues, lettres de la Ville, puis arrondissements. Chaque changement s’enregistre tout de suite.', 'Check what you want to receive. For Montréal: languages, city letters, then boroughs. Each change is saved right away.')}</p>
+      <p class="ab-note"><span class="ab-bientot-abonne">${tr('Bientôt exclusif aux abonné·e·s', 'Soon for subscribers only')}</span> ${tr('Une édition abonnés du compte rendu mensuel, avec la section « Où va l’argent », arrive bientôt.', 'A subscriber edition of the monthly recap, with the “Where the money goes” section, is coming soon.')}</p>
       ${premiereLigne?.html ?? ''}
       ${villes.map((v) => blocVille(v, villes.length > 1 || villesRepliees.length > 0)).join('')}
       ${villesRepliees.length ? `<details class="ab-pliable ab-courriels-villes"${ouvert}>
