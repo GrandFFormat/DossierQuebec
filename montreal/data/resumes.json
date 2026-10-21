@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-16T16:53:16.370Z",
+ "generatedAt": "2026-10-21T16:05:36.505Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel quand il est publié (source « sommaire »), sinon du texte de la résolution elle-même (source « resolution »), sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,17 +7,17 @@
   "annee": "2026",
   "max": 40,
   "batch": true,
-  "depuis": "2026-08-17",
+  "depuis": "2026-08-22",
   "plafond": 120
  },
- "nombre": 8663,
- "genereCetteFois": 38,
+ "nombre": 8693,
+ "genereCetteFois": 30,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.782,
-  "jetonsEntree": 230425,
-  "jetonsSortie": 16472
+  "montant": 0.3938,
+  "jetonsEntree": 106056,
+  "jetonsSortie": 10292
  },
  "resumes": [
   {
@@ -1753,6 +1753,769 @@
    "jetons": {
     "entree": 1730,
     "sortie": 161
+   }
+  },
+  {
+   "id": "1265459072",
+   "numero": "1265459072",
+   "resolution": "CA26 20 0326",
+   "date": "2026-09-14",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "Dépôt du compte-rendu de la rencontre du comité consultatif d'urbanisme qui s'est tenue le 5 août 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=8",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de LaSalle prend acte du compte-rendu de la rencontre du comité consultatif d'urbanisme tenue le 5 août 2026.",
+    "Le comité consultatif d'urbanisme se réunit chaque mois et un compte-rendu est rédigé à chaque fois.",
+    "Le document ne contient aucune décision, aucun montant ni aucune mesure touchant les citoyens."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 2661,
+    "sortie": 236
+   }
+  },
+  {
+   "id": "1268891017",
+   "numero": "1268891017",
+   "resolution": "CA26 20 0335",
+   "date": "2026-09-14",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Autorisation - Permis à la Régie des alcools, des courses et des jeux du Québec - Fête des bénévoles le samedi 17 octobre 2026 au Théâtre Desjardins",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=53",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle autorise une employée de sa Direction de la culture, des sports, des loisirs et du développement social à demander un permis d'alcool à la Régie des alcools, des courses et des jeux du Québec.",
+    "Ce permis servira à la Fête des bénévoles du samedi 17 octobre 2026, au Théâtre Desjardins du Cégep André-Laurendeau, au 1111, rue Lapierre.",
+    "La fête comprend un vin d'honneur et un léger goûter, un spectacle, puis une soirée dansante avec service d'alcool.",
+    "Plus de 600 invitations seront envoyées aux bénévoles de l'arrondissement, surtout des membres de conseils d'administration d'organismes reconnus.",
+    "Les coûts sont payés à même le budget régulier de la Direction de la culture, des sports, des loisirs et du développement social; aucun montant n'est précisé.",
+    "LaSalle souligne le travail de ses bénévoles par une fête annuelle depuis plus de 35 ans."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 4433,
+    "sortie": 445
+   }
+  },
+  {
+   "id": "CA26 20 0350",
+   "numero": null,
+   "resolution": "CA26 20 0350",
+   "date": "2026-09-14",
+   "unite": null,
+   "objet": null,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_PV_ORDI_2026-09-14_19h00_FR.pdf#page=18",
+   "source": "resolution",
+   "puces": [
+    "Le conseil lève la séance à 20 h 24."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 1564,
+    "sortie": 110
+   }
+  },
+  {
+   "id": "1261526010",
+   "numero": "1261526010",
+   "resolution": "CA26 20 0333",
+   "date": "2026-09-14",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Soutien financier à sept organismes culturels reconnus dans le domaine des arts et de la culture pour la période d'automne 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=43",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle verse 7 953,84 $ à sept organismes culturels reconnus pour l'automne 2026.",
+    "Les montants : Société historique Cavelier de LaSalle 2 000 $, Loisirs Henri-Lemieux 1 960 $, L'Avant-Scène de LaSalle 1 090 $, Rendez-vous culturels à LaSalle 1 014,08 $, Club photo LaSalle 790 $, Association des artistes de LaSalle 577,42 $, Savoys atelier de tambour métallique 522,34 $.",
+    "L'argent sert notamment à embaucher des conférenciers, acheter deux portables, un système de son, de l'équipement informatique pour numériser des photos historiques, et à payer droits d'auteur, costumes et décor d'une production théâtrale.",
+    "L'aide couvre au maximum 70 % des dépenses, jusqu'à 1 000 $ par organisme par année pour l'embauche d'une personne-ressource et 2 000 $ pour la création artistique et patrimoniale.",
+    "Les projets doivent se réaliser sur le territoire de LaSalle; les organismes doivent remettre leur bilan le 20 janvier 2027.",
+    "La dépense provient du budget des contributions à d'autres organismes de la Division culture et bibliothèque."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "7 953,84 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 5879,
+    "sortie": 547
+   }
+  },
+  {
+   "id": "1265459068",
+   "numero": "1265459068",
+   "resolution": "CA26 20 0345",
+   "date": "2026-09-14",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "PIIAD - Agrandissement du bâtiment principal situé au 98, avenue Strathyre (lot 1 929 845)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=95",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle approuve les plans d'agrandissement d'un duplex situé au 98, avenue Strathyre, dans un secteur patrimonial.",
+    "Le projet ajoute une annexe à l'arrière du bâtiment et un vestibule fermé à l'avant, à même le perron existant.",
+    "Le revêtement de vinyle actuel sera remplacé : brique d'argile en façade avant et au bas des côtés, clin d'aluminium blanc ailleurs.",
+    "Deux arbres seront plantés sur la propriété.",
+    "La demande de permis avait été déposée le 11 décembre 2025; le comité consultatif d'urbanisme a donné un avis favorable unanime le 5 août 2026.",
+    "Le bâtiment, construit en 1949, est associé au type « plex d'après-guerre »."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 4361,
+    "sortie": 374
+   }
+  },
+  {
+   "id": "CA26 20 0343",
+   "numero": null,
+   "resolution": "CA26 20 0343",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_greffe et services administratifs",
+   "objet": "PIIAD - Regroupement",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_PV_ORDI_2026-09-14_19h00_FR.pdf#page=15",
+   "source": "resolution",
+   "puces": [
+    "Le conseil regroupe les points 40.06 à 40.08 pour les voter ensemble.",
+    "Il adopte ces trois points, liés à des plans d'implantation et d'intégration architecturale (PIIA).",
+    "Le document ne précise ni les projets, ni les adresses, ni les montants concernés."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 1600,
+    "sortie": 195
+   }
+  },
+  {
+   "id": "1261526009",
+   "numero": "1261526009",
+   "resolution": "CA26 20 0336",
+   "date": "2026-09-14",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Camion de cuisine de rue au parc des Rapides dans le cadre des « Journées de la culture »",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=57",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle autorise la présence d'un camion de cuisine de rue au parc des Rapides, à la terrasse Serre, le vendredi 25 septembre 2026.",
+    "Le camion accompagne un événement des Journées de la culture avec kiosques d'organismes culturels et prestations d'artistes locaux sur une scène mobile.",
+    "C'est l'entreprise Traiteur BBQ Cabane : Sève & Boucane qui servira les repas, avec une option végétarienne (poké bowl), et pourra vendre ses produits sur place.",
+    "L'entrée à l'événement est gratuite; les participants sont attendus sur le site dès 17 h.",
+    "L'arrondissement prévoit une campagne de communication (site Web, infolettre, réseaux sociaux, écrans numériques, affichage, radio).",
+    "L'entente avec l'entreprise et la logistique doivent être confirmées le 18 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 3909,
+    "sortie": 414
+   }
+  },
+  {
+   "id": "1266456001",
+   "numero": "1266456001",
+   "resolution": "CA26 20 0348",
+   "date": "2026-09-14",
+   "unite": "Direction",
+   "objet": "Entérinement des décisions déléguées soumises par la Division des ressources humaines",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=108",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de LaSalle entérine les décisions déjà prises par la Division des ressources humaines de la Direction d'arrondissement.",
+    "Le document ne précise ni le nombre, ni la nature, ni le coût de ces décisions : aucune somme n'y est indiquée.",
+    "Il s'agit d'une formalité d'approbation de décisions prises en vertu d'un pouvoir délégué, sans nouvel engagement décrit."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 2539,
+    "sortie": 248
+   }
+  },
+  {
+   "id": "1265459071",
+   "numero": "1265459071",
+   "resolution": "CA26 20 0346",
+   "date": "2026-09-14",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "PIIAD - Modification de la façade du bâtiment situé au 7077, boulevard Newman (Carrefour Angrignon)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=99",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle approuve les plans permettant de modifier la façade d'un local du Carrefour Angrignon, au 7077, boulevard Newman.",
+    "Les travaux serviront à installer le commerce Penningtons dans un local actuellement vacant.",
+    "Le projet prévoit une nouvelle entrée extérieure distincte, plus de fenestration, des panneaux d'aluminium noirs et le remplacement de la brique à l'identique.",
+    "Une bande paysagère d'arbustes sera aménagée au pied de la façade.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable unanime le 5 août 2026.",
+    "L'approbation ouvre la voie à l'émission du permis demandé (demande 3003687159)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 5055,
+    "sortie": 352
+   }
+  },
+  {
+   "id": "CA26 20 0324",
+   "numero": null,
+   "resolution": "CA26 20 0324",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_greffe et services administratifs",
+   "objet": "Décès - M. Normand Daigle",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_PV_ORDI_2026-09-14_19h00_FR.pdf#page=3",
+   "source": "resolution",
+   "puces": [
+    "Le conseil souligne le décès de M. Normand Daigle, survenu le 8 septembre 2026, et transmet ses condoléances à sa famille."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 1660,
+    "sortie": 144
+   }
+  },
+  {
+   "id": "1262484020",
+   "numero": "1262484020",
+   "resolution": "CA26 20 0327",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_greffe et services administratifs",
+   "objet": "Proclamation de la « Journée nationale de la vérité et de la réconciliation »",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=11",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de LaSalle reconna\ript officiellement la Journ\ne nationale de la v\nrit\n et de la r\nconciliation, soulign\ne chaque 30 septembre.",
+    "Le conseil rend hommage aux survivantes et survivants des pensionnats autochtones, \nn leurs familles et \nn leurs communaut\ns, et commemore les enfants qui ne sont jamais revenus.",
+    "L'arrondissement r\nnaffirme son engagement \nn poursuivre ses actions de sensibilisation, de dialogue et de rapprochement avec les peuples autochtones.",
+    "Aucune d\npense n'est pr\nvue au dossier : il s'agit d'une proclamation."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 3344,
+    "sortie": 340
+   }
+  },
+  {
+   "id": "1265459069",
+   "numero": "1265459069",
+   "resolution": "CA26 20 0347",
+   "date": "2026-09-14",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "PIIAD - Agrandissement du stationnement en cour avant du bâtiment situé au 154, avenue Highlands (lot 1 929 824)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=104",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle refuse la demande de permis visant à agrandir le stationnement en cour avant du 154, avenue Highlands.",
+    "Le propriétaire voulait élargir et allonger l'aire de stationnement asphaltée pour y garer un véhicule de plus, avec une bordure de pierre pâle et des arbustes près de la clôture.",
+    "Le terrain se trouve dans un secteur résidentiel d'intérêt patrimonial, entre les rues Dalmany et William-Fleming; un arbre mature en façade contribue à la canopée.",
+    "Le refus s'appuie sur deux critères non respectés : la conservation des arbres matures et l'augmentation de la canopée, et l'usage d'un revêtement perméable à albédo élevé plutôt que de l'asphalte.",
+    "Le comité consultatif d'urbanisme avait donné un avis défavorable unanime à sa séance du 5 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 4208,
+    "sortie": 411
+   }
+  },
+  {
+   "id": "1262484019",
+   "numero": "1262484019",
+   "resolution": "CA26 20 0349",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_greffe et services administratifs",
+   "objet": "Désignation de madame la mairesse d'arrondissement Nancy Blanchet à titre de présidente du comité consultatif sur la transition écologique.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=111",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle nomme la mairesse Nancy Blanchet présidente du comité consultatif sur la transition écologique et la résilience.",
+    "Elle remplace à ce poste la conseillère d'arrondissement Josée Troïlo.",
+    "La désignation vaut pour la durée du mandat, qui se termine en 2029.",
+    "Le document ne prévoit aucune dépense."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 2810,
+    "sortie": 227
+   }
+  },
+  {
+   "id": "CA26 20 0318",
+   "numero": null,
+   "resolution": "CA26 20 0318",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_greffe et services administratifs",
+   "objet": "Adoption de l'ordre du jour de la séance du conseil d'arrondissement",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_PV_ORDI_2026-09-14_19h00_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement adopte l'ordre du jour de sa séance ordinaire du 14 septembre 2026, tel que livré à ses membres."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 1648,
+    "sortie": 147
+   }
+  },
+  {
+   "id": "1268863006",
+   "numero": "1268863006",
+   "resolution": "CA26 20 0328",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_greffe et services administratifs",
+   "objet": "Motion - Transport collectif structurant dans le Grand Sud-Ouest",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=15",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle adopte une motion et demande au conseil municipal de l'appuyer : il réclame un mode de transport collectif structurant pour le Grand Sud-Ouest de Montréal.",
+    "Selon le document, l'Autorité régionale de transport métropolitain (ARTM) a terminé ses travaux et déposé son rapport final sur ce projet.",
+    "Le projet a été retiré du Plan québécois des infrastructures et n'a pas avancé vers un dossier d'affaires, malgré les études déjà faites.",
+    "La motion demande à Québec, à la Ville et aux instances de transport de conserver les études et l'expertise développées, puis de fixer les prochaines étapes.",
+    "Elle invoque la croissance démographique du Grand Sud-Ouest et le développement du secteur Newman à LaSalle.",
+    "LaSalle invite les autres arrondissements, municipalités et partenaires du Grand Sud-Ouest à se joindre à la démarche.",
+    "Des copies seront envoyées au gouvernement du Québec, au ministre des Transports, à l'ARTM, à la Communauté métropolitaine de Montréal et aux députés du secteur."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 3924,
+    "sortie": 488
+   }
+  },
+  {
+   "id": "CA26 20 0321",
+   "numero": null,
+   "resolution": "CA26 20 0321",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_greffe et services administratifs",
+   "objet": "Vœux d'anniversaire - Mme Rolande Frenette - 105 ans",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_PV_ORDI_2026-09-14_19h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement offre ses vœux d'anniversaire à Mme Rolande Frenette.",
+    "Elle a célébré ses 105 ans le 12 août 2026.",
+    "La motion a été adoptée à la séance ordinaire du lundi 14 septembre 2026, à 19 h.",
+    "Aucune dépense ni obligation ne découle de cette décision."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 1831,
+    "sortie": 315
+   }
+  },
+  {
+   "id": "1265459073",
+   "numero": "1265459073",
+   "resolution": "CA26 20 0330",
+   "date": "2026-09-14",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "Approbation des trois projets de convention des organismes retenus dans le cadre de l'appel à projets 2026 « LaSalle vert demain ».",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=28",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle verse 43 775 $ à trois organismes retenus dans l'appel à projets « LaSalle vert demain » 2026, sur l'enveloppe de 50 000 $ réservée en début d'année.",
+    "Nutri-Centre LaSalle reçoit 10 000 $ pour des ateliers contre le gaspillage alimentaire et de la cuisine écologique.",
+    "Le Centre d'accompagnement KEDA reçoit 15 775 $ pour sensibiliser jeunes et parents : capsules éducatives, bacs d'agriculture urbaine et activités intergénérationnelles.",
+    "Allions-Nous reçoit 18 000 $ pour aménager et animer la cour de l'ancienne école Allion.",
+    "Quatre demandes ont été déposées; un comité de quatre employés de l'arrondissement en a retenu trois selon dix critères notés sur 20.",
+    "Les organismes touchent 90 % des fonds (39 398 $) à l'automne 2026 et 10 % (4 377 $) à l'automne 2027, après remise de leur bilan.",
+    "Les projets se réalisent de septembre 2026 à septembre 2027; les organismes doivent appliquer le protocole de visibilité de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "43 775 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.502Z",
+   "jetons": {
+    "entree": 5266,
+    "sortie": 529
+   }
+  },
+  {
+   "id": "1267151019",
+   "numero": "1267151019",
+   "resolution": "CA26 20 0341",
+   "date": "2026-09-14",
+   "unite": "Direction des travaux publics",
+   "objet": "Autorisation d'un débarcadère à la garderie les Jolis Cœurs situé au 138, avenue Lafleur",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=80",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle autorise un débarcadère pour deux véhicules devant la garderie les Jolis Cœurs, au 138, avenue Lafleur.",
+    "L'arrêt sera limité à 5 minutes, du lundi au vendredi, de 7 h à 10 h 30 et de 15 h à 18 h.",
+    "Le débarcadère sera installé le plus près possible de l'entrée de la garderie.",
+    "La garderie n'a pas de stationnement sur son terrain et les parents peinent à trouver une place à proximité.",
+    "L'avenue Lafleur est une rue collectrice passante, sans intersection ni traverse piétonne sécuritaire à proximité.",
+    "Les coûts seront payés à même le budget de fonctionnement de la Direction des travaux publics."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.503Z",
+   "jetons": {
+    "entree": 3099,
+    "sortie": 361
+   }
+  },
+  {
+   "id": "1267151020",
+   "numero": "1267151020",
+   "resolution": "CA26 20 0334",
+   "date": "2026-09-14",
+   "unite": "Direction des travaux publics",
+   "objet": "Demande de subvention au programme PAFFSR du Ministère des Transports et de la Mobilité durable - Sécurisation d’une intersection de rues dans l’arrondissement",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=49",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle demande une subvention au ministère des Transports et de la Mobilité durable pour sécuriser l'intersection des rues Raymond et Centrale.",
+    "Les travaux prévus : saillies de trottoir, meilleures traverses piétonnes et ajout d'éléments d'accessibilité universelle.",
+    "L'aide financière maximale offerte par le programme est de 380 000 $ pour ce type de projet d'infrastructures de sécurité routière.",
+    "L'intersection est voisine de l'école primaire des Découvreurs, du centre d'éducation pour adultes PACC, d'un parc avec plateaux sportifs, de la résidence Cavelier et d'arrêts d'autobus.",
+    "La rue Raymond comporte une voie cyclable sur chaussée; le projet s'ajoute à la campagne « À LaSalle, on ralentit » qui abaisse la vitesse à 30 km/h.",
+    "Si la demande est acceptée, les travaux se feraient en 2027 et seraient terminés avant la fin de cette année-là.",
+    "Le conseil autorise le directeur des Travaux publics à signer les documents de la demande."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "380 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.503Z",
+   "jetons": {
+    "entree": 4456,
+    "sortie": 492
+   }
+  },
+  {
+   "id": "1265459067",
+   "numero": "1265459067",
+   "resolution": "CA26 20 0344",
+   "date": "2026-09-14",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "PIIAD - Démolition d'un bâtiment commercial et la construction de deux bâtiments multifamiliaux au 7333 et au 7401-7475, boulevard Newman",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=88",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle autorise la démolition d'un bâtiment commercial (l'ancienne Banque Laurentienne) au coin du boulevard Newman et de la rue Léger.",
+    "À la place, deux bâtiments de 16 étages seront construits au 7333 et au 7401-7475, boulevard Newman : 697 logements et cinq locaux commerciaux totalisant 2 055 m² au rez-de-chaussée.",
+    "Les promoteurs visent des logements locatifs à des loyers inférieurs au marché, selon le document.",
+    "Vingt arbres le long de la rue Léger seront abattus; 147 arbres seront plantés, dont 59 à grand déploiement, avec deux cours intérieures, deux toits verts et des jardins de pluie.",
+    "Deux étages de stationnement souterrain prévoient 523 cases résidentielles, 70 cases commerciales, 53 bornes de recharge et 707 places pour vélos.",
+    "Deux placettes (600 m² et 200 m²) et une rue partagée piétonne sont prévues entre les bâtiments.",
+    "Il s'agit de la première phase d'un projet plus vaste encadré par le PPCMOI PP-32, qui prévoit un parc, une rue publique, 1 800 logements privés et deux lots sociaux; le comité consultatif d'urbanisme a donné un avis favorable unanime le 5 août 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.503Z",
+   "jetons": {
+    "entree": 7223,
+    "sortie": 775
+   }
+  },
+  {
+   "id": "1265459070",
+   "numero": "1265459070",
+   "resolution": "CA26 20 0342",
+   "date": "2026-09-14",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "DM - Autoriser une distance de 0,88 mètre de la ligne de terrain arrière pour une piscine creusée e au 417, 76 Avenue (lot 1 499 952)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=84",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle accepte une dérogation mineure pour une piscine creusée au 417, 76e Avenue, dans un quadruplex résidentiel.",
+    "La piscine se trouve à 0,88 mètre de la ligne de terrain arrière, alors que le règlement de zonage en exige 1,20 mètre : un écart de 0,32 mètre.",
+    "La piscine a été installée avec un permis valide émis en 1977, quand la règle d'alors demandait une distance de quatre pieds.",
+    "La demande, déposée le 29 juin 2026, vise à régulariser la situation dans le cadre de la mise en vente de la propriété.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable unanime le 5 août 2026, notant qu'aucune plainte n'a été signalée depuis l'installation.",
+    "Selon le document, exiger une correction comme une démolition partielle de la piscine serait disproportionné par rapport au préjudice causé au propriétaire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.503Z",
+   "jetons": {
+    "entree": 4221,
+    "sortie": 431
+   }
+  },
+  {
+   "id": "1269156003",
+   "numero": "1269156003",
+   "resolution": "CA26 20 0332",
+   "date": "2026-09-14",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Contribution financière à quatre organismes - Camp de jour et programme d'accompagnement loisirs pour les personnes ayant une limitation fonctionnelle",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=38",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle verse 15 000 $ à quatre organismes pour leurs camps de jour de l'été 2026.",
+    "L'argent sert à payer des accompagnateurs et du matériel spécialisé pour les jeunes ayant une limitation fonctionnelle.",
+    "Répartition : Club Jeune Aire LaSalle 4 877 $, Association de soccer mineur de LaSalle 4 534 $, Héritage Laurentien 4 426 $, Centre Keda 1 163 $.",
+    "Les montants sont calculés selon le nombre d'enfants inscrits et d'accompagnateurs embauchés durant l'été 2026.",
+    "Selon le document, sans cette somme les organismes devraient réduire leur service d'accompagnement.",
+    "Les Leaders et le Centre multiculturel de ressources de LaSalle n'ont pas demandé de financement cette année.",
+    "La dépense provient du budget de fonctionnement de la Direction de la culture, des sports, des loisirs et du développement social."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "15 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.503Z",
+   "jetons": {
+    "entree": 5304,
+    "sortie": 438
+   }
+  },
+  {
+   "id": "1269309006",
+   "numero": "1269309006",
+   "resolution": "CA26 20 0329",
+   "date": "2026-09-14",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Convention et contribution à la Table de développement social de LaSalle, pour la période 2026- 2027 - Poursuite de la mission de mobilisation et de concertation de l'organisme",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=20",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle verse 50 000 $ à la Table de développement social de LaSalle pour la période 2026-2027, et signe une convention avec l'organisme.",
+    "L'argent sert à la mission de mobilisation et de concertation de la Table, dans le cadre de l'Initiative montréalaise de soutien au développement social local.",
+    "La somme passe de 31 113 $ en 2025-2026 à 50 000 $, après la décision de la Ville de rehausser à 50 000 $ le soutien à chaque table de quartier.",
+    "Avec Centraide (75 000 $) et la Direction régionale de santé publique (23 472 $), la Table reçoit 148 472 $ au total.",
+    "La part de la Ville vient du Service de la diversité et de l'inclusion sociale (33 620 $) et de l'entente Ville-MTESS financée par Québec (16 380 $, non récurrente).",
+    "La Table coordonne le Plan stratégique 2024-2027 en développement social de LaSalle et porte un projet d'impact collectif en sécurité alimentaire soutenu par Centraide."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "50 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.503Z",
+   "jetons": {
+    "entree": 7027,
+    "sortie": 470
+   }
+  },
+  {
+   "id": "1268863005",
+   "numero": "1268863005",
+   "resolution": "CA26 20 0337",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_greffe et services administratifs",
+   "objet": "Affectation de surplus - Diminuer la charge fiscale liée aux travaux du bâtiment situé au 13, avenue Strathyre",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=61",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle pige 5 000 000 $ dans ses surplus pour réduire la dette liée aux travaux du bâtiment du 13, avenue Strathyre (l'ancien hôtel de ville).",
+    "Objectif énoncé : limiter la hausse du compte de taxes des résidents de LaSalle, qui devaient autrement rembourser cet emprunt.",
+    "Les travaux de réfection et de reconstruction du bâtiment ont coûté 16 057 660 $ à l'arrondissement.",
+    "Il s'agit d'une deuxième affectation du genre : une première tranche de 5 000 000 $ avait déjà été votée en 2025.",
+    "Les travaux avaient été confiés à Procova inc. (13 376 191,50 $, taxes incluses), avec surveillance de chantier par Cardin Julien inc."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "5 000 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.503Z",
+   "jetons": {
+    "entree": 4253,
+    "sortie": 388
+   }
+  },
+  {
+   "id": "1265480010",
+   "numero": "1265480010",
+   "resolution": "CA26 20 0331",
+   "date": "2026-09-14",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Contribution financière - Association Cornucopia du Canada et Bienvenue à l'immigrant - réalisation de leur livret souvenir - gala annuel",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=34",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de LaSalle verse 625 $ à deux organismes pour la production de leur livret souvenir de gala.",
+    "L'Association Cornucopia du Canada reçoit 325 $ pour son gala de remise de bourses à des étudiants, le 29 août 2026 à la Casa Grecque de LaSalle.",
+    "Bienvenue à l'Immigrant reçoit 300 $ pour son gala bénéfice du 3 octobre 2026 à la salle de réception Sofia, qui vise à soutenir des initiatives d'intégration et d'inclusion sociale.",
+    "L'argent provient du budget du conseil d'arrondissement, poste « Contribution à d'autres organismes ».",
+    "Les deux organismes sont reconnus comme partenaires selon la Politique de reconnaissance et de soutien des OBNL de LaSalle.",
+    "En 2025, chacun des deux organismes avait reçu 300 $ pour le même type de programme souvenir."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "625 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.503Z",
+   "jetons": {
+    "entree": 3909,
+    "sortie": 424
+   }
+  },
+  {
+   "id": "CA26 20 0320",
+   "numero": null,
+   "resolution": "CA26 20 0320",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_greffe et services administratifs",
+   "objet": "Félicitations à Michael Lecchino pour son admission à la prestigieuse Université Harvard",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_PV_ORDI_2026-09-14_19h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil adopte une motion de félicitations à Michael Lecchino, admis à l'Université Harvard.",
+    "Le texte rappelle qu'il est président et membre fondateur du Conseil jeunesse de LaSalle, ainsi que membre de son comité exécutif.",
+    "La résolution est honorifique : elle n'entraîne aucune dépense ni aucune obligation pour l'arrondissement."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.503Z",
+   "jetons": {
+    "entree": 1759,
+    "sortie": 230
+   }
+  },
+  {
+   "id": "CA26 20 0322",
+   "numero": null,
+   "resolution": "CA26 20 0322",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_greffe et services administratifs",
+   "objet": "Décès - Mme Pierrette Blackhurst",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_PV_ORDI_2026-09-14_19h00_FR.pdf#page=3",
+   "source": "resolution",
+   "puces": [
+    "Le conseil prend acte du décès de Mme Pierrette Blackhurst, survenu le 31 juillet 2026, et transmet ses condoléances à la famille."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.503Z",
+   "jetons": {
+    "entree": 1672,
+    "sortie": 149
+   }
+  },
+  {
+   "id": "1263035010",
+   "numero": "1263035010",
+   "resolution": "CA26 20 0338",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_greffe et services administratifs",
+   "objet": "Reddition de comptes",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_ODJ_LPP_ORDI_2026-09-14_19h00_FR.pdf#page=65",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de LaSalle approuve après coup les bons de commande et les virements de budget effectués du 20 juillet au 24 août 2026, ainsi que les factures sans bon de commande de juillet 2026.",
+    "Aucun montant n'est indiqué dans le document : seules les listes elles-mêmes sont visées.",
+    "Cette approbation est requise parce que la loi ne permet pas à l'arrondissement de déléguer les virements de crédits à ses fonctionnaires.",
+    "Il s'agit d'un exercice répété d'un mois à l'autre : la liste précédente, du 20 juin au 19 juillet 2026, avait été entérinée de la même façon."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.503Z",
+   "jetons": {
+    "entree": 3109,
+    "sortie": 326
+   }
+  },
+  {
+   "id": "CA26 20 0323",
+   "numero": null,
+   "resolution": "CA26 20 0323",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_greffe et services administratifs",
+   "objet": "Décès - M. Cesare Mio",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_PV_ORDI_2026-09-14_19h00_FR.pdf#page=3",
+   "source": "resolution",
+   "puces": [
+    "Le conseil souligne le décès de M. Cesare Mio, survenu le 3 septembre 2026, et transmet ses condoléances à sa famille."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.503Z",
+   "jetons": {
+    "entree": 1660,
+    "sortie": 144
+   }
+  },
+  {
+   "id": "CA26 20 0325",
+   "numero": null,
+   "resolution": "CA26 20 0325",
+   "date": "2026-09-14",
+   "unite": "Direction des relations avec les citoyens_greffe et services administratifs",
+   "objet": "Approbation du procès-verbal de la séance ordinaire du conseil d'arrondissement tenue le 3 août 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_PV_ORDI_2026-09-14_19h00_FR.pdf#page=4",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement approuve le procès-verbal de sa séance ordinaire du 3 août 2026, tenue à 19 h."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T16:05:36.503Z",
+   "jetons": {
+    "entree": 1672,
+    "sortie": 142
    }
   },
   {
