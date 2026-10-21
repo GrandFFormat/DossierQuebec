@@ -644,6 +644,7 @@ function traduireTextesFixes(){
   document.documentElement.lang = currentLang === 'en' ? 'en' : 'fr';
   { const _e = document.getElementById('footerLeft'); if(_e) _e.textContent = t('footer.left'); }
   { const _e = document.getElementById('footerRight'); if(_e) _e.textContent = t('footer.right'); }
+  { const _e = document.getElementById('footerDafr'); if(_e) _e.href = currentLang === 'en' ? 'https://dafrsolution.com/en' : 'https://dafrsolution.com'; }
   if(typeof syncTitle === 'function') syncTitle(viewFromPath());
   if(typeof applyAssemblyState === 'function') applyAssemblyState();
   // Les noms d'onglets changent de longueur avec la langue : l'en-tête se remesure.
