@@ -14,7 +14,11 @@ import { estActive } from './_stripe.js';
 import { aUneSection, choisirVersion } from './_section-abonnes.js';
 
 // Les villes qui ont des courriels. Une ville s'ajoute ici le jour où son volet en produit.
-export const VILLES_INFOLETTRE = { quebec: 'Québec', montreal: 'Montréal' };
+// « assemblee » (21 oct. 2026) n'est pas une ville : c'est l'infolettre mensuelle de DossierQuébec sur
+// l'Assemblée nationale (scripts/infolettre-assemblee.js), une seule sorte (mensuel), en français.
+// Même table, mêmes liens signés, même cron que les villes.
+export const ASSEMBLEE = 'assemblee';
+export const VILLES_INFOLETTRE = { quebec: 'Québec', montreal: 'Montréal', [ASSEMBLEE]: 'Assemblée nationale' };
 // Une ligne propre à une ville, affichée sous son nom partout où on s'inscrit (accueil du volet,
 // Mes dossiers). Montréal : à retirer le jour où son premier compte rendu du mois est publié
 // (Martin, 18 septembre 2026 : « cette légende tu l'enlèveras quand la newsletter sera créée »).
@@ -27,7 +31,22 @@ export const NOTES_INFOLETTRE = {
 
 // Langues offertes par ville. Montréal : FR et EN (chaque combo type×langue = un envoi).
 // Québec : FR seulement pour l'instant.
-export const LANGUES_PAR_VILLE = { quebec: ['fr'], montreal: ['fr', 'en'] };
+export const LANGUES_PAR_VILLE = { quebec: ['fr'], montreal: ['fr', 'en'], [ASSEMBLEE]: ['fr'] };
+// Les sortes offertes, quand ce ne sont pas toutes celles de TYPES_INFOLETTRE.
+const TYPES_PAR_VILLE = { [ASSEMBLEE]: ['mensuel'] };
+const sorteOfferte = (ville, type) => !TYPES_PAR_VILLE[ville] || TYPES_PAR_VILLE[ville].includes(type);
+// Le texte de la sorte « mensuel » de l'Assemblée (celui de TYPES_INFOLETTRE parle de la Ville).
+const TEXTES_ASSEMBLEE = {
+  nom: "L'infolettre de l'Assemblée nationale",
+  nomEn: 'The National Assembly newsletter',
+  quoi: 'Un courriel au début de chaque mois : les projets de loi, les votes, ce qui a bougé.',
+  quoiEn: 'One email at the start of each month: the bills, the votes, what moved.',
+};
+// Le premier numéro de l'Assemblée part au début de décembre 2026 (la 44e législature siège à partir
+// du 17 novembre ; avant, il n'y a rien à raconter).
+const PREMIER_ASSEMBLEE = '2026-12';
+// La page où revenir depuis un courriel ou une page de confirmation.
+export const pageDe = (ville) => (ville === ASSEMBLEE ? `${site()}/` : `${site()}/${ville}/`);
 export const NOM_LANGUE = { fr: 'Français', en: 'English' };
 
 
@@ -100,7 +119,8 @@ export const ARRONDISSEMENTS = {
 export const offreDe = (ville) => {
   const langues = LANGUES_PAR_VILLE[ville] ?? ['fr'];
   return Object.entries(TYPES_INFOLETTRE)
-    .filter(([, t]) => !t.parArrondissement || (ARRONDISSEMENTS[ville] ?? []).length)
+    .filter(([cle, t]) => sorteOfferte(ville, cle) && (!t.parArrondissement || (ARRONDISSEMENTS[ville] ?? []).length))
+    .map(([cle, t]) => [cle, ville === ASSEMBLEE && cle === 'mensuel' ? { ...t, ...TEXTES_ASSEMBLEE } : t])
     .map(([cle, t]) => ({
       cle, nom: t.nom, nomEn: t.nomEn, quoi: t.quoi, quoiEn: t.quoiEn, rythme: t.rythme, rythmeEn: t.rythmeEn,
       arrondissements: t.parArrondissement ? ARRONDISSEMENTS[ville].map(({ cle: c, nom }) => ({ cle: c, nom })) : null,
@@ -113,7 +133,7 @@ export const offreDe = (ville) => {
 export function choixValide(choix) {
   const ville = String(choix?.ville ?? '');
   const type = String(choix?.type ?? 'mensuel');
-  if (!Object.hasOwn(VILLES_INFOLETTRE, ville) || !Object.hasOwn(TYPES_INFOLETTRE, type)) return null;
+  if (!Object.hasOwn(VILLES_INFOLETTRE, ville) || !Object.hasOwn(TYPES_INFOLETTRE, type) || !sorteOfferte(ville, type)) return null;
   const arrondissement = String(choix?.arrondissement ?? '');
   if (TYPES_INFOLETTRE[type].parArrondissement) {
     if (!(ARRONDISSEMENTS[ville] ?? []).some((a) => a.cle === arrondissement)) return null;
@@ -124,10 +144,10 @@ export function choixValide(choix) {
 }
 
 export function nomComplet({ ville, type, arrondissement, langue = 'fr' }) {
-  const nomVille = VILLES_INFOLETTRE[ville] ?? (ville === 'assemblee' ? 'Assemblée nationale' : ville);
-  const nomType = TYPES_INFOLETTRE[type]?.nom ?? type;
+  const nomVille = VILLES_INFOLETTRE[ville] ?? ville;
+  const nomType = (ville === ASSEMBLEE && type === 'mensuel' ? TEXTES_ASSEMBLEE.nom : TYPES_INFOLETTRE[type]?.nom) ?? type;
   const nomArr = (ARRONDISSEMENTS[ville] ?? []).find((a) => a.cle === arrondissement)?.nom;
-  const base = `${nomVille} — ${nomArr ? `${nomType} : ${nomArr}` : nomType}`;
+  const base = ville === ASSEMBLEE ? nomType : `${nomVille} —${nomArr ? `${nomType} : ${nomArr}` : nomType}`;
   return langue === 'en' ? `${base} (English)` : base;
 }
 
@@ -143,6 +163,11 @@ export const deMois = (aaaamm) => { const nom = nomMois(aaaamm); return `${/^[ae
 export function prochainEnvoi(maintenant = new Date()) {
   const nom = MOIS[(maintenant.getUTCMonth() + 1) % 12];
   return `au début ${/^[aeiou]/.test(nom) ? "d'" : 'de '}${nom}`;
+}
+// Le même, pour une sorte de courriel : l'Assemblée part pour la première fois au début de décembre 2026.
+export function prochainEnvoiDe(ville, maintenant = new Date()) {
+  if (ville === ASSEMBLEE && maintenant.toISOString().slice(0, 7) < PREMIER_ASSEMBLEE) return 'au début de décembre 2026';
+  return prochainEnvoi(maintenant);
 }
 export const echapper = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -199,7 +224,7 @@ export function composer(numero, { id, bienvenue, abonne = false }) {
   const mensuel = (numero.type ?? 'mensuel') === 'mensuel';
   const quoi = nomComplet({ ville: numero.ville, type: numero.type ?? 'mensuel', arrondissement: numero.arrondissement ?? '' });
   const bandeau = bienvenue
-    ? `<tr><td style="padding:18px 0 0"><div style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;padding:14px 16px;border-radius:10px;background:#E8F6EE;border:1px solid #9FD9B6;font-size:15px;line-height:1.55;color:#16191D">👋 <strong>Bienvenue !</strong> Voici le plus récent courriel de « ${echapper(quoi)} »${mensuel ? `, celui ${echapper(deMois(numero.mois))}` : ''}. <strong>Le prochain arrive ${mensuel ? echapper(prochainEnvoi()) : 'après la prochaine séance'}.</strong></div></td></tr>`
+    ? `<tr><td style="padding:18px 0 0"><div style="font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;padding:14px 16px;border-radius:10px;background:#E8F6EE;border:1px solid #9FD9B6;font-size:15px;line-height:1.55;color:#16191D">👋 <strong>Bienvenue !</strong> Voici le plus récent courriel de « ${echapper(quoi)} »${mensuel ? `, celui ${echapper(deMois(numero.mois))}` : ''}. <strong>Le prochain arrive ${mensuel ? echapper(prochainEnvoiDe(numero.ville)) : 'après la prochaine séance'}.</strong></div></td></tr>`
     : '';
   const pied = `<br><br>Vous recevez ce courriel parce que vous vous y êtes inscrit sur dossierquebec.ca.
     <a href="${lienSigne('desinscrire', [id])}" style="color:#5B6470">Ne plus recevoir « ${echapper(quoi)} »</a> ·
@@ -224,11 +249,11 @@ export async function envoyerBienvenue(inscriptions) {
       messages.push({ a: i.email, sujet: `Bienvenue — ${numero.titre}`, html: composer(numero, { id: i.id, bienvenue: true, abonne }), desinscription: lienSigne('desinscrire', [i.id]) });
       envoyesPour.set(numero.mois, [...(envoyesPour.get(numero.mois) ?? []), i.id]);
     } else {
-      const quand = (i.type ?? 'mensuel') === 'mensuel' ? prochainEnvoi() : 'après la prochaine séance';
+      const quand = (i.type ?? 'mensuel') === 'mensuel' ? prochainEnvoiDe(i.ville) : 'après la prochaine séance';
       messages.push({
         a: i.email,
         sujet: `Inscription confirmée — ${quoi}`,
-        html: `<div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#16191D;line-height:1.55"><h1 style="font-size:20px;color:#0B8A4B">📬 C'est confirmé</h1><p>Vous recevrez « ${echapper(quoi)} ». <strong>Le premier arrive ${echapper(quand)}.</strong></p><p style="font-size:13px;color:#5B6470">En attendant : <a href="${site()}/${i.ville}/" style="color:#0B8A4B">les décisions de la Ville</a>. <a href="${lienSigne('desinscrire', [i.id])}" style="color:#5B6470">Me désinscrire</a></p></div>`,
+        html: `<div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#16191D;line-height:1.55"><h1 style="font-size:20px;color:#0B8A4B">📬 C'est confirmé</h1><p>Vous recevrez « ${echapper(quoi)} ». <strong>Le premier arrive ${echapper(quand)}.</strong></p><p style="font-size:13px;color:#5B6470">En attendant : <a href="${pageDe(i.ville)}" style="color:#0B8A4B">${i.ville === ASSEMBLEE ? "ce qui se passe à l'Assemblée nationale" : 'les décisions de la Ville'}</a>. <a href="${lienSigne('desinscrire', [i.id])}" style="color:#5B6470">Me désinscrire</a></p></div>`,
         desinscription: lienSigne('desinscrire', [i.id]),
       });
     }

@@ -301,14 +301,19 @@ export async function boiteInfolettre(zone, s, { premiereLigne = null } = {}) {
   if (!etat?.villes?.length && !premiereLigne) { zone.innerHTML = ''; return; }
   etat ??= { villes: [], inscriptions: {}, courriel: s.user?.email ?? '' };
   const volet = dernierVolet();
-  const villesIci = etat.villes.filter((v) => v.cle === volet);
+  // L'infolettre de l'Assemblée (« assemblee », api/_infolettre.js) n'est pas une ville : toujours en
+  // tête de la boîte, jamais dans « Autres villes ».
+  const assemblee = etat.villes.find((v) => v.cle === 'assemblee') ?? null;
+  const lesVilles = etat.villes.filter((v) => v.cle !== 'assemblee');
+  const villesIci = lesVilles.filter((v) => v.cle === volet);
   // Venu du site provincial (« ce qui est sur DQ reste sur DQ », 22 sept. 2026) : aucune ville
   // n'est « la sienne ». On garde en vue les villes où la personne est déjà inscrite ; les autres
   // passent dans un menu replié, au lieu de tout déplier (Montréal s'ouvrait sur « 1. Langues »).
   const dq = vientDuProvincial();
   const aDesInscriptions = (v) => Object.entries(etat.inscriptions ?? {}).some(([cle, statut]) => statut && cle.startsWith(`${v.cle}:`));
-  const villes = villesIci.length ? villesIci : dq ? etat.villes.filter(aDesInscriptions) : etat.villes;
-  const villesRepliees = !villesIci.length && dq ? etat.villes.filter((v) => !aDesInscriptions(v)) : [];
+  const villes = villesIci.length ? villesIci : dq ? lesVilles.filter(aDesInscriptions) : lesVilles;
+  const villesRepliees = !villesIci.length && dq ? lesVilles.filter((v) => !aDesInscriptions(v)) : [];
+  const avecAssemblee = Boolean(assemblee);
   const titreBoite = villesIci.length
     ? tr(`Mes courriels de ${echapper(villesIci[0].nom)}`, `My ${echapper(villesIci[0].nom)} emails`)
     : tr('Mes courriels', 'My emails');
@@ -324,7 +329,8 @@ export async function boiteInfolettre(zone, s, { premiereLigne = null } = {}) {
         : tr('Cochez ce que vous voulez recevoir. Pour Montréal : langues, lettres de la Ville, puis arrondissements. Chaque changement s’enregistre tout de suite.', 'Check what you want to receive. For Montréal: languages, city letters, then boroughs. Each change is saved right away.')}</p>
       <p class="ab-note"><span class="ab-bientot-abonne">${tr('Bientôt exclusif aux abonné·e·s', 'Soon for subscribers only')}</span> ${tr('Une édition abonnés du compte rendu mensuel, avec la section « Où va l’argent », arrive bientôt.', 'A subscriber edition of the monthly recap, with the “Where the money goes” section, is coming soon.')}</p>
       ${premiereLigne?.html ?? ''}
-      ${villes.map((v) => blocVille(v, villes.length > 1 || villesRepliees.length > 0)).join('')}
+      ${avecAssemblee ? blocVille({ ...assemblee, nom: tr('Assemblée nationale', 'National Assembly') }, true) : ''}
+      ${villes.map((v) => blocVille(v, villes.length > 1 || villesRepliees.length > 0 || avecAssemblee)).join('')}
       ${villesRepliees.length ? `<details class="ab-pliable ab-courriels-villes"${ouvert}>
         <summary><h3 class="ab-sous-titre" style="margin:0">+ ${tr('Autres villes', 'Other cities')}</h3><span class="ab-etiquette">${villesRepliees.length}</span></summary>
         <div class="ab-pliable-corps">
