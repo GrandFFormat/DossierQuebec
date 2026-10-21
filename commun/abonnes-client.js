@@ -218,7 +218,7 @@ export function rendreDetail(reponse, ville) {
   const parAnnee = (d.repartitionAnnuelle ?? []).map((r) => `${r.annee} : ${r.montant}`).join(' · ');
   const chiffres = (d.chiffresCles ?? []).map((c) => `${c.libelle} : ${c.valeur}`).join(' · ');
   return `<div class="ab-detail">
-    <div class="ab-detail-titre">${tr("Détail de l'argent", 'Money details')} <span class="ab-etiquette">${echapper(nature(d.nature))}</span></div>
+    <div class="ab-detail-titre">${tr("Détail de l'argent", 'Money details')} <span class="ab-etiquette">${echapper(nature(d.nature))}</span> <span class="ab-bientot-abonne">${tr('Bientôt exclusif aux abonné·e·s', 'Soon for subscribers only')}</span></div>
     ${d.enUnePhrase ? `<p class="ab-phrase">${echapper(d.enUnePhrase)}</p>` : ''}
     <ul>
       ${ligne(tr('Montant', 'Amount'), d.montantPrincipal)}
