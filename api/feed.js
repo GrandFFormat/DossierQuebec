@@ -58,7 +58,9 @@ async function compter(req) {
 const lireJson = (chemin) => fetch(`${site()}${chemin}`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
 
 // Le flux d'un·e abonné·e dont l'adresse est déjà vérifiée.
-async function fluxPersonnel(uid, type, ministere) {
+// `precis` (21 oct. 2026, le + de Mon dossier) : { mot } ou { elu } pour UN mot-clé ou UN élu, au lieu
+// de tous ceux du compte. Le filtre n'a pas besoin d'être signé : c'est l'identité qui ouvre l'accès.
+async function fluxPersonnel(uid, type, ministere, precis = {}) {
   if (type === 'tout') return readFileSync(XML_PATH, 'utf8');
   const brut = await lireJson('/data/bills.json');
   if (!Array.isArray(brut?.bills)) return avis('flux-indisponible', 'Flux momentanément indisponible', 'Les données des projets de loi n’ont pas pu être lues. Votre lecteur réessaiera tout seul.', `${site()}/projets-de-loi`);
@@ -67,7 +69,7 @@ async function fluxPersonnel(uid, type, ministere) {
       supabase(`/rest/v1/alertes_mots_cles?select=mot&user_id=eq.${uid}&portee=eq.assemblee&order=created_at`),
       lireJson('/data/bills-resumes-fr.json'),
     ]);
-    return fluxAbonne({ type, bills: brut.bills, resumes, mots: (lignes ?? []).map((l) => l.mot).filter(Boolean) });
+    return fluxAbonne({ type, bills: brut.bills, resumes, mots: precis.mot ? [precis.mot] : (lignes ?? []).map((l) => l.mot).filter(Boolean) });
   }
   if (type === 'elus') {
     const [follows, votes, deputes] = await Promise.all([
@@ -75,7 +77,7 @@ async function fluxPersonnel(uid, type, ministere) {
       lireJson('/data/votes.json'),
       lireJson('/data/site/deputesRaw.json'),
     ]);
-    return fluxAbonne({ type, bills: brut.bills, votes: votes?.votes ?? null, deputes: Array.isArray(deputes) ? deputes : [], follows: follows ?? [] });
+    return fluxAbonne({ type, bills: brut.bills, votes: votes?.votes ?? null, deputes: Array.isArray(deputes) ? deputes : [], follows: precis.elu ? [{ person_type: 'depute', person_key: precis.elu }] : (follows ?? []) });
   }
   return fluxAbonne({ type, bills: brut.bills, ministere });
 }
@@ -100,7 +102,7 @@ export default async function handler(req, res) {
       }
       if (ligne === undefined) xml = avis('abonnement-non-verifiable', 'Flux momentanément indisponible', 'Votre abonnement n’a pas pu être vérifié pour l’instant. Votre lecteur réessaiera tout seul.');
       else if (!estActive(ligne)) xml = avisInactif(uid);
-      else xml = await fluxPersonnel(uid, type, String(q.m ?? '').slice(0, 200));
+      else xml = await fluxPersonnel(uid, type, String(q.m ?? '').slice(0, 200), { mot: String(q.q ?? '').trim().slice(0, 60), elu: String(q.e ?? '').trim().slice(0, 160) });
     }
   } catch (e) {
     console.error('feed :', e.message);

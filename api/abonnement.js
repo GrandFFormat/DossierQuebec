@@ -88,7 +88,9 @@ export default async function handler(req, res) {
     if (!u) return res.status(401).json({ erreur: 'connexion requise' });
     if (!abonne) return res.status(403).json({ erreur: 'réservé aux abonné·e·s' });
     const brut = await fetch(`${site()}/data/bills.json`).then((r) => (r.ok ? r.json() : null)).catch(() => null);
-    return res.status(200).json({ adresse: adresseFlux(u.id), ministeres: ministeres(brut?.bills ?? []) });
+    const deps = await fetch(`${site()}/data/site/deputesRaw.json`).then((r) => (r.ok ? r.json() : [])).catch(() => []);
+    const elus = (Array.isArray(deps) ? deps : []).map((d) => ({ cle: `${d[0]}|${d[1]}`, nom: `${d[0]} (${d[1]})` })).sort((a, b) => a.nom.localeCompare(b.nom, 'fr'));
+    return res.status(200).json({ adresse: adresseFlux(u.id), ministeres: ministeres(brut?.bills ?? []), elus });
   }
   if (req.method === 'GET') {
     return res.status(200).json({

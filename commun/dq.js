@@ -1682,11 +1682,18 @@ async function mdFlux(isEn){
       ${ligne(isEn ? 'Your followed members (bills introduced and recorded votes)' : 'Vos élus suivis (projets de loi présentés et votes nominaux)', mdFluxAdresse + '&type=elus')}
       ${min.length ? `<li><b>${isEn ? 'By ministry (bills it sponsors) — one feed per ministry' : 'Par ministère (projets de loi qu’il parraine) — un flux par ministère'}</b>
         <div id="mdFluxMins"></div></li>` : ''}
+      <li><b>${isEn ? 'One keyword — one feed per keyword' : 'Un mot-clé précis — un flux par mot-clé'}</b>
+        <div id="mdFluxMots"></div></li>
+      ${(donnees.elus || []).length ? `<li><b>${isEn ? 'One member — one feed per member (bills introduced and recorded votes)' : 'Un élu précis — un flux par élu (projets de loi présentés et votes nominaux)'}</b>
+        <div id="mdFluxElus"></div></li>` : ''}
     </ul>
     <p class="md-note">${isEn ? 'Keywords are managed in the alerts card; followed members, from the ministers and MNAs pages.' : 'Les mots-clés se gèrent dans la carte des alertes ; les élus suivis, depuis les pages des ministres et des député·e·s.'}</p>
   </div>`;
   _mdMins = min;
+  _mdElus = donnees.elus || [];
   if(min.length) mdFluxAjouterMinistere(true);
+  mdFluxAjouterMot(true);
+  if(_mdElus.length) mdFluxAjouterElu(true);
 }
 // Les flux par ministère (Martin, 21 oct. 2026 : « à gauche de ministre, un + ; s'ils veulent suivre
 // plus d'un ministre, une ligne s'additionne »). Chaque ligne : un ministère, son adresse, ⧉ copier.
@@ -1710,6 +1717,46 @@ function mdFluxMinistere(select){
 }
 window.mdFluxMinistere = mdFluxMinistere;
 window.mdFluxAjouterMinistere = mdFluxAjouterMinistere;
+
+// Même principe pour un mot-clé précis (champ libre) et un élu précis (menu) : + ajoute une ligne.
+let _mdElus = [];
+const mdBoutonPlus = (premiere, fn, isEn, quoi) => `<button type="button" class="md-bouton-doux md-flux-plus" aria-label="${premiere ? (isEn ? 'Add' : 'Ajouter') : (isEn ? 'Remove' : 'Retirer')} ${quoi}" onclick="${premiere ? fn + '(false)' : 'this.parentElement.remove()'}">${premiere ? '+' : '−'}</button>`;
+const mdBoutonCopier = (isEn) => `<button class="md-bouton-doux" aria-label="${isEn ? 'Copy' : 'Copier'}" onclick="copierCourriel(this, this.previousElementSibling.value)">⧉</button>`;
+function mdFluxAjouterMot(premiere){
+  const boite = document.getElementById('mdFluxMots');
+  if(!boite) return;
+  const isEn = currentLang === 'en';
+  const ligne = document.createElement('div');
+  ligne.className = 'md-ligne md-flux-min';
+  ligne.innerHTML = `${mdBoutonPlus(premiere, 'mdFluxAjouterMot', isEn, isEn ? 'a keyword' : 'un mot-clé')}<input type="text" class="md-flux-mot" maxlength="60" placeholder="${isEn ? 'e.g. housing' : 'ex. : logement'}" aria-label="${isEn ? 'Keyword' : 'Mot-clé'}" oninput="mdFluxMot(this)"><input type="text" readonly aria-label="${isEn ? 'Keyword feed' : 'Flux du mot-clé'}" onfocus="this.select()">${mdBoutonCopier(isEn)}`;
+  boite.appendChild(ligne);
+  mdFluxMot(ligne.querySelector('.md-flux-mot'));
+}
+function mdFluxMot(champ){
+  const a = champ?.nextElementSibling;
+  const mot = (champ?.value || '').trim();
+  if(a) a.value = mot ? mdFluxAdresse + '&type=mots&q=' + encodeURIComponent(mot) : '';
+}
+function mdFluxAjouterElu(premiere){
+  const boite = document.getElementById('mdFluxElus');
+  if(!boite) return;
+  const isEn = currentLang === 'en';
+  const deja = [...boite.querySelectorAll('select')].map((x) => x.value);
+  const choix = (_mdElus.find((e) => !deja.includes(e.cle)) || _mdElus[0]).cle;
+  const ligne = document.createElement('div');
+  ligne.className = 'md-ligne md-flux-min';
+  ligne.innerHTML = `${mdBoutonPlus(premiere, 'mdFluxAjouterElu', isEn, isEn ? 'a member' : 'un élu')}<select aria-label="${isEn ? 'Member' : 'Élu'}" onchange="mdFluxElu(this)">${_mdElus.map((e) => `<option value="${mdH(e.cle)}"${e.cle === choix ? ' selected' : ''}>${mdH(e.nom)}</option>`).join('')}</select><input type="text" readonly aria-label="${isEn ? 'Member feed' : 'Flux de l’élu'}" onfocus="this.select()">${mdBoutonCopier(isEn)}`;
+  boite.appendChild(ligne);
+  mdFluxElu(ligne.querySelector('select'));
+}
+function mdFluxElu(select){
+  const a = select?.nextElementSibling;
+  if(a) a.value = mdFluxAdresse + '&type=elus&e=' + encodeURIComponent(select.value);
+}
+window.mdFluxAjouterMot = mdFluxAjouterMot;
+window.mdFluxMot = mdFluxMot;
+window.mdFluxAjouterElu = mdFluxAjouterElu;
+window.mdFluxElu = mdFluxElu;
 
 // LES ALERTES SUR MESURE (21 oct. 2026), deuxième outil de l'abonnement. Un courriel le matin quand,
 // à l'Assemblée nationale, un projet de loi contient un mot-clé, un élu suivi présente un projet ou
