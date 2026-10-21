@@ -1,5 +1,5 @@
-// Partagé par api/alertes-projets.js et api/alertes-desabonnement.js (le « _ » : Vercel n'en fait
-// pas une route).
+// Partagé par api/_alertes-assemblee.js (alertes sur mesure), api/unsubscribe.js (leur lien de
+// désabonnement), api/_stripe.js et api/_infolettre.js (le « _ » : Vercel n'en fait pas une route).
 
 import crypto from 'node:crypto';
 
