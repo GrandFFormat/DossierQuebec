@@ -47,9 +47,8 @@
 <title>Mises à jour du site — DossierQuébec</title>
 <meta name="description" content="Ce qui change sur DossierQuébec, site citoyen indépendant qui rend lisibles l'Assemblée nationale et les conseils municipaux du Québec, et qui est derrière.">
 <link rel="canonical" href="https://dossierquebec.ca/sources">
-<!-- Flux RSS de « Quoi de neuf », généré au build par scrapers/build-news-data.js.
-     C'est ainsi que journalistes et agrégateurs suivent un site sans le visiter. -->
-<link rel="alternate" type="application/rss+xml" title="DossierQuébec — Quoi de neuf" href="https://dossierquebec.ca/feed.xml">
+<!-- Plus de <link rel="alternate"> vers /feed.xml : le flux RSS est réservé aux abonné·e·s depuis le
+     21 oct. 2026 (api/feed.js), chacun avec son adresse personnelle dans Mon dossier. -->
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0E4FC1">
 
@@ -280,6 +279,7 @@ function goToFederal(evt){
       <ol class="maj-liste" id="journalListe" aria-live="polite"></ol>
     <div class="prerendu" data-prerendu="journal">
       <ul aria-label="Mises à jour du site">
+        <li><span class="pr-meta">21 octobre 2026 —</span> <b>Troisième outil pour abonné·e·s : les flux RSS, et le flux général devient réservé aux abonné·e·s</b> Le flux RSS général de DossierQuébec (toutes les nouvelles de l’Assemblée nationale) est désormais réservé aux abonné·e·s. L’ancienne adresse /feed.xml n’affiche plus qu’un avis. Dans Mon dossier, les abonné·e·s trouvent leur adresse de flux personnelle pour ce flux général, ainsi que des flux personnalisés : par mot-clé, par élu suivi (projets de loi présentés et votes nominaux) et par ministère. Le site lui-même reste gratuit.</li>
         <li><span class="pr-meta">21 octobre 2026 —</span> <b>Deuxième outil pour abonné·e·s : les alertes sur mesure</b> Les abonné·e·s reçoivent un courriel le matin quand, à l’Assemblée nationale, un projet de loi contient un de leurs mots-clés, un élu qu’ils suivent présente un projet de loi ou vote, ou un projet de loi qu’ils suivent change d’étape. Les mots-clés se gèrent dans Mon dossier, jusqu’à 10. Le suivi de 3 projets de loi, élus ou projets de ville reste gratuit pour tout le monde.</li>
         <li><span class="pr-meta">21 octobre 2026 —</span> <b>Premier outil pour abonné·e·s : l’export des données</b> Dans Mon dossier, les abonné·e·s peuvent télécharger les données de l’Assemblée nationale en fichiers CSV : les votes nominaux (une ligne par député·e et par vote), les présences aux votes et les projets de loi. Le contenu du site reste gratuit pour tout le monde.</li>
         <li><span class="pr-meta">21 octobre 2026 —</span> <b>Une page pour l’abonnement facultatif</b> Tout le contenu du site reste gratuit, de même que le suivi de 3 projets de loi, élus ou projets de ville. La nouvelle page Abonnement présente les outils prévus pour un abonnement facultatif, chacun avec son état, et les forfaits : 9,99 $ par mois, 26,99 $ tous les 3 mois ou 99 $ par an.</li>
@@ -299,9 +299,8 @@ function goToFederal(evt){
         <li><span class="pr-meta">16 octobre 2026 —</span> <b>Les élu·e·s du 5 octobre</b> L'Assemblée nationale a publié la liste des personnes proclamées élues le 5 octobre. La page des ministres et député·e·s les présente maintenant comme telles, avec le nombre de sièges déjà proclamés sur 127. Les autres sièges attendent leur proclamation, entre autres là où un dépouillement judiciaire est en cours. La présence aux votes reprendra avec la nouvelle législature.</li>
         <li><span class="pr-meta">10 octobre 2026 —</span> <b>La page d'accueil dit que l'élection a eu lieu</b> Le texte de base de la page d'accueil annonçait encore l'élection du 5 octobre au futur et parlait des député·e·s sortant·e·s comme de candidat·e·s. Le navigateur corrigeait l'affichage, mais un moteur de recherche ou un assistant qui lit la page sans exécuter son script voyait l'ancien texte. La page dit maintenant, dans son texte de base, que l'élection a eu lieu, et donne le résultat publié par Élections Québec.</li>
         <li><span class="pr-meta">7 octobre 2026 —</span> <b>Lévis, Longueuil et Laval sont en pause</b> Les volets de Lévis, de Longueuil et de Laval ne sont plus mis à jour depuis le 7 octobre 2026 : leur lecture quotidienne est arrêtée. Ils sortent du menu des villes, de Mon dossier et du plan du site. Leurs pages restent en ligne, avec un avis en tête qui dit que les données datent de ce jour-là ou d’avant. Les volets de Québec et de Montréal continuent comme avant.</li>
-        <li><span class="pr-meta">7 octobre 2026 —</span> <b>Québec : qui siège au comité exécutif, et ce que ça change</b> La page du conseil municipal de Québec indique maintenant, sur la fiche de chaque élu concerné, son rôle au comité exécutif et ses responsabilités, lus chaque jour sur le site de la Ville. Une légende explique la différence : le conseil réunit les 22 élus en séance publique ; le comité exécutif est un petit groupe de 10 membres et 1 conseiller associé, qui siège à huis clos. Le lexique, qui parlait de 9 membres, est corrigé.</li>
       </ul>
-      <p class="pr-note">Les 20 plus récentes, sur 84.</p>
+      <p class="pr-note">Les 20 plus récentes, sur 85.</p>
     </div>
       <button type="button" class="maj-plus" id="journalPlus" hidden></button>
     </div>

@@ -47,9 +47,8 @@
 <title>L'abonnement facultatif — DossierQuébec</title>
 <meta name="description" content="Tout le contenu de DossierQuébec reste gratuit. L'abonnement facultatif donne des outils en plus, chacun avec son état. Prix en dollars canadiens, résiliable.">
 <link rel="canonical" href="https://dossierquebec.ca/abonnement">
-<!-- Flux RSS de « Quoi de neuf », généré au build par scrapers/build-news-data.js.
-     C'est ainsi que journalistes et agrégateurs suivent un site sans le visiter. -->
-<link rel="alternate" type="application/rss+xml" title="DossierQuébec — Quoi de neuf" href="https://dossierquebec.ca/feed.xml">
+<!-- Plus de <link rel="alternate"> vers /feed.xml : le flux RSS est réservé aux abonné·e·s depuis le
+     21 oct. 2026 (api/feed.js), chacun avec son adresse personnelle dans Mon dossier. -->
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0E4FC1">
 
@@ -267,7 +266,7 @@ function goToFederal(evt){
       <p>Les outils prévus, chacun avec son état. Un outil marqué « Bientôt » n’existe pas encore : l’abonné·e le reçoit sans frais de plus dès sa sortie, au même prix tant que l’abonnement reste actif. Aucun outil ne porte sur les décisions municipales.</p>
       <ul class="ab-outils">
         <li><span class="ab-etat ab-dispo">Disponible</span><div><b>Alertes sur mesure</b> — un courriel quand un projet de loi touche un mot-clé qui vous intéresse, quand un élu présente un projet ou vote, ou quand un projet change d’étape.</div></li>
-        <li><span class="ab-etat ab-bientot">Bientôt</span><div><b>Flux RSS personnalisés</b> — un flux par mot-clé, par député·e ou par ministère.</div></li>
+        <li><span class="ab-etat ab-dispo">Disponible</span><div><b>Flux RSS</b> — le flux de toutes les nouvelles et des flux personnalisés par mot-clé, par député·e ou par ministère.</div></li>
         <li><span class="ab-etat ab-bientot">Bientôt</span><div><b>Échéances des consultations</b> — la date limite pour déposer un mémoire en commission parlementaire, avec un rappel avant la fin.</div></li>
         <li><span class="ab-etat ab-bientot">Bientôt</span><div><b>Veille par thème</b> — chaque semaine, tout ce qui a bougé dans votre domaine : projets de loi, votes, consultations.</div></li>
         <li><span class="ab-etat ab-bientot">Bientôt</span><div><b>Qui a déposé un mémoire sur quoi</b> — les groupes qui se sont exprimés sur chaque projet de loi en commission.</div></li>

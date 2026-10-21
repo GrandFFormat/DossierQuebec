@@ -47,9 +47,8 @@
 <title>Mon dossier — DossierQuébec</title>
 <meta name="description" content="Votre espace à l'Assemblée nationale : les projets de loi que vous suivez, les ministres et député·e·s suivis, vos mots-clés et votre alerte du matin.">
 <link rel="canonical" href="https://dossierquebec.ca/mon-dossier">
-<!-- Flux RSS de « Quoi de neuf », généré au build par scrapers/build-news-data.js.
-     C'est ainsi que journalistes et agrégateurs suivent un site sans le visiter. -->
-<link rel="alternate" type="application/rss+xml" title="DossierQuébec — Quoi de neuf" href="https://dossierquebec.ca/feed.xml">
+<!-- Plus de <link rel="alternate"> vers /feed.xml : le flux RSS est réservé aux abonné·e·s depuis le
+     21 oct. 2026 (api/feed.js), chacun avec son adresse personnelle dans Mon dossier. -->
 <meta name="robots" content="noindex, follow">
 <meta name="theme-color" content="#0E4FC1">
 
@@ -265,6 +264,9 @@ function goToFederal(evt){
     <!-- Les alertes sur mesure, deuxième outil de l'abonnement (mdAlertes, commun/dq.js ;
          api/_alertes-assemblee.js, envoyées par api/infolettre-envoi.js). -->
     <div id="mdAlertes" class="md-bloc"></div>
+    <!-- Les flux RSS, troisième outil de l'abonnement (mdFlux, commun/dq.js ; api/feed.js,
+         adresse fournie par api/abonnement.js?action=flux). -->
+    <div id="mdFlux" class="md-bloc"></div>
     <div id="mdLois" class="md-bloc"></div>
     <div id="mdElus" class="md-bloc"></div>
     <!-- Ce qui s'en vient (Martin, 18 oct. 2026) : les outils prévus pour l'abonnement, annoncés
@@ -274,7 +276,7 @@ function goToFederal(evt){
         <p>Tout le texte du site restera gratuit : les projets de loi et leurs résumés, les ministres et député·e·s, les votes, les promesses. Des outils en plus arriveront bientôt, réservés aux abonné·e·s :</p>
         <ul class="md-avenir-liste">
           <li><b>Alertes sur mesure</b> <span class="md-dispo">disponible</span> — un courriel quand un projet de loi touche un mot-clé qui vous intéresse, quand un élu présente un projet ou vote, ou quand un projet change d’étape.</li>
-          <li><b>Flux RSS personnalisés</b> — un flux par mot-clé, par député·e ou par ministère, à lire dans votre lecteur RSS.</li>
+          <li><b>Flux RSS personnalisés</b> <span class="md-dispo">disponible</span> — le flux de toutes les nouvelles, et un flux par mot-clé, par député·e ou par ministère, à lire dans votre lecteur RSS.</li>
           <li><b>Échéances des consultations</b> — pour les groupes et les lobbys : la date limite pour déposer un mémoire en commission parlementaire, avec un rappel avant la fin.</li>
           <li><b>Veille par thème</b> — chaque semaine, tout ce qui a bougé dans votre domaine : projets de loi, votes, consultations.</li>
           <li><b>Qui a déposé un mémoire sur quoi</b> — les groupes qui se sont exprimés sur chaque projet de loi en commission.</li>

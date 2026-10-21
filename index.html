@@ -47,9 +47,8 @@
 <title>L'Assemblée nationale du Québec en clair — DossierQuébec</title>
 <meta name="description" content="Suivez l'Assemblée nationale du Québec en langage clair : projets de loi résumés, votes nominatifs de chaque député·e, ministres et promesses électorales 2026.">
 <link rel="canonical" href="https://dossierquebec.ca/">
-<!-- Flux RSS de « Quoi de neuf », généré au build par scrapers/build-news-data.js.
-     C'est ainsi que journalistes et agrégateurs suivent un site sans le visiter. -->
-<link rel="alternate" type="application/rss+xml" title="DossierQuébec — Quoi de neuf" href="https://dossierquebec.ca/feed.xml">
+<!-- Plus de <link rel="alternate"> vers /feed.xml : le flux RSS est réservé aux abonné·e·s depuis le
+     21 oct. 2026 (api/feed.js), chacun avec son adresse personnelle dans Mon dossier. -->
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0E4FC1">
 
@@ -362,9 +361,8 @@ function goToFederal(evt){
     <div class="band band-white bleed" id="band-actu">
     <div class="actu-grid">
     <div>
-    <!-- Le flux RSS (feed.xml) reprend exactement ces événements. Son lien
-         visible vit dans le pied de page ; la balise <link rel=alternate> de
-         l'en-tête sert aux lecteurs RSS. -->
+    <!-- Le flux RSS (api/feed-data.xml) reprend exactement ces événements ; il est réservé aux
+         abonné·e·s depuis le 21 oct. 2026 (adresse personnelle dans Mon dossier). -->
     <div class="section-head" id="sec-quoideneuf"><div><h2 data-i18n="h.quoideneuf">Quoi de neuf</h2><div class="sub" data-i18n="h.quoideneuf.sub">Dernières activités réelles à l'Assemblée nationale</div></div></div>
 
     <div id="body-quoideneuf">
