@@ -10,6 +10,8 @@
 
 import crypto from 'node:crypto';
 import { supabase, site } from './_alertes.js';
+import { estActive } from './_stripe.js';
+import { aUneSection, choisirVersion } from './_section-abonnes.js';
 
 // Les villes qui ont des courriels. Une ville s'ajoute ici le jour où son volet en produit.
 export const VILLES_INFOLETTRE = { quebec: 'Québec', montreal: 'Montréal' };
@@ -122,7 +124,7 @@ export function choixValide(choix) {
 }
 
 export function nomComplet({ ville, type, arrondissement, langue = 'fr' }) {
-  const nomVille = VILLES_INFOLETTRE[ville] ?? ville;
+  const nomVille = VILLES_INFOLETTRE[ville] ?? (ville === 'assemblee' ? 'Assemblée nationale' : ville);
   const nomType = TYPES_INFOLETTRE[type]?.nom ?? type;
   const nomArr = (ARRONDISSEMENTS[ville] ?? []).find((a) => a.cle === arrondissement)?.nom;
   const base = `${nomVille} — ${nomArr ? `${nomType} : ${nomArr}` : nomType}`;
@@ -180,8 +182,20 @@ export const dernierNumero = async ({ ville, type = 'mensuel', arrondissement = 
   return (await q(langue))[0] ?? (langue !== 'fr' ? (await q('fr'))[0] : null) ?? null;
 };
 
+// Parmi des inscriptions, les comptes dont l'abonnement est actif EN CE MOMENT (même règle
+// qu'api/_stripe.js, estActive). Une inscription sans compte (user_id vide) n'est jamais abonnée.
+export async function abonnesParmi(inscriptions) {
+  const ids = [...new Set(inscriptions.map((i) => i.user_id).filter((x) => /^[0-9a-f-]{36}$/.test(String(x ?? ''))))];
+  if (!ids.length) return new Set();
+  const lignes = await supabase(`/rest/v1/abonnements?user_id=in.(${ids.join(',')})&select=*`);
+  return new Set((lignes ?? []).filter(estActive).map((l) => l.user_id));
+}
+
 // Le courriel, prêt à partir : le bandeau de bienvenue (s'il y a lieu) et les liens de désinscription.
-export function composer(numero, { id, bienvenue }) {
+// Un numéro qui porte la section « Pour les abonné·e·s » (api/_section-abonnes.js, l'infolettre de
+// l'Assemblée) garde la version complète pour un·e abonné·e, l'aperçu pour les autres. Les comptes
+// rendus des villes n'en ont pas : ils partent tels quels.
+export function composer(numero, { id, bienvenue, abonne = false }) {
   const mensuel = (numero.type ?? 'mensuel') === 'mensuel';
   const quoi = nomComplet({ ville: numero.ville, type: numero.type ?? 'mensuel', arrondissement: numero.arrondissement ?? '' });
   const bandeau = bienvenue
@@ -190,7 +204,8 @@ export function composer(numero, { id, bienvenue }) {
   const pied = `<br><br>Vous recevez ce courriel parce que vous vous y êtes inscrit sur dossierquebec.ca.
     <a href="${lienSigne('desinscrire', [id])}" style="color:#5B6470">Ne plus recevoir « ${echapper(quoi)} »</a> ·
     <a href="${lienSigne('desinscrire', [id], '&tout=1')}" style="color:#5B6470">me désinscrire de tout</a>`;
-  return numero.html.replace('<!--BANDEAU-->', bandeau).replace('<!--DESINSCRIPTION-->', pied);
+  const html = aUneSection(numero.html) ? choisirVersion(numero.html, abonne) : numero.html;
+  return html.replace('<!--BANDEAU-->', bandeau).replace('<!--DESINSCRIPTION-->', pied);
 }
 
 // À la confirmation (ou à la case cochée dans Mes dossiers) : le plus récent compte rendu de chaque
@@ -199,11 +214,14 @@ export async function envoyerBienvenue(inscriptions) {
   if (!inscriptions.length) return 0;
   const messages = [];
   const envoyesPour = new Map(); // mois → ids
+  let abonnes = null; // cherchés une fois, seulement si un numéro porte la section abonné·e·s
   for (const i of inscriptions) {
     const numero = await dernierNumero(i);
     const quoi = nomComplet(i);
     if (numero) {
-      messages.push({ a: i.email, sujet: `Bienvenue — ${numero.titre}`, html: composer(numero, { id: i.id, bienvenue: true }), desinscription: lienSigne('desinscrire', [i.id]) });
+      if (!abonnes && aUneSection(numero.html)) abonnes = await abonnesParmi(inscriptions);
+      const abonne = Boolean(abonnes?.has(i.user_id));
+      messages.push({ a: i.email, sujet: `Bienvenue — ${numero.titre}`, html: composer(numero, { id: i.id, bienvenue: true, abonne }), desinscription: lienSigne('desinscrire', [i.id]) });
       envoyesPour.set(numero.mois, [...(envoyesPour.get(numero.mois) ?? []), i.id]);
     } else {
       const quand = (i.type ?? 'mensuel') === 'mensuel' ? prochainEnvoi() : 'après la prochaine séance';
@@ -233,10 +251,12 @@ export async function envoyerNumerosEnAttente(plafond = PAR_JOUR) {
   for (const numero of numeros) {
     if (reste <= 0) break;
     rapport.numeros++;
-    const inscrits = await supabase(`/rest/v1/infolettre_inscriptions?ville=eq.${numero.ville}&type=eq.${numero.type ?? 'mensuel'}&arrondissement=eq.${numero.arrondissement ?? ''}&statut=eq.confirme&or=(dernier_mois.is.null,dernier_mois.lt.${numero.mois})&select=id,email&order=confirme_le&limit=${reste + 1}`);
+    const inscrits = await supabase(`/rest/v1/infolettre_inscriptions?ville=eq.${numero.ville}&type=eq.${numero.type ?? 'mensuel'}&arrondissement=eq.${numero.arrondissement ?? ''}&statut=eq.confirme&or=(dernier_mois.is.null,dernier_mois.lt.${numero.mois})&select=id,email,user_id&order=confirme_le&limit=${reste + 1}`);
     const lot = inscrits.slice(0, reste);
     if (lot.length) {
-      await envoyerCourriels(lot.map((i) => ({ a: i.email, sujet: numero.titre, html: composer(numero, { id: i.id, bienvenue: false }), desinscription: lienSigne('desinscrire', [i.id]) })));
+      // Le statut d'abonnement se lit au moment de l'envoi, lot par lot.
+      const abonnes = aUneSection(numero.html) ? await abonnesParmi(lot) : new Set();
+      await envoyerCourriels(lot.map((i) => ({ a: i.email, sujet: numero.titre, html: composer(numero, { id: i.id, bienvenue: false, abonne: abonnes.has(i.user_id) }), desinscription: lienSigne('desinscrire', [i.id]) })));
       await supabase(`/rest/v1/infolettre_inscriptions?id=in.(${lot.map((i) => i.id).join(',')})`, { methode: 'PATCH', corps: { dernier_mois: numero.mois }, entetes: { Prefer: 'return=minimal' } });
       reste -= lot.length;
       rapport.envoyes += lot.length;

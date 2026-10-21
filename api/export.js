@@ -4,6 +4,9 @@
 //
 //   GET /api/export?jeu=votes|votes-deputes|presences|projets      Authorization: Bearer <jeton de session Supabase>
 //   → un fichier CSV (séparateur « ; », encodé UTF-8 avec BOM : Excel en français l'ouvre tel quel)
+//   &mois=AAAA-MM (votes, votes-deputes, presences) : seulement les votes de ce mois-là ; les présences
+//   sont alors recomptées sur ces votes. Sert aux liens « Les fichiers du mois » de l'infolettre
+//   (api/_section-abonnes.js), qui passent par Mon dossier (/mon-dossier?mois=AAAA-MM#mdExport).
 //
 //   GET /api/export?jeu=consultations[&pl=id,id…]                  (même en-tête)
 //   → du JSON pour Mon dossier et la carte d'un projet de loi (quatrième et cinquième outils, 21 oct.
@@ -35,7 +38,8 @@ const cellule = (v) => {
 };
 const csv = (entetes, lignes) => '﻿' + [entetes, ...lignes].map((l) => l.map(cellule).join(';')).join('\r\n') + '\r\n';
 
-async function fabriquer(jeu) {
+export async function fabriquer(jeu, mois = null) {
+  const duMois = (votes) => (mois ? votes.filter((v) => String(v.date ?? '').startsWith(mois)) : votes);
   if (jeu === 'projets') {
     const { bills } = await lire('/data/bills.json');
     return csv(
@@ -47,14 +51,15 @@ async function fabriquer(jeu) {
   // député·e et par vote avec le sujet et l'adresse répétés pesait 24 Mo, au-delà de ce qu'une
   // fonction Vercel peut renvoyer (4,5 Mo).
   if (jeu === 'votes') {
-    const { votes } = await lire('/data/votes.json');
+    const votes = duMois((await lire('/data/votes.json')).votes);
     return csv(
       ['vote', 'date', 'etape', 'projet_de_loi', 'sujet', 'pour', 'contre', 'abstentions', 'adresse_assemblee'],
       votes.map((v) => [`${v.legislature}-${v.session}-${v.num}`, v.date, v.stage, v.billNum, v.subject, (v.pour || []).length, (v.contre || []).length, (v.abstentions || []).length, v.url]),
     );
   }
   if (jeu === 'votes-deputes') {
-    const [{ votes }, histo] = await Promise.all([lire('/data/votes.json'), lire('/data/elus-historique.json').catch(() => ({ elus: {} }))]);
+    const [{ votes: tous }, histo] = await Promise.all([lire('/data/votes.json'), lire('/data/elus-historique.json').catch(() => ({ elus: {} }))]);
+    const votes = duMois(tous);
     const lignes = [];
     for (const v of votes) {
       for (const [choix, liste] of [['pour', v.pour], ['contre', v.contre], ['abstention', v.abstentions]]) {
@@ -67,7 +72,16 @@ async function fabriquer(jeu) {
     return csv(['vote', 'depute', 'parti', 'choix'], lignes);
   }
   if (jeu === 'presences') {
-    const [presences, histo] = await Promise.all([lire('/data/site/presences.json'), lire('/data/elus-historique.json').catch(() => ({ elus: {} }))]);
+    const [toutes, histo, { votes }] = await Promise.all([lire('/data/site/presences.json'), lire('/data/elus-historique.json').catch(() => ({ elus: {} })), mois ? lire('/data/votes.json') : { votes: [] }]);
+    let presences = toutes;
+    if (mois) {
+      // Recomptées sur les votes du mois : présent·e = a voté pour, contre ou s'est abstenu·e.
+      const duMoisV = duMois(votes);
+      const n = {};
+      for (const id of Object.keys(toutes)) n[id] = 0;
+      for (const v of duMoisV) for (const p of [...(v.pour || []), ...(v.contre || []), ...(v.abstentions || [])]) n[p.assnatId] = (n[p.assnatId] ?? 0) + 1;
+      presences = Object.fromEntries(Object.entries(n).map(([id, k]) => [id, { participated: k, total: duMoisV.length, rate: duMoisV.length ? Math.round((100 * k) / duMoisV.length) : 0 }]));
+    }
     return csv(
       ['depute', 'parti', 'votes_participes', 'votes_total', 'taux_presence_pct', 'numero_assemblee'],
       Object.entries(presences).map(([id, p]) => {
@@ -110,8 +124,9 @@ export default async function handler(req, res) {
     return res.status(200).json({ misAJour: index.misAJour, organismes: Object.fromEntries(cles.map((k) => [k, organisme(index, k)])) });
   }
   try {
-    const fichier = await fabriquer(jeu);
-    const jour = new Date().toISOString().slice(0, 10);
+    const mois = /^\d{4}-(0[1-9]|1[0-2])$/.test(String(req.query?.mois ?? '')) && ['votes', 'votes-deputes', 'presences'].includes(jeu) ? String(req.query.mois) : null;
+    const fichier = await fabriquer(jeu, mois);
+    const jour = mois ?? new Date().toISOString().slice(0, 10);
     res.setHeader('Content-Type', 'text/csv; charset=utf-8');
     res.setHeader('Content-Disposition', `attachment; filename="dossierquebec-${jeu}-${jour}.csv"`);
     res.setHeader('Cache-Control', 'no-store');
