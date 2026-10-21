@@ -1008,7 +1008,7 @@ function goToFederal(evt){
         <p data-i18n="regles.9.p">Quand une source est absente ou incomplète, la page le dit et dit pourquoi. Une absence ne doit jamais être lue comme un silence du parti ou de la Ville.</p>
       </li>
     </ol>
-    <p class="regles-suite" data-i18n="regles.suite">Ces règles s'appliquent partout sur le site. Voyez-les à l'œuvre sur la page <a href="/promesses">Promesses</a>, et suivez ce qui change dans les <a href="/sources">mises à jour du site</a>.</p>
+    <p class="regles-suite" data-i18n="regles.suite">Ces règles s'appliquent partout sur le site. Voyez-les à l'œuvre sur la page <a href="/promesses">Promesses</a>, et suivez ce qui change dans les <a href="/sources">mises à jour du site</a>. Tout le contenu du site est gratuit. Un <a href="/abonnement">abonnement facultatif</a> offre des outils en plus.</p>
   </section>
 
   <!-- LA PAGE 404 (Martin, 6 oct. 2026 : « faut une page drôle 404 », puis : avec le jaune et tout
@@ -1058,6 +1058,53 @@ function goToFederal(evt){
     </ul>
   </section>
 
+  <!-- L'ABONNEMENT FACULTATIF (retiré le 27 sept. 2026, remis le 21 oct. 2026). Le texte du site et
+       le suivi restent gratuits ; l'abonnement vend des outils en plus, aucun municipal. Chaque outil
+       porte son état : « Disponible » seulement s'il est réellement livré. La zone #abEtat (s'abonner,
+       gérer, annuler) est remplie par renderAbonnement (commun/dq.js) depuis /api/abonnement. -->
+  <section class="view" id="view-abonnement">
+    <div class="view-hero">
+      <h2 class="hero-h1 hero-h1-md">
+        <span class="hero-sujet" data-i18n="sujet.abonnement">L'abonnement facultatif</span>
+        <span data-i18n="abhero.l1">Le contenu reste gratuit,</span>
+        <span class="hero-outline" data-i18n="abhero.l2">les outils en plus.</span>
+      </h2>
+      <p class="view-hero-sub" data-i18n="abhero.sub">Tout le texte du site est gratuit et le restera. L'abonnement est facultatif : il donne des outils en plus. <b>Résiliable en tout temps, prix en dollars canadiens.</b></p>
+    </div>
+
+    <div class="md-bloc"><div class="md-carte" data-i18n="abgratuit.html">
+      <div class="md-carte-tete"><h2>Ce qui reste gratuit, pour tout le monde</h2><span class="md-etiquette">Gratuit</span></div>
+      <p>Les projets de loi et leurs résumés, les ministres et député·e·s, les votes, les promesses, le lexique, les décisions des villes, et les fonctions déjà présentes sur ces pages. Le suivi aussi : 3 suivis par compte, projets de loi, élus et projets de ville, abonné ou non.</p>
+    </div></div>
+
+    <div class="md-bloc"><div class="md-carte" data-i18n="aboutils.html">
+      <div class="md-carte-tete"><h2>Ce que l’abonnement donne</h2></div>
+      <p>Les outils prévus, chacun avec son état. Un outil marqué « Bientôt » n’existe pas encore : l’abonné·e le reçoit sans frais de plus dès sa sortie, au même prix tant que l’abonnement reste actif. Aucun outil ne porte sur les décisions municipales.</p>
+      <ul class="ab-outils">
+        <li><span class="ab-etat ab-bientot">Bientôt</span><div><b>Alertes sur mesure</b> — un courriel quand un projet de loi touche un mot-clé qui vous intéresse, quand un élu présente un projet ou vote, ou quand un projet change d’étape.</div></li>
+        <li><span class="ab-etat ab-bientot">Bientôt</span><div><b>Flux RSS personnalisés</b> — un flux par mot-clé, par député·e ou par ministère.</div></li>
+        <li><span class="ab-etat ab-bientot">Bientôt</span><div><b>Échéances des consultations</b> — la date limite pour déposer un mémoire en commission parlementaire, avec un rappel avant la fin.</div></li>
+        <li><span class="ab-etat ab-bientot">Bientôt</span><div><b>Veille par thème</b> — chaque semaine, tout ce qui a bougé dans votre domaine : projets de loi, votes, consultations.</div></li>
+        <li><span class="ab-etat ab-bientot">Bientôt</span><div><b>Qui a déposé un mémoire sur quoi</b> — les groupes qui se sont exprimés sur chaque projet de loi en commission.</div></li>
+        <li><span class="ab-etat ab-bientot">Bientôt</span><div><b>Export des données</b> — les votes, les présences et les projets de loi de l’Assemblée en fichier Excel ou CSV.</div></li>
+        <li><span class="ab-etat ab-bientot">Bientôt</span><div><b>Suivre une entreprise</b> — ce qu’elle demande ou défend devant l’Assemblée, au même endroit.</div></li>
+        <li><span class="ab-etat ab-bientot">Bientôt</span><div><b>Sans publicité</b> — le site sans aucune annonce, si des annonces y paraissent un jour.</div></li>
+      </ul>
+    </div></div>
+
+    <div class="md-bloc"><div class="md-carte" data-i18n="abforfaits.html">
+      <div class="md-carte-tete"><h2>Les forfaits</h2></div>
+      <ul class="ab-forfaits">
+        <li><b class="ab-montant">9,99 $</b><span>par mois</span></li>
+        <li><b class="ab-montant">26,99 $</b><span>tous les 3 mois</span></li>
+        <li><b class="ab-montant">99 $</b><span>par an — deux mois gratuits</span></li>
+      </ul>
+      <p class="md-note">Prix en dollars canadiens. Paiement par carte sur la page sécurisée de Stripe : DossierQuébec ne voit jamais votre carte. Résiliable en tout temps, depuis cette page ou Mon dossier, en deux clics : l’abonnement reste actif jusqu’à la fin de la période payée, puis s’arrête sans autres frais.</p>
+    </div></div>
+
+    <div id="abEtat" class="md-bloc" aria-live="polite"></div>
+  </section>
+
   <section class="view" id="view-mondossier">
     <div class="view-hero">
       <h2 class="hero-h1 hero-h1-md">
@@ -1088,6 +1135,7 @@ function goToFederal(evt){
           <li><b>Suivre une entreprise</b> — ce qu’elle demande ou défend devant l’Assemblée, au même endroit.</li>
           <li><b>Sans publicité</b> — le site, sans aucune annonce.</li>
         </ul>
+        <p><a class="md-lien" href="/abonnement">Voir l’abonnement facultatif et l’état de chaque outil →</a></p>
     </div></div>
 
     <!-- Vos projets de ville : l'ancienne page /mes-dossiers, fusionnée ici le 30 sept. 2026 (Martin).
@@ -1167,6 +1215,7 @@ function goToFederal(evt){
   <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">Site propulsé par</span> <a class="footer-etmoi" id="footerDafr" href="https://dafrsolution.com" target="_blank" rel="noopener">DAFRSolution.com</a></span>
   <span class="footer-right-group">
     <a class="footer-gh" href="/regles" data-i18n="footer.regles">Les règles</a>
+    <a class="footer-gh" href="/abonnement" data-i18n="footer.abonnement">Abonnement</a>
     <a class="footer-gh" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook">Facebook</a>
     <a class="footer-gh footer-coffee" href="https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00" target="_blank" rel="noopener" aria-label="Offre-moi un café" data-i18n="footer.coffee">Offre-moi un café</a>
     <a class="footer-gh" href="/feed.xml" data-i18n="footer.rss" title="Flux RSS de « Quoi de neuf »">Flux RSS</a>

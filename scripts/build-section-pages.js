@@ -235,6 +235,14 @@ const PAGES = [
     fil: 'Les règles', cle: 'fil.regles', frequence: 'monthly', priorite: '0.5',
   },
   {
+    // L'abonnement facultatif (remis le 21 oct. 2026) : le contenu reste gratuit, les outils en plus.
+    fichier: 'abonnement.html', vue: 'abonnement', onglet: null, url: '/abonnement',
+    donnees: [],
+    title: "L'abonnement facultatif — DossierQuébec",
+    desc: "Tout le contenu de DossierQuébec reste gratuit. L'abonnement facultatif donne des outils en plus, chacun avec son état. Prix en dollars canadiens, résiliable.",
+    fil: 'Abonnement', cle: 'fil.abonnement', frequence: 'monthly', priorite: '0.3',
+  },
+  {
     fichier: 'sources.html', vue: 'bd', onglet: null, url: '/sources',
     donnees: ['journal'],
     title: 'Mises à jour du site — DossierQuébec',
