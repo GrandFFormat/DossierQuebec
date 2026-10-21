@@ -12,18 +12,22 @@
 //   - un ministre ou un·e député·e suivi (follows) qui présente un projet de loi, ou qui vote à un
 //     vote nominal (/data/votes.json) ;
 //   - (21 oct. 2026) la date limite d'une consultation en commission sur un projet suivi ou touché par
-//     un mot-clé, dans les 7 jours (api/_consultations.js) — seulement si l'Assemblée l'a publiée.
+//     un mot-clé, dans les 7 jours (api/_consultations.js) — seulement si l'Assemblée l'a publiée ;
+//   - (21 oct. 2026) un nouveau mémoire déposé en commission par un organisme suivi
+//     (organismes_suivis, portee « assemblee » ; api/_organismes.js).
 // Un suivi tout neuf est mémorisé sans courriel : on ne signale que ce qui arrive ensuite. Au plus un
 // courriel par personne par exécution. Si l'envoi échoue, rien n'est mémorisé : ce sera redit le
 // lendemain. Ce qui a déjà été signalé vit dans alertes_etat (ville « assemblee »).
 //
 // Tables : scripts/supabase-schema-alertes.sql, supabase-schema-mots-cles.sql,
-// supabase-schema-mots-cles-portee.sql, puis scripts/supabase-alertes-retour.sql (plafond des mots-clés).
+// supabase-schema-mots-cles-portee.sql, puis scripts/supabase-alertes-retour.sql (plafond des mots-clés)
+// et scripts/supabase-organismes-retour.sql (organismes suivis).
 
 import crypto from 'node:crypto';
 import { supabase, signature, site } from './_alertes.js';
 import { estActive } from './_stripe.js';
 import { chargerConsultations, rappelsEcheance, RAPPEL_JOURS } from './_consultations.js';
+import { indexOrganismes, cleEtatOrganisme, idMemoire, ORGANISMES_MAX } from './_organismes.js';
 
 export const ASSEMBLEE = 'assemblee';
 export const LOI = /^pl:(\d{1,9})$/;
@@ -141,8 +145,10 @@ const recentesD = (lois) => [...lois].sort((a, b) => String(b.lastActivity ?? ''
 //   dejaVu         (cle) => l'état déjà mémorisé, ou undefined
 //   consultations  le contenu de api/consultations-data.json, ou null : rappels d'échéance sautés
 //   aujourdhui     AAAA-MM-JJ (les essais hors ligne fixent la date)
+//   organismes     [{ cle, titre, memoires }] — les organismes suivis et TOUS leurs mémoires
+//                  (api/_organismes.js), ou [] : rien à dire
 // Rend { sections: [{ titre, sousTitre, lignes, total, note? }], aMemoriser: [{ projet, etat }] }.
-export function alertesAssemblee({ lois, resumes = null, votes = null, suivies = [], mots = [], personnes = [], rolesParrains = null, vusEnDirect = null, dejaVu, essai = false, consultations = null, aujourdhui = new Date().toISOString().slice(0, 10) }) {
+export function alertesAssemblee({ lois, resumes = null, votes = null, suivies = [], mots = [], personnes = [], rolesParrains = null, vusEnDirect = null, dejaVu, essai = false, consultations = null, organismes = [], aujourdhui = new Date().toISOString().slice(0, 10) }) {
   const sections = [];
   const aMemoriser = [];
   const parId = new Map(lois.map((b) => [String(b.id), b]));
@@ -246,8 +252,29 @@ export function alertesAssemblee({ lois, resumes = null, votes = null, suivies =
     });
     if (aRappeler.length) sections.push({ titre: 'Échéances des consultations', sousTitre: `Date limite dans les ${RAPPEL_JOURS} jours`, lignes: aRappeler.map(ligneEcheance), total: aRappeler.length });
   }
+  // 6. Les nouveaux mémoires des organismes suivis (21 oct. 2026). Comme les mots-clés : la liste des
+  //    mémoires déjà vus ne fait que grandir ; un suivi tout neuf est mémorisé sans courriel.
+  for (const o of organismes) {
+    const ids = o.memoires.map(idMemoire);
+    let aDire;
+    if (essai) {
+      aDire = o.memoires.slice(0, 3);
+    } else {
+      const ancien = dejaVu(o.cle);
+      aMemoriser.push({ projet: o.cle, etat: { vus: [...new Set([...(ancien?.vus ?? []), ...ids])] } });
+      if (!ancien) continue;
+      const vus = new Set(ancien.vus ?? []);
+      aDire = o.memoires.filter((m) => !vus.has(idMemoire(m)));
+    }
+    if (aDire.length) sections.push({ titre: o.titre, sousTitre: 'Nouveaux mémoires en commission', lignes: aDire.map(ligneMemoire), total: aDire.length });
+  }
   return { sections, aMemoriser };
 }
+const ligneMemoire = (m) => `<li style="margin:0 0 12px">
+    ${m.url ? `<a href="${echapper(m.url)}" style="color:#0B5CAD;font-weight:bold">${echapper(m.titre || m.depose)}</a>` : `<b>${echapper(m.titre || m.depose)}</b>`}
+    <span style="font-size:13px;color:#5B6570"> · ${echapper([dateFr(m.date), m.commission].filter(Boolean).join(' · '))}</span><br>
+    <span style="font-size:15px">PL ${echapper(m.num)} — ${echapper(m.titrePl)}</span>
+  </li>`;
 export const cleEcheance = (mandat) => `ech_${String(mandat).replace(/\D/g, '')}`;
 const ligneEcheance = (c) => `<li style="margin:0 0 12px">
     <a href="${echapper(c.url)}" style="color:#0B5CAD;font-weight:bold">${echapper(c.titre)}</a><br>
@@ -273,7 +300,7 @@ export function courriel(sections, userId, essai = false) {
     ${essai ? '<p style="margin:8px 0 0;padding:8px 10px;background:#FFF6D6;border-radius:6px;font-size:13px">Courriel d\'essai : il reprend les éléments les plus récents de chaque suivi, pas seulement les nouveautés.</p>' : ''}`;
   const fin = `<p style="margin:22px 0 0"><a href="${monDossier}" style="display:inline-block;padding:9px 16px;background:#0B8A4B;color:#fff;border-radius:6px;text-decoration:none;font-weight:bold">Voir Mon dossier</a></p>
     <p style="margin:22px 0 0;font-size:12px;color:#5B6570">Les titres, les étapes et les votes viennent des données de l'Assemblée nationale (ses données ouvertes et son site), relues chaque matin. DossierQuébec est un site citoyen indépendant, sans lien avec l'Assemblée nationale.<br>
-    Vous recevez ce courriel parce que vous suivez ces projets de loi, mots-clés ou élus avec votre abonnement. <a href="${echapper(desabonnement)}" style="color:#5B6570">Ne plus recevoir ces alertes</a></p>
+    Vous recevez ce courriel parce que vous suivez ces projets de loi, mots-clés, élus ou organismes avec votre abonnement. <a href="${echapper(desabonnement)}" style="color:#5B6570">Ne plus recevoir ces alertes</a></p>
   </div>`;
   const cadre = (s) => `<div style="margin:26px 0 0;padding:14px 16px;border:1px solid #DDE2E7;border-left:4px solid #0B8A4B;border-radius:8px">
     <h2 style="margin:0;font-size:18px">${echapper(s.titre)}</h2>
@@ -358,7 +385,7 @@ export async function envoyerAlertes({ apercu = false, essai = null, pourSoi = n
   if (!abonnes.length) return { ...rapport, raison: 'aucun abonné actif' };
 
   const liste = abonnes.join(',');
-  const [suivisLois, personnesSuivies, preferences, etats, mots] = await Promise.all([
+  const [suivisLois, personnesSuivies, preferences, etats, mots, orgSuivis] = await Promise.all([
     toutLire(`/rest/v1/dossiers_suivis?select=user_id,dossier_id&user_id=in.(${liste})&ville=eq.${ASSEMBLEE}&dossier_id=like.pl:*`, 'user_id,dossier_id'),
     toutLire(`/rest/v1/follows?select=user_id,person_type,person_key&user_id=in.(${liste})&person_type=in.(minister,depute)`, 'user_id,person_type,person_key').catch((e) => {
       rapport.erreurs.push(`personnes suivies ignorées : ${e.message}`);
@@ -368,6 +395,12 @@ export async function envoyerAlertes({ apercu = false, essai = null, pourSoi = n
     toutLire(`/rest/v1/alertes_etat?select=user_id,projet,etat&user_id=in.(${liste})&ville=eq.${ASSEMBLEE}`, 'user_id,projet'),
     toutLire(`/rest/v1/alertes_mots_cles?select=id,user_id,mot&user_id=in.(${liste})&portee=eq.${ASSEMBLEE}`, 'created_at,id').catch((e) => {
       rapport.erreurs.push(`mots-clés ignorés : ${e.message}`);
+      return [];
+    }),
+    // Seulement la portée « assemblee » : les anciennes lignes (noms cherchés dans les décisions des
+    // villes, avant le 27 sept. 2026) ne déclenchent rien.
+    toutLire(`/rest/v1/organismes_suivis?select=user_id,nom&user_id=in.(${liste})&portee=eq.${ASSEMBLEE}`, 'user_id,nom').catch((e) => {
+      rapport.erreurs.push(`organismes ignorés : ${e.message}`);
       return [];
     }),
   ]);
@@ -430,6 +463,17 @@ export async function envoyerAlertes({ apercu = false, essai = null, pourSoi = n
     : null;
   const consultations = chargerConsultations();
   if (!consultations) rapport.erreurs.push('consultations illisibles : rappels d\'échéance sautés ce matin');
+  // Les organismes suivis, d'après les mémoires (api/_organismes.js). Un organisme qui n'est plus dans
+  // les données est sauté sans rien mémoriser. Données illisibles : sautés ce matin.
+  const index = indexOrganismes(consultations);
+  const organismesDe = new Map();
+  for (const s of orgSuivis) {
+    const o = index?.organismes.get(String(s.nom));
+    if (!o) continue;
+    if (!organismesDe.has(s.user_id)) organismesDe.set(s.user_id, []);
+    const l = organismesDe.get(s.user_id);
+    if (l.length < ORGANISMES_MAX) l.push({ cle: cleEtatOrganisme(o.cle), titre: o.nom, memoires: o.memoires });
+  }
   const listeDeputes = Array.isArray(deputes) ? deputes : [];
   const listeMinistres = Array.isArray(ministres) ? ministres : [];
   const compte = new Map();
@@ -447,7 +491,7 @@ export async function envoyerAlertes({ apercu = false, essai = null, pourSoi = n
     return m ? String(m.role ?? '').split('·').map((r) => normaliserTexte(r).trim()).filter(Boolean) : [];
   };
 
-  for (const uid of new Set([...loisDe.keys(), ...personnesDe.keys(), ...motsDe.keys()])) {
+  for (const uid of new Set([...loisDe.keys(), ...personnesDe.keys(), ...motsDe.keys(), ...organismesDe.keys()])) {
     if (coupees.has(uid) && !essai) continue;
     if (!apercu && rapport.envoyes >= plafond) { rapport.reportes = (rapport.reportes ?? 0) + 1; continue; } // ce sera pour demain
     try {
@@ -469,6 +513,7 @@ export async function envoyerAlertes({ apercu = false, essai = null, pourSoi = n
         dejaVu: (cle) => dejaVu.get(`${uid}|${cle}`),
         essai: Boolean(essai),
         consultations,
+        organismes: organismesDe.get(uid) ?? [],
       });
 
       if (a.sections.length) {

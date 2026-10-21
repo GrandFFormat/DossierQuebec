@@ -381,7 +381,7 @@ const translations = {
     'lp.nd':"<b>n/a</b>: no recorded vote for this person.",
     'lp.officiel':"This is not an official measure: the Assembly does not publish attendance, and a missed vote does not tell why.",
     'promo.sur':"Free account",
-    'mdavenir.html':"<div class=\"md-carte-tete\"><h2>Coming soon</h2><span class=\"md-etiquette\">Soon</span></div><p>All the text on the site will stay free: bills and their summaries, ministers and MNAs, votes, promises. Extra tools are coming soon, for subscribers:</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom RSS feeds</b> — the feed of all the news, and a feed per keyword, per MNA or per ministry, in your RSS reader.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — for groups and lobbies: the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — votes, attendance and bills as Excel or CSV files, ready to analyze.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site, without any ads.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Monthly recap, subscriber edition</b> — the Québec City and Montréal council recap, with the “Where the money goes” section.</div></li></ul><p><a class=\"md-lien\" href=\"/abonnement\">See the optional subscription and the status of each tool →</a></p>",
+    'mdavenir.html':"<div class=\"md-carte-tete\"><h2>Coming soon</h2><span class=\"md-etiquette\">Soon</span></div><p>All the text on the site will stay free: bills and their summaries, ministers and MNAs, votes, promises. Extra tools are coming soon, for subscribers:</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom RSS feeds</b> — the feed of all the news, and a feed per keyword, per MNA or per ministry, in your RSS reader.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — for groups and lobbies: the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — votes, attendance and bills as Excel or CSV files, ready to analyze.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Follow a company or an organization</b> — its briefs filed in committee at the National Assembly, in one place, and an alert for each new brief.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site, without any ads.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Monthly recap, subscriber edition</b> — the Québec City and Montréal council recap, with the “Where the money goes” section.</div></li></ul><p><a class=\"md-lien\" href=\"/abonnement\">See the optional subscription and the status of each tool →</a></p>",
     'promo.h':"Follow the bills that matter to you",
     'promo.p':"A free account, no password: follow up to 3 bills or city projects, and find them in My file, with their current stage.",
     'promo.diss':"The bills of the 43rd legislature died when the Assembly was dissolved on August 27: following will resume with the first bills of the new legislature, convened on November 17, 2026.",
@@ -406,7 +406,7 @@ const translations = {
     'abhero.l2':"the tools are extra.",
     'abhero.sub':"All the text on the site is free and will stay free. The subscription is optional: it gives extra tools. <b>Cancel anytime, prices in Canadian dollars.</b>",
     'abgratuit.html':"<div class=\"md-carte-tete\"><h2>What stays free, for everyone</h2><span class=\"md-etiquette\">Free</span></div><p>Bills and their summaries, ministers and MNAs, votes, promises, the glossary, city decisions, and the features already on those pages. Following too: 3 follows per account, bills, members and city projects, subscriber or not.</p>",
-    'aboutils.html':"<div class=\"md-carte-tete\"><h2>What the subscription gives</h2></div><p>The planned tools, each with its status. A tool marked “Soon” does not exist yet: subscribers get it at no extra cost as soon as it is released, at the same price for as long as the subscription stays active. Tools on city decisions await the cities’ approval: until then they stay free or upcoming.</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>RSS feeds</b> — the feed of all the news, plus custom feeds per keyword, per MNA or per ministry.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — the Assembly's votes, attendance and bills as Excel or CSV files.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site without any ads, should ads ever appear on it.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Monthly recap, subscriber edition</b> — the Québec City and Montréal council recap, with the “Where the money goes” section.</div></li></ul>",
+    'aboutils.html':"<div class=\"md-carte-tete\"><h2>What the subscription gives</h2></div><p>The planned tools, each with its status. A tool marked “Soon” does not exist yet: subscribers get it at no extra cost as soon as it is released, at the same price for as long as the subscription stays active. Tools on city decisions await the cities’ approval: until then they stay free or upcoming.</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>RSS feeds</b> — the feed of all the news, plus custom feeds per keyword, per MNA or per ministry.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — the Assembly's votes, attendance and bills as Excel or CSV files.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Follow a company or an organization</b> — its briefs filed in committee at the National Assembly, in one place, and an alert for each new brief.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site without any ads, should ads ever appear on it.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Monthly recap, subscriber edition</b> — the Québec City and Montréal council recap, with the “Where the money goes” section.</div></li></ul>",
     'abforfaits.html':"<div class=\"md-carte-tete\"><h2>The plans</h2></div><ul class=\"ab-forfaits\"><li><b class=\"ab-montant\">$9.99</b><span>a month</span></li><li><b class=\"ab-montant\">$26.99</b><span>every 3 months</span></li><li><b class=\"ab-montant\">$99</b><span>a year — two months free</span></li></ul><p class=\"md-note\">Prices in Canadian dollars. Card payment on Stripe's secure page: DossierQuébec never sees your card. Cancel anytime, from this page or My file, in two clicks: the subscription stays active until the end of the paid period, then stops with no further charge.</p>",
     'fil.regles':"The rules",
     'sujet.regles':"DossierQuébec's sourcing rules",
@@ -1439,6 +1439,8 @@ async function mdQuota(){
     supabaseClient.from('alertes_mots_cles').select('portee'),
     supabaseClient.from('organismes_suivis').select('id'),
   ]);
+  // (Les organismes non plus, depuis le 21 oct. 2026 : septième outil de l'abonnement, plafond à part,
+  // scripts/supabase-organismes-retour.sql. On les lit encore pour le détail.)
   if(d.error || m.error || o.error) return { total: 0, sur: null, parties: null };
   const dossiers = d.data ?? [], mots = m.data ?? [], org = o.data ?? [];
   const parties = {
@@ -1450,7 +1452,7 @@ async function mdQuota(){
   };
   // Les mots-clés ne comptent plus dans les suivis depuis le 21 oct. 2026 : c'est un outil de
   // l'abonnement, avec son propre plafond (scripts/supabase-alertes-retour.sql, suivis_total).
-  return { total: dossiers.length + org.length, sur: plafond, parties };
+  return { total: dossiers.length, sur: plafond, parties };
 }
 
 async function renderMonDossier(){
@@ -1466,7 +1468,109 @@ async function renderMonDossier(){
   mdAlertes(isEn);
   mdVeille(isEn);
   mdConsultations(isEn);
+  mdOrganismes(isEn);
 }
+
+// SUIVRE UNE ENTREPRISE OU UN ORGANISME (21 oct. 2026), septième outil de l'abonnement. On cherche parmi
+// les auteurs de mémoires déposés en commission (« Déposé par »), on en suit jusqu'à MD_ORG_MAX, et on
+// voit leurs mémoires. Le serveur (api/export.js?jeu=organismes, api/_organismes.js) vérifie
+// l'abonnement et fait la recherche ; la table organismes_suivis (portee « assemblee ») garde la clé
+// de chaque organisme. La base refuse un 11e organisme, ou tout organisme à qui n'est pas abonné.
+const MD_ORG_MAX = 10;
+async function organismesServeur(params){
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  const r = await fetch(`/api/export?jeu=organismes&${params}`, { headers: { Authorization: `Bearer ${session?.access_token || ''}` } });
+  if(!r.ok) throw new Error(r.status);
+  return r.json();
+}
+async function mdOrganismes(isEn){
+  const zone = document.getElementById('mdOrganismes');
+  if(!zone) return;
+  const tete = `<div class="md-carte-tete"><h2>${isEn ? 'Follow a company or an organization' : 'Suivre une entreprise ou un organisme'}</h2><span class="md-etiquette">${isEn ? 'Subscribers' : 'Abonné·e·s'}</span></div>
+    <p>${isEn ? 'What a company, union, association or professional order asks for or defends before the National Assembly: the briefs it filed in committee, in one place, and a line in the morning email for each new brief. Source: Assemblée nationale du Québec (titles in French).' : 'Ce qu’une entreprise, un syndicat, une association ou un ordre professionnel demande ou défend devant l’Assemblée nationale : ses mémoires déposés en commission, au même endroit, et une ligne dans le courriel du matin à chaque nouveau mémoire. Source : Assemblée nationale du Québec.'}</p>`;
+  if(!(await estAbonne())){
+    zone.innerHTML = `<div class="md-carte">${tete}<p class="md-note">${isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.'} <a class="md-lien" href="/abonnement">${isEn ? 'See the subscription' : 'Voir l’abonnement'}</a></p></div>`;
+    return;
+  }
+  let suivis = [], d = null;
+  try{
+    const { data, error } = await supabaseClient.from('organismes_suivis').select('id, nom').eq('portee', 'assemblee').order('created_at');
+    if(error) throw error;
+    suivis = data || [];
+    d = await organismesServeur(suivis.map((x) => 'c=' + encodeURIComponent(x.nom)).join('&'));
+  }catch(e){}
+  if(!d){
+    zone.innerHTML = `<div class="md-carte">${tete}<p class="md-note">${isEn ? 'Unavailable right now. Try again later.' : 'Indisponible pour le moment. Réessayez plus tard.'}</p></div>`;
+    return;
+  }
+  const plein = suivis.length >= MD_ORG_MAX;
+  const liste = suivis.length ? suivis.map((s) => {
+    const o = d.organismes?.[s.nom];
+    const retirer = `<button class="md-bouton-doux" onclick="mdRetirerOrganisme('${mdH(s.id)}')">${isEn ? 'Stop following' : 'Ne plus suivre'}</button>`;
+    if(!o) return `<div class="md-memoires"><p><b>${mdH(s.nom)}</b> — ${isEn ? 'no longer in the data.' : 'n’est plus dans les données.'} ${retirer}</p></div>`;
+    const memoires = `<ul class="bill-memoires-liste">${o.liste.map((m) => `<li>${m.url ? `<a href="${mdH(m.url)}" target="_blank" rel="noopener">${mdH(m.titre || m.depose)}</a>` : mdH(m.titre || m.depose)}
+        <span>${mdH(mdDateCourte(m.date, isEn))}</span>
+        <div class="md-note">${isEn ? 'Bill' : 'Projet de loi'} ${mdH(m.num)} — ${mdH(m.titrePl)}${m.commission ? ` · ${mdH(m.commission)}` : ''}</div></li>`).join('')}</ul>`;
+    return `<details class="md-memoires"><summary><b>${mdH(o.nom)}</b> (${o.memoires})</summary>
+      ${o.variantes.length ? `<p class="md-note">${isEn ? 'Also written: ' : 'Aussi écrit : '}${o.variantes.map(mdH).join(' ; ')}</p>` : ''}
+      ${memoires}<p>${retirer}</p></details>`;
+  }).join('') : `<p class="md-note">${isEn ? 'No organization followed yet.' : 'Aucun organisme suivi pour l’instant.'}</p>`;
+  const maj = d.misAJour ? String(d.misAJour).slice(0, 10) : '';
+  zone.innerHTML = `<div class="md-carte">${tete}
+    <h3 class="md-sous-titre">${isEn ? `Followed (${suivis.length} of ${MD_ORG_MAX})` : `Suivis (${suivis.length} sur ${MD_ORG_MAX})`}</h3>
+    ${liste}
+    <h3 class="md-sous-titre">${isEn ? 'Search' : 'Chercher'}</h3>
+    ${plein ? `<p class="md-note">${isEn ? `All ${MD_ORG_MAX} are used. Stop following one to add another.` : `Vos ${MD_ORG_MAX} organismes sont utilisés. Cessez d’en suivre un pour en ajouter un autre.`}</p>` : ''}
+    <div class="md-ligne"><input type="search" id="mdOrgRecherche" maxlength="120" placeholder="${isEn ? 'A name, e.g. Desjardins, Barreau' : 'Un nom, par exemple Desjardins, Barreau'}" aria-label="${isEn ? 'Search organizations' : 'Chercher un organisme'}">
+      <button class="account-btn" onclick="mdChercherOrganisme()">${isEn ? 'Search' : 'Chercher'}</button></div>
+    <p class="md-note" id="mdOrgNote" aria-live="polite"></p>
+    <ul class="md-avenir-liste" id="mdOrgResultats"></ul>
+    <p class="md-note">${isEn ? 'Names are grouped when they differ only by accents, capitals, apostrophes, hyphens, a final acronym in brackets, “inc.” or a leading article. Any other difference keeps two separate entries. A joint brief also counts for each co-signer that has filed alone. Individuals are not listed.' : 'Les noms sont regroupés quand ils ne diffèrent que par les accents, les majuscules, les apostrophes, les tirets, un sigle final entre parenthèses, « inc. » ou un article au début. Toute autre différence laisse deux entrées séparées. Un mémoire commun compte aussi pour chaque cosignataire qui a déjà déposé seul. Les particuliers ne sont pas listés.'}${maj ? (isEn ? ` Data read on ${mdH(mdDateCourte(maj, true))}.` : ` Données relues le ${mdH(mdDateCourte(maj, false))}.`) : ''}</p>
+  </div>`;
+  zone._suivis = new Set(suivis.map((s) => s.nom));
+  zone._plein = plein;
+  document.getElementById('mdOrgRecherche')?.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); mdChercherOrganisme(); } });
+}
+let _mdOrgResultats = [];
+async function mdChercherOrganisme(){
+  const isEn = currentLang === 'en';
+  const zone = document.getElementById('mdOrganismes');
+  const q = (document.getElementById('mdOrgRecherche')?.value || '').trim();
+  const note = document.getElementById('mdOrgNote'), ul = document.getElementById('mdOrgResultats');
+  if(q.length < 2){ note.textContent = isEn ? 'At least 2 characters.' : 'Au moins 2 caractères.'; return; }
+  note.textContent = isEn ? 'Searching…' : 'Recherche…';
+  try{
+    const d = await organismesServeur('q=' + encodeURIComponent(q));
+    _mdOrgResultats = d.resultats || [];
+  }catch(e){ note.textContent = isEn ? 'Search unavailable. Try again later.' : 'Recherche indisponible. Réessayez plus tard.'; return; }
+  note.textContent = _mdOrgResultats.length ? '' : (isEn ? 'No organization by that name has filed a brief.' : 'Aucun organisme de ce nom n’a déposé de mémoire.');
+  ul.innerHTML = _mdOrgResultats.map((o, i) => `<li><b>${mdH(o.nom)}</b> <span class="md-note">${o.memoires} ${isEn ? (o.memoires > 1 ? 'briefs' : 'brief') : (o.memoires > 1 ? 'mémoires' : 'mémoire')}</span>
+    ${zone._suivis?.has(o.cle) ? `<span class="md-note">· ${isEn ? 'followed' : 'suivi'}</span>` : zone._plein ? '' : `<button class="md-bouton-doux" onclick="mdSuivreOrganisme(${i})">${isEn ? 'Follow' : 'Suivre'}</button>`}</li>`).join('');
+}
+async function mdSuivreOrganisme(i){
+  const isEn = currentLang === 'en';
+  const o = _mdOrgResultats[i];
+  const note = document.getElementById('mdOrgNote');
+  if(!o || !currentUser) return;
+  const { error } = await supabaseClient.from('organismes_suivis').insert({ user_id: currentUser.id, nom: o.cle, portee: 'assemblee' });
+  if(error){
+    note.textContent = /duplicate|23505/.test(error.message + error.code) ? (isEn ? 'Already followed.' : 'Déjà suivi.')
+      : /limite de \d+ organismes/.test(error.message) ? (isEn ? `All ${MD_ORG_MAX} are used.` : `Vos ${MD_ORG_MAX} organismes sont utilisés.`)
+      : /abonn/.test(error.message) ? (isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.')
+      : (isEn ? 'Could not follow it. Try again.' : 'Impossible de le suivre. Réessayez.');
+    return;
+  }
+  mdOrganismes(isEn);
+}
+async function mdRetirerOrganisme(id){
+  const isEn = currentLang === 'en';
+  const { error } = await supabaseClient.from('organismes_suivis').delete().eq('id', id);
+  if(error){ const n = document.getElementById('mdOrgNote'); if(n) n.textContent = isEn ? 'Could not remove it. Try again.' : 'Impossible de le retirer. Réessayez.'; return; }
+  mdOrganismes(isEn);
+}
+window.mdChercherOrganisme = mdChercherOrganisme;
+window.mdSuivreOrganisme = mdSuivreOrganisme;
+window.mdRetirerOrganisme = mdRetirerOrganisme;
 
 // CONSULTATIONS ET MÉMOIRES (21 oct. 2026), quatrième et cinquième outils de l'abonnement. Les
 // consultations à venir en commission (dates des séances, et la date limite quand l'Assemblée la
