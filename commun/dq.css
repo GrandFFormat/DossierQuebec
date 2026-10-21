@@ -2218,3 +2218,9 @@
 
 /* Mon dossier : l'export des données (mdExport). */
 .md-export-boutons{display:grid; grid-template-columns:auto 1fr; gap:8px 12px; align-items:center;}
+
+/* Mon dossier : les alertes sur mesure (mdAlertes). */
+.md-sous-titre{font-size:14px; font-weight:700; margin:16px 0 6px;}
+.md-mots{list-style:none; padding:0; margin:0; display:flex; flex-wrap:wrap; gap:6px;}
+.md-mot{display:inline-flex; align-items:center; gap:6px; border:1px solid currentColor; padding:2px 4px 2px 10px; font-size:14px;}
+.md-mot .md-bouton-doux{padding:0 8px; min-width:0;}

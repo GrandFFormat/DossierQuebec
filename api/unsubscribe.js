@@ -5,8 +5,15 @@
 // n'a pas besoin de stocker de jeton en base. Aucun login requis (exigence d'un
 // vrai désabonnement). N'efface PAS les suivis ni les demandes d'explications —
 // ajoute juste la personne à email_optout, que le digest respecte.
+//
+// Sert aussi, depuis le 21 oct. 2026, le lien « Ne plus recevoir ces alertes » des alertes sur mesure
+// (api/_alertes-assemblee.js) : ?u=<user_id>&s=<signature « alertes: »>, en GET depuis le courriel ou
+// en POST (désabonnement en un clic des messageries, List-Unsubscribe-Post). Une fonction de moins
+// que l'ancien api/alertes-desabonnement.js (Vercel Hobby : 12 au plus). Coupe seulement les
+// alertes (alertes_preferences.actif = false) : les suivis et l'abonnement restent.
 
 import crypto from 'node:crypto';
+import { supabase, signatureValide, site } from './_alertes.js';
 
 function verifyToken(token) {
   const [userId, sig] = (token || '').split('.');
@@ -46,8 +53,34 @@ async function optOut(userId) {
   if (!res.ok) throw new Error(`optout -> ${res.status} ${await res.text()}`);
 }
 
+async function couperAlertes(req, res) {
+  const u = String(req.query?.u ?? '');
+  const s = String(req.query?.s ?? '');
+  if (!process.env.CRON_SECRET || !signatureValide(u, s)) {
+    return res.status(400).send(page("<h1>Lien invalide</h1><p>Ce lien de désabonnement n'est pas valide.</p>"));
+  }
+  try {
+    await supabase('/rest/v1/alertes_preferences?on_conflict=user_id', {
+      methode: 'POST',
+      corps: [{ user_id: u, actif: false, updated_at: new Date().toISOString() }],
+      entetes: { Prefer: 'resolution=merge-duplicates,return=minimal' },
+    });
+    return res.status(200).send(page(
+      '<h1>Alertes arrêtées</h1>' +
+      '<p>Vous ne recevrez plus les alertes sur mesure par courriel.</p>' +
+      '<p style="font-size:13px;color:#5C6270;">Vos suivis, vos mots-clés et votre abonnement restent intacts. Pour reprendre les alertes, rétablissez-les dans Mon dossier.</p>' +
+      `<p><a href="${site()}/mon-dossier">Aller à Mon dossier</a></p>`
+    ));
+  } catch (err) {
+    console.error('alertes (désabonnement) :', err);
+    return res.status(500).send(page('<h1>Erreur</h1><p>Une erreur est survenue. Réessayez dans un moment.</p>'));
+  }
+}
+
 export default async function handler(req, res) {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-store');
+  if (req.query?.u) return couperAlertes(req, res);
   const userId = verifyToken(req.query.token);
   if (!userId) {
     return res.status(400).send(page('<h1>Lien invalide</h1><p>Ce lien de désabonnement n\'est pas valide ou a expiré.</p>'));

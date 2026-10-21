@@ -406,7 +406,7 @@ const translations = {
     'abhero.l2':"the tools are extra.",
     'abhero.sub':"All the text on the site is free and will stay free. The subscription is optional: it gives extra tools. <b>Cancel anytime, prices in Canadian dollars.</b>",
     'abgratuit.html':"<div class=\"md-carte-tete\"><h2>What stays free, for everyone</h2><span class=\"md-etiquette\">Free</span></div><p>Bills and their summaries, ministers and MNAs, votes, promises, the glossary, city decisions, and the features already on those pages. Following too: 3 follows per account, bills, members and city projects, subscriber or not.</p>",
-    'aboutils.html':"<div class=\"md-carte-tete\"><h2>What the subscription gives</h2></div><p>The planned tools, each with its status. A tool marked “Soon” does not exist yet: subscribers get it at no extra cost as soon as it is released, at the same price for as long as the subscription stays active. No tool covers city decisions.</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Custom RSS feeds</b> — a feed per keyword, per MNA or per ministry.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — the Assembly's votes, attendance and bills as Excel or CSV files.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site without any ads, should ads ever appear on it.</div></li></ul>",
+    'aboutils.html':"<div class=\"md-carte-tete\"><h2>What the subscription gives</h2></div><p>The planned tools, each with its status. A tool marked “Soon” does not exist yet: subscribers get it at no extra cost as soon as it is released, at the same price for as long as the subscription stays active. No tool covers city decisions.</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Custom RSS feeds</b> — a feed per keyword, per MNA or per ministry.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — the Assembly's votes, attendance and bills as Excel or CSV files.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site without any ads, should ads ever appear on it.</div></li></ul>",
     'abforfaits.html':"<div class=\"md-carte-tete\"><h2>The plans</h2></div><ul class=\"ab-forfaits\"><li><b class=\"ab-montant\">$9.99</b><span>a month</span></li><li><b class=\"ab-montant\">$26.99</b><span>every 3 months</span></li><li><b class=\"ab-montant\">$99</b><span>a year — two months free</span></li></ul><p class=\"md-note\">Prices in Canadian dollars. Card payment on Stripe's secure page: DossierQuébec never sees your card. Cancel anytime, from this page or My file, in two clicks: the subscription stays active until the end of the paid period, then stops with no further charge.</p>",
     'fil.regles':"The rules",
     'sujet.regles':"DossierQuébec's sourcing rules",
@@ -1448,7 +1448,9 @@ async function mdQuota(){
     motsVilles: mots.filter((x) => (x.portee ?? 'villes') !== 'assemblee').length,
     organismes: org.length,
   };
-  return { total: dossiers.length + mots.length + org.length, sur: plafond, parties };
+  // Les mots-clés ne comptent plus dans les suivis depuis le 21 oct. 2026 : c'est un outil de
+  // l'abonnement, avec son propre plafond (scripts/supabase-alertes-retour.sql, suivis_total).
+  return { total: dossiers.length + org.length, sur: plafond, parties };
 }
 
 async function renderMonDossier(){
@@ -1460,6 +1462,7 @@ async function renderMonDossier(){
   mdElus(isEn);
   mdPreoccupations(isEn);
   mdExport(isEn);
+  mdAlertes(isEn);
 }
 
 // « CE QUI VOUS PRÉOCCUPE » (Martin, 18 oct. 2026). Une boîte de texte pour les gens connectés,
@@ -1643,6 +1646,109 @@ async function mdTelecharger(jeu, bouton){
   bouton.disabled = false; bouton.textContent = avant;
 }
 window.mdTelecharger = mdTelecharger;
+
+// LES ALERTES SUR MESURE (21 oct. 2026), deuxième outil de l'abonnement. Un courriel le matin quand,
+// à l'Assemblée nationale, un projet de loi contient un mot-clé, un élu suivi présente un projet ou
+// vote, ou un projet de loi suivi change d'étape. Le serveur (api/_alertes-assemblee.js) ne lit que
+// les abonné·e·s actifs ; la base (scripts/supabase-alertes-retour.sql) refuse un mot-clé à qui n'est
+// pas abonné et en plafonne le nombre. Ici : l'écran, avec le même contrôle que l'export.
+const MD_MOTS_MAX = 10;
+async function mdAlertes(isEn){
+  const zone = document.getElementById('mdAlertes');
+  if(!zone) return;
+  let abonne = false;
+  if(currentUser){
+    try{
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      const r = await fetch('/api/abonnement', { headers: session ? { Authorization: `Bearer ${session.access_token}` } : {} });
+      abonne = r.ok && (await r.json()).abonne === true;
+    }catch(e){}
+  }
+  const tete = `<div class="md-carte-tete"><h2>${isEn ? 'Custom alerts' : 'Alertes sur mesure'}</h2><span class="md-etiquette">${isEn ? 'Subscribers' : 'Abonné·e·s'}</span></div>
+    <p>${isEn ? 'An email in the morning when, at the National Assembly, a bill contains one of your keywords, a member you follow introduces a bill or votes, or a bill you follow moves to a new stage. National Assembly only.' : 'Un courriel le matin quand, à l’Assemblée nationale, un projet de loi contient un de vos mots-clés, un élu que vous suivez présente un projet de loi ou vote, ou un projet de loi que vous suivez change d’étape. Seulement l’Assemblée nationale.'}</p>`;
+  if(!abonne){
+    zone.innerHTML = `<div class="md-carte">${tete}<p class="md-note">${isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.'} <a class="md-lien" href="/abonnement">${isEn ? 'See the subscription' : 'Voir l’abonnement'}</a></p></div>`;
+    return;
+  }
+  const [m, p] = await Promise.all([
+    supabaseClient.from('alertes_mots_cles').select('id, mot').eq('portee', 'assemblee').order('created_at'),
+    supabaseClient.from('alertes_preferences').select('actif').maybeSingle(),
+  ]);
+  const mots = m.data ?? [];
+  const actif = p.data?.actif !== false;
+  const nLois = Object.keys(followedBills).filter((id) => followedBills[id]).length;
+  const nElus = Object.keys(followed).filter((n) => followed[n]).length + Object.keys(followedDeputes).filter((k) => followedDeputes[k]).length;
+  const plein = mots.length >= MD_MOTS_MAX;
+  zone.innerHTML = `<div class="md-carte">${tete}
+    <p class="md-note"><b>${actif ? (isEn ? 'Alerts on.' : 'Alertes activées.') : (isEn ? 'Alerts paused.' : 'Alertes coupées.')}</b>
+      <button class="md-bouton-doux" onclick="mdAlertesActif(${actif ? 'false' : 'true'})">${actif ? (isEn ? 'Pause alerts' : 'Couper les alertes') : (isEn ? 'Turn alerts back on' : 'Rétablir les alertes')}</button></p>
+    <h3 class="md-sous-titre">${isEn ? 'What is watched' : 'Ce qui est surveillé'}</h3>
+    <ul class="md-avenir-liste">
+      <li>${isEn ? `<b>${mots.length}</b> keyword${mots.length > 1 ? 's' : ''} of ${MD_MOTS_MAX}, searched in the title and summary of bills` : `<b>${mots.length}</b> mot${mots.length > 1 ? 's' : ''}-clé${mots.length > 1 ? 's' : ''} sur ${MD_MOTS_MAX}, cherché${mots.length > 1 ? 's' : ''} dans le titre et le résumé des projets de loi`}</li>
+      <li>${isEn ? `<b>${nElus}</b> member${nElus > 1 ? 's' : ''} followed: bills introduced and recorded votes` : `<b>${nElus}</b> élu${nElus > 1 ? 's' : ''} suivi${nElus > 1 ? 's' : ''} : projets de loi présentés et votes nominaux`}</li>
+      <li>${isEn ? `<b>${nLois}</b> bill${nLois > 1 ? 's' : ''} followed: each new stage` : `<b>${nLois}</b> projet${nLois > 1 ? 's' : ''} de loi suivi${nLois > 1 ? 's' : ''} : chaque nouvelle étape`}</li>
+    </ul>
+    <h3 class="md-sous-titre">${isEn ? 'Your keywords' : 'Vos mots-clés'}</h3>
+    ${mots.length ? `<ul class="md-mots">${mots.map((x) => `<li class="md-mot"><span>${mdH(x.mot)}</span><button class="md-bouton-doux" aria-label="${isEn ? 'Remove' : 'Retirer'} ${mdH(x.mot)}" onclick="mdRetirerMot('${mdH(x.id)}')">×</button></li>`).join('')}</ul>`
+      : `<p class="md-note">${isEn ? 'No keyword yet. Examples: housing, forest, French language.' : 'Aucun mot-clé pour l’instant. Par exemple : logement, forêt, langue française.'}</p>`}
+    ${plein ? `<p class="md-note">${isEn ? `All ${MD_MOTS_MAX} keywords are used. Remove one to add another.` : `Vos ${MD_MOTS_MAX} mots-clés sont utilisés. Retirez-en un pour en ajouter un autre.`}</p>`
+      : `<div class="md-ligne"><input type="text" id="mdMot" maxlength="60" placeholder="${isEn ? 'A keyword' : 'Un mot-clé'}" aria-label="${isEn ? 'A keyword' : 'Un mot-clé'}">
+        <button class="account-btn" onclick="mdAjouterMot()">${isEn ? 'Add' : 'Ajouter'}</button></div>`}
+    <p class="md-note" id="mdMotNote" aria-live="polite"></p>
+    <p class="md-note"><button class="md-bouton-doux" onclick="mdEssaiAlertes(this)">${isEn ? 'Send me a test email' : 'M’envoyer un courriel d’essai'}</button>
+      ${isEn ? 'The most recent items for each thing you follow, to see what an alert looks like (3 per day). Alerts are in French.' : 'Les éléments les plus récents de chaque suivi, pour voir à quoi ressemble une alerte (3 par jour).'}</p>
+  </div>`;
+  document.getElementById('mdMot')?.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); mdAjouterMot(); } });
+}
+async function mdAjouterMot(){
+  const isEn = currentLang === 'en';
+  const champ = document.getElementById('mdMot');
+  const note = document.getElementById('mdMotNote');
+  const mot = (champ?.value || '').trim().replace(/\s+/g, ' ');
+  if(mot.length < 2 || mot.length > 60){ note.textContent = isEn ? 'Between 2 and 60 characters.' : 'Entre 2 et 60 caractères.'; return; }
+  const { error } = await supabaseClient.from('alertes_mots_cles').insert({ user_id: currentUser.id, mot, portee: 'assemblee' });
+  if(error){
+    note.textContent = /duplicate|23505/.test(error.message + error.code) ? (isEn ? 'This keyword is already in your list.' : 'Ce mot-clé est déjà dans votre liste.')
+      : /limite de \d+ mots/.test(error.message) ? (isEn ? `All ${MD_MOTS_MAX} keywords are used.` : `Vos ${MD_MOTS_MAX} mots-clés sont utilisés.`)
+      : /abonn/.test(error.message) ? (isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.')
+      : (isEn ? 'The keyword could not be added. Try again.' : 'Le mot-clé n’a pas pu être ajouté. Réessayez.');
+    return;
+  }
+  mdAlertes(isEn);
+}
+async function mdRetirerMot(id){
+  const isEn = currentLang === 'en';
+  const { error } = await supabaseClient.from('alertes_mots_cles').delete().eq('id', id);
+  if(error){ const n = document.getElementById('mdMotNote'); if(n) n.textContent = isEn ? 'Could not remove it. Try again.' : 'Impossible de le retirer. Réessayez.'; return; }
+  mdAlertes(isEn);
+}
+async function mdAlertesActif(actif){
+  const isEn = currentLang === 'en';
+  const { error } = await supabaseClient.from('alertes_preferences').upsert({ user_id: currentUser.id, actif, updated_at: new Date().toISOString() }, { onConflict: 'user_id' });
+  if(error){ const n = document.getElementById('mdMotNote'); if(n) n.textContent = isEn ? 'The change was not saved. Try again.' : 'Le changement n’a pas été enregistré. Réessayez.'; return; }
+  mdAlertes(isEn);
+}
+async function mdEssaiAlertes(bouton){
+  const isEn = currentLang === 'en';
+  const note = document.getElementById('mdMotNote');
+  bouton.disabled = true;
+  try{
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    const r = await fetch('/api/infolettre-envoi?essai=moi', { method: 'POST', headers: { Authorization: `Bearer ${session?.access_token || ''}` } });
+    const d = await r.json().catch(() => ({}));
+    note.textContent = r.status === 429 ? (isEn ? 'Limit of 3 tests per 24 hours reached.' : 'Limite de 3 essais par 24 heures atteinte.')
+      : !r.ok ? (isEn ? 'The test could not be sent. Try again later.' : 'L’essai n’a pas pu partir. Réessayez plus tard.')
+      : d.envoye ? (isEn ? 'Test sent: check your inbox.' : 'Essai envoyé : regardez votre boîte de courriel.')
+      : (isEn ? 'Nothing to show yet: add a keyword, or follow a bill or a member.' : 'Rien à montrer pour l’instant : ajoutez un mot-clé, ou suivez un projet de loi ou un élu.');
+  }catch(e){
+    note.textContent = isEn ? 'The test could not be sent. Try again later.' : 'L’essai n’a pas pu partir. Réessayez plus tard.';
+  }
+  bouton.disabled = false;
+}
+window.mdAjouterMot = mdAjouterMot;
+window.mdRetirerMot = mdRetirerMot;
+window.mdAlertesActif = mdAlertesActif;
+window.mdEssaiAlertes = mdEssaiAlertes;
 
 function mdCompte(isEn, quota){
   const zone = document.getElementById('mdCompte');

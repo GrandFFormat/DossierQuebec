@@ -206,19 +206,20 @@ const porteeDe = (m) => m.portee ?? 'villes';
 let quota = { total: 0, sur: null };
 const quotaPlein = () => quota.sur != null && quota.total >= quota.sur;
 async function majQuota() {
-  const [dossiers, mots, organismes] = await Promise.all([
+  // Les mots-clés ne comptent plus depuis le 21 oct. 2026 (scripts/supabase-alertes-retour.sql,
+  // suivis_total) : ceux de l'Assemblée sont un outil de l'abonnement, avec leur propre plafond.
+  const [dossiers, organismes] = await Promise.all([
     client.from('dossiers_suivis').select('id'),
-    client.from('alertes_mots_cles').select('id'),
     client.from('organismes_suivis').select('id'),
   ]);
-  quota = dossiers.error || mots.error || organismes.error
+  quota = dossiers.error || organismes.error
     ? { total: 0, sur: null }
-    : { total: (dossiers.data?.length ?? 0) + (mots.data?.length ?? 0) + (organismes.data?.length ?? 0), sur: 3 };
+    : { total: (dossiers.data?.length ?? 0) + (organismes.data?.length ?? 0), sur: 3 };
 }
 // La même phrase partout : ce qui est plein, et quoi retirer pour faire de la place.
 const phraseQuota = (n) => tr(
-  `Vos ${n} suivis sont utilisés. Retirez un projet, un mot-clé, un organisme ou un projet de loi pour en ajouter un autre.`,
-  `All ${n} of your follows are used. Remove a project, a keyword, an organization or a bill to add another.`);
+  `Vos ${n} suivis sont utilisés. Retirez un projet, un organisme ou un projet de loi pour en ajouter un autre.`,
+  `All ${n} of your follows are used. Remove a project, an organization or a bill to add another.`);
 const phrasePlein = () => phraseQuota(quota.sur);
 // Le déclencheur dit « limite de N suivis atteinte ». On reprend son chiffre ; sinon, la phrase
 // générale.
@@ -247,24 +248,29 @@ function carteDormante(zone, { titre, phrase, elements, table }) {
     const etat = zone.querySelector('.ab-dormant-etat');
     const { error: erreur } = await client.from(table).delete().eq('id', bouton.dataset.dormant);
     if (erreur) { bouton.disabled = false; etat.textContent = tr('Impossible de le retirer. Réessayez.', "Couldn't remove it. Try again."); return; }
-    quota.total -= 1;
     bouton.closest('li').remove();
-    etat.textContent = tr('Retiré : une place de plus pour suivre un projet.', 'Removed: one more slot to follow a project.');
+    // Les mots-clés ne comptent plus dans les suivis (21 oct. 2026) ; les organismes, oui.
+    if (table === 'alertes_mots_cles') etat.textContent = tr('Retiré.', 'Removed.');
+    else {
+      quota.total -= 1;
+      etat.textContent = tr('Retiré : une place de plus pour suivre un projet.', 'Removed: one more slot to follow a project.');
+    }
     if (!zone.querySelector('[data-dormant]')) zone.innerHTML = '';
   });
 }
 
-// Les mots-clés d'avant le 27 sept. 2026 (abonnement payant, retiré) : ils ne déclenchent plus
-// rien, mais ils occupent une place dans le quota commun. On les montre pour qu'on puisse les retirer.
+// Les mots-clés de ville d'avant le 27 sept. 2026 : ils ne déclenchent plus rien et, depuis le
+// 21 oct. 2026, ne comptent plus dans les suivis. On les montre pour qu'on puisse les retirer. Les
+// mots de l'Assemblée (alertes sur mesure des abonnés) se gèrent plus haut, dans Mon dossier.
 async function motsCles(s) {
   const zone = $('#mots');
   if (!s) { zone.innerHTML = ''; return; }
   const { data: tous, error } = await client.from('alertes_mots_cles').select('*').order('created_at');
   if (error) { zone.innerHTML = ''; return; } // table absente
   carteDormante(zone, {
-    titre: tr('Anciens mots-clés', 'Former keywords'),
-    phrase: tr("Les alertes par mot-clé ont été retirées : ces mots-clés ne servent plus, mais ils occupent une place dans vos suivis. Retirez-les pour suivre un projet à la place.", 'Keyword alerts have been removed: these keywords no longer do anything, but they still take up your follows. Remove them to follow a project instead.'),
-    elements: (tous ?? []).map((m) => ({ id: m.id, nom: m.mot })),
+    titre: tr('Anciens mots-clés de ville', 'Former city keywords'),
+    phrase: tr('Les alertes par mot-clé sur les décisions des villes ont été retirées : ces mots-clés ne servent plus. Vous pouvez les retirer.', 'Keyword alerts on city decisions have been removed: these keywords no longer do anything. You can remove them.'),
+    elements: (tous ?? []).filter((m) => porteeDe(m) !== 'assemblee').map((m) => ({ id: m.id, nom: m.mot })),
     table: 'alertes_mots_cles',
   });
 }
