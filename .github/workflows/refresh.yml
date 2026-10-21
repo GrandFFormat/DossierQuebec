@@ -90,6 +90,19 @@ jobs:
             done
           fi
 
+      # L'infolettre de l'Assemblée (scripts/infolettre-assemblee.js) : chaque matin, le numéro du mois
+      # précédent est fabriqué et publié s'il n'existe pas déjà (--si-nouveau). En pratique, le premier
+      # passage du mois le publie ; le cron du site (api/infolettre-envoi.js, 11 h UTC) l'envoie. Un mois
+      # sans rien : pas de numéro. Le brouillon va dans un dossier temporaire, jamais dans le dépôt.
+      # Après le commit, pour ne rien ajouter à « git add -A ». Une panne ici ne casse pas le reste.
+      - name: Publier l'infolettre de l'Assemblée du mois précédent
+        if: ${{ !cancelled() && steps.refresh.outcome == 'success' }}
+        continue-on-error: true
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/infolettre-assemblee.js --publier --si-nouveau
+
       # Après le commit : si un ou des scrapers ont échoué, on marque quand même le run en
       # échec pour être alerté qu'une source est tombée. Le !cancelled() fait que l'étape parle
       # aussi quand le commit a été sauté ou la poussée refusée — dans ce cas, rien n'a été

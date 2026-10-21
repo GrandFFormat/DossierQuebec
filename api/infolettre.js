@@ -22,7 +22,7 @@ async function utilisateurDe(jeton) {
   const u = res?.ok ? await res.json() : null;
   return u?.id && /^[0-9a-f-]{36}$/.test(u.id) ? { id: u.id, email: u.email ?? '' } : null;
 }
-import { COURRIEL, VILLES_INFOLETTRE, LANGUES_PAR_VILLE, choixValide, deMois, dernierNumero, echapper, envoyerBienvenue, envoyerCourriels, idsSignes, lienSigne, nomComplet, offreDe, prochainEnvoi, NOTES_INFOLETTRE } from './_infolettre.js';
+import { COURRIEL, VILLES_INFOLETTRE, LANGUES_PAR_VILLE, choixValide, deMois, dernierNumero, echapper, envoyerBienvenue, envoyerCourriels, idsSignes, lienSigne, nomComplet, offreDe, prochainEnvoiDe, pageDe, ASSEMBLEE, NOTES_INFOLETTRE } from './_infolettre.js';
 
 const jetonDe = (req) => String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '') || null;
 const corpsDe = (req) => {
@@ -106,8 +106,9 @@ export default async function handler(req, res) {
       const lignes = await supabase(`/rest/v1/infolettre_inscriptions?id=in.(${ids.join(',')})&select=id,email,ville,statut`);
       if (!lignes.length) return res.status(404).send(page('Inscription introuvable', `<p>Cette inscription n'existe plus. <a href="${site()}/">Revenir au site</a></p>`));
       const noms = (ls) => ls.map((l) => `« ${nomComplet(l)} »`).join(', ');
-      // « Revenir au site » : le volet de l'inscription, pas toujours Québec (ville vérifiée par la table).
-      const retour = `${site()}/${lignes[0].ville}/`;
+      // « Revenir au site » : le volet de l'inscription, pas toujours Québec (ville vérifiée par la table) ;
+      // l'accueil de DossierQuébec pour l'infolettre de l'Assemblée.
+      const retour = pageDe(lignes[0].ville);
 
       if (action === 'confirmer') {
         const aConfirmer = lignes.filter((l) => l.statut === 'en_attente');
@@ -123,9 +124,9 @@ export default async function handler(req, res) {
         return res.status(200).send(page(
           "C'est confirmé 📬",
           `<p>Vous recevrez ${echapper(noms(aConfirmer))}.</p>
-           <p>${numeros.length ? `<strong>Le plus récent vient de partir vers votre boîte${mensuel ? ` (celui ${echapper(deMois(mensuel.mois))})` : ''}.</strong>` : ''} ${aConfirmer.some((l) => (l.type ?? 'mensuel') === 'mensuel') ? `${mensuel ? 'Le prochain' : 'Le premier'} compte rendu du mois arrive ${prochainEnvoi()}.` : 'Le prochain arrive après la prochaine séance.'}</p>
+           <p>${numeros.length ? `<strong>Le plus récent vient de partir vers votre boîte${mensuel ? ` (celui ${echapper(deMois(mensuel.mois))})` : ''}.</strong>` : ''} ${aConfirmer.some((l) => (l.type ?? 'mensuel') === 'mensuel') ? `${mensuel ? 'Le prochain' : 'Le premier'} ${aConfirmer.every((l) => l.ville === ASSEMBLEE) ? 'numéro' : 'compte rendu du mois'} arrive ${prochainEnvoiDe(aConfirmer.find((l) => (l.type ?? 'mensuel') === 'mensuel').ville)}.` : 'Le prochain arrive après la prochaine séance.'}</p>
            <p class="note">Pas dans votre boîte d'ici quelques minutes ? Regardez dans les courriels indésirables.</p>
-           <p><a href="${site()}/${aConfirmer[0].ville}/">Voir les décisions de la Ville</a></p>`
+           <p><a href="${pageDe(aConfirmer[0].ville)}">${aConfirmer[0].ville === ASSEMBLEE ? 'Revenir à DossierQuébec' : 'Voir les décisions de la Ville'}</a></p>`
         ));
       }
 
@@ -138,8 +139,8 @@ export default async function handler(req, res) {
       return res.status(200).send(page(
         "C'est fait",
         `<p>Vous ne recevrez plus ${echapper(noms(cibles))}.</p>
-         <p class="note">Changé d'idée ? Réinscrivez-vous en tout temps sur l'accueil du volet de votre ville, ou dans Mes dossiers.</p>
-         <p><a href="${site()}/${cibles[0].ville}/">Revenir au site</a></p>`
+         <p class="note">Changé d'idée ? Réinscrivez-vous en tout temps sur l'accueil du site ou du volet de votre ville, ou dans Mon dossier.</p>
+         <p><a href="${pageDe(cibles[0].ville)}">Revenir au site</a></p>`
       ));
     } catch (erreur) {
       console.error('infolettre :', action, erreur);
@@ -164,7 +165,7 @@ export default async function handler(req, res) {
       // Connecté avec cette adresse : elle est déjà vérifiée par le lien de connexion.
       if (u?.email && u.email.toLowerCase() === email) {
         await confirmerPour(email, choix, { userId: u.id });
-        return res.status(200).json({ ok: true, confirme: true, prochain: prochainEnvoi() });
+        return res.status(200).json({ ok: true, confirme: true, prochain: prochainEnvoiDe(choix[0].ville) });
       }
 
       // Garde-fous contre l'envoi de courriels de confirmation à la chaîne : 10 minutes par adresse,
@@ -212,7 +213,7 @@ export default async function handler(req, res) {
           methode: 'PATCH', corps: { statut: 'desinscrit', desinscrit_le: new Date().toISOString() }, entetes: { Prefer: 'return=minimal' },
         });
       }
-      return res.status(200).json({ ok: true, prochain: prochainEnvoi(), ...(await etat(u)) });
+      return res.status(200).json({ ok: true, prochain: prochainEnvoiDe(oui[0]?.ville), ...(await etat(u)) });
     }
 
     return res.status(400).json({ erreur: 'action inconnue' });
