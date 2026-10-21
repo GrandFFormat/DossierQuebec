@@ -1680,19 +1680,36 @@ async function mdFlux(isEn){
       ${ligne(isEn ? 'All National Assembly news' : 'Toutes les nouvelles de l’Assemblée', mdFluxAdresse)}
       ${ligne(isEn ? 'Your keywords (bills that contain one of them)' : 'Vos mots-clés (projets de loi qui en contiennent un)', mdFluxAdresse + '&type=mots')}
       ${ligne(isEn ? 'Your followed members (bills introduced and recorded votes)' : 'Vos élus suivis (projets de loi présentés et votes nominaux)', mdFluxAdresse + '&type=elus')}
-      ${min.length ? `<li><b>${isEn ? 'One ministry (bills it sponsors)' : 'Un ministère (projets de loi qu’il parraine)'}</b>
-        <div class="md-ligne"><select id="mdFluxMin" aria-label="${isEn ? 'Ministry' : 'Ministère'}" onchange="mdFluxMinistere()">${min.map((m) => `<option value="${mdH(m)}">${mdH(m)}</option>`).join('')}</select></div>
-        <div class="md-ligne"><input type="text" readonly id="mdFluxMinAdr" aria-label="${isEn ? 'Ministry feed' : 'Flux du ministère'}" onfocus="this.select()">${copier}</div></li>` : ''}
+      ${min.length ? `<li><b>${isEn ? 'By ministry (bills it sponsors) — one feed per ministry' : 'Par ministère (projets de loi qu’il parraine) — un flux par ministère'}</b>
+        <div id="mdFluxMins"></div></li>` : ''}
     </ul>
     <p class="md-note">${isEn ? 'Keywords are managed in the alerts card; followed members, from the ministers and MNAs pages.' : 'Les mots-clés se gèrent dans la carte des alertes ; les élus suivis, depuis les pages des ministres et des député·e·s.'}</p>
   </div>`;
-  mdFluxMinistere();
+  _mdMins = min;
+  if(min.length) mdFluxAjouterMinistere(true);
 }
-function mdFluxMinistere(){
-  const s = document.getElementById('mdFluxMin'), a = document.getElementById('mdFluxMinAdr');
-  if(s && a) a.value = mdFluxAdresse + '&type=ministere&m=' + encodeURIComponent(s.value);
+// Les flux par ministère (Martin, 21 oct. 2026 : « à gauche de ministre, un + ; s'ils veulent suivre
+// plus d'un ministre, une ligne s'additionne »). Chaque ligne : un ministère, son adresse, ⧉ copier.
+// Le + de la première ligne en ajoute une ; les lignes ajoutées ont un − pour se retirer.
+let _mdMins = [];
+function mdFluxAjouterMinistere(premiere){
+  const boite = document.getElementById('mdFluxMins');
+  if(!boite) return;
+  const isEn = currentLang === 'en';
+  const deja = [...boite.querySelectorAll('select')].map((x) => x.value);
+  const choix = _mdMins.find((m) => !deja.includes(m)) || _mdMins[0];
+  const ligne = document.createElement('div');
+  ligne.className = 'md-ligne md-flux-min';
+  ligne.innerHTML = `<button type="button" class="md-bouton-doux md-flux-plus" aria-label="${premiere ? (isEn ? 'Add a ministry' : 'Ajouter un ministère') : (isEn ? 'Remove this ministry' : 'Retirer ce ministère')}" onclick="${premiere ? 'mdFluxAjouterMinistere(false)' : 'this.parentElement.remove()'}">${premiere ? '+' : '−'}</button><select aria-label="${isEn ? 'Ministry' : 'Ministère'}" onchange="mdFluxMinistere(this)">${_mdMins.map((m) => `<option value="${mdH(m)}"${m === choix ? ' selected' : ''}>${mdH(m)}</option>`).join('')}</select><input type="text" readonly aria-label="${isEn ? 'Ministry feed' : 'Flux du ministère'}" onfocus="this.select()"><button class="md-bouton-doux" aria-label="${isEn ? 'Copy' : 'Copier'}" onclick="copierCourriel(this, this.previousElementSibling.value)">⧉</button>`;
+  boite.appendChild(ligne);
+  mdFluxMinistere(ligne.querySelector('select'));
+}
+function mdFluxMinistere(select){
+  const a = select?.parentElement?.querySelector('input');
+  if(a) a.value = mdFluxAdresse + '&type=ministere&m=' + encodeURIComponent(select.value);
 }
 window.mdFluxMinistere = mdFluxMinistere;
+window.mdFluxAjouterMinistere = mdFluxAjouterMinistere;
 
 // LES ALERTES SUR MESURE (21 oct. 2026), deuxième outil de l'abonnement. Un courriel le matin quand,
 // à l'Assemblée nationale, un projet de loi contient un mot-clé, un élu suivi présente un projet ou
