@@ -2246,3 +2246,7 @@
 .ab-forfait{cursor:pointer; transition:background .12s;}
 .ab-forfait:hover, .ab-forfait:focus-visible, .ab-forfait-choisi{background:#FFD24D; color:#131313; outline:none;}
 .ab-forfait-choisi{box-shadow:4px 4px 0 #131313;}
+/* Codes cadeaux (21 oct. 2026) : la case du code et la liste des codes achetés, dans Mon dossier. */
+.ab-code-champ{font-family:monospace; text-transform:uppercase; letter-spacing:1px; min-width:16ch;}
+.ab-mes-codes{margin:4px 0 8px; padding-left:18px;}
+.ab-mes-codes code{font-weight:bold; letter-spacing:1px;}

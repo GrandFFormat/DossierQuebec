@@ -17,12 +17,20 @@
 //                                             sur l'annulation : le bouton « Annuler mon abonnement » que
 //                                             la loi exige pour un abonnement conclu en ligne (Loi 10,
 //                                             en vigueur le 12 sept. 2026)
+//   POST /api/abonnement?action=cadeau       (connecté) { duree, langue? } → { url } de Stripe Checkout, un
+//                                             paiement UNIQUE ; duree = « mensuel », « trimestriel » ou
+//                                             « annuel ». Le code part par courriel à l'acheteur une fois
+//                                             le paiement reçu (webhook, api/_cadeau.js).
+//   GET  /api/abonnement?action=codes        (connecté) → { codes: [{ code, mois, achete, utilise }] }
+//   POST /api/abonnement?action=code         (connecté) { code } → { ok, mois, fin } ou { ok:false, raison } :
+//                                             faire valoir un code (10 essais par heure par compte)
 //
 // Le paiement n'est offert qu'avec STRIPE_OUVERT=1 ET des clés du mode réel, ou aux adresses de
 // STRIPE_ESSAI (voir _stripe.js). L'accès n'est jamais donné ici : seul le webhook
 // (api/stripe-webhook.js) écrit l'abonnement, une fois le paiement confirmé par Stripe.
 
 import { site } from './_alertes.js';
+import { codesDe, DUREES, echangerCode, nomProduit } from './_cadeau.js';
 import { adresseFlux, ministeres } from './_rss-abonnes.js';
 import { adresseEssai, estActive, FORFAITS, ligneAbonnement, modeStripe, paiementOuvert, prixConforme, prixDe, stripe, stripeConfigure, synchroniser, utilisateurDe } from './_stripe.js';
 
@@ -92,12 +100,37 @@ export default async function handler(req, res) {
     const elus = (Array.isArray(deps) ? deps : []).map((d) => ({ cle: `${d[0]}|${d[1]}`, nom: `${d[0]} (${d[1]})` })).sort((a, b) => a.nom.localeCompare(b.nom, 'fr'));
     return res.status(200).json({ adresse: adresseFlux(u.id), ministeres: ministeres(brut?.bills ?? []), elus });
   }
+  // Les codes cadeaux ne dépendent pas de Stripe : un code acheté reste utilisable même si le
+  // paiement est fermé ou en panne.
+  if (req.method === 'GET' && req.query?.action === 'codes') {
+    if (!u) return res.status(401).json({ erreur: 'connexion requise' });
+    try {
+      return res.status(200).json({ codes: await codesDe(u.id) });
+    } catch (e) {
+      console.error('codes cadeaux :', e.message);
+      return res.status(503).json({ erreur: 'codes illisibles' });
+    }
+  }
+  if (req.method === 'POST' && req.query?.action === 'code') {
+    if (!u) return res.status(401).json({ erreur: 'connexion requise' });
+    let corps = req.body;
+    if (typeof corps === 'string') { try { corps = JSON.parse(corps || '{}'); } catch { corps = {}; } }
+    try {
+      const r = await echangerCode(u.id, corps?.code);
+      return res.status(r?.ok ? 200 : r?.raison === 'trop' ? 429 : 400).json(r ?? { ok: false, raison: 'inconnu' });
+    } catch (e) {
+      console.error('code cadeau :', e.message);
+      return res.status(503).json({ ok: false, raison: 'panne' });
+    }
+  }
   if (req.method === 'GET') {
     return res.status(200).json({
       ouvert: configure && paiementOuvert(),
       mode: configure ? modeStripe() : null,
       connecte: Boolean(u),
       peutPayer,
+      // Offrir un abonnement (paiement unique) : mêmes protections, abonné ou non.
+      peutOffrir: Boolean(configure && u?.email && (paiementOuvert() || adresseEssai(u.email))),
       abonne,
       source: ligne?.source ?? null,
       fin: abonne ? ligne.fin : null,
@@ -158,6 +191,42 @@ export default async function handler(req, res) {
         // Payé d'avance : par carte seulement, ce qui garde au consommateur la rétrofacturation.
         'payment_method_types[0]': 'card',
         // Une session abandonnée ne reste pas payable 24 heures (le minimum de Stripe est 30 minutes).
+        expires_at: String(Math.floor(Date.now() / 1000) + 31 * 60),
+      });
+      return res.status(200).json({ url: session.url });
+    }
+    if (action === 'cadeau') {
+      // Mêmes protections que l'abonnement (STRIPE_OUVERT avec des clés réelles, ou STRIPE_ESSAI),
+      // mais un abonné peut offrir : on ne s'offre pas un cadeau à soi-même par erreur, on le donne.
+      if (!(paiementOuvert() || adresseEssai(u.email))) return res.status(403).json({ erreur: "le paiement n'est pas encore ouvert" });
+      if (!u.email) return res.status(400).json({ erreur: 'compte sans courriel' });
+      let corps = req.body;
+      if (typeof corps === 'string') { try { corps = JSON.parse(corps || '{}'); } catch { corps = {}; } }
+      const anglais = String(corps?.langue ?? '') === 'en';
+      const duree = String(corps?.duree ?? '');
+      if (!Object.hasOwn(DUREES, duree)) return res.status(400).json({ erreur: 'durée inconnue' });
+      const session = await stripe('/checkout/sessions', {
+        // Un paiement UNIQUE : le cadeau ne se renouvelle pas sur la carte de l'acheteur. Le montant
+        // est fixé ici, en CAD, jamais par le navigateur.
+        mode: 'payment',
+        'line_items[0][price_data][currency]': 'cad',
+        'line_items[0][price_data][unit_amount]': String(DUREES[duree].montant),
+        'line_items[0][price_data][product_data][name]': nomProduit(duree, anglais),
+        'line_items[0][quantity]': '1',
+        success_url: `${site()}/${retourDe()}?cadeau=merci`,
+        cancel_url: `${site()}/abonnement?cadeau=annule#offrir`,
+        client_reference_id: u.id,
+        // Ce que le webhook relit pour fabriquer le code (api/_cadeau.js, livrerCadeau).
+        'metadata[type]': 'cadeau',
+        'metadata[duree]': duree,
+        'metadata[user_id]': u.id,
+        'metadata[langue]': anglais ? 'en' : 'fr',
+        locale: anglais ? 'en' : 'fr-CA',
+        customer: await clientStripe(u, ligne, anglais),
+        billing_address_collection: 'required',
+        'customer_update[address]': 'auto',
+        'customer_update[name]': 'auto',
+        'payment_method_types[0]': 'card',
         expires_at: String(Math.floor(Date.now() / 1000) + 31 * 60),
       });
       return res.status(200).json({ url: session.url });

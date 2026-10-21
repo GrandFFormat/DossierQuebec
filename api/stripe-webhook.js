@@ -9,6 +9,7 @@
 // Signature Web (Request → Response) plutôt que (req, res) : il faut le corps BRUT pour vérifier la
 // signature, avant tout décodage JSON. Une erreur répond 500 : Stripe réessaie pendant trois jours.
 
+import { livrerCadeau } from './_cadeau.js';
 import { signatureStripeValide, stripeConfigure, synchroniser } from './_stripe.js';
 
 const TYPES = new Set([
@@ -40,8 +41,18 @@ export async function POST(request) {
     return new Response('corps invalide', { status: 400 });
   }
   const objet = evenement.data?.object ?? {};
-  // (Les codes cadeaux, payés en une fois, ne sont pas revenus avec l'abonnement le 21 oct. 2026 :
-  // une session sans abonnement Stripe derrière elle est simplement ignorée plus bas.)
+  // Un abonnement OFFERT (remis le 21 oct. 2026) : un paiement unique, marqué « cadeau » par
+  // api/abonnement.js. Il ne touche pas la table `abonnements` : il fabrique un code (api/_cadeau.js).
+  if (evenement.type === 'checkout.session.completed' && objet.mode === 'payment' && objet.metadata?.type === 'cadeau') {
+    try {
+      const resultat = await livrerCadeau(objet);
+      console.log(`Stripe cadeau ${objet.id} → ${resultat}`);
+      return Response.json({ recu: true, resultat });
+    } catch (e) {
+      console.error(`Stripe cadeau ${objet.id} :`, e.message);
+      return new Response('erreur', { status: 500 });
+    }
+  }
 
   const abonnement = abonnementDe(objet);
   if (!TYPES.has(evenement.type) || !abonnement) return Response.json({ recu: true, ignore: true });
