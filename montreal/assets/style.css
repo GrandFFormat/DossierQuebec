@@ -685,3 +685,6 @@ h2.page[id], h1.page[id] { scroll-margin-top: 16px; }
 /* La légende qui explique l'absence de résumés : elle suit la ligne de comptage, donc elle
    se serre contre elle plutôt que de flotter comme un avis ordinaire. */
 .avis.legende-resume { margin: 4px 0 20px; font-size: 13.5px; line-height: 1.55; }
+
+/* Lien « propulsé par » DAFRSolution.com, surligné jaune (21 oct. 2026). */
+footer a.lien-dafr { background: #FFD24D; color: #101419; font-weight: 700; padding: 1px 5px; border-radius: 3px; text-decoration: none; }
