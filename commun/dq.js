@@ -1754,6 +1754,9 @@ window.adminPreocSujet = adminPreocSujet;
 // de l'Assemblée : votes nominaux (une ligne par député·e et par vote), présences, projets de loi.
 // Le serveur (api/export.js) vérifie l'abonnement avant de fabriquer le fichier ; ici, on ne fait que
 // montrer les boutons aux abonné·e·s et le lien vers /abonnement aux autres.
+function moisExport(){
+  try{ const m = new URL(location.href).searchParams.get('mois') || ''; return /^\d{4}-(0[1-9]|1[0-2])$/.test(m) ? m : null; }catch(e){ return null; }
+}
 async function mdExport(isEn){
   const zone = document.getElementById('mdExport');
   if(!zone) return;
@@ -1774,6 +1777,7 @@ async function mdExport(isEn){
   zone.innerHTML = `<div class="md-carte">
     <div class="md-carte-tete"><h2>${isEn ? 'Data export' : 'Export des données'}</h2><span class="md-etiquette">${isEn ? 'Subscribers' : 'Abonné·e·s'}</span></div>
     <p>${isEn ? 'National Assembly data as CSV files, ready for Excel or Google Sheets. Source: Assemblée nationale du Québec.' : 'Les données de l’Assemblée nationale en fichiers CSV, prêts pour Excel ou Google Sheets. Source : Assemblée nationale du Québec.'}</p>
+    ${abonne && moisExport() ? `<p class="md-note">${isEn ? `Votes and attendance: ${moisExport()} only. <a class="md-lien" href="/mon-dossier?lang=en#mdExport">All months</a>` : `Votes et présences : ${moisExport()} seulement. <a class="md-lien" href="/mon-dossier#mdExport">Tous les mois</a>`}</p>` : ''}
     ${abonne
       ? `<div class="md-export-boutons">${jeux.map(([j, t, d]) => `<button class="account-btn" onclick="mdTelecharger('${j}', this)">${t}</button><span class="md-note">${d}</span>`).join('')}</div>`
       : `<p class="md-note">${isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.'} <a class="md-lien" href="/abonnement">${isEn ? 'See the subscription' : 'Voir l’abonnement'}</a></p>`}
@@ -1785,7 +1789,10 @@ async function mdTelecharger(jeu, bouton){
   bouton.disabled = true; bouton.textContent = isEn ? 'Preparing…' : 'Préparation…';
   try{
     const { data: { session } } = await supabaseClient.auth.getSession();
-    const r = await fetch(`/api/export?jeu=${jeu}`, { headers: { Authorization: `Bearer ${session?.access_token || ''}` } });
+    // ?mois=AAAA-MM dans l'adresse (les liens « Les fichiers du mois » de l'infolettre) : ce mois-là
+    // seulement, pour les votes et les présences.
+    const mois = moisExport();
+    const r = await fetch(`/api/export?jeu=${jeu}${mois && jeu !== 'projets' ? `&mois=${mois}` : ''}`, { headers: { Authorization: `Bearer ${session?.access_token || ''}` } });
     if(!r.ok) throw new Error(r.status);
     const blob = await r.blob();
     const a = document.createElement('a');
