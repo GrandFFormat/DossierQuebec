@@ -14,6 +14,12 @@
   "functions": {
     "api/feed.js": {
       "includeFiles": "api/feed-data.xml"
+    },
+    "api/export.js": {
+      "includeFiles": "api/consultations-data.json"
+    },
+    "api/infolettre-envoi.js": {
+      "includeFiles": "api/consultations-data.json"
     }
   },
   "rewrites": [

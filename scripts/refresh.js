@@ -52,6 +52,9 @@ const doPetitions =
 const SCRAPERS = [
   ['Scrape : projets de loi (Données Québec)', ['scrapers/bills.js']],
   ['Scrape : détails des projets de loi (assnat)', ['scrapers/bill-details.js']],
+  // Consultations en commission et mémoires déposés (outils de l'abonnement) : api/consultations-data.json,
+  // relu par morceaux (cache). « soft » : une panne garde le fichier de la veille.
+  ['Scrape : consultations et mémoires (assnat)', ['scrapers/consultations.js'], { soft: true }],
   // `soft: true` = source lente/peu critique dont une panne NE déclenche PAS
   // d'alerte (run vert). Les pétitions (hebdo) sont capricieuses côté assnat
   // (liste parfois servie en AJAX) : une semaine ratée = données de la veille

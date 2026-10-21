@@ -5,11 +5,17 @@
 //   GET /api/export?jeu=votes|votes-deputes|presences|projets      Authorization: Bearer <jeton de session Supabase>
 //   → un fichier CSV (séparateur « ; », encodé UTF-8 avec BOM : Excel en français l'ouvre tel quel)
 //
+//   GET /api/export?jeu=consultations[&pl=id,id…]                  (même en-tête)
+//   → du JSON pour Mon dossier et la carte d'un projet de loi (quatrième et cinquième outils, 21 oct.
+//     2026) : les consultations à venir, et pour chaque projet demandé, ses mémoires déposés. Vient de
+//     api/consultations-data.json (api/_consultations.js), un fichier que Vercel ne sert pas.
+//
 // Seulement des données de l'Assemblée nationale (aucune donnée municipale : conditions des Villes).
 // Les fichiers viennent des données publiques du site lui-même (dossierquebec.ca/data/…), la source
 // est rappelée dans le nom du fichier et dans la première colonne d'adresse.
 
 import { utilisateurDe, ligneAbonnement, estActive } from './_stripe.js';
+import { chargerConsultations, consultationsAVenir, memoiresDe } from './_consultations.js';
 
 const SITE = process.env.PUBLIC_SITE_URL || 'https://dossierquebec.ca';
 const lire = async (chemin) => {
@@ -69,12 +75,24 @@ async function fabriquer(jeu) {
 
 export default async function handler(req, res) {
   const jeu = String(req.query?.jeu || '');
-  if (!['votes', 'votes-deputes', 'presences', 'projets'].includes(jeu)) return res.status(400).json({ erreur: 'jeu inconnu' });
+  if (!['votes', 'votes-deputes', 'presences', 'projets', 'consultations'].includes(jeu)) return res.status(400).json({ erreur: 'jeu inconnu' });
   const jeton = (req.headers.authorization || '').replace(/^Bearer\s+/i, '') || null;
   const utilisateur = await utilisateurDe(jeton);
   if (!utilisateur) return res.status(401).json({ erreur: 'connexion requise' });
   const ligne = await ligneAbonnement(utilisateur.id).catch(() => null);
   if (!estActive(ligne)) return res.status(403).json({ erreur: 'réservé aux abonné·e·s' });
+  if (jeu === 'consultations') {
+    const donnees = chargerConsultations();
+    if (!donnees) return res.status(500).json({ erreur: 'données indisponibles' });
+    // Au plus 200 projets par demande (Mon dossier : les projets suivis ; la carte : un seul).
+    const ids = String(req.query?.pl || '').split(',').filter((x) => /^\d{1,9}$/.test(x)).slice(0, 200);
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(200).json({
+      misAJour: donnees.misAJour,
+      aVenir: consultationsAVenir(donnees),
+      projets: Object.fromEntries(ids.map((id) => [id, memoiresDe(donnees, id)]).filter(([, v]) => v)),
+    });
+  }
   try {
     const fichier = await fabriquer(jeu);
     const jour = new Date().toISOString().slice(0, 10);

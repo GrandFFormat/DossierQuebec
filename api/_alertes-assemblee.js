@@ -10,7 +10,9 @@
 //   - un projet de loi qui contient un de ses mots-clés (alertes_mots_cles, portee « assemblee »),
 //     dans le titre officiel ou le résumé ;
 //   - un ministre ou un·e député·e suivi (follows) qui présente un projet de loi, ou qui vote à un
-//     vote nominal (/data/votes.json).
+//     vote nominal (/data/votes.json) ;
+//   - (21 oct. 2026) la date limite d'une consultation en commission sur un projet suivi ou touché par
+//     un mot-clé, dans les 7 jours (api/_consultations.js) — seulement si l'Assemblée l'a publiée.
 // Un suivi tout neuf est mémorisé sans courriel : on ne signale que ce qui arrive ensuite. Au plus un
 // courriel par personne par exécution. Si l'envoi échoue, rien n'est mémorisé : ce sera redit le
 // lendemain. Ce qui a déjà été signalé vit dans alertes_etat (ville « assemblee »).
@@ -21,6 +23,7 @@
 import crypto from 'node:crypto';
 import { supabase, signature, site } from './_alertes.js';
 import { estActive } from './_stripe.js';
+import { chargerConsultations, rappelsEcheance, RAPPEL_JOURS } from './_consultations.js';
 
 export const ASSEMBLEE = 'assemblee';
 export const LOI = /^pl:(\d{1,9})$/;
@@ -136,8 +139,10 @@ const recentesD = (lois) => [...lois].sort((a, b) => String(b.lastActivity ?? ''
 //   rolesParrains  Map id → rôle du parrain (« Ministre des Finances »), de /data/bills.json
 //   vusEnDirect    Set des ids dont l'étape a été relue ce matin (liveStage), ou null
 //   dejaVu         (cle) => l'état déjà mémorisé, ou undefined
+//   consultations  le contenu de api/consultations-data.json, ou null : rappels d'échéance sautés
+//   aujourdhui     AAAA-MM-JJ (les essais hors ligne fixent la date)
 // Rend { sections: [{ titre, sousTitre, lignes, total, note? }], aMemoriser: [{ projet, etat }] }.
-export function alertesAssemblee({ lois, resumes = null, votes = null, suivies = [], mots = [], personnes = [], rolesParrains = null, vusEnDirect = null, dejaVu, essai = false }) {
+export function alertesAssemblee({ lois, resumes = null, votes = null, suivies = [], mots = [], personnes = [], rolesParrains = null, vusEnDirect = null, dejaVu, essai = false, consultations = null, aujourdhui = new Date().toISOString().slice(0, 10) }) {
   const sections = [];
   const aMemoriser = [];
   const parId = new Map(lois.map((b) => [String(b.id), b]));
@@ -226,8 +231,28 @@ export function alertesAssemblee({ lois, resumes = null, votes = null, suivies =
       });
     }
   }
+  // 5. Les rappels d'échéance des consultations (21 oct. 2026) : un projet suivi, ou qui contient un
+  //    mot-clé, dont la date limite PUBLIÉE tombe dans les RAPPEL_JOURS jours. Un rappel par mandat et
+  //    par date limite (si l'Assemblée repousse la date, on le redit).
+  if (consultations) {
+    const touches = new Set(suivies.map(String));
+    if (resumes) for (const b of lois) if (mots.some((m) => loiContientMot(b, resumes[b.id], m.cherche))) touches.add(String(b.id));
+    const aRappeler = rappelsEcheance(consultations, touches, aujourdhui).filter((c) => {
+      if (essai) return true;
+      const cle = cleEcheance(c.mandat);
+      if (dejaVu(cle)?.dateLimite === c.dateLimite) return false;
+      aMemoriser.push({ projet: cle, etat: { dateLimite: c.dateLimite } });
+      return true;
+    });
+    if (aRappeler.length) sections.push({ titre: 'Échéances des consultations', sousTitre: `Date limite dans les ${RAPPEL_JOURS} jours`, lignes: aRappeler.map(ligneEcheance), total: aRappeler.length });
+  }
   return { sections, aMemoriser };
 }
+export const cleEcheance = (mandat) => `ech_${String(mandat).replace(/\D/g, '')}`;
+const ligneEcheance = (c) => `<li style="margin:0 0 12px">
+    <a href="${echapper(c.url)}" style="color:#0B5CAD;font-weight:bold">${echapper(c.titre)}</a><br>
+    <span style="color:#5B6570">${echapper(c.commission)} · date limite : ${echapper(dateFr(c.dateLimite))}</span>
+  </li>`;
 
 // ---------- le courriel ----------
 // Gmail coupe un message au-delà d'environ 102 Ko et cache alors le lien de désabonnement : à 80 Ko,
@@ -403,6 +428,8 @@ export async function envoyerAlertes({ apercu = false, essai = null, pourSoi = n
   const vusEnDirect = Array.isArray(brut?.bills)
     ? new Set(brut.bills.filter((b) => b.status !== 'laisse_de_cote' && b.liveStage).map((b) => String(b.id)))
     : null;
+  const consultations = chargerConsultations();
+  if (!consultations) rapport.erreurs.push('consultations illisibles : rappels d\'échéance sautés ce matin');
   const listeDeputes = Array.isArray(deputes) ? deputes : [];
   const listeMinistres = Array.isArray(ministres) ? ministres : [];
   const compte = new Map();
@@ -441,6 +468,7 @@ export async function envoyerAlertes({ apercu = false, essai = null, pourSoi = n
         personnes: (personnesDe.get(uid) ?? []).map((p) => ({ ...p, roles: rolesDe(p), assnatId: numeroAssemblee(p, listeDeputes) })),
         dejaVu: (cle) => dejaVu.get(`${uid}|${cle}`),
         essai: Boolean(essai),
+        consultations,
       });
 
       if (a.sections.length) {

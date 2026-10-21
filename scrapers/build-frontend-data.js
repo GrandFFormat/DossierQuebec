@@ -22,6 +22,7 @@
 // sanctionné / à l'étude / sur la glace.
 
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { comptes } from '../api/_consultations.js';
 
 const IN_PATH = 'data/bills.json';
 const HTML_PATH = 'gabarit.html';   // le MODÈLE, jamais servi : les pages en sont tirées
@@ -184,9 +185,20 @@ function main() {
       ? 'A name without ✉ and in grey: this person no longer sits in the Assembly.'
       : 'Un nom en gris, sans ✉ : cette personne ne siège plus à l’Assemblée.'}</p>` : ''}</details>`;
   };
+  // « Mémoires déposés » (21 oct. 2026, cinquième outil de l'abonnement). Seul le NOMBRE est public :
+  // la liste est servie aux abonné·e·s par api/export.js?jeu=consultations, que commun/dq.js
+  // (remplirMemoires) appelle au dépliement de la carte. Source : api/consultations-data.json.
+  const nbMemoires = existsSync('api/consultations-data.json') ? comptes(JSON.parse(readFileSync('api/consultations-data.json', 'utf-8'))) : {};
+  const caseMemoires = (b, en) => {
+    const n = nbMemoires[b.id];
+    if (!n) return '';
+    return `<details class="bill-votes bill-memoires" data-memoires="${echapper(b.id)}"><summary>${en ? `Briefs submitted in committee (${n})` : `Mémoires déposés en commission (${n})`}</summary><div class="bill-memoires-corps"><p class="bill-votes-note">${en
+      ? `${n} brief${n > 1 ? 's' : ''} submitted to the parliamentary committee. Who submitted them, with the link to each official brief: reserved for subscribers. <a href="/abonnement">See the subscription</a>.`
+      : `${n} mémoire${n > 1 ? 's' : ''} déposé${n > 1 ? 's' : ''} à la commission parlementaire. Qui les a déposés, avec le lien vers chaque mémoire officiel : réservé aux abonné·e·s. <a href="/abonnement">Voir l’abonnement</a>.`}</p></div></details>`;
+  };
   for (const b of bills) {
-    if (b.summary) resumes.fr[b.id] = b.summary + listeLois(b, false) + caseVotes(b, false);
-    if (b.summaryEn) resumes.en[b.id] = b.summaryEn + listeLois(b, true) + caseVotes(b, true);
+    if (b.summary) resumes.fr[b.id] = b.summary + listeLois(b, false) + caseVotes(b, false) + caseMemoires(b, false);
+    if (b.summaryEn) resumes.en[b.id] = b.summaryEn + listeLois(b, true) + caseVotes(b, true) + caseMemoires(b, true);
   }
   for (const [langue, map] of Object.entries(resumes)) {
     const chemin = `data/bills-resumes-${langue}.json`;
