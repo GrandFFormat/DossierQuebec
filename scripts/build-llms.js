@@ -83,7 +83,6 @@ export function construireLlms() {
     '',
     '## Optional',
     '',
-    `- [Flux RSS « Quoi de neuf »](${SITE}/feed.xml): les nouveautés de l'Assemblée nationale.`,
     '- [Code source](https://github.com/GrandFFormat/DossierQuebec): le dépôt public du site.',
     '',
     '## In English',
