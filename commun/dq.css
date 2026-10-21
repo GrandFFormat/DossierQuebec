@@ -2160,6 +2160,15 @@
 /* Mon dossier : la carte « Ce qui s'en vient » (outils pour abonné·e·s, annoncés d'avance). */
 .md-avenir-liste{margin:10px 0 0; padding-left:20px; display:grid; gap:8px; line-height:1.5;}
 .md-a-venir{border-style:dashed;}
+/* Page /abonnement (21 oct. 2026) : les outils avec leur état, et les trois forfaits. */
+.ab-outils{list-style:none; margin:12px 0 0; padding:0; display:grid; gap:10px; line-height:1.5;}
+.ab-outils li{display:flex; gap:12px; align-items:flex-start;}
+.ab-etat{flex:none; font-family:'Archivo',sans-serif; font-size:11.5px; font-weight:800; text-transform:uppercase; letter-spacing:.04em; padding:2px 8px; border:2px solid var(--ink); margin-top:2px; min-width:86px; text-align:center;}
+.ab-bientot{background:transparent; border-style:dashed;}
+.ab-dispo{background:var(--yellow); color:var(--sur-clair);}
+.ab-forfaits{list-style:none; margin:12px 0; padding:0; display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:12px;}
+.ab-forfaits li{border:2px solid var(--ink); padding:12px 14px; display:grid; gap:4px;}
+.ab-montant{font-family:'Archivo',sans-serif; font-size:26px; font-weight:900;}
 
 /* Qui a voté quoi, sous une loi sanctionnée (scrapers/build-frontend-data.js, caseVotes). */
 .bill-votes{margin-top:12px;}

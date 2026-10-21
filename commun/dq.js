@@ -381,7 +381,7 @@ const translations = {
     'lp.nd':"<b>n/a</b>: no recorded vote for this person.",
     'lp.officiel':"This is not an official measure: the Assembly does not publish attendance, and a missed vote does not tell why.",
     'promo.sur':"Free account",
-    'mdavenir.html':"<div class=\"md-carte-tete\"><h2>Coming soon</h2><span class=\"md-etiquette\">Soon</span></div><p>All the text on the site will stay free: bills and their summaries, ministers and MNAs, votes, promises. Extra tools are coming soon, for subscribers:</p><ul class=\"md-avenir-liste\"><li><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</li><li><b>Custom RSS feeds</b> — a feed per keyword, per MNA or per ministry, in your RSS reader.</li><li><b>Consultation deadlines</b> — for groups and lobbies: the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</li><li><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</li><li><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</li><li><b>Data export</b> — votes, attendance and bills as Excel or CSV files, ready to analyze.</li><li><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</li><li><b>Ad-free</b> — the site, without any ads.</li></ul>",
+    'mdavenir.html':"<div class=\"md-carte-tete\"><h2>Coming soon</h2><span class=\"md-etiquette\">Soon</span></div><p>All the text on the site will stay free: bills and their summaries, ministers and MNAs, votes, promises. Extra tools are coming soon, for subscribers:</p><ul class=\"md-avenir-liste\"><li><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</li><li><b>Custom RSS feeds</b> — a feed per keyword, per MNA or per ministry, in your RSS reader.</li><li><b>Consultation deadlines</b> — for groups and lobbies: the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</li><li><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</li><li><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</li><li><b>Data export</b> — votes, attendance and bills as Excel or CSV files, ready to analyze.</li><li><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</li><li><b>Ad-free</b> — the site, without any ads.</li></ul><p><a class=\"md-lien\" href=\"/abonnement\">See the optional subscription and the status of each tool →</a></p>",
     'promo.h':"Follow the bills that matter to you",
     'promo.p':"A free account, no password: follow up to 3 bills or city projects, and find them in My file, with their current stage.",
     'promo.diss':"The bills of the 43rd legislature died when the Assembly was dissolved on August 27: following will resume with the first bills of the new legislature, convened on November 17, 2026.",
@@ -399,6 +399,15 @@ const translations = {
     'apercu.petitions.sub':"Click the \u201cPetitions\u201d tab for the full list",
     'quicknav.label':"Jump to:",
     'footer.regles':"The rules",
+    'footer.abonnement':"Subscription",
+    'fil.abonnement':"Subscription",
+    'sujet.abonnement':"The optional subscription",
+    'abhero.l1':"The content stays free,",
+    'abhero.l2':"the tools are extra.",
+    'abhero.sub':"All the text on the site is free and will stay free. The subscription is optional: it gives extra tools. <b>Cancel anytime, prices in Canadian dollars.</b>",
+    'abgratuit.html':"<div class=\"md-carte-tete\"><h2>What stays free, for everyone</h2><span class=\"md-etiquette\">Free</span></div><p>Bills and their summaries, ministers and MNAs, votes, promises, the glossary, city decisions, and the features already on those pages. Following too: 3 follows per account, bills, members and city projects, subscriber or not.</p>",
+    'aboutils.html':"<div class=\"md-carte-tete\"><h2>What the subscription gives</h2></div><p>The planned tools, each with its status. A tool marked “Soon” does not exist yet: subscribers get it at no extra cost as soon as it is released, at the same price for as long as the subscription stays active. No tool covers city decisions.</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Custom RSS feeds</b> — a feed per keyword, per MNA or per ministry.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Data export</b> — the Assembly's votes, attendance and bills as Excel or CSV files.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site without any ads, should ads ever appear on it.</div></li></ul>",
+    'abforfaits.html':"<div class=\"md-carte-tete\"><h2>The plans</h2></div><ul class=\"ab-forfaits\"><li><b class=\"ab-montant\">$9.99</b><span>a month</span></li><li><b class=\"ab-montant\">$26.99</b><span>every 3 months</span></li><li><b class=\"ab-montant\">$99</b><span>a year — two months free</span></li></ul><p class=\"md-note\">Prices in Canadian dollars. Card payment on Stripe's secure page: DossierQuébec never sees your card. Cancel anytime, from this page or My file, in two clicks: the subscription stays active until the end of the paid period, then stops with no further charge.</p>",
     'fil.regles':"The rules",
     'sujet.regles':"DossierQuébec's sourcing rules",
     'regleshero.l1':"The rules,",
@@ -422,7 +431,7 @@ const translations = {
     'regles.8.p':"Plain-language summaries are made from the official text, and the full text is always one click away. If anything differs, the original document is the one that counts. The site is independent and has no official status.",
     'regles.9.h':"We explain what is missing",
     'regles.9.p':"When a source is absent or incomplete, the page says so and says why. An absence must never be read as silence from the party or the city.",
-    'regles.suite':"These rules apply everywhere on the site. See them at work on the <a href=\"/promesses\">Promises</a> page, and follow what changes in the <a href=\"/sources\">site updates</a>.",
+    'regles.suite':"These rules apply everywhere on the site. See them at work on the <a href=\"/promesses\">Promises</a> page, and follow what changes in the <a href=\"/sources\">site updates</a>. All the content on the site is free. An <a href=\"/abonnement\">optional subscription</a> offers extra tools.",
     'fil.introuvable':"Page not found",
     'sujet.introuvable':"Page not found",
     'p404.bande.h':"⚠️ Error 404 — this address leads nowhere",
@@ -1610,8 +1619,105 @@ function mdCompte(isEn, quota){
       ${quota.parties?.villes || quota.parties?.motsVilles || quota.parties?.organismes
         ? `<a class="md-lien" href="#villes">${isEn ? 'Your city follows' : 'Vos suivis de ville'}</a>` : ''}
       <br>${isEn ? 'Members you follow are not counted.' : 'Les élus suivis ne comptent pas dans ce total.'}</p>` : ''}
+    <div id="mdAbonnement"></div>
+  </div>`;
+  mdAbonnement(isEn);
+}
+
+// L'ABONNEMENT FACULTATIF (remis le 21 oct. 2026). L'état vient TOUJOURS du serveur
+// (api/abonnement.js), qui lit la table écrite par le webhook Stripe : le navigateur ne décide
+// jamais seul qui est abonné. Le suivi reste à 3 pour tout le monde, abonné ou non.
+async function abEtatServeur(){
+  try{
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    const r = await fetch('/api/abonnement', { headers: session ? { Authorization: `Bearer ${session.access_token}` } : {} });
+    return r.ok ? await r.json() : null;
+  }catch(e){ return null; }
+}
+const abDate = (iso, isEn) => new Date(iso).toLocaleDateString(isEn ? 'en-CA' : 'fr-CA', { year:'numeric', month:'long', day:'numeric' });
+
+// Les boutons Gérer / Annuler, communs à Mon dossier et à /abonnement. « Annuler mon abonnement » :
+// le bouton que la loi exige pour un abonnement conclu en ligne (Loi 10, Québec).
+function abBoutonsGestion(etat, isEn){
+  return `${etat.gerable ? `<button type="button" class="account-btn" onclick="abAction('portail', this)">${isEn ? 'Manage my subscription' : 'Gérer mon abonnement'}</button> ` : ''}
+    ${etat.annulable ? `<button type="button" class="md-bouton-doux" onclick="abAction('annuler', this)">${isEn ? 'Cancel my subscription' : 'Annuler mon abonnement'}</button>` : ''}`;
+}
+function abPhraseActive(etat, isEn){
+  if(etat.annulationPrevue && etat.fin) return isEn
+    ? `Cancelled: it stays active until ${abDate(etat.fin, isEn)}, then stops with no further charge.`
+    : `Annulé : il reste actif jusqu’au ${abDate(etat.fin, isEn)}, puis il s’arrête sans autres frais.`;
+  return isEn ? 'Your subscription is active. Thank you.' : 'Votre abonnement est actif. Merci.';
+}
+
+async function mdAbonnement(isEn){
+  const zone = document.getElementById('mdAbonnement');
+  if(!zone) return;
+  const etat = await abEtatServeur();
+  if(!document.body.contains(zone)) return;   // la carte a été redessinée entre-temps
+  if(etat?.abonne){
+    zone.innerHTML = `<p class="md-note"><b>${isEn ? 'Subscriber' : 'Abonné·e'}</b> — ${abPhraseActive(etat, isEn)}</p>
+      <p class="md-ligne">${abBoutonsGestion(etat, isEn)}</p><p class="md-note ab-action-etat" aria-live="polite"></p>`;
+  }else{
+    zone.innerHTML = `<p class="md-note">${isEn ? 'Free account.' : 'Compte gratuit.'} <a class="md-lien" href="/abonnement">${isEn ? 'The optional subscription' : 'L’abonnement facultatif'}</a></p>`;
+  }
+}
+
+async function renderAbonnement(){
+  const zone = document.getElementById('abEtat');
+  if(!zone) return;   // pas sur cette page
+  const isEn = currentLang === 'en';
+  const q = new URLSearchParams(location.search).get('abonnement');
+  const etat = await abEtatServeur();
+  const avis = q === 'annule'
+    ? `<p class="md-note">${isEn ? 'Payment interrupted: nothing was charged.' : 'Paiement interrompu : rien n’a été débité.'}</p>`
+    : q === 'annulation'
+      ? `<p class="md-note">${isEn ? 'Cancellation sent to Stripe. If this page still says the subscription is active, the confirmation is a few seconds away: reload it. Access stays open until the end of the period already paid for.' : 'Annulation transmise à Stripe. Si cette page dit encore que l’abonnement est actif, la confirmation arrive dans quelques secondes : rechargez-la. L’accès reste ouvert jusqu’à la fin de la période déjà payée.'}</p>`
+      : '';
+  let corps;
+  if(!etat){
+    corps = `<p>${isEn ? 'Payment is not responding right now. Reload the page in a moment.' : 'Le paiement ne répond pas pour l’instant. Rechargez la page dans un moment.'}</p>`;
+  }else if(etat.abonne){
+    corps = `<p>${abPhraseActive(etat, isEn)}</p><p class="md-ligne">${abBoutonsGestion(etat, isEn)}</p>`;
+  }else if(etat.peutPayer){
+    const nom = { mensuel: isEn ? '$9.99 a month' : '9,99 $ par mois', trimestriel: isEn ? '$26.99 every 3 months' : '26,99 $ tous les 3 mois', annuel: isEn ? '$99 a year' : '99 $ par an' };
+    const boutons = ['mensuel', 'trimestriel', 'annuel'].filter((f) => etat.forfaits?.[f])
+      .map((f) => `<button type="button" class="account-btn" onclick="abAction('paiement', this, '${f}')">${isEn ? 'Subscribe' : 'S’abonner'} — ${nom[f]}</button>`).join(' ');
+    corps = `${etat.mode === 'test' ? `<p class="md-note"><b>${isEn ? 'Test mode' : 'Mode essai'}</b> : ${isEn ? 'no real card is charged. Test card 4242 4242 4242 4242, any future date, any code.' : 'aucune vraie carte n’est débitée. Carte d’essai 4242 4242 4242 4242, une date future, n’importe quel code.'}</p>` : ''}
+      <p class="md-ligne">${boutons}</p>`;
+  }else if(etat.ouvert && !etat.connecte){
+    corps = `<p>${isEn ? 'The subscription is tied to your account. Sign in from <a class="md-lien" href="/mon-dossier">My file</a> (a sign-in link arrives by email, no password), then come back here.' : 'L’abonnement se rattache à votre compte. Connectez-vous depuis <a class="md-lien" href="/mon-dossier">Mon dossier</a> (un lien de connexion arrive par courriel, sans mot de passe), puis revenez ici.'}</p>`;
+  }else{
+    corps = `<p>${isEn ? 'Payment is not open yet. Everything on the site stays free in the meantime.' : 'Le paiement n’est pas encore ouvert. Tout le site reste gratuit d’ici là.'}</p>`;
+  }
+  zone.innerHTML = `<div class="md-carte">
+    <div class="md-carte-tete"><h2>${etat?.abonne ? (isEn ? 'Your subscription' : 'Votre abonnement') : (isEn ? 'Subscribe' : 'S’abonner')}</h2></div>
+    ${avis}${corps}<p class="md-note ab-action-etat" aria-live="polite"></p>
   </div>`;
 }
+
+// Ouvre Stripe (paiement, portail ou annulation). L'adresse vient du serveur, jamais du navigateur.
+async function abAction(action, bouton, forfait){
+  const isEn = currentLang === 'en';
+  const note = bouton?.closest('.md-carte')?.querySelector('.ab-action-etat');
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if(!session){ location.assign('/mon-dossier'); return; }
+  if(bouton) bouton.disabled = true;
+  if(note) note.textContent = isEn ? 'Opening Stripe…' : 'Ouverture de Stripe…';
+  const r = await fetch(`/api/abonnement?action=${encodeURIComponent(action)}`, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${session.access_token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ langue: isEn ? 'en' : 'fr', forfait: forfait || 'mensuel' }),
+  }).catch(() => null);
+  const d = r ? await r.json().catch(() => ({})) : {};
+  if(d.url){ location.assign(d.url); return; }
+  if(bouton) bouton.disabled = false;
+  if(note) note.textContent = r?.status === 409
+    ? (isEn ? 'Your subscription is already active.' : 'Votre abonnement est déjà actif.')
+    : (d.erreur === 'prix mal configuré' || d.erreur === 'forfait indisponible')
+      ? (isEn ? 'Payment is being set up: nothing was charged. Try again a little later.' : 'Le paiement est en cours de configuration : rien n’a été débité. Réessayez un peu plus tard.')
+      : (isEn ? 'Stripe is not responding right now. Try again in a minute.' : 'Stripe ne répond pas pour l’instant. Réessayez dans une minute.');
+}
+window.abAction = abAction;
 
 async function mdEnvoyerLien(){
   const input = document.getElementById('mdEmail');
@@ -1706,6 +1812,7 @@ async function mdRetirerElu(type, cle){
 function renderAccountBox(){
   renderPromoCompte();
   renderMonDossier();   // page /mon-dossier : elle se redessine à la connexion et au changement de langue
+  renderAbonnement();   // page /abonnement : même chose
   if(!document.getElementById('accountBox')) return;   // vue absente de cette page
   const box = document.getElementById('accountBox');
   if(!box) return;
@@ -4108,8 +4215,8 @@ function toggleVoteCard(id, evt){
    sur une de ces adresses. */
 // /mon-dossier y est aussi : sans lui, la page se prenait pour l'accueil et portait son titre
 // anglais (arrivé avec l'anglais qui suit enfin la navigation, 24 sept. 2026).
-const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier', regles:'/regles' };
-const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier', 'regles':'regles' };
+const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier', regles:'/regles', abonnement:'/abonnement' };
+const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier', 'regles':'regles', 'abonnement':'abonnement' };
 // Titres ANGLAIS seulement : le français vient du <title> de la page (voir syncTitle).
 const PAGE_META = {
   bd:        { en:"Site updates — DossierQuébec" },
@@ -4122,6 +4229,7 @@ const PAGE_META = {
   mondossier:{ en:"My file — DossierQuébec" },
   introuvable:{ en:"Page not found (404) — DossierQuébec" },
   regles:    { en:"DossierQuébec's sourcing rules — DossierQuébec" },
+  abonnement:{ en:"The optional subscription — DossierQuébec" },
 };
 function viewFromPath(){
   // La page 404 est servie à N'IMPORTE quelle adresse inconnue : c'est sa présence qui la désigne,
