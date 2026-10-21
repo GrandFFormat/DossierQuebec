@@ -1869,6 +1869,8 @@
   .md-mot{font-weight:800; padding:2px 10px; border:2px solid var(--ink); background:var(--paper-2);}
   .md-case{display:flex; align-items:flex-start; gap:10px; font-size:15px; line-height:1.45;}
   .md-case input{width:18px; height:18px; margin-top:2px; accent-color:var(--gold);}
+  .md-themes{border:0; margin:12px 0 0; padding:0; display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:8px 18px;}
+  .md-themes legend{padding:0; margin-bottom:8px;}
   @media (max-width:640px){ .md-carte{padding:16px 14px;} }
   /* Vos projets de ville (ancienne page /mes-dossiers, fusionnée le 30 sept. 2026). La section porte
      .ab-page pour les couleurs des villes (commun/abonnes.css) ; on lui retire le fond et la police

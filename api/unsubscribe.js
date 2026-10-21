@@ -53,6 +53,33 @@ async function optOut(userId) {
   if (!res.ok) throw new Error(`optout -> ${res.status} ${await res.text()}`);
 }
 
+// Le lien « Ne plus recevoir la veille par thème » (api/_veille-theme.js, 21 oct. 2026) :
+// ?u=<user_id>&v=<signature « veille: »>. Vide les thèmes cochés ; les alertes, les suivis et
+// l'abonnement restent.
+async function couperVeille(req, res) {
+  const u = String(req.query?.u ?? '');
+  const v = String(req.query?.v ?? '');
+  if (!process.env.CRON_SECRET || !signatureValide(u, v, 'veille')) {
+    return res.status(400).send(page("<h1>Lien invalide</h1><p>Ce lien de désabonnement n'est pas valide.</p>"));
+  }
+  try {
+    await supabase(`/rest/v1/alertes_preferences?user_id=eq.${u}`, {
+      methode: 'PATCH',
+      corps: { veille_themes: [], updated_at: new Date().toISOString() },
+      entetes: { Prefer: 'return=minimal' },
+    });
+    return res.status(200).send(page(
+      '<h1>Veille arrêtée</h1>' +
+      '<p>Vous ne recevrez plus la veille par thème.</p>' +
+      '<p style="font-size:13px;color:#5C6270;">Vos alertes, vos suivis et votre abonnement restent intacts. Pour la reprendre, cochez de nouveau vos thèmes dans Mon dossier.</p>' +
+      `<p><a href="${site()}/mon-dossier">Aller à Mon dossier</a></p>`
+    ));
+  } catch (err) {
+    console.error('veille (désabonnement) :', err);
+    return res.status(500).send(page('<h1>Erreur</h1><p>Une erreur est survenue. Réessayez dans un moment.</p>'));
+  }
+}
+
 async function couperAlertes(req, res) {
   const u = String(req.query?.u ?? '');
   const s = String(req.query?.s ?? '');
@@ -80,6 +107,7 @@ async function couperAlertes(req, res) {
 export default async function handler(req, res) {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.setHeader('Cache-Control', 'no-store');
+  if (req.query?.u && req.query?.v) return couperVeille(req, res);
   if (req.query?.u) return couperAlertes(req, res);
   const userId = verifyToken(req.query.token);
   if (!userId) {
