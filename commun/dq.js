@@ -381,7 +381,7 @@ const translations = {
     'lp.nd':"<b>n/a</b>: no recorded vote for this person.",
     'lp.officiel':"This is not an official measure: the Assembly does not publish attendance, and a missed vote does not tell why.",
     'promo.sur':"Free account",
-    'mdavenir.html':"<div class=\"md-carte-tete\"><h2>Coming soon</h2><span class=\"md-etiquette\">Soon</span></div><p>All the text on the site will stay free: bills and their summaries, ministers and MNAs, votes, promises. Extra tools are coming soon, for subscribers:</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom RSS feeds</b> — the feed of all the news, and a feed per keyword, per MNA or per ministry, in your RSS reader.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — for groups and lobbies: the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — votes, attendance and bills as Excel or CSV files, ready to analyze.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site, without any ads.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Monthly recap, subscriber edition</b> — the Québec City and Montréal council recap, with the “Where the money goes” section.</div></li></ul><p><a class=\"md-lien\" href=\"/abonnement\">See the optional subscription and the status of each tool →</a></p>",
+    'mdavenir.html':"<div class=\"md-carte-tete\"><h2>Coming soon</h2><span class=\"md-etiquette\">Soon</span></div><p>All the text on the site will stay free: bills and their summaries, ministers and MNAs, votes, promises. Extra tools are coming soon, for subscribers:</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom RSS feeds</b> — the feed of all the news, and a feed per keyword, per MNA or per ministry, in your RSS reader.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — for groups and lobbies: the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — votes, attendance and bills as Excel or CSV files, ready to analyze.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site, without any ads.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Monthly recap, subscriber edition</b> — the Québec City and Montréal council recap, with the “Where the money goes” section.</div></li></ul><p><a class=\"md-lien\" href=\"/abonnement\">See the optional subscription and the status of each tool →</a></p>",
     'promo.h':"Follow the bills that matter to you",
     'promo.p':"A free account, no password: follow up to 3 bills or city projects, and find them in My file, with their current stage.",
     'promo.diss':"The bills of the 43rd legislature died when the Assembly was dissolved on August 27: following will resume with the first bills of the new legislature, convened on November 17, 2026.",
@@ -406,7 +406,7 @@ const translations = {
     'abhero.l2':"the tools are extra.",
     'abhero.sub':"All the text on the site is free and will stay free. The subscription is optional: it gives extra tools. <b>Cancel anytime, prices in Canadian dollars.</b>",
     'abgratuit.html':"<div class=\"md-carte-tete\"><h2>What stays free, for everyone</h2><span class=\"md-etiquette\">Free</span></div><p>Bills and their summaries, ministers and MNAs, votes, promises, the glossary, city decisions, and the features already on those pages. Following too: 3 follows per account, bills, members and city projects, subscriber or not.</p>",
-    'aboutils.html':"<div class=\"md-carte-tete\"><h2>What the subscription gives</h2></div><p>The planned tools, each with its status. A tool marked “Soon” does not exist yet: subscribers get it at no extra cost as soon as it is released, at the same price for as long as the subscription stays active. Tools on city decisions await the cities’ approval: until then they stay free or upcoming.</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>RSS feeds</b> — the feed of all the news, plus custom feeds per keyword, per MNA or per ministry.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — the Assembly's votes, attendance and bills as Excel or CSV files.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site without any ads, should ads ever appear on it.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Monthly recap, subscriber edition</b> — the Québec City and Montréal council recap, with the “Where the money goes” section.</div></li></ul>",
+    'aboutils.html':"<div class=\"md-carte-tete\"><h2>What the subscription gives</h2></div><p>The planned tools, each with its status. A tool marked “Soon” does not exist yet: subscribers get it at no extra cost as soon as it is released, at the same price for as long as the subscription stays active. Tools on city decisions await the cities’ approval: until then they stay free or upcoming.</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>RSS feeds</b> — the feed of all the news, plus custom feeds per keyword, per MNA or per ministry.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — the Assembly's votes, attendance and bills as Excel or CSV files.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Follow a company</b> — what it asks for or defends before the Assembly, in one place.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site without any ads, should ads ever appear on it.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Monthly recap, subscriber edition</b> — the Québec City and Montréal council recap, with the “Where the money goes” section.</div></li></ul>",
     'abforfaits.html':"<div class=\"md-carte-tete\"><h2>The plans</h2></div><ul class=\"ab-forfaits\"><li><b class=\"ab-montant\">$9.99</b><span>a month</span></li><li><b class=\"ab-montant\">$26.99</b><span>every 3 months</span></li><li><b class=\"ab-montant\">$99</b><span>a year — two months free</span></li></ul><p class=\"md-note\">Prices in Canadian dollars. Card payment on Stripe's secure page: DossierQuébec never sees your card. Cancel anytime, from this page or My file, in two clicks: the subscription stays active until the end of the paid period, then stops with no further charge.</p>",
     'fil.regles':"The rules",
     'sujet.regles':"DossierQuébec's sourcing rules",
@@ -1464,6 +1464,7 @@ async function renderMonDossier(){
   mdExport(isEn);
   mdFlux(isEn);
   mdAlertes(isEn);
+  mdVeille(isEn);
   mdConsultations(isEn);
 }
 
@@ -1903,6 +1904,75 @@ window.mdAjouterMot = mdAjouterMot;
 window.mdRetirerMot = mdRetirerMot;
 window.mdAlertesActif = mdAlertesActif;
 window.mdEssaiAlertes = mdEssaiAlertes;
+
+// LA VEILLE PAR THÈME (21 oct. 2026), sixième outil de l'abonnement. Chaque lundi, un courriel avec ce
+// qui a bougé à l'Assemblée dans les thèmes cochés (api/_veille-theme.js, envoyé par
+// api/infolettre-envoi.js). Les choix vont dans alertes_preferences.veille_themes ; la base
+// (scripts/supabase-veille.sql) refuse un thème à qui n'est pas abonné. LA MÊME LISTE DE CODES vit
+// dans api/_veille-theme.js (THEMES, avec la table ministères → mots) et dans le SQL.
+const VEILLE_THEMES = [
+  { code: 'sante', fr: 'Santé', en: 'Health' },
+  { code: 'education', fr: 'Éducation', en: 'Education' },
+  { code: 'logement', fr: 'Logement et habitation', en: 'Housing' },
+  { code: 'environnement', fr: 'Environnement et énergie', en: 'Environment and energy' },
+  { code: 'economie', fr: 'Économie et finances publiques', en: 'Economy and public finances' },
+  { code: 'travail', fr: 'Travail', en: 'Labour' },
+  { code: 'justice', fr: 'Justice et sécurité publique', en: 'Justice and public safety' },
+  { code: 'immigration', fr: 'Immigration et langue française', en: 'Immigration and French language' },
+  { code: 'transports', fr: 'Transports', en: 'Transportation' },
+  { code: 'agriculture', fr: 'Agriculture et territoire', en: 'Agriculture and land' },
+  { code: 'culture', fr: 'Culture et communications', en: 'Culture and communications' },
+  { code: 'municipal', fr: 'Affaires municipales et régions', en: 'Municipal affairs and regions' },
+  { code: 'famille', fr: 'Famille et services sociaux', en: 'Family and social services' },
+  { code: 'gouvernance', fr: 'Gouvernance et institutions', en: 'Governance and institutions' },
+];
+async function mdVeille(isEn){
+  const zone = document.getElementById('mdVeille');
+  if(!zone) return;
+  let abonne = false;
+  if(currentUser){
+    try{
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      const r = await fetch('/api/abonnement', { headers: session ? { Authorization: `Bearer ${session.access_token}` } : {} });
+      abonne = r.ok && (await r.json()).abonne === true;
+    }catch(e){}
+  }
+  const tete = `<div class="md-carte-tete"><h2>${isEn ? 'Topic watch' : 'Veille par thème'}</h2><span class="md-etiquette">${isEn ? 'Subscribers' : 'Abonné·e·s'}</span></div>
+    <p>${isEn ? 'Every Monday, one email with everything that moved at the National Assembly in the topics you pick: bills introduced or moving to a new stage, recorded votes on those bills, committee consultations and the briefs filed. Nothing is sent in a week with no news.' : 'Chaque lundi, un courriel avec tout ce qui a bougé à l’Assemblée nationale dans les thèmes choisis : projets de loi présentés ou qui changent d’étape, votes nominaux sur ces projets, consultations en commission et mémoires déposés. Aucun courriel une semaine sans nouveauté.'}</p>`;
+  if(!abonne){
+    zone.innerHTML = `<div class="md-carte">${tete}<p class="md-note">${isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.'} <a class="md-lien" href="/abonnement">${isEn ? 'See the subscription' : 'Voir l’abonnement'}</a></p></div>`;
+    return;
+  }
+  const { data, error } = await supabaseClient.from('alertes_preferences').select('veille_themes').maybeSingle();
+  if(error){
+    zone.innerHTML = `<div class="md-carte">${tete}<p class="md-note">${isEn ? 'Topic watch is not available yet. Come back soon.' : 'La veille par thème n’est pas encore ouverte. Revenez bientôt.'}</p></div>`;
+    return;
+  }
+  const choisis = new Set(data?.veille_themes ?? []);
+  zone.innerHTML = `<div class="md-carte">${tete}
+    <fieldset class="md-themes"><legend class="md-sous-titre">${isEn ? 'Your topics' : 'Vos thèmes'}</legend>
+      ${VEILLE_THEMES.map((t) => `<label class="md-case"><input type="checkbox" value="${t.code}" ${choisis.has(t.code) ? 'checked' : ''} onchange="mdVeilleChoix()"> <span>${isEn ? t.en : t.fr}</span></label>`).join('')}
+    </fieldset>
+    <p class="md-note" id="mdVeilleNote" aria-live="polite">${choisis.size
+      ? (isEn ? `${choisis.size} topic${choisis.size > 1 ? 's' : ''} chosen. Next email: Monday morning, if there is news. Emails are in French.` : `${choisis.size} thème${choisis.size > 1 ? 's' : ''} choisi${choisis.size > 1 ? 's' : ''}. Prochain courriel : lundi matin, s’il y a du neuf.`)
+      : (isEn ? 'No topic chosen: no email.' : 'Aucun thème choisi : aucun courriel.')}</p>
+    <p class="md-note">${isEn ? 'A bill is placed in a topic by the ministry that introduces it, or else by the words of its title, without AI. A bill with no clear topic is placed nowhere. Votes, consultations and briefs follow their bill.' : 'Un projet de loi entre dans un thème par le ministère qui le présente, sinon par les mots de son titre, sans IA. Un projet sans thème clair n’est classé nulle part. Les votes, les consultations et les mémoires suivent leur projet de loi.'}</p>
+  </div>`;
+}
+async function mdVeilleChoix(){
+  const isEn = currentLang === 'en';
+  const note = document.getElementById('mdVeilleNote');
+  const themes = [...document.querySelectorAll('#mdVeille input[type="checkbox"]:checked')].map((c) => c.value);
+  const { error } = await supabaseClient.from('alertes_preferences').upsert({ user_id: currentUser.id, veille_themes: themes, updated_at: new Date().toISOString() }, { onConflict: 'user_id' });
+  if(error){
+    if(note) note.textContent = /abonn/.test(error.message) ? (isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.') : (isEn ? 'The change was not saved. Try again.' : 'Le changement n’a pas été enregistré. Réessayez.');
+    return;
+  }
+  if(note) note.textContent = themes.length
+    ? (isEn ? `Saved: ${themes.length} topic${themes.length > 1 ? 's' : ''}. Next email: Monday morning, if there is news.` : `Enregistré : ${themes.length} thème${themes.length > 1 ? 's' : ''}. Prochain courriel : lundi matin, s’il y a du neuf.`)
+    : (isEn ? 'Saved: no topic, no email.' : 'Enregistré : aucun thème, aucun courriel.');
+}
+window.mdVeilleChoix = mdVeilleChoix;
 
 function mdCompte(isEn, quota){
   const zone = document.getElementById('mdCompte');

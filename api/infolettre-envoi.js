@@ -1,6 +1,6 @@
 // La tâche planifiée de chaque matin (Vercel Cron, vercel.json) : les alertes sur mesure des
-// abonné·e·s (api/_alertes-assemblee.js), PUIS l'infolettre gratuite (api/_infolettre.js). Une seule
-// fonction pour les deux : Vercel Hobby n'accepte que 2 tâches planifiées (l'autre est
+// abonné·e·s (api/_alertes-assemblee.js), puis la veille par thème du lundi (api/_veille-theme.js),
+// PUIS l'infolettre gratuite (api/_infolettre.js). Une seule fonction pour les trois : Vercel Hobby n'accepte que 2 tâches planifiées (l'autre est
 // api/weekly-digest.js) et 12 fonctions.
 //
 //   GET  /api/infolettre-envoi                  Authorization: Bearer <CRON_SECRET>   le passage du matin
@@ -11,15 +11,25 @@
 //   POST /api/infolettre-envoi?essai=moi        Authorization: Bearer <jeton de session Supabase>
 //                                               le même essai, demandé par l'abonné·e depuis Mon
 //                                               dossier ; 3 par 24 heures
+//   GET  /api/infolettre-envoi?apercu=1&veille=1 (même en-tête) la veille par thème qui partirait,
+//                                               calculée comme un lundi, sans rien envoyer ni mémoriser
+//   GET  /api/infolettre-envoi?essai=<courriel>&veille=1 (même en-tête) un courriel d'essai de la
+//                                               veille par thème à cet·te abonné·e
+//
+// La veille par thème passe ici plutôt que dans api/weekly-digest.js (le cron du lundi) : celui-ci
+// est le digest des « demandes d'explications », qui ne part qu'une semaine sur deux et ne connaît pas
+// le quota du jour ; ici, alertes, veille et infolettre se partagent le même PAR_JOUR, et une veille
+// reportée (quota atteint, Resend en panne) repart un des matins suivants de la même semaine.
 //
 // Resend gratuit, c'est 100 courriels par jour pour tout : les alertes passent d'abord, l'infolettre
-// prend ce qui reste (PAR_JOUR). Une panne de l'une n'empêche pas l'autre.
+// prend ce qui reste (PAR_JOUR), après la veille par thème. Une panne de l'une n'empêche pas l'autre.
 //
 // Variables : SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_API_KEY, DIGEST_FROM, CRON_SECRET,
 // PUBLIC_SITE_URL (facultative).
 
 import { envoyerNumerosEnAttente, PAR_JOUR } from './_infolettre.js';
 import { envoyerAlertes, essaiPourSoi } from './_alertes-assemblee.js';
+import { envoyerVeille } from './_veille-theme.js';
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
@@ -46,6 +56,16 @@ export default async function handler(req, res) {
   const apercu = req.query?.apercu === '1';
   const essai = String(req.query?.essai ?? '').trim().toLowerCase() || null;
   const rapport = { ok: true };
+  // La veille seule (?veille=1) : aperçu ou essai, sans les alertes ni l'infolettre.
+  if (req.query?.veille === '1' && (apercu || essai)) {
+    try {
+      rapport.veille = await envoyerVeille({ apercu, essai });
+    } catch (erreur) {
+      console.error('veille (aperçu/essai) :', erreur);
+      return res.status(500).json({ ok: false, erreur: erreur.message });
+    }
+    return res.status(200).json(rapport);
+  }
   try {
     rapport.alertes = await envoyerAlertes({ apercu, essai, plafond: PAR_JOUR });
   } catch (erreur) {
@@ -55,7 +75,14 @@ export default async function handler(req, res) {
   }
   if (apercu || essai) return res.status(200).json(rapport);
   try {
-    rapport.infolettre = await envoyerNumerosEnAttente(Math.max(0, PAR_JOUR - (rapport.alertes.envoyes ?? 0)));
+    rapport.veille = await envoyerVeille({ plafond: Math.max(0, PAR_JOUR - (rapport.alertes.envoyes ?? 0)) });
+  } catch (erreur) {
+    console.error('veille (cron) :', erreur);
+    rapport.ok = false;
+    rapport.veille = { erreur: erreur.message, envoyes: 0 };
+  }
+  try {
+    rapport.infolettre = await envoyerNumerosEnAttente(Math.max(0, PAR_JOUR - (rapport.alertes.envoyes ?? 0) - (rapport.veille.envoyes ?? 0)));
   } catch (erreur) {
     console.error('infolettre (cron) :', erreur);
     return res.status(500).json({ ...rapport, ok: false, erreur: erreur.message });
