@@ -1093,9 +1093,9 @@ function goToFederal(evt){
     <div class="md-bloc"><div class="md-carte" data-i18n="abforfaits.html">
       <div class="md-carte-tete"><h2>Les forfaits</h2></div>
       <ul class="ab-forfaits">
-        <li><b class="ab-montant">9,99 $</b><span>par mois</span></li>
-        <li><b class="ab-montant">26,99 $</b><span>tous les 3 mois</span></li>
-        <li><b class="ab-montant">99 $</b><span>par an — deux mois gratuits</span></li>
+        <li class="ab-forfait" data-forfait="mensuel" role="button" tabindex="0" onclick="abChoisirForfait(this.dataset.forfait)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abChoisirForfait(this.dataset.forfait)}"><b class="ab-montant">9,99 $</b><span>par mois</span></li>
+        <li class="ab-forfait" data-forfait="trimestriel" role="button" tabindex="0" onclick="abChoisirForfait(this.dataset.forfait)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abChoisirForfait(this.dataset.forfait)}"><b class="ab-montant">26,99 $</b><span>tous les 3 mois</span></li>
+        <li class="ab-forfait" data-forfait="annuel" role="button" tabindex="0" onclick="abChoisirForfait(this.dataset.forfait)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abChoisirForfait(this.dataset.forfait)}"><b class="ab-montant">99 $</b><span>par an — deux mois gratuits</span></li>
       </ul>
       <p class="md-note">Prix en dollars canadiens. Paiement par carte sur la page sécurisée de Stripe : DossierQuébec ne voit jamais votre carte. Résiliable en tout temps, depuis cette page ou Mon dossier, en deux clics : l’abonnement reste actif jusqu’à la fin de la période payée, puis s’arrête sans autres frais.</p>
     </div></div>

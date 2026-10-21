@@ -2241,3 +2241,8 @@
 .md-flux-plus{font-weight:800; min-width:2em;}
 
 /* Redéploiement du 21 oct. 2026 : les prix Stripe des trois forfaits (variables Vercel). */
+
+/* Les cases des forfaits, cliquables : jaunes au survol et une fois choisies (abChoisirForfait). */
+.ab-forfait{cursor:pointer; transition:background .12s;}
+.ab-forfait:hover, .ab-forfait:focus-visible, .ab-forfait-choisi{background:#FFD24D; color:#131313; outline:none;}
+.ab-forfait-choisi{box-shadow:4px 4px 0 #131313;}

@@ -407,7 +407,7 @@ const translations = {
     'abhero.sub':"All the text on the site is free and will stay free. The subscription is optional: it gives extra tools. <b>Cancel anytime, prices in Canadian dollars.</b>",
     'abgratuit.html':"<div class=\"md-carte-tete\"><h2>What stays free, for everyone</h2><span class=\"md-etiquette\">Free</span></div><p>Bills and their summaries, ministers and MNAs, votes, promises, the glossary, city decisions, and the features already on those pages. Following too: 3 follows per account, bills, members and city projects, subscriber or not.</p>",
     'aboutils.html':"<div class=\"md-carte-tete\"><h2>What the subscription gives</h2></div><p>The planned tools, each with its status. A tool marked “Soon” does not exist yet: subscribers get it at no extra cost as soon as it is released, at the same price for as long as the subscription stays active. Tools on city decisions await the cities’ approval: until then they stay free or upcoming.</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>RSS feeds</b> — the feed of all the news, plus custom feeds per keyword, per MNA or per ministry.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — the Assembly's votes, attendance and bills as Excel or CSV files.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Follow a company or an organization</b> — its briefs filed in committee at the National Assembly, in one place, and an alert for each new brief.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site without any ads, should ads ever appear on it.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Monthly recap, subscriber edition</b> — the Québec City and Montréal council recap, with the “Where the money goes” section.</div></li></ul>",
-    'abforfaits.html':"<div class=\"md-carte-tete\"><h2>The plans</h2></div><ul class=\"ab-forfaits\"><li><b class=\"ab-montant\">$9.99</b><span>a month</span></li><li><b class=\"ab-montant\">$26.99</b><span>every 3 months</span></li><li><b class=\"ab-montant\">$99</b><span>a year — two months free</span></li></ul><p class=\"md-note\">Prices in Canadian dollars. Card payment on Stripe's secure page: DossierQuébec never sees your card. Cancel anytime, from this page or My file, in two clicks: the subscription stays active until the end of the paid period, then stops with no further charge.</p>",
+    'abforfaits.html':"<div class=\"md-carte-tete\"><h2>The plans</h2></div><ul class=\"ab-forfaits\"><li class=\"ab-forfait\" data-forfait=\"mensuel\" role=\"button\" tabindex=\"0\" onclick=\"abChoisirForfait(this.dataset.forfait)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();abChoisirForfait(this.dataset.forfait)}\"><b class=\"ab-montant\">$9.99</b><span>a month</span></li><li class=\"ab-forfait\" data-forfait=\"trimestriel\" role=\"button\" tabindex=\"0\" onclick=\"abChoisirForfait(this.dataset.forfait)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();abChoisirForfait(this.dataset.forfait)}\"><b class=\"ab-montant\">$26.99</b><span>every 3 months</span></li><li class=\"ab-forfait\" data-forfait=\"annuel\" role=\"button\" tabindex=\"0\" onclick=\"abChoisirForfait(this.dataset.forfait)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();abChoisirForfait(this.dataset.forfait)}\"><b class=\"ab-montant\">$99</b><span>a year — two months free</span></li></ul><p class=\"md-note\">Prices in Canadian dollars. Card payment on Stripe's secure page: DossierQuébec never sees your card. Cancel anytime, from this page or My file, in two clicks: the subscription stays active until the end of the paid period, then stops with no further charge.</p>",
     'fil.regles':"The rules",
     'sujet.regles':"DossierQuébec's sourcing rules",
     'regleshero.l1':"The rules,",
@@ -2170,7 +2170,10 @@ async function renderAbonnement(){
     corps = `${etat.mode === 'test' ? `<p class="md-note"><b>${isEn ? 'Test mode' : 'Mode essai'}</b> : ${isEn ? 'no real card is charged. Test card 4242 4242 4242 4242, any future date, any code.' : 'aucune vraie carte n’est débitée. Carte d’essai 4242 4242 4242 4242, une date future, n’importe quel code.'}</p>` : ''}
       <p class="md-ligne">${boutons}</p>`;
   }else if(etat.ouvert && !etat.connecte){
-    corps = `<p>${isEn ? 'The subscription is tied to your account. Sign in from <a class="md-lien" href="/mon-dossier">My file</a> (a sign-in link arrives by email, no password), then come back here.' : 'L’abonnement se rattache à votre compte. Connectez-vous depuis <a class="md-lien" href="/mon-dossier">Mon dossier</a> (un lien de connexion arrive par courriel, sans mot de passe), puis revenez ici.'}</p>`;
+    // La connexion sur place (Martin, 21 oct. 2026) : on choisit un forfait, on entre son courriel ici.
+    corps = `<p>${isEn ? 'Pick a plan above, then enter your email: a sign-in link arrives, no password. The subscription is tied to your account.' : 'Choisissez un forfait plus haut, puis entrez votre courriel : un lien de connexion arrive, sans mot de passe. L’abonnement se rattache à votre compte.'}</p>
+      <div class="md-ligne"><input type="email" id="abEmail" placeholder="${isEn ? 'Your email' : 'Votre courriel'}" aria-label="${isEn ? 'Your email' : 'Votre courriel'}"> <button type="button" class="account-btn" id="abLienBtn" onclick="abEnvoyerLien()">${isEn ? 'Get the link' : 'Recevoir le lien'}</button></div>
+      <p class="md-note">${isEn ? 'Open the link in this same browser, then come back to this page.' : 'Ouvrez le lien dans ce même navigateur, puis revenez sur cette page.'}</p>`;
   }else{
     corps = `<p>${isEn ? 'Payment is not open yet. Everything on the site stays free in the meantime.' : 'Le paiement n’est pas encore ouvert. Tout le site reste gratuit d’ici là.'}</p>`;
   }
@@ -2178,12 +2181,54 @@ async function renderAbonnement(){
     <div class="md-carte-tete"><h2>${etat?.abonne ? (isEn ? 'Your subscription' : 'Votre abonnement') : (isEn ? 'Subscribe' : 'S’abonner')}</h2></div>
     ${avis}${corps}<p class="md-note ab-action-etat" aria-live="polite"></p>
   </div>`;
+  _abEtat = etat;
+  // Un forfait choisi avant la connexion reste marqué au retour du lien.
+  let garde = null; try{ garde = localStorage.getItem('dossierquebec:forfait'); }catch(e){}
+  if(garde) abMarquerForfait(garde);
 }
+
+// LES CASES DES FORFAITS, CLIQUABLES (Martin, 21 oct. 2026 : « je pensais que ces cases allaient
+// devenir jaunes au survol pour la sélection »). Abonné : rien à choisir. Connecté : Stripe s'ouvre
+// sur ce forfait. Pas connecté : le forfait est retenu et la case de connexion prend le relais.
+let _abEtat = null;
+function abMarquerForfait(f){
+  document.querySelectorAll('.ab-forfait').forEach((li) => li.classList.toggle('ab-forfait-choisi', li.dataset.forfait === f));
+}
+function abChoisirForfait(f){
+  const isEn = currentLang === 'en';
+  abMarquerForfait(f);
+  const zone = document.getElementById('abEtat');
+  const note = zone?.querySelector('.ab-action-etat');
+  if(_abEtat?.abonne){ zone?.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+  if(_abEtat?.peutPayer && _abEtat.forfaits?.[f]){
+    abAction('paiement', document.querySelector(`.ab-forfait[data-forfait="${f}"]`), f);
+    return;
+  }
+  try{ localStorage.setItem('dossierquebec:forfait', f); }catch(e){}
+  zone?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  document.getElementById('abEmail')?.focus();
+  if(note && !_abEtat?.ouvert) note.textContent = isEn ? 'Payment is not open yet.' : 'Le paiement n’est pas encore ouvert.';
+}
+async function abEnvoyerLien(){
+  const isEn = currentLang === 'en';
+  const champ = document.getElementById('abEmail'), btn = document.getElementById('abLienBtn');
+  const note = document.querySelector('#abEtat .ab-action-etat');
+  const email = (champ?.value || '').trim();
+  if(!email || !champ.checkValidity()){ champ?.focus(); return; }
+  btn.disabled = true;
+  const erreur = await signInWithMagicLink(email);
+  btn.disabled = false;
+  if(note) note.textContent = erreur
+    ? (isEn ? 'The link could not be sent. Try again in a moment.' : 'Le lien n’a pas pu partir. Réessayez dans un moment.')
+    : (isEn ? '✓ Check your email: the sign-in link is on its way.' : '✓ Vérifiez vos courriels : le lien de connexion est en route.');
+}
+window.abChoisirForfait = abChoisirForfait;
+window.abEnvoyerLien = abEnvoyerLien;
 
 // Ouvre Stripe (paiement, portail ou annulation). L'adresse vient du serveur, jamais du navigateur.
 async function abAction(action, bouton, forfait){
   const isEn = currentLang === 'en';
-  const note = bouton?.closest('.md-carte')?.querySelector('.ab-action-etat');
+  const note = bouton?.closest('.md-carte')?.querySelector('.ab-action-etat') || document.querySelector('#abEtat .ab-action-etat');
   const { data: { session } } = await supabaseClient.auth.getSession();
   if(!session){ location.assign('/mon-dossier'); return; }
   if(bouton) bouton.disabled = true;
@@ -2194,7 +2239,7 @@ async function abAction(action, bouton, forfait){
     body: JSON.stringify({ langue: isEn ? 'en' : 'fr', forfait: forfait || 'mensuel' }),
   }).catch(() => null);
   const d = r ? await r.json().catch(() => ({})) : {};
-  if(d.url){ location.assign(d.url); return; }
+  if(d.url){ try{ localStorage.removeItem('dossierquebec:forfait'); }catch(e){} location.assign(d.url); return; }
   if(bouton) bouton.disabled = false;
   if(note) note.textContent = r?.status === 409
     ? (isEn ? 'Your subscription is already active.' : 'Votre abonnement est déjà actif.')
