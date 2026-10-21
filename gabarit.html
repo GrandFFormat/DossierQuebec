@@ -1143,17 +1143,8 @@ function goToFederal(evt){
 
     <div id="mdCompte" class="md-bloc"></div>
     <!-- Offrir un abonnement, sous « Votre compte » (Martin, 21 oct. 2026) : la même boîte que sur /abonnement. -->
-    <div class="md-bloc" id="offrir-mon-dossier" hidden><div class="md-carte">
-      <div data-i18n="abcadeau.html">
-        <div class="md-carte-tete"><h2>Offrir un abonnement</h2><span class="md-etiquette">Cadeau</span></div>
-        <p>Choisissez une durée et payez une seule fois, sans renouvellement. Le code arrive dans vos courriels et dans Mon dossier : donnez-le à qui vous voulez.</p>
-        <ul class="ab-forfaits">
-          <li class="ab-forfait ab-cadeau" data-duree="mensuel" role="button" tabindex="0" onclick="abOffrir(this.dataset.duree, this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abOffrir(this.dataset.duree, this)}"><b class="ab-montant">9,99 $</b><span>1 mois</span></li>
-          <li class="ab-forfait ab-cadeau" data-duree="trimestriel" role="button" tabindex="0" onclick="abOffrir(this.dataset.duree, this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abOffrir(this.dataset.duree, this)}"><b class="ab-montant">26,99 $</b><span>3 mois</span></li>
-          <li class="ab-forfait ab-cadeau" data-duree="annuel" role="button" tabindex="0" onclick="abOffrir(this.dataset.duree, this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abOffrir(this.dataset.duree, this)}"><b class="ab-montant">99 $</b><span>1 an</span></li>
-        </ul>
-        <p class="md-note">Il faut être connecté pour offrir. Paiement par carte sur la page sécurisée de Stripe, sans taxes ajoutées.</p>
-      </div>
+    <div class="md-bloc" id="offrir-mon-dossier" hidden><div class="md-cadeau-discret">
+      <div data-i18n="mdcadeau.html"><span class="md-cadeau-titre">🎁 Offrir un abonnement</span> <button type="button" class="md-cadeau-puce ab-cadeau" data-duree="mensuel" onclick="abOffrir(this.dataset.duree, this)">1 mois · 9,99 $</button> <button type="button" class="md-cadeau-puce ab-cadeau" data-duree="trimestriel" onclick="abOffrir(this.dataset.duree, this)">3 mois · 26,99 $</button> <button type="button" class="md-cadeau-puce ab-cadeau" data-duree="annuel" onclick="abOffrir(this.dataset.duree, this)">1 an · 99 $</button> <span class="md-note">Paiement unique ; le code arrive par courriel.</span></div>
       <p class="md-note ab-cadeau-etat" aria-live="polite"></p>
     </div></div>
     <!-- Ce qui vous préoccupe (Martin, 18 oct. 2026) : rempli par mdPreoccupations (commun/dq.js), juste sous « Votre compte ». -->
