@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-19T15:46:26.939Z",
+ "generatedAt": "2026-10-21T13:59:59.224Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,120 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-08-20",
+  "depuis": "2026-08-22",
   "plafond": 120
  },
- "nombre": 1704,
- "genereCetteFois": 11,
+ "nombre": 1708,
+ "genereCetteFois": 4,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.5256,
-  "jetonsEntree": 76480,
-  "jetonsSortie": 5730
+  "montant": 0.1568,
+  "jetonsEntree": 22852,
+  "jetonsSortie": 1700
  },
  "resumes": [
+  {
+   "id": "LS2026-267.pdf",
+   "numero": "LS2026-267",
+   "date": "2026-10-19",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement de subventions totalisant 163 030 $ à trois (3) organismes conformément au Cadre de financement des corporations de loisir",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-267.pdf",
+   "puces": [
+    "La Ville verse 163 030 $ à trois organismes de loisir de l'arrondissement de La Haute-Saint-Charles.",
+    "Les montants : Sports-Loisirs L'Ormière 60 489 $, Loisirs-Action Val-Bélair 52 527 $, Loisirs des Hauts-Sentiers L.D.H.S. 50 014 $.",
+    "L'argent provient du Cadre de financement des corporations de loisir, qui dispose de 750 000 $ répartis entre 11 corporations dans la ville.",
+    "Les sommes ont été calculées selon le nombre d'employés à temps plein, la programmation annuelle, les événements spéciaux et les partenariats.",
+    "Chaque organisme devra remettre un bilan de ses actions à la fin de la période couverte par la subvention.",
+    "Les sommes versées étaient de 119 555,36 $ en 2025 et de 68 001,46 $ en 2024 pour ces mêmes trois organismes.",
+    "Les fonds proviennent du budget de fonctionnement de l'arrondissement de La Haute-Saint-Charles."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "163 030 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T13:59:58.642Z",
+   "jetons": {
+    "entree": 3769,
+    "sortie": 470
+   }
+  },
+  {
+   "id": "GT2026-330.pdf",
+   "numero": "GT2026-330",
+   "date": "2026-10-19",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 86, boulevard des Étudiants, lot 5 886 454, quartier de Loretteville, district électoral de Loretteville-Les Châtels, Arrondissement de La Haute-Saint-Charles",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-330.pdf",
+   "puces": [
+    "L'arrondissement de La Haute-Saint-Charles accorde une dérogation mineure au 86, boulevard des Étudiants, dans le quartier de Loretteville.",
+    "La dérogation permet l'agrandissement de l'aréna pour y aménager un centre de pickleball.",
+    "La marge arrière de l'agrandissement pourra être de 6,6 mètres au lieu des 12 mètres exigés.",
+    "L'aire verte du terrain pourra descendre à 13,5 % au lieu du minimum de 20 % exigé.",
+    "Selon l'analyse, l'aire verte passe de 15 % (1 750 m²) à 14 % (1 620 m²) après le réaménagement du stationnement et l'ajout de cases.",
+    "Le comité consultatif d'urbanisme s'est dit favorable à la demande le 30 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T13:59:57.442Z",
+   "jetons": {
+    "entree": 5773,
+    "sortie": 381
+   }
+  },
+  {
+   "id": "GT2026-329.pdf",
+   "numero": "GT2026-329",
+   "date": "2026-10-19",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 1372, chemin de Bélair, lot 6 688 191, quartier de Val-Bélair, district électoral de Val-Bélair, Arrondissement de La Haute-Saint-Charles",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-329.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure pour le 1372, chemin de Bélair, dans le quartier de Val-Bélair (arrondissement de La Haute-Saint-Charles).",
+    "La dérogation permet d'aménager l'allée d'accès au stationnement en façade du bâtiment principal, ce que le règlement d'urbanisme de l'arrondissement interdit normalement.",
+    "La demande vise la construction d'une habitation sur un terrain traversé par un cours d'eau intermittent.",
+    "Selon l'analyse au dossier, les normes de protection du cours d'eau rendent impossible de placer l'allée d'accès ailleurs qu'en façade.",
+    "Le comité consultatif d'urbanisme s'est dit favorable à la demande le 30 septembre 2026, à l'unanimité."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T13:59:57.135Z",
+   "jetons": {
+    "entree": 5013,
+    "sortie": 368
+   }
+  },
+  {
+   "id": "TM2026-251.pdf",
+   "numero": "TM2026-251",
+   "date": "2026-10-19",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement de La Haute-Saint-Charles sur le stationnement dans un garage, un parc de stationnement et sur un terrain géré par la Ville relativement à une case de stationnement pour laquelle un tarif est imposé par un parcomètre, R.C.A.6V.Q. 373",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-251.pdf",
+   "puces": [
+    "La Ville modifie un règlement pour permettre aux véhicules avec une vignette de stationnement pour personnes handicapées de la SAAQ de se stationner gratuitement 3 heures dans les cases tarifées par parcomètre des parcs de stationnement municipaux.",
+    "La gratuité ne s'applique pas quand le stationnement est interdit pour l'entretien de la rue, des travaux, une signalisation temporaire ou sur l'ordre d'un agent de la paix.",
+    "Cette gratuité de 3 heures existe déjà depuis plus de 20 ans dans les rues où le stationnement est tarifé par parcomètre.",
+    "Dans l'arrondissement de La Haute-Saint-Charles, aucun parc de stationnement n'est visé : le changement est fait pour uniformiser les règlements.",
+    "Huit règlements municipaux sur le stationnement seront modifiés de la même façon.",
+    "La mesure découle du Plan d'action en accessibilité universelle 2025-2030 adopté par la Ville.",
+    "Le règlement met aussi à jour l'annexe listant les types de réglementation et de contrôle du stationnement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-21T13:59:59.223Z",
+   "jetons": {
+    "entree": 8297,
+    "sortie": 481
+   }
+  },
   {
    "id": "PA2026-142.pdf",
    "numero": "PA2026-142",
