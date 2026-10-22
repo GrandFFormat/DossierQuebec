@@ -2272,3 +2272,6 @@
 .md-cadeau-discret > div[data-i18n]{grid-template-columns:minmax(220px, 360px) auto 1fr;}
 
 .md-cadeau-qte{width:64px; text-align:center;}
+
+/* Pas connecté : « Identifiez-vous d'abord » dans chaque case de forfait. */
+.ab-sans-compte .ab-forfait::after{content:attr(data-avis); display:block; margin-top:6px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--muted, #5B6570);}
