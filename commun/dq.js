@@ -1195,15 +1195,26 @@ function resumeElu(nom, isEn){
   const ministre = ministers.find((m) => m.name === nom);
   const role = ministre ? (isEn ? (ministre.roleEn || ministre.role) : ministre.role) : (isEn ? 'MNA' : 'Député·e');
   const att = dep ? attendanceForAssnatId(dep.assnatId) : null;
-  const pl = billsSponsoredBy(nom).length;
+  const parraines = billsSponsoredBy(nom);
+  const pl = parraines.length;
+  const lois = parraines.filter((b) => b.status === 'sanctionne').length;
+  // Ancienneté (Martin, 22 oct. 2026) : moins d'un an, ou au moins N ans, comptée depuis le premier vote
+  // nominal enregistré (le registre commence à la 43e législature, d'où « au moins »).
+  const depuis = att?.depuis ? new Date(att.depuis + 'T12:00:00') : null;
+  const ans = depuis ? Math.floor((Date.now() - depuis) / (365.25 * 864e5)) : null;
+  const anciennete = ans !== null
+    ? (ans < 1 ? (isEn ? 'MNA for less than a year' : 'Député·e depuis moins d’un an')
+      : (isEn ? `MNA for at least ${ans} year${ans > 1 ? 's' : ''}` : `Député·e depuis au moins ${ans} an${ans > 1 ? 's' : ''}`))
+    : (dep ? (isEn ? 'Newly elected on October 5, 2026' : 'Élu·e le 5 octobre 2026') : '');
   const morceaux = [
-    `${nom}, ${role}`,
+    ministre ? `${nom}, ${role}` : `${nom},`,
     dep ? (isEn ? `MNA for ${dep.riding}` : `député·e de ${dep.riding}`) : '',
     (ministre?.party || dep?.party) ? `(${ministre?.party || dep.party})` : '',
   ].filter(Boolean).join(' ');
   const faits = [
     att ? (isEn ? `Recorded-vote attendance: ${att.rate}%` : `Présence aux votes : ${att.rate} %`) : '',
-    isEn ? `Bills sponsored: ${pl}` : `Projets de loi parrainés : ${pl}`,
+    isEn ? `Bills sponsored: ${pl}${lois ? `, ${lois} became law` : ''}` : `Projets de loi parrainés : ${pl}${lois ? `, dont ${lois} devenus lois` : ''}`,
+    anciennete,
   ].filter(Boolean).join(' · ');
   return `${morceaux}. ${faits}.`;
 }

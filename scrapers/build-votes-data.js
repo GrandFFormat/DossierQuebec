@@ -85,7 +85,7 @@ function calculerPresences(out) {
     const depuis = siens[0].date;
     const eligibles = parDate.filter((v) => v.date >= depuis);
     const participes = eligibles.filter((v) => apparus.has(v.id)).length;
-    presences[id] = { participated: participes, total: eligibles.length, rate: Math.round((participes / eligibles.length) * 100) };
+    presences[id] = { participated: participes, total: eligibles.length, rate: Math.round((participes / eligibles.length) * 100), depuis };   // depuis : date du premier vote nominal (partage des fiches, 22 oct. 2026)
   }
   return presences;
 }
