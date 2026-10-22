@@ -9,7 +9,7 @@
 // Signature Web (Request → Response) plutôt que (req, res) : il faut le corps BRUT pour vérifier la
 // signature, avant tout décodage JSON. Une erreur répond 500 : Stripe réessaie pendant trois jours.
 
-import { livrerCadeau } from './_cadeau.js';
+import { annulerCadeauRembourse, livrerCadeau } from './_cadeau.js';
 import { signatureStripeValide, stripeConfigure, synchroniser } from './_stripe.js';
 
 const TYPES = new Set([
@@ -50,6 +50,18 @@ export async function POST(request) {
       return Response.json({ recu: true, resultat });
     } catch (e) {
       console.error(`Stripe cadeau ${objet.id} :`, e.message);
+      return new Response('erreur', { status: 500 });
+    }
+  }
+
+  // Un cadeau remboursé (22 oct. 2026) : ses codes disparaissent, le temps déjà donné est repris.
+  if (evenement.type === 'charge.refunded') {
+    try {
+      const resultat = await annulerCadeauRembourse(objet);
+      console.log(`Stripe remboursement ${objet.id} → ${resultat}`);
+      return Response.json({ recu: true, resultat });
+    } catch (e) {
+      console.error(`Stripe remboursement ${objet.id} :`, e.message);
       return new Response('erreur', { status: 500 });
     }
   }

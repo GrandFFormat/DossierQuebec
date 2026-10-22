@@ -15,7 +15,7 @@
 import crypto from 'node:crypto';
 import { supabase, site } from './_alertes.js';
 import { echapper } from './_infolettre.js';
-import { FORFAITS, modeStripe } from './_stripe.js';
+import { FORFAITS, modeStripe, stripe } from './_stripe.js';
 
 // Les durées qu'on peut offrir. Les MONTANTS viennent de FORFAITS : un cadeau coûte exactement ce
 // que coûte l'abonnement qu'il remplace. Le navigateur n'envoie que le nom de la durée.
@@ -178,4 +178,42 @@ export async function echangerCode(userId, brut) {
     methode: 'POST',
     corps: { p_user: userId, p_code: codeNettoye(brut) },
   });
+}
+
+// ---------- un cadeau REMBOURSÉ (appelé par le webhook, charge.refunded) ----------
+//
+// Martin, 22 oct. 2026 : rembourser chez Stripe fait le ménage tout seul. Seulement un remboursement
+// COMPLET d'un paiement de codes cadeaux :
+//   - un code encore neuf est supprimé ;
+//   - un code déjà utilisé retire son temps (ses mois) à l'abonnement qu'il a ouvert, puis il est
+//     supprimé. Si rien ne reste, l'abonnement s'arrête tout de suite. Un compte abonné par carte
+//     (source stripe) ou par un abonnement offert n'est jamais touché : le code n'y a rien ajouté.
+// IDEMPOTENT : une fois les codes supprimés, un événement relivré ne trouve plus rien.
+export async function annulerCadeauRembourse(charge) {
+  if (!charge?.refunded || !charge.payment_intent) return 'partiel-ou-illisible';
+  const pi = typeof charge.payment_intent === 'string' ? charge.payment_intent : charge.payment_intent.id;
+  const sessions = await stripe(`/checkout/sessions?payment_intent=${encodeURIComponent(pi)}&limit=1`);
+  const session = sessions?.data?.[0];
+  if (session?.metadata?.type !== 'cadeau') return 'pas-un-cadeau';
+  const id = session.id;
+  const codes = (await supabase(`/rest/v1/codes_cadeaux?or=(stripe_session_id.eq.${encodeURIComponent(id)},stripe_session_id.like.${encodeURIComponent(id)}:*)&select=code,mois,utilise_par`)) ?? [];
+  if (!codes.length) return 'rien-a-faire';
+  for (const k of codes) {
+    if (k.utilise_par) {
+      const [abo] = (await supabase(`/rest/v1/abonnements?user_id=eq.${k.utilise_par}&select=source,statut,fin`)) ?? [];
+      if (abo && abo.source === 'manuel' && abo.fin) {
+        const fin = new Date(abo.fin);
+        fin.setUTCMonth(fin.getUTCMonth() - (k.mois || 0));
+        const fini = fin <= new Date();
+        await supabase(`/rest/v1/abonnements?user_id=eq.${k.utilise_par}&source=eq.manuel`, {
+          methode: 'PATCH', entetes: { Prefer: 'return=minimal' },
+          corps: fini
+            ? { statut: 'annule', fin: new Date().toISOString(), updated_at: new Date().toISOString() }
+            : { fin: fin.toISOString(), updated_at: new Date().toISOString() },
+        });
+      }
+    }
+    await supabase(`/rest/v1/codes_cadeaux?code=eq.${encodeURIComponent(k.code)}`, { methode: 'DELETE', entetes: { Prefer: 'return=minimal' } });
+  }
+  return `rembourse-${codes.length}`;
 }
