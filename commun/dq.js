@@ -2110,7 +2110,7 @@ function mdCompte(isEn, quota){
         <input type="email" id="mdEmail" placeholder="${isEn ? 'Your email' : 'Votre courriel'}" aria-label="${isEn ? 'Your email' : 'Votre courriel'}">
         <button class="account-btn" id="mdLienBtn" onclick="mdEnvoyerLien()">${isEn ? 'Get the link' : 'Recevoir le lien'}</button>
       </div>
-      <p class="md-note" id="mdNote">${isEn ? 'A free account follows 3 things in all — bills and city projects together.' : 'Un compte gratuit suit 3 choses en tout — projets de loi et projets de ville ensemble.'}</p>
+      <p class="md-note" id="mdNote">${isEn ? 'A free account follows 3 things in all — bills and city projects together.' : 'Un compte gratuit suit 3 choses en tout — projets de loi et projets de ville ensemble.'} <a class="md-lien" href="/abonnement${isEn ? '?lang=en' : ''}"><b>${isEn ? 'Subscribe' : 'Abonnez-vous'}</b></a></p>
     </div>`;
     document.getElementById('mdEmail')?.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); mdEnvoyerLien(); } });
     return;
@@ -2185,7 +2185,7 @@ async function mdAbonnement(isEn, avisCode){
     zone.innerHTML = `<p class="md-note"><b>${isEn ? 'Subscriber' : 'Abonné·e'}</b> — ${abPhraseActive(etat, isEn)}</p>
       <p class="md-ligne">${abBoutonsGestion(etat, isEn)}</p><p class="md-note ab-action-etat" aria-live="polite"></p>${cadeau}`;
   }else{
-    zone.innerHTML = `<p class="md-note">${isEn ? 'Free account.' : 'Compte gratuit.'} <a class="md-lien" href="/abonnement">${isEn ? 'The optional subscription' : 'L’abonnement facultatif'}</a></p>${cadeau}`;
+    zone.innerHTML = `<p class="md-note">${isEn ? 'Free account.' : 'Compte gratuit.'} <a class="md-lien" href="/abonnement${isEn ? '?lang=en' : ''}"><b>${isEn ? 'Subscribe' : 'Abonnez-vous'}</b></a></p>${cadeau}`;
   }
 }
 
