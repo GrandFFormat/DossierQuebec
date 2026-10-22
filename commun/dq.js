@@ -1240,6 +1240,56 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   remplir();
 });
+// Les partis disparus de l'Assemblée (22 oct. 2026, Martin) : dans la grille des ministres, leur
+// pastille devient un jeu d'arcade. La première carte est Pac-Girl, les autres un chemin de points
+// qu'elle va manger, saupoudré de fantômes et de fruits. Le parti et son sort au survol (et pour les
+// lecteurs d'écran). Dessins pixel maison. Un parti dissous s'ajoute ici avec sa phrase.
+const PARTIS_DISPARUS = { CAQ: { fr: 'disparue de l’Assemblée le 5 octobre 2026 (aucun siège)', en: 'gone from the Assembly on October 5, 2026 (no seats)' } };
+const SPRITES = {
+  // . vide, 1 couleur principale, 2 blanc, 3 bleu foncé (yeux), 4 rose, 5 vert, 6 rouge, 7 noir
+  pacgirl: ['......44......','.....4444.....','....111144....','..1111111111..','.111111171111.','11111111111...','1111111111....','111111111.....','1111111111....','11111111111...','.111111111111.','..1111111111..','....111111....','..............'],
+  point:   ['..............','..............','..............','..............','..............','.....1111.....','....111111....','....111111....','.....1111.....','..............','..............','..............','..............','..............'],
+  fantome: ['.....1111.....','...11111111...','..1111111111..','.111111111111.','.112211112211.','11222211222211','11223311223311','11223311223311','11122111122111','11111111111111','11111111111111','11111111111111','11.111..111.11','1...11..11...1'],
+  cerise:  ['..........5...','.........55...','........5.5...','.......5..5...','......5...5...','.....5....5...','....5.....5...','..666.....666.','.66626...66626','.66666...66666','.66666...66666','..666.....666.','..............','..............'],
+  fraise:  ['.....5555.....','....555555....','..6666666666..','.666626666266.','.666666666666.','.662666626666.','.666666666666.','..6662666266..','..6666666666..','...66666666...','....666666....','.....6666.....','......66......','..............'],
+};
+const COULEURS = { pacgirl: '#FFD600', point: '#FFC107', cerise: '#E53935', fraise: '#E53935' };
+const COULEURS_FANTOMES = ['#00BCD4', '#F58220', '#E53935', '#EC407A'];
+function spriteSvg(nom, couleur){
+  const pal = { '1': couleur, '2': '#fff', '3': '#1a237e', '4': '#EC407A', '5': '#2E7D32', '6': '#E53935', '7': '#131313' };
+  let rects = '';
+  SPRITES[nom].forEach((ligne, y) => [...ligne].forEach((c, x) => { if(c !== '.') rects += `<rect x="${x}" y="${y}" width="1.02" height="1.02" fill="${pal[c]}"/>`; }));
+  return `<svg viewBox="0 0 14 14" width="26" height="26" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`;
+}
+// Le rôle de chaque carte selon sa place dans la liste : 1re = Pac-Girl ; ensuite surtout des points,
+// avec un fantôme ou un fruit environ une carte sur quatre (tiré au hasard à chaque affichage).
+// Toujours un point entre deux autres icônes (Martin) : le plan est tiré une fois par chargement.
+let _planArcade = null;
+function planArcade(){
+  if(_planArcade && _planArcade.length === ministers.length) return _planArcade;
+  _planArcade = ministers.map(() => null);
+  _planArcade.forEach((_, i) => {
+    if(i === 0) { _planArcade[i] = spriteSvg('pacgirl', COULEURS.pacgirl); return; }
+    const precedentPoint = i === 1 ? false : _planArcade[i - 1] === 'point';
+    const r = Math.random();
+    if(precedentPoint && r < 0.45){
+      const t = Math.random();
+      _planArcade[i] = t < 0.55 ? spriteSvg('fantome', COULEURS_FANTOMES[Math.floor(Math.random() * 4)]) : t < 0.8 ? spriteSvg('cerise', COULEURS.cerise) : spriteSvg('fraise', COULEURS.fraise);
+    } else _planArcade[i] = 'point';
+  });
+  return _planArcade;
+}
+function spritePourMinistre(nom){
+  const i = ministers.findIndex((m) => m.name === nom);
+  const choix = i >= 0 ? planArcade()[i] : 'point';
+  return choix === 'point' ? spriteSvg('point', COULEURS.point) : choix;
+}
+function pastilleMinistre(party, nom, styleCouleur){
+  const disparu = PARTIS_DISPARUS[party];
+  if(!disparu) return `<span class="depute-party" style="${styleCouleur}">${party}</span>`;
+  const titre = `${party} — ${currentLang === 'en' ? disparu.en : disparu.fr}`.replace(/"/g, '&quot;');
+  return `<span class="depute-party parti-arcade" title="${titre}" role="img" aria-label="${titre}">${spritePourMinistre(nom)}</span>`;
+}
 const finBouton = (nom) => `<button class="fin-btn" type="button" title="${currentLang === 'en' ? 'Public finances' : 'Finances publiques'}" aria-label="${currentLang === 'en' ? 'Public finances of' : 'Finances publiques de'} ${nom.replace(/"/g, '&quot;')}" onclick="voirFinances('${nom.replace(/'/g, "\\'")}')">$</button>`;
 
 /* ---------------- COMPTES (Supabase) ---------------- */
@@ -3492,7 +3542,7 @@ function personCard(p){
     <div class="m-card">
       <div class="m-card-top">
         <div class="m-top-row">
-          <span class="depute-party" style="background:${partyColors[party]}; color:${partyText(party)}">${party}</span>
+          ${pastilleMinistre(party, name, `background:${partyColors[party]}; color:${partyText(party)}`)}
           ${partageBouton(name)}${finBouton(name)}
           <button class="follow-btn ${isFollowed?'on':''}" onclick="${followOnclick}">${isFollowed ? t('btn.following') : t('btn.follow')}</button>
         </div>

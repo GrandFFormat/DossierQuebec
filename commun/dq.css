@@ -2297,3 +2297,7 @@
 .part-menu{position:absolute; top:calc(100% + 4px); right:0; z-index:30; display:flex; flex-direction:column; min-width:140px; background:var(--card); border:2px solid var(--ink); box-shadow:3px 3px 0 var(--ink);}
 .part-menu a, .part-menu button{display:block; padding:8px 12px; font:inherit; font-size:13.5px; font-weight:700; color:var(--ink); text-decoration:none; background:none; border:0; text-align:left; cursor:pointer;}
 .part-menu a:hover, .part-menu button:hover{background:var(--yellow); color:#131313;}
+
+/* Ministres d'un parti disparu : le sprite d'arcade remplace la pastille (22 oct. 2026). */
+.parti-arcade{background:#131313 !important; color:inherit !important; border:2px solid #131313 !important; padding:1px 3px !important; display:inline-flex; align-items:center; cursor:help;}
+.parti-arcade svg{display:block;}
