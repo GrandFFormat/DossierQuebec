@@ -2169,8 +2169,8 @@ async function mdAbonnement(isEn, avisCode){
   if(!zone) return;
   const [etat, codes] = await Promise.all([abEtatServeur(), abMesCodes(isEn)]);
   if(!document.body.contains(zone)) return;   // la carte a été redessinée entre-temps
-  // « Offrir un abonnement » sous « Votre compte », pour les abonné·e·s seulement (Martin, 21 oct. 2026).
-  { const o = document.getElementById('offrir-mon-dossier'); if(o) o.hidden = !etat?.abonne; }
+  // « Offrir » sous « Votre compte », pour tout compte connecté (Martin, 21 oct. 2026).
+  { const o = document.getElementById('offrir-mon-dossier'); if(o) o.hidden = !etat?.connecte; }
   const merci = new URLSearchParams(location.search).get('cadeau') === 'merci'
     ? `<p class="md-note"><b>${isEn ? 'Thank you.' : 'Merci.'}</b> ${isEn ? 'Your gift code is on its way by email; it also appears below within a minute.' : 'Votre code cadeau part par courriel ; il paraît aussi ci-dessous d’ici une minute.'}</p>`
     : ({
