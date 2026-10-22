@@ -3842,8 +3842,8 @@ const ASSEMBLY = {
   // (63 sièges). » Vide tant que ce n'est pas officiel : la bande passe au
   // passé toute seule (voir phase), mais n'invente jamais de résultat.
   // Publiée le 6 oct. 2026 sur l'OK de Martin, d'après les résultats finaux d'Élections Québec.
-  resultat: "Selon les résultats d'Élections Québec, le Parti Québécois a remporté le plus de sièges : 59 sur 127. Le Parti libéral en a 40, le Parti conservateur 19 et Québec solidaire 9.",
-  resultatEn: "According to Élections Québec's results, the Parti Québécois won the most seats: 59 of 127. The Liberal Party has 40, the Conservative Party 19 and Québec solidaire 9.",
+  resultat: "Selon les résultats d'Élections Québec, le Parti Québécois a remporté le plus de sièges : 60 sur 127. Le Parti libéral en a 39, le Parti conservateur 19 et Québec solidaire 9.",
+  resultatEn: "According to Élections Québec's results, the Parti Québécois won the most seats: 60 of 127. The Liberal Party has 39, the Conservative Party 19 and Québec solidaire 9.",
   // Le sigle du parti qui forme le gouvernement ('PQ', 'PLQ', 'CAQ', 'QS', 'PCQ'), à remplir en même
   // temps que resultat, d'après Élections Québec. Sur la page Promesses, ses engagements passent
   // alors en tête, les autres partis plus bas (Martin, 5 oct. 2026). Vide : aucun parti n'est mis
@@ -3853,12 +3853,12 @@ const ASSEMBLY = {
   // Élections Québec dit qui a remporté le plus de sièges, PAS qui forme le gouvernement : la
   // mention affichée s'en tient donc au nombre de sièges (gagnantNote).
   gagnant: 'PQ',
-  gagnantNote: 'Le plus de sièges : 59 sur 127',
-  gagnantNoteEn: 'Most seats: 59 of 127',
-  ordrePartis: ['PQ', 'PLQ', 'PCQ', 'QS'],   // par nombre de sièges : 59, 40, 19, 9
+  gagnantNote: 'Le plus de sièges : 60 sur 127',
+  gagnantNoteEn: 'Most seats: 60 of 127',
+  ordrePartis: ['PQ', 'PLQ', 'PCQ', 'QS'],   // par nombre de sièges : 60, 39, 19, 9 (Vachon passée au PQ au dépouillement judiciaire du 21 oct. 2026)
   // Les mêmes chiffres, pour la barre « Composition » entre le scrutin et l'ouverture (16 oct. 2026).
   // Ce sont des sièges REMPORTÉS, pas des députés assermentés : la barre le dit.
-  sieges: { PQ: 59, PLQ: 40, PCQ: 19, QS: 9 },
+  sieges: { PQ: 60, PLQ: 39, PCQ: 19, QS: 9 },
 };
 // Phase déduite de la DATE LOCALE du visiteur, pour que le site ne dise pas
 // « élections le 5 octobre » le matin du 6 sans que personne n'ait à y toucher —
