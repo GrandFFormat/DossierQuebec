@@ -1247,7 +1247,8 @@ document.addEventListener('DOMContentLoaded', () => {
 const PARTIS_DISPARUS = { CAQ: { fr: 'disparue de l’Assemblée le 5 octobre 2026 (aucun siège)', en: 'gone from the Assembly on October 5, 2026 (no seats)' } };
 const SPRITES = {
   // . vide, 1 couleur principale, 2 blanc, 3 bleu foncé (yeux), 4 rose, 5 vert, 6 rouge, 7 noir
-  pacgirl: ['......44......','.....4444.....','....111144....','..1111111111..','.111111171111.','11111111111...','1111111111....','111111111.....','1111111111....','11111111111...','.111111111111.','..1111111111..','....111111....','..............'],
+  // Pac-Girl en 16 × 16 (Martin, 22 oct. 2026) : boucle rouge, yeux à cils, lèvres rouges, bouche vers la droite.
+  pacgirl: ['................','.66..66.1111....','.6666661111111..','..666611111111..','.66116611771711.','...1111177177116','..111111771111..','.1111111111.....','.111111111......','.1111111111.....','.11111111111....','..1111111111116.','..111111111111..','...1111111111...','.....111111.....','................'],
   point:   ['..............','..............','..............','..............','..............','.....1111.....','....111111....','....111111....','.....1111.....','..............','..............','..............','..............','..............'],
   fantome: ['.....1111.....','...11111111...','..1111111111..','.111111111111.','.112211112211.','11222211222211','11223311223311','11223311223311','11122111122111','11111111111111','11111111111111','11111111111111','11.111..111.11','1...11..11...1'],
   cerise:  ['..........5...','.........55...','........5.5...','.......5..5...','......5...5...','.....5....5...','....5.....5...','..666.....666.','.66626...66626','.66666...66666','.66666...66666','..666.....666.','..............','..............'],
@@ -1261,7 +1262,8 @@ function spriteSvg(nom, couleur, accent = '#FFCCBC'){
   const pal = { '8': accent, '1': couleur, '2': '#fff', '3': '#1a237e', '4': '#EC407A', '5': '#2E7D32', '6': '#E53935', '7': '#131313' };
   let rects = '';
   SPRITES[nom].forEach((ligne, y) => [...ligne].forEach((c, x) => { if(c !== '.') rects += `<rect x="${x}" y="${y}" width="1.02" height="1.02" fill="${pal[c]}"/>`; }));
-  return `<svg viewBox="0 0 14 14" width="26" height="26" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`;
+  const n = SPRITES[nom].length;
+  return `<svg viewBox="0 0 ${n} ${n}" width="26" height="26" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`;
 }
 // Le rôle de chaque carte selon sa place dans la liste : 1re = Pac-Girl ; ensuite surtout des points,
 // avec un fantôme ou un fruit environ une carte sur quatre (tiré au hasard à chaque affichage).
