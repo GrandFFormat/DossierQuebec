@@ -1185,11 +1185,11 @@ function retourMinistres(){
 window.retourMinistres = retourMinistres;
 window.renderFinances = renderFinances;
 window.voirFinances = voirFinances;
-// Partager la fiche d'un·e élu·e (22 oct. 2026) : l'icône à gauche du bouton $ ouvre Facebook, X et
-// Copier. Le texte est un court résumé de la fiche (rôle, circonscription, parti, présence aux votes,
+// Partager la fiche d'un·e élu·e (22 oct. 2026) : l'icône à gauche du bouton $ copie d'un clic
+// un court résumé de la fiche (rôle, circonscription, parti, présence aux votes,
 // projets de loi parrainés) et le lien rouvre la page Ministres avec ce nom dans la recherche.
 const ICONE_PARTAGE = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><circle cx="18" cy="5" r="3.2"/><circle cx="6" cy="12" r="3.2"/><circle cx="18" cy="19" r="3.2"/><path d="M8.6 10.7l6.8-3.9 1 1.7-6.8 3.9zM8.6 13.3l1-1.7 6.8 3.9-1 1.7z"/></svg>';
-const partageBouton = (nom) => `<span class="part-elu"><button class="part-btn" type="button" title="${currentLang === 'en' ? 'Share' : 'Partager'}" aria-label="${currentLang === 'en' ? 'Share the profile of' : 'Partager la fiche de'} ${nom.replace(/"/g, '&quot;')}" aria-expanded="false" onclick="ouvrirPartageElu(this, '${nom.replace(/'/g, "\\'").replace(/"/g, '&quot;')}')">${ICONE_PARTAGE}</button></span>`;
+const partageBouton = (nom) => `<span class="part-elu"><button class="part-btn" type="button" title="${currentLang === 'en' ? 'Share' : 'Partager'}" aria-label="${currentLang === 'en' ? 'Share the profile of' : 'Partager la fiche de'} ${nom.replace(/"/g, '&quot;')}" onclick="ouvrirPartageElu(this, '${nom.replace(/'/g, "\\'").replace(/"/g, '&quot;')}')">${ICONE_PARTAGE}</button></span>`;
 function resumeElu(nom, isEn){
   const dep = resolveDepute(nom);
   const ministre = ministers.find((m) => m.name === nom);
@@ -1207,20 +1207,18 @@ function resumeElu(nom, isEn){
   ].filter(Boolean).join(' · ');
   return `${morceaux}. ${faits}.`;
 }
+// Un clic copie le résumé et le lien, sans menu (Martin, 22 oct. 2026) ; ✓ le confirme.
 function ouvrirPartageElu(bouton, nom){
   const isEn = currentLang === 'en';
-  const boite = bouton.parentElement;
-  const ouvert = boite.querySelector('.part-menu');
-  document.querySelectorAll('.part-menu').forEach((m) => { m.previousElementSibling?.setAttribute('aria-expanded', 'false'); m.remove(); });
-  if(ouvert) return;
   const lien = `https://dossierquebec.ca/ministres?elu=${encodeURIComponent(nom)}${isEn ? '&lang=en' : ''}`;
-  const texte = resumeElu(nom, isEn);
-  bouton.setAttribute('aria-expanded', 'true');
-  boite.insertAdjacentHTML('beforeend', `<div class="part-menu" role="menu">
-    <a role="menuitem" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(lien)}" target="_blank" rel="noopener">Facebook</a>
-    <a role="menuitem" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(texte)}&url=${encodeURIComponent(lien)}" target="_blank" rel="noopener">X</a>
-    <button role="menuitem" type="button" data-texte="${mdH(texte + ' ' + lien)}" onclick="copierPartageElu(this)">⧉ ${isEn ? 'Copy' : 'Copier'}</button>
-  </div>`);
+  const texte = `${resumeElu(nom, isEn)} ${lien}`;
+  const fait = () => {
+    const avant = bouton.innerHTML;
+    bouton.textContent = '✓';
+    bouton.title = isEn ? 'Copied' : 'Copié';
+    setTimeout(() => { bouton.innerHTML = avant; bouton.title = isEn ? 'Share' : 'Partager'; }, 1500);
+  };
+  (navigator.clipboard ? navigator.clipboard.writeText(texte) : Promise.reject()).then(fait).catch(() => window.prompt(isEn ? 'Copy:' : 'Copiez :', texte));
 }
 function copierPartageElu(b){
   const isEn = currentLang === 'en';
