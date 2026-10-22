@@ -1185,6 +1185,63 @@ function retourMinistres(){
 window.retourMinistres = retourMinistres;
 window.renderFinances = renderFinances;
 window.voirFinances = voirFinances;
+// Partager la fiche d'un·e élu·e (22 oct. 2026) : l'icône à gauche du bouton $ ouvre Facebook, X et
+// Copier. Le texte est un court résumé de la fiche (rôle, circonscription, parti, présence aux votes,
+// projets de loi parrainés) et le lien rouvre la page Ministres avec ce nom dans la recherche.
+const ICONE_PARTAGE = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><circle cx="18" cy="5" r="3.2"/><circle cx="6" cy="12" r="3.2"/><circle cx="18" cy="19" r="3.2"/><path d="M8.6 10.7l6.8-3.9 1 1.7-6.8 3.9zM8.6 13.3l1-1.7 6.8 3.9-1 1.7z"/></svg>';
+const partageBouton = (nom) => `<span class="part-elu"><button class="part-btn" type="button" title="${currentLang === 'en' ? 'Share' : 'Partager'}" aria-label="${currentLang === 'en' ? 'Share the profile of' : 'Partager la fiche de'} ${nom.replace(/"/g, '&quot;')}" aria-expanded="false" onclick="ouvrirPartageElu(this, '${nom.replace(/'/g, "\\'").replace(/"/g, '&quot;')}')">${ICONE_PARTAGE}</button></span>`;
+function resumeElu(nom, isEn){
+  const dep = resolveDepute(nom);
+  const ministre = ministers.find((m) => m.name === nom);
+  const role = ministre ? (isEn ? (ministre.roleEn || ministre.role) : ministre.role) : (isEn ? 'MNA' : 'Député·e');
+  const att = dep ? attendanceForAssnatId(dep.assnatId) : null;
+  const pl = billsSponsoredBy(nom).length;
+  const morceaux = [
+    `${nom}, ${role}`,
+    dep ? (isEn ? `MNA for ${dep.riding}` : `député·e de ${dep.riding}`) : '',
+    (ministre?.party || dep?.party) ? `(${ministre?.party || dep.party})` : '',
+  ].filter(Boolean).join(' ');
+  const faits = [
+    att ? (isEn ? `Recorded-vote attendance: ${att.rate}%` : `Présence aux votes : ${att.rate} %`) : '',
+    isEn ? `Bills sponsored: ${pl}` : `Projets de loi parrainés : ${pl}`,
+  ].filter(Boolean).join(' · ');
+  return `${morceaux}. ${faits}.`;
+}
+function ouvrirPartageElu(bouton, nom){
+  const isEn = currentLang === 'en';
+  const boite = bouton.parentElement;
+  const ouvert = boite.querySelector('.part-menu');
+  document.querySelectorAll('.part-menu').forEach((m) => { m.previousElementSibling?.setAttribute('aria-expanded', 'false'); m.remove(); });
+  if(ouvert) return;
+  const lien = `https://dossierquebec.ca/ministres?elu=${encodeURIComponent(nom)}${isEn ? '&lang=en' : ''}`;
+  const texte = resumeElu(nom, isEn);
+  bouton.setAttribute('aria-expanded', 'true');
+  boite.insertAdjacentHTML('beforeend', `<div class="part-menu" role="menu">
+    <a role="menuitem" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(lien)}" target="_blank" rel="noopener">Facebook</a>
+    <a role="menuitem" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(texte)}&url=${encodeURIComponent(lien)}" target="_blank" rel="noopener">X</a>
+    <button role="menuitem" type="button" data-texte="${mdH(texte + ' ' + lien)}" onclick="copierPartageElu(this)">⧉ ${isEn ? 'Copy' : 'Copier'}</button>
+  </div>`);
+}
+function copierPartageElu(b){
+  const isEn = currentLang === 'en';
+  const fait = () => { b.textContent = '✓ ' + (isEn ? 'Copied' : 'Copié'); setTimeout(() => b.closest('.part-menu')?.remove(), 900); };
+  (navigator.clipboard ? navigator.clipboard.writeText(b.dataset.texte) : Promise.reject()).then(fait).catch(() => window.prompt(isEn ? 'Copy:' : 'Copiez :', b.dataset.texte));
+}
+document.addEventListener('click', (e) => { if(!e.target.closest('.part-elu')) document.querySelectorAll('.part-menu').forEach((m) => m.remove()); });
+window.ouvrirPartageElu = ouvrirPartageElu;
+window.copierPartageElu = copierPartageElu;
+// Le lien partagé : /ministres?elu=Nom remplit la recherche une fois les données arrivées.
+document.addEventListener('DOMContentLoaded', () => {
+  const nom = new URLSearchParams(location.search).get('elu');
+  if(!nom) return;
+  let essais = 0;
+  const remplir = () => {
+    const champ = document.getElementById('searchMinistres');
+    if(champ && ministers.length){ champ.value = nom; champ.dispatchEvent(new Event('input', { bubbles: true })); champ.scrollIntoView({ block: 'center' }); return; }
+    if(++essais < 40) setTimeout(remplir, 250);
+  };
+  remplir();
+});
 const finBouton = (nom) => `<button class="fin-btn" type="button" title="${currentLang === 'en' ? 'Public finances' : 'Finances publiques'}" aria-label="${currentLang === 'en' ? 'Public finances of' : 'Finances publiques de'} ${nom.replace(/"/g, '&quot;')}" onclick="voirFinances('${nom.replace(/'/g, "\\'")}')">$</button>`;
 
 /* ---------------- COMPTES (Supabase) ---------------- */
@@ -3381,7 +3438,7 @@ function renderDeputes(filter){
             <div class="dep-riding">${d.riding} — ${d.region}</div>
             <div class="dep-att">${attNote}</div>
           </div>
-          <div class="dep-actions">${finBouton(d.name)}
+          <div class="dep-actions">${partageBouton(d.name)}${finBouton(d.name)}
           <button class="follow-btn dep-follow ${isFollowed?'on':''}" onclick="toggleFollowDepute('${followKey.replace(/'/g,"\\'")}')">${isFollowed ? t('btn.following') : t('btn.follow')}</button></div>
         </div>`;
       }).join('')}`;
@@ -3438,7 +3495,7 @@ function personCard(p){
       <div class="m-card-top">
         <div class="m-top-row">
           <span class="depute-party" style="background:${partyColors[party]}; color:${partyText(party)}">${party}</span>
-          ${finBouton(name)}
+          ${partageBouton(name)}${finBouton(name)}
           <button class="follow-btn ${isFollowed?'on':''}" onclick="${followOnclick}">${isFollowed ? t('btn.following') : t('btn.follow')}</button>
         </div>
         <div class="m-name">${name}</div>

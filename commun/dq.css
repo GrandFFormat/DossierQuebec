@@ -2289,3 +2289,11 @@
 
 /* « Selon les abonnements » : la pastille pointillée, un peu plus large que « Bientôt ». */
 .ab-selon{min-width:0; white-space:nowrap;}
+
+/* Partager la fiche d'un·e élu·e (22 oct. 2026), à gauche du bouton $. */
+.part-elu{position:relative; display:inline-flex; flex:none;}
+.part-btn{width:34px; height:34px; padding:0; border:2px solid var(--ink); background:var(--card); color:var(--ink); cursor:pointer; display:inline-flex; align-items:center; justify-content:center;}
+.part-btn:hover, .part-btn:focus-visible, .part-btn[aria-expanded="true"]{background:var(--ink); color:var(--card);}
+.part-menu{position:absolute; top:calc(100% + 4px); right:0; z-index:30; display:flex; flex-direction:column; min-width:140px; background:var(--card); border:2px solid var(--ink); box-shadow:3px 3px 0 var(--ink);}
+.part-menu a, .part-menu button{display:block; padding:8px 12px; font:inherit; font-size:13.5px; font-weight:700; color:var(--ink); text-decoration:none; background:none; border:0; text-align:left; cursor:pointer;}
+.part-menu a:hover, .part-menu button:hover{background:var(--yellow); color:#131313;}
