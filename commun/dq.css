@@ -2270,3 +2270,5 @@
 @media (max-width:760px){ .md-cadeau-puces{grid-template-columns:repeat(3, minmax(0, 1fr)) auto;} }
 
 .md-cadeau-discret > div[data-i18n]{grid-template-columns:minmax(220px, 360px) auto 1fr;}
+
+.md-cadeau-qte{width:64px; text-align:center;}
