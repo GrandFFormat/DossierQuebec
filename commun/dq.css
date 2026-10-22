@@ -2279,3 +2279,7 @@
 /* « Vous avez reçu un code? » surligné en jaune. */
 .md-lien-surligne{background:#FFD24D; color:#131313; padding:1px 5px; text-decoration:none;}
 .md-lien-surligne:hover{background:#131313; color:#FFD24D;}
+
+/* Lisibilité : les paragraphes des cartes respirent, sur téléphone surtout. */
+.md-carte p{line-height:1.5;}
+.md-lien-surligne{display:inline-block; margin-top:4px;}
