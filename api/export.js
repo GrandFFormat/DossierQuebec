@@ -139,7 +139,7 @@ export default async function handler(req, res) {
     const demande = String(req.query?.mois ?? '');
     // N'importe quel mois, du début de la 43e législature (novembre 2022) au mois en cours, mais UN
     // seul par fichier (Martin : « tu sélectionnes janvier, tu télécharges les présences de janvier »).
-    if (demande && !(/^d{4}-(0[1-9]|1[0-2])$/.test(demande) && demande >= '2022-11' && demande <= permis[0])) return res.status(400).json({ erreur: 'mois non permis' });
+    if (demande && !(/^\d{4}-(0[1-9]|1[0-2])$/.test(demande) && demande >= '2022-11' && demande <= permis[0])) return res.status(400).json({ erreur: 'mois non permis' });
     const mois = demande || permis[0];
     const fichier = await fabriquer(jeu, mois);
     const jour = mois;
