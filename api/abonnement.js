@@ -228,7 +228,7 @@ export default async function handler(req, res) {
         'line_items[0][price_data][product_data][name]': nomProduit(duree, anglais),
         'line_items[0][quantity]': String(quantite),
         success_url: `${site()}/${retourDe()}?cadeau=merci`,
-        cancel_url: `${site()}/abonnement?cadeau=annule#offrir`,
+        cancel_url: `${site()}/mon-dossier`,
         client_reference_id: u.id,
         // Ce que le webhook relit pour fabriquer le code (api/_cadeau.js, livrerCadeau).
         'metadata[type]': 'cadeau',
@@ -264,7 +264,7 @@ export default async function handler(req, res) {
         'line_items[0][price]': prixDe(forfait),
         'line_items[0][quantity]': '1',
         success_url: `${site()}/${retourDe()}?offert=merci`,
-        cancel_url: `${site()}/abonnement?offert=annule#offrir-abonnement`,
+        cancel_url: `${site()}/mon-dossier`,
         'metadata[type]': 'offert',
         'metadata[donateur]': u.id,
         'metadata[forfait]': forfait,
