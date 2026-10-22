@@ -2180,7 +2180,7 @@ async function mdAbonnement(isEn, avisCode){
   // Offrir et faire valoir un code (remis le 21 oct. 2026) : la même case que sur /abonnement.
   const cadeau = `${merci}<div class="md-ligne"><input type="text" class="ab-code-champ" autocomplete="off" spellcheck="false" maxlength="40" placeholder="${isEn ? 'Enter your code here' : 'Mettez votre code ici'}" aria-label="${isEn ? 'Enter your code here' : 'Mettez votre code ici'}"> <button type="button" class="account-btn" onclick="abUtiliserCode(this)">${isEn ? 'Use the code' : 'Utiliser le code'}</button></div>
     <p class="md-note ab-code-etat" aria-live="polite">${avisCode ? mdH(avisCode) : ''}</p>
-    ${codes}<p class="md-note"><a class="md-lien" href="/abonnement#offrir">${isEn ? 'Give to someone' : 'Offrir à quelqu’un'}</a></p>`;
+    ${codes}`;
   if(etat?.abonne){
     zone.innerHTML = `<p class="md-note"><b>${isEn ? 'Subscriber' : 'Abonné·e'}</b> — ${abPhraseActive(etat, isEn)}</p>
       <p class="md-ligne">${abBoutonsGestion(etat, isEn)}</p><p class="md-note ab-action-etat" aria-live="polite"></p>${cadeau}`;

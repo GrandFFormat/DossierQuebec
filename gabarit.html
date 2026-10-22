@@ -1105,38 +1105,8 @@ function goToFederal(evt){
 
     <div id="abEtat" class="md-bloc" aria-live="polite"></div>
 
-    <!-- Offrir un abonnement et la case du code (remis le 21 oct. 2026) : abOffrir et abUtiliserCode
+    <!-- La case du code. Offrir se fait dans Mon dossier, sous Votre compte (21 oct. 2026) : abOffrir et abUtiliserCode
          (commun/dq.js) → api/abonnement.js, actions « cadeau » et « code ». -->
-    <div class="md-bloc" id="offrir"><div class="md-carte">
-      <div data-i18n="abcadeau.html">
-        <div class="md-carte-tete"><h2>Offrir 1 mois, 3 mois ou 1 an</h2><span class="md-etiquette">Cadeau</span></div>
-        <p>Une durée fixe : vous payez une seule fois, sans renouvellement. Le code arrive dans vos courriels et dans Mon dossier : donnez-le à qui vous voulez.</p>
-        <ul class="ab-forfaits">
-          <li class="ab-forfait ab-cadeau" data-duree="mensuel" role="button" tabindex="0" onclick="abOffrir(this.dataset.duree, this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abOffrir(this.dataset.duree, this)}"><b class="ab-montant">9,99 $</b><span>1 mois</span></li>
-          <li class="ab-forfait ab-cadeau" data-duree="trimestriel" role="button" tabindex="0" onclick="abOffrir(this.dataset.duree, this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abOffrir(this.dataset.duree, this)}"><b class="ab-montant">26,99 $</b><span>3 mois</span></li>
-          <li class="ab-forfait ab-cadeau" data-duree="annuel" role="button" tabindex="0" onclick="abOffrir(this.dataset.duree, this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abOffrir(this.dataset.duree, this)}"><b class="ab-montant">99 $</b><span>1 an</span></li>
-        </ul>
-        <p class="md-note">Il faut être connecté pour offrir. Paiement par carte sur la page sécurisée de Stripe, sans taxes ajoutées.</p>
-      </div>
-      <p class="md-note ab-cadeau-etat" aria-live="polite"></p>
-    </div></div>
-
-    <!-- Offrir un abonnement RÉCURRENT (21 oct. 2026) : abOffrirAbonnement (commun/dq.js) →
-         api/abonnement.js, action « offrir » ; le code et le suivi des paiements : api/_offert.js. -->
-    <div class="md-bloc" id="offrir-abonnement"><div class="md-carte">
-      <div data-i18n="aboffert.html">
-        <div class="md-carte-tete"><h2>Offrir un abonnement</h2><span class="md-etiquette">Récurrent</span></div>
-        <p>Vous payez chaque mois, chaque trimestre ou chaque année pour quelqu’un d’autre, jusqu’à ce que vous annuliez. Le code arrive dans vos courriels et dans Mon dossier : la personne le colle dans la case « Mettez votre code ici ». Son accès suit vos paiements et s’arrête si vous annulez.</p>
-        <ul class="ab-forfaits">
-          <li class="ab-forfait ab-offert" data-forfait="mensuel" role="button" tabindex="0" onclick="abOffrirAbonnement(this.dataset.forfait, this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abOffrirAbonnement(this.dataset.forfait, this)}"><b class="ab-montant">9,99 $</b><span>par mois</span></li>
-          <li class="ab-forfait ab-offert" data-forfait="trimestriel" role="button" tabindex="0" onclick="abOffrirAbonnement(this.dataset.forfait, this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abOffrirAbonnement(this.dataset.forfait, this)}"><b class="ab-montant">26,99 $</b><span>tous les 3 mois</span></li>
-          <li class="ab-forfait ab-offert" data-forfait="annuel" role="button" tabindex="0" onclick="abOffrirAbonnement(this.dataset.forfait, this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();abOffrirAbonnement(this.dataset.forfait, this)}"><b class="ab-montant">99 $</b><span>par an</span></li>
-        </ul>
-        <p class="md-note">La première période commence dès le paiement, même si le code n’a pas encore servi. Vous annulez en tout temps dans Mon dossier, sans frais. Il faut être connecté pour offrir.</p>
-      </div>
-      <p class="md-note ab-offert-etat" aria-live="polite"></p>
-    </div></div>
-
     <div class="md-bloc" id="code"><div class="md-carte">
       <div data-i18n="abcode.html">
         <div class="md-carte-tete"><h2>Vous avez un code?</h2></div>
