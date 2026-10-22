@@ -2286,3 +2286,6 @@
 
 /* Téléphone : la pastille au-dessus du texte, le texte sur toute la largeur. */
 @media (max-width:600px){ .ab-outils li{flex-direction:column; gap:4px;} .ab-outils .ab-etat{min-width:0;} }
+
+/* « Selon les abonnements » : la pastille pointillée, un peu plus large que « Bientôt ». */
+.ab-selon{min-width:0; white-space:nowrap;}
