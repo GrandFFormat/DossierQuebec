@@ -1251,12 +1251,14 @@ const SPRITES = {
   point:   ['..............','..............','..............','..............','..............','.....1111.....','....111111....','....111111....','.....1111.....','..............','..............','..............','..............','..............'],
   fantome: ['.....1111.....','...11111111...','..1111111111..','.111111111111.','.112211112211.','11222211222211','11223311223311','11223311223311','11122111122111','11111111111111','11111111111111','11111111111111','11.111..111.11','1...11..11...1'],
   cerise:  ['..........5...','.........55...','........5.5...','.......5..5...','......5...5...','.....5....5...','....5.....5...','..666.....666.','.66626...66626','.66666...66666','.66666...66666','..666.....666.','..............','..............'],
+  // Fantôme apeuré (8 = yeux et bouche) : bleu à yeux pâles, ou blanc à yeux rouges quand il clignote.
+  apeure:  ['.....1111.....','...11111111...','..1111111111..','.111111111111.','.111111111111.','.111881188111.','.111881188111.','.111111111111.','11111111111111','11811881188111','18118118118181','11111111111111','11.111..111.11','1...11..11...1'],
   fraise:  ['.....5555.....','....555555....','..6666666666..','.666626666266.','.666666666666.','.662666626666.','.666666666666.','..6662666266..','..6666666666..','...66666666...','....666666....','.....6666.....','......66......','..............'],
 };
 const COULEURS = { pacgirl: '#FFD600', point: '#FFC107', cerise: '#E53935', fraise: '#E53935' };
 const COULEURS_FANTOMES = ['#00BCD4', '#F58220', '#E53935', '#EC407A'];
-function spriteSvg(nom, couleur){
-  const pal = { '1': couleur, '2': '#fff', '3': '#1a237e', '4': '#EC407A', '5': '#2E7D32', '6': '#E53935', '7': '#131313' };
+function spriteSvg(nom, couleur, accent = '#FFCCBC'){
+  const pal = { '8': accent, '1': couleur, '2': '#fff', '3': '#1a237e', '4': '#EC407A', '5': '#2E7D32', '6': '#E53935', '7': '#131313' };
   let rects = '';
   SPRITES[nom].forEach((ligne, y) => [...ligne].forEach((c, x) => { if(c !== '.') rects += `<rect x="${x}" y="${y}" width="1.02" height="1.02" fill="${pal[c]}"/>`; }));
   return `<svg viewBox="0 0 14 14" width="26" height="26" shape-rendering="crispEdges" aria-hidden="true">${rects}</svg>`;
@@ -1264,6 +1266,12 @@ function spriteSvg(nom, couleur){
 // Le rôle de chaque carte selon sa place dans la liste : 1re = Pac-Girl ; ensuite surtout des points,
 // avec un fantôme ou un fruit environ une carte sur quatre (tiré au hasard à chaque affichage).
 // Toujours un point entre deux autres icônes (Martin) : le plan est tiré une fois par chargement.
+// Deux fantômes apeurés à des ministres précis (Martin, 22 oct. 2026) : le bleu à Mathieu Lévesque,
+// le blanc à Daniel Bernard. Leurs voisins restent des points, comme pour les autres icônes.
+const FANTOMES_FIXES = {
+  'Mathieu Lévesque': () => spriteSvg('apeure', '#2196F3', '#FFCCBC'),
+  'Daniel Bernard': () => spriteSvg('apeure', '#F5F5F5', '#E53935'),
+};
 let _planArcade = null;
 function planArcade(){
   if(_planArcade && _planArcade.length === ministers.length) return _planArcade;
@@ -1275,6 +1283,9 @@ function planArcade(){
   const icone = (j) => j >= 0 && _planArcade[j] && _planArcade[j] !== 'point';
   _planArcade.forEach((_, i) => {
     if(i === 0) { _planArcade[i] = spriteSvg('pacgirl', COULEURS.pacgirl); return; }
+    if(FANTOMES_FIXES[ministers[i].name]) { _planArcade[i] = FANTOMES_FIXES[ministers[i].name](); return; }
+    const voisinFixe = (j) => j < ministers.length && FANTOMES_FIXES[ministers[j]?.name];
+    if((i % cols !== cols - 1 && voisinFixe(i + 1)) || voisinFixe(i + cols)) { _planArcade[i] = 'point'; return; }
     const voisinGauche = i % cols !== 0 && icone(i - 1);
     const voisinHaut = icone(i - cols);
     const r = Math.random();
