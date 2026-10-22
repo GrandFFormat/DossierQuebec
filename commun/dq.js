@@ -1274,6 +1274,13 @@ const FANTOMES_FIXES = {
   'Mathieu Lévesque': () => spriteSvg('apeure', '#2196F3', '#FFCCBC'),
   'Daniel Bernard': () => spriteSvg('apeure', '#F5F5F5', '#E53935'),
 };
+// Pac-Girl en dessin lisse (Martin, 22 oct. 2026 : « meilleure déf ») : tête jaune bouche vers la
+// droite, boucle rouge, un œil rond, contour noir épais. Dessin maison.
+const PACGIRL_SVG = '<svg viewBox="0 0 100 100" width="28" height="28" aria-hidden="true">'
+  + '<path d="M90 34 A42 42 0 1 0 90 74 L54 54 Z" fill="#FFE600" stroke="#111" stroke-width="7" stroke-linejoin="round"/>'
+  + '<circle cx="58" cy="34" r="7" fill="#111"/>'
+  + '<path d="M30 22 L6 8 Q0 24 8 38 Z M30 22 L48 0 Q60 10 56 26 Z" fill="#E53935" stroke="#111" stroke-width="3" stroke-linejoin="round"/>'
+  + '<circle cx="30" cy="22" r="7" fill="#E53935" stroke="#111" stroke-width="3"/></svg>';
 let _planArcade = null;
 function planArcade(){
   if(_planArcade && _planArcade.length === ministers.length) return _planArcade;
@@ -1284,7 +1291,7 @@ function planArcade(){
   _planArcade = ministers.map(() => null);
   const icone = (j) => j >= 0 && _planArcade[j] && _planArcade[j] !== 'point';
   _planArcade.forEach((_, i) => {
-    if(i === 0) { _planArcade[i] = spriteSvg('pacgirl', COULEURS.pacgirl); return; }
+    if(i === 0) { _planArcade[i] = PACGIRL_SVG; return; }
     if(FANTOMES_FIXES[ministers[i].name]) { _planArcade[i] = FANTOMES_FIXES[ministers[i].name](); return; }
     const voisinFixe = (j) => j < ministers.length && FANTOMES_FIXES[ministers[j]?.name];
     if((i % cols !== cols - 1 && voisinFixe(i + 1)) || voisinFixe(i + cols)) { _planArcade[i] = 'point'; return; }
