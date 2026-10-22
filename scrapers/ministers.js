@@ -29,7 +29,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 const historique = (() => { try { return JSON.parse(readFileSync('data/elus-historique.json', 'utf8')).elus ?? {}; } catch { return {}; } })();
 import * as cheerio from 'cheerio';
 
-const PAGE_URL = 'https://www.quebec.ca/premiere-ministre/equipe/conseil-des-ministres';
+const PAGE_URL = 'https://www.quebec.ca/premier-ministre/equipe/conseil-des-ministres';   // l'adresse suit le titre (première → premier ministre, oct. 2026)
 const HTML_PATH = 'gabarit.html';   // le MODÈLE, jamais servi : les pages en sont tirées
 const OUT_PATH = 'data/ministers.json';
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
@@ -123,6 +123,13 @@ async function main() {
     ministers.push({ name: displayName, role, roleEn, party: parti });
   });
 
+  // Entre deux gouvernements, la page se vide (22 oct. 2026 : nouveau premier ministre, conseil pas
+  // encore nommé). On garde alors la liste précédente plutôt que d'écrire 0 ministre, qui ferait
+  // échouer toute la tournée ; elle sera remplacée dès que la page affichera le nouveau conseil.
+  if (ministers.length === 0) {
+    console.log(`⚠ Aucun ministre sur ${PAGE_URL} (conseil pas encore nommé ?) : ${OUT_PATH} gardé tel quel.`);
+    return;
+  }
   mkdirSync('data', { recursive: true });
   writeFileSync(OUT_PATH, JSON.stringify({ source: PAGE_URL, scrapedAt: new Date().toISOString(), count: ministers.length, ministers }, null, 2));
 
