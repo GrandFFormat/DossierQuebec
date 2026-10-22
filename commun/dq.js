@@ -409,9 +409,9 @@ const translations = {
     'aboutils.html':"<div class=\"md-carte-tete\"><h2>What the subscription gives</h2></div><p>The planned tools, each with its status. A tool marked “Soon” does not exist yet: subscribers get it at no extra cost as soon as it is released, at the same price for as long as the subscription stays active. Tools on city decisions await the cities’ approval: until then they stay free or upcoming.</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>RSS feeds</b> — the feed of all the news, plus custom feeds per keyword, per MNA or per ministry.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — the Assembly's votes, attendance and bills as Excel or CSV files.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Follow a company or an organization</b> — its briefs filed in committee at the National Assembly, in one place, and an alert for each new brief.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Ad-free</b> — the site without any ads, should ads ever appear on it.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Monthly recap, subscriber edition</b> — the Québec City and Montréal council recap, with the “Where the money goes” section.</div></li></ul>",
     'abforfaits.html':"<div class=\"md-carte-tete\"><h2>The plans</h2></div><ul class=\"ab-forfaits\"><li class=\"ab-forfait\" data-forfait=\"mensuel\" role=\"button\" tabindex=\"0\" onclick=\"abChoisirForfait(this.dataset.forfait)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();abChoisirForfait(this.dataset.forfait)}\"><b class=\"ab-montant\">$9.99</b><span>a month</span></li><li class=\"ab-forfait\" data-forfait=\"trimestriel\" role=\"button\" tabindex=\"0\" onclick=\"abChoisirForfait(this.dataset.forfait)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();abChoisirForfait(this.dataset.forfait)}\"><b class=\"ab-montant\">$26.99</b><span>every 3 months</span></li><li class=\"ab-forfait\" data-forfait=\"annuel\" role=\"button\" tabindex=\"0\" onclick=\"abChoisirForfait(this.dataset.forfait)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();abChoisirForfait(this.dataset.forfait)}\"><b class=\"ab-montant\">$99</b><span>a year — two months free</span></li></ul><p class=\"md-note\">Prices in Canadian dollars, with no taxes added: the amount shown is the amount paid. Card payment on Stripe's secure page: DossierQuébec never sees your card. Cancel anytime, from this page or My file, in two clicks: the subscription stays active until the end of the paid period, then stops with no further charge.</p>",
     'abcadeau.html':"<div class=\"md-carte-tete\"><h2>Give 1 month, 3 months or 1 year</h2><span class=\"md-etiquette\">Gift</span></div><p>A fixed length: you pay once, with no renewal. The code arrives in your email and in My file: give it to anyone you like.</p><ul class=\"ab-forfaits\"><li class=\"ab-forfait ab-cadeau\" data-duree=\"mensuel\" role=\"button\" tabindex=\"0\" onclick=\"abOffrir(this.dataset.duree, this)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();abOffrir(this.dataset.duree, this)}\"><b class=\"ab-montant\">$9.99</b><span>1 month</span></li><li class=\"ab-forfait ab-cadeau\" data-duree=\"trimestriel\" role=\"button\" tabindex=\"0\" onclick=\"abOffrir(this.dataset.duree, this)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();abOffrir(this.dataset.duree, this)}\"><b class=\"ab-montant\">$26.99</b><span>3 months</span></li><li class=\"ab-forfait ab-cadeau\" data-duree=\"annuel\" role=\"button\" tabindex=\"0\" onclick=\"abOffrir(this.dataset.duree, this)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();abOffrir(this.dataset.duree, this)}\"><b class=\"ab-montant\">$99</b><span>1 year</span></li></ul><p class=\"md-note\">You need to be signed in to give. Card payment on Stripe's secure page, with no taxes added.</p>",
-    'mdcadeau.html':"<span class=\"md-cadeau-titre\">🎁 Give 1 month, 3 months or 1 year</span><span class=\"md-cadeau-puces\"><button type=\"button\" class=\"md-cadeau-puce ab-cadeau\" data-duree=\"mensuel\" onclick=\"abOffrir(this.dataset.duree, this)\">1 month · $9.99</button> <button type=\"button\" class=\"md-cadeau-puce ab-cadeau\" data-duree=\"trimestriel\" onclick=\"abOffrir(this.dataset.duree, this)\">3 months · $26.99</button> <button type=\"button\" class=\"md-cadeau-puce ab-cadeau\" data-duree=\"annuel\" onclick=\"abOffrir(this.dataset.duree, this)\">1 year · $99</button></span><span class=\"md-note\">One-time payment; the code arrives by email.</span>",
+    'mdcadeau.html':"<span class=\"md-cadeau-titre\">🎁 Give 1 month, 3 months or 1 year</span><span class=\"md-cadeau-puces\"><button type=\"button\" class=\"md-cadeau-puce ab-cadeau\" data-duree=\"mensuel\" onclick=\"abOffrir(this.dataset.duree, this)\">1 month · $9.99</button> <button type=\"button\" class=\"md-cadeau-puce ab-cadeau\" data-duree=\"trimestriel\" onclick=\"abOffrir(this.dataset.duree, this)\">3 months · $26.99</button> <button type=\"button\" class=\"md-cadeau-puce ab-cadeau\" data-duree=\"annuel\" onclick=\"abOffrir(this.dataset.duree, this)\">1 year · $99</button> <select class=\"md-cadeau-qte\" aria-label=\"How many codes\" title=\"How many codes\"><option value=\"1\">× 1</option><option value=\"2\">× 2</option><option value=\"3\">× 3</option><option value=\"4\">× 4</option><option value=\"5\">× 5</option><option value=\"6\">× 6</option><option value=\"7\">× 7</option><option value=\"8\">× 8</option><option value=\"9\">× 9</option><option value=\"10\">× 10</option></select></span><span class=\"md-note\">One-time payment; the code arrives by email.</span>",
     'aboffert.html':"<div class=\"md-carte-tete\"><h2>Give a subscription</h2><span class=\"md-etiquette\">Recurring</span></div><p>You pay every month, every 3 months or every year for someone else, until you cancel. The code arrives in your email and in My file: the person pastes it in the “Enter your code here” box. Their access follows your payments and stops if you cancel.</p><ul class=\"ab-forfaits\"><li class=\"ab-forfait ab-offert\" data-forfait=\"mensuel\" role=\"button\" tabindex=\"0\" onclick=\"abOffrirAbonnement(this.dataset.forfait, this)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();abOffrirAbonnement(this.dataset.forfait, this)}\"><b class=\"ab-montant\">$9.99</b><span>per month</span></li><li class=\"ab-forfait ab-offert\" data-forfait=\"trimestriel\" role=\"button\" tabindex=\"0\" onclick=\"abOffrirAbonnement(this.dataset.forfait, this)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();abOffrirAbonnement(this.dataset.forfait, this)}\"><b class=\"ab-montant\">$26.99</b><span>every 3 months</span></li><li class=\"ab-forfait ab-offert\" data-forfait=\"annuel\" role=\"button\" tabindex=\"0\" onclick=\"abOffrirAbonnement(this.dataset.forfait, this)\" onkeydown=\"if(event.key==='Enter'||event.key===' '){event.preventDefault();abOffrirAbonnement(this.dataset.forfait, this)}\"><b class=\"ab-montant\">$99</b><span>per year</span></li></ul><p class=\"md-note\">The first period starts with your payment, even if the code has not been used yet. You cancel at any time in My file, at no cost. You need to be signed in to give.</p>",
-    'mdoffert.html':"<span class=\"md-cadeau-titre\">🔁 Give a subscription</span><span class=\"md-cadeau-puces\"><button type=\"button\" class=\"md-cadeau-puce ab-offert\" data-forfait=\"mensuel\" onclick=\"abOffrirAbonnement(this.dataset.forfait, this)\">$9.99 / month</button> <button type=\"button\" class=\"md-cadeau-puce ab-offert\" data-forfait=\"trimestriel\" onclick=\"abOffrirAbonnement(this.dataset.forfait, this)\">$26.99 / 3 months</button> <button type=\"button\" class=\"md-cadeau-puce ab-offert\" data-forfait=\"annuel\" onclick=\"abOffrirAbonnement(this.dataset.forfait, this)\">$99 / year</button></span><span class=\"md-note\">You pay every month, every 3 months or every year for someone else, until you cancel. The first period starts with your payment; the code arrives by email.</span>",
+    'mdoffert.html':"<span class=\"md-cadeau-titre\">🔁 Give a subscription / month, / 3 months or / year</span><span class=\"md-cadeau-puces\"><button type=\"button\" class=\"md-cadeau-puce ab-offert\" data-forfait=\"mensuel\" onclick=\"abOffrirAbonnement(this.dataset.forfait, this)\">$9.99 / month</button> <button type=\"button\" class=\"md-cadeau-puce ab-offert\" data-forfait=\"trimestriel\" onclick=\"abOffrirAbonnement(this.dataset.forfait, this)\">$26.99 / 3 months</button> <button type=\"button\" class=\"md-cadeau-puce ab-offert\" data-forfait=\"annuel\" onclick=\"abOffrirAbonnement(this.dataset.forfait, this)\">$99 / year</button></span><span class=\"md-note\">You pay every month, every 3 months or every year for someone else, until you cancel. The first period starts with your payment; the code arrives by email.</span>",
     'abcode.html':"<div class=\"md-carte-tete\"><h2>Have a code?</h2></div><p>Paste it here. The subscription opens on your account for the length given; if you already have time left, it is added. A gift subscription code keeps you subscribed as long as the person giving it keeps paying.</p>",
     'abcode.ph':"Enter your code here",
     'abcode.btn':"Use the code",
@@ -2314,7 +2314,7 @@ async function abOffrir(duree, case_){
   const r = await fetch('/api/abonnement?action=cadeau', {
     method: 'POST',
     headers: { Authorization: `Bearer ${session.access_token}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ duree, langue: isEn ? 'en' : 'fr' }),
+    body: JSON.stringify({ duree, quantite: case_?.closest('.md-cadeau-puces')?.querySelector('.md-cadeau-qte')?.value || 1, langue: isEn ? 'en' : 'fr' }),
   }).catch(() => null);
   const d = r ? await r.json().catch(() => ({})) : {};
   if(d.url){ location.assign(d.url); return; }
@@ -2446,6 +2446,39 @@ async function abUtiliserCode(bouton){
 window.abUtiliserCode = abUtiliserCode;
 
 // Les codes achetés par ce compte (Mon dossier), utilisés ou non.
+// ✉ et ⧉ à côté d'un code pas encore utilisé (Martin, 21 oct. 2026) : le message tout prêt, avec le lien
+// qui remplit la case du code, à envoyer par courriel ou à coller où l'on veut.
+function abMessageCode(code, quoi, isEn){
+  const lien = `${location.origin}/abonnement?code=${encodeURIComponent(code.replace(/-/g, ''))}${isEn ? '&lang=en' : ''}#code`;
+  return {
+    sujet: isEn ? 'A DossierQuébec subscription for you' : 'Un abonnement à DossierQuébec pour vous',
+    corps: isEn
+      ? `I am giving you ${quoi} of DossierQuébec: bills, votes and MNAs of the National Assembly, with the subscriber tools.
+
+Click to activate it (the code is already filled in):
+${lien}
+
+Code: ${code}`
+      : `Je vous offre ${quoi} à DossierQuébec : projets de loi, votes et élus de l’Assemblée nationale, avec les outils des abonné·e·s.
+
+Cliquez pour l’activer (le code est déjà inscrit) :
+${lien}
+
+Code : ${code}`,
+  };
+}
+function abBoutonsCode(code, quoi, isEn){
+  const m = abMessageCode(code, quoi, isEn);
+  const mail = `mailto:?subject=${encodeURIComponent(m.sujet)}&body=${encodeURIComponent(m.corps)}`;
+  return ` <a class="md-bouton-doux" href="${mail}" title="${isEn ? 'Send by email' : 'Envoyer par courriel'}">✉</a> <button type="button" class="md-bouton-doux" data-texte="${mdH(m.corps)}" title="${isEn ? 'Copy the message' : 'Copier le message'}" onclick="abCopierCode(this)">⧉</button>`;
+}
+function abCopierCode(b){
+  const isEn = currentLang === 'en';
+  const fait = () => { b.textContent = '✓'; setTimeout(() => { b.textContent = '⧉'; }, 1500); };
+  (navigator.clipboard ? navigator.clipboard.writeText(b.dataset.texte) : Promise.reject()).then(fait).catch(() => window.prompt(isEn ? 'Copy:' : 'Copiez :', b.dataset.texte));
+}
+window.abCopierCode = abCopierCode;
+
 async function abMesCodes(isEn){
   try{
     const { data: { session } } = await supabaseClient.auth.getSession();
@@ -2456,7 +2489,7 @@ async function abMesCodes(isEn){
     const duree = (m) => isEn ? (m === 1 ? '1 month' : m === 12 ? '1 year' : `${m} months`) : (m === 1 ? '1 mois' : m === 12 ? '1 an' : `${m} mois`);
     const utilise = (u) => u ? (isEn ? 'used' : 'utilisé') : (isEn ? 'not used yet' : 'pas encore utilisé');
     const listeCodes = codes.length ? `<p class="md-note"><b>${isEn ? 'Your gift codes' : 'Vos codes cadeaux'}</b></p><ul class="ab-mes-codes">${codes.map((c) =>
-      `<li><code>${mdH(c.code)}</code> — ${duree(c.mois)} — ${utilise(c.utilise)}</li>`).join('')}</ul>` : '';
+      `<li><code>${mdH(c.code)}</code> — ${duree(c.mois)} — ${utilise(c.utilise)}${c.utilise ? '' : abBoutonsCode(c.code, isEn ? duree(c.mois) : `${duree(c.mois)} d’abonnement`, isEn)}</li>`).join('')}</ul>` : '';
     // Les abonnements RÉCURRENTS offerts (21 oct. 2026) : le donateur les gère et les annule d'ici.
     const rythme = { mensuel: isEn ? 'every month' : 'chaque mois', trimestriel: isEn ? 'every 3 months' : 'chaque trimestre', annuel: isEn ? 'every year' : 'chaque année' };
     const etatOffert = (o) => !o.actif
@@ -2465,7 +2498,7 @@ async function abMesCodes(isEn){
         ? (isEn ? `cancelled, ends on ${abDate(o.fin, true)}` : `annulé, se termine le ${abDate(o.fin, false)}`)
         : '';
     const listeOfferts = offerts.length ? `<p class="md-note"><b>${isEn ? 'Subscriptions you are giving' : 'Vos abonnements offerts'}</b></p><ul class="ab-mes-codes">${offerts.map((o) =>
-      `<li><code>${mdH(o.code)}</code> — ${isEn ? 'gift subscription, renewed' : 'abonnement offert, renouvelé'} ${rythme[o.forfait] || ''} — ${utilise(o.utilise)}${etatOffert(o) ? ` — ${etatOffert(o)}` : ''}${o.actif
+      `<li><code>${mdH(o.code)}</code> — ${isEn ? 'gift subscription, renewed' : 'abonnement offert, renouvelé'} ${rythme[o.forfait] || ''} — ${utilise(o.utilise)}${!o.utilise && o.actif ? abBoutonsCode(o.code, isEn ? 'a subscription' : 'un abonnement', isEn) : ''}${etatOffert(o) ? ` — ${etatOffert(o)}` : ''}${o.actif
         ? ` <button type="button" class="md-bouton-doux" data-code="${mdH(o.code)}" onclick="abGererOffert('portail', this)">${isEn ? 'Manage' : 'Gérer'}</button>${o.annulationPrevue ? '' : ` <button type="button" class="md-bouton-doux" data-code="${mdH(o.code)}" onclick="abGererOffert('annuler', this)">${isEn ? 'Cancel' : 'Annuler'}</button>`}`
         : ''}</li>`).join('')}</ul><p class="md-note ab-offert-etat" aria-live="polite"></p>` : '';
     return listeCodes + listeOfferts;

@@ -2263,3 +2263,10 @@
 .md-cadeau-puces{display:grid; grid-template-columns:repeat(3, 120px); gap:8px;}
 .md-cadeau-puces .md-cadeau-puce{margin:0; text-align:center;}
 @media (max-width:760px){ .md-cadeau-discret > div[data-i18n]{grid-template-columns:1fr;} .md-cadeau-puces{grid-template-columns:repeat(3, minmax(0, 1fr));} }
+
+/* Combien de codes d'un coup, après « 1 an » (Martin, 21 oct. 2026). */
+.md-cadeau-puces{grid-template-columns:repeat(3, 120px) auto;}
+.md-cadeau-qte{font:inherit; font-size:13px; border:1px solid var(--ink); background:var(--bg, #fff); color:inherit; padding:2px 4px; cursor:pointer;}
+@media (max-width:760px){ .md-cadeau-puces{grid-template-columns:repeat(3, minmax(0, 1fr)) auto;} }
+
+.md-cadeau-discret > div[data-i18n]{grid-template-columns:minmax(220px, 360px) auto 1fr;}

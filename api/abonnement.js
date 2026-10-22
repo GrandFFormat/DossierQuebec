@@ -217,6 +217,7 @@ export default async function handler(req, res) {
       const anglais = String(corps?.langue ?? '') === 'en';
       const duree = String(corps?.duree ?? '');
       if (!Object.hasOwn(DUREES, duree)) return res.status(400).json({ erreur: 'durée inconnue' });
+      const quantite = Math.min(10, Math.max(1, parseInt(corps?.quantite ?? '1', 10) || 1));
       const session = await stripe('/checkout/sessions', {
         // Un paiement UNIQUE : le cadeau ne se renouvelle pas sur la carte de l'acheteur. Le montant
         // est fixé ici, en CAD, jamais par le navigateur.
@@ -224,13 +225,14 @@ export default async function handler(req, res) {
         'line_items[0][price_data][currency]': 'cad',
         'line_items[0][price_data][unit_amount]': String(DUREES[duree].montant),
         'line_items[0][price_data][product_data][name]': nomProduit(duree, anglais),
-        'line_items[0][quantity]': '1',
+        'line_items[0][quantity]': String(quantite),
         success_url: `${site()}/${retourDe()}?cadeau=merci`,
         cancel_url: `${site()}/abonnement?cadeau=annule#offrir`,
         client_reference_id: u.id,
         // Ce que le webhook relit pour fabriquer le code (api/_cadeau.js, livrerCadeau).
         'metadata[type]': 'cadeau',
         'metadata[duree]': duree,
+        'metadata[quantite]': String(quantite),
         'metadata[user_id]': u.id,
         'metadata[langue]': anglais ? 'en' : 'fr',
         locale: anglais ? 'en' : 'fr-CA',

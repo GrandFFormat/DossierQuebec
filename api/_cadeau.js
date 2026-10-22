@@ -109,34 +109,40 @@ export async function livrerCadeau(session) {
     console.error('CADEAU PAYÉ ILLISIBLE (durée, compte ou courriel manquant) — à régler à la main :', session.id);
     return 'illisible';
   }
+  // Plusieurs codes d'un coup (Martin, 21 oct. 2026) : un code et un courriel par unité, pour qu'on
+  // transfère chacun à une personne différente. Le 1er garde l'id de session, les suivants « id:2 », « id:3 »…
+  const quantite = Math.min(10, Math.max(1, parseInt(m.quantite ?? '1', 10) || 1));
   // Le montant payé doit être celui de la durée : une session fabriquée ailleurs ne vaut rien ici.
-  if (session.amount_total !== d.montant || session.currency !== 'cad') {
+  if (session.amount_total !== d.montant * quantite || session.currency !== 'cad') {
     console.error('CADEAU : montant inattendu', session.id, session.amount_total, session.currency);
     return 'montant';
   }
 
-  let ligne = await lire(session.id);
-  if (!ligne) {
-    await supabase('/rest/v1/codes_cadeaux?on_conflict=stripe_session_id', {
-      methode: 'POST',
-      entetes: { Prefer: 'resolution=ignore-duplicates,return=minimal' },
-      corps: [{
-        code: nouveauCode(), mois: d.mois, lecture_seule: false,
-        stripe_session_id: session.id, acheteur, destinataire: courriel,
-        note: `Cadeau payé${modeStripe() === 'test' ? ' [ESSAI]' : ''}`,
-      }],
-    });
-    // Relu plutôt que supposé : deux livraisons croisées, l'une gagne, c'est le code enregistré qui fait foi.
-    ligne = await lire(session.id);
-  }
-  if (!ligne) throw new Error('code cadeau introuvable après insertion');
-  if (ligne.courriel_envoye_le) return 'deja-livre';
+  for (let i = 1; i <= quantite; i++) {
+    const id = i === 1 ? session.id : `${session.id}:${i}`;
+    let ligne = await lire(id);
+    if (!ligne) {
+      await supabase('/rest/v1/codes_cadeaux?on_conflict=stripe_session_id', {
+        methode: 'POST',
+        entetes: { Prefer: 'resolution=ignore-duplicates,return=minimal' },
+        corps: [{
+          code: nouveauCode(), mois: d.mois, lecture_seule: false,
+          stripe_session_id: id, acheteur, destinataire: courriel,
+          note: `Cadeau payé${quantite > 1 ? ` (${i} de ${quantite})` : ''}${modeStripe() === 'test' ? ' [ESSAI]' : ''}`,
+        }],
+      });
+      // Relu plutôt que supposé : deux livraisons croisées, l'une gagne, c'est le code enregistré qui fait foi.
+      ligne = await lire(id);
+    }
+    if (!ligne) throw new Error('code cadeau introuvable après insertion');
+    if (ligne.courriel_envoye_le) continue;
 
-  const { sujet, html } = courrielCadeau({ code: ligne.code, mois: ligne.mois, langue: m.langue });
-  await envoyer({ a: courriel, sujet, html });
-  await supabase(`/rest/v1/codes_cadeaux?stripe_session_id=eq.${encodeURIComponent(session.id)}`, {
-    methode: 'PATCH', entetes: { Prefer: 'return=minimal' }, corps: { courriel_envoye_le: new Date().toISOString() },
-  });
+    const { sujet, html } = courrielCadeau({ code: ligne.code, mois: ligne.mois, langue: m.langue });
+    await envoyer({ a: courriel, sujet: quantite > 1 ? `${sujet} (${i}/${quantite})` : sujet, html });
+    await supabase(`/rest/v1/codes_cadeaux?stripe_session_id=eq.${encodeURIComponent(id)}`, {
+      methode: 'PATCH', entetes: { Prefer: 'return=minimal' }, corps: { courriel_envoye_le: new Date().toISOString() },
+    });
+  }
   return 'livre';
 }
 
