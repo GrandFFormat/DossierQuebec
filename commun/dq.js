@@ -5637,3 +5637,24 @@ function copierCourriel(bouton, adresse){
   else window.prompt('', adresse);
 }
 window.copierCourriel = copierCourriel;
+
+// Un ✕ au bout de chaque boîte de recherche (Martin, 22 oct. 2026) : il efface le texte et relance la
+// recherche comme si on l'avait vidée à la main. Caché tant que la boîte est vide.
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.brutal-search input').forEach((champ) => {
+    if(champ.parentElement.querySelector('.bs-effacer')) return;
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'bs-effacer';
+    b.textContent = '✕';
+    const libelle = () => (currentLang === 'en' ? 'Clear the search' : 'Effacer la recherche');
+    b.setAttribute('aria-label', libelle());
+    b.title = libelle();
+    const maj = () => { b.hidden = !champ.value; };
+    b.addEventListener('click', () => { champ.value = ''; champ.dispatchEvent(new Event('input', { bubbles: true })); maj(); champ.focus(); });
+    champ.addEventListener('input', maj);
+    champ.after(b);
+    maj();
+    setTimeout(maj, 1500);   // une valeur posée par le script (lien ?elu=…) arrive après le chargement
+  });
+});

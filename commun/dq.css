@@ -2301,3 +2301,8 @@
 /* Ministres d'un parti disparu : le sprite d'arcade remplace la pastille (22 oct. 2026). */
 .parti-arcade{background:#131313 !important; color:inherit !important; border:2px solid #131313 !important; padding:1px 3px !important; display:inline-flex; align-items:center; cursor:help;}
 .parti-arcade svg{display:block;}
+
+/* Le ✕ qui efface une boîte de recherche (22 oct. 2026), visible seulement quand il y a du texte. */
+.bs-effacer{flex:none; width:48px; border:0; border-left:3px solid var(--ink); background:var(--card); color:var(--ink); font-size:20px; font-weight:900; line-height:1; cursor:pointer;}
+.bs-effacer:hover, .bs-effacer:focus-visible{background:var(--yellow); color:#131313;}
+.bs-effacer[hidden]{display:none;}
