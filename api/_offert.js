@@ -70,7 +70,7 @@ export function courrielOffert({ code, codes, forfait, langue }) {
   <p>Voici le code de l’abonnement que vous offrez (renouvelé ${rythme(forfait, false)}) :</p>
   <p style="font-family:monospace;font-size:24px;font-weight:bold;letter-spacing:2px">${c}</p>
   <p>Donnez ce code à la personne que vous abonnez. Elle le colle sur <a href="${lien}">dossierquebec.ca/abonnement</a>, dans la case « Mettez votre code ici ». Vous payez tant que vous n’annulez pas.</p>
-  <p style="font-size:13px;color:#5B6570">La première période a commencé avec votre paiement. Vous retrouvez le code, et le bouton pour annuler, dans Mon dossier.</p>
+  <p style="font-size:13px;color:#5B6570">La première période a commencé avec votre paiement. Vous retrouvez le code et le bouton pour annuler dans Mon dossier.</p>
   ${carteATransferer({ code, en: false, texteFr: 'On vous offre un abonnement à DossierQuébec' })}
 </div>`;
   return { sujet, html };
