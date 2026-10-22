@@ -2326,7 +2326,7 @@ async function mdAbonnement(isEn, avisCode){
     <p class="md-note ab-code-etat" aria-live="polite">${avisCode ? mdH(avisCode) : ''}</p>
     ${codes}`;
   if(etat?.abonne){
-    zone.innerHTML = `<p class="md-note"><b>${isEn ? 'Subscriber' : 'Abonné·e'}</b> — ${abPhraseActive(etat, isEn)}</p>
+    zone.innerHTML = `<p class="md-note"><a class="md-lien" href="/abonnement${isEn ? '?lang=en' : ''}"><b>${isEn ? 'Subscriber' : 'Abonné·e'}</b></a> — ${abPhraseActive(etat, isEn)}</p>
       <p class="md-ligne">${abBoutonsGestion(etat, isEn)}</p><p class="md-note ab-action-etat" aria-live="polite"></p>${cadeau}`;
   }else{
     zone.innerHTML = `<p class="md-note">${isEn ? 'Free account.' : 'Compte gratuit.'} <a class="md-lien" href="/abonnement${isEn ? '?lang=en' : ''}"><b>${isEn ? 'Subscribe' : 'Abonnez-vous'}</b></a></p>${cadeau}`;
