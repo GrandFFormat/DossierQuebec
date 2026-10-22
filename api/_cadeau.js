@@ -54,6 +54,19 @@ export function carteATransferer({ code, texteFr, texteEn, en }) {
   </a>`;
 }
 
+// ---------- plusieurs codes achetés d'un coup : un seul courriel ----------
+export function courrielCadeaux({ codes, mois, langue }) {
+  const en = langue === 'en';
+  const sujet = en ? `Your ${codes.length} DossierQuébec gift codes` : `Vos ${codes.length} codes cadeaux DossierQuébec`;
+  const cartes = codes.map((code) => carteATransferer({ code, en, texteFr: `On vous offre ${duree(mois, false)} d’abonnement à DossierQuébec`, texteEn: `You have been given ${duree(mois, true)} of DossierQuébec` })
+    .replace(/^<p[^>]*>[\s\S]*?<\/p>\s*/,'<div style="height:14px"></div>')).join('');
+  const html = `<div style="font-family:Arial,sans-serif;max-width:560px;color:#16191D;line-height:1.55">
+  <p>${en ? `Here are your ${codes.length} DossierQuébec gift codes (${duree(mois, true)} each). Each box works once: send each one to a different person. The ✉ and ⧉ buttons in My file prepare the message for you.` : `Voici vos ${codes.length} codes cadeaux DossierQuébec (${duree(mois, false)} chacun). Chaque boîte sert une seule fois : envoyez-les chacune à une personne différente. Les boutons ✉ et ⧉ de Mon dossier préparent le message pour vous.`}</p>
+  ${cartes}
+</div>`;
+  return { sujet, html };
+}
+
 // ---------- le courriel envoyé à l'acheteur ----------
 export function courrielCadeau({ code, mois, langue }) {
   const en = langue === 'en';
@@ -111,13 +124,14 @@ export async function livrerCadeau(session) {
   }
   // Plusieurs codes d'un coup (Martin, 21 oct. 2026) : un code et un courriel par unité, pour qu'on
   // transfère chacun à une personne différente. Le 1er garde l'id de session, les suivants « id:2 », « id:3 »…
-  const quantite = Math.min(10, Math.max(1, parseInt(m.quantite ?? '1', 10) || 1));
+  const quantite = Math.min(100, Math.max(1, parseInt(m.quantite ?? '1', 10) || 1));
   // Le montant payé doit être celui de la durée : une session fabriquée ailleurs ne vaut rien ici.
   if (session.amount_total !== d.montant * quantite || session.currency !== 'cad') {
     console.error('CADEAU : montant inattendu', session.id, session.amount_total, session.currency);
     return 'montant';
   }
 
+  const lignes = [];
   for (let i = 1; i <= quantite; i++) {
     const id = i === 1 ? session.id : `${session.id}:${i}`;
     let ligne = await lire(id);
@@ -135,11 +149,16 @@ export async function livrerCadeau(session) {
       ligne = await lire(id);
     }
     if (!ligne) throw new Error('code cadeau introuvable après insertion');
-    if (ligne.courriel_envoye_le) continue;
-
-    const { sujet, html } = courrielCadeau({ code: ligne.code, mois: ligne.mois, langue: m.langue });
-    await envoyer({ a: courriel, sujet: quantite > 1 ? `${sujet} (${i}/${quantite})` : sujet, html });
-    await supabase(`/rest/v1/codes_cadeaux?stripe_session_id=eq.${encodeURIComponent(id)}`, {
+    lignes.push({ id, ...ligne });
+  }
+  // UN seul courriel, même pour 50 codes (le quota quotidien de Resend) : une carte cliquable par code.
+  if (lignes.every((l) => l.courriel_envoye_le)) return 'deja-livre';
+  const { sujet, html } = quantite === 1
+    ? courrielCadeau({ code: lignes[0].code, mois: lignes[0].mois, langue: m.langue })
+    : courrielCadeaux({ codes: lignes.map((l) => l.code), mois: d.mois, langue: m.langue });
+  await envoyer({ a: courriel, sujet, html });
+  for (const l of lignes) {
+    await supabase(`/rest/v1/codes_cadeaux?stripe_session_id=eq.${encodeURIComponent(l.id)}`, {
       methode: 'PATCH', entetes: { Prefer: 'return=minimal' }, corps: { courriel_envoye_le: new Date().toISOString() },
     });
   }

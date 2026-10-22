@@ -217,7 +217,7 @@ export default async function handler(req, res) {
       const anglais = String(corps?.langue ?? '') === 'en';
       const duree = String(corps?.duree ?? '');
       if (!Object.hasOwn(DUREES, duree)) return res.status(400).json({ erreur: 'durée inconnue' });
-      const quantite = Math.min(10, Math.max(1, parseInt(corps?.quantite ?? '1', 10) || 1));
+      const quantite = Math.min(100, Math.max(1, parseInt(corps?.quantite ?? '1', 10) || 1));
       const session = await stripe('/checkout/sessions', {
         // Un paiement UNIQUE : le cadeau ne se renouvelle pas sur la carte de l'acheteur. Le montant
         // est fixé ici, en CAD, jamais par le navigateur.
