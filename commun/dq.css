@@ -2257,3 +2257,9 @@
 .md-cadeau-titre{font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; letter-spacing:.02em; margin-right:8px;}
 .md-cadeau-puce{background:var(--card); border:2px solid var(--ink); box-shadow:2px 2px 0 var(--ink); padding:3px 10px; margin:4px 6px 4px 0; font:inherit; font-size:13px; font-weight:700; cursor:pointer; color:var(--ink);}
 .md-cadeau-puce:hover, .md-cadeau-puce.ab-forfait-choisi{background:#FFD24D; color:#131313;}
+
+/* Les deux lignes alignées en colonnes : titre | les 3 boîtes | le texte. Sur téléphone, l'une sous l'autre. */
+.md-cadeau-discret > div[data-i18n]{display:grid; grid-template-columns:minmax(220px, 280px) auto 1fr; align-items:center; gap:4px 14px;}
+.md-cadeau-puces{display:grid; grid-template-columns:repeat(3, 120px); gap:8px;}
+.md-cadeau-puces .md-cadeau-puce{margin:0; text-align:center;}
+@media (max-width:760px){ .md-cadeau-discret > div[data-i18n]{grid-template-columns:1fr;} .md-cadeau-puces{grid-template-columns:repeat(3, minmax(0, 1fr));} }
