@@ -1267,12 +1267,18 @@ function spriteSvg(nom, couleur){
 let _planArcade = null;
 function planArcade(){
   if(_planArcade && _planArcade.length === ministers.length) return _planArcade;
+  // Un fantôme ou un fruit a un point en haut, en bas, à gauche et à droite (Martin) : dans la grille
+  // réelle (colonnes lues sur la page, 3 par défaut), aucune autre icône n'est sa voisine.
+  const grille = document.getElementById('ministresGrid');
+  const cols = Math.max(1, (grille ? getComputedStyle(grille).gridTemplateColumns.split(' ').filter(Boolean).length : 3) || 3);
   _planArcade = ministers.map(() => null);
+  const icone = (j) => j >= 0 && _planArcade[j] && _planArcade[j] !== 'point';
   _planArcade.forEach((_, i) => {
     if(i === 0) { _planArcade[i] = spriteSvg('pacgirl', COULEURS.pacgirl); return; }
-    const precedentPoint = i === 1 ? false : _planArcade[i - 1] === 'point';
+    const voisinGauche = i % cols !== 0 && icone(i - 1);
+    const voisinHaut = icone(i - cols);
     const r = Math.random();
-    if(precedentPoint && r < 0.45){
+    if(!voisinGauche && !voisinHaut && r < 0.4){
       const t = Math.random();
       _planArcade[i] = t < 0.55 ? spriteSvg('fantome', COULEURS_FANTOMES[Math.floor(Math.random() * 4)]) : t < 0.8 ? spriteSvg('cerise', COULEURS.cerise) : spriteSvg('fraise', COULEURS.fraise);
     } else _planArcade[i] = 'point';
