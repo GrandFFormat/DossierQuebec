@@ -692,3 +692,12 @@ footer a.lien-dafr { background: #FFD24D; color: #101419; font-weight: 700; padd
 /* Les deux blocs de l avenir côte à côte (22 oct. 2026), l un sous l autre sur téléphone. */
 .avenir-duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; align-items: stretch; margin: 26px 0 32px; }
 .avenir-duo .avis-avenir { margin: 0; max-width: none; }
+
+/* Partager et soutenir, au bas de chaque décision dépliée (22 oct. 2026). */
+.fiche-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--ligne, rgba(127,127,127,.2)); }
+.fiche-actions-titre { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--encre-2, inherit); opacity: .75; }
+.fiche-bouton { font: inherit; font-size: 13px; padding: 5px 11px; border: 1px solid var(--ligne, rgba(127,127,127,.35)); border-radius: 6px; background: transparent; color: inherit; cursor: pointer; text-decoration: none; }
+.fiche-bouton:hover { border-color: currentColor; }
+.fiche-soutien { margin-left: auto; font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 6px; background: #B5D4F4; color: #0C447C; text-decoration: none; }
+.fiche-soutien:hover { background: #85B7EB; }
+@media (max-width: 600px) { .fiche-soutien { margin-left: 0; } }

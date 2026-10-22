@@ -268,6 +268,30 @@ function reinitialiserDepliage() {
 // retombe simplement sur des fiches indépendantes — dégradation sans casse.
 const NOM_ACCORDEON = 'fiches';
 
+// Au bas de chaque décision dépliée (22 oct. 2026) : la partager par courriel ou en copiant le lien,
+// et l'appel à l'abonnement de DossierQuébec. Le lien passe par la recherche (?q=numéro), qui
+// cherche aussi dans l'archive et ouvre la fiche quand elle est seule.
+function actionsFiche(d) {
+  const cle = d.numero || d.objet || '';
+  if (!cle) return '';
+  const lien = new URL(`decisions-de-la-ville-de-montreal?q=${encodeURIComponent(cle)}`, location.href).href;
+  const objet = (d.objet ?? '').slice(0, 140);
+  const mail = `mailto:?subject=${encodeURIComponent(objet)}&body=${encodeURIComponent(`${objet}\n\n${lien}`)}`;
+  return `<div class="fiche-actions">
+      <span class="fiche-actions-titre">${tr('Partager', 'Share')}</span>
+      <a class="fiche-bouton" href="${echapper(mail)}">✉ ${tr('Courriel', 'Email')}</a>
+      <button type="button" class="fiche-bouton" data-lien="${echapper(lien)}" onclick="copierLienFiche(this)">⧉ ${tr('Copier le lien', 'Copy link')}</button>
+      <a class="fiche-soutien" href="https://dossierquebec.ca/abonnement${tr('', '?lang=en')}">👉 ${tr('Soutenez la cause', 'Support the cause')} ❤️</a>
+    </div>`;
+}
+function copierLienFiche(b) {
+  const texte = b.dataset.lien;
+  const avant = b.textContent;
+  const fait = () => { b.textContent = '✓ ' + tr('Copié', 'Copied'); setTimeout(() => { b.textContent = avant; }, 1500); };
+  (navigator.clipboard ? navigator.clipboard.writeText(texte) : Promise.reject()).then(fait).catch(() => window.prompt(tr('Copiez :', 'Copy:'), texte));
+}
+window.copierLienFiche = copierLienFiche;
+
 function carteRepliable(entete, corps) {
   return `<details class="carte pliante" name="${NOM_ACCORDEON}"><summary>${entete}</summary><div class="corps">${corps}</div></details>`;
 }
@@ -292,7 +316,8 @@ function carteDecision(d) {
     <div class="texte-decision" data-id="${echapper(d.id)}"></div>
     ${d.dossier ? `<p class="compte" style="margin:0 0 8px">${tr('Dossier', 'File')} ${echapper(d.dossier)}${d.article ? ` · ${tr('article', 'item')} ${echapper(d.article)}` : ''}</p>` : ''}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${d.type === 'Résolution' ? tr('Procès-verbal officiel (PDF)', 'Official minutes (PDF, in French)') : tr('Document officiel (PDF)', 'Official document (PDF, in French)')} ↗</a>` : ''}
-    ${d.sommairePdf ? ` &nbsp;<a class="lien-pdf" href="${echapper(d.sommairePdf)}" target="_blank" rel="noopener">${tr('Sommaire décisionnel (PDF)', 'Decision summary (PDF, in French)')} ↗</a>` : ''}`;
+    ${d.sommairePdf ? ` &nbsp;<a class="lien-pdf" href="${echapper(d.sommairePdf)}" target="_blank" rel="noopener">${tr('Sommaire décisionnel (PDF)', 'Decision summary (PDF, in French)')} ↗</a>` : ''}
+    ${actionsFiche(d)}`;
   // Espace abonnés (/commun/abonnes.js) : « Suivre ce dossier » et le détail de l'argent. La clé
   // de dossier suit la décision d'une instance à l'autre.
   // Un procès-verbal ou un ordre du jour n'est pas un dossier : rien à suivre.
@@ -937,7 +962,8 @@ function ligneEvenement(e) {
     </div>
     <p class="objet">${echapper(objetDe(d) ?? tr('(sans objet)', '(no subject)'))}</p>`;
   const corps = `${blocResume(resumePour(d))}
-    ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}`;
+    ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}
+    ${actionsFiche(d)}`;
   return carteRepliable(entete, corps);
 }
 
@@ -1106,6 +1132,7 @@ async function init() {
     // Un lien de courriel peut viser un document d'une année passée : la recherche venue de
     // l'adresse n'a rien trouvé, donc on va voir dans l'archive avant de dire qu'il n'y a rien.
     if (recherche && !$('#liste-decisions').querySelector('.carte')) chercherDansArchive(recherche);
+    else if (recherche) { const seules = $('#liste-decisions').querySelectorAll('details.carte'); if (seules.length === 1) seules[0].open = true; }
   }
   if (page === 'votes') rendreVotes();
   if (page === 'conseil') {
