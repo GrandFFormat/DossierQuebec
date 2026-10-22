@@ -268,24 +268,30 @@ function reinitialiserDepliage() {
 // retombe simplement sur des fiches indépendantes — dégradation sans casse.
 const NOM_ACCORDEON = 'fiches';
 
-// Au bas de chaque décision dépliée (22 oct. 2026) : la partager par courriel ou en copiant le lien,
-// et l'appel à l'abonnement de DossierQuébec. Le lien passe par la recherche (?q=numéro), qui
-// cherche aussi dans l'archive et ouvre la fiche quand elle est seule.
+// Au bas de chaque décision dépliée QUI A UN RÉSUMÉ IA (22 oct. 2026) : la partager sur Facebook,
+// sur X ou en copiant le lien, et l'appel à l'abonnement de DossierQuébec. Le texte partagé porte un
+// court récap tiré du résumé, comme sur DQ ; Facebook n'affiche que l'aperçu du lien (règle de FB).
+// Le lien passe par la recherche (?q=numéro), qui cherche aussi dans l'archive et ouvre la fiche.
 function actionsFiche(d) {
+  const r = resumePour(d)?.r;
+  if (!r?.puces?.length || r.sansContenuSubstantiel) return '';
   const cle = d.numero || d.objet || '';
   if (!cle) return '';
   const lien = new URL(`decisions-de-la-ville-de-montreal?q=${encodeURIComponent(cle)}`, location.href).href;
-  const objet = (d.objet ?? '').slice(0, 140);
-  const mail = `mailto:?subject=${encodeURIComponent(objet)}&body=${encodeURIComponent(`${objet}\n\n${lien}`)}`;
+  const coupe = (t, n) => (t.length > n ? t.slice(0, n - 1).replace(/\s+\S*$/, '') + '…' : t);
+  const recap = coupe(r.puces[0], 200);
+  const texteX = coupe(recap, 230);
+  const texteComplet = `${coupe(d.objet ?? '', 160)}\n\n${r.puces.slice(0, 3).map((p) => '• ' + p).join('\n')}\n\n${lien}`;
   return `<div class="fiche-actions">
       <span class="fiche-actions-titre">${tr('Partager', 'Share')}</span>
-      <a class="fiche-bouton" href="${echapper(mail)}">✉ ${tr('Courriel', 'Email')}</a>
-      <button type="button" class="fiche-bouton" data-lien="${echapper(lien)}" onclick="copierLienFiche(this)">⧉ ${tr('Copier le lien', 'Copy link')}</button>
+      <a class="fiche-bouton" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(lien)}" target="_blank" rel="noopener">Facebook</a>
+      <a class="fiche-bouton" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(texteX)}&url=${encodeURIComponent(lien)}" target="_blank" rel="noopener">X</a>
+      <button type="button" class="fiche-bouton" data-texte="${echapper(texteComplet)}" onclick="copierLienFiche(this)">⧉ ${tr('Copier', 'Copy')}</button>
       <a class="fiche-soutien" href="https://dossierquebec.ca/abonnement${tr('', '?lang=en')}">👉 ${tr('Soutenez la cause', 'Support the cause')} ❤️</a>
     </div>`;
 }
 function copierLienFiche(b) {
-  const texte = b.dataset.lien;
+  const texte = b.dataset.texte;
   const avant = b.textContent;
   const fait = () => { b.textContent = '✓ ' + tr('Copié', 'Copied'); setTimeout(() => { b.textContent = avant; }, 1500); };
   (navigator.clipboard ? navigator.clipboard.writeText(texte) : Promise.reject()).then(fait).catch(() => window.prompt(tr('Copiez :', 'Copy:'), texte));
