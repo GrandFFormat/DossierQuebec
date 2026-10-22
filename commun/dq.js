@@ -2223,6 +2223,8 @@ async function renderAbonnement(){
     <div class="md-carte-tete"><h2>${etat?.abonne ? (isEn ? 'Your subscription' : 'Votre abonnement') : (isEn ? 'Subscribe' : 'S’abonner')}</h2></div>
     ${avis}${corps}<p class="md-note ab-action-etat" aria-live="polite"></p>
   </div>`;
+  // Pas connecté : chaque case de forfait le dit (Martin, 21 oct. 2026).
+  document.querySelectorAll('.ab-forfaits').forEach((u) => { u.classList.toggle('ab-sans-compte', Boolean(etat && !etat.connecte)); u.querySelectorAll('.ab-forfait').forEach((li) => { li.dataset.avis = isEn ? 'Sign in first' : 'Identifiez-vous d’abord'; }); });
   _abEtat = etat;
   // Un forfait choisi avant la connexion reste marqué au retour du lien.
   let garde = null; try{ garde = localStorage.getItem('dossierquebec:forfait'); }catch(e){}
