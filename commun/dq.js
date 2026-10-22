@@ -2379,6 +2379,15 @@ async function abGererOffert(action, bouton){
 }
 window.abGererOffert = abGererOffert;
 
+// Le lien de la carte cadeau (courriel) : /abonnement?code=XXXX remplit la case.
+function abCodeDuLien(){
+  const c = new URLSearchParams(location.search).get('code');
+  if(!c) return;
+  const champ = document.querySelector('#code .ab-code-champ');
+  if(champ && !champ.value){ champ.value = c.replace(/[^A-Za-z0-9-]/g, '').slice(0, 40); champ.closest('#code')?.scrollIntoView({ block: 'center' }); }
+}
+document.addEventListener('DOMContentLoaded', () => setTimeout(abCodeDuLien, 300));
+
 // La case « Mettez votre code ici », sur /abonnement et dans Mon dossier. Le serveur vérifie tout
 // (code inconnu ou déjà servi, 10 essais par heure) et écrit l'abonnement.
 function abRaisonCode(d, isEn){

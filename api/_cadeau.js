@@ -40,6 +40,20 @@ export const codeNettoye = (brut) => String(brut ?? '').replace(/[^A-Za-z0-9]/g,
 const duree = (mois, en) => (en ? (mois === 1 ? '1 month' : mois === 12 ? '1 year' : `${mois} months`) : (mois === 1 ? '1 mois' : mois === 12 ? '1 an' : `${mois} mois`));
 export const nomProduit = (forfait, en) => (en ? `DossierQuébec gift subscription (${duree(DUREES[forfait].mois, true)})` : `Abonnement DossierQuébec à offrir (${duree(DUREES[forfait].mois, false)})`);
 
+// La carte à transférer : la personne qui reçoit clique, la case du code est déjà remplie.
+export function carteATransferer({ code, texteFr, texteEn, en }) {
+  const lien = `${site()}/abonnement?code=${encodeURIComponent(code)}${en ? '&lang=en' : ''}#code`;
+  const c = echapper(codeAffiche(code));
+  return `<p style="font-size:13px;color:#5B6570;margin:22px 0 6px">${en ? 'Forward this email: the box below is for the person you are giving it to.' : 'Transférez ce courriel : la boîte ci-dessous est pour la personne à qui vous l’offrez.'}</p>
+  <a href="${lien}" style="display:block;text-decoration:none;color:#131313;background:#FFD24D;border:3px solid #131313;padding:18px 20px;font-family:Arial,sans-serif">
+    <span style="display:block;font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:1px">🎁 DossierQuébec</span>
+    <span style="display:block;font-size:19px;font-weight:bold;margin:6px 0">${en ? texteEn : texteFr}</span>
+    <span style="display:block;font-size:14px">${en ? 'Bills, votes and MNAs of the National Assembly, with the subscriber tools.' : 'Projets de loi, votes et élus de l’Assemblée nationale, avec les outils des abonné·e·s.'}</span>
+    <span style="display:inline-block;margin-top:12px;background:#131313;color:#FFD24D;padding:9px 16px;font-weight:bold">${en ? 'Activate my subscription →' : 'Activer mon abonnement →'}</span>
+    <span style="display:block;font-size:12px;margin-top:10px">${en ? 'Code' : 'Code'} : <b style="font-family:monospace;letter-spacing:1px">${c}</b></span>
+  </a>`;
+}
+
 // ---------- le courriel envoyé à l'acheteur ----------
 export function courrielCadeau({ code, mois, langue }) {
   const en = langue === 'en';
@@ -52,12 +66,14 @@ export function courrielCadeau({ code, mois, langue }) {
   <p style="font-family:monospace;font-size:24px;font-weight:bold;letter-spacing:2px">${c}</p>
   <p>Give it to anyone you like. It is used on <a href="${lien}">dossierquebec.ca/abonnement</a>, in the “Enter your code here” box.</p>
   <p style="font-size:13px;color:#5B6570">The code works once. You also find it in My file.</p>
+  ${carteATransferer({ code, en: true, texteEn: `You have been given ${duree(mois, true)} of DossierQuébec` })}
 </div>`
     : `<div style="font-family:Arial,sans-serif;max-width:560px;color:#16191D;line-height:1.55">
   <p>Voici votre code cadeau DossierQuébec (${duree(mois, false)}) :</p>
   <p style="font-family:monospace;font-size:24px;font-weight:bold;letter-spacing:2px">${c}</p>
   <p>Donnez-le à qui vous voulez. Il s’utilise sur <a href="${lien}">dossierquebec.ca/abonnement</a>, dans la case « Mettez votre code ici ».</p>
   <p style="font-size:13px;color:#5B6570">Le code sert une seule fois. Vous le retrouvez aussi dans Mon dossier.</p>
+  ${carteATransferer({ code, en: false, texteFr: `On vous offre ${duree(mois, false)} d’abonnement à DossierQuébec` })}
 </div>`;
   return { sujet, html };
 }
