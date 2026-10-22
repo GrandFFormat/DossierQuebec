@@ -38,11 +38,26 @@ const lire = async (abonnementId) =>
   (await supabase(`/rest/v1/abonnements_offerts?stripe_subscription_id=eq.${encodeURIComponent(abonnementId)}&select=${CHAMPS}`))?.[0] ?? null;
 
 // ---------- le courriel envoyé au donateur ----------
-export function courrielOffert({ code, forfait, langue }) {
+export function courrielOffert({ code, codes, forfait, langue }) {
+  codes = codes ?? [code];
+  code = codes[0];
   const en = langue === 'en';
   const c = echapper(codeAffiche(code));
   const lien = `${site()}/abonnement`;
-  const sujet = en ? 'Your DossierQuébec subscription code to give' : 'Votre code d’abonnement offert DossierQuébec';
+  const plusieurs = codes.length > 1;
+  const sujet = plusieurs
+    ? (en ? `Your ${codes.length} DossierQuébec subscription codes to give` : `Vos ${codes.length} codes d’abonnement offert DossierQuébec`)
+    : (en ? 'Your DossierQuébec subscription code to give' : 'Votre code d’abonnement offert DossierQuébec');
+  if (plusieurs) {
+    const cartes = codes.map((c2) => carteATransferer({ code: c2, en, texteFr: 'On vous offre un abonnement à DossierQuébec', texteEn: 'You have been given a DossierQuébec subscription' })
+      .replace(/^<p[^>]*>[\s\S]*?<\/p>\s*/, '<div style="height:14px"></div>')).join('');
+    return { sujet, html: `<div style="font-family:Arial,sans-serif;max-width:560px;color:#16191D;line-height:1.55">
+  <p>${en
+    ? `Here are the ${codes.length} codes of the subscriptions you are giving (renewed ${rythme(forfait, true)}). Each box works once: send each one to a different person. The ✉ and ⧉ buttons in My file prepare the message. You pay for all of them until you cancel; cancelling ends all ${codes.length}.`
+    : `Voici les ${codes.length} codes des abonnements que vous offrez (renouvelés ${rythme(forfait, false)}). Chaque boîte sert une seule fois : envoyez-les chacune à une personne différente. Les boutons ✉ et ⧉ de Mon dossier préparent le message. Vous payez pour tous tant que vous n’annulez pas ; annuler les arrête tous les ${codes.length}.`}</p>
+  ${cartes}
+</div>` };
+  }
   const html = en
     ? `<div style="font-family:Arial,sans-serif;max-width:560px;color:#16191D;line-height:1.55">
   <p>Here is the code of the subscription you are giving (renewed ${rythme(forfait, true)}):</p>
@@ -84,10 +99,12 @@ async function codeLibre() {
 export async function synchroniserOffert(sub) {
   const actif = ACTIFS.includes(sub.status);
   const m = sub.metadata ?? {};
-  let ligne = await lire(sub.id);
-  if (!ligne) {
+  const quantite = Math.min(100, Math.max(1, parseInt(sub.items?.data?.[0]?.quantity ?? 1, 10) || 1));
+  const ids = Array.from({ length: quantite }, (_, i) => (i === 0 ? sub.id : `${sub.id}:${i + 1}`));
+  let lignes = (await Promise.all(ids.map(lire))).filter(Boolean);
+  if (lignes.length < ids.length) {
     // Rien à créer pour un abonnement qui n'a jamais été payé (« incomplete ») ou déjà terminé.
-    if (!actif) return 'offert-inactif';
+    if (!actif && !lignes.length) return 'offert-inactif';
     const donateur = UUID.test(m.donateur ?? '') ? m.donateur : null;
     if (!donateur || !Object.hasOwn(FORFAITS, m.forfait)) {
       console.error('ABONNEMENT OFFERT ILLISIBLE (donateur ou forfait manquant) — à régler à la main :', sub.id);
@@ -99,55 +116,71 @@ export async function synchroniserOffert(sub) {
       console.error('ABONNEMENT OFFERT : prix inattendu', sub.id, prix, m.forfait);
       return 'offert-prix';
     }
-    await supabase('/rest/v1/abonnements_offerts?on_conflict=stripe_subscription_id', {
-      methode: 'POST',
-      entetes: { Prefer: 'resolution=ignore-duplicates,return=minimal' },
-      corps: [{
-        code: await codeLibre(), donateur, forfait: m.forfait,
-        stripe_subscription_id: sub.id,
-        stripe_customer_id: typeof sub.customer === 'string' ? sub.customer : sub.customer?.id ?? null,
-        statut: 'actif',
-        note: modeStripe() === 'test' ? '[ESSAI]' : null,
-      }],
-    });
-    // Relu plutôt que supposé : c'est la ligne enregistrée qui fait foi.
-    ligne = await lire(sub.id);
-    if (!ligne) throw new Error('abonnement offert introuvable après insertion');
+    if (actif) {
+      const presents = new Set(lignes.map((l) => l.stripe_subscription_id));
+      for (const id of ids.filter((x) => !presents.has(x))) {
+        await supabase('/rest/v1/abonnements_offerts?on_conflict=stripe_subscription_id', {
+          methode: 'POST',
+          entetes: { Prefer: 'resolution=ignore-duplicates,return=minimal' },
+          corps: [{
+            code: await codeLibre(), donateur, forfait: m.forfait,
+            stripe_subscription_id: id,
+            stripe_customer_id: typeof sub.customer === 'string' ? sub.customer : sub.customer?.id ?? null,
+            statut: 'actif',
+            note: modeStripe() === 'test' ? '[ESSAI]' : null,
+          }],
+        });
+      }
+      // Relu plutôt que supposé : ce sont les lignes enregistrées qui font foi.
+      lignes = (await Promise.all(ids.map(lire))).filter(Boolean);
+      if (lignes.length < ids.length) throw new Error('abonnement offert introuvable après insertion');
+    }
   }
 
   const annulationPrevue = Boolean(sub.cancel_at_period_end || sub.cancel_at);
-  const finMs = finDe(sub, ligne.fin);
-  const etat = {
-    statut: actif ? 'actif' : 'annule',
-    fin: finMs ? new Date(finMs).toISOString() : null,
-    annulation_prevue: annulationPrevue,
-    updated_at: new Date().toISOString(),
-  };
-  await supabase(`/rest/v1/abonnements_offerts?stripe_subscription_id=eq.${encodeURIComponent(sub.id)}`, {
-    methode: 'PATCH', entetes: { Prefer: 'return=minimal' }, corps: etat,
-  });
-  // La ligne du destinataire, et SEULEMENT si elle porte encore cet abonnement offert : un compte qui
-  // a changé de source depuis (il s'est abonné lui-même après une annulation) n'est pas touché.
-  if (ligne.beneficiaire && UUID.test(ligne.beneficiaire)) {
-    await supabase(`/rest/v1/abonnements?user_id=eq.${ligne.beneficiaire}&source=eq.offert&stripe_subscription_id=eq.${encodeURIComponent(sub.id)}`, {
+  for (const ligne of lignes) {
+    const id = ligne.stripe_subscription_id;
+    const finMs = finDe(sub, ligne.fin);
+    const etat = {
+      statut: actif ? 'actif' : 'annule',
+      fin: finMs ? new Date(finMs).toISOString() : null,
+      annulation_prevue: annulationPrevue,
+      updated_at: new Date().toISOString(),
+    };
+    await supabase(`/rest/v1/abonnements_offerts?stripe_subscription_id=eq.${encodeURIComponent(id)}`, {
       methode: 'PATCH', entetes: { Prefer: 'return=minimal' }, corps: etat,
     });
+    // La ligne du destinataire, et SEULEMENT si elle porte encore cet abonnement offert : un compte qui
+    // a changé de source depuis (il s'est abonné lui-même après une annulation) n'est pas touché.
+    if (ligne.beneficiaire && UUID.test(ligne.beneficiaire)) {
+      await supabase(`/rest/v1/abonnements?user_id=eq.${ligne.beneficiaire}&source=eq.offert&stripe_subscription_id=eq.${encodeURIComponent(id)}`, {
+        methode: 'PATCH', entetes: { Prefer: 'return=minimal' }, corps: etat,
+      });
+    }
   }
 
-  if (!ligne.courriel_envoye_le && actif) {
-    const client = ligne.stripe_customer_id ? await stripe(`/customers/${encodeURIComponent(ligne.stripe_customer_id)}`) : null;
+  // UN courriel au donateur pour tous les codes, s'il n'est pas déjà parti.
+  const aEnvoyer = lignes.filter((l) => !l.courriel_envoye_le);
+  if (aEnvoyer.length && actif) {
+    const cid = lignes[0].stripe_customer_id;
+    const client = cid ? await stripe(`/customers/${encodeURIComponent(cid)}`) : null;
     if (!client?.email) {
       console.error('ABONNEMENT OFFERT sans courriel du donateur — code à transmettre à la main :', sub.id);
     } else {
-      const { sujet, html } = courrielOffert({ code: ligne.code, forfait: ligne.forfait, langue: m.langue });
+      const { sujet, html } = courrielOffert({ codes: aEnvoyer.map((l) => l.code), forfait: lignes[0].forfait, langue: m.langue });
       await envoyer({ a: client.email, sujet, html });
-      await supabase(`/rest/v1/abonnements_offerts?stripe_subscription_id=eq.${encodeURIComponent(sub.id)}`, {
-        methode: 'PATCH', entetes: { Prefer: 'return=minimal' }, corps: { courriel_envoye_le: new Date().toISOString() },
-      });
+      for (const l of aEnvoyer) {
+        await supabase(`/rest/v1/abonnements_offerts?stripe_subscription_id=eq.${encodeURIComponent(l.stripe_subscription_id)}`, {
+          methode: 'PATCH', entetes: { Prefer: 'return=minimal' }, corps: { courriel_envoye_le: new Date().toISOString() },
+        });
+      }
     }
   }
   return actif ? 'offert-actif' : 'offert-annule';
 }
+
+// L'id Stripe d'une ligne : « sub_x:3 » → « sub_x ».
+export const abonnementStripeDe = (id) => String(id ?? '').split(':')[0];
 
 // Les abonnements offerts par ce compte, pour Mon dossier.
 export async function offertsDe(userId) {
