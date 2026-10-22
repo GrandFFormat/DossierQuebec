@@ -2213,14 +2213,14 @@ async function renderAbonnement(){
       <p class="md-ligne">${boutons}</p>`;
   }else if(etat.ouvert && !etat.connecte){
     // La connexion sur place (Martin, 21 oct. 2026) : on choisit un forfait, on entre son courriel ici.
-    corps = `<p>${isEn ? 'Pick a plan above, then enter your email: a sign-in link arrives, no password. The subscription is tied to your account.' : 'Choisissez un forfait plus haut, puis entrez votre courriel : un lien de connexion arrive, sans mot de passe. L’abonnement se rattache à votre compte.'}</p>
+    corps = `<p>${isEn ? 'Enter your email: a sign-in link arrives, no password. Then pick your plan above.' : 'Entrez votre courriel : un lien de connexion arrive, sans mot de passe. Ensuite, choisissez votre forfait plus haut.'}</p>
       <div class="md-ligne"><input type="email" id="abEmail" placeholder="${isEn ? 'Your email' : 'Votre courriel'}" aria-label="${isEn ? 'Your email' : 'Votre courriel'}"> <button type="button" class="account-btn" id="abLienBtn" onclick="abEnvoyerLien()">${isEn ? 'Get the link' : 'Recevoir le lien'}</button></div>
       <p class="md-note">${isEn ? 'Open the link in this same browser, then come back to this page.' : 'Ouvrez le lien dans ce même navigateur, puis revenez sur cette page.'}</p>`;
   }else{
     corps = `<p>${isEn ? 'Payment is not open yet. Everything on the site stays free in the meantime.' : 'Le paiement n’est pas encore ouvert. Tout le site reste gratuit d’ici là.'}</p>`;
   }
   zone.innerHTML = `<div class="md-carte">
-    <div class="md-carte-tete"><h2>${etat?.abonne ? (isEn ? 'Your subscription' : 'Votre abonnement') : (isEn ? 'Subscribe' : 'S’abonner')}</h2></div>
+    <div class="md-carte-tete"><h2>${etat?.abonne ? (isEn ? 'Your subscription' : 'Votre abonnement') : etat && !etat.connecte ? (isEn ? 'Sign in' : 'S’identifier') : (isEn ? 'Subscribe' : 'S’abonner')}</h2></div>
     ${avis}${corps}<p class="md-note ab-action-etat" aria-live="polite"></p>
   </div>`;
   // Pas connecté : chaque case de forfait le dit (Martin, 21 oct. 2026).
