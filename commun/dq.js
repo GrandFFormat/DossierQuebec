@@ -2223,6 +2223,10 @@ async function renderAbonnement(){
     <div class="md-carte-tete"><h2>${etat?.abonne ? (isEn ? 'Your subscription' : 'Votre abonnement') : etat && !etat.connecte ? (isEn ? 'Sign in' : 'S’identifier') : (isEn ? 'Subscribe' : 'S’abonner')}</h2></div>
     ${avis}${corps}<p class="md-note ab-action-etat" aria-live="polite"></p>
   </div>`;
+  // Pas connecté : la case du code le dit aussi, avant qu'on la remplisse.
+  { const carte = document.querySelector('#code .md-carte');
+    carte?.querySelector('.ab-code-connexion')?.remove();
+    if(carte && etat && !etat.connecte) carte.querySelector('.md-carte-tete')?.insertAdjacentHTML('beforeend', `<span class="md-etiquette ab-code-connexion">${isEn ? 'Sign in first' : 'Identifiez-vous d’abord'}</span>`); }
   // Pas connecté : chaque case de forfait le dit (Martin, 21 oct. 2026).
   document.querySelectorAll('.ab-forfaits').forEach((u) => { u.classList.toggle('ab-sans-compte', Boolean(etat && !etat.connecte)); u.querySelectorAll('.ab-forfait').forEach((li) => { li.dataset.avis = isEn ? 'Sign in first' : 'Identifiez-vous d’abord'; }); });
   _abEtat = etat;
@@ -2383,7 +2387,9 @@ window.abGererOffert = abGererOffert;
 
 // Le lien de la carte cadeau (courriel) : /abonnement?code=XXXX remplit la case.
 function abCodeDuLien(){
-  const c = new URLSearchParams(location.search).get('code');
+  // Gardé le temps de s'identifier : le lien de connexion ramène sans le ?code=.
+  let c = new URLSearchParams(location.search).get('code');
+  try{ if(c) localStorage.setItem('dossierquebec:code', c); else c = localStorage.getItem('dossierquebec:code'); }catch(e){}
   if(!c) return;
   const champ = document.querySelector('#code .ab-code-champ');
   if(champ && !champ.value){ champ.value = c.replace(/[^A-Za-z0-9-]/g, '').slice(0, 40); champ.closest('#code')?.scrollIntoView({ block: 'center' }); }
@@ -2429,7 +2435,7 @@ async function abUtiliserCode(bouton){
   }).catch(() => null);
   const d = r ? await r.json().catch(() => ({})) : {};
   bouton.disabled = false;
-  if(d.ok){
+  if(d.ok){ try{ localStorage.removeItem('dossierquebec:code'); }catch(e){}
     const fait = d.offert
       ? (isEn
         ? '✓ Done: your subscription is active. It renews as long as the person giving it keeps paying.'
