@@ -2110,7 +2110,7 @@ function mdCompte(isEn, quota){
         <input type="email" id="mdEmail" placeholder="${isEn ? 'Your email' : 'Votre courriel'}" aria-label="${isEn ? 'Your email' : 'Votre courriel'}">
         <button class="account-btn" id="mdLienBtn" onclick="mdEnvoyerLien()">${isEn ? 'Get the link' : 'Recevoir le lien'}</button>
       </div>
-      <p class="md-note" id="mdNote">${isEn ? 'A free account follows 3 things in all — bills and city projects together.' : 'Un compte gratuit suit 3 choses en tout — projets de loi et projets de ville ensemble.'} <a class="md-lien" href="/abonnement${isEn ? '?lang=en' : ''}"><b>${isEn ? 'Subscribe' : 'Abonnez-vous'}</b></a> · <a class="md-lien" href="/abonnement${isEn ? '?lang=en' : ''}#code"><b>${isEn ? 'Received a code?' : 'Vous avez reçu un code?'}</b></a></p>
+      <p class="md-note" id="mdNote">${isEn ? 'A free account follows 3 things in all — bills and city projects together.' : 'Un compte gratuit suit 3 choses en tout — projets de loi et projets de ville ensemble.'} <a class="md-lien" href="/abonnement${isEn ? '?lang=en' : ''}"><b>${isEn ? 'Subscribe' : 'Abonnez-vous'}</b></a> · <a class="md-lien md-lien-surligne" href="/abonnement${isEn ? '?lang=en' : ''}#code"><b>${isEn ? 'Received a code?' : 'Vous avez reçu un code?'}</b></a></p>
     </div>`;
     document.getElementById('mdEmail')?.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); mdEnvoyerLien(); } });
     return;
