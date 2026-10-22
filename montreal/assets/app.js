@@ -945,7 +945,7 @@ function ligneEvenement(e) {
         <span>${dateFr(v.date)}</span>
         ${v.instance ? `<span class="puce">${echapper(lib(v.instance))}</span>` : ''}
         ${v.resultat ? `<span class="resultat ${classeResultat(v.resultat)}">${echapper(lib(v.resultat))}</span>` : ''}
-        ${e.nouveau ? `<span class="puce neuf">${tr('nouveau', 'new')}</span>` : ''}
+        
       </div>
       <p class="objet">${echapper(v.objet ?? tr('(sans objet)', '(no subject)'))}</p>`;
     const corps = `<p class="compte" style="margin:0">
@@ -964,7 +964,7 @@ function ligneEvenement(e) {
       <span>${dateFr(d.date)}</span>
       <span class="puce">${echapper(lib(d.type))}</span>
       ${d.instance ? `<span class="puce">${echapper(lib(d.instance))}</span>` : ''}
-      ${e.nouveau ? `<span class="puce neuf">${tr('nouveau', 'new')}</span>` : ''}
+      ${e.nouveau && resumePour(d)?.r?.puces?.length && !resumePour(d).r.sansContenuSubstantiel ? `<span class="puce neuf">${tr('nouveau', 'new')}</span>` : ''}
     </div>
     <p class="objet">${echapper(objetDe(d) ?? tr('(sans objet)', '(no subject)'))}</p>`;
   const corps = `${blocResume(resumePour(d))}
