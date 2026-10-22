@@ -218,7 +218,7 @@ export function rendreDetail(reponse, ville) {
   const parAnnee = (d.repartitionAnnuelle ?? []).map((r) => `${r.annee} : ${r.montant}`).join(' · ');
   const chiffres = (d.chiffresCles ?? []).map((c) => `${c.libelle} : ${c.valeur}`).join(' · ');
   return `<div class="ab-detail">
-    <div class="ab-detail-titre">${tr("Détail de l'argent", 'Money details')} <span class="ab-etiquette">${echapper(nature(d.nature))}</span> <span class="ab-bientot-abonne">${tr('Bientôt exclusif aux abonné·e·s', 'Soon for subscribers only')}</span></div>
+    <div class="ab-detail-titre">${tr("Détail de l'argent", 'Money details')} <span class="ab-etiquette">${echapper(nature(d.nature))}</span></div>
     ${d.enUnePhrase ? `<p class="ab-phrase">${echapper(d.enUnePhrase)}</p>` : ''}
     <ul>
       ${ligne(tr('Montant', 'Amount'), d.montantPrincipal)}
@@ -253,6 +253,9 @@ const HEURE_LECTURE = tr('demain matin', 'tomorrow morning');
 // une lecture qui n'aura pas lieu. Une ville qui reçoit la chaîne entre dans cette liste.
 const VILLES_DETAIL_LU = new Set(['quebec']);
 export function rendreDemande(reponse, ville) {
+  // Le détail de l'argent n'est plus fabriqué depuis le 22 oct. 2026 (Martin) : un dossier sans
+  // détail ne montre plus rien, ni demande ni avis.
+  return '';
   if (!reponse || reponse.existe) return '';
   if (reponse.lu) return `<div class="ab-demande"><p class="ab-note" style="margin:0">${tr('Ce document a été lu, mais on n’a pas pu en tirer un détail de l’argent fiable. Le PDF officiel fait foi.', "This document was read, but no reliable money details could be drawn from it. The official PDF prevails.")}</p></div>`;
   if (reponse.sansMontant) return `<div class="ab-demande"><p class="ab-note" style="margin:0">${tr('Ce dossier n’a pas de montant à détailler.', 'This item has no amount to detail.')}</p></div>`;

@@ -87,17 +87,9 @@ const ETAPES = [
           argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scrapers/lexique-en.js'],
           secondaire: true,
         },
-        // Le détail de l'argent des nouveaux dossiers avec un montant (et des dossiers de projets
-        // pas encore lus), 30 au plus. Demande aussi les clés Supabase : sautée sans elles.
-        {
-          nom: "Détail de l'argent des nouveaux dossiers",
-          argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scripts/details-du-jour.js', '--projets', '--plafond=30'],
-          secondaire: true,
-          // Promis aux abonnés payants (« dès le lendemain ») : son échec rend le run rouge, après le
-          // commit des données, pour que GitHub prévienne Martin. La panne du 15 au 18 sept. 2026
-          // est passée inaperçue parce que le run restait vert.
-          payant: true,
-        },
+        // Le détail de l'argent (scripts/details-du-jour.js) : ARRÊTÉ le 22 oct. 2026 (Martin). Les
+        // Villes interdisent de le vendre et sa lecture par l'IA coûtait chaque jour. Les détails
+        // déjà lus restent dans Supabase et s'affichent toujours ; aucun nouveau n'est fabriqué.
         // Après les résumés, qu'il relit. Seuls les projets dont un dossier a changé sont refaits.
         {
           nom: 'Récapitulatifs des projets',
