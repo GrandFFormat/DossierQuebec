@@ -688,3 +688,7 @@ h2.page[id], h1.page[id] { scroll-margin-top: 16px; }
 
 /* Lien « propulsé par » DAFRSolution.com, surligné jaune (21 oct. 2026). */
 footer a.lien-dafr { background: #FFD24D; color: #101419; font-weight: 700; padding: 1px 5px; border-radius: 3px; text-decoration: none; }
+
+/* Les deux blocs de l avenir côte à côte (22 oct. 2026), l un sous l autre sur téléphone. */
+.avenir-duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; align-items: stretch; margin: 26px 0 32px; }
+.avenir-duo .avis-avenir { margin: 0; max-width: none; }
