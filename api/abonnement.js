@@ -39,7 +39,7 @@
 
 import { site } from './_alertes.js';
 import { codesDe, DUREES, echangerCode, nomProduit } from './_cadeau.js';
-import { offertDuDonateur, offertsDe } from './_offert.js';
+import { abonnementStripeDe, offertDuDonateur, offertsDe } from './_offert.js';
 import { adresseFlux, ministeres } from './_rss-abonnes.js';
 import { adresseEssai, estActive, FORFAITS, ligneAbonnement, modeStripe, paiementOuvert, prixConforme, prixDe, stripe, stripeConfigure, synchroniser, utilisateurDe } from './_stripe.js';
 
@@ -56,7 +56,7 @@ const clientDe = (o) => (typeof o?.customer === 'string' ? o.customer : o?.custo
 async function abonnementVivant(ligne) {
   if (!ligne?.stripe_subscription_id) return null;
   try {
-    const s = await stripe(`/subscriptions/${encodeURIComponent(ligne.stripe_subscription_id)}`);
+    const s = await stripe(`/subscriptions/${encodeURIComponent(abonnementStripeDe(ligne.stripe_subscription_id))}`);
     return ['active', 'trialing', 'past_due', 'unpaid'].includes(s.status) ? s : null;
   } catch (e) {
     if (absent(e)) return null;
@@ -170,6 +170,7 @@ export default async function handler(req, res) {
       const forfait = String(corps?.forfait ?? 'mensuel');
       const retour = retourDe();
       if (!prixDe(forfait)) return res.status(400).json({ erreur: 'forfait indisponible' });
+      const quantite = Math.min(100, Math.max(1, parseInt(corps?.quantite ?? '1', 10) || 1));
       if (!(await prixConforme(forfait))) return res.status(503).json({ erreur: 'prix mal configuré' });
 
       const vivant = await abonnementVivant(ligne);
@@ -186,7 +187,7 @@ export default async function handler(req, res) {
       const session = await stripe('/checkout/sessions', {
         mode: 'subscription',
         'line_items[0][price]': prixDe(forfait),
-        'line_items[0][quantity]': '1',
+        'line_items[0][quantity]': String(quantite),
         success_url: `${site()}/${retour}?abonnement=merci`,
         cancel_url: `${site()}/abonnement?abonnement=annule`,
         client_reference_id: u.id,
@@ -295,7 +296,7 @@ export default async function handler(req, res) {
         ...(action === 'annuler'
           ? {
             'flow_data[type]': 'subscription_cancel',
-            'flow_data[subscription_cancel][subscription]': offert.stripe_subscription_id,
+            'flow_data[subscription_cancel][subscription]': abonnementStripeDe(offert.stripe_subscription_id),
             'flow_data[after_completion][type]': 'redirect',
             'flow_data[after_completion][redirect][return_url]': `${site()}/${retourDe()}?offert=annulation`,
           }
