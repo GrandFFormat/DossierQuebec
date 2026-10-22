@@ -2283,3 +2283,6 @@
 /* Lisibilité : les paragraphes des cartes respirent, sur téléphone surtout. */
 .md-carte p{line-height:1.5;}
 .md-lien-surligne{display:inline-block; margin-top:4px;}
+
+/* Téléphone : la pastille au-dessus du texte, le texte sur toute la largeur. */
+@media (max-width:600px){ .ab-outils li{flex-direction:column; gap:4px;} .ab-outils .ab-etat{min-width:0;} }
