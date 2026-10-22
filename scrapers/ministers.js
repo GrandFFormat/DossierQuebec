@@ -25,6 +25,8 @@
 // MANUAL_EN_OVERRIDES ci-dessous (2 nouveaux ministres non couverts avant).
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+// Les anciens élus et leur parti (vote box, 22 oct. 2026).
+const historique = (() => { try { return JSON.parse(readFileSync('data/elus-historique.json', 'utf8')).elus ?? {}; } catch { return {}; } })();
 import * as cheerio from 'cheerio';
 
 const PAGE_URL = 'https://www.quebec.ca/premiere-ministre/equipe/conseil-des-ministres';
@@ -109,7 +111,16 @@ async function main() {
     const roleEn = roleEnByName.get(foldName(displayName)) ?? roleEnByName.get(foldName(name)) ?? MANUAL_EN_OVERRIDES[foldName(name)] ?? null;
     if (!roleEn) warnings.push(`${name} : pas de traduction anglaise connue (ni ancienne, ni manuelle) — laissé à null`);
 
-    ministers.push({ name: displayName, role, roleEn, party: dep ? dep.party : null });
+    // Un·e ministre sortant·e qui n'a pas été réélu·e n'est plus dans deputes.json : son parti vient
+    // alors de data/elus-historique.json (le parti sous lequel la personne a siégé), si tous les homonymes
+    // nom y est unique. Sans ça, la pastille du parti restait vide (22 oct. 2026).
+    let parti = dep ? dep.party : null;
+    if (!parti) {
+      const histo = Object.values(historique).filter((e) => foldName(e.name) === foldName(name));
+      const partis = [...new Set(histo.map((e) => e.party).filter(Boolean))];
+      if (partis.length === 1) parti = partis[0];   // un seul parti possible, même pour des homonymes
+    }
+    ministers.push({ name: displayName, role, roleEn, party: parti });
   });
 
   mkdirSync('data', { recursive: true });
