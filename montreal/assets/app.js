@@ -1132,7 +1132,7 @@ async function init() {
     // Un lien de courriel peut viser un document d'une année passée : la recherche venue de
     // l'adresse n'a rien trouvé, donc on va voir dans l'archive avant de dire qu'il n'y a rien.
     if (recherche && !$('#liste-decisions').querySelector('.carte')) chercherDansArchive(recherche);
-    else if (recherche) { const seules = $('#liste-decisions').querySelectorAll('details.carte'); if (seules.length === 1) seules[0].open = true; }
+    else if (recherche) { const seules = $('#liste-decisions').querySelectorAll('details.carte'); if (seules.length === 1) { for (let p = seules[0]; p; p = p.parentElement?.closest('details')) p.open = true; seules[0].scrollIntoView({ block: 'center' }); } }
   }
   if (page === 'votes') rendreVotes();
   if (page === 'conseil') {
