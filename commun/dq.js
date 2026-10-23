@@ -68,7 +68,7 @@ async function chargerDonnees(){
       _echecs.add(nom);
     }
   }));
-  deputes = deputesRaw.map(d => ({ name: d[0], riding: d[1], region: d[2], party: d[3], assnatId: d[4], mandats: d[5] ?? null }));
+  deputes = deputesRaw.map(d => ({ name: d[0], riding: d[1], region: d[2], party: d[3], assnatId: d[4], mandats: d[5] ?? null, wiki: d[6] ?? null }));
   deputeById = new Map(deputes.map(d => [d.assnatId, d]));
   voteById = new Map(votes.map(v => [v.id, v]));
   if(newsItems.length) newsAnchor = newsItems.reduce((max, n) => (n.date > max ? n.date : max), newsItems[0].date);
@@ -1329,6 +1329,9 @@ function pastilleMinistre(party, nom, styleCouleur){
   const titre = `${party} — ${currentLang === 'en' ? disparu.en : disparu.fr}`.replace(/"/g, '&quot;');
   return `<span class="depute-party parti-arcade" title="${titre}" role="img" aria-label="${titre}">${spritePourMinistre(nom)}</span>`;
 }
+// Le « W » à côté du $ (Martin, 23 oct. 2026) : la page Wikipédia de la personne, quand une page sûre
+// existe (scrapers/wikipedia.js) ; sinon rien. Wikipédia raconte le parcours que l'Assemblée n'explique pas.
+const wikiBouton = (nom) => { const w = resolveDepute(nom)?.wiki; return w ? `<a class="wiki-btn" href="${w}" target="_blank" rel="noopener" title="Wikipédia" aria-label="${currentLang === 'en' ? 'Wikipedia page of' : 'Page Wikipédia de'} ${nom.replace(/"/g, '&quot;')}">W</a>` : ''; };
 const finBouton = (nom) => `<button class="fin-btn" type="button" title="${currentLang === 'en' ? 'Public finances' : 'Finances publiques'}" aria-label="${currentLang === 'en' ? 'Public finances of' : 'Finances publiques de'} ${nom.replace(/"/g, '&quot;')}" onclick="voirFinances('${nom.replace(/'/g, "\\'")}')">$</button>`;
 
 /* ---------------- COMPTES (Supabase) ---------------- */
@@ -3525,7 +3528,7 @@ function renderDeputes(filter){
             <div class="dep-riding">${d.riding} — ${d.region}</div>
             <div class="dep-att">${attNote}</div>
           </div>
-          <div class="dep-actions">${partageBouton(d.name)}${finBouton(d.name)}
+          <div class="dep-actions">${partageBouton(d.name)}${wikiBouton(d.name)}${finBouton(d.name)}
           <button class="follow-btn dep-follow ${isFollowed?'on':''}" onclick="toggleFollowDepute('${followKey.replace(/'/g,"\\'")}')">${isFollowed ? t('btn.following') : t('btn.follow')}</button></div>
         </div>`;
       }).join('')}`;
@@ -3582,7 +3585,7 @@ function personCard(p){
       <div class="m-card-top">
         <div class="m-top-row">
           ${pastilleMinistre(party, name, `background:${partyColors[party]}; color:${partyText(party)}`)}
-          ${partageBouton(name)}${finBouton(name)}
+          ${partageBouton(name)}${wikiBouton(name)}${finBouton(name)}
           <button class="follow-btn ${isFollowed?'on':''}" onclick="${followOnclick}">${isFollowed ? t('btn.following') : t('btn.follow')}</button>
         </div>
         <div class="m-name">${name}</div>
