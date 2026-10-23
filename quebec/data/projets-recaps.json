@@ -1,34 +1,46 @@
 {
- "generatedAt": "2026-10-16T13:35:39.526Z",
+ "generatedAt": "2026-10-23T13:42:53.851Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Récapitulatifs rédigés automatiquement à partir de l'objet, du résumé et des résolutions des dossiers de chaque projet, puis vérifiés automatiquement (numéros et nombres contre les dossiers cités, contre-lecture). Ce qui ne passe pas est retiré. En cas d'écart, les documents officiels font foi.",
  "recaps": {
   "tramway": {
    "titre": "Tramway (TramCité)",
-   "signature": "83e56de47a1231e4",
-   "genereLe": "2026-10-16T13:35:39.526Z",
+   "signature": "7dade23c267c6f29",
+   "genereLe": "2026-10-23T13:42:25.267Z",
    "modele": "claude-opus-5",
-   "dossiers": 55,
-   "enBref": "Cette année, la Ville achète des terrains et des droits de passage le long du tracé du tramway, surtout sur la 1re Avenue, le boulevard Laurier, la rue Mendel et des ruelles de La Cité-Limoilou. Elle accorde aussi des contrats pour couper et élaguer des arbres, surveiller la sécurité des chantiers et fournir du matériel d'aqueduc et d'égout. Elle signe des ententes avec le Canadien National pour un pont au-dessus d'une voie ferrée et avec l'Université Laval pour passer sur le campus.",
+   "dossiers": 56,
+   "enBref": null,
    "etapes": [
     {
-     "periode": "Janvier à février 2026",
+     "periode": "Janvier à mars 2026",
      "titre": "Premiers terrains et droits de passage",
-     "texte": "La Ville autorise l'achat de bandes de terrain en bordure de la 1re Avenue, dans La Cité-Limoilou, pour élargir l'emprise de la rue. Elle obtient aussi des droits de passage sur une ruelle près du boulevard René-Lévesque Ouest pour déplacer des conduits et des réseaux d'utilités publiques.",
+     "texte": "La Ville autorise l'achat de bandes de terrain en bordure de la 1re Avenue et de droits de passage sur une ruelle près du boulevard René-Lévesque Ouest et sur des terrains de la rue Mendel. Elle négocie d'abord avec les propriétaires et peut exproprier si aucune entente n'est conclue.",
      "numeros": [
       "DE2026-022",
       "DE2026-063",
       "DE2026-064",
-      "DE2026-065"
+      "DE2026-065",
+      "DE2026-102",
+      "DE2026-103"
+     ]
+    },
+    {
+     "periode": "Février à mars 2026",
+     "titre": "Contrats pour préparer les chantiers",
+     "texte": "La Ville confie des travaux d'arboriculture, la gestion de la santé et de la sécurité sur les chantiers des tronçons TW-01 à TW-06A et la fourniture de matériel d'aqueduc et d'égout pour le tronçon TW-03. Elle ajoute aussi 190 597,00 $ avant taxes à un contrat de réseaux techniques urbains sous le chemin des Quatre-Bourgeois.",
+     "numeros": [
+      "AP2026-018",
+      "AP2026-056",
+      "AP2026-055",
+      "AP2026-068"
      ]
     },
     {
      "periode": "Février à septembre 2026",
-     "titre": "Arbres le long du tracé",
-     "texte": "La Ville confie à une entreprise des travaux d'élagage, d'abattage et d'essouchement pour dégager l'emprise des travaux, pour une somme estimée à 2 840 827,31 $ avant taxes [AP2026-018]. Elle dépose chaque trimestre la liste des ententes sur les arbres signées avec des propriétaires riverains et ajoute un signataire autorisé pour ces ententes.",
+     "titre": "Ententes sur les arbres avec les riverains",
+     "texte": "Le comité exécutif prend acte des rapports trimestriels des ententes signées avec des propriétaires riverains du tracé : abattage, transplantation, élagage ou protection d'arbres, plantation sur terrain privé et entretien par la Ville. Un règlement ajoute le directeur d'arrondissement responsable de la prévention et de la qualité du milieu parmi les personnes qui peuvent signer ces ententes.",
      "numeros": [
-      "AP2026-018",
       "DE2026-069",
       "DE2026-181",
       "PQ2026-018",
@@ -36,63 +48,39 @@
      ]
     },
     {
-     "periode": "Mars 2026",
-     "titre": "Contrats pour les chantiers",
-     "texte": "La Ville embauche une firme pour la santé et la sécurité sur les chantiers des tronçons TW-01 à TW-06A, jusqu'au 31 décembre 2027 [AP2026-056]. Elle achète du matériel d'aqueduc et d'égout pour le tronçon TW-03 et ajoute 190 597,00 $ avant taxes à un contrat de réseaux techniques urbains sous le chemin des Quatre-Bourgeois [AP2026-068].",
-     "numeros": [
-      "AP2026-056",
-      "AP2026-055",
-      "AP2026-068"
-     ]
-    },
-    {
-     "periode": "Mars à mai 2026",
-     "titre": "Droits de passage dans Sainte-Foy et Montcalm",
-     "texte": "La Ville lance des démarches pour obtenir des droits de passage en bordure de la rue Mendel, du boulevard Laurier, de l'avenue Moncton et du boulevard René-Lévesque Ouest. Dans plusieurs cas, une entente avait déjà été conclue avec le propriétaire, mais la Ville entame aussi des procédures d'expropriation pour libérer les emprises à temps.",
-     "numeros": [
-      "DE2026-102",
-      "DE2026-103",
-      "CA-2026-0152",
-      "CA-2026-0196",
-      "CA-2026-0218",
-      "CA-2026-0241"
-     ]
-    },
-    {
-     "periode": "Mai à juillet 2026",
-     "titre": "Ententes avec le CN, l'Université Laval et la CCNQ",
-     "texte": "La Ville s'entend avec le Canadien National pour un pont qui fera passer le tramway, un trottoir et une piste cyclable au-dessus d'une voie ferrée près de la rue Mendel, et avec l'Université Laval pour traverser le campus, moyennant 10 000 000 $ versés à la signature [DE2026-256]. Elle obtient d'occuper une partie du parc de l'Amérique-Française comme aire d'entreposage et de chantier, et retire l'autorisation d'occuper une partie de l'emprise du boulevard Laurier où une station de Métrobus a été démolie [DE2026-150].",
+     "periode": "Juin à juillet 2026",
+     "titre": "Ententes avec le CN et l'Université Laval",
+     "texte": "La Ville s'entend avec le Canadien National pour la construction d'un pont d'étagement dans le secteur de la rue Mendel, et avec l'Université Laval pour passer sur le campus, moyennant 10 000 000 $ versés à la signature de l'acte notarié. Elle obtient aussi d'occuper une partie du parc de l'Amérique-Française comme site d'entreposage et d'installations de chantier.",
      "numeros": [
       "AP2026-197",
       "DE2026-256",
-      "DE2026-258",
-      "DE2026-150"
+      "DE2026-258"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "Un contrat de services professionnels de 1 137 407 $ avant taxes pour le contrôle de la qualité des matériaux et la gestion environnementale des sols sur les tronçons TW-04B à TW-06 et TW-11 à TW-12 est devant le comité exécutif, avec une date cible du 14 octobre 2026.",
+     "texte": "Un contrat de services professionnels pour le contrôle de la qualité des matériaux et la gestion environnementale des sols, sur les tronçons TW-04B à TW-06 et TW-11 à TW-12, attend une décision du comité exécutif.",
      "numeros": [
       "AP2026-289"
      ]
     },
     {
-     "texte": "Les actes notariés des droits de passage sur le campus de l'Université Laval doivent être signés au plus tard le 31 décembre 2026.",
+     "texte": "Une modification à l'entente de confidentialité avec le RTC, Infra CITÉ et Mobilité Infra Québec, qui ajoute des règles de cybersécurité, attend une décision du comité exécutif.",
+     "numeros": [
+      "TW2026-002"
+     ]
+    },
+    {
+     "texte": "Les actes notariés établissant les droits de passage sur le campus de l'Université Laval doivent être signés au plus tard le 31 décembre 2026.",
      "numeros": [
       "DE2026-256"
      ]
     },
     {
-     "texte": "L'entente de servitude avec la Commission de la capitale nationale du Québec sur le parc de l'Amérique-Française est toujours en négociation; l'occupation du terrain est prévue du 6 juillet 2026 au 5 juillet 2033.",
+     "texte": "Une entente de servitude reste à négocier avec la Commission de la capitale nationale du Québec pour le parc de l'Amérique-Française, occupé du 6 juillet 2026 au 5 juillet 2033.",
      "numeros": [
       "DE2026-258"
-     ]
-    },
-    {
-     "texte": "Le contrat d'arboriculture court jusqu'au 31 décembre 2027 et peut être renouvelé deux fois pour 12 mois.",
-     "numeros": [
-      "AP2026-018"
      ]
     }
    ],
@@ -103,23 +91,35 @@
     "retiresContreLecture": [
      {
       "element": "etapes[5]",
-      "raison": "Le texte attribue aux dossiers cités des ruelles « près des rues Godbout, Sir-Thomas-Chapais et des Chênes Est ». Or, parmi les numéros cités (DE2026-203, CA-2026-0362, CA-2026-0383, DE2026-219, DE2026-269, DE2026-271), seule la rue des Chênes Est apparaît (DE2026-271). La rue Godbout provient de DE2026-359 et DE2026-360, et la rue Sir-Thomas-Chapais de DE2026-270 — dossiers non cités. Ces lieux sont donc rattachés aux mauvais dossiers."
+      "raison": "Le texte mentionne des acquisitions « en bordure de la rue Berthiaume et de la rue des Frênes Ouest », mais aucun des dossiers cités (DE2026-203, CA-2026-0362, DE2026-213, DE2026-269, DE2026-270, DE2026-271) ne porte sur ces rues. La rue Berthiaume relève de CA-2026-0365 et la rue des Frênes Ouest de CA-2026-0384, qui ne sont pas cités : faits attribués aux mauvais dossiers."
+     },
+     {
+      "element": "etapes[5]",
+      "raison": "Le texte évoque des ruelles « près des rues Godbout », mais aucun dossier cité ne concerne la rue Godbout (il s'agit de DE2026-359 et DE2026-360, non cités). Parmi les dossiers cités, DE2026-269 vise une ruelle entre la rue des Pins Est et la rue des Peupliers Est, et non la rue Godbout."
+     },
+     {
+      "element": "enBref",
+      "raison": "« Des contrats de services restent à décider par le comité exécutif » suggère plusieurs contrats en attente, alors qu'un seul dossier en cours est un contrat de services professionnels (AP2026-289); l'autre dossier en cours (TW2026-002) est un avenant à une entente de confidentialité, pas un contrat de services. Décompte non appuyé par les dossiers."
+     },
+     {
+      "element": "etapes[3]",
+      "raison": "Le texte parle de droits de passage sur « des ruelles voisines » au pluriel, alors qu'un seul dossier de ruelle est cité dans cet élément (DE2026-179, une partie de ruelle). Le dossier DE2026-180, qui viserait une seconde ruelle, n'est pas cité."
      }
     ]
    }
   },
   "logement": {
    "titre": "Logement social et abordable",
-   "signature": "23c22d6f687171e5",
-   "genereLe": "2026-10-15T13:38:50.131Z",
+   "signature": "797977e8d04f6378",
+   "genereLe": "2026-10-23T13:42:53.850Z",
    "modele": "claude-opus-5",
-   "dossiers": 22,
-   "enBref": "Cette année, la Ville finance du logement social et abordable de plusieurs façons : subventions de démarrage aux organismes, prêts sans intérêts pour acheter des immeubles, subventions pour construire. Elle a aussi créé un emprunt d'agglomération et renfloué une réserve pour payer sa part des projets. En parallèle, elle modifie des règlements d'urbanisme pour permettre des projets précis et ajuste les délais d'ententes déjà signées.",
+   "dossiers": 23,
+   "enBref": "Cette année, la Ville finance des projets de logements sociaux et abordables par des subventions, des prêts sans intérêt à des organismes et des sommes mises en réserve. Elle modifie aussi des ententes déjà signées pour allonger des délais ou ajuster des conditions, et elle change le zonage là où un projet l'exige. Plusieurs décisions relèvent du conseil d'agglomération.",
    "etapes": [
     {
      "periode": "Janvier à juillet 2026",
-     "titre": "Suivi de l'Office municipal d'habitation",
-     "texte": "La Ville soumet au conseil d'agglomération les prévisions budgétaires 2026 puis les états financiers 2025 de l'Office municipal d'habitation de Québec. Elle signe aussi une entente avec l'Office et la Société d'habitation du Québec pour financer des travaux dans les HLM, où elle paie environ 10 % des dépenses reconnues.",
+     "titre": "Budget, comptes et rénovation des HLM",
+     "texte": "La Ville soumet au conseil d'agglomération les prévisions budgétaires 2026 puis les états financiers 2025 de l'Office municipal d'habitation de Québec. Elle signe avec l'Office et la Société d'habitation du Québec une entente pour verser l'aide du Programme de rénovation des habitations à loyer modique, où la Ville paie environ 10 % des dépenses reconnues.",
      "numeros": [
       "CE-2026-0013",
       "CE-2026-0815",
@@ -127,31 +127,40 @@
      ]
     },
     {
-     "periode": "Février à septembre 2026",
-     "titre": "Ajustement d'ententes déjà signées",
-     "texte": "La Ville prolonge des délais et modifie des conditions pour plusieurs organismes et promoteurs : nouvelles dépenses admissibles, dates de versement repoussées, levée d'une garantie hypothécaire, délai de remboursement d'un prêt porté de 18 à 30 mois. Elle clarifie aussi qui acquerra l'immeuble de 100 logements du 9165, boulevard Saint-Jacques.",
+     "periode": "Février à août 2026",
+     "titre": "Ententes du fonds durable modifiées",
+     "texte": "La Ville ajuste trois ententes de subvention du Fonds pour soutenir les projets durables en habitation : un projet au 421, boulevard Langelier, un autre aux 2510 et 2518 à 2520, chemin Sainte-Foy, et un troisième au 401, rue Saint-Paul. Les changements portent sur les dépenses couvertes, les délais de versement et les garanties.",
      "numeros": [
       "PA2026-014",
       "PA2026-025",
-      "PA2026-095",
-      "PA2026-117",
-      "PA2026-124",
-      "CA-2026-0502"
+      "PA2026-117"
+     ]
+    },
+    {
+     "periode": "Mars à octobre 2026",
+     "titre": "Subventions pour construire des logements",
+     "texte": "La Ville verse des subventions à des organismes qui construisent ou transforment des immeubles, dont 994 298,09 $ pour 28 logements au 545, rue Kirouac et 7 512 782 $ pour 222 logements au 1075, chemin Sainte-Foy. Elle ajuste aussi l'accord-cadre pour un immeuble de 100 logements au 9165, boulevard Saint-Jacques, afin que l'Office municipal d'habitation acquière le bâtiment et le terrain.",
+     "numeros": [
+      "CA-2026-0120",
+      "PA2026-098",
+      "CA-2026-0502",
+      "PA2026-128",
+      "PA2026-129"
      ]
     },
     {
      "periode": "Mai à juin 2026",
-     "titre": "Emprunt et réserve pour le logement",
-     "texte": "Le conseil d'agglomération adopte un règlement qui autorise une dépense et un emprunt de 20 000 000 $ pour des projets de logements sociaux et de logements privés abordables. La Ville transfère ensuite 5 000 000 $ de son surplus vers une réserve dédiée au logement social et abordable, et l'utilise aussitôt pour le programme inscrit au plan d'investissement.",
+     "titre": "Sommes réservées au logement",
+     "texte": "La Ville adopte un règlement d'emprunt d'agglomération de 20 000 000 $ pour soutenir des projets de logements sociaux et de logements privés abordables partout sur le territoire. Elle vire aussi 5 000 000 $ de son surplus d'agglomération vers une réserve désormais nommée pour le logement social et abordable, et utilise cette somme pour le programme inscrit au plan d'investissement.",
      "numeros": [
       "PA2026-062",
       "FN2026-028"
      ]
     },
     {
-     "periode": "Mai à juin 2026",
-     "titre": "Règlements pour deux emplacements",
-     "texte": "La Ville adopte un règlement pour permettre un immeuble d'environ 62 logements à l'angle du boulevard Père-Lelièvre et de la rue Labrecque, en autorisant des logements au rez-de-chaussée. Elle modifie un autre règlement au 1300, rue de la Pointe-aux-Lièvres pour permettre 8 logements et 32 chambres destinés à des jeunes adultes en difficulté.",
+     "periode": "Mai à juillet 2026",
+     "titre": "Règlements pour deux projets",
+     "texte": "La Ville adopte un règlement permettant des logements au rez-de-chaussée pour un projet d'environ 62 logements à l'angle du boulevard Père-Lelièvre et de la rue Labrecque. Elle modifie un autre règlement pour permettre 8 logements et 32 chambres au 1300, rue de la Pointe-aux-Lièvres.",
      "numeros": [
       "GT2026-141",
       "GT2026-211"
@@ -159,39 +168,41 @@
     },
     {
      "periode": "Juillet à septembre 2026",
-     "titre": "Démarrage de projets et prêt d'achat",
-     "texte": "La Ville accorde des subventions de 75 000 $ à des organismes pour payer les études de départ : tests de sol, arpentage, examen de titres, esquisses d'architecte. Elle prête aussi jusqu'à 2 000 000 $ sans intérêts, remboursable en 18 mois, à un organisme qui achète l'immeuble du 3055 à 3065, 2e Avenue pour y prévoir environ 251 logements sociaux.",
+     "titre": "Aide au démarrage et prêts",
+     "texte": "La Ville accorde des subventions de démarrage pouvant atteindre 75 000 $ chacune à des organismes qui préparent des projets au 600, 60e Rue Est, au 3055 à 3065, 2e Avenue, au 8190-9120, avenue du Zoo et au 3364, rue Rochambeau. Elle prête jusqu'à 2 000 000 $ sans intérêt pour l'achat de l'immeuble de la 2e Avenue et donne un an de plus pour rembourser un prêt de 4 300 000 $ lié au 2582-2600A, boulevard Montmorency.",
      "numeros": [
-      "PA2026-093",
       "PA2026-090",
       "PA2026-091",
       "PA2026-094",
-      "PA2026-130"
+      "PA2026-130",
+      "PA2026-093",
+      "PA2026-124"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "Le dossier des prévisions budgétaires 2026 de l'Office municipal d'habitation de Québec est encore marqué en cours, avec une décision attendue.",
+     "texte": "Le conseil d'agglomération doit décider du versement d'une subvention pouvant atteindre 268 860 $ à l'Office municipal d'habitation pour le Service d'aide à la recherche de logement en 2026-2027, et de deux ententes avec la Société d'habitation du Québec.",
+     "numeros": [
+      "LS2026-224"
+     ]
+    },
+    {
+     "texte": "Le dossier des prévisions budgétaires 2026 de l'Office municipal d'habitation de Québec est inscrit comme en cours, avec une décision attendue.",
      "numeros": [
       "CE-2026-0013"
      ]
     },
     {
-     "texte": "Pour le projet du 401, rue Saint-Paul, la demande de deuxième versement doit être faite entre le 1er septembre et le 30 novembre 2026, et le versement se fera au plus tard le 31 mars 2027.",
+     "texte": "Pour le projet du 401, rue Saint-Paul, la demande de deuxième versement doit être faite entre le 1er septembre et le 30 novembre 2026, et le versement est prévu au plus tard le 31 mars 2027.",
      "numeros": [
       "PA2026-117"
      ]
     },
     {
-     "texte": "Pour le projet du 545, rue Kirouac, une deuxième part de 497 149,04 $ est prévue en 2027, financée par un règlement d'emprunt.",
+     "texte": "Des versements de la Ville sont prévus après 2026 : 497 149,04 $ en 2027 pour le projet du 545, rue Kirouac, et le solde de la contribution de 4 000 000 $ en 2027 et 2028 pour le projet de la rue de la Pointe-aux-Lièvres.",
      "numeros": [
-      "CA-2026-0120"
-     ]
-    },
-    {
-     "texte": "Pour le projet de la rue de la Pointe-aux-Lièvres, la Ville verse 750 000 $ en 2026, puis le reste en 2027 et 2028.",
-     "numeros": [
+      "CA-2026-0120",
       "PA2026-098"
      ]
     }
@@ -200,16 +211,7 @@
    "verification": {
     "version": 1,
     "retiresMecanique": [],
-    "retiresContreLecture": [
-     {
-      "element": "etapes[2]",
-      "raison": "La phrase « Les organismes doivent respecter la vocation de logement abordable pendant 35 ans après les travaux » est présentée comme valant pour les quatre dossiers cités. Or l'obligation de 35 ans n'apparaît que dans PA2026-128 et PA2026-129; ni CA-2026-0120 (545, rue Kirouac) ni PA2026-098 (Pointe-aux-Lièvres) ne mentionnent une telle condition. Généralisation non appuyée par les dossiers."
-     },
-     {
-      "element": "etapes[2]",
-      "raison": "L'introduction « des organismes dont les projets sont retenus dans les programmes d'habitation » ne correspond pas à PA2026-098 : cette contribution de 4 000 000 $ à UTILE Québec 3 découle d'un projet retenu dans le cadre du Fonds immobilier de solidarité FTQ, et non d'un programme d'habitation (Programme d'habitation abordable Québec) comme pour les trois autres dossiers."
-     }
-    ]
+    "retiresContreLecture": []
    }
   },
   "matieres-residuelles": {
@@ -307,81 +309,76 @@
   },
   "expocite": {
    "titre": "ExpoCité et Centre Vidéotron",
-   "signature": "dfa3fd408e807e0f",
-   "genereLe": "2026-09-14T08:05:38.816Z",
+   "signature": "135925066ebc0210",
+   "genereLe": "2026-10-23T13:41:58.969Z",
    "modele": "claude-opus-5",
-   "dossiers": 10,
-   "enBref": null,
+   "dossiers": 11,
+   "enBref": "Cette année, la Ville remplace des équipements du Centre Vidéotron et signe des contrats de services pour le site d'ExpoCité : ménage, sécurité, placiers. Elle prépare aussi des événements, dont une activité liée à la Coupe du monde de la FIFA 2026 et les Jeux d'hiver du Canada 2027. Elle ajuste enfin l'organisation d'ExpoCité : direction, postes et gestion d'un nouveau bâtiment.",
    "etapes": [
     {
-     "periode": "Février et mars 2026",
-     "titre": "Ménage et conditions de travail",
-     "texte": "La Ville ajoute 17 500 $ avant taxes au contrat de ménage sur demande d'ExpoCité, pour le Centre de foires, la Place Jean-Béliveau et le Pavillon Guy-Lafleur, parce que des événements ajoutés au calendrier ont occupé les employés à d'autres tâches. Une entente avec le syndicat des fonctionnaires municipaux sur les articles vestimentaires à ExpoCité suit son chemin dans les instances.",
+     "periode": "Mars 2026",
+     "titre": "Renouvellement des équipements du Centre Vidéotron",
+     "texte": "La Ville puise 3 185 000 $ dans la réserve financière créée en 2020 pour l'entretien à long terme du Centre Vidéotron, selon le dossier EX2026-018. Elle achète des assises pour les sièges Premium et adhère à une entente d'achat gouvernementale pour des commutateurs, pare-feux, routeurs et équipements sans-fil.",
+     "numeros": [
+      "EX2026-018",
+      "AP2026-040",
+      "AP2026-059"
+     ]
+    },
+    {
+     "periode": "Février à mars 2026",
+     "titre": "Ménage et vêtements de travail",
+     "texte": "La Ville ajoute 17 500 $ avant taxes au contrat de ménage sur demande du Centre de foires, de la Place Jean-Béliveau et du Pavillon Guy-Lafleur, parce que des événements ajoutés au calendrier ont occupé les employés ailleurs. En parallèle, elle soumet au conseil d'agglomération une entente avec le syndicat des fonctionnaires sur les articles vestimentaires à ExpoCité.",
      "numeros": [
       "AP2026-051",
       "CE-2026-0216"
      ]
     },
     {
-     "periode": "Mars 2026",
-     "titre": "Remplacement d'équipements du Centre Vidéotron",
-     "texte": "La Ville puise 3 185 000 $ dans la réserve créée pour l'entretien à long terme du Centre Vidéotron, afin de remplacer des équipements en fin de vie : commutateurs, serveurs, projecteurs, moniteurs, matériel audio et vidéo, assises. Elle adhère à une entente d'achat gouvernementale pour du matériel réseau et achète des assises pour les 2 592 sièges Premium.",
-     "numeros": [
-      "EX2026-018",
-      "AP2026-059",
-      "AP2026-040"
-     ]
-    },
-    {
      "periode": "Avril 2026",
      "titre": "Préparation d'événements sur le site",
-     "texte": "ExpoCité recevra jusqu'à 85 000 $ de la Tourism Industry Association of Canada pour une activité liée à la Coupe du monde de la FIFA 2026, tenue le 21 juin 2026. La Ville désigne aussi le pavillon Guy-Lafleur comme installation majeure des Jeux d'hiver du Canada 2027, sous le nom « Hall des Jeux du Canada Games ».",
+     "texte": "Le comité exécutif ratifie une entente qui apporte jusqu'à 85 000 $ à ExpoCité pour l'activité « Canada Celebrates » du 21 juin 2026, liée à la tournée du trophée de la FIFA. La Ville désigne aussi le pavillon Guy-Lafleur comme installation majeure des Jeux d'hiver du Canada 2027, sous le nom « Hall des Jeux du Canada Games ».",
      "numeros": [
       "EX2026-038",
       "CS2026-008"
      ]
     },
     {
-     "periode": "Mai 2026",
-     "titre": "Sécurité et placiers lors des événements",
-     "texte": "La Ville accorde deux contrats pour la garde des bâtiments et pour les placiers-signaleurs lors des événements sur le site d'ExpoCité, du 1er juin 2026 au 31 mai 2028. Le fournisseur du deuxième lot a baissé son prix de 914 000 $ à 887 750 $ après négociation.",
+     "periode": "Mai à juillet 2026",
+     "titre": "Sécurité, direction et centre de curling",
+     "texte": "La Ville accorde deux contrats de sécurité et de placiers-signaleurs pour les événements du site, du 1er juin 2026 au 31 mai 2028. Elle nomme ensuite un directeur d'ExpoCité en poste à partir du 21 juin 2026 et confie à ExpoCité la gestion du Centre multifonctionnel de curling de Québec, rue des Rocailles.",
      "numeros": [
-      "AP2026-161"
+      "AP2026-161",
+      "RH2026-461",
+      "EX2026-082"
      ]
     },
     {
-     "periode": "Juin et juillet 2026",
-     "titre": "Direction et centre de curling",
-     "texte": "La Ville approuve le contrat d'engagement du directeur d'ExpoCité, en poste par intérim depuis 2025, à compter du 21 juin 2026. Elle confie ensuite à ExpoCité la gestion du Centre multifonctionnel de curling de Québec, au 1020, rue des Rocailles, y compris son exploitation commerciale.",
+     "periode": "Octobre 2026",
+     "titre": "Nouveau poste au service aux événements",
+     "texte": "La Ville crée un poste d'opérateur à la Section du service aux événements d'ExpoCité, à la demande de la direction, qui veut aussi le pourvoir. L'argent est déjà prévu.",
      "numeros": [
-      "RH2026-461",
-      "EX2026-082"
+      "RH2026-786"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "L'entente sur les articles vestimentaires à ExpoCité est toujours en cours de cheminement dans les instances.",
+     "texte": "L'entente avec le syndicat des fonctionnaires sur les articles vestimentaires à ExpoCité suit son chemin vers le conseil d'agglomération.",
      "numeros": [
       "CE-2026-0216"
      ]
     },
     {
-     "texte": "La livraison complète des assises de banc du Centre Vidéotron est prévue en septembre 2026; les assises les plus détériorées seront remplacées d'abord.",
+     "texte": "La création du poste d'opérateur au service aux événements est en cours.",
+     "numeros": [
+      "RH2026-786"
+     ]
+    },
+    {
+     "texte": "La livraison complète des assises de banc du Centre Vidéotron est prévue en septembre 2026; les assises les plus détériorées seront remplacées avant les Jeux du Canada et le Championnat mondial de hockey féminin de 2027.",
      "numeros": [
       "AP2026-040"
-     ]
-    },
-    {
-     "texte": "Les Jeux du Canada auront lieu en février 2027; la construction du centre de curling a commencé en 2025 en vue de ces Jeux.",
-     "numeros": [
-      "EX2026-082"
-     ]
-    },
-    {
-     "texte": "La désignation du pavillon Guy-Lafleur comme installation majeure ne tiendra que si le Conseil des Jeux du Canada l'approuve.",
-     "numeros": [
-      "CS2026-008"
      ]
     }
    ],
@@ -391,8 +388,8 @@
     "retiresMecanique": [],
     "retiresContreLecture": [
      {
-      "element": "enBref",
-      "raison": "« Elle renouvelle aussi des contrats de services sur le site d'ExpoCité : ménage sur demande, sécurité et placiers » déforme AP2026-161 : les contrats de sécurité et de placiers-signaleurs ne sont pas des renouvellements, mais de nouveaux contrats adjugés à la suite de l'appel d'offres public 95131 (avec une simple option de renouvellement future). Seul le contrat de ménage (AP2026-051) relève d'un renouvellement."
+      "element": "aSurveiller[3]",
+      "raison": "L'élément s'appuie sur le dossier CS2026-008, dont la décision est finale (« décision finale prise »), et ne cite aucune date future écrite. La condition d'approbation par le Conseil des Jeux du Canada est une mention du dossier, pas une échéance à venir datée : l'élément ne remplit donc pas le critère d'un suivi (dossier « en cours » ou date future explicite)."
      }
     ]
    }
