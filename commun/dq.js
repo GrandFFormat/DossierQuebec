@@ -267,8 +267,8 @@ const translations = {
     'cal.status':"\u25CF Assembly dissolved on August 27, 2026 \u00B7 election held October 5 · new legislature November 17",
     'cal.title':"Sitting calendar",
     // Dissolution de la 43e législature (2026-08-27) — à retirer le 17 nov. 2026.
-    'diss.h':"⚠️ The Assembly is dissolved — the election was held on October 5",
-    'diss.p1':"On <b>August 27, 2026</b>, the National Assembly was dissolved and the 43rd legislature ended. The general election was held on <b>October 5</b>. The new Assembly is convened on <b>November 17, 2026</b>; until then, the government stays in place to handle current business.",
+    'diss.h':"📅 New bills arrive on November 17",
+    'diss.p1':"The new Assembly sits from <b>November 17, 2026</b>. The first bills of the 44th legislature will appear here as soon as they are introduced.",
     'diss.p2':"Direct consequence: <b>every bill that had not been assented to died with it.</b> They will have to start over before the new Assembly, convened on <b>November 17, 2026</b>. What remains here is the full record of the 43rd legislature: the laws that passed, how each member voted, and the bills that did not make it.",
     'diss.p3':"<em>We can't wait for these bills to come in either, la la!</em>",
     'diss.cta':"What the parties are promising →",
@@ -725,17 +725,11 @@ function applyAssemblyState(){
     if(cal) cal.textContent = isEn
       ? '● Assembly dissolved on August 27, 2026 · election held October 5 · new legislature November 17'
       : '● Assemblée dissoute le 27 août 2026 · élection tenue le 5 octobre · nouvelle législature le 17 novembre';
+    // La bande jaune ne dit plus que l'arrivée des projets de loi (Martin, 23 oct. 2026).
     const h = document.querySelector('[data-i18n="diss.h"]');
-    if(h) h.textContent = isEn
-      ? '⚠️ The Assembly is dissolved — the election was held on October 5'
-      : '⚠️ L\'Assemblée est dissoute — l\'élection a eu lieu le 5 octobre';
+    if(h) h.textContent = isEn ? "📅 New bills arrive on November 17" : "📅 Les nouveaux projets de loi arrivent le 17 novembre";
     const p1 = document.querySelector('[data-i18n="diss.p1"]');
-    if(p1) p1.innerHTML = isEn
-      ? 'On <b>August 27, 2026</b>, the National Assembly was dissolved and the 43rd legislature ended. The general election was held on <b>October 5</b>. The new Assembly is convened on <b>November 17, 2026</b>; until then, the government stays in place to handle current business.'
-      : 'Le <b>27 août 2026</b>, l\'Assemblée nationale a été dissoute et la 43<sup>e</sup> législature a pris fin. L\'élection générale a eu lieu le <b>5 octobre</b>. La nouvelle Assemblée est convoquée le <b>17 novembre 2026</b> ; d\'ici là, le gouvernement reste en place pour expédier les affaires courantes.';
-    const res = document.getElementById('dissResultat');
-    const txt = isEn ? (ASSEMBLY.resultatEn || ASSEMBLY.resultat) : ASSEMBLY.resultat;
-    if(res){ res.hidden = !txt; res.textContent = txt || ''; }
+    if(p1) p1.innerHTML = isEn ? "The new Assembly sits from <b>November 17, 2026</b>. The first bills of the 44th legislature will appear here as soon as they are introduced." : "La nouvelle Assemblée siège à partir du <b>17 novembre 2026</b>. Les premiers projets de loi de la 44<sup>e</sup> législature apparaîtront ici dès leur dépôt.";
     if(typeof renderTicker === 'function') renderTicker(); // il lit cal.status
   }
   // Le titre et le sous-titre des pétitions annonçaient des pétitions
