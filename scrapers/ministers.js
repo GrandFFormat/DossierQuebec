@@ -81,6 +81,45 @@ const MANUAL_EN_OVERRIDES = {
   'amelie dionne': 'Minister of Tourism',
 };
 
+// Le conseil lu sur l'Assemblée : la liste des député·e·s, puis la fiche de chacun·e. Une fonction
+// ministérielle = « Premier ministre », « Vice-première ministre », « Ministre … » ou « Ministre
+// délégué·e … » suivi de « depuis le <date> » dans « Fonctions actuelles ». Le nom passe de
+// « Nom, Prénom » à « Prénom Nom » ; le parti vient de deputes.json. Ordre : premier ministre,
+// vice-premier·ère ministre, puis l'ordre de la liste de l'Assemblée.
+async function ministresAssnat(deputes) {
+  const BASE = 'https://www.assnat.qc.ca';
+  const lire = async (url) => {
+    const r = await fetch(url, { headers: { 'User-Agent': USER_AGENT } });
+    if (!r.ok) throw new Error(`${url} : HTTP ${r.status}`);
+    return r.text();
+  };
+  const $ = cheerio.load(await lire(`${BASE}/fr/deputes/index.html`));
+  const fiches = [];
+  $('a[href*="/fr/deputes/"]').each((_, a) => {
+    const href = $(a).attr('href') || '';
+    const m = href.match(/\/fr\/deputes\/[^/]+-(\d+)\/index\.html$/);
+    if (m && !fiches.some((f) => f.id === Number(m[1]))) fiches.push({ id: Number(m[1]), url: href.startsWith('http') ? href : BASE + href, nom: $(a).text().replace(/\s+/g, ' ').trim() });
+  });
+  const lus = [];
+  for (const f of fiches) {
+    const texte = cheerio.load(await lire(f.url))('body').text().replace(/\s+/g, ' ');
+    const i = texte.indexOf('Fonctions actuelles');
+    if (i < 0) continue;
+    const bloc = texte.slice(i + 'Fonctions actuelles'.length, i + 3000).split(/ (?:Réélue?|Élue?) députée? /)[0];
+    const roles = [...bloc.matchAll(/((?:Premier|Première|Vice-premier|Vice-première)? ?[Mm]inistre[^]*?) depuis le \d+(?:er)? \S+ \d{4}/g)]
+      .map((m) => m[1].trim())
+      .filter((r) => !NON_MINISTER_ROLES.some((x) => r.toLowerCase().includes(x)));
+    if (!roles.length) continue;
+    const [nomFamille, prenom] = f.nom.split(',').map((x) => x.trim());
+    const name = prenom ? `${prenom} ${nomFamille}` : f.nom;
+    const dep = deputes.find((d) => d.assnatId === f.id) ?? deputes.find((d) => foldName(d.name) === foldName(name));
+    lus.push({ name, role: roles.join(' · '), roleEn: null, party: dep?.party ?? null });
+    await new Promise((r) => setTimeout(r, 250));
+  }
+  const rang = (m) => (/^Premi(er|ère) ministre/.test(m.role) ? 0 : /^Vice-premi/.test(m.role) ? 1 : 2);
+  return lus.map((m, i) => ({ m, i })).sort((a, b) => rang(a.m) - rang(b.m) || a.i - b.i).map(({ m }) => m);
+}
+
 async function main() {
   const roleEnByName = loadExistingRoleEn();
   const { deputes } = JSON.parse(readFileSync('data/deputes.json', 'utf-8'));
@@ -126,12 +165,24 @@ async function main() {
   // Entre deux gouvernements, la page se vide (22 oct. 2026 : nouveau premier ministre, conseil pas
   // encore nommé). On garde alors la liste précédente plutôt que d'écrire 0 ministre, qui ferait
   // échouer toute la tournée ; elle sera remplacée dès que la page affichera le nouveau conseil.
+  // Page de quebec.ca vide : le conseil peut être nommé quand même (21 oct. 2026). On le lit alors
+  // sur les fiches des député·e·s de l'Assemblée (« Fonctions actuelles », chaque « Ministre … depuis
+  // le … »). Rien sur l'Assemblée non plus : la liste précédente est gardée.
+  let source = PAGE_URL;
   if (ministers.length === 0) {
-    console.log(`⚠ Aucun ministre sur ${PAGE_URL} (conseil pas encore nommé ?) : ${OUT_PATH} gardé tel quel.`);
+    const lus = await ministresAssnat(deputes);
+    if (lus.length) {
+      ministers.push(...lus);
+      source = 'https://www.assnat.qc.ca/fr/deputes/index.html (fonctions actuelles de chaque député·e)';
+      console.log(`Page de quebec.ca vide : ${lus.length} ministres lus sur les fiches de l'Assemblée.`);
+    }
+  }
+  if (ministers.length === 0) {
+    console.log(`⚠ Aucun ministre sur ${PAGE_URL} ni sur l'Assemblée : ${OUT_PATH} gardé tel quel.`);
     return;
   }
   mkdirSync('data', { recursive: true });
-  writeFileSync(OUT_PATH, JSON.stringify({ source: PAGE_URL, scrapedAt: new Date().toISOString(), count: ministers.length, ministers }, null, 2));
+  writeFileSync(OUT_PATH, JSON.stringify({ source, scrapedAt: new Date().toISOString(), count: ministers.length, ministers }, null, 2));
 
   console.log(`${ministers.length} ministres écrits dans ${OUT_PATH}`);
   warnings.forEach((w) => console.log(`  ⚠ ${w}`));

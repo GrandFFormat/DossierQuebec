@@ -469,7 +469,7 @@ function goToFederal(evt){
            d'abord ; un second clic sur la flèche active revient à l'ordre habituel. Remplie par
            updateMinistresSortLabel (commun/dq.js). -->
       <div class="tri-vote-rang"><h2 data-i18n="h.ministres2">Les ministres</h2><span class="tri-vote" id="triVoteMinistres"></span></div>
-      <span class="head-note"><span id="ministresCount"></span><span data-i18n="min.sub2b"> ministres — liste officielle quebec.ca</span></span>
+      <span class="head-note"><span id="ministresCount"></span><span data-i18n="min.sub2b"> ministres — conseil en fonction (quebec.ca ou fiches de l’Assemblée)</span></span>
     </div>
     <div class="grid" id="ministresGrid"></div>
     <!--PRERENDU:ministresGrid-->
@@ -1281,34 +1281,29 @@ function goToFederal(evt){
    depuis quebec.ca/premiere-ministre/equipe/conseil-des-ministres. Ne pas éditer
    ce bloc à la main. */
 const ministers = [
-  {name:'Christine Fréchette', role:'Première ministre', party:'CAQ', roleEn:''},
-  {name:'Ian Lafrenière', role:'Vice-premier ministre · Ministre de la Sécurité intérieure · Ministre responsable des Relations avec les Premières Nations et les Inuit', party:'CAQ', roleEn:''},
-  {name:'Eric Girard (Groulx)', role:'Ministre des Finances · Ministre responsable des Infrastructures', party:'CAQ', roleEn:''},
-  {name:'Sonia LeBel', role:'Ministre de l’Éducation · Leader parlementaire adjointe du gouvernement', party:'CAQ', roleEn:''},
-  {name:'Bernard Drainville', role:'Ministre de l’Économie, de l’Innovation et de l’Énergie · Ministre responsable de la Stratégie maritime', party:'CAQ', roleEn:''},
-  {name:'Simon Jolin-Barrette', role:'Ministre de la Justice · Ministre responsable des Affaires constitutionnelles', party:'CAQ', roleEn:''},
-  {name:'Sonia Bélanger', role:'Ministre de la Santé · Ministre responsable des Aînés et des Proches aidants', party:'CAQ', roleEn:''},
-  {name:'France-Élaine Duranceau', role:'Ministre responsable de l’Administration gouvernementale et de l’Efficacité de l’État et présidente du Conseil du trésor · Ministre de la Cybersécurité et du Numérique', party:'CAQ', roleEn:''},
-  {name:'Martine Biron', role:'Ministre de la Culture et des Communications · Ministre de l’Enseignement supérieur · Ministre responsable de la Condition féminine', party:'CAQ', roleEn:''},
-  {name:'Jean-François Roberge', role:'Ministre de la Langue française · Ministre responsable de la Francophonie canadienne · Ministre responsable de la Laïcité · Ministre responsable des Institutions démocratiques · Ministre responsable de l’Accès à l’information et de la Protection des renseignements personnels', party:'CAQ', roleEn:''},
-  {name:'Jean Boulet', role:'Ministre du Travail · Ministre responsable des Relations canadiennes', party:'CAQ', roleEn:''},
-  {name:'François Bonnardel', role:'Ministre de l’Immigration, de la Francisation et de l’Intégration · Leader parlementaire du gouvernement', party:'CAQ', roleEn:''},
-  {name:'Kateri Champagne Jourdain', role:'Ministre des Ressources naturelles et des Forêts', party:'CAQ', roleEn:''},
-  {name:'Pascale Déry', role:'Ministre de l’Environnement, de la Lutte contre les changements climatiques, de la Faune et des Parcs', party:'CAQ', roleEn:''},
-  {name:'Samuel Poulin', role:'Ministre des Affaires municipales', party:'CAQ', roleEn:''},
-  {name:'Catherine Blouin', role:'Ministre de la Famille', party:'CAQ', roleEn:''},
-  {name:'Donald Martel', role:'Ministre de l’Agriculture, des Pêcheries et de l’Alimentation', party:'CAQ', roleEn:''},
-  {name:'Christopher Skeete', role:'Ministre des Relations internationales et de la Francophonie · Ministre responsable des Relations avec les Québécois d’expression anglaise · Ministre responsable de la Lutte contre le racisme', party:'CAQ', roleEn:''},
-  {name:'Benoit Charette', role:'Ministre des Transports et de la Mobilité durable', party:'CAQ', roleEn:''},
-  {name:'Amélie Dionne', role:'Ministre du Tourisme', party:'CAQ', roleEn:'Minister of Tourism'},
-  {name:'Jean-François Simard', role:'Ministre de l‘Emploi · Ministre responsable de la région de la Capitale-Nationale', party:'CAQ', roleEn:''},
-  {name:'Chantal Rouleau', role:'Ministre responsable de la Solidarité sociale et de l’Action communautaire · Ministre responsable de la Métropole et de la région de Montréal', party:'CAQ', roleEn:''},
-  {name:'Lionel Carmant', role:'Ministre responsable des Services sociaux et de la Lutte contre l’itinérance', party:'CAQ', roleEn:''},
-  {name:'Karine Boivin Roy', role:'Ministre responsable de l’Habitation', party:'CAQ', roleEn:''},
-  {name:'Kariane Bourassa', role:'Ministre responsable du Sport, du Loisir et du Plein air', party:'CAQ', roleEn:''},
-  {name:'Mathieu Lévesque', role:'Ministre responsable de la Jeunesse · Ministre délégué aux Régions', party:'CAQ', roleEn:''},
-  {name:'Eric Girard (Lac-Saint-Jean)', role:'Ministre délégué au Développement économique régional', party:'CAQ', roleEn:''},
-  {name:'Daniel Bernard', role:'Ministre délégué à l’Économie et aux Petites et Moyennes Entreprises', party:'CAQ', roleEn:''},
+  {name:'Paul St-Pierre Plamondon', role:'Premier ministre · Ministre responsable de la Lutte contre l’itinérance', party:'PQ', roleEn:''},
+  {name:'Catherine Gentilcore', role:'Vice-première ministre · Ministre de l’Immigration et de l’Intégration · Ministre responsable de l’Accession du Québec à l’Indépendance', party:'PQ', roleEn:''},
+  {name:'Pascal Bérubé', role:'Ministre de la Culture, du Patrimoine, des Communications et de la Langue française · Ministre responsable de la région du Bas-Saint-Laurent', party:'PQ', roleEn:''},
+  {name:'Nicolas Girard', role:'Ministre des Transports et de la Mobilité durable · Ministre des Affaires municipales · Ministre responsable de la région de la Capitale-Nationale', party:'PQ', roleEn:''},
+  {name:'Elsie Lefebvre', role:'Ministre de l’Enseignement supérieur · Ministre responsable de l’Habitation · Ministre responsable de la Condition féminine · Ministre responsable de la région de Lanaudière', party:'PQ', roleEn:''},
+  {name:'Nicolas Marceau', role:'Ministre des Finances · Ministre responsable des Infrastructures', party:'PQ', roleEn:''},
+  {name:'Alain Therrien', role:'Ministre responsable de l’Administration gouvernementale · Ministre responsable de l’Action communautaire', party:'PQ', roleEn:''},
+  {name:'Joël Arseneau', role:'Ministre de l’Éducation nationale', party:'PQ', roleEn:''},
+  {name:'Méganne Perry Mélançon', role:'Ministre de la Famille et de la Jeunesse · Ministre responsable des Sports et des Loisirs · Ministre responsable de la région de la Gaspésie–Îles-de-la-Madeleine', party:'PQ', roleEn:''},
+  {name:'Marie-Karlynn Laflamme', role:'Ministre de la Santé, de la Prévention et des Aînés · Ministre responsable de la région du Saguenay–Lac-Saint-Jean', party:'PQ', roleEn:''},
+  {name:'Guy Jr Lapointe', role:'Ministre de la Sécurité intérieure · Ministre responsable de la région de la Montérégie', party:'PQ', roleEn:''},
+  {name:'Jean Pellerin', role:'Ministre de l’Environnement, de la Lutte contre les changements climatiques, de la protection de la biodiversité, de la Faune et des Parcs · Ministre responsable de la région de la Mauricie', party:'PQ', roleEn:''},
+  {name:'Simon-Pierre Savard-Tremblay', role:'Ministre responsable des Relations avec les Premières Nations et les Inuit', party:'PQ', roleEn:''},
+  {name:'Mathieu Lebrun', role:'Ministre du Travail, de l’Emploi et de la Solidarité sociale', party:'PQ', roleEn:''},
+  {name:'Meggie Richard', role:'Ministre responsable des Régions et de l’Occupation du territoire · Ministre responsable de la région de la Côte-Nord', party:'PQ', roleEn:''},
+  {name:'Marie-Claude Sarrazin', role:'Ministre de la Justice · Ministre responsable de l’Accès à l’information et de la Protection des renseignements personnels · Ministre responsable des Affaires intergouvernementales canadiennes · Ministre responsable de la Laïcité · Ministre responsable de la Lutte contre la discrimination envers les personnes LGBTQ+ · Ministre responsable de la Lutte contre le racisme · Ministre responsable des Relations avec les Québécois d’expression anglaise', party:'PQ', roleEn:''},
+  {name:'Camille Pellerin-Forget', role:'Ministre responsable des Institutions démocratiques · Ministre déléguée à la Santé mentale et aux Services sociaux · Ministre responsable de la région de l’Outaouais', party:'PQ', roleEn:''},
+  {name:'Anne Nguyen', role:'Ministre déléguée à l’Intelligence artificielle et au Numérique · Ministre responsable de la région des Laurentides', party:'PQ', roleEn:''},
+  {name:'Stéphane Paquet', role:'Ministre du Développement économique, de l’Innovation et de l’Énergie · Ministre responsable de la Métropole et de la région de Montréal', party:'PQ', roleEn:''},
+  {name:'Natalie Bisaillon', role:'Ministre des Ressources naturelles et des Forêts · Ministre responsable de la région du Centre-du-Québec et de la région de la Chaudière-Appalaches', party:'PQ', roleEn:''},
+  {name:'Bernard Sévigny', role:'Ministre de l’Agriculture, des Pêcheries et de l’Alimentation · Ministre responsable de la région de l’Estrie', party:'PQ', roleEn:''},
+  {name:'Sébastien D\'Astous', role:'Ministre délégué à l’Efficacité gouvernementale et à l’Allégement réglementaire de l’État · Ministre responsable de la région de l’Abitibi-Témiscamingue et de la région du Nord-du-Québec', party:'PQ', roleEn:''},
+  {name:'Dieudonné Ella Oyono', role:'Ministre des Relations internationales, de la Francophonie et du Commerce extérieur · Ministre responsable de la région de Laval', party:'PQ', roleEn:''},
 ];
 /* MINISTERS_DATA_END */
 
@@ -1317,7 +1312,7 @@ const ministers = [
    ce bloc à la main : relancer `node scrapers/build-frontend-data.js` à la place.
    Les résumés ne sont PAS ici : ils vivent dans data/bills-resumes-{fr,en}.json et se chargent
    au premier dépliement de carte ou à la première recherche.
-   Généré le 2026-10-23T08:47:40.881Z */
+   Généré le 2026-10-23T09:04:47.196Z */
 const bills = [
   {
     "id": 27463,
