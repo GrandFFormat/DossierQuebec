@@ -178,6 +178,7 @@ const translations = {
     'h.ministres2':"The ministers",
     'min.merged.sub':"The Cabinet, then all 125 MNAs from every party — one search box for both",
     'min.sub2b':" ministers — Council in office (quebec.ca or National Assembly profiles)",
+    'min.legende43':"Attendance and bills sponsored: 43rd legislature (2022-2026) only. “n/a” and 0 for anyone who did not sit then, even with several earlier terms.",
     'min.restTitle':"The rest of the Assembly",
     'min.restNote':"Every party — 125 seats total",
     'h.comparateur':"Comparator",
