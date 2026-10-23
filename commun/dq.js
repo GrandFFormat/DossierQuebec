@@ -3574,8 +3574,8 @@ function personCard(p){
   const attShort = presidingShort ? presidingShort : (p.att ? pastillePresence(p.att.rate, isEn) : (isEn ? 'n/a' : 'n/d'));
   const plCount = billsSponsoredBy(name).length;
   const labels = isEn
-    ? { riding:'Riding', att:'Vote attendance', bills:'Bills sponsored' }
-    : { riding:'Circonscription', att:'Présence votes', bills:'PL parrainés' };
+    ? { riding:'Riding', att:'Vote attendance', bills:'Bills sponsored / term' }
+    : { riding:'Circonscription', att:'Présence votes', bills:'PL parrainés / mandat' };
   return `
     <div class="m-card">
       <div class="m-card-top">
@@ -3590,7 +3590,7 @@ function personCard(p){
       <div class="m-card-bottom">
         <div class="m-row"><span class="m-label">${labels.riding}</span><span class="m-val">${riding}</span></div>
         <div class="m-row"><span class="m-label">${labels.att}</span><span class="m-val m-val-blue" title="${attTitle}">${attShort}</span></div>
-        <div class="m-row"><span class="m-label">${labels.bills}</span><span class="m-val">${plCount}</span></div>
+        <div class="m-row"><span class="m-label">${labels.bills}</span><span class="m-val">${plCount}${dep?.mandats ? ` / ${isEn ? dep.mandats + ({ 1: "st", 2: "nd", 3: "rd" }[dep.mandats] || "th") : (dep.mandats === 1 ? "1er" : dep.mandats + "e")}` : ""}</span></div>
         <a class="m-mail" href="${mailHref}" ${email ? '' : 'target="_blank" rel="noopener"'} onclick="event.stopPropagation()" title="${mailTitle}">✉ ${email ? email : (isEn ? 'Official email on assnat.qc.ca' : 'Courriel officiel sur assnat.qc.ca')}</a>
       </div>
     </div>

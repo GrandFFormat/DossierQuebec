@@ -5,7 +5,8 @@
 // chaque fiche, et on écrit data/mandats.json { assnatId: n }.
 //
 // Les mandats ne changent qu'aux élections : ce script se relance à la main après une élection
-// ou une partielle (node scrapers/mandats.js, puis node scrapers/build-deputes-data.js), il ne
+// ou une partielle (node scrapers/mandats.js, puis node scrapers/build-deputes-data.js ; changer
+// aussi la date de la dernière générale ci-dessous), il ne
 // fait pas partie de la tournée quotidienne.
 import { writeFileSync } from 'node:fs';
 import * as cheerio from 'cheerio';
@@ -31,7 +32,11 @@ async function main() {
   const mandats = {};
   for (const [id, url] of fiches) {
     const texte = cheerio.load(await lire(url))('body').text().replace(/\s+/g, ' ');
-    const n = (texte.match(/(?:Réélue?|Élue?) députée? de la circonscription/g) || []).length;
+    const elections = texte.match(/(?:Réélue?|Élue?) députée? de la circonscription[^.]*?\d{4}/g) || [];
+    // Toute personne de la liste a été élue à la dernière générale ; certaines fiches ne l'ont pas
+    // encore ajoutée (Catherine Gentilcore : seule sa partielle de 2025 y figure, 23 oct. 2026).
+    const derniere = /5 octobre 2026/;
+    const n = elections.length + (elections.some((e) => derniere.test(e)) ? 0 : 1);
     if (n) mandats[id] = n;
     else console.log(`  ⚠ aucune élection lue sur ${url}`);
     await new Promise((r) => setTimeout(r, 300));
