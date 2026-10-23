@@ -68,7 +68,7 @@ async function chargerDonnees(){
       _echecs.add(nom);
     }
   }));
-  deputes = deputesRaw.map(d => ({ name: d[0], riding: d[1], region: d[2], party: d[3], assnatId: d[4] }));
+  deputes = deputesRaw.map(d => ({ name: d[0], riding: d[1], region: d[2], party: d[3], assnatId: d[4], mandats: d[5] ?? null }));
   deputeById = new Map(deputes.map(d => [d.assnatId, d]));
   voteById = new Map(votes.map(v => [v.id, v]));
   if(newsItems.length) newsAnchor = newsItems.reduce((max, n) => (n.date > max ? n.date : max), newsItems[0].date);
@@ -1214,7 +1214,9 @@ function resumeElu(nom, isEn){
   const faits = [
     att ? (isEn ? `Recorded-vote attendance: ${att.rate}%` : `Présence aux votes : ${att.rate} %`) : '',
     isEn ? `Bills sponsored: ${pl}${lois ? `, ${lois} became law` : ''}` : `Projets de loi parrainés : ${pl}${lois ? `, dont ${lois} devenus lois` : ''}`,
-    anciennete,
+    // Le mandat (Martin, 23 oct. 2026), lu sur la fiche de l'Assemblée : « 3e mandat ». Sans ce
+    // chiffre, l'ancienneté tirée des votes.
+    dep?.mandats ? (isEn ? `${dep.mandats}${({ 1: 'st', 2: 'nd', 3: 'rd' })[dep.mandats] || 'th'} term` : `${dep.mandats === 1 ? '1er' : dep.mandats + 'e'} mandat`) : anciennete,
   ].filter(Boolean).join(' · ');
   return `${morceaux}. ${faits}.`;
 }

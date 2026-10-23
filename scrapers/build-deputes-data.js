@@ -11,8 +11,11 @@ const END_MARKER = '/* DEPUTES_DATA_END */';
 function main() {
   const data = JSON.parse(readFileSync(IN_PATH, 'utf-8'));
 
+  // 6e valeur : le nombre de mandats (scrapers/mandats.js, relancé à la main après une élection).
+  let mandats = {};
+  try { mandats = JSON.parse(readFileSync('data/mandats.json', 'utf-8')).mandats ?? {}; } catch {}
   const rows = data.deputes
-    .map((d) => `["${d.name}","${d.riding}","${d.region ?? ''}","${d.party ?? ''}",${d.assnatId ?? 'null'}]`)
+    .map((d) => `["${d.name}","${d.riding}","${d.region ?? ''}","${d.party ?? ''}",${d.assnatId ?? 'null'},${mandats[d.assnatId] ?? 'null'}]`)
     .join(',');
 
   const html = readFileSync(HTML_PATH, 'utf-8');
@@ -22,7 +25,7 @@ function main() {
     throw new Error(`Marqueurs DEPUTES_DATA_START/END introuvables dans ${HTML_PATH}`);
   }
 
-  const block = `${START_MARKER} — généré automatiquement par scrapers/build-deputes-data.js à partir\n   de data/deputes.json (voir scrapers/deputes.js). Nom, circonscription et parti sont\n   scrapés en direct depuis assnat.qc.ca/fr/deputes/index.html à chaque exécution ; la\n   région est préservée depuis la version précédente de ce tableau (pas dispo sur la\n   page source) — assignation géographique stable, ne change pas avec les élections.\n   L'ID assnat (5e valeur) sert à rapprocher chaque député·e du détail nominatif des\n   votes (voir scrapers/votes.js) sans dépendre du nom, qui peut être ambigu.\n   [Nom complet, Circonscription, Région, Parti, ID assnat]. Ne pas éditer ce bloc à la main.\n   Généré le ${new Date().toISOString()} */\nconst deputesRaw = [\n${rows}\n];\n`;
+  const block = `${START_MARKER} — généré automatiquement par scrapers/build-deputes-data.js à partir\n   de data/deputes.json (voir scrapers/deputes.js). Nom, circonscription et parti sont\n   scrapés en direct depuis assnat.qc.ca/fr/deputes/index.html à chaque exécution ; la\n   région est préservée depuis la version précédente de ce tableau (pas dispo sur la\n   page source) — assignation géographique stable, ne change pas avec les élections.\n   L'ID assnat (5e valeur) sert à rapprocher chaque député·e du détail nominatif des\n   votes (voir scrapers/votes.js) sans dépendre du nom, qui peut être ambigu.\n   [Nom complet, Circonscription, Région, Parti, ID assnat, mandats]. Ne pas éditer ce bloc à la main.\n   Généré le ${new Date().toISOString()} */\nconst deputesRaw = [\n${rows}\n];\n`;
 
   const updated = html.slice(0, startIdx) + block + html.slice(endIdx);
   writeFileSync(HTML_PATH, updated);
