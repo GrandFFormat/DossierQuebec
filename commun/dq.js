@@ -177,7 +177,7 @@ const translations = {
     'h.ministres':"Ministers and MNAs",
     'h.ministres2':"The ministers",
     'min.merged.sub':"The Cabinet, then all 125 MNAs from every party — one search box for both",
-    'min.sub2b':" ministers — official quebec.ca list",
+    'min.sub2b':" ministers — Council in office (quebec.ca or National Assembly profiles)",
     'min.restTitle':"The rest of the Assembly",
     'min.restNote':"Every party — 125 seats total",
     'h.comparateur':"Comparator",
@@ -758,7 +758,12 @@ function applyAssemblyState(){
     const n = deputes.length;
     if(h) h.textContent = isEn ? 'Elected on October 5' : 'Les élu·e·s du 5 octobre';
     const heroSub = document.querySelector('[data-i18n="minhero.sub"]');
-    if(heroSub) heroSub.innerHTML = isEn
+    // Le nouveau conseil nommé (aucun·e ministre de la CAQ) : on ne dit plus « sortant·e·s » (23 oct. 2026).
+    const nouveauConseil = ministers.length > 0 && !ministers.some((m) => m.party === 'CAQ');
+    if(heroSub && nouveauConseil) heroSub.innerHTML = isEn
+      ? 'The new Council of Ministers, then the people elected on October 5 (<b>the elected members are further down</b>) — <b>one search for both.</b>'
+      : 'Le nouveau conseil des ministres, puis les personnes élues le 5 octobre (<b>les élu·e·s sont plus bas</b>) — <b>une seule recherche pour les deux.</b>';
+    else if(heroSub) heroSub.innerHTML = isEn
       ? 'The outgoing ministers, then the people elected on October 5 (<b>the elected members are further down</b>) — <b>one search for both.</b>'
       : 'Les ministres sortant·e·s, puis les personnes élues le 5 octobre (<b>les élu·e·s sont plus bas</b>) — <b>une seule recherche pour les deux.</b>';
     if(note) note.textContent = isEn ? `${n} of ${Object.values(ASSEMBLY.sieges || {}).reduce((a, b) => a + b, 0) || 127} seats proclaimed` : `${n} sièges proclamés sur ${Object.values(ASSEMBLY.sieges || {}).reduce((a, b) => a + b, 0) || 127}`;
@@ -1207,7 +1212,7 @@ function resumeElu(nom, isEn){
       : (isEn ? `MNA for at least ${ans} year${ans > 1 ? 's' : ''}` : `Député·e depuis au moins ${ans} an${ans > 1 ? 's' : ''}`))
     : (dep ? (isEn ? 'Newly elected on October 5, 2026' : 'Élu·e le 5 octobre 2026') : '');
   const morceaux = [
-    ministre ? `${nom}, ${role}` : `${nom},`,
+    ministre ? `${nom}, ${role},` : `${nom},`,
     dep ? (isEn ? `MNA for ${dep.riding}` : `député·e de ${dep.riding}`) : '',
     (ministre?.party || dep?.party) ? `(${ministre?.party || dep.party})` : '',
   ].filter(Boolean).join(' ');
