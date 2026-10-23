@@ -105,6 +105,14 @@ function main() {
     });
   }
 
+  // 4. Les grands événements de l'Assemblée (dissolution, élection, conseil des ministres…), écrits
+  //    à la main dans data/evenements.json, chacun daté et sourcé (23 oct. 2026).
+  try {
+    for (const e of JSON.parse(readFileSync('data/evenements.json', 'utf-8')).evenements ?? []) {
+      items.push({ date: e.date, text: e.text, textEn: e.textEn, link: e.link || `${SITE}/`, guid: `evenement-${e.date}-${e.text.length}` });
+    }
+  } catch {}
+
   if (items.length === 0) throw new Error('aucun événement généré — données absentes ou format changé ?');
 
   items.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
