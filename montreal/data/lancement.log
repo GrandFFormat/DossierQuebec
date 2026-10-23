@@ -2,7 +2,7 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 36b5f47 — Node v22.23.4
+Code : commit 0202811 — Node v22.23.3
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -13,7 +13,7 @@ https://donnees.montreal.ca/robots.txt : règles sur nos chemins : disallow /dat
 https://montreal.ca/robots.txt : rien qui concerne nos chemins
 
 === Calendrier des séances ===
-Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-10-21T23:30:50.168266)
+Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-10-22T23:30:48.907986)
 Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_video_seance
 71 séance(s) de 2026 lue(s) dans le calendrier.
 
@@ -58,9 +58,9 @@ CM_2026-10-19_13h00 : procès-verbal non publié — pas un PDF — page « 404 
 CE_2026-10-14_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-10-07_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-09-30_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CG_2026-09-24_16h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CG_2026-09-24_16h00 : 38 pages, 70 résolutions, 218 points à l'ordre du jour, 67 liens vers un sommaire, 67 sommaires annexés à l'ordre du jour
 CM_2026-09-22_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CM_2026-09-21_13h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CM_2026-09-21_13h00 : 89 pages, 115 résolutions, 384 points à l'ordre du jour, 40 liens vers un sommaire, 102 sommaires annexés à l'ordre du jour
 CE_2026-09-16_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CM_2026-08-25_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CM_2026-06-16_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -86,106 +86,115 @@ CA_Ver_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 
 CA_Vsm_2026-10-06_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Vma_2026-10-13_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 
-7065 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 33 en attente de procès-verbal.
-0 nouveauté(s) depuis la dernière exécution.
+7254 décisions écrites dans data/decisions.json — 2 séance(s) lue(s) cette fois, 31 en attente de procès-verbal.
+189 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
-   1244  Procédure
-    949  Urbanisme
-    883  Transport
-    569  Environnement
-    468  Administration
-    454  Contrats
-    358  Loisirs et communauté
-    310  Culture et patrimoine
-    288  Subventions
-    244  Immobilier
-    230  Finances
-    228  Travaux et infrastructures
-    223  Développement économique
-    221  Motions et hommages
-    177  Logement et social
-    121  Sécurité publique
-     98  Ressources humaines
-    229  (classées par défaut — aucune règle n'a tranché)
+   1262  Procédure
+    968  Urbanisme
+    902  Transport
+    596  Environnement
+    483  Contrats
+    474  Administration
+    368  Loisirs et communauté
+    312  Culture et patrimoine
+    297  Subventions
+    250  Immobilier
+    244  Travaux et infrastructures
+    233  Développement économique
+    232  Finances
+    225  Motions et hommages
+    178  Logement et social
+    131  Sécurité publique
+     99  Ressources humaines
+    230  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes enregistrés (depuis 2026-08-23) ===
-Fenêtre depuis 2026-08-23 : 4 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
+=== Votes enregistrés (depuis 2026-08-24) ===
+Fenêtre depuis 2026-08-24 : 6 séance(s) relue(s), 14 vote(s) conservé(s) du fichier précédent.
 
-15 votes enregistrés écrits dans data/votes.json (4 procès-verbaux analysés).
+17 votes enregistrés écrits dans data/votes.json (6 procès-verbaux analysés).
 2 portent un avertissement d'extraction (à vérifier à la main).
 
 === Lexique, mesuré sur les procès-verbaux ===
-Mesure de 33 termes sur 170 procès-verbaux de 2026 en cache et 7065 décisions…
+Mesure de 33 termes sur 172 procès-verbaux de 2026 en cache et 7254 décisions…
 
-    97 PV    3431 résolutions   Résolution
+    99 PV    3604 résolutions   Résolution
     73 PV     474 résolutions   Sommaire décisionnel
-   170 PV    5844 résolutions   Dossier décisionnel
-   170 PV     438 résolutions   Procès-verbal
-   170 PV     720 résolutions   Ordre du jour
-   135 PV     489 résolutions   Avis de motion
-    78 PV     212 résolutions   Règlement
-   102 PV    1248 résolutions   Conseil municipal
-    72 PV    1419 résolutions   Comité exécutif
-   150 PV    2292 résolutions   Conseil d'arrondissement
+   172 PV    6016 résolutions   Dossier décisionnel
+   172 PV     441 résolutions   Procès-verbal
+   172 PV     745 résolutions   Ordre du jour
+   137 PV     508 résolutions   Avis de motion
+    80 PV     227 résolutions   Règlement
+   103 PV    1347 résolutions   Conseil municipal
+    74 PV    1520 résolutions   Comité exécutif
+   151 PV    2293 résolutions   Conseil d'arrondissement
     79 PV      78 résolutions   Conseiller d'arrondissement
-    51 PV     156 résolutions   Greffier
-    25 PV     160 résolutions   Présidence du conseil
-    55 PV    1271 résolutions   Conseil d'agglomération
-    23 PV      31 résolutions   Ville liée
+    53 PV     168 résolutions   Greffier
+    26 PV     179 résolutions   Présidence du conseil
+    57 PV    1379 résolutions   Conseil d'agglomération
+    25 PV      33 résolutions   Ville liée
      9 PV      12 résolutions   Compétence d'agglomération
-    21 PV     158 résolutions   Vote enregistré
-   139 PV    5382 résolutions   Adoptée à l'unanimité
-    24 PV      38 résolutions   Adoptée à la majorité des voix
-     9 PV      11 résolutions   Dissidence
+    22 PV     161 résolutions   Vote enregistré
+   141 PV    5552 résolutions   Adoptée à l'unanimité
+    25 PV      41 résolutions   Adoptée à la majorité des voix
+    10 PV      13 résolutions   Dissidence
    101 PV     244 résolutions   Prise d’acte
     50 PV      87 résolutions   Mairesse suppléante
     77 PV     138 résolutions   Dérogation mineure
     58 PV     102 résolutions   Projet particulier
      5 PV       5 résolutions   Article 89
-    91 PV     282 résolutions   Zonage
-    65 PV     343 résolutions   Accorder un contrat
-   144 PV     809 résolutions   Appel d'offres
-    51 PV     166 résolutions   Gré à gré
-   139 PV     643 résolutions   Contribution financière
+    92 PV     284 résolutions   Zonage
+    67 PV     373 résolutions   Accorder un contrat
+   146 PV     857 résolutions   Appel d'offres
+    53 PV     172 résolutions   Gré à gré
+   141 PV     666 résolutions   Contribution financière
     47 PV      73 résolutions   Programme décennal d'immobilisations
-    41 PV      86 résolutions   Règlement d'emprunt
+    43 PV      89 résolutions   Règlement d'emprunt
     10 PV      14 résolutions   Expropriation
 
 33 entrées écrites dans data/lexique.json
 
 === Récapitulatifs des sujets suivables ===
-Récapitulatifs des sujets : transport-collectif (43 dossiers)
+Récapitulatifs des sujets : namur-hippodrome (14 dossiers), frederic-back (17 dossiers), grand-parc-ouest (14 dossiers), eau-egouts (95 dossiers), securite-publique (60 dossiers), logement (26 dossiers), matieres-residuelles (39 dossiers), parcs (37 dossiers), transport-collectif (46 dossiers), deneigement (31 dossiers), velo (16 dossiers)
+  namur-hippodrome         5 étape(s), 3 à surveiller · retirés : 1 mécanique, 2 contre-lecture
+  frederic-back            6 étape(s), 5 à surveiller · retirés : 0 mécanique, 2 contre-lecture
+  grand-parc-ouest         5 étape(s), 4 à surveiller · retirés : 0 mécanique, 2 contre-lecture
+  eau-egouts               2 étape(s), 6 à surveiller · retirés : 0 mécanique, 5 contre-lecture
+  securite-publique        4 étape(s), 5 à surveiller · retirés : 0 mécanique, 3 contre-lecture
+  logement                 5 étape(s), 3 à surveiller · retirés : 0 mécanique, 2 contre-lecture
+  matieres-residuelles     3 étape(s), 4 à surveiller · retirés : 0 mécanique, 4 contre-lecture
+  parcs                    5 étape(s), 6 à surveiller · retirés : 0 mécanique, 2 contre-lecture
   transport-collectif      5 étape(s), 5 à surveiller · retirés : 0 mécanique, 1 contre-lecture
-  coût ≈ 0.60 $ US
+  deneigement              2 étape(s), 3 à surveiller · retirés : 0 mécanique, 6 contre-lecture
+  velo                     5 étape(s), 2 à surveiller · retirés : 0 mécanique, 2 contre-lecture
+  coût ≈ 6.12 $ US
 
 === Sujets suivables et dossiers, pour Mes dossiers ===
-Projets publics : 16 sujets · index 17.6 Ko · fichiers de sujet 860 Ko au total.
-Décisions récentes : 802 dossiers depuis le 2026-08-22 · 1253 Ko.
-Dossiers de l'année : 5520 · 3233 Ko · organismes suggérés : 533.
+Projets publics : 16 sujets · index 17.6 Ko · fichiers de sujet 905 Ko au total.
+Décisions récentes : 900 dossiers depuis le 2026-08-22 · 1429 Ko.
+Dossiers de l'année : 5617 · 3296 Ko · organismes suggérés : 533.
 
 === Sujets suivables en anglais ===
 Sujets en anglais : 0 déjà traduits, 16 à faire — ~0.26 $ US estimés.
-Sujets en anglais : 14 traduits (2 refusés), 14 au total — 0.29 $ US.
-  ⚠ logement : nombres différents : 2025,2026,2026,2026,2026,2026,260024,260114,393,5200,541,6056 ≠ 2025,2026,2026,2026,20262026,260024,260114,393,5200,541,6056
-  ⚠ matieres-residuelles : nombres différents : 2020,2025,2025,2025,2026,2027,29,31,415,48,49 ≠ 2020,2025,2025,20262025,2027,29,31,415,48,49
+Sujets en anglais : 15 traduits (1 refusés), 15 au total — 0.30 $ US.
+  ⚠ logement : 2223 étapes au lieu de 5
 
 === Lexique en anglais ===
 Lexique anglais : à jour.
 
 === Traductions anglaises ===
 Résumés : 3753 déjà traduits, 697 à faire, 697 cette fois.
-Titres  : 6078 déjà traduits, 577 à faire, 577 cette fois en 29 paquet(s).
-Étiquettes : 1121 déjà traduites, 125 à faire en 5 paquet(s).
-~2.03 $ US estimés (lot, moitié prix).
-Lot msgbatch_01EJ5Fc9TSfmHzpU3E6prTJ8 envoyé (697 résumés, 29 paquets de titres, 5 paquets d'étiquettes).
-  in_progress — 0 réussis, 731 en cours, 0 en erreur
-  in_progress — 0 réussis, 731 en cours, 0 en erreur
-  in_progress — 0 réussis, 731 en cours, 0 en erreur
-  in_progress — 0 réussis, 731 en cours, 0 en erreur
-  in_progress — 0 réussis, 731 en cours, 0 en erreur
-  in_progress — 0 réussis, 731 en cours, 0 en erreur
-  ended — 731 réussis, 0 en cours, 0 en erreur
+Titres  : 6078 déjà traduits, 762 à faire, 762 cette fois en 39 paquet(s).
+Étiquettes : 1121 déjà traduites, 184 à faire en 7 paquet(s).
+~2.18 $ US estimés (lot, moitié prix).
+Lot msgbatch_019tv5SdXBPe2drLU7VsBguD envoyé (697 résumés, 39 paquets de titres, 7 paquets d'étiquettes).
+  in_progress — 0 réussis, 743 en cours, 0 en erreur
+  in_progress — 0 réussis, 743 en cours, 0 en erreur
+  in_progress — 0 réussis, 743 en cours, 0 en erreur
+  in_progress — 0 réussis, 743 en cours, 0 en erreur
+  in_progress — 0 réussis, 743 en cours, 0 en erreur
+  in_progress — 0 réussis, 743 en cours, 0 en erreur
+  ended — 743 réussis, 0 en cours, 0 en erreur
 file:///home/runner/work/DossierQuebec/DossierQuebec/montreal/scrapers/traductions.js:175
   const puces = (sortie?.puces ?? []).map(decoder).map((p) => String(p).trim());
                                       ^
@@ -197,18 +206,38 @@ TypeError: ((intermediate value) ?? []).map is not a function
     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
     at async file:///home/runner/work/DossierQuebec/DossierQuebec/montreal/scrapers/traductions.js:421:122
 
-Node.js v22.23.4
+Node.js v22.23.3
 ⚠ « Traductions anglaises » a échoué (code 1) — on garde les données précédentes, ça attendra.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-08-23 pas encore résumés (plafond : 120)…
-8693 déjà résumés, 0 à faire.
-Rien à générer. (--force pour tout regénérer.)
+Sommaires depuis 2026-08-24 pas encore résumés (plafond : 120)…
+8693 déjà résumés, 95 à faire.
+
+--- Estimation ---
+Documents à résumer  : 95
+Modèle               : claude-opus-5
+Ratio mesuré         : 1.85 caractères/jeton (sur 12 documents)
+Jetons d'entrée      : ~203 398
+Jetons de sortie     : ~30 400
+Coût estimé          : ~1.78 $ US (0.89 $ via l'API Batches)
+
+Génération…
+Envoi à l'API Batches (50 % du tarif, résultats en moins d'une heure en général)…
+Lot msgbatch_018VQMpBCcBAhjBcEShYTgik — statut in_progress
+  in_progress — 0 réussis, 95 en cours, 0 en erreur
+  in_progress — 0 réussis, 95 en cours, 0 en erreur
+  in_progress — 0 réussis, 95 en cours, 0 en erreur
+  in_progress — 0 réussis, 95 en cours, 0 en erreur
+  ended — 95 réussis, 0 en cours, 0 en erreur
+
+95 résumés générés, 8788 au total dans data/resumes.json
+Coût réel : 1.24 $ US
 
 === Décisions récentes dans la page (Google) ===
-montreal : 30 décisions écrites dans la page des décisions (inchangé).
+montreal : 30 décisions écrites dans la page des décisions.
 
 === Courriels de Montréal publiés ===
+--seance=2026-09-21 → Publié : conseil-2026-09-21. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
 --mois=2026-09 → Déjà publié : 2026-09. Rien à faire.
 
 === Bilan ===
