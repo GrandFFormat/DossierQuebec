@@ -2314,3 +2314,9 @@
 .m-top-row{gap:5px;}
 .m-top-row .part-btn, .m-top-row .wiki-btn, .m-top-row .fin-btn{width:30px; height:30px;}
 .m-top-row .follow-btn{white-space:nowrap;}
+/* Rangées des élu·e·s : quatre boutons (partage, W, $, Suivre) tiennent sur une ligne (23 oct. 2026). */
+.dep-row, .dep-table-head{grid-template-columns:1fr 280px 224px;}
+.dep-actions{gap:5px; justify-content:flex-end;}
+.dep-actions .part-btn, .dep-actions .wiki-btn, .dep-actions .fin-btn{width:30px; height:30px;}
+.dep-actions .follow-btn{white-space:nowrap;}
+@media (max-width:760px){ .dep-row{grid-template-columns:1fr;} .dep-actions{justify-content:flex-start;} }
