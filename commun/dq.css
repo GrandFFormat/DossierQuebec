@@ -2306,3 +2306,11 @@
 .bs-effacer{flex:none; width:48px; border:0; border-left:3px solid var(--ink); background:var(--card); color:var(--ink); font-size:20px; font-weight:900; line-height:1; cursor:pointer;}
 .bs-effacer:hover, .bs-effacer:focus-visible{background:var(--yellow); color:#131313;}
 .bs-effacer[hidden]{display:none;}
+
+/* Le « W » vers la page Wikipédia, à côté du $ (23 oct. 2026). */
+.wiki-btn{flex:none; width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center; border:2px solid var(--ink); background:var(--card); color:var(--ink); font-family:Georgia,'Times New Roman',serif; font-size:18px; font-weight:700; line-height:1; text-decoration:none;}
+.wiki-btn:hover, .wiki-btn:focus-visible{background:var(--ink); color:var(--card);}
+/* Quatre petits boutons dans l'en-tête de la carte : plus serrés, « + Suivre » sur une ligne. */
+.m-top-row{gap:5px;}
+.m-top-row .part-btn, .m-top-row .wiki-btn, .m-top-row .fin-btn{width:30px; height:30px;}
+.m-top-row .follow-btn{white-space:nowrap;}
