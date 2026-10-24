@@ -1,21 +1,21 @@
 {
- "generatedAt": "2026-10-23T13:42:53.851Z",
+ "generatedAt": "2026-10-24T12:50:58.701Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Récapitulatifs rédigés automatiquement à partir de l'objet, du résumé et des résolutions des dossiers de chaque projet, puis vérifiés automatiquement (numéros et nombres contre les dossiers cités, contre-lecture). Ce qui ne passe pas est retiré. En cas d'écart, les documents officiels font foi.",
  "recaps": {
   "tramway": {
    "titre": "Tramway (TramCité)",
-   "signature": "7dade23c267c6f29",
-   "genereLe": "2026-10-23T13:42:25.267Z",
+   "signature": "03fafc8e8f3d1ea4",
+   "genereLe": "2026-10-24T12:50:58.701Z",
    "modele": "claude-opus-5",
    "dossiers": 56,
-   "enBref": null,
+   "enBref": "Cette année, la Ville achète des bandes de terrain et obtient des droits de passage (servitudes) le long du tracé du tramway, surtout sur la 1re Avenue, le boulevard Laurier et dans des ruelles de La Cité-Limoilou. Elle accorde aussi des contrats pour préparer les chantiers et signe des ententes avec l'Université Laval et le Canadien National. Chaque trimestre, elle dépose un rapport sur les ententes conclues avec des propriétaires riverains au sujet des arbres.",
    "etapes": [
     {
      "periode": "Janvier à mars 2026",
-     "titre": "Premiers terrains et droits de passage",
-     "texte": "La Ville autorise l'achat de bandes de terrain en bordure de la 1re Avenue et de droits de passage sur une ruelle près du boulevard René-Lévesque Ouest et sur des terrains de la rue Mendel. Elle négocie d'abord avec les propriétaires et peut exproprier si aucune entente n'est conclue.",
+     "titre": "Premiers terrains et servitudes du tracé",
+     "texte": "La Ville autorise l'achat de bandes de terrain en bordure de la 1re Avenue pour élargir l'emprise de la rue. Elle lance aussi l'obtention de servitudes dans une ruelle près du boulevard René-Lévesque Ouest et sur deux terrains de la rue Mendel, pour déplacer des conduits et des réseaux d'utilités publiques.",
      "numeros": [
       "DE2026-022",
       "DE2026-063",
@@ -26,21 +26,11 @@
      ]
     },
     {
-     "periode": "Février à mars 2026",
-     "titre": "Contrats pour préparer les chantiers",
-     "texte": "La Ville confie des travaux d'arboriculture, la gestion de la santé et de la sécurité sur les chantiers des tronçons TW-01 à TW-06A et la fourniture de matériel d'aqueduc et d'égout pour le tronçon TW-03. Elle ajoute aussi 190 597,00 $ avant taxes à un contrat de réseaux techniques urbains sous le chemin des Quatre-Bourgeois.",
+     "periode": "Février à septembre 2026",
+     "titre": "Arbres le long du tracé",
+     "texte": "La Ville accorde un contrat d'élagage, d'abattage et d'essouchement pour dégager l'emprise des travaux, estimé à 2 840 827,31 $ avant taxes jusqu'au 31 décembre 2027. Le comité exécutif prend acte des rapports trimestriels sur les ententes d'arbres signées avec des propriétaires riverains, et un règlement ajoute un directeur d'arrondissement parmi les personnes autorisées à signer ces ententes.",
      "numeros": [
       "AP2026-018",
-      "AP2026-056",
-      "AP2026-055",
-      "AP2026-068"
-     ]
-    },
-    {
-     "periode": "Février à septembre 2026",
-     "titre": "Ententes sur les arbres avec les riverains",
-     "texte": "Le comité exécutif prend acte des rapports trimestriels des ententes signées avec des propriétaires riverains du tracé : abattage, transplantation, élagage ou protection d'arbres, plantation sur terrain privé et entretien par la Ville. Un règlement ajoute le directeur d'arrondissement responsable de la prévention et de la qualité du milieu parmi les personnes qui peuvent signer ces ententes.",
-     "numeros": [
       "DE2026-069",
       "DE2026-181",
       "PQ2026-018",
@@ -48,9 +38,22 @@
      ]
     },
     {
-     "periode": "Juin à juillet 2026",
+     "periode": "Avril à mai 2026",
+     "titre": "Servitudes Laurier, Moncton, René-Lévesque",
+     "texte": "La Ville autorise de nouvelles servitudes sur des terrains du boulevard Laurier, de l'avenue Moncton, du boulevard René-Lévesque Ouest et d'une ruelle voisine, pour déplacer des conduits et des réseaux. Elle annule aussi l'autorisation qui permettait au Réseau de transport de la Capitale d'occuper 100,6 mètres carrés dans l'emprise du boulevard Laurier, où une station de Métrobus a été démolie.",
+     "numeros": [
+      "CA-2026-0152",
+      "CA-2026-0196",
+      "CA-2026-0218",
+      "CA-2026-0241",
+      "DE2026-179",
+      "DE2026-150"
+     ]
+    },
+    {
+     "periode": "Juin et juillet 2026",
      "titre": "Ententes avec le CN et l'Université Laval",
-     "texte": "La Ville s'entend avec le Canadien National pour la construction d'un pont d'étagement dans le secteur de la rue Mendel, et avec l'Université Laval pour passer sur le campus, moyennant 10 000 000 $ versés à la signature de l'acte notarié. Elle obtient aussi d'occuper une partie du parc de l'Amérique-Française comme site d'entreposage et d'installations de chantier.",
+     "texte": "La Ville s'entend avec le Canadien National pour la construction d'un pont qui fera passer le tramway, un trottoir et une piste cyclable au-dessus d'une voie ferrée dans le secteur de la rue Mendel. Elle obtient de l'Université Laval des droits de passage sur le campus pour 10 000 000 $, et le droit d'occuper environ 7 759,80 mètres carrés du parc de l'Amérique-Française pour y installer un site de chantier.",
      "numeros": [
       "AP2026-197",
       "DE2026-256",
@@ -60,27 +63,28 @@
    ],
    "aSurveiller": [
     {
-     "texte": "Un contrat de services professionnels pour le contrôle de la qualité des matériaux et la gestion environnementale des sols, sur les tronçons TW-04B à TW-06 et TW-11 à TW-12, attend une décision du comité exécutif.",
-     "numeros": [
-      "AP2026-289"
-     ]
-    },
-    {
-     "texte": "Une modification à l'entente de confidentialité avec le RTC, Infra CITÉ et Mobilité Infra Québec, qui ajoute des règles de cybersécurité, attend une décision du comité exécutif.",
+     "texte": "Le comité exécutif doit encore décider d'un avenant à l'entente de confidentialité signée avec le RTC, Infra CITÉ et Mobilité Infra Québec, qui ajoute des règles de cybersécurité pour le partage des maquettes numériques.",
      "numeros": [
       "TW2026-002"
      ]
     },
     {
-     "texte": "Les actes notariés établissant les droits de passage sur le campus de l'Université Laval doivent être signés au plus tard le 31 décembre 2026.",
+     "texte": "Les actes notariés qui établissent les servitudes et le droit d'usage sur le campus de l'Université Laval doivent être signés au plus tard le 31 décembre 2026.",
      "numeros": [
       "DE2026-256"
      ]
     },
     {
-     "texte": "Une entente de servitude reste à négocier avec la Commission de la capitale nationale du Québec pour le parc de l'Amérique-Française, occupé du 6 juillet 2026 au 5 juillet 2033.",
+     "texte": "L'occupation d'une partie du parc de l'Amérique-Française comme site d'entreposage et de chantier s'étend du 6 juillet 2026 au 5 juillet 2033, avec un renouvellement possible de deux ans.",
      "numeros": [
       "DE2026-258"
+     ]
+    },
+    {
+     "texte": "Le contrat d'arboriculture et le mandat de santé et sécurité sur les chantiers des tronçons TW-01 à TW-06A courent jusqu'au 31 décembre 2027.",
+     "numeros": [
+      "AP2026-018",
+      "AP2026-056"
      ]
     }
    ],
@@ -90,20 +94,16 @@
     "retiresMecanique": [],
     "retiresContreLecture": [
      {
-      "element": "etapes[5]",
-      "raison": "Le texte mentionne des acquisitions « en bordure de la rue Berthiaume et de la rue des Frênes Ouest », mais aucun des dossiers cités (DE2026-203, CA-2026-0362, DE2026-213, DE2026-269, DE2026-270, DE2026-271) ne porte sur ces rues. La rue Berthiaume relève de CA-2026-0365 et la rue des Frênes Ouest de CA-2026-0384, qui ne sont pas cités : faits attribués aux mauvais dossiers."
+      "element": "etapes[1]",
+      "raison": "La période annoncée « Février à octobre 2026 » n'est appuyée par aucun des dossiers cités : AP2026-056 (4 mars), AP2026-055 (11 mars), AP2026-068 (18 mars) et AP2026-289 (14 octobre). Aucun n'est de février; le seul contrat de février (AP2026-018, arboriculture) est rattaché à etapes[2]."
      },
      {
       "element": "etapes[5]",
-      "raison": "Le texte évoque des ruelles « près des rues Godbout », mais aucun dossier cité ne concerne la rue Godbout (il s'agit de DE2026-359 et DE2026-360, non cités). Parmi les dossiers cités, DE2026-269 vise une ruelle entre la rue des Pins Est et la rue des Peupliers Est, et non la rue Godbout."
+      "raison": "Le texte mentionne des lieux qui ne figurent dans aucun des dossiers cités : la rue Berthiaume (CA-2026-0365, non cité), la rue des Frênes Ouest (CA-2026-0384, non cité), la rue Godbout (DE2026-359 et DE2026-360, non cités), la rue Sir-Thomas-Chapais (DE2026-270, non cité) et la rue des Chênes Est (DE2026-271, non cité). Le seul dossier de ruelle cité, DE2026-269, vise une ruelle entre la rue des Pins Est et la rue des Peupliers Est, près de la 1re Avenue."
      },
      {
-      "element": "enBref",
-      "raison": "« Des contrats de services restent à décider par le comité exécutif » suggère plusieurs contrats en attente, alors qu'un seul dossier en cours est un contrat de services professionnels (AP2026-289); l'autre dossier en cours (TW2026-002) est un avenant à une entente de confidentialité, pas un contrat de services. Décompte non appuyé par les dossiers."
-     },
-     {
-      "element": "etapes[3]",
-      "raison": "Le texte parle de droits de passage sur « des ruelles voisines » au pluriel, alors qu'un seul dossier de ruelle est cité dans cet élément (DE2026-179, une partie de ruelle). Le dossier DE2026-180, qui viserait une seconde ruelle, n'est pas cité."
+      "element": "etapes[5]",
+      "raison": "La période « Juillet à octobre 2026 » dépasse les dossiers cités : le plus récent d'entre eux (DE2026-213, CA-2026-0497, DE2026-269) se termine le 16 septembre 2026. Les dossiers avec résolutions d'octobre (DE2026-270, DE2026-271, DE2026-359, DE2026-360) ne sont pas cités."
      }
     ]
    }
