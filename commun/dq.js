@@ -1220,10 +1220,12 @@ function resumeElu(nom, isEn){
   ].filter(Boolean).join(' · ');
   return `${morceaux}. ${faits}.`;
 }
+// Un lien lisible à partager (Martin, 26 oct. 2026) : « Pascal Bérubé » → « pascal-berube ».
+const slugElu = (n) => String(n || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 // Un clic copie le résumé et le lien, sans menu (Martin, 22 oct. 2026) ; ✓ le confirme.
 function ouvrirPartageElu(bouton, nom){
   const isEn = currentLang === 'en';
-  const lien = `https://dossierquebec.ca/ministres?elu=${encodeURIComponent(nom)}${isEn ? '&lang=en' : ''}`;
+  const lien = `https://dossierquebec.ca/ministres?elu=${slugElu(nom)}${isEn ? '&lang=en' : ''}`;
   const texte = `${resumeElu(nom, isEn)} ${lien}`;
   const fait = () => {
     const avant = bouton.innerHTML;
@@ -1243,12 +1245,17 @@ window.ouvrirPartageElu = ouvrirPartageElu;
 window.copierPartageElu = copierPartageElu;
 // Le lien partagé : /ministres?elu=Nom remplit la recherche une fois les données arrivées.
 document.addEventListener('DOMContentLoaded', () => {
-  const nom = new URLSearchParams(location.search).get('elu');
-  if(!nom) return;
+  const demande = new URLSearchParams(location.search).get('elu');
+  if(!demande) return;
+  let nom = demande;
   let essais = 0;
   const remplir = () => {
     const champ = document.getElementById('searchMinistres');
-    if(champ && ministers.length){ champ.value = nom; champ.dispatchEvent(new Event('input', { bubbles: true })); champ.scrollIntoView({ block: 'center' }); return; }
+    if(champ && ministers.length){
+      // Lien lisible (?elu=pascal-berube) : retrouver le vrai nom ; un ancien lien avec le nom complet marche encore.
+      const vrai = [...ministers.map((m) => m.name), ...deputes.map((d) => d.name)].find((n) => slugElu(n) === slugElu(demande));
+      if(vrai) nom = vrai.replace(/\s*\([^)]*\)\s*$/, '');
+      champ.value = nom; champ.dispatchEvent(new Event('input', { bubbles: true })); champ.scrollIntoView({ block: 'center' }); return; }
     if(++essais < 40) setTimeout(remplir, 250);
   };
   remplir();
