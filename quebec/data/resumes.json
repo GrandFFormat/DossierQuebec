@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-23T13:40:24.013Z",
+ "generatedAt": "2026-10-27T14:46:01.970Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,366 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-08-24",
+  "depuis": "2026-08-28",
   "plafond": 120
  },
- "nombre": 1725,
- "genereCetteFois": 17,
+ "nombre": 1739,
+ "genereCetteFois": 14,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.6607,
-  "jetonsEntree": 93556,
-  "jetonsSortie": 7716
+  "montant": 0.4995,
+  "jetonsEntree": 70817,
+  "jetonsSortie": 5817
  },
  "resumes": [
+  {
+   "id": "LS2026-268.pdf",
+   "numero": "LS2026-268",
+   "date": "2026-10-26",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement d'une subvention de 71 319 $ à Loisirs du Faubourg inc. conformément au Cadre de financement des corporations de loisir",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-268.pdf",
+   "puces": [
+    "La Ville verse 71 319 $ à Loisirs du Faubourg inc., l'organisme de loisir du quartier situé dans l'arrondissement de La Cité-Limoilou.",
+    "L'argent provient du budget de fonctionnement de l'arrondissement de La Cité-Limoilou.",
+    "La subvention s'inscrit dans le Cadre de financement des corporations de loisir, qui distribue 750 000 $ entre 11 corporations de loisir de quartier en 2026.",
+    "Le montant accordé à l'organisme a été calculé selon le nombre d'employés à temps plein, la programmation annuelle, les événements spéciaux et les partenariats.",
+    "L'organisme devra déposer un bilan de ses actions à la fin de la période couverte par la subvention.",
+    "Le montant augmente par rapport aux années précédentes : 26 653,90 $ en 2024 et 52 300,93 $ en 2025."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "71 319 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-27T14:45:41.383Z",
+   "jetons": {
+    "entree": 3575,
+    "sortie": 409
+   }
+  },
+  {
+   "id": "TM2026-253.pdf",
+   "numero": "TM2026-253",
+   "date": "2026-10-26",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1619 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Louis-Adolphe-Robitaille - Arrondissement de La Cité-Limoilou - District électoral de Montcalm-Saint-Sacrement",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-253.pdf",
+   "puces": [
+    "La Ville réserve trois cases de stationnement devant le Centre de la petite enfance À l'Unisson, au 1195, rue Louis-Adolphe-Robitaille, dans Montcalm-Saint-Sacrement.",
+    "Ces cases passent à une limite de 10 minutes, du lundi au vendredi, de 7 h à 18 h.",
+    "Avant, tout le secteur était limité à 90 minutes, de 9 h à 17 h, du lundi au vendredi; cette règle reste en vigueur sur le reste du tronçon.",
+    "Le changement touche le côté sud de la rue, entre l'avenue Ernest-Gagnon et l'avenue des Jésuites.",
+    "Le but : permettre aux parents de déposer et récupérer leurs enfants; le CPE accueille 40 enfants de 18 mois à 5 ans.",
+    "Selon le document, aucune case de stationnement n'est perdue dans la rue."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-27T14:45:41.399Z",
+   "jetons": {
+    "entree": 4255,
+    "sortie": 410
+   }
+  },
+  {
+   "id": "GT2026-344.pdf",
+   "numero": "GT2026-344",
+   "date": "2026-10-26",
+   "unite": "Gestion du territoire",
+   "objet": "Modification avant adoption du Règlement modifiant le Règlement de l'Arrondissement de La Cité-Limoilou sur l'urbanisme relativement aux zones 11005Mb, 11006Mb, 11007Mb, 11021Mb, 11022Mb, 11049Mb, 11057Mb, 11064Mb, 11094Mc et 11100Mb, R.C.A.1V.Q. 577 (hébergement touristique commercial et contingent",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-344.pdf",
+   "puces": [
+    "Le conseil d'arrondissement de La Cité-Limoilou adopte un règlement qui change le zonage dans le Vieux-Québec, le Vieux-Port et la Colline parlementaire (district du Cap-aux-Diamants).",
+    "Dans plusieurs zones visées, la Ville retire la possibilité d'ouvrir de nouveaux établissements d'hébergement touristique général, pour favoriser la création de logements; les établissements déjà en place ne deviennent pas dérogatoires.",
+    "La Ville abolit le contingentement des restaurants dans le secteur du Vieux-Port, soit la limite du nombre de restaurants permis.",
+    "Les restaurants deviennent autorisés dans la zone 11064Mb, qui longe la rue Saint-Paul.",
+    "Avant l'adoption, la Ville retire du règlement les changements prévus pour la zone 11092Mc, parce que des personnes habiles à voter ont demandé de les soumettre à leur approbation.",
+    "Le règlement crée aussi quatre nouvelles zones à même les zones 11049Mb et 11021Mb."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-27T14:45:42.462Z",
+   "jetons": {
+    "entree": 8103,
+    "sortie": 468
+   }
+  },
+  {
+   "id": "TM2026-205.pdf",
+   "numero": "TM2026-205",
+   "date": "2026-10-26",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnances numéros O-1588, O-1589, O-1611 et O-1612 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement à l'intersection de l'avenue D'Estimauville, de la rue de l'Oie-Blanche et de l'accès au parc de l'Arboretum - Arrondissement de La Cité-Limoilou -",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-205.pdf",
+   "puces": [
+    "La Ville installe un feu de circulation à l'intersection de l'avenue D'Estimauville, de la rue de l'Oie-Blanche et de l'accès au parc de l'Arboretum, dans le quartier Maizerets (arrondissement de La Cité-Limoilou).",
+    "Le virage à droite au feu rouge devient interdit en tout temps, en raison de la forme de l'intersection, de la proximité du passage à niveau et de la programmation du nouveau feu.",
+    "Le stationnement est interdit en tout temps du côté sud de la rue de l'Oie-Blanche.",
+    "Du côté nord de la rue de l'Oie-Blanche, le stationnement est limité dans certaines sections, de 9 h à 17 h du lundi au vendredi; le texte du sommaire parle de 90 minutes, alors que l'ordonnance O-1611 indique 60 minutes.",
+    "La limite de vitesse est fixée sur la rue de l'Oie-Blanche : le sommaire indique 40 km/h, tandis que l'ordonnance O-1612 inscrit 30 km/h.",
+    "Comme l'intersection touche deux réseaux routiers, deux séries d'ordonnances sont adoptées : une par le comité exécutif (réseau artériel) et une par le conseil d'arrondissement (réseau local).",
+    "Le document ne mentionne aucun impact financier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-27T14:45:43.055Z",
+   "jetons": {
+    "entree": 8406,
+    "sortie": 561
+   }
+  },
+  {
+   "id": "TM2026-231.pdf",
+   "numero": "TM2026-231",
+   "date": "2026-10-26",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1613 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Hermine - Arrondissement de La Cité-Limoilou - District électoral de Saint-Roch-Saint-Sauveur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-231.pdf",
+   "puces": [
+    "La Ville retire l'espace de stationnement réservé aux personnes à mobilité réduite devant le 316, rue Hermine, dans Saint-Roch–Saint-Sauveur.",
+    "Cet espace devient du stationnement de durée limitée à 90 minutes, de 9 h à 17 h, du lundi au vendredi.",
+    "Les véhicules munis d'un permis de stationnement de la zone 16 échappent à cette limite de 90 minutes.",
+    "La nouvelle règle s'applique au côté nord de la rue Hermine, entre la rue Victoria et la rue Durocher.",
+    "Aucun espace de stationnement n'est supprimé par ce changement.",
+    "La demande venait d'un résidant du 316, rue Hermine, et le Service du transport a conclu que l'espace réservé n'était plus nécessaire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-27T14:45:48.533Z",
+   "jetons": {
+    "entree": 4309,
+    "sortie": 374
+   }
+  },
+  {
+   "id": "A1DA2026-013.pdf",
+   "numero": "A1DA2026-013",
+   "date": "2026-10-26",
+   "unite": "Arrondissement de La Cité-Limoilou",
+   "objet": "Versement d'une subvention de 200 $ à l'organisme « Bénévolat Montcalm-Saint-Sacrement » pour de l'animation musicale pour un dîner de Noël",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A1DA2026-013.pdf",
+   "puces": [
+    "L'arrondissement de La Cité-Limoilou verse 200 $ à l'organisme « Bénévolat Montcalm-Saint-Sacrement ».",
+    "L'argent sert à payer de l'animation musicale lors d'un dîner de Noël.",
+    "La demande vient de la conseillère Catherine Vallières-Roland.",
+    "Les fonds proviennent du budget du conseil d'arrondissement, destiné à soutenir les conseils d'arrondissement.",
+    "Le chèque est envoyé à l'organisme, au 102-1040 av. Belvédère, à Québec."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "200 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-27T14:45:47.133Z",
+   "jetons": {
+    "entree": 2646,
+    "sortie": 292
+   }
+  },
+  {
+   "id": "A1DA2026-012.pdf",
+   "numero": "A1DA2026-012",
+   "date": "2026-10-26",
+   "unite": "Arrondissement de La Cité-Limoilou",
+   "objet": "Versement de deux (2) subventions totalisant un montant de 250 $ à deux (2) organismes",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A1DA2026-012.pdf",
+   "puces": [
+    "L'arrondissement de La Cité-Limoilou verse 250 $ en subventions à deux organismes du secteur.",
+    "Le Centre Famille Haute-Ville (84, rue Saint-Jean) reçoit 125 $ pour une fête familiale pendant le mois des enfants, en novembre 2026.",
+    "L'Entraide du Faubourg (369, rue Saint-Jean) reçoit 125 $ pour la fête de Noël de ses bénévoles.",
+    "L'argent provient du budget du conseil d'arrondissement et les fonds sont disponibles.",
+    "Les subventions sont demandées par la conseillère Mélissa Coulombe-Leduc."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "250 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-27T14:45:47.126Z",
+   "jetons": {
+    "entree": 2802,
+    "sortie": 322
+   }
+  },
+  {
+   "id": "TM2026-244.pdf",
+   "numero": "TM2026-244",
+   "date": "2026-10-26",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1617 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Saint-Germain - Arrondissement de La Cité-Limoilou - District électoral de Saint-Roch-Saint-Sauveur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-244.pdf",
+   "puces": [
+    "La Ville retire une place de stationnement réservée aux personnes à mobilité réduite sur la rue Saint-Germain, dans Saint-Roch–Saint-Sauveur.",
+    "La place se trouve du côté est de la rue, entre l'avenue des Oblats et la rue Boisseau, sur 10 mètres à partir des Oblats, le long du 455, avenue des Oblats.",
+    "Un résidant du 455, avenue des Oblats a demandé ce retrait.",
+    "Après analyse, le Service du transport et de la mobilité intelligente conclut que cet espace n'est plus nécessaire.",
+    "Le conseil d'arrondissement de La Cité-Limoilou édicte l'ordonnance O-1617 pour appliquer le changement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-27T14:45:48.016Z",
+   "jetons": {
+    "entree": 3767,
+    "sortie": 348
+   }
+  },
+  {
+   "id": "TM2026-210.pdf",
+   "numero": "TM2026-210",
+   "date": "2026-10-26",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1594 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement à la 3e Avenue - Arrondissement de La Cité-Limoilou - District électoral de Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-210.pdf",
+   "puces": [
+    "La Ville ajoute des passages pour piétons sur la 3e Avenue, à l'intersection de la 2e Rue, dans Limoilou.",
+    "Les passages seront aménagés aux approches nord et sud de l'intersection.",
+    "Ils seront marqués au sol et signalisés, avec installation et retrait de panneaux sur place.",
+    "Le Service du transport et de la mobilité intelligente note que le revêtement actuel en pavés de béton peut faire croire aux piétons qu'ils ont la priorité.",
+    "L'analyse de la Ville conclut que le nombre de piétons et de véhicules justifie ces passages.",
+    "Le conseil d'arrondissement de La Cité-Limoilou édicte l'ordonnance O-1594 pour rendre le changement officiel."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-27T14:45:53.692Z",
+   "jetons": {
+    "entree": 4240,
+    "sortie": 356
+   }
+  },
+  {
+   "id": "A1DA2026-011.pdf",
+   "numero": "A1DA2026-011",
+   "date": "2026-10-26",
+   "unite": "Arrondissement de La Cité-Limoilou",
+   "objet": "Versement d'une subvention de 100 $ à l'organisme « La Maison des jeunes du quartier Saint-Jean-Baptiste » pour l'organisation d'un souper de Noël",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A1DA2026-011.pdf",
+   "puces": [
+    "L'Arrondissement de La Cité-Limoilou verse 100 $ à La Maison des jeunes du quartier Saint-Jean-Baptiste.",
+    "L'argent sert à organiser le souper de Noël de l'organisme, prévu en 2026.",
+    "La demande vient de la conseillère Mélissa Coulombe-Leduc.",
+    "La somme provient du budget du conseil d'arrondissement, où les fonds sont déjà disponibles.",
+    "Le conseil d'arrondissement a adopté la décision (résolution CA1-2026-0239)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "100 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-27T14:45:53.397Z",
+   "jetons": {
+    "entree": 2666,
+    "sortie": 284
+   }
+  },
+  {
+   "id": "GT2026-316.pdf",
+   "numero": "GT2026-316",
+   "date": "2026-10-26",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise aux 1330 à 1332, rue De Longueuil, lot 1 736 209, quartier de Saint-Sacrement, district électoral Montcalm-Saint-Sacrement, Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-316.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure pour un agrandissement projeté aux 1330 à 1332, rue De Longueuil, dans le quartier Saint-Sacrement (arrondissement de La Cité-Limoilou).",
+    "L'agrandissement pourra être construit à 1,65 mètre de la limite arrière du terrain, alors que le règlement d'urbanisme de l'arrondissement exige au moins 3,5 mètres.",
+    "L'agrandissement se fera en cour arrière, dans le prolongement du mur arrière du bâtiment déjà existant, qui est lui-même à 1,8 mètre de la ligne arrière.",
+    "Selon l'analyse, appliquer la règle causerait un préjudice au propriétaire, puisqu'il devrait bâtir soit collé sur la ligne de lot, soit à 3,5 mètres.",
+    "Le document indique qu'une bande d'environ 2,29 mètres correspondant à une ancienne ruelle sépare le terrain des propriétés arrière, pour une distance totale d'environ 4,3 mètres.",
+    "Le comité consultatif d'urbanisme a recommandé la demande à l'unanimité le 29 septembre 2026; la décision revient au conseil d'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-27T14:45:55.685Z",
+   "jetons": {
+    "entree": 5409,
+    "sortie": 519
+   }
+  },
+  {
+   "id": "GT2026-317.pdf",
+   "numero": "GT2026-317",
+   "date": "2026-10-26",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 645, rue Sainte-Marie, lot 6 569 739, quartier de Saint-Jean-Baptiste, district électoral du Cap-aux-Diamants, Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-317.pdf",
+   "puces": [
+    "La Ville autorise un bâtiment résidentiel projeté de 16 logements au 645, rue Sainte-Marie, dans le quartier Saint-Jean-Baptiste (arrondissement de La Cité-Limoilou).",
+    "Le bâtiment pourra atteindre 14 mètres de haut, au lieu du maximum de 13 mètres prévu au règlement d'urbanisme de l'arrondissement.",
+    "Le terrain présente une dénivelée d'environ 1,5 mètre, sous le seuil de 2 mètres qui aurait permis un calcul de hauteur plus avantageux.",
+    "Selon l'analyse, appliquer la limite de 13 mètres retrancherait un étage et pourrait faire perdre trois logements au projet.",
+    "Le comité consultatif d'urbanisme s'est dit favorable à l'unanimité le 29 septembre 2026; la décision revient au conseil d'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-27T14:45:55.595Z",
+   "jetons": {
+    "entree": 5670,
+    "sortie": 533
+   }
+  },
+  {
+   "id": "GT2026-313.pdf",
+   "numero": "GT2026-313",
+   "date": "2026-10-26",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 338, Grande Allée Ouest, lot 1 304 818, quartier de Montcalm, district électoral du Cap-aux-Diamants, Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-313.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure au 338, Grande Allée Ouest, dans le quartier Montcalm (arrondissement de La Cité-Limoilou).",
+    "La dérogation rend conforme une aire de stationnement aménagée devant la façade du bâtiment, ce que le règlement d'urbanisme interdit normalement.",
+    "Deux conditions s'appliquent : la largeur du stationnement en cour avant sur Grande Allée Ouest doit être ramenée à 3 mètres maximum, et l'empiétement devant la façade à 2 mètres maximum.",
+    "Le stationnement avait été élargi sans autorisation entre 2015 et 2016, créant un empiétement d'environ 5,5 mètres devant la façade.",
+    "Les propriétaires veulent agrandir le bâtiment sur le côté pour y aménager un vestibule technique d'entrée.",
+    "Le comité consultatif d'urbanisme s'est dit favorable à la demande, à la majorité, le 29 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-27T14:46:01.890Z",
+   "jetons": {
+    "entree": 6341,
+    "sortie": 439
+   }
+  },
+  {
+   "id": "GT2026-335.pdf",
+   "numero": "GT2026-335",
+   "date": "2026-10-26",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement La Cité-Limoilou sur l'urbanisme relativement à la zone 16012Hb, R.C.A.1V.Q. 588 (665-675, avenue Marguerite-Bourgeoys, quartier de Saint-Sacrement, district électoral Montcalm-Saint-Sacrement)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-335.pdf",
+   "puces": [
+    "La Ville propose de modifier le zonage du 665-675, avenue Marguerite-Bourgeoys, dans le quartier Saint-Sacrement, pour y autoriser les maisons de chambres et de pension.",
+    "Le propriétaire, Jarano Immobilier inc., veut convertir l'immeuble, qui compte 27 petits locaux commerciaux, en une trentaine de chambres réparties sur quatre étages.",
+    "Les travaux prévus incluent une mise aux normes, l'ajout de salles de bains et de douches communes et privées, et des cuisines communes à chaque étage.",
+    "Le requérant vise une clientèle étudiante, en raison de la proximité du Cégep Garneau, de l'Université Laval et du Cégep de Sainte-Foy.",
+    "Aucune case de stationnement n'existe sur le terrain et aucune n'est exigée pour ce type d'usage.",
+    "Le conseil de quartier de Saint-Sacrement sera appelé à donner son opinion et à tenir une assemblée publique; les personnes intéressées auront ensuite sept jours pour écrire leurs observations.",
+    "Le règlement contient des dispositions susceptibles d'approbation référendaire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-27T14:46:01.969Z",
+   "jetons": {
+    "entree": 8628,
+    "sortie": 502
+   }
+  },
   {
    "id": "AP2026-359.pdf",
    "numero": "AP2026-359",
