@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-27T14:46:01.970Z",
+ "generatedAt": "2026-10-28T15:15:45.444Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,366 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-08-28",
+  "depuis": "2026-08-29",
   "plafond": 120
  },
- "nombre": 1739,
+ "nombre": 1753,
  "genereCetteFois": 14,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.4995,
-  "jetonsEntree": 70817,
-  "jetonsSortie": 5817
+  "montant": 0.5229,
+  "jetonsEntree": 75593,
+  "jetonsSortie": 5799
  },
  "resumes": [
+  {
+   "id": "TM2026-234.pdf",
+   "numero": "TM2026-234",
+   "date": "2026-10-27",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Projet demandant à être exempté de l'obligation de fournir des cases de stationnement requises par le Règlement de l'Arrondissement des Rivières sur l'urbanisme - R.C.A.2V.Q. 4 pour l'immeuble localisé au 8035, rue Latreille - Arrondissement des Rivières - District électoral de Neufchâtel-Lebourgneu",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-234.pdf",
+   "puces": [
+    "Le propriétaire du 8035, rue Latreille, dans l'arrondissement des Rivières, veut ajouter deux logements au sous-sol d'un immeuble qui en compte déjà quatre.",
+    "Le règlement exige sept cases de stationnement; le projet n'en prévoit que cinq.",
+    "La Ville exempte le propriétaire de fournir les deux cases manquantes, en échange d'une compensation de 1 000 $ versée au « Fonds de stationnement ».",
+    "Le paiement doit être fait au plus tard 30 jours après l'adoption de la résolution par le conseil d'arrondissement.",
+    "L'analyse note que le secteur, entre l'avenue Lespérance et le boulevard La Morille, est bien desservi par le transport en commun et que l'occupation du stationnement sur rue y est faible à modérée."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-28T15:15:26.396Z",
+   "jetons": {
+    "entree": 3632,
+    "sortie": 381
+   }
+  },
+  {
+   "id": "TM2026-238.pdf",
+   "numero": "TM2026-238",
+   "date": "2026-10-27",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-623 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Pierre-Ardouin - Arrondissement des Rivières - District électoral des Saules-Les Méandres",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-238.pdf",
+   "puces": [
+    "La Ville réserve un espace de stationnement aux personnes à mobilité réduite devant le 3320, rue Pierre-Ardouin, dans l'Arrondissement des Rivières.",
+    "Le stationnement y est limité à 30 minutes et réservé aux véhicules munis d'une vignette, d'une plaque ou d'un permis prévus au Code de la sécurité routière.",
+    "La zone se trouve du côté ouest de la rue, sur 10 mètres, à partir de 97,5 mètres au nord de l'intersection est avec la rue Michelet.",
+    "Le gestionnaire du CPE Passe-Partout inc. avait demandé la mesure : un parent à mobilité réduite arrive en transport adapté et les véhicules garés près de l'allée piétonne nuisent aux manœuvres.",
+    "Aucun espace de stationnement existant n'est retiré.",
+    "Le conseil d'arrondissement édicte l'ordonnance O-623 pour appliquer ce changement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-28T15:15:26.291Z",
+   "jetons": {
+    "entree": 3903,
+    "sortie": 428
+   }
+  },
+  {
+   "id": "GT2026-331.pdf",
+   "numero": "GT2026-331",
+   "date": "2026-10-27",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 10610, rue Élisabeth-II, lot 6 676 549, quartier de Neufchâtel Est-Lebourgneuf, district électoral de Neufchâtel-Lebourgneuf, Arrondissement des Rivières",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-331.pdf",
+   "puces": [
+    "La Ville accorde une dérogation pour le 10610, rue Élisabeth-II, dans le quartier Neufchâtel Est-Lebourgneuf (Arrondissement des Rivières).",
+    "Deux allées d'accès en cour avant pourront être séparées de 5 mètres au lieu des 6 mètres exigés par le règlement d'urbanisme.",
+    "La dérogation s'inscrit dans un projet d'ensemble qui ajoute trois séries de bâtiments et 12 logements sur le terrain.",
+    "Condition imposée au propriétaire : planter une rangée de cèdres ou installer une clôture opaque sur au moins 10 mètres le long d'une partie de l'allée d'accès.",
+    "Cet aménagement doit se trouver entre la rue Élisabeth-II et la façade du bâtiment du 10610.",
+    "Le comité consultatif d'urbanisme avait recommandé la dérogation à l'unanimité le 5 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-28T15:15:26.017Z",
+   "jetons": {
+    "entree": 6064,
+    "sortie": 418
+   }
+  },
+  {
+   "id": "GT2026-337.pdf",
+   "numero": "GT2026-337",
+   "date": "2026-10-27",
+   "unite": "Gestion du territoire",
+   "objet": "Abandon du processus de modification réglementaire débuté par le projet de Règlement modifiant le Règlement de l'Arrondissement des Rivières sur l'urbanisme relativement à une autorisation personnelle à Conseil de direction de l'Armée du Salut du Canada sur le lot numéro 1 941 572 du cadastre du Qué",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-337.pdf",
+   "puces": [
+    "Le conseil d'arrondissement des Rivières met fin au projet de règlement qui aurait permis à l'Armée du Salut d'occuper le 735, boulevard Wilfrid-Hamel, dans le quartier de Vanier.",
+    "Ce règlement devait autoriser l'organisme à utiliser le local comme lieu de culte pour une durée de 100 ans.",
+    "La raison invoquée : l'Armée du Salut n'a pas pu signer le bail pour ce local.",
+    "Le projet de règlement et l'avis de motion avaient été adoptés le 29 septembre 2026; la consultation prévue avec le conseil de quartier de Vanier n'aura pas de suite.",
+    "Aucun impact financier n'est indiqué au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-28T15:15:25.548Z",
+   "jetons": {
+    "entree": 8395,
+    "sortie": 347
+   }
+  },
+  {
+   "id": "LS2026-266.pdf",
+   "numero": "LS2026-266",
+   "date": "2026-10-27",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement de subventions totalisant 230 937 $ à trois (3) organismes conformément au nouveau Cadre de financement des corporations de loisir",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-266.pdf",
+   "puces": [
+    "L'arrondissement des Rivières verse 230 937 $ en subventions à trois organismes de loisir de quartier.",
+    "Les montants : Loisirs Duberger-Les Saules inc. 89 569 $, Loisirs Vanier 76 515 $, Loisirs et sports Neufchâtel inc. 64 853 $.",
+    "L'argent provient du Cadre de financement des corporations de loisir, qui dispose de 750 000 $ en 2026 pour 11 corporations dans l'ensemble de la ville.",
+    "Les montants ont été calculés selon le nombre d'employés à temps plein, la programmation annuelle, les événements spéciaux et les partenariats.",
+    "Chaque organisme devra remettre un bilan de ses actions à la fin de la période couverte par la subvention.",
+    "Les sommes versées ont augmenté d'année en année : 86 141,85 $ en 2024, 169 353,65 $ en 2025, 230 937 $ en 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "230 937 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-28T15:15:31.760Z",
+   "jetons": {
+    "entree": 3740,
+    "sortie": 425
+   }
+  },
+  {
+   "id": "TM2026-192.pdf",
+   "numero": "TM2026-192",
+   "date": "2026-10-27",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnances numéros O-616, O-617 et O-618 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement aux rues de la Comtoise, Coursol et des Bienfaits - Arrondissement des Rivières - District électoral des Saules-Les Méandres",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-192.pdf",
+   "puces": [
+    "La Ville ajoute des arrêts obligatoires à trois intersections du secteur de la rue des Bienfaits, dans l'arrondissement des Rivières (district des Saules-Les Méandres).",
+    "Nouvel arrêt sur la rue de la Comtoise, aux approches nord et sud, à l'intersection de la rue des Bienfaits.",
+    "Nouvel arrêt sur la rue Coursol, aux approches nord et sud, à l'intersection de l'accès véhiculaire du 2283, avenue Chauveau.",
+    "Nouvel arrêt sur la rue des Bienfaits, aux approches ouest et est, à l'intersection de l'accès véhiculaire du 2291, rue des Bienfaits.",
+    "Ces arrêts s'appliquent autant aux automobilistes qu'aux cyclistes.",
+    "Le Service du transport a observé la circulation dans cette zone pour aînés; le volume aux trois intersections justifie l'ajout d'arrêts là où aucun contrôle n'existait."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-28T15:15:32.122Z",
+   "jetons": {
+    "entree": 5771,
+    "sortie": 441
+   }
+  },
+  {
+   "id": "LS2026-233.pdf",
+   "numero": "LS2026-233",
+   "date": "2026-10-27",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement de subventions totalisant 284 714 $ à quatre (4) organismes conformément au Cadre de financement des corporations de loisir",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-233.pdf",
+   "puces": [
+    "La Ville verse 284 714 $ en subventions à quatre organismes de loisir de l'arrondissement de Charlesbourg.",
+    "Les montants : Loisirs de St-Rodrigue (Loisirs Flambo) 101 719 $, Loisirs Brio 72 040 $, Loisirs du Trait-Carré 63 675 $ et Les Loisirs Bourassa 47 280 $.",
+    "L'argent provient du Cadre de financement des corporations de loisir, doté de 750 000 $ pour 2026 et partagé entre 11 corporations de la ville.",
+    "Pour y avoir droit, les organismes devaient déposer une déclaration d'activités basée sur l'année 2024; les montants ont été calculés selon le nombre d'employés à temps plein, la programmation, les événements et les partenariats.",
+    "Chaque organisme devra remettre un bilan de ses actions à la fin de la période couverte par la subvention.",
+    "Les sommes visent à soutenir l'offre de loisir de proximité dans les quartiers et à développer les activités et services."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "284 714 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-28T15:15:32.198Z",
+   "jetons": {
+    "entree": 3754,
+    "sortie": 457
+   }
+  },
+  {
+   "id": "TM2026-199.pdf",
+   "numero": "TM2026-199",
+   "date": "2026-10-27",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-620 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement à la rue du Griffon - Arrondissement des Rivières - District électoral de Neufchâtel-Lebourgneuf",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-199.pdf",
+   "puces": [
+    "La Ville ajoute deux arrêts obligatoires sur la rue du Griffon, aux approches ouest et est de l'intersection avec l'avenue des Gerbes.",
+    "L'intersection en « T » n'avait jusqu'ici qu'un seul arrêt, sur l'avenue des Gerbes, à l'approche sud.",
+    "Les automobilistes et les cyclistes devront faire leur arrêt à ces nouveaux panneaux.",
+    "Le secteur touché est le district de Neufchâtel-Lebourgneuf, dans l'arrondissement des Rivières.",
+    "La Ville dit avoir fait l'analyse après des observations dans la zone pour aînés du secteur, et avance la sécurité des usagers comme motif.",
+    "La mesure prend la forme de l'ordonnance O-620, adoptée par le conseil d'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-28T15:15:31.671Z",
+   "jetons": {
+    "entree": 3587,
+    "sortie": 384
+   }
+  },
+  {
+   "id": "GT2026-332.pdf",
+   "numero": "GT2026-332",
+   "date": "2026-10-27",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 4825, carré Antoine-Baumé, lot 1 229 520, quartier de Duberger-Les Saules, district électoral des Saules-Les Méandres, Arrondissement des Rivières",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-332.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure au 4825, carré Antoine-Baumé, dans le quartier Duberger–Les Saules (Arrondissement des Rivières).",
+    "L'immeuble résidentiel de quatre logements, construit en 1968, a une marge de recul arrière de 7 mètres au lieu des 9 mètres exigés par le règlement d'urbanisme.",
+    "La dérogation rend cette marge réputée conforme, ce qui règle la situation en vue de la vente de la propriété.",
+    "Le comité consultatif d'urbanisme s'est dit favorable à l'unanimité le 5 octobre 2026.",
+    "Selon l'analyse, la situation existe depuis 1968 et aucune plainte liée aux marges n'a été déposée pour cette adresse.",
+    "Le conseil d'arrondissement a tranché le 27 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-28T15:15:36.825Z",
+   "jetons": {
+    "entree": 4784,
+    "sortie": 389
+   }
+  },
+  {
+   "id": "GT2026-338.pdf",
+   "numero": "GT2026-338",
+   "date": "2026-10-27",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement des Rivières sur l'urbanisme relativement aux zones 21734Cb et 21736Cc, R.C.A.2V.Q. 451 (840 et 980, rue Bouvier, quartier de Neufchâtel Est-Lebourgneuf, district électoral de Neufchâtel-Lebourgneuf)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-338.pdf",
+   "puces": [
+    "La Ville modifie le zonage des terrains du 840 et du 980, rue Bouvier, dans le quartier Neufchâtel Est-Lebourgneuf (district Neufchâtel-Lebourgneuf).",
+    "La hauteur maximale des bâtiments passe à 24 mètres dans les zones 21734Cb et 21736Cc.",
+    "Ce changement permet la construction d'un hôtel au 840, rue Bouvier et l'ajout de trois étages au bâtiment du 980, rue Bouvier, qui accueillera bureaux, commerces et restaurants ainsi que le siège social du Groupe Abbatiello.",
+    "Le projet du 980, rue Bouvier prévoit 128 cases de stationnement souterraines en plus des 49 cases extérieures existantes.",
+    "Les lave-autos ne seront plus permis dans la zone 21734Cb, mais le seront dans la zone 21736Cc; la distance minimale de 50 mètres entre un lave-auto et un immeuble d'habitation est retirée.",
+    "Le règlement contient des dispositions susceptibles d'approbation référendaire; le conseil de quartier tiendra une assemblée publique de consultation et les personnes intéressées auront sept jours après celle-ci pour écrire leurs observations."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-28T15:15:38.705Z",
+   "jetons": {
+    "entree": 8506,
+    "sortie": 529
+   }
+  },
+  {
+   "id": "TM2026-249.pdf",
+   "numero": "TM2026-249",
+   "date": "2026-10-27",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement de Charlesbourg sur le stationnement dans un garage, un parc de stationnement et sur un terrain géré par la Ville relativement à une case de stationnement pour laquelle un tarif est imposé par un parcomètre, R.C.A.4V.Q. 258",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-249.pdf",
+   "puces": [
+    "Le conseil d'arrondissement de Charlesbourg modifie son règlement sur le stationnement dans les garages, parcs de stationnement et terrains gérés par la Ville.",
+    "Les véhicules affichant une vignette pour personnes handicapées (symbole du fauteuil roulant) pourront se stationner gratuitement jusqu'à trois heures dans une case tarifée par parcomètre.",
+    "La gratuité ne s'applique pas si le stationnement est interdit pour cause d'entretien de la rue, de travaux, de signalisation temporaire ou sur ordre d'un agent de la paix.",
+    "À Charlesbourg, aucun parc de stationnement n'est visé par cette mesure : le changement est fait pour harmoniser les règlements de la Ville.",
+    "Cette gratuité de trois heures existe déjà depuis plus de 20 ans dans les rues où le stationnement est tarifé par parcomètre.",
+    "La modification découle du Plan d'action en accessibilité universelle 2025-2030 et touche en tout huit règlements municipaux sur le stationnement.",
+    "L'annexe listant les types de réglementation et les moyens de contrôle du stationnement est aussi remplacée pour la mettre à jour."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-28T15:15:38.871Z",
+   "jetons": {
+    "entree": 8273,
+    "sortie": 509
+   }
+  },
+  {
+   "id": "A2DA2026-006.pdf",
+   "numero": "A2DA2026-006",
+   "date": "2026-10-27",
+   "unite": "Arrondissement des Rivières",
+   "objet": "Adoption du calendrier 2027 des séances ordinaires du conseil de l'Arrondissement des Rivières",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A2DA2026-006.pdf",
+   "puces": [
+    "Le conseil de l'Arrondissement des Rivières adopte le calendrier de ses séances publiques pour 2027.",
+    "Douze séances sont prévues, toutes à 17 h 30, surtout le quatrième mardi du mois.",
+    "Deux exceptions : le lundi 21 juin, le jeudi 8 juillet et le mardi 7 décembre 2027.",
+    "Les séances ont lieu à la salle du Conseil du bureau d'arrondissement, au 330, rue Chabot, à Québec.",
+    "Le conseil peut quand même décider qu'une séance commence à une autre date ou heure."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-28T15:15:39.529Z",
+   "jetons": {
+    "entree": 3215,
+    "sortie": 298
+   }
+  },
+  {
+   "id": "TM2026-272.pdf",
+   "numero": "TM2026-272",
+   "date": "2026-10-27",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-564 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue des Manitobains - Arrondissement de Charlesbourg - District électoral des Monts",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-272.pdf",
+   "puces": [
+    "La Ville interdit le stationnement dans le rond de virée au bout sud de la rue des Manitobains, à Charlesbourg (district des Monts).",
+    "L'interdiction s'applique de 7 h à 17 h, du lundi au vendredi, pendant l'année scolaire seulement.",
+    "Elle touche tout le côté extérieur du rond de virée, sur 85 mètres, et retire 10 places de stationnement durant ces heures.",
+    "La demande vient du Centre de services scolaire des Premières-Seigneuries : les autos garées là nuisent au passage de l'autobus scolaire.",
+    "En dehors de ces heures et hors période scolaire, les résidants peuvent continuer de s'y stationner."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-28T15:15:44.257Z",
+   "jetons": {
+    "entree": 3705,
+    "sortie": 333
+   }
+  },
+  {
+   "id": "TM2026-247.pdf",
+   "numero": "TM2026-247",
+   "date": "2026-10-27",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement des Rivières sur le stationnement dans un garage, un parc de stationnement et sur un terrain géré par la Ville relativement à une case de stationnement pour laquelle un tarif est imposé par un parcomètre, R.C.A.2V.Q. 440",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-247.pdf",
+   "puces": [
+    "La Ville modifie un règlement de l'arrondissement des Rivières pour offrir 3 heures de stationnement gratuit aux véhicules munis d'une vignette pour personnes handicapées de la SAAQ, dans les cases tarifées par parcomètre.",
+    "La gratuité ne s'applique pas quand le stationnement est interdit pour l'entretien de la rue, des travaux, ou selon une signalisation temporaire ou les directives d'un agent de la paix.",
+    "Dans l'arrondissement des Rivières, aucun parc de stationnement n'est visé par cette mesure : le changement est fait pour uniformiser les règles.",
+    "Au total, 8 règlements municipaux sur le stationnement dans les garages, parcs de stationnement et terrains gérés par la Ville seront modifiés.",
+    "Cette gratuité de 3 heures existe depuis plus de 20 ans dans les rues où le stationnement est tarifé par parcomètre.",
+    "La mesure découle d'un engagement du Plan d'action en accessibilité universelle 2025-2030 de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-10-28T15:15:45.443Z",
+   "jetons": {
+    "entree": 8264,
+    "sortie": 460
+   }
+  },
   {
    "id": "LS2026-268.pdf",
    "numero": "LS2026-268",

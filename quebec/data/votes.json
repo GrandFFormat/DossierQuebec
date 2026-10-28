@@ -1,16 +1,16 @@
 {
- "generatedAt": "2026-10-27T14:45:31.907Z",
+ "generatedAt": "2026-10-28T15:15:16.077Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "methode": "Extraction par analyse du texte des résolutions (champ « content » de l'index de la Ville). Les noms sont lus dans les passages « Ont voté en faveur / Ont voté contre ». Chaque vote conserve le texte brut et signale tout écart avec le décompte officiel.",
  "parametres": {
   "annee": "2026",
   "max": 1000,
-  "depuis": "2026-08-28"
+  "depuis": "2026-08-29"
  },
- "totalDisponible": 263,
- "documentsAnalyses": 36,
- "nombre": 263,
- "nouveauxDepuisDerniereExecution": 0,
+ "totalDisponible": 268,
+ "documentsAnalyses": 41,
+ "nombre": 268,
+ "nouveauxDepuisDerniereExecution": 5,
  "avecAvertissement": 10,
  "themes": {
   "procedure": {
@@ -83,6 +83,161 @@
   }
  },
  "votes": [
+  {
+   "id": "CA-2026-0548.pdf",
+   "numero": "CA-2026-0548",
+   "objet": "Règlement hors tribunal du dossier relatif à l'expropriation du lot 2 012 287 du cadastre du Québec, situé sur le boulevard Laurier (Ville de Québec c. Société en commandite 2810 boulevard Laurier, SAI-Q-270755-2309) et acquisition, de gré à gré ou par expropriation, à des fins municipales, d'un imm",
+   "date": "2026-10-21",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0548.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Marie-Pierre Boucher",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Elisa Verreault",
+    "Gabriel Dusablon",
+    "Charles Guérard"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : mesdames les conseillères Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage et Elisa Verreault et messieurs les conseiller Gabriel Dusablon et Charles Guérard. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0550.pdf",
+   "numero": "CA-2026-0550",
+   "objet": "Adjudication de contrats pour l'entretien hivernal hors rue - Lots 1, 3 à 8, 11 à 13, 15 et 17 (Appel d'offres public 95824)",
+   "date": "2026-10-21",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0550.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Marie-Pierre Boucher",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Elisa Verreault",
+    "Gabriel Dusablon",
+    "Charles Guérard"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : mesdames les conseillères Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage et Elisa Verreault et messieurs les conseiller Gabriel Dusablon et Charles Guérard. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0552.pdf",
+   "numero": "CA-2026-0552",
+   "objet": "Révision de l'affectation annuelle à la réserve financière pour le paiement de la dette de proximité et d'agglomération et ratification de l'appropriation à même la Réserve financière pour le paiement de la dette d'agglomération liée à des projets de nature mixte",
+   "date": "2026-10-21",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0552.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Marie-Pierre Boucher",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Elisa Verreault",
+    "Gabriel Dusablon",
+    "Charles Guérard"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : mesdames les conseillères Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage et Elisa Verreault et messieurs les conseiller Gabriel Dusablon et Charles Guérard. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "administration",
+   "themeSource": "defaut"
+  },
+  {
+   "id": "CA-2026-0554.pdf",
+   "numero": "CA-2026-0554",
+   "objet": "Amendement à l'entente triennale entre la Ville de Québec et Agiro pour des services professionnels et techniques - Projets divers en gestion des milieux naturels, eaux pluviales, communications et sensibilisation 2026-2028",
+   "date": "2026-10-21",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0554.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Marie-Pierre Boucher",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Elisa Verreault",
+    "Gabriel Dusablon",
+    "Charles Guérard"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : mesdames les conseillères Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage et Elisa Verreault et messieurs les conseiller Gabriel Dusablon et Charles Guérard. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0556.pdf",
+   "numero": "CA-2026-0556",
+   "objet": "Convention de prêt et de subvention entre la Ville de Québec et la Fédération canadienne des municipalités, en sa qualité de fiduciaire du Fonds municipal vert, pour un financement pour l'implantation d'un Centre de valorisation des surplus de matériaux d'excavation et centre de traitement des sols",
+   "date": "2026-10-21",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0556.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Marie-Pierre Boucher",
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Elisa Verreault",
+    "Gabriel Dusablon",
+    "Charles Guérard"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 6,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : mesdames les conseillères Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage et Elisa Verreault et messieurs les conseiller Gabriel Dusablon et Charles Guérard. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
   {
    "id": "CA-2026-0514.pdf",
    "numero": "CA-2026-0514",
