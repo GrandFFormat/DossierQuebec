@@ -438,6 +438,14 @@ async function entete(suivi) {
 const MOIS_COURTS = EN ? ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'] : ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
 const MOIS_ETIQUETTES = EN ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] : ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 'juil', 'aoû', 'sep', 'oct', 'nov', 'déc'];
 // Un numéro de décision se déplie sur place, sous son paragraphe : on ne quitte pas la page.
+// Décision finale ou en cours (statut calculé au rafraîchissement). Perdue lors de la fusion de Mon
+// dossier et Mes dossiers (30 sept. 2026) : son absence bloquait l'ouverture des projets suivis
+// sur « Chargement… » (remise le 29 oct. 2026).
+function pastilleStatut(d) {
+  if (!d?.statutDossier) return '';
+  if (d.statutDossier === 'termine') return `<span class="ab-etiquette">${tr('Décision finale', 'Final decision')}${d.etapeFinale ? ` — ${echapper(lib(d.etapeFinale))}` : ''}</span>`;
+  return `<span class="ab-etiquette ab-en-cours">${tr('En cours', 'In progress')}${d.etapeFinale ? ` — ${tr('décision attendue :', 'decision expected:')} ${echapper(lib(d.etapeFinale))}` : ''}${d.echeance ? `, ${tr('date cible', 'target date')} ${dateFr(d.echeance)}` : ''}</span>`;
+}
 const refNumero = (n) => `<button type="button" class="ab-ref" data-action="ref" data-numero="${echapper(n)}" aria-expanded="false">${echapper(n)}<span aria-hidden="true">▾</span></button>`;
 
 async function basculerRef(bouton) {
