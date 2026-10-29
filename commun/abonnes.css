@@ -750,3 +750,6 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 /* « Bientôt exclusif aux abonné·e·s » à côté du Détail de l'argent (Martin, 21 oct. 2026) : même pastille pointillée que « Bientôt » sur /abonnement. */
 
 .ab-bientot-abonne { display: inline-block; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; padding: 1px 8px; border: 2px dashed #131313; color: #131313; background: transparent; vertical-align: middle; }
+
+/* Pastille « Réparé » des projets suivis, jusqu’au 31 déc. 2026 (réparation du 29 oct.). */
+.ab-page .ab-repare { background: #FFD24D; color: #131313; border-color: #131313; }

@@ -397,6 +397,8 @@ async function suggestions(s, suivisIds) {
 
 const estProjet = (id) => id.startsWith('projet:');
 
+// Pastille « Réparé » sur les projets suivis, pendant deux mois après la réparation du 29 oct. 2026.
+const REPARE = new Date() < new Date('2026-12-31T00:00:00');
 // L'en-tête d'un dossier ou d'un projet : ce qu'on voit replié. Le reste se charge à l'ouverture.
 async function entete(suivi) {
   const attributs = `class="ab-carte ab-dossier" name="dossiers" data-ville="${echapper(suivi.ville)}" data-dossier="${echapper(suivi.dossier_id)}"`;
@@ -408,6 +410,7 @@ async function entete(suivi) {
         <div class="ab-meta">
           <span>${echapper(VILLES[suivi.ville] ?? suivi.ville)}</span>
           <span class="ab-etiquette ab-type-projet">${tr('Projet', 'Project')}</span>
+          ${REPARE ? `<span class="ab-etiquette ab-repare" title="${tr('Les projets suivis ne s’ouvraient plus depuis la fin septembre ; c’est réparé depuis le 29 octobre 2026.', 'Followed projects would not open since late September; fixed on October 29, 2026.')}">${tr('Réparé', 'Fixed')}</span>` : ''}
           ${p ? `<span>${tr(`${p.decisions} décision(s) en ${p.annee}`, `${p.decisions} decision(s) in ${p.annee}`)}</span>` : ''}
           ${p?.derniere ? `<span>${tr('Dernière :', 'Latest:')} ${dateFr(p.derniere)}</span>` : ''}
           <span>${tr('Suivi depuis le', 'Followed since')} ${dateFr(suivi.created_at)}</span>
