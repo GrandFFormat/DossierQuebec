@@ -1,16 +1,16 @@
 {
- "generatedAt": "2026-10-28T15:15:16.077Z",
+ "generatedAt": "2026-10-29T15:20:41.544Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "methode": "Extraction par analyse du texte des résolutions (champ « content » de l'index de la Ville). Les noms sont lus dans les passages « Ont voté en faveur / Ont voté contre ». Chaque vote conserve le texte brut et signale tout écart avec le décompte officiel.",
  "parametres": {
   "annee": "2026",
   "max": 1000,
-  "depuis": "2026-08-29"
+  "depuis": "2026-08-30"
  },
  "totalDisponible": 268,
  "documentsAnalyses": 41,
  "nombre": 268,
- "nouveauxDepuisDerniereExecution": 5,
+ "nouveauxDepuisDerniereExecution": 0,
  "avecAvertissement": 10,
  "themes": {
   "procedure": {
@@ -110,7 +110,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage et Elisa Verreault et messieurs les conseiller Gabriel Dusablon et Charles Guérard. | Ont voté contre : monsieur le conseiller Richard Levesque.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "immobilier",
    "themeSource": "objet"
   },
@@ -141,7 +141,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage et Elisa Verreault et messieurs les conseiller Gabriel Dusablon et Charles Guérard. | Ont voté contre : monsieur le conseiller Richard Levesque.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -172,7 +172,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage et Elisa Verreault et messieurs les conseiller Gabriel Dusablon et Charles Guérard. | Ont voté contre : monsieur le conseiller Richard Levesque.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "administration",
    "themeSource": "defaut"
   },
@@ -203,7 +203,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage et Elisa Verreault et messieurs les conseiller Gabriel Dusablon et Charles Guérard. | Ont voté contre : monsieur le conseiller Richard Levesque.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -234,7 +234,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage et Elisa Verreault et messieurs les conseiller Gabriel Dusablon et Charles Guérard. | Ont voté contre : monsieur le conseiller Richard Levesque.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "subventions",
    "themeSource": "objet"
   },
