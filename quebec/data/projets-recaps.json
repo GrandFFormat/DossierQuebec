@@ -1,21 +1,21 @@
 {
- "generatedAt": "2026-10-24T12:50:58.701Z",
+ "generatedAt": "2026-10-29T15:24:17.797Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Récapitulatifs rédigés automatiquement à partir de l'objet, du résumé et des résolutions des dossiers de chaque projet, puis vérifiés automatiquement (numéros et nombres contre les dossiers cités, contre-lecture). Ce qui ne passe pas est retiré. En cas d'écart, les documents officiels font foi.",
  "recaps": {
   "tramway": {
    "titre": "Tramway (TramCité)",
-   "signature": "03fafc8e8f3d1ea4",
-   "genereLe": "2026-10-24T12:50:58.701Z",
+   "signature": "eb02d991bf5a7bda",
+   "genereLe": "2026-10-29T15:24:07.869Z",
    "modele": "claude-opus-5",
-   "dossiers": 56,
-   "enBref": "Cette année, la Ville achète des bandes de terrain et obtient des droits de passage (servitudes) le long du tracé du tramway, surtout sur la 1re Avenue, le boulevard Laurier et dans des ruelles de La Cité-Limoilou. Elle accorde aussi des contrats pour préparer les chantiers et signe des ententes avec l'Université Laval et le Canadien National. Chaque trimestre, elle dépose un rapport sur les ententes conclues avec des propriétaires riverains au sujet des arbres.",
+   "dossiers": 59,
+   "enBref": "Cette année, la Ville achète des terrains et obtient des droits de passage (servitudes) le long du tracé du tramway, surtout sur la 1re Avenue, le boulevard Laurier, le boulevard René-Lévesque et la rue Mendel. Elle accorde aussi des contrats pour préparer les chantiers et signe des ententes avec des propriétaires riverains pour les arbres situés près des voies. Des ententes ont été conclues avec le Canadien National et l'Université Laval.",
    "etapes": [
     {
      "periode": "Janvier à mars 2026",
-     "titre": "Premiers terrains et servitudes du tracé",
-     "texte": "La Ville autorise l'achat de bandes de terrain en bordure de la 1re Avenue pour élargir l'emprise de la rue. Elle lance aussi l'obtention de servitudes dans une ruelle près du boulevard René-Lévesque Ouest et sur deux terrains de la rue Mendel, pour déplacer des conduits et des réseaux d'utilités publiques.",
+     "titre": "Premiers terrains et servitudes achetés",
+     "texte": "La Ville autorise l'achat, à l'amiable ou par expropriation, de bandes de terrain en bordure de la 1re Avenue et de droits de passage sur une ruelle près du boulevard René-Lévesque Ouest et sur des terrains de la rue Mendel. Ces espaces servent à élargir l'emprise de la rue et à déplacer des conduits et des réseaux d'utilités publiques.",
      "numeros": [
       "DE2026-022",
       "DE2026-063",
@@ -26,21 +26,32 @@
      ]
     },
     {
-     "periode": "Février à septembre 2026",
-     "titre": "Arbres le long du tracé",
-     "texte": "La Ville accorde un contrat d'élagage, d'abattage et d'essouchement pour dégager l'emprise des travaux, estimé à 2 840 827,31 $ avant taxes jusqu'au 31 décembre 2027. Le comité exécutif prend acte des rapports trimestriels sur les ententes d'arbres signées avec des propriétaires riverains, et un règlement ajoute un directeur d'arrondissement parmi les personnes autorisées à signer ces ententes.",
+     "periode": "Février à octobre 2026",
+     "titre": "Contrats pour préparer les chantiers",
+     "texte": "La Ville confie des travaux d'arboriculture, la surveillance de la santé et sécurité sur les chantiers des tronçons TW-01 à TW-06A, la fourniture de matériel d'aqueduc et d'égout pour le tronçon TW-03, et le contrôle de la qualité des matériaux pour les tronçons TW-04B à TW-06 et TW-11 à TW-12. Elle ajoute aussi 190 597,00 $ (plus taxes) au contrat de travaux de réseaux techniques urbains sous le chemin des Quatre-Bourgeois.",
      "numeros": [
       "AP2026-018",
+      "AP2026-056",
+      "AP2026-055",
+      "AP2026-068",
+      "AP2026-289"
+     ]
+    },
+    {
+     "periode": "Février à septembre 2026",
+     "titre": "Ententes sur les arbres du tracé",
+     "texte": "Le comité exécutif prend acte, chaque trimestre, des ententes signées avec des propriétaires riverains du tracé pour l'abattage, la transplantation, l'élagage ou la protection d'arbres, parfois avec plantation et entretien par la Ville. Un règlement ajoute le directeur d'arrondissement responsable de la prévention et de la qualité du milieu parmi les personnes autorisées à signer ces ententes.",
+     "numeros": [
       "DE2026-069",
       "DE2026-181",
-      "PQ2026-018",
-      "DE2026-356"
+      "DE2026-356",
+      "PQ2026-018"
      ]
     },
     {
      "periode": "Avril à mai 2026",
-     "titre": "Servitudes Laurier, Moncton, René-Lévesque",
-     "texte": "La Ville autorise de nouvelles servitudes sur des terrains du boulevard Laurier, de l'avenue Moncton, du boulevard René-Lévesque Ouest et d'une ruelle voisine, pour déplacer des conduits et des réseaux. Elle annule aussi l'autorisation qui permettait au Réseau de transport de la Capitale d'occuper 100,6 mètres carrés dans l'emprise du boulevard Laurier, où une station de Métrobus a été démolie.",
+     "titre": "Servitudes sur Laurier, Moncton et René-Lévesque",
+     "texte": "La Ville autorise de nouvelles servitudes pour déplacer des conduits et des réseaux, en bordure du boulevard Laurier, de l'avenue Moncton, du boulevard René-Lévesque Ouest et sur des ruelles voisines. Elle annule aussi l'autorisation qui permettait au Réseau de transport de la Capitale d'occuper 100,6 mètres carrés dans l'emprise du boulevard Laurier, où une station a été démolie.",
      "numeros": [
       "CA-2026-0152",
       "CA-2026-0196",
@@ -53,7 +64,7 @@
     {
      "periode": "Juin et juillet 2026",
      "titre": "Ententes avec le CN et l'Université Laval",
-     "texte": "La Ville s'entend avec le Canadien National pour la construction d'un pont qui fera passer le tramway, un trottoir et une piste cyclable au-dessus d'une voie ferrée dans le secteur de la rue Mendel. Elle obtient de l'Université Laval des droits de passage sur le campus pour 10 000 000 $, et le droit d'occuper environ 7 759,80 mètres carrés du parc de l'Amérique-Française pour y installer un site de chantier.",
+     "texte": "La Ville conclut une entente avec le Canadien National pour la construction d'un pont d'étagement reliant la rue Mendel au boulevard du Versant-Nord au-dessus d'une voie ferrée. Elle obtient de l'Université Laval des droits de passage sur le campus, pour 10 000 000 $ versés à la signature de l'acte notarié, et pourra occuper une partie du parc de l'Amérique-Française comme site d'entreposage et d'installations de chantier.",
      "numeros": [
       "AP2026-197",
       "DE2026-256",
@@ -63,28 +74,29 @@
    ],
    "aSurveiller": [
     {
-     "texte": "Le comité exécutif doit encore décider d'un avenant à l'entente de confidentialité signée avec le RTC, Infra CITÉ et Mobilité Infra Québec, qui ajoute des règles de cybersécurité pour le partage des maquettes numériques.",
+     "texte": "Trois demandes d'autorisation au gouvernement du Québec pour exproprier des terrains ou des servitudes près de la 1re Avenue sont en cours; le conseil d'agglomération doit se prononcer, et chaque demande ira au gouvernement 30 jours après l'avis au propriétaire.",
+     "numeros": [
+      "AJ2026-029",
+      "AJ2026-030",
+      "AJ2026-031"
+     ]
+    },
+    {
+     "texte": "Un avenant ajoutant des règles de cybersécurité à l'entente de confidentialité avec le RTC, Infra CITÉ et Mobilité Infra Québec attend une décision du comité exécutif.",
      "numeros": [
       "TW2026-002"
      ]
     },
     {
-     "texte": "Les actes notariés qui établissent les servitudes et le droit d'usage sur le campus de l'Université Laval doivent être signés au plus tard le 31 décembre 2026.",
+     "texte": "Les actes notariés établissant les servitudes et le droit d'usage sur le campus de l'Université Laval doivent être signés au plus tard le 31 décembre 2026.",
      "numeros": [
       "DE2026-256"
      ]
     },
     {
-     "texte": "L'occupation d'une partie du parc de l'Amérique-Française comme site d'entreposage et de chantier s'étend du 6 juillet 2026 au 5 juillet 2033, avec un renouvellement possible de deux ans.",
+     "texte": "L'occupation d'une partie du parc de l'Amérique-Française par la Ville s'étend du 6 juillet 2026 au 5 juillet 2033, avec possibilité de renouvellement de deux ans; une entente de servitude reste en négociation avec la Commission de la capitale nationale du Québec.",
      "numeros": [
       "DE2026-258"
-     ]
-    },
-    {
-     "texte": "Le contrat d'arboriculture et le mandat de santé et sécurité sur les chantiers des tronçons TW-01 à TW-06A courent jusqu'au 31 décembre 2027.",
-     "numeros": [
-      "AP2026-018",
-      "AP2026-056"
      ]
     }
    ],
@@ -94,16 +106,12 @@
     "retiresMecanique": [],
     "retiresContreLecture": [
      {
-      "element": "etapes[1]",
-      "raison": "La période annoncée « Février à octobre 2026 » n'est appuyée par aucun des dossiers cités : AP2026-056 (4 mars), AP2026-055 (11 mars), AP2026-068 (18 mars) et AP2026-289 (14 octobre). Aucun n'est de février; le seul contrat de février (AP2026-018, arboriculture) est rattaché à etapes[2]."
+      "element": "etapes[5]",
+      "raison": "Le texte mentionne des acquisitions « en bordure de la 1re Avenue, de la rue Berthiaume et de la rue des Frênes Ouest ». Aucun des dossiers cités (DE2026-203, CA-2026-0362, DE2026-219, DE2026-269, DE2026-270, DE2026-271) ne porte sur la rue Berthiaume ni sur la rue des Frênes Ouest : ces lieux proviennent de CA-2026-0365 et CA-2026-0384, qui ne figurent pas dans les numéros. Faits attribués aux mauvais dossiers."
      },
      {
       "element": "etapes[5]",
-      "raison": "Le texte mentionne des lieux qui ne figurent dans aucun des dossiers cités : la rue Berthiaume (CA-2026-0365, non cité), la rue des Frênes Ouest (CA-2026-0384, non cité), la rue Godbout (DE2026-359 et DE2026-360, non cités), la rue Sir-Thomas-Chapais (DE2026-270, non cité) et la rue des Chênes Est (DE2026-271, non cité). Le seul dossier de ruelle cité, DE2026-269, vise une ruelle entre la rue des Pins Est et la rue des Peupliers Est, près de la 1re Avenue."
-     },
-     {
-      "element": "etapes[5]",
-      "raison": "La période « Juillet à octobre 2026 » dépasse les dossiers cités : le plus récent d'entre eux (DE2026-213, CA-2026-0497, DE2026-269) se termine le 16 septembre 2026. Les dossiers avec résolutions d'octobre (DE2026-270, DE2026-271, DE2026-359, DE2026-360) ne sont pas cités."
+      "raison": "Le texte affirme que la Ville vise des servitudes sur des ruelles « notamment près de la rue Godbout ». Les ruelles près de la rue Godbout relèvent de DE2026-359 et DE2026-360, non cités ici; les dossiers cités visent des ruelles près de la 1re Avenue (DE2026-269), de la rue Sir-Thomas-Chapais (DE2026-270) et de la rue des Chênes Est (DE2026-271)."
      }
     ]
    }
@@ -216,27 +224,27 @@
   },
   "matieres-residuelles": {
    "titre": "Matières résiduelles",
-   "signature": "074ae957e35a08ff",
-   "genereLe": "2026-10-08T15:55:24.303Z",
+   "signature": "767ed140c8e3a1ce",
+   "genereLe": "2026-10-29T15:24:17.797Z",
    "modele": "claude-opus-5",
-   "dossiers": 18,
-   "enBref": "Cette année, la Ville modifie ses règlements sur les matières résiduelles, dont les règles sur les sacs utilisés pour les feuilles mortes. Elle finance et lance des travaux au Complexe de valorisation énergétique et à la station de traitement des boues. Elle accorde aussi des contrats pour traiter les matières organiques, entretenir les équipements de l'incinérateur et renforcer les équipes de collecte.",
+   "dossiers": 19,
+   "enBref": "Cette année, la Ville et l'agglomération modifient les règlements sur la collecte des matières résiduelles, dont les règles pour les feuilles mortes. Elles autorisent aussi des emprunts et des travaux au Complexe de valorisation énergétique, au centre de récupération de la matière organique et à la station de traitement des boues. Plusieurs contrats sont accordés pour l'entretien des équipements, la fourniture de pièces et le traitement des matières.",
    "etapes": [
     {
-     "periode": "Janvier et février 2026",
-     "titre": "Règlements et plan de gestion adoptés",
-     "texte": "Le conseil de la ville et le conseil d'agglomération modifient les règlements sur l'enlèvement et la gestion des matières résiduelles. La Ville adopte ensuite le Plan de mise en oeuvre 2025-2032 de l'agglomération et confie un contrat pour analyser la composition des matières résiduelles.",
+     "periode": "Janvier à février 2026",
+     "titre": "Règles de collecte et plan de mise en œuvre",
+     "texte": "Le conseil de la ville et le conseil d'agglomération modifient leurs règlements sur l'enlèvement et la gestion des matières résiduelles. L'agglomération adopte ensuite le Plan de mise en oeuvre 2025-2032 et accorde un contrat pour analyser la composition des matières résiduelles.",
      "numeros": [
       "CV-2026-0036",
       "CA-2026-0031",
-      "CE-2026-0194",
-      "CE-2026-0195"
+      "CE-2026-0195",
+      "CE-2026-0194"
      ]
     },
     {
-     "periode": "Mars et avril 2026",
-     "titre": "Sacs de papier pour les feuilles",
-     "texte": "La Ville interdit les sacs de plastique pour les feuilles mortes et les résidus verts, à Québec comme dans l'agglomération. Le poids maximal d'un sac de feuilles passe de 25 kg à 12 kg, contenu inclus (GM2026-004).",
+     "periode": "Mars à avril 2026",
+     "titre": "Sacs de papier pour les feuilles mortes",
+     "texte": "La Ville interdit les sacs de plastique pour les feuilles et les résidus verts : à Québec, la règle s'applique à partir du 1er septembre 2026, et le poids maximal d'un sac passe de 25 kg à 12 kg. Pour l'agglomération, les matières devront être en vrac ou en sacs de papier à partir du 1er avril 2027.",
      "numeros": [
       "GM2026-004",
       "GM2026-005"
@@ -244,31 +252,31 @@
     },
     {
      "periode": "Mars à juin 2026",
-     "titre": "Argent réservé pour les travaux",
-     "texte": "La Ville autorise une dépense de 22 500 000 $ pour des travaux au Centre de récupération de la matière organique et à la station de traitement des boues (GM2026-001), puis une autre de 4 000 000 $ pour des travaux au même centre (GM2026-002). Elle réserve ensuite 5 000 000 $ de son surplus d'agglomération pour des travaux au complexe et demande une lettre de garantie de 721 219 $ exigée par le ministère de l'Environnement pour l'incinérateur (GM2026-006).",
+     "titre": "Argent pour les travaux des installations",
+     "texte": "La Ville emprunte 22 500 000 $, puis 4 000 000 $, pour moderniser et réparer le centre de récupération de la matière organique, l'incinérateur, ses conduits de vapeur et la station de traitement des boues. Elle réserve aussi 5 000 000 $ de son surplus d'agglomération pour ces travaux et fournit au ministère de l'Environnement une garantie de 721 219 $ pour l'exploitation de l'incinérateur.",
      "numeros": [
       "GM2026-001",
       "GM2026-002",
-      "GM2026-006",
-      "FN2026-024"
+      "FN2026-024",
+      "GM2026-006"
      ]
     },
     {
-     "periode": "Avril à juin 2026",
-     "titre": "Traitement des matières et personnel de collecte",
-     "texte": "La Ville confie à la SÉMER le transport et la biométhanisation de la biopulpe du Centre de récupération de la matière organique, du 1er mars 2026 au 28 février 2029 (AP2026-138). Elle retient aussi une agence pour recruter des aide-éboueurs temporaires lors des collectes saisonnières de résidus verts et de feuilles (AP2026-242).",
+     "periode": "Avril à août 2026",
+     "titre": "Traitement des matières et main-d'œuvre",
+     "texte": "La Ville s'entend avec la SÉMER, de Cacouna, pour transporter et biométhaniser la biopulpe quand le Centre de biométhanisation ne peut pas tout traiter, du 1er mars 2026 au 28 février 2029. Elle se donne aussi une liste de fournisseurs pour composter les boues déshydratées et confie à une agence le recrutement d'aide-éboueurs temporaires pour les collectes saisonnières.",
      "numeros": [
       "AP2026-138",
+      "AP2026-278",
       "AP2026-242"
      ]
     },
     {
-     "periode": "Juin à septembre 2026",
-     "titre": "Contrats d'entretien à l'incinérateur",
-     "texte": "La Ville accorde des contrats pour les gaz de soudage et les gaz spéciaux, la réfection des bassins 1 et 2, l'entretien des pelles et grappins des ponts roulants et la fourniture de 14 vannes à double clapet pour le système de manutention des cendres volantes. Elle se donne aussi une liste de fournisseurs pour composter les boues du Centre de biométhanisation quand l'usine s'arrête.",
+     "periode": "Juin à octobre 2026",
+     "titre": "Entretien et pièces à l'incinérateur",
+     "texte": "La Ville accorde des contrats pour la fourniture de gaz de soudage et de gaz spéciaux, l'entretien des pelles et des grappins des ponts roulants et la fourniture de vannes pour la manutention des cendres volantes. Elle confie aussi la réfection des bassins 1 et 2, liés au traitement des mâchefers, pour 1 765 550 $ avant taxes.",
      "numeros": [
       "AP2026-208",
-      "AP2026-278",
       "AP2026-290",
       "AP2026-327",
       "AP2026-339"
@@ -277,21 +285,21 @@
    ],
    "aSurveiller": [
     {
-     "texte": "Le contrat pour l'entretien du revêtement métallisé des fours de l'incinérateur est encore en cours de décision.",
+     "texte": "L'entretien des analyseurs des quatre cheminées du Complexe de valorisation énergétique attend une décision du conseil d'agglomération. Le contrat irait du 1er janvier 2027 au 31 décembre 2029.",
+     "numeros": [
+      "AP2026-317"
+     ]
+    },
+    {
+     "texte": "Le contrat pour l'entretien du revêtement métallisé des fours de l'incinérateur est toujours en cours de décision.",
      "numeros": [
       "CE-2026-0065"
      ]
     },
     {
-     "texte": "À partir du 1er avril 2027, les feuilles et résidus verts devront être déposés en vrac ou dans des sacs de papier dans toute l'agglomération.",
+     "texte": "Le 1er avril 2027, les sacs de plastique ne seront plus acceptés au centre de transfert des résidus verts de l'agglomération.",
      "numeros": [
       "GM2026-005"
-     ]
-    },
-    {
-     "texte": "Le contrat de recrutement temporaire d'aide-éboueurs commence le 1er octobre 2026 et se termine le 31 décembre 2028.",
-     "numeros": [
-      "AP2026-242"
      ]
     }
    ],
@@ -299,12 +307,7 @@
    "verification": {
     "version": 1,
     "retiresMecanique": [],
-    "retiresContreLecture": [
-     {
-      "element": "aSurveiller[3]",
-      "raison": "L'élément ne repose ni sur un dossier « en cours », ni sur une date future écrite. GM2026-006 est un dossier dont la décision finale est prise (résolutions jusqu'au 22 avril 2026) et son résumé n'indique aucune échéance datée : il mentionne seulement une garantie « valide un an » devant être renouvelée. Aucune date de renouvellement n'est écrite dans le dossier, l'échéance implicite relève donc d'une déduction."
-     }
-    ]
+    "retiresContreLecture": []
    }
   },
   "expocite": {
