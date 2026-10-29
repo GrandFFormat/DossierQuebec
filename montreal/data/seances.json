@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-28T15:52:08.753Z",
+ "generatedAt": "2026-10-29T15:58:57.868Z",
  "source": "https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv",
  "colonnesSource": [
   "seance",
@@ -12,11 +12,11 @@
  "parametres": {
   "annee": "2026"
  },
- "nombre": 71,
+ "nombre": 75,
  "parInstance": {
   "CE": 36,
-  "CG": 13,
-  "CM": 22
+  "CG": 15,
+  "CM": 24
  },
  "seances": [
   {
@@ -41,6 +41,30 @@
    "variante": "ORDI",
    "titre": "Séance du conseil d'agglomération",
    "lien": "https://montreal.ca/evenements/seance-du-conseil-dagglomeration-102509",
+   "source": "calendrier"
+  },
+  {
+   "id": "CG_2026-12-17_09h30",
+   "instance": "CG",
+   "nom": "Conseil d'agglomération",
+   "date": "2026-12-17",
+   "heure": "09h30",
+   "heureSupposee": false,
+   "variante": "EXTRA",
+   "titre": "Séance extraordinaire du conseil d'agglomération",
+   "lien": "https://montreal.ca/evenements/seance-extraordinaire-du-conseil-dagglomeration-121157",
+   "source": "calendrier"
+  },
+  {
+   "id": "CM_2026-12-16_09h30",
+   "instance": "CM",
+   "nom": "Conseil municipal",
+   "date": "2026-12-16",
+   "heure": "09h30",
+   "heureSupposee": false,
+   "variante": "EXTRA",
+   "titre": "Séance extraordinaire du conseil municipal",
+   "lien": "https://montreal.ca/evenements/seance-extraordinaire-du-conseil-municipal-121138",
    "source": "calendrier"
   },
   {
@@ -101,6 +125,30 @@
    "variante": "ORDI",
    "titre": "Séance du comité exécutif",
    "lien": "https://montreal.ca/evenements/seance-du-comite-executif-103150",
+   "source": "calendrier"
+  },
+  {
+   "id": "CG_2026-11-24_19h00",
+   "instance": "CG",
+   "nom": "Conseil d'agglomération",
+   "date": "2026-11-24",
+   "heure": "19h00",
+   "heureSupposee": false,
+   "variante": "EXTRA",
+   "titre": "Séance extraordinaire du conseil d'agglomération",
+   "lien": "https://montreal.ca/evenements/seance-extraordinaire-du-conseil-dagglomeration-121156",
+   "source": "calendrier"
+  },
+  {
+   "id": "CM_2026-11-24_13h00",
+   "instance": "CM",
+   "nom": "Conseil municipal",
+   "date": "2026-11-24",
+   "heure": "13h00",
+   "heureSupposee": false,
+   "variante": "EXTRA",
+   "titre": "Séance extraordinaire du conseil municipal",
+   "lien": "https://montreal.ca/evenements/seance-extraordinaire-du-conseil-municipal-121137",
    "source": "calendrier"
   },
   {
