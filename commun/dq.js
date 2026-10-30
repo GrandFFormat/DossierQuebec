@@ -3523,7 +3523,7 @@ function renderDeputes(filter){
         const att = attendanceForAssnatId(d.assnatId);
         const presidingNote = presidingRoleNote(d.name, isEn);
         const attNote = presidingNote ? presidingNote : att
-          ? `${isEn ? 'attendance:' : 'présence :'} ${pastillePresence(att.rate, isEn)}`
+          ? `${isEn ? 'attendance:' : 'présence :'} ${pastillePresence(att.rate, isEn)}${presencesPasseesTexte(d.assnatId, isEn)}`
           : (isEn ? 'attendance: n/a' : 'présence : n/d');
         return `
         <div class="dep-row">
@@ -3582,7 +3582,7 @@ function personCard(p){
   const dep = isMin ? resolveDepute(name) : p.d;
   const riding = dep ? dep.riding : (isEn ? 'n/a' : 'n/d');
   const presidingShort = presidingNote ? '—' : null;
-  const attShort = presidingShort ? presidingShort : (p.att ? pastillePresence(p.att.rate, isEn) : (isEn ? 'n/a' : 'n/d'));
+  const attShort = presidingShort ? presidingShort : (p.att ? pastillePresence(p.att.rate, isEn) + presencesPasseesTexte(dep?.assnatId, isEn) : (isEn ? 'n/a' : 'n/d'));
   const plCount = billsSponsoredBy(name).length;
   const labels = isEn
     ? { riding:'Riding', att:'Vote attendance', bills:'Bills sponsored / term' }
@@ -4971,6 +4971,14 @@ function renderLegendePresence(){
       : `Chez les ${taux.length} élu·e·s comptés : de ${pct(min)} à ${pct(max)} ; la moitié est à ${pct(mediane)} ou plus.**`}</p>`;
 }
 
+// Taux des législatures terminées (« 43e : 87 % »), gardés dans data/presences-par-legislature.json.
+function presencesPasseesTexte(assnatId, isEn){
+  if(assnatId == null || typeof presencesPassees === 'undefined') return '';
+  const lignes = Object.keys(presencesPassees).sort((a, b) => b - a)
+    .filter((l) => presencesPassees[l][assnatId] != null)
+    .map((l) => `${l}${isEn ? (l.endsWith('1') && l !== '11' ? 'st' : l.endsWith('2') && l !== '12' ? 'nd' : l.endsWith('3') && l !== '13' ? 'rd' : 'th') : 'e'}${isEn ? ': ' : ' : '}${presencesPassees[l][assnatId]}${isEn ? '%' : ' %'}`);
+  return lignes.length ? `<span class="presence-passee" title="${isEn ? 'Recorded-vote attendance in earlier legislatures' : 'Présence aux votes nominaux des législatures précédentes'}"> · ${lignes.join(' · ')}</span>` : '';
+}
 function attendanceForAssnatId(assnatId){
   if(assnatId == null) return null;
   // Les clés de `presences` viennent d'un JSON : ce sont des chaînes, pas des nombres.

@@ -38,6 +38,10 @@ import { join } from 'node:path';
 const VOTES_PATH = 'data/votes.json';
 const BILLS_PATH = 'data/bills.json';
 const NOMINAL_DIR = 'data/votes';
+// Le taux de présence de chaque législature, gardé pour toujours (Martin, 30 oct. 2026 : « garder le
+// % de vote, par mandat, par député »). La législature en cours s'y réécrit à chaque passage ; quand
+// votes.js passe à la suivante, la précédente reste figée telle qu'au dernier vote.
+const PRESENCES_PATH = 'data/presences-par-legislature.json';
 const HTML_PATH = 'gabarit.html';   // le MODÈLE, jamais servi : les pages en sont tirées
 const START_MARKER = '/* VOTES_DATA_START */';
 const END_MARKER = '/* VOTES_DATA_END */';
@@ -149,7 +153,7 @@ function matchBill(vote, bills) {
 }
 
 function main() {
-  const { votes } = JSON.parse(readFileSync(VOTES_PATH, 'utf-8'));
+  const { votes, legislature } = JSON.parse(readFileSync(VOTES_PATH, 'utf-8'));
   const { bills } = JSON.parse(readFileSync(BILLS_PATH, 'utf-8'));
 
   let matched = 0;
@@ -182,6 +186,12 @@ function main() {
   // Les agrégats se calculent AVANT de retirer le nominatif : c'est lui qui les nourrit.
   for (const v of out) v.divise = voteDivise(v.nominal);
   const presences = calculerPresences(out);
+  const historique = existsSync(PRESENCES_PATH) ? JSON.parse(readFileSync(PRESENCES_PATH, 'utf-8')) : {};
+  if (legislature && Object.keys(presences).length) historique[legislature] = presences;
+  writeFileSync(PRESENCES_PATH, JSON.stringify(historique) + '\n');
+  // Dans la page, seulement les législatures terminées (la courante est déjà dans « presences »).
+  const presencesPassees = Object.fromEntries(Object.entries(historique).filter(([l]) => Number(l) !== legislature)
+    .map(([l, p]) => [l, Object.fromEntries(Object.entries(p).map(([id, x]) => [id, x.rate]))]));
   const fichiers = ecrireNominal(out);
 
   // Ce qui part dans la page : tout sauf le nominatif.
@@ -191,7 +201,8 @@ function main() {
     + `/* Le détail nominatif de chaque vote vit dans ${NOMINAL_DIR}/<id>.json et se charge quand\n`
     + `   on déplie une carte. Ici ne restent que les agrégats qui en dérivent : « divise » par\n`
     + `   vote et « presences » par député. Ne pas éditer à la main. */\n`
-    + `const presences = ${JSON.stringify(presences)};\n`;
+    + `const presences = ${JSON.stringify(presences)};\n`
+    + `const presencesPassees = ${JSON.stringify(presencesPassees)};\n`;
 
   const html = readFileSync(HTML_PATH, 'utf-8');
   const startIdx = html.indexOf(START_MARKER);
