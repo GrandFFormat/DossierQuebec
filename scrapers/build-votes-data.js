@@ -152,6 +152,28 @@ function matchBill(vote, bills) {
   return best;
 }
 
+// Projets de loi parrainés dans chaque législature terminée, par nom de parrain normalisé (même
+// normalisation que norm() dans commun/dq.js) : { 43: { "jean francois roberge": [pl, lois] } }.
+const normNom = (s) => (s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[-–—']/g, ' ').replace(/\s+/g, ' ').trim();
+function plPasses(courante) {
+  const out = {};
+  if (!existsSync('data/archives')) return out;
+  for (const l of readdirSync('data/archives')) {
+    if (!/^\d+$/.test(l) || Number(l) === courante || !existsSync(`data/archives/${l}/bills.json`)) continue;
+    const j = JSON.parse(readFileSync(`data/archives/${l}/bills.json`, 'utf-8'));
+    const parNom = {};
+    for (const b of j.bills ?? j) {
+      if (!b.sponsor) continue;
+      const k = normNom(b.sponsor);
+      parNom[k] = parNom[k] || [0, 0];
+      parNom[k][0]++;
+      if (b.status === 'sanctionne') parNom[k][1]++;
+    }
+    out[l] = parNom;
+  }
+  return out;
+}
+
 function main() {
   const { votes, legislature } = JSON.parse(readFileSync(VOTES_PATH, 'utf-8'));
   const { bills } = JSON.parse(readFileSync(BILLS_PATH, 'utf-8'));
@@ -202,7 +224,7 @@ function main() {
     + `   on déplie une carte. Ici ne restent que les agrégats qui en dérivent : « divise » par\n`
     + `   vote et « presences » par député. Ne pas éditer à la main. */\n`
     + `const presences = ${JSON.stringify(presences)};\n`
-    + `const presencesPassees = ${JSON.stringify(presencesPassees)};\n`;
+    + `const historiqueLeg = ${JSON.stringify({ courante: legislature ?? null, presences: presencesPassees, pl: plPasses(legislature) })};\n`;
 
   const html = readFileSync(HTML_PATH, 'utf-8');
   const startIdx = html.indexOf(START_MARKER);

@@ -34,7 +34,7 @@ const src = readFileSync(SRC, 'utf8').replace(/\r\n/g, '\n');
 const JEUX = [
   { marqueur: 'MINISTERS_DATA', consts: ['ministers'] },
   { marqueur: 'BILLS_DATA', consts: ['bills'] },
-  { marqueur: 'VOTES_DATA', consts: ['votes', 'presences'] },
+  { marqueur: 'VOTES_DATA', consts: ['votes', 'presences', 'historiqueLeg'] },
   { marqueur: 'DEPUTES_DATA', consts: ['deputesRaw'] },
   { marqueur: 'DEPUTE_EMAILS', consts: ['deputeEmails'] },
   { marqueur: 'NEWS_DATA', consts: ['newsItems'] },
@@ -172,7 +172,7 @@ const PAGES = [
   },
   {
     fichier: 'ministres.html', vue: 'ministres', onglet: 'ministres', url: '/ministres',
-    donnees: ['ministers', 'deputesRaw', 'deputeEmails', 'presences', 'billsParrains'],
+    donnees: ['ministers', 'deputesRaw', 'deputeEmails', 'presences', 'historiqueLeg', 'billsParrains'],
     title: 'Ministres et député·e·s du Québec — DossierQuébec',
     desc: "Les ministres du gouvernement du Québec et les député·e·s de l'Assemblée nationale : rôles, circonscriptions, présence aux votes et coordonnées officielles.",
     fil: 'Ministres et député·e·s', cle: 'fil.ministres', frequence: 'weekly', priorite: '0.8',

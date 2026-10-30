@@ -17,7 +17,7 @@
 // Ce sont des `let`, pas des `const` : ils sont vides jusqu'à l'arrivée des fichiers. Toute
 // fonction de rendu tourne APRÈS chargerDonnees(), et celles dont la vue n'est pas sur la page
 // sortent immédiatement (voir les gardes en tête de chacune).
-let ministers = [], bills = [], votes = [], presences = {}, deputesRaw = [],
+let ministers = [], bills = [], votes = [], presences = {}, historiqueLeg = {}, deputesRaw = [],
     deputeEmails = {}, newsItems = [], petitions = [], promises = [], stats = null, journal = [];
 
 // Dérivés des précédents, recalculés une fois les fichiers arrivés.
@@ -35,6 +35,8 @@ const _remplir = {
   billsParrains: (v) => { bills = v; },
   votes: (v) => { votes = v; },
   presences: (v) => { presences = v; },
+  // Législatures terminées : présence et PL parrainés par personne (pastilles des cartes).
+  historiqueLeg: (v) => { historiqueLeg = v; },
   deputesRaw: (v) => { deputesRaw = v; },
   deputeEmails: (v) => { deputeEmails = v; },
   newsItems: (v) => { newsItems = v; },
@@ -3583,7 +3585,6 @@ function personCard(p){
   const riding = dep ? dep.riding : (isEn ? 'n/a' : 'n/d');
   const presidingShort = presidingNote ? '—' : null;
   const attShort = presidingShort ? presidingShort : (p.att ? pastillePresence(p.att.rate, isEn) + presencesPasseesTexte(dep?.assnatId, isEn) : (isEn ? 'n/a' : 'n/d'));
-  const plCount = billsSponsoredBy(name).length;
   const labels = isEn
     ? { riding:'Riding', att:'Vote attendance', bills:'Bills sponsored / term' }
     : { riding:'Circonscription', att:'Présence votes', bills:'PL parrainés / mandat' };
@@ -3600,8 +3601,8 @@ function personCard(p){
       </div>
       <div class="m-card-bottom">
         <div class="m-row"><span class="m-label">${labels.riding}</span><span class="m-val">${riding}</span></div>
-        <div class="m-row"><span class="m-label">${labels.att}</span><span class="m-val m-val-blue" title="${attTitle}">${attShort}</span></div>
-        <div class="m-row"><span class="m-label">${labels.bills}</span><span class="m-val">${plCount}${dep?.mandats ? ` / ${isEn ? dep.mandats + ({ 1: "st", 2: "nd", 3: "rd" }[dep.mandats] || "th") : (dep.mandats === 1 ? "1er" : dep.mandats + "e")}` : ""}</span></div>
+        ${dep?.mandats ? `<div class="m-row"><span class="m-label">${isEn ? 'Term' : 'Mandat'}</span><span class="m-val">${isEn ? ordinalLeg(dep.mandats, true) : (dep.mandats === 1 ? '1er' : dep.mandats + 'e')}</span></div>` : ''}
+        <div title="${attTitle}">${pastillesLegislatures(name, dep, p.att, presidingShort, isEn)}</div>
         <a class="m-mail" href="${mailHref}" ${email ? '' : 'target="_blank" rel="noopener"'} onclick="event.stopPropagation()" title="${mailTitle}">✉ ${email ? email : (isEn ? 'Official email on assnat.qc.ca' : 'Courriel officiel sur assnat.qc.ca')}</a>
       </div>
     </div>
@@ -4973,12 +4974,41 @@ function renderLegendePresence(){
 
 // Taux des législatures terminées (« 43e : 87 % »), gardés dans data/presences-par-legislature.json.
 function presencesPasseesTexte(assnatId, isEn){
-  if(assnatId == null || typeof presencesPassees === 'undefined') return '';
+  const presencesPassees = historiqueLeg.presences || {};
+  if(assnatId == null) return '';
   const lignes = Object.keys(presencesPassees).sort((a, b) => b - a)
     .filter((l) => presencesPassees[l][assnatId] != null)
     .map((l) => `${l}${isEn ? (l.endsWith('1') && l !== '11' ? 'st' : l.endsWith('2') && l !== '12' ? 'nd' : l.endsWith('3') && l !== '13' ? 'rd' : 'th') : 'e'}${isEn ? ': ' : ' : '}${presencesPassees[l][assnatId]}${isEn ? '%' : ' %'}`);
   return lignes.length ? `<span class="presence-passee" title="${isEn ? 'Recorded-vote attendance in earlier legislatures' : 'Présence aux votes nominaux des législatures précédentes'}"> · ${lignes.join(' · ')}</span>` : '';
 }
+// Une pastille par législature sur les cartes (Martin, 30 oct. 2026, option C) : présence aux votes et
+// projets de loi parrainés. Deux pastilles visibles ; au-delà, des flèches font circuler de l'une à l'autre.
+const ordinalLeg = (n, isEn) => isEn ? n + ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 100 > 10 && n % 100 < 14 ? 0 : n % 10] || 'th') : n + 'e';
+function pastillesLegislatures(name, dep, att, presidingShort, isEn){
+  const cour = historiqueLeg.courante || 43;
+  const presencesPassees = historiqueLeg.presences || {}, plPasses = historiqueLeg.pl || {};
+  const siens = billsSponsoredBy(name);
+  const plTxt = (pl, lois) => `${pl} PL${lois ? ` · ${lois} ${isEn ? (lois > 1 ? 'laws' : 'law') : (lois > 1 ? 'lois' : 'loi')}` : ''}`;
+  const blocs = [{ leg: cour, pres: presidingShort || (att ? pastillePresence(att.rate, isEn) : (isEn ? 'n/a' : 'n/d')), pl: plTxt(siens.length, siens.filter((b) => b.status === 'sanctionne').length) }];
+  const nom = norm(name.replace(/\s*\([^)]*\)\s*/g, ''));
+  const legs = new Set([...Object.keys(presencesPassees), ...Object.keys(plPasses)]);
+  for (const l of [...legs].map(Number).filter((l) => l !== cour).sort((a, b) => b - a)) {
+    const taux = dep ? presencesPassees[l]?.[dep.assnatId] : null;
+    const pl = plPasses[l]?.[nom];
+    if (taux == null && !pl) continue;   // pas élu·e dans cette législature
+    blocs.push({ leg: l, pres: taux != null ? `${taux}${isEn ? '%' : ' %'}` : (isEn ? 'n/a' : 'n/d'), pl: plTxt(pl ? pl[0] : 0, pl ? pl[1] : 0), passe: true });
+  }
+  const fleches = blocs.length > 2;
+  return `<div class="m-label leg-titre">${isEn ? 'Vote attendance · bills sponsored' : 'Présence aux votes · PL parrainés'}</div><div class="leg-ruban" data-debut="0">${fleches ? `<button class="leg-fleche" type="button" aria-label="${isEn ? 'More recent' : 'Plus récente'}" onclick="event.stopPropagation(); defilerLeg(this, -1)">‹</button>` : ''}${blocs.map((b, i) => `<div class="leg-bloc${b.passe ? ' leg-passe' : ''}${i > 1 ? ' leg-cache' : ''}"><div class="leg-num">${ordinalLeg(b.leg, isEn)}</div><div class="leg-pres">${b.pres}</div><div>${b.pl}</div></div>`).join('')}${fleches ? `<button class="leg-fleche" type="button" aria-label="${isEn ? 'Earlier' : 'Plus ancienne'}" onclick="event.stopPropagation(); defilerLeg(this, 1)">›</button>` : ''}</div>`;
+}
+function defilerLeg(bouton, sens){
+  const ruban = bouton.closest('.leg-ruban');
+  const blocs = [...ruban.querySelectorAll('.leg-bloc')];
+  const debut = Math.max(0, Math.min(blocs.length - 2, Number(ruban.dataset.debut) + sens));
+  ruban.dataset.debut = debut;
+  blocs.forEach((b, i) => b.classList.toggle('leg-cache', i < debut || i > debut + 1));
+}
+window.defilerLeg = defilerLeg;
 function attendanceForAssnatId(assnatId){
   if(assnatId == null) return null;
   // Les clés de `presences` viennent d'un JSON : ce sont des chaînes, pas des nombres.
