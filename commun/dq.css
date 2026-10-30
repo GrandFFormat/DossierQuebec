@@ -2320,3 +2320,14 @@
 .dep-actions .part-btn, .dep-actions .wiki-btn, .dep-actions .fin-btn{width:30px; height:30px;}
 .dep-actions .follow-btn{white-space:nowrap;}
 @media (max-width:760px){ .dep-row{grid-template-columns:1fr;} .dep-actions{justify-content:flex-start;} }
+
+/* Une pastille par législature sur les cartes de ministres et d'élu·e·s (30 oct. 2026). */
+.leg-ruban{display:flex; gap:8px; align-items:stretch;}
+.leg-bloc{flex:1; min-width:0; border:2px solid var(--ink); padding:6px 9px; font-size:12.5px; line-height:1.45; font-weight:600;}
+.leg-bloc.leg-passe{border-color:var(--line-soft); color:var(--slate);}
+.leg-bloc.leg-cache{display:none;}
+.leg-num{font-family:'Archivo',sans-serif; font-weight:900; font-size:14px;}
+.leg-fleche{flex:none; border:2px solid var(--ink); background:var(--paper); font-weight:900; padding:0 7px; cursor:pointer;}
+.leg-fleche:hover{background:var(--yellow);}
+.leg-titre{font-size:12px; margin-bottom:4px;}
+.leg-pres{white-space:nowrap; margin:2px 0;}
