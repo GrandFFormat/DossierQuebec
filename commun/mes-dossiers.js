@@ -90,6 +90,14 @@ const aLOuverture = (details, remplir) => {
   if (details.open) return lancer();
   details.addEventListener('toggle', () => { if (details.open) lancer(); }, { once: true });
 };
+// Ouvrir ou refermer un dossier suivi ramène son en-tête à l'écran, peu importe où on était rendu
+// dans la page (Martin, 30 oct. 2026) : refermer un long dossier laissait loin plus bas.
+document.addEventListener('toggle', (e) => {
+  if (!e.target.matches?.('details.ab-dossier')) return;
+  const tete = e.target.querySelector('summary');
+  const haut = tete.getBoundingClientRect().top;
+  if (haut < 0 || haut > innerHeight) tete.scrollIntoView({ block: 'start' });
+}, true);
 const CHARGEMENT = () => `<p class="ab-note">${tr('Chargement…', 'Loading…')}</p>`;
 
 // Les projets de chaque volet, préparés pour cette page (quebec/scripts/projets-publics.js) :
