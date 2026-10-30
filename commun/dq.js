@@ -3525,7 +3525,7 @@ function renderDeputes(filter){
         const att = attendanceForAssnatId(d.assnatId);
         const presidingNote = presidingRoleNote(d.name, isEn);
         const attNote = presidingNote ? presidingNote : att
-          ? `${isEn ? 'attendance:' : 'présence :'} ${pastillePresence(att.rate, isEn)}${presencesPasseesTexte(d.assnatId, isEn)}`
+          ? ligneLegislatures(d.name, d, att, isEn)
           : (isEn ? 'attendance: n/a' : 'présence : n/d');
         return `
         <div class="dep-row">
@@ -5000,6 +5000,22 @@ function pastillesLegislatures(name, dep, att, presidingShort, isEn){
   }
   const fleches = blocs.length > 2;
   return `<div class="leg-ruban" data-debut="0">${fleches ? `<button class="leg-fleche" type="button" aria-label="${isEn ? 'More recent' : 'Plus récente'}" onclick="event.stopPropagation(); defilerLeg(this, -1)">‹</button>` : ''}${blocs.map((b, i) => `<div class="leg-bloc${b.passe ? ' leg-passe' : ''}${i > 1 ? ' leg-cache' : ''}"><div class="leg-num">${ordinalLeg(b.leg, isEn)} ${isEn ? 'Legislature' : 'législature'}</div><div class="leg-pres">${isEn ? 'attendance' : 'présence'} ${b.pres}</div><div>${b.pl}</div></div>`).join('')}${fleches ? `<button class="leg-fleche" type="button" aria-label="${isEn ? 'Earlier' : 'Plus ancienne'}" onclick="event.stopPropagation(); defilerLeg(this, 1)">›</button>` : ''}</div>`;
+}
+// La même chose sur une ligne pour la liste des député·e·s (Martin, 30 oct. 2026) :
+// « 44e · 92 % · 2 PL | 43e · 87 % · 5 PL ». La législature en cours d'abord, les autres en gris.
+function ligneLegislatures(name, dep, att, isEn){
+  const cour = historiqueLeg.courante || 43;
+  const presencesPassees = historiqueLeg.presences || {}, plPasses = historiqueLeg.pl || {};
+  const nom = norm(name.replace(/\s*\([^)]*\)\s*/g, ''));
+  const morceaux = [`<span class="leg-ligne-cour">${ordinalLeg(cour, isEn)} · ${att ? pastillePresence(att.rate, isEn) : (isEn ? 'n/a' : 'n/d')} · ${billsSponsoredBy(name).length} PL</span>`];
+  const legs = new Set([...Object.keys(presencesPassees), ...Object.keys(plPasses)]);
+  for (const l of [...legs].map(Number).filter((l) => l !== cour).sort((a, b) => b - a)) {
+    const taux = dep ? presencesPassees[l]?.[dep.assnatId] : null;
+    const pl = plPasses[l]?.[nom];
+    if (taux == null && !pl) continue;
+    morceaux.push(`<span class="leg-ligne-passe">${ordinalLeg(l, isEn)} · ${taux != null ? `${taux}${isEn ? '%' : ' %'}` : (isEn ? 'n/a' : 'n/d')} · ${pl ? pl[0] : 0} PL</span>`);
+  }
+  return morceaux.join('<span class="leg-ligne-sep"> | </span>');
 }
 function defilerLeg(bouton, sens){
   const ruban = bouton.closest('.leg-ruban');
