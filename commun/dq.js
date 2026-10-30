@@ -4988,7 +4988,7 @@ function pastillesLegislatures(name, dep, att, presidingShort, isEn){
   const cour = historiqueLeg.courante || 43;
   const presencesPassees = historiqueLeg.presences || {}, plPasses = historiqueLeg.pl || {};
   const siens = billsSponsoredBy(name);
-  const plTxt = (pl, lois) => `${pl} PL${lois ? ` · ${lois} ${isEn ? (lois > 1 ? 'laws' : 'law') : (lois > 1 ? 'lois' : 'loi')}` : ''}`;
+  const plTxt = (pl, lois) => `${pl} ${isEn ? 'bills sponsored' : (pl > 1 ? 'PL parrainés' : 'PL parrainé')}${lois ? ` · ${lois} ${isEn ? (lois > 1 ? 'laws' : 'law') : (lois > 1 ? 'lois' : 'loi')}` : ''}`;
   const blocs = [{ leg: cour, pres: presidingShort || (att ? pastillePresence(att.rate, isEn) : (isEn ? 'n/a' : 'n/d')), pl: plTxt(siens.length, siens.filter((b) => b.status === 'sanctionne').length) }];
   const nom = norm(name.replace(/\s*\([^)]*\)\s*/g, ''));
   const legs = new Set([...Object.keys(presencesPassees), ...Object.keys(plPasses)]);
@@ -4999,7 +4999,7 @@ function pastillesLegislatures(name, dep, att, presidingShort, isEn){
     blocs.push({ leg: l, pres: taux != null ? `${taux}${isEn ? '%' : ' %'}` : (isEn ? 'n/a' : 'n/d'), pl: plTxt(pl ? pl[0] : 0, pl ? pl[1] : 0), passe: true });
   }
   const fleches = blocs.length > 2;
-  return `<div class="m-label leg-titre">${isEn ? 'Vote attendance · bills sponsored' : 'Présence aux votes · PL parrainés'}</div><div class="leg-ruban" data-debut="0">${fleches ? `<button class="leg-fleche" type="button" aria-label="${isEn ? 'More recent' : 'Plus récente'}" onclick="event.stopPropagation(); defilerLeg(this, -1)">‹</button>` : ''}${blocs.map((b, i) => `<div class="leg-bloc${b.passe ? ' leg-passe' : ''}${i > 1 ? ' leg-cache' : ''}"><div class="leg-num">${ordinalLeg(b.leg, isEn)}</div><div class="leg-pres">${b.pres}</div><div>${b.pl}</div></div>`).join('')}${fleches ? `<button class="leg-fleche" type="button" aria-label="${isEn ? 'Earlier' : 'Plus ancienne'}" onclick="event.stopPropagation(); defilerLeg(this, 1)">›</button>` : ''}</div>`;
+  return `<div class="leg-ruban" data-debut="0">${fleches ? `<button class="leg-fleche" type="button" aria-label="${isEn ? 'More recent' : 'Plus récente'}" onclick="event.stopPropagation(); defilerLeg(this, -1)">‹</button>` : ''}${blocs.map((b, i) => `<div class="leg-bloc${b.passe ? ' leg-passe' : ''}${i > 1 ? ' leg-cache' : ''}"><div class="leg-num">${ordinalLeg(b.leg, isEn)} ${isEn ? 'Legislature' : 'législature'}</div><div class="leg-pres">${isEn ? 'attendance' : 'présence'} ${b.pres}</div><div>${b.pl}</div></div>`).join('')}${fleches ? `<button class="leg-fleche" type="button" aria-label="${isEn ? 'Earlier' : 'Plus ancienne'}" onclick="event.stopPropagation(); defilerLeg(this, 1)">›</button>` : ''}</div>`;
 }
 function defilerLeg(bouton, sens){
   const ruban = bouton.closest('.leg-ruban');

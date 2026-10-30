@@ -2331,3 +2331,7 @@
 .leg-fleche:hover{background:var(--yellow);}
 .leg-titre{font-size:12px; margin-bottom:4px;}
 .leg-pres{white-space:nowrap; margin:2px 0;}
+/* Sans rectangle (Martin, 30 oct. 2026) : un simple filet sépare les législatures. */
+.leg-bloc, .leg-bloc.leg-passe{border:0; padding:0 0 0 10px; border-left:2px solid var(--ink);}
+.leg-bloc.leg-passe{border-left-color:var(--line-soft);}
+.leg-num{font-size:13px;}
