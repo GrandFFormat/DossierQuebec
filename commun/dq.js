@@ -3602,7 +3602,7 @@ function personCard(p){
       <div class="m-card-bottom">
         <div class="m-row"><span class="m-label">${labels.riding}</span><span class="m-val">${riding}</span></div>
         ${dep?.mandats ? `<div class="m-row"><span class="m-label">${isEn ? 'Term' : 'Mandat'}</span><span class="m-val">${isEn ? ordinalLeg(dep.mandats, true) : (dep.mandats === 1 ? '1er' : dep.mandats + 'e')}</span></div>` : ''}
-        <div title="${attTitle}">${pastillesLegislatures(name, dep, p.att, presidingShort, isEn)}</div>
+        <div title="${presidingNote ? attTitle : (isEn ? 'Attendance: share of recorded votes taken part in. PL: bills sponsored.' : 'Présence : part des votes nominaux où la personne a voté. PL : projets de loi parrainés.')}">${pastillesLegislatures(name, dep, p.att, presidingShort, isEn)}</div>
         <a class="m-mail" href="${mailHref}" ${email ? '' : 'target="_blank" rel="noopener"'} onclick="event.stopPropagation()" title="${mailTitle}">✉ ${email ? email : (isEn ? 'Official email on assnat.qc.ca' : 'Courriel officiel sur assnat.qc.ca')}</a>
       </div>
     </div>
