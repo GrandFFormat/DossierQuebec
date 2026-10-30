@@ -2335,3 +2335,6 @@
 .leg-bloc, .leg-bloc.leg-passe{border:0; padding:0 0 0 10px; border-left:2px solid var(--ink);}
 .leg-bloc.leg-passe{border-left-color:var(--line-soft);}
 .leg-num{font-size:13px;}
+/* Liste des député·e·s : une législature par segment, sur une ligne. */
+.leg-ligne-passe{color:var(--slate);}
+.leg-ligne-sep{color:var(--line-soft); font-weight:400;}
