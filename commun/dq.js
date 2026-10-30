@@ -5007,22 +5007,27 @@ function ligneLegislatures(name, dep, att, isEn){
   const cour = historiqueLeg.courante || 43;
   const presencesPassees = historiqueLeg.presences || {}, plPasses = historiqueLeg.pl || {};
   const nom = norm(name.replace(/\s*\([^)]*\)\s*/g, ''));
-  const morceaux = [`<span class="leg-ligne-cour">${ordinalLeg(cour, isEn)} · ${att ? pastillePresence(att.rate, isEn) : (isEn ? 'n/a' : 'n/d')} · ${billsSponsoredBy(name).length} PL</span>`];
+  const morceaux = [`<span class="leg-seg leg-ligne-cour leg-premier">${ordinalLeg(cour, isEn)} · ${att ? pastillePresence(att.rate, isEn) : (isEn ? 'n/a' : 'n/d')} · ${billsSponsoredBy(name).length} PL</span>`];
   const legs = new Set([...Object.keys(presencesPassees), ...Object.keys(plPasses)]);
   for (const l of [...legs].map(Number).filter((l) => l !== cour).sort((a, b) => b - a)) {
     const taux = dep ? presencesPassees[l]?.[dep.assnatId] : null;
     const pl = plPasses[l]?.[nom];
     if (taux == null && !pl) continue;
-    morceaux.push(`<span class="leg-ligne-passe">${ordinalLeg(l, isEn)} · ${taux != null ? `${taux}${isEn ? '%' : ' %'}` : (isEn ? 'n/a' : 'n/d')} · ${pl ? pl[0] : 0} PL</span>`);
+    morceaux.push(`<span class="leg-seg leg-ligne-passe${morceaux.length > 1 ? ' leg-cache' : ''}"><span class="leg-ligne-sep"> | </span>${ordinalLeg(l, isEn)} · ${taux != null ? `${taux}${isEn ? '%' : ' %'}` : (isEn ? 'n/a' : 'n/d')} · ${pl ? pl[0] : 0} PL</span>`);
   }
-  return morceaux.join('<span class="leg-ligne-sep"> | </span>');
+  // Plus de deux législatures : une petite flèche fait circuler les plus anciennes (Martin, 30 oct. 2026).
+  const fleche = morceaux.length > 2 ? ` <button class="leg-fleche leg-fleche-ligne" type="button" aria-label="${isEn ? 'Other legislatures' : 'Autres législatures'}" onclick="event.stopPropagation(); defilerLeg(this, 1, true)">›</button>` : '';
+  return `<span class="leg-ruban leg-ruban-ligne" data-debut="0">${morceaux.join('')}${fleche}</span>`;
 }
-function defilerLeg(bouton, sens){
+function defilerLeg(bouton, sens, enBoucle){
   const ruban = bouton.closest('.leg-ruban');
-  const blocs = [...ruban.querySelectorAll('.leg-bloc')];
-  const debut = Math.max(0, Math.min(blocs.length - 2, Number(ruban.dataset.debut) + sens));
+  const blocs = [...ruban.querySelectorAll('.leg-bloc, .leg-seg')];
+  let debut = Number(ruban.dataset.debut) + sens;
+  // Sur la ligne de la liste, une seule flèche : arrivée au bout, elle revient à la législature en cours.
+  if(enBoucle && debut > blocs.length - 2) debut = 0;
+  debut = Math.max(0, Math.min(blocs.length - 2, debut));
   ruban.dataset.debut = debut;
-  blocs.forEach((b, i) => b.classList.toggle('leg-cache', i < debut || i > debut + 1));
+  blocs.forEach((b, i) => { b.classList.toggle('leg-cache', i < debut || i > debut + 1); b.classList.toggle('leg-premier', i === debut); });
 }
 window.defilerLeg = defilerLeg;
 function attendanceForAssnatId(assnatId){

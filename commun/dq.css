@@ -2338,3 +2338,7 @@
 /* Liste des député·e·s : une législature par segment, sur une ligne. */
 .leg-ligne-passe{color:var(--slate);}
 .leg-ligne-sep{color:var(--line-soft); font-weight:400;}
+.leg-seg.leg-cache{display:none;}
+.leg-seg.leg-premier > .leg-ligne-sep{display:none;}
+.leg-fleche-ligne{padding:0 5px; font-size:11px; line-height:1.3; margin-left:4px;}
+.leg-ruban.leg-ruban-ligne{display:inline; gap:0;}
