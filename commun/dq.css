@@ -843,7 +843,7 @@
   nav.tabs a{
     font-family:'Archivo Narrow',sans-serif; font-size:13.5px; font-weight:700;
     text-transform:uppercase; letter-spacing:0.04em; color:var(--ink);
-    padding:6px 10px; border:2px solid transparent; border-bottom:2px solid transparent;
+    padding:6px 8px; border:2px solid transparent; border-bottom:2px solid transparent;   /* 10 → 8 le 30 oct. 2026 : « Archives » remplace « Votes », plus long de 26 px */
     white-space:nowrap;
   }
   nav.tabs a .n{display:none;} /* fini la numérotation 01/02/03 */
@@ -2342,3 +2342,16 @@
 .leg-seg.leg-premier > .leg-ligne-sep{display:none;}
 .leg-fleche-ligne{padding:0 5px; font-size:11px; line-height:1.3; margin-left:4px;}
 .leg-ruban.leg-ruban-ligne{display:inline; gap:0;}
+
+/* Les votes nominaux dans la carte d'un projet de loi (caseVotes, 30 oct. 2026) : les cartes de /votes, déjà ouvertes. */
+.bill-votes .bill-vote-card{margin:12px 0 0; cursor:default;}
+.bill-votes .bill-vote-card .vc-head{cursor:default;}
+.bill-votes .bill-vote-card .vc-nrow .bill-votes-mail, .bill-votes .bill-vote-card .vc-nrow .bill-votes-copie{margin-left:4px;}
+/* Les étapes de la légende des projets mènent à leur terme du Lexique. */
+a.bstep-lien{color:inherit; text-decoration:none;}
+a.bstep-lien:hover{background:var(--yellow); color:var(--sur-clair);}
+/* La page /archives : les liens d'une législature. */
+.archives-liens{line-height:1.9;}
+.archives-liens a, #archivesListe a, .regle-titre a{color:var(--ink); font-weight:800; text-decoration:underline; text-underline-offset:3px;}
+/* Les ancres du Lexique (/lexique#etapes) : sous l'en-tête collant, pas dessous. */
+.lexique-item[id]{scroll-margin-top:120px;}

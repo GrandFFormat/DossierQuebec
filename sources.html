@@ -178,8 +178,10 @@
     <a href="/" data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></a>
     <a href="/ministres" data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></a>
     <a href="/projets-de-loi" data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></a>
-    <a href="/votes" data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></a>
-    <a href="/lexique" data-view="lexique"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></a>
+    <!-- Votes a quitté la barre le 30 oct. 2026 : les votes vivent dans les cartes des projets de
+         loi, et /votes reste lié du pied de page et de la page des projets. -->
+    <a href="/archives" data-view="archives"><span class="n">04</span><span data-i18n="nav.archives">Archives</span></a>
+    <a href="/lexique" data-view="lexique"><span class="n">05</span><span data-i18n="nav.lexique">Lexique</span></a>
     <a href="/mon-dossier" data-view="mondossier" class="nav-mondossier"><span class="n">★</span><span data-i18n="nav.mondossier">Mon dossier</span></a>
   </nav>
   <div class="header-ctrls">
@@ -279,6 +281,7 @@ function goToFederal(evt){
       <ol class="maj-liste" id="journalListe" aria-live="polite"></ol>
     <div class="prerendu" data-prerendu="journal">
       <ul aria-label="Mises à jour du site">
+        <li><span class="pr-meta">30 octobre 2026 —</span> <b>Les votes dans les projets de loi, un onglet Archives</b> Chaque projet de loi montre maintenant tous ses votes nominaux dans sa carte, étape par étape, avec le même tableau que la page des votes. L’onglet Votes quitte la barre du haut : la page reste en ligne, liée du pied de page et de la page des projets de loi. Le nouvel onglet Archives réunit les législatures terminées et les promesses électorales de 2026. La 43e y entre à l’ouverture de la 44e, le 17 novembre.</li>
         <li><span class="pr-meta">30 octobre 2026 —</span> <b>Une pastille par législature sur les cartes</b> Sur les cartes de la page Ministres, la présence aux votes et les projets de loi parrainés sont regroupés dans une pastille par législature, et le mandat a sa propre ligne. À partir de la 44e, deux pastilles s’afficheront côte à côte ; des flèches feront défiler les plus anciennes.</li>
         <li><span class="pr-meta">30 octobre 2026 —</span> <b>La présence de chaque législature est conservée</b> Le taux de présence aux votes de chaque député·e est maintenant gardé législature par législature. Quand la 44e commencera le 17 novembre, la fiche montrera la présence de la nouvelle législature, puis celle de la 43e à côté.</li>
         <li><span class="pr-meta">29 octobre 2026 —</span> <b>Les projets suivis s’ouvrent de nouveau</b> Dans Mon dossier, un projet de ville suivi restait sur « Chargement… » depuis la fin septembre. C’est réparé : les chiffres, le graphique par mois et la liste des décisions s’affichent.</li>
@@ -298,9 +301,8 @@ function goToFederal(evt){
         <li><span class="pr-meta">21 octobre 2026 —</span> <b>Export des données : un mois à la fois</b> Dans Mon dossier, les abonné·e·s peuvent télécharger les votes nominaux, le détail de qui a voté quoi et les présences d’un seul mois. Les présences sont alors recomptées sur les votes de ce mois-là. Le lien arrive par l’infolettre de l’Assemblée nationale.</li>
         <li><span class="pr-meta">21 octobre 2026 —</span> <b>Offrir un abonnement</b> Sur la page Abonnement, une personne connectée offre 1 mois (9,99 $), 3 mois (26,99 $) ou 1 an (99 $), payés une seule fois, sans renouvellement. Le code arrive par courriel et dans Mon dossier ; elle le donne à qui elle veut. La personne qui le reçoit le colle dans la case « Mettez votre code ici », sur la page Abonnement ou dans Mon dossier : l’abonnement s’ouvre pour la durée offerte, ou s’ajoute au temps qui reste. Un code sert une seule fois.</li>
         <li><span class="pr-meta">21 octobre 2026 —</span> <b>Septième outil pour abonné·e·s : suivre une entreprise ou un organisme</b> Dans Mon dossier, les abonné·e·s cherchent parmi les 659 entreprises et organismes qui ont déposé un mémoire en commission à l’Assemblée nationale pendant la 43e législature, et en suivent jusqu’à 10. Pour chacun : ses mémoires, avec le projet de loi, la commission, la date et le lien vers le document officiel. Un nouveau mémoire d’un organisme suivi ajoute une ligne au courriel du matin. Les graphies d’un même nom sont regroupées seulement quand elles ne diffèrent que par les accents, les majuscules, la ponctuation, un sigle final ou « inc. ».</li>
-        <li><span class="pr-meta">21 octobre 2026 —</span> <b>Sixième outil pour abonné·e·s : la veille par thème</b> Les abonné·e·s choisissent des thèmes dans Mon dossier, parmi 14 : santé, éducation, logement, environnement et énergie, travail, justice et d’autres. Chaque lundi, un courriel réunit ce qui a bougé à l’Assemblée nationale dans ces thèmes : projets de loi présentés ou qui changent d’étape, votes nominaux, consultations en commission et mémoires déposés. Un projet de loi entre dans un thème par le ministère qui le présente, sinon par les mots de son titre. Aucun courriel une semaine sans nouveauté.</li>
       </ul>
-      <p class="pr-note">Les 20 plus récentes, sur 108.</p>
+      <p class="pr-note">Les 20 plus récentes, sur 109.</p>
     </div>
       <button type="button" class="maj-plus" id="journalPlus" hidden></button>
     </div>
@@ -313,6 +315,11 @@ function goToFederal(evt){
   
 
   <!-- VOTES -->
+  
+
+  <!-- ARCHIVES (Martin, 30 oct. 2026) : les législatures terminées, une carte chacune (projets de
+       loi, votes), puis les promesses de l'élection de 2026. Dessiné par commun/dq.js (renderArchives)
+       depuis data/archives/index.json : la 43e y entre seule à l'ouverture de la 44e. -->
   
 
   <!-- COMPTE & ABONNEMENT -->
@@ -367,6 +374,7 @@ function goToFederal(evt){
     <a href="/projets-de-loi" data-i18n="nav.projets">Projets de loi</a>
     <a href="/votes" data-i18n="nav.votes">Votes</a>
     <a href="/promesses" data-i18n="fil.promesses">Promesses</a>
+    <a href="/archives" data-i18n="nav.archives">Archives</a>
     <a href="/lexique" data-i18n="nav.lexique">Lexique</a>
     <a href="/sources" data-i18n="fil.bd">Mises à jour du site</a>
     <a href="/mon-dossier" data-i18n="nav.mondossier">Mon dossier</a>
