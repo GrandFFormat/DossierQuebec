@@ -4338,7 +4338,7 @@ function toggleBillSummary(domId, evt){
     const carte = el.closest('.bill');
     const entete = document.querySelector('header');
     const haut = entete && getComputedStyle(entete).position.match(/sticky|fixed/) ? entete.offsetHeight : 0;
-    if(carte) requestAnimationFrame(() => window.scrollTo({ top: carte.getBoundingClientRect().top + scrollY - haut - 12, behavior: 'smooth' }));
+    if(carte) window.scrollTo({ top: carte.getBoundingClientRect().top + scrollY - haut - 12, behavior: 'smooth' });
   }
 }
 
