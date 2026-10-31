@@ -4294,6 +4294,8 @@ async function remplirMemoires(corps){
   if(!boite || boite.dataset.charge) return;
   if(!(await estAbonne())) return;
   boite.dataset.charge = '1';
+  // Abonné·e : la pastille jaune « Réservé aux abonné·e·s » n'a plus lieu d'être.
+  boite.querySelectorAll('.pastille-abonnes').forEach((p) => p.remove());
   const isEn = currentLang === 'en';
   const zone = boite.querySelector('.bill-memoires-corps');
   try{

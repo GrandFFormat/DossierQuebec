@@ -202,9 +202,9 @@ function main() {
   const caseMemoires = (b, en) => {
     const n = nbMemoires[b.id];
     if (!n) return '';
-    return `<details class="bill-votes bill-memoires" data-memoires="${echapper(b.id)}"><summary>${en ? `Briefs submitted in committee (${n})` : `Mémoires déposés en commission (${n})`}</summary><div class="bill-memoires-corps"><p class="bill-votes-note">${en
-      ? `${n} brief${n > 1 ? 's' : ''} submitted to the parliamentary committee. Who submitted them, with the link to each official brief: reserved for subscribers. <a href="/abonnement">See the subscription</a>.`
-      : `${n} mémoire${n > 1 ? 's' : ''} déposé${n > 1 ? 's' : ''} à la commission parlementaire. Qui les a déposés, avec le lien vers chaque mémoire officiel : réservé aux abonné·e·s. <a href="/abonnement">Voir l’abonnement</a>.`}</p></div></details>`;
+    return `<details class="bill-votes bill-memoires" data-memoires="${echapper(b.id)}"><summary>${en ? `Briefs submitted in committee (${n})` : `Mémoires déposés en commission (${n})`} <span class="pastille-abonnes">${en ? 'Subscribers only' : 'Réservé aux abonné·e·s'}</span></summary><div class="bill-memoires-corps"><p class="bill-votes-note">${en
+      ? `${n} brief${n > 1 ? 's' : ''} submitted to the parliamentary committee. Who submitted them, with the link to each official brief: <span class="pastille-abonnes">reserved for subscribers</span>. <a href="/abonnement">See the subscription</a>.`
+      : `${n} mémoire${n > 1 ? 's' : ''} déposé${n > 1 ? 's' : ''} à la commission parlementaire. Qui les a déposés, avec le lien vers chaque mémoire officiel : <span class="pastille-abonnes">réservé aux abonné·e·s</span>. <a href="/abonnement">Voir l’abonnement</a>.`}</p></div></details>`;
   };
   for (const b of bills) {
     if (b.summary) resumes.fr[b.id] = b.summary + listeLois(b, false) + caseVotes(b, false) + caseMemoires(b, false);
