@@ -2355,3 +2355,5 @@ a.bstep-lien:hover{background:var(--yellow); color:var(--sur-clair);}
 .archives-liens a, #archivesListe a, .regle-titre a{color:var(--ink); font-weight:800; text-decoration:underline; text-underline-offset:3px;}
 /* Les ancres du Lexique (/lexique#etapes) : sous l'en-tête collant, pas dessous. */
 .lexique-item[id]{scroll-margin-top:120px;}
+.leg-lien{color:inherit; text-decoration:underline; text-underline-offset:2px;}
+.leg-lien:hover{color:var(--gold);}
