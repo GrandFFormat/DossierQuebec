@@ -189,9 +189,9 @@ function main() {
     };
     const n = liste.length;
     // Le décompte du dernier vote dans le titre de la case, « pour / contre / abst. » dans l'ordre du titre (Martin, 30 oct. 2026 : « les gens sont pas
-    // obligés de cliquer pour rien »). Avec plusieurs votes, l'étape du dernier le précède.
-    const decompte = (v, avecEtape) => `${avecEtape && v.stage ? v.stage + ' : ' : ''}${v.pour.length} / ${v.contre.length} / ${v.abstentions.length}`;
-    return `<details class="bill-votes" data-objet="${objet}"><summary>${titre}${en ? ': ' : ' : '}${decompte(liste[n - 1], n > 1)}${n > 1 ? ` (${n} ${en ? 'recorded votes' : 'votes nominaux'})` : ''}</summary><p class="bill-votes-note">${en
+    // obligés de cliquer pour rien »). Avec plusieurs votes, l'étape du dernier suit entre parenthèses.
+    const decompte = (v) => `${v.pour.length} / ${v.contre.length} / ${v.abstentions.length}`;
+    return `<details class="bill-votes" data-objet="${objet}"><summary>${titre}${en ? ': ' : ' : '}${decompte(liste[n - 1])}${n > 1 ? ` (${liste[n - 1].stage ? liste[n - 1].stage + ' · ' : ''}${n} ${en ? 'recorded votes' : 'votes nominaux'})` : ''}</summary><p class="bill-votes-note">${en
       ? 'Every recorded division on this bill, oldest first. ✉ opens your email app, with the bill’s name as subject; ⧉ copies the address, to paste in Gmail or elsewhere. A name in grey, without ✉: this person no longer sits in the Assembly.'
       : 'Chaque vote nom par nom sur ce projet, du plus ancien au plus récent. ✉ ouvre votre logiciel de courriel, avec le nom du projet en objet ; ⧉ copie l’adresse, à coller dans Gmail ou ailleurs. Un nom en gris, sans ✉ : cette personne ne siège plus à l’Assemblée.'}</p>${liste.map(carte).join('')}</details>`;
   };
