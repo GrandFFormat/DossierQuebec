@@ -4761,8 +4761,8 @@ function copierLien(texte, evt, isEn){
 // /projets-de-loi?pl=NUM qui ouvre directement le projet à l'arrivée.
 // Trois destinations : 𝕏, Facebook, copier.
 // LE BOUTON CAFÉ sous « Partager » (Martin, 18 oct. 2026) : bleu poudre, vers le même lien de don
-// que les volets de Québec et de Montréal. Seulement sur les projets de la 44e législature et des
-// suivantes : il apparaît tout seul avec les premiers projets de la nouvelle Assemblée.
+// que les volets de Québec et de Montréal. Sur tous les projets, ceux de la 43e
+// compris (30 oct. 2026) : archivés, ils gardent leur bouton.
 // Les libellés défilent un projet après l'autre, sans répétition (« je veux pas que le client voie
 // Appuyez-nous, Appuyez-nous, Appuyez-nous à chaque PL ») : renderBills remet le compteur à zéro,
 // chaque bouton affiché prend le libellé suivant.
@@ -4793,7 +4793,6 @@ const ORDRE_CAFE = LIBELLES_CAFE.map((_, i) => i);
 for(let i = ORDRE_CAFE.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [ORDRE_CAFE[i], ORDRE_CAFE[j]] = [ORDRE_CAFE[j], ORDRE_CAFE[i]]; }
 let _rangCafe = 0;
 function boutonCafe(b, isEn){
-  if(!(Number(b.legislature) >= 44)) return '';
   const [fr, en] = LIBELLES_CAFE[ORDRE_CAFE[_rangCafe++ % ORDRE_CAFE.length]];
   return `<div class="bill-cafe-row"><a class="bill-cafe-btn" href="${LIEN_CAFE}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="${isEn ? 'Buy us a coffee (opens in a new tab)' : 'Offrez-nous un café (s’ouvre dans un nouvel onglet)'}">☕ ${isEn ? en : fr}</a></div>`;
 }
