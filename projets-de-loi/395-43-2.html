@@ -184,8 +184,10 @@
     <a href="/" data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></a>
     <a href="/ministres" data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></a>
     <a class="active" aria-current="page" href="/projets-de-loi" data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></a>
-    <a href="/votes" data-view="votes"><span class="n">04</span><span data-i18n="nav.votes">Votes</span></a>
-    <a href="/lexique" data-view="lexique"><span class="n">06</span><span data-i18n="nav.lexique">Lexique</span></a>
+    <!-- Votes a quitté la barre le 30 oct. 2026 : les votes vivent dans les cartes des projets de
+         loi, et /votes reste lié du pied de page et de la page des projets. -->
+    <a href="/archives" data-view="archives"><span class="n">04</span><span data-i18n="nav.archives">Archives</span></a>
+    <a href="/lexique" data-view="lexique"><span class="n">05</span><span data-i18n="nav.lexique">Lexique</span></a>
     <a href="/mon-dossier" data-view="mondossier" class="nav-mondossier"><span class="n">★</span><span data-i18n="nav.mondossier">Mon dossier</span></a>
   </nav>
   <div class="header-ctrls">
@@ -288,11 +290,15 @@ function goToFederal(evt){
       <span class="legend-label" data-i18n="legend.label">Le chemin d'un projet de loi :</span>
       <span class="legend-chips">
         <span class="bstep">Présentation</span><span class="legend-arrow">→</span>
-        <span class="bstep">Étude détaillée</span><span class="legend-arrow">→</span>
-        <span class="bstep">Adoption / Sanction</span>
+        <a class="bstep bstep-lien" href="/lexique#etape-etude">Étude détaillée</a><span class="legend-arrow">→</span>
+        <a class="bstep bstep-lien" href="/lexique#etape-adoption">Adoption / Sanction</a>
       </span>
-      <a class="legend-link" href="/lexique" data-i18n="legend.link">C'est quoi ces étapes ? → Lexique</a>
+      <!-- #etapes : les étapes du Lexique, plutôt que le haut de la page (lobbyistes d'abord). -->
+      <a class="legend-link" href="/lexique#etapes" data-i18n="legend.link">C'est quoi ces étapes ? → Lexique</a>
     </div>
+    <!-- Les votes nominaux sont dans chaque carte (« Qui a voté… ») ; la liste complète, motions
+         comprises, reste sur /votes (30 oct. 2026). -->
+    <p class="archives-note" id="lienTousVotes"><a href="/votes" data-i18n="projets.tousvotes">Tous les votes nominaux, motions comprises →</a></p>
 
     <!-- Titre de résultats (change avec le filtre actif) -->
     <div class="section-head min-group-head" id="billsResultHead">
@@ -303,7 +309,7 @@ function goToFederal(evt){
     <div id="billsList"><article class="bill-prerendu">
 <h2>Projet de loi no 395 — Loi modifiant la Loi sur la Société de l’assurance automobile du Québec et d’autres dispositions législatives concernant les droits consentis sur un véhicule</h2>
 <p>Présenté le 2025-12-04 · Parrain : Derraji, Monsef — Député de Nelligan</p>
-<ul class="bill-summary-list"><li>Encadre la vente de véhicules de promenade entre particuliers pour vérifier si des dettes ou droits pèsent sur le véhicule avant la vente.</li><li>Crée un nouveau régime pour indemniser un acheteur floué par une vérification incomplète.</li></ul><h3 class="volet-titre"><span>Volet 1</span> Code de la sécurité routière</h3><ul class="bill-summary-list"><li>La personne qui vend son véhicule doit remettre à l'acheteur un avis de vérification montrant que le véhicule est libre de tout droit.</li><li>Une amende est prévue pour le vendeur qui ne remet pas cet avis.</li></ul><h3 class="volet-titre"><span>Volet 2</span> Loi sur la Société de l'assurance automobile du Québec</h3><ul class="bill-summary-list"><li>La Société doit maintenant vérifier, dans le registre des droits personnels et réels mobiliers (qui liste les dettes et droits sur les biens), si des droits existent sur un véhicule vendu entre particuliers.</li><li>Un nouvel acheteur peut être indemnisé si un droit existant n'a pas été mentionné dans l'avis de vérification et lui cause un préjudice.</li></ul><h3 class="volet-titre"><span>Volet 3</span> Loi sur la protection du consommateur</h3><ul class="bill-summary-list"><li>Un commerçant qui vend une auto d'occasion doit inscrire sur l'étiquette obligatoire le résultat de sa vérification des droits consentis sur le véhicule.</li></ul><details class="bill-lois"><summary>Lois et règlements touchés (3)</summary><ul><li>Code de la sécurité routière</li><li>Loi sur la protection du consommateur</li><li>Loi sur la Société de l’assurance automobile du Québec</li></ul></details>
+<ul class="bill-summary-list"><li>Encadre la vente de véhicules de promenade entre particuliers pour vérifier si des dettes ou droits pèsent sur le véhicule avant la vente.</li><li>Crée un nouveau régime pour indemniser un acheteur floué par une vérification incomplète.</li></ul><h3 class="volet-titre"><span>Volet 1</span> Code de la sécurité routière</h3><ul class="bill-summary-list"><li>La personne qui vend son véhicule doit remettre à l'acheteur un avis de vérification montrant que le véhicule est libre de tout droit.</li><li>Une amende est prévue pour le vendeur qui ne remet pas cet avis.</li></ul><h3 class="volet-titre"><span>Volet 2</span> Loi sur la Société de l'assurance automobile du Québec</h3><ul class="bill-summary-list"><li>La Société doit maintenant vérifier, dans le registre des droits personnels et réels mobiliers (qui liste les dettes et droits sur les biens), si des droits existent sur un véhicule vendu entre particuliers.</li><li>Un nouvel acheteur peut être indemnisé si un droit existant n'a pas été mentionné dans l'avis de vérification et lui cause un préjudice.</li></ul><h3 class="volet-titre"><span>Volet 3</span> Loi sur la protection du consommateur</h3><ul class="bill-summary-list"><li>Un commerçant qui vend une auto d'occasion doit inscrire sur l'étiquette obligatoire le résultat de sa vérification des droits consentis sur le véhicule.</li></ul><details class="bill-lois"><summary>Lois et règlements touchés (3)</summary><ul><li>Code de la sécurité routière</li><li>Loi sur la protection du consommateur</li><li>Loi sur la Société de l’assurance automobile du Québec</li></ul></details><details class="bill-votes" data-objet="Projet%20de%20loi%20n%C2%B0%20395%20%E2%80%94%20Loi%20modifiant%20la%20Loi%20sur%20la%20Soci%C3%A9t%C3%A9%20de%20l%E2%80%99assurance%20automobile%20du%20Qu%C3%A9bec%20et%20d%E2%80%99autres%20dispositions%20l%C3%A9gislatives%20concernant%20les%20droits%20consentis%20sur%20un%20v%C3%A9hicule"><summary>Qui a voté pour, contre ou s’est abstenu (1 vote nominal)</summary><p class="bill-votes-note">Chaque vote nom par nom sur ce projet, du plus ancien au plus récent. ✉ ouvre votre logiciel de courriel, avec le nom du projet en objet ; ⧉ copie l’adresse, à coller dans Gmail ou ailleurs. Un nom en gris, sans ✉ : cette personne ne siège plus à l’Assemblée.</p><div class="vote-card bill-vote-card"><div class="vc-head"><span class="result-badge adopte">Adopté</span><div class="vc-head-main"><h3>Présentation</h3><div class="vc-meta">2025-12-04 · Vote nominal</div></div><div class="vc-counts"><span class="vcc pour"><b>104</b> pour</span><span class="vcc contre"><b>0</b> contre</span><span class="vcc abst"><b>0</b> abst.</span></div></div><div class="bar"><div class="seg pour" style="width:100.0%"></div><div class="seg contre" style="width:0.0%"></div><div class="seg abst" style="width:0.0%"></div></div><div class="vc-detail open" data-vote="2-82" data-leg="43"><div class="vc-pgrid"></div><div class="vc-ncols"></div><div class="vc-foot"><span class="vc-foot-note">Une abstention n’est pas un vote « non » — mission, maladie, horaire.</span><a class="bill-more" href="https://www.assnat.qc.ca/fr/travaux-parlementaires/registre-des-votes/43-2-82/index.html" target="_blank" rel="noopener">Procès-verbal complet → assnat.qc.ca</a></div></div></div></details>
 <p><a href="https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-395-43-2.html" rel="noopener">Le projet de loi sur le site de l'Assemblée nationale</a></p>
 </article></div>
     <div class="prerendu" data-prerendu="bills">
@@ -478,6 +484,11 @@ function goToFederal(evt){
   <!-- VOTES -->
   
 
+  <!-- ARCHIVES (Martin, 30 oct. 2026) : les législatures terminées, une carte chacune (projets de
+       loi, votes), puis les promesses de l'élection de 2026. Dessiné par commun/dq.js (renderArchives)
+       depuis data/archives/index.json : la 43e y entre seule à l'ouverture de la 44e. -->
+  
+
   <!-- COMPTE & ABONNEMENT -->
 
   <!-- LEXIQUE (fusion : personnes, lexique, apropos) -->
@@ -530,6 +541,7 @@ function goToFederal(evt){
     <a href="/projets-de-loi" data-i18n="nav.projets">Projets de loi</a>
     <a href="/votes" data-i18n="nav.votes">Votes</a>
     <a href="/promesses" data-i18n="fil.promesses">Promesses</a>
+    <a href="/archives" data-i18n="nav.archives">Archives</a>
     <a href="/lexique" data-i18n="nav.lexique">Lexique</a>
     <a href="/sources" data-i18n="fil.bd">Mises à jour du site</a>
     <a href="/mon-dossier" data-i18n="nav.mondossier">Mon dossier</a>

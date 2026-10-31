@@ -157,33 +157,40 @@ function main() {
   }
   if (histoChange) writeFileSync(HISTO, JSON.stringify(histo, null, 1));
   const courriels = new Map(contacts.map((c) => [cleNom(c.name), c.email]));
+  // Tous les votes nominaux d'un projet, du plus ancien au plus récent (Martin, 30 oct. 2026 : les
+  // votes vivent maintenant dans la carte du projet, plus dans un onglet). Même rapprochement que
+  // pour l'adoption avant : numéro, législature et session.
+  const votesDuProjet = (b) => votesNominaux.filter((x) => x.billNum && String(x.billNum) === String(b.num)
+    && Number(x.legislature) === Number(b.legislature) && Number(x.session) === Number(b.introSession))
+    .sort((x, y) => (x.date || '').localeCompare(y.date || '') || (Number(x.num) || 0) - (Number(y.num) || 0));
   const caseVotes = (b, en) => {
-    if (b.status !== 'sanctionne') return '';
-    const v = votesNominaux.find((x) => x.stage === 'Adoption' && String(x.billNum) === String(b.num)
-      && Number(x.legislature) === Number(b.legislature) && Number(x.session) === Number(b.introSession));
+    const liste = votesDuProjet(b);
     const titre = en ? 'Who voted for, against or abstained' : 'Qui a voté pour, contre ou s’est abstenu';
     // Sans vote nominal, on explique comment la loi a été adoptée (Martin, 18 oct. 2026 : « que les
     // gens comprennent »). Le mode exact (unanimité ou majorité) est sur la fiche de l'Assemblée.
-    if (!v) return `<details class="bill-votes"><summary>${titre}</summary><p class="bill-votes-note">${en
+    // Un projet non sanctionné sans vote nominal n'a pas de case : il n'y a rien à expliquer.
+    if (!liste.length) return b.status !== 'sanctionne' ? '' : `<details class="bill-votes"><summary>${titre}</summary><p class="bill-votes-note">${en
       ? '<b>No list of names exists for this law.</b> It was passed by voice: the Speaker asks “Is this motion carried?” and members answer from their seats. If no one objects, it passes unanimously. If a party answers “On division”, it passes by a majority, without anyone being counted.'
       : '<b>Il n’existe pas de liste de noms pour cette loi.</b> Elle a été adoptée de vive voix : le président demande « Cette motion est-elle adoptée ? » et les députés répondent de leur place. Si personne ne s’oppose, elle passe à l’unanimité. Si un parti répond « Sur division », elle passe à la majorité des voix, sans que personne soit compté.'}</p><p class="bill-votes-note">${en
       ? 'A list of names exists only when a party asks for a <b>recorded division</b>: each member then stands for, against or abstaining, and their name is written down.'
       : 'Une liste nom par nom existe seulement quand un parti demande un <b>vote par appel nominal</b> : chaque député se lève alors pour, contre ou abstention, et son nom est inscrit.'} <a href="${echapper(en ? (b.urlEn || b.url) : b.url)}" target="_blank" rel="noopener">${en ? 'How it was passed, on the Assembly’s website' : 'Comment elle a été adoptée, sur la fiche de l’Assemblée'}</a>.</p></details>`;
     const objet = encodeURIComponent((en ? 'Bill ' : 'Projet de loi n° ') + b.num + ' — ' + (en ? (b.titleEn || b.title) : b.title));
-    let anciens = 0;
-    const nom = (p) => {
-      const d = elusParId.get(Number(p.assnatId));
-      if (!d) { anciens++; const h = histo.elus[p.assnatId]; return `<li class="bill-votes-ancien">${echapper(h ? h.name : p.lastName)} <span>(${echapper(p.party || '')})</span></li>`; }
-      const courriel = courriels.get(cleNom(d.name));
-      return `<li>${echapper(d.name)} <span>(${echapper(d.party || p.party || '')})</span>${courriel ? ` <a class="bill-votes-mail" href="mailto:${echapper(courriel)}?subject=${objet}" aria-label="${en ? 'Email' : 'Écrire à'} ${echapper(d.name)}">✉</a><button type="button" class="bill-votes-copie" onclick="event.stopPropagation(); copierCourriel(this, '${echapper(courriel)}')" title="${en ? 'Copy the address' : 'Copier l’adresse'}" aria-label="${en ? 'Copy the address of' : 'Copier l’adresse de'} ${echapper(d.name)}">⧉</button>` : ''}</li>`;
+    // Une carte par vote, dessinée comme celles de /votes (renderVotes, commun/dq.js). Seuls la tête
+    // et la barre sont ici : les noms (125 par vote, avec ✉ et ⧉) pesaient 1,6 Mo dans ce fichier.
+    // commun/dq.js (remplirVotesProjet) les tire de data/archives/<législature>/votes/<id>.json à
+    // l'ouverture de la case, avec contenuNominal, comme sur /votes.
+    const carte = (v) => {
+      const t = { pour: v.pour.length, contre: v.contre.length, abstentions: v.abstentions.length };
+      const total = t.pour + t.contre + t.abstentions;
+      const seg = (g) => (total ? (t[g] / total * 100).toFixed(1) : 0);
+      const adopte = t.pour > t.contre;
+      const etape = v.stage || (en ? 'Recorded division' : 'Vote nominal');
+      return `<div class="vote-card bill-vote-card"><div class="vc-head"><span class="result-badge ${adopte ? 'adopte' : 'rejete'}">${adopte ? (en ? 'Passed' : 'Adopté') : (en ? 'Rejected' : 'Rejeté')}</span><div class="vc-head-main"><h3>${echapper(etape)}</h3><div class="vc-meta">${echapper(v.date)} · ${en ? 'Recorded division' : 'Vote nominal'}</div></div><div class="vc-counts"><span class="vcc pour"><b>${t.pour}</b> ${en ? 'yea' : 'pour'}</span><span class="vcc contre"><b>${t.contre}</b> ${en ? 'nay' : 'contre'}</span><span class="vcc abst"><b>${t.abstentions}</b> abst.</span></div></div><div class="bar"><div class="seg pour" style="width:${seg('pour')}%"></div><div class="seg contre" style="width:${seg('contre')}%"></div><div class="seg abst" style="width:${seg('abstentions')}%"></div></div><div class="vc-detail open" data-vote="${v.session}-${v.num}" data-leg="${v.legislature}"><div class="vc-pgrid"></div><div class="vc-ncols"></div><div class="vc-foot"><span class="vc-foot-note">${en ? 'An abstention is not a « no » vote — mission, illness, scheduling.' : 'Une abstention n’est pas un vote « non » — mission, maladie, horaire.'}</span><a class="bill-more" href="${echapper(v.url)}" target="_blank" rel="noopener">${en ? 'Full record → assnat.qc.ca' : 'Procès-verbal complet → assnat.qc.ca'}</a></div></div></div>`;
     };
-    const colonne = (liste, t) => `<div class="bill-votes-col"><b>${t} (${liste.length})</b>${liste.length ? `<ul>${liste.map(nom).join('')}</ul>` : `<p>—</p>`}</div>`;
-    const cols = colonne(v.pour, en ? 'For' : 'Pour') + colonne(v.contre, en ? 'Against' : 'Contre') + colonne(v.abstentions, en ? 'Abstained' : 'Abstention');
-    return `<details class="bill-votes"><summary>${titre}</summary><p class="bill-votes-note">${en
-      ? `Recorded vote at the final passage, ${v.date}. ✉ opens your email app, with the law’s name as subject; ⧉ copies the address, to paste in Gmail or elsewhere.`
-      : `Vote nom par nom à l’adoption, le ${v.date}. ✉ ouvre votre logiciel de courriel, avec le nom de la loi en objet ; ⧉ copie l’adresse, à coller dans Gmail ou ailleurs.`} <a href="${echapper(v.url)}" target="_blank" rel="noopener">${en ? 'The vote on the Assembly’s website' : 'Le vote sur le site de l’Assemblée'}</a>.</p><div class="bill-votes-grille">${cols}</div>${anciens ? `<p class="bill-votes-note">${en
-      ? 'A name without ✉ and in grey: this person no longer sits in the Assembly.'
-      : 'Un nom en gris, sans ✉ : cette personne ne siège plus à l’Assemblée.'}</p>` : ''}</details>`;
+    const n = liste.length;
+    return `<details class="bill-votes" data-objet="${objet}"><summary>${titre} (${n} ${en ? (n > 1 ? 'recorded votes' : 'recorded vote') : (n > 1 ? 'votes nominaux' : 'vote nominal')})</summary><p class="bill-votes-note">${en
+      ? 'Every recorded division on this bill, oldest first. ✉ opens your email app, with the bill’s name as subject; ⧉ copies the address, to paste in Gmail or elsewhere. A name in grey, without ✉: this person no longer sits in the Assembly.'
+      : 'Chaque vote nom par nom sur ce projet, du plus ancien au plus récent. ✉ ouvre votre logiciel de courriel, avec le nom du projet en objet ; ⧉ copie l’adresse, à coller dans Gmail ou ailleurs. Un nom en gris, sans ✉ : cette personne ne siège plus à l’Assemblée.'}</p>${liste.map(carte).join('')}</details>`;
   };
   // « Mémoires déposés » (21 oct. 2026, cinquième outil de l'abonnement). Seul le NOMBRE est public :
   // la liste est servie aux abonné·e·s par api/export.js?jeu=consultations, que commun/dq.js

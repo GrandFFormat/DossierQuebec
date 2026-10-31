@@ -38,6 +38,7 @@ import { join } from 'node:path';
 const VOTES_PATH = 'data/votes.json';
 const BILLS_PATH = 'data/bills.json';
 const NOMINAL_DIR = 'data/votes';
+const ARCHIVES_DIR = 'data/archives';
 // Le taux de présence de chaque législature, gardé pour toujours (Martin, 30 oct. 2026 : « garder le
 // % de vote, par mandat, par député »). La législature en cours s'y réécrit à chaque passage ; quand
 // votes.js passe à la suivante, la précédente reste figée telle qu'au dernier vote.
@@ -97,15 +98,15 @@ function calculerPresences(out) {
 // Un fichier par vote. Les votes passés ne changent jamais : le rafraîchissement
 // quotidien n'ajoute que les nouveaux, au lieu de réécrire un bloc d'un mégaoctet
 // dans six pages. On retire quand même les fichiers dont le vote a disparu du jeu.
-function ecrireNominal(out) {
-  mkdirSync(NOMINAL_DIR, { recursive: true });
+function ecrireNominal(out, dossier = NOMINAL_DIR) {
+  mkdirSync(dossier, { recursive: true });
   const attendus = new Set();
   let ecrits = 0;
   for (const v of out) {
     const nom = `${v.id}.json`;
     attendus.add(nom);
     const contenu = JSON.stringify(v.nominal);
-    const chemin = join(NOMINAL_DIR, nom);
+    const chemin = join(dossier, nom);
     // Ne réécrire que ce qui change : garde l'horodatage des fichiers stables
     // et le diff quotidien minuscule.
     if (existsSync(chemin) && readFileSync(chemin, 'utf-8') === contenu) continue;
@@ -113,8 +114,8 @@ function ecrireNominal(out) {
     ecrits++;
   }
   let retires = 0;
-  for (const f of readdirSync(NOMINAL_DIR)) {
-    if (f.endsWith('.json') && !attendus.has(f)) { rmSync(join(NOMINAL_DIR, f)); retires++; }
+  for (const f of readdirSync(dossier)) {
+    if (f.endsWith('.json') && !attendus.has(f)) { rmSync(join(dossier, f)); retires++; }
   }
   return { ecrits, retires, total: attendus.size };
 }
@@ -219,6 +220,33 @@ function main() {
   // Ce qui part dans la page : tout sauf le nominatif.
   const allege = out.map(({ nominal, ...reste }) => reste);
   const json = JSON.stringify(allege);
+
+  // ARCHIVE DES VOTES (Martin, 30 oct. 2026, qui renverse la décision du 4 oct.). Comme les projets
+  // de loi (scripts/build-bill-pages.js), la législature en direct est recopiée dans
+  // data/archives/<législature>/ : votes.json (la liste allégée) et votes/<id>.json (le nominatif).
+  // Le jour où votes.js passe à la 44e, la copie de la 43e reste telle quelle et /votes?archives=43
+  // la lit. Les identifiants (session-numéro) repartent à 1-1 à chaque législature : d'où un
+  // dossier nominatif par archive, plutôt que data/votes/ partagé.
+  if (legislature) {
+    const dossierArchive = `${ARCHIVES_DIR}/${legislature}`;
+    mkdirSync(dossierArchive, { recursive: true });
+    const cheminListe = `${dossierArchive}/votes.json`;
+    if (!existsSync(cheminListe) || readFileSync(cheminListe, 'utf-8') !== json) writeFileSync(cheminListe, json);
+    const arch = ecrireNominal(out, `${dossierArchive}/votes`);
+    // noms.json : le nom complet de chaque personne qui a voté dans cette législature. Une fois la
+    // législature passée, les ancien·ne·s élu·e·s sortent de la liste des député·e·s : la case des
+    // votes d'un projet de loi (commun/dq.js, remplirVotesProjet) les nomme grâce à ce fichier.
+    // Source : data/elus-historique.json (scrapers/build-frontend-data.js), jamais vidé.
+    const histo = existsSync('data/elus-historique.json') ? (JSON.parse(readFileSync('data/elus-historique.json', 'utf-8')).elus || {}) : {};
+    const noms = {};
+    for (const v of votes) for (const g of ['pour', 'contre', 'abstentions']) for (const p of v[g] || []) {
+      noms[p.assnatId] = (histo[p.assnatId] && histo[p.assnatId].name) || noms[p.assnatId] || p.lastName;
+    }
+    const nomsJson = JSON.stringify(noms);
+    const cheminNoms = `${dossierArchive}/noms.json`;
+    if (!existsSync(cheminNoms) || readFileSync(cheminNoms, 'utf-8') !== nomsJson) writeFileSync(cheminNoms, nomsJson);
+    console.log(`  archive : ${cheminListe} et ${arch.total} fichiers nominatifs (${arch.ecrits} écrit(s))`);
+  }
   const block = `${START_MARKER}\nconst votes = ${json};\n`
     + `/* Le détail nominatif de chaque vote vit dans ${NOMINAL_DIR}/<id>.json et se charge quand\n`
     + `   on déplie une carte. Ici ne restent que les agrégats qui en dérivent : « divise » par\n`

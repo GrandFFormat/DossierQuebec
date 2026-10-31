@@ -88,55 +88,99 @@ async function chargerDonnees(){
 // récente ; scripts/build-bill-pages.js recopie donc chaque législature dans data/archives/<n>/.
 // Tant que l'archive EST la législature en direct (aujourd'hui : la 43e), rien ne change ici.
 // Ensuite, /projets-de-loi/3-43-3 et /projets-de-loi?archives=43 chargent l'archive à la place
-// des projets en direct, et la page des projets en cours porte un lien vers elle.
+// des projets en direct. Les VOTES suivent depuis le 30 oct. 2026 (scrapers/build-votes-data.js
+// les recopie aussi) : /votes?archives=43 lit data/archives/43/votes.json, et le nominatif de
+// data/archives/43/votes/. La page /archives liste les législatures terminées (renderArchives).
 let archiveLeg = null;      // la législature archivée affichée, sinon null
 let archivesDispo = [];     // les législatures archivées, sauf celle en direct
+let legEnDirect = 0;        // la législature en direct, selon data/archives/index.json
+let votesBase = '/data/votes';   // où vit le nominatif des votes affichés (archive ou direct)
 async function chargerArchive(){
-  if(!document.getElementById('billsList')) return;   // vue absente de cette page
-  const enDirect = Math.max(0, ...bills.map(b => Number(b.legislature) || 0));
+  const surProjets = !!document.getElementById('billsList');
+  const surVotes = !!document.getElementById('votesList');
+  if(!surProjets && !surVotes && !document.getElementById('archivesListe')) return;   // rien d'archivable ici
   const page = location.pathname.match(/^\/projets-de-loi\/\d+-(\d+)-\d+/);
   const demandee = Number(page ? page[1] : new URLSearchParams(location.search).get('archives')) || 0;
   try {
     const idx = await fetch('/data/archives/index.json').then(r => r.ok ? r.json() : null);
-    archivesDispo = ((idx && idx.legislatures) || []).filter(l => l !== enDirect);
-  } catch (e) { /* sans index : pas de lien d'archives, la page marche comme avant */ }
-  if(!demandee || !archivesDispo.includes(demandee)) return;
+    legEnDirect = (idx && idx.enDirect) || Math.max(0, ...bills.map(b => Number(b.legislature) || 0));
+    archivesDispo = ((idx && idx.legislatures) || []).filter(l => l !== legEnDirect);
+  } catch (e) { /* sans index : pas d'archives, la page marche comme avant */ }
+  if(!demandee || !archivesDispo.includes(demandee) || (!surProjets && !surVotes)) return;
   try {
+    // Les projets de l'archive : complets sur /projets-de-loi, pour leurs titres sur /votes.
     const r = await fetch(`/data/archives/${demandee}/bills.json`);
     if(!r.ok) throw new Error(r.status);
     bills = await r.json();
     archiveLeg = demandee;
+    if(surVotes){
+      const rv = await fetch(`/data/archives/${demandee}/votes.json`);
+      if(!rv.ok) throw new Error(rv.status);
+      votes = await rv.json();
+      voteById = new Map(votes.map(v => [v.id, v]));
+      votesBase = `/data/archives/${demandee}/votes`;
+    }
   } catch (e) { console.error('archive non chargée :', e.message); }
 }
 // Une législature terminée : les projets non sanctionnés y sont morts, dissolution en cours ou non.
 const legislatureFinie = () => ASSEMBLY.dissolved || archiveLeg !== null;
-// La ligne d'archives, au-dessus de la liste : « vous êtes dans les archives » ou « voir les archives ».
+// « 43e législature » / « 43rd legislature ».
+function nomLegislature(l, isEn){
+  return isEn ? `${l}${l % 10 === 1 && l % 100 !== 11 ? 'st' : l % 10 === 2 && l % 100 !== 12 ? 'nd' : l % 10 === 3 && l % 100 !== 13 ? 'rd' : 'th'} legislature` : `${l}<sup>e</sup> législature`;
+}
+// La bande « vous êtes dans les archives », au-dessus de la liste des projets ou des votes. Hors
+// archives, rien : l'onglet Archives mène aux législatures terminées (30 oct. 2026).
 function renderArchivesNote(){
-  const tete = document.getElementById('billsResultHead');
-  if(!tete) return;
-  let note = document.getElementById('archivesNote');
-  if(!archiveLeg && !archivesDispo.length){ if(note) note.remove(); return; }
-  if(!note){
-    note = document.createElement('p');
-    note.id = 'archivesNote';
-    note.className = 'archives-note';
-    tete.before(note);
-  }
   const isEn = currentLang === 'en';
   const lang = isEn ? '?lang=en' : '';
-  const nom = (l) => isEn ? `${l}${l % 10 === 1 && l % 100 !== 11 ? 'st' : l % 10 === 2 && l % 100 !== 12 ? 'nd' : l % 10 === 3 && l % 100 !== 13 ? 'rd' : 'th'} legislature` : `${l}<sup>e</sup> législature`;
-  note.innerHTML = archiveLeg
-    ? (isEn
-        ? `<b>Archives: ${nom(archiveLeg)}.</b> These bills belong to a legislature that has ended. <a href="/projets-de-loi${lang}">← Current bills</a>`
-        : `<b>Archives de la ${nom(archiveLeg)}.</b> Ces projets datent d'une législature terminée. <a href="/projets-de-loi">← Projets de loi en cours</a>`)
-    : archivesDispo.slice().reverse().map(l => `<a href="/projets-de-loi?archives=${l}${isEn ? '&lang=en' : ''}">${isEn ? `Archives: ${nom(l)}` : `Archives de la ${nom(l)}`} →</a>`).join(' · ');
+  const lienVotes = document.querySelector('#lienTousVotes a');
+  if(lienVotes) lienVotes.setAttribute('href', archiveLeg ? `/votes?archives=${archiveLeg}` : '/votes');
+  for(const [tete, avant, html] of [
+    [document.getElementById('billsResultHead'), true, isEn
+      ? `<b>Archives: ${nomLegislature(archiveLeg, true)}.</b> These bills belong to a legislature that has ended. <a href="/projets-de-loi${lang}">← Current bills</a>`
+      : `<b>Archives de la ${nomLegislature(archiveLeg, false)}.</b> Ces projets datent d'une législature terminée. <a href="/projets-de-loi">← Projets de loi en cours</a>`],
+    [document.querySelector('#view-votes .section-head'), true, isEn
+      ? `<b>Archives: ${nomLegislature(archiveLeg, true)}.</b> These votes belong to a legislature that has ended. <a href="/votes${lang}">← Current votes</a>`
+      : `<b>Archives de la ${nomLegislature(archiveLeg, false)}.</b> Ces votes datent d'une législature terminée. <a href="/votes">← Votes en cours</a>`],
+  ]){
+    if(!tete) continue;
+    let note = tete.parentNode.querySelector(':scope > .archives-note.archives-bande');
+    if(!archiveLeg){ if(note) note.remove(); continue; }
+    if(!note){
+      note = document.createElement('p');
+      note.className = 'archives-note archives-bande';
+      if(avant) tete.before(note);
+    }
+    note.innerHTML = html;
+  }
+}
+// La page /archives : une carte par législature terminée, la plus récente d'abord. Avant la première
+// archive (la 43e, le 17 nov. 2026), une ligne dit quand elle arrivera.
+function renderArchives(){
+  const liste = document.getElementById('archivesListe');
+  if(!liste) return;
+  const isEn = currentLang === 'en';
+  const q = (premier) => isEn ? (premier ? '?lang=en' : '&lang=en') : '';
+  if(!archivesDispo.length){
+    const l = legEnDirect || 43;
+    liste.innerHTML = `<li class="regle"><p>${isEn
+      ? `The ${nomLegislature(l, true)} will be archived here when the ${nomLegislature(l + 1, true)} opens${l === 43 ? ', on 17 November 2026' : ''}. Until then, its bills and votes are on the <a href="/projets-de-loi${q(true)}">Bills</a> and <a href="/votes${q(true)}">Votes</a> pages.`
+      : `La ${nomLegislature(l, false)} sera archivée ici à l'ouverture de la ${nomLegislature(l + 1, false)}${l === 43 ? ', le 17 novembre 2026' : ''}. D'ici là, ses projets de loi et ses votes sont sur les pages <a href="/projets-de-loi">Projets de loi</a> et <a href="/votes">Votes</a>.`}</p></li>`;
+    return;
+  }
+  liste.innerHTML = archivesDispo.slice().sort((a, b) => b - a).map(l => `
+      <li class="regle">
+        <h2 class="regle-titre"><span class="regle-no">${l}<sup>${isEn ? '' : 'e'}</sup></span><span>${isEn ? `The ${nomLegislature(l, true)}` : `La ${nomLegislature(l, false)}`}</span></h2>
+        <p class="archives-liens"><a href="/projets-de-loi?archives=${l}${q(false)}">${isEn ? `Bills of the ${nomLegislature(l, true)}` : `Projets de loi de la ${nomLegislature(l, false)}`} →</a><br>
+        <a href="/votes?archives=${l}${q(false)}">${isEn ? `Votes of the ${nomLegislature(l, true)}` : `Votes de la ${nomLegislature(l, false)}`} →</a></p>
+      </li>`).join('');
 }
 
 /* ---------------- I18N ---------------- */
 const translations = {
   fr: {
     'nav.close':"Fermer",'nav.villes':"Villes",'nav.apercu':"Aperçu",'nav.ministres':"Ministres",'nav.projets':"Projets de loi",
-    'nav.votes':"Votes",'nav.quoideneuf':"Quoi de neuf",'nav.compte':"Compte & à propos",'nav.trouve':"Trouvez votre député",
+    'nav.votes':"Votes",'nav.archives':"Archives",'nav.quoideneuf':"Quoi de neuf",'nav.compte':"Compte & à propos",'nav.trouve':"Trouvez votre député",
     'nav.lexique':"Lexique",'nav.personnes':"Qui gravite autour",'nav.petitions':"Pétitions",'nav.apropos':"D'où viennent ces données",
     'stat.ministres':"Ministres",'stat.projets':"Projets de loi",'stat.votes':"Votes enregistrés",
     'h.composition':"Composition — 125 sièges",
@@ -171,7 +215,7 @@ const translations = {
   },
   en: {
     'nav.close':"Close",'nav.villes':"Cities",'nav.apercu':"Overview",'nav.ministres':"Ministers",'nav.projets':"Bills",
-    'nav.votes':"Votes",'nav.quoideneuf':"What's new",'nav.compte':"Account & about",'nav.trouve':"Find your MNA",
+    'nav.votes':"Votes",'nav.archives':"Archives",'nav.quoideneuf':"What's new",'nav.compte':"Account & about",'nav.trouve':"Find your MNA",
     'nav.lexique':"Glossary",'nav.personnes':"Who's involved",'nav.petitions':"Petitions",'nav.apropos':"Where this data comes from",
     'stat.ministres':"Ministers",'stat.projets':"Bills",'stat.votes':"Votes recorded",
     'h.composition':"Composition — 125 seats",
@@ -421,6 +465,14 @@ const translations = {
     'abcode.ph':"Enter your code here",
     'abcode.btn':"Use the code",
     'fil.regles':"The rules",
+    'fil.archives':"Archives",
+    'sujet.archives':"National Assembly archives",
+    'archhero.l1':"The archives,",
+    'archhero.l2':"legislature by legislature.",
+    'archhero.sub':"Bills and recorded votes of past legislatures, as they stood at the last sitting. <b>Nothing changes afterwards.</b>",
+    'arch.prom.h':"2026 election promises",
+    'arch.prom.p':"The parties' commitments for the 5 October 2026 election, each with its official source.",
+    'projets.tousvotes':"All recorded votes, motions included →",
     'sujet.regles':"DossierQuébec's sourcing rules",
     'regleshero.l1':"The rules,",
     'regleshero.l2':"in black and white.",
@@ -696,6 +748,7 @@ function applyLanguage(){
   renderChallenged();
   renderPromises();
   renderJournal();
+  renderArchives();
   document.querySelectorAll('.snooze-pill').forEach(pill=>{
     // La pastille de l'intro compacte (#introCompact) n'a pas de <span> imbriqué
     // comme les autres — sans ce repli, ça plantait ici et bloquait tout le
@@ -4151,6 +4204,62 @@ async function remplirResume(el){
     || `<p><em>${isEn ? 'Summary not available for this bill.' : 'Résumé non disponible pour ce projet de loi.'}</em></p>`;
   if(texte) el.dataset.rempli = '1';
   remplirMemoires(corps);
+  remplirVotesProjet(corps);
+}
+
+// LES VOTES D'UN PROJET DE LOI (30 oct. 2026 : les votes ont quitté la barre du haut pour vivre dans
+// la carte de leur projet). Le résumé apporte la tête de chaque carte de vote ; les noms arrivent à
+// l'ouverture de la case « Qui a voté… », depuis data/archives/<législature>/votes/<id>.json (une
+// copie par législature, voir scrapers/build-votes-data.js), et se dessinent comme sur /votes.
+const _nomsLeg = new Map();
+function nomsDeLaLegislature(leg){
+  if(!_nomsLeg.has(leg)) _nomsLeg.set(leg, fetch(`/data/archives/${leg}/noms.json`).then(r => r.ok ? r.json() : {}).catch(() => ({})));
+  return _nomsLeg.get(leg);
+}
+let _courrielsP = null;
+function courrielsDeputes(){
+  if(Object.keys(deputeEmails).length) return Promise.resolve(deputeEmails);
+  if(!_courrielsP) _courrielsP = fetch('/data/site/deputeEmails.json').then(r => r.ok ? r.json() : {}).catch(() => ({}));
+  return _courrielsP;
+}
+function remplirVotesProjet(corps){
+  for(const d of corps.querySelectorAll('details.bill-votes[data-objet]')){
+    d.addEventListener('toggle', () => { if(d.open) remplirCartesVotes(d); });
+    if(d.open) remplirCartesVotes(d);
+  }
+}
+async function remplirCartesVotes(d){
+  const isEn = currentLang === 'en';
+  const objet = d.dataset.objet || '';
+  for(const det of d.querySelectorAll('.vc-detail[data-vote]:not([data-rempli])')){
+    det.dataset.rempli = '1';
+    const colonnes = det.querySelector('.vc-ncols');
+    colonnes.innerHTML = `<div class="vc-empty">${isEn ? 'Loading the names…' : 'Chargement des noms…'}</div>`;
+    const leg = det.dataset.leg;
+    const [nominal, noms, mails] = await Promise.all([
+      fetch(`/data/archives/${leg}/votes/${encodeURIComponent(det.dataset.vote)}.json`).then(r => r.ok ? r.json() : null).catch(() => null),
+      nomsDeLaLegislature(leg), courrielsDeputes(),
+    ]);
+    if(!nominal){
+      delete det.dataset.rempli;
+      colonnes.innerHTML = `<div class="vc-empty">${isEn ? 'Could not load the names. Open the official record below.' : 'Les noms n\'ont pas pu être chargés. Le procès-verbal officiel est en dessous.'}</div>`;
+      continue;
+    }
+    const totals = { pour: (nominal.pour || []).length, contre: (nominal.contre || []).length, abstentions: (nominal.abstentions || []).length };
+    det.querySelector('.vc-pgrid').innerHTML = contenuNominal({ totals }, nominal, isEn).partyBoxes;
+    // Les trois colonnes de /votes, plus ✉ et ⧉ pour qui siège encore.
+    const heads = isEn ? ['Yea', 'Nay', 'Abstentions'] : ['Pour', 'Contre', 'Abstentions'];
+    colonnes.innerHTML = ['pour', 'contre', 'abstentions'].map((g, i) => {
+      const lignes = (nominal[g] || []).map(([id, party]) => {
+        const dep = deputeById.get(id);
+        const nom = dep ? dep.name : (noms[id] || ('#' + id));
+        const courriel = dep ? (mails[norm(dep.name)] || null) : null;
+        const outils = courriel ? ` <a class="bill-votes-mail" href="mailto:${echapperHtml(courriel)}?subject=${objet}" aria-label="${isEn ? 'Email' : 'Écrire à'} ${echapperHtml(nom)}">✉</a><button type="button" class="bill-votes-copie" onclick="event.stopPropagation(); copierCourriel(this, '${echapperHtml(courriel)}')" title="${isEn ? 'Copy the address' : 'Copier l’adresse'}" aria-label="${isEn ? 'Copy the address of' : 'Copier l’adresse de'} ${echapperHtml(nom)}">⧉</button>` : '';
+        return `<div class="vc-nrow${dep ? '' : ' bill-votes-ancien'}"><span class="vc-chip" style="background:${partyColors[party] || '#999'}"></span>${echapperHtml(nom)}${outils}</div>`;
+      }).join('');
+      return `<div class="vc-ncol"><div class="vc-nhead ${['pour', 'contre', 'abst'][i]}">${heads[i]} — ${totals[g]}</div><div class="vc-nbody">${lignes || `<div class="vc-empty">${isEn ? 'None' : 'Personne'}</div>`}</div></div>`;
+    }).join('');
+  }
 }
 
 // « Mémoires déposés » sous un projet de loi (21 oct. 2026). Le fichier public ne contient que le
@@ -5069,6 +5178,7 @@ function loadMoreVotes(){ votesShown += 6; renderVotes(); }
 
 function renderVotes(keyword){
   if(!document.getElementById('votesList')) return;   // vue absente de cette page
+  renderArchivesNote();
   const isEn = currentLang === 'en';
   keyword = keyword !== undefined ? keyword : (document.getElementById('searchVotes')?.value || '');
   const kw = norm(keyword);
@@ -5165,7 +5275,7 @@ function renderVotes(keyword){
 const _nominalCache = new Map();
 async function nominalDuVote(voteId){
   if(_nominalCache.has(voteId)) return _nominalCache.get(voteId);
-  const p = fetch(`/data/votes/${encodeURIComponent(voteId)}.json`)
+  const p = fetch(`${votesBase}/${encodeURIComponent(voteId)}.json`)
     .then(r => r.ok ? r.json() : null)
     // Un réseau qui tombe ne doit pas laisser la carte bloquée sur « chargement » pour
     // toujours : on oublie l'échec pour que la prochaine ouverture réessaie.
@@ -5267,8 +5377,8 @@ function toggleVoteCard(id, evt){
    sur une de ces adresses. */
 // /mon-dossier y est aussi : sans lui, la page se prenait pour l'accueil et portait son titre
 // anglais (arrivé avec l'anglais qui suit enfin la navigation, 24 sept. 2026).
-const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier', regles:'/regles', abonnement:'/abonnement' };
-const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier', 'regles':'regles', 'abonnement':'abonnement' };
+const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', archives:'/archives', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier', regles:'/regles', abonnement:'/abonnement' };
+const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'archives':'archives', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier', 'regles':'regles', 'abonnement':'abonnement' };
 // Titres ANGLAIS seulement : le français vient du <title> de la page (voir syncTitle).
 const PAGE_META = {
   bd:        { en:"Site updates — DossierQuébec" },
@@ -5277,6 +5387,7 @@ const PAGE_META = {
   projets:   { en:"Quebec bills explained in plain language — DossierQuébec" },
   votes:     { en:"Recorded divisions at the National Assembly — DossierQuébec" },
   lexique:   { en:"National Assembly glossary in plain language — DossierQuébec" },
+  archives:  { en:"National Assembly archives — DossierQuébec" },
   promesses: { en:"2026 Quebec election promises — DossierQuébec" },
   mondossier:{ en:"My file — DossierQuébec" },
   introuvable:{ en:"Page not found (404) — DossierQuébec" },
@@ -5695,6 +5806,9 @@ try{ if(!new URLSearchParams(location.search).get('ville')) localStorage.setItem
   else { syncTitle('apercu'); }
   // Lien profond partagé (/projets-de-loi?pl=NUM) : ouvre le projet ciblé.
   openBillFromQuery();
+  // Une ancre (/lexique#etapes) : la page se dessine après le chargement, et le navigateur a déjà
+  // tenté de défiler sur une page plus courte. On y va une fois tout dessiné.
+  if(location.hash.length > 1){ try { document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({ block: 'start' }); } catch(e){} }
   renderTicker();
   demarrageFini = true;
 })();

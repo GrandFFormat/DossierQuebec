@@ -185,11 +185,22 @@ const PAGES = [
     fil: 'Projets de loi', cle: 'fil.projets', frequence: 'daily', priorite: '0.9',
   },
   {
-    fichier: 'votes.html', vue: 'votes', onglet: 'votes', url: '/votes',
+    // Plus d'onglet depuis le 30 oct. 2026 : les votes vivent dans les cartes des projets de loi.
+    // La page reste en ligne et indexée, liée du pied de page et de /projets-de-loi.
+    fichier: 'votes.html', vue: 'votes', onglet: null, url: '/votes',
     donnees: ['votes', 'deputesRaw', 'billsTitres'],
     title: "Votes nominatifs à l'Assemblée nationale — DossierQuébec",
     desc: "Le registre des votes nominatifs de l'Assemblée nationale du Québec : qui a voté pour, contre ou s'est abstenu, député·e par député·e, sans interprétation.",
     fil: 'Votes', cle: 'fil.votes', frequence: 'daily', priorite: '0.9',
+  },
+  {
+    // Les législatures terminées (30 oct. 2026) : leurs projets de loi, leurs votes, et les
+    // promesses de l'élection de 2026. La liste se dessine depuis data/archives/index.json.
+    fichier: 'archives.html', vue: 'archives', onglet: 'archives', url: '/archives',
+    donnees: [],
+    title: "Archives de l'Assemblée nationale — DossierQuébec",
+    desc: "Les législatures terminées de l'Assemblée nationale du Québec : leurs projets de loi, leurs votes nominaux et les promesses électorales de 2026, tels quels.",
+    fil: 'Archives', cle: 'fil.archives', frequence: 'monthly', priorite: '0.6',
   },
   {
     fichier: 'promesses.html', vue: 'promesses', onglet: null, url: '/promesses',
