@@ -4332,6 +4332,14 @@ function toggleBillSummary(domId, evt){
   }
   el.classList.toggle('open', willOpen);
   if(hint) hint.textContent = willOpen ? t('btn.hideSummary') : t('btn.viewSummary');
+  // À l'ouverture, le titre du projet revient devant les yeux (Martin, 30 oct. 2026) :
+  // fermer le résumé du dessus fait remonter la page et laissait le titre hors écran.
+  if(willOpen){
+    const carte = el.closest('.bill');
+    const entete = document.querySelector('header');
+    const haut = entete && getComputedStyle(entete).position.match(/sticky|fixed/) ? entete.offsetHeight : 0;
+    if(carte) requestAnimationFrame(() => window.scrollTo({ top: carte.getBoundingClientRect().top + scrollY - haut - 12, behavior: 'smooth' }));
+  }
 }
 
 // Bascule la section « votes enregistrés » d'une carte entre la vue compacte
