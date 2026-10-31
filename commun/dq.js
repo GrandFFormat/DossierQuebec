@@ -4530,6 +4530,10 @@ function renderBills(keyword){
   // NUMÉRO 3, et rien d'autre. Sans cette règle, « 3 » renvoyait 75 projets (tout
   // résumé ou toute date contenant un 3) et « pl 3 » en renvoyait 14, parce que
   // « pl 30 », « pl 31 »… contiennent « pl 3 » comme sous-chaîne.
+  // ?parrain=Nom (lien des cartes de ministres) : tant que la recherche contient ce nom tel quel,
+  // seuls les projets dont il ou elle est le parrain restent, pas ceux qui le nomment dans leur résumé.
+  const parrainDemande = norm(new URLSearchParams(location.search).get('parrain') || '');
+  const parParrain = parrainDemande && kw === parrainDemande;
   const numCherche = (kw.match(/^(?:pl|projet de loi)?\s*(?:n[°ºo]?\s*)?(\d+)$/) || [])[1] ?? null;
   const list = bills.filter(b => {
     const quickOk = (billsQuickFilter === 'tous'
@@ -4549,7 +4553,7 @@ function renderBills(keyword){
       'projet de loi n° ' + b.num, 'pl ' + b.num, 'pl no ' + b.num,
       partiDuProjet(b),
     ].join(' '));
-    const kwOk = !kw || (numCherche !== null ? String(b.num) === numCherche : haystack.includes(kw));
+    const kwOk = !kw || (parParrain ? norm(b.sponsor) === parrainDemande : numCherche !== null ? String(b.num) === numCherche : haystack.includes(kw));
     return quickOk && kwOk;
   }).sort((a,b)=>{
     const da = a.lastActivity || '', db = b.lastActivity || '';
@@ -5097,15 +5101,15 @@ function pastillesLegislatures(name, dep, att, presidingShort, isEn){
   const cour = historiqueLeg.courante || 43;
   const presencesPassees = historiqueLeg.presences || {}, plPasses = historiqueLeg.pl || {};
   const siens = billsSponsoredBy(name);
-  const plTxt = (pl, lois) => `${pl} ${isEn ? 'bills sponsored' : (pl > 1 ? 'PL parrainés' : 'PL parrainé')}${lois ? ` · ${lois} ${isEn ? (lois > 1 ? 'laws' : 'law') : (lois > 1 ? 'lois' : 'loi')}` : ''}`;
-  const blocs = [{ leg: cour, pres: presidingShort || (att ? pastillePresence(att.rate, isEn) : (isEn ? 'n/a' : 'n/d')), pl: plTxt(siens.length, siens.filter((b) => b.status === 'sanctionne').length) }];
+  const plTxt = (pl, lois, leg) => lienParrain(name, leg, cour, `${pl} ${isEn ? (pl === 1 ? 'bill sponsored' : 'bills sponsored') : (pl > 1 ? 'PL parrainés' : 'PL parrainé')}${lois ? ` · ${lois} ${isEn ? (lois > 1 ? 'laws' : 'law') : (lois > 1 ? 'lois' : 'loi')}` : ''}`, pl, isEn);
+  const blocs = [{ leg: cour, pres: presidingShort || (att ? pastillePresence(att.rate, isEn) : (isEn ? 'n/a' : 'n/d')), pl: plTxt(siens.length, siens.filter((b) => b.status === 'sanctionne').length, cour) }];
   const nom = norm(name.replace(/\s*\([^)]*\)\s*/g, ''));
   const legs = new Set([...Object.keys(presencesPassees), ...Object.keys(plPasses)]);
   for (const l of [...legs].map(Number).filter((l) => l !== cour).sort((a, b) => b - a)) {
     const taux = dep ? presencesPassees[l]?.[dep.assnatId] : null;
     const pl = plPasses[l]?.[nom];
     if (taux == null && !pl) continue;   // pas élu·e dans cette législature
-    blocs.push({ leg: l, pres: taux != null ? `${taux}${isEn ? '%' : ' %'}` : (isEn ? 'n/a' : 'n/d'), pl: plTxt(pl ? pl[0] : 0, pl ? pl[1] : 0), passe: true });
+    blocs.push({ leg: l, pres: taux != null ? `${taux}${isEn ? '%' : ' %'}` : (isEn ? 'n/a' : 'n/d'), pl: plTxt(pl ? pl[0] : 0, pl ? pl[1] : 0, l), passe: true });
   }
   const fleches = blocs.length > 2;
   return `<div class="leg-ruban" data-debut="0">${fleches ? `<button class="leg-fleche" type="button" aria-label="${isEn ? 'More recent' : 'Plus récente'}" onclick="event.stopPropagation(); defilerLeg(this, -1)">‹</button>` : ''}${blocs.map((b, i) => `<div class="leg-bloc${b.passe ? ' leg-passe' : ''}${i > 1 ? ' leg-cache' : ''}"><div class="leg-num">${ordinalLeg(b.leg, isEn)} ${isEn ? 'Legislature' : 'législature'}</div><div class="leg-pres">${isEn ? 'attendance' : 'présence'} ${b.pres}</div><div>${b.pl}</div></div>`).join('')}${fleches ? `<button class="leg-fleche" type="button" aria-label="${isEn ? 'Earlier' : 'Plus ancienne'}" onclick="event.stopPropagation(); defilerLeg(this, 1)">›</button>` : ''}</div>`;
@@ -5116,17 +5120,27 @@ function ligneLegislatures(name, dep, att, isEn){
   const cour = historiqueLeg.courante || 43;
   const presencesPassees = historiqueLeg.presences || {}, plPasses = historiqueLeg.pl || {};
   const nom = norm(name.replace(/\s*\([^)]*\)\s*/g, ''));
-  const morceaux = [`<span class="leg-seg leg-ligne-cour leg-premier">${ordinalLeg(cour, isEn)} · ${att ? pastillePresence(att.rate, isEn) : (isEn ? 'n/a' : 'n/d')} · ${billsSponsoredBy(name).length} PL</span>`];
+  const morceaux = [`<span class="leg-seg leg-ligne-cour leg-premier">${ordinalLeg(cour, isEn)} · ${att ? pastillePresence(att.rate, isEn) : (isEn ? 'n/a' : 'n/d')} · ${lienParrain(name, cour, cour, `${billsSponsoredBy(name).length} PL`, billsSponsoredBy(name).length, isEn)}</span>`];
   const legs = new Set([...Object.keys(presencesPassees), ...Object.keys(plPasses)]);
   for (const l of [...legs].map(Number).filter((l) => l !== cour).sort((a, b) => b - a)) {
     const taux = dep ? presencesPassees[l]?.[dep.assnatId] : null;
     const pl = plPasses[l]?.[nom];
     if (taux == null && !pl) continue;
-    morceaux.push(`<span class="leg-seg leg-ligne-passe${morceaux.length > 1 ? ' leg-cache' : ''}"><span class="leg-ligne-sep"> | </span>${ordinalLeg(l, isEn)} · ${taux != null ? `${taux}${isEn ? '%' : ' %'}` : (isEn ? 'n/a' : 'n/d')} · ${pl ? pl[0] : 0} PL</span>`);
+    morceaux.push(`<span class="leg-seg leg-ligne-passe${morceaux.length > 1 ? ' leg-cache' : ''}"><span class="leg-ligne-sep"> | </span>${ordinalLeg(l, isEn)} · ${taux != null ? `${taux}${isEn ? '%' : ' %'}` : (isEn ? 'n/a' : 'n/d')} · ${lienParrain(name, l, cour, `${pl ? pl[0] : 0} PL`, pl ? pl[0] : 0, isEn)}</span>`);
   }
   // Plus de deux législatures : une petite flèche fait circuler les plus anciennes (Martin, 30 oct. 2026).
   const fleche = morceaux.length > 2 ? ` <button class="leg-fleche leg-fleche-ligne" type="button" aria-label="${isEn ? 'Other legislatures' : 'Autres législatures'}" onclick="event.stopPropagation(); defilerLeg(this, 1, true)">›</button>` : '';
   return `<span class="leg-ruban leg-ruban-ligne" data-debut="0">${morceaux.join('')}${fleche}</span>`;
+}
+// « 5 PL parrainés » mène à la liste de ces projets, archives comprises (Martin, 30 oct. 2026) :
+// /projets-de-loi?parrain=Nom, ou ?archives=43&parrain=Nom pour une législature terminée.
+function lienParrain(name, leg, cour, texte, nombre, isEn){
+  if(!nombre) return texte;
+  const q = new URLSearchParams();
+  if(leg !== cour) q.set('archives', leg);
+  q.set('parrain', name.replace(/\s*\([^)]*\)\s*/g, ''));
+  if(isEn) q.set('lang', 'en');
+  return `<a class="leg-lien" href="/projets-de-loi?${q}" onclick="event.stopPropagation()">${texte}</a>`;
 }
 function defilerLeg(bouton, sens, enBoucle){
   const ruban = bouton.closest('.leg-ruban');
@@ -5613,6 +5627,7 @@ function retourRecherche(valeur){
   }));
   if(!sansMunicipalite) ajouterMunicipalite(valeur, boite, no);
 }
+try{ const p = new URLSearchParams(location.search).get('parrain'); const sb = document.getElementById('searchBills'); if(p && sb) sb.value = p; }catch(e){}
 document.getElementById('searchBills')?.addEventListener('input', ()=> { billsShown = BILLS_STEP; renderBills(); });
 document.getElementById('searchVotes')?.addEventListener('input', ()=> { votesShown = 6; renderVotes(); });
 
