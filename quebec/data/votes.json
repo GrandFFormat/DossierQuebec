@@ -1,16 +1,16 @@
 {
- "generatedAt": "2026-10-30T15:09:03.222Z",
+ "generatedAt": "2026-10-31T14:38:08.034Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "methode": "Extraction par analyse du texte des résolutions (champ « content » de l'index de la Ville). Les noms sont lus dans les passages « Ont voté en faveur / Ont voté contre ». Chaque vote conserve le texte brut et signale tout écart avec le décompte officiel.",
  "parametres": {
   "annee": "2026",
   "max": 1000,
-  "depuis": "2026-08-31"
+  "depuis": "2026-09-01"
  },
  "totalDisponible": 271,
  "documentsAnalyses": 44,
  "nombre": 271,
- "nouveauxDepuisDerniereExecution": 3,
+ "nouveauxDepuisDerniereExecution": 0,
  "avecAvertissement": 10,
  "themes": {
   "procedure": {
@@ -278,7 +278,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Marie-Josée Asselin, Marie–Pierre Boucher, Marylou Boulianne, Mélissa Coulombe-Leduc, Catherine Deschamps, Elainie Lepage, Catherine Vallières-Roland, Elisa Verreault et Marianne White et messieurs les conseillers Clément Bourdeau, Éric Courtemanche Baril, Maxime Elmaleh, Yannick Fauteux, Claude Lavoie, Jean-Luc Lavoie, Raphaël Lebailly et Raymond Poirier. | Ont voté contre : madame la conseillère Mélanie Sauvé et messieurs les conseillers Stéphane Lachance et Marc Roussin.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
@@ -322,7 +322,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Marie-Josée Asselin, Marie–Pierre Boucher, Marylou Boulianne, Mélissa Coulombe-Leduc, Catherine Deschamps, Elainie Lepage, Catherine Vallières-Roland, Elisa Verreault et Marianne White et messieurs les conseillers Clément Bourdeau, Éric Courtemanche Baril, Maxime Elmaleh, Yannick Fauteux, Claude Lavoie, Jean-Luc Lavoie, Raphaël Lebailly et Raymond Poirier. | Ont voté contre : madame la conseillère Mélanie Sauvé et messieurs les conseillers Stéphane Lachance et Marc Roussin.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -367,7 +367,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : madame la conseillère Mélanie Sauvé et messieurs les conseillers Stéphane Lachance et Marc Roussin. | Ont voté contre : monsieur le maire Bruno Marchand, mesdames les conseillères Marie-Josée Asselin, Marie-Pierre Boucher, Marylou Boulianne, Mélissa Coulombe-Leduc, Catherine Deschamps, Elainie Lepage, Catherine Vallières-Roland, Elisa Verreault et Marianne White et messieurs les conseillers Clément Bourdeau, Éric Courtemanche Baril , Maxime Elmaleh, Yannick Fauteux, Claude Lavoie, Jean-Luc Lavoie, Raphaël Lebailly et Raymond Poirier.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
