@@ -2,7 +2,7 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit db04d33 — Node v22.23.4
+Code : commit f5437de — Node v22.23.4
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -13,14 +13,14 @@ https://donnees.montreal.ca/robots.txt : règles sur nos chemins : disallow /dat
 https://montreal.ca/robots.txt : rien qui concerne nos chemins
 
 === Calendrier des séances ===
-Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-10-30T23:30:52.225626)
+Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-10-31T23:30:49.540882)
 Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_video_seance
 75 séance(s) de 2026 lue(s) dans le calendrier.
 
 75 séance(s) de 2026 dans data/seances.json (0 de plus qu'avant) — CE : 36, CG : 15, CM : 24
 
 === Calendrier des séances d'arrondissement ===
-146 séance(s) de 2026 déjà connue(s).
+147 séance(s) de 2026 déjà connue(s).
     Ahuntsic-Cartierville : 25 document(s) sur sa page, 0 daté(s) aujourd'hui, 10 date(s) de séance connues.
     Ahuntsic-Cartierville : 8 ordre(s) du jour repris de sa page, sommaires compris.
   Ahuntsic-Cartierville                       8 séance(s)  (83 requêtes)
@@ -37,8 +37,8 @@ Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_vide
     Pierrefonds-Roxboro : 26 document(s) sur sa page, 0 daté(s) aujourd'hui, 12 date(s) de séance connues.
     Pierrefonds-Roxboro : 9 ordre(s) du jour repris de sa page, sommaires compris.
   Pierrefonds-Roxboro                         9 séance(s)  (43 requêtes)
-    Le Plateau-Mont-Royal : 17 document(s) sur la page, 1 daté(s) aujourd'hui, 10 séance(s) en 2026.
-  Le Plateau-Mont-Royal                      10 séance(s), 1 nouvelle(s)  (2 requêtes)
+    Le Plateau-Mont-Royal : 17 document(s) sur la page, 0 daté(s) aujourd'hui, 10 séance(s) en 2026.
+  Le Plateau-Mont-Royal                      10 séance(s)  (1 requêtes)
   Rivière-des-Prairies–Pointe-aux-Trembles    8 séance(s)  (82 requêtes)
   Rosemont–La Petite-Patrie                   8 séance(s)  (82 requêtes)
   Saint-Laurent                               8 séance(s)  (84 requêtes)
@@ -48,9 +48,9 @@ Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_vide
   Ville-Marie                                 8 séance(s)  (82 requêtes)
   Villeray–Saint-Michel–Parc-Extension        8 séance(s)  (82 requêtes)
 
-147 séance(s) d'arrondissement pour 2026, en 1904 requête(s).
+147 séance(s) d'arrondissement pour 2026, en 1903 requête(s).
 
-=== Décisions de l'année ===
+=== Décisions de l'année (relecture complète) ===
 147 séance(s) d'arrondissement au calendrier.
 CE_2026-10-28_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CG_2026-10-22_16h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -59,15 +59,187 @@ CM_2026-10-19_13h00 : procès-verbal non publié — pas un PDF — page « 404 
 CE_2026-10-14_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-10-07_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-09-30_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CG_2026-09-24_16h00 : 46 pages, 70 résolutions, 218 points à l'ordre du jour, 67 liens vers un sommaire, 67 sommaires annexés à l'ordre du jour
 CM_2026-09-22_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CM_2026-09-21_13h00 : 89 pages, 115 résolutions, 384 points à l'ordre du jour, 40 liens vers un sommaire, 102 sommaires annexés à l'ordre du jour
 CE_2026-09-16_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CE_2026-09-09_09h00 : 34 pages, 79 résolutions, 110 points à l'ordre du jour, 75 liens vers un sommaire, 75 sommaires annexés à l'ordre du jour
+CE_2026-09-02_09h00 : 12 pages, 28 résolutions, 39 points à l'ordre du jour, 23 liens vers un sommaire, 23 sommaires annexés à l'ordre du jour
+CG_2026-08-27_16h00 : 68 pages, 112 résolutions, 241 points à l'ordre du jour, 106 liens vers un sommaire, 106 sommaires annexés à l'ordre du jour
 CM_2026-08-25_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CM_2026-08-24_13h00 : 149 pages, 187 résolutions, 529 points à l'ordre du jour, 73 liens vers un sommaire, 173 sommaires annexés à l'ordre du jour
+CE_2026-08-19_09h00 : 18 pages, 40 résolutions, 45 points à l'ordre du jour, 27 liens vers un sommaire, 27 sommaires annexés à l'ordre du jour
+CE_2026-08-12_09h00 : 44 pages, 109 résolutions, 161 points à l'ordre du jour, 95 liens vers un sommaire, 95 sommaires annexés à l'ordre du jour
+CE_2026-08-05_09h00 : 41 pages, 92 résolutions, 406 points à l'ordre du jour, 80 liens vers un sommaire, 80 sommaires annexés à l'ordre du jour
+CE_2026-07-02_09h00 : 16 pages, 36 résolutions, 121 points à l'ordre du jour, 32 liens vers un sommaire, 32 sommaires annexés à l'ordre du jour
+CE_2026-06-25_09h00 : 15 pages, 36 résolutions, 41 points à l'ordre du jour, 26 liens vers un sommaire, 26 sommaires annexés à l'ordre du jour
+CG_2026-06-18_16h00 : 56 pages, 89 résolutions, 276 points à l'ordre du jour, 85 liens vers un sommaire, 85 sommaires annexés à l'ordre du jour
 CM_2026-06-16_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CM_2026-06-15_13h00 : 108 pages, 151 résolutions, 425 points à l'ordre du jour, 61 liens vers un sommaire, 135 sommaires annexés à l'ordre du jour
+CE_2026-06-10_09h00 : 34 pages, 71 résolutions, 84 points à l'ordre du jour, 55 liens vers un sommaire, 55 sommaires annexés à l'ordre du jour
+CE_2026-06-03_09h00 : 38 pages, 98 résolutions, 125 points à l'ordre du jour, 84 liens vers un sommaire, 84 sommaires annexés à l'ordre du jour
+CE_2026-05-27_09h00 : 10 pages, 20 résolutions, 37 points à l'ordre du jour, 17 liens vers un sommaire, 17 sommaires annexés à l'ordre du jour
+CE_2026-05-20_09h00 : 13 pages, 35 résolutions, 417 points à l'ordre du jour, 26 liens vers un sommaire, 26 sommaires annexés à l'ordre du jour
+CG_2026-05-19_16h00 : 31 pages, 49 résolutions, 115 points à l'ordre du jour, 47 liens vers un sommaire, 47 sommaires annexés à l'ordre du jour
 CM_2026-05-12_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CM_2026-05-11_13h00 : 73 pages, 88 résolutions, 278 points à l'ordre du jour, 34 liens vers un sommaire, 78 sommaires annexés à l'ordre du jour
+CE_2026-05-06_09h00 : 19 pages, 48 résolutions, 72 points à l'ordre du jour, 42 liens vers un sommaire, 42 sommaires annexés à l'ordre du jour
+CE_2026-04-29_09h00 : 26 pages, 62 résolutions, 84 points à l'ordre du jour, 56 liens vers un sommaire, 56 sommaires annexés à l'ordre du jour
+CG_2026-04-23_16h00 : 30 pages, 46 résolutions, 136 points à l'ordre du jour, 43 liens vers un sommaire, 43 sommaires annexés à l'ordre du jour
+CE_2026-04-22_09h00 : 11 pages, 25 résolutions, 35 points à l'ordre du jour, 20 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour
+CM_2026-04-20_13h00 : 85 pages, 108 résolutions, 408 points à l'ordre du jour, 57 liens vers un sommaire, 101 sommaires annexés à l'ordre du jour
+CE_2026-04-15_09h00 : 17 pages, 39 résolutions, 86 points à l'ordre du jour, 28 liens vers un sommaire, 28 sommaires annexés à l'ordre du jour
+CE_2026-04-08_09h00 : 25 pages, 61 résolutions, 71 points à l'ordre du jour, 55 liens vers un sommaire, 55 sommaires annexés à l'ordre du jour
+CE_2026-04-01_09h00 : 16 pages, 34 résolutions, 47 points à l'ordre du jour, 31 liens vers un sommaire, 31 sommaires annexés à l'ordre du jour
+CG_2026-03-26_16h00 : 46 pages, 79 résolutions, 254 points à l'ordre du jour, 75 liens vers un sommaire, 75 sommaires annexés à l'ordre du jour
+CM_2026-03-23_13h00 : 114 pages, 157 résolutions, 550 points à l'ordre du jour, 76 liens vers un sommaire, 143 sommaires annexés à l'ordre du jour
+CE_2026-03-18_09h00 : 24 pages, 60 résolutions, 240 points à l'ordre du jour, 48 liens vers un sommaire, 48 sommaires annexés à l'ordre du jour
+CE_2026-03-11_09h00 : 44 pages, 108 résolutions, 236 points à l'ordre du jour, 101 liens vers un sommaire, 101 sommaires annexés à l'ordre du jour
+CE_2026-02-25_09h00 : 15 pages, 37 résolutions, 258 points à l'ordre du jour, 28 liens vers un sommaire, 28 sommaires annexés à l'ordre du jour
+CG_2026-02-19_16h00 : 28 pages, 48 résolutions, 128 points à l'ordre du jour, 45 liens vers un sommaire, 45 sommaires annexés à l'ordre du jour
 CM_2026-02-17_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CM_2026-02-16_13h00 : 71 pages, 92 résolutions, 306 points à l'ordre du jour, 41 liens vers un sommaire, 81 sommaires annexés à l'ordre du jour
+CE_2026-02-11_09h00 : 21 pages, 49 résolutions, 58 points à l'ordre du jour, 42 liens vers un sommaire, 43 sommaires annexés à l'ordre du jour
+CE_2026-02-04_09h00 : 30 pages, 73 résolutions, 168 points à l'ordre du jour, 66 liens vers un sommaire, 66 sommaires annexés à l'ordre du jour
+CG_2026-01-29_16h00 : 29 pages, 50 résolutions, 267 points à l'ordre du jour, 46 liens vers un sommaire, 46 sommaires annexés à l'ordre du jour
+CG_2026-01-29_09h30 : 13 pages, 18 résolutions, 20 points à l'ordre du jour, 16 liens vers un sommaire, 16 sommaires annexés à l'ordre du jour
+CM_2026-01-28_09h30 : 50 pages, 32 résolutions, 34 points à l'ordre du jour, 14 liens vers un sommaire, 30 sommaires annexés à l'ordre du jour
 CM_2026-01-27_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CM_2026-01-26_13h00 : 70 pages, 90 résolutions, 568 points à l'ordre du jour, 36 liens vers un sommaire, 80 sommaires annexés à l'ordre du jour
+CE_2026-01-21_09h00 : 16 pages, 40 résolutions, 53 points à l'ordre du jour, 36 liens vers un sommaire, 36 sommaires annexés à l'ordre du jour
+CE_2026-01-14_09h00 : 22 pages, 55 résolutions, 221 points à l'ordre du jour, 49 liens vers un sommaire, 49 sommaires annexés à l'ordre du jour
+CG_2026-01-12_19h00 : 11 pages, 17 résolutions, 19 points à l'ordre du jour, 15 liens vers un sommaire, 15 sommaires annexés à l'ordre du jour
+CM_2026-01-12_13h00 : 13 pages, 16 résolutions, 18 points à l'ordre du jour, 14 liens vers un sommaire, 14 sommaires annexés à l'ordre du jour
+CE_2026-01-07_09h00 : 9 pages, 25 résolutions, 251 points à l'ordre du jour, 20 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour
+CA_Slt_2026-01-06_19h30 : 19 pages, 30 résolutions, 30 points à l'ordre du jour, 0 liens vers un sommaire
+CA_Pir_2026-01-12_19h00 : 21 pages, 21 résolutions, 22 points à l'ordre du jour, 16 liens vers un sommaire, 17 sommaires annexés à l'ordre du jour
+CA_Anj_2026-01-13_19h00 : 10 pages, 17 résolutions, 62 points à l'ordre du jour, 14 liens vers un sommaire, 14 sommaires annexés à l'ordre du jour
+CA_Cdn_2026-02-02_19h00 : 26 pages, 31 résolutions, 80 points à l'ordre du jour, 28 liens vers un sommaire, 29 sommaires annexés à l'ordre du jour
+CA_Lac_2026-02-02_19h00 : 14 pages, 25 résolutions, 23 points à l'ordre du jour, 14 liens vers un sommaire, 14 sommaires annexés à l'ordre du jour
+CA_Las_2026-02-02_19h00 : 17 pages, 50 résolutions, 52 points à l'ordre du jour, 41 liens vers un sommaire, 35 sommaires annexés à l'ordre du jour
+CA_Mhm_2026-02-02_18h30 : 14 pages, 23 résolutions, 28 points à l'ordre du jour, 19 liens vers un sommaire, 19 sommaires annexés à l'ordre du jour
+CA_Pir_2026-02-02_19h00 : 24 pages, 25 résolutions, 26 points à l'ordre du jour, 21 liens vers un sommaire, 21 sommaires annexés à l'ordre du jour
+CA_Pmr_2026-02-02_18h30 : 24 pages, 37 résolutions, 40 points à l'ordre du jour, 33 liens vers un sommaire, 33 sommaires annexés à l'ordre du jour
+CA_Rpp_2026-02-02_19h00 : 9 pages, 19 résolutions, 0 points à l'ordre du jour, 17 liens vers un sommaire, 17 sommaires annexés à l'ordre du jour
+CA_Sld_2026-02-02_19h00 : 15 pages, 31 résolutions, 26 points à l'ordre du jour, 27 liens vers un sommaire, 22 sommaires annexés à l'ordre du jour
+CA_Anj_2026-02-03_19h00 : 6 pages, 10 résolutions, 41 points à l'ordre du jour, 7 liens vers un sommaire, 7 sommaires annexés à l'ordre du jour
+CA_Ibs_2026-02-03_19h30 : 12 pages, 22 résolutions, 28 points à l'ordre du jour, 19 liens vers un sommaire, 19 sommaires annexés à l'ordre du jour
+CA_Out_2026-02-03_19h00 : 18 pages, 24 résolutions, 28 points à l'ordre du jour, 20 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour
+CA_Rdp_2026-02-03_19h00 : 23 pages, 35 résolutions, 37 points à l'ordre du jour, 28 liens vers un sommaire, 24 sommaires annexés à l'ordre du jour
+CA_Slt_2026-02-03_19h30 : 17 pages, 35 résolutions, 34 points à l'ordre du jour, 0 liens vers un sommaire
+CA_Ver_2026-02-03_19h00 : 22 pages, 31 résolutions, 39 points à l'ordre du jour, 23 liens vers un sommaire, 23 sommaires annexés à l'ordre du jour
+CA_Vsm_2026-02-03_18h30 : 11 pages, 16 résolutions, 111 points à l'ordre du jour, 10 liens vers un sommaire, 10 sommaires annexés à l'ordre du jour
+CA_Ahu_2026-02-09_19h00 : 17 pages, 29 résolutions, 36 points à l'ordre du jour, 24 liens vers un sommaire, 24 sommaires annexés à l'ordre du jour
+CA_Mtn_2026-02-09_19h00 : 22 pages, 33 résolutions, 38 points à l'ordre du jour, 23 liens vers un sommaire, 25 sommaires annexés à l'ordre du jour
+CA_Sud_2026-02-09_19h00 : 12 pages, 23 résolutions, 29 points à l'ordre du jour, 18 liens vers un sommaire, 18 sommaires annexés à l'ordre du jour
+CA_Vma_2026-02-10_18h30 : 30 pages, 51 résolutions, 99 points à l'ordre du jour, 44 liens vers un sommaire, 46 sommaires annexés à l'ordre du jour
+CA_Lac_2026-03-02_19h00 : 12 pages, 23 résolutions, 25 points à l'ordre du jour, 18 liens vers un sommaire, 19 sommaires annexés à l'ordre du jour
+CA_Las_2026-03-02_19h00 : 17 pages, 47 résolutions, 48 points à l'ordre du jour, 38 liens vers un sommaire, 37 sommaires annexés à l'ordre du jour
+CA_Anj_2026-03-03_19h00 : 16 pages, 30 résolutions, 73 points à l'ordre du jour, 27 liens vers un sommaire, 26 sommaires annexés à l'ordre du jour
+CA_Cdn_2026-03-09_19h00 : 26 pages, 39 résolutions, 94 points à l'ordre du jour, 35 liens vers un sommaire, 35 sommaires annexés à l'ordre du jour
+CA_Mhm_2026-03-09_18h30 : 34 pages, 41 résolutions, 46 points à l'ordre du jour, 37 liens vers un sommaire, 37 sommaires annexés à l'ordre du jour
+CA_Mtn_2026-03-09_19h00 : 20 pages, 31 résolutions, 33 points à l'ordre du jour, 29 liens vers un sommaire, 29 sommaires annexés à l'ordre du jour
+CA_Pir_2026-03-09_19h00 : 26 pages, 28 résolutions, 29 points à l'ordre du jour, 24 liens vers un sommaire, 24 sommaires annexés à l'ordre du jour
+CA_Pmr_2026-03-09_18h30 : 27 pages, 36 résolutions, 39 points à l'ordre du jour, 32 liens vers un sommaire, 32 sommaires annexés à l'ordre du jour
+CA_Rpp_2026-03-09_19h00 : 11 pages, 24 résolutions, 0 points à l'ordre du jour, 22 liens vers un sommaire, 22 sommaires annexés à l'ordre du jour
+CA_Sld_2026-03-09_19h00 : 18 pages, 35 résolutions, 34 points à l'ordre du jour, 31 liens vers un sommaire, 30 sommaires annexés à l'ordre du jour
+CA_Sud_2026-03-09_19h00 : 11 pages, 23 résolutions, 27 points à l'ordre du jour, 16 liens vers un sommaire, 16 sommaires annexés à l'ordre du jour
+CA_Ibs_2026-03-10_19h30 : 7 pages, 13 résolutions, 19 points à l'ordre du jour, 11 liens vers un sommaire, 11 sommaires annexés à l'ordre du jour
+CA_Out_2026-03-10_19h00 : 12 pages, 18 résolutions, 22 points à l'ordre du jour, 15 liens vers un sommaire, 15 sommaires annexés à l'ordre du jour
+CA_Rdp_2026-03-10_19h00 : 22 pages, 30 résolutions, 32 points à l'ordre du jour, 26 liens vers un sommaire, 26 sommaires annexés à l'ordre du jour
+CA_Ver_2026-03-10_19h00 : 21 pages, 25 résolutions, 32 points à l'ordre du jour, 19 liens vers un sommaire, 19 sommaires annexés à l'ordre du jour
+CA_Vma_2026-03-10_18h30 : 33 pages, 62 résolutions, 134 points à l'ordre du jour, 53 liens vers un sommaire, 54 sommaires annexés à l'ordre du jour
+CA_Vsm_2026-03-10_18h30 : 22 pages, 42 résolutions, 133 points à l'ordre du jour, 35 liens vers un sommaire, 35 sommaires annexés à l'ordre du jour
+CA_Ahu_2026-03-16_19h00 : 21 pages, 39 résolutions, 47 points à l'ordre du jour, 36 liens vers un sommaire, 37 sommaires annexés à l'ordre du jour
+CA_Pmr_2026-03-20_09h30 : 4 pages, 6 résolutions, 9 points à l'ordre du jour, 4 liens vers un sommaire, 4 sommaires annexés à l'ordre du jour
+CA_Anj_2026-04-07_19h00 : 22 pages, 32 résolutions, 101 points à l'ordre du jour, 29 liens vers un sommaire, 27 sommaires annexés à l'ordre du jour
+CA_Ibs_2026-04-07_19h30 : 12 pages, 18 résolutions, 24 points à l'ordre du jour, 16 liens vers un sommaire, 16 sommaires annexés à l'ordre du jour
+CA_Lac_2026-04-07_19h00 : 13 pages, 25 résolutions, 26 points à l'ordre du jour, 21 liens vers un sommaire, 21 sommaires annexés à l'ordre du jour
+CA_Rdp_2026-04-07_19h00 : 18 pages, 27 résolutions, 28 points à l'ordre du jour, 23 liens vers un sommaire, 23 sommaires annexés à l'ordre du jour
+CA_Rpp_2026-04-07_19h00 : 10 pages, 18 résolutions, 0 points à l'ordre du jour, 15 liens vers un sommaire, 15 sommaires annexés à l'ordre du jour
+CA_Sld_2026-04-07_19h00 : 16 pages, 30 résolutions, 30 points à l'ordre du jour, 26 liens vers un sommaire, 26 sommaires annexés à l'ordre du jour
+CA_Slt_2026-04-07_19h30 : 29 pages, 52 résolutions, 53 points à l'ordre du jour, 0 liens vers un sommaire
 CA_Ver_2026-04-07_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Vsm_2026-04-07_18h30 : 20 pages, 33 résolutions, 158 points à l'ordre du jour, 25 liens vers un sommaire, 25 sommaires annexés à l'ordre du jour
+CA_Out_2026-04-09_19h00 : 24 pages, 41 résolutions, 43 points à l'ordre du jour, 36 liens vers un sommaire, 35 sommaires annexés à l'ordre du jour
+CA_Ahu_2026-04-13_19h00 : 20 pages, 36 résolutions, 44 points à l'ordre du jour, 0 liens vers un sommaire
+CA_Cdn_2026-04-13_19h00 : 20 pages, 27 résolutions, 76 points à l'ordre du jour, 24 liens vers un sommaire, 24 sommaires annexés à l'ordre du jour
+CA_Las_2026-04-13_19h00 : 16 pages, 46 résolutions, 47 points à l'ordre du jour, 35 liens vers un sommaire, 34 sommaires annexés à l'ordre du jour
+CA_Mhm_2026-04-13_18h30 : 31 pages, 31 résolutions, 35 points à l'ordre du jour, 24 liens vers un sommaire, 24 sommaires annexés à l'ordre du jour
+CA_Mtn_2026-04-13_19h00 : 30 pages, 51 résolutions, 55 points à l'ordre du jour, 46 liens vers un sommaire, 46 sommaires annexés à l'ordre du jour
+CA_Pir_2026-04-13_19h00 : 27 pages, 31 résolutions, 31 points à l'ordre du jour, 26 liens vers un sommaire, 24 sommaires annexés à l'ordre du jour
+CA_Pmr_2026-04-13_18h30 : 21 pages, 30 résolutions, 32 points à l'ordre du jour, 25 liens vers un sommaire, 25 sommaires annexés à l'ordre du jour
+CA_Sud_2026-04-13_19h00 : 10 pages, 19 résolutions, 26 points à l'ordre du jour, 16 liens vers un sommaire, 16 sommaires annexés à l'ordre du jour
+CA_Vma_2026-04-14_18h30 : 33 pages, 60 résolutions, 124 points à l'ordre du jour, 50 liens vers un sommaire, 51 sommaires annexés à l'ordre du jour
+CA_Ahu_2026-05-04_19h00 : 16 pages, 27 résolutions, 36 points à l'ordre du jour, 0 liens vers un sommaire
+CA_Cdn_2026-05-04_18h30 : 17 pages, 21 résolutions, 64 points à l'ordre du jour, 18 liens vers un sommaire, 18 sommaires annexés à l'ordre du jour
+CA_Lac_2026-05-04_19h00 : 12 pages, 23 résolutions, 24 points à l'ordre du jour, 16 liens vers un sommaire, 16 sommaires annexés à l'ordre du jour
+CA_Las_2026-05-04_19h00 : 19 pages, 40 résolutions, 40 points à l'ordre du jour, 34 liens vers un sommaire, 34 sommaires annexés à l'ordre du jour
+CA_Mhm_2026-05-04_18h30 : 22 pages, 34 résolutions, 39 points à l'ordre du jour, 30 liens vers un sommaire, 30 sommaires annexés à l'ordre du jour
+CA_Mtn_2026-05-04_19h00 : 23 pages, 39 résolutions, 42 points à l'ordre du jour, 36 liens vers un sommaire, 36 sommaires annexés à l'ordre du jour
+CA_Pir_2026-05-04_19h00 : 17 pages, 20 résolutions, 20 points à l'ordre du jour, 15 liens vers un sommaire, 15 sommaires annexés à l'ordre du jour
+CA_Pmr_2026-05-04_16h00 : 24 pages, 34 résolutions, 37 points à l'ordre du jour, 30 liens vers un sommaire, 30 sommaires annexés à l'ordre du jour
+CA_Rpp_2026-05-04_19h00 : 13 pages, 23 résolutions, 0 points à l'ordre du jour, 20 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour
+CA_Sld_2026-05-04_19h00 : 15 pages, 32 résolutions, 31 points à l'ordre du jour, 28 liens vers un sommaire, 27 sommaires annexés à l'ordre du jour
+CA_Sud_2026-05-04_19h00 : 11 pages, 21 résolutions, 28 points à l'ordre du jour, 18 liens vers un sommaire, 18 sommaires annexés à l'ordre du jour
+CA_Anj_2026-05-05_19h00 : 18 pages, 26 résolutions, 89 points à l'ordre du jour, 22 liens vers un sommaire, 22 sommaires annexés à l'ordre du jour
+CA_Ibs_2026-05-05_19h30 : 12 pages, 22 résolutions, 28 points à l'ordre du jour, 20 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour
+CA_Out_2026-05-05_19h00 : 21 pages, 32 résolutions, 36 points à l'ordre du jour, 28 liens vers un sommaire, 28 sommaires annexés à l'ordre du jour
+CA_Rdp_2026-05-05_19h00 : 18 pages, 34 résolutions, 37 points à l'ordre du jour, 30 liens vers un sommaire, 29 sommaires annexés à l'ordre du jour
+CA_Slt_2026-05-05_19h30 : 35 pages, 38 résolutions, 38 points à l'ordre du jour, 0 liens vers un sommaire
+CA_Ver_2026-05-05_19h00 : 11 pages, 20 résolutions, 27 points à l'ordre du jour, 16 liens vers un sommaire, 16 sommaires annexés à l'ordre du jour
+CA_Vma_2026-05-05_18h30 : 31 pages, 57 résolutions, 124 points à l'ordre du jour, 44 liens vers un sommaire, 50 sommaires annexés à l'ordre du jour
+CA_Vsm_2026-05-05_18h30 : 15 pages, 25 résolutions, 128 points à l'ordre du jour, 17 liens vers un sommaire, 17 sommaires annexés à l'ordre du jour
+CA_Cdn_2026-06-01_18h30 : 23 pages, 26 résolutions, 70 points à l'ordre du jour, 23 liens vers un sommaire, 23 sommaires annexés à l'ordre du jour
+CA_Lac_2026-06-01_19h00 : 15 pages, 26 résolutions, 26 points à l'ordre du jour, 18 liens vers un sommaire, 18 sommaires annexés à l'ordre du jour
+CA_Las_2026-06-01_19h00 : 17 pages, 36 résolutions, 36 points à l'ordre du jour, 27 liens vers un sommaire, 27 sommaires annexés à l'ordre du jour
+CA_Mhm_2026-06-01_18h30 : 18 pages, 25 résolutions, 29 points à l'ordre du jour, 20 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour
+CA_Pir_2026-06-01_19h00 : 18 pages, 17 résolutions, 18 points à l'ordre du jour, 13 liens vers un sommaire, 13 sommaires annexés à l'ordre du jour
+CA_Pmr_2026-06-01_18h30 : 22 pages, 28 résolutions, 31 points à l'ordre du jour, 25 liens vers un sommaire, 25 sommaires annexés à l'ordre du jour
+CA_Sld_2026-06-01_19h00 : 23 pages, 34 résolutions, 33 points à l'ordre du jour, 30 liens vers un sommaire, 29 sommaires annexés à l'ordre du jour
+CA_Anj_2026-06-02_19h00 : 21 pages, 29 résolutions, 100 points à l'ordre du jour, 25 liens vers un sommaire, 25 sommaires annexés à l'ordre du jour
+CA_Ibs_2026-06-02_19h30 : 13 pages, 24 résolutions, 29 points à l'ordre du jour, 0 liens vers un sommaire
+CA_Out_2026-06-02_19h00 : 20 pages, 28 résolutions, 33 points à l'ordre du jour, 22 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour
+CA_Rdp_2026-06-02_19h00 : 22 pages, 39 résolutions, 41 points à l'ordre du jour, 33 liens vers un sommaire, 32 sommaires annexés à l'ordre du jour
+CA_Slt_2026-06-02_19h30 : 16 pages, 30 résolutions, 30 points à l'ordre du jour, 0 liens vers un sommaire
+CA_Ver_2026-06-02_19h00 : 15 pages, 23 résolutions, 31 points à l'ordre du jour, 18 liens vers un sommaire, 18 sommaires annexés à l'ordre du jour
+CA_Vsm_2026-06-02_18h30 : 15 pages, 24 résolutions, 57 points à l'ordre du jour, 16 liens vers un sommaire, 16 sommaires annexés à l'ordre du jour
+CA_Ahu_2026-06-08_19h00 : 28 pages, 46 résolutions, 55 points à l'ordre du jour, 42 liens vers un sommaire, 42 sommaires annexés à l'ordre du jour
+CA_Mtn_2026-06-08_19h00 : 23 pages, 36 résolutions, 39 points à l'ordre du jour, 31 liens vers un sommaire, 32 sommaires annexés à l'ordre du jour
+CA_Rpp_2026-06-08_19h00 : 19 pages, 36 résolutions, 0 points à l'ordre du jour, 33 liens vers un sommaire, 33 sommaires annexés à l'ordre du jour
+CA_Sud_2026-06-08_19h00 : 13 pages, 26 résolutions, 30 points à l'ordre du jour, 21 liens vers un sommaire, 21 sommaires annexés à l'ordre du jour
+CA_Vma_2026-06-09_18h30 : 30 pages, 58 résolutions, 125 points à l'ordre du jour, 48 liens vers un sommaire, 49 sommaires annexés à l'ordre du jour
+CA_Ahu_2026-07-06_19h00 : 26 pages, 44 résolutions, 49 points à l'ordre du jour, 0 liens vers un sommaire
+CA_Cdn_2026-07-06_18h30 : 30 pages, 31 résolutions, 80 points à l'ordre du jour, 28 liens vers un sommaire, 28 sommaires annexés à l'ordre du jour
+CA_Lac_2026-07-06_19h00 : 18 pages, 32 résolutions, 31 points à l'ordre du jour, 24 liens vers un sommaire, 24 sommaires annexés à l'ordre du jour
+CA_Las_2026-07-06_19h00 : 26 pages, 47 résolutions, 48 points à l'ordre du jour, 37 liens vers un sommaire, 36 sommaires annexés à l'ordre du jour
+CA_Pmr_2026-07-06_18h30 : 22 pages, 31 résolutions, 34 points à l'ordre du jour, 27 liens vers un sommaire, 27 sommaires annexés à l'ordre du jour
+CA_Rpp_2026-07-06_19h00 : 15 pages, 26 résolutions, 0 points à l'ordre du jour, 23 liens vers un sommaire, 23 sommaires annexés à l'ordre du jour
+CA_Sld_2026-07-06_19h00 : 27 pages, 39 résolutions, 39 points à l'ordre du jour, 35 liens vers un sommaire, 35 sommaires annexés à l'ordre du jour
+CA_Ibs_2026-07-07_19h30 : 11 pages, 19 résolutions, 25 points à l'ordre du jour, 0 liens vers un sommaire
+CA_Out_2026-07-07_19h00 : 17 pages, 27 résolutions, 31 points à l'ordre du jour, 24 liens vers un sommaire, 23 sommaires annexés à l'ordre du jour
+CA_Rdp_2026-07-07_19h00 : 22 pages, 37 résolutions, 41 points à l'ordre du jour, 33 liens vers un sommaire, 31 sommaires annexés à l'ordre du jour
+CA_Vma_2026-07-07_18h30 : 31 pages, 56 résolutions, 123 points à l'ordre du jour, 40 liens vers un sommaire, 47 sommaires annexés à l'ordre du jour
+CA_Vsm_2026-07-07_18h30 : 23 pages, 40 résolutions, 157 points à l'ordre du jour, 36 liens vers un sommaire, 37 sommaires annexés à l'ordre du jour
+CA_Sud_2026-07-13_19h00 : 12 pages, 26 résolutions, 28 points à l'ordre du jour, 20 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour
+CA_Las_2026-08-03_19h00 : 14 pages, 37 résolutions, 39 points à l'ordre du jour, 30 liens vers un sommaire, 30 sommaires annexés à l'ordre du jour
+CA_Pir_2026-08-03_19h00 : 33 pages, 32 résolutions, 32 points à l'ordre du jour, 27 liens vers un sommaire, 27 sommaires annexés à l'ordre du jour
+CA_Anj_2026-08-04_19h00 : 16 pages, 25 résolutions, 86 points à l'ordre du jour, 19 liens vers un sommaire, 20 sommaires annexés à l'ordre du jour
+CA_Slt_2026-08-04_19h30 : 10 pages, 19 résolutions, 19 points à l'ordre du jour, 0 liens vers un sommaire
+CA_Anj_2026-09-01_19h00 : 14 pages, 21 résolutions, 67 points à l'ordre du jour, 18 liens vers un sommaire, 18 sommaires annexés à l'ordre du jour
+CA_Ibs_2026-09-01_19h30 : 17 pages, 32 résolutions, 39 points à l'ordre du jour, 30 liens vers un sommaire, 31 sommaires annexés à l'ordre du jour
+CA_Lac_2026-09-01_19h00 : 17 pages, 30 résolutions, 31 points à l'ordre du jour, 23 liens vers un sommaire, 23 sommaires annexés à l'ordre du jour
+CA_Out_2026-09-01_19h00 : 17 pages, 30 résolutions, 34 points à l'ordre du jour, 27 liens vers un sommaire, 27 sommaires annexés à l'ordre du jour
+CA_Rdp_2026-09-01_19h00 : 18 pages, 28 résolutions, 31 points à l'ordre du jour, 21 liens vers un sommaire, 21 sommaires annexés à l'ordre du jour
+CA_Slt_2026-09-01_19h30 : 21 pages, 27 résolutions, 27 points à l'ordre du jour, 0 liens vers un sommaire
+CA_Ver_2026-09-01_19h00 : 13 pages, 20 résolutions, 26 points à l'ordre du jour, 15 liens vers un sommaire, 15 sommaires annexés à l'ordre du jour
+CA_Vma_2026-09-01_18h30 : 22 pages, 41 résolutions, 91 points à l'ordre du jour, 34 liens vers un sommaire, 34 sommaires annexés à l'ordre du jour
+CA_Vsm_2026-09-01_18h30 : 18 pages, 30 résolutions, 195 points à l'ordre du jour, 17 liens vers un sommaire, 19 sommaires annexés à l'ordre du jour
+CA_Pmr_2026-09-08_18h30 : 26 pages, 36 résolutions, 37 points à l'ordre du jour, 29 liens vers un sommaire, 29 sommaires annexés à l'ordre du jour
 CA_Rpp_2026-09-08_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Ahu_2026-09-14_19h00 : 22 pages, 33 résolutions, 43 points à l'ordre du jour, 31 liens vers un sommaire, 32 sommaires annexés à l'ordre du jour
+CA_Las_2026-09-14_19h00 : 18 pages, 33 résolutions, 34 points à l'ordre du jour, 23 liens vers un sommaire, 23 sommaires annexés à l'ordre du jour
+CA_Pir_2026-09-14_19h00 : 17 pages, 19 résolutions, 19 points à l'ordre du jour, 16 liens vers un sommaire, 14 sommaires annexés à l'ordre du jour
 CA_Ahu_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Anj_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Cdn_2026-10-06_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -80,12 +252,13 @@ CA_Pir_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 
 CA_Pmr_2026-10-06_18h35 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Rdp_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Rpp_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Sld_2026-10-06_19h00 : 12 pages, 20 résolutions, 20 points à l'ordre du jour, 16 liens vers un sommaire, 16 sommaires annexés à l'ordre du jour
 CA_Slt_2026-10-06_19h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Ver_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Vsm_2026-10-06_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Vma_2026-10-13_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 
-7254 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 32 en attente de procès-verbal.
+7254 décisions écrites dans data/decisions.json — 173 séance(s) lue(s) cette fois, 32 en attente de procès-verbal.
 0 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
@@ -108,40 +281,39 @@ Pastilles thématiques :
      99  Ressources humaines
     230  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes enregistrés (depuis 2026-09-01) ===
-Fenêtre depuis 2026-09-01 : 4 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
+=== Votes enregistrés (année complète) ===
 
-17 votes enregistrés écrits dans data/votes.json (4 procès-verbaux analysés).
+17 votes enregistrés écrits dans data/votes.json (45 procès-verbaux analysés).
 2 portent un avertissement d'extraction (à vérifier à la main).
 
 === Lexique, mesuré sur les procès-verbaux ===
 Mesure de 33 termes sur 172 procès-verbaux de 2026 en cache et 7254 décisions…
 
-    99 PV    3604 résolutions   Résolution
+    99 PV    3606 résolutions   Résolution
     73 PV     474 résolutions   Sommaire décisionnel
    172 PV    6016 résolutions   Dossier décisionnel
    172 PV     441 résolutions   Procès-verbal
-   172 PV     745 résolutions   Ordre du jour
-   137 PV     508 résolutions   Avis de motion
+   172 PV     757 résolutions   Ordre du jour
+   137 PV     509 résolutions   Avis de motion
     80 PV     227 résolutions   Règlement
-   103 PV    1347 résolutions   Conseil municipal
+   104 PV    1347 résolutions   Conseil municipal
     74 PV    1520 résolutions   Comité exécutif
    151 PV    2293 résolutions   Conseil d'arrondissement
     79 PV      78 résolutions   Conseiller d'arrondissement
-    53 PV     168 résolutions   Greffier
-    26 PV     179 résolutions   Présidence du conseil
-    57 PV    1379 résolutions   Conseil d'agglomération
+    53 PV     169 résolutions   Greffier
+    27 PV     179 résolutions   Présidence du conseil
+    57 PV    1381 résolutions   Conseil d'agglomération
     25 PV      33 résolutions   Ville liée
      9 PV      12 résolutions   Compétence d'agglomération
     22 PV     161 résolutions   Vote enregistré
-   141 PV    5552 résolutions   Adoptée à l'unanimité
+   141 PV    5554 résolutions   Adoptée à l'unanimité
     25 PV      41 résolutions   Adoptée à la majorité des voix
     10 PV      13 résolutions   Dissidence
    101 PV     244 résolutions   Prise d’acte
     50 PV      87 résolutions   Mairesse suppléante
     77 PV     138 résolutions   Dérogation mineure
     58 PV     102 résolutions   Projet particulier
-     5 PV       5 résolutions   Article 89
+     6 PV       5 résolutions   Article 89
     92 PV     284 résolutions   Zonage
     67 PV     373 résolutions   Accorder un contrat
    146 PV     857 résolutions   Appel d'offres
@@ -154,17 +326,22 @@ Mesure de 33 termes sur 172 procès-verbaux de 2026 en cache et 7254 décisions�
 33 entrées écrites dans data/lexique.json
 
 === Récapitulatifs des sujets suivables ===
-Récapitulatifs des sujets : rien de nouveau.
+Récapitulatifs des sujets : namur-hippodrome (14 dossiers), grand-parc-ouest (14 dossiers), parcs (37 dossiers), transport-collectif (46 dossiers)
+  namur-hippodrome         5 étape(s), 4 à surveiller · retirés : 1 mécanique, 2 contre-lecture
+  grand-parc-ouest         5 étape(s), 4 à surveiller · retirés : 0 mécanique, 1 contre-lecture
+  parcs                    4 étape(s), 6 à surveiller · retirés : 1 mécanique, 3 contre-lecture
+  transport-collectif      1 étape(s), 5 à surveiller · retirés : 0 mécanique, 6 contre-lecture · INUTILISABLE
+  coût ≈ 1.95 $ US
 
 === Sujets suivables et dossiers, pour Mes dossiers ===
-Projets publics : 16 sujets · index 17.7 Ko · fichiers de sujet 907 Ko au total.
-Décisions récentes : 900 dossiers depuis le 2026-08-22 · 1429 Ko.
+Projets publics : 16 sujets · index 17.4 Ko · fichiers de sujet 903 Ko au total.
+Décisions récentes : 900 dossiers depuis le 2026-08-22 · 1431 Ko.
 Dossiers de l'année : 5617 · 3296 Ko · organismes suggérés : 533.
 
 === Sujets suivables en anglais ===
-Sujets en anglais : 0 déjà traduits, 16 à faire — ~0.27 $ US estimés.
-Sujets en anglais : 15 traduits (1 refusés), 15 au total — 0.30 $ US.
-  ⚠ logement : 2219 étapes au lieu de 5
+Sujets en anglais : 0 déjà traduits, 16 à faire — ~0.25 $ US estimés.
+Sujets en anglais : 15 traduits (1 refusés), 15 au total — 0.29 $ US.
+  ⚠ logement : 2240 étapes au lieu de 5
 
 === Lexique en anglais ===
 Lexique anglais : à jour.
@@ -174,7 +351,7 @@ Résumés : 3753 déjà traduits, 783 à faire, 783 cette fois.
 Titres  : 6078 déjà traduits, 762 à faire, 762 cette fois en 39 paquet(s).
 Étiquettes : 1121 déjà traduites, 184 à faire en 7 paquet(s).
 ~2.35 $ US estimés (lot, moitié prix).
-Lot msgbatch_01WoiGijKre3sEjPa8j2KW7A envoyé (783 résumés, 39 paquets de titres, 7 paquets d'étiquettes).
+Lot msgbatch_01Vi9CrP5GKE2gio4swSdu9Y envoyé (783 résumés, 39 paquets de titres, 7 paquets d'étiquettes).
   in_progress — 0 réussis, 829 en cours, 0 en erreur
   in_progress — 0 réussis, 829 en cours, 0 en erreur
   in_progress — 0 réussis, 829 en cours, 0 en erreur
@@ -197,15 +374,31 @@ Node.js v22.23.4
 ⚠ « Traductions anglaises » a échoué (code 1) — on garde les données précédentes, ça attendra.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-09-01 pas encore résumés (plafond : 120)…
-8788 déjà résumés, 0 à faire.
-Rien à générer. (--force pour tout regénérer.)
+Sommaires depuis 2026-09-02 pas encore résumés (plafond : 120)…
+8788 déjà résumés, 1 à faire.
+
+--- Estimation ---
+Documents à résumer  : 1
+Modèle               : claude-opus-5
+Ratio mesuré         : 0.33 caractères/jeton (sur 1 documents)
+Jetons d'entrée      : ~2 019
+Jetons de sortie     : ~320
+Coût estimé          : ~0.02 $ US (0.01 $ via l'API Batches)
+
+Génération…
+Envoi à l'API Batches (50 % du tarif, résultats en moins d'une heure en général)…
+Lot msgbatch_01YZVv6PSuvMf9EvQoarGxjT — statut in_progress
+  in_progress — 0 réussis, 1 en cours, 0 en erreur
+  in_progress — 0 réussis, 1 en cours, 0 en erreur
+  ended — 1 réussis, 0 en cours, 0 en erreur
+
+1 résumés générés, 8789 au total dans data/resumes.json
+Coût réel : 0.01 $ US
 
 === Décisions récentes dans la page (Google) ===
-montreal : 30 décisions écrites dans la page des décisions (inchangé).
+montreal : 30 décisions écrites dans la page des décisions.
 
 === Courriels de Montréal publiés ===
---mois=2026-09 → Déjà publié : 2026-09. Rien à faire.
 
 === Bilan ===
   étapes         : 15
