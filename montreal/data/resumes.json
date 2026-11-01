@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-23T14:41:41.616Z",
+ "generatedAt": "2026-11-01T17:02:41.044Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel quand il est publié (source « sommaire »), sinon du texte de la résolution elle-même (source « resolution »), sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,17 +7,17 @@
   "annee": "2026",
   "max": 40,
   "batch": true,
-  "depuis": "2026-08-24",
+  "depuis": "2026-09-02",
   "plafond": 120
  },
- "nombre": 8788,
- "genereCetteFois": 95,
+ "nombre": 8789,
+ "genereCetteFois": 1,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 1.2381,
-  "jetonsEntree": 316020,
-  "jetonsSortie": 35847
+  "montant": 0.0077,
+  "jetonsEntree": 2019,
+  "jetonsSortie": 212
  },
  "resumes": [
   {
@@ -825,6 +825,29 @@
    "jetons": {
     "entree": 7814,
     "sortie": 595
+   }
+  },
+  {
+   "id": "CG26 0511",
+   "numero": null,
+   "resolution": "CG26 0511",
+   "date": "2026-09-24",
+   "unite": "Service du greffe",
+   "objet": "Dépôt du rapport de la Commission sur les finances et l'administration intitulé « Étude du rapport annuel de la vérificatrice générale de la Ville de Montréal pour l'exercice terminé le 31 décembre 2025 - Rapport et recommandations » Le porte-parole d’assemblée, Dimitrios (Jim) Beis, dépose le rapport de la Commission sur les finances et l’administration intitulé « Étude du rapport annuel de la vérificatrice générale de la Ville de Montréal pour l’exercice financier terminé le 31 décembre 2025 – Rapport et recommandations », et le conseil en prend acte.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-09-24_16h00_FR.pdf#page=7",
+   "source": "resolution",
+   "puces": [
+    "Le conseil prend acte du dépôt d'un rapport de la Commission sur les finances et l'administration portant sur le rapport annuel de la vérificatrice générale pour l'exercice terminé le 31 décembre 2025.",
+    "Aucune mesure ni somme n'est décidée : le document se limite au dépôt du rapport et de ses recommandations."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-01T17:02:41.042Z",
+   "jetons": {
+    "entree": 2019,
+    "sortie": 212
    }
   },
   {
