@@ -1,72 +1,72 @@
 {
- "generatedAt": "2026-11-01T16:14:48.528Z",
+ "generatedAt": "2026-11-02T19:44:00.679Z",
  "source": "https://ville.montreal.qc.ca/documents/Adi_Public/",
  "licence": "Documents publics de la Ville de Montréal — reproduction avec mention de la source, lecture gratuite (voir README).",
  "methode": "Sondage des noms de fichiers publiés : l'existence du document prouve la séance. Les séances extraordinaires, dont l'heure est imprévisible, ne sont pas couvertes. Le Plateau-Mont-Royal, qui publie par sa page et non sous Adi_Public, est lu depuis cette page : la date vient du document lui-même (voir lib/plateau.js).",
  "annee": 2026,
  "partiel": false,
- "nombre": 147,
- "requetes": 1903,
+ "nombre": 155,
+ "requetes": 2018,
  "parArrondissement": [
   {
    "arrondissement": "Ahuntsic-Cartierville",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 83
+   "requetes": 90
   },
   {
    "arrondissement": "Anjou",
    "seances": 9,
    "nouvelles": 0,
-   "requetes": 43
+   "requetes": 50
   },
   {
    "arrondissement": "Côte-des-Neiges–Notre-Dame-de-Grâce",
-   "seances": 7,
-   "nouvelles": 0,
-   "requetes": 248
+   "seances": 8,
+   "nouvelles": 1,
+   "requetes": 259
   },
   {
    "arrondissement": "Lachine",
-   "seances": 8,
-   "nouvelles": 0,
-   "requetes": 82
+   "seances": 9,
+   "nouvelles": 1,
+   "requetes": 86
   },
   {
    "arrondissement": "LaSalle",
-   "seances": 9,
-   "nouvelles": 0,
-   "requetes": 41
+   "seances": 10,
+   "nouvelles": 1,
+   "requetes": 45
   },
   {
    "arrondissement": "L'Île-Bizard–Sainte-Geneviève",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 82
+   "requetes": 89
   },
   {
    "arrondissement": "Mercier–Hochelaga-Maisonneuve",
-   "seances": 5,
-   "nouvelles": 0,
-   "requetes": 207
+   "seances": 6,
+   "nouvelles": 1,
+   "requetes": 212
   },
   {
    "arrondissement": "Montréal-Nord",
-   "seances": 6,
-   "nouvelles": 0,
-   "requetes": 166
+   "seances": 7,
+   "nouvelles": 1,
+   "requetes": 172
   },
   {
    "arrondissement": "Outremont",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 82
+   "requetes": 89
   },
   {
    "arrondissement": "Pierrefonds-Roxboro",
-   "seances": 9,
-   "nouvelles": 0,
-   "requetes": 43
+   "seances": 10,
+   "nouvelles": 1,
+   "requetes": 50
   },
   {
    "arrondissement": "Le Plateau-Mont-Royal",
@@ -78,49 +78,49 @@
    "arrondissement": "Rivière-des-Prairies–Pointe-aux-Trembles",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 82
+   "requetes": 89
   },
   {
    "arrondissement": "Rosemont–La Petite-Patrie",
-   "seances": 8,
-   "nouvelles": 0,
-   "requetes": 82
+   "seances": 9,
+   "nouvelles": 1,
+   "requetes": 86
   },
   {
    "arrondissement": "Saint-Laurent",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 84
+   "requetes": 91
   },
   {
    "arrondissement": "Saint-Léonard",
-   "seances": 7,
-   "nouvelles": 0,
-   "requetes": 124
+   "seances": 8,
+   "nouvelles": 1,
+   "requetes": 128
   },
   {
    "arrondissement": "Le Sud-Ouest",
    "seances": 6,
    "nouvelles": 0,
-   "requetes": 165
+   "requetes": 172
   },
   {
    "arrondissement": "Verdun",
    "seances": 7,
    "nouvelles": 0,
-   "requetes": 124
+   "requetes": 131
   },
   {
    "arrondissement": "Ville-Marie",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 82
+   "requetes": 89
   },
   {
    "arrondissement": "Villeray–Saint-Michel–Parc-Extension",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 82
+   "requetes": 89
   }
  ],
  "seances": [
@@ -1870,6 +1870,76 @@
    "preuve": "CA_Vma_ODJ_LPP_ORDI_2026-10-13_18h30_FR.pdf"
   },
   {
+   "id": "CA_Cdn_2026-11-02_18h30",
+   "instance": "CA_Cdn",
+   "arrondissement": "Côte-des-Neiges–Notre-Dame-de-Grâce",
+   "nomInstance": "Conseil d'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce",
+   "date": "2026-11-02",
+   "heure": "18h30",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Cdn_ODJ_LPP_ORDI_2026-11-02_18h30_FR.pdf"
+  },
+  {
+   "id": "CA_Lac_2026-11-02_19h00",
+   "instance": "CA_Lac",
+   "arrondissement": "Lachine",
+   "nomInstance": "Conseil d'arrondissement de Lachine",
+   "date": "2026-11-02",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Lac_ODJ_LPP_ORDI_2026-11-02_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Las_2026-11-02_19h00",
+   "instance": "CA_Las",
+   "arrondissement": "LaSalle",
+   "nomInstance": "Conseil d'arrondissement de LaSalle",
+   "date": "2026-11-02",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Las_ODJ_LPP_ORDI_2026-11-02_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Mhm_2026-11-02_18h30",
+   "instance": "CA_Mhm",
+   "arrondissement": "Mercier–Hochelaga-Maisonneuve",
+   "nomInstance": "Conseil d'arrondissement de Mercier–Hochelaga-Maisonneuve",
+   "date": "2026-11-02",
+   "heure": "18h30",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Mhm_ODJP_ORDI_2026-11-02_18h30_FR.pdf"
+  },
+  {
+   "id": "CA_Mtn_2026-11-02_19h00",
+   "instance": "CA_Mtn",
+   "arrondissement": "Montréal-Nord",
+   "nomInstance": "Conseil d'arrondissement de Montréal-Nord",
+   "date": "2026-11-02",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Mtn_ODJ_LP_ORDI_2026-11-02_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Pir_2026-11-02_19h00",
+   "instance": "CA_Pir",
+   "arrondissement": "Pierrefonds-Roxboro",
+   "nomInstance": "Conseil d'arrondissement de Pierrefonds-Roxboro",
+   "date": "2026-11-02",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Pir_ODJ_ORDI_2026-11-02_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17689"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
+  },
+  {
    "id": "CA_Pmr_2026-11-02_18h30",
    "instance": "CA_Pmr",
    "arrondissement": "Le Plateau-Mont-Royal",
@@ -1882,6 +1952,28 @@
     "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17706"
    },
    "preuve": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17706"
+  },
+  {
+   "id": "CA_Rpp_2026-11-02_19h00",
+   "instance": "CA_Rpp",
+   "arrondissement": "Rosemont–La Petite-Patrie",
+   "nomInstance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "date": "2026-11-02",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Rpp_ODJ_LPP_ORDI_2026-11-02_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Sld_2026-11-02_19h00",
+   "instance": "CA_Sld",
+   "arrondissement": "Saint-Léonard",
+   "nomInstance": "Conseil d'arrondissement de Saint-Léonard",
+   "date": "2026-11-02",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Sld_ODJ_LPP_ORDI_2026-11-02_19h00_FR.pdf"
   }
  ]
 }
