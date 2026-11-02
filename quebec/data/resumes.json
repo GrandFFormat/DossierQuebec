@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-29T15:22:08.827Z",
+ "generatedAt": "2026-11-02T18:37:52.453Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,149 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-08-30",
+  "depuis": "2026-09-03",
   "plafond": 120
  },
- "nombre": 1778,
- "genereCetteFois": 25,
+ "nombre": 1783,
+ "genereCetteFois": 5,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 1.003,
-  "jetonsEntree": 142708,
-  "jetonsSortie": 11577
+  "montant": 0.2198,
+  "jetonsEntree": 31318,
+  "jetonsSortie": 2529
  },
  "resumes": [
+  {
+   "id": "DE2026-393.pdf",
+   "numero": "DE2026-393",
+   "date": "2026-10-30",
+   "unite": "Développement économique et grands projets",
+   "objet": "Acquisition à des fins municipales d'un immeuble situé en bordure de la rue de la Promenade-des-Soeurs, connu et désigné comme étant les lots 5 830 991 et 5 830 992 du cadastre du Québec, circonscription foncière de Québec Arrondissement de Sainte-Foy-Sillery-Cap-Rouge",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-393.pdf",
+   "puces": [
+    "La Ville de Québec achète le boisé de la Promenade-des-Soeurs, dans l'arrondissement de Sainte-Foy–Sillery–Cap-Rouge, pour 9 000 000 $ plus taxes.",
+    "Le terrain fait 108 641,70 mètres carrés et comprend un massif forestier de 14 hectares avec des sentiers de marche et de vélo informels utilisés par des citoyens.",
+    "Le vendeur est Véolia es Matières résiduelles inc.; la transaction règle à l'amiable une poursuite entre l'entreprise et la Ville.",
+    "La Ville s'engage à installer sept panneaux d'affichage à la limite nord-ouest et, dans les 60 jours suivant la clôture, une clôture grillagée et barbelée, en plus de planter des végétaux dissuasifs.",
+    "Véolia gardera accès aux puits de surveillance des biogaz et lixiviats de l'ancien lieu d'enfouissement voisin, maintenant fermé.",
+    "La dépense nette pour la Ville s'élève à 9 448 875 $, financée par deux règlements d'emprunt et un excédent de fonctionnement.",
+    "Le terrain est inscrit au rôle d'évaluation 2025-2026-2027 à 725 000 $, soit 6,67 $ le mètre carré."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "9 000 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-02T18:37:46.727Z",
+   "jetons": {
+    "entree": 6937,
+    "sortie": 555
+   }
+  },
+  {
+   "id": "DE2026-394.pdf",
+   "numero": "DE2026-394",
+   "date": "2026-10-30",
+   "unite": "Développement économique et grands projets",
+   "objet": "Entente entre la Ville de Québec et la Chambre de commerce et d'industrie de Québec, relative au versement d'une subvention maximale de 150 000 $, dans le cadre du volet Soutien aux projets structurants pour améliorer les milieux de vie du Fonds régions et ruralité, pour réaliser le projet « Allianc",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-394.pdf",
+   "puces": [
+    "La Ville de Québec verse une subvention maximale de 150 000 $ à la Chambre de commerce et d'industrie de Québec pour le projet « Alliance économique Lévis-Québec 2026-2028 ».",
+    "Le projet réunit les chambres de commerce de Québec et du Grand Lévis pour travailler ensemble sur des enjeux économiques communs aux deux rives.",
+    "Deux chantiers sont prévus : main-d'œuvre et employabilité, ainsi que défense et sécurité.",
+    "Les travaux visent à documenter les besoins de main-d'œuvre des entreprises et à mieux adapter l'offre de formation au marché du travail.",
+    "Le projet coûte 625 000 $ au total : Services Québec (200 000 $), Secrétariat à la Capitale-Nationale (100 000 $), Ville de Lévis (50 000 $) et les deux chambres de commerce (62 500 $ chacune en services).",
+    "L'argent de la Ville couvre les deux premières années; la troisième année dépendra d'un financement additionnel.",
+    "La fiche de projet prévoit 1 emploi créé et 2 emplois maintenus; le siège social est dans l'arrondissement de La Cité-Limoilou."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "150 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-02T18:37:46.540Z",
+   "jetons": {
+    "entree": 7480,
+    "sortie": 516
+   }
+  },
+  {
+   "id": "GT2026-346.pdf",
+   "numero": "GT2026-346",
+   "date": "2026-10-30",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption d'une résolution autorisant un projet immobilier dérogatoire sur le lot 6 716 840 du cadastre du Québec (1073, boulevard René-Lévesque Ouest, quartier de Sillery, district électoral de Saint-Louis-Sillery) en vertu de l'article 145.45 de la Loi sur l'aménagement et l'urbanisme et approbatio",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-346.pdf",
+   "puces": [
+    "La Ville autorise un projet résidentiel d'environ 510 logements locatifs au 1073, boulevard René-Lévesque Ouest, dans le quartier de Sillery.",
+    "Le projet prévoit 6 immeubles de 4 à 12 étages, construits par phases, sur un terrain appartenant à la Société en commandite St-Cyrille.",
+    "L'ancienne maison Notre-Dame-du-Cénacle, construite en 1928, verra son aile centrale démolie; les ailes sud et nord seront conservées.",
+    "La Ville accorde des dérogations : hauteur maximale portée à 40 mètres au lieu de 13, aire verte minimale abaissée à 30 % au lieu de 40 %, aucun maximum de logements par bâtiment, stationnement permis devant une façade.",
+    "Conditions imposées : au moins 450 logements maintenus, une centrale de géothermie alimentant tous les bâtiments, 50 % des logements avec 2 chambres ou plus (dont 20 % avec 3 chambres ou plus).",
+    "La Commission d'urbanisme et de conservation de Québec encadre la qualité architecturale et les aménagements au sol, le site étant à valeur patrimoniale élevée.",
+    "Contrevenir aux conditions expose à une amende de 1 000 $ (personne physique) ou 2 000 $ (autres cas), doublée en cas de récidive. Le projet n'est pas susceptible d'approbation référendaire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-02T18:37:46.685Z",
+   "jetons": {
+    "entree": 7783,
+    "sortie": 593
+   }
+  },
+  {
+   "id": "GM2026-011.pdf",
+   "numero": "GM2026-011",
+   "date": "2026-10-30",
+   "unite": "Gestion des matières résiduelles et valorisation",
+   "objet": "Renouvellement d'une entente entre la Ville de Québec et la coopérative de solidarité Option métal recyclé du Québec pour la prise en charge des résidus métalliques et d'autres matières résiduelles provenant des écocentres de la Ville de Québec pour la période du 1er décembre 2026 au 30 novembre 202",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GM2026-011.pdf",
+   "puces": [
+    "La Ville renouvelle pour un an son entente avec la coopérative de solidarité Option métal recyclé du Québec, du 1er décembre 2026 au 30 novembre 2027.",
+    "La coopérative continue de ramasser les résidus métalliques des cinq écocentres de la Ville et de les envoyer à des recycleurs.",
+    "Elle prend aussi en charge des matières particulières : pneus avec jantes, batteries acide-plomb et certains appareils non couverts par les programmes gouvernementaux.",
+    "La coopérative fournit les conteneurs, trie, démantèle, transporte les matières et gère la vente des métaux.",
+    "La Ville estime toucher 350 000 $ de revenus nets pour cette année d'entente, versés au fonds général.",
+    "Les cinq écocentres ont reçu plus de 410 000 usagers en 2025.",
+    "Ce renouvellement d'un an doit permettre à la Ville d'évaluer ses options à plus long terme tout en assurant la continuité du service."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "350 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-02T18:37:45.379Z",
+   "jetons": {
+    "entree": 4959,
+    "sortie": 438
+   }
+  },
+  {
+   "id": "DE2026-377.pdf",
+   "numero": "DE2026-377",
+   "date": "2026-10-30",
+   "unite": "Développement économique et grands projets",
+   "objet": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'un immeuble constitué de l'assiette de la rue Gatineau, connu et désigné comme étant le lot 6 533 629 du cadastre du Québec, circonscription foncière de Québec Arrondissement de La Haute-Saint-Charles",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-377.pdf",
+   "puces": [
+    "La Ville veut acquérir la rue Gatineau, dans La Haute-Saint-Charles (Val-Bélair), qui est présentement une rue privée.",
+    "Le terrain visé fait 14 277,20 mètres carrés et appartient à une succession privée.",
+    "L'acquisition peut se faire de gré à gré ou par expropriation si aucune entente n'est conclue.",
+    "L'achat est lié à la mise à niveau du réseau d'égout de la rue Gatineau, pour augmenter sa capacité et desservir la rue Gaudar.",
+    "Le terrain est inscrit au rôle d'évaluation 2025-2026-2027 à 20 000 $, soit 1,40 $ le mètre carré.",
+    "Le Service des affaires juridiques mènera les procédures d'acquisition et le Service de l'ingénierie préparera les plans et l'opération cadastrale.",
+    "Les fonds proviennent du règlement d'emprunt R.V.Q. 3390."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "20 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-02T18:37:52.453Z",
+   "jetons": {
+    "entree": 4159,
+    "sortie": 427
+   }
+  },
   {
    "id": "AJ2026-029.pdf",
    "numero": "AJ2026-029",
