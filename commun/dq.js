@@ -520,6 +520,7 @@ const translations = {
     'p404.accueil':"Home",
     'p404.lien4':"Let's start over, no hard feelings.",
     'footer.rss':"RSS feed",
+    'footer.flaticon':"Icons: Flaticon",
     'quicknav.mission':"Our mission",
     'quicknav.composition':"Composition",
     'quicknav.projets':"Bills",
