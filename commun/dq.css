@@ -2391,3 +2391,10 @@ body.abonne .bill-cafe-row{display:none;}
 .bill-share-row{justify-content:center;}
 /* Pas de mot « Partager » : les icônes parlent d'elles-mêmes (Martin, 3 nov. 2026). */
 .bill-share-row .bill-share-label{display:none;}
+/* Boutons de partage aux couleurs des réseaux (Martin, 3 nov. 2026). */
+.bill-share-btn[data-reseau]{color:#fff; display:inline-flex; align-items:center; justify-content:center;}
+.bill-share-btn[data-reseau="x"]{background:#000;}
+.bill-share-btn[data-reseau="fb"]{background:#1877F2;}
+.bill-share-btn[data-reseau="li"]{background:#0A66C2;}
+.bill-share-btn[data-reseau="reddit"]{background:#FF4500;}
+.bill-share-btn[data-reseau]:hover{filter:brightness(1.15); color:#fff;}
