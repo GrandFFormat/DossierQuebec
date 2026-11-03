@@ -2387,3 +2387,5 @@ body.abonne .bill-cafe-row{display:none;}
 /* Bouton café de la même grosseur que la case « Dernière activité » (Martin, 3 nov. 2026). */
 .bill-cafe-btn{padding:12px 16px; font-size:14px; gap:12px; width:100%; box-sizing:border-box;}
 .bill-cafe-btn .bulle{margin-left:auto;}
+/* « Partager » centré dans la colonne (Martin, 3 nov. 2026). */
+.bill-share-row{justify-content:center;}
