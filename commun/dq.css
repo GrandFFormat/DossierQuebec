@@ -2418,3 +2418,5 @@ html.etroit .brand{flex-wrap:wrap; row-gap:6px; max-width:100%;}
 @media (max-width:760px){ .bill-cafe-btn{justify-content:center; text-align:center;} .bill-cafe-btn .bulle{margin-left:0;} }
 html.etroit .bill-cafe-btn{justify-content:center; text-align:center;}
 html.etroit .bill-cafe-btn .bulle{margin-left:0;}
+/* La pastille jaune peut passer à la ligne au lieu de déborder de sa case (téléphone + zoom A+). */
+.pastille-abonnes{white-space:normal; display:inline-block; max-width:100%; box-sizing:border-box;}
