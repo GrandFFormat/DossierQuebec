@@ -4818,7 +4818,7 @@ for(let i = ORDRE_CAFE.length - 1; i > 0; i--){ const j = Math.floor(Math.random
 let _rangCafe = 0;
 function boutonCafe(b, isEn){
   const [fr, en] = LIBELLES_CAFE[ORDRE_CAFE[_rangCafe++ % ORDRE_CAFE.length]];
-  return `<div class="bill-cafe-row"><a class="bill-cafe-btn" href="${LIEN_CAFE}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="${isEn ? 'Buy us a coffee (opens in a new tab)' : 'Offrez-nous un café (s’ouvre dans un nouvel onglet)'}"><img class="icone" src="/commun/cafe-croissant.png" width="24" height="24" alt=""><span class="libelle">${isEn ? en : fr}</span><span class="bulle" aria-hidden="true">${'<i class="pt" style="animation:none"></i>'.repeat(5)}</span></a></div>`;
+  return `<div class="bill-cafe-row"><a class="bill-cafe-btn" href="${LIEN_CAFE}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="${isEn ? 'Buy us a coffee (opens in a new tab)' : 'Offrez-nous un café (s’ouvre dans un nouvel onglet)'}"><img class="icone" src="/commun/cafe-croissant.png" width="24" height="24" alt="">${isEn ? en : fr}<span class="bulle" aria-hidden="true">${'<i class="pt" style="animation:none"></i>'.repeat(5)}</span></a></div>`;
 }
 
 // La bulle du bouton café (Martin, 3 nov. 2026) : toutes les 8 s, à un moment propre à chaque bouton,
@@ -4855,18 +4855,6 @@ function passageCafe(bulle){
 setInterval(() => {
   if(document.hidden || document.body.classList.contains('abonne') || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const maintenant = Date.now();
-  // Le texte bascule par le haut toutes les 4 s, à un moment propre à chaque bouton (Martin, 3 nov. 2026).
-  document.querySelectorAll('.bill-cafe-btn .libelle').forEach((lib) => {
-    if(!lib.dataset.prochain) lib.dataset.prochain = maintenant + 1000 + Math.random() * 4000;
-    else if(maintenant >= Number(lib.dataset.prochain)){
-      lib.dataset.prochain = maintenant + 4000;
-      const isEn = currentLang === 'en';
-      let paire;
-      do { paire = LIBELLES_CAFE[Math.floor(Math.random() * LIBELLES_CAFE.length)]; } while((isEn ? paire[1] : paire[0]) === lib.textContent);
-      lib.classList.add('bascule');
-      setTimeout(() => { lib.textContent = isEn ? paire[1] : paire[0]; lib.classList.remove('bascule'); }, 250);
-    }
-  });
   document.querySelectorAll('.bill-cafe-btn .bulle').forEach((bulle) => {
     if(!bulle.dataset.prochain) bulle.dataset.prochain = maintenant + Math.random() * DUREE_CAFE * 1000;
     else if(maintenant >= Number(bulle.dataset.prochain)){
