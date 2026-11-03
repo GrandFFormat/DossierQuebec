@@ -16,6 +16,7 @@
 // Usage : node scripts/build-section-pages.js   (appelé par scripts/refresh.js)
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { slugMinistre } from './build-minister-pages.js';
 
 const BASE = 'https://dossierquebec.ca';
 const SRC = 'gabarit.html';
@@ -350,7 +351,7 @@ function prerendus(valeurs) {
         .map((n) => `<span class="pr-meta">${ht(n.label || dateFr(n.date))} —</span> ${ht(n.text)}`),
       `Source officielle : ${ASSNAT}.`),
     ministresGrid: bloc('ministers', 'Conseil des ministres',
-      valeurs.ministers.map((m) => `<b>${ht(m.name)}</b> — ${ht(m.role)} <span class="pr-meta">(${ht(m.party)})</span>`),
+      valeurs.ministers.map((m) => `<b><a href="/ministres/${slugMinistre(m.name)}">${ht(m.name)}</a></b> — ${ht(m.role)} <span class="pr-meta">(${ht(m.party)})</span>`),
       `Le Conseil des ministres du Québec compte ${valeurs.ministers.length} membres, dont le premier ministre ${ht(valeurs.ministers[0].name)} (au ${dateFr(new Date().toISOString().slice(0, 10))}). Source officielle : ${QUEBEC_CA}.`, true),
     deputesList: bloc('deputesRaw', 'Le reste de l’Assemblée',
       deputes.map((d) => `${ht(d[0])} — ${ht(d[1])} <span class="pr-meta">(${ht(d[3])})</span>`),
@@ -767,3 +768,7 @@ construirePagesProjets();
 // /llms.txt : le site expliqué aux assistants, refait à chaque build (scripts/build-llms.js).
 const { construireLlms } = await import('./build-llms.js');
 construireLlms();
+
+// Une page par ministre (/ministres/nicolas-marceau), à partir de ministres.html : scripts/build-minister-pages.js.
+const { construirePagesMinistres } = await import('./build-minister-pages.js');
+construirePagesMinistres();

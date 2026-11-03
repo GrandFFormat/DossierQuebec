@@ -3605,6 +3605,8 @@ function renderDeputes(filter){
 // seul pied d'égalité, voir toggleMinistresSort) — même info qu'avant, juste
 // réunie dans un seul type de carte puisque le classement mélange les deux
 // groupes plutôt que de garder la priorité "Conseil des ministres" en premier.
+// Même slug que scripts/build-minister-pages.js (slugMinistre).
+function slugMinistre(nom){ return String(nom).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
 function personCard(p){
   const isEn = currentLang === 'en';
   const isMin = p.type === 'minister';
@@ -3652,7 +3654,7 @@ function personCard(p){
           ${partageBouton(name)}${wikiBouton(name)}${finBouton(name)}
           <button class="follow-btn ${isFollowed?'on':''}" onclick="${followOnclick}">${isFollowed ? t('btn.following') : t('btn.follow')}</button>
         </div>
-        <div class="m-name">${name}</div>
+        <div class="m-name">${isMin ? `<a href="/ministres/${slugMinistre(name)}">${name}</a>` : name}</div>
         <div class="m-portfolio">${subtitle}</div>
       </div>
       <div class="m-card-bottom">
@@ -5465,13 +5467,15 @@ function toggleVoteCard(id, evt){
    sur une de ces adresses. */
 // /mon-dossier y est aussi : sans lui, la page se prenait pour l'accueil et portait son titre
 // anglais (arrivé avec l'anglais qui suit enfin la navigation, 24 sept. 2026).
-const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', projets:'/projets-de-loi', votes:'/votes', archives:'/archives', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier', regles:'/regles', abonnement:'/abonnement' };
-const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'projets-de-loi':'projets', 'votes':'votes', 'archives':'archives', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier', 'regles':'regles', 'abonnement':'abonnement' };
+const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', ministre:'/ministres', projets:'/projets-de-loi', votes:'/votes', archives:'/archives', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier', regles:'/regles', abonnement:'/abonnement' };
+const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'ministres/':'ministre', 'projets-de-loi':'projets', 'votes':'votes', 'archives':'archives', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier', 'regles':'regles', 'abonnement':'abonnement' };
 // Titres ANGLAIS seulement : le français vient du <title> de la page (voir syncTitle).
 const PAGE_META = {
   bd:        { en:"Site updates — DossierQuébec" },
   apercu:    { en:"Quebec's National Assembly in plain language — DossierQuébec" },
   ministres: { en:"Quebec ministers and MNAs — DossierQuébec" },
+  // Page d'un ministre (/ministres/nicolas-marceau, scripts/build-minister-pages.js) : son titre anglais est dans la page.
+  ministre:  { get en(){ return document.getElementById('view-ministre')?.dataset.titreEn || 'Quebec minister — DossierQuébec'; } },
   projets:   { en:"Quebec bills explained in plain language — DossierQuébec" },
   votes:     { en:"Recorded divisions at the National Assembly — DossierQuébec" },
   lexique:   { en:"National Assembly glossary in plain language — DossierQuébec" },
@@ -5489,6 +5493,7 @@ function viewFromPath(){
   const seg = location.pathname.replace(/^\/+|\/+$/g, '').replace(/\.html$/, '');
   // Une page de projet de loi (/projets-de-loi/3-43-3, scripts/build-bill-pages.js) est la vue Projets.
   if(seg.startsWith('projets-de-loi/')) return 'projets';
+  if(seg.startsWith('ministres/')) return SLUG_VIEWS['ministres/'];
   return SLUG_VIEWS[seg] || 'apercu';
 }
 const _titreFr = document.title;
@@ -5508,7 +5513,7 @@ function goToTab(viewName, opts){
     return;
   }
   document.querySelectorAll('nav.tabs a[data-view]').forEach(a=>{
-    const actif = a.dataset.view === viewName;
+    const actif = a.dataset.view === (viewName === 'ministre' ? 'ministres' : viewName);
     a.classList.toggle('active', actif);
     if(actif) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
   });
