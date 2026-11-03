@@ -2,52 +2,10 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 8461962 — Node v22.23.4
+Code : commit 826e1e2 — Node v22.23.4
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
-
-=== Élus de la Ville ===
-Source : https://donnees.montreal.ca/dataset/381d74ca-dadd-459f-95c9-db255b5f4480/resource/211f6903-1440-438a-9f6c-9718ecf2d3ee/download/liste_elus_montreal.csv (Liste des élu-es de la Ville de Montréal au 2 novembre 2025, modifié 2025-12-15T20:15:52.959031)
-Colonnes : Appellation | Prénom | Nom | Fonction élective | Fonctions additionnelles | Responsabilités CE | Arrondissement | District | Parti | Bureau | Téléphone | Courriel officiel | Historique des changements d'allégeance | Historique des fonctions terminées
-65 membres du conseil municipal (103 élus au total) écrits dans data/elus.json
-  Ensemble Montréal : 34
-  Projet Montréal : 25
-  Équipe LaSalle : 3
-  Équipe Anjou : 2
-  Équipe St-Léonard : 1
-
-=== Conseil d'agglomération ===
-Source : https://donnees.montreal.ca/dataset/da0e81ae-5a30-4919-9b89-ddf66a5e177b/resource/f0fa1aec-71fd-4c77-84e7-025f0bd8c410/download/liste_des-elus-es_aglomeration_elections_2-novembre_2025.csv (modifié 2025-12-15T20:18:51.406683)
-Colonnes : Appellation | Prénom | Nom | Fonction élective | Fonctions additionnelles | Arrondissement / Ville liée | District | Bureau | Téléphone | Courriel officiel | Historique des fonctions terminées
-(pour les Villes liées uniquement)
-
-30 membres écrits dans data/agglomeration.json
-  Montréal : 16
-  Baie-D'Urfé : 1
-  Beaconsfield : 1
-  Côte-Saint-Luc : 1
-  Dollard-Des Ormeaux : 1
-  Dorval : 1
-  Hampstead : 1
-  Kirkland : 1
-  Montréal-Est : 1
-  Montréal-Ouest : 1
-  Mont-Royal : 1
-  Pointe-Claire : 1
-  Sainte-Anne-de-Bellevue : 1
-  Senneville : 1
-  Westmount : 1
-⚠ 30 membres au lieu des 32 sièges attendus — vacance, ou jeu de données modifié.
-
-=== Districts électoraux ===
-Source : https://donnees.montreal.ca/dataset/70acec75-c2b4-4d26-a399-facc7b0ad9bf/resource/fa1f8cfc-cdbf-42fd-9979-32c16b68b5ca/download/districts-electoraux-2025.json (Districts électoraux 2025, modifié 2025-10-20T15:36:15.229218)
-Propriétés : NO_DISTRICT | CODE_DISTRICT | NOM_DISTRICT | NOM_ARR
-58 districts écrits dans data/districts.json
-Contours : 161343 points -> 4716 (6722 ko -> 118 ko)
-
-⚠ Écarts entre les deux sources de la Ville :
-  District « Est » : aucun élu de ville correspondant dans data/elus.json
 
 === robots.txt des sites de la Ville ===
 https://ville.montreal.qc.ca/robots.txt : règles sur nos chemins : allow /
@@ -55,45 +13,45 @@ https://donnees.montreal.ca/robots.txt : règles sur nos chemins : disallow /dat
 https://montreal.ca/robots.txt : rien qui concerne nos chemins
 
 === Calendrier des séances ===
-Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-11-02T14:46:02.710300)
+Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-11-02T23:30:48.830621)
 Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_video_seance
 75 séance(s) de 2026 lue(s) dans le calendrier.
 
 75 séance(s) de 2026 dans data/seances.json (0 de plus qu'avant) — CE : 36, CG : 15, CM : 24
 
 === Calendrier des séances d'arrondissement ===
-147 séance(s) de 2026 déjà connue(s).
+155 séance(s) de 2026 déjà connue(s).
     Ahuntsic-Cartierville : 25 document(s) sur sa page, 0 daté(s) aujourd'hui, 10 date(s) de séance connues.
     Ahuntsic-Cartierville : 8 ordre(s) du jour repris de sa page, sommaires compris.
-  Ahuntsic-Cartierville                       8 séance(s)  (90 requêtes)
+  Ahuntsic-Cartierville                       8 séance(s)  (97 requêtes)
     Anjou : 26 document(s) sur sa page, 0 daté(s) aujourd'hui, 12 date(s) de séance connues.
-    Anjou : 9 ordre(s) du jour repris de sa page, sommaires compris.
-  Anjou                                       9 séance(s)  (50 requêtes)
-  Côte-des-Neiges–Notre-Dame-de-Grâce         8 séance(s), 1 nouvelle(s)  (259 requêtes)
-  Lachine                                     9 séance(s), 1 nouvelle(s)  (86 requêtes)
-  LaSalle                                    10 séance(s), 1 nouvelle(s)  (45 requêtes)
-  L'Île-Bizard–Sainte-Geneviève               8 séance(s)  (89 requêtes)
-  Mercier–Hochelaga-Maisonneuve               6 séance(s), 1 nouvelle(s)  (212 requêtes)
-  Montréal-Nord                               7 séance(s), 1 nouvelle(s)  (172 requêtes)
-  Outremont                                   8 séance(s)  (89 requêtes)
-    Pierrefonds-Roxboro : 26 document(s) sur sa page, 0 daté(s) aujourd'hui, 12 date(s) de séance connues.
+    Anjou : 10 ordre(s) du jour repris de sa page, sommaires compris.
+  Anjou                                      10 séance(s), 1 nouvelle(s)  (51 requêtes)
+  Côte-des-Neiges–Notre-Dame-de-Grâce         8 séance(s)  (248 requêtes)
+  Lachine                                     9 séance(s)  (82 requêtes)
+  LaSalle                                    10 séance(s)  (41 requêtes)
+  L'Île-Bizard–Sainte-Geneviève               9 séance(s), 1 nouvelle(s)  (88 requêtes)
+  Mercier–Hochelaga-Maisonneuve               6 séance(s)  (207 requêtes)
+  Montréal-Nord                               7 séance(s)  (166 requêtes)
+  Outremont                                   9 séance(s), 1 nouvelle(s)  (88 requêtes)
+    Pierrefonds-Roxboro : 27 document(s) sur sa page, 1 daté(s) aujourd'hui, 12 date(s) de séance connues.
     Pierrefonds-Roxboro : 10 ordre(s) du jour repris de sa page, sommaires compris.
-  Pierrefonds-Roxboro                        10 séance(s), 1 nouvelle(s)  (50 requêtes)
+  Pierrefonds-Roxboro                        10 séance(s)  (44 requêtes)
     Le Plateau-Mont-Royal : 17 document(s) sur la page, 0 daté(s) aujourd'hui, 10 séance(s) en 2026.
   Le Plateau-Mont-Royal                      10 séance(s)  (1 requêtes)
-  Rivière-des-Prairies–Pointe-aux-Trembles    8 séance(s)  (89 requêtes)
-  Rosemont–La Petite-Patrie                   9 séance(s), 1 nouvelle(s)  (86 requêtes)
-  Saint-Laurent                               8 séance(s)  (91 requêtes)
-  Saint-Léonard                               8 séance(s), 1 nouvelle(s)  (128 requêtes)
-  Le Sud-Ouest                                6 séance(s)  (172 requêtes)
-  Verdun                                      7 séance(s)  (131 requêtes)
-  Ville-Marie                                 8 séance(s)  (89 requêtes)
-  Villeray–Saint-Michel–Parc-Extension        8 séance(s)  (89 requêtes)
+  Rivière-des-Prairies–Pointe-aux-Trembles    9 séance(s), 1 nouvelle(s)  (87 requêtes)
+  Rosemont–La Petite-Patrie                   9 séance(s)  (82 requêtes)
+  Saint-Laurent                               8 séance(s)  (98 requêtes)
+  Saint-Léonard                               8 séance(s)  (124 requêtes)
+  Le Sud-Ouest                                6 séance(s)  (179 requêtes)
+  Verdun                                      8 séance(s), 1 nouvelle(s)  (130 requêtes)
+  Ville-Marie                                 8 séance(s)  (96 requêtes)
+  Villeray–Saint-Michel–Parc-Extension        9 séance(s), 1 nouvelle(s)  (87 requêtes)
 
-155 séance(s) d'arrondissement pour 2026, en 2018 requête(s).
+161 séance(s) d'arrondissement pour 2026, en 1996 requête(s).
 
 === Décisions de l'année ===
-155 séance(s) d'arrondissement au calendrier.
+161 séance(s) d'arrondissement au calendrier.
 CE_2026-10-28_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CG_2026-10-22_16h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CM_2026-10-20_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -109,14 +67,14 @@ CM_2026-05-12_09h00 : procès-verbal non publié — pas un PDF — page « 404 
 CM_2026-02-17_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CM_2026-01-27_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Ver_2026-04-07_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Rpp_2026-09-08_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Rpp_2026-09-08_19h00 : 15 pages, 26 résolutions, 0 points à l'ordre du jour, 24 liens vers un sommaire, 24 sommaires annexés à l'ordre du jour
 CA_Ahu_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Anj_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Cdn_2026-10-06_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Ibs_2026-10-06_19h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Lac_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Las_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Mtn_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Mtn_2026-10-06_19h00 : 14 pages, 28 résolutions, 30 points à l'ordre du jour, 22 liens vers un sommaire, 22 sommaires annexés à l'ordre du jour
 CA_Out_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Pir_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Pmr_2026-10-06_18h35 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -135,105 +93,112 @@ CA_Pir_2026-11-02_19h00 : procès-verbal non publié — pas un PDF — page « 
 CA_Pmr_2026-11-02_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Rpp_2026-11-02_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Sld_2026-11-02_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Anj_2026-11-03_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Ibs_2026-11-03_19h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Out_2026-11-03_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Rdp_2026-11-03_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Ver_2026-11-03_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Vsm_2026-11-03_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 
-7254 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 41 en attente de procès-verbal.
-0 nouveauté(s) depuis la dernière exécution.
+7312 décisions écrites dans data/decisions.json — 2 séance(s) lue(s) cette fois, 45 en attente de procès-verbal.
+58 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
-   1262  Procédure
-    968  Urbanisme
-    902  Transport
-    596  Environnement
-    483  Contrats
-    474  Administration
-    368  Loisirs et communauté
-    312  Culture et patrimoine
-    297  Subventions
+   1273  Procédure
+    976  Urbanisme
+    916  Transport
+    597  Environnement
+    485  Contrats
+    476  Administration
+    370  Loisirs et communauté
+    315  Culture et patrimoine
+    303  Subventions
     250  Immobilier
-    244  Travaux et infrastructures
-    233  Développement économique
-    232  Finances
-    225  Motions et hommages
+    245  Travaux et infrastructures
+    234  Finances
+    234  Développement économique
+    229  Motions et hommages
     178  Logement et social
     131  Sécurité publique
-     99  Ressources humaines
-    230  (classées par défaut — aucune règle n'a tranché)
+    100  Ressources humaines
+    232  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes enregistrés (depuis 2026-09-03) ===
-Fenêtre depuis 2026-09-03 : 3 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
+=== Votes enregistrés (depuis 2026-09-04) ===
+Fenêtre depuis 2026-09-04 : 3 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
 
 17 votes enregistrés écrits dans data/votes.json (3 procès-verbaux analysés).
 2 portent un avertissement d'extraction (à vérifier à la main).
 
 === Lexique, mesuré sur les procès-verbaux ===
-Mesure de 33 termes sur 172 procès-verbaux de 2026 en cache et 7254 décisions…
+Mesure de 33 termes sur 174 procès-verbaux de 2026 en cache et 7312 décisions…
 
-    99 PV    3606 résolutions   Résolution
-    73 PV     474 résolutions   Sommaire décisionnel
-   172 PV    6016 résolutions   Dossier décisionnel
-   172 PV     441 résolutions   Procès-verbal
-   172 PV     757 résolutions   Ordre du jour
-   137 PV     509 résolutions   Avis de motion
+   101 PV    3659 résolutions   Résolution
+    74 PV     475 résolutions   Sommaire décisionnel
+   174 PV    6062 résolutions   Dossier décisionnel
+   174 PV     443 résolutions   Procès-verbal
+   174 PV     760 résolutions   Ordre du jour
+   138 PV     510 résolutions   Avis de motion
     80 PV     227 résolutions   Règlement
-   104 PV    1347 résolutions   Conseil municipal
+   105 PV    1348 résolutions   Conseil municipal
     74 PV    1520 résolutions   Comité exécutif
-   151 PV    2293 résolutions   Conseil d'arrondissement
-    79 PV      78 résolutions   Conseiller d'arrondissement
+   153 PV    2322 résolutions   Conseil d'arrondissement
+    80 PV      78 résolutions   Conseiller d'arrondissement
     53 PV     169 résolutions   Greffier
     27 PV     179 résolutions   Présidence du conseil
     57 PV    1381 résolutions   Conseil d'agglomération
     25 PV      33 résolutions   Ville liée
      9 PV      12 résolutions   Compétence d'agglomération
     22 PV     161 résolutions   Vote enregistré
-   141 PV    5554 résolutions   Adoptée à l'unanimité
+   143 PV    5607 résolutions   Adoptée à l'unanimité
     25 PV      41 résolutions   Adoptée à la majorité des voix
     10 PV      13 résolutions   Dissidence
-   101 PV     244 résolutions   Prise d’acte
+   102 PV     247 résolutions   Prise d’acte
     50 PV      87 résolutions   Mairesse suppléante
-    77 PV     138 résolutions   Dérogation mineure
+    78 PV     139 résolutions   Dérogation mineure
     58 PV     102 résolutions   Projet particulier
      6 PV       5 résolutions   Article 89
-    92 PV     284 résolutions   Zonage
+    93 PV     286 résolutions   Zonage
     67 PV     373 résolutions   Accorder un contrat
-   146 PV     857 résolutions   Appel d'offres
+   147 PV     859 résolutions   Appel d'offres
     53 PV     172 résolutions   Gré à gré
-   141 PV     666 résolutions   Contribution financière
-    47 PV      73 résolutions   Programme décennal d'immobilisations
+   143 PV     678 résolutions   Contribution financière
+    48 PV      74 résolutions   Programme décennal d'immobilisations
     43 PV      89 résolutions   Règlement d'emprunt
     10 PV      14 résolutions   Expropriation
 
 33 entrées écrites dans data/lexique.json
 
 === Récapitulatifs des sujets suivables ===
-Récapitulatifs des sujets : rien de nouveau.
+Récapitulatifs des sujets : deneigement (32 dossiers)
+  deneigement              2 étape(s), 4 à surveiller · retirés : 0 mécanique, 5 contre-lecture
+  coût ≈ 0.55 $ US
 
 === Sujets suivables et dossiers, pour Mes dossiers ===
-Projets publics : 16 sujets · index 17.4 Ko · fichiers de sujet 903 Ko au total.
-Décisions récentes : 900 dossiers depuis le 2026-08-22 · 1431 Ko.
-Dossiers de l'année : 5617 · 3296 Ko · organismes suggérés : 533.
+Projets publics : 16 sujets · index 17.6 Ko · fichiers de sujet 904 Ko au total.
+Décisions récentes : 954 dossiers depuis le 2026-08-22 · 1508 Ko.
+Dossiers de l'année : 5670 · 3329 Ko · organismes suggérés : 535.
 
 === Sujets suivables en anglais ===
-Sujets en anglais : 0 déjà traduits, 16 à faire — ~0.25 $ US estimés.
+Sujets en anglais : 0 déjà traduits, 16 à faire — ~0.24 $ US estimés.
 Sujets en anglais : 15 traduits (1 refusés), 15 au total — 0.28 $ US.
-  ⚠ logement : 2233 étapes au lieu de 5
+  ⚠ logement : 2231 étapes au lieu de 5
 
 === Lexique en anglais ===
 Lexique anglais : à jour.
 
 === Traductions anglaises ===
 Résumés : 3753 déjà traduits, 783 à faire, 783 cette fois.
-Titres  : 6078 déjà traduits, 762 à faire, 762 cette fois en 39 paquet(s).
+Titres  : 6078 déjà traduits, 815 à faire, 815 cette fois en 41 paquet(s).
 Étiquettes : 1121 déjà traduites, 184 à faire en 7 paquet(s).
-~2.35 $ US estimés (lot, moitié prix).
-Lot msgbatch_01NeFLWTAaJW14dmqwgpLYdu envoyé (783 résumés, 39 paquets de titres, 7 paquets d'étiquettes).
-  in_progress — 0 réussis, 829 en cours, 0 en erreur
-  in_progress — 0 réussis, 829 en cours, 0 en erreur
-  in_progress — 0 réussis, 829 en cours, 0 en erreur
-  in_progress — 0 réussis, 829 en cours, 0 en erreur
-  in_progress — 0 réussis, 829 en cours, 0 en erreur
-  in_progress — 0 réussis, 829 en cours, 0 en erreur
-  in_progress — 0 réussis, 829 en cours, 0 en erreur
-  ended — 829 réussis, 0 en cours, 0 en erreur
+~2.38 $ US estimés (lot, moitié prix).
+Lot msgbatch_01U9tGKhxmqZ1HMDyPzsb5hb envoyé (783 résumés, 41 paquets de titres, 7 paquets d'étiquettes).
+  in_progress — 0 réussis, 831 en cours, 0 en erreur
+  in_progress — 0 réussis, 831 en cours, 0 en erreur
+  in_progress — 0 réussis, 831 en cours, 0 en erreur
+  in_progress — 0 réussis, 831 en cours, 0 en erreur
+  in_progress — 0 réussis, 831 en cours, 0 en erreur
+  in_progress — 0 réussis, 831 en cours, 0 en erreur
+  ended — 831 réussis, 0 en cours, 0 en erreur
 file:///home/runner/work/DossierQuebec/DossierQuebec/montreal/scrapers/traductions.js:175
   const puces = (sortie?.puces ?? []).map(decoder).map((p) => String(p).trim());
                                       ^
@@ -249,17 +214,39 @@ Node.js v22.23.4
 ⚠ « Traductions anglaises » a échoué (code 1) — on garde les données précédentes, ça attendra.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-09-03 pas encore résumés (plafond : 120)…
-8789 déjà résumés, 0 à faire.
-Rien à générer. (--force pour tout regénérer.)
+Sommaires depuis 2026-09-04 pas encore résumés (plafond : 120)…
+8789 déjà résumés, 54 à faire.
+
+--- Estimation ---
+Documents à résumer  : 54
+Modèle               : claude-opus-5
+Ratio mesuré         : 1.19 caractères/jeton (sur 12 documents)
+Jetons d'entrée      : ~285 310
+Jetons de sortie     : ~17 280
+Coût estimé          : ~1.86 $ US (0.93 $ via l'API Batches)
+
+Génération…
+Envoi à l'API Batches (50 % du tarif, résultats en moins d'une heure en général)…
+Lot msgbatch_01KAtTdht3cjyePd42D1fzzw — statut in_progress
+  in_progress — 0 réussis, 54 en cours, 0 en erreur
+  in_progress — 0 réussis, 54 en cours, 0 en erreur
+  in_progress — 0 réussis, 54 en cours, 0 en erreur
+  in_progress — 0 réussis, 54 en cours, 0 en erreur
+  ended — 54 réussis, 0 en cours, 0 en erreur
+
+54 résumés générés, 8843 au total dans data/resumes.json
+Coût réel : 0.86 $ US
 
 === Décisions récentes dans la page (Google) ===
-montreal : 30 décisions écrites dans la page des décisions (inchangé).
+montreal : 30 décisions écrites dans la page des décisions.
 
 === Courriels de Montréal publiés ===
---mois=2026-10 → Publié : 2026-10. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
+2026-10 : compte rendu en attente de 3 procès-verbal(aux) (CG 2026-10-22, CM 2026-10-20, CM 2026-10-19).
+--seance=2026-09-08 --instance=rosemont-la-petite-patrie → Publié : rosemont-la-petite-patrie-2026-09-08. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
+--seance=2026-10-06 --instance=montreal-nord → Publié : montreal-nord-2026-10-06. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
+--mois=2026-09 → Publié : 2026-09. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
 
 === Bilan ===
-  étapes         : 18
+  étapes         : 15
   échecs         : aucun
   avertissements : Traductions anglaises

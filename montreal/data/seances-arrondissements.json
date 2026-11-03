@@ -1,72 +1,72 @@
 {
- "generatedAt": "2026-11-02T19:44:00.679Z",
+ "generatedAt": "2026-11-03T16:34:35.014Z",
  "source": "https://ville.montreal.qc.ca/documents/Adi_Public/",
  "licence": "Documents publics de la Ville de Montréal — reproduction avec mention de la source, lecture gratuite (voir README).",
  "methode": "Sondage des noms de fichiers publiés : l'existence du document prouve la séance. Les séances extraordinaires, dont l'heure est imprévisible, ne sont pas couvertes. Le Plateau-Mont-Royal, qui publie par sa page et non sous Adi_Public, est lu depuis cette page : la date vient du document lui-même (voir lib/plateau.js).",
  "annee": 2026,
  "partiel": false,
- "nombre": 155,
- "requetes": 2018,
+ "nombre": 161,
+ "requetes": 1996,
  "parArrondissement": [
   {
    "arrondissement": "Ahuntsic-Cartierville",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 90
+   "requetes": 97
   },
   {
    "arrondissement": "Anjou",
-   "seances": 9,
-   "nouvelles": 0,
-   "requetes": 50
+   "seances": 10,
+   "nouvelles": 1,
+   "requetes": 51
   },
   {
    "arrondissement": "Côte-des-Neiges–Notre-Dame-de-Grâce",
    "seances": 8,
-   "nouvelles": 1,
-   "requetes": 259
+   "nouvelles": 0,
+   "requetes": 248
   },
   {
    "arrondissement": "Lachine",
    "seances": 9,
-   "nouvelles": 1,
-   "requetes": 86
+   "nouvelles": 0,
+   "requetes": 82
   },
   {
    "arrondissement": "LaSalle",
    "seances": 10,
-   "nouvelles": 1,
-   "requetes": 45
+   "nouvelles": 0,
+   "requetes": 41
   },
   {
    "arrondissement": "L'Île-Bizard–Sainte-Geneviève",
-   "seances": 8,
-   "nouvelles": 0,
-   "requetes": 89
+   "seances": 9,
+   "nouvelles": 1,
+   "requetes": 88
   },
   {
    "arrondissement": "Mercier–Hochelaga-Maisonneuve",
    "seances": 6,
-   "nouvelles": 1,
-   "requetes": 212
+   "nouvelles": 0,
+   "requetes": 207
   },
   {
    "arrondissement": "Montréal-Nord",
    "seances": 7,
-   "nouvelles": 1,
-   "requetes": 172
+   "nouvelles": 0,
+   "requetes": 166
   },
   {
    "arrondissement": "Outremont",
-   "seances": 8,
-   "nouvelles": 0,
-   "requetes": 89
+   "seances": 9,
+   "nouvelles": 1,
+   "requetes": 88
   },
   {
    "arrondissement": "Pierrefonds-Roxboro",
    "seances": 10,
-   "nouvelles": 1,
-   "requetes": 50
+   "nouvelles": 0,
+   "requetes": 44
   },
   {
    "arrondissement": "Le Plateau-Mont-Royal",
@@ -76,51 +76,51 @@
   },
   {
    "arrondissement": "Rivière-des-Prairies–Pointe-aux-Trembles",
-   "seances": 8,
-   "nouvelles": 0,
-   "requetes": 89
+   "seances": 9,
+   "nouvelles": 1,
+   "requetes": 87
   },
   {
    "arrondissement": "Rosemont–La Petite-Patrie",
    "seances": 9,
-   "nouvelles": 1,
-   "requetes": 86
+   "nouvelles": 0,
+   "requetes": 82
   },
   {
    "arrondissement": "Saint-Laurent",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 91
+   "requetes": 98
   },
   {
    "arrondissement": "Saint-Léonard",
    "seances": 8,
-   "nouvelles": 1,
-   "requetes": 128
+   "nouvelles": 0,
+   "requetes": 124
   },
   {
    "arrondissement": "Le Sud-Ouest",
    "seances": 6,
    "nouvelles": 0,
-   "requetes": 172
+   "requetes": 179
   },
   {
    "arrondissement": "Verdun",
-   "seances": 7,
-   "nouvelles": 0,
-   "requetes": 131
+   "seances": 8,
+   "nouvelles": 1,
+   "requetes": 130
   },
   {
    "arrondissement": "Ville-Marie",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 89
+   "requetes": 96
   },
   {
    "arrondissement": "Villeray–Saint-Michel–Parc-Extension",
-   "seances": 8,
-   "nouvelles": 0,
-   "requetes": 89
+   "seances": 9,
+   "nouvelles": 1,
+   "requetes": 87
   }
  ],
  "seances": [
@@ -1935,7 +1935,7 @@
    "source": "sondage des documents publiés",
    "preuve": "CA_Pir_ODJ_ORDI_2026-11-02_19h00_FR.pdf",
    "documents": {
-    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17689"
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17708"
    },
    "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
   },
@@ -1974,6 +1974,76 @@
    "variante": "ORDI",
    "source": "sondage des documents publiés",
    "preuve": "CA_Sld_ODJ_LPP_ORDI_2026-11-02_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Anj_2026-11-03_19h00",
+   "instance": "CA_Anj",
+   "arrondissement": "Anjou",
+   "nomInstance": "Conseil d'arrondissement de Anjou",
+   "date": "2026-11-03",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Anj_ODJ_ORDI_2026-11-03_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17682"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)"
+  },
+  {
+   "id": "CA_Ibs_2026-11-03_19h30",
+   "instance": "CA_Ibs",
+   "arrondissement": "L'Île-Bizard–Sainte-Geneviève",
+   "nomInstance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "date": "2026-11-03",
+   "heure": "19h30",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Ibs_ODJP_ORDI_2026-11-03_19h30_FR.pdf"
+  },
+  {
+   "id": "CA_Out_2026-11-03_19h00",
+   "instance": "CA_Out",
+   "arrondissement": "Outremont",
+   "nomInstance": "Conseil d'arrondissement de Outremont",
+   "date": "2026-11-03",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Out_ODJP_ORDI_2026-11-03_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Rdp_2026-11-03_19h00",
+   "instance": "CA_Rdp",
+   "arrondissement": "Rivière-des-Prairies–Pointe-aux-Trembles",
+   "nomInstance": "Conseil d'arrondissement de Rivière-des-Prairies–Pointe-aux-Trembles",
+   "date": "2026-11-03",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Rdp_ODJ_LPP_ORDI_2026-11-03_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Ver_2026-11-03_19h00",
+   "instance": "CA_Ver",
+   "arrondissement": "Verdun",
+   "nomInstance": "Conseil d'arrondissement de Verdun",
+   "date": "2026-11-03",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Ver_ODJP_ORDI_2026-11-03_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Vsm_2026-11-03_18h30",
+   "instance": "CA_Vsm",
+   "arrondissement": "Villeray–Saint-Michel–Parc-Extension",
+   "nomInstance": "Conseil d'arrondissement de Villeray–Saint-Michel–Parc-Extension",
+   "date": "2026-11-03",
+   "heure": "18h30",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Vsm_ODJ_LPP_ORDI_2026-11-03_18h30_FR.pdf"
   }
  ]
 }
