@@ -2403,3 +2403,6 @@ body.abonne .bill-cafe-row{display:none;}
 /* L'icône du bouton café flippe toutes les 5 s (Martin, 3 nov. 2026). */
 .bill-cafe-btn .icone{transition:transform .3s ease-in; object-fit:contain;}
 .bill-cafe-btn .icone.tourne{transform:rotateY(90deg);}
+/* Icône du bouton café un peu plus grosse (Martin, 3 nov. 2026), bouton toujours à 52 px de haut. */
+.bill-cafe-btn .icone{width:34px; height:34px;}
+.bill-cafe-btn{padding-top:7px; padding-bottom:7px;}
