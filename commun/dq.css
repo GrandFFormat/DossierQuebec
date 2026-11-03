@@ -2414,3 +2414,7 @@ body.abonne .bill-cafe-row{display:none;}
 /* Très étroit (téléphone + zoom A+) : les boutons de l'en-tête et le logo passent à la ligne plutôt que de déborder. */
 html.etroit .header-ctrls{flex-wrap:wrap; justify-content:flex-end; row-gap:6px; max-width:100%;}
 html.etroit .brand{flex-wrap:wrap; row-gap:6px; max-width:100%;}
+/* Sur téléphone, icône, texte et bulle du bouton café centrés (Martin, 3 nov. 2026). */
+@media (max-width:760px){ .bill-cafe-btn{justify-content:center; text-align:center;} .bill-cafe-btn .bulle{margin-left:0;} }
+html.etroit .bill-cafe-btn{justify-content:center; text-align:center;}
+html.etroit .bill-cafe-btn .bulle{margin-left:0;}
