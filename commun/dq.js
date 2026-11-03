@@ -4839,7 +4839,9 @@ ICONES_CAFE.forEach((u) => { const p = new Image(); p.src = u; });
 function flipIcone(bouton){
   const i = bouton.querySelector('.icone');
   if(!i) return;
-  const rang = (Number(i.dataset.rang || 0) + 1) % ICONES_CAFE.length;
+  // Au hasard, jamais la même deux fois de suite (le croissant reste la première).
+  const avant = Number(i.dataset.rang || 0);
+  const rang = (avant + 1 + Math.floor(Math.random() * (ICONES_CAFE.length - 1))) % ICONES_CAFE.length;
   i.dataset.rang = rang;
   i.classList.add('tourne');
   setTimeout(() => { i.src = ICONES_CAFE[rang]; i.classList.remove('tourne'); }, 300);
