@@ -7,6 +7,16 @@
 (function () {
   var CLE = 'dq:temoins';
 
+  // Vercel Web Analytics (Martin, 3 nov. 2026) : compte les visites SANS témoin ni donnée personnelle,
+  // donc sans attendre « Accepter ». Google Analytics, lui, ne voyait qu'environ la moitié des visites.
+  // À activer aussi dans le tableau de bord Vercel (onglet Analytics) : sans ça, le script ne répond pas.
+  if (/^(dossierquebec.ca|www.dossierquebec.ca)$/.test(location.hostname) && !document.querySelector('script[src*="_vercel/insights"]')) {
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    var va = document.createElement('script');
+    va.defer = true; va.src = '/_vercel/insights/script.js';
+    document.head.appendChild(va);
+  }
+
   function lire() { try { return localStorage.getItem(CLE); } catch (e) { return null; } }
   function ecrire(v) { try { localStorage.setItem(CLE, v); } catch (e) { /* navigation privée */ } }
   function anglais() {
