@@ -4109,7 +4109,9 @@ function billCard(b, ctx){
   const shareCtrls =
       `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'x', event)" aria-label="${isEn ? 'Share on X' : 'Partager sur X'}">𝕏</button>`
     + `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'fb', event)" aria-label="${isEn ? 'Share on Facebook' : 'Partager sur Facebook'}">FB</button>`
-    + `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'li', event)" aria-label="${isEn ? 'Share on LinkedIn' : 'Partager sur LinkedIn'}">in</button>`;
+    + `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'li', event)" aria-label="${isEn ? 'Share on LinkedIn' : 'Partager sur LinkedIn'}">in</button>`
+    + `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'reddit', event)" aria-label="${isEn ? 'Share on Reddit' : 'Partager sur Reddit'}"><svg width="15" height="15" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="11.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="7.6" cy="11" r="1.1" fill="currentColor"/><circle cx="12.4" cy="11" r="1.1" fill="currentColor"/><path d="M7.4 13.7c1.5 1 3.7 1 5.2 0" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M10 5l1-3.3 3 .8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="15.3" cy="2.8" r="1.3" fill="currentColor"/></svg></button>`
+    + `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'copy', event)" aria-label="${isEn ? 'Copy link' : 'Copier le lien'}">⧉</button>`;
   const shareRow = `<div class="bill-share-row">
       <span class="bill-share-label">${isEn ? 'Share:' : 'Partager :'}</span>
       ${shareCtrls}
@@ -4736,6 +4738,8 @@ function shareChallenge(billId, count, platform, evt){
     window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank', 'noopener,width=600,height=520');
   } else if(platform === 'fb'){
     window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank', 'noopener,width=600,height=520');
+  } else if(platform === 'reddit'){
+    window.open('https://www.reddit.com/submit?url=' + encodeURIComponent(url) + '&title=' + encodeURIComponent(text), '_blank', 'noopener,width=760,height=640');
   } else if(platform === 'li'){
     window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url), '_blank', 'noopener,width=600,height=560');
   } else { // copier
