@@ -662,10 +662,12 @@ async function main() {
     if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) throw new Error('--publier : SUPABASE_URL et SUPABASE_SERVICE_ROLE_KEY manquent (api.env).');
     const h = { apikey: process.env.SUPABASE_SERVICE_ROLE_KEY, Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`, 'Content-Type': 'application/json' };
     const url = `${process.env.SUPABASE_URL}/rest/v1/infolettre_numeros`;
-    const existant = await fetch(`${url}?ville=eq.${VILLE}&type=eq.${cleNumero.type}&arrondissement=eq.${cleNumero.arrondissement}&mois=eq.${cleNumero.mois}&langue=eq.${cleNumero.langue}&select=envoye_le,envoyes`, { headers: h }).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`Supabase ${r.status} — scripts/supabase-schema-infolettre.sql a-t-il été exécuté ?`))));
+    const existant = await fetch(`${url}?ville=eq.${VILLE}&type=eq.${cleNumero.type}&arrondissement=eq.${cleNumero.arrondissement}&mois=eq.${cleNumero.mois}&langue=eq.${cleNumero.langue}&select=envoye_le,envoyes,publie_le`, { headers: h }).then((r) => (r.ok ? r.json() : Promise.reject(new Error(`Supabase ${r.status} — scripts/supabase-schema-infolettre.sql a-t-il été exécuté ?`))));
     // --si-nouveau (publication automatique, scripts/infolettres-auto.js) : un numéro déjà publié n'est jamais remplacé.
-    if (args['si-nouveau'] && existant.length) { console.log(`Déjà publié : ${fichier}. Rien à faire.`); return; }
-    if (existant[0]?.envoyes > 0) throw new Error(`Le compte rendu ${fichier} est déjà parti vers ${existant[0].envoyes} personne(s) : on ne le remplace pas.`);
+    // Un numéro retiré (publie_le vide, scripts/retirer-numero.js) se republie : c'est la version corrigée.
+    const retire = existant.length && !existant[0].publie_le;
+    if (args['si-nouveau'] && existant.length && !retire) { console.log(`Déjà publié : ${fichier}. Rien à faire.`); return; }
+    if (existant[0]?.envoyes > 0 && !retire) throw new Error(`Le compte rendu ${fichier} est déjà parti vers ${existant[0].envoyes} personne(s) : on ne le remplace pas.`);
     const r = await fetch(`${url}?on_conflict=ville,type,arrondissement,mois,langue`, {
       method: 'POST',
       headers: { ...h, Prefer: 'resolution=merge-duplicates,return=minimal' },
