@@ -4834,6 +4834,8 @@ const CAFES_BULLE = [CAFE_tasse, CAFE_emporter, CAFE_brune, CAFE_glace];
 // le passage des cafés dans la bulle, jamais en même temps :
 // croissant et tasse d'abord, puis carafe, moulin, filtre, tasse au cœur, et on recommence.
 const ICONES_CAFE = ['cafe-croissant', 'cafe-carafe', 'cafe-moulin', 'cafe-filtre', 'cafe-coeur'].map((n) => `/commun/${n}.png`);
+// Préchargées : sans ça, la première fois, l'icône clignotait le temps que l'image arrive.
+ICONES_CAFE.forEach((u) => { const p = new Image(); p.src = u; });
 function flipIcone(bouton){
   const i = bouton.querySelector('.icone');
   if(!i) return;
