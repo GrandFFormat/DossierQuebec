@@ -2860,6 +2860,7 @@ async function initAuth(){
   }finally{
     renderAccountBox();
     renderAdminFlagCounts();
+    marquerAbonne();
   }
 
   supabaseClient.auth.onAuthStateChange(async (event, newSession) => {
@@ -2877,6 +2878,7 @@ async function initAuth(){
     }finally{
       renderAccountBox();
       renderAdminFlagCounts();
+      _abonneP = null; marquerAbonne();
     }
     const kw = document.getElementById('searchMinistres')?.value || '';
     renderMinistres(kw);
@@ -4266,6 +4268,8 @@ async function remplirCartesVotes(d){
 // nombre ; un·e abonné·e reçoit la liste du serveur (api/export.js?jeu=consultations&pl=…), qui
 // vérifie l'abonnement. Les autres gardent la phrase avec le lien vers /abonnement.
 let _abonneP = null;
+// Abonné·e : body.abonne cache les boutons café (Martin, 2 nov. 2026).
+function marquerAbonne(){ estAbonne().then((a) => document.body.classList.toggle('abonne', a)); }
 function estAbonne(){
   if(!currentUser) return Promise.resolve(false);
   if(!_abonneP) _abonneP = (async () => {
