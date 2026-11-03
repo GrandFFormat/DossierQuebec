@@ -4818,7 +4818,7 @@ for(let i = ORDRE_CAFE.length - 1; i > 0; i--){ const j = Math.floor(Math.random
 let _rangCafe = 0;
 function boutonCafe(b, isEn){
   const [fr, en] = LIBELLES_CAFE[ORDRE_CAFE[_rangCafe++ % ORDRE_CAFE.length]];
-  return `<div class="bill-cafe-row"><a class="bill-cafe-btn" href="${LIEN_CAFE}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="${isEn ? 'Buy us a coffee (opens in a new tab)' : 'Offrez-nous un café (s’ouvre dans un nouvel onglet)'}"><img class="icone" src="/commun/cafe-croissant.png" width="24" height="24" alt="">${isEn ? en : fr}<span class="bulle" aria-hidden="true">${'<i class="pt" style="animation:none"></i>'.repeat(5)}</span></a></div>`;
+  return `<div class="bill-cafe-row"><a class="bill-cafe-btn" href="${LIEN_CAFE}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="${isEn ? 'Buy us a coffee (opens in a new tab)' : 'Offrez-nous un café (s’ouvre dans un nouvel onglet)'}"><img class="icone" src="/commun/cafe-croissant.png" width="24" height="24" alt=""><span class="libelle">${isEn ? en : fr}</span><span class="bulle" aria-hidden="true">${'<i class="pt" style="animation:none"></i>'.repeat(5)}</span></a></div>`;
 }
 
 // La bulle du bouton café (Martin, 3 nov. 2026) : toutes les 8 s, à un moment propre à chaque bouton,
@@ -4844,8 +4844,16 @@ function flipIcone(bouton){
   const avant = Number(i.dataset.rang || 0);
   const rang = (avant + 1 + Math.floor(Math.random() * (ICONES_CAFE.length - 1))) % ICONES_CAFE.length;
   i.dataset.rang = rang;
+  const lib = bouton.querySelector('.libelle');
+  const isEn = currentLang === 'en';
+  let paire;
+  do { paire = LIBELLES_CAFE[Math.floor(Math.random() * LIBELLES_CAFE.length)]; } while(lib && (isEn ? paire[1] : paire[0]) === lib.textContent);
   i.classList.add('tourne');
-  setTimeout(() => { i.src = ICONES_CAFE[rang]; i.classList.remove('tourne'); }, 300);
+  if(lib) lib.classList.add('tourne');
+  setTimeout(() => {
+    i.src = ICONES_CAFE[rang]; i.classList.remove('tourne');
+    if(lib){ lib.textContent = isEn ? paire[1] : paire[0]; lib.classList.remove('tourne'); }
+  }, 300);
 }
 function passageCafe(bulle){
   const file = CAFES_BULLE.slice().sort(() => Math.random() - .5).slice(0, 1 + Math.floor(Math.random() * 3));
