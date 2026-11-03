@@ -4833,7 +4833,9 @@ const CAFES_BULLE = [CAFE_tasse, CAFE_emporter, CAFE_brune, CAFE_glace];
 // L'icône de gauche flippe toutes les 8 s, comme la feuille d'érable (Martin, 3 nov. 2026), 4 s après
 // le passage des cafés dans la bulle, jamais en même temps :
 // croissant et tasse d'abord, puis carafe, moulin, filtre, tasse au cœur, et on recommence.
-const ICONES_CAFE = ['cafe-croissant', 'cafe-carafe', 'cafe-moulin', 'cafe-filtre', 'cafe-coeur'].map((n) => `/commun/${n}.png`);
+const ICONES_CAFE = ['cafe-croissant', 'cafe-carafe', 'cafe-moulin', 'cafe-filtre', 'cafe-coeur',
+  'cafe-machine1', 'cafe-machine2', 'cafe-machine3', 'cafe-machine4', 'cafe-terrasse', 'cafe-tasse-or',
+  'cafe-tasse-ligne', 'cafe-tasse-noire', 'cafe-latte', 'cafe-the', 'cafe-pastille'].map((n) => `/commun/${n}.png`);
 // Préchargées : sans ça, la première fois, l'icône clignotait le temps que l'image arrive.
 ICONES_CAFE.forEach((u) => { const p = new Image(); p.src = u; });
 function flipIcone(bouton){
