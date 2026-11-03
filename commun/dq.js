@@ -4815,10 +4815,16 @@ const LIBELLES_CAFE = [
 // d'une visite à l'autre, mais reste le même quand la liste se redessine, et jamais deux pareils de suite.
 const ORDRE_CAFE = LIBELLES_CAFE.map((_, i) => i);
 for(let i = ORDRE_CAFE.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [ORDRE_CAFE[i], ORDRE_CAFE[j]] = [ORDRE_CAFE[j], ORDRE_CAFE[i]]; }
+const ICONES_CAFE = ['cafe-croissant', 'cafe-carafe', 'cafe-moulin', 'cafe-filtre', 'cafe-coeur',
+  'cafe-machine4', 'cafe-terrasse', 'cafe-tasse-or', 'cafe-latte', 'cafe-the', 'cafe-pastille'].map((n) => `/commun/${n}.png`);
+// Chaque case ouvre sur une icône différente de ses voisines (Martin, 3 nov. 2026), comme les textes.
+const ORDRE_ICONES = ICONES_CAFE.map((_, i) => i);
+for(let i = ORDRE_ICONES.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [ORDRE_ICONES[i], ORDRE_ICONES[j]] = [ORDRE_ICONES[j], ORDRE_ICONES[i]]; }
 let _rangCafe = 0;
 function boutonCafe(b, isEn){
+  const rangIcone = ORDRE_ICONES[_rangCafe % ORDRE_ICONES.length];
   const [fr, en] = LIBELLES_CAFE[ORDRE_CAFE[_rangCafe++ % ORDRE_CAFE.length]];
-  return `<div class="bill-cafe-row"><a class="bill-cafe-btn" href="${LIEN_CAFE}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="${isEn ? 'Buy us a coffee (opens in a new tab)' : 'Offrez-nous un café (s’ouvre dans un nouvel onglet)'}"><img class="icone" src="/commun/cafe-croissant.png" width="24" height="24" alt="">${isEn ? en : fr}<span class="bulle" aria-hidden="true">${'<i class="pt" style="animation:none"></i>'.repeat(5)}</span></a></div>`;
+  return `<div class="bill-cafe-row"><a class="bill-cafe-btn" href="${LIEN_CAFE}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="${isEn ? 'Buy us a coffee (opens in a new tab)' : 'Offrez-nous un café (s’ouvre dans un nouvel onglet)'}"><img class="icone" src="${ICONES_CAFE[rangIcone]}" data-rang="${rangIcone}" width="24" height="24" alt="">${isEn ? en : fr}<span class="bulle" aria-hidden="true">${'<i class="pt" style="animation:none"></i>'.repeat(5)}</span></a></div>`;
 }
 
 // La bulle du bouton café (Martin, 3 nov. 2026) : toutes les 8 s, à un moment propre à chaque bouton,
@@ -4833,8 +4839,6 @@ const CAFES_BULLE = [CAFE_tasse, CAFE_emporter, CAFE_brune, CAFE_glace];
 // L'icône de gauche flippe toutes les 8 s, comme la feuille d'érable (Martin, 3 nov. 2026), 4 s après
 // le passage des cafés dans la bulle, jamais en même temps :
 // croissant et tasse d'abord, puis carafe, moulin, filtre, tasse au cœur, et on recommence.
-const ICONES_CAFE = ['cafe-croissant', 'cafe-carafe', 'cafe-moulin', 'cafe-filtre', 'cafe-coeur',
-  'cafe-machine4', 'cafe-terrasse', 'cafe-tasse-or', 'cafe-latte', 'cafe-the', 'cafe-pastille'].map((n) => `/commun/${n}.png`);
 // Préchargées : sans ça, la première fois, l'icône clignotait le temps que l'image arrive.
 ICONES_CAFE.forEach((u) => { const p = new Image(); p.src = u; });
 function flipIcone(bouton){
