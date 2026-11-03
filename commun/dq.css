@@ -2361,3 +2361,26 @@ a.bstep-lien:hover{background:var(--yellow); color:var(--sur-clair);}
 .pastille-abonnes{background:#FFD24D; color:#131313; padding:1px 6px; font-weight:700; white-space:nowrap;}
 /* Pas de bouton café pour les abonné·e·s (Martin, 2 nov. 2026). */
 body.abonne .bill-cafe-row{display:none;}
+/* Bouton café animé (Martin, 3 nov. 2026) : icône croissant + tasse brune, bulle de 5 points. */
+.bill-cafe-btn{display:inline-flex; align-items:center; gap:8px; padding:5px 10px 5px 8px; --duree:8s;}
+.bill-cafe-btn .icone{flex:none; mix-blend-mode:multiply;}
+.bill-cafe-btn .bulle{position:relative; width:118px; height:22px; background:#fff; border:2px solid #131313; border-radius:11px; overflow:hidden;}
+.bill-cafe-btn .pt{position:absolute; top:7px; width:7px; height:7px; border-radius:50%; background:#F2B705;
+    animation:var(--a) var(--duree) linear 1 both;}
+.bill-cafe-btn .pt:nth-child(1){left:12px; --a:mange1} .bill-cafe-btn .pt:nth-child(2){left:33px; --a:mange2} .bill-cafe-btn .pt:nth-child(3){left:54px; --a:mange3}
+.bill-cafe-btn .pt:nth-child(4){left:75px; --a:mange4} .bill-cafe-btn .pt:nth-child(5){left:96px; --a:mange5}
+.bill-cafe-btn .passant{position:absolute; top:2px; left:0; transform:translateX(-26px); animation:traverse var(--duree) linear 1 both; animation-delay:calc(var(--suite, 0) * .75s);}
+
+/* Couvercle qui s'ouvre et se ferme en mangeant */
+.bill-cafe-btn .couvercle{transform-origin:3px 6px; animation:croque .22s steps(2) infinite;}
+@keyframes croque{50%{transform:rotate(-28deg);}}
+
+/* Cycle : la tasse traverse pendant les premiers 18 %, puis les points reviennent un à un. */
+@keyframes traverse{0%{transform:translateX(-26px)} 36%,100%{transform:translateX(124px)}}
+@keyframes mange1{0%,9.1%{background:#F2B705; transform:scale(1)} 10.6%{transform:scale(.6)} 12.1%,70%{background:#6B4A3A; transform:scale(1)} 73%,100%{background:#F2B705}}
+@keyframes mange2{0%,14.2%{background:#F2B705; transform:scale(1)} 15.7%{transform:scale(.6)} 17.2%,74%{background:#6B4A3A; transform:scale(1)} 77%,100%{background:#F2B705}}
+@keyframes mange3{0%,19.2%{background:#F2B705; transform:scale(1)} 20.7%{transform:scale(.6)} 22.2%,78%{background:#6B4A3A; transform:scale(1)} 81%,100%{background:#F2B705}}
+@keyframes mange4{0%,24.2%{background:#F2B705; transform:scale(1)} 25.7%{transform:scale(.6)} 27.2%,82%{background:#6B4A3A; transform:scale(1)} 85%,100%{background:#F2B705}}
+@keyframes mange5{0%,29.3%{background:#F2B705; transform:scale(1)} 30.8%{transform:scale(.6)} 32.3%,86%{background:#6B4A3A; transform:scale(1)} 89%,100%{background:#F2B705}}
+
+@media (prefers-reduced-motion: reduce){ .bill-cafe-btn .pt, .bill-cafe-btn .passant, .bill-cafe-btn .couvercle{animation:none;} .bill-cafe-btn .passant{display:none;} }
