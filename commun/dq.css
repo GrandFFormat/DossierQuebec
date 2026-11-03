@@ -2406,3 +2406,11 @@ body.abonne .bill-cafe-row{display:none;}
 /* Icône du bouton café un peu plus grosse (Martin, 3 nov. 2026), bouton toujours à 52 px de haut. */
 .bill-cafe-btn .icone{width:34px; height:34px;}
 .bill-cafe-btn{padding-top:7px; padding-bottom:7px;}
+/* Bouton café souple (Martin, 3 nov. 2026) : sur téléphone ou avec le zoom A+, le texte passe à la ligne
+   et la bulle descend sous le texte au lieu de pousser la colonne hors de la carte. */
+.bill-cafe-btn{flex-wrap:wrap; row-gap:6px; min-width:0;}
+.bill-cafe-row{min-width:0;}
+.bill-open-side, .bill-open-grid > *{min-width:0;}
+/* Très étroit (téléphone + zoom A+) : les boutons de l'en-tête et le logo passent à la ligne plutôt que de déborder. */
+html.etroit .header-ctrls{flex-wrap:wrap; justify-content:flex-end; row-gap:6px; max-width:100%;}
+html.etroit .brand{flex-wrap:wrap; row-gap:6px; max-width:100%;}
