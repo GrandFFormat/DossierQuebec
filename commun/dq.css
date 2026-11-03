@@ -2389,3 +2389,5 @@ body.abonne .bill-cafe-row{display:none;}
 .bill-cafe-btn .bulle{margin-left:auto;}
 /* « Partager » centré dans la colonne (Martin, 3 nov. 2026). */
 .bill-share-row{justify-content:center;}
+/* Pas de mot « Partager » : les icônes parlent d'elles-mêmes (Martin, 3 nov. 2026). */
+.bill-share-row .bill-share-label{display:none;}
