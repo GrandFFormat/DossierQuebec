@@ -4830,6 +4830,20 @@ const CAFE_emporter = `<svg width="14" height="18" viewBox="0 0 14 18"><rect x="
 const CAFE_brune = `<svg width="18" height="18" viewBox="0 0 18 18"><path d="M5 4c-1-1.5 1-2 0-3.5M8 4c-1-1.5 1-2 0-3.5" fill="none" stroke="#9A9A9A" stroke-width="1.1"/><path d="M2 6h10v8a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3z" fill="#8A5A3B" stroke="#3A2A22" stroke-width="1"/><path d="M12 8h1.5a2 2 0 0 1 0 4H12" fill="none" stroke="#8A5A3B" stroke-width="1.8"/><ellipse cx="7" cy="6.3" rx="4.4" ry=".8" fill="#fff"/></svg>`;
 const CAFE_glace = `<svg width="14" height="19" viewBox="0 0 14 19"><path d="M8 6l2-5h2" fill="none" stroke="#555" stroke-width="1.4"/><path d="M2 7a5 4 0 0 1 10 0z" fill="#E4E4E4" stroke="#131313" stroke-width="1"/><rect x="1" y="7" width="12" height="2" fill="#D0D0D0" stroke="#131313" stroke-width="1"/><path d="M2 9h10l-1 9H3z" fill="#fff" stroke="#131313" stroke-width="1"/><path d="M2.4 12h9.2l-.7 6H3.1z" fill="#C9A27E"/><rect x="4" y="13" width="2" height="2" fill="#fff" stroke="#131313" stroke-width=".6"/><rect x="7.5" y="14.5" width="2" height="2" fill="#fff" stroke="#131313" stroke-width=".6"/></svg>`;
 const CAFES_BULLE = [CAFE_tasse, CAFE_emporter, CAFE_brune, CAFE_glace];
+// L'icône de gauche flippe toutes les 5 s, comme la feuille d'érable (Martin, 3 nov. 2026) :
+// croissant et tasse d'abord, puis carafe, moulin, filtre, tasse au cœur, et on recommence.
+const ICONES_CAFE = ['cafe-croissant', 'cafe-carafe', 'cafe-moulin', 'cafe-filtre', 'cafe-coeur'].map((n) => `/commun/${n}.png`);
+let _rangIcone = 0;
+setInterval(() => {
+  if(document.hidden || document.body.classList.contains('abonne') || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const icones = document.querySelectorAll('.bill-cafe-btn .icone');
+  if(!icones.length) return;
+  _rangIcone = (_rangIcone + 1) % ICONES_CAFE.length;
+  icones.forEach((i) => {
+    i.classList.add('tourne');
+    setTimeout(() => { i.src = ICONES_CAFE[_rangIcone]; i.classList.remove('tourne'); }, 300);
+  });
+}, 5000);
 function passageCafe(bulle){
   const file = CAFES_BULLE.slice().sort(() => Math.random() - .5).slice(0, 1 + Math.floor(Math.random() * 3));
   bulle.innerHTML = '<i class="pt"></i>'.repeat(5)
