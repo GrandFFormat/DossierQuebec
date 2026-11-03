@@ -4109,7 +4109,7 @@ function billCard(b, ctx){
   const shareCtrls =
       `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'x', event)" aria-label="${isEn ? 'Share on X' : 'Partager sur X'}">𝕏</button>`
     + `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'fb', event)" aria-label="${isEn ? 'Share on Facebook' : 'Partager sur Facebook'}">FB</button>`
-    + `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'copy', event)" aria-label="${isEn ? 'Copy link' : 'Copier le lien'}">⧉</button>`;
+    + `<button class="bill-share-btn ic" onclick="event.stopPropagation(); shareBill(${b.id}, 'li', event)" aria-label="${isEn ? 'Share on LinkedIn' : 'Partager sur LinkedIn'}">in</button>`;
   const shareRow = `<div class="bill-share-row">
       <span class="bill-share-label">${isEn ? 'Share:' : 'Partager :'}</span>
       ${shareCtrls}
@@ -4736,6 +4736,8 @@ function shareChallenge(billId, count, platform, evt){
     window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank', 'noopener,width=600,height=520');
   } else if(platform === 'fb'){
     window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank', 'noopener,width=600,height=520');
+  } else if(platform === 'li'){
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url), '_blank', 'noopener,width=600,height=560');
   } else { // copier
     copierLien(text + ' ' + url, evt, isEn);
   }
