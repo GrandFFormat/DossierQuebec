@@ -2406,6 +2406,3 @@ body.abonne .bill-cafe-row{display:none;}
 /* Icône du bouton café un peu plus grosse (Martin, 3 nov. 2026), bouton toujours à 52 px de haut. */
 .bill-cafe-btn .icone{width:34px; height:34px;}
 .bill-cafe-btn{padding-top:7px; padding-bottom:7px;}
-/* Le texte du bouton café se retourne avec l'icône (Martin, 3 nov. 2026). */
-.bill-cafe-btn .libelle{display:inline-block; transition:transform .3s ease-in;}
-.bill-cafe-btn .libelle.tourne{transform:rotateY(90deg);}
