@@ -2359,3 +2359,5 @@ a.bstep-lien:hover{background:var(--yellow); color:var(--sur-clair);}
 .leg-lien:hover{color:var(--gold);}
 /* « Réservé aux abonné·e·s » en jaune sur la case des mémoires (Martin, 30 oct. 2026). */
 .pastille-abonnes{background:#FFD24D; color:#131313; padding:1px 6px; font-weight:700; white-space:nowrap;}
+/* Pas de bouton café pour les abonné·e·s (Martin, 2 nov. 2026). */
+body.abonne .bill-cafe-row{display:none;}
