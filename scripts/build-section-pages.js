@@ -173,8 +173,8 @@ const PAGES = [
   {
     fichier: 'ministres.html', vue: 'ministres', onglet: 'ministres', url: '/ministres',
     donnees: ['ministers', 'deputesRaw', 'deputeEmails', 'presences', 'historiqueLeg', 'billsParrains'],
-    title: 'Ministres et député·e·s du Québec — DossierQuébec',
-    desc: "Les ministres du gouvernement du Québec et les député·e·s de l'Assemblée nationale : rôles, circonscriptions, présence aux votes et coordonnées officielles.",
+    title: 'Ministres du Québec : le Conseil des ministres — DossierQuébec',
+    desc: "Combien de ministres au Québec et qui sont-ils : le Conseil des ministres, le ministère de chacun et les député·e·s de l'Assemblée nationale.",
     fil: 'Ministres et député·e·s', cle: 'fil.ministres', frequence: 'weekly', priorite: '0.8',
   },
   {
@@ -351,7 +351,7 @@ function prerendus(valeurs) {
       `Source officielle : ${ASSNAT}.`),
     ministresGrid: bloc('ministers', 'Conseil des ministres',
       valeurs.ministers.map((m) => `<b>${ht(m.name)}</b> — ${ht(m.role)} <span class="pr-meta">(${ht(m.party)})</span>`),
-      `Les ${valeurs.ministers.length} membres du Conseil des ministres. Source officielle : ${QUEBEC_CA}.`, true),
+      `Le Conseil des ministres du Québec compte ${valeurs.ministers.length} membres, dont le premier ministre ${ht(valeurs.ministers[0].name)} (au ${dateFr(new Date().toISOString().slice(0, 10))}). Source officielle : ${QUEBEC_CA}.`, true),
     deputesList: bloc('deputesRaw', 'Le reste de l’Assemblée',
       deputes.map((d) => `${ht(d[0])} — ${ht(d[1])} <span class="pr-meta">(${ht(d[3])})</span>`),
       `Les ${deputes.length} autres député·e·s. Source officielle : ${ASSNAT}.`, true),
