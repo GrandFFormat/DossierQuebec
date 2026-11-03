@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-01T17:02:41.044Z",
+ "generatedAt": "2026-11-03T16:45:52.516Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel quand il est publié (source « sommaire »), sinon du texte de la résolution elle-même (source « resolution »), sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,17 +7,17 @@
   "annee": "2026",
   "max": 40,
   "batch": true,
-  "depuis": "2026-09-02",
+  "depuis": "2026-09-04",
   "plafond": 120
  },
- "nombre": 8789,
- "genereCetteFois": 1,
+ "nombre": 8843,
+ "genereCetteFois": 54,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.0077,
-  "jetonsEntree": 2019,
-  "jetonsSortie": 212
+  "montant": 0.8642,
+  "jetonsEntree": 238869,
+  "jetonsSortie": 21362
  },
  "resumes": [
   {
@@ -473,6 +473,724 @@
    "jetons": {
     "entree": 7454,
     "sortie": 556
+   }
+  },
+  {
+   "id": "1269433005",
+   "numero": "1269433005",
+   "resolution": "CA26 10 300",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs",
+   "objet": "Accorder une contribution financière de 500 $ au Carrefour des retraités de Montréal-Nord Inc. pour soutenir l'organisme dans les différents services offerts auprès des citoyens âgés de l'Arrondissement, et ce à même le budget discrétionnaire des élu.e.s pour l'année 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=38",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord verse 500 $ au Carrefour des retraités de Montréal-Nord Inc.",
+    "L'argent sert à soutenir les services que l'organisme offre aux citoyens âgés de l'arrondissement.",
+    "La somme provient du budget discrétionnaire des élu.e.s pour l'année 2026.",
+    "Une contribution du même montant avait déjà été accordée à cet organisme l'année précédente.",
+    "La dépense est imputée au budget de fonctionnement de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.512Z",
+   "jetons": {
+    "entree": 3291,
+    "sortie": 276
+   }
+  },
+  {
+   "id": "1260139050",
+   "numero": "1260139050",
+   "resolution": "CA26 10 303",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs",
+   "objet": "er Approuver et déposer les rapports mensuels du 1 août au 31 août 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=50",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Montréal-Nord approuve et dépose les rapports budgétaires du 1er au 31 août 2026.",
+    "Ces rapports suivent l'évolution des revenus et dépenses du budget de fonctionnement et du Programme décennal des immobilisations.",
+    "Les rapports sont versés aux archives de l'arrondissement; aucune dépense ni aucun engagement n'est rattaché à cette décision."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 2771,
+    "sortie": 243
+   }
+  },
+  {
+   "id": "1260535001",
+   "numero": "1260535001",
+   "resolution": "CA26 10 295",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "Attribuer à J. Raymond Maîtres Couvreurs, plus bas soumissionnaire conforme, au montant de 287 322,53 $ taxes incluses, un contrat pour l'exécution des travaux de réfection de la toiture du chalet du parc Primeau de Montréal-Nord et autoriser une dépense de 51 718,05 $ taxes incluses, pour les contingences, une dépense de 12 000,00 $ taxes incluses pour les incidences, pour une dépense totale de 351 040,58 $ taxes incluses. Appel d'offres 1173 / 2 soumissions Mme Chantal Rossi",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=15",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord confie à J. Raymond Maîtres Couvreurs la réfection de la toiture du chalet du parc Primeau, au 10 958, avenue Pelletier, pour 287 322,53 $ taxes incluses.",
+    "La dépense totale autorisée atteint 351 040,58 $ : le contrat, plus 51 718,05 $ de contingences (18 %) et 12 000 $ d'incidences (laboratoire de surveillance et autres).",
+    "Les travaux touchent environ 300 m² de toiture : nouveau système d'étanchéité, gargouilles, rétention des eaux pluviales, remplacement de sections de drainage pluvial et retrait-réinstallation de l'unité mécanique au toit.",
+    "Les travaux doivent commencer en octobre 2026 et se terminer en novembre 2026, avant l'hiver.",
+    "La toiture, jamais refaite depuis la construction du chalet en 1998, a été jugée prioritaire lors d'un audit des toitures de l'arrondissement en 2024.",
+    "Deux entreprises ont soumissionné sur quatre qui ont pris le cahier des charges; l'offre retenue est 9,7 % sous l'estimation de l'architecte et 29,6 % sous l'autre soumission.",
+    "La dépense est financée par deux règlements d'emprunt du programme de protection des bâtiments de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "351 040,58 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 6470,
+    "sortie": 582
+   }
+  },
+  {
+   "id": "1269433009",
+   "numero": "1269433009",
+   "resolution": "CA26 10 302",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "Accorder une contribution financière de 300$ au Centre d'Excellence en Karaté du Québec pour la participation d'un jeune athlète aux championnats du monde de karaté, et ce à même le budget discrétionnaire des élus pour l'année 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=46",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord verse 300 $ au Centre d'Excellence en Karaté du Québec.",
+    "L'argent sert à financer la participation d'un jeune athlète aux championnats du monde de karaté.",
+    "La somme provient du budget discrétionnaire des élus de l'arrondissement pour 2026.",
+    "La décision relève du conseil d'arrondissement; les fonds ont été certifiés par la Direction des services administratifs."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "300 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 3046,
+    "sortie": 249
+   }
+  },
+  {
+   "id": "1269864019",
+   "numero": "1269864019",
+   "resolution": "CA26 10 309",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "Déposer le certificat du secrétaire d'arrondissement et adopter la résolution PP-080 afin de permettre l'occupation d'un bâtiment existant par un espace privé d'activités sportives d'intérieur, un café-bistro, ainsi que les bureaux d'administration, au 3390, rue de Mont-Joli, sur le lot 1 175 056 du cadastre du Québec, le tout en vertu du Règlement RGCA11-10-0007 sur les projets particuliers de construction, de modification ou d'occupation d'un immeuble.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=72",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord autorise l'occupation d'un bâtiment existant de deux étages au 3390, rue de Mont-Joli par un centre privé d'activités sportives intérieures, un café-bistro sans alcool et des bureaux administratifs.",
+    "Le bâtiment se trouve dans une zone où seuls les usages résidentiels sont permis de plein droit; la résolution déroge au zonage pour permettre ces usages.",
+    "Deux dérogations visent le stationnement : des cases en marge avant principale et la dimension et la longueur de l'entrée véhiculaire. Une demande d'occupation du domaine public sera requise pour les cases qui y empiètent.",
+    "Conditions imposées : activités uniquement à l'intérieur du bâtiment, usage récréatif limité aux activités sportives, aménagement paysager bonifié selon le plan du 21 mai 2026.",
+    "Les travaux doivent commencer dans les 24 mois suivant l'entrée en vigueur, sinon l'autorisation devient nulle.",
+    "Le projet prévoit des terrains de pickleball, de padbol et une aire de basketball, avec un maximum de 24 utilisateurs à la fois dans les aires de jeux.",
+    "Aucune demande valide d'approbation référendaire n'a été reçue dans le délai prévu; le projet est réputé approuvé par les personnes habiles à voter."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 7712,
+    "sortie": 571
+   }
+  },
+  {
+   "id": "1269433007",
+   "numero": "1269433007",
+   "resolution": "CA26 10 299",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "Accorder une contribution financière de 500 $ à la Fondation Ali Gerba pour soutenir ses activités et pour promouvoir le soccer auprès des jeunes, et ce, à même le budget discrétionnaire des élu.es pour l'année 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=34",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord verse 500 $ à la Fondation Ali Gerba pour soutenir ses activités.",
+    "L'argent vient du budget discrétionnaire des élu.e.s de l'arrondissement pour 2026, imputé au budget de fonctionnement.",
+    "La Fondation veut promouvoir le soccer auprès des jeunes du quartier et développer leurs talents sportifs.",
+    "Selon le document, la Fondation offre des entraînements, des équipements adaptés et des événements sportifs, et vise à rendre le soccer accessible peu importe le milieu socio-économique.",
+    "Le même montant de 500 $ lui avait été accordé en 2024 et en 2025."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 3474,
+    "sortie": 331
+   }
+  },
+  {
+   "id": "CA26 10 315",
+   "numero": null,
+   "resolution": "CA26 10 315",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs",
+   "objet": null,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=14",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement met fin à sa séance ordinaire du 6 octobre 2026, à 20 h 50."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 1599,
+    "sortie": 136
+   }
+  },
+  {
+   "id": "CA26 10 288",
+   "numero": null,
+   "resolution": "CA26 10 288",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs",
+   "objet": "Adopter l'ordre du jour modifié de la séance ordinaire du conseil d'arrondissement du 6 octobre 2026, à 19 h 00. Ajout des condoléances du conseil à la famille de Madame Lise Blanchet décédée le 26 septembre 2026 à l'âge de 84 ans. (10.08)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement adopte l'ordre du jour modifié de sa séance ordinaire du 6 octobre 2026, à 19 h.",
+    "La seule modification est l'ajout de condoléances du conseil à la famille de Mme Lise Blanchet, décédée le 26 septembre 2026 à l'âge de 84 ans.",
+    "Aucune somme d'argent ni mesure touchant les citoyens n'est en jeu."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 1892,
+    "sortie": 243
+   }
+  },
+  {
+   "id": "1264394011",
+   "numero": "1264394011",
+   "resolution": "CA26 10 314",
+   "date": "2026-10-06",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Nommer quatorze (14) personnes de l'accréditation des cols blancs, trois (3) personnes de l'accréditation des professionnels et une (1) personne cadre administrative à divers postes à la Division des bibliothèques, de la culture et de l'Espace du Coeur nomade de la Direction culture, sports, loisirs et développement social , à compter du 17 octobre 2026, avec la réussite de la période d'essai prévue dans la convention collective des cols blancs ou à la convention collective des professionnelles et professionnels municipaux de Montréal ou aux conditions de travail des cadres, en vue d'un statut permanent à ces emplois.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=106",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord nomme 18 personnes à la Division des bibliothèques, de la culture et de l'Espace du Cœur nomade, à compter du 17 octobre 2026.",
+    "Les postes comblés : 14 employés cols blancs (bibliotechniciens, aides bibliothécaires, agente de bureau, animateurs, techniciens, assistante aux événements culturels), 3 professionnels (2 bibliothécaires et un agent culturel) et une cheffe de section des bibliothèques.",
+    "Chaque personne doit réussir la période d'essai prévue à sa convention collective ou aux conditions de travail des cadres avant d'obtenir un statut permanent.",
+    "Les postes ont été comblés par des affichages internes, ou internes et externes, selon les conventions collectives applicables.",
+    "La nomination de la cheffe de section s'est faite sans appel de candidatures, la personne étant déjà sur la liste des candidats qualifiés pour cet emploi.",
+    "Les salaires suivent les échelles en vigueur des conventions collectives ou des conditions des cadres; aucun montant total n'est indiqué."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 5748,
+    "sortie": 481
+   }
+  },
+  {
+   "id": "1269433004",
+   "numero": "1269433004",
+   "resolution": "CA26 10 301",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs",
+   "objet": "Accorder une contribution financière de 500 $ à l'organisme Héritage Hispanique Québec (HHQ) pour la promotion des activités lors du Mois du Patrimoine Hispanique du Québec, et ce à même le budget discrétionnaire des élu.e.s pour l'année 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=42",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord verse 500 $ à l'organisme Héritage Hispanique Québec (HHQ).",
+    "L'argent sert à promouvoir les activités du Mois du Patrimoine Hispanique du Québec, qui se tient en octobre.",
+    "La somme provient du budget discrétionnaire des élu.e.s pour l'année 2026.",
+    "HHQ est un organisme à but non lucratif enregistré au Registraire des entreprises.",
+    "L'arrondissement avait déjà accordé 300 $ à cet organisme en 2020, 2021 et 2022."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 3555,
+    "sortie": 297
+   }
+  },
+  {
+   "id": "CA26 10 293",
+   "numero": null,
+   "resolution": "CA26 10 293",
+   "date": "2026-10-06",
+   "unite": "Direction Performance_Greffe et Services administratifs",
+   "objet": "Offrir les condoléances du conseil à la famille de Madame Lise Blanchet décédée le 26 septembre 2026 à l'âge de 84 ans.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=4",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de LaSalle offre ses condoléances à la famille de Mme Lise Blanchet, décédée le 26 septembre 2026 à l'âge de 84 ans.",
+    "Mme Blanchet était la mère de Nancy Blanchet, mairesse de l'arrondissement de LaSalle.",
+    "La résolution a été adoptée à la séance ordinaire du conseil d'arrondissement du mardi 6 octobre 2026.",
+    "Il s'agit d'une motion de sympathie, sans effet administratif ni dépense."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 1974,
+    "sortie": 283
+   }
+  },
+  {
+   "id": "1269720006",
+   "numero": "1269720006",
+   "resolution": "CA26 10 313",
+   "date": "2026-10-06",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Titulariser M. Francisco Lopez, à titre de préposé aux travaux et à l'entretien, à la Division de sports et loisirs de la Direction de la culture, des sports, des loisirs et du développement social, avec la réussite de la période d'essai prévue dans la convention collective des cols bleus regroupés de Montréal (S.C.F.P. 301), à compter du 17 octobre 2026, en vue d'un statut permanent à cet emploi.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=102",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord titularise M. Francisco Lopez comme préposé aux travaux et à l'entretien, à la Division des sports et loisirs, à compter du 17 octobre 2026.",
+    "Le poste devient permanent s'il réussit la période d'essai prévue à la convention collective des cols bleus (S.C.F.P. 301).",
+    "Le poste est comblé à la suite du départ de M. William Ducharme aux arénas; la convention collective oblige la Ville à le pourvoir.",
+    "Le candidat retenu est l'employé auxiliaire admissible ayant la plus grande ancienneté générale, après un affichage interne du 25 au 31 mars 2026.",
+    "La dépense prévue du 17 octobre au 31 décembre 2026 est de 17 900 $ (13 600 $ de salaire, 200 $ de banques de maladie, 4 100 $ de charges sociales), payée à même le budget de fonctionnement de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "17 900 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 4126,
+    "sortie": 431
+   }
+  },
+  {
+   "id": "1269720005",
+   "numero": "1269720005",
+   "resolution": "CA26 10 312",
+   "date": "2026-10-06",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Titulariser M. Mohammed El-Habib Said, à titre de préposé aux travaux et à l'entretien, à la Division de sports et loisirs de la Direction de la culture, des sports, des loisirs et du développement social, avec la réussite de la période d'essai prévue dans la convention collective des cols bleus regroupés de Montréal (S.C.F.P. 301) à compter du 11 octobre 2026, en vue d'un statut permanent à cet emploi.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=98",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord rend permanent un poste de préposé aux travaux et à l'entretien à la Division des sports et loisirs, à compter du 17 octobre 2026.",
+    "Mohammed El-Habib Said obtient le poste, sous réserve de réussir la période d'essai prévue à la convention collective des cols bleus (S.C.F.P. 301).",
+    "Le poste est comblé après le départ de son titulaire précédent; la convention collective oblige la Ville à le pourvoir.",
+    "Le poste a été affiché à l'interne du 21 au 28 août 2026; le candidat retenu est l'employé auxiliaire admissible ayant le plus d'ancienneté.",
+    "Le salaire horaire s'élève à 30,25 $ (groupe de traitement 03, données au 31 décembre 2024).",
+    "La dépense prévue du 17 octobre au 31 décembre 2026 est de 17 900 $ (427 heures), payée par le budget de fonctionnement de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "17 900 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 4212,
+    "sortie": 443
+   }
+  },
+  {
+   "id": "1269433006",
+   "numero": "1269433006",
+   "resolution": "CA26 10 306",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "Autoriser une dépense de 300 $ auprès de la Société Culture et Traditions Québécoises de Montréal-Nord pour l'achat d'un espace publicitaire à l'occasion du spectacle d'Halloween 2026, et ce, à même le budget de représentations des élu.es.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=60",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord achète un espace publicitaire de 300 $, taxes incluses, auprès de la Société Culture et Traditions Québécoises de Montréal-Nord.",
+    "La publicité fait la promotion du spectacle d'Halloween 2026 « on n'a pas peur de vos histoires de peur ».",
+    "La dépense est payée à même le budget discrétionnaire de représentation des élu.es.",
+    "L'arrondissement indique autoriser ponctuellement ce type d'achat lors d'activités sportives, communautaires, de loisirs ou culturelles sur son territoire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "300 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 3179,
+    "sortie": 299
+   }
+  },
+  {
+   "id": "1260139051",
+   "numero": "1260139051",
+   "resolution": "CA26 10 304",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs",
+   "objet": "er Approuver et déposer les rapports sur l'exercice du pouvoir délégué du 1 août au 31 août 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=53",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Montréal-Nord prend acte des rapports mensuels sur les décisions prises par les fonctionnaires entre le 1er août et le 31 août 2026.",
+    "Ces rapports recensent les décisions en ressources humaines, en contrats et autorisations de dépenses, en virements de crédits et en matières juridiques.",
+    "Il s'agit d'une reddition de comptes mensuelle prévue par le règlement de délégation de pouvoirs de l'arrondissement, sans nouvelle dépense ni nouvelle mesure."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 2987,
+    "sortie": 285
+   }
+  },
+  {
+   "id": "1269988018",
+   "numero": "1269988018",
+   "resolution": "CA26 10 290",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "Déposer aux archives le procès-verbal de la réunion du comité consultatif en urbanisme tenue le 9 septembre 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=8",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Montréal-Nord verse aux archives le procès-verbal de la réunion du comité consultatif d'urbanisme tenue en virtuel le 9 septembre 2026.",
+    "Aucune dépense ni aucun changement réglementaire n'est associé à cette décision.",
+    "Le versement aux archives de l'arrondissement suit la décision du conseil du 6 octobre 2026."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 2841,
+    "sortie": 234
+   }
+  },
+  {
+   "id": "CA26 10 291",
+   "numero": null,
+   "resolution": "CA26 10 291",
+   "date": "2026-10-06",
+   "unite": "Direction Performance_Greffe et Services administratifs",
+   "objet": "Offrir les condoléances du conseil à la famille de Madame Marie-Lucette Rigaud Bornéus décédée le 9 septembre 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=4",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement offre ses condoléances à la famille de Marie-Lucette Rigaud Bornéus, décédée le 9 septembre 2026.",
+    "Elle était la mère de Guerline Rigaud, fondatrice et directrice de la maison Sam X, un organisme actif dans l'arrondissement en éducation et en alphabétisation.",
+    "La résolution est un geste symbolique : aucune somme d'argent ni obligation n'y est rattachée."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 1940,
+    "sortie": 254
+   }
+  },
+  {
+   "id": "CA26 10 289",
+   "numero": null,
+   "resolution": "CA26 10 289",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs",
+   "objet": "Approuver le procès-verbal de la séance ordinaire du conseil d'arrondissement tenue le 8 septembre 2026, à 19 h 00.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=3",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement approuve le compte rendu écrit (procès-verbal) de sa séance ordinaire du 8 septembre 2026, tenue à 19 h."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 1702,
+    "sortie": 154
+   }
+  },
+  {
+   "id": "CA26 10 292",
+   "numero": null,
+   "resolution": "CA26 10 292",
+   "date": "2026-10-06",
+   "unite": "Direction Performance_Greffe et Services administratifs",
+   "objet": "Offrir les condoléances du conseil à la famille de Madame Diane Lapointe décédée le 28 septembre 2026 à l'âge de 80 ans.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=4",
+   "source": "resolution",
+   "puces": [
+    "Le conseil offre ses condoléances à la famille et aux ami.e.s de Mme Diane Lapointe, décédée le 28 septembre 2026 à 80 ans.",
+    "Mme Lapointe était une résidente de Montréal-Nord, où elle a vécu une partie importante de sa vie.",
+    "Elle a œuvré auprès des Fourchettes de l'espoir, un organisme de Montréal-Nord, de 2004 à 2011.",
+    "Aucune somme d'argent ni obligation ne découle de cette résolution."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 2009,
+    "sortie": 274
+   }
+  },
+  {
+   "id": "1260282009",
+   "numero": "1260282009",
+   "resolution": "CA26 10 294",
+   "date": "2026-10-06",
+   "unite": "Direction des travaux publics",
+   "objet": "Attribuer à Entreprise Excavation Anjou INC., plus bas soumissionnaire conforme des lots 1, 2,3 et 4 au montant de 1 491 455.72 $ , taxes incluses, pour la location de quatre (04) niveleuses, à AMG INC un contrat relatif à la location d'une (1) niveleuse avec opérateur, plus bas soumissionnaire conforme du lot 5, au montant de 129 691.80 $ taxes incluses. Pour un montant total de 1 621 147.52$, taxes incluses, pour les opérations de déneigement 2026-2028. Appel d'offres 26-21474.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=11",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord loue cinq niveleuses avec opérateurs pour le déneigement des saisons 2026-2027 et 2027-2028.",
+    "Entreprise Excavation Anjou inc. obtient les lots 1 à 4 (quatre niveleuses) pour 1 491 455,72 $, taxes incluses.",
+    "AMG inc. obtient le lot 5 (une niveleuse avec opérateur) pour 129 691,80 $, taxes incluses.",
+    "La dépense totale autorisée est de 1 621 147,52 $, taxes incluses, soit 1 480 323,75 $ net répartis également sur les deux hivers.",
+    "Le financement provient du budget de fonctionnement et de la réserve neige.",
+    "Les contrats découlent de l'appel d'offres public regroupé 26-21474, mené par le Service de l'approvisionnement avec d'autres arrondissements."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 621 147.52$",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 4723,
+    "sortie": 406
+   }
+  },
+  {
+   "id": "1269433010",
+   "numero": "1269433010",
+   "resolution": "CA26 10 297",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "Accorder une contribution financière de 500 $ à Baseball Mineur Montréal-Nord (B.M.M.N.) pour soutenir l'organisme dans les différents services offerts auprès des jeunes de l'Arrondissement, et ce, à même le budget discrétionnaire des élus pour l'année 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=26",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord verse 500 $ à Baseball Mineur Montréal-Nord (B.M.M.N.).",
+    "L'argent sert à soutenir les services que l'organisme offre aux jeunes de l'arrondissement.",
+    "La somme provient du budget discrétionnaire des élus pour l'année 2026.",
+    "La dépense est imputée au budget de fonctionnement de l'arrondissement.",
+    "La décision relève du conseil d'arrondissement; aucune décision antérieure liée au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 3137,
+    "sortie": 275
+   }
+  },
+  {
+   "id": "1260166007",
+   "numero": "1260166007",
+   "resolution": "CA26 10 308",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "Donner un avis de motion, présenter et déposer, en vue de son adoption à une séance ultérieure, le projet de Règlement 1570-7 modifiant le Règlement 1570 sur la circulation routière, à l'article 31 relatif à la vitesse, afin de modifier l'Annexe A pour y ajouter trois zones scolaires situées sur les boulevards Léger, Pie-IX et Saint-Michel à la liste des rues où la limite de vitesse est fixée à 30 km/h. AVIS est donné par M. Jean-Marc Poirier qu’à une séance ultérieure, il sera adopté le Règlement 1570-7 modifiant le Règlement 1570 sur la circulation routière dans les limites de Montréal-Nord, à l’article 31, relatif à la vitesse, plus précisément la modification de l'Annexe A pour y ajouter",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=68",
+   "source": "sommaire",
+   "puces": [
+    "Montréal-Nord veut faire passer de 50 à 30 km/h la limite de vitesse dans trois zones scolaires situées sur les boulevards Léger, Pie-IX et Saint-Michel.",
+    "Les écoles visées sont St-Rémi Annexe (Pie-IX), Adélard-Desrosiers (Léger), ainsi que l'Atelier et Our Lady of Pompéi (Saint-Michel).",
+    "La demande vient du Service de l'urbanisme et de la mobilité, dans le cadre du Plan d'action Vision Zéro 2025-2027, qui prévoit le 30 km/h dans toutes les zones scolaires de Montréal.",
+    "L'arrondissement donne l'avis de motion le 6 octobre 2026 ; l'adoption du règlement est prévue le 2 novembre 2026.",
+    "Le règlement entrera en vigueur seulement quand toute la signalisation sera installée, prévue en novembre 2026.",
+    "Aucun montant n'est associé au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 4814,
+    "sortie": 440
+   }
+  },
+  {
+   "id": "1269433012",
+   "numero": "1269433012",
+   "resolution": "CA26 10 307",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "Autoriser l'achat de billets pour la participation de Mme Chantal Rossi, conseillère de la ville - district Ovide-Clermont, arrondissement de Montréal-Nord à la 3e édition du prix des bibliothèques publiques du Québec du 22 octobre 2026, et ce pour une dépense totale de 40 $.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=64",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord autorise l'achat de billets pour une dépense totale de 40 $, taxes incluses.",
+    "Ces billets servent à la participation de la conseillère de ville Chantal Rossi (district Ovide-Clermont) à la 3e édition du prix des bibliothèques publiques du Québec, le 22 octobre 2026.",
+    "Le coût unitaire du billet est de 40 $ et la dépense sera payée à même le budget de fonctionnement de l'arrondissement.",
+    "L'autorisation est requise parce que la Loi sur le traitement des élus oblige un membre du conseil à obtenir l'accord préalable du conseil avant d'engager une dépense pour la municipalité."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "40 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 3351,
+    "sortie": 340
+   }
+  },
+  {
+   "id": "1265579009",
+   "numero": "1265579009",
+   "resolution": "CA26 10 296",
+   "date": "2026-10-06",
+   "unite": "Direction des travaux publics",
+   "objet": "Accorder une contribution financière de 16 600 $ au Centre des jeunes l'Escale de Montréal-Nord Inc. pour la réalisation du projet Brigade neige pour la période du 15 novembre 2026 au 31 mars 2027 et approuver le projet de convention à intervenir.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=22",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord verse 16 600 $ au Centre des jeunes l'Escale pour le projet Brigade neige, du 15 novembre 2026 au 31 mars 2027.",
+    "Des jeunes de 15 à 25 ans, rétribués, déneigeront gratuitement entrées, escaliers, rampes d'accès et balcons de citoyens vulnérables.",
+    "Le service vise les personnes à mobilité réduite et les aînés de l'arrondissement.",
+    "L'admissibilité des citoyens sera déterminée par le CLSC de Montréal-Nord; le recrutement se fera avec le CIUSSS du Nord-de-l'Île et d'autres organismes locaux.",
+    "La dépense est payée à même le budget de fonctionnement de l'arrondissement.",
+    "Les contributions antérieures pour le même projet étaient de 12 000 $ (2021-2022) et 14 000 $ (2022-2023).",
+    "Une campagne de communication fera connaître le service aux médias locaux et aux bénéficiaires."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "16 600 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 4355,
+    "sortie": 457
+   }
+  },
+  {
+   "id": "1269399004",
+   "numero": "1269399004",
+   "resolution": "CA26 10 310",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "Statuer sur une recommandation du comité consultatif d'urbanisme à savoir : Régulariser l'implantation du bâtiment principal existant dont la marge avant principale est de 2,87 mètres ainsi qu'une marge avant secondaire de 2,81 mètres, pour l'immeuble situé au 10205, avenue Armand-Lavergne (lot 1 846 536), le tout en vertu du Règlement RGCA02-10-006 sur les dérogations mineures.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=85",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord régularise l'implantation du bâtiment situé au 10205, avenue Armand-Lavergne, construit trop près de ses lignes de terrain.",
+    "La dérogation permet une marge avant de 2,87 mètres au lieu de 4,50 mètres et une marge avant secondaire de 2,81 mètres au lieu de 3,00 mètres.",
+    "Selon les archives, le bâtiment a été érigé en 1962 et agrandi en 1988 avec permis, mais l'implantation n'a pas respecté ces permis ni la réglementation de l'époque.",
+    "Le taux d'implantation au sol de 63 % n'a pas besoin de dérogation : il est reconnu comme droit acquis.",
+    "Si le bâtiment perd au moins la moitié de sa valeur (démolition, incendie ou autre cause), il devra être reconstruit selon les règles d'urbanisme en vigueur.",
+    "Le comité consultatif d'urbanisme et la direction de l'aménagement urbain recommandent tous deux d'accorder la demande, jugeant que la mise en conformité exigerait une démolition et causerait un préjudice au propriétaire.",
+    "Avis public en ligne le 17 septembre 2026; décision du conseil d'arrondissement le 6 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 6067,
+    "sortie": 536
+   }
+  },
+  {
+   "id": "1269433008",
+   "numero": "1269433008",
+   "resolution": "CA26 10 298",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "Accorder une contribution financière de 500 $ au Centre de pédiatrie sociale de Montréal-Nord pour soutenir l'organisme dans les différents services offerts auprès des familles vulnérables de l'arrondissement, et ce, à même le budget discrétionnaire des élu.e.s pour l'année 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=30",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord verse 500 $ au Centre de pédiatrie sociale de Montréal-Nord.",
+    "L'argent sert à soutenir les services de l'organisme auprès des familles vulnérables de l'arrondissement.",
+    "La somme vient du budget discrétionnaire des élu.e.s pour l'année 2026.",
+    "La dépense est imputée au budget de fonctionnement de l'arrondissement.",
+    "Le même organisme avait reçu 500 $ du budget discrétionnaire en 2025."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 3323,
+    "sortie": 277
+   }
+  },
+  {
+   "id": "1269433011",
+   "numero": "1269433011",
+   "resolution": "CA26 10 305",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "Autoriser une dépense de 500 $ taxes incluses auprès de la Fondation Cégep Marie-Victorin pour l'achat d'un espace publicitaire dans le cadre de l'organisation de la 2e édition du cabaret- bénéfice et ce à même le budget des frais de représentation des élus pour l'année 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=57",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord achète un espace publicitaire de 500 $, taxes incluses, auprès de la Fondation Cégep Marie-Victorin.",
+    "La publicité paraîtra dans le cadre de la 2e édition du cabaret-bénéfice de la Fondation.",
+    "La somme sort du budget de frais de représentation (budget discrétionnaire) des élus pour l'année 2026.",
+    "La décision relève du conseil d'arrondissement de Montréal-Nord."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 3142,
+    "sortie": 265
+   }
+  },
+  {
+   "id": "1269988017",
+   "numero": "1269988017",
+   "resolution": "CA26 10 311",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "objet": "Statuer sur une recommandation du comité consultatif d'urbanisme à savoir : permettre l'agrandissement du portique principal en façade du bâtiment situé au 10333, boulevard Pie-IX (Lot 6 284 024), le tout en vertu du Règlement RGCA25-10-0009 relatif aux plans d'implantation et d'intégration architecturale (PIIA).",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=92",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Montréal-Nord autorise l'agrandissement du portique d'entrée du bâtiment situé au 10333, boulevard Pie-IX.",
+    "Le projet vient de McDonald's Canada, qui veut créer une zone réservée aux « Mc Livraisons » afin d'éviter l'achalandage des livreurs dans la salle principale du restaurant.",
+    "Les travaux doivent commencer dans les 24 mois, sinon l'autorisation devient nulle.",
+    "Le propriétaire doit déposer une garantie financière de 5 % de la valeur des travaux à la délivrance du permis; elle est libérée à la fin des travaux.",
+    "Si les travaux ne sont pas terminés à temps ou ne respectent pas la résolution, le conseil peut utiliser la garantie pour faire exécuter les travaux et réclamer la différence, ou la garder en pénalité.",
+    "Les travaux doivent suivre les plans d'architecture de la firme Pattison ID reçus le 16 juin 2026.",
+    "Le comité consultatif d'urbanisme avait recommandé favorablement la demande le 9 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 5232,
+    "sortie": 484
    }
   },
   {
@@ -8033,6 +8751,698 @@
    "jetons": {
     "entree": 1901,
     "sortie": 290
+   }
+  },
+  {
+   "id": "1266267009",
+   "numero": "1266267009",
+   "resolution": "CA26 26 0158",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Prendre acte du dépôt des rapports sur l'exercice des pouvoirs délégués aux fonctionnaires, pour la période du 1er au juin 30 juin et du 1er au 31 juillet 2026 en vertu du Règlement intérieur du conseil d'arrondissement sur la délégation de pouvoirs aux fonctionnaires et employés (RCA-23)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=51",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Rosemont–La Petite-Patrie prend acte du dépôt des rapports sur les décisions prises par les fonctionnaires à qui le conseil a délégué des pouvoirs.",
+    "Les rapports couvrent les périodes du 1er au 30 juin et du 1er au 31 juillet 2026.",
+    "Il s'agit d'un dépôt de documents : aucune dépense ni nouvelle obligation n'y est rattachée."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.512Z",
+   "jetons": {
+    "entree": 3936,
+    "sortie": 319
+   }
+  },
+  {
+   "id": "1269944003",
+   "numero": "1269944003",
+   "resolution": "CA26 26 0169",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Adopter une résolution, en vertu des articles 145.45 à 145.49 de la Loi sur l'aménagement et l'urbanisme, visant à autoriser la construction d'un bâtiment résidentiel d'une hauteur de 11 mètres et de trois (3) étages, comprenant 24 logements sur la propriété située au 3330, avenue Laurier Est (lot 1 589 295 du cadastre du Québec)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=112",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Rosemont–La Petite-Patrie autorise la construction d'un immeuble résidentiel de 24 logements au 3330, avenue Laurier Est, à l'angle de la 12e Avenue, sur un terrain aujourd'hui occupé par un stationnement de surface.",
+    "Le bâtiment aurait trois étages (10,8 m) avec une mezzanine atteignant 13,9 m, environ 975 m² au sol, 15 places de stationnement et 72 places pour vélos au sous-sol; il serait relié à l'église Holy Cross par un passage souterrain.",
+    "La Ville accorde trois dérogations au règlement d'urbanisme : usage d'habitation sur un terrain de lieu de culte, absence de retrait de la cage d'escalier et hauteur de celle-ci portée à 14 m.",
+    "Le promoteur doit prévoir au moins six logements de trois chambres, rendre tous les logements adaptables et déposer une étude acoustique contre le bruit du parc canin voisin (mur renforcé, triple vitrage).",
+    "Un écran végétal doit être aménagé le long de la limite est, entre l'aire d'exercice canin et le bâtiment.",
+    "Les travaux doivent commencer au plus tard le 8 septembre 2031.",
+    "Avant le permis, les façades devront être approuvées : simplification de la façade sur Laurier, préservation de la référence visuelle au campanile de l'église et traitement du mur aveugle vers la 12e Avenue."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.512Z",
+   "jetons": {
+    "entree": 7653,
+    "sortie": 602
+   }
+  },
+  {
+   "id": "1265642003",
+   "numero": "1265642003",
+   "resolution": "CA26 26 0153",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Autoriser une dépense de 392 766,98 $, taxes incluses (contrat : 302 128,44 $ + contingences : 45 319,27 $ + variation de quantités : 45 319,27 $ - Octroyer un contrat à « Les Pavages Céka inc. » d'une somme de 302 128,44 $, taxes incluses, pour la réalisation des travaux de voirie - Appel d'offres public 26-058-VP (8 soumissionnaires)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=26",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Rosemont–La Petite-Patrie confie à « Les Pavages Céka inc. » des travaux de voirie de 302 128,44 $, taxes incluses, pour une dépense totale autorisée de 392 766,98 $ (incluant 45 319,27 $ de contingences et 45 319,27 $ pour les variations de quantités).",
+    "Les travaux de planage-pavage toucheront la rue Beaubien Ouest entre l'avenue de l'Esplanade et l'avenue du Parc, le boulevard Saint-Laurent entre la rue Henri-IV et la rue de Bellechasse, ainsi que l'intersection Saint-Laurent / Beaubien Ouest.",
+    "Les travaux doivent commencer début octobre 2026 et se terminer à la mi-octobre 2026.",
+    "Huit entreprises ont soumissionné; Céka est la plus basse conforme, à 58 017,22 $ (23,77 %) de plus que l'estimation de l'arrondissement et 77 010,84 $ (34,21 %) de plus que l'estimation de la firme externe Artelia.",
+    "La dépense sera financée par un règlement d'emprunt du programme de réhabilitation de chaussées par planage-revêtement et réalisée à 100 % en 2026.",
+    "Le rendement de l'entrepreneur sera évalué à la fin du contrat.",
+    "L'arrondissement prévoit une opération de communication pour informer des travaux et des délais."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "392 766,98 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 6886,
+    "sortie": 603
+   }
+  },
+  {
+   "id": "1268724008",
+   "numero": "1268724008",
+   "resolution": "CA26 26 0163",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Édicter trois ordonnances - Programmation d'événements publics : « Tournoi John Jones », « Plus de 150 ruelles vertes, ça se fête! », « Événement de fin de saison du CS Montréal Centre », « Zone artistique éphémère », « Pôle de mobilité », « Plaza dans le parc », « Lecture de contes d'automne », « Juristes Urbains », « Fête de quartier Roseau », « Massonloween », « Marche Jaunt pour Vols d'espoir de CCG 2026 », « Ruelle hantée Masson Village »",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=74",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement Rosemont–La Petite-Patrie autorise 12 événements publics sur son territoire en 2026, dont « Massonloween », « Ruelle hantée Masson Village », « Fête de quartier Roseau » et « Plus de 150 ruelles vertes, ça se fête! ».",
+    "Trois ordonnances lèvent temporairement des règlements : bruit d'appareils sonores à l'extérieur, vente et consommation d'alcool, de nourriture et d'articles promotionnels, et fermeture de rues.",
+    "Les autorisations s'appliquent seulement aux sites, dates et heures listés dans le tableau en annexe du dossier.",
+    "Les promoteurs assument la responsabilité financière et logistique de leurs événements; l'arrondissement fournit un soutien logistique à même ses budgets de fonctionnement.",
+    "Les permis d'occupation du domaine public seront émis par la Direction de la culture, des sports, des loisirs et du développement social et la Direction des travaux publics.",
+    "Les ordonnances seront publiées sur le site Internet de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 7750,
+    "sortie": 468
+   }
+  },
+  {
+   "id": "1269074006",
+   "numero": "1269074006",
+   "resolution": "CA26 26 0159",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Prendre acte de la reddition de comptes et approuver le virement de crédits du compte du surplus de gestion affecté - Autres fins, d'un montant de 462 900 $ pour l'activité de charges interunités, pour l'année 2025, concernant l'entretien de l'éclairage, de la signalisation et du marquage de la chaussée",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=55",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Rosemont–La Petite-Patrie prend acte du bilan 2025 de sa Direction de l'entretien de l'éclairage, de la signalisation et du marquage (EESM) et approuve un virement de 462 900 $ provenant du surplus de gestion.",
+    "Ce surplus de 462 900 $ sera redistribué aux neuf arrondissements desservis par EESM, dont Ahuntsic-Cartierville, Ville-Marie, Le Sud-Ouest, Le Plateau-Mont-Royal et Villeray–Saint-Michel–Parc-Extension.",
+    "EESM entretient notamment l'éclairage de rue, les feux de circulation, les panneaux et le marquage de la chaussée pour ces arrondissements.",
+    "Le budget de l'activité était de 24 187 100 $ en 2025 et passe à 25 056 800 $ en 2026; une réserve de 2 505 680 $ (10 % du budget) sert à couvrir les déficits futurs, les urgences ou de nouvelles activités.",
+    "En 2025, l'équipe a entretenu 86 901 luminaires de rue, 1 830 intersections avec feux de circulation, 502 parcs, et traité plus de 5 800 demandes liées aux feux de circulation.",
+    "Le marquage réalisé en 2025 inclut 7 617 passages piétons, 4 892 lignes d'arrêt et 1 053 km de lignes de pistes cyclables."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "462 900 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 6899,
+    "sortie": 701
+   }
+  },
+  {
+   "id": "1269228002",
+   "numero": "1269228002",
+   "resolution": "CA26 26 0166",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Édicter une ordonnance afin d'autoriser un dépassement des heures prévues à l'article 10 du Règlement sur le bruit (RCA-180) pour la réalisation des travaux de pavage et planage en 2026 sur l'avenue Papineau et l'avenue De Lorimier dans l'arrondissement de Rosemont–La Petite-Patrie",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=91",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Rosemont–La Petite-Patrie permet à l'entrepreneur de travailler la nuit et la fin de semaine, en dérogation au règlement sur le bruit qui interdit normalement les travaux de 19 h à 7 h.",
+    "Les travaux de planage et de pavage visent l'avenue Papineau, entre Bélanger et Beaubien Est, et l'avenue De Lorimier, entre Beaubien Est et Rosemont.",
+    "L'horaire autorisé couvre du lundi au vendredi de 19 h à 7 h, du samedi 19 h au dimanche 10 h, et du dimanche 19 h au lundi 7 h.",
+    "Les travaux exigent des fermetures complètes de chaussée; la Ville invoque la circulation, la sécurité des usagers et les circuits d'autobus de la STM pour justifier le travail de nuit.",
+    "L'entrepreneur s'engage à des mesures pour réduire le bruit près des secteurs résidentiels (sons de recul, éviter le claquement des bennes, consignes aux équipes).",
+    "Les opérations sont prévues entre la mi-septembre et décembre 2026; l'autorisation vaut pour l'année 2026.",
+    "Aucun impact financier pour l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 5321,
+    "sortie": 524
+   }
+  },
+  {
+   "id": "1266267007",
+   "numero": "1266267007",
+   "resolution": "CA26 26 0156",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Déposer le rapport de l'évolution budgétaire de l'arrondissement de Rosemont–La Petite-Patrie au 30 juin 2026 ainsi que le rapport comparatif avec l'exercice précédent à la même période",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=43",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Rosemont–La Petite-Patrie dépose son suivi budgétaire au 30 juin 2026, avec une comparaison à la même période l'an dernier, comme l'exige la Loi sur les cités et villes.",
+    "L'arrondissement prévoit terminer 2026 avec un excédent de 814,0 k$.",
+    "Les revenus autonomes anticipés atteignent 10 243,9 k$, soit 1 664,8 k$ de plus que prévu, surtout grâce à l'occupation du domaine public (810,6 k$) et aux permis de construction (594,9 k$).",
+    "Les dépenses anticipées dépassent le budget modifié de 850,8 k$, le budget original de dépenses étant de 78 627,2 k$.",
+    "L'écart de dépenses vient surtout de la rémunération (déficit de 3 084,0 k$, dont 2 510,7 k$ liés à la structure des cols bleus), compensé en partie par des économies de 2 016,4 k$ sur les biens et services."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "814,0 k$",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 4680,
+    "sortie": 448
+   }
+  },
+  {
+   "id": "CA26 26 0148",
+   "numero": null,
+   "resolution": "CA26 26 0148",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Approuver le procès-verbal de la séance ordinaire du conseil d'arrondissement tenue le 6 juillet 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement approuve le procès-verbal de sa séance ordinaire du 6 juillet 2026, tenue à 19 h."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 1675,
+    "sortie": 144
+   }
+  },
+  {
+   "id": "CA26 26 0147",
+   "numero": null,
+   "resolution": "CA26 26 0147",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Adopter l'ordre du jour de la séance ordinaire du conseil d'arrondissement du 8 septembre 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement adopte l'ordre du jour de sa séance ordinaire du 8 septembre 2026, tenue à 19 h, tel que soumis."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 1679,
+    "sortie": 152
+   }
+  },
+  {
+   "id": "1264646001",
+   "numero": "1264646001",
+   "resolution": "CA26 26 0154",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Ratifier l'attribution d'un contrat au montant de 1 931,58 $ US (2 777,96 $ CAN) pour l'achat de sept licences de la plateforme collaborative Miro",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=33",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement Rosemont–La Petite-Patrie ratifie l'achat de sept licences du logiciel collaboratif Miro, au coût de 1 931,58 $ US (2 777,96 $ CAN).",
+    "Il s'agit du renouvellement annuel de licences payantes « Business AI » utilisées par le Bureau de projets pour des ateliers, des remue-méninges et de la cartographie de processus.",
+    "Comme le fournisseur est américain, un règlement provincial oblige le conseil d'arrondissement à autoriser le contrat à titre exceptionnel.",
+    "La dépense est payée à même le budget du directeur d'arrondissement.",
+    "L'arrondissement évaluera chaque année l'utilisation de la plateforme avant de renouveler."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 931,58 $ US (2 777,96 $ CAN)",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 3483,
+    "sortie": 375
+   }
+  },
+  {
+   "id": "1267295001",
+   "numero": "1267295001",
+   "resolution": "CA26 26 0165",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Édicter, en vertu du Règlement sur la circulation et le stationnement (R.R.V.M., c. C-4.1), une ordonnance visant à installer une règlementation d'arrêt interdit, excepté autobus, sur les rues Beaubien Est, Beaubien Ouest, ainsi que la 20e Avenue et retrait sur la rue Saint-Dominique",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=86",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement Rosemont–La Petite-Patrie modifie la signalisation d'arrêt et de stationnement sur plusieurs tronçons pour aménager de nouveaux arrêts d'autobus de la STM.",
+    "Les rues touchées : Beaubien Est (entre Hutchison et Jeanne-Mance), Beaubien Ouest (entre Clark et l'avenue de l'Esplanade, jusqu'à Waverly), la 20e Avenue près de de Bellechasse, et la rue Saint-Dominique.",
+    "De nouvelles zones « arrêt interdit, excepté autobus » sont installées, notamment 29,5 m sur Beaubien Est à l'ouest de Jeanne-Mance et 48 m sur la 20e Avenue au nord de de Bellechasse.",
+    "Sur Saint-Dominique, une zone réservée aux autobus de 30 m est retirée, au sud de Saint-Zotique Est.",
+    "Des places de stationnement limitées (60 min sur Beaubien Ouest, 2 h sur Beaubien Est) disparaissent; une place pour personne handicapée près de Hutchison est déplacée de quelques mètres.",
+    "Le document indique la perte de trois espaces de stationnement au total.",
+    "La STM s'occupe de la communication et du suivi des plaintes; les coûts sont assumés par le projet de refonte de la Ville centre."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.513Z",
+   "jetons": {
+    "entree": 6224,
+    "sortie": 573
+   }
+  },
+  {
+   "id": "1266267008",
+   "numero": "1266267008",
+   "resolution": "CA26 26 0157",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Prendre acte du rapport du maire sur la situation financière 2026 de l'arrondissement de Rosemont–La Petite-Patrie",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=47",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Rosemont–La Petite-Patrie prend acte du rapport du maire sur la situation financière 2026.",
+    "Le rapport porte sur les derniers résultats financiers, le dernier programme des immobilisations, les indications préliminaires pour 2026 et les rapports des vérificateurs.",
+    "Le texte du rapport sera publié sur le site Web de l'arrondissement dès le lendemain de la séance du 8 septembre 2026.",
+    "Aucune somme ni mesure n'est annoncée dans le document : il s'agit d'une exigence de la Charte de la Ville de Montréal."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 3286,
+    "sortie": 359
+   }
+  },
+  {
+   "id": "1267522001",
+   "numero": "1267522001",
+   "resolution": "CA26 26 0161",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Offrir au conseil municipal, en vertu du deuxième alinéa de l'article 85 de la Charte de la Ville de Montréal, métropole du Québec, de prendre en charge les travaux de réfection de chaussées (PRCPR) sur le réseau artériel administratif de la Ville (RAAV) localisé sur le territoire de l'arrondissement de Rosemont–La Petite-Patrie dans le cadre du programme de réhabilitation de chaussées par planage-revêtement (PRCPR) - Réseau artériel",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=66",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Rosemont–La Petite-Patrie propose au conseil municipal de prendre en charge lui-même des travaux de réfection de chaussées sur des rues du réseau artériel de la Ville situées sur son territoire.",
+    "Trois secteurs sont visés : la rue Beaubien Ouest entre l'avenue de l'Esplanade et l'avenue du Parc, le boulevard Saint-Laurent entre la rue Henri-IV et la rue de Bellechasse, ainsi que l'intersection Saint-Laurent / Beaubien Ouest.",
+    "L'arrondissement s'occuperait des plans et devis, de l'appel d'offres, de l'octroi du contrat et de la surveillance des travaux.",
+    "Le document invoque le nombre élevé de requêtes sur l'état des chaussées et les objectifs de mobilité et de sécurité de l'arrondissement.",
+    "Aucun coût n'est engagé à cette étape : le Service des infrastructures du réseau routier financerait la totalité des travaux.",
+    "Échéancier prévu : octroi du contrat en septembre 2026, travaux en octobre 2026, après acceptation de l'offre par le conseil municipal."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 4381,
+    "sortie": 638
+   }
+  },
+  {
+   "id": "1267145002",
+   "numero": "1267145002",
+   "resolution": "CA26 26 0149",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Approuver une convention de soutien financier et technique avec l'organisme « Corporation du cinéma Beaubien » pour la réalisation de l'événement « L'été qui reste - Fête de la rentrée du parc Molson » dans le cadre du Programme des Arrondissements DFÉ 2026 - Octroyer à cet effet une contribution financière de 7 500 $ à même le budget de fonctionnement en provenance du budget dédié du Service de la culture, des sports et des loisirs",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=4",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Rosemont–La Petite-Patrie verse 7 500 $ à la Corporation du cinéma Beaubien pour organiser « L'été qui reste – Fête de la rentrée du parc Molson ».",
+    "L'événement consiste en une projection extérieure gratuite du film CRAZY, le samedi 19 septembre 2026, au parc Molson.",
+    "L'argent vient d'un budget dédié du Service de la culture, des sports et des loisirs, et non du budget régulier de l'arrondissement.",
+    "La somme fait partie d'une enveloppe de 485 000 $ répartie entre les 19 arrondissements pour financer des événements hors des quartiers centraux, dans le cadre d'un projet-pilote 2026-2027.",
+    "L'organisme devra remettre un rapport final (participation, bilan financier, deux visuels) au plus tard 30 jours après l'événement.",
+    "L'organisme devra mentionner la participation de la Ville dans sa promotion; l'arrondissement relaiera l'événement sur ses réseaux sociaux."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "7 500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 5802,
+    "sortie": 461
+   }
+  },
+  {
+   "id": "1266079002",
+   "numero": "1266079002",
+   "resolution": "CA26 26 0171",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Autoriser l'exercice de l'usage conditionnel « Épicerie », conformément au Règlement d'urbanisme de l'arrondissement Rosemont–Petite-Patrie (01-279), au 1650, rue Saint-Zotique Est - Demande 3003649062",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=126",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement Rosemont–La Petite-Patrie autorise l'ouverture d'une épicerie au 1650, rue Saint-Zotique Est, au coin de la rue Marquette, près de l'avenue Papineau.",
+    "Le local se trouve au rez-de-chaussée d'un immeuble de trois étages qui compte quatre logements; le secteur n'autorise normalement que de l'habitation de 2 à 8 logements.",
+    "L'épicerie remplace une garderie qui avait été autorisée en 2011 par le même type de procédure.",
+    "Le requérant doit fournir un plan de gestion des matières résiduelles.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable avec conditions le 29 avril 2026.",
+    "Avis public et affichage le 21 août 2026; questions des citoyens et adoption prévues à la séance du conseil d'arrondissement du 8 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 4045,
+    "sortie": 409
+   }
+  },
+  {
+   "id": "1266079004",
+   "numero": "1266079004",
+   "resolution": "CA26 26 0167",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Adopter un projet de résolution, en vertu des articles 145.45 à 145.49 de la Loi sur l'aménagement et l'urbanisme, visant à autoriser la construction d'un bâtiment résidentiel de six étages, proposant 102 logements, sur le lot vacant 3 795 031 du cadastre du Québec, situé le long de la rue des Carrières, entre les rues de Lanaudière et Chambord",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=96",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Rosemont–La Petite-Patrie autorise la construction d'un immeuble résidentiel de 102 logements sur un terrain vacant de la rue des Carrières, entre les rues de Lanaudière et Chambord (district de Saint-Édouard).",
+    "Le bâtiment aura de quatre à six étages (19,86 m), un sous-sol, des terrasses sur le toit, 47 places de stationnement pour autos et 222 places pour vélos.",
+    "La Ville accorde des dérogations à son règlement d'urbanisme : hauteur (3 étages et 12,5 m permis), densité et nombre de logements autorisés, plus un transformateur sur socle en cour avant.",
+    "Conditions imposées au promoteur : 13 % de logements de trois chambres, 15 % de logements adaptables, air climatisé dans tous les logements, étude acoustique et plan de gestion des déchets au dépôt du permis.",
+    "Les travaux doivent commencer au plus tard le 5 octobre 2031.",
+    "Le projet prévoit aussi 10 % de logements abordables et doit être approuvé en vertu des critères architecturaux (teinte de brique, façades, ensoleillement de la cour arrière).",
+    "La résolution n'est pas susceptible d'approbation référendaire; le site avait déjà fait l'objet de deux projets particuliers en 2022 et 2023."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 7611,
+    "sortie": 566
+   }
+  },
+  {
+   "id": "1260297019",
+   "numero": "1260297019",
+   "resolution": "CA26 26 0152",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Approuver un projet de convention avec l'Association des commerçants et des professionnels de Beaubien Est afin de consolider sa capacité d'action - Octroyer une contribution financière non- récurrente de 45 000 $ à l'organisme (contrat 26-061-CG)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=21",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Rosemont–La Petite-Patrie verse 45 000 $ à l'Association des commerçants et des professionnels de Beaubien Est, une somme non récurrente et taxes incluses.",
+    "L'argent sert à faire connaître l'Association, promouvoir les commerces de la rue Beaubien Est et améliorer leur présence en ligne.",
+    "Une partie financera l'embellissement : signature visuelle dans l'espace public, verdissement des carrés d'arbres et mise en place de la « Brigade Beaubien ».",
+    "La contribution appuie aussi l'accompagnement de l'Association vers la création d'une future Société de développement commercial (SDC).",
+    "Le versement se fait en trois temps : 27 000 $ à la signature, 13 500 $ après un rapport d'étape et 4 500 $ après l'acceptation de la reddition de comptes.",
+    "L'arrondissement avait accordé 75 000 $ à cet organisme en 2024 et en 2025.",
+    "Le financement provient d'un programme destiné aux secteurs commerciaux situés hors des districts de développement commercial."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "45 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 5747,
+    "sortie": 475
+   }
+  },
+  {
+   "id": "1263318002",
+   "numero": "1263318002",
+   "resolution": "CA26 26 0155",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Approuver une convention de contribution financière avec l'organisme « Les Loisirs du centre Père-Marquette inc. » pour la prolongation du projet de médiation urbaine en loisir pour les jeunes de 12 à 25 ans au parc du Père-Marquette pour l'automne 2026 - Octroyer une contribution financière de 10 160 $, toutes taxes incluses, le cas échéant, en provenance du budget de fonctionnement de l'arrondissement",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=37",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Rosemont–La Petite-Patrie verse 10 160 $ (taxes incluses) à l'organisme « Les Loisirs du centre Père-Marquette inc. » pour prolonger son projet de médiation urbaine en loisir.",
+    "L'argent vient du budget de fonctionnement de l'arrondissement et n'est pas récurrent.",
+    "Le projet s'adresse aux jeunes de 12 à 25 ans qui fréquentent la section nord du parc du Père-Marquette, dans La Petite-Patrie.",
+    "Un médiateur urbain sera présent 35 heures par semaine pendant 12 semaines, du 25 septembre au 18 décembre 2026.",
+    "Le médiateur propose des activités de loisir, de culture et de sport et fait le lien entre les projets du parc (volleyball de plage, skatepark, Station loisir, jardin communautaire, piscine, etc.).",
+    "Le financement actuel du projet, issu du programme Prévention Montréal, prend fin le 24 septembre 2026; un bilan est prévu en janvier 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "10 160 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 6203,
+    "sortie": 470
+   }
+  },
+  {
+   "id": "1268729003",
+   "numero": "1268729003",
+   "resolution": "CA26 26 0170",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Autoriser l'exercice de l'usage conditionnel « Épicerie (dépanneur) », conformément au Règlement d'urbanisme de l'arrondissement Rosemont–Petite-Patrie (01-279), bâtiment situé au 7057, rue Saint-Denis - Demande 3003676950",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=121",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Rosemont–La Petite-Patrie autorise l'ouverture d'une épicerie (dépanneur) au rez-de-chaussée du 7057, rue Saint-Denis, près de la rue Jean-Talon.",
+    "Le local vise environ 69 m² et était vacant : son usage commercial avait perdu ses droits acquis après plus de 12 mois d'inoccupation, la zone n'autorisant que du résidentiel de 2 à 8 logements.",
+    "Le commerce devra remettre à l'arrondissement un plan de gestion des déchets et des livraisons avant d'obtenir son certificat d'occupation.",
+    "Ce plan doit viser à réduire les nuisances : bruit, empiétement dans le REV Saint-Denis, vermine.",
+    "Aucune modification à la façade du bâtiment n'est prévue.",
+    "Le comité consultatif d'urbanisme s'est prononcé en faveur du projet le 8 juillet 2026, avec la même condition; la décision passe au conseil d'arrondissement le 8 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 5418,
+    "sortie": 460
+   }
+  },
+  {
+   "id": "1269229002",
+   "numero": "1269229002",
+   "resolution": "CA26 26 0164",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Édicter, en vertu du Règlement sur la circulation et le stationnement (R.R.V.M., c. C-4.1), une ordonnance autorisant l'ajout et le retrait d'espaces de stationnement tarifés sur la rue Jean-Talon Est entre l'avenue Christophe-Colomb et l'avenue Papineau ainsi qu'à certaines amorces de rues transversales",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=80",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement Rosemont–La Petite-Patrie réorganise le stationnement payant sur le côté sud de la rue Jean-Talon Est, entre Christophe-Colomb et Papineau.",
+    "Sur Jean-Talon Est, environ 86 espaces tarifés sont retirés et une quarantaine sont réinstallés à de nouveaux endroits sur les mêmes tronçons.",
+    "De nouveaux espaces payants apparaissent aussi aux amorces des rues transversales : de La Roche, De Normanville, De Lanaudière et Garnier (1 à 6 espaces chacune).",
+    "L'Agence de mobilité durable, qui recommande les changements, paiera la signalisation, les équipements et l'exploitation; les revenus seront partagés avec l'arrondissement.",
+    "But annoncé : améliorer la rotation des véhicules et l'accès aux commerces dans un secteur jugé très achalandé (métro, services, institutions).",
+    "Des supports à vélos seront ajoutés là où l'aménagement le permet.",
+    "Échéancier : communication aux commerçants et citoyens en septembre 2026, signalisation et mise en service à l'automne 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 7264,
+    "sortie": 497
+   }
+  },
+  {
+   "id": "1266079005",
+   "numero": "1266079005",
+   "resolution": "CA26 26 0168",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Adopter un projet de résolution, en vertu des articles 145.45 à 145.49 de la Loi sur l'aménagement et l'urbanisme, visant à autoriser la construction d'un bâtiment mixte de quatre étages, proposant 38 logements et deux suites commerciales, sur le lot vacant 2 170 228 du cadastre du Québec, situé à l'intersection de la rue Beaubien Est et de la 10e Avenue",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=104",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Rosemont–La Petite-Patrie autorise la construction d'un immeuble de quatre étages sur un terrain vacant à l'intersection de la rue Beaubien Est et de la 10e Avenue (district Étienne-Desmarteaux).",
+    "Le bâtiment comptera 38 logements, deux suites commerciales au rez-de-chaussée, 17 places de stationnement pour autos et 76 pour vélos au sous-sol.",
+    "Le projet déroge aux règles d'urbanisme : 4 étages et 17,25 m de hauteur au lieu de 3 étages et 11 m, plus un accès au toit sur la construction hors toit, normalement interdit.",
+    "Conditions imposées : au moins 10 % des logements avec trois chambres (96 m²), au moins un logement adaptable, et un plan de gestion des déchets au dépôt du permis.",
+    "Les travaux doivent commencer d'ici le 5 octobre 2031.",
+    "Le terrain abritait un bâtiment vacant depuis 2013, détruit par un incendie en novembre 2025 puis démoli.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable le 5 août 2026; la résolution n'est pas susceptible d'approbation référendaire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 7642,
+    "sortie": 529
+   }
+  },
+  {
+   "id": "1267853002",
+   "numero": "1267853002",
+   "resolution": "CA26 26 0172",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Approuver la nomination par intérim de Mme Simone Bonenfant à titre de directrice de la Direction de la culture, des sports, des loisirs et du développement social de l'arrondissement de Rosemont–La Petite-Patrie, et ce, rétroactivement au 12 août 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=130",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Rosemont–La Petite-Patrie nomme Simone Bonenfant directrice par intérim de la Direction de la culture, des sports, des loisirs et du développement social.",
+    "La nomination s'applique rétroactivement au 12 août 2026.",
+    "Le poste était vacant à la suite du départ à la retraite de Martin Savaria.",
+    "Pendant l'intérim, Mme Bonenfant conserve aussi son poste de directrice des relations avec les citoyens, des services administratifs et du greffe.",
+    "Le document ne mentionne aucun montant ni durée de fin pour cet intérim."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 3014,
+    "sortie": 303
+   }
+  },
+  {
+   "id": "1269074007",
+   "numero": "1269074007",
+   "resolution": "CA26 26 0160",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Autoriser un virement de crédits du compte de surplus de gestion affecté - divers au montant de 300 000 $ pour assumer les dépenses à venir en location de véhicules afin de répondre aux besoins opérationnels des équipes de la Direction de l'entretien de l'éclairage, de la signalisation et du marquage de la chaussée",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=62",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Rosemont–La Petite-Patrie pige 300 000 $ dans son surplus de gestion pour payer de la location de véhicules.",
+    "L'argent va à la Direction de l'entretien de l'éclairage, de la signalisation et du marquage de la chaussée (EESM).",
+    "Ces véhicules loués doivent remplacer du matériel roulant mis au rancart ou brisé, de façon permanente ou temporaire.",
+    "La direction explique que son budget de fonctionnement ne suffit pas à couvrir ces locations.",
+    "L'équipe EESM s'occupe de l'éclairage, de la signalisation lumineuse et écrite et du marquage de la chaussée pour les arrondissements qu'elle dessert.",
+    "La décision relève du conseil d'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "300 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 3520,
+    "sortie": 369
+   }
+  },
+  {
+   "id": "1267059004",
+   "numero": "1267059004",
+   "resolution": "CA26 26 0162",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Ratifier une dépense de 2 000 $ pour la participation des élus de l'arrondissement aux Assises 2026 de l'Union des municipalités du Québec, qui a eu lieu du 13 au 16 mai 2026, au Centre des Congrès de Québec",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=70",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement Rosemont–La Petite-Patrie approuve après coup une dépense additionnelle de 2 000 $ pour la participation de ses élus aux Assises 2026 de l'Union des municipalités du Québec.",
+    "L'événement s'est tenu du 13 au 16 mai 2026 au Centre des Congrès de Québec.",
+    "Quatre élus y ont participé : le maire François Limoges et les conseillers de ville Ericka Alneus, Josefina Blanco et Olivier Demers-Dubé.",
+    "Un montant de 6 500 $ (avant taxes) avait déjà été approuvé par le conseil d'arrondissement le 27 novembre 2025; les frais réels ont dépassé cette somme.",
+    "La dépense est imputée selon les informations financières au dossier, avec certification de fonds par la direction des services administratifs de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 3361,
+    "sortie": 396
+   }
+  },
+  {
+   "id": "1267951005",
+   "numero": "1267951005",
+   "resolution": "CA26 26 0150",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Approuver deux conventions avec contributions financières avec les organismes « Corporation de développement communautaire de Rosemont inc. » et « Le centre de ressources et d'action communautaire de la Petite-Patrie » pour les paniers de Noël 2026 - Octroyer à chacun d'entre eux une contribution financière, respectivement de 22 000 $ et de 25 000 $ pour un montant total de 47 000 $, pour l'année 2026 - Autoriser un virement de crédits du compte de surplus de gestion affecté - divers",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=10",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Rosemont–La Petite-Patrie verse 47 000 $ à deux organismes pour les paniers de Noël de décembre 2026.",
+    "La Corporation de développement communautaire de Rosemont reçoit 22 000 $ et agira comme fiduciaire pour trois initiatives de distribution alimentaire dans Rosemont, visant plus de 500 ménages.",
+    "Le Centre de ressources et d'action communautaire de la Petite-Patrie reçoit 25 000 $ et prévoit rejoindre 370 ménages de La Petite-Patrie.",
+    "L'argent provient du compte de surplus de gestion affecté – divers de l'arrondissement.",
+    "Les projets ciblent des ménages sous le seuil de faible revenu, avec des volets pour les personnes aînées, seules ou en situation d'itinérance; les lieux de distribution sont accessibles universellement.",
+    "Chaque organisme signera une convention fixant les conditions, et un bilan est prévu en janvier 2027.",
+    "En 2025, chacun des deux organismes avait reçu 20 000 $."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "47 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 6293,
+    "sortie": 467
+   }
+  },
+  {
+   "id": "1260297020",
+   "numero": "1260297020",
+   "resolution": "CA26 26 0151",
+   "date": "2026-09-08",
+   "unite": null,
+   "objet": "Approuver un projet de convention avec la Corporation de développement communautaire (CDC) de Rosemont afin d'assurer un leadership transitoire pour la mobilisation du secteur P'tit Beaubien/Petite Louisiane en consolidant la programmation des activités offertes dans le quartier par les organismes du milieu - Octroyer une contribution financière non-récurrente de 9 000 $ à CDC de Rosemont",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=16",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Rosemont–La Petite-Patrie verse 9 000 $, une seule fois, à la Corporation de développement communautaire (CDC) de Rosemont.",
+    "L'argent sert à coordonner les activités déjà offertes par les organismes du secteur commercial P'tit Beaubien–Petite Louisiane, dans l'est de Rosemont, et à soutenir la programmation de l'Espace 40e/Beaubien.",
+    "La CDC jouera un rôle de direction temporaire, le secteur n'ayant aucune association de commerçants ni instance de coordination, selon une étude réalisée en 2025.",
+    "Le document décrit le secteur comme présentant un taux de locaux vacants élevé, un fort roulement des commerces et une offre jugée insuffisante par des résidents.",
+    "Le versement se fait en trois tranches : 5 400 $ à la signature, 2 700 $ après un rapport d'étape en janvier 2027, puis 900 $ après la reddition de comptes, attendue au plus tard le 30 avril 2027.",
+    "Les fonds viennent du programme de soutien aux secteurs commerciaux situés hors des districts des sociétés de développement commercial (Hors SDC)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "9 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T16:45:52.514Z",
+   "jetons": {
+    "entree": 6424,
+    "sortie": 508
    }
   },
   {

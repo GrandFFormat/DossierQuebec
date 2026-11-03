@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-02T19:44:25.848Z",
+ "generatedAt": "2026-11-03T16:35:08.836Z",
  "source": "https://ville.montreal.qc.ca/documents/Adi_Public/",
  "licence": "Documents publics de la Ville de Montréal — reproduction avec mention de la source, lecture gratuite (voir README).",
  "parametres": {
@@ -11,11 +11,11 @@
   ]
  },
  "partiel": false,
- "totalDisponible": 7254,
- "nombre": 7254,
- "nouveauxDepuisDerniereExecution": 0,
- "seancesLues": 173,
- "seancesEnAttente": 41,
+ "totalDisponible": 7312,
+ "nombre": 7312,
+ "nouveauxDepuisDerniereExecution": 58,
+ "seancesLues": 175,
+ "seancesEnAttente": 45,
  "themes": {
   "procedure": {
    "libelle": "Procédure",
@@ -86,20 +86,20 @@
    "couleur": "#0D9488"
   }
  },
- "sansTheme": 230,
+ "sansTheme": 232,
  "facettes": {
   "type": [
    {
     "valeur": "Résolution",
-    "n": 6908
+    "n": 6962
    },
    {
     "valeur": "Procès-verbal",
-    "n": 173
+    "n": 175
    },
    {
     "valeur": "Ordre du jour",
-    "n": 173
+    "n": 175
    }
   ],
   "instance": [
@@ -144,6 +144,10 @@
     "n": 235
    },
    {
+    "valeur": "Conseil d'arrondissement de Montréal-Nord",
+    "n": 230
+   },
+   {
     "valeur": "Conseil d'arrondissement de Villeray–Saint-Michel–Parc-Extension",
     "n": 224
    },
@@ -160,10 +164,6 @@
     "n": 206
    },
    {
-    "valeur": "Conseil d'arrondissement de Montréal-Nord",
-    "n": 200
-   },
-   {
     "valeur": "Conseil d'arrondissement de Lachine",
     "n": 191
    },
@@ -172,16 +172,16 @@
     "n": 187
    },
    {
+    "valeur": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+    "n": 186
+   },
+   {
     "valeur": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
     "n": 164
    },
    {
     "valeur": "Conseil d'arrondissement de Mercier–Hochelaga-Maisonneuve",
     "n": 164
-   },
-   {
-    "valeur": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
-    "n": 158
    },
    {
     "valeur": "Conseil d'arrondissement du Sud-Ouest",
@@ -195,27 +195,27 @@
   "unite": [
    {
     "valeur": "Direction de la culture_des sports_des loisirs et du développement social",
-    "n": 300
+    "n": 303
    },
    {
     "valeur": "Direction de l'aménagement urbain et des services aux entreprises",
-    "n": 284
+    "n": 290
    },
    {
     "valeur": "Direction des services administratifs",
-    "n": 268
+    "n": 275
    },
    {
     "valeur": "Direction des travaux publics",
-    "n": 193
+    "n": 195
+   },
+   {
+    "valeur": "Bureau du directeur d'arrondissement",
+    "n": 175
    },
    {
     "valeur": "Direction du développement du territoire et études techniques",
     "n": 171
-   },
-   {
-    "valeur": "Bureau du directeur d'arrondissement",
-    "n": 168
    },
    {
     "valeur": "Service du greffe",
@@ -426,6 +426,10 @@
     "n": 14
    },
    {
+    "valeur": "Direction Performance_Greffe et Services administratifs",
+    "n": 13
+   },
+   {
     "valeur": "Direction des relations avec les citoyens_services administratifs et greffe",
     "n": 13
    },
@@ -479,10 +483,6 @@
    },
    {
     "valeur": "Service de l'environnement et de la transition écologique, Direction de la gestion des matières",
-    "n": 10
-   },
-   {
-    "valeur": "Direction Performance_Greffe et Services administratifs",
     "n": 10
    },
    {
@@ -1317,39 +1317,39 @@
   "theme": [
    {
     "valeur": "procedure",
-    "n": 1262
+    "n": 1273
    },
    {
     "valeur": "urbanisme",
-    "n": 968
+    "n": 976
    },
    {
     "valeur": "transport",
-    "n": 902
+    "n": 916
    },
    {
     "valeur": "environnement",
-    "n": 596
+    "n": 597
    },
    {
     "valeur": "contrats",
-    "n": 483
+    "n": 485
    },
    {
     "valeur": "administration",
-    "n": 474
+    "n": 476
    },
    {
     "valeur": "loisirs",
-    "n": 368
+    "n": 370
    },
    {
     "valeur": "culture",
-    "n": 312
+    "n": 315
    },
    {
     "valeur": "subventions",
-    "n": 297
+    "n": 303
    },
    {
     "valeur": "immobilier",
@@ -1357,19 +1357,19 @@
    },
    {
     "valeur": "travaux",
-    "n": 244
-   },
-   {
-    "valeur": "economie",
-    "n": 233
+    "n": 245
    },
    {
     "valeur": "finances",
-    "n": 232
+    "n": 234
+   },
+   {
+    "valeur": "economie",
+    "n": 234
    },
    {
     "valeur": "honneurs",
-    "n": 225
+    "n": 229
    },
    {
     "valeur": "social",
@@ -1381,7 +1381,7 @@
    },
    {
     "valeur": "rh",
-    "n": 99
+    "n": 100
    }
   ]
  },
@@ -1449,7 +1449,7 @@
   "deneigement": {
    "titre": "Déneigement",
    "description": "Contrats de déneigement et de chargement de la neige, épandage d'abrasifs, règlements de stationnement.",
-   "n": 37
+   "n": 38
   },
   "velo": {
    "titre": "Vélo : REV, pistes cyclables et BIXI",
@@ -1709,6 +1709,142 @@
    "odj": null
   },
   {
+   "id": "CA_Anj_2026-11-03_19h00",
+   "instance": "CA_Anj",
+   "arrondissement": "Anjou",
+   "nomInstance": "Conseil d'arrondissement de Anjou",
+   "date": "2026-11-03",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Anj_ODJ_ORDI_2026-11-03_19h00_FR.pdf",
+   "documents": {
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17682"
+   },
+   "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)",
+   "nom": "Conseil d'arrondissement de Anjou",
+   "etat": "procès-verbal non publié",
+   "pv": null,
+   "odj": null,
+   "essaye": "2026-11-03",
+   "essais": [
+    {
+     "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-11-03_19h00_FR.pdf",
+     "resultat": "pas un PDF — page « 404 Page introuvable - 404 not found »"
+    }
+   ]
+  },
+  {
+   "id": "CA_Ibs_2026-11-03_19h30",
+   "instance": "CA_Ibs",
+   "arrondissement": "L'Île-Bizard–Sainte-Geneviève",
+   "nomInstance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "date": "2026-11-03",
+   "heure": "19h30",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Ibs_ODJP_ORDI_2026-11-03_19h30_FR.pdf",
+   "nom": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "etat": "procès-verbal non publié",
+   "pv": null,
+   "odj": null,
+   "essaye": "2026-11-03",
+   "essais": [
+    {
+     "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-11-03_19h30_FR.pdf",
+     "resultat": "pas un PDF — page « 404 Page introuvable - 404 not found »"
+    }
+   ]
+  },
+  {
+   "id": "CA_Out_2026-11-03_19h00",
+   "instance": "CA_Out",
+   "arrondissement": "Outremont",
+   "nomInstance": "Conseil d'arrondissement de Outremont",
+   "date": "2026-11-03",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Out_ODJP_ORDI_2026-11-03_19h00_FR.pdf",
+   "nom": "Conseil d'arrondissement de Outremont",
+   "etat": "procès-verbal non publié",
+   "pv": null,
+   "odj": null,
+   "essaye": "2026-11-03",
+   "essais": [
+    {
+     "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_PV_ORDI_2026-11-03_19h00_FR.pdf",
+     "resultat": "pas un PDF — page « 404 Page introuvable - 404 not found »"
+    }
+   ]
+  },
+  {
+   "id": "CA_Rdp_2026-11-03_19h00",
+   "instance": "CA_Rdp",
+   "arrondissement": "Rivière-des-Prairies–Pointe-aux-Trembles",
+   "nomInstance": "Conseil d'arrondissement de Rivière-des-Prairies–Pointe-aux-Trembles",
+   "date": "2026-11-03",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Rdp_ODJ_LPP_ORDI_2026-11-03_19h00_FR.pdf",
+   "nom": "Conseil d'arrondissement de Rivière-des-Prairies–Pointe-aux-Trembles",
+   "etat": "procès-verbal non publié",
+   "pv": null,
+   "odj": null,
+   "essaye": "2026-11-03",
+   "essais": [
+    {
+     "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rdp/CA_Rdp_PV_ORDI_2026-11-03_19h00_FR.pdf",
+     "resultat": "pas un PDF — page « 404 Page introuvable - 404 not found »"
+    }
+   ]
+  },
+  {
+   "id": "CA_Ver_2026-11-03_19h00",
+   "instance": "CA_Ver",
+   "arrondissement": "Verdun",
+   "nomInstance": "Conseil d'arrondissement de Verdun",
+   "date": "2026-11-03",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Ver_ODJP_ORDI_2026-11-03_19h00_FR.pdf",
+   "nom": "Conseil d'arrondissement de Verdun",
+   "etat": "procès-verbal non publié",
+   "pv": null,
+   "odj": null,
+   "essaye": "2026-11-03",
+   "essais": [
+    {
+     "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-11-03_19h00_FR.pdf",
+     "resultat": "pas un PDF — page « 404 Page introuvable - 404 not found »"
+    }
+   ]
+  },
+  {
+   "id": "CA_Vsm_2026-11-03_18h30",
+   "instance": "CA_Vsm",
+   "arrondissement": "Villeray–Saint-Michel–Parc-Extension",
+   "nomInstance": "Conseil d'arrondissement de Villeray–Saint-Michel–Parc-Extension",
+   "date": "2026-11-03",
+   "heure": "18h30",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Vsm_ODJ_LPP_ORDI_2026-11-03_18h30_FR.pdf",
+   "nom": "Conseil d'arrondissement de Villeray–Saint-Michel–Parc-Extension",
+   "etat": "procès-verbal non publié",
+   "pv": null,
+   "odj": null,
+   "essaye": "2026-11-03",
+   "essais": [
+    {
+     "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-11-03_18h30_FR.pdf",
+     "resultat": "pas un PDF — page « 404 Page introuvable - 404 not found »"
+    }
+   ]
+  },
+  {
    "id": "CA_Cdn_2026-11-02_18h30",
    "instance": "CA_Cdn",
    "arrondissement": "Côte-des-Neiges–Notre-Dame-de-Grâce",
@@ -1722,7 +1858,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_PV_ORDI_2026-11-02_18h30_FR.pdf",
@@ -1744,7 +1880,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Lac/CA_Lac_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -1766,7 +1902,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -1788,7 +1924,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mhm/CA_Mhm_PV_ORDI_2026-11-02_18h30_FR.pdf",
@@ -1810,7 +1946,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -1829,14 +1965,14 @@
    "source": "sondage des documents publiés",
    "preuve": "CA_Pir_ODJ_ORDI_2026-11-02_19h00_FR.pdf",
    "documents": {
-    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17689"
+    "ODJ": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17708"
    },
    "sourceOdj": "page de l’arrondissement (sommaires décisionnels annexés)",
    "nom": "Conseil d'arrondissement de Pierrefonds-Roxboro",
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -1861,7 +1997,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pmr/CA_Pmr_PV_ORDI_2026-11-02_18h30_FR.pdf",
@@ -1883,7 +2019,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -1905,7 +2041,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -1927,7 +2063,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-10-28_09h00_FR.pdf",
@@ -1949,7 +2085,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf",
@@ -1971,7 +2107,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-20_09h00_FR.pdf",
@@ -1993,7 +2129,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf",
@@ -2015,7 +2151,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-10-14_09h00_FR.pdf",
@@ -2037,7 +2173,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-10-13_18h30_FR.pdf",
@@ -2059,7 +2195,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-10-07_09h00_FR.pdf",
@@ -2085,7 +2221,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf",
@@ -2111,7 +2247,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-10-06_19h00_FR.pdf",
@@ -2133,7 +2269,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_PV_ORDI_2026-10-06_18h30_FR.pdf",
@@ -2155,7 +2291,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf",
@@ -2177,7 +2313,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Lac/CA_Lac_PV_ORDI_2026-10-06_19h00_FR.pdf",
@@ -2199,7 +2335,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_PV_ORDI_2026-10-06_19h00_FR.pdf",
@@ -2218,16 +2354,12 @@
    "source": "sondage des documents publiés",
    "preuve": "CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf",
    "nom": "Conseil d'arrondissement de Montréal-Nord",
-   "etat": "procès-verbal non publié",
-   "pv": null,
-   "odj": null,
-   "essaye": "2026-11-02",
-   "essais": [
-    {
-     "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf",
-     "resultat": "pas un PDF — page « 404 Page introuvable - 404 not found »"
-    }
-   ]
+   "etat": "lue",
+   "versionLecture": "13.2",
+   "pv": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "odj": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf",
+   "nombreResolutions": 28,
+   "lueLe": "2026-11-03"
   },
   {
    "id": "CA_Out_2026-10-06_19h00",
@@ -2243,7 +2375,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_PV_ORDI_2026-10-06_19h00_FR.pdf",
@@ -2269,7 +2401,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-10-06_19h00_FR.pdf",
@@ -2294,7 +2426,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pmr/CA_Pmr_PV_ORDI_2026-10-06_18h35_FR.pdf",
@@ -2316,7 +2448,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rdp/CA_Rdp_PV_ORDI_2026-10-06_19h00_FR.pdf",
@@ -2338,7 +2470,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf",
@@ -2378,7 +2510,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-10-06_19h30_FR.pdf",
@@ -2400,7 +2532,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-10-06_19h00_FR.pdf",
@@ -2422,7 +2554,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-10-06_18h30_FR.pdf",
@@ -2444,7 +2576,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-09-30_09h00_FR.pdf",
@@ -2484,7 +2616,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-09-22_09h00_FR.pdf",
@@ -2524,7 +2656,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-09-16_09h00_FR.pdf",
@@ -2645,16 +2777,12 @@
    "source": "sondage des documents publiés",
    "preuve": "CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf",
    "nom": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
-   "etat": "procès-verbal non publié",
-   "pv": null,
-   "odj": null,
-   "essaye": "2026-11-02",
-   "essais": [
-    {
-     "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf",
-     "resultat": "pas un PDF — page « 404 Page introuvable - 404 not found »"
-    }
-   ]
+   "etat": "lue",
+   "versionLecture": "13.2",
+   "pv": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf",
+   "odj": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf",
+   "nombreResolutions": 26,
+   "lueLe": "2026-11-03"
   },
   {
    "id": "CE_2026-09-02_09h00",
@@ -2872,7 +3000,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-25_09h00_FR.pdf",
@@ -3342,7 +3470,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-06-16_09h00_FR.pdf",
@@ -3830,7 +3958,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-05-12_09h00_FR.pdf",
@@ -4676,7 +4804,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-04-07_19h00_FR.pdf",
@@ -5204,7 +5332,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-02-17_09h00_FR.pdf",
@@ -5692,7 +5820,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-02",
+   "essaye": "2026-11-03",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-01-27_09h00_FR.pdf",
@@ -5872,6 +6000,699 @@
   }
  ],
  "decisions": [
+  {
+   "id": "CA_Mtn_2026-10-06_19h00_PV",
+   "numero": null,
+   "objet": "Procès-verbal — Conseil d'arrondissement de Montréal-Nord, séance ordinaire du 2026-10-06",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Procès-verbal",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": null,
+   "article": null,
+   "dossier": null,
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nombreResolutions": 28,
+   "nombrePages": 14,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA_Mtn_2026-10-06_19h00_ODJ",
+   "numero": null,
+   "objet": "Ordre du jour — Conseil d'arrondissement de Montréal-Nord, séance du 2026-10-06 (30 points)",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Ordre du jour",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": null,
+   "article": null,
+   "dossier": null,
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 288",
+   "numero": "CA26 10 288",
+   "objet": "Adopter l'ordre du jour modifié de la séance ordinaire du conseil d'arrondissement du 6 octobre 2026, à 19 h 00. Ajout des condoléances du conseil à la famille de Madame Lise Blanchet décédée le 26 septembre 2026 à l'âge de 84 ans. (10.08)",
+   "categorie": "Ordre du jour",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction des services administratifs",
+   "article": "10.01",
+   "dossier": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=1",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 289",
+   "numero": "CA26 10 289",
+   "objet": "Approuver le procès-verbal de la séance ordinaire du conseil d'arrondissement tenue le 8 septembre 2026, à 19 h 00.",
+   "categorie": "Ordre du jour",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction des services administratifs",
+   "article": "10.04",
+   "dossier": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=3",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 290",
+   "numero": "CA26 10 290",
+   "objet": "Déposer aux archives le procès-verbal de la réunion du comité consultatif en urbanisme tenue le 9 septembre 2026.",
+   "categorie": "Procès-verbal",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "article": "10.05",
+   "dossier": "1269988018",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=3",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=8",
+   "sommaireId": "1269988018",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 291",
+   "numero": "CA26 10 291",
+   "objet": "Offrir les condoléances du conseil à la famille de Madame Marie-Lucette Rigaud Bornéus décédée le 9 septembre 2026.",
+   "categorie": "Autre sujet",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction Performance_Greffe et Services administratifs",
+   "article": "10.06",
+   "dossier": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=4",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "honneurs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 292",
+   "numero": "CA26 10 292",
+   "objet": "Offrir les condoléances du conseil à la famille de Madame Diane Lapointe décédée le 28 septembre 2026 à l'âge de 80 ans.",
+   "categorie": "Autre sujet",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction Performance_Greffe et Services administratifs",
+   "article": "10.07",
+   "dossier": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=4",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "honneurs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 293",
+   "numero": "CA26 10 293",
+   "objet": "Offrir les condoléances du conseil à la famille de Madame Lise Blanchet décédée le 26 septembre 2026 à l'âge de 84 ans.",
+   "categorie": "Autre sujet",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction Performance_Greffe et Services administratifs",
+   "article": "10.08",
+   "dossier": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=4",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "honneurs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 294",
+   "numero": "CA26 10 294",
+   "objet": "Attribuer à Entreprise Excavation Anjou INC., plus bas soumissionnaire conforme des lots 1, 2,3 et 4 au montant de 1 491 455.72 $ , taxes incluses, pour la location de quatre (04) niveleuses, à AMG INC un contrat relatif à la location d'une (1) niveleuse avec opérateur, plus bas soumissionnaire conforme du lot 5, au montant de 129 691.80 $ taxes incluses. Pour un montant total de 1 621 147.52$, taxes incluses, pour les opérations de déneigement 2026-2028. Appel d'offres 26-21474.",
+   "categorie": "Appel d'offres public",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction des travaux publics",
+   "article": "20.01",
+   "dossier": "1260282009",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=5",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=11",
+   "sommaireId": "1260282009",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet",
+   "projets": [
+    "deneigement"
+   ]
+  },
+  {
+   "id": "CA26 10 295",
+   "numero": "CA26 10 295",
+   "objet": "Attribuer à J. Raymond Maîtres Couvreurs, plus bas soumissionnaire conforme, au montant de 287 322,53 $ taxes incluses, un contrat pour l'exécution des travaux de réfection de la toiture du chalet du parc Primeau de Montréal-Nord et autoriser une dépense de 51 718,05 $ taxes incluses, pour les contingences, une dépense de 12 000,00 $ taxes incluses pour les incidences, pour une dépense totale de 351 040,58 $ taxes incluses. Appel d'offres 1173 / 2 soumissions Mme Chantal Rossi",
+   "categorie": "Contrat de construction",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "article": "20.02",
+   "dossier": "1260535001",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=5",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=15",
+   "sommaireId": "1260535001",
+   "nouveau": true,
+   "theme": "loisirs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 296",
+   "numero": "CA26 10 296",
+   "objet": "Accorder une contribution financière de 16 600 $ au Centre des jeunes l'Escale de Montréal-Nord Inc. pour la réalisation du projet Brigade neige pour la période du 15 novembre 2026 au 31 mars 2027 et approuver le projet de convention à intervenir.",
+   "categorie": "Subvention - Contribution financière",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction des travaux publics",
+   "article": "20.03",
+   "dossier": "1265579009",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=6",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=22",
+   "sommaireId": "1265579009",
+   "nouveau": true,
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 297",
+   "numero": "CA26 10 297",
+   "objet": "Accorder une contribution financière de 500 $ à Baseball Mineur Montréal-Nord (B.M.M.N.) pour soutenir l'organisme dans les différents services offerts auprès des jeunes de l'Arrondissement, et ce, à même le budget discrétionnaire des élus pour l'année 2026.",
+   "categorie": "Subvention - Contribution financière",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Bureau du directeur d'arrondissement",
+   "article": "20.04",
+   "dossier": "1269433010",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=6",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=26",
+   "sommaireId": "1269433010",
+   "nouveau": true,
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 298",
+   "numero": "CA26 10 298",
+   "objet": "Accorder une contribution financière de 500 $ au Centre de pédiatrie sociale de Montréal-Nord pour soutenir l'organisme dans les différents services offerts auprès des familles vulnérables de l'arrondissement, et ce, à même le budget discrétionnaire des élu.e.s pour l'année 2026.",
+   "categorie": "Subvention - Contribution financière",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Bureau du directeur d'arrondissement",
+   "article": "20.05",
+   "dossier": "1269433008",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=6",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=30",
+   "sommaireId": "1269433008",
+   "nouveau": true,
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 299",
+   "numero": "CA26 10 299",
+   "objet": "Accorder une contribution financière de 500 $ à la Fondation Ali Gerba pour soutenir ses activités et pour promouvoir le soccer auprès des jeunes, et ce, à même le budget discrétionnaire des élu.es pour l'année 2026.",
+   "categorie": "Subvention - Contribution financière",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Bureau du directeur d'arrondissement",
+   "article": "20.06",
+   "dossier": "1269433007",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=7",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=34",
+   "sommaireId": "1269433007",
+   "nouveau": true,
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 300",
+   "numero": "CA26 10 300",
+   "objet": "Accorder une contribution financière de 500 $ au Carrefour des retraités de Montréal-Nord Inc. pour soutenir l'organisme dans les différents services offerts auprès des citoyens âgés de l'Arrondissement, et ce à même le budget discrétionnaire des élu.e.s pour l'année 2026.",
+   "categorie": "Subvention - Contribution financière",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction des services administratifs",
+   "article": "20.07",
+   "dossier": "1269433005",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=7",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=38",
+   "sommaireId": "1269433005",
+   "nouveau": true,
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 301",
+   "numero": "CA26 10 301",
+   "objet": "Accorder une contribution financière de 500 $ à l'organisme Héritage Hispanique Québec (HHQ) pour la promotion des activités lors du Mois du Patrimoine Hispanique du Québec, et ce à même le budget discrétionnaire des élu.e.s pour l'année 2026.",
+   "categorie": "Subvention - Contribution financière",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction des services administratifs",
+   "article": "20.08",
+   "dossier": "1269433004",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=7",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=42",
+   "sommaireId": "1269433004",
+   "nouveau": true,
+   "theme": "honneurs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 302",
+   "numero": "CA26 10 302",
+   "objet": "Accorder une contribution financière de 300$ au Centre d'Excellence en Karaté du Québec pour la participation d'un jeune athlète aux championnats du monde de karaté, et ce à même le budget discrétionnaire des élus pour l'année 2026.",
+   "categorie": "Subvention - Contribution financière",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Bureau du directeur d'arrondissement",
+   "article": "20.09",
+   "dossier": "1269433009",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=8",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=46",
+   "sommaireId": "1269433009",
+   "nouveau": true,
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 303",
+   "numero": "CA26 10 303",
+   "objet": "er Approuver et déposer les rapports mensuels du 1 août au 31 août 2026.",
+   "categorie": "Budget - Budget de fonctionnement / PTI",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction des services administratifs",
+   "article": "30.01",
+   "dossier": "1260139050",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=8",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=50",
+   "sommaireId": "1260139050",
+   "nouveau": true,
+   "theme": "finances",
+   "themeSource": "categorie"
+  },
+  {
+   "id": "CA26 10 304",
+   "numero": "CA26 10 304",
+   "objet": "er Approuver et déposer les rapports sur l'exercice du pouvoir délégué du 1 août au 31 août 2026.",
+   "categorie": "Budget - Budget de fonctionnement / PTI",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction des services administratifs",
+   "article": "30.02",
+   "dossier": "1260139051",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=8",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=53",
+   "sommaireId": "1260139051",
+   "nouveau": true,
+   "theme": "finances",
+   "themeSource": "categorie"
+  },
+  {
+   "id": "CA26 10 305",
+   "numero": "CA26 10 305",
+   "objet": "Autoriser une dépense de 500 $ taxes incluses auprès de la Fondation Cégep Marie-Victorin pour l'achat d'un espace publicitaire dans le cadre de l'organisation de la 2e édition du cabaret- bénéfice et ce à même le budget des frais de représentation des élus pour l'année 2026.",
+   "categorie": "Budget - Autorisation de dépense",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Bureau du directeur d'arrondissement",
+   "article": "30.03",
+   "dossier": "1269433011",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=9",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=57",
+   "sommaireId": "1269433011",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 306",
+   "numero": "CA26 10 306",
+   "objet": "Autoriser une dépense de 300 $ auprès de la Société Culture et Traditions Québécoises de Montréal-Nord pour l'achat d'un espace publicitaire à l'occasion du spectacle d'Halloween 2026, et ce, à même le budget de représentations des élu.es.",
+   "categorie": "Budget - Autorisation de dépense",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Bureau du directeur d'arrondissement",
+   "article": "30.04",
+   "dossier": "1269433006",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=9",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=60",
+   "sommaireId": "1269433006",
+   "nouveau": true,
+   "theme": "culture",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 307",
+   "numero": "CA26 10 307",
+   "objet": "Autoriser l'achat de billets pour la participation de Mme Chantal Rossi, conseillère de la ville - district Ovide-Clermont, arrondissement de Montréal-Nord à la 3e édition du prix des bibliothèques publiques du Québec du 22 octobre 2026, et ce pour une dépense totale de 40 $.",
+   "categorie": "Budget - Autorisation de dépense",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Bureau du directeur d'arrondissement",
+   "article": "30.05",
+   "dossier": "1269433012",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=9",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=64",
+   "sommaireId": "1269433012",
+   "nouveau": true,
+   "theme": "culture",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 308",
+   "numero": "CA26 10 308",
+   "objet": "Donner un avis de motion, présenter et déposer, en vue de son adoption à une séance ultérieure, le projet de Règlement 1570-7 modifiant le Règlement 1570 sur la circulation routière, à l'article 31 relatif à la vitesse, afin de modifier l'Annexe A pour y ajouter trois zones scolaires situées sur les boulevards Léger, Pie-IX et Saint-Michel à la liste des rues où la limite de vitesse est fixée à 30 km/h. AVIS est donné par M. Jean-Marc Poirier qu’à une séance ultérieure, il sera adopté le Règlement 1570-7 modifiant le Règlement 1570 sur la circulation routière dans les limites de Montréal-Nord, à l’article 31, relatif à la vitesse, plus précisément la modification de l'Annexe A pour y ajouter",
+   "categorie": "Règlement - Avis de motion et adoption d'un projet de règlement",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "article": "40.01",
+   "dossier": "1260166007",
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=10",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=68",
+   "sommaireId": "1260166007",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 309",
+   "numero": "CA26 10 309",
+   "objet": "Déposer le certificat du secrétaire d'arrondissement et adopter la résolution PP-080 afin de permettre l'occupation d'un bâtiment existant par un espace privé d'activités sportives d'intérieur, un café-bistro, ainsi que les bureaux d'administration, au 3390, rue de Mont-Joli, sur le lot 1 175 056 du cadastre du Québec, le tout en vertu du Règlement RGCA11-10-0007 sur les projets particuliers de construction, de modification ou d'occupation d'un immeuble.",
+   "categorie": "Urbanisme - Projet particulier d'urbanisme",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "article": "40.02",
+   "dossier": "1269864019",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=10",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=72",
+   "sommaireId": "1269864019",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 310",
+   "numero": "CA26 10 310",
+   "objet": "Statuer sur une recommandation du comité consultatif d'urbanisme à savoir : Régulariser l'implantation du bâtiment principal existant dont la marge avant principale est de 2,87 mètres ainsi qu'une marge avant secondaire de 2,81 mètres, pour l'immeuble situé au 10205, avenue Armand-Lavergne (lot 1 846 536), le tout en vertu du Règlement RGCA02-10-006 sur les dérogations mineures.",
+   "categorie": "Urbanisme - Dérogation mineure",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "article": "40.03",
+   "dossier": "1269399004",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=11",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=85",
+   "sommaireId": "1269399004",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 311",
+   "numero": "CA26 10 311",
+   "objet": "Statuer sur une recommandation du comité consultatif d'urbanisme à savoir : permettre l'agrandissement du portique principal en façade du bâtiment situé au 10333, boulevard Pie-IX (Lot 6 284 024), le tout en vertu du Règlement RGCA25-10-0009 relatif aux plans d'implantation et d'intégration architecturale (PIIA).",
+   "categorie": "Urbanisme - Plan d'implantation et d'intégration architecturale",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction de l'aménagement urbain et des services aux entreprises",
+   "article": "40.04",
+   "dossier": "1269988017",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=11",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=92",
+   "sommaireId": "1269988017",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 312",
+   "numero": "CA26 10 312",
+   "objet": "Titulariser M. Mohammed El-Habib Said, à titre de préposé aux travaux et à l'entretien, à la Division de sports et loisirs de la Direction de la culture, des sports, des loisirs et du développement social, avec la réussite de la période d'essai prévue dans la convention collective des cols bleus regroupés de Montréal (S.C.F.P. 301) à compter du 11 octobre 2026, en vue d'un statut permanent à cet emploi.",
+   "categorie": "Nomination",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "article": "50.01",
+   "dossier": "1269720005",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=12",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=98",
+   "sommaireId": "1269720005",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 313",
+   "numero": "CA26 10 313",
+   "objet": "Titulariser M. Francisco Lopez, à titre de préposé aux travaux et à l'entretien, à la Division de sports et loisirs de la Direction de la culture, des sports, des loisirs et du développement social, avec la réussite de la période d'essai prévue dans la convention collective des cols bleus regroupés de Montréal (S.C.F.P. 301), à compter du 17 octobre 2026, en vue d'un statut permanent à cet emploi.",
+   "categorie": "Nomination",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "article": "50.02",
+   "dossier": "1269720006",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=12",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=102",
+   "sommaireId": "1269720006",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 314",
+   "numero": "CA26 10 314",
+   "objet": "Nommer quatorze (14) personnes de l'accréditation des cols blancs, trois (3) personnes de l'accréditation des professionnels et une (1) personne cadre administrative à divers postes à la Division des bibliothèques, de la culture et de l'Espace du Coeur nomade de la Direction culture, sports, loisirs et développement social , à compter du 17 octobre 2026, avec la réussite de la période d'essai prévue dans la convention collective des cols blancs ou à la convention collective des professionnelles et professionnels municipaux de Montréal ou aux conditions de travail des cadres, en vue d'un statut permanent à ces emplois.",
+   "categorie": "Structure de service / Emploi / Poste",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "article": "50.03",
+   "dossier": "1264394011",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=13",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=106",
+   "sommaireId": "1264394011",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 10 315",
+   "numero": "CA26 10 315",
+   "objet": null,
+   "categorie": "Levée de la séance",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Montréal-Nord",
+   "seanceId": "CA_Mtn_2026-10-06_19h00",
+   "unite": "Direction des services administratifs",
+   "article": "70.01",
+   "dossier": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-10-06_19h00_FR.pdf#page=14",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "administration",
+   "themeSource": "defaut"
+  },
   {
    "id": "CA_Sld_2026-10-06_19h00_PV",
    "numero": null,
@@ -14867,6 +15688,650 @@
    "sommaireId": "1269579001",
    "nouveau": false,
    "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA_Rpp_2026-09-08_19h00_PV",
+   "numero": null,
+   "objet": "Procès-verbal — Conseil d'arrondissement de Rosemont–La Petite-Patrie, séance ordinaire du 2026-09-08",
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Procès-verbal",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": null,
+   "dossier": null,
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nombreResolutions": 26,
+   "nombrePages": 15,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA_Rpp_2026-09-08_19h00_ODJ",
+   "numero": null,
+   "objet": "Ordre du jour — Conseil d'arrondissement de Rosemont–La Petite-Patrie, séance du 2026-09-08 (0 points)",
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Ordre du jour",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": null,
+   "dossier": null,
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0147",
+   "numero": "CA26 26 0147",
+   "objet": "Adopter l'ordre du jour de la séance ordinaire du conseil d'arrondissement du 8 septembre 2026",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "10.02",
+   "dossier": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=1",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0148",
+   "numero": "CA26 26 0148",
+   "objet": "Approuver le procès-verbal de la séance ordinaire du conseil d'arrondissement tenue le 6 juillet 2026",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "10.03",
+   "dossier": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=2",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0149",
+   "numero": "CA26 26 0149",
+   "objet": "Approuver une convention de soutien financier et technique avec l'organisme « Corporation du cinéma Beaubien » pour la réalisation de l'événement « L'été qui reste - Fête de la rentrée du parc Molson » dans le cadre du Programme des Arrondissements DFÉ 2026 - Octroyer à cet effet une contribution financière de 7 500 $ à même le budget de fonctionnement en provenance du budget dédié du Service de la culture, des sports et des loisirs",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "20.01",
+   "dossier": "1267145002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=2",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=4",
+   "sommaireId": "1267145002",
+   "nouveau": true,
+   "theme": "culture",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0150",
+   "numero": "CA26 26 0150",
+   "objet": "Approuver deux conventions avec contributions financières avec les organismes « Corporation de développement communautaire de Rosemont inc. » et « Le centre de ressources et d'action communautaire de la Petite-Patrie » pour les paniers de Noël 2026 - Octroyer à chacun d'entre eux une contribution financière, respectivement de 22 000 $ et de 25 000 $ pour un montant total de 47 000 $, pour l'année 2026 - Autoriser un virement de crédits du compte de surplus de gestion affecté - divers",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "20.02",
+   "dossier": "1267951005",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=3",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=10",
+   "sommaireId": "1267951005",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0151",
+   "numero": "CA26 26 0151",
+   "objet": "Approuver un projet de convention avec la Corporation de développement communautaire (CDC) de Rosemont afin d'assurer un leadership transitoire pour la mobilisation du secteur P'tit Beaubien/Petite Louisiane en consolidant la programmation des activités offertes dans le quartier par les organismes du milieu - Octroyer une contribution financière non-récurrente de 9 000 $ à CDC de Rosemont",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "20.03",
+   "dossier": "1260297020",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=3",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=16",
+   "sommaireId": "1260297020",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0152",
+   "numero": "CA26 26 0152",
+   "objet": "Approuver un projet de convention avec l'Association des commerçants et des professionnels de Beaubien Est afin de consolider sa capacité d'action - Octroyer une contribution financière non- récurrente de 45 000 $ à l'organisme (contrat 26-061-CG)",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "20.04",
+   "dossier": "1260297019",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=4",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=21",
+   "sommaireId": "1260297019",
+   "nouveau": true,
+   "theme": "economie",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0153",
+   "numero": "CA26 26 0153",
+   "objet": "Autoriser une dépense de 392 766,98 $, taxes incluses (contrat : 302 128,44 $ + contingences : 45 319,27 $ + variation de quantités : 45 319,27 $ - Octroyer un contrat à « Les Pavages Céka inc. » d'une somme de 302 128,44 $, taxes incluses, pour la réalisation des travaux de voirie - Appel d'offres public 26-058-VP (8 soumissionnaires)",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "20.05",
+   "dossier": "1265642003",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=4",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=26",
+   "sommaireId": "1265642003",
+   "nouveau": true,
+   "theme": "environnement",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0154",
+   "numero": "CA26 26 0154",
+   "objet": "Ratifier l'attribution d'un contrat au montant de 1 931,58 $ US (2 777,96 $ CAN) pour l'achat de sept licences de la plateforme collaborative Miro",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "20.06",
+   "dossier": "1264646001",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=4",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=33",
+   "sommaireId": "1264646001",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0155",
+   "numero": "CA26 26 0155",
+   "objet": "Approuver une convention de contribution financière avec l'organisme « Les Loisirs du centre Père-Marquette inc. » pour la prolongation du projet de médiation urbaine en loisir pour les jeunes de 12 à 25 ans au parc du Père-Marquette pour l'automne 2026 - Octroyer une contribution financière de 10 160 $, toutes taxes incluses, le cas échéant, en provenance du budget de fonctionnement de l'arrondissement",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "20.07",
+   "dossier": "1263318002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=5",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=37",
+   "sommaireId": "1263318002",
+   "nouveau": true,
+   "theme": "loisirs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0156",
+   "numero": "CA26 26 0156",
+   "objet": "Déposer le rapport de l'évolution budgétaire de l'arrondissement de Rosemont–La Petite-Patrie au 30 juin 2026 ainsi que le rapport comparatif avec l'exercice précédent à la même période",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "30.01",
+   "dossier": "1266267007",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=5",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=43",
+   "sommaireId": "1266267007",
+   "nouveau": true,
+   "theme": "administration",
+   "themeSource": "defaut"
+  },
+  {
+   "id": "CA26 26 0157",
+   "numero": "CA26 26 0157",
+   "objet": "Prendre acte du rapport du maire sur la situation financière 2026 de l'arrondissement de Rosemont–La Petite-Patrie",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "30.02",
+   "dossier": "1266267008",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=6",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=47",
+   "sommaireId": "1266267008",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0158",
+   "numero": "CA26 26 0158",
+   "objet": "Prendre acte du dépôt des rapports sur l'exercice des pouvoirs délégués aux fonctionnaires, pour la période du 1er au juin 30 juin et du 1er au 31 juillet 2026 en vertu du Règlement intérieur du conseil d'arrondissement sur la délégation de pouvoirs aux fonctionnaires et employés (RCA-23)",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "30.03",
+   "dossier": "1266267009",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=6",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=51",
+   "sommaireId": "1266267009",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0159",
+   "numero": "CA26 26 0159",
+   "objet": "Prendre acte de la reddition de comptes et approuver le virement de crédits du compte du surplus de gestion affecté - Autres fins, d'un montant de 462 900 $ pour l'activité de charges interunités, pour l'année 2025, concernant l'entretien de l'éclairage, de la signalisation et du marquage de la chaussée",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "30.04",
+   "dossier": "1269074006",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=6",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=55",
+   "sommaireId": "1269074006",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0160",
+   "numero": "CA26 26 0160",
+   "objet": "Autoriser un virement de crédits du compte de surplus de gestion affecté - divers au montant de 300 000 $ pour assumer les dépenses à venir en location de véhicules afin de répondre aux besoins opérationnels des équipes de la Direction de l'entretien de l'éclairage, de la signalisation et du marquage de la chaussée",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "30.05",
+   "dossier": "1269074007",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=6",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=62",
+   "sommaireId": "1269074007",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0161",
+   "numero": "CA26 26 0161",
+   "objet": "Offrir au conseil municipal, en vertu du deuxième alinéa de l'article 85 de la Charte de la Ville de Montréal, métropole du Québec, de prendre en charge les travaux de réfection de chaussées (PRCPR) sur le réseau artériel administratif de la Ville (RAAV) localisé sur le territoire de l'arrondissement de Rosemont–La Petite-Patrie dans le cadre du programme de réhabilitation de chaussées par planage-revêtement (PRCPR) - Réseau artériel",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "30.06",
+   "dossier": "1267522001",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=7",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=66",
+   "sommaireId": "1267522001",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0162",
+   "numero": "CA26 26 0162",
+   "objet": "Ratifier une dépense de 2 000 $ pour la participation des élus de l'arrondissement aux Assises 2026 de l'Union des municipalités du Québec, qui a eu lieu du 13 au 16 mai 2026, au Centre des Congrès de Québec",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "30.07",
+   "dossier": "1267059004",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=7",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=70",
+   "sommaireId": "1267059004",
+   "nouveau": true,
+   "theme": "rh",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0163",
+   "numero": "CA26 26 0163",
+   "objet": "Édicter trois ordonnances - Programmation d'événements publics : « Tournoi John Jones », « Plus de 150 ruelles vertes, ça se fête! », « Événement de fin de saison du CS Montréal Centre », « Zone artistique éphémère », « Pôle de mobilité », « Plaza dans le parc », « Lecture de contes d'automne », « Juristes Urbains », « Fête de quartier Roseau », « Massonloween », « Marche Jaunt pour Vols d'espoir de CCG 2026 », « Ruelle hantée Masson Village »",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "40.01",
+   "dossier": "1268724008",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=8",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=74",
+   "sommaireId": "1268724008",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0164",
+   "numero": "CA26 26 0164",
+   "objet": "Édicter, en vertu du Règlement sur la circulation et le stationnement (R.R.V.M., c. C-4.1), une ordonnance autorisant l'ajout et le retrait d'espaces de stationnement tarifés sur la rue Jean-Talon Est entre l'avenue Christophe-Colomb et l'avenue Papineau ainsi qu'à certaines amorces de rues transversales",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "40.02",
+   "dossier": "1269229002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=8",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=80",
+   "sommaireId": "1269229002",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0165",
+   "numero": "CA26 26 0165",
+   "objet": "Édicter, en vertu du Règlement sur la circulation et le stationnement (R.R.V.M., c. C-4.1), une ordonnance visant à installer une règlementation d'arrêt interdit, excepté autobus, sur les rues Beaubien Est, Beaubien Ouest, ainsi que la 20e Avenue et retrait sur la rue Saint-Dominique",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "40.03",
+   "dossier": "1267295001",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=8",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=86",
+   "sommaireId": "1267295001",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0166",
+   "numero": "CA26 26 0166",
+   "objet": "Édicter une ordonnance afin d'autoriser un dépassement des heures prévues à l'article 10 du Règlement sur le bruit (RCA-180) pour la réalisation des travaux de pavage et planage en 2026 sur l'avenue Papineau et l'avenue De Lorimier dans l'arrondissement de Rosemont–La Petite-Patrie",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "40.04",
+   "dossier": "1269228002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=9",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=91",
+   "sommaireId": "1269228002",
+   "nouveau": true,
+   "theme": "travaux",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0167",
+   "numero": "CA26 26 0167",
+   "objet": "Adopter un projet de résolution, en vertu des articles 145.45 à 145.49 de la Loi sur l'aménagement et l'urbanisme, visant à autoriser la construction d'un bâtiment résidentiel de six étages, proposant 102 logements, sur le lot vacant 3 795 031 du cadastre du Québec, situé le long de la rue des Carrières, entre les rues de Lanaudière et Chambord",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "40.05",
+   "dossier": "1266079004",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=9",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=96",
+   "sommaireId": "1266079004",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0168",
+   "numero": "CA26 26 0168",
+   "objet": "Adopter un projet de résolution, en vertu des articles 145.45 à 145.49 de la Loi sur l'aménagement et l'urbanisme, visant à autoriser la construction d'un bâtiment mixte de quatre étages, proposant 38 logements et deux suites commerciales, sur le lot vacant 2 170 228 du cadastre du Québec, situé à l'intersection de la rue Beaubien Est et de la 10e Avenue",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "40.06",
+   "dossier": "1266079005",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=11",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=104",
+   "sommaireId": "1266079005",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0169",
+   "numero": "CA26 26 0169",
+   "objet": "Adopter une résolution, en vertu des articles 145.45 à 145.49 de la Loi sur l'aménagement et l'urbanisme, visant à autoriser la construction d'un bâtiment résidentiel d'une hauteur de 11 mètres et de trois (3) étages, comprenant 24 logements sur la propriété située au 3330, avenue Laurier Est (lot 1 589 295 du cadastre du Québec)",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "40.07",
+   "dossier": "1269944003",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=12",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=112",
+   "sommaireId": "1269944003",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0170",
+   "numero": "CA26 26 0170",
+   "objet": "Autoriser l'exercice de l'usage conditionnel « Épicerie (dépanneur) », conformément au Règlement d'urbanisme de l'arrondissement Rosemont–Petite-Patrie (01-279), bâtiment situé au 7057, rue Saint-Denis - Demande 3003676950",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "40.08",
+   "dossier": "1268729003",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=14",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=121",
+   "sommaireId": "1268729003",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0171",
+   "numero": "CA26 26 0171",
+   "objet": "Autoriser l'exercice de l'usage conditionnel « Épicerie », conformément au Règlement d'urbanisme de l'arrondissement Rosemont–Petite-Patrie (01-279), au 1650, rue Saint-Zotique Est - Demande 3003649062",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "40.09",
+   "dossier": "1266079002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=14",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=126",
+   "sommaireId": "1266079002",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0172",
+   "numero": "CA26 26 0172",
+   "objet": "Approuver la nomination par intérim de Mme Simone Bonenfant à titre de directrice de la Direction de la culture, des sports, des loisirs et du développement social de l'arrondissement de Rosemont–La Petite-Patrie, et ce, rétroactivement au 12 août 2026",
+   "categorie": null,
+   "date": "2026-09-08",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-09-08_19h00",
+   "unite": null,
+   "article": "50.01",
+   "dossier": "1267853002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-09-08_19h00_FR.pdf#page=15",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-09-08_19h00_FR.pdf#page=130",
+   "sommaireId": "1267853002",
+   "nouveau": true,
+   "theme": "transport",
    "themeSource": "objet"
   },
   {
