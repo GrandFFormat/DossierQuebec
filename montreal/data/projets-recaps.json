@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-03T16:37:14.872Z",
+ "generatedAt": "2026-11-03T17:18:06.881Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Récapitulatifs rédigés automatiquement à partir de l'objet, du dispositif et des motifs des résolutions de chaque sujet, lus dans les procès-verbaux, puis vérifiés automatiquement (numéros et nombres contre les dossiers cités, contre-lecture). Ce qui ne passe pas est retiré. En cas d'écart, les documents officiels font foi.",
@@ -1260,16 +1260,28 @@
   },
   "deneigement": {
    "titre": "Déneigement",
-   "signature": "5691e51e406a8710",
-   "genereLe": "2026-11-03T16:37:14.871Z",
+   "signature": "8b69d9944a661470",
+   "genereLe": "2026-11-03T17:18:06.881Z",
    "modele": "claude-opus-5",
    "dossiers": 32,
    "enBref": null,
    "etapes": [
     {
      "periode": "Février à mars 2026",
-     "titre": "Entretien et déneigement de places publiques",
-     "texte": "Ville-Marie a confié à des entreprises le déneigement, l'épandage d'abrasifs et l'entretien du Square Viger, de la Place des Montréalaises, du square Dorchester, de la place du Canada, de l'îlot Bonaventure, du square Victoria, de la place du Sable-Gris et du square Chaboillez. Il a aussi prolongé d'un an le contrat de déneigement du Quartier des Spectacles [CA26 24 0067].",
+     "titre": "Nettoyage printanier des rues et trottoirs",
+     "texte": "Plusieurs arrondissements louent des balais aspirateurs, des camions-citernes, des lave-trottoirs et un mini balai avec opérateurs pour retirer les abrasifs après l'hiver. Mercier–Hochelaga-Maisonneuve autorise une dépense de 574 920,99 $, taxes incluses, pour quatre balais aspirateurs et trois camions-citernes en 2026 et 2027.",
+     "numeros": [
+      "CA26 27 0008",
+      "CA26 22 0006",
+      "CA26 27 0034",
+      "CA26 09 0032",
+      "CA26 09 0035"
+     ]
+    },
+    {
+     "periode": "Février à mars 2026",
+     "titre": "Déneigement des places publiques du centre-ville",
+     "texte": "Ville-Marie confie à des entreprises l'entretien, la propreté et le déneigement du Square Viger, de la Place des Montréalaises, du square Dorchester, de la place du Canada, de l'îlot Bonaventure, du square Victoria, de la place du Sable-Gris et du square Chaboillez. L'arrondissement prolonge aussi d'un an le déneigement du Quartier des Spectacles, du 2 avril 2026 au 1er avril 2027.",
      "numeros": [
       "CA26 240009",
       "CA26 240063",
@@ -1277,40 +1289,54 @@
      ]
     },
     {
-     "periode": "Mars à mai 2026",
-     "titre": "Ajustements de la saison 2025-2026",
-     "texte": "Montréal-Nord a entériné une dépense additionnelle de 106 150,97 $, taxes incluses, pour la location d'une niveleuse de novembre 2025 au 30 avril 2026 [CA26 10 086]. Saint-Léonard a puisé 200 000 $ dans ses surplus pour la rémunération et les abrasifs, et Verdun a offert de fournir lui-même le personnel de son lieu d'élimination de la neige.",
+     "periode": "Avril à juin 2026",
+     "titre": "Dépenses d'hiver et prolongations de contrats",
+     "texte": "Montréal-Nord paie une niveleuse louée en plus pendant l'hiver 2025-2026 et Saint-Léonard affecte 200 000 $ de surplus à ses opérations de déneigement de 2026, après 39 épandages d'abrasifs depuis le 15 novembre 2025 alors que le budget en prévoyait 20. La Ville et des arrondissements prolongent de 12 mois des contrats de déneigement clé en main, de remorquage et de location d'équipements avec opérateurs.",
      "numeros": [
       "CA26 10 086",
       "CA26 13 0121",
-      "CA26 210043"
+      "CA26 240129",
+      "CM26 0548",
+      "CM26 0559",
+      "CE26 0812"
+     ]
+    },
+    {
+     "periode": "Juin à septembre 2026",
+     "titre": "Déneigement des parcs et des bâtiments",
+     "texte": "La Ville prolonge le déneigement du stationnement de l'édifice Jacinthe-Fyfe et celui du parc Frédéric-Back, du TAZ et du stade de soccer de Montréal. Elle accorde aussi un contrat pour déneiger les chemins de service et les stationnements du Grand parc de l'Ouest, dans les secteurs de l'Anse-à-l'Orme, du Bois-de-la-Roche et du Cap-Saint-Jacques.",
+     "numeros": [
+      "CE26 0977",
+      "CG26 0521",
+      "CM26 0942",
+      "CG26 0524",
+      "CM26 0945"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "Les contrats de déneigement clé en main de Côte-des-Neiges–Notre-Dame-de-Grâce, Lachine, Outremont et du Sud-Ouest se terminent le 15 avril 2030; celui du Plateau-Mont-Royal, le 15 avril 2031. Chaque saison va du 1er novembre au 15 avril.",
-     "numeros": [
-      "CM26 0883",
-      "CM26 1013"
-     ]
-    },
-    {
-     "texte": "Le déneigement du Grand parc de l'Ouest, secteurs de l'Anse-à-l'Orme, du Bois-de-la-Roche et du Cap-Saint-Jacques, couvre du 1er novembre 2026 au 30 avril 2028.",
+     "texte": "Les services de déneigement du Grand parc de l'Ouest couvrent deux saisons, du 1er novembre 2026 au 30 avril 2028.",
      "numeros": [
       "CG26 0524"
      ]
     },
     {
-     "texte": "Les services de remorquage prolongés pour Rosemont–La Petite-Patrie, Ville-Marie et Villeray–Saint-Michel–Parc-Extension commencent le 15 novembre 2026.",
+     "texte": "Les contrats de remorquage prolongés commencent le 15 novembre 2026.",
      "numeros": [
       "CM26 0559"
      ]
     },
     {
-     "texte": "La location d'équipements avec opérateur dans Rosemont–La Petite-Patrie commence le 1er novembre 2026 et court jusqu'au 31 mars 2027.",
+     "texte": "Le contrat de déneigement clé en main du Plateau-Mont-Royal se termine le 15 avril 2031, chaque saison allant du 1er novembre au 15 avril.",
      "numeros": [
-      "CE26 0812"
+      "CM26 1013"
+     ]
+    },
+    {
+     "texte": "Les contrats de déneigement clé en main de Côte-des-Neiges–Notre-Dame-de-Grâce, Lachine, Outremont et du Sud-Ouest se terminent le 15 avril 2030.",
+     "numeros": [
+      "CM26 0883"
      ]
     }
    ],
@@ -1322,23 +1348,19 @@
     "retiresContreLecture": [
      {
       "element": "enBref",
-      "raison": "« Deux arrondissements ont aussi resserré leurs règles pour les entrepreneurs qui déneigent des terrains privés » : décompte et action accomplie non fondés. Seul Anjou a adopté un règlement visant les entrepreneurs en déneigement de terrains (CA26 12136). Saint-Léonard n'a donné qu'un avis de motion et déposé un projet de règlement (CA26 13 0188), dont l'adoption n'a pas eu lieu dans les dossiers. Et le règlement d'Ahuntsic-Cartierville (CA26 09 0214) porte sur « le déneigement et l'enlèvement de la neige », sans que les dossiers indiquent qu'il vise les terrains privés."
-     },
-     {
-      "element": "etapes[4]",
-      "raison": "« obligeant les entrepreneurs qui déneigent des terrains privés à détenir un permis » élargit la portée : le dossier CA26 13 0188 vise uniquement les terrains privés industriels, commerciaux ou institutionnels. De plus, il s'agit d'un projet de règlement déposé avec avis de motion, pas d'une obligation en vigueur."
-     },
-     {
-      "element": "etapes[5]",
-      "raison": "« la location d'appareils à Saint-Laurent, Ahuntsic-Cartierville et Montréal-Nord » : aucun des dossiers cités dans « numeros » (CM26 0883, CM26 1013, CM26 0878, CA26 08 0333, CA26 10 294, CG26 0524) ne concerne une location d'appareils à Ahuntsic-Cartierville; le dossier correspondant (CA26 09 0225) n'est pas cité."
+      "raison": "« Deux arrondissements modifient leurs règlements visant les entrepreneurs qui déneigent des terrains privés » : ce décompte n'est pas fondé. Seul Anjou (CA26 12136) adopte une modification d'un règlement visant les entrepreneurs en déneigement de terrains privés. Saint-Léonard (CA26 13 0188) n'a fait qu'un avis de motion et un dépôt de projet de règlement, non adopté, et le règlement modifié par Ahuntsic-Cartierville (CA26 09 0214, « Règlement sur le déneigement et l'enlèvement de la neige ») n'est décrit nulle part comme visant les entrepreneurs de terrains privés."
      },
      {
       "element": "etapes[3]",
-      "raison": "Le dossier CE26 0977 est cité à l'appui d'une énumération (« déneigement clé en main, remorquage, tracteurs-chargeurs, niveleuse, équipements avec opérateur ») à laquelle il ne correspond pas : il s'agit du déneigement du stationnement de l'édifice Jacinthe-Fyfe, à Montréal-Est."
+      "raison": "« Anjou hausse le montant des infractions » : le dossier CA26 12136 parle d'un règlement « afin de modifier le montant des infractions »; ni l'objet, ni la décision, ni les considérants n'indiquent qu'il s'agit d'une hausse."
      },
      {
-      "element": "etapes[0]",
-      "raison": "« pour ramasser les abrasifs après l'hiver » déforme le dossier CA26 27 0008 : le contrat de balais aspirateurs et de camions-citernes couvre aussi le ramassage des feuilles en octobre-novembre et des passages hebdomadaires l'été, et non seulement le retrait printanier des abrasifs."
+      "element": "etapes[4]",
+      "raison": "La phrase attribue à Ahuntsic-Cartierville une location de tracteurs-chargeurs, mais aucun des dossiers cités (CM26 0883, CM26 1013, CM26 0878, CA26 08 0333, CA26 10 294, CA26 12163) ne concerne Ahuntsic-Cartierville; le dossier correspondant (CA26 09 0225, tracteur-chargeur compact, 14 septembre 2026) n'est pas cité."
+     },
+     {
+      "element": "etapes[4]",
+      "raison": "Le texte range Saint-Laurent (CA26 08 0333) parmi les arrondissements qui louent « des niveleuses, une autoniveleuse et des tracteurs-chargeurs »; le dossier parle seulement de « location d'appareils avec opérateurs » sans préciser le type d'équipement."
      }
     ]
    }

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-03T16:45:52.516Z",
+ "generatedAt": "2026-11-03T18:49:01.139Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel quand il est publié (source « sommaire »), sinon du texte de la résolution elle-même (source « resolution »), sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -10,14 +10,14 @@
   "depuis": "2026-09-04",
   "plafond": 120
  },
- "nombre": 8843,
- "genereCetteFois": 54,
+ "nombre": 8847,
+ "genereCetteFois": 4,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.8642,
-  "jetonsEntree": 238869,
-  "jetonsSortie": 21362
+  "montant": 0.0488,
+  "jetonsEntree": 12463,
+  "jetonsSortie": 1411
  },
  "resumes": [
   {
@@ -1191,6 +1191,106 @@
    "jetons": {
     "entree": 5232,
     "sortie": 484
+   }
+  },
+  {
+   "id": "CA26 25 0243",
+   "numero": null,
+   "resolution": "CA26 25 0243",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs",
+   "objet": null,
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8541#page=3",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement met fin à sa séance extraordinaire du 6 octobre 2026, à 18 h 55."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T18:49:01.137Z",
+   "jetons": {
+    "entree": 1592,
+    "sortie": 137
+   }
+  },
+  {
+   "id": "1263945014",
+   "numero": "1263945014",
+   "resolution": "CA26 25 0240",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs",
+   "objet": "Dresser le budget de fonctionnement de l'arrondissement du Plateau-Mont-Royal pour l'exercice financier 2027 et transmettre au comité exécutif",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17617#page=3",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal adopte un budget de fonctionnement équilibré de 70 031 800 $ pour 2027 et le transmet au comité exécutif.",
+    "La taxe locale augmente de 11,5 %, parce que la dotation reçue de la Ville ne couvre pas les besoins : il manque 2 803,0 K$ à compenser.",
+    "Le financement vient de transferts centraux (41 826 100 $), de la taxation locale (15 892 400 $) et de revenus locaux (13 413 300 $).",
+    "Pour boucler le budget, l'arrondissement revoit des activités internes et ajuste la cible de certains revenus locaux.",
+    "Les priorités annoncées : propreté et dépôts sauvages, entretien des infrastructures vieillissantes, itinérance (dont le secteur Milton-Parc), logement abordable, verdissement et transports actifs, culture et commerces, sécurité aux abords des écoles.",
+    "Prochaines étapes : dépôt au comité exécutif le 24 novembre 2026 et adoption au conseil municipal les 16 et 17 décembre 2026.",
+    "Le budget sera publié sur le site Internet de l'arrondissement et annoncé dans l'infolettre et les médias sociaux."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "70 031 800 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T18:49:01.137Z",
+   "jetons": {
+    "entree": 4659,
+    "sortie": 533
+   }
+  },
+  {
+   "id": "1263945015",
+   "numero": "1263945015",
+   "resolution": "CA26 25 0241",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs",
+   "objet": "Dresser le programme décennal d'immobilisations 2027 - 2036 de l'arrondissement du Plateau- Mont-Royal (PDI) et transmettre au Comité exécutif",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=odj&doc=17617#page=8",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement du Plateau-Mont-Royal adopte son plan d'investissements pour 2027-2036 : 58 870 000 $ sur dix ans, soit 5 887 000 $ par année.",
+    "Les trois quarts de la somme vont à l'entretien des installations existantes (bâtiments, parcs, infrastructures) et un quart au développement.",
+    "Projets prévus de 2027 à 2029 : reconstruction de la piscine Baldwin, toitures de la bibliothèque Mordecai-Richler, nouvelle entrée au Centre du Plateau, fenêtres du gymnase du Centre Saint-Denis.",
+    "Aussi au programme : réaménagement du parc Baldwin (soccer, jeux d'eau, aire d'exercice, jardin communautaire), transformation de la place Gérald-Godin, réfection de chaussées, verdissement et ruelles vertes.",
+    "L'enveloppe est fixée par l'administration centrale et sert de limite d'emprunt à la charge des contribuables.",
+    "Le conseil d'arrondissement adopte le programme le 6 octobre 2026; le comité exécutif doit l'approuver le 24 novembre 2026.",
+    "Des budgets de la Ville centre s'ajoutent dans l'arrondissement pour le réseau routier artériel, les égouts et aqueducs, les équipements sportifs, les parcs et la culture."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "58 870 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T18:49:01.137Z",
+   "jetons": {
+    "entree": 4573,
+    "sortie": 576
+   }
+  },
+  {
+   "id": "CA26 25 0239",
+   "numero": null,
+   "resolution": "CA26 25 0239",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs",
+   "objet": "Adoption de l'ordre du jour de la séance du conseil d'arrondissement",
+   "pdf": "https://ville.montreal.qc.ca/sel/adi-public/afficherpdf/fichier.pdf?typeDoc=pv&doc=8541#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement adopte l'ordre du jour de sa séance extraordinaire du 6 octobre 2026, une étape de procédure qui fixe la liste des sujets traités ce jour-là."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-03T18:49:01.137Z",
+   "jetons": {
+    "entree": 1639,
+    "sortie": 165
    }
   },
   {
