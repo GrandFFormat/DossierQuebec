@@ -4806,8 +4806,34 @@ for(let i = ORDRE_CAFE.length - 1; i > 0; i--){ const j = Math.floor(Math.random
 let _rangCafe = 0;
 function boutonCafe(b, isEn){
   const [fr, en] = LIBELLES_CAFE[ORDRE_CAFE[_rangCafe++ % ORDRE_CAFE.length]];
-  return `<div class="bill-cafe-row"><a class="bill-cafe-btn" href="${LIEN_CAFE}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="${isEn ? 'Buy us a coffee (opens in a new tab)' : 'Offrez-nous un café (s’ouvre dans un nouvel onglet)'}">☕ ${isEn ? en : fr}</a></div>`;
+  return `<div class="bill-cafe-row"><a class="bill-cafe-btn" href="${LIEN_CAFE}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="${isEn ? 'Buy us a coffee (opens in a new tab)' : 'Offrez-nous un café (s’ouvre dans un nouvel onglet)'}"><img class="icone" src="/commun/cafe-croissant.png" width="24" height="24" alt="">${isEn ? en : fr}<span class="bulle" aria-hidden="true">${'<i class="pt" style="animation:none"></i>'.repeat(5)}</span></a></div>`;
 }
+
+// La bulle du bouton café (Martin, 3 nov. 2026) : toutes les 8 s, à un moment propre à chaque bouton,
+// une file de 1 à 3 cafés tirés au hasard traverse la bulle ; les points jaunes mangés virent au brun,
+// puis redeviennent jaunes. Une seule horloge pour toute la page ; rien si l'appareil coupe les animations.
+const DUREE_CAFE = 8;
+const CAFE_tasse = `<svg width="18" height="18" viewBox="0 0 18 18"><g class="couvercle"><rect x="1" y="3" width="12" height="3" fill="#131313"/></g><path d="M2 7h10v7a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3z" fill="#fff" stroke="#131313" stroke-width="1.6"/><path d="M12 9h2a2 2 0 0 1 0 4h-2" fill="none" stroke="#131313" stroke-width="1.6"/></svg>`;
+const CAFE_emporter = `<svg width="14" height="18" viewBox="0 0 14 18"><rect x="1" y="1" width="12" height="3" rx="1" fill="#6B4A3A" stroke="#3A2A22" stroke-width="1"/><path d="M2 4h10l-1.3 13H3.3z" fill="#F6D7A7" stroke="#3A2A22" stroke-width="1"/><path d="M2.5 7.5h9l-.5 5h-8z" fill="#C88A55"/><ellipse cx="7" cy="10" rx="1.4" ry="2" fill="#5A3A2A"/></svg>`;
+const CAFE_brune = `<svg width="18" height="18" viewBox="0 0 18 18"><path d="M5 4c-1-1.5 1-2 0-3.5M8 4c-1-1.5 1-2 0-3.5" fill="none" stroke="#9A9A9A" stroke-width="1.1"/><path d="M2 6h10v8a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3z" fill="#8A5A3B" stroke="#3A2A22" stroke-width="1"/><path d="M12 8h1.5a2 2 0 0 1 0 4H12" fill="none" stroke="#8A5A3B" stroke-width="1.8"/><ellipse cx="7" cy="6.3" rx="4.4" ry=".8" fill="#fff"/></svg>`;
+const CAFE_glace = `<svg width="14" height="19" viewBox="0 0 14 19"><path d="M8 6l2-5h2" fill="none" stroke="#555" stroke-width="1.4"/><path d="M2 7a5 4 0 0 1 10 0z" fill="#E4E4E4" stroke="#131313" stroke-width="1"/><rect x="1" y="7" width="12" height="2" fill="#D0D0D0" stroke="#131313" stroke-width="1"/><path d="M2 9h10l-1 9H3z" fill="#fff" stroke="#131313" stroke-width="1"/><path d="M2.4 12h9.2l-.7 6H3.1z" fill="#C9A27E"/><rect x="4" y="13" width="2" height="2" fill="#fff" stroke="#131313" stroke-width=".6"/><rect x="7.5" y="14.5" width="2" height="2" fill="#fff" stroke="#131313" stroke-width=".6"/></svg>`;
+const CAFES_BULLE = [CAFE_tasse, CAFE_emporter, CAFE_brune, CAFE_glace];
+function passageCafe(bulle){
+  const file = CAFES_BULLE.slice().sort(() => Math.random() - .5).slice(0, 1 + Math.floor(Math.random() * 3));
+  bulle.innerHTML = '<i class="pt"></i>'.repeat(5)
+    + file.map((ic, i) => `<span class="passant" style="--suite:${i}">${ic}</span>`).reverse().join('');
+}
+setInterval(() => {
+  if(document.hidden || document.body.classList.contains('abonne') || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const maintenant = Date.now();
+  document.querySelectorAll('.bill-cafe-btn .bulle').forEach((bulle) => {
+    if(!bulle.dataset.prochain) bulle.dataset.prochain = maintenant + Math.random() * DUREE_CAFE * 1000;
+    else if(maintenant >= Number(bulle.dataset.prochain)){
+      bulle.dataset.prochain = maintenant + DUREE_CAFE * 1000;
+      passageCafe(bulle);
+    }
+  });
+}, 400);
 
 function shareBill(billId, platform, evt){
   if(evt) evt.stopPropagation();
