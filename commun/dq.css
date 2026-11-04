@@ -2666,3 +2666,11 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
   #villes .vp-grille{grid-template-columns:minmax(0,1fr);}
   #villes .vp-titre{font-size:20px;}
 }
+/* Boîte « Abonnez-vous » dans la fiche d'un projet de loi (4 nov. 2026). */
+.bill-abo{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 16px; margin:14px 0 0; padding:14px 16px; border:3px solid var(--ink); background:var(--card); box-shadow:4px 4px 0 var(--ink);}
+.bill-abo-texte{display:flex; flex-direction:column; gap:2px; font-size:14px;}
+.bill-abo-texte b{font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; font-size:14.5px;}
+.bill-abo-texte span{color:var(--slate);}
+.bill-abo-btn{display:inline-block; padding:8px 14px; border:3px solid var(--ink); background:#FFD24D; color:#131313; font-weight:800; text-decoration:none; white-space:nowrap;}
+.bill-abo-btn:hover{background:var(--gold); color:#FFFFFF;}
+body.abonne .bill-abo{display:none;}

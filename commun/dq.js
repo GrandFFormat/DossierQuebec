@@ -4234,7 +4234,7 @@ function billCard(b, ctx){
   const shareRow = `<div class="bill-share-row">
       <span class="bill-share-label">${isEn ? 'Share:' : 'Partager :'}</span>
       ${shareCtrls}
-    </div>${boutonCafe(b, isEn)}`;
+    </div>${boutonCafe(b, isEn)}${boiteAbonnement(isEn)}`;
   // Les votes ne sont plus affichés sur les cartes de projets de loi — le
   // détail complet (décomptes + qui a voté quoi) vit dans l'onglet Votes.
   return `
@@ -4938,6 +4938,13 @@ const ICONES_CAFE = ['cafe-croissant', 'cafe-carafe', 'cafe-moulin', 'cafe-filtr
 const ORDRE_ICONES = ICONES_CAFE.map((_, i) => i);
 for(let i = ORDRE_ICONES.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [ORDRE_ICONES[i], ORDRE_ICONES[j]] = [ORDRE_ICONES[j], ORDRE_ICONES[i]]; }
 let _rangCafe = 0;
+// Boîte « Abonnez-vous » sous le bouton café des projets de loi (Martin, 4 nov. 2026). Cachée pour
+// les abonné·e·s, comme le café (body.abonne).
+function boiteAbonnement(isEn){
+  return `<div class="bill-abo"><div class="bill-abo-texte"><b>${isEn ? 'Follow this bill closely' : 'Suivez ce projet de près'}</b>
+    <span>${isEn ? 'Keyword alerts, weekly watch, unlimited follows.' : 'Alertes par mot-clé, veille de la semaine, suivis illimités.'}</span></div>
+    <a class="bill-abo-btn" href="/abonnement${isEn ? '?lang=en' : ''}" onclick="event.stopPropagation()">${isEn ? 'Subscribe' : 'Abonnez-vous'} →</a></div>`;
+}
 function boutonCafe(b, isEn){
   const rangIcone = ORDRE_ICONES[_rangCafe % ORDRE_ICONES.length];
   const [fr, en] = LIBELLES_CAFE[ORDRE_CAFE[_rangCafe++ % ORDRE_CAFE.length]];
