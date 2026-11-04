@@ -293,6 +293,78 @@ export async function formulaireInfolettre(zone, { ville = null } = {}) {
   });
 }
 
+// ---------- Mes dossiers : les cartes « Vos courriels » (refonte du 3 nov. 2026) ----------
+// Seuls le balisage et le style changent : mêmes classes et data-* sur les champs (ab-langue-case,
+// ab-sorte-ville, ab-arr-choix, ab-arr-mtl, ab-arr-retirer, .ab-mtl-blocs), donc mêmes gestionnaires
+// et mêmes enregistrements que l'ancienne boîte.
+const ACCENTS_COURRIELS = { assemblee: 'var(--gold)', quebec: '#2563EB', montreal: '#DC2626' };
+const SVG_PIN = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square" aria-hidden="true"><path d="M12 21s-6-6.2-6-11a6 6 0 0 1 12 0c0 4.8-6 11-6 11z"/><path d="M12 10h.01"/></svg>';
+const SVG_X = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="square" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+
+function ligneInterrupteur(o, attrs, coche, classe = '') {
+  const L = libSorte(o);
+  return `<label class="mdc-ligne">
+    <input type="checkbox" class="mdc-inter${classe ? ` ${classe}` : ''}" ${attrs}${coche ? ' checked' : ''}>
+    <span class="mdc-switch" aria-hidden="true"></span>
+    <span class="mdc-texte"><span class="mdc-titre">${echapper(L.nom)}</span> <span class="mdc-freq">${echapper(L.rythme)}</span>
+      <span class="mdc-quoi">${echapper(L.quoi)}</span></span>
+  </label>`;
+}
+
+function ligneArrondissements(ville, o, suivis, { langue = null, mtl = false } = {}) {
+  const L = libSorte(o);
+  const restants = o.arrondissements.filter((a) => !suivis.includes(a.cle));
+  const lang = langue ? ` data-langue="${echapper(langue)}"` : '';
+  return `<div class="mdc-ligne mdc-ligne-arr">
+    <span class="mdc-icone">${SVG_PIN}</span>
+    <span class="mdc-texte"><span class="mdc-titre">${echapper(L.nom)}</span> <span class="mdc-freq">${echapper(L.rythme)}</span>
+      <span class="mdc-quoi">${echapper(L.quoi)}</span>
+      ${suivis.length ? `<span class="ab-arr-suivis mdc-puces">${suivis.map((cle) => {
+        const nom = echapper(nomArrondissement([o], cle));
+        return `<span class="ab-arr-puce mdc-puce">${nom}<button type="button" class="ab-arr-retirer mdc-puce-x" data-ville="${echapper(ville)}" data-arrondissement="${echapper(cle)}"${lang} aria-label="${tr('Retirer', 'Remove')} ${nom}">${SVG_X}</button></span>`;
+      }).join('')}</span>` : ''}
+      ${restants.length ? `<span class="mdc-select"><select class="ab-arr-choix${mtl ? ' ab-arr-mtl' : ''}" data-ville="${echapper(ville)}"${lang} aria-label="${tr('Ajouter un arrondissement', 'Add a borough')}">
+        <option value="">${suivis.length ? tr('+ Ajouter un arrondissement', '+ Add a borough') : tr('Choisir un arrondissement', 'Choose a borough')}</option>
+        ${restants.map((a) => `<option value="${echapper(a.cle)}">${echapper(a.nom)}</option>`).join('')}
+      </select></span>` : `<span class="mdc-quoi">${tr('Vous les suivez tous.', 'You follow them all.')}</span>`}
+    </span>
+  </div>`;
+}
+
+function carteCourriels(etat, v) {
+  const ville = v.cle;
+  const titre = ville === 'assemblee' ? tr('Assemblée nationale', 'National Assembly') : v.nom;
+  const style = `--mdc-accent:${ACCENTS_COURRIELS[ville] ?? 'var(--gold)'}`;
+  const note = (v.note || v.noteEn) ? `<p class="mdc-note">${v.noteEn ? tr(v.note, v.noteEn) : v.note}</p>` : '';
+  const pied = ville === 'assemblee' ? '' : `<p class="mdc-pied">${tr('Bientôt : une édition abonné·e·s du compte rendu du mois, avec « Où va l’argent ».', 'Coming soon: a subscriber edition of the monthly roundup, with “Where the money goes”.')}</p>`;
+  const mtl = ville === 'montreal' && languesDe(v).length > 1;
+
+  if (!mtl) {
+    const langue = 'fr';
+    const lignes = v.offre.map((o) => (o.arrondissements
+      ? ligneArrondissements(ville, o, arrondissementsSuivis(etat, ville, [langue]), { langue })
+      : ligneInterrupteur(o, `data-ville="${echapper(ville)}" data-type="${echapper(o.cle)}" data-langue="${langue}"`, inscrit(etat, { ville, type: o.cle, langue })))).join('');
+    return `<article class="mdc-carte" style="${style}">
+      <header class="mdc-tete"><h3>${echapper(titre)}</h3></header>${note}<div class="mdc-lignes">${lignes}</div>${pied}</article>`;
+  }
+
+  // Montréal : mêmes calculs que blocMontreal (mode boîte).
+  const languesDispo = languesDe(v);
+  const languesActives = languesDispo.filter((lang) =>
+    Object.entries(etat.inscriptions ?? {}).some(([cle, st]) => st === 'confirme' && cle.startsWith(`${ville}:`) && cle.endsWith(`:${lang}`)));
+  const languesCochees = languesActives.length ? languesActives : ['fr'];
+  const suivis = arrondissementsSuivis(etat, ville, languesCochees);
+  const langues = `<span class="mdc-langues" role="group" aria-label="${tr('Langues des courriels', 'Email languages')}">${languesDispo.map((lang) =>
+    `<label class="mdc-langue" title="${lang === 'fr' ? tr('Français', 'French') : 'English'}"><input type="checkbox" class="ab-langue-case" data-ville="${echapper(ville)}" data-langue="${lang}"${languesCochees.includes(lang) ? ' checked' : ''}><span>${lang.toUpperCase()}</span></label>`).join('')}</span>`;
+  const lignes = v.offre.map((o) => (o.arrondissements
+    ? ligneArrondissements(ville, o, suivis, { mtl: true })
+    : ligneInterrupteur(o, `data-ville="${echapper(ville)}" data-type="${echapper(o.cle)}"`, sorteVilleActive(etat, ville, o.cle, languesCochees), 'ab-sorte-ville'))).join('');
+  return `<article class="mdc-carte ab-mtl-blocs" data-ville="${echapper(ville)}" data-mode="boite" style="${style}">
+    <header class="mdc-tete"><h3>${echapper(titre)}</h3>${langues}</header>${note}
+    <p class="mdc-aide">${tr('Chaque courriel coché part dans chaque langue choisie.', 'Each checked email goes out in every language chosen.')}</p>
+    <div class="mdc-lignes">${lignes}</div>${pied}</article>`;
+}
+
 // ---------- Mes dossiers ----------
 export async function boiteInfolettre(zone, s, { premiereLigne = null } = {}) {
   if (!zone) return;
@@ -306,39 +378,18 @@ export async function boiteInfolettre(zone, s, { premiereLigne = null } = {}) {
   const assemblee = etat.villes.find((v) => v.cle === 'assemblee') ?? null;
   const lesVilles = etat.villes.filter((v) => v.cle !== 'assemblee');
   const villesIci = lesVilles.filter((v) => v.cle === volet);
-  // Venu du site provincial (« ce qui est sur DQ reste sur DQ », 22 sept. 2026) : aucune ville
-  // n'est « la sienne ». On garde en vue les villes où la personne est déjà inscrite ; les autres
-  // passent dans un menu replié, au lieu de tout déplier (Montréal s'ouvrait sur « 1. Langues »).
-  const dq = vientDuProvincial();
-  const aDesInscriptions = (v) => Object.entries(etat.inscriptions ?? {}).some(([cle, statut]) => statut && cle.startsWith(`${v.cle}:`));
-  const villes = villesIci.length ? villesIci : dq ? lesVilles.filter(aDesInscriptions) : lesVilles;
-  const villesRepliees = !villesIci.length && dq ? lesVilles.filter((v) => !aDesInscriptions(v)) : [];
-  const avecAssemblee = Boolean(assemblee);
-  const titreBoite = villesIci.length
-    ? tr(`Mes courriels de ${echapper(villesIci[0].nom)}`, `My ${echapper(villesIci[0].nom)} emails`)
-    : tr('Mes courriels', 'My emails');
-  const blocVille = (v, plusieurs) => `${plusieurs ? `<h3 class="ab-sous-titre">${echapper(v.nom)}</h3>` : ''}${noteDe(v)}${listePourVille(etat, v, { cocherSuivis: true, retirable: true, mode: 'boite' })}`;
+  // Refonte du 3 nov. 2026 : une carte par provenance (Assemblée, puis chaque ville), côte à côte.
+  // Venu d'un volet : seulement sa ville (et l'Assemblée). Sinon toutes les villes.
+  const villes = villesIci.length ? villesIci : lesVilles;
+  const cartes = [...(assemblee ? [assemblee] : []), ...villes];
 
   const dessiner = (message = '') => {
-    // Le menu replié garde son état quand la boîte se redessine (chaque case enregistre et redessine).
-    const ouvert = zone.querySelector('details.ab-courriels-villes')?.open ? ' open' : '';
-    zone.innerHTML = `<section class="ab-carte ab-infolettre-boite">
-      <h2 style="margin-top:0">📬 ${titreBoite}</h2>
-      <p class="ab-chapeau" style="margin-bottom:12px">${dq && !villesIci.length
-        ? tr('Cochez ce que vous voulez recevoir. Chaque changement s’enregistre tout de suite.', 'Check what you want to receive. Each change is saved right away.')
-        : tr('Cochez ce que vous voulez recevoir. Pour Montréal : langues, lettres de la Ville, puis arrondissements. Chaque changement s’enregistre tout de suite.', 'Check what you want to receive. For Montréal: languages, city letters, then boroughs. Each change is saved right away.')}</p>
-      <p class="ab-note"><span class="ab-bientot-abonne">${tr('Bientôt exclusif aux abonné·e·s', 'Soon for subscribers only')}</span> ${tr('Une édition abonnés du compte rendu mensuel, avec la section « Où va l’argent », arrive bientôt.', 'A subscriber edition of the monthly recap, with the “Where the money goes” section, is coming soon.')}</p>
+    zone.innerHTML = `<section class="mdc" aria-labelledby="mdcTitre">
+      <h2 class="mdr-h2" id="mdcTitre">${tr('Vos courriels', 'Your emails')}</h2>
+      <p class="mdc-chapeau">${tr('Cochez ce que vous voulez recevoir. Tout s’enregistre tout de suite.', 'Check what you want to receive. Everything is saved right away.')}</p>
       ${premiereLigne?.html ?? ''}
-      ${avecAssemblee ? blocVille({ ...assemblee, nom: tr('Assemblée nationale', 'National Assembly') }, true) : ''}
-      ${villes.map((v) => blocVille(v, villes.length > 1 || villesRepliees.length > 0 || avecAssemblee)).join('')}
-      ${villesRepliees.length ? `<details class="ab-pliable ab-courriels-villes"${ouvert}>
-        <summary><h3 class="ab-sous-titre" style="margin:0">+ ${tr('Autres villes', 'Other cities')}</h3><span class="ab-etiquette">${villesRepliees.length}</span></summary>
-        <div class="ab-pliable-corps">
-          <p class="ab-note" style="margin-top:6px">${tr('Les comptes rendus des conseils municipaux, ville par ville. Pour Montréal : langues, lettres de la Ville, puis arrondissements.', 'City council recaps, city by city. For Montréal: languages, city letters, then boroughs.')}</p>
-          ${villesRepliees.map((v) => blocVille(v, true)).join('')}
-        </div>
-      </details>` : ''}
-      <p class="ab-note" aria-live="polite">${message || tr(`Envoyé à ${echapper(etat.courriel ?? '')}.`, `Sent to ${echapper(etat.courriel ?? '')}.`)}</p>
+      <div class="mdc-cartes">${cartes.map((v) => carteCourriels(etat, v)).join('')}</div>
+      <p class="mdc-etat" aria-live="polite">${message || tr(`Envoyés à ${echapper(etat.courriel ?? '')}.`, `Sent to ${echapper(etat.courriel ?? '')}.`)}</p>
     </section>`;
     premiereLigne?.cabler?.(zone);
   };

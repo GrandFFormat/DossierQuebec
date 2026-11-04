@@ -9,7 +9,8 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 // Mêmes valeurs que index.html de DossierQuébec. La clé « publishable » est faite pour être
 // publique : ce sont les règles RLS (scripts/supabase-schema-abonnes.sql) qui protègent.
-export const client = createClient('https://wfgcqftgtmptfutrbujz.supabase.co', 'sb_publishable_CutVYEz29QYUV3tCDsAhSQ_RvZUQ3G6');
+// window.__DQ_APERCU__ : le mode aperçu de commun/apercu.js (localhost seulement), client factice.
+export const client = window.__DQ_APERCU__?.client ?? createClient('https://wfgcqftgtmptfutrbujz.supabase.co', 'sb_publishable_CutVYEz29QYUV3tCDsAhSQ_RvZUQ3G6');
 
 // VILLES, echapper et la navigation vivent dans navigation.js (sans dépendance extérieure).
 import { VILLES, echapper, lienMonDossier } from './navigation.js';
@@ -156,7 +157,10 @@ async function envoyerMessage(contenu) {
 }
 
 // Dans « Mes dossiers », on choisit le sujet ; sous une fiche, sujet et numéro sont déjà remplis.
-export function formulaireMessage(boite, s, { sujet = 'idee', ville = null, numero = null, fixe = false } = {}) {
+// `preoccupation` (Mon dossier, 3 nov. 2026) : ajoute le sujet « Ce qui me préoccupe », qui garde
+// son propre enregistrement (table preoccupations, comme l'ancienne boîte de commun/dq.js).
+export function formulaireMessage(boite, s, { sujet = 'idee', ville = null, numero = null, fixe = false, preoccupation = false } = {}) {
+  const SUJETS = preoccupation ? { ...SUJETS_MESSAGE, preoccupation: tr('Ce qui me préoccupe', 'What worries me') } : SUJETS_MESSAGE;
   boite.hidden = false;
   const question = fixe && sujet === 'erreur'
     ? tr(`Qu'est-ce qui ne va pas${numero ? ` dans ${numero}` : ''} ?`, `What's wrong${numero ? ` in ${numero}` : ''}?`)
@@ -169,7 +173,7 @@ export function formulaireMessage(boite, s, { sujet = 'idee', ville = null, nume
     };
   const exemple = EXEMPLES[sujet] ?? '';
   boite.innerHTML = `<form class="ab-message">
-    ${fixe ? '' : `<label>${tr('Sujet', 'Topic')} <select name="sujet">${Object.entries(SUJETS_MESSAGE).map(([k, v]) => `<option value="${k}"${k === sujet ? ' selected' : ''}>${v}</option>`).join('')}</select></label>`}
+    ${fixe ? '' : `<label>${tr('Sujet', 'Topic')} <select name="sujet">${Object.entries(SUJETS).map(([k, v]) => `<option value="${k}"${k === sujet ? ' selected' : ''}>${v}</option>`).join('')}</select></label>`}
     <label>${echapper(question)} <textarea name="message" required minlength="3" maxlength="4000" rows="5" placeholder="${echapper(exemple)}"></textarea></label>
     <div><button type="submit" class="ab-bouton">${tr('Envoyer', 'Send')}</button></div>
     <p class="ab-note">${tr('Si une réponse est utile, elle vous arrivera à', 'If a reply is useful, it will be sent to')} ${echapper(s.user.email)}.</p>
@@ -184,6 +188,24 @@ export function formulaireMessage(boite, s, { sujet = 'idee', ville = null, nume
     bouton.disabled = true;
     etat.textContent = tr('Envoi…', 'Sending…');
     const choix = form.elements.sujet?.value ?? sujet;
+    if (choix === 'preoccupation') {
+      const texte = form.elements.message.value.trim();
+      const mots = texte.split(/\s+/).filter(Boolean).length;
+      bouton.disabled = false;
+      if (mots > 300) { etat.textContent = tr(`Votre message compte ${mots} mots : 300 au plus.`, `Your message has ${mots} words: 300 at most.`); return; }
+      bouton.disabled = true;
+      const { error } = await client.from('preoccupations').insert({ texte: texte.slice(0, 2000) });
+      if (!error) {
+        boite.innerHTML = `<p class="ab-merci">${tr('Reçu, merci. Votre message n’est jamais publié ; il sera compté au prochain classement.', 'Received, thank you. Your message is never published; it will be counted at the next sorting.')}</p>`;
+        mesurer('message_envoye', { sujet: choix, ville: '' });
+        return;
+      }
+      bouton.disabled = false;
+      etat.textContent = /limite/.test(error.message || '')
+        ? tr('Vous avez atteint 3 messages pour aujourd’hui. Revenez demain.', 'You have reached 3 messages for today. Come back tomorrow.')
+        : tr('Le message n’a pas pu partir. Réessayez plus tard.', 'The message could not be sent. Try again later.');
+      return;
+    }
     const erreur = await envoyerMessage({ sujet: choix, message: form.elements.message.value.trim(), ville, numero, page: (location.pathname + location.search).slice(0, 300) });
     if (!erreur) {
       boite.innerHTML = `<p class="ab-merci">${echapper(merci(choix))}</p>`;
