@@ -249,67 +249,30 @@ function goToFederal(evt){
   <!-- APERÇU -->
   <section class="view active" id="view-mondossier">
     <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/" data-i18n="fil.accueil">Accueil</a><span class="sep" aria-hidden="true">›</span><span aria-current="page" data-i18n="fil.mondossier">Mon dossier</span></nav>
-    <div class="view-hero">
-      <h1 class="hero-h1 hero-h1-md">
+    <!-- REFONTE de Mon dossier (prototype, 3 nov. 2026) : en-tête + connexion compacte, trois compteurs,
+         « Pour commencer » ou les vraies listes, grille des outils d'abonné·e, bande « Nous écrire ».
+         Rempli par mdRefonte (commun/dq.js) ; les outils existants vivent dans #mdOutils, dépliés par tuile. -->
+    <div class="mdr-tete">
+      <h1 class="hero-h1 hero-h1-md mdr-titre">
         <span class="hero-sujet" data-i18n="sujet.mondossier">Mon dossier</span>
-        <span data-i18n="mdhero.l1">Vos projets de loi,</span>
-        <span class="hero-outline" data-i18n="mdhero.l2">vos élus suivis.</span>
+        <span data-i18n="mdr.titre">Ce que vous suivez, au même endroit</span>
       </h1>
-      <p class="view-hero-sub" data-i18n="mdhero.sub">Ce que vous suivez à l'Assemblée nationale et dans les villes, avec un seul compte. <b><a class="md-lien" href="#villes">Vos projets de ville</a> sont plus bas.</b></p>
+      <div id="mdCompte" class="mdr-compte"></div>
     </div>
 
-    <div id="mdCompte" class="md-bloc"></div>
-    <!-- Offrir un abonnement, sous « Votre compte » (Martin, 21 oct. 2026) : la même boîte que sur /abonnement. -->
-    <div class="md-bloc" id="offrir-mon-dossier" hidden><div class="md-cadeau-discret">
-      <div data-i18n="mdcadeau.html"><span class="md-cadeau-titre">🎁 Offrir 1 mois, 3 mois ou 1 an</span><span class="md-cadeau-puces"><button type="button" class="md-cadeau-puce ab-cadeau" data-duree="mensuel" onclick="abOffrir(this.dataset.duree, this)">1 mois · 9,99 $</button> <button type="button" class="md-cadeau-puce ab-cadeau" data-duree="trimestriel" onclick="abOffrir(this.dataset.duree, this)">3 mois · 26,99 $</button> <button type="button" class="md-cadeau-puce ab-cadeau" data-duree="annuel" onclick="abOffrir(this.dataset.duree, this)">1 an · 99 $</button> <input type="number" class="md-cadeau-qte" min="1" max="100" step="1" inputmode="numeric" placeholder="×1" aria-label="Combien de codes" title="Combien de codes (jusqu’à 100)"></span><span class="md-note">Paiement unique ; le code arrive par courriel.</span></div>
-      <div class="md-cadeau-ligne" data-i18n="mdoffert.html"><span class="md-cadeau-titre">🔁 Offrir un abonnement / mois, / 3 mois ou / an</span><span class="md-cadeau-puces"><button type="button" class="md-cadeau-puce ab-offert" data-forfait="mensuel" onclick="abOffrirAbonnement(this.dataset.forfait, this)">9,99 $ / mois</button> <button type="button" class="md-cadeau-puce ab-offert" data-forfait="trimestriel" onclick="abOffrirAbonnement(this.dataset.forfait, this)">26,99 $ / 3 mois</button> <button type="button" class="md-cadeau-puce ab-offert" data-forfait="annuel" onclick="abOffrirAbonnement(this.dataset.forfait, this)">99 $ / an</button> <input type="number" class="md-cadeau-qte" min="1" max="100" step="1" inputmode="numeric" placeholder="×1" aria-label="Combien de codes" title="Combien de codes (jusqu’à 100)"></span><span class="md-note">Vous payez chaque mois, chaque trimestre ou chaque année pour quelqu’un d’autre, jusqu’à ce que vous annuliez. La première période commence dès le paiement ; le code arrive par courriel.</span></div>
-      <p class="md-note ab-cadeau-etat" aria-live="polite"></p>
-    </div></div>
-    <!-- Ce qui vous préoccupe (Martin, 18 oct. 2026) : rempli par mdPreoccupations (commun/dq.js), juste sous « Votre compte ». -->
-    <div id="mdPreoccupations" class="md-bloc"></div>
-    <!-- L'export des données, premier outil de l'abonnement (mdExport, commun/dq.js ; api/export.js). -->
-    <div id="mdExport" class="md-bloc"></div>
-    <!-- Les alertes sur mesure, deuxième outil de l'abonnement (mdAlertes, commun/dq.js ;
-         api/_alertes-assemblee.js, envoyées par api/infolettre-envoi.js). -->
-    <div id="mdAlertes" class="md-bloc"></div>
-    <!-- La veille par thème, sixième outil de l'abonnement (mdVeille, commun/dq.js ;
-         api/_veille-theme.js, envoyée le lundi par api/infolettre-envoi.js). -->
-    <div id="mdVeille" class="md-bloc"></div>
-    <!-- Les flux RSS, troisième outil de l'abonnement (mdFlux, commun/dq.js ; api/feed.js,
-         adresse fournie par api/abonnement.js?action=flux). -->
-    <div id="mdFlux" class="md-bloc"></div>
-    <!-- Consultations et mémoires, quatrième et cinquième outils de l'abonnement (mdConsultations,
-         commun/dq.js ; api/export.js?jeu=consultations, données de scrapers/consultations.js). -->
-    <div id="mdConsultations" class="md-bloc"></div>
-    <!-- Suivre une entreprise ou un organisme, septième outil de l'abonnement (mdOrganismes, commun/dq.js ;
-         api/export.js?jeu=organismes, api/_organismes.js). -->
-    <div id="mdOrganismes" class="md-bloc"></div>
-    <div id="mdLois" class="md-bloc"></div>
-    <div id="mdElus" class="md-bloc"></div>
-    <!-- Ce qui s'en vient (Martin, 18 oct. 2026) : les outils prévus pour l'abonnement, annoncés
-         d'avance. Le texte du site reste gratuit ; seuls les outils en plus seront payants. -->
-    <div class="md-bloc"><div class="md-carte md-a-venir" data-i18n="mdavenir.html">
-        <div class="md-carte-tete"><h2>Ce qui s’en vient</h2><span class="md-etiquette">Bientôt</span></div>
-        <p>Tout le texte du site restera gratuit : les projets de loi et leurs résumés, les ministres et député·e·s, les votes, les promesses. Des outils en plus arriveront bientôt, réservés aux abonné·e·s :</p>
-        <ul class="ab-outils">
-          <li><span class="ab-etat ab-dispo">Disponible</span><div><b>Alertes sur mesure</b> — un courriel quand un projet de loi touche un mot-clé qui vous intéresse, quand un élu présente un projet ou vote, ou quand un projet change d’étape.</div></li>
-          <li><span class="ab-etat ab-dispo">Disponible</span><div><b>Flux RSS personnalisés</b> — le flux de toutes les nouvelles, et un flux par mot-clé, par député·e ou par ministère, à lire dans votre lecteur RSS.</div></li>
-          <li><span class="ab-etat ab-bientot">Bientôt</span><div><b>Échéances des consultations</b> — pour les groupes et les lobbys : la date limite pour déposer un mémoire en commission parlementaire, avec un rappel avant la fin.</div></li>
-          <li><span class="ab-etat ab-dispo">Disponible</span><div><b>Veille par thème</b> — chaque semaine, tout ce qui a bougé dans votre domaine : projets de loi, votes, consultations.</div></li>
-          <li><span class="ab-etat ab-dispo">Disponible</span><div><b>Qui a déposé un mémoire sur quoi</b> — les groupes qui se sont exprimés sur chaque projet de loi en commission.</div></li>
-          <li><span class="ab-etat ab-dispo">Disponible</span><div><b>Export des données</b> — les votes, les présences et les projets de loi en fichier Excel ou CSV, prêts à analyser.</div></li>
-          <li><span class="ab-etat ab-dispo">Disponible</span><div><b>Suivre une entreprise ou un organisme</b> — ses mémoires déposés en commission à l’Assemblée nationale, au même endroit, et une alerte à chaque nouveau mémoire.</div></li>
-          <li><span class="ab-etat ab-dispo">Disponible</span><div><b>Sans pastille publicitaire</b> — sur DossierQuébec, les boutons « ☕ Appuyez-nous » des projets de loi disparaissent.</div></li><li><span class="ab-etat ab-bientot">Bientôt</span><div><b>Compte rendu mensuel, édition abonnés</b> — le compte rendu des conseils de Québec et de Montréal, avec la section « Où va l’argent ».</div></li>
-        </ul>
-        <p><a class="md-lien" href="/abonnement">Voir l’abonnement facultatif et l’état de chaque outil →</a></p>
-    </div></div>
+    <div id="mdCompteurs" class="mdr-compteurs"></div>
+    <p class="mdr-gratuit" data-i18n="mdr.gratuit"><b>Gratuit : 3 suivis en tout.</b> Pas de mot de passe, un lien arrive par courriel.</p>
 
-    <!-- Vos projets de ville : l'ancienne page /mes-dossiers, fusionnée ici le 30 sept. 2026 (Martin).
-         Même compte, même connexion (la carte « Se connecter » plus haut). Rempli par
-         commun/mes-dossiers.js ; .ab-page lui donne les couleurs des villes (commun/abonnes.css). -->
-    <div class="md-villes ab-page" id="villes" role="region" aria-labelledby="mdVillesTitre">
+    <div id="mdDebut" class="md-bloc"></div>
+    <div id="mdSuivis" hidden>
+      <div id="mdLois" class="md-bloc"></div>
+      <div id="mdElus" class="md-bloc"></div>
+    </div>
+
+    <!-- Vos projets de ville (ancienne page /mes-dossiers, fusionnée le 30 sept. 2026). Rempli par
+         commun/mes-dossiers.js ; montré seulement à qui est connecté (mdRefonte). -->
+    <div class="md-villes ab-page" id="villes" role="region" aria-labelledby="mdVillesTitre" hidden>
       <h2 class="md-villes-titre" id="mdVillesTitre" data-i18n="mdvilles.h">Vos projets de ville</h2>
-      <p class="ab-chapeau" data-i18n="mdvilles.sub">Les projets que vous suivez, toutes villes confondues. Cliquez sur un projet pour voir ses décisions, les plus récentes d'abord. Pour en ajouter un, choisissez-le plus bas, ou cliquez « Projet : … » sur une décision dans une ville.</p>
       <div id="compte" hidden></div>
       <div id="infolettre"></div>
       <div id="mots"></div>
@@ -317,7 +280,31 @@ function goToFederal(evt){
       <div id="suggestions"></div>
       <div id="liste"><p class="ab-vide">Chargement…</p></div>
       <div id="pourquoi"></div>
+    </div>
+
+    <div id="mdPlus" class="mdr-plus"></div>
+    <div id="mdOutils" class="mdr-outils">
+      <div id="mdAlertes" class="md-bloc" hidden></div>
+      <div id="mdVeille" class="md-bloc" hidden></div>
+      <div id="mdOrganismes" class="md-bloc" hidden></div>
+      <div id="mdConsultations" class="md-bloc" hidden></div>
+      <div id="mdFlux" class="md-bloc" hidden></div>
+      <div id="mdExport" class="md-bloc" hidden></div>
+    </div>
+    <!-- Offrir un abonnement : gardé, montré aux personnes connectées seulement (commun/abonnement). -->
+    <div class="md-bloc" id="offrir-mon-dossier" hidden><div class="md-cadeau-discret">
+      <div data-i18n="mdcadeau.html"><span class="md-cadeau-titre">🎁 Offrir 1 mois, 3 mois ou 1 an</span><span class="md-cadeau-puces"><button type="button" class="md-cadeau-puce ab-cadeau" data-duree="mensuel" onclick="abOffrir(this.dataset.duree, this)">1 mois · 9,99 $</button> <button type="button" class="md-cadeau-puce ab-cadeau" data-duree="trimestriel" onclick="abOffrir(this.dataset.duree, this)">3 mois · 26,99 $</button> <button type="button" class="md-cadeau-puce ab-cadeau" data-duree="annuel" onclick="abOffrir(this.dataset.duree, this)">1 an · 99 $</button> <input type="number" class="md-cadeau-qte" min="1" max="100" step="1" inputmode="numeric" placeholder="×1" aria-label="Combien de codes" title="Combien de codes (jusqu’à 100)"></span><span class="md-note">Paiement unique ; le code arrive par courriel.</span></div>
+      <div class="md-cadeau-ligne" data-i18n="mdoffert.html"><span class="md-cadeau-titre">🔁 Offrir un abonnement / mois, / 3 mois ou / an</span><span class="md-cadeau-puces"><button type="button" class="md-cadeau-puce ab-offert" data-forfait="mensuel" onclick="abOffrirAbonnement(this.dataset.forfait, this)">9,99 $ / mois</button> <button type="button" class="md-cadeau-puce ab-offert" data-forfait="trimestriel" onclick="abOffrirAbonnement(this.dataset.forfait, this)">26,99 $ / 3 mois</button> <button type="button" class="md-cadeau-puce ab-offert" data-forfait="annuel" onclick="abOffrirAbonnement(this.dataset.forfait, this)">99 $ / an</button> <input type="number" class="md-cadeau-qte" min="1" max="100" step="1" inputmode="numeric" placeholder="×1" aria-label="Combien de codes" title="Combien de codes (jusqu’à 100)"></span><span class="md-note">Vous payez chaque mois, chaque trimestre ou chaque année pour quelqu’un d’autre, jusqu’à ce que vous annuliez. La première période commence dès le paiement ; le code arrive par courriel.</span></div>
+      <p class="md-note ab-cadeau-etat" aria-live="polite"></p>
+    </div></div>
+
+    <div class="mdr-bande">
+      <p data-i18n="mdr.bande"><b>Une idée, une erreur ?</b> Chaque message est lu.</p>
+      <button type="button" class="mdr-btn-jaune" id="mdEcrireBtn" aria-expanded="false" aria-controls="mdEcrirePli" onclick="mdBasculerEcrire()" data-i18n="mdr.ecrire">Nous écrire</button>
+    </div>
+    <div id="mdEcrirePli" class="ab-page mdr-pli" hidden>
       <div id="ecrire"></div>
+      <div id="mdPreoccupations" class="md-bloc"></div>
     </div>
     <script type="module" src="/commun/mes-dossiers.js"></script>
   </section>
