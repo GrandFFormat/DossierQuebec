@@ -1717,7 +1717,7 @@ async function mdRefonte(isEn, quota){
   if(!zc) return;
   const L = isEn ? '?lang=en' : '';
   const nLois = currentUser ? Object.keys(followedBills).filter((id) => followedBills[id]).length : 0;
-  const nElus = currentUser ? Object.keys(followed).filter((n) => followed[n]).length + Object.keys(followedDeputes).filter((k) => followedDeputes[k]).length : 0;
+  const nElus = currentUser ? Object.keys(followed).filter((n) => followed[n]).length + deputesSuivisParNom().length : 0;
   const nVilles = currentUser ? (quota?.parties?.villes || 0) : 0;
   const compteur = (cls, n, t) => `<div class="mdr-compteur ${cls}"><span class="mdr-nb">${n}</span><span class="mdr-lib">${t}</span></div>`;
   zc.innerHTML = compteur('mdr-bleu', nLois, isEn ? 'Bills' : 'Projets de loi')
@@ -2261,7 +2261,7 @@ async function mdAlertes(isEn){
   const mots = m.data ?? [];
   const actif = p.data?.actif !== false;
   const nLois = Object.keys(followedBills).filter((id) => followedBills[id]).length;
-  const nElus = Object.keys(followed).filter((n) => followed[n]).length + Object.keys(followedDeputes).filter((k) => followedDeputes[k]).length;
+  const nElus = Object.keys(followed).filter((n) => followed[n]).length + deputesSuivisParNom().length;
   const plein = mots.length >= MD_MOTS_MAX;
   zone.innerHTML = `<div class="md-carte">${tete}
     <p class="md-note"><b>${actif ? (isEn ? 'Alerts on.' : 'Alertes activées.') : (isEn ? 'Alerts paused.' : 'Alertes coupées.')}</b>
@@ -2888,12 +2888,12 @@ async function mdRetirerLoi(id){
 function mdElus(isEn){
   const zone = document.getElementById('mdElus');
   const ministres = Object.keys(followed).filter((n) => followed[n]);
-  const deps = Object.keys(followedDeputes).filter((k) => followedDeputes[k]);
+  const deps = deputesSuivisParNom();
   const ligne = (nom, sous, onclick) => `<li class="md-ligne-elu"><div><b>${mdH(nom)}</b>${sous ? `<div class="md-note">${mdH(sous)}</div>` : ''}</div>
     <button class="md-bouton-doux" onclick="${onclick}">${isEn ? 'Unfollow' : 'Ne plus suivre'}</button></li>`;
   const lignes = [
     ...ministres.map((n) => ligne(n, ministers.find((m) => m.name === n) ? (isEn ? (ministers.find((m) => m.name === n).roleEn || ministers.find((m) => m.name === n).role) : ministers.find((m) => m.name === n).role) : '', `mdRetirerElu('minister', '${mdH(n).replace(/'/g, "\\'")}')`)),
-    ...deps.map((k) => ligne(k.split('|')[0], k.split('|')[1] || '', `mdRetirerElu('depute', '${mdH(k).replace(/'/g, "\\'")}')`)),
+    ...deps.map(([nom, sous]) => ligne(nom, sous, `mdRetirerDeputeNom('${mdH(nom).replace(/'/g, "\\'")}')`)),
   ].join('');
   zone.innerHTML = `<div class="md-carte">
     <div class="md-carte-tete">
@@ -2904,6 +2904,21 @@ function mdElus(isEn){
   </div>`;
 }
 
+// Une personne suivie avant et après le 5 octobre a deux clés « Nom|Circonscription » (ex. Maïté
+// Blanchette Vézina, Rimouski puis La Peltrie) : une seule ligne, la circonscription actuelle (4 nov. 2026).
+function deputesSuivisParNom(){
+  const parNom = new Map();
+  for(const k of Object.keys(followedDeputes).filter((x) => followedDeputes[x])){
+    const [nom, circ] = k.split('|');
+    parNom.set(nom, circ || '');   // la clé la plus récente l'emporte
+  }
+  return [...parNom].map(([nom, circ]) => [nom, (typeof deputes !== 'undefined' && deputes.find((d) => d.name === nom)?.riding) || circ]);
+}
+async function mdRetirerDeputeNom(nom){
+  for(const k of Object.keys(followedDeputes).filter((x) => followedDeputes[x] && x.split('|')[0] === nom)) await toggleFollowDepute(k);
+  renderMonDossier();
+}
+window.mdRetirerDeputeNom = mdRetirerDeputeNom;
 async function mdRetirerElu(type, cle){
   if(type === 'minister') await toggleFollow(cle); else await toggleFollowDepute(cle);
   renderMonDossier();
