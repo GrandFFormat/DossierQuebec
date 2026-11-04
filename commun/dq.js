@@ -472,7 +472,7 @@ const translations = {
     'archhero.sub':"Bills and recorded votes of past legislatures, as they stood at the last sitting. <b>Nothing changes afterwards.</b>",
     'arch.prom.h':"2026 election promises",
     'arch.prom.p':"The parties' commitments for the 5 October 2026 election, each with its official source.",
-    'arch.min.h':"Former ministers of the Legault government",
+    'arch.min.h':"Former ministers of the Legault and Fréchette governments",
     'arch.min.p':"One profile per minister of the 43rd Legislature (2022-2026): roles, bills sponsored and vote attendance.",
     'projets.tousvotes':"All recorded votes, motions included →",
     'sujet.regles':"DossierQuébec's sourcing rules",

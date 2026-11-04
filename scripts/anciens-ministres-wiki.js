@@ -1,4 +1,4 @@
-// LES ANCIENS MINISTRES DE LA 43e LÉGISLATURE (gouvernement Legault, 2022-2026) — 3 nov. 2026.
+// LES ANCIENS MINISTRES DE LA 43e LÉGISLATURE (gouvernements Legault et Fréchette, 2022-2026) — 3 nov. 2026.
 // Écrit data/archives/43/ministres.json et archives/43/ministres/photos/<slug>.webp (+ @2x).
 // Lancé à la main, une fois : node scripts/anciens-ministres-wiki.js
 // (photos : sharp, pris dans le dossier donné par SHARP_DIR, p. ex. ...\photos-eric-bilodeau\outils).
@@ -6,11 +6,16 @@
 // LA LISTE vient des deux tableaux de l'article fr.wikipedia « Gouvernement Legault » (deuxième
 // cabinet) : composition du 20 octobre 2022 et remaniement du 10 septembre 2025. On n'en garde que
 // les noms et les intitulés des fonctions (des faits), jamais le texte de l'article.
+// GOUVERNEMENT FRÉCHETTE (ajouté le 3 nov. 2026) : tableau « Composition initiale (21 avril 2026) » de
+// l'article fr.wikipedia « Gouvernement Fréchette » → fonctionsFrechette ; l'ajustement du 9 octobre 2026
+// (Lacombe expulsé, Culture confiée à Martine Biron) est écrit à la main plus bas (AJUSTEMENTS_FRECHETTE).
+// Les fiches déjà présentes dans data/archives/43/ministres.json sont reprises telles quelles (bio,
+// photo) : seules les personnes nouvelles sont cherchées dans Wikidata et Commons (TOUT_REFAIRE=1 : toutes).
 // LA BIO est composée à partir des faits de Wikidata, comme scripts/ministres-wiki.js.
 // LA PHOTO : image de l'infobox, gardée seulement sous CC0 / domaine public / CC BY / CC BY-SA,
 // recadrée en carré 200 px et 400 px (WebP), avec auteur, licence et fiche Commons.
 
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { slugMinistre } from './build-minister-pages.js';
 
@@ -34,9 +39,9 @@ const DOSSIER_PHOTOS = 'archives/43/ministres/photos';
 mkdirSync(DOSSIER_PHOTOS, { recursive: true });
 
 // 1. Les deux tableaux du deuxième cabinet.
-const wt = (await api('fr.wikipedia.org', { action: 'parse', page: 'Gouvernement Legault', prop: 'wikitext' })).parse.wikitext;
+const wtLegault = (await api('fr.wikipedia.org', { action: 'parse', page: 'Gouvernement Legault', prop: 'wikitext' })).parse.wikitext;
 const lien = (s) => s.replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, '$2').replace(/\[\[([^\]]+)\]\]/g, '$1').replace(/''+/g, '').replace(/<ref[\s\S]*?(<\/ref>|\/>)/g, '').trim();
-function tableau(debut, fin) {
+function tableau(debut, fin, wt = wtLegault) {
   const bloc = wt.slice(wt.indexOf(debut), wt.indexOf(fin, wt.indexOf(debut)));
   const tab = bloc.slice(bloc.indexOf('{|'), bloc.indexOf('|}'));
   const rangs = tab.split(/\n\|-[^\n]*/).slice(1);
@@ -53,22 +58,38 @@ function tableau(debut, fin) {
 }
 const t2022 = tableau('Composition initiale (20 octobre 2022)', '=== Ajustements (2022-2025)');
 const t2025 = tableau('Remaniement majeur (10 septembre 2025)', '=== Ajustements (2025-2026)');
+const wtFrechette = (await api('fr.wikipedia.org', { action: 'parse', page: 'Gouvernement Fréchette', prop: 'wikitext' })).parse.wikitext;
+const tFrechette = tableau('Composition initiale (21 avril 2026)', '== Ajustements', wtFrechette);
 const personnes = new Map();
-for (const [annee, t] of [['2022', t2022], ['2025', t2025]]) for (const x of t) {
-  const p = personnes.get(x.article) ?? { nom: x.nom, article: x.article, fonctions2022: [], fonctions2025: [] };
+for (const [annee, t] of [['2022', t2022], ['2025', t2025], ['Frechette', tFrechette]]) for (const x of t) {
+  const p = personnes.get(x.article) ?? { nom: x.nom, article: x.article, fonctions2022: [], fonctions2025: [], fonctionsFrechette: [] };
   p[`fonctions${annee}`].push(...x.fonctions);
   personnes.set(x.article, p);
 }
 // Le whip et le président du caucus sont dans les tableaux, mais ne sont pas ministres.
-for (const [k, p] of personnes) if (![...p.fonctions2022, ...p.fonctions2025].some((f) => /ministre/i.test(f))) personnes.delete(k);
-console.log(`${t2022.length} rangs en 2022, ${t2025.length} en 2025, ${personnes.size} ministres`);
+for (const [k, p] of personnes) if (![...p.fonctions2022, ...p.fonctions2025, ...p.fonctionsFrechette].some((f) => /ministre/i.test(f))) personnes.delete(k);
+// Ajustement du 9 octobre 2026 : Lacombe expulsé du Conseil exécutif, la Culture passe à Martine Biron.
+const AJUSTEMENTS_FRECHETTE = {
+  'Mathieu Lacombe': { fr: 'Expulsé du Conseil exécutif le 9 octobre 2026.', en: 'Removed from cabinet on October 9, 2026.' },
+  'Martine Biron': { fr: 'Ministre de la Culture et des Communications à partir du 9 octobre 2026, en remplacement de Mathieu Lacombe.', en: 'Also Minister of Culture and Communications from October 9, 2026, replacing Mathieu Lacombe.' },
+};
+for (const p of personnes.values()) if (AJUSTEMENTS_FRECHETTE[p.nom]) p.ajustementFrechette = AJUSTEMENTS_FRECHETTE[p.nom];
+console.log(`${t2022.length} rangs en 2022, ${t2025.length} en 2025, ${tFrechette.length} chez Fréchette, ${personnes.size} ministres`);
 // Circonscription de la 43e quand Wikidata ne la donne pas (relevé sur assnat.qc.ca, 3 nov. 2026).
-const CIRC = { 'Pascale Déry': 'Repentigny', 'Andrée Laforest': 'Chicoutimi', 'Kateri Champagne Jourdain': 'Duplessis', 'Caroline Proulx': 'Berthier', 'Lionel Carmant': 'Taillon', 'France-Élaine Duranceau': 'Bertrand', 'Ian Lafrenière': 'Vachon', 'Isabelle Charest': 'Brome-Missisquoi', 'Chantal Rouleau': 'Pointe-aux-Trembles', 'Christopher Skeete': 'Sainte-Rose', 'Jean-François Simard': 'Montmorency', 'Gilles Bélanger': 'Orford', 'Samuel Poulin': 'Beauce-Sud' };
+const CIRC = { 'Pascale Déry': 'Repentigny', 'Andrée Laforest': 'Chicoutimi', 'Kateri Champagne Jourdain': 'Duplessis', 'Caroline Proulx': 'Berthier', 'Lionel Carmant': 'Taillon', 'France-Élaine Duranceau': 'Bertrand', 'Ian Lafrenière': 'Vachon', 'Isabelle Charest': 'Brome-Missisquoi', 'Chantal Rouleau': 'Pointe-aux-Trembles', 'Christopher Skeete': 'Sainte-Rose', 'Jean-François Simard': 'Montmorency', 'Gilles Bélanger': 'Orford', 'Samuel Poulin': 'Beauce-Sud', 'Karine Boivin Roy': 'Anjou–Louis-Riel', 'Kariane Bourassa': 'Charlevoix–Côte-de-Beaupré', 'Mathieu Lévesque': 'Chapleau' };
 
-// 2. Wikidata (faits) et Commons (photo).
+// 2. Wikidata (faits) et Commons (photo), pour les personnes qui n'ont pas encore de fiche.
+const SORTIE = 'data/archives/43/ministres.json';
+const deja = new Map((existsSync(SORTIE) ? JSON.parse(readFileSync(SORTIE, 'utf8')).ministres : []).map((m) => [m.article, m]));
 const sortie = [];
 for (const p of personnes.values()) {
   const slug = slugMinistre(p.nom);
+  const vieux = deja.get(p.article);
+  if (vieux && !process.env.TOUT_REFAIRE) {
+    const { fonctions2022, fonctions2025, fonctionsFrechette, ajustementFrechette, ...reste } = vieux;
+    sortie.push({ ...reste, ...p, slug, url: vieux.url });
+    continue;
+  }
   const f = { slug, ...p, url: null, wikidata: null, naissance: null, lieu: null, lieuEn: null, formation: [], formationEn: [], metiers: [], metiersEn: [], circonscription: null, photo: null, raison: null };
   try {
     const page = (await api('fr.wikipedia.org', { action: 'query', titles: p.article, redirects: '1', prop: 'pageprops|pageimages|info', piprop: 'name', inprop: 'url' })).query.pages[0];
@@ -137,5 +158,5 @@ for (const p of personnes.values()) {
   sortie.push(f);
   await attendre(300);
 }
-writeFileSync('data/archives/43/ministres.json', JSON.stringify({ source: 'https://fr.wikipedia.org/wiki/Gouvernement_Legault', releve: new Date().toISOString().slice(0, 10), ministres: sortie }, null, 1) + '\n', 'utf8');
+writeFileSync(SORTIE, JSON.stringify({ source: 'https://fr.wikipedia.org/wiki/Gouvernement_Legault', sourceFrechette: 'https://fr.wikipedia.org/wiki/Gouvernement_Fr%C3%A9chette', releve: new Date().toISOString().slice(0, 10), ministres: sortie }, null, 1) + '\n', 'utf8');
 console.log(`\n${sortie.length} anciens ministres, ${sortie.filter((f) => f.photo).length} photos → data/archives/43/ministres.json`);
