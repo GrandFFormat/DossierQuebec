@@ -472,6 +472,8 @@ const translations = {
     'archhero.sub':"Bills and recorded votes of past legislatures, as they stood at the last sitting. <b>Nothing changes afterwards.</b>",
     'arch.prom.h':"2026 election promises",
     'arch.prom.p':"The parties' commitments for the 5 October 2026 election, each with its official source.",
+    'arch.min.h':"Former ministers of the Legault government",
+    'arch.min.p':"One profile per minister of the 43rd Legislature (2022-2026): roles, bills sponsored and vote attendance.",
     'projets.tousvotes':"All recorded votes, motions included →",
     'sujet.regles':"DossierQuébec's sourcing rules",
     'regleshero.l1':"The rules,",
@@ -5467,8 +5469,8 @@ function toggleVoteCard(id, evt){
    sur une de ces adresses. */
 // /mon-dossier y est aussi : sans lui, la page se prenait pour l'accueil et portait son titre
 // anglais (arrivé avec l'anglais qui suit enfin la navigation, 24 sept. 2026).
-const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', ministre:'/ministres', projets:'/projets-de-loi', votes:'/votes', archives:'/archives', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier', regles:'/regles', abonnement:'/abonnement' };
-const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'ministres/':'ministre', 'projets-de-loi':'projets', 'votes':'votes', 'archives':'archives', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier', 'regles':'regles', 'abonnement':'abonnement' };
+const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', ministre:'/ministres', projets:'/projets-de-loi', votes:'/votes', archives:'/archives', ancien:'/archives', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier', regles:'/regles', abonnement:'/abonnement' };
+const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'ministres/':'ministre', 'projets-de-loi':'projets', 'votes':'votes', 'archives':'archives', 'archives/':'ancien', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier', 'regles':'regles', 'abonnement':'abonnement' };
 // Titres ANGLAIS seulement : le français vient du <title> de la page (voir syncTitle).
 const PAGE_META = {
   bd:        { en:"Site updates — DossierQuébec" },
@@ -5476,6 +5478,8 @@ const PAGE_META = {
   ministres: { en:"Quebec ministers and MNAs — DossierQuébec" },
   // Page d'un ministre (/ministres/nicolas-marceau, scripts/build-minister-pages.js) : son titre anglais est dans la page.
   ministre:  { get en(){ return document.getElementById('view-ministre')?.dataset.titreEn || 'Quebec minister — DossierQuébec'; } },
+  // Anciens ministres (/archives/43/ministres…, scripts/build-anciens-ministres.js) : titre anglais dans la page.
+  ancien:    { get en(){ return document.getElementById('view-ancien')?.dataset.titreEn || 'Former minister — DossierQuébec'; } },
   projets:   { en:"Quebec bills explained in plain language — DossierQuébec" },
   votes:     { en:"Recorded divisions at the National Assembly — DossierQuébec" },
   lexique:   { en:"National Assembly glossary in plain language — DossierQuébec" },
@@ -5494,6 +5498,7 @@ function viewFromPath(){
   // Une page de projet de loi (/projets-de-loi/3-43-3, scripts/build-bill-pages.js) est la vue Projets.
   if(seg.startsWith('projets-de-loi/')) return 'projets';
   if(seg.startsWith('ministres/')) return SLUG_VIEWS['ministres/'];
+  if(seg.startsWith('archives/')) return SLUG_VIEWS['archives/'];
   return SLUG_VIEWS[seg] || 'apercu';
 }
 const _titreFr = document.title;
@@ -5513,7 +5518,7 @@ function goToTab(viewName, opts){
     return;
   }
   document.querySelectorAll('nav.tabs a[data-view]').forEach(a=>{
-    const actif = a.dataset.view === (viewName === 'ministre' ? 'ministres' : viewName);
+    const actif = a.dataset.view === (viewName === 'ministre' ? 'ministres' : viewName === 'ancien' ? 'archives' : viewName);
     a.classList.toggle('active', actif);
     if(actif) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
   });
