@@ -2457,3 +2457,6 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 .min-reseaux{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 0;}
 .min-reseaux a{display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border:2px solid var(--ink); color:var(--ink); background:var(--card); text-decoration:none;}
 .min-reseaux a:hover{background:#FFE88A; color:#131313;}
+/* Nom du ministre sur les cartes : souligné jaune comme le fil d'Ariane, il mène à sa fiche (Martin, 4 nov. 2026). */
+.m-name a{color:inherit; text-decoration:none; border-bottom:3px solid var(--yellow);}
+.m-name a:hover{color:var(--gold);}
