@@ -25,11 +25,21 @@ const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 const dateFr = (iso) => { const [a, m, j] = iso.split('-').map(Number); return `${j === 1 ? '1er' : j} ${MOIS[m - 1]} ${a}`; };
 const dateEn = (iso) => { const [a, m, j] = iso.split('-').map(Number); return `${MONTHS[m - 1]} ${j}, ${a}`; };
 // Le plus court possible (Martin, 3 nov. 2026) : « Source, 3 octobre 2026 », « Source » est le lien.
+// Le lien tombe sur la phrase et la surligne (fragment de texte #:~:text=début,fin ; Chrome, Edge, Safari).
+// Si la citation n'est pas mot pour mot sur la page, le lien ouvre simplement l'annonce.
+const fragmentTexte = (quote) => {
+  const mots = String(quote || '').replace(/[«»"“”]/g, '').trim().split(/\s+/).filter(Boolean);
+  if (mots.length < 3) return '';
+  const enc = (t) => encodeURIComponent(t).replace(/-/g, '%2D').replace(/,/g, '%2C');
+  const debut = mots.slice(0, Math.min(5, mots.length)).join(' ');
+  const fin = mots.length > 9 ? mots.slice(-3).join(' ').replace(/[.!?;:]+$/, '') : '';
+  return `#:~:text=${enc(debut)}${fin ? ',' + enc(fin) : ''}`;
+};
 const citeSource = (p) => {
   const date = String(p.sourceLabel || '').split(' — ').map((x) => x.trim())[2] || '';
   const d = /^\d{4}-\d{2}-\d{2}$/.test(date) ? dateFr(date) : date;
   const mot = deux('Source', 'Source');
-  return (p.sourceUrl ? `<a href="${esc(p.sourceUrl)}" target="_blank" rel="noopener">${mot}</a>` : mot) + (d ? `, ${esc(d)}` : '');
+  return (p.sourceUrl ? `<a href="${esc(p.sourceUrl + fragmentTexte(p.quote))}" target="_blank" rel="noopener">${mot}</a>` : mot) + (d ? `, ${esc(d)}` : '');
 };
 const deux = (fr, en) => `<span class="fr-txt">${fr}</span><span class="en-txt">${en}</span>`;
 const PARTIS = { PQ: ['Parti québécois', 'Parti Québécois'], CAQ: ['Coalition avenir Québec', 'Coalition Avenir Québec'], PLQ: ['Parti libéral du Québec', 'Quebec Liberal Party'], QS: ['Québec solidaire', 'Québec solidaire'], PCQ: ['Parti conservateur du Québec', 'Conservative Party of Quebec'] };
