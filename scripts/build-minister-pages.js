@@ -60,6 +60,14 @@ export function construirePagesMinistres() {
   const deputes = lire('data/site/deputesRaw.json', []);
   const courriels = lire('data/site/deputeEmails.json', {});
   const presences = lire('data/site/presences.json', {});
+  // Même pastille que la page Ministres (tauxPresence de dq.js) : vert à la médiane de l'Assemblée ou
+  // au-dessus, jaune jusqu'à la médiane de ceux qui sont sous, sans couleur en dessous.
+  const tauxTous = deputes.map((d) => presences[d[4]]?.rate).filter((r) => typeof r === 'number').sort((x, y) => x - y);
+  const medianeDe = (t) => { const k = Math.floor(t.length / 2); return t.length % 2 ? t[k] : Math.round((t[k - 1] + t[k]) / 2); };
+  const mediane = tauxTous.length ? medianeDe(tauxTous) : 0;
+  const sousMed = tauxTous.filter((r) => r < mediane);
+  const medianeJaune = sousMed.length ? medianeDe(sousMed) : mediane;
+  const classePresence = (r) => r >= mediane ? 'presence-haute' : r >= medianeJaune ? 'presence-moyenne' : 'presence-neutre';
   const historique = lire('data/site/historiqueLeg.json', {});
   const parrains = lire('data/site/billsParrains.json', []);
   const promesses = lire('data/site/promises.json', []).filter((p) => !p.draft);
@@ -142,7 +150,7 @@ export function construirePagesMinistres() {
         : `<p>${deux('Aucun projet de loi parrainé dans les données du site pour l’instant.', 'No bill sponsored in the site’s data so far.')}</p>`}
 
       <h2>${deux('Présence aux votes', 'Vote attendance')}</h2>
-      ${att ? `<p>${deux(`<b>${att.rate} %</b> des votes nominaux depuis le ${dateFr(att.depuis)} : ${att.participated} sur ${att.total}, soit ${att.total - att.participated} votes manqués (43e législature).`, `<b>${att.rate}%</b> of recorded divisions since ${dateEn(att.depuis)}: ${att.participated} of ${att.total}, i.e. ${att.total - att.participated} votes missed (43rd Legislature).`)}</p><p class="pr-meta">${deux('Un vote manqué peut être une mission officielle, une maladie ou un conflit d’horaire : le registre n’en donne pas la raison.', 'A missed vote can be an official mission, an illness or a scheduling conflict: the register does not give the reason.')}</p>`
+      ${att ? `<p>${deux(`<b class="presence-pastille ${classePresence(att.rate)}">${att.rate} %</b> des votes nominaux depuis le ${dateFr(att.depuis)} : ${att.participated} sur ${att.total}, soit ${att.total - att.participated} votes manqués (43e législature).`, `<b class="presence-pastille ${classePresence(att.rate)}">${att.rate}%</b> of recorded divisions since ${dateEn(att.depuis)}: ${att.participated} of ${att.total}, i.e. ${att.total - att.participated} votes missed (43rd Legislature).`)}</p><p class="pr-meta">${deux('Un vote manqué peut être une mission officielle, une maladie ou un conflit d’horaire : le registre n’en donne pas la raison.', 'A missed vote can be an official mission, an illness or a scheduling conflict: the register does not give the reason.')}</p>`
         : `<p>${deux('Pas encore de vote nominal enregistré pour cette personne dans les données du site.', 'No recorded division for this person in the site’s data yet.')}</p>`}
 
       <h2>${deux('Historique', 'History')}</h2>
