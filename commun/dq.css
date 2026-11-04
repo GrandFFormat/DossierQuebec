@@ -2462,3 +2462,8 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 .presence-avenir{background:var(--gold); color:#FFFFFF; border-color:var(--ink); text-transform:uppercase; font-size:13px;}
 /* Fiches de ministres : barre jaune devant chaque titre de section, pour donner du relief (Martin, 4 nov. 2026). */
 .min-fiche h2{border-left:8px solid #FFD24D; padding-left:10px; margin-top:28px;}
+/* Idées de mots-clés cliquables dans Mon dossier. */
+.md-exemples{display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:8px 0 0; font-size:13.5px;}
+.md-exemples span{color:var(--slate); margin-right:2px;}
+.md-exemple{border:2px solid var(--ink); background:var(--card); color:var(--ink); padding:2px 9px; font:inherit; font-weight:700; cursor:pointer;}
+.md-exemple:hover{background:#FFE88A; color:#131313;}
