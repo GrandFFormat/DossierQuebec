@@ -6079,3 +6079,45 @@ document.addEventListener('click', (e) => {
   };
   revenir();
 })();
+
+// Compteur de suivis à côté de chaque bouton « Suivre » (Martin, 4 nov. 2026) : combien de personnes
+// suivent cet·te élu·e, toutes clés confondues (ministre, Nom|Circonscription). Fonction Supabase
+// public.nb_suivis() (security definer, seulement des totaux par nom). Rien d'affiché sous 1.
+let _nbSuivis = null, _nbSuivisDemande = null;
+function nbSuivisCharger(){
+  if(_nbSuivisDemande) return _nbSuivisDemande;
+  _nbSuivisDemande = (async () => {
+    try{
+      if(typeof supabaseClient === 'undefined' || !supabaseClient?.rpc) return null;
+      const { data, error } = await supabaseClient.rpc('nb_suivis');
+      if(error || !Array.isArray(data)) return null;
+      _nbSuivis = new Map(data.map((r) => [norm(r.nom), Number(r.nb) || 0]));
+      return _nbSuivis;
+    }catch(e){ return null; }
+  })();
+  return _nbSuivisDemande;
+}
+function nbSuivisDecorer(){
+  if(!_nbSuivis) return;
+  const isEn = currentLang === 'en';
+  document.querySelectorAll('.follow-btn').forEach((b) => {
+    const m = (b.getAttribute('onclick') || '').match(/toggleFollow(?:Depute)?\('((?:[^'\\]|\\.)*)'\)/);
+    if(!m) return;
+    const nom = m[1].replace(/\\'/g, "'").split('|')[0];
+    const n = _nbSuivis.get(norm(nom)) || 0;
+    let pastille = b.nextElementSibling?.classList.contains('nb-suivis') ? b.nextElementSibling : null;
+    if(n < 1){ pastille?.remove(); return; }
+    if(!pastille){ pastille = document.createElement('span'); pastille.className = 'nb-suivis'; b.after(pastille); }
+    pastille.textContent = n;
+    pastille.title = isEn ? `${n} ${n > 1 ? 'people follow' : 'person follows'} ${nom} on DossierQuébec` : `${n} personne${n > 1 ? 's suivent' : ' suit'} ${nom} sur DossierQuébec`;
+  });
+}
+(() => {
+  let attente = null;
+  const relancer = () => { clearTimeout(attente); attente = setTimeout(nbSuivisDecorer, 120); };
+  const demarrer = () => {
+    if(!document.querySelector('.follow-btn') && !/^\/(ministres|deputes|archives)/.test(location.pathname)) return;
+    nbSuivisCharger().then(() => { nbSuivisDecorer(); new MutationObserver(relancer).observe(document.body, { childList: true, subtree: true }); });
+  };
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => setTimeout(demarrer, 600)); else setTimeout(demarrer, 600);
+})();
