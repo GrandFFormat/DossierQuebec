@@ -24,12 +24,12 @@ const MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const dateFr = (iso) => { const [a, m, j] = iso.split('-').map(Number); return `${j === 1 ? '1er' : j} ${MOIS[m - 1]} ${a}`; };
 const dateEn = (iso) => { const [a, m, j] = iso.split('-').map(Number); return `${MONTHS[m - 1]} ${j}, ${a}`; };
-// Qui l'a dit, quand, et le lien (Martin, 3 nov. 2026) : ce n'est pas forcément le ministre, c'est son parti.
+// Le plus court possible (Martin, 3 nov. 2026) : « Source, 3 octobre 2026 », « Source » est le lien.
 const citeSource = (p) => {
-  const [qui, , date] = String(p.sourceLabel || '').split(' — ').map((x) => x.trim());
-  const d = /^\d{4}-\d{2}-\d{2}$/.test(date || '') ? dateFr(date) : (date || '');
-  const lien = p.sourceUrl ? ` · <a href="${esc(p.sourceUrl)}" target="_blank" rel="noopener">${deux('Voir la source', 'See the source')}</a>` : '';
-  return '— ' + [qui, d].filter(Boolean).map(esc).join(', ') + lien;
+  const date = String(p.sourceLabel || '').split(' — ').map((x) => x.trim())[2] || '';
+  const d = /^\d{4}-\d{2}-\d{2}$/.test(date) ? dateFr(date) : date;
+  const mot = deux('Source', 'Source');
+  return (p.sourceUrl ? `<a href="${esc(p.sourceUrl)}" target="_blank" rel="noopener">${mot}</a>` : mot) + (d ? `, ${esc(d)}` : '');
 };
 const deux = (fr, en) => `<span class="fr-txt">${fr}</span><span class="en-txt">${en}</span>`;
 const PARTIS = { PQ: ['Parti québécois', 'Parti Québécois'], CAQ: ['Coalition avenir Québec', 'Coalition Avenir Québec'], PLQ: ['Parti libéral du Québec', 'Quebec Liberal Party'], QS: ['Québec solidaire', 'Québec solidaire'], PCQ: ['Parti conservateur du Québec', 'Conservative Party of Quebec'] };
