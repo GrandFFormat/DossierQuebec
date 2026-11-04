@@ -417,7 +417,11 @@ const translations = {
     'fil.mondossier':"My file",
     'mdvilles.h':"Your city projects",
     'mdvilles.sub':"The projects you follow, all cities combined. Click a project to see its decisions, most recent first. To add one, pick it further down, or click “Project: …” on a decision in a city section.",
-    'mdhero.l1':"Your bills,",
+    'mdr.titre':"What you follow, in one place",
+'mdr.gratuit':"<b>Free: 3 follows in all.</b> No password, a link arrives by email.",
+'mdr.bande':"<b>An idea, an error?</b> Every message is read.",
+'mdr.ecrire':"Write to us",
+'mdhero.l1':"Your bills,",
     'mdhero.l2':"the members you follow.",
     'mdhero.sub':"What you follow at the National Assembly and in the cities, with one account. <b><a class=\"md-lien\" href=\"#villes\">Your city projects</a> are further down.</b>",
     'lp.titre':"How to read vote attendance",
@@ -1693,6 +1697,79 @@ async function renderMonDossier(){
   mdVeille(isEn);
   mdConsultations(isEn);
   mdOrganismes(isEn);
+  mdRefonte(isEn, quota);
+}
+
+// REFONTE de Mon dossier (prototype, 3 nov. 2026) : compteurs, « Pour commencer » ou les listes,
+// tuiles des outils d'abonné·e (chaque tuile déplie l'outil existant), bande « Nous écrire ».
+const MD_ICONES = {
+  cloche: '<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/>',
+  theme: '<rect x="3" y="5" width="18" height="16"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  organisme: '<path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/>',
+  consult: '<path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h7"/>',
+  rss: '<path d="M5 19h.01"/><path d="M5 12a7 7 0 0 1 7 7M5 5a14 14 0 0 1 14 14"/>',
+  excel: '<rect x="4" y="3" width="16" height="18"/><path d="M8 8l8 8M16 8l-8 8"/>',
+};
+const mdIcone = (n) => `<svg class="mdr-icone" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square" aria-hidden="true">${MD_ICONES[n]}</svg>`;
+let _mdOuvert = null;
+async function mdRefonte(isEn, quota){
+  const zc = document.getElementById('mdCompteurs');
+  if(!zc) return;
+  const L = isEn ? '?lang=en' : '';
+  const nLois = currentUser ? Object.keys(followedBills).filter((id) => followedBills[id]).length : 0;
+  const nElus = currentUser ? Object.keys(followed).filter((n) => followed[n]).length + Object.keys(followedDeputes).filter((k) => followedDeputes[k]).length : 0;
+  const nVilles = currentUser ? (quota?.parties?.villes || 0) : 0;
+  const compteur = (cls, n, t) => `<div class="mdr-compteur ${cls}"><span class="mdr-nb">${n}</span><span class="mdr-lib">${t}</span></div>`;
+  zc.innerHTML = compteur('mdr-bleu', nLois, isEn ? 'Bills' : 'Projets de loi')
+    + compteur('mdr-ocre', nElus, isEn ? 'Members' : 'Élu·e·s')
+    + compteur('mdr-vert', nVilles, isEn ? 'City projects' : 'Projets de ville');
+
+  const aDesSuivis = nLois + nElus + nVilles > 0;
+  document.getElementById('mdSuivis').hidden = !aDesSuivis;
+  document.getElementById('villes').hidden = !currentUser;
+  const debut = document.getElementById('mdDebut');
+  if(aDesSuivis) debut.innerHTML = '';
+  else {
+    const carte = (n, titre, sous, liens) => `<div class="mdr-carte">
+      <span class="mdr-num">${n}.</span><b class="mdr-carte-titre">${titre}</b><span class="mdr-carte-sous">${sous}</span>
+      <span class="mdr-carte-action">${liens.map(([h, t]) => `<a href="${h}${L}">${t}</a>`).join(' · ')}</span></div>`;
+    debut.innerHTML = `<h2 class="mdr-h2">${isEn ? 'Getting started' : 'Pour commencer'}</h2>
+      <div class="mdr-cartes">
+        ${carte(1, isEn ? 'A bill' : 'Un projet de loi', isEn ? 'An alert at every stage' : 'Une alerte à chaque étape', [['/projets-de-loi', isEn ? 'Choose a bill →' : 'Choisir un projet →']])}
+        ${carte(2, isEn ? 'A member' : 'Un·e élu·e', isEn ? 'Their votes and bills' : 'Ses votes et ses projets', [['/ministres', isEn ? 'Find my MNA →' : 'Trouver mon député →']])}
+        ${carte(3, isEn ? 'A city project' : 'Un projet de ville', isEn ? 'Québec City or Montréal' : 'Québec ou Montréal', [['/quebec', isEn ? 'Québec City →' : 'Québec →'], ['/montreal', 'Montréal →']])}
+      </div>`;
+  }
+
+  const abonne = await estAbonne();
+  const tuiles = [
+    ['mdAlertes', 'cloche', isEn ? 'Keyword alerts' : 'Alertes par mot-clé', isEn ? 'An email in the morning' : 'Un courriel le matin'],
+    ['mdVeille', 'theme', isEn ? 'Topic watch' : 'Veille par thème', isEn ? 'Every Monday' : 'Chaque lundi'],
+    ['mdOrganismes', 'organisme', isEn ? 'Follow an organization' : 'Suivre un organisme', isEn ? 'Its briefs filed' : 'Ses mémoires déposés'],
+    ['mdConsultations', 'consult', isEn ? 'Consultations' : 'Consultations', isEn ? 'Who filed what' : 'Qui a déposé quoi'],
+    ['mdFlux', 'rss', isEn ? 'RSS feeds' : 'Flux RSS', isEn ? 'In your reader' : 'Dans votre lecteur'],
+    ['mdExport', 'excel', isEn ? 'Excel export' : 'Export Excel', isEn ? 'Votes and attendance' : 'Votes et présences'],
+  ];
+  document.getElementById('mdPlus').innerHTML = `<div class="mdr-plus-tete"><h2 class="mdr-h2">${isEn ? 'Going further · subscribers' : 'Pour aller plus loin · abonné·e·s'}</h2>
+      <a class="md-lien" href="/abonnement${L}">${isEn ? 'See the subscription →' : 'Voir l’abonnement →'}</a></div>
+    <div class="mdr-tuiles">${tuiles.map(([id, ic, t, st]) => abonne
+      ? `<button type="button" class="mdr-tuile" data-outil="${id}" aria-expanded="${_mdOuvert === id}" aria-controls="${id}" onclick="mdOuvrirOutil('${id}')">${mdIcone(ic)}<b>${t}</b><span>${st}</span></button>`
+      : `<a class="mdr-tuile" href="/abonnement${L}">${mdIcone(ic)}<b>${t}</b><span>${st}</span></a>`).join('')}</div>`;
+  tuiles.forEach(([id]) => { const z = document.getElementById(id); if(z) z.hidden = !(abonne && _mdOuvert === id); });
+  if(location.hash === '#ecrire') mdBasculerEcrire(true);
+}
+function mdOuvrirOutil(id){
+  _mdOuvert = _mdOuvert === id ? null : id;
+  document.querySelectorAll('.mdr-tuile[data-outil]').forEach((b) => b.setAttribute('aria-expanded', String(b.dataset.outil === _mdOuvert)));
+  document.querySelectorAll('#mdOutils > .md-bloc').forEach((z) => { z.hidden = z.id !== _mdOuvert; });
+  if(_mdOuvert) document.getElementById(_mdOuvert)?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+function mdBasculerEcrire(ouvrir){
+  const pli = document.getElementById('mdEcrirePli'), btn = document.getElementById('mdEcrireBtn');
+  if(!pli) return;
+  pli.hidden = ouvrir === true ? false : !pli.hidden;
+  btn?.setAttribute('aria-expanded', String(!pli.hidden));
+  if(!pli.hidden && ouvrir !== true) pli.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 // SUIVRE UNE ENTREPRISE OU UN ORGANISME (21 oct. 2026), septième outil de l'abonnement. On cherche parmi
@@ -2326,14 +2403,13 @@ window.mdVeilleChoix = mdVeilleChoix;
 function mdCompte(isEn, quota){
   const zone = document.getElementById('mdCompte');
   if(!currentUser){
-    zone.innerHTML = `<div class="md-carte md-connexion">
-      <h2>${isEn ? 'Sign in' : 'Se connecter'}</h2>
-      <p>${isEn ? 'One account for DossierQuébec. No password: a sign-in link arrives by email.' : 'Un seul compte pour DossierQuébec. Pas de mot de passe : un lien de connexion arrive par courriel.'}</p>
+    zone.innerHTML = `<div class="mdr-connexion">
+      <label class="mdr-connexion-lib" for="mdEmail">${isEn ? 'Sign in' : 'Se connecter'}</label>
       <div class="md-ligne">
         <input type="email" id="mdEmail" placeholder="${isEn ? 'Your email' : 'Votre courriel'}" aria-label="${isEn ? 'Your email' : 'Votre courriel'}">
-        <button class="account-btn" id="mdLienBtn" onclick="mdEnvoyerLien()">${isEn ? 'Get the link' : 'Recevoir le lien'}</button>
+        <button class="mdr-btn-jaune" id="mdLienBtn" onclick="mdEnvoyerLien()">${isEn ? 'Get the link' : 'Recevoir le lien'}</button>
       </div>
-      <p class="md-note" id="mdNote">${isEn ? 'A free account follows 3 things in all — bills and city projects together.' : 'Un compte gratuit suit 3 choses en tout — projets de loi et projets de ville ensemble.'} <a class="md-lien" href="/abonnement${isEn ? '?lang=en' : ''}"><b>${isEn ? 'Subscribe' : 'Abonnez-vous'}</b></a> <a class="md-lien md-lien-surligne" href="/abonnement${isEn ? '?lang=en' : ''}#code"><b>${isEn ? 'Received a code?' : 'Vous avez reçu un code?'}</b></a></p>
+      <p class="md-note" id="mdNote" aria-live="polite"><a class="md-lien" href="/abonnement${isEn ? '?lang=en' : ''}"><b>${isEn ? 'Subscribe' : 'Abonnez-vous'}</b></a> <a class="md-lien md-lien-surligne" href="/abonnement${isEn ? '?lang=en' : ''}#code"><b>${isEn ? 'Received a code?' : 'Vous avez reçu un code?'}</b></a></p>
     </div>`;
     document.getElementById('mdEmail')?.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); mdEnvoyerLien(); } });
     return;

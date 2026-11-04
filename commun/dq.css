@@ -2467,3 +2467,70 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 .md-exemples span{color:var(--slate); margin-right:2px;}
 .md-exemple{border:2px solid var(--ink); background:var(--card); color:var(--ink); padding:2px 9px; font:inherit; font-weight:700; cursor:pointer;}
 .md-exemple:hover{background:#FFE88A; color:#131313;}
+
+/* REFONTE de /mon-dossier (prototype, 3 nov. 2026) : en-tête + connexion compacte, compteurs,
+   « Pour commencer », tuiles des outils, bande « Nous écrire ». Même grammaire : bordures noires,
+   ombres décalées, jaune, bleu var(--gold). */
+#view-mondossier .mdr-tete{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:18px 32px; padding:28px 0 22px;}
+#view-mondossier .mdr-titre{margin:0; flex:1 1 420px; min-width:0;}
+.mdr-compte{flex:0 1 420px; min-width:0; width:100%;}
+.mdr-compte .md-carte{padding:14px 16px;}
+.mdr-connexion{border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow-sm); padding:14px 16px;}
+.mdr-connexion-lib{font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; font-size:13px; letter-spacing:.05em;}
+.mdr-connexion .md-ligne{margin-top:8px;}
+.mdr-connexion .md-ligne input{flex:1 1 180px; min-width:0; font:inherit; font-size:15px; padding:9px 10px; border:2px solid var(--ink); background:var(--card); color:var(--ink);}
+.mdr-connexion .md-note{margin:8px 0 0;}
+.mdr-btn-jaune{font-family:'Archivo',sans-serif; font-size:15px; font-weight:900; padding:9px 16px; background:var(--yellow); color:var(--sur-clair, #131313); border:2px solid var(--ink); box-shadow:3px 3px 0 var(--ink); cursor:pointer;}
+.mdr-btn-jaune:hover{transform:translate(-1px,-1px); box-shadow:4px 4px 0 var(--ink);}
+.mdr-btn-jaune:active{transform:translate(2px,2px); box-shadow:1px 1px 0 var(--ink);}
+.mdr-btn-jaune:disabled{opacity:.6; cursor:default; transform:none;}
+
+.mdr-compteurs{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:14px;}
+.mdr-compteur{border:3px solid var(--ink); box-shadow:var(--shadow-sm); padding:14px 16px; display:flex; flex-direction:column; gap:2px; color:var(--ink);}
+.mdr-bleu{background:color-mix(in srgb, #0E4FC1 16%, var(--card));}
+.mdr-ocre{background:color-mix(in srgb, #D99A1E 22%, var(--card));}
+.mdr-vert{background:color-mix(in srgb, #0B8A4B 18%, var(--card));}
+.mdr-nb{font-family:'Archivo',sans-serif; font-weight:900; font-size:clamp(34px,5vw,48px); line-height:1;}
+.mdr-lib{font-family:'Archivo',sans-serif; font-weight:800; font-size:13px; text-transform:uppercase; letter-spacing:.04em;}
+.mdr-gratuit{margin:14px 0 28px; font-size:14.5px; color:var(--slate);}
+.mdr-gratuit b{color:var(--ink);}
+
+.mdr-h2{font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; letter-spacing:-0.01em; font-size:clamp(18px,2.2vw,24px); margin:0 0 12px;}
+.mdr-cartes{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:14px;}
+.mdr-carte{position:relative; border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow-sm); padding:16px; display:flex; flex-direction:column; gap:4px; transition:transform .1s, box-shadow .1s;}
+.mdr-carte:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--ink);}
+.mdr-num{font-family:'Archivo',sans-serif; font-weight:900; font-size:22px; color:var(--gold);}
+.mdr-carte-titre{font-size:17px;}
+.mdr-carte-sous{font-size:14px; color:var(--slate);}
+.mdr-carte-action{margin-top:8px; font-weight:800;}
+.mdr-carte-action a{color:var(--gold); text-decoration:underline; position:relative; z-index:1;}
+.mdr-carte-action a:first-child::after{content:''; position:absolute; inset:0;}
+.mdr-carte-action a:first-child{position:static;}
+.mdr-carte-action a + a{position:relative; z-index:2;}
+
+.mdr-plus{margin:34px 0 0; padding-top:24px; border-top:3px solid var(--ink);}
+.mdr-plus-tete{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:6px 16px; margin-bottom:4px;}
+.mdr-tuiles{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:12px;}
+.mdr-tuile{font:inherit; text-align:left; text-decoration:none; color:var(--ink); border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow-sm); padding:14px; display:grid; grid-template-columns:auto 1fr; grid-template-rows:auto auto; column-gap:12px; align-items:center; cursor:pointer;}
+.mdr-tuile .mdr-icone{grid-row:1 / span 2; color:var(--gold);}
+.mdr-tuile b{font-size:15.5px;}
+.mdr-tuile span{font-size:13.5px; color:var(--slate);}
+.mdr-tuile:hover, .mdr-tuile[aria-expanded="true"]{background:var(--yellow); color:var(--sur-clair, #131313);}
+.mdr-tuile:hover span, .mdr-tuile[aria-expanded="true"] span, .mdr-tuile:hover .mdr-icone, .mdr-tuile[aria-expanded="true"] .mdr-icone{color:var(--sur-clair, #131313);}
+.mdr-outils{margin-top:16px;}
+
+.mdr-bande{margin:34px 0 0; border:3px solid var(--ink); background:var(--ink); color:var(--card); padding:16px 18px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 20px;}
+.mdr-bande p{margin:0; font-size:16px;}
+#mdEcrirePli.ab-page{background:transparent; color:var(--ink); font-family:inherit; margin-top:16px; padding:0; min-height:0;}
+.mdr-pli #ecrire{margin-bottom:20px;}
+
+@media (max-width:760px){
+  .mdr-cartes, .mdr-tuiles{grid-template-columns:1fr;}
+  .mdr-compteurs{gap:8px;}
+  .mdr-compteur{padding:10px 8px;}
+  .mdr-lib{font-size:11px; letter-spacing:0;}
+  .mdr-compte{flex-basis:100%;}
+}
+
+/* Thème clair choisi sur le site mais système en sombre : abonnes.css attend data-theme="clair", le site écrit "light". */
+:root[data-theme="light"] #mdEcrirePli.ab-page, :root[data-theme="light"] #villes.ab-page{--fond:#F7F8FA; --carte:#FFFFFF; --encre:#16191D; --doux:#5B6570; --ligne:#DDE2E7; --ligne-forte:#C2CAD2; --fond-2:#EEF1F4;}
