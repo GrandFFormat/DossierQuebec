@@ -30,7 +30,11 @@ const api = (hote, params) => json(`https://${hote}/w/api.php?` + new URLSearchP
 const norm = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z]/g, '');
 const texte = (html) => String(html ?? '').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&nbsp;/g, ' ').replace(/&#0?39;/g, "'").replace(/&quot;/g, '"').replace(/\s+/g, ' ').trim();
 
-const ministres = JSON.parse(readFileSync('data/site/ministers.json', 'utf8'));
+// --chefs : les chefs de l'opposition (data/site/chefsOpposition.json -> data/site/chefsWiki.json),
+// faits de Wikidata seulement : leur photo vient du site de leur parti (deputes/photos/).
+const CHEFS = process.argv.includes('--chefs');
+const SORTIE = CHEFS ? 'data/site/chefsWiki.json' : 'data/site/ministresWiki.json';
+const ministres = JSON.parse(readFileSync(CHEFS ? 'data/site/chefsOpposition.json' : 'data/site/ministers.json', 'utf8'));
 const deputes = JSON.parse(readFileSync('data/site/deputesRaw.json', 'utf8'));
 mkdirSync('ministres/photos', { recursive: true });
 
@@ -88,7 +92,7 @@ for (const m of ministres) {
     }
 
     // L'image de l'infobox ; à défaut, l'image (P18) de Wikidata, que l'infobox affiche aussi.
-    const image = page.pageimage ?? p18;
+    const image = CHEFS ? null : page.pageimage ?? p18;
     if (image) {
       const fichier = `File:${image}`;
       const ii = (await api('commons.wikimedia.org', { action: 'query', titles: fichier, prop: 'imageinfo', iiprop: 'url|extmetadata|mime', iiurlwidth: '400' })).query.pages[0];
@@ -116,6 +120,6 @@ for (const m of ministres) {
   sortie[slug] = fiche;
   await attendre(300);
 }
-writeFileSync('data/site/ministresWiki.json', JSON.stringify(sortie, null, 1) + '\n', 'utf8');
-console.log(`\n${Object.values(sortie).filter((f) => f.url).length} articles, ${Object.values(sortie).filter((f) => f.photo).length} photos → data/site/ministresWiki.json`);
+writeFileSync(SORTIE, JSON.stringify(sortie, null, 1) + '\n', 'utf8');
+console.log(`\n${Object.values(sortie).filter((f) => f.url).length} articles, ${Object.values(sortie).filter((f) => f.photo).length} photos → ${SORTIE}`);
 if (!existsSync('ministres/photos')) process.exit(1);

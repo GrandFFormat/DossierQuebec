@@ -16,14 +16,14 @@ import { slugProjet } from './build-bill-pages.js';
 
 const SITE = 'https://dossierquebec.ca';
 const DOSSIER = 'ministres';
-const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const norm = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z]/g, '');
+export const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+export const norm = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z]/g, '');
 export const slugMinistre = (nom) => String(nom).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-const lire = (f, d) => (existsSync(f) ? JSON.parse(readFileSync(f, 'utf8')) : d);
+export const lire = (f, d) => (existsSync(f) ? JSON.parse(readFileSync(f, 'utf8')) : d);
 const MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-const dateFr = (iso) => { const [a, m, j] = iso.split('-').map(Number); return `${j === 1 ? '1er' : j} ${MOIS[m - 1]} ${a}`; };
-const dateEn = (iso) => { const [a, m, j] = iso.split('-').map(Number); return `${MONTHS[m - 1]} ${j}, ${a}`; };
+export const dateFr = (iso) => { const [a, m, j] = iso.split('-').map(Number); return `${j === 1 ? '1er' : j} ${MOIS[m - 1]} ${a}`; };
+export const dateEn = (iso) => { const [a, m, j] = iso.split('-').map(Number); return `${MONTHS[m - 1]} ${j}, ${a}`; };
 // Le plus court possible (Martin, 3 nov. 2026) : « Source, 3 octobre 2026 », « Source » est le lien.
 // Le lien tombe sur la phrase et la surligne (fragment de texte #:~:text=début,fin ; Chrome, Edge, Safari).
 // Si la citation n'est pas mot pour mot sur la page, le lien ouvre simplement l'annonce.
@@ -40,22 +40,22 @@ const fragmentTexte = (quote) => {
 };
 // Petites icônes carrées sous la photo (Martin, 4 nov. 2026).
 const svg = (d) => `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="${d}"/></svg>`;
-const ICONES_RESEAUX = {
+export const ICONES_RESEAUX = {
   Facebook: svg('M14 8h3V4h-3c-2.8 0-4 1.7-4 4.3V10H7v4h3v8h4v-8h3l1-4h-4V8.6c0-.4.3-.6.6-.6z'),
   LinkedIn: svg('M4 9h4v12H4zM6 3a2 2 0 110 4 2 2 0 010-4zm4 6h3.8v1.7c.6-1 1.9-2 3.9-2 4 0 4.3 2.6 4.3 6V21h-4v-5.6c0-1.4 0-3.1-1.9-3.1S12 13.8 12 15.3V21h-2z'),
   X: svg('M17.7 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L2 3h6.4l4.4 5.8zm-1.1 16.2h1.7L7.5 4.7H5.7z'),
   Instagram: svg('M12 7.3a4.7 4.7 0 100 9.4 4.7 4.7 0 000-9.4zm0 7.7a3 3 0 110-6 3 3 0 010 6zm4.9-8.9a1.1 1.1 0 100 2.2 1.1 1.1 0 000-2.2zM12 2c-2.7 0-3 0-4.1.1C4.3 2.3 2.3 4.3 2.1 7.9 2 9 2 9.3 2 12s0 3 .1 4.1c.2 3.6 2.2 5.6 5.8 5.8 1.1.1 1.4.1 4.1.1s3 0 4.1-.1c3.6-.2 5.6-2.2 5.8-5.8.1-1.1.1-1.4.1-4.1s0-3-.1-4.1c-.2-3.6-2.2-5.6-5.8-5.8C15 2 14.7 2 12 2zm0 1.8c2.7 0 3 0 4 .1 2.7.1 3.9 1.4 4 4 .1 1 .1 1.3.1 4s0 3-.1 4c-.1 2.6-1.3 3.9-4 4-1 .1-1.3.1-4 .1s-3 0-4-.1c-2.7-.1-3.9-1.4-4-4-.1-1-.1-1.3-.1-4s0-3 .1-4c.1-2.6 1.3-3.9 4-4 1-.1 1.3-.1 4-.1z'),
   YouTube: svg('M23 7.2a3 3 0 00-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 001 7.2 31 31 0 00.5 12a31 31 0 00.5 4.8 3 3 0 002.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 002.1-2.1 31 31 0 00.5-4.8 31 31 0 00-.5-4.8zM9.7 15.1V8.9L15.5 12z'),
 };
-const nomReseau = (u) => [[/\/\/x\.com|twitter/, 'X'], [/facebook/, 'Facebook'], [/instagram/, 'Instagram'], [/linkedin/, 'LinkedIn'], [/youtube/, 'YouTube'], [/tiktok/, 'TikTok']].find(([r]) => r.test(u))?.[1] || 'Web';
-const citeSource = (p) => {
+export const nomReseau = (u) => [[/\/\/x\.com|twitter/, 'X'], [/facebook/, 'Facebook'], [/instagram/, 'Instagram'], [/linkedin/, 'LinkedIn'], [/youtube/, 'YouTube'], [/tiktok/, 'TikTok']].find(([r]) => r.test(u))?.[1] || 'Web';
+export const citeSource = (p) => {
   const date = String(p.sourceLabel || '').split(' — ').map((x) => x.trim())[2] || '';
   const d = /^\d{4}-\d{2}-\d{2}$/.test(date) ? dateFr(date) : date;
   const mot = deux('Source', 'Source');
   return (p.sourceUrl ? `<a href="${esc(p.sourceUrl + fragmentTexte(p.quote))}" target="_blank" rel="noopener">${mot}</a>` : mot) + (d ? `, ${esc(d)}` : '');
 };
-const deux = (fr, en) => `<span class="fr-txt">${fr}</span><span class="en-txt">${en}</span>`;
-const PARTIS = { PQ: ['Parti québécois', 'Parti Québécois'], CAQ: ['Coalition avenir Québec', 'Coalition Avenir Québec'], PLQ: ['Parti libéral du Québec', 'Quebec Liberal Party'], QS: ['Québec solidaire', 'Québec solidaire'], PCQ: ['Parti conservateur du Québec', 'Conservative Party of Quebec'] };
+export const deux = (fr, en) => `<span class="fr-txt">${fr}</span><span class="en-txt">${en}</span>`;
+export const PARTIS = { PQ: ['Parti québécois', 'Parti Québécois'], CAQ: ['Coalition avenir Québec', 'Coalition Avenir Québec'], PLQ: ['Parti libéral du Québec', 'Quebec Liberal Party'], QS: ['Québec solidaire', 'Québec solidaire'], PCQ: ['Parti conservateur du Québec', 'Conservative Party of Quebec'] };
 
 // Ministère → thèmes de promesses. Prudent : seulement des correspondances franches, sur le titre
 // du ministère (pas sur « responsable de la région de… »).
@@ -77,6 +77,16 @@ const THEMES = [
   [/économie/i, ['Économie']],
 ];
 
+// Pastille de présence (partagée avec scripts/build-chefs-opposition.js).
+export function classeurPresence(deputes, presences) {
+  const tauxTous = deputes.map((d) => presences[d[4]]?.rate).filter((r) => typeof r === 'number').sort((x, y) => x - y);
+  const medianeDe = (t) => { const k = Math.floor(t.length / 2); return t.length % 2 ? t[k] : Math.round((t[k - 1] + t[k]) / 2); };
+  const mediane = tauxTous.length ? medianeDe(tauxTous) : 0;
+  const sousMed = tauxTous.filter((r) => r < mediane);
+  const medianeJaune = sousMed.length ? medianeDe(sousMed) : mediane;
+  return (r) => r >= mediane ? 'presence-haute' : r >= medianeJaune ? 'presence-moyenne' : 'presence-neutre';
+}
+
 export function construirePagesMinistres() {
   const modele = readFileSync('ministres.html', 'utf8').replace(/\r\n/g, '\n');
   const ministres = lire('data/site/ministers.json', []);
@@ -87,12 +97,7 @@ export function construirePagesMinistres() {
   const reseaux = lire('data/site/ministresReseaux.json', {});
   // Même pastille que la page Ministres (tauxPresence de dq.js) : vert à la médiane de l'Assemblée ou
   // au-dessus, jaune jusqu'à la médiane de ceux qui sont sous, sans couleur en dessous.
-  const tauxTous = deputes.map((d) => presences[d[4]]?.rate).filter((r) => typeof r === 'number').sort((x, y) => x - y);
-  const medianeDe = (t) => { const k = Math.floor(t.length / 2); return t.length % 2 ? t[k] : Math.round((t[k - 1] + t[k]) / 2); };
-  const mediane = tauxTous.length ? medianeDe(tauxTous) : 0;
-  const sousMed = tauxTous.filter((r) => r < mediane);
-  const medianeJaune = sousMed.length ? medianeDe(sousMed) : mediane;
-  const classePresence = (r) => r >= mediane ? 'presence-haute' : r >= medianeJaune ? 'presence-moyenne' : 'presence-neutre';
+  const classePresence = classeurPresence(deputes, presences);
   const historique = lire('data/site/historiqueLeg.json', {});
   const parrains = lire('data/site/billsParrains.json', []);
   const promesses = lire('data/site/promises.json', []).filter((p) => !p.draft);

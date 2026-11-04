@@ -3591,7 +3591,7 @@ function renderDeputes(filter){
         return `
         <div class="dep-row">
           <div>
-            <div class="dep-name">${d.name}</div>
+            <div class="dep-name">${CHEFS_OPPOSITION.includes(d.name) ? `<a href="/deputes/${slugMinistre(d.name)}">${d.name}</a>` : d.name}</div>
             <a class="dep-mail" href="${mailHref}" ${email ? '' : 'target="_blank" rel="noopener"'}>✉ ${mailText}</a>
           </div>
           <div>
@@ -3610,6 +3610,8 @@ function renderDeputes(filter){
 // seul pied d'égalité, voir toggleMinistresSort) — même info qu'avant, juste
 // réunie dans un seul type de carte puisque le classement mélange les deux
 // groupes plutôt que de garder la priorité "Conseil des ministres" en premier.
+// Chefs de l'opposition qui ont leur fiche /deputes/<slug> (data/site/chefsOpposition.json, scripts/build-chefs-opposition.js).
+const CHEFS_OPPOSITION = ['Charles Milliard', 'Éric Duhaime', 'Ruba Ghazal', 'Sol Zanetti'];
 // Même slug que scripts/build-minister-pages.js (slugMinistre).
 function slugMinistre(nom){ return String(nom).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
 function personCard(p){
@@ -5473,7 +5475,7 @@ function toggleVoteCard(id, evt){
 // /mon-dossier y est aussi : sans lui, la page se prenait pour l'accueil et portait son titre
 // anglais (arrivé avec l'anglais qui suit enfin la navigation, 24 sept. 2026).
 const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', ministre:'/ministres', projets:'/projets-de-loi', votes:'/votes', archives:'/archives', ancien:'/archives', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier', regles:'/regles', abonnement:'/abonnement' };
-const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'ministres/':'ministre', 'projets-de-loi':'projets', 'votes':'votes', 'archives':'archives', 'archives/':'ancien', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier', 'regles':'regles', 'abonnement':'abonnement' };
+const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'ministres/':'ministre', 'projets-de-loi':'projets', 'votes':'votes', 'archives':'archives', 'archives/':'ancien', 'deputes/':'ministre', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier', 'regles':'regles', 'abonnement':'abonnement' };
 // Titres ANGLAIS seulement : le français vient du <title> de la page (voir syncTitle).
 const PAGE_META = {
   bd:        { en:"Site updates — DossierQuébec" },
@@ -5502,6 +5504,8 @@ function viewFromPath(){
   if(seg.startsWith('projets-de-loi/')) return 'projets';
   if(seg.startsWith('ministres/')) return SLUG_VIEWS['ministres/'];
   if(seg.startsWith('archives/')) return SLUG_VIEWS['archives/'];
+  // Fiche d'un chef de l'opposition (/deputes/charles-milliard) : même vue que celle d'un ministre.
+  if(seg.startsWith('deputes/')) return SLUG_VIEWS['deputes/'];
   return SLUG_VIEWS[seg] || 'apercu';
 }
 const _titreFr = document.title;

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- Consentement (Loi 25) : par défaut, Google Analytics n'a PAS le droit de déposer de témoins.
+     La bannière (commun/consentement.js) passe analytics_storage à « granted » après « Accepter ». -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: (function(){ try { return localStorage.getItem('dq:temoins') === 'oui' ? 'granted' : 'denied'; } catch (e) { return 'denied'; } })(), ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-87R1S6SR9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-87R1S6SR9Y', { content_group: 'Assemblée' });
+</script>
+<script src="/commun/consentement.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+/* La langue, avant d'afficher quoi que ce soit — EXACTEMENT la décision de langueDeDepart
+   (commun/dq.js) : « ?lang=en » dans l'adresse, sinon le choix gardé dans dvq:langue (commun à
+   tout le site) ; en revenant par Précédent ou Suivant, le choix gardé passe avant l'adresse.
+   En anglais, la page reste cachée le temps que dq.js la traduise : 1,5 s au plus, même s'il
+   échoue. lang="en" n'est posé qu'au moment de traduire (dq.js) : si la traduction n'arrive pas,
+   la page française ne s'annonce pas en anglais.
+   Tout est dans une fonction : une variable globale ici entrerait en collision avec les
+   déclarations de dq.js et le ferait planter en entier. */
+(function(){
+  try{
+    var valide = function(l){ return l === 'en' || l === 'fr'; };
+    var gardee = null;
+    try{ gardee = localStorage.getItem('dvq:langue'); }catch(e){}
+    var q = new URLSearchParams(location.search).get('lang');
+    var nav = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+    var parHistorique = !!nav && nav.type === 'back_forward';
+    var choix = (parHistorique && valide(gardee)) ? gardee : (valide(q) ? q : gardee);
+    if(choix !== 'en') return;
+    var racine = document.documentElement;
+    racine.classList.add('dq-en');
+    setTimeout(function(){ racine.classList.add('dq-pret'); }, 1500);
+  }catch(e){}
+})();
+</script>
+<title>Ruba Ghazal, co-porte-parole de Québec solidaire — DossierQuébec</title>
+<meta name="description" content="Ruba Ghazal (QS, Mercier) : porte-parole féminine de Québec solidaire. Projets de loi, présence aux votes, promesses et biographie.">
+<link rel="canonical" href="https://dossierquebec.ca/deputes/ruba-ghazal">
+<!-- Plus de <link rel="alternate"> vers /feed.xml : le flux RSS est réservé aux abonné·e·s depuis le
+     21 oct. 2026 (api/feed.js), chacun avec son adresse personnelle dans Mon dossier. -->
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0E4FC1">
+
+<!-- Open Graph (aperçu au partage : Facebook, LinkedIn, iMessage…) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DossierQuébec">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:title" content="Ruba Ghazal, co-porte-parole de Québec solidaire — DossierQuébec">
+<meta property="og:description" content="Ruba Ghazal (QS, Mercier) : porte-parole féminine de Québec solidaire. Projets de loi, présence aux votes, promesses et biographie.">
+<meta property="og:url" content="https://dossierquebec.ca/deputes/ruba-ghazal">
+<meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
+<meta property="og:image:width" content="1702">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DossierQuébec — veille citoyenne de l'Assemblée nationale du Québec">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ruba Ghazal, co-porte-parole de Québec solidaire — DossierQuébec">
+<meta name="twitter:description" content="Ruba Ghazal (QS, Mercier) : porte-parole féminine de Québec solidaire. Projets de loi, présence aux votes, promesses et biographie.">
+<meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
+
+<link rel="icon" type="image/svg+xml" href="/commun/dq.svg">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="48x48" href="/commun/dq-48.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/commun/dq-512.png">
+<link rel="apple-touch-icon" href="/commun/dq-512.png">
+
+<!-- Données structurées (aide Google à comprendre le site) -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://dossierquebec.ca/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Ministres et député·e·s",
+     "item": "https://dossierquebec.ca/ministres"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Ruba Ghazal",
+     "item": "https://dossierquebec.ca/deputes/ruba-ghazal"
+    }
+   ]
+  },
+  {
+   "@type": "Person",
+   "name": "Ruba Ghazal",
+   "url": "https://dossierquebec.ca/deputes/ruba-ghazal",
+   "jobTitle": [
+    "Porte-parole féminine de Québec solidaire"
+   ],
+   "memberOf": [
+    {
+     "@type": "PoliticalParty",
+     "name": "Québec solidaire"
+    }
+   ],
+   "image": "https://dossierquebec.ca/deputes/photos/ruba-ghazal-parti.jpg",
+   "sameAs": [
+    "https://fr.wikipedia.org/wiki/Ruba_Ghazal",
+    "https://www.wikidata.org/wiki/Q56861255"
+   ]
+  }
+ ]
+}
+</script>
+<!-- Les DEUX préconnexions sont nécessaires et ce n'est pas un doublon :
+     googleapis.com sert la feuille CSS, gstatic.com sert les ~258 ko de
+     fichiers de police. Sans la seconde, le navigateur n'ouvre la connexion
+     vers gstatic qu'APRÈS avoir lu le CSS — un DNS + TLS en série, soit 100 à
+     300 ms perdus sur mobile à la première visite. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- ⚠️ « wght@400..900 » (deux points) demande la POLICE VARIABLE : un seul
+     fichier couvrant toutes les graisses, au lieu d'un fichier par graisse.
+     Mesuré : Archivo passe de 6 fichiers / 205 ko à 1 fichier / 34 ko, et
+     Archivo Narrow de 3 fichiers / 55 ko à 1 fichier / 18 ko — 260 ko et
+     9 requêtes ramenés à 52 ko et 2 requêtes, sans perdre aucune graisse.
+     Ne pas revenir à la liste « 400;500;600 » (points-virgules) : c'est la
+     syntaxe des fichiers statiques.
+     IBM Plex Mono a été retirée : utilisée nulle part. Aucun octet économisé
+     pour autant — un navigateur ne télécharge une police que si elle sert au
+     rendu, donc elle ne partait déjà pas. C'était du ménage, pas un gain. -->
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/commun/dq.css">
+</head>
+<body data-page="ministre" data-donnees="ministers,deputesRaw,deputeEmails,presences,historiqueLeg,billsParrains,stats">
+
+<!-- Ticker brutaliste : bande noire défilante — contenu rempli avec les VRAIES
+     données par renderTicker() (appelé une fois les datasets chargés). -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-text" id="tickerA">● DossierQuébec — site citoyen indépendant · vraies données publiques&nbsp;&nbsp;&nbsp;</span>
+    <span class="ticker-text" id="tickerB">● DossierQuébec — site citoyen indépendant · vraies données publiques&nbsp;&nbsp;&nbsp;</span>
+  </div>
+</div>
+
+<div id="dq-topbar">
+<header class="top">
+  <div class="brand">
+    <div class="brand-text" role="button" tabindex="0" aria-label="Retour à l'aperçu" onclick="goToTab('apercu')">
+      <!-- Volontairement un div, et non un titre de niveau 1 : le nom du site se
+           répète sur chaque page, alors que le titre de niveau 1 doit annoncer
+           le sujet de LA page. C'est le titre de une de la vue active qui joue
+           ce rôle, et le générateur de pages de section s'en assure.
+           (Pas de balise écrite en toutes lettres dans ce commentaire : elle
+           fausserait les outils qui comptent les titres à l'expression
+           régulière.) -->
+      <div class="brand-title">Dossier<span class="brand-blue">Québec</span></div>
+      <p>Qui siège, qui légifère, qui vote quoi</p>
+    </div>
+    <!-- Feuille d'érable : passerelle vers le site fédéral DossierCanada.
+         Flippe jaune ↔ rouge toutes les 20 s (voir le script plus bas). -->
+    <a class="maple-flip" id="mapleFlip" role="button" tabindex="0"
+       title="Aller au site fédéral — DossierCanada"
+       aria-label="Aller au site fédéral — DossierCanada"
+       onclick="goToFederal(event)">
+      <svg viewBox="-2015 -2000 4030 4030" aria-hidden="true"><path fill="currentColor" d="m-90 2030 45-863a95 95 0 0 0-111-98l-859 151 116-320a65 65 0 0 0-20-73l-941-762 212-99a65 65 0 0 0 34-79l-186-572 542 115a65 65 0 0 0 73-38l105-247 423 454a65 65 0 0 0 111-57l-204-1052 327 189a65 65 0 0 0 91-27l332-652 332 652a65 65 0 0 0 91 27l327-189-204 1052a65 65 0 0 0 111 57l423-454 105 247a65 65 0 0 0 73 38l542-115-186 572a65 65 0 0 0 34 79l212 99-941 762a65 65 0 0 0-20 73l116 320-859-151a95 95 0 0 0-111 98l45 863z"/></svg>
+    </a>
+    <!-- Les volets municipaux (DossierVille) : un bouton « Villes » qui ouvre la liste.
+         Vrais liens <a href> : le clavier, le clic du milieu et « ouvrir dans un
+         nouvel onglet » fonctionnent sans une ligne de code. La barre oblique finale
+         est OBLIGATOIRE — sans elle, les chemins relatifs du volet (assets/, data/)
+         se résolvent depuis la racine du site. Plus de rel="nofollow" depuis le
+         21 sept. 2026 : les volets sont ouverts aux moteurs de recherche. Le chemin dit /quebec/ : c'est la
+         liste, sous « Villes », qui dit qu'il s'agit de la ville. -->
+    <details class="villes-menu" id="villesMenu">
+      <summary class="city-flip" title="Les volets municipaux" aria-label="Les volets municipaux">
+        <span data-i18n="nav.villes">Villes</span>
+      </summary>
+      <ul>
+        <li><a href="/quebec/">Québec <small>DossierVilleDeQuébec</small></a></li>
+        <li><a href="/montreal/">Montréal <small>DossierVilleDeMontréal</small></a></li>
+        <!-- Lévis, Longueuil et Laval : en pause depuis le 7 oct. 2026 (commun/navigation.js, VILLES_EN_PAUSE). -->
+      </ul>
+    </details>
+  </div>
+  <!-- Nav DANS la ligne du header (maquette : logo | menu | contrôles sur
+       UNE seule rangée). Sur mobile, le nav devient le panneau plein écran
+       du hamburger (position:fixed), peu importe où il vit dans le DOM. -->
+  <nav class="tabs">
+    <div class="close-menu" id="closeMenuBtn"><span data-i18n="nav.close">Fermer</span> ✕</div>
+    <!-- De vrais liens, pas des <button> : un moteur de recherche ne suit pas un bouton, et
+         /ministres, /projets-de-loi, /votes et /lexique n'avaient aucun lien qu'il puisse suivre. -->
+    <a href="/" data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></a>
+    <a class="active" aria-current="page" href="/ministres" data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></a>
+    <a href="/projets-de-loi" data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></a>
+    <!-- Votes a quitté la barre le 30 oct. 2026 : les votes vivent dans les cartes des projets de
+         loi, et /votes reste lié du pied de page et de la page des projets. -->
+    <a href="/archives" data-view="archives"><span class="n">04</span><span data-i18n="nav.archives">Archives</span></a>
+    <a href="/lexique" data-view="lexique"><span class="n">05</span><span data-i18n="nav.lexique">Lexique</span></a>
+    <a href="/mon-dossier" data-view="mondossier" class="nav-mondossier"><span class="n">★</span><span data-i18n="nav.mondossier">Mon dossier</span></a>
+  </nav>
+  <div class="header-ctrls">
+    <div class="font-size-ctrl" id="fontSizeCtrl">
+      <button id="fontMinus" aria-label="Réduire le texte">A−</button>
+      <span id="fontPct">100%</span>
+      <button id="fontPlus" aria-label="Agrandir le texte">A+</button>
+    </div>
+    <!-- Aucun contenu textuel : l'icône est dessinée en CSS. Le nom accessible
+         vient donc entièrement de aria-label, que le JS tient à jour. -->
+    <button class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="Passer au thème sombre" title="Passer au thème sombre"></button>
+    <button class="lang-toggle" id="langToggle">English</button>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+</div>
+
+<script>
+/* Bascule le bloc logo+menu en mode compact après un peu de défilement.
+   Hystérésis (80 vs 20) pour éviter le clignotement autour du seuil. */
+(function(){
+  var bar = document.getElementById('dq-topbar');
+  var compact = false;
+  function onScroll(){
+    var y = window.scrollY;
+    if(!compact && y > 80){ compact = true; bar.classList.add('compact'); }
+    else if(compact && y < 20){ compact = false; bar.classList.remove('compact'); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+// Ouvre le site fédéral DossierCanada dans un nouvel onglet.
+function goToFederal(evt){
+  if(evt) evt.stopPropagation();
+  window.open('https://dossiercanada.ca/', '_blank', 'noopener');
+}
+// Feuille d'érable : flippe jaune ↔ rouge toutes les 20 secondes.
+(function(){
+  var leaf = document.getElementById('mapleFlip');
+  if(!leaf) return;
+  setInterval(function(){ leaf.classList.toggle('is-red'); }, 20000);
+})();
+
+// Menu « Villes » : compte les clics vers chaque volet municipal (événement
+// personnalisé Vercel Web Analytics — onglet « Events » du tableau de bord), et
+// referme le menu quand on clique ailleurs ou qu'on appuie sur Échap.
+(function(){
+  var menu = document.getElementById('villesMenu');
+  if(!menu) return;
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      if(window.va) window.va('event', { name: 'clic_icone_ville', data: { ville: a.getAttribute('href') } });
+    });
+  });
+  document.addEventListener('click', function(e){ if(menu.open && !menu.contains(e.target)) menu.open = false; });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && menu.open){ menu.open = false; menu.querySelector('summary').focus(); } });
+})();
+</script>
+
+<div class="app">
+
+  <!-- APERÇU -->
+  <section class="view active" id="view-ministre" data-titre-en="Ruba Ghazal, Québec solidaire co-spokesperson — DossierQuébec">
+    <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/" data-i18n="fil.accueil">Accueil</a><span class="sep" aria-hidden="true">›</span><a href="/ministres" data-i18n="fil.ministres">Ministres et député·e·s</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Ruba Ghazal</span></nav>
+    <div class="view-hero min-hero">
+      <div class="min-colphoto"><figure class="min-photo"><img src="/deputes/photos/ruba-ghazal-parti.webp" srcset="/deputes/photos/ruba-ghazal-parti.webp 1x, /deputes/photos/ruba-ghazal-parti@2x.webp 2x" width="200" height="200" alt="Ruba Ghazal"><figcaption><span class="fr-txt">Photo</span><span class="en-txt">Photo</span> : <a href="https://quebecsolidaire.net/equipe" rel="noopener">Québec solidaire</a></figcaption></figure></div>
+      <div class="min-tete">
+        <h1 class="hero-h1 hero-h1-md"><span class="hero-sujet"><span class="fr-txt">Co-porte-parole de Québec solidaire</span><span class="en-txt">Québec solidaire co-spokesperson</span></span><span>Ruba Ghazal</span></h1>
+        <p class="view-hero-sub"><span class="fr-txt">Ruba Ghazal est porte-parole féminine de Québec solidaire, députée de Mercier (au 4 novembre 2026).</span><span class="en-txt">Ruba Ghazal is the female co-spokesperson of Québec solidaire, MNA for Mercier (as of November 4, 2026).</span></p>
+        <button class="follow-btn" onclick="toggleFollow('Ruba Ghazal')" data-i18n="btn.follow">Suivre</button>
+      </div>
+    </div>
+    <div class="band band-white bleed"><div class="min-fiche">
+      <h2><span class="fr-txt">Fonctions</span><span class="en-txt">Roles</span></h2>
+      <ul class="min-liste"><li><span class="fr-txt">Porte-parole féminine de Québec solidaire</span><span class="en-txt">Female co-spokesperson of Québec solidaire</span></li></ul>
+      <div class="min-faits">
+        <div class="m-row"><span class="m-label"><span class="fr-txt">Parti</span><span class="en-txt">Party</span></span><span class="m-val">Québec solidaire (QS)</span></div>
+        <div class="m-row"><span class="m-label"><span class="fr-txt">Circonscription</span><span class="en-txt">Riding</span></span><span class="m-val">Mercier — Montréal</span></div>
+        <div class="m-row"><span class="m-label"><span class="fr-txt">Mandat</span><span class="en-txt">Term</span></span><span class="m-val"><span class="fr-txt">3e</span><span class="en-txt">no. 3</span></span></div>
+      </div>
+
+      <h2><span class="fr-txt">Projets de loi parrainés</span><span class="en-txt">Bills sponsored</span></h2>
+      <ul class="min-liste"><li><a href="/projets-de-loi/994-43-1"><span class="fr-txt">PL 994 — Loi favorisant la santé sexuelle et reproductive par un accès amélioré à la contraception</span><span class="en-txt">Bill 994 — Act to promote sexual and reproductive health through improved access to contraception</span></a> <span class="pr-meta">· <span class="fr-txt">43e législature</span><span class="en-txt">43th Legislature</span> · <span class="fr-txt">Présenté le 2025-05-07</span><span class="en-txt">Introduced on 2025-05-07</span></span></li><li><a href="/projets-de-loi/895-43-1"><span class="fr-txt">PL 895 — Loi établissant un réseau scolaire commun afin de garantir l’égalité des chances</span><span class="en-txt">Bill 895 — Act to establish a common school network to guarantee equal opportunity</span></a> <span class="pr-meta">· <span class="fr-txt">43e législature</span><span class="en-txt">43th Legislature</span> · <span class="fr-txt">Présenté le 2025-02-19</span><span class="en-txt">Introduced on 2025-02-19</span></span></li><li><a href="/projets-de-loi/397-43-1"><span class="fr-txt">PL 397 — Loi visant à prévenir et à combattre les violences à caractère sexuel dans les établissements d’enseignement dispensant des services de l’éducation préscolaire, d’enseignement au primaire ou d’enseignement en formation générale ou professionnelle au secondaire, incluant les services éducatifs pour les adultes</span><span class="en-txt">Bill 397 — Act to prevent and combat sexual violence in educational institutions providing preschool education, elementary school education or general or vocational secondary school education, including educational services for adults</span></a> <span class="pr-meta">· <span class="fr-txt">43e législature</span><span class="en-txt">43th Legislature</span> · <span class="fr-txt">Présenté le 2023-04-27</span><span class="en-txt">Introduced on 2023-04-27</span></span></li><li><a href="/projets-de-loi/390-43-1"><span class="fr-txt">PL 390 — Loi favorisant la prise en compte de l’égalité des sexes et de la diversité dans une perspective intersectionnelle dans le processus budgétaire</span><span class="en-txt">Bill 390 — Act to promote the consideration of gender equality and diversity from an intersectional perspective in the budgetary process</span></a> <span class="pr-meta">· <span class="fr-txt">43e législature</span><span class="en-txt">43th Legislature</span> · <span class="fr-txt">Présenté le 2023-03-21</span><span class="en-txt">Introduced on 2023-03-21</span></span></li></ul>
+
+      <h2><span class="fr-txt">Présence aux votes</span><span class="en-txt">Vote attendance</span></h2>
+      <p><span class="fr-txt"><b class="presence-pastille presence-neutre">65 %</b> des votes nominaux depuis le 2 décembre 2022 : 476 sur 735, soit 259 votes manqués (43e législature).</span><span class="en-txt"><b class="presence-pastille presence-neutre">65%</b> of recorded divisions since December 2, 2022: 476 of 735, i.e. 259 votes missed (43rd Legislature).</span></p><p class="pr-meta"><span class="fr-txt">Un vote manqué peut être une mission officielle, une maladie ou un conflit d’horaire : le registre n’en donne pas la raison.</span><span class="en-txt">A missed vote can be an official mission, an illness or a scheduling conflict: the register does not give the reason.</span></p>
+
+      <h2><span class="fr-txt">Historique</span><span class="en-txt">History</span></h2>
+      <p><span class="fr-txt">3e mandat à l’Assemblée nationale.</span><span class="en-txt">Term no. 3 in the National Assembly.</span></p>
+
+      <h2><span class="fr-txt">Promesses du Québec solidaire en 2026</span><span class="en-txt">Québec solidaire 2026 promises</span></h2>
+      <ul class="min-liste"><li class="min-promesse"><q>un gouvernement solidaire plafonnera les marges de profits des grandes chaînes d'épicerie tout en s'assurant de favoriser l'achat local</q><span class="min-prom-source"><a href="https://quebecsolidaire.net/#:~:text=un%20gouvernement%20solidaire%20plafonnera%20les%20marges%20de%20profits%20des%20grandes%20cha%C3%AEnes%20d'%C3%A9picerie%20tout%20en%20s'assurant%20de%20favoriser%20l'achat%20local" target="_blank" rel="noopener"><span class="fr-txt">Source</span><span class="en-txt">Source</span></a></span></li><li class="min-promesse"><q>un gouvernement solidaire rendra la contraception et les produits menstruels gratuits et éliminera la « taxe rose »</q><span class="min-prom-source"><a href="https://quebecsolidaire.net/#:~:text=un%20gouvernement%20solidaire%20rendra%20la%20contraception%20et%20les%20produits%20menstruels%20gratuits%20et%20%C3%A9liminera%20la%20taxe%20rose" target="_blank" rel="noopener"><span class="fr-txt">Source</span><span class="en-txt">Source</span></a></span></li><li class="min-promesse"><q>Un gouvernement solidaire instaurera le principe des amendes proportionnelles à leurs moyens afin qu'elles respectent nos lois, notamment en matière d'environnement, de travail et de non-discrimination.</q><span class="min-prom-source"><a href="https://quebecsolidaire.net/#:~:text=Un%20gouvernement%20solidaire%20instaurera%20le%20principe%20des%20amendes,d'environnement%2C%20de%20travail%20et%20de%20non%2Ddiscrimination" target="_blank" rel="noopener"><span class="fr-txt">Source</span><span class="en-txt">Source</span></a></span></li><li class="min-promesse"><q>un gouvernement solidaire mettra graduellement en place un programme de revenu minimum garanti au cours d'un premier mandat.</q><span class="min-prom-source"><a href="https://quebecsolidaire.net/#:~:text=un%20gouvernement%20solidaire%20mettra%20graduellement%20en%20place%20un%20programme%20de%20revenu%20minimum%20garanti%20au%20cours%20d'un%20premier%20mandat" target="_blank" rel="noopener"><span class="fr-txt">Source</span><span class="en-txt">Source</span></a></span></li><li class="min-promesse"><q>un gouvernement solidaire imposera la rémunération de tous les stages obligatoires dans le cadre d'un programme d'études reconnu par le ministère de l'Éducation.</q><span class="min-prom-source"><a href="https://quebecsolidaire.net/#:~:text=un%20gouvernement%20solidaire%20imposera%20la%20r%C3%A9mun%C3%A9ration%20de%20tous%20les%20stages%20obligatoires%20dans%20le%20cadre%20d'un%20programme%20d'%C3%A9tudes%20reconnu%20par%20le%20minist%C3%A8re%20de%20l'%C3%89ducation" target="_blank" rel="noopener"><span class="fr-txt">Source</span><span class="en-txt">Source</span></a></span></li><li class="min-promesse"><q>un gouvernement solidaire mettra en place, dans la première année de son mandat, un gel des loyers à l'inflation.</q><span class="min-prom-source"><a href="https://quebecsolidaire.net/#:~:text=un%20gouvernement%20solidaire%20mettra%20en%20place%2C%20dans%20la%20premi%C3%A8re%20ann%C3%A9e%20de%20son%20mandat%2C%20un%20gel%20des%20loyers%20%C3%A0%20l'inflation" target="_blank" rel="noopener"><span class="fr-txt">Source</span><span class="en-txt">Source</span></a></span></li><li class="min-promesse"><q>Un gouvernement solidaire s'engagera à réduire les émissions de gaz à effet de serre de 37,5 %, et idéalement de 45 %, d'ici 2030.</q><span class="min-prom-source"><a href="https://quebecsolidaire.net/#:~:text=Un%20gouvernement%20solidaire%20s'engagera%20%C3%A0%20r%C3%A9duire%20les%20%C3%A9missions%20de%20gaz%20%C3%A0%20effet%20de%20serre%20de%2037%2C5%20%25%2C%20et%20id%C3%A9alement%20de%2045%20%25%2C%20d'ici%202030" target="_blank" rel="noopener"><span class="fr-txt">Source</span><span class="en-txt">Source</span></a></span></li><li class="min-promesse"><q>Un gouvernement solidaire travaillera à augmenter la proportion d'investissements dans les transports collectifs au-delà de 50 % des dépenses publiques en transport.</q><span class="min-prom-source"><a href="https://quebecsolidaire.net/#:~:text=Un%20gouvernement%20solidaire%20travaillera%20%C3%A0%20augmenter%20la%20proportion%20d'investissements%20dans%20les%20transports%20collectifs%20au%2Ddel%C3%A0%20de%2050%20%25%20des%20d%C3%A9penses%20publiques%20en%20transport" target="_blank" rel="noopener"><span class="fr-txt">Source</span><span class="en-txt">Source</span></a></span></li></ul>
+      <p><a href="/promesses"><span class="fr-txt">Toutes les promesses 2026 →</span><span class="en-txt">All 2026 promises →</span></a></p>
+
+      <h2><span class="fr-txt">Biographie</span><span class="en-txt">Biography</span></h2><p><span class="fr-txt">Naissance le 6 décembre 1977 à Beyrouth. Études : HEC Montréal, Université de Sherbrooke. Avant la politique : expert-comptable. Députée de Mercier (Québec solidaire), 3e mandat.</span><span class="en-txt">Born on December 6, 1977 in Beirut. Education: HEC Montréal, University of Sherbrooke. Occupation outside politics: chartered accountant. MNA for Mercier (Québec solidaire), term no. 3.</span></p>
+
+      <h2><span class="fr-txt">Coordonnées officielles</span><span class="en-txt">Official contact</span></h2>
+      <p><a class="m-mail" href="mailto:Ruba.Ghazal.MERC@assnat.qc.ca">✉ Ruba.Ghazal.MERC@assnat.qc.ca</a></p>
+      <p class="min-source"><span class="fr-txt">Source</span><span class="en-txt">Source</span> : <a href="https://fr.wikipedia.org/wiki/Ruba_Ghazal" rel="noopener">Wikipédia</a></p>
+    </div></div>
+  </section>
+
+  <!-- MINISTRES & DÉPUTÉS -->
+  
+
+  <!-- PROJETS DE LOI -->
+  
+
+  <!-- VOTES -->
+  
+
+  <!-- ARCHIVES (Martin, 30 oct. 2026) : les législatures terminées, une carte chacune (projets de
+       loi, votes), puis les promesses de l'élection de 2026. Dessiné par commun/dq.js (renderArchives)
+       depuis data/archives/index.json : la 43e y entre seule à l'ouverture de la 44e. -->
+  
+
+  <!-- COMPTE & ABONNEMENT -->
+
+  <!-- LEXIQUE (fusion : personnes, lexique, apropos) -->
+  <!-- PROMESSES — vue sans onglet (comme view-bd). Accessible par /promesses,
+       par le bouton de la bande de dissolution et par le bloc du Lexique.
+       Contenu saisi à la main dans data/promises.json (voir la note du fichier). -->
+  
+
+  
+
+  <!-- PAGE CACHÉE — la BD « l'idée derrière le site ». Aucun onglet n'y mène :
+       accessible seulement par le « et moi » du bas de page (à côté de
+       « Construit avec Claude »). goToTab('bd') fonctionne sans bouton d'onglet. -->
+  <!-- /mon-dossier : l'espace de la personne connectée, côté ASSEMBLÉE seulement (Martin,
+       22 sept. 2026 : « mes dossiers provincial et les villes doivent être complètement séparés »).
+       Les villes y ont leur section (#villes) depuis le 30 sept. 2026 ; avant, /mes-dossiers. Tout le contenu
+       est rempli par commun/dq.js (renderMonDossier) : rien de personnel n'est dans le HTML. -->
+  <!-- LES RÈGLES (Martin, 5 oct. 2026 : « on pourrait quasiment faire une page de ça… à côté de
+       Facebook »). Les règles de sources du site, écrites une fois pour être montrées à quelqu'un :
+       tout ce que les encadrés de méthode disent page par page, réuni. Lien dans le pied de page. -->
+  
+
+  <!-- LA PAGE 404 (Martin, 6 oct. 2026 : « faut une page drôle 404 », puis : avec le jaune et tout
+       le kit du site, « morte dans l'œuf », et pas de blanc sur noir). Vercel sert 404.html, avec le
+       code 404, pour toute adresse qui n'existe pas ; avant, c'était le message brut de l'hébergeur,
+       en anglais. Fabriquée comme les autres pages (scripts/build-section-pages.js, vue
+       « introuvable »), donc avec l'en-tête, le menu et le pied du site.
+       « Morte dans l'œuf » est le libellé des projets de loi jamais rendus plus loin que la
+       présentation. Le faux vote est ÉTIQUETÉ comme une blague : ce site n'invente jamais de donnée. -->
+  
+
+  <!-- L'ABONNEMENT FACULTATIF (retiré le 27 sept. 2026, remis le 21 oct. 2026). Le texte du site et
+       le suivi restent gratuits ; l'abonnement vend des outils en plus, aucun municipal. Chaque outil
+       porte son état : « Disponible » seulement s'il est réellement livré. La zone #abEtat (s'abonner,
+       gérer, annuler) est remplie par renderAbonnement (commun/dq.js) depuis /api/abonnement. -->
+  
+
+  
+
+  
+
+</div>
+
+<!-- Footer maquette : texte à gauche (avec « construit avec Claude » suivi du
+     lien caché « et moi » vers la BD), liens texte en majuscules à droite. -->
+<footer>
+  <nav class="footer-nav" aria-label="Plan du site">
+    <a href="/" data-i18n="nav.apercu">Aperçu</a>
+    <a href="/ministres" data-i18n="nav.ministres">Ministres</a>
+    <a href="/projets-de-loi" data-i18n="nav.projets">Projets de loi</a>
+    <a href="/votes" data-i18n="nav.votes">Votes</a>
+    <a href="/promesses" data-i18n="fil.promesses">Promesses</a>
+    <a href="/archives" data-i18n="nav.archives">Archives</a>
+    <a href="/lexique" data-i18n="nav.lexique">Lexique</a>
+    <a href="/sources" data-i18n="fil.bd">Mises à jour du site</a>
+    <a href="/mon-dossier" data-i18n="nav.mondossier">Mon dossier</a>
+    <span class="footer-nav-villes"><span data-i18n="footer.villes">Villes :</span>
+      <a href="/quebec/">Québec</a>
+      <a href="/montreal/">Montréal</a>
+    </span>
+  </nav>
+  <div class="footer-inner">
+  <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">Site propulsé par</span> <a class="footer-etmoi" id="footerDafr" href="https://www.dafrsolution.com" target="_blank" rel="noopener">DAFRSolution.com</a></span>
+  <span class="footer-right-group">
+    <a class="footer-gh" href="/regles" data-i18n="footer.regles">Les règles</a>
+    <a class="footer-gh" href="/abonnement" data-i18n="footer.abonnement">Abonnement</a>
+    <a class="footer-gh" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook">Facebook</a>
+    <a class="footer-gh footer-coffee" href="https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00" target="_blank" rel="noopener" aria-label="Offre-moi un café" data-i18n="footer.coffee">Offre-moi un café</a>
+    <a class="footer-gh" href="/abonnement" data-i18n="footer.rss" title="Flux RSS : réservé aux abonné·e·s">Flux RSS</a>
+    <!-- Crédit exigé par la licence gratuite de Flaticon (icônes du bouton café, 3 nov. 2026). -->
+    <a class="footer-gh" href="https://www.flaticon.com/fr/icones-gratuites/cafe" target="_blank" rel="noopener" data-i18n="footer.flaticon">Icônes : Flaticon</a>
+    <a class="footer-gh" href="https://github.com/GrandFFormat/DossierQuebec" target="_blank" rel="noopener" data-i18n="footer.source">Code source</a>
+  </span>
+  </div>
+</footer>
+
+<button id="backToTop" class="dq-remonter" aria-label="Remonter en haut" title="Remonter en haut" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/commun/dq.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle (donc pas de
+     bannière de consentement requise). Le script est servi automatiquement par
+     Vercel quand Web Analytics est activé dans le tableau de bord du projet. -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
