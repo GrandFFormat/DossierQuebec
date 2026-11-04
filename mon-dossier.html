@@ -269,20 +269,15 @@ function goToFederal(evt){
       <div id="mdElus" class="md-bloc"></div>
     </div>
 
-    <!-- Vos projets de ville (ancienne page /mes-dossiers, fusionnée le 30 sept. 2026). Rempli par
-         commun/mes-dossiers.js ; montré seulement à qui est connecté (mdRefonte). -->
-    <div class="md-villes ab-page" id="villes" role="region" aria-labelledby="mdVillesTitre" hidden>
-      <h2 class="md-villes-titre" id="mdVillesTitre" data-i18n="mdvilles.h">Vos projets de ville</h2>
-      <div id="compte" hidden></div>
-      <div id="infolettre"></div>
-      <div id="mots"></div>
-      <div id="organismes"></div>
-      <div id="suggestions"></div>
-      <div id="liste"><p class="ab-vide">Chargement…</p></div>
-      <div id="pourquoi"></div>
-    </div>
-
     <div id="mdPlus" class="mdr-plus"></div>
+    <!-- Offrir un abonnement : montré aux personnes connectées (commun/dq.js), replié derrière le
+         bouton « Offrir un abonnement » de l'en-tête « Pour aller plus loin ». -->
+    <div class="md-bloc mdr-offrir" id="offrir-mon-dossier" hidden><div class="md-cadeau-discret mdr-offrir-carte" id="mdOffrirPli" hidden>
+      <h3 class="mdr-offrir-titre" data-i18n="mdr.offrir.h">Offrir un abonnement</h3>
+      <div data-i18n="mdcadeau.html"><span class="md-cadeau-titre">Une fois</span><span class="md-cadeau-puces"><button type="button" class="md-cadeau-puce ab-cadeau" data-duree="mensuel" onclick="abOffrir(this.dataset.duree, this)">1 mois · 9,99 $</button> <button type="button" class="md-cadeau-puce ab-cadeau" data-duree="trimestriel" onclick="abOffrir(this.dataset.duree, this)">3 mois · 26,99 $</button> <button type="button" class="md-cadeau-puce ab-cadeau" data-duree="annuel" onclick="abOffrir(this.dataset.duree, this)">1 an · 99 $</button> <input type="number" class="md-cadeau-qte" min="1" max="100" step="1" inputmode="numeric" placeholder="×1" aria-label="Combien de codes" title="Combien de codes (jusqu’à 100)"></span><span class="md-note">Paiement unique. Le code arrive par courriel.</span></div>
+      <div class="md-cadeau-ligne" data-i18n="mdoffert.html"><span class="md-cadeau-titre">Récurrent</span><span class="md-cadeau-puces"><button type="button" class="md-cadeau-puce ab-offert" data-forfait="mensuel" onclick="abOffrirAbonnement(this.dataset.forfait, this)">9,99 $/mois</button> <button type="button" class="md-cadeau-puce ab-offert" data-forfait="trimestriel" onclick="abOffrirAbonnement(this.dataset.forfait, this)">26,99 $/3 mois</button> <button type="button" class="md-cadeau-puce ab-offert" data-forfait="annuel" onclick="abOffrirAbonnement(this.dataset.forfait, this)">99 $/an</button> <input type="number" class="md-cadeau-qte" min="1" max="100" step="1" inputmode="numeric" placeholder="×1" aria-label="Combien de codes" title="Combien de codes (jusqu’à 100)"></span><span class="md-note">Jusqu’à ce que vous annuliez. Le code arrive par courriel.</span></div>
+      <p class="md-note ab-cadeau-etat" aria-live="polite"></p>
+    </div></div>
     <div id="mdOutils" class="mdr-outils">
       <div id="mdAlertes" class="md-bloc" hidden></div>
       <div id="mdVeille" class="md-bloc" hidden></div>
@@ -291,12 +286,21 @@ function goToFederal(evt){
       <div id="mdFlux" class="md-bloc" hidden></div>
       <div id="mdExport" class="md-bloc" hidden></div>
     </div>
-    <!-- Offrir un abonnement : gardé, montré aux personnes connectées seulement (commun/abonnement). -->
-    <div class="md-bloc" id="offrir-mon-dossier" hidden><div class="md-cadeau-discret">
-      <div data-i18n="mdcadeau.html"><span class="md-cadeau-titre">🎁 Offrir 1 mois, 3 mois ou 1 an</span><span class="md-cadeau-puces"><button type="button" class="md-cadeau-puce ab-cadeau" data-duree="mensuel" onclick="abOffrir(this.dataset.duree, this)">1 mois · 9,99 $</button> <button type="button" class="md-cadeau-puce ab-cadeau" data-duree="trimestriel" onclick="abOffrir(this.dataset.duree, this)">3 mois · 26,99 $</button> <button type="button" class="md-cadeau-puce ab-cadeau" data-duree="annuel" onclick="abOffrir(this.dataset.duree, this)">1 an · 99 $</button> <input type="number" class="md-cadeau-qte" min="1" max="100" step="1" inputmode="numeric" placeholder="×1" aria-label="Combien de codes" title="Combien de codes (jusqu’à 100)"></span><span class="md-note">Paiement unique ; le code arrive par courriel.</span></div>
-      <div class="md-cadeau-ligne" data-i18n="mdoffert.html"><span class="md-cadeau-titre">🔁 Offrir un abonnement / mois, / 3 mois ou / an</span><span class="md-cadeau-puces"><button type="button" class="md-cadeau-puce ab-offert" data-forfait="mensuel" onclick="abOffrirAbonnement(this.dataset.forfait, this)">9,99 $ / mois</button> <button type="button" class="md-cadeau-puce ab-offert" data-forfait="trimestriel" onclick="abOffrirAbonnement(this.dataset.forfait, this)">26,99 $ / 3 mois</button> <button type="button" class="md-cadeau-puce ab-offert" data-forfait="annuel" onclick="abOffrirAbonnement(this.dataset.forfait, this)">99 $ / an</button> <input type="number" class="md-cadeau-qte" min="1" max="100" step="1" inputmode="numeric" placeholder="×1" aria-label="Combien de codes" title="Combien de codes (jusqu’à 100)"></span><span class="md-note">Vous payez chaque mois, chaque trimestre ou chaque année pour quelqu’un d’autre, jusqu’à ce que vous annuliez. La première période commence dès le paiement ; le code arrive par courriel.</span></div>
-      <p class="md-note ab-cadeau-etat" aria-live="polite"></p>
-    </div></div>
+    <!-- Vos projets de ville (ancienne page /mes-dossiers, fusionnée le 30 sept. 2026). Rempli par
+         commun/mes-dossiers.js ; montré seulement à qui est connecté (mdRefonte). -->
+    <div class="md-villes ab-page" id="villes" role="region" aria-labelledby="mdVillesTitre" hidden>
+      <h2 class="md-villes-titre" id="mdVillesTitre" data-i18n="mdvilles.h">Vos projets de ville</h2>
+      <div id="compte" hidden></div>
+      <div id="suggestions"></div>
+      <div id="liste"><p class="ab-vide">Chargement…</p></div>
+      <div id="mots"></div>
+      <div id="organismes"></div>
+      <div id="pourquoi"></div>
+    </div>
+
+    <!-- Vos courriels (3 nov. 2026) : Assemblée et villes, une carte chacune. Rempli par
+         boiteInfolettre (commun/infolettre.js) ; montré seulement à qui est connecté (mdRefonte). -->
+    <div class="mdc-section" id="courriels" hidden><div id="infolettre"></div></div>
 
     <div class="mdr-bande">
       <p data-i18n="mdr.bande"><b>Une idée, une erreur ?</b> Chaque message est lu.</p>
@@ -304,7 +308,6 @@ function goToFederal(evt){
     </div>
     <div id="mdEcrirePli" class="ab-page mdr-pli" hidden>
       <div id="ecrire"></div>
-      <div id="mdPreoccupations" class="md-bloc"></div>
     </div>
     <script type="module" src="/commun/mes-dossiers.js"></script>
   </section>
@@ -404,6 +407,7 @@ function goToFederal(evt){
 </button>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/commun/apercu.js"></script>
 <script src="/commun/dq.js"></script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle (donc pas de
      bannière de consentement requise). Le script est servi automatiquement par
