@@ -2448,10 +2448,6 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 .min-prom-source{display:block; margin-top:2px; font-size:13.5px; color:var(--slate);}
 .min-prom-source a{color:inherit; padding:0 2px; text-decoration:underline;}
 .min-prom-source a:hover{color:#131313; background:#FFE88A; text-decoration:none;}
-/* Bouton « copier la promesse » sur les fiches de ministres. */
-.min-copie{border:0; background:none; padding:0 4px; font-size:15px; line-height:1; color:var(--slate); cursor:pointer; vertical-align:baseline;}
-.min-copie:hover{color:var(--ink); background:#FFE88A;}
-.min-copie.ok{color:#1E7B45; font-size:13px; font-weight:700;}
 /* Réseaux sociaux sur les fiches de ministres (relevés sur le site du parti). */
 .min-colphoto{flex:0 0 200px; max-width:100%;}
 .min-reseaux{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 0;}

@@ -38,9 +38,6 @@ const fragmentTexte = (quote) => {
   const fin = mots.slice(-6).join(' ').replace(/[.!?;:]+$/, '');
   return `#:~:text=${enc(debut)}${fin ? ',' + enc(fin) : ''}`;
 };
-// Bouton « copier » au bout de la promesse (Martin, 3 nov. 2026) : certains sites de partis effacent
-// le surlignage du lien ; on colle la phrase dans Ctrl+F sur la source.
-const boutonCopie = `<button type="button" class="min-copie" title="Copier la promesse" aria-label="Copier la promesse" onclick="var b=this,q=b.previousElementSibling.textContent;navigator.clipboard.writeText(q).then(function(){b.classList.add('ok');b.textContent='✓ Copié';setTimeout(function(){b.classList.remove('ok');b.textContent='⧉';},1800);})">⧉</button>`;
 // Petites icônes carrées sous la photo (Martin, 4 nov. 2026).
 const svg = (d) => `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="${d}"/></svg>`;
 const ICONES_RESEAUX = {
@@ -190,7 +187,7 @@ export function construirePagesMinistres() {
       <p>${mandats ? deux(mandats === 1 ? 'Premier mandat à l’Assemblée nationale.' : `${mandats}e mandat à l’Assemblée nationale.`, mandats === 1 ? 'First term in the National Assembly.' : `Term no. ${mandats} in the National Assembly.`) : ''}${passees ? ` ${deux(`Présence aux votes de la ${historique.courante - 1}e législature : ${esc(passees.rate ?? '')} %.`, `Attendance in the previous Legislature: ${esc(passees.rate ?? '')}%.`)}` : ''}</p>
 
       ${proms.length ? `<h2>${deux(`Promesses du ${esc(partiFr)} qui touchent son ministère`, `${esc(partiEn)} promises related to this portfolio`)}</h2>
-      <ul class="min-liste">${proms.map((p) => `<li class="min-promesse"><q>${esc(p.quote)}</q> ${boutonCopie}<span class="min-prom-source">${citeSource(p)}</span></li>`).join('')}</ul>
+      <ul class="min-liste">${proms.map((p) => `<li class="min-promesse"><q>${esc(p.quote)}</q><span class="min-prom-source">${citeSource(p)}</span></li>`).join('')}</ul>
       <p><a href="/promesses">${deux('Toutes les promesses 2026 →', 'All 2026 promises →')}</a></p>` : ''}
 
       ${bioFr.length ? `<h2>${deux('Biographie', 'Biography')}</h2><p>${deux(esc(bioFr.join(' ')), esc(bioEn.join(' ')))}</p>` : ''}
