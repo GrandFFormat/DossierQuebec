@@ -2613,3 +2613,56 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 .nb-suivis{font-weight:inherit;}
 /* Un espace entre les cartes des ministres et la bande Finances publiques (Martin, 4 nov. 2026). */
 #ministresGrid{margin-bottom:48px;}
+/* Vos projets de ville, refonte (4 nov. 2026) : en-tête avec compte et « + Ajouter un projet »,
+   projets suivis en grille de cartes groupées par ville (bandeau --ville), catalogue en cartes.
+   Préfixe #villes pour passer devant commun/abonnes.css (.ab-page details.ab-dossier…). */
+#villes{position:relative;}
+#villes .vp-entete{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:0 0 14px; padding-right:250px; min-height:48px;}
+#villes .vp-entete .md-villes-titre{margin:0;}
+#villes .vp-compte{display:inline-block; min-width:34px; padding:3px 9px; text-align:center; font-family:'Archivo',sans-serif; font-weight:900; font-size:16px; background:#FFD24D; color:#131313; border:3px solid #131313; box-shadow:3px 3px 0 #131313;}
+#villes .vp-compte[hidden]{display:none;}
+#villes details.ab-suggestions{border:0; background:transparent; box-shadow:none; padding:0; margin:0;}
+#villes details.ab-suggestions > summary.vp-ajouter{position:absolute; top:24px; right:0; list-style:none; cursor:pointer; display:inline-flex; align-items:center; min-height:44px; padding:8px 16px; font-family:'Archivo',sans-serif; font-weight:800; font-size:15px; text-transform:uppercase; letter-spacing:.01em; background:var(--card); color:var(--ink); border:3px solid var(--ink); box-shadow:4px 4px 0 var(--ink); transition:transform .08s, box-shadow .08s;}
+#villes details.ab-suggestions > summary.vp-ajouter::after{content:none; display:none;}
+#villes details.ab-suggestions > summary.vp-ajouter::-webkit-details-marker{display:none;}
+#villes details.ab-suggestions > summary.vp-ajouter:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--ink);}
+#villes details.ab-suggestions > summary.vp-ajouter:focus-visible{outline:3px solid var(--gold); outline-offset:3px;}
+#villes .vp-ajouter-ouvert, #villes details[open] > summary .vp-ajouter-ferme{display:none;}
+#villes details[open] > summary .vp-ajouter-ouvert{display:inline;}
+#villes details.ab-suggestions > .ab-pliable-corps{margin:0 0 28px; padding:18px; background:var(--paper); border:3px solid var(--ink); box-shadow:var(--shadow);}
+#villes .vp-cat-titre{margin:0 0 6px; display:flex; align-items:center; gap:10px; font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; font-size:20px; color:var(--ink);}
+#villes .vp-cat-titre .vp-compte{font-size:14px; padding:1px 7px; box-shadow:none;}
+#villes .vp-ville{--ville:var(--gold); margin:0 0 26px;}
+#villes .vp-ville-titre{display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin:0 0 12px; padding:6px 12px; background:var(--ville); color:#fff; border:3px solid #131313; font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; font-size:17px; letter-spacing:.01em;}
+#villes .vp-ville-titre span{font-size:13px; font-weight:700; text-transform:none; letter-spacing:0;}
+#villes .vp-grille{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px; align-items:stretch;}
+#villes details.ab-dossier{margin:0; padding:0; background:var(--card); color:var(--ink); border:3px solid var(--ink); border-top:8px solid var(--ville); border-radius:0; box-shadow:5px 5px 0 var(--ink); min-width:0;}
+#villes details.ab-dossier[open]{grid-column:1/-1;}
+#villes details.ab-dossier > summary{display:flex; flex-direction:column; gap:12px; padding:16px 18px; border-radius:0; height:100%; box-sizing:border-box;}
+#villes details.ab-dossier[open] > summary{height:auto; border-bottom:3px solid var(--ink); border-radius:0;}
+#villes details.ab-dossier > summary::after{content:none; display:none;}
+#villes details.ab-dossier > summary:hover{background:transparent;}
+#villes details.ab-dossier > summary:focus-visible{outline:3px solid var(--gold); outline-offset:-6px;}
+#villes .vp-titre{margin:0; font-family:'Archivo',sans-serif; font-weight:900; font-size:22px; line-height:1.15; letter-spacing:-0.01em; color:var(--ink); overflow-wrap:anywhere;}
+#villes .vp-chiffres{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px; font-size:14.5px; color:var(--slate, var(--ink));}
+#villes .vp-chiffres li:first-child{font-weight:800; color:var(--ink); font-size:16px;}
+#villes .vp-chiffres strong{color:var(--ink);}
+#villes .vp-actions{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-top:auto; padding-top:4px;}
+#villes .vp-voir{display:inline-flex; align-items:center; min-height:40px; padding:6px 14px; background:#FFD24D; color:#131313; border:3px solid #131313; box-shadow:3px 3px 0 #131313; font-family:'Archivo',sans-serif; font-weight:800; font-size:14px; text-transform:uppercase;}
+#villes details.ab-dossier > summary:hover .vp-voir{transform:translate(-1px,-1px); box-shadow:4px 4px 0 #131313;}
+#villes .vp-voir-ouvert, #villes details[open] .vp-voir-ferme{display:none;}
+#villes details[open] .vp-voir-ouvert{display:inline;}
+#villes .vp-retirer{font-size:13px; color:var(--slate, var(--ink)); text-decoration:underline; background:none; border:0; padding:4px 0; cursor:pointer;}
+#villes .ab-dossier-corps{padding:16px 18px 18px;}
+#villes .vp-sugg{display:flex; flex-direction:column; gap:8px; margin:0; padding:14px 16px; background:var(--card); color:var(--ink); border:3px solid var(--ink); border-top:6px solid var(--ville); border-radius:0; box-shadow:4px 4px 0 var(--ink); min-width:0;}
+#villes .vp-sugg h3{margin:0; font-family:'Archivo',sans-serif; font-weight:900; font-size:19px; line-height:1.15; color:var(--ink);}
+#villes .vp-sugg .ab-meta{font-size:13.5px;}
+#villes .vp-sugg .ab-bouton{background:var(--ville); border:3px solid #131313; color:#fff; border-radius:0; box-shadow:3px 3px 0 #131313; font-weight:800; text-transform:uppercase; min-height:40px;}
+#villes .vp-sugg .ab-bouton:disabled{opacity:.6;}
+@media (max-width:640px){
+  #villes .vp-entete{padding-right:0;}
+  #villes details.ab-suggestions > summary.vp-ajouter{position:static; display:flex; justify-content:center; width:100%; margin:0 0 16px; box-sizing:border-box;}
+  #villes details.ab-suggestions > .ab-pliable-corps{padding:14px 12px;}
+  #villes .vp-grille{grid-template-columns:minmax(0,1fr);}
+  #villes .vp-titre{font-size:20px;}
+}

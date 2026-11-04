@@ -360,13 +360,13 @@ async function suggestions(s, suivisIds) {
         // Le récapitulatif du projet dit mieux de quoi il s'agit que sa dernière décision.
         const enBref = p.enBref;
         const phrase = enBref ?? p.plusRecent ?? '';
-        return `<article class="ab-carte ab-suggestion">
-          <div class="ab-meta"><span class="ab-etiquette ab-type-projet">${tr('Projet', 'Project')}</span><span>${tr(`${p.decisions} décision(s) en ${p.annee}`, `${p.decisions} decision(s) in ${p.annee}`)}</span>${p.derniere ? `<span>${tr('Dernière :', 'Latest:')} ${dateFr(p.derniere)}</span>` : ''}</div>
+        return `<article class="ab-carte ab-suggestion vp-sugg">
           <h3>${echapper(p.titre)}</h3>
+          <div class="ab-meta"><span>${nbDecisions(p.decisions, p.annee)}</span>${p.derniere ? `<span>${tr('Dernière :', 'Latest:')} ${dateCourte(p.derniere)}</span>` : ''}</div>
           <p class="ab-note" style="margin:0 0 6px">${echapper(p.description ?? '')}</p>
           ${phrase ? `<p class="ab-derniere">${enBref ? '' : `<strong>${tr('Le plus récent :', 'Most recent:')}</strong> `}${echapper(phrase.length > 260 ? phrase.slice(0, 259) + '…' : phrase)}</p>` : ''}
           <div class="ab-liens">
-            <button type="button" class="ab-bouton" data-action="suivre-projet" data-ville="${echapper(ville)}" data-cle="${echapper(cle)}" data-titre="${echapper(p.titre)}">☆ ${tr('Suivre ce projet', 'Follow this project')}</button>
+            <button type="button" class="ab-bouton" data-action="suivre-projet" data-ville="${echapper(ville)}" data-cle="${echapper(cle)}" data-titre="${echapper(p.titre)}">+ ${tr('Suivre', 'Follow')}</button>
             <a href="/${echapper(ville)}/decisions-de-la-ville-de-${echapper(ville)}?projet=${encodeURIComponent(cle)}">${tr('Voir ses décisions', 'See its decisions')}</a>
           </div>
         </article>`;
@@ -381,7 +381,6 @@ async function suggestions(s, suivisIds) {
   // Fermés au départ ; pour qui ne suit encore rien, la ville du dernier volet visité (ou la
   // première) est ouverte, puisque c'est là qu'on choisit son premier projet. Chaque ville garde
   // son état quand la page se redessine.
-  const avant = new Map([...document.querySelectorAll('#suggestions details[data-ville]')].map((d) => [d.dataset.ville, d.open]));
   const boiteAvant = $('#suggestions details.ab-suggestions');
   // La ville reçue dans l’adresse s’ouvre toujours, même pour qui suit déjà des projets : c’est
   // elle qu’on est venu voir.
@@ -392,13 +391,14 @@ async function suggestions(s, suivisIds) {
   // La même boîte que les autres (Export, Agenda…) ; dedans, une ville par menu dépliant.
   $('#suggestions').innerHTML = blocs.length
     ? `<details class="ab-carte ab-pliable ab-suggestions"${(boiteAvant ? boiteAvant.open : (!suivisIds.size || villeDArrivee || location.hash === '#suggestions')) ? ' open' : ''}>
-       <summary><h2>${tr('Des projets à suivre', 'Projects to follow')}</h2><span class="ab-etiquette">${total}</span></summary>
+       <summary class="vp-ajouter"><span class="vp-ajouter-ferme">+ ${tr('Ajouter un projet', 'Add a project')}</span><span class="vp-ajouter-ouvert">× ${tr('Fermer le catalogue', 'Close the catalogue')}</span></summary>
        <div class="ab-pliable-corps">
+       <h3 class="vp-cat-titre">${tr('Des projets à suivre', 'Projects to follow')} <span class="vp-compte">${total}</span></h3>
        <p class="ab-chapeau">${tr('Les grands dossiers de chaque ville, qui reviennent de séance en séance. Suivez-en un pour garder le fil de toutes ses décisions.', "Each city's major files, which come back meeting after meeting. Follow one to keep track of all its decisions. (Project descriptions and recaps are in French for now.)")}</p>
-       ${blocs.map((b, i) => `<details class="ab-pliable ab-ville-projets" data-ville="${echapper(b.ville)}" style="--ville:${couleurVille(b.ville, i)}"${(avant.has(b.ville) ? avant.get(b.ville) : b.ville === aOuvrir) ? ' open' : ''}>
-         <summary><h3>${echapper(VILLES[b.ville])}</h3><span class="ab-etiquette">${b.nombre} ${tr(pl(b.nombre, 'projet', 'projets'), pl(b.nombre, 'project', 'projects'))}</span></summary>
-         <div class="ab-pliable-corps">${b.legende?.texte ? `<p class="ab-note ab-legende-ville">${echapper(tr(b.legende.texte, b.legende.texteEn ?? b.legende.texte))}</p>` : ''}<div class="ab-grille">${b.cartes}</div></div>
-       </details>`).join('')}
+       ${blocs.map((b, i) => [b, i]).sort(([a], [c]) => (c.ville === aOuvrir) - (a.ville === aOuvrir)).map(([b, i]) => `<section class="vp-ville" data-ville="${echapper(b.ville)}" style="--ville:${couleurVille(b.ville, i)}">
+         <h4 class="vp-ville-titre">${echapper(VILLES[b.ville])} <span>${b.nombre} ${tr(pl(b.nombre, 'projet', 'projets'), pl(b.nombre, 'project', 'projects'))}</span></h4>
+         ${b.legende?.texte ? `<p class="ab-note ab-legende-ville">${echapper(tr(b.legende.texte, b.legende.texteEn ?? b.legende.texte))}</p>` : ''}<div class="vp-grille">${b.cartes}</div>
+       </section>`).join('')}
        </div>
      </details>`
     : '';
@@ -406,8 +406,14 @@ async function suggestions(s, suivisIds) {
 
 const estProjet = (id) => id.startsWith('projet:');
 
-// Pastille « Réparé » sur les projets suivis, pendant deux mois après la réparation du 29 oct. 2026.
-const REPARE = new Date() < new Date('2026-12-31T00:00:00');
+// « 1 décision en 2026 », « 128 décisions en 2026 » ; une date sans l'année (« 28 oct. »).
+const nbDecisions = (n, annee) => tr(`${n} ${pl(n, 'décision', 'décisions')} en ${annee}`, `${n} ${pl(n, 'decision', 'decisions')} in ${annee}`);
+const dateCourte = (d) => dateFr(d).replace(/,? \d{4}$/, '');
+// Le bas d'une carte suivie : le bouton qui déplie l'historique, et « Ne plus suivre », discret.
+const actionsCarte = () => `<div class="vp-actions">
+          <span class="vp-voir" aria-hidden="true"><span class="vp-voir-ferme">${tr('Voir les décisions', 'See the decisions')} ▾</span><span class="vp-voir-ouvert">${tr('Masquer les décisions', 'Hide the decisions')} ▴</span></span>
+          <button type="button" class="ab-lien-bouton vp-retirer" data-action="retirer">${tr('Ne plus suivre', 'Unfollow')}</button>
+        </div>`;
 // L'en-tête d'un dossier ou d'un projet : ce qu'on voit replié. Le reste se charge à l'ouverture.
 async function entete(suivi) {
   const attributs = `class="ab-carte ab-dossier" name="dossiers" data-ville="${echapper(suivi.ville)}" data-dossier="${echapper(suivi.dossier_id)}"`;
@@ -416,15 +422,13 @@ async function entete(suivi) {
     const p = (await indexVille(suivi.ville))?.projets?.[cle];
     return `<details ${attributs}>
       <summary>
-        <div class="ab-meta">
-          <span>${echapper(VILLES[suivi.ville] ?? suivi.ville)}</span>
-          <span class="ab-etiquette ab-type-projet">${tr('Projet', 'Project')}</span>
-          ${REPARE ? `<span class="ab-etiquette ab-repare" title="${tr('Les projets suivis ne s’ouvraient plus depuis la fin septembre ; c’est réparé depuis le 29 octobre 2026.', 'Followed projects would not open since late September; fixed on October 29, 2026.')}">${tr('Réparé', 'Fixed')}</span>` : ''}
-          ${p ? `<span>${tr(`${p.decisions} décision(s) en ${p.annee}`, `${p.decisions} decision(s) in ${p.annee}`)}</span>` : ''}
-          ${p?.derniere ? `<span>${tr('Dernière :', 'Latest:')} ${dateFr(p.derniere)}</span>` : ''}
-          <span>${tr('Suivi depuis le', 'Followed since')} ${dateFr(suivi.created_at)}</span>
-        </div>
-        <h3>${echapper(p?.titre ?? suivi.objet ?? cle)}</h3>
+        <h3 class="vp-titre">${echapper(p?.titre ?? suivi.objet ?? cle)}</h3>
+        <ul class="vp-chiffres">
+          ${p ? `<li>${nbDecisions(p.decisions, p.annee)}</li>` : ''}
+          ${p?.derniere ? `<li>${tr('Dernière :', 'Latest:')} <strong>${dateCourte(p.derniere)}</strong></li>` : ''}
+          <li>${tr('Suivi depuis le', 'Followed since')} <strong>${dateCourte(suivi.created_at)}</strong></li>
+        </ul>
+        ${actionsCarte()}
       </summary>
       <div class="ab-dossier-corps"></div>
     </details>`;
@@ -433,12 +437,12 @@ async function entete(suivi) {
   const numero = suivi.numero || '';
   return `<details ${attributs} data-numero="${echapper(numero)}">
     <summary>
-      <div class="ab-meta">
-        <span>${echapper(VILLES[suivi.ville] ?? suivi.ville)}</span>
-        ${numero ? `<span>${echapper(numero)}</span>` : ''}
-        <span>${tr('Suivi depuis le', 'Followed since')} ${dateFr(suivi.created_at)}</span>
-      </div>
-      <h3>${echapper(suivi.objet ?? suivi.dossier_id)}</h3>
+      <h3 class="vp-titre">${echapper(suivi.objet ?? suivi.dossier_id)}</h3>
+      <ul class="vp-chiffres">
+        ${numero ? `<li>${tr('Décision', 'Decision')} <strong>${echapper(numero)}</strong></li>` : ''}
+        <li>${tr('Suivi depuis le', 'Followed since')} <strong>${dateCourte(suivi.created_at)}</strong></li>
+      </ul>
+      ${actionsCarte()}
     </summary>
     <div class="ab-dossier-corps"></div>
   </details>`;
@@ -576,7 +580,7 @@ async function ouvrirProjet(carte, corps) {
   const maxMois = Math.max(1, ...parMois);
   const graphiqueMois = `<div class="ab-bloc"><div class="ab-detail-titre">${tr('Décisions par mois', 'Decisions by month')}</div>
     <div class="ab-mois" role="img" aria-label="${parMois.slice(0, dernierMois).map((n, i) => `${MOIS_COURTS[i]} ${n}`).join(', ')}">
-      ${parMois.slice(0, dernierMois).map((n, i) => `<div class="ab-mois-col" title="${MOIS_COURTS[i]} ${annee} : ${n} ${tr('décision(s)', 'decision(s)')}">
+      ${parMois.slice(0, dernierMois).map((n, i) => `<div class="ab-mois-col" title="${MOIS_COURTS[i]} ${annee} : ${n} ${tr(pl(n, 'décision', 'décisions'), pl(n, 'decision', 'decisions'))}">
         <span class="ab-mois-n">${n || ''}</span><span class="ab-mois-barre" style="height:${Math.round((n / maxMois) * 100)}%"></span><span class="ab-mois-nom">${MOIS_ETIQUETTES[i]}</span>
       </div>`).join('')}
     </div></div>`;
@@ -606,7 +610,7 @@ async function ouvrirProjet(carte, corps) {
     ${lignes.length ? `<div class="ab-graphiques">${graphiqueMois}${graphiqueThemes}</div>` : ''}
     ${blocAttente}
     ${lignes.length
-      ? `<details class="ab-toutes"><summary>${tr("Toutes les décisions, les plus récentes d'abord", 'All decisions, most recent first')} <span class="ab-etiquette">${lignes.length} ${tr('dossier(s)', 'item(s)')}</span></summary><ol class="ab-liste-projet">${lignes.map(ligne).join('')}</ol></details>`
+      ? `<details class="ab-toutes"><summary>${tr("Toutes les décisions, les plus récentes d'abord", 'All decisions, most recent first')} <span class="ab-etiquette">${lignes.length} ${tr(pl(lignes.length, 'dossier', 'dossiers'), pl(lignes.length, 'item', 'items'))}</span></summary><ol class="ab-liste-projet">${lignes.map(ligne).join('')}</ol></details>`
       : `<p class="ab-note">${tr("Aucune décision de ce projet dans l'année en cours pour l'instant.", 'No decision for this project in the current year yet.')}</p>`}
     <div class="ab-liens">
       <a href="/${echapper(ville)}/decisions-de-la-ville-de-${echapper(ville)}?projet=${encodeURIComponent(cle)}">${tr(`Voir les ${chiffres.decisions} décisions dans le volet ${echapper(VILLES[ville] ?? '')}`, `See the ${chiffres.decisions} decisions in the ${echapper(VILLES[ville] ?? '')} section`)}</a>
@@ -654,8 +658,10 @@ async function afficher() {
   const suivis = (await chargerSuivis()).filter((x) => x.ville !== 'assemblee');
   pourquoi({ connecte: true });
   suggestions(s, new Set(suivis.map((x) => `${x.ville}|${x.dossier_id}`)));
+  const nbSuivis = document.getElementById('vpTotal');
+  if (nbSuivis) { nbSuivis.textContent = suivis.length; nbSuivis.hidden = !suivis.length; }
   if (!suivis.length) {
-    $('#liste').innerHTML = `<p class="ab-vide">${tr("Vous ne suivez aucun projet de ville pour l'instant. Choisissez-en un ci-dessus, dans « Des projets à suivre ».", "You aren't following any city project yet. Pick one above, in “Projects to follow”.")}</p>`;
+    $('#liste').innerHTML = `<p class="ab-vide">${tr("Vous ne suivez aucun projet de ville pour l'instant. Choisissez-en un avec « + Ajouter un projet ».", "You aren't following any city project yet. Pick one with “+ Add a project”.")}</p>`;
     return;
   }
   const parVille = new Map();
@@ -664,8 +670,12 @@ async function afficher() {
     parVille.get(x.ville).push(x);
   }
   const sections = [];
+  let i = 0;
   for (const [ville, liste] of parVille) {
-    sections.push(`<h2>${echapper(VILLES[ville] ?? ville)} <span class="ab-note">(${liste.length})</span></h2>${(await Promise.all(liste.map(entete))).join('')}`);
+    sections.push(`<section class="vp-ville" style="--ville:${couleurVille(ville, i++)}">
+      <h3 class="vp-ville-titre">${echapper(VILLES[ville] ?? ville)} <span>${liste.length} ${tr(pl(liste.length, 'projet', 'projets'), pl(liste.length, 'project', 'projects'))}</span></h3>
+      <div class="vp-grille">${(await Promise.all(liste.map(entete))).join('')}</div>
+    </section>`);
   }
   $('#liste').innerHTML = sections.join('');
   // Un seul dossier suivi : on l'ouvre d'office, mais seulement à l'arrivée sur la page — pas
@@ -715,6 +725,8 @@ document.addEventListener('click', async (e) => {
 
   const bouton = e.target.closest('[data-action="retirer"]');
   if (!bouton) return;
+  // « Ne plus suivre » sur la carte fermée est dans le summary : le clic ne doit pas la déplier.
+  if (bouton.closest('summary')) e.preventDefault();
   const carte = bouton.closest('details.ab-dossier');
   const s = await session();
   if (!s) return connexion();
