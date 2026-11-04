@@ -31,8 +31,11 @@ const fragmentTexte = (quote) => {
   const mots = String(quote || '').replace(/[«»"“”]/g, '').trim().split(/\s+/).filter(Boolean);
   if (mots.length < 3) return '';
   const enc = (t) => encodeURIComponent(t).replace(/-/g, '%2D').replace(/,/g, '%2C');
-  const debut = mots.slice(0, Math.min(5, mots.length)).join(' ');
-  const fin = mots.length > 9 ? mots.slice(-3).join(' ').replace(/[.!?;:]+$/, '') : '';
+  // Phrase entière quand elle est courte : un intervalle début,fin peut déborder sur toute la page
+  // si la fin n'est pas trouvée juste après (Martin, 3 nov. 2026, Plan CITÉ).
+  if (mots.length <= 25) return `#:~:text=${enc(mots.join(' ').replace(/[.!?;:]+$/, ''))}`;
+  const debut = mots.slice(0, 8).join(' ');
+  const fin = mots.slice(-6).join(' ').replace(/[.!?;:]+$/, '');
   return `#:~:text=${enc(debut)}${fin ? ',' + enc(fin) : ''}`;
 };
 // Bouton « copier » au bout de la promesse (Martin, 3 nov. 2026) : certains sites de partis effacent
