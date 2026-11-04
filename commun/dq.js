@@ -418,7 +418,7 @@ const translations = {
     'mdvilles.h':"Your city projects",
     'mdvilles.sub':"The projects you follow, all cities combined. Click a project to see its decisions, most recent first. To add one, pick it further down, or click “Project: …” on a decision in a city section.",
     'mdr.titre':"What you follow, in one place",
-'mdr.gratuit':"<b>Free: 3 follows in all.</b> No password, a link arrives by email.",
+'mdr.gratuit':"<b>Free: 3 follows in all.</b>",
 'mdr.bande':"<b>An idea, an error?</b> Every message is read.",
 'mdr.ecrire':"Write to us",
 'mdhero.l1':"Your bills,",
@@ -1751,7 +1751,7 @@ async function mdRefonte(isEn, quota){
     ['mdExport', 'excel', isEn ? 'Excel export' : 'Export Excel', isEn ? 'Votes and attendance' : 'Votes et présences'],
   ];
   document.getElementById('mdPlus').innerHTML = `<div class="mdr-plus-tete"><h2 class="mdr-h2">${isEn ? 'Going further · subscribers' : 'Pour aller plus loin · abonné·e·s'}</h2>
-      <a class="md-lien" href="/abonnement${L}">${isEn ? 'See the subscription →' : 'Voir l’abonnement →'}</a></div>
+      <span><a class="md-lien" href="/abonnement${L}#code">${isEn ? 'Received a code?' : 'Vous avez reçu un code ?'}</a> · <a class="md-lien" href="/abonnement${L}">${isEn ? 'See the subscription →' : 'Voir l’abonnement →'}</a></span></div>
     <div class="mdr-tuiles">${tuiles.map(([id, ic, t, st]) => abonne
       ? `<button type="button" class="mdr-tuile" data-outil="${id}" aria-expanded="${_mdOuvert === id}" aria-controls="${id}" onclick="mdOuvrirOutil('${id}')">${mdIcone(ic)}<b>${t}</b><span>${st}</span></button>`
       : `<a class="mdr-tuile" href="/abonnement${L}">${mdIcone(ic)}<b>${t}</b><span>${st}</span></a>`).join('')}</div>`;
@@ -2409,7 +2409,7 @@ function mdCompte(isEn, quota){
         <input type="email" id="mdEmail" placeholder="${isEn ? 'Your email' : 'Votre courriel'}" aria-label="${isEn ? 'Your email' : 'Votre courriel'}">
         <button class="mdr-btn-jaune" id="mdLienBtn" onclick="mdEnvoyerLien()">${isEn ? 'Get the link' : 'Recevoir le lien'}</button>
       </div>
-      <p class="md-note" id="mdNote" aria-live="polite"><a class="md-lien" href="/abonnement${isEn ? '?lang=en' : ''}"><b>${isEn ? 'Subscribe' : 'Abonnez-vous'}</b></a> <a class="md-lien md-lien-surligne" href="/abonnement${isEn ? '?lang=en' : ''}#code"><b>${isEn ? 'Received a code?' : 'Vous avez reçu un code?'}</b></a></p>
+      <p class="md-note" id="mdNote" aria-live="polite">${isEn ? 'No password: a sign-in link arrives by email.' : 'Pas de mot de passe : un lien de connexion arrive par courriel.'}</p>
     </div>`;
     document.getElementById('mdEmail')?.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); mdEnvoyerLien(); } });
     return;
