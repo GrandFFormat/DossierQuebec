@@ -776,3 +776,7 @@ construirePagesMinistres();
 // Les anciens ministres de la 43e (/archives/43/ministres), à partir d'archives.html : scripts/build-anciens-ministres.js.
 const { construirePagesAnciensMinistres } = await import('./build-anciens-ministres.js');
 construirePagesAnciensMinistres();
+
+// Les chefs de l'opposition qui siègent (/deputes/charles-milliard) : scripts/build-chefs-opposition.js.
+const { construirePagesChefs } = await import('./build-chefs-opposition.js');
+construirePagesChefs();
