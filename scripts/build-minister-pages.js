@@ -137,7 +137,12 @@ export function construirePagesMinistres() {
     if (desc.length < 120) desc += ' Gouvernement du Québec.';
     if (desc.length < 120) desc += ' Fiche à jour sur DossierQuébec.';
 
-    const photo = w.photo ? `<figure class="min-photo"><img src="${esc(w.photo.src)}" width="${w.photo.largeur}" height="${w.photo.hauteur}" alt="${esc(m.name)}"><figcaption>${esc(w.photo.auteur)}, ${w.photo.licenceUrl ? `<a href="${esc(w.photo.licenceUrl)}" rel="noopener license">${esc(w.photo.licence)}</a>` : esc(w.photo.licence)} · <a href="${esc(w.photo.fiche)}" rel="noopener">Wikimedia Commons</a></figcaption></figure>` : '';
+    // Photo officielle du parti en premier (Martin, 3 nov. 2026 : pq.org/notre-equipe, permission demandée
+    // au PQ le même jour), sinon celle de Wikimedia Commons.
+    const photoParti = existsSync(`${DOSSIER}/photos/${slug}-pq.jpg`) ? `/${DOSSIER}/photos/${slug}-pq.jpg` : null;
+    if (photoParti) w.photo = null;
+    const photo = photoParti ? `<figure class="min-photo"><img src="${photoParti}" width="400" height="400" alt="${esc(m.name)}"><figcaption>${deux('Photo', 'Photo')} : <a href="https://pq.org/notre-equipe/" rel="noopener">Parti Québécois</a></figcaption></figure>`
+      : w.photo ?`<figure class="min-photo"><img src="${esc(w.photo.src)}" width="${w.photo.largeur}" height="${w.photo.hauteur}" alt="${esc(m.name)}"><figcaption>${esc(w.photo.auteur)}, ${w.photo.licenceUrl ? `<a href="${esc(w.photo.licenceUrl)}" rel="noopener license">${esc(w.photo.licence)}</a>` : esc(w.photo.licence)} · <a href="${esc(w.photo.fiche)}" rel="noopener">Wikimedia Commons</a></figcaption></figure>` : '';
 
     const fiche = `<section class="view active" id="view-ministre" data-titre-en="${esc(`${m.name}, minister — DossierQuébec`)}">
     <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/" data-i18n="fil.accueil">Accueil</a><span class="sep" aria-hidden="true">›</span><a href="/ministres" data-i18n="fil.ministres">Ministres et député·e·s</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">${esc(m.name)}</span></nav>
@@ -190,7 +195,7 @@ export function construirePagesMinistres() {
           { '@type': 'ListItem', position: 3, name: m.name, item: url },
         ] },
         { '@type': 'Person', name: m.name, url, jobTitle: roles, memberOf: [{ '@type': 'PoliticalParty', name: partiFr }, { '@type': 'GovernmentOrganization', name: 'Conseil des ministres du Québec' }],
-          ...(w.photo ? { image: SITE + w.photo.src } : {}), ...(w.url ? { sameAs: [w.url, ...(w.wikidata ? [`https://www.wikidata.org/wiki/${w.wikidata}`] : [])] } : {}) },
+          ...(photoParti || w.photo ? { image: SITE + (photoParti || w.photo.src) } : {}), ...(w.url ? { sameAs: [w.url, ...(w.wikidata ? [`https://www.wikidata.org/wiki/${w.wikidata}`] : [])] } : {}) },
       ],
     }, null, 1).replace(/</g, '\\u003c');
 
