@@ -3562,7 +3562,9 @@ function renderDeputes(filter){
   // boutons Suivre (followedDeputes), même courriel.
   const partyOrder = seats.map(s=>s.party);
   const groups = partyOrder
-    .map(p => ({ party:p, seat: seats.find(s=>s.party===p), members: list.filter(d=>d.party===p) }))
+    .map(p => ({ party:p, seat: seats.find(s=>s.party===p), members: list.filter(d=>d.party===p)
+      // Le ou les chefs en tête de leur parti (Martin, 4 nov. 2026), puis par ordre alphabétique.
+      .sort((a, b) => ((CHEFS_OPPOSITION.indexOf(a.name) + 1 || 99) - (CHEFS_OPPOSITION.indexOf(b.name) + 1 || 99)) || a.name.localeCompare(b.name, 'fr')) }))
     .filter(g => g.members.length);
   const nameLabel = isEn ? 'Name' : 'Nom';
   const ridingLabel = isEn ? 'Riding — region' : 'Circonscription — région';
