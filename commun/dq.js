@@ -5951,3 +5951,26 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(maj, 1500);   // une valeur posée par le script (lien ?elu=…) arrive après le chargement
   });
 });
+
+// Retour depuis une fiche (Martin, 4 nov. 2026) : la liste des ministres et des élu·e·s se dessine
+// après le chargement, alors le navigateur ne retrouve pas la position et laisse la page ailleurs.
+// On note la position au clic sur un nom, puis on y revient une fois la liste redessinée.
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('.m-name a, .dep-name a');
+  if(!a) return;
+  try{ sessionStorage.setItem('dq:retourListe', JSON.stringify({ page: location.pathname, y: scrollY })); }catch(err){}
+});
+(() => {
+  let note = null;
+  try{ note = JSON.parse(sessionStorage.getItem('dq:retourListe') || 'null'); }catch(err){}
+  if(!note || note.page !== location.pathname) return;
+  try{ sessionStorage.removeItem('dq:retourListe'); }catch(err){}
+  if('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  let essais = 0;
+  const revenir = () => {
+    const pret = document.querySelector('#deputesList .dep-name') && document.documentElement.scrollHeight > note.y + innerHeight / 2;
+    if(pret){ scrollTo(0, note.y); return; }
+    if(++essais < 40) setTimeout(revenir, 150);
+  };
+  revenir();
+})();
