@@ -41,6 +41,15 @@ const fragmentTexte = (quote) => {
 // Bouton « copier » au bout de la promesse (Martin, 3 nov. 2026) : certains sites de partis effacent
 // le surlignage du lien ; on colle la phrase dans Ctrl+F sur la source.
 const boutonCopie = `<button type="button" class="min-copie" title="Copier la promesse" aria-label="Copier la promesse" onclick="var b=this,q=b.previousElementSibling.textContent;navigator.clipboard.writeText(q).then(function(){b.classList.add('ok');b.textContent='✓ Copié';setTimeout(function(){b.classList.remove('ok');b.textContent='⧉';},1800);})">⧉</button>`;
+// Petites icônes carrées sous la photo (Martin, 4 nov. 2026).
+const svg = (d) => `<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="${d}"/></svg>`;
+const ICONES_RESEAUX = {
+  Facebook: svg('M14 8h3V4h-3c-2.8 0-4 1.7-4 4.3V10H7v4h3v8h4v-8h3l1-4h-4V8.6c0-.4.3-.6.6-.6z'),
+  LinkedIn: svg('M4 9h4v12H4zM6 3a2 2 0 110 4 2 2 0 010-4zm4 6h3.8v1.7c.6-1 1.9-2 3.9-2 4 0 4.3 2.6 4.3 6V21h-4v-5.6c0-1.4 0-3.1-1.9-3.1S12 13.8 12 15.3V21h-2z'),
+  X: svg('M17.7 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L2 3h6.4l4.4 5.8zm-1.1 16.2h1.7L7.5 4.7H5.7z'),
+  Instagram: svg('M12 7.3a4.7 4.7 0 100 9.4 4.7 4.7 0 000-9.4zm0 7.7a3 3 0 110-6 3 3 0 010 6zm4.9-8.9a1.1 1.1 0 100 2.2 1.1 1.1 0 000-2.2zM12 2c-2.7 0-3 0-4.1.1C4.3 2.3 2.3 4.3 2.1 7.9 2 9 2 9.3 2 12s0 3 .1 4.1c.2 3.6 2.2 5.6 5.8 5.8 1.1.1 1.4.1 4.1.1s3 0 4.1-.1c3.6-.2 5.6-2.2 5.8-5.8.1-1.1.1-1.4.1-4.1s0-3-.1-4.1c-.2-3.6-2.2-5.6-5.8-5.8C15 2 14.7 2 12 2zm0 1.8c2.7 0 3 0 4 .1 2.7.1 3.9 1.4 4 4 .1 1 .1 1.3.1 4s0 3-.1 4c-.1 2.6-1.3 3.9-4 4-1 .1-1.3.1-4 .1s-3 0-4-.1c-2.7-.1-3.9-1.4-4-4-.1-1-.1-1.3-.1-4s0-3 .1-4c.1-2.6 1.3-3.9 4-4 1-.1 1.3-.1 4-.1z'),
+  YouTube: svg('M23 7.2a3 3 0 00-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 001 7.2 31 31 0 00.5 12a31 31 0 00.5 4.8 3 3 0 002.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 002.1-2.1 31 31 0 00.5-4.8 31 31 0 00-.5-4.8zM9.7 15.1V8.9L15.5 12z'),
+};
 const nomReseau = (u) => [[/\/\/x\.com|twitter/, 'X'], [/facebook/, 'Facebook'], [/instagram/, 'Instagram'], [/linkedin/, 'LinkedIn'], [/youtube/, 'YouTube'], [/tiktok/, 'TikTok']].find(([r]) => r.test(u))?.[1] || 'Web';
 const citeSource = (p) => {
   const date = String(p.sourceLabel || '').split(' — ').map((x) => x.trim())[2] || '';
@@ -153,8 +162,7 @@ export function construirePagesMinistres() {
     const fiche = `<section class="view active" id="view-ministre" data-titre-en="${esc(`${m.name}, minister — DossierQuébec`)}">
     <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/" data-i18n="fil.accueil">Accueil</a><span class="sep" aria-hidden="true">›</span><a href="/ministres" data-i18n="fil.ministres">Ministres et député·e·s</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">${esc(m.name)}</span></nav>
     <div class="view-hero min-hero">
-      ${photo}
-      ${(reseaux[slug] || []).length ? `<p class="min-reseaux">${reseaux[slug].map((u) => `<a href="${esc(u)}" target="_blank" rel="noopener">${nomReseau(u)}</a>`).join('')}</p>` : ''}
+      <div class="min-colphoto">${photo}${(reseaux[slug] || []).length ? `<p class="min-reseaux">${reseaux[slug].map((u) => `<a href="${esc(u)}" target="_blank" rel="noopener" title="${nomReseau(u)}" aria-label="${nomReseau(u)}">${ICONES_RESEAUX[nomReseau(u)] || nomReseau(u)}</a>`).join('')}</p>` : ''}</div>
       <div class="min-tete">
         <h1 class="hero-h1 hero-h1-md"><span class="hero-sujet">${deux('Ministre du Québec', 'Quebec minister')}</span><span>${esc(m.name)}</span></h1>
         <p class="view-hero-sub">${deux(`${esc(m.name)} est ${esc(joint)} dans le gouvernement St-Pierre Plamondon (au ${dateFr(auj)}).`, `${esc(m.name)} is a member of the St-Pierre Plamondon government’s cabinet (as of ${dateEn(auj)}). Official titles are listed below in French.`)}</p>

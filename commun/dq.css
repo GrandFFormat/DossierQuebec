@@ -2453,6 +2453,7 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 .min-copie:hover{color:var(--ink); background:#FFE88A;}
 .min-copie.ok{color:#1E7B45; font-size:13px; font-weight:700;}
 /* Réseaux sociaux sur les fiches de ministres (relevés sur le site du parti). */
-.min-reseaux{display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 14px;}
-.min-reseaux a{display:inline-block; padding:3px 10px; border:2px solid var(--ink); font-size:13px; font-weight:700; color:var(--ink); text-decoration:none; background:var(--card);}
+.min-colphoto{flex:0 0 200px; max-width:100%;}
+.min-reseaux{display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 0;}
+.min-reseaux a{display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border:2px solid var(--ink); color:var(--ink); background:var(--card); text-decoration:none;}
 .min-reseaux a:hover{background:#FFE88A; color:#131313;}
