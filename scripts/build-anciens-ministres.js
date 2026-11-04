@@ -114,6 +114,8 @@ export function construirePagesAnciensMinistres() {
     const f = FEMMES.test(m.nom);
     m.fonctionsFrechette ??= [];
     const [gouvFr, gouvEn] = quelGouv(m);
+    // François Legault : premier ministre du 18 octobre 2018 au 15 avril 2026.
+    const premierLegault = /^Fran[cç]ois Legault$/.test(m.nom);
     const premiereMin = m.fonctionsFrechette.some((r) => /^Premi[eè]re? ministre$/i.test(r));
     const principale = (m.fonctionsFrechette[0] || m.fonctions2025[0] || m.fonctions2022[0] || 'Ministre').replace(/^Ministre/, 'ministre').replace(/^Président/, 'président').replace(/^Premier/, 'premier');
     const projets = bills.filter((b) => norm(b.sponsor) === norm(m.nom)).sort((a, b) => String(b.lastActivity ?? '').localeCompare(String(a.lastActivity ?? '')));
@@ -140,14 +142,16 @@ export function construirePagesAnciensMinistres() {
       ? `<p>${deux(`${esc(m.nom)} siège toujours, dans la 44e législature : <a href="/ministres/${slugMinistre(actuel.name)}">sa fiche actuelle →</a>`, `${esc(m.nom)} still sits in the 44th Legislature: <a href="/ministres/${slugMinistre(actuel.name)}">current profile →</a>`)}</p>`
       : depute ? `<p>${deux(`Réélu${f ? 'e' : ''} le 5 octobre 2026 : ${esc(m.nom)} siège dans la 44e législature (${esc(depute[1])}, ${esc(depute[3])}). <a href="/ministres?elu=${slugMinistre(m.nom)}">Voir sa carte parmi les député·e·s →</a>`, `Re-elected on October 5, 2026: ${esc(m.nom)} sits in the 44th Legislature (${esc(depute[1])}, ${esc(depute[3])}). <a href="/ministres?elu=${slugMinistre(m.nom)}">See the MNAs →</a>`)}</p>` : '';
 
-    const section = `<section class="view active" id="view-ancien" data-titre-en="${esc(`${m.nom}, ${premiereMin ? 'former Premier' : 'former minister'} — DossierQuébec`)}">
+    const section = `<section class="view active" id="view-ancien" data-titre-en="${esc(`${m.nom}, ${premierLegault || premiereMin ? 'former Premier' : 'former minister'} — DossierQuébec`)}">
     <nav class="fil-ariane" aria-label="Fil d'Ariane">${filArchive}<a href="/${DOSSIER}">${deux('Anciens ministres', 'Former ministers')}</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">${esc(m.nom)}</span></nav>
     ${bande(ancien)}
     <div class="view-hero min-hero">
       <div class="min-colphoto">${photo}</div>
       <div class="min-tete">
-        <h1 class="hero-h1 hero-h1-md"><span class="hero-sujet">${premiereMin ? deux('Première ministre (2026)', 'Premier of Québec (2026)') : deux(`${ancien} (2022-2026)`, 'Former minister (2022-2026)')}</span><span>${esc(m.nom)}</span></h1>
-        <p class="view-hero-sub">${premiereMin
+        <h1 class="hero-h1 hero-h1-md"><span class="hero-sujet">${premierLegault ? deux('Premier ministre (2018-2026)', 'Premier of Québec (2018-2026)') : premiereMin ? deux('Première ministre (2026)', 'Premier of Québec (2026)') : deux(`${ancien} (2022-2026)`, 'Former minister (2022-2026)')}</span><span>${esc(m.nom)}</span></h1>
+        <p class="view-hero-sub">${premierLegault
+          ? deux(`${esc(m.nom)} a été premier ministre du Québec du 18 octobre 2018 au 15 avril 2026.`, `${esc(m.nom)} was Premier of Québec from October 18, 2018 to April 15, 2026. Official titles are listed below in French.`)
+          : premiereMin
           ? deux(`${esc(m.nom)} a été première ministre du Québec du 15 avril au 21 octobre 2026, après avoir été membre du Conseil des ministres du gouvernement Legault pendant la 43e législature.`, `${esc(m.nom)} was Premier of Québec from April 15 to October 21, 2026, after sitting in the Legault government’s cabinet during the 43rd Legislature. Official titles are listed below in French.`)
           : deux(`${esc(m.nom)} a été membre du Conseil des ministres ${gouvFr} pendant la 43e législature (2022-2026).`, `${esc(m.nom)} sat in ${gouvEn} cabinet during the 43rd Legislature (2022-2026). Official titles are listed below in French.`)}</p>
         ${lienActuel}
@@ -185,7 +189,7 @@ export function construirePagesAnciensMinistres() {
     </div></div>
   </section>`;
 
-    const qui = premiereMin ? 'ancienne première ministre' : `${f ? 'ancienne' : 'ancien'} ministre`;
+    const qui = premierLegault ? 'ancien premier ministre' : premiereMin ? 'ancienne première ministre' : `${f ? 'ancienne' : 'ancien'} ministre`;
     const titreCourt = `${m.nom}${homonyme && m.circonscription ? ` (${m.circonscription})` : ''}, ${qui}`;
     const titre = `${titreCourt} — DossierQuébec`;
     const suite = ': fonctions, projets de loi et présence aux votes de la 43e législature.';
