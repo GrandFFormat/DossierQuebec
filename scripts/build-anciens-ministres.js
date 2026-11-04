@@ -95,7 +95,9 @@ export function construirePagesAnciensMinistres() {
   const bande = (fr = 'Ancien ministre', en = 'Former minister', pl = false) => `<p class="archives-note archives-bande">${deux(`<b>${fr} (2022-2026).</b> ${pl ? 'Fiches' : 'Fiche'} de la 43e législature, archivée à sa dissolution.`, `<b>${en} (2022-2026).</b> ${pl ? 'Profiles' : 'Profile'} from the 43rd Legislature, archived at its dissolution.`)}</p>`;
 
   for (const m of donnees.ministres) {
-    const slug = m.slug || slugMinistre(m.nom);
+    // Deux Eric Girard (Groulx et Lac-Saint-Jean) : un nom en double prend sa circonscription.
+    const homonyme = donnees.ministres.filter((x) => slugMinistre(x.nom) === slugMinistre(m.nom)).length > 1;
+    const slug = slugMinistre(homonyme && m.circonscription ? `${m.nom} ${m.circonscription}` : m.nom);
     const url = `${SITE}/${DOSSIER}/${slug}`;
     const f = FEMMES.test(m.nom);
     const fonctions = [...new Set([...m.fonctions2022, ...m.fonctions2025])];
@@ -163,7 +165,7 @@ export function construirePagesAnciensMinistres() {
     </div></div>
   </section>`;
 
-    const titreCourt = `${m.nom}, ${f ? 'ancienne' : 'ancien'} ministre`;
+    const titreCourt = `${m.nom}${homonyme && m.circonscription ? ` (${m.circonscription})` : ''}, ${f ? 'ancienne' : 'ancien'} ministre`;
     const titre = `${titreCourt} — DossierQuébec`;
     let desc = `${m.nom} (CAQ${m.circonscription ? `, ${m.circonscription}` : ''}), ${f ? 'ancienne' : 'ancien'} ministre du gouvernement Legault : fonctions, projets de loi et présence aux votes de la 43e législature.`;
     if (desc.length > 165) desc = `${m.nom}, ${f ? 'ancienne' : 'ancien'} ministre du gouvernement Legault : fonctions, projets de loi et présence aux votes de la 43e législature.`;
