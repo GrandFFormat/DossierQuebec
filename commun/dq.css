@@ -2611,3 +2611,5 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 @media (max-width:640px){ .mdc-cartes{grid-template-columns:minmax(0,1fr);} .mdc-carte{padding:12px 12px 10px;} }
 /* Compteur de suivis à côté du bouton Suivre (4 nov. 2026). */
 .nb-suivis{font-weight:inherit;}
+/* Un espace entre les cartes des ministres et la bande Finances publiques (Martin, 4 nov. 2026). */
+#ministresGrid{margin-bottom:48px;}
