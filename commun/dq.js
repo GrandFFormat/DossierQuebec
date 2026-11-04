@@ -418,7 +418,7 @@ const translations = {
     'mdvilles.h':"Your city projects",
     'mdvilles.sub':"The projects you follow, all cities combined. Click a project to see its decisions, most recent first. To add one, pick it further down, or click “Project: …” on a decision in a city section.",
     'mdr.titre':"What you follow, in one place",
-'mdr.gratuit':"<b>Free: 3 follows in all.</b>",
+'mdr.gratuit':"<b>Free: 3 follows in all.</b> Unlimited for subscribers.",
 'mdr.bande':"<b>An idea, an error?</b> Every message is read.",
 'mdr.ecrire':"Write to us",'mdr.offrir.h':"Give a subscription",
 'mdhero.l1':"Your bills,",
