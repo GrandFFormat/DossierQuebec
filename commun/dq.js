@@ -1753,7 +1753,7 @@ async function mdRefonte(isEn, quota){
     ['mdExport', 'excel', isEn ? 'Excel export' : 'Export Excel', isEn ? 'Votes and attendance' : 'Votes et présences'],
   ];
   document.getElementById('mdPlus').innerHTML = `<div class="mdr-plus-tete"><h2 class="mdr-h2">${isEn ? 'Going further · subscribers' : 'Pour aller plus loin · abonné·e·s'}</h2>
-      <span><a class="md-lien" href="/abonnement${L}#code">${isEn ? 'Received a code?' : 'Vous avez reçu un code ?'}</a> · <a class="md-lien" href="/abonnement${L}">${isEn ? 'See the subscription →' : 'Voir l’abonnement →'}</a>${currentUser ? ` · <button type="button" class="mdr-lien-btn" id="mdOffrirBtn" aria-expanded="${!document.getElementById('mdOffrirPli')?.hidden}" aria-controls="mdOffrirPli" onclick="mdBasculerOffrir()">${isEn ? 'Give a subscription' : 'Offrir un abonnement'}</button>` : ''}</span></div>
+      <span><a class="md-lien" href="/abonnement${L}#code">${isEn ? 'Received a code?' : 'Vous avez reçu un code ?'}</a> · <a class="md-lien" href="/abonnement${L}">${isEn ? 'See the subscription →' : 'Voir l’abonnement →'}</a></span></div>
     <div class="mdr-tuiles">${tuiles.map(([id, ic, t, st]) => abonne
       ? `<button type="button" class="mdr-tuile" data-outil="${id}" aria-expanded="${_mdOuvert === id}" aria-controls="${id}" onclick="mdOuvrirOutil('${id}')">${mdIcone(ic)}<b>${t}</b><span>${st}</span></button>`
       : `<a class="mdr-tuile" href="/abonnement${L}">${mdIcone(ic)}<b>${t}</b><span>${st}</span></a>`).join('')}</div>`;
@@ -2478,7 +2478,6 @@ async function mdAbonnement(isEn, avisCode){
   const [etat, codes] = await Promise.all([abEtatServeur(), abMesCodes(isEn)]);
   if(!document.body.contains(zone)) return;   // la carte a été redessinée entre-temps
   // « Offrir » sous « Votre compte », pour tout compte connecté (Martin, 21 oct. 2026).
-  { const o = document.getElementById('offrir-mon-dossier'); if(o) o.hidden = !etat?.connecte; }
   const merci = new URLSearchParams(location.search).get('cadeau') === 'merci'
     ? `<p class="md-note"><b>${isEn ? 'Thank you.' : 'Merci.'}</b> ${isEn ? 'Your gift code is on its way by email; it also appears below within a minute.' : 'Votre code cadeau part par courriel ; il paraît aussi ci-dessous d’ici une minute.'}</p>`
     : ({
