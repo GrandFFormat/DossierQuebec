@@ -2610,4 +2610,4 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 #mdEcrirePli .ab-merci{border:3px solid var(--ink); background:var(--yellow); color:#131313; padding:12px 14px; border-radius:0; font-weight:700;}
 @media (max-width:640px){ .mdc-cartes{grid-template-columns:minmax(0,1fr);} .mdc-carte{padding:12px 12px 10px;} }
 /* Compteur de suivis à côté du bouton Suivre (4 nov. 2026). */
-.nb-suivis{display:inline-flex; align-items:center; justify-content:center; min-width:26px; height:26px; padding:0 6px; margin-left:4px; border:2px solid var(--ink); background:#FFD24D; color:#131313; font-weight:800; font-size:12.5px; vertical-align:middle;}
+.nb-suivis{font-weight:inherit;}
