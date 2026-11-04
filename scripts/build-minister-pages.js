@@ -38,6 +38,7 @@ const fragmentTexte = (quote) => {
 // Bouton « copier » au bout de la promesse (Martin, 3 nov. 2026) : certains sites de partis effacent
 // le surlignage du lien ; on colle la phrase dans Ctrl+F sur la source.
 const boutonCopie = `<button type="button" class="min-copie" title="Copier la promesse" aria-label="Copier la promesse" onclick="var b=this,q=b.previousElementSibling.textContent;navigator.clipboard.writeText(q).then(function(){b.classList.add('ok');b.textContent='✓ Copié';setTimeout(function(){b.classList.remove('ok');b.textContent='⧉';},1800);})">⧉</button>`;
+const nomReseau = (u) => [[/x.com|twitter/, 'X'], [/facebook/, 'Facebook'], [/instagram/, 'Instagram'], [/linkedin/, 'LinkedIn'], [/youtube/, 'YouTube'], [/tiktok/, 'TikTok']].find(([r]) => r.test(u))?.[1] || 'Web';
 const citeSource = (p) => {
   const date = String(p.sourceLabel || '').split(' — ').map((x) => x.trim())[2] || '';
   const d = /^\d{4}-\d{2}-\d{2}$/.test(date) ? dateFr(date) : date;
@@ -73,6 +74,8 @@ export function construirePagesMinistres() {
   const deputes = lire('data/site/deputesRaw.json', []);
   const courriels = lire('data/site/deputeEmails.json', {});
   const presences = lire('data/site/presences.json', {});
+  // Réseaux sociaux relevés sur pq.org/notre-equipe (3 nov. 2026).
+  const reseaux = lire('data/site/ministresReseaux.json', {});
   // Même pastille que la page Ministres (tauxPresence de dq.js) : vert à la médiane de l'Assemblée ou
   // au-dessus, jaune jusqu'à la médiane de ceux qui sont sous, sans couleur en dessous.
   const tauxTous = deputes.map((d) => presences[d[4]]?.rate).filter((r) => typeof r === 'number').sort((x, y) => x - y);
@@ -148,6 +151,7 @@ export function construirePagesMinistres() {
     <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/" data-i18n="fil.accueil">Accueil</a><span class="sep" aria-hidden="true">›</span><a href="/ministres" data-i18n="fil.ministres">Ministres et député·e·s</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">${esc(m.name)}</span></nav>
     <div class="view-hero min-hero">
       ${photo}
+      ${(reseaux[slug] || []).length ? `<p class="min-reseaux">${reseaux[slug].map((u) => `<a href="${esc(u)}" target="_blank" rel="noopener me">${nomReseau(u)}</a>`).join('')}</p>` : ''}
       <div class="min-tete">
         <h1 class="hero-h1 hero-h1-md"><span class="hero-sujet">${deux('Ministre du Québec', 'Quebec minister')}</span><span>${esc(m.name)}</span></h1>
         <p class="view-hero-sub">${deux(`${esc(m.name)} est ${esc(joint)} dans le gouvernement St-Pierre Plamondon (au ${dateFr(auj)}).`, `${esc(m.name)} is a member of the St-Pierre Plamondon government’s cabinet (as of ${dateEn(auj)}). Official titles are listed below in French.`)}</p>
@@ -195,7 +199,7 @@ export function construirePagesMinistres() {
           { '@type': 'ListItem', position: 3, name: m.name, item: url },
         ] },
         { '@type': 'Person', name: m.name, url, jobTitle: roles, memberOf: [{ '@type': 'PoliticalParty', name: partiFr }, { '@type': 'GovernmentOrganization', name: 'Conseil des ministres du Québec' }],
-          ...(photoParti || w.photo ? { image: SITE + (photoParti || w.photo.src) } : {}), ...(w.url ? { sameAs: [w.url, ...(w.wikidata ? [`https://www.wikidata.org/wiki/${w.wikidata}`] : [])] } : {}) },
+          ...(photoParti || w.photo ? { image: SITE + (photoParti || w.photo.src) } : {}), ...((w.url || reseaux[slug]) ? { sameAs: [...(w.url ? [w.url] : []), ...(w.wikidata ? [`https://www.wikidata.org/wiki/${w.wikidata}`] : []), ...(reseaux[slug] || [])] } : {}) },
       ],
     }, null, 1).replace(/</g, '\\u003c');
 
