@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-03T18:49:01.139Z",
+ "generatedAt": "2026-11-04T17:31:17.249Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel quand il est publié (source « sommaire »), sinon du texte de la résolution elle-même (source « resolution »), sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,17 +7,17 @@
   "annee": "2026",
   "max": 40,
   "batch": true,
-  "depuis": "2026-09-04",
+  "depuis": "2026-09-05",
   "plafond": 120
  },
- "nombre": 8847,
- "genereCetteFois": 4,
+ "nombre": 8915,
+ "genereCetteFois": 68,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.0488,
-  "jetonsEntree": 12463,
-  "jetonsSortie": 1411
+  "montant": 1.0522,
+  "jetonsEntree": 286806,
+  "jetonsSortie": 26811
  },
  "resumes": [
   {
@@ -1291,6 +1291,1767 @@
    "jetons": {
     "entree": 1639,
     "sortie": 165
+   }
+  },
+  {
+   "id": "CA26 210186",
+   "numero": null,
+   "resolution": "CA26 210186",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Adoption de l'ordre du jour de la séance du conseil d'arrondissement",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-10-06_19h00_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement adopte l'ordre du jour de sa séance ordinaire du mardi 6 octobre 2026, à 19 h."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.242Z",
+   "jetons": {
+    "entree": 1673,
+    "sortie": 145
+   }
+  },
+  {
+   "id": "CA26 29 0210",
+   "numero": null,
+   "resolution": "CA26 29 0210",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "PROCÈS-VERBAL",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "Le conseil approuve le procès-verbal de sa séance ordinaire du 14 septembre 2026 (19 h) et le verse aux archives de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.242Z",
+   "jetons": {
+    "entree": 1647,
+    "sortie": 150
+   }
+  },
+  {
+   "id": "1267126005",
+   "numero": "1267126005",
+   "resolution": "CA26 210192",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Ratifier l'entente intervenue entre la Ville de Montréal, arrondissement de Verdun et le Syndicat de copropriété Elää relative à la rétention des eaux pluviales du projet Elää dans le cadre du Règlement sur les branchements aux réseaux d'aqueduc et d'égouts publics et sur la gestion des eaux pluviales (20-030). (1267126005)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-10-06_19h00_FR.pdf#page=3",
+   "source": "sommaire",
+   "puces": [
+    "La Ville ratifie une entente avec le Syndicat de copropriété Elää, un complexe de six bâtiments et 41 unités situé aux 640-650 boulevard Henri-Duhamel et 3140-3150 rue Joseph, à Verdun.",
+    "Le syndicat versera 28 000 $ (taxes en sus) à la Ville, soit 1 000 $ par arbre, pour financer la plantation de 28 arbres sur le domaine public.",
+    "Ces 28 arbres valent 7 000 litres de rétention d'eau pluviale, ce qui rend l'ensemble du terrain conforme au règlement sur la gestion des eaux pluviales (20-030).",
+    "Le syndicat ne pouvait pas respecter l'exigence de rétention sur son terrain à cause de la densité des bâtiments et de contraintes liées aux drains français; la mise aux normes aurait coûté environ 50 000 $ par unité.",
+    "Selon le syndicat, le complexe a subi une trentaine de refoulements d'égout depuis juillet 2018 et n'est plus assuré contre les dégâts d'eau depuis novembre 2018.",
+    "Signature de l'entente et paiement prévus d'octobre à décembre 2026; plantation des arbres par l'arrondissement de Verdun en 2027.",
+    "Le greffier adjoint de la Ville est mandaté pour signer l'entente."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "28 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.242Z",
+   "jetons": {
+    "entree": 6075,
+    "sortie": 571
+   }
+  },
+  {
+   "id": "1269533009",
+   "numero": "1269533009",
+   "resolution": "CA26 14 0251",
+   "date": "2026-10-06",
+   "unite": "Direction du développement du territoire",
+   "objet": "Adopter le premier projet de résolution PP26-14004 à l'effet d'autoriser l'agrandissement de 1 étage et l'ajout de 2 logements supplémentaires au bâtiment situé au 7179-7181, rue Berri en vertu du Règlement sur les PPCMOI de l'arrondissement (RCA04-14003).",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=256",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension autorise l'ajout d'un 3e étage au bâtiment du 7179-7181, rue Berri, et la création de 2 logements d'une chambre.",
+    "Le bâtiment, un quadruplex de brique construit en 1946, passerait de 4 à 6 logements, ce que le règlement de zonage ne permet pas (maximum de 2 à 3) — d'où le recours à un projet particulier.",
+    "Conditions imposées : maximum de 6 logements, les nouveaux logements au 3e étage, amélioration des espaces extérieurs, et remplacement du bardage de clin de la façade latérale est par un revêtement d'acrylique.",
+    "L'autorisation tombe si la demande de permis de construction complète n'est pas déposée dans les 24 mois suivant l'entrée en vigueur de la résolution.",
+    "Le projet prévoit le verdissement de la cour arrière, 2 arbres, 2 places de vélo et des bacs à matières résiduelles; aucun stationnement automobile.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable le 9 septembre 2026. Les frais d'étude s'élèvent à 8 106 $.",
+    "Prochaines étapes : affiche sur la propriété, consultation écrite, assemblée publique, second projet de résolution, puis période d'approbation référendaire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "8 106 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.243Z",
+   "jetons": {
+    "entree": 8342,
+    "sortie": 578
+   }
+  },
+  {
+   "id": "CA26 29 0218",
+   "numero": "1263050013",
+   "resolution": "CA26 29 0218",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "DÉROGATION MINEURE – ÉTUDE N°3003718696 e 50, 5 AVENUE SUD LOT 1 388 966",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement accepte une dérogation mineure pour la maison unifamiliale isolée située au 50, 5e Avenue Sud (lot 1 388 966).",
+    "La marge avant du bâtiment pourra être de 5,8 m au lieu des 6 m exigés par le règlement de zonage pour la zone H1-7-420.",
+    "La décision suit la recommandation du Comité consultatif d'urbanisme formulée à sa réunion du 15 septembre 2026.",
+    "Aucune somme d'argent n'est associée à cette décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.243Z",
+   "jetons": {
+    "entree": 1990,
+    "sortie": 359
+   }
+  },
+  {
+   "id": "CA26 170208",
+   "numero": null,
+   "resolution": "CA26 170208",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "PROLONGATION DE LA PÉRIODE DE QUESTIONS ORALES DU PUBLIC",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_PV_ORDI_2026-10-06_18h30_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "Le conseil prolonge de 15 minutes la période de questions orales du public.",
+    "Cette prolongation vise à permettre aux citoyens déjà inscrits de s'adresser au conseil."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.243Z",
+   "jetons": {
+    "entree": 1680,
+    "sortie": 157
+   }
+  },
+  {
+   "id": "CA26 29 0221",
+   "numero": "1268707018",
+   "resolution": "CA26 29 0221",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "PROCÈS-VERBAL – COMITÉ CONSULTATIF D’URBANISME",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement prend acte du dépôt du procès-verbal de la réunion du Comité consultatif d'urbanisme tenue le 16 septembre 2026, sans autre décision."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.243Z",
+   "jetons": {
+    "entree": 1676,
+    "sortie": 161
+   }
+  },
+  {
+   "id": "CA26 14 0232",
+   "numero": null,
+   "resolution": "CA26 14 0232",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Motion visant à confirmer l'appui de l'arrondissement de Villeray-Saint-Michel-Parc-Extension à l'inscription et à l'obtention des crédits requis au Programme décennal d'immobilisations de la Ville de Montréal afin d'assurer la poursuite de la conception et la réalisation du projet IM-DV-23- 0001 - Nouveau pôle aquatique du parc Jarry",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-10-06_18h30_FR.pdf#page=4",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de Villeray–Saint-Michel–Parc-Extension appuie le projet de nouveau pôle aquatique au parc Jarry (projet IM-DV-23-0001).",
+    "Il demande à la Ville de Montréal d'inscrire les crédits nécessaires au Programme décennal d'immobilisations 2027-2036 pour poursuivre la conception et la réalisation.",
+    "La piscine et le pavillon des baigneurs datent de 1962, la pataugeoire de 1987; le texte évoque des pertes d'eau, une filtration insuffisante, une qualité d'eau difficile à maintenir lors des chaleurs et l'absence de vestiaires et de sanitaires pour la pataugeoire.",
+    "Capacités actuelles citées : 615 personnes pour la piscine, 346 pour la pataugeoire, qui doit fermer chaque jour pour l'entretien.",
+    "En hiver, le parc Jarry reçoit jusqu'à 20 000 visites par semaine sans vestiaire accessible.",
+    "Le conseil demande que le projet inclue du verdissement : plantation d'arbres et de végétaux, plus de surfaces perméables, aménagements pour la biodiversité et contre les îlots de chaleur.",
+    "Les espaces libérés par les anciennes installations aquatiques devront rester des parcs, espaces verts ou lieux de sport, loisir et détente accessibles au public."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.243Z",
+   "jetons": {
+    "entree": 2797,
+    "sortie": 584
+   }
+  },
+  {
+   "id": "CA26 14 0230",
+   "numero": null,
+   "resolution": "CA26 14 0230",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs et du greffe",
+   "objet": "Adoption de l'ordre du jour de la séance du conseil d'arrondissement",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-10-06_18h30_FR.pdf#page=1",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement adopte l'ordre du jour de sa séance ordinaire, tel que proposé, sans autre décision de fond."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.243Z",
+   "jetons": {
+    "entree": 1635,
+    "sortie": 143
+   }
+  },
+  {
+   "id": "CA26 29 0209",
+   "numero": null,
+   "resolution": "CA26 29 0209",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "ADOPTION DE L’ORDRE DU JOUR",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de Pierrefonds-Roxboro adopte l'ordre du jour de sa séance ordinaire du 6 octobre 2026."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.243Z",
+   "jetons": {
+    "entree": 1639,
+    "sortie": 150
+   }
+  },
+  {
+   "id": "CA26 14 0231",
+   "numero": null,
+   "resolution": "CA26 14 0231",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs et du greffe",
+   "objet": "Approbation du procès-verbal de la séance ordinaire du conseil d'arrondissement tenue le er 1 septembre 2026, à 18 h 30",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-10-06_18h30_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement approuve et signe le procès-verbal de sa séance ordinaire du 1er septembre 2026, tenue à 18 h 30."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.243Z",
+   "jetons": {
+    "entree": 1703,
+    "sortie": 149
+   }
+  },
+  {
+   "id": "CA26 170207",
+   "numero": null,
+   "resolution": "CA26 170207",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs du greffe et de la gestion immobilière",
+   "objet": "APPROBATION DU PROCÈS-VERBAL",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_PV_ORDI_2026-10-06_18h30_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce approuve le procès-verbal de sa séance ordinaire du 8 septembre 2026, tenue à 18 h 30."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.243Z",
+   "jetons": {
+    "entree": 1659,
+    "sortie": 172
+   }
+  },
+  {
+   "id": "CA26 14 0235",
+   "numero": null,
+   "resolution": "CA26 14 0235",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Proclamation de la Journée internationale pour l'élimination de la pauvreté, le 17 octobre 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-10-06_18h30_FR.pdf#page=6",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension proclame le 17 octobre 2026 « Journée internationale pour l'élimination de la pauvreté ».",
+    "La résolution rappelle que l'ONU a désigné cette journée en 1992 et qu'elle est soulignée par des milliers de villes et villages dans le monde.",
+    "Elle note aussi que le quartier Saint-Michel souligne cette journée depuis 1997.",
+    "Il s'agit d'une proclamation symbolique : aucune dépense ni obligation n'est prévue dans le texte."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.243Z",
+   "jetons": {
+    "entree": 1828,
+    "sortie": 292
+   }
+  },
+  {
+   "id": "CA26 210188",
+   "numero": null,
+   "resolution": "CA26 210188",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Approbation du procès-verbal de la séance extraordinaire du conseil d'arrondissement tenue le 22 septembre 2026, à 16 h 30",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-10-06_19h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement approuve le procès-verbal de sa séance extraordinaire du 22 septembre 2026, tenue à 16 h 30, dont une copie avait été remise d'avance aux élus."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.244Z",
+   "jetons": {
+    "entree": 1729,
+    "sortie": 166
+   }
+  },
+  {
+   "id": "CA26 14 0237",
+   "numero": null,
+   "resolution": "CA26 14 0237",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs et du greffe",
+   "objet": "Proclamation de la Semaine québécoise de réduction des déchets, du 19 au 25 octobre 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-10-06_18h30_FR.pdf#page=7",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension proclame la Semaine québécoise de réduction des déchets du 19 au 25 octobre 2026.",
+    "L'arrondissement s'engage à promouvoir la réduction des matières résiduelles pendant cette semaine.",
+    "Les motifs invoqués : 13 millions de tonnes de déchets produites chaque année au Québec et les effets sur la santé, le milieu naturel, la salubrité publique et la qualité de vie.",
+    "La résolution rappelle que la Ville s'est dotée d'un Plan métropolitain de gestion des matières résiduelles 2024-2030.",
+    "La Semaine, créée par le Réseau des ressourceries du Québec au début des années 2000, met de l'avant l'approche des 3RV (réduction, réemploi, recyclage, valorisation/compostage)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.244Z",
+   "jetons": {
+    "entree": 2061,
+    "sortie": 390
+   }
+  },
+  {
+   "id": "1266996011",
+   "numero": "1266996011",
+   "resolution": "CA26 14 0252",
+   "date": "2026-10-06",
+   "unite": "Direction du développement du territoire",
+   "objet": "Adopter le premier projet de résolution PP26-14005 à l'effet d'autoriser la construction d'un centre communautaire de 3 étages sur le site de l'aréna Howie-Morenz (8650, avenue Querbes - lot 2 245 347) ainsi que le lotissement de la propriété en vertu du Règlement sur les PPCMOI de l'arrondissement (RCA04-14003).",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=291",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension autorise la construction d'un centre communautaire de 3 étages sur le terrain de l'aréna Howie-Morenz, au 8650, avenue Querbes, et le lotissement de la propriété.",
+    "Le bâtiment regroupera des organismes communautaires de Parc-Extension : bureaux, salles polyvalentes, gymnase au sous-sol, cuisine collective et une cafétéria communautaire donnant sur le parc Howard.",
+    "Un restaurant communautaire y sera autorisé comme usage complémentaire : ouvert 7 jours sur 7, de 50 à 150 repas le midi à prix modique.",
+    "L'autorisation passe outre plusieurs normes du zonage (hauteur, taux d'implantation, usages, marges, ouvertures, stationnement pour vélos, aires de chargement).",
+    "Conditions imposées : hauteur maximale de 14 m, au moins 8 arbres plantés ou maintenus, 58 % du terrain non bâti verdi, 45 unités de stationnement pour vélos dont 20 à l'intérieur.",
+    "Le projet doit viser la certification Bâtiment Carbone Zéro V.4 ou aménager un toit vert couvrant au moins 20 % de la toiture.",
+    "Les travaux doivent commencer dans les 48 mois, sinon l'autorisation devient nulle. La construction entraînera l'abattage d'environ 21 des 42 arbres du secteur touché."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.244Z",
+   "jetons": {
+    "entree": 7550,
+    "sortie": 613
+   }
+  },
+  {
+   "id": "1265676006",
+   "numero": "1265676006",
+   "resolution": "CA26 210203",
+   "date": "2026-10-06",
+   "unite": "– 6 octobre 2026 - Adoption du premier projet de résolution;",
+   "objet": "Édicter les ordonnances relatives à divers événements publics. (1265676006)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-10-06_19h00_FR.pdf#page=64",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Verdun autorise la tenue d'une série d'événements publics sur son territoire, selon une liste de sites, dates et horaires annexée au dossier.",
+    "Pour permettre ces événements, l'arrondissement permet de déroger à ses règlements sur l'occupation du domaine public, la cuisine de rue, la circulation et le stationnement, la propreté, les nuisances et les parcs, ainsi que les tarifs 2026.",
+    "Les événements peuvent occuper en tout ou en partie une place ou un parc, fermer une ou plusieurs rues, ou les deux à la fois.",
+    "Les organisateurs doivent eux-mêmes obtenir toutes les autres autorisations nécessaires.",
+    "Les services fournis par la Ville sont facturés selon le Règlement sur les tarifs 2026, avec certaines gratuités selon les cas; les événements sont gratuits et ouverts à tous.",
+    "Parmi les activités mentionnées : une distribution de sapins écologiques de la compagnie Titi sapin et le forum citoyen le Grand Courant de Demain Verdun."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.244Z",
+   "jetons": {
+    "entree": 4862,
+    "sortie": 593
+   }
+  },
+  {
+   "id": "1263751025",
+   "numero": "1263751025",
+   "resolution": "CA26 170209",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et de la mobilité",
+   "objet": "ADOPTION - POLITIQUE LOCALE - CONTRIBUTIONS FINANCIÈRES AUX PROJETS DE LOGEMENTS SOCIAUX",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=33",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement Côte-des-Neiges–Notre-Dame-de-Grâce adopte une politique encadrant son aide financière aux projets de logements sociaux.",
+    "L'arrondissement remboursera 50 % des frais de permis de construction ou de transformation payés pour un projet de logements admissible.",
+    "Pour avoir droit au remboursement, le projet doit offrir des logements abordables ou destinés à des personnes à faible ou modeste revenu ou ayant des besoins spéciaux.",
+    "Le demandeur doit être un organisme à but non lucratif légalement constitué, et non un organisme public, parapublic ou paramunicipal, et respecter la Charte de la langue française.",
+    "Le projet ne doit pas avoir déjà reçu de contribution municipale, en argent ou en terrain, hormis celle de base prévue par les programmes de la Société d'habitation du Québec.",
+    "Les demandes liées à un projet de logement abordable ou social présentées par un OBNL ou une coopérative de logement admissible restent exemptées des tarifs locaux en urbanisme.",
+    "Cet ajustement de formulation sera intégré au règlement tarifaire local de 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.244Z",
+   "jetons": {
+    "entree": 4331,
+    "sortie": 493
+   }
+  },
+  {
+   "id": "1263751024",
+   "numero": "1263751024",
+   "resolution": "CA26 170220",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et de la mobilité",
+   "objet": "RENOUVELLEMENT DES MANDATS ET NOMINATION DES MEMBRES DU CCU",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=258",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce nomme et renouvelle des membres de son comité consultatif d'urbanisme (CCU), dont des mandats étaient échus.",
+    "Sonny Moroz devient président et membre du comité; Milany Thiagarajah devient présidente substitut et membre suppléante.",
+    "Le mandat d'Émilie Brière, présidente substitut et membre suppléante, est renouvelé.",
+    "Les trois mandats durent 14 mois, du 6 octobre 2026 au 8 décembre 2027.",
+    "Le CCU examine les demandes de dérogation mineure, de PIIA, d'usage conditionnel, de projets particuliers et de démolition, puis fait ses recommandations au conseil d'arrondissement.",
+    "Le document n'indique aucune dépense liée à ces nominations."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.244Z",
+   "jetons": {
+    "entree": 3847,
+    "sortie": 384
+   }
+  },
+  {
+   "id": "1267479008",
+   "numero": "1267479008",
+   "resolution": "CA26 170221",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs du greffe et de la gestion immobilière",
+   "objet": "DÉPÔT - RAPPORTS DÉCISIONNELS - AOÛT 2026 Madame la mairesse Stephanie Valenzuela dépose les rapports faisant état de décisions prises par tout le personnel, dans l'exercice des pouvoirs qui leur sont délégués en vertu du Règlement intérieur du conseil d'arrondissement sur la délégation de pouvoirs aux fonctionnaires et employés (RCA04 17044), ainsi que les rapports de toutes les dépenses du mois d’août 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=262",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce prend acte du dépôt des rapports de décisions prises par le personnel en vertu des pouvoirs qui leur sont délégués, et des rapports de dépenses du mois d'août 2026.",
+    "Le dépôt inclut quatre documents : les décisions en ressources humaines, la liste des bons de commande approuvés, les factures payées sans bon de commande et le rapport des achats par carte de crédit."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.244Z",
+   "jetons": {
+    "entree": 8707,
+    "sortie": 266
+   }
+  },
+  {
+   "id": "1269574003",
+   "numero": "1269574003",
+   "resolution": "CA26 14 0248",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs et du greffe",
+   "objet": "Avis de motion et dépôt du projet de Règlement RCA24-14006-1 intitulé « Règlement modifiant le Règlement autorisant un emprunt de 7 723 000 $ pour financer la réalisation des travaux d'aménagement et de réaménagement de parcs » afin d'augmenter l'emprunt de 9 440 000 $ pour un total de 17 163 000 $. AVIS DE MOTION ET DÉPÔT DU PROJET DE RÈGLEMENT Avis de motion est donné par le maire de l’arrondissement, Jean François Lalonde et dépôt du projet de règlement pour adoption, à une séance subséquente du conseil d’arrondissement, du Règlement RCA24- 14006-1 intitulé « Règlement autorisant un emprunt de 7 723 000 $ pour financer la réalisation des travaux d'aménagement et de réaménagement de parcs",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=143",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension veut ajouter 9 440 000 $ à un règlement d'emprunt existant de 7 723 000 $ pour les parcs, ce qui porterait le total à 17 163 000 $.",
+    "L'argent servirait aux travaux d'aménagement et de réaménagement des parcs de l'arrondissement : drainage, plantation, mise aux normes, éclairage, remplacement et ajout d'équipements.",
+    "L'emprunt couvrirait aussi les honoraires professionnels, les études, la conception, la surveillance des travaux et les dépenses imprévues.",
+    "Le financement se répartit sur trois ans : 6 607 000 $ en 2027, 1 250 000 $ en 2028 et 1 583 000 $ en 2029.",
+    "À cette séance, le conseil reçoit seulement l'avis de motion et le dépôt du projet de règlement; l'adoption est prévue en novembre 2026.",
+    "Le règlement devra ensuite être approuvé par le ministère des Affaires municipales et de l'Habitation avant les appels d'offres et l'octroi de contrats."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "9 440 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.244Z",
+   "jetons": {
+    "entree": 5095,
+    "sortie": 488
+   }
+  },
+  {
+   "id": "1269980002",
+   "numero": "1269980002",
+   "resolution": "CA26 170219",
+   "date": "2026-10-06",
+   "unite": "Direction des travaux publics",
+   "objet": "ORDONNANCE - GRAFFITI - 5414, AVENUE GATINEAU",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=244",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce autorise la création d'une murale sur la façade est du bâtiment situé au 5414, avenue Gatineau.",
+    "La murale rend hommage au pilote automobile brésilien Ayrton Senna et sera peinte par l'artiste Pierre Andonian.",
+    "Le projet vient du commerçant Restaurant-bar Boteco inc.; l'immeuble appartient à Immeubles Wil-Low inc., qui a donné son autorisation.",
+    "L'autorisation est conditionnelle au retrait des logos publicitaires du projet.",
+    "La division Culture recommandait de refuser l'œuvre telle que présentée, parce qu'elle met en évidence des marques et identités commerciales reconnaissables dans l'espace public.",
+    "La murale doit être réalisée en octobre 2026.",
+    "Aucun argent public n'est engagé : le projet est une initiative privée."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.244Z",
+   "jetons": {
+    "entree": 6065,
+    "sortie": 419
+   }
+  },
+  {
+   "id": "CA26 29 0217",
+   "numero": "1260354006",
+   "resolution": "CA26 29 0217",
+   "date": "2026-10-06",
+   "unite": "Direction des relations avec les citoyens_services administratifs et greffe",
+   "objet": "AFFECTATION DU SURPLUS – RÉSERVE NEIGE – SEL DE DÉGLAÇAGE",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement pige 226 703,85 $ (taxes incluses) dans son surplus, dans la réserve neige, pour acheter du sel de déglaçage supplémentaire en 2026.",
+    "Cette somme couvre une partie de la dépense totale de 704 579,59 $ pour le sel de déglaçage en 2026; le reste vient du budget de fonctionnement.",
+    "L'hiver 2026 a fait consommer plus de sel que prévu au budget initial.",
+    "La moyenne de consommation des cinq dernières années pour novembre et décembre justifie des achats additionnels.",
+    "L'objectif invoqué : assurer la sécurité des usagers et maintenir les opérations de déneigement et de déglaçage.",
+    "Décision prise à la séance ordinaire du conseil d'arrondissement du mardi 6 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "226 703,85 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.244Z",
+   "jetons": {
+    "entree": 2072,
+    "sortie": 385
+   }
+  },
+  {
+   "id": "1269774006",
+   "numero": "1269774006",
+   "resolution": "CA26 210196",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Autoriser le paiement à 6358098 Canada inc. (Golf Exécutif Montréal) de la somme de 270 979,86 $ représentant le montant de la condamnation de la Ville incluant le capital et les intérêts légaux depuis le 18 mars 2026 jusqu'au 16 octobre 2026 suivant la sentence arbitrale rendue le 2 juin 2026. (1269774006)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-10-06_19h00_FR.pdf#page=20",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Verdun versera 270 979,86 $ à 6358098 Canada inc. (Golf Exécutif Montréal), soit 263 332,40 $ plus les intérêts légaux de 5 % par année calculés du 18 mars 2026 au 16 octobre 2026.",
+    "Un arbitre a tranché le 2 juin 2026 : il rejette les prétentions de la Ville sur le fonds d'amélioration prévu au contrat d'emphytéose du terrain de golf de l'Île-des-Sœurs et ordonne le remboursement du solde de ce fonds avec intérêts.",
+    "La sentence est finale : aucun appel ni révision n'est possible, la Ville doit payer.",
+    "Si le paiement n'est pas fait le 16 octobre 2026, 36,07 $ d'intérêts s'ajoutent par jour à partir du 17 octobre 2026.",
+    "La dépense est assumée entièrement par l'arrondissement de Verdun.",
+    "En septembre 2024, l'arrondissement avait déjà payé 318 770,49 $ au même golf à la suite d'une autre sentence arbitrale, en plus de radier 209 787,07 $ de factures."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "270 979,86 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.244Z",
+   "jetons": {
+    "entree": 6097,
+    "sortie": 507
+   }
+  },
+  {
+   "id": "CA26 29 0213",
+   "numero": "1262155021",
+   "resolution": "CA26 29 0213",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "CONTRIBUTION FINANCIÈRE – PME MTL L’OUEST-DE-L’ÎLE Le conseiller Chahi (Sharkie) Tarakjian déclare avoir un intérêt pécuniaire particulier dans ce dossier puisqu’il a des contrats avec l'organisme mentionné dans la résolution. Il s'abstient de prendre part aux délibérations et de voter.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "La Ville verse 14 972 $ à l'organisme PME MTL Ouest-de-l'Île pour l'année 2026.",
+    "La dépense est imputée selon les informations financières du sommaire décisionnel.",
+    "Le conseiller Chahi (Sharkie) Tarakjian a déclaré un intérêt pécuniaire parce qu'il a des contrats avec cet organisme; il n'a ni participé aux délibérations ni voté."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "14 972 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.244Z",
+   "jetons": {
+    "entree": 1924,
+    "sortie": 247
+   }
+  },
+  {
+   "id": "1264539005",
+   "numero": "1264539005",
+   "resolution": "CA26 14 0242",
+   "date": "2026-10-06",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Autoriser le versement d'une contribution financière totale de 3 250 $ à quatre (4) organismes de l'Arrondissement, à même le budget discrétionnaire du conseil d'arrondissement, pour l'année financière 2026, comme suit : 1 250 $ à Festival des arts de ruelle; 1 200 $ à Maison d'Haïti; 500 $ à Coalition des amis du parc Jarry; 300 $ à À portée de mains, le tout, pour diverses activités.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=68",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement Villeray–Saint-Michel–Parc-Extension verse 3 250 $ à quatre organismes pour l'année financière 2026, à même le budget discrétionnaire du conseil d'arrondissement.",
+    "Festival des arts de ruelle reçoit 1 250 $ pour la 10e édition de son festival.",
+    "Maison d'Haïti reçoit 1 200 $ pour la 1re édition d'un forum sur les violences faites aux femmes.",
+    "Coalition des amis du parc Jarry reçoit 500 $ pour une fête, dans le district de Parc-Extension.",
+    "À portée de mains reçoit 300 $ pour la 7e édition du Festival des saveurs interculturelles de Saint-Michel.",
+    "Les sommes proviennent du fonds du maire et des enveloppes des districts de François-Perrault, Parc-Extension, Saint-Michel et Villeray.",
+    "Le service des finances confirme que les crédits sont disponibles au budget discrétionnaire 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 250 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.244Z",
+   "jetons": {
+    "entree": 5864,
+    "sortie": 438
+   }
+  },
+  {
+   "id": "CA26 29 0212",
+   "numero": "1260627001",
+   "resolution": "CA26 29 0212",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "DON DE DOCUMENTS PÉRIMÉS, ABÎMÉS OU SOUS-UTILISÉS – CIUSS DE L’OUEST DE L’ÎLE ET LES AMIS DE LA BIBLIOTHÈQUE DE MONTRÉAL",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "La Ville donne 929 documents retirés des collections de bibliothèque : livres, périodiques pour adultes et jeunes, et documents audiovisuels.",
+    "Le Centre intégré universitaire de santé et de services sociaux de l'Ouest-de-l'Île-de-Montréal reçoit 210 documents.",
+    "L'organisme Les Amis de la Bibliothèque de Montréal reçoit 719 documents.",
+    "Les documents donnés sont périmés, abîmés ou sous-utilisés.",
+    "Aucune somme d'argent n'est mentionnée dans la décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 1893,
+    "sortie": 291
+   }
+  },
+  {
+   "id": "1263751023",
+   "numero": "1263751023",
+   "resolution": "CA26 170217",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et de la mobilité",
+   "objet": "AVIS DE MOTION ET ADOPTION DU PREMIER PROJET DE RÈGLEMENT RCA26 17430 Madame la mairesse Stephanie Valenzuela donne un avis de motion annonçant qu’à la prochaine séance ou qu’à toute séance subséquente, il sera adopté un règlement modifiant le Règlement régissant la démolition des immeubles (RCA02 17009) afin d’assurer la concordance au Plan d’urbanisme et de mobilité 2050 de la Ville de Montréal (24-017).",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=173",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce amorce la modification de son règlement sur la démolition d'immeubles pour l'arrimer au Plan d'urbanisme et de mobilité 2050.",
+    "Avant de démolir un bâtiment patrimonial, il faudra fournir une évaluation patrimoniale et démontrer les solutions de rechange pour le conserver ou l'intégrer au nouveau projet.",
+    "Les projets de logement social ou abordable verront leur procédure simplifiée : certains seront exemptés du passage au comité de démolition.",
+    "Le règlement favorisera la déconstruction et la réutilisation des matériaux pour les bâtiments patrimoniaux et ceux à usage collectif, institutionnel ou industriel.",
+    "Une étude du potentiel archéologique sera exigée pour les démolitions dans les secteurs d'intérêt archéologique et les ensembles patrimoniaux institutionnels.",
+    "Étapes prévues : avis de motion et premier projet le 6 octobre 2026, consultation publique le 21 octobre 2026, adoption le 2 novembre 2026.",
+    "La ministre des Affaires municipales a accordé à l'arrondissement jusqu'au 16 décembre 2026 pour adopter ses règlements de concordance."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 7886,
+    "sortie": 545
+   }
+  },
+  {
+   "id": "CA26 14 0236",
+   "numero": null,
+   "resolution": "CA26 14 0236",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs et du greffe",
+   "objet": "Proclamation de la Semaine des bibliothèques publiques, du 17 au 24 octobre 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-10-06_18h30_FR.pdf#page=7",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension déclare la semaine du 17 au 24 octobre 2026 « Semaine des bibliothèques publiques ».",
+    "La proclamation s'inscrit dans une démarche où les bibliothèques publiques du Québec s'unissent pour faire connaître leurs services.",
+    "Les motifs invoqués rappellent les rôles de la bibliothèque publique : informer, éduquer, donner accès à la culture et à la détente.",
+    "Le texte ne prévoit aucune dépense ni aucune activité particulière."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 1948,
+    "sortie": 405
+   }
+  },
+  {
+   "id": "CA26 21 0189",
+   "numero": null,
+   "resolution": "CA26 21 0189",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Déclaration pour souligner la Journée internationale des personnes aînées er",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-10-06_19h00_FR.pdf#page=3",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Verdun adopte une déclaration pour souligner la Journée internationale des personnes aînées, soulignée le 1er octobre.",
+    "Verdun s'engage à poursuivre, avec ses partenaires, le déploiement d'initiatives et d'aménagements accessibles pour favoriser la participation sociale, l'autonomie et la santé des personnes aînées.",
+    "L'arrondissement continuera de soutenir les ateliers de médiation culturelle destinés aux aînés au Quai 5160 – Maison de la culture de Verdun, notamment ceux portant sur leurs souvenirs et l'histoire locale.",
+    "Une copie de la résolution sera envoyée à Action Prévention Verdun, au Regroupement des organismes pour aînés et aînées du sud-ouest de Montréal, à Bougez et Vivre, au centre communautaire pour aînées du centre Marcel Giroux et à la Table de concertation des ressources pour aînés de Verdun.",
+    "Motifs cités : Montréal est reconnue Municipalité amie des aînés depuis 2011, les 65 ans et plus forment 17,7 % de la population verdunoise selon le recensement de 2021, et Verdun a adopté en 2023 son deuxième Plan d'action en accessibilité universelle."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 2418,
+    "sortie": 536
+   }
+  },
+  {
+   "id": "CA26 29 0222",
+   "numero": null,
+   "resolution": "CA26 29 0222",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "Levée de la présente séance extraordinaire Adjournment of the present special sitting Système de gestion des décisions des instances SOMMAIRE DÉCISIONNEL IDENTIFICATION Dossier # :1264902002 Unité administrative Arrondissement Pierrefonds-Roxboro , Direction des relations responsable : avec les citoyens_services administratifs et greffe , Division des ressources financières_matérielles et informationnelles Niveau décisionnel Conseil d'arrondissement proposé : Projet : - Objet : Adoption du budget de fonctionnement 2027 de l'arrondissement de Pierrefonds-Roxboro. CONTENU CONTEXTE Approuver l'enveloppe budgétaire, au montant net de 32 685 100 $, qui a été remise à l'arrondissement par le",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de Pierrefonds-Roxboro met fin à la séance.",
+    "Le document joint porte sur l'adoption du budget de fonctionnement 2027 de l'arrondissement.",
+    "L'enveloppe budgétaire remise à l'arrondissement s'élève à 32 685 100 $ net.",
+    "Le texte s'arrête en cours de phrase : aucun autre détail sur le budget n'est disponible."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "32 685 100 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 2124,
+    "sortie": 249
+   }
+  },
+  {
+   "id": "CA26 210191",
+   "numero": null,
+   "resolution": "CA26 210191",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "e Déclaration à l'occasion du 60 anniversaire du métro de Montréal et sur l'importance d'assurer sa modernisation, son expansion et sa pérennité e",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-10-06_19h00_FR.pdf#page=4",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Verdun souligne le 60e anniversaire du métro de Montréal, qui sera célébré le 14 octobre 2026.",
+    "La déclaration rappelle que 46 % des actifs du métro sont en mauvais ou très mauvais état et que près de 10 G$ d'investissements en maintien d'actifs pour les 10 prochaines années ne sont pas financés.",
+    "Verdun demande au gouvernement du Québec de poursuivre la planification du projet de transport collectif structurant du Grand Sud-Ouest et de le remettre parmi ses priorités d'investissement.",
+    "Verdun demande aussi à Québec de financer des ascenseurs dans le métro sur son territoire, notamment à la station de l'Église (3e phase d'accessibilité universelle).",
+    "Une copie de la déclaration sera envoyée à la STM, à l'ARTM, aux députés provinciaux concernés et au ministère des Transports et de la Mobilité durable.",
+    "Le document rappelle que le métro compte 68 stations sur quatre lignes, plus de 1,3 million de déplacements par jour et plus de 11 milliards de déplacements depuis son ouverture."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 2742,
+    "sortie": 493
+   }
+  },
+  {
+   "id": "1266880004",
+   "numero": "1266880004",
+   "resolution": "CA26 170215",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et de la mobilité",
+   "objet": "AUTORISATION DU DÉPÔT DE TROIS DEMANDES DE SUBVENTION - PROGRAMME D'AIDE À LA VOIRIE LOCALE",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=143",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement Côte-des-Neiges–Notre-Dame-de-Grâce dépose trois demandes de subvention au Programme d'aide à la voirie locale du ministère des Transports et de la Mobilité durable.",
+    "Les trois chantiers visent l'avenue Draper (entre Côte-Saint-Luc et Somerled), l'avenue Coolbrook (entre Snowdon et Côte-Saint-Luc) et l'avenue Linton (entre Lavoie et Légaré).",
+    "Les travaux prévoient la reconstruction de la chaussée, la réfection des trottoirs et du drainage, plus 2 avancées de trottoir sur Draper, un trottoir traversant sur Coolbrook et 2 îlots refuge sur Linton.",
+    "Les coûts estimés des trois projets s'élèvent à 2 040 000 $; l'arrondissement demande 1 326 000 $ à Québec (65 %) et assume le reste.",
+    "Le directeur de l'aménagement urbain et de la mobilité, Samir Admo, est autorisé à signer les engagements liés aux demandes.",
+    "Échéancier prévu : demande en octobre 2026, conception de janvier à mars 2027, appel d'offres en avril 2027 et travaux à l'été 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 326 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 5508,
+    "sortie": 538
+   }
+  },
+  {
+   "id": "1269223013",
+   "numero": "1269223013",
+   "resolution": "CA26 170211",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "ENTENTE DE COMMMANDITE - CAISSE DESJARDINS DES VERSANTS DU MONT- ROYAL - PARC NOTRE-DAME-DE-GRÂCE",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=70",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce accepte une commandite de 25 000 $ de la Caisse Desjardins des versants du mont Royal.",
+    "L'argent finance l'offre alimentaire, le café-terrasse et les animations au parc Notre-Dame-de-Grâce, du 6 juillet au 19 octobre 2026, dans le cadre du projet Rendez-vous NDG.",
+    "L'organisme Rendez-vous NDG, mandaté en avril 2026 pour chercher des commandites, garde 15 % en frais de gestion (3 750 $) et peut conserver jusqu'à 20 000 $ par année.",
+    "Sur l'excédent de 1 250 $, l'organisme remet 35 % à l'arrondissement, soit 437,50 $.",
+    "Les sommes non remises à l'arrondissement doivent être réinvesties dans le projet.",
+    "La décision modifie aussi l'annexe 3 du contrat de recherche de commandites conclu avec Rendez-vous NDG.",
+    "Le commanditaire sera reconnu dans les outils promotionnels et plateformes du projet, selon l'entente."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "25 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 7698,
+    "sortie": 499
+   }
+  },
+  {
+   "id": "CA26 210190",
+   "numero": null,
+   "resolution": "CA26 210190",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Déclaration pour souligner le Mois du patrimoine latino-américain",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-10-06_19h00_FR.pdf#page=3",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de Verdun souligne le Mois de l'héritage latino-américain, lancé par la Ville de Montréal en octobre 2019.",
+    "Il s'engage à continuer de faire la promotion des différentes cultures de Verdun, dont la culture latino-américaine, pour favoriser l'inclusion et lutter contre les discriminations.",
+    "Une copie de la résolution sera envoyée à la Maison d'accueil des nouveaux arrivants (MANA) et au Centre d'Aide aux Familles Immigrantes (Casa CAFI).",
+    "Le texte rappelle qu'au recensement de 2021, plus de 3 425 résidentes et résidents de Verdun s'identifiaient comme Latino-Américains, soit près de 5 % de la population.",
+    "Il note aussi que l'espagnol est la première langue non officielle la plus parlée dans l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 2213,
+    "sortie": 497
+   }
+  },
+  {
+   "id": "1264952002",
+   "numero": "1264952002",
+   "resolution": "CA26 14 0239",
+   "date": "2026-10-06",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Approuver le projet d'Addenda à la convention afin d'accorder une contribution financière additionnelle de 20 340 $ à Projet Ado Communautaire en Travail de rue, pour soutenir l'intensification des interventions de travail de rue jusqu'au 30 septembre 2026 dans le cadre de la Convention d'aide financière provenant du ministère de l'Emploi et de la Solidarité sociale - Alliance pour la solidarité et la gestion du Fonds québécois d'initiatives sociales (MESS-Ville 2024-2029).",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=31",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension verse 20 340 $ de plus à l'organisme PACT de rue (Projet Ado Communautaire en Travail de rue).",
+    "L'argent paie des heures de travail de rue supplémentaires au parc Azellus-Denis et dans les environs, dans Villeray, jusqu'au 30 septembre 2026.",
+    "L'arrondissement avait demandé à l'organisme d'intensifier sa présence à l'été 2026 face à l'intensification des enjeux dans ce micro-secteur; l'organisme a avancé les fonds.",
+    "Les intervenants offrent du soutien aux personnes en situation d'itinérance ou de vulnérabilité : aide alimentaire, hébergement, santé, services sociaux, médiation.",
+    "La somme s'ajoute à la contribution de 343 197 $ accordée en mai 2025 pour le projet « Travail de rue dans Villeray et Saint-Michel » (2025-2029).",
+    "La dépense est assumée par l'agglomération et financée par une entente avec le ministère de l'Emploi et de la Solidarité sociale; aucun impact sur le cadre financier de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "20 340 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 7641,
+    "sortie": 509
+   }
+  },
+  {
+   "id": "1269574004",
+   "numero": "1269574004",
+   "resolution": "CA26 14 0247",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs et du greffe",
+   "objet": "Avis de motion et dépôt du projet de Règlement RCA25-14010-1 intitulé « Règlement modifiant le Règlement autorisant un emprunt de 6 188 000 $ pour financer la réalisation du programme de la construction de la nouvelle bibliothèque Caroline-Dawson » afin d'augmenter l'emprunt de 2 983 000 $ pour un total de 9 171 000 $. AVIS DE MOTION ET DÉPÔT DU PROJET DE RÈGLEMENT Avis de motion est donné par le maire de l’arrondissement, Jean François Lalonde et dépôt du projet de règlement pour adoption, à une séance subséquente du conseil d’arrondissement, du Règlement RCA25-14010-1 intitulé « Règlement modifiant le Règlement autorisant un emprunt de 6 188 000 $ pour financer la réalisation du programme",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=137",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension veut augmenter de 2 983 000 $ son emprunt pour la nouvelle bibliothèque Caroline-Dawson, portant le total à 9 171 000 $.",
+    "L'argent supplémentaire servira à construire un lien entre la nouvelle bibliothèque et le bâtiment Le Prévost, et à réaménager le parc Le Prévost.",
+    "L'emprunt additionnel serait étalé ainsi : 158 000 $ en 2027, 691 000 $ en 2028 et 2 134 000 $ en 2029.",
+    "À cette séance, le conseil reçoit seulement l'avis de motion et le dépôt du projet de règlement; l'adoption est prévue en novembre 2026.",
+    "Avant son entrée en vigueur, le règlement devra passer par un registre des personnes habiles à voter et être approuvé par le ministère des Affaires municipales et de l'Habitation.",
+    "Les appels d'offres et l'octroi des contrats viendront après l'entrée en vigueur du règlement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 983 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 5103,
+    "sortie": 471
+   }
+  },
+  {
+   "id": "CA26 170206",
+   "numero": null,
+   "resolution": "CA26 170206",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs du greffe et de la gestion immobilière",
+   "objet": "ADOPTION DE L'ORDRE DU JOUR",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_PV_ORDI_2026-10-06_18h30_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce adopte l'ordre du jour de sa séance ordinaire du 6 octobre 2026, à 18 h 30. Il s'agit d'une formalité d'ouverture de séance, sans décision de fond."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 1660,
+    "sortie": 200
+   }
+  },
+  {
+   "id": "1260130021",
+   "numero": "1260130021",
+   "resolution": "CA26 210195",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Dépôt des rapports budgétaires pour la période d'août 2026. (1260130021)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-10-06_19h00_FR.pdf#page=16",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Verdun prend acte du dépôt des rapports budgétaires du mois d'août 2026, à titre informatif seulement.",
+    "Ces rapports sont produits chaque mois par la Direction des services administratifs à partir du système SIMON.",
+    "Aucune dépense, aucun contrat ni aucune obligation nouvelle ne découle de ce dépôt."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 3114,
+    "sortie": 226
+   }
+  },
+  {
+   "id": "CA26 14 0238",
+   "numero": null,
+   "resolution": "CA26 14 0238",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs et du greffe",
+   "objet": "Proclamation du mois d'octobre 2026, mois du patrimoine hispanique",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-10-06_18h30_FR.pdf#page=8",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension proclame octobre 2026 « mois du patrimoine hispanique ».",
+    "Le texte rappelle que les Latino-Américains s'établissent dans la métropole depuis les années 1950, avec une première vague d'immigration dans les années 1970.",
+    "Selon la résolution, 16 % des Québécois d'origine latino-américaine vivent dans l'arrondissement, et la présence hispanique est deux fois plus forte dans le district de Saint-Michel.",
+    "La proclamation s'appuie sur des projets de loi fédéral et québécois (2017) désignant octobre comme mois du patrimoine hispanique.",
+    "Aucune dépense ni obligation n'est prévue dans le texte."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 2166,
+    "sortie": 354
+   }
+  },
+  {
+   "id": "1263091001",
+   "numero": "1263091001",
+   "resolution": "CA26 170210",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs du greffe et de la gestion immobilière",
+   "objet": "CONTRAT - ISI CONSTRUCTION INC. - RÉNOVATION DES LOCAUX AU CLOS DARLINGTON",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=38",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce confie à ISI Construction Inc. la rénovation des locaux du rez-de-chaussée du clos de voirie Darlington, pour 136 360,35 $ taxes incluses.",
+    "La dépense totale autorisée atteint 209 622,43 $ : le contrat, plus 27 272,07 $ de contingences et 45 990,00 $ d'incidences (dont l'achat de mobilier).",
+    "Les travaux prévoient sept postes de travail, un nouveau comptoir d'accueil accessible, un vestiaire avec casiers pleine hauteur et une aire de repas avec écran pour réunions virtuelles.",
+    "Les locaux servent à la cour de service et à la Division des parcs et espaces verts; l'arrondissement dit que les bureaux actuels ne répondent plus aux besoins.",
+    "Sept entreprises ont soumissionné; ISI Construction a déposé le plus bas prix, 17,75 % sous l'estimation de 160 562,58 $.",
+    "Le chantier doit commencer en janvier 2027 et se terminer en mai 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "136 360,35 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 7809,
+    "sortie": 495
+   }
+  },
+  {
+   "id": "1269855007",
+   "numero": "1269855007",
+   "resolution": "CA26 210201",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Demande d'approbation d'un plan d'implantation et d'intégration architecturale (PIIA) afin de permettre l'agrandissement ainsi que la modification de composantes architecturales en façade ère principale du bâtiment situé au 990, 1 Avenue (lot 1 184 742). (1269855007)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-10-06_19h00_FR.pdf#page=48",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Verdun approuve les plans d'agrandissement d'une maison unifamiliale au 990, 1re Avenue, un bâtiment d'un étage construit en 1940.",
+    "Le projet ajoute un deuxième étage après démolition d'une bonne partie du toit existant, remplace le garage, démolit l'annexe latérale droite et refait le revêtement de brique en façade.",
+    "Environ 40 % du volume d'origine de la maison serait conservé, et l'agrandissement est reculé par rapport à la façade (environ 10 pi 3/4 et 9 pi 3/4).",
+    "Le dossier est passé devant le conseil d'arrondissement parce que l'avis du comité consultatif d'urbanisme était favorable, mais pas unanime.",
+    "Les services municipaux posent des conditions : montrer le profil du toit d'origine sur la façade latérale droite, ajouter une fenêtre à l'étage à gauche, planter deux arbres à grand déploiement en cour avant, aménager un passage piéton et réduire l'allée pavée à la largeur du garage.",
+    "Autres conditions : harmoniser les gouttières en façade et installer un éclairage extérieur à l'entrée principale et à l'entrée latérale.",
+    "Les plans approuvés sont ceux de Maxime Riopel (Carta architectes inc.), estampillés le 22 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 7244,
+    "sortie": 567
+   }
+  },
+  {
+   "id": "CA26 14 0234",
+   "numero": null,
+   "resolution": "CA26 14 0234",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs et du greffe",
+   "objet": "er Proclamation de la Journée internationale des personnes aînées, le 1 octobre 2026 er",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-10-06_18h30_FR.pdf#page=6",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension proclame le 1er octobre 2026 Journée internationale des personnes aînées.",
+    "La proclamation reprend la journée désignée par l'Assemblée générale des Nations Unies depuis 1991.",
+    "Les motifs invoqués soulignent la contribution des personnes aînées au développement et le vieillissement de la population.",
+    "La résolution est symbolique : elle ne prévoit ni dépense ni nouvelle obligation."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 1901,
+    "sortie": 264
+   }
+  },
+  {
+   "id": "1266996012",
+   "numero": "1266996012",
+   "resolution": "CA26 14 0253",
+   "date": "2026-10-06",
+   "unite": "Direction du développement du territoire",
+   "objet": "Fermer et retirer du domaine public en tant que parc, à toutes fins que de droit, le lot 2 212 993 du cadastre du Québec, situé entre la rue Denis-Papin, le boulevard Robert, le boulevard Saint-Michel e et la 12 Avenue, dans l'arrondissement de Villeray–Saint-Michel–Parc-Extension.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=350",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension retire du domaine public, comme parc, le terrain situé entre la rue Denis-Papin, le boulevard Robert, le boulevard Saint-Michel et la 12e Avenue (lot 2 212 993).",
+    "Ce retrait est nécessaire pour permettre la vente éventuelle du terrain.",
+    "Le terrain était auparavant occupé par le jardin communautaire Le Michellois.",
+    "L'organisme Saint-Michel, quartier de l'innovation sociale y projette la construction d'un centre communautaire de trois étages, autorisée par le conseil d'arrondissement en septembre 2025.",
+    "En mars 2025, la Ville s'était engagée à céder ce terrain de 1 565,5 m² sans contrepartie financière à l'organisme, ce qui équivaut à une subvention d'au moins 2 190 000 $.",
+    "Le sommaire n'indique aucun impact financier pour cette décision-ci."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 4453,
+    "sortie": 436
+   }
+  },
+  {
+   "id": "CA26 29 0219",
+   "numero": "1263050014",
+   "resolution": "CA26 29 0219",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "DÉROGATION MINEURE – ÉTUDE N°3003721492 13 555, BOULEVARD DE PIERREFONDS LOT 5 871 464",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement autorise une dérogation mineure pour le bâtiment communautaire du 13 555, boulevard de Pierrefonds.",
+    "Un café pourra s'installer à l'intérieur de la bibliothèque située à cette adresse.",
+    "Le café est dispensé d'aménager un local intérieur réfrigéré pour entreposer les déchets, normalement exigé par le règlement de zonage.",
+    "La décision suit une recommandation du comité consultatif d'urbanisme du 15 septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.245Z",
+   "jetons": {
+    "entree": 2007,
+    "sortie": 272
+   }
+  },
+  {
+   "id": "CA26 29 0211",
+   "numero": "1262155022",
+   "resolution": "CA26 29 0211",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "PROCLAMATION – VIOLENCE CONJUGALE",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de Pierrefonds-Roxboro se proclame « arrondissement allié contre la violence conjugale ».",
+    "La proclamation s'inscrit dans les 12 jours d'action pour l'élimination de la violence envers les femmes, du 25 novembre au 6 décembre 2026.",
+    "L'arrondissement dit appuyer les efforts du Regroupement des maisons pour femmes victimes de violence conjugale et de ses maisons membres pour sensibiliser la population.",
+    "Les motifs cités rappellent que les services de police du Québec ont enregistré 18 746 cas d'infractions contre la personne en contexte conjugal en 2014.",
+    "Le texte ne prévoit aucune dépense ni obligation nouvelle pour les citoyens."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 2177,
+    "sortie": 359
+   }
+  },
+  {
+   "id": "1269060003",
+   "numero": "1269060003",
+   "resolution": "CA26 170216",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs du greffe et de la gestion immobilière",
+   "objet": "DÉPÔT - ÉVOLUTION DES DÉPENSES ET DES REVENUS AU 31 AOÛT 2026 Madame la mairesse Stephanie Valenzuela dépose l'évolution des dépenses et des revenus pour l'année 2026 en date du 31 août 2026 et l'état comparatif des revenus et des dépenses réelles au 31 août 2026 par rapport au 31 août 2025, pour l'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=149",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce dépose son suivi budgétaire au 31 août 2026, avec comparaison avec la même date en 2025.",
+    "L'arrondissement prévoit terminer 2026 avec un surplus de 591 300 $.",
+    "Il anticipe un déficit d'opération de 132 900 $ : un manque de 1 168 800 $ en rémunération, compensé en partie par 1 035 900 $ d'économies ailleurs.",
+    "Les revenus devraient manquer de 849 900 $, surtout à cause du ralentissement des permis d'occupation temporaire du domaine public (moins de grands chantiers qu'en 2025, comme le projet Carbonleo).",
+    "Des ajustements de 1 574 100 $ sont attendus, dont 977 200 $ liés aux permis de construction et de modification (4,5 M$ de permis prévus en 2026).",
+    "L'arrondissement compte se faire rembourser 595 200 $ pour la gestion des matières résiduelles et 131 100 $ pour la gestion de l'eau; le Service de l'eau lui a déjà viré 401 000 $.",
+    "Un ajustement défavorable de 276 100 $ est prévu pour l'abolition de la mesure transitoire sur les régimes de retraite."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "591 300 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 8088,
+    "sortie": 548
+   }
+  },
+  {
+   "id": "1263751022",
+   "numero": "1263751022",
+   "resolution": "CA26 170212",
+   "date": "2026-10-06",
+   "unite": "Direction de l'aménagement urbain et de la mobilité",
+   "objet": "CONTRIBUTION FINANCIÈRE - 2 OBNL - TRAVAUX DE TRANSFORMATION",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=104",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce verse 25 714,63 $ à deux OBNL : 7 505,00 $ à la Fondation Maison Elizabeth et 18 209,63 $ à la Maison Elizabeth.",
+    "Cette somme rembourse 50 % des frais d'étude de deux permis de transformation (frais de 15 009,99 $ et de 36 419,26 $).",
+    "Le permis émis le 25 septembre 2025 permet d'aménager un centre de services, d'aide et d'hébergement au rez-de-chaussée et au sous-sol, et de subdiviser le logement du 2e étage en deux logements.",
+    "Le permis émis le 5 mai 2026 permet de réaménager un centre de services, d'aide et d'hébergement et d'aménager une maison de 9 chambres au 2e étage.",
+    "L'arrondissement justifie l'aide par son engagement à faciliter la réalisation et le financement des projets de logements sociaux sur son territoire.",
+    "La dépense est financée par le surplus libre de l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "25 714,63 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 7830,
+    "sortie": 471
+   }
+  },
+  {
+   "id": "CA26 210187",
+   "numero": null,
+   "resolution": "CA26 210187",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Approbation du procès-verbal de la séance ordinaire du conseil d'arrondissement tenue le er 1 septembre 2026, à 19 h",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-10-06_19h00_FR.pdf#page=2",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement approuve le procès-verbal de sa séance ordinaire du 1er septembre 2026, tenue à 19 h, dont une copie avait été remise d'avance aux membres du conseil."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 1725,
+    "sortie": 167
+   }
+  },
+  {
+   "id": "1267680001",
+   "numero": "1267680001",
+   "resolution": "CA26 210197",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Avis de motion et dépôt d'un projet de règlement - Règlement sur le zonage différencié. (1267680001) Avis de motion est donné par le conseiller Benoit Gratton de l'inscription pour adoption à une séance subséquente du conseil d'arrondissement du règlement intitulé « Règlement sur le zonage différencié », lequel est déposé avec le dossier décisionnel.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-10-06_19h00_FR.pdf#page=25",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Verdun dépose un projet de « Règlement sur le zonage différencié », qui touche l'ensemble de son territoire.",
+    "Un promoteur qui construit principalement des logements abordables ou sociaux pourrait obtenir une hausse de 0,05 du coefficient d'occupation du sol maximal, dans une zone où l'habitation est déjà permise de plein droit.",
+    "Le projet devra quand même respecter toutes les autres règles du Règlement de zonage (1700) et la réglementation municipale en vigueur.",
+    "Le règlement est transitoire : il sera abrogé quand le nouveau règlement d'urbanisme remplacera le Règlement de zonage (1700), prévu à l'hiver 2026-2027.",
+    "Étapes prévues : consultation publique le 19 octobre 2026, adoption finale au conseil du 3 novembre 2026, entrée en vigueur en novembre-décembre 2026.",
+    "Le projet n'est pas susceptible d'approbation référendaire.",
+    "L'arrondissement agit pour rendre sa réglementation conforme au Plan d'urbanisme et de mobilité 2050 adopté le 16 juin 2025."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 7569,
+    "sortie": 497
+   }
+  },
+  {
+   "id": "1265291003",
+   "numero": "1265291003",
+   "resolution": "CA26 210200",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Adoption d'un premier projet de résolution, en vertu du Règlement sur les projets particuliers de construction, de modification ou d'occupation d'un immeuble (RCA08 210003) (PPCMOI), afin de e permettre la division d'un logement situé au 2 étage du bâtiment sis au 5651, rue de Verdun en 2 logements de 2 chambres chacun. (1265291003)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-10-06_19h00_FR.pdf#page=42",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Verdun autorise la division d'un logement du 2e étage du 5651, rue de Verdun en deux logements de deux chambres chacun.",
+    "Le logement actuel fait environ 190 m² et serait vacant depuis plusieurs années; il deviendrait un logement de 96 m² et un autre de 70 m².",
+    "Les travaux se font à l'intérieur: le bâtiment n'est pas agrandi. Le rez-de-chaussée reste commercial.",
+    "La Ville déroge à l'article 36.3 du Règlement de zonage, qui interdit normalement de subdiviser un logement existant.",
+    "Les travaux devront commencer dans les 36 mois suivant l'entrée en vigueur de la résolution, sinon l'autorisation tombe.",
+    "Le comité consultatif d'urbanisme s'est prononcé favorablement à l'unanimité le 18 août 2026.",
+    "Étapes à venir: consultation publique, puis adoption de la résolution finale prévue au conseil du 3 novembre 2026. Le projet n'est pas soumis à l'approbation référendaire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 6246,
+    "sortie": 469
+   }
+  },
+  {
+   "id": "1263982007",
+   "numero": "1263982007",
+   "resolution": "CA26 170218",
+   "date": "2026-10-06",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "ORDONNANCES - OCCUPATION DU DOMAINE PUBLIC - ÉVÉNEMENTS",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=228",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce autorise l'occupation du domaine public pour les événements inscrits sur la liste du 6 octobre 2026, et ratifie après coup trois événements tenus en septembre et début octobre.",
+    "Les autorisations permettent, selon les cas, le bruit d'appareils sonores à l'extérieur, la vente d'articles promotionnels, d'aliments et de boissons (alcoolisées ou non), la consommation d'alcool et la fermeture de rues.",
+    "Le bruit extérieur est limité à 80 dBA, mesuré à 35 m des appareils sonores.",
+    "La procession religieuse de Notre-Dame et Saint-Gabriel est autorisée sur la voie publique (Saint-Jacques Ouest, avenue Belgrave, chemin Upper Lachine, avenue Girouard), le 4 octobre de 12 h 30 à 13 h 30.",
+    "L'arrondissement justifie cette autorisation religieuse par quatre critères : sécurité encadrée, durée de moins de deux heures, accès ouvert à tous, et circulation sur une seule voie hors des heures de pointe.",
+    "Chaque organisateur doit fournir son avenant d'assurance responsabilité civile et les autres documents requis au plus tard 72 heures avant l'événement.",
+    "Les coûts additionnels des événements sont payés par les promoteurs; le soutien des directions municipales vient des budgets de fonctionnement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 7482,
+    "sortie": 613
+   }
+  },
+  {
+   "id": "1264518009",
+   "numero": "1264518009",
+   "resolution": "CA26 14 0240",
+   "date": "2026-10-06",
+   "unite": "Bureau du directeur d'arrondissement",
+   "objet": "er Recevoir les rapports consolidés faisant état, pour la période du 1 août au 31 août 2026, de l'ensemble des décisions déléguées prises par l'Arrondissement, dans l'exercice de ses pouvoirs délégués, en vertu du Règlement RCA18-14009.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=45",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement Villeray–Saint-Michel–Parc-Extension dépose son rapport mensuel des décisions prises par ses fonctionnaires, du 1er au 31 août 2026.",
+    "Le conseil d'arrondissement ne fait que recevoir ce rapport : aucune nouvelle dépense ni nouvelle règle n'est adoptée.",
+    "Le rapport recense 43 décisions totalisant 237 446,98 $ pour le mois d'août 2026.",
+    "On y trouve notamment 2 contrats de travaux (163 080 $), 1 contrat de services professionnels (74 366,98 $) et 39 décisions touchant le personnel.",
+    "Le cumulatif avec juillet 2026 atteint 111 décisions et 490 103,10 $."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": "237 446,98 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 9012,
+    "sortie": 363
+   }
+  },
+  {
+   "id": "1269335011",
+   "numero": "1269335011",
+   "resolution": "CA26 14 0244",
+   "date": "2026-10-06",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "Édicter les ordonnances pour la programmation d'événements publics sur le territoire de l'arrondissement pour les mois d'octobre à décembre 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=112",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension autorise la tenue d'événements publics sur le domaine public d'octobre à décembre 2026, aux sites et horaires listés dans un tableau en pièce jointe.",
+    "Les organisateurs pourront diffuser du son à l'extérieur, jusqu'à 80 dBA mesurés à 35 m des appareils; les mégaphones restent interdits sauf pour la sécurité.",
+    "La vente d'articles promotionnels, de nourriture et de boissons alcoolisées ou non est permise, tout comme la consommation d'alcool sur les sites, dans des contenants en plastique seulement.",
+    "Des rues pourront être fermées pendant les événements; les promoteurs devront afficher les heures de fermeture 10 jours à l'avance et aviser les résidents.",
+    "L'affichage d'enseignes publicitaires est permis pendant ces événements.",
+    "Les événements sont gratuits et ouverts à tous; les coûts des services de la Ville sont absorbés par les budgets de fonctionnement existants.",
+    "D'autres dossiers pourront s'ajouter plus tard pour intégrer de nouveaux événements au calendrier 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 7578,
+    "sortie": 502
+   }
+  },
+  {
+   "id": "1265898002",
+   "numero": "1265898002",
+   "resolution": "CA26 14 0243",
+   "date": "2026-10-06",
+   "unite": "Direction du développement du territoire",
+   "objet": "Autoriser le dépôt d'une demande d'aide financière auprès du ministère des Transports et de la Mobilité durable du Québec (MTMD), dans le cadre du Programme d'aide aux infrastructures de transports actifs (Véloce III), pour la construction d'une bande cyclable à mi-hauteur et le réaménagement des trottoirs existants sur la rue de Louvain Est entre le parc Frédéric-Back et le boulevard Saint-Michel.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=74",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension demandera une aide financière au ministère des Transports et de la Mobilité durable du Québec, dans le cadre du programme Véloce III.",
+    "L'argent servirait au réaménagement de la rue De Louvain Est, entre le parc Frédéric-Back et le boulevard Saint-Michel : nouvelle bande cyclable à mi-hauteur et trottoirs élargis des deux côtés.",
+    "Les dépenses admissibles sont estimées à environ 580 000 $ pour l'aménagement cyclable et 1 070 000 $ pour les trottoirs, pour un financement possible d'un peu plus de 700 000 $ (le programme paie jusqu'à 50 %).",
+    "Les travaux de réaménagement de la rue ont commencé en mai 2026; un contrat de 8 199 514,82 $ a été octroyé à Groupe MPotvin en avril 2026, pour une dépense totale autorisée de 11 192 464,62 $.",
+    "Le projet prévoit aussi la plantation d'arbres, du mobilier urbain, des traverses marquées, des plaques podotactiles et des rampes aux intersections, ainsi que le redimensionnement d'une conduite d'égout.",
+    "Le directeur du développement du territoire, Jocelyn Jobidon, ou son représentant pourra signer la demande et les ententes avec le Ministère.",
+    "La demande doit être déposée en octobre 2026 et la réponse est attendue à l'automne 2026; les travaux subventionnés doivent être faits dans les 12 mois suivant la lettre d'octroi."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "un peu plus de 700 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 7592,
+    "sortie": 665
+   }
+  },
+  {
+   "id": "CA26 29 0220",
+   "numero": "1260207003",
+   "resolution": "CA26 29 0220",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "ANNULATION DES SOLDES RÉSIDUAIRES DES RÈGLEMENTS D’EMPRUNT",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro ferme 12 règlements d'emprunt (CA29 0034, 0037, 0053, 0064, 0066, 0067, 0072, 0073, 0074, 0080, 0101 et 0102).",
+    "Ces emprunts servaient à financer des travaux de réfection routière, du réaménagement de parcs et des rénovations de bâtiments administratifs, culturels et de loisirs.",
+    "Les travaux prévus ont été réalisés et une partie des emprunts a déjà été financée de façon permanente.",
+    "Il reste dans chaque règlement une somme autorisée mais jamais empruntée, qui ne peut pas servir à autre chose.",
+    "L'arrondissement abaisse les montants d'emprunt autorisés aux sommes réellement utilisées, selon l'annexe A du dossier.",
+    "Il demande au ministère des Affaires municipales et de l'Habitation d'effacer ces soldes de ses registres et lui transmet une copie de la résolution."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 2503,
+    "sortie": 439
+   }
+  },
+  {
+   "id": "1267397002",
+   "numero": "1267397002",
+   "resolution": "CA26 170214",
+   "date": "2026-10-06",
+   "unite": "Direction de la culture_des sports_des loisirs et du développement social",
+   "objet": "OFFRE DE SERVICE - ARRONDISSEMENT MERCIER-HOCHELAGA- MAISONNEUVE",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=138",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement Côte-des-Neiges–Notre-Dame-de-Grâce accepte les services de la Division des services techniques et du soutien logistique aux installations (DSTSLI), qui relève de l'arrondissement Mercier–Hochelaga-Maisonneuve, du 1er janvier 2027 au 31 décembre 2028.",
+    "Côte-des-Neiges–Notre-Dame-de-Grâce aura ainsi accès à plus de 20 000 pièces d'équipement, à un service de menuiserie, au transport de matériel et au prêt de surfaceuse à glace.",
+    "Les services couvrent aussi l'installation de scènes mobiles et d'équipement de piscine, la préparation des patinoires réfrigérées intérieures et extérieures, le soutien en aréna et l'entretien des terrains sportifs synthétiques.",
+    "Le document indique que l'arrondissement n'a pas l'expertise ni les ressources pour faire ces travaux lui-même, et que refuser l'offre l'obligerait à investir pour maintenir ces services à l'interne.",
+    "Les coûts sont répartis entre arrondissements selon le principe des charges interunités (CIU); la part de Côte-des-Neiges–Notre-Dame-de-Grâce figure dans un document joint au sommaire, non chiffrée dans le texte.",
+    "Une reddition de comptes sera faite chaque année."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 5372,
+    "sortie": 568
+   }
+  },
+  {
+   "id": "CA26 14 0233",
+   "numero": null,
+   "resolution": "CA26 14 0233",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs et du greffe",
+   "objet": "er Proclamation de la Journée internationale de la musique, le 1 octobre 2026 er",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-10-06_18h30_FR.pdf#page=5",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension proclame le 1er octobre 2026 Journée internationale de la musique sur son territoire.",
+    "La résolution rappelle que l'UNESCO souligne cette journée chaque 1er octobre, créée en 1975 par sir Yehudi Menuhin, alors président du Conseil international de la musique.",
+    "Les objectifs cités : promouvoir la musique auprès de toute la société, défendre les valeurs d'amitié et de paix de l'UNESCO et favoriser l'échange entre les approches esthétiques du monde.",
+    "L'arrondissement souligne la présence à Montréal de nombreux organismes qui rendent la musique accessible aux citoyennes et citoyens.",
+    "Aucune somme d'argent ni obligation nouvelle n'est associée à cette proclamation."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 1960,
+    "sortie": 384
+   }
+  },
+  {
+   "id": "1260130019",
+   "numero": "1260130019",
+   "resolution": "CA26 210193",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Dépôt de la liste des bons de commande approuvés, de la liste des factures non associées à un bon de commande, ainsi que la liste des transactions de la carte d'achat pour la période d'août 2026. (1260130019)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-10-06_19h00_FR.pdf#page=8",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de Verdun prend acte du dépôt des listes de dépenses d'août 2026 : bons de commande approuvés, factures sans bon de commande et transactions par carte d'achat.",
+    "Ce dépôt est un suivi régulier des achats faits par les fonctionnaires à qui le conseil a délégué des pouvoirs.",
+    "Aucune somme, aucun contrat ni aucune nouvelle obligation ne découlent de ce dossier."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 3383,
+    "sortie": 255
+   }
+  },
+  {
+   "id": "CA26 29 0216",
+   "numero": "1268388008",
+   "resolution": "CA26 29 0216",
+   "date": "2026-10-06",
+   "unite": "Direction des relations avec les citoyens_services administratifs et greffe",
+   "objet": "REDDITION DES COMPTES DES DEMANDES DE PAIEMENT ET ENGAGEMENTS",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement de Pierrefonds-Roxboro approuve la reddition de comptes financière de ses services (bons de commande, factures payées sans bon de commande, virements budgétaires et engagements).",
+    "Ces dépenses totalisent 202 033,28 $ pour la période du 1er au 28 août 2026.",
+    "S'ajoutent 81 724,88 $ d'achats par imputations directes pour le mois d'août 2026.",
+    "S'ajoutent aussi 17 101,93 $ d'achats faits par cartes de crédit, du 1er juin au 31 juillet 2026.",
+    "Il s'agit d'une approbation comptable de dépenses déjà engagées, sans nouveau projet annoncé."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "202 033,28 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 1863,
+    "sortie": 346
+   }
+  },
+  {
+   "id": "1269574007",
+   "numero": "1269574007",
+   "resolution": "CA26 14 0245",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs et du greffe",
+   "objet": "Avis de motion et dépôt du projet de Règlement RCA26-14003 intitulé « Règlement sur la taxe relative aux services (exercice financier 2027) ». AVIS DE MOTION ET DÉPÔT DU PROJET DE RÈGLEMENT Avis de motion est donné par le maire de l’arrondissement, Jean François Lalonde et dépôt du projet de règlement pour adoption, à une séance subséquente du conseil d’arrondissement, du Règlement RCA26-14003 intitulé « Règlement sur la taxe relative aux services (exercice financier 2027) » de l'arrondissement de Villeray–Saint-Michel–Parc-Extension.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=125",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension dépose un projet de règlement qui crée une taxe locale sur les services pour l'année 2027.",
+    "La taxe serait de 0,0588 $ par 100 $ d'évaluation, sur tous les immeubles imposables de l'arrondissement.",
+    "Elle rapporterait 13 833 900 $, pour compléter le financement du budget de dépenses de 73 316 700 $ prévu en 2027.",
+    "L'arrondissement dit que cet argent lui permet de maintenir le niveau et la qualité des services aux résidents.",
+    "À cette étape, le conseil donne seulement un avis de motion et dépose le projet; l'adoption est prévue en novembre 2026.",
+    "Si le règlement est adopté, la taxe s'appliquerait à partir du 1er janvier 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "13 833 900 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 4961,
+    "sortie": 391
+   }
+  },
+  {
+   "id": "1269574008",
+   "numero": "1269574008",
+   "resolution": "CA26 14 0246",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs et du greffe",
+   "objet": "Avis de motion et dépôt du projet de Règlement RCA24-14007-1 intitulé « Règlement modifiant le Règlement autorisant un emprunt de 17 801 000 $ pour financer la réalisation du programme de protection des bâtiments (RCA24-14007) » afin d'augmenter l'emprunt de 17 088 000 $ pour un total de 34 889 000 $. AVIS DE MOTION ET DÉPÔT DU PROJET DE RÈGLEMENT Avis de motion est donné par le maire de l’arrondissement, Jean François Lalonde et dépôt du projet de règlement pour adoption, à une séance subséquente du conseil d’arrondissement, du Règlement RCA24- 14007-1 intitulé « Règlement modifiant le Règlement autorisant un emprunt de 17 801 000 $ pour financer la réalisation du programme de protection",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=131",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension veut augmenter de 17 088 000 $ un emprunt déjà autorisé de 17 801 000 $, pour un total de 34 889 000 $.",
+    "L'argent servira aux travaux de protection des bâtiments de l'arrondissement : honoraires professionnels, rénovations et travaux de conformité.",
+    "Les dépenses sont prévues pour la période de 2027 à 2029, avec une répartition de l'emprunt sur 2026 (10 650 000 $), 2027 (3 257 000 $) et 2028 (3 181 000 $).",
+    "À cette séance, le conseil reçoit seulement l'avis de motion et le dépôt du projet de règlement; l'adoption est prévue en novembre 2026.",
+    "Avant d'entrer en vigueur, le règlement devra passer par un registre des personnes habiles à voter et être approuvé par le ministère des Affaires municipales et de l'Habitation.",
+    "Des appels d'offres et l'octroi de contrats suivront l'entrée en vigueur."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "17 088 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 4856,
+    "sortie": 470
+   }
+  },
+  {
+   "id": "CA26 29 0215",
+   "numero": "1267924001",
+   "resolution": "CA26 29 0215",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "CONTRAT 25-21202 PROLONGATION DU CONTRAT POUR LA GESTION DES PISCINES MUNICIPALES EXTÉRIEURES – CAMP SPORTMAX INC.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge d'une année le contrat de gestion des piscines municipales extérieures confié à Camp Sportmax inc.",
+    "Le contrat vise les piscines Valleycrest et Versailles, dans l'arrondissement de Pierrefonds-Roxboro.",
+    "La dépense totale s'élève à 270 827,99 $, taxes incluses.",
+    "Le montant sera ajusté selon l'Indice des prix à la consommation (IPC) au 1er janvier 2027.",
+    "La somme sera payée à même le budget de fonctionnement 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "270 827,99 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 1902,
+    "sortie": 289
+   }
+  },
+  {
+   "id": "1260130020",
+   "numero": "1260130020",
+   "resolution": "CA26 210194",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Dépôt du rapport des virements de crédits du budget de fonctionnement et du programme décennal d'immobilisations (PDI) pour la période d'août 2026. (1260130020)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-10-06_19h00_FR.pdf#page=12",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Verdun dépose au conseil, pour information seulement, la liste des virements de crédits d'août 2026 (budget de fonctionnement et programme décennal d'immobilisations).",
+    "Aucun montant n'est mentionné dans le document et aucune dépense n'est autorisée : il s'agit d'un suivi des modifications déjà faites par les gestionnaires au budget initial.",
+    "Les virements qui augmentent le budget initial (par exemple une affectation de surplus) font l'objet de dossiers distincts présentés séparément au conseil."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 3821,
+    "sortie": 283
+   }
+  },
+  {
+   "id": "1262959005",
+   "numero": "1262959005",
+   "resolution": "CA26 210202",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Édicter une ordonnance relative à la réalisation de deux murales sur le socle d'une partie de l'immeuble situé au 610, avenue Desmarchais. (1262959005)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_ODJP_ORDI_2026-10-06_19h00_FR.pdf#page=60",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Verdun autorise la réalisation de deux murales sur le socle du bâtiment du 610, avenue Desmarchais, de chaque côté de l'entrée marquée « boys », face à l'avenue.",
+    "La demande vient de la direction de l'école primaire Verdun Elementary School, qui veut colorer la cour des plus jeunes; la commission scolaire Lester-B.-Pearson, propriétaire, appuie le projet.",
+    "Condition imposée : l'encadrement de l'entrée et la frise du socle doivent rester intacts.",
+    "Une troisième murale était prévue sur la façade principale, rue de Verdun, mais elle a été retirée du projet : le bâtiment figure sur la liste des immeubles patrimoniaux exceptionnels du Plan d'urbanisme et de mobilité.",
+    "La muraliste Beverly Landry, qui a déjà peint dans d'autres écoles de la même commission scolaire, réalisera les murales sur le thème de la forêt tropicale.",
+    "Le règlement de l'arrondissement interdit les graffitis, mais permet les murales si le conseil d'arrondissement édicte une ordonnance, ce qu'il fait ici.",
+    "Aucun coût pour la Ville n'est indiqué au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.246Z",
+   "jetons": {
+    "entree": 4212,
+    "sortie": 529
+   }
+  },
+  {
+   "id": "1266290032",
+   "numero": "1266290032",
+   "resolution": "CA26 170213",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs du greffe et de la gestion immobilière",
+   "objet": "CONTRIBUTIONS FINANCIÈRES NON RÉCURRENTES - 6 ORGANISMES",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=125",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement Côte-des-Neiges–Notre-Dame-de-Grâce verse 4 100 $ en contributions financières uniques à 6 organismes, à même les budgets discrétionnaires des élus.",
+    "Logis action NDG reçoit 1 000 $ pour une campagne sur les augmentations de loyer : dépliants et ateliers dans plusieurs secteurs de NDG, pour les personnes âgées, immigrantes, à faible revenu et apprenants du français.",
+    "Jeunesse Loyola reçoit 1 000 $ pour son programme parascolaire, qui réunit une quarantaine d'enfants et de jeunes du quartier.",
+    "La FCVAM (Filipino Canadian Volleyball Association of Montreal) reçoit 1 000 $ pour sa ligue hivernale 2026 de 12 équipes, du 26 septembre au 19 décembre au Collège Jean-de-Brébeuf.",
+    "La CDC Côte-des-Neiges reçoit 500 $ pour sa Cérémonie de bienvenue aux nouveaux résidents, le samedi 3 octobre 2026 de 10 h à 15 h, au 6767, chemin de la Côte-des-Neiges.",
+    "La Maison des Jeunes CDN - Chalet Kent reçoit 400 $ pour l'événement 4TheHood, qui distribue gratuitement plus de 400 fournitures scolaires aux élèves du primaire et du secondaire.",
+    "L'Envol des femmes reçoit 200 $ pour une collecte d'habits de neige, de bottes et de vêtements d'hiver destinés aux familles du quartier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "4 100 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.247Z",
+   "jetons": {
+    "entree": 7695,
+    "sortie": 664
+   }
+  },
+  {
+   "id": "1263356006",
+   "numero": "1263356006",
+   "resolution": "CA26 14 0241",
+   "date": "2026-10-06",
+   "unite": "Direction des services administratifs et du greffe",
+   "objet": "Adopter le calendrier des séances ordinaires du conseil d'arrondissement pour l'année 2027",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_ODJ_LPP_ORDI_2026-10-06_18h30_FR.pdf#page=62",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de Villeray–Saint-Michel–Parc-Extension fixe le calendrier de ses séances publiques du conseil pour 2027.",
+    "Les séances ont lieu le premier mardi du mois à 18 h 30, à la mairie d'arrondissement, 405, avenue Ogilvy (salle du conseil 201).",
+    "Pas de séance en janvier ni en août : 10 séances au total dans l'année.",
+    "La séance de mars est reportée au mardi 9 mars, après la semaine de relâche scolaire, pour accommoder les familles.",
+    "Le calendrier sera publié sur le site Internet de l'arrondissement et par avis public."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.247Z",
+   "jetons": {
+    "entree": 4731,
+    "sortie": 318
+   }
+  },
+  {
+   "id": "CA26 29 0214",
+   "numero": "1266936026",
+   "resolution": "CA26 29 0214",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "DEMANDE D'AIDE FINANCIÈRE – PROGRAMME D’AIDE FINANCIÈRE AU DÉVELOPPEMENT DES TRANSPORTS ACTIFS DANS LES PÉRIMÈTRES URBAINS (TAPU)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement de Pierrefonds-Roxboro demande une aide financière au ministère des Transports et de la Mobilité durable pour le réaménagement du boulevard Lalande.",
+    "L'argent viendrait du programme TAPU, qui finance les déplacements à pied et à vélo dans les zones urbaines.",
+    "Le conseil désigne le directeur d'arrondissement, Dominique Jacob, comme mandataire et signataire pour tout engagement lié à ce financement.",
+    "Selon les motifs invoqués, le programme vise à augmenter la part des déplacements actifs et à réduire les gaz à effet de serre.",
+    "Décision prise à la séance ordinaire du conseil d'arrondissement du 6 octobre 2026.",
+    "Le texte n'indique aucun montant demandé ni échéancier de travaux."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-04T17:31:17.247Z",
+   "jetons": {
+    "entree": 2172,
+    "sortie": 374
    }
   },
   {
