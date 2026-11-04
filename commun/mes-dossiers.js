@@ -216,13 +216,16 @@ const quotaPlein = () => quota.sur != null && quota.total >= quota.sur;
 async function majQuota() {
   // Les mots-clés ne comptent plus depuis le 21 oct. 2026 (scripts/supabase-alertes-retour.sql,
   // suivis_total) : ceux de l'Assemblée sont un outil de l'abonnement, avec leur propre plafond.
-  const [dossiers, organismes] = await Promise.all([
+  // Abonné·e : aucune limite (Martin, 4 nov. 2026 ; scripts/supabase-suivis-illimites-abonnes.sql).
+  const uid = (await client.auth.getUser())?.data?.user?.id;
+  const [dossiers, organismes, abonne] = await Promise.all([
     client.from('dossiers_suivis').select('id'),
     client.from('organismes_suivis').select('id'),
+    uid ? client.rpc('est_abonne', { uid }) : Promise.resolve({ data: false }),
   ]);
   quota = dossiers.error || organismes.error
     ? { total: 0, sur: null }
-    : { total: (dossiers.data?.length ?? 0) + (organismes.data?.length ?? 0), sur: 3 };
+    : { total: (dossiers.data?.length ?? 0) + (organismes.data?.length ?? 0), sur: abonne?.data === true ? null : 3 };
 }
 // La même phrase partout : ce qui est plein, et quoi retirer pour faire de la place.
 const phraseQuota = (n) => tr(
