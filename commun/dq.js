@@ -2188,16 +2188,22 @@ async function mdAlertes(isEn){
     </ul>
     <h3 class="md-sous-titre">${isEn ? 'Your keywords' : 'Vos mots-clés'}</h3>
     ${mots.length ? `<ul class="md-mots">${mots.map((x) => `<li class="md-mot"><span>${mdH(x.mot)}</span><button class="md-bouton-doux" aria-label="${isEn ? 'Remove' : 'Retirer'} ${mdH(x.mot)}" onclick="mdRetirerMot('${mdH(x.id)}')">×</button></li>`).join('')}</ul>`
-      : `<p class="md-note">${isEn ? 'No keyword yet. Examples: housing, forest, French language.' : 'Aucun mot-clé pour l’instant. Par exemple : logement, forêt, langue française.'}</p>`}
+      : `<p class="md-note">${isEn ? 'No keyword yet. Click an idea below or type your own.' : 'Aucun mot-clé pour l’instant. Cliquez sur une idée ci-dessous ou tapez le vôtre.'}</p>`}
     ${plein ? `<p class="md-note">${isEn ? `All ${MD_MOTS_MAX} keywords are used. Remove one to add another.` : `Vos ${MD_MOTS_MAX} mots-clés sont utilisés. Retirez-en un pour en ajouter un autre.`}</p>`
-      : `<div class="md-ligne"><input type="text" id="mdMot" maxlength="60" placeholder="${isEn ? 'A keyword' : 'Un mot-clé'}" aria-label="${isEn ? 'A keyword' : 'Un mot-clé'}">
-        <button class="account-btn" onclick="mdAjouterMot()">${isEn ? 'Add' : 'Ajouter'}</button></div>`}
+      : `<div class="md-ligne"><input type="text" id="mdMot" maxlength="60" placeholder="${isEn ? 'E.g. housing' : 'Ex. : logement'}" aria-label="${isEn ? 'A keyword' : 'Un mot-clé'}">
+        <button class="account-btn" onclick="mdAjouterMot()">${isEn ? 'Add' : 'Ajouter'}</button></div>
+      <p class="md-exemples"><span>${isEn ? 'Ideas:' : 'Idées :'}</span>${(isEn ? MD_EXEMPLES_EN : MD_EXEMPLES).filter((e) => !mots.some((x) => norm(x.mot) === norm(e))).map((e) => `<button type="button" class="md-exemple" onclick="mdEssayerMot('${mdH(e)}')">+ ${mdH(e)}</button>`).join('')}</p>`}
     <p class="md-note" id="mdMotNote" aria-live="polite"></p>
     <p class="md-note"><button class="md-bouton-doux" onclick="mdEssaiAlertes(this)">${isEn ? 'Send me a test email' : 'M’envoyer un courriel d’essai'}</button>
       ${isEn ? 'The most recent items for each thing you follow, to see what an alert looks like (3 per day). Alerts are in French.' : 'Les éléments les plus récents de chaque suivi, pour voir à quoi ressemble une alerte (3 par jour).'}</p>
   </div>`;
   document.getElementById('mdMot')?.addEventListener('keydown', (e)=>{ if(e.key === 'Enter'){ e.preventDefault(); mdAjouterMot(); } });
 }
+// Exemples cliquables sous le champ des mots-clés (Martin, 4 nov. 2026) : un clic l'ajoute.
+const MD_EXEMPLES = ['logement', 'tramway', 'CPE', 'langue française', 'immigration', 'mines', 'santé mentale', 'forêt'];
+const MD_EXEMPLES_EN = ['housing', 'tramway', 'daycare', 'French language', 'immigration', 'mining', 'mental health', 'forest'];
+function mdEssayerMot(mot){ const champ = document.getElementById('mdMot'); if(!champ) return; champ.value = mot; mdAjouterMot(); }
+window.mdEssayerMot = mdEssayerMot;
 async function mdAjouterMot(){
   const isEn = currentLang === 'en';
   const champ = document.getElementById('mdMot');
