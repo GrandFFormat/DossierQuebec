@@ -1313,7 +1313,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // Lien lisible (?elu=pascal-berube) : retrouver le vrai nom ; un ancien lien avec le nom complet marche encore.
       const vrai = [...ministers.map((m) => m.name), ...deputes.map((d) => d.name)].find((n) => slugElu(n) === slugElu(demande));
       if(vrai) nom = vrai.replace(/\s*\([^)]*\)\s*$/, '');
-      champ.value = nom; champ.dispatchEvent(new Event('input', { bubbles: true })); champ.scrollIntoView({ block: 'center' }); return; }
+      champ.value = nom; champ.dispatchEvent(new Event('input', { bubbles: true })); champ.scrollIntoView({ block: 'center' });
+      // Un seul résultat : descendre jusqu'à sa carte (lien des fiches d'anciens ministres, 4 nov. 2026).
+      setTimeout(() => { const seul = document.querySelectorAll('.search-retour-nom'); if(seul.length === 1) seul[0].click(); }, 300);
+      return; }
     if(++essais < 40) setTimeout(remplir, 250);
   };
   remplir();
