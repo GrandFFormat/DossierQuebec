@@ -2446,4 +2446,5 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 .min-liste .min-promesse{margin-bottom:14px;}
 .min-promesse q{quotes:"« " " »";}
 .min-prom-source{display:block; margin-top:2px; font-size:13.5px; color:var(--slate);}
-.min-prom-source a{color:inherit; text-decoration:underline;}
+.min-prom-source a{color:#131313; background:#FFE88A; padding:0 4px; font-weight:700; text-decoration:none;}
+.min-prom-source a:hover{background:#FFD24D;}
