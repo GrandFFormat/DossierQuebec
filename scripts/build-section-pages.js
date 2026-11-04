@@ -772,3 +772,7 @@ construireLlms();
 // Une page par ministre (/ministres/nicolas-marceau), à partir de ministres.html : scripts/build-minister-pages.js.
 const { construirePagesMinistres } = await import('./build-minister-pages.js');
 construirePagesMinistres();
+
+// Les anciens ministres de la 43e (/archives/43/ministres), à partir d'archives.html : scripts/build-anciens-ministres.js.
+const { construirePagesAnciensMinistres } = await import('./build-anciens-ministres.js');
+construirePagesAnciensMinistres();

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<!-- Consentement (Loi 25) : par défaut, Google Analytics n'a PAS le droit de déposer de témoins.
+     La bannière (commun/consentement.js) passe analytics_storage à « granted » après « Accepter ». -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: (function(){ try { return localStorage.getItem('dq:temoins') === 'oui' ? 'granted' : 'denied'; } catch (e) { return 'denied'; } })(), ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-87R1S6SR9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-87R1S6SR9Y', { content_group: 'Assemblée' });
+</script>
+<script src="/commun/consentement.js" defer></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+/* La langue, avant d'afficher quoi que ce soit — EXACTEMENT la décision de langueDeDepart
+   (commun/dq.js) : « ?lang=en » dans l'adresse, sinon le choix gardé dans dvq:langue (commun à
+   tout le site) ; en revenant par Précédent ou Suivant, le choix gardé passe avant l'adresse.
+   En anglais, la page reste cachée le temps que dq.js la traduise : 1,5 s au plus, même s'il
+   échoue. lang="en" n'est posé qu'au moment de traduire (dq.js) : si la traduction n'arrive pas,
+   la page française ne s'annonce pas en anglais.
+   Tout est dans une fonction : une variable globale ici entrerait en collision avec les
+   déclarations de dq.js et le ferait planter en entier. */
+(function(){
+  try{
+    var valide = function(l){ return l === 'en' || l === 'fr'; };
+    var gardee = null;
+    try{ gardee = localStorage.getItem('dvq:langue'); }catch(e){}
+    var q = new URLSearchParams(location.search).get('lang');
+    var nav = window.performance && performance.getEntriesByType ? performance.getEntriesByType('navigation')[0] : null;
+    var parHistorique = !!nav && nav.type === 'back_forward';
+    var choix = (parHistorique && valide(gardee)) ? gardee : (valide(q) ? q : gardee);
+    if(choix !== 'en') return;
+    var racine = document.documentElement;
+    racine.classList.add('dq-en');
+    setTimeout(function(){ racine.classList.add('dq-pret'); }, 1500);
+  }catch(e){}
+})();
+</script>
+<title>Donald Martel, ancien ministre — DossierQuébec</title>
+<meta name="description" content="Donald Martel (CAQ, Nicolet-Bécancour), ancien ministre du gouvernement Legault : fonctions, projets de loi et présence aux votes de la 43e législature.">
+<link rel="canonical" href="https://dossierquebec.ca/archives/43/ministres/donald-martel">
+<!-- Plus de <link rel="alternate"> vers /feed.xml : le flux RSS est réservé aux abonné·e·s depuis le
+     21 oct. 2026 (api/feed.js), chacun avec son adresse personnelle dans Mon dossier. -->
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0E4FC1">
+
+<!-- Open Graph (aperçu au partage : Facebook, LinkedIn, iMessage…) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DossierQuébec">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:title" content="Donald Martel, ancien ministre — DossierQuébec">
+<meta property="og:description" content="Donald Martel (CAQ, Nicolet-Bécancour), ancien ministre du gouvernement Legault : fonctions, projets de loi et présence aux votes de la 43e législature.">
+<meta property="og:url" content="https://dossierquebec.ca/archives/43/ministres/donald-martel">
+<meta property="og:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
+<meta property="og:image:width" content="1702">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DossierQuébec — veille citoyenne de l'Assemblée nationale du Québec">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Donald Martel, ancien ministre — DossierQuébec">
+<meta name="twitter:description" content="Donald Martel (CAQ, Nicolet-Bécancour), ancien ministre du gouvernement Legault : fonctions, projets de loi et présence aux votes de la 43e législature.">
+<meta name="twitter:image" content="https://dossierquebec.ca/dossierquebec-cover-2026.png">
+
+<link rel="icon" type="image/svg+xml" href="/commun/dq.svg">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="48x48" href="/commun/dq-48.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/commun/dq-512.png">
+<link rel="apple-touch-icon" href="/commun/dq-512.png">
+
+<!-- Données structurées (aide Google à comprendre le site) -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Accueil",
+     "item": "https://dossierquebec.ca/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Archives",
+     "item": "https://dossierquebec.ca/archives"
+    },
+    {
+     "@type": "ListItem",
+     "position": 3,
+     "name": "Anciens ministres",
+     "item": "https://dossierquebec.ca/archives/43/ministres"
+    },
+    {
+     "@type": "ListItem",
+     "position": 4,
+     "name": "Donald Martel",
+     "item": "https://dossierquebec.ca/archives/43/ministres/donald-martel"
+    }
+   ]
+  },
+  {
+   "@type": "Person",
+   "name": "Donald Martel",
+   "url": "https://dossierquebec.ca/archives/43/ministres/donald-martel",
+   "memberOf": {
+    "@type": "PoliticalParty",
+    "name": "Coalition avenir Québec"
+   },
+   "hasOccupation": [
+    {
+     "@type": "Role",
+     "roleName": "Ministre de l'Agriculture, des Pêcheries et de l'Alimentation",
+     "startDate": "2022",
+     "endDate": "2026"
+    },
+    {
+     "@type": "Role",
+     "roleName": "Ministre responsable de la région du Centre-du-Québec",
+     "startDate": "2022",
+     "endDate": "2026"
+    }
+   ],
+   "image": "https://dossierquebec.ca/archives/43/ministres/photos/donald-martel.webp",
+   "sameAs": [
+    "https://fr.wikipedia.org/wiki/Donald_Martel",
+    "https://www.wikidata.org/wiki/Q3036064"
+   ]
+  }
+ ]
+}
+</script>
+<!-- Les DEUX préconnexions sont nécessaires et ce n'est pas un doublon :
+     googleapis.com sert la feuille CSS, gstatic.com sert les ~258 ko de
+     fichiers de police. Sans la seconde, le navigateur n'ouvre la connexion
+     vers gstatic qu'APRÈS avoir lu le CSS — un DNS + TLS en série, soit 100 à
+     300 ms perdus sur mobile à la première visite. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- ⚠️ « wght@400..900 » (deux points) demande la POLICE VARIABLE : un seul
+     fichier couvrant toutes les graisses, au lieu d'un fichier par graisse.
+     Mesuré : Archivo passe de 6 fichiers / 205 ko à 1 fichier / 34 ko, et
+     Archivo Narrow de 3 fichiers / 55 ko à 1 fichier / 18 ko — 260 ko et
+     9 requêtes ramenés à 52 ko et 2 requêtes, sans perdre aucune graisse.
+     Ne pas revenir à la liste « 400;500;600 » (points-virgules) : c'est la
+     syntaxe des fichiers statiques.
+     IBM Plex Mono a été retirée : utilisée nulle part. Aucun octet économisé
+     pour autant — un navigateur ne télécharge une police que si elle sert au
+     rendu, donc elle ne partait déjà pas. C'était du ménage, pas un gain. -->
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/commun/dq.css">
+</head>
+<body data-page="ancien" data-donnees="stats">
+
+<!-- Ticker brutaliste : bande noire défilante — contenu rempli avec les VRAIES
+     données par renderTicker() (appelé une fois les datasets chargés). -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span class="ticker-text" id="tickerA">● DossierQuébec — site citoyen indépendant · vraies données publiques&nbsp;&nbsp;&nbsp;</span>
+    <span class="ticker-text" id="tickerB">● DossierQuébec — site citoyen indépendant · vraies données publiques&nbsp;&nbsp;&nbsp;</span>
+  </div>
+</div>
+
+<div id="dq-topbar">
+<header class="top">
+  <div class="brand">
+    <div class="brand-text" role="button" tabindex="0" aria-label="Retour à l'aperçu" onclick="goToTab('apercu')">
+      <!-- Volontairement un div, et non un titre de niveau 1 : le nom du site se
+           répète sur chaque page, alors que le titre de niveau 1 doit annoncer
+           le sujet de LA page. C'est le titre de une de la vue active qui joue
+           ce rôle, et le générateur de pages de section s'en assure.
+           (Pas de balise écrite en toutes lettres dans ce commentaire : elle
+           fausserait les outils qui comptent les titres à l'expression
+           régulière.) -->
+      <div class="brand-title">Dossier<span class="brand-blue">Québec</span></div>
+      <p>Qui siège, qui légifère, qui vote quoi</p>
+    </div>
+    <!-- Feuille d'érable : passerelle vers le site fédéral DossierCanada.
+         Flippe jaune ↔ rouge toutes les 20 s (voir le script plus bas). -->
+    <a class="maple-flip" id="mapleFlip" role="button" tabindex="0"
+       title="Aller au site fédéral — DossierCanada"
+       aria-label="Aller au site fédéral — DossierCanada"
+       onclick="goToFederal(event)">
+      <svg viewBox="-2015 -2000 4030 4030" aria-hidden="true"><path fill="currentColor" d="m-90 2030 45-863a95 95 0 0 0-111-98l-859 151 116-320a65 65 0 0 0-20-73l-941-762 212-99a65 65 0 0 0 34-79l-186-572 542 115a65 65 0 0 0 73-38l105-247 423 454a65 65 0 0 0 111-57l-204-1052 327 189a65 65 0 0 0 91-27l332-652 332 652a65 65 0 0 0 91 27l327-189-204 1052a65 65 0 0 0 111 57l423-454 105 247a65 65 0 0 0 73 38l542-115-186 572a65 65 0 0 0 34 79l212 99-941 762a65 65 0 0 0-20 73l116 320-859-151a95 95 0 0 0-111 98l45 863z"/></svg>
+    </a>
+    <!-- Les volets municipaux (DossierVille) : un bouton « Villes » qui ouvre la liste.
+         Vrais liens <a href> : le clavier, le clic du milieu et « ouvrir dans un
+         nouvel onglet » fonctionnent sans une ligne de code. La barre oblique finale
+         est OBLIGATOIRE — sans elle, les chemins relatifs du volet (assets/, data/)
+         se résolvent depuis la racine du site. Plus de rel="nofollow" depuis le
+         21 sept. 2026 : les volets sont ouverts aux moteurs de recherche. Le chemin dit /quebec/ : c'est la
+         liste, sous « Villes », qui dit qu'il s'agit de la ville. -->
+    <details class="villes-menu" id="villesMenu">
+      <summary class="city-flip" title="Les volets municipaux" aria-label="Les volets municipaux">
+        <span data-i18n="nav.villes">Villes</span>
+      </summary>
+      <ul>
+        <li><a href="/quebec/">Québec <small>DossierVilleDeQuébec</small></a></li>
+        <li><a href="/montreal/">Montréal <small>DossierVilleDeMontréal</small></a></li>
+        <!-- Lévis, Longueuil et Laval : en pause depuis le 7 oct. 2026 (commun/navigation.js, VILLES_EN_PAUSE). -->
+      </ul>
+    </details>
+  </div>
+  <!-- Nav DANS la ligne du header (maquette : logo | menu | contrôles sur
+       UNE seule rangée). Sur mobile, le nav devient le panneau plein écran
+       du hamburger (position:fixed), peu importe où il vit dans le DOM. -->
+  <nav class="tabs">
+    <div class="close-menu" id="closeMenuBtn"><span data-i18n="nav.close">Fermer</span> ✕</div>
+    <!-- De vrais liens, pas des <button> : un moteur de recherche ne suit pas un bouton, et
+         /ministres, /projets-de-loi, /votes et /lexique n'avaient aucun lien qu'il puisse suivre. -->
+    <a href="/" data-view="apercu"><span class="n">01</span><span data-i18n="nav.apercu">Aperçu</span></a>
+    <a href="/ministres" data-view="ministres"><span class="n">02</span><span data-i18n="nav.ministres">Ministres</span></a>
+    <a href="/projets-de-loi" data-view="projets"><span class="n">03</span><span data-i18n="nav.projets">Projets de loi</span></a>
+    <!-- Votes a quitté la barre le 30 oct. 2026 : les votes vivent dans les cartes des projets de
+         loi, et /votes reste lié du pied de page et de la page des projets. -->
+    <a class="active" aria-current="page" href="/archives" data-view="archives"><span class="n">04</span><span data-i18n="nav.archives">Archives</span></a>
+    <a href="/lexique" data-view="lexique"><span class="n">05</span><span data-i18n="nav.lexique">Lexique</span></a>
+    <a href="/mon-dossier" data-view="mondossier" class="nav-mondossier"><span class="n">★</span><span data-i18n="nav.mondossier">Mon dossier</span></a>
+  </nav>
+  <div class="header-ctrls">
+    <div class="font-size-ctrl" id="fontSizeCtrl">
+      <button id="fontMinus" aria-label="Réduire le texte">A−</button>
+      <span id="fontPct">100%</span>
+      <button id="fontPlus" aria-label="Agrandir le texte">A+</button>
+    </div>
+    <!-- Aucun contenu textuel : l'icône est dessinée en CSS. Le nom accessible
+         vient donc entièrement de aria-label, que le JS tient à jour. -->
+    <button class="theme-toggle" id="themeToggle" aria-pressed="false" aria-label="Passer au thème sombre" title="Passer au thème sombre"></button>
+    <button class="lang-toggle" id="langToggle">English</button>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+</div>
+
+<script>
+/* Bascule le bloc logo+menu en mode compact après un peu de défilement.
+   Hystérésis (80 vs 20) pour éviter le clignotement autour du seuil. */
+(function(){
+  var bar = document.getElementById('dq-topbar');
+  var compact = false;
+  function onScroll(){
+    var y = window.scrollY;
+    if(!compact && y > 80){ compact = true; bar.classList.add('compact'); }
+    else if(compact && y < 20){ compact = false; bar.classList.remove('compact'); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+// Ouvre le site fédéral DossierCanada dans un nouvel onglet.
+function goToFederal(evt){
+  if(evt) evt.stopPropagation();
+  window.open('https://dossiercanada.ca/', '_blank', 'noopener');
+}
+// Feuille d'érable : flippe jaune ↔ rouge toutes les 20 secondes.
+(function(){
+  var leaf = document.getElementById('mapleFlip');
+  if(!leaf) return;
+  setInterval(function(){ leaf.classList.toggle('is-red'); }, 20000);
+})();
+
+// Menu « Villes » : compte les clics vers chaque volet municipal (événement
+// personnalisé Vercel Web Analytics — onglet « Events » du tableau de bord), et
+// referme le menu quand on clique ailleurs ou qu'on appuie sur Échap.
+(function(){
+  var menu = document.getElementById('villesMenu');
+  if(!menu) return;
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      if(window.va) window.va('event', { name: 'clic_icone_ville', data: { ville: a.getAttribute('href') } });
+    });
+  });
+  document.addEventListener('click', function(e){ if(menu.open && !menu.contains(e.target)) menu.open = false; });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && menu.open){ menu.open = false; menu.querySelector('summary').focus(); } });
+})();
+</script>
+
+<div class="app">
+
+  <!-- APERÇU -->
+  <section class="view active" id="view-ancien" data-titre-en="Donald Martel, former minister — DossierQuébec">
+    <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/" data-i18n="fil.accueil">Accueil</a><span class="sep" aria-hidden="true">›</span><a href="/archives" data-i18n="fil.archives">Archives</a><span class="sep" aria-hidden="true">›</span><a href="/archives/43/ministres"><span class="fr-txt">Anciens ministres</span><span class="en-txt">Former ministers</span></a><span class="sep" aria-hidden="true">›</span><span aria-current="page">Donald Martel</span></nav>
+    <p class="archives-note archives-bande"><span class="fr-txt"><b>Ancien ministre (2022-2026).</b> Fiche de la 43e législature, archivée à sa dissolution.</span><span class="en-txt"><b>Former minister (2022-2026).</b> Profile from the 43rd Legislature, archived at its dissolution.</span></p>
+    <div class="view-hero min-hero">
+      <div class="min-colphoto"><figure class="min-photo"><img src="/archives/43/ministres/photos/donald-martel.webp" srcset="/archives/43/ministres/photos/donald-martel.webp 1x, /archives/43/ministres/photos/donald-martel@2x.webp 2x" width="200" height="200" alt="Donald Martel"><figcaption>LouisRoyQc, <a href="https://creativecommons.org/licenses/by-sa/4.0" rel="noopener license">CC BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/wiki/File:DonaldetJB_(cropped).jpg" rel="noopener">Wikimedia Commons</a></figcaption></figure></div>
+      <div class="min-tete">
+        <h1 class="hero-h1 hero-h1-md"><span class="hero-sujet"><span class="fr-txt">Ancien ministre (2022-2026)</span><span class="en-txt">Former minister (2022-2026)</span></span><span>Donald Martel</span></h1>
+        <p class="view-hero-sub"><span class="fr-txt">Donald Martel a été membre du Conseil des ministres du gouvernement Legault pendant la 43e législature (2022-2026).</span><span class="en-txt">Donald Martel sat in the Legault government’s cabinet during the 43rd Legislature (2022-2026). Official titles are listed below in French.</span></p>
+        
+      </div>
+    </div>
+    <div class="band band-white bleed"><div class="min-fiche">
+      <h2><span class="fr-txt">Fonctions occupées</span><span class="en-txt">Roles held</span></h2>
+      
+      <p class="pr-meta"><span class="fr-txt">Conseil du 10 septembre 2025</span><span class="en-txt">Cabinet of September 10, 2025</span></p><ul class="min-liste"><li>Ministre de l'Agriculture, des Pêcheries et de l'Alimentation</li><li>Ministre responsable de la région du Centre-du-Québec</li></ul>
+      <p class="pr-meta"><span class="fr-txt">Les ajustements faits entre ces deux dates (démissions, intérims) ne sont pas tous repris ici.</span><span class="en-txt">Adjustments made between those two dates (resignations, acting roles) are not all listed here.</span></p>
+      <div class="min-faits">
+        <div class="m-row"><span class="m-label"><span class="fr-txt">Parti</span><span class="en-txt">Party</span></span><span class="m-val"><span class="fr-txt">Coalition avenir Québec (CAQ)</span><span class="en-txt">Coalition Avenir Québec (CAQ)</span></span></div>
+        <div class="m-row"><span class="m-label"><span class="fr-txt">Circonscription (43e)</span><span class="en-txt">Riding (43rd)</span></span><span class="m-val">Nicolet-Bécancour</span></div>
+      </div>
+
+      <h2><span class="fr-txt">Projets de loi parrainés (43e)</span><span class="en-txt">Bills sponsored (43rd)</span></h2>
+      <p><span class="fr-txt">Aucun projet de loi parrainé dans les données de la 43e législature.</span><span class="en-txt">No bill sponsored in the 43rd Legislature’s data.</span></p>
+
+      <h2><span class="fr-txt">Présence aux votes (43e)</span><span class="en-txt">Vote attendance (43rd)</span></h2>
+      <p><span class="fr-txt"><b class="presence-pastille presence-haute">88 %</b> des votes nominaux du 6 décembre 2022 au 11 juin 2026 : 645 sur 734, soit 89 votes manqués.</span><span class="en-txt"><b class="presence-pastille presence-haute">88%</b> of recorded divisions from December 6, 2022 to June 11, 2026: 645 of 734, i.e. 89 votes missed.</span></p><p class="pr-meta"><span class="fr-txt">Vert : à la médiane des député·e·s de la 43e (86 %) ou au-dessus ; jaune : jusqu'à 78 %. Un vote manqué peut être une mission officielle, une maladie ou un conflit d’horaire : le registre n’en donne pas la raison.</span><span class="en-txt">Green: at or above the 43rd Legislature’s median (86%); yellow: down to 78%. A missed vote can be an official mission, an illness or a scheduling conflict: the register does not give the reason.</span></p>
+
+      <h2><span class="fr-txt">Votes marquants</span><span class="en-txt">Notable votes</span></h2>
+      <p class="pr-meta"><span class="fr-txt">Adoptions finales de projets de loi qui ont divisé l’Assemblée, les plus récentes d’abord.</span><span class="en-txt">Final passage votes on bills that split the Assembly, most recent first.</span></p>
+      <ul class="min-liste"><li><b><span class="fr-txt">Pour</span><span class="en-txt">For</span></b> · <a href="/projets-de-loi/10-43-2"><span class="fr-txt">PL 10 — Loi protégeant les consommateurs contre les pratiques abusives de revente de billets et de renouvellement d’abonnements en ligne</span><span class="en-txt">Bill 10 — Act to protect consumers against abusive ticket resale practices and online subscription renewals</span></a> <span class="pr-meta">· <span class="fr-txt">11 juin 2026</span><span class="en-txt">June 11, 2026</span></span></li><li><b><span class="fr-txt">Pour</span><span class="en-txt">For</span></b> · <a href="/projets-de-loi/11-43-2"><span class="fr-txt">PL 11 — Loi modifiant diverses dispositions principalement aux fins d’allègement du fardeau réglementaire et administratif</span><span class="en-txt">Bill 11 — Act to amend various provisions mainly to reduce the regulatory and administrative burden</span></a> <span class="pr-meta">· <span class="fr-txt">11 juin 2026</span><span class="en-txt">June 11, 2026</span></span></li><li><b><span class="fr-txt">Pour</span><span class="en-txt">For</span></b> · <a href="/projets-de-loi/9-43-2"><span class="fr-txt">PL 9 — Loi sur le renforcement de la laïcité au Québec</span><span class="en-txt">Bill 9 — Act to strengthen secularism in Québec</span></a> <span class="pr-meta">· <span class="fr-txt">11 juin 2026</span><span class="en-txt">June 11, 2026</span></span></li><li><b><span class="fr-txt">Pour</span><span class="en-txt">For</span></b> · <a href="/projets-de-loi/7-43-2"><span class="fr-txt">PL 7 — Loi visant à réduire la bureaucratie, à accroître l’efficacité de l’État et à renforcer l’imputabilité des hauts fonctionnaires</span><span class="en-txt">Bill 7 — Act to reduce bureaucracy, increase government efficiency and strengthen the accountability of senior officials</span></a> <span class="pr-meta">· <span class="fr-txt">4 juin 2026</span><span class="en-txt">June 4, 2026</span></span></li><li><b><span class="fr-txt">Pour</span><span class="en-txt">For</span></b> · <a href="/projets-de-loi/3-43-2"><span class="fr-txt">PL 3 — Loi visant à améliorer la transparence, la gouvernance et le processus démocratique de diverses associations en milieu de travail</span><span class="en-txt">Bill 3 — Act to improve the transparency, governance and democratic process of various workplace associations</span></a> <span class="pr-meta">· <span class="fr-txt">2 avril 2026</span><span class="en-txt">April 2, 2026</span></span></li><li><b><span class="fr-txt">Pour</span><span class="en-txt">For</span></b> · <a href="/projets-de-loi/9-43-2"><span class="fr-txt">PL 9 — Loi sur le renforcement de la laïcité au Québec</span><span class="en-txt">Bill 9 — Act to strengthen secularism in Québec</span></a> <span class="pr-meta">· <span class="fr-txt">2 avril 2026</span><span class="en-txt">April 2, 2026</span></span></li></ul>
+      <p><a href="/votes?archives=43"><span class="fr-txt">Tous les votes de la 43e →</span><span class="en-txt">All votes of the 43rd →</span></a></p>
+
+      <h2><span class="fr-txt">Biographie</span><span class="en-txt">Biography</span></h2><p><span class="fr-txt">Naissance le 7 août 1964 à Grand-Mère. Études : Université du Québec à Trois-Rivières. Député de Nicolet-Bécancour (Coalition avenir Québec) pendant la 43e législature.</span><span class="en-txt">Born on August 7, 1964 in Grand-Mère. Education: Université du Québec à Trois-Rivières. MNA for Nicolet-Bécancour (Coalition Avenir Québec) during the 43rd Legislature.</span></p>
+      <p class="min-source"><span class="fr-txt">Source</span><span class="en-txt">Source</span> : <a href="https://fr.wikipedia.org/wiki/Donald_Martel" rel="noopener">Wikipédia</a></p>
+    </div></div>
+  </section>
+
+  <!-- MINISTRES & DÉPUTÉS -->
+  
+
+  <!-- PROJETS DE LOI -->
+  
+
+  <!-- VOTES -->
+  
+
+  <!-- ARCHIVES (Martin, 30 oct. 2026) : les législatures terminées, une carte chacune (projets de
+       loi, votes), puis les promesses de l'élection de 2026. Dessiné par commun/dq.js (renderArchives)
+       depuis data/archives/index.json : la 43e y entre seule à l'ouverture de la 44e. -->
+  
+
+  <!-- COMPTE & ABONNEMENT -->
+
+  <!-- LEXIQUE (fusion : personnes, lexique, apropos) -->
+  <!-- PROMESSES — vue sans onglet (comme view-bd). Accessible par /promesses,
+       par le bouton de la bande de dissolution et par le bloc du Lexique.
+       Contenu saisi à la main dans data/promises.json (voir la note du fichier). -->
+  
+
+  
+
+  <!-- PAGE CACHÉE — la BD « l'idée derrière le site ». Aucun onglet n'y mène :
+       accessible seulement par le « et moi » du bas de page (à côté de
+       « Construit avec Claude »). goToTab('bd') fonctionne sans bouton d'onglet. -->
+  <!-- /mon-dossier : l'espace de la personne connectée, côté ASSEMBLÉE seulement (Martin,
+       22 sept. 2026 : « mes dossiers provincial et les villes doivent être complètement séparés »).
+       Les villes y ont leur section (#villes) depuis le 30 sept. 2026 ; avant, /mes-dossiers. Tout le contenu
+       est rempli par commun/dq.js (renderMonDossier) : rien de personnel n'est dans le HTML. -->
+  <!-- LES RÈGLES (Martin, 5 oct. 2026 : « on pourrait quasiment faire une page de ça… à côté de
+       Facebook »). Les règles de sources du site, écrites une fois pour être montrées à quelqu'un :
+       tout ce que les encadrés de méthode disent page par page, réuni. Lien dans le pied de page. -->
+  
+
+  <!-- LA PAGE 404 (Martin, 6 oct. 2026 : « faut une page drôle 404 », puis : avec le jaune et tout
+       le kit du site, « morte dans l'œuf », et pas de blanc sur noir). Vercel sert 404.html, avec le
+       code 404, pour toute adresse qui n'existe pas ; avant, c'était le message brut de l'hébergeur,
+       en anglais. Fabriquée comme les autres pages (scripts/build-section-pages.js, vue
+       « introuvable »), donc avec l'en-tête, le menu et le pied du site.
+       « Morte dans l'œuf » est le libellé des projets de loi jamais rendus plus loin que la
+       présentation. Le faux vote est ÉTIQUETÉ comme une blague : ce site n'invente jamais de donnée. -->
+  
+
+  <!-- L'ABONNEMENT FACULTATIF (retiré le 27 sept. 2026, remis le 21 oct. 2026). Le texte du site et
+       le suivi restent gratuits ; l'abonnement vend des outils en plus, aucun municipal. Chaque outil
+       porte son état : « Disponible » seulement s'il est réellement livré. La zone #abEtat (s'abonner,
+       gérer, annuler) est remplie par renderAbonnement (commun/dq.js) depuis /api/abonnement. -->
+  
+
+  
+
+  
+
+</div>
+
+<!-- Footer maquette : texte à gauche (avec « construit avec Claude » suivi du
+     lien caché « et moi » vers la BD), liens texte en majuscules à droite. -->
+<footer>
+  <nav class="footer-nav" aria-label="Plan du site">
+    <a href="/" data-i18n="nav.apercu">Aperçu</a>
+    <a href="/ministres" data-i18n="nav.ministres">Ministres</a>
+    <a href="/projets-de-loi" data-i18n="nav.projets">Projets de loi</a>
+    <a href="/votes" data-i18n="nav.votes">Votes</a>
+    <a href="/promesses" data-i18n="fil.promesses">Promesses</a>
+    <a href="/archives" data-i18n="nav.archives">Archives</a>
+    <a href="/lexique" data-i18n="nav.lexique">Lexique</a>
+    <a href="/sources" data-i18n="fil.bd">Mises à jour du site</a>
+    <a href="/mon-dossier" data-i18n="nav.mondossier">Mon dossier</a>
+    <span class="footer-nav-villes"><span data-i18n="footer.villes">Villes :</span>
+      <a href="/quebec/">Québec</a>
+      <a href="/montreal/">Montréal</a>
+    </span>
+  </nav>
+  <div class="footer-inner">
+  <span class="footer-left-line"><span id="footerLeft">Site non officiel — données publiques ANQ &amp; Données Québec ·</span> <span id="footerRight">Site propulsé par</span> <a class="footer-etmoi" id="footerDafr" href="https://www.dafrsolution.com" target="_blank" rel="noopener">DAFRSolution.com</a></span>
+  <span class="footer-right-group">
+    <a class="footer-gh" href="/regles" data-i18n="footer.regles">Les règles</a>
+    <a class="footer-gh" href="/abonnement" data-i18n="footer.abonnement">Abonnement</a>
+    <a class="footer-gh" href="https://www.facebook.com/dossierquebec" target="_blank" rel="noopener" aria-label="DossierQuébec sur Facebook">Facebook</a>
+    <a class="footer-gh footer-coffee" href="https://donate.stripe.com/6oU5kDg8b91a3sY8RK9fW00" target="_blank" rel="noopener" aria-label="Offre-moi un café" data-i18n="footer.coffee">Offre-moi un café</a>
+    <a class="footer-gh" href="/abonnement" data-i18n="footer.rss" title="Flux RSS : réservé aux abonné·e·s">Flux RSS</a>
+    <!-- Crédit exigé par la licence gratuite de Flaticon (icônes du bouton café, 3 nov. 2026). -->
+    <a class="footer-gh" href="https://www.flaticon.com/fr/icones-gratuites/cafe" target="_blank" rel="noopener" data-i18n="footer.flaticon">Icônes : Flaticon</a>
+    <a class="footer-gh" href="https://github.com/GrandFFormat/DossierQuebec" target="_blank" rel="noopener" data-i18n="footer.source">Code source</a>
+  </span>
+  </div>
+</footer>
+
+<button id="backToTop" class="dq-remonter" aria-label="Remonter en haut" title="Remonter en haut" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+</button>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/commun/dq.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle (donc pas de
+     bannière de consentement requise). Le script est servi automatiquement par
+     Vercel quand Web Analytics est activé dans le tableau de bord du projet. -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
