@@ -4390,7 +4390,7 @@ async function remplirCartesVotes(d){
 // vérifie l'abonnement. Les autres gardent la phrase avec le lien vers /abonnement.
 let _abonneP = null;
 // Abonné·e : body.abonne cache les boutons café (Martin, 2 nov. 2026).
-function marquerAbonne(){ estAbonne().then((a) => document.body.classList.toggle('abonne', a)); }
+function marquerAbonne(){ document.body.classList.toggle('connecte', !!currentUser); estAbonne().then((a) => document.body.classList.toggle('abonne', a)); }
 function estAbonne(){
   if(!currentUser) return Promise.resolve(false);
   if(!_abonneP) _abonneP = (async () => {
@@ -4938,12 +4938,16 @@ const ICONES_CAFE = ['cafe-croissant', 'cafe-carafe', 'cafe-moulin', 'cafe-filtr
 const ORDRE_ICONES = ICONES_CAFE.map((_, i) => i);
 for(let i = ORDRE_ICONES.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [ORDRE_ICONES[i], ORDRE_ICONES[j]] = [ORDRE_ICONES[j], ORDRE_ICONES[i]]; }
 let _rangCafe = 0;
-// Boîte « Abonnez-vous » sous le bouton café des projets de loi (Martin, 4 nov. 2026). Cachée pour
-// les abonné·e·s, comme le café (body.abonne).
+// Deux boîtes sous le bouton café des projets de loi (Martin, 4 nov. 2026) : suivre en se connectant
+// (cachée une fois connecté, body.connecte) et devenir abonné·e (cachée aux abonné·e·s, body.abonne).
 function boiteAbonnement(isEn){
-  return `<div class="bill-abo"><div class="bill-abo-texte"><b>${isEn ? 'Follow this bill closely' : 'Suivez ce projet de près'}</b>
+  const L = isEn ? '?lang=en' : '';
+  return `<div class="bill-abo bill-abo-suivre"><div class="bill-abo-texte"><b>${isEn ? 'Follow this bill' : 'Suivez ce projet de loi'}</b>
+    <span>${isEn ? 'Free: sign in and get an email at each stage.' : 'Gratuit : connectez-vous et recevez un courriel à chaque étape.'}</span></div>
+    <a class="bill-abo-btn" href="/mon-dossier${L}" onclick="event.stopPropagation()">${isEn ? 'Sign in' : 'Se connecter'} →</a></div>
+  <div class="bill-abo bill-abo-membre"><div class="bill-abo-texte"><b>${isEn ? 'Become DossierQuébec' : 'Devenez DossierQuébec'}</b>
     <span>${isEn ? 'Keyword alerts, weekly watch, unlimited follows.' : 'Alertes par mot-clé, veille de la semaine, suivis illimités.'}</span></div>
-    <a class="bill-abo-btn" href="/abonnement${isEn ? '?lang=en' : ''}" onclick="event.stopPropagation()">${isEn ? 'Subscribe' : 'Abonnez-vous'} →</a></div>`;
+    <a class="bill-abo-btn" href="/abonnement${L}" onclick="event.stopPropagation()">${isEn ? 'Subscribe' : 'Abonnez-vous'} →</a></div>`;
 }
 function boutonCafe(b, isEn){
   const rangIcone = ORDRE_ICONES[_rangCafe % ORDRE_ICONES.length];
