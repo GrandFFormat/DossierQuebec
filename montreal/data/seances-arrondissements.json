@@ -1,18 +1,18 @@
 {
- "generatedAt": "2026-11-03T17:16:11.201Z",
+ "generatedAt": "2026-11-04T17:19:18.276Z",
  "source": "https://ville.montreal.qc.ca/documents/Adi_Public/",
  "licence": "Documents publics de la Ville de Montréal — reproduction avec mention de la source, lecture gratuite (voir README).",
  "methode": "Sondage des noms de fichiers publiés : l'existence du document prouve la séance. Les séances extraordinaires, dont l'heure est imprévisible, ne sont pas couvertes. Le Plateau-Mont-Royal, qui publie par sa page et non sous Adi_Public, est lu depuis cette page : la date vient du document lui-même (voir lib/plateau.js).",
  "annee": 2026,
  "partiel": false,
- "nombre": 161,
- "requetes": 1961,
+ "nombre": 162,
+ "requetes": 1976,
  "parArrondissement": [
   {
    "arrondissement": "Ahuntsic-Cartierville",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 97
+   "requetes": 104
   },
   {
    "arrondissement": "Anjou",
@@ -66,13 +66,13 @@
    "arrondissement": "Pierrefonds-Roxboro",
    "seances": 10,
    "nouvelles": 0,
-   "requetes": 43
+   "requetes": 45
   },
   {
    "arrondissement": "Le Plateau-Mont-Royal",
    "seances": 10,
-   "nouvelles": 1,
-   "requetes": 3
+   "nouvelles": 0,
+   "requetes": 1
   },
   {
    "arrondissement": "Rivière-des-Prairies–Pointe-aux-Trembles",
@@ -88,9 +88,9 @@
   },
   {
    "arrondissement": "Saint-Laurent",
-   "seances": 8,
-   "nouvelles": 0,
-   "requetes": 98
+   "seances": 9,
+   "nouvelles": 1,
+   "requetes": 92
   },
   {
    "arrondissement": "Saint-Léonard",
@@ -102,7 +102,7 @@
    "arrondissement": "Le Sud-Ouest",
    "seances": 6,
    "nouvelles": 0,
-   "requetes": 179
+   "requetes": 186
   },
   {
    "arrondissement": "Verdun",
@@ -114,7 +114,7 @@
    "arrondissement": "Ville-Marie",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 96
+   "requetes": 103
   },
   {
    "arrondissement": "Villeray–Saint-Michel–Parc-Extension",
@@ -2023,6 +2023,17 @@
    "variante": "ORDI",
    "source": "sondage des documents publiés",
    "preuve": "CA_Rdp_ODJ_LPP_ORDI_2026-11-03_19h00_FR.pdf"
+  },
+  {
+   "id": "CA_Slt_2026-11-03_19h30",
+   "instance": "CA_Slt",
+   "arrondissement": "Saint-Laurent",
+   "nomInstance": "Conseil d'arrondissement de Saint-Laurent",
+   "date": "2026-11-03",
+   "heure": "19h30",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Slt_ODJ_LP_ORDI_2026-11-03_19h30_FR.pdf"
   },
   {
    "id": "CA_Ver_2026-11-03_19h00",
