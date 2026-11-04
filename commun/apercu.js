@@ -15,7 +15,10 @@
     dossiers_suivis: [
       { id: 1, ville: 'assemblee', dossier_id: 'pl:27463', numero: null, objet: null, created_at: maintenant },
       { id: 2, ville: 'assemblee', dossier_id: 'pl:26903', numero: null, objet: null, created_at: maintenant },
-      { id: 3, ville: 'quebec', dossier_id: 'projet:logement', numero: null, objet: 'Logement', created_at: maintenant },
+      { id: 3, ville: 'montreal', dossier_id: 'projet:canopee', numero: null, objet: 'Canopée', created_at: '2026-09-14T12:00:00Z' },
+      { id: 4, ville: 'quebec', dossier_id: 'projet:tramway', numero: null, objet: 'Tramway', created_at: '2026-09-14T12:00:00Z' },
+      { id: 5, ville: 'quebec', dossier_id: 'projet:logement', numero: null, objet: 'Logement', created_at: '2026-09-20T12:00:00Z' },
+      { id: 6, ville: 'quebec', dossier_id: 'projet:expocite', numero: null, objet: 'ExpoCité', created_at: '2026-10-02T12:00:00Z' },
     ],
   };
   function requete(table){
