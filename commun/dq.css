@@ -2442,3 +2442,8 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 .min-source a{color:inherit;}
 .m-name a{color:inherit; text-decoration:none;}
 .m-name a:hover{text-decoration:underline;}
+/* Promesses sur les fiches de ministres : la citation, puis la source en petit dessous. */
+.min-liste .min-promesse{margin-bottom:14px;}
+.min-promesse q{quotes:"« " " »";}
+.min-prom-source{display:block; margin-top:2px; font-size:13.5px; color:var(--slate);}
+.min-prom-source a{color:inherit; text-decoration:underline;}

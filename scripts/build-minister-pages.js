@@ -26,10 +26,10 @@ const dateFr = (iso) => { const [a, m, j] = iso.split('-').map(Number); return `
 const dateEn = (iso) => { const [a, m, j] = iso.split('-').map(Number); return `${MONTHS[m - 1]} ${j}, ${a}`; };
 // Qui l'a dit, quand, et le lien (Martin, 3 nov. 2026) : ce n'est pas forcément le ministre, c'est son parti.
 const citeSource = (p) => {
-  const [qui, type, date] = String(p.sourceLabel || '').split(' — ').map((x) => x.trim());
-  let dom = ''; try { dom = new URL(p.sourceUrl).hostname.replace(/^www\./, ''); } catch {}
+  const [qui, , date] = String(p.sourceLabel || '').split(' — ').map((x) => x.trim());
   const d = /^\d{4}-\d{2}-\d{2}$/.test(date || '') ? dateFr(date) : (date || '');
-  return [qui, type, d].filter(Boolean).map(esc).join(' · ') + (dom ? ` · <a href="${esc(p.sourceUrl)}" target="_blank" rel="noopener">${esc(dom)}</a>` : '');
+  const lien = p.sourceUrl ? ` · <a href="${esc(p.sourceUrl)}" target="_blank" rel="noopener">${deux('Voir la source', 'See the source')}</a>` : '';
+  return '— ' + [qui, d].filter(Boolean).map(esc).join(', ') + lien;
 };
 const deux = (fr, en) => `<span class="fr-txt">${fr}</span><span class="en-txt">${en}</span>`;
 const PARTIS = { PQ: ['Parti québécois', 'Parti Québécois'], CAQ: ['Coalition avenir Québec', 'Coalition Avenir Québec'], PLQ: ['Parti libéral du Québec', 'Quebec Liberal Party'], QS: ['Québec solidaire', 'Québec solidaire'], PCQ: ['Parti conservateur du Québec', 'Conservative Party of Quebec'] };
@@ -157,7 +157,7 @@ export function construirePagesMinistres() {
       <p>${mandats ? deux(mandats === 1 ? 'Premier mandat à l’Assemblée nationale.' : `${mandats}e mandat à l’Assemblée nationale.`, mandats === 1 ? 'First term in the National Assembly.' : `Term no. ${mandats} in the National Assembly.`) : ''}${passees ? ` ${deux(`Présence aux votes de la ${historique.courante - 1}e législature : ${esc(passees.rate ?? '')} %.`, `Attendance in the previous Legislature: ${esc(passees.rate ?? '')}%.`)}` : ''}</p>
 
       ${proms.length ? `<h2>${deux(`Promesses du ${esc(partiFr)} qui touchent son ministère`, `${esc(partiEn)} promises related to this portfolio`)}</h2>
-      <ul class="min-liste">${proms.map((p) => `<li>« ${esc(p.quote)} » <span class="pr-meta">· ${esc(p.theme)}<br>${citeSource(p)}</span></li>`).join('')}</ul>
+      <ul class="min-liste">${proms.map((p) => `<li class="min-promesse"><q>${esc(p.quote)}</q><span class="min-prom-source">${citeSource(p)}</span></li>`).join('')}</ul>
       <p><a href="/promesses">${deux('Toutes les promesses 2026 →', 'All 2026 promises →')}</a></p>` : ''}
 
       ${bioFr.length ? `<h2>${deux('Biographie', 'Biography')}</h2><p>${deux(esc(bioFr.join(' ')), esc(bioEn.join(' ')))}</p>` : ''}
