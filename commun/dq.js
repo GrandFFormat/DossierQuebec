@@ -4938,17 +4938,37 @@ const ICONES_CAFE = ['cafe-croissant', 'cafe-carafe', 'cafe-moulin', 'cafe-filtr
 const ORDRE_ICONES = ICONES_CAFE.map((_, i) => i);
 for(let i = ORDRE_ICONES.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [ORDRE_ICONES[i], ORDRE_ICONES[j]] = [ORDRE_ICONES[j], ORDRE_ICONES[i]]; }
 let _rangCafe = 0;
-// Deux boîtes sous le bouton café des projets de loi (Martin, 4 nov. 2026) : suivre en se connectant
-// (cachée une fois connecté, body.connecte) et devenir abonné·e (cachée aux abonné·e·s, body.abonne).
+// Sous le bouton café des projets de loi (Martin, 4 nov. 2026) : une boîte pour suivre en se
+// connectant sur place (champ courriel, lien qui ramène sur cette page ; cachée une fois connecté,
+// body.connecte), puis un simple bouton « Devenez DossierQuébec » vers l'abonnement. Rien pour les
+// abonné·e·s (body.abonne).
 function boiteAbonnement(isEn){
-  const L = isEn ? '?lang=en' : '';
-  return `<div class="bill-abo bill-abo-suivre"><div class="bill-abo-texte"><b>${isEn ? 'Follow this bill' : 'Suivez ce projet de loi'}</b>
-    <span>${isEn ? 'Free: sign in and get an email at each stage.' : 'Gratuit : connectez-vous et recevez un courriel à chaque étape.'}</span></div>
-    <a class="bill-abo-btn" href="/mon-dossier${L}" onclick="event.stopPropagation()">${isEn ? 'Sign in' : 'Se connecter'} →</a></div>
-  <div class="bill-abo bill-abo-membre"><div class="bill-abo-texte"><b>${isEn ? 'Become DossierQuébec' : 'Devenez DossierQuébec'}</b>
-    <span>${isEn ? 'Keyword alerts, weekly watch, unlimited follows.' : 'Alertes par mot-clé, veille de la semaine, suivis illimités.'}</span></div>
-    <a class="bill-abo-btn" href="/abonnement${L}" onclick="event.stopPropagation()">${isEn ? 'Subscribe' : 'Abonnez-vous'} →</a></div>`;
+  return `<form class="bill-abo bill-abo-suivre" onclick="event.stopPropagation()" onsubmit="event.preventDefault(); billEnvoyerLien(this)">
+    <b class="bill-abo-titre">${isEn ? 'Follow this bill: sign in' : 'Suivez ce projet en vous identifiant'}</b>
+    <div class="bill-abo-ligne"><input type="email" required autocomplete="email" placeholder="${isEn ? 'Your email' : 'Votre courriel'}" aria-label="${isEn ? 'Your email' : 'Votre courriel'}">
+    <button type="submit" class="bill-abo-btn">${isEn ? 'Get the link' : 'Recevoir le lien'}</button></div>
+    <p class="bill-abo-note" aria-live="polite">${isEn ? 'Free. No password: a link arrives by email.' : 'Gratuit. Pas de mot de passe : un lien arrive par courriel.'}</p></form>
+  <a class="bill-more bill-abo-devenir" href="/abonnement${isEn ? '?lang=en' : ''}" onclick="event.stopPropagation()">${isEn ? 'Become DossierQuébec' : 'Devenez DossierQuébec'} →</a>`;
 }
+async function billEnvoyerLien(form){
+  const isEn = currentLang === 'en';
+  const input = form.querySelector('input'), btn = form.querySelector('button'), note = form.querySelector('.bill-abo-note');
+  const email = input.value.trim();
+  if(!email || !input.checkValidity() || btn.disabled){ input.focus(); return; }
+  btn.disabled = true;
+  note.textContent = isEn ? 'Sending…' : 'Envoi en cours…';
+  const error = await signInWithMagicLink(email);
+  if(error){
+    btn.disabled = false;
+    note.textContent = error.code === 'over_email_send_rate_limit'
+      ? (isEn ? 'A link was already sent recently: check your inbox.' : 'Un lien a déjà été envoyé récemment : vérifiez vos courriels.')
+      : (isEn ? 'Something went wrong. Try again.' : 'Une erreur est survenue. Réessayez.');
+    return;
+  }
+  btn.textContent = isEn ? '✓ Link sent' : '✓ Lien envoyé';
+  note.textContent = isEn ? `Check your inbox (${email}). The link brings you back here.` : `Vérifiez vos courriels (${email}). Le lien vous ramène ici.`;
+}
+window.billEnvoyerLien = billEnvoyerLien;
 function boutonCafe(b, isEn){
   const rangIcone = ORDRE_ICONES[_rangCafe % ORDRE_ICONES.length];
   const [fr, en] = LIBELLES_CAFE[ORDRE_CAFE[_rangCafe++ % ORDRE_CAFE.length]];

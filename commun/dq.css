@@ -2666,13 +2666,14 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
   #villes .vp-grille{grid-template-columns:minmax(0,1fr);}
   #villes .vp-titre{font-size:20px;}
 }
-/* Boîte « Abonnez-vous » dans la fiche d'un projet de loi (4 nov. 2026). */
-.bill-abo{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 16px; margin:14px 0 0; padding:14px 16px; border:3px solid var(--ink); background:var(--card); box-shadow:4px 4px 0 var(--ink);}
-.bill-abo-texte{display:flex; flex-direction:column; gap:2px; font-size:14px;}
-.bill-abo-texte b{font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; font-size:14.5px;}
-.bill-abo-texte span{color:var(--slate);}
-.bill-abo-btn{display:inline-block; padding:8px 14px; border:3px solid var(--ink); background:#FFD24D; color:#131313; font-weight:800; text-decoration:none; white-space:nowrap;}
+/* Sous le bouton café d'un projet de loi : suivre en se connectant, puis Devenez DossierQuébec (4 nov. 2026). */
+.bill-abo{margin:14px 0 0; padding:14px 16px; border:3px solid var(--ink); background:var(--card); box-shadow:4px 4px 0 var(--ink);}
+.bill-abo-titre{display:block; font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; font-size:14.5px; margin-bottom:8px;}
+.bill-abo-ligne{display:flex; gap:8px; flex-wrap:wrap;}
+.bill-abo-ligne input{flex:1 1 180px; min-width:0; padding:8px 10px; border:2px solid var(--ink); background:var(--card); color:var(--ink); font:inherit;}
+.bill-abo-btn{padding:8px 14px; border:3px solid var(--ink); background:#FFD24D; color:#131313; font:inherit; font-weight:800; cursor:pointer; white-space:nowrap;}
 .bill-abo-btn:hover{background:var(--gold); color:#FFFFFF;}
-body.abonne .bill-abo{display:none;}
+.bill-abo-note{margin:6px 0 0; font-size:12.5px; color:var(--slate);}
 body.connecte .bill-abo-suivre{display:none;}
-.bill-abo-membre{background:#FFF6D6;}
+body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
+.bill-abo-devenir{margin-top:14px;}
