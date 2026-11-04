@@ -6105,11 +6105,13 @@ function nbSuivisDecorer(){
     if(!m) return;
     const nom = m[1].replace(/\\'/g, "'").split('|')[0];
     const n = _nbSuivis.get(norm(nom)) || 0;
-    let pastille = b.nextElementSibling?.classList.contains('nb-suivis') ? b.nextElementSibling : null;
+    // Dans le bouton : « Suivre (12) », « Suivre (1k+) », « Suivre (100k+) » (Martin, 4 nov. 2026).
+    let pastille = b.querySelector('.nb-suivis');
     if(n < 1){ pastille?.remove(); return; }
-    if(!pastille){ pastille = document.createElement('span'); pastille.className = 'nb-suivis'; b.after(pastille); }
-    pastille.textContent = n;
-    pastille.title = isEn ? `${n} ${n > 1 ? 'people follow' : 'person follows'} ${nom} on DossierQuébec` : `${n} personne${n > 1 ? 's suivent' : ' suit'} ${nom} sur DossierQuébec`;
+    const texte = ` (${n < 1000 ? n : n < 100000 ? `${Math.floor(n / 1000)}k+` : '100k+'})`;
+    if(!pastille){ pastille = document.createElement('span'); pastille.className = 'nb-suivis'; b.append(pastille); }
+    if(pastille.textContent !== texte) pastille.textContent = texte;
+    b.title = isEn ? `${n} ${n > 1 ? 'people follow' : 'person follows'} ${nom} on DossierQuébec` : `${n} personne${n > 1 ? 's suivent' : ' suit'} ${nom} sur DossierQuébec`;
   });
 }
 (() => {
