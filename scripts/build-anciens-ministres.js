@@ -1,7 +1,8 @@
 // LES ANCIENS MINISTRES DE LA 43e — /archives/43/ministres et /archives/43/ministres/<slug> (3 nov. 2026).
 //
-// Même fiche que scripts/build-minister-pages.js, pour les ministres du gouvernement Legault
-// (deuxième cabinet, 2022-2026), bâtie sur archives.html (onglet Archives) : fonctions occupées,
+// Même fiche que scripts/build-minister-pages.js, pour les ministres de la 43e législature : gouvernement
+// Legault (deuxième cabinet, 20 oct. 2022 - 15 avril 2026) et gouvernement Fréchette (15 avril - 21 oct.
+// 2026 ; Conseil du 21 avril 2026, assermentation de Paul St-Pierre Plamondon le 21 oct.), bâtie sur archives.html (onglet Archives) : fonctions occupées,
 // circonscription, parti, projets de loi parrainés pendant la 43e, présence aux votes nominaux de
 // la 43e (pastille calculée sur les 125 député·e·s de la 43e), votes marquants, bio et photo
 // (data/archives/43/ministres.json, refait par scripts/anciens-ministres-wiki.js).
@@ -22,7 +23,18 @@ const MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const dateFr = (iso) => { const [a, m, j] = iso.split('-').map(Number); return `${j === 1 ? '1er' : j} ${MOIS[m - 1]} ${a}`; };
 const dateEn = (iso) => { const [a, m, j] = iso.split('-').map(Number); return `${MONTHS[m - 1]} ${j}, ${a}`; };
-const FEMMES = /^(Geneviève|Sonia|Pascale|Christine|Suzanne|Andrée|Martine|Maïté|Kateri|Caroline|France-Élaine|Isabelle|Chantal|Amélie)\b/;
+const FEMMES = /^(Geneviève|Sonia|Pascale|Christine|Suzanne|Andrée|Martine|Maïté|Kateri|Caroline|France-Élaine|Isabelle|Chantal|Amélie|Catherine|Karine|Kariane)\b/;
+// Les deux gouvernements de la 43e législature.
+const GOUVS = {
+  legault: { fr: 'Gouvernement Legault (2022-2026)', en: 'Legault government (2022-2026)', debut: '2022-10-20', fin: '2026-04-15' },
+  frechette: { fr: 'Gouvernement Fréchette (avril-octobre 2026)', en: 'Fréchette government (April-October 2026)', debut: '2026-04-21', fin: '2026-10-21' },
+};
+const dansLegault = (m) => m.fonctions2022.length + m.fonctions2025.length > 0;
+const dansFrechette = (m) => (m.fonctionsFrechette ?? []).length > 0;
+// « du gouvernement Legault », « du gouvernement Fréchette » ou « des gouvernements Legault et Fréchette ».
+const quelGouv = (m) => dansLegault(m) && dansFrechette(m)
+  ? ['des gouvernements Legault et Fréchette', 'the Legault and Fréchette governments’']
+  : dansFrechette(m) ? ['du gouvernement Fréchette', 'the Fréchette government’s'] : ['du gouvernement Legault', 'the Legault government’s'];
 
 function remplacerTout(modele, { titre, desc, url, ld, section, fichier }) {
   let h = modele;
@@ -100,8 +112,10 @@ export function construirePagesAnciensMinistres() {
     const slug = slugMinistre(homonyme && m.circonscription ? `${m.nom} ${m.circonscription}` : m.nom);
     const url = `${SITE}/${DOSSIER}/${slug}`;
     const f = FEMMES.test(m.nom);
-    const fonctions = [...new Set([...m.fonctions2022, ...m.fonctions2025])];
-    const principale = (m.fonctions2025[0] || m.fonctions2022[0] || 'Ministre').replace(/^Ministre/, 'ministre').replace(/^Président/, 'président').replace(/^Premier/, 'premier');
+    m.fonctionsFrechette ??= [];
+    const [gouvFr, gouvEn] = quelGouv(m);
+    const premiereMin = m.fonctionsFrechette.some((r) => /^Premi[eè]re? ministre$/i.test(r));
+    const principale = (m.fonctionsFrechette[0] || m.fonctions2025[0] || m.fonctions2022[0] || 'Ministre').replace(/^Ministre/, 'ministre').replace(/^Président/, 'président').replace(/^Premier/, 'premier');
     const projets = bills.filter((b) => norm(b.sponsor) === norm(m.nom)).sort((a, b) => String(b.lastActivity ?? '').localeCompare(String(a.lastActivity ?? '')));
     const att = m.assnatId ? presences[m.assnatId] : null;
     const actuel = actuels.get(norm(m.nom));
@@ -126,22 +140,28 @@ export function construirePagesAnciensMinistres() {
       ? `<p>${deux(`${esc(m.nom)} siège toujours, dans la 44e législature : <a href="/ministres/${slugMinistre(actuel.name)}">sa fiche actuelle →</a>`, `${esc(m.nom)} still sits in the 44th Legislature: <a href="/ministres/${slugMinistre(actuel.name)}">current profile →</a>`)}</p>`
       : depute ? `<p>${deux(`Réélu${f ? 'e' : ''} le 5 octobre 2026 : ${esc(m.nom)} siège dans la 44e législature (${esc(depute[1])}, ${esc(depute[3])}). <a href="/ministres?elu=${slugMinistre(m.nom)}">Voir sa carte parmi les député·e·s →</a>`, `Re-elected on October 5, 2026: ${esc(m.nom)} sits in the 44th Legislature (${esc(depute[1])}, ${esc(depute[3])}). <a href="/ministres?elu=${slugMinistre(m.nom)}">See the MNAs →</a>`)}</p>` : '';
 
-    const section = `<section class="view active" id="view-ancien" data-titre-en="${esc(`${m.nom}, former minister — DossierQuébec`)}">
+    const section = `<section class="view active" id="view-ancien" data-titre-en="${esc(`${m.nom}, ${premiereMin ? 'former Premier' : 'former minister'} — DossierQuébec`)}">
     <nav class="fil-ariane" aria-label="Fil d'Ariane">${filArchive}<a href="/${DOSSIER}">${deux('Anciens ministres', 'Former ministers')}</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">${esc(m.nom)}</span></nav>
     ${bande(ancien)}
     <div class="view-hero min-hero">
       <div class="min-colphoto">${photo}</div>
       <div class="min-tete">
-        <h1 class="hero-h1 hero-h1-md"><span class="hero-sujet">${deux(`${ancien} (2022-2026)`, 'Former minister (2022-2026)')}</span><span>${esc(m.nom)}</span></h1>
-        <p class="view-hero-sub">${deux(`${esc(m.nom)} a été membre du Conseil des ministres du gouvernement Legault pendant la 43e législature (2022-2026).`, `${esc(m.nom)} sat in the Legault government’s cabinet during the 43rd Legislature (2022-2026). Official titles are listed below in French.`)}</p>
+        <h1 class="hero-h1 hero-h1-md"><span class="hero-sujet">${premiereMin ? deux('Première ministre (2026)', 'Premier of Québec (2026)') : deux(`${ancien} (2022-2026)`, 'Former minister (2022-2026)')}</span><span>${esc(m.nom)}</span></h1>
+        <p class="view-hero-sub">${premiereMin
+          ? deux(`${esc(m.nom)} a été première ministre du Québec du 15 avril au 21 octobre 2026, après avoir été membre du Conseil des ministres du gouvernement Legault pendant la 43e législature.`, `${esc(m.nom)} was Premier of Québec from April 15 to October 21, 2026, after sitting in the Legault government’s cabinet during the 43rd Legislature. Official titles are listed below in French.`)
+          : deux(`${esc(m.nom)} a été membre du Conseil des ministres ${gouvFr} pendant la 43e législature (2022-2026).`, `${esc(m.nom)} sat in ${gouvEn} cabinet during the 43rd Legislature (2022-2026). Official titles are listed below in French.`)}</p>
         ${lienActuel}
       </div>
     </div>
     <div class="band band-white bleed"><div class="min-fiche">
       <h2>${deux('Fonctions occupées', 'Roles held')}</h2>
+      ${dansLegault(m) ? `<h3>${deux(GOUVS.legault.fr, GOUVS.legault.en)}</h3>
       ${m.fonctions2022.length ? `<p class="pr-meta">${deux('Conseil du 20 octobre 2022', 'Cabinet of October 20, 2022')}</p><ul class="min-liste">${m.fonctions2022.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>` : ''}
-      ${m.fonctions2025.length ? `<p class="pr-meta">${deux('Conseil du 10 septembre 2025', 'Cabinet of September 10, 2025')}</p><ul class="min-liste">${m.fonctions2025.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>` : ''}
-      <p class="pr-meta">${deux('Les ajustements faits entre ces deux dates (démissions, intérims) ne sont pas tous repris ici.', 'Adjustments made between those two dates (resignations, acting roles) are not all listed here.')}</p>
+      ${m.fonctions2025.length ? `<p class="pr-meta">${deux('Remaniement du 10 septembre 2025', 'Shuffle of September 10, 2025')}</p><ul class="min-liste">${m.fonctions2025.map((r) => `<li>${esc(r)}</li>`).join('')}</ul>` : ''}` : ''}
+      ${dansFrechette(m) ? `<h3>${deux(GOUVS.frechette.fr, GOUVS.frechette.en)}</h3>
+      <p class="pr-meta">${deux('Conseil du 21 avril 2026', 'Cabinet of April 21, 2026')}</p><ul class="min-liste">${m.fonctionsFrechette.map((r) => `<li>${esc(premiereMin && /^Premi/i.test(r) ? `${r} (2026)` : r)}</li>`).join('')}</ul>
+      ${m.ajustementFrechette ? `<p>${deux(esc(m.ajustementFrechette.fr), esc(m.ajustementFrechette.en))}</p>` : ''}` : ''}
+      <p class="pr-meta">${deux('Fonctions relevées à trois dates : 20 octobre 2022 et 10 septembre 2025 (gouvernement Legault), 21 avril 2026 (gouvernement Fréchette, avec le changement du 9 octobre 2026). Les autres ajustements (démissions, intérims) ne sont pas tous repris ici.', 'Roles recorded at three dates: October 20, 2022 and September 10, 2025 (Legault government), April 21, 2026 (Fréchette government, with the October 9, 2026 change). Other adjustments (resignations, acting roles) are not all listed here.')}</p>
       <div class="min-faits">
         ${ligne(deux('Parti', 'Party'), deux('Coalition avenir Québec (CAQ)', 'Coalition Avenir Québec (CAQ)'))}
         ${m.circonscription ? ligne(deux('Circonscription (43e)', 'Riding (43rd)'), esc(m.circonscription)) : ''}
@@ -165,10 +185,14 @@ export function construirePagesAnciensMinistres() {
     </div></div>
   </section>`;
 
-    const titreCourt = `${m.nom}${homonyme && m.circonscription ? ` (${m.circonscription})` : ''}, ${f ? 'ancienne' : 'ancien'} ministre`;
+    const qui = premiereMin ? 'ancienne première ministre' : `${f ? 'ancienne' : 'ancien'} ministre`;
+    const titreCourt = `${m.nom}${homonyme && m.circonscription ? ` (${m.circonscription})` : ''}, ${qui}`;
     const titre = `${titreCourt} — DossierQuébec`;
-    let desc = `${m.nom} (CAQ${m.circonscription ? `, ${m.circonscription}` : ''}), ${f ? 'ancienne' : 'ancien'} ministre du gouvernement Legault : fonctions, projets de loi et présence aux votes de la 43e législature.`;
-    if (desc.length > 165) desc = `${m.nom}, ${f ? 'ancienne' : 'ancien'} ministre du gouvernement Legault : fonctions, projets de loi et présence aux votes de la 43e législature.`;
+    const suite = ': fonctions, projets de loi et présence aux votes de la 43e législature.';
+    let desc = `${m.nom} (CAQ${m.circonscription ? `, ${m.circonscription}` : ''}), ${qui} ${gouvFr} ${suite}`;
+    if (desc.length > 165) desc = `${m.nom}, ${qui} ${gouvFr} ${suite}`;
+    if (desc.length > 165) desc = `${m.nom}, ${qui} de la Coalition avenir Québec ${suite}`;
+    if (desc.length > 165) desc = `${m.nom}, ${qui} de la CAQ ${suite}`;
     if (desc.length < 120) desc += ' Archives de la 43e législature.';
     if (desc.length < 120) desc += ' Sur DossierQuébec.';
     const ld = JSON.stringify({ '@context': 'https://schema.org', '@graph': [
@@ -179,28 +203,46 @@ export function construirePagesAnciensMinistres() {
         { '@type': 'ListItem', position: 4, name: m.nom, item: url },
       ] },
       { '@type': 'Person', name: m.nom, url, memberOf: { '@type': 'PoliticalParty', name: 'Coalition avenir Québec' },
-        hasOccupation: fonctions.map((r) => ({ '@type': 'Role', roleName: r, startDate: '2022', endDate: '2026' })),
+        hasOccupation: [
+          ...[...new Set([...m.fonctions2022, ...m.fonctions2025])].map((r) => ({ '@type': 'Role', roleName: `${r} (gouvernement Legault)`, startDate: m.fonctions2022.includes(r) ? GOUVS.legault.debut : '2025-09-10', endDate: GOUVS.legault.fin })),
+          ...m.fonctionsFrechette.map((r) => ({ '@type': 'Role', roleName: `${r} (gouvernement Fréchette)`, startDate: /^Premi/i.test(r) ? '2026-04-15' : GOUVS.frechette.debut, endDate: m.nom === 'Mathieu Lacombe' ? '2026-10-09' : GOUVS.frechette.fin })),
+          ...(m.nom === 'Martine Biron' ? [{ '@type': 'Role', roleName: 'Ministre de la Culture et des Communications (gouvernement Fréchette)', startDate: '2026-10-09', endDate: GOUVS.frechette.fin }] : []),
+        ],
         ...(m.photo ? { image: SITE + m.photo.src } : {}), ...(m.url ? { sameAs: [m.url, ...(m.wikidata ? [`https://www.wikidata.org/wiki/${m.wikidata}`] : [])] } : {}) },
     ] }, null, 1).replace(/</g, '\\u003c');
     remplacerTout(modele, { titre, desc, url, ld, section, fichier: `${DOSSIER}/${slug}.html` });
     adresses.push(url);
-    cartes.push({ m, slug, principale: m.fonctions2025[0] || m.fonctions2022[0] || '' });
+    cartes.push({ m, slug });
   }
 
-  // La page index.
+  // La page index : le Conseil de Christine Fréchette, puis celui de François Legault. Une personne
+  // qui a siégé aux deux apparaît dans les deux listes (même fiche).
   const urlIdx = `${SITE}/${DOSSIER}`;
-  const premier = cartes.filter((c) => /^Premier ministre/i.test(c.principale));
-  const autres = cartes.filter((c) => !premier.includes(c)).sort((a, b) => a.m.nom.split(' ').slice(1).join(' ').localeCompare(b.m.nom.split(' ').slice(1).join(' '), 'fr'));
-  const section = `<section class="view active" id="view-ancien" data-titre-en="Former ministers of the Legault government — DossierQuébec">
+  const nomFamille = (c) => c.m.nom.split(' ').slice(1).join(' ');
+  const liste = (garde, fonctionDe) => {
+    const siens = cartes.filter((c) => garde(c.m));
+    const chef = siens.filter((c) => /^Premi[eè]re? ministre$/i.test(fonctionDe(c.m)));
+    const reste = siens.filter((c) => !chef.includes(c)).sort((a, b) => nomFamille(a).localeCompare(nomFamille(b), 'fr'));
+    return { n: siens.length, html: `<ul class="min-liste">${[...chef, ...reste].map((c) => `<li><b><a href="/${DOSSIER}/${c.slug}">${esc(c.m.nom)}</a></b> — ${esc(fonctionDe(c.m))}${c.m.circonscription ? ` <span class="pr-meta">(${esc(c.m.circonscription)})</span>` : ''}</li>`).join('')}</ul>` };
+  };
+  const lFrechette = liste(dansFrechette, (m) => m.fonctionsFrechette[0]);
+  const lLegault = liste(dansLegault, (m) => m.fonctions2025[0] || m.fonctions2022[0]);
+  const deuxFois = cartes.filter((c) => dansLegault(c.m) && dansFrechette(c.m)).length;
+  const section = `<section class="view active" id="view-ancien" data-titre-en="Former CAQ ministers (2022-2026) — DossierQuébec">
     <nav class="fil-ariane" aria-label="Fil d'Ariane">${filArchive}<span aria-current="page">${deux('Anciens ministres', 'Former ministers')}</span></nav>
     ${bande('Anciens ministres', 'Former ministers', true)}
     <div class="view-hero">
-      <h1 class="hero-h1 hero-h1-md"><span class="hero-sujet">${deux('Archives de la 43e législature', 'Archives of the 43rd Legislature')}</span><span>${deux('Les ministres du gouvernement Legault', 'The Legault government’s ministers')}</span></h1>
-      <p class="view-hero-sub">${deux(`${cartes.length} personnes ont siégé au Conseil des ministres de 2022 à 2026, au remaniement du 20 octobre 2022 ou à celui du 10 septembre 2025. Chaque fiche donne leurs fonctions, leurs projets de loi et leur présence aux votes.`, `${cartes.length} people sat in cabinet from 2022 to 2026, in the October 20, 2022 cabinet or the September 10, 2025 shuffle. Each profile lists their roles, bills and vote attendance.`)}</p>
+      <h1 class="hero-h1 hero-h1-md"><span class="hero-sujet">${deux('Archives de la 43e législature', 'Archives of the 43rd Legislature')}</span><span>${deux('Anciens ministres de la CAQ (2022-2026)', 'Former CAQ ministers (2022-2026)')}</span></h1>
+      <p class="view-hero-sub">${deux(`${cartes.length} personnes ont siégé au Conseil des ministres pendant la 43e législature, sous deux gouvernements : celui de François Legault (2022-avril 2026) et celui de Christine Fréchette (avril-octobre 2026). ${deuxFois} ont siégé aux deux. Chaque fiche donne leurs fonctions, leurs projets de loi et leur présence aux votes.`, `${cartes.length} people sat in cabinet during the 43rd Legislature, under two governments: François Legault’s (2022-April 2026) and Christine Fréchette’s (April-October 2026). ${deuxFois} sat in both. Each profile lists their roles, bills and vote attendance.`)}</p>
     </div>
     <div class="band band-white bleed"><div class="min-fiche">
-      <ul class="min-liste">${[...premier, ...autres].map((c) => `<li><b><a href="/${DOSSIER}/${c.slug}">${esc(c.m.nom)}</a></b> — ${esc(c.principale)}${c.m.circonscription ? ` <span class="pr-meta">(${esc(c.m.circonscription)})</span>` : ''}</li>`).join('')}</ul>
-      <p class="min-source">${deux('Source de la liste', 'Source of the list')} : <a href="${esc(donnees.source)}" rel="noopener">Wikipédia</a> · ${deux('votes et projets de loi', 'votes and bills')} : <a href="https://www.assnat.qc.ca/" rel="noopener">assnat.qc.ca</a></p>
+      <h2>${deux('Conseil des ministres de Christine Fréchette (avril-octobre 2026)', 'Christine Fréchette’s cabinet (April-October 2026)')}</h2>
+      <p class="pr-meta">${deux(`${lFrechette.n} membres, Conseil du 21 avril 2026. Christine Fréchette est assermentée le 15 avril 2026 ; son gouvernement prend fin à l’assermentation de Paul St-Pierre Plamondon, le 21 octobre 2026. Le 9 octobre 2026, Mathieu Lacombe est expulsé du Conseil et Martine Biron reprend la Culture et les Communications.`, `${lFrechette.n} members, cabinet of April 21, 2026. Christine Fréchette was sworn in on April 15, 2026; her government ended when Paul St-Pierre Plamondon was sworn in on October 21, 2026. On October 9, 2026, Mathieu Lacombe was removed from cabinet and Martine Biron took over Culture and Communications.`)}</p>
+      ${lFrechette.html}
+      <h2>${deux('Conseil des ministres de François Legault (2022-avril 2026)', 'François Legault’s cabinet (2022-April 2026)')}</h2>
+      <p class="pr-meta">${deux(`${lLegault.n} membres, au Conseil du 20 octobre 2022 ou au remaniement du 10 septembre 2025 (fonction la plus récente). François Legault quitte ses fonctions le 15 avril 2026.`, `${lLegault.n} members, in the October 20, 2022 cabinet or the September 10, 2025 shuffle (most recent role). François Legault left office on April 15, 2026.`)}</p>
+      ${lLegault.html}
+      <p class="min-source">${deux('Source des listes', 'Source of the lists')} : <a href="${esc(donnees.source)}" rel="noopener">Wikipédia (Legault)</a>${donnees.sourceFrechette ? `, <a href="${esc(donnees.sourceFrechette)}" rel="noopener">Wikipédia (Fréchette)</a>` : ''} · ${deux('votes et projets de loi', 'votes and bills')} : <a href="https://www.assnat.qc.ca/" rel="noopener">assnat.qc.ca</a></p>
     </div></div>
   </section>`;
   const ldIdx = JSON.stringify({ '@context': 'https://schema.org', '@graph': [{ '@type': 'BreadcrumbList', itemListElement: [
@@ -209,8 +251,8 @@ export function construirePagesAnciensMinistres() {
     { '@type': 'ListItem', position: 3, name: 'Anciens ministres', item: urlIdx },
   ] }] }, null, 1).replace(/</g, '\\u003c');
   remplacerTout(modele, {
-    titre: 'Anciens ministres du gouvernement Legault — DossierQuébec',
-    desc: `Les ${cartes.length} ministres du gouvernement Legault de 2022 à 2026 : fonctions, projets de loi parrainés et présence aux votes de la 43e législature.`,
+    titre: 'Anciens ministres de la CAQ (2022-2026) — DossierQuébec',
+    desc: `Les ${cartes.length} ministres des gouvernements Legault et Fréchette (2022-2026) : fonctions, projets de loi et présence aux votes de la 43e législature.`,
     url: urlIdx, ld: ldIdx, section, fichier: `archives/${LEG}/ministres.html`,
   });
   adresses.unshift(urlIdx);
