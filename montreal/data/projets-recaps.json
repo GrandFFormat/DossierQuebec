@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-04T17:23:00.419Z",
+ "generatedAt": "2026-11-05T17:38:46.626Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Récapitulatifs rédigés automatiquement à partir de l'objet, du dispositif et des motifs des résolutions de chaque sujet, lus dans les procès-verbaux, puis vérifiés automatiquement (numéros et nombres contre les dossiers cités, contre-lecture). Ce qui ne passe pas est retiré. En cas d'écart, les documents officiels font foi.",
@@ -120,45 +120,33 @@
   },
   "louvain-est": {
    "titre": "Écoquartier Louvain Est",
-   "signature": "9973462a54e58fd7",
-   "genereLe": "2026-11-04T17:22:10.250Z",
+   "signature": "e6876bf499fe145d",
+   "genereLe": "2026-11-05T17:38:46.626Z",
    "modele": "claude-opus-5",
    "dossiers": 14,
-   "enBref": "Cette année, la Ville gère les terrains municipaux du secteur Louvain : elle les loue pour du stationnement, les prête à des organismes pour des potagers et des activités, et donne un contrat pour construire une rue avec ses réseaux et nettoyer des sols. Elle nomme aussi la rue centrale de l'écoquartier « avenue des Solidarités ». En parallèle, l'arrondissement d'Ahuntsic-Cartierville modifie des règles de construction, et l'arrondissement voisin fait réaménager la rue de Louvain entre le parc Frédéric-Back et le boulevard Saint-Michel.",
+   "enBref": null,
    "etapes": [
     {
      "periode": "Janvier 2026",
      "titre": "Terrains loués pour du stationnement",
-     "texte": "Le conseil municipal loue à la Société de transport de Montréal un terrain de 2 787 mètres carrés au sud de la rue de Louvain, à l'ouest du boulevard Saint-Laurent, pour le stationnement des employés munis d'une vignette, au prix de 49 293 $ pour trois ans [CM26 0078]. Il prolonge aussi la location d'un terrain de 836 mètres carrés à une entreprise qui y exploite un stationnement payant par application mobile [CM26 0080].",
+     "texte": "Le conseil municipal a prolongé la location d'un terrain de 2 787 mètres carrés à la Société de transport de Montréal, au sud de la rue de Louvain et à l'ouest du boulevard Saint-Laurent, pour un loyer total de 49 293 $. Il a aussi prolongé la location d'un terrain voisin de 836 mètres carrés à une entreprise de stationnement par application, pour 45 049 $ avant taxes.",
      "numeros": [
       "CM26 0078",
       "CM26 0080"
      ]
     },
     {
-     "periode": "Mars à juin 2026",
-     "titre": "Terrains prêtés à des organismes",
-     "texte": "La Ville prête gratuitement des terrains du secteur : 10 000 pieds carrés à Ville en vert pour un potager [CM26 0447], et deux parties de terrain à Laboratoire sur l'agriculture urbaine pour planter des tournesols et installer une serre [CM26 0698]. L'arrondissement demande au conseil municipal de lui confier le bail avec Îlot 84 pour un terrain d'animation [CM26 0474], verse 35 000 $ à cet organisme pour l'espace éphémère Esplanade-Louvain au 150, rue de Louvain Ouest [CA26 09 0143] et autorise des spectacles, de la bouffe de rue et des activités récréatives sur un terrain vacant de la rue de Louvain Ouest [CA26 09 0162].",
-     "numeros": [
-      "CM26 0447",
-      "CM26 0474",
-      "CA26 09 0143",
-      "CM26 0698",
-      "CA26 09 0162"
-     ]
-    },
-    {
      "periode": "Mai 2026",
-     "titre": "La rue centrale prend un nom",
-     "texte": "Le conseil municipal nomme « avenue des Solidarités » la nouvelle rue au cœur de l'écoquartier Louvain. Le nom vient d'un appel de propositions tenu à l'automne 2024 ; l'affichage suivra l'officialisation par la Commission de toponymie du Québec [CM26 0579].",
+     "titre": "La rue centrale est nommée",
+     "texte": "Le conseil municipal a nommé « avenue des Solidarités » la nouvelle rue au cœur de l'écoquartier, parce que le premier projet résidentiel est en construction et qu'il faut attribuer des adresses. Le nom vient d'un appel public de propositions tenu à l'automne 2024.",
      "numeros": [
       "CM26 0579"
      ]
     },
     {
      "periode": "Juin 2026",
-     "titre": "Contrat pour la rue, les réseaux et les sols",
-     "texte": "La Ville confie à Charex inc. la construction d'une rue de l'écoquartier avec égout, aqueduc, voirie, éclairage et réseau électrique souterrain, pour une dépense totale de 15 366 336 $, taxes incluses [CG26 0368]. Le contrat comprend le nettoyage des sols de l'ancien poste d'essence du terrain Louvain Est, financé par 2 007 312,15 $ pris dans la réserve du passif environnemental [CM26 0651].",
+     "titre": "Contrat pour la rue et les sols",
+     "texte": "La Ville a confié à Charex inc. la construction d'une rue de 610 mètres avec égout, aqueduc, éclairage et réseau électrique souterrain, pour 10 311 940,25 $ taxes incluses, et une dépense totale de 15 366 336 $. Le contrat comprend la réhabilitation des sols de l'ancien poste d'essence, pour laquelle la Ville ajoute 2 007 312,15 $ au net par la réserve du passif environnemental.",
      "numeros": [
       "CM26 0651",
       "CG26 0368"
@@ -166,17 +154,17 @@
     },
     {
      "periode": "Juin à septembre 2026",
-     "titre": "Règles de construction revues",
-     "texte": "L'arrondissement d'Ahuntsic-Cartierville adopte un second projet de résolution autorisant la démolition d'un immeuble de l'avenue de l'Esplanade et la construction d'un ensemble de bâtiments, avec une densité d'au moins 200 logements à l'hectare [CA26 09 0206]. Il lance ensuite un projet de règlement pour permettre des bâtiments plus hauts et plus denses sur un terrain municipal à l'angle de l'avenue de l'Esplanade et de la rue de Louvain Ouest, avec une hauteur limite de 73 mètres [CA26 09 0254].",
+     "titre": "Hauteurs et densités revues",
+     "texte": "L'arrondissement a adopté un projet de résolution autorisant la démolition d'un immeuble de l'avenue de l'Esplanade et la construction d'un ensemble de bâtiments, avec une densité minimale de 200 logements à l'hectare. Il a ensuite lancé un projet de règlement permettant, sur une partie du terrain municipal des 50 et 150, rue de Louvain Ouest, une hauteur limite de 73 mètres et un coefficient d'occupation du sol de 6.",
      "numeros": [
       "CA26 09 0206",
       "CA26 09 0254"
      ]
     },
     {
-     "periode": "Avril et octobre 2026",
-     "titre": "Réaménagement de la rue de Louvain",
-     "texte": "L'arrondissement de Villeray–Saint-Michel–Parc-Extension confie à Groupe MPotvin le réaménagement de la rue de Louvain entre le parc Frédéric-Back et le boulevard Saint-Michel, pour une dépense totale de 11 192 464,62 $, taxes incluses : conduites, éclairage, feux, trottoirs, plantations et marquage cyclable [CA26 14 0076]. En octobre, il demande une aide financière au gouvernement du Québec pour une bande cyclable et des trottoirs sur ce même tronçon [CA26 14 0243].",
+     "periode": "Avril à octobre 2026",
+     "titre": "Réaménagement de la rue de Louvain Est",
+     "texte": "L'arrondissement de Villeray–Saint-Michel–Parc-Extension a confié à Groupe MPotvin le réaménagement de la rue de Louvain entre le parc Frédéric-Back et le boulevard Saint-Michel, pour un maximum de 8 199 514,82 $ taxes incluses et une dépense totale de 11 192 464,62 $. En octobre, il a autorisé le dépôt d'une demande d'aide financière au ministère des Transports pour la bande cyclable et les trottoirs de ce tronçon.",
      "numeros": [
       "CA26 14 0076",
       "CA26 14 0243"
@@ -185,25 +173,20 @@
    ],
    "aSurveiller": [
     {
-     "texte": "Le bail de stationnement avec la Société de transport de Montréal commence le 1er octobre 2026, pour trois ans, à raison de 92 jours par année.",
+     "texte": "Le bail du Laboratoire sur l'agriculture urbaine court du 1er novembre 2026 au 31 octobre 2027 ; le potager de Ville en vert est prêté jusqu'au 31 décembre 2027.",
      "numeros": [
-      "CM26 0078"
-     ]
-    },
-    {
-     "texte": "Le prêt de terrain pour les tournesols et la serre court du 1er novembre 2026 au 31 octobre 2027.",
-     "numeros": [
-      "CM26 0698"
-     ]
-    },
-    {
-     "texte": "Le potager de Ville en vert peut rester sur le terrain jusqu'au 31 décembre 2027.",
-     "numeros": [
+      "CM26 0698",
       "CM26 0447"
      ]
     },
     {
-     "texte": "Le chantier de la rue de Louvain se déroule en trois phases : mai à novembre 2026, mai à octobre 2027, puis mai à août 2028.",
+     "texte": "Îlot 84 pourrait occuper le terrain de l'Esplanade du 1er avril au 31 octobre 2027.",
+     "numeros": [
+      "CM26 0474"
+     ]
+    },
+    {
+     "texte": "Le chantier de la rue de Louvain se poursuit de mai à octobre 2027 (trottoirs et bordures), puis de mai à août 2028 (chaussée finale, piste cyclable, plantations).",
      "numeros": [
       "CA26 14 0076"
      ]
@@ -222,108 +205,120 @@
     "retiresMecanique": [],
     "retiresContreLecture": [
      {
-      "element": "aSurveiller[3]",
-      "raison": "Le dossier CM26 0474 ne constate aucun prêt de terrain en vigueur : le conseil d'arrondissement offre seulement au conseil municipal, en vertu de l'article 85 de la Charte, de prendre en charge la préparation et l'approbation d'un futur bail avec Îlot 84, et le sommaire précise qu'aucune somme n'est engagée à cette étape et que le projet de bail sera déposé plus tard. Écrire que « le prêt de terrain à Îlot 84 vise aussi la période du 1er avril au 31 octobre 2027 » affirme l'existence d'un bail conclu pour 2027, ce que le dossier ne dit pas (il s'agit d'un bail envisagé, non approuvé)."
+      "element": "enBref",
+      "raison": "Confusion de deux sites. La phrase « La Ville prépare le terrain municipal de l'écoquartier Louvain […] En attendant la construction, elle loue ou prête des parties des terrains » laisse entendre que les baux portent sur le site de l'écoquartier. Or CM26 0579 situe l'écoquartier Louvain sur un terrain de 7,7 ha bordé par la rue de Louvain Est, la rue Saint-Hubert, l'avenue Christophe-Colomb et l'emprise du CN, alors que les baux (CM26 0078, CM26 0080, CM26 0447, CM26 0474, CM26 0698) portent tous sur des terrains situés au sud de la rue de Louvain Ouest et à l'ouest du boulevard Saint-Laurent (secteur de l'Esplanade Louvain / District central). Aucun dossier ne dit qu'il s'agit du même terrain."
+     },
+     {
+      "element": "enBref",
+      "raison": "« la construction d'une première rue » : aucun dossier n'indique qu'il s'agit de la première rue de l'écoquartier. CG26 0368 et CM26 0651 parlent d'« une nouvelle rue » / de « travaux d'aménagement d'une route […] (lot 2) ». Le rang chronologique est une déduction du rédacteur."
+     },
+     {
+      "element": "enBref",
+      "raison": "« L'arrondissement d'Ahuntsic-Cartierville modifie aussi ses règles d'urbanisme sur le secteur » présente un changement comme accompli. CA26 09 0254 n'est qu'un avis de motion et un premier projet de règlement, suivi selon le dossier d'une consultation, d'un second projet et d'une démarche d'approbation référendaire avant l'adoption finale ; CA26 09 0206 n'est qu'un second projet de résolution. Aucune modification réglementaire n'est en vigueur."
+     },
+     {
+      "element": "etapes[1]",
+      "raison": "« le conseil municipal a pris en charge le bail d'Îlot 84 pour un terrain de 78 244 pieds carrés » : CM26 0474 ne porte que sur la prise en charge de la préparation et de l'approbation d'un futur bail, en vertu de l'article 85 de la Charte. Le dossier précise qu'aucune somme n'est engagée à cette étape et que le projet de bail sera déposé plus tard. Placé dans une étape intitulée « Terrains prêtés pour des usages temporaires », l'énoncé laisse croire que le prêt est conclu."
      }
     ]
    }
   },
   "frederic-back": {
    "titre": "Parc Frédéric-Back et complexe environnemental Saint-Michel",
-   "signature": "dff374a25a5c4b1f",
-   "genereLe": "2026-11-04T17:23:00.419Z",
+   "signature": "c4ff606cdd20a5b2",
+   "genereLe": "2026-11-05T17:38:10.376Z",
    "modele": "claude-opus-5",
    "dossiers": 18,
-   "enBref": "Cette année, la Ville avance sur plusieurs fronts au parc Frédéric-Back et au Complexe environnemental Saint-Michel : un complexe de serres dans le secteur sud-ouest du parc, des travaux électriques liés au captage du biogaz, et l'entretien courant du parc. Elle demande aussi de l'aide financière au gouvernement du Québec pour un lien piéton et cyclable est-ouest, et pour la rue De Louvain Est en bordure du parc.",
+   "enBref": "Cette année, la Ville fait avancer plusieurs chantiers au parc Frédéric-Back et au Complexe environnemental Saint-Michel. Elle lance la construction d'un complexe de serres dans le quartier Saint-Michel, remplace des équipements électriques du site, renouvelle l'entretien du parc et réaménage la rue De Louvain à ses abords. Elle demande aussi de l'argent au gouvernement du Québec pour un lien cyclable et piéton.",
    "etapes": [
     {
      "periode": "Février 2026",
-     "titre": "Demande d'aide pour le lien est-ouest",
-     "texte": "La Ville demande au ministère des Transports et de la Mobilité durable du Québec une aide pouvant atteindre 2 000 000 $ pour un sentier polyvalent de 900 mètres traversant le parc, avec une passerelle d'environ 150 mètres. Le projet comprend aussi des ouvrages de gestion des eaux de pluie et une prairie de 12,7 hectares.",
+     "titre": "Demande d'aide pour la passerelle",
+     "texte": "La Ville demande une aide financière au ministère des Transports et de la Mobilité durable du Québec pour aménager une passerelle et un lien est-ouest dans le parc. Le dossier décrit un sentier de 900 mètres traversant le parc, incluant une passerelle d'environ 150 mètres, et une aide pouvant atteindre 2 000 000 $ [CG26 0121].",
      "numeros": [
       "CM26 0177",
       "CG26 0121"
      ]
     },
     {
-     "periode": "Février à mars 2026",
-     "titre": "Feu vert au projet de serres",
-     "texte": "Le conseil d'agglomération approuve la construction d'un complexe de serres près de la plateforme de compostage : 1500 m² pour la recherche et la formation, 1000 m² pour la serre communautaire du quartier Saint-Michel, pour un budget de construction évalué à 2 185 000 $. L'agglomération confie la réalisation au conseil municipal, qui accepte l'offre de l'arrondissement de Villeray–Saint-Michel–Parc-Extension de piloter le chantier.",
+     "periode": "Février à juillet 2026",
+     "titre": "Serres urbaines au parc",
+     "texte": "La Ville approuve la construction d'un complexe de serres près de la plateforme de compostage, puis confie le projet à l'arrondissement de Villeray–Saint-Michel–Parc-Extension. L'arrondissement accorde ensuite un contrat de 499 865,92 $, taxes incluses, pour fournir et installer deux serres, avec 74 979,88 $ de contingences [CA26 14 0163].",
      "numeros": [
       "CM26 0180",
       "CG26 0124",
       "CA26 14 0039",
-      "CM26 0363"
+      "CM26 0363",
+      "CA26 14 0163"
      ]
     },
     {
      "periode": "Avril 2026",
      "titre": "Travaux électriques du complexe",
-     "texte": "La Ville accorde à Systèmes Urbains inc. un contrat de 1 091 693,37 $, taxes incluses, pour la deuxième phase des travaux électriques du Complexe environnemental Saint-Michel. Les travaux prévoient une nouvelle alimentation de 25 kV, un transformateur, une génératrice de secours et un automate central pour gérer le captage du biogaz.",
+     "texte": "La Ville accorde un contrat de 1 091 693,37 $, taxes incluses, pour la deuxième phase des travaux électriques du Complexe environnemental de Saint-Michel, avec 163 754,01 $ de contingences. Les travaux portent sur une nouvelle alimentation de 25 kV, un transformateur, une génératrice de secours et un automate pour gérer le captage du biogaz [CG26 0223].",
      "numeros": [
       "CM26 0406",
       "CG26 0223"
      ]
     },
     {
+     "periode": "Avril 2026",
+     "titre": "Réaménagement de la rue De Louvain",
+     "texte": "L'arrondissement accorde un contrat d'un maximum de 8 199 514,82 $, taxes incluses, pour réaménager la rue De Louvain entre le parc Frédéric-Back et le boulevard Saint-Michel, pour une dépense totale autorisée de 11 192 464,62 $. Les travaux touchent les égouts, l'aqueduc, l'éclairage, les trottoirs, la piste cyclable et les plantations [CA26 14 0076].",
+     "numeros": [
+      "CA26 14 0076"
+     ]
+    },
+    {
      "periode": "Avril à septembre 2026",
-     "titre": "Entretien, compost et déneigement",
-     "texte": "La Ville confie l'entretien général du parc à Groupe Nicky et la gestion écologique et horticole aux Entreprises Roseneige, pour 30 mois à partir du 1er mai 2026. Elle prolonge aussi la location d'un tamiseur à compost et d'un tracteur chargeur, dont le compost sert à l'aménagement du parc, et prolonge de six mois les services de déneigement du parc, du TAZ et du stade de soccer.",
+     "titre": "Entretien et déneigement du parc",
+     "texte": "La Ville confie à deux entreprises l'entretien général et la gestion écologique et horticole du parc pour 30 mois, du 1er mai 2026 au 31 octobre 2028. Elle prolonge aussi de six mois le contrat de déneigement du parc, du TAZ et du stade de soccer, pour 193 215,49 $ de plus, taxes incluses [CG26 0521].",
      "numeros": [
       "CM26 0407",
       "CG26 0224",
-      "CM26 0603",
-      "CG26 0320",
       "CM26 0942",
       "CG26 0521"
      ]
     },
     {
-     "periode": "Juillet 2026",
-     "titre": "Contrat pour construire les serres",
-     "texte": "L'arrondissement confie à Les industries Harnois inc. la fourniture et l'installation de deux serres au parc, pour un montant maximal de 499 865,92 $, taxes incluses, et autorise une dépense totale de 574 845,80 $ avec les contingences. Une seule entreprise a soumissionné sur les cinq ayant pris le cahier des charges.",
+     "periode": "Juin et octobre 2026",
+     "titre": "Compost et deuxième demande d'aide",
+     "texte": "La Ville prolonge de cinq mois la location d'un tamiseur à compost et d'un tracteur chargeur avec opérateur au complexe, pour 296 349,21 $ de plus, taxes incluses; le compost sert notamment à aménager le parc [CG26 0320]. En octobre, l'arrondissement autorise le dépôt d'une demande d'aide au programme Véloce III pour la bande cyclable et les trottoirs de la rue De Louvain Est.",
      "numeros": [
-      "CA26 14 0163"
-     ]
-    },
-    {
-     "periode": "Avril à octobre 2026",
-     "titre": "Réaménagement de la rue De Louvain",
-     "texte": "L'arrondissement confie à Groupe MPotvin le réaménagement de la rue De Louvain entre le parc et le boulevard Saint-Michel, pour un maximum de 8 199 514,82 $ taxes incluses, avec une dépense totale autorisée de 11 192 464,62 $ : égouts, aqueduc, éclairage, corridors de marche, aménagement cyclable et plantations. En octobre, il autorise le dépôt d'une demande d'aide financière au ministère des Transports pour une bande cyclable et des trottoirs sur ce même tronçon.",
-     "numeros": [
-      "CA26 14 0076",
+      "CM26 0603",
+      "CG26 0320",
       "CA26 14 0243"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "L'appel de projets du programme TAPU, pour lequel la Ville demande une aide financière, se termine le 26 novembre 2026.",
+     "texte": "L'appel de projets du programme TAPU, pour lequel la Ville dépose sa demande, se termine le 26 novembre 2026.",
      "numeros": [
       "CG26 0121"
      ]
     },
     {
-     "texte": "Pour les serres, la livraison des infrastructures est indiquée en juillet 2026, le début des travaux en août 2026 et la fin en décembre 2026; la mise en service est annoncée à l'hiver 2027.",
+     "texte": "Les travaux d'installation des serres doivent se terminer en décembre 2026; la mise en service est annoncée pour l'hiver 2027.",
      "numeros": [
       "CA26 14 0163",
       "CM26 0363"
      ]
     },
     {
-     "texte": "La prolongation du déneigement couvre du 1er novembre 2026 au 30 avril 2027.",
+     "texte": "Le contrat de déneigement prolongé couvre du 1er novembre 2026 au 30 avril 2027.",
      "numeros": [
       "CG26 0521"
      ]
     },
     {
-     "texte": "Le chantier de la rue De Louvain se déroule en trois phases : de mai à novembre 2026, de mai à octobre 2027 et de mai à août 2028.",
+     "texte": "Le chantier de la rue De Louvain se poursuit de mai à octobre 2027 (trottoirs, bordures, saillies), puis de mai à août 2028 (chaussée finale, piste cyclable, plantations).",
      "numeros": [
       "CA26 14 0076"
      ]
     },
     {
-     "texte": "Les contrats d'entretien du parc courent jusqu'au 31 octobre 2028, avec deux prolongations possibles de 12 mois; 26 hectares s'ajouteront en 2027 dans le secteur du Boisé Ouest.",
+     "texte": "26 hectares de plus s'ajouteront au parc en 2027, dans le secteur du Boisé Ouest.",
      "numeros": [
       "CG26 0224"
      ]
@@ -438,25 +433,16 @@
   },
   "eau-egouts": {
    "titre": "Eau potable, aqueduc et égouts",
-   "signature": "5d480a8b022f09af",
-   "genereLe": "2026-11-04T17:21:54.084Z",
+   "signature": "295f3bf767d9e28d",
+   "genereLe": "2026-11-05T17:38:09.698Z",
    "modele": "claude-opus-5",
    "dossiers": 96,
-   "enBref": "Cette année, la Ville finance et lance des travaux sur ses conduites d'eau et d'égout, dans les rues de plusieurs arrondissements comme sur le réseau principal. Elle poursuit le remplacement des entrées de service en plomb, y compris la portion située sur les terrains privés. Elle investit aussi dans la station d'épuration Jean-R.-Marcotte, où elle construit une unité de désinfection des eaux usées et entretient les installations existantes.",
+   "enBref": "Cette année, la Ville finance et met en chantier des travaux sur ses réseaux d'eau potable et d'égouts, dans plusieurs arrondissements et sur les conduites principales. Elle poursuit aussi le projet de désinfection des eaux usées à la station d'épuration Jean-R.-Marcotte et paie l'exploitation courante de cette station. Des arrondissements se chargent du remplacement des entrées d'eau en plomb, y compris la portion située sur les terrains privés.",
    "etapes": [
     {
-     "periode": "Janvier 2026",
-     "titre": "Hausse de l'emprunt pour la désinfection",
-     "texte": "Le conseil d'agglomération fait passer de 197 000 000 $ à 381 000 000 $ l'emprunt qui finance l'unité de désinfection de l'effluent de la station Jean-R.-Marcotte. L'argent sert notamment à finir l'unité d'ozonation et à bâtir l'usine de production d'oxygène qui l'alimentera.",
-     "numeros": [
-      "CM26 0058",
-      "CG26 0075"
-     ]
-    },
-    {
      "periode": "Février à avril 2026",
-     "titre": "Contrats de réhabilitation de conduites par chemisage",
-     "texte": "La Ville accorde plusieurs contrats pour réhabiliter des conduites d'eau secondaires sans tranchée et refaire les chaussées, dans des rues de nombreux arrondissements. Ces chantiers incluent le remplacement de branchements d'eau en plomb, du côté public comme du côté privé.",
+     "titre": "Contrats de chemisage des conduites d'eau",
+     "texte": "La Ville accorde des contrats pour réhabiliter des conduites d'eau secondaires par chemisage, sans creuser de tranchée, et refaire la chaussée dans diverses rues de nombreux arrondissements. Ces contrats incluent le remplacement de branchements d'eau en plomb du côté public et du côté privé.",
      "numeros": [
       "CM26 0189",
       "CM26 0342",
@@ -467,54 +453,72 @@
      ]
     },
     {
+     "periode": "Février à juin 2026",
+     "titre": "Entrées d'eau en plomb sur terrains privés",
+     "texte": "Des arrondissements offrent au conseil municipal de prendre en charge le remplacement des entrées de service en plomb situées sur les terrains privés, selon le règlement 20-030. Les coûts des travaux faits sur le domaine privé sont facturés aux propriétaires concernés [CA26 22 0034].",
+     "numeros": [
+      "CA26 19 0014",
+      "CA26 22 0034",
+      "CA26 09 0077",
+      "CA26 19 0114"
+     ]
+    },
+    {
      "periode": "Mars à juin 2026",
      "titre": "Chantiers sur les conduites principales",
-     "texte": "La Ville accorde des contrats pour reconstruire des conduites d'eau dans la rue Guy et dans la rue De Champlain, et ajoute des sommes aux chantiers de la rue Saint-Antoine Ouest et de la rue de la Cathédrale, jusqu'au réservoir McTavish. Elle loue aussi de Parcs Canada un terrain de 941 mètres carrés sous le canal de Lachine pour entretenir deux conduites de 600 millimètres.",
+     "texte": "La Ville accorde des contrats pour reconstruire des conduites d'eau et des infrastructures dans l'axe de la rue Guy et dans la rue De Champlain, et ajoute des sommes aux contrats des rues Saint-Antoine Ouest et de la Cathédrale. Dans la rue De Champlain, le chantier remplace une conduite de 1 200 mm installée en 1927 [CG26 0332].",
      "numeros": [
       "CG26 0153",
       "CG26 0245",
       "CG26 0332",
       "CG26 0336",
-      "CG26 0355",
       "CG26 0333"
+     ]
+    },
+    {
+     "periode": "Mai à septembre 2026",
+     "titre": "Exploitation de la station Jean-R.-Marcotte",
+     "texte": "La Ville renouvelle ou accorde des contrats pour faire fonctionner la station d'épuration : système de commande des procédés, produits chimiques, enfouissement des résidus, entretien ménager, remise à niveau des incinérateurs de boues et travaux mécaniques. Les travaux mécaniques visent notamment à reconditionner des dégrilleurs endommagés lors de pluies intenses [CG26 0543].",
+     "numeros": [
+      "CG26 0271",
+      "CG26 0317",
+      "CG26 0414",
+      "CG26 0450",
+      "CG26 0438",
+      "CG26 0543"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "Mise en service de l'usine d'ozone de la station Jean-R.-Marcotte prévue en 2029; les contrats des lots 4, 5 et 6 doivent se terminer au dernier trimestre de 2028.",
-     "numeros": [
-      "CG26 0075"
-     ]
-    },
-    {
-     "texte": "Arrêt de l'incinérateur de boues 2 dès la première semaine d'octobre 2026, et de l'incinérateur 4 en janvier 2027, pour environ six semaines de travaux chacun.",
+     "texte": "Arrêt de l'incinérateur de boues 2 à la première semaine d'octobre 2026, puis de l'incinérateur 4 en janvier 2027, pour environ six semaines de travaux chacun.",
      "numeros": [
       "CG26 0450"
      ]
     },
     {
-     "texte": "Adoption du règlement d'emprunt de 951 000 000 $ pour les réseaux secondaires annoncée pour le 19 octobre 2026.",
+     "texte": "Adoption prévue le 19 octobre 2026 du règlement d'emprunt de 951 000 000 $ pour le renouvellement des réseaux secondaires d'aqueduc et d'égouts.",
      "numeros": [
       "CM26 1026"
      ]
     },
     {
-     "texte": "Chantier de la rue Guy prévu du deuxième trimestre de 2026 à décembre 2027.",
+     "texte": "Travaux de réhabilitation de la conduite de 600 mm le long de l'autoroute 15 Nord à terminer au plus tard le 18 décembre 2026.",
      "numeros": [
-      "CG26 0245"
+      "CG26 0333"
      ]
     },
     {
-     "texte": "Travaux de la rue de la Cathédrale, jusqu'au réservoir McTavish, prolongés jusqu'en mars 2027.",
+     "texte": "Fin des travaux de la conduite de la rue de la Cathédrale repoussée de décembre 2026 à mars 2027.",
      "numeros": [
       "CG26 0336"
      ]
     },
     {
-     "texte": "Inspection des conduites principales par Pure Technologies : début en juillet 2026, fin en juin 2028.",
+     "texte": "Chantier de la rue Guy prévu jusqu'en décembre 2027; mise en service de l'usine d'ozone prévue en 2029.",
      "numeros": [
-      "CG26 0273"
+      "CG26 0245",
+      "CG26 0075"
      ]
     }
    ],
@@ -525,147 +529,133 @@
     "retiresMecanique": [],
     "retiresContreLecture": [
      {
-      "element": "etapes[4]",
-      "raison": "Le texte énumère « enfouissement des résidus » parmi les contrats d'exploitation de la station Jean-R.-Marcotte, mais aucun des dossiers cités (CG26 0271 système de commande, CG26 0317 polymères, CG26 0410 protection incendie, CG26 0438 entretien ménager, CG26 0450 incinérateurs, CG26 0543 dégrilleurs) ne porte sur l'enfouissement. Le dossier correspondant (CG26 0414, Complexe Enviro Connexions, lieu d'enfouissement technique) n'est pas cité — fait attribué aux mauvais dossiers."
+      "element": "etapes[0]",
+      "raison": "Le texte affirme que « le conseil municipal et le conseil d'agglomération adoptent un règlement ». Or CM26 0058 n'adopte rien : la résolution du 26 janvier 2026 se limite à établir « que l'orientation du conseil municipal soit : d'adopter le règlement ». L'adoption du règlement (RCG 24-024 modifié) relève du seul conseil d'agglomération (CG26 0075, 29 janvier 2026). L'élément attribue donc au conseil municipal un geste que le dossier ne lui prête pas."
      },
      {
       "element": "etapes[5]",
-      "raison": "La période annoncée est « Août et septembre 2026 », mais le dossier cité CG26 0391 (Règlement d'emprunt de 12 000 000 $ pour le secteur Namur–De la Savane) a été adopté le 18 juin 2026, hors de cette période; le texte ne mentionne d'ailleurs pas ce règlement, alors que le titre parle d'« emprunts » au pluriel."
-     },
-     {
-      "element": "etapes[2]",
-      "raison": "L'élément attribue aux quatre arrondissements nommés, dont Rosemont–La Petite-Patrie, le fait d'offrir de « remplacer les entrées de service en plomb sur les terrains privés ». Le dossier CA26 26 0011 (rue Boyer) ne porte que sur la reconstruction de conduites d'aqueduc et d'égout, de chaussée et de trottoirs et ne mentionne aucun remplacement d'entrées de service en plomb sur le domaine privé."
-     },
-     {
-      "element": "etapes[2]",
-      "raison": "L'affirmation générale « Les coûts des travaux faits sur le domaine privé sont facturés aux propriétaires » est contredite pour un des dossiers cités : CA26 19 0114 (rue Dawes / 34e Avenue) indique que le Service de l'eau paie 100 % des coûts liés aux conduites d'eau, d'égout et aux entrées de service."
+      "raison": "La période annoncée (« Août à septembre 2026 ») ne correspond pas à CG26 0391, dont les résolutions vont du 6 mai au 18 juin 2026. De plus, ce dossier porte sur un règlement d'emprunt de 12 000 000 $ pour des conduites principales dans le secteur Namur–De la Savane, sujet que le texte de l'élément ne mentionne nulle part : le lecteur ne peut rattacher ce numéro à aucune affirmation, et le seul financement évoqué est l'emprunt de 951 000 000 $ (CM26 1026)."
      }
     ]
    }
   },
   "securite-publique": {
    "titre": "Police et sécurité publique",
-   "signature": "327bb4497ecb1b30",
-   "genereLe": "2026-10-23T14:32:14.630Z",
+   "signature": "b7a85b1ff8655466",
+   "genereLe": "2026-11-05T17:38:08.830Z",
    "modele": "claude-opus-5",
-   "dossiers": 60,
+   "dossiers": 61,
    "enBref": null,
    "etapes": [
     {
      "periode": "Janvier 2026",
      "titre": "Emprunt pour équipements et prêt d'un policier",
-     "texte": "Le conseil d'agglomération adopte un règlement autorisant un emprunt de 10 880 000 $ pour acheter et remplacer des équipements spécialisés du SPVM entre 2026 et 2030. Il autorise aussi le prêt d'un sergent-détective à l'équipe de la GRC qui applique la Loi sur les armes à feu, pour trois ans à compter du 7 janvier 2026.",
+     "texte": "Le conseil adopte un règlement autorisant un emprunt de 10 880 000 $ pour acheter et remplacer des équipements spécialisés de sécurité publique du SPVM entre 2026 et 2030. Il autorise aussi le prêt d'un sergent-détective à l'équipe de la GRC qui applique la Loi sur les armes à feu, à compter du 7 janvier 2026.",
      "numeros": [
       "CM26 0056",
       "CG26 0073",
       "CM26 0059",
-      "CG26 0076",
-      "CE26 0110"
+      "CG26 0076"
      ]
     },
     {
-     "periode": "Mars à avril 2026",
-     "titre": "Véhicules, repas, entretien et logiciels",
-     "texte": "La Ville achète 11 motocyclettes de patrouille, prolonge d'un an l'entretien ménager du quartier général et confie des travaux pour remplacer le chauffage au mazout du bâtiment de la cavalerie, au 1515, chemin Remembrance. Elle accorde aussi un contrat de repas pour les personnes détenues et prolonge l'entretien des logiciels du système de répartition des appels.",
+     "periode": "Avril à mai 2026",
+     "titre": "Repas, informatique du 9-1-1 et baux",
+     "texte": "La Ville confie à 9415-1966 Québec inc. les repas des personnes détenues par le SPVM et prolonge d'un an l'entretien des logiciels du système de répartition assistée par ordinateur avec Peraton International. Elle loue 50 places de stationnement de la Société de la Place des arts, prolonge le bail du centre de formation à Anjou et celui du poste de quartier 15 à Verdun, et accepte 8 000 $ d'Ottawa pour une campagne d'information sur les agressions sexuelles.",
      "numeros": [
-      "CG26 0141",
-      "CG26 0149",
-      "CG26 0163",
       "CG26 0218",
-      "CG26 0248"
-     ]
-    },
-    {
-     "periode": "Mai à juin 2026",
-     "titre": "Baux des postes de quartier et locaux",
-     "texte": "La Ville loue 50 places de stationnement au 260, boulevard De Maisonneuve pour les véhicules du quartier général. Elle renouvelle les baux du centre de formation dans Anjou, du poste de quartier 15 à Verdun et du poste de quartier 26 sur l'avenue Mountain Sights.",
-     "numeros": [
+      "CG26 0248",
       "CG26 0278",
       "CG26 0280",
       "CG26 0281",
-      "CG26 0352"
+      "CE26 0590"
      ]
     },
     {
      "periode": "Juin à juillet 2026",
-     "titre": "Munitions, courrier et travaux d'entretien",
-     "texte": "La Ville conclut une entente pour fournir des munitions de pratique de calibre 9 mm servant à la formation au tir des policiers, et prolonge d'un an le service de ramassage et de distribution du courrier du SPVM. Elle retient aussi des fournisseurs pour les services de menuisier et de peintre dans les bâtiments du service.",
+     "titre": "Munitions, courrier et métiers du bâtiment",
+     "texte": "La Ville conclut une entente avec Agence Gravel pour des munitions de pratique de 9 mm destinées à la formation au tir, prolonge d'un an le contrat de messagerie du SPVM et renouvelle le bail du poste de quartier 26, avenue Mountain Sights. Elle retient aussi des fournisseurs pour les services de menuisier et de peintre dans les bâtiments du SPVM, et prête un sergent-détective à l'équipe de la Sûreté du Québec sur l'exportation de véhicules volés.",
      "numeros": [
       "CG26 0316",
       "CG26 0318",
+      "CG26 0352",
       "CE26 0910",
-      "CE26 1015"
+      "CE26 1015",
+      "CE26 1046"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "Journée de levée de fonds « Fèves au lard » au poste de quartier 46, le 23 octobre 2026; l'arrondissement d'Anjou achète 62 billets.",
+     "texte": "Le 23 octobre 2026 : journée « Fèves au lard » de la Fraternité des policiers et policières au poste de quartier 46, pour laquelle l'arrondissement d'Anjou a acheté 62 billets.",
      "numeros": [
       "CA26 12165"
      ]
     },
     {
-     "texte": "L'embarcation de patrouille portuaire et sa remorque doivent être livrées au plus tard le 1er mars 2027.",
+     "texte": "Le 1er février 2027 : début du bail de 10 ans du local de l'unité métro du poste de quartier 50, au 888, boulevard De Maisonneuve Est.",
+     "numeros": [
+      "CM26 0823",
+      "CG26 0477"
+     ]
+    },
+    {
+     "texte": "Le 1er mars 2027 : date limite de livraison de l'embarcation de patrouille portuaire et de sa remorque.",
      "numeros": [
       "CG26 0441"
      ]
     },
     {
-     "texte": "Le bail du local de l'unité métro du poste de quartier 50, au 888, boulevard De Maisonneuve Est, commence le 1er février 2027.",
-     "numeros": [
-      "CG26 0477"
-     ]
-    },
-    {
-     "texte": "Les comités ACCES Tabac, Alcool, Cannabis et ACCEF sont prolongés jusqu'au 31 mars 2027.",
+     "texte": "Le 31 mars 2027 : fin de la période couverte par les subventions des comités ACCES Tabac, ACCES Alcool, ACCES Cannabis et ACCEF.",
      "numeros": [
       "CE26 1295",
       "CE26 1296",
       "CE26 1297",
       "CE26 1298"
      ]
-    },
-    {
-     "texte": "Les travaux de remplacement du chauffage au mazout du bâtiment de la cavalerie doivent se terminer le 30 septembre 2027.",
-     "numeros": [
-      "CG26 0163"
-     ]
     }
    ],
    "utilisable": true,
-   "source": "Rédigé automatiquement à partir des 60 dossiers du sujet : leur sommaire décisionnel quand le conseil l'annexe à son ordre du jour, et le texte décidé et les motifs lus dans les procès-verbaux. Puis vérifié automatiquement : ce qui ne se vérifiait pas a été retiré. Les documents officiels font foi.",
+   "source": "Rédigé automatiquement à partir des 61 dossiers du sujet : leur sommaire décisionnel quand le conseil l'annexe à son ordre du jour, et le texte décidé et les motifs lus dans les procès-verbaux. Puis vérifié automatiquement : ce qui ne se vérifiait pas a été retiré. Les documents officiels font foi.",
    "verification": {
     "version": 2,
     "retiresMecanique": [],
     "retiresContreLecture": [
      {
       "element": "enBref",
-      "raison": "« accepte des subventions de Québec et d'Ottawa pour des équipes d'enquête » déforme les dossiers : la seule subvention fédérale de l'année (CE26 0590, 8 000 $ du Fonds d'aide aux victimes du ministère de la Justice du Canada) finance une campagne d'information sur les agressions sexuelles pendant la Semaine des victimes, et non une équipe d'enquête. Ce dossier n'est d'ailleurs cité nulle part dans le récapitulatif."
+      "raison": "« Le conseil d'arrondissement de Saint-Laurent reçoit chaque mois le rapport d'activités du poste de quartier 7 » : les dossiers ne montrent pas une présentation mensuelle. Les rapports listés portent sur décembre 2025, janvier, mars, avril, mai, puis un rapport combiné pour juin-juillet-août 2026 et un pour septembre 2026. Aucun rapport pour février 2026 ni pour les mois d'été pris séparément. L'affirmation de périodicité (« chaque mois ») est une généralisation que les dossiers ne soutiennent pas."
      },
      {
       "element": "etapes[5]",
-      "raison": "Le texte affirme que la Ville « prolonge d'un an les comités ACCES Tabac, Alcool, Cannabis et ACCEF », mais les numéros cités ne contiennent que CE26 1295 (ACCES Tabac) et CE26 1297 (ACCES Cannabis). Les prolongations d'ACCES Alcool (CE26 1296) et d'ACCEF (CE26 1298) ne sont appuyées par aucun des dossiers cités à cet élément."
+      "raison": "L'achat de « deux camionnettes pour la cavalerie » est attribué aux dossiers cités (CG26 0441, CG26 0453, CG26 0459, CG26 0477, CE26 1295, CG26 0578), alors qu'il provient de CE26 1145 (12 août 2026), qui n'est pas cité. De même, les subventions des comités ACCES Alcool, ACCES Cannabis et ACCEF proviennent de CE26 1296, CE26 1297 et CE26 1298, non cités : seul CE26 1295 (ACCES Tabac) figure dans la liste de numéros."
+     },
+     {
+      "element": "etapes[1]",
+      "raison": "« autorise un second prêt de policier à la GRC » : ni CG26 0207 ni les autres dossiers ne qualifient cette entente de seconde ni n'indiquent qu'un deuxième policier s'ajoute à celui détaché en janvier. Les deux ententes visent la même équipe (ENSALA) et le récapitulatif en déduit un cumul que les dossiers n'établissent pas."
      },
      {
       "element": "etapes[4]",
-      "raison": "L'élément attribue aux quatre conseils, dont celui de Lachine (CA26 19 0138), le fait d'« offrir leurs condoléances aux proches du policier décédé en service et du citoyen tué ». Le dossier de Lachine ne contient aucun texte de décision de ce type (seulement « À L'UNANIMITÉ 10.07 ») : le contenu des condoléances n'y figure pas."
+      "raison": "« Ils offrent leurs condoléances aux familles et réaffirment leur engagement envers le service » est attribué aux quatre conseils, dont Lachine (CA26 19 0138). Le dossier de Lachine ne contient aucun texte de condoléances ni d'engagement : son dispositif se limite à « À L'UNANIMITÉ 10.07 » et à des considérants."
+     },
+     {
+      "element": "aSurveiller[4]",
+      "raison": "« commencés le 28 avril 2026 » présente comme un fait accompli le début des travaux. CG26 0163 indique seulement que « le contrat doit débuter le 28 avril 2026 et se terminer le 30 septembre 2027 » : il s'agit de dates prévues au contrat, non d'un démarrage constaté."
      }
     ]
    }
   },
   "logement": {
    "titre": "Logement social et abordable",
-   "signature": "8f9f921a39806222",
-   "genereLe": "2026-11-04T17:22:17.476Z",
+   "signature": "e114ae47c1a828dd",
+   "genereLe": "2026-11-05T17:37:59.798Z",
    "modele": "claude-opus-5",
    "dossiers": 27,
-   "enBref": "Cette année, la Ville approuve les budgets 2026 de la Société d'habitation et de développement de Montréal et de l'Office municipal d'habitation de Montréal, cède ou achète des terrains destinés au logement social, et verse des subventions à des organismes qui construisent des logements abordables. Elle modifie aussi le règlement qui oblige les promoteurs à inclure du logement social et abordable dans leurs projets.",
+   "enBref": "Cette année, la Ville approuve les budgets 2026 de la SHDM et de l'OMHM, cède ou achète des terrains destinés au logement social, et verse des subventions à des organismes qui construisent des logements abordables. Elle modifie aussi le règlement qui oblige les promoteurs à inclure du logement social et abordable dans leurs projets.",
    "etapes": [
     {
      "periode": "Janvier 2026",
-     "titre": "Budgets 2026 de la SHDM et de l'OMHM",
-     "texte": "Les conseils approuvent le budget 2026 de la Société d'habitation et de développement de Montréal et celui de l'Office municipal d'habitation de Montréal. Le budget de l'Office passe de 541 M$ en 2025 à 605,6 M$ en 2026, dont 475,4 M$ pour les HLM [CG26 0024].",
+     "titre": "Budgets de la SHDM et de l'OMHM",
+     "texte": "Le conseil municipal approuve le budget 2026 de la Société d'habitation et de développement de Montréal, qui gère 393 immeubles et plus de 5 200 logements abordables [CM26 0114]. Le conseil municipal et le conseil d'agglomération approuvent le budget 2026 de l'Office municipal d'habitation de Montréal, qui loge 42 587 ménages [CG26 0024].",
      "numeros": [
       "CM26 0114",
       "CM26 0127",
@@ -674,8 +664,8 @@
     },
     {
      "periode": "Janvier 2026",
-     "titre": "Deux terrains destinés au logement social",
-     "texte": "La Ville accepte du gouvernement du Canada la moitié des droits sur un terrain de 3 658,8 mètres carrés de la rue Jolicoeur, à Pierrefonds-Roxboro, sans payer. Elle cède aussi sans contrepartie à la Coopérative d'habitation Monde-Uni un terrain de 789,6 mètres carrés du boulevard de l'Acadie, où la coopérative doit construire 26 logements [CG26 0062].",
+     "titre": "Terrains cédés pour du logement social",
+     "texte": "La Ville accepte du gouvernement du Canada la moitié des droits sur un terrain de 3 658,8 mètres carrés de la rue Jolicoeur, à Pierrefonds-Roxboro, sans payer [CG26 0042]. Elle cède aussi sans contrepartie à la Coopérative d'habitation Monde-Uni un terrain de 789,6 mètres carrés au 7965, boulevard de l'Acadie, où la coopérative doit construire 26 logements [CG26 0062].",
      "numeros": [
       "CM26 0026",
       "CG26 0042",
@@ -684,11 +674,10 @@
      ]
     },
     {
-     "periode": "Février à mars 2026",
-     "titre": "Aide au relogement et soutien à des projets",
-     "texte": "La Ville signe avec la Société d'habitation du Québec deux ententes de financement pour l'hébergement temporaire et l'aide à la recherche de logement. Elle accorde 877 312 $ de plus à Mission Unitaînés pour un immeuble de 100 logements pour aînés dans Mercier–Hochelaga-Maisonneuve, et 581 845 $ à la Coopérative d'habitation Monde-Uni pour le projet Acadie.",
+     "periode": "Mars 2026",
+     "titre": "Subventions à deux organismes",
+     "texte": "La Ville ajoute 877 312 $ à son aide à Mission Unitaînés pour un immeuble de 100 logements destinés à des aînés dans Mercier–Hochelaga-Maisonneuve [CG26 0171]. Elle accorde 581 845 $ à la Coopérative d'habitation Monde-Uni pour le projet Acadie [CG26 0178].",
      "numeros": [
-      "CE26 0187",
       "CM26 0276",
       "CG26 0171",
       "CM26 0283",
@@ -696,59 +685,53 @@
      ]
     },
     {
-     "periode": "Mars à octobre 2026",
-     "titre": "Règles, tarifs et exemptions",
-     "texte": "Le conseil municipal modifie le règlement sur le logement social, abordable et familial : il ne vise plus que les projets de plus de 18 000 mètres carrés et impose 20 % de logements hors marché, après une consultation publique tenue le 26 février 2026. Deux arrondissements adoptent leurs propres mesures : tarifs d'occupation du domaine public à Ahuntsic-Cartierville, et remboursement de 50 % des frais de permis à Côte-des-Neiges–Notre-Dame-de-Grâce.",
-     "numeros": [
-      "CE26 0263",
-      "CM26 0223",
-      "CM26 0385",
-      "CA26 09 0121",
-      "CA26 170209"
-     ]
-    },
-    {
-     "periode": "Mai à septembre 2026",
-     "titre": "Achat de terrain et droit de préemption",
-     "texte": "La Ville achète pour 9 293 113 $, plus les taxes, un terrain vacant de 1535,1 mètres carrés près des rues Chatham et William, dans le Sud-Ouest, pour du logement social. Elle retire onze lots de la liste des immeubles visés par le droit de préemption et approuve, à Saint-Laurent, une entente de développement qui comprend un engagement pour un projet de logement social.",
+     "periode": "Mai 2026",
+     "titre": "Achat d'un terrain et droit de préemption",
+     "texte": "La Ville achète pour 9 293 113 $, plus taxes, un terrain vacant de 1 535,1 mètres carrés près des rues Chatham et William, dans le Sud-Ouest, à des fins de logement social [CG26 0286]. Elle retire du droit de préemption pour le logement social des lots de Ville-Marie et du Sud-Ouest visés depuis 2020 [CG26 0292].",
      "numeros": [
       "CM26 0528",
       "CG26 0286",
       "CM26 0534",
-      "CG26 0292",
-      "CA26 08 0335"
+      "CG26 0292"
      ]
     },
     {
-     "periode": "Juin à septembre 2026",
-     "titre": "Subventions à de grands projets locatifs",
-     "texte": "La Ville verse 25 110 800 $ à la Société du Patrimoine Angus Résidentiel pour 350 logements abordables dans Rosemont–La Petite-Patrie, et 13 151 528 $ à Immobilier collectif – Point commun pour un immeuble de 395 logements dans le Sud-Ouest. Elle autorise aussi la SHDM à construire 72 logements sur le terrain « Solotech », sur la 2e Avenue.",
+     "periode": "Juin à octobre 2026",
+     "titre": "Grands projets et règles locales",
+     "texte": "La Ville verse 25 110 800 $ à la Société du Patrimoine Angus Résidentiel pour 350 logements abordables au Technopôle Angus [CG26 0372] et 13 151 528 $ à Immobilier collectif – Point commun pour 395 logements dans Pointe-Saint-Charles [CG26 0559]. Le comité exécutif autorise la SHDM à construire 72 logements sur la 2e Avenue [CE26 1028], et Côte-des-Neiges–Notre-Dame-de-Grâce adopte une politique de remboursement de 50 % des frais de permis pour les projets admissibles [CA26 170209].",
      "numeros": [
       "CM26 0655",
       "CG26 0372",
       "CE26 1028",
       "CM26 0980",
-      "CG26 0559"
+      "CG26 0559",
+      "CA26 170209"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "Occupation prévue au plus tard le 30 avril 2027 pour les 350 logements du projet au Technopôle Angus.",
+     "texte": "Occupation des 350 logements du Technopôle Angus au plus tard le 30 avril 2027.",
      "numeros": [
       "CG26 0372"
      ]
     },
     {
-     "texte": "Livraison annoncée en mai 2028 pour l'immeuble de 72 logements de la SHDM sur la 2e Avenue.",
+     "texte": "Livraison de l'immeuble de 72 logements de la SHDM sur la 2e Avenue en mai 2028.",
      "numeros": [
       "CE26 1028"
      ]
     },
     {
-     "texte": "Occupation prévue en février 2030 pour l'immeuble de 395 logements dans Pointe-Saint-Charles.",
+     "texte": "Occupation de l'immeuble de 395 logements de Pointe-Saint-Charles en février 2030.",
      "numeros": [
       "CG26 0559"
+     ]
+    },
+    {
+     "texte": "Intégration de l'exemption de tarifs au règlement tarifaire local de 2027 dans Côte-des-Neiges–Notre-Dame-de-Grâce.",
+     "numeros": [
+      "CA26 170209"
      ]
     }
    ],
@@ -757,7 +740,12 @@
    "verification": {
     "version": 2,
     "retiresMecanique": [],
-    "retiresContreLecture": []
+    "retiresContreLecture": [
+     {
+      "element": "etapes[2]",
+      "raison": "Le numéro CE26 0470 est rattaché à l'étape portant sur la modification du Règlement 20-041 et sur les ententes PHTARL, alors que la résolution CE26 0470 (dossier 1269163002, 18 mars 2026) porte en réalité sur l'inscription du projet de « Code d'éthique et de conduite des membres du conseil de la ville et des conseils d'arrondissement » : son sommaire et son dispositif ne concernent ni le logement social ni le règlement 20-041. La chaîne décisionnelle du règlement modifié est constituée de CE26 0263, CM26 0223, CE26 0473 et CM26 0385 (CE26 0473, et non CE26 0470, est la résolution citée aux motifs de CM26 0385). L'attribution est donc erronée."
+     }
+    ]
    }
   },
   "matieres-residuelles": {
@@ -857,306 +845,330 @@
   },
   "parcs": {
    "titre": "Parcs et espaces verts",
-   "signature": "c5c710e477239407",
-   "genereLe": "2026-11-01T16:54:49.544Z",
+   "signature": "5bfb530687fd26a4",
+   "genereLe": "2026-11-05T17:38:45.212Z",
    "modele": "claude-opus-5",
-   "dossiers": 37,
-   "enBref": "La Ville conçoit et refait des parcs dans plusieurs arrondissements : études de sols, contrats de travaux, art public et ajustements de chantiers déjà lancés. Dans le Grand parc de l'Ouest, elle fait réparer des murs et un ponceau, dépose une candidature pour une désignation liée au ciel nocturne et confie le déneigement, l'entretien ménager et l'abattage d'arbres à des entreprises. Plusieurs projets sont financés par le budget participatif, la réserve du passif environnemental ou les fonds de parcs.",
+   "dossiers": 39,
+   "enBref": "Cette année, la Ville finance la conception et la réfection de parcs un peu partout sur l'île : contrats de travaux, études de sols, art public et ajustements de chantiers déjà commencés. Plusieurs projets viennent du budget participatif de Montréal ou des fonds réservés aux parcs des arrondissements. Dans le Grand parc de l'Ouest, la Ville accorde des contrats d'entretien et de travaux, et dépose une candidature pour une désignation internationale sur l'éclairage nocturne.",
    "etapes": [
     {
-     "periode": "Janvier et février 2026",
-     "titre": "Conception, études de sols et entente de financement",
-     "texte": "La Ville confie à une équipe gagnante d'un concours la conception de la bibliothèque Caroline-Dawson et du réaménagement du parc Le Prévost, pour une dépense totale de 10 559 257,81 $ taxes incluses. Elle verse aussi 174 471,56 $ à Verdun pour des études avant de refaire le parc Monseigneur-J.-A.-Richard, et le Sud-Ouest signe une entente avec Hydro-Québec pour obtenir 154 000 $ destinés au parc d'Argenson.",
+     "periode": "Avril à juillet 2026",
+     "titre": "Contrats pour des parcs de quartier",
+     "texte": "Les arrondissements accordent des contrats pour refaire des aires de jeux, des jeux d'eau, des sentiers et des parcs à chiens : parc Lucie-Bruneau à Anjou, parc Mackenzie-King, parc Alexis-Nihon, parc Monseigneur-Langlois, parc Denise-Morelle. Outremont verse 150 000 $ au centre de services scolaire pour refaire le module de jeu du parc-école Saint-Germain.",
      "numeros": [
-      "CM26 0082",
-      "CM26 0093",
-      "CA26 22 0016"
+      "CA26 12066",
+      "CA26 16 0052",
+      "CA26 170129",
+      "CA26 08 235",
+      "CA26 210113",
+      "CA26 25 0174"
      ]
     },
     {
-     "periode": "Avril à juin 2026",
-     "titre": "Grand parc de l'Ouest : travaux et protection",
-     "texte": "La Ville ajoute 162 897,98 $ au contrat de réfection des murs patrimoniaux du chemin de Senneville et accorde un contrat pour reconstruire le ponceau sous ce même chemin, dans le pôle agricole du Bois-de-la-Roche. Elle dépose la candidature du secteur du Cap-Saint-Jacques pour la désignation Urban Night Sky Place et inscrit le secteur de l'Anse-à-l'Orme, avec le parc-nature des Sources, au répertoire des milieux naturels protégés.",
+     "periode": "Avril à septembre 2026",
+     "titre": "Travaux et entretien dans le Grand parc de l'Ouest",
+     "texte": "La Ville ajoute 162 897,98 $ au contrat de réfection des murs patrimoniaux du chemin de Senneville et confie la reconstruction d'un ponceau sous ce même chemin, au pôle agricole du Bois-de-la-Roche. Elle accorde aussi des contrats de déneigement des chemins de service, d'abattage de frênes et d'arbres dépérissants, et d'entretien ménager de neuf bâtiments du secteur Cap-Saint-Jacques.",
      "numeros": [
-      "CM26 0429",
       "CG26 0246",
+      "CE26 0981",
+      "CG26 0524",
+      "CG26 0525",
+      "CG26 0553"
+     ]
+    },
+    {
+     "periode": "Avril à mai 2026",
+     "titre": "Protection des milieux naturels",
+     "texte": "La Ville dépose la candidature du secteur du Cap-Saint-Jacques pour la désignation internationale Urban Night Sky Place de DarkSky International. Elle inscrit le parc-nature des Sources et le secteur de l'Anse-à-l'Orme au Répertoire des milieux naturels protégés et contributifs à la biodiversité.",
+     "numeros": [
       "CG26 0250",
       "CG26 0299",
-      "CE26 0981"
+      "CM26 0541",
+      "CM26 0433"
      ]
     },
     {
      "periode": "Mai à septembre 2026",
-     "titre": "Ajustements de chantiers déjà lancés",
-     "texte": "La Ville ajoute 153 434,14 $ à la surveillance des travaux du parc du Bassin-à-Bois et 168 472,14 $ pour décontaminer le parc George-Vernot. Les arrondissements déplacent ou augmentent des budgets pour les parcs des Hirondelles, du Sault-au-Récollet, Villeray et Percy-Walters.",
+     "titre": "Ajustements des chantiers en cours",
+     "texte": "La Ville ajoute des sommes ou déplace des budgets dans des contrats déjà accordés : surveillance du chantier du parc du Bassin-à-Bois, parc des Hirondelles, parc du Sault-au-Récollet, parc Villeray et parc Percy-Walters. Elle convertit aussi en parc local un terrain de 810,2 m² de l'ancienne rue Eadie, au parc Campbell Ouest.",
      "numeros": [
       "CM26 0557",
-      "CM26 0887",
       "CA26 09 0109",
       "CA26 09 0139",
       "CA26 14 0208",
-      "CA26 240364"
-     ]
-    },
-    {
-     "periode": "Septembre 2026",
-     "titre": "Entretien du Grand parc de l'Ouest",
-     "texte": "L'agglomération confie le déneigement des chemins de service et des stationnements des secteurs de l'Anse-à-l'Orme, du Bois-de-la-Roche et du Cap-Saint-Jacques, l'entretien ménager de neuf bâtiments du Cap-Saint-Jacques et l'abattage de frênes et d'arbres dépérissants.",
-     "numeros": [
-      "CM26 0945",
-      "CM26 0946",
-      "CM26 0974",
-      "CG26 0524",
-      "CG26 0525",
-      "CG26 0553"
+      "CA26 240364",
+      "CM26 0704"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "Choix du projet d'art public lauréat pour le parc des Eaux-Cachées en octobre 2026, contrat avec l'artiste en décembre 2026 et installation de l'œuvre en 2028.",
-     "numeros": [
-      "CE26 0446"
-     ]
-    },
-    {
-     "texte": "Adoption visée au conseil municipal le 19 octobre 2026 pour verser une bande de ruelle de 75,2 m² au parc Le Prévost.",
-     "numeros": [
-      "CA26 14 0220"
-     ]
-    },
-    {
-     "texte": "Début des contrats de déneigement et d'entretien ménager du Grand parc de l'Ouest le 1er novembre 2026.",
-     "numeros": [
-      "CG26 0524",
-      "CG26 0553"
-     ]
-    },
-    {
-     "texte": "Réponse de DarkSky International attendue en avril 2027 pour le Cap-Saint-Jacques, avec dépôt du plan d'éclairage en février 2027.",
+     "texte": "Candidature du Cap-Saint-Jacques : plan d'éclairage à déposer en février 2027, réponse de DarkSky International attendue en avril 2027, mise en conformité du site en avril 2032.",
      "numeros": [
       "CG26 0250"
      ]
     },
     {
-     "texte": "Réception définitive des travaux du parc du Bassin-à-Bois prévue en juin 2027.",
+     "texte": "Art public au parc des Eaux-Cachées : choix du lauréat en octobre 2026, contrat en décembre 2026, installation de l'œuvre en 2028.",
+     "numeros": [
+      "CE26 0446"
+     ]
+    },
+    {
+     "texte": "Parc Le Prévost : passage de la bande de ruelle au domaine public comme parc local visé au comité exécutif le 7 octobre 2026 et au conseil municipal le 19 octobre 2026.",
+     "numeros": [
+      "CA26 14 0220"
+     ]
+    },
+    {
+     "texte": "Parc du Bassin-à-Bois : réception définitive des travaux prévue en juin 2027, après l'année de garantie.",
      "numeros": [
       "CM26 0557"
      ]
     },
     {
-     "texte": "Fin des travaux du parc J.O.R.-Leduc prévue en juin 2028.",
+     "texte": "Parc Denise-Morelle : travaux de début août 2026 à novembre 2026.",
+     "numeros": [
+      "CA26 25 0174"
+     ]
+    },
+    {
+     "texte": "Parc J.O.R.-Leduc : travaux d'août 2026 à juin 2028.",
      "numeros": [
       "CA26 20 0291"
      ]
     }
    ],
    "utilisable": true,
-   "source": "Rédigé automatiquement à partir des 37 dossiers du sujet : leur sommaire décisionnel quand le conseil l'annexe à son ordre du jour, et le texte décidé et les motifs lus dans les procès-verbaux. Puis vérifié automatiquement : ce qui ne se vérifiait pas a été retiré. Les documents officiels font foi.",
+   "source": "Rédigé automatiquement à partir des 39 dossiers du sujet : leur sommaire décisionnel quand le conseil l'annexe à son ordre du jour, et le texte décidé et les motifs lus dans les procès-verbaux. Puis vérifié automatiquement : ce qui ne se vérifiait pas a été retiré. Les documents officiels font foi.",
    "verification": {
     "version": 2,
-    "retiresMecanique": [
-     {
-      "element": "etapes[3]",
-      "raison": "nombre absent des dossiers cités : 150000"
-     }
-    ],
+    "retiresMecanique": [],
     "retiresContreLecture": [
      {
-      "element": "etapes[1]",
-      "raison": "« La Ville accorde un contrat à St-Denis Thompson inc. » présente comme une décision prise ce qui n'est, dans CE26 0347, qu'une recommandation du comité exécutif au conseil municipal (« de recommander au conseil municipal : 1- d'accorder... »). Aucune résolution du conseil municipal octroyant ce contrat ne figure dans les dossiers fournis."
+      "element": "etapes[5]",
+      "raison": "Le texte affirme que « la Ville accorde des contrats » pour, notamment, le parc sportif sous l'autoroute 15 (CE26 0347). Or, dans ce dossier, le comité exécutif ne fait que « recommander au conseil municipal » d'accorder le contrat à St-Denis Thompson inc.; aucun dossier cité ne montre l'octroi final par le conseil municipal. L'octroi est présenté comme acquis alors qu'il n'est qu'au stade de la recommandation."
      },
      {
-      "element": "etapes[1]",
-      "raison": "Le titre « Nouveaux parcs dans le Sud-Ouest » déforme deux des trois dossiers cités : CM26 0704 porte sur l'agrandissement du parc Campbell Ouest, un parc existant dont le réaménagement est amorcé depuis 2025, et CE26 0446 porte sur un concours d'art public dans un projet d'aménagement déjà en cours, et non sur la création de parcs."
-     },
-     {
-      "element": "etapes[3]",
-      "raison": "L'élément est nul (vide) : il n'a aucun contenu, aucune période et aucun numéro de dossier, et serait publié tel quel dans la liste des étapes."
+      "element": "etapes[0]",
+      "raison": "« touche 154 000 $ d'Hydro-Québec pour la phase 4 du parc d'Argenson » : CA26 22 0016 approuve une convention et demande à Hydro-Québec « de lui verser la somme allouée » — la somme n'est pas encore versée. De plus, le bénéficiaire est l'arrondissement du Sud-Ouest, alors que la phrase l'attribue à « Elle » (la Ville), sujet du paragraphe."
      }
     ]
    }
   },
   "plan-urbanisme": {
    "titre": "Plan d'urbanisme et de mobilité",
-   "signature": "106059431291a435",
-   "genereLe": "2026-11-04T17:21:35.392Z",
+   "signature": "cee8d5a7f1b7b0a1",
+   "genereLe": "2026-11-05T17:37:58.162Z",
    "modele": "claude-opus-5",
-   "dossiers": 18,
+   "dossiers": 21,
    "enBref": null,
    "etapes": [
     {
-     "periode": "Février et mars 2026",
-     "titre": "Premiers règlements de concordance adoptés",
-     "texte": "Ahuntsic-Cartierville modifie son règlement d'urbanisme pour la plantation, l'entretien, la protection et l'abattage des arbres. Rosemont–La Petite-Patrie revoit ses règles d'urbanisme, de projets particuliers et de démolition, et Saint-Léonard modifie son règlement sur les projets particuliers et celui sur la démolition d'immeubles.",
+     "periode": "Mars et mai 2026",
+     "titre": "Demandes de délai au ministère",
+     "texte": "Ahuntsic-Cartierville demande douze mois de plus, soit jusqu'au 16 juin 2027, pour adopter ses règlements de concordance. L'Île-Bizard–Sainte-Geneviève demande six mois supplémentaires, après une première prolongation obtenue en juillet 2025.",
      "numeros": [
-      "CA26 09 0021",
-      "CA26 26 0040",
-      "CA26 13 0064",
-      "CA26 13 0065"
-     ]
-    },
-    {
-     "periode": "Mars et avril 2026",
-     "titre": "Hauteurs et densité à Ahuntsic-Cartierville",
-     "texte": "L'arrondissement change les hauteurs, les usages et le taux d'implantation dans le secteur délimité par les avenues Papineau, Émile-Journault et André-Grasset et la rue Legendre Est. Il augmente aussi les hauteurs permises sur des tronçons de la rue Lajeunesse, entre les boulevards Crémazie et Henri-Bourassa.",
-     "numeros": [
-      "CA26 09 0086",
-      "CA26 09 0087"
-     ]
-    },
-    {
-     "periode": "Mars et avril 2026",
-     "titre": "Cinq règlements revus dans Villeray–Saint-Michel–Parc-Extension",
-     "texte": "Après une consultation publique le 18 mars 2026 et une consultation écrite du 11 au 18 mars 2026, l'arrondissement modifie son zonage (liste des bâtiments d'intérêt patrimonial), sa réglementation sur la démolition, les usages conditionnels, les projets particuliers et les plans d'implantation et d'intégration architecturale. Les nouvelles règles encadrent notamment l'hébergement pour personnes en situation d'instabilité résidentielle et les études exigées avant d'intervenir sur un immeuble patrimonial.",
-     "numeros": [
-      "CA26 14 0090",
-      "CA26 14 0091",
-      "CA26 14 0092",
-      "CA26 14 0093",
-      "CA26 14 0094"
+      "CA26 09 0049",
+      "CA26 28 065"
      ]
     },
     {
      "periode": "Mars à mai 2026",
-     "titre": "Ville-Marie complète son exercice",
-     "texte": "L'arrondissement dépose un premier projet en mars, tient une consultation publique le 25 mars 2026, puis adopte en mai un règlement qui touche l'urbanisme, les projets particuliers, la démolition, les certificats d'autorisation et les opérations cadastrales. Le texte autorise une hauteur maximale de 103 m sur l'îlot de l'ancienne terrasse Peel et soumet à approbation la construction d'une piscine creusée dans le site patrimonial déclaré du Mont-Royal.",
+     "titre": "Ville-Marie modifie cinq règlements",
+     "texte": "Après la consultation publique du 25 mars 2026, Ville-Marie revoit ses règles d'urbanisme, de projets particuliers, de démolition, de certificats et d'opérations cadastrales. Le règlement autorise une hauteur maximale de 103 m sur l'îlot de l'ancienne terrasse Peel et permet des stations de transport collectif dans les secteurs de catégorie E.1.",
      "numeros": [
       "CA26 240113",
       "CA26 240222"
      ]
     },
     {
-     "periode": "Mars et mai 2026",
-     "titre": "Deux demandes de délai au ministère",
-     "texte": "Ahuntsic-Cartierville demande douze mois de plus, soit jusqu'au 16 juin 2027, pour adopter ses règlements de concordance. L'Île-Bizard–Sainte-Geneviève demande six mois supplémentaires, en invoquant le manque de personnel, la complexité de son territoire et la coordination avec le Service de l'urbanisme.",
+     "periode": "Avril et juillet 2026",
+     "titre": "Hauteurs et démolition à Ahuntsic-Cartierville",
+     "texte": "L'arrondissement change les hauteurs, les usages et le taux d'implantation dans le secteur bordé par les avenues Papineau, Émile-Journault et André-Grasset et la rue Legendre Est, et augmente les hauteurs permises sur des tronçons de la rue Lajeunesse. Il modifie aussi son règlement sur la démolition d'immeubles, après une assemblée publique tenue le 23 juin 2026.",
      "numeros": [
-      "CA26 09 0049",
-      "CA26 28 065"
+      "CA26 09 0086",
+      "CA26 09 0087",
+      "CA26 09 0211"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "La ministre des Affaires municipales a fixé au 16 juin 2027 la date limite pour que Saint-Léonard adopte tous ses règlements de concordance; le remplacement de son règlement de zonage fait partie des blocs qui suivent.",
+     "texte": "Consultation publique de Saint-Laurent sur ses trois projets de règlement, le 20 octobre 2026 à 19 h.",
+     "numeros": [
+      "CA26 08 0380",
+      "CA26 08 0382",
+      "CA26 08 0383"
+     ]
+    },
+    {
+     "texte": "Côte-des-Neiges–Notre-Dame-de-Grâce : consultation publique le 21 octobre 2026 et adoption le 2 novembre 2026; le délai accordé par la ministre court jusqu'au 16 décembre 2026.",
+     "numeros": [
+      "CA26 170217"
+     ]
+    },
+    {
+     "texte": "Saint-Léonard doit adopter tous ses règlements de concordance d'ici le 16 juin 2027, date fixée par la ministre des Affaires municipales.",
      "numeros": [
       "CA26 13 0064",
       "CA26 13 0065"
      ]
     },
     {
-     "texte": "Villeray–Saint-Michel–Parc-Extension a jusqu'au 17 juin 2027 pour mettre ses règlements à jour, et son règlement de zonage doit être remplacé en 2027.",
+     "texte": "Ahuntsic-Cartierville demande un délai jusqu'au 16 juin 2027.",
+     "numeros": [
+      "CA26 09 0049"
+     ]
+    },
+    {
+     "texte": "Villeray–Saint-Michel–Parc-Extension a jusqu'au 17 juin 2027 pour mettre ses règlements à jour; son règlement de zonage doit être remplacé en 2027.",
      "numeros": [
       "CA26 14 0090"
      ]
     },
     {
-     "texte": "Ahuntsic-Cartierville demande un délai jusqu'au 16 juin 2027 pour adopter ses règlements de concordance.",
+     "texte": "L'Île-Bizard–Sainte-Geneviève prévoit présenter son projet aux élus à partir de la mi-juin 2026 et tenir une consultation publique en septembre ou octobre 2026.",
      "numeros": [
-      "CA26 09 0049"
+      "CA26 28 065"
      ]
     }
    ],
    "utilisable": true,
-   "source": "Rédigé automatiquement à partir des 18 dossiers du sujet : leur sommaire décisionnel quand le conseil l'annexe à son ordre du jour, et le texte décidé et les motifs lus dans les procès-verbaux. Puis vérifié automatiquement : ce qui ne se vérifiait pas a été retiré. Les documents officiels font foi.",
+   "source": "Rédigé automatiquement à partir des 21 dossiers du sujet : leur sommaire décisionnel quand le conseil l'annexe à son ordre du jour, et le texte décidé et les motifs lus dans les procès-verbaux. Puis vérifié automatiquement : ce qui ne se vérifiait pas a été retiré. Les documents officiels font foi.",
    "verification": {
     "version": 2,
     "retiresMecanique": [],
     "retiresContreLecture": [
      {
       "element": "enBref",
-      "raison": "« Deux arrondissements ont plutôt demandé [...] plus de temps » déforme les dossiers : l'un des deux demandeurs, Ahuntsic-Cartierville (CA26 09 0049), a aussi adopté plusieurs règlements de concordance la même année (CA26 09 0021, CA26 09 0086, CA26 09 0087, CA26 09 0211). L'adverbe « plutôt » laisse croire à une alternative à l'adoption, ce que les dossiers contredisent. De plus, les demandes sont adressées à « la ministre » / « au ministre des Affaires municipales » (CA26 09 0049, CA26 28 065), et non au « ministère »."
+      "raison": "« Deux arrondissements ont demandé au ministère des Affaires municipales plus de temps » est un décompte que les dossiers ne donnent pas et qu'ils contredisent en partie : seules deux demandes figurent explicitement (Ahuntsic-Cartierville, L'Île-Bizard–Sainte-Geneviève), mais d'autres arrondissements ont manifestement obtenu des délais de la ministre (Saint-Léonard au 16 juin 2027, Villeray–Saint-Michel–Parc-Extension au 17 juin 2027, Côte-des-Neiges–Notre-Dame-de-Grâce au 16 décembre 2026). De plus, les dossiers parlent de la « ministre »/du « ministre » des Affaires municipales, et non du ministère."
+     },
+     {
+      "element": "etapes[0]",
+      "raison": "« avec deux corrections déposées le 19 mars 2026 » : selon le dossier CA26 13 0101, les procès-verbaux de correction ont été signés le 19 mars 2026, mais déposés au conseil d'arrondissement le 7 avril 2026. La date du dépôt est inexacte."
+     },
+     {
+      "element": "etapes[2]",
+      "raison": "Le titre annonce « Quatre règlements » alors que l'élément cite cinq dossiers et décrit cinq règlements distincts (zonage CA26 14 0090, démolition CA26 14 0091, usages conditionnels CA26 14 0092, projets particuliers CA26 14 0093, PIIA CA26 14 0094). Décompte erroné."
      },
      {
       "element": "etapes[5]",
-      "raison": "« rectifient le nom d'une école et une adresse » : selon CA26 13 0101, la seconde correction n'est pas la rectification d'une adresse, mais l'ajout de la mention « (Centre d'appels téléphoniques Bell Canada) » après l'adresse 7325, boulevard Provencher, qui reste inchangée."
+      "raison": "Le titre « Saint-Laurent et Côte-des-Neiges s'y mettent » porte un jugement (sous-entend un retard ou un démarrage tardif) que les dossiers n'appuient pas; ils ne font état que d'avis de motion et de dépôts de projets de règlement."
      }
     ]
    }
   },
   "transport-collectif": {
    "titre": "Transport collectif",
-   "signature": "dc27cc30ef19c026",
-   "genereLe": "2026-11-01T16:55:04.027Z",
+   "signature": "a4094f49be52fed8",
+   "genereLe": "2026-11-05T17:38:35.436Z",
    "modele": "claude-opus-5",
-   "dossiers": 46,
-   "enBref": null,
+   "dossiers": 47,
+   "enBref": "Cette année, la Ville approuve le budget 2026 et le programme d'immobilisations de la Société de transport de Montréal (STM), puis une série de règlements d'emprunt de la STM. Elle vend, loue ou prête des terrains à la STM pour des édicules, des postes de ventilation et du stationnement. Elle encadre aussi des chantiers autour du réseau et confie des mandats liés au prolongement de la ligne bleue.",
    "etapes": [
     {
-     "periode": "Février à mars 2026",
-     "titre": "Abords des stations et ligne bleue",
-     "texte": "Ahuntsic-Cartierville établit et retire des postes d'attente d'autobus dans le cadre de la refonte du réseau. La Ville signe une entente avec la STM pour construire un pavillon adossé au poste de ventilation Wiseman, dans Outremont, et une autre pour confier à la STM ses travaux municipaux aux futures stations Pie-IX et Viau, pour 3 808 451,29 $ [CG26 0175]. Elle achète par ailleurs des espaces publicitaires dans le métro et les autobus pour Espace pour la vie.",
+     "periode": "Janvier 2026",
+     "titre": "Budget de la STM et achat de carburant",
+     "texte": "Le conseil d'agglomération dépose puis approuve le budget 2026 de la STM, équilibré à 1 804 314 410 $ en revenus comme en dépenses, et son programme d'immobilisations 2026-2035 [CG26 0022]. La Ville conclut aussi une entente de 36 mois avec Produits Suncor Énergie pour fournir du diesel clair et du diesel contenant du carburant renouvelable [CG26 0064].",
+     "numeros": [
+      "CG26 0022",
+      "CM26 0125",
+      "CG26 0064",
+      "CM26 0048"
+     ]
+    },
+    {
+     "periode": "Février à octobre 2026",
+     "titre": "Chantiers encadrés autour du réseau",
+     "texte": "Ahuntsic-Cartierville modifie des postes d'attente d'autobus dans le cadre de la refonte du réseau [CA26 09 0020], Ville-Marie autorise la STM à forer et refaire la voûte du tunnel de la ligne verte 24 heures sur 24 du 10 juin au 31 juillet 2026 [CA26 240269], et Saint-Laurent offre de prendre en charge la construction de trottoirs aux arrêts d'autobus [CA26 08 0373]. La Ville signe une entente pour construire un pavillon adossé au poste de ventilation Wiseman à Outremont [CM26 0198], ne s'oppose pas à la reconstruction d'un pont-tunnel au-dessus du REM [CG26 0379] et ajoute 250 000 $ de travaux connexes au chantier de la station Berri-UQAM, facturables à la STM [CG26 0526].",
      "numeros": [
       "CA26 09 0020",
       "CM26 0198",
-      "CM26 0280",
+      "CA26 240269",
+      "CG26 0379",
+      "CG26 0526",
+      "CA26 08 0373"
+     ]
+    },
+    {
+     "periode": "Mars à septembre 2026",
+     "titre": "Prolongement de la ligne bleue",
+     "texte": "La Ville confie à la STM la réalisation de ses propres travaux aux futures stations Pie-IX et Viau et autorise une dépense de 3 808 451,29 $ [CG26 0175]. Elle conclut ensuite des ententes-cadres avec Artelia Canada inc. et Stantec Experts-conseils ltée pour la conception et la gestion des impacts du réaménagement du corridor de la ligne bleue [CG26 0564], et le conseil municipal adopte une motion demandant à Québec d'étudier la conservation du tunnelier « Lisette » [CM26 0920].",
+     "numeros": [
       "CG26 0175",
-      "CM26 0269",
-      "CG26 0164"
+      "CM26 0280",
+      "CG26 0564",
+      "CM26 0985",
+      "CM26 0920"
+     ]
+    },
+    {
+     "periode": "Mars à septembre 2026",
+     "titre": "Publicité, soutien financier et motions",
+     "texte": "La Ville achète des espaces publicitaires dans le métro et les autobus pour Espace pour la vie, jusqu'à 172 462,50 $ [CG26 0164], et verse 382 000 $ à la STM pour renforcer les dessertes pendant les Championnats du monde sur route UCI 2026 [CG26 0461]. Les conseils d'arrondissement de Rivière-des-Prairies–Pointe-aux-Trembles et de LaSalle adoptent des motions réclamant un transport collectif structurant dans l'Est et dans le Grand Sud-Ouest.",
+     "numeros": [
+      "CG26 0164",
+      "CG26 0461",
+      "CA26 30 09 0219",
+      "CA26 20 0328"
+     ]
+    },
+    {
+     "periode": "Juin à août 2026",
+     "titre": "Règlements d'emprunt de la STM",
+     "texte": "L'agglomération approuve plusieurs emprunts de la STM et les modifications correspondantes au programme d'immobilisations 2026-2035 : analyse du remplacement des voitures MR-73 [CG26 0393], prolongation de leur durée de vie [CG26 0504], mesures préférentielles pour bus [CG26 0500], Réno-Infrastructures phase 4 porté à 640 000 000 $ [CG26 0501], réfection des infrastructures de surface [CG26 0506] et gestion des risques technologiques et de sécurité [CG26 0503].",
+     "numeros": [
+      "CG26 0393",
+      "CG26 0500",
+      "CG26 0501",
+      "CG26 0503",
+      "CG26 0504",
+      "CG26 0506"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "Le bail du terrain de stationnement près de la rue de Louvain commence le 1er octobre 2026, pour trois ans, à raison de 92 jours par année.",
+     "texte": "Le bail du terrain de stationnement d'Ahuntsic-Cartierville court sur trois ans à partir du 1er octobre 2026, pour un maximum de 92 jours par année.",
      "numeros": [
       "CM26 0078"
      ]
     },
     {
-     "texte": "Les ententes avec Artelia Canada et Stantec Experts-conseils pour le corridor de la ligne bleue courent d'octobre 2026 à octobre 2032.",
+     "texte": "Les ententes avec Artelia Canada inc. et Stantec Experts-conseils ltée couvrent 72 mois, d'octobre 2026 à octobre 2032.",
      "numeros": [
       "CG26 0564"
      ]
     },
     {
-     "texte": "Les travaux du poste de ventilation Rielle, à Verdun, doivent se poursuivre jusqu'en décembre 2027.",
+     "texte": "Les travaux de réfection et d'agrandissement du poste de ventilation Rielle, à Verdun, doivent se poursuivre jusqu'en décembre 2027.",
      "numeros": [
       "CG26 0349"
      ]
     },
     {
-     "texte": "La rue Wilderton sera fermée au maximum deux semaines pendant les vacances estivales de 2027, au passage à niveau croisant Jean-Talon Ouest; les travaux du pont-tunnel sont prévus de juin 2026 à mars 2028.",
+     "texte": "La rue Wilderton sera fermée au maximum deux semaines pendant les vacances estivales de 2027, pour la reconstruction du pont-tunnel.",
      "numeros": [
       "CG26 0379"
      ]
     },
     {
-     "texte": "L'ouverture des cinq stations du prolongement de la ligne bleue est prévue en 2031.",
+     "texte": "L'ouverture des cinq nouvelles stations du prolongement de la ligne bleue est prévue en 2031.",
      "numeros": [
       "CG26 0175"
      ]
     }
    ],
-   "utilisable": false,
-   "source": "Rédigé automatiquement à partir des 46 dossiers du sujet : leur sommaire décisionnel quand le conseil l'annexe à son ordre du jour, et le texte décidé et les motifs lus dans les procès-verbaux. Puis vérifié automatiquement : ce qui ne se vérifiait pas a été retiré. Les documents officiels font foi.",
+   "utilisable": true,
+   "source": "Rédigé automatiquement à partir des 47 dossiers du sujet : leur sommaire décisionnel quand le conseil l'annexe à son ordre du jour, et le texte décidé et les motifs lus dans les procès-verbaux. Puis vérifié automatiquement : ce qui ne se vérifiait pas a été retiré. Les documents officiels font foi.",
    "verification": {
     "version": 2,
     "retiresMecanique": [],
     "retiresContreLecture": [
      {
-      "element": "etapes[3]",
-      "raison": "« Ville-Marie autorise des travaux de nuit dans le tunnel de la ligne verte » déforme CA26 240269 : l'ordonnance autorise des travaux « à raison de 24 h sur 24 h, tous les jours de la semaine, incluant les jours fériés, du 10 juin au 31 juillet 2026 », et non des travaux de nuit."
-     },
-     {
       "element": "etapes[1]",
-      "raison": "« à la suite d'un appel d'offres lancé par la STM » n'est écrit nulle part dans CM26 0048 ni CG26 0064. Les dossiers mentionnent seulement l'« appel d'offres public STM-6000037351 » et indiquent que c'est la Ville (agglomération) qui conclut l'entente; attribuer le lancement de l'appel d'offres à la STM est une déduction non appuyée."
-     },
-     {
-      "element": "etapes[0]",
-      "raison": "« Le conseil d'agglomération dépose puis approuve le budget 2026 » n'est pas établi par CG26 0022 : le texte décidé se lit « de déposer le budget de 2026 et le programme d'immobilisations 2026-2035 [...] qui sera approuvé à une assemblée ultérieure ». Aucune approbation par l'agglomération n'est consignée dans le dossier."
-     },
-     {
-      "element": "etapes[4]",
-      "raison": "Présenter l'emprunt de CG26 0393 comme finançant le « remplacement des voitures MR-73 » déforme le dossier : le sommaire précise que l'emprunt de 11 159 588 $ sert à la phase de démarrage (définir le besoin, documenter les options, planifier les études) et « pas encore à acheter des trains »."
-     },
-     {
-      "element": "etapes[5]",
-      "raison": "« Des conseils d'arrondissement et le conseil municipal adoptent des motions sur le transport structurant dans l'Est et le Grand Sud-Ouest et sur le tunnelier » laisse entendre que le conseil municipal s'est prononcé sur l'Est et le Grand Sud-Ouest. Or CA26 30 09 0219 (RDP-PAT) et CA26 20 0328 (LaSalle) sont des motions d'arrondissement; LaSalle ne fait que « demander au conseil de la Ville d'appuyer cette motion », sans décision du conseil municipal au dossier."
-     },
-     {
-      "element": "enBref",
-      "raison": "« lui vend ou lui prête des terrains pour agrandir des édicules et des postes techniques du métro » : aucun prêt de terrain à ces fins n'apparaît dans les dossiers. Le seul prêt à la STM (CE26 1303, non cité dans les étapes) vise un immeuble d'environ 100 pi², la chute mécanisée Stinson, pour une aire de repos et des installations sanitaires de chauffeurs d'autobus."
+      "raison": "Le texte affirme que la Ville « vend » à la STM « une partie de la rue Jean-Brillant pour un poste de redressement [CG26 0375] ». Le dossier CG26 0375 (comme CM26 0658) n'approuve qu'un projet de promesse bilatérale par lequel la Ville « s'engage à vendre » ce terrain de 202,8 m² pour 115 000 $ : la vente n'est pas conclue et demeure conditionnelle aux autorisations du CIUSSS du Centre-Sud et du ministère des Transports et de la Mobilité durable, l'acte de vente restant à signer. Présenter la transaction comme réalisée, au même titre que les ventes conclues de CG26 0348 et CG26 0349, déforme la portée de la décision."
      }
     ]
    }
