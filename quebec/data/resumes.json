@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-05T16:37:20.816Z",
+ "generatedAt": "2026-11-06T16:04:17.367Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,44 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-09-06",
+  "depuis": "2026-09-07",
   "plafond": 120
  },
- "nombre": 1798,
- "genereCetteFois": 15,
+ "nombre": 1799,
+ "genereCetteFois": 1,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.5613,
-  "jetonsEntree": 77396,
-  "jetonsSortie": 6974
+  "montant": 0.0405,
+  "jetonsEntree": 5693,
+  "jetonsSortie": 481
  },
  "resumes": [
+  {
+   "id": "GT2026-355.pdf",
+   "numero": "GT2026-355",
+   "date": "2026-11-05",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise aux 1450-1452, avenue de l'Amiral, lot 1 746 715, quartier de Val-Bélair, district électoral de Val-Bélair, Arrondissement de La Haute-Saint-Charles",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-355.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure pour la maison des 1450-1452, avenue de l'Amiral, dans Val-Bélair (arrondissement de La Haute-Saint-Charles).",
+    "La façade pourra se trouver jusqu'à 18,75 mètres de la marge avant, alors que le règlement d'urbanisme de l'arrondissement fixe la limite à 3 mètres.",
+    "Le propriétaire veut refaire et rehausser les fondations pour ajouter un logement; le bâtiment doit être déplacé parce qu'il se trouve dans la rive d'un cours d'eau.",
+    "Selon l'analyse, le cours d'eau empêche de placer la façade entre 6 et 9 mètres de la ligne avant du terrain, et la nouvelle implantation sort de la rive.",
+    "Le dossier a déjà fait l'objet d'un avis d'infraction pour la démolition de la fondation sans permis; les travaux sont arrêtés le temps de régulariser l'implantation.",
+    "Le comité consultatif d'urbanisme a recommandé la dérogation à l'unanimité le 28 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-06T16:04:17.365Z",
+   "jetons": {
+    "entree": 5693,
+    "sortie": 481
+   }
+  },
   {
    "id": "DE2026-411.pdf",
    "numero": "DE2026-411",
