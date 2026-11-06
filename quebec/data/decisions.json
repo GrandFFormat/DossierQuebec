@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-05T16:36:43.377Z",
+ "generatedAt": "2026-11-06T16:04:08.297Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "licence": "Documents publics de la Ville de Québec — reproduction avec mention de la source, usage non commercial.",
  "parametres": {
@@ -12,9 +12,9 @@
    "Tableaux des décisions"
   ]
  },
- "totalDisponible": 5773,
- "nombre": 5773,
- "nouveauxDepuisDerniereExecution": 18,
+ "totalDisponible": 5804,
+ "nombre": 5804,
+ "nouveauxDepuisDerniereExecution": 31,
  "themes": {
   "procedure": {
    "libelle": "Procédure",
@@ -90,7 +90,7 @@
   "tramway": {
    "titre": "Tramway (TramCité)",
    "description": "Le réseau structurant de transport en commun : financement, terrains et servitudes, arbres, chantiers.",
-   "n": 129
+   "n": 130
   },
   "logement": {
    "titre": "Logement social et abordable",
@@ -100,7 +100,7 @@
   "matieres-residuelles": {
    "titre": "Matières résiduelles",
    "description": "Collectes, incinérateur (Complexe de valorisation énergétique), biométhanisation et centre de tri.",
-   "n": 59
+   "n": 60
   },
   "expocite": {
    "titre": "ExpoCité et Centre Vidéotron",
@@ -124,23 +124,23 @@
   }
  },
  "statuts": {
-  "termines": 1672,
-  "enCours": 126,
+  "termines": 1681,
+  "enCours": 118,
   "inconnus": 0
  },
  "facettes": {
   "type": [
    {
     "valeur": "Résolutions",
-    "n": 3692
+    "n": 3720
    },
    {
     "valeur": "Sommaires et mémoires",
-    "n": 1798
+    "n": 1799
    },
    {
     "valeur": "Procès-verbaux",
-    "n": 186
+    "n": 188
    },
    {
     "valeur": "Tableaux des décisions",
@@ -150,7 +150,7 @@
   "instance": [
    {
     "valeur": "Comité exécutif",
-    "n": 1426
+    "n": 1453
    },
    {
     "valeur": "Conseil de la ville",
@@ -173,12 +173,12 @@
     "n": 195
    },
    {
-    "valeur": "Conseil de l'Arrondissement de Beauport",
-    "n": 122
+    "valeur": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+    "n": 123
    },
    {
-    "valeur": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
-    "n": 120
+    "valeur": "Conseil de l'Arrondissement de Beauport",
+    "n": 122
    },
    {
     "valeur": "Conseil de l'Arrondissement de Charlesbourg",
@@ -192,7 +192,7 @@
   "unite": [
    {
     "valeur": "Gestion du territoire",
-    "n": 325
+    "n": 326
    },
    {
     "valeur": "Approvisionnements",
@@ -338,31 +338,31 @@
   "theme": [
    {
     "valeur": "urbanisme",
-    "n": 1080
+    "n": 1083
    },
    {
     "valeur": "procedure",
-    "n": 800
+    "n": 807
    },
    {
     "valeur": "subventions",
-    "n": 649
+    "n": 655
    },
    {
     "valeur": "transport",
-    "n": 614
+    "n": 617
    },
    {
     "valeur": "contrats",
-    "n": 596
+    "n": 600
    },
    {
     "valeur": "immobilier",
-    "n": 353
+    "n": 357
    },
    {
     "valeur": "loisirs",
-    "n": 284
+    "n": 285
    },
    {
     "valeur": "finances",
@@ -370,7 +370,7 @@
    },
    {
     "valeur": "travaux",
-    "n": 205
+    "n": 206
    },
    {
     "valeur": "rh",
@@ -378,7 +378,7 @@
    },
    {
     "valeur": "administration",
-    "n": 182
+    "n": 184
    },
    {
     "valeur": "culture",
@@ -408,6 +408,73 @@
  },
  "decisions": [
   {
+   "id": "PV_CA7_EX_2026-11-05_00h00.pdf",
+   "numero": null,
+   "objet": "Procès-verbal de la séance extraordinaire du Conseil de l'Arrondissement de La Haute-Saint-Charles tenue le jeudi 05 novembre 2026 à 14h00",
+   "date": "2026-11-05",
+   "annee": "2026",
+   "type": "Procès-verbaux",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA7_EX_2026-11-05_00h00.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA6-2026-0110.pdf",
+   "numero": "CA6-2026-0110",
+   "objet": "Adoption de l'ordre du jour",
+   "date": "2026-11-05",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA6-2026-0110.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "statutDossier": "termine",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA6-2026-0111.pdf",
+   "numero": "CA6-2026-0111",
+   "objet": "Demande de dérogation mineure pour la propriété sise aux 1450-1452, avenue de l'Amiral, lot 1 746 715, quartier de Val-Bélair, district électoral de Val-Bélair",
+   "date": "2026-11-05",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA6-2026-0111.pdf",
+   "nouveau": true,
+   "sommaireId": "GT2026-355.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "GT2026-355.pdf",
+   "numero": "GT2026-355",
+   "objet": "Demande de dérogation mineure pour la propriété sise aux 1450-1452, avenue de l'Amiral, lot 1 746 715, quartier de Val-Bélair, district électoral de Val-Bélair, Arrondissement de La Haute-Saint-Charles",
+   "date": "2026-11-05",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Gestion du territoire",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-355.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'arrondissement",
+   "dateCible": null,
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
    "id": "TD_CE_PL_2026-11-04_00h00.pdf",
    "numero": null,
    "objet": "Tableau des décisions de la séance planifiée du comité exécutif tenue le mercredi 04 novembre 2026 à 10h00",
@@ -417,7 +484,7 @@
    "instance": "Comité exécutif",
    "unite": null,
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CE_PL_2026-11-04_00h00.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "theme": "procedure",
    "themeSource": "objet"
@@ -432,7 +499,7 @@
    "instance": "Conseil d'agglomération de Québec",
    "unite": null,
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CAG_PL_2026-11-04_13h00.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "theme": "procedure",
    "themeSource": "objet"
@@ -468,10 +535,9 @@
    "instance": null,
    "unite": "Approvisionnements",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-264.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil d'agglomération de Québec",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Conseil d'agglomération de Québec",
    "theme": "contrats",
@@ -523,10 +589,9 @@
    "instance": null,
    "unite": "Approvisionnements",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-371.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil d'agglomération de Québec",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Conseil d'agglomération de Québec",
    "theme": "contrats",
@@ -542,7 +607,7 @@
    "instance": null,
    "unite": "Approvisionnements",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-372.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
    "dateCible": "2026-11-04",
@@ -562,10 +627,9 @@
    "instance": null,
    "unite": "Approvisionnements",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-373.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Comité exécutif",
    "theme": "procedure",
@@ -581,7 +645,7 @@
    "instance": null,
    "unite": "Culture et patrimoine",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-087.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
    "dateCible": "2026-11-04",
@@ -601,10 +665,9 @@
    "instance": null,
    "unite": "Culture et patrimoine",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-088.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Comité exécutif",
    "theme": "subventions",
@@ -674,10 +737,9 @@
    "instance": null,
    "unite": "Développement économique et grands projets",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-410.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Comité exécutif",
    "theme": "economie",
@@ -693,10 +755,9 @@
    "instance": null,
    "unite": "Développement économique et grands projets",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DE2026-411.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Comité exécutif",
    "projets": [
@@ -715,10 +776,9 @@
    "instance": null,
    "unite": "Finances",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/FN2026-045.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil de la ville",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Conseil de la ville",
    "theme": "procedure",
@@ -734,10 +794,9 @@
    "instance": null,
    "unite": "Finances",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/FN2026-046.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil d'agglomération de Québec",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Conseil d'agglomération de Québec",
    "theme": "procedure",
@@ -833,10 +892,9 @@
    "instance": null,
    "unite": "Loisirs, sports et vie communautaire",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-277.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil d'agglomération de Québec",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Conseil d'agglomération de Québec",
    "theme": "subventions",
@@ -852,7 +910,7 @@
    "instance": null,
    "unite": "Planification de l'aménagement et de l'environnement",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PA2026-146.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil de la ville",
    "dateCible": "2026-11-17",
@@ -872,10 +930,9 @@
    "instance": null,
    "unite": "Ressources humaines",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/RH2026-816.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Comité exécutif",
    "theme": "rh",
@@ -891,10 +948,9 @@
    "instance": null,
    "unite": "Ressources humaines",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/RH2026-875.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil d'agglomération de Québec",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Conseil d'agglomération de Québec",
    "theme": "rh",
@@ -910,10 +966,9 @@
    "instance": null,
    "unite": "Technologies de l'information",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TI2026-015.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil d'agglomération de Québec",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Conseil d'agglomération de Québec",
    "theme": "contrats",
@@ -947,7 +1002,7 @@
    "instance": "Conseil de la ville",
    "unite": null,
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CV_PL_2026-11-03_00h00.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "theme": "procedure",
    "themeSource": "objet"
@@ -1227,6 +1282,21 @@
    "themeSource": "objet"
   },
   {
+   "id": "PV_CE_PL_2026-10-28_00h00.pdf",
+   "numero": null,
+   "objet": "Procès-verbal de la séance planifiée du comité exécutif tenue le mercredi 28 octobre 2026 à 10h00",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Procès-verbaux",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CE_PL_2026-10-28_00h00.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
    "id": "AJ2026-024.pdf",
    "numero": "AJ2026-024",
    "objet": "Autorisation au Service des affaires juridiques à confier, à Me Nathalie Lavoie, un mandat de services professionnels pour représenter la Ville de Québec ainsi que les autres employés, élus ou avocats du Service des affaire juridiques impliqués dans les dossiers de la Cour supérieure 200-17-035022-2",
@@ -1239,7 +1309,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "administration",
    "themeSource": "objet"
@@ -1314,9 +1384,459 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1304.pdf",
+   "numero": "CE-2026-1304",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Règlement hors tribunal du dossier relatif à l'expropriation du lot 6 728 669 du cadastre du Québec, situé sur la 1re Avenue (Ville de Québec c. Guylaine Langlois, SAI¿Q¿286101¿2601)",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1304.pdf",
+   "nouveau": true,
+   "sommaireId": "AJ2026-028.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1305.pdf",
+   "numero": "CE-2026-1305",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Demande afin d'obtenir l'autorisation du gouvernement du Québec de prendre par voie d'expropriation une servitude réelle et perpétuelle d'utilité publique contre une partie du lot 6 495 378 du cadastre du Québec, pour les fins du projet de résea",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1305.pdf",
+   "nouveau": true,
+   "sommaireId": "AJ2026-029.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1306.pdf",
+   "numero": "CE-2026-1306",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Demande afin d'obtenir l'autorisation du gouvernement du Québec d'acquérir par voie d'expropriation une partie du lot 1 941 070 du cadastre du Québec, pour les fins du projet de réseau structurant de transport en commun de la Ville de Québec (pr",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1306.pdf",
+   "nouveau": true,
+   "sommaireId": "AJ2026-030.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "projets": [
+    "tramway"
+   ],
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1307.pdf",
+   "numero": "CE-2026-1307",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Demande afin d'obtenir l'autorisation du gouvernement du Québec d'acquérir par voie d'expropriation une servitude réelle et perpétuelle d'utilité publique contre une partie du lot 1 941 044 du cadastre du Québec, pour les fins du projet de résea",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1307.pdf",
+   "nouveau": true,
+   "sommaireId": "AJ2026-031.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1308.pdf",
+   "numero": "CE-2026-1308",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Demande afin d'obtenir l'autorisation du gouvernement du Québec d'acquérir, par voie d'expropriation, la propriété d'une parcelle de terrain et une servitude réelle et perpétuelle d'utilité publique sur le lot 6 583 120 du cadastre du Québec, po",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1308.pdf",
+   "nouveau": true,
+   "sommaireId": "AJ2026-032.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1309.pdf",
+   "numero": "CE-2026-1309",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Contrat pour le service d'entretien des analyseurs de cheminées du Complexe de valorisation énergétique (Dossier 95512)",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1309.pdf",
+   "nouveau": true,
+   "sommaireId": "AP2026-317.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "projets": [
+    "matieres-residuelles"
+   ],
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1310.pdf",
+   "numero": "CE-2026-1310",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Contrat pour la maintenance et le soutien à l'utilisation du progiciel de paie et de gestion des ressources humaines (VIP) (Dossier 96736)",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1310.pdf",
+   "nouveau": true,
+   "sommaireId": "AP2026-362.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1311.pdf",
+   "numero": "CE-2026-1311",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Adhésion de la Ville de Québec au regroupement d'achats du Centre d'acquisitions gouvernementales 2025-8216-50 imprimante, multifonction et cartouche originale (Dossier 96688)",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1311.pdf",
+   "nouveau": true,
+   "sommaireId": "AP2026-364.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "administration",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1312.pdf",
+   "numero": "CE-2026-1312",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Avenant à l'entente intervenue le 8 décembre 2025 entre la Ville de Québec et Technologie Hoola One inc., afin de modifier les dates de fin et de réclamation finale du projet Commercialisation de la technologie HOWrack sur le marché européen",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1312.pdf",
+   "nouveau": true,
+   "sommaireId": "DE2026-389.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1313.pdf",
+   "numero": "CE-2026-1313",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Entente entre la Ville de Québec et l'Ébénisterie Globale inc., relative au versement d'une subvention, dans le cadre du volet Capitale-Productivité de la Vision entrepreneuriale Québec 2030, pour réaliser le projet Amélioration de productivité",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1313.pdf",
+   "nouveau": true,
+   "sommaireId": "DE2026-392.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1314.pdf",
+   "numero": "CE-2026-1314",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Entente entre la Ville de Québec et Concetti Design inc., relative au versement d'une subvention, dans le cadre du volet Capitale-Innovation de la Vision entrepreneuriale Québec 2030, pour réaliser le projet Commercialisation et diversification",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1314.pdf",
+   "nouveau": true,
+   "sommaireId": "DE2026-403.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1315.pdf",
+   "numero": "CE-2026-1315",
+   "objet": "Modification avant adoption d'une résolution autorisant un projet immobilier dérogatoire sur les lots 6 583 175 et 6 583 176 du cadastre du Québec (lot projeté numéro 6 733 206 dudit cadastre) (0, rue de la Pointe-aux-Lièvres, quartier de Saint-Roch, district électoral de Saint-Roch¿Saint-Sauveur),",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1315.pdf",
+   "nouveau": true,
+   "sommaireId": "GT2026-336.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération",
+   "echeance": "2026-11-03",
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1316.pdf",
+   "numero": "CE-2026-1316",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Approbation de la programmation de travaux n° 3 et autorisation de son envoi au ministère des Affaires municipales, des Régions et de l'Occupation du territoire - Programme de transfert pour les infrastructures d'eau et collectives du Québec pou",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1316.pdf",
+   "nouveau": true,
+   "sommaireId": "IN2026-012.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "travaux",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1317.pdf",
+   "numero": "CE-2026-1317",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Adoption du Règlement modifiant le Règlement de l'agglomération sur la détermination des fins municipales pour lesquelles des immeubles peuvent être acquis au moyen d'un droit de préemption et du territoire sur lequel ce droit peut être exercé,",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1317.pdf",
+   "nouveau": true,
+   "sommaireId": "PA2026-143.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "echeance": "2026-11-04",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1318.pdf",
+   "numero": "CE-2026-1318",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Adoption du Règlement modifiant le Règlement de l'agglomération sur la circulation et le stationnement relativement à plusieurs dispositions, R.A.V.Q. 1879",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1318.pdf",
+   "nouveau": true,
+   "sommaireId": "TM2026-149.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1319.pdf",
+   "numero": "CE-2026-1319",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Adoption du Règlement modifiant le Règlement de l'agglomération sur le partage des dépenses mixtes afin de préciser l'application de certaines dispositions et d'y prévoir de nouveaux critères de partage, R.A.V.Q. 1888",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1319.pdf",
+   "nouveau": true,
+   "sommaireId": "FN2026-048.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1320.pdf",
+   "numero": "CE-2026-1320",
+   "objet": "Adoption du Règlement sur la détermination des fins municipales pour lesquelles des immeubles peuvent être acquis au moyen d'un droit de préemption et du territoire sur lequel ce droit peut être exercé, R.V.Q. 3590",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1320.pdf",
+   "nouveau": true,
+   "sommaireId": "PA2026-145.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "echeance": "2026-11-03",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1321.pdf",
+   "numero": "CE-2026-1321",
+   "objet": "Autorisation au Service des affaires juridiques de confier, à Me Nathalie Lavoie, un mandat de services professionnels pour représenter la Ville de Québec ainsi que les autres employés, élus ou avocats du Service des affaires juridiques impliqués dans les dossiers de la Cour supérieure 200¿17¿035022",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1321.pdf",
+   "nouveau": true,
+   "sommaireId": "AJ2026-024.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "administration",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1322.pdf",
+   "numero": "CE-2026-1322",
+   "objet": "Attribution d'un contrat à commandes pour des services professionnels - Analyste d'affaires (Appel d'offres sur invitation 96557)",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1322.pdf",
+   "nouveau": true,
+   "sommaireId": "AP2026-366.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1323.pdf",
+   "numero": "CE-2026-1323",
+   "objet": "Aide financière à la Fondation Jeunes en Tête",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1323.pdf",
+   "nouveau": true,
+   "sommaireId": "DG2026-032.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1324.pdf",
+   "numero": "CE-2026-1324",
+   "objet": "Aide financière à la Fondation Maison Dauphine",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1324.pdf",
+   "nouveau": true,
+   "sommaireId": "DG2026-040.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1325.pdf",
+   "numero": "CE-2026-1325",
+   "objet": "Aide financière à l'École nationale d'administration publique pour le démarrage du Lieu de savoir municipal du Québec",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1325.pdf",
+   "nouveau": true,
+   "sommaireId": "DG2026-041.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1326.pdf",
+   "numero": "CE-2026-1326",
+   "objet": "Subventions dans le cadre de l'axe 3 intitulé Se rapprocher et s'enraciner du Plan d'action municipal de l'immigration 2024-2026 de la Ville de Québec",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1326.pdf",
+   "nouveau": true,
+   "sommaireId": "LS2026-270.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1327.pdf",
+   "numero": "CE-2026-1327",
+   "objet": "Approbation des procès-verbaux des séances du comité exécutif tenues les 30 septembre et 2, 7 et 9 octobre 2026",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1327.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "statutDossier": "termine",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1328.pdf",
+   "numero": "CE-2026-1328",
+   "objet": "Modification à la structure administrative du Service du transport et de la mobilité intelligente",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1328.pdf",
+   "nouveau": true,
+   "sommaireId": "RH2026-797.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1329.pdf",
+   "numero": "CE-2026-1329",
+   "objet": "Participation de monsieur Alexandre Côté à une mission de formation du Service technique des remontées mécaniques et des transports guidés qui aura lieu du 13 au 21 novembre 2026 à Grenoble, en France",
+   "date": "2026-10-28",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1329.pdf",
+   "nouveau": true,
+   "sommaireId": "TM2026-252.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "loisirs",
    "themeSource": "objet"
   },
   {
@@ -1350,7 +1870,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "subventions",
    "themeSource": "objet"
@@ -1368,7 +1888,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "subventions",
    "themeSource": "objet"
@@ -1386,7 +1906,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "subventions",
    "themeSource": "objet"
@@ -1422,7 +1942,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "subventions",
    "themeSource": "objet"
@@ -1460,7 +1980,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "transport",
    "themeSource": "objet"
@@ -1478,7 +1998,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "loisirs",
    "themeSource": "objet"
