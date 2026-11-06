@@ -53,7 +53,7 @@ const s = (n, sing, plur) => (n > 1 ? plur : sing);
 // ---------- chargement ----------
 async function charger(nom) {
   try {
-    const res = await fetch(`data/${nom}.json`, { cache: 'no-store' });
+    const res = await fetch(`data/${nom}.json`, { cache: 'no-cache' });
     return res.ok ? await res.json() : null;
   } catch {
     return null;
