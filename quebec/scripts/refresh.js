@@ -103,9 +103,10 @@ const ETAPES = [
   { nom: 'Projets pour « Mes dossiers »', argv: ['scripts/projets-publics.js'] },
   // Les chiffres de « Le travail derrière le site » (page Abonnement).
   { nom: 'Chiffres de la page Abonnement', argv: ['scripts/travail-public.js'], secondaire: true },
-  // Les décisions récentes écrites dans decisions-de-la-ville-de-quebec.html, pour Google (27 sept. 2026) : après les
-  // résumés du jour, sinon la page porterait ceux de la veille.
-  { nom: 'Décisions récentes dans la page (Google)', argv: ['../scripts/prerendu-villes.js', 'quebec'], secondaire: true },
+  // Le premier écran des six pages, écrit dans leur HTML (scripts/prerendre.js, 6 nov. 2026), et le
+  // petit data/pages/accueil.json : après les résumés du jour, sinon les pages porteraient ceux de la
+  // veille. Remplace l'ancien pré-rendu « pour Google » de la page des décisions (../scripts/prerendu-villes.js).
+  { nom: 'Premier écran dans les pages (pré-rendu)', argv: ['scripts/prerendre.js'], secondaire: true },
   // Les courriels de la Ville (séances et compte rendu du mois), publiés tout seuls (30 sept. 2026) :
   // scripts/infolettres-auto.js. L'envoi aux inscrits suit, par le cron du site.
   { nom: 'Courriels de la Ville publiés', argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scripts/infolettres-auto.js'], secondaire: true },

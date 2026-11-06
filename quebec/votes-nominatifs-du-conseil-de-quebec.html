@@ -87,7 +87,7 @@
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="/commun/abonnes.css">
 </head>
-<body data-page="votes" data-ville="quebec">
+<body data-prerendu="1" data-page="votes" data-ville="quebec">
 
 <header>
   <div class="contenu">
@@ -120,7 +120,7 @@
 </header>
 
 <main class="contenu">
-  <div data-en="Loading data…" id="chargement" class="avis">Chargement des données…</div>
+  <div data-en="Loading data…" id="chargement" class="avis" hidden>Chargement des données…</div>
 
   <h1 data-en="Recorded votes, Québec City council" class="page">Votes nominatifs du conseil de Québec</h1>
   <div data-en="<strong>How the recorded votes of Québec City council are obtained.</strong> At the City of Québec, most decisions are adopted without a recorded vote. When a member &quot;calls for the vote&quot;, the minutes record by name who votes for and who votes against. These names are extracted from the text of the resolutions by automatic reading: each vote keeps the original passage, and any gap with the official count in the document is flagged rather than corrected." class="avis">
@@ -135,7 +135,7 @@
     <summary>
       <div class="meta">
         <span data-en="table" class="puce">tableau</span>
-        <span id="resume-dissidence"></span>
+        <span id="resume-dissidence"><!--PR:resume-dissidence-->27 personnes — en tête : Richard Levesque (157), Mélanie Sauvé (61), Stéphane Lachance (61)<!--/PR:resume-dissidence--></span>
       </div>
       <p data-en="Votes against, by person" class="objet">Votes contre, par personne</p>
     </summary>
@@ -143,7 +143,7 @@
   <p data-en="Raw count, without interpretation. Voting against is neither a flaw nor a merit: it is a position." class="compte">Décompte brut, sans interprétation. Voter contre n'est ni un défaut ni un mérite&nbsp;: c'est une position.</p>
   <table id="table-dissidence">
     <thead><tr><th data-en="Person">Personne</th><th data-en="Most frequent body">Instance la plus fréquente</th><th data-en="Votes against" class="n">Votes contre</th></tr></thead>
-    <tbody></tbody>
+    <tbody><!--PR:table-dissidence tbody--><tr><td>Richard Levesque</td><td>Conseil d'agglomération de Québec</td><td class="n">157</td></tr><tr><td>Mélanie Sauvé</td><td>Conseil de la ville</td><td class="n">61</td></tr><tr><td>Stéphane Lachance</td><td>Conseil de la ville</td><td class="n">61</td></tr><tr><td>Marc Roussin</td><td>Conseil de la ville</td><td class="n">56</td></tr><tr><td>Élise Paquette</td><td>Conseil d'agglomération de Québec</td><td class="n">19</td></tr><tr><td>Jacques Bouchard</td><td>Conseil d'agglomération de Québec</td><td class="n">16</td></tr><tr><td>Gaétan Pageau</td><td>Conseil d'agglomération de Québec</td><td class="n">9</td></tr><tr><td>Martin Maranda</td><td>Conseil d'agglomération de Québec</td><td class="n">5</td></tr><tr><td>Bruno Marchand</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Marie-Josée Asselin</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Marie-Pierre Boucher</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Marylou Boulianne</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Mélissa Coulombe-Leduc</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Catherine Deschamps</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Elainie Lepage</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Catherine Vallières-Roland</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Elisa Verreault</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Marianne White</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Clément Bourdeau</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Éric Courtemanche Baril</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Maxime Elmaleh</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Yannick Fauteux</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Claude Lavoie</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Jean-Luc Lavoie</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Raphaël Lebailly</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Raymond Poirier</td><td>Conseil de la ville</td><td class="n">4</td></tr><tr><td>Charles Guérard</td><td>Conseil d'agglomération de Québec</td><td class="n">2</td></tr><!--/PR:table-dissidence tbody--></tbody>
   </table>
     </div>
   </details>
@@ -151,13 +151,123 @@
   <h2 data-en="The recorded votes" class="section">Les appels nominaux</h2>
   <div class="barre-outils">
     <input data-en-placeholder="Search subjects or names…" type="search" id="rech-votes" placeholder="Rechercher dans l'objet ou les noms…">
-    <select id="filtre-theme-votes"><option data-en="All topics" value="">Tous les sujets</option></select>
-    <select id="filtre-instance-votes"><option data-en="All bodies" value="">Toutes les instances</option></select>
-    <button data-en="Expand all" type="button" class="bouton-lien" id="tout-deplier">Tout déplier</button>
+    <select id="filtre-theme-votes"><option data-en="All topics" value="">Tous les sujets</option><!--PR:filtre-theme-votes--><option value="immobilier">Immobilier (68)</option><option value="transport">Transport (46)</option><option value="contrats">Contrats (44)</option><option value="finances">Finances (30)</option><option value="subventions">Subventions (18)</option><option value="travaux">Travaux et infrastructures (15)</option><option value="rh">Ressources humaines (12)</option><option value="procedure">Procédure (9)</option><option value="loisirs">Loisirs et communauté (6)</option><option value="environnement">Environnement (6)</option><option value="securite">Sécurité publique (6)</option><option value="administration">Administration (5)</option><option value="urbanisme">Urbanisme (2)</option><option value="culture">Culture et patrimoine (2)</option><option value="economie">Développement économique (2)</option><!--/PR:filtre-theme-votes--></select>
+    <select id="filtre-instance-votes" data-rempli="1"><option data-en="All bodies" value="">Toutes les instances</option><!--PR:filtre-instance-votes--><option value="Conseil d'agglomération de Québec">Conseil d'agglomération de Québec (205)</option><option value="Conseil de la ville">Conseil de la ville (66)</option><!--/PR:filtre-instance-votes--></select>
+    <button data-en="Expand all" type="button" class="bouton-lien" id="tout-deplier" data-etat="replie"><!--PR:tout-deplier-->Tout déplier<!--/PR:tout-deplier--></button>
   </div>
-  <p class="compte" id="compte-votes"></p>
-  <div id="liste-votes"></div>
-  <button data-en="10 more" class="plus" id="plus-votes" hidden>10 de plus</button>
+  <p class="compte" id="compte-votes"><!--PR:compte-votes-->271 appel(s) nominal(aux) affiché(s) sur 271 en 2026. 10 portent un avertissement d'extraction.<!--/PR:compte-votes--></p>
+  <div id="liste-votes"><!--PR:liste-votes--><details class="carte pliante" name="fiches"><summary><div class="meta">
+      <span class="puce theme t-immobilier">Immobilier</span>
+      <span class="puce num">CA-2026-0548</span>
+      <span>21 oct. 2026</span>
+      <span class="puce">Conseil d'agglomération de Québec</span>
+      <span class="resultat r-majorite">Adoptée à la majorité</span>
+      <span class="decompte"><span class="d-pour">6 pour</span><span class="d-contre">1 contre</span></span>
+    </div>
+    <p class="objet">Règlement hors tribunal du dossier relatif à l'expropriation du lot 2 012 287 du cadastre du Québec, situé sur le boulevard Laurier (Ville de Québec c. Société en commandite 2810 boulevard Laurier, SAI-Q-270755-2309) et acquisition, de gré à gré ou par expropriation, à des fins municipales, d'un imm</p></summary><div class="corps"><div class="colonnes-vote">
+      <div class="colonne-vote pour">
+        <h4>Pour — 6</h4>
+        <div class="noms"><span class="nom">Marie-Pierre Boucher</span><span class="nom">Catherine Deschamps</span><span class="nom">Elainie Lepage</span><span class="nom">Elisa Verreault</span><span class="nom">Gabriel Dusablon</span><span class="nom">Charles Guérard</span></div>
+      </div>
+      <div class="colonne-vote contre">
+        <h4>Contre — 1</h4>
+        <div class="noms"><span class="nom">Richard Levesque</span></div>
+      </div>
+    </div>
+    <p class="compte" style="margin:10px 0 0">Abstention&nbsp;: Monsieur le président.</p>
+    <p class="compte" style="margin:2px 0 0">Vote demandé par Richard Levesque.</p>
+    
+    <details><summary>Voir le passage d'origine</summary><p>Ont voté en faveur : mesdames les conseillères Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage et Elisa Verreault et messieurs les conseiller Gabriel Dusablon et Charles Guérard. | Ont voté contre : monsieur le conseiller Richard Levesque.</p></details>
+    <p style="margin:9px 0 0"><a class="lien-pdf" href="https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0548.pdf" target="_blank" rel="noopener">Résolution officielle (PDF) ↗</a></p></div></details><details class="carte pliante" name="fiches"><summary><div class="meta">
+      <span class="puce theme t-contrats">Contrats</span>
+      <span class="puce num">CA-2026-0550</span>
+      <span>21 oct. 2026</span>
+      <span class="puce">Conseil d'agglomération de Québec</span>
+      <span class="resultat r-majorite">Adoptée à la majorité</span>
+      <span class="decompte"><span class="d-pour">6 pour</span><span class="d-contre">1 contre</span></span>
+    </div>
+    <p class="objet">Adjudication de contrats pour l'entretien hivernal hors rue - Lots 1, 3 à 8, 11 à 13, 15 et 17 (Appel d'offres public 95824)</p></summary><div class="corps"><div class="colonnes-vote">
+      <div class="colonne-vote pour">
+        <h4>Pour — 6</h4>
+        <div class="noms"><span class="nom">Marie-Pierre Boucher</span><span class="nom">Catherine Deschamps</span><span class="nom">Elainie Lepage</span><span class="nom">Elisa Verreault</span><span class="nom">Gabriel Dusablon</span><span class="nom">Charles Guérard</span></div>
+      </div>
+      <div class="colonne-vote contre">
+        <h4>Contre — 1</h4>
+        <div class="noms"><span class="nom">Richard Levesque</span></div>
+      </div>
+    </div>
+    <p class="compte" style="margin:10px 0 0">Abstention&nbsp;: Monsieur le président.</p>
+    <p class="compte" style="margin:2px 0 0">Vote demandé par Richard Levesque.</p>
+    
+    <details><summary>Voir le passage d'origine</summary><p>Ont voté en faveur : mesdames les conseillères Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage et Elisa Verreault et messieurs les conseiller Gabriel Dusablon et Charles Guérard. | Ont voté contre : monsieur le conseiller Richard Levesque.</p></details>
+    <p style="margin:9px 0 0"><a class="lien-pdf" href="https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0550.pdf" target="_blank" rel="noopener">Résolution officielle (PDF) ↗</a></p></div></details><details class="carte pliante" name="fiches"><summary><div class="meta">
+      <span class="puce theme t-administration">Administration</span>
+      <span class="puce num">CA-2026-0552</span>
+      <span>21 oct. 2026</span>
+      <span class="puce">Conseil d'agglomération de Québec</span>
+      <span class="resultat r-majorite">Adoptée à la majorité</span>
+      <span class="decompte"><span class="d-pour">6 pour</span><span class="d-contre">1 contre</span></span>
+    </div>
+    <p class="objet">Révision de l'affectation annuelle à la réserve financière pour le paiement de la dette de proximité et d'agglomération et ratification de l'appropriation à même la Réserve financière pour le paiement de la dette d'agglomération liée à des projets de nature mixte</p></summary><div class="corps"><div class="colonnes-vote">
+      <div class="colonne-vote pour">
+        <h4>Pour — 6</h4>
+        <div class="noms"><span class="nom">Marie-Pierre Boucher</span><span class="nom">Catherine Deschamps</span><span class="nom">Elainie Lepage</span><span class="nom">Elisa Verreault</span><span class="nom">Gabriel Dusablon</span><span class="nom">Charles Guérard</span></div>
+      </div>
+      <div class="colonne-vote contre">
+        <h4>Contre — 1</h4>
+        <div class="noms"><span class="nom">Richard Levesque</span></div>
+      </div>
+    </div>
+    <p class="compte" style="margin:10px 0 0">Abstention&nbsp;: Monsieur le président.</p>
+    <p class="compte" style="margin:2px 0 0">Vote demandé par Richard Levesque.</p>
+    
+    <details><summary>Voir le passage d'origine</summary><p>Ont voté en faveur : mesdames les conseillères Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage et Elisa Verreault et messieurs les conseiller Gabriel Dusablon et Charles Guérard. | Ont voté contre : monsieur le conseiller Richard Levesque.</p></details>
+    <p style="margin:9px 0 0"><a class="lien-pdf" href="https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0552.pdf" target="_blank" rel="noopener">Résolution officielle (PDF) ↗</a></p></div></details><details class="carte pliante" name="fiches"><summary><div class="meta">
+      <span class="puce theme t-contrats">Contrats</span>
+      <span class="puce num">CA-2026-0554</span>
+      <span>21 oct. 2026</span>
+      <span class="puce">Conseil d'agglomération de Québec</span>
+      <span class="resultat r-majorite">Adoptée à la majorité</span>
+      <span class="decompte"><span class="d-pour">6 pour</span><span class="d-contre">1 contre</span></span>
+    </div>
+    <p class="objet">Amendement à l'entente triennale entre la Ville de Québec et Agiro pour des services professionnels et techniques - Projets divers en gestion des milieux naturels, eaux pluviales, communications et sensibilisation 2026-2028</p></summary><div class="corps"><div class="colonnes-vote">
+      <div class="colonne-vote pour">
+        <h4>Pour — 6</h4>
+        <div class="noms"><span class="nom">Marie-Pierre Boucher</span><span class="nom">Catherine Deschamps</span><span class="nom">Elainie Lepage</span><span class="nom">Elisa Verreault</span><span class="nom">Gabriel Dusablon</span><span class="nom">Charles Guérard</span></div>
+      </div>
+      <div class="colonne-vote contre">
+        <h4>Contre — 1</h4>
+        <div class="noms"><span class="nom">Richard Levesque</span></div>
+      </div>
+    </div>
+    <p class="compte" style="margin:10px 0 0">Abstention&nbsp;: Monsieur le président.</p>
+    <p class="compte" style="margin:2px 0 0">Vote demandé par Richard Levesque.</p>
+    
+    <details><summary>Voir le passage d'origine</summary><p>Ont voté en faveur : mesdames les conseillères Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage et Elisa Verreault et messieurs les conseiller Gabriel Dusablon et Charles Guérard. | Ont voté contre : monsieur le conseiller Richard Levesque.</p></details>
+    <p style="margin:9px 0 0"><a class="lien-pdf" href="https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0554.pdf" target="_blank" rel="noopener">Résolution officielle (PDF) ↗</a></p></div></details><details class="carte pliante" name="fiches"><summary><div class="meta">
+      <span class="puce theme t-subventions">Subventions</span>
+      <span class="puce num">CA-2026-0556</span>
+      <span>21 oct. 2026</span>
+      <span class="puce">Conseil d'agglomération de Québec</span>
+      <span class="resultat r-majorite">Adoptée à la majorité</span>
+      <span class="decompte"><span class="d-pour">6 pour</span><span class="d-contre">1 contre</span></span>
+    </div>
+    <p class="objet">Convention de prêt et de subvention entre la Ville de Québec et la Fédération canadienne des municipalités, en sa qualité de fiduciaire du Fonds municipal vert, pour un financement pour l'implantation d'un Centre de valorisation des surplus de matériaux d'excavation et centre de traitement des sols</p></summary><div class="corps"><div class="colonnes-vote">
+      <div class="colonne-vote pour">
+        <h4>Pour — 6</h4>
+        <div class="noms"><span class="nom">Marie-Pierre Boucher</span><span class="nom">Catherine Deschamps</span><span class="nom">Elainie Lepage</span><span class="nom">Elisa Verreault</span><span class="nom">Gabriel Dusablon</span><span class="nom">Charles Guérard</span></div>
+      </div>
+      <div class="colonne-vote contre">
+        <h4>Contre — 1</h4>
+        <div class="noms"><span class="nom">Richard Levesque</span></div>
+      </div>
+    </div>
+    <p class="compte" style="margin:10px 0 0">Abstention&nbsp;: Monsieur le président.</p>
+    <p class="compte" style="margin:2px 0 0">Vote demandé par Richard Levesque.</p>
+    
+    <details><summary>Voir le passage d'origine</summary><p>Ont voté en faveur : mesdames les conseillères Marie-Pierre Boucher, Catherine Deschamps, Elainie Lepage et Elisa Verreault et messieurs les conseiller Gabriel Dusablon et Charles Guérard. | Ont voté contre : monsieur le conseiller Richard Levesque.</p></details>
+    <p style="margin:9px 0 0"><a class="lien-pdf" href="https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0556.pdf" target="_blank" rel="noopener">Résolution officielle (PDF) ↗</a></p></div></details><!--/PR:liste-votes--></div>
+  <button data-en="10 more" class="plus" id="plus-votes"><!--PR:plus-votes-->10 de plus (266 restants)<!--/PR:plus-votes--></button>
 </main>
 
 <footer>

@@ -15,6 +15,7 @@
     "scrape:lexique": "node scrapers/lexique.js",
     "scrape:resumes": "node --env-file-if-exists=api.env scrapers/resumes.js",
     "serve": "node scripts/static-server.js",
+    "prerendre": "node scripts/prerendre.js",
     "infolettre": "node scripts/infolettre.js"
   },
   "dependencies": {

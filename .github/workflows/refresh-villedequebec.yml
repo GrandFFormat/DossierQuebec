@@ -71,7 +71,8 @@ jobs:
         run: |
           git config user.name "dossierquebec-bot"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add quebec/data quebec/decisions-de-la-ville-de-quebec.html
+          # Les six pages portent leur premier écran (quebec/scripts/prerendre.js, 6 nov. 2026).
+          git add quebec/data quebec/index.html quebec/decisions-de-la-ville-de-quebec.html quebec/votes-nominatifs-du-conseil-de-quebec.html quebec/conseil-municipal-de-quebec.html quebec/lexique-municipal-de-quebec.html quebec/sources-des-donnees-de-quebec.html
           if git diff --cached --quiet; then
             echo "Aucun changement — rien à committer."
           else
