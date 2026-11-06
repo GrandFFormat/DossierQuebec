@@ -87,7 +87,7 @@
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="/commun/abonnes.css">
 </head>
-<body data-page="lexique" data-ville="quebec">
+<body data-prerendu="1" data-page="lexique" data-ville="quebec">
 
 <header>
   <div class="contenu">
@@ -120,7 +120,7 @@
 </header>
 
 <main class="contenu">
-  <div data-en="Loading data…" id="chargement" class="avis">Chargement des données…</div>
+  <div data-en="Loading data…" id="chargement" class="avis" hidden>Chargement des données…</div>
 
   <h1 data-en="Québec City municipal glossary" class="page">Lexique municipal de Québec</h1>
   <p data-en="Here is the Québec City municipal glossary: the French terms you'll see on this site, and what they mean. The official documents are in French, and the vocabulary of municipal decisions is opaque out of habit, not necessity." class="chapeau">
@@ -131,8 +131,158 @@
   <div class="barre-outils">
     <input data-en-placeholder="Search for a term…" type="search" id="rech-lexique" placeholder="Chercher un terme…">
   </div>
-  <p class="compte" id="compte-lexique"></p>
-  <div id="liste-lexique"></div>
+  <p class="compte" id="compte-lexique"><!--PR:compte-lexique-->30 termes<!--/PR:compte-lexique--></p>
+  <div id="liste-lexique"><!--PR:liste-lexique--><details class="lexique-cat cat-documents"><summary><h2 class="section">Les documents<span class="compte-cat">7 termes</span></h2></summary><div class="bloc-lexique"><div class="entree-lexique">
+      <h3 class="terme">Résolution</h3>
+      
+      <p class="definition">La décision elle-même. Une fois adoptée, c'est l'acte officiel du conseil : elle porte un numéro (CV-2026-0123, CE-2026-0456…) et engage la Ville.</p>
+      <p class="remarque">C'est le type de document le plus nombreux du portail.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Sommaire décisionnel</h3>
+      
+      <p class="definition">La note que l'administration municipale rédige AVANT la décision, pour l'expliquer aux élus : exposé de la situation, décisions antérieures, analyse des solutions, recommandation, impact financier. C'est le « pourquoi » derrière la résolution.</p>
+      <p class="remarque">C'est à partir de ce document que les résumés en langage clair du site sont produits — le raisonnement y est déjà écrit par la Ville.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Procès-verbal</h3>
+      
+      <p class="definition">Le compte rendu officiel d'une séance : qui était présent, ce qui a été décidé, et — quand quelqu'un l'a demandé — qui a voté quoi.</p>
+      <p class="remarque">C'est la source des votes nominatifs du site, et la seule source qui donne la composition réelle de chaque instance.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Avis de motion</h3>
+      
+      <p class="definition">L'annonce qu'un règlement sera présenté à une séance suivante. Ça ne décide rien : ça prévient. C'est une étape obligatoire avant d'adopter un règlement.</p>
+      <p class="remarque">Souvent suivi, quelques semaines plus tard, de l'adoption du règlement annoncé.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Ordonnance</h3>
+      
+      <p class="definition">Une décision d'application, prise en vertu d'un règlement déjà en vigueur. Elle ajuste des détails concrets sans qu'on doive rouvrir le règlement lui-même.</p>
+      <p class="remarque">Très fréquente pour le stationnement et la circulation : « Ordonnance numéro O-604 concernant des modifications aux règles portant sur le stationnement ».</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Règlement</h3>
+      
+      <p class="definition">La forme la plus contraignante d'une décision municipale : une norme générale qui s'applique à tous. Son adoption suit des étapes obligatoires (avis de motion, projet, adoption).</p>
+      <p class="remarque">Les numéros disent l'instance : R.V.Q. pour la ville, R.A.V.Q. pour l'agglomération, R.C.A. pour un arrondissement.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Tableau des décisions</h3>
+      
+      <p class="definition">Le récapitulatif des décisions prises à une séance, sous forme de liste.</p>
+      <p class="remarque">Utile pour balayer une séance d'un coup d'œil, sans lire tout le procès-verbal.</p>
+    </div></div></details><details class="lexique-cat cat-instances"><summary><h2 class="section">Qui décide<span class="compte-cat">5 termes</span></h2></summary><div class="bloc-lexique"><div class="entree-lexique">
+      <h3 class="terme">Conseil municipal</h3>
+      
+      <p class="definition">Les 22 élus de la Ville de Québec : le maire et 21 conseillères et conseillers, un par district. Il adopte les règlements, le budget, et les décisions les plus importantes.</p>
+      <p class="remarque">Ses séances sont publiques et webdiffusées, avec une période de questions des citoyens.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Comité exécutif</h3>
+      
+      <p class="definition">Un petit groupe d'élus — 9 à Québec — à qui le conseil a délégué une large part de ses pouvoirs. C'est l'instance qui prend le plus de décisions, et de loin.</p>
+      <p class="remarque">Plus de 70 000 documents du portail viennent du comité exécutif, contre environ 35 000 pour le conseil de la ville.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Conseil d'arrondissement</h3>
+      
+      <p class="definition">Chacun des six arrondissements de Québec a son conseil, formé des conseillers des districts qui le composent. Il décide de ce qui est local : urbanisme de proximité, loisirs, vie de quartier.</p>
+      <p class="remarque">Les six : La Cité-Limoilou, Les Rivières, Sainte-Foy–Sillery–Cap-Rouge, Charlesbourg, Beauport, La Haute-Saint-Charles.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Commission d'urbanisme et de conservation de Québec</h3>
+      <p class="alias">On dit aussi&nbsp;: CUCQ</p>
+      <p class="definition">Une commission qui rend des décisions contraignantes en urbanisme : apparence architecturale, démolitions, secteurs patrimoniaux. Elle est présidée par des élus, mais la majorité de ses membres ne sont pas élus.</p>
+      <p class="remarque">Un permis peut dépendre de son avis. C'est l'instance la moins connue parmi celles qui décident vraiment.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Greffier</h3>
+      
+      <p class="definition">L'officier qui garde les documents officiels de la Ville, rédige les procès-verbaux et certifie les décisions. Ce n'est pas un élu.</p>
+      <p class="remarque">Sa signature clôt les procès-verbaux, avec celle de la présidence d'assemblée.</p>
+    </div></div></details><details class="lexique-cat cat-agglomeration"><summary><h2 class="section">Agglomération et villes reconstituées<span class="compte-cat">3 termes</span></h2></summary><div class="bloc-lexique"><div class="entree-lexique">
+      <h3 class="terme">Conseil d'agglomération</h3>
+      
+      <p class="definition">Neuf sièges où Québec siège avec L'Ancienne-Lorette et Saint-Augustin-de-Desmaures, pour décider des services partagés par les trois villes.</p>
+      <p class="remarque">Selon la Ville : évaluation foncière, transport en commun, réseau artériel, eau potable et traitement, matières résiduelles, sécurité publique (police, incendie, 911), cour municipale, logement social et itinérance, développement économique.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Ville reconstituée</h3>
+      <p class="alias">On dit aussi&nbsp;: ville défusionnée · municipalité liée</p>
+      <p class="definition">Une ville qui avait été fusionnée à Québec en 2002 et qui a repris son existence propre en 2006 à la suite d'un référendum. Elle a son propre conseil et son propre maire. Dans le texte de loi et dans les documents de la Ville, on lit plus souvent « municipalité liée » — qui désigne les trois villes de l'agglomération, Québec comprise.</p>
+      <p class="remarque">Deux dans l'agglomération de Québec : L'Ancienne-Lorette et Saint-Augustin-de-Desmaures. Leurs élus votent à l'agglomération, mais ne siègent pas au conseil municipal de Québec et ne représentent aucun district de Québec.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Compétence d'agglomération</h3>
+      
+      <p class="definition">Un domaine que la loi confie au conseil d'agglomération plutôt qu'à chaque ville séparément, parce que le service est partagé. Le reste — ce qu'on appelle les compétences de proximité — demeure à chaque ville.</p>
+      <p class="remarque">C'est ce qui explique qu'un élu d'une autre ville vote sur des dossiers qui touchent Québec.</p>
+    </div></div></details><details class="lexique-cat cat-vote"><summary><h2 class="section">Voter et adopter<span class="compte-cat">6 termes</span></h2></summary><div class="bloc-lexique"><div class="entree-lexique">
+      <h3 class="terme">Demander le vote</h3>
+      
+      <p class="definition">Exiger qu'on compte les voix une à une. Sans cette demande, une décision est adoptée sans appel nominal et personne n'est nommé au procès-verbal.</p>
+      <p class="remarque">C'est la clé du registre des votes du site : les seuls votes dont on connaît le détail sont ceux que quelqu'un a demandés.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Adoptée à l'unanimité</h3>
+      
+      <p class="definition">Personne n'a voté contre.</p>
+      <p class="remarque">La formule la plus courante, parce que la plupart des décisions passent sans opposition.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Adoptée à la majorité</h3>
+      
+      <p class="definition">Adoptée, mais au moins une personne a voté contre. Le procès-verbal nomme alors qui.</p>
+      <p class="remarque">C'est le cas de la quasi-totalité des votes nominatifs du site.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Adoptée sur division</h3>
+      
+      <p class="definition">Adoptée malgré une opposition consignée, sans qu'on ait nécessairement compté les voix nominativement.</p>
+      <p class="remarque">Plus rare que « à la majorité », et moins informatif : on sait qu'il y a eu désaccord, pas toujours de qui.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Prise d’acte</h3>
+      
+      <p class="definition">Le conseil constate officiellement qu'un document lui a été présenté. Ça ne l'approuve pas : ça l'enregistre.</p>
+      <p class="remarque">Souvent pour des rapports, des ententes déjà signées ou des dépôts obligatoires.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Mairesse suppléante</h3>
+      <p class="alias">On dit aussi&nbsp;: maire suppléant</p>
+      <p class="definition">L'élu désigné pour remplacer le maire quand celui-ci est absent ou empêché.</p>
+      <p class="remarque">Aux séances d'agglomération de 2026, le maire de Québec a été remplacé à chacune des douze séances.</p>
+    </div></div></details><details class="lexique-cat cat-urbanisme"><summary><h2 class="section">Urbanisme<span class="compte-cat">3 termes</span></h2></summary><div class="bloc-lexique"><div class="entree-lexique">
+      <h3 class="terme">Dérogation mineure</h3>
+      
+      <p class="definition">Une permission d'écarter légèrement une règle du zonage pour un terrain précis — une marge, une hauteur, un nombre de cases de stationnement — sans changer le règlement pour tout le monde.</p>
+      <p class="remarque">Presque toujours rattachée à une adresse précise, qui est nommée dans l'objet de la décision.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Plan d'implantation et d'intégration architecturale</h3>
+      <p class="alias">On dit aussi&nbsp;: PIIA</p>
+      <p class="definition">Un mécanisme qui soumet un projet à une évaluation de son apparence et de son insertion dans le milieu, au-delà des règles chiffrées du zonage.</p>
+      <p class="remarque">C'est souvent ce qui amène un dossier devant la Commission d'urbanisme. Le vocabulaire de la Ville a changé en cours de route : l'acronyme pointé « P.I.I.A. » apparaît dans 4 352 documents, surtout entre 2006 et 2017, puis disparaît au profit de la formulation au long.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Zonage</h3>
+      
+      <p class="definition">Le découpage du territoire en zones, avec pour chacune ce qu'on a le droit d'y construire et d'y faire.</p>
+      <p class="remarque">La grille de zonage de Québec est publiée en données ouvertes.</p>
+    </div></div></details><details class="lexique-cat cat-argent"><summary><h2 class="section">L'argent et les contrats<span class="compte-cat">6 termes</span></h2></summary><div class="bloc-lexique"><div class="entree-lexique">
+      <h3 class="terme">Adjudication</h3>
+      
+      <p class="definition">L'attribution officielle d'un contrat à un soumissionnaire, au terme d'un appel d'offres.</p>
+      <p class="remarque">« Adjudication d'un contrat pour… » est l'une des formulations les plus fréquentes du portail.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Appel d'offres</h3>
+      
+      <p class="definition">La mise en concurrence obligatoire avant d'accorder un contrat au-delà d'un certain montant. Public, il est ouvert à tous ; sur invitation, il est réservé à des fournisseurs sollicités.</p>
+      <p class="remarque">Les contrats municipaux sont publiés sur le SEAO, le système électronique d'appel d'offres du Québec.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Gré à gré</h3>
+      
+      <p class="definition">Un contrat conclu directement, sans mise en concurrence. La loi ne le permet que dans des cas précis.</p>
+      <p class="remarque">Apparaît aussi pour les acquisitions d'immeubles : « de gré à gré ou par expropriation ».</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Appropriation</h3>
+      
+      <p class="definition">Réserver une somme déjà disponible pour une dépense précise. Ce n'est pas un nouvel emprunt.</p>
+      <p class="remarque">« Appropriation d'un montant de 2 510 000 $ à même le fonds général ».</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Règlement d'emprunt</h3>
+      
+      <p class="definition">Le règlement par lequel la Ville s'autorise à emprunter pour financer un projet, en général un investissement de longue durée.</p>
+      <p class="remarque">Il précise le montant et la durée du remboursement.</p>
+    </div><div class="entree-lexique">
+      <h3 class="terme">Expropriation</h3>
+      
+      <p class="definition">L'acquisition forcée d'un terrain ou d'un droit par la Ville pour un motif d'utilité publique, avec indemnité au propriétaire.</p>
+      <p class="remarque">Souvent suivie d'un « règlement hors tribunal », c'est-à-dire d'une entente sur l'indemnité sans aller devant le juge.</p>
+    </div></div></details><!--/PR:liste-lexique--></div>
 </main>
 
 <footer>

@@ -108,6 +108,9 @@ new MutationObserver(() => {
     equiperTout();
   });
 }).observe(document.body, { childList: true, subtree: true });
+// Les fiches déjà dans le HTML (pages pré-rendues du volet Québec, 6 nov. 2026) : aucune mutation ne
+// les annonce, on les équipe tout de suite.
+equiperTout();
 
 // ---------- le corps de la fiche ----------
 async function peupler(zone) {

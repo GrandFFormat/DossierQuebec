@@ -162,7 +162,7 @@ function blocResume(trouve) {
 // des décisions, votes.json sur celle des votes. Sans ce repli, la pastille disparaissait
 // silencieusement sur la page des votes, qui ne charge pas les décisions.
 function puceTheme(cle) {
-  const t = etat.decisions?.themes?.[cle] ?? etat.votes?.themes?.[cle];
+  const t = etat.decisions?.themes?.[cle] ?? etat.votes?.themes?.[cle] ?? etat.fil?.themes?.[cle];
   if (!t) return '';
   return `<span class="puce theme t-${echapper(cle)}">${echapper(EN ? themeEn(cle, t.libelle) : t.libelle)}</span>`;
 }
@@ -793,7 +793,13 @@ function rendreLexique() {
 // Les scrapers marquent `nouveau` sur ce qui n'était pas là à l'extraction précédente.
 // Quand rien n'a bougé (ou à la toute première extraction, où il n'y a rien à comparer),
 // on montre l'activité la plus récente en le disant clairement, plutôt qu'une page vide.
-function evenementsRecents() {
+export function evenementsRecents() {
+  // Page pré-rendue, jeux complets pas encore chargés : le fil vient de data/pages/accueil.json, le
+  // début du même fil, déjà trié et choisi au build (scripts/prerendre.js).
+  if (!etat.decisions && etat.fil) {
+    const { evenements, mode, total } = etat.fil;
+    return { evenements, nouveaux: evenements, mode, total };
+  }
   const evenements = [];
   for (const d of etat.decisions?.decisions ?? []) {
     evenements.push({ date: d.date, genre: 'decision', nouveau: d.nouveau === true, data: d });
@@ -846,7 +852,7 @@ function ligneEvenement(e) {
 
 function rendreFil() {
   if (!$('#fil')) return;
-  const { evenements, nouveaux, mode } = evenementsRecents();
+  const { evenements, nouveaux, mode, total } = evenementsRecents();
   const source = mode === 'nouveautes' ? nouveaux : evenements;
   const aMontrer = source.slice(0, etat.limiteFil);
 
@@ -856,7 +862,7 @@ function rendreFil() {
   $('#titre-fil').textContent = mode === 'nouveautes' ? tr('Ce qui a changé', "What's new") : tr('Activité récente', 'Recent activity');
   $('#fil').innerHTML = aMontrer.map(ligneEvenement).join('');
 
-  const reste = source.length - aMontrer.length;
+  const reste = (total ?? source.length) - aMontrer.length;
   if ($('#plus-fil')) {
     $('#plus-fil').hidden = reste <= 0;
     $('#plus-fil').textContent = tr(`${Math.min(PAS_FIL, reste)} de plus (${nombreFr(reste)} restants)`, `${Math.min(PAS_FIL, reste)} more (${nombreFr(reste)} left)`);
@@ -944,28 +950,48 @@ const BESOINS = {
   sources: ['decisions', 'votes', 'elus', 'resumes', 'districts', 'agglomeration', 'cucq'],
 };
 
+// Les jeux complets de la page, chargés une seule fois. Sur une page pré-rendue, on ne les demande
+// qu'au premier geste qui en a besoin (recherche, filtre, « afficher plus ») : le premier écran est
+// déjà dans le HTML, et decisions.json + resumes.json pèsent 7 Mo à eux deux.
+let promesseJeux = null;
+function chargerJeux(page) {
+  promesseJeux ??= (async () => {
+    const noms = BESOINS[page] ?? [];
+    const jeux = await Promise.all(noms.map(charger));
+    noms.forEach((nom, i) => {
+      etat[nom] = jeux[i];
+    });
+    // En anglais : les puces traduites remplacent les françaises (data/resumes-en.json) ; un résumé
+    // pas encore traduit reste en français, et le dit.
+    if (EN && etat.resumes) {
+      const traductions = (await charger('resumes-en'))?.traductions ?? {};
+      for (const r of etat.resumes.resumes ?? []) {
+        const t = traductions[r.id];
+        if (t) Object.assign(r, { puces: t.puces, montantPrincipal: t.montantPrincipal });
+        else if (r.puces?.length) r.francaisSeulement = true;
+      }
+    }
+    if (EN && page === 'lexique') etat.lexiqueEn = await charger('lexique-en');
+    if (etat.resumes) etat.parId = new Map((etat.resumes.resumes ?? []).map((r) => [r.id, r]));
+    // Le manifeste de l'archive vit dans un sous-dossier ; seule la page des sources le lit,
+    // et elle ne lit que le manifeste, jamais les fichiers d'années eux-mêmes.
+    if (page === 'sources') etat.archives = await charger('archives/index');
+  })();
+  return promesseJeux;
+}
+
+// PRÉ-RENDU (6 nov. 2026). scripts/prerendre.js exécute ce même fichier au build et écrit le premier
+// écran dans le HTML (body[data-prerendu]). Ici, rien à redessiner : la page est déjà la bonne, et
+// la redessiner fermerait une fiche ouverte entre-temps. Seul un lien profond (?q=, ?instance=,
+// ?projet=) change le premier écran : celui-là se rend comme avant, jeux complets chargés.
+const PRERENDU = document.body.dataset.prerendu === '1';
+
 async function init() {
   const page = document.body.dataset.page;
-  const noms = BESOINS[page] ?? [];
-  const jeux = await Promise.all(noms.map(charger));
-  noms.forEach((nom, i) => {
-    etat[nom] = jeux[i];
-  });
-  // En anglais : les puces traduites remplacent les françaises (data/resumes-en.json) ; un résumé
-  // pas encore traduit reste en français, et le dit.
-  if (EN && etat.resumes) {
-    const traductions = (await charger('resumes-en'))?.traductions ?? {};
-    for (const r of etat.resumes.resumes ?? []) {
-      const t = traductions[r.id];
-      if (t) Object.assign(r, { puces: t.puces, montantPrincipal: t.montantPrincipal });
-      else if (r.puces?.length) r.francaisSeulement = true;
-    }
-  }
-  if (EN && page === 'lexique') etat.lexiqueEn = await charger('lexique-en');
-  etat.parId = new Map((etat.resumes?.resumes ?? []).map((r) => [r.id, r]));
-  // Le manifeste de l'archive vit dans un sous-dossier ; seule la page des sources le lit,
-  // et elle ne lit que le manifeste, jamais les fichiers d'années eux-mêmes.
-  if (page === 'sources') etat.archives = await charger('archives/index');
+  const parametres = new URLSearchParams(location.search);
+  const lienProfond = page === 'decisions' && ['q', 'instance', 'projet'].some((p) => parametres.has(p));
+  if (PRERENDU && !lienProfond && !EN) return;
+  await chargerJeux(page);
 
   const requis = { accueil: 'decisions', decisions: 'decisions', votes: 'votes', conseil: 'elus', lexique: 'lexique', sources: null }[page];
   if (requis && !etat[requis]) {
@@ -973,6 +999,8 @@ async function init() {
     return;
   }
   if ($('#chargement')) $('#chargement').hidden = true;
+  // Lien profond sur une page pré-rendue : le script en ligne avait caché la liste du premier écran.
+  if ($('#liste-decisions')) $('#liste-decisions').hidden = false;
 
   if (page === 'accueil') rendreAccueil();
   if (page === 'decisions') {
@@ -1011,33 +1039,52 @@ async function init() {
 }
 
 // Filtres et pagination : câblés seulement si la page les contient.
-document.addEventListener('input', (e) => {
+// Sur une page pré-rendue, chaque geste attend d'abord les jeux complets (chargerJeux, une fois).
+const jeux = () => chargerJeux(document.body.dataset.page);
+document.addEventListener('input', async (e) => {
   if (e.target.matches('#rech-decisions, #filtre-type, #filtre-instance, #filtre-theme, #filtre-resume, #affichage')) {
+    await jeux();
     etat.limiteDecisions = PAS;
     etat.limiteSeances = PAS_SEANCES;
     rendreDecisions();
   }
-  if (e.target.matches('#rech-lexique')) rendreLexique();
+  if (e.target.matches('#rech-lexique')) { await jeux(); rendreLexique(); }
   if (e.target.matches('#rech-votes, #filtre-instance-votes, #filtre-theme-votes')) {
+    await jeux();
     etat.limiteVotes = PAS_VOTES_DEPART;
     rendreVotes();
   }
 });
+// Le chargement part dès qu'une main approche des outils : la frappe qui suit n'attend presque plus.
+for (const geste of ['focusin', 'pointerdown']) {
+  document.addEventListener(geste, (e) => {
+    if (PRERENDU && e.target.closest?.('.barre-outils, #plus-decisions, #plus-votes')) jeux();
+  });
+}
 if (existe('#plus-decisions')) {
-  $('#plus-decisions').addEventListener('click', () => {
+  $('#plus-decisions').addEventListener('click', async () => {
+    await jeux();
     etat.limiteDecisions += PAS;
     etat.limiteSeances += PAS_SEANCES;
     rendreDecisions();
   });
 }
+// L'accueil pré-rendu montre les 5 premiers éléments du fil ; les suivants viennent du petit
+// data/pages/accueil.json, et des jeux complets seulement si on descend plus loin que lui.
 if (existe('#plus-fil')) {
-  $('#plus-fil').addEventListener('click', () => {
+  $('#plus-fil').addEventListener('click', async () => {
     etat.limiteFil += PAS_FIL;
+    if (!etat.decisions) {
+      etat.fil ??= await charger('pages/accueil');
+      if (etat.fil && !etat.parId.size) etat.parId = new Map(Object.entries(etat.fil.resumes ?? {}));
+      if (!etat.fil || etat.limiteFil > etat.fil.evenements.length) await jeux();
+    }
     rendreFil();
   });
 }
 if (existe('#plus-votes')) {
-  $('#plus-votes').addEventListener('click', () => {
+  $('#plus-votes').addEventListener('click', async () => {
+    await jeux();
     etat.limiteVotes += PAS_VOTES;
     rendreVotes();
   });
@@ -1056,8 +1103,11 @@ document.addEventListener('keydown', (e) => {
     choisirDistrict(Number(district.dataset.numero));
   }
 });
-document.addEventListener('change', (e) => {
-  if (e.target.matches('#mode-couleur')) rendreCarte();
+document.addEventListener('change', async (e) => {
+  if (!e.target.matches('#mode-couleur')) return;
+  // Page pré-rendue : recolorier la carte ne demande que le contour des districts.
+  etat.districts ??= await charger('districts');
+  if (etat.districts) rendreCarte();
 });
 
 // Tout déplier / tout replier, pour la liste visible.
@@ -1094,7 +1144,9 @@ document.addEventListener('click', (e) => {
   bouton.textContent = onDeplie ? tr('Tout replier', 'Collapse all') : tr('Tout déplier', 'Expand all');
 });
 
-init();
+// Exporté pour scripts/prerendre.js, qui attend la fin du rendu avant d'écrire la page.
+export const rendu = init();
+export { etat };
 
 // ---------- Bascule clair / sombre ----------
 // Le thème est déjà posé sur <html> par le script en <head> (avant le premier rendu).

@@ -81,7 +81,7 @@
 <link rel="stylesheet" href="assets/style.css">
 <link rel="stylesheet" href="/commun/abonnes.css">
 </head>
-<body data-page="accueil" data-ville="quebec">
+<body data-prerendu="1" data-page="accueil" data-ville="quebec">
 
 <header>
   <div class="contenu">
@@ -114,7 +114,7 @@
 </header>
 
 <main class="contenu">
-  <div data-en="Loading data…" id="chargement" class="avis">Chargement des données…</div>
+  <div data-en="Loading data…" id="chargement" class="avis" hidden>Chargement des données…</div>
 
   <!-- L'avis du 14 octobre 2026 : l'intention de départ, ce qu'on espérait des villes, et ce qu'on
        envisage. Il vit sur l'accueil des deux volets municipaux (Québec et Montréal), au-dessus des
@@ -136,11 +136,106 @@
   </section>
   </div>
 
-  <div class="chiffres" id="chiffres"></div>
+  <div class="chiffres" id="chiffres"><!--PR:chiffres--><a class="chiffre" href="decisions-de-la-ville-de-quebec"><div class="n">5 804</div><div class="quoi">décisions publiées en 2026</div></a><a class="chiffre" href="votes-nominatifs-du-conseil-de-quebec"><div class="n">271</div><div class="quoi">votes nominatifs consignés cette année</div></a><a class="chiffre" href="decisions-de-la-ville-de-quebec"><div class="n">1 799</div><div class="quoi">décisions résumées en langage clair</div></a><a class="chiffre" href="conseil-municipal-de-quebec"><div class="n">22</div><div class="quoi">membres du conseil municipal</div></a><!--/PR:chiffres--></div>
 
-  <h2 data-en="What's new" class="page" id="titre-fil">Ce qui a changé</h2>
-  <div id="fil"></div>
-  <button data-en="Show more" class="plus" id="plus-fil" hidden>Afficher plus</button>
+  <h2 data-en="What's new" class="page" id="titre-fil"><!--PR:titre-fil-->Ce qui a changé<!--/PR:titre-fil--></h2>
+  <div id="fil"><!--PR:fil--><details class="carte pliante" name="fiches"><summary><div class="meta">
+      <span class="puce genre-decision">décision</span>
+      <span class="puce theme t-procedure">Procédure</span>
+      
+      <span>5 nov. 2026</span>
+      <span class="puce">Procès-verbaux</span>
+      <span class="puce">Conseil de l'Arrondissement de La Haute-Saint-Charles</span>
+      
+    </div>
+    <p class="objet">Procès-verbal de la séance extraordinaire du Conseil de l'Arrondissement de La Haute-Saint-Charles tenue le jeudi 05 novembre 2026 à 14h00</p></summary><div class="corps">
+    <a class="lien-pdf" href="https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA7_EX_2026-11-05_00h00.pdf" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>
+    </div></details><details class="carte pliante" name="fiches"><summary><div class="meta">
+      <span class="puce genre-decision">décision</span>
+      <span class="puce theme t-procedure">Procédure</span>
+      <span class="puce num">CA6-2026-0110</span>
+      <span>5 nov. 2026</span>
+      <span class="puce">Résolutions</span>
+      <span class="puce">Conseil de l'Arrondissement de La Haute-Saint-Charles</span>
+      
+    </div>
+    <p class="objet">Adoption de l'ordre du jour</p></summary><div class="corps">
+    <a class="lien-pdf" href="https://gpddocs.ville.quebec.qc.ca/gpdblob/CA6-2026-0110.pdf" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>
+    </div></details><details class="carte pliante" name="fiches"><summary><div class="meta">
+      <span class="puce genre-decision">décision</span>
+      <span class="puce theme t-urbanisme">Urbanisme</span>
+      <span class="puce num">CA6-2026-0111</span>
+      <span>5 nov. 2026</span>
+      <span class="puce">Résolutions</span>
+      <span class="puce">Conseil de l'Arrondissement de La Haute-Saint-Charles</span>
+      <span class="puce neuf">nouveau</span>
+    </div>
+    <p class="objet">Demande de dérogation mineure pour la propriété sise aux 1450-1452, avenue de l'Amiral, lot 1 746 715, quartier de Val-Bélair, district électoral de Val-Bélair</p></summary><div class="corps"><div class="resume">
+    <div class="resume-entete">
+      <span>Résumé généré par IA — sommaire GT2026-355</span>
+      
+      
+      
+    </div>
+    <ul><li>La Ville accorde une dérogation mineure pour la maison des 1450-1452, avenue de l'Amiral, dans Val-Bélair (arrondissement de La Haute-Saint-Charles).</li><li>La façade pourra se trouver jusqu'à 18,75 mètres de la marge avant, alors que le règlement d'urbanisme de l'arrondissement fixe la limite à 3 mètres.</li><li>Le propriétaire veut refaire et rehausser les fondations pour ajouter un logement; le bâtiment doit être déplacé parce qu'il se trouve dans la rive d'un cours d'eau.</li><li>Selon l'analyse, le cours d'eau empêche de placer la façade entre 6 et 9 mètres de la ligne avant du terrain, et la nouvelle implantation sort de la rive.</li><li>Le dossier a déjà fait l'objet d'un avis d'infraction pour la démolition de la fondation sans permis; les travaux sont arrêtés le temps de régulariser l'implantation.</li><li>Le comité consultatif d'urbanisme a recommandé la dérogation à l'unanimité le 28 octobre 2026.</li></ul>
+  </div>
+    <a class="lien-pdf" href="https://gpddocs.ville.quebec.qc.ca/gpdblob/CA6-2026-0111.pdf" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>
+    <div class="fiche-actions">
+      <span class="fiche-actions-titre">Partager</span>
+      <a class="fiche-bouton" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdossierquebec.ca%2Fquebec%2Fdecisions-de-la-ville-de-quebec%3Fq%3DCA6-2026-0111" target="_blank" rel="noopener">Facebook</a>
+      <a class="fiche-bouton" href="https://twitter.com/intent/tweet?text=La%20Ville%20accorde%20une%20d%C3%A9rogation%20mineure%20pour%20la%20maison%20des%201450-1452%2C%20avenue%20de%20l'Amiral%2C%20dans%20Val-B%C3%A9lair%20(arrondissement%20de%20La%20Haute-Saint-Charles).&url=https%3A%2F%2Fdossierquebec.ca%2Fquebec%2Fdecisions-de-la-ville-de-quebec%3Fq%3DCA6-2026-0111" target="_blank" rel="noopener">X</a>
+      <button type="button" class="fiche-bouton" data-texte="Demande de dérogation mineure pour la propriété sise aux 1450-1452, avenue de l'Amiral, lot 1 746 715, quartier de Val-Bélair, district électoral de Val-Bélair
+
+• La Ville accorde une dérogation mineure pour la maison des 1450-1452, avenue de l'Amiral, dans Val-Bélair (arrondissement de La Haute-Saint-Charles).
+• La façade pourra se trouver jusqu'à 18,75 mètres de la marge avant, alors que le règlement d'urbanisme de l'arrondissement fixe la limite à 3 mètres.
+• Le propriétaire veut refaire et rehausser les fondations pour ajouter un logement; le bâtiment doit être déplacé parce qu'il se trouve dans la rive d'un cours d'eau.
+
+https://dossierquebec.ca/quebec/decisions-de-la-ville-de-quebec?q=CA6-2026-0111" onclick="copierLienFiche(this)">⧉ Copier</button>
+      <a class="fiche-soutien" href="https://dossierquebec.ca/abonnement">👉 Soutenez la cause ❤️</a>
+    </div></div></details><details class="carte pliante" name="fiches"><summary><div class="meta">
+      <span class="puce genre-decision">décision</span>
+      <span class="puce theme t-urbanisme">Urbanisme</span>
+      <span class="puce num">GT2026-355</span>
+      <span>5 nov. 2026</span>
+      <span class="puce">Sommaires et mémoires</span>
+      
+      <span class="puce neuf">nouveau</span>
+    </div>
+    <p class="objet">Demande de dérogation mineure pour la propriété sise aux 1450-1452, avenue de l'Amiral, lot 1 746 715, quartier de Val-Bélair, district électoral de Val-Bélair, Arrondissement de La Haute-Saint-Charles</p></summary><div class="corps"><div class="resume">
+    <div class="resume-entete">
+      <span>Résumé généré par IA</span>
+      
+      
+      
+    </div>
+    <ul><li>La Ville accorde une dérogation mineure pour la maison des 1450-1452, avenue de l'Amiral, dans Val-Bélair (arrondissement de La Haute-Saint-Charles).</li><li>La façade pourra se trouver jusqu'à 18,75 mètres de la marge avant, alors que le règlement d'urbanisme de l'arrondissement fixe la limite à 3 mètres.</li><li>Le propriétaire veut refaire et rehausser les fondations pour ajouter un logement; le bâtiment doit être déplacé parce qu'il se trouve dans la rive d'un cours d'eau.</li><li>Selon l'analyse, le cours d'eau empêche de placer la façade entre 6 et 9 mètres de la ligne avant du terrain, et la nouvelle implantation sort de la rive.</li><li>Le dossier a déjà fait l'objet d'un avis d'infraction pour la démolition de la fondation sans permis; les travaux sont arrêtés le temps de régulariser l'implantation.</li><li>Le comité consultatif d'urbanisme a recommandé la dérogation à l'unanimité le 28 octobre 2026.</li></ul>
+  </div>
+    <a class="lien-pdf" href="https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-355.pdf" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>
+    <div class="fiche-actions">
+      <span class="fiche-actions-titre">Partager</span>
+      <a class="fiche-bouton" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdossierquebec.ca%2Fquebec%2Fdecisions-de-la-ville-de-quebec%3Fq%3DGT2026-355" target="_blank" rel="noopener">Facebook</a>
+      <a class="fiche-bouton" href="https://twitter.com/intent/tweet?text=La%20Ville%20accorde%20une%20d%C3%A9rogation%20mineure%20pour%20la%20maison%20des%201450-1452%2C%20avenue%20de%20l'Amiral%2C%20dans%20Val-B%C3%A9lair%20(arrondissement%20de%20La%20Haute-Saint-Charles).&url=https%3A%2F%2Fdossierquebec.ca%2Fquebec%2Fdecisions-de-la-ville-de-quebec%3Fq%3DGT2026-355" target="_blank" rel="noopener">X</a>
+      <button type="button" class="fiche-bouton" data-texte="Demande de dérogation mineure pour la propriété sise aux 1450-1452, avenue de l'Amiral, lot 1 746 715, quartier de Val-Bélair, district électoral de…
+
+• La Ville accorde une dérogation mineure pour la maison des 1450-1452, avenue de l'Amiral, dans Val-Bélair (arrondissement de La Haute-Saint-Charles).
+• La façade pourra se trouver jusqu'à 18,75 mètres de la marge avant, alors que le règlement d'urbanisme de l'arrondissement fixe la limite à 3 mètres.
+• Le propriétaire veut refaire et rehausser les fondations pour ajouter un logement; le bâtiment doit être déplacé parce qu'il se trouve dans la rive d'un cours d'eau.
+
+https://dossierquebec.ca/quebec/decisions-de-la-ville-de-quebec?q=GT2026-355" onclick="copierLienFiche(this)">⧉ Copier</button>
+      <a class="fiche-soutien" href="https://dossierquebec.ca/abonnement">👉 Soutenez la cause ❤️</a>
+    </div></div></details><details class="carte pliante" name="fiches"><summary><div class="meta">
+      <span class="puce genre-decision">décision</span>
+      <span class="puce theme t-procedure">Procédure</span>
+      
+      <span>28 oct. 2026</span>
+      <span class="puce">Procès-verbaux</span>
+      <span class="puce">Comité exécutif</span>
+      
+    </div>
+    <p class="objet">Procès-verbal de la séance planifiée du comité exécutif tenue le mercredi 28 octobre 2026 à 10h00</p></summary><div class="corps">
+    <a class="lien-pdf" href="https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CE_PL_2026-10-28_00h00.pdf" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>
+    </div></details><!--/PR:fil--></div>
+  <button data-en="Show more" class="plus" id="plus-fil"><!--PR:plus-fil-->5 de plus (26 restants)<!--/PR:plus-fil--></button>
   <p style="margin-top:14px">
     <a data-en="All decisions →" href="decisions-de-la-ville-de-quebec">Toutes les décisions →</a> &nbsp;·&nbsp;
     <a data-en="All recorded votes →" href="votes-nominatifs-du-conseil-de-quebec">Tous les votes nominatifs →</a>

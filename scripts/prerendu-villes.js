@@ -3,8 +3,8 @@
 // (en-tête, filtres, pied de page), et Google l'a « lue puis écartée » le 22 sept. 2026.
 // Décidé le 27 sept. 2026 : Québec et Montréal d'abord ; Lévis, Longueuil et Laval attendent.
 //
-//   node scripts/prerendu-villes.js            quebec et montreal
-//   node scripts/prerendu-villes.js quebec     un seul volet
+//   node scripts/prerendu-villes.js            montreal (Québec : quebec/scripts/prerendre.js)
+//   node scripts/prerendu-villes.js montreal   un seul volet
 //
 // Ce qui est écrit : les NOMBRE dernières décisions qui ont un résumé en clair (objet, date,
 // instance, numéro, les puces du résumé, le lien vers le PDF officiel), entre deux marqueurs dans
@@ -63,4 +63,5 @@ function prerendre(ville) {
 }
 
 const demandes = process.argv.slice(2);
-for (const ville of demandes.length ? demandes : ['quebec', 'montreal']) prerendre(ville);
+// Québec n'est plus ici depuis le 6 nov. 2026 : quebec/scripts/prerendre.js écrit le vrai premier écran.
+for (const ville of demandes.length ? demandes : ['montreal']) prerendre(ville);
