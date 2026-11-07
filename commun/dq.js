@@ -210,7 +210,7 @@ const translations = {
     'btn.viewSummary':"+ Voir le résumé",'btn.hideSummary':"− Masquer le résumé",
     'btn.viewFull':"Voir le texte complet sur assnat.qc.ca →",
     'footer.left':"Site non officiel — données publiques ANQ & Données Québec ·",
-    'footer.right':"Site propulsé par",
+    'footer.right':"Une réalisation de",
     'footer.source':"Code source",
   },
   en: {
@@ -292,7 +292,7 @@ const translations = {
     'btn.viewSummary':"+ View summary",'btn.hideSummary':"− Hide summary",
     'btn.viewFull':"View full text on assnat.qc.ca →",
     'footer.left':"Unofficial site — public data ANQ & Données Québec ·",
-    'footer.right':"Powered by",
+    'footer.right':"A project by",
     'footer.source':"Source code",
 
     // Ministers
