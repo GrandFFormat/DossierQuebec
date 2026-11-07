@@ -4,10 +4,12 @@
 //   { ville, nom, courriel, profil: 'citoyen' | 'organisme' | 'entreprise', message?, site_web? }
 //
 // Pas de compte requis : on mesure la demande. Le champ site_web est un piège à robots (caché) :
-// rempli, on répond 200 sans rien envoyer. Le tout part par courriel (Resend) à MESSAGES_A ;
-// « Répondre » écrit directement à la personne.
+// rempli, on répond 200 sans rien envoyer. Depuis le 7 nov. 2026, la demande est gardée dans la
+// table rtv_demandes (scripts/supabase-rtv-demandes.sql) ; Martin la lit sur la page Lexique (admin).
+// Si l'insertion échoue (table absente, Supabase en panne), on retombe sur le courriel (Resend) à
+// MESSAGES_A pour ne rien perdre ; « Répondre » écrit directement à la personne.
 //
-// Variables : RESEND_API_KEY, DIGEST_FROM, MESSAGES_A.
+// Variables : SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY ; secours : RESEND_API_KEY, DIGEST_FROM, MESSAGES_A.
 
 const PROFILS = { citoyen: 'Citoyen·ne', organisme: 'Organisme', entreprise: 'Entreprise (commandite)' };
 const COURRIEL = /^[^\s@<>]{1,100}@[^\s@<>]{1,100}\.[^\s@<>]{2,}$/;
@@ -15,6 +17,25 @@ const COURRIEL = /^[^\s@<>]{1,100}@[^\s@<>]{1,100}\.[^\s@<>]{2,}$/;
 const echapper = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const propre = (s, max) => String(s ?? '').trim().slice(0, max);
+// La clé de regroupement : sans accents, en minuscules, espaces simples (« Lévis » = « levis »).
+const cleVille = (v) => v.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[’']/g, ' ').replace(/\s+/g, ' ').trim();
+
+async function garder(m) {
+  const { SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY: cle } = process.env;
+  if (!SUPABASE_URL || !cle) return false;
+  try {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/rtv_demandes`, {
+      method: 'POST',
+      headers: { apikey: cle, Authorization: `Bearer ${cle}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+      body: JSON.stringify({ ...m, ville_cle: cleVille(m.ville) }),
+    });
+    if (!r.ok) console.error('rtv_demandes :', r.status, await r.text());
+    return r.ok;
+  } catch (e) {
+    console.error('rtv_demandes :', e);
+    return false;
+  }
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ ok: false });
@@ -29,6 +50,8 @@ export default async function handler(req, res) {
     message: propre(b.message, 2000),
   };
   if (!m.ville || !m.nom || !COURRIEL.test(m.courriel)) return res.status(400).json({ ok: false });
+
+  if (await garder(m)) return res.status(200).json({ ok: true });
 
   const { RESEND_API_KEY, DIGEST_FROM, MESSAGES_A } = process.env;
   if (!RESEND_API_KEY || !DIGEST_FROM || !MESSAGES_A) return res.status(503).json({ ok: false });

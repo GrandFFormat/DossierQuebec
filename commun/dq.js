@@ -2053,6 +2053,61 @@ async function adminPreocApprouver(id, aUnSujet){
   if(error){ console.error('adminPreocApprouver:', error); alert(currentLang === 'en' ? 'Not saved.' : 'Pas enregistré.'); }
   renderAdminPreoccupations();
 }
+// « REPRÉSENTEZ VOTRE VILLE », CÔTÉ ADMIN (7 nov. 2026) : les demandes du formulaire
+// /represente-ta-ville, gardées dans rtv_demandes (api/represente.js) au lieu de la boîte de Martin.
+// Regroupées par ville (la plus demandée d'abord), les entreprises en évidence. Lecture et statut
+// permis aux admins seulement par scripts/supabase-rtv-demandes.sql.
+async function renderAdminRtv(){
+  const zone = document.getElementById('adminRtv');
+  if(!zone) return;
+  if(!(await checkIsAdmin())){ zone.innerHTML = ''; return; }
+  const isEn = currentLang === 'en';
+  const voirArchives = zone.dataset.archives === '1';
+  let req = supabaseClient.from('rtv_demandes').select('id, created_at, ville, ville_cle, nom, courriel, profil, message, statut').order('created_at', { ascending: false }).limit(500);
+  if(!voirArchives) req = req.neq('statut', 'archivee');
+  const { data, error } = await req;
+  const titre = `<b>${isEn ? 'Requests: Represent your city (admin only)' : 'Demandes : Représentez votre ville (réservé aux admins)'}</b>`;
+  if(error){ console.error('renderAdminRtv:', error); zone.innerHTML = `<div class="account-note" style="margin:18px 0 10px;">${titre} — ${isEn ? 'Requests could not be read (table rtv_demandes missing?).' : 'Les demandes n’ont pas pu être lues (table rtv_demandes pas encore créée ?).'}</div>`; return; }
+  const h = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  const PROFILS = isEn ? { citoyen: 'Citizen', organisme: 'Organization', entreprise: 'Business' } : { citoyen: 'Citoyen·ne', organisme: 'Organisme', entreprise: 'Entreprise' };
+  const STATUTS = isEn ? { nouvelle: 'new', repondue: 'answered', archivee: 'archived' } : { nouvelle: 'nouvelle', repondue: 'répondue', archivee: 'archivée' };
+  const villes = new Map();
+  for(const d of data || []){
+    if(!villes.has(d.ville_cle)) villes.set(d.ville_cle, { nom: d.ville, liste: [] });
+    villes.get(d.ville_cle).liste.push(d);
+  }
+  const groupes = [...villes.values()].sort((a, b) => b.liste.length - a.liste.length || a.nom.localeCompare(b.nom, 'fr'));
+  const sujet = (d) => encodeURIComponent(isEn ? `Dossier Québec — ${d.ville}` : `Dossier Québec — ${d.ville}`);
+  const carte = (d) => `<tr class="admin-preoc-${d.statut === 'nouvelle' ? 'nouveau' : 'classe'}">
+      <td>${h(String(d.created_at).slice(0, 10))}</td>
+      <td><b>${h(d.nom)}</b><br>${d.profil === 'entreprise' ? `<b>💼 ${PROFILS.entreprise}</b>` : h(PROFILS[d.profil] || d.profil)}<br><a href="mailto:${h(d.courriel)}?subject=${sujet(d)}">${h(d.courriel)}</a></td>
+      <td style="white-space:pre-wrap">${h(d.message) || '—'}</td>
+      <td>${h(STATUTS[d.statut] || d.statut)}</td>
+      <td class="admin-preoc-actions">${d.statut !== 'repondue' ? `<button class="account-btn" onclick="adminRtvStatut('${d.id}', 'repondue')">${isEn ? 'Answered' : 'Répondue'}</button> ` : ''}${d.statut !== 'archivee' ? `<button class="account-btn" onclick="adminRtvStatut('${d.id}', 'archivee')">${isEn ? 'Archive' : 'Archiver'}</button>` : `<button class="account-btn" onclick="adminRtvStatut('${d.id}', 'nouvelle')">${isEn ? 'Restore' : 'Ressortir'}</button>`}</td>
+    </tr>`;
+  const blocs = groupes.map((g) => {
+    const ent = g.liste.filter((d) => d.profil === 'entreprise').length;
+    const nouv = g.liste.filter((d) => d.statut === 'nouvelle').length;
+    return `<h4 style="margin:16px 0 6px;">${h(g.nom)} — ${g.liste.length} ${isEn ? 'request(s)' : (g.liste.length > 1 ? 'demandes' : 'demande')}${ent ? ` · <span style="background:#ffe08a;color:#16191D;padding:1px 6px;">💼 ${ent} ${isEn ? 'business(es)' : (ent > 1 ? 'entreprises' : 'entreprise')}</span>` : ''}${nouv ? ` · ${nouv} ${isEn ? 'new' : (nouv > 1 ? 'nouvelles' : 'nouvelle')}` : ''}</h4>
+      <div class="admin-preoc-defile"><table class="admin-preoc"><thead><tr><th>Date</th><th>${isEn ? 'Who' : 'Qui'}</th><th>Message</th><th>${isEn ? 'Status' : 'Statut'}</th><th></th></tr></thead><tbody>${g.liste.map(carte).join('')}</tbody></table></div>`;
+  }).join('');
+  zone.innerHTML = `<div class="account-note" style="margin:18px 0 10px;">${titre} — ${isEn
+    ? `${(data || []).length} request(s) from the /represente-ta-ville form, by city. Click the address to answer, then « Answered ».`
+    : `${(data || []).length} demande${(data || []).length > 1 ? 's' : ''} du formulaire /represente-ta-ville, par ville. Cliquez l’adresse pour répondre, puis « Répondue ».`}
+    <button class="account-btn" onclick="adminRtvArchives()">${voirArchives ? (isEn ? 'Hide archived' : 'Cacher les archivées') : (isEn ? 'Show archived' : 'Voir les archivées')}</button></div>
+    ${blocs || `<p class="account-note">${isEn ? 'No request yet.' : 'Aucune demande pour l’instant.'}</p>`}`;
+}
+async function adminRtvStatut(id, statut){
+  const { error } = await supabaseClient.from('rtv_demandes').update({ statut }).eq('id', id);
+  if(error){ console.error('adminRtvStatut:', error); alert(currentLang === 'en' ? 'Not saved.' : 'Pas enregistré.'); }
+  renderAdminRtv();
+}
+function adminRtvArchives(){
+  const zone = document.getElementById('adminRtv');
+  if(zone){ zone.dataset.archives = zone.dataset.archives === '1' ? '' : '1'; renderAdminRtv(); }
+}
+window.adminRtvStatut = adminRtvStatut;
+window.adminRtvArchives = adminRtvArchives;
 window.adminPreocApprouver = adminPreocApprouver;
 window.adminPreocSpam = adminPreocSpam;
 window.adminPreocSujet = adminPreocSujet;
@@ -3022,7 +3077,7 @@ async function checkIsAdmin(){
 const PETITION_TIERS = [1000, 5000, 25000];
 
 async function renderAdminFlagCounts(){
-  renderAdminPreoccupations();   // le panneau des préoccupations suit celui des demandes, sur la même page
+  renderAdminPreoccupations(); renderAdminRtv();   // le panneau des préoccupations suit celui des demandes, sur la même page
   if(!document.getElementById('adminFlagCounts')) return;   // vue absente de cette page
   const container = document.getElementById('adminFlagCounts');
   if(!container) return;
