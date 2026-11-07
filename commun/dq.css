@@ -2695,3 +2695,6 @@ body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
 .rtv-note{margin:0; font-size:13px; color:var(--muted, #5B6570);}
 .rtv-merci{margin:0; font-size:16px;}
 @media (max-width:760px){ .rtv-etapes{grid-template-columns:1fr;} }
+.rtv-h1{font-size:clamp(40px, 7vw, 88px) !important; line-height:1 !important; overflow-wrap:anywhere;}
+.rtv-lien{color:inherit; font-weight:700; text-decoration:underline; text-decoration-color:#FFD24D; text-decoration-thickness:4px; text-underline-offset:3px;}
+.rtv-lien:hover{text-decoration-color:#0E4FC1;}

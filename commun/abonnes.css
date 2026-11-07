@@ -753,3 +753,5 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 
 /* Pastille « Réparé » des projets suivis, jusqu’au 31 déc. 2026 (réparation du 29 oct.). */
 .ab-page .ab-repare { background: #FFD24D; color: #131313; border-color: #131313; }
+/* « Représentez votre ville » dans le menu des villes (6 nov. 2026). */
+.ab-villes-rtv a { color: var(--accent, #1F9D55); font-weight: 700; }
