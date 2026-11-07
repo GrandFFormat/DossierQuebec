@@ -2712,3 +2712,9 @@ body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
 .rtv-grille td{padding:5px 18px 5px 0; border-bottom:1px solid var(--line, #ddd);}
 .rtv-grille td:last-child{font-weight:800; text-align:right; padding-right:0;}
 .rtv-fondateur{background:#FFF3C4; color:#131313; border-left:4px solid #FFD24D; padding:8px 10px;}
+
+/* Représentez votre ville : les deux exemples de bande commanditaire, en haut du formulaire (7 nov. 2026). */
+.rtv-exemples{display:grid;grid-template-columns:1fr;gap:16px;margin:0 0 20px}
+.rtv-exemples figure{margin:0}
+.rtv-exemples img{display:block;width:100%;height:auto;border:2px solid var(--ink,#131313)}
+.rtv-exemples figcaption{font-size:13px;margin-top:6px;color:var(--slate,#5B6570)}
