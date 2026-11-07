@@ -9,6 +9,8 @@
 // Si l'insertion échoue (table absente, Supabase en panne), on retombe sur le courriel (Resend) à
 // MESSAGES_A pour ne rien perdre ; « Répondre » écrit directement à la personne.
 //
+// La provenance (site d'origine, page de DQ, campagne) vient de la page : voir rtv_visites.
+//
 // Variables : SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY ; secours : RESEND_API_KEY, DIGEST_FROM, MESSAGES_A.
 
 const PROFILS = { citoyen: 'Citoyen·ne', organisme: 'Organisme', entreprise: 'Entreprise (commandite)' };
@@ -48,6 +50,7 @@ export default async function handler(req, res) {
     courriel: propre(b.courriel, 200),
     profil: PROFILS[b.profil] ? b.profil : 'citoyen',
     message: propre(b.message, 2000),
+    provenance: propre(b.provenance, 200),
   };
   if (!m.ville || !m.nom || !COURRIEL.test(m.courriel)) return res.status(400).json({ ok: false });
 
@@ -63,6 +66,7 @@ export default async function handler(req, res) {
       ${ligne('Nom', echapper(m.nom))}
       ${ligne('Courriel', echapper(m.courriel))}
       ${ligne('Profil', PROFILS[m.profil])}
+      ${ligne('Provenance', echapper(m.provenance))}
     </table>
     ${m.message ? `<p style="white-space:pre-wrap;margin:16px 0 0">${echapper(m.message)}</p>` : ''}
   </div>`;

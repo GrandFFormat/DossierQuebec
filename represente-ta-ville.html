@@ -287,12 +287,25 @@ function goToFederal(evt){
     </div></div>
   </section>
 <script>
+// D'où arrive la personne (7 nov. 2026) : ?utm_source=…, sinon le site d'où elle vient, sinon « direct ».
+// Une visite par session dans rtv_visites ; la même provenance part avec le formulaire.
+var rtvProvenance = (function(){
+  var q = new URLSearchParams(location.search), ref = '', interne = '';
+  try { var u = new URL(document.referrer); ref = u.hostname.replace(/^www./, ''); if(ref === location.hostname.replace(/^www./, '')){ interne = u.pathname; ref = 'dossierquebec.ca'; } } catch(e){}
+  return { source: (q.get('utm_source') || ref || 'direct').slice(0, 120), page_interne: interne.slice(0, 200), campagne: (q.get('utm_campaign') || '').slice(0, 120) };
+})();
+window.addEventListener('load', function(){
+  try { if(sessionStorage.getItem('rtv:vu')) return; sessionStorage.setItem('rtv:vu', '1'); } catch(e){}
+  if(typeof supabaseClient === 'undefined' || /^(localhost|127.)/.test(location.hostname)) return;
+  supabaseClient.from('rtv_visites').insert(Object.assign({ langue: document.documentElement.classList.contains('dq-en') ? 'en' : 'fr' }, rtvProvenance)).then(function(r){ if(r.error) console.error('rtv_visites:', r.error); });
+});
 if(document.documentElement.classList.contains('dq-en')) document.querySelectorAll('[data-ph-en]').forEach(function(i){ i.placeholder = i.dataset.phEn; });
 async function rtvEnvoyer(f){
   var note = f.querySelector('.rtv-note'), btn = f.querySelector('button');
   btn.disabled = true; note.textContent = document.documentElement.classList.contains('dq-en') ? 'Sending…' : 'Envoi…';
   try{
     var d = Object.fromEntries(new FormData(f));
+    d.provenance = rtvProvenance.source + (rtvProvenance.page_interne ? ' ' + rtvProvenance.page_interne : '') + (rtvProvenance.campagne ? ' (' + rtvProvenance.campagne + ')' : '');
     var r = await fetch('/api/represente', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(d)});
     if(!r.ok) throw 0;
     f.innerHTML = document.documentElement.classList.contains('dq-en') ? '<p class="rtv-merci"><b>Thank you!</b> We will email you once we have looked at your city.</p>' : '<p class="rtv-merci"><b>Merci !</b> On vous revient par courriel dès qu\'on a regardé votre ville.</p>';

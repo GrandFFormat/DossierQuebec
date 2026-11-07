@@ -2063,7 +2063,7 @@ async function renderAdminRtv(){
   if(!(await checkIsAdmin())){ zone.innerHTML = ''; return; }
   const isEn = currentLang === 'en';
   const voirArchives = zone.dataset.archives === '1';
-  let req = supabaseClient.from('rtv_demandes').select('id, created_at, ville, ville_cle, nom, courriel, profil, message, statut').order('created_at', { ascending: false }).limit(500);
+  let req = supabaseClient.from('rtv_demandes').select('id, created_at, ville, ville_cle, nom, courriel, profil, message, statut, provenance').order('created_at', { ascending: false }).limit(500);
   if(!voirArchives) req = req.neq('statut', 'archivee');
   const { data, error } = await req;
   const titre = `<b>${isEn ? 'Requests: Represent your city (admin only)' : 'Demandes : Représentez votre ville (réservé aux admins)'}</b>`;
@@ -2080,7 +2080,7 @@ async function renderAdminRtv(){
   const sujet = (d) => encodeURIComponent(isEn ? `Dossier Québec — ${d.ville}` : `Dossier Québec — ${d.ville}`);
   const carte = (d) => `<tr class="admin-preoc-${d.statut === 'nouvelle' ? 'nouveau' : 'classe'}">
       <td>${h(String(d.created_at).slice(0, 10))}</td>
-      <td><b>${h(d.nom)}</b><br>${d.profil === 'entreprise' ? `<b>💼 ${PROFILS.entreprise}</b>` : h(PROFILS[d.profil] || d.profil)}<br><a href="mailto:${h(d.courriel)}?subject=${sujet(d)}">${h(d.courriel)}</a></td>
+      <td><b>${h(d.nom)}</b><br>${d.profil === 'entreprise' ? `<b>💼 ${PROFILS.entreprise}</b>` : h(PROFILS[d.profil] || d.profil)}<br><a href="mailto:${h(d.courriel)}?subject=${sujet(d)}">${h(d.courriel)}</a>${d.provenance ? `<br><small>${isEn ? 'From' : 'Arrivé·e par'} : ${h(d.provenance)}</small>` : ''}</td>
       <td style="white-space:pre-wrap">${h(d.message) || '—'}</td>
       <td>${h(STATUTS[d.statut] || d.statut)}</td>
       <td class="admin-preoc-actions">${d.statut !== 'repondue' ? `<button class="account-btn" onclick="adminRtvStatut('${d.id}', 'repondue')">${isEn ? 'Answered' : 'Répondue'}</button> ` : ''}${d.statut !== 'archivee' ? `<button class="account-btn" onclick="adminRtvStatut('${d.id}', 'archivee')">${isEn ? 'Archive' : 'Archiver'}</button>` : `<button class="account-btn" onclick="adminRtvStatut('${d.id}', 'nouvelle')">${isEn ? 'Restore' : 'Ressortir'}</button>`}</td>
@@ -2095,7 +2095,29 @@ async function renderAdminRtv(){
     ? `${(data || []).length} request(s) from the /represente-ta-ville form, by city. Click the address to answer, then « Answered ».`
     : `${(data || []).length} demande${(data || []).length > 1 ? 's' : ''} du formulaire /represente-ta-ville, par ville. Cliquez l’adresse pour répondre, puis « Répondue ».`}
     <button class="account-btn" onclick="adminRtvArchives()">${voirArchives ? (isEn ? 'Hide archived' : 'Cacher les archivées') : (isEn ? 'Show archived' : 'Voir les archivées')}</button></div>
-    ${blocs || `<p class="account-note">${isEn ? 'No request yet.' : 'Aucune demande pour l’instant.'}</p>`}`;
+    ${blocs || `<p class="account-note">${isEn ? 'No request yet.' : 'Aucune demande pour l’instant.'}</p>`}
+    <div id="adminRtvVisites"></div>`;
+  renderAdminRtvVisites();
+}
+// Les visites de /represente-ta-ville (rtv_visites, scripts/supabase-rtv-visites.sql) : combien,
+// d'où (site d'origine ou ?utm_source), et depuis quelle page de DQ. 30 derniers jours.
+async function renderAdminRtvVisites(){
+  const zone = document.getElementById('adminRtvVisites');
+  if(!zone) return;
+  const isEn = currentLang === 'en';
+  const depuis = new Date(Date.now() - 30 * 864e5).toISOString();
+  const { data, error } = await supabaseClient.from('rtv_visites').select('created_at, source, page_interne, campagne').gte('created_at', depuis).order('created_at', { ascending: false }).limit(5000);
+  if(error){ console.error('renderAdminRtvVisites:', error); zone.innerHTML = `<p class="account-note">${isEn ? 'Visits could not be read (table rtv_visites missing?).' : 'Les visites n’ont pas pu être lues (table rtv_visites pas encore créée ?).'}</p>`; return; }
+  const h = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+  const compter = (cle) => { const m = new Map(); for(const v of data){ const k = cle(v); if(k) m.set(k, (m.get(k) || 0) + 1); } return [...m].sort((a, b) => b[1] - a[1]); };
+  const tableau = (titre, lignes) => lignes.length ? `<h4 style="margin:14px 0 6px;">${titre}</h4><table class="admin-preoc"><tbody>${lignes.map(([k, n]) => `<tr><td>${h(k)}</td><td style="text-align:right"><b>${n}</b></td></tr>`).join('')}</tbody></table>` : '';
+  const sources = compter((v) => v.source + (v.campagne ? ` (${v.campagne})` : ''));
+  const pages = compter((v) => v.page_interne);
+  const jours = compter((v) => String(v.created_at).slice(0, 10)).sort((a, b) => b[0].localeCompare(a[0]));
+  zone.innerHTML = `<div class="account-note" style="margin:22px 0 6px;"><b>${isEn ? 'Visits to /represente-ta-ville, last 30 days' : 'Visites de /represente-ta-ville, 30 derniers jours'}</b> — ${data.length} ${isEn ? 'visit(s), one per session' : (data.length > 1 ? 'visites, une par session' : 'visite, une par session')}</div>
+    ${tableau(isEn ? 'Where they came from' : 'D’où on arrive', sources)}
+    ${tableau(isEn ? 'From which DQ page' : 'Depuis quelle page de DQ', pages)}
+    ${tableau(isEn ? 'By day' : 'Par jour', jours)}`;
 }
 async function adminRtvStatut(id, statut){
   const { error } = await supabaseClient.from('rtv_demandes').update({ statut }).eq('id', id);
