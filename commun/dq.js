@@ -179,7 +179,7 @@ function renderArchives(){
 /* ---------------- I18N ---------------- */
 const translations = {
   fr: {
-    'nav.close':"Fermer",'nav.villes':"Villes",'nav.apercu':"Aperçu",'nav.ministres':"Ministres",'nav.projets':"Projets de loi",
+    'nav.close':"Fermer",'nav.villes':"Villes",'nav.rtv':"+ Représentez votre ville",'nav.apercu':"Aperçu",'nav.ministres':"Ministres",'nav.projets':"Projets de loi",
     'nav.votes':"Votes",'nav.archives':"Archives",'nav.quoideneuf':"Quoi de neuf",'nav.compte':"Compte & à propos",'nav.trouve':"Trouvez votre député",
     'nav.lexique':"Lexique",'nav.personnes':"Qui gravite autour",'nav.petitions':"Pétitions",'nav.apropos':"D'où viennent ces données",
     'stat.ministres':"Ministres",'stat.projets':"Projets de loi",'stat.votes':"Votes enregistrés",
@@ -214,7 +214,7 @@ const translations = {
     'footer.source':"Code source",
   },
   en: {
-    'nav.close':"Close",'nav.villes':"Cities",'nav.apercu':"Overview",'nav.ministres':"Ministers",'nav.projets':"Bills",
+    'nav.close':"Close",'nav.villes':"Cities",'nav.rtv':"+ Represent your city",'nav.apercu':"Overview",'nav.ministres':"Ministers",'nav.projets':"Bills",
     'nav.votes':"Votes",'nav.archives':"Archives",'nav.quoideneuf':"What's new",'nav.compte':"Account & about",'nav.trouve':"Find your MNA",
     'nav.lexique':"Glossary",'nav.personnes':"Who's involved",'nav.petitions':"Petitions",'nav.apropos':"Where this data comes from",
     'stat.ministres':"Ministers",'stat.projets':"Bills",'stat.votes':"Votes recorded",
@@ -732,6 +732,7 @@ function traduireTextesFixes(){
 }
 function applyLanguage(){
   traduireTextesFixes();
+  document.getElementById('lienRtv')?.setAttribute('href', '/represente-ta-ville' + paramLangue(true));
   // Re-render dynamic lists so their JS-generated buttons pick up the new language
   renderHemicycle();
   renderLegendePresence();

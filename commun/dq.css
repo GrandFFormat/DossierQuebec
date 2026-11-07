@@ -783,6 +783,8 @@
      équivalents d'ici (--paper-2, --slate). */
   .villes-menu li a:hover, .villes-menu li a:focus-visible{background:var(--paper-2); color:var(--gold);}
   .villes-menu li a small{display:block; font-weight:400; font-size:11px; color:var(--slate); letter-spacing:.02em;}
+  .villes-menu li.villes-rtv{margin-top:4px; padding-top:4px; border-top:1px solid var(--line);}
+  .villes-menu li.villes-rtv a{color:var(--gold);}
   @media (prefers-reduced-motion: reduce){ .maple-flip{transition:color 0.3s ease;} }
   .brand-text p{display:none;} /* la devise devient le H1 du hero (Phase 2) */
   .top-meta{display:none;}     /* les stats migrent dans la bande du hero (Phase 2) */
