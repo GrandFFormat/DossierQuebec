@@ -2,6 +2,7 @@
   "cleanUrls": true,
   "installCommand": "npm install --omit=dev --ignore-scripts --no-audit --no-fund",
   "buildCommand": "echo \"Rien a construire : les pages sont deja fabriquees et commitees.\"",
+  "outputDirectory": ".",
   "ignoreCommand": "sh scripts/vercel-deployer.sh",
   "crons": [
     {
