@@ -2711,6 +2711,13 @@ body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
 .rtv-grille{border-collapse:collapse; margin:0 0 12px; font-size:15px;}
 .rtv-grille td{padding:5px 18px 5px 0; border-bottom:1px solid var(--line, #ddd);}
 .rtv-grille td:last-child{font-weight:800; text-align:right; padding-right:0;}
+.rtv-villes{border-collapse:collapse; margin:0 0 8px; font-size:15px; width:100%; max-width:520px;}
+.rtv-villes th{text-align:left; font-size:13px; padding:5px 12px 5px 0; border-bottom:2px solid currentColor;}
+.rtv-villes td{padding:5px 12px 5px 0; border-bottom:1px solid var(--line, #ddd);}
+.rtv-villes td:last-child,.rtv-villes th:last-child{font-weight:800; text-align:right; padding-right:0;}
+.rtv-villes td:nth-child(3),.rtv-villes th:nth-child(3){text-align:right;}
+.rtv-villes-plus{margin:0 0 12px; max-width:520px;}
+.rtv-villes-plus summary{cursor:pointer; font-weight:700; padding:6px 0;}
 .rtv-fondateur{background:#FFF3C4; color:#131313; border-left:4px solid #FFD24D; padding:8px 10px;}
 
 /* Représentez votre ville : les deux exemples de bande commanditaire, en haut du formulaire (7 nov. 2026). */
