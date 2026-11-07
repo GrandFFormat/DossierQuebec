@@ -638,3 +638,24 @@ footer a.lien-dafr { background: #FFD24D; color: #101419; font-weight: 700; padd
 .fiche-soutien { margin-left: auto; font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 6px; background: #B5D4F4; color: #0C447C; text-decoration: none; }
 .fiche-soutien:hover { background: #85B7EB; }
 @media (max-width: 600px) { .fiche-soutien { margin-left: 0; } }
+
+/* Bande du commanditaire sur l'accueil (6 nov. 2026). */
+.commandite { margin: 26px 0 32px; max-width: none; border-left-width: 4px; }
+.commandite p { margin: 0; font-size: 17px; }
+.commandite a { font-weight: 700; }
+.commandite .commandite-note { margin-top: 8px; font-size: 13px; opacity: .8; }
+.commandite .commandite-note a { font-weight: 400; }
+.commandite { display: flex; gap: 18px; align-items: flex-start; }
+.commandite-logo { flex: none; line-height: 0; }
+.commandite-logo img { width: 64px; height: 64px; }
+.commandite-texte p { font-size: 15px; }
+.commandite-texte p + p { margin-top: 6px; }
+.commandite .commandite-titre { font-size: 17px; }
+/* Un peu plus gros (Martin, 6 nov. 2026). */
+.commandite { gap: 22px; padding: 20px 24px; align-items: center; }
+.commandite-logo img { width: 96px; height: 96px; }
+.commandite-texte p { font-size: 16.5px; }
+.commandite .commandite-titre { font-size: 20px; }
+.commandite .commandite-note { font-size: 14px; }
+.commandite-liste { margin: 8px 0 4px; padding-left: 20px; font-size: 16px; line-height: 1.5; }
+.commandite-liste li + li { margin-top: 2px; }

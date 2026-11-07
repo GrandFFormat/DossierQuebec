@@ -2677,3 +2677,21 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 body.connecte .bill-abo-suivre{display:none;}
 body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
 .bill-abo-devenir{margin-top:14px;}
+
+/* REPRÉSENTE TA VILLE (6 nov. 2026) : formulaire d'intérêt, /represente-ta-ville. */
+.rtv{max-width:760px; margin:0 auto; padding:28px 0 48px;}
+.rtv-etapes{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:28px;}
+.rtv-etape{border:3px solid var(--ink); background:var(--card); box-shadow:4px 4px 0 var(--ink); padding:14px 16px;}
+.rtv-etape b{display:inline-block; background:#FFD24D; border:2px solid var(--ink); padding:0 8px; font-family:'Archivo',sans-serif; font-weight:900; margin-bottom:6px;}
+.rtv-etape p{margin:0; font-size:15px; line-height:1.45;}
+.rtv-form{display:grid; gap:14px; border:3px solid var(--ink); background:var(--card); box-shadow:4px 4px 0 var(--ink); padding:20px 22px;}
+.rtv-form label{display:grid; gap:6px; font-weight:700; font-size:14px;}
+.rtv-form input:not([type=radio]), .rtv-form textarea{font:inherit; font-weight:400; padding:10px 12px; border:2px solid var(--ink); background:#fff; color:#131313;}
+.rtv-form fieldset{border:0; margin:0; padding:0; display:grid; gap:6px;}
+.rtv-form legend{font-weight:700; font-size:14px; margin-bottom:6px;}
+.rtv-form .rtv-choix{display:flex; align-items:center; gap:8px; font-weight:400;}
+.rtv-form .bill-more{justify-self:start; cursor:pointer;}
+.rtv-pot{position:absolute; left:-9999px; width:1px; height:1px; opacity:0;}
+.rtv-note{margin:0; font-size:13px; color:var(--muted, #5B6570);}
+.rtv-merci{margin:0; font-size:16px;}
+@media (max-width:760px){ .rtv-etapes{grid-template-columns:1fr;} }
