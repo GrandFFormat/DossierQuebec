@@ -4468,6 +4468,17 @@ function toggleBillSummary(domId, evt){
   }
 }
 
+// Le premier projet d'une liste s'affiche déplié (Martin, 7 nov. 2026) : le visiteur voit
+// tout de suite qu'un résumé se cache dans chaque carte. Sans défilement.
+function ouvrirPremierResume(conteneur){
+  const el = conteneur && conteneur.querySelector('.bill-summary');
+  if(!el || el.classList.contains('open')) return;
+  remplirResume(el);
+  el.classList.add('open');
+  const hint = document.getElementById('hint-'+el.id);
+  if(hint) hint.textContent = t('btn.hideSummary');
+}
+
 // Bascule la section « votes enregistrés » d'une carte entre la vue compacte
 // (une ligne par vote) et la vue détaillée (détail nominatif, les + par ligne).
 function toggleBillVotes(id){
@@ -4710,6 +4721,7 @@ function renderBills(keyword){
     // qu'une carte s'ouvre d'un clic.
     const astuce = `<div class="bills-astuce">${isEn ? '↓ Click anywhere in the white square to see the summary ↓' : '↓ Cliquez n’importe où dans le carré blanc pour voir le résumé ↓'}</div>`;
     el.innerHTML = visibles.slice(0, 2).map((b, i)=>(i === 1 ? astuce : '') + billCard(b,'full')).join('');
+    ouvrirPremierResume(el);
     if(rest){
       rest.innerHTML = visibles.slice(2).map(b=>billCard(b,'full')).join('');
       // Barre « + 10 », même patron que celle des votes.
@@ -4765,7 +4777,7 @@ function renderBills(keyword){
 
 function renderApercuBills(){
   if(!document.getElementById('apercuBills')) return;   // vue absente de cette page
-  { const _e = document.getElementById('apercuBills'); if(_e) _e.innerHTML = bills.slice(0,4).map(b=>billCard(b,'apercu')).join(''); }
+  { const _e = document.getElementById('apercuBills'); if(_e){ _e.innerHTML = bills.slice(0,4).map(b=>billCard(b,'apercu')).join(''); ouvrirPremierResume(_e); } }
 }
 
 // Projets « challengés » : affiche PUBLIQUEMENT les projets de loi ayant atteint
