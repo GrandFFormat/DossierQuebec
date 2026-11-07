@@ -263,6 +263,10 @@ function goToFederal(evt){
       </div>
 
       <form class="rtv-form" id="rtvForm" onsubmit="event.preventDefault(); rtvEnvoyer(this)">
+        <div class="rtv-exemples">
+          <figure><img src="/commun/rtv-exemple-accueil.png" alt="Bande du commanditaire sur l'accueil de DossierVilleDeMontréal" loading="lazy" width="1280" height="760"><figcaption><span class="fr-txt">Sur l'accueil de la ville</span><span class="en-txt">On the city's home page</span></figcaption></figure>
+          <figure><img src="/commun/rtv-exemple-decisions.png" alt="Bande du commanditaire sous la liste des décisions de Montréal" loading="lazy" width="1280" height="760"><figcaption><span class="fr-txt">Sous la liste des décisions</span><span class="en-txt">Below the list of decisions</span></figcaption></figure>
+        </div>
         <label><span><span class="fr-txt">Votre ville</span><span class="en-txt">Your city</span></span><input name="ville" required maxlength="80" placeholder="Ex. Sherbrooke, Gaspé, Alma…" data-ph-en="E.g. Sherbrooke, Gatineau, Toronto…"></label>
         <label><span><span class="fr-txt">Votre nom ou celui de votre organisme</span><span class="en-txt">Your name or your organization's</span></span><input name="nom" required maxlength="120"></label>
         <label><span><span class="fr-txt">Votre courriel</span><span class="en-txt">Your email</span></span><input name="courriel" type="email" required maxlength="200"></label>
