@@ -51,7 +51,7 @@ export default async function handler(req, res) {
         from: DIGEST_FROM,
         to: MESSAGES_A.split(',').map((a) => a.trim()).filter(Boolean),
         reply_to: m.courriel,
-        subject: `[Représente ta ville] ${m.ville} — ${PROFILS[m.profil]}`,
+        subject: `[Représentez votre ville] ${m.ville} — ${PROFILS[m.profil]}`,
         html,
       }),
     });
