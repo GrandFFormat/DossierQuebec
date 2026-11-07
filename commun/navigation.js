@@ -88,7 +88,7 @@ export function menuVilles(details, villeActuelle) {
   details.innerHTML = `<summary>${villeActuelle ? `<span class="ab-villes-libelle">${tr('Ville : ', 'Town: ')}</span>${echapper(VILLES[villeActuelle])}` : tr('Choisir une ville', 'Choose a city')}</summary>
     <ul class="ab-villes-menu">
       ${Object.entries(VILLES).map(([v, nom]) => `<li><a href="/${v}/"${v === villeActuelle ? ' aria-current="true"' : ''}>${echapper(nom)}</a></li>`).join('')}
-      <li class="ab-villes-rtv"><a href="/represente-ta-ville">${tr('+ Représentez votre ville', '+ Represent your city')}</a></li>
+      <li class="ab-villes-rtv"><a href="/represente-ta-ville${EN ? '?lang=en' : ''}">${tr('+ Représentez votre ville', '+ Represent your city')}</a></li>
       <li class="ab-villes-dq"><a href="/">DossierQuébec <span>(${tr('provincial', 'Québec province')})</span></a></li>
     </ul>`;
   document.addEventListener('click', (e) => {
