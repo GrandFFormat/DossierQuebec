@@ -44,6 +44,10 @@
   }catch(e){}
 })();
 </script>
+<script>
+/* Arrivé depuis l'anglais de DossierCanada ou de DossierOntario : la page s'ouvre en anglais. */
+(function(){ try{ var r = document.referrer || ""; if(!/[?&]lang=/.test(location.search) && (r.indexOf('dossierontario.ca') > -1 || /dossiercanada\.ca\/en(\/|$|\?)/.test(r))) location.replace(location.pathname + "?lang=en" + location.hash); }catch(e){} })();
+</script>
 <title>Représentez votre ville — DossierQuébec</title>
 <meta name="description" content="Votre ville n'est pas sur DossierQuébec ? Levez la main : citoyen, organisme ou entreprise, aidez-nous à mettre en clair les décisions de votre conseil municipal.">
 <link rel="canonical" href="https://dossierquebec.ca/represente-ta-ville">
@@ -229,47 +233,48 @@ function goToFederal(evt){
   <!-- APERÇU -->
   <!-- REPRÉSENTE TA VILLE (6 nov. 2026) : formulaire d'intérêt seulement ; api/represente.js
        envoie le tout par courriel à Martin. Rien n'est promis : on mesure la demande. -->
-  <section class="view active" id="view-represente">
-    <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/">Accueil</a><span class="sep" aria-hidden="true">›</span><span>Représentez votre ville</span></nav>
+  <section class="view active" id="view-represente" data-titre-en="Represent your city — DossierQuébec">
+    <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/" data-i18n="fil.accueil">Accueil</a><span class="sep" aria-hidden="true">›</span><span><span class="fr-txt">Représentez votre ville</span><span class="en-txt">Represent your city</span></span></nav>
     <div class="view-hero">
-      <h1 class="hero-h1 rtv-h1">Représentez votre ville</h1>
-      <p class="view-hero-sub">DossierQuébec met en clair les décisions de <a class="rtv-lien" href="/quebec/">Québec</a> et de <a class="rtv-lien" href="/montreal/">Montréal</a>. Votre ville n'y est pas encore ? Levez la main. On s'occupe de la technique, vous donnez le coup de pouce. <a class="rtv-lien" href="/quebec/">Voir un exemple : la Ville de Québec →</a></p>
+      <h1 class="hero-h1 rtv-h1"><span class="fr-txt">Représentez votre ville</span><span class="en-txt">Represent your city</span></h1>
+      <p class="view-hero-sub"><span class="fr-txt">DossierQuébec met en clair les décisions de <a class="rtv-lien" href="/quebec/">Québec</a> et de <a class="rtv-lien" href="/montreal/">Montréal</a>. Votre ville n'y est pas encore ? Levez la main. On s'occupe de la technique, vous donnez le coup de pouce. <a class="rtv-lien" href="/montreal/">Voir un exemple : la Ville de Montréal →</a></span><span class="en-txt">DossierQuébec makes the decisions of <a class="rtv-lien" href="/montreal/?lang=en">Montréal</a> and <a class="rtv-lien" href="/quebec/">Québec City</a> easy to read. Your city is not there yet? Raise your hand. We handle the technical side, you give the boost. <a class="rtv-lien" href="/montreal/?lang=en">See an example: the City of Montréal →</a></span></p>
     </div>
     <div class="band band-white bleed"><div class="rtv">
       <div class="rtv-etapes">
-        <div class="rtv-etape"><b>1</b><p>Vous nous dites quelle ville vous voulez voir sur le site.</p></div>
-        <div class="rtv-etape"><b>2</b><p>On vérifie comment la Ville publie ses procès-verbaux (parfois de façon archaïque) et on vous revient avec le coût.</p></div>
-        <div class="rtv-etape"><b>3</b><p>Votre ville apparaît dans le menu, avec la mention « Compte rendu offert par » votre nom. <a href="/quebec/">Voir l'exemple de Québec →</a></p></div>
+        <div class="rtv-etape"><b>1</b><p><span class="fr-txt">Vous nous dites quelle ville vous voulez voir sur le site.</span><span class="en-txt">You tell us which city you want to see on the site.</span></p></div>
+        <div class="rtv-etape"><b>2</b><p><span class="fr-txt">On vérifie comment la Ville publie ses procès-verbaux (parfois de façon archaïque) et on vous revient avec le coût.</span><span class="en-txt">We check how the city publishes its council minutes (sometimes in archaic ways) and get back to you with the cost.</span></p></div>
+        <div class="rtv-etape"><b>3</b><p><span class="fr-txt">Votre ville apparaît dans le menu, avec la mention « Compte rendu offert par » votre nom. <a href="/montreal/">Voir l'exemple de Montréal →</a></span><span class="en-txt">Your city appears in the menu, with the mention “Report offered by” your name. <a href="/montreal/?lang=en">See the Montréal example →</a></span></p></div>
       </div>
 
       <form class="rtv-form" id="rtvForm" onsubmit="event.preventDefault(); rtvEnvoyer(this)">
-        <label>Votre ville<input name="ville" required maxlength="80" placeholder="Ex. Sherbrooke, Gaspé, Alma…"></label>
-        <label>Votre nom ou celui de votre organisme<input name="nom" required maxlength="120"></label>
-        <label>Votre courriel<input name="courriel" type="email" required maxlength="200"></label>
+        <label><span><span class="fr-txt">Votre ville</span><span class="en-txt">Your city</span></span><input name="ville" required maxlength="80" placeholder="Ex. Sherbrooke, Gaspé, Alma…" data-ph-en="E.g. Sherbrooke, Gatineau, Toronto…"></label>
+        <label><span><span class="fr-txt">Votre nom ou celui de votre organisme</span><span class="en-txt">Your name or your organization's</span></span><input name="nom" required maxlength="120"></label>
+        <label><span><span class="fr-txt">Votre courriel</span><span class="en-txt">Your email</span></span><input name="courriel" type="email" required maxlength="200"></label>
         <fieldset>
-          <legend>Vous êtes</legend>
-          <label class="rtv-choix"><input type="radio" name="profil" value="citoyen" checked> Un citoyen ou une citoyenne</label>
-          <label class="rtv-choix"><input type="radio" name="profil" value="organisme"> Un organisme</label>
-          <label class="rtv-choix"><input type="radio" name="profil" value="entreprise"> Une entreprise qui veut commanditer sa ville</label>
+          <legend><span class="fr-txt">Vous êtes</span><span class="en-txt">You are</span></legend>
+          <label class="rtv-choix"><input type="radio" name="profil" value="citoyen" checked> <span class="fr-txt">Un citoyen ou une citoyenne</span><span class="en-txt">A citizen</span></label>
+          <label class="rtv-choix"><input type="radio" name="profil" value="organisme"> <span class="fr-txt">Un organisme</span><span class="en-txt">An organization</span></label>
+          <label class="rtv-choix"><input type="radio" name="profil" value="entreprise"> <span class="fr-txt">Une entreprise qui veut commanditer sa ville</span><span class="en-txt">A business that wants to sponsor its city</span></label>
         </fieldset>
-        <label>Un mot de plus (facultatif)<textarea name="message" rows="4" maxlength="2000"></textarea></label>
+        <label><span><span class="fr-txt">Un mot de plus (facultatif)</span><span class="en-txt">Anything else (optional)</span></span><textarea name="message" rows="4" maxlength="2000"></textarea></label>
         <input name="site_web" class="rtv-pot" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button type="submit" class="bill-more">Lever la main →</button>
-        <p class="rtv-note" aria-live="polite">Pas de parti, de candidat·e ni d'élu·e. Le commanditaire n'a aucun droit de regard sur le contenu.</p>
+        <button type="submit" class="bill-more"><span class="fr-txt">Lever la main →</span><span class="en-txt">Raise my hand →</span></button>
+        <p class="rtv-note" aria-live="polite"><span class="fr-txt">Pas de parti, de candidat·e ni d'élu·e. Le commanditaire n'a aucun droit de regard sur le contenu.</span><span class="en-txt">No parties, candidates or elected officials. The sponsor has no say over the content.</span></p>
       </form>
     </div></div>
   </section>
 <script>
+if(document.documentElement.classList.contains('dq-en')) document.querySelectorAll('[data-ph-en]').forEach(function(i){ i.placeholder = i.dataset.phEn; });
 async function rtvEnvoyer(f){
   var note = f.querySelector('.rtv-note'), btn = f.querySelector('button');
-  btn.disabled = true; note.textContent = 'Envoi…';
+  btn.disabled = true; note.textContent = document.documentElement.classList.contains('dq-en') ? 'Sending…' : 'Envoi…';
   try{
     var d = Object.fromEntries(new FormData(f));
     var r = await fetch('/api/represente', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(d)});
     if(!r.ok) throw 0;
-    f.innerHTML = '<p class="rtv-merci"><b>Merci !</b> On vous revient par courriel dès qu\'on a regardé votre ville.</p>';
+    f.innerHTML = document.documentElement.classList.contains('dq-en') ? '<p class="rtv-merci"><b>Thank you!</b> We will email you once we have looked at your city.</p>' : '<p class="rtv-merci"><b>Merci !</b> On vous revient par courriel dès qu\'on a regardé votre ville.</p>';
   }catch(e){
-    btn.disabled = false; note.textContent = 'L\'envoi n\'a pas fonctionné. Réessayez dans un moment.';
+    btn.disabled = false; note.textContent = document.documentElement.classList.contains('dq-en') ? 'Sending failed. Please try again in a moment.' : 'L\'envoi n\'a pas fonctionné. Réessayez dans un moment.';
   }
 }
 </script>
