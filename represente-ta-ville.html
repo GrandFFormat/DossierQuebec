@@ -237,7 +237,7 @@ function goToFederal(evt){
     <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/" data-i18n="fil.accueil">Accueil</a><span class="sep" aria-hidden="true">›</span><span><span class="fr-txt">Représentez votre ville</span><span class="en-txt">Represent your city</span></span></nav>
     <div class="view-hero">
       <h1 class="hero-h1 rtv-h1"><span class="fr-txt">Représentez votre ville</span><span class="en-txt">Represent your city</span></h1>
-      <p class="view-hero-sub"><span class="fr-txt">DossierQuébec met en clair les décisions des villes. Votre ville n'y est pas encore ? Levez la main. On s'occupe de la technique, vous donnez le coup de pouce. <a class="rtv-lien" href="/montreal/">Voir un exemple : la Ville de Montréal →</a></span><span class="en-txt">DossierQuébec makes city decisions easy to read. Your city is not there yet? Raise your hand. We handle the technical side, you give the boost. <a class="rtv-lien" href="/montreal/?lang=en">See an example: the City of Montréal →</a></span></p>
+      <p class="view-hero-sub"><span class="fr-txt">DossierQuébec met en clair les décisions des villes. Votre ville n'y est pas encore ? Levez la main. On s'occupe de la technique, vous donnez le coup de pouce. <a class="rtv-lien" href="/montreal/">Voir un exemple : la Ville de Montréal →</a> <span class="rtv-province-pastille"><select class="rtv-province" aria-label="Province"><option value="">Québec</option><option value="on">Ontario</option><option value="sk">Saskatchewan</option><option value="nb">Nouveau-Brunswick</option></select></span></span><span class="en-txt">DossierQuébec makes city decisions easy to read. Your city is not there yet? Raise your hand. We handle the technical side, you give the boost. <a class="rtv-lien" href="/montreal/?lang=en">See an example: the City of Montréal →</a> <span class="rtv-province-pastille"><select class="rtv-province" aria-label="Province"><option value="">Québec</option><option value="on">Ontario</option><option value="sk">Saskatchewan</option><option value="nb">New Brunswick</option></select></span></span></p>
     </div>
     <div class="band band-white bleed"><div class="rtv">
       <div class="rtv-etapes">
@@ -303,6 +303,15 @@ var RTV_BARREES = { nb: ['Shediac', 'Campbellton', 'Cap-Acadie'] };
 var rtvProvince = (new URLSearchParams(location.search).get('province') || '').toLowerCase();
 // Dossier Canada montre la même liste que l'Ontario (Martin, 7 nov. 2026).
 var rtvListe = rtvProvince === 'ca' ? 'on' : rtvProvince;
+// Pastille Province à côté de l'exemple de Montréal (Martin, 8 nov. 2026) : change la liste de villes.
+document.querySelectorAll('.rtv-province').forEach(function(m){
+  m.value = RTV_VILLES[rtvListe] ? rtvListe : '';
+  m.addEventListener('change', function(){
+    var u = new URL(location.href);
+    if(m.value) u.searchParams.set('province', m.value); else u.searchParams.delete('province');
+    location.href = u.pathname + u.search + '#rtvVillesTitre';
+  });
+});
 (function(){
   var v = RTV_VILLES[rtvListe]; if(!v) return;
   var esp = function(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); };

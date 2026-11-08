@@ -2700,6 +2700,13 @@ body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
 .rtv-h1{font-size:clamp(40px, 7vw, 88px) !important; line-height:1 !important; overflow-wrap:anywhere;}
 .rtv-lien{color:inherit; font-weight:700; text-decoration:underline; text-decoration-color:#FFD24D; text-decoration-thickness:4px; text-underline-offset:3px;}
 .rtv-lien:hover{text-decoration-color:#0E4FC1;}
+.rtv-province-pastille{position:relative; display:inline-block; margin-left:8px; vertical-align:middle; color:var(--card);}
+.rtv-province-pastille::after{content:""; position:absolute; right:10px; top:11px; border-left:4px solid transparent; border-right:4px solid transparent; border-top:5px solid currentColor; pointer-events:none;}
+.rtv-province-pastille:hover,.rtv-province-pastille:focus-within{color:var(--sur-clair);}
+.rtv-province{appearance:none; -webkit-appearance:none; height:26px; padding:0 24px 0 11px; border:0; border-radius:13px !important; cursor:pointer;
+  background:var(--gold); color:inherit; font-family:'Archivo',sans-serif; font-weight:900; font-size:10px; letter-spacing:0.04em; text-transform:uppercase;}
+.rtv-province-pastille:hover .rtv-province,.rtv-province:focus{background:var(--yellow);}
+.rtv-province option{text-transform:none; color:#131313; background:#fff;}
 
 /* « Une réalisation de DAFR Solution » : signature sans surlignage (6 nov. 2026). */
 #footerDafr{ color:inherit; }
