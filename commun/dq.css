@@ -2720,6 +2720,8 @@ body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
 .rtv-villes-plus{margin:0 0 12px; max-width:520px;}
 .rtv-villes-plus summary{cursor:pointer; font-weight:700; padding:6px 0;}
 .rtv-villes tr.rtv-bloquee td{color:var(--red); font-weight:700;}
+.rtv-villes tr.rtv-barree td{text-decoration:line-through; color:var(--muted, #5B6570);}
+.rtv-barree-legende{display:block; margin-top:2px; font-size:13px; color:var(--muted, #5B6570); font-weight:600;}
 .rtv-bloquee-legende{display:block; margin-top:4px; font-size:13px; color:var(--red); font-weight:600;}
 .rtv-fondateur{background:#FFF3C4; color:#131313; border-left:4px solid #FFD24D; padding:8px 10px;}
 

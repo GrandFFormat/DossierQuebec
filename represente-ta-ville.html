@@ -297,14 +297,16 @@ var RTV_NOMS = { on: ['Les villes de l’Ontario de 50 000 habitants et plus', '
 // En rouge : villes qui bloquent l'accès à leurs procès-verbaux (robots.txt, mur anti-robot ou rien de publié) ;
 // on leur écrit avant de les mettre en ligne (Martin, 8 nov. 2026).
 var RTV_BLOQUEES = { nb: ['Dieppe', 'Riverview', 'Miramichi'] };
+// Barrées : rien à travailler (Shediac ne publie plus depuis 2023, page vide à Campbellton, Beaubassin East fusionnée dans Cap-Acadie en 2023).
+var RTV_BARREES = { nb: ['Shediac', 'Campbellton', 'Beaubassin East'] };
 var rtvProvince = (new URLSearchParams(location.search).get('province') || '').toLowerCase();
 // Dossier Canada montre la même liste que l'Ontario (Martin, 7 nov. 2026).
 var rtvListe = rtvProvince === 'ca' ? 'on' : rtvProvince;
 (function(){
   var v = RTV_VILLES[rtvListe]; if(!v) return;
   var esp = function(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); };
-  var bloq = RTV_BLOQUEES[rtvListe] || [];
-  var ligne = function(c, i){ return '<tr' + (bloq.indexOf(c[0]) > -1 ? ' class="rtv-bloquee"' : '') + '><td>' + (i + 1) + '</td><td>' + c[0] + '</td><td>' + esp(c[1]) + '</td><td><span class="fr-txt">' + c[2] + ' $</span><span class="en-txt">$' + c[2] + '</span></td></tr>'; };
+  var bloq = RTV_BLOQUEES[rtvListe] || [], barr = RTV_BARREES[rtvListe] || [];
+  var ligne = function(c, i){ return '<tr' + (bloq.indexOf(c[0]) > -1 ? ' class="rtv-bloquee"' : barr.indexOf(c[0]) > -1 ? ' class="rtv-barree"' : '') + '><td>' + (i + 1) + '</td><td>' + c[0] + '</td><td>' + esp(c[1]) + '</td><td><span class="fr-txt">' + c[2] + ' $</span><span class="en-txt">$' + c[2] + '</span></td></tr>'; };
   var t1 = document.getElementById('rtvVilles1'), t2 = document.getElementById('rtvVilles2'), h = t1.rows[0].outerHTML;
   t1.innerHTML = h + v.slice(0, 3).map(ligne).join('');
   t2.innerHTML = h + v.slice(3).map(function(c, i){ return ligne(c, i + 3); }).join('');
@@ -312,7 +314,8 @@ var rtvListe = rtvProvince === 'ca' ? 'on' : rtvProvince;
   if(n < 1) plus.hidden = true;
   else plus.querySelector('summary').innerHTML = '<span class="fr-txt">Voir ' + (n > 1 ? 'les ' + n + ' villes suivantes' : 'la ville suivante') + '</span><span class="en-txt">See the next ' + (n > 1 ? n + ' cities' : 'city') + '</span>';
   document.getElementById('rtvVillesTitre').innerHTML = '<b class="fr-txt">' + RTV_NOMS[rtvListe][0] + '</b><b class="en-txt">' + RTV_NOMS[rtvListe][1] + '</b>'
-    + (bloq.length ? '<span class="rtv-bloquee-legende"><span class="fr-txt">En rouge : ces villes bloquent l’accès à leurs procès-verbaux. Nous leur demandons la permission avant de les mettre en ligne.</span><span class="en-txt">In red: these towns block access to their council minutes. We ask for their permission before putting them online.</span></span>' : '');
+    + (bloq.length ? '<span class="rtv-bloquee-legende"><span class="fr-txt">En rouge : ces villes bloquent l’accès à leurs procès-verbaux. Nous leur demandons la permission avant de les mettre en ligne.</span><span class="en-txt">In red: these towns block access to their council minutes. We ask for their permission before putting them online.</span></span>' : '')
+    + (barr.length ? '<span class="rtv-barree-legende"><span class="fr-txt">Barrées : ces villes ne publient rien que nous puissions suivre.</span><span class="en-txt">Struck through: these towns publish nothing we can follow.</span></span>' : '');
   if(bloq.length) plus.open = true;
 })();
 // D'où arrive la personne (7 nov. 2026) : ?utm_source=…, sinon le site d'où elle vient, sinon « direct ».
