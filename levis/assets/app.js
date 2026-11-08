@@ -149,6 +149,35 @@ function carteRepliable(entete, corps) {
   return `<details class="carte pliante" name="${NOM_ACCORDEON}"><summary>${entete}</summary><div class="corps">${corps}</div></details>`;
 }
 
+// Au bas de chaque décision dépliée QUI A UN RÉSUMÉ IA : la partager sur Facebook, sur X ou en
+// copiant le lien, et l'appel à soutenir DossierQuébec. Repris tel quel du volet Québec
+// (quebec/assets/app.js, 22 oct. 2026) le 8 nov. 2026. Le lien passe par la recherche (?q=numéro).
+function actionsFiche(d) {
+  const r = resumePour(d)?.r;
+  if (!r?.puces?.length || r.sansContenuSubstantiel) return '';
+  const cle = d.numero || d.objet || '';
+  if (!cle) return '';
+  const lien = new URL(`decisions-de-la-ville-de-levis?q=${encodeURIComponent(cle)}`, location.href).href;
+  const coupe = (t, n) => (t.length > n ? t.slice(0, n - 1).replace(/\s+\S*$/, '') + '…' : t);
+  const recap = coupe(r.puces[0], 200);
+  const texteX = coupe(recap, 230);
+  const texteComplet = `${coupe(d.objet ?? '', 160)}\n\n${r.puces.slice(0, 3).map((p) => '• ' + p).join('\n')}\n\n${lien}`;
+  return `<div class="fiche-actions">
+      <span class="fiche-actions-titre">Partager</span>
+      <a class="fiche-bouton" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(lien)}" target="_blank" rel="noopener">Facebook</a>
+      <a class="fiche-bouton" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(texteX)}&url=${encodeURIComponent(lien)}" target="_blank" rel="noopener">X</a>
+      <button type="button" class="fiche-bouton" data-texte="${echapper(texteComplet)}" onclick="copierLienFiche(this)">⧉ Copier</button>
+      <a class="fiche-soutien" href="https://dossierquebec.ca/abonnement">👉 Soutenez la cause ❤️</a>
+    </div>`;
+}
+function copierLienFiche(b) {
+  const texte = b.dataset.texte;
+  const avant = b.textContent;
+  const fait = () => { b.textContent = '✓ Copié'; setTimeout(() => { b.textContent = avant; }, 1500); };
+  (navigator.clipboard ? navigator.clipboard.writeText(texte) : Promise.reject()).then(fait).catch(() => window.prompt('Copiez :', texte));
+}
+if (typeof window !== 'undefined') window.copierLienFiche = copierLienFiche;
+
 // « Ce que le conseil décide » : la phrase de décision du procès-verbal, recopiée telle quelle
 // (« D’ACCORDER la dérogation mineure visant à rendre conforme… »). Montrée quand la décision n'a
 // pas de résumé — c'est le cas des conseils d'arrondissement, qui n'ont pas de sommaire. Les
@@ -186,7 +215,8 @@ function carteDecision(d) {
     ${d.sommaires?.length ? `<p class="compte" style="margin:0 0 8px">Sommaire décisionnel ${d.sommaires.map(echapper).join(', ')}</p>` : ''}
     ${d.voteEnregistre ? `<p class="compte" style="margin:0 0 8px"><a href="votes-nominatifs-du-conseil-de-levis?q=${encodeURIComponent(d.numero ?? '')}">Voir qui a voté pour et contre</a></p>` : ''}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${d.numero ? 'Procès-verbal officiel (PDF)' : 'Document officiel (PDF)'} ↗</a>` : ''}
-    ${d.sommairePdf ? ` &nbsp;<a class="lien-pdf" href="${echapper(d.sommairePdf)}" target="_blank" rel="noopener">Sommaire décisionnel (PDF) ↗</a>` : ''}`;
+    ${d.sommairePdf ? ` &nbsp;<a class="lien-pdf" href="${echapper(d.sommairePdf)}" target="_blank" rel="noopener">Sommaire décisionnel (PDF) ↗</a>` : ''}
+    ${actionsFiche(d)}`;
   // Espace abonnés (/commun/abonnes.js) : « Suivre ce dossier » et le détail de l'argent. La clé
   // de dossier suit la décision d'une instance à l'autre.
   // Un procès-verbal ou un ordre du jour n'est pas un dossier : rien à suivre.

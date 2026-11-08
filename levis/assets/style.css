@@ -1,4 +1,6 @@
-/* DossierVilleDeMontréal — feuille de style commune à toutes les pages (reprise telle quelle de DossierVilleDeQuébec).
+/* DossierVilleDeLévis — feuille de style commune à toutes les pages, recopiée telle quelle de
+   quebec/assets/style.css le 8 nov. 2026 (le volet Québec fait référence). Les ajouts propres à
+   Lévis sont regroupés à la fin.
  *
  * DEUX THÈMES, via l'attribut data-theme sur <html> : "clair" (défaut) et "sombre".
  * Le thème est posé avant le premier rendu par un petit script en <head> de chaque page :
@@ -136,14 +138,6 @@ header { background: var(--entete-fond); border-bottom: 1px solid var(--entete-l
 .titre-ligne a { text-decoration: none; color: inherit; }
 h1, .logo-titre { font-size: 27px; margin: 0; font-weight: 800; letter-spacing: -0.025em; color: var(--entete-encre); }
 .marque { color: var(--accent); }
-/* Étiquette « Prototype » à côté du logo — à retirer le jour où le site est considéré
-   comme définitif. */
-.prototype {
-  display: inline-block; align-self: center;
-  font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
-  color: #16191D; background: var(--vedette);
-  padding: 3px 9px; border-radius: 999px; line-height: 1.5;
-}
 
 .sous-titre { color: var(--entete-doux); margin: 6px 0 18px; font-size: 14.5px; max-width: 66ch; }
 
@@ -184,14 +178,16 @@ nav .outils { flex-basis: 100%; justify-content: center; margin-left: 0; padding
      l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge ») et les pastilles de nom d'instance
      élargissaient la page, qui glissait de côté. */
   select { max-width: 100%; }
-  .puce { max-width: 100%; white-space: normal; }
+  /* La même règle pour les pastilles vit plus bas, APRÈS la règle de base .puce : ici,
+     elle était écrite avant et la base (white-space: nowrap) l'annulait — à 375 px, la
+     pastille de Sainte-Foy - Sillery - Cap-Rouge élargissait encore la page à 415 px. */
 }
 
 
 
 /* ---------- TITRES ---------- */
 /* h1.page : le titre de chaque page intérieure depuis le 27 sept. 2026 (le logo n'est plus un <h1>). */
-h2.page, h1.page { font-size: 30px; margin: 36px 0 8px; font-weight: 800; letter-spacing: -0.028em; line-height: 1.15; }
+h2.page, h1.page { color: var(--encre); font-size: 30px; margin: 36px 0 8px; font-weight: 800; letter-spacing: -0.028em; line-height: 1.15; }
 h2.section {
   font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.09em;
   color: var(--doux); font-weight: 700; margin: 34px 0 12px;
@@ -207,22 +203,31 @@ p.chapeau { color: var(--doux); margin: 0 0 6px; max-width: 74ch; font-size: 15.
 .avis strong { color: var(--accent-encre); font-weight: 700; }
 :root[data-theme="sombre"] .avis strong { color: var(--accent); }
 
+/* L'avis sur l'avenir des volets municipaux (14 oct. 2026). Ni le vert de l'accent, qui dirait
+   que tout va bien, ni le rouge, qui dirait que c'est déjà fermé : l'ambre de --vedette dit
+   « à surveiller ». Il s'affiche en haut de l'accueil des volets, au-dessus des chiffres. */
+.avis-avenir {
+  background: var(--fond-2); border-left-color: var(--vedette);
+  margin: 26px 0 32px; padding: 16px 20px; max-width: 76ch;
+}
+.avis-avenir h2 {
+  margin: 0 0 9px; font-size: 16.5px; font-weight: 800; letter-spacing: -0.012em;
+  line-height: 1.3; color: var(--encre); text-transform: none;
+}
+.avis-avenir p { margin: 0 0 10px; line-height: 1.62; max-width: none; }
+.avis-avenir p:last-child { margin-bottom: 0; }
+.avis-avenir strong { color: var(--encre); }
+:root[data-theme="sombre"] .avis-avenir strong { color: var(--encre); }
+
 /* ---------- OUTILS ---------- */
 .barre-outils { display: flex; gap: 9px; flex-wrap: wrap; align-items: center; margin: 24px 0 10px; }
 input[type="search"], select {
   font: inherit; font-size: 14.5px; padding: 9px 13px;
   border: 1px solid var(--ligne-forte); background: var(--carte); color: var(--encre);
   border-radius: var(--rayon);
-  /* Un select prend par défaut la largeur de sa plus longue option : depuis l'arrivée des
-     dix-neuf arrondissements, « Conseil d'arrondissement de Villeray–Saint-Michel–Parc-
-     Extension » débordait de l'écran. Le menu déroulant, lui, s'ouvre à sa vraie largeur. */
-  max-width: 100%; text-overflow: ellipsis;
 }
 input[type="search"]:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
 input[type="search"] { flex: 1 1 260px; min-width: 200px; }
-/* display:flex l'emporte sur le display:none que le navigateur donne à [hidden] : sans
-   cette ligne, masquer la case avec l'attribut hidden n'a aucun effet. */
-.case[hidden] { display: none; }
 .case {
   font-size: 14px; color: var(--doux); display: flex; align-items: center; gap: 7px;
   white-space: nowrap; border: 1px solid var(--ligne-forte); background: var(--carte);
@@ -246,11 +251,13 @@ input[type="search"] { flex: 1 1 260px; min-width: 200px; }
   font-size: 11.5px; font-weight: 600; letter-spacing: 0.01em;
   padding: 3px 9px; border-radius: 100px;
   background: var(--fond-2); color: var(--doux); white-space: nowrap;
-  /* « Direction de la culture_des sports… » ne tient pas sur un téléphone, et les soulignés
-     empêchent toute coupure naturelle : sur petit écran la pastille passe à la ligne. */
   max-width: 100%; overflow-wrap: anywhere;
 }
-@media (max-width: 700px) { .puce { white-space: normal; } }
+/* ⚠️ APRÈS la règle de base, pas avant : à spécificité égale, la dernière règle écrite
+   gagne. Placée dans le bloc @media plus haut, cette dérogation était annulée par le
+   « nowrap » ci-dessus, et le nom d'instance le plus long (« Conseil de l'Arrondissement de
+   Sainte-Foy - Sillery - Cap-Rouge ») faisait glisser la page de côté sur un téléphone. */
+@media (max-width: 620px) { .puce { white-space: normal; } }
 .puce.num { font-family: ui-monospace, Consolas, monospace; font-size: 11px; background: var(--fond-2); color: var(--encre); }
 .puce.theme { color: #fff; font-weight: 700; }
 .puce.montant { background: var(--accent-fond); color: var(--accent-encre); font-weight: 700; }
@@ -397,6 +404,26 @@ code { font-family: ui-monospace, Consolas, monospace; font-size: 13px; backgrou
 .lien-section h3 { margin: 0 0 6px; font-size: 18px; font-weight: 700; letter-spacing: -0.015em; color: var(--accent); }
 .lien-section p { margin: 0; font-size: 14.5px; color: var(--doux); }
 
+
+/* « Offre-moi un café », au bas de l'accueil des volets (14 oct. 2026). Le même lien Stripe que
+   le pied de DossierQuébec. Une carte, une phrase, un bouton : on demande, on n'insiste pas. */
+.cafe {
+  background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon);
+  box-shadow: var(--ombre); padding: 22px 24px; margin: 46px 0 0; max-width: 76ch;
+}
+.cafe h2 {
+  margin: 0 0 7px; font-size: 19px; font-weight: 800; letter-spacing: -0.015em;
+  line-height: 1.25; color: var(--encre); text-transform: none;
+}
+.cafe p { margin: 0 0 15px; font-size: 14.5px; line-height: 1.6; color: var(--doux); }
+.bouton-cafe {
+  display: inline-block; font-weight: 700; font-size: 15px; text-decoration: none;
+  background: var(--accent); color: #FFFFFF; border-radius: var(--rayon); padding: 11px 19px;
+}
+.bouton-cafe:hover { background: var(--accent-encre); }
+/* Le vert du thème sombre est clair : le texte du bouton y passe en encre foncée. */
+:root[data-theme="sombre"] .bouton-cafe { color: #101419; }
+
 footer { border-top: 1px solid var(--ligne); margin-top: 52px; padding: 22px 0 0; font-size: 13.5px; color: var(--doux); }
 footer a { color: var(--doux); }
 
@@ -539,20 +566,6 @@ h2.section[class*="cat-"] {
   color: var(--entete-doux); font-variant-numeric: tabular-nums;
 }
 
-/* Montréal : les conseillères et conseillers d'arrondissement ne siègent pas au conseil
-   municipal. Même fiche, un peu en retrait, pour qu'on ne les confonde pas. */
-.elu.arrondissement-seulement { opacity: .82; }
-
-/* Montréal : les responsabilités publiées par la Ville font parfois une ligne entière
-   (« Responsable du développement de l'Est de Montréal, des relations internationales et
-   intergouvernementales… »). Une pastille qui refuse de se couper élargit la fiche à sa
-   propre largeur, et tous les titres sortent du cadre. Dans une fiche d'élu, les pastilles
-   se coupent, et la colonne de texte peut rétrécir. */
-.elu > div { min-width: 0; flex: 1 1 auto; }
-.elu .puce, .elu .meta { white-space: normal; }
-.elu .meta { flex-wrap: wrap; }
-.elu h3, .elu .district { overflow-wrap: anywhere; }
-
 /* ---------- LEXIQUE : catégories dépliantes ---------- */
 /* Le titre de catégorie est le bouton : details/summary natifs, donc clavier et lecteur
    d'écran sans JavaScript. Le chevron dit l'état ; le compte dit ce qu'on va trouver. */
@@ -594,6 +607,81 @@ h2.page[id], h1.page[id] { scroll-margin-top: 16px; }
 .haut.visible { opacity: 1; transform: none; pointer-events: auto; }
 .haut:hover { border-color: var(--accent); color: var(--accent); }
 
+/* ---------- FICHES D'ÉLUS : rien ne sort du cadre ---------- */
+/* Les pastilles longues (« Président de l'Arrondissement de … ») et les noms composés passent
+   à la ligne au lieu d'élargir la fiche et la page. */
+.elu > div { min-width: 0; flex: 1 1 auto; }
+.elu .puce, .elu .meta { white-space: normal; }
+.elu .meta { flex-wrap: wrap; }
+.elu h3, .elu .district { overflow-wrap: anywhere; }
+
+/* Lien sortant dans la navigation : même rangée, mais on dit qu'on quitte le site. */
+nav a.externe { color: var(--entete-doux); font-weight: 500; }
+nav a.externe span[aria-hidden] { font-size: 12px; margin-left: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* Le comité exécutif sur la page du conseil : la légende, la pastille et les responsabilités. */
+.legende-executif { border-left: 6px solid #FFD24D; padding: 10px 14px; margin: 10px 0 18px; }
+.puce.puce-executif { background: #FFD24D; color: #131313; border-color: #131313; font-weight: 700; }
+.elu .responsabilites { margin: 6px 0 0; font-size: 13px; line-height: 1.45; }
+
+/* Lien « propulsé par » DAFRSolution.com, surligné jaune (21 oct. 2026). */
+footer a.lien-dafr { color: inherit; }
+
+/* Les deux blocs de l avenir côte à côte (22 oct. 2026), l un sous l autre sur téléphone. */
+.avenir-duo { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; align-items: stretch; margin: 26px 0 32px; }
+.avenir-duo .avis-avenir { margin: 0; max-width: none; }
+
+/* Partager et soutenir, au bas de chaque décision dépliée (22 oct. 2026). */
+.fiche-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--ligne, rgba(127,127,127,.2)); }
+.fiche-actions-titre { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--encre-2, inherit); opacity: .75; }
+.fiche-bouton { font: inherit; font-size: 13px; padding: 5px 11px; border: 1px solid var(--ligne, rgba(127,127,127,.35)); border-radius: 6px; background: transparent; color: inherit; cursor: pointer; text-decoration: none; }
+.fiche-bouton:hover { border-color: currentColor; }
+.fiche-soutien { margin-left: auto; font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 6px; background: #B5D4F4; color: #0C447C; text-decoration: none; }
+.fiche-soutien:hover { background: #85B7EB; }
+@media (max-width: 600px) { .fiche-soutien { margin-left: 0; } }
+
+/* Bande du commanditaire sur l'accueil (6 nov. 2026). */
+.commandite { margin: 26px 0 32px; max-width: none; border-left-width: 4px; }
+.commandite p { margin: 0; font-size: 17px; }
+.commandite a { font-weight: 700; }
+.commandite .commandite-note { margin-top: 8px; font-size: 13px; opacity: .8; }
+.commandite .commandite-note a { font-weight: 400; }
+.commandite { display: flex; gap: 18px; align-items: flex-start; }
+.commandite-logo { flex: none; line-height: 0; }
+.commandite-logo img { width: 64px; height: 64px; }
+.commandite-texte p { font-size: 15px; }
+.commandite-texte p + p { margin-top: 6px; }
+.commandite .commandite-titre { font-size: 17px; }
+/* Un peu plus gros (Martin, 6 nov. 2026). */
+.commandite { gap: 22px; padding: 20px 24px; align-items: center; }
+.commandite-logo img { width: 96px; height: 96px; }
+.commandite-texte p { font-size: 16.5px; }
+.commandite .commandite-titre { font-size: 20px; }
+.commandite .commandite-note { font-size: 14px; }
+.commandite-liste { margin: 8px 0 4px; padding-left: 20px; font-size: 16px; line-height: 1.5; }
+.commandite-liste li + li { margin-top: 2px; }
+/* Mobile (8 nov. 2026) : logo au-dessus du texte, sinon il mange un tiers de la largeur. */
+@media (max-width: 600px) {
+  .commandite { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
+  .commandite-logo img { width: 56px; height: 56px; }
+  .commandite .commandite-titre { font-size: 18px; }
+  .commandite-texte p, .commandite-liste { font-size: 15px; }
+}
+
+/* ---------- PROPRE À LÉVIS ---------- */
+/* Un select prend par défaut la largeur de sa plus longue option : le nom d'instance le plus
+   long débordait de l'écran. Le menu déroulant, lui, s'ouvre à sa vraie largeur. */
+input[type="search"], select { max-width: 100%; text-overflow: ellipsis; }
+
+/* display:flex l'emporte sur le display:none que le navigateur donne à [hidden] : sans
+   cette ligne, masquer la case « Avec résumé seulement » avec l'attribut hidden n'a aucun effet. */
+.case[hidden] { display: none; }
+
 /* La légende qui explique l'absence de résumés : elle suit la ligne de comptage, donc elle
    se serre contre elle plutôt que de flotter comme un avis ordinaire. */
 .avis.legende-resume { margin: 4px 0 20px; font-size: 13.5px; line-height: 1.55; }
+
+/* Les membres des conseils d'arrondissement qui ne siègent pas au conseil de la Ville : même
+   fiche, un peu en retrait. */
+.elu.arrondissement-seulement { opacity: .82; }
