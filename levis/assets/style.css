@@ -696,3 +696,7 @@ input[type="search"], select { max-width: 100%; text-overflow: ellipsis; }
 .commandite-image .commandite-note { text-align: center; }
 .commandite-image .commandite-titre { display: none; }
 .commandite-image .commandite-note { margin-top: 8px; }
+/* Bannière (Martin, 8 nov. 2026) : bande noire pleine largeur, l'image au centre, comme un repère visuel. */
+.commandite-image .commandite-logo { background: #000; border-radius: 12px; padding: 12px 0; }
+.commandite-image .commandite-logo img { max-width: none; width: auto; height: 260px; border-radius: 0; }
+@media (max-width: 600px) { .commandite-image .commandite-logo img { height: auto; width: 100%; max-width: 320px; } }
