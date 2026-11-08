@@ -707,3 +707,5 @@ input[type="search"], select { max-width: 100%; text-overflow: ellipsis; }
 :root[data-theme="sombre"] .commandite-image .ca-sombre { display: block !important; }
 /* Plus large (Martin, 8 nov. 2026). */
 .commandite-image .commandite-logo img { height: auto; width: 100%; max-width: 520px; }
+/* Version large (Martin, 8 nov. 2026) : toute la largeur de la colonne. */
+.commandite-image .commandite-logo img { max-width: 100%; }
