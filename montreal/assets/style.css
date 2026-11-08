@@ -721,3 +721,10 @@ footer a.lien-dafr { color: inherit; }
 .commandite .commandite-note { font-size: 14px; }
 .commandite-liste { margin: 8px 0 4px; padding-left: 20px; font-size: 16px; line-height: 1.5; }
 .commandite-liste li + li { margin-top: 2px; }
+/* Mobile (8 nov. 2026) : logo au-dessus du texte, sinon il mange un tiers de la largeur. */
+@media (max-width: 600px) {
+  .commandite { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
+  .commandite-logo img { width: 56px; height: 56px; }
+  .commandite .commandite-titre { font-size: 18px; }
+  .commandite-texte p, .commandite-liste { font-size: 15px; }
+}
