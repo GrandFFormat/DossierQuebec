@@ -685,3 +685,7 @@ input[type="search"], select { max-width: 100%; text-overflow: ellipsis; }
 /* Les membres des conseils d'arrondissement qui ne siègent pas au conseil de la Ville : même
    fiche, un peu en retrait. */
 .elu.arrondissement-seulement { opacity: .82; }
+
+/* Image du commanditaire anonyme (8 nov. 2026) : plus grande que les logos, coins arrondis. */
+.commandite-image .commandite-logo img { width: 200px; height: auto; border-radius: 10px; }
+@media (max-width: 600px) { .commandite-image .commandite-logo img { width: 100%; max-width: 280px; } }
