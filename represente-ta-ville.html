@@ -300,13 +300,14 @@ var RTV_VILLES3 = { on: [["Whitchurch-Stouffville",49864,50],["Haldimand County"
 var RTV_NOMS = { on: ['Les villes de l’Ontario de 50 000 habitants et plus', 'Ontario cities of 50,000 people or more'], sk: ['Les 15 plus grandes villes de la Saskatchewan', 'The 15 largest cities in Saskatchewan'], nb: ['Les 15 plus grandes villes du Nouveau-Brunswick', 'The 15 largest cities in New Brunswick'] };
 // En rouge : villes qui bloquent l'accès à leurs procès-verbaux (robots.txt, mur anti-robot ou rien de publié) ;
 // on leur écrit avant de les mettre en ligne (Martin, 8 nov. 2026).
+// Ontario, 3e liste : robots.txt qui exclut ClaudeBot (dont les 30 villes sur CivicWeb) ou mur Cloudflare (Uxbridge) (8 nov. 2026).
 // Ontario : London interdit les robots dans ses conditions d'utilisation (8 nov. 2026).
-var RTV_BLOQUEES = { nb: ['Dieppe', 'Riverview', 'Miramichi'], on: ['London'] };
+var RTV_BLOQUEES = { nb: ['Dieppe', 'Riverview', 'Miramichi'], on: ['London', 'Whitchurch-Stouffville', 'Quinte West', 'New Tecumseth', 'Innisfil', 'Timmins', 'East Gwillimbury', 'Centre Wellington', 'King', 'Prince Edward County', 'Oro-Medonte', 'Brockville', 'Springwater', 'Uxbridge', 'Huntsville', 'Russell', 'Petawawa', 'North Grenville', 'Loyalist', 'Greater Napanee', 'St. Clair', 'Severn', 'Trent Hills', 'Central Elgin', 'Ingersoll', 'Gravenhurst', 'Tiny', 'Brighton', 'Erin', 'Meaford', 'Norwich', 'Tay', 'Hamilton Township', 'Adjala-Tosorontio', 'Grey Highlands', 'Ramara'] };
 // Barrées : rien à travailler (Shediac ne publie plus depuis 2023, page vide à Campbellton, rien de Cap-Acadie depuis avril 2023).
 // Cap-Acadie = Beaubassin East + Cap-Pelé, fusionnées le 1er janv. 2023 : 6 718 + 2 441 au recensement de 2021 (Martin, 8 nov. 2026).
 var RTV_BARREES = { nb: ['Shediac', 'Campbellton', 'Cap-Acadie'] };
 // En jaune : conditions d'utilisation qui exigent une permission écrite (Martin, 8 nov. 2026).
-var RTV_PERMISSION = { on: ['Toronto', 'Ottawa', 'Mississauga', 'Vaughan', 'Windsor', 'Oakville', 'Richmond Hill', 'Burlington', 'Oshawa'], sk: ['Yorkton'], nb: ['Moncton', 'Fredericton', 'Rothesay'] };
+var RTV_PERMISSION = { on: ['Toronto', 'Ottawa', 'Mississauga', 'Vaughan', 'Windsor', 'Oakville', 'Richmond Hill', 'Burlington', 'Oshawa', 'Grimsby', 'Wasaga Beach', 'Middlesex Centre', 'Pelham', 'Kenora', 'Wellesley'], sk: ['Yorkton'], nb: ['Moncton', 'Fredericton', 'Rothesay'] };
 // En gris : procès-verbaux archaïques (PDF numérisés, sans texte ou OCR bruité).
 var RTV_ARCHAIQUES = { nb: ['Edmundston', 'Oromocto'] };
 var rtvProvince = (new URLSearchParams(location.search).get('province') || '').toLowerCase();
