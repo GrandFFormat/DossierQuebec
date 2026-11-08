@@ -81,7 +81,6 @@
   <div class="contenu">
     <div class="titre-ligne">
       <a href="./"><h1>Dossier<span class="marque">VilleDeLévis</span></h1></a><a class="lien-dq" href="/" title="DossierQuébec — l'Assemblée nationale en clair" aria-label="DossierQuébec — l'Assemblée nationale en clair" data-en-title="DossierQuébec — Quebec's National Assembly in plain language" data-en-aria-label="DossierQuébec — Quebec's National Assembly in plain language"></a>
-      <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
       <details class="ab-villes" id="villes"></details>
     </div>
     <p class="sous-titre">
@@ -94,7 +93,7 @@
       <a href="votes-nominatifs-du-conseil-de-levis">Votes nominatifs</a>
       <a href="conseil-municipal-de-levis">Conseil municipal</a>
       <a href="lexique-municipal-de-levis">Lexique</a>
-      <a href="https://levis.ca/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Lévis (nouvel onglet)">Ville de Lévis ↗</a>
+      <a href="https://levis.ca/" class="externe" target="_blank" rel="noopener">Ville de Lévis <span aria-hidden="true">↗</span><span class="sr-only"> (site officiel, nouvel onglet)</span></a>
       <div class="outils">
         <div class="taille-texte" role="group" aria-label="Taille du texte">
           <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
@@ -111,9 +110,18 @@
 <main class="contenu">
   <div id="chargement" class="avis">Chargement des données…</div>
 
+  <!-- Commanditaire du volet (8 nov. 2026) : anonyme, à sa demande, donc ni logo ni lien.
+       Même bande que le volet Québec. Une autre ville commanditée : /represente-ta-ville. -->
+  <section class="avis commandite">
+    <div class="commandite-texte">
+      <p class="commandite-titre">Le compte rendu de cette ville vous est gracieusement offert par un commanditaire qui a choisi de rester anonyme.</p>
+      <p class="commandite-note">Le commanditaire n'a aucun droit de regard sur le contenu. · <a href="/represente-ta-ville">Vous voulez représenter votre ville ?</a></p>
+    </div>
+  </section>
+
   <div class="chiffres" id="chiffres"></div>
 
-  <h2 class="page" id="titre-fil">Ce qui a changé</h2>
+  <h2 class="page" id="titre-fil">Activité récente</h2>
   <div id="fil"></div>
   <button class="plus" id="plus-fil" hidden>Afficher plus</button>
   <p style="margin-top:14px">
@@ -137,7 +145,7 @@
     </a>
     <a class="lien-section" href="sources-des-donnees-de-levis">
       <h3>Sources et limites</h3>
-      <p>D'où viennent les données, comment elles sont obtenues, et ce que ce prototype ne fait pas encore.</p>
+      <p>D'où viennent les données, comment elles sont obtenues, et ce que le site ne fait pas encore.</p>
     </a>
   </div>
 
@@ -149,7 +157,7 @@
   <div class="contenu">
     <p>Site citoyen indépendant. Aucun lien avec la Ville de Lévis, aucun caractère officiel.
     En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees-de-levis">Sources</a>.</p>
-    <p class="lien-dq-pied"><a href="/" data-en="DossierQuébec — Québec's National Assembly in plain language">DossierQuébec — l'Assemblée nationale en clair</a> · <a href="/regles" data-en="The rules of the site">Les règles du site</a></p>
+    <p class="lien-dq-pied"><a href="/" data-en="DossierQuébec — Québec's National Assembly in plain language">DossierQuébec — l'Assemblée nationale en clair</a> · <a href="/regles" data-en="The rules of the site">Les règles du site</a> · <span data-en="Powered by">Une réalisation de</span> <a class="lien-dafr" href="https://www.dafrsolution.com" data-en-href="https://www.dafrsolution.com/en" target="_blank" rel="noopener">DAFR Solution</a></p>
   </div>
 </footer>
 
