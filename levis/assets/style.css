@@ -700,3 +700,8 @@ input[type="search"], select { max-width: 100%; text-overflow: ellipsis; }
 .commandite-image .commandite-logo { background: #000; border-radius: 12px; padding: 12px 0; }
 .commandite-image .commandite-logo img { max-width: none; width: auto; height: 260px; border-radius: 0; }
 @media (max-width: 600px) { .commandite-image .commandite-logo img { height: auto; width: 100%; max-width: 320px; } }
+/* Sans bloc noir (Martin, 8 nov. 2026) : silhouettes noires en thème clair, blanches en thème sombre. */
+.commandite-image .commandite-logo { background: none; padding: 0; }
+.commandite-image .ca-sombre { display: none !important; }
+:root[data-theme="sombre"] .commandite-image .ca-clair { display: none !important; }
+:root[data-theme="sombre"] .commandite-image .ca-sombre { display: block !important; }
