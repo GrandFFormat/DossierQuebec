@@ -689,3 +689,10 @@ input[type="search"], select { max-width: 100%; text-overflow: ellipsis; }
 /* Image du commanditaire anonyme (8 nov. 2026) : plus grande que les logos, coins arrondis. */
 .commandite-image .commandite-logo img { width: 200px; height: auto; border-radius: 10px; }
 @media (max-width: 600px) { .commandite-image .commandite-logo img { width: 100%; max-width: 280px; } }
+/* Sans cadre (Martin, 8 nov. 2026) : l'image seule, à pleine largeur de la colonne. */
+.commandite.commandite-image { background: none; border: 0; padding: 0; display: block; }
+.commandite-image .commandite-logo { display: block; }
+.commandite-image .commandite-logo img { width: 100%; max-width: 360px; height: auto; border-radius: 12px; display: block; margin: 0 auto; }
+.commandite-image .commandite-note { text-align: center; }
+.commandite-image .commandite-titre { display: none; }
+.commandite-image .commandite-note { margin-top: 8px; }
