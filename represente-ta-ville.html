@@ -296,7 +296,8 @@ var RTV_VILLES = {"on":[["Toronto",2794356,500],["Ottawa",1017449,500],["Mississ
 var RTV_NOMS = { on: ['Les villes de l’Ontario de 50 000 habitants et plus', 'Ontario cities of 50,000 people or more'], sk: ['Les 15 plus grandes villes de la Saskatchewan', 'The 15 largest cities in Saskatchewan'], nb: ['Les 15 plus grandes villes du Nouveau-Brunswick', 'The 15 largest cities in New Brunswick'] };
 // En rouge : villes qui bloquent l'accès à leurs procès-verbaux (robots.txt, mur anti-robot ou rien de publié) ;
 // on leur écrit avant de les mettre en ligne (Martin, 8 nov. 2026).
-var RTV_BLOQUEES = { nb: ['Dieppe', 'Riverview', 'Miramichi'] };
+// Ontario : London interdit les robots dans ses conditions d'utilisation (8 nov. 2026).
+var RTV_BLOQUEES = { nb: ['Dieppe', 'Riverview', 'Miramichi'], on: ['London'] };
 // Barrées : rien à travailler (Shediac ne publie plus depuis 2023, page vide à Campbellton, rien de Cap-Acadie depuis avril 2023).
 // Cap-Acadie = Beaubassin East + Cap-Pelé, fusionnées le 1er janv. 2023 : 6 718 + 2 441 au recensement de 2021 (Martin, 8 nov. 2026).
 var RTV_BARREES = { nb: ['Shediac', 'Campbellton', 'Cap-Acadie'] };
