@@ -2,7 +2,7 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit d039d15 — Node v22.23.4
+Code : commit f40053c — Node v22.23.4
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -13,7 +13,7 @@ https://donnees.montreal.ca/robots.txt : règles sur nos chemins : disallow /dat
 https://montreal.ca/robots.txt : rien qui concerne nos chemins
 
 === Calendrier des séances ===
-Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-11-06T23:30:49.031611)
+Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-11-07T23:30:47.648865)
 Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_video_seance
 75 séance(s) de 2026 lue(s) dans le calendrier.
 
@@ -115,8 +115,8 @@ Pastilles thématiques :
     104  Ressources humaines
     243  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes enregistrés (depuis 2026-09-08) ===
-Fenêtre depuis 2026-09-08 : 3 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
+=== Votes enregistrés (depuis 2026-09-09) ===
+Fenêtre depuis 2026-09-09 : 3 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
 
 17 votes enregistrés écrits dans data/votes.json (3 procès-verbaux analysés).
 2 portent un avertissement d'extraction (à vérifier à la main).
@@ -180,7 +180,7 @@ Résumés : 3753 déjà traduits, 934 à faire, 934 cette fois.
 Titres  : 6078 déjà traduits, 975 à faire, 975 cette fois en 49 paquet(s).
 Étiquettes : 1121 déjà traduites, 194 à faire en 7 paquet(s).
 ~2.80 $ US estimés (lot, moitié prix).
-Lot msgbatch_01F8M8WR6ePEE14njVrDEF91 envoyé (934 résumés, 49 paquets de titres, 7 paquets d'étiquettes).
+Lot msgbatch_01LYEdVA5Xb3vY14rXVXR5aA envoyé (934 résumés, 49 paquets de titres, 7 paquets d'étiquettes).
   in_progress — 0 réussis, 990 en cours, 0 en erreur
   in_progress — 0 réussis, 990 en cours, 0 en erreur
   in_progress — 0 réussis, 990 en cours, 0 en erreur
@@ -203,7 +203,7 @@ Node.js v22.23.4
 ⚠ « Traductions anglaises » a échoué (code 1) — on garde les données précédentes, ça attendra.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-09-08 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-09-09 pas encore résumés (plafond : 120)…
 8990 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
