@@ -2732,6 +2732,14 @@ body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
 .rtv-villes tr.rtv-permission td{background:#FFF3B0; color:#131313; font-weight:700;}
 .rtv-permission-legende{display:block; margin-top:4px; font-size:13px; font-weight:600;}
 .rtv-permission-legende::before{content:""; display:inline-block; width:10px; height:10px; margin-right:6px; background:#FFD24D; border:1px solid currentColor;}
+/* Menu en volets de /represente-ta-ville (Martin, 8 nov. 2026). */
+.rtv-menu{border-top:2px solid currentColor; padding:4px 0;}
+.rtv-menu:last-of-type{border-bottom:2px solid currentColor;}
+.rtv-menu-titre{cursor:pointer; font-weight:800; font-size:18px; padding:10px 0; list-style:none; display:flex; justify-content:space-between; align-items:center;}
+.rtv-menu-titre::-webkit-details-marker{display:none;}
+.rtv-menu-titre::after{content:"+"; font-size:22px; line-height:1;}
+.rtv-menu[open] > .rtv-menu-titre::after{content:"−";}
+.rtv-menu > :not(summary){margin-left:0;}
 .rtv-louee{display:inline-block; margin-left:6px; padding:0 6px; font-size:12px; font-weight:700; background:#131313; color:#fff;}
 .rtv-locations{margin:18px 0 6px;}
 .rtv-villes tr.rtv-archaique td{color:#8a94a0;}
