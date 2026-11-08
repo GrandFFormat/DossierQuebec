@@ -705,3 +705,5 @@ input[type="search"], select { max-width: 100%; text-overflow: ellipsis; }
 .commandite-image .ca-sombre { display: none !important; }
 :root[data-theme="sombre"] .commandite-image .ca-clair { display: none !important; }
 :root[data-theme="sombre"] .commandite-image .ca-sombre { display: block !important; }
+/* Plus large (Martin, 8 nov. 2026). */
+.commandite-image .commandite-logo img { height: auto; width: 100%; max-width: 520px; }
