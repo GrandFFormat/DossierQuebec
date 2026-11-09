@@ -730,3 +730,6 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 .merci-commanditaire p { margin: 0; }
 .merci-commanditaire a { font-weight: 700; }
 .merci-commanditaire img { display: block; width: 96px; height: 96px; background: #fff; padding: 6px; border-radius: 4px; }
+
+/* Thème sombre : une ligne claire en haut de chaque fiche pour suivre la liste (Martin, 9 nov. 2026). */
+:root[data-theme="sombre"] .carte { border-top: 2px solid rgba(255, 255, 255, .55); }
