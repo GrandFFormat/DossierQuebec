@@ -156,6 +156,7 @@ function remplirSelect(select, valeurs) {
 // sommaire explique le pourquoi, la résolution ne dit que le quoi. Une décision peut
 // avoir les deux (lot Grok d'après la résolution, puis lecture des sommaires annexés).
 function resumePour(d) {
+  if (d.theme === 'procedure') return null;   // résumés de procédure masqués : jamais rien d'utile (Martin, 9 nov. 2026)
   const viaSommaire = d.sommaireId ? etat.parId.get(d.sommaireId) : null;
   if (viaSommaire) return { r: viaSommaire, indirect: viaSommaire.id !== d.id };
   const direct = etat.parId.get(d.id);

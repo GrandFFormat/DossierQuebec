@@ -94,6 +94,7 @@ function remplirSelect(select, valeurs) {
 // cas, une séance d'arrondissement — qui ne contient que des résolutions — n'afficherait
 // aucun résumé, alors que la matière existe.
 function resumePour(d) {
+  if (d.theme === 'procedure') return null;   // résumés de procédure masqués : jamais rien d'utile (Martin, 9 nov. 2026)
   const direct = etat.parId.get(d.id);
   if (direct) return { r: direct, indirect: false };
   const viaSommaire = d.sommaireId ? etat.parId.get(d.sommaireId) : null;
