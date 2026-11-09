@@ -193,7 +193,7 @@ function blocDispositif(paragraphes) {
   </div>`;
 }
 
-function carteDecision(d) {
+function carteDecision(d, ouverte = false) {
   const entete = `<div class="meta">
       ${puceTheme(d.theme)}
       ${d.numero ? `<span class="puce num">${echapper(d.numero)}</span>` : ''}
@@ -220,7 +220,7 @@ function carteDecision(d) {
   // Espace abonnés (/commun/abonnes.js) : « Suivre ce dossier » et le détail de l'argent. La clé
   // de dossier suit la décision d'une instance à l'autre.
   // Un procès-verbal ou un ordre du jour n'est pas un dossier : rien à suivre.
-  if (d.type === 'Procès-verbal' || d.type === 'Ordre du jour') return carteRepliable(entete, corps);
+  if (d.type === 'Procès-verbal' || d.type === 'Ordre du jour') return carteRepliable(entete, corps, ouverte);
   // Comme à Québec : « Décision finale » ou « Suivre », les projets, et data-montant quand le
   // résumé a trouvé un montant (un abonné peut alors demander le détail de l'argent).
   const projets = (d.projets ?? []).map((cle) => ({ cle, titre: etat.decisions?.projets?.[cle]?.titre ?? cle }));
@@ -228,7 +228,7 @@ function carteDecision(d) {
   const abonnes = `<div class="ab-fiche" data-dossier="${echapper(d.dossier ?? d.id)}" data-numero="${echapper(d.numero ?? '')}" data-objet="${echapper((d.objet ?? '').slice(0, 300))}" data-montant="${resume?.montantPrincipal && !resume.sansContenuSubstantiel ? 1 : 0}"
     data-statut="${echapper(d.statutDossier ?? '')}" data-etape="${echapper(d.etapeFinale ?? '')}" data-echeance="${echapper(d.echeance ?? '')}"
     data-projets="${echapper(JSON.stringify(projets))}"></div>`;
-  return carteRepliable(entete, corps + abonnes);
+  return carteRepliable(entete, corps + abonnes, ouverte);
 }
 
 function decisionsFiltrees() {
@@ -284,7 +284,7 @@ function rendreDecisions() {
     const groupes = grouperParSeance(filtrees);
     const montres = groupes.slice(0, etat.limiteSeances);
     $('#liste-decisions').innerHTML = montres.length
-      ? montres.map(rendreSeance).join('')
+      ? montres.map((g, i) => rendreSeance(g, i === 0)).join('')
       : '<p class="vide">Aucune décision ne correspond.</p>';
     reste = groupes.length - montres.length;
     $('#plus-decisions').hidden = reste <= 0;
@@ -340,15 +340,19 @@ function grouperParSeance(decisions) {
 //
 // Pas d'accordéon ici, contrairement aux fiches : on veut pouvoir comparer deux séances
 // côte à côte, alors qu'empiler quinze décisions dépliées n'aide personne.
-function rendreSeance(g) {
-  return `<details class="seance">
+//
+// 9 nov. 2026 (Martin) : la première séance est ouverte au chargement ; dans chaque séance, les
+// décisions qui ont un résumé IA passent en tête, et la première s'ouvre avec sa séance.
+function rendreSeance(g, ouverte = false) {
+  const lignes = [...g.lignes.filter((d) => resumePour(d)), ...g.lignes.filter((d) => !resumePour(d))];
+  return `<details class="seance"${ouverte ? ' open' : ''}>
       <summary class="seance-entete">
         <h3>${echapper(g.instance)}</h3>
         <span class="seance-date">${dateFr(g.date)}</span>
         <span class="puce">${g.lignes.length} décision${g.lignes.length > 1 ? 's' : ''}</span>
         ${g.tronquee ? '<span class="puce procedural">journée partiellement chargée</span>' : ''}
       </summary>
-      <div class="seance-corps">${g.lignes.map(carteDecision).join('')}</div>
+      <div class="seance-corps">${lignes.map((d, i) => carteDecision(d, ouverte && i === 0 && Boolean(resumePour(d)))).join('')}</div>
     </details>`;
 }
 
@@ -1031,6 +1035,15 @@ if (existe('#plus-decisions')) {
     etat.limiteSeances += PAS_SEANCES;
     rendreDecisions();
   });
+}
+// Ouvrir une séance ouvre aussi sa première décision, si elle porte un résumé IA (9 nov. 2026).
+if (existe('#liste-decisions')) {
+  $('#liste-decisions').addEventListener('toggle', (ev) => {
+    const s = ev.target;
+    if (!s.classList?.contains('seance') || !s.open) return;
+    const premiere = s.querySelector('.seance-corps > details.carte');
+    if (premiere && premiere.querySelector('.resume, [class*="resume"]')) premiere.open = true;
+  }, true);
 }
 if (existe('#plus-fil')) {
   $('#plus-fil').addEventListener('click', () => {
