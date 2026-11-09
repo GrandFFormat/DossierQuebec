@@ -211,7 +211,8 @@ async function candidats({ depuis = null, plafond = Infinity, cache }) {
   const textes = (await lireJsonSansEchec(TEXTES))?.textes ?? {};
   const resolues = new Set([...parDossier.keys(), ...docs.map((x) => x.id)]);
   const sansSommaire = (decisions ?? [])
-    .filter((d) => d.type === 'Résolution' && !d.sommaireId && !resolues.has(d.dossier) && !cache.has(d.id) && (!depuis || (d.date ?? '') >= depuis))
+    // Pas de résumé pour les points de procédure : jamais rien d'utile (Martin, 9 nov. 2026).
+    .filter((d) => d.type === 'Résolution' && d.theme !== 'procedure' && !d.sommaireId && !resolues.has(d.dossier) && !cache.has(d.id) && (!depuis || (d.date ?? '') >= depuis))
     .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
   for (const d of sansSommaire) {
     if (docs.length >= plafond) break;
