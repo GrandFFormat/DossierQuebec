@@ -359,7 +359,8 @@ function rendreSeance(g, ouverte = false) {
   const estProcedure = (d) => !resumePour(d);   // 9 nov. 2026 (Martin) : tout ce qui n'a pas de résumé, pas seulement la procédure
   const procedure = g.lignes.filter(estProcedure);
   const autres = g.lignes.filter((d) => !estProcedure(d));
-  const lignes = [...autres.filter((d) => resumePour(d)), ...autres.filter((d) => !resumePour(d))];
+  // Les points de procédure, même résumés, passent sous les vraies décisions (Martin, 9 nov. 2026).
+  const lignes = [...autres.filter((d) => d.theme !== 'procedure'), ...autres.filter((d) => d.theme === 'procedure')];
   const carte = (d, i) => carteDecision(d, ouverte && i === 0 && Boolean(resumePour(d)));
   const blocProcedure = procedure.length
     ? `<details class="seance-procedure"><summary>${tr(
