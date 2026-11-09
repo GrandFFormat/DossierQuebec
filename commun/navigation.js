@@ -10,7 +10,7 @@ export { EN, tr } from './langue.js';
 
 // Les villes couvertes : clé du sous-dossier → nom. La marque d'un volet en découle
 // (« DossierVilleDeQuébec »).
-export const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis' };   // Lévis au menu le 9 nov. 2026 (Martin) ; robot et sitemap encore en pause
+export const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis' };   // Lévis rallumé le 9 nov. 2026 : premier commanditaire
 
 // LES VOLETS EN PAUSE (Martin, 7 oct. 2026 : arrêter les scripts de Lévis, Longueuil et Laval et les
 // retirer de la liste « pour l'instant », pour ne plus dépenser là-dessus). Leurs pages restent en
@@ -20,7 +20,6 @@ export const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis
 // de scripts/build-llms.js, dans les deux listes de gabarit.html, et rendre son `schedule` au
 // workflow .github/workflows/refresh-villede<ville>.yml.
 export const VILLES_EN_PAUSE = {
-  levis: { nom: 'Lévis', depuis: '2026-11-09', sansAvis: true },   // données rattrapées le 9 nov. ; avis retiré (Martin), toujours hors menus
   longueuil: { nom: 'Longueuil', depuis: '2026-10-07' },
   laval: { nom: 'Laval', depuis: '2026-10-07' },
 };
@@ -39,7 +38,7 @@ export const VILLES_EN_PAUSE = {
 // pas les octets, c'est que des erreurs permanentes dans la console masquent celles qui comptent.
 //
 // À faire quand un volet reçoit son scripts/projets-publics.js : ajouter sa clé ici.
-export const VILLES_PROJETS = ['quebec', 'montreal'];   // levis, longueuil, laval : en pause (VILLES_EN_PAUSE)
+export const VILLES_PROJETS = ['quebec', 'montreal', 'levis'];   // longueuil, laval : en pause (VILLES_EN_PAUSE)
 
 // Les volets traduits en anglais (data/resumes-en.json). Lévis n'y est pas encore : sa liste
 // est donc plus courte que celle du dessus, et pas une copie.
@@ -48,7 +47,7 @@ export const VILLES_EN = ['quebec', 'montreal'];
 // Les volets qui annoncent les décisions À VENIR (data/attendues.json). Encore un autre
 // ensemble : Montréal n'y est pas, alors qu'il est dans les deux listes précédentes. Chaque
 // fonction a été bâtie volet par volet ; ces trois listes disent l'état réel, pas un idéal.
-export const VILLES_ATTENDUES = ['quebec'];   // levis : en pause (VILLES_EN_PAUSE)
+export const VILLES_ATTENDUES = ['quebec', 'levis'];
 
 export const echapper = (s) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

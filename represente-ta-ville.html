@@ -326,8 +326,8 @@ var RTV_PERMISSION = { on: ['Toronto', 'Ottawa', 'Mississauga', 'Vaughan', 'Wind
 var RTV_ARCHAIQUES = { nb: ['Edmundston', 'Oromocto'] };
 // Villes louées (registre public, Martin 8 nov. 2026) : [ville, province, fin AAAA-MM-JJ].
 // Ajouter une ligne à chaque entente ; la ville reçoit aussi l'étiquette « louée » dans sa liste.
-// Lévis : entente signée, à ajouter au lancement du volet (fin = lancement + 12 mois).
-var RTV_LOUEES = [];
+// Lévis : lancé le 9 nov. 2026, 12 mois.
+var RTV_LOUEES = [['Lévis', 'Québec', '2027-11-08']];
 var rtvProvince = (new URLSearchParams(location.search).get('province') || '').toLowerCase();
 // Dossier Canada montre la même liste que l'Ontario (Martin, 7 nov. 2026).
 var rtvListe = rtvProvince === 'ca' ? 'on' : rtvProvince;
@@ -468,6 +468,7 @@ async function rtvEnvoyer(f){
     <span class="footer-nav-villes"><span data-i18n="footer.villes">Villes :</span>
       <a href="/quebec/">Québec</a>
       <a href="/montreal/">Montréal</a>
+      <a href="/levis/">Lévis</a>
     </span>
   </nav>
   <div class="footer-inner">
