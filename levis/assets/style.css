@@ -720,3 +720,7 @@ input[type="search"], select { max-width: 100%; text-overflow: ellipsis; }
 .seance-procedure { margin-top: 10px; border: 1px dashed currentColor; border-radius: 8px; padding: 8px 12px; opacity: .85; }
 .seance-procedure > summary { cursor: pointer; font-weight: 600; font-size: 14px; }
 .seance-procedure[open] > summary { margin-bottom: 8px; }
+
+/* « Avec résumé seulement » en vert, la couleur des résumés IA (Martin, 9 nov. 2026). */
+label.case:has(#filtre-resume) { color: #fff; background: #0B8A4B; border: 2px solid #0B8A4B; border-radius: 6px; padding: 6px 10px; font-weight: 700; cursor: pointer; }
+label.case:has(#filtre-resume) input { accent-color: #fff; }
