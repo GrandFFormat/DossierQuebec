@@ -20,7 +20,7 @@ export const VILLES = { quebec: 'Québec', montreal: 'Montréal' };
 // de scripts/build-llms.js, dans les deux listes de gabarit.html, et rendre son `schedule` au
 // workflow .github/workflows/refresh-villede<ville>.yml.
 export const VILLES_EN_PAUSE = {
-  levis: { nom: 'Lévis', depuis: '2026-10-07' },
+  levis: { nom: 'Lévis', depuis: '2026-11-09' },
   longueuil: { nom: 'Longueuil', depuis: '2026-10-07' },
   laval: { nom: 'Laval', depuis: '2026-10-07' },
 };
