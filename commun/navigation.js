@@ -20,7 +20,7 @@ export const VILLES = { quebec: 'Québec', montreal: 'Montréal' };
 // de scripts/build-llms.js, dans les deux listes de gabarit.html, et rendre son `schedule` au
 // workflow .github/workflows/refresh-villede<ville>.yml.
 export const VILLES_EN_PAUSE = {
-  levis: { nom: 'Lévis', depuis: '2026-11-09' },
+  levis: { nom: 'Lévis', depuis: '2026-11-09', sansAvis: true },   // données rattrapées le 9 nov. ; avis retiré (Martin), toujours hors menus
   longueuil: { nom: 'Longueuil', depuis: '2026-10-07' },
   laval: { nom: 'Laval', depuis: '2026-10-07' },
 };
@@ -106,7 +106,7 @@ export function menuVilles(details, villeActuelle) {
 // liraient comme des données du jour. Il masque aussi l'inscription au courriel de la ville.
 function avisPause() {
   const p = VILLES_EN_PAUSE[document.body.dataset.ville ?? ''];
-  if (!p || document.getElementById('avis-pause')) return;
+  if (!p || p.sansAvis || document.getElementById('avis-pause')) return;
   const jour = new Date(p.depuis + 'T12:00:00').toLocaleDateString(EN ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'long', year: 'numeric' });
   const avis = document.createElement('div');
   avis.id = 'avis-pause';
