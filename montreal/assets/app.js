@@ -24,7 +24,7 @@ const PAS_SEANCES = 8; // séances affichées par palier, en mode groupé
 // écran sert à décider si on veut lire, les suivants à lire pour vrai.
 const PAS_VOTES_DEPART = 5;
 const PAS_VOTES = 10;
-const PAS_FIL = 5; // éléments du fil d'accueil par palier
+const PAS_FIL = 3; // éléments du fil d'accueil (9 nov. 2026 : 3, puis le bouton mène à la page Décisions)
 // Dans une séance, les dix premières décisions, puis un dépliant pour le reste : une séance
 // de Ville-Marie en compte cinquante-huit, et cinquante-huit fiches d'affilée sont un mur.
 const PAR_SEANCE_DEPART = 10;
@@ -297,11 +297,11 @@ function copierLienFiche(b) {
 }
 window.copierLienFiche = copierLienFiche;
 
-function carteRepliable(entete, corps) {
-  return `<details class="carte pliante" name="${NOM_ACCORDEON}"><summary>${entete}</summary><div class="corps">${corps}</div></details>`;
+function carteRepliable(entete, corps, ouverte = false) {
+  return `<details class="carte pliante"${ouverte ? ' open' : ''} name="${NOM_ACCORDEON}"><summary>${entete}</summary><div class="corps">${corps}</div></details>`;
 }
 
-function carteDecision(d) {
+function carteDecision(d, ouverte = false) {
   const entete = `<div class="meta">
       ${puceTheme(d.theme)}
       ${d.numero ? `<span class="puce num">${echapper(d.numero)}</span>` : ''}
@@ -326,9 +326,9 @@ function carteDecision(d) {
   // Espace abonnés (/commun/abonnes.js) : « Suivre ce dossier » et le détail de l'argent. La clé
   // de dossier suit la décision d'une instance à l'autre.
   // Un procès-verbal ou un ordre du jour n'est pas un dossier : rien à suivre.
-  if (d.type === 'Procès-verbal' || d.type === 'Ordre du jour') return carteRepliable(entete, corps);
+  if (d.type === 'Procès-verbal' || d.type === 'Ordre du jour') return carteRepliable(entete, corps, ouverte);
   const abonnes = `<div class="ab-fiche" data-dossier="${echapper(d.dossier ?? d.id)}" data-numero="${echapper(d.numero ?? '')}" data-objet="${echapper((d.objet ?? '').slice(0, 300))}"></div>`;
-  return carteRepliable(entete, corps + abonnes);
+  return carteRepliable(entete, corps + abonnes, ouverte);
 }
 
 // Le total honnête : les résolutions seules. `nombre` compte aussi les fiches de
@@ -412,7 +412,7 @@ function rendreDecisions() {
     const groupes = grouperParSeance(filtrees);
     const montres = groupes.slice(0, etat.limiteSeances);
     $('#liste-decisions').innerHTML = montres.length
-      ? montres.map(rendreSeance).join('')
+      ? montres.map((g, i) => rendreSeance(g, i === 0)).join('')
       : `<p class="vide">${tr('Aucune décision ne correspond.', 'No decisions match.')}</p>`;
     reste = groupes.length - montres.length;
     $('#plus-decisions').hidden = reste <= 0;
@@ -469,8 +469,24 @@ function grouperParSeance(decisions) {
 //
 // Pas d'accordéon ici, contrairement aux fiches : on veut pouvoir comparer deux séances
 // côte à côte, alors qu'empiler quinze décisions dépliées n'aide personne.
-function rendreSeance(g) {
-  return `<details class="seance">
+//
+// 9 nov. 2026 (Martin) : la première séance est ouverte au chargement ; dans chaque séance, les
+// décisions qui ont un résumé IA passent en tête, et la première s'ouvre avec sa séance. Les points
+// de procédure sans résumé (ouverture, dépôts, adoption de l'ordre du jour…) descendent en bas de
+// la séance, repliés sous « Procédure ».
+function rendreSeance(g, ouverte = false) {
+  const estProcedure = (d) => d.theme === 'procedure' && !resumePour(d);
+  const procedure = g.lignes.filter(estProcedure);
+  const autres = g.lignes.filter((d) => !estProcedure(d));
+  const lignes = [...autres.filter((d) => resumePour(d)), ...autres.filter((d) => !resumePour(d))];
+  const carte = (d, i) => carteDecision(d, ouverte && i === 0 && Boolean(resumePour(d)));
+  const blocProcedure = procedure.length
+    ? `<details class="seance-procedure"><summary>${tr(
+        `Procédure (${procedure.length} point${procedure.length > 1 ? 's' : ''})`,
+        `Procedure (${procedure.length} item${procedure.length > 1 ? 's' : ''})`
+      )}</summary>${procedure.map((d) => carteDecision(d)).join('')}</details>`
+    : '';
+  return `<details class="seance"${ouverte ? ' open' : ''}>
       <summary class="seance-entete">
         <h3>${echapper(g.instance === SANS_INSTANCE ? tr(SANS_INSTANCE, 'Other documents') : lib(g.instance))}</h3>
         <span class="seance-date">${dateFr(g.date)}</span>
@@ -478,14 +494,14 @@ function rendreSeance(g) {
         ${g.tronquee ? `<span class="puce procedural">${tr('journée partiellement chargée', 'day partly loaded')}</span>` : ''}
         ${boutonImprimer(tr('Imprimer cette séance, toutes ses décisions dépliées', 'Print this meeting, with all its decisions expanded'))}
       </summary>
-      <div class="seance-corps">${g.lignes.slice(0, PAR_SEANCE_DEPART).map(carteDecision).join('')}${
-        g.lignes.length > PAR_SEANCE_DEPART
+      <div class="seance-corps">${lignes.slice(0, PAR_SEANCE_DEPART).map(carte).join('')}${
+        lignes.length > PAR_SEANCE_DEPART
           ? `<details class="reste-seance"><summary>${tr(
-              `Afficher les ${nombreFr(g.lignes.length - PAR_SEANCE_DEPART)} autres décisions de cette séance`,
-              `Show the ${nombreFr(g.lignes.length - PAR_SEANCE_DEPART)} other decisions of this meeting`
-            )}</summary>${g.lignes.slice(PAR_SEANCE_DEPART).map(carteDecision).join('')}</details>`
+              `Afficher les ${nombreFr(lignes.length - PAR_SEANCE_DEPART)} autres décisions de cette séance`,
+              `Show the ${nombreFr(lignes.length - PAR_SEANCE_DEPART)} other decisions of this meeting`
+            )}</summary>${lignes.slice(PAR_SEANCE_DEPART).map((d) => carteDecision(d)).join('')}</details>`
           : ''
-      }</div>
+      }${blocProcedure}</div>
     </details>`;
 }
 
@@ -924,11 +940,11 @@ function rendreLexique() {
 function evenementsRecents() {
   const evenements = [];
   for (const d of etat.decisions?.decisions ?? []) {
+    // Martin, 9 nov. 2026 : le fil ne montre que les décisions qui ont un résumé IA.
+    if (!resumePour(d)) continue;
     evenements.push({ date: d.date, genre: 'decision', nouveau: d.nouveau === true, data: d });
   }
-  for (const v of etat.votes?.votes ?? []) {
-    evenements.push({ date: v.date, genre: 'vote', nouveau: v.nouveau === true, data: v });
-  }
+  // Les votes nominatifs n'ont pas de résumé IA : ils restent sur leur page, hors du fil (9 nov. 2026).
   evenements.sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
 
   const nouveaux = evenements.filter((e) => e.nouveau);
@@ -969,7 +985,7 @@ function ligneEvenement(e) {
   const corps = `${blocResume(resumePour(d))}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}
     ${actionsFiche(d)}`;
-  return carteRepliable(entete, corps);
+  return carteRepliable(entete, corps, e.ouverte);
 }
 
 function rendreFil() {
@@ -982,12 +998,13 @@ function rendreFil() {
   // nouveautés) vit sur la page « Sources et limites », là où on va quand on se pose la
   // question — pas en travers du fil quand on veut juste lire.
   $('#titre-fil').textContent = mode === 'nouveautes' ? tr('Ce qui a changé', "What's new") : tr('Activité récente', 'Recent activity');
-  $('#fil').innerHTML = aMontrer.map(ligneEvenement).join('');
+  // La première carte du fil est toujours ouverte : elle montre ce qu'est un résumé (9 nov. 2026).
+  $('#fil').innerHTML = aMontrer.map((e, i) => ligneEvenement({ ...e, ouverte: i === 0 })).join('');
 
-  const reste = source.length - aMontrer.length;
+  // 9 nov. 2026 : 3 décisions, puis le bouton mène toujours à la page Décisions.
   if ($('#plus-fil')) {
-    $('#plus-fil').hidden = reste <= 0;
-    $('#plus-fil').textContent = tr(`${Math.min(PAS_FIL, reste)} de plus (${nombreFr(reste)} restants)`, `${Math.min(PAS_FIL, reste)} more (${nombreFr(reste)} left)`);
+    $('#plus-fil').hidden = false;
+    $('#plus-fil').textContent = tr('Voir plus de décisions →', 'See more decisions →');
   }
 }
 
@@ -1163,6 +1180,15 @@ document.addEventListener('input', (e) => {
     rendreVotes();
   }
 });
+// Ouvrir une séance ouvre aussi sa première décision, si elle porte un résumé IA (9 nov. 2026).
+if (existe('#liste-decisions')) {
+  $('#liste-decisions').addEventListener('toggle', (ev) => {
+    const s = ev.target;
+    if (!s.classList?.contains('seance') || !s.open) return;
+    const premiere = s.querySelector('.seance-corps > details.carte');
+    if (premiere && premiere.querySelector('.resume, [class*="resume"]')) premiere.open = true;
+  }, true);
+}
 if (existe('#plus-decisions')) {
   $('#plus-decisions').addEventListener('click', () => {
     etat.limiteDecisions += PAS;
@@ -1170,10 +1196,10 @@ if (existe('#plus-decisions')) {
     rendreDecisions();
   });
 }
+// L'accueil montre 3 décisions résumées ; le bouton mène à la page Décisions (9 nov. 2026).
 if (existe('#plus-fil')) {
   $('#plus-fil').addEventListener('click', () => {
-    etat.limiteFil += PAS_FIL;
-    rendreFil();
+    location.href = `decisions-de-la-ville-de-montreal${EN ? '?lang=en' : ''}`;
   });
 }
 if (existe('#plus-votes')) {
