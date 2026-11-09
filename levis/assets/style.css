@@ -733,3 +733,5 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 
 /* Thème sombre : une ligne claire en haut de chaque fiche pour suivre la liste (Martin, 9 nov. 2026). */
 :root[data-theme="sombre"] .carte { border-top: 2px solid rgba(255, 255, 255, .55); }
+/* Thème clair : la même ligne, en noir (Martin, 9 nov. 2026). */
+:root:not([data-theme="sombre"]) .carte { border-top: 2px solid rgba(0, 0, 0, .55); }
