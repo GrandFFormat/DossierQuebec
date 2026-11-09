@@ -597,3 +597,7 @@ h2.page[id], h1.page[id] { scroll-margin-top: 16px; }
 /* La légende qui explique l'absence de résumés : elle suit la ligne de comptage, donc elle
    se serre contre elle plutôt que de flotter comme un avis ordinaire. */
 .avis.legende-resume { margin: 4px 0 20px; font-size: 13.5px; line-height: 1.55; }
+
+/* Une ligne en haut de chaque fiche pour suivre la liste : claire en thème sombre, noire en thème clair (Martin, 9 nov. 2026). */
+:root[data-theme="sombre"] .carte { border-top: 2px solid rgba(255, 255, 255, .55); }
+:root:not([data-theme="sombre"]) .carte { border-top: 2px solid rgba(0, 0, 0, .55); }
