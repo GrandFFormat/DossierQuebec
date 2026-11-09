@@ -358,6 +358,7 @@ function rendreSeance(g, ouverte = false) {
         <span class="seance-date">${dateFr(g.date)}</span>
         <span class="puce">${g.lignes.length} décision${g.lignes.length > 1 ? 's' : ''}</span>
         ${g.tronquee ? '<span class="puce procedural">journée partiellement chargée</span>' : ''}
+        <button type="button" class="bouton-tout-ouvrir">Tout ouvrir</button>
       </summary>
       <div class="seance-corps">${lignes.map((d, i) => carteDecision(d, ouverte && i === 0 && Boolean(resumePour(d)))).join('')}${blocProcedure}</div>
     </details>`;
@@ -1207,3 +1208,33 @@ init();
   majVisible();
   bouton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 })();
+
+// « Tout ouvrir » d'une séance (Martin, 9 nov. 2026) : déplie la séance et toutes ses fiches ;
+// en ouvrir une autre referme la précédente. Les fiches forment un accordéon (attribut name) :
+// on le retire le temps de tout déplier, on le remet en refermant.
+function fermerSeanceDepliee(s) {
+  s.classList.remove('tout-ouvert');
+  s.querySelectorAll('details.carte[data-nom]').forEach((c) => { c.open = false; c.setAttribute('name', c.dataset.nom); delete c.dataset.nom; });
+  s.querySelectorAll('.seance-procedure').forEach((p) => { p.open = false; });
+  const b = s.querySelector('.bouton-tout-ouvrir');
+  if (b) b.textContent = 'Tout ouvrir';
+  s.open = false;
+}
+document.addEventListener('click', (e) => {
+  const b = e.target.closest?.('.bouton-tout-ouvrir');
+  if (!b) return;
+  e.preventDefault();
+  e.stopPropagation();
+  const s = b.closest('details.seance');
+  if (s.classList.contains('tout-ouvert')) { fermerSeanceDepliee(s); return; }
+  document.querySelectorAll('details.seance.tout-ouvert').forEach(fermerSeanceDepliee);
+  s.open = true;
+  s.classList.add('tout-ouvert');
+  s.querySelectorAll('.seance-procedure').forEach((p) => { p.open = true; });
+  s.querySelectorAll('details.carte').forEach((c) => {
+    if (c.hasAttribute('name')) { c.dataset.nom = c.getAttribute('name'); c.removeAttribute('name'); }
+    c.open = true;
+  });
+  b.textContent = 'Tout fermer';
+  s.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}, true);
