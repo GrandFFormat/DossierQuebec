@@ -145,8 +145,8 @@ function reinitialiserDepliage() {
 // retombe simplement sur des fiches indépendantes — dégradation sans casse.
 const NOM_ACCORDEON = 'fiches';
 
-function carteRepliable(entete, corps) {
-  return `<details class="carte pliante" name="${NOM_ACCORDEON}"><summary>${entete}</summary><div class="corps">${corps}</div></details>`;
+function carteRepliable(entete, corps, ouverte = false) {
+  return `<details class="carte pliante"${ouverte ? ' open' : ''} name="${NOM_ACCORDEON}"><summary>${entete}</summary><div class="corps">${corps}</div></details>`;
 }
 
 // Au bas de chaque décision dépliée QUI A UN RÉSUMÉ IA : la partager sur Facebook, sur X ou en
@@ -801,11 +801,11 @@ function evenementsRecents() {
   // questions…) restent sur la page Décisions ; le fil ne montre que ce qui décide quelque chose.
   for (const d of etat.decisions?.decisions ?? []) {
     if (d.type === 'Procédure' || d.type === 'Procès-verbal') continue;
+    // Martin, 9 nov. 2026 : le fil ne montre que les décisions qui ont un résumé IA.
+    if (!resumePour(d)) continue;
     evenements.push({ date: d.date, genre: 'decision', nouveau: d.nouveau === true, data: d });
   }
-  for (const v of etat.votes?.votes ?? []) {
-    evenements.push({ date: v.date, genre: 'vote', nouveau: v.nouveau === true, data: v });
-  }
+  // Les votes nominatifs n'ont pas de résumé IA : ils restent sur leur page, hors du fil (9 nov. 2026).
   evenements.sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
 
   const nouveaux = evenements.filter((e) => e.nouveau);
@@ -845,7 +845,7 @@ function ligneEvenement(e) {
     <p class="objet">${echapper(d.objet ?? '(sans objet)')}</p>`;
   const corps = `${blocResume(resumePour(d))}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}`;
-  return carteRepliable(entete, corps);
+  return carteRepliable(entete, corps, e.ouverte);
 }
 
 function rendreFil() {
@@ -858,7 +858,8 @@ function rendreFil() {
   // nouveautés) vit sur la page « Sources et limites », là où on va quand on se pose la
   // question — pas en travers du fil quand on veut juste lire.
   $('#titre-fil').textContent = mode === 'nouveautes' ? 'Ce qui a changé' : 'Activité récente';
-  $('#fil').innerHTML = aMontrer.map(ligneEvenement).join('');
+  // La première carte du fil est toujours ouverte : elle montre ce qu'est un résumé (9 nov. 2026).
+  $('#fil').innerHTML = aMontrer.map((e, i) => ligneEvenement({ ...e, ouverte: i === 0 })).join('');
 
   const reste = source.length - aMontrer.length;
   if ($('#plus-fil')) {
