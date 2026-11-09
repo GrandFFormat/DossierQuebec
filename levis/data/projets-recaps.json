@@ -1,21 +1,21 @@
 {
- "generatedAt": "2026-10-01T16:37:33.918Z",
+ "generatedAt": "2026-11-09T11:59:20.593Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Récapitulatifs rédigés automatiquement à partir de l'objet, du résumé et des résolutions des dossiers de chaque projet, puis vérifiés automatiquement (numéros et nombres contre les dossiers cités, contre-lecture). Ce qui ne passe pas est retiré. En cas d'écart, les documents officiels font foi.",
  "recaps": {
   "stations-epuration": {
    "titre": "Stations d'épuration de Saint-Nicolas et de Desjardins",
-   "signature": "f053673edd820525",
-   "genereLe": "2026-10-01T16:37:23.123Z",
+   "signature": "136adaa5f36f3970",
+   "genereLe": "2026-11-09T11:59:04.455Z",
    "modele": "claude-opus-5",
-   "dossiers": 9,
-   "enBref": "Les stations de traitement des eaux usées de Saint-Nicolas et de Desjardins ne peuvent plus recevoir de débits ni de charges supplémentaires. Cette année, la Ville a modifié ses règlements provisoires qui limitent les constructions, lancé des travaux à Saint-Nicolas et retenu des firmes d'ingénierie pour préparer l'agrandissement des deux stations. Elle a aussi déposé des demandes d'aide financière au gouvernement du Québec.",
+   "dossiers": 10,
+   "enBref": "Les stations de traitement des eaux usées de Desjardins et de Saint-Nicolas n'ont plus de capacité disponible. Cette année, la Ville a ajusté puis entrepris de prolonger les règlements provisoires qui limitent la construction dans les secteurs desservis. Elle a aussi engagé des firmes pour concevoir l'agrandissement des deux stations et demandé une aide financière à Québec.",
    "etapes": [
     {
      "periode": "Février et mars 2026",
-     "titre": "Une exception aux règlements provisoires",
-     "texte": "La Ville a modifié les règlements qui interdisent les projets ajoutant des eaux usées dans les secteurs des deux stations. Un propriétaire peut maintenant construire, agrandir ou changer un usage s'il démolit d'autres bâtiments sur le même ensemble de terrains, sans ajouter de logements et sans hausse des eaux usées rejetées.",
+     "titre": "Une exception ajoutée aux règlements provisoires",
+     "texte": "La Ville a modifié les règlements qui interdisent les travaux augmentant les eaux usées, pour permettre de construire ou d'agrandir si on démolit d'autres bâtiments sur les mêmes terrains, sans hausse des rejets et sans ajout de logements. Une assemblée publique de consultation a eu lieu le 19 mars 2026 et aucun commentaire n'a été exprimé.",
      "numeros": [
       "CV3209",
       "CV3282"
@@ -24,55 +24,63 @@
     {
      "periode": "Mars 2026",
      "titre": "Travaux à la station de Saint-Nicolas",
-     "texte": "La Ville a confié à Groupe Pro-B inc. la réfection des dégrilleurs et des dessableurs de la station de Saint-Nicolas, au prix de 2 022 888,00 $ avant taxes. Les travaux devaient commencer le 24 mars 2026.",
+     "texte": "La Ville a confié à Groupe Pro-B inc. la réfection des dégrilleurs et des dessableurs de la station de Saint-Nicolas, pour 2 022 888,00 $ avant taxes. Les travaux devaient commencer le 24 mars 2026.",
      "numeros": [
       "CE2882"
      ]
     },
     {
      "periode": "Juin et juillet 2026",
-     "titre": "Firmes d'ingénierie pour les deux stations",
-     "texte": "La Ville a retenu Tetra Tech QI inc. pour préparer l'augmentation de capacité de la station Desjardins, puis WSP Canada inc. pour celle de Saint-Nicolas. Les deux contrats sont à prix fixe.",
+     "titre": "Ingénieurs engagés pour les deux agrandissements",
+     "texte": "La Ville a confié à Tetra Tech QI inc. les services d'ingénierie pour augmenter la capacité de la station Desjardins, au coût de 1 993 500,00 $ avant taxes. Elle a ensuite confié à WSP Canada inc. les mêmes services pour la station de Saint-Nicolas, au coût de 2 470 208,26 $ avant taxes.",
      "numeros": [
       "CE3186",
       "CE3293"
      ]
     },
     {
-     "periode": "Août 2026",
-     "titre": "Aide demandée à Québec pour les stations",
-     "texte": "La Ville a demandé au gouvernement du Québec une aide du programme FIERH pour agrandir chacune des deux stations. Le projet de Saint-Nicolas est évalué à 80 604 851 $ et celui de Desjardins à 79 108 130 $, l'aide demandée couvrant 40 % des dépenses admissibles.",
+     "periode": "Août et septembre 2026",
+     "titre": "Demandes d'aide financière à Québec",
+     "texte": "La Ville a demandé l'aide du programme FIERH pour agrandir les deux stations, pour remplacer la conduite de refoulement du poste de pompage SN-G à Saint-Nicolas et pour augmenter la capacité de quatre postes de pompage à Saint-Romuald. Le programme peut couvrir jusqu'à 40 % des dépenses admissibles.",
+     "numeros": [
+      "CV3616",
+      "CV3617",
+      "CV3656",
+      "CV3657"
+     ]
+    },
+    {
+     "periode": "Octobre 2026",
+     "titre": "Reconduction des règlements provisoires amorcée",
+     "texte": "La Ville a lancé la démarche pour prolonger de deux ans les règlements qui interdisent l'ajout de logements, le prolongement du réseau d'égout sanitaire et les travaux augmentant les eaux usées. Les règlements actuels sont en vigueur depuis le 26 mars 2025.",
+     "numeros": [
+      "CV3792"
+     ]
+    }
+   ],
+   "aSurveiller": [
+    {
+     "texte": "La reconduction des règlements provisoires n'est pas terminée. Une assemblée publique de consultation doit se tenir, à une date que fixera la greffière, avant l'adoption des règlements.",
+     "numeros": [
+      "CV3792"
+     ]
+    },
+    {
+     "texte": "Pour la station de Saint-Nicolas, les plans et devis sont prévus de mai 2026 à janvier 2028 et les travaux de janvier 2028 à février 2030. Pour la station Desjardins, les plans et devis sont prévus de mars 2026 à juin 2027 et les travaux de juillet 2027 à septembre 2029.",
      "numeros": [
       "CV3616",
       "CV3617"
      ]
     },
     {
-     "periode": "Septembre 2026",
-     "titre": "Aide demandée pour les postes de pompage",
-     "texte": "La Ville a déposé deux autres demandes au même programme : remplacer la conduite de refoulement du poste de pompage SN-G à Saint-Nicolas par une conduite de plus grand diamètre, et augmenter la capacité de quatre postes de pompage à Saint-Romuald.",
+     "texte": "Les services d'ingénierie pour la station Desjardins se poursuivent jusqu'en septembre 2029. Ceux pour la station de Saint-Nicolas devaient commencer en août 2026.",
      "numeros": [
-      "CV3656",
-      "CV3657"
-     ]
-    }
-   ],
-   "aSurveiller": [
-    {
-     "texte": "À Saint-Nicolas, les plans et devis de l'agrandissement sont prévus de mai 2026 à janvier 2028, et les travaux de janvier 2028 à février 2030.",
-     "numeros": [
-      "CV3616"
+      "CE3186",
+      "CE3293"
      ]
     },
     {
-     "texte": "À Desjardins, les plans et devis sont prévus de mars 2026 à juin 2027, et les travaux de juillet 2027 à septembre 2029. Les services d'ingénierie se poursuivent jusqu'en septembre 2029.",
-     "numeros": [
-      "CV3617",
-      "CE3186"
-     ]
-    },
-    {
-     "texte": "Pour les postes de pompage, les plans et devis sont annoncés en 2027 et les travaux en 2028 pour la conduite SN-G, en 2028-2029 pour Saint-Romuald.",
+     "texte": "Pour le poste de pompage SN-G et pour les quatre postes de Saint-Romuald, les plans et devis sont prévus en 2027 et les travaux en 2028, et en 2028-2029 pour Saint-Romuald.",
      "numeros": [
       "CV3656",
       "CV3657"
@@ -83,38 +91,33 @@
    "verification": {
     "version": 1,
     "retiresMecanique": [],
-    "retiresContreLecture": [
-     {
-      "element": "aSurveiller[0]",
-      "raison": "Deux affirmations ne figurent dans aucun des dossiers cités (CV3616, CV3617, CV3656, CV3657). (1) « Les demandes d'aide financière ont été déposées avant la fin de l'appel de propositions » : les dossiers indiquent seulement que le conseil doit adopter une résolution pour permettre le dépôt de la demande avant la fin de l'appel de propositions du 18 septembre; aucun ne confirme que les demandes ont effectivement été déposées. (2) « La réponse du gouvernement du Québec reste à venir » : aucun dossier ne mentionne une réponse attendue du gouvernement; il s'agit d'une inférence ajoutée."
-     }
-    ]
+    "retiresContreLecture": []
    }
   },
   "logement": {
    "titre": "Logement social et abordable",
-   "signature": "e73464427a032ec6",
-   "genereLe": "2026-10-01T16:37:33.918Z",
+   "signature": "61bf0872e26a23e1",
+   "genereLe": "2026-11-09T11:59:20.593Z",
    "modele": "claude-opus-5",
-   "dossiers": 11,
-   "enBref": "Cette année, la Ville finance l'Office municipal d'habitation de Lévis et confirme sa participation à des projets de logements abordables dans plusieurs secteurs. Elle adopte aussi son propre programme d'aide qui s'ajoute aux programmes de la Société d'habitation du Québec. Un emprunt pour les rénovations des habitations à loyer modique est encore à l'étude.",
+   "dossiers": 12,
+   "enBref": "Cette année, la Ville de Lévis finance des projets de logements abordables portés par des organismes et des promoteurs, et elle soutient l'Office municipal d'habitation de Lévis. Elle s'est aussi dotée d'un règlement encadrant son aide financière et d'un règlement d'emprunt pour sa part des rénovations des habitations à loyer modique. Un projet de redéveloppement est lancé rue Saint-Joseph, avec relogement des locataires.",
    "etapes": [
     {
-     "periode": "Mars à mai 2026",
-     "titre": "Soutien à l'Office municipal d'habitation",
-     "texte": "La Ville nomme quatre personnes pour la représenter à l'Office municipal d'habitation de Lévis et adopte ses prévisions budgétaires 2026, avec un versement de 358 885 $ pour sa part du déficit des habitations à loyer modique. Elle verse aussi au plus 24 632,22 $ pour l'exploitation d'un immeuble de 100 logements abordables pour personnes âgées à faible revenu.",
+     "periode": "Mars et avril 2026",
+     "titre": "Représentation et budget de l'Office d'habitation",
+     "texte": "La Ville désigne quatre personnes pour la représenter à l'Office municipal d'habitation de Lévis. Elle adopte ensuite les prévisions budgétaires 2026 de l'Office et verse 358 885 $ pour sa part du déficit des habitations à loyer modique.",
      "numeros": [
       "CV3242",
-      "CV3358",
       "CE3020",
-      "CE3050"
+      "CV3358"
      ]
     },
     {
      "periode": "Mai 2026",
-     "titre": "Décisions sur trois projets de logements",
-     "texte": "La Ville confirme une aide maximale de 5 230 846 $ pour 72 logements sur la route Monseigneur-Bourget et jusqu'à 2 860 000 $ pour 50 logements abordables d'un immeuble de la rue de Courchevel, à Saint-Romuald. Pour le projet de la rue des Fines-Herbes, à Saint-Jean-Chrysostome, la Direction de l'urbanisme recommande de ne pas verser la contribution, le nombre de logements étant passé de 302 à 192.",
+     "titre": "Aide à des projets de logements abordables",
+     "texte": "La Ville confirme une aide maximale de 5 230 846 $ pour un projet de 72 logements sur la route Monseigneur-Bourget et jusqu'à 2 860 000 $ pour les 50 logements abordables d'un immeuble de la rue de Courchevel, dans le secteur Saint-Romuald. Elle revoit sa contribution au projet de la rue des Fines-Herbes, passé de 302 à 192 logements, et verse 24 632,22 $ à l'Office municipal d'habitation pour un immeuble de 100 logements pour personnes âgées à faible revenu.",
      "numeros": [
+      "CE3050",
       "CV3384",
       "CV3385",
       "CV3386",
@@ -122,48 +125,41 @@
      ]
     },
     {
-     "periode": "Juillet 2026",
-     "titre": "Rue Saint-Joseph et projet La Cité",
-     "texte": "La Ville mandate l'Office municipal d'habitation pour reloger les locataires des immeubles du 58 à 60B, 75 à 77 et 85, rue Saint-Joseph, et autorise jusqu'à 500 000 $ pour la relocalisation, la démolition et la décontamination des sols. Elle accorde ensuite 7 751 360 $ au promoteur du projet La Cité, soit 192 logements abordables rue des Fines-Herbes, sous forme d'une contribution monétaire et d'un crédit de taxes sur 20 ans.",
-     "numeros": [
-      "CV3555",
-      "CE3265",
-      "CV3583",
-      "CE3281"
-     ]
-    },
-    {
-     "periode": "Septembre 2026",
-     "titre": "Nouveau programme d'aide de la Ville",
-     "texte": "Le conseil adopte le Règlement RV3631, qui crée un programme d'aide complémentaire à deux programmes de la Société d'habitation du Québec. L'aide peut prendre la forme d'argent, de dons de terrains ou de bâtiments, de travaux d'infrastructures ou de crédits de taxes foncières.",
+     "periode": "Septembre et octobre 2026",
+     "titre": "Nouveau règlement d'aide et emprunt pour rénovations",
+     "texte": "La Ville adopte un règlement créant son propre programme d'aide, qui s'ajoute à deux programmes de la Société d'habitation du Québec. Elle adopte aussi un règlement d'emprunt d'au plus 10 580 000 $ sur 10 ans pour payer sa part des rénovations des habitations à loyer modique.",
      "numeros": [
       "CV3722",
-      "CV3659",
-      "CV3678",
-      "CE3380",
-      "CE3381"
+      "CV3763"
      ]
     },
     {
-     "periode": "Septembre 2026",
-     "titre": "Emprunt pour rénover les HLM",
-     "texte": "La Ville étudie un emprunt d'au plus 10 580 000 $ sur 10 ans pour payer sa part des rénovations des habitations à loyer modique réalisées par l'Office municipal d'habitation. Les dépenses sont réparties de 2027 à 2030.",
+     "periode": "Octobre 2026",
+     "titre": "Appui à un projet pour adultes polyhandicapés",
+     "texte": "La Ville appuie la demande d'aide financière d'une fondation lévisienne au Programme d'habitation abordable Québec pour une habitation de huit chambres avec services de soutien, ruelle Marguerite-Fournier. Cet appui n'est pas un engagement financier.",
      "numeros": [
-      "CV3725"
+      "CE3467",
+      "CV3782"
      ]
     }
    ],
    "aSurveiller": [
     {
-     "texte": "Le règlement d'emprunt pour les rénovations des HLM est en cours. Il doit encore être approuvé par les personnes habiles à voter de toute la ville et par le ministère.",
+     "texte": "Le règlement d'emprunt pour les rénovations des habitations à loyer modique doit encore passer l'approbation des personnes habiles à voter et celle du ministère.",
      "numeros": [
-      "CV3725"
+      "CV3763"
      ]
     },
     {
-     "texte": "Rue Saint-Joseph : rencontres des locataires en juillet-août 2026, relocalisation de septembre à novembre 2026, démolition et décontamination en 2027, construction en 2028 et occupation en 2029.",
+     "texte": "Rue Saint-Joseph : relocalisation des locataires de septembre à novembre 2026, démolition et décontamination en 2027. La contribution de la Ville à la construction fera l'objet d'une décision distincte.",
      "numeros": [
       "CV3555"
+     ]
+    },
+    {
+     "texte": "Projet de la ruelle Marguerite-Fournier : une autre résolution du conseil sera nécessaire pour confirmer la participation de la Ville, et une modification du règlement de zonage sera requise.",
+     "numeros": [
+      "CV3782"
      ]
     }
    ],
@@ -173,12 +169,12 @@
     "retiresMecanique": [],
     "retiresContreLecture": [
      {
-      "element": "aSurveiller[2]",
-      "raison": "Repose uniquement sur le dossier CV3555, dont la décision finale est prise (7 et 14 juillet 2026), et ne cite aucune date future écrite : le dossier mentionne seulement qu'une « décision distincte » suivra, sans échéance. L'élément ne satisfait donc pas au critère d'un point à surveiller (ni dossier « en cours », ni date future)."
+      "element": "etapes[2]",
+      "raison": "Le texte parle de « trois immeubles de la rue Saint-Joseph ». Le dossier CV3555 n'énonce aucun nombre d'immeubles : il énumère des adresses (58 à 60B, 75 à 77 et 85, rue Saint-Joseph), dont certaines regroupent plusieurs numéros civiques. Le décompte « trois » est une déduction du rédacteur, non un fait donné par le dossier."
      },
      {
-      "element": "aSurveiller[3]",
-      "raison": "Repose uniquement sur le dossier CV3722, dont la décision finale est prise (adoption du règlement le 29 septembre 2026), et aucune date future n'est écrite pour l'approbation par la Société d'habitation du Québec. L'élément ne satisfait donc pas au critère d'un point à surveiller."
+      "element": "aSurveiller[0]",
+      "raison": "L'élément ne repose ni sur un dossier « en cours » ni sur une date future écrite. CV3722 est un dossier dont la décision finale est prise (adoption le 29 septembre 2026) et les seules dates qu'il mentionne (15 et 29 septembre 2026) sont passées; l'approbation par la SHQ y est évoquée sans aucune échéance. Le point ne satisfait pas les conditions d'un élément à surveiller."
      }
     ]
    }
