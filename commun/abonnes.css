@@ -735,7 +735,7 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
    (commun/fleur-de-lys.png, utilisée comme masque) ; la couleur est celle du volet (--accent). */
 .titre-ligne .lien-dq {
   display: inline-block; flex: none; width: 24px; height: 24px; margin-left: -4px; /* à peu près la hauteur des lettres du logo (27 px) */
-  background-color: #C9DEF2; /* bleu poudre, comme la pastille QC de DossierCanada (Martin, 9 nov. 2026) */
+  background-color: #7DB4F0; /* bleu poudre franc (Martin, 9 nov. 2026 : « plus bleu ») */
   -webkit-mask: url(/commun/fleur-de-lys.png) center / contain no-repeat;
   mask: url(/commun/fleur-de-lys.png) center / contain no-repeat;
   transition: transform .7s ease-in-out;
