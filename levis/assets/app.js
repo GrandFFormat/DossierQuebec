@@ -11,7 +11,7 @@ const PAS_SEANCES = 8; // séances affichées par palier, en mode groupé
 // écran sert à décider si on veut lire, les suivants à lire pour vrai.
 const PAS_VOTES_DEPART = 5;
 const PAS_VOTES = 10;
-const PAS_FIL = 5; // éléments du fil d'accueil par palier
+const PAS_FIL = 3; // éléments du fil d'accueil (9 nov. 2026 : 3, puis le bouton mène à la page Décisions)
 
 const etat = {
   decisions: null,
@@ -863,8 +863,8 @@ function rendreFil() {
 
   const reste = source.length - aMontrer.length;
   if ($('#plus-fil')) {
-    $('#plus-fil').hidden = reste <= 0;
-    $('#plus-fil').textContent = `${Math.min(PAS_FIL, reste)} de plus (${nombreFr(reste)} restants)`;
+    $('#plus-fil').hidden = false;
+    $('#plus-fil').textContent = 'Voir plus de décisions →';
   }
 }
 
@@ -1034,8 +1034,7 @@ if (existe('#plus-decisions')) {
 }
 if (existe('#plus-fil')) {
   $('#plus-fil').addEventListener('click', () => {
-    etat.limiteFil += PAS_FIL;
-    rendreFil();
+    location.href = 'decisions-de-la-ville-de-levis';
   });
 }
 if (existe('#plus-votes')) {
