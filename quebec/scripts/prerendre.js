@@ -46,7 +46,7 @@ const PAGES = [
 // Les zones qu'app.js remplit. Les champs de saisie (#rech-…, #affichage, #filtre-resume,
 // #mode-couleur) sont lus, jamais écrits : ils gardent leur valeur par défaut.
 const ZONES = [
-  'chargement', 'tout-deplier', 'chiffres', 'titre-fil', 'fil', 'plus-fil',
+  'chargement', 'chiffres', 'titre-fil', 'fil', 'plus-fil',
   'rech-decisions', 'filtre-type', 'filtre-theme', 'affichage', 'filtre-instance', 'filtre-resume', 'compte-decisions', 'liste-decisions', 'plus-decisions',
   'resume-dissidence', 'table-dissidence', 'table-dissidence tbody', 'rech-votes', 'filtre-theme-votes', 'filtre-instance-votes', 'compte-votes', 'liste-votes', 'plus-votes',
   'mode-couleur', 'carte', 'legende', 'compte-elus', 'legende-executif', 'liste-elus', 'compte-agglo', 'liste-agglo', 'compte-cucq', 'liste-cucq',
