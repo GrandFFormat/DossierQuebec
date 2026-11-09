@@ -2742,8 +2742,8 @@ body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
 .rtv-menu > :not(summary){margin-left:0;}
 .rtv-louee{display:inline-block; margin-left:6px; padding:0 6px; font-size:12px; font-weight:700; background:#131313; color:#fff;}
 .rtv-locations{margin:18px 0 6px;}
-.rtv-villes tr.rtv-archaique td{color:#8a94a0;}
-.rtv-archaique-legende{display:block; margin-top:4px; font-size:13px; color:#8a94a0; font-weight:600;}
+.rtv-villes tr.rtv-archaique td{text-decoration:line-through;} /* PV numérisés : écriture normale, barrée (Martin, 9 nov. 2026) */
+.rtv-archaique-legende{display:block; margin-top:4px; font-size:13px; color:var(--muted, #5B6570); font-weight:600;}
 .rtv-bloquee-legende{display:block; margin-top:4px; font-size:13px; color:var(--red); font-weight:600;}
 .rtv-fondateur{background:#FFF3C4; color:#131313; border-left:4px solid #FFD24D; padding:8px 10px;}
 
