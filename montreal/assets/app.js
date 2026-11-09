@@ -287,7 +287,6 @@ function actionsFiche(d) {
       <a class="fiche-bouton" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(lien)}" target="_blank" rel="noopener">Facebook</a>
       <a class="fiche-bouton" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(texteX)}&url=${encodeURIComponent(lien)}" target="_blank" rel="noopener">X</a>
       <button type="button" class="fiche-bouton" data-texte="${echapper(texteComplet)}" onclick="copierLienFiche(this)">⧉ ${tr('Copier', 'Copy')}</button>
-      <a class="fiche-soutien" href="https://dossierquebec.ca/abonnement${tr('', '?lang=en')}">👉 ${tr('Soutenez la cause', 'Support the cause')} ❤️</a>
     </div>`;
 }
 function copierLienFiche(b) {
