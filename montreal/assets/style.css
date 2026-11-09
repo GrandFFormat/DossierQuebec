@@ -737,3 +737,9 @@ footer a.lien-dafr { color: inherit; }
 /* « Avec résumé seulement » en vert, la couleur des résumés IA (Martin, 9 nov. 2026). */
 label.case:has(#filtre-resume) { color: #fff; background: #0B8A4B; border: 2px solid #0B8A4B; border-radius: 6px; padding: 6px 10px; font-weight: 700; cursor: pointer; }
 label.case:has(#filtre-resume) input { accent-color: #fff; }
+
+/* Remerciement du commanditaire, sous l'encadré vert, avant les séances (9 nov. 2026). */
+.merci-commanditaire { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; margin: 0 0 18px; padding: 14px 18px; border: 2px dashed currentColor; border-radius: 8px; text-align: center; font-size: 15px; line-height: 1.45; }
+.merci-commanditaire p { margin: 0; }
+.merci-commanditaire a { font-weight: 700; }
+.merci-commanditaire img { display: block; width: 96px; height: 96px; background: #fff; padding: 6px; border-radius: 4px; }
