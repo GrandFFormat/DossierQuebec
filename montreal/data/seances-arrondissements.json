@@ -1,18 +1,18 @@
 {
- "generatedAt": "2026-11-08T16:13:21.906Z",
+ "generatedAt": "2026-11-09T20:01:32.413Z",
  "source": "https://ville.montreal.qc.ca/documents/Adi_Public/",
  "licence": "Documents publics de la Ville de Montréal — reproduction avec mention de la source, lecture gratuite (voir README).",
  "methode": "Sondage des noms de fichiers publiés : l'existence du document prouve la séance. Les séances extraordinaires, dont l'heure est imprévisible, ne sont pas couvertes. Le Plateau-Mont-Royal, qui publie par sa page et non sous Adi_Public, est lu depuis cette page : la date vient du document lui-même (voir lib/plateau.js).",
  "annee": 2026,
  "partiel": false,
- "nombre": 162,
- "requetes": 1987,
+ "nombre": 163,
+ "requetes": 1969,
  "parArrondissement": [
   {
    "arrondissement": "Ahuntsic-Cartierville",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 111
+   "requetes": 112
   },
   {
    "arrondissement": "Anjou",
@@ -100,9 +100,9 @@
   },
   {
    "arrondissement": "Le Sud-Ouest",
-   "seances": 6,
-   "nouvelles": 0,
-   "requetes": 193
+   "seances": 7,
+   "nouvelles": 1,
+   "requetes": 173
   },
   {
    "arrondissement": "Verdun",
@@ -114,7 +114,7 @@
    "arrondissement": "Ville-Marie",
    "seances": 8,
    "nouvelles": 0,
-   "requetes": 110
+   "requetes": 111
   },
   {
    "arrondissement": "Villeray–Saint-Michel–Parc-Extension",
@@ -2056,6 +2056,17 @@
    "variante": "ORDI",
    "source": "sondage des documents publiés",
    "preuve": "CA_Vsm_ODJ_LPP_ORDI_2026-11-03_18h30_FR.pdf"
+  },
+  {
+   "id": "CA_Sud_2026-11-09_19h00",
+   "instance": "CA_Sud",
+   "arrondissement": "Le Sud-Ouest",
+   "nomInstance": "Conseil d'arrondissement du Sud-Ouest",
+   "date": "2026-11-09",
+   "heure": "19h00",
+   "variante": "ORDI",
+   "source": "sondage des documents publiés",
+   "preuve": "CA_Sud_ODJ_LPP_ORDI_2026-11-09_19h00_FR.pdf"
   }
  ]
 }
