@@ -666,3 +666,8 @@ footer a.lien-dafr { color: inherit; }
   .commandite .commandite-titre { font-size: 18px; }
   .commandite-texte p, .commandite-liste { font-size: 15px; }
 }
+
+/* Points de procédure repliés en bas de chaque séance (9 nov. 2026). */
+.seance-procedure { margin-top: 10px; border: 1px dashed currentColor; border-radius: 8px; padding: 8px 12px; opacity: .85; }
+.seance-procedure > summary { cursor: pointer; font-weight: 600; font-size: 14px; }
+.seance-procedure[open] > summary { margin-bottom: 8px; }
