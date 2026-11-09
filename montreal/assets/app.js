@@ -1014,7 +1014,8 @@ function rendreAccueil() {
     chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: tr('votes nominatifs consignés cette année', 'recorded votes this year'), lien: 'votes-nominatifs-du-conseil-de-montreal' });
   }
   if (etat.resumes) {
-    chiffres.push({ n: nombreFr(etat.resumes.nombre), quoi: tr('décisions résumées en langage clair', 'decisions summarized in plain language'), lien: 'decisions-de-la-ville-de-montreal' });
+    // Décisions qui affichent un résumé (procédure exclue, 9 nov. 2026), pas le total brut du fichier.
+    chiffres.push({ n: nombreFr(etat.decisions ? etat.decisions.decisions.filter((d) => resumePour(d)).length : etat.resumes.nombre), quoi: tr('décisions résumées en langage clair', 'decisions summarized in plain language'), lien: 'decisions-de-la-ville-de-montreal' });
   }
   if (etat.elus) {
     chiffres.push({ n: etat.elus.nombre, quoi: tr('membres du conseil municipal', 'members of City Council'), lien: 'conseil-municipal-de-montreal' });

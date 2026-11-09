@@ -893,7 +893,8 @@ function rendreAccueil() {
     chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: 'votes nominatifs consignés cette année', lien: 'votes-nominatifs-du-conseil-de-levis' });
   }
   if (etat.resumes) {
-    chiffres.push({ n: nombreFr(etat.resumes.nombre), quoi: 'décisions résumées en langage clair', lien: 'decisions-de-la-ville-de-levis' });
+    // Décisions qui affichent un résumé (procédure exclue, 9 nov. 2026), pas le total brut du fichier.
+    chiffres.push({ n: nombreFr(etat.decisions ? etat.decisions.decisions.filter((d) => resumePour(d)).length : etat.resumes.nombre), quoi: 'décisions résumées en langage clair', lien: 'decisions-de-la-ville-de-levis' });
   }
   if (etat.elus) {
     chiffres.push({ n: etat.elus.nombre, quoi: 'membres du conseil municipal', lien: 'conseil-municipal-de-levis' });
