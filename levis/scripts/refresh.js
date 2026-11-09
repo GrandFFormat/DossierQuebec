@@ -101,6 +101,7 @@ const ETAPES = [
   // Lévis pour l'instant (voir README).
   { nom: 'Projets pour « Mes dossiers »', argv: ['scripts/projets-publics.js'] },
   { nom: 'Chiffres de la page Abonnement', argv: ['scripts/travail-public.js'], secondaire: true },
+  { nom: 'Décisions récentes dans la page (Google)', argv: ['../scripts/prerendu-villes.js', 'levis'], secondaire: true },
 ];
 
 try {

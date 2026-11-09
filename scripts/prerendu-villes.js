@@ -1,9 +1,9 @@
 // Écrit les décisions les plus récentes DANS la page des décisions d'un volet municipal, pour que
 // Google les lise sans exécuter le code. Sans ça, /laval/decisions n'avait que ~300 mots lisibles
 // (en-tête, filtres, pied de page), et Google l'a « lue puis écartée » le 22 sept. 2026.
-// Décidé le 27 sept. 2026 : Québec et Montréal d'abord ; Lévis, Longueuil et Laval attendent.
+// Décidé le 27 sept. 2026 : Québec et Montréal d'abord ; Lévis ajouté le 9 nov. 2026 ; Longueuil et Laval attendent.
 //
-//   node scripts/prerendu-villes.js            montreal (Québec : quebec/scripts/prerendre.js)
+//   node scripts/prerendu-villes.js            montreal et levis (Québec : quebec/scripts/prerendre.js)
 //   node scripts/prerendu-villes.js montreal   un seul volet
 //
 // Ce qui est écrit : les NOMBRE dernières décisions qui ont un résumé en clair (objet, date,
@@ -64,4 +64,4 @@ function prerendre(ville) {
 
 const demandes = process.argv.slice(2);
 // Québec n'est plus ici depuis le 6 nov. 2026 : quebec/scripts/prerendre.js écrit le vrai premier écran.
-for (const ville of demandes.length ? demandes : ['montreal']) prerendre(ville);
+for (const ville of demandes.length ? demandes : ['montreal', 'levis']) prerendre(ville);
