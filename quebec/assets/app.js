@@ -819,6 +819,7 @@ export function evenementsRecents() {
   for (const d of etat.decisions?.decisions ?? []) {
     // Martin, 9 nov. 2026 : le fil ne montre que les décisions qui ont un résumé IA.
     if (!resumePour(d)) continue;
+    if (d.theme === 'procedure') continue;   // ni ordre du jour ni procès-verbal en vitrine, même résumés (9 nov. 2026)
     evenements.push({ date: d.date, genre: 'decision', nouveau: d.nouveau === true, data: d });
   }
   // Les votes nominatifs n'ont pas de résumé IA : ils restent sur leur page, hors du fil (9 nov. 2026).
