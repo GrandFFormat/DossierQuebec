@@ -197,6 +197,15 @@ document.addEventListener('click', async (e) => {
   if (!sess) {
     await peupler(zone);
     fiche.open = true;
+    // Un 2e clic sur le même bouton referme la boîte de connexion (9 nov. 2026).
+    const boiteCx = zone.querySelector('.ab-connexion');
+    const source = etoile.dataset.titre || etoile.dataset.dossier || '1';
+    if (!boiteCx.hidden && boiteCx.dataset.source === source) {
+      boiteCx.hidden = true;
+      boiteCx.dataset.source = '';
+      return;
+    }
+    boiteCx.dataset.source = source;
     formulaireConnexion(
       zone.querySelector('.ab-connexion'),
       etoile.dataset.titre
