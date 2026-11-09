@@ -475,15 +475,15 @@ function grouperParSeance(decisions) {
 // de procédure sans résumé (ouverture, dépôts, adoption de l'ordre du jour…) descendent en bas de
 // la séance, repliés sous « Procédure ».
 function rendreSeance(g, ouverte = false) {
-  const estProcedure = (d) => d.theme === 'procedure' && !resumePour(d);
+  const estProcedure = (d) => !resumePour(d);   // 9 nov. 2026 (Martin) : tout ce qui n'a pas de résumé, pas seulement la procédure
   const procedure = g.lignes.filter(estProcedure);
   const autres = g.lignes.filter((d) => !estProcedure(d));
   const lignes = [...autres.filter((d) => resumePour(d)), ...autres.filter((d) => !resumePour(d))];
   const carte = (d, i) => carteDecision(d, ouverte && i === 0 && Boolean(resumePour(d)));
   const blocProcedure = procedure.length
     ? `<details class="seance-procedure"><summary>${tr(
-        `Procédure (${procedure.length} point${procedure.length > 1 ? 's' : ''})`,
-        `Procedure (${procedure.length} item${procedure.length > 1 ? 's' : ''})`
+        `Sans résumé (${procedure.length} point${procedure.length > 1 ? 's' : ''})`,
+        `No summary (${procedure.length} item${procedure.length > 1 ? 's' : ''})`
       )}</summary>${procedure.map((d) => carteDecision(d)).join('')}</details>`
     : '';
   return `<details class="seance"${ouverte ? ' open' : ''}>
