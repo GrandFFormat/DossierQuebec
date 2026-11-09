@@ -25,9 +25,6 @@ const PAS_SEANCES = 8; // séances affichées par palier, en mode groupé
 const PAS_VOTES_DEPART = 5;
 const PAS_VOTES = 10;
 const PAS_FIL = 3; // éléments du fil d'accueil (9 nov. 2026 : 3, puis le bouton mène à la page Décisions)
-// Dans une séance, les dix premières décisions, puis un dépliant pour le reste : une séance
-// de Ville-Marie en compte cinquante-huit, et cinquante-huit fiches d'affilée sont un mur.
-const PAR_SEANCE_DEPART = 10;
 
 const etat = {
   decisions: null,
@@ -478,7 +475,8 @@ function rendreSeance(g, ouverte = false) {
   const estProcedure = (d) => !resumePour(d);   // 9 nov. 2026 (Martin) : tout ce qui n'a pas de résumé, pas seulement la procédure
   const procedure = g.lignes.filter(estProcedure);
   const autres = g.lignes.filter((d) => !estProcedure(d));
-  const lignes = [...autres.filter((d) => resumePour(d)), ...autres.filter((d) => !resumePour(d))];
+  // Les points de procédure, même résumés, passent sous les vraies décisions (Martin, 9 nov. 2026).
+  const lignes = [...autres.filter((d) => d.theme !== 'procedure'), ...autres.filter((d) => d.theme === 'procedure')];
   const carte = (d, i) => carteDecision(d, ouverte && i === 0 && Boolean(resumePour(d)));
   const blocProcedure = procedure.length
     ? `<details class="seance-procedure"><summary>${tr(
@@ -495,14 +493,7 @@ function rendreSeance(g, ouverte = false) {
         ${boutonImprimer(tr('Imprimer cette séance, toutes ses décisions dépliées', 'Print this meeting, with all its decisions expanded'))}
         <button type="button" class="bouton-tout-ouvrir">${tr('Tout ouvrir', 'Expand all')}</button>
       </summary>
-      <div class="seance-corps">${lignes.slice(0, PAR_SEANCE_DEPART).map(carte).join('')}${
-        lignes.length > PAR_SEANCE_DEPART
-          ? `<details class="reste-seance"><summary>${tr(
-              `Afficher les ${nombreFr(lignes.length - PAR_SEANCE_DEPART)} autres décisions de cette séance`,
-              `Show the ${nombreFr(lignes.length - PAR_SEANCE_DEPART)} other decisions of this meeting`
-            )}</summary>${lignes.slice(PAR_SEANCE_DEPART).map((d) => carteDecision(d)).join('')}</details>`
-          : ''
-      }${blocProcedure}</div>
+      <div class="seance-corps">${lignes.map(carte).join('')}${blocProcedure}</div>
     </details>`;
 }
 
