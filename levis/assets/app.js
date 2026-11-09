@@ -343,7 +343,15 @@ function grouperParSeance(decisions) {
 // 9 nov. 2026 (Martin) : la première séance est ouverte au chargement ; dans chaque séance, les
 // décisions qui ont un résumé IA passent en tête, et la première s'ouvre avec sa séance.
 function rendreSeance(g, ouverte = false) {
-  const lignes = [...g.lignes.filter((d) => resumePour(d)), ...g.lignes.filter((d) => !resumePour(d))];
+  // Les points de procédure (ouverture, dépôts, adoption de l'ordre du jour…) n'ont jamais de
+  // résumé : ils descendent en bas de la séance, repliés sous « Procédure » (9 nov. 2026).
+  const estProcedure = (d) => d.theme === 'procedure' && !resumePour(d);
+  const procedure = g.lignes.filter(estProcedure);
+  const autres = g.lignes.filter((d) => !estProcedure(d));
+  const lignes = [...autres.filter((d) => resumePour(d)), ...autres.filter((d) => !resumePour(d))];
+  const blocProcedure = procedure.length
+    ? `<details class="seance-procedure"><summary>Procédure (${procedure.length} point${procedure.length > 1 ? 's' : ''})</summary>${procedure.map((d) => carteDecision(d)).join('')}</details>`
+    : '';
   return `<details class="seance"${ouverte ? ' open' : ''}>
       <summary class="seance-entete">
         <h3>${echapper(g.instance)}</h3>
@@ -351,7 +359,7 @@ function rendreSeance(g, ouverte = false) {
         <span class="puce">${g.lignes.length} décision${g.lignes.length > 1 ? 's' : ''}</span>
         ${g.tronquee ? '<span class="puce procedural">journée partiellement chargée</span>' : ''}
       </summary>
-      <div class="seance-corps">${lignes.map((d, i) => carteDecision(d, ouverte && i === 0 && Boolean(resumePour(d)))).join('')}</div>
+      <div class="seance-corps">${lignes.map((d, i) => carteDecision(d, ouverte && i === 0 && Boolean(resumePour(d)))).join('')}${blocProcedure}</div>
     </details>`;
 }
 

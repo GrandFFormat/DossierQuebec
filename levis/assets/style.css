@@ -715,3 +715,8 @@ input[type="search"], select { max-width: 100%; text-overflow: ellipsis; }
 /* Format d'une annonce standard (9 nov. 2026) : 970 × 250 (« billboard ») ; 300 × 250 sur téléphone. */
 .commandite.commandite-anonyme { box-sizing: border-box; width: 100%; max-width: 970px; min-height: 250px; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px 32px; }
 @media (max-width: 600px) { .commandite.commandite-anonyme { max-width: 300px; min-height: 250px; padding: 16px; } }
+
+/* Points de procédure repliés en bas de chaque séance (9 nov. 2026). */
+.seance-procedure { margin-top: 10px; border: 1px dashed currentColor; border-radius: 8px; padding: 8px 12px; opacity: .85; }
+.seance-procedure > summary { cursor: pointer; font-weight: 600; font-size: 14px; }
+.seance-procedure[open] > summary { margin-bottom: 8px; }
