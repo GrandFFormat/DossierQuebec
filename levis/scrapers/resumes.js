@@ -192,6 +192,7 @@ async function candidats({ depuis = null, plafond = Infinity, cache }) {
   const parDossier = new Map();
   for (const d of decisions ?? []) {
     if (!d.sommairePdf || !d.dossier) continue;
+    if (d.theme === 'procedure') continue;   // jamais rien d'utile à résumer dans la procédure (Martin, 9 nov. 2026)
     if (depuis && (d.date ?? '') < depuis) continue;
     if (cache.has(d.dossier)) continue;
     if (!parDossier.has(d.dossier) || (d.date ?? '') > (parDossier.get(d.dossier).date ?? '')) parDossier.set(d.dossier, d);

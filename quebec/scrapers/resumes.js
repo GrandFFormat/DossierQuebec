@@ -193,7 +193,8 @@ async function chargerSommaires(year, max) {
 async function chargerSommairesDepuis(depuis, plafond, cache) {
   const { decisions } = JSON.parse(await readFile(DECISIONS, 'utf8'));
   const candidats = (decisions ?? [])
-    .filter((d) => d.type === 'Sommaires et mémoires' && d.numero && (d.date ?? '') >= depuis && !cache.has(d.id))
+    // Pas de résumé pour les points de procédure : jamais rien d'utile (Martin, 9 nov. 2026).
+    .filter((d) => d.type === 'Sommaires et mémoires' && d.theme !== 'procedure' && d.numero && (d.date ?? '') >= depuis && !cache.has(d.id))
     .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
     .slice(0, plafond);
   const parNom = new Map(candidats.map((d) => [d.id, d]));
