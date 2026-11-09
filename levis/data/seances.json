@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-07T16:42:13.902Z",
+ "generatedAt": "2026-11-09T11:36:25.598Z",
  "source": "https://levis.ca/fr/ville/conseil-municipal/seances-du-conseil-municipal/archives-des-seances-du-conseil-municipal",
  "parametres": {
   "annee": "2026"
@@ -34,15 +34,15 @@
    "secteur": "chutes-de-la-chaudiere-ouest"
   }
  },
- "nombre": 73,
+ "nombre": 78,
  "parInstance": {
   "CAD": {
    "seances": 12,
-   "avecProcesVerbal": 7
+   "avecProcesVerbal": 8
   },
   "CV": {
-   "seances": 19,
-   "avecProcesVerbal": 14
+   "seances": 20,
+   "avecProcesVerbal": 17
   },
   "CACCO": {
    "seances": 12,
@@ -50,14 +50,36 @@
   },
   "CACCE": {
    "seances": 12,
-   "avecProcesVerbal": 8
+   "avecProcesVerbal": 10
   },
   "CE": {
-   "seances": 18,
-   "avecProcesVerbal": 18
+   "seances": 22,
+   "avecProcesVerbal": 22
   }
  },
- "nonReconnues": [],
+ "nonReconnues": [
+  {
+   "titre": "Forum citoyen : contribuez à l’avenir de Lévis",
+   "date": "2026-11-18",
+   "page": "https://levis.ca/fr/ville/organisation-municipale/participation-citoyenne/calendrier-participation-citoyenne/forum-citoyen-contribuez-a-lavenir-de-levis-2-2",
+   "pv": null,
+   "odj": null
+  },
+  {
+   "titre": "Forum citoyen : contribuez à l’avenir de Lévis",
+   "date": "2026-11-17",
+   "page": "https://levis.ca/fr/ville/organisation-municipale/participation-citoyenne/calendrier-participation-citoyenne/forum-citoyen-contribuez-a-lavenir-de-levis-2",
+   "pv": null,
+   "odj": null
+  },
+  {
+   "titre": "Forum citoyen : contribuez à l’avenir de Lévis",
+   "date": "2026-11-14",
+   "page": "https://levis.ca/fr/ville/organisation-municipale/participation-citoyenne/calendrier-participation-citoyenne/forum-citoyen-contribuez-a-lavenir-de-levis",
+   "pv": null,
+   "odj": null
+  }
+ ],
  "seances": [
   {
    "id": "CAD_2026-12-16",
@@ -176,7 +198,7 @@
    "annulee": false,
    "pv": null,
    "pvModifieLe": null,
-   "odj": null,
+   "odj": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Ordres-du-jour/2026/ODJ-CV-2026-11-10-affaires-courantes.pdf",
    "documents": []
   },
   {
@@ -191,7 +213,7 @@
    "annulee": false,
    "pv": null,
    "pvModifieLe": null,
-   "odj": null,
+   "odj": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/2026-11-04_CACCE_ordre_du_jour_2026-11-05-140456_ublt.pdf",
    "documents": []
   },
   {
@@ -206,7 +228,7 @@
    "annulee": false,
    "pv": null,
    "pvModifieLe": null,
-   "odj": null,
+   "odj": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/2026-10-28_CAD_ordre_du_jour.pdf",
    "documents": []
   },
   {
@@ -219,8 +241,23 @@
    "titre": "Séance ordinaire du 27 octobre 2026",
    "page": "https://levis.ca/fr/ville/organisation-municipale/participation-citoyenne/calendrier-participation-citoyenne/seance-ordinaire-du-27-octobre-2026",
    "annulee": false,
-   "pv": null,
-   "pvModifieLe": null,
+   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/2026/PV-CV-2026-10-27-CV3768-a-CV3802.pdf",
+   "pvModifieLe": "2026-10-28T14:31:43-04:00",
+   "odj": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Ordres-du-jour/2026/ODJ-CV-2026-10-27-affaires-courantes.pdf",
+   "documents": []
+  },
+  {
+   "id": "CE_2026-10-23_EXTRA",
+   "uid": "860ee977-1be9-448d-a98e-cad363c382a7",
+   "instance": "CE",
+   "nom": "Comité exécutif",
+   "date": "2026-10-23",
+   "variante": "EXTRA",
+   "titre": "Procès-verbal de la séance du 23 octobre 2026",
+   "page": "https://levis.ca/fr/ville/organisation-municipale/participation-citoyenne/calendrier-participation-citoyenne/proces-verbal-de-la-seance-du-23-octobre-2026",
+   "annulee": false,
+   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/2026/PV-CE-2026-10-23-extra-CE3491-a-CE3494.pdf",
+   "pvModifieLe": "2026-11-05T11:09:45-05:00",
    "odj": null,
    "documents": []
   },
@@ -240,6 +277,21 @@
    "documents": []
   },
   {
+   "id": "CE_2026-10-21",
+   "uid": "1b8df088-6151-4583-8ca4-b1c453fb8bc6",
+   "instance": "CE",
+   "nom": "Comité exécutif",
+   "date": "2026-10-21",
+   "variante": "ORDI",
+   "titre": "Procès-verbal de la séance du 21 octobre 2026",
+   "page": "https://levis.ca/fr/ville/organisation-municipale/participation-citoyenne/calendrier-participation-citoyenne/proces-verbal-de-la-seance-du-20-octobre-2026",
+   "annulee": false,
+   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/2026/PV-CE-2026-10-21-CE3457-a-CE3490.pdf",
+   "pvModifieLe": "2026-11-05T11:07:30-05:00",
+   "odj": null,
+   "documents": []
+  },
+  {
    "id": "CACCE_2026-10-14",
    "uid": "7d283326-9b64-47b3-9b96-7d38499b06be",
    "instance": "CACCE",
@@ -249,9 +301,9 @@
    "titre": "Séance ordinaire du 14 octobre 2026",
    "page": "https://levis.ca/fr/ville/organisation-municipale/participation-citoyenne/calendrier-participation-citoyenne/seance-ordinaire-du-14-octobre-2026",
    "annulee": false,
-   "pv": null,
-   "pvModifieLe": null,
-   "odj": null,
+   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/10-2026-10-14_CACCE-2026-0232-a-CACCE-2026-0258.pdf",
+   "pvModifieLe": "2026-11-05T11:55:57-05:00",
+   "odj": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/2026-10-14_CACCE_ordre_du_jour.pdf",
    "documents": []
   },
   {
@@ -264,8 +316,38 @@
    "titre": "Séance ordinaire du 13 octobre 2026",
    "page": "https://levis.ca/fr/ville/organisation-municipale/participation-citoyenne/calendrier-participation-citoyenne/seance-ordinaire-du-13-octobre-2026",
    "annulee": false,
-   "pv": null,
-   "pvModifieLe": null,
+   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/2026/PV-CV-2026-10-13-CV3743-CV3767.pdf",
+   "pvModifieLe": "2026-10-27T14:54:09-04:00",
+   "odj": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Ordres-du-jour/2026/ODJ-CV-2026-10-13-affaires-courantes.pdf",
+   "documents": []
+  },
+  {
+   "id": "CV_2026-10-13_EXTRA",
+   "uid": "581411a1-52d0-43c8-a0ae-e0d31789862f",
+   "instance": "CV",
+   "nom": "Conseil de la Ville",
+   "date": "2026-10-13",
+   "variante": "EXTRA",
+   "titre": "Séance extraordinaire du 13 octobre 2026",
+   "page": "https://levis.ca/fr/ville/organisation-municipale/participation-citoyenne/calendrier-participation-citoyenne/seance-extraordinaire-du-13-octobre-2026",
+   "annulee": false,
+   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/2026/PV-CV-2026-10-13-CV3733-CV3742-seance-extraordinaire.pdf",
+   "pvModifieLe": "2026-10-27T14:55:24-04:00",
+   "odj": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Ordres-du-jour/2026/ODJ-CV-2026-10-13_avis-convocation-PQI-extraordinaire.pdf",
+   "documents": []
+  },
+  {
+   "id": "CE_2026-10-06",
+   "uid": "3f37a92f-eadd-4e17-8df6-c7f1524886e4",
+   "instance": "CE",
+   "nom": "Comité exécutif",
+   "date": "2026-10-06",
+   "variante": "ORDI",
+   "titre": "Procès-verbal de la séance du 6 octobre 2026",
+   "page": "https://levis.ca/fr/ville/organisation-municipale/participation-citoyenne/calendrier-participation-citoyenne/proces-verbal-de-la-seance-du-6-octobre-2026",
+   "annulee": false,
+   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/2026/PV-CE-2026-10-06-CE3430-a-CE3457.pdf",
+   "pvModifieLe": "2026-10-27T14:36:55-04:00",
    "odj": null,
    "documents": []
   },
@@ -279,8 +361,8 @@
    "titre": "Séance ordinaire du 30 septembre 2026",
    "page": "https://levis.ca/fr/ville/organisation-municipale/participation-citoyenne/calendrier-participation-citoyenne/seance-ordinaire-du-30-septembre-2026",
    "annulee": false,
-   "pv": null,
-   "pvModifieLe": null,
+   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/09-Proces_verbal_de_la_seance_ordinaire_du_-30_septembre_2026.pdf",
+   "pvModifieLe": "2026-10-29T15:20:50-04:00",
    "odj": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/2026-09-30_CAD_Ordre_du_jour.pdf",
    "documents": []
   },
@@ -295,7 +377,7 @@
    "page": "https://levis.ca/fr/ville/organisation-municipale/participation-citoyenne/calendrier-participation-citoyenne/seance-ordinaire-du-29-septembre-2026",
    "annulee": false,
    "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/2026/PV-CV-2026-09-29-CV3691-a-CV3732-pour-pub.pdf",
-   "pvModifieLe": "2026-09-30T15:12:05-04:00",
+   "pvModifieLe": "2026-10-14T13:51:18-04:00",
    "odj": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Ordres-du-jour/2026/ODJ-CV-2026-09-29-affaires-courantes.pdf",
    "documents": []
   },
@@ -315,6 +397,21 @@
    "documents": []
   },
   {
+   "id": "CE_2026-09-22",
+   "uid": "3b535dcb-40cc-4f22-b178-fa04ca81ace2",
+   "instance": "CE",
+   "nom": "Comité exécutif",
+   "date": "2026-09-22",
+   "variante": "ORDI",
+   "titre": "Procès-verbal de la séance du 22 septembre 2026",
+   "page": "https://levis.ca/fr/ville/organisation-municipale/participation-citoyenne/calendrier-participation-citoyenne/proces-verbal-de-la-seance-du-22-septembre-2026",
+   "annulee": false,
+   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/PV-CE-2026-09-22_modif.pdf",
+   "pvModifieLe": "2026-11-03T13:21:40-05:00",
+   "odj": null,
+   "documents": []
+  },
+  {
    "id": "CACCE_2026-09-16",
    "uid": "6b5237f5-c97d-4ca5-bd41-62585bc579b7",
    "instance": "CACCE",
@@ -324,8 +421,8 @@
    "titre": "Séance ordinaire du 16 septembre 2026",
    "page": "https://levis.ca/fr/ville/organisation-municipale/participation-citoyenne/calendrier-participation-citoyenne/seance-ordinaire-du-16-septembre-2026",
    "annulee": false,
-   "pv": null,
-   "pvModifieLe": null,
+   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/09-2026-09-16_CACCE-2026-0204-a-CACCE-2026-0231.pdf",
+   "pvModifieLe": "2026-10-15T09:32:23-04:00",
    "odj": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/2026-09-16_CACCE_ordre_du_jour.pdf",
    "documents": []
   },
