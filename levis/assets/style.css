@@ -712,3 +712,6 @@ input[type="search"], select { max-width: 100%; text-overflow: ellipsis; }
 
 /* Commanditaire anonyme (9 nov. 2026) : encadré pointillé, sans image. */
 .commandite.commandite-anonyme { border: 2px dashed currentColor; border-left-width: 2px; background: transparent; }
+/* Format d'une annonce standard (9 nov. 2026) : 970 × 250 (« billboard ») ; 300 × 250 sur téléphone. */
+.commandite.commandite-anonyme { box-sizing: border-box; width: 100%; max-width: 970px; min-height: 250px; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px 32px; }
+@media (max-width: 600px) { .commandite.commandite-anonyme { max-width: 300px; min-height: 250px; padding: 16px; } }
