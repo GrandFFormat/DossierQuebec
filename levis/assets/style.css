@@ -709,3 +709,6 @@ input[type="search"], select { max-width: 100%; text-overflow: ellipsis; }
 .commandite-image .commandite-logo img { height: auto; width: 100%; max-width: 520px; }
 /* Version large (Martin, 8 nov. 2026) : toute la largeur de la colonne. */
 .commandite-image .commandite-logo img { max-width: 100%; }
+
+/* Commanditaire anonyme (9 nov. 2026) : encadré pointillé, sans image. */
+.commandite.commandite-anonyme { border: 2px dashed currentColor; border-left-width: 2px; background: transparent; }
