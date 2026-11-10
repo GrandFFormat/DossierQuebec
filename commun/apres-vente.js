@@ -7,7 +7,7 @@
 //   <div data-apres-vente data-file="data/file-commandite.json"></div>
 //   <script src="/commun/apres-vente.js" defer></script>
 // La file : { "periodes": [ { "debut": "AAAA-MM-JJ", "fin": "AAAA-MM-JJ", "affichage": "nom|anonyme|banniere", "nom": "" } ] }
-// Une ligne par paiement reçu. La langue suit ?lang=en, dvq:langue ou <html lang>.
+// Une ligne par paiement reçu. La langue suit la page (voir lang plus bas).
 (function(){
   var LIENS = {
     fr: { nom: '6af307242330fac488af738c', anonyme: '6af307442330fac488af738d', banniere: '6af3076603c375ed645fe94e' },
@@ -32,14 +32,22 @@
     + '.apres-vente .av-boutons{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 6px}'
     + '.apres-vente .av-bouton{display:inline-block;padding:5px 12px;font-size:13px;border:2px solid currentColor;font-weight:700;text-decoration:none}'
     + '.apres-vente .av-bouton:hover{opacity:.75}.apres-vente .av-note{font-size:13px;opacity:.8}';
-  var lang = function(){
+  // Le bloc suit la langue de la PAGE : un volet sans anglais (Lévis, Québec) reste en français,
+  // même si le visiteur a choisi l’anglais ailleurs (même règle que commun/langue.js, VOLETS_EN).
+  // data-lang="en" ou "fr" sur le bloc impose la langue (sites sœurs en anglais).
+  var VOLETS_EN = ['montreal'];
+  var lang = function(el){
+    var impose = el.getAttribute('data-lang'); if(impose === 'en' || impose === 'fr') return impose;
+    var ville = document.body && document.body.dataset.ville;
+    if(ville && VOLETS_EN.indexOf(ville) < 0) return 'fr';
     if(/[?&]lang=en/.test(location.search)) return 'en';
     try { if(localStorage.getItem('dvq:langue') === 'en') return 'en'; } catch(e){}
     return /^en/i.test(document.documentElement.lang) ? 'en' : 'fr';
   };
+
   var esc = function(s){ return String(s).replace(/[&<>"]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   function monter(el){
-    var L = lang(), t = T[L];
+    var L = lang(el), t = T[L];
     var jour = function(s){ return new Date(s + 'T12:00:00').toLocaleDateString(L === 'en' ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'long', year: 'numeric' }); };
     fetch(el.getAttribute('data-file')).then(function(r){ return r.json(); }).then(function(d){
       var p = d.periodes || []; if(!p.length) return;
