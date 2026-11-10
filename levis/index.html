@@ -121,20 +121,8 @@
     </div>
   </section>
 
-  <!-- File des mois de commandite (Martin, 10 nov. 2026) : 50 $ par mois, 1 à 6 mois, placés après la
-       dernière période réservée. Données : data/file-commandite.json, une ligne par paiement GoHighLevel. -->
-  <details class="file-commandite" id="file-commandite">
-    <summary><span data-en="Booked until">Réservée jusqu'au</span> <b id="file-fin">…</b> · <span data-en="Sponsor a month: $50">Commanditer un mois : 50&nbsp;$</span></summary>
-    <p class="file-dates"><span data-en="Next free month">Prochain mois libre</span> : <b id="file-libre">…</b></p>
-    <p data-en="$50 per month, 1 to 6 months. Your months are added at the end of the line, after the last booked month.">50&nbsp;$ par mois, de 1 à 6 mois. Vos mois s'ajoutent au bout de la file, après le dernier mois réservé.</p>
-    <table class="file-table" id="file-table"></table>
-    <p class="file-boutons">
-      <a class="file-bouton" href="https://promo.dafrsolution.com/payment-link/6af307242330fac488af738c" rel="noopener" data-en="With my name">Avec mon nom</a>
-      <a class="file-bouton" href="https://promo.dafrsolution.com/payment-link/6af307442330fac488af738d" rel="noopener" data-en="Anonymously">Anonyme</a>
-      <a class="file-bouton" href="https://promo.dafrsolution.com/payment-link/6af3076603c375ed645fe94e" rel="noopener" data-en="With my banner">Avec ma bannière</a>
-    </p>
-    <p class="commandite-note" data-en="The name shown is the one used for payment. Each banner, a still image with no animation, is checked before going online. If refused, you are refunded. Contribution to the service, no tax receipt.">Le nom affiché est celui du paiement. Chaque bannière, une image fixe sans animation, est vérifiée avant sa mise en ligne. Refusée, elle est remboursée. Contribution au service, sans reçu d'impôt.</p>
-  </details>
+  <!-- Bloc d’après-vente (10 nov. 2026) : /commun/apres-vente.js, file dans data/file-commandite.json. -->
+  <div data-apres-vente data-file="data/file-commandite.json"></div>
 
   <div class="chiffres" id="chiffres"></div>
 
@@ -178,22 +166,7 @@
   </div>
 </footer>
 
-<script>
-// File des mois de commandite (10 nov. 2026) : lit data/file-commandite.json.
-(function(){
-  var en = /[?&]lang=en/.test(location.search) || (function(){ try { return localStorage.getItem('dvq:langue') === 'en'; } catch(e){ return false; } })();
-  var jour = function(s){ return new Date(s + 'T12:00:00').toLocaleDateString(en ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'long', year: 'numeric' }); };
-  fetch('data/file-commandite.json').then(function(r){ return r.json(); }).then(function(d){
-    var p = d.periodes || []; if(!p.length) return;
-    var fin = p[p.length - 1].fin, libre = new Date(fin + 'T12:00:00'); libre.setDate(libre.getDate() + 1);
-    document.getElementById('file-fin').textContent = jour(fin);
-    document.getElementById('file-libre').textContent = jour(libre.toISOString().slice(0, 10));
-    var qui = function(x){ return x.affichage === 'anonyme' ? (en ? 'Anonymous' : 'Anonyme') : x.nom; };
-    document.getElementById('file-table').innerHTML = '<tr><th>#</th><th>' + (en ? 'Period' : 'Période') + '</th><th>' + (en ? 'Sponsor' : 'Commanditaire') + '</th></tr>'
-      + p.map(function(x, i){ return '<tr><td>' + (i + 1) + '</td><td>' + jour(x.debut) + ' → ' + jour(x.fin) + '</td><td>' + qui(x) + '</td></tr>'; }).join('');
-  }).catch(function(){ document.getElementById('file-commandite').hidden = true; });
-})();
-</script>
+<script src="/commun/apres-vente.js" defer></script>
 <script type="module" src="assets/app.js"></script>
 <script type="module" src="/commun/entete-volet.js"></script>
 <script type="module" src="/commun/abonnes.js"></script>
