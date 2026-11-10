@@ -13,15 +13,23 @@
     fr: { nom: '6af307242330fac488af738c', anonyme: '6af307442330fac488af738d', banniere: '6af3076603c375ed645fe94e' },
     en: { nom: '6af317df03c375ed645fe986', anonyme: '6af3180103c375ed645fe987', banniere: '6af318222330fac488af73b4' }
   };
+  // Villes à un seul mois à la fois (data-max-mois="1", Québec et Montréal, 10 nov. 2026) : liens à 1 mois fixe,
+  // et aucune réservation tant que la ville est réservée. Un gros commanditaire attend au plus un mois.
+  var LIENS1 = {
+    fr: { nom: '6af31a6b03c375ed645fe997', anonyme: '6af31a952330fac488af73c5', banniere: '6af31abf2330fac488af73c7' },
+    en: { nom: '6af31a1903c375ed645fe993', anonyme: '6af319e92330fac488af73c0', banniere: '6af31a412330fac488af73c4' }
+  };
   var PAIEMENT = 'https://promo.dafrsolution.com/payment-link/';
   var T = {
     fr: { reservee: 'Réservée jusqu’au', commanditer: 'Commanditer un mois : 50 $', libre: 'Prochain mois libre',
           prix: '50 $ par mois, de 1 à 6 mois. Vos mois s’ajoutent au bout de la file, après le dernier mois réservé.',
+          libreMaint: 'Libre', prix1: '50 $ pour un mois, une réservation à la fois.', occupe: 'Ce mois est déjà réservé. La prochaine réservation ouvre le',
           periode: 'Période', qui: 'Commanditaire', anonyme: 'Anonyme',
           b: { nom: 'Avec mon nom', anonyme: 'Anonyme', banniere: 'Avec ma bannière' },
           note: 'Le nom affiché est celui du paiement. Chaque bannière, une image fixe sans animation, est vérifiée avant sa mise en ligne. Refusée, elle est remboursée. Contribution au service, sans reçu d’impôt.' },
     en: { reservee: 'Booked until', commanditer: 'Sponsor a month: $50', libre: 'Next free month',
           prix: '$50 per month, 1 to 6 months. Your months are added at the end of the line, after the last booked month.',
+          libreMaint: 'Available', prix1: '$50 for one month, one booking at a time.', occupe: 'This month is already booked. The next booking opens on',
           periode: 'Period', qui: 'Sponsor', anonyme: 'Anonymous',
           b: { nom: 'With my name', anonyme: 'Anonymously', banniere: 'With my banner' },
           note: 'The name shown is the one used for payment. Each banner, a still image with no animation, is checked before going online. If refused, you are refunded. Contribution to the service, no tax receipt.' }
@@ -49,16 +57,23 @@
   function monter(el){
     var L = lang(el), t = T[L];
     var jour = function(s){ return new Date(s + 'T12:00:00').toLocaleDateString(L === 'en' ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'long', year: 'numeric' }); };
+    var un = el.getAttribute('data-max-mois') === '1', liens = (un ? LIENS1 : LIENS)[L];
+    var iso = function(dt){ return dt.toISOString().slice(0, 10); }, auj = iso(new Date());
     fetch(el.getAttribute('data-file')).then(function(r){ return r.json(); }).then(function(d){
-      var p = d.periodes || []; if(!p.length) return;
-      var fin = p[p.length - 1].fin, libre = new Date(fin + 'T12:00:00'); libre.setDate(libre.getDate() + 1);
+      var p = d.periodes || [];
+      var fin = p.length ? p[p.length - 1].fin : null;
+      var libre = fin ? new Date(fin + 'T12:00:00') : new Date(); if(fin) libre.setDate(libre.getDate() + 1);
+      if(libre < new Date()) libre = new Date();
+      var occupe = un && fin && fin >= auj;
       var qui = function(x){ return x.affichage === 'anonyme' ? t.anonyme : esc(x.nom); };
-      var bouton = function(k){ return '<a class="av-bouton" href="' + PAIEMENT + LIENS[L][k] + '" rel="noopener">' + t.b[k] + '</a>'; };
-      el.outerHTML = '<details class="apres-vente"><summary>' + t.reservee + ' <b>' + jour(fin) + '</b> · ' + t.commanditer + '</summary>'
-        + '<p>' + t.libre + ' : <b>' + jour(libre.toISOString().slice(0, 10)) + '</b></p><p>' + t.prix + '</p>'
-        + '<table><tr><th>#</th><th>' + t.periode + '</th><th>' + t.qui + '</th></tr>'
-        + p.map(function(x, i){ return '<tr><td>' + (i + 1) + '</td><td>' + jour(x.debut) + ' → ' + jour(x.fin) + '</td><td>' + qui(x) + '</td></tr>'; }).join('')
-        + '</table><p class="av-boutons">' + bouton('nom') + bouton('anonyme') + bouton('banniere') + '</p>'
+      var bouton = function(k){ return '<a class="av-bouton" href="' + PAIEMENT + liens[k] + '" rel="noopener">' + t.b[k] + '</a>'; };
+      var resume = fin && fin >= auj ? t.reservee + ' <b>' + jour(fin) + '</b>' : t.libreMaint;
+      el.outerHTML = '<details class="apres-vente"><summary>' + resume + ' · ' + t.commanditer + '</summary>'
+        + (occupe ? '<p>' + t.occupe + ' <b>' + jour(iso(libre)) + '</b>.</p>'
+                  : '<p>' + t.libre + ' : <b>' + jour(iso(libre)) + '</b></p><p>' + (un ? t.prix1 : t.prix) + '</p>')
+        + (p.length ? '<table><tr><th>#</th><th>' + t.periode + '</th><th>' + t.qui + '</th></tr>'
+          + p.map(function(x, i){ return '<tr><td>' + (i + 1) + '</td><td>' + jour(x.debut) + ' → ' + jour(x.fin) + '</td><td>' + qui(x) + '</td></tr>'; }).join('') + '</table>' : '')
+        + (occupe ? '' : '<p class="av-boutons">' + bouton('nom') + bouton('anonyme') + bouton('banniere') + '</p>')
         + '<p class="av-note">' + t.note + '</p></details>';
     }).catch(function(){ el.remove(); });
   }
