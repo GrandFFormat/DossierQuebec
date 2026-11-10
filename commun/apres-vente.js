@@ -31,13 +31,13 @@
   var T = {
     fr: { reservee: 'Réservée jusqu’au', commanditer: 'Commanditer un mois : dès 50 $', libre: 'Prochain mois libre',
           prix: '50 $ par mois, de 1 à 6 mois. Vos mois s’ajoutent au bout de la file, après le dernier mois réservé.',
-          libreMaint: 'Libre', prix6: 'De 1 à 6 mois. Vos mois s’ajoutent au bout de la file, après le dernier mois réservé.', prix1: 'Un mois à la fois, une réservation à la fois.', prixB: function(p){ return 'Avec votre nom ou anonymement : 50 $ par mois. Avec votre bannière : ' + p + ' $ par mois.'; }, bp: function(p){ return 'Avec ma bannière (' + p + ' $)'; }, occupe: 'Ce mois est déjà réservé. La prochaine réservation ouvre le',
+          libreMaint: 'Libre', prix6: 'De 1 à 6 mois. Vos mois s’ajoutent au bout de la file, après le dernier mois réservé.', prix1: 'Un mois à la fois, une réservation à la fois.', prixB: function(p){ return 'Avec votre nom ou anonymement : 50 $ par mois. Avec votre bannière ou le nom de votre entreprise : ' + p + ' $ par mois.'; }, bp: function(p){ return 'Avec ma bannière ou mon entreprise (' + p + ' $)'; }, occupe: 'Ce mois est déjà réservé. La prochaine réservation ouvre le',
           periode: 'Période', qui: 'Commanditaire', anonyme: 'Anonyme',
           b: { nom: 'Avec mon nom', anonyme: 'Anonyme', banniere: 'Avec ma bannière' },
           note: 'Le nom affiché est celui du paiement. Chaque bannière, une image fixe sans animation, est vérifiée avant sa mise en ligne. Refusée, elle est remboursée. Contribution au service, sans reçu d’impôt.' },
     en: { reservee: 'Booked until', commanditer: 'Sponsor a month: from $50', libre: 'Next free month',
           prix: '$50 per month, 1 to 6 months. Your months are added at the end of the line, after the last booked month.',
-          libreMaint: 'Available', prix6: '1 to 6 months. Your months are added at the end of the line, after the last booked month.', prix1: 'One month at a time, one booking at a time.', prixB: function(p){ return 'With your name or anonymously: $50 a month. With your banner: $' + p + ' a month.'; }, bp: function(p){ return 'With my banner ($' + p + ')'; }, occupe: 'This month is already booked. The next booking opens on',
+          libreMaint: 'Available', prix6: '1 to 6 months. Your months are added at the end of the line, after the last booked month.', prix1: 'One month at a time, one booking at a time.', prixB: function(p){ return 'With your name or anonymously: $50 a month. With your banner or business name: $' + p + ' a month.'; }, bp: function(p){ return 'With my banner or business ($' + p + ')'; }, occupe: 'This month is already booked. The next booking opens on',
           periode: 'Period', qui: 'Sponsor', anonyme: 'Anonymous',
           b: { nom: 'With my name', anonyme: 'Anonymously', banniere: 'With my banner' },
           note: 'The name shown is the one used for payment. Each banner, a still image with no animation, is checked before going online. If refused, you are refunded. Contribution to the service, no tax receipt.' }
