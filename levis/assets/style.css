@@ -739,3 +739,14 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 /* Bouton « Tout ouvrir » dans l'en-tête de chaque séance (9 nov. 2026). */
 .bouton-tout-ouvrir { margin-left: auto; font: inherit; font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: 1px solid currentColor; background: transparent; color: inherit; cursor: pointer; }
 .bouton-tout-ouvrir:hover { background: rgba(127, 127, 127, .15); }
+
+/* File des mois de commandite (10 nov. 2026) */
+.file-commandite { margin: -18px 0 28px; font-size: 14px; }
+.file-commandite summary { cursor: pointer; opacity: .85; }
+.file-commandite[open] { padding-bottom: 4px; }
+.file-commandite p { margin: 8px 0; font-size: 14px; }
+.file-table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 14px; }
+.file-table th, .file-table td { text-align: left; padding: 6px 8px; border-bottom: 1px solid currentColor; border-bottom-color: rgba(127,127,127,.35); }
+.file-boutons { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 6px; }
+.file-bouton { display: inline-block; padding: 5px 12px; font-size: 13px; border: 2px solid currentColor; font-weight: 700; text-decoration: none; }
+.file-bouton:hover { opacity: .75; }
