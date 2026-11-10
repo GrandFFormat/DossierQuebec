@@ -2744,6 +2744,16 @@ body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
 .rtv-locations{margin:18px 0 6px;}
 .rtv-villes tr.rtv-archaique td{text-decoration:line-through;} /* PV numérisés : écriture normale, barrée (Martin, 9 nov. 2026) */
 .rtv-archaique-legende{display:block; margin-top:4px; font-size:13px; color:var(--muted, #5B6570); font-weight:600;}
+/* GRIS « aucune clause trouvée » (10 nov. 2026, d'abord pour les 24 villes de la C.-B.).
+   La Ville ne dit RIEN sur la republication de ses procès-verbaux — ni oui, ni non. Il fallait
+   le distinguer du jaune : « exige une permission écrite » et « ne dit rien du tout » n'appellent
+   pas la même lettre quand on écrit à l'hôtel de ville, et peindre les deux pareil effaçait la
+   seule nuance qui compte. Le silence n'est pas une permission.
+   À ne pas confondre non plus avec .rtv-archaique juste au-dessus, qui barre la rangée parce que
+   les procès-verbaux sont numérisés : ça, c'est le document, pas le droit. */
+.rtv-villes tr.rtv-inconnu td{background:#E3E5E7; color:#131313;}
+.rtv-inconnu-legende{display:block; margin-top:4px; font-size:13px; font-weight:600;}
+.rtv-inconnu-legende::before{content:""; display:inline-block; width:10px; height:10px; margin-right:6px; background:#E3E5E7; border:1px solid currentColor;}
 .rtv-bloquee-legende{display:block; margin-top:4px; font-size:13px; color:var(--red); font-weight:600;}
 .rtv-fondateur{background:#FFF3C4; color:#131313; border-left:4px solid #FFD24D; padding:8px 10px;}
 
