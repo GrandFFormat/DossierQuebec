@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-09T18:58:05.085Z",
+ "generatedAt": "2026-11-10T16:30:02.166Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "licence": "Documents publics de la Ville de Québec — reproduction avec mention de la source, usage non commercial.",
  "parametres": {
@@ -12,9 +12,9 @@
    "Tableaux des décisions"
   ]
  },
- "totalDisponible": 5815,
- "nombre": 5815,
- "nouveauxDepuisDerniereExecution": 5,
+ "totalDisponible": 5821,
+ "nombre": 5821,
+ "nouveauxDepuisDerniereExecution": 6,
  "themes": {
   "procedure": {
    "libelle": "Procédure",
@@ -100,7 +100,7 @@
   "matieres-residuelles": {
    "titre": "Matières résiduelles",
    "description": "Collectes, incinérateur (Complexe de valorisation énergétique), biométhanisation et centre de tri.",
-   "n": 60
+   "n": 61
   },
   "expocite": {
    "titre": "ExpoCité et Centre Vidéotron",
@@ -132,7 +132,7 @@
   "type": [
    {
     "valeur": "Résolutions",
-    "n": 3720
+    "n": 3725
    },
    {
     "valeur": "Sommaires et mémoires",
@@ -140,7 +140,7 @@
    },
    {
     "valeur": "Procès-verbaux",
-    "n": 199
+    "n": 200
    },
    {
     "valeur": "Tableaux des décisions",
@@ -150,7 +150,7 @@
   "instance": [
    {
     "valeur": "Comité exécutif",
-    "n": 1453
+    "n": 1459
    },
    {
     "valeur": "Conseil de la ville",
@@ -338,11 +338,11 @@
   "theme": [
    {
     "valeur": "urbanisme",
-    "n": 1083
+    "n": 1084
    },
    {
     "valeur": "procedure",
-    "n": 818
+    "n": 819
    },
    {
     "valeur": "subventions",
@@ -358,7 +358,7 @@
    },
    {
     "valeur": "immobilier",
-    "n": 357
+    "n": 359
    },
    {
     "valeur": "loisirs",
@@ -386,7 +386,7 @@
    },
    {
     "valeur": "environnement",
-    "n": 158
+    "n": 159
    },
    {
     "valeur": "securite",
@@ -394,7 +394,7 @@
    },
    {
     "valeur": "economie",
-    "n": 92
+    "n": 93
    },
    {
     "valeur": "honneurs",
@@ -1231,6 +1231,21 @@
    "themeSource": "objet"
   },
   {
+   "id": "PV_CE_SP_2026-10-30_00h00.pdf",
+   "numero": null,
+   "objet": "Procès-verbal de la séance spéciale du comité exécutif tenue le vendredi 30 octobre 2026 à 08h30",
+   "date": "2026-10-30",
+   "annee": "2026",
+   "type": "Procès-verbaux",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CE_SP_2026-10-30_00h00.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
    "id": "TD_CE_PL_2026-10-30_00h00.pdf",
    "numero": null,
    "objet": "Tableau des décisions de la séance spéciale du comité exécutif tenue le vendredi 30 octobre 2026 à 08h30",
@@ -1243,6 +1258,95 @@
    "nouveau": false,
    "sommaireId": null,
    "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1330.pdf",
+   "numero": "CE-2026-1330",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Renouvellement de l'entente entre la Ville de Québec et Option métal recyclé du Québec pour la prise en charge des résidus métalliques et d'autres matières résiduelles provenant des écocentres de la Ville de Québec, pour la période du 1er décemb",
+   "date": "2026-10-30",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1330.pdf",
+   "nouveau": true,
+   "sommaireId": "GM2026-011.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "projets": [
+    "matieres-residuelles"
+   ],
+   "theme": "environnement",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1331.pdf",
+   "numero": "CE-2026-1331",
+   "objet": "Autorisation d'un projet immobilier dérogatoire sur le lot 6 716 840 du cadastre du Québec (1073, boulevard René-Lévesque Ouest, quartier de Sillery, district électoral de Saint-Louis¿Sillery), en vertu de l'article 145.45 de la Loi sur l'aménagement et l'urbanisme (RLRQ, c. A¿19.1) ¿ Autorisation d",
+   "date": "2026-10-30",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1331.pdf",
+   "nouveau": true,
+   "sommaireId": "GT2026-346.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération",
+   "echeance": "2026-11-03",
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1332.pdf",
+   "numero": "CE-2026-1332",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Entente entre la Ville de Québec et la Chambre de commerce et d'industrie de Québec, relative au versement d'une subvention, dans le cadre du volet Soutien aux projets structurants pour améliorer les milieux de vie du Fonds régions et ruralité,",
+   "date": "2026-10-30",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1332.pdf",
+   "nouveau": true,
+   "sommaireId": "DE2026-394.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "economie",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1333.pdf",
+   "numero": "CE-2026-1333",
+   "objet": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'un immeuble constitué de l'assiette de la rue Gatineau, connu et désigné comme étant le lot 6 533 629 du cadastre du Québec ¿ Arrondissement de La Haute-Saint-Charles",
+   "date": "2026-10-30",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1333.pdf",
+   "nouveau": true,
+   "sommaireId": "DE2026-377.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1334.pdf",
+   "numero": "CE-2026-1334",
+   "objet": "Acquisition à des fins municipales d'un immeuble situé en bordure de la rue de la Promenade-des-Soeurs, connu et désigné comme étant les lots 5 830 991 et 5 830 992 du cadastre du Québec ¿ Arrondissement de Sainte-Foy¿Sillery¿Cap-Rouge",
+   "date": "2026-10-30",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1334.pdf",
+   "nouveau": true,
+   "sommaireId": "DE2026-393.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "theme": "immobilier",
    "themeSource": "objet"
   },
   {
@@ -4274,7 +4378,7 @@
    "instance": "Commission d'urbanisme et de conservation de Québec",
    "unite": "Planification de l'aménagement et de l'environnement",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CUCQ_OR_2026-10-21.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "theme": "procedure",
    "themeSource": "objet"
@@ -6535,7 +6639,7 @@
    "instance": "Commission d'urbanisme et de conservation de Québec",
    "unite": "Planification de l'aménagement et de l'environnement",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CUCQ_OR_2026-10-14.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "theme": "procedure",
    "themeSource": "objet"
@@ -9218,7 +9322,7 @@
    "instance": "Commission d'urbanisme et de conservation de Québec",
    "unite": "Planification de l'aménagement et de l'environnement",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CUCQ_OR_2026-10-07.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "theme": "procedure",
    "themeSource": "objet"
@@ -11840,7 +11944,7 @@
    "instance": "Commission d'urbanisme et de conservation de Québec",
    "unite": "Planification de l'aménagement et de l'environnement",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CUCQ_OR_2026-09-30.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "theme": "procedure",
    "themeSource": "objet"
@@ -13479,7 +13583,7 @@
    "instance": "Commission d'urbanisme et de conservation de Québec",
    "unite": "Planification de l'aménagement et de l'environnement",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CUCQ_OR_2026-09-23.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "theme": "procedure",
    "themeSource": "objet"
