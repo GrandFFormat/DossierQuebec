@@ -103,6 +103,9 @@ export function menuVilles(details, villeActuelle) {
 
 // L'avis d'un volet en pause, en tête de chacune de ses pages : sans lui, des données figées se
 // liraient comme des données du jour. Il masque aussi l'inscription au courriel de la ville.
+// Il offre la réactivation (Martin, 11 nov. 2026) : 100 $ une fois pour un particulier, puis 50 $ par
+// mois. Lien GoHighLevel « Réactivation d'une ville », redirigé vers le formulaire d'après-vente.
+const REACTIVER = 'https://promo.dafrsolution.com/payment-link/6af4eaec906a8b62055d5b71';
 function avisPause() {
   const p = VILLES_EN_PAUSE[document.body.dataset.ville ?? ''];
   if (!p || p.sansAvis || document.getElementById('avis-pause')) return;
@@ -112,8 +115,8 @@ function avisPause() {
   avis.setAttribute('role', 'note');
   avis.style.cssText = 'background:#FFD24D;color:#131313;border-bottom:3px solid #131313;padding:12px 18px;font-size:15px;line-height:1.5;text-align:center;';
   avis.innerHTML = tr(
-    `<strong>Ce volet est en pause.</strong> Les données de ${echapper(p.nom)} ne sont plus mises à jour depuis le ${jour} : ce que vous lisez date de ce jour-là ou d'avant. <a href="/" style="color:#131313;font-weight:700">Retour à DossierQuébec</a>`,
-    `<strong>This section is on hold.</strong> ${echapper(p.nom)} data has not been updated since ${jour}: what you are reading dates from that day or earlier. <a href="/" style="color:#131313;font-weight:700">Back to DossierQuébec</a>`);
+    `<strong>Ce volet est présentement désactivé.</strong> Les données de ${echapper(p.nom)} ne sont plus mises à jour depuis le ${jour} : ce que vous lisez date de ce jour-là ou d'avant.<br>Pour un particulier, le réactiver coûte <strong>100 $</strong> une fois, puis <strong>50 $ par mois</strong>, avec votre nom ou anonymement. <a href="${REACTIVER}" rel="noopener" style="color:#131313;font-weight:700">Réactiver ${echapper(p.nom)} →</a> · <a href="/" style="color:#131313;font-weight:700">Retour à DossierQuébec</a>`,
+    `<strong>This section is currently inactive.</strong> ${echapper(p.nom)} data has not been updated since ${jour}: what you are reading dates from that day or earlier.<br>For an individual, reactivating it costs <strong>$100</strong> once, then <strong>$50 a month</strong>, with your name or anonymously. <a href="${REACTIVER}" rel="noopener" style="color:#131313;font-weight:700">Reactivate ${echapper(p.nom)} →</a> · <a href="/" style="color:#131313;font-weight:700">Back to DossierQuébec</a>`);
   document.body.prepend(avis);
   const infolettre = document.getElementById('infolettre');
   if (infolettre) infolettre.remove();
