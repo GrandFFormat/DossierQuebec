@@ -68,8 +68,9 @@ export default async function handler(req, res) {
   }
   if (req.method !== 'POST') return res.status(405).json({ ok: false });
   const b = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : req.body || {};
-  if (b.site_web) return res.status(200).json({ ok: true });
+  // L'enchère a son propre piège (av_laisser_vide) : le navigateur remplissait « site_web » tout seul (11 nov. 2026).
   if (b.action === 'offre') {
+    if (b.av_laisser_vide) return res.status(200).json({ ok: true });
     try {
       const r = await offrir(b);
       return res.status(r.statut).json(r.corps);
@@ -78,6 +79,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ ok: false });
     }
   }
+  if (b.site_web) return res.status(200).json({ ok: true });
 
   const m = {
     ville: propre(b.ville, 80),
