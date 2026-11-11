@@ -112,6 +112,7 @@ export const ETAPES = [
       ]
     : []),
   { nom: 'Lexique, mesuré sur les procès-verbaux', argv: ['scrapers/lexique.js'], secondaire: true },
+  { nom: 'Décisions récentes dans la page (Google)', argv: ['../scripts/prerendu-villes.js', 'laval'], secondaire: true },
   // Un PDF par sommaire, sur le stockage Azure : 120 par jour au plus, le reste attendra demain.
   { nom: 'Sommaires décisionnels (120 par jour au plus)', argv: ['scrapers/sommaires.js', '--max=120'], secondaire: true },
   ...(resumes
