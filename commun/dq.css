@@ -2749,3 +2749,13 @@ body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
 .rtv-exemples figure{margin:0}
 .rtv-exemples img{display:block;width:100%;height:auto;border:2px solid var(--ink,#131313)}
 .rtv-exemples figcaption{font-size:13px;margin-top:6px;color:var(--slate,#5B6570)}
+
+/* Fiche enrichie d'un projet de loi (11 nov. 2026) : au-dessus de la liste, sur /projets-de-loi/<slug>. */
+.fiche-enrichie{border:2px solid currentColor;padding:18px 20px;margin:0 0 28px;max-width:860px}
+.fiche-enrichie h2{margin:0 0 6px;font-size:24px;line-height:1.2}
+.fiche-enrichie h3{margin:18px 0 6px;font-size:17px}
+.fiche-enrichie h4{margin:12px 0 2px;font-size:15px}
+.fiche-enrichie p,.fiche-enrichie li{font-size:15px;line-height:1.5}
+.fiche-enrichie .fiche-enrichie-note{font-size:13px;opacity:.8}
+.fiche-enrichie table{border-collapse:collapse;width:100%;font-size:14px}
+.fiche-enrichie th,.fiche-enrichie td{text-align:left;vertical-align:top;padding:6px 8px;border-bottom:1px solid rgba(127,127,127,.35)}
