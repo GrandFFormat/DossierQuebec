@@ -312,8 +312,7 @@ function ecrire(s) {
     <p class="ab-chapeau" style="margin-bottom:12px">${tr("Une idée pour le site, un problème, une erreur dans une donnée ? Chaque message est lu. Pour une erreur dans une décision, le plus simple est le lien « Signaler une erreur » au bas de sa fiche : le numéro s'y ajoute tout seul.", 'An idea for the site, a problem, an error in the data? Every message is read, in English or French. For an error in a decision, the easiest is the “Report an error” link at the bottom of its item: the number is added automatically.')}</p>
     ${s ? '<div class="ab-message-boite"></div>' : `<p class="ab-note">${tr('Connectez-vous plus haut pour nous écrire.', 'Sign in above to write to us.')}</p>`}
   </section>`;
-  // « Ce qui me préoccupe » est un sujet du menu depuis le 3 nov. 2026 (même table preoccupations).
-  if (s) formulaireMessage(zone.querySelector('.ab-message-boite'), s, { preoccupation: true });
+  if (s) formulaireMessage(zone.querySelector('.ab-message-boite'), s);
 }
 
 // Arriver sur « Nous écrire » depuis une autre page (/mes-dossiers#ecrire) : le formulaire est
