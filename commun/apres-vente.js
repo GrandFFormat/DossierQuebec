@@ -27,9 +27,14 @@
   var BANNIERE = {
     '100-6': { fr: '6af32d0b03c375ed645fe9e6', en: '6af4833d906a8b62055d5942' },
     '300-1': { fr: '6af32d3c2330fac488af7409', en: '6af48302906a8b62055d5941' },
-    '500-1': { fr: '6af32d6d2330fac488af740a', en: '6af32da12330fac488af740b' }
+    '500-1': { fr: '6af32d6d2330fac488af740a', en: '6af32da12330fac488af740b' },
+    '200-6': { fr: '6af4eb2a21a48a3872d25465' }
   };
   var PAIEMENT = 'https://promo.dafrsolution.com/payment-link/';
+  // Ville déjà bâtie mais en pause (Laval, Longueuil ; Martin, 11 nov. 2026) : data-reactiver="1" sur le bloc.
+  // La réactiver coûte 100 $ une fois, au lieu des 500 $ de démarrage, puis les mois de la grille.
+  // Lien en français seulement : ces volets ne sont pas bilingues.
+  var REACTIVATION = '6af4eaec906a8b62055d5b71';
   // Enchère en direct du mois de bannière (Martin, 11 nov. 2026), servie par api/represente.js (api/_enchere.js).
   // On offre le montant voulu, à partir du prix de la ville ; l'offre compte une fois confirmée par courriel,
   // la page dit la place obtenue et l'ancien premier est prévenu par courriel. Fermeture 7 jours avant le
@@ -40,6 +45,8 @@
   var ENCHERE = ['quebec', 'montreal', 'levis'], API = '/api/represente', FERMETURE = 7;
   var T = {
     fr: { reservee: 'Réservée jusqu’au', commanditer: 'Commanditer un mois : dès 50 $', libre: 'Prochain mois libre',
+          enPause: 'En pause', reactiver: 'Réactiver cette ville : 100 $',
+          pause: 'Cette ville est en pause. La réactiver coûte 100 $ une fois, au lieu des 500 $ de démarrage. Ensuite, les mois de commandite reprennent.',
           prix: '50 $ par mois, de 1 à 6 mois. Vos mois s’ajoutent au bout de la file, après le dernier mois réservé.',
           libreMaint: 'Libre', prix6: 'De 1 à 6 mois. Vos mois s’ajoutent au bout de la file, après le dernier mois réservé.', prix1: 'Un mois à la fois, une réservation à la fois.', prixB: function(p){ return 'Avec votre nom ou anonymement : 50 $ par mois. Avec votre bannière ou le nom de votre entreprise : ' + p + ' $ par mois.'; }, bp: function(p){ return 'Avec ma bannière ou mon entreprise (' + p + ' $)'; }, occupe: 'Ce mois est déjà réservé. La prochaine réservation ouvre le',
           prixN: 'Avec votre nom ou anonymement : 50 $ par mois.',
@@ -59,6 +66,8 @@
           erreur: 'Offre non envoyée. Vérifiez les champs ou réessayez plus tard.',
           regles: 'Le mois de bannière se gagne aux enchères, à partir du prix de la ville. Une offre compte une fois confirmée par courriel. Vous savez tout de suite votre place. Si quelqu’un vous dépasse, un courriel vous le dit. L’enchère ferme 7 jours avant le début du mois. Une offre ne se paie pas : seule l’offre gagnante reçoit une facture.' },
     en: { reservee: 'Booked until', commanditer: 'Sponsor a month: from $50', libre: 'Next free month',
+          enPause: 'Paused', reactiver: 'Reactivate this city: $100',
+          pause: 'This city is paused. Reactivating it costs $100 once, instead of the $500 setup fee. Then sponsorship months resume.',
           prix: '$50 per month, 1 to 6 months. Your months are added at the end of the line, after the last booked month.',
           libreMaint: 'Available', prix6: '1 to 6 months. Your months are added at the end of the line, after the last booked month.', prix1: 'One month at a time, one booking at a time.', prixB: function(p){ return 'With your name or anonymously: $50 a month. With your banner or business name: $' + p + ' a month.'; }, bp: function(p){ return 'With my banner or business ($' + p + ')'; }, occupe: 'This month is already booked. The next booking opens on',
           prixN: 'With your name or anonymously: $50 a month.',
@@ -139,7 +148,9 @@
       var boutons = (occupe ? [] : ['nom', 'anonyme']).concat(enchere || (pb ? occupeB : occupe) ? [] : ['banniere']);
       var resume = fin && fin >= auj ? t.reservee + ' <b>' + jour(fin) + '</b>' : t.libreMaint;
       var champ = function(n, type, extra){ return '<label>' + t.champs[n] + '<input name="' + n + '" type="' + type + '" required ' + (extra || '') + '></label>'; };
-      var html = '<details class="apres-vente"><summary>' + resume + ' · ' + t.commanditer + '</summary>'
+      var reactiver = el.getAttribute('data-reactiver') === '1';
+      var html = '<details class="apres-vente"><summary>' + (reactiver ? t.enPause : resume) + ' · ' + (reactiver ? t.reactiver : t.commanditer) + '</summary>'
+        + (reactiver ? '<p>' + t.pause + '</p><p class="av-boutons"><a class="av-bouton" href="' + PAIEMENT + REACTIVATION + '" rel="noopener">' + t.reactiver + '</a></p>' : '')
         + (occupe ? '<p>' + t.occupe + ' <b>' + jour(iso(libre)) + '</b>.</p>'
                   : '<p>' + t.libre + ' : <b>' + jour(iso(libre)) + '</b></p><p>' + (un ? t.prix1 : (pb ? t.prix6 : t.prix)) + (enchere ? ' ' + t.prixN : pb ? ' ' + t.prixB(pb) : '') + '</p>')
         + (p.length ? '<table><tr><th>#</th><th>' + t.periode + '</th><th>' + t.qui + '</th></tr>'
