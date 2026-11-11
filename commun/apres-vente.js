@@ -151,7 +151,8 @@
             + '<p class="av-msg" aria-live="polite"></p><div class="av-liste"></div>'
             + '<form class="av-offre">' + champ('montant', 'number', 'min="' + pb + '" step="1" inputmode="numeric"') + champ('entreprise', 'text', 'maxlength="120"')
             + champ('nom', 'text', 'maxlength="120" autocomplete="name"') + champ('courriel', 'email', 'maxlength="200" autocomplete="email"')
-            + '<input class="av-piege" name="site_web" tabindex="-1" autocomplete="off" aria-hidden="true">'
+            // Piège à robots : un nom qu'aucun navigateur ne remplit tout seul (« site_web » l'était, 11 nov. 2026).
+            + '<input class="av-piege" name="av_laisser_vide" tabindex="-1" autocomplete="new-password" aria-hidden="true">'
             + '<p class="av-boutons"><button class="av-bouton" type="submit">' + t.offrir + '</button></p></form></div>' : '')
         + '<p class="av-note">' + t.note + (enchere ? ' ' + t.regles : '') + '</p></details>';
       var boite = document.createElement('div'); boite.innerHTML = html;
@@ -185,7 +186,7 @@
       var envoi = form.querySelector('button'); envoi.disabled = true;
       fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
         action: 'offre', ville_cle: ville, mois: mois, montant: montant, entreprise: f.entreprise.value, nom: f.nom.value,
-        courriel: f.courriel.value, langue: L, page: location.origin + location.pathname, site_web: f.site_web.value }) })
+        courriel: f.courriel.value, langue: L, page: location.origin + location.pathname, av_laisser_vide: f.av_laisser_vide.value }) })
         .then(function(r){ return r.json(); }).then(function(d){
           if(d.ok){ msg.textContent = t.envoye; form.reset(); }
           else msg.textContent = d.erreur === 'montant' ? t.minimum(t.dollars(d.minimum || minimum)) : d.erreur === 'ferme' ? t.fermee : t.erreur;
