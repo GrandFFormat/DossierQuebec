@@ -80,8 +80,7 @@
 <header>
   <div class="contenu">
     <div class="titre-ligne">
-      <a href="./"><h1>Dossier<span class="marque">VilleDeLongueuil</span></h1></a><a class="lien-dq" href="/" title="DossierQuébec — l'Assemblée nationale en clair" aria-label="DossierQuébec — l'Assemblée nationale en clair" data-en-title="DossierQuébec — Quebec's National Assembly in plain language" data-en-aria-label="DossierQuébec — Quebec's National Assembly in plain language"></a>
-      <span class="prototype" title="Version d'essai : le contenu et la présentation peuvent changer">Prototype</span>
+      <a href="./"><p class="logo-titre">Dossier<span class="marque">VilleDeLongueuil</span></p></a><a class="lien-dq" href="/" title="DossierQuébec — l'Assemblée nationale en clair" aria-label="DossierQuébec — l'Assemblée nationale en clair" data-en-title="DossierQuébec — Quebec's National Assembly in plain language" data-en-aria-label="DossierQuébec — Quebec's National Assembly in plain language"></a>
       <details class="ab-villes" id="villes"></details>
     </div>
     <p class="sous-titre">
@@ -94,7 +93,7 @@
       <a href="votes-nominatifs-du-conseil-de-longueuil">Votes nominatifs</a>
       <a href="conseil-de-ville-de-longueuil">Conseil de ville</a>
       <a href="lexique-municipal-de-longueuil">Lexique</a>
-      <a href="https://longueuil.quebec/" target="_blank" rel="noopener" title="Le site officiel de la Ville de Longueuil (nouvel onglet)">Ville de Longueuil ↗</a>
+      <a href="https://longueuil.quebec/" class="externe" target="_blank" rel="noopener">Ville de Longueuil <span aria-hidden="true">↗</span><span class="sr-only"> (site officiel, nouvel onglet)</span></a>
       <div class="outils">
         <div class="taille-texte" role="group" aria-label="Taille du texte">
           <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
@@ -110,6 +109,8 @@
 
 <main class="contenu">
   <div id="chargement" class="avis">Chargement des données…</div>
+
+  <h1 data-en="Longueuil city council decisions" class="page">Décisions du conseil de ville de Longueuil</h1>
 
   <!-- Bande commanditaire (DAFR en attendant) et bloc d’après-vente (11 nov. 2026) : ville en pause,
        réactivation 150 $ puis 50 $/mois, bannière ou entreprise 200 $/mois (prix de la grille). -->
@@ -132,7 +133,7 @@
 
   <div class="chiffres" id="chiffres"></div>
 
-  <h2 class="page" id="titre-fil">Ce qui a changé</h2>
+  <h2 class="page" id="titre-fil">Activité récente</h2>
   <div id="fil"></div>
   <button class="plus" id="plus-fil" hidden>Afficher plus</button>
   <p style="margin-top:14px">
@@ -156,7 +157,7 @@
     </a>
     <a class="lien-section" href="sources-des-donnees-de-longueuil">
       <h3>Sources et limites</h3>
-      <p>D'où viennent les données, comment elles sont obtenues, et ce que ce prototype ne fait pas encore.</p>
+      <p>D'où viennent les données, comment elles sont obtenues, et ce que le site ne fait pas encore.</p>
     </a>
   </div>
 
@@ -168,7 +169,7 @@
   <div class="contenu">
     <p>Site citoyen indépendant. Aucun lien avec la Ville de Longueuil, aucun caractère officiel.
     En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees-de-longueuil">Sources</a>.</p>
-    <p class="lien-dq-pied"><a href="/" data-en="DossierQuébec — Québec's National Assembly in plain language">DossierQuébec — l'Assemblée nationale en clair</a> · <a href="/regles" data-en="The rules of the site">Les règles du site</a></p>
+    <p class="lien-dq-pied"><a href="/" data-en="DossierQuébec — Québec's National Assembly in plain language">DossierQuébec — l'Assemblée nationale en clair</a> · <a href="/regles" data-en="The rules of the site">Les règles du site</a> · <span data-en="Powered by">Une réalisation de</span> <a class="lien-dafr" href="https://www.dafrsolution.com" data-en-href="https://www.dafrsolution.com/en" target="_blank" rel="noopener">DAFR Solution</a></p>
   </div>
 </footer>
 

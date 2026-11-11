@@ -670,7 +670,7 @@ for (const { page, html } of produites) {
 // abîmées ne doit pas empêcher la publication des votes et des projets de loi du jour.
 // Lévis, Longueuil et Laval sont en pause depuis le 7 oct. 2026 (commun/navigation.js, VILLES_EN_PAUSE) :
 // leurs pages restent en ligne, avec un avis, mais sortent du sitemap. Les rendre ici pour les y remettre.
-const VILLES = ['quebec', 'montreal', 'levis'];   // Lévis rallumé le 9 nov. 2026
+const VILLES = ['quebec', 'montreal', 'levis', 'laval', 'longueuil'];   // Lévis rallumé le 9 nov. 2026
 const PAGES_VILLE = [
   { page: 'index', frequence: 'daily', priorite: '0.8', jeu: 'decisions' },
   // Chaque ville a son adresse : « Décisions de la Ville de Québec » donne decisions-de-la-ville-de-quebec.

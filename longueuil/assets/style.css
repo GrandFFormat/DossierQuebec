@@ -57,7 +57,7 @@
   --t-finances: #CA8A04;       /* or        \                        */
   --t-immobilier: #92400E;     /* brun      / famille « argent et propriété » */
   --t-procedure: #64748B;      /* ardoise   \                        */
-  --t-travaux: #475569;        /* ardoise foncée > famille administrative */
+  --t-travaux: #0369A1;        /* bleu acier (Martin, 11 nov. 2026 : le gris était laid) */
   --t-administration: #94A3B8; /* ardoise claire /                   */
   --t-honneurs: #9F1239;       /* lie-de-vin — les motions cérémonielles */
   --t-social: #0D9488;         /* sarcelle — logement et services sociaux */
@@ -106,7 +106,7 @@
   --t-finances: #FBBF24;
   --t-immobilier: #D9A066;
   --t-procedure: #8B96A3;
-  --t-travaux: #6B7A8A;
+  --t-travaux: #38BDF8;
   --t-administration: #B0BCC9;
   --t-honneurs: #FDA4AF;
   --t-social: #5EEAD4;
@@ -196,7 +196,7 @@ h2.section {
   font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.09em;
   color: var(--doux); font-weight: 700; margin: 34px 0 12px;
 }
-p.chapeau { color: var(--doux); margin: 0 0 6px; max-width: 74ch; font-size: 15.5px; }
+p.chapeau { color: var(--doux); margin: 0 0 6px; max-width: none; font-size: 15.5px; }   /* pleine largeur, comme Lévis (Martin, 9 nov. 2026) */
 
 /* ---------- AVIS ---------- */
 .avis {
@@ -629,3 +629,39 @@ h2.page[id], h1.page[id] { scroll-margin-top: 16px; }
   .commandite .commandite-titre { font-size: 18px; }
   .commandite-texte p, .commandite-liste { font-size: 15px; }
 }
+
+/* ============================================================
+   REPRIS DU VOLET LÉVIS (11 nov. 2026)
+   ============================================================ */
+/* Lien sortant dans la navigation : même rangée, mais on dit qu'on quitte le site. */
+nav a.externe { color: var(--entete-doux); font-weight: 500; }
+nav a.externe span[aria-hidden] { font-size: 12px; margin-left: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* Lien « Une réalisation de » DAFR Solution au pied de page. */
+footer a.lien-dafr { color: inherit; }
+
+/* Partager, au bas de chaque décision dépliée qui a un résumé. */
+.fiche-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--ligne, rgba(127,127,127,.2)); }
+.fiche-actions-titre { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; opacity: .75; }
+.fiche-bouton { font: inherit; font-size: 13px; padding: 5px 11px; border: 1px solid var(--ligne, rgba(127,127,127,.35)); border-radius: 6px; background: transparent; color: inherit; cursor: pointer; text-decoration: none; }
+.fiche-bouton:hover { border-color: currentColor; }
+
+/* « Sans résumé » : replié en bas de chaque séance. */
+.seance-procedure { margin-top: 10px; border: 1px dashed currentColor; border-radius: 8px; padding: 8px 12px; opacity: .85; }
+.seance-procedure > summary { cursor: pointer; font-weight: 600; font-size: 14px; }
+.seance-procedure[open] > summary { margin-bottom: 8px; }
+
+/* « Avec résumé seulement » en vert, la couleur des résumés IA. */
+label.case:has(#filtre-resume) { color: #fff; background: #0B8A4B; border: 2px solid #0B8A4B; border-radius: 6px; padding: 6px 10px; font-weight: 700; cursor: pointer; }
+label.case:has(#filtre-resume) input { accent-color: #fff; }
+
+/* Remerciement du commanditaire, avant les séances. */
+.merci-commanditaire { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; margin: 0 0 18px; padding: 14px 18px; border: 2px dashed currentColor; border-radius: 8px; text-align: center; font-size: 15px; line-height: 1.45; }
+.merci-commanditaire p { margin: 0; }
+.merci-commanditaire a { font-weight: 700; }
+.merci-commanditaire img { display: block; width: 96px; height: 96px; background: #fff; padding: 6px; border-radius: 4px; }
+
+/* Bouton « Tout ouvrir » dans l'en-tête de chaque séance. */
+.bouton-tout-ouvrir { margin-left: auto; font: inherit; font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: 1px solid currentColor; background: transparent; color: inherit; cursor: pointer; }
+.bouton-tout-ouvrir:hover { background: rgba(127, 127, 127, .15); }
