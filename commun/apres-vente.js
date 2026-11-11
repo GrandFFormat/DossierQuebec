@@ -23,8 +23,8 @@
   // d'une entreprise paie le prix de la grille. data-prix-banniere="300" sur le bloc ; clé prix-mode (6 = 1 à 6 mois, 1 = mois fixe).
   // Un prix ou une langue absents ici retombent sur le lien bannière à 50 $ : créer le lien d'abord.
   var BANNIERE = {
-    '100-6': { fr: '6af32d0b03c375ed645fe9e6' },
-    '300-1': { fr: '6af32d3c2330fac488af7409' },
+    '100-6': { fr: '6af32d0b03c375ed645fe9e6', en: '6af4833d906a8b62055d5942' },
+    '300-1': { fr: '6af32d3c2330fac488af7409', en: '6af48302906a8b62055d5941' },
     '500-1': { fr: '6af32d6d2330fac488af740a', en: '6af32da12330fac488af740b' }
   };
   var PAIEMENT = 'https://promo.dafrsolution.com/payment-link/';
