@@ -879,7 +879,8 @@ async function bandeauAccesVille() {
     `<strong>Mise à jour interrompue depuis le ${depuis}.</strong> Le site de la Ville de Longueuil ne répond plus ` +
     'à notre outil de mise à jour automatique. Les données de cette page peuvent donc avoir du retard' +
     (reussite ? `&nbsp;: la dernière lecture réussie du calendrier des séances date du ${reussite}.` : '.') +
-    ' Nous vérifions chaque jour et reprendrons dès que la Ville répondra de nouveau.';
+    // Robot éteint depuis la pause (11 nov. 2026) : plus de « nous vérifions chaque jour », mais la réactivation.
+    ' <a class="bouton-reactiver" href="https://promo.dafrsolution.com/payment-link/6af4eaec906a8b62055d5b71" rel="noopener">Réactiver pour 150&nbsp;$ →</a>';
   const repere = $('#chargement') ?? document.querySelector('main') ?? document.body.firstElementChild;
   repere?.parentNode?.insertBefore(avis, repere);
 }
