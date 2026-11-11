@@ -5060,6 +5060,7 @@ async function billEnvoyerLien(form){
 }
 window.billEnvoyerLien = billEnvoyerLien;
 function boutonCafe(b, isEn){
+  return '';   // Bouton café retiré partout (Martin, 10 nov. 2026).
   const rangIcone = ORDRE_ICONES[_rangCafe % ORDRE_ICONES.length];
   const [fr, en] = LIBELLES_CAFE[ORDRE_CAFE[_rangCafe++ % ORDRE_CAFE.length]];
   return `<div class="bill-cafe-row"><a class="bill-cafe-btn" href="${LIEN_CAFE}" target="_blank" rel="noopener" onclick="event.stopPropagation()" aria-label="${isEn ? 'Buy us a coffee (opens in a new tab)' : 'Offrez-nous un café (s’ouvre dans un nouvel onglet)'}"><img class="icone" src="${ICONES_CAFE[rangIcone]}" data-rang="${rangIcone}" width="24" height="24" alt="">${isEn ? en : fr}<span class="bulle" aria-hidden="true">${'<i class="pt" style="animation:none"></i>'.repeat(5)}</span></a></div>`;
