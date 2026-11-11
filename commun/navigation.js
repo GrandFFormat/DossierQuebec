@@ -10,7 +10,7 @@ export { EN, tr } from './langue.js';
 
 // Les villes couvertes : clé du sous-dossier → nom. La marque d'un volet en découle
 // (« DossierVilleDeQuébec »).
-export const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis' };   // Lévis rallumé le 9 nov. 2026 : premier commanditaire
+export const VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis', laval: 'Laval', longueuil: 'Longueuil' };   // Laval et Longueuil remis au menu le 11 nov. 2026 (en pause, réactivables)   // Lévis rallumé le 9 nov. 2026 : premier commanditaire
 
 // LES VOLETS EN PAUSE (Martin, 7 oct. 2026 : arrêter les scripts de Lévis, Longueuil et Laval et les
 // retirer de la liste « pour l'instant », pour ne plus dépenser là-dessus). Leurs pages restent en

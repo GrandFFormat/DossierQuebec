@@ -11,7 +11,7 @@ const PAS_SEANCES = 8; // séances affichées par palier, en mode groupé
 // écran sert à décider si on veut lire, les suivants à lire pour vrai.
 const PAS_VOTES_DEPART = 5;
 const PAS_VOTES = 10;
-const PAS_FIL = 5; // éléments du fil d'accueil par palier
+const PAS_FIL = 3; // éléments du fil d'accueil (repris de Lévis, 9 nov. 2026 : 3, puis le bouton mène à la page Décisions)
 
 const etat = {
   decisions: null,
@@ -74,6 +74,7 @@ function remplirSelect(select, valeurs) {
 // cas, une séance d'arrondissement — qui ne contient que des résolutions — n'afficherait
 // aucun résumé, alors que la matière existe.
 function resumePour(d) {
+  if (d.theme === 'procedure') return null;   // résumés de procédure masqués (repris de Lévis, 9 nov. 2026)
   const direct = etat.parId.get(d.id);
   if (direct) return { r: direct, indirect: false };
   const viaSommaire = d.sommaireId ? etat.parId.get(d.sommaireId) : null;
@@ -125,11 +126,45 @@ function reinitialiserDepliage() {
 // retombe simplement sur des fiches indépendantes — dégradation sans casse.
 const NOM_ACCORDEON = 'fiches';
 
-function carteRepliable(entete, corps) {
-  return `<details class="carte pliante" name="${NOM_ACCORDEON}"><summary>${entete}</summary><div class="corps">${corps}</div></details>`;
+// Une décision « vaut la vitrine » quand elle porte un résumé IA (règle de Lévis, 9 nov. 2026).
+// Tant que la Ville n'a aucun résumé publié (résumés éteints), la règle retomberait sur une page
+// vide : on se rabat alors sur les vraies décisions, hors procédure et documents de séance.
+function aResume(d) {
+  if (etat.parId.size) return Boolean(resumePour(d));
+  return d.theme !== 'procedure' && d.type !== 'Procès-verbal' && d.type !== 'Ordre du jour' && d.type !== 'Document de séance';
 }
 
-function carteDecision(d) {
+// Au bas de chaque décision dépliée QUI A UN RÉSUMÉ IA : la partager (repris de Lévis).
+function actionsFiche(d) {
+  const r = resumePour(d)?.r;
+  if (!r?.puces?.length || r.sansContenuSubstantiel) return '';
+  const cle = d.numero || d.objet || '';
+  if (!cle) return '';
+  const lien = new URL(`decisions-de-la-ville-de-longueuil?q=${encodeURIComponent(cle)}`, location.href).href;
+  const coupe = (t, n) => (t.length > n ? t.slice(0, n - 1).replace(/\s+\S*$/, '') + '…' : t);
+  const recap = coupe(r.puces[0], 200);
+  const texteX = coupe(recap, 230);
+  const texteComplet = `${coupe(d.objet ?? '', 160)}\n\n${r.puces.slice(0, 3).map((p) => '• ' + p).join('\n')}\n\n${lien}`;
+  return `<div class="fiche-actions">
+      <span class="fiche-actions-titre">Partager</span>
+      <a class="fiche-bouton" href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(lien)}" target="_blank" rel="noopener">Facebook</a>
+      <a class="fiche-bouton" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(texteX)}&url=${encodeURIComponent(lien)}" target="_blank" rel="noopener">X</a>
+      <button type="button" class="fiche-bouton" data-texte="${echapper(texteComplet)}" onclick="copierLienFiche(this)">⧉ Copier</button>
+    </div>`;
+}
+function copierLienFiche(b) {
+  const texte = b.dataset.texte;
+  const avant = b.textContent;
+  const fait = () => { b.textContent = '✓ Copié'; setTimeout(() => { b.textContent = avant; }, 1500); };
+  (navigator.clipboard ? navigator.clipboard.writeText(texte) : Promise.reject()).then(fait).catch(() => window.prompt('Copiez :', texte));
+}
+if (typeof window !== 'undefined') window.copierLienFiche = copierLienFiche;
+
+function carteRepliable(entete, corps, ouverte = false) {
+  return `<details class="carte pliante"${ouverte ? ' open' : ''} name="${NOM_ACCORDEON}"><summary>${entete}</summary><div class="corps">${corps}</div></details>`;
+}
+
+function carteDecision(d, ouverte = false) {
   const entete = `<div class="meta">
       ${puceTheme(d.theme)}
       ${d.numero ? `<span class="puce num">${echapper(d.numero)}</span>` : ''}
@@ -153,13 +188,14 @@ function carteDecision(d) {
     ${d.modifieePar?.length ? `<p class="compte" style="margin:0 0 8px">Modifiée par la résolution ${d.modifieePar.map(echapper).join(', ')}.</p>` : ''}
     ${d.dossier && !trouve ? `<p class="compte" style="margin:0 0 8px">Sommaire décisionnel ${echapper(d.dossier)} — pas encore résumé.</p>` : ''}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${d.type === 'Résolution' ? 'Procès-verbal officiel (PDF)' : 'Document officiel (PDF)'} ↗</a>` : ''}
-    ${d.sommairePdf ? ` &nbsp;<a class="lien-pdf" href="${echapper(d.sommairePdf)}" target="_blank" rel="noopener">Sommaire, dans le document de séance${page ? ` (page ${page})` : ''} ↗</a>` : ''}`;
+    ${d.sommairePdf ? ` &nbsp;<a class="lien-pdf" href="${echapper(d.sommairePdf)}" target="_blank" rel="noopener">Sommaire, dans le document de séance${page ? ` (page ${page})` : ''} ↗</a>` : ''}
+    ${actionsFiche(d)}`;
   // Espace abonnés (/commun/abonnes.js) : « Suivre ce dossier » et le détail de l'argent. La clé
   // de dossier suit la décision d'une instance à l'autre.
   // Un procès-verbal ou un document de séance n'est pas un dossier : rien à suivre.
-  if (d.type !== 'Résolution') return carteRepliable(entete, corps);
+  if (d.type !== 'Résolution') return carteRepliable(entete, corps, ouverte);
   const abonnes = `<div class="ab-fiche" data-dossier="${echapper(d.dossier ?? d.id)}" data-numero="${echapper(d.numero ?? '')}" data-objet="${echapper((d.objet ?? '').slice(0, 300))}"${trouve?.r?.montantPrincipal ? ' data-montant="1"' : ''}></div>`;
-  return carteRepliable(entete, corps + abonnes);
+  return carteRepliable(entete, corps + abonnes, ouverte);
 }
 
 function decisionsFiltrees() {
@@ -212,7 +248,7 @@ function rendreDecisions() {
     const groupes = grouperParSeance(filtrees);
     const montres = groupes.slice(0, etat.limiteSeances);
     $('#liste-decisions').innerHTML = montres.length
-      ? montres.map(rendreSeance).join('')
+      ? montres.map((g, i) => rendreSeance(g, i === 0)).join('')
       : '<p class="vide">Aucune décision ne correspond.</p>';
     reste = groupes.length - montres.length;
     $('#plus-decisions').hidden = reste <= 0;
@@ -268,15 +304,24 @@ function grouperParSeance(decisions) {
 //
 // Pas d'accordéon ici, contrairement aux fiches : on veut pouvoir comparer deux séances
 // côte à côte, alors qu'empiler quinze décisions dépliées n'aide personne.
-function rendreSeance(g) {
-  return `<details class="seance">
+// Repris de Lévis (9 nov. 2026) : la première séance est ouverte ; les décisions résumées
+// d'abord, les points de procédure résumés ensuite, et tout le reste replié sous « Sans résumé ».
+function rendreSeance(g, ouverte = false) {
+  const sansResume = g.lignes.filter((d) => !aResume(d));
+  const autres = g.lignes.filter((d) => aResume(d));
+  const lignes = [...autres.filter((d) => d.theme !== 'procedure'), ...autres.filter((d) => d.theme === 'procedure')];
+  const blocSansResume = sansResume.length
+    ? `<details class="seance-procedure"><summary>${etat.parId.size ? 'Sans résumé' : 'Procédure et documents de séance'} (${sansResume.length} point${sansResume.length > 1 ? 's' : ''})</summary>${sansResume.map((d) => carteDecision(d)).join('')}</details>`
+    : '';
+  return `<details class="seance"${ouverte ? ' open' : ''}>
       <summary class="seance-entete">
         <h3>${echapper(g.instance)}</h3>
         <span class="seance-date">${dateFr(g.date)}</span>
         <span class="puce">${g.lignes.length} décision${g.lignes.length > 1 ? 's' : ''}</span>
         ${g.tronquee ? '<span class="puce procedural">journée partiellement chargée</span>' : ''}
+        <button type="button" class="bouton-tout-ouvrir">Tout ouvrir</button>
       </summary>
-      <div class="seance-corps">${g.lignes.map(carteDecision).join('')}</div>
+      <div class="seance-corps">${lignes.map((d, i) => carteDecision(d, ouverte && i === 0 && Boolean(resumePour(d)))).join('')}${blocSansResume}</div>
     </details>`;
 }
 
@@ -672,11 +717,11 @@ function rendreLexique() {
 function evenementsRecents() {
   const evenements = [];
   for (const d of etat.decisions?.decisions ?? []) {
+    // Repris de Lévis (9 nov. 2026) : le fil ne montre que les vraies décisions résumées.
+    if (!aResume(d) || d.theme === 'procedure') continue;
     evenements.push({ date: d.date, genre: 'decision', nouveau: d.nouveau === true, data: d });
   }
-  for (const v of etat.votes?.votes ?? []) {
-    evenements.push({ date: v.date, genre: 'vote', nouveau: v.nouveau === true, data: v });
-  }
+  // Les votes nominatifs restent sur leur page, hors du fil (repris de Lévis, 9 nov. 2026).
   evenements.sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''));
 
   const nouveaux = evenements.filter((e) => e.nouveau);
@@ -716,7 +761,7 @@ function ligneEvenement(e) {
     <p class="objet">${echapper(d.objet ?? '(sans objet)')}</p>`;
   const corps = `${blocResume(resumePour(d))}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}`;
-  return carteRepliable(entete, corps);
+  return carteRepliable(entete, corps, e.ouverte);
 }
 
 function rendreFil() {
@@ -729,12 +774,12 @@ function rendreFil() {
   // nouveautés) vit sur la page « Sources et limites », là où on va quand on se pose la
   // question — pas en travers du fil quand on veut juste lire.
   $('#titre-fil').textContent = mode === 'nouveautes' ? 'Ce qui a changé' : 'Activité récente';
-  $('#fil').innerHTML = aMontrer.map(ligneEvenement).join('');
+  $('#fil').innerHTML = aMontrer.map((e, i) => ligneEvenement({ ...e, ouverte: i === 0 })).join('');
 
   const reste = source.length - aMontrer.length;
   if ($('#plus-fil')) {
-    $('#plus-fil').hidden = reste <= 0;
-    $('#plus-fil').textContent = `${Math.min(PAS_FIL, reste)} de plus (${nombreFr(reste)} restants)`;
+    $('#plus-fil').hidden = false;
+    $('#plus-fil').textContent = 'Voir plus de décisions →';
   }
 }
 
@@ -748,7 +793,8 @@ function rendreAccueil() {
     chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: `votes nominatifs consignés depuis ${etat.votes.parametres.annees?.[0] ?? etat.votes.parametres.annee}`, lien: 'votes-nominatifs-du-conseil-de-longueuil' });
   }
   if (etat.resumes) {
-    chiffres.push({ n: nombreFr(etat.resumes.nombre), quoi: 'sommaires décisionnels résumés en langage clair', lien: 'decisions-de-la-ville-de-longueuil' });
+    // Décisions qui affichent un résumé, procédure exclue (repris de Lévis, 9 nov. 2026).
+    chiffres.push({ n: nombreFr(etat.decisions ? etat.decisions.decisions.filter((d) => resumePour(d)).length : etat.resumes.nombre), quoi: 'décisions résumées en langage clair', lien: 'decisions-de-la-ville-de-longueuil' });
   }
   if (etat.elus) {
     chiffres.push({ n: etat.elus.nombre, quoi: 'membres du conseil de ville', lien: 'conseil-de-ville-de-longueuil' });
@@ -900,10 +946,18 @@ if (existe('#plus-decisions')) {
     rendreDecisions();
   });
 }
+// Ouvrir une séance ouvre aussi sa première décision, si elle porte un résumé IA (repris de Lévis).
+if (existe('#liste-decisions')) {
+  $('#liste-decisions').addEventListener('toggle', (ev) => {
+    const s = ev.target;
+    if (!s.classList?.contains('seance') || !s.open) return;
+    const premiere = s.querySelector('.seance-corps > details.carte');
+    if (premiere && premiere.querySelector('.resume, [class*="resume"]')) premiere.open = true;
+  }, true);
+}
 if (existe('#plus-fil')) {
   $('#plus-fil').addEventListener('click', () => {
-    etat.limiteFil += PAS_FIL;
-    rendreFil();
+    location.href = 'decisions-de-la-ville-de-longueuil';
   });
 }
 if (existe('#plus-votes')) {
@@ -1054,3 +1108,33 @@ init();
   majVisible();
   bouton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 })();
+
+// « Tout ouvrir » d'une séance (repris de Lévis, 9 nov. 2026) : déplie la séance et toutes ses
+// fiches ; en ouvrir une autre referme la précédente. L'accordéon (attribut name) est retiré le
+// temps de tout déplier, puis remis en refermant.
+function fermerSeanceDepliee(s) {
+  s.classList.remove('tout-ouvert');
+  s.querySelectorAll('details.carte[data-nom]').forEach((c) => { c.open = false; c.setAttribute('name', c.dataset.nom); delete c.dataset.nom; });
+  s.querySelectorAll('.seance-procedure').forEach((p) => { p.open = false; });
+  const b = s.querySelector('.bouton-tout-ouvrir');
+  if (b) b.textContent = 'Tout ouvrir';
+  s.open = false;
+}
+document.addEventListener('click', (e) => {
+  const b = e.target.closest?.('.bouton-tout-ouvrir');
+  if (!b) return;
+  e.preventDefault();
+  e.stopPropagation();
+  const s = b.closest('details.seance');
+  if (s.classList.contains('tout-ouvert')) { fermerSeanceDepliee(s); return; }
+  document.querySelectorAll('details.seance.tout-ouvert').forEach(fermerSeanceDepliee);
+  s.open = true;
+  s.classList.add('tout-ouvert');
+  s.querySelectorAll('.seance-procedure').forEach((p) => { p.open = true; });
+  s.querySelectorAll('details.carte').forEach((c) => {
+    if (c.hasAttribute('name')) { c.dataset.nom = c.getAttribute('name'); c.removeAttribute('name'); }
+    c.open = true;
+  });
+  b.textContent = 'Tout fermer';
+  s.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}, true);

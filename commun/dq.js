@@ -3097,7 +3097,7 @@ const themeColors = {
   'Santé':'#E23A3A', 'Logement':'#0E4FC1', 'Transport':'#1E9E5A',
   'Finances publiques':'#FFD24D', 'Éducation':'#FF7B33', 'Environnement':'#12429B',
   'Économie':'#7C5CD6', 'Famille':'#D4537E', 'Culture':'#00A5CF',
-  'Immigration':'#B45309', 'Énergie':'#0891B2', 'Justice':'#6B7280', 'Agriculture':'#84A31E', 'Aînés':'#7C3AED', 'Fiscalité':'#A16207', 'Infrastructures':'#475569',
+  'Immigration':'#B45309', 'Énergie':'#0891B2', 'Justice':'#6B7280', 'Agriculture':'#84A31E', 'Aînés':'#7C3AED', 'Fiscalité':'#A16207', 'Infrastructures':'#0369A1',
 };
 const themeFallback = ['#8B5CF6','#0891B2','#C2410C','#4D7C0F','#BE185D','#0F766E'];
 function themeColor(t){
