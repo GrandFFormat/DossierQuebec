@@ -157,10 +157,9 @@ async function envoyerMessage(contenu) {
 }
 
 // Dans « Mes dossiers », on choisit le sujet ; sous une fiche, sujet et numéro sont déjà remplis.
-// `preoccupation` (Mon dossier, 3 nov. 2026) : ajoute le sujet « Ce qui me préoccupe », qui garde
-// son propre enregistrement (table preoccupations, comme l'ancienne boîte de commun/dq.js).
-export function formulaireMessage(boite, s, { sujet = 'idee', ville = null, numero = null, fixe = false, preoccupation = false } = {}) {
-  const SUJETS = preoccupation ? { ...SUJETS_MESSAGE, preoccupation: tr('Ce qui me préoccupe', 'What worries me') } : SUJETS_MESSAGE;
+// Le sujet « Ce qui me préoccupe » est retiré le 11 nov. 2026 (Martin) : son tableau n'était plus affiché.
+export function formulaireMessage(boite, s, { sujet = 'idee', ville = null, numero = null, fixe = false } = {}) {
+  const SUJETS = SUJETS_MESSAGE;
   boite.hidden = false;
   const question = fixe && sujet === 'erreur'
     ? tr(`Qu'est-ce qui ne va pas${numero ? ` dans ${numero}` : ''} ?`, `What's wrong${numero ? ` in ${numero}` : ''}?`)
@@ -188,24 +187,6 @@ export function formulaireMessage(boite, s, { sujet = 'idee', ville = null, nume
     bouton.disabled = true;
     etat.textContent = tr('Envoi…', 'Sending…');
     const choix = form.elements.sujet?.value ?? sujet;
-    if (choix === 'preoccupation') {
-      const texte = form.elements.message.value.trim();
-      const mots = texte.split(/\s+/).filter(Boolean).length;
-      bouton.disabled = false;
-      if (mots > 300) { etat.textContent = tr(`Votre message compte ${mots} mots : 300 au plus.`, `Your message has ${mots} words: 300 at most.`); return; }
-      bouton.disabled = true;
-      const { error } = await client.from('preoccupations').insert({ texte: texte.slice(0, 2000) });
-      if (!error) {
-        boite.innerHTML = `<p class="ab-merci">${tr('Reçu, merci. Votre message n’est jamais publié ; il sera compté au prochain classement.', 'Received, thank you. Your message is never published; it will be counted at the next sorting.')}</p>`;
-        mesurer('message_envoye', { sujet: choix, ville: '' });
-        return;
-      }
-      bouton.disabled = false;
-      etat.textContent = /limite/.test(error.message || '')
-        ? tr('Vous avez atteint 3 messages pour aujourd’hui. Revenez demain.', 'You have reached 3 messages for today. Come back tomorrow.')
-        : tr('Le message n’a pas pu partir. Réessayez plus tard.', 'The message could not be sent. Try again later.');
-      return;
-    }
     const erreur = await envoyerMessage({ sujet: choix, message: form.elements.message.value.trim(), ville, numero, page: (location.pathname + location.search).slice(0, 300) });
     if (!erreur) {
       boite.innerHTML = `<p class="ab-merci">${echapper(merci(choix))}</p>`;

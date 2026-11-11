@@ -1691,7 +1691,6 @@ async function renderMonDossier(){
   mdCompte(isEn, quota);
   mdLois(isEn, quota);
   mdElus(isEn);
-  mdPreoccupations(isEn);
   mdExport(isEn);
   mdFlux(isEn);
   mdAlertes(isEn);
@@ -1925,134 +1924,6 @@ async function mdConsultations(isEn){
   </div>`;
 }
 
-// « CE QUI VOUS PRÉOCCUPE » (Martin, 18 oct. 2026). Une boîte de texte pour les gens connectés,
-// le nombre de messages reçus, et le tableau des sujets en pourcentage. Les messages ne sont jamais
-// affichés : une fois par jour, scrapers/preoccupations.js les classe (Claude) et publie seulement
-// le tableau, data/preoccupations.json. Pour l'instant dans Mon dossier ; l'accueil plus tard.
-let _preoc = null;
-async function mdPreoccupations(isEn){
-  const zone = document.getElementById('mdPreoccupations');
-  if(!zone) return;
-  // En direct d'abord (Martin, 19 oct. 2026 : le tableau suit ses approbations tout de suite) : la
-  // fonction Supabase preoccupations_tableau() ne rend que les totaux, jamais un message. Si elle
-  // manque ou tombe, on retombe sur le tableau publié chaque matin (data/preoccupations.json).
-  if(!_preoc){
-    try{
-      const { data, error } = await supabaseClient.rpc('preoccupations_tableau');
-      if(error || !data) throw error || new Error('vide');
-      const sujets = (data.sujets || []).map((s) => ({ fr: s.sujet, en: s.sujet, n: s.n }));
-      _preoc = { recus: data.recus || 0, mentions: sujets.reduce((t, s) => t + s.n, 0), sujets, direct: true };
-    }catch(e){
-      try{ _preoc = await (await fetch('/data/preoccupations.json')).json(); }catch(e2){ _preoc = { recus: 0, mentions: 0, sujets: [] }; }
-    }
-  }
-  const p = _preoc;
-  const h = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-  const lignes = (p.sujets || []).map((s) => {
-    const pc = p.mentions ? Math.round(s.n / p.mentions * 100) : 0;
-    return `<tr><td>${h(isEn ? (s.en || s.fr) : s.fr)}</td><td class="md-preoc-barre"><span style="width:${pc}%"></span></td><td class="md-preoc-pc">${pc} %</td></tr>`;
-  }).join('');
-  // La boîte reste visible sans compte ; c'est à l'envoi qu'on dit qu'il en faut un.
-  const formulaire = true
-    ? `<label class="md-note" for="mdPreocTexte">${isEn ? 'In your own words: a problem, a topic, something that should change.' : 'En vos mots : un problème, un sujet, quelque chose qui devrait changer.'}</label>
-       <textarea id="mdPreocTexte" class="md-preoc-texte" maxlength="2000" rows="4" oninput="mdCompterMots()" placeholder="${isEn ? 'What worries you?' : 'Qu’est-ce qui vous préoccupe ?'}"></textarea>
-       <div class="md-preoc-envoi"><button class="account-btn" id="mdPreocBtn" onclick="mdEnvoyerPreoccupation()">${isEn ? 'Send' : 'Envoyer'}</button><span class="md-note" id="mdPreocNote">${isEn ? 'Your message is never published. 300 words and 3 messages per day at most. An account is needed to send.' : 'Votre message n’est jamais publié. 300 mots et 3 messages par jour au plus. Il faut un compte pour envoyer.'}</span><span class="md-note md-preoc-mots" id="mdPreocMots"></span></div>`
-    : `<p>${isEn ? 'Sign in (above) to write what worries you.' : 'Connectez-vous (plus haut) pour écrire ce qui vous préoccupe.'}</p>`;
-  zone.innerHTML = `<div class="md-carte">
-    <div class="md-carte-tete"><h2>${isEn ? 'What worries you' : 'Ce qui vous préoccupe'}</h2><span class="md-etiquette">${p.recus || 0} ${isEn ? ((p.recus || 0) > 1 ? 'messages received' : 'message received') : ((p.recus || 0) > 1 ? 'messages reçus' : 'message reçu')}</span></div>
-    ${formulaire}
-    ${lignes ? `<table class="md-preoc-table"><tbody>${lignes}</tbody></table>` : `<p class="md-note">${isEn ? 'The table of topics will appear here once the first messages are sorted.' : 'Le tableau des sujets paraîtra ici quand les premiers messages auront été classés.'}</p>`}
-    <p class="md-note">${isEn
-      ? `Messages are read and grouped into topics by hand, from time to time. A person counts once per topic. This is not a poll: only visitors who wrote are counted.${p.direct ? ' Live count.' : p.majLe ? ` Last count: ${h(p.majLe)}.` : ''}`
-      : `Les messages sont lus et regroupés en sujets à la main, à temps perdu. Une personne compte une fois par sujet. Ce n’est pas un sondage : seuls les visiteurs qui ont écrit sont comptés.${p.direct ? ' Compte en direct.' : p.majLe ? ` Dernier compte : ${h(p.majLe)}.` : ''}`}</p>
-  </div>`;
-}
-async function mdEnvoyerPreoccupation(){
-  const isEn = currentLang === 'en';
-  const champ = document.getElementById('mdPreocTexte'), btn = document.getElementById('mdPreocBtn'), note = document.getElementById('mdPreocNote');
-  const texte = (champ?.value || '').trim();
-  if(texte.length < 3){ note.textContent = isEn ? 'Write a few words first.' : 'Écrivez quelques mots d’abord.'; return; }
-  if(nbMots(texte) > 300){ note.textContent = isEn ? `Your message has ${nbMots(texte)} words: 300 at most.` : `Votre message compte ${nbMots(texte)} mots : 300 au plus.`; return; }
-  if(!currentUser){
-    note.innerHTML = isEn
-      ? '<b>An account is needed to send your message.</b> Enter your email in “Your account”, just above: a sign-in link arrives, no password. Your text stays here in the meantime.'
-      : '<b>Il faut un compte pour envoyer votre message.</b> Entrez votre courriel dans « Votre compte », juste au-dessus : un lien de connexion arrive, sans mot de passe. Votre texte reste ici en attendant.';
-    note.classList.add('md-preoc-alerte');
-    document.getElementById('mdCompte')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
-  btn.disabled = true;
-  const { error } = await supabaseClient.from('preoccupations').insert({ texte: texte.slice(0, 2000) });
-  btn.disabled = false;
-  if(error){
-    console.error('preoccupations:', error);
-    note.textContent = /limite/.test(error.message || '')
-      ? (isEn ? 'You have reached 3 messages for today. Come back tomorrow.' : 'Vous avez atteint 3 messages pour aujourd’hui. Revenez demain.')
-      : (isEn ? 'The message could not be sent. Try again later.' : 'Le message n’a pas pu partir. Réessayez plus tard.');
-    return;
-  }
-  champ.value = '';
-  note.textContent = isEn ? '✓ Received, thank you. It will be counted at the next sorting.' : '✓ Reçu, merci. Il sera compté au prochain classement.';
-}
-window.mdEnvoyerPreoccupation = mdEnvoyerPreoccupation;
-const nbMots = (t) => (String(t).trim().match(/\S+/g) || []).length;
-function mdCompterMots(){
-  const n = nbMots(document.getElementById('mdPreocTexte')?.value || ''), z = document.getElementById('mdPreocMots');
-  if(z){ z.textContent = n ? `${n} / 300 ${currentLang === 'en' ? 'words' : 'mots'}` : ''; z.classList.toggle('md-preoc-trop', n > 300); }
-}
-window.mdCompterMots = mdCompterMots;
-
-// LES MESSAGES, CÔTÉ ADMIN (Martin, 18 oct. 2026 : sous « Demandes d'explications », page Lexique).
-// Les 200 plus récents, avec leur statut et leur sujet ; un admin peut marquer un message comme spam
-// (ou l'en sortir) et le changer de sujet. Le tableau public se recalcule au classement du matin.
-// Lecture et correction permises par scripts/supabase-schema-preoccupations-admin.sql.
-async function renderAdminPreoccupations(){
-  const zone = document.getElementById('adminPreoccupations');
-  if(!zone) return;
-  if(!(await checkIsAdmin())){ zone.innerHTML = ''; return; }
-  const isEn = currentLang === 'en';
-  const { data, error } = await supabaseClient.from('preoccupations').select('id, texte, statut, sujet, created_at').order('created_at', { ascending: false }).limit(200);
-  if(error){ console.error('renderAdminPreoccupations:', error); zone.innerHTML = `<div class="account-note">${isEn ? 'Messages could not be read.' : 'Les messages n’ont pas pu être lus.'}</div>`; return; }
-  // Les sujets : ceux déjà donnés à un message, plus ceux du tableau publié. Le sujet EST son libellé
-  // (« Coût du logement ») : Martin les crée et les range lui-même, sans IA (18 oct. 2026).
-  let publies = [];
-  try{ publies = (await (await fetch('/data/preoccupations.json')).json()).sujets || []; }catch(e){}
-  const sujets = [...new Set([...(data || []).map((m) => m.sujet).filter(Boolean), ...publies.map((p) => p.fr || p.cle)])].sort((a, b) => a.localeCompare(b, 'fr'));
-  const h = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-  const choix = (m) => `<select onchange="adminPreocSujet('${m.id}', this.value, this)"><option value="">${isEn ? '— no topic —' : '— aucun sujet —'}</option>${sujets.map((t) => `<option value="${h(t)}"${t === m.sujet ? ' selected' : ''}>${h(t)}</option>`).join('')}<option value="__nouveau__">${isEn ? '➕ New topic…' : '➕ Nouveau sujet…'}</option></select>`;
-  const lignes = (data || []).map((m) => `<tr class="admin-preoc-${m.statut}">
-      <td>${h(String(m.created_at).slice(0, 10))}</td>
-      <td>${h(m.texte)}</td>
-      <td>${m.statut === 'spam' ? (isEn ? 'spam' : 'spam') : m.statut === 'classe' ? (isEn ? 'sorted' : 'classé') : (isEn ? 'new' : 'nouveau')}</td>
-      <td>${m.statut === 'classe' ? `<span class="admin-preoc-ok">✓ ${isEn ? 'Approved' : 'Approuvé'}</span>` : m.statut === 'spam' ? '—' : `<button class="account-btn" onclick="adminPreocApprouver('${m.id}', ${m.sujet ? 'true' : 'false'})">${isEn ? 'Approve' : 'Approuver'}</button>`}</td>
-      <td class="admin-preoc-actions">${choix(m)} <button class="account-btn" onclick="adminPreocSpam('${m.id}', ${m.statut === 'spam' ? 'false' : 'true'})">${m.statut === 'spam' ? (isEn ? 'Not spam' : 'Pas du spam') : 'Spam'}</button></td>
-    </tr>`).join('');
-  zone.innerHTML = `<div class="account-note" style="margin:18px 0 10px;"><b>${isEn ? 'What worries visitors (admin only)' : 'Ce qui préoccupe les visiteurs (réservé aux admins)'}</b> — ${isEn
-    ? `${(data || []).length} most recent message(s). For each message: pick a topic (or create one with « ➕ New topic… »), then « Approve » so it counts in the public table; otherwise « Spam ». The public table is recounted every morning.`
-    : `${(data || []).length > 1 ? `les ${(data || []).length} messages les plus récents` : `${(data || []).length} message`}. Pour chaque message : choisissez un sujet (ou créez-en un avec « ➕ Nouveau sujet… »), puis « Approuver » pour qu’il compte dans le tableau public ; sinon « Spam ». Le tableau public se recompte chaque matin.`}</div>
-    ${lignes ? `<div class="admin-preoc-defile"><table class="admin-preoc"><thead><tr><th>${isEn ? 'Date' : 'Date'}</th><th>Message</th><th>${isEn ? 'Status' : 'Statut'}</th><th>${isEn ? 'Approved' : 'Approuvé'}</th><th>${isEn ? 'Topic' : 'Sujet'}</th></tr></thead><tbody>${lignes}</tbody></table></div>` : `<p class="account-note">${isEn ? 'No message yet.' : 'Aucun message pour l’instant.'}</p>`}`;
-}
-async function adminPreocSpam(id, spam){
-  const { error } = await supabaseClient.from('preoccupations').update(spam ? { statut: 'spam', sujet: null } : { statut: 'nouveau', sujet: null }).eq('id', id);
-  if(error){ console.error('adminPreocSpam:', error); alert(currentLang === 'en' ? 'Not saved.' : 'Pas enregistré.'); }
-  renderAdminPreoccupations();
-}
-async function adminPreocSujet(id, sujet, menu){
-  if(sujet === '__nouveau__'){
-    const libelle = (window.prompt(currentLang === 'en' ? 'Name of the new topic (e.g. Cost of housing):' : 'Nom du nouveau sujet (ex. : Coût du logement) :') || '').trim().slice(0, 80);
-    if(libelle.length < 2){ if(menu) renderAdminPreoccupations(); return; }
-    sujet = libelle;
-  }
-  const { error } = await supabaseClient.from('preoccupations').update(sujet ? { sujet } : { statut: 'nouveau', sujet: null }).eq('id', id);
-  if(error){ console.error('adminPreocSujet:', error); alert(currentLang === 'en' ? 'Not saved.' : 'Pas enregistré.'); }
-  renderAdminPreoccupations();
-}
-async function adminPreocApprouver(id, aUnSujet){
-  if(!aUnSujet){ alert(currentLang === 'en' ? 'Pick a topic first, in the menu next to Spam.' : 'Choisissez d’abord un sujet, dans le menu à côté de Spam.'); return; }
-  const { error } = await supabaseClient.from('preoccupations').update({ statut: 'classe' }).eq('id', id);
-  if(error){ console.error('adminPreocApprouver:', error); alert(currentLang === 'en' ? 'Not saved.' : 'Pas enregistré.'); }
-  renderAdminPreoccupations();
-}
 // « REPRÉSENTEZ VOTRE VILLE », CÔTÉ ADMIN (7 nov. 2026) : les demandes du formulaire
 // /represente-ta-ville, gardées dans rtv_demandes (api/represente.js) au lieu de la boîte de Martin.
 // Regroupées par ville (la plus demandée d'abord), les entreprises en évidence. Lecture et statut
@@ -2179,9 +2050,6 @@ function adminRtvArchives(){
 }
 window.adminRtvStatut = adminRtvStatut;
 window.adminRtvArchives = adminRtvArchives;
-window.adminPreocApprouver = adminPreocApprouver;
-window.adminPreocSpam = adminPreocSpam;
-window.adminPreocSujet = adminPreocSujet;
 
 // L'EXPORT DES DONNÉES (21 oct. 2026), premier outil de l'abonnement. Trois fichiers CSV des données
 // de l'Assemblée : votes nominaux (une ligne par député·e et par vote), présences, projets de loi.
@@ -3148,7 +3016,7 @@ async function checkIsAdmin(){
 const PETITION_TIERS = [1000, 5000, 25000];
 
 async function renderAdminFlagCounts(){
-  renderAdminPreoccupations(); renderAdminRtv();   // le panneau des préoccupations suit celui des demandes, sur la même page
+  renderAdminRtv();
   if(!document.getElementById('adminFlagCounts')) return;   // vue absente de cette page
   const container = document.getElementById('adminFlagCounts');
   if(!container) return;
