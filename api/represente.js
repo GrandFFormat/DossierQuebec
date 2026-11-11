@@ -12,6 +12,11 @@
 // La provenance (site d'origine, page de DQ, campagne) vient de la page : voir rtv_visites.
 //
 // Variables : SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY ; secours : RESEND_API_KEY, DIGEST_FROM, MESSAGES_A.
+//
+// Depuis le 11 nov. 2026, la même route sert l'enchère en direct des mois de bannière (api/_enchere.js) :
+// GET ?enchere=<ville>&mois=<AAAA-MM-JJ>, POST { action: 'offre', … }, GET ?confirmer=<jeton>.
+
+import { voir, offrir, confirmer } from './_enchere.js';
 
 const PROFILS = { citoyen: 'Citoyen·ne', organisme: 'Organisme', entreprise: 'Entreprise (commandite)' };
 const COURRIEL = /^[^\s@<>]{1,100}@[^\s@<>]{1,100}\.[^\s@<>]{2,}$/;
@@ -40,9 +45,39 @@ async function garder(m) {
 }
 
 export default async function handler(req, res) {
+  const q = req.query || {};
+  if (req.method === 'GET' && q.confirmer) {
+    try {
+      const r = await confirmer(String(q.confirmer));
+      res.setHeader('Location', r.redirection);
+      return res.status(302).end();
+    } catch (e) {
+      console.error('enchère, confirmation :', e);
+      return res.status(500).send('Erreur, réessayez plus tard.');
+    }
+  }
+  if (req.method === 'GET' && q.enchere) {
+    try {
+      const r = await voir(q);
+      res.setHeader('Cache-Control', 'no-store');
+      return res.status(r.statut).json(r.corps);
+    } catch (e) {
+      console.error('enchère, classement :', e);
+      return res.status(500).json({ ok: false });
+    }
+  }
   if (req.method !== 'POST') return res.status(405).json({ ok: false });
   const b = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : req.body || {};
   if (b.site_web) return res.status(200).json({ ok: true });
+  if (b.action === 'offre') {
+    try {
+      const r = await offrir(b);
+      return res.status(r.statut).json(r.corps);
+    } catch (e) {
+      console.error('enchère, offre :', e);
+      return res.status(500).json({ ok: false });
+    }
+  }
 
   const m = {
     ville: propre(b.ville, 80),
