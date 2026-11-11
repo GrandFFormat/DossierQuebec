@@ -7,7 +7,8 @@
 //   <div data-apres-vente data-file="data/file-commandite.json"></div>
 //   <script src="/commun/apres-vente.js" defer></script>
 // La file : { "periodes": [ { "debut": "AAAA-MM-JJ", "fin": "AAAA-MM-JJ", "affichage": "nom|anonyme|banniere", "nom": "" } ] }
-// Une ligne par paiement reçu. La langue suit la page (voir lang plus bas).
+// Une ligne par paiement reçu. Une bannière porte aussi "prix" (offre retenue, en $ par mois) : voir l'enchère plus bas.
+// La langue suit la page (voir lang plus bas).
 (function(){
   var LIENS = {
     fr: { nom: '6af307242330fac488af738c', anonyme: '6af307442330fac488af738d', banniere: '6af3076603c375ed645fe94e' },
@@ -28,19 +29,35 @@
     '500-1': { fr: '6af32d6d2330fac488af740a', en: '6af32da12330fac488af740b' }
   };
   var PAIEMENT = 'https://promo.dafrsolution.com/payment-link/';
+  // Enchère de bannière (Martin, 11 nov. 2026) : une 2e entreprise qui veut un mois déjà pris par une bannière
+  // surenchérit de 25, 50 ou 100 %. L'offre passe par un formulaire GHL (mois, offre et ville préremplis),
+  // rien n'est payé avant la fermeture, 7 jours avant le début du mois. Le gagnant reçoit une facture.
+  // Une offre retenue : mettre "prix" à jour sur la période (et "nom" si l'entreprise change).
+  var FORMULAIRE = 'https://promo.dafrsolution.com/widget/form/';
+  var OFFRE = { fr: 'KLUwkmJQ19wjh7oEHJ1C', en: 'Ep2zoGOS9G5gXs3chpQ9' };
+  var HAUSSES = [25, 50, 100], FERMETURE = 7;
+  var VILLES = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis', laval: 'Laval', longueuil: 'Longueuil' };
   var T = {
     fr: { reservee: 'Réservée jusqu’au', commanditer: 'Commanditer un mois : dès 50 $', libre: 'Prochain mois libre',
           prix: '50 $ par mois, de 1 à 6 mois. Vos mois s’ajoutent au bout de la file, après le dernier mois réservé.',
           libreMaint: 'Libre', prix6: 'De 1 à 6 mois. Vos mois s’ajoutent au bout de la file, après le dernier mois réservé.', prix1: 'Un mois à la fois, une réservation à la fois.', prixB: function(p){ return 'Avec votre nom ou anonymement : 50 $ par mois. Avec votre bannière ou le nom de votre entreprise : ' + p + ' $ par mois.'; }, bp: function(p){ return 'Avec ma bannière ou mon entreprise (' + p + ' $)'; }, occupe: 'Ce mois est déjà réservé. La prochaine réservation ouvre le',
           periode: 'Période', qui: 'Commanditaire', anonyme: 'Anonyme',
           b: { nom: 'Avec mon nom', anonyme: 'Anonyme', banniere: 'Avec ma bannière' },
-          note: 'Le nom affiché est celui du paiement. Chaque bannière, une image fixe sans animation, est vérifiée avant sa mise en ligne. Refusée, elle est remboursée. Contribution au service, sans reçu d’impôt.' },
+          note: 'Le nom affiché est celui du paiement. Chaque bannière, une image fixe sans animation, est vérifiée avant sa mise en ligne. Refusée, elle est remboursée. Contribution au service, sans reçu d’impôt.',
+          devant: function(d){ return 'Avec votre bannière, vous passez devant les mois des particuliers : votre mois commence le <b>' + d + '</b>. Leurs mois sont décalés après le vôtre, rien n’est perdu.'; },
+          enchere: 'Enchère ouverte', au: ' au ', actuelle: 'Offre actuelle', ferme: 'Fermeture le', dp: ' : ',
+          dollars: function(n){ return n.toLocaleString('fr-CA') + ' $'; }, pct: function(h){ return h + ' %'; },
+          regles: 'Un mois déjà pris par une bannière se gagne aux enchères : chaque offre dépasse la précédente de 25, 50 ou 100 %. L’enchère ferme 7 jours avant le début du mois. Une offre ne se paie pas : seule l’offre gagnante reçoit une facture. L’entreprise qui perd sa place est remboursée.' },
     en: { reservee: 'Booked until', commanditer: 'Sponsor a month: from $50', libre: 'Next free month',
           prix: '$50 per month, 1 to 6 months. Your months are added at the end of the line, after the last booked month.',
           libreMaint: 'Available', prix6: '1 to 6 months. Your months are added at the end of the line, after the last booked month.', prix1: 'One month at a time, one booking at a time.', prixB: function(p){ return 'With your name or anonymously: $50 a month. With your banner or business name: $' + p + ' a month.'; }, bp: function(p){ return 'With my banner or business ($' + p + ')'; }, occupe: 'This month is already booked. The next booking opens on',
           periode: 'Period', qui: 'Sponsor', anonyme: 'Anonymous',
           b: { nom: 'With my name', anonyme: 'Anonymously', banniere: 'With my banner' },
-          note: 'The name shown is the one used for payment. Each banner, a still image with no animation, is checked before going online. If refused, you are refunded. Contribution to the service, no tax receipt.' }
+          note: 'The name shown is the one used for payment. Each banner, a still image with no animation, is checked before going online. If refused, you are refunded. Contribution to the service, no tax receipt.',
+          devant: function(d){ return 'With your banner, you go ahead of individual sponsors: your month starts on <b>' + d + '</b>. Their months move after yours, nothing is lost.'; },
+          enchere: 'Auction open', au: ' to ', actuelle: 'Current bid', ferme: 'Closes on', dp: ': ',
+          dollars: function(n){ return '$' + n.toLocaleString('en-CA'); }, pct: function(h){ return h + '%'; },
+          regles: 'A month already taken by a banner goes to auction: each bid beats the last one by 25, 50 or 100%. The auction closes 7 days before the month starts. A bid is not paid up front: only the winning bid receives an invoice. A business that loses its spot is refunded.' }
   };
   var CSS = '.apres-vente{margin:-18px 0 28px;font-size:14px}.apres-vente summary{cursor:pointer;opacity:.85}'
     + '.apres-vente p{margin:8px 0;font-size:14px;background:none;padding:0;border:0}.apres-vente table{border-collapse:collapse;width:100%;margin:12px 0;font-size:14px}'
@@ -71,20 +88,42 @@
     var iso = function(dt){ return dt.toISOString().slice(0, 10); }, auj = iso(new Date());
     fetch(el.getAttribute('data-file')).then(function(r){ return r.json(); }).then(function(d){
       var p = d.periodes || [];
-      var fin = p.length ? p[p.length - 1].fin : null;
-      var libre = fin ? new Date(fin + 'T12:00:00') : new Date(); if(fin) libre.setDate(libre.getDate() + 1);
-      if(libre < new Date()) libre = new Date();
+      var finMax = function(l){ return l.reduce(function(m, x){ return !m || x.fin > m ? x.fin : m; }, null); };
+      var apres = function(f){ var x = f ? new Date(f + 'T12:00:00') : new Date(); if(f) x.setDate(x.getDate() + 1); return x < new Date() ? new Date() : x; };
+      var fin = finMax(p), libre = apres(fin);
       var occupe = un && fin && fin >= auj;
+      // Passe-devant (Martin, 11 nov. 2026) : une bannière passe devant les mois de particuliers pas encore commencés.
+      // Seuls les mois commencés et les autres bannières la retiennent.
+      var finB = finMax(p.filter(function(x){ return x.affichage === 'banniere' || x.debut <= auj; })), libreB = apres(finB);
+      var occupeB = un && finB && finB >= auj;
+      var devant = pb && !occupeB && iso(libreB) < iso(libre);
+      // Enchères : bannières pas encore commencées, ouvertes jusqu'à FERMETURE jours avant le début.
+      var ville = VILLES[document.body && document.body.dataset.ville] || el.getAttribute('data-ville-nom') || '';
+      var encheres = pb ? p.filter(function(x){ return x.affichage === 'banniere' && x.debut > auj; }).map(function(x){
+        var f = new Date(x.debut + 'T12:00:00'); f.setDate(f.getDate() - FERMETURE); return { x: x, ferme: iso(f) };
+      }).filter(function(e){ return e.ferme >= auj; }) : [];
+      var enchere = function(e){
+        var prix = +(e.x.prix || pb), mois = jour(e.x.debut) + t.au + jour(e.x.fin);
+        return '<p><b>' + t.enchere + '</b>' + t.dp + mois + '. ' + t.actuelle + t.dp + '<b>' + t.dollars(prix) + '</b>. ' + t.ferme + ' ' + jour(e.ferme) + '.</p>'
+          + '<p class="av-boutons">' + HAUSSES.map(function(h){
+            var montant = Math.round(prix * (1 + h / 100));
+            var url = FORMULAIRE + OFFRE[L] + '?city=' + encodeURIComponent(ville) + '&mois=' + encodeURIComponent(mois) + '&offre=' + montant;
+            return '<a class="av-bouton" href="' + url + '" rel="noopener">+' + t.pct(h) + ' (' + t.dollars(montant) + ')</a>';
+          }).join('') + '</p>';
+      };
       var qui = function(x){ return x.affichage === 'anonyme' ? t.anonyme : esc(x.nom); };
       var bouton = function(k){ return '<a class="av-bouton" href="' + PAIEMENT + liens[k] + '" rel="noopener">' + (k === 'banniere' && pb ? t.bp(pb) : t.b[k]) + '</a>'; };
+      var boutons = (occupe ? [] : ['nom', 'anonyme']).concat((pb ? occupeB : occupe) ? [] : ['banniere']);
       var resume = fin && fin >= auj ? t.reservee + ' <b>' + jour(fin) + '</b>' : t.libreMaint;
       el.outerHTML = '<details class="apres-vente"><summary>' + resume + ' · ' + t.commanditer + '</summary>'
         + (occupe ? '<p>' + t.occupe + ' <b>' + jour(iso(libre)) + '</b>.</p>'
                   : '<p>' + t.libre + ' : <b>' + jour(iso(libre)) + '</b></p><p>' + (un ? t.prix1 : (pb ? t.prix6 : t.prix)) + (pb ? ' ' + t.prixB(pb) : '') + '</p>')
+        + (devant ? '<p>' + t.devant(jour(iso(libreB))) + '</p>' : '')
         + (p.length ? '<table><tr><th>#</th><th>' + t.periode + '</th><th>' + t.qui + '</th></tr>'
           + p.map(function(x, i){ return '<tr><td>' + (i + 1) + '</td><td>' + jour(x.debut) + ' → ' + jour(x.fin) + '</td><td>' + qui(x) + '</td></tr>'; }).join('') + '</table>' : '')
-        + (occupe ? '' : '<p class="av-boutons">' + bouton('nom') + bouton('anonyme') + bouton('banniere') + '</p>')
-        + '<p class="av-note">' + t.note + '</p></details>';
+        + (boutons.length ? '<p class="av-boutons">' + boutons.map(function(k){ return bouton(k); }).join('') + '</p>' : '')
+        + encheres.map(enchere).join('')
+        + '<p class="av-note">' + t.note + (pb ? ' ' + t.regles : '') + '</p></details>';
     }).catch(function(){ el.remove(); });
   }
   function demarrer(){
