@@ -27,6 +27,38 @@ const texte = (html) => String(html ?? '').replace(/<details[\s\S]*?<\/details>/
 
 export const slugProjet = (b) => (b.legislature && b.introSession ? `${b.num}-${b.legislature}-${b.introSession}` : null);
 
+// Fiches enrichies (11 nov. 2026, leçons Roof et Tzitzis dans SAVOIR-SEO.md) : data/projets-enrichis/<slug>.json
+// ajoute un titre parlant, « Ce qui change », les votes par parti (tirés du registre) et une FAQ avec
+// ses données structurées. Faits tirés du résumé officiel et du registre des votes seulement.
+const ENRICHIS = 'data/projets-enrichis';
+const PARTIS = { CAQ: 'Coalition avenir Québec', PLQ: 'Parti libéral', QS: 'Québec solidaire', PQ: 'Parti québécois', PCQ: 'Parti conservateur', IND: 'Indépendants' };
+let VOTES = null;
+const votesDuProjet = (b) => {
+  VOTES ??= existsSync('data/votes.json') ? JSON.parse(readFileSync('data/votes.json', 'utf8')).votes : [];
+  return VOTES.filter((v) => v.billNum === b.num && v.legislature === b.legislature && v.session === b.introSession);
+};
+function sectionsEnrichies(b, e) {
+  const dateFr = (d) => new Date(`${d}T12:00:00`).toLocaleDateString('fr-CA', { day: 'numeric', month: 'long', year: 'numeric' });
+  let html = '';
+  if (e.ceQuiChange?.length) html += `\n<h3>Ce qui change</h3>\n<ul>\n${e.ceQuiChange.map((x) => `<li>${echapper(x)}</li>`).join('\n')}\n</ul>${e.legende ? `\n<p class="fiche-enrichie-note">${echapper(e.legende)}</p>` : ''}`;
+  const votes = votesDuProjet(b);
+  if (votes.length) {
+    const lignes = votes.map((v) => {
+      const c = {};
+      for (const k of ['pour', 'contre', 'abstentions']) for (const p of v[k] || []) { c[p.party] ??= { pour: 0, contre: 0, abstentions: 0 }; c[p.party][k]++; }
+      const taille = (p) => c[p].pour + c[p].contre + c[p].abstentions;
+      const partis = Object.keys(c).sort((a, z) => taille(z) - taille(a));
+      return `<tr><td>${echapper(v.stage)}<br><small>${dateFr(v.date)}</small></td><td>${partis.map((p) => `${echapper(PARTIS[p] || p)} : ${c[p].pour} pour, ${c[p].contre} contre${c[p].abstentions ? `, ${c[p].abstentions} abst.` : ''}`).join('<br>')}</td></tr>`;
+    });
+    html += `\n<h3>Les votes par parti</h3>\n<table>\n<tr><th>Étape</th><th>Vote des partis</th></tr>\n${lignes.join('\n')}\n</table>`;
+  }
+  if (e.faq?.length) html += `\n<h3>Questions fréquentes</h3>\n${e.faq.map((x) => `<h4>${echapper(x.q)}</h4>\n<p>${echapper(x.r)}</p>`).join('\n')}`;
+  return html;
+}
+const faqLd = (e) => (e?.faq?.length
+  ? `\n<script type="application/ld+json">\n${JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: e.faq.map((x) => ({ '@type': 'Question', name: x.q, acceptedAnswer: { '@type': 'Answer', text: x.r } })) }, null, 2).replace(/</g, '\\u003c')}\n</script>`
+  : '');
+
 const ARCHIVES = 'data/archives';
 const lire = (chemin, defaut) => (existsSync(chemin) ? JSON.parse(readFileSync(chemin, 'utf8')) : defaut);
 const copier = (de, vers) => {
@@ -78,11 +110,12 @@ export function construirePagesProjets() {
     // sans niveau sauté. Seule la copie écrite dans la page change ; commun/dq.js refait la carte.
     const resumePage = resumeHtml.replace(/<(\/?)h[4-6]\b/g, '<$1h3');
     const resume = texte(resumeHtml);
-    const titreLong = `Projet de loi no ${b.num} — ${b.title}`;
+    const enrichi = lire(`${ENRICHIS}/${slug}.json`, null);
+    const titreLong = enrichi?.titre || `Projet de loi no ${b.num} — ${b.title}`;
     const titreCourt = b.title.length > 60 ? `${b.title.slice(0, 57).replace(/\s+\S*$/, '')}…` : b.title;
-    const titre = `PL ${b.num} — ${titreCourt} — DossierQuébec`;
+    const titre = enrichi?.titre ? `${enrichi.titre} — DossierQuébec` : `PL ${b.num} — ${titreCourt} — DossierQuébec`;
     const base = resume || `${b.title}. Son étape à l'Assemblée nationale, expliquée en langage clair.`;
-    const desc = `PL ${b.num} : ${base.length > 150 ? `${base.slice(0, 147).replace(/\s+\S*$/, '')}…` : base}`;
+    const desc = enrichi?.description || `PL ${b.num} :${base.length > 150 ? `${base.slice(0, 147).replace(/\s+\S*$/, '')}…` : base}`;
     const ld = JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
@@ -106,7 +139,7 @@ export function construirePagesProjets() {
     remplacer(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${url}">`);
     h = h.replace(/<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${echapper(titre)}">`)
       .replace(/<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${echapper(desc)}">`);
-    remplacer(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">\n${ld}\n</script>`);
+    remplacer(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">\n${ld}\n</script>${faqLd(enrichi)}`);
     // Le projet, écrit dans la page. commun/dq.js remplace le contenu de #billsList au chargement,
     // puis ouvre la carte de ce projet (openBillFromQuery lit le chemin).
     const fiche = `<article class="bill-prerendu">
@@ -116,6 +149,14 @@ ${resumePage}
 <p><a href="${echapper(b.url)}" rel="noopener">Le projet de loi sur le site de l'Assemblée nationale</a></p>
 </article>`;
     remplacer(/<div id="billsList"><\/div>/, `<div id="billsList">${fiche}</div>`);
+    // La fiche enrichie va AU-DESSUS de la liste, hors de #billsList que commun/dq.js remplace : le
+    // visiteur et Google (après rendu) la voient. Sans elle, toutes les fiches montrent la même liste.
+    if (enrichi) remplacer(/<div class="legend-strip bleed">/, `<section class="fiche-enrichie" id="fiche">
+<h2>${echapper(titreLong)}</h2>
+<p class="fiche-enrichie-note">Projet de loi no ${b.num} : ${echapper(b.title)}. ${echapper(b.note ?? '')}${b.sponsor ? ` · Parrain : ${echapper(b.sponsor)}` : ''}</p>${sectionsEnrichies(b, enrichi)}
+<p><a href="${echapper(b.url)}" rel="noopener">Le projet de loi sur le site de l'Assemblée nationale</a></p>
+</section>
+<div class="legend-strip bleed">`);
     writeFileSync(`${DOSSIER}/${slug}.html`, h, 'utf8');
     adresses.push({ url, lastmod: b.lastActivity ?? null });
   }
