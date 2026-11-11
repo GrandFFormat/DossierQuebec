@@ -32,7 +32,8 @@
   };
   var PAIEMENT = 'https://promo.dafrsolution.com/payment-link/';
   // Ville déjà bâtie mais en pause (Laval, Longueuil ; Martin, 11 nov. 2026) : data-reactiver="1" sur le bloc.
-  // La réactiver coûte 100 $ une fois, au lieu des 500 $ de démarrage, puis les mois de la grille.
+  // La réactiver coûte 150 $ une fois (rattrapage des deux derniers mois et mois en cours ; même texte que
+  // l'avis de pause de commun/navigation.js), puis les mois de la grille.
   // Lien en français seulement : ces volets ne sont pas bilingues.
   var REACTIVATION = '6af4eaec906a8b62055d5b71';
   // Enchère en direct du mois de bannière (Martin, 11 nov. 2026), servie par api/represente.js (api/_enchere.js).
@@ -45,8 +46,8 @@
   var ENCHERE = ['quebec', 'montreal', 'levis'], API = '/api/represente', FERMETURE = 7;
   var T = {
     fr: { reservee: 'Réservée jusqu’au', commanditer: 'Commanditer un mois : dès 50 $', libre: 'Prochain mois libre',
-          enPause: 'En pause', reactiver: 'Réactiver cette ville : 100 $',
-          pause: 'Cette ville est en pause. La réactiver coûte 100 $ une fois, au lieu des 500 $ de démarrage. Ensuite, les mois de commandite reprennent.',
+          enPause: 'En pause', reactiver: 'Réactiver cette ville : 150 $',
+          pause: 'Cette ville est en pause. La réactiver coûte 150 $ : le rattrapage des deux derniers mois et le mois en cours. Ensuite, 50 $ par mois, avec votre nom ou anonymement.',
           prix: '50 $ par mois, de 1 à 6 mois. Vos mois s’ajoutent au bout de la file, après le dernier mois réservé.',
           libreMaint: 'Libre', prix6: 'De 1 à 6 mois. Vos mois s’ajoutent au bout de la file, après le dernier mois réservé.', prix1: 'Un mois à la fois, une réservation à la fois.', prixB: function(p){ return 'Avec votre nom ou anonymement : 50 $ par mois. Avec votre bannière ou le nom de votre entreprise : ' + p + ' $ par mois.'; }, bp: function(p){ return 'Avec ma bannière ou mon entreprise (' + p + ' $)'; }, occupe: 'Ce mois est déjà réservé. La prochaine réservation ouvre le',
           prixN: 'Avec votre nom ou anonymement : 50 $ par mois.',
@@ -66,8 +67,8 @@
           erreur: 'Offre non envoyée. Vérifiez les champs ou réessayez plus tard.',
           regles: 'Le mois de bannière se gagne aux enchères, à partir du prix de la ville. Une offre compte une fois confirmée par courriel. Vous savez tout de suite votre place. Si quelqu’un vous dépasse, un courriel vous le dit. L’enchère ferme 7 jours avant le début du mois. Une offre ne se paie pas : seule l’offre gagnante reçoit une facture.' },
     en: { reservee: 'Booked until', commanditer: 'Sponsor a month: from $50', libre: 'Next free month',
-          enPause: 'Paused', reactiver: 'Reactivate this city: $100',
-          pause: 'This city is paused. Reactivating it costs $100 once, instead of the $500 setup fee. Then sponsorship months resume.',
+          enPause: 'Paused', reactiver: 'Reactivate this city: $150',
+          pause: 'This city is paused. Reactivating it costs $150: catching up on the last two months plus the current month. Then $50 a month, with your name or anonymously.',
           prix: '$50 per month, 1 to 6 months. Your months are added at the end of the line, after the last booked month.',
           libreMaint: 'Available', prix6: '1 to 6 months. Your months are added at the end of the line, after the last booked month.', prix1: 'One month at a time, one booking at a time.', prixB: function(p){ return 'With your name or anonymously: $50 a month. With your banner or business name: $' + p + ' a month.'; }, bp: function(p){ return 'With my banner or business ($' + p + ')'; }, occupe: 'This month is already booked. The next booking opens on',
           prixN: 'With your name or anonymously: $50 a month.',
