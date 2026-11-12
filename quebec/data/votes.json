@@ -1,16 +1,16 @@
 {
- "generatedAt": "2026-11-11T16:25:05.642Z",
+ "generatedAt": "2026-11-12T16:56:25.528Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "methode": "Extraction par analyse du texte des résolutions (champ « content » de l'index de la Ville). Les noms sont lus dans les passages « Ont voté en faveur / Ont voté contre ». Chaque vote conserve le texte brut et signale tout écart avec le décompte officiel.",
  "parametres": {
   "annee": "2026",
   "max": 1000,
-  "depuis": "2026-09-12"
+  "depuis": "2026-09-13"
  },
- "totalDisponible": 271,
- "documentsAnalyses": 44,
- "nombre": 271,
- "nouveauxDepuisDerniereExecution": 0,
+ "totalDisponible": 282,
+ "documentsAnalyses": 55,
+ "nombre": 282,
+ "nouveauxDepuisDerniereExecution": 11,
  "avecAvertissement": 10,
  "themes": {
   "procedure": {
@@ -83,6 +83,325 @@
   }
  },
  "votes": [
+  {
+   "id": "CA-2026-0561.pdf",
+   "numero": "CA-2026-0561",
+   "objet": "Entente entre la Ville de Québec et Wajax limitée pour le service de réparation de transmissions chez le concessionnaire du fabricant Allison (Dossier 95511)",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0561.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Marie-Pierre Boucher",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Martin Maranda"
+   ],
+   "decomptePour": 4,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Martin Maranda",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Marie-Pierre Boucher et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Martin Maranda.",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0563.pdf",
+   "numero": "CA-2026-0563",
+   "objet": "Attribution d'un contrat à commandes pour le service d'intervention d'urgence en cas de déversements accidentels et de récupération de contaminants (Appel d'offres public 96459)",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0563.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Marie-Pierre Boucher",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Martin Maranda"
+   ],
+   "decomptePour": 4,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Martin Maranda",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Marie-Pierre Boucher et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Martin Maranda.",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0564.pdf",
+   "numero": "CA-2026-0564",
+   "objet": "Attribution d'un contrat à commandes pour la fourniture, l'installation et le retrait de divers accessoires pour véhicules légers (Appel d'offres public 96435)",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0564.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Marie-Pierre Boucher",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Martin Maranda"
+   ],
+   "decomptePour": 4,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Martin Maranda",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Marie-Pierre Boucher et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Martin Maranda.",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0567.pdf",
+   "numero": "CA-2026-0567",
+   "objet": "Prise d'acte de l'entente intervenue entre la Ville de Québec et le Syndicat des employés manuels de la Ville de Québec concernant l'implantation d'un horaire de travail régulier pour les employés manuels du Service de la gestion des équipements motorisés",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0567.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Marie-Pierre Boucher",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Martin Maranda"
+   ],
+   "decomptePour": 4,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Martin Maranda",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Marie-Pierre Boucher et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Martin Maranda.",
+   "nouveau": true,
+   "theme": "rh",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0568.pdf",
+   "numero": "CA-2026-0568",
+   "objet": "Règlement hors tribunal du dossier relatif à l'expropriation du lot 6 728 669 du cadastre du Québec, situé sur la 1re Avenue (Ville de Québec c. Guylaine Langlois, SAI¿Q¿286101¿2601)",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0568.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Marie-Pierre Boucher",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Martin Maranda"
+   ],
+   "decomptePour": 4,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Martin Maranda",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Marie-Pierre Boucher et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Martin Maranda.",
+   "nouveau": true,
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0569.pdf",
+   "numero": "CA-2026-0569",
+   "objet": "Demande afin d'obtenir l'autorisation du gouvernement du Québec de prendre par voie d'expropriation une servitude réelle et perpétuelle d'utilité publique contre une partie du lot 6 495 378 du cadastre du Québec, pour les fins du projet de réseau structurant de transport en commun de la Ville de Qué",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0569.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Marie-Pierre Boucher",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Martin Maranda"
+   ],
+   "decomptePour": 4,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Martin Maranda",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Marie-Pierre Boucher et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Martin Maranda.",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0570.pdf",
+   "numero": "CA-2026-0570",
+   "objet": "Demande afin d'obtenir l'autorisation du gouvernement du Québec d'acquérir par voie d'expropriation une partie du lot 1 941 070 du cadastre du Québec, pour les fins du projet de réseau structurant de transport en commun de la Ville de Québec (projet TramCité)",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0570.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Marie-Pierre Boucher",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Martin Maranda"
+   ],
+   "decomptePour": 4,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Martin Maranda",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Marie-Pierre Boucher et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Martin Maranda.",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0571.pdf",
+   "numero": "CA-2026-0571",
+   "objet": "Demande afin d'obtenir l'autorisation du gouvernement du Québec d'acquérir par voie d'expropriation une servitude réelle et perpétuelle d'utilité publique contre une partie du lot 1 941 044 du cadastre du Québec, pour les fins du projet de réseau structurant de transport en commun de la Ville de Qué",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0571.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Marie-Pierre Boucher",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Martin Maranda"
+   ],
+   "decomptePour": 4,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Martin Maranda",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Marie-Pierre Boucher et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Martin Maranda.",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0572.pdf",
+   "numero": "CA-2026-0572",
+   "objet": "Demande afin d'obtenir l'autorisation du gouvernement du Québec d'acquérir, par voie d'expropriation, la propriété d'une parcelle de terrain et une servitude réelle et perpétuelle d'utilité publique sur le lot 6 583 120 du cadastre du Québec, pour les fins du projet de réseau structurant de transpor",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0572.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Marie-Pierre Boucher",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Martin Maranda"
+   ],
+   "decomptePour": 4,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Martin Maranda",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Marie-Pierre Boucher et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Martin Maranda.",
+   "nouveau": true,
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0574.pdf",
+   "numero": "CA-2026-0574",
+   "objet": "Contrat pour la maintenance et le soutien à l'utilisation du progiciel de paie et de gestion des ressources humaines (VIP) (Dossier 96736)",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0574.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Marie-Pierre Boucher",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Martin Maranda"
+   ],
+   "decomptePour": 4,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Martin Maranda",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Marie-Pierre Boucher et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Martin Maranda.",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0575.pdf",
+   "numero": "CA-2026-0575",
+   "objet": "Adhésion de la Ville de Québec au regroupement d'achats du Centre d'acquisitions gouvernementales 2025-8216-50 imprimante, multifonction et cartouche originale (Dossier 96688)",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0575.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Gaétan Pageau",
+    "Marie-Pierre Boucher",
+    "Elisa Verreault",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Martin Maranda"
+   ],
+   "decomptePour": 4,
+   "decompteContre": 1,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Martin Maranda",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : monsieur le maire Gaétan Pageau, mesdames les conseillères Marie-Pierre Boucher et Elisa Verreault et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Martin Maranda.",
+   "nouveau": true,
+   "theme": "administration",
+   "themeSource": "objet"
+  },
   {
    "id": "CA-2026-0548.pdf",
    "numero": "CA-2026-0548",
