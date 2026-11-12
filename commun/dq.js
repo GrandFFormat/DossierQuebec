@@ -3634,8 +3634,27 @@ function norm(s){
     .trim();
 }
 
+// Réseaux sociaux officiels des député·e·s (data/site/deputesReseaux.json, clé = slugMinistre(nom)).
+// Chargé une seule fois, au premier affichage de la liste ; la liste se redessine à l'arrivée.
+let _reseauxDep = null, _reseauxDepP = null;
+const ICONES_RES_DEP = {
+  X: 'M17.7 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L2 3h6.4l4.4 5.8zm-1.1 16.2h1.7L7.5 4.7H5.7z',
+  Facebook: 'M14 8h3V4h-3c-2.8 0-4 1.7-4 4.3V10H7v4h3v8h4v-8h3l1-4h-4V8.6c0-.4.3-.6.6-.6z',
+  Instagram: 'M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3zm5 3.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 2a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM17.5 5.3a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z',
+  LinkedIn: 'M4 9h4v12H4zM6 3a2 2 0 110 4 2 2 0 010-4zm4 6h3.8v1.7c.6-1 1.9-2 3.9-2 4 0 4.3 2.6 4.3 6V21h-4v-5.6c0-1.4 0-3.1-1.9-3.1S12 13.8 12 15.3V21h-2z',
+  TikTok: 'M16.5 2h-3.4v13.4a2.9 2.9 0 11-2.9-2.9c.3 0 .6 0 .9.1V9.1a6.3 6.3 0 105.4 6.3V8.6a7.9 7.9 0 004.5 1.4V6.6a4.5 4.5 0 01-4.5-4.6z',
+};
+const nomReseauDep = (u) => [[/\/\/(www\.)?x\.com|twitter/, 'X'], [/facebook/, 'Facebook'], [/instagram/, 'Instagram'], [/linkedin/, 'LinkedIn'], [/tiktok/, 'TikTok']].find(([r]) => r.test(u))?.[1] || 'Web';
+function reseauxDeputeHtml(nom){
+  const liens = _reseauxDep?.[slugMinistre(nom)];
+  if(!liens?.length) return '';
+  const de = currentLang === 'en' ? ' of ' : ' de ';
+  return `<span class="dep-reseaux">${liens.map(u => { const r = nomReseauDep(u); return `<a href="${u.replace(/"/g, '&quot;')}" target="_blank" rel="noopener" title="${r}" aria-label="${r}${de}${nom}">${ICONES_RES_DEP[r] ? `<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="${ICONES_RES_DEP[r]}"/></svg>` : r}</a>`; }).join('')}</span>`;
+}
 function renderDeputes(filter){
   if(!document.getElementById('deputesList')) return;   // vue absente de cette page
+  if(!_reseauxDepP) _reseauxDepP = fetch('/data/site/deputesReseaux.json').then(r => r.ok ? r.json() : {}).catch(() => ({}))
+    .then(d => { _reseauxDep = d; if(Object.keys(d).length) renderDeputes(filter); });
   // Toute nouvelle liste (recherche, filtre de parti, tri, langue) refait le retour sous la boîte :
   // sinon il garderait l'ancien compte et des boutons vers des fiches qui n'existent plus.
   planifierRetour();
@@ -3695,7 +3714,7 @@ function renderDeputes(filter){
         return `
         <div class="dep-row">
           <div>
-            <div class="dep-name">${CHEFS_OPPOSITION.includes(d.name) ? `<a href="/deputes/${slugMinistre(d.name)}">${d.name}</a>` : d.name}</div>
+            <div class="dep-name">${CHEFS_OPPOSITION.includes(d.name) ? `<a href="/deputes/${slugMinistre(d.name)}">${d.name}</a>` : d.name}</div>${reseauxDeputeHtml(d.name)}
             <a class="dep-mail" href="${mailHref}" ${email ? '' : 'target="_blank" rel="noopener"'}>✉ ${mailText}</a>
           </div>
           <div>
