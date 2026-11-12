@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-11T17:20:51.100Z",
+ "generatedAt": "2026-11-12T17:49:55.265Z",
  "source": "https://ville.montreal.qc.ca/documents/Adi_Public/",
  "avertissement": "Les définitions de ce lexique sont rédigées par DossierVille — ce ne sont pas des textes de la Ville de Montréal ni des définitions légales. Ce qui vient des documents officiels, ce sont les décomptes et les exemples, mesurés sur les procès-verbaux de l'année.",
  "categories": {
@@ -12,7 +12,7 @@
  },
  "parametres": {
   "annee": "2026",
-  "procesVerbauxMesures": 183
+  "procesVerbauxMesures": 184
  },
  "nombre": 33,
  "entrees": [
@@ -66,10 +66,10 @@
    "definition": "Le dossier complet d'une décision dans le système de la Ville : le sommaire, ses pièces jointes, les interventions des services, puis la ou les résolutions. Son numéro à dix chiffres suit la décision d'une instance à l'autre — du comité exécutif au conseil municipal, puis à l'agglomération.",
    "ouVousLeVoyez": "Un même dossier peut donc apparaître trois fois sur la page Décisions, une par instance qui s'est prononcée.",
    "occurrences": {
-    "procesVerbaux": 183,
-    "resolutions": 6224,
+    "procesVerbaux": 184,
+    "resolutions": 6262,
     "pourAnnee": "2026",
-    "total": 6224
+    "total": 6262
    },
    "exemple": {
     "numero": "CA26 29 0222",
@@ -87,18 +87,18 @@
    "definition": "Le compte rendu officiel d'une séance : qui était présent, ce qui a été décidé, et — quand un vote enregistré a été demandé — qui a voté quoi.",
    "ouVousLeVoyez": "C'est la source de toutes les décisions et de tous les votes du site. Un par séance, en PDF, sur le site de la Ville.",
    "occurrences": {
-    "procesVerbaux": 183,
-    "resolutions": 460,
+    "procesVerbaux": 184,
+    "resolutions": 481,
     "pourAnnee": "2026",
-    "total": 460
+    "total": 481
    },
    "exemple": {
-    "numero": "CA26 12210",
-    "objet": "Approuver le procès-verbal de la séance ordinaire du conseil d'arrondissement er tenue le 1 septembre 2026, à 19 h",
-    "date": "2026-10-06",
+    "numero": "CA26 24 0393",
+    "objet": "er Adopter le procès-verbal de la séance du conseil d'arrondissement du 1 septembre 2026",
+    "date": "2026-10-13",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Anjou",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-10-06_19h00_FR.pdf#page=3"
+    "instance": "Conseil d'arrondissement de Ville-Marie",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-10-13_18h30_FR.pdf#page=4"
    }
   },
   {
@@ -108,18 +108,18 @@
    "definition": "La liste des points qu'une séance doit traiter, publiée le vendredi précédant l'assemblée du conseil municipal. Les points sont numérotés par chapitre : 20 pour les contrats et ententes, 30 pour l'administration et les finances, 40 pour les règlements, 50 pour les nominations, 60 pour les motions.",
    "ouVousLeVoyez": "Le numéro d'article d'une résolution (20.03, 40.12) est celui de son point à l'ordre du jour.",
    "occurrences": {
-    "procesVerbaux": 183,
-    "resolutions": 775,
+    "procesVerbaux": 184,
+    "resolutions": 782,
     "pourAnnee": "2026",
-    "total": 775
+    "total": 782
    },
    "exemple": {
-    "numero": "CA26 12209",
-    "objet": "Adopter l'ordre du jour de la séance ordinaire du conseil d'arrondissement du 6 octobre 2026",
-    "date": "2026-10-06",
+    "numero": "CA26 240390",
+    "objet": "Adopter l'ordre du jour de la séance du conseil d'arrondissement du 13 octobre 2026",
+    "date": "2026-10-13",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Anjou",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-10-06_19h00_FR.pdf#page=2"
+    "instance": "Conseil d'arrondissement de Ville-Marie",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-10-13_18h30_FR.pdf#page=1"
    }
   },
   {
@@ -129,18 +129,18 @@
    "definition": "L'annonce qu'un règlement sera présenté à une séance suivante. Ça ne décide rien : ça prévient. C'est une étape obligatoire avant d'adopter un règlement.",
    "ouVousLeVoyez": "Souvent accompagné du dépôt du projet de règlement, puis suivi de son adoption à la séance suivante.",
    "occurrences": {
-    "procesVerbaux": 143,
-    "resolutions": 525,
+    "procesVerbaux": 144,
+    "resolutions": 533,
     "pourAnnee": "2026",
-    "total": 525
+    "total": 533
    },
    "exemple": {
-    "numero": "CA26 12225",
-    "objet": "Donner avis de motion et déposer le projet de règlement RCA 59-3 intitulé « Règlement modifiant le Règlement sur la propreté (RCA 59) », afin d'augmenter la hauteur permise de l'herbe sur les terrains",
-    "date": "2026-10-06",
+    "numero": "CA26 240427",
+    "objet": "Adopter le Règlement sur la taxe relative aux services (exercice financier 2027) - Avis de motion et dépôt Avis de motion est donné par la mairesse Soraya Martinez Ferrada annonçant l’adoption d’un règlement intitulé « Règlement sur la taxe relative aux services (exercice financier 2027) », et lequel est déposé avec le dossier décisionnel.",
+    "date": "2026-10-13",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Anjou",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-10-06_19h00_FR.pdf#page=11"
+    "instance": "Conseil d'arrondissement de Ville-Marie",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-10-13_18h30_FR.pdf#page=19"
    }
   },
   {
@@ -150,18 +150,18 @@
    "definition": "La forme la plus contraignante d'une décision municipale : une norme générale qui s'applique à tous. Son adoption suit des étapes obligatoires (avis de motion, projet, adoption).",
    "ouVousLeVoyez": "Les numéros disent l'instance et l'année : 26-012 pour le conseil municipal, RCG 26-005 pour l'agglomération, RCA pour un arrondissement.",
    "occurrences": {
-    "procesVerbaux": 81,
-    "resolutions": 228,
+    "procesVerbaux": 82,
+    "resolutions": 237,
     "pourAnnee": "2026",
-    "total": 228
+    "total": 237
    },
    "exemple": {
-    "numero": "CA26 12230",
-    "objet": "Adopter le règlement RCA 191-2 intitulé « Règlement modifiant le Règlement sur les tarifs de l'arrondissement d'Anjou - Exercice financier 2026 (RCA 191) »",
-    "date": "2026-10-06",
+    "numero": "CA26 240421",
+    "objet": "Recommander au conseil municipal d'adopter le Règlement autorisant un emprunt de 7 607 000 $ afin de financer la réalisation des travaux prévus au programme de réfection routière de l'arrondissement de Ville-Marie",
+    "date": "2026-10-13",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Anjou",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-10-06_19h00_FR.pdf#page=25"
+    "instance": "Conseil d'arrondissement de Ville-Marie",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-10-13_18h30_FR.pdf#page=16"
    }
   },
   {
@@ -172,18 +172,18 @@
    "definition": "Les 65 élus de la Ville de Montréal : la mairesse ou le maire, les 18 maires d'arrondissement et 46 conseillères et conseillers de ville. Il adopte le budget, les règlements, les motions, et siège en assemblée ordinaire une fois par mois, le lundi.",
    "ouVousLeVoyez": "Ses séances sont publiques, webdiffusées, et s'ouvrent sur une période de questions du public.",
    "occurrences": {
-    "procesVerbaux": 107,
-    "resolutions": 1350,
+    "procesVerbaux": 108,
+    "resolutions": 1352,
     "pourAnnee": "2026",
-    "total": 1350
+    "total": 1352
    },
    "exemple": {
-    "numero": "CM26 0922",
-    "objet": "Adoption de l'ordre du jour de l'assemblée du conseil municipal",
-    "date": "2026-09-21",
+    "numero": "CA26 240421",
+    "objet": "Recommander au conseil municipal d'adopter le Règlement autorisant un emprunt de 7 607 000 $ afin de financer la réalisation des travaux prévus au programme de réfection routière de l'arrondissement de Ville-Marie",
+    "date": "2026-10-13",
     "type": "Résolution",
-    "instance": "Conseil municipal",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-09-21_13h00_FR.pdf#page=6"
+    "instance": "Conseil d'arrondissement de Ville-Marie",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-10-13_18h30_FR.pdf#page=16"
    }
   },
   {
@@ -214,18 +214,18 @@
    "definition": "Chacun des 19 arrondissements de Montréal a son conseil, présidé par son maire d'arrondissement, avec les conseillers de ville et d'arrondissement élus sur son territoire. Il décide de ce qui est local : urbanisme de proximité, parcs, loisirs, voirie locale, déneigement.",
    "ouVousLeVoyez": "Ce site couvre les trois instances centrales ; les 19 conseils d'arrondissement suivent le même schéma de publication et sont l'étape suivante.",
    "occurrences": {
-    "procesVerbaux": 162,
-    "resolutions": 2457,
+    "procesVerbaux": 163,
+    "resolutions": 2482,
     "pourAnnee": "2026",
-    "total": 2457
+    "total": 2482
    },
    "exemple": {
-    "numero": "CA26 12209",
-    "objet": "Adopter l'ordre du jour de la séance ordinaire du conseil d'arrondissement du 6 octobre 2026",
-    "date": "2026-10-06",
+    "numero": "CA26 24 0393",
+    "objet": "er Adopter le procès-verbal de la séance du conseil d'arrondissement du 1 septembre 2026",
+    "date": "2026-10-13",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Anjou",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-10-06_19h00_FR.pdf#page=2"
+    "instance": "Conseil d'arrondissement de Ville-Marie",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-10-13_18h30_FR.pdf#page=4"
    }
   },
   {
@@ -372,10 +372,10 @@
    "definition": "Personne n'a voté contre.",
    "ouVousLeVoyez": "La formule la plus courante, parce que la plupart des décisions passent sans opposition.",
    "occurrences": {
-    "procesVerbaux": 147,
-    "resolutions": 5688,
+    "procesVerbaux": 148,
+    "resolutions": 5728,
     "pourAnnee": "2026",
-    "total": 5688
+    "total": 5728
    },
    "exemple": {
     "numero": "CE26 1057",
@@ -421,18 +421,18 @@
    "definition": "L'instance constate officiellement qu'un document lui a été présenté. Ça ne l'approuve pas : ça l'enregistre.",
    "ouVousLeVoyez": "Souvent pour des rapports, des réponses du comité exécutif ou des dépôts obligatoires.",
    "occurrences": {
-    "procesVerbaux": 106,
-    "resolutions": 260,
+    "procesVerbaux": 107,
+    "resolutions": 266,
     "pourAnnee": "2026",
-    "total": 260
+    "total": 266
    },
    "exemple": {
-    "numero": "CA26 12216",
-    "objet": "Prendre acte du rapport des décisions déléguées, de la liste des bons de commande approuvés, des demandes de paiement et des virements budgétaires ainsi que des achats par carte de crédit pour la période comptable er du 1 juillet 2026 au 31 juillet 2026",
-    "date": "2026-10-06",
+    "numero": "CA26 240394",
+    "objet": "Prendre acte du dépôt du procès-verbal de la réunion du comité consultatif d'urbanisme tenue le 10 septembre 2026",
+    "date": "2026-10-13",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Anjou",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-10-06_19h00_FR.pdf#page=6"
+    "instance": "Conseil d'arrondissement de Ville-Marie",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-10-13_18h30_FR.pdf#page=4"
    }
   },
   {
@@ -464,18 +464,18 @@
    "definition": "Une permission d'écarter légèrement une règle du zonage pour un terrain précis — une marge, une hauteur, un nombre de cases de stationnement — sans changer le règlement pour tout le monde. À Montréal, c'est surtout une affaire d'arrondissement.",
    "ouVousLeVoyez": "Presque toujours rattachée à une adresse précise, nommée dans l'objet de la décision.",
    "occurrences": {
-    "procesVerbaux": 83,
-    "resolutions": 150,
+    "procesVerbaux": 84,
+    "resolutions": 151,
     "pourAnnee": "2026",
-    "total": 150
+    "total": 151
    },
    "exemple": {
-    "numero": "CA26 12219",
-    "objet": "Accorder, en vertu du Règlement sur les dérogations mineures aux règlements d'urbanisme (1557), une dérogation mineure afin d'autoriser l'installation d'une enseigne au mur pour un bâtiment occupé par un usage industriel ainsi que l'installation d'une deuxième enseigne au sol, pour l'immeuble situé aux 7755, rue Bombardier et 10301, rue Colbert, lot 6 637 519 du cadastre du Québec, circonscription foncière de Montréal",
-    "date": "2026-10-06",
+    "numero": "CA26 240420",
+    "objet": "Accorder une dérogation mineure relativement à une enseigne excédant la superficie maximale prescrite sur vitrage, pour le bâtiment situé au 2850, rue Sherbrooke Est, conformément au Règlement sur les dérogations mineures (Collège Ville-Marie)",
+    "date": "2026-10-13",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Anjou",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-10-06_19h00_FR.pdf#page=7"
+    "instance": "Conseil d'arrondissement de Ville-Marie",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-10-13_18h30_FR.pdf#page=15"
    }
   },
   {
@@ -528,18 +528,18 @@
    "definition": "Le découpage du territoire en zones, avec pour chacune ce qu'on a le droit d'y construire et d'y faire. À Montréal, chaque arrondissement a son règlement d'urbanisme.",
    "ouVousLeVoyez": "Le plan d'urbanisme de la Ville chapeaute les 19 règlements d'arrondissement.",
    "occurrences": {
-    "procesVerbaux": 101,
-    "resolutions": 319,
+    "procesVerbaux": 102,
+    "resolutions": 323,
     "pourAnnee": "2026",
-    "total": 319
+    "total": 323
    },
    "exemple": {
-    "numero": "CA26 08 0376",
-    "objet": "Soumis sommaire décisionnel numéro 1268918003 relatif à une demande de dérogation mineure concernant la propriété située au 1025-1027, avenue O'Brien du règlement numéro RCA08-08-0001 sur le zonage et ayant pour objet d’autoriser un agrandissement arrière d’une habitation bifamiliale isolée en empiétant dans la marge latérale.",
-    "date": "2026-10-06",
+    "numero": "CA26 240430",
+    "objet": "Adopter, conformément à l'article 145.35.1 de la Loi sur l'aménagement et l'urbanisme, le Règlement relatif au zonage incitatif de l'arrondissement de Ville-Marie (CA-24-419) - Avis de motion Avis de motion est donné par la mairesse Soraya Martinez Ferrada annonçant l’adoption du règlement intitulé « Règlement relatif au zonage incitatif » pour l’arrondissement de Ville-Marie et lequel est déposé avec le dossier décisionnel.",
+    "date": "2026-10-13",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Saint-Laurent",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-10-06_19h30_FR.pdf#page=12"
+    "instance": "Conseil d'arrondissement de Ville-Marie",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-10-13_18h30_FR.pdf#page=20"
    }
   },
   {
@@ -571,18 +571,18 @@
    "definition": "La mise en concurrence obligatoire avant d'accorder un contrat au-delà d'un certain montant. Public, il est ouvert à tous ; sur invitation, il est réservé à des fournisseurs sollicités.",
    "ouVousLeVoyez": "Les contrats de Montréal sont aussi publiés en données ouvertes, avec le numéro de la résolution qui les accorde.",
    "occurrences": {
-    "procesVerbaux": 154,
-    "resolutions": 873,
+    "procesVerbaux": 155,
+    "resolutions": 877,
     "pourAnnee": "2026",
-    "total": 873
+    "total": 877
    },
    "exemple": {
-    "numero": "CA26 12214",
-    "objet": "Autoriser une dépense totale de 229 720,05 $, contingences et taxes incluses, pour la location d'un (1) tracteur-chargeur muni d'une pelle hydraulique à oreilles latérales avec opérateur pour les opérations de déneigement de l'arrondissement d'Anjou, pour les saisons hivernales 2026-2027, 2027-2028 et 2028-2029. - Attribuer, à cette fin, un contrat à Les Pavages Dancar (2009) inc., au montant de 191 433,38 $, taxes incluses - Appel d'offres public 26-21417, lot 2.1.1 (4 soumissionnaires)",
-    "date": "2026-10-06",
+    "numero": "CA26 24 0404",
+    "objet": "Autoriser la prolongation du contrat attribué à Sodem inc., pour une période d'un an, soit du er 1 novembre 2026 au 31 octobre 2027, pour le déneigement et l'entretien de l'esplanade Tranquille - Autoriser une dépense supplémentaire de 828 241,70 $, taxes et contingences incluses, majorant la dépense totale à 3 369 037,55 $ (appel d'offres public 23-19985)",
+    "date": "2026-10-13",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Anjou",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-10-06_19h00_FR.pdf#page=4"
+    "instance": "Conseil d'arrondissement de Ville-Marie",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-10-13_18h30_FR.pdf#page=8"
    }
   },
   {
@@ -614,18 +614,18 @@
    "definition": "Une somme que la Ville verse à un organisme pour un projet ou une mission, encadrée par une convention qui dit à quoi elle sert et ce que l'organisme doit rendre compte.",
    "ouVousLeVoyez": "« Accorder un soutien financier de 250 000 $ à … et approuver un projet de convention à cet effet ».",
    "occurrences": {
-    "procesVerbaux": 151,
-    "resolutions": 695,
+    "procesVerbaux": 152,
+    "resolutions": 696,
     "pourAnnee": "2026",
-    "total": 695
+    "total": 696
    },
    "exemple": {
-    "numero": "CA26 12211",
-    "objet": "Approuver la convention entre la Ville de Montréal - Arrondissement d'Anjou et Les Chevaliers de Colomb du conseil St-Conrad, numéro 9821, pour l'achat et la distribution de cadeaux de Noël à des enfants âgés de 17 ans et moins issus de familles en situation de vulnérabilité, pour l'année 2026 - Accorder, à cet effet, une contribution financière au montant de 15 000 $ à Les Chevaliers de Colomb du conseil St-Conrad, numéro 9821",
-    "date": "2026-10-06",
+    "numero": "CA26 240407",
+    "objet": "Approuver la convention, se terminant le 14 août 2027, avec Famille pour l'Entraide et l'Éducation des Jeunes et des Adultes (FEEJAD) dans le cadre du « Fonds de soutien financier en développement social de l'arrondissement de Ville-Marie » et accorder une contribution totale de 40 000 $",
+    "date": "2026-10-13",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Anjou",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-10-06_19h00_FR.pdf#page=3"
+    "instance": "Conseil d'arrondissement de Ville-Marie",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-10-13_18h30_FR.pdf#page=10"
    }
   },
   {
@@ -636,18 +636,18 @@
    "definition": "Le plan des investissements de la Ville sur dix ans — bâtiments, conduites, rues, parcs — adopté chaque année avec le budget. C'est là qu'on voit ce que la Ville compte construire, et quand.",
    "ouVousLeVoyez": "Beaucoup de contrats de travaux renvoient au PDI comme source de financement.",
    "occurrences": {
-    "procesVerbaux": 51,
-    "resolutions": 77,
+    "procesVerbaux": 52,
+    "resolutions": 78,
     "pourAnnee": "2026",
-    "total": 77
+    "total": 78
    },
    "exemple": {
-    "numero": "CA26 210194",
-    "objet": "Dépôt du rapport des virements de crédits du budget de fonctionnement et du programme décennal d'immobilisations (PDI) pour la période d'août 2026. (1260130020)",
-    "date": "2026-10-06",
+    "numero": "CA26 240398",
+    "objet": "Adopter le procès-verbal de la séance extraordinaire du conseil d'arrondissement du 6 octobre 2026 relative au budget 2027 et au Programme décennal d'immobilisations (PDI) 2027-2036",
+    "date": "2026-10-13",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Verdun",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-10-06_19h00_FR.pdf#page=6"
+    "instance": "Conseil d'arrondissement de Ville-Marie",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-10-13_18h30_FR.pdf#page=5"
    }
   },
   {
@@ -657,18 +657,18 @@
    "definition": "Le règlement par lequel la Ville s'autorise à emprunter pour financer un projet, en général un investissement de longue durée. Il précise le montant et l'objet.",
    "ouVousLeVoyez": "« Adopter le règlement autorisant un emprunt de 12 000 000 $ afin de financer … ».",
    "occurrences": {
-    "procesVerbaux": 44,
-    "resolutions": 92,
+    "procesVerbaux": 45,
+    "resolutions": 94,
     "pourAnnee": "2026",
-    "total": 92
+    "total": 94
    },
    "exemple": {
-    "numero": "CA26 14 0246",
-    "objet": "Avis de motion et dépôt du projet de Règlement RCA24-14007-1 intitulé « Règlement modifiant le Règlement autorisant un emprunt de 17 801 000 $ pour financer la réalisation du programme de protection des bâtiments (RCA24-14007) » afin d'augmenter l'emprunt de 17 088 000 $ pour un total de 34 889 000 $. AVIS DE MOTION ET DÉPÔT DU PROJET DE RÈGLEMENT Avis de motion est donné par le maire de l’arrondissement, Jean François Lalonde et dépôt du projet de règlement pour adoption, à une séance subséquente du conseil d’arrondissement, du Règlement RCA24- 14007-1 intitulé « Règlement modifiant le Règlement autorisant un emprunt de 17 801 000 $ pour financer la réalisation du programme de protection",
-    "date": "2026-10-06",
+    "numero": "CA26 240421",
+    "objet": "Recommander au conseil municipal d'adopter le Règlement autorisant un emprunt de 7 607 000 $ afin de financer la réalisation des travaux prévus au programme de réfection routière de l'arrondissement de Ville-Marie",
+    "date": "2026-10-13",
     "type": "Résolution",
-    "instance": "Conseil d'arrondissement de Villeray–Saint-Michel–Parc-Extension",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-10-06_18h30_FR.pdf#page=12"
+    "instance": "Conseil d'arrondissement de Ville-Marie",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-10-13_18h30_FR.pdf#page=16"
    }
   },
   {
