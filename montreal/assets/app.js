@@ -1365,7 +1365,7 @@ document.addEventListener('click', (e) => {
   e.stopPropagation();
   const s = b.closest('details.seance');
   if (s.classList.contains('tout-ouvert')) { fermerSeanceDepliee(s); return; }
-  document.querySelectorAll('details.seance.tout-ouvert').forEach(fermerSeanceDepliee);
+  document.querySelectorAll('details.seance[open], details.seance.tout-ouvert').forEach((x) => { if (x !== s) fermerSeanceDepliee(x); });
   s.open = true;
   s.classList.add('tout-ouvert');
   s.querySelectorAll('.seance-procedure').forEach((p) => { p.open = true; });

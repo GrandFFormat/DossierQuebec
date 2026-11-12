@@ -1279,7 +1279,9 @@ document.addEventListener('click', (e) => {
   e.stopPropagation();
   const s = b.closest('details.seance');
   if (s.classList.contains('tout-ouvert')) { fermerSeanceDepliee(s); return; }
-  document.querySelectorAll('details.seance.tout-ouvert').forEach(fermerSeanceDepliee);
+  // Toute autre séance ouverte se referme, y compris celle ouverte d'office par le pré-rendu
+  // (sans la classe tout-ouvert) : sinon deux séances restaient ouvertes (Martin, 12 nov. 2026).
+  document.querySelectorAll('details.seance[open], details.seance.tout-ouvert').forEach((x) => { if (x !== s) fermerSeanceDepliee(x); });
   s.open = true;
   s.classList.add('tout-ouvert');
   s.querySelectorAll('.seance-procedure').forEach((p) => { p.open = true; });
