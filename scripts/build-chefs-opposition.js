@@ -38,6 +38,7 @@ export function construirePagesChefs() {
   const parrains = lire('data/site/billsParrains.json', []);
   const promesses = lire('data/site/promises.json', []).filter((p) => !p.draft);
   const wiki = lire('data/site/chefsWiki.json', {});
+  const reseauxDep = lire('data/site/deputesReseaux.json', {});
   const brut = new Map((lire('data/bills.json', { bills: [] }).bills ?? []).map((b) => [b.id, b]));
   const affiches = new Map(lire('data/site/bills.json', []).map((b) => [b.id, b]));
   const courrielDe = new Map(Object.entries(courriels).map(([k, v]) => [norm(k), v]));
@@ -89,7 +90,7 @@ export function construirePagesChefs() {
     const base = `/${DOSSIER}/photos/${slug}-parti`;
     const photo = existsSync(`${DOSSIER}/photos/${slug}-parti.jpg`)
       ? `<figure class="min-photo"><img src="${base}.webp" srcset="${base}.webp 1x, ${base}@2x.webp 2x" width="200" height="200" alt="${esc(c.name)}"><figcaption>${deux('Photo', 'Photo')} : <a href="${esc(c.photoPage)}" rel="noopener">${esc(NOMS_PARTIS[c.party] ?? partiFr)}</a></figcaption></figure>` : '';
-    const reseaux = c.reseaux ?? [];
+    const reseaux = [...new Set([...(c.reseaux ?? []), ...(reseauxDep[slug] ?? [])])];
 
     const fiche = `<section class="view active" id="view-ministre" data-titre-en="${esc(`${c.name}, ${c.bandeau[1]} — DossierQuébec`.length <= 65 ? `${c.name}, ${c.bandeau[1]} — DossierQuébec` : `${c.name}, ${c.party} — DossierQuébec`)}">
     <nav class="fil-ariane" aria-label="Fil d'Ariane"><a href="/" data-i18n="fil.accueil">Accueil</a><span class="sep" aria-hidden="true">›</span><a href="/ministres" data-i18n="fil.ministres">Ministres et député·e·s</a><span class="sep" aria-hidden="true">›</span><span aria-current="page">${esc(c.name)}</span></nav>
