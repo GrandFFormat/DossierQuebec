@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-12T17:59:15.508Z",
+ "generatedAt": "2026-11-13T17:34:01.168Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel quand il est publié (source « sommaire »), sinon du texte de la résolution elle-même (source « resolution »), sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,17 +7,17 @@
   "annee": "2026",
   "max": 40,
   "batch": true,
-  "depuis": "2026-09-13",
+  "depuis": "2026-09-14",
   "plafond": 120
  },
- "nombre": 9076,
- "genereCetteFois": 35,
+ "nombre": 9092,
+ "genereCetteFois": 16,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.7913,
-  "jetonsEntree": 233053,
-  "jetonsSortie": 16695
+  "montant": 0.137,
+  "jetonsEntree": 32295,
+  "jetonsSortie": 4498
  },
  "resumes": [
   {
@@ -7250,6 +7250,411 @@
    "jetons": {
     "entree": 2499,
     "sortie": 414
+   }
+  },
+  {
+   "id": "CA26 09 0273",
+   "numero": "1269426001",
+   "resolution": "CA26 09 0273",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Édicter, en vertu du Règlement sur la circulation et le stationnement (R.R.V.M., chapitre C-4.1, article 3, paragraphe 3°), une ordonnance afin d'interdire le virage à gauche sur le boulevard Gouin Ouest en direction est, à l'approche de l'hôpital du Sacré-Coeur-de-Montréal.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=9",
+   "source": "resolution",
+   "puces": [
+    "La Ville interdit le virage à gauche sur le boulevard Gouin Ouest, en direction est, à l'approche de l'hôpital du Sacré-Coeur-de-Montréal.",
+    "L'interdiction prend la forme d'une ordonnance adoptée en vertu du Règlement sur la circulation et le stationnement.",
+    "Le document ne donne ni motif, ni date d'entrée en vigueur, ni coût."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.158Z",
+   "jetons": {
+    "entree": 1928,
+    "sortie": 237
+   }
+  },
+  {
+   "id": "CA26 09 0269",
+   "numero": "1266624001",
+   "resolution": "CA26 09 0269",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Approuver l'entente relative au franchissement et à l'entretien d'un passage à niveau public entre la Ville de Montréal et la Compagnie de chemin de fer Canadien Pacifique.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=7",
+   "source": "resolution",
+   "puces": [
+    "La Ville de Montréal approuve une entente avec la Compagnie de chemin de fer Canadien Pacifique.",
+    "L'entente porte sur le franchissement et l'entretien d'un passage à niveau public.",
+    "Le document ne précise ni montant, ni échéance, ni emplacement du passage à niveau."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.158Z",
+   "jetons": {
+    "entree": 1745,
+    "sortie": 198
+   }
+  },
+  {
+   "id": "CA26 09 0267",
+   "numero": "1269715008",
+   "resolution": "CA26 09 0267",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Accorder un soutien financier non récurrent de 5 000 $ à l'Association commerciale et citoyenne Youville (ACCY) pour la réalisation du projet « Youville, Mon quartier, Ma Façade », pour la période du 7 octobre au 31 décembre 2026, dans le cadre du Programme de soutien aux artères commerciales hors SDC / Approuver la convention à cet effet.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=6",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement verse 5 000 $ à l'Association commerciale et citoyenne Youville (ACCY), un montant versé une seule fois.",
+    "L'argent sert au projet « Youville, Mon quartier, Ma Façade », mené du 7 octobre au 31 décembre 2026.",
+    "Le soutien vient du Programme de soutien aux artères commerciales hors SDC (secteurs sans société de développement commercial).",
+    "La Ville signe une convention avec l'organisme fixant les conditions de versement.",
+    "La dépense est payée en entier par l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "5 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.158Z",
+   "jetons": {
+    "entree": 2103,
+    "sortie": 292
+   }
+  },
+  {
+   "id": "CA26 09 0263",
+   "numero": "1264465003",
+   "resolution": "CA26 09 0263",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Autoriser le don de deux vélos cargos adaptés et d'un abri à vélos à la Résidence Berthiaume-Du Tremblay afin de permettre la poursuite du projet « Navette à vélo adapté » destiné aux personnes aînées.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=4",
+   "source": "resolution",
+   "puces": [
+    "La Ville donne deux vélos cargos adaptés et un abri à vélos à la Résidence Berthiaume-Du Tremblay.",
+    "Ce don vise à permettre la poursuite du projet « Navette à vélo adapté ».",
+    "Le projet s'adresse aux personnes aînées.",
+    "Le texte de la décision ne mentionne aucun montant ni échéance."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.158Z",
+   "jetons": {
+    "entree": 1808,
+    "sortie": 219
+   }
+  },
+  {
+   "id": "CA26 09 0266",
+   "numero": "1260613003",
+   "resolution": "CA26 09 0266",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Accorder un soutien financier totalisant la somme de 55 750 $ à différents organismes afin de soutenir l'accueil d'enfants ayant une limitation fonctionnelle dans les camps de jour pour l'été 2026 / Approuver les conventions à cet effet.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=6",
+   "source": "resolution",
+   "puces": [
+    "La Ville verse 55 750 $ à six organismes pour accueillir des enfants ayant une limitation fonctionnelle dans les camps de jour de l'été 2026.",
+    "Les sommes vont à L'Union des Familles d'Ahuntsic inc. (14 270 $), Service des Loisirs Christ Roi (12 177 $), Service des Loisirs Sts-Martyrs-Canadiens de Montréal (9 894 $) et Loisirs de l'Acadie de Montréal (9 323 $).",
+    "S'ajoutent Loisirs Sophie-Barat (6 090 $) et Service des Loisirs Ste-Odile (3 996 $).",
+    "Chaque montant combine une part au budget de fonctionnement et une part Prévention Montréal.",
+    "Six conventions fixent les conditions et les modalités de versement de l'aide.",
+    "La dépense est assumée en entier par l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "55 750 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.158Z",
+   "jetons": {
+    "entree": 2202,
+    "sortie": 408
+   }
+  },
+  {
+   "id": "CA26 09 0264",
+   "numero": "1265372004",
+   "resolution": "CA26 09 0264",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Approuver la deuxième convention de modification et de prolongation du bail par lequel la Ville de Montréal loue des Habitations Nicolas-Viel des locaux d'une superficie de 491,35 mètres carrés (5 289 pieds carrés) au sous-sol de l'immeuble situé au 161, boulevard Henri-Bourassa Ouest, er pour une période additionnelle de cinq ans, soit du 1 octobre 2026 au 30 septembre 2031, aux fins d'activités communautaires et de loisirs, pour un loyer total de 382 259,92 $, exonéré de TPS et de TVQ, auquel s'ajoutent les coûts d'énergie estimés à 43 102 $ ainsi que les taxes foncières et scolaires estimées à 133 286 $, pour un coût total estimé à 558 648 $ (bâtiment 8084-002).",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=5",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge de cinq ans son bail avec les Habitations Nicolas-Viel pour des locaux au sous-sol du 161, boulevard Henri-Bourassa Ouest.",
+    "Les locaux font 491,35 mètres carrés (5 289 pieds carrés) et servent à des activités communautaires et de loisirs.",
+    "La prolongation couvre la période du 1er octobre 2026 au 30 septembre 2031.",
+    "Le loyer totalise 382 259,92 $, exonéré de TPS et de TVQ.",
+    "S'ajoutent des coûts d'énergie estimés à 43 102 $ et des taxes foncières et scolaires estimées à 133 286 $, pour un coût total estimé à 558 648 $.",
+    "L'arrondissement assume entièrement cette dépense."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "558 648 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.158Z",
+   "jetons": {
+    "entree": 2495,
+    "sortie": 371
+   }
+  },
+  {
+   "id": "CA26 09 0265",
+   "numero": "1260306030",
+   "resolution": "CA26 09 0265",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Modifier la convention intervenue avec l'organisme Image Création Interprétation (ICI) afin de corriger une erreur dans la transcription en lettres des montants qui y figurent, relativement à l'entente accordée dans le cadre de l'appel à projets culturels 2026 (CA26 09 0185).",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=5",
+   "source": "resolution",
+   "puces": [
+    "La Ville corrige une erreur d'écriture dans la convention signée avec l'organisme Image Création Interprétation (ICI) : les montants écrits en lettres aux articles 5.2.1 et 5.2.2 sont rectifiés.",
+    "Cette convention découle de l'entente accordée dans le cadre de l'appel à projets culturels 2026.",
+    "Tout le reste de la convention et de la décision initiale demeure inchangé."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.158Z",
+   "jetons": {
+    "entree": 1937,
+    "sortie": 240
+   }
+  },
+  {
+   "id": "CA26 09 0277",
+   "numero": "1269570029",
+   "resolution": "CA26 09 0277",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Adopter un second projet de règlement modifiant le Règlement d'urbanisme de l'arrondissement d'Ahuntsic-Cartierville (01-274) afin de permettre une augmentation de la hauteur et de la densité autorisées sur une partie du lot 6 712 042 du cadastre du Québec, situé à l'angle sud-est de l'intersection de l'avenue de l'Esplanade et de la rue de Louvain Ouest.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=11",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement d'Ahuntsic-Cartierville adopte un second projet de règlement modifiant son règlement d'urbanisme.",
+    "Le changement vise un terrain situé à l'angle sud-est de l'avenue de l'Esplanade et de la rue de Louvain Ouest (une partie du lot 6 712 042).",
+    "La modification permettrait d'y construire plus haut et plus dense que ce qui est autorisé actuellement.",
+    "Il s'agit d'une étape du processus : le règlement n'est pas encore adopté de façon définitive.",
+    "Le document ne précise ni les hauteurs ni les densités visées, ni le projet de construction concerné."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.159Z",
+   "jetons": {
+    "entree": 2003,
+    "sortie": 319
+   }
+  },
+  {
+   "id": "CA26 09 0270",
+   "numero": "1260613004",
+   "resolution": "CA26 09 0270",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Accepter, en vertu de l'article 85.1 de la Charte de la Ville de Montréal, métropole du Québec (RLQ, c. C-11.4), l'offre de services de la Division des services techniques et du soutien logistique aux installations (DSTSLI) de l'arrondissement de Mercier-Hochelaga-Maisonneuve pour la période du er 1 janvier 2027 au 31 décembre 2028. 163",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=7",
+   "source": "resolution",
+   "puces": [
+    "La Ville accepte l'offre de services de la Division des services techniques et du soutien logistique aux installations (DSTSLI) de l'arrondissement de Mercier–Hochelaga-Maisonneuve.",
+    "L'entente couvre la période du 1er janvier 2027 au 31 décembre 2028.",
+    "La décision s'appuie sur l'article 85.1 de la Charte de la Ville de Montréal, qui encadre ce type d'offre de services entre instances municipales.",
+    "Le texte ne précise ni les services visés en détail, ni les sommes en jeu."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.159Z",
+   "jetons": {
+    "entree": 1983,
+    "sortie": 285
+   }
+  },
+  {
+   "id": "CA26 09 0276",
+   "numero": "1268373017",
+   "resolution": "CA26 09 0276",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Adopter, en vertu du Règlement sur les projets particuliers de construction, de modification ou d'occupation d'un immeuble (RCA02 09007), une résolution visant à autoriser la réunion de deux logements situés aux 9961 et 9965, avenue Charton - Lot 1 742 678 du cadastre du Québec - Zone 1487.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=10",
+   "source": "resolution",
+   "puces": [
+    "L'arrondissement d'Ahuntsic-Cartierville autorise la fusion de deux logements au 9961 et 9965, avenue Charton.",
+    "Les logements du rez-de-chaussée et du sous-sol pourront être réunis en un seul.",
+    "Cette autorisation passe outre la règle d'urbanisme qui interdit normalement de réduire le nombre de logements dans un immeuble de trois logements ou plus.",
+    "Le propriétaire doit obtenir un permis de transformation dans les 60 mois, sinon l'autorisation devient nulle.",
+    "Toutes les autres règles d'urbanisme compatibles continuent de s'appliquer."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.159Z",
+   "jetons": {
+    "entree": 2192,
+    "sortie": 316
+   }
+  },
+  {
+   "id": "CA26 09 0271",
+   "numero": "1264746003",
+   "resolution": "CA26 09 0271",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Accorder un soutien financier totalisant la somme de 350 $ à différents organismes pour le projet et le montant indiqués en regard de chacun d'eux, afin de les soutenir dans la poursuite de leurs activités.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=8",
+   "source": "resolution",
+   "puces": [
+    "La Ville verse 350 $ au total à deux organismes pour soutenir la poursuite de leurs activités.",
+    "Solidarité Ahuntsic reçoit 100 $ pour le projet « Feu des Mal logés 2026 ».",
+    "Le Centre de ressources périnatales Autour du bébé reçoit 250 $.",
+    "La dépense est assumée en entier par l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "350 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.159Z",
+   "jetons": {
+    "entree": 1902,
+    "sortie": 228
+   }
+  },
+  {
+   "id": "CA26 09 0268",
+   "numero": "1264465007",
+   "resolution": "CA26 09 0268",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Accorder un soutien financier spécial non récurrent de 95 000 $ à Mission Bon Accueil pour la réalisation du projet « La Maison du coin Crémazie » / Approuver la convention à cet effet.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=7",
+   "source": "resolution",
+   "puces": [
+    "La Ville verse 95 000 $ à l'organisme Mission Bon Accueil, un soutien financier spécial versé une seule fois.",
+    "L'argent sert à réaliser le projet « La Maison du coin Crémazie ».",
+    "Une convention entre la Ville et l'organisme fixe les conditions et les modalités de versement.",
+    "La dépense est payée en entier par l'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "95 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.159Z",
+   "jetons": {
+    "entree": 1872,
+    "sortie": 229
+   }
+  },
+  {
+   "id": "CA26 09 0275",
+   "numero": "1268373019",
+   "resolution": "CA26 09 0275",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Édicter, en vertu du Règlement sur les exemptions en matière d'unités de stationnement (5984), une ordonnance exemptant le propriétaire du bâtiment situé au 11810, avenue du Bois-de- Boulogne, érigé sur le lot 3 880 207 du cadastre du Québec, de l'obligation de fournir cinq unités de stationnement exigibles dans le cadre d'un projet de transformation à des fins de bureaux et de studio de production - Demande de permis 3003727264.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=10",
+   "source": "resolution",
+   "puces": [
+    "La Ville exempte le propriétaire du 11810, avenue du Bois-de-Boulogne de fournir cinq cases de stationnement.",
+    "L'exemption vise un projet de transformation du bâtiment en bureaux et en studio de production.",
+    "Le bâtiment est situé sur le lot 3 880 207 du cadastre du Québec et la demande de permis porte le numéro 3003727264.",
+    "L'ordonnance s'appuie sur le Règlement sur les exemptions en matière d'unités de stationnement (5984)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.159Z",
+   "jetons": {
+    "entree": 2054,
+    "sortie": 271
+   }
+  },
+  {
+   "id": "CA26 09 0274",
+   "numero": "1264017003",
+   "resolution": "CA26 09 0274",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Édicter, en vertu du Règlement sur la circulation et le stationnement (R.R.V.M., chapitre C-4.1, article 3, paragraphe 3°), une ordonnance relative à la direction des voies sur l'avenue Christophe- Colomb, du côté est, aux approches sud des intersections avec le boulevard Henri-Bourassa Est et la rue Sauvé Est, ainsi que sur la rue de Louvain Est, du côté nord, à l'approche est de l'intersection avec l'avenue Christophe-Colomb.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=9",
+   "source": "resolution",
+   "puces": [
+    "La Ville édicte une ordonnance qui fixe la direction des voies de circulation à trois endroits.",
+    "Sur l'avenue Christophe-Colomb, côté est, aux approches sud des intersections avec le boulevard Henri-Bourassa Est et la rue Sauvé Est.",
+    "Sur la rue de Louvain Est, côté nord, à l'approche est de l'intersection avec l'avenue Christophe-Colomb.",
+    "La décision s'appuie sur le Règlement sur la circulation et le stationnement; le document ne précise pas les directions imposées ni la date d'entrée en vigueur."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.159Z",
+   "jetons": {
+    "entree": 2108,
+    "sortie": 300
+   }
+  },
+  {
+   "id": "CA26 09 0272",
+   "numero": "1260306027",
+   "resolution": "CA26 09 0272",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Approuver la programmation d'événements publics sur le territoire de l'arrondissement d'Ahuntsic-Cartierville et édicter les ordonnances requises dans le cadre de ces événements.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=8",
+   "source": "resolution",
+   "puces": [
+    "Le conseil d'arrondissement d'Ahuntsic-Cartierville approuve une programmation d'événements publics sur son territoire.",
+    "Les organisateurs sont autorisés à occuper le domaine public aux sites, dates et heures listés dans un tableau annexé à la résolution.",
+    "Une ordonnance permet le bruit d'appareils sonores diffusant à l'extérieur, sur ces mêmes sites, dates et heures.",
+    "Cette permission de bruit déroge au règlement sur le bruit de l'arrondissement.",
+    "La décision a été prise à la séance ordinaire du conseil d'arrondissement du 6 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.159Z",
+   "jetons": {
+    "entree": 1940,
+    "sortie": 315
+   }
+  },
+  {
+   "id": "CA26 09 0278",
+   "numero": "1261066011",
+   "resolution": "CA26 09 0278",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Accorder une dérogation mineure visant à autoriser, pour l'immeuble portant les numéros 10951- 10953, avenue de l'Esplanade, un taux d'implantation au sol maximal de 70 % au lieu de 65 % - Lot 1 486 087 du cadastre du Québec - Demande de permis 3003719415.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ahu/CA_Ahu_PV_ORDI_2026-10-06_19h00_FR.pdf#page=11",
+   "source": "resolution",
+   "puces": [
+    "La Ville accorde une dérogation mineure à l'immeuble du 10951-10953, avenue de l'Esplanade.",
+    "Le bâtiment pourra occuper jusqu'à 70 % de la superficie du terrain, au lieu du maximum de 65 % normalement permis.",
+    "La propriété concernée est le lot 1 486 087 du cadastre du Québec, visée par la demande de permis 3003719415.",
+    "Le comité consultatif d'urbanisme avait étudié la demande et recommandé de l'accepter."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-13T17:34:01.159Z",
+   "jetons": {
+    "entree": 2023,
+    "sortie": 270
    }
   },
   {
