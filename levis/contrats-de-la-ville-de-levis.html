@@ -170,6 +170,15 @@
   .tableau-defile .motif { display: block; color: var(--doux); font-size: .85rem; margin-top: 2px; }
   .barre-outils input, .barre-outils select { font: inherit; padding: 6px 8px; border: 1px solid var(--ligne-forte); border-radius: var(--rayon); background: var(--carte); color: var(--encre); }
   .barre-outils input { flex: 1; min-width: 200px; }
+  .ouvrir { font: inherit; font-size: .85rem; background: none; border: 0; padding: 2px 0; margin-top: 4px; color: var(--lien, var(--encre)); cursor: pointer; text-decoration: underline; display: block; text-align: left; }
+  tr.detail > td { background: var(--carte); padding: 12px 14px 14px; }
+  .detail h3 { font-size: 1rem; margin: 10px 0 6px; }
+  .detail h3:first-child { margin-top: 0; }
+  .tableau-defile .detail table.soum { width: auto; min-width: min(100%, 560px); font-size: .9rem; }
+  .tableau-defile .detail table.soum th, .tableau-defile .detail table.soum td { padding: 5px 8px; }
+  .detail tr.gagnant td { font-weight: 700; }
+  .detail .note { color: var(--doux); font-size: .85rem; margin: 8px 0 0; }
+  .detail ul { margin: 4px 0; padding-left: 20px; }
 </style>
 
 <script type="module">
@@ -189,8 +198,9 @@
   const MOTIFS_EN = {"6":"Cloud supply or service contract","8":"Professional services contract with the designer of the plans and specifications, to amend them","9":"Contract over $25,000 but below the public tender threshold, under special rules in the contract management by-law","3(1)":"Supply contract with a non-profit, below the CETA threshold","3(2)":"Supply contract in the cultural field","33(1)":"Emergency situation","33(2)":"Only one company can provide it (warranty, ownership or exclusive right, or artistic, heritage or museum value)","33(4)":"An open procedure can be shown not to serve the public interest","4(1)":"Construction or service contract awarded to the owner of the pipes or facilities","4(2)":"Construction or service contract on a railway right-of-way, with its owner or operator","5(1)a)":"Service contract not covered by CETA, with a non-profit","5(1)b)":"Service contract covered by CETA with a non-profit, below the CETA threshold","5(3)":"Service contract in the cultural field","5(4)":"Service contract for media space","5(5)":"Bulk trucking service contract","5(6)":"Financial services contract","5(7)":"Professional services needed for court proceedings"};
   const motifEn = (m) => { if (!EN || !m) return m; const a = /^Article\s*(\d+)(?:\s*-\s*(?:Paragraphe|Alinéa)\s*([\d()a-z]+))?/.exec(m); const cle = a && (a[2] || a[1]); return cle && MOTIFS_EN[cle] ? `Section ${a[1]}: ${MOTIFS_EN[cle]}` : m; };
   const estGre = (m) => /gré à gré/i.test(d.modes[m]);
-  const C = d.c.map(([date, montant, mode, soum, motif, cat, fournisseur, titre, item, avis]) => ({
-    date, montant, soum, avis, motif: motifEn(d.motifs[motif]), cat: d.categories[cat], fournisseur, titre, item,
+  let D = null, C_i = 0; // contrats-details.json, chargé au premier clic
+  const C = d.c.map(([date, montant, mode, soum, motif, cat, fournisseur, titre, item, avis, det]) => ({
+    i: C_i++, date, montant, soum, avis, det, motif: motifEn(d.motifs[motif]), cat: d.categories[cat], fournisseur, titre, item,
     gre: estGre(mode), seule: !estGre(mode) && soum === 1,
   }));
 
@@ -229,17 +239,53 @@
     const l = C.filter((c) => (!m || c[m]) && (!q || norm(c.fournisseur + ' ' + c.titre).includes(q)));
     $('#compte-liste').textContent = fr(`${nf.format(l.length)} contrat(s), ${argent(somme(l))}`, `${nf.format(l.length)} contract(s), ${argent(somme(l))}`);
     $('#liste').innerHTML = `<table><thead><tr><th>Date</th><th>${fr('Objet', 'Subject')}</th><th>${fr('Fournisseur', 'Supplier')}</th><th class="n">${fr('Montant', 'Amount')}</th></tr></thead><tbody>${
-      l.slice(0, limite).map((c) => `<tr><td class="n">${c.date}</td><td>${c.item ? `<a href="https://seao.gouv.qc.ca/avis-resultat-recherche/consulter?ItemId=${esc(c.item)}" target="_blank" rel="noopener">${esc(c.titre)}</a>` : esc(c.titre)}${
+      l.slice(0, limite).map((c) => `<tr data-i="${c.i}"><td class="n">${c.date}</td><td>${c.item ? `<a href="https://seao.gouv.qc.ca/avis-resultat-recherche/consulter?ItemId=${esc(c.item)}" target="_blank" rel="noopener">${esc(c.titre)}</a>` : esc(c.titre)}${
         c.gre ? `<span class="motif"><span class="puce">${fr('Gré à gré', 'Direct award')}</span> ${esc((c.motif || '').replace(/^Article\s*/, fr('Article ', 'Section ')))}</span>`
         : c.seule ? `<span class="motif"><span class="puce">${fr('Une seule soumission', 'Single bid')}</span></span>` : ''
-      }${c.avis ? `<span class="motif"><a href="decisions-de-la-ville-de-quebec?q=${esc(c.avis)}">${fr('Décisions du conseil sur ce contrat', 'Council decisions on this contract')} →</a></span>` : ''}</td><td>${esc(c.fournisseur)}</td><td class="n">${argent(c.montant)}</td></tr>`).join('')
+      }${c.avis ? `<span class="motif"><a href="decisions-de-la-ville-de-levis?q=${esc(c.avis)}">${fr('Décisions du conseil sur ce contrat', 'Council decisions on this contract')} →</a></span>` : ''}${c.det ? `<button type="button" class="ouvrir" aria-expanded="false">${c.det > 0 ? fr(`Lot et soumissionnaires (${c.det})`, `Lot and bidders (${c.det})`) : fr('Lot et modifications', 'Lot and amendments')}</button>` : ''}</td><td>${esc(c.fournisseur)}</td><td class="n">${argent(c.montant)}</td></tr>`).join('')
     }</tbody></table>`;
     $('#voir-plus').hidden = l.length <= limite;
   }
+  async function detail(c) {
+    if (!D) D = await (await fetch('data/contrats-details.json')).json();
+    const [lot, soums, modifs] = D[c.i] || ['', [], []];
+    let h = '';
+    if (lot) h += `<h3>Lot : ${esc(lot)}</h3>`;
+    if (soums.length) {
+      const g = soums.find((b) => b[4]);
+      const tri = [...soums].sort((a, b) => b[4] - a[4] || (a[1] ?? Infinity) - (b[1] ?? Infinity));
+      const ecart = (b) => {
+        if (b[4] || !g || g[1] == null || b[1] == null) return '';
+        const e = b[1] - g[1], s = e >= 0 ? '+' : '−';
+        return `${s}${argent(Math.abs(e))} (${s}${nf1.format(Math.abs((100 * e) / g[1]))} %)`;
+      };
+      const oui = (v) => (v == null ? '' : v ? fr('oui', 'yes') : fr('non', 'no'));
+      const avecConf = soums.some((b) => b[2] != null || b[3] != null);
+      h += `<h3>${fr('Soumissionnaires', 'Bidders')} (${soums.length})</h3><table class="soum"><thead><tr><th>${fr('Entreprise', 'Company')}</th><th class="n">${fr('Montant', 'Amount')}</th><th class="n">${fr('Écart avec le gagnant', 'Gap with winner')}</th>${avecConf ? `<th>${fr('Conforme', 'Compliant')}</th><th>${fr('Admissible', 'Eligible')}</th>` : ''}</tr></thead><tbody>${
+        tri.map((b) => `<tr${b[4] ? ' class="gagnant"' : ''}><td>${esc(b[0])}${b[4] ? ` <span class="puce">${fr('Retenu', 'Awarded')}</span>` : ''}</td><td class="n">${argent(b[1])}</td><td class="n">${ecart(b)}</td>${avecConf ? `<td>${oui(b[2])}</td><td>${oui(b[3])}</td>` : ''}</tr>`).join('')
+      }</tbody></table>`;
+    } else if (!c.gre) h += `<p class="note">${fr('Les données ouvertes ne permettent pas de relier cet octroi à un lot précis : la liste des soumissionnaires est sur le SEAO.', 'The open data does not tie this award to a specific lot: the bidder list is on SEAO.')}</p>`;
+    if (modifs.length) h += `<h3>${fr('Modifications du contrat', 'Contract amendments')}</h3><ul>${modifs.map((m) => `<li>${esc(m[0])} : ${esc(m[1] || fr('(sans description)', '(no description)'))}${m[2] != null ? `, ${argent(m[2])}` : ''}</li>`).join('')}</ul>`;
+    else h += `<p class="note">${fr('Aucune modification de contrat publiée dans les données ouvertes du SEAO.', 'No contract amendment published in SEAO open data.')}</p>`;
+    if (c.item) h += `<p><a href="https://seao.gouv.qc.ca/avis-resultat-recherche/consulter?ItemId=${esc(c.item)}" target="_blank" rel="noopener">${fr('Voir l’avis et les documents sur le SEAO ↗', 'See the notice and documents on SEAO ↗')}</a></p><p class="note">${fr('Le devis et les exigences du contrat restent sur le SEAO : ils ne sont pas dans les données ouvertes.', 'The specifications and requirements stay on SEAO: they are not in the open data.')}</p>`;
+    return h;
+  }
+  $('#liste').addEventListener('click', async (e) => {
+    const b = e.target.closest('button.ouvrir'); if (!b) return;
+    const tr = b.closest('tr'), suiv = tr.nextElementSibling;
+    if (suiv?.classList.contains('detail')) { suiv.remove(); b.setAttribute('aria-expanded', 'false'); return; }
+    const n = document.createElement('tr'); n.className = 'detail';
+    n.innerHTML = `<td colspan="4">${await detail(C[+tr.dataset.i])}</td>`;
+    tr.after(n); b.setAttribute('aria-expanded', 'true');
+  });
+  // ?q=… remplit la recherche ; ?q=…&ouvrir=1 déplie le premier contrat trouvé.
+  const params = new URLSearchParams(location.search), qInit = params.get('q');
+  if (qInit) $('#recherche').value = qInit;
   $('#recherche').addEventListener('input', () => montrer(true));
   $('#filtre-mode').addEventListener('change', () => montrer(true));
   $('#voir-plus').addEventListener('click', () => { limite += 100; montrer(); });
   montrer(true);
+  if (qInit && params.has('ouvrir')) document.querySelector('#liste button.ouvrir')?.click();
   $('#maj').textContent = fr(`Dernière lecture du SEAO : ${d.extraction.slice(0, 10)}.`, `Last SEAO read: ${d.extraction.slice(0, 10)}.`);
 </script>
 
