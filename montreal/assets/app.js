@@ -66,6 +66,10 @@ const TITRE_ODJ = /^Ordre du jour — (.+), séance du (\d{4}-\d{2}-\d{2}) \((\d
 export function sansCents(t) {
   if (t == null) return t;
   return String(t)
+    // K$ et M$ : « 2 803,0 K$ » → « 2 803 K$ » ; une décimale de K$ s'arrondit ; « 1,5 M$ » reste.
+    .replace(/(\d),0(?=[   ]?[KkMG]\$)/g, (m, c) => c)
+    .replace(/(\d{1,3}(?:[   ]\d{3})+|\d+),(\d)(?=[   ]?[Kk]\$)/g, (m, ent, dec) =>
+      Math.round(Number(ent.replace(/[   ]/g, '')) + Number('0.' + dec)).toLocaleString('fr-CA'))
     .replace(/(\d{1,3}(?:[   ]\d{3})+|\d+),(\d{1,2})(?=[   ]?\$)/g, (m, ent, dec) =>
       Math.round(Number(ent.replace(/[   ]/g, '')) + Number('0.' + dec)).toLocaleString('fr-CA'))
     .replace(/\$[  ]?(\d{1,3}(?:,\d{3})+|\d+)\.(\d{1,2})\b/g, (m, ent, dec) =>
@@ -82,8 +86,8 @@ function porteeDe(instance) {
   if (instance === 'Conseil municipal') return tr('Toute la Ville de Montréal (conseil municipal)', 'The whole City of Montréal (city council)');
   if (instance === "Conseil d'agglomération") return tr("L'agglomération : Montréal et les 15 villes liées de l'île", 'The agglomeration: Montréal and the 15 linked cities on the island');
   if (instance === 'Comité exécutif') return tr('Ville de Montréal, décision du comité exécutif', 'City of Montréal, executive committee decision');
-  const a = instance.match(/^Conseil d'arrondissement (?:de |du |d')(.+)$/);
-  if (a) return tr(`L'arrondissement ${/^[AEIOUÉÈ]/.test(a[1]) ? "d'" : 'de '}${a[1]} seulement`, `The ${a[1]} borough only`);
+  const a = instance.match(/^Conseil d'arrondissement (de |du |d')(.+)$/);
+  if (a) return tr(`L'arrondissement ${a[1]}${a[2]} seulement`, `The ${a[2]} borough only`);
   return null;
 }
 function dureeDe(objet) {
@@ -117,7 +121,8 @@ function parcoursDe(d) {
   const l = (parDossier.get(d.dossier) ?? []).filter((x) => x.type !== 'Procès-verbal' && x.type !== 'Ordre du jour');
   if (l.length < 2) return null;
   return l.slice().sort((a, b) => (a.date ?? '').localeCompare(b.date ?? '')).map((x) => {
-    const etiquette = `${dateFr(x.date)}, ${echapper(lib(x.instance ?? ''))}`;
+    const double = l.some((y) => y !== x && y.date === x.date && y.instance === x.instance);
+    const etiquette = `${dateFr(x.date)}, ${echapper(lib(x.instance ?? ''))}${double && x.numero ? ` (${echapper(x.numero)})` : ''}`;
     if (x === d) return `<strong>${etiquette} ${tr('(cette décision)', '(this decision)')}</strong>`;
     const cle = x.numero || x.id;
     return `<a href="decisions-de-la-ville-de-montreal?q=${encodeURIComponent(cle)}">${etiquette}</a>`;
