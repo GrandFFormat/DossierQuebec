@@ -740,3 +740,6 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 .bouton-tout-ouvrir { margin-left: auto; font: inherit; font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: 1px solid currentColor; background: transparent; color: inherit; cursor: pointer; }
 .bouton-tout-ouvrir:hover { background: rgba(127, 127, 127, .15); }
 
+
+/* Vote nominatif sur une fiche de décision (fusion Votes et Décisions, 12 nov. 2026). */
+.bloc-vote { border: 1px solid var(--ligne); border-radius: var(--rayon); padding: 11px 16px; margin: 0 0 12px; }

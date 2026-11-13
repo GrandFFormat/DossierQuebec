@@ -75,6 +75,8 @@ const ETAPES = [
     nom: 'Votes nominatifs' + (complet ? ' (année complète)' : ` (depuis ${depuis})`),
     argv: ['--max-old-space-size=4096', 'scrapers/votes.js', ...(complet ? ['--complet'] : [`--depuis=${depuis}`])],
   },
+  // Les votes rangés par décision, pour la page Décisions (fusion des pages Votes et Décisions, 12 nov. 2026).
+  { nom: 'Votes par décision', argv: ['scripts/votes-decisions.js'], secondaire: true },
   { nom: 'Lexique, mesuré sur les procès-verbaux', argv: ['scrapers/lexique.js'], secondaire: true },
   ...(resumes
     ? [

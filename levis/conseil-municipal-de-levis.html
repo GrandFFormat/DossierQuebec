@@ -96,7 +96,6 @@
     <nav>
       <a href="./">Accueil</a>
       <a href="decisions-de-la-ville-de-levis">Décisions</a>
-      <a href="votes-nominatifs-du-conseil-de-levis">Votes nominatifs</a>
       <a href="conseil-municipal-de-levis" aria-current="page">Conseil municipal</a>
       <a href="pres-de-chez-moi-a-levis">Près de chez moi</a>
       <a href="lexique-municipal-de-levis">Lexique</a>
@@ -173,6 +172,25 @@
     de l'année, telles qu'elles sont consignées.
   </p>
   <div id="liste-arrondissements"></div>
+  <h2 class="page" id="votes-nominatifs" style="margin-top:34px">Les votes nominatifs du conseil</h2>
+  <p class="compte">Un vote nominatif n'a lieu que si un membre le demande : la plupart des décisions sont adoptées sans appel nominal. Chaque vote est affiché sur sa décision, dans la page <a href="decisions-de-la-ville-de-levis?vote=1">Décisions</a> (filtre « Avec vote nominatif »).</p>
+  <details class="carte pliante bloc-tableau">
+    <summary>
+      <div class="meta">
+        <span class="puce">tableau</span>
+        <span id="resume-dissidence"></span>
+      </div>
+      <p class="objet">Votes contre, par personne</p>
+    </summary>
+    <div class="corps">
+  <p class="compte">Décompte brut, sans interprétation. Voter contre n'est ni un défaut ni un mérite&nbsp;: c'est une position.</p>
+  <table id="table-dissidence">
+    <thead><tr><th>Personne</th><th>Instance la plus fréquente</th><th class="n">Votes contre</th></tr></thead>
+    <tbody></tbody>
+  </table>
+    </div>
+  </details>
+
 </main>
 
 <footer>
