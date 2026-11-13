@@ -70,7 +70,9 @@ for (const f of aLire) {
   let n = 0;
   for (const r of releases) {
     if (r.buyer?.name !== ACHETEUR) continue;
-    if (r.bids?.details?.length) offres[r.ocid] = r.bids.details.map((b) => [b.id, b.value ?? null, b.relatedLots || []]);
+    // SEAO-2022 : les soumissions sont une liste dans r.bids (l'ancien format les mettait dans r.bids.details).
+    const soumissions = Array.isArray(r.bids) ? r.bids : r.bids?.details;
+    if (soumissions?.length) offres[r.ocid] = soumissions.map((b) => [b.id, b.value ?? null, b.relatedLots || []]);
     if (!r.awards?.length) continue;
     const t = r.tender || {};
     for (const a of r.awards) {
