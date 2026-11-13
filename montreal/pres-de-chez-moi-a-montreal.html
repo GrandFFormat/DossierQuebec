@@ -203,7 +203,7 @@
       return raison ? `${lieu}: ${raison}` : lieu;
     };
     const enMotif = (m) => (!EN ? m : m.replace('Démolition d’un bâtiment', 'Building demolition').replace('Agrandissement', 'Extension')
-      .replace(/((d+) logements?)/, (_, n) => `(${n} dwelling${n > 1 ? 's' : ''})`));
+      .replace(/\((\d+) logements?\)/, (_, n) => `(${n} dwelling${n > 1 ? 's' : ''})`));
     const fichiers = new Map();
     const lire = (f) => { if (!fichiers.has(f)) fichiers.set(f, fetch(`data/adresses/${f}`).then((r) => (r.ok ? r.json() : null))); return fichiers.get(f); };
     let index = null, districts = null;
