@@ -23,10 +23,13 @@ const ARGS = new Set(process.argv.slice(3));
 const DRY = ARGS.has('--dry-run');
 const VILLES = {
   montreal: { page: 'decisions-de-la-ville-de-montreal', estResolution: (d) => d.type === 'Résolution', cle: (d) => d.seanceId ?? `${d.date}__${d.instance}` },
+  // Laval et Longueuil sont en pause (robots arrêtés) : l'encadré y résume leurs dernières données, une fois.
+  laval: { page: 'decisions-de-la-ville-de-laval', estResolution: (d) => d.type === 'Résolution', cle: (d) => d.seanceId ?? `${d.date}__${d.instance}` },
+  longueuil: { page: 'decisions-de-la-ville-de-longueuil', estResolution: (d) => d.type === 'Résolution', cle: (d) => d.seanceId ?? `${d.date}__${d.instance}` },
   levis: { page: 'decisions-de-la-ville-de-levis', estResolution: (d) => d.type === 'Résolution' || d.type === 'Règlement', cle: (d) => d.seanceId ?? `${d.date}__${d.instance}` },
   quebec: { page: 'decisions-de-la-ville-de-quebec', estResolution: (d) => d.type === 'Résolutions', cle: (d) => `${d.date}__${d.instance}` },
 };
-if (!VILLES[VILLE]) { console.error('Usage : node scripts/resumes-seances.js montreal|quebec|levis [--dry-run]'); process.exit(1); }
+if (!VILLES[VILLE]) { console.error('Usage : node scripts/resumes-seances.js montreal|quebec|levis|laval|longueuil [--dry-run]'); process.exit(1); }
 const CFG = VILLES[VILLE];
 const DOSSIER = new URL(`../${VILLE}/data/`, import.meta.url);
 const OUT = new URL('resumes-seances.json', DOSSIER);
@@ -172,7 +175,10 @@ async function main() {
   const objetsEn = en?.objets ?? {};
   const traductionsEn = en?.traductions ?? {};
 
-  const limite = new Date(Date.now() - JOURS * 864e5).toISOString().slice(0, 10);
+  // La fenêtre part de la décision la plus récente, pas d'aujourd'hui : une ville en pause garde ses
+  // dernières séances dans l'encadré.
+  const plusRecente = decisions.decisions.reduce((m, d) => (d.date && d.date > m ? d.date : m), '0000');
+  const limite = new Date(Date.parse(plusRecente) - JOURS * 864e5).toISOString().slice(0, 10);
   const groupes = new Map();
   for (const d of decisions.decisions) {
     if (!CFG.estResolution(d) || !d.instance || !d.date || d.date < limite) continue;
