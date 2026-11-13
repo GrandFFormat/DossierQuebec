@@ -61,6 +61,13 @@ const ETAPES = [
         { nom: 'Districts électoraux', argv: ['scrapers/districts.js'], secondaire: true },
         { nom: "Conseil d'agglomération", argv: ['scrapers/agglomeration.js'], secondaire: true },
         { nom: "Commission d'urbanisme (CUCQ)", argv: ['scrapers/cucq.js'], secondaire: true },
+        // Budget et taxes (rapport financier du MAMH, Données Québec) : change une ou deux fois par
+        // année, donc le lundi seulement, avec les pages du conseil. Aucune requête à la Ville.
+        { nom: 'Budget et taxes (MAMH)', argv: ['scrapers/finances.js'], secondaire: true },
+        // Adresses → district et quartier (recherche « Qui me représente ? ») : le lundi aussi.
+        { nom: 'Adresses et districts', argv: ['scrapers/adresses.js'], secondaire: true },
+        // Permis délivrés (Données Québec, mis à jour chaque semaine par la Ville), après les adresses.
+        { nom: 'Permis par quartier', argv: ['scrapers/permis.js'], secondaire: true },
       ]
     : []),
   { nom: "Décisions de l'année", argv: ['scrapers/decisions.js'] },
@@ -98,6 +105,13 @@ const ETAPES = [
         },
       ]
     : []),
+  // Contrats octroyés par la Ville, d'après les données ouvertes du SEAO (Données Québec, pas la
+  // Ville) : une requête à l'API, puis seulement les fichiers SEAO pas encore lus (un hebdo par semaine).
+  // Les votes rangés par décision, pour la page Décisions (après l'extraction des votes).
+  { nom: 'Votes par décision', argv: ['scripts/votes-decisions.js'], secondaire: true },
+  { nom: 'Contrats octroyés (SEAO)', argv: ['scrapers/contrats.js'], secondaire: true },
+  // Travaux en cours par quartier (flux des entraves de la Ville, Données Québec) : chaque matin.
+  { nom: 'Entraves à la circulation', argv: ['scrapers/entraves.js'], secondaire: true },
   // En dernier, avec ou sans clé : ce que lit « Mes dossiers » (data/projets/), tiré des
   // décisions, résumés et récapitulatifs du jour. Sans lui, la page affiche les données de la veille.
   { nom: 'Projets pour « Mes dossiers »', argv: ['scripts/projets-publics.js'] },

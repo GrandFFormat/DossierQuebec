@@ -690,3 +690,8 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 /* Bouton « Tout ouvrir » dans l'en-tête de chaque séance (9 nov. 2026). */
 .bouton-tout-ouvrir { margin-left: auto; font: inherit; font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: 1px solid currentColor; background: transparent; color: inherit; cursor: pointer; }
 .bouton-tout-ouvrir:hover { background: rgba(127, 127, 127, .15); }
+
+/* Contrat au SEAO sur une fiche de décision (assets/app.js, 12 nov. 2026). */
+.bloc-contrat { border: 1px solid var(--ligne); border-radius: var(--rayon); padding: 11px 16px; margin: 0 0 12px; }
+.bloc-contrat ul { margin: 0; padding-left: 19px; }
+.bloc-contrat li { margin: 2px 0; }

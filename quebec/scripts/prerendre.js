@@ -37,7 +37,6 @@ register(
 const PAGES = [
   { fichier: 'index.html', page: 'accueil', slug: '' },
   { fichier: 'decisions-de-la-ville-de-quebec.html', page: 'decisions', slug: 'decisions-de-la-ville-de-quebec' },
-  { fichier: 'votes-nominatifs-du-conseil-de-quebec.html', page: 'votes', slug: 'votes-nominatifs-du-conseil-de-quebec' },
   { fichier: 'conseil-municipal-de-quebec.html', page: 'conseil', slug: 'conseil-municipal-de-quebec' },
   { fichier: 'lexique-municipal-de-quebec.html', page: 'lexique', slug: 'lexique-municipal-de-quebec' },
   { fichier: 'sources-des-donnees-de-quebec.html', page: 'sources', slug: 'sources-des-donnees-de-quebec' },
@@ -48,7 +47,7 @@ const PAGES = [
 const ZONES = [
   'chargement', 'chiffres', 'titre-fil', 'fil', 'plus-fil',
   'rech-decisions', 'filtre-type', 'filtre-theme', 'affichage', 'filtre-instance', 'filtre-resume', 'compte-decisions', 'liste-decisions', 'plus-decisions',
-  'resume-dissidence', 'table-dissidence', 'table-dissidence tbody', 'rech-votes', 'filtre-theme-votes', 'filtre-instance-votes', 'compte-votes', 'liste-votes', 'plus-votes',
+  'resume-dissidence', 'qui-demande', 'table-dissidence', 'table-dissidence tbody', 'rech-votes', 'filtre-theme-votes', 'filtre-instance-votes', 'compte-votes', 'liste-votes', 'plus-votes',
   'mode-couleur', 'carte', 'legende', 'compte-elus', 'legende-executif', 'liste-elus', 'compte-agglo', 'liste-agglo', 'compte-cucq', 'liste-cucq',
   'rech-lexique', 'compte-lexique', 'liste-lexique',
   'etat-donnees', 'etat-archive',

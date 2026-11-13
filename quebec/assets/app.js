@@ -250,6 +250,7 @@ function decisionsFiltrees() {
   const instance = $('#filtre-instance').value;
   const theme = $('#filtre-theme')?.value ?? '';
   const avecResume = $('#filtre-resume').checked;
+  const avecVote = $('#filtre-vote')?.checked;
   const projet = etat.projet;
   return etat.decisions.decisions.filter((d) => {
     if (projet && !d.projets?.includes(projet)) return false;
@@ -257,6 +258,7 @@ function decisionsFiltrees() {
     if (instance && d.instance !== instance) return false;
     if (theme && d.theme !== theme) return false;
     if (avecResume && !resumePour(d)) return false;
+    if (avecVote && !etat['votes-decisions']?.v?.[d.numero]) return false;
     // L'identifiant du document entre aussi dans la recherche : un procès-verbal n'a pas de numéro,
     // et c'est par son identifiant que le courriel mensuel ouvre sa fiche (?q=PV_CA4_OR_…).
     if (q && !((d.objet ?? '') + ' ' + (d.numero ?? '') + ' ' + (d.id ?? '')).toLowerCase().includes(q)) return false;
@@ -424,7 +426,7 @@ function carteVote(v) {
       </div>
     </div>
     ${v.abstention ? `<p class="compte" style="margin:10px 0 0">${tr('Abstention&nbsp;:', 'Abstention:')} ${echapper(v.abstention)}.</p>` : ''}
-    ${v.demandeParVote ? `<p class="compte" style="margin:2px 0 0">${tr('Vote demandé par', 'Vote requested by')} ${echapper(v.demandeParVote)}.</p>` : ''}
+    ${v.demandeParVote ? `<p class="compte" style="margin:2px 0 0">${tr('Vote demandé par', 'Vote called by')} ${echapper(v.demandeParVote)}.</p>` : ''}
     ${v.avertissements.length ? `<div class="drapeau"><strong>${tr('À vérifier&nbsp;:', 'To check:')}</strong> ${v.avertissements.map((a) => echapper(EN ? a.replace(/^Texte source dégradé.*$/, 'Degraded source text (PDF with spaced-out glyphs) — names not extracted; see the original passage.') : a)).join(' · ')}</div>` : ''}
     <details><summary>${tr("Voir le passage d'origine", 'See the original passage (in French)')}</summary><p>${echapper(v.brut)}</p></details>
     ${v.pdf ? `<p style="margin:9px 0 0"><a class="lien-pdf" href="${echapper(v.pdf)}" target="_blank" rel="noopener">${tr('Résolution officielle (PDF) ↗', 'Official resolution (PDF, in French) ↗')}</a></p>` : ''}`;
@@ -464,8 +466,9 @@ function tableauVotesContre(votes) {
     .join('');
 }
 
-function rendreVotes() {
-  const votes = etat.votes.votes;
+// Le tableau des votes contre et la phrase « qui demande le vote » : sur la page Conseil depuis la
+// fusion des pages Votes et Décisions (12 nov. 2026).
+function rendreDissidence(votes) {
   if ($('#table-dissidence')) {
     $('#table-dissidence tbody').innerHTML = tableauVotesContre(votes);
     // Le tableau est replié : son résumé doit donc porter assez d'information pour qu'on
@@ -476,10 +479,33 @@ function rendreVotes() {
       const tri = [...compte.entries()].sort((a, b) => b[1] - a[1]);
       const tete = tri.slice(0, 3).map(([n, c]) => `${n} (${c})`).join(', ');
       $('#resume-dissidence').textContent = EN
-        ? `${tri.length} ${s(tri.length, 'person', 'people')}` + (tete ? ` — most: ${tete}` : '')
-        : `${tri.length} personne${tri.length > 1 ? 's' : ''}` + (tete ? ` — en tête : ${tete}` : '');
+        ? `${tri.length} ${s(tri.length, 'person', 'people')}` + (tete ? `. Most: ${tete}` : '')
+        : `${tri.length} personne${tri.length > 1 ? 's' : ''}` + (tete ? `. En tête : ${tete}` : '');
     }
   }
+
+  // Qui demande les votes du conseil de la ville, calculé sur l'année affichée (Hugo, 12 nov. 2026) :
+  // une phrase écrite à la main aurait vieilli à la prochaine élection.
+  if ($('#qui-demande') && etat.elus?.membres) {
+    const parti = new Map(etat.elus.membres.map((m) => [m.nomComplet, m.parti]));
+    const maire = etat.elus.membres.find((m) => m.roles?.includes('Maire'))?.parti;
+    const duConseil = votes.filter((v) => /conseil de la ville/i.test(v.instance ?? ''));
+    // L'opposition : un parti reconnu autre que celui du maire. Un indépendant ou un élu sans parti connu
+    // n'y est pas compté (Hugo, 12 nov. 2026).
+    const opposition = (n) => { const p = parti.get(n); return Boolean(p) && p !== maire && !/ind[ée]pendant/i.test(p); };
+    const parOpposition = duConseil.filter((v) => v.demandeParVote && opposition(v.demandeParVote)).length;
+    const annee = etat.votes.parametres?.annee ?? '';
+    $('#qui-demande').textContent = duConseil.length && parOpposition * 2 > duConseil.length
+      ? tr(`En ${annee}, le vote a surtout été demandé par les élus de l’opposition (${parOpposition} des ${duConseil.length} votes du conseil de la ville).`,
+           `In ${annee}, the vote was mostly called by opposition members (${parOpposition} of the ${duConseil.length} votes of City Council).`)
+      : '';
+  }
+
+}
+
+function rendreVotes() {
+  const votes = etat.votes.votes;
+  rendreDissidence(votes);
 
   if (!$('#filtre-instance-votes').dataset.rempli) {
     const compte = new Map();
@@ -530,20 +556,25 @@ function rendreLegendeExecutif(membres) {
   const absents = [...new Set(membres.map((m) => m.parti).filter(Boolean))].filter((p) => !partisEx.includes(p));
   const source = etat.elus.executif?.source;
   const fr = `<strong>Le comité exécutif n'est pas le conseil.</strong> Le conseil municipal réunit les ${membres.length} élus, en séance publique : c'est là qu'on débat et qu'on vote devant les citoyens. Le comité exécutif est un petit groupe : ${titulaires} membres${associes.length ? ` et ${associes.length} conseiller${associes.length > 1 ? 's' : ''} associé${associes.length > 1 ? 's' : ''}` : ''}, qui siègent à huis clos, environ une fois par semaine, et prennent la plupart des décisions courantes de la Ville. Sur les fiches ci-dessous, leur rôle au comité est sur une pastille jaune, avec leurs responsabilités. ${partisEx.length === 1
-    ? `En ce moment, ses membres sont tous de ${partisEx[0]}${absents.length ? ` ; aucun élu de ${absents.join(' ni de ')} n'y siège` : ''}.`
+    ? `En ce moment, ses membres sont tous de ${partisEx[0]}${absents.length ? `. Aucun élu de ${absents.join(' ni de ')} n'y siège` : ''}.`
     : `En ce moment, y siègent des élus de ${partisEx.join(' et de ')}.`}`;
   const en = `<strong>The executive committee is not the council.</strong> City Council brings together all ${membres.length} elected members, in public session: that is where debates and votes take place in front of citizens. The executive committee is a small group: ${titulaires} members${associes.length ? ` and ${associes.length} associate councillor${associes.length > 1 ? 's' : ''}` : ''}, who sit behind closed doors about once a week and make most of the City's day-to-day decisions. On the cards below, their role on the committee is on a yellow tag, with their responsibilities. ${partisEx.length === 1
-    ? `At the moment, its members are all from ${partisEx[0]}${absents.length ? `; no member of ${absents.join(' or ')} sits on it` : ''}.`
+    ? `At the moment, its members are all from ${partisEx[0]}${absents.length ? `. No member of ${absents.join(' or ')} sits on it` : ''}.`
     : `At the moment, members of ${partisEx.join(' and ')} sit on it.`}`;
   boite.hidden = false;
   boite.innerHTML = tr(fr, en) + (source ? ` <a href="${echapper(source)}" target="_blank" rel="noopener">${tr('La liste, sur le site de la Ville', 'The list, on the City’s website')}</a>.` : '');
 }
 function carteElu(m) {
   const roles = m.roles.filter((r) => r !== 'Maire');
-  // Décompte réel tiré du registre des appels nominaux, sans interprétation.
-  const votesContre = etat.votes && m.nomComplet
-    ? etat.votes.votes.filter((v) => v.contre.includes(m.nomComplet)).length
-    : null;
+  // Décompte réel tiré du registre des appels nominaux, sans interprétation. Les noms sont comparés
+  // sans accents, tirets ni espaces : les résolutions écrivent parfois « Marie–Pierre » ou
+  // « Vallières- Roland », que la comparaison exacte ratait (12 nov. 2026).
+  const cleNom = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z]/g, '').toLowerCase();
+  const moi = cleNom(m.nomComplet);
+  const listeContre = etat.votes && m.nomComplet
+    ? etat.votes.votes.filter((v) => v.contre.some((n) => cleNom(n) === moi)).sort((a, b) => (b.date ?? '').localeCompare(a.date ?? ''))
+    : [];
+  const votesContre = listeContre.length;
   const arr = instanceArrondissement(m.arrondissement);
 
   return `<article class="carte elu"${m.districtNumero ? ` id="elu-${m.districtNumero}"` : ''}>
@@ -847,7 +878,7 @@ function ligneEvenement(e) {
     const corps = `<p class="compte" style="margin:0">
         ${v.decomptePour ?? v.pour.length} ${tr('pour', 'for')}, ${v.decompteContre ?? v.contre.length} ${tr('contre', 'against')}${
           v.contre.length ? ' — ' + v.contre.map(echapper).join(', ') : ''
-        }. <a href="votes-nominatifs-du-conseil-de-quebec">${tr('Voir le détail', 'See details')}</a>
+        }. <a href="decisions-de-la-ville-de-quebec?q=${encodeURIComponent(v.numero ?? '')}">${tr('Voir le détail', 'See details')}</a>
       </p>`;
     return carteRepliable(entete, corps);
   }
@@ -896,7 +927,7 @@ function rendreAccueil() {
     chiffres.push({ n: nombreFr(etat.decisions.totalDisponible), quoi: tr(`décisions publiées en ${etat.decisions.parametres.annee}`, `decisions published in ${etat.decisions.parametres.annee}`), lien: 'decisions-de-la-ville-de-quebec' });
   }
   if (etat.votes) {
-    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: tr('votes nominatifs consignés cette année', 'recorded votes this year'), lien: 'votes-nominatifs-du-conseil-de-quebec' });
+    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: tr('votes nominatifs consignés cette année', 'recorded votes this year'), lien: 'decisions-de-la-ville-de-quebec?vote=1' });
   }
   if (etat.resumes) {
     // Décisions qui affichent un résumé (procédure exclue, 9 nov. 2026), pas le total brut du fichier.
@@ -964,8 +995,8 @@ function rendreEtat() {
 // ---------- démarrage ----------
 const BESOINS = {
   accueil: ['decisions', 'votes', 'elus', 'resumes'],
-  decisions: ['decisions', 'resumes'],
-  votes: ['votes'],
+  decisions: ['decisions', 'resumes', 'votes-decisions'],
+  votes: ['votes', 'elus'],
   conseil: ['elus', 'districts', 'votes', 'decisions', 'agglomeration', 'cucq'],
   lexique: ['lexique'],
   sources: ['decisions', 'votes', 'elus', 'resumes', 'districts', 'agglomeration', 'cucq'],
@@ -1010,7 +1041,7 @@ const PRERENDU = document.body.dataset.prerendu === '1';
 async function init() {
   const page = document.body.dataset.page;
   const parametres = new URLSearchParams(location.search);
-  const lienProfond = page === 'decisions' && ['q', 'instance', 'projet'].some((p) => parametres.has(p));
+  const lienProfond = (page === 'decisions' && ['q', 'instance', 'projet', 'vote'].some((p) => parametres.has(p))) || (page === 'votes' && parametres.has('q'));
   if (PRERENDU && !lienProfond && !EN) return;
   await chargerJeux(page);
 
@@ -1029,6 +1060,8 @@ async function init() {
     const instance = new URLSearchParams(location.search).get('instance');
     const recherche = new URLSearchParams(location.search).get('q');
     if (recherche && $('#rech-decisions')) $('#rech-decisions').value = recherche;
+    // ?vote=1 : arrivée depuis l'ancienne page Votes nominatifs (redirection), filtre déjà coché.
+    if (parametres.has('vote') && $('#filtre-vote')) $('#filtre-vote').checked = true;
     // Arriver sur les décisions d'un projet (lien depuis « Mes dossiers ») : filtre annoncé, retirable.
     const projet = new URLSearchParams(location.search).get('projet');
     if (projet && etat.decisions.projets?.[projet]) {
@@ -1048,8 +1081,14 @@ async function init() {
     if (recherche && !$('#liste-decisions').querySelector('.carte')) chercherDansArchive(recherche);
     else if (recherche) { const seules = $('#liste-decisions').querySelectorAll('details.carte'); if (seules.length === 1) { for (let p = seules[0]; p; p = p.parentElement?.closest('details')) p.open = true; seules[0].scrollIntoView({ block: 'center' }); } }
   }
-  if (page === 'votes') rendreVotes();
+  if (page === 'votes') {
+    // ?q=Nom : arriver depuis la fiche d'un élu (page Conseil) sur ses votes.
+    const recherche = parametres.get('q');
+    if (recherche && $('#rech-votes')) $('#rech-votes').value = recherche;
+    rendreVotes();
+  }
   if (page === 'conseil') {
+    if (etat.votes) rendreDissidence(etat.votes.votes);
     if (etat.districts) rendreCarte();
     rendreElus();
     rendreAgglomeration();
@@ -1063,7 +1102,7 @@ async function init() {
 // Sur une page pré-rendue, chaque geste attend d'abord les jeux complets (chargerJeux, une fois).
 const jeux = () => chargerJeux(document.body.dataset.page);
 document.addEventListener('input', async (e) => {
-  if (e.target.matches('#rech-decisions, #filtre-type, #filtre-instance, #filtre-theme, #filtre-resume, #affichage')) {
+  if (e.target.matches('#rech-decisions, #filtre-type, #filtre-instance, #filtre-theme, #filtre-resume, #filtre-vote, #affichage')) {
     await jeux();
     etat.limiteDecisions = PAS;
     etat.limiteSeances = PAS_SEANCES;
@@ -1292,3 +1331,48 @@ document.addEventListener('click', (e) => {
   b.textContent = tr('Tout fermer', 'Collapse all');
   s.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }, true);
+
+// CONTRAT AU SEAO (12 nov. 2026). Sur une fiche de décision qui adjuge un contrat, le contrat tel que
+// déclaré au SEAO : fournisseur retenu, montant, soumissions, lien vers l'avis. Le lien se fait par le
+// numéro d'avis cité dans l'objet (scrapers/contrats.js → data/contrats-decisions.json). Indépendant du
+// rendu et du pré-rendu : la boîte s'ajoute à l'ouverture d'une fiche, le fichier n'est lu qu'une fois.
+let contratsParDecision = null;
+let votesParDecision = null;
+document.addEventListener('toggle', async (e) => {
+  const fiche = e.target;
+  if (!fiche.matches?.('details.carte.pliante') || !fiche.open || fiche.querySelector('.bloc-seao')) return;
+  const numero = fiche.querySelector('.puce.num')?.textContent.trim();
+  if (!numero || document.body.dataset.page !== 'decisions') return;
+  ajouterVote(fiche, numero);
+  contratsParDecision ??= charger('contrats-decisions');
+  const liste = (await contratsParDecision)?.[numero];
+  if (!liste?.length || fiche.querySelector('.bloc-seao')) return;
+  const argent = (n) => (n == null ? '—' : Number(n).toLocaleString(EN ? 'en-CA' : 'fr-CA', { maximumFractionDigits: 0 }) + ' $');
+  const lignes = liste.map(([fournisseur, montant, gre, soum, item]) => `<li><strong>${echapper(fournisseur)}</strong> : ${argent(montant)}${
+    gre ? ` · ${tr('gré à gré', 'direct award')}` : soum ? ` · ${soum} ${soum > 1 ? tr('soumissions', 'bids') : tr('soumission', 'bid')}` : ''
+  }${item ? ` · <a href="https://seao.gouv.qc.ca/avis-resultat-recherche/consulter?ItemId=${echapper(item)}" target="_blank" rel="noopener">${tr('avis SEAO', 'SEAO notice')} ↗</a>` : ''}</li>`).join('');
+  fiche.querySelector('.corps')?.insertAdjacentHTML('afterbegin', `<div class="bloc-contrat bloc-seao">
+    <div class="resume-entete">${tr('Contrat déclaré au SEAO', 'Contract declared in SEAO')} · <a href="contrats-de-la-ville-de-quebec">${tr('tous les contrats', 'all contracts')}</a></div>
+    <ul>${lignes}</ul></div>`);
+}, true);
+
+
+// VOTE NOMINATIF SUR LA FICHE (fusion des pages Votes et Décisions, 12 nov. 2026). Quand la décision a
+// fait l'objet d'un appel nominal, la fiche montre le résultat, qui a voté pour et contre, et qui a
+// demandé le vote (scripts/votes-decisions.js → data/votes-decisions.json, lu une seule fois).
+async function ajouterVote(fiche, numero) {
+  if (fiche.querySelector('.bloc-vote')) return;
+  votesParDecision ??= etat['votes-decisions'] ? Promise.resolve(etat['votes-decisions']) : charger('votes-decisions');
+  const jeu = await votesParDecision;
+  const v = jeu?.v?.[numero];
+  if (!v || fiche.querySelector('.bloc-vote')) return;
+  const [resultat, pour, contre, demandeur, pdf] = v;
+  const noms = (l) => l.map((i) => echapper(jeu.noms[i])).join(', ');
+  fiche.querySelector('.corps')?.insertAdjacentHTML('afterbegin', `<div class="bloc-contrat bloc-vote">
+    <div class="resume-entete">${tr('Vote nominatif', 'Recorded vote')} · ${echapper(resultat)} · ${pour.length} ${tr('pour', 'for')}, ${contre.length} ${tr('contre', 'against')}</div>
+    <p style="margin:0 0 4px"><strong>${tr('Pour', 'For')}</strong> : ${noms(pour) || '—'}</p>
+    <p style="margin:0 0 4px"><strong>${tr('Contre', 'Against')}</strong> : ${noms(contre) || '—'}</p>
+    ${demandeur ? `<p class="compte" style="margin:0">${tr('Vote demandé par', 'Vote called by')} ${echapper(demandeur)}.</p>` : ''}
+    ${pdf ? `<p class="compte" style="margin:2px 0 0"><a href="${echapper(pdf)}" target="_blank" rel="noopener">${tr('Résolution officielle (PDF) ↗', 'Official resolution (PDF, in French) ↗')}</a></p>` : ''}
+  </div>`);
+}
