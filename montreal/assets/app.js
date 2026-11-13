@@ -92,6 +92,8 @@ function porteeDe(instance) {
 }
 function dureeDe(objet) {
   if (!objet) return null;
+  // Une décision qui annule ne dure pas : la période écrite est celle de ce qui est annulé.
+  if (/^(Abroger|Annuler|Résilier|Mettre fin|Abrogation|Annulation|Résiliation)/i.test(objet.trim())) return null;
   const m = objet.match(/du (1er|\d{1,2})(?:er)? (\p{L}+) (\d{4}) au (1er|\d{1,2})(?:er)? (\p{L}+) (\d{4})/iu);
   if (m && MOIS_FR[m[2].toLowerCase()] != null && MOIS_FR[m[5].toLowerCase()] != null) {
     const d1 = new Date(+m[3], MOIS_FR[m[2].toLowerCase()], m[1] === '1er' ? 1 : +m[1]);
