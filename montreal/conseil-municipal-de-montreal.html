@@ -102,8 +102,10 @@
     <nav>
       <a data-en="Home" href="./">Accueil</a>
       <a data-en="Decisions" href="decisions-de-la-ville-de-montreal">Décisions</a>
-      <a data-en="Recorded votes" href="votes-nominatifs-du-conseil-de-montreal">Votes nominatifs</a>
       <a data-en="City Council" href="conseil-municipal-de-montreal" aria-current="page">Conseil municipal</a>
+      <a data-en="Near me" href="pres-de-chez-moi-a-montreal">Près de chez moi</a>
+      <a data-en="Contracts" href="contrats-de-la-ville-de-montreal">Contrats</a>
+      <a data-en="Budget and taxes" href="budget-et-taxes-de-montreal">Budget</a>
       <a data-en="Glossary" href="lexique-municipal-de-montreal">Lexique</a>
       <div class="outils">
         <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
@@ -188,6 +190,25 @@
   </p>
   <p class="compte" id="compte-agglo"></p>
   <div id="liste-agglo"></div>
+  <h2 data-en="Recorded votes of the council" class="page" id="votes-nominatifs" style="margin-top:34px">Les votes nominatifs du conseil</h2>
+  <p class="compte" data-en="A recorded vote only happens if a member asks for it: most decisions are adopted without one. Each recorded vote is shown on its decision, on the <a href=&quot;decisions-de-la-ville-de-montreal?vote=1&quot;>Decisions</a> page (&quot;With a recorded vote&quot; filter).">Un vote nominatif n’a lieu que si un membre le demande : la plupart des décisions sont adoptées sans appel nominal. Chaque vote est affiché sur sa décision, dans la page <a href="decisions-de-la-ville-de-montreal?vote=1">Décisions</a> (filtre « Avec vote nominatif »).</p>
+  <details class="carte pliante bloc-tableau">
+    <summary>
+      <div class="meta">
+        <span data-en="table" class="puce">tableau</span>
+        <span id="resume-dissidence"></span>
+      </div>
+      <p data-en="Votes against, by person" class="objet">Votes contre, par personne</p>
+    </summary>
+    <div class="corps">
+  <p data-en="Raw count, without interpretation. Voting against is neither a flaw nor a merit: it is a position." class="compte">Décompte brut, sans interprétation. Voter contre n'est ni un défaut ni un mérite&nbsp;: c'est une position.</p>
+  <table id="table-dissidence">
+    <thead><tr><th data-en="Person">Personne</th><th data-en="Most frequent body">Instance la plus fréquente</th><th data-en="Votes against" class="n">Votes contre</th></tr></thead>
+    <tbody></tbody>
+  </table>
+    </div>
+  </details>
+
 </main>
 
 <footer>

@@ -96,8 +96,10 @@
     <nav>
       <a data-en="Home" href="./" aria-current="page">Accueil</a>
       <a data-en="Decisions" href="decisions-de-la-ville-de-montreal">Décisions</a>
-      <a data-en="Recorded votes" href="votes-nominatifs-du-conseil-de-montreal">Votes nominatifs</a>
       <a data-en="City Council" href="conseil-municipal-de-montreal">Conseil municipal</a>
+      <a data-en="Near me" href="pres-de-chez-moi-a-montreal">Près de chez moi</a>
+      <a data-en="Contracts" href="contrats-de-la-ville-de-montreal">Contrats</a>
+      <a data-en="Budget and taxes" href="budget-et-taxes-de-montreal">Budget</a>
       <a data-en="Glossary" href="lexique-municipal-de-montreal">Lexique</a>
       <div class="outils">
         <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
@@ -145,12 +147,12 @@
   <button data-en="Show more" class="plus" id="plus-fil" hidden>Afficher plus</button>
   <p style="margin-top:14px">
     <a data-en="All decisions →" href="decisions-de-la-ville-de-montreal">Toutes les décisions →</a> &nbsp;·&nbsp;
-    <a data-en="All recorded votes →" href="votes-nominatifs-du-conseil-de-montreal">Tous les votes nominatifs →</a>
+    <a data-en="All recorded votes →" href="decisions-de-la-ville-de-montreal?vote=1">Tous les votes nominatifs →</a>
   </p>
 
   <h2 data-en="What this site covers" class="page">Ce que couvre le site</h2>
   <p data-en="The site follows four kinds of City of Montréal bodies: the city council, with 65 members; the urban agglomeration council, whose 32 seats bring together Montréal and the mayors of the 15 related cities on the island; the executive committee; and the 19 borough councils, from Ahuntsic-Cartierville to Villeray–Saint-Michel–Parc-Extension. Every resolution of the current year is on the <a href='decisions-de-la-ville-de-montreal'>decisions</a> page, with word search and filters by body.">Le site suit quatre types d'instances de la Ville de Montréal : le conseil municipal, qui compte 65 membres ; le conseil d'agglomération, dont les 32 sièges réunissent Montréal et les maires des 15 villes liées de l'île ; le comité exécutif ; les 19 conseils d'arrondissement, d'Ahuntsic-Cartierville à Villeray–Saint-Michel–Parc-Extension. Chaque résolution de l'année en cours se trouve dans la page des <a href="decisions-de-la-ville-de-montreal">décisions</a>, avec une recherche par mot et des filtres par instance.</p>
-  <p data-en="Decisions and votes are read in the official minutes the City publishes as PDFs after each meeting. Recorded votes repeat the names listed under « Votent en faveur » and « Votent contre », with the raw text kept and any gap with the official count flagged: they are on the <a href='votes-nominatifs-du-conseil-de-montreal'>recorded votes</a> page. Council members, their roles and the 58 electoral districts come from the City's open data portal, donnees.montreal.ca: see the <a href='conseil-municipal-de-montreal'>city council</a> page. The data is refreshed every morning.">Les décisions et les votes sont lus dans les procès-verbaux officiels que la Ville publie en PDF après chaque séance. Les votes nominatifs reprennent les noms inscrits sous « Votent en faveur » et « Votent contre » ; le texte brut est conservé et tout écart avec le décompte officiel est signalé. Ils sont réunis dans la page des <a href="votes-nominatifs-du-conseil-de-montreal">votes nominatifs</a>. Les élus, leurs rôles et les 58 districts électoraux viennent du portail de données ouvertes de la Ville, donnees.montreal.ca : voir la page du <a href="conseil-municipal-de-montreal">conseil municipal</a>. Les données sont mises à jour chaque matin.</p>
+  <p data-en="Decisions and votes are read in the official minutes the City publishes as PDFs after each meeting. Recorded votes repeat the names listed under « Votent en faveur » and « Votent contre », with the raw text kept and any gap with the official count flagged: they are on the <a href='decisions-de-la-ville-de-montreal?vote=1'>recorded votes</a> page. Council members, their roles and the 58 electoral districts come from the City's open data portal, donnees.montreal.ca: see the <a href='conseil-municipal-de-montreal'>city council</a> page. The data is refreshed every morning.">Les décisions et les votes sont lus dans les procès-verbaux officiels que la Ville publie en PDF après chaque séance. Les votes nominatifs reprennent les noms inscrits sous « Votent en faveur » et « Votent contre » ; le texte brut est conservé et tout écart avec le décompte officiel est signalé. Ils sont réunis dans la page des <a href="decisions-de-la-ville-de-montreal?vote=1">votes nominatifs</a>. Les élus, leurs rôles et les 58 districts électoraux viennent du portail de données ouvertes de la Ville, donnees.montreal.ca : voir la page du <a href="conseil-municipal-de-montreal">conseil municipal</a>. Les données sont mises à jour chaque matin.</p>
   <p data-en="Short AI-generated summaries in plain language accompany some decisions; the official PDF is always one click away and remains the reference. Municipal jargon (resolution, borough, agglomeration) is explained in the <a href='lexique-municipal-de-montreal'>glossary</a>. Every source used is listed on the <a href='sources-des-donnees-de-montreal'>data sources</a> page. See also the <a href='/quebec/decisions-de-la-ville-de-quebec'>City of Québec decisions</a> and the <a href='/levis/decisions-de-la-ville-de-levis'>City of Lévis decisions</a>.">Des résumés courts en langage clair, générés par IA, accompagnent une partie des décisions ; le PDF officiel reste à un clic et fait foi. Le vocabulaire municipal (résolution, arrondissement, agglomération) est expliqué dans le <a href="lexique-municipal-de-montreal">lexique</a>. Chaque source utilisée est décrite dans la page des <a href="sources-des-donnees-de-montreal">sources des données</a>. Voir aussi les <a href="/quebec/decisions-de-la-ville-de-quebec">décisions de la Ville de Québec</a> et les <a href="/levis/decisions-de-la-ville-de-levis">décisions de la Ville de Lévis</a>.</p>
 
   <h2 data-en="Where to start" class="page">Par où commencer</h2>
@@ -161,7 +163,7 @@
       <p>Les résolutions du conseil municipal, du conseil d'agglomération et du comité exécutif de l'année en cours, lues dans les procès-verbaux, avec recherche et filtres.</p>
     </a>
     <a data-en="<h3>Recorded votes</h3>
-      <p>When a recorded vote is called, we know who voted for and who voted against. The count, person by person.</p>" class="lien-section" href="votes-nominatifs-du-conseil-de-montreal">
+      <p>When a recorded vote is called, we know who voted for and who voted against. The count, person by person.</p>" class="lien-section" href="decisions-de-la-ville-de-montreal?vote=1">
       <h3>Votes nominatifs</h3>
       <p>Quand un vote enregistré est demandé, on sait qui a voté pour et qui a voté contre. Le décompte, par personne.</p>
     </a>

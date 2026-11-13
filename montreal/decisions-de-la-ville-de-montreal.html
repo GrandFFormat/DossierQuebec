@@ -101,9 +101,11 @@
     </p>
     <nav>
       <a data-en="Home" href="./">Accueil</a>
-      <a data-en="Decisions" href="decisions-de-la-ville-de-montreal" aria-current="page">Décisions</a>
-      <a data-en="Recorded votes" href="votes-nominatifs-du-conseil-de-montreal">Votes nominatifs</a>
+      <a data-en="Decisions" href="decisions-de-la-ville-de-montreal" aria-current="page">Décisions</a>
       <a data-en="City Council" href="conseil-municipal-de-montreal">Conseil municipal</a>
+      <a data-en="Near me" href="pres-de-chez-moi-a-montreal">Près de chez moi</a>
+      <a data-en="Contracts" href="contrats-de-la-ville-de-montreal">Contrats</a>
+      <a data-en="Budget and taxes" href="budget-et-taxes-de-montreal">Budget</a>
       <a data-en="Glossary" href="lexique-municipal-de-montreal">Lexique</a>
       <div class="outils">
         <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
@@ -139,6 +141,7 @@
     <select id="filtre-instance"><option data-en="All bodies" value="">Toutes les instances</option></select>
     <!-- Masqué tant qu'aucune décision n'a de résumé : app.js le révèle s'il y en a. -->
     <label data-en="<input type=&quot;checkbox&quot; id=&quot;filtre-resume&quot;> With summary only" class="case" id="case-resume" hidden><input type="checkbox" id="filtre-resume"> Avec résumé seulement</label>
+    <label data-en="<input type=&quot;checkbox&quot; id=&quot;filtre-vote&quot;> With a recorded vote" class="case"><input type="checkbox" id="filtre-vote"> Avec vote nominatif</label>
   </div>
   <p class="compte" id="compte-decisions"></p>
 

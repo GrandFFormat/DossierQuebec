@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<!-- Consentement (Loi 25) : par défaut, Google Analytics n'a PAS le droit de déposer de témoins.
+     La bannière (commun/consentement.js) passe analytics_storage à « granted » après « Accepter ». -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: (function(){ try { return localStorage.getItem('dq:temoins') === 'oui' ? 'granted' : 'denied'; } catch (e) { return 'denied'; } })(), ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-87R1S6SR9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-87R1S6SR9Y', { content_group: 'Montréal' });
+</script>
+<script src="/commun/consentement.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-en="Contracts awarded by the City of Montréal | DossierQuébec">Contrats octroyés par la Ville de Montréal | DossierQuébec</title>
+<meta data-en-content="Resolution, decision summary, decision file, recorded vote, dissidence, related city: the vocabulary of the City of Montréal's decisions, explained and counted on the official minutes." name="description" content="Les contrats que la Ville de Montréal a déclarés au SEAO depuis janvier 2026 : fournisseurs, montants, gré à gré et soumissions uniques.">
+<link rel="canonical" href="https://dossierquebec.ca/montreal/contrats-de-la-ville-de-montreal">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DossierQuébec">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:title" content="Contrats octroyés par la Ville de Montréal | DossierQuébec">
+<meta property="og:description" content="Les contrats que la Ville de Montréal a déclarés au SEAO depuis janvier 2026 : fournisseurs, montants, gré à gré et soumissions uniques.">
+<meta property="og:url" content="https://dossierquebec.ca/montreal/contrats-de-la-ville-de-montreal">
+<meta property="og:image" content="https://dossierquebec.ca/montreal/og-montreal.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contrats octroyés par la Ville de Montréal | DossierQuébec">
+<meta name="twitter:description" content="Les contrats que la Ville de Montréal a déclarés au SEAO depuis janvier 2026 : fournisseurs, montants, gré à gré et soumissions uniques.">
+<meta name="twitter:image" content="https://dossierquebec.ca/montreal/og-montreal.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvq:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+      // Anglais choisi (commun/langue.js) : page cachée le temps de traduire, 1,5 s au plus.
+      var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('dvq:langue');
+      if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.classList.add('dvq-en'); setTimeout(function () { document.documentElement.classList.add('dvq-pret'); }, 1500); }
+    } catch (e) {}
+  })();
+</script>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="assets/favicon-512.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "DossierQuébec",
+      "item": "https://dossierquebec.ca/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Ville de Montréal",
+      "item": "https://dossierquebec.ca/montreal/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Contrats",
+      "item": "https://dossierquebec.ca/montreal/contrats-de-la-ville-de-montreal"
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="/commun/abonnes.css">
+</head>
+<body data-page="outil" data-ville="montreal">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="./"><p class="logo-titre">Dossier<span class="marque">VilleDeMontréal</span></p></a><a class="lien-dq" href="/" title="DossierQuébec — l'Assemblée nationale en clair" aria-label="DossierQuébec — l'Assemblée nationale en clair" data-en-title="DossierQuébec — Quebec's National Assembly in plain language" data-en-aria-label="DossierQuébec — Quebec's National Assembly in plain language"></a>
+      <details class="ab-villes" id="villes"></details>
+    </div>
+    <p data-en="The City of Montréal's decisions, made readable. Public data, taken as is from the City's official minutes and its open data portal." class="sous-titre">
+      Les décisions de la Ville de Montréal, lisibles. Données publiques, reprises telles quelles
+      des procès-verbaux officiels de la Ville et de son portail de données ouvertes.
+    </p>
+    <nav>
+      <a data-en="Home" href="./">Accueil</a>
+      <a data-en="Decisions" href="decisions-de-la-ville-de-montreal">Décisions</a>
+      <a data-en="City Council" href="conseil-municipal-de-montreal">Conseil municipal</a>
+      <a data-en="Near me" href="pres-de-chez-moi-a-montreal">Près de chez moi</a>
+      <a data-en="Contracts" href="contrats-de-la-ville-de-montreal">Contrats</a>
+      <a data-en="Budget and taxes" href="budget-et-taxes-de-montreal">Budget</a>
+      <a data-en="Glossary" href="lexique-municipal-de-montreal">Lexique</a>
+      <div class="outils">
+        <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
+          <button data-en-aria-label="Smaller text" type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+          <span id="texte-pct" aria-live="polite">100%</span>
+          <button data-en-aria-label="Larger text" type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+        </div>
+        <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+                title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu prose">
+  <div id="chargement" class="avis" hidden></div>
+
+  <h1 data-en="Contracts awarded by the City of Montréal" class="page">Contrats octroyés par la Ville de Montréal</h1>
+  <p data-en="Every contract the City of Montréal has awarded since January 1, 2026, as published in the government's electronic tendering system (SEAO). <strong>No figure here points to any fault.</strong> The law allows direct awards and single bids in several cases. The SEAO notice is one click away under each contract." class="chapeau">
+    Tous les contrats octroyés par la Ville de Montréal depuis le 1<sup>er</sup> janvier 2026, tels que
+    publiés dans le système électronique d’appel d’offres du gouvernement (SEAO). <strong>Aucun chiffre
+    ici n’indique une faute.</strong> La loi permet le gré à gré et la soumission unique dans plusieurs cas.
+    L’avis du SEAO est à un clic sous chaque contrat.
+  </p>
+
+  <div id="chiffres" class="grille-chiffres"></div>
+
+  <h2 data-en="The 15 largest suppliers">Les 15 plus gros fournisseurs</h2>
+  <p data-en="Total of contracts awarded since January 1, 2026. Click a name to see its contracts." class="compte">Total des contrats octroyés depuis le 1<sup>er</sup> janvier 2026. Cliquer un nom affiche ses contrats.</p>
+  <div id="palmares" class="tableau-defile"></div>
+
+  <h2 data-en="All contracts">Tous les contrats</h2>
+  <div class="barre-outils">
+    <input id="recherche" type="search" placeholder="Fournisseur ou objet" data-en-placeholder="Supplier or subject" aria-label="Chercher un fournisseur ou un objet" data-en-aria-label="Search a supplier or subject">
+    <select id="filtre-mode" aria-label="Mode d’octroi" data-en-aria-label="Award method">
+      <option value="" data-en="All methods">Tous les modes</option>
+      <option value="gre" data-en="Direct awards only">Gré à gré seulement</option>
+      <option value="seule" data-en="Tender with a single bid">Appel d’offres, une seule soumission</option>
+    </select>
+  </div>
+  <p id="compte-liste" class="compte" aria-live="polite"></p>
+  <div id="liste" class="tableau-defile"></div>
+  <p><button type="button" id="voir-plus" class="bouton-lien" hidden data-en="Show more">Voir plus</button></p>
+
+  <h2 data-en="How to read this page">Comment lire cette page</h2>
+  <ul>
+    <li data-en="<strong>The amount</strong> is the one at award time, taxes included, as published in SEAO. Later amendments are not included: the final cost may be higher."><strong>Le montant</strong> est celui de l’octroi, taxes incluses, tel que publié au SEAO. Les avenants signés plus tard n’y sont pas : la dépense finale peut être plus élevée.</li>
+    <li data-en="<strong>A direct award</strong> (gré à gré) is a contract awarded without a public call for tenders. From $139,000 (threshold set by regulation, in force until December 31, 2027), the City must issue a public call for tenders. Below it, the City follows its own contract management by-law, which can allow a written invitation or a direct award. The law also lists cases where a direct award is allowed above the threshold, such as an emergency or a single possible supplier (<a href=&quot;https://www.legisquebec.gouv.qc.ca/fr/document/lc/C-65.01&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Act respecting contracts of municipal bodies</a>, ss. 9, 29, 30 and 33). The reason recorded in SEAO is shown under each contract."><strong>Gré à gré</strong> veut dire un contrat octroyé sans appel d’offres public. À partir de 139 000 $ (seuil fixé par règlement, en vigueur jusqu’au 31 décembre 2027), la Ville doit lancer un appel d’offres public. Sous ce seuil, elle suit son règlement sur la gestion contractuelle, qui peut permettre l’invitation écrite ou le gré à gré. La loi énumère aussi des cas où le gré à gré est permis au-dessus du seuil, comme une urgence ou un seul fournisseur possible (<a href="https://www.legisquebec.gouv.qc.ca/fr/document/lc/C-65.01" target="_blank" rel="noopener">Loi sur les contrats des organismes municipaux</a>, art. 9, 29, 30 et 33). Le motif inscrit au SEAO est affiché sous chaque contrat.</li>
+    <li data-en="<strong>A single bid</strong> on a public tender means only one company answered. It can point to a narrow market or to very specific requirements. When a tender split into lots received several bids in all, the open data does not say how many each lot received: those lots are left out, so this count is a minimum."><strong>Une seule soumission</strong> à un appel d’offres public veut dire qu’une seule entreprise a répondu. Ça peut signaler un marché étroit ou des exigences très pointues. Quand un appel d’offres divisé en lots a reçu plusieurs soumissions en tout, les données ouvertes ne disent pas combien chaque lot en a reçu. Ces lots sont laissés hors du compte, qui est donc un minimum.</li>
+    <li data-en="The City must publish in SEAO, every month, the list of contracts of $25,000 or more that it concludes (<a href=&quot;https://www.legisquebec.gouv.qc.ca/fr/document/lc/C-65.01&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Act respecting contracts of municipal bodies</a>, s. 99). Smaller contracts are not there.">La Ville doit publier au SEAO, chaque mois, la liste des contrats de 25 000 $ et plus qu’elle conclut (<a href="https://www.legisquebec.gouv.qc.ca/fr/document/lc/C-65.01" target="_blank" rel="noopener">Loi sur les contrats des organismes municipaux</a>, art. 99). Les contrats plus petits n’y figurent pas.</li>
+  </ul>
+
+  <h2 data-en="Sources">Sources</h2>
+  <ul>
+    <li data-en="<strong>Data</strong>: <a href=&quot;https://www.donneesquebec.ca/recherche/dataset/systeme-electronique-dappel-doffres-seao&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>SEAO open data</a>, Secrétariat du Conseil du trésor, under a CC BY 4.0 licence. Updated every week, as SEAO publishes. If anything differs, the SEAO notice prevails."><strong>Données</strong> : <a href="https://www.donneesquebec.ca/recherche/dataset/systeme-electronique-dappel-doffres-seao" target="_blank" rel="noopener">données ouvertes du SEAO</a>, Secrétariat du Conseil du trésor, sous licence CC BY 4.0. Mises à jour chaque semaine, selon la publication du SEAO. En cas d’écart, l’avis du SEAO fait foi.</li>
+  </ul>
+  <p id="maj" class="compte"></p>
+</main>
+
+<style>
+  .grille-chiffres { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 20px 0; }
+  .grille-chiffres > div { background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon); padding: 12px 14px; }
+  .grille-chiffres strong { display: block; font-size: 1.5rem; line-height: 1.2; }
+  .grille-chiffres span { color: var(--doux); font-size: .9rem; }
+  .tableau-defile { overflow-x: auto; }
+  .tableau-defile table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  .tableau-defile th, .tableau-defile td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--ligne); vertical-align: top; }
+  .tableau-defile .n { text-align: right; white-space: nowrap; }
+  .tableau-defile .motif { display: block; color: var(--doux); font-size: .85rem; margin-top: 2px; }
+  .barre-outils input, .barre-outils select { font: inherit; padding: 6px 8px; border: 1px solid var(--ligne-forte); border-radius: var(--rayon); background: var(--carte); color: var(--encre); }
+  .barre-outils input { flex: 1; min-width: 200px; }
+</style>
+
+<script type="module">
+  const EN = document.documentElement.lang === 'en';
+  const fr = (f, e) => (EN ? e : f);
+  const loc = EN ? 'en-CA' : 'fr-CA';
+  const nf = new Intl.NumberFormat(loc, { maximumFractionDigits: 0 });
+  const nf1 = new Intl.NumberFormat(loc, { maximumFractionDigits: 1 });
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const argent = (n) => (n == null ? '—' : nf.format(n) + ' $');
+  const millions = (n) => (n >= 1e6 ? nf1.format(n / 1e6) + ' M$' : argent(n));
+
+  const d = await (await fetch('data/contrats-page.json')).json();
+  const estGre = (m) => /gré à gré/i.test(d.modes[m]);
+  const C = d.c.map(([date, montant, mode, soum, motif, cat, fournisseur, titre, item, avis]) => ({
+    date, montant, soum, avis, motif: d.motifs[motif], cat: d.categories[cat], fournisseur, titre, item,
+    gre: estGre(mode), seule: !estGre(mode) && soum === 1,
+  }));
+
+  const somme = (l) => l.reduce((s, c) => s + (c.montant || 0), 0);
+  const total = somme(C);
+  const G = C.filter((c) => c.gre), S = C.filter((c) => c.seule);
+  const pct = (a, b) => Math.round((100 * a) / b) + ' %';
+  $('#chiffres').innerHTML = [
+    [nf.format(C.length), fr('contrats octroyés', 'contracts awarded')],
+    [millions(total), fr('au total', 'in total')],
+    [`${nf.format(G.length)} (${pct(G.length, C.length)})`, fr(`de gré à gré, ${millions(somme(G))}`, `direct awards (gré à gré), ${millions(somme(G))}`)],
+    [nf.format(S.length), fr(`appels d’offres à une seule soumission, ${millions(somme(S))}`, `tenders with a single bid, ${millions(somme(S))}`)],
+  ].map(([a, b]) => `<div><strong>${a}</strong><span>${b}</span></div>`).join('');
+
+  const parF = new Map();
+  for (const c of C) {
+    const f = parF.get(c.fournisseur) || { n: 0, m: 0, g: 0 };
+    f.n++; f.m += c.montant || 0; if (c.gre) f.g++;
+    parF.set(c.fournisseur, f);
+  }
+  const top = [...parF].sort((a, b) => b[1].m - a[1].m).slice(0, 15);
+  $('#palmares').innerHTML = `<table><thead><tr><th>${fr('Fournisseur', 'Supplier')}</th><th class="n">${fr('Contrats', 'Contracts')}</th><th class="n">${fr('Gré à gré', 'Direct award')}</th><th class="n">${fr('Montant', 'Amount')}</th><th class="n">${fr('Part', 'Share')}</th></tr></thead><tbody>${
+    top.map(([nom, f]) => `<tr><td><a href="#liste" data-f="${esc(nom)}">${esc(nom)}</a></td><td class="n">${f.n}</td><td class="n">${f.g || ''}</td><td class="n">${argent(f.m)}</td><td class="n">${pct(f.m, total)}</td></tr>`).join('')
+  }</tbody></table>`;
+  $('#palmares').addEventListener('click', (e) => {
+    const a = e.target.closest('a[data-f]'); if (!a) return;
+    e.preventDefault(); $('#recherche').value = a.dataset.f; $('#filtre-mode').value = ''; montrer(true);
+    $('#recherche').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+
+  const norm = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  let limite = 50;
+  function montrer(neuf) {
+    if (neuf) limite = 50;
+    const q = norm($('#recherche').value.trim()), m = $('#filtre-mode').value;
+    const l = C.filter((c) => (!m || c[m]) && (!q || norm(c.fournisseur + ' ' + c.titre).includes(q)));
+    $('#compte-liste').textContent = fr(`${nf.format(l.length)} contrat(s), ${argent(somme(l))}`, `${nf.format(l.length)} contract(s), ${argent(somme(l))}`);
+    $('#liste').innerHTML = `<table><thead><tr><th>Date</th><th>${fr('Objet', 'Subject')}</th><th>${fr('Fournisseur', 'Supplier')}</th><th class="n">${fr('Montant', 'Amount')}</th></tr></thead><tbody>${
+      l.slice(0, limite).map((c) => `<tr><td class="n">${c.date}</td><td>${c.item ? `<a href="https://seao.gouv.qc.ca/avis-resultat-recherche/consulter?ItemId=${esc(c.item)}" target="_blank" rel="noopener">${esc(c.titre)}</a>` : esc(c.titre)}${
+        c.gre ? `<span class="motif"><span class="puce">${fr('Gré à gré', 'Direct award')}</span> ${esc((c.motif || '').replace(/^Article\s*/, fr('Article ', 'Section ')))}</span>`
+        : c.seule ? `<span class="motif"><span class="puce">${fr('Une seule soumission', 'Single bid')}</span></span>` : ''
+      }${c.avis ? `<span class="motif"><a href="decisions-de-la-ville-de-montreal?q=${esc(c.avis)}">${fr('Décisions du conseil sur ce contrat', 'Council decisions on this contract')} →</a></span>` : ''}</td><td>${esc(c.fournisseur)}</td><td class="n">${argent(c.montant)}</td></tr>`).join('')
+    }</tbody></table>`;
+    $('#voir-plus').hidden = l.length <= limite;
+  }
+  $('#recherche').addEventListener('input', () => montrer(true));
+  $('#filtre-mode').addEventListener('change', () => montrer(true));
+  $('#voir-plus').addEventListener('click', () => { limite += 100; montrer(); });
+  montrer(true);
+  $('#maj').textContent = fr(`Dernière lecture du SEAO : ${d.extraction.slice(0, 10)}.`, `Last SEAO read: ${d.extraction.slice(0, 10)}.`);
+</script>
+
+<footer>
+  <div class="contenu">
+    <p data-en="Independent citizen site. No connection with the City of Montréal, no official status. If anything differs, the original PDF document prevails. <a href=&quot;sources&quot;>Sources</a>.">Site citoyen indépendant. Aucun lien avec la Ville de Montréal, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees-de-montreal">Sources</a>.</p>
+    <p class="lien-dq-pied"><a href="/" data-en="DossierQuébec — Québec's National Assembly in plain language">DossierQuébec — l'Assemblée nationale en clair</a> · <a href="/regles" data-en="The rules of the site">Les règles du site</a> · <a href="sources-des-donnees-de-montreal" data-en="Sources">Sources</a> · <a href="sources-des-donnees-de-montreal#mises-a-jour" data-en="Updates">Mises à jour</a> · <a href="https://montreal.ca/" target="_blank" rel="noopener" data-en="City of Montréal site ↗">Site de la Ville de Montréal ↗</a> · <span data-en="Powered by">Une réalisation de</span> <a class="lien-dafr" href="https://www.dafrsolution.com" data-en-href="https://www.dafrsolution.com/en" target="_blank" rel="noopener">DAFR Solution</a></p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+<script type="module" src="/commun/entete-volet.js"></script>
+<script type="module" src="/commun/abonnes.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
+     Même projet Vercel : les pages vues de /montreal/ s'ajoutent au même tableau de
+     bord. En local le script n'existe pas (404 sans conséquence). -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
