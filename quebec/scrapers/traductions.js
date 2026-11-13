@@ -98,7 +98,13 @@ const CONTROLE = /[\x00-\x09\x0b-\x1f\x7f]/;
 const decoder = (v) => (typeof v === 'string' ? v.replace(/\\u([0-9a-fA-F]{4})/g, (_, h) => String.fromCharCode(parseInt(h, 16))).split('\\"').join('"') : v);
 
 export function verifier(r, sortie) {
-  const puces = (sortie?.puces ?? []).map(decoder).map((p) => String(p).trim());
+  // Le modèle renvoie parfois la liste sous forme de texte JSON plutôt que de tableau : on la relit.
+  // Si ce n'est toujours pas une liste, la traduction est refusée (avant le 12 nov. 2026, ce cas
+  // faisait planter tout le lot déjà payé, chaque jour depuis le 3 oct.).
+  let brutes = sortie?.puces ?? [];
+  if (typeof brutes === 'string') { try { brutes = JSON.parse(brutes); } catch { /* refusé plus bas */ } }
+  if (!Array.isArray(brutes)) return { raison: 'puces reçues sous une forme illisible' };
+  const puces = brutes.map(decoder).map((p) => String(p).trim());
   const montant = sortie?.montantPrincipal == null ? null : decoder(String(sortie.montantPrincipal)).trim();
   if (puces.length !== r.puces.length) return { raison: `${puces.length} puces au lieu de ${r.puces.length}` };
   if (puces.some((p) => !p || CONTROLE.test(p))) return { raison: 'puce vide ou caractère de contrôle' };
