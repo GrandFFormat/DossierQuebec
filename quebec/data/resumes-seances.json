@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-13T11:58:06.865Z",
+ "generatedAt": "2026-11-13T12:00:33.996Z",
  "modele": "claude-haiku-4-5",
  "genereParIA": true,
  "avertissement": "Phrase de résumé générée par IA à partir des décisions de la séance ; les points marquants sont choisis sans IA. Le procès-verbal officiel fait foi.",
@@ -12,6 +12,7 @@
    "date": "2026-11-10",
    "nDecisions": 16,
    "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA5_OR_2026-11-10_17h30.pdf",
+   "votes": [],
    "themes": [
     {
      "theme": "transport",
@@ -73,13 +74,25 @@
     }
    ],
    "signature": "16:9",
-   "phrase": "Le conseil d'arrondissement a versé 8 090 $ en subventions à huit organismes du secteur et approuvé le stationnement gratuit jusqu'à 3 heures pour les titulaires de vignettes pour personnes handicapées dans les cases tarifées.",
-   "phraseEn": "The borough council allocated $8,090 in subsidies to eight local organizations and approved free parking for up to 3 hours for holders of disability permits in metered parking spaces.",
-   "motsCles": [],
-   "motsClesEn": [],
-   "motsEssais": 1,
-   "genereLe": "2026-11-13T11:57:53.571Z",
-   "motsThemes": []
+   "phrase": "Le conseil a accordé des dérogations mineures pour deux terrains de la rue des Amis à Sainte-Thérèse-de-Lisieux, versé 8 090 $ en subventions à huit organismes et autorisé le stationnement gratuit de trois heures pour les personnes handicapées dans les cases tarifées des stationnements municipaux.",
+   "phraseEn": "The council granted minor variances for two properties on rue des Amis in Sainte-Thérèse-de-Lisieux, provided 8 090 $ in subsidies to eight organizations, and authorized free three-hour parking for people with disabilities in metered parking spaces at municipal parking lots.",
+   "motsCles": [
+    "dérogations mineures",
+    "rue des Amis",
+    "subventions"
+   ],
+   "motsClesEn": [
+    "minor variances",
+    "rue des Amis",
+    "subsidies"
+   ],
+   "motsEssais": 2,
+   "genereLe": "2026-11-13T12:00:33.986Z",
+   "motsThemes": [
+    "urbanisme",
+    "urbanisme",
+    "subventions"
+   ]
   },
   {
    "id": "2026-11-05__Conseil de l'Arrondissement de La Haute-Saint-Charles",
@@ -88,6 +101,7 @@
    "date": "2026-11-05",
    "nDecisions": 2,
    "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA7_EX_2026-11-05_00h00.pdf",
+   "votes": [],
    "themes": [
     {
      "theme": "urbanisme",
@@ -205,6 +219,85 @@
     "travaux",
     "subventions",
     "subventions"
+   ],
+   "votes": [
+    {
+     "numero": "CA-2026-0561",
+     "titre": "Entente entre la Ville de Québec et Wajax limitée pour le service de réparation de transmissions chez le concessionnaire du fabricant Allison (Dossier 95511)",
+     "pour": 4,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0563",
+     "titre": "Attribution d'un contrat à commandes pour le service d'intervention d'urgence en cas de déversements accidentels et de récupération de contaminants (Appel d'offres public 96459)",
+     "pour": 4,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0564",
+     "titre": "Attribution d'un contrat à commandes pour la fourniture, l'installation et le retrait de divers accessoires pour véhicules légers (Appel d'offres public 96435)",
+     "pour": 4,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0567",
+     "titre": "Prise d'acte de l'entente intervenue entre la Ville de Québec et le Syndicat des employés manuels de la Ville de Québec concernant l'implantation d'un horaire de travail régulier pour les employés manuels du Service de la gestion des équipements motorisés",
+     "pour": 4,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0568",
+     "titre": "Règlement hors tribunal du dossier relatif à l'expropriation du lot 6 728 669 du cadastre du Québec, situé sur la 1re Avenue (Ville de Québec c. Guylaine Langlois, SAI¿Q¿286101¿2601)",
+     "pour": 4,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0569",
+     "titre": "Demande afin d'obtenir l'autorisation du gouvernement du Québec de prendre par voie d'expropriation une servitude réelle et perpétuelle d'utilité publique contre une partie du lot 6 495 378 du cadastre du Québec, pour les fins du projet de réseau structurant de transport en commun de la Ville de Qué",
+     "pour": 4,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0570",
+     "titre": "Demande afin d'obtenir l'autorisation du gouvernement du Québec d'acquérir par voie d'expropriation une partie du lot 1 941 070 du cadastre du Québec, pour les fins du projet de réseau structurant de transport en commun de la Ville de Québec (projet TramCité)",
+     "pour": 4,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0571",
+     "titre": "Demande afin d'obtenir l'autorisation du gouvernement du Québec d'acquérir par voie d'expropriation une servitude réelle et perpétuelle d'utilité publique contre une partie du lot 1 941 044 du cadastre du Québec, pour les fins du projet de réseau structurant de transport en commun de la Ville de Qué",
+     "pour": 4,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0572",
+     "titre": "Demande afin d'obtenir l'autorisation du gouvernement du Québec d'acquérir, par voie d'expropriation, la propriété d'une parcelle de terrain et une servitude réelle et perpétuelle d'utilité publique sur le lot 6 583 120 du cadastre du Québec, pour les fins du projet de réseau structurant de transpor",
+     "pour": 4,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0574",
+     "titre": "Contrat pour la maintenance et le soutien à l'utilisation du progiciel de paie et de gestion des ressources humaines (VIP) (Dossier 96736)",
+     "pour": 4,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0575",
+     "titre": "Adhésion de la Ville de Québec au regroupement d'achats du Centre d'acquisitions gouvernementales 2025-8216-50 imprimante, multifonction et cartouche originale (Dossier 96688)",
+     "pour": 4,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    }
    ]
   },
   {
@@ -292,7 +385,8 @@
     "immobilier",
     null,
     "urbanisme"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-10-28__Comité exécutif",
@@ -382,7 +476,8 @@
    "genereLe": "2026-11-13T11:57:58.750Z",
    "motsThemes": [
     "immobilier"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-10-27__Conseil de l'Arrondissement de Charlesbourg",
@@ -462,7 +557,8 @@
    "motsThemes": [
     "transport",
     "urbanisme"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-10-27__Conseil de l'Arrondissement des Rivières",
@@ -542,7 +638,8 @@
    "motsThemes": [
     "loisirs",
     "transport"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-10-26__Conseil de l'Arrondissement de La Cité-Limoilou",
@@ -626,7 +723,8 @@
    "motsThemes": [
     "urbanisme",
     "loisirs"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-10-21__Comité exécutif",
@@ -721,7 +819,8 @@
     "contrats",
     "contrats",
     null
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-10-21__Conseil d'agglomération de Québec",
@@ -813,6 +912,43 @@
    "motsThemes": [
     "contrats",
     "contrats"
+   ],
+   "votes": [
+    {
+     "numero": "CA-2026-0548",
+     "titre": "Règlement hors tribunal du dossier relatif à l'expropriation du lot 2 012 287 du cadastre du Québec, situé sur le boulevard Laurier (Ville de Québec c. Société en commandite 2810 boulevard Laurier, SAI-Q-270755-2309) et acquisition, de gré à gré ou par expropriation, à des fins municipales, d'un imm",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0550",
+     "titre": "Adjudication de contrats pour l'entretien hivernal hors rue - Lots 1, 3 à 8, 11 à 13, 15 et 17 (Appel d'offres public 95824)",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0552",
+     "titre": "Révision de l'affectation annuelle à la réserve financière pour le paiement de la dette de proximité et d'agglomération et ratification de l'appropriation à même la Réserve financière pour le paiement de la dette d'agglomération liée à des projets de nature mixte",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0554",
+     "titre": "Amendement à l'entente triennale entre la Ville de Québec et Agiro pour des services professionnels et techniques - Projets divers en gestion des milieux naturels, eaux pluviales, communications et sensibilisation 2026-2028",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0556",
+     "titre": "Convention de prêt et de subvention entre la Ville de Québec et la Fédération canadienne des municipalités, en sa qualité de fiduciaire du Fonds municipal vert, pour un financement pour l'implantation d'un Centre de valorisation des surplus de matériaux d'excavation et centre de traitement des sols",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    }
    ]
   },
   {
@@ -907,6 +1043,29 @@
     "loisirs",
     null,
     "contrats"
+   ],
+   "votes": [
+    {
+     "numero": "CV-2026-0862",
+     "titre": "Prise d'acte de l'état intérimaire du 31 août 2026 et approbation des virements et ajouts de crédits budgétaires pour la période du 1er mai au 31 août 2026 relevant de l'autorité du conseil de la ville",
+     "pour": 17,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0875",
+     "titre": "Modification avant adoption d'une résolution autorisant un projet immobilier dérogatoire sur le lot 1 304 160 du cadastre du Québec (1075, chemin Sainte-Foy, quartier de Saint¿Sacrement, district électoral Montcalm-Saint-Sacrement) en vertu de l'article 145.45 de la Loi sur l'aménagement et l'urbani",
+     "pour": 17,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0886",
+     "titre": "Avis de proposition déposé par monsieur le conseiller Stéphane Lachance, lors de la séance du conseil de la ville tenue le 6 octobre 2026, demandant d'ajouter des modalités de participation virtuelle des citoyens à la période de questions des séances du conseil de la ville",
+     "pour": 3,
+     "contre": 18,
+     "resultat": "Rejetée"
+    }
    ]
   },
   {
@@ -985,7 +1144,8 @@
    "genereLe": "2026-11-13T11:29:56.919Z",
    "motsThemes": [
     "loisirs"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-10-16__Comité exécutif",
@@ -1080,7 +1240,8 @@
     "subventions",
     "travaux",
     "loisirs"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-10-14__Comité exécutif",
@@ -1175,7 +1336,8 @@
     "transport",
     "immobilier",
     "loisirs"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-10-13__Conseil de l'Arrondissement de Beauport",
@@ -1256,7 +1418,8 @@
    "motsThemes": [
     "urbanisme",
     "urbanisme"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-10-13__Conseil de l'Arrondissement de La Cité-Limoilou",
@@ -1331,7 +1494,8 @@
     "urbanisme",
     "urbanisme",
     "urbanisme"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-10-13__Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
@@ -1418,7 +1582,8 @@
     "urbanisme",
     null,
     "urbanisme"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-10-09__Comité exécutif",
@@ -1427,6 +1592,7 @@
    "date": "2026-10-09",
    "nDecisions": 1,
    "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CE_SP_2026-10-09_00h00.pdf",
+   "votes": [],
    "themes": [
     {
      "theme": "economie",
@@ -1543,7 +1709,8 @@
     "culture",
     "contrats",
     "economie"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-10-07__Conseil d'agglomération de Québec",
@@ -1638,6 +1805,85 @@
     null,
     "subventions",
     null
+   ],
+   "votes": [
+    {
+     "numero": "CA-2026-0514",
+     "titre": "Contrats pour les services de soutien, d'entretien et de mise à jour des modules de la suite eBusiness PGI financier d'Oracle (Dossier 96396)",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0515",
+     "titre": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur une partie d'une ruelle, connue et désignée comme étant une partie du lot 1 317 753 du cadastre du Québec, relativement au projet de réseau structurant de transport en commun de la Ville de Québec (projet Tra",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0516",
+     "titre": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur une partie d'une ruelle, connue et désignée comme étant une partie du lot 1 317 757 du cadastre du Québec, relativement au projet de réseau structurant de transport en commun de la Ville de Québec (projet Tra",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0520",
+     "titre": "Adjudication d'un contrat pour la location de camions écureurs d'égout combinés et de camions d'hydro-excavation ¿ Lot 2 (Appel d'offres public 95959)",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0521",
+     "titre": "Adjudication d'un contrat à commande pour des travaux d'inspection, de certification, d'installation et d'entretien mécanique et électrique sur des équipements de levage - Lot 1 (Appel d'offres public 96155)",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0523",
+     "titre": "Adjudication de contrats pour la location de pelles hydrauliques sur chenilles (Appel d'offres public 95974)",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0524",
+     "titre": "Adjudication de contrats pour la location de camions-bennes 12 roues (Appel d'offres public 95978)",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0525",
+     "titre": "Adjudication d'un contrat à commande pour la réalisation de sondages et de groupes de discussion auprès de la population (Appel d'offres public 96051)",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0526",
+     "titre": "Adjudication de contrats pour l'entretien hivernal hors rue - Lots 5, 6, 7, 12 et 15 (Appel d'offres public 95823)",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0529",
+     "titre": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur une partie d'une ruelle, connue et désignée comme étant une partie du lot 1 317 743 du cadastre du Québec, relativement au projet de réseau structurant de transport en commun de la Ville de Québec (projet Tra",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0530",
+     "titre": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur une partie d'une ruelle, connue et désignée comme étant une partie du lot 6 666 052 du cadastre du Québec, relativement au projet de réseau structurant de transport en commun de la Ville de Québec (projet Tra",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    }
    ]
   },
   {
@@ -1731,6 +1977,43 @@
    "motsThemes": [
     "subventions",
     "urbanisme"
+   ],
+   "votes": [
+    {
+     "numero": "CV-2026-0809",
+     "titre": "Ratification du protocole de collaboration 2026-2029 intervenu entre la Ville de Québec et la Ville de Namur",
+     "pour": 18,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0816",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur une partie d'une ruelle, connue et désignée comme étant une partie du lot 1 317 753 du cadastre du Québec, relativement au projet de réseau structurant d",
+     "pour": 17,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0817",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur une partie d'une ruelle, connue et désignée comme étant une partie du lot 1 317 757 du cadastre du Québec, relativement au projet de réseau structurant d",
+     "pour": 17,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0830",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur une partie d'une ruelle, connue et désignée comme étant une partie du lot 1 317 743 du cadastre du Québec, relativement au projet de réseau structurant d",
+     "pour": 17,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0831",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur une partie d'une ruelle, connue et désignée comme étant une partie du lot 6 666 052 du cadastre du Québec, relativement au projet de réseau structurant d",
+     "pour": 17,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    }
    ]
   },
   {
@@ -1811,7 +2094,8 @@
    "motsThemes": [
     null,
     "subventions"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-09-30__Comité exécutif",
@@ -1906,7 +2190,8 @@
     "travaux",
     "contrats",
     "subventions"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-09-29__Conseil de l'Arrondissement des Rivières",
@@ -1986,7 +2271,8 @@
    "motsThemes": [
     "urbanisme",
     null
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-09-28__Conseil de l'Arrondissement de La Cité-Limoilou",
@@ -2069,7 +2355,8 @@
     null,
     "subventions",
     "transport"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-09-23__Comité exécutif",
@@ -2164,7 +2451,8 @@
     "transport",
     "travaux",
     "travaux"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-09-22__Conseil de l'Arrondissement de Charlesbourg",
@@ -2244,7 +2532,8 @@
    "motsThemes": [
     "urbanisme",
     "urbanisme"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-09-21__Conseil de l'Arrondissement de La Haute-Saint-Charles",
@@ -2310,7 +2599,8 @@
    "motsThemes": [
     null,
     "subventions"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-09-16__Comité exécutif",
@@ -2400,7 +2690,8 @@
    "genereLe": "2026-11-13T11:30:39.229Z",
    "motsThemes": [
     "environnement"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-09-16__Conseil d'agglomération de Québec",
@@ -2494,6 +2785,106 @@
    "motsThemes": [
     "transport",
     null
+   ],
+   "votes": [
+    {
+     "numero": "CA-2026-0479",
+     "titre": "Entente entre la Ville de Québec et La Parade des jouets inc. relativement au versement d'une subvention, à la fourniture à titre gratuit de services municipaux et à l'achat de biens et services, à titre d'assistance, dans le cadre de la tenue de l'événement Parade des jouets, en 2026",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0480",
+     "titre": "Adjudication de contrats pour la fourniture de pièces et d'outillage pour les unités du parc véhiculaire (Appel d'offres public 95715)",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0482",
+     "titre": "Entente entre la Ville de Québec et 8348871 Canada inc. (Terapro Construction) pour le service de réparation d'équipements de génie civil incluant les pièces chez le concessionnaire du fabricant Case (Dossier 95942)",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0486",
+     "titre": "Règlement hors tribunal du dossier relatif à l'expropriation de servitudes sur des parties du lot 1 302 593 du cadastre du Québec, situé au 1092, rue du Parc-Thornhill (Ville de Québec c. Axel Benhamed et Amaury Gossiôme, SAI-Q-282121-2506)",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0487",
+     "titre": "Règlement hors tribunal du dossier relatif à l'expropriation du lot 6 697 154 du cadastre du Québec, situé sur le boulevard René¿Lévesque Ouest (Ville de Québec c. Renée Lévesque et Ginette Goulet, SAI-Q-280543-2503)",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0488",
+     "titre": "Adjudication de contrats pour l'opération des dépôts à neige Jonquière, Saint-Thomas-d'Aquin et Godin (Appel d'offres public 94888)",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0489",
+     "titre": "Adjudication d'un contrat de services professionnels d'accompagnement pour l'intégration des pratiques d'affaires en lien avec la modélisation des données des infrastructures (Appel d'offres public 96079)",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0491",
+     "titre": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur un immeuble situé en bordure de la 1re Avenue, connu et désigné comme étant une partie du lot 6 460 865 du cadastre du Québec, relativement au projet de réseau structurant de transport en commun de la Ville d",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0492",
+     "titre": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'un immeuble situé en bordure de la 1re Avenue, connu et désigné comme étant une partie du lot 5 213 647 du cadastre du Québec, relativement au projet de réseau structurant de transport en commun de la Ville de Québec (projet T",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0494",
+     "titre": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur une partie d'une ruelle, connue et désignée comme étant une partie du lot 1 317 747 du cadastre du Québec, relativement au projet de réseau structurant de transport en commun de la Ville de Québec (projet Tra",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0496",
+     "titre": "Acquisition à des fins municipales d'un immeuble situé en bordure du boulevard Pierre-Bertrand, connu et désigné comme étant le lot 6 090 872 du cadastre du Québec - Arrondissement des Rivières",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0497",
+     "titre": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'immeubles et d'une servitude situés en bordure de la 1re Avenue, connus et désignés comme étant des parties du lot 3 940 826 du cadastre du Québec, relativement au projet de réseau structurant de transport en commun de la Vill",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0509",
+     "titre": "Règlement de l'agglomération sur des travaux de nature mixte de caractérisation et d'amélioration de la qualité du milieu et sur l'emprunt nécessaire au paiement des coûts qui y sont rattachés, R.A.V.Q. 1877",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0510",
+     "titre": "Règlement de l'agglomération de nature mixte sur des interventions relatives à la mise en place d'une stratégie de suivi de la qualité de l'air du territoire de la ville de Québec et sur l'emprunt nécessaire au paiement des coûts qui y sont rattachés, R.A.V.Q. 1878",
+     "pour": 6,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    }
    ]
   },
   {
@@ -2586,6 +2977,50 @@
    "motsThemes": [
     null,
     "contrats"
+   ],
+   "votes": [
+    {
+     "numero": "CV-2026-0775",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Adjudication d'un contrat de services professionnels d'accompagnement pour l'intégration des pratiques d'affaires en lien avec la modélisation des données des infrastructures (Appel d'offres public 96079)",
+     "pour": 18,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0777",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur un immeuble situé en bordure de la 1re Avenue, connu et désigné comme étant une partie du lot 6 460 865 du cadastre du Québec, relativement au projet de",
+     "pour": 18,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0778",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'un immeuble situé en bordure de la 1re Avenue, connu et désigné comme étant une partie du lot 5 213 647 du cadastre du Québec, relativement au projet de réseau structurant",
+     "pour": 18,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0780",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'une servitude sur une partie d'une ruelle, connue et désignée comme étant une partie du lot 1 317 747 du cadastre du Québec, relativement au projet de réseau structurant d",
+     "pour": 18,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0783",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'immeubles et d'une servitude situés en bordure de la 1re Avenue, connus et désignés comme étant des parties du lot 3 940 826 du cadastre du Québec, relativement au projet",
+     "pour": 18,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0790",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Contribution au déficit d'opération encouru par QMI Spectacles inc. pour l'exercice financier clos le 31 décembre 2025",
+     "pour": 18,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    }
    ]
   },
   {
@@ -2666,7 +3101,8 @@
    "motsThemes": [
     "transport",
     "transport"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-09-11__Comité exécutif",
@@ -2754,7 +3190,8 @@
     null,
     "transport",
     "transport"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-09-09__Comité exécutif",
@@ -2847,7 +3284,8 @@
    "motsThemes": [
     "transport",
     null
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-09-08__Conseil de l'Arrondissement de Beauport",
@@ -2914,7 +3352,8 @@
    "motsThemes": [
     "urbanisme",
     null
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-09-02__Comité exécutif",
@@ -3005,7 +3444,8 @@
    "genereLe": "2026-11-13T11:30:57.513Z",
    "motsThemes": [
     "contrats"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-08-31__Conseil de l'Arrondissement de Charlesbourg",
@@ -3086,7 +3526,8 @@
    "motsThemes": [
     "urbanisme",
     null
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-08-31__Conseil de l'Arrondissement de La Cité-Limoilou",
@@ -3163,7 +3604,8 @@
    "genereLe": "2026-11-13T11:31:02.958Z",
    "motsThemes": [
     "urbanisme"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-08-31__Conseil de l'Arrondissement de La Haute-Saint-Charles",
@@ -3250,7 +3692,8 @@
     "urbanisme",
     "subventions",
     null
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-08-27__Conseil de l'Arrondissement de Beauport",
@@ -3338,7 +3781,8 @@
    "motsThemes": [
     "urbanisme",
     "urbanisme"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-08-27__Conseil de l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge",
@@ -3421,7 +3865,8 @@
     "transport",
     "urbanisme",
     null
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-08-26__Comité exécutif",
@@ -3513,7 +3958,8 @@
    "motsThemes": [
     "subventions",
     "contrats"
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-08-26__Conseil d'agglomération de Québec",
@@ -3606,6 +4052,92 @@
    "motsThemes": [
     "contrats",
     "subventions"
+   ],
+   "votes": [
+    {
+     "numero": "CA-2026-0435",
+     "titre": "Adoption du document indiquant la nature des modifications que la Ville de Québec devra apporter à sa réglementation d'urbanisme à la suite de l'entrée en vigueur du Règlement de l'agglomération modifiant le Schéma d'aménagement et de développement révisé relativement à la création d'une aire de gra",
+     "pour": 7,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0438",
+     "titre": "Adjudication d'un contrat pour le service de réparation de véhicules légers et intermédiaires, incluant les pièces, chez le concessionnaire du fabricant Ford (Appel d'offres public 95732)",
+     "pour": 7,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0441",
+     "titre": "Adjudication de contrats pour des travaux de réparation, d'entretien et de réfection de toitures d'immeubles (Appel d'offres public 95858)",
+     "pour": 7,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0442",
+     "titre": "Adjudication d'un contrat pour la fourniture de pièces chez le concessionnaire du fabricant General Motors (Appel d'offres public 95946)",
+     "pour": 7,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0452",
+     "titre": "Autorisation de l'acceptation par la Ville de Québec des permissions accordées par Hydro-Québec, afin de réaliser des travaux dans le corridor énergétique Pie-XII, à des fins municipales, soit dans les assiettes des servitudes en faveur d'Hydro-Québec sur des terrains de la Ville relativement au pro",
+     "pour": 7,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0453",
+     "titre": "Entente entre la Ville de Québec et la Corporation Événements Course de Québec relativement au versement d'une subvention, à la fourniture, à titre gratuit, de services municipaux et à l'achat de biens et services, à titre d'assistance, dans le cadre de la tenue de l'événement Marathon de Québec, en",
+     "pour": 7,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0454",
+     "titre": "Entente entre la Ville de Québec et l'Alliance Arc-en-ciel de Québec relativement au versement d'une subvention et à la fourniture à titre gratuit de services municipaux, à titre d'assistance, dans le cadre de la tenue de l'événement Fierté de Québec, en 2026",
+     "pour": 7,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0461",
+     "titre": "Modification de la nomenclature des emplois professionnels",
+     "pour": 7,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0462",
+     "titre": "Prise d'acte de l'entente intervenue entre la Ville de Québec et le Syndicat des employés manuels de la Ville de Québec concernant la modification de l'Annexe F de la convention collective en vigueur jusqu'au 31 décembre 2028",
+     "pour": 7,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0469",
+     "titre": "Avenant numéro 1 au protocole d'entente signé le 15 avril 2024 entre la Ville de Québec et la Société hôtesse des Jeux du Canada 2027 relatif au versement d'une contribution pour l'organisation, l'administration et la gestion des activités des Jeux d'hiver du Canada - Québec 2027",
+     "pour": 7,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0472",
+     "titre": "Appropriation d'un montant de 28 700 $ au fonds général",
+     "pour": 7,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0474",
+     "titre": "Appropriation d'un montant de 45 000 $ au fonds général",
+     "pour": 7,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    }
    ]
   },
   {
@@ -3695,6 +4227,36 @@
    "genereLe": "2026-11-13T11:31:19.464Z",
    "motsThemes": [
     "environnement"
+   ],
+   "votes": [
+    {
+     "numero": "CV-2026-0719",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Adoption du Règlement de l'agglomération de nature mixte sur des interventions relatives à la mise en place d'une stratégie de suivi de la qualité de l'air du territoire de la ville de Québec et sur l'emprunt nécessaire au paiement des coûts qui",
+     "pour": 18,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0721",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Adoption du Règlement modifiant le Règlement de l'agglomération sur les ormes malades et le Règlement de l'agglomération sur le programme de soutien à l'abattage et la disposition des ormes dans le cadre de la lutte à la propagation de la maladi",
+     "pour": 18,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0745",
+     "titre": "Avis de proposition déposé par monsieur le conseiller Stéphane Lachance, lors de la séance du conseil de la ville tenue le 7 juillet 2026, demandant que la Ville manifeste officiellement son intérêt à acquérir ou à recevoir la statue de Samuel de Champlain appartenant à la Ville d'Orillia",
+     "pour": 3,
+     "contre": 18,
+     "resultat": "Rejetée"
+    },
+    {
+     "numero": "CV-2026-0746",
+     "titre": "Avis de proposition déposé par monsieur le conseiller Marc Roussin, lors de la séance du conseil de la ville tenue le 7 juillet 2026, demandant le plan d'action mis en place à la suite des problèmes de débordement d'égouts dans le secteur Chauveau",
+     "pour": 3,
+     "contre": 18,
+     "resultat": "Rejetée"
+    }
    ]
   },
   {
@@ -3772,7 +4334,8 @@
    "genereLe": "2026-11-13T11:31:21.787Z",
    "motsThemes": [
     null
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-08-21__Comité exécutif",
@@ -3848,7 +4411,8 @@
    "motsThemes": [
     "urbanisme",
     null
-   ]
+   ],
+   "votes": []
   },
   {
    "id": "2026-08-19__Comité exécutif",
@@ -3942,7 +4506,8 @@
     "contrats",
     "contrats",
     "travaux"
-   ]
+   ],
+   "votes": []
   }
  ],
  "ordresDuJour": [],

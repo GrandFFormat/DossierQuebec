@@ -163,6 +163,8 @@ async function main() {
   const decisions = await lire('decisions.json');
   const resumes = await lire('resumes.json');
   const en = await lire('resumes-en.json');
+  // Les votes nominaux, posés sur la carte de leur séance (Martin, 13 nov. 2026 : « comme sur DQ »).
+  const votesParNumero = new Map(((await lire('votes.json'))?.votes ?? []).map((v) => [v.numero, v]));
   const ancien = (await lire('resumes-seances.json')) ?? { seances: [] };
   const anciens = new Map(ancien.seances.map((s) => [s.id, s]));
   const parId = new Map((resumes?.resumes ?? []).map((r) => [r.id, r]));
@@ -211,7 +213,7 @@ async function main() {
     // Le procès-verbal officiel de la séance : la version qui fait foi, liée sur la carte.
     const pv = decisions.decisions.find((d) => /^Procès-verba/.test(d.type) && d.pdf && (d.seanceId ? d.seanceId === g.id : d.date === g.date && d.instance === g.instance));
     objetsDe.set(g.id, g.lignes.map((d) => ({ objet: d.objet, theme: d.theme })));
-    const base = { id: g.id, instance: g.instance, instanceEn: instanceEn(g.instance), date: g.date, nDecisions: g.lignes.length, pv: pv?.pdf ?? null, themes: compterThemes(g.lignes.map((d) => d.theme)), points };
+    const base = { id: g.id, instance: g.instance, instanceEn: instanceEn(g.instance), date: g.date, nDecisions: g.lignes.length, pv: pv?.pdf ?? null, votes: g.lignes.map((d) => votesParNumero.get(d.numero ?? d.id)).filter(Boolean).map((v) => ({ numero: v.numero, titre: v.objet, pour: v.decomptePour ?? v.pour?.length ?? 0, contre: v.decompteContre ?? v.contre?.length ?? 0, resultat: v.resultat ?? null })), themes: compterThemes(g.lignes.map((d) => d.theme)), points };
     const vieux = anciens.get(g.id);
     // Trois phrases rejetées pour les mêmes décisions : on n'insiste plus (la carte garde ses points).
     // Une phrase sans mot clé est redemandée deux fois au plus (motsEssais), puis laissée telle quelle.
