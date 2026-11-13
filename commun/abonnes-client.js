@@ -83,6 +83,9 @@ export async function nePlusSuivre(s, { ville, dossier }) {
 // Renvoie { existe, acces, apercu | detail } ou null si le service ne répond pas (en local,
 // par exemple, où les fonctions Vercel n'existent pas).
 export async function chargerDetail(ville, dossier, s) {
+  // Un numéro qu'api/detail.js refuserait (« CM26 0996 » de Montréal, avec une espace) : aucun
+  // détail n'existe pour lui, inutile de le demander (12 nov. 2026).
+  if (!/^[\w.\-]{1,120}$/.test(dossier)) return null;
   try {
     const res = await fetch(`/api/detail?ville=${encodeURIComponent(ville)}&dossier=${encodeURIComponent(dossier)}`, {
       headers: s ? { Authorization: `Bearer ${s.access_token}` } : {},
