@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<!-- Consentement (Loi 25) : par défaut, Google Analytics n'a PAS le droit de déposer de témoins.
+     La bannière (commun/consentement.js) passe analytics_storage à « granted » après « Accepter ». -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: (function(){ try { return localStorage.getItem('dq:temoins') === 'oui' ? 'granted' : 'denied'; } catch (e) { return 'denied'; } })(), ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-87R1S6SR9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-87R1S6SR9Y', { content_group: 'Québec' });
+</script>
+<script src="/commun/consentement.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="/quebec/assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="512x512" href="/quebec/assets/favicon-512.png">
+<link rel="apple-touch-icon" href="/quebec/assets/favicon-512.png">
+<title data-en="Near me in Québec City | DossierQuébec">Près de chez moi à Québec : conseiller, travaux et permis | DossierQuébec</title>
+<meta data-en-content="Type your address in Québec City: your district councillor, roadwork underway and construction permits in your neighbourhood, from City open data." name="description" content="Tapez votre adresse à Québec : votre conseiller de district, les travaux en cours et les permis de construction de votre quartier, d’après les données ouvertes de la Ville.">
+<link rel="canonical" href="https://dossierquebec.ca/quebec/pres-de-chez-moi-a-quebec">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DossierQuébec">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:title" content="Près de chez moi à Québec : conseiller, travaux et permis | DossierQuébec">
+<meta property="og:description" content="Tapez votre adresse à Québec : votre conseiller de district, les travaux en cours et les permis de construction de votre quartier, d’après les données ouvertes de la Ville.">
+<meta property="og:url" content="https://dossierquebec.ca/quebec/pres-de-chez-moi-a-quebec">
+<meta property="og:image" content="https://dossierquebec.ca/quebec/og-quebec.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Près de chez moi à Québec : conseiller, travaux et permis | DossierQuébec">
+<meta name="twitter:description" content="Tapez votre adresse à Québec : votre conseiller de district, les travaux en cours et les permis de construction de votre quartier, d’après les données ouvertes de la Ville.">
+<meta name="twitter:image" content="https://dossierquebec.ca/quebec/og-quebec.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvq:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+      // Anglais choisi (commun/langue.js) : page cachée le temps de traduire, 1,5 s au plus.
+      var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('dvq:langue');
+      if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.classList.add('dvq-en'); setTimeout(function () { document.documentElement.classList.add('dvq-pret'); }, 1500); }
+    } catch (e) {}
+  })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "DossierQuébec",
+      "item": "https://dossierquebec.ca/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Ville de Québec",
+      "item": "https://dossierquebec.ca/quebec/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Près de chez moi",
+      "item": "https://dossierquebec.ca/quebec/pres-de-chez-moi-a-quebec"
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="/commun/abonnes.css">
+</head>
+<body data-page="pres" data-ville="quebec">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="./"><p class="logo-titre">Dossier<span class="marque">VilleDeQuébec</span></p></a><a class="lien-dq" href="/" title="DossierQuébec — l'Assemblée nationale en clair" aria-label="DossierQuébec — l'Assemblée nationale en clair" data-en-title="DossierQuébec — Quebec's National Assembly in plain language" data-en-aria-label="DossierQuébec — Quebec's National Assembly in plain language"></a>
+      <details class="ab-villes" id="villes"></details>
+    </div>
+    <p data-en="What is happening near you in Québec City. Public data from the City of Québec, Données Québec." class="sous-titre">
+      Ce qui se passe près de chez vous à Québec. Données publiques de la Ville de Québec, Données Québec.
+    </p>
+    <nav>
+      <a data-en="Home" href="./">Accueil</a>
+      <a data-en="Decisions" href="decisions-de-la-ville-de-quebec">Décisions</a>
+      <a data-en="City Council" href="conseil-municipal-de-quebec">Conseil municipal</a>
+      <a data-en="Near me" href="pres-de-chez-moi-a-quebec" aria-current="page">Près de chez moi</a>
+      <a data-en="Contracts" href="contrats-de-la-ville-de-quebec">Contrats</a>
+      <a data-en="Budget and taxes" href="budget-et-taxes-de-quebec">Budget</a>
+      <a data-en="Glossary" href="lexique-municipal-de-quebec">Lexique</a>
+      <div class="outils">
+        <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
+          <button data-en-aria-label="Smaller text" type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+          <span id="texte-pct" aria-live="polite">100%</span>
+          <button data-en-aria-label="Larger text" type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+        </div>
+        <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+                title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+      </div>
+    </nav>
+  </div>
+</header>
+</header>
+
+</header>
+
+<main class="contenu prose" style="max-width:1180px">
+  <h1 data-en="Near me in Québec City" class="page">Près de chez moi à Québec</h1>
+  <p data-en="Type your address: your district councillor, the roadwork underway in your neighbourhood and the construction, extension and demolition permits issued over the last 12 months. Everything comes from the City of Québec's open data." class="chapeau">
+    Tapez votre adresse : votre conseiller de district, les travaux en cours dans votre quartier et les
+    permis de construction, d’agrandissement et de démolition délivrés depuis 12 mois. Tout vient des
+    données ouvertes de la Ville de Québec.
+  </p>
+  <form class="qui-represente" id="qui-represente" autocomplete="off">
+    <label for="adresse" data-en="Your address">Votre adresse</label>
+    <div class="ligne">
+      <input id="adresse" type="search" placeholder="Ex. 40 boulevard Henri-Bourassa" data-en-placeholder="E.g. 40 boulevard Henri-Bourassa">
+      <button type="submit" data-en="Search">Chercher</button>
+    </div>
+    <div id="resultat-adresse" aria-live="polite"></div>
+    <p class="compte" data-en="Your address stays in your browser. It is not sent to anyone. Addresses, districts and neighbourhoods: City of Québec open data (CC BY 4.0).">Votre adresse reste dans votre navigateur. Elle n’est envoyée à personne. Adresses, districts et quartiers&nbsp;: données ouvertes de la Ville de Québec (CC BY 4.0).</p>
+  </form>
+  <style>
+    .qui-represente { background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon); padding: 14px 16px; margin: 16px 0 20px; }
+    .qui-represente label { font-weight: 600; display: block; margin-bottom: 6px; }
+    .qui-represente .ligne { display: flex; gap: 8px; }
+    .qui-represente input { flex: 1; min-width: 0; font: inherit; padding: 7px 10px; border: 1px solid var(--ligne-forte); border-radius: var(--rayon); background: var(--fond); color: var(--encre); }
+    .qui-represente button { font: inherit; padding: 7px 14px; border-radius: var(--rayon); border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; }
+    #resultat-adresse { margin-top: 14px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; align-items: start; }
+    .bloc-pres { background: var(--fond); border: 1px solid var(--ligne); border-radius: var(--rayon); padding: 12px 14px; }
+    .bloc-pres h3 { margin: 0 0 8px; font-size: 1rem; }
+    .bloc-pres ul { margin: 0; padding-left: 18px; }
+    .bloc-pres li { margin: 4px 0; font-size: .92rem; }
+    #resultat-adresse ul { margin: 6px 0 0; padding-left: 18px; }
+    .genre-permis { display: inline-block; font-size: .75rem; font-weight: 600; color: #fff; border-radius: 999px; padding: 1px 8px; margin-right: 2px; }
+    .genre-permis.construction { background: var(--pour); }
+    .genre-permis.demolition { background: var(--contre); }
+    .genre-permis.agrandissement { background: var(--t-transport); }
+    .genre-permis.logements { background: var(--t-urbanisme); }
+    .genre-permis.usage { background: var(--t-contrats); }
+    .genre-permis.lotissement { background: var(--doux); }
+    .genre-permis.ferme { background: var(--contre); }
+    .genre-permis.partiel { background: var(--t-contrats); }
+    .genre-permis.ouvert { background: var(--doux); }
+    .genre-permis.ville { background: var(--t-transport); }
+    .genre-permis.prive { background: var(--t-urbanisme); }
+    .lien-carte { display: inline-flex; vertical-align: -2px; color: var(--accent); }
+    .lien-carte:hover { color: var(--accent-encre); }
+    .permis-quartier { margin-top: 10px; }
+    /* Flèche des volets « Travaux en cours » et « Près de chez vous » : plus grosse (Martin, 12 nov. 2026). */
+    .permis-quartier > summary { list-style: none; display: flex; align-items: center; gap: 8px; }
+    .permis-quartier > summary::-webkit-details-marker { display: none; }
+    .permis-quartier > summary::before { content: '▸'; font-size: 1.5rem; line-height: 1; color: var(--accent); transition: transform .15s; }
+    .permis-quartier[open] > summary::before { transform: rotate(90deg); } .permis-quartier summary { cursor: pointer; font-weight: 600; } .permis-quartier li { margin: 3px 0; font-size: .9rem; }
+  </style>
+  <script type="module">
+    // Recherche « Qui me représente ? » (12 nov. 2026). L'index (scrapers/adresses.js) est découpé par
+    // première lettre de la voie : on ne lit qu'un fichier, et seulement quand on cherche.
+    const EN = document.documentElement.lang === 'en';
+    const tr = (f, e) => (EN ? e : f);
+    const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const cle = (nom) => String(nom ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase()
+      .replace(/[^A-Z0-9]+/g, ' ').trim()
+      .replace(/^((DE|DU|DES|LA|LE|LES|L|D|DE LA|DE L)\s+)+/, '').replace(/\s+/g, ' ');
+    // Les mots de type de voie qu'on tape mais qui ne sont pas dans le nom (« rue », « boul. »…).
+    const TYPES = /^(RUE|AVENUE|AV|AVE|BOULEVARD|BOUL|BD|BLVD|CHEMIN|CH|ROUTE|RTE|COTE|PLACE|PL|RANG|MONTEE|TERRASSE|CARRE|ALLEE|IMPASSE|PROMENADE|SENTIER|CROISSANT|COURS|PARC|AUTOROUTE|RUELLE)\s+/;
+    const fichiers = new Map();
+    const lire = (f) => { if (!fichiers.has(f)) fichiers.set(f, fetch(`data/adresses/${f}`).then((r) => (r.ok ? r.json() : null))); return fichiers.get(f); };
+    let index = null, districts = null;
+    // Petite maison qui ouvre Google Maps sur le lieu (12 nov. 2026). Un clic du visiteur seulement :
+    // rien n'est envoyé à Google tant qu'on ne clique pas.
+    const MAISON = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>';
+    const carte = (requete) => `<a class="lien-carte" href="https://www.google.com/maps/search/?api=1&amp;query=${encodeURIComponent(requete)}" target="_blank" rel="noopener" title="${tr('Voir sur Google Maps', 'See on Google Maps')}" aria-label="${tr('Voir sur Google Maps (nouvel onglet)', 'See on Google Maps (new tab)')}">${MAISON}</a>`;
+    const carteCoord = (lat, lon, texte) => (lat && lon ? carte(`${lat},${lon}`) : texte ? carte(texte + ', Québec, QC') : '');
+    // Le genre d'un permis, lu au début de son motif, pour une pastille de couleur (12 nov. 2026).
+    const genrePermis = (motif) => {
+      if (/^Démolition/i.test(motif)) return { cle: 'demolition', nom: tr('Démolition', 'Demolition') };
+      if (/^Construction/i.test(motif)) return { cle: 'construction', nom: tr('Construction', 'Construction') };
+      if (/^Agrandissement/i.test(motif)) return { cle: 'agrandissement', nom: tr('Agrandissement', 'Extension') };
+      if (/^Ajout d.un ou plusieurs logements/i.test(motif)) return { cle: 'logements', nom: tr('Logements ajoutés', 'Units added') };
+      if (/^Changement d.usage/i.test(motif)) return { cle: 'usage', nom: tr('Changement d’usage', 'Change of use') };
+      if (/^Création, modification ou correction d.un ou plusieurs lots|^Lotissement/i.test(motif)) return { cle: 'lotissement', nom: tr('Lotissement', 'Subdivision') };
+      return { cle: 'lotissement', nom: tr('Autre', 'Other') };
+    };
+    // Deux-points : espace insécable avant en français, aucune en anglais.
+    const dp = EN ? ':' : '&nbsp;:';
+
+    const formulaire = document.getElementById('qui-represente');
+    formulaire.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const zone = document.getElementById('resultat-adresse');
+      const saisie = document.getElementById('adresse').value.trim();
+      const m = saisie.match(/^(\d+[A-Za-z]?)\s*[, -]*\s*(.+)$/);
+      if (!m) { zone.innerHTML = `<p>${tr('Tapez le numéro puis la rue, par exemple « 40 boulevard Henri-Bourassa ».', 'Type the number then the street, for example “40 boulevard Henri-Bourassa”.')}</p>`; return; }
+      const numero = m[1].toUpperCase();
+      let voie = cle(m[2]);
+      for (let i = 0; i < 2; i++) voie = cle(voie.replace(TYPES, ''));
+      // « St-Jean », « Ste-Foy » : la Ville écrit SAINT et SAINTE au long.
+      voie = voie.replace(/\bSTE\b/g, 'SAINTE').replace(/\bST\b/g, 'SAINT');
+      if (!voie) return;
+      zone.textContent = tr('Recherche…', 'Searching…');
+      index ??= await lire('index.json');
+      districts ??= (await (await fetch('data/districts.json')).json()).districts;
+      const voies = (await lire(`${voie[0].replace(/[^A-Z0-9]/, '_')}.json`)) ?? {};
+      // Correspondance exacte d'abord, puis les voies dont le nom commence par ce qu'on a tapé.
+      // Le nom exact (avec ou sans orientation : « E », « O »…) passe seul ; sinon, les noms qui commencent ainsi.
+      const exact = new RegExp(`^${voie.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}( [NSEO]{1,2})?$`);
+      const exactes = Object.entries(voies).filter(([k]) => exact.test(k));
+      const candidates = exactes.length ? exactes : Object.entries(voies).filter(([k]) => k.startsWith(voie));
+      const trouvees = [];
+      for (const [, [libelle, adresses]] of candidates) {
+        const a = adresses.find((x) => String(x[0]).toUpperCase() === numero);
+        if (a) trouvees.push({ libelle, district: a[1], qi: a[2], quartier: index.quartiers[a[2]] });
+      }
+      if (!trouvees.length) {
+        zone.innerHTML = `<p>${tr('Adresse introuvable. Vérifiez le numéro et le nom de la rue. La recherche couvre la Ville de Québec seulement.', 'Address not found. Check the number and street name. The search covers the City of Québec only.')}</p>`;
+        return;
+      }
+      zone.innerHTML = trouvees.slice(0, 4).map((t) => {
+        const d = districts.find((x) => x.numero === t.district) ?? {};
+        return `<section class="bloc-pres"><h3>${tr('Votre adresse', 'Your address')}</h3><strong>${esc(numero)} ${esc(t.libelle)}</strong> ${carte(`${numero} ${t.libelle}, Québec, QC`)}
+          <ul>
+            <li>${tr('District', 'District')} ${t.district}${d.nom ? `, ${esc(d.nom)}` : ''}${d.arrondissement ? ` (${esc(d.arrondissement)})` : ''}${t.quartier ? `, ${tr('quartier', 'neighbourhood')} ${esc(t.quartier)}` : ''}</li>
+            <li>${tr('Votre conseiller ou conseillère', 'Your councillor')}${dp} <a href="conseil-municipal-de-quebec#elu-${t.district}">${esc(d.conseiller ?? '')}</a>${d.parti ? ` (${esc(d.parti)})` : ''}</li>
+            <li>${tr('Pour un nid-de-poule, un lampadaire ou une collecte', 'For a pothole, a street light or a pickup')}${dp} <a href="conseil-municipal-de-quebec#requetes">311</a></li>
+          </ul></section>`;
+      }).join('');
+      // Près de chez vous : les permis de construction, d'agrandissement et de démolition des 12 derniers
+      // mois dans le quartier (scrapers/permis.js). Seulement pour la première adresse trouvée.
+      const t = trouvees[0];
+      // Travaux en cours dans le quartier (scrapers/entraves.js, état du matin).
+      if (t.qi >= 0) {
+        const ent = await fetch('data/entraves.json').then((r) => (r.ok ? r.json() : null)).catch(() => null);
+        const chantiers = ent?.parQuartier?.[t.qi] ?? [];
+        const jour = (d) => (d ? new Date(d + 'T12:00').toLocaleDateString(EN ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'short', year: 'numeric' }) : '');
+        // Pastilles : l'effet sur la circulation (rouge, orange, gris) et la nature du chantier.
+        const IMPACT = {
+          'all-lanes-closed': ['ferme', tr('Rue fermée', 'Road closed')],
+          'some-lanes-closed': ['partiel', tr('Voies fermées', 'Lanes closed')],
+          'all-lanes-open': ['ouvert', tr('Voies ouvertes', 'Lanes open')],
+        };
+        const nature = (d) => (/chantier privé/i.test(d) ? ['prive', tr('Chantier privé', 'Private site')] : ['ville', tr('Travaux publics', 'Public works')]);
+        if (chantiers.length) zone.insertAdjacentHTML('beforeend', `<section class="bloc-pres"><h3>${tr('Travaux en cours dans le quartier', 'Roadwork in the neighbourhood')} ${esc(t.quartier)}${dp} ${chantiers.length}</h3><ul>${
+          chantiers.map((c) => {
+            const i = IMPACT[c[3]], n = nature(c[0]);
+            return `<li>${i ? `<span class="genre-permis ${i[0]}">${i[1]}</span> ` : ''}<span class="genre-permis ${n[0]}">${n[1]}</span> ${carteCoord(c[4], c[5], '')} ${esc(c[0].replace(/^(RTE-\d+\s+)?Québec,\s*/, ''))}${c[2] ? ` <span class="compte">(${tr('jusqu’au', 'until')} ${jour(c[2])})</span>` : ''}</li>`;
+          }).join('')
+        }</ul><p class="compte">${tr('État du', 'As of')} ${new Date(ent.extraction).toLocaleDateString(EN ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'short', year: 'numeric' })}. ${tr('Source : Entraves à la circulation de la Ville de Québec, Données Québec (CC BY 4.0).', 'Source: City of Québec traffic disruptions, Données Québec (CC BY 4.0).')}</p></section>`);
+      }
+      if (t.qi >= 0) {
+        const permis = await fetch(`data/permis/${t.qi}.json`).then((r) => (r.ok ? r.json() : [])).catch(() => []);
+        if (permis.length) {
+          const date = (d) => new Date(d + 'T12:00').toLocaleDateString(EN ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'short', year: 'numeric' });
+          zone.insertAdjacentHTML('beforeend', `<section class="bloc-pres"><h3>${tr('Près de chez vous', 'Near you')}${dp} ${permis.length} ${tr('permis délivrés dans le quartier', 'permits issued in the neighbourhood')} ${esc(t.quartier)} ${tr('depuis 12 mois', 'over the last 12 months')}</h3><ul>${
+            permis.slice(0, 15).map((p) => { const g = genrePermis(p[2]); return `<li><span class="genre-permis ${g.cle}">${g.nom}</span> <span class="compte">${date(p[0])}</span> ${carteCoord(p[4], p[5], p[1])} ${esc(p[1])} : ${esc(p[2])}</li>`; }).join('')
+          }</ul>${permis.length > 15 ? `<p class="compte">${tr('Les 15 plus récents.', 'The 15 most recent.')}</p>` : ''}<p class="compte">${tr('Source : Permis délivrés à la Ville de Québec, Données Québec (CC BY 4.0).', 'Source: Permits issued by the City of Québec, Données Québec (CC BY 4.0).')}</p></section>`);
+        }
+      }
+    });
+    // #adresse : arrivée depuis la petite case de la page Conseil, la recherche part toute seule.
+    // Le # n'est jamais envoyé au serveur : l'adresse reste dans le navigateur.
+    const venue = decodeURIComponent(location.hash.slice(1));
+    if (venue) { document.getElementById('adresse').value = venue; formulaire.requestSubmit(); }
+  </script>
+
+  <h2 data-en="Sources">Sources</h2>
+  <ul>
+    <li data-en="Addresses, electoral districts and neighbourhoods, construction permits and traffic disruptions: City of Québec, <a href=&quot;https://www.donneesquebec.ca/recherche/organization/ville-de-quebec&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Données Québec</a>, under a CC BY 4.0 licence. Permits are read every week, roadwork every morning.">Adresses, districts électoraux et quartiers, permis délivrés et entraves à la circulation : Ville de Québec, <a href="https://www.donneesquebec.ca/recherche/organization/ville-de-quebec" target="_blank" rel="noopener">Données Québec</a>, sous licence CC BY 4.0. Les permis sont relus chaque semaine, les travaux chaque matin.</li>
+  </ul>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p data-en="Independent citizen site. No connection with the City of Québec, no official status. If anything differs, the City's documents prevail.">Site citoyen indépendant. Aucun lien avec la Ville de Québec, aucun caractère officiel.
+    En cas d'écart, les documents de la Ville font foi.</p>
+    <p class="lien-dq-pied"><a href="/" data-en="DossierQuébec — Quebec's National Assembly in plain language">DossierQuébec — l'Assemblée nationale en clair</a> · <a href="/regles" data-en="The rules of the site">Les règles du site</a> · <a href="sources-des-donnees-de-quebec" data-en="Sources">Sources</a> · <a href="sources-des-donnees-de-quebec#mises-a-jour" data-en="Updates">Mises à jour</a> · <a href="https://www.ville.quebec.qc.ca/" target="_blank" rel="noopener" data-en="City of Québec site ↗">Site de la Ville de Québec ↗</a> · <span data-en="Powered by">Une réalisation de</span> <a class="lien-dafr" href="https://www.dafrsolution.com" data-en-href="https://www.dafrsolution.com/en" target="_blank" rel="noopener">DAFR Solution</a></p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+<script type="module" src="/commun/entete-volet.js"></script>
+<script type="module" src="/commun/abonnes.js"></script>
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
