@@ -104,6 +104,7 @@
       <a data-en="Home" href="./">Accueil</a>
       <a data-en="Decisions" href="decisions-de-la-ville-de-quebec">Décisions</a>
       <a data-en="City Council" href="conseil-municipal-de-quebec" aria-current="page">Conseil municipal</a>
+      <a data-en="Near me" href="pres-de-chez-moi-a-quebec">Près de chez moi</a>
       <a data-en="Contracts" href="contrats-de-la-ville-de-quebec">Contrats</a>
       <a data-en="Budget and taxes" href="budget-et-taxes-de-quebec">Budget</a>
       <a data-en="Glossary" href="lexique-municipal-de-quebec">Lexique</a>
@@ -136,15 +137,12 @@
     qui vous représente.
   </p>
 
-  <form class="qui-represente" id="qui-represente" autocomplete="off">
-    <p style="margin:0 0 4px; font-weight:600" data-en="Your district councillor, roadwork underway and construction permits in your neighbourhood">Votre conseiller de district, les travaux en cours et les permis de construction de votre quartier</p>
-    <label for="adresse" class="compte" style="font-weight:400; margin-bottom:8px" data-en="Near me: type your address">Près de chez moi&nbsp;: tapez votre adresse</label>
+  <form class="qui-represente" id="vers-pres" action="pres-de-chez-moi-a-quebec">
+    <label for="adresse" data-en="Find your councillor, roadwork and permits near you">Trouvez votre conseiller, les travaux et les permis près de chez vous</label>
     <div class="ligne">
       <input id="adresse" type="search" placeholder="Ex. 40 boulevard Henri-Bourassa" data-en-placeholder="E.g. 40 boulevard Henri-Bourassa">
       <button type="submit" data-en="Search">Chercher</button>
     </div>
-    <div id="resultat-adresse" aria-live="polite"></div>
-    <p class="compte" data-en="Your address stays in your browser. It is not sent to anyone. Addresses, districts and neighbourhoods: City of Québec open data (CC BY 4.0).">Votre adresse reste dans votre navigateur. Elle n’est envoyée à personne. Adresses, districts et quartiers&nbsp;: données ouvertes de la Ville de Québec (CC BY 4.0).</p>
   </form>
   <style>
     .qui-represente { background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon); padding: 14px 16px; margin: 16px 0 20px; }
@@ -152,131 +150,13 @@
     .qui-represente .ligne { display: flex; gap: 8px; }
     .qui-represente input { flex: 1; min-width: 0; font: inherit; padding: 7px 10px; border: 1px solid var(--ligne-forte); border-radius: var(--rayon); background: var(--fond); color: var(--encre); }
     .qui-represente button { font: inherit; padding: 7px 14px; border-radius: var(--rayon); border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; }
-    #resultat-adresse { margin-top: 10px; }
-    #resultat-adresse ul { margin: 6px 0 0; padding-left: 18px; }
-    .genre-permis { display: inline-block; font-size: .75rem; font-weight: 600; color: #fff; border-radius: 999px; padding: 1px 8px; margin-right: 2px; }
-    .genre-permis.construction { background: var(--pour); }
-    .genre-permis.demolition { background: var(--contre); }
-    .genre-permis.agrandissement { background: var(--t-transport); }
-    .genre-permis.logements { background: var(--t-urbanisme); }
-    .genre-permis.usage { background: var(--t-contrats); }
-    .genre-permis.lotissement { background: var(--doux); }
-    .genre-permis.ferme { background: var(--contre); }
-    .genre-permis.partiel { background: var(--t-contrats); }
-    .genre-permis.ouvert { background: var(--doux); }
-    .genre-permis.ville { background: var(--t-transport); }
-    .genre-permis.prive { background: var(--t-urbanisme); }
-    .lien-carte { display: inline-flex; vertical-align: -2px; color: var(--accent); }
-    .lien-carte:hover { color: var(--accent-encre); }
-    .permis-quartier { margin-top: 10px; }
-    /* Flèche des volets « Travaux en cours » et « Près de chez vous » : plus grosse (Martin, 12 nov. 2026). */
-    .permis-quartier > summary { list-style: none; display: flex; align-items: center; gap: 8px; }
-    .permis-quartier > summary::-webkit-details-marker { display: none; }
-    .permis-quartier > summary::before { content: '▸'; font-size: 1.5rem; line-height: 1; color: var(--accent); transition: transform .15s; }
-    .permis-quartier[open] > summary::before { transform: rotate(90deg); } .permis-quartier summary { cursor: pointer; font-weight: 600; } .permis-quartier li { margin: 3px 0; font-size: .9rem; }
   </style>
-  <script type="module">
-    // Recherche « Qui me représente ? » (12 nov. 2026). L'index (scrapers/adresses.js) est découpé par
-    // première lettre de la voie : on ne lit qu'un fichier, et seulement quand on cherche.
-    const EN = document.documentElement.lang === 'en';
-    const tr = (f, e) => (EN ? e : f);
-    const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-    const cle = (nom) => String(nom ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase()
-      .replace(/[^A-Z0-9]+/g, ' ').trim()
-      .replace(/^((DE|DU|DES|LA|LE|LES|L|D|DE LA|DE L)\s+)+/, '').replace(/\s+/g, ' ');
-    // Les mots de type de voie qu'on tape mais qui ne sont pas dans le nom (« rue », « boul. »…).
-    const TYPES = /^(RUE|AVENUE|AV|AVE|BOULEVARD|BOUL|BD|BLVD|CHEMIN|CH|ROUTE|RTE|COTE|PLACE|PL|RANG|MONTEE|TERRASSE|CARRE|ALLEE|IMPASSE|PROMENADE|SENTIER|CROISSANT|COURS|PARC|AUTOROUTE|RUELLE)\s+/;
-    const fichiers = new Map();
-    const lire = (f) => { if (!fichiers.has(f)) fichiers.set(f, fetch(`data/adresses/${f}`).then((r) => (r.ok ? r.json() : null))); return fichiers.get(f); };
-    let index = null, districts = null;
-    // Petite maison qui ouvre Google Maps sur le lieu (12 nov. 2026). Un clic du visiteur seulement :
-    // rien n'est envoyé à Google tant qu'on ne clique pas.
-    const MAISON = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>';
-    const carte = (requete) => `<a class="lien-carte" href="https://www.google.com/maps/search/?api=1&amp;query=${encodeURIComponent(requete)}" target="_blank" rel="noopener" title="${tr('Voir sur Google Maps', 'See on Google Maps')}" aria-label="${tr('Voir sur Google Maps (nouvel onglet)', 'See on Google Maps (new tab)')}">${MAISON}</a>`;
-    const carteCoord = (lat, lon, texte) => (lat && lon ? carte(`${lat},${lon}`) : texte ? carte(texte + ', Québec, QC') : '');
-    // Le genre d'un permis, lu au début de son motif, pour une pastille de couleur (12 nov. 2026).
-    const genrePermis = (motif) => {
-      if (/^Démolition/i.test(motif)) return { cle: 'demolition', nom: tr('Démolition', 'Demolition') };
-      if (/^Construction/i.test(motif)) return { cle: 'construction', nom: tr('Construction', 'Construction') };
-      if (/^Agrandissement/i.test(motif)) return { cle: 'agrandissement', nom: tr('Agrandissement', 'Extension') };
-      if (/^Ajout d.un ou plusieurs logements/i.test(motif)) return { cle: 'logements', nom: tr('Logements ajoutés', 'Units added') };
-      if (/^Changement d.usage/i.test(motif)) return { cle: 'usage', nom: tr('Changement d’usage', 'Change of use') };
-      if (/^Création, modification ou correction d.un ou plusieurs lots|^Lotissement/i.test(motif)) return { cle: 'lotissement', nom: tr('Lotissement', 'Subdivision') };
-      return { cle: 'lotissement', nom: tr('Autre', 'Other') };
-    };
-    // Deux-points : espace insécable avant en français, aucune en anglais.
-    const dp = EN ? ':' : '&nbsp;:';
-
-    document.getElementById('qui-represente').addEventListener('submit', async (e) => {
+  <script>
+    // L'adresse passe après le # : cette partie de l'adresse web n'est jamais envoyée au serveur.
+    document.getElementById('vers-pres').addEventListener('submit', function (e) {
       e.preventDefault();
-      const zone = document.getElementById('resultat-adresse');
-      const saisie = document.getElementById('adresse').value.trim();
-      const m = saisie.match(/^(\d+[A-Za-z]?)\s*[, -]*\s*(.+)$/);
-      if (!m) { zone.innerHTML = `<p>${tr('Tapez le numéro puis la rue, par exemple « 40 boulevard Henri-Bourassa ».', 'Type the number then the street, for example “40 boulevard Henri-Bourassa”.')}</p>`; return; }
-      const numero = m[1].toUpperCase();
-      let voie = cle(m[2]);
-      for (let i = 0; i < 2; i++) voie = cle(voie.replace(TYPES, ''));
-      // « St-Jean », « Ste-Foy » : la Ville écrit SAINT et SAINTE au long.
-      voie = voie.replace(/\bSTE\b/g, 'SAINTE').replace(/\bST\b/g, 'SAINT');
-      if (!voie) return;
-      zone.textContent = tr('Recherche…', 'Searching…');
-      index ??= await lire('index.json');
-      districts ??= (await (await fetch('data/districts.json')).json()).districts;
-      const voies = (await lire(`${voie[0].replace(/[^A-Z0-9]/, '_')}.json`)) ?? {};
-      // Correspondance exacte d'abord, puis les voies dont le nom commence par ce qu'on a tapé.
-      // Le nom exact (avec ou sans orientation : « E », « O »…) passe seul ; sinon, les noms qui commencent ainsi.
-      const exact = new RegExp(`^${voie.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}( [NSEO]{1,2})?$`);
-      const exactes = Object.entries(voies).filter(([k]) => exact.test(k));
-      const candidates = exactes.length ? exactes : Object.entries(voies).filter(([k]) => k.startsWith(voie));
-      const trouvees = [];
-      for (const [, [libelle, adresses]] of candidates) {
-        const a = adresses.find((x) => String(x[0]).toUpperCase() === numero);
-        if (a) trouvees.push({ libelle, district: a[1], qi: a[2], quartier: index.quartiers[a[2]] });
-      }
-      if (!trouvees.length) {
-        zone.innerHTML = `<p>${tr('Adresse introuvable. Vérifiez le numéro et le nom de la rue. La recherche couvre la Ville de Québec seulement.', 'Address not found. Check the number and street name. The search covers the City of Québec only.')}</p>`;
-        return;
-      }
-      zone.innerHTML = trouvees.slice(0, 4).map((t) => {
-        const d = districts.find((x) => x.numero === t.district) ?? {};
-        return `<div><strong>${esc(numero)} ${esc(t.libelle)}</strong> ${carte(`${numero} ${t.libelle}, Québec, QC`)}
-          <ul>
-            <li>${tr('District', 'District')} ${t.district}${d.nom ? `, ${esc(d.nom)}` : ''}${d.arrondissement ? ` (${esc(d.arrondissement)})` : ''}${t.quartier ? `, ${tr('quartier', 'neighbourhood')} ${esc(t.quartier)}` : ''}</li>
-            <li>${tr('Votre conseiller ou conseillère', 'Your councillor')}${dp} <a href="#elu-${t.district}">${esc(d.conseiller ?? '')}</a>${d.parti ? ` (${esc(d.parti)})` : ''}</li>
-            <li>${tr('Pour un nid-de-poule, un lampadaire ou une collecte', 'For a pothole, a street light or a pickup')}${dp} <a href="#requetes">311</a></li>
-          </ul></div>`;
-      }).join('');
-      // Près de chez vous : les permis de construction, d'agrandissement et de démolition des 12 derniers
-      // mois dans le quartier (scrapers/permis.js). Seulement pour la première adresse trouvée.
-      const t = trouvees[0];
-      // Travaux en cours dans le quartier (scrapers/entraves.js, état du matin).
-      if (t.qi >= 0) {
-        const ent = await fetch('data/entraves.json').then((r) => (r.ok ? r.json() : null)).catch(() => null);
-        const chantiers = ent?.parQuartier?.[t.qi] ?? [];
-        const jour = (d) => (d ? new Date(d + 'T12:00').toLocaleDateString(EN ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'short', year: 'numeric' }) : '');
-        // Pastilles : l'effet sur la circulation (rouge, orange, gris) et la nature du chantier.
-        const IMPACT = {
-          'all-lanes-closed': ['ferme', tr('Rue fermée', 'Road closed')],
-          'some-lanes-closed': ['partiel', tr('Voies fermées', 'Lanes closed')],
-          'all-lanes-open': ['ouvert', tr('Voies ouvertes', 'Lanes open')],
-        };
-        const nature = (d) => (/chantier privé/i.test(d) ? ['prive', tr('Chantier privé', 'Private site')] : ['ville', tr('Travaux publics', 'Public works')]);
-        if (chantiers.length) zone.insertAdjacentHTML('beforeend', `<details class="permis-quartier"><summary>${tr('Travaux en cours dans le quartier', 'Roadwork in the neighbourhood')} ${esc(t.quartier)}${dp} ${chantiers.length}</summary><ul>${
-          chantiers.map((c) => {
-            const i = IMPACT[c[3]], n = nature(c[0]);
-            return `<li>${i ? `<span class="genre-permis ${i[0]}">${i[1]}</span> ` : ''}<span class="genre-permis ${n[0]}">${n[1]}</span> ${carteCoord(c[4], c[5], '')} ${esc(c[0].replace(/^(RTE-\d+\s+)?Québec,\s*/, ''))}${c[2] ? ` <span class="compte">(${tr('jusqu’au', 'until')} ${jour(c[2])})</span>` : ''}</li>`;
-          }).join('')
-        }</ul><p class="compte">${tr('État du', 'As of')} ${new Date(ent.extraction).toLocaleDateString(EN ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'short', year: 'numeric' })}. ${tr('Source : Entraves à la circulation de la Ville de Québec, Données Québec (CC BY 4.0).', 'Source: City of Québec traffic disruptions, Données Québec (CC BY 4.0).')}</p></details>`);
-      }
-      if (t.qi >= 0) {
-        const permis = await fetch(`data/permis/${t.qi}.json`).then((r) => (r.ok ? r.json() : [])).catch(() => []);
-        if (permis.length) {
-          const date = (d) => new Date(d + 'T12:00').toLocaleDateString(EN ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'short', year: 'numeric' });
-          zone.insertAdjacentHTML('beforeend', `<details class="permis-quartier"><summary>${tr('Près de chez vous', 'Near you')}${dp} ${permis.length} ${tr('permis délivrés dans le quartier', 'permits issued in the neighbourhood')} ${esc(t.quartier)} ${tr('depuis 12 mois', 'over the last 12 months')}</summary><ul>${
-            permis.slice(0, 15).map((p) => { const g = genrePermis(p[2]); return `<li><span class="genre-permis ${g.cle}">${g.nom}</span> <span class="compte">${date(p[0])}</span> ${carteCoord(p[4], p[5], p[1])} ${esc(p[1])} : ${esc(p[2])}</li>`; }).join('')
-          }</ul>${permis.length > 15 ? `<p class="compte">${tr('Les 15 plus récents.', 'The 15 most recent.')}</p>` : ''}<p class="compte">${tr('Source : Permis délivrés à la Ville de Québec, Données Québec (CC BY 4.0).', 'Source: Permits issued by the City of Québec, Données Québec (CC BY 4.0).')}</p></details>`);
-        }
-      }
+      var a = document.getElementById('adresse').value.trim();
+      location.href = 'pres-de-chez-moi-a-quebec' + (a ? '#' + encodeURIComponent(a) : '');
     });
   </script>
 
