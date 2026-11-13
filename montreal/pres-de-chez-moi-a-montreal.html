@@ -178,6 +178,32 @@
     const carteCoord = (lat, lon) => (lat && lon ? carte(`${lat},${lon}`) : '');
     const genrePermis = (motif) => (/^D[ée]molition/i.test(motif) ? ['demolition', tr('Démolition', 'Demolition')]
       : /^Agrandissement/i.test(motif) ? ['agrandissement', tr('Agrandissement', 'Extension')] : ['construction', tr('Construction', 'Construction')]);
+    // En anglais : les libellés de la Ville (chantiers et permis) sont en français ; on traduit les
+    // mots fixes, les noms de rues restent tels quels.
+    const RAISONS = {
+      'égouts et aqueducs - inspection et nettoyage': 'sewers and water mains: inspection and cleaning',
+      'égouts et aqueducs - excavation': 'sewers and water mains: excavation',
+      'égouts et aqueducs - réhabilitation': 'sewers and water mains: rehabilitation',
+      'toiture - rénovation': 'roof renovation',
+      'construction/rénovation sans excavation': 'construction/renovation without excavation',
+      'construction/rénovation avec excavation': 'construction/renovation with excavation',
+      'feux de signalisation - ajout/réparation': 'traffic lights: installation/repair',
+      'réseaux routier - réfection et travaux corrélatifs': 'road rebuilding and related work',
+      'trottoirs - construction': 'sidewalk construction',
+      'entretien': 'maintenance',
+      'forage/excavation exploratoire': 'exploratory drilling/excavation',
+      'déménagement': 'moving',
+      "puits d'accès - construction/réparation": 'manhole construction/repair',
+    };
+    const enChantier = (t) => {
+      if (!EN) return t;
+      let [lieu, raison] = t.split(' : ');
+      lieu = lieu.replace(/ entre (.+) et (.+)$/, ' between $1 and $2').replace(/^Ruelle$/, 'Alley').replace(/^Parc /, 'Park ');
+      if (raison) raison = RAISONS[raison.trim()] ?? (/^a?s-d+ /.test(raison) ? 'underground utilities' : raison);
+      return raison ? `${lieu}: ${raison}` : lieu;
+    };
+    const enMotif = (m) => (!EN ? m : m.replace('Démolition d’un bâtiment', 'Building demolition').replace('Agrandissement', 'Extension')
+      .replace(/((d+) logements?)/, (_, n) => `(${n} dwelling${n > 1 ? 's' : ''})`));
     const fichiers = new Map();
     const lire = (f) => { if (!fichiers.has(f)) fichiers.set(f, fetch(`data/adresses/${f}`).then((r) => (r.ok ? r.json() : null))); return fichiers.get(f); };
     let index = null, districts = null;
@@ -216,7 +242,7 @@
         const d = districts.find((x) => String(x.numeroSource) === String(t.district)) ?? {};
         return `<section class="bloc-pres"><h3>${tr('Votre adresse', 'Your address')}</h3><strong>${numero} ${esc(t.libelle)}</strong> ${carte(`${numero} ${t.libelle}, Montréal, QC`)}
           <ul>
-            <li>${tr('District', 'District')} ${esc(d.nom ?? t.district)}${d.arrondissement ? ` (${tr('arrondissement', 'borough')} ${esc(d.arrondissement)})` : ''}${t.quartier ? `, ${tr('quartier', 'neighbourhood')} ${esc(t.quartier)}` : ''}</li>
+            <li>${EN ? `${esc(d.nom ?? t.district)} district${d.arrondissement ? ` (${esc(d.arrondissement)} borough)` : ''}${t.quartier ? `, ${esc(t.quartier)} neighbourhood` : ''}` : `District ${esc(d.nom ?? t.district)}${d.arrondissement ? ` (arrondissement ${esc(d.arrondissement)})` : ''}${t.quartier ? `, quartier ${esc(t.quartier)}` : ''}`}</li>
             <li>${tr('Votre conseiller ou conseillère', 'Your councillor')}${dp} <a href="conseil-municipal-de-montreal">${esc(d.conseiller ?? '')}</a>${d.parti ? ` (${esc(d.parti)})` : ''}</li>
             <li>${tr('Pour une requête à la Ville (nid-de-poule, collecte, déneigement)', 'For a request to the City (pothole, pickup, snow removal)')}${dp} <strong>311</strong>${tr(', ou le 514 872-0311 de l’extérieur', ', or 514 872-0311 from outside Montréal')}</li>
           </ul></section>`;
@@ -228,12 +254,12 @@
         fetch(`data/permis/${t.qi}.json`).then((r) => (r.ok ? r.json() : [])).catch(() => []),
       ]);
       const chantiers = ent?.parQuartier?.[t.qi] ?? [];
-      if (chantiers.length) zone.insertAdjacentHTML('beforeend', `<section class="bloc-pres"><h3>${tr('Travaux en cours dans le quartier', 'Roadwork in the neighbourhood')} ${esc(t.quartier)}${dp} ${chantiers.length}</h3><ul>${
-        chantiers.slice(0, 25).map((c) => `<li><span class="genre-permis ${c[3] === 'public' ? 'ville' : 'prive'}">${c[3] === 'public' ? tr('Travaux publics', 'Public works') : tr('Chantier privé', 'Private site')}</span> ${carteCoord(c[4], c[5])} ${esc(c[0])}${c[2] ? ` <span class="compte">(${tr('jusqu’au', 'until')} ${jour(c[2])})</span>` : ''}${
+      if (chantiers.length) zone.insertAdjacentHTML('beforeend', `<section class="bloc-pres"><h3>${tr(`Travaux en cours dans le quartier ${esc(t.quartier)}`, `Roadwork in ${esc(t.quartier)}`)}${dp} ${chantiers.length}</h3><ul>${
+        chantiers.slice(0, 25).map((c) => `<li><span class="genre-permis ${c[3] === 'public' ? 'ville' : 'prive'}">${c[3] === 'public' ? tr('Travaux publics', 'Public works') : tr('Chantier privé', 'Private site')}</span> ${carteCoord(c[4], c[5])} ${esc(enChantier(c[0]))}${c[2] ? ` <span class="compte">(${tr('jusqu’au', 'until')} ${jour(c[2])})</span>` : ''}${
           c[6] ? `<span class="contrat-chantier">${tr('Contrat', 'Contract')}${dp} ${esc(c[6][0])}, ${argent(c[6][1])}${c[6][2] ? ` · <a href="https://seao.gouv.qc.ca/avis-resultat-recherche/consulter?ItemId=${esc(c[6][2])}" target="_blank" rel="noopener">${tr('avis SEAO', 'SEAO notice')} ↗</a>` : ''}</span>` : ''}</li>`).join('')
       }</ul>${chantiers.length > 25 ? `<p class="compte">${tr('Les 25 qui finissent le plus tôt.', 'The 25 ending soonest.')}</p>` : ''}<p class="compte">${tr('État du', 'As of')} ${new Date(ent.extraction).toLocaleDateString(EN ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'short', year: 'numeric' })}.</p></section>`);
-      if (permis.length) zone.insertAdjacentHTML('beforeend', `<section class="bloc-pres"><h3>${tr('Près de chez vous', 'Near you')}${dp} ${permis.length} ${tr('permis délivrés dans le quartier', 'permits issued in the neighbourhood')} ${esc(t.quartier)} ${tr('depuis 12 mois', 'over the last 12 months')}</h3><ul>${
-        permis.slice(0, 15).map((p) => { const g = genrePermis(p[2]); return `<li><span class="genre-permis ${g[0]}">${g[1]}</span> <span class="compte">${jour(p[0])}</span> ${carteCoord(p[4], p[5])} ${esc(p[1])} : ${esc(p[2])}</li>`; }).join('')
+      if (permis.length) zone.insertAdjacentHTML('beforeend', `<section class="bloc-pres"><h3>${tr('Près de chez vous', 'Near you')}${dp} ${permis.length} ${tr(`permis délivrés dans le quartier ${esc(t.quartier)} depuis 12 mois`, `permits issued in ${esc(t.quartier)} over the last 12 months`)}</h3><ul>${
+        permis.slice(0, 15).map((p) => { const g = genrePermis(p[2]); return `<li><span class="genre-permis ${g[0]}">${g[1]}</span> <span class="compte">${jour(p[0])}</span> ${carteCoord(p[4], p[5])} ${esc(p[1])}${dp} ${esc(enMotif(p[2]))}</li>`; }).join('')
       }</ul>${permis.length > 15 ? `<p class="compte">${tr('Les 15 plus récents.', 'The 15 most recent.')}</p>` : ''}</section>`);
     }
 
