@@ -307,7 +307,7 @@ function carteDecision(d, ouverte = false) {
       <span class="puce">${echapper(lib(d.type))}</span>
       ${d.instance ? `<span class="puce">${echapper(lib(d.instance))}</span>` : ''}
       ${d.categorie ? `<span class="puce">${echapper(categorieEn(d.categorie))}</span>` : ''}
-      ${d.unite ? `<span class="puce">${echapper(d.unite)}</span>` : ''}
+      ${d.unite ? `<span class="puce">${echapper(lib(d.unite.replace(/_/g, ', ')))}</span>` : ''}
       ${d.resultat ? `<span class="resultat ${classeResultat(d.resultat)}">${echapper(lib(d.resultat))}</span>` : ''}
       ${d.voteEnregistre ? `<span class="puce genre-vote">${tr('vote enregistré', 'recorded vote')}</span>` : ''}
     </div>
@@ -374,7 +374,7 @@ function rendreDecisions() {
       // On affiche le libellé lisible, pas la clé interne.
       remplirSelect(
         $('#filtre-theme'),
-        (facettes.theme ?? []).map(({ valeur, n }) => ({ valeur, n, libelle: etat.decisions.themes?.[valeur]?.libelle }))
+        (facettes.theme ?? []).map(({ valeur, n }) => ({ valeur, n, libelle: EN ? themeEn(valeur, etat.decisions.themes?.[valeur]?.libelle) : etat.decisions.themes?.[valeur]?.libelle }))
       );
     }
     $('#filtre-type').dataset.rempli = '1';
