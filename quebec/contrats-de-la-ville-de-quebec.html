@@ -140,6 +140,7 @@
   <h2 data-en="All contracts">Tous les contrats</h2>
   <div class="barre-outils">
     <input id="recherche" type="search" placeholder="Fournisseur ou objet" data-en-placeholder="Supplier or subject" aria-label="Chercher un fournisseur ou un objet" data-en-aria-label="Search a supplier or subject">
+    <select id="choix-contrat" aria-label="Choisir un contrat" data-en-aria-label="Pick a contract"><option value="" data-en="Pick a contract (A to Z)">Choisir un contrat (A à Z)</option></select>
     <select id="filtre-mode" aria-label="Mode d’octroi" data-en-aria-label="Award method">
       <option value="" data-en="All methods">Tous les modes</option>
       <option value="gre" data-en="Direct awards only">Gré à gré seulement</option>
@@ -293,6 +294,14 @@
   if (qInit) $('#recherche').value = qInit;
   $('#recherche').addEventListener('input', () => montrer(true));
   $('#filtre-mode').addEventListener('change', () => montrer(true));
+  // Menu des contrats en ordre alphabétique (13 nov. 2026) : choisir au lieu de taper.
+  const titres = [...new Set(C.map((c) => (c.titre || '').replace(/^[^\p{L}\p{N}]+/u, '').trim()).filter(Boolean))].sort((x, y) => x.localeCompare(y, 'fr', { sensitivity: 'base' }));
+  $('#choix-contrat').insertAdjacentHTML('beforeend', titres.map((t) => `<option>${esc(t.length > 110 ? t.slice(0, 107) + '…' : t)}</option>`).join(''));
+  $('#choix-contrat').addEventListener('change', (e) => {
+    const i = e.target.selectedIndex; if (!i) return;
+    $('#recherche').value = titres[i - 1]; $('#filtre-mode').value = ''; montrer(true);
+    document.querySelector('#liste button.ouvrir')?.click();
+  });
   $('#voir-plus').addEventListener('click', () => { limite += 100; montrer(); });
   montrer(true);
   if (qInit && params.has('ouvrir')) document.querySelector('#liste button.ouvrir')?.click();
