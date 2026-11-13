@@ -329,6 +329,8 @@ const projet = (b) => `<b>Projet de loi n° ${ht(b.num)}</b> — ${ht(b.title)}$
 // Même normalisation que norm() dans commun/dq.js : c'est elle qui sépare les ministres du reste
 // de l'Assemblée.
 const normNom = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[-–—']/g, ' ').replace(/\s+/g, ' ').trim();
+// Volets de ville du journal : « villes » = un changement commun à toutes les villes.
+const JOURNAL_VILLES = ['quebec', 'montreal', 'levis', 'laval', 'longueuil', 'villes'];
 const JOURNAL_PREMIERES = 20;   // même valeur que dans commun/dq.js : la page n'en montre pas plus
 
 function prerendus(valeurs) {
@@ -342,6 +344,9 @@ function prerendus(valeurs) {
   try { if (existsSync('data/journal.json')) journal = JSON.parse(readFileSync('data/journal.json', 'utf8')); }
   catch (e) { console.warn(`⚠ data/journal.json illisible (${e.message.slice(0, 70)}) : /sources part sans sa liste écrite`); }
   if (!Array.isArray(journal)) journal = [];
+  // Les mises à jour des villes vont sur la page Sources de chaque ville (Martin, 12 nov. 2026) :
+  // /sources ne garde que l'Assemblée, le compte et le site.
+  journal = journal.filter((e) => !JOURNAL_VILLES.includes(e?.volet));
   const journalTrie = [...journal].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
   return {
     apercuBills: bloc('apercuBills', 'Projets de loi récemment actifs', bills.slice(0, 4).map(projet),
@@ -786,3 +791,7 @@ construirePagesAnciensMinistres();
 // Les chefs de l'opposition qui siègent (/deputes/charles-milliard) : scripts/build-chefs-opposition.js.
 const { construirePagesChefs } = await import('./build-chefs-opposition.js');
 construirePagesChefs();
+
+// Le journal propre à chaque ville, sur sa page Sources (scripts/journal-villes.js, 12 nov. 2026).
+const { journalDesVilles } = await import('./journal-villes.js');
+journalDesVilles();
