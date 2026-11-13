@@ -103,16 +103,101 @@ function resumePour(d) {
 
 // Le résumé n'est affiché que s'il existe pour ce document précis, toujours identifié
 // comme généré par une IA, et toujours accompagné du lien vers le PDF officiel.
+// Lévis est en français seulement : tr() garde le texte français, lib() le libellé tel quel.
+const tr = (fr) => fr;
+const lib = (t) => t;
+
+// Montants sans cents (rétroaction d'un lecteur, 13 nov. 2026) : « 828 241,70 $ » devient « 828 242 $ ».
+// Mélanger des montants à virgule et des montants ronds empêche de saisir l'ordre de grandeur d'un
+// coup d'oeil. Seuls les cents sont arrondis : « 1,5 M$ » reste tel quel.
+export function sansCents(t) {
+  if (t == null) return t;
+  return String(t)
+    // K$ et M$ : « 2 803,0 K$ » → « 2 803 K$ » ; une décimale de K$ s'arrondit ; « 1,5 M$ » reste.
+    .replace(/(\d),0(?=[   ]?[KkMG]\$)/g, (m, c) => c)
+    .replace(/(\d{1,3}(?:[   ]\d{3})+|\d+),(\d)(?=[   ]?[Kk]\$)/g, (m, ent, dec) =>
+      Math.round(Number(ent.replace(/[   ]/g, '')) + Number('0.' + dec)).toLocaleString('fr-CA'))
+    .replace(/(\d{1,3}(?:[   ]\d{3})+|\d+),(\d{1,2})(?=[   ]?\$)/g, (m, ent, dec) =>
+      Math.round(Number(ent.replace(/[   ]/g, '')) + Number('0.' + dec)).toLocaleString('fr-CA'))
+    .replace(/\$[  ]?(\d{1,3}(?:,\d{3})+|\d+)\.(\d{1,2})\b/g, (m, ent, dec) =>
+      '$' + Math.round(Number(ent.replace(/,/g, '')) + Number('0.' + dec)).toLocaleString('en-CA'));
+}
+
+// CONTEXTE D'UNE DÉCISION (rétroaction d'un lecteur, 13 nov. 2026) : « on ne comprend pas tout de suite
+// quel est le périmètre concerné ni où en est chaque décision dans le processus ». Trois lignes, tirées
+// des faits seulement : la portée (l'instance), la durée (dates écrites dans l'objet), le parcours du
+// dossier (les autres décisions qui portent le même numéro de dossier, d'une instance à l'autre).
+const MOIS_FR = { janvier: 0, février: 1, fevrier: 1, mars: 2, avril: 3, mai: 4, juin: 5, juillet: 6, août: 7, aout: 7, septembre: 8, octobre: 9, novembre: 10, décembre: 11, decembre: 11 };
+function porteeDe(instance) {
+  if (!instance) return null;
+  if (instance === 'Conseil de la Ville') return tr('Toute la Ville de Lévis (conseil de la ville)', 'The whole City of Lévis (city council)');
+  if (instance === 'Comité exécutif') return tr('Ville de Lévis, décision du comité exécutif', 'City of Lévis, executive committee decision');
+  const a = instance.match(/^Conseil d'arrondissement (de |du |des |d')(.+)$/);
+  if (a) return tr(`L'arrondissement ${a[1]}${a[2]} seulement`, `The ${a[2]} borough only`);
+  return null;
+}
+function dureeDe(objet) {
+  if (!objet) return null;
+  // Une décision qui annule ne dure pas : la période écrite est celle de ce qui est annulé.
+  if (/^(Abroger|Annuler|Résilier|Mettre fin|Abrogation|Annulation|Résiliation)/i.test(objet.trim())) return null;
+  const m = objet.match(/du (1er|\d{1,2})(?:er)? (\p{L}+) (\d{4}) au (1er|\d{1,2})(?:er)? (\p{L}+) (\d{4})/iu);
+  if (m && MOIS_FR[m[2].toLowerCase()] != null && MOIS_FR[m[5].toLowerCase()] != null) {
+    const d1 = new Date(+m[3], MOIS_FR[m[2].toLowerCase()], m[1] === '1er' ? 1 : +m[1]);
+    const d2 = new Date(+m[6], MOIS_FR[m[5].toLowerCase()], m[4] === '1er' ? 1 : +m[4]);
+    const mois = Math.round((d2 - d1) / (30.44 * 864e5));
+    if (mois > 0 && mois < 600) {
+      const txt = mois % 12 === 0 ? (mois === 12 ? tr('1 an', '1 year') : tr(`${mois / 12} ans`, `${mois / 12} years`)) : tr(`${mois} mois`, `${mois} months`);
+      const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      return `${txt} (${dateFr(iso(d1))} → ${dateFr(iso(d2))})`;
+    }
+  }
+  const p = objet.match(/p[ée]riode (?:additionnelle )?d(?:'|e )(un|une|deux|trois|quatre|cinq|six|dix|\d+) (ans?|années?|mois)/i);
+  if (p) {
+    const n = { un: 1, une: 1, deux: 2, trois: 3, quatre: 4, cinq: 5, six: 6, dix: 10 }[p[1].toLowerCase()] ?? +p[1];
+    const an = /^an/i.test(p[2]);
+    return an ? tr(`${n} an${n > 1 ? 's' : ''}`, `${n} year${n > 1 ? 's' : ''}`) : tr(`${n} mois`, `${n} month${n > 1 ? 's' : ''}`);
+  }
+  return null;
+}
+let parDossier = null;
+function parcoursDe(d) {
+  if (!d.dossier || !etat.decisions?.decisions) return null;
+  if (!parDossier) {
+    parDossier = new Map();
+    for (const x of etat.decisions.decisions) if (x.dossier) (parDossier.get(x.dossier) ?? parDossier.set(x.dossier, []).get(x.dossier)).push(x);
+  }
+  const l = (parDossier.get(d.dossier) ?? []).filter((x) => x.type !== 'Procès-verbal' && x.type !== 'Ordre du jour');
+  if (l.length < 2) return null;
+  return l.slice().sort((a, b) => (a.date ?? '').localeCompare(b.date ?? '')).map((x) => {
+    const double = l.some((y) => y !== x && y.date === x.date && y.instance === x.instance);
+    const etiquette = `${dateFr(x.date)}, ${echapper(lib(x.instance ?? ''))}${double && x.numero ? ` (${echapper(x.numero)})` : ''}`;
+    if (x === d) return `<strong>${etiquette} ${tr('(cette décision)', '(this decision)')}</strong>`;
+    const cle = x.numero || x.id;
+    return `<a href="decisions-de-la-ville-de-levis?q=${encodeURIComponent(cle)}">${etiquette}</a>`;
+  }).join(' → ');
+}
+function blocContexte(d) {
+  if (d.type === 'Procès-verbal' || d.type === 'Ordre du jour') return '';
+  const lignes = [];
+  const portee = porteeDe(d.instance);
+  if (portee) lignes.push(`<li><strong>${tr('Portée', 'Scope')}&nbsp;:</strong> ${echapper(portee)}</li>`);
+  const duree = dureeDe(d.objet);
+  if (duree) lignes.push(`<li><strong>${tr('Durée', 'Term')}&nbsp;:</strong> ${echapper(duree)}</li>`);
+  const parcours = parcoursDe(d);
+  if (parcours) lignes.push(`<li><strong>${tr('Parcours du dossier', 'Path of this file')}&nbsp;:</strong> ${parcours}</li>`);
+  return lignes.length ? `<ul class="contexte-decision">${lignes.join('')}</ul>` : '';
+}
+
 function blocResume(trouve) {
   if (!trouve) return '';
   const { r, indirect } = trouve;
   return `<div class="resume">
     <div class="resume-entete">
       <span>Résumé généré par IA${indirect && r.numero ? ` — sommaire ${echapper(r.numero)}` : ''}</span>
-      ${r.montantPrincipal ? `<span class="puce montant">${echapper(r.montantPrincipal)}</span>` : ''}
+      ${r.montantPrincipal ? `<span class="puce montant">${echapper(sansCents(r.montantPrincipal))}</span>` : ''}
       ${r.sansContenuSubstantiel ? '<span class="puce procedural">document de procédure</span>' : ''}
     </div>
-    <ul>${r.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul>
+    <ul>${r.puces.map((p) => `<li>${echapper(sansCents(p))}</li>`).join('')}</ul>
   </div>`;
 }
 
@@ -206,10 +291,10 @@ function carteDecision(d, ouverte = false) {
       ${d.refus === 'refus' ? '<span class="resultat r-rejetee">Demande refusée</span>' : d.refus === 'refus-partiel' ? '<span class="resultat r-rejetee">Refusée en partie</span>' : ''}
       ${d.voteEnregistre ? '<span class="puce genre-vote">vote enregistré</span>' : ''}
     </div>
-    <p class="objet">${echapper(d.objet ?? '(sans objet)')}</p>`;
+    <p class="objet">${echapper(sansCents(d.objet) ?? '(sans objet)')}</p>`;
   // Lévis : le sommaire décisionnel (« Document d'aide à la décision FIN-2026-035 ») suit la
   // décision du comité exécutif au conseil de la Ville. Les votes nominaux sont sur la page Votes.
-  const corps = `${blocResume(resumePour(d))}
+  const corps = `${blocContexte(d)}${blocResume(resumePour(d))}
     ${!resumePour(d) && d.dispositif?.length ? blocDispositif(d.dispositif) : ''}
     ${d.annotation ? `<p class="compte" style="margin:0 0 8px">Résolution ${echapper(d.annotation)}.</p>` : ''}
     ${d.sommaires?.length ? `<p class="compte" style="margin:0 0 8px">Sommaire décisionnel ${d.sommaires.map(echapper).join(', ')}</p>` : ''}
@@ -865,8 +950,8 @@ function ligneEvenement(e) {
       ${d.instance ? `<span class="puce">${echapper(d.instance)}</span>` : ''}
       ${e.nouveau ? '<span class="puce neuf">nouveau</span>' : ''}
     </div>
-    <p class="objet">${echapper(d.objet ?? '(sans objet)')}</p>`;
-  const corps = `${blocResume(resumePour(d))}
+    <p class="objet">${echapper(sansCents(d.objet) ?? '(sans objet)')}</p>`;
+  const corps = `${blocContexte(d)}${blocResume(resumePour(d))}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}`;
   return carteRepliable(entete, corps, e.ouverte);
 }
