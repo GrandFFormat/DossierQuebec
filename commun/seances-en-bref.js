@@ -48,6 +48,24 @@ function souligner(phrase, mots, themes = []) {
   return html;
 }
 
+// Les votes nominaux de la séance, juste au-dessus du lien du procès-verbal, comme les cartes de
+// votes de DQ : le décompte et une barre pour / contre (Martin, 13 nov. 2026). Deux au plus, le reste
+// en compte ; la séance sans vote nominal le dit.
+function blocVotes(s, page, petite) {
+  const votes = s.votes ?? [];
+  if (!votes.length) return `<p class="eb-votes-aucun">${tr('Aucun vote nominal à cette séance.', 'No recorded vote at this meeting.')}</p>`;
+  const lignes = votes.slice(0, petite ? 1 : 2).map((v) => {
+    const total = v.pour + v.contre || 1;
+    return `<a class="eb-vote" href="${page}?q=${encodeURIComponent(v.numero)}${suffixe}">
+      <span class="eb-vote-titre">${echapper(couper(adoucir(v.titre ?? v.numero), 70))}</span>
+      <span class="eb-vote-compte"><b class="p">${v.pour}</b> ${tr('pour', 'for')} · <b class="c">${v.contre}</b> ${tr('contre', 'against')}</span>
+      <span class="eb-vote-barre"><i class="p" style="width:${(v.pour / total * 100).toFixed(1)}%"></i><i class="c" style="width:${(v.contre / total * 100).toFixed(1)}%"></i></span>
+    </a>`;
+  }).join('');
+  const reste = votes.length - (petite ? 1 : 2);
+  return `<div class="eb-votes"><span class="eb-votes-titre">${tr(`Vote${votes.length > 1 ? 's' : ''} nominal${votes.length > 1 ? 'aux' : ''} (${votes.length})`, `Recorded vote${votes.length > 1 ? 's' : ''} (${votes.length})`)}</span>${lignes}${reste > 0 ? `<a class="eb-votes-plus" href="${page}?instance=${encodeURIComponent(s.instance)}&vote=1${suffixe}">${tr(`et ${reste} autre${reste > 1 ? 's' : ''}`, `and ${reste} more`)} →</a>` : ''}</div>`;
+}
+
 function rythme(i) {
   if (/comité exécutif/i.test(i)) return tr('semaine', 'week');
   if (/^Conseil de la ville$/.test(i)) return tr('2 semaines', '2 weeks');
@@ -86,6 +104,7 @@ function carte(s, page, petite) {
     <span class="eb-date">${tr('Séance du', 'Meeting of')} ${dateLongue(s.date)} · ${compte}</span></header>
     ${phrase ? `<div class="eb-phrase">${souligner(phrase, EN ? s.motsClesEn : s.motsCles, s.motsThemes)}</div>` : ''}
     ${points ? `<ul class="eb-points">${points}</ul>` : ''}
+    ${odj ? '' : blocVotes(s, page, petite)}
     <div class="eb-liens">${liens}</div>
   </article>`;
 }
