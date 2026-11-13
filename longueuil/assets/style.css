@@ -711,7 +711,7 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 .eb-note strong { background: var(--vedette); color: #16191D; padding: 1px 5px; border-radius: 3px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .eb-liens { margin-top: auto; display: flex; flex-direction: column; gap: 4px; } .eb-liens .eb-tout { margin-top: 0; } .eb-officiel { font-size: 13px; font-weight: 600; color: var(--encre); text-decoration: underline; text-decoration-color: var(--vedette); text-underline-offset: 3px; }
 .eb-sorte { align-self: flex-start; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 2px 7px; border-radius: 3px; }
-.eb-sorte-odj { background: var(--vedette); color: #16191D; }
+.eb-sorte-odj { background: none; color: inherit; padding: 0 0 2px; border-radius: 0; border-bottom: 2px solid var(--vedette); }
 .eb-sorte-pv { background: var(--accent-fond); color: var(--accent-encre); border: 1px solid var(--accent); }
 :root[data-theme="sombre"] .eb-sorte-pv { color: var(--accent); }
 .eb-carte-odj { border-top: 3px solid var(--vedette); }
