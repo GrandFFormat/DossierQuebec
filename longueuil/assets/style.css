@@ -669,3 +669,7 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 /* Bouton « Réactiver pour 150 $ » dans l'avis d'interruption (11 nov. 2026). */
 .bouton-reactiver { display: inline-block; margin-top: 8px; padding: 5px 12px; border: 2px solid currentColor; font-weight: 700; text-decoration: none; }
 .bouton-reactiver:hover { opacity: .75; }
+
+/* « Votre publicité ici » : remplace le bloc du commanditaire, même hauteur (12 nov. 2026). */
+.commandite.pub-ici { min-height: 290px; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 8px; border-style: dashed; }
+.pub-ici .pub-ici-titre { font-size: 28px; font-weight: 700; }

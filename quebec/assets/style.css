@@ -695,3 +695,7 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 .bloc-contrat { border: 1px solid var(--ligne); border-radius: var(--rayon); padding: 11px 16px; margin: 0 0 12px; }
 .bloc-contrat ul { margin: 0; padding-left: 19px; }
 .bloc-contrat li { margin: 2px 0; }
+
+/* « Votre publicité ici » : remplace le bloc du commanditaire, même hauteur (12 nov. 2026). */
+.commandite.pub-ici { min-height: 290px; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 8px; border-style: dashed; }
+.pub-ici .pub-ici-titre { font-size: 28px; font-weight: 700; }
