@@ -132,6 +132,9 @@
     Les encadrés verts sont un résumé généré par IA du sommaire — le PDF officiel reste à un clic. Voir aussi les <a href="/montreal/decisions-de-la-ville-de-montreal">décisions de la Ville de Montréal</a> et les <a href="/levis/decisions-de-la-ville-de-levis">décisions de la Ville de Lévis</a>.
   </p>
 
+  <!-- En bref : la dernière séance de chaque conseil (commun/seances-en-bref.js, 13 nov. 2026). -->
+  <section id="en-bref" class="en-bref" hidden></section>
+
   <div class="barre-outils">
     <input data-en-placeholder="Search decision subjects…" type="search" id="rech-decisions" placeholder="Rechercher dans l'objet des décisions…">
     <select id="filtre-type" data-rempli="1"><option data-en="All types" value="">Tous les types</option><!--PR:filtre-type--><option value="Résolutions">Résolutions (3770)</option><option value="Sommaires et mémoires">Sommaires et mémoires (1843)</option><option value="Procès-verbaux">Procès-verbaux (202)</option><option value="Tableaux des décisions">Tableaux des décisions (98)</option><!--/PR:filtre-type--></select>
@@ -2778,6 +2781,7 @@ https://dossierquebec.ca/quebec/decisions-de-la-ville-de-quebec?q=CAAM-2026-0583
 
 <script type="module" src="assets/app.js"></script>
 <script type="module" src="/commun/entete-volet.js"></script>
+<script type="module" src="/commun/seances-en-bref.js"></script>
 <script type="module" src="/commun/abonnes.js"></script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
      Même projet Vercel : les pages vues de /quebec/ s'ajoutent au même tableau de

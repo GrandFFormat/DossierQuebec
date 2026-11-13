@@ -89,6 +89,12 @@ const ETAPES = [
           argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scrapers/traductions.js', '--plafond=150'],
           secondaire: true,
         },
+        // En bref : une phrase par séance, en tête de la page Décisions (13 nov. 2026, Haiku, ~1 ¢ la séance).
+        {
+          nom: 'En bref, séance par séance',
+          argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), '../scripts/resumes-seances.js', 'quebec'],
+          secondaire: true,
+        },
         {
           nom: 'Lexique anglais',
           argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scrapers/lexique-en.js'],

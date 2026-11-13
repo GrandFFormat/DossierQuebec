@@ -140,6 +140,9 @@ const ETAPES = [
         },
       ]
     : []),
+  // En bref : une phrase par séance, en tête de la page Décisions (13 nov. 2026, Haiku, ~1 ¢ la séance).
+  // Après les résumés et les traductions, qu'il relit.
+  ...(resumes ? [{ nom: 'En bref, séance par séance', argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), '../scripts/resumes-seances.js', 'montreal'], secondaire: true }] : []),
   // Les décisions récentes écrites dans decisions-de-la-ville-de-montreal.html, pour Google (27 sept. 2026) : après les
   // résumés du jour, sinon la page porterait ceux de la veille.
   { nom: 'Décisions récentes dans la page (Google)', argv: ['../scripts/prerendu-villes.js', 'montreal'], secondaire: true },
