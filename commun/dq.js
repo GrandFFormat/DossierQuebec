@@ -5868,7 +5868,7 @@ function renderJournal(){
   const fmtMois = new Intl.DateTimeFormat(loc, { month: 'long', year: 'numeric' });
   const fmtJour = new Intl.DateTimeFormat(loc, { day: 'numeric', month: 'long' });
   // Les mises à jour des villes vont sur la page Sources de chaque ville (12 nov. 2026).
-  const entrees = journal.filter((e) => e && /^\d{4}-\d{2}-\d{2}$/.test(e.date) && e.fr && !['quebec', 'montreal', 'levis', 'laval', 'longueuil', 'villes'].includes(e.volet))
+  const entrees = journal.filter((e) => e && /^\d{4}-\d{2}-\d{2}$/.test(e.date) && e.fr && !['quebec', 'montreal', 'levis', 'laval', 'longueuil'].includes(e.volet))
     .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
   const visibles = journalTout ? entrees : entrees.slice(0, JOURNAL_PREMIERES);
   let html = '', mois = '';
