@@ -88,3 +88,40 @@
   var choix = lire();
   if (choix !== 'oui' && choix !== 'non') auChargement(banniere);
 })();
+
+// LIENS EXTERNES DANS UN NOUVEL ONGLET, VOLETS DE VILLE SEULEMENT (Martin, 12 nov. 2026) : sur
+// /quebec/, /montreal/, /levis/, /laval/ et /longueuil/, tout lien qui fait sortir du site s'ouvre
+// dans un nouvel onglet. Le reste de DossierQuébec garde son comportement. Placé ici parce que ce
+// fichier est chargé sur toutes les pages publiques. Couvre aussi les liens ajoutés après coup par
+// les scripts des pages (recherche par adresse, fiches qu'on ouvre). Les liens internes, mailto: et
+// tel: ne sont pas touchés ; un lien qui a déjà une cible garde la sienne.
+(function () {
+  if (!/^\/(quebec|montreal|levis|laval|longueuil)(\/|$)/.test(location.pathname)) return;
+  function marquer(racine) {
+    if (!racine || !racine.querySelectorAll) return;
+    var liens = racine.matches && racine.matches('a[href]') ? [racine] : racine.querySelectorAll('a[href]');
+    for (var i = 0; i < liens.length; i++) {
+      var a = liens[i];
+      if (a.hasAttribute('target')) continue;
+      var url;
+      try { url = new URL(a.getAttribute('href'), location.href); } catch (e) { continue; }
+      if ((url.protocol !== 'http:' && url.protocol !== 'https:') || url.hostname === location.hostname) continue;
+      a.setAttribute('target', '_blank');
+      var rel = (a.getAttribute('rel') || '').split(/\s+/).filter(Boolean);
+      if (rel.indexOf('noopener') < 0) rel.push('noopener');
+      a.setAttribute('rel', rel.join(' '));
+    }
+  }
+  function demarrer() {
+    marquer(document.body);
+    if (!window.MutationObserver) return;
+    new MutationObserver(function (changements) {
+      for (var i = 0; i < changements.length; i++) {
+        var ajouts = changements[i].addedNodes;
+        for (var j = 0; j < ajouts.length; j++) if (ajouts[j].nodeType === 1) marquer(ajouts[j]);
+      }
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', demarrer);
+  else demarrer();
+})();

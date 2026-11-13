@@ -96,10 +96,10 @@
     <nav>
       <a data-en="Home" href="./" aria-current="page">Accueil</a>
       <a data-en="Decisions" href="decisions-de-la-ville-de-quebec">Décisions</a>
-      <a data-en="Recorded votes" href="votes-nominatifs-du-conseil-de-quebec">Votes nominatifs</a>
       <a data-en="City Council" href="conseil-municipal-de-quebec">Conseil municipal</a>
+      <a data-en="Contracts" href="contrats-de-la-ville-de-quebec">Contrats</a>
+      <a data-en="Budget and taxes" href="budget-et-taxes-de-quebec">Budget</a>
       <a data-en="Glossary" href="lexique-municipal-de-quebec">Lexique</a>
-      <a data-en="Ville de Québec <span aria-hidden=&quot;true&quot;>↗</span><span class=&quot;sr-only&quot;> (official site, new tab)</span>" href="https://www.ville.quebec.qc.ca/" class="externe" target="_blank" rel="noopener">Ville de Québec <span aria-hidden="true">↗</span><span class="sr-only"> (site officiel, nouvel onglet)</span></a>
       <div class="outils">
         <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
           <button data-en-aria-label="Smaller text" type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
@@ -140,7 +140,7 @@
   <!-- Bloc d’après-vente (10 nov. 2026) : un mois à la fois, /commun/apres-vente.js, file dans data/file-commandite.json. -->
   <div data-apres-vente data-max-mois="1" data-prix-banniere="300" data-file="data/file-commandite.json"></div>
 
-  <div class="chiffres" id="chiffres"><!--PR:chiffres--><a class="chiffre" href="decisions-de-la-ville-de-quebec"><div class="n">5 913</div><div class="quoi">décisions publiées en 2026</div></a><a class="chiffre" href="votes-nominatifs-du-conseil-de-quebec"><div class="n">282</div><div class="quoi">votes nominatifs consignés cette année</div></a><a class="chiffre" href="decisions-de-la-ville-de-quebec"><div class="n">4 724</div><div class="quoi">décisions résumées en langage clair</div></a><a class="chiffre" href="conseil-municipal-de-quebec"><div class="n">22</div><div class="quoi">membres du conseil municipal</div></a><!--/PR:chiffres--></div>
+  <div class="chiffres" id="chiffres"><!--PR:chiffres--><a class="chiffre" href="decisions-de-la-ville-de-quebec"><div class="n">5 913</div><div class="quoi">décisions publiées en 2026</div></a><a class="chiffre" href="decisions-de-la-ville-de-quebec?vote=1"><div class="n">282</div><div class="quoi">votes nominatifs consignés cette année</div></a><a class="chiffre" href="decisions-de-la-ville-de-quebec"><div class="n">4 724</div><div class="quoi">décisions résumées en langage clair</div></a><a class="chiffre" href="conseil-municipal-de-quebec"><div class="n">22</div><div class="quoi">membres du conseil municipal</div></a><!--/PR:chiffres--></div>
 
   <h2 data-en="What's new" class="page" id="titre-fil"><!--PR:titre-fil-->Ce qui a changé<!--/PR:titre-fil--></h2>
   <div id="fil"><!--PR:fil--><details class="carte pliante" open name="fiches"><summary><div class="meta">
@@ -237,7 +237,7 @@ https://dossierquebec.ca/quebec/decisions-de-la-ville-de-quebec?q=AP2026-375" on
   <button data-en="Show more" class="plus" id="plus-fil"><!--PR:plus-fil-->Voir plus de décisions →<!--/PR:plus-fil--></button>
   <p style="margin-top:14px">
     <a data-en="All decisions →" href="decisions-de-la-ville-de-quebec">Toutes les décisions →</a> &nbsp;·&nbsp;
-    <a data-en="All recorded votes →" href="votes-nominatifs-du-conseil-de-quebec">Tous les votes nominatifs →</a>
+    <a data-en="All recorded votes →" href="decisions-de-la-ville-de-quebec?vote=1">Tous les votes nominatifs →</a>
   </p>
 
   <h2 data-en="Where to start" class="page">Par où commencer</h2>
@@ -248,7 +248,7 @@ https://dossierquebec.ca/quebec/decisions-de-la-ville-de-quebec?q=AP2026-375" on
       <p>Résolutions, sommaires décisionnels, procès-verbaux et tableaux de décisions de l'année en cours, avec recherche et filtres.</p>
     </a>
     <a data-en="<h3>Recorded votes</h3>
-      <p>When someone calls for a vote, we know who voted for and who voted against. The count, person by person.</p>" class="lien-section" href="votes-nominatifs-du-conseil-de-quebec">
+      <p>When someone calls for a vote, we know who voted for and who voted against. The count, person by person.</p>" class="lien-section" href="decisions-de-la-ville-de-quebec?vote=1">
       <h3>Votes nominatifs</h3>
       <p>Quand quelqu'un demande le vote, on sait qui a voté pour et qui a voté contre. Le décompte, par personne.</p>
     </a>
@@ -272,7 +272,7 @@ https://dossierquebec.ca/quebec/decisions-de-la-ville-de-quebec?q=AP2026-375" on
   <div class="contenu">
     <p data-en="Independent citizen site. No connection with the City of Québec, no official status. If anything differs, the original PDF document prevails. <a href=&quot;sources&quot;>Sources</a>.">Site citoyen indépendant. Aucun lien avec la Ville de Québec, aucun caractère officiel.
     En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees-de-quebec">Sources</a>.</p>
-    <p class="lien-dq-pied"><a href="/" data-en="DossierQuébec — Québec's National Assembly in plain language">DossierQuébec — l'Assemblée nationale en clair</a> · <a href="/regles" data-en="The rules of the site">Les règles du site</a> · <span data-en="Powered by">Une réalisation de</span> <a class="lien-dafr" href="https://www.dafrsolution.com" data-en-href="https://www.dafrsolution.com/en" target="_blank" rel="noopener">DAFR Solution</a></p>
+    <p class="lien-dq-pied"><a href="/" data-en="DossierQuébec — Québec's National Assembly in plain language">DossierQuébec — l'Assemblée nationale en clair</a> · <a href="/regles" data-en="The rules of the site">Les règles du site</a> · <a href="sources-des-donnees-de-quebec" data-en="Data sources">Sources des données</a> · <a href="https://www.ville.quebec.qc.ca/" target="_blank" rel="noopener" data-en="City of Québec site ↗">Site de la Ville de Québec ↗</a> · <span data-en="Powered by">Une réalisation de</span> <a class="lien-dafr" href="https://www.dafrsolution.com" data-en-href="https://www.dafrsolution.com/en" target="_blank" rel="noopener">DAFR Solution</a></p>
   </div>
 </footer>
 

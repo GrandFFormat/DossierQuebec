@@ -677,9 +677,13 @@ const PAGES_VILLE = [
   { page: 'decisions', parVille: Object.fromEntries(VILLES.map((v) => [v, `decisions-de-la-ville-de-${v}`])), frequence: 'daily', priorite: '0.8', jeu: 'decisions' },
   // Longueuil n'a pas de conseil municipal mais un conseil de ville : son adresse le dit, comme son titre.
   { page: 'conseil', parVille: {"quebec":"conseil-municipal-de-quebec","montreal":"conseil-municipal-de-montreal","levis":"conseil-municipal-de-levis","longueuil":"conseil-de-ville-de-longueuil","laval":"conseil-municipal-de-laval"}, frequence: 'weekly', priorite: '0.6', jeu: 'decisions' },
-  { page: 'votes', parVille: {"quebec":"votes-nominatifs-du-conseil-de-quebec","montreal":"votes-nominatifs-du-conseil-de-montreal","levis":"votes-nominatifs-du-conseil-de-levis","longueuil":"votes-nominatifs-du-conseil-de-longueuil","laval":"votes-nominatifs-du-conseil-de-laval"}, frequence: 'weekly', priorite: '0.6', jeu: 'votes' },
+  // Québec : page Votes fondue dans Décisions (12 nov. 2026), redirigée en 301 (vercel.json).
+  { page: 'votes', sauf: ['quebec'], parVille: {"quebec":"votes-nominatifs-du-conseil-de-quebec","montreal":"votes-nominatifs-du-conseil-de-montreal","levis":"votes-nominatifs-du-conseil-de-levis","longueuil":"votes-nominatifs-du-conseil-de-longueuil","laval":"votes-nominatifs-du-conseil-de-laval"}, frequence: 'weekly', priorite: '0.6', jeu: 'votes' },
   { page: 'lexique', parVille: {"quebec":"lexique-municipal-de-quebec","montreal":"lexique-municipal-de-montreal","levis":"lexique-municipal-de-levis","longueuil":"lexique-municipal-de-longueuil","laval":"lexique-municipal-de-laval"}, frequence: 'monthly', priorite: '0.4' },
   { page: 'sources', parVille: {"quebec":"sources-des-donnees-de-quebec","montreal":"sources-des-donnees-de-montreal","levis":"sources-des-donnees-de-levis","longueuil":"sources-des-donnees-de-longueuil","laval":"sources-des-donnees-de-laval"}, frequence: 'monthly', priorite: '0.3' },
+  // Contrats octroyés (SEAO), à l'essai sur Québec seulement (12 nov. 2026).
+  { page: 'contrats', parVille: { quebec: 'contrats-de-la-ville-de-quebec' }, seulement: ['quebec'], frequence: 'weekly', priorite: '0.6' },
+  { page: 'budget', parVille: { quebec: 'budget-et-taxes-de-quebec' }, seulement: ['quebec'], frequence: 'monthly', priorite: '0.6' },
 ];
 function derniereDate(ville, jeu) {
   const chemin = `${ville}/data/${jeu}.json`;
@@ -706,6 +710,8 @@ const sitemap = (function preparerSitemap(){
   });
   for (const v of VILLES) {
     for (const p of PAGES_VILLE) {
+      if (p.seulement && !p.seulement.includes(v)) continue;
+      if (p.sauf?.includes(v)) continue;
       const nom = p.parVille?.[v] ?? p.page;
       const fichier = `${v}/${nom}.html`;
       if (!existsSync(fichier)) { console.warn(`⚠ sitemap : ${fichier} introuvable — hors du sitemap`); continue; }

@@ -114,12 +114,12 @@
     },
     {
       "source": "/quebec/votes",
-      "destination": "/quebec/votes-nominatifs-du-conseil-de-quebec",
+      "destination": "/quebec/decisions-de-la-ville-de-quebec?vote=1",
       "permanent": true
     },
     {
       "source": "/quebec/votes.html",
-      "destination": "/quebec/votes-nominatifs-du-conseil-de-quebec",
+      "destination": "/quebec/decisions-de-la-ville-de-quebec?vote=1",
       "permanent": true
     },
     {
@@ -154,12 +154,12 @@
     },
     {
       "source": "/quebec/votes-nominatifs",
-      "destination": "/quebec/votes-nominatifs-du-conseil-de-quebec",
+      "destination": "/quebec/decisions-de-la-ville-de-quebec?vote=1",
       "permanent": true
     },
     {
       "source": "/quebec/votes-nominatifs.html",
-      "destination": "/quebec/votes-nominatifs-du-conseil-de-quebec",
+      "destination": "/quebec/decisions-de-la-ville-de-quebec?vote=1",
       "permanent": true
     },
     {
@@ -555,6 +555,16 @@
     {
       "source": "/mes-dossiers",
       "destination": "/mon-dossier#villes",
+      "permanent": true
+    },
+    {
+      "source": "/quebec/votes-nominatifs-du-conseil-de-quebec",
+      "destination": "/quebec/decisions-de-la-ville-de-quebec?vote=1",
+      "permanent": true
+    },
+    {
+      "source": "/quebec/votes-nominatifs-du-conseil-de-quebec.html",
+      "destination": "/quebec/decisions-de-la-ville-de-quebec?vote=1",
       "permanent": true
     }
   ]
