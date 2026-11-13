@@ -184,9 +184,13 @@
   const millions = (n) => (n >= 1e6 ? nf1.format(n / 1e6) + ' M$' : argent(n));
 
   const d = await (await fetch('data/contrats-page.json')).json();
+  // En anglais : le motif officiel du SEAO (en français) devient une phrase courte. Les articles
+  // viennent du Règlement sur la gestion contractuelle (12 nov. 2026).
+  const MOTIFS_EN = {"6":"Cloud supply or service contract","8":"Professional services contract with the designer of the plans and specifications, to amend them","9":"Contract over $25,000 but below the public tender threshold, under special rules in the contract management by-law","3(1)":"Supply contract with a non-profit, below the CETA threshold","3(2)":"Supply contract in the cultural field","33(1)":"Emergency","33(2)":"Only one company can provide it (warranty, ownership or exclusive right, or artistic, heritage or museum value)","33(4)":"An open procedure can be shown not to serve the public interest","4(1)":"Construction or service contract awarded to the owner of the pipes or facilities","4(2)":"Construction or service contract on a railway right-of-way, with its owner or operator","5(1)a)":"Service contract not covered by CETA, with a non-profit","5(1)b)":"Service contract covered by CETA with a non-profit, below the CETA threshold","5(3)":"Service contract in the cultural field","5(4)":"Service contract for media space","5(5)":"Bulk trucking service contract","5(6)":"Financial services contract","5(7)":"Professional services needed for court proceedings"};
+  const motifEn = (m) => { if (!EN || !m) return m; const a = /^Article\s*(\d+)(?:\s*-\s*(?:Paragraphe|Alinéa)\s*([\d()a-z]+))?/.exec(m); const cle = a && (a[2] || a[1]); return cle && MOTIFS_EN[cle] ? `Section ${a[1]}: ${MOTIFS_EN[cle]}` : m; };
   const estGre = (m) => /gré à gré/i.test(d.modes[m]);
   const C = d.c.map(([date, montant, mode, soum, motif, cat, fournisseur, titre, item, avis]) => ({
-    date, montant, soum, avis, motif: d.motifs[motif], cat: d.categories[cat], fournisseur, titre, item,
+    date, montant, soum, avis, motif: motifEn(d.motifs[motif]), cat: d.categories[cat], fournisseur, titre, item,
     gre: estGre(mode), seule: !estGre(mode) && soum === 1,
   }));
 
