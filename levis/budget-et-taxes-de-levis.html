@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<!-- Consentement (Loi 25) : par défaut, Google Analytics n'a PAS le droit de déposer de témoins.
+     La bannière (commun/consentement.js) passe analytics_storage à « granted » après « Accepter ». -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: (function(){ try { return localStorage.getItem('dq:temoins') === 'oui' ? 'granted' : 'denied'; } catch (e) { return 'denied'; } })(), ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-87R1S6SR9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-87R1S6SR9Y', { content_group: 'Lévis' });
+</script>
+<script src="/commun/consentement.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Budget et taxes de la Ville de Lévis | DossierQuébec</title>
+<meta name="description" content="Estimez votre compte de taxes à Lévis et voyez où la Ville dépense son argent, d’après le rapport financier publié par le ministère des Affaires municipales.">
+<link rel="canonical" href="https://dossierquebec.ca/levis/budget-et-taxes-de-levis">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DossierQuébec">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:title" content="Budget et taxes de la Ville de Lévis | DossierQuébec">
+<meta property="og:description" content="Estimez votre compte de taxes à Lévis et voyez où la Ville dépense son argent, d’après le rapport financier publié par le ministère des Affaires municipales.">
+<meta property="og:url" content="https://dossierquebec.ca/levis/budget-et-taxes-de-levis">
+<meta property="og:image" content="https://dossierquebec.ca/levis/og-levis.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Budget et taxes de la Ville de Lévis | DossierQuébec">
+<meta name="twitter:description" content="Estimez votre compte de taxes à Lévis et voyez où la Ville dépense son argent, d’après le rapport financier publié par le ministère des Affaires municipales.">
+<meta name="twitter:image" content="https://dossierquebec.ca/levis/og-levis.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvq:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+    } catch (e) {}
+  })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "DossierQuébec",
+      "item": "https://dossierquebec.ca/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Ville de Lévis",
+      "item": "https://dossierquebec.ca/levis/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Budget et taxes",
+      "item": "https://dossierquebec.ca/levis/budget-et-taxes-de-levis"
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="/commun/abonnes.css">
+</head>
+<body data-page="outil" data-ville="levis">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="./"><p class="logo-titre">Dossier<span class="marque">VilleDeLévis</span></p></a><a class="lien-dq" href="/" title="DossierQuébec — l'Assemblée nationale en clair" aria-label="DossierQuébec — l'Assemblée nationale en clair" data-en-title="DossierQuébec — Quebec's National Assembly in plain language" data-en-aria-label="DossierQuébec — Quebec's National Assembly in plain language"></a>
+      <details class="ab-villes" id="villes"></details>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Lévis, lisibles. Données publiques, reprises telles quelles
+      des procès-verbaux officiels de la Ville.
+    </p>
+    <nav>
+      <a href="./">Accueil</a>
+      <a href="decisions-de-la-ville-de-levis">Décisions</a>
+      <a href="conseil-municipal-de-levis">Conseil municipal</a>
+      <a href="pres-de-chez-moi-a-levis">Près de chez moi</a>
+      <a href="contrats-de-la-ville-de-levis">Contrats</a>
+      <a href="budget-et-taxes-de-levis" aria-current="page">Budget</a>
+      <a href="lexique-municipal-de-levis">Lexique</a>
+      <div class="outils">
+        <div class="taille-texte" role="group" aria-label="Taille du texte">
+          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+          <span id="texte-pct" aria-live="polite">100%</span>
+          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+        </div>
+        <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+                title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+      </div>
+    </nav>
+  </div>
+</header>
+<main class="contenu prose">
+  <h1 data-en="Lévis budget and taxes" class="page">Budget et taxes de la Ville de Lévis</h1>
+  <p data-en="Estimate your property tax bill, then see where the City spends its money. The figures come from the financial report that every municipality files with the Ministry of Municipal Affairs. The rates were checked against the City's official page." class="chapeau">
+    Estimez votre compte de taxes, puis voyez où la Ville dépense son argent. Les chiffres viennent du
+    rapport financier que chaque municipalité transmet au ministère des Affaires municipales. Les taux ont
+    été vérifiés avec la page officielle de la Ville.
+  </p>
+
+  <h2 data-en="Your tax bill" id="titre-calcul">Votre compte de taxes</h2>
+  <div class="calcul">
+    <label for="valeur" data-en="Assessed value of your home (1 to 5 dwellings)">Valeur de votre maison au rôle d’évaluation (1 à 5 logements)</label>
+    <div class="ligne-valeur">
+      <input id="valeur" type="number" min="0" step="1000" value="400000" inputmode="numeric">
+      <span>$</span>
+    </div>
+    <label for="logements" data-en="Number of dwellings in the building" style="margin-top:12px">Nombre de logements dans l’immeuble</label>
+    <select id="logements"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <p class="compte" data-en="The assessed value is on your tax bill or in the City's assessment roll. The fixed fees for water, sewers and waste are charged once per dwelling.">La valeur est sur votre compte de taxes ou au rôle d’évaluation de la Ville. Les tarifs fixes d’eau, d’assainissement et de matières résiduelles sont facturés une fois par logement.</p>
+    <table id="detail-calcul"></table>
+  </div>
+
+  <h2 data-en="Where your money goes" id="titre-repartition">Où va votre argent</h2>
+  <p id="intro-repartition" class="compte"></p>
+  <div id="repartition"></div>
+
+  <h2 data-en="City spending by service" id="titre-depenses">Les dépenses de la Ville, par service</h2>
+  <p id="intro-depenses" class="compte"></p>
+  <div id="depenses"></div>
+
+  <h2 data-en="How to read this page">Comment lire cette page</h2>
+  <ul>
+    <li><strong>Taxe de secteur</strong> : les immeubles des secteurs desservis par l’aqueduc et l’égout paient aussi une taxe de secteur (0,04869 $ par 100 $ d’évaluation en 2026). Elle n’est pas dans le calculateur.</li>
+    <li data-en="<strong>The calculator</strong> covers the general property tax and the fixed fees for water, sewers and waste of a residential building of 1 to 5 dwellings. It does not include school tax, which is billed separately, nor special fees that apply to some properties."><strong>Le calculateur</strong> couvre la taxe foncière générale et les tarifs fixes d’eau, d’égout et de matières résiduelles d’un immeuble résidentiel de 1 à 5 logements. Il n’inclut pas la taxe scolaire, facturée à part, ni les tarifs particuliers qui visent certains immeubles.</li>
+    <li data-en="<strong>Where your money goes</strong> divides your property tax according to the City's actual spending of the last audited year. It is an illustration: taxes pay for only part of the spending, which is also funded by government transfers and other revenue."><strong>Où va votre argent</strong> répartit votre taxe foncière selon les dépenses réelles de la dernière année vérifiée. C’est une illustration : les taxes ne paient qu’une partie des dépenses, financées aussi par des transferts des gouvernements et d’autres revenus.</li>
+    <li data-en="<strong>Spending</strong> is the actual spending of the last audited year, without depreciation, as reported to the Ministry. It always lags one year behind. The current year's budget is on the City's site."><strong>Les dépenses</strong> sont les dépenses réelles de la dernière année vérifiée, sans l’amortissement, telles que déclarées au ministère. Elles ont toujours un an de retard. Le budget de l’année en cours est sur le site de la Ville.</li>
+  </ul>
+
+  <h2 data-en="Sources">Sources</h2>
+  <ul>
+    <li data-en="<strong>Data</strong>: <a href=&quot;https://www.donneesquebec.ca/recherche/dataset/rapport-financier-des-organismes-municipaux-et-autres-documents&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>Rapport financier des organismes municipaux</a>, Ministère des Affaires municipales et de l'Habitation, Données Québec, under a CC BY 4.0 licence."><strong>Données</strong> : <a href="https://www.donneesquebec.ca/recherche/dataset/rapport-financier-des-organismes-municipaux-et-autres-documents" target="_blank" rel="noopener">Rapport financier des organismes municipaux</a>, ministère des Affaires municipales et de l’Habitation, Données Québec, sous licence CC BY 4.0.</li>
+    <li><strong>Taux vérifiés avec</strong> la page <a href="https://www.levis.ca/fr/services/taxes-droits-de-mutation-et-evaluation/taxes-foncieres" target="_blank" rel="noopener">Taxes foncières</a> de la Ville de Lévis (règlement RV3579). En cas d’écart, les documents de la Ville font foi.</li>
+  </ul>
+  <p id="maj" class="compte"></p>
+</main>
+
+<style>
+  .calcul { background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon); padding: 16px 18px; margin: 12px 0 24px; }
+  .calcul label { font-weight: 600; display: block; margin-bottom: 6px; }
+  .ligne-valeur { display: flex; align-items: center; gap: 8px; }
+  #logements { font: inherit; padding: 6px 10px; border: 1px solid var(--ligne-forte); border-radius: var(--rayon); background: var(--fond); color: var(--encre); }
+  .ligne-valeur input { font: inherit; font-size: 1.3rem; width: 100%; max-width: 240px; padding: 6px 10px; border: 1px solid var(--ligne-forte); border-radius: var(--rayon); background: var(--fond); color: var(--encre); }
+  #detail-calcul { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  #detail-calcul td { padding: 6px 4px; border-bottom: 1px solid var(--ligne); }
+  #detail-calcul td.n { text-align: right; white-space: nowrap; }
+  #detail-calcul tr.total td { font-weight: 700; font-size: 1.1rem; border-bottom: none; }
+  .barre-service { margin: 10px 0; }
+  .barre-service .tete { display: flex; justify-content: space-between; gap: 12px; font-size: .95rem; }
+  .barre-service .tete strong { font-weight: 600; }
+  .barre-service .piste { height: 10px; background: var(--fond-2); border-radius: 5px; margin-top: 4px; overflow: hidden; }
+  .barre-service .rempli { height: 100%; background: var(--accent); border-radius: 5px; }
+  .barre-service details { margin-top: 4px; }
+  .notes-sat { margin-top: 5px; font-size: .85rem; color: var(--doux); display: flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; }
+  .note-sat { background: var(--fond-2); border-radius: 999px; padding: 2px 9px; color: var(--encre); }
+  .barre-service summary { cursor: pointer; font-size: .85rem; color: var(--doux); }
+  .barre-service ul { margin: 4px 0 0; padding-left: 18px; font-size: .9rem; }
+</style>
+
+<script type="module">
+  const EN = document.documentElement.lang === 'en';
+  const fr = (f, e) => (EN ? e : f);
+  const loc = EN ? 'en-CA' : 'fr-CA';
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const argent = (n) => new Intl.NumberFormat(loc, { maximumFractionDigits: 0 }).format(Math.round(n)) + ' $';
+  const millions = (n) => new Intl.NumberFormat(loc, { maximumFractionDigits: 1 }).format(n / 1e6) + ' M$';
+  const pct = (a, b) => new Intl.NumberFormat(loc, { maximumFractionDigits: 1 }).format((100 * a) / b) + ' %';
+
+  // Noms courts et anglais des services du rapport financier du MAMH.
+  const NOMS = {
+    'Administration générale': ['Administration générale', 'General administration'],
+    'Sécurité publique': ['Sécurité publique (police, sécurité civile)', 'Public safety (police, civil security)'],
+    'Transport': ['Transport (réseau routier, transport collectif)', 'Transportation (roads, public transit)'],
+    'Hygiène du milieu': ['Eau, égouts et matières résiduelles', 'Water, sewers and waste'],
+    'Santé et bien-être': ['Santé et bien-être', 'Health and welfare'],
+    'Aménagement, urbanisme et développement': ['Urbanisme et développement économique', 'Urban planning and economic development'],
+    'Loisirs et culture': ['Loisirs et culture', 'Recreation and culture'],
+    'Frais de financement': ['Intérêts et frais de la dette', 'Debt interest and fees'],
+  };
+  const nomService = (n) => (NOMS[n] ? NOMS[n][EN ? 1 : 0] : n);
+
+  const d = await (await fetch('data/finances.json')).json();
+  // Satisfaction des citoyens (sondage Léger de la Ville) : facultative, la page vit sans elle.
+  const sat = null; // pas de sondage de satisfaction publié à Lévis
+  const note = (n) => new Intl.NumberFormat(loc, { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(n);
+  const notes = (nom) => (sat?.services?.[nom] ?? []).map((q) => `<span class="note-sat" title="${esc(EN ? q.saisonEn : q.saison)}, n = ${q.n}">${esc(EN ? q.en : q.libelle)} <strong>${note(q.note)}/10</strong></span>`).join('');
+  const t = d.taxes, dep = d.depenses;
+  const tarifs = (t.tarifs.eau || 0) + (t.tarifs.egout || 0) + (t.tarifs.matieres || 0);
+  const services = [...dep.services].sort((a, b) => b.montant - a.montant);
+
+  function calculer() {
+    const valeur = Math.max(0, Number($('#valeur').value) || 0);
+    const n = Number($('#logements').value) || 1;
+    const fonciere = (valeur * t.residentiel) / 100;
+    const total = fonciere + tarifs * n;
+    const fois = n > 1 ? ` × ${n}` : '';
+    $('#detail-calcul').innerHTML = `
+      <tr><td>${fr('Taxe foncière générale', 'General property tax')} (${String(t.residentiel).replace('.', EN ? '.' : ',')} $ ${fr('par 100 $', 'per $100')})</td><td class="n">${argent(fonciere)}</td></tr>
+      <tr><td>${fr('Eau', 'Water')} (${argent(t.tarifs.eau)}${fois})</td><td class="n">${argent(t.tarifs.eau * n)}</td></tr>
+      <tr><td>${fr('Assainissement', 'Wastewater')} (${argent(t.tarifs.egout)}${fois})</td><td class="n">${argent(t.tarifs.egout * n)}</td></tr>
+      <tr><td>${fr('Matières résiduelles (ordures, recyclage, compost)', 'Waste (garbage, recycling, compost)')} (${argent(t.tarifs.matieres)}${fois})</td><td class="n">${argent(t.tarifs.matieres * n)}</td></tr>
+      <tr class="total"><td>${fr(`Total ${t.annee}, par année`, `${t.annee} total, per year`)}</td><td class="n">${argent(total)}</td></tr>`;
+    $('#intro-repartition').textContent = fr(
+      `Votre taxe foncière de ${argent(fonciere)}, répartie comme les dépenses réelles de la Ville en ${dep.annee}. Les tarifs d’eau, d’assainissement et de matières résiduelles (${argent(tarifs * n)}) vont à Eau, égouts et matières résiduelles.`,
+      `Your ${argent(fonciere)} property tax, divided like the City's actual spending in ${dep.annee}. The water, sewer and waste fees (${argent(tarifs * n)}) go to Water, sewers and waste.`);
+    $('#repartition').innerHTML = services.map((s) => barre(nomService(s.nom), argent((fonciere * s.montant) / dep.total), s.montant / dep.total)).join('');
+  }
+
+  function barre(nom, valeur, part, details = '') {
+    return `<div class="barre-service"><div class="tete"><strong>${esc(nom)}</strong><span>${valeur}</span></div>
+      <div class="piste"><div class="rempli" style="width:${Math.max(1, Math.round(part * 100))}%"></div></div>${details}</div>`;
+  }
+
+  $('#intro-depenses').textContent = fr(
+    `Dépenses réelles de ${dep.annee} : ${millions(dep.total)}, sans l’amortissement. Ouvrez un service pour voir ses postes.`,
+    `Actual ${dep.annee} spending: ${millions(dep.total)}, without depreciation. Open a service to see its items.`);
+  $('#depenses').innerHTML = services.map((s) => {
+    const postes = [...s.postes].sort((a, b) => b.montant - a.montant);
+    const detailles = postes.reduce((x, p) => x + p.montant, 0);
+    const reste = s.montant - detailles;
+    const lignes = postes.map((p) => `<li>${esc(p.nom)} : ${millions(p.montant)}</li>`).join('') +
+      (postes.length && Math.abs(reste) > 1e6 ? `<li>${fr('Non détaillé dans le rapport', 'Not itemized in the report')} : ${millions(reste)}</li>` : '');
+    const n = notes(s.nom);
+    return barre(nomService(s.nom), `${millions(s.montant)} · ${pct(s.montant, dep.total)}`, s.montant / services[0].montant,
+      (n ? `<div class="notes-sat">${fr('Satisfaction des citoyens', 'Residents’ satisfaction')} : ${n}</div>` : '') +
+      (postes.length ? `<details><summary>${fr('Détail', 'Detail')}</summary><ul>${lignes}</ul></details>` : ''));
+  }).join('');
+
+  if (sat) $('#intro-sat').innerHTML = fr(
+    `Sous chaque service, la satisfaction des citoyens, sur 10, tirée du <a href="${sat.lien}" target="_blank" rel="noopener">sondage de la Ville</a> (environ 1 000 répondants par saison). Satisfaction générale : <strong>${note(sat.generale.note)}/10</strong> (${sat.generale.saison}).`,
+    `Under each service, residents' satisfaction out of 10, from the <a href="${sat.lien}" target="_blank" rel="noopener">City's survey</a> (about 1,000 respondents per season). Overall satisfaction: <strong>${note(sat.generale.note)}/10</strong> (${sat.generale.saisonEn}).`);
+  $('#valeur').addEventListener('input', calculer);
+  $('#logements').addEventListener('change', calculer);
+  calculer();
+  $('#maj').textContent = fr(`Taux ${t.annee} et dépenses réelles ${dep.annee}. Dernière lecture : ${d.extraction.slice(0, 10)}.`, `${t.annee} rates and ${dep.annee} actual spending. Last read: ${d.extraction.slice(0, 10)}.`);
+</script>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Lévis, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees-de-levis">Sources</a>.</p>
+    <p class="lien-dq-pied"><a href="/" data-en="DossierQuébec — Québec's National Assembly in plain language">DossierQuébec — l'Assemblée nationale en clair</a> · <a href="/regles" data-en="The rules of the site">Les règles du site</a> · <a href="sources-des-donnees-de-levis" data-en="Sources">Sources</a> · <a href="sources-des-donnees-de-levis#mises-a-jour" data-en="Updates">Mises à jour</a> · <a href="https://levis.ca/" target="_blank" rel="noopener" data-en="City of Lévis site ↗">Site de la Ville de Lévis ↗</a> · <span data-en="Powered by">Une réalisation de</span> <a class="lien-dafr" href="https://www.dafrsolution.com" data-en-href="https://www.dafrsolution.com/en" target="_blank" rel="noopener">DAFR Solution</a></p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+<script type="module" src="/commun/entete-volet.js"></script>
+<script type="module" src="/commun/abonnes.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
+     Même projet Vercel : les pages vues de /levis/ s'ajoutent au même tableau de
+     bord. En local le script n'existe pas (404 sans conséquence). -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

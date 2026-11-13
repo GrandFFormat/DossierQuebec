@@ -98,6 +98,8 @@
       <a href="decisions-de-la-ville-de-levis">Décisions</a>
       <a href="conseil-municipal-de-levis">Conseil municipal</a>
       <a href="pres-de-chez-moi-a-levis" aria-current="page">Près de chez moi</a>
+      <a href="contrats-de-la-ville-de-levis">Contrats</a>
+      <a href="budget-et-taxes-de-levis">Budget</a>
       <a href="lexique-municipal-de-levis">Lexique</a>
       <div class="outils">
         <div class="taille-texte" role="group" aria-label="Taille du texte">
@@ -120,7 +122,7 @@
   <form class="qui-represente" id="qui-represente" autocomplete="off">
     <label for="adresse">Votre adresse</label>
     <div class="ligne">
-      <input id="adresse" type="search" placeholder="Ex. 5333 rue de la Symphonie">
+      <input id="adresse" type="search" placeholder="Ex. 2175 chemin du Fleuve">
       <button type="submit">Chercher</button>
     </div>
     <div id="resultat-adresse" aria-live="polite"></div>
@@ -157,7 +159,7 @@
       e.preventDefault();
       const zone = document.getElementById('resultat-adresse');
       const m = document.getElementById('adresse').value.trim().match(/^(\d+[A-Za-z]?)\s*[, -]*\s*(.+)$/);
-      if (!m) { zone.innerHTML = '<p>Tapez le numéro puis la rue, par exemple « 5333 rue de la Symphonie ».</p>'; return; }
+      if (!m) { zone.innerHTML = '<p>Tapez le numéro puis la rue, par exemple « 2175 chemin du Fleuve ».</p>'; return; }
       const numero = m[1].toUpperCase();
       let voie = cle(m[2]);
       for (let i = 0; i < 2; i++) voie = cle(voie.replace(TYPES, ''));
@@ -182,6 +184,7 @@
           <ul>
             <li>District ${t.district}${d.nom ? `, ${esc(d.nom)}` : ''}${d.arrondissement ? ` (arrondissement ${esc(d.arrondissement)})` : ''}${t.secteur ? `, secteur ${esc(t.secteur)}` : ''}</li>
             <li>Votre conseiller ou conseillère&nbsp;: <a href="conseil-municipal-de-levis">${esc(d.conseiller ?? '')}</a>${d.parti ? ` (${esc(d.parti)})` : ''}</li>
+            <li>Pour une requête à la Ville (nid-de-poule, collecte, déneigement)&nbsp;: <strong>311</strong>, ou le (418) 839-2002 de l’extérieur</li>
           </ul>
           ${t.limite ? '<p class="avis-limite">Votre adresse est à moins de 100 m d’une limite de district. Les contours publiés par la Ville datent de 2022 et ont été légèrement ajustés pour l’élection de 2025 : vous êtes peut-être dans le district voisin. La carte officielle de la Ville fait foi.</p>' : ''}
         </section>`;
@@ -192,6 +195,7 @@
   <h2>Sources</h2>
   <ul>
     <li>Adresses (« Adresse ponctuelle »), districts électoraux et secteurs&nbsp;: Ville de Lévis, <a href="https://www.donneesquebec.ca/recherche/organization/ville-de-levis" target="_blank" rel="noopener">Données Québec</a>, sous licence CC BY 4.0. Les contours des districts datent de 2022.</li>
+    <li>Le 311 et le (418) 839-2002&nbsp;: page <a href="https://www.levis.ca/fr/ville/decouvrir-levis/nous-joindre" target="_blank" rel="noopener">Nous joindre</a> de la Ville de Lévis, lue le 12 novembre 2026.</li>
     <li>Lévis ne publie pas en données ouvertes ses permis de construction ni ses entraves à la circulation. Ces deux volets, offerts à Québec, ne sont donc pas possibles ici pour le moment.</li>
   </ul>
 </main>
