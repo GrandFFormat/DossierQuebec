@@ -147,7 +147,14 @@ function compterThemes(liste) {
 
 // Mots clés surlignés dans la phrase (Martin, 13 nov. 2026) : seulement ceux qui y sont mot pour mot,
 // sans chiffre, trois au plus.
-const garder = (mots, phrase) => (mots ?? []).filter((m) => m && m.length <= 40 && !/[0-9]/.test(m) && String(phrase ?? '').includes(m)).slice(0, 3);
+// Recherche sans tenir compte des majuscules ni des apostrophes courbes ; on garde le texte tel qu'il est
+// écrit dans la phrase. Pas de montant (« $ ») ni de mot fait surtout de chiffres.
+const plat = (t) => String(t ?? '').toLowerCase().replace(/[’ʼ]/g, "'");
+const garder = (mots, phrase) => (mots ?? []).map((m) => {
+  if (!m || m.length > 40 || m.includes('$') || (m.match(/[0-9]/g) ?? []).length > m.length / 3) return null;
+  const i = plat(phrase).indexOf(plat(m).trim());
+  return i >= 0 ? String(phrase).slice(i, i + m.trim().length) : null;
+}).filter(Boolean).slice(0, 3);
 
 // Les nombres d'une phrase, sans espaces ni séparateurs : « 48,5 M$ » → « 485 ».
 const nombres = (t) => (String(t).replace(/[   ]/g, '').match(/\d[\d.,]*/g) ?? []).map((n) => n.replace(/[.,]/g, ''));
@@ -207,7 +214,8 @@ async function main() {
     const base = { id: g.id, instance: g.instance, instanceEn: instanceEn(g.instance), date: g.date, nDecisions: g.lignes.length, pv: pv?.pdf ?? null, themes: compterThemes(g.lignes.map((d) => d.theme)), points };
     const vieux = anciens.get(g.id);
     // Trois phrases rejetées pour les mêmes décisions : on n'insiste plus (la carte garde ses points).
-    const vieuxBon = vieux?.phrase && vieux.motsCles && !JUGEMENT.test(vieux.phrase) && !JUGEMENT.test(vieux.phraseEn ?? '');
+    // Une phrase sans mot clé est redemandée deux fois au plus (motsEssais), puis laissée telle quelle.
+    const vieuxBon = vieux?.phrase && (vieux.motsCles?.length || (vieux.motsEssais ?? 0) >= 2) && !JUGEMENT.test(vieux.phrase) && !JUGEMENT.test(vieux.phraseEn ?? '');
     if (vieux?.signature === signature && (vieuxBon || (vieux.rejets ?? 0) >= 3)) { sortie.push({ ...vieux, ...base }); continue; }
     if (utiles.length < 2) { sortie.push({ ...base, signature, phrase: null, phraseEn: null }); continue; }
 
@@ -239,7 +247,7 @@ async function main() {
         console.log(`  ${g.id} : phrase rejetée (nombres absents de la source : ${fautifs.join(', ')}) — ${phrase}`);
         sortie.push({ ...base, signature, rejets: (vieux?.signature === signature ? vieux.rejets ?? 0 : 0) + 1, phrase: null, phraseEn: null });
       } else {
-        sortie.push({ ...base, signature, phrase, phraseEn, motsCles: garder(motsCles, phrase), motsClesEn: garder(motsClesEn, phraseEn), genereLe: new Date().toISOString() });
+        sortie.push({ ...base, signature, phrase, phraseEn, motsCles: garder(motsCles, phrase), motsClesEn: garder(motsClesEn, phraseEn), motsEssais: (vieux?.motsEssais ?? 0) + 1, genereLe: new Date().toISOString() });
       }
     } catch (e) {
       console.log(`  ${g.id} : échec (${e.message})`);
@@ -267,7 +275,7 @@ async function main() {
       if (faites.has(s.nom)) continue;
       const vieux = anciensOdj.get(s.id);
       const mots = (t) => String(t ?? '').split(/ +/).length;
-      if (vieux?.version === 6 && ((vieux.phrase && mots(vieux.phrase) <= 50) || (vieux.rejets ?? 0) >= 3)) {
+      if (vieux?.version === 6 && ((vieux.phrase && mots(vieux.phrase) <= 50 && (vieux.motsCles?.length || (vieux.motsEssais ?? 0) >= 2)) || (vieux.rejets ?? 0) >= 3)) {
         if (vieux.themes) { odjSortie.push(vieux); faites.add(s.nom); continue; }
         // Résumé déjà fait, mais d'avant les pastilles : on relit l'ordre du jour, sans rappeler l'IA.
         const d2 = await documentDeSeance(s, 'ODJ').catch(() => null);
@@ -317,7 +325,7 @@ async function main() {
           console.log(`  ODJ ${s.id} : phrase rejetée (${fautifs.join(', ')}) — ${phrase}`);
           odjSortie.push({ ...base, phrase: null, phraseEn: null, rejets: (vieux?.rejets ?? 0) + 1 });
         } else {
-          odjSortie.push({ ...base, phrase, phraseEn, motsCles: garder(motsCles, phrase), motsClesEn: garder(motsClesEn, phraseEn), genereLe: new Date().toISOString() });
+          odjSortie.push({ ...base, phrase, phraseEn, motsCles: garder(motsCles, phrase), motsClesEn: garder(motsClesEn, phraseEn), motsEssais: (vieux?.motsEssais ?? 0) + 1, genereLe: new Date().toISOString() });
         }
       } catch (e) {
         console.log(`  ODJ ${s.id} : échec (${e.message})`);

@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-13T11:33:24.394Z",
+ "generatedAt": "2026-11-13T11:57:50.641Z",
  "modele": "claude-haiku-4-5",
  "genereParIA": true,
  "avertissement": "Phrase de résumé générée par IA à partir des décisions de la séance ; les points marquants sont choisis sans IA. Le procès-verbal officiel fait foi.",
@@ -3953,7 +3953,7 @@
      "montant": "15 000 $",
      "theme": "economie",
      "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Lac/CA_Lac_ODJ_LPP_ORDI_2026-11-02_19h00_FR.pdf#page=3",
-     "titreEn": "Approve the agreement between the City of Montreal - Lachine borough and PME MTL Ouest-de-L'Île for 2026 and grant a financial contribution of 15 000 $ as the borough's share in financing the regular operations of the Industrial Commissioner of the organization"
+     "titreEn": "Approve the agreement between the City of Montreal - arrondissement of Lachine and PME MTL Ouest-de-L'Île for 2026 and grant a financial contribution in the amount of 15 000 $ as the arrondissement's share in financing the regular operations of the organization's Industrial Commissioner"
     },
     {
      "article": "20.03",
@@ -3961,7 +3961,7 @@
      "montant": "12 900 $",
      "theme": "finances",
      "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Lac/CA_Lac_ODJ_LPP_ORDI_2026-11-02_19h00_FR.pdf#page=3",
-     "titreEn": "Authorization to grant financial contributions to various organizations for a total amount of 12 900 $ taxes included, if applicable"
+     "titreEn": "Authorization of the granting of financial contributions to various organizations in the total amount of 12 900 $ including taxes, if applicable"
     },
     {
      "article": "30.05",
@@ -3969,7 +3969,7 @@
      "montant": null,
      "theme": "administration",
      "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Lac/CA_Lac_ODJ_LPP_ORDI_2026-11-02_19h00_FR.pdf#page=4",
-     "titreEn": "Adopt a resolution and entrust the Division of Relations with Citizens and Communications with the mandate to implement the use of the signatures « Lachine au fil de l'eau » and « Lachine, the first suburb », in the communications and representations of the borough, according to the subjects and communication objectives"
+     "titreEn": "Adopt a resolution and entrust the Division of Relations with Citizens and Communications with the mandate to implement the use of the signatures « Lachine au fil de l'eau » and « Lachine, the first suburb », in the communications and representations of the arrondissement, depending on the subjects and communication objectives"
     },
     {
      "article": "47.01",
@@ -3977,15 +3977,28 @@
      "montant": null,
      "theme": "urbanisme",
      "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Lac/CA_Lac_ODJ_LPP_ORDI_2026-11-02_19h00_FR.pdf#page=6",
-     "titreEn": "Adoption, without change, of the second draft resolution - Particular project of construction, modification or occupation of a building (PPCMOI) to authorize the demolition of the existing industrial building located at 325, rue Norman on the lot bearing number 1 702 973 of the Quebec cadastre as well as the construction of a new main building and a truck shelter on the same lot"
+     "titreEn": "Adoption, without change, of the second draft resolution - Particular project for construction, modification or occupancy of a building (PPCMOI) in order to authorize the demolition of the existing industrial building located at 325, rue Norman on the lot bearing number 1 702 973 of the Quebec cadastre as well as the construction of a new main building and a truck shelter on that same lot"
     }
    ],
-   "phrase": "À l'ordre du jour : la reconstruction des réseaux d'aqueduc, d'égout et de voirie sur trois tronçons, une contribution de 15 000 $ à PME MTL Ouest-de-L'Île et des contributions de 12 900 $ à divers organismes.",
-   "phraseEn": "On the agenda: the reconstruction of water, sewer and road networks on three sections, a contribution of 15 000 $ to PME MTL Ouest-de-L'Île and contributions of 12 900 $ to various organizations.",
-   "motsCles": [],
-   "motsClesEn": [],
-   "genereLe": "2026-11-13T11:33:18.862Z",
-   "motsThemes": []
+   "phrase": "À l'ordre du jour : la reconstruction des réseaux d'aqueduc, d'égout et de voirie sur trois axes de Lachine, une contribution de 15 000 $ à PME MTL Ouest-de-L'Île, et des contributions de 12 900 $ à divers organismes.",
+   "phraseEn": "On the agenda: the reconstruction of water, sewer and road networks on three Lachine axes, a contribution of 15 000 $ to PME MTL Ouest-de-L'Île, and contributions of 12 900 $ to various organizations.",
+   "motsCles": [
+    "réseaux d'aqueduc, d'égout et de voirie",
+    "contribution",
+    "organismes"
+   ],
+   "motsClesEn": [
+    "water, sewer and road networks",
+    "contribution",
+    "organizations"
+   ],
+   "motsEssais": 1,
+   "genereLe": "2026-11-13T11:57:48.149Z",
+   "motsThemes": [
+    "transport",
+    "economie",
+    "finances"
+   ]
   },
   {
    "id": "CA_Las_2026-11-02_19h00",
@@ -4116,8 +4129,8 @@
    ],
    "genereLe": "2026-11-13T11:33:21.945Z",
    "motsThemes": [
-    "contrats",
-    "contrats",
+    "economie",
+    null,
     "finances"
    ]
   },
