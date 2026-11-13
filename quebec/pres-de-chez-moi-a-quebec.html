@@ -132,9 +132,10 @@
   <form class="qui-represente" id="qui-represente" autocomplete="off">
     <label for="adresse" data-en="Your address">Votre adresse</label>
     <div class="ligne">
-      <input id="adresse" type="search" placeholder="Ex. 40 boulevard Henri-Bourassa" data-en-placeholder="E.g. 40 boulevard Henri-Bourassa">
+      <input id="adresse" type="search" placeholder="Ex. 1000 route de l’Église" data-en-placeholder="E.g. 1000 route de l’Église">
       <button type="submit" data-en="Search">Chercher</button>
     </div>
+    <p class="compte" style="margin:6px 0 0" id="essai" data-en="No idea? <a href=&quot;#1000 route de l’Église&quot;>Try 1000 route de l’Église</a>, in a neighbourhood full of roadwork and permits.">Pas d’idée&nbsp;? <a href="#1000 route de l’Église">Essayez avec 1000 route de l’Église</a>, dans un quartier plein de travaux et de permis.</p>
     <div id="resultat-adresse" aria-live="polite"></div>
     <p class="compte" data-en="Your address stays in your browser. It is not sent to anyone. Addresses, districts and neighbourhoods: City of Québec open data (CC BY 4.0).">Votre adresse reste dans votre navigateur. Elle n’est envoyée à personne. Adresses, districts et quartiers&nbsp;: données ouvertes de la Ville de Québec (CC BY 4.0).</p>
   </form>
@@ -278,6 +279,10 @@
     // #adresse : arrivée depuis la petite case de la page Conseil, la recherche part toute seule.
     // Le # n'est jamais envoyé au serveur : l'adresse reste dans le navigateur.
     const venue = decodeURIComponent(location.hash.slice(1));
+    window.addEventListener('hashchange', () => {
+      const v = decodeURIComponent(location.hash.slice(1));
+      if (v) { document.getElementById('adresse').value = v; formulaire.requestSubmit(); }
+    });
     if (venue) { document.getElementById('adresse').value = venue; formulaire.requestSubmit(); }
   </script>
 

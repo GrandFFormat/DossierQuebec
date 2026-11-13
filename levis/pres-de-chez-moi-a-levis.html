@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<!-- Consentement (Loi 25) : par défaut, Google Analytics n'a PAS le droit de déposer de témoins.
+     La bannière (commun/consentement.js) passe analytics_storage à « granted » après « Accepter ». -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: (function(){ try { return localStorage.getItem('dq:temoins') === 'oui' ? 'granted' : 'denied'; } catch (e) { return 'denied'; } })(), ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-87R1S6SR9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-87R1S6SR9Y', { content_group: 'Lévis' });
+</script>
+<script src="/commun/consentement.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Près de chez moi à Lévis : votre conseiller de district | DossierQuébec</title>
+<meta name="description" content="Tapez votre adresse à Lévis : votre district électoral, votre conseiller et votre secteur, d’après les données ouvertes de la Ville.">
+<link rel="canonical" href="https://dossierquebec.ca/levis/pres-de-chez-moi-a-levis">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DossierQuébec">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:title" content="Près de chez moi à Lévis : votre conseiller de district | DossierQuébec">
+<meta property="og:description" content="Tapez votre adresse à Lévis : votre district électoral, votre conseiller et votre secteur, d’après les données ouvertes de la Ville.">
+<meta property="og:url" content="https://dossierquebec.ca/levis/pres-de-chez-moi-a-levis">
+<meta property="og:image" content="https://dossierquebec.ca/levis/og-levis.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Près de chez moi à Lévis : votre conseiller de district | DossierQuébec">
+<meta name="twitter:description" content="Tapez votre adresse à Lévis : votre district électoral, votre conseiller et votre secteur, d’après les données ouvertes de la Ville.">
+<meta name="twitter:image" content="https://dossierquebec.ca/levis/og-levis.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvq:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+    } catch (e) {}
+  })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "DossierQuébec",
+      "item": "https://dossierquebec.ca/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Ville de Lévis",
+      "item": "https://dossierquebec.ca/levis/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Près de chez moi",
+      "item": "https://dossierquebec.ca/levis/pres-de-chez-moi-a-levis"
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="/commun/abonnes.css">
+</head>
+<body data-page="pres" data-ville="levis">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="./"><p class="logo-titre">Dossier<span class="marque">VilleDeLévis</span></p></a><a class="lien-dq" href="/" title="DossierQuébec — l'Assemblée nationale en clair" aria-label="DossierQuébec — l'Assemblée nationale en clair" data-en-title="DossierQuébec — Quebec's National Assembly in plain language" data-en-aria-label="DossierQuébec — Quebec's National Assembly in plain language"></a>
+      <details class="ab-villes" id="villes"></details>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Lévis, lisibles. Données publiques, reprises telles quelles
+      des procès-verbaux officiels de la Ville.
+    </p>
+    <nav>
+      <a href="./">Accueil</a>
+      <a href="decisions-de-la-ville-de-levis">Décisions</a>
+      <a href="votes-nominatifs-du-conseil-de-levis">Votes nominatifs</a>
+      <a href="conseil-municipal-de-levis">Conseil municipal</a>
+      <a href="pres-de-chez-moi-a-levis" aria-current="page">Près de chez moi</a>
+      <a href="lexique-municipal-de-levis">Lexique</a>
+      <div class="outils">
+        <div class="taille-texte" role="group" aria-label="Taille du texte">
+          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+          <span id="texte-pct" aria-live="polite">100%</span>
+          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+        </div>
+        <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+                title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu" style="max-width:900px">
+  <h1 class="page">Près de chez moi à Lévis</h1>
+  <p class="chapeau">Tapez votre adresse : votre district électoral, la personne qui vous représente au
+    conseil municipal et votre secteur. Tout vient des données ouvertes de la Ville de Lévis.</p>
+
+  <form class="qui-represente" id="qui-represente" autocomplete="off">
+    <label for="adresse">Votre adresse</label>
+    <div class="ligne">
+      <input id="adresse" type="search" placeholder="Ex. 5333 rue de la Symphonie">
+      <button type="submit">Chercher</button>
+    </div>
+    <div id="resultat-adresse" aria-live="polite"></div>
+    <p class="compte">Votre adresse reste dans votre navigateur. Elle n’est envoyée à personne.</p>
+  </form>
+  <style>
+    .qui-represente { background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon); padding: 14px 16px; margin: 16px 0 20px; }
+    .qui-represente label { font-weight: 600; display: block; margin-bottom: 6px; }
+    .qui-represente .ligne { display: flex; gap: 8px; }
+    .qui-represente input { flex: 1; min-width: 0; font: inherit; padding: 7px 10px; border: 1px solid var(--ligne-forte); border-radius: var(--rayon); background: var(--fond); color: var(--encre); }
+    .qui-represente button { font: inherit; padding: 7px 14px; border-radius: var(--rayon); border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; }
+    #resultat-adresse { margin-top: 14px; display: grid; gap: 12px; }
+    .bloc-pres { background: var(--fond); border: 1px solid var(--ligne); border-radius: var(--rayon); padding: 12px 14px; }
+    .bloc-pres ul { margin: 6px 0 0; padding-left: 18px; }
+    .avis-limite { margin: 8px 0 0; padding: 8px 10px; border-left: 3px solid var(--vedette, #F5B301); background: var(--fond-2); font-size: .9rem; }
+    .lien-carte { display: inline-flex; vertical-align: -2px; color: var(--accent); }
+  </style>
+  <script type="module">
+    // « Près de chez moi » à Lévis (12 nov. 2026) : même mécanique que le volet Québec. L'index
+    // (scrapers/adresses.js) est découpé par première lettre de la voie. Lévis ne publie ni ses permis
+    // ni ses entraves à la circulation : la page s'en tient au district, au conseiller et au secteur.
+    const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const cle = (nom) => String(nom ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase()
+      .replace(/[^A-Z0-9]+/g, ' ').trim()
+      .replace(/^((DE|DU|DES|LA|LE|LES|L|D|DE LA|DE L)\s+)+/, '').replace(/\s+/g, ' ');
+    const TYPES = /^(RUE|AVENUE|AV|AVE|BOULEVARD|BOUL|BD|BLVD|CHEMIN|CH|ROUTE|RTE|COTE|PLACE|PL|RANG|MONTEE|TERRASSE|CARRE|ALLEE|IMPASSE|PROMENADE|SENTIER|CROISSANT|COURS|PARC|RUELLE)\s+/;
+    const MAISON = '<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>';
+    const carte = (q) => `<a class="lien-carte" href="https://www.google.com/maps/search/?api=1&amp;query=${encodeURIComponent(q)}" target="_blank" rel="noopener" title="Voir sur Google Maps" aria-label="Voir sur Google Maps (nouvel onglet)">${MAISON}</a>`;
+    const fichiers = new Map();
+    const lire = (f) => { if (!fichiers.has(f)) fichiers.set(f, fetch(`data/adresses/${f}`).then((r) => (r.ok ? r.json() : null))); return fichiers.get(f); };
+    let index = null, districts = null;
+    const formulaire = document.getElementById('qui-represente');
+    formulaire.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const zone = document.getElementById('resultat-adresse');
+      const m = document.getElementById('adresse').value.trim().match(/^(\d+[A-Za-z]?)\s*[, -]*\s*(.+)$/);
+      if (!m) { zone.innerHTML = '<p>Tapez le numéro puis la rue, par exemple « 5333 rue de la Symphonie ».</p>'; return; }
+      const numero = m[1].toUpperCase();
+      let voie = cle(m[2]);
+      for (let i = 0; i < 2; i++) voie = cle(voie.replace(TYPES, ''));
+      voie = voie.replace(/\bSTE\b/g, 'SAINTE').replace(/\bST\b/g, 'SAINT');
+      if (!voie) return;
+      zone.textContent = 'Recherche…';
+      index ??= await lire('index.json');
+      districts ??= (await (await fetch('data/districts.json')).json()).districts;
+      const voies = (await lire(`${voie[0].replace(/[^A-Z0-9]/, '_')}.json`)) ?? {};
+      const exact = new RegExp(`^${voie.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}( [NSEO]{1,2})?$`);
+      const exactes = Object.entries(voies).filter(([k]) => exact.test(k));
+      const candidates = exactes.length ? exactes : Object.entries(voies).filter(([k]) => k.startsWith(voie));
+      const trouvees = [];
+      for (const [, [libelle, adresses]] of candidates) {
+        const a = adresses.find((x) => String(x[0]).toUpperCase() === numero);
+        if (a) trouvees.push({ libelle, district: a[1], secteur: index.quartiers[a[2]], limite: a[3] });
+      }
+      if (!trouvees.length) { zone.innerHTML = '<p>Adresse introuvable. Vérifiez le numéro et le nom de la rue. La recherche couvre la Ville de Lévis seulement.</p>'; return; }
+      zone.innerHTML = trouvees.slice(0, 4).map((t) => {
+        const d = districts.find((x) => x.numero === t.district) ?? {};
+        return `<section class="bloc-pres"><strong>${esc(numero)} ${esc(t.libelle)}</strong> ${carte(`${numero} ${t.libelle}, Lévis, QC`)}
+          <ul>
+            <li>District ${t.district}${d.nom ? `, ${esc(d.nom)}` : ''}${d.arrondissement ? ` (arrondissement ${esc(d.arrondissement)})` : ''}${t.secteur ? `, secteur ${esc(t.secteur)}` : ''}</li>
+            <li>Votre conseiller ou conseillère&nbsp;: <a href="conseil-municipal-de-levis">${esc(d.conseiller ?? '')}</a>${d.parti ? ` (${esc(d.parti)})` : ''}</li>
+          </ul>
+          ${t.limite ? '<p class="avis-limite">Votre adresse est à moins de 100 m d’une limite de district. Les contours publiés par la Ville datent de 2022 et ont été légèrement ajustés pour l’élection de 2025 : vous êtes peut-être dans le district voisin. La carte officielle de la Ville fait foi.</p>' : ''}
+        </section>`;
+      }).join('');
+    });
+  </script>
+
+  <h2>Sources</h2>
+  <ul>
+    <li>Adresses (« Adresse ponctuelle »), districts électoraux et secteurs&nbsp;: Ville de Lévis, <a href="https://www.donneesquebec.ca/recherche/organization/ville-de-levis" target="_blank" rel="noopener">Données Québec</a>, sous licence CC BY 4.0. Les contours des districts datent de 2022.</li>
+    <li>Lévis ne publie pas en données ouvertes ses permis de construction ni ses entraves à la circulation. Ces deux volets, offerts à Québec, ne sont donc pas possibles ici pour le moment.</li>
+  </ul>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Lévis, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees-de-levis">Sources</a>.</p>
+    <p class="lien-dq-pied"><a href="/" data-en="DossierQuébec — Québec's National Assembly in plain language">DossierQuébec — l'Assemblée nationale en clair</a> · <a href="/regles" data-en="The rules of the site">Les règles du site</a> · <a href="sources-des-donnees-de-levis" data-en="Sources">Sources</a> · <a href="sources-des-donnees-de-levis#mises-a-jour" data-en="Updates">Mises à jour</a> · <a href="https://levis.ca/" target="_blank" rel="noopener" data-en="City of Lévis site ↗">Site de la Ville de Lévis ↗</a> · <span data-en="Powered by">Une réalisation de</span> <a class="lien-dafr" href="https://www.dafrsolution.com" data-en-href="https://www.dafrsolution.com/en" target="_blank" rel="noopener">DAFR Solution</a></p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+<script type="module" src="/commun/entete-volet.js"></script>
+<script type="module" src="/commun/abonnes.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
+     Même projet Vercel : les pages vues de /levis/ s'ajoutent au même tableau de
+     bord. En local le script n'existe pas (404 sans conséquence). -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
