@@ -462,6 +462,8 @@ if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split(/[\\/]/).p
 export function nettoyerObjet(t) {
   if (!t) return t ?? null;
   let s = String(t);
+  // Le « er » de « 1er » sort du PDF en exposant et se retrouve collé en tête : on le remet après le 1.
+  if (/^er\s/.test(s)) s = s.replace(/^er\s+/, '').replace(/\b1 (janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre|et|au|alinéa)\b/, '1er $1');
   // « Extrait authentique… Résolution : CA26 12205 <titre> Il est proposé… » : on garde le titre.
   const extrait = /^Extrait authentique[\s\S]*?Résolution\s*:\s*\S+\s+\S+\s+(.+?)\s+Il est proposé/.exec(s);
   if (extrait) return extrait[1].trim();
