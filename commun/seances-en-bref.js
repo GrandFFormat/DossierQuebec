@@ -27,6 +27,27 @@ const nomCourt = (i) => i.replace(/^Conseil d(?:e l'|')arrondissement (?:de la |
 const suffixe = EN ? '&lang=en' : '';
 // À quelle fréquence le conseil siège, collé au nom : « Conseil d'agglomération/mois » (Martin,
 // 13 nov. 2026). Le conseil de la ville de Québec siège deux fois par mois.
+// Les sujets, mêmes couleurs que les pastilles des décisions (--t-* du style.css de chaque ville).
+const THEMES_FR = { urbanisme: 'Urbanisme', transport: 'Transport', immobilier: 'Immobilier', subventions: 'Subventions', contrats: 'Contrats', finances: 'Finances', rh: 'Ressources humaines', environnement: 'Environnement', culture: 'Culture et patrimoine', loisirs: 'Loisirs et communauté', securite: 'Sécurité publique', economie: 'Développement économique', travaux: 'Travaux et infrastructures', honneurs: 'Motions et hommages', social: 'Logement et social', procedure: 'Procédure', administration: 'Administration' };
+const THEMES_EN = { urbanisme: 'Urban planning', transport: 'Transportation', immobilier: 'Real estate', subventions: 'Grants', contrats: 'Contracts', finances: 'Finance', rh: 'Human resources', environnement: 'Environment', culture: 'Culture and heritage', loisirs: 'Recreation and community', securite: 'Public safety', economie: 'Economic development', travaux: 'Public works', honneurs: 'Motions and tributes', social: 'Housing and social', procedure: 'Procedure', administration: 'Administration' };
+const nomTheme = (t) => (EN ? THEMES_EN[t] : THEMES_FR[t]) ?? t;
+
+// Le sujet de chaque élément de la phrase est souligné (« déneigement », « organisme jeunesse »…) :
+// on sait de quoi parle la séance avant de lire (Martin, 13 nov. 2026). Les mots viennent du robot,
+// qui ne garde que ceux écrits mot pour mot dans la phrase.
+// La couleur du soulignement est celle du sujet (motsThemes, même rang que les mots ; l'anglais
+// reprend les sujets du français).
+function souligner(phrase, mots, themes = []) {
+  let html = echapper(phrase);
+  (mots ?? []).forEach((m, k) => {
+    const e = echapper(m);
+    const i = html.indexOf(e);
+    const t = themes[k];
+    if (i >= 0) html = html.slice(0, i) + `<span class="eb-mot${t ? ` t-bord-${t}` : ''}"${t ? ` title="${echapper(nomTheme(t))}"` : ''}>${e}</span>` + html.slice(i + e.length);
+  });
+  return html;
+}
+
 function rythme(i) {
   if (/comité exécutif/i.test(i)) return tr('semaine', 'week');
   if (/^Conseil de la ville$/.test(i)) return tr('2 semaines', '2 weeks');
@@ -44,7 +65,7 @@ function carte(s, page, petite) {
     const titre = couper(adoucir(EN ? p.titreEn ?? p.titre : p.titre), petite ? 70 : 85);
     const montant = EN ? p.montantEn ?? p.montant : p.montant;
     const lien = odj ? `${echapper(p.lien)}" target="_blank" rel="noopener` : `${page}?q=${encodeURIComponent(p.numero)}${suffixe}`;
-    return `<li><a href="${lien}"><span class="eb-titre">${echapper(titre)}</span>`
+    return `<li${p.theme ? ` class="eb-pt t-bord-${p.theme}" title="${echapper(nomTheme(p.theme))}"` : ''}><a href="${lien}"><span class="eb-titre">${echapper(titre)}</span>`
       + (montant ? `<span class="eb-montant">${echapper(montant)}</span>` : '')
       + (p.divise ? `<span class="eb-divise">${tr('vote divisé', 'split vote')}</span>` : '')
       + '</a></li>';
@@ -63,7 +84,7 @@ function carte(s, page, petite) {
     ${quoi}
     <header><h3>${echapper(petite ? nomCourt(instance) : instance)}<span class="eb-rythme">/${rythme(s.instance)}</span></h3>
     <span class="eb-date">${tr('Séance du', 'Meeting of')} ${dateLongue(s.date)} · ${compte}</span></header>
-    ${phrase ? `<div class="eb-phrase">${echapper(phrase)}</div>` : ''}
+    ${phrase ? `<div class="eb-phrase">${souligner(phrase, EN ? s.motsClesEn : s.motsCles, s.motsThemes)}</div>` : ''}
     ${points ? `<ul class="eb-points">${points}</ul>` : ''}
     <div class="eb-liens">${liens}</div>
   </article>`;
@@ -114,6 +135,13 @@ async function init() {
       ${derriereArr.length ? grille(derriereArr, jeu.page, true) : ''}
       <a class="eb-detail" href="#liste-decisions">${tr('Voir toutes les décisions, séance par séance ↓', 'See every decision, meeting by meeting ↓')}</a>
     </details></div>` : ''}`;
+  // Le remerciement du commanditaire monte entre l'encadré non officiel et « Pourquoi un mois de
+  // retard ? » (Martin, 13 nov. 2026). Sans cette boîte (Québec), il passe juste sous l'encadré.
+  const merci = document.querySelector('aside.merci-commanditaire');
+  if (merci) {
+    const retard = zone.querySelector('.eb-boite-retard');
+    if (retard) zone.insertBefore(merci, retard); else zone.appendChild(merci);
+  }
   zone.hidden = false;
 }
 init();

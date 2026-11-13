@@ -77,7 +77,12 @@ Mont-Royal pour 3 769 140,63 $, la déconstruction de l'ancien hôpital chinois 
 l'installation de fibre optique sur 38 km de conduites d'aqueduc pour 24 338 482,88 $. »
 Des choses concrètes que les gens reconnaissent, chacune avec son montant exact.
 
-Écris aussi la même phrase en anglais (phraseEn), fidèlement, avec les mêmes nombres.`;
+Écris aussi la même phrase en anglais (phraseEn), fidèlement, avec les mêmes nombres.
+
+Donne enfin motsCles : 2 ou 3 mots ou courtes expressions (1 à 3 mots) recopiés TELS QUELS de ta phrase,
+qui disent le SUJET concret de chaque élément (ex. « déneigement », « organisme jeunesse », « zonage »,
+« logements abordables »). Jamais un montant, un nom de conseil ou un verbe. Et motsClesEn : les mêmes, recopiés
+tels quels de phraseEn.`;
 
 const OUTIL = {
   name: 'resume_seance',
@@ -85,8 +90,8 @@ const OUTIL = {
   strict: true,
   input_schema: {
     type: 'object',
-    properties: { phrase: { type: 'string' }, phraseEn: { type: 'string' } },
-    required: ['phrase', 'phraseEn'],
+    properties: { phrase: { type: 'string' }, phraseEn: { type: 'string' }, motsCles: { type: 'array', items: { type: 'string' } }, motsClesEn: { type: 'array', items: { type: 'string' } } },
+    required: ['phrase', 'phraseEn', 'motsCles', 'motsClesEn'],
     additionalProperties: false,
   },
 };
@@ -110,6 +115,11 @@ Interdits absolus (une phrase qui les enfreint est jetée) :
 Donne aussi la phrase en anglais (phraseEn, qui commence par « On the agenda: »), et la traduction
 anglaise fidèle de chacun des titres fournis à la fin (titresEn, même ordre, mêmes nombres).
 
+Donne enfin motsCles : 2 ou 3 mots ou courtes expressions (1 à 3 mots) recopiés TELS QUELS de ta phrase,
+qui disent le SUJET concret de chaque élément (ex. « déneigement », « organisme jeunesse », « zonage »,
+« logements abordables »). Jamais un montant, un nom de conseil ou un verbe. Et motsClesEn : les mêmes,
+recopiés tels quels de phraseEn.
+
 Exemple du ton voulu : « À l'ordre du jour : la réfection de la croix du Mont-Royal pour
 3 769 140,63 $, la déconstruction de l'ancien hôpital chinois et un contrat de sel de déglaçage. »`;
 
@@ -119,11 +129,24 @@ const OUTIL_ODJ = {
   strict: true,
   input_schema: {
     type: 'object',
-    properties: { phrase: { type: 'string' }, phraseEn: { type: 'string' }, titresEn: { type: 'array', items: { type: 'string' } } },
-    required: ['phrase', 'phraseEn', 'titresEn'],
+    properties: { phrase: { type: 'string' }, phraseEn: { type: 'string' }, titresEn: { type: 'array', items: { type: 'string' } }, motsCles: { type: 'array', items: { type: 'string' } }, motsClesEn: { type: 'array', items: { type: 'string' } } },
+    required: ['phrase', 'phraseEn', 'titresEn', 'motsCles', 'motsClesEn'],
     additionalProperties: false,
   },
 };
+
+// Les sujets d'une séance, du plus fréquent au moins fréquent, pour les pastilles de couleur de la
+// carte (Martin, 13 nov. 2026 : « savoir d'avance ce que ça comprend avant de tout lire »). La procédure
+// et l'administration générale ne disent rien : on les tait.
+function compterThemes(liste) {
+  const n = new Map();
+  for (const t of liste) if (t && t !== 'procedure' && t !== 'administration') n.set(t, (n.get(t) ?? 0) + 1);
+  return [...n.entries()].sort((a, b) => b[1] - a[1]).slice(0, 6).map(([theme, nombre]) => ({ theme, n: nombre }));
+}
+
+// Mots clés surlignés dans la phrase (Martin, 13 nov. 2026) : seulement ceux qui y sont mot pour mot,
+// sans chiffre, trois au plus.
+const garder = (mots, phrase) => (mots ?? []).filter((m) => m && m.length <= 40 && !/[0-9]/.test(m) && String(phrase ?? '').includes(m)).slice(0, 3);
 
 // Les nombres d'une phrase, sans espaces ni séparateurs : « 48,5 M$ » → « 485 ».
 const nombres = (t) => (String(t).replace(/[   ]/g, '').match(/\d[\d.,]*/g) ?? []).map((n) => n.replace(/[.,]/g, ''));
@@ -153,6 +176,7 @@ async function main() {
   const { default: Anthropic } = await import(pathToFileURL(createRequire(new URL(`../${VILLE}/package.json`, import.meta.url)).resolve('@anthropic-ai/sdk')).href);
   const client = DRY ? null : new Anthropic();
   const sortie = [];
+  const objetsDe = new Map();   // id de séance → [{ objet, theme }], pour colorer les mots clés
   let appels = 0, entree = 0, sortieJetons = 0, rejets = 0;
 
   for (const g of [...groupes.values()].sort((a, b) => b.date.localeCompare(a.date) || a.instance.localeCompare(b.instance))) {
@@ -172,15 +196,17 @@ async function main() {
       montant: r?.montantPrincipal ?? null,
       montantEn: traductionsEn[r?.id]?.montantPrincipal ?? null,
       divise: /majorité|division|rejet/i.test(d.resultat ?? '') || Boolean(d.voteEnregistre),
+      theme: d.theme ?? null,
     }));
 
     const signature = `${g.lignes.length}:${avecResume.filter((x) => x.r).length}`;
     // Le procès-verbal officiel de la séance : la version qui fait foi, liée sur la carte.
     const pv = decisions.decisions.find((d) => /^Procès-verba/.test(d.type) && d.pdf && (d.seanceId ? d.seanceId === g.id : d.date === g.date && d.instance === g.instance));
-    const base = { id: g.id, instance: g.instance, instanceEn: instanceEn(g.instance), date: g.date, nDecisions: g.lignes.length, pv: pv?.pdf ?? null, points };
+    objetsDe.set(g.id, g.lignes.map((d) => ({ objet: d.objet, theme: d.theme })));
+    const base = { id: g.id, instance: g.instance, instanceEn: instanceEn(g.instance), date: g.date, nDecisions: g.lignes.length, pv: pv?.pdf ?? null, themes: compterThemes(g.lignes.map((d) => d.theme)), points };
     const vieux = anciens.get(g.id);
     // Trois phrases rejetées pour les mêmes décisions : on n'insiste plus (la carte garde ses points).
-    const vieuxBon = vieux?.phrase && !JUGEMENT.test(vieux.phrase) && !JUGEMENT.test(vieux.phraseEn ?? '');
+    const vieuxBon = vieux?.phrase && vieux.motsCles && !JUGEMENT.test(vieux.phrase) && !JUGEMENT.test(vieux.phraseEn ?? '');
     if (vieux?.signature === signature && (vieuxBon || (vieux.rejets ?? 0) >= 3)) { sortie.push({ ...vieux, ...base }); continue; }
     if (utiles.length < 2) { sortie.push({ ...base, signature, phrase: null, phraseEn: null }); continue; }
 
@@ -200,7 +226,7 @@ async function main() {
         messages: [{ role: 'user', content: message }],
       });
       appels++; entree += rep.usage.input_tokens; sortieJetons += rep.usage.output_tokens;
-      const { phrase, phraseEn } = rep.content.find((c) => c.type === 'tool_use')?.input ?? {};
+      const { phrase, phraseEn, motsCles, motsClesEn } = rep.content.find((c) => c.type === 'tool_use')?.input ?? {};
       // « 5 414 590 $ » dans la phrase, « 5 414 590,00 $ » dans la source : même nombre. On tolère
       // donc un nombre de 4 chiffres ou plus qui commence un nombre de la source ; les petits
       // nombres doivent être identiques.
@@ -212,7 +238,7 @@ async function main() {
         console.log(`  ${g.id} : phrase rejetée (nombres absents de la source : ${fautifs.join(', ')}) — ${phrase}`);
         sortie.push({ ...base, signature, rejets: (vieux?.signature === signature ? vieux.rejets ?? 0 : 0) + 1, phrase: null, phraseEn: null });
       } else {
-        sortie.push({ ...base, signature, phrase, phraseEn, genereLe: new Date().toISOString() });
+        sortie.push({ ...base, signature, phrase, phraseEn, motsCles: garder(motsCles, phrase), motsClesEn: garder(motsClesEn, phraseEn), genereLe: new Date().toISOString() });
       }
     } catch (e) {
       console.log(`  ${g.id} : échec (${e.message})`);
@@ -228,6 +254,8 @@ async function main() {
   if (VILLE === 'montreal') {
     const { documentDeSeance } = await import('../montreal/scrapers/decisions.js');
     const { parserOrdreDuJour } = await import('../montreal/lib/pv.js');
+    const { classer } = await import('../montreal/lib/themes.js');
+    const themeDe = (p) => classer({ objet: p.objet ?? p.titre, categorie: p.categorie, unite: p.unite }).theme;
     const anciensOdj = new Map((ancien.ordresDuJour ?? []).map((o) => [o.id, o]));
     const aujourdhui = new Date().toISOString().slice(0, 10);
     const attente = (decisions.seances ?? [])
@@ -238,7 +266,17 @@ async function main() {
       if (faites.has(s.nom)) continue;
       const vieux = anciensOdj.get(s.id);
       const mots = (t) => String(t ?? '').split(/ +/).length;
-      if (vieux?.version === 5 && ((vieux.phrase && mots(vieux.phrase) <= 50) || (vieux.rejets ?? 0) >= 3)) { odjSortie.push(vieux); faites.add(s.nom); continue; }
+      if (vieux?.version === 6 && ((vieux.phrase && mots(vieux.phrase) <= 50) || (vieux.rejets ?? 0) >= 3)) {
+        if (vieux.themes) { odjSortie.push(vieux); faites.add(s.nom); continue; }
+        // Résumé déjà fait, mais d'avant les pastilles : on relit l'ordre du jour, sans rappeler l'IA.
+        const d2 = await documentDeSeance(s, 'ODJ').catch(() => null);
+        if (d2?.url) {
+          const u2 = parserOrdreDuJour(d2.pages).filter((p) => p.objet);
+          objetsDe.set(s.id, u2.map((p) => ({ objet: p.objet, theme: themeDe(p) })));
+          odjSortie.push({ ...vieux, themes: compterThemes(u2.map(themeDe)), points: vieux.points.map((p) => ({ ...p, theme: themeDe(p) })) });
+        } else odjSortie.push(vieux);
+        faites.add(s.nom); continue;
+      }
       let doc;
       try { doc = await documentDeSeance(s, 'ODJ'); } catch (e) { console.log(`  ${s.id} : ordre du jour illisible (${e.message})`); continue; }
       if (!doc?.url) continue;   // pas d'ordre du jour public (le comité exécutif, souvent) : on essaie la séance d'avant
@@ -256,8 +294,9 @@ async function main() {
       const points = [...propres]
         .sort((a, b) => montant(montantDe(b.objet)) - montant(montantDe(a.objet)) || (/r[èe]glement/i.test(b.objet) ? 1 : 0) - (/r[èe]glement/i.test(a.objet) ? 1 : 0))
         .slice(0, MAX_POINTS)
-        .map((p) => ({ article: p.article, titre: p.objet, montant: montantDe(p.objet)?.replace(/\s+\$$/, ' $') ?? null, lien: p.page ? `${doc.url}#page=${p.page}` : doc.url }));
-      const base = { id: s.id, version: 5, instance: s.nom, instanceEn: instanceEn(s.nom), date: s.date, odj: doc.url, nPoints: tous.length, points };
+        .map((p) => ({ article: p.article, titre: p.objet, montant: montantDe(p.objet)?.replace(/\s+\$$/, ' $') ?? null, theme: themeDe(p), lien: p.page ? `${doc.url}#page=${p.page}` : doc.url }));
+      objetsDe.set(s.id, utiles.map((p) => ({ objet: p.objet, theme: themeDe(p) })));
+      const base = { id: s.id, version: 6, instance: s.nom, instanceEn: instanceEn(s.nom), date: s.date, odj: doc.url, nPoints: tous.length, themes: compterThemes(utiles.map(themeDe)), points };
       const message = `${s.nom}, ordre du jour de la séance du ${s.date} — ${tous.length} points, dont ${utiles.length} hors procédure.\n\n${utiles.slice(0, 120).map((p) => `- ${p.objet}`).join('\n')}`;
       if (DRY) { console.log(`\n=== ODJ ${s.id}\n${message.slice(0, 500)}…`); faites.add(s.nom); continue; }
       try {
@@ -266,7 +305,7 @@ async function main() {
           messages: [{ role: 'user', content: `${message}\n\nTitres à traduire (titresEn, même ordre) :\n${points.map((p) => `- ${p.titre}`).join('\n')}` }],
         });
         appels++; entree += rep.usage.input_tokens; sortieJetons += rep.usage.output_tokens;
-        const { phrase, phraseEn, titresEn } = rep.content.find((c) => c.type === 'tool_use')?.input ?? {};
+        const { phrase, phraseEn, titresEn, motsCles, motsClesEn } = rep.content.find((c) => c.type === 'tool_use')?.input ?? {};
         const permis = nombres(message + points.map((p) => p.titre).join(' '));
         const fautifs = [...nombres(phrase), ...nombres(phraseEn)].filter((n) => !permis.some((p) => p === n || (n.length >= 4 && p.startsWith(n))));
         if (JUGEMENT.test(phrase ?? '') || JUGEMENT.test(phraseEn ?? '')) fautifs.push('mot de jugement');
@@ -277,7 +316,7 @@ async function main() {
           console.log(`  ODJ ${s.id} : phrase rejetée (${fautifs.join(', ')}) — ${phrase}`);
           odjSortie.push({ ...base, phrase: null, phraseEn: null, rejets: (vieux?.rejets ?? 0) + 1 });
         } else {
-          odjSortie.push({ ...base, phrase, phraseEn, genereLe: new Date().toISOString() });
+          odjSortie.push({ ...base, phrase, phraseEn, motsCles: garder(motsCles, phrase), motsClesEn: garder(motsClesEn, phraseEn), genereLe: new Date().toISOString() });
         }
       } catch (e) {
         console.log(`  ODJ ${s.id} : échec (${e.message})`);
@@ -289,6 +328,26 @@ async function main() {
   const cout = (entree * TARIF.entree + sortieJetons * TARIF.sortie) / 1e6;
   console.log(`Séances : ${sortie.length}, appels : ${appels}, rejets : ${rejets}, coût : ${cout.toFixed(3)} $ US`);
   if (DRY) return;
+  // Chaque mot clé prend la couleur de son sujet, la même que la barre des décisions marquantes
+  // (Martin, 13 nov. 2026). Sans IA : les règles de thèmes du site. Un mot sans sujet clair (« administration »)
+  // garde le soulignement jaune.
+  const { classer: classerMot } = await import('../montreal/lib/themes.js');
+  const colorer = (o) => {
+    const liste = objetsDe.get(o.id) ?? (o.points ?? []).map((p) => ({ objet: p.titre, theme: p.theme }));
+    const themes = (o.motsCles ?? []).map((m) => {
+      // Le sujet de la décision de la séance qui contient le mot (ou son mot le plus long), sinon les règles.
+      const cle = m.toLowerCase();
+      const long = cle.split(/[^a-zà-ÿ]+/).sort((a, b) => b.length - a.length)[0] ?? cle;
+      const utile = (x) => x.theme && x.theme !== 'procedure' && x.theme !== 'administration';
+      const trouve = liste.find((x) => utile(x) && x.objet?.toLowerCase().includes(cle)) ?? (long.length >= 5 ? liste.find((x) => utile(x) && x.objet?.toLowerCase().includes(long)) : null);
+      if (trouve) return trouve.theme;
+      const t = classerMot({ objet: m });
+      return t.themeSource === 'defaut' ? null : t.theme;
+    });
+    return { ...o, motsThemes: themes };
+  };
+  sortie.splice(0, sortie.length, ...sortie.map(colorer));
+  odjSortie.splice(0, odjSortie.length, ...odjSortie.map(colorer));
   await writeFile(OUT, JSON.stringify({
     generatedAt: new Date().toISOString(),
     modele: MODELE,

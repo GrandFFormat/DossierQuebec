@@ -806,3 +806,28 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 .eb-detail { display: inline-block; margin-top: 12px; font-weight: 600; font-size: 14px; color: var(--accent-encre); } :root[data-theme="sombre"] .eb-detail { color: var(--accent); }
 .eb-marque { padding: 2px 7px; border-radius: 3px; color: #16191D; } .eb-marque-non { background: var(--vedette); } .eb-marque-oui { background: #7ED9A4; }
 .eb-boite-retard { margin-top: 16px; } .eb-boite-retard > .eb-retard > summary { cursor: pointer; }
+
+/* Pastilles de sujets des cartes En bref (13 nov. 2026) : mêmes couleurs que les décisions. */
+.eb-sujets { display: flex; flex-wrap: wrap; gap: 5px; }
+.eb-sujets .puce { font-size: 11.5px; padding: 2px 8px; border-radius: 999px; }
+.eb-sujets .puce b { font-weight: 800; opacity: .85; margin-left: 2px; }
+.resume .eb-points li.eb-pt { border-left: 4px solid var(--c, transparent); padding-left: 8px; }
+.t-bord-urbanisme { --c: var(--t-urbanisme); }
+.t-bord-transport { --c: var(--t-transport); }
+.t-bord-immobilier { --c: var(--t-immobilier); }
+.t-bord-subventions { --c: var(--t-subventions); }
+.t-bord-contrats { --c: var(--t-contrats); }
+.t-bord-finances { --c: var(--t-finances); }
+.t-bord-rh { --c: var(--t-rh); }
+.t-bord-environnement { --c: var(--t-environnement); }
+.t-bord-culture { --c: var(--t-culture); }
+.t-bord-loisirs { --c: var(--t-loisirs); }
+.t-bord-securite { --c: var(--t-securite); }
+.t-bord-economie { --c: var(--t-economie); }
+.t-bord-travaux { --c: var(--t-travaux); }
+.t-bord-honneurs { --c: var(--t-honneurs); }
+.t-bord-social { --c: var(--t-social); }
+.t-bord-procedure { --c: var(--t-procedure); }
+.t-bord-administration { --c: var(--t-administration); }
+.eb-mot { text-decoration: underline; text-decoration-color: var(--vedette); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+.eb-mot[class*="t-bord-"] { text-decoration-color: var(--c); }
