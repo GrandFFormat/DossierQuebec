@@ -18,7 +18,7 @@ const lire = (chemin, defaut) => (existsSync(chemin) ? JSON.parse(readFileSync(c
 // Les volets municipaux : nom, dossier, et les adresses de leurs pages (les mêmes que le sitemap).
 const VILLES = [
   { nom: 'Québec', dossier: 'quebec', etat: 'volet complet', pages: ['decisions-de-la-ville-de-quebec', 'conseil-municipal-de-quebec', 'sources-des-donnees-de-quebec'] },
-  { nom: 'Montréal', dossier: 'montreal', etat: 'volet complet', pages: ['decisions-de-la-ville-de-montreal', 'votes-nominatifs-du-conseil-de-montreal', 'conseil-municipal-de-montreal', 'sources-des-donnees-de-montreal'] },
+  { nom: 'Montréal', dossier: 'montreal', etat: 'volet complet', pages: ['decisions-de-la-ville-de-montreal', 'conseil-municipal-de-montreal', 'sources-des-donnees-de-montreal'] },
   // `pause` : volets arrêtés le 7 oct. 2026 (commun/navigation.js, VILLES_EN_PAUSE), hors du fichier.
   { nom: 'Lévis', dossier: 'levis', etat: 'volet partiel (prototype)', pages: ['decisions-de-la-ville-de-levis', 'conseil-municipal-de-levis', 'sources-des-donnees-de-levis'] },
   { nom: 'Longueuil', dossier: 'longueuil', pause: true, etat: 'volet partiel (prototype)', pages: ['decisions-de-la-ville-de-longueuil', 'votes-nominatifs-du-conseil-de-longueuil', 'conseil-de-ville-de-longueuil', 'sources-des-donnees-de-longueuil'] },

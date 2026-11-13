@@ -80,6 +80,16 @@ const ETAPES = [
     nom: 'Votes enregistrés' + (complet ? ' (année complète)' : ` (depuis ${depuis})`),
     argv: ['--max-old-space-size=4096', 'scrapers/votes.js', ...(complet ? ['--complet'] : [`--depuis=${depuis}`])],
   },
+  // Les votes rangés par décision, pour la page Décisions (fusion des pages Votes et Décisions, 12 nov. 2026).
+  { nom: 'Votes par décision', argv: ['scripts/votes-decisions.js'], secondaire: true },
+  // Contrats (SEAO) chaque jour ; budget et taxes (MAMH) le lundi ; taux d'arrondissement (environ 3 Go,
+  // donnees.montreal.ca) seulement en février, quand la Ville publie les comptes de l'année (12 nov. 2026).
+  { nom: 'Contrats octroyés (SEAO)', argv: ['scrapers/contrats.js'], secondaire: true },
+  ...(maintenant.getUTCDay() === 1 ? [{ nom: 'Budget et taxes (MAMH)', argv: ['scrapers/finances.js'], secondaire: true }] : []),
+  // Près de chez moi : adresses le lundi, permis et travaux en cours chaque jour (après les contrats).
+  ...(maintenant.getUTCDay() === 1 ? [{ nom: 'Adresses et districts', argv: ['scrapers/adresses.js'], secondaire: true }] : []),
+  { nom: 'Permis et travaux en cours', argv: ['scrapers/permis-travaux.js'], secondaire: true },
+  ...(maintenant.getUTCMonth() === 1 && maintenant.getUTCDate() >= 20 && maintenant.getUTCDay() === 1 ? [{ nom: 'Taux de taxes des arrondissements', argv: ['scrapers/taux-taxes.js'], secondaire: true }] : []),
   { nom: 'Lexique, mesuré sur les procès-verbaux', argv: ['scrapers/lexique.js'], secondaire: true },
   // « Où en est le projet » : un récapitulatif par sujet suivable, écrit par le modèle à
   // partir du texte des résolutions et vérifié mécaniquement. Même clé que les résumés ;

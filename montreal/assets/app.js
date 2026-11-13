@@ -343,12 +343,14 @@ function decisionsFiltrees() {
   const instance = $('#filtre-instance').value;
   const theme = $('#filtre-theme')?.value ?? '';
   const avecResume = $('#filtre-resume')?.checked ?? false;
+  const avecVote = $('#filtre-vote')?.checked;
   return etat.decisions.decisions.filter((d) => {
     if (etat.projet && !d.projets?.includes(etat.projet)) return false;
     if (type && d.type !== type) return false;
     if (instance && d.instance !== instance) return false;
     if (theme && d.theme !== theme) return false;
     if (avecResume && !resumePour(d)) return false;
+    if (avecVote && !etat['votes-decisions']?.v?.[d.numero]) return false;
     // L'identifiant du document entre aussi dans la recherche : un procès-verbal n'a pas de numéro,
     // et c'est par son identifiant que le courriel ouvre sa fiche (?q=PV_CA4_OR_…).
     if (q && !((d.objet ?? '') + ' ' + (d.numero ?? '') + ' ' + (d.id ?? '')).toLowerCase().includes(q)) return false;
@@ -580,8 +582,9 @@ function tableauVotesContre(votes) {
     .join('');
 }
 
-function rendreVotes() {
-  const votes = etat.votes.votes;
+// Le tableau des votes contre : sur la page Conseil depuis la fusion des pages Votes et Décisions
+// (12 nov. 2026).
+function rendreDissidence(votes) {
   if ($('#table-dissidence')) {
     $('#table-dissidence tbody').innerHTML = tableauVotesContre(votes);
     // Le tableau est replié : son résumé doit donc porter assez d'information pour qu'on
@@ -592,10 +595,16 @@ function rendreVotes() {
       const tri = [...compte.entries()].sort((a, b) => b[1] - a[1]);
       const tete = tri.slice(0, 3).map(([n, c]) => `${n} (${c})`).join(', ');
       $('#resume-dissidence').textContent = EN
-        ? `${tri.length} ${s(tri.length, 'person', 'people')}` + (tete ? ` — most: ${tete}` : '')
-        : `${tri.length} personne${tri.length > 1 ? 's' : ''}` + (tete ? ` — en tête : ${tete}` : '');
+        ? `${tri.length} ${s(tri.length, 'person', 'people')}` + (tete ? `. Most: ${tete}` : '')
+        : `${tri.length} personne${tri.length > 1 ? 's' : ''}` + (tete ? `. En tête : ${tete}` : '');
     }
   }
+
+}
+
+function rendreVotes() {
+  const votes = etat.votes.votes;
+  rendreDissidence(votes);
 
   if (!$('#filtre-instance-votes').dataset.rempli) {
     const compte = new Map();
@@ -960,7 +969,7 @@ function ligneEvenement(e) {
     const corps = `<p class="compte" style="margin:0">
         ${v.decomptePour ?? v.pour.length} ${tr('pour', 'for')}, ${v.decompteContre ?? v.contre.length} ${tr('contre', 'against')}${
           v.contre.length ? ' — ' + v.contre.map(echapper).join(', ') : ''
-        }. <a href="votes-nominatifs-du-conseil-de-montreal">${tr('Voir le détail', 'See details')}</a>
+        }. <a href="decisions-de-la-ville-de-montreal?q=${encodeURIComponent(v.numero ?? '')}">${tr('Voir le détail', 'See details')}</a>
       </p>`;
     return carteRepliable(entete, corps);
   }
@@ -1011,7 +1020,7 @@ function rendreAccueil() {
     chiffres.push({ n: nombreFr(totalDecisions()), quoi: tr(`décisions publiées en ${etat.decisions.parametres.annee}`, `decisions published in ${etat.decisions.parametres.annee}`), lien: 'decisions-de-la-ville-de-montreal' });
   }
   if (etat.votes) {
-    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: tr('votes nominatifs consignés cette année', 'recorded votes this year'), lien: 'votes-nominatifs-du-conseil-de-montreal' });
+    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: tr('votes nominatifs consignés cette année', 'recorded votes this year'), lien: 'decisions-de-la-ville-de-montreal?vote=1' });
   }
   if (etat.resumes) {
     // Décisions qui affichent un résumé (procédure exclue, 9 nov. 2026), pas le total brut du fichier.
@@ -1081,7 +1090,7 @@ function rendreEtat() {
 // ---------- démarrage ----------
 const BESOINS = {
   accueil: ['decisions', 'votes', 'elus', 'resumes'],
-  decisions: ['decisions', 'resumes'],
+  decisions: ['decisions', 'resumes', 'votes-decisions'],
   votes: ['votes'],
   conseil: ['elus', 'districts', 'votes', 'decisions', 'agglomeration'],
   lexique: ['lexique'],
@@ -1131,6 +1140,8 @@ async function init() {
     const instance = new URLSearchParams(location.search).get('instance');
     const recherche = new URLSearchParams(location.search).get('q');
     if (recherche && $('#rech-decisions')) $('#rech-decisions').value = recherche;
+    // ?vote=1 : arrivée depuis l'ancienne page Votes nominatifs (redirection), filtre déjà coché.
+    if (new URLSearchParams(location.search).has('vote') && $('#filtre-vote')) $('#filtre-vote').checked = true;
     // Arriver sur les décisions d'un sujet (lien depuis « Mes dossiers ») : filtre annoncé,
     // et retirable — sans quoi le lecteur croit voir toutes les décisions de la Ville.
     const projet = new URLSearchParams(location.search).get('projet');
@@ -1153,6 +1164,7 @@ async function init() {
   }
   if (page === 'votes') rendreVotes();
   if (page === 'conseil') {
+    if (etat.votes) rendreDissidence(etat.votes.votes);
     if (etat.districts) rendreCarte();
     rendreElus();
     rendreComiteExecutif();
@@ -1164,7 +1176,7 @@ async function init() {
 
 // Filtres et pagination : câblés seulement si la page les contient.
 document.addEventListener('input', (e) => {
-  if (e.target.matches('#rech-decisions, #filtre-type, #filtre-instance, #filtre-theme, #filtre-resume, #affichage')) {
+  if (e.target.matches('#rech-decisions, #filtre-type, #filtre-instance, #filtre-theme, #filtre-resume, #filtre-vote, #affichage')) {
     etat.limiteDecisions = PAS;
     etat.limiteSeances = PAS_SEANCES;
     rendreDecisions();
@@ -1375,4 +1387,30 @@ document.addEventListener('click', (e) => {
   });
   b.textContent = tr('Tout fermer', 'Collapse all');
   s.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}, true);
+
+
+// VOTE NOMINATIF SUR LA FICHE (fusion des pages Votes et Décisions, 12 nov. 2026). Quand la décision a
+// fait l'objet d'un vote, la fiche montre le résultat, qui a voté pour et contre, et qui a demandé le
+// vote (scripts/votes-decisions.js → data/votes-decisions.json, lu une seule fois).
+let votesParDecision = null;
+document.addEventListener('toggle', async (e) => {
+  const fiche = e.target;
+  if (!fiche.matches?.('details.carte.pliante') || !fiche.open || fiche.querySelector('.bloc-vote')) return;
+  if (document.body.dataset.page !== 'decisions') return;
+  const numero = fiche.querySelector('.puce.num')?.textContent.trim();
+  if (!numero) return;
+  votesParDecision ??= etat['votes-decisions'] ? Promise.resolve(etat['votes-decisions']) : charger('votes-decisions');
+  const jeu = await votesParDecision;
+  const v = jeu?.v?.[numero];
+  if (!v || fiche.querySelector('.bloc-vote')) return;
+  const [resultat, pour, contre, demandeur, pdf] = v;
+  const noms = (l) => l.map((i) => echapper(jeu.noms[i])).join(', ');
+  fiche.querySelector('.corps')?.insertAdjacentHTML('afterbegin', `<div class="bloc-vote">
+    <div class="resume-entete">${tr('Vote nominatif', 'Recorded vote')} · ${echapper(resultat)} · ${pour.length} ${tr('pour', 'for')}, ${contre.length} ${tr('contre', 'against')}</div>
+    <p style="margin:0 0 4px"><strong>${tr('Pour', 'For')}</strong> : ${noms(pour) || '—'}</p>
+    <p style="margin:0 0 4px"><strong>${tr('Contre', 'Against')}</strong> : ${noms(contre) || '—'}</p>
+    ${demandeur ? `<p class="compte" style="margin:0">${tr('Vote demandé par', 'Vote called by')} ${echapper(demandeur)}.</p>` : ''}
+    ${pdf ? `<p class="compte" style="margin:2px 0 0"><a href="${echapper(pdf)}" target="_blank" rel="noopener">${tr('Résolution officielle (PDF) ↗', 'Official resolution (PDF, in French) ↗')}</a></p>` : ''}
+  </div>`);
 }, true);

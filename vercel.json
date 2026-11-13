@@ -204,12 +204,12 @@
     },
     {
       "source": "/montreal/votes",
-      "destination": "/montreal/votes-nominatifs-du-conseil-de-montreal",
+      "destination": "/montreal/decisions-de-la-ville-de-montreal?vote=1",
       "permanent": true
     },
     {
       "source": "/montreal/votes.html",
-      "destination": "/montreal/votes-nominatifs-du-conseil-de-montreal",
+      "destination": "/montreal/decisions-de-la-ville-de-montreal?vote=1",
       "permanent": true
     },
     {
@@ -244,12 +244,12 @@
     },
     {
       "source": "/montreal/votes-nominatifs",
-      "destination": "/montreal/votes-nominatifs-du-conseil-de-montreal",
+      "destination": "/montreal/decisions-de-la-ville-de-montreal?vote=1",
       "permanent": true
     },
     {
       "source": "/montreal/votes-nominatifs.html",
-      "destination": "/montreal/votes-nominatifs-du-conseil-de-montreal",
+      "destination": "/montreal/decisions-de-la-ville-de-montreal?vote=1",
       "permanent": true
     },
     {
@@ -575,6 +575,16 @@
     {
       "source": "/levis/votes-nominatifs-du-conseil-de-levis.html",
       "destination": "/levis/decisions-de-la-ville-de-levis?vote=1",
+      "permanent": true
+    },
+    {
+      "source": "/montreal/votes-nominatifs-du-conseil-de-montreal",
+      "destination": "/montreal/decisions-de-la-ville-de-montreal?vote=1",
+      "permanent": true
+    },
+    {
+      "source": "/montreal/votes-nominatifs-du-conseil-de-montreal.html",
+      "destination": "/montreal/decisions-de-la-ville-de-montreal?vote=1",
       "permanent": true
     }
   ]
