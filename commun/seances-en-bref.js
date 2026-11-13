@@ -95,6 +95,10 @@ const parNom = (a, b) => nomCourt(a.instance).localeCompare(nomCourt(b.instance)
 
 const NOTE_FR = "<strong>Notre lecture, pas la version officielle</strong> et <strong>peut changer d'ici le dépôt de la version officielle.</strong> La phrase de chaque carte est écrite par IA. Pour les séances récentes, elle résume l'ordre du jour, c'est-à-dire ce qui était prévu : un point peut être modifié, reporté ou retiré avant le procès-verbal de la Ville.";
 const NOTE_EN = "<strong>Our reading, not the official version</strong> and <strong>may change until the official version is filed.</strong> Each card's sentence is AI-written. For recent meetings, it summarizes the agenda, that is what was planned: an item may be amended, postponed or withdrawn before the City's minutes.";
+// Sans ordre du jour en avant (Québec, Lévis) : tout vient du procès-verbal, publié tout de suite.
+// C'est la version officielle, résumée (Martin, 13 nov. 2026) : pas de « pas la version officielle ».
+const NOTE_PV_FR = "<strong>D'après le procès-verbal de la Ville.</strong> La phrase de chaque carte en est un résumé écrit par IA. Le procès-verbal fait foi : le lien est au bas de chaque carte.";
+const NOTE_PV_EN = "<strong>From the City's minutes.</strong> Each card's sentence is an AI-written summary of them. The minutes prevail: the link is at the bottom of each card.";
 const RETARD_FR = "Un procès-verbal est d'abord adopté à la séance suivante, puis mis en ligne. On a donc toujours un mois de retard, souvent plus pour le comité exécutif. Voici la dernière séance de chaque conseil dont le procès-verbal est publié : ce qui a été décidé, d'après notre extraction.";
 const RETARD_EN = "Minutes are first adopted at the next meeting, then put online. So we are always a month behind, often more for the executive committee. Here is the latest meeting of each council whose minutes are published: what was decided, according to our extraction.";
 
@@ -125,9 +129,9 @@ async function init() {
 
   zone.innerHTML = `<div class="resume eb-gros">
     <div class="resume-entete"><span>${tr('En bref — la dernière séance de chaque conseil · résumé généré par IA', 'In brief — the latest meeting of each council · AI-generated summary')}</span></div>
-    <div class="eb-note">${tr(NOTE_FR, NOTE_EN)}</div>
+    <div class="eb-note">${odjs.size ? tr(NOTE_FR, NOTE_EN) : tr(NOTE_PV_FR, NOTE_PV_EN)}</div>
     ${grille(principales, jeu.page, false)}
-    ${n ? `<details class="eb-arr"><summary><span class="eb-marque eb-marque-non">${tr(`Les ${n} arrondissements · non officiel`, `The ${n} boroughs · not official`)}</span></summary>${grille(arrondissements, jeu.page, true)}</details>` : ''}
+    ${n ? `<details class="eb-arr"><summary>${odjs.size ? `<span class="eb-marque eb-marque-non">${tr(`Les ${n} arrondissements · non officiel`, `The ${n} boroughs · not official`)}</span>` : tr(`Les ${n} arrondissements`, `The ${n} boroughs`)}</summary>${grille(arrondissements, jeu.page, true)}</details>` : ''}
   </div>
   ${derriere.length ? `<div class="resume eb-gros eb-boite-retard"><details class="eb-arr eb-retard"><summary><span class="eb-marque eb-marque-non">${tr("Pourquoi un mois de retard ? C'est la façon de faire de Montréal", 'Why a month behind? That is how Montréal works')}</span></summary>
       <div class="eb-note">${tr(RETARD_FR, RETARD_EN)}</div>
@@ -143,5 +147,20 @@ async function init() {
     if (retard) zone.insertBefore(merci, retard); else zone.appendChild(merci);
   }
   zone.hidden = false;
+  // Arrivée sur une décision précise (?q=) : le cadre reste en haut, comme partout (Martin, 13 nov. 2026),
+  // mais il vient de pousser la liste vers le bas. On redescend sur la fiche ouverte dès qu'elle est là.
+  if (new URLSearchParams(location.search).has('q')) {
+    let essais = 0;
+    const viser = () => {
+      const fiches = document.querySelectorAll('#liste-decisions details.carte');
+      if (fiches.length === 1) {
+        fiches[0].scrollIntoView({ block: 'center' });
+        // Une deuxième fois, quand les images et le reste de la page ont fini de bouger.
+        setTimeout(() => fiches[0].scrollIntoView({ block: 'center' }), 600);
+      }
+      else if (essais++ < 30) setTimeout(viser, 100);
+    };
+    requestAnimationFrame(viser);
+  }
 }
 init();

@@ -1021,6 +1021,10 @@ async function init() {
       $('#filtre-instance').value = instance;
       rendreDecisions();
     }
+    // Arrivée sur une décision précise (?q=CV3825, lien de l'encadré En bref) : on l'ouvre et on y va,
+    // comme à Montréal et à Québec (13 nov. 2026).
+    const q = new URLSearchParams(location.search).get('q');
+    if (q) { const seules = $('#liste-decisions').querySelectorAll('details.carte'); if (seules.length === 1) { for (let p = seules[0]; p; p = p.parentElement?.closest('details')) p.open = true; seules[0].scrollIntoView({ block: 'center' }); } }
   }
   if (page === 'votes') {
     // Arrivée depuis une décision : « Voir qui a voté pour et contre » passe son numéro.
