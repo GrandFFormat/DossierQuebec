@@ -329,8 +329,9 @@ const projet = (b) => `<b>Projet de loi n° ${ht(b.num)}</b> — ${ht(b.title)}$
 // Même normalisation que norm() dans commun/dq.js : c'est elle qui sépare les ministres du reste
 // de l'Assemblée.
 const normNom = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[-–—']/g, ' ').replace(/\s+/g, ' ').trim();
-// Volets de ville du journal : « villes » = un changement commun à toutes les villes.
-const JOURNAL_VILLES = ['quebec', 'montreal', 'levis', 'laval', 'longueuil', 'villes'];
+// Volets d'une seule ville : leurs entrées vont sur la page Sources de cette ville. Les entrées
+// « villes » (communes à toutes) restent ici.
+const JOURNAL_VILLES = ['quebec', 'montreal', 'levis', 'laval', 'longueuil'];
 const JOURNAL_PREMIERES = 20;   // même valeur que dans commun/dq.js : la page n'en montre pas plus
 
 function prerendus(valeurs) {

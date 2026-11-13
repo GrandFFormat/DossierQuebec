@@ -1,6 +1,6 @@
 // JOURNAL DE CHAQUE VILLE (Martin, 12 nov. 2026). La page Sources de chaque volet de ville reçoit ses
-// propres mises à jour (volet = la ville) et celles communes à toutes les villes (volet = « villes »),
-// écrites entre <!--JOURNAL-VILLE--> et <!--/JOURNAL-VILLE-->, à la fin du <main> la première fois.
+// propres mises à jour (volet = la ville) seulement. Les changements communs à toutes les villes
+// (volet = « villes ») restent sur /sources du site principal. Écrites entre <!--JOURNAL-VILLE--> et <!--/JOURNAL-VILLE-->, à la fin du <main> la première fois.
 // Le site principal (/sources) ne montre plus ces entrées (scripts/build-section-pages.js, commun/dq.js).
 //
 //   node scripts/journal-villes.js     (lancé aussi à la fin de scripts/build-section-pages.js)
@@ -21,7 +21,7 @@ export function journalDesVilles() {
     const fichier = `${v}/sources-des-donnees-de-${v}.html`;
     if (!existsSync(fichier)) continue;
     const entrees = tout
-      .filter((e) => e && e.fr && /^\d{4}-\d{2}-\d{2}$/.test(e.date) && (e.volet === v || e.volet === 'villes'))
+      .filter((e) => e && e.fr && /^\d{4}-\d{2}-\d{2}$/.test(e.date) && e.volet === v)
       .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
       .slice(0, MAX);
     const liste = entrees.map((e) => {
