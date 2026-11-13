@@ -188,11 +188,15 @@ export function decisionsDeSeance(seance, pv, odj) {
     const annexe = dossier ? sommaireParDossier.get(dossier) ?? null : null;
     // L'objet du procès-verbal quand il en a un ; sinon — au comité exécutif, où la
     // résolution commence par « Il est RÉSOLU » — celui de l'ordre du jour, plus lisible.
-    const objetPv = r.objet && !/^(?:Il est|R[ÉE]SOLU|L['’][ée]tude de ce dossier)/i.test(r.objet) ? r.objet : null;
+    // La dernière résolution d'un procès-verbal avale parfois ce qui suit dans le PDF : signatures
+    // (« /sb », lignes de soulignés) et sommaire décisionnel joint (« Système de gestion des
+    // décisions des instances… »). On coupe le titre là (13 nov. 2026 : 3 titres touchés).
+    const objetPropre = nettoyerObjet(r.objet);
+    const objetPv = objetPropre && !/^(?:Il est|R[ÉE]SOLU|L['’][ée]tude de ce dossier)/i.test(objetPropre) ? objetPropre : null;
     return {
       id: r.numero,
       numero: r.numero,
-      objet: objetPv ?? point?.objet ?? r.objet ?? null,
+      objet: objetPv ?? point?.objet ?? objetPropre ?? r.objet ?? null,
       categorie: point?.categorie ?? null,
       date: seance.date,
       annee: seance.date.slice(0, 4),
@@ -455,3 +459,8 @@ if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split(/[\\/]/).p
   });
 }
 
+export function nettoyerObjet(t) {
+  if (!t) return t ?? null;
+  const propre = String(t).replace(/\s*(?:Système de gestion des décisions des instances|_{10,}|(?:^|\s)\/sb\b)[\s\S]*$/, '').trim();
+  return propre || null;
+}
