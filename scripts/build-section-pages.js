@@ -690,7 +690,7 @@ const PAGES_VILLE = [
   // Contrats octroyés (SEAO), à l'essai sur Québec seulement (12 nov. 2026).
   { page: 'contrats', parVille: { quebec: 'contrats-de-la-ville-de-quebec' }, seulement: ['quebec'], frequence: 'weekly', priorite: '0.6' },
   { page: 'budget', parVille: { quebec: 'budget-et-taxes-de-quebec' }, seulement: ['quebec'], frequence: 'monthly', priorite: '0.6' },
-  { page: 'pres', parVille: { quebec: 'pres-de-chez-moi-a-quebec' }, seulement: ['quebec'], frequence: 'weekly', priorite: '0.7' },
+  { page: 'pres', parVille: { quebec: 'pres-de-chez-moi-a-quebec', levis: 'pres-de-chez-moi-a-levis' }, seulement: ['quebec', 'levis'], frequence: 'weekly', priorite: '0.7' },
 ];
 function derniereDate(ville, jeu) {
   const chemin = `${ville}/data/${jeu}.json`;
