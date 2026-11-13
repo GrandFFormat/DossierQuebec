@@ -794,7 +794,7 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 .eb-attente { font-size: 12.5px; color: var(--doux); font-style: italic; margin: 0; padding: 0; background: none; }
 .eb-note strong { color: var(--encre); } .eb-retard { margin-top: 6px; }
 .eb-note { font-size: 13.5px; color: var(--encre); margin: 0 0 8px; } .eb-note + .eb-grille { margin-top: 12px; }
-.eb-note strong { background: var(--vedette); color: #16191D; padding: 1px 5px; border-radius: 3px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.eb-note strong { background: none; color: inherit; text-decoration: underline; text-decoration-color: var(--vedette); text-decoration-thickness: 2px; text-underline-offset: 3px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .eb-liens { margin-top: auto; display: flex; flex-direction: column; gap: 4px; } .eb-liens .eb-tout { margin-top: 0; } .eb-officiel { font-size: 13px; font-weight: 600; color: var(--encre); text-decoration: underline; text-decoration-color: var(--vedette); text-underline-offset: 3px; }
 .eb-sorte { align-self: flex-start; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 2px 7px; border-radius: 3px; }
 .eb-sorte-odj { background: none; color: inherit; padding: 0 0 2px; border-radius: 0; border-bottom: 2px solid var(--vedette); }
@@ -804,7 +804,7 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 .eb-retard[open] > summary { margin-bottom: 8px; }
 .eb-retard .eb-grille + .eb-grille { margin-top: 12px; }
 .eb-detail { display: inline-block; margin-top: 12px; font-weight: 600; font-size: 14px; color: var(--accent-encre); } :root[data-theme="sombre"] .eb-detail { color: var(--accent); }
-.eb-marque { padding: 2px 7px; border-radius: 3px; color: #16191D; } .eb-marque-non { background: var(--vedette); } .eb-marque-oui { background: #7ED9A4; }
+.eb-marque { padding: 2px 7px; border-radius: 3px; color: #16191D; } .eb-marque-non { background: none; color: inherit; padding: 0; text-decoration: underline; text-decoration-color: var(--vedette); text-decoration-thickness: 2px; text-underline-offset: 3px; } .eb-marque-oui { background: #7ED9A4; }
 .eb-boite-retard { margin-top: 16px; } .eb-boite-retard > .eb-retard > summary { cursor: pointer; }
 
 /* Pastilles de sujets des cartes En bref (13 nov. 2026) : mêmes couleurs que les décisions. */
