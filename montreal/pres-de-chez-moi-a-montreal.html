@@ -156,6 +156,7 @@
     .genre-permis.ville { background: var(--t-transport, #1D4ED8); }
     .genre-permis.prive { background: var(--t-urbanisme, #7C3AED); }
     .contrat-chantier { display: block; font-size: .85rem; color: var(--doux); margin-top: 2px; }
+    #resultat-adresse.apercu { opacity: .45; filter: grayscale(1); max-height: 660px; overflow: hidden; -webkit-mask-image: linear-gradient(#000 80%, transparent); mask-image: linear-gradient(#000 80%, transparent); }
     .lien-carte { display: inline-flex; vertical-align: -2px; color: var(--accent); }
   </style>
   <script type="module">
@@ -182,10 +183,11 @@
     let index = null, districts = null;
     const formulaire = document.getElementById('qui-represente');
 
-    formulaire.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    formulaire.addEventListener('submit', (e) => { e.preventDefault(); chercher(document.getElementById('adresse').value); });
+    async function chercher(texte, apercu = false) {
       const zone = document.getElementById('resultat-adresse');
-      const m = document.getElementById('adresse').value.trim().match(/^(\d+)[A-Za-z]?\s*[, -]*\s*(.+)$/);
+      zone.classList.toggle('apercu', apercu);
+      const m = texte.trim().match(/^(\d+)[A-Za-z]?\s*[, -]*\s*(.+)$/);
       if (!m) { zone.innerHTML = `<p>${tr('Tapez le numéro puis la rue, par exemple « 1191 rue Peel ».', 'Type the number then the street, for example “1191 rue Peel”.')}</p>`; return; }
       const numero = Number(m[1]);
       let voie = cle(m[2]);
@@ -233,10 +235,11 @@
       if (permis.length) zone.insertAdjacentHTML('beforeend', `<section class="bloc-pres"><h3>${tr('Près de chez vous', 'Near you')}${dp} ${permis.length} ${tr('permis délivrés dans le quartier', 'permits issued in the neighbourhood')} ${esc(t.quartier)} ${tr('depuis 12 mois', 'over the last 12 months')}</h3><ul>${
         permis.slice(0, 15).map((p) => { const g = genrePermis(p[2]); return `<li><span class="genre-permis ${g[0]}">${g[1]}</span> <span class="compte">${jour(p[0])}</span> ${carteCoord(p[4], p[5])} ${esc(p[1])} : ${esc(p[2])}</li>`; }).join('')
       }</ul>${permis.length > 15 ? `<p class="compte">${tr('Les 15 plus récents.', 'The 15 most recent.')}</p>` : ''}</section>`);
-    });
+    }
 
     // #adresse : arrivée par le lien d'exemple ; le # n'est jamais envoyé au serveur.
-    const lancer = () => { const v = decodeURIComponent(location.hash.slice(1)); if (v) { document.getElementById('adresse').value = v; formulaire.requestSubmit(); } };
+    const lancer = () => { const v = decodeURIComponent(location.hash.slice(1)); if (v) { document.getElementById('adresse').value = v; chercher(v); } else chercher('1191 rue Peel', true); };
+    // Sans adresse : l'exemple s'affiche en gris, comme un texte indicatif, jusqu'à la première recherche.
     window.addEventListener('hashchange', lancer);
     lancer();
   </script>

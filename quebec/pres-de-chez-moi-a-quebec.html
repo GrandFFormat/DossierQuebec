@@ -163,6 +163,7 @@
     .genre-permis.ouvert { background: var(--doux); }
     .genre-permis.ville { background: var(--t-transport); }
     .genre-permis.prive { background: var(--t-urbanisme); }
+    #resultat-adresse.apercu { opacity: .45; filter: grayscale(1); max-height: 660px; overflow: hidden; -webkit-mask-image: linear-gradient(#000 80%, transparent); mask-image: linear-gradient(#000 80%, transparent); }
     .lien-carte { display: inline-flex; vertical-align: -2px; color: var(--accent); }
     .lien-carte:hover { color: var(--accent-encre); }
     .permis-quartier { margin-top: 10px; }
@@ -205,10 +206,11 @@
     const dp = EN ? ':' : '&nbsp;:';
 
     const formulaire = document.getElementById('qui-represente');
-    formulaire.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    formulaire.addEventListener('submit', (e) => { e.preventDefault(); chercher(document.getElementById('adresse').value); });
+    async function chercher(texte, apercu = false) {
       const zone = document.getElementById('resultat-adresse');
-      const saisie = document.getElementById('adresse').value.trim();
+      zone.classList.toggle('apercu', apercu);
+      const saisie = texte.trim();
       const m = saisie.match(/^(\d+[A-Za-z]?)\s*[, -]*\s*(.+)$/);
       if (!m) { zone.innerHTML = `<p>${tr('Tapez le numéro puis la rue, par exemple « 40 boulevard Henri-Bourassa ».', 'Type the number then the street, for example “40 boulevard Henri-Bourassa”.')}</p>`; return; }
       const numero = m[1].toUpperCase();
@@ -275,15 +277,18 @@
           }</ul>${permis.length > 15 ? `<p class="compte">${tr('Les 15 plus récents.', 'The 15 most recent.')}</p>` : ''}<p class="compte">${tr('Source : Permis délivrés à la Ville de Québec, Données Québec (CC BY 4.0).', 'Source: Permits issued by the City of Québec, Données Québec (CC BY 4.0).')}</p></section>`);
         }
       }
-    });
+    }
+
     // #adresse : arrivée depuis la petite case de la page Conseil, la recherche part toute seule.
     // Le # n'est jamais envoyé au serveur : l'adresse reste dans le navigateur.
     const venue = decodeURIComponent(location.hash.slice(1));
     window.addEventListener('hashchange', () => {
       const v = decodeURIComponent(location.hash.slice(1));
-      if (v) { document.getElementById('adresse').value = v; formulaire.requestSubmit(); }
+      if (v) { document.getElementById('adresse').value = v; chercher(v); }
     });
-    if (venue) { document.getElementById('adresse').value = venue; formulaire.requestSubmit(); }
+    if (venue) { document.getElementById('adresse').value = venue; chercher(venue); }
+    // Sans adresse : l'exemple s'affiche en gris, comme un texte indicatif, jusqu'à la première recherche.
+    else chercher('1000 route de l’Église', true);
   </script>
 
   <h2 data-en="Sources">Sources</h2>
