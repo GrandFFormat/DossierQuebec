@@ -38,6 +38,8 @@ const etat = !reset && existsSync(SORTIE)
 // compte les soumissionnaires de CE lot. Sans ça, un avis de 21 lots afficherait le nombre de
 // soumissionnaires de l'avis entier (vérifié contre le SEAO le 12 nov. 2026).
 const offres = etat.offres || {};
+// Titres des lots par ocid (« Lot 02 »…), pour afficher quel lot chaque octroi a remporté.
+const lotsAvis = etat.lots || {};
 
 // Les fichiers à lire : mensuels depuis DEPUIS, puis les hebdomadaires qui commencent après la fin
 // du dernier mensuel. Un hebdo relu plus tard (doublon d'un mensuel) ne fait que réécrire les
@@ -76,7 +78,10 @@ for (const f of aLire) {
     if (!estMontreal(r.buyer?.name)) continue;
     // SEAO-2022 : les soumissions sont une liste dans r.bids (l'ancien format les mettait dans r.bids.details).
     const soumissions = Array.isArray(r.bids) ? r.bids : r.bids?.details;
-    if (soumissions?.length) offres[r.ocid] = soumissions.map((b) => [b.id, b.value ?? null, b.relatedLots || []]);
+    // [fournisseur, montant, lots, nom, conforme, admissible] ; conforme/admissible : '1', '0' ou null.
+    const nomDe = (id) => (r.parties?.find((p) => p.id === id)?.name || '').trim();
+    if (soumissions?.length) offres[r.ocid] = soumissions.map((b) => [b.id, b.value ?? null, b.relatedLots || [], nomDe(b.id), b.conform ?? null, b.admissible ?? null]);
+    if (r.tender?.lots?.length) lotsAvis[r.ocid] = Object.fromEntries(r.tender.lots.map((l) => [l.id, (l.title || '').trim()]));
     if (!r.awards?.length) continue;
     const t = r.tender || {};
     for (const a of r.awards) {
@@ -86,6 +91,12 @@ for (const f of aLire) {
       const avant = parCle.get(cle);
       if (avant && avant.maj > r.date) continue;
       const fo = a.suppliers?.[0] || {};
+      // Modifications du contrat (r.contracts[].amendments, reliées à l'octroi par awardID) : date et
+      // motif ; le SEAO n'y met pas de montant dans les données ouvertes.
+      const ct = r.contracts?.find((x) => x.awardID === a.id);
+      const modifs = ct?.amendments?.length
+        ? ct.amendments.map((m) => [(m.date || '').slice(0, 10), (m.rationale || m.description || '').trim(), m.value?.amount ?? m.amendedValue?.amount ?? null])
+        : avant?.modifs || null;
       const neq = r.parties?.find((p) => p.id === fo.id)?.details?.neq || null;
       parCle.set(cle, {
         cle,
@@ -106,6 +117,7 @@ for (const f of aLire) {
         fournisseur: (fo.name || '').trim(),
         neq,
         url: urlSeao(r) || avant?.url || null,
+        modifs,
       });
       n++;
     }
@@ -125,6 +137,9 @@ for (const c of parCle.values()) {
     const choix = proche.length === 1 ? proche[0] : siennes.length === 1 ? siennes[0] : null;
     if (choix && choix[2].length === 1) lot = choix[2][0];
   }
+  c.lot = lot;
+  // Avis sans lot : toutes les soumissions de l'avis sont celles de ce contrat.
+  if (!lot && o && c.nbLots <= 1) c.lotTous = true;
   if (lot) c.soumissions = new Set(o.filter((b) => b[2].includes(lot)).map((b) => b[0])).size;
   // Un seul soumissionnaire pour tout l'avis : chaque lot en a eu un seul, lots ou pas.
   else if (c.nbLots <= 1 || c.soumAvis === 1) c.soumissions = c.soumAvis;
@@ -139,6 +154,7 @@ writeFileSync(SORTIE, JSON.stringify({
   fichiers: etat.fichiers,
   contrats,
   offres,
+  lots: lotsAvis,
 }));
 // Version allégée pour la page (contrats-de-la-ville-de-montreal.html) : tableaux plutôt qu'objets,
 // motifs et catégories en index, seul l'ItemId de l'adresse SEAO. ~3 fois moins lourd.
@@ -187,16 +203,32 @@ console.log(`Contrats : ${relies.length} reliés à une décision du conseil (${
 const motifs = [...new Set(contrats.map((c) => c.motif || ''))];
 const categories = [...new Set(contrats.map((c) => c.categorie || ''))];
 const modes = [...new Set(contrats.map((c) => c.mode || ''))];
+// Détails (lot, soumissionnaires, modifications) calculés une fois : contrats-details.json les garde,
+// contrats-page.json en garde le nombre pour l'étiquette du bouton (pas de case vide à ouvrir).
+const DETAILS = contrats.map((c) => {
+  const o = offres[c.ocid] || [];
+  const du = c.lot ? o.filter((b) => b[2].includes(c.lot)) : c.lotTous ? o : [];
+  const nb = (v) => (v == null ? null : v === '1' || v === 1 ? 1 : 0);
+  const soums = du.map((b) => [b[3] || b[0], b[1], nb(b[4]), nb(b[5]), b[0] === c.foId ? 1 : 0]);
+  const titreLot = c.lot ? lotsAvis[c.ocid]?.[c.lot] || '' : '';
+  return soums.length || titreLot || c.modifs?.length ? [titreLot, soums, c.modifs || []] : 0;
+});
 writeFileSync('data/contrats-page.json', JSON.stringify({
   depuis: DEPUIS,
   extraction: new Date().toISOString(),
   modes, motifs, categories,
-  // [date, montant, mode, soumissions, motif, catégorie, fournisseur, titre, ItemId SEAO, n° d'avis si relié à une décision]
+  // [date, montant, mode, soumissions, motif, catégorie, fournisseur, titre, ItemId SEAO, n° d'avis si relié à une décision,
+  //  détails : nombre de soumissionnaires affichés, -1 = lot ou modifications sans soumissionnaires, 0 = rien]
   c: contrats.map((c) => [
     c.date, c.montant, modes.indexOf(c.mode || ''), c.soumissions,
     motifs.indexOf(c.motif || ''), categories.indexOf(c.categorie || ''),
     nomAffiche(c), c.titre, (c.url || '').split('ItemId=')[1] || '',
     decisionsDe(c).length ? c.numero : '',
+    DETAILS[contrats.indexOf(c)] ? DETAILS[contrats.indexOf(c)][1].length || -1 : 0,
   ]),
 }));
+// Détails chargés à la demande (clic sur un contrat) : même ordre que contrats-page.json.
+// [titre du lot ou '', soumissions [nom, montant, conforme, admissible, gagnant 1/0], modifications [date, motif, montant]]
+// Soumissions vides quand on ne sait pas quel lot l'octroi a remporté (avis à plusieurs lots).
+writeFileSync('data/contrats-details.json', JSON.stringify(DETAILS));
 console.log(`Contrats : ${contrats.length} octrois écrits dans ${SORTIE} et data/contrats-page.json.`);
