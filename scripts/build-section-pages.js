@@ -688,8 +688,8 @@ const PAGES_VILLE = [
   { page: 'lexique', parVille: {"quebec":"lexique-municipal-de-quebec","montreal":"lexique-municipal-de-montreal","levis":"lexique-municipal-de-levis","longueuil":"lexique-municipal-de-longueuil","laval":"lexique-municipal-de-laval"}, frequence: 'monthly', priorite: '0.4' },
   { page: 'sources', parVille: {"quebec":"sources-des-donnees-de-quebec","montreal":"sources-des-donnees-de-montreal","levis":"sources-des-donnees-de-levis","longueuil":"sources-des-donnees-de-longueuil","laval":"sources-des-donnees-de-laval"}, frequence: 'monthly', priorite: '0.3' },
   // Contrats octroyés (SEAO), à l'essai sur Québec seulement (12 nov. 2026).
-  { page: 'contrats', parVille: { quebec: 'contrats-de-la-ville-de-quebec' }, seulement: ['quebec'], frequence: 'weekly', priorite: '0.6' },
-  { page: 'budget', parVille: { quebec: 'budget-et-taxes-de-quebec' }, seulement: ['quebec'], frequence: 'monthly', priorite: '0.6' },
+  { page: 'contrats', parVille: { quebec: 'contrats-de-la-ville-de-quebec', levis: 'contrats-de-la-ville-de-levis' }, seulement: ['quebec', 'levis'], frequence: 'weekly', priorite: '0.6' },
+  { page: 'budget', parVille: { quebec: 'budget-et-taxes-de-quebec', levis: 'budget-et-taxes-de-levis' }, seulement: ['quebec', 'levis'], frequence: 'monthly', priorite: '0.6' },
   { page: 'pres', parVille: { quebec: 'pres-de-chez-moi-a-quebec', levis: 'pres-de-chez-moi-a-levis' }, seulement: ['quebec', 'levis'], frequence: 'weekly', priorite: '0.7' },
 ];
 function derniereDate(ville, jeu) {
