@@ -138,6 +138,7 @@
     .bloc-pres { background: var(--fond); border: 1px solid var(--ligne); border-radius: var(--rayon); padding: 12px 14px; }
     .bloc-pres ul { margin: 6px 0 0; padding-left: 18px; }
     .avis-limite { margin: 8px 0 0; padding: 8px 10px; border-left: 3px solid var(--vedette, #F5B301); background: var(--fond-2); font-size: .9rem; }
+    #resultat-adresse.apercu { opacity: .45; filter: grayscale(1); max-height: 660px; overflow: hidden; -webkit-mask-image: linear-gradient(#000 80%, transparent); mask-image: linear-gradient(#000 80%, transparent); }
     .lien-carte { display: inline-flex; vertical-align: -2px; color: var(--accent); }
   </style>
   <script type="module">
@@ -155,10 +156,11 @@
     const lire = (f) => { if (!fichiers.has(f)) fichiers.set(f, fetch(`data/adresses/${f}`).then((r) => (r.ok ? r.json() : null))); return fichiers.get(f); };
     let index = null, districts = null;
     const formulaire = document.getElementById('qui-represente');
-    formulaire.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    formulaire.addEventListener('submit', (e) => { e.preventDefault(); chercher(document.getElementById('adresse').value); });
+    async function chercher(texte, apercu = false) {
       const zone = document.getElementById('resultat-adresse');
-      const m = document.getElementById('adresse').value.trim().match(/^(\d+[A-Za-z]?)\s*[, -]*\s*(.+)$/);
+      zone.classList.toggle('apercu', apercu);
+      const m = texte.trim().match(/^(\d+[A-Za-z]?)\s*[, -]*\s*(.+)$/);
       if (!m) { zone.innerHTML = '<p>Tapez le numéro puis la rue, par exemple « 2175 chemin du Fleuve ».</p>'; return; }
       const numero = m[1].toUpperCase();
       let voie = cle(m[2]);
@@ -189,7 +191,10 @@
           ${t.limite ? '<p class="avis-limite">Votre adresse est à moins de 100 m d’une limite de district. Les contours publiés par la Ville datent de 2022 et ont été légèrement ajustés pour l’élection de 2025 : vous êtes peut-être dans le district voisin. La carte officielle de la Ville fait foi.</p>' : ''}
         </section>`;
       }).join('');
-    });
+    }
+
+    // Sans adresse : l'exemple s'affiche en gris, comme un texte indicatif, jusqu'à la première recherche.
+    chercher('2175 chemin du Fleuve', true);
   </script>
 
   <h2>Sources</h2>
