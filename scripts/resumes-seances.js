@@ -23,9 +23,10 @@ const ARGS = new Set(process.argv.slice(3));
 const DRY = ARGS.has('--dry-run');
 const VILLES = {
   montreal: { page: 'decisions-de-la-ville-de-montreal', estResolution: (d) => d.type === 'Résolution', cle: (d) => d.seanceId ?? `${d.date}__${d.instance}` },
+  levis: { page: 'decisions-de-la-ville-de-levis', estResolution: (d) => d.type === 'Résolution' || d.type === 'Règlement', cle: (d) => d.seanceId ?? `${d.date}__${d.instance}` },
   quebec: { page: 'decisions-de-la-ville-de-quebec', estResolution: (d) => d.type === 'Résolutions', cle: (d) => `${d.date}__${d.instance}` },
 };
-if (!VILLES[VILLE]) { console.error('Usage : node scripts/resumes-seances.js montreal|quebec [--dry-run]'); process.exit(1); }
+if (!VILLES[VILLE]) { console.error('Usage : node scripts/resumes-seances.js montreal|quebec|levis [--dry-run]'); process.exit(1); }
 const CFG = VILLES[VILLE];
 const DOSSIER = new URL(`../${VILLE}/data/`, import.meta.url);
 const OUT = new URL('resumes-seances.json', DOSSIER);
@@ -40,7 +41,7 @@ const lire = async (nom) => (existsSync(new URL(nom, DOSSIER)) ? JSON.parse(awai
 
 function instanceEn(i) {
   if (!i) return i;
-  const fixe = { 'Conseil municipal': 'City council', 'Conseil de la ville': 'City council', "Conseil d'agglomération": 'Agglomeration council', "Conseil d'agglomération de Québec": 'Québec agglomeration council', 'Comité exécutif': 'Executive committee' };
+  const fixe = { 'Conseil municipal': 'City council', 'Conseil de la ville': 'City council', 'Conseil de la Ville': 'City council', "Conseil d'agglomération": 'Agglomeration council', "Conseil d'agglomération de Québec": 'Québec agglomeration council', 'Comité exécutif': 'Executive committee' };
   if (fixe[i]) return fixe[i];
   const m = i.match(/^Conseil d(?:e l'|')Arrondissement (?:de la |de l'|de |du |des )(.+)$/i);
   if (m) return `${/^Rivières$/.test(m[1]) ? 'Les Rivières' : m[1]} borough council`;

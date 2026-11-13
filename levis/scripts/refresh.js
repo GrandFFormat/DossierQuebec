@@ -107,6 +107,8 @@ const ETAPES = [
   // Lévis pour l'instant (voir README).
   { nom: 'Projets pour « Mes dossiers »', argv: ['scripts/projets-publics.js'] },
   { nom: 'Chiffres de la page Abonnement', argv: ['scripts/travail-public.js'], secondaire: true },
+  // En bref : une phrase par séance, en tête de la page Décisions (13 nov. 2026, Haiku, ~1 ¢ la séance).
+  ...(resumes ? [{ nom: 'En bref, séance par séance', argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), '../scripts/resumes-seances.js', 'levis'], secondaire: true }] : []),
   { nom: 'Décisions récentes dans la page (Google)', argv: ['../scripts/prerendu-villes.js', 'levis'], secondaire: true },
 ];
 
