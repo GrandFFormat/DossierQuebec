@@ -20,7 +20,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-en="Your councillor, roadwork and permits near you in Montréal | DossierQuébec">Votre conseiller, les travaux et les permis près de chez vous à Montréal | DossierQuébec</title>
-<meta data-en-content="Resolution, decision summary, decision file, recorded vote, dissidence, related city: the vocabulary of the City of Montréal's decisions, explained and counted on the official minutes." name="description" content="Tapez votre adresse à Montréal : votre conseiller de district, les travaux en cours et les permis de construction de votre quartier.">
+<meta data-en-content="Type your Montréal address: your district councillor, the roadwork underway and the construction permits in your neighbourhood." name="description" content="Tapez votre adresse à Montréal : votre conseiller de district, les travaux en cours et les permis de construction de votre quartier.">
 <link rel="canonical" href="https://dossierquebec.ca/montreal/pres-de-chez-moi-a-montreal">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DossierQuébec">
@@ -199,7 +199,7 @@
       if (!EN) return t;
       let [lieu, raison] = t.split(' : ');
       lieu = lieu.replace(/ entre (.+) et (.+)$/, ' between $1 and $2').replace(/^Ruelle$/, 'Alley').replace(/^Parc /, 'Park ');
-      if (raison) raison = RAISONS[raison.trim()] ?? (/^a?s-d+ /.test(raison) ? 'underground utilities' : raison);
+      if (raison) raison = RAISONS[raison.trim()] ?? (/^a?s-\d+ /.test(raison) ? 'underground utilities' : raison);
       return raison ? `${lieu}: ${raison}` : lieu;
     };
     const enMotif = (m) => (!EN ? m : m.replace('Démolition d’un bâtiment', 'Building demolition').replace('Agrandissement', 'Extension')
