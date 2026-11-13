@@ -294,12 +294,12 @@
     },
     {
       "source": "/levis/votes",
-      "destination": "/levis/votes-nominatifs-du-conseil-de-levis",
+      "destination": "/levis/decisions-de-la-ville-de-levis?vote=1",
       "permanent": true
     },
     {
       "source": "/levis/votes.html",
-      "destination": "/levis/votes-nominatifs-du-conseil-de-levis",
+      "destination": "/levis/decisions-de-la-ville-de-levis?vote=1",
       "permanent": true
     },
     {
@@ -334,12 +334,12 @@
     },
     {
       "source": "/levis/votes-nominatifs",
-      "destination": "/levis/votes-nominatifs-du-conseil-de-levis",
+      "destination": "/levis/decisions-de-la-ville-de-levis?vote=1",
       "permanent": true
     },
     {
       "source": "/levis/votes-nominatifs.html",
-      "destination": "/levis/votes-nominatifs-du-conseil-de-levis",
+      "destination": "/levis/decisions-de-la-ville-de-levis?vote=1",
       "permanent": true
     },
     {
@@ -565,6 +565,16 @@
     {
       "source": "/quebec/votes-nominatifs-du-conseil-de-quebec.html",
       "destination": "/quebec/decisions-de-la-ville-de-quebec?vote=1",
+      "permanent": true
+    },
+    {
+      "source": "/levis/votes-nominatifs-du-conseil-de-levis",
+      "destination": "/levis/decisions-de-la-ville-de-levis?vote=1",
+      "permanent": true
+    },
+    {
+      "source": "/levis/votes-nominatifs-du-conseil-de-levis.html",
+      "destination": "/levis/decisions-de-la-ville-de-levis?vote=1",
       "permanent": true
     }
   ]

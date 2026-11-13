@@ -95,8 +95,7 @@
     </p>
     <nav>
       <a href="./">Accueil</a>
-      <a href="decisions-de-la-ville-de-levis" aria-current="page">Décisions</a>
-      <a href="votes-nominatifs-du-conseil-de-levis">Votes nominatifs</a>
+      <a href="decisions-de-la-ville-de-levis" aria-current="page">Décisions</a>
       <a href="conseil-municipal-de-levis">Conseil municipal</a>
       <a href="pres-de-chez-moi-a-levis">Près de chez moi</a>
       <a href="lexique-municipal-de-levis">Lexique</a>
@@ -136,6 +135,7 @@
     <select id="filtre-instance"><option value="">Toutes les instances</option></select>
     <!-- Masqué tant qu'aucune décision n'a de résumé : app.js le révèle s'il y en a. -->
     <label class="case" id="case-resume" hidden><input type="checkbox" id="filtre-resume"> Avec résumé seulement</label>
+    <label class="case"><input type="checkbox" id="filtre-vote"> Avec vote nominatif</label>
   </div>
   <p class="compte" id="compte-decisions"></p>
 
