@@ -60,8 +60,83 @@ const nombreFr = (n) => Number(n).toLocaleString(EN ? 'en-CA' : 'fr-CA');
 // données. En anglais on le recompose plutôt que de le traduire à la pièce.
 const TITRE_PV = /^Procès-verbal — (.+), séance (ordinaire|extraordinaire) du (\d{4}-\d{2}-\d{2})$/;
 const TITRE_ODJ = /^Ordre du jour — (.+), séance du (\d{4}-\d{2}-\d{2}) \((\d+) points?\)$/;
+// Montants sans cents (rétroaction d'un lecteur, 13 nov. 2026) : « 828 241,70 $ » devient « 828 242 $ ».
+// Mélanger des montants à virgule et des montants ronds empêche de saisir l'ordre de grandeur d'un
+// coup d'oeil. Seuls les cents sont arrondis : « 1,5 M$ » reste tel quel.
+export function sansCents(t) {
+  if (t == null) return t;
+  return String(t)
+    .replace(/(\d{1,3}(?:[   ]\d{3})+|\d+),(\d{1,2})(?=[   ]?\$)/g, (m, ent, dec) =>
+      Math.round(Number(ent.replace(/[   ]/g, '')) + Number('0.' + dec)).toLocaleString('fr-CA'))
+    .replace(/\$[  ]?(\d{1,3}(?:,\d{3})+|\d+)\.(\d{1,2})\b/g, (m, ent, dec) =>
+      '$' + Math.round(Number(ent.replace(/,/g, '')) + Number('0.' + dec)).toLocaleString('en-CA'));
+}
+
+// CONTEXTE D'UNE DÉCISION (rétroaction d'un lecteur, 13 nov. 2026) : « on ne comprend pas tout de suite
+// quel est le périmètre concerné ni où en est chaque décision dans le processus ». Trois lignes, tirées
+// des faits seulement : la portée (l'instance), la durée (dates écrites dans l'objet), le parcours du
+// dossier (les autres décisions qui portent le même numéro de dossier, d'une instance à l'autre).
+const MOIS_FR = { janvier: 0, février: 1, fevrier: 1, mars: 2, avril: 3, mai: 4, juin: 5, juillet: 6, août: 7, aout: 7, septembre: 8, octobre: 9, novembre: 10, décembre: 11, decembre: 11 };
+function porteeDe(instance) {
+  if (!instance) return null;
+  if (instance === 'Conseil municipal') return tr('Toute la Ville de Montréal (conseil municipal)', 'The whole City of Montréal (city council)');
+  if (instance === "Conseil d'agglomération") return tr("L'agglomération : Montréal et les 15 villes liées de l'île", 'The agglomeration: Montréal and the 15 linked cities on the island');
+  if (instance === 'Comité exécutif') return tr('Ville de Montréal, décision du comité exécutif', 'City of Montréal, executive committee decision');
+  const a = instance.match(/^Conseil d'arrondissement (?:de |du |d')(.+)$/);
+  if (a) return tr(`L'arrondissement ${/^[AEIOUÉÈ]/.test(a[1]) ? "d'" : 'de '}${a[1]} seulement`, `The ${a[1]} borough only`);
+  return null;
+}
+function dureeDe(objet) {
+  if (!objet) return null;
+  const m = objet.match(/du (1er|\d{1,2})(?:er)? (\p{L}+) (\d{4}) au (1er|\d{1,2})(?:er)? (\p{L}+) (\d{4})/iu);
+  if (m && MOIS_FR[m[2].toLowerCase()] != null && MOIS_FR[m[5].toLowerCase()] != null) {
+    const d1 = new Date(+m[3], MOIS_FR[m[2].toLowerCase()], m[1] === '1er' ? 1 : +m[1]);
+    const d2 = new Date(+m[6], MOIS_FR[m[5].toLowerCase()], m[4] === '1er' ? 1 : +m[4]);
+    const mois = Math.round((d2 - d1) / (30.44 * 864e5));
+    if (mois > 0 && mois < 600) {
+      const txt = mois % 12 === 0 ? (mois === 12 ? tr('1 an', '1 year') : tr(`${mois / 12} ans`, `${mois / 12} years`)) : tr(`${mois} mois`, `${mois} months`);
+      const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      return `${txt} (${dateFr(iso(d1))} → ${dateFr(iso(d2))})`;
+    }
+  }
+  const p = objet.match(/p[ée]riode (?:additionnelle )?d(?:'|e )(un|une|deux|trois|quatre|cinq|six|dix|\d+) (ans?|années?|mois)/i);
+  if (p) {
+    const n = { un: 1, une: 1, deux: 2, trois: 3, quatre: 4, cinq: 5, six: 6, dix: 10 }[p[1].toLowerCase()] ?? +p[1];
+    const an = /^an/i.test(p[2]);
+    return an ? tr(`${n} an${n > 1 ? 's' : ''}`, `${n} year${n > 1 ? 's' : ''}`) : tr(`${n} mois`, `${n} month${n > 1 ? 's' : ''}`);
+  }
+  return null;
+}
+let parDossier = null;
+function parcoursDe(d) {
+  if (!d.dossier || !etat.decisions?.decisions) return null;
+  if (!parDossier) {
+    parDossier = new Map();
+    for (const x of etat.decisions.decisions) if (x.dossier) (parDossier.get(x.dossier) ?? parDossier.set(x.dossier, []).get(x.dossier)).push(x);
+  }
+  const l = (parDossier.get(d.dossier) ?? []).filter((x) => x.type !== 'Procès-verbal' && x.type !== 'Ordre du jour');
+  if (l.length < 2) return null;
+  return l.slice().sort((a, b) => (a.date ?? '').localeCompare(b.date ?? '')).map((x) => {
+    const etiquette = `${dateFr(x.date)}, ${echapper(lib(x.instance ?? ''))}`;
+    if (x === d) return `<strong>${etiquette} ${tr('(cette décision)', '(this decision)')}</strong>`;
+    const cle = x.numero || x.id;
+    return `<a href="decisions-de-la-ville-de-montreal?q=${encodeURIComponent(cle)}">${etiquette}</a>`;
+  }).join(' → ');
+}
+function blocContexte(d) {
+  if (d.type === 'Procès-verbal' || d.type === 'Ordre du jour') return '';
+  const lignes = [];
+  const portee = porteeDe(d.instance);
+  if (portee) lignes.push(`<li><strong>${tr('Portée', 'Scope')}&nbsp;:</strong> ${echapper(portee)}</li>`);
+  const duree = dureeDe(d.objet);
+  if (duree) lignes.push(`<li><strong>${tr('Durée', 'Term')}&nbsp;:</strong> ${echapper(duree)}</li>`);
+  const parcours = parcoursDe(d);
+  if (parcours) lignes.push(`<li><strong>${tr('Parcours du dossier', 'Path of this file')}&nbsp;:</strong> ${parcours}</li>`);
+  return lignes.length ? `<ul class="contexte-decision">${lignes.join('')}</ul>` : '';
+}
+
 function objetDe(d) {
-  const objet = d?.objet ?? null;
+  const objet = sansCents(d?.objet ?? null);
   if (!EN || !objet) return objet;
   const pv = objet.match(TITRE_PV);
   if (pv) return `Minutes — ${libelleEn(pv[1])}, ${pv[2] === 'extraordinaire' ? 'special' : 'regular'} meeting of ${dateFr(pv[3])}`;
@@ -176,10 +251,10 @@ function blocResume(trouve) {
     <div class="resume-entete">
       <span>${tr('Résumé généré par IA', 'AI-generated summary')}${r.source === 'sommaire' || indirect ? `${tr(" — d'après le sommaire décisionnel", ' — from the decision summary')}${indirect && r.numero ? ` ${echapper(r.numero)}` : ''}` : tr(" — d'après le texte de la résolution", ' — from the text of the resolution')}</span>
       ${r.francaisSeulement ? '<span class="puce procedural" lang="en">summary not yet translated</span>' : ''}
-      ${r.montantPrincipal ? `<span class="puce montant">${echapper(r.montantPrincipal)}</span>` : ''}
+      ${r.montantPrincipal ? `<span class="puce montant">${echapper(sansCents(r.montantPrincipal))}</span>` : ''}
       ${r.sansContenuSubstantiel ? `<span class="puce procedural">${tr('document de procédure', 'procedural document')}</span>` : ''}
     </div>
-    <ul>${r.puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul>
+    <ul>${r.puces.map((p) => `<li>${echapper(sansCents(p))}</li>`).join('')}</ul>
   </div>`;
 }
 
@@ -314,7 +389,7 @@ function carteDecision(d, ouverte = false) {
     <p class="objet">${echapper(objetDe(d) ?? tr('(sans objet)', '(no subject)'))}</p>`;
   // Montréal : le numéro de dossier suit la décision d'une instance à l'autre, et les
   // dissidences sont les noms consignés contre, sans appel nominal complet. Faits bruts.
-  const corps = `${blocResume(resumePour(d))}
+  const corps = `${blocContexte(d)}${blocResume(resumePour(d))}
     ${d.dissidences?.length ? `<p class="compte" style="margin:0 0 8px">${tr(`Dissidence${d.dissidences.length > 1 ? 's' : ''}&nbsp;:`, `${s(d.dissidences.length, 'Dissent', 'Dissents')}:`)} ${d.dissidences.map(echapper).join(', ')}.</p>` : ''}
     <div class="texte-decision" data-id="${echapper(d.id)}"></div>
     ${d.dossier ? `<p class="compte" style="margin:0 0 8px">${tr('Dossier', 'File')} ${echapper(d.dossier)}${d.article ? ` · ${tr('article', 'item')} ${echapper(d.article)}` : ''}</p>` : ''}
