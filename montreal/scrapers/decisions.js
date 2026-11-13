@@ -461,6 +461,18 @@ if (process.argv[1] && import.meta.url.endsWith(process.argv[1].split(/[\\/]/).p
 
 export function nettoyerObjet(t) {
   if (!t) return t ?? null;
-  const propre = String(t).replace(/\s*(?:Système de gestion des décisions des instances|_{10,}|(?:^|\s)\/sb\b)[\s\S]*$/, '').trim();
-  return propre || null;
+  let s = String(t);
+  // « Extrait authentique… Résolution : CA26 12205 <titre> Il est proposé… » : on garde le titre.
+  const extrait = /^Extrait authentique[\s\S]*?Résolution\s*:\s*\S+\s+\S+\s+(.+?)\s+Il est proposé/.exec(s);
+  if (extrait) return extrait[1].trim();
+  s = s.replace(/\s*(?:Système de gestion des décisions des instances|Système de gestion des CA)[\s\S]*$/, '');
+  // Début de page avalé : soulignés de signature, « /sb Prénom NOM », en-tête de séance, numéro.
+  for (let i = 0; i < 4; i++) {
+    s = s.replace(/^\s*(?:_{3,}\s*)+/, '')
+      .replace(/^\s*\d+\/\d+\s+/, '')
+      .replace(/^Séance ordinaire du comité exécutif du \S+ \d+ \S+ \d{4} à \d+ h(?: \d+)?\s*/, '')
+      .replace(/^C[EGMA]\d\d \d{4}\s+/, '');
+  }
+  s = s.replace(/\s*_{10,}[\s\S]*$/, '').replace(/(?:^|\s)\/[a-z]{2}\s[\s\S]*$/, '').trim();
+  return s || null;
 }
