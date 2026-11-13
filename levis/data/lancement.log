@@ -2,7 +2,7 @@
 > dossiervillelevis@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 9b7ceea — Node v22.23.4
+Code : commit 59339c9 — Node v22.23.4
 
 === Syntaxe du JavaScript du site ===
 
@@ -24,11 +24,9 @@ https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt : HTTP 403 Fo
 ⚠ 3 entrée(s) sans instance reconnue : Forum citoyen : contribuez à l’avenir de Lévis | Forum citoyen : contribuez à l’avenir de Lévis | Forum citoyen : contribuez à l’avenir de Lévis
 
 === Décisions de l'année ===
-CV_2026-11-10 : 19 pages, 49 résolutions, 32 liées à un sommaire, 0 vote(s) nominal(aux)
-CV_2026-10-27 : 15 pages, 35 résolutions, 17 liées à un sommaire, 2 vote(s) nominal(aux)
 
-2301 décisions écrites dans data/decisions.json — 2 séance(s) lue(s) cette fois, 5 en attente de procès-verbal.
-50 nouveauté(s) depuis la dernière exécution.
+2301 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 5 en attente de procès-verbal.
+0 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
     775  Urbanisme
@@ -50,40 +48,31 @@ Pastilles thématiques :
      17  Immobilier
     149  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-09-13) ===
-Fenêtre depuis 2026-09-13 : 10 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-09-14) ===
+Fenêtre depuis 2026-09-14 : 10 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
 
 20 votes nominaux écrits dans data/votes.json (10 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
+
+=== Contrats octroyés (SEAO) ===
+Contrats : aucun nouveau fichier SEAO (368 octrois connus).
+Contrats : 0 reliés à une décision du conseil (0 décisions).
+Contrats : 368 octrois écrits dans data/contrats.json et data/contrats-page.json.
+
+=== Budget et taxes (MAMH) ===
+Finances : taux 2026 (0.6361 $/100 $), dépenses réelles 2025 (360.3 M$).
+
+=== Votes par décision ===
+Votes par décision : 18 décisions, 18 noms.
 
 === Lexique, mesuré sur les procès-verbaux ===
 ✖ 10 procès-verbal/aux de 2026 en cache (la dernière mesure en portait 55) — cache de texte incomplet : data/lexique.json de la veille est conservé.
 ⚠ « Lexique, mesuré sur les procès-verbaux » a échoué (code 1) — on garde les données précédentes, ça attendra.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-09-13 pas encore résumés (plafond : 120)…
-610 déjà résumés, 27 à faire.
-
---- Estimation ---
-Documents à résumer  : 27
-Modèle               : claude-opus-5
-Ratio mesuré         : 1.57 caractères/jeton (sur 12 documents)
-Jetons d'entrée      : ~159 250
-Jetons de sortie     : ~8 640
-Coût estimé          : ~1.01 $ US
-                       (moitié moins avec --batch, résultats en moins d'une heure)
-
-Génération…
-  … 4/27
-  … 8/27
-  … 12/27
-  … 16/27
-  … 20/27
-  … 24/27
-  … 27/27
-
-27 résumés générés, 637 au total dans data/resumes.json
-Coût réel : 1.08 $ US
+Sommaires depuis 2026-09-14 pas encore résumés (plafond : 120)…
+637 déjà résumés, 0 à faire.
+Rien à générer. (--force pour tout regénérer.)
 
 === Récapitulatifs des projets ===
 Récapitulatifs des projets : rien de nouveau.
@@ -97,10 +86,13 @@ Décisions récentes : 249 dossiers depuis le 2026-09-26 · 219 Ko.
 === Chiffres de la page Abonnement ===
 Travail public : 2962 documents, 582 résumés, 20 votes, 4 projets.
 
+=== En bref, séance par séance ===
+Séances : 17, appels : 1, rejets : 0, coût : 0.004 $ US
+
 === Décisions récentes dans la page (Google) ===
-levis : 30 décisions écrites dans la page des décisions.
+levis : 30 décisions écrites dans la page des décisions (inchangé).
 
 === Bilan ===
-  étapes         : 12
+  étapes         : 16
   échecs         : aucun
   avertissements : Lexique, mesuré sur les procès-verbaux
