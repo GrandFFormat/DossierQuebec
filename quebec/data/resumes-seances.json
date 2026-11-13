@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-13T12:00:33.996Z",
+ "generatedAt": "2026-11-13T16:37:09.826Z",
  "modele": "claude-haiku-4-5",
  "genereParIA": true,
  "avertissement": "Phrase de résumé générée par IA à partir des décisions de la séance ; les points marquants sont choisis sans IA. Le procès-verbal officiel fait foi.",
@@ -298,6 +298,136 @@
      "contre": 1,
      "resultat": "Adoptée à la majorité"
     }
+   ]
+  },
+  {
+   "id": "2026-11-03__Conseil de la ville",
+   "instance": "Conseil de la ville",
+   "instanceEn": "City council",
+   "date": "2026-11-03",
+   "nDecisions": 42,
+   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CV_OR_2026-11-03_00h00.pdf",
+   "votes": [
+    {
+     "numero": "CV-2026-0908",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Demande afin d'obtenir l'autorisation du gouvernement du Québec de prendre, par voie d'expropriation, une servitude réelle et perpétuelle d'utilité publique contre une partie du lot 6 495 378 du cadastre du Québec, pour les fins du projet de rés",
+     "pour": 15,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0909",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Demande afin d'obtenir l'autorisation du gouvernement du Québec d'acquérir, par voie d'expropriation, une partie du lot 1 941 070 du cadastre du Québec, pour les fins du projet de réseau structurant de transport en commun de la Ville de Québec (",
+     "pour": 15,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0910",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Demande afin d'obtenir l'autorisation du gouvernement du Québec d'acquérir, par voie d'expropriation, une servitude réelle et perpétuelle d'utilité publique contre une partie du lot 1 941 044 du cadastre du Québec, pour les fins du projet de rés",
+     "pour": 15,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0911",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Demande afin d'obtenir l'autorisation du gouvernement du Québec d'acquérir, par voie d'expropriation, la propriété d'une parcelle de terrain et une servitude réelle et perpétuelle d'utilité publique sur le lot 6 583 120 du cadastre du Québec, po",
+     "pour": 15,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CV-2026-0922",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Adoption du Règlement modifiant le Règlement de l'agglomération sur la circulation et le stationnement relativement à plusieurs dispositions, R.A.V.Q. 1879",
+     "pour": 15,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    }
+   ],
+   "themes": [
+    {
+     "theme": "contrats",
+     "n": 8
+    },
+    {
+     "theme": "immobilier",
+     "n": 8
+    },
+    {
+     "theme": "urbanisme",
+     "n": 5
+    },
+    {
+     "theme": "subventions",
+     "n": 3
+    },
+    {
+     "theme": "rh",
+     "n": 2
+    },
+    {
+     "theme": "transport",
+     "n": 2
+    }
+   ],
+   "points": [
+    {
+     "id": "CV-2026-0920.pdf",
+     "numero": "CV-2026-0920",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Approbation de la programmation de travaux n° 3 et autorisation de son envoi au ministère des Affaires municipales, des Régions et de l'Occupation du territoire - Programme de transfert pour les infrastructures d'eau et collectives du Québec pou",
+     "titreEn": null,
+     "montant": "175 732 033 $",
+     "montantEn": "$175,732,033",
+     "divise": false,
+     "theme": "travaux"
+    },
+    {
+     "id": "CV-2026-0907.pdf",
+     "numero": "CV-2026-0907",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Règlement hors tribunal du dossier relatif à l'expropriation du lot 6 728 669 du cadastre du Québec, situé sur la 1re Avenue (Ville de Québec c. Guylaine Langlois, SAI¿Q¿286101¿2601)",
+     "titreEn": null,
+     "montant": "48 900,00$",
+     "montantEn": "$48,900.00",
+     "divise": false,
+     "theme": "immobilier"
+    },
+    {
+     "id": "CV-2026-0897.pdf",
+     "numero": "CV-2026-0897",
+     "titre": "Acquisition à des fins municipales d'un immeuble situé en bordure de la rue de la Promenade-des-Soeurs, connu et désigné comme étant les lots 5 830 991 et 5 830 992 du cadastre du Québec ¿ Arrondissement de Sainte-Foy¿Sillery¿Cap-Rouge",
+     "titreEn": null,
+     "montant": "9 000 000 $",
+     "montantEn": "$9,000,000",
+     "divise": false,
+     "theme": "immobilier"
+    },
+    {
+     "id": "CV-2026-0892.pdf",
+     "numero": "CV-2026-0892",
+     "titre": "Vente d'un immeuble connu et désigné comme étant le lot 6 703 594 du cadastre du Québec, situé dans l'Espace d'innovation Chauveau, à des fins industrielles, para-industrielles ou de recherche - Extinction d'une servitude de passage et constitution d'une servitude réelle et perpétuelle de non-accès",
+     "titreEn": null,
+     "montant": "1 083 205 $",
+     "montantEn": "$1,083,205",
+     "divise": false,
+     "theme": "immobilier"
+    }
+   ],
+   "signature": "42:34",
+   "phrase": "Le conseil a approuvé l'achat du boisé de la Promenade-des-Soeurs pour 9 000 000 $, l'entente de collaboration pour la réparation du pont P-14566 pour 523 000 $, et la programmation de travaux du programme TECQ 2024-2028 pour 175 732 033 $.",
+   "phraseEn": "The council approved the purchase of the Promenade-des-Soeurs woodland for 9 000 000 $, the collaboration agreement for the repair of bridge P-14566 for 523 000 $, and the work programming for the TECQ 2024-2028 program for 175 732 033 $.",
+   "motsCles": [
+    "boisé",
+    "pont"
+   ],
+   "motsClesEn": [
+    "woodland",
+    "bridge"
+   ],
+   "motsEssais": 1,
+   "genereLe": "2026-11-13T16:37:09.796Z",
+   "motsThemes": [
+    null,
+    "contrats"
    ]
   },
   {
