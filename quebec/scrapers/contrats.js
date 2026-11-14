@@ -165,12 +165,12 @@ for (const c of contrats) {
 const nomAffiche = (c) => (c.neq ? [...nomsParNeq.get(c.neq)].sort((a, b) => b[1] - a[1])[0][0] : c.fournisseur);
 // LE PONT AVEC LES DÉCISIONS DU CONSEIL (12 nov. 2026). La Ville écrit le numéro d'avis SEAO dans
 // l'objet de ses décisions : « Adjudication d'un contrat… (Appel d'offres public 96068) ». On le
-// retrouve des deux côtés, sans IA. Les gré à gré ne citent presque jamais d'avis : ils restent sans lien.
+// retrouve des deux côtés, sans IA. Les gré à gré l'écrivent « (Dossier 96396) » : même numéro (14 nov. 2026).
 const decisionsParAvis = new Map();
 try {
   const brutes = JSON.parse(readFileSync('data/decisions.json', 'utf8'));
   const liste = Array.isArray(brutes) ? brutes : brutes.decisions || [];
-  const motif = /(?:appel d.offres|avis|AO|soumission|demande de prix)[^0-9]{0,40}?(\d{5,6})/gi;
+  const motif = /(?:appel d.offres|avis|AO|soumission|demande de prix|dossier)[^0-9]{0,40}?(\d{5,6})(?!\d)/gi;
   for (const d of liste) {
     if (!d.numero) continue;
     for (const m of (d.objet || '').matchAll(motif)) {
