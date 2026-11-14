@@ -804,7 +804,7 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 .eb-retard[open] > summary { margin-bottom: 8px; }
 .eb-retard .eb-grille + .eb-grille { margin-top: 12px; }
 .eb-detail { display: inline-block; margin-top: 12px; font-weight: 600; font-size: 14px; color: var(--accent-encre); } :root[data-theme="sombre"] .eb-detail { color: var(--accent); }
-.eb-marque { padding: 2px 7px; border-radius: 3px; color: #16191D; } .eb-marque-non { background: none; color: inherit; padding: 0; text-decoration: underline; text-decoration-color: var(--vedette); text-decoration-thickness: 2px; text-underline-offset: 3px; } .eb-marque-oui { background: #7ED9A4; }
+.eb-marque { padding: 2px 7px; border-radius: 3px; color: #16191D; } .eb-marque-non { background: var(--vedette); } .eb-marque-oui { background: #7ED9A4; }
 .eb-boite-retard { margin-top: 16px; } .eb-boite-retard > .eb-retard > summary { cursor: pointer; }
 
 /* Pastilles de sujets des cartes En bref (13 nov. 2026) : mêmes couleurs que les décisions. */
