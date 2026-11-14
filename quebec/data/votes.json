@@ -1,16 +1,16 @@
 {
- "generatedAt": "2026-11-13T16:37:06.232Z",
+ "generatedAt": "2026-11-14T15:14:08.457Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "methode": "Extraction par analyse du texte des résolutions (champ « content » de l'index de la Ville). Les noms sont lus dans les passages « Ont voté en faveur / Ont voté contre ». Chaque vote conserve le texte brut et signale tout écart avec le décompte officiel.",
  "parametres": {
   "annee": "2026",
   "max": 1000,
-  "depuis": "2026-09-14"
+  "depuis": "2026-09-15"
  },
  "totalDisponible": 287,
  "documentsAnalyses": 60,
  "nombre": 287,
- "nouveauxDepuisDerniereExecution": 5,
+ "nouveauxDepuisDerniereExecution": 0,
  "avecAvertissement": 10,
  "themes": {
   "procedure": {
@@ -440,7 +440,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : monsieur le maire Bruno Marchand, mesdames les conseillères Marie-Josée Asselin, Marie-Pierre Boucher, Marylou Boulianne, Mélissa Coulombe-Leduc, Elainie Lepage, Elisa Verreault et Marianne White et messieurs les conseillers Clément Bourdeau, Maxime Elmaleh, Yannick Fauteux, Claude Lavoie, Jean-Luc Lavoie, Raphaël Lebailly et Raymond Poirier. | Ont voté contre : madame la conseillère Mélanie Sauvé et messieurs les conseillers Stéphane Lachance et Marc Roussin.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "immobilier",
    "themeSource": "objet"
   },
@@ -482,7 +482,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : monsieur le maire Bruno Marchand, mesdames les conseillères Marie-Josée Asselin, Marie-Pierre Boucher, Marylou Boulianne, Mélissa Coulombe-Leduc, Elainie Lepage, Elisa Verreault et Marianne White et messieurs les conseillers Clément Bourdeau, Maxime Elmaleh, Yannick Fauteux, Claude Lavoie, Jean-Luc Lavoie, Raphaël Lebailly et Raymond Poirier. | Ont voté contre : madame la conseillère Mélanie Sauvé et messieurs les conseillers Stéphane Lachance et Marc Roussin.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet"
   },
@@ -524,7 +524,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : monsieur le maire Bruno Marchand, mesdames les conseillères Marie-Josée Asselin, Marie-Pierre Boucher, Marylou Boulianne, Mélissa Coulombe-Leduc, Elainie Lepage, Elisa Verreault et Marianne White et messieurs les conseillers Clément Bourdeau, Maxime Elmaleh, Yannick Fauteux, Claude Lavoie, Jean-Luc Lavoie, Raphaël Lebailly et Raymond Poirier. | Ont voté contre : madame la conseillère Mélanie Sauvé et messieurs les conseillers Stéphane Lachance et Marc Roussin.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "immobilier",
    "themeSource": "objet"
   },
@@ -566,7 +566,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : monsieur le maire Bruno Marchand, mesdames les conseillères Marie-Josée Asselin, Marie-Pierre Boucher, Marylou Boulianne, Mélissa Coulombe-Leduc, Elainie Lepage, Elisa Verreault et Marianne White et messieurs les conseillers Clément Bourdeau, Maxime Elmaleh, Yannick Fauteux, Claude Lavoie, Jean-Luc Lavoie, Raphaël Lebailly et Raymond Poirier. | Ont voté contre : madame la conseillère Mélanie Sauvé et messieurs les conseillers Stéphane Lachance et Marc Roussin.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "immobilier",
    "themeSource": "objet"
   },
@@ -608,7 +608,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : monsieur le maire Bruno Marchand, mesdames les conseillères Marie-Josée Asselin, Marie-Pierre Boucher, Marylou Boulianne, Mélissa Coulombe-Leduc, Elainie Lepage, Elisa Verreault et Marianne White et messieurs les conseillers Clément Bourdeau, Maxime Elmaleh, Yannick Fauteux, Claude Lavoie, Jean-Luc Lavoie, Raphaël Lebailly et Raymond Poirier. | Ont voté contre : madame la conseillère Mélanie Sauvé et messieurs les conseillers Stéphane Lachance et Marc Roussin.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet"
   },
