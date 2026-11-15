@@ -30,7 +30,7 @@ function chargerStyle() {
   const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = FEUILLE; document.head.appendChild(l);
 }
 
-function carte(s, lang, t, { lienFiche = true } = {}) {
+function carte(s, lang, t, { lienFiche = true, ouvert = false } = {}) {
   const en = lang === 'en';
   const r = s.resume;
   const puces = (en && r.pucesEn?.length ? r.pucesEn : r.puces) ?? [];
@@ -49,14 +49,14 @@ function carte(s, lang, t, { lienFiche = true } = {}) {
   }).join('');
   const pls = (s.pls ?? []).map((n) => `${t.pl} ${n}`).join(', ');
   const fiche = lienFiche && s.pls?.length && s.legislature && s.session ? `<a href="/projets-de-loi/${s.pls[0]}-${s.legislature}-${s.session}${en ? '?lang=en' : ''}">${t.fiche} ${s.pls[0]} →</a>` : '';
-  return `<article class="db-carte">
+  return `<details class="db-carte"${ouvert ? ' open' : ''}><summary>
     <div class="db-haut"><span class="db-tag db-tag-type">${echapper(en ? s.typeNomEn : s.typeNom)}</span><span class="db-tag">${echapper(en ? s.commissionNomEn : s.commissionNom)}</span><span class="db-heure">${echapper(dateLongue(s.date, lang))}${heures ? ` · ${echapper(heures)}` : ''}</span></div>
-    <h3>${echapper(pls)}${loi ? ` — ${echapper(loi)}` : ''}</h3>
+    <h3>${echapper(pls)}${loi ? ` — ${echapper(loi)}` : ''}</h3></summary>
     <ul>${puces.map((p) => `<li>${echapper(p)}</li>`).join('')}</ul>
     ${votes ? `<div class="db-votes"><div class="db-votes-titre">${(r.votes.length > 1 ? t.votes : t.vote)}</div>${votes}</div>` : ''}
     ${aSuivre ? `<div class="db-suite"><strong>${t.aSuivre} :</strong> ${echapper(aSuivre)}</div>` : ''}
     <div class="db-liens">${fiche}<a href="${echapper(s.url)}" rel="noopener" target="_blank">${t.transcription} ↗</a></div>
-  </article>`;
+  </details>`;
 }
 
 export async function rendreDebats(zone) {
@@ -81,7 +81,7 @@ export async function rendreDebats(zone) {
   const sous = pl ? '' : `${t.seance} ${dateLongue(jour, lang)} · ${t.commissions(seances.filter((s) => s.date === jour).length)}`;
   zone.innerHTML = `<section class="db" aria-labelledby="dbTitre">
     <div class="db-tete"><h2 id="dbTitre">${titre}</h2>${sous ? `<span>${echapper(sous)}</span>` : ''}</div>
-    <div class="db-cartes">${duJour.map((s) => carte(s, lang, t, { lienFiche: !pl })).join('')}</div>
+    <div class="db-cartes">${duJour.map((s, i) => carte(s, lang, t, { lienFiche: !pl, ouvert: i === 0 })).join('')}</div>
     <p class="db-note">${t.note}${auj !== jour && !pl ? '' : ''}</p>
   </section>`;
   zone.hidden = false;

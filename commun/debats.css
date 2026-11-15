@@ -35,3 +35,10 @@
 .db-note{margin:10px 0 0;font-size:12px;color:var(--slate,var(--doux,#5B6470))}
 @media (min-width:900px){.db-cartes.db-deux{grid-template-columns:1fr 1fr}}
 @media (max-width:640px){.db-carte{padding:14px 12px 12px;box-shadow:4px 4px 0 var(--ink,var(--encre,#131313))}.db-heure{margin-left:0;flex-basis:100%}}
+
+/* Séances en menus dépliants : seule la première est ouverte. */
+.db-carte > summary { list-style: none; cursor: pointer; position: relative; padding-right: 1.6rem; }
+.db-carte > summary::-webkit-details-marker { display: none; }
+.db-carte > summary::after { content: '▸'; position: absolute; right: 0; top: 0; color: var(--muted, #666); transition: transform .15s; }
+.db-carte[open] > summary::after { transform: rotate(90deg); }
+.db-carte:not([open]) > summary h3 { margin-bottom: 0; }
