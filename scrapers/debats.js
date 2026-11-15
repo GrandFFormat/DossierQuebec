@@ -166,7 +166,7 @@ const OUTIL = {
     additionalProperties: false,
   },
 };
-const JUGEMENT = /\b(important|importante|importants|importantes|majeur|majeure|historique|controvers|vif|vive|houleu|ambitieu|notamment|significant|major|historic|controversial|heated|notably)\b/i;
+const JUGEMENT = /\b(important|importante|importants|importantes|majeur|majeure|historique|controvers|vif|vive|houleu|ambitieu|significant|major|historic|controversial|heated)\b/i;
 
 async function resumer(client, seance, texte) {
   // Une journée tient dans la fenêtre ; au-delà de 160 000 caractères on garde le début et la fin.

@@ -1,13 +1,13 @@
 {
- "generatedAt": "2026-11-15T02:16:48.820Z",
+ "generatedAt": "2026-11-15T02:24:11.893Z",
  "source": "https://www.assnat.qc.ca/fr/travaux-parlementaires/journaux-debats.html",
  "session": "43-3",
  "modele": "claude-haiku-4-5",
  "dernierPassage": {
-  "appels": 12,
-  "entree": 527793,
-  "sortie": 17654,
-  "coutUSD": 0.6161
+  "appels": 8,
+  "entree": 295685,
+  "sortie": 8635,
+  "coutUSD": 0.3389
  },
  "seances": [
   {
@@ -35,7 +35,28 @@
    },
    "mots": 16539,
    "preliminaire": true,
-   "rejets": 2
+   "resume": {
+    "puces": [
+     "Le ministre Bernard a déposé un amendement retirant les articles 1 à 49 du projet de loi, qui encadraient l'attribution de licences, les mécanismes de règlement des différends et l'autorisation des travaux, pour se concentrer sur les projets pilotes.",
+     "La commission a adopté un amendement à l'article 50 du projet de loi établissant un régime de projets pilotes d'une durée de 5 ans, prolongeable de 2 ans, autorisant la mise en œuvre de projets relatifs à la recherche ou l'exploitation de réservoirs souterrains et de fluides.",
+     "Un sous-amendement du député de Jacques-Cartier a précisé que la consultation porte sur les communautés locales, incluant notamment les municipalités et les communautés autochtones.",
+     "La commission a adopté un amendement retirant les articles 51 à 80, articles de concordance ne concernant pas les projets pilotes.",
+     "La commission a adopté des amendements aux articles 81, 82, 83 et 84, et a modifié le titre du projet de loi pour refléter qu'il porte désormais sur l'autorisation de projets pilotes, plutôt que sur l'encadrement complet des réservoirs souterrains et des fluides."
+    ],
+    "pucesEn": [
+     "Minister Bernard tabled an amendment removing articles 1 to 49 of the bill, which governed the granting of licenses, dispute resolution mechanisms and work authorization, to focus on pilot projects.",
+     "The commission adopted an amendment to article 50 of the bill establishing a pilot project regime for a period of 5 years, extendable by 2 years, authorizing the implementation of projects relating to the research or exploitation of underground reservoirs and fluids.",
+     "A sub-amendment by the member for Jacques-Cartier clarified that consultation concerns local communities, including notably municipalities and Indigenous communities.",
+     "The commission adopted an amendment removing articles 51 to 80, conforming articles not concerning pilot projects.",
+     "The commission adopted amendments to articles 81, 82, 83 and 84, and modified the title of the bill to reflect that it now deals with the authorization of pilot projects, rather than comprehensive regulation of underground reservoirs and fluids."
+    ],
+    "votes": [],
+    "aSuivre": "La commission a ajourné ses travaux sine die; le projet de loi amendé sera voté demain.",
+    "aSuivreEn": "The commission adjourned its proceedings sine die; the amended bill will be voted on tomorrow."
+   },
+   "modele": "claude-haiku-4-5",
+   "genereLe": "2026-11-15T02:22:43.606Z",
+   "rejets": 0
   },
   {
    "id": "CSSS-260611",
@@ -418,7 +439,7 @@
    },
    "mots": 22094,
    "preliminaire": true,
-   "rejets": 2
+   "rejets": 1
   },
   {
    "id": "CFP-260609",
@@ -896,7 +917,28 @@
    },
    "mots": 51875,
    "preliminaire": true,
-   "rejets": 2
+   "resume": {
+    "puces": [
+     "La commission a poursuivi l'étude détaillée du projet de loi n° 4 en reprenant à l'article 1, qui porte sur la définition de la demande de renseignements. Mme Lesley Hill, directrice nationale de la protection de la jeunesse, et Mme Hélène Groleau, directrice des services de protection de la jeunesse au ministère de la Santé et des Services sociaux, ont témoigné sur les préoccupations concernant les signalements à la DPJ et la protection des femmes victimes de violence conjugale.",
+     "Les articles 1, 2, 11, 12, 13, 14, 15, 16, 17, 18, 19 et 20 ont été adoptés. Un amendement à l'article 10 a été adopté pour clarifier que les renseignements communiqués peuvent être partagés si nécessaires pour que la personne à risque ou son enfant puisse bénéficier d'aide, de soutien moral ou de protection.",
+     "La commission a suspendu l'examen de l'article 20.1, proposé comme amendement par la députée de Westmount—Saint-Louis, qui prévoit qu'un rapport sur la mise en œuvre de la loi doit être déposé au gouvernement dans les cinq ans. Le ministre a demandé plus de temps pour l'analyser en raison des projets de loi 7 et 11 qui limitent les rapports obligatoires.",
+     "L'article 3, portant sur la présentation des demandes, a soulevé des questions sur la participation des tiers sans consentement de la personne à risque. Le ministre a indiqué qu'il consulterait les groupes durant l'été avant de déterminer, par voie réglementaire, si des professionnels pourraient présenter des demandes sans consentement.",
+     "Des enjeux majeurs ont été discutés concernant les risques que les signalements à la DPJ ne se retournent contre les mères victimes de violence, notamment par des accusations d'aliénation parentale ou des pertes de garde. Le ministre et Mme Hill se sont engagés à travailler ensemble durant l'été pour établir des directives cliniques et des protocoles de collaboration afin d'éviter ces effets pervers."
+    ],
+    "pucesEn": [
+     "The commission continued detailed study of Bill 4 by resuming at article 1, which concerns the definition of request for information. Lesley Hill, National Director of Youth Protection, and Hélène Groleau, Director of Youth Protection Services at the Ministry of Health and Social Services, testified about concerns regarding reports to DPJ and the protection of women victims of intimate partner violence.",
+     "Articles 1, 2, 11, 12, 13, 14, 15, 16, 17, 18, 19 and 20 were adopted. An amendment to article 10 was adopted to clarify that information communicated may be shared if necessary for the person at risk or their child to benefit from assistance, moral support or protection.",
+     "The commission suspended examination of article 20.1, proposed as an amendment by the member for Westmount—Saint-Louis, which provides that a report on the implementation of the law must be filed with the government within five years. The minister requested more time to analyze it because bills 7 and 11 limit mandatory reports.",
+     "Article 3, concerning the presentation of requests, raised questions about the participation of third parties without the consent of the person at risk. The minister indicated he would consult with groups during the summer before determining, by regulation, whether professionals could present requests without consent.",
+     "Major issues were discussed regarding the risks that DPJ reports could backfire against mothers who are victims of violence, notably through allegations of parental alienation or loss of custody. The minister and Ms. Hill committed to working together over the summer to establish clinical directives and collaboration protocols to avoid these adverse effects."
+    ],
+    "votes": [],
+    "aSuivre": "La commission reprendra ses travaux le mardi 9 juin 2026 à 9 heures pour poursuivre l'examen du projet de loi n° 4.",
+    "aSuivreEn": "The commission will resume its work on Tuesday, June 9, 2026 at 9 a.m. to continue examination of Bill 4."
+   },
+   "modele": "claude-haiku-4-5",
+   "genereLe": "2026-11-15T02:23:13.813Z",
+   "rejets": 0
   },
   {
    "id": "CFP-260608",
@@ -1140,7 +1182,119 @@
    },
    "mots": 30595,
    "preliminaire": true,
-   "rejets": 1
+   "resume": {
+    "puces": [
+     "Le député de Laurier-Dorion a proposé un amendement au titre de la loi pour remplacer « présentant une altération de leur état mental » par « dont l'altération de l'état mental présente un risque pour elles-mêmes ou pour autrui »; cet amendement a été rejeté par un vote de 1 pour, 4 contre et 3 abstentions.",
+     "L'article 1 du titre a été adopté sur division.",
+     "Un amendement du gouvernement à l'article 2 a ajouté deux considérants sur le respect de l'approche d'intervention et le rôle des proches; après négociations, la formulation du deuxième considérant a été modifiée pour reconnaître les proches comme partenaires indispensables.",
+     "Le deputy Fontecilla a proposé un amendement à l'article 2 pour clarifier que les mesures coercitives visées doivent être celles « prévues dans la présente loi » et « sans son consentement »; cet amendement a été rejeté.",
+     "Un deuxième amendement de Fontecilla à l'article 2 pour ajouter des principes d'interprétation (justice fondamentale, proportionnalité, subsidiarité) et interdire l'utilisation de mesures coercitives pour compenser l'absence de services a été rejeté."
+    ],
+    "pucesEn": [
+     "The member for Laurier-Dorion proposed an amendment to the title to replace « presenting an alteration in their mental state » with « whose alteration of mental state presents a risk to themselves or others »; this amendment was rejected by a vote of 1 for, 4 against, and 3 abstentions.",
+     "Article 1 on the title was adopted on division.",
+     "A government amendment to article 2 added two preambles on the respectful approach to intervention and the role of close ones; after negotiations, the wording of the second preamble was modified to recognize close ones as indispensable partners.",
+     "Deputy Fontecilla proposed an amendment to article 2 to clarify that coercive measures referred to must be those « provided in this Act » and « without consent »; this amendment was rejected.",
+     "A second Fontecilla amendment to article 2 to add principles of interpretation (fundamental justice, proportionality, minimal impairment, subsidiarity) and prohibit the use of coercive measures to compensate for the absence of services was rejected."
+    ],
+    "votes": [
+     {
+      "objet": "Amendement du député de Laurier-Dorion à l'article 1 remplaçant « présentant une altération de leur état mental » par « dont l'altération de l'état mental présente un risque pour elles-mêmes ou pour autrui »",
+      "objetEn": "Amendment by the member for Laurier-Dorion to article 1 replacing « presenting an alteration in their mental state » with « whose alteration of mental state presents a risk to themselves or others »",
+      "pour": 1,
+      "contre": 4,
+      "abstentions": 3,
+      "resultat": "rejete",
+      "appelNominal": true
+     },
+     {
+      "objet": "Article 1 du titre",
+      "objetEn": "Article 1 on the title",
+      "pour": 0,
+      "contre": 0,
+      "abstentions": 0,
+      "resultat": "adopte",
+      "appelNominal": false
+     },
+     {
+      "objet": "Amendement du gouvernement à l'article 2 ajoutant deux considérants",
+      "objetEn": "Government amendment to article 2 adding two preambles",
+      "pour": 0,
+      "contre": 0,
+      "abstentions": 0,
+      "resultat": "adopte",
+      "appelNominal": false
+     },
+     {
+      "objet": "Amendement du député de Fontecilla à l'article 2 clarifying coercive measures and consent",
+      "objetEn": "Amendment by deputy Fontecilla to article 2 clarifying coercive measures and consent",
+      "pour": 1,
+      "contre": 5,
+      "abstentions": 2,
+      "resultat": "rejete",
+      "appelNominal": true
+     },
+     {
+      "objet": "Amendement du député de Fontecilla à l'article 2 sur les principes d'interprétation et mesures coercitives",
+      "objetEn": "Amendment by deputy Fontecilla to article 2 on interpretation principles and coercive measures",
+      "pour": 1,
+      "contre": 5,
+      "abstentions": 2,
+      "resultat": "rejete",
+      "appelNominal": true
+     },
+     {
+      "objet": "Article 2 tel qu'amendé",
+      "objetEn": "Article 2 as amended",
+      "pour": 6,
+      "contre": 1,
+      "abstentions": 1,
+      "resultat": "adopte",
+      "appelNominal": true
+     },
+     {
+      "objet": "Article 6 sur la fusion des gardes préventive et provisoire",
+      "objetEn": "Article 6 on the merger of preventive and provisional custody",
+      "pour": 0,
+      "contre": 0,
+      "abstentions": 0,
+      "resultat": "adopte",
+      "appelNominal": false
+     },
+     {
+      "objet": "Amendement du gouvernement à l'article 7 reformulant le critère de temporalité",
+      "objetEn": "Government amendment to article 7 reformulating the temporality criterion",
+      "pour": 0,
+      "contre": 0,
+      "abstentions": 0,
+      "resultat": "adopte",
+      "appelNominal": false
+     },
+     {
+      "objet": "Amendement du député de Fontecilla à l'article 7 retirant la détérioration importante de l'état mental du critère de danger",
+      "objetEn": "Amendment by deputy Fontecilla to article 7 removing significant deterioration of mental state from danger criterion",
+      "pour": 1,
+      "contre": 5,
+      "abstentions": 2,
+      "resultat": "rejete",
+      "appelNominal": true
+     },
+     {
+      "objet": "Amendement du député de Fontecilla à l'article 7 ajoutant « aucune autre mesure ne pourrait être prise en temps utile »",
+      "objetEn": "Amendment by deputy Fontecilla to article 7 adding « no other measure could be taken in a timely manner »",
+      "pour": 1,
+      "contre": 6,
+      "abstentions": 1,
+      "resultat": "rejete",
+      "appelNominal": true
+     }
+    ],
+    "aSuivre": "« La commission reprendra ses travaux au mardi 9 juin 2026 à 9 heures pour poursuivre l'étude du projet de loi. »",
+    "aSuivreEn": "« The commission will resume its work on Tuesday, June 9, 2026, at 9 a.m. to continue studying the bill. »"
+   },
+   "modele": "claude-haiku-4-5",
+   "genereLe": "2026-11-15T02:23:30.568Z",
+   "rejets": 0
   },
   {
    "id": "CTE-260608",
@@ -1351,6 +1505,217 @@
    "mots": 7314,
    "preliminaire": true,
    "rejets": 1
+  },
+  {
+   "id": "CI-260605",
+   "date": "2026-06-05",
+   "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/commissions/ci-43-3/journal-debats/CI-260605.html",
+   "volume": "Vol. 49 N° 12 (Version préliminaire)",
+   "commission": "ci",
+   "sujets": [
+    "Étude détaillée du projet de loi n° 3, Loi visant à assurer la représentation effective des électeurs"
+   ],
+   "pls": [
+    3
+   ],
+   "type": "etude-detaillee",
+   "legislature": 43,
+   "session": 3,
+   "commissionNom": "Commission des institutions",
+   "commissionNomEn": "Committee on Institutions",
+   "typeNom": "Étude détaillée",
+   "typeNomEn": "Clause-by-clause study",
+   "heures": {
+    "debut": "Onze heures cinquante-neuf minutes",
+    "fin": "13 h 31"
+   },
+   "mots": 11515,
+   "preliminaire": true,
+   "resume": {
+    "puces": [
+     " Le mémoire de Louis-Philippe Noël sur le projet de loi n° 3 a été déposé. Le ministre Roberge a renoncé à ses remarques préliminaires, tandis que les députés de Marquette, Hochelaga-Maisonneuve et Jean-Talon ont brièvement commenté le projet de loi transpartisan.",
+     " Le député de Saint-Jérôme a déposé deux motions préliminaires : l'une pour entendre la Commission de la représentation électorale et l'autre pour entendre le Directeur général des élections du Québec. Les deux motions ont été rejetées.",
+     " L'article 1 a été adopté avec consentement, sans lecture formelle. Le député de Saint-Jérôme a soulevé des questions sur l'indépendance de la Commission de la représentation électorale face à l'obligation de publier la nouvelle carte électorale, ainsi que sur les choix de maintenir certains comtés en Gaspésie et à l'est de Montréal plutôt que d'autres régions.",
+     " L'article 2 a été suspendu en attente d'un amendement du député de Saint-Jérôme concernant la date de prise d'effet de la nouvelle carte électorale. Le ministre a précisé que la date du 14 juillet avait été proposée par le Directeur général des élections lors de l'élaboration du projet de loi.",
+     " L'article 3 a été étudié. Le député de Saint-Jérôme a exprimé des préoccupations quant à la validité juridique de la disposition donnant à la nouvelle carte électorale les mêmes effets que si elle avait été établie selon la procédure prévue à la Loi électorale, et a demandé la communication d'un avis juridique si celui-ci existe."
+    ],
+    "pucesEn": [
+     "The memorandum from Louis-Philippe Noël on Bill 3 was filed. Minister Roberge waived his opening remarks, while the deputies for Marquette, Hochelaga-Maisonneuve and Jean-Talon briefly commented on the cross-party bill.",
+     "The deputy for Saint-Jérôme filed two preliminary motions: one to hear the Electoral Boundaries Commission and another to hear the Chief Electoral Officer of Quebec. Both motions were rejected.",
+     "Article 1 was adopted with consent, without formal reading. The deputy for Saint-Jérôme raised questions about the independence of the Electoral Boundaries Commission given its obligation to publish the new electoral map, as well as about the choices to maintain certain ridings in Gaspésie and East Montreal rather than other regions.",
+     "Article 2 was suspended pending an amendment from the deputy for Saint-Jérôme regarding the date when the new electoral map takes effect. The minister clarified that the July 14 date had been proposed by the Chief Electoral Officer during the bill's development.",
+     "Article 3 was studied. The deputy for Saint-Jérôme expressed concerns about the legal validity of the provision giving the new electoral map the same effects as if it had been established under the procedure provided in the Electoral Act, and requested the disclosure of a legal opinion if one exists."
+    ],
+    "votes": [],
+    "aSuivre": "La commission poursuivra l'étude détaillée du projet de loi n° 3 lundi 8 juin 2026 à 14 heures, en reprenant l'article 3 avec les trois minutes de temps restant au député de Saint-Jérôme, puis les articles suivants.",
+    "aSuivreEn": "The commission will continue the detailed study of Bill 3 on Monday, June 8, 2026 at 2:00 p.m., resuming Article 3 with the remaining three minutes for the deputy for Saint-Jérôme, then the following articles."
+   },
+   "modele": "claude-haiku-4-5",
+   "genereLe": "2026-11-15T02:22:04.960Z",
+   "rejets": 0
+  },
+  {
+   "id": "CSSS-260605",
+   "date": "2026-06-05",
+   "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/commissions/csss-43-3/journal-debats/CSSS-260605.html",
+   "volume": "Vol. 49 N° 7 (Version préliminaire)",
+   "commission": "csss",
+   "sujets": [
+    "Étude détaillée du projet de loi n° 23, Loi visant principalement à mieux accompagner les personnes dont l’état mental pourrait représenter un risque pour leur propre sécurité ou celle d’autrui"
+   ],
+   "pls": [
+    23
+   ],
+   "type": "etude-detaillee",
+   "legislature": 43,
+   "session": 3,
+   "commissionNom": "Commission de la santé et des services sociaux",
+   "commissionNomEn": "Committee on Health and Social Services",
+   "typeNom": "Étude détaillée",
+   "typeNomEn": "Clause-by-clause study",
+   "heures": {
+    "debut": "Douze heures quatre minutes",
+    "fin": "12 h 58"
+   },
+   "mots": 7700,
+   "preliminaire": true,
+   "resume": {
+    "puces": [
+     "Début de l'étude détaillée du projet de loi n° 23 sur la protection des personnes présentant une altération de leur état mental.",
+     "Deux motions préliminaires ont été déposées et rejetées : la première demandant d'entendre le Barreau du Québec, l'Association des juristes progressistes et la Ligue des droits et libertés; la deuxième demandant d'entendre la Commission de la santé et des services sociaux des Premières Nations du Québec et du Labrador.",
+     "Étude de l'article 1 : remplacement du titre de la Loi sur la protection des personnes dont l'état mental présente un danger pour elles-mêmes ou pour autrui par « Loi sur la protection des personnes présentant une altération de leur état mental ».",
+     "La ministre a expliqué que le nouveau titre reflète un passage d'une logique de contrôle à une logique de protection, englobant les mesures de prévention de première ligne et l'accompagnement des personnes.",
+     "Le député de Laurier-Dorion a annoncé son intention de déposer un amendement à l'article 1, estimant que le titre est trop large et que la notion de dangerosité devrait y être mentionnée."
+    ],
+    "pucesEn": [
+     "Beginning of the detailed study of Bill 23 on the protection of persons presenting an alteration of their mental state.",
+     "Two preliminary motions were filed and rejected: the first requesting to hear the Bar of Quebec, the Association of Progressive Jurists and the League of Rights and Freedoms; the second requesting to hear the Health and Social Services Commission of the First Nations of Quebec and Labrador.",
+     "Study of article 1: replacement of the title of the Act respecting the protection of persons whose mental state presents a danger to themselves or others with 'Act respecting the protection of persons presenting an alteration of their mental state'.",
+     "The minister explained that the new title reflects a shift from a logic of control to a logic of protection, encompassing first-line prevention measures and support for individuals.",
+     "The member for Laurier-Dorion announced his intention to file an amendment to article 1, arguing that the title is too broad and that the notion of dangerousness should be mentioned in it."
+    ],
+    "votes": [
+     {
+      "objet": "Motion préliminaire du député de Laurier-Dorion demandant des consultations particulières auprès du Barreau du Québec, l'Association des juristes progressistes et la Ligue des droits et libertés",
+      "objetEn": "Preliminary motion by the member for Laurier-Dorion requesting particular consultations with the Bar of Quebec, the Association of Progressive Jurists and the League of Rights and Freedoms",
+      "pour": 2,
+      "contre": 5,
+      "abstentions": 1,
+      "resultat": "rejete",
+      "appelNominal": true
+     },
+     {
+      "objet": "Motion préliminaire du député de Laurier-Dorion demandant des consultations particulières auprès de la Commission de la santé et des services sociaux des Premières Nations du Québec et du Labrador",
+      "objetEn": "Preliminary motion by the member for Laurier-Dorion requesting particular consultations with the Health and Social Services Commission of the First Nations of Quebec and Labrador",
+      "pour": 2,
+      "contre": 5,
+      "abstentions": 1,
+      "resultat": "rejete",
+      "appelNominal": true
+     }
+    ],
+    "aSuivre": "Reprise de l'étude détaillée du projet de loi n° 23 lundi 8 juin 2026 à 14 heures, avec traitement de l'amendement au titre de la loi déposé par le député de Laurier-Dorion et poursuite de l'étude article par article.",
+    "aSuivreEn": "Resumption of the detailed study of Bill 23 on Monday, June 8, 2026 at 2 p.m., with consideration of the amendment to the title of the Act filed by the member for Laurier-Dorion and continuation of the article-by-article study."
+   },
+   "modele": "claude-haiku-4-5",
+   "genereLe": "2026-11-15T02:22:15.741Z",
+   "rejets": 0
+  },
+  {
+   "id": "CTE-260605",
+   "date": "2026-06-05",
+   "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/commissions/cte-43-3/journal-debats/CTE-260605.html",
+   "volume": "Vol. 49 N° 7 (Version préliminaire)",
+   "commission": "cte",
+   "sujets": [
+    "Étude détaillée du projet de loi n° 22, Loi bonifiant les pouvoirs d’intervention des municipalités et modifiant d’autres dispositions législatives"
+   ],
+   "pls": [
+    22
+   ],
+   "type": "etude-detaillee",
+   "legislature": 43,
+   "session": 3,
+   "commissionNom": "Commission des transports et de l’environnement",
+   "commissionNomEn": "Committee on Transportation and the Environment",
+   "typeNom": "Étude détaillée",
+   "typeNomEn": "Clause-by-clause study",
+   "heures": {
+    "debut": "Douze heures",
+    "fin": null
+   },
+   "mots": 10928,
+   "preliminaire": true,
+   "resume": {
+    "puces": [
+     "La Commission des transports et de l'environnement a entrepris l'étude détaillée du projet de loi n° 22 en début de séance le 2 juin 2026.",
+     "Les articles 17, 34, 16, 32, 33, 18, 35, 3 et 9 ont été adoptés sans amendements, modifiant les pouvoirs municipaux en matière d'aliénation et location de biens et introduisant des obligations de publication sur Internet.",
+     "Un amendement du ministre introduisant l'article 11.1, qui modifie l'article 38 de l'annexe C de la Charte de la Ville de Québec, a été adopté pour assurer la concordance avec les modifications aux lois générales.",
+     "La députée de Vaudreuil a soulevé la préoccupation de la COMAQ concernant la flexibilité pour les agrandissements et relocalisations de CPE et garderies, et des questions de l'Association des directeurs municipaux du Québec sur les pouvoirs d'aliénation; le ministre a confirmé que la formulation actuelle permet ces possibilités.",
+     "La commission a ajourné ses travaux au lundi 8 juin 2026 à 14 heures."
+    ],
+    "pucesEn": [
+     "The Commission on Transportation and the Environment began detailed study of Bill 22 at the start of the session on June 2, 2026.",
+     "Articles 17, 34, 16, 32, 33, 18, 35, 3 and 9 were adopted without amendments, modifying municipal powers regarding the sale and leasing of property and introducing Internet publication requirements.",
+     "A ministerial amendment introducing section 11.1, which amends section 38 of Schedule C of the Quebec City Charter, was adopted to ensure consistency with modifications to general laws.",
+     "The member for Vaudreuil raised COMAQ's concern regarding flexibility for expansions and relocations of daycares and childcare services, and questions from the Association of Municipal Directors of Quebec on sale powers; the minister confirmed that the current wording permits these possibilities.",
+     "The commission adjourned its work to Monday, June 8, 2026 at 2 p.m."
+    ],
+    "votes": [],
+    "aSuivre": "La commission reprendra l'étude article par article du projet de loi n° 22 le lundi 8 juin 2026 à 14 heures.",
+    "aSuivreEn": "The commission will resume article-by-article study of Bill 22 on Monday, June 8, 2026 at 2 p.m."
+   },
+   "modele": "claude-haiku-4-5",
+   "genereLe": "2026-11-15T02:23:58.223Z",
+   "rejets": 0
+  },
+  {
+   "id": "CAPERN-260604",
+   "date": "2026-06-04",
+   "url": "https://www.assnat.qc.ca/fr/travaux-parlementaires/commissions/capern-43-3/journal-debats/CAPERN-260604.html",
+   "volume": "Vol. 49 N° 6 (Version préliminaire)",
+   "commission": "capern",
+   "sujets": [
+    "Consultations particulières et auditions publiques sur le projet de loi n° 17, Loi modifiant principalement la Loi sur le stockage de gaz naturel et sur les conduites de gaz naturel et de pétrole aux fins d’encadrer les réservoirs souterrains et certaines conduites"
+   ],
+   "pls": [
+    17
+   ],
+   "type": "consultations",
+   "legislature": 43,
+   "session": 3,
+   "commissionNom": "Commission de l'agriculture, des pêcheries, de l'énergie et des ressources naturelles",
+   "commissionNomEn": "Committee on Agriculture, Fisheries, Energy and Natural Resources",
+   "typeNom": "Consultations",
+   "typeNomEn": "Consultations",
+   "heures": {
+    "debut": "Onze heures quarante-sept minutes",
+    "fin": "16 h 57"
+   },
+   "mots": 32440,
+   "preliminaire": true,
+   "resume": {
+    "puces": [
+     "L'Union des producteurs agricoles a présenté ses préoccupations concernant le projet de loi 17, notamment sur la protection du territoire agricole face à l'exploration d'hydrogène blanc. Elle a demandé un mécanisme de soustraction par défaut des terres privées, une reconnaissance explicite de la protection agricole dans les décisions ministérielles, un rôle central pour la CPTAQ, un encadrement strict des projets pilotes et des exigences adaptées au milieu agricole.",
+     "L'Union des municipalités du Québec a demandé une consultation obligatoire des municipalités et MRC avant la détermination des territoires admissibles, le respect des règlements municipaux sur les nuisances, un nombre maximal de renouvellements de licences dormantes, un encadrement du pouvoir d'expropriation, des garanties financières obligatoires, des redevances pour les retombées économiques et une protection renforcée contre l'inversion du carbone stocké.",
+     "Benoît Marcoux, consultant en stratégie, a recommandé que le projet de loi s'inscrive dans une doctrine d'usage du sous-sol cohérente avec le PGIRE, qu'il traite explicitement des réserves stratégiques de gaz naturel, que le stockage du carbone demeure un outil ciblé et non automatique, que l'hydrogène naturel soit étudié prudemment en précisant le traitement des gaz mixtes, et que les principes essentiels figurent dans la loi plutôt que dans les règlements.",
+     "Pierre-Olivier Pineau, économiste, a appuyé le projet de loi comme nécessaire pour préparer le terrain à la séquestration de carbone, mais a souligné que le Québec a manqué des progrès en réduction d'émissions depuis 20 ans et doit agir simultanément sur plusieurs fronts pour atteindre la carbonégativité plutôt que seulement la carboneutralité.",
+     "La Fédération québécoise des municipalités a demandé le retrait de l'article 52 modifiant la Loi sur l'aménagement et l'urbanisme, une consultation obligatoire des municipalités avant les décisions sur les territoires admissibles, le respect des compétences municipales en aménagement, des garanties de sécurité et financières robustes, et l'implication des municipalités dans l'élaboration de la réglementation."
+    ],
+    "pucesEn": [
+     "The Union of Agricultural Producers presented concerns regarding Bill 17, particularly regarding the protection of agricultural territory from natural hydrogen exploration. It requested a default exclusion mechanism for private land, explicit recognition of agricultural protection in ministerial decisions, a central role for the CPTAQ, strict oversight of pilot projects and requirements adapted to agricultural contexts.",
+     "The Union of Municipalities of Quebec requested mandatory consultation of municipalities and RCMs before determining territories eligible for activities, respect for municipal nuisance regulations, a maximum number of renewals for dormant licenses, oversight of the expropriation power, mandatory financial guarantees, royalties for economic benefits and enhanced protection against reversal of stored carbon.",
+     "Benoît Marcoux, strategy consultant, recommended that the bill be part of a doctrine for subsurface use consistent with the PGIRE, that it explicitly address strategic natural gas reserves, that carbon storage remain a targeted tool rather than automatic, that natural hydrogen be studied cautiously by clarifying treatment of mixed gases, and that essential principles be in the law rather than regulations.",
+     "Pierre-Olivier Pineau, economist, supported the bill as necessary to prepare for carbon sequestration, but emphasized that Quebec has missed progress on emission reductions over 20 years and must act simultaneously on multiple fronts to achieve carbon negativity rather than only carbon neutrality.",
+     "The Quebec Federation of Municipalities requested the removal of article 52 amending the Act respecting land use planning and development, mandatory consultation of municipalities before decisions on eligible territories, respect for municipal land use planning competencies, robust safety and financial guarantees, and municipal involvement in developing regulations."
+    ],
+    "votes": [],
+    "aSuivre": null,
+    "aSuivreEn": null
+   },
+   "modele": "claude-haiku-4-5",
+   "genereLe": "2026-11-15T02:24:11.893Z",
+   "rejets": 0
   }
  ]
 }
