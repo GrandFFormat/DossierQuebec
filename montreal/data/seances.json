@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-14T15:41:37.969Z",
+ "generatedAt": "2026-11-15T16:12:11.482Z",
  "source": "https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv",
  "colonnesSource": [
   "seance",
@@ -12,9 +12,9 @@
  "parametres": {
   "annee": "2026"
  },
- "nombre": 75,
+ "nombre": 76,
  "parInstance": {
-  "CE": 36,
+  "CE": 37,
   "CG": 15,
   "CM": 24
  },
@@ -193,6 +193,18 @@
    "nom": "Comité exécutif",
    "date": "2026-11-11",
    "heure": "09h00",
+   "heureSupposee": false,
+   "variante": "ORDI",
+   "titre": "Séance du comité exécutif",
+   "lien": "https://montreal.ca/evenements/seance-du-comite-executif-103148",
+   "source": "calendrier"
+  },
+  {
+   "id": "CE_2026-11-11_08h00",
+   "instance": "CE",
+   "nom": "Comité exécutif",
+   "date": "2026-11-11",
+   "heure": "08h00",
    "heureSupposee": false,
    "variante": "ORDI",
    "titre": "Séance du comité exécutif",
