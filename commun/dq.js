@@ -398,6 +398,7 @@ const translations = {
     // Overview page
     'apercu.composition.sub':"43rd Legislature · breakdown by parliamentary group",
     'apercu.recent.sub':"↓ Click anywhere in the white square to see the summary ↓",
+    'apercu.recent.sub2':"The latest to change stage",
     'maj.h':"Site updates",
     'sujet.apercu':"Quebec's National Assembly in plain language",
     'sujet.ministres':"Quebec ministers and MNAs",

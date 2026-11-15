@@ -2766,3 +2766,9 @@ body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
 .apercu-note{font-size:12.5px; color:var(--slate);}
 .apercu-titres a:hover .apercu-note{color:#131313;}
 @media (max-width:860px){ .apercu-duo{grid-template-columns:minmax(0,1fr);} }
+/* Les deux têtes de l'accueil, identiques (Martin, 14 nov. 2026 : « c'est pas égal ») : même taille,
+   même ligne de sous-titre, même trait. */
+.apercu-duo .section-head, .apercu-duo-d .db-tete{display:block; margin:0 0 14px; padding:0 0 8px; border-bottom:3px solid var(--ink); min-height:62px; box-sizing:border-box;}
+.apercu-duo .section-head h2, .apercu-duo-d .db-tete h2{margin:0; font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; letter-spacing:-.01em; font-size:clamp(18px,2.2vw,24px); line-height:1.15;}
+.apercu-duo .section-head .sub, .apercu-duo-d .db-tete span{display:block; margin-top:4px; font-size:13px; color:var(--slate);}
+.apercu-duo .apercu-titres{border-top:0;}
