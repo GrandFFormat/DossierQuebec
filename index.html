@@ -269,10 +269,10 @@ function goToFederal(evt){
 
     <!-- Avis de dissolution — la 43e législature s'est terminée le 2026-08-27.
          À RETIRER (ici et dans view-projets) quand la nouvelle Assemblée
-         commencera le 17 novembre 2026 ; voir l'objet ASSEMBLY dans le script. -->
+         commencera le 1er décembre 2026 ; voir l'objet ASSEMBLY dans le script. -->
     <div class="band band-yellow bleed" id="band-dissolution">
-      <h2 data-i18n="diss.h">📅 Les nouveaux projets de loi arrivent le 17 novembre</h2>
-      <p data-i18n="diss.p1">La nouvelle Assemblée siège à partir du <b>17 novembre 2026</b>. Les premiers projets de loi de la 44<sup>e</sup> législature apparaîtront ici dès leur dépôt.</p>
+      <h2 data-i18n="diss.h">📅 Les nouveaux projets de loi arrivent le 1er décembre</h2>
+      <p data-i18n="diss.p1">La nouvelle Assemblée siège à partir du <b>1er décembre 2026</b>. Les premiers projets de loi de la 44<sup>e</sup> législature apparaîtront ici dès leur dépôt.</p>
     </div>
 
     <!-- Hero poster brutaliste : la devise du site devient l'affiche.
@@ -299,6 +299,7 @@ function goToFederal(evt){
       <div class="stat-cell"><b id="statVotes">735</b><span data-i18n="stat.votes">Votes nominatifs</span></div>
     </div>
 
+
     <!-- Section signature du handoff : bande JAUNE pleine largeur -->
     <div class="band band-yellow bleed" id="band-challenged">
     <div class="section-head" id="sec-challenged">
@@ -311,10 +312,14 @@ function goToFederal(evt){
     <div id="challengedList"></div>
     </div>
 
+    <!-- Accueil, 14 nov. 2026 (Martin) : les projets de loi récemment actifs (titres seulement, chacun mène à
+         sa fiche) à gauche, « Aujourd'hui à l'Assemblée » (commun/debats.js) à droite. -->
+    <div class="apercu-duo">
+    <div class="apercu-duo-g">
     <div class="section-head" id="sec-projets-recents">
       <div>
         <h2 data-i18n="h.billsrecent">Projets de loi récemment actifs</h2>
-        <div class="sub" data-i18n="apercu.recent.sub">↓ Cliquez n'importe où dans le carré blanc pour voir le résumé ↓</div>
+        
       </div>
     </div>
     <div id="body-projets-recents">
@@ -325,9 +330,16 @@ function goToFederal(evt){
         <li><b>Projet de loi n° 10</b> — Loi protégeant les consommateurs contre les pratiques abusives de revente de billets et de renouvellement d’abonnements en ligne <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
         <li><b>Projet de loi n° 17</b> — Loi modifiant la Loi sur le stockage de gaz naturel et sur les conduites de gaz naturel et de pétrole aux fins d'autoriser la mise en œuvre d'un projet pilote relatif à la recherche ou à l'exploitation d'un réservoir souterrain ou de certains fluides (titre modifié) <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
         <li><b>Projet de loi n° 22</b> — Loi bonifiant les pouvoirs d’intervention des municipalités et modifiant d’autres dispositions législatives <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
+        <li><b>Projet de loi n° 23</b> — Loi visant principalement à mieux accompagner les personnes dont l’état mental pourrait représenter un risque pour leur propre sécurité ou celle d’autrui <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
+        <li><b>Projet de loi n° 24</b> — Loi protégeant le consommateur contre l’utilisation trompeuse ou frauduleuse de l’identité ou de l’image d’une personne <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
+        <li><b>Projet de loi n° 692</b> — Loi visant à créer un nouvel outil de conservation volontaire des milieux naturels <span class="pr-meta">· Présenté le 2026-06-12</span></li>
+        <li><b>Projet de loi n° 2</b> — Loi permettant au Parlement du Québec de préserver le principe de la souveraineté parlementaire à l’égard de la Charte de la langue française et de la Loi sur la langue officielle et commune du Québec, le français <span class="pr-meta">· Étude détaillée entreprise le 2026-06-11</span></li>
       </ul>
       <p class="pr-note">Source officielle : <a href="https://www.assnat.qc.ca/" rel="noopener">assnat.qc.ca</a>.</p>
     </div>
+    </div>
+    </div>
+    <div class="apercu-duo-d"><div id="debats" data-src="/data/site/debats.json" data-max="3" hidden></div></div>
     </div>
 
     <!-- À la place de « Par où commencer » (Martin, 21 sept. 2026) : le compte gratuit et Mon dossier.
@@ -339,7 +351,7 @@ function goToFederal(evt){
           <p class="promo-sur" data-i18n="promo.sur">Compte gratuit</p>
           <h2 id="promoAccueilTitre" data-i18n="promo.h">Suivez les projets de loi qui vous touchent</h2>
           <p class="promo-texte" data-i18n="promo.p">Un compte gratuit, sans mot de passe : suivez jusqu'à 3 projets de loi ou projets de ville, et retrouvez-les dans Mon dossier, avec leur étape du moment.</p>
-          <p class="promo-texte promo-dissolution" data-i18n="promo.diss">Les projets de loi de la 43e législature sont morts à la dissolution du 27 août : le suivi reprendra avec les premiers projets de loi de la nouvelle législature, convoquée le 17 novembre 2026.</p>
+          <p class="promo-texte promo-dissolution" data-i18n="promo.diss">Les projets de loi de la 43e législature sont morts à la dissolution du 27 août : le suivi reprendra avec les premiers projets de loi de la nouvelle législature, convoquée le 1er décembre 2026.</p>
         </div>
         <div class="promo-cote">
         <div class="promo-compte">
@@ -386,7 +398,7 @@ function goToFederal(evt){
     <!-- Encadré noir compact (maquette) — le même statut réel que le ticker.
          renderTicker() lit .calendar-box .status : NE PAS renommer. -->
     <div class="calendar-box">
-      <div class="status" data-i18n="cal.status">● Assemblée dissoute le 27 août 2026 · élection tenue le 5 octobre · nouvelle législature le 17 novembre</div>
+      <div class="status" data-i18n="cal.status">● Assemblée dissoute le 27 août 2026 · élection tenue le 5 octobre · nouvelle législature le 1er décembre</div>
     </div>
     </div>
     </div>
@@ -531,6 +543,7 @@ function goToFederal(evt){
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/commun/apercu.js"></script>
+<script type="module" src="/commun/debats.js"></script>
 <script src="/commun/dq.js"></script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle (donc pas de
      bannière de consentement requise). Le script est servi automatiquement par

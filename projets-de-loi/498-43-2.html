@@ -263,7 +263,7 @@ function goToFederal(evt){
          comme « encore en cours ». À retirer avec l'autre bande le 17 nov. 2026. -->
     <div class="band band-yellow bleed" id="band-dissolution-projets">
       <h2 data-i18n="dissp.h">⚠️ Ces projets ne sont jamais devenus des lois</h2>
-      <p data-i18n="dissp.p">L'Assemblée a été dissoute le <b>27 août 2026</b>. Tout projet de loi qui n'avait pas été <b>sanctionné</b> est donc <b>mort au feuilleton</b> — c'est le terme officiel de l'Assemblée. Sur les cartes, on l'écrit en clair : <b>« mort dans l'œuf »</b> si le projet n'a jamais dépassé la présentation, <b>« tombé en cours de route »</b> s'il s'était rendu plus loin. Dans les deux cas, il devra repartir de zéro devant la nouvelle Assemblée (17 novembre 2026). Les projets marqués « Sanctionnée » sont, eux, bel et bien devenus des lois.</p>
+      <p data-i18n="dissp.p">L'Assemblée a été dissoute le <b>27 août 2026</b>. Tout projet de loi qui n'avait pas été <b>sanctionné</b> est donc <b>mort au feuilleton</b> — c'est le terme officiel de l'Assemblée. Sur les cartes, on l'écrit en clair : <b>« mort dans l'œuf »</b> si le projet n'a jamais dépassé la présentation, <b>« tombé en cours de route »</b> s'il s'était rendu plus loin. Dans les deux cas, il devra repartir de zéro devant la nouvelle Assemblée (1er décembre 2026). Les projets marqués « Sanctionnée » sont, eux, bel et bien devenus des lois.</p>
     </div>
 
     <!-- Hero de vue (refonte brutaliste) -->
@@ -316,6 +316,8 @@ function goToFederal(evt){
 <ul class="bill-summary-list"><li>Abolit l'obligation pour les médecins de faire des activités médicales particulières pour adhérer à une entente.</li><li>Supprime l'obligation d'élaborer des plans territoriaux et d'établissement des effectifs médicaux et dentaires.</li><li>Abroge la loi obligeant un médecin à obtenir l'autorisation de Santé Québec pour devenir non participant.</li><li>Crée un statut de « professionnel en pratique mixte », soumis à une entente pour une partie seulement de sa pratique.</li><li>Permet la création de centres médicaux spécialisés mixtes, combinant médecins participants et non participants.</li><li>Retire les limites de lits et la limite d'hospitalisation de 24 heures dans les centres médicaux spécialisés.</li><li>Met fin, au plus tard trois mois après l'entrée en vigueur, aux ententes existantes liées aux activités médicales particulières.</li></ul><details class="bill-lois"><summary>Lois et règlements touchés (9)</summary><ul><li>Loi sur l’assurance maladie</li><li>Loi sur la gouvernance du système de santé et de services sociaux</li><li>Loi sur l’Institut national d’excellence en santé et en services sociaux</li><li>Loi sur l’Institut national de santé publique du Québec</li><li>Loi sur les services de santé et les services sociaux pour les Inuit et les Naskapis</li><li>Loi sur les services de santé et les services sociaux pour les autochtones cris</li><li>Loi favorisant l’exercice de la médecine au sein du réseau public de la santé et des services sociaux</li><li>Règlement sur l’organisation et l’administration des établissements</li><li>Règlement sur les traitements médicaux spécialisés dispensés dans un centre médical spécialisé</li></ul></details>
 <p><a href="https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-498-43-2.html" rel="noopener">Le projet de loi sur le site de l'Assemblée nationale</a></p>
 </article></div>
+<div id="debats" data-src="/data/site/debats.json" data-pl="498" data-leg="43" data-session="2" data-max="8" hidden></div>
+<script type="module" src="/commun/debats.js"></script>
     <div class="prerendu" data-prerendu="bills">
       <ul aria-label="Projets de loi">
         <li><b>Projet de loi n° 3</b> — Loi visant à assurer la représentation effective des électeurs <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
@@ -575,6 +577,7 @@ function goToFederal(evt){
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/commun/apercu.js"></script>
+<script type="module" src="/commun/debats.js"></script>
 <script src="/commun/dq.js"></script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle (donc pas de
      bannière de consentement requise). Le script est servi automatiquement par

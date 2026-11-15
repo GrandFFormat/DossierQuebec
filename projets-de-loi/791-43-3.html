@@ -263,7 +263,7 @@ function goToFederal(evt){
          comme « encore en cours ». À retirer avec l'autre bande le 17 nov. 2026. -->
     <div class="band band-yellow bleed" id="band-dissolution-projets">
       <h2 data-i18n="dissp.h">⚠️ Ces projets ne sont jamais devenus des lois</h2>
-      <p data-i18n="dissp.p">L'Assemblée a été dissoute le <b>27 août 2026</b>. Tout projet de loi qui n'avait pas été <b>sanctionné</b> est donc <b>mort au feuilleton</b> — c'est le terme officiel de l'Assemblée. Sur les cartes, on l'écrit en clair : <b>« mort dans l'œuf »</b> si le projet n'a jamais dépassé la présentation, <b>« tombé en cours de route »</b> s'il s'était rendu plus loin. Dans les deux cas, il devra repartir de zéro devant la nouvelle Assemblée (17 novembre 2026). Les projets marqués « Sanctionnée » sont, eux, bel et bien devenus des lois.</p>
+      <p data-i18n="dissp.p">L'Assemblée a été dissoute le <b>27 août 2026</b>. Tout projet de loi qui n'avait pas été <b>sanctionné</b> est donc <b>mort au feuilleton</b> — c'est le terme officiel de l'Assemblée. Sur les cartes, on l'écrit en clair : <b>« mort dans l'œuf »</b> si le projet n'a jamais dépassé la présentation, <b>« tombé en cours de route »</b> s'il s'était rendu plus loin. Dans les deux cas, il devra repartir de zéro devant la nouvelle Assemblée (1er décembre 2026). Les projets marqués « Sanctionnée » sont, eux, bel et bien devenus des lois.</p>
     </div>
 
     <!-- Hero de vue (refonte brutaliste) -->
@@ -316,6 +316,8 @@ function goToFederal(evt){
 <ul class="bill-summary-list"><li>Fixe définitivement les circonscriptions de Gaspé et Bonaventure, malgré les règles habituelles de délimitation.</li><li>Augmente le nombre total de circonscriptions électorales à 126 au Québec.</li><li>Maintient aussi les délimitations actuelles de Matane-Matapédia-Mitis et Rimouski.</li><li>Oblige la Commission de la représentation à publier une nouvelle liste des circonscriptions.</li><li>Prévoit que cette nouvelle liste entre en vigueur selon la date de fin de la 43e législature.</li><li>Crée un comité de trois membres pour revoir les critères de délimitation des circonscriptions.</li><li>Ce comité doit consulter citoyens et experts, et remettre un rapport avant le 1er février 2028.</li></ul>
 <p><a href="https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-791-43-3.html" rel="noopener">Le projet de loi sur le site de l'Assemblée nationale</a></p>
 </article></div>
+<div id="debats" data-src="/data/site/debats.json" data-pl="791" data-leg="43" data-session="3" data-max="8" hidden></div>
+<script type="module" src="/commun/debats.js"></script>
     <div class="prerendu" data-prerendu="bills">
       <ul aria-label="Projets de loi">
         <li><b>Projet de loi n° 3</b> — Loi visant à assurer la représentation effective des électeurs <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
@@ -575,6 +577,7 @@ function goToFederal(evt){
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/commun/apercu.js"></script>
+<script type="module" src="/commun/debats.js"></script>
 <script src="/commun/dq.js"></script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle (donc pas de
      bannière de consentement requise). Le script est servi automatiquement par

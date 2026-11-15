@@ -148,7 +148,11 @@ export function construirePagesProjets() {
 ${resumePage}
 <p><a href="${echapper(b.url)}" rel="noopener">Le projet de loi sur le site de l'Assemblée nationale</a></p>
 </article>`;
-    remplacer(/<div id="billsList"><\/div>/, `<div id="billsList">${fiche}</div>`);
+    // Ses séances en commission (14 nov. 2026) : le bloc de commun/debats.js, filtré sur ce projet, sous la
+    // fiche. Hors de #billsList (que commun/dq.js remplace) ; caché s'il n'y a aucune séance résumée.
+    remplacer(/<div id="billsList"><\/div>/, `<div id="billsList">${fiche}</div>
+<div id="debats" data-src="/data/site/debats.json" data-pl="${b.num}" data-leg="${b.legislature}" data-session="${b.introSession}" data-max="8" hidden></div>
+<script type="module" src="/commun/debats.js"></script>`);
     // La fiche enrichie va AU-DESSUS de la liste, hors de #billsList que commun/dq.js remplace : le
     // visiteur et Google (après rendu) la voient. Sans elle, toutes les fiches montrent la même liste.
     if (enrichi) remplacer(/<div class="legend-strip bleed">/, `<section class="fiche-enrichie" id="fiche">

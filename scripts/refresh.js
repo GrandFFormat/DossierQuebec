@@ -52,6 +52,10 @@ const doPetitions =
 const SCRAPERS = [
   ['Scrape : projets de loi (Données Québec)', ['scrapers/bills.js']],
   ['Scrape : détails des projets de loi (assnat)', ['scrapers/bill-details.js']],
+  // « Aujourd'hui à l'Assemblée » (14 nov. 2026) : les séances de commission sur un projet de loi,
+  // résumées par Haiku depuis le Journal des débats (≈ 4 ¢ la séance, 12 par passage au plus).
+  // « soft » : une panne ou une clé absente garde data/debats.json de la veille.
+  ['Scrape : séances de commission résumées (Claude)', existsSync('api.env') ? ['--env-file=api.env', 'scrapers/debats.js'] : ['scrapers/debats.js'], { soft: true }],
   // Consultations en commission et mémoires déposés (outils de l'abonnement) : api/consultations-data.json,
   // relu par morceaux (cache). « soft » : une panne garde le fichier de la veille.
   ['Scrape : consultations et mémoires (assnat)', ['scrapers/consultations.js'], { soft: true }],

@@ -263,7 +263,7 @@ function goToFederal(evt){
          comme « encore en cours ». À retirer avec l'autre bande le 17 nov. 2026. -->
     <div class="band band-yellow bleed" id="band-dissolution-projets">
       <h2 data-i18n="dissp.h">⚠️ Ces projets ne sont jamais devenus des lois</h2>
-      <p data-i18n="dissp.p">L'Assemblée a été dissoute le <b>27 août 2026</b>. Tout projet de loi qui n'avait pas été <b>sanctionné</b> est donc <b>mort au feuilleton</b> — c'est le terme officiel de l'Assemblée. Sur les cartes, on l'écrit en clair : <b>« mort dans l'œuf »</b> si le projet n'a jamais dépassé la présentation, <b>« tombé en cours de route »</b> s'il s'était rendu plus loin. Dans les deux cas, il devra repartir de zéro devant la nouvelle Assemblée (17 novembre 2026). Les projets marqués « Sanctionnée » sont, eux, bel et bien devenus des lois.</p>
+      <p data-i18n="dissp.p">L'Assemblée a été dissoute le <b>27 août 2026</b>. Tout projet de loi qui n'avait pas été <b>sanctionné</b> est donc <b>mort au feuilleton</b> — c'est le terme officiel de l'Assemblée. Sur les cartes, on l'écrit en clair : <b>« mort dans l'œuf »</b> si le projet n'a jamais dépassé la présentation, <b>« tombé en cours de route »</b> s'il s'était rendu plus loin. Dans les deux cas, il devra repartir de zéro devant la nouvelle Assemblée (1er décembre 2026). Les projets marqués « Sanctionnée » sont, eux, bel et bien devenus des lois.</p>
     </div>
 
     <!-- Hero de vue (refonte brutaliste) -->
@@ -316,6 +316,8 @@ function goToFederal(evt){
 <ul class="bill-summary-list"><li>Applique des mesures annoncées dans le budget du 18 mars 2026 et le point économique du 25 novembre 2025.</li><li>Réduit le taux de cotisation de base au Régime de rentes du Québec, qui verse une rente à la retraite.</li><li>Augmente la déduction pour petite entreprise, ce qui réduit l'impôt payé par ces entreprises.</li><li>Crée une pause temporaire de cotisation au Fonds des services de santé pour les employeurs en agriculture, foresterie et pêche.</li><li>Prolonge le crédit d'impôt pour l'emploi en Gaspésie et dans des régions maritimes, et l'étend à la transformation de produits de la mer.</li><li>Élargit le crédit d'impôt pour la presse écrite aux agences de presse et aux médias diffusant des bulletins de nouvelles à la radio ou la télévision.</li><li>Prolonge le crédit d'impôt pour la transformation numérique de la presse écrite, mais réduit graduellement son taux.</li><li>Prolonge le mécanisme qui permet aux producteurs forestiers d'étaler leur revenu sur plusieurs années.</li><li>Assouplit les règles d'admissibilité des films pour certains crédits d'impôt dans le domaine culturel.</li><li>Ajuste les crédits d'impôt pour les entreprises développant des technologies d'affaires électroniques avec intelligence artificielle.</li><li>Élargit la définition de « particuliers liés » pour le calcul de la taxe de vente lors du transfert d'un véhicule usagé entre proches.</li></ul><details class="bill-lois"><summary>Lois et règlements touchés (7)</summary><ul><li>Loi sur l’assurance parentale</li><li>Loi sur la fiscalité municipale</li><li>Loi sur les impôts</li><li>Loi sur la Régie de l’assurance maladie du Québec</li><li>Loi sur le régime de rentes du Québec</li><li>Loi sur la taxe de vente du Québec</li><li>Règlement sur la taxe de vente du Québec</li></ul></details>
 <p><a href="https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-6-43-3.html" rel="noopener">Le projet de loi sur le site de l'Assemblée nationale</a></p>
 </article></div>
+<div id="debats" data-src="/data/site/debats.json" data-pl="6" data-leg="43" data-session="3" data-max="8" hidden></div>
+<script type="module" src="/commun/debats.js"></script>
     <div class="prerendu" data-prerendu="bills">
       <ul aria-label="Projets de loi">
         <li><b>Projet de loi n° 3</b> — Loi visant à assurer la représentation effective des électeurs <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
@@ -575,6 +577,7 @@ function goToFederal(evt){
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/commun/apercu.js"></script>
+<script type="module" src="/commun/debats.js"></script>
 <script src="/commun/dq.js"></script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle (donc pas de
      bannière de consentement requise). Le script est servi automatiquement par

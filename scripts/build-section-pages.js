@@ -112,7 +112,7 @@ function extraireDonnees() {
       projets: valeurs.bills.length,
       votes: valeurs.votes.length,
     },
-    apercuBills: valeurs.bills.slice(0, 4),
+    apercuBills: valeurs.bills.slice(0, 8),
     billsTitres: valeurs.bills.map((b) => ({ id: b.id, title: b.title, titleEn: b.titleEn, sponsor: b.sponsor })),
     // billsParrains : le parrain de chaque projet et son rôle, pour « PL parrainés » de la page
     // Ministres (qui affichait 0 partout depuis le découpage : elle ne chargeait aucun projet). Le
@@ -350,7 +350,7 @@ function prerendus(valeurs) {
   journal = journal.filter((e) => !JOURNAL_VILLES.includes(e?.volet));
   const journalTrie = [...journal].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
   return {
-    apercuBills: bloc('apercuBills', 'Projets de loi récemment actifs', bills.slice(0, 4).map(projet),
+    apercuBills: bloc('apercuBills', 'Projets de loi récemment actifs', bills.slice(0, 8).map(projet),
       `Source officielle : ${ASSNAT}.`),
     newsList: bloc('newsItems', 'Quoi de neuf à l’Assemblée nationale',
       [...valeurs.newsItems].sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 8)

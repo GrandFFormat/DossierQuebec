@@ -2750,3 +2750,19 @@ body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
   .md-rangees li{grid-template-columns:minmax(0,1fr);}
   .md-rangees li .md-btn-noir, .md-rangees li .md-copier{justify-self:start;}
 }
+
+/* Accueil (14 nov. 2026) : « Projets de loi récemment actifs » en titres à gauche, « Aujourd'hui à
+   l'Assemblée » à droite (commun/debats.js). Une colonne sur téléphone. */
+.apercu-duo{display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:28px; align-items:start; margin-top:34px;}
+.apercu-duo .section-head{margin-top:0;}
+.apercu-duo-d .db{margin:0;}
+.apercu-duo-d .db-tete{min-height:0;}
+.apercu-titres{list-style:none; margin:0; padding:0; border-top:3px solid var(--ink);}
+.apercu-titres li{border-bottom:2px solid var(--line-soft);}
+.apercu-titres a{display:grid; grid-template-columns:auto minmax(0,1fr); column-gap:10px; row-gap:2px; padding:10px 4px; color:var(--ink); text-decoration:none;}
+.apercu-titres a:hover{background:#FFD24D; color:#131313;}
+.apercu-pl{grid-row:1 / span 2; align-self:start; font-family:'Archivo',sans-serif; font-weight:900; font-size:13px; padding:2px 7px; border:2px solid var(--ink); background:var(--card); white-space:nowrap;}
+.apercu-titre{font-weight:700; font-size:15px; line-height:1.35;}
+.apercu-note{font-size:12.5px; color:var(--slate);}
+.apercu-titres a:hover .apercu-note{color:#131313;}
+@media (max-width:860px){ .apercu-duo{grid-template-columns:minmax(0,1fr);} }

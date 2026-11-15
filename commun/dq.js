@@ -165,7 +165,7 @@ function renderArchives(){
     const l = legEnDirect || 43;
     liste.innerHTML = `<li class="regle"><p>${isEn
       ? `The ${nomLegislature(l, true)} will be archived here when the ${nomLegislature(l + 1, true)} opens${l === 43 ? ', on 17 November 2026' : ''}. Until then, its bills and votes are on the <a href="/projets-de-loi${q(true)}">Bills</a> and <a href="/votes${q(true)}">Votes</a> pages.`
-      : `La ${nomLegislature(l, false)} sera archivée ici à l'ouverture de la ${nomLegislature(l + 1, false)}${l === 43 ? ', le 17 novembre 2026' : ''}. D'ici là, ses projets de loi et ses votes sont sur les pages <a href="/projets-de-loi">Projets de loi</a> et <a href="/votes">Votes</a>.`}</p></li>`;
+      : `La ${nomLegislature(l, false)} sera archivée ici à l'ouverture de la ${nomLegislature(l + 1, false)}${l === 43 ? ', le 1er décembre 2026' : ''}. D'ici là, ses projets de loi et ses votes sont sur les pages <a href="/projets-de-loi">Projets de loi</a> et <a href="/votes">Votes</a>.`}</p></li>`;
     return;
   }
   liste.innerHTML = archivesDispo.slice().sort((a, b) => b - a).map(l => `
@@ -202,7 +202,7 @@ const translations = {
     // Voir la note du côté anglais : la bande « C'est quoi, challenger ? » change de deuxième
     // ligne pendant la dissolution. Le français a besoin de SA clé, sinon applyLanguage
     // retombe sur le texte écrit dans le HTML — celui qui promet une pétition.
-    'chexp.p2.dissous':"<b>Un compte (courriel) est requis</b> — une demande par personne, aucune demande anonyme. L'Assemblée est dissoute : ces projets sont morts au feuilleton. Les demandes restent enregistrées et comptées — elles diront, à la rentrée du 17 novembre, ce que les gens voulaient voir expliqué.",
+    'chexp.p2.dissous':"<b>Un compte (courriel) est requis</b> — une demande par personne, aucune demande anonyme. L'Assemblée est dissoute : ces projets sont morts au feuilleton. Les demandes restent enregistrées et comptées — elles diront, à la rentrée du 1er décembre, ce que les gens voulaient voir expliqué.",
     'filter.statuts':"Statuts", 'filter.etapes':"Étapes",
     'ph.searchDeputes':"Nom, circonscription ou région…",
     'ph.searchVotes':"Mot-clé : sujet, numéro de projet de loi…",
@@ -311,12 +311,12 @@ const translations = {
     'trouve.sub':"125 ridings — full list, real National Assembly data",
     'trouve.info':"These 125 entries come directly from the official list of sitting MNAs at the National Assembly. Some seats may change between updates (resignation, by-election) — this list is a snapshot taken at the last update, not an automatically updated feed.",
     // What's new / calendar
-    'cal.status':"\u25CF Assembly dissolved on August 27, 2026 \u00B7 election held October 5 · new legislature November 17",
+    'cal.status':"\u25CF Assembly dissolved on August 27, 2026 \u00B7 election held October 5 · new legislature December 1",
     'cal.title':"Sitting calendar",
     // Dissolution de la 43e législature (2026-08-27) — à retirer le 17 nov. 2026.
-    'diss.h':"📅 New bills arrive on November 17",
-    'diss.p1':"The new Assembly sits from <b>November 17, 2026</b>. The first bills of the 44th legislature will appear here as soon as they are introduced.",
-    'diss.p2':"Direct consequence: <b>every bill that had not been assented to died with it.</b> They will have to start over before the new Assembly, convened on <b>November 17, 2026</b>. What remains here is the full record of the 43rd legislature: the laws that passed, how each member voted, and the bills that did not make it.",
+    'diss.h':"📅 New bills arrive on December 1",
+    'diss.p1':"The new Assembly sits from <b>December 1, 2026</b>. The first bills of the 44th legislature will appear here as soon as they are introduced.",
+    'diss.p2':"Direct consequence: <b>every bill that had not been assented to died with it.</b> They will have to start over before the new Assembly, convened on <b>December 1, 2026</b>. What remains here is the full record of the 43rd legislature: the laws that passed, how each member voted, and the bills that did not make it.",
     'diss.p3':"<em>We can't wait for these bills to come in either, la la!</em>",
     'diss.cta':"What the parties are promising →",
     'prom.l1':"What they promise,",
@@ -342,9 +342,9 @@ const translations = {
     'prom.ail.h':"Comparison tools from news outlets",
     'prom.ail.p':"Several newsrooms have built their own promise comparison tools, with resources we do not have. <b>We do not reproduce their content</b>: these outlets have opted their material out of AI use, and our permission requests remain unanswered. We respect that choice. But a link is not a reproduction — so here they are, because they will be useful to you.",
     'prom.next.h':"And after October 5?",
-    'prom.next.p':"The new Assembly sits from <b>November 17, 2026</b>. From then on, every bill introduced will be placed next to the promise it matches — and the absence of a bill on a commitment will be just as visible. That is the follow-up nobody does past election week.",
+    'prom.next.p':"The new Assembly sits from <b>December 1, 2026</b>. From then on, every bill introduced will be placed next to the promise it matches — and the absence of a bill on a commitment will be just as visible. That is the follow-up nobody does past election week.",
     'dissp.h':"⚠️ These bills never became law",
-    'dissp.p':"The Assembly was dissolved on <b>August 27, 2026</b>. Any bill that had not been <b>assented to</b> therefore <b>died on the Order Paper</b> — that is the Assembly's official term. On the cards we say it plainly: <b>“dead on arrival”</b> if the bill never got past introduction, <b>“died along the way”</b> if it got further. Either way, it must start over before the new Assembly (November 17, 2026). Bills marked “Assented to” did become law.",
+    'dissp.p':"The Assembly was dissolved on <b>August 27, 2026</b>. Any bill that had not been <b>assented to</b> therefore <b>died on the Order Paper</b> — that is the Assembly's official term. On the cards we say it plainly: <b>“dead on arrival”</b> if the bill never got past introduction, <b>“died along the way”</b> if it got further. Either way, it must start over before the new Assembly (December 1, 2026). Bills marked “Assented to” did become law.",
     'cal.p1':"The Assembly doesn't sit year-round. Its Standing Orders set two working periods: a spring period starting the 2nd Tuesday of February (16 weeks, plus 2 intensive weeks), and a fall period starting the 3rd Tuesday of September (10 weeks, plus 2 intensive weeks). Outside these periods the Assembly is adjourned — barring a special sitting called by the Premier.",
     'cal.p2':"This page outlines the main working periods, not the daily schedule. For a day-by-day view of upcoming sittings and committees, the Assembly's official calendar remains the reference.",
     // Lexicon
@@ -437,7 +437,7 @@ const translations = {
     'mdavenir.html':"<div class=\"md-carte-tete\"><h2>Coming soon</h2><span class=\"md-etiquette\">Soon</span></div><p>All the text on the site will stay free: bills and their summaries, ministers and MNAs, votes, promises. Extra tools are coming soon, for subscribers:</p><ul class=\"ab-outils\"><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom alerts</b> — an email when a bill touches a keyword you care about, when a member introduces a bill or votes, or when a bill moves to a new stage.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Custom RSS feeds</b> — the feed of all the news, and a feed per keyword, per MNA or per ministry, in your RSS reader.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Consultation deadlines</b> — for groups and lobbies: the deadline to file a brief with a parliamentary committee, with a reminder before it closes.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Topic watch</b> — every week, everything that moved in your field: bills, votes, consultations.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Who filed a brief on what</b> — the groups that spoke up on each bill in committee.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Data export</b> — votes, attendance and bills as Excel or CSV files, ready to analyze.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>Follow a company or an organization</b> — its briefs filed in committee at the National Assembly, in one place, and an alert for each new brief.</div></li><li><span class=\"ab-etat ab-dispo\">Available</span><div><b>No ad badges</b> — on DossierQuébec, the « ☕ Support us » buttons on bills disappear.</div></li><li><span class=\"ab-etat ab-bientot\">Soon</span><div><b>Monthly recap, subscriber edition</b> — the Québec City and Montréal council recap, with the “Where the money goes” section.</div></li></ul><p><a class=\"md-lien\" href=\"/abonnement\">See the optional subscription and the status of each tool →</a></p>",
     'promo.h':"Follow the bills that matter to you",
     'promo.p':"A free account, no password: follow up to 3 bills or city projects, and find them in My file, with their current stage.",
-    'promo.diss':"The bills of the 43rd legislature died when the Assembly was dissolved on August 27: following will resume with the first bills of the new legislature, convened on November 17, 2026.",
+    'promo.diss':"The bills of the 43rd legislature died when the Assembly was dissolved on August 27: following will resume with the first bills of the new legislature, convened on December 1, 2026.",
     'promo.compte.h':"Your account",
     'promo.mesdossiers':"My file →",
     'footer.villes':"Cities:",
@@ -786,13 +786,13 @@ function applyAssemblyState(){
   if(ASSEMBLY.phase === 'entre-deux'){
     const cal = document.querySelector('[data-i18n="cal.status"]');
     if(cal) cal.textContent = isEn
-      ? '● Assembly dissolved on August 27, 2026 · election held October 5 · new legislature November 17'
-      : '● Assemblée dissoute le 27 août 2026 · élection tenue le 5 octobre · nouvelle législature le 17 novembre';
+      ? '● Assembly dissolved on August 27, 2026 · election held October 5 · new legislature December 1'
+      : '● Assemblée dissoute le 27 août 2026 · élection tenue le 5 octobre · nouvelle législature le 1er décembre';
     // La bande jaune ne dit plus que l'arrivée des projets de loi (Martin, 23 oct. 2026).
     const h = document.querySelector('[data-i18n="diss.h"]');
-    if(h) h.textContent = isEn ? "📅 New bills arrive on November 17" : "📅 Les nouveaux projets de loi arrivent le 17 novembre";
+    if(h) h.textContent = isEn ? "📅 New bills arrive on December 1" : "📅 Les nouveaux projets de loi arrivent le 1er décembre";
     const p1 = document.querySelector('[data-i18n="diss.p1"]');
-    if(p1) p1.innerHTML = isEn ? "The new Assembly sits from <b>November 17, 2026</b>. The first bills of the 44th legislature will appear here as soon as they are introduced." : "La nouvelle Assemblée siège à partir du <b>17 novembre 2026</b>. Les premiers projets de loi de la 44<sup>e</sup> législature apparaîtront ici dès leur dépôt.";
+    if(p1) p1.innerHTML = isEn ? "The new Assembly sits from <b>December 1, 2026</b>. The first bills of the 44th legislature will appear here as soon as they are introduced." : "La nouvelle Assemblée siège à partir du <b>1er décembre 2026</b>. Les premiers projets de loi de la 44<sup>e</sup> législature apparaîtront ici dès leur dépôt.";
     if(typeof renderTicker === 'function') renderTicker(); // il lit cal.status
   }
   // Le titre et le sous-titre des pétitions annonçaient des pétitions
@@ -825,15 +825,15 @@ function applyAssemblyState(){
       : 'Les ministres sortant·e·s, puis les personnes élues le 5 octobre (<b>les élu·e·s sont plus bas</b>) — <b>une seule recherche pour les deux.</b>';
     if(note) note.textContent = isEn ? `${n} of ${Object.values(ASSEMBLY.sieges || {}).reduce((a, b) => a + b, 0) || 127} seats proclaimed` : `${n} sièges proclamés sur ${Object.values(ASSEMBLY.sieges || {}).reduce((a, b) => a + b, 0) || 127}`;
     if(box) box.textContent = isEn
-      ? 'List published by the National Assembly: the people proclaimed elected on October 5. They will sit when the new Assembly opens on November 17. The other seats are awaiting proclamation, notably where a judicial recount is under way. Attendance at votes will start again with the new legislature: the records of the 43rd do not apply to this list.'
-      : 'Liste publiée par l\'Assemblée nationale : les personnes proclamées élues le 5 octobre. Elles siégeront à l\'ouverture de la nouvelle Assemblée, le 17 novembre. Les autres sièges attendent leur proclamation, entre autres là où un dépouillement judiciaire est en cours. La présence aux votes reprendra avec la nouvelle législature : celle de la 43e ne s\'applique pas à cette liste.';
+      ? 'List published by the National Assembly: the people proclaimed elected on October 5. They will sit when the new Assembly opens on December 1. The other seats are awaiting proclamation, notably where a judicial recount is under way. Attendance at votes will start again with the new legislature: the records of the 43rd do not apply to this list.'
+      : 'Liste publiée par l\'Assemblée nationale : les personnes proclamées élues le 5 octobre. Elles siégeront à l\'ouverture de la nouvelle Assemblée, le 1er décembre. Les autres sièges attendent leur proclamation, entre autres là où un dépouillement judiciaire est en cours. La présence aux votes reprendra avec la nouvelle législature : celle de la 43e ne s\'applique pas à cette liste.';
     return;
   }
   if(h) h.textContent = isEn ? 'The outgoing Assembly' : 'L\'Assemblée sortante';
   if(note) note.textContent = isEn ? 'All parties — 125 seats before dissolution' : 'Tous les partis — 125 sièges avant la dissolution';
   if(box) box.textContent = isEn
-    ? 'The Assembly was dissolved on August 27, 2026: these 125 people are no longer members — they are the outgoing members of the 43rd legislature. The members elected on October 5 will appear here when the new Assembly opens on November 17. Their voting record below is the record of that legislature.'
-    : 'L\'Assemblée a été dissoute le 27 août 2026 : ces 125 personnes ne sont plus députées — ce sont les sortant·e·s de la 43e législature. Les personnes élues le 5 octobre paraîtront ici à l\'ouverture de la nouvelle Assemblée, le 17 novembre. Leur bilan de votes ci-dessous reste celui de cette législature.';
+    ? 'The Assembly was dissolved on August 27, 2026: these 125 people are no longer members — they are the outgoing members of the 43rd legislature. The members elected on October 5 will appear here when the new Assembly opens on December 1. Their voting record below is the record of that legislature.'
+    : 'L\'Assemblée a été dissoute le 27 août 2026 : ces 125 personnes ne sont plus députées — ce sont les sortant·e·s de la 43e législature. Les personnes élues le 5 octobre paraîtront ici à l\'ouverture de la nouvelle Assemblée, le 1er décembre. Leur bilan de votes ci-dessous reste celui de cette législature.';
 }
 
 document.getElementById('langToggle')?.addEventListener('click', ()=>{
@@ -1914,7 +1914,7 @@ async function mdConsultations(isEn){
         <div class="md-note">${c.dateLimite
           ? `<b>${isEn ? 'Deadline: ' : 'Date limite : '}${mdH(mdDateCourte(c.dateLimite, isEn))}</b>`
           : (isEn ? 'No deadline published on the Assembly’s website.' : 'Aucune date limite publiée sur le site de l’Assemblée.')}</div></li>`).join('')}</ul>`
-    : `<p class="md-note">${isEn ? 'No consultation under way or announced. None will be before the new legislature’s first bills (not before November 17, 2026).' : 'Aucune consultation en cours ni annoncée. Il n’y en aura pas avant les premiers projets de loi de la nouvelle législature (pas avant le 17 novembre 2026).'}</p>`;
+    : `<p class="md-note">${isEn ? 'No consultation under way or announced. None will be before the new legislature’s first bills (not before December 1, 2026).' : 'Aucune consultation en cours ni annoncée. Il n’y en aura pas avant les premiers projets de loi de la nouvelle législature (pas avant le 1er décembre 2026).'}</p>`;
   const projets = Object.values(d.projets || {}).filter((p) => p.memoires.length);
   const memoires = projets.length
     ? projets.map((p) => `<details class="md-memoires"><summary><b>${isEn ? 'Bill' : 'Projet de loi'} ${mdH(p.num)}</b> — ${mdH(p.titre)} (${p.memoires.length})</summary>${listeMemoiresHtml(p.memoires, isEn)}</details>`).join('')
@@ -3077,8 +3077,8 @@ function renderPromises(){
         <div class="prom-col">
           <span class="lbl att">${isEn ? 'The action' : 'L\'action'}</span>
           <p class="prom-none">${isEn
-            ? 'Nothing yet. The new Assembly sits from November 17, 2026.'
-            : 'Rien encore. La nouvelle Assemblée siège à partir du 17 novembre 2026.'}</p>
+            ? 'Nothing yet. The new Assembly sits from December 1, 2026.'
+            : 'Rien encore. La nouvelle Assemblée siège à partir du 1er décembre 2026.'}</p>
         </div>
       </div>
     </div>`;
@@ -3344,8 +3344,8 @@ function renderNews(){
   // été dissoute le 27 août. On le dit, plutôt que de laisser le doute.
   const avisDissolution = (typeof ASSEMBLY !== 'undefined' && ASSEMBLY.dissolved)
     ? `<div class="info-box" style="margin-bottom:16px;">${isEn
-        ? "Nothing new since June 12, 2026 — and that is expected. The Assembly rose that day, then was dissolved on August 27. There will be no new parliamentary activity until the new Assembly convenes on November 17, 2026. What follows is the final record of the 43rd legislature."
-        : "Rien de neuf depuis le 12 juin 2026 — et c'est normal. L'Assemblée a suspendu ses travaux ce jour-là, puis a été dissoute le 27 août. Il n'y aura pas de nouvelle activité parlementaire avant la rentrée de la nouvelle Assemblée, le 17 novembre 2026. Ce qui suit est le dernier état des travaux de la 43<sup>e</sup> législature."}</div>`
+        ? "Nothing new since June 12, 2026 — and that is expected. The Assembly rose that day, then was dissolved on August 27. There will be no new parliamentary activity until the new Assembly convenes on December 1, 2026. What follows is the final record of the 43rd legislature."
+        : "Rien de neuf depuis le 12 juin 2026 — et c'est normal. L'Assemblée a suspendu ses travaux ce jour-là, puis a été dissoute le 27 août. Il n'y aura pas de nouvelle activité parlementaire avant la rentrée de la nouvelle Assemblée, le 1er décembre 2026. Ce qui suit est le dernier état des travaux de la 43<sup>e</sup> législature."}</div>`
     : '';
 
   // Regroupé PAR JOUR : une même date revenait jusqu'à huit fois de suite, ce
@@ -3404,8 +3404,8 @@ function renderPetitions(targetId){
   // tranche, comme pour les projets de loi morts au feuilleton.)
   if(typeof ASSEMBLY !== 'undefined' && ASSEMBLY.dissolved){
     const msg = isEn
-      ? "No petition can be signed right now. The National Assembly's rules prohibit signing an e-petition while the Assembly is dissolved — which has been the case since August 27, 2026. Petitions reopen once the new Assembly convenes, on November 17, 2026."
-      : "Aucune pétition ne peut être signée en ce moment. Le Règlement de l'Assemblée interdit de signer une pétition électronique pendant que l'Assemblée est dissoute — c'est le cas depuis le 27 août 2026. Les pétitions rouvriront à la rentrée de la nouvelle Assemblée, le 17 novembre 2026.";
+      ? "No petition can be signed right now. The National Assembly's rules prohibit signing an e-petition while the Assembly is dissolved — which has been the case since August 27, 2026. Petitions reopen once the new Assembly convenes, on December 1, 2026."
+      : "Aucune pétition ne peut être signée en ce moment. Le Règlement de l'Assemblée interdit de signer une pétition électronique pendant que l'Assemblée est dissoute — c'est le cas depuis le 27 août 2026. Les pétitions rouvriront à la rentrée de la nouvelle Assemblée, le 1er décembre 2026.";
     const lien = isEn ? "See the official notice on assnat.qc.ca →" : "Voir l'avis officiel sur assnat.qc.ca →";
     const url = isEn
       ? "https://www.assnat.qc.ca/en/exprimez-votre-opinion/petition/signer-petition/index.html"
@@ -3657,7 +3657,7 @@ function renderHemicycle(){
     const h = document.querySelector('[data-i18n="h.composition"]');
     if(h) h.textContent = isEn ? `Composition — ${total} seats won on October 5` : `Composition — ${total} sièges remportés le 5 octobre`;
     const sub = document.querySelector('#sec-composition [data-i18n="apercu.composition.sub"]');
-    if(sub) sub.textContent = isEn ? 'Élections Québec results · the new Assembly opens on November 17' : 'Résultats d’Élections Québec · la nouvelle Assemblée ouvre le 17 novembre';
+    if(sub) sub.textContent = isEn ? 'Élections Québec results · the new Assembly opens on December 1' : 'Résultats d’Élections Québec · la nouvelle Assemblée ouvre le 1er décembre';
   }
   bar.innerHTML = seatsAff.map((s,i)=>
     `<div class="compo-seg" title="${(isEn ? (s.labelEn||s.label) : s.label)} — ${s.n}" style="width:${(s.n/total*100).toFixed(2)}%; background:${partyColors[s.party] || '#999'};${i>0 ? ' border-left:3px solid var(--ink);' : ''}"></div>`
@@ -3866,7 +3866,7 @@ function renderComparateurTable(){
 /* ---------- État de l'Assemblée (source de vérité unique) ----------
    L'Assemblée nationale a été DISSOUTE le 27 août 2026 (fin de la 43e
    législature) : élections générales le 5 octobre 2026, nouvelle Assemblée
-   convoquée le 17 novembre 2026.
+   convoquée le 1er décembre 2026.
    Conséquences factuelles, appliquées partout via cet objet :
      - tout projet de loi NON sanctionné meurt au feuilleton ;
      - les député·e·s cessent de l'être (ce sont des sortant·e·s / candidat·e·s) ;
@@ -3877,7 +3877,7 @@ const ASSEMBLY = {
   dissolved: true,
   dissolvedOn: '2026-08-27',
   electionOn: '2026-10-05',
-  newLegislatureOn: '2026-11-17',
+  newLegislatureOn: '2026-12-01',
   // À remplir À LA MAIN le soir du 5 octobre : UNE phrase, factuelle, sans
   // adjectif — p. ex. « Le Parti Québécois forme un gouvernement majoritaire
   // (63 sièges). » Vide tant que ce n'est pas officiel : la bande passe au
@@ -3906,7 +3906,7 @@ const ASSEMBLY = {
 // c'est le moment de trafic maximal, et un site au futur y aurait l'air
 // abandonné. Le jour du vote compte encore comme campagne (on vote jusqu'à
 // 20 h). Le retour à « legislature » reste MANUEL : dissolved = false le
-// 17 novembre, quand la nouvelle Assemblée siège.
+// 1er décembre, quand la nouvelle Assemblée siège.
 // Le soir du vote compte déjà comme « après » : les bureaux ferment à 20 h, heure du Québec
 // (1er oct. 2026 — avant, la phase ne changeait que le 6, et un résultat écrit le soir du 5
 // restait invisible pendant toute la soirée électorale, au moment du plus fort trafic).
@@ -4045,7 +4045,7 @@ function billCard(b, ctx){
   // pas arriver avant la rentrée. On dit ce qui se passe vraiment — la demande est comptée.
   const mailHint = ASSEMBLY.dissolved
     ? (isEn ? 'Recorded and counted — it waits for the new legislature on 17 November'
-            : 'Enregistrée et comptée — elle attend la rentrée du 17 novembre')
+            : 'Enregistrée et comptée — elle attend la rentrée du 1er décembre')
     : (isEn ? 'One email at the moments that count (500 & 1,000 requests, or if it becomes law)'
             : 'Un courriel aux moments qui comptent (500 et 1000 demandes, ou si ça devient loi)');
   let flagRow = '';
@@ -4631,7 +4631,17 @@ function renderBills(keyword){
 
 function renderApercuBills(){
   if(!document.getElementById('apercuBills')) return;   // vue absente de cette page
-  { const _e = document.getElementById('apercuBills'); if(_e){ _e.innerHTML = bills.slice(0,4).map(b=>billCard(b,'apercu')).join(''); ouvrirPremierResume(_e); } }
+  // Titres seulement (Martin, 14 nov. 2026) : chacun mène à la fiche du projet ; le détail est là-bas.
+  const _e = document.getElementById('apercuBills');
+  if(!_e) return;
+  const isEn = currentLang === 'en';
+  _e.innerHTML = `<ul class="apercu-titres">${bills.slice(0,8).map(b => {
+    const slug = b.legislature && b.introSession ? `${b.num}-${b.legislature}-${b.introSession}` : null;
+    const href = slug ? `/projets-de-loi/${slug}${isEn ? '?lang=en' : ''}` : (isEn ? b.urlEn || b.url : b.url);
+    const titre = isEn ? (b.titleEn || b.title) : b.title;
+    const note = isEn ? (b.noteEn || b.note) : b.note;
+    return `<li><a href="${mdH(href)}"><span class="apercu-pl">${isEn ? 'Bill' : 'PL'} ${b.num}</span><span class="apercu-titre">${mdH(titre)}</span>${note ? `<span class="apercu-note">${mdH(note)}</span>` : ''}</a></li>`;
+  }).join('')}</ul>`;
 }
 
 // Projets « challengés » : affiche PUBLIQUEMENT les projets de loi ayant atteint

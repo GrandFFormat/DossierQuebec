@@ -263,7 +263,7 @@ function goToFederal(evt){
          comme « encore en cours ». À retirer avec l'autre bande le 17 nov. 2026. -->
     <div class="band band-yellow bleed" id="band-dissolution-projets">
       <h2 data-i18n="dissp.h">⚠️ Ces projets ne sont jamais devenus des lois</h2>
-      <p data-i18n="dissp.p">L'Assemblée a été dissoute le <b>27 août 2026</b>. Tout projet de loi qui n'avait pas été <b>sanctionné</b> est donc <b>mort au feuilleton</b> — c'est le terme officiel de l'Assemblée. Sur les cartes, on l'écrit en clair : <b>« mort dans l'œuf »</b> si le projet n'a jamais dépassé la présentation, <b>« tombé en cours de route »</b> s'il s'était rendu plus loin. Dans les deux cas, il devra repartir de zéro devant la nouvelle Assemblée (17 novembre 2026). Les projets marqués « Sanctionnée » sont, eux, bel et bien devenus des lois.</p>
+      <p data-i18n="dissp.p">L'Assemblée a été dissoute le <b>27 août 2026</b>. Tout projet de loi qui n'avait pas été <b>sanctionné</b> est donc <b>mort au feuilleton</b> — c'est le terme officiel de l'Assemblée. Sur les cartes, on l'écrit en clair : <b>« mort dans l'œuf »</b> si le projet n'a jamais dépassé la présentation, <b>« tombé en cours de route »</b> s'il s'était rendu plus loin. Dans les deux cas, il devra repartir de zéro devant la nouvelle Assemblée (1er décembre 2026). Les projets marqués « Sanctionnée » sont, eux, bel et bien devenus des lois.</p>
     </div>
 
     <!-- Hero de vue (refonte brutaliste) -->
@@ -316,6 +316,8 @@ function goToFederal(evt){
 <ul class="bill-summary-list"><li>Crée une table régionale de l'immigration dans chaque région administrative du Québec.</li><li>Ces tables réunissent ministre, préfets, maires et représentants autochtones de la région.</li><li>Chaque table doit élaborer un plan d'immigration régional révisé tous les cinq ans.</li><li>Le plan couvre capacité d'accueil, besoins de main-d'œuvre et cibles d'immigration régionales.</li><li>Le ministre doit consulter les tables et tenir compte des plans dans ses décisions.</li><li>Donne aux municipalités le pouvoir d'agir en immigration, accueil et intégration.</li><li>Une nouvelle règle d'immigration ne s'appliquerait pas automatiquement aux personnes déjà présentes au Québec.</li></ul><details class="bill-lois"><summary>Lois et règlements touchés (7)</summary><ul><li>Loi sur la régionalisation de l’immigration (indiquer ici l’année et le numéro de chapitre de la présente loi ainsi que le numéro de l’article de cette loi qui édicte la Loi sur la régionalisation de </li><li>Loi sur la Communauté métropolitaine de Montréal</li><li>Loi sur la Communauté métropolitaine de Québec</li><li>Loi sur les compétences municipales</li><li>Loi sur l’immigration au Québec</li><li>Loi sur l’intégration à la nation québécoise</li><li>Loi sur le ministère de l’Immigration, de la Francisation et de l’Intégration</li></ul></details>
 <p><a href="https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-592-43-2.html" rel="noopener">Le projet de loi sur le site de l'Assemblée nationale</a></p>
 </article></div>
+<div id="debats" data-src="/data/site/debats.json" data-pl="592" data-leg="43" data-session="2" data-max="8" hidden></div>
+<script type="module" src="/commun/debats.js"></script>
     <div class="prerendu" data-prerendu="bills">
       <ul aria-label="Projets de loi">
         <li><b>Projet de loi n° 3</b> — Loi visant à assurer la représentation effective des électeurs <span class="pr-meta">· Sanctionné le 2026-06-12</span></li>
@@ -575,6 +577,7 @@ function goToFederal(evt){
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/commun/apercu.js"></script>
+<script type="module" src="/commun/debats.js"></script>
 <script src="/commun/dq.js"></script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle (donc pas de
      bannière de consentement requise). Le script est servi automatiquement par

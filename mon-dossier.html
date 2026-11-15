@@ -264,9 +264,8 @@ function goToFederal(evt){
       <div id="mdCompte" class="mdr-compte"></div>
     </div>
 
-    <!-- Vos courriels (3 nov. 2026) : Assemblée et villes, une carte chacune, avec les choix de chaque
-         ville. EN HAUT de la page depuis le 14 nov. 2026 (Martin). Rempli par boiteInfolettre
-         (commun/infolettre.js) ; montré seulement à qui est connecté (mdRefonte). -->
+    <!-- Vos courriels : Assemblée et villes, avec les choix de chaque ville. EN HAUT de la page depuis le
+         14 nov. 2026 (Martin). Rempli par commun/infolettre.js ; visible aussi sans connexion. -->
     <div class="mdc-section" id="courriels" hidden><div id="infolettre"></div></div>
 
     <div id="mdCompteurs" class="mdr-compteurs"></div>
@@ -413,6 +412,7 @@ function goToFederal(evt){
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/commun/apercu.js"></script>
+<script type="module" src="/commun/debats.js"></script>
 <script src="/commun/dq.js"></script>
 <!-- Vercel Web Analytics — sans cookie, sans donnée personnelle (donc pas de
      bannière de consentement requise). Le script est servi automatiquement par
