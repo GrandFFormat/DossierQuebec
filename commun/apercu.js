@@ -5,7 +5,10 @@
 (function(){
   'use strict';
   if (location.hostname !== 'localhost') return;
-  if (new URLSearchParams(location.search).get('apercu') !== 'connecte') return;
+  // ?apercu=connecte : compte gratuit ; ?apercu=abonne : abonné·e, les six outils remplis (14 nov. 2026).
+  const MODE = new URLSearchParams(location.search).get('apercu');
+  if (MODE !== 'connecte' && MODE !== 'abonne') return;
+  const ABONNE = MODE === 'abonne';
 
   const user = { id: '00000000-0000-0000-0000-00000000a9e1', email: 'apercu@exemple.test' };
   const session = { access_token: 'apercu', user };
@@ -20,6 +23,11 @@
       { id: 5, ville: 'quebec', dossier_id: 'projet:logement', numero: null, objet: 'Logement', created_at: '2026-09-20T12:00:00Z' },
       { id: 6, ville: 'quebec', dossier_id: 'projet:expocite', numero: null, objet: 'ExpoCité', created_at: '2026-10-02T12:00:00Z' },
     ],
+    // Les outils de l'abonnement, remplis en mode abonne.
+    alertes_mots_cles: ABONNE ? [{ id: 'm1', mot: 'logement', portee: 'assemblee' }, { id: 'm2', mot: 'tramway', portee: 'assemblee' }, { id: 'm3', mot: 'santé mentale', portee: 'assemblee' }] : [],
+    alertes_preferences: ABONNE ? [{ actif: true, veille_themes: ['sante', 'logement', 'transports'] }] : [],
+    organismes_suivis: ABONNE ? [{ id: 'o1', nom: 'Barreau du Québec', portee: 'assemblee' }, { id: 'o2', nom: 'Fédération des travailleurs et travailleuses du Québec', portee: 'assemblee' }] : [],
+    abonnements: [{ lecture_seule: false }],
   };
   function requete(table){
     let lignes = (TABLES[table] || []).slice(), ecriture = false, une = false;
@@ -83,7 +91,31 @@
       }
       return json(JSON.parse(JSON.stringify(etat)));
     }
-    if (url.pathname === '/api/abonnement') return json(url.searchParams.get('action') === 'codes' ? { codes: [] } : { abonne: false, connecte: true });
+    if (url.pathname === '/api/abonnement') {
+      const action = url.searchParams.get('action');
+      if (action === 'codes') return json({ codes: [] });
+      if (action === 'flux') return json(ABONNE ? {
+        adresse: 'https://dossierquebec.ca/feed.xml?u=apercu&s=3f9c1a7e2b',
+        ministeres: ['Santé et Services sociaux', 'Transports et Mobilité durable', 'Éducation', 'Environnement, Lutte contre les changements climatiques, Faune et Parcs'],
+        elus: [{ cle: 'paul-st-pierre-plamondon', nom: 'Paul St-Pierre Plamondon' }, { cle: 'ruba-ghazal', nom: 'Ruba Ghazal' }, { cle: 'marc-tanguay', nom: 'Marc Tanguay' }],
+      } : { abonne: false });
+      return json({ abonne: ABONNE, connecte: true });
+    }
+    if (url.pathname === '/api/export' && url.searchParams.get('jeu') === 'organismes') {
+      if (url.searchParams.get('q')) return json({ resultats: [{ nom: 'Mouvement Desjardins', cle: 'Mouvement Desjardins', memoires: 7 }, { nom: 'Desjardins Assurances', cle: 'Desjardins Assurances', memoires: 2 }] });
+      const memoire = (num, titrePl, titre, date) => ({ titre, url: 'https://www.assnat.qc.ca/', date, num, titrePl, commission: 'Commission des institutions' });
+      return json({ misAJour: '2026-11-13', organismes: {
+        'Barreau du Québec': { nom: 'Barreau du Québec', memoires: 2, variantes: ['Le Barreau du Québec'], liste: [memoire('2', 'Loi portant sur la réforme du droit de la famille', 'Mémoire du Barreau du Québec sur le projet de loi 2', '2026-10-01'), memoire('11', 'Loi modifiant le Code de procédure civile', 'Commentaires du Barreau', '2026-09-12')] },
+        'Fédération des travailleurs et travailleuses du Québec': { nom: 'Fédération des travailleurs et travailleuses du Québec', memoires: 1, variantes: ['FTQ'], liste: [memoire('7', 'Loi visant à améliorer le régime de santé et de sécurité du travail', 'Mémoire de la FTQ', '2026-10-20')] },
+      } });
+    }
+    if (url.pathname === '/api/export' && url.searchParams.get('jeu') === 'consultations') return json({
+      aVenir: [
+        { titre: 'Consultations particulières sur le projet de loi 5, Loi sur l’encadrement des loyers', url: 'https://www.assnat.qc.ca/', commission: 'Commission de l’aménagement du territoire', type: 'particuliere', prochaineSeance: '2026-11-25', dateLimite: '2026-11-20' },
+        { titre: 'Consultation générale sur le projet de loi 8, Loi sur la laïcité dans les services publics', url: 'https://www.assnat.qc.ca/', commission: 'Commission des institutions', type: 'generale', prochaineSeance: null, dateLimite: null },
+      ],
+      projets: { 27463: { num: '3', titre: 'Loi sur la protection des renseignements personnels dans le secteur de la santé', memoires: [{ depose: 'Commission d’accès à l’information', url: 'https://www.assnat.qc.ca/', date: '2026-10-02', organisme: 'Commission d’accès à l’information' }, { depose: 'Ordre des infirmières et infirmiers du Québec', url: 'https://www.assnat.qc.ca/', date: '2026-10-03', organisme: 'OIIQ' }] } },
+    });
     if (url.pathname === '/api/message') return json({ ok: true });
     return json({ erreur: 'apercu' }, 404);
   };

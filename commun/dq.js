@@ -1701,6 +1701,8 @@ async function renderMonDossier(){
 
 // REFONTE de Mon dossier (prototype, 3 nov. 2026) : compteurs, « Pour commencer » ou les listes,
 // tuiles des outils d'abonné·e (chaque tuile déplie l'outil existant), bande « Nous écrire ».
+// Dans un outil, pour qui n'est pas abonné·e : ce qu'il fait reste lisible, l'action est derrière l'abonnement.
+const mdReserve = (isEn) => `<div class="md-reserve"><span>${isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.'}</span><a class="mdr-btn-jaune" href="/abonnement${isEn ? '?lang=en' : ''}">${isEn ? 'See the subscription →' : 'Voir l’abonnement →'}</a></div>`;
 const MD_ICONES = {
   cloche: '<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 21h4"/>',
   theme: '<rect x="3" y="5" width="18" height="16"/><path d="M3 10h18M8 3v4M16 3v4"/>',
@@ -1796,10 +1798,10 @@ async function organismesServeur(params){
 async function mdOrganismes(isEn){
   const zone = document.getElementById('mdOrganismes');
   if(!zone) return;
-  const tete = `<div class="md-carte-tete"><h2>${isEn ? 'Follow a company or an organization' : 'Suivre une entreprise ou un organisme'}</h2><span class="md-etiquette">${isEn ? 'Subscribers' : 'Abonné·e·s'}</span></div>
+  const tete = `<div class="md-carte-tete"><h2 class="md-outil-titre">${mdIcone('organisme')}<span>${isEn ? 'Follow a company or an organization' : 'Suivre une entreprise ou un organisme'}</span></h2></div>
     <p>${isEn ? 'What a company, union, association or professional order asks for or defends before the National Assembly: the briefs it filed in committee, in one place, and a line in the morning email for each new brief. Source: Assemblée nationale du Québec (titles in French).' : 'Ce qu’une entreprise, un syndicat, une association ou un ordre professionnel demande ou défend devant l’Assemblée nationale : ses mémoires déposés en commission, au même endroit, et une ligne dans le courriel du matin à chaque nouveau mémoire. Source : Assemblée nationale du Québec.'}</p>`;
   if(!(await estAbonne())){
-    zone.innerHTML = `<div class="md-carte">${tete}<p class="md-note">${isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.'} <a class="md-lien" href="/abonnement">${isEn ? 'See the subscription' : 'Voir l’abonnement'}</a></p></div>`;
+    zone.innerHTML = `<div class="md-carte">${tete}${mdReserve(isEn)}</div>`;
     return;
   }
   let suivis = [], d = null;
@@ -1889,10 +1891,10 @@ window.mdRetirerOrganisme = mdRetirerOrganisme;
 async function mdConsultations(isEn){
   const zone = document.getElementById('mdConsultations');
   if(!zone) return;
-  const tete = `<div class="md-carte-tete"><h2>${isEn ? 'Consultations and briefs' : 'Consultations et mémoires'}</h2><span class="md-etiquette">${isEn ? 'Subscribers' : 'Abonné·e·s'}</span></div>
+  const tete = `<div class="md-carte-tete"><h2 class="md-outil-titre">${mdIcone('consult')}<span>${isEn ? 'Consultations and briefs' : 'Consultations et mémoires'}</span></h2></div>
     <p>${isEn ? 'Upcoming committee consultations on bills, and who submitted a brief on the bills you follow. Source: Assemblée nationale du Québec (titles in French).' : 'Les consultations à venir en commission parlementaire, et qui a déposé un mémoire sur les projets de loi que vous suivez. Source : Assemblée nationale du Québec.'}</p>`;
   if(!(await estAbonne())){
-    zone.innerHTML = `<div class="md-carte">${tete}<p class="md-note">${isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.'} <a class="md-lien" href="/abonnement">${isEn ? 'See the subscription' : 'Voir l’abonnement'}</a></p></div>`;
+    zone.innerHTML = `<div class="md-carte">${tete}${mdReserve(isEn)}</div>`;
     return;
   }
   let d = null;
@@ -1960,12 +1962,12 @@ async function mdExport(isEn){
     ['projets', isEn ? 'Bills' : 'Projets de loi', isEn ? 'number, title, status, dates' : 'numéro, titre, statut, dates'],
   ];
   zone.innerHTML = `<div class="md-carte">
-    <div class="md-carte-tete"><h2>${isEn ? 'Data export' : 'Export des données'}</h2><span class="md-etiquette">${isEn ? 'Subscribers' : 'Abonné·e·s'}</span></div>
+    <div class="md-carte-tete"><h2 class="md-outil-titre">${mdIcone('excel')}<span>${isEn ? 'Data export' : 'Export des données'}</span></h2></div>
     <p>${isEn ? 'National Assembly data as CSV files, ready for Excel or Google Sheets. Source: Assemblée nationale du Québec.' : 'Les données de l’Assemblée nationale en fichiers CSV, prêts pour Excel ou Google Sheets. Source : Assemblée nationale du Québec.'}</p>
     ${abonne ? `<p class="md-ligne"><label class="md-note" for="mdExportMois">${isEn ? 'Month covered:' : 'Mois couvert :'}</label> <select id="mdExportMois">${mdMoisPermis().map((m) => `<option value="${m}"${m === (moisExport() || mdMoisPermis()[0]) ? ' selected' : ''}>${mdNomMois(m, isEn)}</option>`).join('')}</select></p><p class="md-note">${isEn ? 'One month per file: pick the month, then the file. Bills: those introduced or that moved during the month.' : 'Un mois par fichier : choisissez le mois, puis le fichier. Projets de loi : ceux présentés ou qui ont bougé pendant le mois.'}</p>` : ''}
     ${abonne
-      ? `<div class="md-export-boutons">${jeux.map(([j, t, d]) => `<button class="account-btn" onclick="mdTelecharger('${j}', this)">${t}</button><span class="md-note">${d}</span>`).join('')}</div>`
-      : `<p class="md-note">${isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.'} <a class="md-lien" href="/abonnement">${isEn ? 'See the subscription' : 'Voir l’abonnement'}</a></p>`}
+      ? `<ul class="md-rangees">${jeux.map(([j, t, d]) => `<li><div><b>${t}</b><span>${d}</span></div><button class="md-btn-noir" onclick="mdTelecharger('${j}', this)">${isEn ? 'Download CSV' : 'Télécharger le CSV'}</button></li>`).join('')}</ul>`
+      : mdReserve(isEn)}
   </div>`;
 }
 async function mdTelecharger(jeu, bouton){
@@ -1997,6 +1999,7 @@ window.mdTelecharger = mdTelecharger;
 // ?action=flux) : le navigateur n'y ajoute que « &type=… », il ne connaît aucun secret. api/feed.js
 // revérifie l'abonnement à chaque lecture.
 let mdFluxAdresse = '';
+let _mdFluxDonnees = null;
 async function mdFlux(isEn){
   const zone = document.getElementById('mdFlux');
   if(!zone) return;
@@ -2008,99 +2011,61 @@ async function mdFlux(isEn){
       if(r.ok) donnees = await r.json();
     }catch(e){}
   }
-  const tete = `<div class="md-carte-tete"><h2>${isEn ? 'Custom RSS feeds' : 'Flux RSS personnalisés'}</h2><span class="md-etiquette">${isEn ? 'Subscribers' : 'Abonné·e·s'}</span></div>
-    <p>${isEn ? 'National Assembly news in any RSS reader (Feedly, Inoreader, Thunderbird…). Source: Assemblée nationale du Québec. Feeds are in French.' : 'Les nouvelles de l’Assemblée nationale dans n’importe quel lecteur RSS (Feedly, Inoreader, Thunderbird…). Source : Assemblée nationale du Québec.'}</p>`;
+  const tete = `<div class="md-carte-tete"><h2 class="md-outil-titre">${mdIcone('rss')}<span>${isEn ? 'RSS feeds' : 'Flux RSS'}</span></h2></div>
+    <p class="md-intro">${isEn ? 'National Assembly news in any RSS reader (Feedly, Inoreader, Thunderbird…). Each address is personal: do not share it. Feeds are in French.' : 'Les nouvelles de l’Assemblée nationale dans n’importe quel lecteur RSS (Feedly, Inoreader, Thunderbird…). Chaque adresse est personnelle : ne la partagez pas.'}</p>`;
   if(!donnees?.adresse){
-    zone.innerHTML = `<div class="md-carte">${tete}<p class="md-note">${isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.'} <a class="md-lien" href="/abonnement">${isEn ? 'See the subscription' : 'Voir l’abonnement'}</a></p></div>`;
+    zone.innerHTML = `<div class="md-carte md-outil">${tete}${mdReserve(isEn)}</div>`;
     return;
   }
   mdFluxAdresse = donnees.adresse;
-  const copier = `<button class="md-bouton-doux" aria-label="${isEn ? 'Copy' : 'Copier'}" onclick="copierCourriel(this, this.previousElementSibling.value)">⧉</button>`;
-  const ligne = (titre, adresse) => `<li><b>${titre}</b><div class="md-ligne"><input type="text" readonly value="${mdH(adresse)}" aria-label="${mdH(titre)}" onfocus="this.select()">${copier}</div></li>`;
+  _mdFluxDonnees = donnees;
+  const copier = (cle) => `<button type="button" class="md-copier" data-flux="${cle}" onclick="mdCopierFlux(this)">${isEn ? 'Copy the address' : 'Copier l’adresse'}</button>`;
+  // Un flux tout fait : son nom, ce qu'il contient, son adresse en petit.
+  const rangee = (cle, titre, quoi, url) => `<li><div><b>${titre}</b><span>${quoi}</span><code class="md-flux-url" id="mdFluxUrl-${cle}">${mdH(url)}</code></div>${copier(cle)}</li>`;
   const min = donnees.ministeres || [];
-  zone.innerHTML = `<div class="md-carte">${tete}
-    <p class="md-note">${isEn ? 'Paste this address into your RSS reader. It is personal: do not share it.' : 'Collez cette adresse dans votre lecteur RSS. Elle est personnelle : ne la partagez pas.'}</p>
-    <ul class="md-avenir-liste">
-      ${ligne(isEn ? 'All National Assembly news' : 'Toutes les nouvelles de l’Assemblée', mdFluxAdresse)}
-      ${ligne(isEn ? 'Your keywords (bills that contain one of them)' : 'Vos mots-clés (projets de loi qui en contiennent un)', mdFluxAdresse + '&type=mots')}
-      ${ligne(isEn ? 'Your followed members (bills introduced and recorded votes)' : 'Vos élus suivis (projets de loi présentés et votes nominaux)', mdFluxAdresse + '&type=elus')}
-      ${min.length ? `<li><b>${isEn ? 'By ministry (bills it sponsors) — one feed per ministry' : 'Par ministère (projets de loi qu’il parraine) — un flux par ministère'}</b>
-        <div id="mdFluxMins"></div></li>` : ''}
-      <li><b>${isEn ? 'One keyword — one feed per keyword' : 'Un mot-clé précis — un flux par mot-clé'}</b>
-        <div id="mdFluxMots"></div></li>
-      ${(donnees.elus || []).length ? `<li><b>${isEn ? 'One member — one feed per member (bills introduced and recorded votes)' : 'Un élu précis — un flux par élu (projets de loi présentés et votes nominaux)'}</b>
-        <div id="mdFluxElus"></div></li>` : ''}
+  const elus = donnees.elus || [];
+  const option = (v, t, sel) => `<option value="${mdH(v)}"${sel ? ' selected' : ''}>${mdH(t)}</option>`;
+  zone.innerHTML = `<div class="md-carte md-outil">${tete}
+    <ul class="md-rangees md-flux">
+      ${rangee('tout', isEn ? 'All National Assembly news' : 'Toutes les nouvelles de l’Assemblée', isEn ? 'bills, recorded votes, consultations' : 'projets de loi, votes nominaux, consultations', mdFluxAdresse)}
+      ${rangee('mots', isEn ? 'Your keywords' : 'Vos mots-clés', isEn ? 'bills that contain one of your alert keywords' : 'les projets de loi qui contiennent un de vos mots-clés d’alerte', mdFluxAdresse + '&type=mots')}
+      ${rangee('elus', isEn ? 'Your followed members' : 'Vos élu·e·s suivi·e·s', isEn ? 'bills they introduce and their recorded votes' : 'les projets de loi qu’ils présentent et leurs votes nominaux', mdFluxAdresse + '&type=elus')}
     </ul>
-    <p class="md-note">${isEn ? 'Keywords are managed in the alerts card; followed members, from the ministers and MNAs pages.' : 'Les mots-clés se gèrent dans la carte des alertes ; les élus suivis, depuis les pages des ministres et des député·e·s.'}</p>
+    <h3 class="md-sous-titre">${isEn ? 'A custom feed' : 'Un flux sur mesure'}</h3>
+    <ul class="md-rangees md-flux">
+      ${min.length ? `<li><div><b>${isEn ? 'One ministry' : 'Un ministère'}</b><span>${isEn ? 'the bills it sponsors' : 'les projets de loi qu’il parraine'}</span>
+        <div class="md-flux-choix"><select aria-label="${isEn ? 'Ministry' : 'Ministère'}" onchange="mdFluxChoix('ministere', this)">${min.map((m, i) => option(m, m, i === 0)).join('')}</select></div>
+        <code class="md-flux-url" id="mdFluxUrl-ministere">${mdH(mdFluxAdresse + '&type=ministere&m=' + encodeURIComponent(min[0]))}</code></div>${copier('ministere')}</li>` : ''}
+      <li><div><b>${isEn ? 'One keyword' : 'Un mot-clé'}</b><span>${isEn ? 'bills whose title or summary contains it' : 'les projets de loi dont le titre ou le résumé le contient'}</span>
+        <div class="md-flux-choix"><input type="text" maxlength="60" placeholder="${isEn ? 'e.g. housing' : 'ex. : logement'}" aria-label="${isEn ? 'Keyword' : 'Mot-clé'}" oninput="mdFluxChoix('mot', this)"></div>
+        <code class="md-flux-url md-flux-url-vide" id="mdFluxUrl-mot">${isEn ? 'Type a keyword to get its address.' : 'Tapez un mot-clé pour obtenir son adresse.'}</code></div>${copier('mot')}</li>
+      ${elus.length ? `<li><div><b>${isEn ? 'One member' : 'Un·e élu·e'}</b><span>${isEn ? 'bills introduced and recorded votes' : 'projets de loi présentés et votes nominaux'}</span>
+        <div class="md-flux-choix"><select aria-label="${isEn ? 'Member' : 'Élu·e'}" onchange="mdFluxChoix('elu', this)">${elus.map((e, i) => option(e.cle, e.nom, i === 0)).join('')}</select></div>
+        <code class="md-flux-url" id="mdFluxUrl-elu">${mdH(mdFluxAdresse + '&type=elus&e=' + encodeURIComponent(elus[0].cle))}</code></div>${copier('elu')}</li>` : ''}
+    </ul>
+    <p class="md-note">${isEn ? 'Keywords are managed in the alerts tool; followed members, from the ministers and MNAs pages.' : 'Les mots-clés se gèrent dans l’outil des alertes ; les élu·e·s suivi·e·s, depuis les pages des ministres et des député·e·s.'}</p>
   </div>`;
-  _mdMins = min;
-  _mdElus = donnees.elus || [];
-  if(min.length) mdFluxAjouterMinistere(true);
-  mdFluxAjouterMot(true);
-  if(_mdElus.length) mdFluxAjouterElu(true);
 }
-// Les flux par ministère (Martin, 21 oct. 2026 : « à gauche de ministre, un + ; s'ils veulent suivre
-// plus d'un ministre, une ligne s'additionne »). Chaque ligne : un ministère, son adresse, ⧉ copier.
-// Le + de la première ligne en ajoute une ; les lignes ajoutées ont un − pour se retirer.
-let _mdMins = [];
-function mdFluxAjouterMinistere(premiere){
-  const boite = document.getElementById('mdFluxMins');
-  if(!boite) return;
+// Le choix d'un flux sur mesure change son adresse, affichée en petit sous le choix.
+function mdFluxChoix(quoi, champ){
+  const code = document.getElementById('mdFluxUrl-' + quoi);
+  if(!code) return;
   const isEn = currentLang === 'en';
-  const deja = [...boite.querySelectorAll('select')].map((x) => x.value);
-  const choix = _mdMins.find((m) => !deja.includes(m)) || _mdMins[0];
-  const ligne = document.createElement('div');
-  ligne.className = 'md-ligne md-flux-min';
-  ligne.innerHTML = `<button type="button" class="md-bouton-doux md-flux-plus" aria-label="${premiere ? (isEn ? 'Add a ministry' : 'Ajouter un ministère') : (isEn ? 'Remove this ministry' : 'Retirer ce ministère')}" onclick="${premiere ? 'mdFluxAjouterMinistere(false)' : 'this.parentElement.remove()'}">${premiere ? '+' : '−'}</button><select aria-label="${isEn ? 'Ministry' : 'Ministère'}" onchange="mdFluxMinistere(this)">${_mdMins.map((m) => `<option value="${mdH(m)}"${m === choix ? ' selected' : ''}>${mdH(m)}</option>`).join('')}</select><input type="text" readonly aria-label="${isEn ? 'Ministry feed' : 'Flux du ministère'}" onfocus="this.select()"><button class="md-bouton-doux" aria-label="${isEn ? 'Copy' : 'Copier'}" onclick="copierCourriel(this, this.previousElementSibling.value)">⧉</button>`;
-  boite.appendChild(ligne);
-  mdFluxMinistere(ligne.querySelector('select'));
+  const v = (champ.value || '').trim();
+  if(quoi === 'mot' && !v){ code.textContent = isEn ? 'Type a keyword to get its address.' : 'Tapez un mot-clé pour obtenir son adresse.'; code.classList.add('md-flux-url-vide'); return; }
+  code.classList.remove('md-flux-url-vide');
+  code.textContent = mdFluxAdresse + (quoi === 'ministere' ? '&type=ministere&m=' : quoi === 'mot' ? '&type=mots&q=' : '&type=elus&e=') + encodeURIComponent(v);
 }
-function mdFluxMinistere(select){
-  const a = select?.parentElement?.querySelector('input');
-  if(a) a.value = mdFluxAdresse + '&type=ministere&m=' + encodeURIComponent(select.value);
-}
-window.mdFluxMinistere = mdFluxMinistere;
-window.mdFluxAjouterMinistere = mdFluxAjouterMinistere;
-
-// Même principe pour un mot-clé précis (champ libre) et un élu précis (menu) : + ajoute une ligne.
-let _mdElus = [];
-const mdBoutonPlus = (premiere, fn, isEn, quoi) => `<button type="button" class="md-bouton-doux md-flux-plus" aria-label="${premiere ? (isEn ? 'Add' : 'Ajouter') : (isEn ? 'Remove' : 'Retirer')} ${quoi}" onclick="${premiere ? fn + '(false)' : 'this.parentElement.remove()'}">${premiere ? '+' : '−'}</button>`;
-const mdBoutonCopier = (isEn) => `<button class="md-bouton-doux" aria-label="${isEn ? 'Copy' : 'Copier'}" onclick="copierCourriel(this, this.previousElementSibling.value)">⧉</button>`;
-function mdFluxAjouterMot(premiere){
-  const boite = document.getElementById('mdFluxMots');
-  if(!boite) return;
+function mdCopierFlux(bouton){
+  const code = document.getElementById('mdFluxUrl-' + bouton.dataset.flux);
+  if(!code || code.classList.contains('md-flux-url-vide')){ bouton.closest('li')?.querySelector('input')?.focus(); return; }
   const isEn = currentLang === 'en';
-  const ligne = document.createElement('div');
-  ligne.className = 'md-ligne md-flux-min';
-  ligne.innerHTML = `${mdBoutonPlus(premiere, 'mdFluxAjouterMot', isEn, isEn ? 'a keyword' : 'un mot-clé')}<input type="text" class="md-flux-mot" maxlength="60" placeholder="${isEn ? 'e.g. housing' : 'ex. : logement'}" aria-label="${isEn ? 'Keyword' : 'Mot-clé'}" oninput="mdFluxMot(this)"><input type="text" readonly aria-label="${isEn ? 'Keyword feed' : 'Flux du mot-clé'}" onfocus="this.select()">${mdBoutonCopier(isEn)}`;
-  boite.appendChild(ligne);
-  mdFluxMot(ligne.querySelector('.md-flux-mot'));
+  const fait = () => { const avant = bouton.textContent; bouton.textContent = isEn ? 'Copied ✓' : 'Copiée ✓'; bouton.classList.add('ok'); setTimeout(() => { bouton.textContent = avant; bouton.classList.remove('ok'); }, 1600); };
+  if(navigator.clipboard?.writeText) navigator.clipboard.writeText(code.textContent).then(fait).catch(() => window.prompt('', code.textContent));
+  else window.prompt('', code.textContent);
 }
-function mdFluxMot(champ){
-  const a = champ?.nextElementSibling;
-  const mot = (champ?.value || '').trim();
-  if(a) a.value = mot ? mdFluxAdresse + '&type=mots&q=' + encodeURIComponent(mot) : '';
-}
-function mdFluxAjouterElu(premiere){
-  const boite = document.getElementById('mdFluxElus');
-  if(!boite) return;
-  const isEn = currentLang === 'en';
-  const deja = [...boite.querySelectorAll('select')].map((x) => x.value);
-  const choix = (_mdElus.find((e) => !deja.includes(e.cle)) || _mdElus[0]).cle;
-  const ligne = document.createElement('div');
-  ligne.className = 'md-ligne md-flux-min';
-  ligne.innerHTML = `${mdBoutonPlus(premiere, 'mdFluxAjouterElu', isEn, isEn ? 'a member' : 'un élu')}<select aria-label="${isEn ? 'Member' : 'Élu'}" onchange="mdFluxElu(this)">${_mdElus.map((e) => `<option value="${mdH(e.cle)}"${e.cle === choix ? ' selected' : ''}>${mdH(e.nom)}</option>`).join('')}</select><input type="text" readonly aria-label="${isEn ? 'Member feed' : 'Flux de l’élu'}" onfocus="this.select()">${mdBoutonCopier(isEn)}`;
-  boite.appendChild(ligne);
-  mdFluxElu(ligne.querySelector('select'));
-}
-function mdFluxElu(select){
-  const a = select?.nextElementSibling;
-  if(a) a.value = mdFluxAdresse + '&type=elus&e=' + encodeURIComponent(select.value);
-}
-window.mdFluxAjouterMot = mdFluxAjouterMot;
-window.mdFluxMot = mdFluxMot;
-window.mdFluxAjouterElu = mdFluxAjouterElu;
-window.mdFluxElu = mdFluxElu;
+window.mdFluxChoix = mdFluxChoix;
+window.mdCopierFlux = mdCopierFlux;
 
 // LES ALERTES SUR MESURE (21 oct. 2026), deuxième outil de l'abonnement. Un courriel le matin quand,
 // à l'Assemblée nationale, un projet de loi contient un mot-clé, un élu suivi présente un projet ou
@@ -2119,10 +2084,10 @@ async function mdAlertes(isEn){
       abonne = r.ok && (await r.json()).abonne === true;
     }catch(e){}
   }
-  const tete = `<div class="md-carte-tete"><h2>${isEn ? 'Custom alerts' : 'Alertes sur mesure'}</h2><span class="md-etiquette">${isEn ? 'Subscribers' : 'Abonné·e·s'}</span></div>
+  const tete = `<div class="md-carte-tete"><h2 class="md-outil-titre">${mdIcone('cloche')}<span>${isEn ? 'Custom alerts' : 'Alertes sur mesure'}</span></h2></div>
     <p>${isEn ? 'An email in the morning when, at the National Assembly, a bill contains one of your keywords, a member you follow introduces a bill or votes, or a bill you follow moves to a new stage. National Assembly only.' : 'Un courriel le matin quand, à l’Assemblée nationale, un projet de loi contient un de vos mots-clés, un élu que vous suivez présente un projet de loi ou vote, ou un projet de loi que vous suivez change d’étape. Seulement l’Assemblée nationale.'}</p>`;
   if(!abonne){
-    zone.innerHTML = `<div class="md-carte">${tete}<p class="md-note">${isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.'} <a class="md-lien" href="/abonnement">${isEn ? 'See the subscription' : 'Voir l’abonnement'}</a></p></div>`;
+    zone.innerHTML = `<div class="md-carte">${tete}${mdReserve(isEn)}</div>`;
     return;
   }
   const [m, p] = await Promise.all([
@@ -2243,10 +2208,10 @@ async function mdVeille(isEn){
       abonne = r.ok && (await r.json()).abonne === true;
     }catch(e){}
   }
-  const tete = `<div class="md-carte-tete"><h2>${isEn ? 'Topic watch' : 'Veille par thème'}</h2><span class="md-etiquette">${isEn ? 'Subscribers' : 'Abonné·e·s'}</span></div>
+  const tete = `<div class="md-carte-tete"><h2 class="md-outil-titre">${mdIcone('theme')}<span>${isEn ? 'Topic watch' : 'Veille par thème'}</span></h2></div>
     <p>${isEn ? 'Every Monday, one email with everything that moved at the National Assembly in the topics you pick: bills introduced or moving to a new stage, recorded votes on those bills, committee consultations and the briefs filed. Nothing is sent in a week with no news.' : 'Chaque lundi, un courriel avec tout ce qui a bougé à l’Assemblée nationale dans les thèmes choisis : projets de loi présentés ou qui changent d’étape, votes nominaux sur ces projets, consultations en commission et mémoires déposés. Aucun courriel une semaine sans nouveauté.'}</p>`;
   if(!abonne){
-    zone.innerHTML = `<div class="md-carte">${tete}<p class="md-note">${isEn ? 'Reserved for subscribers.' : 'Réservé aux abonné·e·s.'} <a class="md-lien" href="/abonnement">${isEn ? 'See the subscription' : 'Voir l’abonnement'}</a></p></div>`;
+    zone.innerHTML = `<div class="md-carte">${tete}${mdReserve(isEn)}</div>`;
     return;
   }
   const { data, error } = await supabaseClient.from('alertes_preferences').select('veille_themes').maybeSingle();

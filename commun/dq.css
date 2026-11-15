@@ -2212,9 +2212,6 @@
 .admin-preoc-actions{white-space:nowrap;}
 .admin-preoc-ok{font-weight:700; color:#1d7a3a;}
 
-/* Mon dossier : l'export des données (mdExport). */
-.md-export-boutons{display:grid; grid-template-columns:auto 1fr; gap:8px 12px; align-items:center;}
-
 /* Mon dossier : les alertes sur mesure (mdAlertes). */
 .md-sous-titre{font-size:14px; font-weight:700; margin:16px 0 6px;}
 .md-mots{list-style:none; padding:0; margin:0; display:flex; flex-wrap:wrap; gap:6px;}
@@ -2222,12 +2219,6 @@
 .md-mot .md-bouton-doux{padding:0 8px; min-width:0;}
 
 .md-dispo{display:inline-block; font-size:11px; font-weight:800; text-transform:uppercase; padding:0 6px; background:#FFD24D; color:#131313; border:1px solid #131313;}
-
-/* Flux RSS par ministère : une ligne par ministère, le + en ajoute une (mdFluxAjouterMinistere). */
-.md-flux-min{display:flex; flex-wrap:wrap; gap:6px; align-items:center; margin-top:6px;}
-.md-flux-min select{max-width:100%;}
-.md-flux-min input{flex:1 1 220px; min-width:0;}
-.md-flux-plus{font-weight:800; min-width:2em;}
 
 /* Redéploiement du 21 oct. 2026 : les prix Stripe des trois forfaits (variables Vercel). */
 
@@ -2561,8 +2552,8 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 .nb-suivis{font-weight:inherit;}
 /* Un espace entre les cartes des ministres et la bande Finances publiques (Martin, 4 nov. 2026). */
 #ministresGrid{margin-bottom:48px;}
-/* Vos projets de ville, refonte (4 nov. 2026) : en-tête avec compte et « + Ajouter un projet »,
-   projets suivis en grille de cartes groupées par ville (bandeau --ville), catalogue en cartes.
+/* Vos projets de ville, refonte du 14 nov. 2026 : une ligne par projet suivi, groupée par ville
+   (un carré de la couleur de la ville, plus de bandeau plein), le catalogue en cartes plates.
    Préfixe #villes pour passer devant commun/abonnes.css (.ab-page details.ab-dossier…). */
 #villes{position:relative;}
 #villes .vp-entete{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:0 0 14px; padding-right:250px; min-height:48px;}
@@ -2577,42 +2568,53 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 #villes details.ab-suggestions > summary.vp-ajouter:focus-visible{outline:3px solid var(--gold); outline-offset:3px;}
 #villes .vp-ajouter-ouvert, #villes details[open] > summary .vp-ajouter-ferme{display:none;}
 #villes details[open] > summary .vp-ajouter-ouvert{display:inline;}
-#villes details.ab-suggestions > .ab-pliable-corps{margin:0 0 28px; padding:18px; background:var(--paper); border:3px solid var(--ink); box-shadow:var(--shadow);}
+#villes details.ab-suggestions > .ab-pliable-corps{margin:0 0 28px; padding:18px; background:var(--card); border:3px solid var(--ink); box-shadow:var(--shadow-sm);}
 #villes .vp-cat-titre{margin:0 0 6px; display:flex; align-items:center; gap:10px; font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; font-size:20px; color:var(--ink);}
 #villes .vp-cat-titre .vp-compte{font-size:14px; padding:1px 7px; box-shadow:none;}
-#villes .vp-ville{--ville:var(--gold); margin:0 0 26px;}
-#villes .vp-ville-titre{display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin:0 0 12px; padding:6px 12px; background:var(--ville); color:#fff; border:3px solid #131313; font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; font-size:17px; letter-spacing:.01em;}
-#villes .vp-ville-titre span{font-size:13px; font-weight:700; text-transform:none; letter-spacing:0;}
-#villes .vp-grille{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px; align-items:stretch;}
-#villes details.ab-dossier{margin:0; padding:0; background:var(--card); color:var(--ink); border:3px solid var(--ink); border-top:8px solid var(--ville); border-radius:0; box-shadow:5px 5px 0 var(--ink); min-width:0;}
-#villes details.ab-dossier[open]{grid-column:1/-1;}
-#villes details.ab-dossier > summary{display:flex; flex-direction:column; gap:12px; padding:16px 18px; border-radius:0; height:100%; box-sizing:border-box;}
-#villes details.ab-dossier[open] > summary{height:auto; border-bottom:3px solid var(--ink); border-radius:0;}
+#villes .ab-pliable-corps .ab-chapeau{margin:0 0 16px; font-size:14.5px;}
+/* Une ville : un carré de sa couleur, son nom, le nombre de projets à droite. */
+#villes .vp-ville{--ville:var(--gold); margin:0 0 22px;}
+#villes .vp-ville-titre{display:flex; align-items:center; gap:10px; margin:0 0 6px; padding:0 0 6px; border-bottom:3px solid var(--ink); font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase; font-size:16px; letter-spacing:.02em; color:var(--ink);}
+#villes .vp-ville-titre::before{content:''; width:14px; height:14px; flex:none; background:var(--ville); border:2px solid var(--ink);}
+#villes .vp-ville-titre span{margin-left:auto; font-size:13px; font-weight:700; text-transform:none; letter-spacing:0; color:var(--slate);}
+/* Les projets suivis : une ligne chacun ; ouvert, le projet devient une carte pleine largeur. */
+#villes .vp-grille{display:grid; grid-template-columns:minmax(0,1fr); gap:0;}
+#villes details.ab-dossier{margin:0; padding:0; background:var(--card); color:var(--ink); border:0; border-bottom:2px solid var(--line-soft); border-radius:0; box-shadow:none; min-width:0;}
+#villes details.ab-dossier[open]{border:3px solid var(--ink); margin:6px 0 14px; box-shadow:var(--shadow-sm);}
+#villes details.ab-dossier > summary{display:grid; grid-template-columns:minmax(0,1fr) auto; column-gap:16px; row-gap:3px; align-items:center; padding:12px 10px 12px 14px; border-left:6px solid var(--ville); border-radius:0; height:auto; box-sizing:border-box;}
+#villes details.ab-dossier > summary:hover{background:var(--paper-2);}
+#villes details.ab-dossier[open] > summary{border-bottom:3px solid var(--ink); border-radius:0;}
 #villes details.ab-dossier > summary::after{content:none; display:none;}
-#villes details.ab-dossier > summary:hover{background:transparent;}
-#villes details.ab-dossier > summary:focus-visible{outline:3px solid var(--gold); outline-offset:-6px;}
-#villes .vp-titre{margin:0; font-family:'Archivo',sans-serif; font-weight:900; font-size:22px; line-height:1.15; letter-spacing:-0.01em; color:var(--ink); overflow-wrap:anywhere;}
-#villes .vp-chiffres{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px; font-size:14.5px; color:var(--slate, var(--ink));}
-#villes .vp-chiffres li:first-child{font-weight:800; color:var(--ink); font-size:16px;}
-#villes .vp-chiffres strong{color:var(--ink);}
-#villes .vp-actions{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-top:auto; padding-top:4px;}
-#villes .vp-voir{display:inline-flex; align-items:center; min-height:40px; padding:6px 14px; background:#FFD24D; color:#131313; border:3px solid #131313; box-shadow:3px 3px 0 #131313; font-family:'Archivo',sans-serif; font-weight:800; font-size:14px; text-transform:uppercase;}
-#villes details.ab-dossier > summary:hover .vp-voir{transform:translate(-1px,-1px); box-shadow:4px 4px 0 #131313;}
+#villes details.ab-dossier > summary:focus-visible{outline:3px solid var(--gold); outline-offset:-4px;}
+#villes .vp-titre{grid-column:1; margin:0; font-family:'Archivo',sans-serif; font-weight:900; font-size:18px; line-height:1.2; letter-spacing:-0.01em; color:var(--ink); overflow-wrap:anywhere;}
+#villes .vp-chiffres{grid-column:1; list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:2px 14px; font-size:13.5px; color:var(--slate, var(--ink));}
+#villes .vp-chiffres li:first-child{font-weight:800; color:var(--ink);}
+#villes .vp-chiffres strong{color:var(--ink); font-weight:700;}
+#villes .vp-actions{grid-column:2; grid-row:1 / span 2; display:flex; flex-direction:column; align-items:flex-end; gap:4px; margin:0; padding:0;}
+#villes .vp-voir{display:inline-flex; align-items:center; min-height:34px; padding:4px 12px; background:#FFD24D; color:#131313; border:2px solid #131313; box-shadow:2px 2px 0 #131313; font-family:'Archivo',sans-serif; font-weight:800; font-size:12.5px; text-transform:uppercase; white-space:nowrap;}
+#villes details.ab-dossier > summary:hover .vp-voir{background:#131313; color:#FFD24D;}
 #villes .vp-voir-ouvert, #villes details[open] .vp-voir-ferme{display:none;}
 #villes details[open] .vp-voir-ouvert{display:inline;}
-#villes .vp-retirer{font-size:13px; color:var(--slate, var(--ink)); text-decoration:underline; background:none; border:0; padding:4px 0; cursor:pointer;}
+#villes .vp-retirer{font-size:12.5px; color:var(--slate, var(--ink)); text-decoration:underline; background:none; border:0; padding:2px 0; cursor:pointer;}
 #villes .ab-dossier-corps{padding:16px 18px 18px;}
-#villes .vp-sugg{display:flex; flex-direction:column; gap:8px; margin:0; padding:14px 16px; background:var(--card); color:var(--ink); border:3px solid var(--ink); border-top:6px solid var(--ville); border-radius:0; box-shadow:4px 4px 0 var(--ink); min-width:0;}
-#villes .vp-sugg h3{margin:0; font-family:'Archivo',sans-serif; font-weight:900; font-size:19px; line-height:1.15; color:var(--ink);}
-#villes .vp-sugg .ab-meta{font-size:13.5px;}
-#villes .vp-sugg .ab-bouton{background:var(--ville); border:3px solid #131313; color:#fff; border-radius:0; box-shadow:3px 3px 0 #131313; font-weight:800; text-transform:uppercase; min-height:40px;}
+/* Le catalogue : des cartes plates, le bouton noir. */
+#villes .ab-pliable-corps .vp-grille{grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:14px;}
+#villes .vp-sugg{display:flex; flex-direction:column; gap:6px; margin:0; padding:14px 16px; background:var(--card); color:var(--ink); border:2px solid var(--ink); border-left:6px solid var(--ville); border-radius:0; box-shadow:none; min-width:0;}
+#villes .vp-sugg h3{margin:0; font-family:'Archivo',sans-serif; font-weight:900; font-size:17px; line-height:1.2; color:var(--ink);}
+#villes .vp-sugg .ab-meta{font-size:13px;}
+#villes .vp-sugg .ab-derniere{margin:0; font-size:13.5px; line-height:1.45;}
+#villes .vp-sugg .ab-bouton{background:var(--ink); border:2px solid var(--ink); color:#fff; border-radius:0; box-shadow:none; font-family:'Archivo',sans-serif; font-weight:800; font-size:13px; text-transform:uppercase; min-height:34px; padding:4px 12px;}
+#villes .vp-sugg .ab-bouton:hover{background:#FFD24D; color:#131313;}
 #villes .vp-sugg .ab-bouton:disabled{opacity:.6;}
+#villes .vp-sugg .ab-liens a{color:var(--ink); font-weight:600;}
 @media (max-width:640px){
   #villes .vp-entete{padding-right:0;}
   #villes details.ab-suggestions > summary.vp-ajouter{position:static; display:flex; justify-content:center; width:100%; margin:0 0 16px; box-sizing:border-box;}
   #villes details.ab-suggestions > .ab-pliable-corps{padding:14px 12px;}
-  #villes .vp-grille{grid-template-columns:minmax(0,1fr);}
-  #villes .vp-titre{font-size:20px;}
+  #villes .ab-pliable-corps .vp-grille{grid-template-columns:minmax(0,1fr);}
+  #villes details.ab-dossier > summary{grid-template-columns:minmax(0,1fr); padding:10px 8px 10px 12px;}
+  #villes .vp-actions{grid-column:1; grid-row:auto; flex-direction:row; align-items:center; justify-content:space-between; margin-top:6px;}
+  #villes .vp-titre{font-size:17px;}
 }
 /* Sous le bouton café d'un projet de loi : suivre en se connectant, puis Devenez DossierQuébec (4 nov. 2026). */
 .bill-abo{margin:14px 0 0; padding:14px 16px; border:3px solid var(--ink); background:var(--card); box-shadow:4px 4px 0 var(--ink);}
@@ -2718,3 +2720,32 @@ body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
 .fiche-enrichie .fiche-enrichie-note{font-size:13px;opacity:.8}
 .fiche-enrichie table{border-collapse:collapse;width:100%;font-size:14px}
 .fiche-enrichie th,.fiche-enrichie td{text-align:left;vertical-align:top;padding:6px 8px;border-bottom:1px solid rgba(127,127,127,.35)}
+
+/* Les outils de « Pour aller plus loin », refaits le 14 nov. 2026 : le titre porte l'icône de la tuile,
+   une rangée par élément (fichier à télécharger, flux à copier) avec son bouton à droite, et pour qui
+   n'est pas abonné·e l'encadré « Réservé » avec le bouton jaune. */
+.mdr-outils .md-carte{border-top:8px solid #FFD24D; padding:20px 24px 18px;}
+.md-outil-titre{display:flex; align-items:center; gap:10px; font-family:'Archivo',sans-serif; font-weight:900; text-transform:uppercase;}
+.md-outil-titre .mdr-icone{width:26px; height:26px; color:var(--gold); flex:none;}
+.md-intro{margin:0 0 12px; font-size:15px; line-height:1.55; color:var(--slate);}
+.md-rangees{list-style:none; margin:10px 0 0; padding:0; border-top:2px solid var(--ink);}
+.md-rangees li{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 16px; align-items:center; padding:12px 0; border-bottom:2px solid var(--line-soft);}
+.md-rangees li > div{min-width:0;}
+.md-rangees b{display:block; font-size:15.5px; line-height:1.3;}
+.md-rangees li > div > span{display:block; font-size:13.5px; line-height:1.45; color:var(--slate);}
+.md-btn-noir, .md-copier{font-family:'Archivo',sans-serif; font-size:13px; font-weight:800; letter-spacing:.01em; padding:8px 14px; background:var(--ink); color:var(--card); border:2px solid var(--ink); cursor:pointer; white-space:nowrap;}
+.md-btn-noir:hover, .md-copier:hover, .md-copier.ok{background:#FFD24D; color:#131313;}
+.md-btn-noir:disabled{opacity:.6; cursor:default;}
+.md-flux-url{display:block; margin-top:5px; font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:12px; color:var(--slate); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.md-flux-url-vide{font-family:inherit; font-style:italic;}
+.md-flux-choix{margin-top:6px;}
+.md-flux-choix select, .md-flux-choix input{font:inherit; font-size:14px; padding:6px 8px; width:min(100%, 360px); border:2px solid var(--ink); background:var(--card); color:var(--ink);}
+.md-reserve{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 16px; margin-top:14px; padding:12px 14px; border:2px dashed var(--ink); background:var(--paper-2); font-weight:700;}
+.md-reserve .mdr-btn-jaune{text-decoration:none;}
+.mdr-outils .md-sous-titre{font-family:'Archivo',sans-serif; font-size:13px; font-weight:900; text-transform:uppercase; letter-spacing:.04em; margin:18px 0 4px;}
+.mdr-outils .md-mot{display:inline-flex; align-items:center; gap:6px; padding:3px 4px 3px 10px; font-size:14px;}
+@media (max-width:640px){
+  .mdr-outils .md-carte{padding:16px 14px;}
+  .md-rangees li{grid-template-columns:minmax(0,1fr);}
+  .md-rangees li .md-btn-noir, .md-rangees li .md-copier{justify-self:start;}
+}
