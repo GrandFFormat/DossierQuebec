@@ -37,10 +37,10 @@ const TYPES_PAR_VILLE = { [ASSEMBLEE]: ['mensuel'] };
 const sorteOfferte = (ville, type) => !TYPES_PAR_VILLE[ville] || TYPES_PAR_VILLE[ville].includes(type);
 // Le texte de la sorte « mensuel » de l'Assemblée (celui de TYPES_INFOLETTRE parle de la Ville).
 const TEXTES_ASSEMBLEE = {
-  nom: "L'infolettre de l'Assemblée nationale",
-  nomEn: 'The National Assembly newsletter',
-  quoi: 'Un courriel au début de chaque mois : les projets de loi, les votes, ce qui a bougé.',
-  quoiEn: 'One email at the start of each month: the bills, the votes, what moved.',
+  nom: "L'infolettre DossierQuébec",
+  nomEn: 'The DossierQuébec newsletter',
+  quoi: "Au début de chaque mois : les projets de loi, les votes à l'Assemblée nationale, ce qui a bougé sur le site.",
+  quoiEn: 'At the start of each month: the bills, the votes at the National Assembly, what changed on the site.',
 };
 // Le premier numéro de l'Assemblée part au début de décembre 2026 (la 44e législature siège à partir
 // du 17 novembre ; avant, il n'y a rien à raconter).

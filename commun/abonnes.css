@@ -637,15 +637,7 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 .ab-page .ab-merci { border-left: 5px solid var(--accent); background: var(--accent-fond, #E6F6EC); color: var(--encre); margin-bottom: 16px; }
 .ab-abo .ab-payer h3 { margin-top: 0; }
 
-/* Le compte rendu du mois : formulaire (accueil des volets) et boîte de Mes dossiers */
-.ab-infolettre { margin: 36px 0 8px; padding: 22px 22px 16px; border-radius: 12px; border: 1px solid var(--ligne, #DDE2E7); border-top: 5px solid #0B8A4B; background: var(--carte, #fff); }
-.ab-infolettre h2 { margin: 0 0 8px; font-size: 21px; }
-.ab-infolettre p { margin: 0 0 12px; line-height: 1.55; }
-.ab-infolettre .ab-form { margin: 4px 0 8px; }
-.ab-infolettre-villes { border: 0; padding: 0; margin: 0 0 10px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
-.ab-infolettre-villes legend { font-weight: 600; margin-bottom: 6px; }
 .ab-pot-de-miel { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; opacity: 0; }
-.ab-infolettre-boite .ab-case { display: inline-flex; margin-right: 18px; }
 
 /* « Des projets à suivre » : une ville par menu dépliant, dans sa couleur (--ville, posée par mes-dossiers.html) */
 .ab-page details.ab-ville-projets { --ville: var(--accent); margin: 0 0 12px; padding: 12px 16px; border: 1px solid color-mix(in srgb, var(--ville) 30%, var(--ligne, #DDE2E7)); border-left: 6px solid var(--ville); border-radius: 12px; background: color-mix(in srgb, var(--ville) 8%, var(--carte, #fff)); }
@@ -659,39 +651,6 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 .ab-page details.ab-ville-projets .ab-suggestion { border-top: 4px solid var(--ville); }
 .ab-page details.ab-ville-projets .ab-suggestion .ab-type-projet { background: color-mix(in srgb, var(--ville) 15%, var(--carte, #fff)); color: var(--ville); border-color: color-mix(in srgb, var(--ville) 40%, transparent); }
 .ab-page details.ab-ville-projets .ab-suggestion .ab-bouton { background: var(--ville); border-color: var(--ville); }
-
-/* Les courriels : une ligne par sorte (compte rendu du mois, conseil, arrondissement) */
-.ab-courriel { display: flex; gap: 10px; align-items: flex-start; padding: 10px 0; border-top: 1px solid var(--ligne, #DDE2E7); }
-.ab-courriel:first-of-type { border-top: 0; }
-.ab-courriel input[type="checkbox"] { margin-top: 4px; width: 18px; height: 18px; flex: none; accent-color: var(--accent); }
-.ab-courriel-texte { display: block; }
-.ab-courriel-nom { font-weight: 700; }
-.ab-courriel-rythme { display: inline-block; margin-left: 8px; padding: 1px 8px; border-radius: 999px; background: var(--fond-2, #EEF1F4); color: var(--doux); font-size: 12px; font-weight: 600; white-space: nowrap; }
-.ab-courriel-quoi { display: block; margin-top: 3px; font-size: 14px; line-height: 1.5; color: var(--doux); }
-.ab-courriel-arr { padding-left: 28px; }
-.ab-arr-suivis { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.ab-arr-puce { display: inline-flex; align-items: center; gap: 4px; padding: 3px 6px 3px 10px; border-radius: 999px; background: var(--accent-fond, #E6F6EC); color: var(--accent-encre, #076338); border: 1px solid var(--accent, #0B8A4B); font-size: 13px; font-weight: 600; }
-.ab-arr-retirer { border: 0; background: none; color: inherit; font-size: 16px; line-height: 1; cursor: pointer; padding: 0 2px; }
-.ab-arr-choix { display: block; margin-top: 8px; max-width: 320px; width: 100%; }
-
-.ab-courriel-verrou { opacity: .75; }
-.ab-courriel-cadenas { width: 18px; margin-top: 2px; flex: none; text-align: center; }
-.ab-courriel .ab-liens { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 6px; align-items: center; }
-
-
-/* mtl-courriels-zones */
-.ab-mtl-blocs { display: flex; flex-direction: column; gap: 14px; margin: 8px 0 4px; }
-.ab-zone { margin: 0; padding: 12px 14px 10px; border: 1px solid var(--ligne, #DDE2E7); border-radius: 10px; background: var(--fond-2, #F4F6F8); }
-.ab-zone legend { padding: 0 6px; font-weight: 700; font-size: 14px; color: var(--encre, #16191D); }
-.ab-zone-aide { margin: 0 0 8px; font-size: 13px; color: var(--doux, #5B6570); line-height: 1.45; }
-.ab-zone-cases { display: flex; flex-wrap: wrap; gap: 10px 18px; }
-.ab-langue { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; }
-.ab-langue input { width: 18px; height: 18px; accent-color: var(--accent, #0B8A4B); }
-.ab-zone-ville .ab-courriel,
-.ab-zone-arr .ab-courriel { border-top-color: transparent; padding-top: 6px; }
-.ab-zone-arr .ab-arr-suivis { margin-top: 4px; }
-.ab-zone-arr .ab-arr-choix { margin-top: 8px; }
-
 /* ---------- comptes de consultation (bibliothèques) ---------- */
 /* Un abonnement « lecture seule » reste ouvert sur les postes publics d'une bibliothèque. Toute
    commande qui ÉCRIT disparaît : suivre un projet, ajouter une alerte, demander un détail de
@@ -707,7 +666,7 @@ html.dvq-en:not(.dvq-pret) body { visibility: hidden; }
 .dq-consultation .ab-export,
 .dq-consultation .ab-mots,
 .dq-consultation .ab-organismes,
-.dq-consultation .ab-infolettre-boite,
+.dq-consultation .cr,
 .dq-consultation #deconnexion,
 .dq-consultation .follow-btn { display: none !important; }
 
