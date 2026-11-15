@@ -171,24 +171,37 @@ for (const c of contrats) {
 const nomAffiche = (c) => (c.neq ? [...nomsParNeq.get(c.neq)].sort((a, b) => b[1] - a[1])[0][0] : c.fournisseur);
 // LE PONT AVEC LES DÉCISIONS DU CONSEIL (12 nov. 2026). La Ville écrit le numéro d'avis SEAO dans
 // l'objet de ses décisions : « Adjudication d'un contrat… (Appel d'offres public 96068) ». On le
-// retrouve des deux côtés, sans IA. Les gré à gré ne citent presque jamais d'avis : ils restent sans lien.
+// retrouve des deux côtés, sans IA.
+// Montréal (14 nov. 2026) : trois ponts. Le numéro d'appel d'offres dans l'objet (« Appel d'offres
+// nº 25-21152 »), le numéro de résolution déclaré au SEAO (« CA26 250265 » = « CA26 25 0265 »), et le
+// numéro de dossier décisionnel à 10 chiffres (« D1269645002 » = dossier 1269645002). Espaces ignorées.
+// Les bons de commande (« 26-1809456 ») sont des achats d'employés : ils restent sans décision.
+const cle = (s) => String(s ?? '').toUpperCase().replace(/[\s.]/g, '');
 const decisionsParAvis = new Map();
 try {
   const brutes = JSON.parse(readFileSync('data/decisions.json', 'utf8'));
   const liste = Array.isArray(brutes) ? brutes : brutes.decisions || [];
-  const motif = /(?:appel d.offres|avis|AO|soumission|demande de prix)[^0-9]{0,40}?(\d{5,6})/gi;
+  const motif = /(?:appel d.offres|avis|AO|soumission|demande de prix|dossier|contrat)[^A-Za-z0-9]{0,12}(?:public|sur invitation|n[oº°]|num[ée]ro|\s|:|#)*([A-Z0-9][A-Z0-9.]*(?:-[A-Z0-9.]+)+|\d{5,7})(?![\w-])/gi;
+  const ajouter = (k, d) => {
+    if (!k || !/\d/.test(k)) return;
+    const a = decisionsParAvis.get(k) || [];
+    if (!a.some((x) => x.numero === d.numero)) a.push({ numero: d.numero, date: d.date, instance: d.instanceDecisionnelle || d.instance || null });
+    decisionsParAvis.set(k, a);
+  };
   for (const d of liste) {
     if (!d.numero) continue;
-    for (const m of (d.objet || '').matchAll(motif)) {
-      const a = decisionsParAvis.get(m[1]) || [];
-      if (!a.some((x) => x.numero === d.numero)) a.push({ numero: d.numero, date: d.date, instance: d.instanceDecisionnelle || d.instance || null });
-      decisionsParAvis.set(m[1], a);
-    }
+    for (const m of (d.objet || '').matchAll(motif)) ajouter(cle(m[1]), d);
+    ajouter(cle(d.numero), d);
+    if (/^\d{10}$/.test(String(d.dossier ?? ''))) ajouter(`DOSSIER${d.dossier}`, d);
   }
 } catch (e) {
   console.warn(`Contrats : décisions illisibles (${e.message}) — pas de lien vers les décisions.`);
 }
-const decisionsDe = (c) => (c.numero && decisionsParAvis.get(c.numero)) || [];
+const decisionsDe = (c) => {
+  if (!c.numero) return [];
+  const dossier = /\d{10}/.exec(c.numero)?.[0];
+  return decisionsParAvis.get(cle(c.numero)) || (dossier && decisionsParAvis.get(`DOSSIER${dossier}`)) || [];
+};
 // Pour la page Décisions : numéro de décision → contrats qu'elle vise. Chargé seulement à l'ouverture
 // d'une fiche (assets/app.js, boîte « Contrat au SEAO »).
 const parDecision = {};
@@ -223,7 +236,7 @@ writeFileSync('data/contrats-page.json', JSON.stringify({
     c.date, c.montant, modes.indexOf(c.mode || ''), c.soumissions,
     motifs.indexOf(c.motif || ''), categories.indexOf(c.categorie || ''),
     nomAffiche(c), c.titre, (c.url || '').split('ItemId=')[1] || '',
-    decisionsDe(c).length ? c.numero : '',
+    (decisionsDe(c).length === 1 ? decisionsDe(c)[0].numero : decisionsDe(c).length ? c.numero : ''),
     DETAILS[contrats.indexOf(c)] ? DETAILS[contrats.indexOf(c)][1].length || -1 : 0,
   ]),
 }));
