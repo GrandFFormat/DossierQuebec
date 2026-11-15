@@ -110,6 +110,9 @@ const ETAPES = [
   // En bref : une phrase par séance, en tête de la page Décisions (13 nov. 2026, Haiku, ~1 ¢ la séance).
   ...(resumes ? [{ nom: 'En bref, séance par séance', argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), '../scripts/resumes-seances.js', 'levis'], secondaire: true }] : []),
   { nom: 'Décisions récentes dans la page (Google)', argv: ['../scripts/prerendu-villes.js', 'levis'], secondaire: true },
+  // Les courriels de Lévis (14 nov. 2026) : chaque séance et le compte rendu du mois, publiés une fois
+  // par scripts/infolettres-auto.js. L'envoi aux inscrits suit, par le cron du site.
+  { nom: 'Courriels de Lévis publiés', argv: [...(fichierCle ? [`--env-file=${fichierCle}`] : []), 'scripts/infolettres-auto.js'], secondaire: true },
 ];
 
 try {

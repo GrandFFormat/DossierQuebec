@@ -18,7 +18,7 @@ import { aUneSection, choisirVersion } from './_section-abonnes.js';
 // l'Assemblée nationale (scripts/infolettre-assemblee.js), une seule sorte (mensuel), en français.
 // Même table, mêmes liens signés, même cron que les villes.
 export const ASSEMBLEE = 'assemblee';
-export const VILLES_INFOLETTRE = { quebec: 'Québec', montreal: 'Montréal', [ASSEMBLEE]: 'Assemblée nationale' };
+export const VILLES_INFOLETTRE = { quebec: 'Québec', montreal: 'Montréal', levis: 'Lévis', [ASSEMBLEE]: 'Assemblée nationale' };
 // Une ligne propre à une ville, affichée sous son nom partout où on s'inscrit (accueil du volet,
 // Mes dossiers). Montréal : à retirer le jour où son premier compte rendu du mois est publié
 // (Martin, 18 septembre 2026 : « cette légende tu l'enlèveras quand la newsletter sera créée »).
@@ -31,7 +31,7 @@ export const NOTES_INFOLETTRE = {
 
 // Langues offertes par ville. Montréal : FR et EN (chaque combo type×langue = un envoi).
 // Québec : FR seulement pour l'instant.
-export const LANGUES_PAR_VILLE = { quebec: ['fr'], montreal: ['fr', 'en'], [ASSEMBLEE]: ['fr'] };
+export const LANGUES_PAR_VILLE = { quebec: ['fr'], montreal: ['fr', 'en'], levis: ['fr'], [ASSEMBLEE]: ['fr'] };
 // Les sortes offertes, quand ce ne sont pas toutes celles de TYPES_INFOLETTRE.
 const TYPES_PAR_VILLE = { [ASSEMBLEE]: ['mensuel'] };
 const sorteOfferte = (ville, type) => !TYPES_PAR_VILLE[ville] || TYPES_PAR_VILLE[ville].includes(type);
@@ -90,6 +90,12 @@ export const ARRONDISSEMENTS = {
     { cle: 'charlesbourg', nom: 'Charlesbourg', instance: "Conseil de l'Arrondissement de Charlesbourg" },
     { cle: 'beauport', nom: 'Beauport', instance: "Conseil de l'Arrondissement de Beauport" },
     { cle: 'la-haute-saint-charles', nom: 'La Haute-Saint-Charles', instance: "Conseil de l'Arrondissement de La Haute-Saint-Charles" },
+  ],
+  // Lévis (14 nov. 2026) : ses 3 arrondissements, tels que levis/data/decisions.json les nomme.
+  levis: [
+    { cle: 'desjardins', nom: 'Desjardins', instance: "Conseil d'arrondissement de Desjardins" },
+    { cle: 'chutes-de-la-chaudiere-est', nom: 'Chutes-de-la-Chaudière-Est', instance: "Conseil d'arrondissement des Chutes-de-la-Chaudière-Est" },
+    { cle: 'chutes-de-la-chaudiere-ouest', nom: 'Chutes-de-la-Chaudière-Ouest', instance: "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest" },
   ],
   // Les 19 de Montréal, tels que montreal/data/decisions.json les nomme (lib/mtl.js, nomConseil).
   montreal: [
