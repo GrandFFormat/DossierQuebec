@@ -151,7 +151,11 @@ function connexion() {
   motsCles(null, false);
   organismesSuivis(null, false);
   // La connexion se fait une seule fois, dans la carte « Se connecter » de Mon dossier, plus haut.
-  $('#liste').innerHTML = `<p class="ab-vide">${tr('Connectez-vous plus haut sur cette page pour suivre des projets de ville.', 'Sign in higher up on this page to follow city projects.')}</p>`;
+  // Tous les projets de ville, pour tout le monde (Martin, 14 nov. 2026) : on les lit un à un ; le
+  // bouton « Suivre » demande de se connecter.
+  $('#liste').innerHTML = '';
+  const titre = document.getElementById('mdVillesTitre');
+  if (titre) titre.textContent = tr('Les projets de ville', 'City projects');
   pourquoi({ connecte: false });
   suggestions(null, new Set());
   ecrire(null);
@@ -361,18 +365,20 @@ async function suggestions(s, suivisIds) {
       .sort((a, b) => b[1].decisions - a[1].decisions)
       .map(([cle, p]) => {
         // Le récapitulatif du projet dit mieux de quoi il s'agit que sa dernière décision.
-        const enBref = p.enBref;
-        const phrase = enBref ?? p.plusRecent ?? '';
-        return `<article class="ab-carte ab-suggestion vp-sugg">
-          <h3>${echapper(p.titre)}</h3>
-          <div class="ab-meta"><span>${nbDecisions(p.decisions, p.annee)}</span>${p.derniere ? `<span>${tr('Dernière :', 'Latest:')} ${dateCourte(p.derniere)}</span>` : ''}</div>
-          <p class="ab-note" style="margin:0 0 6px">${echapper(p.description ?? '')}</p>
-          ${phrase ? `<p class="ab-derniere">${enBref ? '' : `<strong>${tr('Le plus récent :', 'Most recent:')}</strong> `}${echapper(phrase.length > 260 ? phrase.slice(0, 259) + '…' : phrase)}</p>` : ''}
-          <div class="ab-liens">
-            <button type="button" class="ab-bouton" data-action="suivre-projet" data-ville="${echapper(ville)}" data-cle="${echapper(cle)}" data-titre="${echapper(p.titre)}">+ ${tr('Suivre', 'Follow')}</button>
-            <a href="/${echapper(ville)}/decisions-de-la-ville-de-${echapper(ville)}?projet=${encodeURIComponent(cle)}">${tr('Voir ses décisions', 'See its decisions')}</a>
-          </div>
-        </article>`;
+        const phrase = p.enBref ?? p.plusRecent ?? '';
+        return `<details class="ab-carte ab-dossier vp-sugg" data-ville="${echapper(ville)}" data-dossier="projet:${echapper(cle)}">
+          <summary>
+            <h3 class="vp-titre">${echapper(p.titre)}</h3>
+            <ul class="vp-chiffres">
+              <li>${nbDecisions(p.decisions, p.annee)}</li>
+              ${p.derniere ? `<li>${tr('Dernière :', 'Latest:')} <strong>${dateCourte(p.derniere)}</strong></li>` : ''}
+              ${p.description ? `<li class="vp-desc">${echapper(p.description)}</li>` : ''}
+            </ul>
+            ${phrase ? `<p class="vp-phrase">${echapper(phrase.length > 220 ? phrase.slice(0, 219) + '…' : phrase)}</p>` : ''}
+            ${actionsCarte({ suivre: { ville, cle, titre: p.titre } })}
+          </summary>
+          <div class="ab-dossier-corps"></div>
+        </details>`;
       })
       .join('');
     // La ville peut expliquer, en tête de ses projets, ce qui leur manque et pourquoi
@@ -387,17 +393,18 @@ async function suggestions(s, suivisIds) {
   const boiteAvant = $('#suggestions details.ab-suggestions');
   // La ville reçue dans l’adresse s’ouvre toujours, même pour qui suit déjà des projets : c’est
   // elle qu’on est venu voir.
+  const connecte = Boolean(s);
   const aOuvrir = blocs.some((b) => b.ville === villeDArrivee)
     ? villeDArrivee
     : suivisIds.size ? null : (blocs.find((b) => b.ville === dernierVolet()) ?? blocs[0])?.ville;
   const total = blocs.reduce((n, b) => n + b.nombre, 0);
   // La même boîte que les autres (Export, Agenda…) ; dedans, une ville par menu dépliant.
   $('#suggestions').innerHTML = blocs.length
-    ? `<details class="ab-carte ab-pliable ab-suggestions"${(boiteAvant ? boiteAvant.open : (!suivisIds.size || villeDArrivee || location.hash === '#suggestions')) ? ' open' : ''}>
+    ? `<details class="ab-carte ab-pliable ab-suggestions${connecte ? '' : ' vp-public'}"${(!connecte || (boiteAvant ? boiteAvant.open : (!suivisIds.size || villeDArrivee || location.hash === '#suggestions'))) ? ' open' : ''}>
        <summary class="vp-ajouter"><span class="vp-ajouter-ferme">+ ${tr('Ajouter un projet', 'Add a project')}</span><span class="vp-ajouter-ouvert">× ${tr('Fermer le catalogue', 'Close the catalogue')}</span></summary>
        <div class="ab-pliable-corps">
-       <h3 class="vp-cat-titre">${tr('Des projets à suivre', 'Projects to follow')} <span class="vp-compte">${total}</span></h3>
-       <p class="ab-chapeau">${tr('Les grands dossiers de chaque ville, qui reviennent de séance en séance. Suivez-en un pour garder le fil de toutes ses décisions.', "Each city's major files, which come back meeting after meeting. Follow one to keep track of all its decisions. (Project descriptions and recaps are in French for now.)")}</p>
+       <h3 class="vp-cat-titre">${connecte ? tr('Des projets à suivre', 'Projects to follow') : tr('Tous les projets de ville', 'All city projects')} <span class="vp-compte">${total}</span></h3>
+       <p class="ab-chapeau">${tr('Les grands dossiers de chaque ville, qui reviennent de séance en séance. Ouvrez un projet pour le lire ; suivez-le pour garder le fil de toutes ses décisions', "Each city's major files, which come back meeting after meeting. Open a project to read it; follow it to keep track of all its decisions. (Project descriptions and recaps are in French for now.)")}</p>
        ${blocs.map((b, i) => [b, i]).sort(([a], [c]) => (c.ville === aOuvrir) - (a.ville === aOuvrir)).map(([b, i]) => `<section class="vp-ville" data-ville="${echapper(b.ville)}" style="--ville:${couleurVille(b.ville, i)}">
          <h4 class="vp-ville-titre">${echapper(VILLES[b.ville])} <span>${b.nombre} ${tr(pl(b.nombre, 'projet', 'projets'), pl(b.nombre, 'project', 'projects'))}</span></h4>
          ${b.legende?.texte ? `<p class="ab-note ab-legende-ville">${echapper(tr(b.legende.texte, b.legende.texteEn ?? b.legende.texte))}</p>` : ''}<div class="vp-grille">${b.cartes}</div>
@@ -413,9 +420,10 @@ const estProjet = (id) => id.startsWith('projet:');
 const nbDecisions = (n, annee) => tr(`${n} ${pl(n, 'décision', 'décisions')} en ${annee}`, `${n} ${pl(n, 'decision', 'decisions')} in ${annee}`);
 const dateCourte = (d) => dateFr(d).replace(/,? \d{4}$/, '');
 // Le bas d'une carte suivie : le bouton qui déplie l'historique, et « Ne plus suivre », discret.
-const actionsCarte = () => `<div class="vp-actions">
+const boutonSuivre = ({ ville, cle, titre }) => `<button type="button" class="ab-bouton vp-suivre" data-action="suivre-projet" data-ville="${echapper(ville)}" data-cle="${echapper(cle)}" data-titre="${echapper(titre)}">+ ${tr('Suivre', 'Follow')}</button>`;
+const actionsCarte = ({ suivre = null } = {}) => `<div class="vp-actions">
           <span class="vp-voir" aria-hidden="true"><span class="vp-voir-ferme">${tr('Voir les décisions', 'See the decisions')} ▾</span><span class="vp-voir-ouvert">${tr('Masquer les décisions', 'Hide the decisions')} ▴</span></span>
-          <button type="button" class="ab-lien-bouton vp-retirer" data-action="retirer">${tr('Ne plus suivre', 'Unfollow')}</button>
+          ${suivre ? boutonSuivre(suivre) : `<button type="button" class="ab-lien-bouton vp-retirer" data-action="retirer">${tr('Ne plus suivre', 'Unfollow')}</button>`}
         </div>`;
 // L'en-tête d'un dossier ou d'un projet : ce qu'on voit replié. Le reste se charge à l'ouverture.
 async function entete(suivi) {
@@ -617,9 +625,9 @@ async function ouvrirProjet(carte, corps) {
       : `<p class="ab-note">${tr("Aucune décision de ce projet dans l'année en cours pour l'instant.", 'No decision for this project in the current year yet.')}</p>`}
     <div class="ab-liens">
       <a href="/${echapper(ville)}/decisions-de-la-ville-de-${echapper(ville)}?projet=${encodeURIComponent(cle)}">${tr(`Voir les ${chiffres.decisions} décisions dans le volet ${echapper(VILLES[ville] ?? '')}`, `See the ${chiffres.decisions} decisions in the ${echapper(VILLES[ville] ?? '')} section`)}</a>
-      <button type="button" class="ab-lien-bouton" data-action="retirer">${tr('Ne plus suivre ce projet', 'Stop following this project')}</button>
+      ${carte.classList.contains('vp-sugg') ? boutonSuivre({ ville, cle, titre: projet.titre ?? cle }) : `<button type="button" class="ab-lien-bouton" data-action="retirer">${tr('Ne plus suivre ce projet', 'Stop following this project')}</button>`}
     </div>`;
-  mesurer('ouvrir_projet_suivi', { ville, projet: cle });
+  mesurer(carte.classList.contains('vp-sugg') ? 'ouvrir_projet_catalogue' : 'ouvrir_projet_suivi', { ville, projet: cle });
 }
 
 async function ouvrir(carte) {
@@ -697,6 +705,7 @@ document.addEventListener('click', async (e) => {
 
   const suggestion = e.target.closest('[data-action="suivre-projet"]');
   if (suggestion) {
+    if (suggestion.closest('summary')) e.preventDefault();
     const s = await session();
     if (!s) {
       document.getElementById('mdCompte')?.scrollIntoView({ behavior: 'smooth', block: 'start' });

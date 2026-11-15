@@ -2593,25 +2593,24 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 #villes .vp-actions{grid-column:2; grid-row:1 / span 2; display:flex; flex-direction:column; align-items:flex-end; gap:4px; margin:0; padding:0;}
 #villes .vp-voir{display:inline-flex; align-items:center; min-height:34px; padding:4px 12px; background:#FFD24D; color:#131313; border:2px solid #131313; box-shadow:2px 2px 0 #131313; font-family:'Archivo',sans-serif; font-weight:800; font-size:12.5px; text-transform:uppercase; white-space:nowrap;}
 #villes details.ab-dossier > summary:hover .vp-voir{background:#131313; color:#FFD24D;}
-#villes .vp-voir-ouvert, #villes details[open] .vp-voir-ferme{display:none;}
-#villes details[open] .vp-voir-ouvert{display:inline;}
+#villes .vp-voir-ouvert, #villes details.ab-dossier[open] > summary .vp-voir-ferme{display:none;}
+#villes details.ab-dossier[open] > summary .vp-voir-ouvert{display:inline;}
 #villes .vp-retirer{font-size:12.5px; color:var(--slate, var(--ink)); text-decoration:underline; background:none; border:0; padding:2px 0; cursor:pointer;}
 #villes .ab-dossier-corps{padding:16px 18px 18px;}
-/* Le catalogue : des cartes plates, le bouton noir. */
-#villes .ab-pliable-corps .vp-grille{grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:14px;}
-#villes .vp-sugg{display:flex; flex-direction:column; gap:6px; margin:0; padding:14px 16px; background:var(--card); color:var(--ink); border:2px solid var(--ink); border-left:6px solid var(--ville); border-radius:0; box-shadow:none; min-width:0;}
-#villes .vp-sugg h3{margin:0; font-family:'Archivo',sans-serif; font-weight:900; font-size:17px; line-height:1.2; color:var(--ink);}
-#villes .vp-sugg .ab-meta{font-size:13px;}
-#villes .vp-sugg .ab-derniere{margin:0; font-size:13.5px; line-height:1.45;}
-#villes .vp-sugg .ab-bouton{background:var(--ink); border:2px solid var(--ink); color:#fff; border-radius:0; box-shadow:none; font-family:'Archivo',sans-serif; font-weight:800; font-size:13px; text-transform:uppercase; min-height:34px; padding:4px 12px;}
-#villes .vp-sugg .ab-bouton:hover{background:#FFD24D; color:#131313;}
-#villes .vp-sugg .ab-bouton:disabled{opacity:.6;}
-#villes .vp-sugg .ab-liens a{color:var(--ink); font-weight:600;}
+/* Le catalogue : les mêmes lignes que les projets suivis, avec « + Suivre » ; sans connexion, il est
+   ouvert d'office et son bouton « + Ajouter un projet » n'existe pas. */
+#villes details.ab-suggestions.vp-public > summary.vp-ajouter{display:none;}
+#villes details.ab-suggestions.vp-public > .ab-pliable-corps{margin-top:0;}
+#villes .vp-desc{flex-basis:100%; color:var(--slate);}
+#villes .vp-phrase{grid-column:1; margin:2px 0 0; font-size:13.5px; line-height:1.45; color:var(--ink);}
+#villes .vp-suivre{background:var(--ink); border:2px solid var(--ink); color:#fff; border-radius:0; box-shadow:2px 2px 0 var(--ink); font-family:'Archivo',sans-serif; font-weight:800; font-size:12.5px; text-transform:uppercase; min-height:34px; padding:4px 12px; cursor:pointer; white-space:nowrap;}
+#villes .vp-suivre:hover{background:#FFD24D; color:#131313;}
+#villes .vp-suivre:disabled{opacity:.6;}
+#villes .vp-sugg .vp-actions{grid-row:1 / span 3;}
 @media (max-width:640px){
   #villes .vp-entete{padding-right:0;}
   #villes details.ab-suggestions > summary.vp-ajouter{position:static; display:flex; justify-content:center; width:100%; margin:0 0 16px; box-sizing:border-box;}
   #villes details.ab-suggestions > .ab-pliable-corps{padding:14px 12px;}
-  #villes .ab-pliable-corps .vp-grille{grid-template-columns:minmax(0,1fr);}
   #villes details.ab-dossier > summary{grid-template-columns:minmax(0,1fr); padding:10px 8px 10px 12px;}
   #villes .vp-actions{grid-column:1; grid-row:auto; flex-direction:row; align-items:center; justify-content:space-between; margin-top:6px;}
   #villes .vp-titre{font-size:17px;}

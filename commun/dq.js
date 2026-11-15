@@ -1727,7 +1727,7 @@ async function mdRefonte(isEn, quota){
 
   const aDesSuivis = nLois + nElus + nVilles > 0;
   document.getElementById('mdSuivis').hidden = !aDesSuivis;
-  document.getElementById('villes').hidden = !currentUser;
+  document.getElementById('villes').hidden = false; // tous les projets de ville, pour tout le monde (14 nov. 2026)
   const courriels = document.getElementById('courriels');
   if(courriels) courriels.hidden = false; // visible aussi sans connexion : formulaire public (14 nov. 2026)
   const debut = document.getElementById('mdDebut');
