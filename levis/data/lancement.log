@@ -2,7 +2,7 @@
 > dossiervillelevis@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit c8dd05a — Node v22.23.4
+Code : commit 1c342d3 — Node v22.23.4
 
 === Syntaxe du JavaScript du site ===
 
@@ -48,10 +48,10 @@ Pastilles thématiques :
      17  Immobilier
     149  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-09-15) ===
-Fenêtre depuis 2026-09-15 : 10 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-09-16) ===
+Fenêtre depuis 2026-09-16 : 9 séance(s) relue(s), 17 vote(s) conservé(s) du fichier précédent.
 
-20 votes nominaux écrits dans data/votes.json (10 procès-verbaux analysés).
+20 votes nominaux écrits dans data/votes.json (9 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
 
 === Contrats octroyés (SEAO) ===
@@ -70,7 +70,7 @@ Votes par décision : 18 décisions, 18 noms.
 ⚠ « Lexique, mesuré sur les procès-verbaux » a échoué (code 1) — on garde les données précédentes, ça attendra.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-09-15 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-09-16 pas encore résumés (plafond : 120)…
 637 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
@@ -92,7 +92,11 @@ Séances : 17, appels : 0, rejets : 0, coût : 0.000 $ US
 === Décisions récentes dans la page (Google) ===
 levis : 30 décisions écrites dans la page des décisions (inchangé).
 
+=== Courriels de Lévis publiés ===
+--seance=2026-11-10 → Publié : conseil-2026-11-10. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
+--mois=2026-10 → Publié : 2026-10. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
+
 === Bilan ===
-  étapes         : 16
+  étapes         : 17
   échecs         : aucun
   avertissements : Lexique, mesuré sur les procès-verbaux
