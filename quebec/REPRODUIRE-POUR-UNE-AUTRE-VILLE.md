@@ -1,508 +1,392 @@
-# Reproduire DossierVilleDeQuébec pour une autre ville
+# Reproduire un volet de ville pour une autre ville
 
-> **Version de référence depuis le 24 sept. 2026 :** ce guide vit désormais dans un document Claude,
+> **Version de référence depuis le 24 sept. 2026 :** ce guide vit dans un document Claude,
 > <https://claude.ai/code/artifact/3e9746c3-3c92-4271-9bc4-363866a35d3f>. Ce fichier n'est qu'une copie ;
 > en cas d'écart, le document fait foi.
 
 Ce document est fait pour être **collé tel quel au début d'une nouvelle session**, avec une
-seule phrase en plus : « La ville, c'est ___. » Il dit ce qu'on a construit pour Québec, ce
-qui se réutilise sans y toucher, ce qui doit être réécrit pour une autre source, comment
-brancher la ville sur l'espace abonnés, dans quel ordre travailler, et
-les pièges déjà rencontrés. Le code de référence est public :
-`github.com/GrandFFormat/DossierQuebec`, dossier `quebec/` (le volet) et la racine (la couche
-commune : `commun/`, `api/`, `mes-dossiers.html`, `abonnement.html`). Le README de `quebec/` est le
-journal détaillé : ce guide y renvoie pour les formats exacts.
+seule phrase en plus : « La ville, c'est ___. » Il dit ce qu'on a construit, ce qui se réutilise
+sans y toucher, ce qui doit être réécrit pour une autre source, comment brancher la ville sur la
+couche commune, dans quel ordre travailler, et les pièges déjà rencontrés.
 
-Mis à jour le 14 sept. 2026 : espace abonnés (alertes, mots-clés, organismes, agenda, export,
-détail de l'argent et demandes). La version anglaise n'est **pas** à reproduire (section 11).
+**Le modèle à copier est maintenant Montréal** (`montreal/`), le volet le plus complet : huit pages,
+contrats SEAO, budget et taxes, « Près de chez moi », courriels de ville, version anglaise.
+Québec (`quebec/`) reste la référence pour le client AzSearch et le challenge. Le code est public :
+`github.com/GrandFFormat/DossierQuebec`. Le README de chaque volet est son journal détaillé.
 
-Mis à jour le 24 sept. 2026 : la campagne « demander une explication » (section 10) — tables,
-agrégats publics, digest, et ce que le découpage multipage y avait cassé.
+Mis à jour le 15 nov. 2026 d'après Montréal : pages Contrats, Budget, Près de chez moi ; votes
+fusionnés dans Décisions ; Mon dossier remplace Mes dossiers ; courriels de ville ; anglais
+standard ; un groupe de concurrence par volet ; détail de l'argent arrêté ; commandites ; villes
+en pause.
 
 ---
 
 ## 1. Ce que c'est, et les règles qui ne se discutent pas
 
-Un site citoyen indépendant qui rend lisibles les décisions d'une ville : ce qui a été
-décidé, par quelle instance, quand, avec un lien vers le document officiel, un résumé en
-langage clair, et — quand la ville les consigne — les votes nominatifs de chaque élu.
-Pas de publicité, rien à vendre, aucune revente de données. Même esprit que DossierQuébec
-(Assemblée nationale) et DossierCanada (Parlement fédéral).
+Un site citoyen indépendant qui rend lisibles les décisions d'une ville : ce qui a été décidé, par
+quelle instance, quand, avec un lien vers le document officiel, un résumé en langage clair, et
+— quand la ville les consigne — les votes nominatifs de chaque élu. Gratuit pour le public,
+aucune revente de données. Un volet peut être **offert par un commanditaire** (section 9.6) : la
+commandite paie le volet, elle ne touche jamais au contenu.
 
 Trois règles, héritées de DossierQuébec, qui priment sur tout le reste :
 
-1. **Aucune donnée inventée.** Tout ce qui est affiché vient d'un document de la ville, et
-   la fiche mène à ce document. Ce qu'on ne sait pas, on ne l'affiche pas ; ce qu'on n'est
-   pas sûr d'avoir bien lu, on le signale (`avertissements`, `texteSourceDegrade`) au lieu
-   de le corriger en douce.
-2. **Aucun verdict sur une vraie personne.** Les présences, les votes, les fonctions sont
-   des faits consignés ; on les montre bruts. Pas d'adjectif, pas de palmarès, pas de
-   « bon » ou « mauvais » élu. Les résumés IA ont l'interdiction explicite de juger.
-3. **La ville d'abord.** Son serveur n'est pas gratuit, son `robots.txt` et son avis de droit
-   d'auteur comptent. On s'identifie, on attend entre deux requêtes, on lit le minimum, on
-   écrit au greffe avant de rendre le site public, et on reste hors des moteurs de recherche
-   tant qu'on n'a pas de réponse.
+1. **Aucune donnée inventée.** Tout ce qui est affiché vient d'un document de la ville, et la
+   fiche mène à ce document. Ce qu'on ne sait pas, on ne l'affiche pas ; ce qu'on n'est pas sûr
+   d'avoir bien lu, on le signale (`avertissements`, `texteSourceDegrade`).
+2. **Aucun verdict sur une vraie personne.** Présences, votes, fonctions : des faits consignés,
+   montrés bruts. Pas de palmarès. Les résumés IA ont l'interdiction explicite de juger.
+3. **La ville d'abord.** On s'identifie, on attend entre deux requêtes, on lit le minimum, on
+   écrit au greffe. La page Sources décrit la licence **réelle** de chaque source (ne pas
+   recopier « sans usage commercial » si la source est sous CC BY).
 
 Le site dit sur chaque page qu'il n'est pas celui de la ville et n'a aucun caractère officiel.
 
-## 2. Ce qui existe pour Québec, et ce qui se réutilise sans y toucher
+## 2. Ce qui existe, et ce qui se réutilise sans y toucher
 
-Six pages HTML statiques, un style et une logique partagés, des données JSON lues à
-l'exécution. Aucun framework, aucune dépendance sauf le SDK Anthropic pour les résumés.
+Huit pages HTML statiques par volet, un style et une logique partagés, des données JSON lues à
+l'exécution. Pas de framework. Dépendances : le SDK Anthropic, et `pdfjs-dist` (`lib/pdf.js`)
+quand la ville publie ses procès-verbaux en PDF (lancer avec `--max-old-space-size=4096`).
 
-| Page | Contenu |
+| Page (Montréal) | Contenu |
 |---|---|
-| `index.html` | ce qui a changé depuis la dernière extraction (5 fiches, bouton « de plus ») |
-| `decisions-de-la-ville-de-quebec.html` | toutes les décisions de l'année, groupées par séance, repliées ; recherche, filtres par type / sujet / instance |
-| `votes-nominatifs-du-conseil-de-quebec.html` | les appels nominaux : qui vote pour, qui vote contre, décompte des votes contre par personne |
-| `conseil-municipal-de-quebec.html` | carte SVG des districts, membres du conseil, puis les instances sans page « membres » (agglomération, commission d'urbanisme) |
-| `lexique-municipal-de-quebec.html` | 30 termes du vocabulaire décisionnel, avec décompte réel et un exemple vivant |
-| `sources-des-donnees-de-quebec.html` | provenance, méthode, limites, état des données, archive |
+| `index.html` | ce qui a changé depuis la dernière extraction |
+| `decisions-de-la-ville-de-montreal.html` | toutes les décisions de l'année par séance ; « En bref » de la séance en tête ; **les votes nominatifs dans la carte de chaque décision** (décompte, barre) ; case « Avec résumé seulement », repli « Sans résumé » |
+| `conseil-municipal-de-montreal.html` | carte des districts, membres, instances sans page « membres » |
+| `contrats-de-la-ville-de-montreal.html` | contrats SEAO : soumissionnaires, écart au gagnant, modifications, gré à gré, menu A à Z |
+| `budget-et-taxes-de-montreal.html` | rapport financier MAMH, taux de taxe par arrondissement |
+| `pres-de-chez-moi-a-montreal.html` | une adresse → district, élu, travaux et permis autour (rien n'est envoyé au serveur) |
+| `lexique-municipal-de-montreal.html` | vocabulaire décisionnel chiffré sur le corpus |
+| `sources-des-donnees-de-montreal.html` | provenance, licences, limites, journal de la ville |
 
-> ⚠️ Ceci vaut pour un **volet de ville** à l'intérieur du dépôt de DQ. Pour un **site séparé**
-> (DossierOntario, DossierCanada…), ne pas partir d'ici ni de `assets/style.css` — c'est le design
-> des volets, vert et arrondi, pas celui de DQ. Lire `CHARTE-DOSSIER.md` à la racine.
+La page « Votes nominatifs » séparée n'existe plus (fusionnée dans Décisions le 12 nov. 2026 :
+`scripts/votes-decisions.js` → `data/votes-decisions.json`).
 
-**À garder tel quel** (ça ne dépend pas de la ville) : les six pages et `assets/app.js`,
-`assets/style.css` (deux thèmes, pastilles, accordéon `<details name="fiches">`, taille du
-texte A− / A+, bouton fleur de lys vers DQ), `scrapers/resumes.js` (résumés IA avec cache,
-estimation, plafond, lots), `scrapers/recaps-projets.js`, `scrapers/details-argent.js`, `scrapers/archive.js`
-(rotation annuelle), `scripts/refresh.js` (routine quotidienne tolérante),
-`scripts/projets-publics.js` et `scripts/travail-public.js` (fichiers de Mes dossiers et de la
-page Abonnement), `scripts/static-server.js`, le workflow GitHub Actions, `.vercelignore`.
+> ⚠️ Ceci vaut pour un **volet de ville** dans le dépôt de DQ. Pour un **site séparé**
+> (DossierOntario, DossierCanada…), lire `CHARTE-DOSSIER.md` à la racine.
 
-**Et une couche commune, qui existe une fois pour toutes les villes** — on ne la recopie
-jamais, on s'y branche (section 9) : `mes-dossiers.html` et `abonnement.html`, `commun/`
-(navigation et menu des villes, client Supabase, styles de l'espace abonnés, tableur Excel/CSV,
-langue), `api/` (détail de l'argent et demandes, alertes du matin, messages, désabonnement) et
-les tables Supabase (suivis, abonnements, alertes, mots-clés, organismes, détail de l'argent,
-demandes, messages), qui ont toutes une colonne `ville` quand c'est utile.
+**À garder tel quel** : `assets/app.js`, `assets/style.css`, `scrapers/resumes.js`,
+`recaps-projets.js`, `archive.js`, `traductions.js`, `lexique-en.js`, `projets-en.js`,
+`scripts/refresh.js`, `projets-publics.js`, `infolettre.js`, `infolettres-auto.js`,
+`retirer-numero.js`, `static-server.js`, le workflow, `.vercelignore`, les tests (`npm test`).
 
-**À adapter** : `lib/themes.js` (règles de classement — les libellés d'objet changent d'une
-ville à l'autre), `lib/lexique.js` (définitions), les textes des pages (noms d'instances,
-chapeaux), `courriel-greffe.md`.
+**La couche commune, une fois pour toutes les villes — on s'y branche, on ne la recopie pas :**
 
-**À réécrire** : `lib/gpd.js` (le client de la source) et tous les scrapers qui lisent la
-ville : `decisions.js`, `votes.js`, `elus.js`, `districts.js`, `agglomeration.js`, `cucq.js`.
-Le site ne s'en aperçoit pas tant que les JSON gardent la même forme (section 5).
+| Pièce | Rôle |
+|---|---|
+| `mon-dossier.html` (`/mon-dossier?ville=<cle>#villes`) | projets suivis, mots-clés, organismes, courriels ; remplace `mes-dossiers.html` |
+| `commun/navigation.js`, `entete-volet.js`, `abonnes.js`, `langue.js` | menu des villes, marque, langue |
+| `commun/infolettre.js` + `courriels.css` | bloc « Les courriels », une ligne par ville |
+| `commun/seances-en-bref.js` + `scripts/resumes-seances.js <ville>` | la phrase « En bref » de chaque séance (Haiku) |
+| `commun/imprimer-seance.js` | impression d'une séance |
+| `commun/mesure.js`, `commun/consentement.js` | mesure maison (`data-mesure`, lue dans `/admin`), bannière de consentement + GA |
+| `commun/apres-vente.js` | bloc de commandite (« Offert par », « Votre publicité ici ») |
+| `scripts/prerendu-villes.js <ville>` | 30 décisions récentes pré-rendues dans la page pour Google |
+| `scripts/og-villes.js` | image de partage `<ville>/og-<ville>.png` 1200×630 |
+| `scripts/journal-villes.js` | journal de la ville sur sa page Sources (`<!--JOURNAL-VILLE-->`), tiré de `data/journal.json` (`volet: "<cle>"`) |
+| `scripts/build-section-pages.js`, `build-llms.js`, `gabarit.html` | sitemap généré (jamais à la main), llms.txt, gabarit |
+| `api/_infolettre.js`, `api/_projets-suivis.js`, `api/_enchere.js`, `api/represente.js`, `api/message.js` | courriels, projets suivis, enchère de bannière, Représentez votre ville, messages |
+
+**À adapter** : `lib/themes.js`, `lib/lexique.js`, `lib/projets.js` (projets suivables, travail
+éditorial), `lib/noms.js` (clés de jointure des noms), les textes des pages, `courriel-greffe.md`.
+
+**À réécrire** : le client de la source (`lib/gpd.js` à Québec, `lib/mtl.js` + `lib/pv.js` à
+Montréal) et les scrapers qui lisent la ville : `seances.js`, `decisions.js`, `votes.js`,
+`elus.js`, `districts.js`, `agglomeration.js`. Les scrapers de données ouvertes provinciales
+(`contrats.js` SEAO, `finances.js` MAMH) se réutilisent en changeant le filtre de la ville.
 
 ## 3. Étape 1 — Étude de faisabilité, avant d'écrire une ligne
 
-C'est la première chose à faire dans la nouvelle session, et elle peut conclure « non ».
+Elle peut conclure « non ».
 
-1. **Trouver le gisement.** Où la ville publie-t-elle résolutions, procès-verbaux, sommaires
-   décisionnels ? Regarder : un portail de documents décisionnels (Québec : une application
-   AzSearch dont la configuration est en clair dans le JavaScript de la page), un jeu de
-   données ouvertes (Données Québec, portail municipal), un dépôt de PDF par séance, ou
-   seulement des pages HTML. Ouvrir les outils de développement du navigateur sur le portail
-   et regarder les requêtes réseau : souvent une API est derrière.
-2. **Mesurer.** Combien de documents par an, par type, par instance ? Depuis quelle année ?
-   Le texte intégral est-il déjà extrait (champ texte dans l'API) ou faut-il parser les PDF ?
-3. **Lire les conditions.** `robots.txt` du portail, avis de droit d'auteur ou licence,
-   conditions d'utilisation de l'API. Noter mot pour mot ce qui est interdit (usage
-   commercial ? reproduction ? accès automatisé ?). Ça décide du ton du courriel au greffe.
-4. **Échantillonner le texte.** Prendre dix documents et regarder : la qualité de
-   l'extraction (glyphes espacés `Ca the r ine` = PDF dégradé), la présence d'un lien de la
-   résolution vers son sommaire, la formule des votes.
-5. **Chercher les appels nominaux.** Chercher « Ont voté en faveur », « A voté contre »,
-   « demande le vote », « Pour : … Contre : … ». Sans ça, pas de page Votes — et c'est la
-   page la plus intéressante. Compter combien de documents en contiennent.
-6. **Repérer les pages « membres ».** Page officielle des élus (photos, districts, partis,
-   fonctions), GeoJSON des districts (souvent en données ouvertes sous CC-BY), et les
-   instances qui n'ont pas de page (agglomération, commissions) mais dont les procès-verbaux
-   s'ouvrent sur une liste de présences.
-7. **Conclure** avec des chiffres : X documents/an, texte extrait ou non, Y votes nominaux
-   en 2026, pages membres oui/non, GeoJSON oui/non, conditions. Puis seulement, décider.
+1. **Trouver le gisement.** Portail de documents décisionnels, données ouvertes, PDF par séance
+   ou HTML. Ouvrir les outils de développement : souvent une API est derrière.
+2. **Mesurer.** Documents par an, par type, par instance ; texte extrait ou PDF à parser ;
+   **délai de publication** des procès-verbaux (Montréal : plusieurs semaines après la séance).
+3. **Lire les conditions.** `robots.txt`, licence, conditions de l'API, mot pour mot.
+4. **Échantillonner le texte.** Dix documents : qualité d'extraction, lien résolution ↔ sommaire,
+   formule des votes.
+5. **Chercher les appels nominaux** (« Ont voté en faveur », « Pour : … Contre : … »). Mesurer
+   aussi l'année précédente.
+6. **Repérer les pages « membres »**, le GeoJSON des districts et les instances sans page.
+7. **Pour une ville à arrondissements**, prévoir le calendrier des conseils d'arrondissement :
+   souvent une découverte par essai d'URL, longue (Montréal : `scrapers/decouverte-*.js`,
+   `seances-arrondissements.js`, `sonde-*.js`, workflows `decouverte-*.yml`,
+   `diagnostic-arrondissements.yml`).
+8. **Recenser les données ouvertes utiles** (Données Québec, portail de la ville, CC BY 4.0) :
+   SEAO (OCDS) pour les contrats, rapport financier MAMH, taux de taxe, entraves et travaux,
+   permis de construction, adresses ponctuelles, quartiers.
+9. **Conclure** avec des chiffres. Puis seulement, décider.
 
 ## 4. Étape 2 — L'entente avec la ville
 
-Avant tout usage en volume, et avant de rendre le site public :
-
-- **Le robot s'identifie** : User-Agent `DossierVille/0.1 (veille citoyenne; <contact>)`,
-  0,6 s minimum entre deux requêtes, jamais de re-téléchargement complet.
-- **Le courriel au greffe** (ou au service des données ouvertes, ou aux deux). Modèle dans
-  `courriel-greffe.md` de Québec : ce qu'on fait, comment on lit (chiffres réels : requêtes
-  par jour, délai), ce qu'on s'engage à faire quoi qu'il arrive (source citée, lien vers le
-  PDF, avertissement « pas la ville »), les deux points à clarifier (robots.txt, droit
-  d'auteur), et ce qu'on demande (continuer, et rendre public). Offrir en échange les
-  erreurs trouvées dans leurs données — il y en a toujours.
-- **Verrous en attendant la réponse** : `<meta name="robots" content="noindex, nofollow">`
-  sur chaque page, `X-Robots-Tag` dans `vercel.json` sur le sous-dossier, `rel="nofollow"`
-  sur le lien depuis DQ, pages absentes du sitemap. **Pas de `Disallow` dans robots.txt** :
-  il empêcherait les robots de lire le `noindex`, c'est contradictoire.
-- **Rappel** : programmer une relance à la date limite de réponse (loi sur l'accès : 20
-  jours ouvrables au Québec).
+- **Le robot s'identifie** : User-Agent `DossierVille/0.1 (veille citoyenne; <contact>)`, contact
+  dans une variable GitHub (`MTL_CONTACT` à Montréal), 0,6 s minimum entre deux requêtes.
+- **Le courriel au greffe** : modèle `courriel-greffe.md`. Programmer la relance (20 jours ouvrables).
+- **Verrous** : `noindex` + `X-Robots-Tag` tant qu'on attend, **sans `Disallow`**. Montréal les a
+  levés le 21 sept. 2026 sans attendre la réponse ; c'est une décision de Martin, ville par ville.
+- **Checklist de mise en ligne** : copier `montreal/CHECKLIST-PUBLICATION.md` (7 jours de
+  rafraîchissement verts, image de partage, sitemap).
 
 ## 5. Étape 3 — Le contrat de données (ce que le site attend)
 
-Neuf fichiers dans `data/`. Si les nouveaux scrapers produisent ces formes, le site marche
-sans modification. Champs de racine communs : `generatedAt`, `source`, `parametres`.
+Si les nouveaux scrapers produisent ces formes, le site marche sans modification. Champs de
+racine communs : `generatedAt`, `source`, `parametres`. Formats exacts : README de Montréal.
 
-**`decisions.json`** — racine : `totalDisponible`, `nombre`, `nouveauxDepuisDerniereExecution`,
-`themes` (copie de `THEMES`), `sansTheme`, `facettes` {type, instance, unite, theme : [{valeur, n}]}, `decisions[]` :
-`id` (nom de fichier, clé stable), `numero`, `objet`, `date` (AAAA-MM-JJ), `annee`, `type`,
-`instance`, `unite`, `pdf`, `sommaireId` (renvoi vers le sommaire, null sinon), `nouveau`
-(bool, null à la première extraction), `theme`, `themeSource` ('objet' | 'unite' | 'defaut').
+**Le cœur** (décrit en détail au README de Québec) :
+- `seances.json` — `id` (`CM_2026-01-26_13h00`), `instance`, `nom`, `parInstance` ;
+  `seances-arrondissements.json` s'il y a des arrondissements.
+- `decisions.json` — `id`, `numero`, `objet`, `date`, `annee`, `type`, `instance`, `unite`, `pdf`,
+  `sommaireId`, `nouveau`, `theme`, `themeSource` ; plus l'encadré de contexte (portée, durée,
+  parcours du dossier : `lib/modele.js`) et des montants sans cents.
+- `votes.json` et `votes-decisions.json` (les votes rattachés aux décisions, règlement cité).
+- `elus.json`, `districts.json`, `agglomeration.json`, `lexique.json`, `archives/index.json`.
+- `resumes.json` — les points de procédure **n'ont plus de résumé** : ils vont dans « Sans
+  résumé », sont exclus du décompte de l'accueil, et ne portent jamais « nouveau ».
+- `resumes-seances.json` (« En bref »), `robots.json` (état des étapes).
 
-**`votes.json`** — racine : `methode`, `totalDisponible`, `documentsAnalyses`, `nombre`,
-`avecAvertissement`, `themes`, `votes[]` : `id`, `numero`, `objet`, `date`, `annee`, `instance`,
-`pdf`, `resultat`, `pour[]`, `contre[]`, `decomptePour`, `decompteContre`, `abstention`,
-`demandeParVote`, `texteSourceDegrade`, `avertissements[]`, `brut` (le passage source),
-`nouveau`, `theme`, `themeSource`.
-
-**`elus.json`** — `nombre`, `partis`, `membres[]` : `nom`, `prenom`, `nomComplet`, `fonction`,
-`districtNumero`, `district`, `arrondissement`, `parti`, `roles[]`, `telephone`,
-`formulaireCourriel`, `biographie`, `photo`.
-
-**`districts.json`** — `licence`, `simplification`, `cadre`, `nombre`, `ecarts[]` (les
-contradictions entre GeoJSON et page des membres, consignées), `districts[]` : `numero`,
-`nom`, `parti`, `conseiller`, `arrondissement`, `telephone`, `formulaireCourriel`, `photo`,
-`roles[]`, `anneaux[]` (polygones [lon, lat] simplifiés).
-
-**`resumes.json`** — `modele`, `genereParIA`, `avertissement`, `nombre`, `genereCetteFois`,
-`echecs`, `cout`, `resumes[]` : `id`, `numero`, `date`, `unite`, `objet`, `pdf`, `puces[]`,
-`sansContenuSubstantiel`, `montantPrincipal`, `genereParIA`, `modele`, `genereLe`, `jetons`.
-
-**`agglomeration.json`** et **`cucq.json`** — instances sans page « membres » :
-`methode`, `seancesAnalysees`, `nombre`, `membres[]` avec `nom`, `civilite`, `presences`,
-`absences`, `seances`, `roles[]`, plus `fonction`/`ville`/`remplace[]` (agglomération) ou
-`categorie`/`elu`/`partielles` (commission).
-
-**`lexique.json`** — `categories`, `entrees[]` : `terme`, `categorie`, `recherche`,
-`definition`, `ouVousLeVoyez`, `occurrences` {total, annee, pourAnnee}, `exemple`.
-
-**`archives/index.json`** — `annees[]` : `annee`, `fichier`, `nombre`, `totalDisponible`,
-`octets`, `octetsCompresses`, `archiveLe`, `types`. Les années sont dans
-`archives/AAAA.json.gz`, métadonnées seulement, jamais lues par le site.
-
-À ces neuf fichiers s'ajoutent ceux de l'espace abonnés (section 9), tirés des précédents par
-des scripts qui se réutilisent.
+**Les ajouts de Montréal** :
+- Contrats : `contrats.json`, `contrats-page.json` (`c[]` en tableaux positionnels : date,
+  montant, mode, catégorie, fournisseur, objet, ocid… + dictionnaires `modes`, `motifs`,
+  `categories`), `contrats-decisions.json`, `contrats-details.json`.
+- Budget : `finances.json`, `taux-arrondissements.json`.
+- Près de chez moi : `entraves.json`, `permis/index.json` + `permis/<quartier>.json`,
+  `adresses/index.json` + `adresses/<lettre>.json` (`{voie: [libellé, [[de, à, district,
+  quartier]…]]}` ; `district` = `numeroSource` de `districts.json`).
+- Projets et Mon dossier : `projets/index.json`, `projets/<cle>.json`, `projets-recaps.json`,
+  `dossiers.json`, `recentes.json`, `organismes.json` (section 9.3).
+- Anglais : `resumes-en.json` (`traductions`, `nombre`, `nombreObjets`, `nombreCategories`),
+  `lexique-en.json`.
+- Commandite : `file-commandite.json`.
 
 ## 6. Étape 4 — Les scrapers
 
-Vanilla Node (ESM), `fetch`, regex. Un client de source (`lib/gpd.js` à Québec) qui
-centralise : throttle, réessais avec recul sur 429/5xx, User-Agent, encodage/décodage des
-valeurs, pagination déterministe (**toujours un départage** : `Date desc, Numero asc` — trier
-sur la seule date fait sauter ou répéter des lignes entre deux pages).
+Vanilla Node (ESM), `fetch`, regex. Un client de source qui centralise throttle, réessais sur
+429/5xx, User-Agent, pagination déterministe (**toujours un départage**).
 
-**Décisions, en deux temps** — c'est ce qui rend la routine quotidienne légère : d'abord les
-métadonnées de toute l'année (1 000 par requête), ensuite le texte intégral des seules
-résolutions jamais lues, par lots (à Québec : `search.in(Numero, 'a|b|c', '|')`, parce que
-le nom de fichier n'est pas filtrable mais le numéro l'est). Le texte n'est jamais conservé ;
-on y lit le renvoi vers le sommaire. `nouveau` = inconnu de l'extraction précédente **et**
-daté de moins de 45 jours avant le plus récent connu (sinon c'est un rattrapage, pas une
-nouveauté). Le fichier porte l'année en cours ; `archive.js --rotate` range l'année révolue
-en janvier.
+**Décisions, en deux temps** : métadonnées de toute l'année, puis texte intégral des seules
+résolutions jamais lues. `nouveau` = inconnu de l'extraction précédente **et** daté de moins de
+45 jours avant le plus récent connu. Fenêtre de 60 jours au quotidien, année complète le 1er
+(`--complet`, `--fenetre`, `--plafond`).
 
-**Votes** — chercher les documents contenant la formule d'appel nominal, extraire le
-segment, recoller les listes coupées par les pages, séparer sur virgules / « et » / « ainsi
-que », retirer les hyperliens tombés au milieu des noms, gérer le singulier (« A voté
-contre »), « aucun membre du conseil » (liste vide légitime), les PDF dégradés (ne pas
-extraire, marquer `texteSourceDegrade`). **Garde-fou** : recouper avec le décompte imprimé
-(`En faveur : 7 Contre : 1`) et écrire tout écart dans `avertissements`. Fenêtre glissante
-de 60 jours au quotidien, année complète le 1er du mois.
+**Titres** : nettoyer signatures et en-têtes ; un titre ne doit jamais avaler le sommaire qui suit ;
+remettre le « er » du 1er à sa place. Tests : `test/pv.test.js`, `textes.test.js`.
 
-**Élus** — la page officielle. À Québec, la même information était balisée de trois façons
-selon l'élu ; balayer tous les paragraphes du bloc, ne pas se fier à un seul attribut.
+**Votes** : formule d'appel nominal, listes recollées, singulier, liste vide légitime, PDF
+dégradés marqués. **Garde-fou** : recouper avec le décompte imprimé. Les noms ne correspondent pas
+toujours à la liste des élus : `lib/noms.js`.
 
-**Districts** — GeoJSON en données ouvertes, simplifié (Douglas-Peucker avec correction
-`cos(latitude)`, cinq décimales : 586 ko → 46 ko), joint aux élus par numéro de district ;
-les contradictions entre les deux sources sont consignées, pas écrasées.
+**Contrats SEAO** (`scrapers/contrats.js`) : lit les JSON mensuels OCDS (70 à 95 Mo), aucune
+requête à la ville. Filtre de l'acheteur par regex (Montréal : ~40 noms ; Montréal-Est et
+Montréal-Ouest sont d'autres villes). Soumissions dans `r.bids`, repli `r.bids.details`.
+Jumelage décision ↔ contrat par numéro d'appel d'offres, de résolution **et de dossier**
+(Montréal : 42 → 641 jumelés). « 1 seule soumission » est repris dans les courriels.
 
-**Instances sans page « membres »** — lire les listes de présences des procès-verbaux
-(présents, absents, fonction, ville, remplacement), et exclure les fonctionnaires qui
-« assistent également ». Une personne par séance, compter présences et absences.
+**Près de chez moi** : `scrapers/adresses.js` (point dans polygone, tout se fait dans le
+navigateur), `scrapers/permis-travaux.js` (permis CO et DE, travaux liés au SEAO), `lib/plateau.js`.
+
+**Budget** : `scrapers/finances.js` (MAMH, le lundi), `scrapers/taux-taxes.js` (février).
+
+**Élus, districts, instances sans page « membres »** : comme à Québec (README de Québec).
 
 ## 7. Étape 5 — Les résumés en langage clair
 
-Sur les sommaires décisionnels (la note de l'administration : situation, analyse,
-recommandation), jamais sur les procès-verbaux. Modèle `claude-opus-5`, sortie par outil en
-schéma strict avec `tool_choice` forcé, cache dans `resumes.json` (jamais repayer), estimation
-gratuite par `countTokens` avant de dépenser, API Batches à moitié prix pour les gros lots,
-plafond de 120 par exécution en routine. La consigne interdit : ajouter quoi que ce soit
-d'absent du document, juger, meubler un document procédural (lever
-`sansContenuSubstantiel`), recalculer un montant. Décoder les `\uXXXX` que le modèle glisse
-parfois littéralement dans ses chaînes.
+Sur les sommaires décisionnels, jamais sur les procès-verbaux, et **jamais sur les points de
+procédure**. Modèle `claude-opus-5`, sortie par outil en schéma strict, cache dans `resumes.json`,
+estimation par `countTokens`, **toujours en `--batch`** (moitié prix : ~20 $ US/mois à Montréal
+au lieu de 35), plafond par exécution, rattrapage par `--resumes-complets`. Traductions anglaises
+sur Sonnet, « En bref » sur Haiku. La consigne interdit d'ajouter, de juger, de meubler, de
+recalculer. Valider le type de chaque champ reçu : une liste de puces arrivée en texte a bloqué
+les traductions de Montréal du 3 oct. au 12 nov.
 
 ## 8. Étape 6 — Le site
 
-- Servi comme **sous-dossier de dossierquebec.ca** (`/quebec/`), dans le dépôt de DQ :
-  mêmes déploiements Vercel, même analytics (pages vues, événement de clic sur l'icône),
-  même workflow. **La barre oblique finale est obligatoire** : sans elle, `assets/` et
-  `data/` se résolvent depuis la racine du site. Les liens « accueil » pointent vers `./`,
-  jamais vers `index.html` (Vercel `cleanUrls` le réécrit sans barre), et `vercel.json`
-  redirige `/quebec` vers `/quebec/`.
-- Icône dans l'en-tête de DQ vers le volet municipal ; bouton fleur de lys + « DQ » (retour à
-  DossierQuébec, bleu en clair, jaune en sombre) à côté du logo du volet ; étiquette « Prototype » pendant la construction (retirée de Québec
-  le 14 sept. 2026, une fois le volet jugé stable).
-- Pastilles de sujet : règles par mots-clés sur l'objet, **les sujets avant les véhicules**
-  (contrats, finances), puis l'unité administrative, puis « Administration » faute de mieux
-  — chaque décision a une pastille, et `themeSource` dit ce qui a tranché. Recompter à
-  chaque changement de règles.
-- Fiches repliées par défaut, une seule ouverte à la fois (`<details name="fiches">`),
-  séances repliées, « Tout déplier » qui retire le `name` le temps de l'ouverture.
-- Thème clair et sombre (`data-theme`, appliqué avant le premier rendu), taille du texte
-  mémorisée (`zoom` 80–150 %).
-- **En-tête** : dans `<nav>`, les onglets du volet puis `<div class="outils">` avec la taille du
-  texte et le thème — `/commun/abonnes.js` y ajoute « Mes dossiers » et « Abonnement », et
-  mémorise la ville pour que Mes dossiers et Abonnement prennent la marque du volet (logo qui y
-  ramène). Le menu déroulant « Ville : … » est en haut à droite de chaque page : dans
-  `.titre-ligne`, un `<details class="ab-villes" id="villes">` rempli par
-  `/commun/entete-volet.js`. Sur cellulaire, le sous-titre ne reste que sur l'accueil et les
-  outils tiennent sur une ligne.
-- **Espace abonnés** : section 9. **Version anglaise** : pas pour l'instant, section 11.
+- Servi comme **sous-dossier de dossierquebec.ca** (`/<cle>/`), barre oblique finale obligatoire,
+  liens « accueil » vers `./`, redirection dans `vercel.json`.
+- En-tête : bouton fleur de lys à droite du logo, dans la couleur du volet ; titre de page
+  terminé par « | DossierQuébec » ; fil d'Ariane et un vrai H1 ; le premier paragraphe nomme la
+  page et renvoie vers Décisions.
+- Dans le `<head>` de chaque page : consentement + GA, `/commun/mesure.js` ; les boutons clés
+  portent `data-mesure`. Rien n'est mesuré en local, sauf avec `?mesure=1`.
+- Pastilles de sujet : **les sujets avant les véhicules** ; chaque décision a une pastille. Les
+  numéros de dossier ne sont pas une catégorie.
+- Fiches repliées, une seule ouverte à la fois ; « Tout ouvrir » **par séance**, une séance à la
+  fois ; plus de « Tout déplier » global.
+- Partager (courriel, lien, X, Facebook) seulement sur les décisions résumées. Pas de « Soutenez
+  la cause » ni « Offre-moi un café ».
+- Thème clair et sombre, taille du texte mémorisée. Menu « Ville : … » rempli par
+  `/commun/entete-volet.js`.
 
-## 9. Étape 7 — Brancher la ville sur l'espace abonnés
+## 9. Étape 7 — Brancher la ville sur la couche commune
 
-L'espace abonnés n'appartient à aucune ville : Mes dossiers, Abonnement, `commun/`, `api/` et
-Supabase servent toutes les villes à la fois. Une nouvelle ville s'y branche avec des attributs
-dans ses pages, sa clé dans quelques listes, et des fichiers publiés au bon format. Tant qu'un
-fichier manque, la boîte correspondante n'affiche simplement rien pour cette ville : rien ne
-casse, ce qui permet de brancher morceau par morceau.
+Une nouvelle ville s'y branche avec des attributs dans ses pages, sa clé dans des listes, et des
+fichiers publiés au bon format. Tant qu'un fichier manque, la boîte n'affiche rien : on branche
+morceau par morceau.
 
-**1. Les pages du volet.**
-- `<body data-page="…" data-ville="<cle>">` (la clé = le nom du sous-dossier), et les scripts
-  `/commun/entete-volet.js` et `/commun/abonnes.js`.
-- En-tête : `<details class="ab-villes" id="villes"></details>` dans `.titre-ligne`, et
-  `<div class="outils">` dans `<nav>` (voir la section 8).
-- Chaque fiche de dossier contient
-  `<div class="ab-fiche" data-dossier data-numero data-objet data-montant data-statut data-etape data-echeance data-projets>`
-  (voir `carteDecision` dans `quebec/assets/app.js`). `data-dossier` est la clé qui suit la
-  décision d'une instance à l'autre (le sommaire à Québec, le numéro de dossier à Montréal) ;
-  `data-montant="1"` quand le résumé a trouvé un montant (ça offre « Demander le détail de
-  l'argent »).
+**1. Les pages du volet.** `<body data-page="…" data-ville="<cle>">`, scripts
+`/commun/entete-volet.js` et `/commun/abonnes.js` ; chaque fiche porte
+`<div class="ab-fiche" data-dossier data-numero data-objet data-montant data-statut data-etape data-echeance data-projets>`.
 
-**2. Les listes de villes à allonger** (partout la même clé) :
+**2. Les listes de villes à allonger** (même clé partout) :
 
-| Fichier | Ce que la liste commande |
+| Fichier | Liste |
 |---|---|
-| `commun/navigation.js` — `VILLES` | le menu des villes, la marque des pages communes, toutes les boucles de Mes dossiers et d'Abonnement |
-| `api/detail.js` — `VILLES` | le détail de l'argent, les demandes et l'export |
-| `api/message.js` — `VILLES` | « Nous écrire » et « Signaler une erreur » |
-| `api/alertes-projets.js` — `VILLES` | les alertes du matin (projets, mots-clés, organismes) |
+| `commun/navigation.js` | `VILLES`, `VILLES_PROJETS`, `VILLES_ATTENDUES` (si la ville publie `attendues.json`), `VILLES_EN_PAUSE` |
+| `commun/langue.js` | `VOLETS_EN` (si la ville a l'anglais) |
+| `commun/mesure.js` | la ville |
+| `api/detail.js`, `api/message.js` | `VILLES` |
+| `api/_infolettre.js` | `VILLES_INFOLETTRE`, `NOTES_INFOLETTRE` (légende, ex. délai des PV) |
+| `api/_enchere.js` | `VILLES` (si commanditée) |
+| `scripts/build-section-pages.js`, `build-llms.js`, `journal-villes.js`, `og-villes.js` | la ville |
+| `gabarit.html` | les deux listes |
 
-**3. Les fichiers que la ville publie pour Mes dossiers**, écrits par son
-`scripts/projets-publics.js` (celui de Québec se réutilise tel quel si `decisions.json` et
-`resumes.json` ont la forme de la section 5). Formats exacts : README de Québec, section
-« L'espace abonnés ». Mes dossiers ne lit que ces fichiers, jamais les décisions complètes : c'est
-ce qui la garde légère quand les villes s'additionnent.
+**3. Les fichiers pour Mon dossier**, écrits par `scripts/projets-publics.js` : `projets/index.json`,
+`projets/<cle>.json`, `recentes.json` (format commun, lu aussi par le serveur), `dossiers.json`,
+`organismes.json`, et `attendues.json` si la ville a un agenda (Québec, Lévis). Projets définis à
+la main dans `lib/projets.js`, vérifiés par `scripts/verifier-projets.js`.
 
-| Fichier | Ce qu'il nourrit |
-|---|---|
-| `data/projets/index.json`, `data/projets/<cle>.json` | projets suivis, « Où en est le projet », suggestions, export. Projets définis à la main dans `lib/projets.js` (relus sur leurs résultats), récapitulatifs par `scrapers/recaps-projets.js` |
-| `data/attendues.json` | l'agenda des conseils (dossiers en attente, instance regroupée, date cible) |
-| `data/recentes.json` | les mots-clés et les alertes du matin (45 derniers jours) — **format commun à toutes les villes**, lu aussi par le serveur |
-| `data/dossiers.json` | les organismes suivis et l'export (toute l'année, avec `numeros[]` pour retrouver les dossiers d'un projet) |
-| `data/organismes.json` | les suggestions de noms d'organismes et d'entreprises |
-| `data/travail.json` | « Le travail derrière le volet… » de la page Abonnement (`scripts/travail-public.js`) |
+**4. Les courriels de ville.** `scripts/infolettre.js` et `scripts/infolettres-auto.js`
+(`INSTANCES`) publient seuls : compte rendu du mois (à partir du 2), un courriel après chaque PV,
+un par arrondissement, FR et EN. Un compte rendu vide ne part pas. Suivre un projet ajoute le bloc
+« Vos projets suivis » à l'envoi (`api/_projets-suivis.js` lit `<ville>/data/projets/<cle>.json`,
+repère `<!--PROJETS-->`). Un numéro parti par erreur se retire par `scripts/retirer-numero.js`
+(workflow `retirer-numero.yml`). Secrets du workflow : `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`.
 
-**4. Le détail de l'argent.** Les tables `details_argent` et `demandes_details` ont une colonne
-`ville` : rien à créer dans Supabase. `scripts/details-du-jour.js` et `scripts/publier-details.js`
-portent `const VILLE = 'quebec'` : les copier dans le volet avec la clé de la ville ;
-`scrapers/details-argent.js` doit savoir obtenir le texte d'un sommaire de cette source. Le
-workflow de la ville demande les secrets `SUPABASE_URL` et `SUPABASE_SERVICE_ROLE_KEY` (sans eux,
-l'étape est sautée, le reste tourne). Garder les règles : jamais le détail dans le dépôt public,
-montants jamais additionnés, chaque nombre vérifié contre le texte.
+**5. Le détail de l'argent : arrêté.** Plus aucune lecture IA des montants pour les volets ; ne pas
+copier `details-du-jour.js` ni `publier-details.js`, ne pas relancer sans Martin.
 
-**5. Vérifier avec un compte abonné** (une ligne dans `abonnements`, statut `actif`) : suivre un
-projet, ajouter un mot-clé et un organisme, ouvrir l'agenda, exporter en Excel et en PDF,
-s'envoyer un courriel d'essai d'alerte, demander un détail de l'argent.
+**6. La commandite** (si la ville est offerte) : bloc `commun/apres-vente.js` (« Offert par… »,
+remerciement avant les séances), `data/file-commandite.json`, enchère du mois de bannière
+(`api/_enchere.js`), page « Représentez votre ville » (`api/represente.js`, tables `rtv_demandes`,
+`rtv_visites`, `rtv_encheres`). Prix : voir la grille des commandites.
+
+**7. Vérifier** avec un compte connecté : suivre un projet, mot-clé, organisme, courriel d'essai
+avec le bloc « Vos projets suivis ».
+
+**8. Mettre une ville en pause** : la retirer de `VILLES` et la mettre dans `VILLES_EN_PAUSE`
+(avec `depuis`), retirer le `schedule` de son workflow. Ses pages restent en ligne avec un avis,
+hors des menus, de Mon dossier et du sitemap. Rallumer : procédure en commentaire de
+`commun/navigation.js`.
 
 ## 10. Étape 8 — La campagne « demander une explication »
 
-Sur DossierQuébec, une personne connectée demande des explications sur un projet de loi actif.
-Le total par projet est public ; **qui** a demandé quoi ne l'est jamais. À 1000 demandes sur un
-même projet, on pousse pour une pétition. Cette chaîne n'existe **pas** dans les volets de ville :
-elle est décrite ici parce qu'une ville qui la reprend part de là, et parce qu'elle se confond
-facilement avec « Demander le détail de l'argent » (section 9.4), qui est réservé aux abonnés et
-porte sur un montant. Le challenge, lui, est gratuit, public en total, et porte sur une décision.
+Elle n'existe que sur DossierQuébec (projets de loi). Une personne connectée demande des
+explications ; le total par projet est public, **qui** a demandé ne l'est jamais. Tables :
+`scripts/supabase-schema-flags.sql`, `supabase-schema-campaign.sql` (`bill_flags`, `admins`,
+`bill_campaign`). Limite de 10 demandes / 30 jours dans la **policy d'insertion**, via
+`my_recent_flag_count()` en `security definer` (sinon récursion infinie). Agrégats :
+`flag_counts()` public (bill_id + cnt), `flag_counts_all()` pour `service_role` seulement
+(révoquer `execute` à PUBLIC). Digest : `api/weekly-digest.js`, une semaine sur deux.
 
-**Les tables** — `scripts/supabase-schema-flags.sql` et `scripts/supabase-schema-campaign.sql`.
+➜ **Règle à retenir : ne jamais faire dépendre un palmarès public de ce que la page a chargé.**
+Publier une liste maigre (`data/site/challengeBills.json`) et ne la charger que si l'agrégat
+renvoie au moins une ligne.
 
-- `bill_flags` : une ligne = une personne + un projet, `unique (user_id, bill_id)`. RLS : chacun
-  ne voit que ses propres lignes ; les admins voient tout, parce qu'il faut bien compter.
-- La limite anti-troll (10 demandes par compte par 30 jours) est dans la **policy d'insertion**,
-  pas dans le navigateur — sinon elle se contourne. ⚠️ Elle passe par `my_recent_flag_count()`
-  en `security definer` : une sous-requête directe sur `bill_flags` à l'intérieur d'une policy
-  de `bill_flags` déclenche « infinite recursion detected in policy » dès qu'il y a des lignes.
-- `admins (user_id)` : les seuls comptes autorisés à voir les vrais chiffres.
-- `bill_campaign` : la mémoire du digest — `last_count` (compte au dernier envoi, pour détecter
-  les paliers franchis), `threshold` (seuil de pétition courant), `escalation_pending` (posé par
-  le bouton admin), `terminal_notified`.
+Une ville qui reprend le mécanisme : `bill_id` → clé de dossier, colonne `ville`, listes VILLES,
+et ne rien promettre à 1000 demandes qu'on ne puisse tenir.
 
-**Les agrégats, et pourquoi il en faut deux.** `flag_counts()` est ouverte à `anon` et
-`authenticated`, mais ne renvoie que `bill_id` et `cnt` (`having count(*) >= 1`) : c'est ce qui
-permet un palmarès public sans trahir personne. `flag_counts_all()` fait la même chose sans seuil
-et n'est donnée qu'à `service_role`, pour le cron — Postgres accorde `execute` à PUBLIC à la
-création, il faut le révoquer explicitement.
+## 11. La version anglaise : standard depuis Montréal
 
-**Le site.** Un bouton sur chaque carte, trois états en bascule : se connecter / ✋ Demander une
-explication / ✓ Challengé — retirer. Une section « Projets challengés » sur l'accueil : bande
-jaune, grille de trois cartes, « Voir plus » qui remplace les trois visibles et reboucle, partage
-direct 𝕏 / Facebook / copier. Un badge « 🔥 N demandes » sur les cartes, un filtre rapide
-« 🔥 Challengés », et un panneau admin (Resend ↑ / Reset) sur la page du compte. Paliers
-`[500, 1000, 2500, 5000, 25000]`, affichage dès la **première** demande (montrer l'élan plutôt
-qu'une liste vide), seuil de pétition à 1000.
-
-**Le digest.** `api/weekly-digest.js`, cron Vercel hebdomadaire qui n'envoie qu'une semaine sur
-deux (semaines ISO paires ; `?force=1` pour forcer) : un courriel par personne, ses projets
-challengés, le total actuel de chacun, et une note quand un palier a été franchi depuis le
-dernier envoi, quand l'admin a déclenché une escalade, ou quand le projet est devenu loi sous le
-seuil. Secrets : `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `DIGEST_FROM`,
-`CRON_SECRET`, `PUBLIC_SITE_URL`. Le lien de désabonnement est un jeton HMAC signé avec
-`CRON_SECRET`.
-
-**⚠️ Ce que le découpage multipage avait cassé — corrigé le 24 septembre 2026.** Le palmarès ne
-renvoie que des `bill_id` : il faut les rejoindre à des titres, et cette jointure se faisait sur
-la variable `bills` de la page. Or l'accueil n'en charge que 4 (`apercuBills` remplit la même
-variable que la liste complète). **Neuf** projets challengés, treize demandes, étaient jetés en
-silence pendant que l'accueil affirmait « Personne n'a encore demandé d'explication » — une
-phrase que le site n'était pas en mesure de savoir vraie. Deux effets du même enfermement : sur
-la page des projets, la fonction sortait faute de son conteneur, donc `flag_counts()` n'y était
-jamais appelée (filtre « 🔥 Challengés » toujours vide, aucun badge sur les cartes) ; et le
-panneau admin, sur une page qui ne charge aucun projet, n'affichait que des « #27053 ». Depuis,
-le chargement du palmarès est séparé du rendu, et les titres viennent d'un
-`data/site/challengeBills.json` maigre (sept champs, 12,5 ko compressés) chargé à la demande.
-
-**Reste ouvert.** Aucune page ne porte plus `id="flagBox"` : la demande par NUMÉRO, avec le
-compteur de demandes restantes du mois, ne s'affiche donc nulle part. Le bouton des cartes fait
-le même travail — reste à décider si la boîte revient sur la page du compte ou si la fonction
-part.
-
-➜ **La règle à retenir pour toute reproduction : ne jamais faire dépendre un palmarès public de
-ce que la page a chargé.** Publier une liste maigre (id, numéro, titre, statut, étape) et l'aller
-chercher seulement si l'agrégat renvoie au moins une ligne — une page où rien n'est challengé ne
-paie rien.
-
-**Si une ville reprend le mécanisme.** Remplacer `bill_id` par la clé de dossier
-(`data-dossier`, section 9.1), ajouter une colonne `ville` comme aux autres tables, allonger les
-listes VILLES (section 9.2) — et décider ce qu'on promet à 1000 demandes : au municipal, la
-pétition n'a pas le statut qu'elle a à l'Assemblée. Ne rien promettre sur le site qu'on ne puisse
-tenir.
-
-## 11. La version anglaise : pas pour une nouvelle ville (pour l'instant)
-
-La version anglaise est un essai, sur Québec seulement : on attend de voir dans Vercel Analytics
-si des gens s'en servent (événements `langue_choisie` et `page_en`) avant de la reproduire
-ailleurs. C'est Martin qui décidera, chiffres en main. D'ici là, une nouvelle ville est **en
-français seulement** :
-
-- Ne pas copier `scrapers/traductions.js` ni `scrapers/lexique-en.js`, et retirer du `refresh.js`
-  copié les deux étapes « Traductions anglaises des résumés » et « Lexique anglais » (elles
-  coûtent de l'argent chaque matin).
-- Ne pas ajouter la ville à `VOLETS_EN` dans `commun/langue.js` : la ville reste en français et
-  n'a pas de pastille EN, même pour quelqu'un qui a choisi l'anglais sur Québec.
-- Ce qui vient avec la copie des fichiers de Québec (`tr(…)` et `import` de `libelles-en.js`
-  dans `app.js`, attributs `data-en` dans les pages) est sans effet hors de `VOLETS_EN` : le
-  laisser tel quel, ne pas le compléter pour les textes propres à la ville, ne rien traduire.
-
-Si l'anglais est retenu un jour, la mécanique et ses coûts sont dans le README de Québec
-(« La version anglaise »).
+Montréal a une version anglaise complète ; une nouvelle ville la reprend si Martin le décide.
+Pièces : `scrapers/traductions.js` (résumés et titres, Sonnet), `scrapers/lexique-en.js`,
+`scrapers/projets-en.js`, `assets/libelles-en.js`, `data/resumes-en.json`, `data/lexique-en.json`,
+la ville dans `VOLETS_EN` (`commun/langue.js`), `data-en` sur les textes propres à la ville. Les
+étapes anglaises sont dans `refresh.js`. Chantiers, permis, contrats et motifs de gré à gré se
+traduisent aussi. Langue : `?lang=en` et `dvq:langue`. Rattrapage d'un coup possible (Montréal,
+12 nov. : 952 résumés et 1 031 titres).
 
 ## 12. Étape 9 — L'automatisation
 
-Un workflow GitHub Actions par volet, dans le dépôt de DQ, même groupe de concurrence que le
-rafraîchissement de DQ (jamais deux pushes en même temps), `permissions: contents: write`,
-`npm run refresh` dans le sous-dossier, commit + push de `data/` s'il y a du nouveau.
-`.vercelignore` garde `lib/`, `scrapers/`, `scripts/`, README et `package.json` hors du site
-servi. Secrets `ANTHROPIC_API_KEY`, `SUPABASE_URL` et `SUPABASE_SERVICE_ROLE_KEY` (déjà là,
-passés en `env` à l'étape `npm run refresh`) ; sans eux, les résumés et le détail de l'argent
-sont sautés, le reste tourne. Les échecs d'étapes secondaires sont des avertissements ; une extraction principale
-en échec rend le run rouge après avoir publié ce qui a marché.
+Un workflow par volet : `.github/workflows/refresh-villede<ville>.yml`, **son propre groupe de
+concurrence** (`refresh-<ville>`), car un job de plusieurs heures annulait les autres ; les outils
+de découverte partagent ce groupe. Cron décalé (Montréal 09 h UTC), `timeout-minutes: 300`,
+`permissions: contents: write`. Inputs `workflow_dispatch` : `resumes_complets`, `retirer_numero`.
 
-**Aucune clé dans le dépôt.** GitHub bloque le push s'il reconnaît une clé (même une clé de
-lecture que la ville publie elle-même) : la lire à l'exécution dans le code du portail, comme
-un navigateur, ou la mettre en secret.
+Étapes à copier : vérification de présence du volet (`if:` sur chaque étape) ;
+`actions/cache/restore` + `save` séparé de `data/textes` (le job rouge ne sauvegarde pas) ;
+journal `tee data/lancement.log` ; push avec 3 tentatives et `git pull --rebase` ; `!cancelled()`
+sur les alertes ; texte d'erreur passé en variable d'environnement, jamais en `${{ }}` dans le
+script. Le push porte `data/` **et** la page Décisions pré-rendue.
+
+Ordre de `scripts/refresh.js` (Montréal) : archive → élus, agglomération, districts (lundi) →
+robots → séances → séances d'arrondissement → décisions → votes → votes-décisions → contrats SEAO
+→ finances, adresses (lundi) → permis-travaux → taux (février) → lexique → récaps projets →
+projets-publics → projets-en → lexique-en → traductions → résumés → En bref → prérendu → courriels.
+
+Une source en panne ne doit jamais effacer ce qui était publié. Étapes secondaires en
+avertissement ; séances, décisions et votes en échec rendent le run rouge. **Aucune clé dans le
+dépôt.**
 
 ## 13. Pièges déjà rencontrés (ne pas les refaire)
 
-- `\w` ne couvre pas les accents : `conseill\w+` attrape « conseiller » et jamais
-  « conseillère » — toutes les femmes disparaissent sans erreur. Écrire `conseill[a-zà-ÿ]*`.
+- `\w` ne couvre pas les accents : écrire `conseill[a-zà-ÿ]*`.
 - Un champ listé dans le code du portail peut ne pas exister dans l'index (HTTP 400).
-- Les valeurs de facettes peuvent être stockées URL-encodées : double encodage dans les filtres.
-- Pagination sans départage = documents perdus ou dupliqués d'une page à l'autre.
-- Le modèle émet parfois `é` littéralement dans un outil : décoder à la source, et
-  garder un script de réparation.
-- Élargir une règle générique (« contrats ») avale les sujets : les sujets d'abord.
-- Les pluriels (« dérogations mineures », « usages conditionnels ») cassent les regex au singulier.
+- Facettes URL-encodées : double encodage dans les filtres.
+- Pagination sans départage = documents perdus ou dupliqués.
+- Le modèle émet parfois des `\uXXXX` littéraux : décoder, garder un script de réparation
+  (`scripts/reparer-echappements.js`).
+- Les sujets avant les véhicules ; les pluriels cassent les regex au singulier.
 - `Disallow` + `noindex` se contredisent.
-- Un scalaire YAML nu contenant « : » casse le workflow (« Invalid workflow file ») — bloc `|`.
-- Un tableau des décisions ou un procès-verbal cite des dizaines de sommaires : ne jamais lui
-  attacher le résumé du premier trouvé.
-- Un document daté de longtemps avant ce qu'on connaît n'est pas une « nouveauté » : sinon
-  le premier rattrapage remplit le fil de 2 800 « nouveautés ».
-- Les résumés grossissent d'une année à l'autre : prévoir leur archivage avant que ça pèse.
-- **Fichiers en fins de ligne Windows (CRLF)** : un remplacement scripté qui cherche `\n` ne trouve
-  rien ou abîme le fichier. Détecter la fin de ligne du fichier avant de remplacer.
-- **`String.replace(motif, texte)` interprète `$&`, `$'` et `$$`** dans le texte de remplacement
-  (un `$$` de SQL devient `$`, un `$'` recopie la fin du fichier) : passer une fonction,
-  `replace(motif, () => texte)`.
-- **Windows** : `process.exit()` pendant qu'un `fetch` est en cours fait planter Node (assertion
-  libuv). Laisser `main()` se terminer.
-- **Supabase** : `service_role` a besoin de `grant` explicites sur chaque table ; une fonction
-  reçoit `EXECUTE` pour tout le monde (`PUBLIC`) à sa création, il faut le révoquer ; ajouter une
-  valeur (un sujet de message, par exemple) oblige à modifier la contrainte `check` de la table.
-- **Les sommaires peuvent être cachés dans un document de séance** (Longueuil : colonne « Global »
-  du tableau des séances, un PDF SharePoint de 1 000 pages avec chaque sommaire et ses annexes).
-  Ouvrir toutes les colonnes de la page des séances avant de conclure « pas de sommaires publics ».
-  Un lien de partage SharePoint pose un cookie invité pendant sa redirection : `fetch` ne le rejoue
-  pas (401), il faut suivre la redirection à la main.
-- **Un jeu de données ouvertes peut être périmé** (Longueuil : districts et élus d'avant 2021 sur
-  Données Québec, découpage 2025 seulement sur la carte ArcGIS de la Ville). Recouper avec la page
-  des élus avant de dessiner la carte.
-- **Une année peut n'avoir aucun vote divisé** (Longueuil, 2026, un seul parti au conseil) : mesurer
-  l'année précédente avant de conclure qu'il n'y a pas de page Votes, et le dire sur la page.
-- **Un compte ou une liste qui ne se voit qu'une fois connecté** se teste avec un faux client
-  Supabase dans le navigateur, et le vrai aller-retour se vérifie après le déploiement.
+- Un scalaire YAML nu contenant « : » casse le workflow.
+- Un PV cite des dizaines de sommaires : ne jamais lui attacher le premier résumé trouvé.
+- Un vieux document n'est pas une « nouveauté ».
+- « Adopter » ≠ « Adopté » (seul le second ferme l'objet) ; les dissidences tiennent sur
+  plusieurs lignes ; un numéro de résolution du CE cité dans une résolution du CM n'ouvre pas de
+  bloc.
+- pdf.js 6 : détruire la tâche de chargement, `useSystemFonts` et `disableFontFace`.
+- Les noms d'acheteur SEAO se déclinent : regex, et attention aux villes voisines homonymes.
+- SEAO-2022 : les soumissions sont dans `r.bids` (0 soumission lue sinon).
+- Les PV arrivent des semaines après la séance : le dire dans la légende du courriel.
+- Une liste reçue en texte du modèle fait planter tout le lot : valider les types.
+- Fins de ligne CRLF ; `String.replace` interprète `$&`, `$'`, `$$` (passer une fonction) ;
+  `process.exit()` pendant un `fetch` plante Node sous Windows.
+- Supabase : `grant` explicites sur chaque nouvelle table (même SQL) ; révoquer `EXECUTE` à
+  PUBLIC ; préfixe de table propre au site.
+- Sommaires cachés dans un document de séance (Longueuil) ; jeu de données ouvertes périmé
+  (Longueuil) ; année sans vote divisé (Longueuil).
+- Ce qui ne se voit qu'une fois connecté se teste avec un faux client Supabase, puis en ligne.
 
 ## 14. Ordre de travail conseillé
 
-1. Étude de faisabilité (section 3), avec chiffres. Décider.
-2. Client de source + `decisions.js` : d'abord un échantillon, puis l'année.
-3. `themes.js` adapté aux libellés de la ville, jusqu'à zéro sans pastille.
-4. Site local (`npm run serve`) avec les seules décisions ; valider la lecture.
-5. `votes.js` avec le garde-fou du décompte ; viser 95 % de recoupements exacts.
+1. Faisabilité (section 3), avec chiffres. Décider.
+2. Découverte des conseils d'arrondissement s'il y en a : la lancer tôt, elle est longue.
+3. Client de source + séances + décisions : un échantillon, puis l'année.
+4. `themes.js` jusqu'à zéro sans pastille ; site local (`npm run serve`).
+5. Votes avec garde-fou ; votes-décisions.
 6. Élus, districts, instances sans page « membres ».
-7. Lexique, chiffré sur le corpus (il corrige les définitions écrites de tête).
-8. Résumés : `--dry-run` d'abord, un échantillon de 50, puis le lot en Batches.
-9. Courriel au greffe ; verrous `noindex` ; publication sous DQ ; icône et bouton retour.
-10. `refresh.js` + workflow ; vérifier un run planifié le lendemain.
-11. Espace abonnés (section 9) : attributs des fiches, listes de villes, projets suivables et
-    fichiers de Mes dossiers, puis le détail de l'argent ; vérifier avec un compte abonné.
-12. Campagne « demander une explication » (section 10), si la ville la reprend : tables et
-    agrégats d'abord, section publique ensuite, digest en dernier.
-13. README à jour à chaque étape : chaque décision technique y a sa raison.
-14. Le jour de la réponse de la ville : retirer les trois verrous, sitemap.
+7. Lexique chiffré.
+8. Résumés : `--dry-run`, échantillon de 50, puis le lot en Batches ; En bref.
+9. Contrats SEAO (jumelage par dossier), budget et taxes, Près de chez moi.
+10. Courriel au greffe ; publication sous DQ ; prérendu et image OG ; entrée dans `data/journal.json`.
+11. `refresh.js` + workflow ; vérifier un run planifié le lendemain.
+12. Couche commune (section 9) : listes, Mon dossier, courriels de ville.
+13. Version anglaise, si retenue.
+14. README à jour à chaque étape.
 
 ## 15. Conventions de travail
 
-- Le terminal de Martin est **PowerShell 5.1** : pas de `&&`, une commande par ligne. Quand
-  une commande doit tourner, Claude la lance lui-même et pousse lui-même ; on ne demande pas
-  « veux-tu que je… », on fait, on vérifie en ligne, on rend compte en une phrase.
-- Les domaines sont **dossierquebec.ca** et **dossiercanada.ca** — jamais `.com`.
-- Commits en français, message qui explique le pourquoi, signés avec la ligne
-  `Co-Authored-By` indiquée par la session.
-- Le README du volet est le journal du projet : ce qui a été mesuré, corrigé, et pourquoi.
-- Martin décide du produit ; il réagit sur ce qu'il voit. Montrer (capture, test dans le
-  navigateur), proposer une recommandation, et rester **consistant** d'une boîte à l'autre :
-  mêmes pastilles, mêmes menus dépliants, mêmes liens discrets.
-- Les clés et les secrets ne passent jamais dans la conversation : Martin les entre lui-même
-  (Vercel, GitHub, `api.env`). Le SQL à exécuter lui est donné prêt à coller.
+- Terminal de Martin : **PowerShell 5.1**. Claude lance et pousse lui-même, vérifie en ligne,
+  rend compte en une phrase.
+- Domaines : **dossierquebec.ca**, **dossiercanada.ca** — jamais `.com`.
+- Commits en français, avec la ligne `Co-Authored-By` indiquée par la session ; jamais
+  `git add` d'un dossier entier.
+- Tout changement visible ajoute son entrée FR+EN à `data/journal.json`.
+- Le README du volet est son journal.
+- Martin décide du produit : montrer, recommander, rester consistant d'une page à l'autre.
+- Les clés ne passent jamais dans la conversation ; le SQL est donné prêt à coller.
 
 ## 16. Liste de vérification de fin de mise en place
 
-- [ ] `https://dossierquebec.ca/<cle>/` s'ouvre (barre oblique finale) ; pages en `noindex`, lien
-      depuis DQ en `nofollow`, courriel au greffe envoyé et relance programmée.
-- [ ] Le menu « Ville : … » montre la ville, depuis les volets comme depuis Mes dossiers et
-      Abonnement.
-- [ ] Un run planifié du workflow a réussi le lendemain et poussé `data/`.
-- [ ] Mes dossiers, avec un compte abonné : projet suivi, mot-clé, organisme, agenda, export Excel
-      et PDF, courriel d'essai des alertes, demande de détail de l'argent.
-- [ ] Abonnement `?ville=<cle>` : « Le travail derrière le volet… » a ses chiffres.
-- [ ] Cellulaire 375 px : aucun débordement horizontal, outils sur une ligne ; thème clair et
-      sombre.
+- [ ] `https://dossierquebec.ca/<cle>/` s'ouvre ; les huit pages aussi (Contrats, Budget, Près de
+      chez moi compris).
+- [ ] Courriel au greffe envoyé, relance programmée.
+- [ ] Le menu « Ville : … » montre la ville, depuis les volets et depuis Mon dossier.
+- [ ] Un run planifié a réussi le lendemain et poussé `data/` et la page pré-rendue.
+- [ ] Une carte de contrat montre ses soumissionnaires ; une décision montre son vote.
+- [ ] Mon dossier : projet suivi, mot-clé, organisme ; courriel d'essai avec « Vos projets suivis » ;
+      le compte rendu du mois n'est pas vide.
+- [ ] `og-<ville>.png` 1200×630 testée ; `mesure.js` présent ; ville dans le sitemap.
+- [ ] `data/journal.json` a une entrée de la ville ; elle paraît sur sa page Sources.
+- [ ] Anglais : bascule FR/EN sur chaque page (si retenu).
+- [ ] Cellulaire 375 px : aucun débordement ; thème clair et sombre.
 - [ ] README du volet à jour ; ce guide aussi, s'il a appris quelque chose.
-- [ ] Pas de traduction anglaise qui tourne pour la ville (section 11).
-- [ ] Si le challenge est repris : une demande faite depuis un compte apparaît dans la section
-      publique **et** dans le filtre « 🔥 Challengés ».
-- [ ] Plus tard : retrait des verrous le jour de la réponse de la ville.
