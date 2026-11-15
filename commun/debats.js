@@ -92,6 +92,13 @@ export async function rendreDebats(zone) {
     <p class="db-note">${t.note}${auj !== jour && !pl ? '' : ''}</p>
   </section>`;
   zone.hidden = false;
+  // Accordéon : une seule séance ouverte à la fois, jamais zéro.
+  const cartes = [...zone.querySelectorAll('details.db-carte')];
+  for (const d of cartes) d.querySelector('summary').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (d.open) return;
+    for (const autre of cartes) autre.open = autre === d;
+  });
 }
 
 const zones = () => document.querySelectorAll('[data-debats], #debats');
