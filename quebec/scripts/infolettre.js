@@ -197,19 +197,6 @@ async function main() {
     const c = [...(f.numeros ?? [])].flatMap((n) => seao[n] ?? []).filter((x) => !x[2]);
     return c.length > 0 && c.every((x) => x[3] === 1);
   };
-  // Le compte rendu du mois : les contrats déclarés au SEAO que nous ne retrouvons dans aucune décision
-  // publiée, le plus souvent accordés par un fonctionnaire (délégation). Pas après une séance.
-  let sansDecision = [];
-  if (!seance) {
-    const relies = new Set(Object.values(seao).flat().map((x) => x[4]));
-    const { contrats: octrois = [] } = await lire('contrats').catch(() => ({}));
-    sansDecision = octrois
-      .filter((c) => c.date >= depuis && c.date <= jusqua && c.montant > 0 && !relies.has((c.url || '').split('ItemId=')[1]))
-      .sort((a, b) => b.montant - a.montant);
-  }
-  // « 878146000 (CDW Canada Corp) » → « CDW Canada Corp ».
-  const fournisseurDe = (c) => (/^\d+\s*\((.+)\)$/.exec(c.fournisseur ?? '')?.[1] ?? c.fournisseur ?? '').trim();
-  const modeDe = (c) => (c.gre ? 'gré à gré' : c.soumissions == null ? "appel d'offres" : `appel d'offres, ${c.soumissions === 1 ? '1 seule soumission' : pluriel(c.soumissions, 'soumission', 'soumissions')}`);
 
   // Les montants : on écarte les dépôts de rapports et de listes, qui parlent d'argent sans rien décider.
   const decidant = (f) => f.theme !== 'procedure' && !/prise d'acte|d[ée]p[ôo]t (?:de la|des|du)/i.test(f.objet ?? '');
@@ -325,10 +312,6 @@ async function main() {
       titre: 'Les contrats', icone: '📝', couleur: '#2563EB',
       chapeau: 'Les achats et les services confiés à des entreprises, du plus gros au plus petit. Montants avant taxes quand le document le précise.',
     },
-    seao: {
-      titre: 'Accordés sans décision publiée', icone: '📋', couleur: '#0E7490',
-      chapeau: "Des contrats de 25 000 $ et plus que la Ville a déclarés ce mois-ci au registre des contrats publics (SEAO), mais que nous n'avons retrouvés dans aucune de ses décisions publiées. La plupart sont accordés par un fonctionnaire, en vertu d'une délégation que la loi permet. Montants avec taxes, tels que déclarés au SEAO.",
-    },
     votes: {
       titre: 'Les votes divisés', icone: '🗳️', couleur: '#7C3AED',
       chapeau: "La plupart des résolutions passent sans opposition. Voici celles où des élus ont voté autrement que la majorité, regroupées quand ce sont les mêmes élus à la même séance.",
@@ -369,11 +352,6 @@ async function main() {
   autresCon.forEach(ligneMd);
   if (!contrats.length) L.push(seance ? 'Aucun à cette séance.' : 'Aucun ce mois-ci.');
   L.push('');
-  if (sansDecision.length) {
-    titreMd(SECTIONS.seao, sansDecision.length);
-    for (const c of sansDecision) L.push(`- **${argent(c.montant)}** — ${fournisseurDe(c)} · ${c.titre} *(${modeDe(c)}, ${jourMois(c.date)})* [SEAO](${c.url})`);
-    L.push('');
-  }
   titreMd(SECTIONS.votes, nbVotesDivises);
   for (const b of votesDivises) {
     L.push(`- **${b.instance}, ${jourMois(b.date)}** — ont voté ${b.cote} : ${b.noms.join(', ')}`);
@@ -605,17 +583,6 @@ async function main() {
   if (subventions.length !== autresSub.length) H.push(`<tr><td style="${POLICE};font-size:12px;color:${DOUX};padding:0 4px 4px">Plus ${subventions.length - autresSub.length} déjà dans les plus gros montants.</td></tr>`);
   liste2(SECTIONS.contrats, autresCon, contrats.length, seance ? 'Aucun à cette séance.' : 'Aucun ce mois-ci.');
   if (contrats.length !== autresCon.length) H.push(`<tr><td style="${POLICE};font-size:12px;color:${DOUX};padding:0 4px 4px">Plus ${contrats.length - autresCon.length} déjà dans les plus gros montants.</td></tr>`);
-
-  // Les contrats déclarés au SEAO sans décision retrouvée (compte rendu du mois seulement).
-  if (sansDecision.length) {
-    const s = SECTIONS.seao;
-    H.push(enTete(s, sansDecision.length));
-    const lignes = sansDecision.map((c, i) => `<tr style="background:${i % 2 ? teinte(s.couleur, 0.05) : '#ffffff'}">
-        <td valign="top" width="1" style="${POLICE};padding:10px 10px 10px 12px;white-space:nowrap"><span style="display:inline-block;padding:3px 10px;border-radius:6px;background:${s.couleur};color:#fff;font-weight:800;font-size:14px;white-space:nowrap">${echapper(argent(c.montant))}</span></td>
-        <td valign="top" style="${POLICE};padding:10px 12px 10px 0;font-size:14px;line-height:1.5;color:${ENCRE}"><strong>${echapper(fournisseurDe(c))}</strong> · ${echapper(c.titre)}${c.soumissions === 1 && !c.gre ? ` ${pastille('1 seule soumission', '#B45309')}` : ''}<div style="margin-top:3px;font-size:12px;color:${DOUX}">${echapper(modeDe(c).replace(', 1 seule soumission', ''))} · ${echapper(jourMois(c.date))} · ${lien('SEAO', c.url, s.couleur)}</div></td>
-      </tr>`).join('');
-    H.push(`<tr><td style="padding:0 0 6px"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border:1px solid ${teinte(s.couleur, 0.25)};border-top:4px solid ${s.couleur};border-radius:8px;border-collapse:separate;overflow:hidden">${lignes}</table></td></tr>`);
-  }
 
   // Les votes divisés
   H.push(enTete(SECTIONS.votes, nbVotesDivises));
