@@ -48,6 +48,25 @@ createServer(async (req, res) => {
   // n'était pas reconnu comme « / » et renvoyait un 404.
   const sansQuery = req.url.split('?')[0];
   const path = sansQuery === '/' ? '/index.html' : sansQuery;
+  // Les LECTURES de /api/ passent au site en ligne (14 nov. 2026) : sans ça, le bloc des courriels
+  // (et tout ce qui lit l'API) restait caché en local. Seulement GET et sans connexion : une
+  // inscription ou un changement depuis localhost ne touche jamais aux vraies données.
+  if (sansQuery.startsWith('/api/')) {
+    if (req.method !== 'GET') {
+      res.writeHead(403, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ erreur: 'En local, l’API est en lecture seule.' }));
+      return;
+    }
+    try {
+      const r = await fetch(`https://dossierquebec.ca${req.url}`, { headers: { Accept: 'application/json' } });
+      res.writeHead(r.status, { 'Content-Type': r.headers.get('content-type') || 'application/json', 'Cache-Control': 'no-store' });
+      res.end(Buffer.from(await r.arrayBuffer()));
+    } catch {
+      res.writeHead(502);
+      res.end('API en ligne injoignable');
+    }
+    return;
+  }
   try {
     const { data, ext } = await lire(path);
     // Pas de cache en développement : sans ça, le navigateur resservait
