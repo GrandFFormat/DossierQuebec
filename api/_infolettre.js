@@ -12,6 +12,7 @@ import crypto from 'node:crypto';
 import { supabase, site } from './_alertes.js';
 import { estActive } from './_stripe.js';
 import { aUneSection, choisirVersion } from './_section-abonnes.js';
+import { blocsProjetsSuivis } from './_projets-suivis.js';
 
 // Les villes qui ont des courriels. Une ville s'ajoute ici le jour où son volet en produit.
 // « assemblee » (21 oct. 2026) n'est pas une ville : c'est l'infolettre mensuelle de DossierQuébec sur
@@ -226,7 +227,7 @@ export async function abonnesParmi(inscriptions) {
 // Un numéro qui porte la section « Pour les abonné·e·s » (api/_section-abonnes.js, l'infolettre de
 // l'Assemblée) garde la version complète pour un·e abonné·e, l'aperçu pour les autres. Les comptes
 // rendus des villes n'en ont pas : ils partent tels quels.
-export function composer(numero, { id, bienvenue, abonne = false }) {
+export function composer(numero, { id, bienvenue, abonne = false, projets = '' }) {
   const mensuel = (numero.type ?? 'mensuel') === 'mensuel';
   const quoi = nomComplet({ ville: numero.ville, type: numero.type ?? 'mensuel', arrondissement: numero.arrondissement ?? '' });
   const bandeau = bienvenue
@@ -236,7 +237,8 @@ export function composer(numero, { id, bienvenue, abonne = false }) {
     <a href="${lienSigne('desinscrire', [id])}" style="color:#5B6470">Ne plus recevoir « ${echapper(quoi)} »</a> ·
     <a href="${lienSigne('desinscrire', [id], '&tout=1')}" style="color:#5B6470">me désinscrire de tout</a>`;
   const html = aUneSection(numero.html) ? choisirVersion(numero.html, abonne) : numero.html;
-  return html.replace('<!--BANDEAU-->', bandeau).replace('<!--DESINSCRIPTION-->', pied);
+  // <!--PROJETS--> (14 nov. 2026) : les projets de ville suivis par ce compte (api/_projets-suivis.js).
+  return html.replace('<!--BANDEAU-->', bandeau).replace('<!--PROJETS-->', projets).replace('<!--DESINSCRIPTION-->', pied);
 }
 
 // À la confirmation (ou à la case cochée dans Mes dossiers) : le plus récent compte rendu de chaque
@@ -252,7 +254,8 @@ export async function envoyerBienvenue(inscriptions) {
     if (numero) {
       if (!abonnes && aUneSection(numero.html)) abonnes = await abonnesParmi(inscriptions);
       const abonne = Boolean(abonnes?.has(i.user_id));
-      messages.push({ a: i.email, sujet: `Bienvenue — ${numero.titre}`, html: composer(numero, { id: i.id, bienvenue: true, abonne }), desinscription: lienSigne('desinscrire', [i.id]) });
+      const projets = numero.html.includes('<!--PROJETS-->') ? (await blocsProjetsSuivis(numero, [i])).get(i.user_id) ?? '' : '';
+      messages.push({ a: i.email, sujet: `Bienvenue — ${numero.titre}`, html: composer(numero, { id: i.id, bienvenue: true, abonne, projets }), desinscription: lienSigne('desinscrire', [i.id]) });
       envoyesPour.set(numero.mois, [...(envoyesPour.get(numero.mois) ?? []), i.id]);
     } else {
       const quand = (i.type ?? 'mensuel') === 'mensuel' ? prochainEnvoiDe(i.ville) : 'après la prochaine séance';
@@ -287,7 +290,8 @@ export async function envoyerNumerosEnAttente(plafond = PAR_JOUR) {
     if (lot.length) {
       // Le statut d'abonnement se lit au moment de l'envoi, lot par lot.
       const abonnes = aUneSection(numero.html) ? await abonnesParmi(lot) : new Set();
-      await envoyerCourriels(lot.map((i) => ({ a: i.email, sujet: numero.titre, html: composer(numero, { id: i.id, bienvenue: false, abonne: abonnes.has(i.user_id) }), desinscription: lienSigne('desinscrire', [i.id]) })));
+      const projets = numero.html.includes('<!--PROJETS-->') ? await blocsProjetsSuivis(numero, lot) : new Map();
+      await envoyerCourriels(lot.map((i) => ({ a: i.email, sujet: numero.titre, html: composer(numero, { id: i.id, bienvenue: false, abonne: abonnes.has(i.user_id), projets: projets.get(i.user_id) ?? '' }), desinscription: lienSigne('desinscrire', [i.id]) })));
       await supabase(`/rest/v1/infolettre_inscriptions?id=in.(${lot.map((i) => i.id).join(',')})`, { methode: 'PATCH', corps: { dernier_mois: numero.mois }, entetes: { Prefer: 'return=minimal' } });
       reste -= lot.length;
       rapport.envoyes += lot.length;

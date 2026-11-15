@@ -2560,6 +2560,8 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 #villes .vp-entete .md-villes-titre{margin:0;}
 #villes .vp-compte{display:inline-block; min-width:34px; padding:3px 9px; text-align:center; font-family:'Archivo',sans-serif; font-weight:900; font-size:16px; background:#FFD24D; color:#131313; border:3px solid #131313; box-shadow:3px 3px 0 #131313;}
 #villes .vp-compte[hidden]{display:none;}
+#villes .vp-note{margin:-6px 0 14px; padding:8px 12px; border:2px solid var(--ink); background:#FFD24D; color:#131313; font-size:14px; font-weight:700;}
+#villes .vp-note[hidden]{display:none;}
 #villes details.ab-suggestions{border:0; background:transparent; box-shadow:none; padding:0; margin:0;}
 #villes details.ab-suggestions > summary.vp-ajouter{position:absolute; top:24px; right:0; list-style:none; cursor:pointer; display:inline-flex; align-items:center; min-height:44px; padding:8px 16px; font-family:'Archivo',sans-serif; font-weight:800; font-size:15px; text-transform:uppercase; letter-spacing:.01em; background:var(--card); color:var(--ink); border:3px solid var(--ink); box-shadow:4px 4px 0 var(--ink); transition:transform .08s, box-shadow .08s;}
 #villes details.ab-suggestions > summary.vp-ajouter::after{content:none; display:none;}

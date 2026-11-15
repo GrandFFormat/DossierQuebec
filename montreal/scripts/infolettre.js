@@ -611,6 +611,9 @@ async function main() {
   H.push(enTete(SECTIONS.sujets));
   H.push(`<tr><td style="padding:0 0 6px;line-height:2.1">${sujets.map((s) => `<span style="${POLICE};display:inline-block;margin:0 6px 6px 0;padding:4px 11px;border-radius:999px;background:${s.couleur};color:#fff;font-size:13px;font-weight:700;white-space:nowrap">${echapper(s.libelle)} <span style="opacity:.85">${s.n}</span></span>`).join('')}</td></tr>`);
 
+  // « Vos projets suivis » : remplacé à l'envoi, pour chaque compte, par ses projets de cette ville
+  // (api/_projets-suivis.js, 14 nov. 2026) ; vide pour les autres.
+  H.push('<!--PROJETS-->');
   // L'invitation à suivre un projet (gratuit ; l'abonnement payant a été retiré le 27 sept. 2026), puis le pied
   H.push(`<tr><td style="padding:26px 0 0">
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#E8F6EE;border:1px solid #9FD9B6;border-radius:10px;border-collapse:separate"><tr><td style="${POLICE};padding:16px 18px;font-size:15px;line-height:1.55;color:${ENCRE}">

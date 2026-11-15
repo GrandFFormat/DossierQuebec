@@ -404,7 +404,7 @@ async function suggestions(s, suivisIds) {
        <summary class="vp-ajouter"><span class="vp-ajouter-ferme">+ ${tr('Ajouter un projet', 'Add a project')}</span><span class="vp-ajouter-ouvert">× ${tr('Fermer le catalogue', 'Close the catalogue')}</span></summary>
        <div class="ab-pliable-corps">
        <h3 class="vp-cat-titre">${connecte ? tr('Des projets à suivre', 'Projects to follow') : tr('Tous les projets de ville', 'All city projects')} <span class="vp-compte">${total}</span></h3>
-       <p class="ab-chapeau">${tr('Les grands dossiers de chaque ville, qui reviennent de séance en séance. Ouvrez un projet pour le lire ; suivez-le pour garder le fil de toutes ses décisions', "Each city's major files, which come back meeting after meeting. Open a project to read it; follow it to keep track of all its decisions. (Project descriptions and recaps are in French for now.)")}</p>
+       <p class="ab-chapeau">${tr('Les grands dossiers de chaque ville, qui reviennent de séance en séance. Ouvrez un projet pour le lire ; suivez-le pour recevoir ses nouvelles dans le compte rendu du mois de sa ville', "Each city's major files, which come back meeting after meeting. Open a project to read it; follow it to get its news in its city's monthly roundup, and keep track of all its decisions. (Project descriptions and recaps are in French for now.)")}</p>
        ${blocs.map((b, i) => [b, i]).sort(([a], [c]) => (c.ville === aOuvrir) - (a.ville === aOuvrir)).map(([b, i]) => `<section class="vp-ville" data-ville="${echapper(b.ville)}" style="--ville:${couleurVille(b.ville, i)}">
          <h4 class="vp-ville-titre">${echapper(VILLES[b.ville])} <span>${b.nombre} ${tr(pl(b.nombre, 'projet', 'projets'), pl(b.nombre, 'project', 'projects'))}</span></h4>
          ${b.legende?.texte ? `<p class="ab-note ab-legende-ville">${echapper(tr(b.legende.texte, b.legende.texteEn ?? b.legende.texte))}</p>` : ''}<div class="vp-grille">${b.cartes}</div>
@@ -414,6 +414,19 @@ async function suggestions(s, suivisIds) {
     : '';
 }
 
+async function inscrireAuMois(s, ville, titre) {
+  const note = document.getElementById('vpNote');
+  const r = await fetch('/api/infolettre?action=preferences', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${s.access_token}` },
+    body: JSON.stringify({ choix: [{ ville, type: 'mensuel', langue: EN && ville === 'montreal' ? 'en' : 'fr', actif: true }] }),
+  }).catch(() => null);
+  if (!note) return;
+  note.textContent = r?.ok
+    ? tr(`« ${titre} » est suivi. Ses nouvelles arriveront dans le compte rendu du mois de ${VILLES[ville] ?? ville}.`, `“${titre}” is followed. Its news will come in the ${VILLES[ville] ?? ville} monthly roundup.`)
+    : tr(`« ${titre} » est suivi.`, `“${titre}” is followed.`);
+  note.hidden = false;
+}
 const estProjet = (id) => id.startsWith('projet:');
 
 // « 1 décision en 2026 », « 128 décisions en 2026 » ; une date sans l'année (« 28 oct. »).
@@ -724,6 +737,9 @@ document.addEventListener('click', async (e) => {
       return;
     }
     mesurer('suggestion_suivre_projet', { ville: suggestion.dataset.ville, projet: suggestion.dataset.cle });
+    // Suivre, c'est recevoir ses nouvelles (Martin, 14 nov. 2026) : le compte rendu du mois de sa ville,
+    // coché d'office s'il ne l'était pas. Déjà inscrit·e : rien ne change.
+    inscrireAuMois(s, suggestion.dataset.ville, suggestion.dataset.titre).catch((e) => console.error('courriel du mois :', e));
     // On reste exactement où on est : suivre un projet ne doit pas expédier la page ailleurs
     // (Martin, 16 sept. 2026). La page se redessine sous les yeux, sans bouger ni rien déplier.
     const hauteur = window.scrollY;
