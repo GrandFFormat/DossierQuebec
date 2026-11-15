@@ -1923,132 +1923,8 @@ async function mdConsultations(isEn){
   </div>`;
 }
 
-// « REPRÉSENTEZ VOTRE VILLE », CÔTÉ ADMIN (7 nov. 2026) : les demandes du formulaire
-// /represente-ta-ville, gardées dans rtv_demandes (api/represente.js) au lieu de la boîte de Martin.
-// Regroupées par ville (la plus demandée d'abord), les entreprises en évidence. Lecture et statut
-// permis aux admins seulement par scripts/supabase-rtv-demandes.sql.
-async function renderAdminRtv(){
-  const zone = document.getElementById('adminRtv');
-  if(!zone) return;
-  if(!(await checkIsAdmin())){ zone.innerHTML = ''; return; }
-  const isEn = currentLang === 'en';
-  const voirArchives = zone.dataset.archives === '1';
-  let req = supabaseClient.from('rtv_demandes').select('id, created_at, ville, ville_cle, nom, courriel, profil, message, statut, provenance').order('created_at', { ascending: false }).limit(500);
-  if(!voirArchives) req = req.neq('statut', 'archivee');
-  const { data, error } = await req;
-  const titre = `<b>${isEn ? 'Requests: Represent your city (admin only)' : 'Demandes : Représentez votre ville (réservé aux admins)'}</b>`;
-  if(error){ console.error('renderAdminRtv:', error); zone.innerHTML = `<div class="account-note" style="margin:18px 0 10px;">${titre} — ${isEn ? 'Requests could not be read (table rtv_demandes missing?).' : 'Les demandes n’ont pas pu être lues (table rtv_demandes pas encore créée ?).'}</div>`; return; }
-  const h = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-  const PROFILS = isEn ? { citoyen: 'Citizen', organisme: 'Organization', entreprise: 'Business' } : { citoyen: 'Citoyen·ne', organisme: 'Organisme', entreprise: 'Entreprise' };
-  const STATUTS = isEn ? { nouvelle: 'new', repondue: 'answered', archivee: 'archived' } : { nouvelle: 'nouvelle', repondue: 'répondue', archivee: 'archivée' };
-  const villes = new Map();
-  for(const d of data || []){
-    if(!villes.has(d.ville_cle)) villes.set(d.ville_cle, { nom: d.ville, liste: [] });
-    villes.get(d.ville_cle).liste.push(d);
-  }
-  const groupes = [...villes.values()].sort((a, b) => b.liste.length - a.liste.length || a.nom.localeCompare(b.nom, 'fr'));
-  const sujet = (d) => encodeURIComponent(isEn ? `Dossier Québec — ${d.ville}` : `Dossier Québec — ${d.ville}`);
-  const carte = (d) => `<tr class="admin-preoc-${d.statut === 'nouvelle' ? 'nouveau' : 'classe'}">
-      <td>${h(String(d.created_at).slice(0, 10))}</td>
-      <td><b>${h(d.nom)}</b><br>${d.profil === 'entreprise' ? `<b>💼 ${PROFILS.entreprise}</b>` : h(PROFILS[d.profil] || d.profil)}<br><a href="mailto:${h(d.courriel)}?subject=${sujet(d)}">${h(d.courriel)}</a>${d.provenance ? `<br><small>${isEn ? 'From' : 'Arrivé·e par'} : ${h(d.provenance)}</small>` : ''}</td>
-      <td style="white-space:pre-wrap">${h(d.message) || '—'}</td>
-      <td>${h(STATUTS[d.statut] || d.statut)}</td>
-      <td class="admin-preoc-actions">${d.statut !== 'repondue' ? `<button class="account-btn" onclick="adminRtvStatut('${d.id}', 'repondue')">${isEn ? 'Answered' : 'Répondue'}</button> ` : ''}${d.statut !== 'archivee' ? `<button class="account-btn" onclick="adminRtvStatut('${d.id}', 'archivee')">${isEn ? 'Archive' : 'Archiver'}</button>` : `<button class="account-btn" onclick="adminRtvStatut('${d.id}', 'nouvelle')">${isEn ? 'Restore' : 'Ressortir'}</button>`}</td>
-    </tr>`;
-  const blocs = groupes.map((g) => {
-    const ent = g.liste.filter((d) => d.profil === 'entreprise').length;
-    const nouv = g.liste.filter((d) => d.statut === 'nouvelle').length;
-    return `<h4 style="margin:16px 0 6px;">${h(g.nom)} — ${g.liste.length} ${isEn ? 'request(s)' : (g.liste.length > 1 ? 'demandes' : 'demande')}${ent ? ` · <span style="background:#ffe08a;color:#16191D;padding:1px 6px;">💼 ${ent} ${isEn ? 'business(es)' : (ent > 1 ? 'entreprises' : 'entreprise')}</span>` : ''}${nouv ? ` · ${nouv} ${isEn ? 'new' : (nouv > 1 ? 'nouvelles' : 'nouvelle')}` : ''}</h4>
-      <div class="admin-preoc-defile"><table class="admin-preoc"><thead><tr><th>Date</th><th>${isEn ? 'Who' : 'Qui'}</th><th>Message</th><th>${isEn ? 'Status' : 'Statut'}</th><th></th></tr></thead><tbody>${g.liste.map(carte).join('')}</tbody></table></div>`;
-  }).join('');
-  zone.innerHTML = `<div class="account-note" style="margin:18px 0 10px;">${titre} — ${isEn
-    ? `${(data || []).length} request(s) from the /represente-ta-ville form, by city. Click the address to answer, then « Answered ».`
-    : `${(data || []).length} demande${(data || []).length > 1 ? 's' : ''} du formulaire /represente-ta-ville, par ville. Cliquez l’adresse pour répondre, puis « Répondue ».`}
-    <button class="account-btn" onclick="adminRtvArchives()">${voirArchives ? (isEn ? 'Hide archived' : 'Cacher les archivées') : (isEn ? 'Show archived' : 'Voir les archivées')}</button></div>
-    ${blocs || `<p class="account-note">${isEn ? 'No request yet.' : 'Aucune demande pour l’instant.'}</p>`}
-    <div id="adminRtvEncheres"></div>
-    <div id="adminRtvVisites"></div>`;
-  renderAdminRtvEncheres();
-  renderAdminRtvVisites();
-}
-// Les enchères de bannière (11 nov. 2026, rtv_encheres, scripts/supabase-rtv-encheres.sql) : par ville,
-// puis par mois en jeu. Classement des offres confirmées (meilleure offre par courriel, la première
-// confirmée passe devant à égalité, comme api/_enchere.js) ; les offres pas encore confirmées en gris.
-async function renderAdminRtvEncheres(){
-  const zone = document.getElementById('adminRtvEncheres');
-  if(!zone) return;
-  const isEn = currentLang === 'en';
-  const { data, error } = await supabaseClient.from('rtv_encheres').select('ville, ville_cle, mois_debut, mois_fin, montant, nom, entreprise, courriel, created_at, confirmee_at').order('mois_debut', { ascending: false }).order('montant', { ascending: false }).limit(1000);
-  const titre = `<b>${isEn ? 'Banner auctions (admin only)' : 'Enchères de bannière (réservé aux admins)'}</b>`;
-  if(error){ console.error('renderAdminRtvEncheres:', error); zone.innerHTML = `<div class="account-note" style="margin:22px 0 6px;">${titre} — ${isEn ? 'Bids could not be read (table rtv_encheres missing?).' : 'Les offres n’ont pas pu être lues (table rtv_encheres pas encore créée ?).'}</div>`; return; }
-  const h = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-  const dollars = (n) => isEn ? '$' + n.toLocaleString('en-CA') : n.toLocaleString('fr-CA') + ' $';
-  const jour = (s) => { const j = new Date(s + 'T12:00:00').toLocaleDateString(isEn ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'long', year: 'numeric' }); return isEn ? j : j.replace(/^1 /, '1er '); };
-  const quand = (s) => s ? new Date(s).toLocaleString(isEn ? 'en-CA' : 'fr-CA', { dateStyle: 'short', timeStyle: 'short' }) : '';
-  const auj = new Date().toISOString().slice(0, 10);
-  const fermeture = (m) => { const d = new Date(m + 'T12:00:00'); d.setDate(d.getDate() - 7); return d.toISOString().slice(0, 10); };
-  const villes = new Map();
-  for(const o of data || []){
-    if(!villes.has(o.ville_cle)) villes.set(o.ville_cle, { nom: o.ville, mois: new Map() });
-    const v = villes.get(o.ville_cle);
-    if(!v.mois.has(o.mois_debut)) v.mois.set(o.mois_debut, []);
-    v.mois.get(o.mois_debut).push(o);
-  }
-  const tableauMois = (mois, liste) => {
-    const confirmees = liste.filter((o) => o.confirmee_at).sort((a, b) => b.montant - a.montant || String(a.confirmee_at).localeCompare(String(b.confirmee_at)));
-    const rang = new Map(), vus = new Set();
-    for(const o of confirmees){ const c = o.courriel.toLowerCase(); if(!vus.has(c)){ vus.add(c); rang.set(o, vus.size); } }
-    const lignes = confirmees.concat(liste.filter((o) => !o.confirmee_at));
-    const f = fermeture(mois), ferme = auj > f;
-    return `<h5 style="margin:12px 0 4px;">${isEn ? 'Month' : 'Mois du'} ${jour(mois)} ${isEn ? 'to' : 'au'} ${jour(liste[0].mois_fin)} · ${ferme ? `<b>${isEn ? 'closed' : 'fermée'}</b>` : (isEn ? 'closes' : 'ferme le')} ${jour(f)} · ${vus.size} ${isEn ? 'bidder(s)' : (vus.size > 1 ? 'enchérisseurs' : 'enchérisseur')}</h5>
-      <div class="admin-preoc-defile"><table class="admin-preoc"><thead><tr><th>#</th><th>${isEn ? 'Bid' : 'Offre'}</th><th>${isEn ? 'Business' : 'Entreprise'}</th><th>${isEn ? 'Who' : 'Qui'}</th><th>${isEn ? 'Confirmed' : 'Confirmée'}</th></tr></thead><tbody>${lignes.map((o) => {
-        const r = rang.get(o);
-        return `<tr class="admin-preoc-${o.confirmee_at ? (r === 1 ? 'nouveau' : 'classe') : 'classe'}" style="${o.confirmee_at ? '' : 'opacity:.5'}">
-          <td>${r ? (r === 1 ? '<b>1</b>' : r) : '—'}</td>
-          <td><b>${dollars(o.montant)}</b></td>
-          <td>${h(o.entreprise)}</td>
-          <td>${h(o.nom)}<br><a href="mailto:${h(o.courriel)}">${h(o.courriel)}</a></td>
-          <td>${o.confirmee_at ? quand(o.confirmee_at) : (isEn ? 'not confirmed' : 'pas confirmée')}${!r && o.confirmee_at ? `<br><small>${isEn ? 'replaced by a higher bid' : 'remplacée par une offre plus haute'}</small>` : ''}</td>
-        </tr>`; }).join('')}</tbody></table></div>`;
-  };
-  const blocs = [...villes.values()].sort((a, b) => a.nom.localeCompare(b.nom, 'fr')).map((v) =>
-    `<h4 style="margin:16px 0 6px;">${h(v.nom)}</h4>` + [...v.mois].map(([m, l]) => tableauMois(m, l)).join('')).join('');
-  zone.innerHTML = `<div class="account-note" style="margin:22px 0 6px;">${titre} — ${isEn
-    ? 'Bids from the city pages, by city and by month. Rank 1 wins at closing: send the GHL invoice.'
-    : 'Offres faites sur les pages des villes, par ville et par mois. Le rang 1 gagne à la fermeture : lui envoyer la facture GHL.'}</div>
-    ${blocs || `<p class="account-note">${isEn ? 'No bid yet.' : 'Aucune offre pour l’instant.'}</p>`}`;
-}
-// Les visites de /represente-ta-ville (rtv_visites, scripts/supabase-rtv-visites.sql) : combien,
-// d'où (site d'origine ou ?utm_source), et depuis quelle page de DQ. 30 derniers jours.
-async function renderAdminRtvVisites(){
-  const zone = document.getElementById('adminRtvVisites');
-  if(!zone) return;
-  const isEn = currentLang === 'en';
-  const depuis = new Date(Date.now() - 30 * 864e5).toISOString();
-  const { data, error } = await supabaseClient.from('rtv_visites').select('created_at, source, page_interne, campagne').gte('created_at', depuis).order('created_at', { ascending: false }).limit(5000);
-  if(error){ console.error('renderAdminRtvVisites:', error); zone.innerHTML = `<p class="account-note">${isEn ? 'Visits could not be read (table rtv_visites missing?).' : 'Les visites n’ont pas pu être lues (table rtv_visites pas encore créée ?).'}</p>`; return; }
-  const h = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-  const compter = (cle) => { const m = new Map(); for(const v of data){ const k = cle(v); if(k) m.set(k, (m.get(k) || 0) + 1); } return [...m].sort((a, b) => b[1] - a[1]); };
-  const tableau = (titre, lignes) => lignes.length ? `<h4 style="margin:14px 0 6px;">${titre}</h4><table class="admin-preoc"><tbody>${lignes.map(([k, n]) => `<tr><td>${h(k)}</td><td style="text-align:right"><b>${n}</b></td></tr>`).join('')}</tbody></table>` : '';
-  const sources = compter((v) => v.source + (v.campagne ? ` (${v.campagne})` : ''));
-  const pages = compter((v) => v.page_interne);
-  const jours = compter((v) => String(v.created_at).slice(0, 10)).sort((a, b) => b[0].localeCompare(a[0]));
-  zone.innerHTML = `<div class="account-note" style="margin:22px 0 6px;"><b>${isEn ? 'Visits to /represente-ta-ville, last 30 days' : 'Visites de /represente-ta-ville, 30 derniers jours'}</b> — ${data.length} ${isEn ? 'visit(s), one per session' : (data.length > 1 ? 'visites, une par session' : 'visite, une par session')}</div>
-    ${tableau(isEn ? 'Where they came from' : 'D’où on arrive', sources)}
-    ${tableau(isEn ? 'From which DQ page' : 'Depuis quelle page de DQ', pages)}
-    ${tableau(isEn ? 'By day' : 'Par jour', jours)}`;
-}
-async function adminRtvStatut(id, statut){
-  const { error } = await supabaseClient.from('rtv_demandes').update({ statut }).eq('id', id);
-  if(error){ console.error('adminRtvStatut:', error); alert(currentLang === 'en' ? 'Not saved.' : 'Pas enregistré.'); }
-  renderAdminRtv();
-}
-function adminRtvArchives(){
-  const zone = document.getElementById('adminRtv');
-  if(zone){ zone.dataset.archives = zone.dataset.archives === '1' ? '' : '1'; renderAdminRtv(); }
-}
-window.adminRtvStatut = adminRtvStatut;
-window.adminRtvArchives = adminRtvArchives;
+// Les demandes, enchères et visites de « Représentez votre ville » ont déménagé dans /admin
+// (commun/admin.js, onglet « Représentez votre ville ») le 15 nov. 2026.
 
 // L'EXPORT DES DONNÉES (21 oct. 2026), premier outil de l'abonnement. Trois fichiers CSV des données
 // de l'Assemblée : votes nominaux (une ligne par député·e et par vote), présences, projets de loi.
@@ -3015,7 +2891,6 @@ async function checkIsAdmin(){
 const PETITION_TIERS = [1000, 5000, 25000];
 
 async function renderAdminFlagCounts(){
-  renderAdminRtv();
   if(!document.getElementById('adminFlagCounts')) return;   // vue absente de cette page
   const container = document.getElementById('adminFlagCounts');
   if(!container) return;

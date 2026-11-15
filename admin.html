@@ -23,6 +23,40 @@
   .tb-bande .tb-esp{flex:1;}
   .tb-sortir{font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; padding:6px 12px; background:transparent; color:#fff; border:2px solid #fff; cursor:pointer;}
   .tb-sortir:hover{background:#fff; color:var(--ink);}
+  .tb-onglets{display:flex; gap:4px; margin-left:18px;}
+  .tb-onglets button{font-family:'Archivo',sans-serif; font-size:14px; font-weight:800; padding:7px 12px; background:transparent; color:#fff; border:0; border-bottom:3px solid transparent; cursor:pointer;}
+  .tb-onglets button:hover{border-bottom-color:var(--gold-pale);}
+  .tb-onglets button[aria-pressed="true"]{border-bottom-color:var(--yellow); color:var(--yellow);}
+  @media (max-width:620px){ .tb-onglets{order:3; flex-basis:100%; margin:0;} .tb-onglets button{flex:1;} }
+
+  /* Onglet « Représentez votre ville » : demandes, enchères, visites. */
+  .tb-groupe{margin:0 0 22px;}
+  .tb-groupe h3{font-size:18px; font-weight:900; margin:0 0 8px; display:flex; flex-wrap:wrap; align-items:center; gap:8px;}
+  .tb-pastille{display:inline-block; font-size:12px; font-weight:800; padding:2px 8px; border:2px solid var(--ink); background:var(--card);}
+  .tb-pastille.jaune{background:var(--yellow);}
+  .tb-pastille.bleu{background:var(--gold); border-color:var(--gold); color:#fff;}
+  .tb-cartes{display:grid; gap:12px;}
+  .tb-dem{border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow-sm); padding:14px 16px; display:grid; grid-template-columns:minmax(0, 1fr) auto; gap:10px 16px;}
+  .tb-dem.nouvelle{border-left:10px solid var(--gold);}
+  .tb-dem.archivee{opacity:.6;}
+  .tb-dem-qui b{font-size:16px;}
+  .tb-dem-qui small, .tb-dem-meta{display:block; color:var(--slate); font-size:13px; margin-top:2px;}
+  .tb-dem-qui a{color:var(--gold); font-weight:700;}
+  .tb-dem-msg{grid-column:1 / -1; white-space:pre-wrap; font-size:14.5px; line-height:1.5; padding-top:10px; border-top:2px solid var(--line-soft);}
+  .tb-dem-actions{display:flex; gap:6px; align-items:flex-start; flex-wrap:wrap; justify-content:flex-end;}
+  .tb-btn{font-family:'Archivo',sans-serif; font-size:13px; font-weight:800; padding:6px 11px; background:var(--card); color:var(--ink); border:2px solid var(--ink); cursor:pointer; white-space:nowrap;}
+  .tb-btn:hover{background:var(--gold-soft);}
+  .tb-btn.plein{background:var(--ink); color:#fff;}
+  .tb-btn.plein:hover{background:var(--gold); border-color:var(--gold);}
+  .tb-tab{width:100%; border-collapse:collapse; font-size:14px; border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow-sm);}
+  .tb-tab th{text-align:left; font-family:'Archivo Narrow',sans-serif; font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--slate); padding:8px 10px; border-bottom:3px solid var(--ink);}
+  .tb-tab td{padding:9px 10px; border-top:2px solid var(--line-soft); vertical-align:top;}
+  .tb-tab tr.gagne td{background:var(--gold-soft);}
+  .tb-tab tr.pale td{opacity:.5;}
+  .tb-tab a{color:var(--gold); font-weight:700;}
+  .tb-defile{overflow-x:auto;}
+  .tb-mois{font-size:14px; font-weight:700; margin:12px 0 6px; color:var(--slate);}
+  @media (max-width:560px){ .tb-dem{grid-template-columns:1fr;} .tb-dem-actions{justify-content:flex-start;} }
 
   .tb{max-width:1180px; margin:0 auto; padding:30px 20px 90px;}
   .tb-tete{display:flex; align-items:flex-end; justify-content:space-between; gap:18px; flex-wrap:wrap; margin:0 0 24px;}
@@ -113,6 +147,10 @@
 <header class="tb-bande">
   <div class="tb-bande-in">
     <a class="tb-logo" href="/"><img src="/commun/dq.svg" alt="">DossierQuébec<small>Admin</small></a>
+    <nav class="tb-onglets" id="tbOnglets" hidden>
+      <button type="button" data-onglet="trafic" aria-pressed="true">Fréquentation</button>
+      <button type="button" data-onglet="rtv" aria-pressed="false">Représentez votre ville</button>
+    </nav>
     <span class="tb-esp"></span>
     <button class="tb-sortir" id="tbSortir" hidden>Se déconnecter</button>
   </div>

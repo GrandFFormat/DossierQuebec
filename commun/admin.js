@@ -12,6 +12,16 @@
   var NOMS_VILLE = { '': 'Assemblée nationale', quebec: 'Ville de Québec', montreal: 'Ville de Montréal', levis: 'Ville de Lévis', longueuil: 'Ville de Longueuil', laval: 'Ville de Laval' };
   var DEMO = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) && /[?&]demo=1/.test(location.search);
   var ouverts = {};
+  var onglets = document.getElementById('tbOnglets');
+  var onglet = 'trafic';
+  try { if (localStorage.getItem('dq:admin-onglet') === 'rtv') onglet = 'rtv'; } catch (e) {}
+  function montrerOnglets() {
+    onglets.hidden = false;
+    onglets.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.onglet === onglet)); });
+  }
+  onglets.querySelectorAll('button').forEach(function (b) {
+    b.addEventListener('click', function () { onglet = b.dataset.onglet; try { localStorage.setItem('dq:admin-onglet', onglet); } catch (e) {} charger(); });
+  });
 
   var h = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var n = function (x) { return Number(x || 0).toLocaleString('fr-CA'); };
@@ -20,6 +30,7 @@
 
   function connexion(message) {
     sortir.hidden = true;
+    onglets.hidden = true;
     zone.innerHTML = '<div class="tb-connexion"><h2>Tableau de bord</h2><p class="tb-note" style="margin:0">Réservé à l’équipe de DossierQuébec.</p>' +
       (message ? '<p class="tb-erreur" style="margin:14px 0 0">' + h(message) + '</p>' : '') +
       '<form id="tbForm"><label for="tbCourriel">Ton courriel</label><input id="tbCourriel" type="email" required autocomplete="email" placeholder="toi@exemple.ca">' +
@@ -114,8 +125,144 @@
     };
   }
 
+  // ---------- Onglet « Représentez votre ville » (déménagé du Lexique le 15 nov. 2026) ----------
+  // Les demandes du formulaire /represente-ta-ville (rtv_demandes), les enchères de bannière
+  // (rtv_encheres) et les visites de la page (rtv_visites, 30 jours). Mêmes tables et mêmes règles
+  // qu'avant : lecture et statut permis aux admins seulement.
+  var voirArchives = false;
+  var PROFILS = { citoyen: 'Citoyen·ne', organisme: 'Organisme', entreprise: 'Entreprise' };
+  var dollars = function (x) { return Number(x).toLocaleString('fr-CA') + ' $'; };
+  var jourLong = function (s) { return new Date(s + 'T12:00:00').toLocaleDateString('fr-CA', { day: 'numeric', month: 'long', year: 'numeric' }).replace(/^1 /, '1er '); };
+  var quand = function (s) { return s ? new Date(s).toLocaleString('fr-CA', { dateStyle: 'medium', timeStyle: 'short' }) : ''; };
+  function grouper(liste, cle) { var m = new Map(); liste.forEach(function (x) { var k = cle(x); if (!m.has(k)) m.set(k, []); m.get(k).push(x); }); return m; }
+
+  function blocDemandes(res) {
+    if (res.error) return '<p class="tb-erreur">Les demandes n’ont pas pu être lues : ' + h(res.error.message) + '</p>';
+    var data = res.data || [];
+    var villes = Array.from(grouper(data, function (d) { return d.ville_cle; }).values()).sort(function (a, b) { return b.length - a.length || a[0].ville.localeCompare(b[0].ville, 'fr'); });
+    var outil = '<button class="tb-btn" data-rtv="archives">' + (voirArchives ? 'Cacher les archivées' : 'Voir les archivées') + '</button>';
+    if (!data.length) return '<p class="tb-vide">Aucune demande pour l’instant.</p><p style="margin-top:10px">' + outil + '</p>';
+    return villes.map(function (liste) {
+      var ent = liste.filter(function (d) { return d.profil === 'entreprise'; }).length;
+      var nouv = liste.filter(function (d) { return d.statut === 'nouvelle'; }).length;
+      return '<div class="tb-groupe"><h3>' + h(liste[0].ville) + ' <span class="tb-pastille">' + pluriel(liste.length, 'demande', 'demandes') + '</span>' +
+        (ent ? '<span class="tb-pastille jaune">💼 ' + pluriel(ent, 'entreprise', 'entreprises') + '</span>' : '') +
+        (nouv ? '<span class="tb-pastille bleu">' + pluriel(nouv, 'nouvelle', 'nouvelles') + '</span>' : '') + '</h3><div class="tb-cartes">' +
+        liste.map(function (d) {
+          var sujet = encodeURIComponent('Dossier Québec — ' + d.ville);
+          var actions = (d.statut !== 'repondue' ? '<button class="tb-btn plein" data-statut="repondue" data-id="' + h(d.id) + '">Répondue</button>' : '') +
+            (d.statut !== 'archivee' ? '<button class="tb-btn" data-statut="archivee" data-id="' + h(d.id) + '">Archiver</button>' : '<button class="tb-btn" data-statut="nouvelle" data-id="' + h(d.id) + '">Ressortir</button>');
+          return '<article class="tb-dem ' + h(d.statut) + '"><div class="tb-dem-qui"><b>' + h(d.nom) + '</b> · ' + (d.profil === 'entreprise' ? '<b>💼 Entreprise</b>' : h(PROFILS[d.profil] || d.profil)) +
+            '<small><a href="mailto:' + h(d.courriel) + '?subject=' + sujet + '">' + h(d.courriel) + '</a></small>' +
+            '<span class="tb-dem-meta">' + h(quand(d.created_at)) + ' · ' + (d.statut === 'nouvelle' ? 'nouvelle' : d.statut === 'repondue' ? 'répondue' : 'archivée') + (d.provenance ? ' · arrivé·e par ' + h(d.provenance) : '') + '</span></div>' +
+            '<div class="tb-dem-actions">' + actions + '</div>' +
+            '<div class="tb-dem-msg">' + (h(d.message) || '—') + '</div></article>';
+        }).join('') + '</div></div>';
+    }).join('') + '<p>' + outil + '</p>';
+  }
+
+  // Classement des offres confirmées : meilleure offre par courriel, la première confirmée passe
+  // devant à égalité (comme api/_enchere.js) ; les offres pas encore confirmées en pâle.
+  function blocEncheres(res) {
+    if (res.error) return '<p class="tb-erreur">Les offres n’ont pas pu être lues : ' + h(res.error.message) + '</p>';
+    var data = res.data || [];
+    if (!data.length) return '<p class="tb-vide">Aucune offre pour l’instant.</p>';
+    var auj = new Date().toISOString().slice(0, 10);
+    var fermeture = function (m) { var d = new Date(m + 'T12:00:00'); d.setDate(d.getDate() - 7); return d.toISOString().slice(0, 10); };
+    var villes = Array.from(grouper(data, function (o) { return o.ville_cle; }).values()).sort(function (a, b) { return a[0].ville.localeCompare(b[0].ville, 'fr'); });
+    return villes.map(function (lv) {
+      return '<div class="tb-groupe"><h3>' + h(lv[0].ville) + '</h3>' + Array.from(grouper(lv, function (o) { return o.mois_debut; })).map(function (e) {
+        var mois = e[0], liste = e[1];
+        var conf = liste.filter(function (o) { return o.confirmee_at; }).sort(function (a, b) { return b.montant - a.montant || String(a.confirmee_at).localeCompare(String(b.confirmee_at)); });
+        var rang = new Map(), vus = new Set();
+        conf.forEach(function (o) { var c = o.courriel.toLowerCase(); if (!vus.has(c)) { vus.add(c); rang.set(o, vus.size); } });
+        var f = fermeture(mois), ferme = auj > f;
+        return '<p class="tb-mois">Du ' + jourLong(mois) + ' au ' + jourLong(liste[0].mois_fin) + ' · ' + (ferme ? '<b>fermée</b> le ' : 'ferme le ') + jourLong(f) + ' · ' + pluriel(vus.size, 'enchérisseur', 'enchérisseurs') + '</p>' +
+          '<div class="tb-defile"><table class="tb-tab"><thead><tr><th>Rang</th><th>Offre</th><th>Entreprise</th><th>Qui</th><th>Confirmée</th></tr></thead><tbody>' +
+          conf.concat(liste.filter(function (o) { return !o.confirmee_at; })).map(function (o) {
+            var r = rang.get(o);
+            return '<tr class="' + (r === 1 ? 'gagne' : (!o.confirmee_at ? 'pale' : '')) + '"><td>' + (r ? (r === 1 ? '<b>1</b>' : r) : '—') + '</td><td><b>' + dollars(o.montant) + '</b></td><td>' + h(o.entreprise) + '</td>' +
+              '<td>' + h(o.nom) + '<br><a href="mailto:' + h(o.courriel) + '">' + h(o.courriel) + '</a></td>' +
+              '<td>' + (o.confirmee_at ? h(quand(o.confirmee_at)) : 'pas confirmée') + (!r && o.confirmee_at ? '<br><small>remplacée par une offre plus haute</small>' : '') + '</td></tr>';
+          }).join('') + '</tbody></table></div>';
+      }).join('') + '</div>';
+    }).join('');
+  }
+
+  function blocVisites(res) {
+    if (res.error) return '<p class="tb-erreur">Les visites n’ont pas pu être lues : ' + h(res.error.message) + '</p>';
+    var data = res.data || [];
+    var compter = function (cle) { var m = new Map(); data.forEach(function (v) { var k = cle(v); if (k) m.set(k, (m.get(k) || 0) + 1); }); return Array.from(m); };
+    var sources = compter(function (v) { return v.source + (v.campagne ? ' [' + v.campagne + ']' : ''); }).sort(function (a, b) { return b[1] - a[1]; }).map(function (a) { return { nom: a[0] === 'direct' ? 'Direct' : a[0], n: a[1] }; });
+    var pages = compter(function (v) { return v.page_interne; }).sort(function (a, b) { return b[1] - a[1]; }).map(function (a) { return { nom: a[0], n: a[1] }; });
+    var parJour = compter(function (v) { return String(v.created_at).slice(0, 10); }).sort(function (a, b) { return a[0].localeCompare(b[0]); });
+    var max = parJour.length ? Math.max.apply(null, parJour.map(function (j) { return j[1]; })) : 0;
+    return '<div class="tb-chiffres" style="grid-template-columns:1fr; max-width:320px; margin-bottom:22px"><div class="tb-chiffre"><b>' + n(data.length) + '</b><span>Visites en 30 jours, une par session</span></div></div>' +
+      (parJour.length ? '<section class="tb-bloc"><div class="tb-courbe"><div class="tb-jours" style="height:120px">' + parJour.map(function (j) {
+        return '<div class="tb-jour"><s style="height:' + Math.max(3, Math.round(100 * j[1] / max)) + '%"></s><i>' + jourCourt(j[0]) + ' · ' + pluriel(j[1], 'visite', 'visites') + '</i></div>';
+      }).join('') + '</div><div class="tb-axe"><span>' + jourCourt(parJour[0][0]) + '</span><span>' + jourCourt(parJour[parJour.length - 1][0]) + '</span></div></div></section>' : '') +
+      '<div class="tb-deux"><section class="tb-bloc">' + titre('', 'D’où on arrive', 'Entre crochets : la province du site d’origine.') + liste('rtv-src', sources, 8) + '</section>' +
+      '<section class="tb-bloc">' + titre('', 'Depuis quelle page de DQ', '') + liste('rtv-pages', pages, 8) + '</section></div>';
+  }
+
+  var rtvDernier = null;
+  function rendreRtv(d) {
+    rtvDernier = d;
+    var nouv = ((d.demandes.data) || []).filter(function (x) { return x.statut === 'nouvelle'; }).length;
+    zone.innerHTML = '<div class="tb-tete"><div><h1>Représentez votre ville</h1><p>Les demandes du formulaire, les enchères de bannière et les visites de /represente-ta-ville. Clique l’adresse pour répondre, puis « Répondue ».</p></div></div>' +
+      '<section class="tb-bloc">' + titre('01', 'Demandes', nouv ? pluriel(nouv, 'nouvelle', 'nouvelles') + ' à traiter.' : 'Par ville, la plus demandée d’abord.') + blocDemandes(d.demandes) + '</section>' +
+      '<section class="tb-bloc">' + titre('02', 'Enchères de bannière', 'Le rang 1 gagne à la fermeture : lui envoyer la facture GHL.') + blocEncheres(d.encheres) + '</section>' +
+      '<section class="tb-bloc">' + titre('03', 'Visites de la page', '30 derniers jours.') + blocVisites(d.visites) + '</section>';
+    zone.querySelectorAll('[data-statut]').forEach(function (b) {
+      b.addEventListener('click', async function () {
+        b.disabled = true;
+        if (!DEMO) { var r = await sb.from('rtv_demandes').update({ statut: b.dataset.statut }).eq('id', b.dataset.id); if (r.error) { alert('Pas enregistré : ' + r.error.message); b.disabled = false; return; } }
+        chargerRtv();
+      });
+    });
+    zone.querySelectorAll('[data-rtv="archives"]').forEach(function (b) { b.addEventListener('click', function () { voirArchives = !voirArchives; chargerRtv(); }); });
+    zone.querySelectorAll('[data-plus]').forEach(function (b) { b.addEventListener('click', function () { ouverts[b.dataset.plus] = !ouverts[b.dataset.plus]; rendreRtv(rtvDernier); }); });
+  }
+
+  function demoRtv() {
+    var il = function (j) { return new Date(Date.now() - j * 864e5).toISOString(); };
+    var visites = [];
+    [['dossierquebec.ca', '', '/', 18], ['facebook.com', '', '/montreal/', 4], ['direct', 'nb', '/', 4], ['direct', '', '/levis/', 3], ['dossiernbrunswick.ca', 'nb', '', 2], ['dossiersaskatchewan.ca', 'sk', '', 2]].forEach(function (a) { for (var i = 0; i < a[3]; i++) visites.push({ created_at: il(i % 6), source: a[0], campagne: a[1], page_interne: a[2] }); });
+    return {
+      demandes: { data: [
+        { id: '1', created_at: il(0), ville: 'Sherbrooke', ville_cle: 'sherbrooke', nom: 'Marie Tremblay', courriel: 'marie@exemple.ca', profil: 'citoyen', message: 'J’aimerais voir les décisions du conseil de Sherbrooke.', statut: 'nouvelle', provenance: 'facebook.com' },
+        { id: '2', created_at: il(1), ville: 'Sherbrooke', ville_cle: 'sherbrooke', nom: 'Quincaillerie Fortin', courriel: 'info@exemple.ca', profil: 'entreprise', message: 'Intéressés à commanditer le volet.', statut: 'nouvelle', provenance: '' },
+        { id: '3', created_at: il(3), ville: 'Gatineau', ville_cle: 'gatineau', nom: 'Luc Gagnon', courriel: 'luc@exemple.ca', profil: 'organisme', message: '', statut: 'repondue', provenance: 'dossierquebec.ca' }] },
+      encheres: { data: [
+        { ville: 'Ville de Québec', ville_cle: 'quebec', mois_debut: '2026-12-01', mois_fin: '2026-12-31', montant: 350, nom: 'Paul Roy', entreprise: 'Boulangerie Roy', courriel: 'paul@exemple.ca', confirmee_at: il(2) },
+        { ville: 'Ville de Québec', ville_cle: 'quebec', mois_debut: '2026-12-01', mois_fin: '2026-12-31', montant: 300, nom: 'Anne Côté', entreprise: 'Côté Notaires', courriel: 'anne@exemple.ca', confirmee_at: il(3) },
+        { ville: 'Ville de Québec', ville_cle: 'quebec', mois_debut: '2026-12-01', mois_fin: '2026-12-31', montant: 400, nom: 'Jean Roy', entreprise: 'Garage Roy', courriel: 'jean@exemple.ca', confirmee_at: null }] },
+      visites: { data: visites }
+    };
+  }
+
+  async function chargerRtv() {
+    montrerOnglets(); sortir.hidden = DEMO;
+    if (DEMO) return rendreRtv(demoRtv());
+    var u = (await sb.auth.getUser()).data.user;
+    var adm = u ? await sb.from('admins').select('user_id').eq('user_id', u.id).maybeSingle() : { data: null };
+    if (!adm.data) { await sb.auth.signOut(); return connexion('Ce compte n’est pas dans la liste des admins.'); }
+    var reqDem = sb.from('rtv_demandes').select('id, created_at, ville, ville_cle, nom, courriel, profil, message, statut, provenance').order('created_at', { ascending: false }).limit(500);
+    if (!voirArchives) reqDem = reqDem.neq('statut', 'archivee');
+    var depuis = new Date(Date.now() - 30 * 864e5).toISOString();
+    var res = await Promise.all([
+      reqDem,
+      sb.from('rtv_encheres').select('ville, ville_cle, mois_debut, mois_fin, montant, nom, entreprise, courriel, created_at, confirmee_at').order('mois_debut', { ascending: false }).order('montant', { ascending: false }).limit(1000),
+      sb.from('rtv_visites').select('created_at, source, page_interne, campagne').gte('created_at', depuis).order('created_at', { ascending: false }).limit(5000)
+    ]);
+    if (onglet !== 'rtv') return;
+    rendreRtv({ demandes: res[0], encheres: res[1], visites: res[2] });
+  }
+
   async function charger() {
     zone.innerHTML = '<p class="tb-charge">Chargement…</p>';
+    if (onglet === 'rtv') return chargerRtv();
+    montrerOnglets();
     if (DEMO) return rendre(demo());
     var r = await sb.rpc('dq_mesures_resume', { jours: jours });
     if (r.error) {
