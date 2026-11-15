@@ -12,7 +12,7 @@ if (!document.querySelector('link[href="/commun/abonnes.css"]')) {
   document.head.appendChild(css);
 }
 import { client, VILLES, VILLES_PROJETS, VILLES_EN, VILLES_ATTENDUES, avisConsultation, marquerConsultation, echapper, dateFr, session, envoyerLien, chargerSuivis, suivre, limiteSuivis, nePlusSuivre, chargerDetail, rendreDetail, rendreDemande, demanderDetail, mesurer, formulaireMessage, dernierVolet, memoriserVolet, EN, tr } from '/commun/abonnes-client.js';
-import { boiteInfolettre } from '/commun/infolettre.js';
+import { boiteInfolettre, formulaireInfolettre } from '/commun/infolettre.js';
 const pl = (n, sing, plur) => (n > 1 ? plur : sing);
 import { libelleEn, themeEn } from '/quebec/assets/libelles-en.js';
 
@@ -146,7 +146,8 @@ const fichierProjet = (ville, cle) => (/^[\w-]{1,60}$/.test(cle) ? jeu(ville, cl
 
 function connexion() {
   $('#compte').innerHTML = '';
-  boiteInfolettre($('#infolettre'), null);
+  // Sans connexion : le formulaire public (courriel + choix de chaque ville), en haut de Mon dossier (14 nov. 2026).
+  formulaireInfolettre($('#infolettre')).catch((e) => console.error('courriels :', e));
   motsCles(null, false);
   organismesSuivis(null, false);
   // La connexion se fait une seule fois, dans la carte « Se connecter » de Mon dossier, plus haut.

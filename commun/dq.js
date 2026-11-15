@@ -1727,7 +1727,7 @@ async function mdRefonte(isEn, quota){
   document.getElementById('mdSuivis').hidden = !aDesSuivis;
   document.getElementById('villes').hidden = !currentUser;
   const courriels = document.getElementById('courriels');
-  if(courriels) courriels.hidden = !currentUser;
+  if(courriels) courriels.hidden = false; // visible aussi sans connexion : formulaire public (14 nov. 2026)
   const debut = document.getElementById('mdDebut');
   if(aDesSuivis) debut.innerHTML = '';
   else {

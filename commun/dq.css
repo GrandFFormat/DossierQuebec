@@ -2576,6 +2576,7 @@ body:not(.lang-en) .en-txt, body.lang-en .fr-txt{display:none;}
 .mdc-etat{margin:12px 0 0; font-size:13px; color:var(--slate);}
 #courriels{scroll-margin-top:120px;}
 .mdr-tete + #courriels{margin-top:18px;}
+#courriels:has(> #infolettre[hidden]){display:none;}
 
 /* Offrir un abonnement (3 nov. 2026) : une carte DQ repliée, ouverte par le bouton de l'en-tête. */
 .mdr-lien-btn{font:inherit; font-weight:800; padding:0; border:0; background:none; color:var(--gold); text-decoration:underline; cursor:pointer;}
