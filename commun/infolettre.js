@@ -10,7 +10,7 @@
 //   formulaire  — courriel + bouton « M'inscrire » ; les choix s'accumulent puis partent d'un coup ;
 //   boite       — connecté·e (Mon dossier) : chaque changement s'enregistre tout de suite.
 // Les champs portent les mêmes classes et data-* dans les deux modes (ab-mtl-blocs, ab-langue-case,
-// ab-sorte-ville, ab-arr-mtl, ab-arr-suivis, ab-arr-retirer) : un seul jeu de gestionnaires. Une ville à
+// ab-sorte-ville, ab-arr-case) : un seul jeu de gestionnaires. Une ville à
 // une seule langue a une case de langue cachée, cochée « fr ».
 
 import { session, mesurer, echapper, tr } from './abonnes-client.js';
@@ -62,6 +62,7 @@ const COURT = {
   conseil: () => tr('Chaque séance du conseil', 'Each council meeting'),
 };
 const NOM_LANGUE = { fr: 'Français', en: 'English' };
+const compteArr = (n) => (n ? tr(`${n} arrondissement${n > 1 ? 's' : ''}`, `${n} borough${n > 1 ? 's' : ''}`) : tr('Mon arrondissement', 'My borough'));
 
 // ---------- rendu ----------
 const caseLangueCachee = (ville) => `<input type="checkbox" class="ab-langue-case" data-ville="${echapper(ville)}" data-langue="fr" checked hidden>`;
@@ -88,8 +89,6 @@ function rangeeVille(etat, v, mode) {
   const cochees = actives.length ? actives : ['fr'];
   const suivis = mode === 'boite' ? arrondissementsSuivis(etat, ville, cochees) : [];
   const arrOffre = v.offre.find((o) => o.arrondissements);
-  const restants = (arrOffre?.arrondissements ?? []).filter((a) => !suivis.includes(a.cle));
-  const nomArr = (cle) => arrOffre?.arrondissements.find((a) => a.cle === cle)?.nom ?? cle;
 
   const chip = (o) => {
     if (!o) return '';
@@ -99,13 +98,11 @@ function rangeeVille(etat, v, mode) {
       <input type="checkbox" class="ab-sorte-ville" data-ville="${echapper(ville)}" data-type="${echapper(o.cle)}"${coche ? ' checked' : ''}><span>${COURT[o.cle]?.() ?? echapper(L.nom)}</span>
     </label>`;
   };
-  const puces = suivis.map((cle) => `<span class="ab-arr-puce cr-puce" data-arrondissement="${echapper(cle)}">${echapper(nomArr(cle))}<button type="button" class="ab-arr-retirer" data-ville="${echapper(ville)}" data-arrondissement="${echapper(cle)}" aria-label="${tr('Retirer', 'Remove')} ${echapper(nomArr(cle))}">×</button></span>`).join('');
-  const arr = arrOffre ? `<span class="ab-arr-suivis cr-puces">${puces}</span>${restants.length
-    ? `<select class="ab-arr-choix ab-arr-mtl cr-select" data-ville="${echapper(ville)}" title="${echapper(libSorte(arrOffre).quoi)}" aria-label="${tr('Ajouter un arrondissement', 'Add a borough')}">
-        <option value="">📍 ${suivis.length ? tr('+ un arrondissement', '+ a borough') : tr('Mon arrondissement…', 'My borough…')}</option>
-        ${restants.map((a) => `<option value="${echapper(a.cle)}">${echapper(a.nom)}</option>`).join('')}
-      </select>`
-    : `<span class="cr-quoi">${tr('Tous les arrondissements.', 'Every borough.')}</span>`}` : '';
+  // Les arrondissements : une pastille qui ouvre la liste, une case par arrondissement (Martin, 14 nov. 2026).
+  const arr = arrOffre ? `<details class="cr-arr"${suivis.length ? ` data-n="${suivis.length}"` : ''}>
+      <summary class="cr-chip cr-chip-arr" title="${echapper(libSorte(arrOffre).quoi)}">📍 <span class="cr-arr-compte">${compteArr(suivis.length)}</span> <span class="cr-caret" aria-hidden="true">▾</span></summary>
+      <div class="cr-arr-liste">${arrOffre.arrondissements.map((a) => `<label class="cr-arr-case"><input type="checkbox" class="ab-arr-case" data-ville="${echapper(ville)}" data-arrondissement="${echapper(a.cle)}"${suivis.includes(a.cle) ? ' checked' : ''}><span>${echapper(a.nom)}</span></label>`).join('')}</div>
+    </details>` : '';
   const langue = langues.length > 1
     ? `<span class="cr-langues" role="group" aria-label="${tr('Langue des courriels', 'Email language')}">${langues.map((lang) =>
       `<label class="cr-lang" title="${NOM_LANGUE[lang] ?? lang}"><input type="checkbox" class="ab-langue-case" data-ville="${echapper(ville)}" data-langue="${lang}"${cochees.includes(lang) ? ' checked' : ''}><span>${lang.toUpperCase()}</span></label>`).join('')}</span>`
@@ -136,32 +133,22 @@ function choixDepuisFormulaire(racine) {
     const langues = [...b.querySelectorAll('.ab-langue-case:checked')].map((c) => c.dataset.langue);
     if (!langues.length) continue;
     for (const c of b.querySelectorAll('.ab-sorte-ville:checked')) for (const langue of langues) out.push({ ville, type: c.dataset.type, langue });
-    const arrs = new Set([...b.querySelectorAll('.ab-arr-suivis [data-arrondissement]')].map((el) => el.dataset.arrondissement));
-    if (b.querySelector('.ab-arr-mtl')?.value) arrs.add(b.querySelector('.ab-arr-mtl').value);
-    for (const arrondissement of arrs) for (const langue of langues) out.push({ ville, type: 'arrondissement', arrondissement, langue });
+    for (const c of b.querySelectorAll('.ab-arr-case:checked')) for (const langue of langues) out.push({ ville, type: 'arrondissement', arrondissement: c.dataset.arrondissement, langue });
   }
   return out;
 }
 
-// Mode formulaire : un arrondissement choisi devient une puce (on peut en empiler plusieurs avant d'envoyer).
-function cablerPuces(racine) {
+// La liste des arrondissements : le compte dans la pastille suit les cases ; un clic ailleurs la referme.
+function cablerArrondissements(racine) {
   racine.addEventListener('change', (ev) => {
-    const sel = ev.target.closest('.ab-arr-mtl');
-    if (!sel?.value) return;
-    const liste = sel.closest('.ab-mtl-blocs')?.querySelector('.ab-arr-suivis');
-    if (!liste) return;
-    const nom = sel.selectedOptions[0]?.textContent ?? sel.value;
-    const puce = document.createElement('span');
-    puce.className = 'ab-arr-puce cr-puce';
-    puce.dataset.arrondissement = sel.value;
-    puce.innerHTML = `${echapper(nom)}<button type="button" class="ab-arr-retirer ab-arr-mtl-accum" aria-label="${tr('Retirer', 'Remove')} ${echapper(nom)}">×</button>`;
-    liste.appendChild(puce);
-    sel.querySelector(`option[value="${CSS.escape(sel.value)}"]`)?.remove();
-    sel.value = '';
-    if (sel.options.length === 1) sel.options[0].textContent = tr('📍 + un arrondissement', '📍 + a borough');
+    const d = ev.target.closest('.cr-arr');
+    if (!d || !ev.target.classList.contains('ab-arr-case')) return;
+    const n = d.querySelectorAll('.ab-arr-case:checked').length;
+    d.querySelector('.cr-arr-compte').textContent = compteArr(n);
+    if (n) d.dataset.n = n; else delete d.dataset.n;
   });
-  racine.addEventListener('click', (ev) => {
-    ev.target.closest('.ab-arr-mtl-accum')?.closest('.ab-arr-puce')?.remove();
+  document.addEventListener('click', (ev) => {
+    for (const d of racine.querySelectorAll('.cr-arr[open]')) if (!d.contains(ev.target)) d.open = false;
   });
 }
 
@@ -196,7 +183,7 @@ export async function formulaireInfolettre(zone, { ville = null } = {}) {
 
   const form = zone.querySelector('form');
   const etatTexte = form.querySelector('.cr-etat');
-  cablerPuces(form);
+  cablerArrondissements(form);
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -204,7 +191,7 @@ export async function formulaireInfolettre(zone, { ville = null } = {}) {
     const choix = choixDepuisFormulaire(form);
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { etatTexte.textContent = tr('Entrez une adresse courriel valide.', 'Enter a valid email address.'); return; }
     if (!choix.length) {
-      const sansLangue = [...form.querySelectorAll('.ab-mtl-blocs')].some((b) => !b.querySelector('.ab-langue-case:checked') && (b.querySelector('.ab-sorte-ville:checked') || b.querySelector('.ab-arr-suivis [data-arrondissement]')));
+      const sansLangue = [...form.querySelectorAll('.ab-mtl-blocs')].some((b) => !b.querySelector('.ab-langue-case:checked') && (b.querySelector('.ab-sorte-ville:checked') || b.querySelector('.ab-arr-case:checked')));
       etatTexte.textContent = sansLangue
         ? tr('Choisissez au moins une langue (FR ou EN).', 'Pick at least one language (FR or EN).')
         : tr('Cochez au moins un courriel.', 'Check at least one email.');
@@ -232,7 +219,8 @@ export async function formulaireInfolettre(zone, { ville = null } = {}) {
       ? tr(`<strong>C'est fait.</strong> Le plus récent de chaque sorte part vers ${echapper(email)}.`, `<strong>Done.</strong> The latest of each kind is on its way to ${echapper(email)}.`)
       : tr(`<strong>Presque fini :</strong> on vient d'écrire à ${echapper(email)}. Cliquez sur « Confirmer mon inscription » dans ce courriel. (Pas reçu ? Regardez dans les indésirables.)`, `<strong>Almost done:</strong> we just emailed ${echapper(email)}. Click “Confirmer mon inscription” in that email. (Not there? Check your spam folder.)`);
     form.reset();
-    form.querySelectorAll('.ab-arr-suivis').forEach((l) => { l.innerHTML = ''; });
+    form.querySelectorAll('.cr-arr-compte').forEach((c) => { c.textContent = compteArr(0); });
+    form.querySelectorAll('.cr-arr').forEach((d) => { delete d.dataset.n; d.open = false; });
   });
 }
 
@@ -252,11 +240,13 @@ export async function boiteInfolettre(zone, s, { premiereLigne = null } = {}) {
   const villes = villesIci.length ? villesIci : lesVilles;
 
   const dessiner = (message = '') => {
+    const ouvertes = [...zone.querySelectorAll('.cr-arr[open]')].map((d) => d.closest('.ab-mtl-blocs')?.dataset.ville);
     zone.innerHTML = `<section class="cr" aria-labelledby="crTitre">
       ${bloc(etat, { site, villes, mode: 'boite', titre: tr('Vos courriels', 'Your emails') })}
       ${premiereLigne?.html ?? ''}
       <p class="cr-etat" aria-live="polite">${message || tr(`Tout s’enregistre tout de suite. Envoyés à ${echapper(etat.courriel ?? '')}.`, `Everything is saved right away. Sent to ${echapper(etat.courriel ?? '')}.`)}</p>
     </section>`;
+    for (const d of zone.querySelectorAll('.cr-arr')) if (ouvertes.includes(d.closest('.ab-mtl-blocs')?.dataset.ville)) d.open = true;
     premiereLigne?.cabler?.(zone);
   };
   dessiner();
@@ -313,22 +303,15 @@ export async function boiteInfolettre(zone, s, { premiereLigne = null } = {}) {
       ev.target.disabled = true;
       return enregistrer(langues.map((langue) => ({ ville, type: ev.target.dataset.type, langue, actif: ev.target.checked })), ev.target.checked ? INSCRIT() : RETIRE());
     }
-    // Un arrondissement de plus.
-    if (ev.target.classList.contains('ab-arr-mtl') && ev.target.value) {
-      const arrondissement = ev.target.value;
-      const nom = ev.target.selectedOptions[0]?.textContent ?? arrondissement;
+    // Un arrondissement coché ou décoché.
+    if (ev.target.classList.contains('ab-arr-case')) {
+      const { arrondissement } = ev.target.dataset;
+      const nom = ev.target.nextElementSibling?.textContent ?? arrondissement;
       ev.target.disabled = true;
-      return enregistrer(langues.map((langue) => ({ ville, type: 'arrondissement', arrondissement, langue, actif: true })), tr(`${echapper(nom)} ajouté.`, `${echapper(nom)} added.`));
+      return enregistrer(langues.map((langue) => ({ ville, type: 'arrondissement', arrondissement, langue, actif: ev.target.checked })),
+        ev.target.checked ? tr(`${echapper(nom)} ajouté.`, `${echapper(nom)} added.`) : tr(`${echapper(nom)} retiré.`, `${echapper(nom)} removed.`));
     }
   };
-
-  zone.onclick = async (ev) => {
-    const retirer = ev.target.closest('.ab-arr-retirer');
-    const b = retirer?.closest('.ab-mtl-blocs');
-    if (!b) return;
-    const { ville, arrondissement } = retirer.dataset;
-    const langues = languesDuBloc(b);
-    retirer.disabled = true;
-    await enregistrer((langues.length ? langues : ['fr']).map((langue) => ({ ville, type: 'arrondissement', arrondissement, langue, actif: false })), tr('Arrondissement retiré.', 'Borough removed.'));
-  };
+  cablerArrondissements(zone);
 }
+
