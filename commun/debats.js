@@ -59,10 +59,17 @@ function carte(s, lang, t, { lienFiche = true, ouvert = false } = {}) {
   </details>`;
 }
 
+// La langue suit celle du site : ?lang=, sinon dvq:langue (le bouton EN de DQ change les deux sans recharger).
+function langueCourante() {
+  const demandee = new URLSearchParams(location.search).get('lang');
+  if (demandee === 'en' || demandee === 'fr') return demandee;
+  try { return localStorage.getItem('dvq:langue') === 'en' ? 'en' : 'fr'; } catch (e) { return 'fr'; }
+}
+
 export async function rendreDebats(zone) {
   if (!zone) return;
   chargerStyle();
-  const lang = zone.dataset.lang || (new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'fr');
+  const lang = zone.dataset.lang || langueCourante();
   const t = T[lang];
   const max = Number(zone.dataset.max || 4);
   const pl = zone.dataset.pl ? Number(zone.dataset.pl) : null;
@@ -87,4 +94,8 @@ export async function rendreDebats(zone) {
   zone.hidden = false;
 }
 
-for (const zone of document.querySelectorAll('[data-debats], #debats')) rendreDebats(zone);
+const zones = () => document.querySelectorAll('[data-debats], #debats');
+for (const zone of zones()) rendreDebats(zone);
+// Au clic sur le bouton de langue, dq.js met la langue à jour d'abord ; on redessine ensuite.
+document.addEventListener('click', (e) => { if (e.target.closest?.('#langToggle')) setTimeout(() => { for (const z of zones()) if (!z.dataset.lang) rendreDebats(z); }, 0); });
+window.addEventListener('storage', (e) => { if (e.key === 'dvq:langue') for (const z of zones()) if (!z.dataset.lang) rendreDebats(z); });
