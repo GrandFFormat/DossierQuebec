@@ -8,53 +8,117 @@
 <!-- Réservé aux comptes de la table `admins`. Lit la table dq_mesures par la fonction
      dq_mesures_resume (scripts/supabase-dq-mesures.sql) : où vont les gens et sur quoi ils pèsent,
      site de l'Assemblée et volets de ville. Pas de Google Analytics ni de Vercel ici : on ne se
-     mesure pas soi-même. -->
+     mesure pas soi-même. Design : la charte DQ (encre, papier, bleu Québec, ombres pleines). -->
 <link rel="icon" href="/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/commun/dq.css">
 <style>
-  .tb{max-width:1100px; margin:0 auto; padding:28px 20px 80px;}
-  .tb h1{font-size:34px; font-weight:900; letter-spacing:-.02em; margin:0 0 4px;}
-  .tb .sous{color:var(--slate); margin:0 0 22px; font-size:15px;}
-  .tb-periodes{display:flex; gap:8px; flex-wrap:wrap; margin:0 0 20px;}
-  .tb-periodes button{font-family:'Archivo',sans-serif; font-size:14px; font-weight:800; padding:8px 14px; background:var(--card); color:var(--ink); border:3px solid var(--ink); cursor:pointer;}
-  .tb-periodes button[aria-pressed="true"]{background:var(--ink); color:var(--card);}
-  .tb-chiffres{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; margin:0 0 22px;}
-  .tb-chiffre{border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow-sm); padding:14px 16px 12px; border-top:10px solid var(--gold);}
-  .tb-chiffre b{display:block; font-size:38px; font-weight:900; line-height:1.1;}
-  .tb-chiffre span{display:block; color:var(--slate); font-size:14px; margin-top:4px;}
-  .tb-grille{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:18px;}
-  .tb-carte{border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow-sm); padding:14px 16px 12px; min-width:0;}
-  .tb-carte.large{grid-column:1 / -1;}
-  .tb-carte h2{font-size:18px; font-weight:900; margin:0 0 4px;}
-  .tb-carte .aide{color:var(--slate); font-size:13px; margin:0 0 10px; line-height:1.4;}
-  .tb-table{width:100%; border-collapse:collapse; font-size:14px;}
-  .tb-table td{padding:6px 4px; border-top:2px solid var(--line-soft); vertical-align:top;}
-  .tb-table td:last-child{text-align:right; font-weight:800; white-space:nowrap;}
-  .tb-table .petit{display:block; color:var(--slate); font-size:12px; word-break:break-all;}
-  .tb-barre{display:block; height:6px; background:var(--gold); margin-top:4px;}
-  .tb-jours{display:flex; align-items:flex-end; gap:3px; height:140px; margin:8px 0 2px;}
-  .tb-jour{flex:1; min-width:4px; background:var(--ink); position:relative;}
-  .tb-jour:hover{background:var(--gold);}
-  .tb-jour i{position:absolute; bottom:100%; left:50%; transform:translateX(-50%); background:var(--ink); color:var(--card); font-style:normal; font-size:11px; padding:2px 6px; white-space:nowrap; display:none; margin-bottom:3px;}
+  body{background:var(--paper); color:var(--ink);}
+  .tb-bande{background:var(--ink-bg); color:#fff; border-bottom:4px solid var(--gold);}
+  .tb-bande-in{max-width:1180px; margin:0 auto; padding:14px 20px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+  .tb-logo{display:flex; align-items:center; gap:10px; color:#fff; text-decoration:none; font-weight:900; font-size:18px; letter-spacing:-.01em;}
+  .tb-logo img{width:30px; height:30px; display:block;}
+  .tb-logo small{font-family:'Archivo Narrow',sans-serif; font-weight:600; font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--gold-pale); margin-left:4px;}
+  .tb-bande .tb-esp{flex:1;}
+  .tb-sortir{font-family:'Archivo',sans-serif; font-size:13px; font-weight:700; padding:6px 12px; background:transparent; color:#fff; border:2px solid #fff; cursor:pointer;}
+  .tb-sortir:hover{background:#fff; color:var(--ink);}
+
+  .tb{max-width:1180px; margin:0 auto; padding:30px 20px 90px;}
+  .tb-tete{display:flex; align-items:flex-end; justify-content:space-between; gap:18px; flex-wrap:wrap; margin:0 0 24px;}
+  .tb-tete h1{font-size:clamp(34px, 6vw, 56px); font-weight:900; letter-spacing:-.035em; line-height:.95; margin:0;}
+  .tb-tete p{margin:8px 0 0; color:var(--slate); font-size:15px; max-width:560px;}
+  .tb-periodes{display:inline-flex; border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow-sm);}
+  .tb-periodes button{font-family:'Archivo',sans-serif; font-size:14px; font-weight:800; padding:9px 14px; background:transparent; color:var(--ink); border:0; border-left:3px solid var(--ink); cursor:pointer; white-space:nowrap;}
+  .tb-periodes button:first-child{border-left:0;}
+  .tb-periodes button:hover{background:var(--gold-soft);}
+  .tb-periodes button[aria-pressed="true"]{background:var(--ink); color:#fff;}
+
+  .tb-chiffres{display:grid; grid-template-columns:repeat(4, 1fr); border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow); margin:0 0 30px;}
+  .tb-chiffre{padding:18px 20px 16px; border-left:3px solid var(--ink); min-width:0;}
+  .tb-chiffre:first-child{border-left:0; background:var(--gold); color:#fff;}
+  .tb-chiffre:first-child span{color:var(--gold-paler);}
+  .tb-chiffre b{display:block; font-size:clamp(34px, 5vw, 54px); font-weight:900; letter-spacing:-.04em; line-height:1; font-variant-numeric:tabular-nums;}
+  .tb-chiffre span{display:block; font-family:'Archivo Narrow',sans-serif; font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; color:var(--slate); margin-top:8px;}
+
+  .tb-titre{display:flex; align-items:baseline; gap:12px; margin:0 0 12px; padding-top:14px; border-top:3px solid var(--ink);}
+  .tb-titre h2{font-size:22px; font-weight:900; letter-spacing:-.02em; margin:0;}
+  .tb-titre .num{font-family:'Archivo Narrow',sans-serif; font-weight:700; color:var(--gold); font-size:15px;}
+  .tb-titre p{margin:0 0 0 auto; color:var(--slate); font-size:13px; text-align:right; max-width:420px;}
+  .tb-bloc{margin:0 0 36px;}
+  .tb-deux{display:grid; grid-template-columns:1fr 1fr; gap:30px; margin:0 0 36px;}
+  .tb-deux .tb-bloc{margin:0;}
+
+  .tb-courbe{border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow-sm); padding:18px 18px 10px;}
+  .tb-jours{display:flex; align-items:flex-end; gap:4px; height:170px;}
+  .tb-jour{flex:1; min-width:3px; height:100%; display:flex; align-items:flex-end; position:relative; cursor:default;}
+  .tb-jour s{display:block; width:100%; background:var(--gold); text-decoration:none;}
+  .tb-jour:hover s{background:var(--ink);}
+  .tb-jour i{position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); background:var(--ink); color:#fff; font-style:normal; font-size:12px; font-weight:700; padding:4px 8px; white-space:nowrap; display:none; z-index:2;}
   .tb-jour:hover i{display:block;}
-  .tb-axe{display:flex; justify-content:space-between; color:var(--slate); font-size:12px;}
-  .tb-vide{color:var(--slate); font-style:italic;}
-  .tb-connexion{max-width:460px; border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow-sm); padding:18px;}
-  .tb-connexion input{width:100%; font:inherit; font-size:16px; padding:9px 10px; border:3px solid var(--ink); margin:8px 0 10px; background:var(--paper); color:var(--ink);}
-  .tb-connexion button, .tb-sortir{font-family:'Archivo',sans-serif; font-size:15px; font-weight:800; padding:9px 16px; background:var(--ink); color:var(--card); border:3px solid var(--ink); cursor:pointer;}
-  .tb-sortir{font-size:13px; padding:5px 10px; float:right;}
+  .tb-axe{display:flex; justify-content:space-between; border-top:3px solid var(--ink); margin-top:0; padding-top:6px; font-family:'Archivo Narrow',sans-serif; font-size:13px; font-weight:600; color:var(--slate);}
+
+  .tb-liste{list-style:none; margin:0; padding:0; border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow-sm);}
+  .tb-liste li{display:grid; grid-template-columns:34px minmax(0, 1fr) auto; gap:12px; align-items:center; padding:10px 14px; border-top:2px solid var(--line-soft); position:relative;}
+  .tb-liste li:first-child{border-top:0;}
+  .tb-rang{font-family:'Archivo Narrow',sans-serif; font-weight:700; font-size:14px; color:var(--slate); font-variant-numeric:tabular-nums;}
+  .tb-liste li:nth-child(-n+3) .tb-rang{color:var(--gold);}
+  .tb-nom{min-width:0;}
+  .tb-nom b{display:block; font-weight:700; font-size:15px; line-height:1.3; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .tb-nom small{display:block; font-size:12px; color:var(--slate); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-top:1px;}
+  .tb-barre{display:block; height:5px; background:var(--line-soft); margin-top:6px;}
+  .tb-barre s{display:block; height:100%; background:var(--gold); text-decoration:none;}
+  .tb-val{text-align:right; font-weight:900; font-size:18px; font-variant-numeric:tabular-nums; white-space:nowrap;}
+  .tb-val small{display:block; font-weight:600; font-size:12px; color:var(--slate);}
+  .tb-plus{display:block; width:100%; font-family:'Archivo',sans-serif; font-size:13px; font-weight:800; padding:10px; background:var(--paper-2); color:var(--ink); border:0; border-top:3px solid var(--ink); cursor:pointer;}
+  .tb-plus:hover{background:var(--gold-soft);}
+
+  .tb-villes .tb-liste li{grid-template-columns:minmax(0, 1fr) auto; padding:14px 16px;}
+  .tb-villes .tb-nom b{font-size:17px; font-weight:800;}
+  .tb-villes .tb-barre{height:10px;}
+
+  .tb-vide{padding:22px 16px; color:var(--slate); font-style:italic; border:3px dashed var(--line-soft); text-align:center;}
+  .tb-pied{margin:10px 0 0; padding-top:14px; border-top:2px solid var(--line-soft); color:var(--slate); font-size:13px; line-height:1.5;}
+  .tb-langues{display:inline-flex; gap:8px; margin-right:10px;}
+  .tb-langues b{display:inline-block; padding:1px 7px; border:2px solid var(--ink); background:var(--card); color:var(--ink); font-size:12px;}
+
+  .tb-connexion{max-width:480px; margin:40px auto 0; border:3px solid var(--ink); background:var(--card); box-shadow:var(--shadow); border-top:10px solid var(--gold); padding:22px 22px 18px;}
+  .tb-connexion h2{font-size:24px; font-weight:900; letter-spacing:-.02em; margin:0 0 4px;}
+  .tb-connexion label{display:block; font-weight:700; font-size:14px; margin-top:14px;}
+  .tb-connexion input{width:100%; font:inherit; font-size:16px; padding:10px 12px; border:3px solid var(--ink); margin:6px 0 12px; background:var(--paper-2); color:var(--ink);}
+  .tb-connexion input:focus{outline:3px solid var(--yellow); outline-offset:1px;}
+  .tb-connexion button{width:100%; font-family:'Archivo',sans-serif; font-size:16px; font-weight:800; padding:12px 16px; background:var(--ink); color:#fff; border:3px solid var(--ink); cursor:pointer; box-shadow:var(--shadow-sm);}
+  .tb-connexion button:hover{background:var(--gold); border-color:var(--gold);}
   .tb-note{color:var(--slate); font-size:13px; margin:12px 0 0; line-height:1.45;}
-  .tb-erreur{border:3px solid #a3261f; color:#a3261f; padding:10px 14px; font-weight:700; margin:0 0 18px;}
+  .tb-erreur{border:3px solid var(--red); background:var(--red-soft); color:var(--ink); padding:12px 16px; font-weight:700; margin:0 0 18px;}
+  .tb-charge{padding:60px 0; text-align:center; font-family:'Archivo Narrow',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--slate);}
+
+  @media (max-width:860px){
+    .tb-chiffres{grid-template-columns:1fr 1fr;}
+    .tb-chiffre:nth-child(3){border-left:0;}
+    .tb-chiffre:nth-child(n+3){border-top:3px solid var(--ink);}
+    .tb-deux{grid-template-columns:1fr;}
+    .tb-titre{flex-wrap:wrap;}
+    .tb-titre p{margin:0; text-align:left; flex-basis:100%;}
+  }
+  @media (max-width:520px){
+    .tb-periodes{display:flex; width:100%;}
+    .tb-periodes button{flex:1; padding:9px 6px; font-size:13px;}
+    .tb-chiffre{padding:14px 14px 12px;}
+    .tb-liste li{grid-template-columns:26px minmax(0, 1fr) auto; gap:8px; padding:10px;}
+  }
 </style>
 </head>
 <body>
+<header class="tb-bande">
+  <div class="tb-bande-in">
+    <a class="tb-logo" href="/"><img src="/commun/dq.svg" alt="">DossierQuébec<small>Admin</small></a>
+    <span class="tb-esp"></span>
+    <button class="tb-sortir" id="tbSortir" hidden>Se déconnecter</button>
+  </div>
+</header>
 <main class="tb">
-  <a href="/" style="font-size:13px; font-weight:800; text-decoration:none; color:var(--ink);">← DossierQuébec</a>
-  <h1>Tableau de bord</h1>
-  <p class="sous">Où vont les gens et sur quoi ils pèsent. Site de l'Assemblée et volets de ville, toutes langues. Aucune donnée personnelle.</p>
-  <div id="tbZone"><p class="tb-vide">Chargement…</p></div>
+  <div id="tbZone"><p class="tb-charge">Chargement…</p></div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/commun/admin.js"></script>
