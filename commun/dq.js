@@ -1753,10 +1753,11 @@ async function mdRefonte(isEn, quota){
   ];
   document.getElementById('mdPlus').innerHTML = `<div class="mdr-plus-tete"><h2 class="mdr-h2">${isEn ? 'Going further · subscribers' : 'Pour aller plus loin · abonné·e·s'}</h2>
       <span><a class="md-lien" href="/abonnement${L}#code">${isEn ? 'Received a code?' : 'Vous avez reçu un code ?'}</a> · <a class="md-lien" href="/abonnement${L}">${isEn ? 'See the subscription →' : 'Voir l’abonnement →'}</a></span></div>
-    <div class="mdr-tuiles">${tuiles.map(([id, ic, t, st]) => abonne
-      ? `<button type="button" class="mdr-tuile" data-outil="${id}" aria-expanded="${_mdOuvert === id}" aria-controls="${id}" onclick="mdOuvrirOutil('${id}')">${mdIcone(ic)}<b>${t}</b><span>${st}</span></button>`
-      : `<a class="mdr-tuile" href="/abonnement${L}">${mdIcone(ic)}<b>${t}</b><span>${st}</span></a>`).join('')}</div>`;
-  tuiles.forEach(([id]) => { const z = document.getElementById(id); if(z) z.hidden = !(abonne && _mdOuvert === id); });
+    <div class="mdr-tuiles">${tuiles.map(([id, ic, t, st]) =>
+      // Toutes les tuiles ouvrent leur outil, abonné·e ou non (Martin, 14 nov. 2026) : sans abonnement,
+      // on voit ce que l'outil fait et à quoi il ressemble ; seule l'action reste réservée.
+      `<button type="button" class="mdr-tuile" data-outil="${id}" aria-expanded="${_mdOuvert === id}" aria-controls="${id}" onclick="mdOuvrirOutil('${id}')">${mdIcone(ic)}<b>${t}</b><span>${st}</span></button>`).join('')}</div>`;
+  tuiles.forEach(([id]) => { const z = document.getElementById(id); if(z) z.hidden = _mdOuvert !== id; });
   if(location.hash === '#ecrire') mdBasculerEcrire(true);
 }
 function mdOuvrirOutil(id){
