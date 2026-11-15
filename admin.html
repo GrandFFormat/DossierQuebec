@@ -31,6 +31,18 @@
 
   /* Onglet « Représentez votre ville » : demandes, enchères, visites. */
   .tb-groupe{margin:0 0 22px;}
+  /* Onglet « Villes » : toutes les villes de tous les sites Dossier, par province. */
+  .tb-prov{margin:0 0 30px;}
+  .tb-prov h2{font-size:22px; font-weight:900; margin:0 0 10px; padding-bottom:6px; border-bottom:3px solid var(--ink);}
+  .tb-prov h2 small{font-family:'Archivo Narrow',sans-serif; font-weight:600; font-size:14px; margin-left:8px;}
+  .tb-cartes{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:14px;}
+  .tb-carte{background:var(--card); border:2px solid var(--ink); box-shadow:4px 4px 0 var(--ink); padding:14px 16px;}
+  .tb-carte h3{font-size:18px; font-weight:900; margin:0 0 6px; display:flex; flex-wrap:wrap; gap:6px; align-items:center;}
+  .tb-carte p{margin:6px 0; font-size:14px; line-height:1.45;}
+  .tb-carte .tb-liens{display:flex; flex-wrap:wrap; gap:10px; font-size:13px; font-weight:700; margin-top:10px;}
+  .tb-pastille.rouge{background:#f6d5d2; border-color:#a3281e; color:#a3281e;}
+  .tb-pastille.gris{background:transparent; border-style:dashed;}
+  .tb-vide-prov{font-size:14px; margin:0;}
   .tb-groupe h3{font-size:18px; font-weight:900; margin:0 0 8px; display:flex; flex-wrap:wrap; align-items:center; gap:8px;}
   .tb-pastille{display:inline-block; font-size:12px; font-weight:800; padding:2px 8px; border:2px solid var(--ink); background:var(--card);}
   .tb-pastille.jaune{background:var(--yellow);}
@@ -150,6 +162,7 @@
     <nav class="tb-onglets" id="tbOnglets" hidden>
       <button type="button" data-onglet="trafic" aria-pressed="true">Fréquentation</button>
       <button type="button" data-onglet="rtv" aria-pressed="false">Représentez votre ville</button>
+      <button type="button" data-onglet="villes" aria-pressed="false">Villes</button>
     </nav>
     <span class="tb-esp"></span>
     <button class="tb-sortir" id="tbSortir" hidden>Se déconnecter</button>

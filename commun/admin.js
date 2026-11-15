@@ -14,7 +14,7 @@
   var ouverts = {};
   var onglets = document.getElementById('tbOnglets');
   var onglet = 'trafic';
-  try { if (localStorage.getItem('dq:admin-onglet') === 'rtv') onglet = 'rtv'; } catch (e) {}
+  try { var o0 = localStorage.getItem('dq:admin-onglet'); if (o0 === 'rtv' || o0 === 'villes') onglet = o0; } catch (e) {}
   function montrerOnglets() {
     onglets.hidden = false;
     onglets.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.onglet === onglet)); });
@@ -259,9 +259,110 @@
     rendreRtv({ demandes: res[0], encheres: res[1], visites: res[2] });
   }
 
+  // ---------- Onglet « Villes » (Martin, 15 nov. 2026 : toutes ses villes à un seul endroit, par province) ----------
+  // Liste tenue à la main : les villes vivent dans des dépôts différents (dossierquebec, dossierBC,
+  // dossierontario…), le tableau ne peut pas les deviner. À mettre à jour quand une ville s'ajoute,
+  // passe en pause ou se rallume (en même temps que VILLES / VILLES_EN_PAUSE de commun/navigation.js).
+  // etat : actif | pause | apercu (bâtie, pas encore en ligne). file : le file-commandite.json lisible
+  // d'ici (même domaine) ; null tant que la ville n'a pas de file en ligne sur dossierquebec.ca.
+  var PROVINCES = [
+    { nom: 'Québec', site: 'https://dossierquebec.ca', villes: [
+      { cle: 'quebec', nom: 'Québec', etat: 'actif', url: '/quebec/', file: '/quebec/data/file-commandite.json', note: 'Un mois de commandite à la fois.' },
+      { cle: 'montreal', nom: 'Montréal', etat: 'actif', url: '/montreal/', file: '/montreal/data/file-commandite.json', note: 'Un mois de commandite à la fois.' },
+      { cle: 'levis', nom: 'Lévis', etat: 'actif', url: '/levis/', file: '/levis/data/file-commandite.json' },
+      { cle: 'laval', nom: 'Laval', etat: 'pause', depuis: '2026-10-07', url: '/laval/', file: '/laval/data/file-commandite.json' },
+      { cle: 'longueuil', nom: 'Longueuil', etat: 'pause', depuis: '2026-10-07', url: '/longueuil/', file: '/longueuil/data/file-commandite.json' }
+    ] },
+    { nom: 'Colombie-Britannique', site: 'https://dossierbc.ca', villes: [
+      { cle: 'vancouver', nom: 'Vancouver', etat: 'apercu', url: 'https://dossierbc.ca/vancouver/', file: null, note: 'Ira en ligne déjà en pause. Le courriel au greffe part ce jour-là.' }
+    ] },
+    { nom: 'Ontario', site: 'https://dossierontario.ca', villes: [
+      { cle: 'ottawa', nom: 'Ottawa', etat: 'apercu', url: 'https://dossierontario.ca/ottawa/', file: null }
+    ] },
+    { nom: 'Nouveau-Brunswick', site: 'https://dossiernbrunswick.ca', villes: [] },
+    { nom: 'Saskatchewan', site: 'https://dossiersaskatchewan.ca', villes: [] }
+  ];
+  var ETATS = { actif: ['Active', 'bleu'], pause: ['En pause', 'rouge'], apercu: ['Pas encore en ligne', 'gris'] };
+  var aujourdhui = function () { return new Date().toLocaleDateString('en-CA', { timeZone: 'America/Montreal' }); };
+  async function lireFile(chemin) {
+    if (!chemin) return null;
+    try { var r = await fetch(chemin, { cache: 'no-store' }); if (!r.ok) return { erreur: 'HTTP ' + r.status }; return await r.json(); }
+    catch (e) { return { erreur: 'illisible' }; }
+  }
+  function enCours(f) { var j = aujourdhui(); return !!(f && f.periodes) && f.periodes.some(function (p) { return p.debut <= j && j <= p.fin; }); }
+  // Les villes louées : le registre public RTV_LOUEES de /represente-ta-ville.html ([ville, province, fin]).
+  // Lu d'ici pour ne tenir la liste qu'à un seul endroit : une ville qu'on y ajoute reçoit sa pastille.
+  var louees = {};
+  async function lireLouees() {
+    try {
+      var t = await (await fetch('/represente-ta-ville.html', { cache: 'no-store' })).text();
+      var m = t.match(/var RTV_LOUEES = (\[[^;]*\]);/);
+      var j = aujourdhui();
+      louees = {};
+      if (m) JSON.parse(m[1].replace(/'/g, '"')).forEach(function (l) { if (!l[2] || l[2] >= j) louees[l[0]] = l[2] || ''; });
+    } catch (e) { louees = {}; }
+  }
+  function pastilleLouee(v, f) {
+    var fin = louees[v.nom];
+    if (fin === undefined && !enCours(f)) return '';
+    return ' <span class="tb-pastille jaune">Louée' + (fin ? ' jusqu’au ' + jourLong(fin) : '') + '</span>';
+  }
+  function blocCommandite(f) {
+    if (f === null) return '<p>Commandite : pas encore de file en ligne.</p>';
+    if (f.erreur) return '<p>Commandite : file ' + h(f.erreur) + '.</p>';
+    var per = (f.periodes || []).slice().sort(function (a, b) { return String(a.debut).localeCompare(String(b.debut)); });
+    if (!per.length) return '<p>Commandite : <b>personne</b> pour l’instant.</p>';
+    var j = aujourdhui();
+    var qui = function (p) { return p.affichage === 'anonyme' ? 'anonyme' : (p.nom || '(sans nom)') + (p.affichage === 'banniere' ? ' (bannière)' : ''); };
+    var cour = per.filter(function (p) { return p.debut <= j && j <= p.fin; })[0];
+    var avenir = per.filter(function (p) { return p.debut > j; });
+    var fin = per.reduce(function (m, p) { return p.fin > m ? p.fin : m; }, per[0].fin);
+    return '<p>Commandite : ' + (cour ? '<b>' + h(qui(cour)) + '</b> jusqu’au ' + jourLong(cour.fin) : '<b>personne</b> aujourd’hui') + '.</p>' +
+      (avenir.length ? '<p>À venir : ' + avenir.map(function (p) { return h(qui(p)) + ' dès le ' + jourLong(p.debut); }).join(' ; ') + '.</p>' : '') +
+      (fin >= j ? '<p>Réservé jusqu’au ' + jourLong(fin) + '.</p>' : '');
+  }
+  function rendreVilles(fichiers, demandes) {
+    var nouvelles = {}, toutes = {};
+    (demandes || []).forEach(function (d) { toutes[d.ville_cle] = (toutes[d.ville_cle] || 0) + 1; if (d.statut === 'nouvelle') nouvelles[d.ville_cle] = (nouvelles[d.ville_cle] || 0) + 1; });
+    var total = PROVINCES.reduce(function (t, p) { return t + p.villes.length; }, 0);
+    zone.innerHTML = '<div class="tb-tete"><div><h1>Villes</h1><p>Toutes tes villes : ' + pluriel(total, 'ville', 'villes') + ', ' + pluriel(PROVINCES.length, 'province', 'provinces') + '. État, commanditaire du moment et demandes reçues. La liste se tient à la main dans commun/admin.js.</p></div></div>' +
+      PROVINCES.map(function (p) {
+        var lien = p.site.replace(/^https:\/\//, '');
+        return '<section class="tb-prov"><h2>' + h(p.nom) + '<small><a href="' + h(p.site) + '" target="_blank" rel="noopener">' + h(lien) + '</a> · ' + pluriel(p.villes.length, 'ville', 'villes') + '</small></h2>' +
+          (p.villes.length ? '<div class="tb-cartes">' + p.villes.map(function (v) {
+            var e = ETATS[v.etat] || [v.etat, ''];
+            var nv = nouvelles[v.cle] || 0, tt = toutes[v.cle] || 0;
+            return '<article class="tb-carte"><h3>' + h(v.nom) + ' <span class="tb-pastille ' + e[1] + '">' + e[0] + '</span>' + pastilleLouee(v, fichiers[v.cle]) + (nv ? ' <span class="tb-pastille jaune">' + pluriel(nv, 'nouvelle demande', 'nouvelles demandes') + '</span>' : '') + '</h3>' +
+              (v.etat === 'pause' && v.depuis ? '<p>Données figées depuis le ' + jourLong(v.depuis) + '. Réactivation : 150 $.</p>' : '') +
+              blocCommandite(fichiers[v.cle]) +
+              (tt ? '<p>Demandes « Représentez votre ville » : ' + n(tt) + '.</p>' : '') +
+              (v.note ? '<p>' + h(v.note) + '</p>' : '') +
+              '<div class="tb-liens"><a href="' + h(v.url) + '" target="_blank" rel="noopener">Voir la ville ↗</a>' + (v.file ? '<a href="' + h(v.file) + '" target="_blank" rel="noopener">File de commandite ↗</a>' : '') + '</div></article>';
+          }).join('') + '</div>' : '<p class="tb-vide-prov">Aucune ville encore.</p>') + '</section>';
+      }).join('');
+  }
+  async function chargerVilles() {
+    montrerOnglets(); sortir.hidden = DEMO;
+    var dem = { data: [] };
+    if (!DEMO) {
+      var u = (await sb.auth.getUser()).data.user;
+      var adm = u ? await sb.from('admins').select('user_id').eq('user_id', u.id).maybeSingle() : { data: null };
+      if (!adm.data) { await sb.auth.signOut(); return connexion('Ce compte n’est pas dans la liste des admins.'); }
+      dem = await sb.from('rtv_demandes').select('ville_cle, statut').neq('statut', 'archivee').limit(2000);
+    }
+    var tout = [];
+    PROVINCES.forEach(function (p) { p.villes.forEach(function (v) { tout.push(v); }); });
+    var lus = await Promise.all(tout.map(function (v) { return lireFile(v.file); }).concat([lireLouees()]));
+    var fichiers = {};
+    tout.forEach(function (v, i) { fichiers[v.cle] = lus[i]; });
+    if (onglet !== 'villes') return;
+    rendreVilles(fichiers, dem.data || []);
+  }
+
   async function charger() {
     zone.innerHTML = '<p class="tb-charge">Chargement…</p>';
     if (onglet === 'rtv') return chargerRtv();
+    if (onglet === 'villes') return chargerVilles();
     montrerOnglets();
     if (DEMO) return rendre(demo());
     var r = await sb.rpc('dq_mesures_resume', { jours: jours });
