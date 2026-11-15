@@ -264,6 +264,11 @@ function goToFederal(evt){
       <div id="mdCompte" class="mdr-compte"></div>
     </div>
 
+    <!-- Vos courriels (3 nov. 2026) : Assemblée et villes, une carte chacune, avec les choix de chaque
+         ville. EN HAUT de la page depuis le 14 nov. 2026 (Martin). Rempli par boiteInfolettre
+         (commun/infolettre.js) ; montré seulement à qui est connecté (mdRefonte). -->
+    <div class="mdc-section" id="courriels" hidden><div id="infolettre"></div></div>
+
     <div id="mdCompteurs" class="mdr-compteurs"></div>
     <p class="mdr-gratuit" data-i18n="mdr.gratuit"><b>Gratuit : 3 suivis en tout.</b> Illimité pour les abonné·e·s.</p>
 
@@ -300,10 +305,6 @@ function goToFederal(evt){
       <div id="organismes"></div>
       <div id="pourquoi"></div>
     </div>
-
-    <!-- Vos courriels (3 nov. 2026) : Assemblée et villes, une carte chacune. Rempli par
-         boiteInfolettre (commun/infolettre.js) ; montré seulement à qui est connecté (mdRefonte). -->
-    <div class="mdc-section" id="courriels" hidden><div id="infolettre"></div></div>
 
     <div class="mdr-bande">
       <p data-i18n="mdr.bande"><b>Une idée, une erreur ?</b> Chaque message est lu.</p>
