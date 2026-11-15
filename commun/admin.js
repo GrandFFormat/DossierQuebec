@@ -274,7 +274,7 @@
       { cle: 'longueuil', nom: 'Longueuil', etat: 'pause', depuis: '2026-10-07', url: '/longueuil/', file: '/longueuil/data/file-commandite.json' }
     ] },
     { nom: 'Colombie-Britannique', site: 'https://dossierbc.ca', villes: [
-      { cle: 'vancouver', nom: 'Vancouver', etat: 'apercu', url: 'https://dossierbc.ca/vancouver/', file: null, note: 'Ira en ligne déjà en pause. Le courriel au greffe part ce jour-là.' }
+      { cle: 'vancouver', nom: 'Vancouver', etat: 'pause', depuis: '2026-11-15', url: 'https://dossierbc.ca/vancouver/', file: null, note: 'En ligne depuis le 15 nov. 2026, déjà en pause (aperçu de juin et juillet). Demande Van311 nº 201003771234 envoyée à la Ville pour les procès-verbaux ; relance le 14 déc. 2026.' }
     ] },
     { nom: 'Ontario', site: 'https://dossierontario.ca', villes: [
       { cle: 'ottawa', nom: 'Ottawa', etat: 'apercu', url: 'https://dossierontario.ca/ottawa/', file: null }
