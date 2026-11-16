@@ -6,6 +6,9 @@
   var sb = supabase.createClient('https://wfgcqftgtmptfutrbujz.supabase.co', 'sb_publishable_CutVYEz29QYUV3tCDsAhSQ_RvZUQ3G6');
   var zone = document.getElementById('tbZone');
   var sortir = document.getElementById('tbSortir');
+  var SITES_FILTRE = [['', 'Tous les sites'], ['dq', 'DossierQuébec'], ['dossiercanada.ca', 'DossierCanada'], ['dossierontario.ca', 'DossierOntario'], ['dossiersaskatchewan.ca', 'DossierSaskatchewan'], ['dossiernbrunswick.ca', 'DossierNBrunswick'], ['dossierbc.ca', 'DossierBC']];
+  var site = '';
+  try { site = localStorage.getItem('dq:admin-site') || ''; } catch (e) {}
   var PERIODES = [[1, 'Aujourd’hui'], [7, '7 jours'], [30, '30 jours'], [90, '90 jours']];
   var jours = 7;
   try { jours = parseInt(localStorage.getItem('dq:admin-jours'), 10) || 7; } catch (e) {}
@@ -75,7 +78,8 @@
     var nomPeriode = (PERIODES.filter(function (p) { return p[0] === jours; })[0] || [0, ''])[1].toLowerCase();
 
     var html = '<div class="tb-tete"><div><h1>Tableau de bord</h1><p>Où vont les gens et sur quoi ils pèsent, ' + (jours === 1 ? 'aujourd’hui' : 'ces ' + nomPeriode) + '. Tous les sites Dossier et leurs volets de ville. Aucune donnée personnelle.</p></div>' +
-      '<div class="tb-periodes" role="group" aria-label="Période">' + PERIODES.map(function (p) { return '<button type="button" data-jours="' + p[0] + '" aria-pressed="' + (p[0] === jours) + '">' + p[1] + '</button>'; }).join('') + '</div></div>' +
+      '<div class="tb-filtres"><select class="tb-site" aria-label="Site">' + SITES_FILTRE.map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === site ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>' +
+      '<div class="tb-periodes" role="group" aria-label="Période">' + PERIODES.map(function (p) { return '<button type="button" data-jours="' + p[0] + '" aria-pressed="' + (p[0] === jours) + '">' + p[1] + '</button>'; }).join('') + '</div></div></div>' +
       '<div class="tb-chiffres">' +
         '<div class="tb-chiffre"><b>' + n(r.visites) + '</b><span>Visites</span></div>' +
         '<div class="tb-chiffre"><b>' + n(r.pages_vues) + '</b><span>Pages vues</span></div>' +
@@ -107,6 +111,8 @@
       'Les lignes de plus de 90 jours s’effacent à chaque ouverture. Google Analytics et Vercel comptent à côté.</p>';
 
     zone.innerHTML = html;
+    var choixSite = zone.querySelector('.tb-site');
+    if (choixSite) choixSite.addEventListener('change', function () { site = choixSite.value; try { localStorage.setItem('dq:admin-site', site); } catch (e) {} charger(); });
     zone.querySelectorAll('[data-jours]').forEach(function (b) { b.addEventListener('click', function () { jours = parseInt(b.dataset.jours, 10); try { localStorage.setItem('dq:admin-jours', String(jours)); } catch (e) {} charger(); }); });
     zone.querySelectorAll('[data-plus]').forEach(function (b) { b.addEventListener('click', function () { ouverts[b.dataset.plus] = !ouverts[b.dataset.plus]; rendre(dernier); }); });
   }
@@ -365,7 +371,7 @@
     if (onglet === 'villes') return chargerVilles();
     montrerOnglets();
     if (DEMO) return rendre(demo());
-    var r = await sb.rpc('dq_mesures_resume', { jours: jours });
+    var r = await sb.rpc('dq_mesures_resume', { jours: jours, site: site });
     if (r.error) {
       var m = r.error.message || '';
       if (/réservé aux admins|42501|permission denied/i.test(m)) { await sb.auth.signOut(); return connexion('Ce compte n’est pas dans la liste des admins.'); }

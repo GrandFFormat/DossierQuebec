@@ -40,7 +40,10 @@ grant all on public.dq_mesures to service_role;
 
 -- Le résumé que lit /admin : un seul appel, tout déjà compté côté serveur. `jours` = période
 -- (1, 7, 30 ou 90). Refuse quiconque n'est pas dans `admins`. Purge les lignes de plus de 90 jours.
-create or replace function public.dq_mesures_resume(jours int default 7)
+-- `site` (16 nov. 2026) : '' = tous les sites, 'dq' = DossierQuébec (pages qui commencent par /),
+-- sinon le domaine d'un autre site (« dossiercanada.ca ») : mesure.js préfixe ses pages du domaine.
+drop function if exists public.dq_mesures_resume(int);
+create or replace function public.dq_mesures_resume(jours int default 7, site text default '')
 returns jsonb
 language plpgsql
 security definer
@@ -58,30 +61,30 @@ begin
 
   select jsonb_build_object(
     'depuis', depuis,
-    'pages_vues', (select count(*) from dq_mesures where type = 'page' and created_at >= depuis),
-    'visites', (select count(distinct session) from dq_mesures where type = 'page' and created_at >= depuis and session <> ''),
-    'clics', (select count(*) from dq_mesures where type = 'clic' and created_at >= depuis),
+    'pages_vues', (select count(*) from dq_mesures where (site = '' or (site = 'dq' and page like '/%') or page like site || '/%') and type = 'page' and created_at >= depuis),
+    'visites', (select count(distinct session) from dq_mesures where (site = '' or (site = 'dq' and page like '/%') or page like site || '/%') and type = 'page' and created_at >= depuis and session <> ''),
+    'clics', (select count(*) from dq_mesures where (site = '' or (site = 'dq' and page like '/%') or page like site || '/%') and type = 'clic' and created_at >= depuis),
     'par_jour', (select coalesce(jsonb_agg(jsonb_build_object('jour', j, 'pages', p, 'visites', v) order by j), '[]'::jsonb) from (
         select (created_at at time zone 'America/Montreal')::date as j, count(*) as p, count(distinct session) as v
-        from dq_mesures where type = 'page' and created_at >= depuis group by 1) t),
+        from dq_mesures where (site = '' or (site = 'dq' and page like '/%') or page like site || '/%') and type = 'page' and created_at >= depuis group by 1) t),
     'par_ville', (select coalesce(jsonb_agg(jsonb_build_object('ville', ville, 'pages', p, 'visites', v) order by p desc), '[]'::jsonb) from (
         select ville, count(*) as p, count(distinct session) as v
-        from dq_mesures where type = 'page' and created_at >= depuis group by 1) t),
+        from dq_mesures where (site = '' or (site = 'dq' and page like '/%') or page like site || '/%') and type = 'page' and created_at >= depuis group by 1) t),
     'par_page', (select coalesce(jsonb_agg(jsonb_build_object('page', page, 'titre', titre, 'ville', ville, 'pages', p, 'visites', v) order by p desc), '[]'::jsonb) from (
         select page, max(titre) as titre, max(ville) as ville, count(*) as p, count(distinct session) as v
-        from dq_mesures where type = 'page' and created_at >= depuis group by 1 order by 4 desc limit 40) t),
+        from dq_mesures where (site = '' or (site = 'dq' and page like '/%') or page like site || '/%') and type = 'page' and created_at >= depuis group by 1 order by 4 desc limit 40) t),
     'par_cible', (select coalesce(jsonb_agg(jsonb_build_object('cible', cible, 'page', page, 'clics', c) order by c desc), '[]'::jsonb) from (
         select cible, max(page) as page, count(*) as c
-        from dq_mesures where type = 'clic' and created_at >= depuis group by 1 order by 3 desc limit 40) t),
+        from dq_mesures where (site = '' or (site = 'dq' and page like '/%') or page like site || '/%') and type = 'clic' and created_at >= depuis group by 1 order by 3 desc limit 40) t),
     'par_provenance', (select coalesce(jsonb_agg(jsonb_build_object('provenance', provenance, 'visites', v) order by v desc), '[]'::jsonb) from (
         select provenance, count(distinct session) as v
-        from dq_mesures where type = 'page' and created_at >= depuis group by 1 order by 2 desc limit 20) t),
+        from dq_mesures where (site = '' or (site = 'dq' and page like '/%') or page like site || '/%') and type = 'page' and created_at >= depuis group by 1 order by 2 desc limit 20) t),
     'par_langue', (select coalesce(jsonb_agg(jsonb_build_object('langue', langue, 'pages', p) order by p desc), '[]'::jsonb) from (
-        select langue, count(*) as p from dq_mesures where type = 'page' and created_at >= depuis group by 1) t)
+        select langue, count(*) as p from dq_mesures where (site = '' or (site = 'dq' and page like '/%') or page like site || '/%') and type = 'page' and created_at >= depuis group by 1) t)
   ) into r;
   return r;
 end;
 $$;
 
-revoke all on function public.dq_mesures_resume(int) from public, anon;
-grant execute on function public.dq_mesures_resume(int) to authenticated;
+revoke all on function public.dq_mesures_resume(int, text) from public, anon;
+grant execute on function public.dq_mesures_resume(int, text) to authenticated;
