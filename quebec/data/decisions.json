@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-15T15:44:56.826Z",
+ "generatedAt": "2026-11-16T18:44:01.710Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "licence": "Documents publics de la Ville de Québec — reproduction avec mention de la source, usage non commercial.",
  "parametres": {
@@ -12,9 +12,9 @@
    "Tableaux des décisions"
   ]
  },
- "totalDisponible": 5956,
- "nombre": 5956,
- "nouveauxDepuisDerniereExecution": 0,
+ "totalDisponible": 5960,
+ "nombre": 5960,
+ "nouveauxDepuisDerniereExecution": 4,
  "themes": {
   "procedure": {
    "libelle": "Procédure",
@@ -125,7 +125,7 @@
  },
  "statuts": {
   "termines": 1721,
-  "enCours": 122,
+  "enCours": 125,
   "inconnus": 0
  },
  "facettes": {
@@ -136,7 +136,7 @@
    },
    {
     "valeur": "Sommaires et mémoires",
-    "n": 1843
+    "n": 1846
    },
    {
     "valeur": "Procès-verbaux",
@@ -144,13 +144,13 @@
    },
    {
     "valeur": "Tableaux des décisions",
-    "n": 98
+    "n": 99
    }
   ],
   "instance": [
    {
     "valeur": "Comité exécutif",
-    "n": 1460
+    "n": 1461
    },
    {
     "valeur": "Conseil de la ville",
@@ -192,11 +192,11 @@
   "unite": [
    {
     "valeur": "Approvisionnements",
-    "n": 336
+    "n": 337
    },
    {
     "valeur": "Gestion du territoire",
-    "n": 331
+    "n": 332
    },
    {
     "valeur": "Développement économique et grands projets",
@@ -216,7 +216,7 @@
    },
    {
     "valeur": "Culture et patrimoine",
-    "n": 72
+    "n": 73
    },
    {
     "valeur": "Ressources humaines",
@@ -338,15 +338,15 @@
   "theme": [
    {
     "valeur": "urbanisme",
-    "n": 1096
+    "n": 1097
    },
    {
     "valeur": "procedure",
-    "n": 842
+    "n": 843
    },
    {
     "valeur": "subventions",
-    "n": 668
+    "n": 669
    },
    {
     "valeur": "transport",
@@ -354,7 +354,7 @@
    },
    {
     "valeur": "contrats",
-    "n": 622
+    "n": 623
    },
    {
     "valeur": "immobilier",
@@ -407,6 +407,78 @@
   ]
  },
  "decisions": [
+  {
+   "id": "TD_CE_PL_2026-11-13_00h00.pdf",
+   "numero": null,
+   "objet": "Tableau des décisions de la séance spéciale du comité exécutif tenue le vendredi 13 novembre 2026 à 08h30",
+   "date": "2026-11-13",
+   "annee": "2026",
+   "type": "Tableaux des décisions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CE_PL_2026-11-13_00h00.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "AP2026-370.pdf",
+   "numero": "AP2026-370",
+   "objet": "Disposition de certains biens et équipements en surplus provenant des Jeux du Canada 2027",
+   "date": "2026-11-13",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Approvisionnements",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-370.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil de la ville",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "theme": "contrats",
+   "themeSource": "unite"
+  },
+  {
+   "id": "CU2026-089.pdf",
+   "numero": "CU2026-089",
+   "objet": "Conclusion d'ententes relatives aux versements de subventions à intervenir entre la Ville de Québec et trois organismes, dans le cadre de la Mesure d'aide financière pour les églises de valeur patrimoniale exceptionnelle",
+   "date": "2026-11-13",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Culture et patrimoine",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-089.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil de la ville",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "GT2026-357.pdf",
+   "numero": "GT2026-357",
+   "objet": "Adoption d'une résolution autorisant un projet immobilier dérogatoire sur les lots 1 479 009, 1 479 010 et 1 623 117 du cadastre du Québec (310, rue Saint-Roch, quartier de Saint-Roch, district électoral de Saint-Roch-Saint-Sauveur) en vertu de l'article 145.45 de la Loi sur l'aménagement et l'urba",
+   "date": "2026-11-13",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Gestion du territoire",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-357.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil de la ville et conseil d'agglomération",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération",
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
   {
    "id": "TD_CE_PL_2026-11-11_00h00.pdf",
    "numero": null,

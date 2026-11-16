@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-11-09T18:57:57.868Z",
+ "generatedAt": "2026-11-16T18:43:46.025Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "methode": "Reconstitué à partir des listes de présences des procès-verbaux du conseil d'agglomération. La Ville ne publie pas de page « membres » pour ce conseil ; la liste de présences en est la seule source structurée.",
  "avertissement": "Le conseil d'agglomération est distinct du conseil municipal de Québec. Les élus des villes reconstituées (L'Ancienne-Lorette, Saint-Augustin-de-Desmaures) y siègent, mais ne siègent pas au conseil municipal de Québec et ne représentent aucun district de la Ville de Québec.",
  "parametres": {
   "annee": "2026"
  },
- "seancesAnalysees": 15,
+ "seancesAnalysees": 16,
  "nombre": 15,
  "villes": {
   "Québec": 8,
@@ -19,13 +19,24 @@
    "civilite": "M.",
    "fonction": "conseiller",
    "ville": "Québec",
-   "presences": 15,
+   "presences": 16,
    "absences": 0,
    "roles": [
     "président d'assemblée"
    ],
    "remplace": [],
-   "seances": 15
+   "seances": 16
+  },
+  {
+   "nom": "Elisa Verreault",
+   "civilite": "Mme",
+   "fonction": "conseillère",
+   "ville": "Québec",
+   "presences": 15,
+   "absences": 1,
+   "roles": [],
+   "remplace": [],
+   "seances": 16
   },
   {
    "nom": "Catherine Deschamps",
@@ -33,43 +44,32 @@
    "fonction": "conseillère",
    "ville": "Québec",
    "presences": 14,
-   "absences": 1,
+   "absences": 2,
    "roles": [],
    "remplace": [],
-   "seances": 15
-  },
-  {
-   "nom": "Elisa Verreault",
-   "civilite": "Mme",
-   "fonction": "conseillère",
-   "ville": "Québec",
-   "presences": 14,
-   "absences": 1,
-   "roles": [],
-   "remplace": [],
-   "seances": 15
+   "seances": 16
   },
   {
    "nom": "Gabriel Dusablon",
    "civilite": "M.",
    "fonction": "conseiller",
    "ville": "Québec",
-   "presences": 13,
+   "presences": 14,
    "absences": 2,
    "roles": [],
    "remplace": [],
-   "seances": 15
+   "seances": 16
   },
   {
    "nom": "Marie-Pierre Boucher",
    "civilite": "Mme",
    "fonction": "conseillère",
    "ville": "Québec",
-   "presences": 13,
+   "presences": 14,
    "absences": 2,
    "roles": [],
    "remplace": [],
-   "seances": 15
+   "seances": 16
   },
   {
    "nom": "Elainie Lepage",
@@ -77,10 +77,25 @@
    "fonction": "conseillère",
    "ville": "Québec",
    "presences": 12,
-   "absences": 3,
+   "absences": 4,
    "roles": [],
    "remplace": [],
-   "seances": 15
+   "seances": 16
+  },
+  {
+   "nom": "Gaétan Pageau",
+   "civilite": "M.",
+   "fonction": "maire",
+   "ville": "L'Ancienne-Lorette",
+   "presences": 11,
+   "absences": 5,
+   "roles": [
+    "vice-président d'assemblée",
+    "vice-président d'assemblée (partie de séance)",
+    "vice-président d'assemblée (par visioconférence)"
+   ],
+   "remplace": [],
+   "seances": 16
   },
   {
    "nom": "Catherine Vallières-Roland",
@@ -95,21 +110,6 @@
     "Bruno Marchand (par visioconférence)"
    ],
    "seances": 10
-  },
-  {
-   "nom": "Gaétan Pageau",
-   "civilite": "M.",
-   "fonction": "maire",
-   "ville": "L'Ancienne-Lorette",
-   "presences": 10,
-   "absences": 5,
-   "roles": [
-    "vice-président d'assemblée",
-    "vice-président d'assemblée (partie de séance)",
-    "vice-président d'assemblée (par visioconférence)"
-   ],
-   "remplace": [],
-   "seances": 15
   },
   {
    "nom": "Richard Levesque",
@@ -151,6 +151,19 @@
    "seances": 2
   },
   {
+   "nom": "Martin Maranda",
+   "civilite": "M.",
+   "fonction": "conseiller",
+   "ville": "Saint-Augustin-de-Desmaures",
+   "presences": 2,
+   "absences": 0,
+   "roles": [],
+   "remplace": [
+    "Sylvain Juneau"
+   ],
+   "seances": 2
+  },
+  {
    "nom": "Jacques Bouchard",
    "civilite": "M.",
    "fonction": "conseiller",
@@ -164,28 +177,15 @@
    "seances": 1
   },
   {
-   "nom": "Martin Maranda",
-   "civilite": "M.",
-   "fonction": "conseiller",
-   "ville": "Saint-Augustin-de-Desmaures",
-   "presences": 1,
-   "absences": 0,
-   "roles": [],
-   "remplace": [
-    "Sylvain Juneau"
-   ],
-   "seances": 1
-  },
-  {
    "nom": "Bruno Marchand",
    "civilite": "M.",
    "fonction": "maire",
    "ville": "Québec",
    "presences": 0,
-   "absences": 15,
+   "absences": 16,
    "roles": [],
    "remplace": [],
-   "seances": 15
+   "seances": 16
   },
   {
    "nom": "Sylvain Juneau",
@@ -193,10 +193,10 @@
    "fonction": "maire",
    "ville": "Saint-Augustin-de-Desmaures",
    "presences": 0,
-   "absences": 15,
+   "absences": 16,
    "roles": [],
    "remplace": [],
-   "seances": 15
+   "seances": 16
   }
  ]
 }
