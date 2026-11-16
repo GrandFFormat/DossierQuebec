@@ -1311,6 +1311,7 @@ init();
   majVisible();
   // La flèche s'envole vers le haut en même temps que la page remonte (Martin, 16 nov. 2026).
   bouton.addEventListener('click', () => {
+    bouton.style.setProperty('--envol', `${-(window.innerHeight - 90)}px`);
     bouton.classList.remove('envol'); void bouton.offsetWidth; bouton.classList.add('envol');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });

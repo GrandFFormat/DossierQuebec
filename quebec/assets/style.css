@@ -801,6 +801,6 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 @media (max-width: 700px) { #en-bref a[href*=".pdf" i] { pointer-events: none; cursor: default; } }
 
 /* Flèche ↑ : petit envol vers le haut au clic (16 nov. 2026). */
-@keyframes haut-envol { 0% { transform: none; opacity: 1; } 45% { transform: translateY(-60px) scale(.85); opacity: 0; } 46% { transform: translateY(14px); opacity: 0; } 100% { transform: none; opacity: 1; } }
-.haut.envol { animation: haut-envol .55s ease-in-out; }
+@keyframes haut-envol { 0% { transform: none; opacity: 1; } 15% { transform: translateY(8px) scale(1.1); opacity: 1; } 100% { transform: translateY(var(--envol, -400px)) scale(.6); opacity: 0; } }
+.haut.envol { animation: haut-envol .7s cubic-bezier(.5,0,.2,1) forwards; opacity: 1 !important; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .haut.envol { animation: none; } }
