@@ -227,7 +227,7 @@ export function boutonRetourEnHaut() {
   const bouton = document.createElement('button');
   bouton.type = 'button';
   bouton.className = 'ab-retour-haut';
-  bouton.setAttribute('aria-label', tr('Revenir en haut de la page', 'Back to top'));
+  bouton.setAttribute('aria-label', tr('Revenir en haut de la page', 'Go to the top of the page'));
   bouton.textContent = '↑';
   document.body.appendChild(bouton);
   // Le bouton apparaît quand on a descendu d'à peu près un écran, pas après 600 pixels fixes :
