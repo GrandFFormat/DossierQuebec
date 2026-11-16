@@ -204,6 +204,12 @@ init();
   const CLE = 'eb:retour', RESTAURER = 'eb:restaurer';
   const lire = (k) => { try { return JSON.parse(sessionStorage.getItem(k) || 'null'); } catch { return null; } };
   const ecrire = (k, v) => { try { v ? sessionStorage.setItem(k, JSON.stringify(v)) : sessionStorage.removeItem(k); } catch {} };
+  // Comme « Latest at the Legislature » de DossierOntario : la carte d'où on était parti s'allume en jaune.
+  const allumer = (i) => {
+    const c = [...document.querySelectorAll('#en-bref .eb-carte')][i];
+    if (!c) return;
+    c.classList.remove('eb-revenue'); void c.offsetWidth; c.classList.add('eb-revenue');
+  };
 
   // Retour d'une page filtrée : on remet la position une fois l'encadré dessiné.
   const r = lire(RESTAURER);
@@ -218,13 +224,14 @@ init();
       window.scrollTo(0, r.y);
       if (++n < 3 || (Math.abs(window.scrollY - r.y) > 4 && n < 20)) { setTimeout(viser, 100); return; }
       document.documentElement.style.visibility = '';
+      allumer(r.carte);
     };
     document.documentElement.style.visibility = 'hidden';
     setTimeout(viser, 100);
   }
 
   const st = document.createElement('style');
-  st.textContent = `.eb-retour{position:fixed;right:22px;bottom:70px;z-index:21;width:34px;height:34px;border-radius:50%;border:2px solid #16191D;background:#FFD24D;color:#16191D;font-size:17px;font-weight:900;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.35);display:none}.eb-retour.visible{display:block}@keyframes eb-envol{0%{transform:none;opacity:1}15%{transform:translateY(calc(var(--sens,1) * -8px)) scale(1.1)}100%{transform:translateY(var(--envol,-300px)) scale(.6);opacity:0}}.eb-retour.envol{display:block;animation:eb-envol .7s cubic-bezier(.5,0,.2,1) forwards;pointer-events:none}@media (prefers-reduced-motion:reduce){.eb-retour.envol{animation:none;display:none}}`;
+  st.textContent = `.eb-retour{position:fixed;right:22px;bottom:70px;z-index:21;width:34px;height:34px;border-radius:50%;border:2px solid #16191D;background:#FFD24D;color:#16191D;font-size:17px;font-weight:900;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.35);display:none}.eb-retour.visible{display:block}.eb-revenue{animation:ebRevenue 1.6s ease-out}@keyframes ebRevenue{0%,35%{background:rgba(255,210,77,.35)}100%{background:transparent}}@media (prefers-reduced-motion:reduce){.eb-revenue{animation:none}}@keyframes eb-envol{0%{transform:none;opacity:1}15%{transform:translateY(calc(var(--sens,1) * -8px)) scale(1.1)}100%{transform:translateY(var(--envol,-300px)) scale(.6);opacity:0}}.eb-retour.envol{display:block;animation:eb-envol .7s cubic-bezier(.5,0,.2,1) forwards;pointer-events:none}@media (prefers-reduced-motion:reduce){.eb-retour.envol{animation:none;display:none}}`;
   document.head.appendChild(st);
   const bouton = document.createElement('button');
   bouton.type = 'button';
@@ -243,7 +250,8 @@ init();
     const u = new URL(a.getAttribute('href'), location.href);
     if (u.pathname !== location.pathname) return;
     const ouverts = [...document.querySelectorAll('#en-bref details')].map((d, i) => (d.open ? i : -1)).filter((i) => i >= 0);
-    ecrire(CLE, { href: location.href, y: Math.round(window.scrollY), ouverts });
+    const carte = [...document.querySelectorAll('#en-bref .eb-carte')].indexOf(a.closest('.eb-carte'));
+    ecrire(CLE, { href: location.href, y: Math.round(window.scrollY), ouverts, carte });
     setTimeout(montrer, 0);
   }, true);
 
@@ -262,6 +270,7 @@ init();
       const pl = [...document.querySelectorAll('#en-bref details')];
       (d.ouverts ?? []).forEach((i) => { if (pl[i]) pl[i].open = true; });
       window.scrollTo({ top: d.y, behavior: 'smooth' });
+      setTimeout(() => allumer(d.carte), 450);
     }
 
   });
