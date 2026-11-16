@@ -59,7 +59,7 @@
       return '<li>' + (l.sansRang ? '' : '<span class="tb-rang">' + String(i + 1).padStart(2, '0') + '</span>') +
         '<div class="tb-nom"><b title="' + h(l.nom) + '">' + h(l.nom) + '</b>' + (l.sous ? '<small title="' + h(l.sous) + '">' + h(l.sous) + '</small>' : '') +
         '<span class="tb-barre"><s style="width:' + Math.max(2, Math.round(100 * l.n / max)) + '%"></s></span></div>' +
-        '<div class="tb-val">' + n(l.n) + (l.detail ? '<small>' + h(l.detail) + '</small>' : '') + '</div></li>';
+        '<div class="tb-val">' + n(l.n) + (l.detail ? '<small>' + h(l.detail) + '</small>' : '') + (l.lien && l.lien.charAt(0) === '/' ? '<a class="tb-go" href="' + h(l.lien) + '" target="_blank" rel="noopener" title="Ouvrir la page">Ouvrir ↗</a>' : '') + '</div></li>';
     }).join('') + '</ol>' +
     (lignes.length > montrer ? '<button class="tb-plus" data-plus="' + cle + '">' + (tout ? 'Voir moins' : 'Voir les ' + lignes.length) + '</button>' : '');
   }
@@ -92,8 +92,8 @@
 
     var villes = (r.par_ville || []).map(function (v) { return { nom: NOMS_VILLE[v.ville] || v.ville, n: v.pages, detail: pluriel(v.visites, 'visite', 'visites'), sansRang: true }; });
     var provs = (r.par_provenance || []).filter(function (p) { return p.provenance; }).map(function (p) { return { nom: p.provenance === 'direct' ? 'Direct (adresse, favori, courriel)' : p.provenance, n: p.visites, detail: 'visites' }; });
-    var pages = (r.par_page || []).map(function (p) { return { nom: titreCourt(p.titre) || p.page, sous: p.page, n: p.pages, detail: pluriel(p.visites, 'visite', 'visites') }; });
-    var cibles = (r.par_cible || []).map(function (c) { return { nom: c.cible, sous: 'depuis ' + c.page, n: c.clics, detail: 'clics' }; });
+    var pages = (r.par_page || []).map(function (p) { return { nom: titreCourt(p.titre) || p.page, sous: p.page, lien: p.page, n: p.pages, detail: pluriel(p.visites, 'visite', 'visites') }; });
+    var cibles = (r.par_cible || []).map(function (c) { return { nom: c.cible, sous: 'depuis ' + c.page, lien: c.page, n: c.clics, detail: 'clics' }; });
 
     html += '<div class="tb-deux">' +
       '<section class="tb-bloc tb-villes">' + titre(jours > 1 ? '02' : '01', 'Villes', 'Pages vues par volet.') + liste('villes', villes, 10) + '</section>' +
