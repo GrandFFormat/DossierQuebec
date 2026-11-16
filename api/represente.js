@@ -44,8 +44,42 @@ async function garder(m) {
   }
 }
 
+// Statut des villes pour /admin (16 nov. 2026) : lu sur les sites en ligne plutôt que tenu à la main.
+// Pas en ligne = la page d'accueil du volet ne répond pas 200. En pause = la page charge
+// assets/avis-pause.js (volets des autres provinces) ou la ville est dans VILLES_EN_PAUSE de
+// commun/navigation.js (volets de DQ). La liste des adresses est fixe ici : rien ne vient de la requête.
+const VILLES_ETAT = {
+  quebec: 'https://dossierquebec.ca/quebec/', montreal: 'https://dossierquebec.ca/montreal/', levis: 'https://dossierquebec.ca/levis/',
+  laval: 'https://dossierquebec.ca/laval/', longueuil: 'https://dossierquebec.ca/longueuil/',
+  vancouver: 'https://dossierbc.ca/vancouver/', ottawa: 'https://dossierontario.ca/ottawa/',
+};
+async function etatVilles() {
+  const lire = async (u) => { try { const r = await fetch(u, { redirect: 'follow', signal: AbortSignal.timeout(8000) }); return { ok: r.ok, texte: r.ok ? await r.text() : '' }; } catch (e) { return { ok: false, texte: '' }; } };
+  const nav = await lire('https://dossierquebec.ca/commun/navigation.js');
+  const pauseDq = {};
+  const m = /VILLES_EN_PAUSE\s*=\s*\{([\s\S]*?)\n\};/.exec(nav.texte);
+  if (m) for (const x of m[1].matchAll(/(\w+):\s*\{[^}]*?depuis:\s*'([\d-]+)'/g)) pauseDq[x[1]] = x[2];
+  const sortie = {};
+  await Promise.all(Object.entries(VILLES_ETAT).map(async ([cle, url]) => {
+    const p = await lire(url);
+    if (!p.ok) { sortie[cle] = { etat: 'apercu' }; return; }
+    if (pauseDq[cle]) { sortie[cle] = { etat: 'pause', depuis: pauseDq[cle] }; return; }
+    sortie[cle] = { etat: /avis-pause\.js/.test(p.texte) ? 'pause' : 'actif' };
+  }));
+  return sortie;
+}
+
 export default async function handler(req, res) {
   const q = req.query || {};
+  if (req.method === 'GET' && q.etat === 'villes') {
+    try {
+      res.setHeader('Cache-Control', 's-maxage=600, stale-while-revalidate=3600');
+      return res.status(200).json(await etatVilles());
+    } catch (e) {
+      console.error('état des villes :', e);
+      return res.status(500).json({});
+    }
+  }
   if (req.method === 'GET' && q.confirmer) {
     try {
       const r = await confirmer(String(q.confirmer));

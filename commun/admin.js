@@ -266,7 +266,8 @@
   }
 
   // ---------- Onglet « Villes » (Martin, 15 nov. 2026 : toutes ses villes à un seul endroit, par province) ----------
-  // Liste tenue à la main : les villes vivent dans des dépôts différents (dossierquebec, dossierBC,
+  // Les villes sont listées à la main (une ville neuve s'ajoute ici ET dans VILLES_ETAT de
+  // api/represente.js), mais leur statut se lit tout seul sur les sites en ligne. Les villes vivent dans des dépôts différents (dossierquebec, dossierBC,
   // dossierontario…), le tableau ne peut pas les deviner. À mettre à jour quand une ville s'ajoute,
   // passe en pause ou se rallume (en même temps que VILLES / VILLES_EN_PAUSE de commun/navigation.js).
   // etat : actif | pause | apercu (bâtie, pas encore en ligne). file : le file-commandite.json lisible
@@ -283,7 +284,7 @@
       { cle: 'vancouver', nom: 'Vancouver', etat: 'pause', depuis: '2026-11-15', url: 'https://dossierbc.ca/vancouver/', file: null, note: 'En ligne depuis le 15 nov. 2026, déjà en pause (aperçu de juin et juillet). Demande Van311 nº 201003771234 envoyée à la Ville pour les procès-verbaux ; relance le 14 déc. 2026.' }
     ] },
     { nom: 'Ontario', site: 'https://dossierontario.ca', villes: [
-      { cle: 'ottawa', nom: 'Ottawa', etat: 'apercu', url: 'https://dossierontario.ca/ottawa/', file: null }
+      { cle: 'ottawa', nom: 'Ottawa', etat: 'pause', url: 'https://dossierontario.ca/ottawa/', file: null }
     ] },
     { nom: 'Nouveau-Brunswick', site: 'https://dossiernbrunswick.ca', villes: [] },
     { nom: 'Saskatchewan', site: 'https://dossiersaskatchewan.ca', villes: [] }
@@ -358,6 +359,11 @@
     }
     var tout = [];
     PROVINCES.forEach(function (p) { p.villes.forEach(function (v) { tout.push(v); }); });
+    // Le statut vient des sites en ligne (api/represente.js?etat=villes) ; l'état écrit dans
+    // PROVINCES ne sert plus que de repli si l'appel échoue (en local, par exemple).
+    var etats = {};
+    try { var re = await fetch('/api/represente?etat=villes'); if (re.ok) etats = await re.json(); } catch (e) {}
+    tout.forEach(function (v) { var e = etats[v.cle]; if (e && e.etat) { v.etat = e.etat; if (e.depuis) v.depuis = e.depuis; } });
     var lus = await Promise.all(tout.map(function (v) { return lireFile(v.file); }).concat([lireLouees()]));
     var fichiers = {};
     tout.forEach(function (v, i) { fichiers[v.cle] = lus[i]; });
