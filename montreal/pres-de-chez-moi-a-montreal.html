@@ -260,10 +260,10 @@
         const chantiers = Object.values(ent?.parQuartier ?? {}).flat().map((c) => {
           const b = c[3] === 'public' ? ['ville', tr('Travaux publics', 'Public works')] : ['prive', tr('Chantier privé', 'Private site')];
           const contrat = c[6] ? `<span class="contrat-chantier">${tr('Contrat', 'Contract')}${dp} ${esc(c[6][0])}, ${argent(c[6][1])}${c[6][2] ? ` · <a href="https://seao.gouv.qc.ca/avis-resultat-recherche/consulter?ItemId=${esc(c[6][2])}" target="_blank" rel="noopener">${tr('avis SEAO', 'SEAO notice')} ↗</a>` : ''}</span>` : '';
-          return { lat: c[4], lon: c[5], classe: b[0], popup: `<strong>${b[1]}</strong><br>${esc(enChantier(c[0]))}`,
+          return { lat: c[4], lon: c[5], classe: b[0], libelle: b[1], popup: `<strong>${b[1]}</strong><br>${esc(enChantier(c[0]))}`,
             html: (loin) => `<li>${bulle(b[0], b[1], c[4], c[5], titreGM)} ${esc(enChantier(c[0]))}${loin}${c[2] ? ` <span class="compte">(${tr('jusqu’au', 'until')} ${jour(c[2])})</span>` : ''}${contrat}</li>` };
         });
-        const permis = tous.flat().map((p) => { const g = genrePermis(p[2]); return { lat: p[4], lon: p[5], classe: g[0],
+        const permis = tous.flat().map((p) => { const g = genrePermis(p[2]); return { lat: p[4], lon: p[5], classe: g[0], libelle: g[1],
           popup: `<strong>${g[1]}</strong><br>${esc(p[1])}<br>${jour(p[0])}`,
           html: (loin) => `<li>${bulle(g[0], g[1], p[4], p[5], titreGM)} <span class="compte">${jour(p[0])}</span> ${esc(p[1])}${dp} ${esc(enMotif(p[2]))}${loin}</li>` }; });
         const zr = document.createElement('div'); zr.className = 'zone-rayon'; zr.id = 'zone-rayon'; zone.append(zr);

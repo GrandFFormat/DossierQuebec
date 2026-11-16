@@ -264,10 +264,10 @@
         const chantiers = Object.values(ent?.parQuartier ?? {}).flat().map((c) => {
           const i = IMPACT[c[3]], n = nature(c[0]), b = i ?? n;
           const texte = esc(c[0].replace(/^(RTE-d+s+)?Québec,s*/, ''));
-          return { lat: c[4], lon: c[5], classe: b[0], popup: `<strong>${b[1]}</strong><br>${texte}`,
+          return { lat: c[4], lon: c[5], classe: b[0], libelle: b[1], circulation: c[3] === 'all-lanes-closed' || c[3] === 'some-lanes-closed', popup: `<strong>${b[1]}</strong><br>${texte}`,
             html: (loin) => `<li>${bulle(b[0], b[1], c[4], c[5], titreGM)} ${i ? `<span class="genre-permis ${n[0]}">${n[1]}</span> ` : ''}${texte}${loin}${c[2] ? ` <span class="compte">(${tr('jusqu’au', 'until')} ${jour(c[2])})</span>` : ''}</li>` };
         });
-        const permis = tous.flat().map((p) => { const g = genrePermis(p[2]); return { lat: p[4], lon: p[5], classe: g.cle,
+        const permis = tous.flat().map((p) => { const g = genrePermis(p[2]); return { lat: p[4], lon: p[5], classe: g.cle, libelle: g.nom, circulation: false,
           popup: `<strong>${g.nom}</strong><br>${esc(p[1])}<br>${jour(p[0])}`,
           html: (loin) => `<li>${bulle(g.cle, g.nom, p[4], p[5], titreGM)} <span class="compte">${jour(p[0])}</span> ${esc(p[1])} : ${esc(p[2])}${loin}</li>` }; });
         const zr = document.createElement('div'); zr.className = 'zone-rayon'; zr.id = 'zone-rayon'; zone.append(zr);

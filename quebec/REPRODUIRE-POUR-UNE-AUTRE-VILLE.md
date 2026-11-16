@@ -185,6 +185,15 @@ Jumelage décision ↔ contrat par numéro d'appel d'offres, de résolution **et
 **Près de chez moi** : `scrapers/adresses.js` (point dans polygone, tout se fait dans le
 navigateur), `scrapers/permis-travaux.js` (permis CO et DE, travaux liés au SEAO), `lib/plateau.js`.
 
+**Filtres, standard aussi (15 nov. 2026)** : dans le cadre, deux boutons seulement. « Filtres ▾ »
+déplie Routes, Permis et une pastille par type (couleur de la bulle, nombre dans le rayon) ; tout est
+actif au départ, la carte montre tout ; le nombre de types masqués s'affiche en orange sur le bouton.
+« 🚧 Impact sur la circulation » ne garde que ce qui ferme une rue ou des voies (élément
+`circulation: true`) et fait disparaître les autres boutons ; il n'apparaît que si la source le
+distingue (Québec : `all-lanes-closed` / `some-lanes-closed` ; Vancouver : « road closures » ;
+Montréal : non, ses entraves ne le disent pas). Une page donne `libelle` et, si elle le sait,
+`circulation` à chaque élément.
+
 **Standard de toute ville (15 nov. 2026)** : le cadre « Autour de votre adresse − 1 km + »
 (rayons 0,25 / 0,5 / 1 / 2 / 3 / 5 km, 1 km par défaut, mémorisé en localStorage avec une clé
 propre à la ville), chantiers et permis de TOUS les quartiers à portée triés du plus proche, la
