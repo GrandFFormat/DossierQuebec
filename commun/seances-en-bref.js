@@ -144,7 +144,7 @@ async function init() {
   const RANG = (i) => (/exécutif/i.test(i) ? 0 : /municipal/i.test(i) ? 1 : /agglom/i.test(i) ? 2 : 3);
   const principales = devant.filter((s) => !estArrondissement(s.instance)).sort((x, y) => RANG(x.instance) - RANG(y.instance));
   const chemin = principales.some((s) => /exécutif/i.test(s.instance)) && principales.some((s) => /municipal|agglom/i.test(s.instance))
-    ? `<p class="eb-chemin">${tr('Le comité exécutif recommande, le conseil municipal ou d’agglomération adopte : un même dossier peut revenir d’une carte à l’autre.', 'The executive committee recommends, the city or agglomeration council adopts: the same file can show up on more than one card.')}</p>` : '';
+    ? `<p class="eb-chemin">${tr('Comité exécutif → Conseil municipal → Conseil d’agglomération', 'Executive committee → City council → Agglomeration council')}</p>` : '';
   const arrondissements = devant.filter((s) => estArrondissement(s.instance)).sort(parNom);
   const n = arrondissements.length;
   const derrierePrinc = derriere.filter((s) => !estArrondissement(s.instance));
