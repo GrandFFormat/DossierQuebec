@@ -59,6 +59,8 @@ const ETAPES = [
   // disparaît des données publiées sans copie — decisions.js refuse maintenant de repartir sans
   // archive, mais le run doit rougir dès le premier jour.
   { nom: 'Archivage des années révolues', argv: ['scrapers/archive.js', '--rotate'] },
+  // Consultations publiques à venir (16 nov. 2026) : l'API de levis.ca, sans IA ; lues par commun/consultations.js.
+  { nom: 'Consultations publiques', argv: ['scrapers/consultations.js'], secondaire: true },
   ...(conseil
     ? [
         { nom: 'Membres du conseil', argv: ['scrapers/elus.js'], secondaire: true },

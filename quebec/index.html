@@ -132,6 +132,8 @@
 
   <div class="chiffres" id="chiffres"><!--PR:chiffres--><a class="chiffre" href="decisions-de-la-ville-de-quebec"><div class="n">5 956</div><div class="quoi">décisions publiées en 2026</div></a><a class="chiffre" href="decisions-de-la-ville-de-quebec?vote=1"><div class="n">287</div><div class="quoi">votes nominatifs consignés cette année</div></a><a class="chiffre" href="decisions-de-la-ville-de-quebec"><div class="n">4 758</div><div class="quoi">décisions résumées en langage clair</div></a><a class="chiffre" href="conseil-municipal-de-quebec"><div class="n">22</div><div class="quoi">membres du conseil municipal</div></a><!--/PR:chiffres--></div>
 
+  <div id="consultations-ville" data-mode="apercu" hidden></div>
+
   <h2 data-en="What's new" class="page" id="titre-fil"><!--PR:titre-fil-->Activité récente<!--/PR:titre-fil--></h2>
   <div id="fil"><!--PR:fil--><details class="carte pliante" open name="fiches"><summary><div class="meta">
       <span class="puce genre-decision">décision</span>
@@ -268,6 +270,7 @@ https://dossierquebec.ca/quebec/decisions-de-la-ville-de-quebec?q=AP2026-375" on
 
 <script type="module" src="assets/app.js"></script>
 <script type="module" src="/commun/entete-volet.js"></script>
+<script type="module" src="/commun/consultations.js"></script>
 <script type="module" src="/commun/abonnes.js"></script>
 <script type="module">
   import { formulaireInfolettre } from '/commun/infolettre.js';

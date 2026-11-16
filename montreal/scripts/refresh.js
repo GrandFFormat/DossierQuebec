@@ -53,6 +53,8 @@ if (!resumes) {
 
 const ETAPES = [
   { nom: 'Archivage des années révolues', argv: ['scrapers/archive.js', '--rotate'], secondaire: true },
+  // Consultations publiques à venir (16 nov. 2026) : une requête, sans IA ; lues par commun/consultations.js.
+  { nom: 'Consultations publiques', argv: ['scrapers/consultations.js'], secondaire: true },
   ...(conseil
     ? [
         { nom: 'Élus de la Ville', argv: ['scrapers/elus.js'], secondaire: true },

@@ -55,6 +55,8 @@ if (!resumes) {
 const ETAPES = [
   // Au changement d'année, l'archive prend l'année révolue avant qu'on la remplace.
   { nom: 'Archivage des années révolues', argv: ['scrapers/archive.js', '--rotate'], secondaire: true },
+  // Consultations publiques à venir (16 nov. 2026) : une requête, sans IA ; lues par commun/consultations.js.
+  { nom: 'Consultations publiques', argv: ['scrapers/consultations.js'], secondaire: true },
   ...(conseil
     ? [
         { nom: 'Membres du conseil', argv: ['scrapers/elus.js'], secondaire: true },
