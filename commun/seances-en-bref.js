@@ -97,7 +97,7 @@ function carte(s, page, petite) {
   const liens = odj
     ? `<a class="eb-officiel" href="${echapper(s.odj)}" target="_blank" rel="noopener">${tr('Ordre du jour (PDF)', 'Agenda (PDF, French)')} ↗</a>`
     : `<a class="eb-tout" href="${page}?instance=${encodeURIComponent(s.instance)}${suffixe}">${tr('Toutes ses décisions', 'All its decisions')} →</a>`
-      + (s.pv ? `<a class="eb-officiel" href="${echapper(s.pv)}" target="_blank" rel="noopener">${tr('P.-verbal (PDF)', 'Minutes (PDF, French)')} ↗</a>` : '');
+      + (s.pv ? `<a class="eb-officiel eb-pv" href="${echapper(s.pv)}" target="_blank" rel="noopener">${tr('P.-verbal (PDF)', 'Minutes (PDF, French)')} ↗</a>` : '');
   return `<article class="eb-carte${petite ? ' eb-petite' : ''}${odj ? ' eb-carte-odj' : ''}">
     ${quoi}
     <header><h3>${echapper(petite ? nomCourt(instance) : instance)}<span class="eb-rythme">/${rythme(s.instance)}</span></h3>

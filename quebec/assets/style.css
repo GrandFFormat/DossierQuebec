@@ -794,3 +794,6 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 /* Chemin d un dossier, En bref (16 nov. 2026) */
 .eb-chemin { font-size: 13px; margin: 4px 0 10px; color: var(--doux); }
 .eb-fleche { background: var(--vedette, #FFD24D); color: #16191D; padding: 0 5px; border-radius: 3px; margin: 0 2px; }
+
+/* « P.-verbal (PDF) » caché sur cellulaire, gardé sur iPad (16 nov. 2026). */
+@media (max-width: 700px) { .eb-pv { display: none; } }
