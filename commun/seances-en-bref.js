@@ -140,7 +140,11 @@ async function init() {
   const instances = [...new Set([...pvs.map((s) => s.instance), ...odjs.keys()])];
   const devant = instances.map((i) => odjs.get(i) ?? pvs.find((s) => s.instance === i)).filter(Boolean);
   const derriere = pvs.filter((s) => odjs.has(s.instance));
-  const principales = devant.filter((s) => !estArrondissement(s.instance));
+  // Montréal : dans l'ordre du chemin d'un dossier, exécutif → municipal → agglomération (Martin, 16 nov. 2026).
+  const RANG = (i) => (/exécutif/i.test(i) ? 0 : /municipal/i.test(i) ? 1 : /agglom/i.test(i) ? 2 : 3);
+  const principales = devant.filter((s) => !estArrondissement(s.instance)).sort((x, y) => RANG(x.instance) - RANG(y.instance));
+  const chemin = principales.some((s) => /exécutif/i.test(s.instance)) && principales.some((s) => /municipal|agglom/i.test(s.instance))
+    ? `<p class="eb-chemin">${tr('Le comité exécutif recommande, le conseil municipal ou d’agglomération adopte : un même dossier peut revenir d’une carte à l’autre.', 'The executive committee recommends, the city or agglomeration council adopts: the same file can show up on more than one card.')}</p>` : '';
   const arrondissements = devant.filter((s) => estArrondissement(s.instance)).sort(parNom);
   const n = arrondissements.length;
   const derrierePrinc = derriere.filter((s) => !estArrondissement(s.instance));
@@ -149,12 +153,12 @@ async function init() {
   zone.innerHTML = `<div class="resume eb-gros">
     <div class="resume-entete"><span>${tr('En bref — la dernière séance de chaque conseil · résumé généré par IA', 'In brief — the latest meeting of each council · AI-generated summary')}</span></div>
     <div class="eb-note">${odjs.size ? tr(NOTE_FR, NOTE_EN) : tr(NOTE_PV_FR, NOTE_PV_EN)}${odjs.size && derriere.length ? ` <a class="eb-vo" href="#eb-version-officielle">${tr('Version officielle', 'Official version')} ↓</a>` : ''}</div>
-    ${grille(principales, jeu.page, false)}
+    ${chemin}${grille(principales, jeu.page, false)}
     ${n ? `<details class="eb-arr"><summary>${odjs.size ? `<span class="eb-marque eb-marque-non">${tr(`Les ${n} arrondissements · non officiel`, `The ${n} boroughs · not official`)}</span>` : tr(`Les ${n} arrondissements`, `The ${n} boroughs`)}</summary>${grille(arrondissements, jeu.page, true)}</details>` : ''}
   </div>
   ${derriere.length ? `<div class="resume eb-gros eb-boite-retard" id="eb-version-officielle"><details class="eb-arr eb-retard"><summary><span class="eb-marque eb-marque-non">${tr("Pourquoi un mois de retard ? C'est la façon de faire de Montréal", 'Why a month behind? That is how Montréal works')}</span></summary>
       <div class="eb-note">${tr(RETARD_FR, RETARD_EN)}</div>
-      ${grille(derrierePrinc, jeu.page, false)}
+      ${chemin}${grille(derrierePrinc.sort((x, y) => RANG(x.instance) - RANG(y.instance)), jeu.page, false)}
       ${derriereArr.length ? grille(derriereArr, jeu.page, true) : ''}
       <a class="eb-detail" href="#liste-decisions">${tr('Voir toutes les décisions, séance par séance ↓', 'See every decision, meeting by meeting ↓')}</a>
     </details></div>` : ''}`;
