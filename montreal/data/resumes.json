@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-13T17:34:01.168Z",
+ "generatedAt": "2026-11-16T19:56:50.997Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel quand il est publié (source « sommaire »), sinon du texte de la résolution elle-même (source « resolution »), sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,17 +7,17 @@
   "annee": "2026",
   "max": 40,
   "batch": true,
-  "depuis": "2026-09-14",
+  "depuis": "2026-09-17",
   "plafond": 120
  },
- "nombre": 9092,
- "genereCetteFois": 16,
+ "nombre": 9106,
+ "genereCetteFois": 14,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.137,
-  "jetonsEntree": 32295,
-  "jetonsSortie": 4498
+  "montant": 0.2048,
+  "jetonsEntree": 56386,
+  "jetonsSortie": 5107
  },
  "resumes": [
   {
@@ -7655,6 +7655,368 @@
    "jetons": {
     "entree": 2023,
     "sortie": 270
+   }
+  },
+  {
+   "id": "1269606028",
+   "numero": "1269606028",
+   "resolution": "CA26 28 177",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant le remplacement du revêtement de toiture de la propriété située au 420, rue Closse, correspondant au lot 4 295 546 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=49",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de L'Île-Bizard – Sainte-Geneviève doit trancher sur le remplacement de la toiture du 420, rue Closse.",
+    "Le propriétaire a remplacé une toiture en tôle à baguette par des bardeaux d'asphalte de couleur charbon.",
+    "La toiture d'origine était détériorée, avec des infiltrations d'eau constatées lors de l'inspection préachat.",
+    "Le comité consultatif d'urbanisme s'est prononcé contre et recommande de refuser : selon lui, le bardeau d'asphalte ne respecte pas le caractère architectural du bâtiment et banalise le secteur.",
+    "La maison fait partie du développement Campeau (rues Blaise et Closse), un ensemble des années 1970 encadré par le règlement sur les P.I.I.A.",
+    "La recommandation soumise au conseil, elle, propose d'approuver la demande."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-16T19:56:50.993Z",
+   "jetons": {
+    "entree": 4658,
+    "sortie": 409
+   }
+  },
+  {
+   "id": "1266059003",
+   "numero": "1266059003",
+   "resolution": "CA26 28 172",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Édicter, en vertu du Règlement sur la circulation et le stationnement (CA28 0018), une ordonnance visant à rendre la rue Chauret, à Sainte-Geneviève, à sens unique en direction nord, entre la rue de la Caserne et le boulevard Gouin Ouest",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=29",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard–Sainte-Geneviève rend la rue Chaurest à sens unique vers le nord, entre la rue de la Caserne et le boulevard Gouin Ouest.",
+    "La Ville invoque la largeur limitée de la rue : avec le stationnement sur rue, les croisements de véhicules sont difficiles pour les automobilistes, cyclistes et piétons.",
+    "La circulation à double sens compliquait aussi le déneigement et l'entretien de la chaussée.",
+    "De nouveaux panneaux seront installés aux approches concernées pour indiquer la direction permise.",
+    "Une période d'avertissement et de sensibilisation suivra l'installation de la signalisation, avant l'application de la règle.",
+    "Les résidents du secteur pourraient recevoir une communication expliquant le changement.",
+    "Le document ne chiffre pas la dépense : il mentionne seulement les coûts de fabrication et d'installation de la signalisation."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-16T19:56:50.993Z",
+   "jetons": {
+    "entree": 4104,
+    "sortie": 418
+   }
+  },
+  {
+   "id": "1266059001",
+   "numero": "1266059001",
+   "resolution": "CA26 28 174",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Édicter, en vertu du Règlement sur la circulation et le stationnement (CA28 0018), une ordonnance visant à ajouter une interdiction de stationnement en tout temps sur le côté sud de la rue de la Caserne, entre le boulevard Gouin Ouest et la limite du terrain situé au 15736, rue de la Caserne.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=37",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement L'Île-Bizard–Sainte-Geneviève interdit le stationnement en tout temps du côté sud de la rue de la Caserne, entre le boulevard Gouin Ouest et le terrain du 15736, rue de la Caserne.",
+    "La Ville installera des panneaux de signalisation pour annoncer l'interdiction.",
+    "Une période d'avertissement de deux semaines suivra l'installation des panneaux avant que l'interdiction soit appliquée.",
+    "Une communication écrite pourra être envoyée aux résidents du secteur pour expliquer le changement.",
+    "Motifs invoqués : les véhicules stationnés réduisent la largeur de la chaussée, ce qui nuit aux véhicules d'urgence, à l'entretien (dont le déneigement) et à la visibilité.",
+    "Les coûts se limitent à l'achat et à l'installation des panneaux; aucun montant n'est précisé."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-16T19:56:50.993Z",
+   "jetons": {
+    "entree": 3855,
+    "sortie": 406
+   }
+  },
+  {
+   "id": "1260543005",
+   "numero": "1260543005",
+   "resolution": "CA26 28 168",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Accorder un contrat à MLC Associés inc. d'un montant de 444 384,39 $ $ incluant taxes et 15 % de contingences pour effectuer le carottage et l'élaboration des plans et devis pour des travaux de planage et revêtement de plusieurs rues de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, selon l'entente cadre 2026-04.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=12",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard–Sainte-Geneviève accorde un contrat de 444 384,39 $ (taxes et 15 % de contingences incluses) à la firme MLC Associés inc.",
+    "Le mandat porte sur le carottage et la préparation des plans et devis en vue de travaux de planage et revêtement sur plusieurs rues de l'arrondissement.",
+    "Le planage consiste à raboter la couche supérieure de la chaussée; le revêtement à poser une nouvelle couche d'enrobé bitumineux.",
+    "L'arrondissement justifie les travaux par un déficit d'entretien passé : la chaussée de la plupart de ces rues a dépassé sa durée de vie utile.",
+    "Le mandat commence en octobre 2026 et se termine en décembre 2027.",
+    "La dépense est entièrement assumée par l'arrondissement, selon l'entente-cadre 2026-04."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "444 384,39 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-16T19:56:50.994Z",
+   "jetons": {
+    "entree": 3793,
+    "sortie": 409
+   }
+  },
+  {
+   "id": "1269606029",
+   "numero": "1269606029",
+   "resolution": "CA26 28 176",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant à permettre le remplacement du revêtement de la toiture en bardeaux d'asphalte sur la propriété située au 506, place Blaise, correspondant au lot 4 296 330 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=45",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard – Sainte-Geneviève approuve le remplacement du revêtement de toiture d'une maison au 506, place Blaise.",
+    "Les anciens bardeaux d'asphalte sont remplacés par des bardeaux IKO Dynasty de couleur « Noir granite », avec réparation de certaines composantes de la toiture.",
+    "Les travaux ont déjà été faits le 29 avril 2026 : la demande sert à les régulariser après coup.",
+    "La maison fait partie du développement Campeau, un ensemble résidentiel des années 1970 soumis au règlement sur les PIIA en raison de son caractère architectural homogène.",
+    "Selon les propriétaires, la toiture avait environ 20 ans et montrait des signes d'usure.",
+    "Le comité consultatif d'urbanisme s'est dit favorable au projet, qui ne change ni le volume, ni l'implantation, ni l'architecture du bâtiment.",
+    "Aucune somme d'argent n'est rattachée à cette décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-16T19:56:50.994Z",
+   "jetons": {
+    "entree": 4317,
+    "sortie": 447
+   }
+  },
+  {
+   "id": "1269452024",
+   "numero": "1269452024",
+   "resolution": "CA26 28 166",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Adopter le procès-verbal de la séance extraordinaire du conseil d'arrondissement de L'Île-Bizard - Sainte-Geneviève du jeudi 24 septembre 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=6",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de L'Île-Bizard - Sainte-Geneviève approuve le procès-verbal de sa séance extraordinaire du 24 septembre 2026, comme l'exige la Loi sur les cités et villes."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-16T19:56:50.994Z",
+   "jetons": {
+    "entree": 2950,
+    "sortie": 176
+   }
+  },
+  {
+   "id": "1269606030",
+   "numero": "1269606030",
+   "resolution": "CA26 28 175",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant des travaux de rénovation extérieure à la résidence située au 15219, place Bellerive, correspondant au lot 1 843 992 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=41",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard – Sainte-Geneviève autorise des travaux de rénovation extérieure à une maison unifamiliale du 15219, place Bellerive.",
+    "Les travaux : remplacement de la porte d'entrée, de toutes les fenêtres et des deux portes de garage, plus l'ajout d'une fenêtre au garage.",
+    "Les faux volets et les quatre poteaux de la véranda seront peints en noir; la couleur extérieure passe du blanc au noir.",
+    "Les ouvertures gardent leurs dimensions actuelles et le bâtiment conserve sa volumétrie et son implantation.",
+    "La propriété borde la rivière des Prairies et est visible de la rue, donc soumise au règlement sur les P.I.I.A. pour les parcours riverains.",
+    "Le comité consultatif d'urbanisme s'est dit favorable au projet.",
+    "Aucun aspect financier n'est rattaché au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-16T19:56:50.994Z",
+   "jetons": {
+    "entree": 4488,
+    "sortie": 421
+   }
+  },
+  {
+   "id": "1269452021",
+   "numero": "1269452021",
+   "resolution": "CA26 28 165",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Adopter le procès-verbal de la séance ordinaire du conseil d'arrondissement de L'Île-Bizard - Sainte-Geneviève du mardi 1er septembre 2026.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=3",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil d'arrondissement de L'Île-Bizard - Sainte-Geneviève approuve le procès-verbal de sa séance ordinaire du 1er septembre 2026, comme l'exige la Loi sur les cités et villes. Aucune dépense ni mesure concrète n'est en jeu."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-16T19:56:50.994Z",
+   "jetons": {
+    "entree": 2942,
+    "sortie": 198
+   }
+  },
+  {
+   "id": "1269452022",
+   "numero": "1269452022",
+   "resolution": "CA26 28 167",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Prendre acte des procès-verbaux et des comptes rendus des comités de l'arrondissement de L'Île- Bizard - Sainte-Geneviève.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=9",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil de l'arrondissement de L'Île-Bizard–Sainte-Geneviève prend acte du dépôt du procès-verbal du comité consultatif d'urbanisme du 18 août 2026 et du compte rendu du comité consultatif sur la culture, les sports, les loisirs et le développement social du 8 juillet 2026."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-16T19:56:50.994Z",
+   "jetons": {
+    "entree": 2918,
+    "sortie": 210
+   }
+  },
+  {
+   "id": "1269452023",
+   "numero": "1269452023",
+   "resolution": "CA26 28 169",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Prendre acte du dépôt des rapports sur l'exercice des pouvoirs délégués aux fonctionnaires et employé.es, pour la période du 1er au 31 août 2026, en vertu du règlement CA28 0074.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=16",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil de l'arrondissement L'Île-Bizard–Sainte-Geneviève prend acte du dépôt des rapports sur les décisions prises par les fonctionnaires et employé.es en vertu des pouvoirs qui leur sont délégués, pour la période du 1er au 31 août 2026."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-16T19:56:50.994Z",
+   "jetons": {
+    "entree": 2931,
+    "sortie": 198
+   }
+  },
+  {
+   "id": "1264364031",
+   "numero": "1264364031",
+   "resolution": "CA26 28 171",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Prolonger d'une année supplémentaire, soit pour l'année 2026 (1er janvier au 31 décembre 2026), le projet Hockey sur glace récréatif mixte sécuritaire pour adolescents (es), de l'organisme Association sportive du bon vieux temps, soutenu par le programme Prévention Montréal (local), sans accorder de nouvelle somme financière et modifier la convention à cet effet.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=24",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard - Sainte-Geneviève prolonge jusqu'au 31 décembre 2026 l'entente avec l'Association sportive Bon Vieux Temps pour son projet de hockey sur glace récréatif mixte pour adolescents.",
+    "Aucun nouvel argent n'est accordé : la Ville maintient les sommes déjà engagées en 2023, soit une contribution de 22 500 $, et modifie le calendrier des versements pour 2025 et 2026.",
+    "La prolongation est demandée parce que l'organisme, géré par des bénévoles, n'a pas pu terminer son projet avant le 31 décembre 2025.",
+    "L'organisme doit remettre son rapport final et sa reddition de comptes au plus tard le 30 janvier 2027 pour toucher le dernier versement de 500 $.",
+    "Si les documents ne satisfont pas l'arrondissement, la Ville pourrait exiger le remboursement des sommes inutilisées.",
+    "Les activités visent les jeunes de 7 à 17 ans et sont offertes gratuitement, avec possibilité d'emprunter du matériel sans frais.",
+    "Sans cette prolongation, les activités prévues en 2026 n'auraient pas lieu."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "22 500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-16T19:56:50.994Z",
+   "jetons": {
+    "entree": 6092,
+    "sortie": 527
+   }
+  },
+  {
+   "id": "1260392005",
+   "numero": "1260392005",
+   "resolution": "CA26 28 170",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Approuver le nouveau Programme de subvention de produits d'hygiène durables et réutilisables 2026-2028 de l'arrondissement de L'Île-Bizard - Sainte-Geneviève et affecter une somme totale de 3 750 $ annuellement à même le budget de fonctionnement de la Direction de la culture, des sports, des loisirs et des relations avec les citoyens.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=19",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard–Sainte-Geneviève lance un nouveau programme de subvention pour l'achat de produits d'hygiène durables et réutilisables, en vigueur d'octobre 2026 au 31 décembre 2028.",
+    "Le programme remplace l'ancien programme de couches lavables et ajoute les produits d'hygiène menstruelle réutilisables et les produits d'incontinence.",
+    "Achats faits au Québec : jusqu'à 200 $ pour les produits destinés aux enfants (ex. couches lavables) et 125 $ pour les produits menstruels ou d'incontinence.",
+    "Achats faits hors Québec : jusqu'à 150 $ pour les produits pour enfants et 100 $ pour les produits menstruels ou d'incontinence.",
+    "Le remboursement est versé directement aux citoyens, qui doivent être inscrits au fichier des fournisseurs de la Ville de Montréal. Une demande est possible tous les deux ans.",
+    "L'arrondissement réserve 3 750 $ par année, soit 8 437,50 $ pour les 27 mois du programme, à même le budget de la Direction de la culture, des sports, des loisirs et des relations avec les citoyens.",
+    "Le programme sera annoncé dans le journal de l'arrondissement en septembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 750 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-16T19:56:50.995Z",
+   "jetons": {
+    "entree": 5293,
+    "sortie": 552
+   }
+  },
+  {
+   "id": "1269606027",
+   "numero": "1269606027",
+   "resolution": "CA26 28 178",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant à permettre le remplacement du revêtement de la toiture en bardeaux d'asphalte sur la propriété située au 384, rue Pierre-Boileau, correspondant au lot 4 295 577 du cadastre du Québec.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=53",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard – Sainte-Geneviève autorise le remplacement de la toiture d'une maison au 384, rue Pierre-Boileau.",
+    "Les nouveaux bardeaux d'asphalte (BP Mystique, couleur « Cèdre rustique ») sont identiques à ceux déjà en place.",
+    "Les travaux incluent la réparation et le remplacement de certaines composantes de la toiture pour assurer son étanchéité.",
+    "La maison fait partie du développement Campeau, un ensemble résidentiel des années 1970 soumis à des règles d'apparence architecturale.",
+    "Le projet ne change ni le volume, ni l'implantation, ni l'architecture du bâtiment.",
+    "Le comité consultatif d'urbanisme s'est dit favorable au projet."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-16T19:56:50.995Z",
+   "jetons": {
+    "entree": 4185,
+    "sortie": 371
+   }
+  },
+  {
+   "id": "1266059002",
+   "numero": "1266059002",
+   "resolution": "CA26 28 173",
+   "date": "2026-10-06",
+   "unite": null,
+   "objet": "Édicter, en vertu du Règlement sur la circulation et le stationnement (CA28 0018), une ordonnance visant à permettre le stationnement pour une durée maximale de 15 minutes sur le côté sud de la rue de la Caserne, face aux immeubles situés aux 15724 et 15728, rue de la Caserne.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=33",
+   "source": "sommaire",
+   "puces": [
+    "L'arrondissement de L'Île-Bizard–Sainte-Geneviève autorise le stationnement pour un maximum de 15 minutes sur le côté sud de la rue de la Caserne, devant les 15724 et 15728.",
+    "Des panneaux seront fabriqués et installés pour indiquer la durée maximale permise.",
+    "Objectif indiqué : faciliter les arrêts de courte durée pour visiteurs et fournisseurs de services, et assurer une rotation des véhicules.",
+    "Une période d'information et de sensibilisation est prévue au moment de l'installation de la signalisation; une communication pourra être envoyée aux résidents et occupants du secteur.",
+    "Les coûts se limitent à l'achat, la fabrication et l'installation des panneaux; aucun montant n'est précisé."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-16T19:56:50.995Z",
+   "jetons": {
+    "entree": 3860,
+    "sortie": 365
    }
   },
   {

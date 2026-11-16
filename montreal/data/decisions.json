@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-15T16:31:58.036Z",
+ "generatedAt": "2026-11-16T19:48:37.271Z",
  "source": "https://ville.montreal.qc.ca/documents/Adi_Public/",
  "licence": "Documents publics de la Ville de Montréal — reproduction avec mention de la source, lecture gratuite (voir README).",
  "parametres": {
@@ -11,10 +11,10 @@
   ]
  },
  "partiel": false,
- "totalDisponible": 7625,
- "nombre": 7625,
- "nouveauxDepuisDerniereExecution": 0,
- "seancesLues": 187,
+ "totalDisponible": 7643,
+ "nombre": 7643,
+ "nouveauxDepuisDerniereExecution": 18,
+ "seancesLues": 188,
  "seancesEnAttente": 39,
  "themes": {
   "procedure": {
@@ -91,15 +91,15 @@
   "type": [
    {
     "valeur": "Résolution",
-    "n": 7251
+    "n": 7267
    },
    {
     "valeur": "Procès-verbal",
-    "n": 187
+    "n": 188
    },
    {
     "valeur": "Ordre du jour",
-    "n": 187
+    "n": 188
    }
   ],
   "instance": [
@@ -177,7 +177,7 @@
    },
    {
     "valeur": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
-    "n": 164
+    "n": 182
    },
    {
     "valeur": "Conseil d'arrondissement de Mercier–Hochelaga-Maisonneuve",
@@ -1313,15 +1313,15 @@
   "theme": [
    {
     "valeur": "procedure",
-    "n": 1383
+    "n": 1391
    },
    {
     "valeur": "urbanisme",
-    "n": 1036
+    "n": 1040
    },
    {
     "valeur": "transport",
-    "n": 954
+    "n": 957
    },
    {
     "valeur": "environnement",
@@ -1333,7 +1333,7 @@
    },
    {
     "valeur": "contrats",
-    "n": 485
+    "n": 486
    },
    {
     "valeur": "loisirs",
@@ -1341,7 +1341,7 @@
    },
    {
     "valeur": "culture",
-    "n": 320
+    "n": 321
    },
    {
     "valeur": "subventions",
@@ -1349,7 +1349,7 @@
    },
    {
     "valeur": "travaux",
-    "n": 252
+    "n": 253
    },
    {
     "valeur": "immobilier",
@@ -1670,9 +1670,16 @@
    "titre": "Séance du conseil municipal",
    "lien": "https://montreal.ca/evenements/seance-du-conseil-municipal-102477",
    "source": "calendrier",
-   "etat": "à venir",
+   "etat": "procès-verbal non publié",
    "pv": null,
-   "odj": null
+   "odj": null,
+   "essaye": "2026-11-16",
+   "essais": [
+    {
+     "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-11-16_13h00_FR.pdf",
+     "resultat": "pas un PDF — page « 404 Page introuvable - 404 not found »"
+    }
+   ]
   },
   {
    "id": "CE_2026-11-11_09h00",
@@ -1688,7 +1695,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-11-11_09h00_FR.pdf",
@@ -1710,7 +1717,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-11-11_08h00_FR.pdf",
@@ -1732,7 +1739,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-11-10_18h30_FR.pdf",
@@ -1754,7 +1761,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sud/CA_Sud_PV_ORDI_2026-11-09_19h00_FR.pdf",
@@ -1776,7 +1783,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-11-04_09h00_FR.pdf",
@@ -1802,7 +1809,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-11-03_19h00_FR.pdf",
@@ -1824,7 +1831,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-11-03_19h30_FR.pdf",
@@ -1846,7 +1853,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_PV_ORDI_2026-11-03_19h00_FR.pdf",
@@ -1868,7 +1875,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rdp/CA_Rdp_PV_ORDI_2026-11-03_19h00_FR.pdf",
@@ -1890,7 +1897,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-11-03_19h30_FR.pdf",
@@ -1912,7 +1919,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-11-03_19h00_FR.pdf",
@@ -1934,7 +1941,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-11-03_18h30_FR.pdf",
@@ -1956,7 +1963,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_PV_ORDI_2026-11-02_18h30_FR.pdf",
@@ -1978,7 +1985,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Lac/CA_Lac_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -2000,7 +2007,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -2022,7 +2029,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mhm/CA_Mhm_PV_ORDI_2026-11-02_18h30_FR.pdf",
@@ -2044,7 +2051,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -2070,7 +2077,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -2095,7 +2102,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pmr/CA_Pmr_PV_ORDI_2026-11-02_18h30_FR.pdf",
@@ -2117,7 +2124,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -2139,7 +2146,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -2161,7 +2168,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-10-28_09h00_FR.pdf",
@@ -2183,7 +2190,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf",
@@ -2205,7 +2212,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-20_09h00_FR.pdf",
@@ -2227,7 +2234,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf",
@@ -2249,7 +2256,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-10-14_09h00_FR.pdf",
@@ -2289,7 +2296,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-10-07_09h00_FR.pdf",
@@ -2370,16 +2377,12 @@
    "source": "sondage des documents publiés",
    "preuve": "CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf",
    "nom": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
-   "etat": "procès-verbal non publié",
-   "pv": null,
-   "odj": null,
-   "essaye": "2026-11-15",
-   "essais": [
-    {
-     "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf",
-     "resultat": "pas un PDF — page « 404 Page introuvable - 404 not found »"
-    }
-   ]
+   "etat": "lue",
+   "versionLecture": "13.2",
+   "pv": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf",
+   "odj": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf",
+   "nombreResolutions": 16,
+   "lueLe": "2026-11-16"
   },
   {
    "id": "CA_Lac_2026-10-06_19h00",
@@ -2449,7 +2452,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_PV_ORDI_2026-10-06_19h00_FR.pdf",
@@ -2533,7 +2536,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf",
@@ -2627,7 +2630,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-09-30_09h00_FR.pdf",
@@ -2667,7 +2670,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-09-22_09h00_FR.pdf",
@@ -2707,7 +2710,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-09-16_09h00_FR.pdf",
@@ -3051,7 +3054,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-25_09h00_FR.pdf",
@@ -3521,7 +3524,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-06-16_09h00_FR.pdf",
@@ -4009,7 +4012,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-05-12_09h00_FR.pdf",
@@ -4855,7 +4858,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-04-07_19h00_FR.pdf",
@@ -5383,7 +5386,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-02-17_09h00_FR.pdf",
@@ -5871,7 +5874,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-15",
+   "essaye": "2026-11-16",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-01-27_09h00_FR.pdf",
@@ -8802,6 +8805,420 @@
    "sommaireId": "1267479008",
    "nouveau": false,
    "theme": "administration",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA_Ibs_2026-10-06_19h30_PV",
+   "numero": null,
+   "objet": "Procès-verbal — Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève, séance ordinaire du 2026-10-06",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Procès-verbal",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": null,
+   "dossier": null,
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nombreResolutions": 16,
+   "nombrePages": 9,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA_Ibs_2026-10-06_19h30_ODJ",
+   "numero": null,
+   "objet": "Ordre du jour — Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève, séance du 2026-10-06 (22 points)",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Ordre du jour",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": null,
+   "dossier": null,
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 164",
+   "numero": "CA26 28 164",
+   "objet": "Adoption de l'ordre du jour de la séance du conseil d'arrondissement",
+   "categorie": "Adoption de l'ordre du jour de la séance du conseil d'arrondissement",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "10.02",
+   "dossier": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=1",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 165",
+   "numero": "CA26 28 165",
+   "objet": "Adopter le procès-verbal de la séance ordinaire du conseil d'arrondissement de L'Île-Bizard - Sainte-Geneviève du mardi 1er septembre 2026.",
+   "categorie": "Adopter le procès-verbal de la séance ordinaire du conseil d'arrondissement de L'Île-Bizard -",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "10.07",
+   "dossier": "1269452021",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=3",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=3",
+   "sommaireId": "1269452021",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 166",
+   "numero": "CA26 28 166",
+   "objet": "Adopter le procès-verbal de la séance extraordinaire du conseil d'arrondissement de L'Île-Bizard - Sainte-Geneviève du jeudi 24 septembre 2026.",
+   "categorie": "Adopter le procès-verbal de la séance extraordinaire du conseil d'arrondissement de L'Île-Bizard -",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "10.08",
+   "dossier": "1269452024",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=3",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=6",
+   "sommaireId": "1269452024",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 167",
+   "numero": "CA26 28 167",
+   "objet": "Prendre acte des procès-verbaux et des comptes rendus des comités de l'arrondissement de L'Île- Bizard - Sainte-Geneviève.",
+   "categorie": "Prendre acte des procès-verbaux et des comptes rendus des comités de l'arrondissement de",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "10.09",
+   "dossier": "1269452022",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=4",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=9",
+   "sommaireId": "1269452022",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 168",
+   "numero": "CA26 28 168",
+   "objet": "Accorder un contrat à MLC Associés inc. d'un montant de 444 384,39 $ $ incluant taxes et 15 % de contingences pour effectuer le carottage et l'élaboration des plans et devis pour des travaux de planage et revêtement de plusieurs rues de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, selon l'entente cadre 2026-04.",
+   "categorie": "Accorder un contrat à MLC Associés inc. d'un montant de 444 384,39 $ $ incluant taxes et 15 %",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "20.01",
+   "dossier": "1260543005",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=4",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=12",
+   "sommaireId": "1260543005",
+   "nouveau": true,
+   "theme": "travaux",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 169",
+   "numero": "CA26 28 169",
+   "objet": "Prendre acte du dépôt des rapports sur l'exercice des pouvoirs délégués aux fonctionnaires et employé.es, pour la période du 1er au 31 août 2026, en vertu du règlement CA28 0074.",
+   "categorie": "Prendre acte du dépôt des rapports sur l'exercice des pouvoirs délégués aux fonctionnaires et",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "30.01",
+   "dossier": "1269452023",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=5",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=16",
+   "sommaireId": "1269452023",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 170",
+   "numero": "CA26 28 170",
+   "objet": "Approuver le nouveau Programme de subvention de produits d'hygiène durables et réutilisables 2026-2028 de l'arrondissement de L'Île-Bizard - Sainte-Geneviève et affecter une somme totale de 3 750 $ annuellement à même le budget de fonctionnement de la Direction de la culture, des sports, des loisirs et des relations avec les citoyens.",
+   "categorie": "Approuver le nouveau Programme de subvention de produits d'hygiène durables et réutilisables",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "30.02",
+   "dossier": "1260392005",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=5",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=19",
+   "sommaireId": "1260392005",
+   "nouveau": true,
+   "theme": "culture",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 171",
+   "numero": "CA26 28 171",
+   "objet": "Prolonger d'une année supplémentaire, soit pour l'année 2026 (1er janvier au 31 décembre 2026), le projet Hockey sur glace récréatif mixte sécuritaire pour adolescents (es), de l'organisme Association sportive du bon vieux temps, soutenu par le programme Prévention Montréal (local), sans accorder de nouvelle somme financière et modifier la convention à cet effet.",
+   "categorie": "Prolonger d'une année supplémentaire, soit pour l'année 2026 (1er janvier au 31 décembre",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "30.03",
+   "dossier": "1264364031",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=5",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=24",
+   "sommaireId": "1264364031",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 172",
+   "numero": "CA26 28 172",
+   "objet": "Édicter, en vertu du Règlement sur la circulation et le stationnement (CA28 0018), une ordonnance visant à rendre la rue Chauret, à Sainte-Geneviève, à sens unique en direction nord, entre la rue de la Caserne et le boulevard Gouin Ouest",
+   "categorie": "Édicter, en vertu du Règlement sur la circulation et le stationnement (CA28 0018), une",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "40.01",
+   "dossier": "1266059003",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=6",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=29",
+   "sommaireId": "1266059003",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 173",
+   "numero": "CA26 28 173",
+   "objet": "Édicter, en vertu du Règlement sur la circulation et le stationnement (CA28 0018), une ordonnance visant à permettre le stationnement pour une durée maximale de 15 minutes sur le côté sud de la rue de la Caserne, face aux immeubles situés aux 15724 et 15728, rue de la Caserne.",
+   "categorie": "Édicter, en vertu du Règlement sur la circulation et le stationnement (CA28 0018), une",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "40.02",
+   "dossier": "1266059002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=6",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=33",
+   "sommaireId": "1266059002",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 174",
+   "numero": "CA26 28 174",
+   "objet": "Édicter, en vertu du Règlement sur la circulation et le stationnement (CA28 0018), une ordonnance visant à ajouter une interdiction de stationnement en tout temps sur le côté sud de la rue de la Caserne, entre le boulevard Gouin Ouest et la limite du terrain situé au 15736, rue de la Caserne.",
+   "categorie": "Édicter, en vertu du Règlement sur la circulation et le stationnement (CA28 0018), une",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "40.03",
+   "dossier": "1266059001",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=7",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=37",
+   "sommaireId": "1266059001",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 175",
+   "numero": "CA26 28 175",
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant des travaux de rénovation extérieure à la résidence située au 15219, place Bellerive, correspondant au lot 1 843 992 du cadastre du Québec.",
+   "categorie": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "40.04",
+   "dossier": "1269606030",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=7",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=41",
+   "sommaireId": "1269606030",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 176",
+   "numero": "CA26 28 176",
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant à permettre le remplacement du revêtement de la toiture en bardeaux d'asphalte sur la propriété située au 506, place Blaise, correspondant au lot 4 296 330 du cadastre du Québec.",
+   "categorie": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "40.05",
+   "dossier": "1269606029",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=7",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=45",
+   "sommaireId": "1269606029",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 177",
+   "numero": "CA26 28 177",
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant le remplacement du revêtement de toiture de la propriété située au 420, rue Closse, correspondant au lot 4 295 546 du cadastre du Québec.",
+   "categorie": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "40.06",
+   "dossier": "1269606028",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=8",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=49",
+   "sommaireId": "1269606028",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 178",
+   "numero": "CA26 28 178",
+   "objet": "Statuer sur la recommandation du comité consultatif d'urbanisme, conformément au Règlement sur les plans d'implantation et d'intégration architecturale (CA28 0015) de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, concernant la demande de P.I.I.A. visant à permettre le remplacement du revêtement de la toiture en bardeaux d'asphalte sur la propriété située au 384, rue Pierre-Boileau, correspondant au lot 4 295 577 du cadastre du Québec.",
+   "categorie": "Dépôt de documents",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "60.01",
+   "dossier": "1269606027",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=8",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_ODJP_ORDI_2026-10-06_19h30_FR.pdf#page=53",
+   "sommaireId": "1269606027",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 28 179",
+   "numero": "CA26 28 179",
+   "objet": "Système de gestion des CA : 10.07 décisions des instances 2026/10/06 RECOMMANDATION 19:30 Dossier # : 1269452021 Unité administrative Arrondissement L'Île-Bizard - Sainte-Geneviève , Direction L'Île- responsable : Bizard - Sainte-Geneviève , Division secrétariat d'arrondissement Niveau décisionnel Conseil d'arrondissement proposé : Projet : - Objet : Adopter le procès-verbal de la séance ordinaire du conseil d'arrondissement de L'Île-Bizard - Sainte-Geneviève du mardi 1er septembre 2026. Il est recommandé : D'adopter le procès-verbal de la séance ordinaire du conseil d'arrondissement de L'Île-Bizard - Sainte-Geneviève du mardi 1er septembre 2026. Signé par Pierre Yves MORIN Le 2026-10-02",
+   "categorie": "Levée de la séance",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "seanceId": "CA_Ibs_2026-10-06_19h30",
+   "unite": null,
+   "article": "70.01",
+   "dossier": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf#page=9",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "procedure",
    "themeSource": "objet"
   },
   {

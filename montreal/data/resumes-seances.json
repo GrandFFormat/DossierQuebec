@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-15T16:37:03.573Z",
+ "generatedAt": "2026-11-16T19:57:58.185Z",
  "modele": "claude-haiku-4-5",
  "genereParIA": true,
  "avertissement": "Phrase de résumé générée par IA à partir des décisions de la séance ; les points marquants sont choisis sans IA. Le procès-verbal officiel fait foi.",
@@ -384,6 +384,93 @@
     "travaux"
    ],
    "votes": []
+  },
+  {
+   "id": "CA_Ibs_2026-10-06_19h30",
+   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
+   "instanceEn": "Île-Bizard–Sainte-Geneviève borough council",
+   "date": "2026-10-06",
+   "nDecisions": 16,
+   "pv": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-10-06_19h30_FR.pdf",
+   "votes": [],
+   "themes": [
+    {
+     "theme": "urbanisme",
+     "n": 4
+    },
+    {
+     "theme": "transport",
+     "n": 3
+    },
+    {
+     "theme": "travaux",
+     "n": 1
+    },
+    {
+     "theme": "culture",
+     "n": 1
+    },
+    {
+     "theme": "contrats",
+     "n": 1
+    }
+   ],
+   "points": [
+    {
+     "id": "CA26 28 168",
+     "numero": "CA26 28 168",
+     "titre": "Accorder un contrat à MLC Associés inc. d'un montant de 444 384,39 $ $ incluant taxes et 15 % de contingences pour effectuer le carottage et l'élaboration des plans et devis pour des travaux de planage et revêtement de plusieurs rues de l'arrondissement de L'Île-Bizard - Sainte-Geneviève, selon l'entente cadre 2026-04.",
+     "titreEn": "Grant a contract to MLC Associés inc. in the amount of $444,384.39 including taxes and 15% contingencies to carry out coring and the preparation of plans and specifications for milling and resurfacing work on several streets of the borough of L'Île-Bizard - Sainte-Geneviève, in accordance with framework agreement 2026-04.",
+     "montant": "444 384,39 $",
+     "montantEn": null,
+     "divise": false,
+     "theme": "travaux"
+    },
+    {
+     "id": "CA26 28 171",
+     "numero": "CA26 28 171",
+     "titre": "Prolonger d'une année supplémentaire, soit pour l'année 2026 (1er janvier au 31 décembre 2026), le projet Hockey sur glace récréatif mixte sécuritaire pour adolescents (es), de l'organisme Association sportive du bon vieux temps, soutenu par le programme Prévention Montréal (local), sans accorder de nouvelle somme financière et modifier la convention à cet effet.",
+     "titreEn": "Extend by one additional year, namely for the year 2026 (January 1 to December 31, 2026), the Safe Mixed Recreational Ice Hockey for Teens project, of the organization Association sportive du bon vieux temps, supported by the Prévention Montréal (local) program, without granting any new financial sum, and amend the agreement accordingly.",
+     "montant": "22 500 $",
+     "montantEn": null,
+     "divise": false,
+     "theme": "contrats"
+    },
+    {
+     "id": "CA26 28 170",
+     "numero": "CA26 28 170",
+     "titre": "Approuver le nouveau Programme de subvention de produits d'hygiène durables et réutilisables 2026-2028 de l'arrondissement de L'Île-Bizard - Sainte-Geneviève et affecter une somme totale de 3 750 $ annuellement à même le budget de fonctionnement de la Direction de la culture, des sports, des loisirs et des relations avec les citoyens.",
+     "titreEn": "Approve the new Sustainable and Reusable Hygiene Products Subsidy Program 2026-2028 of the borough of L'Île-Bizard - Sainte-Geneviève and allocate a total sum of $3,750 annually from the operating budget of the Direction de la culture, des sports, des loisirs et des relations avec les citoyens.",
+     "montant": "3 750 $",
+     "montantEn": null,
+     "divise": false,
+     "theme": "culture"
+    },
+    {
+     "id": "CA26 28 172",
+     "numero": "CA26 28 172",
+     "titre": "Édicter, en vertu du Règlement sur la circulation et le stationnement (CA28 0018), une ordonnance visant à rendre la rue Chauret, à Sainte-Geneviève, à sens unique en direction nord, entre la rue de la Caserne et le boulevard Gouin Ouest",
+     "titreEn": "Enact, pursuant to the By-law on traffic and parking (CA28 0018), an ordinance to make rue Chauret, in Sainte-Geneviève, one-way northbound, between rue de la Caserne and boulevard Gouin Ouest",
+     "montant": null,
+     "montantEn": null,
+     "divise": false,
+     "theme": "transport"
+    }
+   ],
+   "signature": "16:10",
+   "phrase": "Le conseil a accordé un contrat de 444 384,39 $ à MLC Associés inc. pour le carottage et les plans de revêtement de rues, lancé un programme de subvention de produits d'hygiène durables et réutilisables, et autorisé plusieurs modifications de circulation rue de la Caserne.",
+   "phraseEn": "The council awarded a contract of 444 384,39 $ to MLC Associés inc. for coring and pavement plans for streets, launched a subsidy program for durable and reusable hygiene products, and authorized several traffic modifications on Rue de la Caserne.",
+   "motsCles": [
+    "produits d'hygiène durables",
+    "circulation rue de la Caserne"
+   ],
+   "motsClesEn": [],
+   "motsEssais": 1,
+   "genereLe": "2026-11-16T19:57:00.879Z",
+   "motsThemes": [
+    "culture",
+    "transport"
+   ]
   },
   {
    "id": "CA_Lac_2026-10-06_19h00",
@@ -3838,6 +3925,94 @@
  ],
  "ordresDuJour": [
   {
+   "id": "CM_2026-11-16_13h00",
+   "version": 6,
+   "instance": "Conseil municipal",
+   "instanceEn": "City council",
+   "date": "2026-11-16",
+   "odj": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-11-16_13h00_FR.pdf",
+   "nPoints": 437,
+   "themes": [
+    {
+     "theme": "securite",
+     "n": 53
+    },
+    {
+     "theme": "contrats",
+     "n": 48
+    },
+    {
+     "theme": "transport",
+     "n": 47
+    },
+    {
+     "theme": "environnement",
+     "n": 44
+    },
+    {
+     "theme": "urbanisme",
+     "n": 31
+    },
+    {
+     "theme": "social",
+     "n": 29
+    }
+   ],
+   "points": [
+    {
+     "article": "30.07",
+     "titre": "Autoriser l'utilisation partielle des sommes de 324 309 421,93 $ accumulées à la réserve financière de paiement au comptant destinée à financer des dépenses en immobilisations de compétences municipales",
+     "montant": "324 309 421,93 $",
+     "theme": "finances",
+     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-11-16_13h00_FR.pdf#page=12",
+     "titreEn": "Authorize the partial use of sums of $324,309,421.93 accumulated in the cash payment reserve fund to finance capital expenditures of municipal competence"
+    },
+    {
+     "article": "42.02",
+     "titre": "Adoption - Règlement autorisant un emprunt de 313 000 000 $ afin de financer les travaux de construction et de renouvellement du réseau principal d'aqueduc Compétence Alimentation en eau et assainissement des eaux d’agglomération :",
+     "montant": "313 000 000 $",
+     "theme": "environnement",
+     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-11-16_13h00_FR.pdf#page=38",
+     "titreEn": "Adoption - Bylaw authorizing a loan of $313,000,000 to finance the construction and renewal of the main aqueduct network"
+    },
+    {
+     "article": "30.08",
+     "titre": "Autoriser l'utilisation partielle des sommes de 245 512 000,84 $ accumulées à la réserve financière de paiement au comptant destinée à financer des dépenses en immobilisations de compétences d'agglomération Compétence Acte mixte d’agglomération :",
+     "montant": "245 512 000,84 $",
+     "theme": "finances",
+     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-11-16_13h00_FR.pdf#page=36",
+     "titreEn": "Authorize the partial use of sums of $245,512,000.84 accumulated in the cash payment reserve fund to finance capital expenditures of agglomeration competence"
+    },
+    {
+     "article": "42.03",
+     "titre": "Adoption - Règlement autorisant un emprunt de 11 940 000 $ afin de financer la réalisation du Plan de la forêt urbaine dans les parcs relevant de la compétence du conseil d'agglomération Compétence Annexe du décret - Écoterritoires d’agglomération :",
+     "montant": "11 940 000 $",
+     "theme": "loisirs",
+     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-11-16_13h00_FR.pdf#page=38",
+     "titreEn": "Adoption - Bylaw authorizing a loan of $11,940,000 to finance the implementation of the Urban Forest Plan in parks under the jurisdiction of the agglomeration council"
+    }
+   ],
+   "phrase": "À l'ordre du jour : l'entente-cadre avec Orbis Canada Limited pour les bacs de manutention des bibliothèques (221 763,78 $), le contrat de gestion du TAZ pour trois ans (4 302 846,61 $) et les travaux de voirie dans l'avenue Jean-Bourdon.",
+   "phraseEn": "On the agenda: the framework agreement with Orbis Canada Limited for library handling bins ($221,763.78), the TAZ management contract for three years ($4,302,846.61) and roadwork on Jean-Bourdon Avenue.",
+   "motsCles": [
+    "bacs de manutention des bibliothèques",
+    "gestion du TAZ",
+    "voirie"
+   ],
+   "motsClesEn": [
+    "library handling bins",
+    "TAZ management",
+    "roadwork"
+   ],
+   "motsEssais": 1,
+   "genereLe": "2026-11-16T19:57:55.665Z",
+   "motsThemes": [
+    "culture",
+    "contrats",
+    "transport"
+   ]
+  },
+  {
    "id": "CE_2026-11-11_08h00",
    "version": 6,
    "instance": "Comité exécutif",
@@ -5257,94 +5432,13 @@
     "environnement",
     null
    ]
-  },
-  {
-   "id": "CM_2026-10-19_13h00",
-   "version": 6,
-   "instance": "Conseil municipal",
-   "instanceEn": "City council",
-   "date": "2026-10-19",
-   "odj": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf",
-   "nPoints": 437,
-   "themes": [
-    {
-     "theme": "environnement",
-     "n": 61
-    },
-    {
-     "theme": "contrats",
-     "n": 59
-    },
-    {
-     "theme": "transport",
-     "n": 45
-    },
-    {
-     "theme": "urbanisme",
-     "n": 34
-    },
-    {
-     "theme": "securite",
-     "n": 24
-    },
-    {
-     "theme": "travaux",
-     "n": 20
-    }
-   ],
-   "points": [
-    {
-     "article": "45.03",
-     "titre": "Approuver le Règlement R-216-1, modifiant le Règlement R-216 autorisant un emprunt de 500 000 000 $ pour financer le projet « Réno-Systèmes - phase 6 » / Approuver la modification du livre Programme des immobilisations (PI) 2026-2035 Adopté à l'unanimité.",
-     "montant": "500 000 000 $",
-     "theme": "finances",
-     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=248",
-     "titreEn": "Propreté streets maintenance teams"
-    },
-    {
-     "article": "45.02",
-     "titre": "Approuver le Règlement R-215-1, modifiant le Règlement R-215 de la Société de transport de Montréal autorisant un emprunt de 400 000 000 $ pour financer le projet « Réno- Infrastructures - phase 4 » / Approuver la modification du livre Programme des immobilisations (PI) 2026-2035 Adopté à l'unanimité.",
-     "montant": "400 000 000 $",
-     "theme": "loisirs",
-     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=248",
-     "titreEn": "Cold asphalt supply"
-    },
-    {
-     "article": "45.07",
-     "titre": "Approuver le Règlement R-200-1 modifiant le Règlement R-200 de la Société de transport de Montréal autorisant un emprunt de 120 900 925 $ pour financer le projet « Programme de réfection des infrastructures (PRI Surface) - phase 2 » / Approuver la modification du livre Programme des immobilisations (PI) 2026-2035 Adopté à l'unanimité.",
-     "montant": "120 900 925 $",
-     "theme": "loisirs",
-     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=249",
-     "titreEn": "Snow transport services"
-    },
-    {
-     "article": "45.01",
-     "titre": "Approuver le Règlement R-015-3 modifiant le Règlement CA-113, tel que modifié par les Règlements R-015, R-015-1 et R-015-2 de la Société de transport de Montréal autorisant un emprunt additionnel de 28 423 532 $ pour financer le projet « Programme mesures préférentielles pour bus (MPB) » / Approuver la modification du livre Programme des immobilisations (PI) 2026-2035 Adopté à l'unanimité. 24/26",
-     "montant": "28 423 532 $",
-     "theme": "loisirs",
-     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=247",
-     "titreEn": null
-    }
-   ],
-   "phrase": "À l'ordre du jour : la gestion des brigades de propreté pour 5 108 788,24 $, les enrobés à froid pour 527 746,58 $ et le transport de la neige pour 13 657 043,23 $.",
-   "phraseEn": "On the agenda: snow removal team management for 5 108 788,24 $, cold mix asphalt for 527 746,58 $ and snow transport for 13 657 043,23 $.",
-   "motsCles": [
-    "brigades de propreté",
-    "enrobés à froid",
-    "transport de la neige"
-   ],
-   "motsClesEn": [
-    "cold mix asphalt"
-   ],
-   "genereLe": "2026-11-13T11:29:23.128Z",
-   "motsThemes": [
-    null,
-    null,
-    "loisirs"
-   ]
   }
  ],
  "enAttente": [
+  {
+   "instance": "Conseil municipal",
+   "date": "2026-11-16"
+  },
   {
    "instance": "Comité exécutif",
    "date": "2026-11-11"
@@ -5452,10 +5546,6 @@
   {
    "instance": "Comité exécutif",
    "date": "2026-10-07"
-  },
-  {
-   "instance": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
-   "date": "2026-10-06"
   },
   {
    "instance": "Conseil d'arrondissement de Outremont",

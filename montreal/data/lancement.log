@@ -2,10 +2,55 @@
 > dossiervillemontreal@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 1c342d3 — Node v22.23.4
+Code : commit f98fc5b — Node v22.23.4
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
+
+=== Consultations publiques ===
+Consultations : 5 à venir.
+
+=== Élus de la Ville ===
+Source : https://donnees.montreal.ca/dataset/381d74ca-dadd-459f-95c9-db255b5f4480/resource/211f6903-1440-438a-9f6c-9718ecf2d3ee/download/liste_elus_montreal.csv (Liste des élu-es de la Ville de Montréal au 2 novembre 2025, modifié 2025-12-15T20:15:52.959031)
+Colonnes : Appellation | Prénom | Nom | Fonction élective | Fonctions additionnelles | Responsabilités CE | Arrondissement | District | Parti | Bureau | Téléphone | Courriel officiel | Historique des changements d'allégeance | Historique des fonctions terminées
+65 membres du conseil municipal (103 élus au total) écrits dans data/elus.json
+  Ensemble Montréal : 34
+  Projet Montréal : 25
+  Équipe LaSalle : 3
+  Équipe Anjou : 2
+  Équipe St-Léonard : 1
+
+=== Conseil d'agglomération ===
+Source : https://donnees.montreal.ca/dataset/da0e81ae-5a30-4919-9b89-ddf66a5e177b/resource/f0fa1aec-71fd-4c77-84e7-025f0bd8c410/download/liste_des-elus-es_aglomeration_elections_2-novembre_2025.csv (modifié 2025-12-15T20:18:51.406683)
+Colonnes : Appellation | Prénom | Nom | Fonction élective | Fonctions additionnelles | Arrondissement / Ville liée | District | Bureau | Téléphone | Courriel officiel | Historique des fonctions terminées
+(pour les Villes liées uniquement)
+
+30 membres écrits dans data/agglomeration.json
+  Montréal : 16
+  Baie-D'Urfé : 1
+  Beaconsfield : 1
+  Côte-Saint-Luc : 1
+  Dollard-Des Ormeaux : 1
+  Dorval : 1
+  Hampstead : 1
+  Kirkland : 1
+  Montréal-Est : 1
+  Montréal-Ouest : 1
+  Mont-Royal : 1
+  Pointe-Claire : 1
+  Sainte-Anne-de-Bellevue : 1
+  Senneville : 1
+  Westmount : 1
+⚠ 30 membres au lieu des 32 sièges attendus — vacance, ou jeu de données modifié.
+
+=== Districts électoraux ===
+Source : https://donnees.montreal.ca/dataset/70acec75-c2b4-4d26-a399-facc7b0ad9bf/resource/fa1f8cfc-cdbf-42fd-9979-32c16b68b5ca/download/districts-electoraux-2025.json (Districts électoraux 2025, modifié 2025-10-20T15:36:15.229218)
+Propriétés : NO_DISTRICT | CODE_DISTRICT | NOM_DISTRICT | NOM_ARR
+58 districts écrits dans data/districts.json
+Contours : 161343 points -> 4716 (6722 ko -> 118 ko)
+
+⚠ Écarts entre les deux sources de la Ville :
+  District « Est » : aucun élu de ville correspondant dans data/elus.json
 
 === robots.txt des sites de la Ville ===
 https://ville.montreal.qc.ca/robots.txt : règles sur nos chemins : allow /
@@ -13,17 +58,17 @@ https://donnees.montreal.ca/robots.txt : règles sur nos chemins : disallow /dat
 https://montreal.ca/robots.txt : rien qui concerne nos chemins
 
 === Calendrier des séances ===
-Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-11-14T23:30:55.821185)
+Calendrier : https://donnees.montreal.ca/dataset/ef6ce312-9737-4253-8b25-94ba17eec23e/resource/9d9d839a-8131-40e4-a2f4-7e82bf9bd58c/download/calendrier-seances-executif-municipal-agglo.csv (modifié 2026-11-15T23:30:50.420281)
 Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_video_seance
 75 séance(s) de 2026 lue(s) dans le calendrier.
 
-76 séance(s) de 2026 dans data/seances.json (1 de plus qu'avant) — CE : 37, CG : 15, CM : 24
+76 séance(s) de 2026 dans data/seances.json (0 de plus qu'avant) — CE : 37, CG : 15, CM : 24
 
 === Calendrier des séances d'arrondissement ===
 164 séance(s) de 2026 déjà connue(s).
     Ahuntsic-Cartierville : 27 document(s) sur sa page, 0 daté(s) aujourd'hui, 11 date(s) de séance connues.
     Ahuntsic-Cartierville : 8 ordre(s) du jour repris de sa page, sommaires compris.
-  Ahuntsic-Cartierville                       8 séance(s)  (115 requêtes)
+  Ahuntsic-Cartierville                       8 séance(s)  (116 requêtes)
     Anjou : 28 document(s) sur sa page, 0 daté(s) aujourd'hui, 12 date(s) de séance connues.
     Anjou : 10 ordre(s) du jour repris de sa page, sommaires compris.
   Anjou                                      10 séance(s)  (43 requêtes)
@@ -48,10 +93,11 @@ Colonnes : seance | lien_site_ville | date | heure_debut | heure_fin | lien_vide
   Ville-Marie                                 9 séance(s)  (82 requêtes)
   Villeray–Saint-Michel–Parc-Extension        9 séance(s)  (82 requêtes)
 
-164 séance(s) d'arrondissement pour 2026, en 1935 requête(s).
+164 séance(s) d'arrondissement pour 2026, en 1936 requête(s).
 
 === Décisions de l'année ===
 164 séance(s) d'arrondissement au calendrier.
+CM_2026-11-16_13h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-11-11_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-11-11_08h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CE_2026-11-04_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -70,7 +116,7 @@ CM_2026-05-12_09h00 : procès-verbal non publié — pas un PDF — page « 404 
 CM_2026-02-17_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CM_2026-01-27_09h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Ver_2026-04-07_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
-CA_Ibs_2026-10-06_19h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
+CA_Ibs_2026-10-06_19h30 : 9 pages, 16 résolutions, 22 points à l'ordre du jour, 14 liens vers un sommaire, 14 sommaires annexés à l'ordre du jour
 CA_Out_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Rpp_2026-10-06_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Cdn_2026-11-02_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
@@ -92,20 +138,20 @@ CA_Vsm_2026-11-03_18h30 : procès-verbal non publié — pas un PDF — page « 
 CA_Sud_2026-11-09_19h00 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 CA_Vma_2026-11-10_18h30 : procès-verbal non publié — pas un PDF — page « 404 Page introuvable - 404 not found »
 
-7625 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 39 en attente de procès-verbal.
-0 nouveauté(s) depuis la dernière exécution.
+7643 décisions écrites dans data/decisions.json — 1 séance(s) lue(s) cette fois, 39 en attente de procès-verbal.
+18 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
-   1383  Procédure
-   1036  Urbanisme
-    954  Transport
+   1391  Procédure
+   1040  Urbanisme
+    957  Transport
     617  Environnement
     495  Administration
-    485  Contrats
+    486  Contrats
     380  Loisirs et communauté
-    320  Culture et patrimoine
+    321  Culture et patrimoine
     310  Subventions
-    252  Travaux et infrastructures
+    253  Travaux et infrastructures
     251  Immobilier
     250  Finances
     240  Développement économique
@@ -115,8 +161,8 @@ Pastilles thématiques :
     102  Ressources humaines
     243  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes enregistrés (depuis 2026-09-16) ===
-Fenêtre depuis 2026-09-16 : 2 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
+=== Votes enregistrés (depuis 2026-09-17) ===
+Fenêtre depuis 2026-09-17 : 2 séance(s) relue(s), 15 vote(s) conservé(s) du fichier précédent.
 
 17 votes enregistrés écrits dans data/votes.json (2 procès-verbaux analysés).
 2 portent un avertissement d'extraction (à vérifier à la main).
@@ -125,47 +171,53 @@ Fenêtre depuis 2026-09-16 : 2 séance(s) relue(s), 15 vote(s) conservé(s) du f
 Votes par décision : 17 décisions, 64 noms.
 
 === Contrats octroyés (SEAO) ===
-Contrats : aucun nouveau fichier SEAO (1953 octrois connus).
+Contrats : lecture de hebdo_20261109_20261115.json… 30 octroi(s).
 Contrats : 641 reliés à une décision du conseil (691 décisions).
-Contrats : 1953 octrois écrits dans data/contrats.json et data/contrats-page.json.
+Contrats : 1979 octrois écrits dans data/contrats.json et data/contrats-page.json.
+
+=== Budget et taxes (MAMH) ===
+Finances : taux 2026 (0.4631 $/100 $), dépenses réelles 2025 (6186.7 M$).
+
+=== Adresses et districts ===
+Adresses de Montréal : 282924 placées (63055 hors des districts, villes liées), 35 fichiers.
 
 === Permis et travaux en cours ===
-Permis : 444 du 2025-11-09 au 2026-11-09. Travaux : 1086 chantiers actifs, dont 51 reliés à un contrat SEAO.
+Permis : 444 du 2025-11-09 au 2026-11-09. Travaux : 1379 chantiers actifs, dont 53 reliés à un contrat SEAO.
 
 === Lexique, mesuré sur les procès-verbaux ===
-Mesure de 33 termes sur 185 procès-verbaux de 2026 en cache et 7625 décisions…
+Mesure de 33 termes sur 186 procès-verbaux de 2026 en cache et 7643 décisions…
 
-   107 PV    3747 résolutions   Résolution
-    79 PV     509 résolutions   Sommaire décisionnel
-   185 PV    6280 résolutions   Dossier décisionnel
-   185 PV     483 résolutions   Procès-verbal
-   185 PV     784 résolutions   Ordre du jour
+   108 PV    3763 résolutions   Résolution
+    80 PV     511 résolutions   Sommaire décisionnel
+   186 PV    6294 résolutions   Dossier décisionnel
+   186 PV     486 résolutions   Procès-verbal
+   186 PV     785 résolutions   Ordre du jour
    144 PV     533 résolutions   Avis de motion
     82 PV     237 résolutions   Règlement
    108 PV    1352 résolutions   Conseil municipal
     75 PV    1521 résolutions   Comité exécutif
-   164 PV    2493 résolutions   Conseil d'arrondissement
-    85 PV      81 résolutions   Conseiller d'arrondissement
+   165 PV    2502 résolutions   Conseil d'arrondissement
+    86 PV      81 résolutions   Conseiller d'arrondissement
     55 PV     171 résolutions   Greffier
     28 PV     180 résolutions   Présidence du conseil
     58 PV    1382 résolutions   Conseil d'agglomération
     25 PV      33 résolutions   Ville liée
      9 PV      12 résolutions   Compétence d'agglomération
     23 PV     162 résolutions   Vote enregistré
-   149 PV    5748 résolutions   Adoptée à l'unanimité
+   150 PV    5764 résolutions   Adoptée à l'unanimité
     27 PV      43 résolutions   Adoptée à la majorité des voix
     10 PV      13 résolutions   Dissidence
-   108 PV     267 résolutions   Prise d’acte
+   109 PV     269 résolutions   Prise d’acte
     52 PV     103 résolutions   Mairesse suppléante
     85 PV     152 résolutions   Dérogation mineure
     65 PV     119 résolutions   Projet particulier
      6 PV       5 résolutions   Article 89
-   102 PV     323 résolutions   Zonage
-    68 PV     374 résolutions   Accorder un contrat
+   103 PV     324 résolutions   Zonage
+    69 PV     375 résolutions   Accorder un contrat
    155 PV     877 résolutions   Appel d'offres
     54 PV     173 résolutions   Gré à gré
    153 PV     701 résolutions   Contribution financière
-    52 PV      78 résolutions   Programme décennal d'immobilisations
+    53 PV      79 résolutions   Programme décennal d'immobilisations
     45 PV      94 résolutions   Règlement d'emprunt
     11 PV      15 résolutions   Expropriation
 
@@ -176,8 +228,8 @@ Récapitulatifs des sujets : rien de nouveau.
 
 === Sujets suivables et dossiers, pour Mes dossiers ===
 Projets publics : 16 sujets · index 17.2 Ko · fichiers de sujet 926 Ko au total.
-Décisions récentes : 940 dossiers depuis le 2026-08-29 · 1408 Ko.
-Dossiers de l'année : 5940 · 3455 Ko · organismes suggérés : 540.
+Décisions récentes : 956 dossiers depuis le 2026-08-29 · 1426 Ko.
+Dossiers de l'année : 5956 · 3465 Ko · organismes suggérés : 541.
 
 === Sujets suivables en anglais ===
 Sujets en anglais : 0 déjà traduits, 16 à faire — ~0.25 $ US estimés.
@@ -189,16 +241,16 @@ Lexique anglais : à jour.
 
 === Traductions anglaises ===
 Résumés : 4719 déjà traduits, 0 à faire, 0 cette fois.
-Titres  : 7146 déjà traduits, 33 à faire, 33 cette fois en 2 paquet(s).
-Étiquettes : 1324 déjà traduites, 1 à faire en 1 paquet(s).
+Titres  : 7164 déjà traduits, 31 à faire, 31 cette fois en 2 paquet(s).
+Étiquettes : 1324 déjà traduites, 4 à faire en 1 paquet(s).
 ~0.02 $ US estimés (lot, moitié prix).
-Lot msgbatch_01LVAKmuR5eDdv9h1o2o5GGw envoyé (0 résumés, 2 paquets de titres, 1 paquets d'étiquettes).
+Lot msgbatch_01C9MSobD2fYuLJczT6isu2t envoyé (0 résumés, 2 paquets de titres, 1 paquets d'étiquettes).
+  in_progress — 0 réussis, 3 en cours, 0 en erreur
+  in_progress — 0 réussis, 3 en cours, 0 en erreur
   in_progress — 0 réussis, 3 en cours, 0 en erreur
   in_progress — 0 réussis, 3 en cours, 0 en erreur
   ended — 3 réussis, 0 en cours, 0 en erreur
-Traductions : 0 résumés et 18 titres et 0 étiquettes faits (16 refusés ou en échec) — 4719 résumés et 7164 titres au total, 0.02 $ US.
-  ⚠ titre CA26 28 084 : nombres différents
-  ⚠ titre CA26 16 0124 : nombres différents
+Traductions : 0 résumés et 16 titres et 3 étiquettes faits (16 refusés ou en échec) — 4719 résumés et 7180 titres au total, 0.03 $ US.
   ⚠ titre CA26 16 0125 : nombres différents
   ⚠ titre CA26 16 0149 : nombres différents
   ⚠ titre CA26 25 0167 : nombres différents
@@ -212,23 +264,44 @@ Traductions : 0 résumés et 18 titres et 0 étiquettes faits (16 refusés ou en
   ⚠ titre CA26 12017 : nombres différents
   ⚠ étiquette « Autoriser le transfert de 14/036,01/$, t » refusée
   ⚠ titre CA26 10 294 : nombres différents
+  ⚠ titre CA26 19 0182 : nombres différents
+  ⚠ titre CA26 28 084 : nombres différents
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-09-16 pas encore résumés (plafond : 120)…
-9092 déjà résumés, 0 à faire.
-Rien à générer. (--force pour tout regénérer.)
+Sommaires depuis 2026-09-17 pas encore résumés (plafond : 120)…
+9092 déjà résumés, 14 à faire.
+
+--- Estimation ---
+Documents à résumer  : 14
+Modèle               : claude-opus-5
+Ratio mesuré         : 1.31 caractères/jeton (sur 12 documents)
+Jetons d'entrée      : ~56 930
+Jetons de sortie     : ~4 480
+Coût estimé          : ~0.40 $ US (0.20 $ via l'API Batches)
+
+Génération…
+Envoi à l'API Batches (50 % du tarif, résultats en moins d'une heure en général)…
+Lot msgbatch_01VMHi4Nfs9TUgvgDKAHmXfN — statut in_progress
+  in_progress — 0 réussis, 14 en cours, 0 en erreur
+  in_progress — 0 réussis, 14 en cours, 0 en erreur
+  in_progress — 0 réussis, 14 en cours, 0 en erreur
+  ended — 14 réussis, 0 en cours, 0 en erreur
+
+14 résumés générés, 9106 au total dans data/resumes.json
+Coût réel : 0.20 $ US
 
 === En bref, séance par séance ===
-Séances : 41, appels : 1, rejets : 0, coût : 0.011 $ US
+Séances : 42, appels : 2, rejets : 0, coût : 0.024 $ US
 
 === Décisions récentes dans la page (Google) ===
 montreal : 30 décisions écrites dans la page des décisions (inchangé).
 
 === Courriels de Montréal publiés ===
 2026-10 : compte rendu en attente de 3 procès-verbal(aux) (CG 2026-10-22, CM 2026-10-20, CM 2026-10-19).
+--seance=2026-10-06 --instance=ile-bizard-sainte-genevieve → Publié : ile-bizard-sainte-genevieve-2026-10-06. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
 --mois=2026-09 → Déjà publié : 2026-09. Rien à faire.
 
 === Bilan ===
-  étapes         : 19
+  étapes         : 25
   échecs         : aucun
   avertissements : aucun
