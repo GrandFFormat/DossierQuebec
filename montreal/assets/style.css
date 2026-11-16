@@ -858,5 +858,5 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 .bloc-contrat li { margin: 2px 0; }
 
 /* « Version officielle » au bout de la note de l'encadré En bref : cellulaire seulement (16 nov. 2026). */
-.eb-vo { display: none; font-weight: 700; color: inherit; white-space: nowrap; }
+.eb-vo { display: none; font-weight: 700; color: #16191D; background: var(--vedette, #FFD24D); padding: 1px 5px; border-radius: 3px; white-space: nowrap; }
 @media (max-width: 700px) { .eb-vo { display: inline; } }
