@@ -1496,3 +1496,24 @@ document.addEventListener('toggle', async (e) => {
     ${pdf ? `<p class="compte" style="margin:2px 0 0"><a href="${echapper(pdf)}" target="_blank" rel="noopener">${tr('Résolution officielle (PDF) ↗', 'Official resolution (PDF, in French) ↗')}</a></p>` : ''}
   </div>`);
 }, true);
+
+// CONTRAT AU SEAO (16 nov. 2026, comme à Québec). Sur une fiche de décision qui adjuge un contrat, le
+// contrat déclaré au SEAO (scrapers/contrats.js → data/contrats-decisions.json, lu une seule fois).
+let contratsParDecision = null;
+document.addEventListener('toggle', async (e) => {
+  const fiche = e.target;
+  if (!fiche.matches?.('details.carte.pliante') || !fiche.open || fiche.querySelector('.bloc-seao')) return;
+  if (document.body.dataset.page !== 'decisions') return;
+  const numero = fiche.querySelector('.puce.num')?.textContent.trim();
+  if (!numero) return;
+  contratsParDecision ??= charger('contrats-decisions');
+  const liste = (await contratsParDecision)?.[numero];
+  if (!liste?.length || fiche.querySelector('.bloc-seao')) return;
+  const argent = (n) => (n == null ? '—' : Number(n).toLocaleString(EN ? 'en-CA' : 'fr-CA', { maximumFractionDigits: 0 }) + ' $');
+  const lignes = liste.map(([fournisseur, montant, gre, soum, item]) => `<li><strong>${echapper(fournisseur)}</strong> : ${argent(montant)}${
+    gre ? ` · ${tr('gré à gré', 'direct award')}` : soum ? ` · ${soum} ${soum > 1 ? tr('soumissions', 'bids') : tr('soumission', 'bid')}` : ''
+  }${item ? ` · <a href="https://seao.gouv.qc.ca/avis-resultat-recherche/consulter?ItemId=${echapper(item)}" target="_blank" rel="noopener">${tr('avis SEAO', 'SEAO notice')} ↗</a>` : ''}</li>`).join('');
+  fiche.querySelector('.corps')?.insertAdjacentHTML('afterbegin', `<div class="bloc-contrat bloc-seao">
+    <div class="resume-entete">${tr('Contrat déclaré au SEAO', 'Contract declared in SEAO')} · <a href="contrats-de-la-ville-de-montreal${EN ? '?lang=en' : ''}">${tr('tous les contrats', 'all contracts')}</a></div>
+    <ul>${lignes}</ul></div>`);
+}, true);

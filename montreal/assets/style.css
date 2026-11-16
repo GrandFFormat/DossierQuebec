@@ -851,3 +851,8 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 /* Contexte d'une décision : portée, durée, parcours du dossier (13 nov. 2026). */
 .contexte-decision { list-style: none; margin: 0 0 12px; padding: 10px 14px; border-left: 3px solid var(--accent); background: var(--surface, transparent); font-size: 14.5px; line-height: 1.5; }
 .contexte-decision li { margin: 2px 0; overflow-wrap: anywhere; }
+
+/* Contrat au SEAO sur une fiche de décision (16 nov. 2026, comme à Québec). */
+.bloc-contrat { border: 1px solid var(--ligne); border-radius: var(--rayon); padding: 11px 16px; margin: 0 0 12px; }
+.bloc-contrat ul { margin: 0; padding-left: 19px; }
+.bloc-contrat li { margin: 2px 0; }
