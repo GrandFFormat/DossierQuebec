@@ -1309,7 +1309,12 @@ init();
   window.addEventListener('scroll', majVisible, { passive: true });
   window.addEventListener('resize', majVisible, { passive: true });
   majVisible();
-  bouton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  // La flèche s'envole vers le haut en même temps que la page remonte (Martin, 16 nov. 2026).
+  bouton.addEventListener('click', () => {
+    bouton.classList.remove('envol'); void bouton.offsetWidth; bouton.classList.add('envol');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  bouton.addEventListener('animationend', () => bouton.classList.remove('envol'));
 })();
 
 // « Tout ouvrir » d'une séance (Martin, 9 nov. 2026) : déplie la séance et toutes ses fiches ;
