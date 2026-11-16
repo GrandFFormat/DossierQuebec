@@ -2,12 +2,41 @@
 > dossiervillelevis@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 1c342d3 — Node v22.23.4
+Code : commit f98fc5b — Node v22.23.4
 
 === Syntaxe du JavaScript du site ===
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
+
+=== Consultations publiques ===
+Consultations : 2 à venir.
+
+=== Membres du conseil ===
+16 membres écrits dans data/elus.json :
+  maire        Steven Blaney                                                                Prospérité Lévis — Équipe Steven Blaney
+  district  1  Anthony Dufour             Saint-Étienne      Chutes-de-la-Chaudière-Ouest   Repensons Lévis — Équipe Serge Bonin
+  district  2  Isabelle Lefebvre          Saint-Nicolas      Chutes-de-la-Chaudière-Ouest   Repensons Lévis — Équipe Serge Bonin
+  district  3  Audrey Bédard              Villieu            Chutes-de-la-Chaudière-Ouest   Repensons Lévis — Équipe Serge Bonin
+  district  4  Benoit Forget-Chiasson     Saint-Rédempteur   Chutes-de-la-Chaudière-Ouest   Lévis Force 10 — Équipe Isabelle Demers
+  district  5  Daniel Saindon             Charny             Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
+  district  6  Karine Lavertu             Breakeyville       Chutes-de-la-Chaudière-Est     Lévis Force 10 — Équipe Isabelle Demers
+  district  7  Alain Quirion              Saint-Jean         Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
+  district  8  Erik Bilodeau              Taniata            Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
+  district  9  Anick Tremblay             Saint-Romuald      Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
+  district 10  Anne-Marie Tremblay        Notre-Dame         Desjardins                     Prospérité Lévis — Équipe Steven Blaney
+  district 11  Jean Demers                Saint-David        Desjardins                     Prospérité Lévis — Équipe Steven Blaney
+  district 12  Jean Leblond               Christ-Roi         Desjardins                     Prospérité Lévis — Équipe Steven Blaney
+  district 13  Olivier Biron              Bienville          Desjardins                     Prospérité Lévis — Équipe Steven Blaney
+  district 14  Mélanie Sicotte            Lauzon             Desjardins                     Prospérité Lévis — Équipe Steven Blaney
+  district 15  Éric Nadeau                Pintendre          Desjardins                     Repensons Lévis — Équipe Serge Bonin
+Partis : {"Prospérité Lévis — Équipe Steven Blaney":10,"Repensons Lévis — Équipe Serge Bonin":4,"Lévis Force 10 — Équipe Isabelle Demers":2}
+
+=== Districts électoraux ===
+Source : https://www.donneesquebec.ca/recherche/dataset/e53425f2-e4cc-4eec-b978-0b862c7a0c56/resource/ee12484f-cc90-4340-9edc-8e17de3e1422/download/districts-electoraux.json (mise à jour du 2022-07-21)
+15 districts écrits dans data/districts.json
+Contours : 12098 points -> 1158 (498 ko -> 35 ko)
+  ⚠ Contours du jeu ouvert mis à jour le 2022-07-21, antérieurs au Règlement RV-2024-34-65 et aux ajustements annoncés par la Ville : carte indicative.
 
 === robots.txt des sites lus ===
 https://levis.ca/robots.txt : rien qui concerne nos chemins
@@ -48,16 +77,16 @@ Pastilles thématiques :
      17  Immobilier
     149  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-09-16) ===
-Fenêtre depuis 2026-09-16 : 9 séance(s) relue(s), 17 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-09-17) ===
+Fenêtre depuis 2026-09-17 : 9 séance(s) relue(s), 17 vote(s) conservé(s) du fichier précédent.
 
 20 votes nominaux écrits dans data/votes.json (9 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
 
 === Contrats octroyés (SEAO) ===
-Contrats : aucun nouveau fichier SEAO (368 octrois connus).
+Contrats : lecture de hebdo_20261109_20261115.json… 6 octroi(s).
 Contrats : 0 reliés à une décision du conseil (0 décisions).
-Contrats : 368 octrois écrits dans data/contrats.json et data/contrats-page.json.
+Contrats : 374 octrois écrits dans data/contrats.json et data/contrats-page.json.
 
 === Budget et taxes (MAMH) ===
 Finances : taux 2026 (0.6361 $/100 $), dépenses réelles 2025 (360.3 M$).
@@ -70,7 +99,7 @@ Votes par décision : 18 décisions, 18 noms.
 ⚠ « Lexique, mesuré sur les procès-verbaux » a échoué (code 1) — on garde les données précédentes, ça attendra.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-09-16 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-09-17 pas encore résumés (plafond : 120)…
 637 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
@@ -93,10 +122,10 @@ Séances : 17, appels : 0, rejets : 0, coût : 0.000 $ US
 levis : 30 décisions écrites dans la page des décisions (inchangé).
 
 === Courriels de Lévis publiés ===
---seance=2026-11-10 → Publié : conseil-2026-11-10. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
---mois=2026-10 → Publié : 2026-10. Il part aux inscrits confirmés au prochain passage du cron (11 h UTC), et à chaque nouvel inscrit.
+--seance=2026-11-10 → Déjà publié : conseil-2026-11-10. Rien à faire.
+--mois=2026-10 → Déjà publié : 2026-10. Rien à faire.
 
 === Bilan ===
-  étapes         : 17
+  étapes         : 20
   échecs         : aucun
   avertissements : Lexique, mesuré sur les procès-verbaux
