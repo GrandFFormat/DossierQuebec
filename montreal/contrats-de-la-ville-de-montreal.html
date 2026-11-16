@@ -144,6 +144,7 @@
     <select id="filtre-mode" aria-label="Mode d’octroi" data-en-aria-label="Award method">
       <option value="" data-en="All methods">Tous les modes</option>
       <option value="gre" data-en="Direct awards only">Gré à gré seulement</option>
+      <option value="ao" data-en="Public tenders only">Appels d’offres seulement</option>
       <option value="seule" data-en="Tender with a single bid">Appel d’offres, une seule soumission</option>
     </select>
   </div>
@@ -210,7 +211,7 @@
   let D = null, C_i = 0; // contrats-details.json, chargé au premier clic
   const C = d.c.map(([date, montant, mode, soum, motif, cat, fournisseur, titre, item, avis, det]) => ({
     i: C_i++, date, montant, soum, avis, det, motif: motifEn(d.motifs[motif]), cat: d.categories[cat], fournisseur, titre, item,
-    gre: estGre(mode), seule: !estGre(mode) && soum === 1,
+    gre: estGre(mode), ao: /appel d.offres/i.test(d.modes[mode] || ''), inv: /invitation/i.test(d.modes[mode] || ''), seule: !estGre(mode) && soum === 1,
   }));
 
   const somme = (l) => l.reduce((s, c) => s + (c.montant || 0), 0);
@@ -250,7 +251,7 @@
     $('#liste').innerHTML = `<table><thead><tr><th>Date</th><th>${fr('Objet', 'Subject')}</th><th>${fr('Fournisseur', 'Supplier')}</th><th class="n">${fr('Montant', 'Amount')}</th></tr></thead><tbody>${
       l.slice(0, limite).map((c) => `<tr data-i="${c.i}"><td class="n">${c.date}</td><td>${c.item ? `<a href="https://seao.gouv.qc.ca/avis-resultat-recherche/consulter?ItemId=${esc(c.item)}" target="_blank" rel="noopener">${esc(c.titre)}</a>` : esc(c.titre)}${
         c.gre ? `<span class="motif"><span class="puce">${fr('Gré à gré', 'Direct award')}</span> ${esc((c.motif || '').replace(/^Article\s*/, fr('Article ', 'Section ')))}</span>`
-        : c.seule ? `<span class="motif"><span class="puce">${fr('Une seule soumission', 'Single bid')}</span></span>` : ''
+        : c.ao ? `<span class="motif"><span class="puce">${c.inv ? fr('Appel d’offres sur invitation', 'Invitation to tender') : fr('Appel d’offres', 'Public tender')}</span>${c.seule ? ` <span class="puce">${fr('Une seule soumission', 'Single bid')}</span>` : ''}</span>` : ''
       }${c.avis ? `<span class="motif"><a href="decisions-de-la-ville-de-montreal?q=${esc(c.avis)}">${fr('Décisions du conseil sur ce contrat', 'Council decisions on this contract')} →</a></span>` : ''}${c.det ? `<button type="button" class="ouvrir" aria-expanded="false">${c.det > 0 ? fr(`Lot et soumissionnaires (${c.det})`, `Lot and bidders (${c.det})`) : fr('Lot et modifications', 'Lot and amendments')}</button>` : ''}</td><td>${esc(c.fournisseur)}</td><td class="n">${argent(c.montant)}</td></tr>`).join('')
     }</tbody></table>`;
     $('#voir-plus').hidden = l.length <= limite;
