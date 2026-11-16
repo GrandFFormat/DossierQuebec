@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<!-- Consentement (Loi 25) : par défaut, Google Analytics n'a PAS le droit de déposer de témoins.
+     La bannière (commun/consentement.js) passe analytics_storage à « granted » après « Accepter ». -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: (function(){ try { return localStorage.getItem('dq:temoins') === 'oui' ? 'granted' : 'denied'; } catch (e) { return 'denied'; } })(), ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-87R1S6SR9Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-87R1S6SR9Y', { content_group: 'Longueuil' });
+</script>
+<script src="/commun/consentement.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Près de chez moi à Longueuil | DossierQuébec</title>
+<meta name="description" content="Près de chez moi à Longueuil : travaux, permis et adresse. Le volet est en pause et ces données de la Ville de Longueuil n’ont pas encore été lues.">
+<link rel="canonical" href="https://dossierquebec.ca/longueuil/pres-de-chez-moi-a-longueuil">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DossierQuébec">
+<meta property="og:locale" content="fr_CA">
+<meta property="og:title" content="Près de chez moi à Longueuil | DossierQuébec">
+<meta property="og:description" content="Près de chez moi à Longueuil : travaux, permis et adresse. Le volet est en pause et ces données de la Ville de Longueuil n’ont pas encore été lues.">
+<meta property="og:url" content="https://dossierquebec.ca/longueuil/pres-de-chez-moi-a-longueuil">
+<meta property="og:image" content="https://dossierquebec.ca/longueuil/og-longueuil.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Près de chez moi à Longueuil | DossierQuébec">
+<meta name="twitter:description" content="Près de chez moi à Longueuil : travaux, permis et adresse. Le volet est en pause et ces données de la Ville de Longueuil n’ont pas encore été lues.">
+<meta name="twitter:image" content="https://dossierquebec.ca/longueuil/og-longueuil.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
+<script>
+  /* Thème appliqué AVANT le premier rendu. Sans ça, quelqu'un en mode sombre se prend
+     un éclair blanc à chaque changement de page. Choix explicite d'abord, préférence
+     du système ensuite. */
+  (function () {
+    try {
+      var t = localStorage.getItem('dvm:theme');
+      if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
+      document.documentElement.dataset.theme = t;
+      var z = parseInt(localStorage.getItem('dvm:zoom'), 10);
+      if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+    } catch (e) {}
+  })();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "DossierQuébec",
+      "item": "https://dossierquebec.ca/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Ville de Longueuil",
+      "item": "https://dossierquebec.ca/longueuil/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Près de chez moi",
+      "item": "https://dossierquebec.ca/longueuil/pres-de-chez-moi-a-longueuil"
+    }
+  ]
+}
+</script>
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="/commun/abonnes.css">
+</head>
+<body data-page="pres" data-ville="longueuil">
+
+<header>
+  <div class="contenu">
+    <div class="titre-ligne">
+      <a href="./"><p class="logo-titre">Dossier<span class="marque">VilleDeLongueuil</span></p></a><a class="lien-dq" href="/" title="DossierQuébec — l'Assemblée nationale en clair" aria-label="DossierQuébec — l'Assemblée nationale en clair" data-en-title="DossierQuébec — Quebec's National Assembly in plain language" data-en-aria-label="DossierQuébec — Quebec's National Assembly in plain language"></a>
+      <details class="ab-villes" id="villes"></details>
+    </div>
+    <p class="sous-titre">
+      Les décisions de la Ville de Longueuil, lisibles. Données publiques, reprises telles quelles
+      des procès-verbaux et des documents de séance officiels de la Ville.
+    </p>
+    <nav>
+      <a href="./">Accueil</a>
+      <a href="decisions-de-la-ville-de-longueuil">Décisions</a>
+      <a href="votes-nominatifs-du-conseil-de-longueuil">Votes nominatifs</a>
+      <a href="conseil-de-ville-de-longueuil">Conseil de ville</a>
+      <a href="pres-de-chez-moi-a-longueuil" aria-current="page">Près de chez moi</a>
+      <a href="lexique-municipal-de-longueuil">Lexique</a>
+      <div class="outils">
+        <div class="taille-texte" role="group" aria-label="Taille du texte">
+          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+          <span id="texte-pct" aria-live="polite">100%</span>
+          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+        </div>
+        <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
+                title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="contenu prose">
+  <h1 data-en="Near me in Longueuil" class="page">Près de chez moi à Longueuil</h1>
+  <p class="chapeau" data-en="In the other cities, this page finds your address, then the roadwork and the permits within one kilometre, on a map. For Longueuil, it is not ready yet.">
+    Dans les autres villes, cette page trouve votre adresse, puis les travaux et les permis à moins d’un
+    kilomètre, sur une carte. Pour Longueuil, elle n’est pas encore prête.
+  </p>
+  <section class="bloc-pres" style="background:var(--carte);border:var(--bordure-carte, 1px solid var(--ligne));border-radius:var(--rayon);padding:14px 16px;margin:16px 0 20px">
+    <h2 style="margin-top:0" data-en="No data yet">Pas encore de données</h2>
+    <p data-en="The Longueuil section has been on pause since October 7, 2026. The City’s addresses, building permits and roadwork have not been read, so this page shows nothing rather than something invented.">Le volet de Longueuil est en pause depuis le 7 octobre 2026. Les adresses, les permis de construction et les travaux de la Ville n’ont pas été lus : cette page n’affiche donc rien plutôt que d’inventer.</p>
+    <p data-en="Meanwhile, your district and your councillor are on the <a href=&quot;conseil-de-ville-de-longueuil&quot;>City Council</a> page.">En attendant, votre district et votre élu sont sur la page <a href="conseil-de-ville-de-longueuil">Conseil de ville</a>.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="contenu">
+    <p>Site citoyen indépendant. Aucun lien avec la Ville de Longueuil, aucun caractère officiel.
+    En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees-de-longueuil">Sources</a>.</p>
+    <p class="lien-dq-pied"><a href="/" data-en="DossierQuébec — Québec's National Assembly in plain language">DossierQuébec — l'Assemblée nationale en clair</a> · <a href="/regles" data-en="The rules of the site">Les règles du site</a> · <a href="sources-des-donnees-de-longueuil" data-en="Sources">Sources</a> · <a href="sources-des-donnees-de-longueuil#mises-a-jour" data-en="Updates">Mises à jour</a> · <a href="https://longueuil.quebec/" target="_blank" rel="noopener" data-en="City of Longueuil site ↗">Site de la Ville de Longueuil ↗</a> · <span data-en="Powered by">Une réalisation de</span> <a class="lien-dafr" href="https://www.dafrsolution.com" data-en-href="https://www.dafrsolution.com/en" target="_blank" rel="noopener">DAFR Solution</a></p>
+  </div>
+</footer>
+
+<script type="module" src="assets/app.js"></script>
+<script type="module" src="/commun/entete-volet.js"></script>
+<script type="module" src="/commun/abonnes.js"></script>
+<!-- Vercel Web Analytics — sans cookie, sans donnée personnelle, comme sur DossierQuébec.
+     Même projet Vercel : les pages vues de /longueuil/ s'ajoutent au même tableau de
+     bord. En local le script n'existe pas (404 sans conséquence). -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/commun/mesure.js"></script>
+</body>
+</html>

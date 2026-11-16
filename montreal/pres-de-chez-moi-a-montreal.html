@@ -163,6 +163,7 @@
     // « Près de chez moi » à Montréal (12 nov. 2026), même mécanique qu'à Québec. Index des adresses :
     // scrapers/adresses.js ; permis et travaux : scrapers/permis-travaux.js. Un chantier dont le numéro de
     // contrat se retrouve au SEAO montre le fournisseur et le montant du contrat.
+    import { bulle, afficherRayon } from '/commun/pres-rayon.js';
     const EN = document.documentElement.lang === 'en';
     const tr = (f, e) => (EN ? e : f);
     const dp = EN ? ':' : '&nbsp;:';
@@ -232,7 +233,7 @@
       for (const [, [libelle, adresses]] of candidates) {
         // Une adresse peut couvrir une plage (« 6215-6223 ») : même côté de la rue, donc même parité.
         const a = adresses.find((x) => numero >= x[0] && numero <= x[1] && (numero - x[0]) % 2 === 0);
-        if (a) trouvees.push({ libelle, district: a[2], qi: a[3], quartier: index.quartiers[a[3]] });
+        if (a) trouvees.push({ libelle, district: a[2], qi: a[3], quartier: index.quartiers[a[3]], lat: a[4], lon: a[5] });
       }
       if (!trouvees.length) {
         zone.innerHTML = `<p>${tr('Adresse introuvable. Vérifiez le numéro et le nom de la rue. La recherche couvre la Ville de Montréal seulement, pas les villes liées.', 'Address not found. Check the number and street name. The search covers the City of Montréal only, not the linked cities.')}</p>`;
@@ -248,6 +249,31 @@
           </ul></section>`;
       }).join('');
       const t = trouvees[0];
+      // Le rayon « − 1 km + » et la carte (15 nov. 2026, standard venu de Vancouver) : chantiers et permis
+      // de TOUS les quartiers à portée, du plus proche au plus loin. Sans position : l'ancien affichage.
+      if (t.lat && t.lon) {
+        const [ent, ...tous] = await Promise.all([
+          fetch('data/entraves.json').then((r) => (r.ok ? r.json() : null)).catch(() => null),
+          ...index.quartiers.map((_, qi) => fetch(`data/permis/${qi}.json`).then((r) => (r.ok ? r.json() : [])).catch(() => [])),
+        ]);
+        const titreGM = tr('Voir sur Google Maps', 'See on Google Maps');
+        const chantiers = Object.values(ent?.parQuartier ?? {}).flat().map((c) => {
+          const b = c[3] === 'public' ? ['ville', tr('Travaux publics', 'Public works')] : ['prive', tr('Chantier privé', 'Private site')];
+          const contrat = c[6] ? `<span class="contrat-chantier">${tr('Contrat', 'Contract')}${dp} ${esc(c[6][0])}, ${argent(c[6][1])}${c[6][2] ? ` · <a href="https://seao.gouv.qc.ca/avis-resultat-recherche/consulter?ItemId=${esc(c[6][2])}" target="_blank" rel="noopener">${tr('avis SEAO', 'SEAO notice')} ↗</a>` : ''}</span>` : '';
+          return { lat: c[4], lon: c[5], classe: b[0], popup: `<strong>${b[1]}</strong><br>${esc(enChantier(c[0]))}`,
+            html: (loin) => `<li>${bulle(b[0], b[1], c[4], c[5], titreGM)} ${esc(enChantier(c[0]))}${loin}${c[2] ? ` <span class="compte">(${tr('jusqu’au', 'until')} ${jour(c[2])})</span>` : ''}${contrat}</li>` };
+        });
+        const permis = tous.flat().map((p) => { const g = genrePermis(p[2]); return { lat: p[4], lon: p[5], classe: g[0],
+          popup: `<strong>${g[1]}</strong><br>${esc(p[1])}<br>${jour(p[0])}`,
+          html: (loin) => `<li>${bulle(g[0], g[1], p[4], p[5], titreGM)} <span class="compte">${jour(p[0])}</span> ${esc(p[1])}${dp} ${esc(enMotif(p[2]))}${loin}</li>` }; });
+        const zr = document.createElement('div'); zr.className = 'zone-rayon'; zr.id = 'zone-rayon'; zone.append(zr);
+        afficherRayon(zr, { cleStockage: 'mtl:rayon', tr, adresse: t, sections: [
+          { titre: (ou, n) => `${tr(`Travaux en cours ${ou}`, `Roadwork ${ou}`)}${dp} ${n}`, items: chantiers,
+            pied: ent ? `<p class="compte">${tr('État du', 'As of')} ${new Date(ent.extraction).toLocaleDateString(EN ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'short', year: 'numeric' })}.</p>` : '' },
+          { titre: (ou, n) => `${tr(`Permis délivrés ${ou} depuis 12 mois`, `Permits issued ${ou} over the last 12 months`)}${dp} ${n}`, items: permis },
+        ] });
+        return;
+      }
       if (t.qi < 0) return;
       const [ent, permis] = await Promise.all([
         fetch('data/entraves.json').then((r) => (r.ok ? r.json() : null)).catch(() => null),

@@ -8,7 +8,7 @@
 // municipales - Districts électoraux » (2025), « Quartiers de référence en habitation ».
 // Une adresse de Montréal peut couvrir une plage de numéros (« 6215-6223 ») : on garde le début et la fin.
 //
-// Sortie : data/adresses/<lettre>.json — { "voie": [libellé, [[de, à, district, quartier], …]] }, où
+// Sortie : data/adresses/<lettre>.json — { "voie": [libellé, [[de, à, district, quartier, lat, lon], …]] }, où
 // district est le NO_DISTRICT de la Ville (= numeroSource de data/districts.json) ; data/adresses/index.json.
 
 import { mkdirSync, writeFileSync, rmSync } from 'node:fs';
@@ -54,7 +54,7 @@ for (const l of lignes.slice(1)) {
   const lettre = (cle[0] || '_').replace(/[^A-Z0-9]/, '_');
   const libelle = [l[cGen], l[cLien], l[cSpec], or].filter(Boolean).join(' ').replace(/\s+/g, ' ');
   const voie = ((parLettre[lettre] ||= {})[cle] ||= [libelle, []]);
-  voie[1].push([Number(l[cDe]), Number(l[cA] || l[cDe]), d.numero, q ? nomsQuartiers.indexOf(q.nom) : -1]);
+  voie[1].push([Number(l[cDe]), Number(l[cA] || l[cDe]), d.numero, q ? nomsQuartiers.indexOf(q.nom) : -1, +y.toFixed(5), +x.toFixed(5)]);
   n++;
 }
 

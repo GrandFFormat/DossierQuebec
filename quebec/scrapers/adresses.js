@@ -11,7 +11,7 @@
 // ici, une fois par semaine. Aucun service de géolocalisation externe, aucune adresse tapée par un
 // visiteur n'est envoyée nulle part : la page lit un petit fichier par lettre et cherche chez lui.
 //
-// Sortie : data/adresses/<lettre>.json — { "voie normalisée": [libellé, [[no, district, quartier], …]] }
+// Sortie : data/adresses/<lettre>.json — { "voie normalisée": [libellé, [[no, district, quartier, lat, lon], …]] }
 // et data/adresses/index.json (quartiers, date, nombre).
 
 import { mkdirSync, writeFileSync, rmSync, readFileSync } from 'node:fs';
@@ -71,7 +71,7 @@ for (const l of lignes.slice(1)) {
   const libelle = [v[cType], v[cNom], v[cOr]].filter(Boolean).join(' ').replace(/\s+/g, ' ');
   const voies = (parLettre[lettre] ||= {});
   const voie = (voies[cle] ||= [libelle, []]);
-  voie[1].push([v[cNo], d.numero, q ? nomsQuartiers.indexOf(q.nom) : -1]);
+  voie[1].push([v[cNo], d.numero, q ? nomsQuartiers.indexOf(q.nom) : -1, +y.toFixed(5), +x.toFixed(5)]);
   n++;
 }
 

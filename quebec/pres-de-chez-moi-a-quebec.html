@@ -176,6 +176,7 @@
   <script type="module">
     // Recherche « Qui me représente ? » (12 nov. 2026). L'index (scrapers/adresses.js) est découpé par
     // première lettre de la voie : on ne lit qu'un fichier, et seulement quand on cherche.
+    import { bulle, afficherRayon } from '/commun/pres-rayon.js';
     const EN = document.documentElement.lang === 'en';
     const tr = (f, e) => (EN ? e : f);
     const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -231,7 +232,7 @@
       const trouvees = [];
       for (const [, [libelle, adresses]] of candidates) {
         const a = adresses.find((x) => String(x[0]).toUpperCase() === numero);
-        if (a) trouvees.push({ libelle, district: a[1], qi: a[2], quartier: index.quartiers[a[2]] });
+        if (a) trouvees.push({ libelle, district: a[1], qi: a[2], quartier: index.quartiers[a[2]], lat: a[3], lon: a[4] });
       }
       if (!trouvees.length) {
         zone.innerHTML = `<p>${tr('Adresse introuvable. Vérifiez le numéro et le nom de la rue. La recherche couvre la Ville de Québec seulement.', 'Address not found. Check the number and street name. The search covers the City of Québec only.')}</p>`;
@@ -249,6 +250,35 @@
       // Près de chez vous : les permis de construction, d'agrandissement et de démolition des 12 derniers
       // mois dans le quartier (scrapers/permis.js). Seulement pour la première adresse trouvée.
       const t = trouvees[0];
+      // Le rayon « − 1 km + » et la carte (15 nov. 2026, standard venu de Vancouver) : chantiers et permis
+      // de TOUS les quartiers à portée, du plus proche au plus loin. Sans position : l'ancien affichage.
+      if (t.lat && t.lon) {
+        const [ent, ...tous] = await Promise.all([
+          fetch('data/entraves.json').then((r) => (r.ok ? r.json() : null)).catch(() => null),
+          ...index.quartiers.map((_, qi) => fetch(`data/permis/${qi}.json`).then((r) => (r.ok ? r.json() : [])).catch(() => [])),
+        ]);
+        const jour = (d) => (d ? new Date(d + 'T12:00').toLocaleDateString(EN ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'short', year: 'numeric' }) : '');
+        const IMPACT = { 'all-lanes-closed': ['ferme', tr('Rue fermée', 'Road closed')], 'some-lanes-closed': ['partiel', tr('Voies fermées', 'Lanes closed')], 'all-lanes-open': ['ouvert', tr('Voies ouvertes', 'Lanes open')] };
+        const nature = (d) => (/chantier privé/i.test(d) ? ['prive', tr('Chantier privé', 'Private site')] : ['ville', tr('Travaux publics', 'Public works')]);
+        const titreGM = tr('Voir sur Google Maps', 'See on Google Maps');
+        const chantiers = Object.values(ent?.parQuartier ?? {}).flat().map((c) => {
+          const i = IMPACT[c[3]], n = nature(c[0]), b = i ?? n;
+          const texte = esc(c[0].replace(/^(RTE-d+s+)?Québec,s*/, ''));
+          return { lat: c[4], lon: c[5], classe: b[0], popup: `<strong>${b[1]}</strong><br>${texte}`,
+            html: (loin) => `<li>${bulle(b[0], b[1], c[4], c[5], titreGM)} ${i ? `<span class="genre-permis ${n[0]}">${n[1]}</span> ` : ''}${texte}${loin}${c[2] ? ` <span class="compte">(${tr('jusqu’au', 'until')} ${jour(c[2])})</span>` : ''}</li>` };
+        });
+        const permis = tous.flat().map((p) => { const g = genrePermis(p[2]); return { lat: p[4], lon: p[5], classe: g.cle,
+          popup: `<strong>${g.nom}</strong><br>${esc(p[1])}<br>${jour(p[0])}`,
+          html: (loin) => `<li>${bulle(g.cle, g.nom, p[4], p[5], titreGM)} <span class="compte">${jour(p[0])}</span> ${esc(p[1])} : ${esc(p[2])}${loin}</li>` }; });
+        const zr = document.createElement('div'); zr.className = 'zone-rayon'; zr.id = 'zone-rayon'; zone.append(zr);
+        afficherRayon(zr, { cleStockage: 'qc:rayon', tr, adresse: t, sections: [
+          { titre: (ou, n) => `${tr(`Travaux en cours ${ou}`, `Roadwork ${ou}`)}${dp} ${n}`, items: chantiers,
+            pied: ent ? `<p class="compte">${tr('État du', 'As of')} ${new Date(ent.extraction).toLocaleDateString(EN ? 'en-CA' : 'fr-CA', { day: 'numeric', month: 'short', year: 'numeric' })}. ${tr('Source : Entraves à la circulation de la Ville de Québec, Données Québec (CC BY 4.0).', 'Source: City of Québec traffic disruptions, Données Québec (CC BY 4.0).')}</p>` : '' },
+          { titre: (ou, n) => `${tr(`Permis délivrés ${ou} depuis 12 mois`, `Permits issued ${ou} over the last 12 months`)}${dp} ${n}`, items: permis,
+            pied: `<p class="compte">${tr('Source : Permis délivrés à la Ville de Québec, Données Québec (CC BY 4.0).', 'Source: Permits issued by the City of Québec, Données Québec (CC BY 4.0).')}</p>` },
+        ] });
+        return;
+      }
       // Travaux en cours dans le quartier (scrapers/entraves.js, état du matin).
       if (t.qi >= 0) {
         const ent = await fetch('data/entraves.json').then((r) => (r.ok ? r.json() : null)).catch(() => null);

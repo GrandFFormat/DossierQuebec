@@ -152,7 +152,7 @@ racine communs : `generatedAt`, `source`, `parametres`. Formats exacts : README 
 - Budget : `finances.json`, `taux-arrondissements.json`.
 - Près de chez moi : `entraves.json`, `permis/index.json` + `permis/<quartier>.json`,
   `adresses/index.json` + `adresses/<lettre>.json` (`{voie: [libellé, [[de, à, district,
-  quartier]…]]}` ; `district` = `numeroSource` de `districts.json`).
+  quartier, lat, lon]…]]}` ; `district` = `numeroSource` de `districts.json` ; lat, lon à la fin).
 - Projets et Mon dossier : `projets/index.json`, `projets/<cle>.json`, `projets-recaps.json`,
   `dossiers.json`, `recentes.json`, `organismes.json` (section 9.3).
 - Anglais : `resumes-en.json` (`traductions`, `nombre`, `nombreObjets`, `nombreCategories`),
@@ -184,6 +184,18 @@ Jumelage décision ↔ contrat par numéro d'appel d'offres, de résolution **et
 
 **Près de chez moi** : `scrapers/adresses.js` (point dans polygone, tout se fait dans le
 navigateur), `scrapers/permis-travaux.js` (permis CO et DE, travaux liés au SEAO), `lib/plateau.js`.
+
+**Standard de toute ville (15 nov. 2026)** : le cadre « Autour de votre adresse − 1 km + »
+(rayons 0,25 / 0,5 / 1 / 2 / 3 / 5 km, 1 km par défaut, mémorisé en localStorage avec une clé
+propre à la ville), chantiers et permis de TOUS les quartiers à portée triés du plus proche, la
+distance sur chaque ligne, les 25 plus proches ; la carte Leaflet 1.9.4 + tuiles OpenStreetMap
+(chargée seulement à la recherche, un point par élément de la couleur de sa bulle) ; la bulle de
+genre/statut devient le lien Google Maps avec la maison dedans (32 px au doigt). Tout est dans
+`/commun/pres-rayon.js` (`bulle`, `afficherRayon`) : la page prépare ses éléments
+`{lat, lon, classe, popup, html(distance)}` et l'appelle. **Condition** : le robot des adresses
+ajoute `lat, lon` (5 décimales) À LA FIN de chaque entrée, sans déplacer les champs existants ;
+sans position, la page garde l'ancien affichage par quartier. Modèle d'origine :
+`dossierBC/vancouver/near-me-in-vancouver.html` ; appliqué à Québec et Montréal.
 
 **Budget** : `scrapers/finances.js` (MAMH, le lundi), `scrapers/taux-taxes.js` (février).
 

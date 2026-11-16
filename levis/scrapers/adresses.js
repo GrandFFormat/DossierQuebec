@@ -11,7 +11,7 @@
 // légèrement ajustés pour l'élection de 2025 (data/districts.json le dit déjà). Chaque adresse à moins
 // de 100 m d'une limite de district est marquée : la page avertit qu'elle est peut-être de l'autre côté.
 //
-// Sortie : data/adresses/<lettre>.json — { "voie": [libellé, [[no, district, secteur, prèsLimite], …]] }
+// Sortie : data/adresses/<lettre>.json — { "voie": [libellé, [[no, district, secteur, prèsLimite, lat, lon], …]] }
 // et data/adresses/index.json (secteurs, date, nombre).
 
 import { mkdirSync, writeFileSync, rmSync } from 'node:fs';
@@ -77,7 +77,7 @@ for (const l of lignes.slice(1)) {
   const lettre = (cle[0] || '_').replace(/[^A-Z0-9]/, '_');
   const libelle = [l[cType], l[cLien], l[cNom], l[cOr]].filter(Boolean).join(' ').replace(/\s+/g, ' ');
   const voie = ((parLettre[lettre] ||= {})[cle] ||= [libelle, []]);
-  voie[1].push([l[cNo], d.numero, s ? nomsSecteurs.indexOf(s.nom) : -1, proche]);
+  voie[1].push([l[cNo], d.numero, s ? nomsSecteurs.indexOf(s.nom) : -1, proche, +y.toFixed(5), +x.toFixed(5)]);
   n++;
 }
 
