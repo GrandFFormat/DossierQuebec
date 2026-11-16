@@ -195,3 +195,54 @@ async function init() {
   }
 }
 init();
+
+// ---------- flèche jaune « retour au point de départ » (Martin, 16 nov. 2026) ----------
+// Un lien de l'encadré qui mène ailleurs sur la même page (« Version officielle ↓ », « Toutes ses
+// décisions → », un vote…) retient d'où on est parti. Une petite flèche jaune, au-dessus de la
+// flèche ↑ habituelle, y ramène. Elle disparaît une fois utilisée.
+(() => {
+  const CLE = 'eb:retour', RESTAURER = 'eb:restaurer';
+  const lire = (k) => { try { return JSON.parse(sessionStorage.getItem(k) || 'null'); } catch { return null; } };
+  const ecrire = (k, v) => { try { v ? sessionStorage.setItem(k, JSON.stringify(v)) : sessionStorage.removeItem(k); } catch {} };
+
+  // Retour d'une page filtrée : on remet la position une fois l'encadré dessiné.
+  const r = lire(RESTAURER);
+  if (r && r.href === location.href) {
+    ecrire(RESTAURER, null);
+    let n = 0;
+    const viser = () => { window.scrollTo(0, r.y); if (++n < 8) setTimeout(viser, 250); };
+    setTimeout(viser, 300);
+  }
+
+  const st = document.createElement('style');
+  st.textContent = `.eb-retour{position:fixed;right:22px;bottom:70px;z-index:21;width:34px;height:34px;border-radius:50%;border:2px solid #16191D;background:#FFD24D;color:#16191D;font-size:17px;font-weight:900;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.35);display:none}.eb-retour.visible{display:block}`;
+  document.head.appendChild(st);
+  const bouton = document.createElement('button');
+  bouton.type = 'button';
+  bouton.className = 'eb-retour';
+  bouton.textContent = '↩';
+  bouton.setAttribute('aria-label', tr('Revenir où j’étais', 'Back to where I was'));
+  bouton.title = bouton.getAttribute('aria-label');
+  document.body.appendChild(bouton);
+
+  const montrer = () => bouton.classList.toggle('visible', Boolean(lire(CLE)));
+  montrer();
+
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest?.('#en-bref a[href]');
+    if (!a || a.target === '_blank') return;
+    const u = new URL(a.getAttribute('href'), location.href);
+    if (u.pathname !== location.pathname) return;
+    ecrire(CLE, { href: location.href, y: Math.round(window.scrollY) });
+    setTimeout(montrer, 0);
+  }, true);
+
+  bouton.addEventListener('click', () => {
+    const d = lire(CLE);
+    ecrire(CLE, null);
+    montrer();
+    if (!d) return;
+    if (d.href.split('#')[0] === location.href.split('#')[0]) window.scrollTo({ top: d.y, behavior: 'smooth' });
+    else { ecrire(RESTAURER, d); location.href = d.href; }
+  });
+})();
