@@ -24,6 +24,26 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { comptes, consultationsAVenir } from '../api/_consultations.js';
 
+// La note d'étape (« Sanctionné le 2026-06-12 ») se traduit par règle, sans l'IA : la traduction IA
+// pouvait rester en retard sur l'étape (« Passed » pour un projet sanctionné) ou recevoir tout le
+// résumé (PL 23, 16 nov. 2026). L'IA ne sert plus que pour une note hors gabarit, et seulement si elle est courte.
+function noteAnglaise(note, ia) {
+  if (!note) return null;
+  const R = [
+    [/^Sanctionné le (\S+)$/, 'Assented to on $1'],
+    [/^Présenté le (\S+)$/, 'Introduced on $1'],
+    [/^Adopté le (\S+)$/, 'Passed on $1'],
+    [/^Étude détaillée entreprise le (\S+)$/, 'Detailed study began on $1'],
+    [/^Étude détaillée en commission — (\S+)$/, 'Detailed study in committee — $1'],
+    [/^Étude détaillée en commission$/, 'Detailed study in committee'],
+    [/^Déposé en commission pour consultations particulières le (\S+)$/, 'Referred to committee for special consultations on $1'],
+    [/^Resté à l'étape « présentation » \(session (\d+)\) — non réinscrit depuis, dernière activité le (\S+)$/, 'Stalled at introduction (session $1) — not reinstated since, last activity on $2'],
+    [/^Resté à l'étape « dépôt en commission \(consultations particulières\) » \(session (\d+)\) — non réinscrit depuis, dernière activité le (\S+)$/, 'Stalled in committee (special consultations) (session $1) — not reinstated since, last activity on $2'],
+  ];
+  for (const [re, en] of R) if (re.test(note)) return note.replace(re, en);
+  return ia && ia.length <= 160 ? ia : null;
+}
+
 const IN_PATH = 'data/bills.json';
 const HTML_PATH = 'gabarit.html';   // le MODÈLE, jamais servi : les pages en sont tirées
 const START_MARKER = '/* BILLS_DATA_START';
@@ -99,7 +119,7 @@ function main() {
     url: b.url,
     urlEn: b.urlEn || null,
     titleEn: b.titleEn || null,
-    noteEn: b.noteEn || null,
+    noteEn: noteAnglaise(b.note, b.noteEn),
     summaryEn: b.summaryEn ? (b.omnibus ? omnibusToHtml(b.summaryEn, true) : bulletsToHtml(b.summaryEn, null)) : null,
     lastActivity: b.lastActivity,
     presentedOn: b.presentedOn || null,

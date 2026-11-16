@@ -148,11 +148,11 @@ async function init() {
 
   zone.innerHTML = `<div class="resume eb-gros">
     <div class="resume-entete"><span>${tr('En bref — la dernière séance de chaque conseil · résumé généré par IA', 'In brief — the latest meeting of each council · AI-generated summary')}</span></div>
-    <div class="eb-note">${odjs.size ? tr(NOTE_FR, NOTE_EN) : tr(NOTE_PV_FR, NOTE_PV_EN)}</div>
+    <div class="eb-note">${odjs.size ? tr(NOTE_FR, NOTE_EN) : tr(NOTE_PV_FR, NOTE_PV_EN)}${odjs.size && derriere.length ? ` <a class="eb-vo" href="#eb-version-officielle">${tr('Version officielle', 'Official version')} ↓</a>` : ''}</div>
     ${grille(principales, jeu.page, false)}
     ${n ? `<details class="eb-arr"><summary>${odjs.size ? `<span class="eb-marque eb-marque-non">${tr(`Les ${n} arrondissements · non officiel`, `The ${n} boroughs · not official`)}</span>` : tr(`Les ${n} arrondissements`, `The ${n} boroughs`)}</summary>${grille(arrondissements, jeu.page, true)}</details>` : ''}
   </div>
-  ${derriere.length ? `<div class="resume eb-gros eb-boite-retard"><details class="eb-arr eb-retard"><summary><span class="eb-marque eb-marque-non">${tr("Pourquoi un mois de retard ? C'est la façon de faire de Montréal", 'Why a month behind? That is how Montréal works')}</span></summary>
+  ${derriere.length ? `<div class="resume eb-gros eb-boite-retard" id="eb-version-officielle"><details class="eb-arr eb-retard"><summary><span class="eb-marque eb-marque-non">${tr("Pourquoi un mois de retard ? C'est la façon de faire de Montréal", 'Why a month behind? That is how Montréal works')}</span></summary>
       <div class="eb-note">${tr(RETARD_FR, RETARD_EN)}</div>
       ${grille(derrierePrinc, jeu.page, false)}
       ${derriereArr.length ? grille(derriereArr, jeu.page, true) : ''}
@@ -165,6 +165,9 @@ async function init() {
     const retard = zone.querySelector('.eb-boite-retard');
     if (retard) zone.insertBefore(merci, retard); else zone.appendChild(merci);
   }
+  // Cellulaire (Martin, 16 nov. 2026) : « Version officielle » au bout de la note descend aux
+  // procès-verbaux officiels, derrière « Pourquoi un mois de retard ? », et ouvre le pli.
+  zone.querySelector('.eb-vo')?.addEventListener('click', () => { const d = zone.querySelector('.eb-retard'); if (d) d.open = true; });
   zone.hidden = false;
   // Arrivée sur une décision précise (?q=) : le cadre reste en haut, comme partout (Martin, 13 nov. 2026),
   // mais il vient de pousser la liste vers le bas. On redescend sur la fiche ouverte dès qu'elle est là.

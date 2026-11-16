@@ -109,3 +109,23 @@ window.addEventListener('storage', (e) => { if (e.key === 'dvq:langue') for (con
 
 // « Donnez votre avis » (16 nov. 2026) : les consultations à venir en commission, au même endroit que ce bloc.
 import('/commun/consultations-assemblee.js').catch(() => {});
+
+// Accueil : les deux en-têtes du duo (« Projets récents » / « Dernières séances ») gardent la même hauteur,
+// même quand un titre passe sur deux lignes : chacun prend la hauteur du plus haut.
+(() => {
+  const duo = document.querySelector('.apercu-duo');
+  if (!duo || typeof ResizeObserver === 'undefined') return;
+  let attente = 0;
+  const egaliser = () => {
+    cancelAnimationFrame(attente);
+    attente = requestAnimationFrame(() => {
+      const tetes = [...duo.querySelectorAll('.section-head, .db-tete')];
+      tetes.forEach((t) => { t.style.minHeight = ''; });
+      if (tetes.length < 2 || getComputedStyle(duo).gridTemplateColumns.split(' ').length < 2) return;
+      const h = Math.max(...tetes.map((t) => t.getBoundingClientRect().height));
+      tetes.forEach((t) => { t.style.minHeight = `${h}px`; });
+    });
+  };
+  new ResizeObserver(egaliser).observe(duo);
+  new MutationObserver(egaliser).observe(duo, { childList: true, subtree: true, characterData: true });
+})();
