@@ -801,6 +801,8 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 .eb-sorte-pv { background: var(--accent-fond); color: var(--accent-encre); border: 1px solid var(--accent); }
 :root[data-theme="sombre"] .eb-sorte-pv { color: var(--accent); }
 .eb-carte-odj { border-top: 3px solid var(--vedette); }
+/* Une boîte sur deux seulement (Martin, 16 nov. 2026). */
+.eb-grille > .eb-carte-odj:nth-child(even) { border-top-color: var(--ligne); }
 .eb-retard[open] > summary { margin-bottom: 8px; }
 .eb-retard .eb-grille + .eb-grille { margin-top: 12px; }
 .eb-detail { display: inline-block; margin-top: 12px; font-weight: 600; font-size: 14px; color: var(--accent-encre); } :root[data-theme="sombre"] .eb-detail { color: var(--accent); }
