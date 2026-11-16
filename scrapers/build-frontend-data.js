@@ -22,7 +22,7 @@
 // sanctionné / à l'étude / sur la glace.
 
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
-import { comptes } from '../api/_consultations.js';
+import { comptes, consultationsAVenir } from '../api/_consultations.js';
 
 const IN_PATH = 'data/bills.json';
 const HTML_PATH = 'gabarit.html';   // le MODÈLE, jamais servi : les pages en sont tirées
@@ -198,7 +198,18 @@ function main() {
   // « Mémoires déposés » (21 oct. 2026, cinquième outil de l'abonnement). Seul le NOMBRE est public :
   // la liste est servie aux abonné·e·s par api/export.js?jeu=consultations, que commun/dq.js
   // (remplirMemoires) appelle au dépliement de la carte. Source : api/consultations-data.json.
-  const nbMemoires = existsSync('api/consultations-data.json') ? comptes(JSON.parse(readFileSync('api/consultations-data.json', 'utf-8'))) : {};
+  const donneesConsult = existsSync('api/consultations-data.json') ? JSON.parse(readFileSync('api/consultations-data.json', 'utf-8')) : null;
+  const nbMemoires = donneesConsult ? comptes(donneesConsult) : {};
+  // « Donnez votre avis » (16 nov. 2026, commun/consultations-assemblee.js) : les consultations à venir
+  // en commission, en public. Seulement les dates, le type, la commission et le lien : la liste des
+  // mémoires (qui a déposé quoi) reste servie par api/export.js.
+  {
+    const publiques = consultationsAVenir(donneesConsult).map(({ pl, num, legislature, titrePl, titre, commission, type, seances, dateLimite, url, prochaineSeance }) =>
+      ({ pl, num, legislature, titrePl, titre, commission, type, seances, dateLimite, url, prochaineSeance }));
+    const chemin = 'data/site/consultations-assemblee.json';
+    const contenu = JSON.stringify({ items: publiques });
+    if (!existsSync(chemin) || readFileSync(chemin, 'utf-8') !== contenu) writeFileSync(chemin, contenu);
+  }
   const caseMemoires = (b, en) => {
     const n = nbMemoires[b.id];
     if (!n) return '';

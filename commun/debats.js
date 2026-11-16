@@ -106,3 +106,6 @@ for (const zone of zones()) rendreDebats(zone);
 // Au clic sur le bouton de langue, dq.js met la langue à jour d'abord ; on redessine ensuite.
 document.addEventListener('click', (e) => { if (e.target.closest?.('#langToggle')) setTimeout(() => { for (const z of zones()) if (!z.dataset.lang) rendreDebats(z); }, 0); });
 window.addEventListener('storage', (e) => { if (e.key === 'dvq:langue') for (const z of zones()) if (!z.dataset.lang) rendreDebats(z); });
+
+// « Donnez votre avis » (16 nov. 2026) : les consultations à venir en commission, au même endroit que ce bloc.
+import('/commun/consultations-assemblee.js').catch(() => {});
