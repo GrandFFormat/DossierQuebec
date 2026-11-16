@@ -9,7 +9,7 @@
   var PERIODES = [[1, 'Aujourd’hui'], [7, '7 jours'], [30, '30 jours'], [90, '90 jours']];
   var jours = 7;
   try { jours = parseInt(localStorage.getItem('dq:admin-jours'), 10) || 7; } catch (e) {}
-  var NOMS_VILLE = { '': 'Assemblée nationale', quebec: 'Ville de Québec', montreal: 'Ville de Montréal', levis: 'Ville de Lévis', longueuil: 'Ville de Longueuil', laval: 'Ville de Laval' };
+  var NOMS_VILLE = { '': 'Assemblée nationale', quebec: 'Ville de Québec', montreal: 'Ville de Montréal', levis: 'Ville de Lévis', longueuil: 'Ville de Longueuil', laval: 'Ville de Laval', canada: 'DossierCanada', ontario: 'DossierOntario', 'ontario-ottawa': 'Ontario · Ottawa', saskatchewan: 'DossierSaskatchewan', nbrunswick: 'DossierNBrunswick', bc: 'DossierBC', 'bc-vancouver': 'BC · Vancouver' };
   var DEMO = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) && /[?&]demo=1/.test(location.search);
   var ouverts = {};
   var onglets = document.getElementById('tbOnglets');
@@ -59,7 +59,7 @@
       return '<li>' + (l.sansRang ? '' : '<span class="tb-rang">' + String(i + 1).padStart(2, '0') + '</span>') +
         '<div class="tb-nom"><b title="' + h(l.nom) + '">' + h(l.nom) + '</b>' + (l.sous ? '<small title="' + h(l.sous) + '">' + h(l.sous) + '</small>' : '') +
         '<span class="tb-barre"><s style="width:' + Math.max(2, Math.round(100 * l.n / max)) + '%"></s></span></div>' +
-        '<div class="tb-val">' + n(l.n) + (l.detail ? '<small>' + h(l.detail) + '</small>' : '') + (l.lien && l.lien.charAt(0) === '/' ? '<a class="tb-go" href="' + h(l.lien) + '" target="_blank" rel="noopener" title="Ouvrir la page">Ouvrir ↗</a>' : '') + '</div></li>';
+        '<div class="tb-val">' + n(l.n) + (l.detail ? '<small>' + h(l.detail) + '</small>' : '') + (l.lien ? '<a class="tb-go" href="' + h(l.lien.charAt(0) === '/' ? l.lien : 'https://' + l.lien) + '" target="_blank" rel="noopener" title="Ouvrir la page">Ouvrir ↗</a>' : '') + '</div></li>';
     }).join('') + '</ol>' +
     (lignes.length > montrer ? '<button class="tb-plus" data-plus="' + cle + '">' + (tout ? 'Voir moins' : 'Voir les ' + lignes.length) + '</button>' : '');
   }
@@ -74,7 +74,7 @@
     var maxJour = parJour.length ? Math.max.apply(null, parJour.map(function (j) { return j.pages; })) : 0;
     var nomPeriode = (PERIODES.filter(function (p) { return p[0] === jours; })[0] || [0, ''])[1].toLowerCase();
 
-    var html = '<div class="tb-tete"><div><h1>Tableau de bord</h1><p>Où vont les gens et sur quoi ils pèsent, ' + (jours === 1 ? 'aujourd’hui' : 'ces ' + nomPeriode) + '. Site de l’Assemblée et volets de ville. Aucune donnée personnelle.</p></div>' +
+    var html = '<div class="tb-tete"><div><h1>Tableau de bord</h1><p>Où vont les gens et sur quoi ils pèsent, ' + (jours === 1 ? 'aujourd’hui' : 'ces ' + nomPeriode) + '. Tous les sites Dossier et leurs volets de ville. Aucune donnée personnelle.</p></div>' +
       '<div class="tb-periodes" role="group" aria-label="Période">' + PERIODES.map(function (p) { return '<button type="button" data-jours="' + p[0] + '" aria-pressed="' + (p[0] === jours) + '">' + p[1] + '</button>'; }).join('') + '</div></div>' +
       '<div class="tb-chiffres">' +
         '<div class="tb-chiffre"><b>' + n(r.visites) + '</b><span>Visites</span></div>' +
@@ -96,7 +96,7 @@
     var cibles = (r.par_cible || []).map(function (c) { return { nom: c.cible, sous: 'depuis ' + c.page, lien: c.page, n: c.clics, detail: 'clics' }; });
 
     html += '<div class="tb-deux">' +
-      '<section class="tb-bloc tb-villes">' + titre(jours > 1 ? '02' : '01', 'Villes', 'Pages vues par volet.') + liste('villes', villes, 10) + '</section>' +
+      '<section class="tb-bloc tb-villes">' + titre(jours > 1 ? '02' : '01', 'Sites et villes', 'Pages vues par site et par volet.') + liste('villes', villes, 10) + '</section>' +
       '<section class="tb-bloc">' + titre(jours > 1 ? '03' : '02', 'D’où ils arrivent', 'Le site qui les envoie.') + liste('provs', provs, 6) + '</section>' +
       '</div>' +
       '<div class="tb-deux">' +

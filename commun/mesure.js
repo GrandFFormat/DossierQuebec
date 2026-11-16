@@ -13,6 +13,14 @@
   var URL_SUPABASE = 'https://wfgcqftgtmptfutrbujz.supabase.co/rest/v1/dq_mesures';
   var CLE_ANON = 'sb_publishable_CutVYEz29QYUV3tCDsAhSQ_RvZUQ3G6';
   var VILLES = ['quebec', 'montreal', 'levis', 'longueuil', 'laval'];
+  // Les autres sites Dossier chargent ce même fichier (16 nov. 2026) : leur « ville » est le nom du
+  // site (plus son volet de ville s'il y a lieu) et leur page garde le domaine, pour ne pas mêler
+  // l'accueil de DC avec celui de DQ.
+  var SITES = { 'dossiercanada.ca': 'canada', 'dossierontario.ca': 'ontario', 'dossiersaskatchewan.ca': 'saskatchewan', 'dossiernbrunswick.ca': 'nbrunswick', 'dossierbc.ca': 'bc' };
+  var VOLETS = ['ottawa', 'vancouver'];
+  var HOTE = location.hostname.replace(/^www\./, '');
+  var SITE = SITES[HOTE] || '';
+  if (!SITE && HOTE !== 'dossierquebec.ca' && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(HOTE)) return;   // copie de prévisualisation, domaine inconnu
 
   if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) && !/[?&]mesure=1/.test(location.search)) return;   // rien en local, sauf ?mesure=1 pour tester
 
@@ -25,6 +33,7 @@
   }
   function ville() {
     var premier = location.pathname.split('/')[1] || '';
+    if (SITE) return VOLETS.indexOf(premier) >= 0 ? SITE + '-' + premier : SITE;
     return VILLES.indexOf(premier) >= 0 ? premier : '';
   }
   function provenance() {
@@ -36,7 +45,7 @@
       return h === location.hostname.replace(/^www\./, '') ? '' : h.slice(0, 120);
     } catch (e) { return ''; }
   }
-  function page() { return (location.pathname || '/').replace(/\.html$/, '').slice(0, 200); }
+  function page() { return ((SITE ? HOTE : '') + (location.pathname || '/')).replace(/\.html$/, '').slice(0, 200); }
   function langue() { return document.documentElement.classList.contains('dq-en') || document.documentElement.lang === 'en' ? 'en' : 'fr'; }
   function titre() { return (document.title || '').replace(/\s+/g, ' ').trim().slice(0, 160); }
 
