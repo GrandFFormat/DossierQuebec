@@ -95,7 +95,7 @@ function carte(s, page, petite) {
     ? `${s.nPoints} ${tr("points à l'ordre du jour", 'agenda items')}`
     : `${s.nDecisions} ${tr(s.nDecisions > 1 ? 'décisions' : 'décision', s.nDecisions > 1 ? 'decisions' : 'decision')}`;
   const liens = odj
-    ? `<a class="eb-officiel" href="${echapper(s.odj)}" target="_blank" rel="noopener">${tr('Ordre du jour de la Ville (PDF)', 'City agenda (PDF, in French)')} ↗</a>`
+    ? `<a class="eb-officiel" href="${echapper(s.odj)}" target="_blank" rel="noopener">${tr('Ordre du jour (PDF)', 'Agenda (PDF, French)')} ↗</a>`
     : `<a class="eb-tout" href="${page}?instance=${encodeURIComponent(s.instance)}${suffixe}">${tr('Toutes ses décisions', 'All its decisions')} →</a>`
       + (s.pv ? `<a class="eb-officiel" href="${echapper(s.pv)}" target="_blank" rel="noopener">${tr('Version officielle : procès-verbal (PDF)', 'Official version: minutes (PDF, in French)')} ↗</a>` : '');
   return `<article class="eb-carte${petite ? ' eb-petite' : ''}${odj ? ' eb-carte-odj' : ''}">
