@@ -214,11 +214,13 @@ init();
     const viser = () => {
       const pl = [...document.querySelectorAll('#en-bref details')];
       (r.ouverts ?? []).forEach((i) => { if (pl[i]) pl[i].open = true; });
-      // On laisse la page se dessiner, puis on y glisse en douceur plutôt que d'un coup.
-      if (++n < 4) { setTimeout(viser, 250); return; }
-      window.scrollTo({ top: r.y, behavior: 'smooth' });
+      // La page reste cachée le temps de se placer : pas de passage par le haut de la page.
+      window.scrollTo(0, r.y);
+      if (++n < 3 || (Math.abs(window.scrollY - r.y) > 4 && n < 20)) { setTimeout(viser, 100); return; }
+      document.documentElement.style.visibility = '';
     };
-    setTimeout(viser, 300);
+    document.documentElement.style.visibility = 'hidden';
+    setTimeout(viser, 100);
   }
 
   const st = document.createElement('style');
@@ -250,7 +252,8 @@ init();
     ecrire(CLE, null);
     if (!d) { montrer(); return; }
     // La flèche s'envole dans le sens du retour (vers le haut ou vers le bas), comme la flèche ↑.
-    const monte = d.y < window.scrollY || d.href.split('#')[0] !== location.href.split('#')[0];
+    if (d.href.split('#')[0] !== location.href.split('#')[0]) { ecrire(RESTAURER, d); location.href = d.href; return; }
+    const monte = d.y < window.scrollY;
     bouton.style.setProperty('--envol', `${monte ? -(window.innerHeight - 140) : 120}px`);
     bouton.style.setProperty('--sens', monte ? -1 : 1);
     bouton.classList.add('envol');
@@ -260,6 +263,6 @@ init();
       (d.ouverts ?? []).forEach((i) => { if (pl[i]) pl[i].open = true; });
       window.scrollTo({ top: d.y, behavior: 'smooth' });
     }
-    else { ecrire(RESTAURER, d); setTimeout(() => { location.href = d.href; }, 350); }
+
   });
 })();
