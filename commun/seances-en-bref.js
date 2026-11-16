@@ -214,14 +214,15 @@ init();
     const viser = () => {
       const pl = [...document.querySelectorAll('#en-bref details')];
       (r.ouverts ?? []).forEach((i) => { if (pl[i]) pl[i].open = true; });
-      window.scrollTo(0, r.y);
-      if (++n < 8) setTimeout(viser, 250);
+      // On laisse la page se dessiner, puis on y glisse en douceur plutôt que d'un coup.
+      if (++n < 4) { setTimeout(viser, 250); return; }
+      window.scrollTo({ top: r.y, behavior: 'smooth' });
     };
     setTimeout(viser, 300);
   }
 
   const st = document.createElement('style');
-  st.textContent = `.eb-retour{position:fixed;right:22px;bottom:70px;z-index:21;width:34px;height:34px;border-radius:50%;border:2px solid #16191D;background:#FFD24D;color:#16191D;font-size:17px;font-weight:900;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.35);display:none}.eb-retour.visible{display:block}`;
+  st.textContent = `.eb-retour{position:fixed;right:22px;bottom:70px;z-index:21;width:34px;height:34px;border-radius:50%;border:2px solid #16191D;background:#FFD24D;color:#16191D;font-size:17px;font-weight:900;line-height:1;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.35);display:none}.eb-retour.visible{display:block}@keyframes eb-envol{0%{transform:none;opacity:1}15%{transform:translateY(calc(var(--sens,1) * -8px)) scale(1.1)}100%{transform:translateY(var(--envol,-300px)) scale(.6);opacity:0}}.eb-retour.envol{display:block;animation:eb-envol .7s cubic-bezier(.5,0,.2,1) forwards;pointer-events:none}@media (prefers-reduced-motion:reduce){.eb-retour.envol{animation:none;display:none}}`;
   document.head.appendChild(st);
   const bouton = document.createElement('button');
   bouton.type = 'button';
@@ -247,13 +248,18 @@ init();
   bouton.addEventListener('click', () => {
     const d = lire(CLE);
     ecrire(CLE, null);
-    montrer();
-    if (!d) return;
+    if (!d) { montrer(); return; }
+    // La flèche s'envole dans le sens du retour (vers le haut ou vers le bas), comme la flèche ↑.
+    const monte = d.y < window.scrollY || d.href.split('#')[0] !== location.href.split('#')[0];
+    bouton.style.setProperty('--envol', `${monte ? -(window.innerHeight - 140) : 120}px`);
+    bouton.style.setProperty('--sens', monte ? -1 : 1);
+    bouton.classList.add('envol');
+    bouton.addEventListener('animationend', () => { bouton.classList.remove('envol'); montrer(); }, { once: true });
     if (d.href.split('#')[0] === location.href.split('#')[0]) {
       const pl = [...document.querySelectorAll('#en-bref details')];
       (d.ouverts ?? []).forEach((i) => { if (pl[i]) pl[i].open = true; });
       window.scrollTo({ top: d.y, behavior: 'smooth' });
     }
-    else { ecrire(RESTAURER, d); location.href = d.href; }
+    else { ecrire(RESTAURER, d); setTimeout(() => { location.href = d.href; }, 350); }
   });
 })();
