@@ -63,7 +63,7 @@ function blocVotes(s, page, petite) {
     </a>`;
   }).join('');
   const reste = votes.length - (petite ? 1 : 2);
-  return `<div class="eb-votes"><span class="eb-votes-titre">${tr(`Vote${votes.length > 1 ? 's' : ''} nominal${votes.length > 1 ? 'aux' : ''} (${votes.length})`, `Recorded vote${votes.length > 1 ? 's' : ''} (${votes.length})`)}</span>${lignes}${reste > 0 ? `<a class="eb-votes-plus" href="${page}?instance=${encodeURIComponent(s.instance)}&vote=1${suffixe}">${tr(`et ${reste} autre${reste > 1 ? 's' : ''}`, `and ${reste} more`)} →</a>` : ''}</div>`;
+  return `<div class="eb-votes"><span class="eb-votes-titre">${tr(`${votes.length > 1 ? 'Votes nominaux' : 'Vote nominal'} (${votes.length})`, `Recorded vote${votes.length > 1 ? 's' : ''} (${votes.length})`)}</span>${lignes}${reste > 0 ? `<a class="eb-votes-plus" href="${page}?instance=${encodeURIComponent(s.instance)}&vote=1${suffixe}">${tr(`et ${reste} autre${reste > 1 ? 's' : ''}`, `and ${reste} more`)} →</a>` : ''}</div>`;
 }
 
 function rythme(i) {
