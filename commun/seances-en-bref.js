@@ -210,7 +210,13 @@ init();
   if (r && r.href === location.href) {
     ecrire(RESTAURER, null);
     let n = 0;
-    const viser = () => { window.scrollTo(0, r.y); if (++n < 8) setTimeout(viser, 250); };
+    // Les menus déroulants qui étaient ouverts le redeviennent, sinon la position ne veut plus rien dire.
+    const viser = () => {
+      const pl = [...document.querySelectorAll('#en-bref details')];
+      (r.ouverts ?? []).forEach((i) => { if (pl[i]) pl[i].open = true; });
+      window.scrollTo(0, r.y);
+      if (++n < 8) setTimeout(viser, 250);
+    };
     setTimeout(viser, 300);
   }
 
@@ -233,7 +239,8 @@ init();
     if (!a || a.target === '_blank') return;
     const u = new URL(a.getAttribute('href'), location.href);
     if (u.pathname !== location.pathname) return;
-    ecrire(CLE, { href: location.href, y: Math.round(window.scrollY) });
+    const ouverts = [...document.querySelectorAll('#en-bref details')].map((d, i) => (d.open ? i : -1)).filter((i) => i >= 0);
+    ecrire(CLE, { href: location.href, y: Math.round(window.scrollY), ouverts });
     setTimeout(montrer, 0);
   }, true);
 
@@ -242,7 +249,11 @@ init();
     ecrire(CLE, null);
     montrer();
     if (!d) return;
-    if (d.href.split('#')[0] === location.href.split('#')[0]) window.scrollTo({ top: d.y, behavior: 'smooth' });
+    if (d.href.split('#')[0] === location.href.split('#')[0]) {
+      const pl = [...document.querySelectorAll('#en-bref details')];
+      (d.ouverts ?? []).forEach((i) => { if (pl[i]) pl[i].open = true; });
+      window.scrollTo({ top: d.y, behavior: 'smooth' });
+    }
     else { ecrire(RESTAURER, d); location.href = d.href; }
   });
 })();
