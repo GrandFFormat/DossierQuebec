@@ -144,7 +144,7 @@ async function init() {
   const RANG = (i) => (/exécutif/i.test(i) ? 0 : /municipal/i.test(i) ? 1 : /agglom/i.test(i) ? 2 : 3);
   const principales = devant.filter((s) => !estArrondissement(s.instance)).sort((x, y) => RANG(x.instance) - RANG(y.instance));
   const chemin = principales.some((s) => /exécutif/i.test(s.instance)) && principales.some((s) => /municipal|agglom/i.test(s.instance))
-    ? `<p class="eb-chemin">${tr('Comité exécutif → Conseil municipal → Conseil d’agglomération', 'Executive committee → City council → Agglomeration council')}</p>` : '';
+    ? `<p class="eb-chemin">${tr('Comité exécutif <b class="eb-fleche">→</b> Conseil municipal <b class="eb-fleche">→</b> Conseil d’agglomération', 'Executive committee <b class="eb-fleche">→</b> City council <b class="eb-fleche">→</b> Agglomeration council')}</p>` : '';
   const arrondissements = devant.filter((s) => estArrondissement(s.instance)).sort(parNom);
   const n = arrondissements.length;
   const derrierePrinc = derriere.filter((s) => !estArrondissement(s.instance));
