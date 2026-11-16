@@ -141,10 +141,15 @@ async function init() {
   const devant = instances.map((i) => odjs.get(i) ?? pvs.find((s) => s.instance === i)).filter(Boolean);
   const derriere = pvs.filter((s) => odjs.has(s.instance));
   // Montréal : dans l'ordre du chemin d'un dossier, exécutif → municipal → agglomération (Martin, 16 nov. 2026).
-  const RANG = (i) => (/exécutif/i.test(i) ? 0 : /municipal/i.test(i) ? 1 : /agglom/i.test(i) ? 2 : 3);
+  const RANG = (i) => (/exécutif/i.test(i) ? 0 : /municipal|conseil de la ville/i.test(i) ? 1 : /agglom/i.test(i) ? 2 : 3);
   const principales = devant.filter((s) => !estArrondissement(s.instance)).sort((x, y) => RANG(x.instance) - RANG(y.instance));
-  const chemin = principales.some((s) => /exécutif/i.test(s.instance)) && principales.some((s) => /municipal|agglom/i.test(s.instance))
-    ? `<p class="eb-chemin">${tr('Comité exécutif <b class="eb-fleche">→</b> Conseil municipal <b class="eb-fleche">→</b> Conseil d’agglomération', 'Executive committee <b class="eb-fleche">→</b> City council <b class="eb-fleche">→</b> Agglomeration council')}</p>` : '';
+  // Le chemin d'un dossier, d'après les conseils présents (Montréal, Québec, Lévis), flèches en jaune.
+  const etapes = principales.map((x) => x.instance).filter((i) => RANG(i) < 3);
+  const nomEtape = (i) => (/exécutif/i.test(i) ? tr('Comité exécutif', 'Executive committee')
+    : /agglom/i.test(i) ? tr('Conseil d’agglomération', 'Agglomeration council')
+    : /municipal/i.test(i) ? tr('Conseil municipal', 'City council') : tr('Conseil de la ville', 'City council'));
+  const chemin = etapes.length > 1 && etapes.some((i) => RANG(i) === 0)
+    ? `<p class="eb-chemin">${[...new Set(etapes.map(nomEtape))].join(' <b class="eb-fleche">→</b> ')}</p>` : '';
   const arrondissements = devant.filter((s) => estArrondissement(s.instance)).sort(parNom);
   const n = arrondissements.length;
   const derrierePrinc = derriere.filter((s) => !estArrondissement(s.instance));

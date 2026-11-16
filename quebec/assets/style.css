@@ -790,3 +790,7 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 /* Contexte d'une décision : portée, durée, parcours du dossier (13 nov. 2026). */
 .contexte-decision { list-style: none; margin: 0 0 12px; padding: 10px 14px; border-left: 3px solid var(--accent); font-size: 14.5px; line-height: 1.5; }
 .contexte-decision li { margin: 2px 0; overflow-wrap: anywhere; }
+
+/* Chemin d un dossier, En bref (16 nov. 2026) */
+.eb-chemin { font-size: 13px; margin: 4px 0 10px; color: var(--doux); }
+.eb-fleche { background: var(--vedette, #FFD24D); color: #16191D; padding: 0 5px; border-radius: 3px; margin: 0 2px; }
