@@ -842,3 +842,5 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 
 /* Liens PDF des cartes En bref cachés sur cellulaire, gardés sur iPad (16 nov. 2026). */
 @media (max-width: 700px) { .eb-officiel { display: none; } }
+/* Cellulaire : les points de En bref qui ouvrent un PDF ne sont plus cliquables (16 nov. 2026). */
+@media (max-width: 700px) { #en-bref a[href*=".pdf" i] { pointer-events: none; cursor: default; } }
