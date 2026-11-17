@@ -328,7 +328,21 @@
       (avenir.length ? '<p>À venir : ' + avenir.map(function (p) { return h(qui(p)) + ' dès le ' + jourLong(p.debut); }).join(' ; ') + '.</p>' : '') +
       (fin >= j ? '<p>Réservé jusqu’au ' + jourLong(fin) + '.</p>' : '');
   }
-  function rendreVilles(fichiers, demandes) {
+  // Les abonné·e·s aux courriels de ville (Martin, 17 nov. 2026) : totaux par ville rendus par la
+  // fonction dq_infolettre_abonnes (scripts/supabase-admin-abonnes.sql), jamais une adresse.
+  function blocAbonnes(a, erreur) {
+    if (erreur) return '<p class="tb-abonnes">Abonné·e·s au courriel : ' + h(erreur) + '</p>';
+    if (!a) return '<p class="tb-abonnes">Abonné·e·s au courriel : aucun.</p>';
+    var detail = [];
+    if (a.mensuel) detail.push(n(a.mensuel) + ' mensuel');
+    if (a.conseil) detail.push(n(a.conseil) + ' conseil');
+    if (a.arrondissement) detail.push(n(a.arrondissement) + ' arrondissement');
+    return '<p class="tb-abonnes"><strong>' + pluriel(a.personnes, 'abonné·e au courriel', 'abonné·e·s au courriel') + '</strong>' +
+      (detail.length ? ' (' + detail.join(', ') + ')' : '') +
+      (a.en_attente ? ' · ' + n(a.en_attente) + ' en attente de confirmation' : '') + '.</p>';
+  }
+  function rendreVilles(fichiers, demandes, abonnes) {
+    abonnes = abonnes || {};
     var nouvelles = {}, toutes = {};
     (demandes || []).forEach(function (d) { toutes[d.ville_cle] = (toutes[d.ville_cle] || 0) + 1; if (d.statut === 'nouvelle') nouvelles[d.ville_cle] = (nouvelles[d.ville_cle] || 0) + 1; });
     var total = PROVINCES.reduce(function (t, p) { return t + p.villes.length; }, 0);
@@ -342,6 +356,7 @@
             return '<article class="tb-carte"><h3>' + h(v.nom) + ' <span class="tb-pastille ' + e[1] + '">' + e[0] + '</span>' + pastilleLouee(v, fichiers[v.cle]) + (nv ? ' <span class="tb-pastille jaune">' + pluriel(nv, 'nouvelle demande', 'nouvelles demandes') + '</span>' : '') + '</h3>' +
               (v.etat === 'pause' && v.depuis ? '<p>Données figées depuis le ' + jourLong(v.depuis) + '. Réactivation : 150 $.</p>' : '') +
               blocCommandite(fichiers[v.cle]) +
+              (p.site === 'https://dossierquebec.ca' ? blocAbonnes(abonnes[v.cle], abonnes._erreur) : '') +
               (tt ? '<p>Demandes « Représentez votre ville » : ' + n(tt) + '.</p>' : '') +
               (v.note ? '<p>' + h(v.note) + '</p>' : '') +
               '<div class="tb-liens"><a href="' + h(v.url) + '" target="_blank" rel="noopener">Voir la ville ↗</a>' + (v.file ? '<a href="' + h(v.file) + '" target="_blank" rel="noopener">File de commandite ↗</a>' : '') + '</div></article>';
@@ -350,12 +365,20 @@
   }
   async function chargerVilles() {
     montrerOnglets(); sortir.hidden = DEMO;
-    var dem = { data: [] };
+    var dem = { data: [] }, abonnes = {};
+    if (DEMO) abonnes = { quebec: { personnes: 42, mensuel: 40, conseil: 12, arrondissement: 3, en_attente: 2 }, montreal: { personnes: 17, mensuel: 17, conseil: 0, arrondissement: 0, en_attente: 0 } };
     if (!DEMO) {
       var u = (await sb.auth.getUser()).data.user;
       var adm = u ? await sb.from('admins').select('user_id').eq('user_id', u.id).maybeSingle() : { data: null };
       if (!adm.data) { await sb.auth.signOut(); return connexion('Ce compte n’est pas dans la liste des admins.'); }
-      dem = await sb.from('rtv_demandes').select('ville_cle, statut').neq('statut', 'archivee').limit(2000);
+      var lectures = await Promise.all([
+        sb.from('rtv_demandes').select('ville_cle, statut').neq('statut', 'archivee').limit(2000),
+        sb.rpc('dq_infolettre_abonnes')
+      ]);
+      dem = lectures[0];
+      var ab = lectures[1];
+      if (ab.error) abonnes = { _erreur: /does not exist|PGRST202/i.test(ab.error.message || '') ? 'fonction absente, colle scripts/supabase-admin-abonnes.sql dans Supabase.' : 'pas pu lire (' + (ab.error.message || '') + ').' };
+      else abonnes = ab.data || {};
     }
     var tout = [];
     PROVINCES.forEach(function (p) { p.villes.forEach(function (v) { tout.push(v); }); });
@@ -368,7 +391,7 @@
     var fichiers = {};
     tout.forEach(function (v, i) { fichiers[v.cle] = lus[i]; });
     if (onglet !== 'villes') return;
-    rendreVilles(fichiers, dem.data || []);
+    rendreVilles(fichiers, dem.data || [], abonnes);
   }
 
   async function charger() {
