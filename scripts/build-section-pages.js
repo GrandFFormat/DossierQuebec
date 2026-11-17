@@ -257,9 +257,9 @@ const PAGES = [
   {
     fichier: 'sources.html', vue: 'bd', onglet: null, url: '/sources',
     donnees: ['journal'],
-    title: 'Mises à jour du site — DossierQuébec',
+    title: 'Mission et mises à jour — DossierQuébec',
     desc: "Ce qui change sur DossierQuébec, site citoyen indépendant qui rend lisibles l'Assemblée nationale et les conseils municipaux du Québec, et qui est derrière.",
-    fil: 'Mises à jour du site', cle: 'fil.bd', frequence: 'weekly', priorite: '0.4',
+    fil: 'Mission et mises à jour', cle: 'fil.bd', frequence: 'weekly', priorite: '0.4',
   },
 ];
 for (const page of PAGES) if (!page.donnees.includes('stats')) page.donnees.push('stats');

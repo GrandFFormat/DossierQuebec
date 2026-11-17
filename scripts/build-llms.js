@@ -63,7 +63,7 @@ export function construireLlms() {
     `- [Promesses électorales 2026](${SITE}/promesses): ${promesses.length} engagements cités mot pour mot (${partis}), chacun avec le lien vers le document du parti.`,
     `- [Lexique](${SITE}/lexique): le vocabulaire de l'Assemblée nationale expliqué simplement.`,
     `- [Les règles du site](${SITE}/regles): d'où viennent les données et ce que le site s'interdit.`,
-    `- [Mises à jour du site](${SITE}/sources): ce qui a changé sur le site, du plus récent au plus ancien, et qui est derrière.`,
+    `- [Mission et mises à jour](${SITE}/sources): pourquoi le site existe, puis ce qui a changé, du plus récent au plus ancien.`,
     '',
     '## Une page par projet de loi',
     '',
