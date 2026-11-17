@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-16T18:44:14.326Z",
+ "generatedAt": "2026-11-17T17:43:37.943Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,167 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-09-17",
+  "depuis": "2026-09-18",
   "plafond": 120
  },
- "nombre": 1840,
- "genereCetteFois": 3,
+ "nombre": 1846,
+ "genereCetteFois": 6,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.1535,
-  "jetonsEntree": 23436,
-  "jetonsSortie": 1451
+  "montant": 0.2122,
+  "jetonsEntree": 29883,
+  "jetonsSortie": 2511
  },
  "resumes": [
+  {
+   "id": "TM2026-204.pdf",
+   "numero": "TM2026-204",
+   "date": "2026-11-16",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnances numéros O-439, O-440 et O-441 concernant des modifications aux règles portant sur la circulation et le stationnement sur le réseau local relativement aux rues Guillaume-Bresse et de Montrachet - Arrondissement La Haute-Saint-Charles - District électoral de Lac-Saint-Charles-Saint-Émile",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-204.pdf",
+   "puces": [
+    "L'arrondissement de La Haute-Saint-Charles interdit le stationnement en tout temps dans la courbe des rues Guillaume-Bresse et de Montrachet, du côté nord (quartier Lac-Saint-Charles–Saint-Émile).",
+    "Sur la rue Guillaume-Bresse, l'interdiction permanente couvre 22 m à l'ouest de la rue de Montrachet; au-delà, l'interdiction reste du 15 novembre au 31 mars jusqu'à la rue de Beaune.",
+    "Sur la rue de Montrachet, l'interdiction permanente couvre 27 m à l'est de la rue Guillaume-Bresse; au-delà, l'interdiction reste du 15 novembre au 31 mars jusqu'à la rue du Côte-de-Nuits.",
+    "Environ cinq cases de stationnement sont retirées; la Ville indique que les résidants du secteur ont accès à des espaces de stationnement privés.",
+    "La Ville inscrit officiellement dans son règlement le passage pour piétons de la rue Guillaume-Bresse, face au lien piétonnier du parc aux Quatre-Vents, aménagé après la construction d'un trottoir.",
+    "Le Service du transport invoque la visibilité réduite par les véhicules stationnés dans la courbe, qui nuit à la sécurité et à la fluidité de la circulation."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-17T17:43:32.606Z",
+   "jetons": {
+    "entree": 6068,
+    "sortie": 567
+   }
+  },
+  {
+   "id": "LS2026-287.pdf",
+   "numero": "LS2026-287",
+   "date": "2026-11-16",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement de six (6) subventions totalisant un montant de 21 456 $ à six (6) organismes pour des demandes déposées dans les programmes de soutien financier du Cadre de soutien aux organismes reconnus, pour la date de dépôt du 15 septembre 2026 - arrondissement de La Haute-Saint-Charles",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-287.pdf",
+   "puces": [
+    "L'arrondissement de La Haute-Saint-Charles verse 21 456 $ en subventions à six organismes communautaires.",
+    "L'argent répond aux demandes déposées le 15 septembre 2026 dans les programmes de soutien aux organismes reconnus de la Ville.",
+    "L'Harmonie de Loretteville reçoit 5 000 $ et le Club Kamentukash 5 000 $; l'Accueil St-Ambroise de Loretteville obtient 4 000 $ pour refaire son image de marque et son site Web.",
+    "Les cadets 2847 Haute St-Charles touchent 4 753 $ pour du matériel de tir, d'orientation et de jeux; la Maison des jeunes de St-Émile 2 228 $ pour des divans.",
+    "Le Centre d'appui Réseau-Aînés reçoit 475 $ pour une activité de cohésion et de reconnaissance de ses bénévoles.",
+    "Les sommes proviennent du budget de fonctionnement de l'arrondissement, à l'activité « Soutien aux organismes »."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "21 456 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-17T17:43:31.753Z",
+   "jetons": {
+    "entree": 5670,
+    "sortie": 460
+   }
+  },
+  {
+   "id": "GT2026-356.pdf",
+   "numero": "GT2026-356",
+   "date": "2026-11-16",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 12630, boulevard de la Colline, lot projeté 6 730 196, quartier de Saint-Émile, district électoral de Lac-Saint-Charles-Saint-Émile, Arrondissement de La Haute-Saint-Charles",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-356.pdf",
+   "puces": [
+    "La Ville autorise un troisième accès à la rue pour un bâtiment commercial au 12630, boulevard de la Colline, dans Saint-Émile (arrondissement de La Haute-Saint-Charles).",
+    "Le règlement d'urbanisme de l'arrondissement permet normalement un maximum de deux accès à la rue pour un lot.",
+    "La demande suit un lotissement qui intègre le bâtiment accessoire du 12576, boulevard de la Colline au terrain du 12630.",
+    "Le troisième accès servirait à séparer la circulation des visiteurs de celle des opérations de l'entreprise et à faciliter les manœuvres des camions de livraison.",
+    "Le Service de transport et de la mobilité intelligente ne voit aucun enjeu de circulation lié à cet accès supplémentaire.",
+    "Le comité consultatif d'urbanisme s'est prononcé en faveur de la demande à l'unanimité le 28 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-17T17:43:31.305Z",
+   "jetons": {
+    "entree": 5447,
+    "sortie": 419
+   }
+  },
+  {
+   "id": "TM2026-221.pdf",
+   "numero": "TM2026-221",
+   "date": "2026-11-16",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-422 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement à la rue Blain - Arrondissement de La Haute-Saint-Charles - District électoral de Loretteville-Les Châtels",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-221.pdf",
+   "puces": [
+    "Le virage à droite au feu rouge devient interdit en tout temps sur la rue Blain, à l'approche est de l'intersection avec le boulevard de l'Ormière.",
+    "Avant, l'interdiction s'appliquait seulement de 7 h à 22 h.",
+    "La Ville va aussi reculer la ligne d'arrêt de l'approche est, ce qui réduit la visibilité vers le sud pour les automobilistes.",
+    "Le changement vise les camions venant du sud, qui devaient empiéter sur la voie opposée ou rouler sur le trottoir pour tourner à droite.",
+    "La mesure touche le district de Loretteville-Les Châtels, dans l'arrondissement de La Haute-Saint-Charles."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-17T17:43:30.769Z",
+   "jetons": {
+    "entree": 4101,
+    "sortie": 341
+   }
+  },
+  {
+   "id": "TM2026-052.pdf",
+   "numero": "TM2026-052",
+   "date": "2026-11-16",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-425 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement à plusieurs intersections - Arrondissement de La Haute-Saint-Charles",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-052.pdf",
+   "puces": [
+    "La Ville interdit le virage à droite au feu rouge en tout temps à deux intersections de l'arrondissement de La Haute-Saint-Charles.",
+    "Les lieux visés : l'approche est du boulevard des Étudiants à l'intersection du boulevard Valcartier, et l'approche est de la rue Roussin à l'intersection du boulevard de la Colline.",
+    "Auparavant, l'interdiction s'appliquait seulement de 7 h à 22 h à ces deux endroits.",
+    "Le changement suit l'installation prochaine de signaux sonores de nouvelle génération, qui fonctionnent en tout temps, pour la traversée des personnes ayant une déficience visuelle.",
+    "Les panneaux de signalisation seront remplacés aux deux intersections.",
+    "L'interdiction vise autant les automobilistes que les cyclistes."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-17T17:43:37.943Z",
+   "jetons": {
+    "entree": 5264,
+    "sortie": 381
+   }
+  },
+  {
+   "id": "A6DA2026-005.pdf",
+   "numero": "A6DA2026-005",
+   "date": "2026-11-16",
+   "unite": "Arrondissement de La Haute-Saint-Charles",
+   "objet": "Participation de trois membres du conseil de l'Arrondissement de La Haute-Saint-Charles aux Assises annuelles 2027 de l'Union des municipalités du Québec (UMQ) les 22 et 23 avril 2027",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A6DA2026-005.pdf",
+   "puces": [
+    "L'arrondissement de La Haute-Saint-Charles autorise trois élus à assister aux Assises annuelles de l'Union des municipalités du Québec, à Montréal, les 22 et 23 avril 2027.",
+    "Les trois personnes visées sont le président Marc Roussin, la conseillère Marie-Josée Asselin et le conseiller Stéphane Lachance.",
+    "La Ville paie ou rembourse les frais d'inscription de 925 $ par personne, plus les taxes.",
+    "Les autres dépenses liées au déplacement sont remboursées sur présentation de pièces justificatives.",
+    "L'argent provient du budget de l'arrondissement, à l'activité « Soutenir les conseils d'arrondissement »."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "925 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-17T17:43:37.236Z",
+   "jetons": {
+    "entree": 3333,
+    "sortie": 343
+   }
+  },
   {
    "id": "AP2026-370.pdf",
    "numero": "AP2026-370",

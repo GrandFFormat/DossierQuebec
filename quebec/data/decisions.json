@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-16T18:44:01.710Z",
+ "generatedAt": "2026-11-17T17:43:21.827Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "licence": "Documents publics de la Ville de Québec — reproduction avec mention de la source, usage non commercial.",
  "parametres": {
@@ -12,9 +12,9 @@
    "Tableaux des décisions"
   ]
  },
- "totalDisponible": 5960,
- "nombre": 5960,
- "nouveauxDepuisDerniereExecution": 4,
+ "totalDisponible": 5996,
+ "nombre": 5996,
+ "nouveauxDepuisDerniereExecution": 36,
  "themes": {
   "procedure": {
    "libelle": "Procédure",
@@ -90,7 +90,7 @@
   "tramway": {
    "titre": "Tramway (TramCité)",
    "description": "Le réseau structurant de transport en commun : financement, terrains et servitudes, arbres, chantiers.",
-   "n": 135
+   "n": 136
   },
   "logement": {
    "titre": "Logement social et abordable",
@@ -124,23 +124,23 @@
   }
  },
  "statuts": {
-  "termines": 1721,
-  "enCours": 125,
+  "termines": 1734,
+  "enCours": 119,
   "inconnus": 0
  },
  "facettes": {
   "type": [
    {
     "valeur": "Résolutions",
-    "n": 3812
+    "n": 3839
    },
    {
     "valeur": "Sommaires et mémoires",
-    "n": 1846
+    "n": 1853
    },
    {
     "valeur": "Procès-verbaux",
-    "n": 203
+    "n": 205
    },
    {
     "valeur": "Tableaux des décisions",
@@ -150,7 +150,7 @@
   "instance": [
    {
     "valeur": "Comité exécutif",
-    "n": 1461
+    "n": 1478
    },
    {
     "valeur": "Conseil de la ville",
@@ -178,7 +178,7 @@
    },
    {
     "valeur": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
-    "n": 123
+    "n": 135
    },
    {
     "valeur": "Conseil de l'Arrondissement de Charlesbourg",
@@ -196,7 +196,7 @@
    },
    {
     "valeur": "Gestion du territoire",
-    "n": 332
+    "n": 333
    },
    {
     "valeur": "Développement économique et grands projets",
@@ -204,11 +204,11 @@
    },
    {
     "valeur": "Loisirs, sports et vie communautaire",
-    "n": 200
+    "n": 201
    },
    {
     "valeur": "Transport et mobilité intelligente",
-    "n": 198
+    "n": 201
    },
    {
     "valeur": "Planification de l'aménagement et de l'environnement",
@@ -283,6 +283,10 @@
     "n": 7
    },
    {
+    "valeur": "Arrondissement de La Haute-Saint-Charles",
+    "n": 6
+   },
+   {
     "valeur": "Arrondissement des Rivières",
     "n": 6
    },
@@ -311,10 +315,6 @@
     "n": 4
    },
    {
-    "valeur": "Arrondissement de La Haute-Saint-Charles",
-    "n": 4
-   },
-   {
     "valeur": "S.O.M.H.A.C.",
     "n": 3
    },
@@ -338,23 +338,23 @@
   "theme": [
    {
     "valeur": "urbanisme",
-    "n": 1097
+    "n": 1100
    },
    {
     "valeur": "procedure",
-    "n": 843
+    "n": 854
    },
    {
     "valeur": "subventions",
-    "n": 669
+    "n": 673
    },
    {
     "valeur": "transport",
-    "n": 634
+    "n": 642
    },
    {
     "valeur": "contrats",
-    "n": 623
+    "n": 627
    },
    {
     "valeur": "immobilier",
@@ -373,16 +373,16 @@
     "n": 208
    },
    {
-    "valeur": "rh",
-    "n": 195
+    "valeur": "administration",
+    "n": 196
    },
    {
-    "valeur": "administration",
-    "n": 193
+    "valeur": "rh",
+    "n": 196
    },
    {
     "valeur": "culture",
-    "n": 168
+    "n": 169
    },
    {
     "valeur": "environnement",
@@ -394,7 +394,7 @@
    },
    {
     "valeur": "economie",
-    "n": 97
+    "n": 98
    },
    {
     "valeur": "honneurs",
@@ -408,6 +408,338 @@
  },
  "decisions": [
   {
+   "id": "PV_CA7_OR_2026-11-16_17h30.pdf",
+   "numero": null,
+   "objet": "Procès-verbal de la séance planifiée du Conseil de l'Arrondissement de La Haute-Saint-Charles tenue le lundi 16 novembre 2026 à 17h30",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Procès-verbaux",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA7_OR_2026-11-16_17h30.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "A6DA2026-005.pdf",
+   "numero": "A6DA2026-005",
+   "objet": "Participation de trois membres du conseil de l'Arrondissement de La Haute-Saint-Charles aux Assises annuelles 2027 de l'Union des municipalités du Québec (UMQ) les 22 et 23 avril 2027",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Arrondissement de La Haute-Saint-Charles",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A6DA2026-005.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'arrondissement",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "administration",
+   "themeSource": "objet"
+  },
+  {
+   "id": "A6DA2026-006.pdf",
+   "numero": "A6DA2026-006",
+   "objet": "Adoption du calendrier 2027 des séances ordinaires du conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Arrondissement de La Haute-Saint-Charles",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A6DA2026-006.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'arrondissement",
+   "dateCible": null,
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA6-2026-0112.pdf",
+   "numero": "CA6-2026-0112",
+   "objet": "Adoption de l'ordre du jour",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA6-2026-0112.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "statutDossier": "termine",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA6-2026-0113.pdf",
+   "numero": "CA6-2026-0113",
+   "objet": "Procès-verbal de la séance ordinaire du 19 octobre 2026",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA6-2026-0113.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "statutDossier": "termine",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA6-2026-0114.pdf",
+   "numero": "CA6-2026-0114",
+   "objet": "Procès-verbal de la séance extraordinaire du 5 novembre 2026",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA6-2026-0114.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "statutDossier": "termine",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA6-2026-0115.pdf",
+   "numero": "CA6-2026-0115",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 12630, boulevard de la Colline, lot projeté 6 730 196, quartier de Saint-Émile, district électoral de Lac-Saint-Charles-Saint-Émile",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA6-2026-0115.pdf",
+   "nouveau": true,
+   "sommaireId": "GT2026-356.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA6-2026-0116.pdf",
+   "numero": "CA6-2026-0116",
+   "objet": "Versement de six (6) subventions totalisant un montant de 21 456 $ à six (6) organismes pour des demandes déposées dans les programmes de soutien financier du Cadre de soutien aux organismes reconnus, pour la date de dépôt du 15 septembre 2026",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA6-2026-0116.pdf",
+   "nouveau": true,
+   "sommaireId": "LS2026-287.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "echeance": "2026-11-16",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA6-2026-0117.pdf",
+   "numero": "CA6-2026-0117",
+   "objet": "Ordonnances numéros O-439, O-440 et O-441 concernant des modifications aux règles portant sur la circulation et le stationnement sur le réseau local relativement aux rues Guillaume-Bresse et de Montrachet - District électoral de Lac-Saint-Charles-Saint-Émile",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA6-2026-0117.pdf",
+   "nouveau": true,
+   "sommaireId": "TM2026-204.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA6-2026-0118.pdf",
+   "numero": "CA6-2026-0118",
+   "objet": "Ordonnance numéro O-422 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement à la rue Blain - District électoral de Loretteville-Les Châtels",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA6-2026-0118.pdf",
+   "nouveau": true,
+   "sommaireId": "TM2026-221.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA6-2026-0119.pdf",
+   "numero": "CA6-2026-0119",
+   "objet": "Ordonnance numéro O-425 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement à plusieurs intersections",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA6-2026-0119.pdf",
+   "nouveau": true,
+   "sommaireId": "TM2026-052.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA6-2026-0120.pdf",
+   "numero": "CA6-2026-0120",
+   "objet": "Adoption du calendrier 2027 des séances ordinaires du conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA6-2026-0120.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "statutDossier": "termine",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA6-2026-0121.pdf",
+   "numero": "CA6-2026-0121",
+   "objet": "Participation de trois membres du conseil de l'Arrondissement de La Haute-Saint-Charles aux Assises annuelles 2027 de l'Union des municipalités du Québec (UMQ) les 22 et 23 avril 2027",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA6-2026-0121.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "statutDossier": "termine",
+   "theme": "administration",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA6-2026-0122.pdf",
+   "numero": "CA6-2026-0122",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement de La Haute-Saint-Charles sur le stationnement dans un garage, un parc de stationnement et sur un terrain géré par la Ville relativement à une case de stationnement pour laquelle un tarif est imposé par un parcomètre, R.C.A.6V.Q. 373",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA6-2026-0122.pdf",
+   "nouveau": true,
+   "sommaireId": "TM2026-251.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "GT2026-356.pdf",
+   "numero": "GT2026-356",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 12630, boulevard de la Colline, lot projeté 6 730 196, quartier de Saint-Émile, district électoral de Lac-Saint-Charles-Saint-Émile, Arrondissement de La Haute-Saint-Charles",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Gestion du territoire",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-356.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'arrondissement",
+   "dateCible": null,
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "LS2026-287.pdf",
+   "numero": "LS2026-287",
+   "objet": "Versement de six (6) subventions totalisant un montant de 21 456 $ à six (6) organismes pour des demandes déposées dans les programmes de soutien financier du Cadre de soutien aux organismes reconnus, pour la date de dépôt du 15 septembre 2026 - arrondissement de La Haute-Saint-Charles",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Loisirs, sports et vie communautaire",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-287.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'arrondissement",
+   "dateCible": "2026-11-16",
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "echeance": "2026-11-16",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "TM2026-052.pdf",
+   "numero": "TM2026-052",
+   "objet": "Ordonnance numéro O-425 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement à plusieurs intersections - Arrondissement de La Haute-Saint-Charles",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Transport et mobilité intelligente",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-052.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'arrondissement",
+   "dateCible": null,
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "TM2026-204.pdf",
+   "numero": "TM2026-204",
+   "objet": "Ordonnances numéros O-439, O-440 et O-441 concernant des modifications aux règles portant sur la circulation et le stationnement sur le réseau local relativement aux rues Guillaume-Bresse et de Montrachet - Arrondissement La Haute-Saint-Charles - District électoral de Lac-Saint-Charles-Saint-Émile",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Transport et mobilité intelligente",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-204.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'arrondissement",
+   "dateCible": null,
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "TM2026-221.pdf",
+   "numero": "TM2026-221",
+   "objet": "Ordonnance numéro O-422 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement à la rue Blain - Arrondissement de La Haute-Saint-Charles - District électoral de Loretteville-Les Châtels",
+   "date": "2026-11-16",
+   "annee": "2026",
+   "type": "Sommaires et mémoires",
+   "instance": null,
+   "unite": "Transport et mobilité intelligente",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-221.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "instanceDecisionnelle": "Conseil d'arrondissement",
+   "dateCible": null,
+   "statutDossier": "termine",
+   "etapeFinale": "Conseil d'arrondissement",
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
    "id": "TD_CE_PL_2026-11-13_00h00.pdf",
    "numero": null,
    "objet": "Tableau des décisions de la séance spéciale du comité exécutif tenue le vendredi 13 novembre 2026 à 08h30",
@@ -417,7 +749,7 @@
    "instance": "Comité exécutif",
    "unite": null,
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TD_CE_PL_2026-11-13_00h00.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "theme": "procedure",
    "themeSource": "objet"
@@ -432,10 +764,9 @@
    "instance": null,
    "unite": "Approvisionnements",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-370.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil de la ville",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Conseil de la ville",
    "theme": "contrats",
@@ -451,10 +782,9 @@
    "instance": null,
    "unite": "Culture et patrimoine",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-089.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil de la ville",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Conseil de la ville",
    "theme": "subventions",
@@ -470,10 +800,9 @@
    "instance": null,
    "unite": "Gestion du territoire",
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-357.pdf",
-   "nouveau": true,
+   "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil de la ville et conseil d'agglomération",
-   "dateCible": null,
    "statutDossier": "en_cours",
    "etapeFinale": "Conseil d'agglomération",
    "theme": "urbanisme",
@@ -1670,6 +1999,21 @@
    "themeSource": "objet"
   },
   {
+   "id": "PV_CE_PL_2026-11-04_00h00.pdf",
+   "numero": null,
+   "objet": "Procès-verbal de la séance planifiée du comité exécutif tenue le mercredi 04 novembre 2026 à 10h00",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Procès-verbaux",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CE_PL_2026-11-04_00h00.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
    "id": "PV_CAG_PL_2026-11-04_13h00.pdf",
    "numero": null,
    "objet": "Procès-verbal de la séance planifiée du conseil d'agglomération de Québec tenue le mercredi 04 novembre 2026 à 13h00",
@@ -1806,7 +2150,7 @@
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
    "dateCible": "2026-11-04",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "echeance": "2026-11-04",
    "theme": "contrats",
@@ -1825,7 +2169,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "procedure",
    "themeSource": "objet"
@@ -2345,6 +2689,283 @@
    "themeSource": "objet"
   },
   {
+   "id": "CE-2026-1335.pdf",
+   "numero": "CE-2026-1335",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Attribution d'un contrat à commandes pour le service de réparation sur la route pour les pneus de camions lourds et les équipements de génie civil (Appel d'offres public 96068)",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1335.pdf",
+   "nouveau": true,
+   "sommaireId": "AP2026-264.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1336.pdf",
+   "numero": "CE-2026-1336",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Attribution d'un contrat à commandes pour l'inspection et la certification des équipements de protection contre les chutes (Appel d'offres public 96537)",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1336.pdf",
+   "nouveau": true,
+   "sommaireId": "AP2026-371.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1337.pdf",
+   "numero": "CE-2026-1337",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Adoption du Règlement modifiant le Règlement de l'agglomération sur la réserve financière pour le paiement de la dette d'agglomération relativement à la date de terminaison de la réserve financière, R.A.V.Q. 1885",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1337.pdf",
+   "nouveau": true,
+   "sommaireId": "FN2026-046.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1338.pdf",
+   "numero": "CE-2026-1338",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Entente entre la Ville de Québec et la Communauté allemande Québec relativement au versement d'une subvention et à la fourniture à titre gratuit de services municipaux, à titre d'assistance, dans le cadre de la tenue de l'événement Marché de Noë",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1338.pdf",
+   "nouveau": true,
+   "sommaireId": "LS2026-277.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1339.pdf",
+   "numero": "CE-2026-1339",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Prolongation de l'entente intermunicipale entre la Ville de Québec et la Ville de L'Ancienne-Lorette relative à la fourniture de biens et services en matière de technologies de l'information pour les années 2027 et 2028",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1339.pdf",
+   "nouveau": true,
+   "sommaireId": "TI2026-015.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1340.pdf",
+   "numero": "CE-2026-1340",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Prise d'acte de l'entente intervenue entre la Ville de Québec et le Syndicat canadien de la fonction publique - Section locale 4528 - Secteur aquatique, concernant la modification des articles 5.00, 8.00 et 16.00 de la convention collective en v",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1340.pdf",
+   "nouveau": true,
+   "sommaireId": "RH2026-875.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil d'agglomération de Québec",
+   "theme": "rh",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1341.pdf",
+   "numero": "CE-2026-1341",
+   "objet": "Adoption du Règlement modifiant le Règlement sur la réserve financière pour le paiement de la dette de proximité de la ville relativement à la date de terminaison de la réserve financière, R.V.Q. 3588",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1341.pdf",
+   "nouveau": true,
+   "sommaireId": "FN2026-045.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1342.pdf",
+   "numero": "CE-2026-1342",
+   "objet": "Nomination des membres à la Commission d'urbanisme et de conservation de Québec",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1342.pdf",
+   "nouveau": true,
+   "sommaireId": "PA2026-146.pdf",
+   "statutDossier": "en_cours",
+   "etapeFinale": "Conseil de la ville",
+   "echeance": "2026-11-17",
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1343.pdf",
+   "numero": "CE-2026-1343",
+   "objet": "Attribution d'un contrat de services professionnels en ingénierie pour la réparation du quai Chouinard (POA260241) (Appel d'offres public 96472)",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1343.pdf",
+   "nouveau": true,
+   "sommaireId": "AP2026-372.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "echeance": "2026-11-04",
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1344.pdf",
+   "numero": "CE-2026-1344",
+   "objet": "Dépôt de la liste hebdomadaire des autorisations de dépenser par avis de modification de plus de 250 000 $ accordées par un titulaire d'une délégation de dépenser pour la semaine du 11 octobre 2026",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1344.pdf",
+   "nouveau": true,
+   "sommaireId": "AP2026-373.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1345.pdf",
+   "numero": "CE-2026-1345",
+   "objet": "Subventions à plusieurs organismes culturels dans le cadre de l'Entente de développement culturel MCC/Ville",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1345.pdf",
+   "nouveau": true,
+   "sommaireId": "CU2026-087.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "echeance": "2026-11-04",
+   "theme": "culture",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1346.pdf",
+   "numero": "CE-2026-1346",
+   "objet": "Subvention à Le Groupe Danse Partout inc. pour le projet Archipel, mission de réciprocité avec Nantes 2026",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1346.pdf",
+   "nouveau": true,
+   "sommaireId": "CU2026-088.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1347.pdf",
+   "numero": "CE-2026-1347",
+   "objet": "Prise d'acte du rapport des transactions immobilières effectuées par le Service du développement économique et des grands projets du 1er juillet au 30 septembre 2026 et ajout de corrections de trois transactions immobilières pour la période du 1er avril au 30 juin 2026",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1347.pdf",
+   "nouveau": true,
+   "sommaireId": "DE2026-410.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "economie",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1348.pdf",
+   "numero": "CE-2026-1348",
+   "objet": "Prise d'acte du rapport trimestriel des ententes de foresterie urbaine relativement au réseau structurant de transport en commun de la Ville de Québec (projet TramCité) pour la période du 1er juillet au 30 septembre 2026",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1348.pdf",
+   "nouveau": true,
+   "sommaireId": "DE2026-411.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "projets": [
+    "tramway"
+   ],
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1349.pdf",
+   "numero": "CE-2026-1349",
+   "objet": "Approbation des procès-verbaux des séances du comité exécutif tenues les 14 et 16 octobre 2026",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1349.pdf",
+   "nouveau": true,
+   "sommaireId": null,
+   "statutDossier": "termine",
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CE-2026-1350.pdf",
+   "numero": "CE-2026-1350",
+   "objet": "Restructuration au Service des finances",
+   "date": "2026-11-04",
+   "annee": "2026",
+   "type": "Résolutions",
+   "instance": "Comité exécutif",
+   "unite": null,
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CE-2026-1350.pdf",
+   "nouveau": true,
+   "sommaireId": "RH2026-816.pdf",
+   "statutDossier": "termine",
+   "etapeFinale": "Comité exécutif",
+   "theme": "administration",
+   "themeSource": "defaut"
+  },
+  {
    "id": "CU2026-087.pdf",
    "numero": "CU2026-087",
    "objet": "Versement de plusieurs subventions totalisant une somme maximale de 184 243 $ à plusieurs organismes culturels dans le cadre de l'Entente de développement culturel",
@@ -2358,7 +2979,7 @@
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
    "dateCible": "2026-11-04",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "echeance": "2026-11-04",
    "theme": "culture",
@@ -2377,7 +2998,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "subventions",
    "themeSource": "objet"
@@ -2449,7 +3070,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "economie",
    "themeSource": "objet"
@@ -2467,7 +3088,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "projets": [
     "tramway"
@@ -2642,7 +3263,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Comité exécutif",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Comité exécutif",
    "theme": "rh",
    "themeSource": "unite"
@@ -7766,7 +8387,7 @@
    "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AM6-2026-0108.pdf",
    "nouveau": false,
    "sommaireId": "TM2026-251.pdf",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Conseil d'arrondissement",
    "theme": "transport",
    "themeSource": "objet"
@@ -7959,7 +8580,7 @@
    "nouveau": false,
    "sommaireId": null,
    "instanceDecisionnelle": "Conseil d'arrondissement",
-   "statutDossier": "en_cours",
+   "statutDossier": "termine",
    "etapeFinale": "Conseil d'arrondissement",
    "theme": "transport",
    "themeSource": "objet"

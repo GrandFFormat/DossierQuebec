@@ -1,10 +1,83 @@
 {
- "generatedAt": "2026-11-16T18:44:19.483Z",
+ "generatedAt": "2026-11-17T17:43:52.988Z",
  "modele": "claude-haiku-4-5",
  "genereParIA": true,
  "avertissement": "Phrase de résumé générée par IA à partir des décisions de la séance ; les points marquants sont choisis sans IA. Le procès-verbal officiel fait foi.",
  "page": "decisions-de-la-ville-de-quebec",
  "seances": [
+  {
+   "id": "2026-11-16__Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
+   "instanceEn": "Haute-Saint-Charles borough council",
+   "date": "2026-11-16",
+   "nDecisions": 11,
+   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA7_OR_2026-11-16_17h30.pdf",
+   "votes": [],
+   "themes": [
+    {
+     "theme": "transport",
+     "n": 4
+    },
+    {
+     "theme": "urbanisme",
+     "n": 1
+    },
+    {
+     "theme": "subventions",
+     "n": 1
+    }
+   ],
+   "points": [
+    {
+     "id": "CA6-2026-0116.pdf",
+     "numero": "CA6-2026-0116",
+     "titre": "Versement de six (6) subventions totalisant un montant de 21 456 $ à six (6) organismes pour des demandes déposées dans les programmes de soutien financier du Cadre de soutien aux organismes reconnus, pour la date de dépôt du 15 septembre 2026",
+     "titreEn": null,
+     "montant": "21 456 $",
+     "montantEn": "$21,456",
+     "divise": false,
+     "theme": "subventions"
+    },
+    {
+     "id": "CA6-2026-0122.pdf",
+     "numero": "CA6-2026-0122",
+     "titre": "Adoption du Règlement modifiant le Règlement de l'Arrondissement de La Haute-Saint-Charles sur le stationnement dans un garage, un parc de stationnement et sur un terrain géré par la Ville relativement à une case de stationnement pour laquelle un tarif est imposé par un parcomètre, R.C.A.6V.Q. 373",
+     "titreEn": null,
+     "montant": null,
+     "montantEn": null,
+     "divise": false,
+     "theme": "transport"
+    },
+    {
+     "id": "CA6-2026-0115.pdf",
+     "numero": "CA6-2026-0115",
+     "titre": "Demande de dérogation mineure pour la propriété sise au 12630, boulevard de la Colline, lot projeté 6 730 196, quartier de Saint-Émile, district électoral de Lac-Saint-Charles-Saint-Émile",
+     "titreEn": null,
+     "montant": null,
+     "montantEn": null,
+     "divise": false,
+     "theme": "urbanisme"
+    },
+    {
+     "id": "CA6-2026-0117.pdf",
+     "numero": "CA6-2026-0117",
+     "titre": "Ordonnances numéros O-439, O-440 et O-441 concernant des modifications aux règles portant sur la circulation et le stationnement sur le réseau local relativement aux rues Guillaume-Bresse et de Montrachet - District électoral de Lac-Saint-Charles-Saint-Émile",
+     "titreEn": null,
+     "montant": null,
+     "montantEn": null,
+     "divise": false,
+     "theme": "transport"
+    }
+   ],
+   "signature": "11:6",
+   "phrase": "Le conseil a versé 21 456 $ en subventions à six organismes communautaires et modifié les règles de stationnement pour permettre aux véhicules avec vignette handicapée de se stationner gratuitement 3 heures dans les cases tarifées.",
+   "phraseEn": "The council allocated 21 456 $ in subsidies to six community organizations and modified parking rules to allow vehicles with a disability permit to park free for 3 hours in metered parking spaces.",
+   "motsCles": [],
+   "motsClesEn": [],
+   "motsEssais": 1,
+   "genereLe": "2026-11-17T17:43:50.317Z",
+   "motsThemes": []
+  },
   {
    "id": "2026-11-10__Conseil de l'Arrondissement de Beauport",
    "instance": "Conseil de l'Arrondissement de Beauport",
@@ -124,6 +197,101 @@
    "phrase": null,
    "phraseEn": null,
    "motsThemes": []
+  },
+  {
+   "id": "2026-11-04__Comité exécutif",
+   "instance": "Comité exécutif",
+   "instanceEn": "Executive committee",
+   "date": "2026-11-04",
+   "nDecisions": 16,
+   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CE_PL_2026-11-04_00h00.pdf",
+   "votes": [],
+   "themes": [
+    {
+     "theme": "contrats",
+     "n": 4
+    },
+    {
+     "theme": "subventions",
+     "n": 2
+    },
+    {
+     "theme": "rh",
+     "n": 1
+    },
+    {
+     "theme": "urbanisme",
+     "n": 1
+    },
+    {
+     "theme": "culture",
+     "n": 1
+    },
+    {
+     "theme": "economie",
+     "n": 1
+    }
+   ],
+   "points": [
+    {
+     "id": "CE-2026-1335.pdf",
+     "numero": "CE-2026-1335",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Attribution d'un contrat à commandes pour le service de réparation sur la route pour les pneus de camions lourds et les équipements de génie civil (Appel d'offres public 96068)",
+     "titreEn": null,
+     "montant": "599 998,60 $",
+     "montantEn": "$599,998.60",
+     "divise": false,
+     "theme": "contrats"
+    },
+    {
+     "id": "CE-2026-1338.pdf",
+     "numero": "CE-2026-1338",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Entente entre la Ville de Québec et la Communauté allemande Québec relativement au versement d'une subvention et à la fourniture à titre gratuit de services municipaux, à titre d'assistance, dans le cadre de la tenue de l'événement Marché de Noë",
+     "titreEn": null,
+     "montant": "390 000 $",
+     "montantEn": "$390,000",
+     "divise": false,
+     "theme": "subventions"
+    },
+    {
+     "id": "CE-2026-1339.pdf",
+     "numero": "CE-2026-1339",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Prolongation de l'entente intermunicipale entre la Ville de Québec et la Ville de L'Ancienne-Lorette relative à la fourniture de biens et services en matière de technologies de l'information pour les années 2027 et 2028",
+     "titreEn": null,
+     "montant": "360 419,52 $",
+     "montantEn": null,
+     "divise": false,
+     "theme": "contrats"
+    },
+    {
+     "id": "CE-2026-1343.pdf",
+     "numero": "CE-2026-1343",
+     "titre": "Attribution d'un contrat de services professionnels en ingénierie pour la réparation du quai Chouinard (POA260241) (Appel d'offres public 96472)",
+     "titreEn": null,
+     "montant": "299 025 $",
+     "montantEn": "$299,025",
+     "divise": false,
+     "theme": "contrats"
+    }
+   ],
+   "signature": "16:12",
+   "phrase": "Le comité exécutif a autorisé des contrats de réparation de pneus lourds pour 599 998,60 $ et d'inspection d'équipements de protection contre les chutes pour 152 730 $, ainsi qu'une subvention de 350 000 $ au Marché de Noël allemand.",
+   "phraseEn": "The executive committee authorized contracts for heavy tire repair for 599 998,60 $ and inspection of fall protection equipment for 152 730 $, as well as a subsidy of 350 000 $ for the German Christmas Market.",
+   "motsCles": [
+    "réparation de pneus lourds",
+    "Marché de Noël allemand"
+   ],
+   "motsClesEn": [
+    "heavy tire repair",
+    "fall protection equipment",
+    "German Christmas Market"
+   ],
+   "motsEssais": 1,
+   "genereLe": "2026-11-17T17:43:52.968Z",
+   "motsThemes": [
+    "contrats",
+    "subventions"
+   ]
   },
   {
    "id": "2026-11-04__Conseil d'agglomération de Québec",
