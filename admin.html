@@ -26,6 +26,8 @@
   .tb-onglets{display:flex; gap:4px; margin-left:18px;}
   .tb-onglets button{font-family:'Archivo',sans-serif; font-size:14px; font-weight:800; padding:7px 12px; background:transparent; color:#fff; border:0; border-bottom:3px solid transparent; cursor:pointer;}
   .tb-onglets button:hover{border-bottom-color:var(--gold-pale);}
+  .tb-onglets a{font-family:'Archivo',sans-serif; font-size:14px; font-weight:800; padding:7px 12px; color:#fff; text-decoration:none; border-bottom:3px solid transparent;}
+  .tb-onglets a:hover{border-bottom-color:var(--gold-pale);}
   .tb-onglets button[aria-pressed="true"]{border-bottom-color:var(--yellow); color:var(--yellow);}
   @media (max-width:620px){ .tb-onglets{order:3; flex-basis:100%; margin:0;} .tb-onglets button{flex:1;} }
 
@@ -168,6 +170,7 @@
       <button type="button" data-onglet="trafic" aria-pressed="true">Fréquentation</button>
       <button type="button" data-onglet="rtv" aria-pressed="false">Représentez votre ville</button>
       <button type="button" data-onglet="villes" aria-pressed="false">Villes</button>
+      <a href="https://claude.ai/artifact/FnWMPhNnuW717PK3z2TEBt" target="_blank" rel="noopener">Commandites ↗</a>
     </nav>
     <span class="tb-esp"></span>
     <button class="tb-sortir" id="tbSortir" hidden>Se déconnecter</button>
