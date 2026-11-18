@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-17T18:42:18.250Z",
+ "generatedAt": "2026-11-18T18:17:54.915Z",
  "modele": "claude-haiku-4-5",
  "genereParIA": true,
  "avertissement": "Phrase de résumé générée par IA à partir des décisions de la séance ; les points marquants sont choisis sans IA. Le procès-verbal officiel fait foi.",
@@ -95,6 +95,103 @@
     "transport"
    ],
    "votes": []
+  },
+  {
+   "id": "CE_2026-11-03",
+   "instance": "Comité exécutif",
+   "instanceEn": "Executive committee",
+   "date": "2026-11-03",
+   "nDecisions": 35,
+   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/2026/PV-CE-2026-11-03-CE3495-a-CE3550.pdf",
+   "votes": [],
+   "themes": [
+    {
+     "theme": "contrats",
+     "n": 4
+    },
+    {
+     "theme": "subventions",
+     "n": 4
+    },
+    {
+     "theme": "environnement",
+     "n": 4
+    },
+    {
+     "theme": "transport",
+     "n": 4
+    },
+    {
+     "theme": "travaux",
+     "n": 3
+    },
+    {
+     "theme": "urbanisme",
+     "n": 3
+    }
+   ],
+   "points": [
+    {
+     "id": "CE3512",
+     "numero": "CE3512",
+     "titre": "Adoption des prévisions budgétaires de la Régie intermunicipale de gestion des déchets des Chutes-de-la-Chaudière pour l’année 2027",
+     "titreEn": null,
+     "montant": "4 965 200 $",
+     "montantEn": null,
+     "divise": false,
+     "theme": "administration"
+    },
+    {
+     "id": "CE3514",
+     "numero": "CE3514",
+     "titre": "Financement de la dépense relative aux travaux de réalisation des améliorations des installations de l’écocentre",
+     "titreEn": null,
+     "montant": "3 000 000 $",
+     "montantEn": null,
+     "divise": false,
+     "theme": "travaux"
+    },
+    {
+     "id": "CE3524",
+     "numero": "CE3524",
+     "titre": "Financement afférent, adhésion et désignation de représentantes et représentants relatifs au regroupement d’achats relatif à l'acquisition de services de liens téléphoniques fixes du Centre d’acquisitions gouvernementales",
+     "titreEn": null,
+     "montant": "808 250,00 $",
+     "montantEn": null,
+     "divise": false,
+     "theme": "contrats"
+    },
+    {
+     "id": "CE3518",
+     "numero": "CE3518",
+     "titre": "Option de renouvellement du contrat relatif à la location et l’implantation d’un logiciel-service de recrutement",
+     "titreEn": null,
+     "montant": "500 000,00 $",
+     "montantEn": null,
+     "divise": false,
+     "theme": "environnement"
+    }
+   ],
+   "signature": "35:30",
+   "phrase": "Le comité exécutif a approuvé le financement des améliorations de l'écocentre pour 3 000 000 $ et l'étude de positionnement économique de Lévis-Est pour 200 000 $, ainsi que le renouvellement du contrat de logiciel de recrutement pour 500 000,00 $.",
+   "phraseEn": "The executive committee approved funding for ecocentre improvements for 3 000 000 $ and the economic positioning study for Lévis-Est for 200 000 $, as well as renewal of the recruitment software contract for 500 000,00 $.",
+   "motsCles": [
+    "améliorations de l'écocentre",
+    "étude de positionnement économique",
+    "logiciel de recrutement"
+   ],
+   "motsClesEn": [
+    "ecocentre improvements",
+    "economic positioning study",
+    "recruitment software"
+   ],
+   "motsEssais": 1,
+   "genereLe": "2026-11-18T18:17:54.900Z",
+   "motsThemes": [
+    "travaux",
+    "economie",
+    "environnement"
+   ]
   },
   {
    "id": "CV_2026-10-27",
@@ -1439,6 +1536,10 @@
  ],
  "ordresDuJour": [],
  "enAttente": [
+  {
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "date": "2026-11-18"
+  },
   {
    "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Est",
    "date": "2026-11-04"
