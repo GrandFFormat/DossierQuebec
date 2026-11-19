@@ -133,6 +133,14 @@ function extraireDonnees() {
     // ⚠️ Volontairement ABSENT de `donnees` : commun/dq.js ne va le chercher que si l'agrégat
     // renvoie un projet dont la page n'a pas le titre. Une page où rien n'est challengé ne
     // paie rien.
+    // motions : les 40 dernières motions mises aux voix, pour « Dernières motions » de l'accueil
+    // (Martin, 19 nov. 2026, copié de DossierOntario). Un vote sans projet de loi dont l'étape ou
+    // le sujet parle d'une motion. Le texte est celui du registre des votes, tel quel (français).
+    motions: valeurs.votes
+      .filter((v) => !v.billId && /motion/i.test(`${v.stage ?? ''} ${v.subject ?? ''}`))
+      .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '') || String(b.id).localeCompare(String(a.id), undefined, { numeric: true }))
+      .slice(0, 40)
+      .map((v) => ({ id: v.id, date: v.date, stage: v.stage, subject: v.subject, url: v.url, totals: v.totals })),
     challengeBills: valeurs.bills.map((b) => ({
       id: b.id, num: b.num, title: b.title, titleEn: b.titleEn,
       status: b.status, step: b.step, lastActivity: b.lastActivity,
@@ -166,7 +174,7 @@ function extraireDonnees() {
 const PAGES = [
   {
     fichier: 'index.html', vue: 'apercu', onglet: 'apercu', url: '/',
-    donnees: ['newsItems', 'petitions', 'apercuBills', 'deputesRaw', 'stats'],
+    donnees: ['newsItems', 'motions', 'petitions', 'apercuBills', 'deputesRaw', 'stats'],
     title: "L'Assemblée nationale du Québec en clair — DossierQuébec",
     desc: "Suivez l'Assemblée nationale du Québec en langage clair : projets de loi résumés, votes nominatifs de chaque député·e, ministres et promesses électorales 2026.",
     frequence: 'daily', priorite: '1.0',
@@ -352,10 +360,12 @@ function prerendus(valeurs) {
   return {
     apercuBills: bloc('apercuBills', 'Projets de loi récemment actifs', bills.slice(0, 8).map(projet),
       `Source officielle : ${ASSNAT}.`),
-    newsList: bloc('newsItems', 'Quoi de neuf à l’Assemblée nationale',
-      [...valeurs.newsItems].sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 8)
-        .map((n) => `<span class="pr-meta">${ht(n.label || dateFr(n.date))} —</span> ${ht(n.text)}`),
-      `Source officielle : ${ASSNAT}.`),
+    // « Dernières motions » remplace « Quoi de neuf » à l'accueil (19 nov. 2026) : la même liste, écrite dans le HTML.
+    motionsList: bloc('motions', 'Dernières motions à l’Assemblée nationale',
+      valeurs.votes.filter((v) => !v.billId && /motion/i.test(`${v.stage ?? ''} ${v.subject ?? ''}`))
+        .sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '')).slice(0, 8)
+        .map((v) => `<span class="pr-meta">${ht(dateFr(v.date))} —</span> ${ht(v.subject)} <span class="pr-meta">(${v.totals?.pour ?? 0} pour, ${v.totals?.contre ?? 0} contre)</span>`),
+      `Source officielle : le registre des votes, ${ASSNAT}.`),
     ministresGrid: bloc('ministers', 'Conseil des ministres',
       valeurs.ministers.map((m) => `<b><a href="/ministres/${slugMinistre(m.name)}">${ht(m.name)}</a></b> — ${ht(m.role)} <span class="pr-meta">(${ht(m.party)})</span>`),
       `Le Conseil des ministres du Québec compte ${valeurs.ministers.length} membres, dont le premier ministre ${ht(valeurs.ministers[0].name)} (au ${dateFr(new Date().toISOString().slice(0, 10))}). Source officielle : ${QUEBEC_CA}.`, true),

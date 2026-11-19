@@ -131,7 +131,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400..900&family=Archivo+Narrow:wght@400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/commun/dq.css">
 </head>
-<body data-page="apercu" data-donnees="newsItems,petitions,apercuBills,deputesRaw,stats">
+<body data-page="apercu" data-donnees="newsItems,motions,petitions,apercuBills,deputesRaw,stats">
 
 <!-- Ticker brutaliste : bande noire défilante — contenu rempli avec les VRAIES
      données par renderTicker() (appelé une fois les datasets chargés). -->
@@ -379,22 +379,24 @@ function goToFederal(evt){
     <div>
     <!-- Le flux RSS (api/feed-data.xml) reprend exactement ces événements ; il est réservé aux
          abonné·e·s depuis le 21 oct. 2026 (adresse personnelle dans Mon dossier). -->
-    <div class="section-head" id="sec-quoideneuf"><div><h2 data-i18n="h.quoideneuf">Quoi de neuf</h2><div class="sub" data-i18n="h.quoideneuf.sub">Dernières activités réelles à l'Assemblée nationale</div></div></div>
+    <!-- « Dernières motions » à la place de « Quoi de neuf » (Martin, 19 nov. 2026, comme DossierOntario).
+         Les événements de Quoi de neuf restent chargés : le ticker et le flux RSS des abonné·e·s s'en servent. -->
+    <div class="section-head" id="sec-quoideneuf"><div><h2 data-i18n="h.motions">Dernières motions</h2><div class="sub" data-i18n="h.motions.sub">Les motions mises aux voix à l'Assemblée nationale, de la plus récente à la plus ancienne</div></div></div>
 
     <div id="body-quoideneuf">
-    <div id="newsList"></div>
-    <div class="prerendu" data-prerendu="newsItems">
-      <ul aria-label="Quoi de neuf à l’Assemblée nationale">
-        <li><span class="pr-meta">21 octobre 2026 —</span> Le nouveau conseil des ministres entre en fonction. Paul St-Pierre Plamondon est premier ministre.</li>
-        <li><span class="pr-meta">21 octobre 2026 —</span> Dépouillement judiciaire dans Vachon : Stephan Fogaing (PQ) l'emporte par 3 votes.</li>
-        <li><span class="pr-meta">5 octobre 2026 —</span> Élection générale. Selon Élections Québec : PQ 60 sièges, PLQ 39, PCQ 19, QS 9.</li>
-        <li><span class="pr-meta">27 août 2026 —</span> Dissolution de l'Assemblée nationale : fin de la 43e législature.</li>
-        <li><span class="pr-meta">12 juin 2026 —</span> Dépôt du projet de loi n° 692 — Loi visant à créer un nouvel outil de conservation volontaire des milieux naturels</li>
-        <li><span class="pr-meta">12 juin 2026 —</span> Sanction du projet de loi n° 24 — Loi protégeant le consommateur contre l’utilisation trompeuse ou frauduleuse de l’identité ou de l’image…</li>
-        <li><span class="pr-meta">12 juin 2026 —</span> Sanction du projet de loi n° 23 — Loi visant principalement à mieux accompagner les personnes dont l’état mental pourrait représenter un r…</li>
-        <li><span class="pr-meta">12 juin 2026 —</span> Sanction du projet de loi n° 22 — Loi bonifiant les pouvoirs d’intervention des municipalités et modifiant d’autres dispositions législati…</li>
+    <div id="motionsList"></div>
+    <div class="prerendu" data-prerendu="motions">
+      <ul aria-label="Dernières motions à l’Assemblée nationale">
+        <li><span class="pr-meta">11 juin 2026 —</span> Motion proposée par Mme Fréchette, première ministre, afin de nommer Mme Marie-Claude Girard membre à temps partiel de la Commission des droits de la personne et des droits de la jeunesse <span class="pr-meta">(97 pour, 7 contre)</span></li>
+        <li><span class="pr-meta">11 juin 2026 —</span> Motion proposée par Mme Fréchette, première ministre, afin de nommer Mme Nicole Léger membre à temps partiel de la Commission des droits de la personne et des droits de la jeunesse <span class="pr-meta">(105 pour, 0 contre)</span></li>
+        <li><span class="pr-meta">10 juin 2026 —</span> Motion proposée par M. Ciccone (Marquette) afin de rendre hommage à l’équipe de la Victoire de Montréal, gagnante de la Coupe Walter <span class="pr-meta">(101 pour, 0 contre)</span></li>
+        <li><span class="pr-meta">10 juin 2026 —</span> Motion proposée par M. Arseneau (Îles-de-la-Madeleine) afin de demander à Santé Québec de prendre les mesures nécessaires afin d’assurer le maintien des services d’urgence au CLSC de Portneuf <span class="pr-meta">(96 pour, 0 contre)</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Motion pour formuler un grief de M. Fortin, chef de l’opposition officielle <span class="pr-meta">(27 pour, 63 contre)</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Motion pour formuler un grief de Mme Ghazal, cheffe du deuxième groupe d’opposition <span class="pr-meta">(25 pour, 63 contre)</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Motion pour formuler un grief de M. Ciccone (Marquette) <span class="pr-meta">(26 pour, 63 contre)</span></li>
+        <li><span class="pr-meta">5 juin 2026 —</span> Motion pour formuler un grief de Mme Zaga Mendez (Verdun) <span class="pr-meta">(11 pour, 77 contre)</span></li>
       </ul>
-      <p class="pr-note">Source officielle : <a href="https://www.assnat.qc.ca/" rel="noopener">assnat.qc.ca</a>.</p>
+      <p class="pr-note">Source officielle : le registre des votes, <a href="https://www.assnat.qc.ca/" rel="noopener">assnat.qc.ca</a>.</p>
     </div>
     <!-- Encadré noir compact (maquette) — le même statut réel que le ticker.
          renderTicker() lit .calendar-box .status : NE PAS renommer. -->
