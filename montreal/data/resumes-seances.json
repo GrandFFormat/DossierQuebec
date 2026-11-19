@@ -1,10 +1,115 @@
 {
- "generatedAt": "2026-11-18T18:19:42.909Z",
+ "generatedAt": "2026-11-19T18:38:21.146Z",
  "modele": "claude-haiku-4-5",
  "genereParIA": true,
  "avertissement": "Phrase de résumé générée par IA à partir des décisions de la séance ; les points marquants sont choisis sans IA. Le procès-verbal officiel fait foi.",
  "page": "decisions-de-la-ville-de-montreal",
  "seances": [
+  {
+   "id": "CM_2026-10-19_13h00",
+   "instance": "Conseil municipal",
+   "instanceEn": "City council",
+   "date": "2026-10-19",
+   "nDecisions": 92,
+   "pv": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf",
+   "votes": [
+    {
+     "numero": "CM26 1128",
+     "titre": "AJOUT - Motion de l'Opposition officielle - Motion d'urgence visant la tenue d'un comité plénier sur les allégations graves visant le SPVM",
+     "pour": 36,
+     "contre": 24,
+     "resultat": "Adoptée à la majorité"
+    }
+   ],
+   "themes": [
+    {
+     "theme": "transport",
+     "n": 17
+    },
+    {
+     "theme": "environnement",
+     "n": 14
+    },
+    {
+     "theme": "contrats",
+     "n": 12
+    },
+    {
+     "theme": "urbanisme",
+     "n": 11
+    },
+    {
+     "theme": "securite",
+     "n": 6
+    },
+    {
+     "theme": "finances",
+     "n": 5
+    }
+   ],
+   "points": [
+    {
+     "id": "CM26 1081",
+     "numero": "CM26 1081",
+     "titre": "Adoption - Règlement autorisant un emprunt de 10 430 000 $ pour le financement des travaux de mise à niveau de la Biosphère",
+     "titreEn": "Adoption - By-law authorizing a loan of $10,430,000 for the financing of upgrade work at the Biosphère",
+     "montant": "10 430 000 $",
+     "montantEn": null,
+     "divise": false,
+     "theme": "travaux"
+    },
+    {
+     "id": "CM26 1041",
+     "numero": "CM26 1041",
+     "titre": "Dépôt de la projection des résultats de l'exercice 2026 en date du 31 août 2026 - Volet municipal et de l'état des revenus et des charges réels global Ville, au 31 août 2026 comparé avec le 31 août 2025 Le leader adjoint de la majorité, Alexandre Devaux-Guizani, dépose la projection des résultats de l’exercice 2026 en date du 31 août 2026 – Volet municipal, ainsi que l’état des revenus et des charges réels de la Ville au 31 août 2026 comparé avec le 31 août 2025, et le conseil en prend acte.",
+     "titreEn": "Tabling of the projection of results for fiscal year 2026 as at August 31, 2026 - Municipal component, and of the statement of actual revenues and expenditures for the City overall, as at August 31, 2026 compared with August 31, 2025 - The deputy majority leader, Alexandre Devaux-Guizani, tables the projection of results for fiscal year 2026 as at August 31, 2026 – Municipal component, as well as the statement of actual revenues and expenditures for the City as at August 31, 2026 compared with August 31, 2025, and council takes note thereof.",
+     "montant": "165,0 M$",
+     "montantEn": null,
+     "divise": false,
+     "theme": "environnement"
+    },
+    {
+     "id": "CM26 1066",
+     "numero": "CM26 1066",
+     "titre": "Accorder un soutien financier de 500 000 $ à Société de développement Écoquartier Louvain provenant des contributions issues du volet social du Règlement visant à améliorer l'offre en matière de logement social, abordable et familial, pour la conception d'un projet de logements hors marché, dans l'arrondissement d'Ahuntsic-Cartierville / Approuver le projet de convention à cet effet",
+     "titreEn": "Grant financial support of $500,000 to Société de développement Écoquartier Louvain from contributions arising from the social component of the By-law to improve the supply of social, affordable and family housing, for the design of a non-market housing project, in the Ahuntsic-Cartierville borough / Approve the draft agreement to this effect",
+     "montant": "500 000 $",
+     "montantEn": null,
+     "divise": false,
+     "theme": "transport"
+    },
+    {
+     "id": "CM26 1057",
+     "numero": "CM26 1057",
+     "titre": "Approuver le projet d'addenda 1 à la convention de contribution financière entre la Ville et Mission Old Brewery, provenant des contributions issues du volet social du Règlement visant à améliorer l'offre en matière de logement social, abordable et familial en complément du soutien financier reçu dans le cadre du Fonds capital pour TOIT du Fonds de solidarité FTQ, afin de bonifier de 475 000 $ le montant de la contribution financière, pour la construction d'un immeuble situé au 1685 à 1693, avenue de l'Église, dans l'arrondissement du Sud-Ouest",
+     "titreEn": "Approve the draft addendum 1 to the financial contribution agreement between the City and Mission Old Brewery, from contributions arising from the social component of the By-law to improve the supply of social, affordable and family housing, in addition to the financial support received under the Fonds capital pour TOIT of the Fonds de solidarité FTQ, in order to increase the amount of the financial contribution by $475,000, for the construction of a building located at 1685 to 1693, avenue de l'Église, in the Sud-Ouest borough",
+     "montant": "475 000 $",
+     "montantEn": null,
+     "divise": false,
+     "theme": "social"
+    }
+   ],
+   "signature": "92:85",
+   "phrase": "Le conseil a accordé des contrats pour l'équipement incendie (3 299 207,63 $), les services de déneigement (13 657 043,23 $), et la rénovation de l'auditorium du Jardin botanique (3 043 312,11 $), et a versé 8 600 000 $ à Mission Unitaînés pour construire des logements pour aînés.",
+   "phraseEn": "The council awarded contracts for firefighting equipment (3,299,207.63 $), snow removal services (13,657,043.23 $), and renovation of the Jardin botanique auditorium (3,043,312.11 $), and allocated 8,600,000 $ to Mission Unitaînés for senior housing construction.",
+   "motsCles": [
+    "équipement incendie",
+    "déneigement",
+    "logements pour aînés"
+   ],
+   "motsClesEn": [
+    "firefighting equipment",
+    "snow removal",
+    "senior housing"
+   ],
+   "motsEssais": 1,
+   "genereLe": "2026-11-19T18:37:39.932Z",
+   "motsThemes": [
+    "securite",
+    "transport",
+    "urbanisme"
+   ]
+  },
   {
    "id": "CA_Vma_2026-10-13_18h30",
    "instance": "Conseil d'arrondissement de Ville-Marie",
@@ -3925,6 +4030,94 @@
  ],
  "ordresDuJour": [
   {
+   "id": "CG_2026-11-19_16h00",
+   "version": 6,
+   "instance": "Conseil d'agglomération",
+   "instanceEn": "Agglomeration council",
+   "date": "2026-11-19",
+   "odj": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-11-19_16h00_FR.pdf",
+   "nPoints": 276,
+   "themes": [
+    {
+     "theme": "securite",
+     "n": 47
+    },
+    {
+     "theme": "contrats",
+     "n": 30
+    },
+    {
+     "theme": "environnement",
+     "n": 26
+    },
+    {
+     "theme": "transport",
+     "n": 22
+    },
+    {
+     "theme": "culture",
+     "n": 20
+    },
+    {
+     "theme": "social",
+     "n": 19
+    }
+   ],
+   "points": [
+    {
+     "article": "42.02",
+     "titre": "Adoption - Règlement autorisant un emprunt de 313 000 000 $ afin de financer les travaux de construction et de renouvellement du réseau principal d'aqueduc Compétence Alimentation en eau et assainissement des eaux d’agglomération :",
+     "montant": "313 000 000 $",
+     "theme": "environnement",
+     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-11-19_16h00_FR.pdf#page=26",
+     "titreEn": "Adoption - By-law authorizing a loan of $313,000,000 to finance construction and renewal work of the main water system"
+    },
+    {
+     "article": "30.08",
+     "titre": "Autoriser l'utilisation partielle des sommes de 245 512 000,84 $ accumulées à la réserve financière de paiement au comptant destinée à financer des dépenses en immobilisations de compétences d'agglomération Compétence Acte mixte d’agglomération :",
+     "montant": "245 512 000,84 $",
+     "theme": "finances",
+     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-11-19_16h00_FR.pdf#page=23",
+     "titreEn": "Authorize the partial use of amounts of $245,512,000.84 accumulated in the cash payment reserve intended to finance capital expenditures of agglomeration jurisdiction"
+    },
+    {
+     "article": "42.03",
+     "titre": "Adoption - Règlement autorisant un emprunt de 11 940 000 $ afin de financer la réalisation du Plan de la forêt urbaine dans les parcs relevant de la compétence du conseil d'agglomération Compétence Annexe du décret - Écoterritoires d’agglomération :",
+     "montant": "11 940 000 $",
+     "theme": "loisirs",
+     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-11-19_16h00_FR.pdf#page=27",
+     "titreEn": "Adoption - By-law authorizing a loan of $11,940,000 to finance the implementation of the Urban Forest Plan in parks under the agglomeration council's jurisdiction"
+    },
+    {
+     "article": "20.27",
+     "titre": "Accorder un soutien financier totalisant 6 750 740 $, à différents organismes du réseau PME MTL, afin de permettre la continuité de l'offre de soutien technique dédiée aux entrepreneurs, pour l'année 2027 / Approuver les projets de conventions à cet effet Compétence Élément du développement économique qu'est tout centre d’agglomération : local de développement",
+     "montant": "6 750 740 $",
+     "theme": "transport",
+     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-11-19_16h00_FR.pdf#page=14",
+     "titreEn": "Grant financial support totaling $6,750,740 to various organizations in the PME MTL network, to enable the continuation of technical support services dedicated to entrepreneurs, for the year 2027 / Approve the draft service agreements for this purpose"
+    }
+   ],
+   "phrase": "À l'ordre du jour : ententes pour services de réparation automobile du SPVM (2 066 088,32 $), équipements de protection individuelle (2 086 096,93 $) et travaux de rue Bélanger (16 632 811,58 $).",
+   "phraseEn": "On the agenda: agreements for SPVM vehicle repair services ($2,066,088.32), personal protective equipment ($2,086,096.93) and Bélanger Street work ($16,632,811.58).",
+   "motsCles": [
+    "services de réparation automobile",
+    "équipements de protection individuelle",
+    "travaux de rue"
+   ],
+   "motsClesEn": [
+    "vehicle repair services",
+    "personal protective equipment",
+    "Street work"
+   ],
+   "motsEssais": 1,
+   "genereLe": "2026-11-19T18:38:15.493Z",
+   "motsThemes": [
+    "securite",
+    "contrats",
+    "environnement"
+   ]
+  },
+  {
    "id": "CM_2026-11-16_13h00",
    "version": 6,
    "instance": "Conseil municipal",
@@ -5345,96 +5538,13 @@
     "subventions",
     "travaux"
    ]
-  },
-  {
-   "id": "CG_2026-10-22_16h00",
-   "version": 6,
-   "instance": "Conseil d'agglomération",
-   "instanceEn": "Agglomeration council",
-   "date": "2026-10-22",
-   "odj": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf",
-   "nPoints": 152,
-   "themes": [
-    {
-     "theme": "contrats",
-     "n": 27
-    },
-    {
-     "theme": "environnement",
-     "n": 14
-    },
-    {
-     "theme": "urbanisme",
-     "n": 13
-    },
-    {
-     "theme": "securite",
-     "n": 11
-    },
-    {
-     "theme": "social",
-     "n": 10
-    },
-    {
-     "theme": "transport",
-     "n": 10
-    }
-   ],
-   "points": [
-    {
-     "article": "42.01",
-     "titre": "Adoption - Règlement autorisant un emprunt de 10 430 000 $ pour le financement des travaux de mise à niveau de la Biosphère Compétence Annexe du décret - Parc Jean-Drapeau d’agglomération :",
-     "montant": "10 430 000 $",
-     "theme": "loisirs",
-     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=18",
-     "titreEn": "Adoption - Regulation authorizing a loan of $10,430,000 for the financing of work to upgrade the Biosphere"
-    },
-    {
-     "article": "20.19",
-     "titre": "Accorder un contrat à Innotex inc., pour la fourniture d'habits pour le combat incendie - Dépense totale de 3 299 207,63 $, taxes incluses - Appel d'offres public 26-21497 (1 soum.) Compétence Éléments de la sécurité publique que sont les services de d’agglomération : police, de sécurité civile, de sécurité incendie et de premiers répondants",
-     "montant": "3 299 207,63 $",
-     "theme": "securite",
-     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=11",
-     "titreEn": "Contract with Innotex Inc. for the supply of fire-fighting apparel - Total expense of $3,299,207.63, taxes included - Public call for tender 26-21497 (1 bid)"
-    },
-    {
-     "article": "20.16",
-     "titre": "Accorder un contrat à J.N.A. Leblanc Électrique inc., pour les travaux électriques en régie contrôlée sur les équipements de la Direction de l'épuration des eaux usées, pour une période de 24 mois - Dépense totale de 775 559,72 $, taxes incluses - Appel d'offres public DEEU-SP2638-167032-C (7 soum.) Compétence Alimentation en eau et assainissement des eaux d’agglomération :",
-     "montant": "775 559,72 $",
-     "theme": "environnement",
-     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=10",
-     "titreEn": "Contract with J.N.A. Leblanc Électrique Inc. for electrical work under controlled contract on wastewater treatment equipment, for a period of 24 months - Total expense of $775,559.72, taxes included - Public call for tender DEEU-SP2638-167032-C (7 bids)"
-    },
-    {
-     "article": "20.24",
-     "titre": "Exercer l'option de la première prolongation de 12 mois / Autoriser une dépense additionnelle de 551 436,32 $, taxes incluses, pour les services d'entretien de génératrices pour divers bâtiments de la Ville, dans le cadre des contrats accordés à Entreprises L.M. inc. (CG23 0718), majorant ainsi le montant total des contrats à 1 944 566,33 $, taxes incluses Compétence Acte mixte d’agglomération :",
-     "montant": "551 436,32 $",
-     "theme": "contrats",
-     "lien": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=13",
-     "titreEn": "Exercise the option for the first 12-month extension / Authorize an additional expense of $551,436.32, taxes included, for generator maintenance services for various City buildings, under the contracts awarded to Entreprises L.M. Inc. (CG23 0718), thus increasing the total amount of the contracts to $1,944,566.33, taxes included"
-    }
-   ],
-   "phrase": "À l'ordre du jour : un contrat à Innotex inc. pour habits de combat incendie de 3 299 207,63 $, des travaux électriques à J.N.A. Leblanc Électrique inc. pour 775 559,72 $ et une servitude réelle pour collecteur pluvial et sanitaire de 490 780 $.",
-   "phraseEn": "On the agenda: a contract with Innotex Inc. for fire-fighting apparel for $3,299,207.63, electrical work with J.N.A. Leblanc Électrique Inc. for $775,559.72, and a real servitude for storm and sanitary collector for $490,780.",
-   "motsCles": [
-    "habits de combat incendie",
-    "travaux électriques",
-    "collecteur pluvial et sanitaire"
-   ],
-   "motsClesEn": [
-    "fire-fighting apparel",
-    "electrical work",
-    "storm and sanitary collector"
-   ],
-   "genereLe": "2026-11-13T11:29:17.625Z",
-   "motsThemes": [
-    "securite",
-    "environnement",
-    null
-   ]
   }
  ],
  "enAttente": [
+  {
+   "instance": "Conseil d'agglomération",
+   "date": "2026-11-19"
+  },
   {
    "instance": "Conseil municipal",
    "date": "2026-11-17"
@@ -5538,10 +5648,6 @@
   {
    "instance": "Conseil municipal",
    "date": "2026-10-20"
-  },
-  {
-   "instance": "Conseil municipal",
-   "date": "2026-10-19"
   },
   {
    "instance": "Comité exécutif",

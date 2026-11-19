@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-18T18:18:04.502Z",
+ "generatedAt": "2026-11-19T18:33:58.885Z",
  "modele": "claude-sonnet-5",
  "genereParIA": true,
  "avertissement": "Traductions automatiques des textes français ; chaque nombre a été vérifié contre le français. Les documents de la Ville sont en français et font foi.",
@@ -7,8 +7,8 @@
  "projets": {
   "canopee": {
    "titre": "Tree canopy and greening",
-   "description": "Tree planting, greening, and action against emerald ash borer and heat islands.",
-   "enBref": "The City buys trees and pays to have them planted on sidewalks, in parks and on private land. It also funds the machinery and the teams of employees who do this work in the boroughs. At the same time, borough councils allow construction projects to depart from the rules on trees and greening.",
+   "description": "Tree planting, greening, action against the emerald ash borer and heat islands.",
+   "enBref": "The City buys trees and pays to have them planted on sidewalks, in parks and on private land. It also funds the machinery and employee teams who do this work in the boroughs. At the same time, borough councils allow construction projects to depart from the rules on trees and greening.",
    "etapes": [
     {
      "periode": "February 2026",
@@ -18,7 +18,7 @@
     {
      "periode": "March 2026",
      "titre": "Money to plant trees",
-     "texte": "The City is paying $3,071,550 to the Société de verdissement du Montréal métropolitain to plant and maintain trees on private and institutional land until December 31, 2026. Pierrefonds-Roxboro is transferring $162,233.12 from its parks fund to buy trees and plants."
+     "texte": "The City is paying $3,071,550 to the Société de verdissement du Montréal métropolitain to plant and maintain trees on private and institutional land until December 31, 2026. Pierrefonds-Roxboro is separately transferring $162,233.12 from its parks fund to buy trees and plants."
     },
     {
      "periode": "March and May 2026",
@@ -27,13 +27,13 @@
     },
     {
      "periode": "April to June 2026",
-     "titre": "Machinery, teams and work in parks",
+     "titre": "Machinery, teams and park work",
      "texte": "Mercier–Hochelaga-Maisonneuve is renting a mini backhoe loader with operator for $152,916.75 and setting aside $200,000 for blue-collar teams assigned to planting. Outremont is awarding the renovation of the parc Pratt chalet and the redevelopment of its surroundings, including planting vegetation, for an expense of $800,416.17, financed in part by the Programme de réfection et de verdissement des parcs locaux."
     },
     {
      "periode": "August 2026",
      "titre": "Land leased for a nursery",
-     "texte": "The City is leasing lots in the Namur-Hippodrome neighbourhood to the Société de verdissement du Montréal métropolitain for $100, so it can operate a transitional nursery there. The lease runs for 24 months starting May 1, 2026, and the property subsidy is estimated at $329,600."
+     "texte": "The City is leasing plots in the Namur-Hippodrome neighbourhood to the Société de verdissement du Montréal métropolitain for $100, so it can operate a transition nursery there. The lease runs for 24 months starting May 1, 2026, and the property subsidy is estimated at $329,600."
     }
    ],
    "aSurveiller": [
@@ -44,179 +44,166 @@
      "texte": "The 855 trees in lot 2 must be planted in spring 2027; watering, maintenance and replacement continue until the end of November 2029."
     },
     {
-     "texte": "The lease for the transitional nursery ends on April 30, 2028."
+     "texte": "The transition nursery lease ends on April 30, 2028."
     }
    ],
    "source": "4b5e4e66a3b1937f",
-   "genereLe": "2026-11-18T18:15:41.774Z"
+   "genereLe": "2026-11-19T18:31:32.240Z"
   },
   "deneigement": {
    "titre": "Snow removal",
-   "description": "Contracts for snow removal and snow loading, spreading of abrasives, parking by-laws.",
-   "enBref": "This year, the City and the boroughs mainly signed, extended and paid for snow-related contracts: turnkey snow removal for streets and sidewalks, rental of graders and tractor-loaders with operators, vehicle towing and spring street cleaning. Some boroughs also drew on their surpluses to cover expenses from the 2025-2026 winter, and others amended their by-laws for contractors who clear snow from private lots.",
+   "description": "Snow removal and snow loading contracts, spreading of abrasives, parking by-laws.",
+   "enBref": null,
    "etapes": [
     {
      "periode": "February to March 2026",
-     "titre": "Snow removal of downtown public squares",
-     "texte": "Ville-Marie entrusted companies with the maintenance, cleanliness and snow removal of Square Viger, Place des Montréalaises, square Dorchester, place du Canada, square Victoria and other sites. It also extended by one year the snow removal of the Quartier des Spectacles, from April 2, 2026 to April 1, 2027 [CA26 24 0067]."
+     "titre": "Equipment rental for spring cleaning",
+     "texte": "Several boroughs are renting sweeper trucks, tanker trucks, sidewalk washers and a mini sweeper with operators to remove abrasives from streets, sidewalks and bike paths in the spring. In Mercier–Hochelaga-Maisonneuve, the sidewalk cleaning contract for four private snow removal sectors guarantees about 278 km of sidewalks per year [CA26 27 0034]."
+    },
+    {
+     "periode": "February to March 2026",
+     "titre": "Snow removal at downtown public squares",
+     "texte": "Ville-Marie is hiring companies to maintain, clean and remove snow from Square Viger, Place des Montréalaises, square Dorchester, place du Canada, îlot Bonaventure, square Victoria, place du Sable-Gris and square Chaboillez. The borough is also extending snow removal in the Quartier des Spectacles by one year, from April 2, 2026 to April 1, 2027 [CA26 24 0067]."
     },
     {
      "periode": "March to May 2026",
-     "titre": "Additional expenses for the 2025-2026 winter",
-     "texte": "Montréal-Nord approved an additional expense for the rental of an extra grader, and Saint-Léonard allocated $200,000 in surplus funds to staff and abrasives [CA26 13 0121]. Verdun offered to the city council to itself provide staff at the snow disposal site during loading."
+     "titre": "Adjustments for the 2025–2026 season",
+     "texte": "Montréal-Nord is paying for an additional rented grader due to winter conditions, and Saint-Léonard is drawing $200,000 from its surpluses for wages and the purchase of abrasives, after 39 spreading operations since November 15, 2025 [CA26 13 0121]. Verdun is offering to supply its own staff at the snow disposal site for 2025, 2026 and 2027."
     },
     {
-     "periode": "April to August 2026",
-     "titre": "Contract extensions for the 2026-2027 winter",
-     "texte": "The City extended by twelve months turnkey snow removal contracts in Anjou, Montréal-Nord and Pierrefonds-Roxboro, towing contracts, and equipment rentals with operators in Rosemont–La Petite-Patrie. Ville-Marie and Anjou did the same for their tractor-loaders and their grader."
+     "periode": "April to June 2026",
+     "titre": "Extensions for winter 2026–2027",
+     "texte": "The City is extending turnkey snow removal contracts by twelve months in Anjou, Montréal-Nord and Pierrefonds-Roxboro, towing contracts in four boroughs, and equipment rentals with operator in Rosemont–La Petite-Patrie. Ville-Marie and Ahuntsic-Cartierville are extending front-end loader tractor rentals."
     },
     {
      "periode": "May to July 2026",
-     "titre": "By-laws targeting snow removal contractors",
-     "texte": "Anjou amended the fine amounts in its by-law on snow removal from lots by contractors, and Ahuntsic-Cartierville amended its by-law on snow removal and clearing. Saint-Léonard tabled a draft by-law requiring snow removal contractors working on industrial, commercial and institutional lots to hold a permit."
+     "titre": "By-laws on snow removal contractors",
+     "texte": "Anjou is amending the fine amounts in its by-law on snow removal of properties by contractors, and Ahuntsic-Cartierville is amending its by-law on snow removal and clearing. Saint-Léonard is tabling a draft by-law requiring snow removal contractors working on private commercial, industrial or institutional properties to hold a permit."
     }
    ],
    "aSurveiller": [
     {
-     "texte": "The extended towing contracts begin on November 15, 2026."
-    },
-    {
-     "texte": "Snow removal of roads and parking lots in the Grand parc de l'Ouest runs from November 1, 2026 to April 30, 2028."
+     "texte": "The turnkey snow removal contracts for Côte-des-Neiges–Notre-Dame-de-Grâce, Lachine, Outremont and Sud-Ouest end on April 15, 2030, with each season running from November 1 to April 15."
     },
     {
      "texte": "The turnkey snow removal contract for Le Plateau-Mont-Royal ends on April 15, 2031."
     },
     {
-     "texte": "The turnkey snow removal contracts for Côte-des-Neiges–Notre-Dame-de-Grâce, Lachine, Outremont and Le Sud-Ouest end on April 15, 2030."
+     "texte": "Snow removal on service roads and parking lots at the Grand parc de l'Ouest runs from November 1, 2026 to April 30, 2028."
+    },
+    {
+     "texte": "Snow removal and maintenance of the esplanade Tranquille is extended from November 1, 2026 to October 31, 2027."
     }
    ],
-   "source": "0248d79085580c56",
-   "genereLe": "2026-11-18T18:15:50.781Z"
+   "source": "c1518d9688ae7c23",
+   "genereLe": "2026-11-19T18:31:42.868Z"
   },
   "eau-egouts": {
    "titre": "Drinking water, waterworks and sewers",
    "description": "Pipes, drinking water production plants, Jean-R.-Marcotte wastewater treatment plant, retention basins.",
-   "enBref": "The City funds and carries out work on its water networks: rehabilitation of pipes in several boroughs, replacement of lead service lines, and reconstruction of main pipes under downtown streets. It is also continuing the disinfection project at the Jean-R.-Marcotte wastewater treatment plant, including the construction of the oxygen production unit, and is entrusting routine maintenance of the plant to companies. It is adopting loan by-laws to pay for these projects.",
+   "enBref": "The City is financing and building the disinfection plant at the Jean-R.-Marcotte wastewater treatment plant, and is having its equipment maintained. It is also awarding contracts to rehabilitate or rebuild water and sewer pipes on many streets, and to replace lead service lines, including the portion on private property. At the same time, it is passing loan by-laws to pay for this work.",
    "etapes": [
     {
      "periode": "January 2026",
      "titre": "Loan increased for wastewater disinfection",
-     "texte": "The City is increasing from $197,000,000 to $381,000,000 the loan that funds the disinfection unit at the Jean-R.-Marcotte wastewater treatment plant. The money is used to finish building the ozonation unit, install liquid oxygen tanks and build the oxygen production plant."
+     "texte": "The City is increasing from $197,000,000 to $381,000,000 the loan that finances the effluent disinfection unit at the Jean-R.-Marcotte plant. The money is used to finish the ozonation unit, install liquid oxygen tanks and build the oxygen production plant."
     },
     {
      "periode": "February to April 2026",
-     "titre": "Water pipe rehabilitation contracts",
-     "texte": "The City is awarding a series of contracts to rehabilitate secondary water pipes by lining, without digging trenches, and to redo the pavement. The work affects streets in L'Île-Bizard–Sainte-Geneviève, Pierrefonds-Roxboro, Saint-Laurent, Ahuntsic-Cartierville, Villeray–Saint-Michel–Parc-Extension, Lachine, Le Sud-Ouest, Outremont, Verdun, Côte-des-Neiges–Notre-Dame-de-Grâce, Le Plateau-Mont-Royal, Rosemont–La Petite-Patrie, Mercier–Hochelaga-Maisonneuve, Rivière-des-Prairies–Pointe-aux-Trembles and Saint-Léonard."
-    },
-    {
-     "periode": "February to June 2026",
-     "titre": "Lead water service lines handed over to boroughs",
-     "texte": "Boroughs are offering city council to carry out the replacement of lead service lines themselves, including the portion located on private property, under by-law 20-030. The costs of work done on private property are billed to owners."
-    },
-    {
-     "periode": "March to June 2026",
-     "titre": "Projects on main pipes",
-     "texte": "The City is awarding contracts to rebuild a 500 mm water pipe along rue Guy and pipes on rue De Champlain, and to rehabilitate a 600 mm pipe along autoroute 15 Nord. It is adding funds to the contracts for rue de la Cathédrale and rue Saint-Antoine Ouest."
+     "titre": "Pipe rehabilitation contracts by lining",
+     "texte": "The City is awarding several contracts to rehabilitate secondary water pipes without digging trenches and to redo the roadway, on streets in the west, north, centre and east of the island. Each contract also includes replacing lead water service connections, on both the public and private sides."
     }
    ],
    "aSurveiller": [
     {
-     "texte": "Adoption of the $951,000,000 loan by-law for secondary waterworks and sewer networks, announced for October 19, 2026."
+     "texte": "The ozone plant at the Jean-R.-Marcotte plant is expected to come into service in 2029, and the contracts for lots 4, 5 and 6 are to be completed in the last quarter of 2028."
     },
     {
-     "texte": "Shutdown of sludge incinerator 2 planned for the first week of October 2026 and of incinerator 4 in January 2027, for about six weeks of work each."
+     "texte": "Work on rue de la Cathédrale, between rue Saint-Jacques and the McTavish reservoir, is to be completed in March 2027 instead of December 2026."
     },
     {
-     "texte": "Completion of rehabilitation work on the rue de la Cathédrale water pipe pushed back from December 2026 to March 2027."
+     "texte": "The construction site on rue Guy, between Saint-Jacques and René-Lévesque, is to continue until December 2027."
     },
     {
-     "texte": "Rue Guy project planned to run until December 2027."
+     "texte": "The shutdown of sludge incinerator 4 at the Jean-R.-Marcotte plant is planned for January 2027, for about six weeks of work."
     },
     {
-     "texte": "Commissioning of the ozone plant at the Jean-R.-Marcotte wastewater treatment plant planned for 2029."
+     "texte": "The intrusive-method inspection of main pipes is to be completed in June 2028."
     }
    ],
-   "source": "701b6317ca75e51a",
-   "genereLe": "2026-11-18T18:16:00.604Z"
+   "source": "f110ad601c2b87b6",
+   "genereLe": "2026-11-19T18:31:50.223Z"
   },
   "frederic-back": {
-   "titre": "Parc Frédéric-Back and Complexe environnemental Saint-Michel",
-   "description": "The former quarry turned landfill, transformed into a park in phases: urban greenhouses, biogas capture, electrical rationalization.",
-   "enBref": null,
+   "titre": "Frédéric-Back Park and Saint-Michel Environmental Complex",
+   "description": "The former quarry turned dump, transformed into a park in phases: urban greenhouses, biogas capture, and electrical upgrades.",
+   "enBref": "This year, the City is continuing work on Frédéric-Back park, within the Saint-Michel Environmental Complex. It is launching construction of a greenhouse complex led by the borough of Villeray–Saint-Michel–Parc-Extension, having the electrical installation linked to biogas capture modernized, and giving park maintenance contracts to companies. It is also requesting money from the Québec and Canada governments for a pedestrian and bike link and for the park's development.",
    "etapes": [
     {
      "periode": "February 2026",
-     "titre": "Funding request for the footbridge",
-     "texte": "The City is requesting financial assistance from the ministère des Transports et de la Mobilité durable du Québec to build a footbridge and an east-west link in the park. The file describes a 900-metre path crossing the park, with a footbridge of about 150 metres and a 12.7-hectare meadow [CG26 0121]."
+     "titre": "Funding request for the east-west link",
+     "texte": "The City is asking the Québec ministère des Transports et de la Mobilité durable for funding of up to $2,000,000 for a 900-metre trail crossing the park from east to west, with a footbridge of about 150 metres. The project includes rainwater management works and a 12.7-hectare meadow."
     },
     {
-     "periode": "February and March 2026",
-     "titre": "Urban greenhouses entrusted to the borough",
-     "texte": "The City approves a complex of research, training and community production greenhouses in the southwest sector of the park, with a construction budget estimated at $2,185,000 [CG26 0124]. The urban agglomeration delegates the project to the city council, which accepts the offer of the arrondissement de Villeray–Saint-Michel–Parc-Extension to carry it out."
+     "periode": "February to July 2026",
+     "titre": "Urban greenhouses: decision and contract",
+     "texte": "The conseil d'agglomération approves a complex of research, training and community production greenhouses in the park's southwest sector, with a construction budget estimated at $2,185,000, and hands the project to the city council, which passes it on to the borough of Villeray–Saint-Michel–Parc-Extension. The borough then awards Les industries Harnois inc. a contract worth $499,865.92, taxes included, to supply and install two greenhouses."
     },
     {
      "periode": "April 2026",
+     "titre": "Electrical work at the complex",
+     "texte": "The City awards Systèmes Urbains inc. the second phase of the electrical upgrade work at the Saint-Michel Environmental Complex, for a total expense of $1,255,447.38, taxes included. The work covers a new 25 kV power supply, a transformer, a backup generator and a controller that manages biogas capture."
+    },
+    {
+     "periode": "April to September 2026",
+     "titre": "Maintenance, compost and snow removal",
+     "texte": "The City awards general park maintenance to 178001 Canada inc. (Groupe Nicky) and ecological and horticultural management to 9190-8673 Québec inc. (Les Entreprises Roseneige) for 30 months. It is also extending the rental of a compost screener and a loader tractor, whose compost is used for park landscaping, as well as the snow removal contract for the park, the TAZ and the soccer stadium."
+    },
+    {
+     "periode": "April to October 2026",
      "titre": "Redevelopment of rue De Louvain",
-     "texte": "The borough awards a company the contract to redevelop rue De Louvain, between the park and boulevard Saint-Michel, for a maximum of $8,199,514.82 taxes included, and authorizes total spending of $11,192,464.62 [CA26 14 0076]. The work affects sewers, water mains, lighting, sidewalks, the bike path and plantings."
-    },
-    {
-     "periode": "April 2026",
-     "titre": "Site electricity and park maintenance",
-     "texte": "The City awards a contract for the second phase of electrical rationalization work at the complexe environnemental: new power supply, transformer, backup generator and automated controller to manage biogas capture. It also entrusts two companies with the general upkeep and ecological and horticultural management of the park for 30 months."
-    },
-    {
-     "periode": "June and July 2026",
-     "titre": "Compost and greenhouse installation",
-     "texte": "The City extends by five months the rental of a compost screener and a loader tractor at the complexe environnemental; the compost is used in part for park landscaping [CG26 0320]. The borough then awards a contract for $499,865.92 taxes included for the supply and installation of the greenhouses [CA26 14 0163]."
-    },
-    {
-     "periode": "September and October 2026",
-     "titre": "Snow removal and second funding request",
-     "texte": "The City extends by six months the snow removal contract for the park, the TAZ and the soccer stadium. The borough authorizes the filing of a funding request with the ministère des Transports et de la Mobilité durable, under the Véloce III program, for a bike lane and sidewalks on rue De Louvain Est."
+     "texte": "The borough awards Groupe MPotvin a contract worth $8,199,514.82, taxes included, to redevelop rue De Louvain between the park and boulevard Saint-Michel: sewers, water mains, lighting, sidewalks, bike facilities and plantings. In October, it authorizes filing a funding request with the Véloce III program of the ministère des Transports et de la Mobilité durable for the bike lane and sidewalks."
     }
    ],
    "aSurveiller": [
     {
-     "texte": "The call for projects under the TAPU program, to which the City is submitting its request for the footbridge and the east-west link, ends on November 26, 2026."
+     "texte": "The call for projects under the ministère des Transports et de la Mobilité durable's TAPU program ends on November 26, 2026."
     },
     {
-     "texte": "The greenhouse installation work must be completed by December 2026, according to the borough's file."
+     "texte": "Greenhouse installation work must be completed by December 2026, with commissioning announced for winter 2027."
     },
     {
-     "texte": "The greenhouses are announced to come into service in winter 2027."
+     "texte": "Snow removal for the park, the TAZ and the soccer stadium is extended until April 30, 2027."
     },
     {
-     "texte": "The extended snow removal covers the period from November 1, 2026 to April 30, 2027."
+     "texte": "Park maintenance contracts run until October 31, 2028, and 26 more hectares will be added in 2027 in the Boisé Ouest sector."
     },
     {
-     "texte": "The park maintenance contracts run until October 31, 2028, and 26 hectares will be added in 2027 in the Boisé Ouest sector."
-    },
-    {
-     "texte": "The rue De Louvain worksite includes a phase from May to October 2027 and a phase from May to August 2028."
+     "texte": "The rue De Louvain construction site runs in three phases: May to November 2026, May to October 2027, then May to August 2028."
     }
    ],
-   "source": "2b67add9f553e30a",
-   "genereLe": "2026-11-18T18:16:10.915Z"
+   "source": "32cb77d93bf9cf54",
+   "genereLe": "2026-11-19T18:32:01.799Z"
   },
   "grand-parc-ouest": {
    "titre": "Grand parc de l'Ouest",
-   "description": "The largest municipal park in Canada, being assembled: land acquisitions, Anse-à-l'Orme, Cap-Saint-Jacques, Bois-de-la-Roche, parc-nature des Sources.",
-   "enBref": "This year, the City is maintaining and protecting the sectors of the Grand parc de l'Ouest. It adjusted a contract for the repair of heritage walls on chemin de Senneville, filed an application for an international designation related to the night sky at Cap-Saint-Jacques, and had two sectors listed in a registry of protected natural environments. It also awarded contracts for culvert reconstruction, snow removal, tree felling and housekeeping.",
+   "description": "Canada's largest municipal park, in the making: land acquisitions, Anse-à-l'Orme, Cap-Saint-Jacques, Bois-de-la-Roche, parc-nature des Sources.",
+   "enBref": "This year, the City is maintaining and protecting the sectors of the Grand parc de l'Ouest. It adjusted a contract for the repair of heritage walls on chemin de Senneville, filed a candidacy for an international designation related to the night sky at Cap-Saint-Jacques, and had two sectors listed in a registry of protected natural areas. It also awarded contracts for culvert reconstruction, snow removal, tree felling and housekeeping.",
    "etapes": [
     {
      "periode": "April 2026",
      "titre": "More money for the heritage walls",
-     "texte": "The City is adding $162,897.98, taxes included, to the contract for the repair of heritage walls on chemin de Senneville, bringing the contract to $1,174,331.77. Buried stones, extra mortar and a degraded culvert explain the increase, according to file 1255414002."
+     "texte": "The City is adding $162,897.98, taxes included, to the contract for the repair of the heritage walls on chemin de Senneville, bringing the contract to $1,174,331.77. Buried stones, extra mortar and a degraded culvert explain the increase, according to file 1255414002."
     },
     {
      "periode": "April 2026",
-     "titre": "Application for the night sky",
-     "texte": "The City files an application for the Cap-Saint-Jacques sector (330 hectares) for the Urban Night Sky Place designation from DarkSky International. It commits to producing a lighting plan, bringing its light fixtures up to standard and keeping nighttime access open to the public."
+     "titre": "Candidacy for the night sky",
+     "texte": "The City files the candidacy of the Cap-Saint-Jacques sector (330 hectares) for DarkSky International's Urban Night Sky Place designation. It commits to producing a lighting plan, bringing its light fixtures up to standard, and keeping night-time access open to the public."
     },
     {
      "periode": "May 2026",
-     "titre": "Two sectors listed as natural environments",
-     "texte": "The parc-nature des Sources (38.32 ha) and the Anse-à-l'Orme sector (429 ha) are listed in the Répertoire des milieux naturels protégés et contributifs à la biodiversité, with conservation plans. Elected officials also take note of the 2025 report on the areas."
+     "titre": "Two sectors listed as natural areas",
+     "texte": "The parc-nature des Sources (38.32 ha) and the Anse-à-l'Orme sector (429 ha) are listed in the Répertoire des milieux naturels protégés et contributifs à la biodiversité, with conservation plans. Elected officials also take note of the 2025 summary of the areas."
     },
     {
      "periode": "September 2026",
@@ -226,273 +213,279 @@
    ],
    "aSurveiller": [
     {
-     "texte": "Snow removal on roads and parking lots from November 1, 2026 to April 30, 2028, with no possible extension."
+     "texte": "Snow removal of roads and parking lots from November 1, 2026 to April 30, 2028, with no possible extension."
     },
     {
-     "texte": "Housekeeping for the nine Cap-Saint-Jacques buildings from November 1, 2026 to October 31, 2030, with a possible extension to October 31, 2031."
+     "texte": "Housekeeping of the nine buildings at Cap-Saint-Jacques from November 1, 2026 to October 31, 2030, with a possible extension until October 31, 2031."
     },
     {
      "texte": "Tree felling planned from fall 2026 to early summer 2028."
     },
     {
-     "texte": "For the night sky designation: lighting plan filed in February 2027, DarkSky's response expected in April 2027, site compliance by April 2032."
+     "texte": "For the night sky designation: lighting plan filed in February 2027, response from DarkSky expected in April 2027, site compliance upgrade in April 2032."
     }
    ],
    "source": "91658ba16b2d6318",
-   "genereLe": "2026-11-18T18:16:19.549Z"
+   "genereLe": "2026-11-19T18:32:10.742Z"
   },
   "itinerance": {
    "titre": "Homelessness and emergency shelter",
-   "description": "Support for organizations, warm-up spots and shelters for people experiencing homelessness.",
-   "enBref": null,
+   "description": "Support for organizations, warming centres and shelters for people experiencing homelessness.",
+   "enBref": "This year, the City is lending municipal buildings to organizations to open warming centres, funding organizations that work with people experiencing homelessness, and sharing a public works team dedicated to cleanliness related to homelessness across boroughs. It also sets rules for receiving private donations for shelter and housing projects, and awards contracts for support services toward housing.",
    "etapes": [
     {
      "periode": "January to February 2026",
-     "titre": "Building loans for warm-up spots",
-     "texte": "The City is lending three buildings free of charge to organizations to shelter people experiencing homelessness during the winter: the church at 5600, 12e Avenue to the Centre des Femmes de convictions de Montréal, the former monastery of the Recluses Missionnaires at 12050, boulevard Gouin Est to Projets Autochtones du Québec, and the Bain St-Denis at 7075, rue Saint-Hubert to L'Amour en Action SYL DAN. All three loans end on April 30, 2026."
+     "titre": "Buildings lent for warming centres",
+     "texte": "The City is lending three buildings free of charge to organizations for the winter: the church at 5600, 12e Avenue to Centre des Femmes de convictions de Montréal, the former monastery of the Recluses Missionnaires at 12050, boulevard Gouin Est to Projets Autochtones du Québec, and the Bain St-Denis at 7075, rue Saint-Hubert to L'Amour en Action SYL DAN. Ahuntsic-Cartierville confirms the continuation of COHAB's contract for a warming centre, for a maximum amount of $126,615.07, taxes included."
     },
     {
-     "periode": "February 2026",
-     "titre": "Warm-up spots and outreach workers in the boroughs",
-     "texte": "Verdun is paying $12,950 to the Société de développement social to keep two psychosocial outreach workers in its municipal facilities from January 5 to February 6, 2026. Ahuntsic-Cartierville ratifies the continuation of a contract with Les services de cohabitation sociale COHAB inc. to operate a warm-up spot for the 2025-2026 winter."
-    },
-    {
-     "periode": "March 2026",
-     "titre": "Financial support for organizations over three years",
-     "texte": "The City is granting $5,407,736 to 15 organizations and adding $3,942,461 to 10 already-funded organizations, under the Programme itinérance et milieux inclusifs 2026-2028. The projects deal with the inclusion of people experiencing homelessness, cohabitation in public spaces, and awareness-raising."
+     "periode": "February to March 2026",
+     "titre": "Money paid to organizations",
+     "texte": "Verdun pays $12,950 to Société de développement social to keep two outreach workers in its municipal facilities from January 5 to February 6, 2026. The urban agglomeration council grants $5,407,736 to 15 organizations and a further $3,942,461 to 10 already-funded organizations, for projects ending December 31, 2028."
     },
     {
      "periode": "May to June 2026",
-     "titre": "Private donations and development of the Bain Saint-Denis",
-     "texte": "The urban agglomeration council adopts a framework for receiving private money donations intended for housing, shelter and social cohabitation projects. Rosemont–La Petite-Patrie transfers $250,000 for development work on the temporary warm-up spot at the Bain Saint-Denis, and city council adopts a declaration of support for people experiencing homelessness."
+     "titre": "Declaration and framework for private donations",
+     "texte": "City council adopts a declaration of support for people experiencing homelessness and recognition of the organization Maison Mobile. The urban agglomeration council then adopts a mechanism to govern private money donations intended for housing, shelter and social cohabitation projects. Rosemont–La Petite-Patrie transfers $250,000 for the development work on the Bain Saint-Denis warming centre."
     },
     {
-     "periode": "August to October 2026",
-     "titre": "Encampments, support services and Nuit des sans-abri",
-     "texte": "The City awards Mission Old Brewery a $149,520 contract to support people in the Notre-Dame street encampment area toward shelter and housing, and pays $90,000 to the Réseau d'aide aux personnes seules et itinérantes de Montréal for the 2026, 2027 and 2028 editions of the Nuit des sans-abri. The executive committee authorizes an appeal of the June 8, 2026 ruling on the encampments under the Van Horne viaduct, and Ville-Marie regulates noise for the October 16, 2026 event on rue Beaudry."
+     "periode": "August to September 2026",
+     "titre": "Encampments, support services and legal appeal",
+     "texte": "The City awards a sole-source contract of $149,520, taxes included, to Mission Old Brewery to help people from the rue Notre-Dame encampment area move toward shelter and housing, from July 13 to October 18, 2026. It also grants $90,000 to Réseau d'aide aux personnes seules et itinérantes de Montréal for the 2026, 2027 and 2028 editions of the Nuit des sans-abri. The executive committee authorizes an appeal of the June 8, 2026 ruling on the encampments under the Van Horne viaduct."
+    },
+    {
+     "periode": "October 2026",
+     "titre": "Extended shuttle services and encampment program",
+     "texte": "The City extends until December 31, 2027 the shuttle service agreements with Projets Autochtones du Québec, Mission Old Brewery and L'Amour en action Syl Dan, with additional support of $860,692. It awards seven service contracts, for $3,025,000 taxes included, for the Programme d'interventions spécialisées en campement. Ville-Marie regulates noise for the Nuit des sans-abri on October 16, 2026, on rue Beaudry."
     }
    ],
    "aSurveiller": [
     {
-     "texte": "The social outreach brigade agreement with Rivière-des-Prairies–Pointe-aux-Trembles runs until May 15, 2027."
+     "texte": "The shuttle service agreements with Projets Autochtones du Québec, Mission Old Brewery and L'Amour en action Syl Dan are extended until December 31, 2027."
     },
     {
-     "texte": "According to the file, the ruling on the merits of the dispute over the Van Horne viaduct encampments is expected in 2027."
+     "texte": "Financial support under the Programme itinérance et milieux inclusifs covers a three-year period ending December 31, 2028."
     },
     {
-     "texte": "Support under the Programme itinérance et milieux inclusifs ends on December 31, 2028."
+     "texte": "Budget transfers are authorized for the Programme d'interventions spécialisées en campement in 2027, 2028 and 2029."
+    },
+    {
+     "texte": "The public works team is active in Rivière-des-Prairies–Pointe-aux-Trembles from May 15, 2026 to May 15, 2027."
+    },
+    {
+     "texte": "According to the file on the Van Horne viaduct encampments, the ruling on the merits is expected likely in 2027."
     }
    ],
-   "source": "29afe8649fc006dc",
-   "genereLe": "2026-11-18T18:16:29.258Z"
+   "source": "686ed06abeb47c4e",
+   "genereLe": "2026-11-19T18:32:22.630Z"
   },
   "louvain-est": {
-   "titre": "Écoquartier Louvain Est",
-   "description": "The neighbourhood being built on municipal land in Ahuntsic-Cartierville: acquisitions, soil decontamination, street names, temporary developments.",
+   "titre": "Louvain Est Eco-District",
+   "description": "The neighbourhood being built on municipal lands in Ahuntsic-Cartierville: acquisitions, soil decontamination, street names, temporary developments.",
    "enBref": null,
    "etapes": [
     {
      "periode": "January 2026",
-     "titre": "Land leases for parking",
-     "texte": "The City is leasing to the Société de transport de Montréal a 2,787-square-metre lot south of rue de Louvain, for parking for employees with a permit sticker, for $49,293 over three years. It is also leasing 836 square metres to a pay-by-mobile-app parking company, for $45,049 before taxes."
-    },
-    {
-     "periode": "April to June 2026",
-     "titre": "Temporary uses of the Louvain Ouest lot",
-     "texte": "The City is lending, free of charge, a 10,000-square-foot lot to an organization for a vegetable garden, and two parcels totalling 3,316 square metres to another organization for sunflowers and a greenhouse. The borough is giving $35,000 to an organization for the Esplanade-Louvain pop-up space at 150, rue de Louvain Ouest, authorizing an event use on the vacant lot, and city council is taking over an activation lease on 78,244 square feet."
+     "titre": "Land leased for parking",
+     "texte": "The City is extending the lease of a lot to the Société de transport de Montréal, south of rue de Louvain and west of boulevard Saint-Laurent, for parking of its officers' vehicles. It is also extending the lease of a neighbouring lot to a paid parking company, for a total rent of $45,049 before taxes [CM26 0080]."
     },
     {
      "periode": "May 2026",
-     "titre": "The main street gets a name",
-     "texte": "City council is naming the new street at the heart of the écoquartier Louvain « avenue des Solidarités ». The file states that the first residential project is under construction and that addresses need to be assigned in the short term."
+     "titre": "The central street is named",
+     "texte": "City council names the new street at the heart of the Louvain eco-district \"avenue des Solidarités.\" The name comes from a public call for proposals held in fall 2024."
     },
     {
      "periode": "June 2026",
-     "titre": "Street contract and soil cleanup",
-     "texte": "The City is awarding a company a contract worth $10,311,940.25 including taxes to build a street with sewer, water main, roadway, electrical network and lighting, for total spending of $15,366,336. The contract includes rehabilitating the soil of the former gas station, for which the City is adding $2,007,312.15 net to the infrastructure department's budget."
+     "titre": "Street, networks and soil to be rehabilitated",
+     "texte": "The City awards a contract of $10,311,940.25 including taxes to develop a street in the eco-district with sewer, waterworks, roadwork, lighting and an underground electrical network, for a total expenditure of $15,366,336 [CG26 0368]. The contract includes rehabilitation of the soil at the former gas station on the Louvain Est site, funded by the environmental liability reserve."
     },
     {
-     "periode": "June to October 2026",
-     "titre": "New height and density rules",
-     "texte": "The borough is adopting a draft resolution authorizing the demolition of a building on avenue de l'Esplanade and the construction of a group of buildings, with a minimum density of 200 dwellings per hectare. It is also adopting a draft by-law setting the height limit at 73 metres on part of the municipal lot, at the corner of avenue de l'Esplanade and rue de Louvain Ouest."
+     "periode": "July to October 2026",
+     "titre": "Construction rules and money for housing",
+     "texte": "The borough adopts draft by-laws and resolutions allowing more height and density on the Louvain Ouest side, with a target of 200 housing units per hectare. City council adds $48,398.55 to the infrastructure work for the modular housing on the Louvain Ouest site [CM26 1049] and gives $500,000 to the Société de développement Écoquartier Louvain to design a non-market housing project."
     }
    ],
    "aSurveiller": [
     {
-     "texte": "Construction on rue de Louvain Est continues from May to October 2027 (sidewalks, curbs, bump-outs), then from May to August 2028 (final roadway, bike path, plantings)."
+     "texte": "Second phase of the rue de Louvain construction site (sidewalks, curbs, bulges), from May to October 2027, then third phase (final roadway, bike path, plantings) from May to August 2028."
     },
     {
-     "texte": "The ministère des Transports' response to the funding request is expected in fall 2026."
+     "texte": "The loan of the lot for the vegetable garden ends on December 31, 2027."
     },
     {
-     "texte": "The loan of the lot for the greenhouse and sunflowers runs until October 31, 2027; the one for the vegetable garden, until December 31, 2027."
+     "texte": "The loan of the lot for the sunflowers and greenhouse runs from November 1, 2026 to October 31, 2027."
+    },
+    {
+     "texte": "The parking lease with the Société de transport de Montréal begins on October 1, 2026, for three years."
     },
     {
      "texte": "Four other public spaces on the site remain to be named before the development is completed, expected around 2032."
     }
    ],
-   "source": "7f28a43a6b4dd2ec",
-   "genereLe": "2026-11-18T18:16:49.091Z"
+   "source": "a3a8c23ecd71f0d0",
+   "genereLe": "2026-11-19T18:32:41.599Z"
   },
   "matieres-residuelles": {
-   "titre": "Residual Materials",
-   "description": "Collections, sorting centres, biomethanization and ecocentres.",
-   "enBref": "The City is adjusting its residual materials collections: new days and new frequencies in several boroughs, bin purchases, support for residents. It is extending contracts for food waste treatment, container collection and ecocentre service, and awarding a contract to recover mattresses. It is also tabling its annual reports and reports from the inspector general on subcontracting in collection.",
+   "titre": "Waste Management",
+   "description": "Collection, sorting centres, biomethanization and ecocentres.",
+   "enBref": "This year, the City is adjusting its collection rules in several boroughs, buying bins and extending contracts for processing food waste and for transport to ecocentres. It is also awarding hydro-excavation contracts with waste treatment in several boroughs. The 2025 waste management report and inspector general reports on collection subcontracting are being tabled at councils.",
    "etapes": [
     {
      "periode": "January to May 2026",
-     "titre": "New collection days and frequencies",
-     "texte": "The executive committee changes collection days, schedules and sectors in L'Île-Bizard–Sainte-Geneviève and Le Plateau-Mont-Royal. In Mercier–Hochelaga-Maisonneuve, garbage is picked up every two weeks from November 1 to April 30 and every week from May 1 to October 31, and the boundaries of sectors 41 and 42 change starting May 1, 2026."
+     "titre": "New collection rules in the boroughs",
+     "texte": "The executive committee is changing collection days, schedules and sectors in L'Île-Bizard–Sainte-Geneviève, Le Plateau-Mont-Royal and Mercier–Hochelaga-Maisonneuve, where garbage is collected every two weeks from November 1 to April 30 and every week from May 1 to October 31. Two boroughs are also authorizing waste-related fittings in buildings: a storage room of at least 28 m² at 397, boulevard Saint-Joseph Ouest, and an exemption from an outdoor drop-off area at 2380, rue Notre-Dame Ouest."
     },
     {
-     "periode": "January to August 2026",
-     "titre": "Food waste treatment extended",
-     "texte": "The City extends, twice, by six months each time, its contracts with Recyclage Notre-Dame inc. to compost or biomethanize food waste from the eastern part of the agglomeration, at an additional cost of $3,269,055.43 taxes included per extension [CG26 0045]. It explains that the start-up of the Montréal-Est organic materials treatment centre is not confirmed and that it can end the contracts with 30 days' notice [CG26 0417]."
+     "periode": "January and August 2026",
+     "titre": "Food waste processing extended",
+     "texte": "The City is extending its contracts with Recyclage Notre-Dame inc. twice, by six months each time, to compost or biomethanize food waste from the eastern part of the agglomeration, at $3,269,055.43 taxes included per extension. It explains that the start-up of the Montréal-Est organic matter treatment centre is not confirmed and that it can end the contracts with 30 days' notice."
     },
     {
      "periode": "March to June 2026",
-     "titre": "Collection bins and resident information",
-     "texte": "The City enters into framework agreements to supply brown bins and garbage bins, then others to supply and distribute garbage bins in Ahuntsic-Cartierville and Villeray–Saint-Michel–Parc-Extension, where collection will be spaced out in two phases, fall 2026 and fall 2027 [CM26 0690]. Ahuntsic-Cartierville gives Ville en vert a mandate for information and awareness, and the executive committee approves an agreement with Tricentris to lend reusable dishware, water fountains and sorting stations for neighbourhood festivities."
+     "titre": "Bin purchase and resident support",
+     "texte": "The City is entering into framework agreements to supply collection bins, including one with Plasti-Bac inc. for garbage bins intended for Ahuntsic-Cartierville and Villeray–Saint-Michel–Parc-Extension, where garbage collection will be spaced out. Ahuntsic-Cartierville is giving Ville en vert a mandate for information and awareness-raising, and the executive committee is approving an agreement with Tricentris to lend reusable dishware, water fountains and sorting stations for neighbourhood events."
     },
     {
      "periode": "April to August 2026",
-     "titre": "Containers, ecocentres and former dumps",
-     "texte": "The City extends by 12 months the contracts for front-end loading and semi-underground container collection awarded to Waste Connections of Canada inc. / Enviro Connexions, as well as the container contract for the écocentre Saint-Laurent transferred to GFL Environmental inc. It awards Recyc-Matelas inc. a contract worth $734,690.25 taxes included to collect and recover mattresses and box springs from the ecocentres [CG26 0416], extends the dumping authorization management software, and retains two firms for studies related to construction on former disposal sites."
+     "titre": "Ecocentres, containers and mattresses",
+     "texte": "The City is extending the contract for supplying and transporting containers for the Saint-Laurent ecocentre, as well as the contracts for collecting garbage from front-loading and semi-underground containers. It is awarding Recyc-Matelas inc. a contract worth $734,690.25 taxes included, over 28 months, to collect and recover mattresses and box springs left at ecocentres."
     }
    ],
    "aSurveiller": [
     {
-     "texte": "The extension of food waste treatment by Recyclage Notre-Dame inc. runs until February 28, 2027."
+     "texte": "The extension of the food waste processing contracts runs until February 28, 2027."
     },
     {
-     "texte": "Container collection and the container service at the écocentre Saint-Laurent are maintained until October 31, 2027."
+     "texte": "The Saint-Laurent ecocentre container contract and the container collection contracts are extended until October 31, 2027."
     },
     {
-     "texte": "The loan of dishware, water fountains and sorting stations is offered until December 31, 2026 at the latest."
-    },
-    {
-     "texte": "The dumping authorization software contract covers the period from October 12, 2026 to October 11, 2029."
+     "texte": "The contract for the discharge authorization management software covers the period from October 12, 2026 to October 11, 2029."
     }
    ],
-   "source": "8adb3195860a4fad",
-   "genereLe": "2026-11-18T18:16:59.374Z"
+   "source": "fec5ebde78719188",
+   "genereLe": "2026-11-19T18:32:51.076Z"
   },
   "namur-hippodrome": {
-   "titre": "Namur–Hippodrome neighbourhood",
-   "description": "The new neighbourhood on the site of the former Blue Bonnets racetrack: sale of land, loan by-laws, water supply system for the Namur–De la Savane sector.",
-   "enBref": "The City is preparing the future neighbourhood on the site of the former racetrack, in Côte-des-Neiges–Notre-Dame-de-Grâce. This year, it obtained an additional delay from the Québec government to sell a first parcel of land, adopted two loan by-laws for the water supply system and the public domain, and transferred a parcel of land to an organization for non-market housing. It is also renting out parcels of the site to organizations for temporary uses.",
+   "titre": "Quartier Namur–Hippodrome",
+   "description": "The new neighbourhood on the site of the former hippodrome Blue Bonnets: sale of land, loan by-laws, water main for the Namur–De la Savane sector.",
+   "enBref": "The City is preparing the ground, literally and legally, for the future neighbourhood on the site of the former hippodrome. It got more time from Quebec to sell a first piece of land, adopted loan by-laws for the water main and public works, and transferred a piece of land to an organization for non-market housing. At the same time, it is leasing parcels of the site to organizations for urban agriculture and a nursery.",
    "etapes": [
     {
      "periode": "January 2026",
-     "titre": "Extended delay to sell a first parcel of land",
-     "texte": "The Québec government grants the City a delay until October 31, 2027 to sell a first parcel of land on the site of the former racetrack, west of boulevard Décarie and south of rue Paré. The City approves the addendum to the 2017 transfer deed, without financial compensation."
+     "titre": "More time to sell a first piece of land",
+     "texte": "The Government of Quebec grants the City a deadline until October 31, 2027 to sell a first piece of land on the site, west of boulevard Décarie and south of rue Paré. The postponement does not involve any financial compensation, and the other conditions of the 2017 transfer remain the same."
     },
     {
      "periode": "April 2026",
      "titre": "$2M guarantee for studies",
-     "texte": "The City guarantees a loan of $2,000,000 granted by the Canada Infrastructure Bank to Société GALOPH, to pay for feasibility studies of the residential project. The same day, city council rejects an opposition motion on governance and asset management of the sector."
+     "texte": "The City guarantees a loan of $2,000,000 from the Canada Infrastructure Bank to Société GALOPH, a non-profit organization, to pay for feasibility studies of the residential project. The same month, city council rejects a motion from the Official Opposition on governance and management of public assets in the neighbourhood."
     },
     {
      "periode": "May to June 2026",
-     "titre": "Two loans for the water supply system and streets",
-     "texte": "The City adopts a loan of $29,000,000 to develop the public domain of the neighbourhood: soils, sewers, water supply system, streets, land purchases. It also adopts a loan of $12,000,000 to build main water supply pipes between boulevard Cavendish, in Saint-Laurent, and rue Isabella."
+     "titre": "Two loan by-laws adopted",
+     "texte": "The City borrows $29,000,000 to develop the public domain of the neighbourhood: soil remediation, sewers and water main, street redevelopment and land purchases. It also borrows $12,000,000 to build water mains between boulevard Cavendish, in Saint-Laurent, and rue Isabella, in Côte-des-Neiges–Notre-Dame-de-Grâce."
+    },
+    {
+     "periode": "July 2026",
+     "titre": "Four buildings authorized on rue Namur",
+     "texte": "The borough of Côte-des-Neiges–Notre-Dame-de-Grâce adopts a draft resolution authorizing the construction of four buildings, in four phases, at 7301 boulevard Décarie and 5150-5160 rue Namur. One of the buildings must house a municipal sports and recreation centre, and the developer will pay $3,200,000 for public works in the sector."
     },
     {
      "periode": "August 2026",
-     "titre": "Land leased to organizations",
-     "texte": "The City leases parcels of the site to three organizations for $100 or $200 in rent: urban agriculture with MultiCaf and with the Coopérative de solidarité Polliflora, a transitional nursery with the Société de verdissement du Montréal métropolitain."
-    },
-    {
-     "periode": "September 2026",
-     "titre": "Land transferred for non-market housing",
-     "texte": "The City transfers, without payment, to the organization Communia a vacant parcel of 4,777.7 square metres in the southeastern part of the former racetrack, to build at least 225 non-market housing units there. It repeals the 2025 agreement with another organization and authorizes a depreciation expense of $877,488."
+     "titre": "Land leased to three organizations",
+     "texte": "The City leases parcels of the site to the community cafeteria MultiCaf and to Coopérative de solidarité Polliflora for temporary urban agriculture, and to Société de verdissement du Montréal métropolitain for a transition nursery. Each lease provides for rent of $100 or $200 before taxes, with the organizations paying for development, maintenance and property taxes."
     }
    ],
    "aSurveiller": [
     {
-     "texte": "October 31, 2027: deadline granted to the City to complete the sale of a first parcel of land on the site."
+     "texte": "The City has until October 31, 2027 to sell a first piece of land on the site, under the amended agreement with the Government of Quebec."
     },
     {
-     "texte": "2031: date by which the infrastructure must be completed, according to the condition of the federal grant cited in the loan by-laws."
+     "texte": "The federal grant of $128.3M is conditional on the infrastructure being completed by 2031."
     },
     {
-     "texte": "April 30, 2027: end of the urban agriculture lease with MultiCaf."
+     "texte": "MultiCaf's lease for urban agriculture ends on April 30, 2027."
     },
     {
-     "texte": "March 31, 2028: end of the extended lease of the Coopérative de solidarité Polliflora. April 30, 2028: end of the transitional nursery lease."
+     "texte": "The transition nursery's lease ends on April 30, 2028, and Coopérative Polliflora's lease ends on March 31, 2028."
     }
    ],
-   "source": "0a74b20d7daa45e1",
-   "genereLe": "2026-11-18T18:17:08.549Z"
+   "source": "633d626ae5ec2514",
+   "genereLe": "2026-11-19T18:33:01.608Z"
   },
   "parcs": {
    "titre": "Parks and green spaces",
    "description": "Development and renovation of parks, including the Grand parc de l'Ouest.",
-   "enBref": "This year, the City funded studies, awarded design contracts and launched park redevelopment projects in several boroughs, from Le Sud-Ouest to Le Plateau-Mont-Royal, as well as Verdun, LaSalle and Saint-Laurent. It also adjusted contracts already underway when contaminated soil or unforeseen site issues lengthened the work. In the Grand parc de l'Ouest, it repaired infrastructure, awarded routine maintenance contracts and submitted an application for an international designation related to the night sky.",
+   "enBref": "This year, the City is funding the design and redevelopment work of parks in several boroughs, from parc Le Prévost to parc Baldwin. It is also awarding maintenance and work contracts in the Grand parc de l'Ouest, and submitting the application of the Cap-Saint-Jacques sector for an international dark-sky designation. Several decisions adjust contracts already underway on park construction sites.",
    "etapes": [
     {
-     "periode": "January to March 2026",
-     "titre": "Design, studies and project funding",
-     "texte": "The City awarded the winning team of an architecture competition the design of the bibliothèque Caroline-Dawson and the redevelopment of parc Le Prévost, for a total expenditure of $10,559,257.81, taxes included [CM26 0082]. It also gave money to Verdun for soil studies at parc Monseigneur-J.-A.-Richard, accepted an amount from Hydro-Québec for phase 4 of parc d'Argenson, and authorized a public art competition at parc des Eaux-Cachées."
+     "periode": "January 2026",
+     "titre": "Design and preparatory work",
+     "texte": "The City awards the winning team of an architecture competition the design of the bibliothèque Caroline-Dawson and the redevelopment of parc Le Prévost, for a total expense of $10,559,257.81, taxes included. It also pays $174,471.56, net of taxes, to the borough of Verdun for soil and environmental studies of the parc Monseigneur-J.-A.-Richard, built on a former dump."
     },
     {
-     "periode": "June to September 2026",
-     "titre": "Work and maintenance at the Grand parc de l'Ouest",
-     "texte": "The City awarded a contract to rebuild the culvert under chemin Senneville, in the Bois-de-la-Roche agricultural hub. It also awarded contracts for snow removal on service roads and parking lots, the felling of ash trees and dying trees, and housekeeping services for nine buildings in the Cap-Saint-Jacques sector."
+     "periode": "April to September 2026",
+     "titre": "Grand parc de l'Ouest",
+     "texte": "The City adds $162,897.98 to the contract for the repair of the heritage walls on chemin de Senneville, has a culvert under the same road rebuilt, and awards contracts for snow clearing of service roads and for cutting down ash trees and declining trees. It submits the application of the Cap-Saint-Jacques sector for the Urban Night Sky Place designation and lists the Anse-à-l'Orme sector, along with the parc-nature des Sources, in the registry of protected natural environments."
     },
     {
-     "periode": "June to October 2026",
-     "titre": "New projects and land transferred to parkland",
-     "texte": "Other redevelopment contracts were awarded: parcs Denise-Morelle and Baldwin in Le Plateau-Mont-Royal, parc J.O.R.-Leduc in LaSalle and parc Aimé-Caron in Saint-Laurent. The City also removed a section of street from the public domain to add it to parc Campbell Ouest, and Villeray–Saint-Michel–Parc-Extension requested the same change for a 75.2-square-metre strip at parc Le Prévost."
+     "periode": "May to October 2026",
+     "titre": "Adjustments to ongoing contracts",
+     "texte": "Several decisions add money or shift budgets in projects already launched: oversight of work at the parc du Bassin-à-Bois, parc des Hirondelles, parc du Sault-au-Récollet, parc Villeray, parc Percy-Walters and the museography of the parc des Sœurs de Sainte-Anne."
+    },
+    {
+     "periode": "June and October 2026",
+     "titre": "Land transferred to parks",
+     "texte": "City council removes a former street portion of 810.2 m² from the public domain as a street in order to add it to parc Campbell Ouest. It does the same with a 75.2 m² strip of lane that runs through parc Le Prévost."
     }
    ],
    "aSurveiller": [
     {
-     "texte": "The snow removal contract for the Grand parc de l'Ouest covers the period from November 1, 2026 to April 30, 2028."
+     "texte": "End of work at parc Denise-Morelle in November 2026, according to the file from the borough of Le Plateau-Mont-Royal."
     },
     {
-     "texte": "Housekeeping services for nine buildings in the Cap-Saint-Jacques sector run from November 1, 2026 to October 31, 2030, with a 12-month extension option."
+     "texte": "Snow clearing of the Grand parc de l'Ouest from November 1, 2026 to April 30, 2028."
     },
     {
-     "texte": "For the DarkSky application, the lighting management plan must be submitted in February 2027 and a response is expected in April 2027."
+     "texte": "Housekeeping of nine buildings in the Cap-Saint-Jacques sector from November 1, 2026 to October 31, 2030, with a possible extension to October 31, 2031."
     },
     {
-     "texte": "For the parc des Eaux-Cachées public art competition: winner selected in October 2026, contract in December 2026 and installation of the artwork in 2028."
+     "texte": "For the Cap-Saint-Jacques application: lighting plan submitted in February 2027, response from DarkSky expected in April 2027, site compliance work in April 2032."
     },
     {
-     "texte": "Final acceptance of the work at parc du Bassin-à-Bois is expected in June 2027."
+     "texte": "Final acceptance of work at parc du Bassin-à-Bois expected in June 2027."
     },
     {
-     "texte": "Work on parc J.O.R.-Leduc, in LaSalle, is to be completed in June 2028."
+     "texte": "End of work at parc J.O.R.-Leduc in June 2028; tree cutting in the Grand parc de l'Ouest until early summer 2028; installation of the artwork at parc des Eaux-Cachées in 2028."
     }
    ],
-   "source": "53ab019353ab70af",
-   "genereLe": "2026-11-18T18:17:18.737Z"
+   "source": "0ac561cc61b24fba",
+   "genereLe": "2026-11-19T18:33:11.725Z"
   },
   "pietonnisation": {
    "titre": "Pedestrianization and public squares",
-   "description": "Pedestrian streets, public squares and commercial animation orders.",
-   "enBref": "This year, the City is organizing the 2026 season of pedestrian streets and public squares: it adopts funding rules, gives money to boroughs and sociétés de développement commercial, then closes stretches of street to cars and regulates sales, noise and traffic on these streets. It also settles a dispute related to the development of a public square, changes the status of a piece of land, and gives a name to a square.",
+   "description": "Pedestrian streets, public squares and business animation by-laws.",
+   "enBref": "This year, the City is organizing the 2026 season of pedestrian streets and public squares: it adopts funding rules, pays out money to boroughs and business development corporations, then closes street sections to cars and regulates sales, noise and traffic on these streets. It also settles a dispute related to the development of a public square, changes the status of a piece of land and gives a name to a square.",
    "etapes": [
     {
      "periode": "February 2026",
      "titre": "Funding rules and settlement of a dispute",
-     "texte": "Ville-Marie adopts a by-law that allows it to subsidize its sociétés de développement commercial to pedestrianize streets, up to $425 per linear metre of pedestrianized street. Rosemont–La Petite-Patrie settles out of court for $41,686.46 a lawsuit related to work on a public square at the corner of rue Beaubien Est and rue Boyer."
+     "texte": "Ville-Marie adopts a by-law that allows it to subsidize its business development corporations to pedestrianize streets, up to $425 per linear metre of pedestrianized street. Rosemont–La Petite-Patrie settles out of court for $41,686.46 a lawsuit related to the construction work on a public square at the corner of rue Beaubien Est and rue Boyer."
     },
     {
      "periode": "March to May 2026",
-     "titre": "Street closures and animation orders",
-     "texte": "Boroughs close stretches of street to cars and authorize terraces, the sale of food and drinks, music and ground painting: Ville-Marie for thirteen streets, Côte-des-Neiges–Notre-Dame-de-Grâce for the Placette CDN and avenues Royal and Madison, Outremont for avenue Bernard, Mercier–Hochelaga-Maisonneuve for rue Ontario Est, Le Plateau-Mont-Royal for avenues du Mont-Royal and Duluth."
+     "titre": "Street closures and animation by-laws",
+     "texte": "The boroughs close sections to cars and authorize terraces, the sale of food and drinks, music and ground painting: Ville-Marie for thirteen streets, Côte-des-Neiges–Notre-Dame-de-Grâce for the Placette CDN and avenues Royal and Madison, Outremont for avenue Bernard, Mercier–Hochelaga-Maisonneuve for rue Ontario Est, Le Plateau-Mont-Royal for avenues du Mont-Royal and Duluth."
     },
     {
      "periode": "June to September 2026",
-     "titre": "Animation and sound ambiance",
-     "texte": "The executive committee grants $40,000 to animate the pedestrian street Notre-Dame Ouest from July 10 to 19, 2026 during the FIFA World Cup. Côte-des-Neiges–Notre-Dame-de-Grâce closes avenue de Monkland for a commercial promotion from August 20 to 23, 2026, and Ville-Marie authorizes a musical sound ambiance on the pedestrian streets of the Quartier des spectacles."
+     "titre": "Animations and sound ambiance",
+     "texte": "The executive committee grants $40,000 to animate the pedestrian street Notre-Dame Ouest from July 10 to 19, 2026, during the FIFA World Cup. Côte-des-Neiges–Notre-Dame-de-Grâce closes avenue de Monkland for a business promotion from August 20 to 23, 2026, and Ville-Marie authorizes a musical sound ambiance on the pedestrian streets of the Quartier des spectacles."
     },
     {
      "periode": "August and September 2026",
      "titre": "Public squares and end of season",
-     "texte": "City council names \"place Chez-Marguerite\" the public square at the corner of rue Charleroi and avenue L'Archevêque, in Montréal-Nord, and changes a 899-square-metre piece of land from street status to local park status near the Langelier metro station. Le Plateau-Mont-Royal revises the reopening schedule for avenue du Mont-Royal in three sections."
+     "texte": "City council names \"place Chez-Marguerite\" the public square at the corner of rue Charleroi and avenue L'Archevêque, in Montréal-Nord, and changes the status of an 899-square-metre piece of land from street to local park near the Langelier metro station. Le Plateau-Mont-Royal revises the reopening schedule for avenue du Mont-Royal in three sections."
     }
    ],
    "aSurveiller": [
@@ -503,17 +496,17 @@
      "texte": "Traffic resumes on the chemin de la Côte-des-Neiges ramp on November 1, 2026, after dismantling on November 1 and 2."
     },
     {
-     "texte": "The order on sound ambiance for the pedestrian streets of the Quartier des spectacles runs until September 2, 2027."
+     "texte": "The by-law on the sound ambiance of the pedestrian streets of the Quartier des spectacles runs until September 2, 2027."
     },
     {
      "texte": "The on-demand transportation contract for avenue du Mont-Royal covers the period until December 31, 2027; the 2027 edition takes place only if the pedestrianization project is renewed."
     },
     {
-     "texte": "Support for pedestrianizing avenue Lacombe continues until December 31, 2028: $22,500 in 2027 and $20,000 in 2028."
+     "texte": "Funding assistance for the pedestrianization of avenue Lacombe continues until December 31, 2028: $22,500 in 2027 and $20,000 in 2028."
     }
    ],
    "source": "31d7d5e2f75dc36a",
-   "genereLe": "2026-11-18T18:17:29.444Z"
+   "genereLe": "2026-11-19T18:33:22.554Z"
   },
   "plan-urbanisme": {
    "titre": "Urban Planning and Mobility Plan",
@@ -522,32 +515,32 @@
    "etapes": [
     {
      "periode": "March and May 2026",
-     "titre": "Deadline extension requests to the ministry",
-     "texte": "Ahuntsic-Cartierville is requesting twelve more months, until June 16, 2027, to adopt its concordance by-laws. L'Île-Bizard–Sainte-Geneviève is requesting six additional months, after a first extension obtained in July 2025."
+     "titre": "Requests for extension to the ministère",
+     "texte": "Ahuntsic-Cartierville is requesting twelve more months, until June 16, 2027, to adopt its concordance by-laws. L'Île-Bizard–Sainte-Geneviève is requesting an additional six months, after a first extension obtained in July 2025."
     },
     {
      "periode": "March to May 2026",
      "titre": "Ville-Marie amends five by-laws",
-     "texte": "Following the public consultation of March 25, 2026, Ville-Marie is revising its rules on urban planning, special projects, demolition, certificates, and cadastral operations. The by-law authorizes a maximum height of 103 m on the block of the former terrasse Peel and allows public transit stations in Category E.1 sectors."
+     "texte": "Following the public consultation on March 25, 2026, Ville-Marie is revising its rules on urban planning, special projects, demolition, certificates and cadastral operations. The by-law authorizes a maximum height of 103 m on the block of the former terrasse Peel and allows public transit stations in category E.1 sectors."
     },
     {
      "periode": "April and July 2026",
      "titre": "Heights and demolition in Ahuntsic-Cartierville",
-     "texte": "The borough is changing heights, uses, and the lot coverage ratio in the sector bordered by avenue Papineau, avenue Émile-Journault, avenue André-Grasset, and rue Legendre Est, and is increasing the permitted heights on sections of rue Lajeunesse. It is also amending its by-law on the demolition of buildings, following a public meeting held on June 23, 2026."
+     "texte": "The borough is changing the heights, uses and site coverage ratio in the sector bordered by avenue Papineau, avenue Émile-Journault, avenue André-Grasset and rue Legendre Est, and is increasing the allowable heights on sections of rue Lajeunesse. It is also amending its by-law on building demolition, following a public meeting held on June 23, 2026."
     }
    ],
    "aSurveiller": [
     {
-     "texte": "Saint-Laurent's public consultation on its three draft by-laws, on October 20, 2026 at 7 p.m."
+     "texte": "Saint-Laurent public consultation on its three draft by-laws, on October 20, 2026 at 7 p.m."
     },
     {
      "texte": "Côte-des-Neiges–Notre-Dame-de-Grâce: public consultation on October 21, 2026 and adoption on November 2, 2026; the deadline granted by the minister runs until December 16, 2026."
     },
     {
-     "texte": "Saint-Léonard must adopt all its concordance by-laws by June 16, 2027, the date set by the Minister of Municipal Affairs."
+     "texte": "Saint-Léonard must adopt all its concordance by-laws by June 16, 2027, the date set by the minister of Municipal Affairs."
     },
     {
-     "texte": "Ahuntsic-Cartierville is requesting a deadline until June 16, 2027."
+     "texte": "Ahuntsic-Cartierville is requesting an extension until June 16, 2027."
     },
     {
      "texte": "Villeray–Saint-Michel–Parc-Extension has until June 17, 2027 to update its by-laws; its zoning by-law must be replaced in 2027."
@@ -557,65 +550,63 @@
     }
    ],
    "source": "bc858a91c41c545c",
-   "genereLe": "2026-11-18T18:17:37.140Z"
+   "genereLe": "2026-11-19T18:33:30.967Z"
   },
   "securite-publique": {
    "titre": "Police and public safety",
    "description": "The City of Montréal's Police Department (SPVM): contracts, neighbourhood stations, council motions.",
-   "enBref": null,
+   "enBref": "This year, the City mainly funded the operations of the Service de police de la Ville de Montréal (SPVM): a loan for equipment, purchases of vehicles and ammunition, maintenance and IT services contracts. It also renewed several leases for neighbourhood stations and department buildings, accepted government grants, and lent police officers to the RCMP and the Sûreté du Québec. Borough councils and city council adopted motions about the SPVM.",
    "etapes": [
     {
-     "periode": "January 2026",
-     "titre": "Loan for equipment and loan of an officer",
-     "texte": "The City adopts a loan by-law of $10,880,000 to buy and replace specialized SPVM equipment between 2026 and 2030. It also authorizes the loan of a sergeant-detective to the RCMP team that enforces the Firearms Act, starting January 7, 2026."
+     "periode": "April to September 2026",
+     "titre": "Grants and specialized teams",
+     "texte": "The City accepted a $2,436,490 grant from the ministère de la Sécurité intérieure for the Section spécialisée en violence conjugale, keeping seven police positions and one civilian position. It extended the ACCES Tabac, ACCES Alcool, ACCES Cannabis and ACCEF committees, funded by the same ministry, until March 31, 2027, and received $8,000 from the Fonds d'aide aux victimes for a public information campaign on sexual assault."
     },
     {
-     "periode": "March to April 2026",
-     "titre": "SPVM vehicles, buildings and services",
-     "texte": "The City buys patrol motorcycles, replaces the oil heating of the cavalry building at 1515, chemin Remembrance, and extends the housekeeping services of its headquarters. It also awards meals for detained persons to a new company and extends the maintenance of the software for the call dispatch system."
-    },
-    {
-     "periode": "May to June 2026",
-     "titre": "Leases for neighbourhood stations and premises",
-     "texte": "The City renews the leases for neighbourhood station 15, rue de l'Église in Verdun, and neighbourhood station 26, avenue Mountain Sights. It also leases 50 parking spaces at 260, boulevard De Maisonneuve and extends the lease of the SPVM training centre, rue Ernest-Cormier in Anjou."
+     "periode": "August to October 2026",
+     "titre": "Vehicles, boat and IT systems",
+     "texte": "The City purchased a port patrol boat with its trailer and two pickup trucks for the mounted unit, and awarded a group of firms the plans, specifications and work supervision for the permanent 9-1-1 relief centre. In October, it awarded a contract for video court appearances and video visitation rooms for the municipal court and the SPVM, and extended maintenance of the SIGAL software as well as maintenance of garage doors at its buildings."
     }
    ],
    "aSurveiller": [
     {
-     "texte": "October 23, 2026: \"Fèves au lard\" day of the Fraternité des policiers et policières at neighbourhood station 46, for which the Anjou borough bought tickets."
+     "texte": "The lease for the metro unit of neighbourhood station 50, at 888 boulevard De Maisonneuve Est, begins on February 1, 2027 and runs until January 31, 2037."
     },
     {
-     "texte": "February 1, 2027: start of the ten-year lease for the metro unit premises of neighbourhood station 50, at 888, boulevard De Maisonneuve Est."
+     "texte": "The patrol boat and its trailer must be delivered no later than March 1, 2027."
     },
     {
-     "texte": "March 1, 2027: deadline for delivery of the port patrol boat and its trailer."
+     "texte": "The ACCES Tabac, ACCES Alcool, ACCES Cannabis and ACCEF committees are extended until March 31, 2027."
     },
     {
-     "texte": "September 30, 2027: expected end of the work to replace the oil heating of the cavalry building."
+     "texte": "Work to replace the oil heating system at the mounted unit building must be completed by September 30, 2027."
+    },
+    {
+     "texte": "Maintenance of the SIGAL software is renewed from January 1 to December 31, 2027."
     }
    ],
-   "source": "de9d5250bd50533d",
-   "genereLe": "2026-11-18T18:17:44.613Z"
+   "source": "b1af4766b42dc46e",
+   "genereLe": "2026-11-19T18:33:38.907Z"
   },
   "transport-collectif": {
    "titre": "Public transit",
-   "description": "What the City decides around the network: land sold to the STM, areas around stations, agreements.",
-   "enBref": "This year, the City approves the budget and borrowings of the Société de transport de Montréal (STM), and sells, leases or lends it land for its stations, its ventilation shafts and its staff. It also oversees metro construction sites and bus stops on its territory, and entrusts the STM with municipal work related to the blue line extension. Borough councils and city council adopt motions on the development of the network.",
+   "description": "What the City decides about the network: land sold to the STM, areas around stations, agreements.",
+   "enBref": "This year, the City approves the budget and borrowings of the Société de transport de Montréal (STM), and sells, leases or lends it land for its stations, ventilation buildings and staff. It also oversees metro construction sites and bus stops on its territory, and entrusts the STM with municipal work related to the extension of the blue line. Borough councils and city council adopt motions on the development of the network.",
    "etapes": [
     {
      "periode": "February to October 2026",
      "titre": "Bus stops and construction sites overseen",
-     "texte": "Ahuntsic-Cartierville establishes and removes bus waiting posts as part of the network overhaul, and Saint-Laurent offers to take charge of building sidewalks for new stops. Ville-Marie authorizes the STM to drill and redo the vault of the green line tunnel 24 hours a day from June 10 to July 31, 2026; the City signs an agreement to build a pavilion attached to the Wiseman ventilation shaft in Outremont, adds a contingency budget to the Berri-UQAM station construction site and does not oppose the reconstruction of a bridge-tunnel over the REM."
+     "texte": "Ahuntsic-Cartierville sets up and removes bus waiting areas as part of the network redesign, and Saint-Laurent offers to take charge of building sidewalks at the new stops. Ville-Marie authorizes the STM to drill and redo the vault of the green line tunnel 24 hours a day from June 10 to July 31, 2026; the City signs an agreement to build a pavilion attached to the Wiseman ventilation building in Outremont, adds an incidental budget to the Berri-UQAM station construction site, and does not oppose the reconstruction of a bridge-tunnel over the REM."
     },
     {
      "periode": "March to September 2026",
      "titre": "Blue line extension",
-     "texte": "The City entrusts the STM with carrying out its own work at the future Pie-IX and Viau stations, on rue Jean-Talon Est, and authorizes a spending of $3,808,451.29, including taxes. It then concludes 72-month framework agreements with Artelia Canada inc. and Stantec Experts-conseils ltée for the design, technical assistance and impact management of the redevelopment of the blue line corridor."
+     "texte": "The City entrusts the STM with carrying out its own work at the future Pie-IX and Viau stations, on rue Jean-Talon Est, and authorizes an expenditure of $3,808,451.29, taxes included. It then concludes 72-month framework agreements with Artelia Canada inc. and Stantec Experts-conseils ltée for the design, technical assistance and management of impacts from the redevelopment of the blue line corridor."
     },
     {
      "periode": "June to August 2026",
      "titre": "STM loan by-laws",
-     "texte": "The agglomeration approves STM borrowings and amends its capital works program: analysis of replacing the MR-73 cars, extending their service life, bus priority measures, Réno-Infrastructures phase 4, surface building repairs and management of technological and security risks."
+     "texte": "The agglomeration approves STM borrowings and amends its capital works program: analysis of replacing the MR-73 cars, extending their service life, bus priority measures, Réno-Infrastructures phase 4, repair of surface buildings, and management of technological and security risks."
     },
     {
      "periode": "August to October 2026",
@@ -625,39 +616,39 @@
    ],
    "aSurveiller": [
     {
-     "texte": "Approval from the ministère des Affaires municipales expected in November 2026 for borrowings related to the MR-73 cars and surface building repairs."
+     "texte": "Approval from the Ministère des Affaires municipales expected in November 2026 for borrowings related to the MR-73 cars and the repair of surface buildings."
     },
     {
-     "texte": "Work on the Rielle ventilation shaft, in Verdun, is to continue until December 2027."
+     "texte": "Work on the Rielle ventilation building, in Verdun, is to continue until December 2027."
     },
     {
-     "texte": "Rue Wilderton will be closed for a maximum of two weeks during the summer 2027 holidays, for the reconstruction of the bridge-tunnel; work is planned until March 2028."
+     "texte": "Rue Wilderton will be closed for a maximum of two weeks during the summer 2027 vacation period, for the reconstruction of the bridge-tunnel; the work is scheduled to continue until March 2028."
     },
     {
-     "texte": "The opening of the five new blue line stations is planned for 2031."
+     "texte": "The opening of the five new blue line stations is scheduled for 2031."
     }
    ],
    "source": "f73423a768f852b5",
-   "genereLe": "2026-11-18T18:17:54.653Z"
+   "genereLe": "2026-11-19T18:33:48.854Z"
   },
   "velo": {
-   "titre": "Bikeways: REV, bike paths and BIXI",
+   "titre": "Cycling: REV, bike paths and BIXI",
    "description": "The Réseau express vélo, bike paths and bike lanes, and the bike-sharing system.",
-   "enBref": "This year, the City and the boroughs are building and repairing bike lanes, regulating car traffic around them, and buying equipment for the BIXI system. Work affects the REV Lajeunesse, rue Saint-Jacques, avenue Christophe-Colomb and corridors in Ville-Marie and Mercier–Hochelaga-Maisonneuve. The City is also settling its rents with Hydro-Québec for land used as bike paths and asking Québec for financial help for four new projects.",
+   "enBref": "This year, the City and boroughs are building and repairing bike lanes, managing car traffic around them, and buying equipment for the BIXI system. Work affects the REV Lajeunesse, rue Saint-Jacques, avenue Christophe-Colomb, and corridors in Ville-Marie and Mercier–Hochelaga-Maisonneuve. The City is also settling its rents with Hydro-Québec for land used as bike paths and is asking Québec for financial help for four new projects.",
    "etapes": [
     {
      "periode": "February and March 2026",
      "titre": "Bike path maintenance",
-     "texte": "Outremont authorizes spending of $100,000, taxes included, for de-icing salt and abrasives spread notably on bike paths. Ahuntsic-Cartierville is renting a mini sweeper with operator for spring cleaning of paths less than 1.8 metres wide."
+     "texte": "Outremont authorizes spending of $100,000, taxes included, for de-icing salt and abrasives spread notably on bike paths. Ahuntsic-Cartierville is renting a mini sweeper with an operator for spring cleaning of paths less than 1.8 metres wide."
     },
     {
      "periode": "February to October 2026",
      "titre": "New traffic rules",
-     "texte": "Rosemont–La Petite-Patrie imposes mandatory manoeuvres on drivers on avenue Christophe-Colomb and formalizes the bike lanes between rue des Carrières and rue de Bellechasse. Outremont tables a draft by-law to turn a shared lane on avenue Lajoie into a one-way bike path, and Ville-Marie makes rue Saint-Jacques one-way eastbound between Peel and Robert-Bourassa for a section of the REV."
+     "texte": "Rosemont–La Petite-Patrie imposes mandatory manoeuvres on drivers on avenue Christophe-Colomb and formalizes bike lanes between rue des Carrières and rue de Bellechasse. Outremont introduces a draft by-law to turn a shared lane on avenue Lajoie into a one-way bike path, and Ville-Marie makes rue Saint-Jacques one-way eastbound between Peel and Robert-Bourassa for a section of the REV."
     },
     {
      "periode": "March to July 2026",
-     "titre": "BIXI purchases and installations",
+     "titre": "Purchases and installations for BIXI",
      "texte": "The City awards PBSC Solutions Urbaines inc. a sole-source contract of $4,815,802.61, taxes included, for bikes, stations and docking points compatible with BIXI, then a contract of $394,851.17, taxes included, to Laser AMP for the steel bases of the stations. Le Plateau-Mont-Royal and the Sud-Ouest each include the installation of a BIXI station in street and laneway projects."
     },
     {
@@ -676,11 +667,11 @@
      "texte": "The new traffic directions and lane assignments on rue Saint-Jacques, related to the REV, take effect on November 6, 2026."
     },
     {
-     "texte": "The lease for the bike path rented from Hydro-Québec in Rivière-des-Prairies–Pointe-aux-Trembles runs until December 31, 2035."
+     "texte": "The lease for the bike path leased from Hydro-Québec in Rivière-des-Prairies–Pointe-aux-Trembles runs until December 31, 2035."
     }
    ],
    "source": "7771a47d112e4ba6",
-   "genereLe": "2026-11-18T18:18:04.502Z"
+   "genereLe": "2026-11-19T18:33:58.885Z"
   }
  }
 }

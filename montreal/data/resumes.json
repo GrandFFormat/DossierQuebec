@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-16T19:56:50.997Z",
+ "generatedAt": "2026-11-19T18:37:35.888Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel quand il est publié (source « sommaire »), sinon du texte de la résolution elle-même (source « resolution »), sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,2162 @@
   "annee": "2026",
   "max": 40,
   "batch": true,
-  "depuis": "2026-09-17",
+  "depuis": "2026-09-20",
   "plafond": 120
  },
- "nombre": 9106,
- "genereCetteFois": 14,
+ "nombre": 9186,
+ "genereCetteFois": 80,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.2048,
-  "jetonsEntree": 56386,
-  "jetonsSortie": 5107
+  "montant": 1.3231,
+  "jetonsEntree": 359546,
+  "jetonsSortie": 33942
  },
  "resumes": [
+  {
+   "id": "1269671003",
+   "numero": "1269671003",
+   "resolution": "CM26 1125",
+   "date": "2026-10-19",
+   "unite": "Service du greffe",
+   "objet": "Nommer Mathieu Arsenault, professeur d'histoire, à titre de président du Comité consultatif en reconnaissance pour un premier mandat renouvelable de trois ans à compter du 20 octobre 2026",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1567",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil municipal nomme Mathieu Arsenault, professeur d'histoire à l'Université de Montréal, à la présidence du Comité consultatif en reconnaissance.",
+    "Son mandat, d'une durée de trois ans et renouvelable une fois, commence le 20 octobre 2026.",
+    "Il remplace Jean-François Leclerc, dont le mandat s'est terminé au printemps 2026 et qui a choisi de ne pas poursuivre; la Ville le remercie.",
+    "Le comité conseille la Ville sur les cérémonies commémoratives, la commémoration matérielle, la toponymie et certains règlements d'identification du patrimoine.",
+    "Un appel de candidatures a été lancé à l'été 2026 (journal Le Devoir, site de la Ville, milieux universitaires et professionnels); un comité de sélection a rencontré trois candidats le 31 août 2026.",
+    "La rémunération de la présidence est payée à même le budget de fonctionnement du Service du greffe; aucun montant n'est précisé."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.881Z",
+   "jetons": {
+    "entree": 7900,
+    "sortie": 441
+   }
+  },
+  {
+   "id": "CM26 1078",
+   "numero": null,
+   "resolution": "CM26 1078",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Retourner un montant de 203 429,70 $ à la réserve de voirie d'agglomération / Autoriser un virement de crédits de 532 000 $ en provenance de la réserve de voirie vers budget de fonctionnement du Service de l'urbanisme et de la mobilité, afin de financer des études ou des analyses, dans le cadre des grands projets de transport en partenariat et des projets d'aménagement urbain",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=34",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal retourne 203 429,70 $ à la réserve de voirie d'agglomération.",
+    "Il autorise un virement de 532 000 $ de la réserve de voirie vers le budget de fonctionnement du Service de l'urbanisme et de la mobilité.",
+    "Cet argent servira à payer des études ou des analyses liées aux grands projets de transport en partenariat et aux projets d'aménagement urbain.",
+    "La décision a été prise à la séance ordinaire du conseil municipal du lundi 19 octobre 2026.",
+    "Le document ne précise ni les projets visés ni les échéances."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "532 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.881Z",
+   "jetons": {
+    "entree": 2059,
+    "sortie": 303
+   }
+  },
+  {
+   "id": "1267736002",
+   "numero": "1267736002",
+   "resolution": "CM26 1105",
+   "date": "2026-10-19",
+   "unite": "Service de l'environnement et de la transition écologique, Direction",
+   "objet": "Offrir à l'arrondissement de Ville-Marie, conformément à l'article 85 de la Charte de la Ville de Montréal, métropole du Québec (RLRQ, c. C-11.4), de prendre en charge la planification et la réalisation des travaux d'aménagement de la place du Village permanente, incluant la maîtrise d'ouvrage, dans le cadre du projet Sainte-Catherine Est",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1147",
+   "source": "sommaire",
+   "puces": [
+    "La Ville centrale propose de prendre en charge l'aménagement permanent de la place du Village, à l'angle des rues Atateken et Sainte-Catherine Est, dans Ville-Marie.",
+    "Le Service de l'urbanisme et de la mobilité agirait comme promoteur et le Service des infrastructures du réseau routier comme gestionnaire de projet : plans et devis, appels d'offres, surveillance des travaux, communications et gestion des impacts.",
+    "La raison invoquée : coordonner ce projet avec le réaménagement de la rue Sainte-Catherine Est, déjà géré par les services centraux.",
+    "L'arrondissement de Ville-Marie continuerait de payer les dépenses du projet.",
+    "L'arrondissement doit accepter l'offre; l'acceptation est prévue le 10 novembre 2026.",
+    "Calendrier annoncé : avant-projet en 2026-2027, plans et devis en 2027-2028, contrat de construction en 2028, travaux en 2028-2029, sous réserve de confirmation.",
+    "Le site, acquis par la Ville en 2014, est aménagé de façon temporaire depuis ce temps; le projet permanent découle d'une démarche participative menée en 2022."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.881Z",
+   "jetons": {
+    "entree": 6095,
+    "sortie": 620
+   }
+  },
+  {
+   "id": "CM26 1061",
+   "numero": null,
+   "resolution": "CM26 1061",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Accorder un contrat de gré à gré à Oracle Canada ULC, pour l'achat de 48 licences Oracle Real Application Clusters, incluant les frais de support, par l'entremise de son entente avec le Centre d'acquisitions gouvernementales, pour la période du 20 novembre 2026 au 19 novembre 2029 - Dépense totale de 1 095 436,96 $, taxes incluses / Autoriser une dépense de 32 863,10 $, taxes incluses, à titre de frais de gestion payables au Centre d'acquisitions gouvernementales",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=23",
+   "source": "resolution",
+   "puces": [
+    "La Ville achète 48 licences logicielles Oracle Real Application Clusters, frais de support inclus, directement d'Oracle Canada ULC, sans appel d'offres.",
+    "Le contrat couvre la période du 20 novembre 2026 au 19 novembre 2029, pour 1 095 436,96 $, taxes incluses.",
+    "L'achat passe par l'entente d'Oracle avec le Centre d'acquisitions gouvernementales, à qui la Ville versera 32 863,10 $ de frais de gestion, taxes incluses.",
+    "Le directeur de la Direction infrastructures et opérations du Service des technologies de l'information pourra prolonger l'entente sans dépense additionnelle et signer les documents au nom de la Ville.",
+    "Il s'agit d'une orientation transmise au conseil municipal."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 095 436,96 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.881Z",
+   "jetons": {
+    "entree": 2311,
+    "sortie": 379
+   }
+  },
+  {
+   "id": "1260310001",
+   "numero": "1260310001",
+   "resolution": "CM26 1040",
+   "date": "2026-10-19",
+   "unite": "Service du greffe",
+   "objet": "Dépôt du calendrier des assemblées ordinaires du conseil municipal et du conseil d'agglomération de l'année 2027 Le leader adjoint de la majorité, Alexandre Devaux-Guizani, dépose le document intitulé « calendrier des assemblées ordinaires du conseil municipal et du conseil d'agglomération de l'année 2027 », et le conseil en prend acte.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=250",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil prend acte du dépôt du calendrier des assemblées ordinaires du conseil municipal et du conseil d'agglomération pour 2027.",
+    "Les séances du conseil municipal sont prévues le lundi à 13 h, et le mardi à 9 h 30 au besoin; celles du conseil d'agglomération le jeudi à 16 h.",
+    "Le calendrier prévoit des relâches des instances (comité exécutif, conseil municipal, conseil d'agglomération) le 1er janvier, du 1er au 5 mars, du 5 au 30 juillet et du 27 au 31 décembre 2027.",
+    "Des avis publics de convocation seront publiés dans les journaux avant les assemblées, et la Ville prévoit une communication numérique interne et externe."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.881Z",
+   "jetons": {
+    "entree": 4806,
+    "sortie": 356
+   }
+  },
+  {
+   "id": "CM26 1045",
+   "numero": null,
+   "resolution": "CM26 1045",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Conclure des ententes-cadres avec les firmes Goodyear Canada inc., Michelin Amérique du Nord (Canada) inc., Continental Tire Canada, inc., Toyo Tire Canada inc., Hankook Tire Canada Corp., pour utiliser les contrats à commandes de fourniture de divers pneus neufs, dans le cadre de l'adhésion de la Ville à l'appel d'offres mené par le Centre d'acquisitions gouvernementales 2026- 8109-50-02, d'une durée de 36 mois - Montant estimé des ententes : 5 124 895,65 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=13",
+   "source": "resolution",
+   "puces": [
+    "La Ville conclut des ententes de 36 mois avec cinq fournisseurs de pneus neufs : Goodyear, Michelin, Continental, Toyo et Hankook.",
+    "Valeur totale estimée des ententes : 5 124 895,65 $, taxes incluses.",
+    "Les montants par firme : Goodyear 1 561 820,40 $, Michelin 1 561 820,40 $, Continental 449 782,20 $, Toyo 441 504 $ et Hankook 441 504 $.",
+    "La Ville ajoute 668 464,65 $, taxes incluses, comme budget de contingences.",
+    "Ces achats passent par un appel d'offres mené par le Centre d'acquisitions gouvernementales, auquel la Ville adhère.",
+    "Les dépenses sont imputées aux budgets du Service du matériel roulant et des ateliers, selon les besoins."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "5 124 895,65 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.881Z",
+   "jetons": {
+    "entree": 2467,
+    "sortie": 397
+   }
+  },
+  {
+   "id": "CM26 1052",
+   "numero": null,
+   "resolution": "CM26 1052",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Exercer l'option de la deuxième prolongation de 12 mois / Autoriser une dépense additionnelle de 116 757,12 $, taxes incluses, pour le renouvellement du contrat de maintenance pour le soutien er technique des licences du logiciel Citrix, pour la période du 1 janvier 2027 au 31 décembre 2027, dans le cadre du contrat accordé à Bell Canada (CG22 0755), majorant ainsi le montant total du contrat à 563 547,68 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=17",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge de 12 mois son contrat avec Bell Canada pour l'entretien et le soutien technique des licences du logiciel Citrix.",
+    "Elle autorise une dépense additionnelle de 116 757,12 $, taxes incluses.",
+    "La prolongation couvre la période du 1er janvier 2027 au 31 décembre 2027.",
+    "Il s'agit de la deuxième option de prolongation prévue au contrat.",
+    "Avec cet ajout, le contrat atteint 563 547,68 $, taxes incluses."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "116 757,12 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.881Z",
+   "jetons": {
+    "entree": 2104,
+    "sortie": 281
+   }
+  },
+  {
+   "id": "1268114001",
+   "numero": "1268114001",
+   "resolution": "CM26 1042",
+   "date": "2026-10-19",
+   "unite": "Service de la diversité et de l'inclusion sociale, Direction stratégies et",
+   "objet": "Dépôt du Bilan des réalisations 2025 en accessibilité universelle et de la liste des actions suivies en 2026 Le leader adjoint de la majorité, Alexandre Devaux-Guizani, dépose le Bilan des réalisations 2025 en accessibilité universelle et la liste des actions suivies en 2026, et le conseil en prend acte.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=268",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil municipal prend acte du dépôt du Bilan des réalisations 2025 en accessibilité universelle et de la liste des actions suivies en 2026.",
+    "Le document fait le point sur 62 actions suivies en 2025, avec les unités responsables et l'état d'avancement de chacune.",
+    "Il s'agit du deuxième bilan rattaché au Plan municipal en accessibilité universelle 2024-2030, qui comporte 3 priorités, 9 résultats attendus et 31 indicateurs de progression.",
+    "La Ville doit produire ce bilan chaque année en vertu de la loi québécoise sur les droits des personnes handicapées.",
+    "Le dépôt n'entraîne aucune dépense additionnelle : les actions sont payées à même les budgets des services et arrondissements.",
+    "Le document sera publié en octobre 2026 sur montreal.ca et sur le site de l'Office des personnes handicapées du Québec."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.882Z",
+   "jetons": {
+    "entree": 7515,
+    "sortie": 412
+   }
+  },
+  {
+   "id": "CM26 1079",
+   "numero": null,
+   "resolution": "CM26 1079",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Adopter les modalités encadrant le versement des avances prévues à l'article 31.5.5.1 de la Loi sur le traitement des élus municipaux",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=35",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal approuve les règles encadrant les avances d'argent versées aux membres du conseil d'agglomération pour leurs dépenses de recherche et de soutien en 2026.",
+    "Une avance est une somme versée par la Ville avant que la dépense soit faite; le membre peut aussi désigner par mandat écrit une personne pour la recevoir et l'administrer.",
+    "La mairesse de Montréal est exclue de ces avances.",
+    "L'avance couvre les dépenses faites entre la date de l'avis de versement de la trésorière et le 31 décembre 2026.",
+    "Aucune avance n'est accordée pour une dépense faite à partir du décès ou de la démission du membre, ou pendant une période d'absence.",
+    "La trésorière, soit la direction du Service des finances et de l'évaluation foncière, gère les versements."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.882Z",
+   "jetons": {
+    "entree": 2506,
+    "sortie": 375
+   }
+  },
+  {
+   "id": "1268141001",
+   "numero": "1268141001",
+   "resolution": "CM26 1095",
+   "date": "2026-10-19",
+   "unite": "Service de la gestion et planification des immeubles, Direction exploitation des bâtiments et",
+   "objet": "Accorder un contrat à Le Groupe St-Lambert (2862-5622 Québec inc.), pour les travaux de rénovation de l'auditorium Henry-Teuscher du bâtiment administratif du Jardin botanique - Dépense totale de 3 043 312,11 $, taxes incluses - Appel d'offres public IMM-15991 (10 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=731",
+   "source": "sommaire",
+   "puces": [
+    "La Ville accorde à Le Groupe St-Lambert (2862-5622 Québec inc.) le contrat de rénovation de l'auditorium Henry-Teuscher, dans l'édifice Marie-Victorin du Jardin botanique.",
+    "La dépense totale autorisée est de 3 043 312,11 $, taxes incluses : 2 341 009,32 $ pour le contrat, 468 201,86 $ en contingences (20 %) et 234 100,93 $ en incidences (10 %).",
+    "Les travaux prévoient de nouveaux sièges, un pont d'éclairage amovible, des équipements multimédias et d'éclairage scénique, de la peinture et un nouveau plancher.",
+    "Une plate-forme élévatrice pour les personnes à mobilité réduite sera ajoutée, avec renforcement de la structure.",
+    "Les travaux doivent commencer en novembre 2026 et se terminer en mai 2027.",
+    "Dix entreprises ont soumissionné; l'offre retenue est 712 403,60 $ (23,4 %) sous l'estimation des professionnels.",
+    "La dépense est assumée par la ville centrale; l'Agence de développement économique du Canada verse 1 200 000 $ pour les équipements techniques et scéniques et 300 000 $ pour les études."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 043 312,11 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.882Z",
+   "jetons": {
+    "entree": 7936,
+    "sortie": 543
+   }
+  },
+  {
+   "id": "1265019002",
+   "numero": "1265019002",
+   "resolution": "CM26 1115",
+   "date": "2026-10-19",
+   "unite": "Commission des services électriques, Bureau du Président de la commission",
+   "objet": "Avis de motion et dépôt - Règlement établissant le processus de traitement des plaintes ou signalements relatifs à la conduite de certains officiers relevant du conseil municipal AVIS DE MOTION ET DÉPÔT D’UN PROJET DE RÈGLEMENT Avis de motion est donné par Alexandre Devaux-Guizani de l’inscription pour adoption à une assemblée subséquente du conseil municipal du projet de règlement intitulé « Règlement établissant le processus de traitement des plaintes ou signalements relatifs à la conduite de certains officiers relevant du conseil municipal », lequel est déposé avec le dossier décisionnel.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1305",
+   "source": "sommaire",
+   "puces": [
+    "La Ville dépose un projet de règlement créant une marche à suivre quand un employé porte plainte contre la personne à la tête d'un organisme relevant du conseil municipal.",
+    "Six postes sont visés : la direction de la Commission de la fonction publique, du Bureau de l'inspecteur général, de l'Ombudsman, de l'Office de consultation publique, de la Commission des services électriques et du Bureau du vérificateur général.",
+    "Les plaintes porteraient sur des manquements au Code de conduite du personnel ou à la Politique de respect de la personne.",
+    "L'employé déposerait sa plainte à la Centrale d'accompagnement du personnel (CAPP) ou au contrôleur général, qui l'achemine ensuite à la Commission de la présidence du conseil.",
+    "La Commission jugerait de la recevabilité, confierait l'enquête à un enquêteur mandaté par la Ville, puis recommanderait une suite, incluant une sanction s'il y a lieu.",
+    "L'officier visé recevrait un résumé des allégations, pourrait être accompagné lors de sa rencontre avec l'enquêteur et aurait au moins 15 jours pour répondre par écrit aux recommandations.",
+    "Il serait interdit de porter plainte de mauvaise foi, sous peine de mesures correctives. Avis de motion le 19 octobre 2026, adoption finale prévue le 16 novembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.882Z",
+   "jetons": {
+    "entree": 7599,
+    "sortie": 575
+   }
+  },
+  {
+   "id": "1260459002",
+   "numero": "1260459002",
+   "resolution": "CM26 1094",
+   "date": "2026-10-19",
+   "unite": "Service de l'eau, Direction de l'épuration des eaux usées",
+   "objet": "Exercer l'option de la deuxième prolongation de 12 mois / Autoriser une dépense additionnelle de 313 523,03 $, taxes incluses, pour la fourniture de bois Kebony pour les ateliers spécialisés de la Ville, dans le cadre de l'entente-cadre conclue avec North On Sixty (CM24 0689), majorant ainsi le montant total de l'entente à 1 111 390,80 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=722",
+   "source": "sommaire",
+   "puces": [
+    "La Ville prolonge de 12 mois son entente avec l'entreprise North On Sixty pour l'achat de bois Kebony, utilisé par ses ateliers de menuiserie.",
+    "Elle autorise une dépense additionnelle de 313 523,03 $, taxes incluses : 261 269,19 $ pour le bois et 52 253,84 $ en provision pour variation de quantité.",
+    "La valeur totale de l'entente passe ainsi de 797 867,77 $ à 1 111 390,80 $, taxes incluses.",
+    "Ce bois sert à fabriquer, réparer et entretenir du mobilier urbain : bancs, tables de pique-nique et corbeilles à déchets.",
+    "Il s'agit de la deuxième et dernière prolongation prévue au contrat conclu en 2024; l'entente prendra fin à son échéance.",
+    "Le fournisseur doit remettre à la livraison les certificats FSC et ISO 14021 exigés.",
+    "Les sommes seront prises à même le budget de fonctionnement du Service du matériel roulant et des ateliers, selon les besoins."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "313 523,03 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.882Z",
+   "jetons": {
+    "entree": 7613,
+    "sortie": 472
+   }
+  },
+  {
+   "id": "CM26 1056",
+   "numero": null,
+   "resolution": "CM26 1056",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Approuver le projet d'acte en vertu duquel la Ville acquiert de la Coopérative d'habitation Ste-Anne (Montréal), à des fins de logement social, un terrain vacant connu et désigné comme étant le lot 1 853 591 du cadastre du Québec, circonscription foncière de Montréal, situé sur la rue de la Montagne, dans l'arrondissement du Sud-Ouest, d'une superficie de 433,2 mètres carrés, pour le prix de 500 000 $, plus les taxes applicables",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=19",
+   "source": "resolution",
+   "puces": [
+    "La Ville achète un terrain vacant de 433,2 mètres carrés sur la rue de la Montagne, dans l'arrondissement du Sud-Ouest.",
+    "Le vendeur est la Coopérative d'habitation Ste-Anne (Montréal).",
+    "Le prix est de 500 000 $, plus les taxes applicables.",
+    "Le terrain est acquis à des fins de logement social.",
+    "La signature de l'acte dépend de l'approbation de la transaction par le ministre responsable de l'Habitation.",
+    "Le chèque sera émis au vendeur ou au notaire fiduciaire en fidéicommis du vendeur."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.882Z",
+   "jetons": {
+    "entree": 2371,
+    "sortie": 311
+   }
+  },
+  {
+   "id": "CM26 1067",
+   "numero": null,
+   "resolution": "CM26 1067",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Exercer l'option de la première prolongation de 12 mois / Autoriser une dépense additionnelle de 551 436,32 $, taxes incluses, pour les services d'entretien de génératrices pour divers bâtiments de la Ville, dans le cadre des contrats accordés à Entreprises L.M. inc. (CG23 0718), majorant ainsi le montant total des contrats à 1 944 566,33 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=27",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge de 12 mois ses contrats d'entretien des génératrices dans divers bâtiments municipaux.",
+    "Les contrats restent confiés à Entreprises L.M. inc.",
+    "Dépense additionnelle autorisée : 551 436,32 $ taxes incluses, dont 459 530,27 $ pour les services et 91 906,05 $ en budget de contingences.",
+    "Avec cette prolongation, la valeur totale des contrats atteint 1 944 566,33 $ taxes incluses.",
+    "La dépense sera imputée selon les informations financières du dossier décisionnel."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "551 436,32 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.882Z",
+   "jetons": {
+    "entree": 2054,
+    "sortie": 302
+   }
+  },
+  {
+   "id": "1260005002",
+   "numero": "1260005002",
+   "resolution": "CM26 1084",
+   "date": "2026-10-19",
+   "unite": "Bureau de lutte contre l'itinérance, Direction",
+   "objet": "Exercer l'option de prolongation d'un an / Autoriser une dépense additionnelle de 5 108 788,24 $, taxes incluses, pour les services de gestion des brigades de propreté dans les 19 arrondissements pour l'année 2027, dans le cadre du contrat accordé à Services d'entretien Alphanet inc. (CM25 1405), majorant ainsi le montant total du contrat à 10 217 576,48 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=366",
+   "source": "sommaire",
+   "puces": [
+    "La Ville prolonge d'un an, pour 2027, les cinq contrats de brigades de propreté confiés à Services d'entretien Alphanet inc.",
+    "Elle autorise une dépense additionnelle de 5 108 788,24 $, taxes incluses, ce qui porte le contrat total à 10 217 576,48 $.",
+    "Les brigadiers nettoient le domaine public dans 19 arrondissements : ramassage des déchets, balayage des trottoirs, retrait de l'affichage et des mauvaises herbes, collecte des cendriers de la Ville.",
+    "Ville-Marie reçoit le plus d'heures (46 956 h de brigadiers), suivi de Côte-des-Neiges–Notre-Dame-de-Grâce et Le Sud-Ouest (43 680 h) et du Plateau-Mont-Royal (31 941 h).",
+    "Les équipes seront déployées le 15 mars 2027 et les opérations prendront fin le 12 décembre 2027.",
+    "La dépense est payée à 100 % par la ville centrale et dépend de l'approbation du budget 2027.",
+    "Le document indique que le fournisseur est encouragé à embaucher des personnes en réinsertion socioprofessionnelle."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "5 108 788,24 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.882Z",
+   "jetons": {
+    "entree": 7858,
+    "sortie": 520
+   }
+  },
+  {
+   "id": "CM26 1047",
+   "numero": null,
+   "resolution": "CM26 1047",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Conclure des ententes-cadres avec les firmes Provencher Roy + Associés Architectes inc., Atelier Civiliti inc., Les services EXP inc., Nippaysage inc., BC2 Groupe conseil inc. et Vlan paysages inc., pour les services professionnels multidisciplinaires en aménagement urbain, d'une durée de 36 mois - Montant estimé des ententes : 6 192 988,70 $, taxes incluses - Appel d'offres public 26-21143 (18 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=14",
+   "source": "resolution",
+   "puces": [
+    "La Ville signe des ententes-cadres de 36 mois avec six firmes pour des services professionnels en aménagement urbain, pour un total estimé de 6 192 988,70 $, taxes incluses.",
+    "Les firmes fourniront ces services sur demande : Provencher Roy + Associés Architectes (1 630 235,14 $), Atelier Civiliti (1 532 545,77 $), Les services EXP (1 175 243,40 $), Nippaysage (707 180,92 $), BC2 Groupe conseil (630 707,51 $) et Vlan paysages (517 075,96 $).",
+    "Ces montants excluent les contingences, les variations de quantités et les incidences.",
+    "Les six firmes ont été retenues après un appel d'offres public (26-21143) ayant reçu 18 soumissions, selon le pointage le plus élevé aux critères de sélection.",
+    "La Ville évaluera le rendement de chacune des six firmes.",
+    "Les dépenses seront payées à même les budgets des arrondissements et des services corporatifs, au rythme des besoins."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "6 192 988,70 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.882Z",
+   "jetons": {
+    "entree": 2509,
+    "sortie": 461
+   }
+  },
+  {
+   "id": "1254386004",
+   "numero": "1254386004",
+   "resolution": "CM26 1118",
+   "date": "2026-10-19",
+   "unite": "Service de la stratégie immobilière et de l'habitation",
+   "objet": "Avis de motion et dépôt - Règlement sur la fermeture d'une ruelle située au nord-est de la e e 57 Avenue, entre la 5 Rue et le boulevard Maurice-Duplessis, dans l'arrondissement de Rivière- des-Prairies–Pointe-aux-Trembles, aux fins de transfert aux propriétaires riverains AVIS DE MOTION ET DÉPÔT D’UN PROJET DE RÈGLEMENT Avis de motion est donné par Alexandre Devaux-Guizani de l’inscription pour adoption à une assemblée subséquente du conseil municipal du projet de règlement intitulé « Règlement sur la fermeture d'une e e ruelle située au nord-est de la 57 Avenue, entre la 5 Rue et le boulevard Maurice-Duplessis, dans l'arrondissement de Rivière-des-Prairies–Pointe-aux-Trembles, aux fins de",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1348",
+   "source": "sommaire",
+   "puces": [
+    "La Ville amorce la fermeture d'une ruelle non ouverte à la circulation, située au nord-est de la 57e Avenue, entre la 5e Rue et le boulevard Maurice-Duplessis, dans Rivière-des-Prairies–Pointe-aux-Trembles.",
+    "Les terrains de cette ruelle seront transférés gratuitement aux 18 propriétaires riverains, qui l'occupent déjà.",
+    "La démarche part de la demande d'un citoyen; plus des deux tiers des riverains, représentant plus des deux tiers du front des terrains, ont signé la pétition en faveur.",
+    "Une servitude d'utilités publiques sera créée sur les lots cédés, notamment pour un oléoduc de 0,762 mètre (30 pouces) appartenant à Pipelines Enbridge inc.",
+    "Cette servitude interdit tous travaux dans une zone de 30 mètres (100 pieds) sans autorisation préalable.",
+    "La Ville dit qu'elle pourra percevoir des taxes foncières sur les lots cédés et qu'elle n'aura plus la gestion de cette ruelle.",
+    "Il s'agit ici d'un avis de motion et du dépôt du projet de règlement; l'adoption se fera à une séance ultérieure du conseil municipal."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.883Z",
+   "jetons": {
+    "entree": 8266,
+    "sortie": 537
+   }
+  },
+  {
+   "id": "1265607002",
+   "numero": "1265607002",
+   "resolution": "CM26 1111",
+   "date": "2026-10-19",
+   "unite": "Service des ressources humaines, Direction stratégie_développement et",
+   "objet": "Prolonger, pour une période de deux ans, la déclaration de compétence du conseil de la ville quant à l'adoption des règles relatives au respect de la personne et à l'application de celles-ci en ce qui concerne les mécanismes de soutien et de traitement des demandes d'intervention, des signalements et des plaintes prévus à la Politique de respect de la personne, conformément à l'article 85.5 de la Charte de la Ville de Montréal, métropole du Québec (RLRQ, c. C-11.4)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1235",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil municipal prolonge de 2 ans sa compétence sur les règles de respect de la personne et sur le traitement des demandes d'intervention, des signalements et des plaintes.",
+    "Concrètement, le traitement des plaintes reste centralisé pour toutes les unités et tous les arrondissements, au lieu d'être géré localement.",
+    "Les plaintes et signalements continuent d'être déposés auprès de la Centrale d'accompagnement du personnel en matière de plaintes (CAPP), rattachée au Service des ressources humaines.",
+    "La Ville dit vouloir ainsi des décisions uniformes et impartiales, peu importe l'unité ou l'arrondissement concerné.",
+    "Selon le document, ne pas renouveler cette compétence ferait tomber les mécanismes de traitement et de protection prévus dans la Politique de respect de la personne.",
+    "La Ville indique que la prolongation réduit le recours à des firmes externes pour les enquêtes de harcèlement et de discrimination, les médiations et les formations.",
+    "Le vote doit être adopté aux deux tiers des voix des membres du conseil."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.883Z",
+   "jetons": {
+    "entree": 7210,
+    "sortie": 474
+   }
+  },
+  {
+   "id": "1265382002",
+   "numero": "1265382002",
+   "resolution": "CM26 1097",
+   "date": "2026-10-19",
+   "unite": "Service de l'environnement et de la transition écologique, Direction de la gestion des",
+   "objet": "Prendre connaissance du rapport de la Commission permanente sur l'examen des contrats Accorder six contrats à 9168-5941 Québec inc. (Axo Construction), à Déneigement Fontaine Gadbois inc. et à Martin Lefebvre Transport inc., pour les services de transport de la neige (lots 4, 8, 12, 13, 14 et 15), dans le cadre des activités de déneigement - Arrondissements multiples, pour une période d'une ou deux saisons hivernales, incluant une option de prolongation d'une saison hivernale - Dépense totale de 13 657 043,23 $, taxes incluses - Appel d'offres public 26-21510 (10 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=781",
+   "source": "sommaire",
+   "puces": [
+    "La Ville accorde six contrats de transport de la neige à trois entreprises : 9168-5941 Québec inc. (Axo Construction) pour les lots 4, 12, 13 et 14, Déneigement Fontaine Gadbois inc. pour le lot 8 et Martin Lefebvre Transport inc. pour le lot 15.",
+    "La dépense totale atteint 13 657 043,23 $, taxes incluses, dont 569 043,47 $ en contingences et 1 707 130,40 $ pour la variation des quantités. La facture est assumée en entier par la ville centrale.",
+    "Les contrats couvrent les arrondissements de Mercier–Hochelaga-Maisonneuve, Rivière-des-Prairies–Pointe-aux-Trembles, Rosemont–La Petite-Patrie, Le Sud-Ouest et Le Plateau-Mont-Royal, dans les secteurs déneigés en régie.",
+    "La durée est d'une ou deux saisons hivernales, avec une option de prolongation d'une saison.",
+    "Le plus gros contrat va à Déneigement Fontaine Gadbois inc. : 4 674 423,60 $ pour le lot 8 (Rivière-des-Prairies–Pointe-aux-Trembles), sur deux saisons.",
+    "La Ville teste une nouvelle formule de paiement au quart de travail, qui laisse à l'entrepreneur la gestion de la disponibilité des camions.",
+    "L'appel d'offres public 26-21510, lancé le 29 juillet 2026, a reçu 10 soumissions ouvertes le 27 août 2026. La Ville évaluera le rendement des trois entreprises retenues."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "13 657 043,23 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.883Z",
+   "jetons": {
+    "entree": 7932,
+    "sortie": 675
+   }
+  },
+  {
+   "id": "CM26 1051",
+   "numero": null,
+   "resolution": "CM26 1051",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Exercer l'option de la prolongation de 12 mois sans dépense additionnelle, pour la fourniture de services de surveillance en santé et sécurité sur les chantiers de la direction de l'eau potable, dans le cadre du contrat accordé à Brûlé Murray et Associés inc. (CG23 0239)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=16",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge de 12 mois le contrat de Brûlé Murray et associés inc. pour la surveillance en santé et sécurité sur les chantiers de la Direction de l'eau potable.",
+    "Aucune dépense additionnelle n'est prévue : la prolongation se fait dans les sommes déjà prévues au contrat.",
+    "Il s'agit d'une option déjà inscrite au contrat accordé auparavant (CG23 0239).",
+    "La décision porte sur l'orientation du conseil municipal à ce sujet."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.883Z",
+   "jetons": {
+    "entree": 1880,
+    "sortie": 272
+   }
+  },
+  {
+   "id": "CM26 1075",
+   "numero": null,
+   "resolution": "CM26 1075",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Autoriser le dépôt d'une demande d'aide financière dans le cadre du Programme d'infrastructures municipales d'eau, volet 1 - Infrastructures d'eau, pour divers projets concernant le réseau principal d'aqueducs, le réseau principal d'égouts ainsi que la Station d'épuration des eaux usées",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=33",
+   "source": "resolution",
+   "puces": [
+    "La Ville de Montréal demande une aide financière au gouvernement dans le cadre du programme PRIMEAU 2023 (volet 1 - Infrastructures d'eau).",
+    "L'argent demandé servirait à des projets sur le réseau principal d'aqueducs, le réseau principal d'égouts et la Station d'épuration des eaux usées.",
+    "La Ville s'engage à réaliser les travaux selon les règles du programme et à en assumer l'entière responsabilité, y compris les dommages causés par ses employés ou ses sous-traitants.",
+    "Elle s'engage à payer sa part des coûts admissibles et les coûts d'exploitation continus.",
+    "Elle s'engage à payer tous les coûts non admissibles, les dépassements de coûts, et 50 % du coût des directives de changement admissibles.",
+    "Si elle rate les échéances du programme, la Ville assume elle-même les dépenses engagées."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.883Z",
+   "jetons": {
+    "entree": 2361,
+    "sortie": 404
+   }
+  },
+  {
+   "id": "CM26 1060",
+   "numero": null,
+   "resolution": "CM26 1060",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Accorder un contrat de gré à gré à Oracle Canada ULC, pour un abonnement à la plateforme Exadata Cloud@Customer, par l'entremise de son entente avec le ministère de la Cybersécurité et er du Numérique (MCN), pour la période du 1 décembre 2026 au 30 novembre 2029 - Dépense totale de 2 256 036,97 $, taxes incluses / Autoriser une dépense de 45 120,73 $, taxes incluses, à titre de frais de gestion, payables au MCN",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=22",
+   "source": "resolution",
+   "puces": [
+    "La Ville accorde un contrat de gré à gré à Oracle Canada ULC pour un abonnement à la plateforme infonuagique Exadata Cloud@Customer.",
+    "Le contrat couvre la période du 1er décembre 2026 au 30 novembre 2029, pour 2 256 036,97 $, taxes incluses.",
+    "Le contrat passe par l'entente du ministère de la Cybersécurité et du Numérique, qui agit comme courtier en infonuagique pour les organismes publics.",
+    "La Ville paie en plus 45 120,73 $, taxes incluses, en frais de gestion au ministère.",
+    "Le directeur de la Direction infrastructures et opérations du Service des technologies de l'information pourra prolonger l'entente sans dépense additionnelle et signer les documents."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 256 036,97 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.883Z",
+   "jetons": {
+    "entree": 2285,
+    "sortie": 370
+   }
+  },
+  {
+   "id": "CM26 1064",
+   "numero": null,
+   "resolution": "CM26 1064",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Accorder un contrat à Précisions Provençal inc., pour la fourniture et l'installation de boîtes et d'aménagements sur des châssis de camions lourds fournis par la Ville, afin de compléter l'assemblage de deux camions-ateliers destinés aux opérations du Service de sécurité incendie de Montréal - Dépense totale de 811 194,62 $, taxes incluses - Appel d'offres public 26-21436 (2 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=25",
+   "source": "resolution",
+   "puces": [
+    "La Ville accorde un contrat à Précisions Provençal inc. pour équiper deux camions-ateliers du Service de sécurité incendie de Montréal.",
+    "L'entreprise fournira et installera les boîtes et les aménagements sur des châssis de camions lourds que la Ville fournit elle-même.",
+    "Le contrat vaut 737 449,65 $, taxes incluses, auquel s'ajoute un budget de contingences de 73 744,97 $, pour une dépense totale de 811 194,62 $.",
+    "Précisions Provençal inc. était le plus bas soumissionnaire conforme de l'appel d'offres public 26-21436, qui a reçu deux soumissions.",
+    "La Ville procédera à une évaluation du rendement de l'entreprise."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "811 194,62 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.883Z",
+   "jetons": {
+    "entree": 2167,
+    "sortie": 357
+   }
+  },
+  {
+   "id": "1265437001",
+   "numero": "1265437001",
+   "resolution": "CM26 1085",
+   "date": "2026-10-19",
+   "unite": "Service de l'approvisionnement, Direction acquisition",
+   "objet": "Conclure une entente-cadre d'une durée de 18 mois, par laquelle Construction DJL inc., plus bas soumissionnaire conforme, s'engage à fournir à la Ville, sur demande, des enrobés à froid, (pour le lot 1), d'une durée de 18 mois, pour une somme maximale de 527 746,58 $, taxes incluses, conformément aux documents de l'appel d'offres public 26-21468 (5 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=374",
+   "source": "sommaire",
+   "puces": [
+    "La Ville confie à Construction DJL inc. la fourniture d'enrobés à froid en vrac (lot 1) pour un maximum de 458 910,07 $, taxes incluses, plus 68 836,51 $ pour les variations de quantités — soit 527 746,58 $ au total.",
+    "L'entente dure 18 mois, sans possibilité de prolongation, et la Ville ne s'engage à acheter aucune quantité précise.",
+    "Ces enrobés servent au colmatage des nids-de-poule et aux réparations ponctuelles de chaussée faites par les équipes des travaux publics.",
+    "Deux autres ententes sont recommandées au comité exécutif : Tech-Mix (Bau-Val) pour les enrobés en sacs (144 055,40 $) et Multiflexx pour les enrobés réactifs à l'eau (191 205,55 $). Valeur totale estimée des trois ententes : 913 296,67 $.",
+    "Les dépenses seront payées à même les budgets des arrondissements, selon leurs besoins.",
+    "L'appel d'offres public 26-21468 a reçu 5 soumissions sur 7 preneurs de documents; l'offre de DJL dépasse l'estimation de la Ville de 11,41 %.",
+    "Le prix des enrobés en vrac sera ajusté chaque mois selon le coût du bitume; les prix des sacs et des enrobés réactifs à l'eau restent fixes."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "527 746,58 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.883Z",
+   "jetons": {
+    "entree": 7692,
+    "sortie": 586
+   }
+  },
+  {
+   "id": "CM26 1059",
+   "numero": null,
+   "resolution": "CM26 1059",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Accorder un contrat à J.N.A. Leblanc Électrique inc., pour les travaux électriques en régie contrôlée sur les équipements de la Direction de l'épuration des eaux usées, pour une période de 24 mois - Dépense totale de 775 559,72 $, taxes incluses - Appel d'offres public DEEU-SP2638- 167032-C (7 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=21",
+   "source": "resolution",
+   "puces": [
+    "La Ville accorde un contrat de travaux électriques à l'entreprise J.N.A. Leblanc Électrique inc.",
+    "Les travaux visent les équipements de la Direction de l'épuration des eaux usées, pour une période de 24 mois.",
+    "La dépense totale s'élève à 775 559,72 $, taxes incluses.",
+    "L'entreprise a été retenue comme plus bas soumissionnaire conforme, parmi 7 soumissions reçues à l'appel d'offres public.",
+    "La Ville évaluera le rendement de l'entreprise."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "775 559,72 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.883Z",
+   "jetons": {
+    "entree": 2057,
+    "sortie": 288
+   }
+  },
+  {
+   "id": "CM26 1083",
+   "numero": null,
+   "resolution": "CM26 1083",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Renouveler le mandat d'Éliane Roko à titre d'administratrice indépendante au sein du conseil d'administration du Réseau de transport métropolitain pour une période de quatre ans",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=39",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal donne son appui au renouvellement du mandat d'Éliane Roko comme administratrice indépendante au conseil d'administration du Réseau de transport métropolitain.",
+    "Le mandat est renouvelé pour une période de quatre ans.",
+    "Le document ne mentionne aucune somme d'argent ni aucun motif à l'appui de la décision."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.883Z",
+   "jetons": {
+    "entree": 1752,
+    "sortie": 217
+   }
+  },
+  {
+   "id": "CM26 1043",
+   "numero": null,
+   "resolution": "CM26 1043",
+   "date": "2026-10-19",
+   "unite": "Service du greffe",
+   "objet": "Dépôt du rapport de la Commission sur l'inspecteur général intitulé « Étude des rapports de recommandations à la suite d'une enquête sur la sous-traitance dans l'exécution de contrats de collecte et de transport des matières résiduelles découlant de l'appel d'offres 23-19726 dans les arrondissements Saint-Laurent et Villeray–Saint-Michel–Parc-Extension » Le conseiller Denis Pelletier, à titre de président de cette commission, dépose le rapport de la Commission sur l'inspecteur général intitulé « Étude des rapports de recommandations à la suite d’une enquête sur la sous-traitance dans l’exécution de contrats de collecte et de transport des matières résiduelles découlant de l’appel d’offres",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=12",
+   "source": "resolution",
+   "puces": [
+    "Le président de la Commission sur l'inspecteur général dépose un rapport au conseil.",
+    "Le rapport porte sur une enquête concernant la sous-traitance dans des contrats de collecte et de transport des matières résiduelles (appel d'offres 23-19726), dans les arrondissements Saint-Laurent et Villeray–Saint-Michel–Parc-Extension.",
+    "Le conseil réunit aussi plusieurs points de l'ordre du jour pour les étudier ensemble; aucune autre décision n'est prise."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.883Z",
+   "jetons": {
+    "entree": 2117,
+    "sortie": 270
+   }
+  },
+  {
+   "id": "CM26 1072",
+   "numero": null,
+   "resolution": "CM26 1072",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Accorder sept contrats de services professionnels de gré à gré, à différents organismes pour la mise en œuvre du Programme d'interventions spécialisées en campement (PISC) - Dépense totale de 3 025 000 $, taxes incluses / Approuver les projets de convention de services à cet effet / Autoriser pour l'ensemble du PISC un virement budgétaire de 3 130 144 $ en 2027, de 3 174 742 $ en 2028 et de 3 205 346 $ en 2029 en provenance du Bureau de la lutte à l'itinérance vers le Service de la diversité et de l'inclusion sociale",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=30",
+   "source": "resolution",
+   "puces": [
+    "La Ville accorde sept contrats de gré à gré, totalisant 3 025 000 $ taxes incluses, à des organismes qui interviennent dans les campements (Programme d'interventions spécialisées en campement).",
+    "Les montants maximaux par organisme : Action jeunesse de l'Ouest-de-l'Île 750 000 $, Le sac à dos (Action-Réinsertion) 650 000 $, Plein milieu 650 000 $, Multi Caf 325 000 $.",
+    "Aussi : Maison des jeunes de LaSalle 243 750 $, Société Ressources-Loisirs de Pointe-aux-Trembles 243 750 $ et le Collectif d'action pour le trouble d'accumulation compulsive 162 500 $.",
+    "Le conseil approuve les conventions de services qui fixent les conditions de versement de l'argent à chaque organisme.",
+    "Pour financer l'ensemble du programme, la Ville transfère 3 130 144 $ en 2027, 3 174 742 $ en 2028 et 3 205 346 $ en 2029 du Bureau de la lutte à l'itinérance vers le Service de la diversité et de l'inclusion sociale."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 025 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.884Z",
+   "jetons": {
+    "entree": 2581,
+    "sortie": 504
+   }
+  },
+  {
+   "id": "1267409008",
+   "numero": "1267409008",
+   "resolution": "CM26 1112",
+   "date": "2026-10-19",
+   "unite": "Service de l'urbanisme et de la mobilité, Direction des grands projets de",
+   "objet": "Autoriser le dépôt de quatre demandes d'aide financière au ministère des Transports et de la Mobilité durable dans le cadre de l'appel à projet 2027-2028 du Programme d'aide financière au développement des transports actifs dans les périmètres urbains pour les projets du Pôle Gadbois, du réaménagement de la rue Notre-Dame Ouest, du lien cyclable Sunnybrooke entre la rue Cérès et la rue Lucerne, et du projet Wellington",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1243",
+   "source": "sommaire",
+   "puces": [
+    "La Ville demande quatre subventions au ministère des Transports et de la Mobilité durable, dans un programme qui finance la marche et le vélo en milieu urbain (appel à projets 2027-2028).",
+    "Projet Pôle Gadbois : réaménagement complet du chemin de la Côte-Saint-Paul entre la rue Notre-Dame Ouest et l'autoroute 15, avec trottoirs, saillies, arrêts d'autobus accessibles et piste cyclable protégée.",
+    "Rue Notre-Dame Ouest : trottoir, piste cyclable bidirectionnelle, station BIXI électrifiée et voie réservée au transport collectif.",
+    "Boulevard Sunnybrooke : 310 m de piste cyclable bidirectionnelle protégée entre les rues Cérès et de Lucerne, reliée à la station du REM Sunnybrooke.",
+    "Rue Wellington : 200 m de lien cyclable bidirectionnel entre les rues Bridge et de Condé, avec sécurisation des intersections du secteur Bridge/Wellington.",
+    "Le programme peut couvrir 50 % des dépenses admissibles (jusqu'à 1 000 000 $/km pour un nouveau lien cyclable); la Ville paie au moins l'autre moitié et 100 % des dépenses non admissibles.",
+    "La demande doit être déposée au plus tard le 9 octobre 2026; les projets sont prévus en 2027-2028."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.884Z",
+   "jetons": {
+    "entree": 7592,
+    "sortie": 593
+   }
+  },
+  {
+   "id": "CM26 1126",
+   "numero": null,
+   "resolution": "CM26 1126",
+   "date": "2026-10-19",
+   "unite": "Service du greffe, Direction",
+   "objet": "Motion de l'Opposition officielle - Pour le dépôt simultané de l'évolution anticipée de l'état des actifs lors de la présentation du budget et du Programme décennal d'immobilisations (PDI) afin de garantir une meilleure transparence des effets du PDI sur l'état des actifs de la Ville de Montréal",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=64",
+   "source": "resolution",
+   "puces": [
+    "L'Opposition officielle demande que la Ville dépose l'évolution anticipée de l'état de ses actifs en même temps que le budget et le Programme décennal d'immobilisations (PDI).",
+    "But invoqué : montrer clairement quels effets les investissements du PDI auront sur l'état des infrastructures de la Ville.",
+    "La motion rappelle que la Ville possède et gère rues, trottoirs, conduites d'eau, bâtiments municipaux, parcs, infrastructures sportives et équipements collectifs.",
+    "Elle lie la pérennité de ces actifs à la qualité des services, à la sécurité du public, à l'endettement de la Ville et au taux de taxation.",
+    "Elle décrit le PDI, instauré en 2021, comme le principal outil de planification des investissements pour entretenir, réhabiliter, remplacer et développer les actifs.",
+    "Le texte fourni s'interrompt avant l'énoncé complet de la décision : la suite du dispositif n'y figure pas."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.884Z",
+   "jetons": {
+    "entree": 2215,
+    "sortie": 432
+   }
+  },
+  {
+   "id": "CM26 1076",
+   "numero": null,
+   "resolution": "CM26 1076",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Autoriser un budget additionnel de 470 730,17 $ de dépenses équivalent au revenu additionnel au Service de police de la Ville de Montréal, pour 2026, en provenance du ministère de la Sécurité intérieure permettant de transformer les produits de la criminalité en leviers d'action concrets pour renforcer la sécurité publique",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=33",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal autorise un budget additionnel de 470 730,17 $ pour le Service de police de la Ville de Montréal, pour l'année 2026.",
+    "Cette somme vient du ministère de la Sécurité intérieure et provient des produits de la criminalité, destinés à des actions de sécurité publique.",
+    "La dépense est entièrement couverte par ce revenu additionnel : le montant des dépenses autorisées égale le montant reçu.",
+    "Les revenus et les dépenses seront imputés selon les informations financières du dossier décisionnel.",
+    "La décision a été prise à la séance ordinaire du conseil municipal du lundi 19 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "470 730,17 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.884Z",
+   "jetons": {
+    "entree": 1995,
+    "sortie": 325
+   }
+  },
+  {
+   "id": "CM26 1057",
+   "numero": null,
+   "resolution": "CM26 1057",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Approuver le projet d'addenda 1 à la convention de contribution financière entre la Ville et Mission Old Brewery, provenant des contributions issues du volet social du Règlement visant à améliorer l'offre en matière de logement social, abordable et familial en complément du soutien financier reçu dans le cadre du Fonds capital pour TOIT du Fonds de solidarité FTQ, afin de bonifier de 475 000 $ le montant de la contribution financière, pour la construction d'un immeuble situé au 1685 à 1693, avenue de l'Église, dans l'arrondissement du Sud-Ouest",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=20",
+   "source": "resolution",
+   "puces": [
+    "La Ville ajoute 475 000 $ à sa contribution financière à la Mission Old Brewery.",
+    "L'argent sert à construire un immeuble situé aux 1685 à 1693, avenue de l'Église, dans l'arrondissement du Sud-Ouest.",
+    "Les fonds proviennent du volet social du Règlement visant à améliorer l'offre en matière de logement social, abordable et familial.",
+    "Cette aide s'ajoute au soutien reçu du Fonds capital pour TOIT du Fonds de solidarité FTQ.",
+    "La directrice du Service de la stratégie immobilière et de l'habitation est autorisée à signer un acte hypothécaire de 3e rang en faveur de la Ville et la mainlevée de l'hypothèque initiale."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "475 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.884Z",
+   "jetons": {
+    "entree": 2369,
+    "sortie": 359
+   }
+  },
+  {
+   "id": "1267271001",
+   "numero": "1267271001",
+   "resolution": "CM26 1117",
+   "date": "2026-10-19",
+   "unite": "Service de l'eau, Direction de la gestion des actifs",
+   "objet": "Avis de motion et dépôt - Règlement modifiant le Règlement sur les branchements aux réseaux d'aqueduc et d'égout publics et sur la gestion des eaux pluviales (20-030) AVIS DE MOTION ET DÉPÔT D’UN PROJET DE RÈGLEMENT Avis de motion est donné par Alexandre Devaux-Guizani de l’inscription pour adoption à une assemblée subséquente du conseil municipal du projet de règlement intitulé « Règlement modifiant le Règlement sur les branchements aux réseaux d'aqueduc et d'égout publics et sur la gestion des eaux pluviales (20-030) », lequel est déposé avec le dossier décisionnel.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1339",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil municipal annonce (avis de motion) qu'il adoptera plus tard un règlement modifiant les règles sur les branchements d'aqueduc et d'égout et la gestion des eaux de pluie, en vigueur dans les 19 arrondissements.",
+    "Le taux de rejet d'eaux pluviales serait modifié pour le bassin du Golf, à Anjou.",
+    "Les immeubles dont la surface perméable dépasse 20 % de la superficie du toit devraient diriger l'eau de pluie du toit vers ces surfaces perméables, à au moins 1,5 mètre des fondations, ou vers un ouvrage d'infiltration ou un réservoir de récupération.",
+    "Plusieurs articles préciseraient qu'un propriétaire qui néglige de faire les travaux ou de transmettre les documents demandés commet une infraction chaque jour de retard.",
+    "La Ville pourrait exiger tout document lié à l'application du règlement, et non seulement ceux sur l'état et l'entretien d'un branchement.",
+    "Selon le Service de l'eau, les taux de rejet visent les immeubles privés de plus de 1 000 m² de surfaces imperméables, pour réduire les risques d'inondations et de refoulements.",
+    "Avis de motion le 19 octobre 2026, adoption prévue le 16 novembre 2026. Aucun impact financier selon le dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.884Z",
+   "jetons": {
+    "entree": 8009,
+    "sortie": 568
+   }
+  },
+  {
+   "id": "CM26 1128",
+   "numero": null,
+   "resolution": "CM26 1128",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "AJOUT - Motion de l'Opposition officielle - Motion d'urgence visant la tenue d'un comité plénier sur les allégations graves visant le SPVM",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=75",
+   "source": "resolution",
+   "puces": [
+    "L'Opposition officielle dépose une motion d'urgence pour que le conseil municipal tienne un comité plénier sur des allégations visant le SPVM.",
+    "La motion rappelle que plusieurs allégations graves contre des membres du SPVM ont été rendues publiques ces derniers mois.",
+    "Elle vise notamment des allégations d'actes discriminatoires et racistes au poste de quartier 39.",
+    "Selon le texte, ces allégations ont mené au démantèlement d'une équipe complète, à la suspension de plusieurs policiers et à des enquêtes administratives et criminelles.",
+    "La motion invoque le rôle de surveillance du conseil envers le SPVM et la confiance du public envers les institutions municipales.",
+    "Le texte fourni s'arrête avant le dispositif complet : le détail de ce qui est décidé n'y figure pas."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.884Z",
+   "jetons": {
+    "entree": 2110,
+    "sortie": 383
+   }
+  },
+  {
+   "id": "CM26 1077",
+   "numero": null,
+   "resolution": "CM26 1077",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Autoriser le dépôt d'une demande de subvention au Fonds pour les infrastructures naturelles du gouvernement du Canada / Approuver l'entente de contribution pour le projet « développement du parc Frédéric-Back », situé dans le Complexe environnemental de Saint-Michel",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=34",
+   "source": "resolution",
+   "puces": [
+    "Le conseil autorise la Ville à déposer une demande de subvention au Fonds pour les infrastructures naturelles du gouvernement du Canada.",
+    "La demande vise le projet de « développement du parc Frédéric-Back », dans le Complexe environnemental de Saint-Michel.",
+    "Le conseil approuve l'entente de contribution à conclure entre le gouvernement du Canada, représenté par le ministre de l'Infrastructure et des Collectivités, et la Ville de Montréal.",
+    "Le texte ne précise aucun montant ni échéancier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.884Z",
+   "jetons": {
+    "entree": 1923,
+    "sortie": 282
+   }
+  },
+  {
+   "id": "CM26 1058",
+   "numero": null,
+   "resolution": "CM26 1058",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Approuver les addendas 1 aux conventions de contribution financière entre la Ville et trois différents organismes (CG25 0507), pour prolonger la durée des conventions au 31 décembre 2027 et pour un soutien financier additionnel total de 860 692 $, majorant ainsi le montant total des contributions financières à 1 560 011 $, dans le cadre du budget d'agglomération du Service de la diversité et de l'inclusion sociale et du Bureau de la lutte à l'itinérance",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=21",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge jusqu'au 31 décembre 2027 ses ententes de financement avec trois organismes qui opèrent des navettes liées à l'itinérance.",
+    "Elle ajoute 860 692 $ à ces ententes, ce qui porte le total des contributions à 1 560 011 $.",
+    "Projets Autochtones du Québec reçoit 333 551 $ de plus pour sa navette communautaire autochtone, pour un total de 604 851 $.",
+    "La Mission Old Brewery reçoit 372 293 $ de plus pour son projet Navette 2026-2028, pour un total de 668 012 $.",
+    "L'Amour en action Syl Dan reçoit 154 848 $ de plus pour la Navette du Nord, pour un total de 287 148 $.",
+    "L'argent vient du budget d'agglomération du Service de la diversité et de l'inclusion sociale (2026) et du Bureau de la lutte à l'itinérance (2027)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "860 692 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.884Z",
+   "jetons": {
+    "entree": 2236,
+    "sortie": 423
+   }
+  },
+  {
+   "id": "1267935001",
+   "numero": "1267935001",
+   "resolution": "CM26 1099",
+   "date": "2026-10-19",
+   "unite": "Bureau des relations gouvernementales et internationales et du protocole",
+   "objet": "Accepter l'offre de services de la Division des services techniques et du soutien logistique aux er installations de l'arrondissement de Mercier–Hochelaga-Maisonneuve, du 1 janvier 2027 au 31 décembre 2028, conformément à l'article 85 de la Charte de la Ville de Montréal, métropole du Québec (RLRQ, c. C-11.4)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1026",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil municipal accepte que la Division des services techniques et du soutien logistique aux installations (DSTSLI), de l'arrondissement Mercier–Hochelaga-Maisonneuve, serve la Direction générale adjointe – Développement et affaires institutionnelles du 1er janvier 2027 au 31 décembre 2028.",
+    "La DSTSLI fournira le montage et le démontage pour les séances du conseil, les conférences de presse et les accueils protocolaires, avec accès à plus de 20 000 pièces d'équipement, à de la menuiserie, au transport de matériel et à une scène mobile.",
+    "Pour 2027, les frais sont fixés à 12 700 $ : un budget de base de 12 100 $ plus 600 $ d'indexation. Le montant de 2028 sera ajusté selon les interventions réalisées en 2026.",
+    "L'unité du protocole administre l'entente et en assume les frais; une reddition de comptes est prévue chaque année.",
+    "La Ville explique que le Service du greffe, le Service des communications et l'unité du protocole n'ont pas les ressources humaines et matérielles pour faire ces installations eux-mêmes et devraient autrement engager des ressources externes."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "12 700 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.884Z",
+   "jetons": {
+    "entree": 6834,
+    "sortie": 511
+   }
+  },
+  {
+   "id": "CM26 1071",
+   "numero": null,
+   "resolution": "CM26 1071",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Prendre connaissance du rapport de la Commission sur l'examen des contrats Approuver le projet d'acte par lequel la Ville acquiert de 9399-8532 Québec inc., à des fins de réalisation de logements sociaux et abordable, un terrain vacant connu et désigné comme étant le lot 6 724 675, du cadastre du Québec, circonscription foncière de Montréal, situé dans l'arrondissement de Ville-Marie, d'une superficie de 1 850 mètres carrés, pour le prix de 3 233 628 $, plus les taxes applicables / Approuver le projet d'acte par lequel la Ville cède à la SHDM, à des fins de logement social ou abordable, ledit lot 6 724 675, sans contrepartie financière",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=29",
+   "source": "resolution",
+   "puces": [
+    "La Ville achète de l'entreprise 9399-8532 Québec inc. un terrain vacant de 1 850 mètres carrés dans Ville-Marie, au prix de 3 233 628 $ plus taxes.",
+    "Le terrain doit servir à construire des logements sociaux et abordables.",
+    "La Ville cède ensuite ce même terrain à la Société d'habitation et de développement de Montréal (SHDM), gratuitement, pour du logement social ou abordable.",
+    "La signature de l'acte d'achat est conditionnelle à la publication d'un avis de décontamination au registre foncier.",
+    "Elle est aussi conditionnelle à une entente entre le promoteur et la SHDM sur le nivellement et le compactage des sols.",
+    "Le conseil prend connaissance du rapport de la Commission sur l'examen des contrats et retire le terrain du domaine public."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 233 628 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.884Z",
+   "jetons": {
+    "entree": 2668,
+    "sortie": 393
+   }
+  },
+  {
+   "id": "1267063001",
+   "numero": "1267063001",
+   "resolution": "CM26 1088",
+   "date": "2026-10-19",
+   "unite": "Service de la culture_des sports et des loisirs, Direction des sports",
+   "objet": "Accorder un contrat de gré à gré à Para-Sol Design s.e.n.c., pour les services professionnels en conception et en réalisation d'une expérience muséale de « Sentier pieds nus - Les pieds sur terre » au Jardin botanique de Montréal - Dépense totale de : 293 146,02 $, taxes incluses / Approuver le projet de convention à cet effet",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=447",
+   "source": "sommaire",
+   "puces": [
+    "La Ville accorde un contrat de gré à gré de 270 151,02 $ (taxes incluses) à Para-Sol Design s.e.n.c. pour concevoir et réaliser un « Sentier pieds nus – Les pieds sur terre » au Jardin botanique, plus 22 995 $ de contingences, soit 293 146,02 $ au total.",
+    "L'installation sera aménagée dans une section de l'Arboretum : des textures variées à parcourir pieds nus, des pergolas d'animation, une zone pour déposer ses souliers et se nettoyer les pieds.",
+    "Le contrat couvre la conception, la fabrication, l'installation, l'entretien et le démontage; les composantes sont prévues pour durer deux ans.",
+    "Ouverture au public du 24 juin au 22 août 2027, avec démontage à la fin août 2027.",
+    "Deux animations scientifiques sur le sol vivant et les sens accompagneront le parcours.",
+    "Les personnes à mobilité réduite ou avec poussette pourront suivre l'expérience sur le sentier de poussière de pierre adjacent.",
+    "La dépense est assumée entièrement par la ville centre et répartie sur 2026 (20 695,50 $) et 2027 (249 455,52 $ plus contingences)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "293 146,02 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.884Z",
+   "jetons": {
+    "entree": 7637,
+    "sortie": 534
+   }
+  },
+  {
+   "id": "CM26 1073",
+   "numero": null,
+   "resolution": "CM26 1073",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Approuver le projet d'addenda 1 à la convention de services professionnels intervenue de gré à gré entre la Ville et Mission Old Brewery (CG26 0472), pour prolonger la durée de la convention au 29 janvier 2027 et autoriser une dépense additionnelle de 176 220 $, taxes incluses, majorant ainsi le montant total du contrat à 325 740 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=31",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge jusqu'au 29 janvier 2027 son contrat de services professionnels conclu de gré à gré avec la Mission Old Brewery.",
+    "Elle autorise une dépense additionnelle de 176 220 $, taxes incluses.",
+    "Le contrat total passe ainsi à 325 740 $, taxes incluses.",
+    "La dépense sera imputée selon les informations financières du dossier décisionnel.",
+    "Il s'agit d'une orientation adressée au conseil municipal."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "176 220 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 2020,
+    "sortie": 266
+   }
+  },
+  {
+   "id": "1268682010",
+   "numero": "1268682010",
+   "resolution": "CM26 1090",
+   "date": "2026-10-19",
+   "unite": "Service de la stratégie immobilière et de l'habitation",
+   "objet": "Approuver le contrat de prêt de locaux par lequel la Ville prête, à titre gratuit, à Culture Montréal, er pour une période de quatre ans, à compter du 1 décembre 2026, les locaux 314, 315 et 317 situés au 3680, rue Jeanne-Mance, dans l'arrondissement du Plateau-Mont-Royal, d'une superficie d'environ 185,35 mètres carrés (1 995,08 pieds carrés), à des fins d'activités socioculturelles. Le montant total de la subvention immobilière est estimé à 199 510,76 $ (Bâtiment 2453-104)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=559",
+   "source": "sommaire",
+   "puces": [
+    "La Ville prête gratuitement à l'organisme Culture Montréal trois locaux (314, 315 et 317) au 3680, rue Jeanne-Mance, dans le Plateau-Mont-Royal.",
+    "Le prêt dure quatre ans, du 1er décembre 2026 au 30 novembre 2030, pour des activités socioculturelles.",
+    "Les locaux totalisent environ 185,35 m² (1 995,08 pi²) au 3e étage du Centre Strathearn.",
+    "La valeur du loyer non perçu est estimée à 199 510,76 $ sur quatre ans, soit 49 877,69 $ par année.",
+    "Culture Montréal paie l'aménagement, l'entretien ménager, les réparations locatives et les taxes applicables; la Ville garde à sa charge la structure et les systèmes mécaniques, électriques et de plomberie.",
+    "La Ville assume environ 11 193,29 $ de frais d'exploitation (énergie, entretien courant) pour 2026.",
+    "L'organisme a été prévenu que la Ville prévoit des travaux de réfection de la toiture, qui peuvent causer des nuisances, des interruptions de services et une inoccupation temporaire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "199 510,76 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 8046,
+    "sortie": 509
+   }
+  },
+  {
+   "id": "1267608001",
+   "numero": "1267608001",
+   "resolution": "CM26 1110",
+   "date": "2026-10-19",
+   "unite": "Direction générale, Direction générale adjointe - Qualité de vie",
+   "objet": "Prolonger, conformément à l'article 85.5 de la Charte de la Ville de Montréal, métropole du Québec (RLRQ, c. C-11.4), pour une période de trois ans, la déclaration de compétence du conseil municipal quant à la mise en œuvre des obligations qui incombent à la Ville en vertu de la Charte de la langue française (RLRQ, c. C-11)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1227",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil municipal prolonge de 3 ans sa prise en charge centralisée des obligations de la Ville liées à la Charte de la langue française, au lieu de laisser chaque arrondissement s'en occuper.",
+    "Sans cette prolongation, chacun des 19 arrondissements devrait adopter sa propre directive sur l'usage d'une autre langue que le français.",
+    "La Ville garde une seule directive, une seule procédure de traitement des plaintes et un seul rapport annuel transmis au ministère de la Langue française.",
+    "La directive prévoit des exceptions où une autre langue peut être utilisée : santé, sécurité publique, justice naturelle, services touristiques, personnes autochtones, personnes immigrantes depuis moins de 6 mois et personnes admissibles à l'école anglaise.",
+    "Une section spéciale de la directive vise Pierrefonds-Roxboro, seul arrondissement reconnu bilingue.",
+    "Le Bureau de la langue française reste le coordonnateur pour les services centraux et les arrondissements; le taux de plaintes traitées est passé de 83,3 % en 2024 à 95,2 % en 2025.",
+    "La Ville indique que la prolongation n'entraîne aucun coût additionnel."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 7052,
+    "sortie": 517
+   }
+  },
+  {
+   "id": "CM26 1069",
+   "numero": null,
+   "resolution": "CM26 1069",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Exercer l'option de la deuxième prolongation de 12 mois / Autoriser une dépense additionnelle de 1 441 569,91 $, taxes incluses, pour les services d'entretien préventif et correctif de portes de garage industrielles dans divers bâtiments de la Ville dans le cadre des contrats accordés à Les portes JPR inc. (CG23 0409), majorant ainsi le montant total du contrat à 5 792 510,91 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=28",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge de 12 mois, une deuxième fois, ses contrats d'entretien des portes de garage industrielles avec l'entreprise Les portes JPR inc.",
+    "Elle autorise une dépense additionnelle de 1 441 569,91 $, taxes incluses, ce qui porte le contrat total à 5 792 510,91 $.",
+    "De ce montant, 1 201 308,26 $ vont aux services eux-mêmes, répartis sur 7 lots allant de 86 114,38 $ à 225 525,80 $.",
+    "Un budget de contingences de 240 261,66 $ est aussi autorisé.",
+    "Les travaux couvrent l'entretien préventif et correctif dans divers bâtiments de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 441 569,91 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 2261,
+    "sortie": 351
+   }
+  },
+  {
+   "id": "1266924002",
+   "numero": "1266924002",
+   "resolution": "CM26 1119",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Avis de motion et dépôt - Règlement modifiant le Règlement intérieur du conseil de la Ville sur la délégation de pouvoirs du conseil de la ville au comité exécutif en matière d'aménagement, d'urbanisme et de patrimoine (15-077) AVIS DE MOTION ET DÉPÔT D’UN PROJET DE RÈGLEMENT Avis de motion est donné par Alexandre Devaux-Guizani de l’inscription pour adoption à une assemblée subséquente du conseil municipal du projet de règlement intitulé « Règlement modifiant le Règlement intérieur du conseil de la ville sur la délégation de pouvoirs du conseil de la ville au comité exécutif en matière d'aménagement, d'urbanisme et de patrimoine (15-077) », lequel est déposé avec le dossier décisionnel.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1380",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil municipal annonce qu'il adoptera plus tard un règlement sur les démolitions d'immeubles patrimoniaux : c'est un avis de motion, pas encore une adoption.",
+    "Depuis une loi québécoise de 2021, quand un comité de démolition ou un conseil d'arrondissement autorise la démolition d'un immeuble patrimonial, le conseil municipal a 90 jours pour renverser cette décision.",
+    "Aucun permis de démolition d'un immeuble patrimonial ne peut être délivré avant que le conseil municipal se prononce ou que les 90 jours soient écoulés.",
+    "Le règlement proposé confierait au comité exécutif les dossiers où la démolition n'a pas à être bloquée, pour raccourcir les délais de traitement.",
+    "Le conseil municipal garderait pour lui le pouvoir de bloquer une démolition quand un renversement est recommandé.",
+    "La Ville prévoit ensuite que le comité exécutif confie ces mêmes dossiers au directeur responsable du patrimoine, par un règlement à venir."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 8017,
+    "sortie": 462
+   }
+  },
+  {
+   "id": "1263074029",
+   "numero": "1263074029",
+   "resolution": "CM26 1113",
+   "date": "2026-10-19",
+   "unite": "Service des finances et de l'évaluation foncière",
+   "objet": "Adopter les modalités encadrant le versement des avances prévues à l'article 31.5.5.1 de la Loi sur le traitement des élus municipaux",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1277",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil municipal met en place, pour 2026, un système d'avances de fonds aux conseillers pour leurs dépenses de recherche et de soutien : jusqu'ici, ces sommes n'étaient remboursées qu'après coup, sur présentation de pièces justificatives.",
+    "Une seule avance par conseiller est permise, limitée au moindre de 1/6 du montant maximal annuel auquel il a droit ou de son solde budgétaire disponible.",
+    "Le conseil autorise le versement d'avances totalisant 290 397,58 $ pour l'exercice 2026 aux élues et élus admissibles.",
+    "Les montants varient selon le conseil : 4 676,91 $ pour un conseiller de ville, 2 338,45 $ pour un conseiller d'arrondissement.",
+    "Chaque conseiller doit produire une reddition de comptes avec pièces justificatives et rembourser toute somme non admissible, non utilisée ou versée en trop ; la Ville conserve son pouvoir de recouvrement.",
+    "Un représentant officiel de parti politique peut demander, recevoir et administrer les avances au nom des conseillers s'il a un mandat de gestion.",
+    "Échéancier : demandes jusqu'au 4 novembre 2026, dépenses admissibles jusqu'au 31 décembre 2026, redditions de comptes au 31 janvier 2027 et vérifications en février 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "290 397,58 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 7956,
+    "sortie": 578
+   }
+  },
+  {
+   "id": "CM26 1070",
+   "numero": null,
+   "resolution": "CM26 1070",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Approuver le projet d'acte par lequel la Ville acquiert de Église de la Pentecôte Evangel, un immeuble, correspondant au lot 1 064 535, du cadastre du Québec, d'une superficie de 858,9 mètres carrés, situé au 2152-2154, rue Sainte-Catherine Ouest, dans l'arrondissement de Ville-Marie, à des fins d'habitation et d'hébergement destiné aux personnes en situation de vulnérabilité, pour la somme de 7 500 000 $, plus les taxes applicables / Autoriser un budget de revenus et de dépenses équivalents, soit 10 500 $ en 2026 et 126 000 $ en 2027, et ce, jusqu'à la revente de l'immeuble",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=29",
+   "source": "resolution",
+   "puces": [
+    "La Ville achète un immeuble de l'Église de la Pentecôte Evangel, au 2152-2154, rue Sainte-Catherine Ouest, dans Ville-Marie, pour 7 500 000 $ plus les taxes.",
+    "Le terrain visé fait 858,9 mètres carrés (lot 1 064 535).",
+    "L'immeuble servira à des fins d'habitation et d'hébergement pour des personnes en situation de vulnérabilité.",
+    "La Ville prévoit des revenus et des dépenses équivalents de 10 500 $ en 2026 et de 126 000 $ en 2027, jusqu'à la revente de l'immeuble.",
+    "Ces montants couvrent les revenus de loyer et les coûts de détention de l'immeuble.",
+    "La Ville autorise l'émission des chèques au vendeur ou à son notaire ou avocat en fidéicommis.",
+    "Elle autorise aussi la signature d'un contrat de services professionnels entre le vendeur et son fiduciaire, prévoyant des obligations en faveur de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "7 500 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 2599,
+    "sortie": 461
+   }
+  },
+  {
+   "id": "CM26 1046",
+   "numero": null,
+   "resolution": "CM26 1046",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Autoriser une dépense additionnelle de 65 765,70 $, taxes incluses, pour les travaux d'infrastructures (égout, aqueduc et préparation du terrain) liés à la poursuite de l'implantation d'habitations modulaires sur le site de l'ancien Hippodrome de Montréal, dans le cadre du contrat accordé à Loiselle inc. (CE25 0441), majorant ainsi le montant total du contrat à 677 412 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=14",
+   "source": "resolution",
+   "puces": [
+    "La Ville ajoute 65 765,70 $ (taxes incluses) au contrat de l'entreprise Loiselle inc.",
+    "L'argent sert aux travaux d'égout, d'aqueduc et de préparation du terrain sur le site de l'ancien Hippodrome de Montréal.",
+    "Ces travaux accompagnent la poursuite de l'implantation d'habitations modulaires sur le site.",
+    "Avec cet ajout, le contrat passe à 677 412 $, taxes incluses.",
+    "La dépense sera imputée selon les informations financières du dossier décisionnel."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "65 765,70 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 2063,
+    "sortie": 296
+   }
+  },
+  {
+   "id": "CM26 1082",
+   "numero": null,
+   "resolution": "CM26 1082",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Adoption - Règlement modifiant le Règlement concernant la quote-part tarifaire pour la fourniture de compteurs et la réalisation des activités déléguées afférentes (RCG 13-005)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=39",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal donne son orientation : adopter un règlement qui modifie le règlement sur la quote-part tarifaire pour la fourniture de compteurs et les activités déléguées qui s'y rattachent (RCG 13-005).",
+    "Le document ne précise ni les modifications apportées, ni les montants, ni les dates d'entrée en vigueur.",
+    "Il s'agit d'une prise de position du conseil municipal en vue de l'adoption du règlement, sans autre détail au dossier."
+   ],
+   "sansContenuSubstantiel": true,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 1772,
+    "sortie": 261
+   }
+  },
+  {
+   "id": "1269653006",
+   "numero": "1269653006",
+   "resolution": "CM26 1096",
+   "date": "2026-10-19",
+   "unite": "Service de la stratégie immobilière et de l'habitation",
+   "objet": "Approuver le projet de la quatrième convention de prolongation de bail par lequel la Ville loue à L'Office des congrès et du tourisme du grand Montréal inc., pour une période de trois ans, à er compter du 1 janvier 2027, des espaces au rez-de-chaussée de l'immeuble situé au 174, rue Notre-Dame Est, dans l'arrondissement de Ville-Marie, d'une superficie d'environ 50,35 mètres carrés (542 pieds carrés), à des fins de bureau touristique, pour un loyer total de 77 250 $, excluant les taxes (Bâtiment 8543-001)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=761",
+   "source": "sommaire",
+   "puces": [
+    "La Ville prolonge de trois ans le bail du bureau touristique de l'Office des congrès et du tourisme du grand Montréal, au 174, rue Notre-Dame Est, dans Ville-Marie.",
+    "La prolongation court du 1er janvier 2027 au 31 décembre 2029 et vise un local d'environ 50,35 m² (542 pi²) au rez-de-chaussée.",
+    "L'organisme versera à la Ville 77 250 $ pour les trois ans, soit 25 750 $ par année (2 145,83 $ par mois), avant taxes.",
+    "Le locataire s'occupe du déneigement, de l'entretien ménager, de l'aménagement, des réparations locatives et paie son énergie; la Ville garde la structure, la mécanique, l'électricité et la plomberie.",
+    "Chaque partie peut mettre fin à l'entente avec un préavis écrit d'au moins 90 jours.",
+    "La Ville prévoit environ 3 000 $ de frais d'entretien courant pour ce local en 2026.",
+    "Sans cette prolongation, le document indique que le locataire devrait cesser ses activités le temps de trouver un autre local."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "77 250 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 8251,
+    "sortie": 492
+   }
+  },
+  {
+   "id": "1268788007",
+   "numero": "1268788007",
+   "resolution": "CM26 1087",
+   "date": "2026-10-19",
+   "unite": "Service de la culture_des sports et des loisirs, Direction des sports",
+   "objet": "Accorder six contrats aux firmes Ramcor Construction inc., MWM équipement spécialisé et Les Entreprises Michaudville inc., pour la location d'équipements avec opérateur pour les opérations de déneigement, pour une période d'une saison hivernale pour l'arrondissement du Plateau-Mont- Royal, incluant une option de prolongation d'une saison hivernale - Dépense totale de 2 969 202,13 $, taxes incluses - Appel d'offres public 26-21544 (5 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=414",
+   "source": "sommaire",
+   "puces": [
+    "La Ville accorde six contrats de location d'équipements de déneigement avec opérateur pour l'arrondissement du Plateau-Mont-Royal : dépense totale de 2 969 202,13 $, taxes incluses.",
+    "Les Entreprises Michaudville inc. obtiennent quatre contrats (deux lots d'équipements de trottoirs, un tracteur-chargeur, une souffleuse), Ramcor Construction inc. deux tracteurs-chargeurs et MWM Équipement Spécialisé une niveleuse.",
+    "Les contrats couvrent une saison, du 1er novembre 2026 au 15 avril 2027, avec une option de prolongation d'une autre saison hivernale.",
+    "Le total inclut 439 881,80 $ de contingences et 329 911,34 $ pour les variations de quantités; la dépense est assumée par la ville centrale.",
+    "La Ville avait annulé les secteurs du Plateau-Mont-Royal d'un appel d'offres précédent, les prix étant jugés trop élevés, et opte pour une formule mixte entre équipes municipales et entreprises privées.",
+    "Seul soumissionnaire conforme pour le lot 2, Michaudville a négocié son prix à la baisse, de 675 501,12 $ à 580 508,78 $ (écart avec l'estimation ramené de 50,43 % à 29,28 %).",
+    "Cinq entreprises ont soumissionné sur onze qui avaient pris le cahier des charges; une soumission a été rejetée faute d'achat des documents sur le SEAO."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "2 969 202,13 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 7973,
+    "sortie": 627
+   }
+  },
+  {
+   "id": "CM26 1054",
+   "numero": null,
+   "resolution": "CM26 1054",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Approuver l'entente entre le ministre de l'Agriculture, des Pêcheries et de l'Alimentation du Québec et la Ville, relative à la communication de renseignements de nature personnelle et confidentielle concernant les exploitations agricoles situées sur le territoire de l'agglomération dans le but de favoriser le développement des activités agricoles ou la protection du territoire agricole",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=18",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal donne son accord à une entente entre la Ville de Montréal et le ministre de l'Agriculture, des Pêcheries et de l'Alimentation du Québec.",
+    "L'entente prévoit que le Ministère transmette à la Ville des renseignements personnels et confidentiels sur les exploitations agricoles.",
+    "Les renseignements visent les exploitations agricoles situées sur le territoire de l'agglomération de Montréal.",
+    "L'objectif inscrit au document : favoriser le développement des activités agricoles ou protéger le territoire agricole.",
+    "Le document ne mentionne aucune somme d'argent ni échéance."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 1954,
+    "sortie": 312
+   }
+  },
+  {
+   "id": "CM26 1062",
+   "numero": null,
+   "resolution": "CM26 1062",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Accorder un contrat à Innotex inc., pour la fourniture d'habits pour le combat incendie - Dépense totale de 3 299 207,63 $, taxes incluses - Appel d'offres public 26-21497 (1 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=23",
+   "source": "resolution",
+   "puces": [
+    "La Ville accorde à Innotex inc. un contrat pour fournir des habits de combat contre les incendies.",
+    "Le contrat vaut 3 299 207,63 $, taxes incluses, soit le prix de la soumission déposée.",
+    "Innotex inc. était la seule entreprise à soumissionner dans l'appel d'offres public 26-21497, et sa soumission a été jugée conforme.",
+    "La Ville évaluera le rendement d'Innotex inc. dans le cadre de ce contrat.",
+    "La décision a été prise à la séance ordinaire du conseil municipal du lundi 19 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 299 207,63 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 1945,
+    "sortie": 309
+   }
+  },
+  {
+   "id": "1269006002",
+   "numero": "1269006002",
+   "resolution": "CM26 1089",
+   "date": "2026-10-19",
+   "unite": "Service de la culture_des sports et des loisirs, Direction des sports",
+   "objet": "Approuver le projet de convention de location de local par lequel la Ville loue à l'Académie de baseball Canada, un local et des plateaux sportifs au Complexe sportif Claude-Robillard, pour la er réalisation de ses activités, du 1 novembre 2026 au 30 avril 2028 / Autoriser la réception de la somme estimée de 68 453,17 $, taxes incluses à cette fin / Autoriser un soutien technique de 117 568,25 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=519",
+   "source": "sommaire",
+   "puces": [
+    "La Ville loue à l'Académie de baseball Canada un bureau, un local d'entreposage et des plateaux sportifs du Complexe sportif Claude-Robillard, du 1er novembre 2026 au 30 avril 2028.",
+    "L'organisme versera à la Ville une somme estimée de 68 453,17 $, taxes incluses, facturée chaque trimestre selon l'utilisation réelle.",
+    "La Ville accorde une réduction de loyer de 117 568,25 $, taxes incluses : l'organisme paie 33 % du tarif régulier, qui serait autrement de 186 021,42 $.",
+    "Les locaux réservés incluent les cages des frappeurs (923 h/an), la salle omnisports (390 h), un gymnase simple (390 h) et la salle de lutte (130 h).",
+    "Le programme vise une quarantaine de joueurs de baseball de 16 à 19 ans; la Ville soutient l'organisme par des réductions tarifaires depuis 2021.",
+    "La Ville dit vouloir éviter que la hausse des coûts soit refilée aux athlètes."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "117 568,25 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 7793,
+    "sortie": 467
+   }
+  },
+  {
+   "id": "CM26 1081",
+   "numero": null,
+   "resolution": "CM26 1081",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Adoption - Règlement autorisant un emprunt de 10 430 000 $ pour le financement des travaux de mise à niveau de la Biosphère",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=38",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal adopte un règlement qui autorise la Ville à emprunter 10 430 000 $.",
+    "L'argent doit servir à financer des travaux de mise à niveau de la Biosphère.",
+    "La décision a été prise à la séance ordinaire du conseil municipal du lundi 19 octobre 2026.",
+    "Le texte ne précise pas la nature des travaux ni leur échéancier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "10 430 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 1755,
+    "sortie": 235
+   }
+  },
+  {
+   "id": "CM26 1050",
+   "numero": null,
+   "resolution": "CM26 1050",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Autoriser une dépense additionnelle de 14 251,38 $, taxes incluses, pour l'ajout des taxes applicables, dans le cadre du contrat accordé à Dyplex Communications ltd (CG26 0455), majorant ainsi le montant total du contrat à 164 265,93 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=16",
+   "source": "resolution",
+   "puces": [
+    "La Ville ajoute 14 251,38 $ au contrat déjà accordé à l'entreprise Dyplex Communications ltd, pour couvrir les taxes applicables.",
+    "Le contrat passe ainsi à 164 265,93 $, taxes incluses.",
+    "Le directeur de la Direction Sécurité publique et justice, au Service des technologies de l'information, est autorisé à signer les documents liés au contrat au nom de la Ville.",
+    "Le document ne précise pas la nature des biens ou services visés par le contrat."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "14 251,38 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 1965,
+    "sortie": 277
+   }
+  },
+  {
+   "id": "1269653007",
+   "numero": "1269653007",
+   "resolution": "CM26 1093",
+   "date": "2026-10-19",
+   "unite": "Service de sécurité incendie de Montréal, Direction stratégique et de la prévention incendie",
+   "objet": "Approuver le projet de contrat de prêt de locaux par lequel la Ville de Montréal prête, sans contrepartie financière, à la Société historique de Montréal, pour une période de cinq ans, à er compter du 1 janvier 2027, des locaux d'une superficie d'environ 169,55 mètres carrés (1 825 pieds carrés) situés aux étages et au sous-sol de l'édifice portant le numéro 462, place Jacques-Cartier, dans l'arrondissement de Ville-Marie. Le montant de la subvention immobilière octroyée pour la durée de l'entente est de 157 750 $ (Bâtiment 8543)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=697",
+   "source": "sommaire",
+   "puces": [
+    "La Ville prête gratuitement à la Société historique de Montréal des locaux de 1 825 pieds carrés (169,55 m²) au 462, place Jacques-Cartier, dans Ville-Marie.",
+    "Le prêt dure cinq ans, du 1er janvier 2027 au 31 décembre 2031, et ne peut pas être renouvelé automatiquement.",
+    "La valeur de cette subvention immobilière est estimée à 157 750 $ pour les cinq ans, soit 31 550 $ par année; le sous-sol est prêté sans valeur marchande.",
+    "L'organisme occupe les lieux gratuitement depuis le 1er décembre 1996; l'entente actuelle se termine le 31 décembre 2026.",
+    "La Société historique doit s'occuper du déneigement, de l'entretien ménager et des réparations liées à son usage; la Ville garde la structure, la mécanique, l'électricité et la plomberie.",
+    "Chaque partie peut mettre fin au contrat avec un préavis écrit de 90 jours.",
+    "La Ville prévoit environ 9 934,88 $ de frais d'exploitation pour ce local en 2026, payés par le Service de la gestion et de la planification des immeubles."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "157 750 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 7999,
+    "sortie": 512
+   }
+  },
+  {
+   "id": "1260474001",
+   "numero": "1260474001",
+   "resolution": "CM26 1102",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Majorer la dotation de l'arrondissement de Montréal-Nord, par l'entremise du passif environnemental des sols contaminés, pour un montant de 142 422,81 $, taxes nettes, pour les services de caractérisation environnementale Phase II des sols et des biogaz sur le lot 1 990 031 du cadastre du Québec, circonscription foncière de Montréal, situé dans l'arrondissement de Montréal-Nord (Friche Charleroi)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1082",
+   "source": "sommaire",
+   "puces": [
+    "Montréal-Nord veut transformer un terrain vague de la rue de Charleroi (près de la rue Massé), la « friche Charleroi », en parc avec des aires d'agriculture urbaine et un milieu humide restauré.",
+    "Le conseil municipal majore la dotation de l'arrondissement de 142 422,81 $ (taxes nettes), via le passif environnemental des sols contaminés; la dépense est assumée entièrement par la ville centrale.",
+    "L'arrondissement accorde un contrat de 129 976,28 $ (taxes incluses) à AtkinsRéalis Canada inc., plus 25 995,26 $ de contingences, pour un total de 155 971,54 $.",
+    "La firme doit caractériser les sols, les biogaz et l'eau souterraine : 8 puits d'observation, 28 tranchées d'exploration, 28 sondages et trois campagnes d'échantillonnage espacées d'environ un mois.",
+    "Le site a servi d'entrepôt et de dépôt de neiges usées; la loi provinciale exige ces études avant tout changement d'usage et l'autorisation du ministère de l'Environnement.",
+    "Des personnes en situation d'itinérance campent sur le terrain, désigné zone de tolérance; un périmètre de sécurité doit être installé autour des travaux.",
+    "Selon les résultats, l'arrondissement pourra inscrire de nouvelles dépenses au passif environnemental d'ici le 31 décembre 2026 pour réhabiliter les sols à partir de 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "142 422,81 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 7651,
+    "sortie": 621
+   }
+  },
+  {
+   "id": "1260606001",
+   "numero": "1260606001",
+   "resolution": "CM26 1092",
+   "date": "2026-10-19",
+   "unite": "Service de l'eau, Direction des réseaux d'eau",
+   "objet": "Accorder un contrat de gré à gré à CIBC Mellon Trust Company, pour l'émission des paiements de montant forfaitaire du Bureau des régimes de retraite de Montréal, pour une période de cinq ans, incluant une option de prolongation de 12 mois - Dépense totale de 296 307,83 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=690",
+   "source": "sommaire",
+   "puces": [
+    "La Ville accorde un contrat de gré à gré à CIBC Mellon Trust Company pour émettre les paiements forfaitaires des régimes de retraite de ses employés et ex-employés.",
+    "Le contrat vaut 257 658,98 $ taxes incluses, plus 38 648,85 $ prévus si les quantités varient, pour une dépense totale de 296 307,83 $.",
+    "Il couvre 5 ans à partir du 1er janvier 2027, avec une possibilité de prolonger de 12 mois (environ 51 531,80 $ de plus).",
+    "Les paiements visés sont versés après une cessation d'emploi, un divorce ou un décès : environ 2 000 paiements par année. Les rentes mensuelles des retraités ne sont pas incluses.",
+    "Le fournisseur émet aussi les relevés fiscaux et fournit des rapports permettant au Bureau des régimes de retraite de vérifier les sommes versées.",
+    "CIBC Mellon fait ce travail depuis juillet 2023; l'offre est inférieure de 0,90 % à l'estimation de la Ville.",
+    "La dépense est payée par la ville centrale, à même le budget de fonctionnement du Bureau des régimes de retraite."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "296 307,83 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 6710,
+    "sortie": 517
+   }
+  },
+  {
+   "id": "1264501002",
+   "numero": "1264501002",
+   "resolution": "CM26 1098",
+   "date": "2026-10-19",
+   "unite": "Service de la stratégie immobilière et de l'habitation",
+   "objet": "Prendre connaissance du rapport de la Commission permanente sur l'examen des contrats Approuver le projet d'acte de reconnaissance volontaire du droit de propriété aux termes duquel la Ville et la Société d'habitation et de développement de Montréal (SHDM) renoncent au bénéfice de 9399-8532 Québec inc., à tout droit qu'elles pourraient détenir relativement à un emplacement connu comme étant le site Molson dans l'arrondissement de Ville-Marie",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=849",
+   "source": "sommaire",
+   "puces": [
+    "La Ville achète du promoteur 9399-8532 Québec inc. un terrain vacant de 1 850 m² sur le site Molson, dans Ville-Marie, pour 3 233 628 $ plus taxes.",
+    "Elle cède ensuite ce même terrain gratuitement à la Société d'habitation et de développement de Montréal (SHDM), qui doit y réaliser du logement social ou abordable.",
+    "La SHDM possède déjà un terrain voisin; le regroupement des deux terrains doit servir au projet de logements.",
+    "La Ville et la SHDM renoncent à tout droit qu'elles pourraient encore détenir sur les lots du site Molson, afin de clarifier le titre de propriété du promoteur pour ses créanciers hypothécaires.",
+    "La signature de l'achat est conditionnelle à la publication d'un avis de décontamination et à une entente entre le promoteur et la SHDM sur le nivellement et le compactage des sols.",
+    "La Ville transfère 3 394 905,20 $ du budget de fonctionnement du Service de l'environnement vers le Service de l'urbanisme et de la mobilité, et vire 3 395 000 $ à l'interne dans son programme d'immobilisations 2026.",
+    "La dépense est assumée à 100 % par l'agglomération."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "3 233 628 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 7710,
+    "sortie": 540
+   }
+  },
+  {
+   "id": "CM26 1074",
+   "numero": null,
+   "resolution": "CM26 1074",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Autoriser le dépôt d'une demande d'aide financière au volet 2 du programme Accélérer la transition climatique locale / Attester que tous les projets de la programmation déposée en soutien à la demande respecteront les critères d'admissibilité et modalités du programme, notamment, et non limitativement, qu'ils sont issus d'un plan climat partiel ou complet approuvé par le ministère de l'Environnement, de la Lutte contre les changements climatiques, de la Faune et des Parcs",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=32",
+   "source": "resolution",
+   "puces": [
+    "La Ville autorise le dépôt d'une demande d'aide financière au volet 2 du programme gouvernemental Accélérer la transition climatique locale (ATCL).",
+    "Elle atteste que tous les projets soumis respectent les critères du programme, dont le fait d'être issus d'un plan climat approuvé par le ministère de l'Environnement.",
+    "L'agglomération de Montréal s'engage à respecter les conditions et modalités du programme.",
+    "Si l'aide est accordée, l'agglomération et les villes qui la composent paieront les coûts non admissibles, les dépassements de coûts, leur part des dépenses et l'entretien des infrastructures subventionnées.",
+    "Le greffier de la Ville est autorisé à signer les documents nécessaires au nom de l'agglomération.",
+    "Une copie certifiée de la résolution sera envoyée au ministère des Affaires municipales et de l'Habitation."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 2427,
+    "sortie": 401
+   }
+  },
+  {
+   "id": "1267883002",
+   "numero": "1267883002",
+   "resolution": "CM26 1091",
+   "date": "2026-10-19",
+   "unite": "Service de l'Espace pour la vie_des Grand parcs et du Mont-Royal, Direction gestion de",
+   "objet": "Accorder un soutien financier totalisant 463 450 $, en lien avec l'entente Réflexe 3 avec le gouvernement du Québec et un soutien technique estimé à 400 000 $ à quatre organismes dans le cadre de la Stratégie hivernale 2026-2027 / Autoriser un virement budgétaire de 463 450 $, en provenance du Service du développement économique vers le Service de la culture, des sports et des loisirs / Approuver les projets de conventions à cet effet",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=585",
+   "source": "sommaire",
+   "puces": [
+    "La Ville verse 463 450 $ à quatre organismes pour animer le centre-ville durant l'hiver 2026-2027, en plus d'un soutien technique évalué à 400 000 $ (occupation du domaine public, stationnement, remorquage).",
+    "Le Grand Marché de Noël de La Lutinerie reçoit 185 000 $ : marché extérieur avec près d'une centaine d'artisans à la Place des Festivals, du 13 novembre 2026 au 3 janvier 2027.",
+    "Le Grand Minuit de Montréal (Festival Igloo) reçoit 160 000 $ pour la fête du Nouvel An au Vieux-Port, le 31 décembre 2026.",
+    "Igloo Fête 2027 (Festival Igloo) reçoit 70 000 $ pour une programmation familiale gratuite les samedis du 16 janvier au 6 février 2027.",
+    "Le Théâtre de la Ligue nationale d'improvisation reçoit 48 450 $ pour six matchs d'improvisation extérieurs gratuits dans le Quartier des spectacles, entre le 9 et le 31 janvier 2027.",
+    "L'argent provient de l'entente avec le ministère de l'Économie, de l'Innovation et de l'Énergie du Québec et transite du Service du développement économique vers le Service de la culture, des sports et des loisirs.",
+    "La dépense est assumée à 100 % par la ville centre."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "463 450 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 7632,
+    "sortie": 587
+   }
+  },
+  {
+   "id": "1260615012",
+   "numero": "1260615012",
+   "resolution": "CM26 1104",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Accepter l'offre de services de l'arrondissement de Rosemont–La-Petite-Patrie, conformément à l'article 85 de la Charte de la Ville de Montréal, métropole du Québec (RLRQ, c. C-11.4), de prendre en charge les travaux de réfection de chaussées sur le réseau artériel administratif de la Ville sur le territoire de l'arrondissement, dans le cadre du Programme de réhabilitation de chaussées par planage-revêtement - Artériel",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1138",
+   "source": "sommaire",
+   "puces": [
+    "La Ville confie à l'arrondissement de Rosemont–La Petite-Patrie la réfection de chaussées sur des rues qui relèvent normalement du conseil municipal (réseau artériel).",
+    "Trois secteurs sont visés : la rue Beaubien Ouest entre l'avenue de l'Esplanade et l'avenue du Parc, le boulevard Saint-Laurent entre la rue Henri-IV et la rue de Bellechasse, et l'intersection Saint-Laurent / Beaubien Ouest.",
+    "L'arrondissement s'occupera des plans et devis, de l'appel d'offres, de l'octroi des contrats et de la surveillance des travaux.",
+    "Les coûts seront payés par le Service des infrastructures du réseau routier, à même le programme décennal d'investissement 2026-2035 (Programme de réhabilitation de chaussées par planage-revêtement – Artériel).",
+    "Les travaux doivent être réalisés en 2026, l'échéancier préliminaire visant l'automne 2026.",
+    "L'arrondissement devra rendre compte de l'avancement, du budget et de l'échéancier, et ne pas dépenser au-delà des crédits autorisés.",
+    "Selon le document, un refus retarderait les travaux, avec des effets possibles sur la sécurité des usagers, la fluidité de la circulation et la desserte de certains arrêts d'autobus de la STM."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 6869,
+    "sortie": 568
+   }
+  },
+  {
+   "id": "CM26 1053",
+   "numero": null,
+   "resolution": "CM26 1053",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Exercer l'option de prolongation de 12 mois / Autoriser une dépense additionnelle de 344 925 $, taxes incluses, pour le renouvellement du service d'entretien du logiciel SIGAL utilisé par le er Service de police de la Ville de Montréal, pour la période du 1 janvier au 31 décembre 2027 dans le cadre du contrat accordé à Cegid inc. (CG23 0637), majorant ainsi le montant total du contrat à 1 498 216,33 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=17",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge de 12 mois son contrat avec Cegid inc. pour l'entretien du logiciel SIGAL, utilisé par le Service de police de Montréal.",
+    "Elle autorise une dépense additionnelle de 344 925 $, taxes incluses, pour ce renouvellement.",
+    "Le service d'entretien est couvert du 1er janvier au 31 décembre 2027.",
+    "Avec cet ajout, la valeur totale du contrat passe à 1 498 216,33 $, taxes incluses.",
+    "La dépense sera imputée selon les informations financières inscrites au dossier décisionnel."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "344 925 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.885Z",
+   "jetons": {
+    "entree": 2102,
+    "sortie": 305
+   }
+  },
+  {
+   "id": "1265551003",
+   "numero": "1265551003",
+   "resolution": "CM26 1109",
+   "date": "2026-10-19",
+   "unite": "Service de l'urbanisme et de la mobilité",
+   "objet": "Accepter les offres de services de l'ensemble des conseils d'arrondissement, conformément à l'article 85 de la Charte de la Ville de Montréal, métropole du Québec (RLRQ, c. C-11.4), de prendre en charge la conception et la réalisation des travaux d'aménagement de rues du réseau routier artériel administratif de la Ville",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1221",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil municipal laisse 5 arrondissements concevoir et réaliser eux-mêmes des travaux sur des rues artérielles qui relèvent normalement de la Ville centre.",
+    "Neuf projets sont visés, à réaliser en 2026 et 2027, dans Saint-Laurent, Ville-Marie, Pierrefonds-Roxboro, Rosemont–La Petite-Patrie et Outremont.",
+    "Les travaux incluent le réaménagement de Saint-Antoine Ouest, une nouvelle intersection Viger/De la Visitation, la sécurisation des abords de l'école Harfang-des-Neiges, des dos d'âne sur le chemin de la Rive-Boisée et l'avenue du Château-Pierrefonds, et le réaménagement de l'avenue De Vimy.",
+    "Deux projets cyclables sont prévus dans Rosemont–La Petite-Patrie : la piste de la 1re avenue (10 000 $) et des voies sur l'avenue du Midway (30 000 $).",
+    "Le Service de l'urbanisme et de la mobilité paie 2 268 397 $ au total, dont 1 580 000 $ pour De Vimy, 492 397 $ pour l'école Harfang-des-Neiges et 156 000 $ pour Saint-Laurent; quatre projets sont autorisés sans financement de la Ville centre.",
+    "Les arrondissements assument la main-d'œuvre interne et les dépenses hors contrat; tout dépassement de coûts ou report doit être approuvé d'avance par le Service.",
+    "Les arrondissements ont consulté les riverains et les commerçants avant de déposer leurs demandes."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 580 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 6610,
+    "sortie": 673
+   }
+  },
+  {
+   "id": "CM26 1049",
+   "numero": null,
+   "resolution": "CM26 1049",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Autoriser une dépense additionnelle de 48 398,55 $, taxes incluses, pour les travaux d'infrastructures (égout, aqueduc et préparation du terrain) liés à la poursuite de l'implantation d'habitations modulaires sur le site Louvain Ouest, dans le cadre du contrat accordé à Loiselle inc. (CE25 0442), majorant ainsi le montant total du contrat à 914 546,41 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=15",
+   "source": "resolution",
+   "puces": [
+    "La Ville ajoute 48 398,55 $, taxes incluses, au contrat de l'entreprise Loiselle inc.",
+    "L'argent sert aux travaux d'égout, d'aqueduc et de préparation du terrain sur le site Louvain Ouest.",
+    "Ces travaux accompagnent la poursuite de l'implantation d'habitations modulaires sur ce site.",
+    "Avec cet ajout, le contrat total atteint 914 546,41 $, taxes incluses.",
+    "La dépense sera imputée selon les informations financières du dossier décisionnel."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "48 398,55 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 2041,
+    "sortie": 290
+   }
+  },
+  {
+   "id": "CM26 1063",
+   "numero": null,
+   "resolution": "CM26 1063",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Accorder un contrat à XYZ Technologie Culturelle inc., pour la fourniture et la mise en service d'une solution audiovisuelle et d'équipements technologiques pour la vidéocomparution et les visioparloirs de la cour municipale et du Service de police de la Ville de Montréal, pour une période de 60 mois, incluant deux options de prolongation de 12 mois chacune - Dépense totale de 1 980 450,33 $, taxes incluses - Appel d'offres public 26-21473 (3 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=24",
+   "source": "resolution",
+   "puces": [
+    "La Ville accorde à XYZ Technologie Culturelle inc. un contrat de 1 980 450,33 $, taxes incluses, pour fournir et mettre en service une solution audiovisuelle et des équipements technologiques.",
+    "Ces équipements serviront à la vidéocomparution et aux visioparloirs de la cour municipale et du Service de police de la Ville de Montréal.",
+    "Le contrat dure 60 mois, avec deux possibilités de prolongation de 12 mois chacune.",
+    "L'appel d'offres public 26-21473 a reçu 3 soumissions; XYZ Technologie Culturelle inc. est le seul soumissionnaire conforme.",
+    "La Ville fera une évaluation du rendement de l'entreprise."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 980 450,33 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 2196,
+    "sortie": 354
+   }
+  },
+  {
+   "id": "1268726001",
+   "numero": "1268726001",
+   "resolution": "CM26 1116",
+   "date": "2026-10-19",
+   "unite": "Service du développement économique, Direction du développement du territoire",
+   "objet": "Avis de motion et dépôt - Règlement modifiant le Règlement sur l'encadrement des animaux domestiques (21-012) Avis de motion et dépôt - Règlement modifiant le Règlement sur les tarifs (exercice financier 2026) (26-006) AVIS DE MOTION ET DÉPÔT D’UN PROJET DE RÈGLEMENT Avis de motion est donné par Alexandre Devaux-Guizani de l’inscription pour adoption à une assemblée subséquente du conseil municipal du projet de règlement intitulé « Règlement modifiant le Règlement sur l'encadrement des animaux domestiques (21-012) », lequel est déposé avec le dossier décisionnel. AVIS DE MOTION ET DÉPÔT D’UN PROJET DE RÈGLEMENT Avis de motion est donné par Alexandre Devaux-Guizani de l’inscription pour",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1317",
+   "source": "sommaire",
+   "puces": [
+    "La Ville annonce qu'elle modifiera son Règlement sur l'encadrement des animaux domestiques (21-012) : l'avis de motion est donné en octobre 2026 et l'adoption est prévue en novembre 2026.",
+    "Le projet compte 42 articles qui touchent notamment la définition d'animal errant, les permis pour chiens et chats, le nombre maximal d'animaux par logement, les nuisances, les chiens à risque et potentiellement dangereux, les aires d'exercice canin et les refuges.",
+    "La Ville dit vouloir agir sur l'errance des chats, le non-respect des règles par leurs gardiens, les nuisances, les risques de rage et la prédation des oiseaux, dans la foulée de son adhésion au Pacte de Berlin sur la nature urbaine.",
+    "Le sommaire cite ses constats : 75 % des animaux admis en refuge en 2025 étaient des chats, 14 % des quelque 3000 chats reçus chez Proanima en 2026 étaient micropucés, et les permis de chat sont passés de 12 070 en 2017 à 7261 en 2025.",
+    "Les règles encadreront davantage la nourriture laissée dehors, un enjeu lié à la gestion des coyotes et à la présence de rats dans certains secteurs.",
+    "Le Règlement sur les tarifs 2026 (26-006) sera modifié à son article 9 en conséquence.",
+    "Le dossier ne comporte aucun impact financier selon la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 7855,
+    "sortie": 602
+   }
+  },
+  {
+   "id": "CM26 1048",
+   "numero": null,
+   "resolution": "CM26 1048",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Autoriser, sans dépense additionnelle, la prolongation de l'entente du regroupement d'achats de services cellulaires avec le Centre d'acquisitions gouvernementales (CG22 0238) jusqu'au 20 février 2027",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=15",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge jusqu'au 20 février 2027 son entente d'achat groupé de services cellulaires avec le Centre d'acquisitions gouvernementales.",
+    "La prolongation se fait sans dépense additionnelle.",
+    "Le directeur de la Direction espaces de travail et services aux utilisateurs (Service des technologies de l'information) est autorisé à prolonger l'entente et à signer les documents au nom de la Ville.",
+    "Le document fixe l'orientation du conseil municipal sur ce dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 1904,
+    "sortie": 270
+   }
+  },
+  {
+   "id": "1269354001",
+   "numero": "1269354001",
+   "resolution": "CM26 1107",
+   "date": "2026-10-19",
+   "unite": "Service des technologies de l'information, Direction institutionnelle",
+   "objet": "Offrir à l'arrondissement d'Outremont, conformément à l'article 85 de la Charte de la Ville de Montréal, métropole du Québec (RLRQ, c. C-11.4), de prendre en charge, à compter de novembre 2026, l'activité « Technologies de l'information - support bureautique et télécommunications »",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1198",
+   "source": "sommaire",
+   "puces": [
+    "Le Service des technologies de l'information de la Ville prendra en charge, à compter de novembre 2026, le support bureautique et les télécommunications de l'arrondissement d'Outremont.",
+    "L'arrondissement vire 17 300 $ au Service des TI pour 2026, puis 105 400 $ par année de façon récurrente à partir de 2027.",
+    "Un poste de technicien en bureautique d'Outremont est transféré au Service des TI, avec maintien d'une présence sur place.",
+    "Le Service des TI reprend les équipements réseau, serveurs et postes de travail, ainsi que les contrats de télécommunications.",
+    "Outremont garde à sa charge les licences de logiciels non bureautiques, ses applications maison (stationnement, sécurité publique), la téléphonie cellulaire, les ajouts de couverture réseau, le contrôle des portes et la vidéosurveillance.",
+    "La démarche d'intégration, entamée en novembre 2024, vise à rehausser la sécurité informatique et à uniformiser les façons de faire."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "105 400 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 5282,
+    "sortie": 446
+   }
+  },
+  {
+   "id": "CM26 1080",
+   "numero": null,
+   "resolution": "CM26 1080",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Autoriser le versement d'avances aux élues et élus admissibles relevant du conseil d'agglomération",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=38",
+   "source": "resolution",
+   "puces": [
+    "La Ville autorise le versement d'avances aux élues et élus admissibles qui relèvent du conseil d'agglomération.",
+    "Le montant total autorisé est de 51 016,65 $.",
+    "Ces avances visent l'exercice financier 2026.",
+    "Il s'agit de l'orientation adoptée par le conseil municipal sur cette question."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "51 016,65 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 1680,
+    "sortie": 214
+   }
+  },
+  {
+   "id": "CM26 1055",
+   "numero": null,
+   "resolution": "CM26 1055",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Approuver le projet d'acte en vertu duquel la Ville acquiert de Logistec Services Maritimes SRI, une servitude réelle et perpétuelle d'utilités publiques aux fins de la construction, de l'exploitation et de l'entretien d'un collecteur pluvial et sanitaire, dont l'assiette en volumétrie, d'une superficie au sol de 9 119 mètres carrés, grève une partie du lot 4 683 647 du cadastre du Québec, circonscription foncière de Montréal, située dans l'axe est-ouest de l'Île de Montréal, dans la Ville de Montréal-Est, pour un montant de 490 780 $, plus les taxes applicables",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=19",
+   "source": "resolution",
+   "puces": [
+    "La Ville achète de Logistec Services Maritimes SRI un droit de passage permanent (servitude) sur un terrain situé à Ville de Montréal-Est.",
+    "Ce droit lui permet de construire, exploiter et entretenir un collecteur d'eaux pluviales et sanitaires.",
+    "La servitude touche une partie du lot 4 683 647, sur une superficie au sol de 9 119 mètres carrés, dans l'axe est-ouest de l'île de Montréal.",
+    "Montant de l'acquisition : 490 780 $, plus les taxes applicables.",
+    "La décision est une orientation transmise au conseil municipal, selon les termes du projet d'acte."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "490 780 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 2338,
+    "sortie": 325
+   }
+  },
+  {
+   "id": "1263074027",
+   "numero": "1263074027",
+   "resolution": "CM26 1041",
+   "date": "2026-10-19",
+   "unite": "Service des finances et de l'évaluation foncière, Direction du budget et de la",
+   "objet": "Dépôt de la projection des résultats de l'exercice 2026 en date du 31 août 2026 - Volet municipal et de l'état des revenus et des charges réels global Ville, au 31 août 2026 comparé avec le 31 août 2025 Le leader adjoint de la majorité, Alexandre Devaux-Guizani, dépose la projection des résultats de l’exercice 2026 en date du 31 août 2026 – Volet municipal, ainsi que l’état des revenus et des charges réels de la Ville au 31 août 2026 comparé avec le 31 août 2025, et le conseil en prend acte.",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=255",
+   "source": "sommaire",
+   "puces": [
+    "Le conseil municipal prend acte de deux documents financiers déposés par la trésorière : la projection des résultats de 2026 au 31 août et la comparaison des revenus et charges réels avec ceux du 31 août 2025.",
+    "La Ville anticipe un surplus de 165,0 M$ pour 2026 : 125,5 M$ au volet municipal et 39,5 M$ au volet agglomération.",
+    "Côté revenus, la Ville prévoit 24,1 M$ de plus en contraventions et 20,0 M$ de plus en permis de construction que prévu au budget.",
+    "Côté dépenses, elle prévoit des dépassements de 65,5 M$ pour la rémunération du SPVM et de 11,6 M$ pour celle du SIM, plus 9,0 M$ en mesures d'urgence (pluies diluviennes, crues, froid extrême).",
+    "Au 31 août 2026, les revenus réels atteignent 6 951,7 M$, en hausse de 339,6 M$ (5,14 %) sur un an, dont 201,5 M$ de plus en taxes.",
+    "Les quotes-parts versées par les villes reconstituées montent à 619,2 M$, une hausse de 49,8 M$ par rapport à 2025.",
+    "Ce dépôt est exigé par la Loi sur les cités et villes avant l'adoption du budget de l'exercice suivant."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "165,0 M$",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 7985,
+    "sortie": 567
+   }
+  },
+  {
+   "id": "CM26 1066",
+   "numero": null,
+   "resolution": "CM26 1066",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Accorder un soutien financier de 500 000 $ à Société de développement Écoquartier Louvain provenant des contributions issues du volet social du Règlement visant à améliorer l'offre en matière de logement social, abordable et familial, pour la conception d'un projet de logements hors marché, dans l'arrondissement d'Ahuntsic-Cartierville / Approuver le projet de convention à cet effet",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=26",
+   "source": "resolution",
+   "puces": [
+    "La Ville verse 500 000 $ à la Société de développement Écoquartier Louvain, un organisme à but non lucratif.",
+    "L'argent sert à concevoir un projet de logements hors marché dans l'arrondissement d'Ahuntsic-Cartierville.",
+    "La somme provient des contributions du volet social du règlement sur le logement social, abordable et familial.",
+    "Le conseil approuve la convention de contribution financière entre la Ville et l'organisme.",
+    "La dépense sera imputée selon les informations financières du dossier décisionnel."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 1960,
+    "sortie": 280
+   }
+  },
+  {
+   "id": "CM26 1044",
+   "numero": null,
+   "resolution": "CM26 1044",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Accorder un contrat à Protection Incendie CFS ltée, pour la fourniture d'ensembles d'équipement de protection individuel pour le Groupe d'intervention en matières dangereuses pour le Service de sécurité incendie de Montréal - Dépense totale de 257 589,99 $, taxes incluses - Appel d'offres public 26-21489 (1 soum. conforme)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=12",
+   "source": "resolution",
+   "puces": [
+    "La Ville accorde un contrat de 257 589,99 $, taxes incluses, à Protection Incendie CFS ltée.",
+    "Le contrat porte sur la fourniture d'ensembles d'équipement de protection individuel.",
+    "Cet équipement est destiné au Groupe d'intervention en matières dangereuses du Service de sécurité incendie de Montréal.",
+    "Le contrat découle de l'appel d'offres public 26-21489, qui n'a reçu qu'une seule soumission conforme.",
+    "La décision doit être prise à la séance ordinaire du conseil municipal du lundi 19 octobre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "257 589,99 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 2069,
+    "sortie": 308
+   }
+  },
+  {
+   "id": "CM26 1068",
+   "numero": null,
+   "resolution": "CM26 1068",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Exercer l'option de la deuxième prolongation de 12 mois / Autoriser une dépense additionnelle de 78 773,74 $, taxes incluses, pour les services d'entretien préventif et correctif de portes de garage industrielles, dans divers bâtiments du Service de police de la Ville de Montréal dans le cadre du contrat accordé à Les portes JPR inc. (CG23 0011), majorant ainsi le montant total du contrat à 364 992,59 $, taxes incluses",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=27",
+   "source": "resolution",
+   "puces": [
+    "La Ville prolonge de 12 mois, pour une deuxième fois, le contrat d'entretien des portes de garage industrielles confié à Les portes JPR inc.",
+    "Ce contrat couvre l'entretien préventif et correctif dans divers bâtiments du Service de police de la Ville de Montréal.",
+    "Dépense additionnelle autorisée : 78 773,74 $, taxes incluses.",
+    "Ce montant se divise en 65 644,78 $ pour les services et 13 128,96 $ en budget de contingences.",
+    "Avec cet ajout, la valeur totale du contrat atteint 364 992,59 $, taxes incluses."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "78 773,74 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 2119,
+    "sortie": 317
+   }
+  },
+  {
+   "id": "CM26 1127",
+   "numero": null,
+   "resolution": "CM26 1127",
+   "date": "2026-10-19",
+   "unite": "Service du greffe",
+   "objet": "Motion de l'Opposition officielle - Pour un plafonnement des hausses de loyers à l'inflation et la mise en place d'un registre obligatoire des loyers au Québec Les conseillères Elvira Carhuallanqui et Caroline Braun déposent une nouvelle version consensuelle du point 65.02. La nouvelle version se lit comme suit :",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=73",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal demande à Québec de plafonner les hausses de loyers à la moyenne du taux d'inflation des trois dernières années, mesurée par l'Indice des prix à la consommation de Statistique Canada.",
+    "Des exceptions seraient prévues pour les immeubles ayant fait l'objet de travaux majeurs ou d'investissements importants.",
+    "Le conseil réclame aussi un registre des loyers obligatoire, universel et accessible, documentant l'historique des loyers de chaque logement au Québec, dans le respect de la protection des renseignements personnels.",
+    "Il demande à Québec d'évaluer comment utiliser ces données pour suivre les logements vacants ou inoccupés et en remettre davantage sur le marché.",
+    "La Ville maintient son financement du registre volontaire des loyers administré par Vivre en Ville, sous réserve des demandes officielles de l'organisme, jusqu'à l'entrée en vigueur d'un registre obligatoire.",
+    "La Ville s'engage à intensifier la sensibilisation et la promotion du registre volontaire de Vivre en Ville.",
+    "Les motifs invoqués : 63,6 % des ménages montréalais sont locataires, contre 40,1 % à l'échelle du Québec, et les hausses de loyers dépassent souvent la croissance des revenus."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 2961,
+    "sortie": 547
+   }
+  },
+  {
+   "id": "CM26 1065",
+   "numero": null,
+   "resolution": "CM26 1065",
+   "date": "2026-10-19",
+   "unite": null,
+   "objet": "Accorder un soutien financier de 8 600 000 $ à Mission Unitaînés, pour la construction d'un immeuble, sur une partie du lot 1 276 444, du cadastre du Québec, circonscription foncière de Montréal, situé dans l'arrondissement de Rivière-des–Pointe-aux-Trembles, afin d'y aménager des logements pour des aînés à revenus faibles ou modestes, dans le cadre de l'entente de contribution financière pour la réalisation de logements abordables entre la Société d'habitation du Québec, Mission Unitaînés et la Fédération des Caisses Desjardins du Québec / Autoriser les budgets additionnels de revenus et de dépenses équivalents de 6 519 080,72 $, pour l'exercice 2026 et de 2 080 919,28 $, pour 2028 /",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=25",
+   "source": "resolution",
+   "puces": [
+    "La Ville verse 8 600 000 $ à l'organisme Mission Unitaînés pour construire un immeuble dans l'arrondissement de Rivière-des-Prairies–Pointe-aux-Trembles.",
+    "L'immeuble servira à loger des personnes aînées à revenus faibles ou modestes.",
+    "L'argent vient d'une entente de contribution financière pour du logement abordable liant la Société d'habitation du Québec, Mission Unitaînés et la Fédération des Caisses Desjardins du Québec.",
+    "La Ville ajoute des budgets de revenus et de dépenses équivalents : 6 519 080,72 $ en 2026 et 2 080 919,28 $ en 2028.",
+    "Le conseil approuve un accord-cadre entre la Ville, Mission Unitaînés et l'Office municipal d'habitation de Montréal.",
+    "La directrice du Service de la stratégie immobilière et de l'habitation est autorisée à signer cet accord au nom de la Ville."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "8 600 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 2635,
+    "sortie": 438
+   }
+  },
+  {
+   "id": "1268290007",
+   "numero": "1268290007",
+   "resolution": "CM26 1106",
+   "date": "2026-10-19",
+   "unite": "Service de la stratégie immobilière et de l'habitation",
+   "objet": "Abroger la résolution CM25 0769",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1153",
+   "source": "sommaire",
+   "puces": [
+    "La Ville achète un terrain vacant de 433,2 m² sur la rue de la Montagne, dans le Sud-Ouest (Griffintown), de la Coopérative d'habitation Ste-Anne, pour 500 000 $ plus taxes.",
+    "Le terrain servira à du logement social, et non plus à un parc local avec jardins d'agriculture urbaine comme prévu en juin 2025.",
+    "Les décisions précédentes sont annulées : la Ville devait d'abord payer 1 000 000 $ pour un projet d'agriculture urbaine, abandonné après les vérifications.",
+    "Une étude de mars 2026 a confirmé la présence de contaminants dans les sols; la décontamination est estimée à environ 315 000 $ pour le scénario d'agriculture urbaine, et serait moins chère pour un usage résidentiel.",
+    "La Ville achète sans garantie sur la qualité des sols et assume les risques.",
+    "La vente doit d'abord être approuvée par le ministre responsable de l'Habitation.",
+    "Le terrain sera plus tard revendu à un organisme communautaire ou à une coopérative d'habitation; la dépense est payée à 100 % par l'agglomération."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "500 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 7472,
+    "sortie": 504
+   }
+  },
+  {
+   "id": "1269445009",
+   "numero": "1269445009",
+   "resolution": "CM26 1086",
+   "date": "2026-10-19",
+   "unite": "Service de la culture_des sports et des loisirs, Direction des sports",
+   "objet": "Accorder un contrat à REM. Groupe Extrême inc., pour les services de remorquage dans le cadre des opérations de déneigement dans l'arrondissement du Plateau-Mont-Royal, pour une période d'une saison hivernale, incluant une option de prolongation d'une saison hivernale - Dépense totale de 372 519 $, taxes incluses - Appel d'offres public 26-21535 (1 soum.)",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=395",
+   "source": "sommaire",
+   "puces": [
+    "La Ville accorde à REM. Groupe Extrême inc. un contrat de remorquage lié au déneigement dans l'arrondissement du Plateau-Mont-Royal.",
+    "Le contrat couvre une saison hivernale, avec une option de prolongation d'une autre saison, à la discrétion de la Ville.",
+    "Les services seront rendus du 15 novembre 2026 au 31 mars 2027.",
+    "La dépense totale atteint 372 519 $ : 275 940 $ pour le contrat, 55 188 $ en contingences et 41 391 $ en variation de quantités (taxes incluses).",
+    "Une seule entreprise a soumissionné à l'appel d'offres public 26-21535, pour un prix 22 % au-dessus de l'estimation de la Ville; elle a refusé de baisser son prix, invoquant la hausse du carburant.",
+    "La Ville explique l'écart par la mise en marché tardive de l'appel d'offres, le faible intérêt des fournisseurs et la courte durée du contrat.",
+    "La dépense est assumée à 100 % par l'agglomération; le rendement de l'entreprise sera évalué."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "372 519 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 7884,
+    "sortie": 478
+   }
+  },
+  {
+   "id": "CM26 1038",
+   "numero": null,
+   "resolution": "CM26 1038",
+   "date": "2026-10-19",
+   "unite": "Service du greffe",
+   "objet": "Déclaration pour le Mois de l'héritage latino-américain",
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=6",
+   "source": "resolution",
+   "puces": [
+    "Le conseil municipal adopte une déclaration soulignant le Mois de l'héritage latino-américain, célébré chaque année en octobre à Montréal depuis 2019.",
+    "La Ville reconnaît l'apport des communautés latino-américaines à son développement et remercie les groupes qui soutiennent les personnes issues des communautés culturelles.",
+    "Elle s'engage à continuer de promouvoir l'inclusion et à lutter contre les discriminations.",
+    "La déclaration invite la population à participer aux festivités et aux programmations liées au Mois de l'héritage latino-américain.",
+    "Le texte rappelle que près de 100 000 Montréalais sont nés dans un pays latino-américain et que près de 175 000 déclarent des origines d'Amérique latine."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T18:37:35.886Z",
+   "jetons": {
+    "entree": 2442,
+    "sortie": 353
+   }
+  },
   {
    "id": "1263172001",
    "numero": "1263172001",
