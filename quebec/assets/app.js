@@ -962,7 +962,7 @@ function ligneEvenement(e) {
           v.contre.length ? ' — ' + v.contre.map(echapper).join(', ') : ''
         }. <a href="decisions-de-la-ville-de-quebec?q=${encodeURIComponent(v.numero ?? '')}">${tr('Voir le détail', 'See details')}</a>
       </p>`;
-    return lienFil(entete, v.numero);
+    return lienFil(entete);
   }
 
   const d = e.data;
@@ -979,14 +979,13 @@ function ligneEvenement(e) {
   const corps = `${blocContexte(d)}${blocResume(resumePour(d))}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}
     ${actionsFiche(d)}`;
-  return lienFil(entete, d.numero);
+  return lienFil(entete);
 }
 
 // 19 nov. 2026 (Martin) : sur l'accueil, « Ce qui a changé » montre des cartes fermées ; un clic
-// mène droit à la fiche sur la page Décisions (même lien ?q= que les courriels).
-function lienFil(entete, numero) {
-  const href = 'decisions-de-la-ville-de-quebec' + (numero ? '?q=' + encodeURIComponent(numero) : '');
-  return `<a class="carte pliante fil-lien" href="${href}">${entete}</a>`;
+// mène en haut de la page Décisions, sans filtrer (Martin, même jour).
+function lienFil(entete) {
+  return `<a class="carte pliante fil-lien" href="decisions-de-la-ville-de-quebec">${entete}</a>`;
 }
 
 function rendreFil() {
