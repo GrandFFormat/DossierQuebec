@@ -1053,7 +1053,7 @@ function ligneEvenement(e) {
           v.contre.length ? ' — ' + v.contre.map(echapper).join(', ') : ''
         }. <a href="decisions-de-la-ville-de-montreal?q=${encodeURIComponent(v.numero ?? '')}">${tr('Voir le détail', 'See details')}</a>
       </p>`;
-    return carteRepliable(entete, corps);
+    return lienFil(entete);
   }
 
   const d = e.data;
@@ -1070,7 +1070,13 @@ function ligneEvenement(e) {
   const corps = `${blocResume(resumePour(d))}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}
     ${actionsFiche(d)}`;
-  return carteRepliable(entete, corps, e.ouverte);
+  return lienFil(entete);
+}
+
+// 19 nov. 2026 (Martin) : sur l'accueil, « Ce qui a changé » montre des cartes fermées ; un clic
+// mène en haut de la page Décisions, sans filtrer.
+function lienFil(entete) {
+  return `<a class="carte pliante fil-lien" href="decisions-de-la-ville-de-montreal">${entete}</a>`;
 }
 
 function rendreFil() {
@@ -1084,7 +1090,7 @@ function rendreFil() {
   // question — pas en travers du fil quand on veut juste lire.
   $('#titre-fil').textContent = mode === 'nouveautes' ? tr('Ce qui a changé', "What's new") : tr('Activité récente', 'Recent activity');
   // La première carte du fil est toujours ouverte : elle montre ce qu'est un résumé (9 nov. 2026).
-  $('#fil').innerHTML = aMontrer.map((e, i) => ligneEvenement({ ...e, ouverte: i === 0 })).join('');
+  $('#fil').innerHTML = aMontrer.map(ligneEvenement).join('');
 
   // 9 nov. 2026 : 3 décisions, puis le bouton mène toujours à la page Décisions.
   if ($('#plus-fil')) {

@@ -305,6 +305,10 @@ a:hover { color: var(--accent-encre); }
 .pliante:hover { box-shadow: var(--ombre-forte); }
 .pliante > summary:hover .objet { color: var(--accent); }
 .pliante > summary .objet { margin-bottom: 0; }
+.fil-lien { display: block; position: relative; padding-right: 48px; color: inherit; text-decoration: none; }
+.fil-lien::after { content: '→'; position: absolute; right: 18px; top: 13px; font-size: 19px; font-weight: 700; color: var(--accent); }
+.fil-lien:hover .objet { color: var(--accent); }
+.fil-lien .objet { margin-bottom: 0; }
 .pliante > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: var(--rayon); }
 .pliante > .corps { margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--ligne); }
 

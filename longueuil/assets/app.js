@@ -747,7 +747,7 @@ function ligneEvenement(e) {
           v.contre.length ? ' — ' + v.contre.map(echapper).join(', ') : ''
         }. <a href="votes-nominatifs-du-conseil-de-longueuil">Voir le détail</a>
       </p>`;
-    return carteRepliable(entete, corps);
+    return lienFil(entete);
   }
 
   const d = e.data;
@@ -763,7 +763,13 @@ function ligneEvenement(e) {
     <p class="objet">${echapper(d.objet ?? '(sans objet)')}</p>`;
   const corps = `${blocResume(resumePour(d))}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">Document officiel (PDF) ↗</a>` : ''}`;
-  return carteRepliable(entete, corps, e.ouverte);
+  return lienFil(entete);
+}
+
+// 19 nov. 2026 (Martin) : sur l'accueil, « Ce qui a changé » montre des cartes fermées ; un clic
+// mène en haut de la page Décisions, sans filtrer.
+function lienFil(entete) {
+  return `<a class="carte pliante fil-lien" href="decisions-de-la-ville-de-longueuil">${entete}</a>`;
 }
 
 function rendreFil() {
@@ -776,7 +782,7 @@ function rendreFil() {
   // nouveautés) vit sur la page « Sources et limites », là où on va quand on se pose la
   // question — pas en travers du fil quand on veut juste lire.
   $('#titre-fil').textContent = mode === 'nouveautes' ? 'Ce qui a changé' : 'Activité récente';
-  $('#fil').innerHTML = aMontrer.map((e, i) => ligneEvenement({ ...e, ouverte: i === 0 })).join('');
+  $('#fil').innerHTML = aMontrer.map(ligneEvenement).join('');
 
   const reste = source.length - aMontrer.length;
   if ($('#plus-fil')) {
