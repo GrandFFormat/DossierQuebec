@@ -1,11 +1,11 @@
 {
- "generatedAt": "2026-11-18T17:24:30.906Z",
+ "generatedAt": "2026-11-19T17:29:12.420Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "methode": "Extraction par analyse du texte des résolutions (champ « content » de l'index de la Ville). Les noms sont lus dans les passages « Ont voté en faveur / Ont voté contre ». Chaque vote conserve le texte brut et signale tout écart avec le décompte officiel.",
  "parametres": {
   "annee": "2026",
   "max": 1000,
-  "depuis": "2026-09-19"
+  "depuis": "2026-09-20"
  },
  "totalDisponible": 287,
  "documentsAnalyses": 40,

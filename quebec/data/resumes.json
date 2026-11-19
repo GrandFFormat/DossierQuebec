@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-18T17:25:08.394Z",
+ "generatedAt": "2026-11-19T17:29:28.338Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,199 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-09-19",
+  "depuis": "2026-09-20",
   "plafond": 120
  },
- "nombre": 1865,
- "genereCetteFois": 19,
+ "nombre": 1872,
+ "genereCetteFois": 7,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.7361,
-  "jetonsEntree": 104708,
-  "jetonsSortie": 8501
+  "montant": 0.2826,
+  "jetonsEntree": 40162,
+  "jetonsSortie": 3271
  },
  "resumes": [
+  {
+   "id": "AP2026-360.pdf",
+   "numero": "AP2026-360",
+   "date": "2026-11-18",
+   "unite": "Approvisionnements",
+   "objet": "Conclusion d'une entente entre la Ville de Québec et l'organisme Programme d'encadrement clinique et d'hébergement (PECH) relativement à des services en soutien aux interventions policières sur le territoire de la ville de Québec (Dossier 96714)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-360.pdf",
+   "puces": [
+    "La Ville de Québec s'entend avec l'organisme PECH pour fournir des intervenants qui épaulent les policiers lors de situations de crise psychosociale ou psychiatrique.",
+    "L'entente couvre du 1er janvier au 31 décembre 2027 et vaut 400 955 $, sans TPS ni TVQ.",
+    "Les intervenants prennent en charge et suivent après la crise des personnes ayant des problèmes de santé mentale, une déficience intellectuelle ou des problèmes de toxicomanie.",
+    "La Ville vise à réduire la judiciarisation de ces personnes et à mieux coordonner les services, incluant pour les personnes en situation d'itinérance ou à risque de l'être.",
+    "L'entente peut être renouvelée une fois pour 12 mois (2028), avec un montant ajusté selon l'indice des prix à la consommation de la région de Québec.",
+    "Le financement dépend de l'adoption du budget 2027 par les autorités compétentes; la décision revient au conseil d'agglomération."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "400 955 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T17:29:21.103Z",
+   "jetons": {
+    "entree": 7299,
+    "sortie": 448
+   }
+  },
+  {
+   "id": "CU2026-090.pdf",
+   "numero": "CU2026-090",
+   "date": "2026-11-18",
+   "unite": "Culture et patrimoine",
+   "objet": "Versement de subventions totalisant une somme maximale de 211 701 $ à plusieurs organismes de loisir pour la réalisation de projets de médiation culturelle dans le cadre de l'Entente de développement culturel",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-090.pdf",
+   "puces": [
+    "La Ville de Québec verse jusqu'à 211 701 $ en subventions à des organismes de loisir pour des projets de médiation culturelle.",
+    "Sur 21 projets soumis, 17 ont été retenus; 4 ont été jugés inadmissibles faute de répondre aux critères.",
+    "Chaque projet peut recevoir au maximum 15 000 $, et l'aide peut couvrir jusqu'à 100 % du coût du projet.",
+    "Les projets doivent se terminer au plus tard le 31 décembre 2027 et provenir d'organismes à but non lucratif reconnus par la Ville.",
+    "Les projets touchent plusieurs arrondissements, dont La Cité-Limoilou, Beauport, Charlesbourg, Les Rivières, Sainte-Foy-Sillery-Cap-Rouge et La Haute-Saint-Charles.",
+    "Les activités incluent notamment de la poésie avec des aînés, de la danse avec des femmes sourdes, des ateliers de rap pour ados et une murale collective avec des adultes ayant une déficience intellectuelle.",
+    "L'argent provient du règlement d'emprunt lié à l'Entente de développement culturel 2024-2026 entre la Ville et le ministère de la Culture et des Communications."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "211 701 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T17:29:21.631Z",
+   "jetons": {
+    "entree": 7251,
+    "sortie": 531
+   }
+  },
+  {
+   "id": "AP2026-390.pdf",
+   "numero": "AP2026-390",
+   "date": "2026-11-18",
+   "unite": "Approvisionnements",
+   "objet": "Autorisation de contracter avec des entreprises n'ayant pas d'établissement au Québec, au Canada ou dans un pays membre de l'Union européenne pour l'acquisition de matériels et logiciels informatiques au bénéfice du Service des technologies de l'information",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-390.pdf",
+   "puces": [
+    "La Ville autorise son Service des approvisionnements à acheter du matériel et des logiciels informatiques auprès d'entreprises qui n'ont pas d'établissement au Québec, au Canada ou dans un pays de l'Union européenne.",
+    "Ces achats servent au Service des technologies de l'information.",
+    "Depuis un règlement du gouvernement du Québec édicté le 6 mars 2025, ce type de contrat de gré à gré exige une autorisation préalable, sans limite de valeur, y compris pour les achats par carte de crédit.",
+    "Le règlement vise le matériel et les logiciels informatiques, les fournitures et équipements médicaux, les produits pharmaceutiques et les instruments scientifiques.",
+    "La liste jointe au dossier contient une entreprise : reMarkable AS, en Norvège, fournisseur unique d'une tablette Paper reMarkable Pro 18 pouces avec marqueur et étui.",
+    "Ce contrat se situe entre 0 $ et 33 000 $ et sera payé par carte d'achat."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "De 0 $ à 33 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T17:29:21.168Z",
+   "jetons": {
+    "entree": 3071,
+    "sortie": 462
+   }
+  },
+  {
+   "id": "PO2026-005.pdf",
+   "numero": "PO2026-005",
+   "date": "2026-11-18",
+   "unite": "Police",
+   "objet": "Participation d'un représentant du Service de police de la Ville de Québec à une formation spécialisée aux États-Unis d'ici la fin de l'année 2026",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PO2026-005.pdf",
+   "puces": [
+    "La Ville autorise un policier du Service de police de Québec à suivre une formation spécialisée aux États-Unis d'ici la fin de 2026.",
+    "Elle approuve une dépense maximale de 5 495 $ pour cette participation.",
+    "Les frais de scolarité et d'hébergement sont payés par l'organisme qui donne la formation; le montant de la Ville couvre surtout les déplacements et l'hébergement lors de sorties pédagogiques.",
+    "Le Service des finances remboursera les dépenses sur présentation des pièces justificatives, et les dépenses déjà engagées sont ratifiées.",
+    "Un dépassement d'au plus 10 % du montant autorisé est accepté sans autre autorisation.",
+    "Le lieu, le contenu détaillé et certains partenaires de la formation restent confidentiels pour des raisons de sécurité, selon le document.",
+    "La formation n'est offerte qu'à un seul participant canadien par année, indique le document."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "5 495 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T17:29:20.804Z",
+   "jetons": {
+    "entree": 3807,
+    "sortie": 422
+   }
+  },
+  {
+   "id": "CU2026-091.pdf",
+   "numero": "CU2026-091",
+   "date": "2026-11-18",
+   "unite": "Culture et patrimoine",
+   "objet": "Conclusion d'une entente relative au versement annuel d'une subvention de 75 000 $ entre l'organisme La Remise culturelle - ressourcerie et la Ville de Québec, concernant la revalorisation de matières artistiques résiduelles, pour les années 2026, 2027 et 2028",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CU2026-091.pdf",
+   "puces": [
+    "La Ville de Québec versera 75 000 $ par année à l'organisme La Remise culturelle - ressourcerie, pour 2026, 2027 et 2028.",
+    "L'argent sert à récupérer et revaloriser des matériaux artistiques, et à accompagner les artistes vers des pratiques écoresponsables.",
+    "La Remise culturelle permet aux artistes et aux organismes culturels de se départir de matériaux et de s'en procurer à moindre coût, dans un lieu d'entreposage collectif.",
+    "Chaque versement dépend de la disponibilité des fonds, de l'adoption des budgets et de la remise du bilan annuel de l'organisme.",
+    "Selon le document, 125 tonnes de matières ont été détournées de l'enfouissement en 5 ans par l'organisme.",
+    "Le budget d'opération de l'organisme est passé de 215 000 $ en 2024-2025 à 348 000 $ en 2025-2026.",
+    "La Ville soutient déjà l'organisme depuis 2021 avec des ententes semblables de 75 000 $ par année."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "75 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T17:29:27.357Z",
+   "jetons": {
+    "entree": 7596,
+    "sortie": 463
+   }
+  },
+  {
+   "id": "LS2026-296.pdf",
+   "numero": "LS2026-296",
+   "date": "2026-11-18",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Conclusion de deux ententes entre la Ville de Québec et Patinage de vitesse Canada relativement au versement de deux subventions de 25 000 $ chacune et à la fourniture à titre gratuit de services municipaux pour une somme maximale de 15 000 $ par événement, totalisant 80 000 $, à titre d'assistance,",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-296.pdf",
+   "puces": [
+    "La Ville verse 25 000 $ à Patinage de vitesse Canada pour chacune des deux étapes de la Coupe du monde ISU junior de patinage de vitesse longue piste, soit 50 000 $ en argent.",
+    "Elle ajoute des services municipaux gratuits (temps de personnel et prêt d'équipements) valant au plus 15 000 $ par événement, pour un total d'aide de 80 000 $.",
+    "Les compétitions ont lieu au Centre de glaces Intact Assurance les 28 et 29 novembre et les 5 et 6 décembre 2026, avec plus de 25 pays attendus.",
+    "Les entraînements sont gratuits pour le public; les compétitions sont payantes (billetterie).",
+    "Le budget prévu de chaque événement est de 289 000 $; la subvention de la Ville en couvre 8,7 %.",
+    "L'aide est conditionnelle à un financement suffisant des autres partenaires.",
+    "La Ville paie 45 000 $ en 2026 et 5 000 $ en 2027, sous réserve de l'adoption du budget 2027."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "80 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T17:29:28.240Z",
+   "jetons": {
+    "entree": 7687,
+    "sortie": 470
+   }
+  },
+  {
+   "id": "AP2026-306.pdf",
+   "numero": "AP2026-306",
+   "date": "2026-11-18",
+   "unite": "Approvisionnements",
+   "objet": "Adjudication d'un contrat pour la fourniture des pompes et accessoires d'eau potable (Appel d'offres public 95983)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-306.pdf",
+   "puces": [
+    "La Ville achète quatre pompes d'eau potable et leurs accessoires pour le poste de pompage Roland-Beaudin, dans l'arrondissement de Sainte-Foy–Sillery–Cap-Rouge.",
+    "Le contrat va à 1221807 Ontario inc. (Aquateck inc.), de Saint-Laurent, pour 761 000 $ avant taxes.",
+    "La dépense nette pour la Ville, après récupération de la TVQ, est de 798 954,88 $.",
+    "Les pompes actuelles sont en fin de vie utile; les nouvelles auront des moteurs conçus pour fonctionner à vitesse variable.",
+    "Une seule soumission a été reçue à l'appel d'offres public 95983; le fournisseur a révisé son prix à la baisse après négociation.",
+    "La soumission dépasse de 10,3 % l'estimation du service demandeur, qui était de 690 000 $ avant taxes.",
+    "Les fonds proviennent du règlement d'emprunt R.A.V.Q. 1618 sur la réfection des postes d'eau potable et d'eaux usées."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "761 000 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-19T17:29:28.338Z",
+   "jetons": {
+    "entree": 3451,
+    "sortie": 475
+   }
+  },
   {
    "id": "TM2026-204.pdf",
    "numero": "TM2026-204",
