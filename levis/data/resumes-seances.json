@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-18T18:17:54.915Z",
+ "generatedAt": "2026-11-19T18:27:01.039Z",
  "modele": "claude-haiku-4-5",
  "genereParIA": true,
  "avertissement": "Phrase de résumé générée par IA à partir des décisions de la séance ; les points marquants sont choisis sans IA. Le procès-verbal officiel fait foi.",
@@ -436,6 +436,87 @@
     "contrats"
    ],
    "votes": []
+  },
+  {
+   "id": "CACCO_2026-10-21",
+   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
+   "instanceEn": "Chutes-de-la-Chaudière-Ouest borough council",
+   "date": "2026-10-21",
+   "nDecisions": 12,
+   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/10-Proces_verbal_de_la_seance_ordinaire_du_21_octobre_2026.pdf",
+   "votes": [],
+   "themes": [
+    {
+     "theme": "urbanisme",
+     "n": 9
+    },
+    {
+     "theme": "loisirs",
+     "n": 1
+    }
+   ],
+   "points": [
+    {
+     "id": "CACCO-2026-0159",
+     "numero": "CACCO-2026-0159",
+     "titre": "Rapport sur la consultation écrite",
+     "titreEn": null,
+     "montant": null,
+     "montantEn": null,
+     "divise": false,
+     "theme": "administration"
+    },
+    {
+     "id": "CACCO-2026-0160",
+     "numero": "CACCO-2026-0160",
+     "titre": "Demande de dérogation mineure – Marge de recul latérale pour l’agrandissement d’une habitation unifamiliale isolée (H1) – 88, rue de la Place-Couture (secteur Saint-Étienne-de-Lauzon) – Lot 2 849 389 du cadastre du Québec",
+     "titreEn": null,
+     "montant": null,
+     "montantEn": null,
+     "divise": false,
+     "theme": "urbanisme"
+    },
+    {
+     "id": "CACCO-2026-0161",
+     "numero": "CACCO-2026-0161",
+     "titre": "Demande de dérogation mineure – Marge de recul latérale pour une habitation unifamiliale isolée – 280, rue de la Corniche (secteur Saint-Nicolas) – Lot 2 286 881 du cadastre du Québec",
+     "titreEn": null,
+     "montant": null,
+     "montantEn": null,
+     "divise": false,
+     "theme": "urbanisme"
+    },
+    {
+     "id": "CACCO-2026-0162",
+     "numero": "CACCO-2026-0162",
+     "titre": "PIIA - Installation de quatre enseignes appliquées – 1-1060, chemin Industriel (secteur Saint-Nicolas) – Gauthier chariots élévateurs Inc",
+     "titreEn": null,
+     "montant": null,
+     "montantEn": null,
+     "divise": false,
+     "theme": "urbanisme"
+    }
+   ],
+   "signature": "12:0",
+   "phrase": "Le conseil d'arrondissement a approuvé onze demandes hors procédure : deux dérogations pour agrandissements d'habitations, quatre aménagements et rénovations commerciaux, deux projets patrimoniaux et trois restrictions d'urbanisme.",
+   "phraseEn": "The borough council approved eleven off-procedure requests: two variances for home expansions, four commercial renovations and site plans, two heritage projects and three land use restrictions.",
+   "motsCles": [
+    "dérogations",
+    "habitations",
+    "rénovations"
+   ],
+   "motsClesEn": [
+    "variances",
+    "home expansions",
+    "renovations"
+   ],
+   "motsEssais": 1,
+   "genereLe": "2026-11-19T18:27:01.030Z",
+   "motsThemes": [
+    null,
+    null,
+    "urbanisme"
+   ]
   },
   {
    "id": "CACCE_2026-10-14",
@@ -1547,10 +1628,6 @@
   {
    "instance": "Conseil d'arrondissement de Desjardins",
    "date": "2026-10-28"
-  },
-  {
-   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
-   "date": "2026-10-21"
   },
   {
    "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",

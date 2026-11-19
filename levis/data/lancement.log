@@ -2,7 +2,7 @@
 > dossiervillelevis@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit bce4c1c — Node v22.23.4
+Code : commit 0e91847 — Node v22.23.4
 
 === Syntaxe du JavaScript du site ===
 
@@ -10,7 +10,7 @@ Code : commit bce4c1c — Node v22.23.4
 data/decisions.json porte l'année courante (2026) — rien à archiver.
 
 === Consultations publiques ===
-Consultations : 1 à venir.
+Consultations : 0 à venir.
 
 === robots.txt des sites lus ===
 https://levis.ca/robots.txt : rien qui concerne nos chemins
@@ -21,28 +21,29 @@ https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt : HTTP 403 Fo
 80 séance(s) en 2026 écrites dans data/seances.json.
   CAD     12 séances, 8 avec procès-verbal
   CV      21 séances, 18 avec procès-verbal
-  CACCO   12 séances, 8 avec procès-verbal
+  CACCO   12 séances, 9 avec procès-verbal
   CACCE   12 séances, 10 avec procès-verbal
   CE      23 séances, 23 avec procès-verbal
 ⚠ 3 entrée(s) sans instance reconnue : Forum citoyen : contribuez à l’avenir de Lévis | Forum citoyen : contribuez à l’avenir de Lévis | Forum citoyen : contribuez à l’avenir de Lévis
 
 === Décisions de l'année ===
-CE_2026-11-03 : 18 pages, 56 résolutions, 49 liées à un sommaire, 0 vote(s) nominal(aux)
+CACCO_2026-10-21 : 8 pages, 17 résolutions, 0 liées à un sommaire, 0 vote(s) nominal(aux)
+⚠ CACCO_2026-10-21 : liste des présences non reconnue.
 
-2358 décisions écrites dans data/decisions.json — 1 séance(s) lue(s) cette fois, 6 en attente de procès-verbal.
-57 nouveauté(s) depuis la dernière exécution.
+2376 décisions écrites dans data/decisions.json — 1 séance(s) lue(s) cette fois, 5 en attente de procès-verbal.
+18 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
-    784  Urbanisme
-    599  Procédure
-    196  Administration
+    793  Urbanisme
+    606  Procédure
+    197  Administration
     146  Transport
      98  Finances
      82  Contrats
      73  Subventions
      72  Environnement
      56  Motions et hommages
-     42  Loisirs et communauté
+     43  Loisirs et communauté
      40  Travaux et infrastructures
      38  Sécurité publique
      34  Ressources humaines
@@ -50,10 +51,10 @@ Pastilles thématiques :
      27  Développement économique
      21  Culture et patrimoine
      17  Immobilier
-    154  (classées par défaut — aucune règle n'a tranché)
+    155  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-09-19) ===
-Fenêtre depuis 2026-09-19 : 10 séance(s) relue(s), 17 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-09-20) ===
+Fenêtre depuis 2026-09-20 : 10 séance(s) relue(s), 17 vote(s) conservé(s) du fichier précédent.
 
 20 votes nominaux écrits dans data/votes.json (10 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
@@ -70,30 +71,13 @@ Finances : taux 2026 (0.6361 $/100 $), dépenses réelles 2025 (360.3 M$).
 Votes par décision : 18 décisions, 18 noms.
 
 === Lexique, mesuré sur les procès-verbaux ===
-✖ 11 procès-verbal/aux de 2026 en cache (la dernière mesure en portait 55) — cache de texte incomplet : data/lexique.json de la veille est conservé.
+✖ 12 procès-verbal/aux de 2026 en cache (la dernière mesure en portait 55) — cache de texte incomplet : data/lexique.json de la veille est conservé.
 ⚠ « Lexique, mesuré sur les procès-verbaux » a échoué (code 1) — on garde les données précédentes, ça attendra.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-09-19 pas encore résumés (plafond : 120)…
-637 déjà résumés, 14 à faire.
-
---- Estimation ---
-Documents à résumer  : 14
-Modèle               : claude-opus-5
-Ratio mesuré         : 1.44 caractères/jeton (sur 12 documents)
-Jetons d'entrée      : ~56 186
-Jetons de sortie     : ~4 480
-Coût estimé          : ~0.39 $ US
-                       (moitié moins avec --batch, résultats en moins d'une heure)
-
-Génération…
-  … 4/14
-  … 8/14
-  … 12/14
-  … 14/14
-
-14 résumés générés, 651 au total dans data/resumes.json
-Coût réel : 0.45 $ US
+Sommaires depuis 2026-09-20 pas encore résumés (plafond : 120)…
+651 déjà résumés, 0 à faire.
+Rien à générer. (--force pour tout regénérer.)
 
 === Récapitulatifs des projets ===
 Récapitulatifs des projets : rien de nouveau.
@@ -101,17 +85,17 @@ Récapitulatifs des projets : rien de nouveau.
 === Projets pour « Mes dossiers » ===
 Projets publics : 4 projets · index 2.9 Ko · fichiers de projet 54 Ko au total.
 Décisions attendues : 42 dossiers en attente, dont 0 avec une date cible · 61.5 Ko.
-Dossiers de l'année : 1750 · 1308 Ko · organismes suggérés : 108.
-Décisions récentes : 273 dossiers depuis le 2026-09-26 · 244 Ko.
+Dossiers de l'année : 1767 · 1316 Ko · organismes suggérés : 108.
+Décisions récentes : 290 dossiers depuis le 2026-09-26 · 255 Ko.
 
 === Chiffres de la page Abonnement ===
-Travail public : 3036 documents, 594 résumés, 20 votes, 4 projets.
+Travail public : 3054 documents, 594 résumés, 20 votes, 4 projets.
 
 === En bref, séance par séance ===
-Séances : 18, appels : 1, rejets : 0, coût : 0.006 $ US
+Séances : 19, appels : 1, rejets : 0, coût : 0.003 $ US
 
 === Décisions récentes dans la page (Google) ===
-levis : 30 décisions écrites dans la page des décisions.
+levis : 30 décisions écrites dans la page des décisions (inchangé).
 
 === Courriels de Lévis publiés ===
 --seance=2026-11-10 → Déjà publié : conseil-2026-11-10. Rien à faire.
