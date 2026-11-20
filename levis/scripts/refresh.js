@@ -53,7 +53,12 @@ const ETAPES = [
   // Le 15 septembre 2026, un « `n » laissé par un remplacement scripté dans app.js a cassé toutes
   // les pages du volet pendant une nuit, sans que rien ne le signale : une erreur de syntaxe dans
   // le JavaScript du site rend maintenant le run rouge.
+  // Depuis le 20 nov. 2026, le code des pages est le moteur commun (../commun/ville/moteur.js) et la
+  // configuration de Lévis (assets/ville.js) : les trois fichiers sont vérifiés, un par étape
+  // (node --check ne lit que son premier fichier).
   { nom: 'Syntaxe du JavaScript du site', argv: ['--check', 'assets/app.js'] },
+  { nom: 'Syntaxe de la configuration de Lévis', argv: ['--check', 'assets/ville.js'] },
+  { nom: 'Syntaxe du moteur commun des volets', argv: ['--check', '../commun/ville/moteur.js'] },
   // Pas « secondaire » : la promesse des étapes secondaires (« on garde les données précédentes »)
   // est justement fausse pour celle-ci. Un archivage raté le 1er janvier, et l'année révolue
   // disparaît des données publiées sans copie — decisions.js refuse maintenant de repartir sans
