@@ -1,6 +1,5 @@
-/* DossierVilleDeLévis — feuille de style commune à toutes les pages, recopiée telle quelle de
-   quebec/assets/style.css le 8 nov. 2026 (le volet Québec fait référence). Les ajouts propres à
-   Lévis sont regroupés à la fin.
+/* DossierVilleDeLévis — feuille de style commune à toutes les pages : celle du volet Montréal, le modèle
+   des volets de ville (alignement du 20 nov. 2026). Les ajouts propres à Lévis sont à la fin.
  *
  * DEUX THÈMES, via l'attribut data-theme sur <html> : "clair" (défaut) et "sombre".
  * Le thème est posé avant le premier rendu par un petit script en <head> de chaque page :
@@ -178,9 +177,7 @@ nav .outils { flex-basis: 100%; justify-content: center; margin-left: 0; padding
      l'Arrondissement de Sainte-Foy - Sillery - Cap-Rouge ») et les pastilles de nom d'instance
      élargissaient la page, qui glissait de côté. */
   select { max-width: 100%; }
-  /* La même règle pour les pastilles vit plus bas, APRÈS la règle de base .puce : ici,
-     elle était écrite avant et la base (white-space: nowrap) l'annulait — à 375 px, la
-     pastille de Sainte-Foy - Sillery - Cap-Rouge élargissait encore la page à 415 px. */
+  .puce { max-width: 100%; white-space: normal; }
 }
 
 
@@ -225,9 +222,16 @@ input[type="search"], select {
   font: inherit; font-size: 14.5px; padding: 9px 13px;
   border: 1px solid var(--ligne-forte); background: var(--carte); color: var(--encre);
   border-radius: var(--rayon);
+  /* Un select prend par défaut la largeur de sa plus longue option : depuis l'arrivée des
+     dix-neuf arrondissements, « Conseil d'arrondissement de Villeray–Saint-Michel–Parc-
+     Extension » débordait de l'écran. Le menu déroulant, lui, s'ouvre à sa vraie largeur. */
+  max-width: 100%; text-overflow: ellipsis;
 }
 input[type="search"]:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
 input[type="search"] { flex: 1 1 260px; min-width: 200px; }
+/* display:flex l'emporte sur le display:none que le navigateur donne à [hidden] : sans
+   cette ligne, masquer la case avec l'attribut hidden n'a aucun effet. */
+.case[hidden] { display: none; }
 .case {
   font-size: 14px; color: var(--doux); display: flex; align-items: center; gap: 7px;
   white-space: nowrap; border: 1px solid var(--ligne-forte); background: var(--carte);
@@ -251,13 +255,11 @@ input[type="search"] { flex: 1 1 260px; min-width: 200px; }
   font-size: 11.5px; font-weight: 600; letter-spacing: 0.01em;
   padding: 3px 9px; border-radius: 100px;
   background: var(--fond-2); color: var(--doux); white-space: nowrap;
+  /* « Direction de la culture_des sports… » ne tient pas sur un téléphone, et les soulignés
+     empêchent toute coupure naturelle : sur petit écran la pastille passe à la ligne. */
   max-width: 100%; overflow-wrap: anywhere;
 }
-/* ⚠️ APRÈS la règle de base, pas avant : à spécificité égale, la dernière règle écrite
-   gagne. Placée dans le bloc @media plus haut, cette dérogation était annulée par le
-   « nowrap » ci-dessus, et le nom d'instance le plus long (« Conseil de l'Arrondissement de
-   Sainte-Foy - Sillery - Cap-Rouge ») faisait glisser la page de côté sur un téléphone. */
-@media (max-width: 620px) { .puce { white-space: normal; } }
+@media (max-width: 700px) { .puce { white-space: normal; } }
 .puce.num { font-family: ui-monospace, Consolas, monospace; font-size: 11px; background: var(--fond-2); color: var(--encre); }
 .puce.theme { color: #fff; font-weight: 700; }
 .puce.montant { background: var(--accent-fond); color: var(--accent-encre); font-weight: 700; }
@@ -358,6 +360,60 @@ details p { background: var(--fond-2); border-radius: var(--rayon); padding: 12p
 .elu h3 { margin: 0 0 3px; font-size: 17px; font-weight: 700; letter-spacing: -0.015em; }
 .elu .district { font-size: 13.5px; color: var(--doux); margin: 0 0 8px; }
 .elu.choisi { box-shadow: 0 0 0 2px var(--accent), var(--ombre-forte); }
+
+/* Ce que la décision dit vraiment : le dispositif, puis les motifs. Deux blocs sobres —
+   c'est du texte officiel cité, pas un résumé, et il doit se lire comme tel. */
+.texte-decision:empty { display: none; }
+.texte-decision-pli { margin: 0 0 10px; }
+
+/* Le reste des décisions d'une séance, replié : un seul bouton, pas un mur de fiches. */
+.reste-seance > summary {
+  cursor: pointer; list-style: none; margin: 6px 0 2px; padding: 9px 14px;
+  border: 1px solid var(--ligne-forte); border-radius: var(--rayon);
+  background: var(--carte); color: var(--accent); font-weight: 700; font-size: 14px; text-align: center;
+}
+.reste-seance > summary::before { content: '▸ '; }
+.reste-seance[open] > summary::before { content: '▾ '; }
+.reste-seance > summary:hover { border-color: var(--accent); }
+.texte-decision-pli > summary { cursor: pointer; font-size: 13px; color: var(--accent); font-weight: 600; list-style: none; }
+.texte-decision-pli > summary::before { content: '▸ '; }
+.texte-decision-pli[open] > summary::before { content: '▾ '; }
+.texte-decision-pli[open] > summary { margin-bottom: 8px; }
+.texte-decision h4 {
+  margin: 0 0 3px; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.07em;
+  color: var(--doux); font-weight: 700;
+}
+.texte-decision .dispositif, .texte-decision .motifs { margin: 0 0 10px; }
+.texte-decision .dispositif p, .texte-decision .motifs p { margin: 0; font-size: 14.5px; line-height: 1.6; }
+.texte-decision .dispositif { border-left: 3px solid var(--accent); padding-left: 10px; }
+.texte-decision .motifs p { color: var(--doux); font-size: 13.5px; }
+
+/* Un nom d'arrondissement cité dans un paragraphe : souligné et en italique. Sans ça, une page
+   comme Sources est un mur de texte d'une seule couleur, où l'œil ne trouve pas les noms. */
+/* La page Sources est un long texte suivi : elle se lit comme un article, pas comme une
+   liste de fiches. Plus d'air entre les lignes, entre les puces et autour des titres, et une
+   colonne qui ne dépasse pas la largeur où l'œil retrouve le début de la ligne suivante.
+   (Martin, 18 septembre 2026 : « c'est dur à lire ».) */
+body[data-page="sources"] main { line-height: 1.75; }
+body[data-page="sources"] main p,
+body[data-page="sources"] main li { max-width: 72ch; }
+body[data-page="sources"] main > p { margin: 0 0 20px; }
+body[data-page="sources"] main > ul { margin: 0 0 28px; padding-left: 22px; }
+body[data-page="sources"] main > ul > li { margin-bottom: 16px; }
+body[data-page="sources"] main > ul > li:last-child { margin-bottom: 0; }
+body[data-page="sources"] h3 { margin: 40px 0 14px; }
+body[data-page="sources"] h2.page, body[data-page="sources"] h1.page { margin-bottom: 14px; }
+/* Le tableau garde une largeur minimale ; sur un téléphone il défile seul plutôt que de
+   pousser toute la page. */
+body[data-page="sources"] .bloc-tableau { margin: 24px 0 28px; overflow-x: auto; }
+body[data-page="sources"] main td,
+body[data-page="sources"] main th { padding: 12px 14px; }
+
+/* Un nom propre cité dans un paragraphe — la Ville, un jeu de données, un répertoire :
+   souligné, sans italique. L'italique reste aux noms de lieux. */
+.nom-propre { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+
+.lieu { font-style: italic; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 
 /* ---------- TABLEAUX ---------- */
 table {
@@ -484,6 +540,12 @@ footer a { color: var(--doux); }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 
 
+/* Les tableaux d'état (Sources) : à 400 px, « Dernière extraction » et « Chargé / disponible »
+   ne tiennent pas côte à côte et poussaient la page à 418 px de large. Le tableau défile seul
+   dans sa boîte plutôt que d'emporter la page avec lui. */
+#etat-donnees, #etat-archive { overflow-x: auto; }
+#etat-donnees table, #etat-archive table { min-width: 420px; }
+
 /* Un tableau replié : il doit porter la même ombre et le même cadre qu'une fiche, mais
    son contenu déborde en largeur sur petit écran — d'où le défilement horizontal interne
    plutôt qu'une page qui se met à glisser latéralement. */
@@ -570,6 +632,20 @@ h2.section[class*="cat-"] {
   color: var(--entete-doux); font-variant-numeric: tabular-nums;
 }
 
+/* Montréal : les conseillères et conseillers d'arrondissement ne siègent pas au conseil
+   municipal. Même fiche, un peu en retrait, pour qu'on ne les confonde pas. */
+.elu.arrondissement-seulement { opacity: .82; }
+
+/* Montréal : les responsabilités publiées par la Ville font parfois une ligne entière
+   (« Responsable du développement de l'Est de Montréal, des relations internationales et
+   intergouvernementales… »). Une pastille qui refuse de se couper élargit la fiche à sa
+   propre largeur, et tous les titres sortent du cadre. Dans une fiche d'élu, les pastilles
+   se coupent, et la colonne de texte peut rétrécir. */
+.elu > div { min-width: 0; flex: 1 1 auto; }
+.elu .puce, .elu .meta { white-space: normal; }
+.elu .meta { flex-wrap: wrap; }
+.elu h3, .elu .district { overflow-wrap: anywhere; }
+
 /* ---------- LEXIQUE : catégories dépliantes ---------- */
 /* Le titre de catégorie est le bouton : details/summary natifs, donc clavier et lecteur
    d'écran sans JavaScript. Le chevron dit l'état ; le compte dit ce qu'on va trouver. */
@@ -611,23 +687,9 @@ h2.page[id], h1.page[id] { scroll-margin-top: 16px; }
 .haut.visible { opacity: 1; transform: none; pointer-events: auto; }
 .haut:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-/* ---------- FICHES D'ÉLUS : rien ne sort du cadre ---------- */
-/* Les pastilles longues (« Président de l'Arrondissement de … ») et les noms composés passent
-   à la ligne au lieu d'élargir la fiche et la page. */
-.elu > div { min-width: 0; flex: 1 1 auto; }
-.elu .puce, .elu .meta { white-space: normal; }
-.elu .meta { flex-wrap: wrap; }
-.elu h3, .elu .district { overflow-wrap: anywhere; }
-
-/* Lien sortant dans la navigation : même rangée, mais on dit qu'on quitte le site. */
-nav a.externe { color: var(--entete-doux); font-weight: 500; }
-nav a.externe span[aria-hidden] { font-size: 12px; margin-left: 2px; }
-.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-
-/* Le comité exécutif sur la page du conseil : la légende, la pastille et les responsabilités. */
-.legende-executif { border-left: 6px solid #FFD24D; padding: 10px 14px; margin: 10px 0 18px; }
-.puce.puce-executif { background: #FFD24D; color: #131313; border-color: #131313; font-weight: 700; }
-.elu .responsabilites { margin: 6px 0 0; font-size: 13px; line-height: 1.45; }
+/* La légende qui explique l'absence de résumés : elle suit la ligne de comptage, donc elle
+   se serre contre elle plutôt que de flotter comme un avis ordinaire. */
+.avis.legende-resume { margin: 4px 0 20px; font-size: 13.5px; line-height: 1.55; }
 
 /* Lien « propulsé par » DAFRSolution.com, surligné jaune (21 oct. 2026). */
 footer a.lien-dafr { color: inherit; }
@@ -644,7 +706,6 @@ footer a.lien-dafr { color: inherit; }
 .fiche-soutien { margin-left: auto; font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 6px; background: #B5D4F4; color: #0C447C; text-decoration: none; }
 .fiche-soutien:hover { background: #85B7EB; }
 @media (max-width: 600px) { .fiche-soutien { margin-left: 0; } }
-
 /* Bande du commanditaire sur l'accueil (6 nov. 2026). */
 .commandite { margin: 26px 0 32px; max-width: none; border-left-width: 4px; }
 .commandite p { margin: 0; font-size: 17px; }
@@ -673,53 +734,6 @@ footer a.lien-dafr { color: inherit; }
   .commandite-texte p, .commandite-liste { font-size: 15px; }
 }
 
-/* ---------- PROPRE À LÉVIS ---------- */
-/* Un select prend par défaut la largeur de sa plus longue option : le nom d'instance le plus
-   long débordait de l'écran. Le menu déroulant, lui, s'ouvre à sa vraie largeur. */
-input[type="search"], select { max-width: 100%; text-overflow: ellipsis; }
-
-/* display:flex l'emporte sur le display:none que le navigateur donne à [hidden] : sans
-   cette ligne, masquer la case « Avec résumé seulement » avec l'attribut hidden n'a aucun effet. */
-.case[hidden] { display: none; }
-
-/* La légende qui explique l'absence de résumés : elle suit la ligne de comptage, donc elle
-   se serre contre elle plutôt que de flotter comme un avis ordinaire. */
-.avis.legende-resume { margin: 4px 0 20px; font-size: 13.5px; line-height: 1.55; }
-
-/* Les membres des conseils d'arrondissement qui ne siègent pas au conseil de la Ville : même
-   fiche, un peu en retrait. */
-.elu.arrondissement-seulement { opacity: .82; }
-
-/* Image du commanditaire anonyme (8 nov. 2026) : plus grande que les logos, coins arrondis. */
-.commandite-image .commandite-logo img { width: 200px; height: auto; border-radius: 10px; }
-@media (max-width: 600px) { .commandite-image .commandite-logo img { width: 100%; max-width: 280px; } }
-/* Sans cadre (Martin, 8 nov. 2026) : l'image seule, à pleine largeur de la colonne. */
-.commandite.commandite-image { background: none; border: 0; padding: 0; display: block; }
-.commandite-image .commandite-logo { display: block; }
-.commandite-image .commandite-logo img { width: 100%; max-width: 360px; height: auto; border-radius: 12px; display: block; margin: 0 auto; }
-.commandite-image .commandite-note { text-align: center; }
-.commandite-image .commandite-titre { display: none; }
-.commandite-image .commandite-note { margin-top: 8px; }
-/* Bannière (Martin, 8 nov. 2026) : bande noire pleine largeur, l'image au centre, comme un repère visuel. */
-.commandite-image .commandite-logo { background: #000; border-radius: 12px; padding: 12px 0; }
-.commandite-image .commandite-logo img { max-width: none; width: auto; height: 260px; border-radius: 0; }
-@media (max-width: 600px) { .commandite-image .commandite-logo img { height: auto; width: 100%; max-width: 320px; } }
-/* Sans bloc noir (Martin, 8 nov. 2026) : silhouettes noires en thème clair, blanches en thème sombre. */
-.commandite-image .commandite-logo { background: none; padding: 0; }
-.commandite-image .ca-sombre { display: none !important; }
-:root[data-theme="sombre"] .commandite-image .ca-clair { display: none !important; }
-:root[data-theme="sombre"] .commandite-image .ca-sombre { display: block !important; }
-/* Plus large (Martin, 8 nov. 2026). */
-.commandite-image .commandite-logo img { height: auto; width: 100%; max-width: 520px; }
-/* Version large (Martin, 8 nov. 2026) : toute la largeur de la colonne. */
-.commandite-image .commandite-logo img { max-width: 100%; }
-
-/* Commanditaire anonyme (9 nov. 2026) : encadré pointillé, sans image. */
-.commandite.commandite-anonyme { border: 2px dashed currentColor; border-left-width: 2px; background: transparent; }
-/* Format d'une annonce standard (9 nov. 2026) : 970 × 250 (« billboard ») ; 300 × 250 sur téléphone. */
-.commandite.commandite-anonyme { box-sizing: border-box; width: 100%; max-width: 970px; min-height: 250px; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px 32px; }
-@media (max-width: 600px) { .commandite.commandite-anonyme { max-width: 300px; min-height: 250px; padding: 16px; } }
-
 /* Points de procédure repliés en bas de chaque séance (9 nov. 2026). */
 .seance-procedure { margin-top: 10px; border: 1px dashed currentColor; border-radius: 8px; padding: 8px 12px; opacity: .85; }
 .seance-procedure > summary { cursor: pointer; font-weight: 600; font-size: 14px; }
@@ -744,9 +758,12 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 .bouton-tout-ouvrir { margin-left: auto; font: inherit; font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 6px; border: 1px solid currentColor; background: transparent; color: inherit; cursor: pointer; }
 .bouton-tout-ouvrir:hover { background: rgba(127, 127, 127, .15); }
 
-
 /* Vote nominatif sur une fiche de décision (fusion Votes et Décisions, 12 nov. 2026). */
 .bloc-vote { border: 1px solid var(--ligne); border-radius: var(--rayon); padding: 11px 16px; margin: 0 0 12px; }
+
+/* « Votre publicité ici » : remplace le bloc du commanditaire, même hauteur (12 nov. 2026). */
+.commandite.pub-ici { min-height: 290px; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 8px; border-style: dashed; }
+.pub-ici .pub-ici-titre { font-size: 28px; font-weight: 700; }
 
 /* En bref : la dernière séance de chaque conseil (commun/seances-en-bref.js, 13 nov. 2026).
    Un grand carré vert comme le résumé d'une décision ; dedans, une carte par conseil. */
@@ -789,6 +806,8 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 .eb-sorte-pv { background: var(--accent-fond); color: var(--accent-encre); border: 1px solid var(--accent); }
 :root[data-theme="sombre"] .eb-sorte-pv { color: var(--accent); }
 .eb-carte-odj { border-top: 3px solid var(--vedette); }
+/* Une boîte sur deux seulement (Martin, 16 nov. 2026). */
+.eb-grille > .eb-carte-odj:nth-child(even) { border-top-color: var(--ligne); }
 .eb-retard[open] > summary { margin-bottom: 8px; }
 .eb-retard .eb-grille + .eb-grille { margin-top: 12px; }
 .eb-detail { display: inline-block; margin-top: 12px; font-weight: 600; font-size: 14px; color: var(--accent-encre); } :root[data-theme="sombre"] .eb-detail { color: var(--accent); }
@@ -837,10 +856,18 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 .eb-votes-aucun { font-size: 12px; color: var(--doux); margin: 0; padding: 8px 0 0; border-top: 1px solid var(--ligne); background: none; }
 
 /* Contexte d'une décision : portée, durée, parcours du dossier (13 nov. 2026). */
-.contexte-decision { list-style: none; margin: 0 0 12px; padding: 10px 14px; border-left: 3px solid var(--accent); font-size: 14.5px; line-height: 1.5; }
+.contexte-decision { list-style: none; margin: 0 0 12px; padding: 10px 14px; border-left: 3px solid var(--accent); background: var(--surface, transparent); font-size: 14.5px; line-height: 1.5; }
 .contexte-decision li { margin: 2px 0; overflow-wrap: anywhere; }
 
-/* Chemin d un dossier, En bref (16 nov. 2026) */
+/* Contrat au SEAO sur une fiche de décision (16 nov. 2026, comme à Québec). */
+.bloc-contrat { border: 1px solid var(--ligne); border-radius: var(--rayon); padding: 11px 16px; margin: 0 0 12px; }
+.bloc-contrat ul { margin: 0; padding-left: 19px; }
+.bloc-contrat li { margin: 2px 0; }
+
+/* « Version officielle » au bout de la note de l'encadré En bref : cellulaire seulement (16 nov. 2026). */
+.eb-vo { display: none; font-weight: 700; color: #16191D; background: var(--vedette, #FFD24D); padding: 1px 5px; border-radius: 3px; white-space: nowrap; }
+@media (max-width: 700px) { .eb-vo { display: inline; } }
+
 .eb-chemin { font-size: 13px; margin: 4px 0 10px; color: var(--doux); }
 .eb-fleche { background: var(--vedette, #FFD24D); color: #16191D; padding: 0 5px; border-radius: 3px; margin: 0 2px; }
 
@@ -853,3 +880,10 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 @keyframes haut-envol { 0% { transform: none; opacity: 1; } 15% { transform: translateY(8px) scale(1.1); opacity: 1; } 100% { transform: translateY(var(--envol, -400px)) scale(.6); opacity: 0; } }
 .haut.envol { animation: haut-envol .7s cubic-bezier(.5,0,.2,1) forwards; opacity: 1 !important; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .haut.envol { animation: none; } }
+
+/* ---------- PROPRE À LÉVIS ---------- */
+/* Commanditaire anonyme (9 nov. 2026) : encadré pointillé, sans image, au format d'une annonce
+   standard : 970 × 250 (« billboard ») ; 300 × 250 sur téléphone. */
+.commandite.commandite-anonyme { border: 2px dashed currentColor; border-left-width: 2px; background: transparent; }
+.commandite.commandite-anonyme { box-sizing: border-box; width: 100%; max-width: 970px; min-height: 250px; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px 32px; }
+@media (max-width: 600px) { .commandite.commandite-anonyme { max-width: 300px; min-height: 250px; padding: 16px; } }
