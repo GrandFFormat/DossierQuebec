@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-19T18:29:13.086Z",
+ "generatedAt": "2026-11-20T18:02:07.005Z",
  "source": "https://ville.montreal.qc.ca/documents/Adi_Public/",
  "avertissement": "Les définitions de ce lexique sont rédigées par DossierVille — ce ne sont pas des textes de la Ville de Montréal ni des définitions légales. Ce qui vient des documents officiels, ce sont les décomptes et les exemples, mesurés sur les procès-verbaux de l'année.",
  "categories": {
@@ -12,7 +12,7 @@
  },
  "parametres": {
   "annee": "2026",
-  "procesVerbauxMesures": 187
+  "procesVerbauxMesures": 189
  },
  "nombre": 33,
  "entrees": [
@@ -23,10 +23,10 @@
    "definition": "La décision elle-même. Une fois adoptée, c'est l'acte officiel de l'instance : elle porte un numéro qui dit qui l'a prise et quand — CM26 0355 pour le conseil municipal en 2026, CE26 0412 pour le comité exécutif, CG26 0123 pour le conseil d'agglomération, CA26 pour un conseil d'arrondissement.",
    "ouVousLeVoyez": "Chaque fiche de la page Décisions est une résolution lue dans le procès-verbal officiel.",
    "occurrences": {
-    "procesVerbaux": 109,
-    "resolutions": 3846,
+    "procesVerbaux": 111,
+    "resolutions": 3906,
     "pourAnnee": "2026",
-    "total": 3846
+    "total": 3906
    },
    "exemple": {
     "numero": "CA26 08 0355",
@@ -66,10 +66,10 @@
    "definition": "Le dossier complet d'une décision dans le système de la Ville : le sommaire, ses pièces jointes, les interventions des services, puis la ou les résolutions. Son numéro à dix chiffres suit la décision d'une instance à l'autre — du comité exécutif au conseil municipal, puis à l'agglomération.",
    "ouVousLeVoyez": "Un même dossier peut donc apparaître trois fois sur la page Décisions, une par instance qui s'est prononcée.",
    "occurrences": {
-    "procesVerbaux": 187,
-    "resolutions": 6378,
+    "procesVerbaux": 189,
+    "resolutions": 6439,
     "pourAnnee": "2026",
-    "total": 6378
+    "total": 6439
    },
    "exemple": {
     "numero": "CA26 09 0262",
@@ -87,18 +87,18 @@
    "definition": "Le compte rendu officiel d'une séance : qui était présent, ce qui a été décidé, et — quand un vote enregistré a été demandé — qui a voté quoi.",
    "ouVousLeVoyez": "C'est la source de toutes les décisions et de tous les votes du site. Un par séance, en PDF, sur le site de la Ville.",
    "occurrences": {
-    "procesVerbaux": 187,
-    "resolutions": 488,
+    "procesVerbaux": 189,
+    "resolutions": 490,
     "pourAnnee": "2026",
-    "total": 488
+    "total": 490
    },
    "exemple": {
-    "numero": "CM26 1039",
-    "objet": "Approbation du procès-verbal de l'assemblée ordinaire du conseil municipal tenue le 21 septembre 2026, à 13 h",
-    "date": "2026-10-19",
+    "numero": "CG26 0580",
+    "objet": "Approbation du procès-verbal de l'assemblée ordinaire du conseil d'agglomération tenue le 24 septembre 2026, à 16 h",
+    "date": "2026-10-22",
     "type": "Résolution",
-    "instance": "Conseil municipal",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=9"
+    "instance": "Conseil d'agglomération",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=6"
    }
   },
   {
@@ -108,18 +108,18 @@
    "definition": "La liste des points qu'une séance doit traiter, publiée le vendredi précédant l'assemblée du conseil municipal. Les points sont numérotés par chapitre : 20 pour les contrats et ententes, 30 pour l'administration et les finances, 40 pour les règlements, 50 pour les nominations, 60 pour les motions.",
    "ouVousLeVoyez": "Le numéro d'article d'une résolution (20.03, 40.12) est celui de son point à l'ordre du jour.",
    "occurrences": {
-    "procesVerbaux": 187,
-    "resolutions": 804,
+    "procesVerbaux": 189,
+    "resolutions": 815,
     "pourAnnee": "2026",
-    "total": 804
+    "total": 815
    },
    "exemple": {
-    "numero": "CM26 1037",
-    "objet": "Adoption de l'ordre du jour de l'assemblée du conseil municipal",
-    "date": "2026-10-19",
+    "numero": "CG26 0579",
+    "objet": "Adoption de l'ordre du jour de l'assemblée du conseil d'agglomération",
+    "date": "2026-10-22",
     "type": "Résolution",
-    "instance": "Conseil municipal",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=6"
+    "instance": "Conseil d'agglomération",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=5"
    }
   },
   {
@@ -129,18 +129,18 @@
    "definition": "L'annonce qu'un règlement sera présenté à une séance suivante. Ça ne décide rien : ça prévient. C'est une étape obligatoire avant d'adopter un règlement.",
    "ouVousLeVoyez": "Souvent accompagné du dépôt du projet de règlement, puis suivi de son adoption à la séance suivante.",
    "occurrences": {
-    "procesVerbaux": 145,
-    "resolutions": 544,
+    "procesVerbaux": 147,
+    "resolutions": 553,
     "pourAnnee": "2026",
-    "total": 544
+    "total": 553
    },
    "exemple": {
-    "numero": "CM26 1115",
-    "objet": "Avis de motion et dépôt - Règlement établissant le processus de traitement des plaintes ou signalements relatifs à la conduite de certains officiers relevant du conseil municipal AVIS DE MOTION ET DÉPÔT D’UN PROJET DE RÈGLEMENT Avis de motion est donné par Alexandre Devaux-Guizani de l’inscription pour adoption à une assemblée subséquente du conseil municipal du projet de règlement intitulé « Règlement établissant le processus de traitement des plaintes ou signalements relatifs à la conduite de certains officiers relevant du conseil municipal », lequel est déposé avec le dossier décisionnel.",
-    "date": "2026-10-19",
+    "numero": "CG26 0620",
+    "objet": "Avis de motion et dépôt - Règlement autorisant la construction, la transformation et l'occupation d'un bâtiment à des fins d'hébergement pour personnes ayant besoin d'aide et d'assistance sur le lot 2 243 374",
+    "date": "2026-10-22",
     "type": "Résolution",
-    "instance": "Conseil municipal",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=59"
+    "instance": "Conseil d'agglomération",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=30"
    }
   },
   {
@@ -150,10 +150,10 @@
    "definition": "La forme la plus contraignante d'une décision municipale : une norme générale qui s'applique à tous. Son adoption suit des étapes obligatoires (avis de motion, projet, adoption).",
    "ouVousLeVoyez": "Les numéros disent l'instance et l'année : 26-012 pour le conseil municipal, RCG 26-005 pour l'agglomération, RCA pour un arrondissement.",
    "occurrences": {
-    "procesVerbaux": 83,
-    "resolutions": 244,
+    "procesVerbaux": 84,
+    "resolutions": 246,
     "pourAnnee": "2026",
-    "total": 244
+    "total": 246
    },
    "exemple": {
     "numero": "CA26 240421",
@@ -172,18 +172,18 @@
    "definition": "Les 65 élus de la Ville de Montréal : la mairesse ou le maire, les 18 maires d'arrondissement et 46 conseillères et conseillers de ville. Il adopte le budget, les règlements, les motions, et siège en assemblée ordinaire une fois par mois, le lundi.",
    "ouVousLeVoyez": "Ses séances sont publiques, webdiffusées, et s'ouvrent sur une période de questions du public.",
    "occurrences": {
-    "procesVerbaux": 109,
-    "resolutions": 1428,
+    "procesVerbaux": 110,
+    "resolutions": 1429,
     "pourAnnee": "2026",
-    "total": 1428
+    "total": 1429
    },
    "exemple": {
-    "numero": "CM26 1037",
-    "objet": "Adoption de l'ordre du jour de l'assemblée du conseil municipal",
-    "date": "2026-10-19",
+    "numero": "CG26 0581",
+    "objet": "Dépôt du calendrier des assemblées ordinaires du conseil municipal et du conseil d'agglomération de l'année 2027 Le porte-parole d’assemblée, Dimitrios (Jim) Beis, dépose le calendrier des assemblées ordinaires du conseil municipal et du conseil d'agglomération de l'année 2027, et le conseil en prend acte.",
+    "date": "2026-10-22",
     "type": "Résolution",
-    "instance": "Conseil municipal",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=6"
+    "instance": "Conseil d'agglomération",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=7"
    }
   },
   {
@@ -193,10 +193,10 @@
    "definition": "Le gouvernement de la Ville au quotidien : la mairesse ou le maire, sa présidence et une dizaine de membres choisis parmi les élus, chacun responsable de dossiers. Il prépare ce que les conseils adoptent et décide seul de ce qui lui est délégué. Il siège chaque semaine, le mercredi.",
    "ouVousLeVoyez": "La formule « Vu la recommandation du comité exécutif… » ouvre la plupart des résolutions du conseil municipal.",
    "occurrences": {
-    "procesVerbaux": 76,
-    "resolutions": 1561,
+    "procesVerbaux": 77,
+    "resolutions": 1602,
     "pourAnnee": "2026",
-    "total": 1561
+    "total": 1602
    },
    "exemple": {
     "numero": "CM26 1119",
@@ -214,10 +214,10 @@
    "definition": "Chacun des 19 arrondissements de Montréal a son conseil, présidé par son maire d'arrondissement, avec les conseillers de ville et d'arrondissement élus sur son territoire. Il décide de ce qui est local : urbanisme de proximité, parcs, loisirs, voirie locale, déneigement.",
    "ouVousLeVoyez": "Ce site couvre les trois instances centrales ; les 19 conseils d'arrondissement suivent le même schéma de publication et sont l'étape suivante.",
    "occurrences": {
-    "procesVerbaux": 166,
-    "resolutions": 2505,
+    "procesVerbaux": 167,
+    "resolutions": 2516,
     "pourAnnee": "2026",
-    "total": 2505
+    "total": 2516
    },
    "exemple": {
     "numero": "CA26 24 0393",
@@ -258,10 +258,10 @@
    "definition": "L'officier qui garde les documents officiels de la Ville, rédige les procès-verbaux et certifie les décisions. Ce n'est pas un élu. À Montréal, le greffier fait aussi l'appel des membres lors d'un vote enregistré.",
    "ouVousLeVoyez": "Sa signature clôt les procès-verbaux, avec celle de la présidence.",
    "occurrences": {
-    "procesVerbaux": 56,
-    "resolutions": 177,
+    "procesVerbaux": 57,
+    "resolutions": 182,
     "pourAnnee": "2026",
-    "total": 177
+    "total": 182
    },
    "exemple": {
     "numero": "CE26 1137",
@@ -300,18 +300,18 @@
    "definition": "L'instance où Montréal siège avec les 15 villes liées de l'île pour décider des services partagés : police, incendie, transport en commun, eau, évaluation foncière, logement social, grands parcs. Montréal y détient la majorité des voix ; les maires des villes liées y votent aussi.",
    "ouVousLeVoyez": "Ses résolutions portent le préfixe CG. Beaucoup passent d'abord par le conseil municipal sous la forme « recommander au conseil d'agglomération ».",
    "occurrences": {
-    "procesVerbaux": 59,
-    "resolutions": 1426,
+    "procesVerbaux": 60,
+    "resolutions": 1455,
     "pourAnnee": "2026",
-    "total": 1426
+    "total": 1455
    },
    "exemple": {
-    "numero": "CM26 1040",
-    "objet": "Dépôt du calendrier des assemblées ordinaires du conseil municipal et du conseil d'agglomération de l'année 2027 Le leader adjoint de la majorité, Alexandre Devaux-Guizani, dépose le document intitulé « calendrier des assemblées ordinaires du conseil municipal et du conseil d'agglomération de l'année 2027 », et le conseil en prend acte.",
-    "date": "2026-10-19",
+    "numero": "CG26 0579",
+    "objet": "Adoption de l'ordre du jour de l'assemblée du conseil d'agglomération",
+    "date": "2026-10-22",
     "type": "Résolution",
-    "instance": "Conseil municipal",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=11"
+    "instance": "Conseil d'agglomération",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=5"
    }
   },
   {
@@ -372,10 +372,10 @@
    "definition": "Personne n'a voté contre.",
    "ouVousLeVoyez": "La formule la plus courante, parce que la plupart des décisions passent sans opposition.",
    "occurrences": {
-    "procesVerbaux": 151,
-    "resolutions": 5846,
+    "procesVerbaux": 153,
+    "resolutions": 5906,
     "pourAnnee": "2026",
-    "total": 5846
+    "total": 5906
    },
    "exemple": {
     "numero": "CA26 29 0180",
@@ -421,10 +421,10 @@
    "definition": "L'instance constate officiellement qu'un document lui a été présenté. Ça ne l'approuve pas : ça l'enregistre.",
    "ouVousLeVoyez": "Souvent pour des rapports, des réponses du comité exécutif ou des dépôts obligatoires.",
    "occurrences": {
-    "procesVerbaux": 109,
-    "resolutions": 269,
+    "procesVerbaux": 110,
+    "resolutions": 270,
     "pourAnnee": "2026",
-    "total": 269
+    "total": 270
    },
    "exemple": {
     "numero": "CA26 240394",
@@ -464,10 +464,10 @@
    "definition": "Une permission d'écarter légèrement une règle du zonage pour un terrain précis — une marge, une hauteur, un nombre de cases de stationnement — sans changer le règlement pour tout le monde. À Montréal, c'est surtout une affaire d'arrondissement.",
    "ouVousLeVoyez": "Presque toujours rattachée à une adresse précise, nommée dans l'objet de la décision.",
    "occurrences": {
-    "procesVerbaux": 85,
-    "resolutions": 152,
+    "procesVerbaux": 86,
+    "resolutions": 154,
     "pourAnnee": "2026",
-    "total": 152
+    "total": 154
    },
    "exemple": {
     "numero": "CA26 240420",
@@ -550,18 +550,18 @@
    "definition": "L'attribution officielle d'un contrat à une entreprise, en général au plus bas soumissionnaire conforme au terme d'un appel d'offres.",
    "ouVousLeVoyez": "« Accorder un contrat à … pour … — Dépense totale de … $, taxes incluses — Appel d'offres public … (3 soumissionnaires) ». L'objet dit tout : qui, quoi, combien, combien de concurrents.",
    "occurrences": {
-    "procesVerbaux": 70,
-    "resolutions": 386,
+    "procesVerbaux": 71,
+    "resolutions": 393,
     "pourAnnee": "2026",
-    "total": 386
+    "total": 393
    },
    "exemple": {
-    "numero": "CM26 1044",
+    "numero": "CG26 0583",
     "objet": "Accorder un contrat à Protection Incendie CFS ltée, pour la fourniture d'ensembles d'équipement de protection individuel pour le Groupe d'intervention en matières dangereuses pour le Service de sécurité incendie de Montréal - Dépense totale de 257 589,99 $, taxes incluses - Appel d'offres public 26-21489 (1 soum. conforme)",
-    "date": "2026-10-19",
+    "date": "2026-10-22",
     "type": "Résolution",
-    "instance": "Conseil municipal",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=12"
+    "instance": "Conseil d'agglomération",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=7"
    }
   },
   {
@@ -571,18 +571,18 @@
    "definition": "La mise en concurrence obligatoire avant d'accorder un contrat au-delà d'un certain montant. Public, il est ouvert à tous ; sur invitation, il est réservé à des fournisseurs sollicités.",
    "ouVousLeVoyez": "Les contrats de Montréal sont aussi publiés en données ouvertes, avec le numéro de la résolution qui les accorde.",
    "occurrences": {
-    "procesVerbaux": 156,
-    "resolutions": 890,
+    "procesVerbaux": 158,
+    "resolutions": 898,
     "pourAnnee": "2026",
-    "total": 890
+    "total": 898
    },
    "exemple": {
-    "numero": "CM26 1043",
-    "objet": "Dépôt du rapport de la Commission sur l'inspecteur général intitulé « Étude des rapports de recommandations à la suite d'une enquête sur la sous-traitance dans l'exécution de contrats de collecte et de transport des matières résiduelles découlant de l'appel d'offres 23-19726 dans les arrondissements Saint-Laurent et Villeray–Saint-Michel–Parc-Extension » Le conseiller Denis Pelletier, à titre de président de cette commission, dépose le rapport de la Commission sur l'inspecteur général intitulé « Étude des rapports de recommandations à la suite d’une enquête sur la sous-traitance dans l’exécution de contrats de collecte et de transport des matières résiduelles découlant de l’appel d’offres",
-    "date": "2026-10-19",
+    "numero": "CG26 0583",
+    "objet": "Accorder un contrat à Protection Incendie CFS ltée, pour la fourniture d'ensembles d'équipement de protection individuel pour le Groupe d'intervention en matières dangereuses pour le Service de sécurité incendie de Montréal - Dépense totale de 257 589,99 $, taxes incluses - Appel d'offres public 26-21489 (1 soum. conforme)",
+    "date": "2026-10-22",
     "type": "Résolution",
-    "instance": "Conseil municipal",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=12"
+    "instance": "Conseil d'agglomération",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=7"
    }
   },
   {
@@ -592,18 +592,18 @@
    "definition": "Un contrat conclu directement, sans mise en concurrence. La loi ne le permet que dans des cas précis, et la Ville doit le dire dans la résolution.",
    "ouVousLeVoyez": "« contrat de gré à gré », « fournisseur unique ».",
    "occurrences": {
-    "procesVerbaux": 55,
-    "resolutions": 179,
+    "procesVerbaux": 56,
+    "resolutions": 183,
     "pourAnnee": "2026",
-    "total": 179
+    "total": 183
    },
    "exemple": {
-    "numero": "CM26 1060",
+    "numero": "CG26 0599",
     "objet": "Accorder un contrat de gré à gré à Oracle Canada ULC, pour un abonnement à la plateforme Exadata Cloud@Customer, par l'entremise de son entente avec le ministère de la Cybersécurité et er du Numérique (MCN), pour la période du 1 décembre 2026 au 30 novembre 2029 - Dépense totale de 2 256 036,97 $, taxes incluses / Autoriser une dépense de 45 120,73 $, taxes incluses, à titre de frais de gestion, payables au MCN",
-    "date": "2026-10-19",
+    "date": "2026-10-22",
     "type": "Résolution",
-    "instance": "Conseil municipal",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=22"
+    "instance": "Conseil d'agglomération",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=16"
    }
   },
   {
@@ -614,18 +614,18 @@
    "definition": "Une somme que la Ville verse à un organisme pour un projet ou une mission, encadrée par une convention qui dit à quoi elle sert et ce que l'organisme doit rendre compte.",
    "ouVousLeVoyez": "« Accorder un soutien financier de 250 000 $ à … et approuver un projet de convention à cet effet ».",
    "occurrences": {
-    "procesVerbaux": 154,
-    "resolutions": 706,
+    "procesVerbaux": 156,
+    "resolutions": 713,
     "pourAnnee": "2026",
-    "total": 706
+    "total": 713
    },
    "exemple": {
-    "numero": "CM26 1057",
+    "numero": "CG26 0596",
     "objet": "Approuver le projet d'addenda 1 à la convention de contribution financière entre la Ville et Mission Old Brewery, provenant des contributions issues du volet social du Règlement visant à améliorer l'offre en matière de logement social, abordable et familial en complément du soutien financier reçu dans le cadre du Fonds capital pour TOIT du Fonds de solidarité FTQ, afin de bonifier de 475 000 $ le montant de la contribution financière, pour la construction d'un immeuble situé au 1685 à 1693, avenue de l'Église, dans l'arrondissement du Sud-Ouest",
-    "date": "2026-10-19",
+    "date": "2026-10-22",
     "type": "Résolution",
-    "instance": "Conseil municipal",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=20"
+    "instance": "Conseil d'agglomération",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=14"
    }
   },
   {
@@ -657,18 +657,18 @@
    "definition": "Le règlement par lequel la Ville s'autorise à emprunter pour financer un projet, en général un investissement de longue durée. Il précise le montant et l'objet.",
    "ouVousLeVoyez": "« Adopter le règlement autorisant un emprunt de 12 000 000 $ afin de financer … ».",
    "occurrences": {
-    "procesVerbaux": 46,
-    "resolutions": 95,
+    "procesVerbaux": 47,
+    "resolutions": 98,
     "pourAnnee": "2026",
-    "total": 95
+    "total": 98
    },
    "exemple": {
-    "numero": "CM26 1081",
-    "objet": "Adoption - Règlement autorisant un emprunt de 10 430 000 $ pour le financement des travaux de mise à niveau de la Biosphère",
-    "date": "2026-10-19",
+    "numero": "CG26 0621",
+    "objet": "Avis de motion et dépôt - Règlement autorisant un emprunt de 313 000 000 $ afin de financer les travaux de construction et de renouvellement du réseau principal d'aqueduc AVIS DE MOTION ET DÉPÔT D’UN PROJET DE RÈGLEMENT Avis de motion est donné par Dimitrios (Jim) Beis de l’inscription pour adoption à une assemblée subséquente du conseil d’agglomération du projet de règlement intitulé « Règlement autorisant un emprunt de 313 000 000 $ afin de financer les travaux de construction et de renouvellement du réseau principal d'aqueduc », lequel est déposé avec le dossier décisionnel.",
+    "date": "2026-10-22",
     "type": "Résolution",
-    "instance": "Conseil municipal",
-    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=38"
+    "instance": "Conseil d'agglomération",
+    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=31"
    }
   },
   {

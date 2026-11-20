@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-19T18:28:40.141Z",
+ "generatedAt": "2026-11-20T18:01:33.982Z",
  "source": "https://ville.montreal.qc.ca/documents/Adi_Public/",
  "licence": "Documents publics de la Ville de Montréal — reproduction avec mention de la source, lecture gratuite (voir README).",
  "parametres": {
@@ -11,11 +11,11 @@
   ]
  },
  "partiel": false,
- "totalDisponible": 7737,
- "nombre": 7737,
- "nouveauxDepuisDerniereExecution": 94,
- "seancesLues": 189,
- "seancesEnAttente": 40,
+ "totalDisponible": 7806,
+ "nombre": 7806,
+ "nouveauxDepuisDerniereExecution": 69,
+ "seancesLues": 191,
+ "seancesEnAttente": 38,
  "themes": {
   "procedure": {
    "libelle": "Procédure",
@@ -91,15 +91,15 @@
   "type": [
    {
     "valeur": "Résolution",
-    "n": 7359
+    "n": 7424
    },
    {
     "valeur": "Procès-verbal",
-    "n": 189
+    "n": 191
    },
    {
     "valeur": "Ordre du jour",
-    "n": 189
+    "n": 191
    }
   ],
   "instance": [
@@ -113,7 +113,7 @@
    },
    {
     "valeur": "Conseil d'agglomération",
-    "n": 598
+    "n": 647
    },
    {
     "valeur": "Conseil d'arrondissement de Ville-Marie",
@@ -168,12 +168,12 @@
     "n": 214
    },
    {
-    "valeur": "Conseil d'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce",
-    "n": 205
+    "valeur": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+    "n": 206
    },
    {
-    "valeur": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
-    "n": 186
+    "valeur": "Conseil d'arrondissement de Côte-des-Neiges–Notre-Dame-de-Grâce",
+    "n": 205
    },
    {
     "valeur": "Conseil d'arrondissement de L'Île-Bizard–Sainte-Geneviève",
@@ -223,11 +223,15 @@
    },
    {
     "valeur": "Service du greffe",
-    "n": 152
+    "n": 154
    },
    {
     "valeur": "Direction des services administratifs et du greffe",
     "n": 151
+   },
+   {
+    "valeur": "Service de la stratégie immobilière et de l'habitation",
+    "n": 130
    },
    {
     "valeur": "Direction des relations avec les citoyens_greffe et services administratifs",
@@ -236,10 +240,6 @@
    {
     "valeur": "Direction du développement du territoire et des études techniques",
     "n": 129
-   },
-   {
-    "valeur": "Service de la stratégie immobilière et de l'habitation",
-    "n": 126
    },
    {
     "valeur": "Service de la stratégie immobilière, Direction des transactions",
@@ -271,19 +271,19 @@
    },
    {
     "valeur": "Service de l'eau, Direction des réseaux d'eau",
-    "n": 55
+    "n": 57
    },
    {
     "valeur": "Direction de la culture_des loisirs et des bâtiments",
     "n": 49
    },
    {
-    "valeur": "Service de la culture, Direction du développement culturel",
+    "valeur": "Service des finances et de l'évaluation foncière, Direction du budget et de la",
     "n": 44
    },
    {
-    "valeur": "Service des finances et de l'évaluation foncière, Direction du budget et de la",
-    "n": 43
+    "valeur": "Service de la culture, Direction du développement culturel",
+    "n": 44
    },
    {
     "valeur": "Service du développement économique, Direction du développement du territoire",
@@ -303,15 +303,15 @@
    },
    {
     "valeur": "Service de l'urbanisme et de la mobilité, Direction de la planification et de la",
-    "n": 31
+    "n": 32
+   },
+   {
+    "valeur": "Service de l'eau, Direction de l'épuration des eaux usées",
+    "n": 29
    },
    {
     "valeur": "Direction de l'aménagement urbain et du patrimoine",
     "n": 29
-   },
-   {
-    "valeur": "Service de l'eau, Direction de l'épuration des eaux usées",
-    "n": 28
    },
    {
     "valeur": "Service des infrastructures du réseau routier, Direction de la réalisation des projets",
@@ -330,12 +330,12 @@
     "n": 27
    },
    {
-    "valeur": "Service de la culture_des sports et des loisirs, Direction des sports",
+    "valeur": "Service de l'eau, Direction des stratégies et de la performance",
     "n": 26
    },
    {
-    "valeur": "Service de l'eau, Direction des stratégies et de la performance",
-    "n": 25
+    "valeur": "Service de la culture_des sports et des loisirs, Direction des sports",
+    "n": 26
    },
    {
     "valeur": "Service du développement économique",
@@ -346,12 +346,12 @@
     "n": 21
    },
    {
-    "valeur": "Service des grands parcs_du Mont-Royal et des sports, Direction gestion de grands parcs et",
+    "valeur": "Service de l'eau, Direction de l'eau potable",
     "n": 19
    },
    {
-    "valeur": "Service de l'eau, Direction de l'eau potable",
-    "n": 18
+    "valeur": "Service des grands parcs_du Mont-Royal et des sports, Direction gestion de grands parcs et",
+    "n": 19
    },
    {
     "valeur": "Service de l'eau, Direction de la gestion des actifs",
@@ -386,6 +386,10 @@
     "n": 16
    },
    {
+    "valeur": "Service de police de Montréal, Direction des services spécialisés",
+    "n": 15
+   },
+   {
     "valeur": "Service de la gestion et planification des immeubles, Direction exploitation des bâtiments et",
     "n": 15
    },
@@ -410,6 +414,10 @@
     "n": 15
    },
    {
+    "valeur": "Service de l'environnement et de la transition écologique",
+    "n": 14
+   },
+   {
     "valeur": "Service de l'Espace pour la vie_des Grand parcs et du Mont-Royal, Direction gestion de",
     "n": 14
    },
@@ -419,10 +427,6 @@
    },
    {
     "valeur": "Service de la culture_des sports et des loisirs, Direction Cinéma-Festivals-Événements",
-    "n": 14
-   },
-   {
-    "valeur": "Service de police de Montréal, Direction des services spécialisés",
     "n": 14
    },
    {
@@ -443,10 +447,6 @@
    },
    {
     "valeur": "Service de la diversité et de l'inclusion sociale, Direction stratégies et programmes",
-    "n": 13
-   },
-   {
-    "valeur": "Service de l'environnement et de la transition écologique",
     "n": 13
    },
    {
@@ -514,6 +514,14 @@
     "n": 9
    },
    {
+    "valeur": "Service des technologies de l'information, Direction institutionnelle",
+    "n": 8
+   },
+   {
+    "valeur": "Service du matériel roulant et des ateliers",
+    "n": 8
+   },
+   {
     "valeur": "Service de l'approvisionnement",
     "n": 8
    },
@@ -524,14 +532,6 @@
    {
     "valeur": "Service de la stratégie immobilière",
     "n": 8
-   },
-   {
-    "valeur": "Service des technologies de l'information, Direction institutionnelle",
-    "n": 7
-   },
-   {
-    "valeur": "Service du matériel roulant et des ateliers",
-    "n": 7
    },
    {
     "valeur": "Service des technologies de l'information, Direction espaces de travail et services aux",
@@ -574,6 +574,14 @@
     "n": 7
    },
    {
+    "valeur": "Bureau de lutte contre l'itinérance",
+    "n": 6
+   },
+   {
+    "valeur": "Service de l'Espace pour la vie_des Grand parcs et du Mont-Royal",
+    "n": 6
+   },
+   {
     "valeur": "Conseil Interculturel",
     "n": 6
    },
@@ -606,11 +614,11 @@
     "n": 6
    },
    {
-    "valeur": "Service de la gestion et planification des immeubles, Direction de la sécurité",
+    "valeur": "Service de l'Espace pour la vie_des Grand parcs et du Mont-Royal, Direction",
     "n": 5
    },
    {
-    "valeur": "Bureau de lutte contre l'itinérance",
+    "valeur": "Service de la gestion et planification des immeubles, Direction de la sécurité",
     "n": 5
    },
    {
@@ -650,6 +658,10 @@
     "n": 5
    },
    {
+    "valeur": "Service des finances et de l'évaluation foncière",
+    "n": 4
+   },
+   {
     "valeur": "Service de la diversité et de l'inclusion sociale, Direction stratégies et",
     "n": 4
    },
@@ -663,14 +675,6 @@
    },
    {
     "valeur": "Service de sécurité incendie de Montréal, Direction des opérations",
-    "n": 4
-   },
-   {
-    "valeur": "Service de l'Espace pour la vie_des Grand parcs et du Mont-Royal",
-    "n": 4
-   },
-   {
-    "valeur": "Service de l'Espace pour la vie_des Grand parcs et du Mont-Royal, Direction",
     "n": 4
    },
    {
@@ -708,6 +712,10 @@
    {
     "valeur": "Service de l'Espace pour la vie, Planétarium",
     "n": 4
+   },
+   {
+    "valeur": "Service de sécurité incendie de Montréal, Opérations centralisées",
+    "n": 3
    },
    {
     "valeur": "Service des ressources humaines",
@@ -807,14 +815,6 @@
    },
    {
     "valeur": "Service de l'urbanisme et de la mobilité, Direction des grands projets de",
-    "n": 2
-   },
-   {
-    "valeur": "Service des finances et de l'évaluation foncière",
-    "n": 2
-   },
-   {
-    "valeur": "Service de sécurité incendie de Montréal, Opérations centralisées",
     "n": 2
    },
    {
@@ -932,6 +932,10 @@
    {
     "valeur": "Service du développement économique, Direction Mise en valeur des pôles économiques",
     "n": 2
+   },
+   {
+    "valeur": "Service du greffe, Direction, Division de la réglementation de l'accès à",
+    "n": 1
    },
    {
     "valeur": "Service de police de Montréal, Direction",
@@ -1333,67 +1337,67 @@
   "theme": [
    {
     "valeur": "procedure",
-    "n": 1400
+    "n": 1413
    },
    {
     "valeur": "urbanisme",
-    "n": 1051
+    "n": 1061
    },
    {
     "valeur": "transport",
-    "n": 974
+    "n": 981
    },
    {
     "valeur": "environnement",
-    "n": 631
+    "n": 640
+   },
+   {
+    "valeur": "contrats",
+    "n": 506
    },
    {
     "valeur": "administration",
     "n": 499
    },
    {
-    "valeur": "contrats",
-    "n": 498
-   },
-   {
     "valeur": "loisirs",
-    "n": 381
+    "n": 383
    },
    {
     "valeur": "culture",
-    "n": 323
+    "n": 324
    },
    {
     "valeur": "subventions",
     "n": 310
    },
    {
-    "valeur": "travaux",
-    "n": 255
+    "valeur": "finances",
+    "n": 259
    },
    {
-    "valeur": "finances",
-    "n": 255
+    "valeur": "travaux",
+    "n": 256
    },
    {
     "valeur": "immobilier",
-    "n": 252
+    "n": 253
    },
    {
     "valeur": "honneurs",
-    "n": 243
+    "n": 244
    },
    {
     "valeur": "economie",
-    "n": 241
+    "n": 243
    },
    {
     "valeur": "social",
-    "n": 183
+    "n": 187
    },
    {
     "valeur": "securite",
-    "n": 138
+    "n": 144
    },
    {
     "valeur": "rh",
@@ -1405,17 +1409,17 @@
   "namur-hippodrome": {
    "titre": "Quartier Namur–Hippodrome",
    "description": "Le nouveau quartier sur le site de l'ancien hippodrome Blue Bonnets : vente des terrains, règlements d'emprunt, aqueduc du secteur Namur–De la Savane.",
-   "n": 22
+   "n": 23
   },
   "louvain-est": {
    "titre": "Écoquartier Louvain Est",
    "description": "Le quartier construit sur des terrains municipaux d'Ahuntsic-Cartierville : acquisitions, décontamination des sols, noms de rues, aménagements transitoires.",
-   "n": 27
+   "n": 29
   },
   "frederic-back": {
    "titre": "Parc Frédéric-Back et complexe environnemental Saint-Michel",
    "description": "L'ancienne carrière devenue dépotoir, transformée en parc par phases : serres urbaines, captage des biogaz, rationalisation électrique.",
-   "n": 24
+   "n": 25
   },
   "grand-parc-ouest": {
    "titre": "Grand parc de l'Ouest",
@@ -1425,17 +1429,17 @@
   "eau-egouts": {
    "titre": "Eau potable, aqueduc et égouts",
    "description": "Conduites, usines de production d'eau potable, station d'épuration Jean-R.-Marcotte, bassins de rétention.",
-   "n": 140
+   "n": 144
   },
   "securite-publique": {
    "titre": "Police et sécurité publique",
    "description": "Le Service de police de la Ville de Montréal : contrats, postes de quartier, motions du conseil.",
-   "n": 83
+   "n": 87
   },
   "logement": {
    "titre": "Logement social et abordable",
    "description": "Subventions, terrains et projets de logement social, abordable ou étudiant, dont ceux de la SHDM et de l'OMHM.",
-   "n": 47
+   "n": 52
   },
   "matieres-residuelles": {
    "titre": "Matières résiduelles",
@@ -1460,12 +1464,12 @@
   "itinerance": {
    "titre": "Itinérance et hébergement d'urgence",
    "description": "Soutien aux organismes, haltes-chaleur et refuges pour les personnes en situation d'itinérance.",
-   "n": 40
+   "n": 42
   },
   "deneigement": {
    "titre": "Déneigement",
    "description": "Contrats de déneigement et de chargement de la neige, épandage d'abrasifs, règlements de stationnement.",
-   "n": 47
+   "n": 48
   },
   "velo": {
    "titre": "Vélo : REV, pistes cyclables et BIXI",
@@ -1663,7 +1667,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-11-19_16h00_FR.pdf",
@@ -1685,7 +1689,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-11-17_09h00_FR.pdf",
@@ -1707,7 +1711,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-11-16_13h00_FR.pdf",
@@ -1729,7 +1733,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-11-11_09h00_FR.pdf",
@@ -1751,7 +1755,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-11-11_08h00_FR.pdf",
@@ -1773,7 +1777,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vma/CA_Vma_PV_ORDI_2026-11-10_18h30_FR.pdf",
@@ -1795,7 +1799,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sud/CA_Sud_PV_ORDI_2026-11-09_19h00_FR.pdf",
@@ -1817,7 +1821,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-11-04_09h00_FR.pdf",
@@ -1843,7 +1847,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Anj/CA_Anj_PV_ORDI_2026-11-03_19h00_FR.pdf",
@@ -1865,7 +1869,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ibs/CA_Ibs_PV_ORDI_2026-11-03_19h30_FR.pdf",
@@ -1887,7 +1891,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_PV_ORDI_2026-11-03_19h00_FR.pdf",
@@ -1909,7 +1913,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rdp/CA_Rdp_PV_ORDI_2026-11-03_19h00_FR.pdf",
@@ -1931,7 +1935,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Slt/CA_Slt_PV_ORDI_2026-11-03_19h30_FR.pdf",
@@ -1953,7 +1957,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-11-03_19h00_FR.pdf",
@@ -1975,7 +1979,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Vsm/CA_Vsm_PV_ORDI_2026-11-03_18h30_FR.pdf",
@@ -1997,7 +2001,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Cdn/CA_Cdn_PV_ORDI_2026-11-02_18h30_FR.pdf",
@@ -2019,7 +2023,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Lac/CA_Lac_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -2041,7 +2045,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Las/CA_Las_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -2063,7 +2067,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mhm/CA_Mhm_PV_ORDI_2026-11-02_18h30_FR.pdf",
@@ -2085,7 +2089,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Mtn/CA_Mtn_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -2111,7 +2115,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pir/CA_Pir_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -2136,7 +2140,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Pmr/CA_Pmr_PV_ORDI_2026-11-02_18h30_FR.pdf",
@@ -2158,7 +2162,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -2180,7 +2184,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Sld/CA_Sld_PV_ORDI_2026-11-02_19h00_FR.pdf",
@@ -2202,7 +2206,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-10-28_09h00_FR.pdf",
@@ -2221,16 +2225,12 @@
    "titre": "Séance du conseil d'agglomération",
    "lien": "https://montreal.ca/evenements/seance-du-conseil-dagglomeration-102507",
    "source": "calendrier",
-   "etat": "procès-verbal non publié",
-   "pv": null,
-   "odj": null,
-   "essaye": "2026-11-19",
-   "essais": [
-    {
-     "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf",
-     "resultat": "pas un PDF — page « 404 Page introuvable - 404 not found »"
-    }
-   ]
+   "etat": "lue",
+   "versionLecture": "13.2",
+   "pv": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf",
+   "odj": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf",
+   "nombreResolutions": 47,
+   "lueLe": "2026-11-20"
   },
   {
    "id": "CM_2026-10-20_09h00",
@@ -2246,7 +2246,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-20_09h00_FR.pdf",
@@ -2286,7 +2286,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-10-14_09h00_FR.pdf",
@@ -2326,7 +2326,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-10-07_09h00_FR.pdf",
@@ -2482,7 +2482,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Out/CA_Out_PV_ORDI_2026-10-06_19h00_FR.pdf",
@@ -2563,16 +2563,12 @@
    "source": "sondage des documents publiés",
    "preuve": "CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf",
    "nom": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
-   "etat": "procès-verbal non publié",
-   "pv": null,
-   "odj": null,
-   "essaye": "2026-11-19",
-   "essais": [
-    {
-     "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf",
-     "resultat": "pas un PDF — page « 404 Page introuvable - 404 not found »"
-    }
-   ]
+   "etat": "lue",
+   "versionLecture": "13.2",
+   "pv": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "odj": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf",
+   "nombreResolutions": 18,
+   "lueLe": "2026-11-20"
   },
   {
    "id": "CA_Sld_2026-10-06_19h00",
@@ -2660,7 +2656,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-09-30_09h00_FR.pdf",
@@ -2700,7 +2696,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-09-22_09h00_FR.pdf",
@@ -2740,7 +2736,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CE/CE_PV_ORDI_2026-09-16_09h00_FR.pdf",
@@ -3084,7 +3080,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-08-25_09h00_FR.pdf",
@@ -3554,7 +3550,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-06-16_09h00_FR.pdf",
@@ -4042,7 +4038,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-05-12_09h00_FR.pdf",
@@ -4888,7 +4884,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Ver/CA_Ver_PV_ORDI_2026-04-07_19h00_FR.pdf",
@@ -5416,7 +5412,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-02-17_09h00_FR.pdf",
@@ -5904,7 +5900,7 @@
    "etat": "procès-verbal non publié",
    "pv": null,
    "odj": null,
-   "essaye": "2026-11-19",
+   "essaye": "2026-11-20",
    "essais": [
     {
      "url": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-01-27_09h00_FR.pdf",
@@ -6085,6 +6081,1184 @@
  ],
  "decisions": [
   {
+   "id": "CG_2026-10-22_16h00_PV",
+   "numero": null,
+   "objet": "Procès-verbal — Conseil d'agglomération, séance ordinaire du 2026-10-22",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Procès-verbal",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": null,
+   "dossier": null,
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nombreResolutions": 47,
+   "nombrePages": 33,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG_2026-10-22_16h00_ODJ",
+   "numero": null,
+   "objet": "Ordre du jour — Conseil d'agglomération, séance du 2026-10-22 (152 points)",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Ordre du jour",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": null,
+   "dossier": null,
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0579",
+   "numero": "CG26 0579",
+   "objet": "Adoption de l'ordre du jour de l'assemblée du conseil d'agglomération",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service du greffe",
+   "article": "03.01",
+   "dossier": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=5",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0580",
+   "numero": "CG26 0580",
+   "objet": "Approbation du procès-verbal de l'assemblée ordinaire du conseil d'agglomération tenue le 24 septembre 2026, à 16 h",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service du greffe",
+   "article": "03.02",
+   "dossier": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=6",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0581",
+   "numero": "CG26 0581",
+   "objet": "Dépôt du calendrier des assemblées ordinaires du conseil municipal et du conseil d'agglomération de l'année 2027 Le porte-parole d’assemblée, Dimitrios (Jim) Beis, dépose le calendrier des assemblées ordinaires du conseil municipal et du conseil d'agglomération de l'année 2027, et le conseil en prend acte.",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service du greffe, Direction, Division de la réglementation de l'accès à",
+   "article": "07.01",
+   "dossier": "1260310001",
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=7",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=134",
+   "sommaireId": "1260310001",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0582",
+   "numero": "CG26 0582",
+   "objet": "Dépôt de la projection des résultats de l'exercice 2026 en date du 31 août 2026 - Volet agglomération et de l'état des revenus et des charges réels global Ville, au 31 août 2026 comparé avec le 31 août 2025 Le porte-parole d’assemblée, Dimitrios (Jim) Beis, dépose le la projection des résultats de l’exercice 2026 en date du 31 août 2026 – Volet agglomération, ainsi que l’état des revenus et des charges réels de la Ville au 31 août 2026 comparé avec le 31 août 2025, et le conseil en prend acte.",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service des finances et de l'évaluation foncière, Direction du budget et de la",
+   "article": "07.02",
+   "dossier": "1263074028",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=7",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=139",
+   "sommaireId": "1263074028",
+   "nouveau": true,
+   "theme": "environnement",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0583",
+   "numero": "CG26 0583",
+   "objet": "Accorder un contrat à Protection Incendie CFS ltée, pour la fourniture d'ensembles d'équipement de protection individuel pour le Groupe d'intervention en matières dangereuses pour le Service de sécurité incendie de Montréal - Dépense totale de 257 589,99 $, taxes incluses - Appel d'offres public 26-21489 (1 soum. conforme)",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de sécurité incendie de Montréal, Opérations centralisées",
+   "article": "20.01",
+   "dossier": "1266953003",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=7",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=152",
+   "sommaireId": "1266953003",
+   "nouveau": true,
+   "theme": "securite",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0584",
+   "numero": "CG26 0584",
+   "objet": "Conclure des ententes-cadres avec les firmes Goodyear Canada inc., Michelin Amérique du Nord (Canada) inc., Continental Tire Canada, inc., Toyo Tire Canada inc., Hankook Tire Canada Corp., pour utiliser les contrats à commandes de fourniture de divers pneus neufs, dans le cadre de l'adhésion de la Ville à l'appel d'offres mené par le Centre d'acquisitions gouvernementales 2026- 8109-50-02, d'une durée de 36 mois - Montant estimé des ententes : 5 124 895,65 $, taxes incluses",
+   "categorie": "1265588002",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.02",
+   "dossier": "1265593005",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=8",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=168",
+   "sommaireId": "1265593005",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0585",
+   "numero": "CG26 0585",
+   "objet": "Autoriser une dépense additionnelle de 65 765,70 $, taxes incluses, pour les travaux d'infrastructures (égout, aqueduc et préparation du terrain) liés à la poursuite de l'implantation d'habitations modulaires sur le site de l'ancien Hippodrome de Montréal, dans le cadre du contrat accordé à Loiselle inc. (CE25 0441), majorant ainsi le montant total du contrat à 677 412 $, taxes incluses",
+   "categorie": "1267360004",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.03",
+   "dossier": "1267157017",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=9",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=177",
+   "sommaireId": "1267157017",
+   "nouveau": true,
+   "theme": "environnement",
+   "themeSource": "objet",
+   "projets": [
+    "namur-hippodrome",
+    "eau-egouts"
+   ]
+  },
+  {
+   "id": "CG26 0586",
+   "numero": "CG26 0586",
+   "objet": "Conclure des ententes-cadres avec les firmes Provencher Roy + Associés Architectes inc., Atelier Civiliti inc., Les services EXP inc., Nippaysage inc., BC2 Groupe conseil inc. et Vlan paysages inc., pour les services professionnels multidisciplinaires en aménagement urbain, d'une durée de 36 mois - Montant estimé des ententes : 6 192 988,70 $, taxes incluses - Appel d'offres public 26-21143 (18 soum.)",
+   "categorie": "1269544001",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.04",
+   "dossier": "1269299003",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=9",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=186",
+   "sommaireId": "1269299003",
+   "nouveau": true,
+   "theme": "environnement",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0587",
+   "numero": "CG26 0587",
+   "objet": "Autoriser, sans dépense additionnelle, la prolongation de l'entente du regroupement d'achats de services cellulaires avec le Centre d'acquisitions gouvernementales (CG22 0238) jusqu'au 20 février 2027",
+   "categorie": "1269442006",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.05",
+   "dossier": "1269563009",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=10",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=287",
+   "sommaireId": "1269563009",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0588",
+   "numero": "CG26 0588",
+   "objet": "Autoriser une dépense additionnelle de 48 398,55 $, taxes incluses, pour les travaux d'infrastructures (égout, aqueduc et préparation du terrain) liés à la poursuite de l'implantation d'habitations modulaires sur le site Louvain Ouest, dans le cadre du contrat accordé à Loiselle inc. (CE25 0442), majorant ainsi le montant total du contrat à 914 546,41 $, taxes incluses",
+   "categorie": "1264069005",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.06",
+   "dossier": "1261570001",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=10",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=292",
+   "sommaireId": "1261570001",
+   "nouveau": true,
+   "theme": "environnement",
+   "themeSource": "objet",
+   "projets": [
+    "louvain-est",
+    "eau-egouts"
+   ]
+  },
+  {
+   "id": "CG26 0589",
+   "numero": "CG26 0589",
+   "objet": "Autoriser une dépense additionnelle de 14 251,38 $, taxes incluses, pour l'ajout des taxes applicables, dans le cadre du contrat accordé à Dyplex Communications ltd (CG26 0455), majorant ainsi le montant total du contrat à 164 265,93 $, taxes incluses",
+   "categorie": "1265372003",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.07",
+   "dossier": "1268527002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=11",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=301",
+   "sommaireId": "1268527002",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0590",
+   "numero": "CG26 0590",
+   "objet": "Exercer l'option de la prolongation de 12 mois sans dépense additionnelle, pour la fourniture de services de surveillance en santé et sécurité sur les chantiers de la direction de l'eau potable, dans le cadre du contrat accordé à Brûlé Murray et Associés inc. (CG23 0239)",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de l'eau, Direction de l'eau potable",
+   "article": "20.08",
+   "dossier": "1268375001",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=11",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=349",
+   "sommaireId": "1268375001",
+   "nouveau": true,
+   "theme": "environnement",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0591",
+   "numero": "CG26 0591",
+   "objet": "Exercer l'option de la deuxième prolongation de 12 mois / Autoriser une dépense additionnelle de 116 757,12 $, taxes incluses, pour le renouvellement du contrat de maintenance pour le soutien er technique des licences du logiciel Citrix, pour la période du 1 janvier 2027 au 31 décembre 2027, dans le cadre du contrat accordé à Bell Canada (CG22 0755), majorant ainsi le montant total du contrat à 563 547,68 $, taxes incluses",
+   "categorie": "1267231015",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.09",
+   "dossier": "1260094003",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=12",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=359",
+   "sommaireId": "1260094003",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0592",
+   "numero": "CG26 0592",
+   "objet": "Exercer l'option de prolongation de 12 mois / Autoriser une dépense additionnelle de 344 925 $, taxes incluses, pour le renouvellement du service d'entretien du logiciel SIGAL utilisé par le er Service de police de la Ville de Montréal, pour la période du 1 janvier au 31 décembre 2027 dans le cadre du contrat accordé à Cegid inc. (CG23 0637), majorant ainsi le montant total du contrat à 1 498 216,33 $, taxes incluses",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service des technologies de l'information, Direction institutionnelle",
+   "article": "20.10",
+   "dossier": "1267684005",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=12",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=368",
+   "sommaireId": "1267684005",
+   "nouveau": true,
+   "theme": "securite",
+   "themeSource": "objet",
+   "projets": [
+    "securite-publique"
+   ]
+  },
+  {
+   "id": "CG26 0593",
+   "numero": "CG26 0593",
+   "objet": "Approuver l'entente entre le ministre de l'Agriculture, des Pêcheries et de l'Alimentation du Québec et la Ville, relative à la communication de renseignements de nature personnelle et confidentielle concernant les exploitations agricoles situées sur le territoire de l'agglomération dans le but de favoriser le développement des activités agricoles ou la protection du territoire agricole",
+   "categorie": "1268321003",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.11",
+   "dossier": "1268199002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=13",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=382",
+   "sommaireId": "1268199002",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0594",
+   "numero": "CG26 0594",
+   "objet": "Approuver le projet d'acte en vertu duquel la Ville acquiert de Logistec Services Maritimes SRI, une servitude réelle et perpétuelle d'utilités publiques aux fins de la construction, de l'exploitation et de l'entretien d'un collecteur pluvial et sanitaire, dont l'assiette en volumétrie, d'une superficie au sol de 9 119 mètres carrés, grève une partie du lot 4 683 647 du cadastre du Québec, circonscription foncière de Montréal, située dans l'axe est-ouest de l'Île de Montréal, dans la Ville de Montréal-Est, pour un montant de 490 780 $, plus les taxes applicables",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de la stratégie immobilière et de l'habitation",
+   "article": "20.12",
+   "dossier": "1268290002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=13",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=407",
+   "sommaireId": "1268290002",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0595",
+   "numero": "CG26 0595",
+   "objet": "Approuver le projet d'acte en vertu duquel la Ville acquiert de la Coopérative d'habitation Ste-Anne (Montréal), à des fins de logement social, un terrain vacant connu et désigné comme étant le lot 1 853 591 du cadastre du Québec, circonscription foncière de Montréal, situé sur la rue de la Montagne, dans l'arrondissement du Sud-Ouest, d'une superficie de 433,2 mètres carrés, pour le prix de 500 000 $, plus les taxes applicables",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de la stratégie immobilière et de l'habitation",
+   "article": "20.13",
+   "dossier": "1268290007",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=14",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=455",
+   "sommaireId": "1268290007",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet",
+   "projets": [
+    "logement"
+   ]
+  },
+  {
+   "id": "CG26 0596",
+   "numero": "CG26 0596",
+   "objet": "Approuver le projet d'addenda 1 à la convention de contribution financière entre la Ville et Mission Old Brewery, provenant des contributions issues du volet social du Règlement visant à améliorer l'offre en matière de logement social, abordable et familial en complément du soutien financier reçu dans le cadre du Fonds capital pour TOIT du Fonds de solidarité FTQ, afin de bonifier de 475 000 $ le montant de la contribution financière, pour la construction d'un immeuble situé au 1685 à 1693, avenue de l'Église, dans l'arrondissement du Sud-Ouest",
+   "categorie": "1269196002",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.14",
+   "dossier": "1268440001",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=14",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=500",
+   "sommaireId": "1268440001",
+   "nouveau": true,
+   "theme": "social",
+   "themeSource": "objet",
+   "projets": [
+    "logement"
+   ]
+  },
+  {
+   "id": "CG26 0597",
+   "numero": "CG26 0597",
+   "objet": "Approuver les addendas 1 aux conventions de contribution financière entre la Ville et trois différents organismes (CG25 0507), pour prolonger la durée des conventions au 31 décembre 2027 et pour un soutien financier additionnel total de 860 692 $, majorant ainsi le montant total des contributions financières à 1 560 011 $, dans le cadre du budget d'agglomération du Service de la diversité et de l'inclusion sociale et du Bureau de la lutte à l'itinérance",
+   "categorie": "1267231036",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.15",
+   "dossier": "1268071003",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=15",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=534",
+   "sommaireId": "1268071003",
+   "nouveau": true,
+   "theme": "social",
+   "themeSource": "objet",
+   "projets": [
+    "itinerance"
+   ]
+  },
+  {
+   "id": "CG26 0598",
+   "numero": "CG26 0598",
+   "objet": "Accorder un contrat à J.N.A. Leblanc Électrique inc., pour les travaux électriques en régie contrôlée sur les équipements de la Direction de l'épuration des eaux usées, pour une période de 24 mois - Dépense totale de 775 559,72 $, taxes incluses - Appel d'offres public DEEU-SP2638- 167032-C (7 soum.)",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de l'eau, Direction de l'épuration des eaux usées",
+   "article": "20.16",
+   "dossier": "1265461001",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=16",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=644",
+   "sommaireId": "1265461001",
+   "nouveau": true,
+   "theme": "environnement",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0599",
+   "numero": "CG26 0599",
+   "objet": "Accorder un contrat de gré à gré à Oracle Canada ULC, pour un abonnement à la plateforme Exadata Cloud@Customer, par l'entremise de son entente avec le ministère de la Cybersécurité et er du Numérique (MCN), pour la période du 1 décembre 2026 au 30 novembre 2029 - Dépense totale de 2 256 036,97 $, taxes incluses / Autoriser une dépense de 45 120,73 $, taxes incluses, à titre de frais de gestion, payables au MCN",
+   "categorie": "1260499002",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.17",
+   "dossier": "1269834008",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=16",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=659",
+   "sommaireId": "1269834008",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0600",
+   "numero": "CG26 0600",
+   "objet": "Accorder un contrat de gré à gré à Oracle Canada ULC, pour l'achat de 48 licences Oracle Real Application Clusters, incluant les frais de support, par l'entremise de son entente avec le Centre d'acquisitions gouvernementales, pour la période du 20 novembre 2026 au 19 novembre 2029 - Dépense totale de 1 095 436,96 $, taxes incluses / Autoriser une dépense de 32 863,10 $, taxes incluses, à titre de frais de gestion payables au Centre d'acquisitions gouvernementales",
+   "categorie": "1266634002",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.18",
+   "dossier": "1269834009",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=17",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=668",
+   "sommaireId": "1269834009",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0601",
+   "numero": "CG26 0601",
+   "objet": "Accorder un contrat à Innotex inc., pour la fourniture d'habits pour le combat incendie - Dépense totale de 3 299 207,63 $, taxes incluses - Appel d'offres public 26-21497 (1 soum.)",
+   "categorie": "1269859004",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.19",
+   "dossier": "1265866002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=17",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=702",
+   "sommaireId": "1265866002",
+   "nouveau": true,
+   "theme": "securite",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0602",
+   "numero": "CG26 0602",
+   "objet": "Accorder un contrat à XYZ Technologie Culturelle inc., pour la fourniture et la mise en service d'une solution audiovisuelle et d'équipements technologiques pour la vidéocomparution et les visioparloirs de la cour municipale et du Service de police de la Ville de Montréal, pour une période de 60 mois, incluant deux options de prolongation de 12 mois chacune - Dépense totale de 1 980 450,33 $, taxes incluses - Appel d'offres public 26-21473 (3 soum.)",
+   "categorie": "1265072001",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.20",
+   "dossier": "1266634003",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=18",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=717",
+   "sommaireId": "1266634003",
+   "nouveau": true,
+   "theme": "culture",
+   "themeSource": "objet",
+   "projets": [
+    "securite-publique"
+   ]
+  },
+  {
+   "id": "CG26 0603",
+   "numero": "CG26 0603",
+   "objet": "Accorder un contrat à Précisions Provençal inc., pour la fourniture et l'installation de boîtes et d'aménagements sur des châssis de camions lourds fournis par la Ville, afin de compléter l'assemblage de deux camions-ateliers destinés aux opérations du Service de sécurité incendie de Montréal - Dépense totale de 811 194,62 $, taxes incluses - Appel d'offres public 26-21436 (2 soum.)",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service du matériel roulant et des ateliers",
+   "article": "20.21",
+   "dossier": "1260499004",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=18",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=759",
+   "sommaireId": "1260499004",
+   "nouveau": true,
+   "theme": "securite",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0604",
+   "numero": "CG26 0604",
+   "objet": "Accorder un soutien financier de 8 600 000 $ à Mission Unitaînés, pour la construction d'un immeuble, sur une partie du lot 1 276 444, du cadastre du Québec, circonscription foncière de Montréal, situé dans l'arrondissement de Rivière-des-Prairies–Pointe-aux-Trembles, afin d'y aménager des logements pour des aînés à revenus faibles ou modestes, dans le cadre de l'entente de contribution financière pour la réalisation de logements abordables entre la Société d'habitation du Québec, Mission Unitaînés et la Fédération des Caisses Desjardins du Québec / Autoriser les budgets additionnels de revenus et de dépenses équivalents de 6 519 080,72 $, pour l'exercice 2026 et de 2 080 919,28 $, pour 2028",
+   "categorie": "1265072002",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.22",
+   "dossier": "1269286005",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=19",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=783",
+   "sommaireId": "1269286005",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet",
+   "projets": [
+    "logement"
+   ]
+  },
+  {
+   "id": "CG26 0605",
+   "numero": "CG26 0605",
+   "objet": "Accorder un soutien financier de 500 000 $ à Société de développement Écoquartier Louvain provenant des contributions issues du volet social du Règlement visant à améliorer l'offre en matière de logement social, abordable et familial, pour la conception d'un projet de logements hors marché, dans l'arrondissement d'Ahuntsic-Cartierville / Approuver le projet de convention à cet effet",
+   "categorie": "1269859005",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.23",
+   "dossier": "1269053001",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=19",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=887",
+   "sommaireId": "1269053001",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet",
+   "projets": [
+    "louvain-est",
+    "logement"
+   ]
+  },
+  {
+   "id": "CG26 0606",
+   "numero": "CG26 0606",
+   "objet": "Exercer l'option de la première prolongation de 12 mois / Autoriser une dépense additionnelle de 551 436,32 $, taxes incluses, pour les services d'entretien de génératrices pour divers bâtiments de la Ville, dans le cadre des contrats accordés à Entreprises L.M. inc. (CG23 0718), majorant ainsi le montant total des contrats à 1 944 566,33 $, taxes incluses",
+   "categorie": "1269502003",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.24",
+   "dossier": "1267157007",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=20",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=926",
+   "sommaireId": "1267157007",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0607",
+   "numero": "CG26 0607",
+   "objet": "Exercer l'option de la deuxième prolongation de 12 mois / Autoriser une dépense additionnelle de 78 773,74 $, taxes incluses, pour les services d'entretien préventif et correctif de portes de garage industrielles, dans divers bâtiments du Service de police de la Ville de Montréal dans le cadre du contrat accordé à Les portes JPR inc. (CG23 0011), majorant ainsi le montant total du contrat à 364 992,59 $, taxes incluses",
+   "categorie": "1266953001",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.25",
+   "dossier": "1267157008",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=20",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=939",
+   "sommaireId": "1267157008",
+   "nouveau": true,
+   "theme": "securite",
+   "themeSource": "objet",
+   "projets": [
+    "securite-publique"
+   ]
+  },
+  {
+   "id": "CG26 0608",
+   "numero": "CG26 0608",
+   "objet": "Exercer l'option de la deuxième prolongation de 12 mois / Autoriser une dépense additionnelle de 1 441 569,91 $, taxes incluses, pour les services d'entretien préventif et correctif de portes de garage industrielles dans divers bâtiments de la Ville dans le cadre des contrats accordés à Les portes JPR inc. (CG23 0409), majorant ainsi le montant total du contrat à 5 792 510,91 $, taxes incluses",
+   "categorie": "1266953002",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.26",
+   "dossier": "1267157009",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=21",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=952",
+   "sommaireId": "1267157009",
+   "nouveau": true,
+   "theme": "economie",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0609",
+   "numero": "CG26 0609",
+   "objet": "Approuver le projet d'acte par lequel la Ville acquiert de Église de la Pentecôte Evangel, un immeuble, correspondant au lot 1 064 535, du cadastre du Québec, d'une superficie de 858,9 mètres carrés, situé au 2152-2154, rue Sainte-Catherine Ouest, dans l'arrondissement de Ville-Marie, à des fins d'habitation et d'hébergement destiné aux personnes en situation de vulnérabilité, pour la somme de 7 500 000 $, plus les taxes applicables / Autoriser un budget de revenus et de dépenses équivalents, soit 10 500 $ en 2026 et 126 000 $ en 2027, et ce, jusqu'à la revente de l'immeuble",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de la stratégie immobilière et de l'habitation",
+   "article": "20.27",
+   "dossier": "1260317003",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=22",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=965",
+   "sommaireId": "1260317003",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0610",
+   "numero": "CG26 0610",
+   "objet": "Prendre connaissance du rapport de la Commission sur l'examen des contrats Approuver le projet d'acte par lequel la Ville acquiert de 9399-8532 Québec inc., à des fins de réalisation de logements sociaux et abordable, un terrain vacant connu et désigné comme étant le lot 6 724 675, du cadastre du Québec, circonscription foncière de Montréal, situé dans l'arrondissement de Ville-Marie, d'une superficie de 1 850 mètres carrés, pour le prix de 3 233 628 $, plus les taxes applicables / Approuver le projet d'acte par lequel la Ville cède à la SHDM, à des fins de logement social ou abordable, ledit lot 6 724 675, sans contrepartie financière",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de la stratégie immobilière et de l'habitation",
+   "article": "20.28",
+   "dossier": "1264501002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=22",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1008",
+   "sommaireId": "1264501002",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet",
+   "projets": [
+    "logement"
+   ]
+  },
+  {
+   "id": "CG26 0611",
+   "numero": "CG26 0611",
+   "objet": "Accorder sept contrats de services professionnels de gré à gré, à différents organismes pour la mise en œuvre du Programme d'interventions spécialisées en campement (PISC) - Dépense totale de 3 025 000 $, taxes incluses / Approuver les projets de convention de services à cet effet / Autoriser pour l'ensemble du PISC un virement budgétaire de 3 130 144 $ en 2027, de 3 174 742 $ en 2028 et de 3 205 346 $ en 2029 en provenance du Bureau de la lutte à l'itinérance vers le Service de la diversité et de l'inclusion sociale",
+   "categorie": "1269563008",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "20.29",
+   "dossier": "1260417002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=23",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1185",
+   "sommaireId": "1260417002",
+   "nouveau": true,
+   "theme": "social",
+   "themeSource": "objet",
+   "projets": [
+    "itinerance"
+   ]
+  },
+  {
+   "id": "CG26 0612",
+   "numero": "CG26 0612",
+   "objet": "Approuver le projet d'addenda 1 à la convention de services professionnels intervenue de gré à gré entre la Ville et Mission Old Brewery (CG26 0472), pour prolonger la durée de la convention au 29 janvier 2027 et autoriser une dépense additionnelle de 176 220 $, taxes incluses, majorant ainsi le montant total du contrat à 325 740 $, taxes incluses",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Bureau de lutte contre l'itinérance",
+   "article": "20.30",
+   "dossier": "1264363001",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=24",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1362",
+   "sommaireId": "1264363001",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0613",
+   "numero": "CG26 0613",
+   "objet": "Autoriser le dépôt d'une demande d'aide financière au volet 2 du programme Accélérer la transition climatique locale / Attester que tous les projets de la programmation déposée en soutien à la demande respecteront les critères d'admissibilité et modalités du programme, notamment, et non limitativement, qu'ils sont issus d'un plan climat partiel ou complet approuvé par le ministère de l'Environnement, de la Lutte contre les changements climatiques, de la Faune et des Parcs",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de l'environnement et de la transition écologique",
+   "article": "30.01",
+   "dossier": "1269918005",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=25",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1391",
+   "sommaireId": "1269918005",
+   "nouveau": true,
+   "theme": "environnement",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0614",
+   "numero": "CG26 0614",
+   "objet": "Autoriser le dépôt d'une demande d'aide financière dans le cadre du Programme d'infrastructures municipales d'eau, volet 1 - Infrastructures d'eau, pour divers projets concernant le réseau principal d'aqueducs, le réseau principal d'égouts ainsi que la Station d'épuration des eaux usées",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de l'eau, Direction des stratégies et de la performance",
+   "article": "30.02",
+   "dossier": "1269019009",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=25",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1456",
+   "sommaireId": "1269019009",
+   "nouveau": true,
+   "theme": "environnement",
+   "themeSource": "objet",
+   "projets": [
+    "eau-egouts"
+   ]
+  },
+  {
+   "id": "CG26 0615",
+   "numero": "CG26 0615",
+   "objet": "Autoriser un budget additionnel de 470 730,17 $ de dépenses équivalent au revenu additionnel au Service de police de la Ville de Montréal, pour 2026, en provenance du ministère de la Sécurité intérieure permettant de transformer les produits de la criminalité en leviers d'action concrets pour renforcer la sécurité publique",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de police de Montréal, Direction des services spécialisés",
+   "article": "30.03",
+   "dossier": "1266716004",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=26",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1463",
+   "sommaireId": "1266716004",
+   "nouveau": true,
+   "theme": "securite",
+   "themeSource": "objet",
+   "projets": [
+    "securite-publique"
+   ]
+  },
+  {
+   "id": "CG26 0616",
+   "numero": "CG26 0616",
+   "objet": "Autoriser le dépôt d'une demande de subvention au Fonds pour les infrastructures naturelles du gouvernement du Canada / Approuver l'entente de contribution pour le projet « développement du parc Frédéric-Back », situé dans le Complexe environnemental de Saint-Michel",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de l'Espace pour la vie_des Grand parcs et du Mont-Royal",
+   "article": "30.04",
+   "dossier": "1265186001",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=26",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1473",
+   "sommaireId": "1265186001",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet",
+   "projets": [
+    "frederic-back"
+   ]
+  },
+  {
+   "id": "CG26 0617",
+   "numero": "CG26 0617",
+   "objet": "Retourner un montant de 203 429,70 $ à la réserve de voirie d'agglomération / Autoriser un virement de crédits de 532 000 $ en provenance de la réserve de voirie vers budget de fonctionnement du Service de l'urbanisme et de la mobilité, afin de financer des études ou des analyses, dans le cadre des grands projets de transport en partenariat et des projets d'aménagement urbain",
+   "categorie": "1269817001",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "30.05",
+   "dossier": "1260405008",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=27",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1512",
+   "sommaireId": "1260405008",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0618",
+   "numero": "CG26 0618",
+   "objet": "Adopter les modalités encadrant le versement des avances prévues à l'article 31.5.5.1 de la Loi sur le traitement des élus municipaux",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service des finances et de l'évaluation foncière",
+   "article": "30.06",
+   "dossier": "1263074026",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=27",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1521",
+   "sommaireId": "1263074026",
+   "nouveau": true,
+   "theme": "finances",
+   "themeSource": "unite"
+  },
+  {
+   "id": "CG26 0619",
+   "numero": "CG26 0619",
+   "objet": "Autoriser le versement d'avances aux élues et élus admissibles relevant du conseil d'agglomération",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service des finances et de l'évaluation foncière",
+   "article": "30.07",
+   "dossier": "1263074026",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=30",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1521",
+   "sommaireId": "1263074026",
+   "nouveau": true,
+   "theme": "finances",
+   "themeSource": "unite"
+  },
+  {
+   "id": "CG26 0620",
+   "numero": "CG26 0620",
+   "objet": "Avis de motion et dépôt - Règlement autorisant la construction, la transformation et l'occupation d'un bâtiment à des fins d'hébergement pour personnes ayant besoin d'aide et d'assistance sur le lot 2 243 374",
+   "categorie": "1267227003",
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": null,
+   "article": "41.01",
+   "dossier": "1265092015",
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=30",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1555",
+   "sommaireId": "1265092015",
+   "nouveau": true,
+   "theme": "social",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0621",
+   "numero": "CG26 0621",
+   "objet": "Avis de motion et dépôt - Règlement autorisant un emprunt de 313 000 000 $ afin de financer les travaux de construction et de renouvellement du réseau principal d'aqueduc AVIS DE MOTION ET DÉPÔT D’UN PROJET DE RÈGLEMENT Avis de motion est donné par Dimitrios (Jim) Beis de l’inscription pour adoption à une assemblée subséquente du conseil d’agglomération du projet de règlement intitulé « Règlement autorisant un emprunt de 313 000 000 $ afin de financer les travaux de construction et de renouvellement du réseau principal d'aqueduc », lequel est déposé avec le dossier décisionnel.",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de l'eau, Direction des réseaux d'eau",
+   "article": "41.02",
+   "dossier": "1260598001",
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=31",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1566",
+   "sommaireId": "1260598001",
+   "nouveau": true,
+   "theme": "environnement",
+   "themeSource": "objet",
+   "projets": [
+    "eau-egouts"
+   ]
+  },
+  {
+   "id": "CG26 0622",
+   "numero": "CG26 0622",
+   "objet": "Avis de motion et dépôt - Règlement autorisant un emprunt de 11 940 000 $ afin de financer la réalisation du Plan de la forêt urbaine dans les parcs relevant de la compétence du conseil d'agglomération AVIS DE MOTION ET DÉPÔT D’UN PROJET DE RÈGLEMENT Avis de motion est donné par Dimitrios (Jim) Beis de l’inscription pour adoption à une assemblée subséquente du conseil d’agglomération du projet de règlement intitulé « Règlement autorisant un emprunt de 11 940 000 $ afin de financer la réalisation du Plan de la forêt urbaine dans les parcs relevant de la compétence du conseil d'agglomération », lequel est déposé avec le dossier décisionnel.",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de l'Espace pour la vie_des Grand parcs et du Mont-Royal, Direction",
+   "article": "41.03",
+   "dossier": "1269767002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=31",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1579",
+   "sommaireId": "1269767002",
+   "nouveau": true,
+   "theme": "loisirs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0623",
+   "numero": "CG26 0623",
+   "objet": "Adoption - Règlement autorisant un emprunt de 10 430 000 $ pour le financement des travaux de mise à niveau de la Biosphère",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de l'Espace pour la vie_des Grand parcs et du Mont-Royal",
+   "article": "42.01",
+   "dossier": "1267227003",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=32",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1590",
+   "sommaireId": "1267227003",
+   "nouveau": true,
+   "theme": "travaux",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0624",
+   "numero": "CG26 0624",
+   "objet": "Adoption - Règlement modifiant le Règlement concernant la quote-part tarifaire pour la fourniture de compteurs et la réalisation des activités déléguées afférentes (RCG 13-005)",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de l'eau, Direction des réseaux d'eau",
+   "article": "42.02",
+   "dossier": "1269443003",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=32",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1609",
+   "sommaireId": "1269443003",
+   "nouveau": true,
+   "theme": "finances",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CG26 0625",
+   "numero": "CG26 0625",
+   "objet": "Renouveler le mandat d'Éliane Roko à titre d'administratrice indépendante au sein du conseil d'administration du Réseau de transport métropolitain pour une période de quatre ans",
+   "categorie": null,
+   "date": "2026-10-22",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'agglomération",
+   "seanceId": "CG_2026-10-22_16h00",
+   "unite": "Service de l'urbanisme et de la mobilité, Direction de la planification et de la",
+   "article": "51.01",
+   "dossier": "1268514001",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_PV_ORDI_2026-10-22_16h00_FR.pdf#page=33",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CG/CG_ODJ_LPP_ORDI_2026-10-22_16h00_FR.pdf#page=1621",
+   "sommaireId": "1268514001",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
    "id": "CM_2026-10-19_13h00_PV",
    "numero": null,
    "objet": "Procès-verbal — Conseil municipal, séance ordinaire du 2026-10-19",
@@ -6104,7 +7278,7 @@
    "sommaireId": null,
    "nombreResolutions": 92,
    "nombrePages": 79,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
@@ -6126,7 +7300,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
@@ -6149,7 +7323,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=6",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
@@ -6172,7 +7346,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=6",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "honneurs",
    "themeSource": "objet"
   },
@@ -6195,7 +7369,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=9",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
@@ -6218,7 +7392,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=11",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=250",
    "sommaireId": "1260310001",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
@@ -6241,7 +7415,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=11",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=255",
    "sommaireId": "1263074027",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "environnement",
    "themeSource": "objet"
   },
@@ -6264,7 +7438,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=11",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=268",
    "sommaireId": "1268114001",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "social",
    "themeSource": "objet"
   },
@@ -6287,7 +7461,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=12",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "environnement",
    "themeSource": "objet",
    "projets": [
@@ -6313,7 +7487,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=12",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "securite",
    "themeSource": "objet"
   },
@@ -6336,7 +7510,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=13",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -6359,7 +7533,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=14",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "environnement",
    "themeSource": "objet",
    "projets": [
@@ -6386,7 +7560,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=14",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "environnement",
    "themeSource": "objet"
   },
@@ -6409,7 +7583,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=15",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -6432,7 +7606,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=15",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "environnement",
    "themeSource": "objet",
    "projets": [
@@ -6459,7 +7633,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=16",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -6482,7 +7656,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=16",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "environnement",
    "themeSource": "objet"
   },
@@ -6505,7 +7679,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=17",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -6528,7 +7702,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=17",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "securite",
    "themeSource": "objet",
    "projets": [
@@ -6554,7 +7728,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=18",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet"
   },
@@ -6577,7 +7751,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=19",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -6600,7 +7774,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=19",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet",
    "projets": [
@@ -6626,7 +7800,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=20",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "social",
    "themeSource": "objet",
    "projets": [
@@ -6652,7 +7826,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=21",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "social",
    "themeSource": "objet",
    "projets": [
@@ -6678,7 +7852,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=21",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "environnement",
    "themeSource": "objet"
   },
@@ -6701,7 +7875,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=22",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -6724,7 +7898,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=23",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -6747,7 +7921,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=23",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "securite",
    "themeSource": "objet"
   },
@@ -6770,7 +7944,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=24",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "culture",
    "themeSource": "objet",
    "projets": [
@@ -6796,7 +7970,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=25",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "securite",
    "themeSource": "objet"
   },
@@ -6819,7 +7993,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=25",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet",
    "projets": [
@@ -6845,7 +8019,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=26",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet",
    "projets": [
@@ -6872,7 +8046,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=27",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -6895,7 +8069,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=27",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "securite",
    "themeSource": "objet",
    "projets": [
@@ -6921,7 +8095,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=28",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "economie",
    "themeSource": "objet"
   },
@@ -6944,7 +8118,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=29",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -6967,7 +8141,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=29",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet",
    "projets": [
@@ -6993,7 +8167,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=30",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "social",
    "themeSource": "objet",
    "projets": [
@@ -7019,7 +8193,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=31",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -7042,7 +8216,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=32",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "environnement",
    "themeSource": "objet"
   },
@@ -7065,7 +8239,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=33",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "environnement",
    "themeSource": "objet",
    "projets": [
@@ -7091,7 +8265,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=33",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "securite",
    "themeSource": "objet",
    "projets": [
@@ -7117,7 +8291,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=34",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet",
    "projets": [
@@ -7143,7 +8317,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=34",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -7166,7 +8340,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=35",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "administration",
    "themeSource": "defaut"
   },
@@ -7189,7 +8363,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=38",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "administration",
    "themeSource": "defaut"
   },
@@ -7212,7 +8386,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=38",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "travaux",
    "themeSource": "objet"
   },
@@ -7235,7 +8409,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=39",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "finances",
    "themeSource": "objet"
   },
@@ -7258,7 +8432,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=39",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet"
   },
@@ -7281,7 +8455,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=40",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=366",
    "sommaireId": "1260005002",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -7304,7 +8478,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=40",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=374",
    "sommaireId": "1265437001",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -7327,7 +8501,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=41",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=395",
    "sommaireId": "1269445009",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet",
    "projets": [
@@ -7353,7 +8527,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=41",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=414",
    "sommaireId": "1268788007",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet",
    "projets": [
@@ -7379,7 +8553,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=42",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=447",
    "sommaireId": "1267063001",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -7402,7 +8576,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=43",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=519",
    "sommaireId": "1269006002",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "loisirs",
    "themeSource": "objet"
   },
@@ -7425,7 +8599,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=43",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=559",
    "sommaireId": "1268682010",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "culture",
    "themeSource": "objet"
   },
@@ -7448,7 +8622,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=44",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=585",
    "sommaireId": "1267883002",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet"
   },
@@ -7471,7 +8645,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=44",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=690",
    "sommaireId": "1260606001",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "administration",
    "themeSource": "objet"
   },
@@ -7494,7 +8668,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=45",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=697",
    "sommaireId": "1269653007",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "environnement",
    "themeSource": "objet"
   },
@@ -7517,7 +8691,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=45",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=722",
    "sommaireId": "1260459002",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -7540,7 +8714,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=46",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=731",
    "sommaireId": "1268141001",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "travaux",
    "themeSource": "objet"
   },
@@ -7563,7 +8737,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=46",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=761",
    "sommaireId": "1269653006",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "immobilier",
    "themeSource": "objet"
   },
@@ -7586,7 +8760,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=47",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=781",
    "sommaireId": "1265382002",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet",
    "projets": [
@@ -7612,7 +8786,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=48",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=849",
    "sommaireId": "1264501002",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet",
    "projets": [
@@ -7638,7 +8812,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=49",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1026",
    "sommaireId": "1267935001",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet"
   },
@@ -7661,7 +8835,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=49",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1045",
    "sommaireId": "1264950006",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -7684,7 +8858,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=50",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1060",
    "sommaireId": "1267370004",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "environnement",
    "themeSource": "objet"
   },
@@ -7707,7 +8881,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=50",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1082",
    "sommaireId": "1260474001",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -7730,7 +8904,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=51",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1117",
    "sommaireId": "1261010009",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet",
    "projets": [
@@ -7756,7 +8930,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=51",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1138",
    "sommaireId": "1260615012",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet"
   },
@@ -7779,7 +8953,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=52",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1147",
    "sommaireId": "1267736002",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet"
   },
@@ -7802,7 +8976,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=52",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1153",
    "sommaireId": "1268290007",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
@@ -7825,7 +8999,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=53",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1198",
    "sommaireId": "1269354001",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet"
   },
@@ -7848,7 +9022,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=53",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1203",
    "sommaireId": "1265395003",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "finances",
    "themeSource": "objet"
   },
@@ -7871,7 +9045,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=54",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1221",
    "sommaireId": "1265551003",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet"
   },
@@ -7894,7 +9068,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=54",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1227",
    "sommaireId": "1267608001",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet"
   },
@@ -7917,7 +9091,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=55",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1235",
    "sommaireId": "1265607002",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet"
   },
@@ -7940,7 +9114,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=55",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1243",
    "sommaireId": "1267409008",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet"
   },
@@ -7963,7 +9137,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=56",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1277",
    "sommaireId": "1263074029",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "finances",
    "themeSource": "unite"
   },
@@ -7986,7 +9160,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=58",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1277",
    "sommaireId": "1263074029",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "finances",
    "themeSource": "unite"
   },
@@ -8009,7 +9183,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=59",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1305",
    "sommaireId": "1265019002",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
@@ -8032,7 +9206,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=59",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1317",
    "sommaireId": "1268726001",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "finances",
    "themeSource": "objet"
   },
@@ -8055,7 +9229,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=59",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1339",
    "sommaireId": "1267271001",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "environnement",
    "themeSource": "objet",
    "projets": [
@@ -8081,7 +9255,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=60",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1348",
    "sommaireId": "1254386004",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
@@ -8104,7 +9278,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=60",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1380",
    "sommaireId": "1266924002",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -8127,7 +9301,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=60",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1389",
    "sommaireId": "1264386001",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "urbanisme",
    "themeSource": "objet"
   },
@@ -8150,7 +9324,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=61",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1416",
    "sommaireId": "1268492001",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "procedure",
    "themeSource": "objet"
   },
@@ -8173,7 +9347,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=62",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1478",
    "sommaireId": "1269632005",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "administration",
    "themeSource": "defaut"
   },
@@ -8196,7 +9370,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=62",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1543",
    "sommaireId": "1265909005",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "environnement",
    "themeSource": "objet"
   },
@@ -8219,7 +9393,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=63",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1555",
    "sommaireId": "1265909006",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "environnement",
    "themeSource": "objet"
   },
@@ -8242,7 +9416,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=64",
    "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_ODJ_LPP_ORDI_2026-10-19_13h00_FR.pdf#page=1567",
    "sommaireId": "1269671003",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "rh",
    "themeSource": "objet"
   },
@@ -8265,7 +9439,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=64",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "honneurs",
    "themeSource": "objet"
   },
@@ -8288,7 +9462,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=73",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "honneurs",
    "themeSource": "objet"
   },
@@ -8311,7 +9485,7 @@
    "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CM/CM_PV_ORDI_2026-10-19_13h00_FR.pdf#page=75",
    "sommairePdf": null,
    "sommaireId": null,
-   "nouveau": true,
+   "nouveau": false,
    "theme": "honneurs",
    "themeSource": "objet",
    "projets": [
@@ -14506,6 +15680,469 @@
    "nouveau": false,
    "theme": "administration",
    "themeSource": "unite"
+  },
+  {
+   "id": "CA_Rpp_2026-10-06_19h00_PV",
+   "numero": null,
+   "objet": "Procès-verbal — Conseil d'arrondissement de Rosemont–La Petite-Patrie, séance ordinaire du 2026-10-06",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Procès-verbal",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": null,
+   "dossier": null,
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nombreResolutions": 18,
+   "nombrePages": 11,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA_Rpp_2026-10-06_19h00_ODJ",
+   "numero": null,
+   "objet": "Ordre du jour — Conseil d'arrondissement de Rosemont–La Petite-Patrie, séance du 2026-10-06 (0 points)",
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Ordre du jour",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": null,
+   "dossier": null,
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0173",
+   "numero": "CA26 26 0173",
+   "objet": "Adopter l'ordre du jour de la séance ordinaire du conseil d'arrondissement du 6 octobre 2026",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "10.02",
+   "dossier": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=1",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0174",
+   "numero": "CA26 26 0174",
+   "objet": "Approuver le procès-verbal de la séance ordinaire du conseil d'arrondissement tenue le 8 septembre 2026",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "10.03",
+   "dossier": null,
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=2",
+   "sommairePdf": null,
+   "sommaireId": null,
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0175",
+   "numero": "CA26 26 0175",
+   "objet": "Ratifier trois conventions avec contributions financières avec trois organismes de l'arrondissement de Rosemont–La Petite-Patrie qui accueillent des enfants avec des limitations fonctionnelles dans leur camp de jour pour l'été 2026 - Octroyer des contributions financières pour un montant total de 44 700 $, toutes taxes incluses, le cas échéant (contrat 26-075-CG)",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "20.01",
+   "dossier": "1267174002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=2",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=3",
+   "sommaireId": "1267174002",
+   "nouveau": true,
+   "theme": "loisirs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0176",
+   "numero": "CA26 26 0176",
+   "objet": "Autoriser une dépense totale de 301 608,16 $, taxes incluses - Accorder trois (3) contrats totalisant le même montant aux firmes « Les pavages Dancar (209) inc. » (lot 1) et « 9449-9092 Québec inc. » (lots 2 et 3), pour la location avec opérateurs, respectivement d'une (1) niveleuse et deux (2) tracteurs-chargeurs pour les opérations de déneigement, pour une durée d'un (1) an, soit l'hiver 2026-2027 - Appel d'offres public numéro 26-064-AP / 26-21521 (5 soumissionnaires)",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "20.02",
+   "dossier": "1269609003",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=3",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=10",
+   "sommaireId": "1269609003",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet",
+   "projets": [
+    "deneigement"
+   ]
+  },
+  {
+   "id": "CA26 26 0177",
+   "numero": "CA26 26 0177",
+   "objet": "Approuver un avenant modifiant la convention de contribution financière avec l'Association des commerçants et des professionnels de Beaubien Est afin de soutenir ses activités de relance (contrat 26-030-CG)",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "20.03",
+   "dossier": "1260297021",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=3",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=16",
+   "sommaireId": "1260297021",
+   "nouveau": true,
+   "theme": "economie",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0178",
+   "numero": "CA26 26 0178",
+   "objet": "Approuver une convention avec contribution financière avec l'organisme « Regroupement des tables de concertation de La Petite-Patrie » (RTCPP) pour la prolongation du bail de location dans le cadre de la relocalisation temporaire de ses activités au 6615, avenue Papineau à Montréal, du 1er octobre au 31 décembre 2026 - Octroyer une contribution financière de 11 250 $, toutes taxes incluses, le cas échéant - Autoriser un virement de crédits du compte de surplus de gestion affecté - divers",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "20.04",
+   "dossier": "1260284003",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=4",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=21",
+   "sommaireId": "1260284003",
+   "nouveau": true,
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0179",
+   "numero": "CA26 26 0179",
+   "objet": "Prendre acte du dépôt des rapports sur l'exercice des pouvoirs délégués aux fonctionnaires, pour la période du 1er au 31 août 2026 en vertu du Règlement intérieur du conseil d'arrondissement sur la délégation de pouvoirs aux fonctionnaires et employés (RCA-23)",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "30.01",
+   "dossier": "1266267010",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=4",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=27",
+   "sommaireId": "1266267010",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0180",
+   "numero": "CA26 26 0180",
+   "objet": "Accepter, en vertu de l'article 85.1 de la Charte de la Ville de Montréal, métropole du Québec (RLRQ, c. C-11.4), les services de la Division des services techniques et du soutien logistique aux installations (DSTSLI) de l'arrondissement de Mercier–Hochelaga-Maisonneuve, du 1er janvier 2027 au 31 décembre 2028",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "30.02",
+   "dossier": "1264646002",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=4",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=31",
+   "sommaireId": "1264646002",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0181",
+   "numero": "CA26 26 0181",
+   "objet": "Autoriser un virement de crédits au montant de 120 000 $ en provenance du surplus de gestion affecté - divers vers la Division de la voirie",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "30.03",
+   "dossier": "1266743001",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=5",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=36",
+   "sommaireId": "1266743001",
+   "nouveau": true,
+   "theme": "finances",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0182",
+   "numero": "CA26 26 0182",
+   "objet": "Édicter deux ordonnances - Programmation d'événements publics : « Leloup et ses fourmis - 4e édition », « Soirée commémorative et Marche lumineuse annuelle », « Massonloween », « Halloween au parc Molson », « Le chalet du Père-Noël »",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "40.01",
+   "dossier": "1268724009",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=5",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=39",
+   "sommaireId": "1268724009",
+   "nouveau": true,
+   "theme": "honneurs",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0183",
+   "numero": "CA26 26 0183",
+   "objet": "Donner avis de motion et adopter un projet de règlement intitulé « Règlement modifiant le Règlement régissant la démolition d'immeubles de l'arrondissement de Rosemont–La Petite- Patrie (RCA-6) » (RCA-6-10) afin de préciser la définition d'une démolition Le maire d'arrondissement, Monsieur François Limoges, donne avis de motion à l'effet qu'à la prochaine séance ou qu'à toute séance subséquente, il sera adopté un règlement intitulé « Règlement modifiant le Règlement régissant la démolition d'immeubles de l'arrondissement de Rosemont–La Petite-Patrie (RCA- 6) » (RCA-6-10) afin de préciser la définition d'une démolition.",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "40.02",
+   "dossier": "1269944007",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=5",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=45",
+   "sommaireId": "1269944007",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0184",
+   "numero": "CA26 26 0184",
+   "objet": "Donner avis de motion et déposer un projet de règlement intitulé « Règlement sur la taxe relative aux services (exercice financier 2027) » Le maire d’arrondissement, Monsieur François Limoges, donne un avis de motion annonçant qu’à la prochaine séance ou qu’à toute séance subséquente, il sera adopté un règlement intitulé « Règlement sur la taxe relative aux services (exercice financier 2027) », et dépose un projet de règlement.",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "40.03",
+   "dossier": "1267853003",
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=6",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=49",
+   "sommaireId": "1267853003",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0185",
+   "numero": "CA26 26 0185",
+   "objet": "Donner avis de motion et déposer un projet de règlement intitulé « Règlement modifiant le règlement intérieur du conseil d'arrondissement de Rosemont–La Petite-Patrie sur la délégation de pouvoirs aux fonctionnaires et employés (RCA-23) » afin d'y apporter diverses modifications Le maire d’arrondissement, Monsieur François Limoges, donne un avis de motion annonçant qu’à la prochaine séance ou qu’à toute séance subséquente, il sera adopté un règlement intitulé « Règlement modifiant le règlement intérieur du conseil d’arrondissement de Rosemont–La Petite-Patrie sur la délégation de pouvoirs aux fonctionnaires et employés (RCA-23) » afin d'y apporter diverses modifications, et dépose un projet",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "40.04",
+   "dossier": "1268557001",
+   "resultat": null,
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=6",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=53",
+   "sommaireId": "1268557001",
+   "nouveau": true,
+   "theme": "procedure",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0186",
+   "numero": "CA26 26 0186",
+   "objet": "Adopter une résolution, en vertu des articles 145.45 à 145.49 de la Loi sur l'aménagement et l'urbanisme, visant à autoriser la construction d'un bâtiment résidentiel de six étages, proposant 102 logements, sur le lot vacant 3 795 031 du cadastre du Québec, situé le long de la rue des Carrières, entre les rues de Lanaudière et Chambord",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "40.05",
+   "dossier": "1266079004",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=6",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=58",
+   "sommaireId": "1266079004",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0187",
+   "numero": "CA26 26 0187",
+   "objet": "Adopter une résolution, en vertu des articles 145.45 à 145.49 de la Loi sur l'aménagement et l'urbanisme, visant à autoriser la construction d'un bâtiment mixte de quatre étages, proposant 38 logements et deux suites commerciales, sur le lot vacant 2 170 228 du cadastre du Québec, situé à l'intersection de la rue Beaubien Est et de la 10e Avenue",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "40.06",
+   "dossier": "1266079005",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=8",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=66",
+   "sommaireId": "1266079005",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0188",
+   "numero": "CA26 26 0188",
+   "objet": "Autoriser, en vertu du Règlement sur les dérogations mineures (RCA-5), l'aménagement d'un local de 106 m² pour un usage d'activité agricole maraîchère, en dérogation aux articles 328.0.2 et 328.0.4 du Règlement d'urbanisme de l'arrondissement Rosemont–Petite-Patrie (01-279) - Bâtiment situé au 5329, rue Bélanger - Demande de dérogation mineure 3003674316",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "40.07",
+   "dossier": "1268695008",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=10",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=74",
+   "sommaireId": "1268695008",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0189",
+   "numero": "CA26 26 0189",
+   "objet": "Autoriser l'exercice de l'usage conditionnel « espace habitable au sous-sol » pour un bâtiment de la catégorie H.4, conformément au Règlement d'urbanisme de l'arrondissement Rosemont–Petite- Patrie (01-279), au 5517 à 5523, 9e Avenue",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "40.08",
+   "dossier": "1266079006",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=10",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=80",
+   "sommaireId": "1266079006",
+   "nouveau": true,
+   "theme": "urbanisme",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA26 26 0190",
+   "numero": "CA26 26 0190",
+   "objet": "Édicter, en vertu du Règlement sur la circulation et le stationnement (R.R.V.M., c. C-4.1), une ordonnance visant à implanter un passage piéton muni d'un refuge piéton à l'approche sud de l'intersection de la rue D'Iberville et de l'avenue Elsdale",
+   "categorie": null,
+   "date": "2026-10-06",
+   "annee": "2026",
+   "type": "Résolution",
+   "instance": "Conseil d'arrondissement de Rosemont–La Petite-Patrie",
+   "seanceId": "CA_Rpp_2026-10-06_19h00",
+   "unite": null,
+   "article": "40.09",
+   "dossier": "1269854001",
+   "resultat": "Adoptée à l'unanimité",
+   "dissidences": [],
+   "voteEnregistre": false,
+   "pdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_PV_ORDI_2026-10-06_19h00_FR.pdf#page=10",
+   "sommairePdf": "https://ville.montreal.qc.ca/documents/Adi_Public/CA_Rpp/CA_Rpp_ODJ_LPP_ORDI_2026-10-06_19h00_FR.pdf#page=85",
+   "sommaireId": "1269854001",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
   },
   {
    "id": "CA_Slt_2026-10-06_19h30_PV",
