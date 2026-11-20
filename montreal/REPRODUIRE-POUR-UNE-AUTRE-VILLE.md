@@ -9,10 +9,67 @@ seule phrase en plus : « La ville, c'est ___. » Il dit ce qu'on a construit, c
 sans y toucher, ce qui doit être réécrit pour une autre source, comment brancher la ville sur la
 couche commune, dans quel ordre travailler, et les pièges déjà rencontrés.
 
-**Le modèle à copier est maintenant Montréal** (`montreal/`), le volet le plus complet : huit pages,
-contrats SEAO, budget et taxes, « Près de chez moi », courriels de ville, version anglaise.
-Québec (`quebec/`) reste la référence pour le client AzSearch et le challenge. Le code est public :
-`github.com/GrandFFormat/DossierQuebec`. Le README de chaque volet est son journal détaillé.
+**Le modèle à copier est Montréal** (`montreal/`), le volet le plus complet : huit pages, contrats
+SEAO, budget et taxes, « Près de chez moi », courriels de ville, version anglaise. Depuis le 20 nov.
+2026, Montréal, Québec, Lévis et Longueuil roulent sur un **seul code commun** (section 0). Le code
+est public : `github.com/GrandFFormat/DossierQuebec`. Le README de chaque volet est son journal détaillé.
+
+## 0. L'architecture commune (20 nov. 2026)
+
+Toutes les villes ont la même architecture. Seuls changent la configuration, les données, le robot
+de lecture et, au besoin, la palette.
+
+- `commun/ville/moteur.js` : tout le code des pages de ville, générique. Il lit `globalThis.VILLE`.
+- `commun/ville/style.css` : la feuille de style commune.
+- `<ville>/assets/app.js` : 4 lignes, à ne pas modifier (`import './ville.js'` puis
+  `export * from '/commun/ville/moteur.js'`). Les pages HTML gardent leur balise `assets/app.js`.
+- `<ville>/assets/ville.js` : la configuration de la ville, et rien d'autre. Liste complète des clés
+  en tête de `montreal/assets/ville.js`.
+- `<ville>/assets/libelles-en.js` : le vocabulaire anglais des instances de la ville.
+- `<ville>/assets/ville.css` : seulement ce qui diffère de la feuille commune. Souvent absent.
+
+**Ce que contient `ville.js`**
+
+- Base : `nom`, `pages` (`decisions`, `conseil`, `contrats` ; `contrats: null` = pas de page Contrats),
+  `libelles`, `regexMaire`, `libelleMembres`.
+- Adaptateurs de données : `cleDossier`, `typesDocuments`, `horsDecisions`, `sansInstance`,
+  `instanceConseil`, `comparerNoms`, `uniteBrute`, `ordreArrondissements`, `totalAvec`,
+  `paletteArrondissements`, `archivesSeances`.
+- Jeux de données déclarés (sans déclaration, le fichier n'est pas demandé) : `agglomeration`, `cucq`,
+  `presences`, `archives`, `textes`.
+- Drapeaux de fonctions, à activer seulement si la ville a la donnée.
+- Crochets, en dernier recours : `porteeDe`, `titreArrondissement`, `rangComiteExecutif`.
+
+Certaines fonctions s'allument seules quand la donnée existe : « Ce que le conseil décide », « Demande
+refusée », avis « Extraction en panne », postes vacants, comité exécutif, « Vote sur… ».
+
+**Les règles**
+
+- Une amélioration se fait dans le moteur, jamais dans une seule ville.
+- Ce qui est propre à une ville passe par `ville.js`, jamais par une copie du moteur.
+- Le tableau des votes contre est en ordre alphabétique partout, sans « En tête » ni palmarès.
+- Après un changement du moteur : `node --check`, relancer le prérendu de Québec
+  (`node scripts/prerendre.js` dans `quebec/`) et ouvrir chaque ville.
+
+**Pas encore sur le moteur** : Laval (code construit autrement, une session à part), ainsi que
+Vancouver, Ottawa et Fredericton (autres dépôts). Pour ces trois-là, le moteur sera copié par un
+script de synchro dans chaque dépôt, pas chargé depuis dossierquebec.ca : chaque site doit rouler
+seul. Il faut d'abord rendre réglables les liens `/commun/…` et le vocabulaire québécois du moteur.
+
+**Ajouter une ville**
+
+1. Copier `montreal/` sous le nom de la ville, sans `data/`.
+2. Renommer les pages HTML selon les slugs de la ville ; garder la balise `assets/app.js`.
+3. Laisser `assets/app.js` tel quel.
+4. Dans `assets/ville.js`, remplir `nom`, `pages`, `regexMaire` et `porteeDe`.
+5. Déclarer seulement les jeux de données qui existent.
+6. Choisir adaptateurs et drapeaux dans la liste en tête de `montreal/assets/ville.js`.
+7. Ajuster `assets/libelles-en.js` ; un `assets/ville.css` seulement pour ce qui diffère.
+8. Brancher les robots de la ville, avec un `node --check` sur `app.js`, `ville.js` et le moteur.
+9. Servir le dépôt, ouvrir chaque page en français et avec `?lang=en` : aucune erreur console sauf
+   `/_vercel/insights`.
+10. Ajouter l'entrée FR+EN dans `data/journal.json`, puis la ville dans la navigation, le sitemap,
+    `llms`, l'admin (onglet Villes) et `commun/mesure.js` si elle est sur un autre domaine.
 
 Mis à jour le 15 nov. 2026 d'après Montréal : pages Contrats, Budget, Près de chez moi ; votes
 fusionnés dans Décisions ; Mon dossier remplace Mes dossiers ; courriels de ville ; anglais
