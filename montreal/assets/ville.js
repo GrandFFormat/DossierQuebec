@@ -6,7 +6,13 @@
 //   pages        slugs des pages du volet, sans extension
 //   libelles     { libelleEn, themeEn } : traductions des libellés des données (./libelles-en.js)
 //   regexMaire   reconnaît la fonction du maire ou de la mairesse de la ville
-//   porteeDe(instance, tr)  crochet : la portée d'une instance (ligne « Portée » d'une fiche), ou null
+//   porteeDe(instance, tr, etat, EN)  crochet : la portée d'une instance (ligne « Portée » d'une fiche), ou null
+//   chemins      { langue, imprimer } : modules de langue et d'impression (défaut : /commun/langue.js,
+//                /commun/imprimer-seance.js ; les volets des autres dépôts pointent vers leurs copies)
+//   langueDefaut 'en' : la page est en anglais par défaut, les liens n'ajoutent pas ?lang=en
+//   vocabulaire  { cle: [fr, en] } : les mots propres à une ville (volets anglophones, fin du moteur)
+//   anglophone   volets écrits en anglais (Vancouver, Ottawa, Fredericton) : voir « VOLETS ANGLOPHONES »
+//                à la fin de commun/ville/moteur.js pour leurs clés
 //
 // Adaptateurs de données (facultatifs ; défaut = Montréal) :
 //   cleDossier       champ qui suit un dossier d'une instance à l'autre ('dossier' ; Québec 'sommaireId')

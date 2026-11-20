@@ -51,10 +51,27 @@ refusée », avis « Extraction en panne », postes vacants, comité exécutif, 
 - Après un changement du moteur : `node --check`, relancer le prérendu de Québec
   (`node scripts/prerendre.js` dans `quebec/`) et ouvrir chaque ville.
 
-**Pas encore sur le moteur** : Laval (code construit autrement, une session à part), ainsi que
-Vancouver, Ottawa et Fredericton (autres dépôts). Pour ces trois-là, le moteur sera copié par un
-script de synchro dans chaque dépôt, pas chargé depuis dossierquebec.ca : chaque site doit rouler
-seul. Il faut d'abord rendre réglables les liens `/commun/…` et le vocabulaire québécois du moteur.
+**Pas encore sur le moteur** : Laval (code construit autrement, une session à part).
+
+**Les volets des autres dépôts** (Vancouver dans dossierBC, Ottawa dans dossierontario, Fredericton
+dans dossiernbrunswick ; 20 nov. 2026) roulent sur le même moteur, COPIÉ dans chaque dépôt, jamais
+chargé depuis dossierquebec.ca (CORS, pannes croisées : chaque site roule seul).
+
+- `node scripts/synchro-moteur.js ../dossierBC ../dossierontario ../dossiernbrunswick` copie
+  `commun/ville/moteur.js` et `commun/ville/style.css` dans `commun/ville/` de chaque dépôt, avec en
+  tête le commit d'origine. On ne touche jamais la copie : on corrige ici, on commit, on resynchronise.
+- `… --verifier` échoue (code 1) si une copie est en retard : à lancer après chaque changement du
+  moteur, et avant de pousser un des trois dépôts.
+- Ce qui les distingue passe par `ville.js` : `chemins` (`langue`, `imprimer` : leurs copies locales
+  de langue.js et imprimer-seance.js), `langueDefaut: 'en'`, `anglophone`, `fenetre`, `vocabulaire`,
+  `conflits`, `quartiers`, `fichePV`, `objetFr`, `date1er`, `cleZoom`, `mesure`, `besoins` et les
+  crochets `compteElus`, `filSansResume`, `chiffreVotes`, `lignesSources`, `noteSources`,
+  `apresChargement`. Liste commentée dans la section « VOLETS ANGLOPHONES » à la fin du moteur.
+- Restent locaux dans ces volets : `langue.js` (anglais par défaut, `data-fr`), `avis-pause.js`,
+  `seances-en-bref.js` (reconstruit d'après la source de chaque ville), `imprimer-seance.js`,
+  `libelles-en.js` (traduction anglais → français), `ville.js`, `ville.css` (palette).
+- Leur tableau des votes contre garde le tri par nombre (`palmaresVotesContre`), comme avant le
+  branchement : à aligner sur l'ordre alphabétique quand Martin le décidera.
 
 **Ajouter une ville**
 
