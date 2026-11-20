@@ -51,7 +51,11 @@ refusée », avis « Extraction en panne », postes vacants, comité exécutif, 
 - Après un changement du moteur : `node --check`, relancer le prérendu de Québec
   (`node scripts/prerendre.js` dans `quebec/`) et ouvrir chaque ville.
 
-**Pas encore sur le moteur** : Laval (code construit autrement, une session à part), ainsi que
+Laval est sur le moteur depuis le 20 nov. 2026 : ses fonctions propres (séances par identifiant,
+fiches tirées de l'ordre du jour, présences du jeu ouvert, carte par parti…) sont des drapeaux du moteur ;
+il garde sa feuille de style.
+
+**Pas encore sur le moteur** :
 Vancouver, Ottawa et Fredericton (autres dépôts). Pour ces trois-là, le moteur sera copié par un
 script de synchro dans chaque dépôt, pas chargé depuis dossierquebec.ca : chaque site doit rouler
 seul. Il faut d'abord rendre réglables les liens `/commun/…` et le vocabulaire québécois du moteur.

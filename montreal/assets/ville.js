@@ -58,6 +58,28 @@
 //                'sansAccents' : nom complet sans accents ni casse (Longueuil)
 //   pages.contrats null : pas de page Contrats, pas de contrats SEAO sur les fiches
 //
+// Venues de Laval (20 nov. 2026), pour toute ville qui a la donnée :
+//   resumes false         pas de data/resumes.json (résumés éteints) : le fichier n'est pas demandé
+//   sommaires             data/sommaires.json : service responsable et montant lus dans le PDF du sommaire
+//   presencesOuvertes     data/presences.json au format du jeu ouvert (parAnnee) : présences sur la fiche d'élu
+//   resumeParSommaire     résumés indexés par numéro de sommaire (d.sommaireId, sinon d.dossier)
+//   seancesParId          séances groupées par d.seanceId (deux séances le même jour, huis clos), en-tête
+//                         « séance ordinaire du 3 févr. 2026, 18 h 30 », titre des documents réécrit
+//   ficheFaits            fiche tirée du procès-verbal et de l'ordre du jour : montant et districts touchés
+//                         (d.montant, d.districts), « Au procès-verbal », proposeur, certificat de trésorerie,
+//                         sommaire non publié, PDF avec page ; compte « fiches, décisions et documents de séance »
+//   votesDecompteImprime  carte de vote avec le décompte imprimé, la page du PDF, le vote de procédure ;
+//                         « Votes nominatifs sans décision dans l'année » sous ?vote=1
+//   tableauPourContre     tableau des votes contre à 4 colonnes (contre, pour, nommée), ordre alphabétique
+//   elusDistrictsNumerotes  la mairie puis « Les N districts » par numéro ; fiche avec initiales sous la photo,
+//                         habitants, présences, lien ?district= ; domaineVille ('laval.ca') pour le profil
+//   carteParParti         { palette: { parti sans accents: couleur }, reserve: [couleurs] } : carte par parti
+//   lexiqueExemples       l'exemple tiré des documents (e.exemple) sous chaque terme du lexique
+//   accueilProcesVerbaux  chiffres de l'accueil « lues dans les procès-verbaux de 2026 »
+//   etatDetaille          page Sources : sommaires, présences, lexique, avertissements des robots, index
+// Détectés sans drapeau : filtre ?district=N (d.districts) et sa pastille, initiales quand une photo
+// .portrait ne charge pas, liens ?type= et ?theme= sur la page Décisions.
+//
 // Détectés dans les données, sans drapeau : « Ce que le conseil décide » (d.dispositif), pastilles
 // « Demande refusée » (d.refus), numéro de résolution (d.annotation), sommaires cités et cherchables
 // (d.sommaires), avis « Extraction en panne » (procès-verbaux publiés sans décision lue), légende et pastilles du comité exécutif (m.executif),
