@@ -9,25 +9,32 @@
 // Les données sont lues à l'exécution depuis data/*.json, donc les pages restent légères
 // et une seule extraction met tout le site à jour.
 
-// Version anglaise (commun/langue.js) : tr('français', 'English').
-import { EN, tr } from '/commun/langue.js';
-import { boutonImprimer, brancherImpression } from '/commun/imprimer-seance.js';
-
 const VILLE = globalThis.VILLE;
 if (!VILLE) throw new Error('moteur.js : globalThis.VILLE absent (importer assets/ville.js avant)');
-const { libelleEn, themeEn } = VILLE.libelles;
+// Version anglaise : tr('français', 'English'). VILLE.chemins (volets copiés dans un autre dépôt,
+// 20 nov. 2026) : { langue, imprimer } ; défaut, la couche commune de DossierQuébec.
+const { EN, tr } = await import(VILLE.chemins?.langue ?? '/commun/langue.js');
+const { boutonImprimer, brancherImpression } = await import(VILLE.chemins?.imprimer ?? '/commun/imprimer-seance.js');
+// libelleFr, themeFr (facultatifs) : volets écrits en anglais, traduits vers le français.
+const { libelleEn, themeEn, libelleFr, themeFr } = VILLE.libelles;
+// VILLE.anglophone (Vancouver, Ottawa, Fredericton) : la Ville publie en anglais ; fiches sans espace
+// abonnés, décomptes bruts par élu, objet et libellés traduits vers le français. Voir la section
+// « VOLETS ANGLOPHONES » en fin de fichier.
+const ANGLO = Boolean(VILLE.anglophone);
+// Vocabulaire propre à une ville : VILLE.vocabulaire.cle = [français, anglais].
+const voc = (cle, fr, en) => (VILLE.vocabulaire?.[cle] ? tr(...VILLE.vocabulaire[cle]) : tr(fr, en));
 // Adresses des pages du volet, sans extension (ex. « decisions-de-la-ville-de-montreal »).
 const PAGE = VILLE.pages;
 // Les types qui sont des documents de séance, pas des dossiers à suivre.
 const TYPES_DOCUMENTS = VILLE.typesDocuments ?? ['Procès-verbal', 'Ordre du jour'];
 // Ce qui compte comme une décision. Défaut (Montréal) : les résolutions seules. VILLE.horsDecisions
 // (Lévis : procès-verbal et points de procédure) : tout sauf ces types ; ils sortent aussi du fil.
-const estDecision = VILLE.horsDecisions ? (d) => !VILLE.horsDecisions.has(d.type) : (d) => d.type === 'Résolution';
+const estDecision = VILLE.fenetre ? (d) => !d.ordreDuJour && !d.information : VILLE.horsDecisions ? (d) => !VILLE.horsDecisions.has(d.type) : (d) => d.type === 'Résolution';
 
 brancherImpression();
 // Les libellés qui viennent des données (type, instance, résultat, fonction, rôle) : traduits en
 // anglais, intacts en français. Les noms propres restent français dans les deux cas.
-const lib = (texte) => (EN ? libelleEn(texte) : texte);
+const lib = (texte) => (EN ? libelleEn(texte) : libelleFr ? libelleFr(texte) : texte);
 // Les étiquettes de catégorie viennent des données et sont traduites en lot
 // (data/resumes-en.json, scrapers/traductions.js) : une par étiquette, pas une par décision.
 const categorieEn = (c) => (EN ? (etat.traductionsEn?.categories?.[c] ?? c) : c);
@@ -64,7 +71,8 @@ const MONTHS = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', '
 export function dateFr(iso) {
   if (!iso) return '';
   const [a, m, j] = iso.split('-');
-  return EN ? `${MONTHS[Number(m) - 1]} ${Number(j)}, ${a}` : `${Number(j)} ${MOIS[Number(m) - 1]} ${a}`;
+  // VILLE.date1er (volets anglophones) : « 1er » le premier du mois.
+  return EN ? `${MONTHS[Number(m) - 1]} ${Number(j)}, ${a}` : `${VILLE.date1er && Number(j) === 1 ? '1er' : Number(j)} ${MOIS[Number(m) - 1]} ${a}`;
 }
 
 const nombreFr = (n) => Number(n).toLocaleString(EN ? 'en-CA' : 'fr-CA');
@@ -97,7 +105,7 @@ export function sansCents(t) {
 const MOIS_FR = { janvier: 0, février: 1, fevrier: 1, mars: 2, avril: 3, mai: 4, juin: 5, juillet: 6, août: 7, aout: 7, septembre: 8, octobre: 9, novembre: 10, décembre: 11, decembre: 11 };
 function porteeDe(instance) {
   if (!instance) return null;
-  return VILLE.porteeDe?.(instance, tr) ?? null;
+  return VILLE.porteeDe?.(instance, tr, etat, EN) ?? null;
 }
 function dureeDe(objet) {
   if (!objet) return null;
@@ -156,6 +164,7 @@ function blocContexte(d) {
 }
 
 function objetDe(d) {
+  if (VILLE.objetFr && !EN && d?.objetFr) return d.objetFr;   // VILLE.objetFr : titre français fourni par les données (N.-B.)
   const objet = sansCents(d?.objet ?? null);
   if (!EN || !objet) return objet;
   const pv = objet.match(TITRE_PV);
@@ -314,7 +323,7 @@ function blocResume(trouve) {
   </div>`;
   return `<div class="resume">
     <div class="resume-entete">
-      <span>${tr('Résumé généré par IA', 'AI-generated summary')}${r.source === 'sommaire' || indirect ? `${tr(" — d'après le sommaire décisionnel", ' — from the decision summary')}${indirect && r.numero ? ` ${echapper(r.numero)}` : ''}` : tr(" — d'après le texte de la résolution", ' — from the text of the resolution')}</span>
+      <span>${tr('Résumé généré par IA', 'AI-generated summary')}${r.source === 'sommaire' || indirect ? `${tr(" — d'après le sommaire décisionnel", ' — from the decision summary')}${indirect && r.numero ? ` ${echapper(r.numero)}` : ''}` : ANGLO && r.source === 'pv' ? tr(' — d’après le procès-verbal officiel', ' — from the official minutes') : tr(" — d'après le texte de la résolution", ' — from the text of the resolution')}</span>
       ${r.francaisSeulement ? '<span class="puce procedural" lang="en">summary not yet translated</span>' : ''}
       ${r.montantPrincipal ? `<span class="puce montant">${echapper(sansCents(r.montantPrincipal))}</span>` : ''}
       ${r.sansContenuSubstantiel ? `<span class="puce procedural">${tr('document de procédure', 'procedural document')}</span>` : ''}
@@ -333,7 +342,7 @@ function blocResume(trouve) {
 function puceTheme(cle) {
   const t = etat.decisions?.themes?.[cle] ?? etat.votes?.themes?.[cle] ?? etat.fil?.themes?.[cle];
   if (!t) return '';
-  return `<span class="puce theme t-${echapper(cle)}">${echapper(EN ? themeEn(cle, t.libelle) : t.libelle)}</span>`;
+  return `<span class="puce theme t-${echapper(cle)}">${echapper(EN ? themeEn(cle, t.libelle) : themeFr ? themeFr(cle, t.libelle) : t.libelle)}</span>`;
 }
 
 // Après un redessin, les fiches reviennent fermées : le bouton doit le refléter, sinon il
@@ -362,11 +371,12 @@ async function chargerTextes() {
 // Québec ne montre pas plus. Rien du tout quand le procès-verbal n'en a pas (Martin, 18 sept. 2026 :
 // « pourquoi y a ça en plus, y a pas ça à Québec »).
 function rendreTexteDecision(zone, t) {
+  if (ANGLO && t && !EN && t.dispositifFr) t = { ...t, dispositif: t.dispositifFr };   // Ottawa : le procès-verbal français
   if (!t || (!t.dispositif && !t.motifs)) {
     zone.innerHTML = '';
     return;
   }
-  zone.innerHTML = `<details class="texte-decision-pli"><summary>${tr('Texte exact de la résolution', 'Exact text of the resolution')}</summary>
+  zone.innerHTML = `<details class="texte-decision-pli"><summary>${voc('texteExact', 'Texte exact de la résolution', 'Exact text of the resolution')}</summary>
     ${t.dispositif ? `<div class="dispositif"><h4>${tr('Ce que le conseil a décidé', 'What the council decided')}</h4><p>${echapper(t.dispositif)}</p></div>` : ''}
     ${t.motifs ? `<div class="motifs"><h4>${tr("Sur quoi il s'appuie", 'What it is based on')}</h4><p>${echapper(t.motifs)}</p></div>` : ''}
   </details>`;
@@ -455,6 +465,7 @@ function carteRepliable(entete, corps, ouverte = false) {
 
 function carteDecision(d, ouverte = false) {
   if (VILLE.ficheFaits) return carteDecisionFaits(d, ouverte);
+  if (ANGLO) return carteDecisionAnglo(d, ouverte);
   const entete = `<div class="meta">
       ${puceTheme(d.theme)}
       ${d.numero ? `<span class="puce num">${echapper(d.numero)}</span>` : ''}
@@ -509,6 +520,7 @@ function carteDecision(d, ouverte = false) {
 // VILLE.compteCharges (Québec) : les données ne séparent pas les documents des décisions ; on dit
 // combien sont chargées et combien la Ville en a publié (totalDisponible).
 function totalDecisions() {
+  if (VILLE.fenetre) return etat.decisions.nombre ?? etat.decisions.decisions.length;   // chaque fiche est une décision de la fenêtre
   if (VILLE.compteCharges) return etat.decisions.totalDisponible;
   if (VILLE.horsDecisions) {
     const types = etat.decisions.facettes?.type;
@@ -539,7 +551,8 @@ function decisionsFiltrees() {
     // L'identifiant du document entre aussi dans la recherche : un procès-verbal n'a pas de numéro,
     // et c'est par son identifiant que le courriel ouvre sa fiche (?q=PV_CA4_OR_…).
     // Les identifiants de sommaires cités (d.sommaires, Lévis : FIN-2026-035) se cherchent aussi, Mes dossiers y renvoie.
-    if (q && !((d.objet ?? '') + ' ' + (d.numero ?? '') + ' ' + (d.id ?? '') + (d.sommaires?.length ? ' ' + d.sommaires.join(' ') : '')).toLowerCase().includes(q)) return false;
+    // ANGLO : les noms de qui a voté contre (et des conflits déclarés, VILLE.conflits) se cherchent aussi.
+    if (q && !((d.objet ?? '') + ' ' + (d.numero ?? '') + ' ' + (d.id ?? '') + (d.sommaires?.length ? ' ' + d.sommaires.join(' ') : '') + (ANGLO ? ' ' + (d.dissidences ?? []).join(' ') + ' ' + (VILLE.conflits ? d.conflits ?? [] : []).join(' ') : '')).toLowerCase().includes(q)) return false;
     return true;
   });
 }
@@ -560,7 +573,7 @@ function rendreDecisions() {
       // On affiche le libellé lisible, pas la clé interne.
       remplirSelect(
         $('#filtre-theme'),
-        (facettes.theme ?? []).map(({ valeur, n }) => ({ valeur, n, libelle: EN ? themeEn(valeur, etat.decisions.themes?.[valeur]?.libelle) : etat.decisions.themes?.[valeur]?.libelle }))
+        (facettes.theme ?? []).map(({ valeur, n }) => ({ valeur, n, libelle: EN ? themeEn(valeur, etat.decisions.themes?.[valeur]?.libelle) : themeFr ? themeFr(valeur, etat.decisions.themes?.[valeur]?.libelle) : etat.decisions.themes?.[valeur]?.libelle }))
       );
     }
     $('#filtre-type').dataset.rempli = '1';
@@ -578,7 +591,7 @@ function rendreDecisions() {
   // Court : le nombre, l'état des séances, les résumés. Le compte des documents de séance
   // (procès-verbaux, ordres du jour) se lit dans le filtre des types, pas ici.
   const total = totalDecisions();
-  const filtre = nDecisions !== total
+  const filtre = VILLE.fenetre ? filtreFenetre(nDecisions, total, filtrees, parametres) : nDecisions !== total
     ? tr(`${nombreFr(nDecisions)} décision(s) affichée(s) sur ${nombreFr(total)}`, `${nombreFr(nDecisions)} decision(s) shown of ${nombreFr(total)}`)
     : tr(`${nombreFr(total)} décisions de ${parametres.annee}`, `${nombreFr(total)} decisions from ${parametres.annee}`);
   const seancesTexte = etat.decisions.seancesLues != null
@@ -650,7 +663,7 @@ function grouperParSeance(decisions) {
       groupes.set(cle, {
         date: d.date,
         instance: d.instance ?? SANS_INSTANCE,
-        tronquee: Boolean(d.date) && d.date === plusAncienne,
+        tronquee: !VILLE.fenetre && Boolean(d.date) && d.date === plusAncienne,   // VILLE.fenetre : la fenêtre est lue en entier
         lignes: [],
       });
     }
@@ -677,15 +690,16 @@ function rendreSeance(g, ouverte = false) {
   if (VILLE.seancesParId) return rendreSeanceParId(g, ouverte);
   // 9 nov. 2026 (Martin) : tout ce qui n'a pas de résumé, pas seulement la procédure. aResume retombe
   // sur les vraies décisions quand la Ville n'a aucun résumé (Laval).
-  const estProcedure = (d) => !aResume(d);
+  // ANGLO : sans aucun résumé dans le volet, seule la procédure descend sous « No summary ».
+  const estProcedure = ANGLO ? (d) => (etat.parId.size ? !resumePour(d) : d.theme === 'procedure') : (d) => !aResume(d);
   const procedure = g.lignes.filter(estProcedure);
   const autres = g.lignes.filter((d) => !estProcedure(d));
   // Les points de procédure, même résumés, passent sous les vraies décisions (Martin, 9 nov. 2026).
   const lignes = [...autres.filter((d) => d.theme !== 'procedure'), ...autres.filter((d) => d.theme === 'procedure')];
-  const carte = (d, i) => carteDecision(d, ouverte && i === 0 && Boolean(resumePour(d)));
+  const carte = (d, i) => carteDecision(d, ouverte && i === 0 && (ANGLO || Boolean(resumePour(d))));
   const blocProcedure = procedure.length
     ? `<details class="seance-procedure"><summary>${tr(
-        `${etat.parId.size ? 'Sans résumé' : 'Procédure et documents de séance'} (${procedure.length} point${procedure.length > 1 ? 's' : ''})`,
+        `${etat.parId.size || ANGLO ? 'Sans résumé' : 'Procédure et documents de séance'} (${procedure.length} point${procedure.length > 1 ? 's' : ''})`,
         `No summary (${procedure.length} item${procedure.length > 1 ? 's' : ''})`
       )}</summary>${procedure.map((d) => carteDecision(d)).join('')}</details>`
     : '';
@@ -693,7 +707,7 @@ function rendreSeance(g, ouverte = false) {
       <summary class="seance-entete">
         <h3>${echapper(g.instance === SANS_INSTANCE ? tr(SANS_INSTANCE, SANS_INSTANCE_EN) : lib(g.instance))}</h3>
         <span class="seance-date">${dateFr(g.date)}</span>
-        <span class="puce">${g.lignes.length} ${tr(s(g.lignes.length, 'décision', 'décisions'), s(g.lignes.length, 'decision', 'decisions'))}</span>
+        ${ANGLO ? pucesSeanceAnglo(g) : `<span class="puce">${g.lignes.length} ${tr(s(g.lignes.length, 'décision', 'décisions'), s(g.lignes.length, 'decision', 'decisions'))}</span>`}
         ${g.tronquee ? `<span class="puce procedural">${tr('journée partiellement chargée', 'day partly loaded')}</span>` : ''}
         ${boutonImprimer(tr('Imprimer cette séance, toutes ses décisions dépliées', 'Print this meeting, with all its decisions expanded'))}
         <button type="button" class="bouton-tout-ouvrir">${tr('Tout ouvrir', 'Expand all')}</button>
@@ -706,6 +720,12 @@ function rendreSeance(g, ouverte = false) {
 function classeResultat(r) {
   if (!r) return '';
   if (VILLE.votesDecompteImprime) return classeResultatLarge(r);
+  if (ANGLO) {   // « Carried Unanimously », « Carried », « Lost », « Defeated » ; Ottawa : « Received », « Approved »…
+    if (/unanim/i.test(r)) return 'r-unanimite';
+    if (/^Carried$/i.test(r) || r.includes('majorité')) return 'r-majorite';
+    if (/^(Lost|Defeated)$/i.test(r) || r.includes('Rejet')) return 'r-rejetee';
+    if (/^Carried|^Received|^Approved|^Adopted/i.test(r)) return 'r-majorite';
+  }
   if (r.includes('unanimité')) return 'r-unanimite';
   if (r.includes('majorité')) return 'r-majorite';
   if (r.includes('division')) return 'r-division';
@@ -968,6 +988,7 @@ function rendreLegendeExecutif(membres) {
 }
 
 function carteElu(m) {
+  if (ANGLO) return carteEluAnglo(m);
   const roles = m.roles.filter((r) => (VILLE.elusSimple ? true : r) && r !== 'Maire');
   const votesContre = votesContreDe(m);
   const numero = numeroDistrict(m);
@@ -1041,6 +1062,7 @@ function carteVacant(v) {
 
 function rendreElus() {
   if (VILLE.elusDistrictsNumerotes) return rendreElusDistricts();
+  if (ANGLO) return rendreElusAnglo();
   const membres = etat.elus.membres;
   const partis = Object.entries(etat.elus.partis).sort((a, b) => b[1] - a[1]);
   rendreLegendeExecutif(membres);
@@ -1358,19 +1380,22 @@ function rendreCarte() {
       .join(' ');
 
   $('#carte').innerHTML =
-    `<svg viewBox="0 0 ${LARGEUR} ${hauteur}" role="img" aria-label="${tr(`Carte des ${districts.length} districts électoraux de la Ville de ${VILLE.nom}`, `Map of the ${districts.length} electoral districts of the City of ${VILLE.nom}`)}">` +
+    `<svg viewBox="0 0 ${LARGEUR} ${hauteur}" role="img" aria-label="${VILLE.quartiers ? voc('carte', '', '').replace('{n}', districts.length) : tr(`Carte des ${districts.length} districts électoraux de la Ville de ${VILLE.nom}`, `Map of the ${districts.length} electoral districts of the City of ${VILLE.nom}`)}">` +
     districts
       .map(
         (d) =>
           `<path d="${chemin(d.anneaux)}" class="district" data-numero="${d.numero}" ` +
           `fill="${table.get(cle(d)) ?? '#999'}" tabindex="0" role="button" ` +
-          `aria-label="District ${d.numero} — ${echapper(d.nom ?? '')}"><title>${echapper(d.nom ?? '')} (${d.numero}) — ${echapper(d.conseiller ?? '')}${d.conseillerArrondissement ? tr(" (conseil d'arrondissement)", ' (borough council)') : ''}</title></path>`
+          (VILLE.quartiers   // Ottawa : « Quartier / Ward », nom français du quartier (d.nomFr)
+            ? `aria-label="${tr('Quartier', 'Ward')} ${d.numero} — ${echapper((EN ? d.nom : d.nomFr) ?? '')}"><title>${echapper((EN ? d.nom : d.nomFr) ?? '')} (${d.numero})`
+            : `aria-label="District ${d.numero} — ${echapper(d.nom ?? '')}"><title>${echapper(d.nom ?? '')} (${d.numero})`) +
+          ` — ${echapper(d.conseiller ?? '')}${d.conseillerArrondissement ? tr(" (conseil d'arrondissement)", ' (borough council)') : ''}</title></path>`
       )
       .join('') +
     '</svg>';
 
   $('#legende').innerHTML = [...table.entries()]
-    .map(([valeur, couleur]) => `<span class="cle-legende"><i style="background:${couleur}"></i>${echapper(lib(valeur))}</span>`)
+    .map(([valeur, couleur]) => `<span class="cle-legende"><i style="background:${couleur}"></i>${echapper(VILLE.quartiers ? (EN ? valeur : districts.find((d) => d.arrondissement === valeur)?.arrondissementFr ?? valeur) : lib(valeur))}</span>`)
     .join('');
 }
 
@@ -1407,9 +1432,10 @@ function instanceArrondissement(arrondissement) {
 function entreeLexique(e) {
   // En anglais : le terme reste en français (c'est lui qu'on croise dans les documents), suivi de
   // son équivalent ; la définition est traduite (data/lexique-en.json).
-  const en = EN ? etat.lexiqueEn?.entrees?.[e.terme] : null;
+  // ANGLO : l'inverse, le terme anglais et son équivalent français (data/lexique-fr.json).
+  const en = ANGLO ? (EN ? null : etat.lexiqueFr?.entrees?.[e.terme]) : EN ? etat.lexiqueEn?.entrees?.[e.terme] : null;
   return `<div class="entree-lexique">
-      <h3 class="terme">${echapper(e.terme)}${en?.equivalent ? ` <span class="alias" lang="en">(${echapper(en.equivalent)})</span>` : ''}</h3>
+      <h3 class="terme">${echapper(e.terme)}${en?.equivalent ? ` <span class="alias" lang="${ANGLO ? 'fr' : 'en'}">(${echapper(en.equivalent)})</span>` : ''}</h3>
       ${(en ? en.aussi : e.aussi) ? `<p class="alias">${tr('On dit aussi&nbsp;:', 'Also called:')} ${echapper(en ? en.aussi : e.aussi)}</p>` : ''}
       <p class="definition">${echapper(en?.definition ?? e.definition)}</p>
       ${(en?.ouVousLeVoyez ?? e.ouVousLeVoyez) ? `<p class="remarque">${echapper(en?.ouVousLeVoyez ?? e.ouVousLeVoyez)}</p>` : ''}${VILLE.lexiqueExemples ? '\n      ' + exempleLexique(e) : ''}
@@ -1420,7 +1446,7 @@ function lexiqueFiltre() {
   const q = ($('#rech-lexique')?.value ?? '').trim().toLowerCase();
   return etat.lexique.entrees.filter((e) => {
     if (!q) return true;
-    const en = etat.lexiqueEn?.entrees?.[e.terme];
+    const en = ANGLO ? etat.lexiqueFr?.entrees?.[e.terme] : etat.lexiqueEn?.entrees?.[e.terme];
     return [e.terme, e.aussi ?? '', e.definition, e.ouVousLeVoyez ?? '', en?.equivalent ?? '', en?.definition ?? '', en?.aussi ?? ''].join(' ').toLowerCase().includes(q);
   });
 }
@@ -1428,7 +1454,7 @@ function lexiqueFiltre() {
 function rendreLexique() {
   const entrees = lexiqueFiltre();
   // L'ordre et les clés viennent du lexique français ; le titre anglais, clé par clé (lexique-en.json).
-  const categories = etat.lexique.categories ?? {};
+  const categories = (ANGLO && !EN && etat.lexiqueFr?.categories) || etat.lexique.categories || {};
   // Chaque catégorie est un menu dépliant, fermé à l'arrivée : on voit les six titres d'un
   // coup, on ouvre celui qu'on cherche. Une recherche en cours ouvre les catégories où
   // elle a trouvé quelque chose — sinon les résultats resteraient cachés.
@@ -1471,7 +1497,9 @@ export function evenementsRecents() {
   const evenements = [];
   for (const d of etat.decisions?.decisions ?? []) {
     // Martin, 9 nov. 2026 : le fil ne montre que les décisions qui ont un résumé IA.
-    if (!aResume(d)) continue;   // aResume : la règle du résumé, avec le repli des villes sans résumés
+    // ANGLO sans résumé : VILLE.filSansResume(d) choisit (Vancouver : les points divisés ou rejetés).
+    if (ANGLO && !etat.parId.size) { if (VILLE.filSansResume && !VILLE.filSansResume(d)) continue; }
+    else if (!aResume(d)) continue;   // aResume : la règle du résumé, avec le repli des villes sans résumés
     if (d.theme === 'procedure') continue;   // ni ordre du jour ni procès-verbal en vitrine, même résumés (9 nov. 2026)
     if (VILLE.horsDecisions && !estDecision(d)) continue;   // ni procès-verbal ni point de procédure (Lévis)
     evenements.push({ date: d.date, genre: 'decision', nouveau: d.nouveau === true, data: d });
@@ -1506,13 +1534,14 @@ function ligneEvenement(e) {
   const d = e.data;
   if (VILLE.ficheFaits) return lienFil(`${pucesDecision(d, { nouveau: e.nouveau, genre: true })}<p class="objet">${echapper(objetDecision(d))}</p>`);
   const entete = `<div class="meta">
-      <span class="puce genre-decision">${tr('décision', 'decision')}</span>
+      <span class="puce genre-decision">${ANGLO && d.ordreDuJour ? tr('à l’ordre du jour', 'on the agenda') : ANGLO && d.information ? tr('information', 'information') : tr('décision', 'decision')}</span>
       ${puceTheme(d.theme)}
       ${d.numero ? `<span class="puce num">${echapper(d.numero)}</span>` : ''}
       <span>${dateFr(d.date)}</span>
       <span class="puce">${echapper(lib(d.type))}</span>
       ${d.instance ? `<span class="puce">${echapper(lib(d.instance))}</span>` : ''}
       ${e.nouveau && resumePour(d)?.r?.puces?.length && !resumePour(d).r.sansContenuSubstantiel ? `<span class="puce neuf">${tr('nouveau', 'new')}</span>` : ''}
+      ${ANGLO ? enteteVoteAnglo(d) : ''}
     </div>
     <p class="objet">${echapper(objetDe(d) ?? tr('(sans objet)', '(no subject)'))}</p>`;
   const corps = `${blocContexte(d)}${blocResume(resumePour(d))}
@@ -1536,7 +1565,7 @@ function rendreFil() {
   // Le titre suffit à dire ce qu'on regarde. Le détail de l'extraction (date, nombre de
   // nouveautés) vit sur la page « Sources et limites », là où on va quand on se pose la
   // question — pas en travers du fil quand on veut juste lire.
-  $('#titre-fil').textContent = mode === 'nouveautes' ? tr('Ce qui a changé', "What's new") : tr('Activité récente', 'Recent activity');
+  $('#titre-fil').textContent = mode === 'nouveautes' ? tr('Ce qui a changé', "What's new") : ANGLO && !etat.parId.size ? voc('titreFil', 'Activité récente', 'Recent activity') : tr('Activité récente', 'Recent activity');
   // La première carte du fil est toujours ouverte : elle montre ce qu'est un résumé (9 nov. 2026).
   $('#fil').innerHTML = aMontrer.map(ligneEvenement).join('');
 
@@ -1554,9 +1583,12 @@ function rendreAccueil() {
   if (etat.decisions) {
     // Les résolutions seules : les fiches de procès-verbaux et d'ordres du jour sont des
     // documents, pas des décisions (voir totalDecisions).
-    chiffres.push({ n: nombreFr(totalDecisions()), quoi: tr(`décisions publiées en ${etat.decisions.parametres.annee}`, `decisions published in ${etat.decisions.parametres.annee}`), lien: PAGE.decisions });
+    if (VILLE.fenetre) chiffres.push(...chiffresFenetre());   // la fenêtre de dates, pas l'année
+    else chiffres.push({ n: nombreFr(totalDecisions()), quoi: tr(`décisions publiées en ${etat.decisions.parametres.annee}`, `decisions published in ${etat.decisions.parametres.annee}`), lien: PAGE.decisions });
   }
-  if (etat.votes) {
+  // VILLE.chiffreVotes(etat, tr, nombreFr) → { n, quoi } : le chiffre des votes propre à la ville.
+  if (etat.votes && VILLE.chiffreVotes) chiffres.push({ ...VILLE.chiffreVotes(etat, tr, nombreFr), lien: PAGE.decisions });
+  else if (etat.votes) {
     // Les votes peuvent couvrir plus d'une année (Longueuil : 2025 et 2026) : la phrase le dit.
     const depuis = etat.votes.parametres?.annees?.length > 1 ? etat.votes.parametres.annees[0] : null;
     chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: depuis ? tr(`votes nominatifs consignés depuis ${depuis}`, `recorded votes since ${depuis}`) : tr('votes nominatifs consignés cette année', 'recorded votes this year'), lien: `${PAGE.decisions}?vote=1` });
@@ -1589,6 +1621,9 @@ function rendreEtat() {
     }
     lignes.push(`<tr><td>${nom}</td><td>${new Date(data.generatedAt).toLocaleString(EN ? 'en-CA' : 'fr-CA')}</td><td class="n">${extra}</td></tr>`);
   };
+  // VILLE.lignesSources(ajouter, { etat, tr, nombreFr }) : les lignes du tableau propres à la ville.
+  if (VILLE.lignesSources) VILLE.lignesSources(ajouter, { etat, tr, nombreFr });
+  else {
   ajouter(tr('Décisions', 'Decisions'), etat.decisions, etat.decisions ? `${etat.decisions.nombre} / ${etat.decisions.totalDisponible}` : '');
   ajouter(tr('Votes nominatifs', 'Recorded votes'), etat.votes, etat.votes ? `${etat.votes.nombre} / ${etat.votes.totalDisponible}` : '');
   ajouter(tr('Résumés en langage clair', 'Plain-language summaries'), etat.resumes, etat.resumes ? `${etat.resumes.nombre}` : '');
@@ -1600,9 +1635,12 @@ function rendreEtat() {
     lignes.push(`<tr><td>${tr("Séances de l'année", 'Meetings this year')}</td><td>${etat.decisions.seancesLues ?? 0} ${tr('procès-verbaux lus', 'minutes read')}</td><td class="n">${etat.decisions.seancesEnAttente ?? 0} ${tr('en attente', 'awaiting')}</td></tr>`);
   }
   if (VILLE.cucq) ajouter(tr("Commission d'urbanisme (CUCQ)", 'Urban Planning Commission (CUCQ)'), etat.cucq, etat.cucq ? `${etat.cucq.nombre}` : '');
+  }
   $('#etat-donnees').innerHTML =
     `<table><thead><tr><th>${tr('Jeu', 'Dataset')}</th><th>${tr('Dernière extraction', 'Last extraction')}</th><th class="n">${tr('Chargé / disponible', 'Loaded / available')}</th></tr></thead><tbody>${lignes.join('')}</tbody></table>` +
-    (etat.resumes?.modele ? `<p class="compte">${tr('Modèle utilisé pour les résumés&nbsp;:', 'Model used for the summaries:')} <code>${echapper(etat.resumes.modele)}</code>.</p>` : '');
+    (etat.resumes?.modele ? `<p class="compte">${tr('Modèle utilisé pour les résumés&nbsp;:', 'Model used for the summaries:')} <code>${echapper(etat.resumes.modele)}</code>.</p>` : '') +
+    // VILLE.noteSources(etat, tr, echapper) : une note sous le tableau (Vancouver : le robots.txt lu).
+    (VILLE.noteSources?.(etat, tr, echapper) ?? '');
 
   // L'archive : le site ne la charge pas, il se contente d'annoncer ce qu'elle contient.
   if (!$('#etat-archive')) return;
@@ -1641,7 +1679,7 @@ const JEUX_EN_PLUS = [
 // VILLE.resumes === false : pas de data/resumes.json (Laval, résumés éteints). VILLE.sommaires : data/sommaires.json.
 const JEU_RESUMES = VILLE.resumes === false ? [] : ['resumes'];
 const JEU_SOMMAIRES = VILLE.sommaires ? ['sommaires'] : [];
-const BESOINS = {
+const BESOINS = VILLE.besoins ?? {
   accueil: ['decisions', 'votes', 'elus', ...JEU_RESUMES, ...JEU_SOMMAIRES],
   decisions: ['decisions', ...JEU_RESUMES, ...JEU_SOMMAIRES, 'votes-decisions', ...(VILLE.votesDetailles ? ['votes'] : [])],
   votes: ['votes', 'elus'],
@@ -1663,7 +1701,9 @@ function chargerJeux(page) {
     });
     // En anglais : les puces traduites remplacent les françaises, et l'objet de chaque décision
     // aussi (data/resumes-en.json). Ce qui n'est pas encore traduit reste en français, et le dit.
-    if (EN && (etat.resumes || etat.decisions)) {
+    // VILLE.apresChargement({ etat, EN, charger, page }) : traductions propres à la ville (volets anglophones).
+    await VILLE.apresChargement?.({ etat, EN, charger, page });
+    if (EN && !ANGLO && (etat.resumes || etat.decisions)) {
       const en = await charger('resumes-en');
       etat.traductionsEn = en;
       const traductions = en?.traductions ?? {};
@@ -1678,7 +1718,8 @@ function chargerJeux(page) {
         if (o?.en) d.objet = o.en;
       }
     }
-    if (EN && page === 'lexique') etat.lexiqueEn = await charger('lexique-en');
+    if (EN && !ANGLO && page === 'lexique') etat.lexiqueEn = await charger('lexique-en');
+    if (ANGLO && !EN && page === 'lexique') etat.lexiqueFr = await charger('lexique-fr');
     etat.parId = new Map((etat.resumes?.resumes ?? []).map((r) => [r.id, r]));
     etat.sommairesLus = new Map((etat.sommaires?.sommaires ?? []).map((x) => [x.numero, x]));
     etat.seancesParId = new Map((etat.decisions?.seances ?? []).map((x) => [x.id, x]));
@@ -1837,7 +1878,7 @@ if (existe('#plus-decisions')) {
 // L'accueil montre 3 décisions résumées ; le bouton mène à la page Décisions (9 nov. 2026).
 if (existe('#plus-fil')) {
   $('#plus-fil').addEventListener('click', () => {
-    location.href = `${PAGE.decisions}${EN ? '?lang=en' : ''}`;
+    location.href = `${PAGE.decisions}${EN && VILLE.langueDefaut !== 'en' ? '?lang=en' : ''}`;   // VILLE.langueDefaut 'en' : pas de ?lang
   });
 }
 if (existe('#plus-votes')) {
@@ -1966,7 +2007,7 @@ export { etat };
     pct.textContent = z + '%';
     moins.disabled = z <= MIN;
     plus.disabled = z >= MAX;
-    try { localStorage.setItem('dvq:zoom', String(z)); } catch {}
+    try { localStorage.setItem(VILLE.cleZoom ?? 'dvq:zoom', String(z)); } catch {}
   };
 
   appliquer(lire());
@@ -2055,14 +2096,17 @@ document.addEventListener('toggle', async (e) => {
   }
   const v = jeu?.v?.[numero];
   if (!v || fiche.querySelector('.bloc-vote')) return;
-  const [resultat, pour, contre, demandeur, pdf] = v;
+  const [resultat, pour, contre, demandeur, pdf, abstentions = [], absents = [], conflits = []] = v;   // ANGLO : trois listes de plus
   const noms = (l) => l.map((i) => echapper(jeu.noms[i])).join(', ');
   fiche.querySelector('.corps')?.insertAdjacentHTML('afterbegin', `<div class="bloc-vote">
-    <div class="resume-entete">${tr('Vote nominatif', 'Recorded vote')} · ${echapper(resultat)} · ${pour.length} ${tr('pour', 'for')}, ${contre.length} ${tr('contre', 'against')}</div>
+    <div class="resume-entete">${tr('Vote nominatif', 'Recorded vote')} · ${echapper(ANGLO ? lib(resultat) : resultat)} · ${pour.length} ${tr('pour', 'for')}, ${contre.length} ${tr('contre', 'against')}</div>
     <p style="margin:0 0 4px"><strong>${tr('Pour', 'For')}</strong> : ${noms(pour) || '—'}</p>
     <p style="margin:0 0 4px"><strong>${tr('Contre', 'Against')}</strong> : ${noms(contre) || '—'}</p>
+    ${ANGLO && abstentions.length ? `<p style="margin:0 0 4px"><strong>${tr('Abstention', 'Abstained')}</strong> : ${noms(abstentions)}</p>` : ''}
+    ${ANGLO && absents.length ? `<p style="margin:0 0 4px"><strong>${tr('Absent', 'Absent')}</strong> : ${noms(absents)}</p>` : ''}
+    ${VILLE.conflits && conflits.length ? `<p style="margin:0 0 4px"><strong>${tr('Conflit déclaré', 'Declared conflict')}</strong> : ${noms(conflits)}</p>` : ''}
     ${demandeur ? `<p class="compte" style="margin:0">${tr('Vote demandé par', 'Vote called by')} ${echapper(demandeur)}.</p>` : ''}
-    ${pdf ? `<p class="compte" style="margin:2px 0 0"><a href="${echapper(pdf)}" target="_blank" rel="noopener">${tr('Résolution officielle (PDF) ↗', 'Official resolution (PDF, in French) ↗')}</a></p>` : ''}
+    ${pdf ? `<p class="compte" style="margin:2px 0 0"><a href="${echapper(pdf)}" target="_blank" rel="noopener">${ANGLO ? voc('lienSource', '', '') : tr('Résolution officielle (PDF) ↗', 'Official resolution (PDF, in French) ↗')}</a></p>` : ''}
   </div>`);
 }, true);
 
@@ -2669,4 +2713,160 @@ function rendreEtatDetaille() {
     annees.map((a) => `<tr><td>${echapper(a.annee)}</td><td class="n">${nombreFr(a.nombre)}</td><td class="n">${nombreFr(Math.round(a.octetsCompresses / 1024))} ko</td><td>${echapper(String(a.archiveLe ?? '').slice(0, 10))}</td></tr>`).join('') +
     '</tbody></table>' +
     `<p class="compte">${annees.length} année(s), ${nombreFr(totalDocs)} documents, ${nombreFr(Math.round(totalOctets / 1024))} ko compressés au total.</p>`;
+}
+
+
+// ---------- VOLETS ANGLOPHONES (Vancouver, Ottawa, Fredericton ; 20 nov. 2026) ----------
+// Allumé par VILLE.anglophone. Ces volets vivent dans d'autres dépôts : le moteur y est COPIÉ par
+// scripts/synchro-moteur.js (dossierquebec), jamais chargé depuis dossierquebec.ca. La Ville publie
+// en anglais ; le français est en option (VILLE.langueDefaut 'en'). Pas d'espace abonnés. Les clés :
+//   fenetre      { points, affichees, seances, point } : une fenêtre de dates plutôt qu'une année ;
+//                chaque fiche est une décision (sauf d.ordreDuJour et d.information, Fredericton)
+//   vocabulaire  { lienSource, bulletins, titreFil, texteExact, pageVille, carte } : [fr, en]
+//   conflits     conflits d'intérêts déclarés : puce sur la fiche et sur l'élu, recherche (Ottawa)
+//   quartiers    élus par quartier, coordonnées, présences, carte des quartiers (Ottawa)
+//   fichePV      fiche tirée du procès-verbal : texte, proposée/appuyée, absents, PDF anglais et
+//                français, points d'ordre du jour et d'information (Fredericton)
+//   absencesSurSeances  la fiche d'élu compte les absences sur les séances (Fredericton)
+//   compteElus({ n, maires, conseillers, p }, tr, dateFr)  crochet : la phrase sous « Conseil »
+//   filSansResume(d), chiffreVotes, lignesSources, noteSources, apresChargement, besoins : crochets
+//   mesure       URL de la mesure maison, injectée par le moteur
+function enteteVoteAnglo(d) {
+  return `${d.resultat ? `<span class="resultat ${classeResultat(d.resultat)}">${echapper(lib(d.resultat))}</span>` : ''}
+      ${d.decomptePour != null ? `<span class="decompte"><span class="d-pour">${d.decomptePour} ${tr('pour', 'for')}</span><span class="d-contre">${d.decompteContre} ${tr('contre', 'against')}</span></span>` : ''}`;
+}
+
+function fen(cle) {
+  return VILLE.fenetre?.[cle] ?? [];
+}
+
+// « 12 décisions affichées sur 40 », ou la fenêtre : « 40 points mis aux voix du 1er janv. 2026 au … ».
+// Fredericton : les points d'ordre du jour et les informations se comptent à part.
+function filtreFenetre(nDecisions, total, filtrees, parametres) {
+  const [pointsFr, pointsEn] = fen('points');
+  const [affFr, affEn] = fen('affichees');
+  const nOdj = filtrees.filter((d) => d.ordreDuJour).length, nInfo = filtrees.filter((d) => d.information).length;
+  const enPlus = (nOdj || nInfo) ? tr(` (plus ${[nOdj ? `${nombreFr(nOdj)} point${nOdj > 1 ? 's' : ''} à l’ordre du jour` : '', nInfo ? `${nombreFr(nInfo)} information${nInfo > 1 ? 's' : ''}` : ''].filter(Boolean).join(' et ')})`, ` (plus ${[nOdj ? `${nombreFr(nOdj)} agenda item${nOdj > 1 ? 's' : ''}` : '', nInfo ? `${nombreFr(nInfo)} information item${nInfo > 1 ? 's' : ''}` : ''].filter(Boolean).join(' and ')})`) : '';
+  return (nDecisions !== total
+    ? tr(`${nombreFr(nDecisions)} ${affFr} sur ${nombreFr(total)}`, `${nombreFr(nDecisions)} ${affEn} of ${nombreFr(total)}`)
+    : tr(`${nombreFr(total)} ${pointsFr} du ${dateFr(parametres.depuis)} au ${dateFr(parametres.jusqua)}`, `${nombreFr(total)} ${pointsEn}, ${dateFr(parametres.depuis)} to ${dateFr(parametres.jusqua)}`)) + enPlus;
+}
+
+function chiffresFenetre() {
+  const p = etat.decisions.parametres ?? {};
+  const [pointsFr, pointsEn] = fen('points');
+  const l = [{ n: nombreFr(totalDecisions()), quoi: tr(`${pointsFr} du ${dateFr(p.depuis)} au ${dateFr(p.jusqua)}`, `${pointsEn}, ${dateFr(p.depuis)} to ${dateFr(p.jusqua)}`), lien: PAGE.decisions }];
+  if (etat.decisions.seancesLues != null) l.push({ n: nombreFr(etat.decisions.seancesLues), quoi: tr(...fen('seances')), lien: PAGE.decisions });
+  return l;
+}
+
+function pucesSeanceAnglo(g) {
+  const n = g.lignes.length;
+  const [unFr, plFr, unEn, plEn] = fen('point');
+  if (g.lignes[0]?.ordreDuJour) {
+    return `<span class="puce">${n} ${tr(s(n, 'point à l’ordre du jour', 'points à l’ordre du jour'), s(n, 'agenda item', 'agenda items'))}</span>
+        <span class="puce procedural">${tr('procès-verbal pas encore publié', 'minutes not yet published')}</span>`;
+  }
+  return `<span class="puce">${n} ${tr(s(n, unFr, plFr), s(n, unEn, plEn))}</span>`;
+}
+
+function carteDecisionAnglo(d, ouverte = false) {
+  const entete = `<div class="meta">
+      ${puceTheme(d.theme)}
+      ${d.numero ? `<span class="puce num">${echapper(d.numero)}</span>` : ''}
+      <span>${dateFr(d.date)}</span>
+      <span class="puce">${d.ordreDuJour ? tr('À l’ordre du jour', 'On the agenda') : d.information ? tr('Information', 'Information') : echapper(lib(d.type))}</span>
+      ${d.instance ? `<span class="puce">${echapper(lib(d.instance))}</span>` : ''}
+      ${d.categorie && !/^\d{8,}$/.test(d.categorie) ? `<span class="puce">${echapper(categorieEn(d.categorie))}</span>` : ''}
+      ${d.unite ? `<span class="puce">${echapper(lib(d.unite.replace(/_/g, ', ')))}</span>` : ''}
+      ${d.resultat ? `<span class="resultat ${classeResultat(d.resultat)}">${echapper(lib(d.resultat))}</span>` : ''}
+      ${d.voteEnregistre ? `<span class="puce genre-vote">${tr('vote enregistré', 'recorded vote')}</span>` : ''}
+      ${d.decomptePour != null ? `<span class="decompte"><span class="d-pour">${d.decomptePour} ${tr('pour', 'for')}</span><span class="d-contre">${d.decompteContre} ${tr('contre', 'against')}</span></span>` : ''}
+      ${VILLE.conflits && d.conflits?.length ? `<span class="puce conflit">${tr('conflit déclaré', 'declared conflict')}&nbsp;: ${d.conflits.map(echapper).join(', ')}</span>` : ''}
+    </div>
+    <p class="objet">${echapper(objetDe(d) ?? tr('(sans objet)', '(no subject)'))}</p>`;
+  // Faits bruts : les dissidences consignées ; la fiche du procès-verbal (VILLE.fichePV) ou le lien
+  // vers la donnée officielle (d.lienSource).
+  const pv = VILLE.fichePV
+    ? `${d.information ? `<p class="compte" style="margin:0 0 8px">${tr('Ce n’est pas une décision : le procès-verbal le rapporte pour information', 'This is not a decision: the minutes report it for information')}${(!EN && d.sectionFr ? d.sectionFr : d.section) ? ` (${echapper(!EN && d.sectionFr ? d.sectionFr : d.section)})` : ''}.</p>` : ''}
+    ${d.ordreDuJour ? `<p class="compte" style="margin:0 0 8px">${tr('Ce point était à l’ordre du jour de la séance. La Ville n’a pas encore publié le procès-verbal : on ne sait pas encore ce que le conseil a décidé.', 'This item was on the meeting agenda. The City has not yet published the minutes, so what Council decided is not known yet.')}</p>` : ''}
+    ${(() => { const t = !EN && d.texteFr ? d.texteFr : d.texte; return t ? `<p style="margin:0 0 10px;white-space:pre-line">${echapper(t)}</p>` : ''; })()}
+    ${d.proposePar ? `<p class="compte" style="margin:0 0 8px">${tr('Proposée par', 'Moved by')} ${echapper(d.proposePar)}${d.appuyePar ? ` · ${tr('appuyée par', 'seconded by')} ${echapper(d.appuyePar)}` : ''}. ${d.dissidences?.length ? '' : tr('Le procès-verbal ne note aucun vote contre.', 'The minutes record no vote against.')}</p>` : ''}
+    ${d.absents?.length ? `<p class="compte" style="margin:0 0 8px">${tr('Absent à la séance', 'Absent from the meeting')} : ${d.absents.map(echapper).join(', ')}.</p>` : ''}
+    ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${d.ordreDuJour ? tr('Ordre du jour officiel, anglais et français (PDF)', 'Official agenda, English and French (PDF)') : tr('Procès-verbal officiel, en anglais (PDF)', 'Official minutes (PDF)')} ↗</a>` : ''}
+    ${d.pdfFr ? ` &nbsp;<a class="lien-pdf" href="${echapper(d.pdfFr)}" target="_blank" rel="noopener">${tr('Procès-verbal officiel (PDF)', 'Official minutes, in French (PDF)')} ↗</a>` : ''}`
+    : `${d.dossier ? `<p class="compte" style="margin:0 0 8px">${tr('Dossier', 'File')} ${echapper(d.dossier)}${d.article ? ` · ${tr('article', 'item')} ${echapper(d.article)}` : ''}</p>` : ''}
+    ${d.lienSource ? `<a class="lien-pdf" href="${echapper(d.lienSource)}" target="_blank" rel="noopener">${voc('lienSource', '', '')}</a>` : ''}
+    ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${d.type === 'Résolution' ? tr('Procès-verbal officiel (PDF)', 'Official minutes (PDF, in French)') : tr('Document officiel (PDF)', 'Official document (PDF, in French)')} ↗</a>` : ''}`;
+  const corps = `${blocContexte(d)}${blocResume(resumePour(d))}
+    ${d.dissidences?.length ? `<p class="compte" style="margin:0 0 8px">${tr(`Dissidence${d.dissidences.length > 1 ? 's' : ''}&nbsp;:`, `${s(d.dissidences.length, 'Dissent', 'Dissents')}:`)} ${d.dissidences.map(echapper).join(', ')}.</p>` : ''}
+    <div class="texte-decision" data-id="${echapper(d.id)}"></div>
+    ${pv}
+    ${d.sommairePdf ? ` &nbsp;<a class="lien-pdf" href="${echapper(d.sommairePdf)}" target="_blank" rel="noopener">${tr('Sommaire décisionnel (PDF)', 'Decision summary (PDF, in French)')} ↗</a>` : ''}
+    ${actionsFiche(d)}`;
+  return carteRepliable(entete, corps, ouverte);
+}
+
+// La fiche d'un élu : la fonction et les décomptes bruts de la période (pour, contre, abstentions,
+// absences, conflits), des faits consignés montrés tels quels. VILLE.quartiers (Ottawa) : le quartier,
+// les coordonnées et les présences au conseil.
+function carteEluAnglo(m) {
+  const v = m.votes ?? {};
+  const puce = (nb, fr, en, classe = '') => (nb ? `<span class="puce${classe ? ' ' + classe : ''}">${nb} ${tr(fr, en)}</span>` : '');
+  const Q = VILLE.quartiers;
+  const quartier = Q && m.districtNumero ? `${tr('Quartier', 'Ward')} ${m.districtNumero} · ${echapper(EN ? m.district : m.districtFr ?? m.district)}${m.arrondissement ? ` · ${echapper(EN ? m.arrondissement : m.arrondissementFr ?? m.arrondissement)}` : ''}` : '';
+  const pr = Q ? m.presence : null;
+  const contact = Q ? [
+    m.telephone ? `<a href="tel:${echapper(m.telephone.replace(/[^\d+]/g, ''))}">${echapper(m.telephone)}</a>` : '',
+    m.courriel ? `<a href="mailto:${echapper(m.courriel)}">${echapper(m.courriel)}</a>` : '',
+    m.lienVille ? `<a href="${echapper(m.lienVille)}" target="_blank" rel="noopener">${voc('pageVille', 'Page sur le site de la Ville', 'Page on the City website')} ↗</a>` : '',
+  ].filter(Boolean).join(' · ') : '';
+  const fonction = Q ? (/mayor/i.test(m.fonction ?? '') ? tr('Maire', 'Mayor') : tr('Conseiller ou conseillère', 'Councillor')) : echapper(m.fonction ?? '');
+  const total = VILLE.absencesSurSeances
+    ? `${v.absents ?? 0} ${tr(`absence${(v.absents ?? 0) > 1 ? 's' : ''} sur ${v.total ?? 0} séances`, `absence${(v.absents ?? 0) === 1 ? '' : 's'} out of ${v.total ?? 0} meetings`)}.   `
+    : `${v.total ?? 0} ${voc('bulletins', 'bulletins consignés sur la période', 'votes on record in this period')}.`;
+  return `<article class="carte elu"${Q && m.districtNumero ? ` id="elu-${m.districtNumero}"` : ''}>
+    <div>
+      <h3>${echapper(m.nomComplet)}</h3>
+      <p class="district">${fonction}${quartier ? ` — ${quartier}` : ''}</p>
+      ${contact ? `<p class="compte" style="margin:2px 0 6px">${contact}</p>` : ''}
+      ${pr ? `<p class="compte" style="margin:0 0 6px">${tr(`Présent à ${pr.presents} séances du conseil sur ${pr.seances} (${pr.taux} %), du ${dateFr(pr.du)} au ${dateFr(pr.au)}.`, `Present at ${pr.presents} of ${pr.seances} Council meetings (${pr.taux}%), ${dateFr(pr.du)} to ${dateFr(pr.au)}.`)}</p>` : ''}
+      <div class="meta">
+        ${puce(v.pour, 'pour', 'in favour')}
+        ${puce(v.contre, 'contre', 'opposed')}
+        ${puce(v.abstentions, 'abstention(s)', 'abstained')}
+        ${puce(v.absents, 'absence(s)', 'absent')}
+        ${VILLE.conflits ? puce(v.conflits, 'conflit(s) déclaré(s)', v.conflits > 1 ? 'declared conflicts' : 'declared conflict', 'conflit') : ''}
+        ${puce(v.inadmissibles, 'inadmissible(s)', 'ineligible')}
+        ${puce(v.sansVote, 'sans vote', 'no vote')}
+      </div>
+      <p class="compte" style="margin:6px 0 0">${total}${
+        v.contre ? ` <a href="${PAGE.decisions}?q=${encodeURIComponent(m.nomComplet)}">${tr('Voir les points votés contre', 'See the motions they opposed')} →</a>` : ''
+      }</p>
+    </div>
+  </article>`;
+}
+
+// La mairie, puis les conseillers et conseillères (par quartier avec VILLE.quartiers).
+function rendreElusAnglo() {
+  const membres = etat.elus.membres;
+  const p = etat.elus.parametres ?? {};
+  const maires = membres.filter((m) => /mayor/i.test(m.fonction ?? ''));
+  const conseillers = membres.filter((m) => !/mayor/i.test(m.fonction ?? ''));
+  if (VILLE.quartiers) conseillers.sort((a, b) => (a.districtNumero ?? 99) - (b.districtNumero ?? 99));
+  $('#compte-elus').textContent = VILLE.compteElus?.({ n: etat.elus.nombre, maires, conseillers, p }, tr, dateFr) ?? '';
+  const groupes = [[tr('Maire ou mairesse', 'Mayor'), maires], [tr('Conseillers et conseillères', 'Councillors'), conseillers]].filter(([, l]) => l.length);
+  $('#liste-elus').innerHTML = groupes
+    .map(([titre, gens]) => `<h2 class="section">${echapper(titre)}</h2><div class="grille-elus">${gens.map(carteElu).join('')}</div>`)
+    .join('');
+}
+
+// VILLE.mesure : la mesure maison commune aux sites Dossier (pages vues et clics, sans donnée
+// personnelle, lue dans dossierquebec.ca/admin), pour les volets dont les pages ne la chargent pas.
+if (VILLE.mesure && !window.__dqMesure) {
+  window.__dqMesure = true;
+  const script = document.createElement('script');
+  script.src = VILLE.mesure;
+  script.defer = true;
+  document.head.appendChild(script);
 }
