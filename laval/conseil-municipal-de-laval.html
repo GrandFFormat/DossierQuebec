@@ -44,11 +44,14 @@
      du système ensuite. */
   (function () {
     try {
-      var t = localStorage.getItem('dvm:theme');
+      var t = localStorage.getItem('dvq:theme');
       if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
       document.documentElement.dataset.theme = t;
-      var z = parseInt(localStorage.getItem('dvm:zoom'), 10);
+      var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
       if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+      // Anglais choisi (commun/langue.js) : page cachée le temps de traduire, 1,5 s au plus.
+      var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('dvq:langue');
+      if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.classList.add('dvq-en'); setTimeout(function () { document.documentElement.classList.add('dvq-pret'); }, 1500); }
     } catch (e) {}
   })();
 </script>
@@ -94,17 +97,16 @@
       des procès-verbaux, des ordres du jour et des sommaires décisionnels officiels de la Ville.
     </p>
     <nav>
-      <a href="./">Accueil</a>
-      <a href="decisions-de-la-ville-de-laval">Décisions</a>
-      <a href="votes-nominatifs-du-conseil-de-laval">Votes nominatifs</a>
-      <a href="conseil-municipal-de-laval" aria-current="page">Conseil municipal</a>
-      <a href="pres-de-chez-moi-a-laval">Près de chez moi</a>
-      <a href="lexique-municipal-de-laval">Lexique</a>
+      <a data-en="Home" href="./">Accueil</a>
+      <a data-en="Decisions" href="decisions-de-la-ville-de-laval">Décisions</a>
+      <a data-en="City Council" href="conseil-municipal-de-laval" aria-current="page">Conseil municipal</a>
+      <a data-en="Near me" href="pres-de-chez-moi-a-laval">Près de chez moi</a>
+      <a data-en="Glossary" href="lexique-municipal-de-laval">Lexique</a>
       <div class="outils">
-        <div class="taille-texte" role="group" aria-label="Taille du texte">
-          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+        <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
+          <button data-en-aria-label="Smaller text" type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
           <span id="texte-pct" aria-live="polite">100%</span>
-          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+          <button data-en-aria-label="Larger text" type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
         </div>
         <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
                 title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
@@ -114,12 +116,13 @@
 </header>
 
 <main class="contenu">
-  <div id="chargement" class="avis">Chargement des données…</div>
+  <div data-en="Loading data…" id="chargement" class="avis">Chargement des données…</div>
 
   <h1 data-en="Laval City Council" class="page">Le conseil municipal de Laval</h1>
   <nav class="raccourcis" aria-label="Sections de cette page">
     <a href="#carte">La carte des districts</a>
     <a href="#membres">Les membres du conseil</a>
+    <a href="#votes" data-en="Recorded votes">Les votes nominatifs</a>
   </nav>
   <p class="chapeau">
     Au total, le conseil municipal de Laval compte 23 sièges&nbsp;: le maire, élu au suffrage
@@ -148,17 +151,55 @@
     «&nbsp;Membres du conseil municipal&nbsp;» de laval.ca et des fiches de profil qu'elle relie.
     Les présences viennent du jeu ouvert «&nbsp;Présence des élus au conseil municipal&nbsp;»
     (Données Québec, CC-BY 4.0), tenu par la Ville et mis à jour chaque mois. Les votes consignés
-    sont comptés sur la page <a href="votes-nominatifs-du-conseil-de-laval">Votes nominatifs</a>. Faits bruts, aucune
+    sont affichés sur chaque décision, dans la page <a data-en="Decisions" href="decisions-de-la-ville-de-laval?vote=1">Décisions</a>. Faits bruts, aucune
     interprétation.
   </p>
   <p class="compte" id="compte-elus"></p>
   <div id="liste-elus"></div>
+  <!-- Fusion des pages Votes et Décisions (20 nov. 2026, comme Montréal le 12 nov.) : chaque vote est sur
+       sa décision ; les explications et le tableau des votes contre restent ici. -->
+  <h2 class="page" id="votes" style="margin-top:40px" data-en="Recorded votes">Les votes nominatifs</h2>
+  <p class="compte" data-en="Each recorded vote is shown on its decision, on the <a href=&quot;decisions-de-la-ville-de-laval?vote=1&quot;>Decisions</a> page (&quot;With a recorded vote&quot; filter).">Chaque vote est affiché sur sa décision, dans la page <a data-en="Decisions" href="decisions-de-la-ville-de-laval?vote=1">Décisions</a> (filtre « Avec vote nominatif »).</p>
+  <div class="avis">
+    <strong>Comment les votes nominatifs du conseil de Laval sont obtenus.</strong> Au conseil
+    municipal, presque toutes les décisions sont «&nbsp;adoptées à l'unanimité&nbsp;», sans que
+    personne ne soit nommé. Quand un membre <strong>demande le vote</strong>, le procès-verbal écrit,
+    dans la même phrase, le décompte et les noms&nbsp;: «&nbsp;… laquelle est adoptée par un compte
+    de 16 en faveur et de 4 contre&nbsp;: M. Stéphane Boyer, maire, et les conseillers … se
+    prononcent en faveur de la proposition&nbsp;; les conseillers … se prononcent contre la
+    proposition.&nbsp;» Ces noms sont extraits du texte par lecture automatique&nbsp;: chaque vote
+    garde le passage d'origine, et tout écart entre les noms lus et le décompte imprimé est signalé
+    plutôt que corrigé.
+  </div>
+  <div class="avis">
+    <strong>Le comité exécutif n'est pas ici.</strong> Ses procès-verbaux disent «&nbsp;à
+    l'unanimité&nbsp;» partout&nbsp;: aucun vote nominal à y lire. Le vote peut porter sur la
+    proposition elle-même, sur un amendement, sur une demande de report ou sur la prolongation de
+    la séance&nbsp;: chaque fiche dit sur quoi on a voté.
+  </div>
+
+  <details class="carte pliante bloc-tableau">
+    <summary>
+      <div class="meta">
+        <span data-en="table" class="puce">tableau</span>
+        <span id="resume-dissidence"></span>
+      </div>
+      <p data-en="Votes against, by person" class="objet">Votes contre, par personne</p>
+    </summary>
+    <div class="corps">
+  <p data-en="Raw count, without interpretation. Voting against is neither a flaw nor a merit: it is a position." class="compte">Décompte brut, sans interprétation. Voter contre n'est ni un défaut ni un mérite&nbsp;: c'est une position.</p>
+  <table id="table-dissidence">
+    <thead><tr><th data-en="Person">Personne</th><th data-en="Votes against" class="n">Votes contre</th><th data-en="Votes for" class="n">Votes pour</th><th data-en="Votes where the person is named" class="n">Votes où la personne est nommée</th></tr></thead>
+    <tbody></tbody>
+  </table>
+    </div>
+  </details>
 </main>
 
 <footer>
   <div class="contenu">
     <p>Site citoyen indépendant. Aucun lien avec la Ville de Laval, aucun caractère officiel.
-    En cas d'écart, la page officielle fait foi. <a href="sources-des-donnees-de-laval">Sources</a>.</p>
+    En cas d'écart, la page officielle fait foi. <a data-en="Sources" href="sources-des-donnees-de-laval">Sources</a>.</p>
     <p class="lien-dq-pied"><a href="/" data-en="DossierQuébec — Québec's National Assembly in plain language">DossierQuébec — l'Assemblée nationale en clair</a> · <a href="/regles" data-en="The rules of the site">Les règles du site</a> · <a href="sources-des-donnees-de-laval" data-en="Sources">Sources</a> · <a href="sources-des-donnees-de-laval#mises-a-jour" data-en="Updates">Mises à jour</a> · <a href="https://www.laval.ca/" target="_blank" rel="noopener" data-en="City of Laval site ↗">Site de la Ville de Laval ↗</a> · <span data-en="Powered by">Une réalisation de</span> <a class="lien-dafr" href="https://www.dafrsolution.com" data-en-href="https://www.dafrsolution.com/en" target="_blank" rel="noopener">DAFR Solution</a></p>
   </div>
 </footer>

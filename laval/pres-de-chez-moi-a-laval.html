@@ -44,11 +44,14 @@
      du système ensuite. */
   (function () {
     try {
-      var t = localStorage.getItem('dvm:theme');
+      var t = localStorage.getItem('dvq:theme');
       if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
       document.documentElement.dataset.theme = t;
-      var z = parseInt(localStorage.getItem('dvm:zoom'), 10);
+      var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
       if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+      // Anglais choisi (commun/langue.js) : page cachée le temps de traduire, 1,5 s au plus.
+      var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('dvq:langue');
+      if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.classList.add('dvq-en'); setTimeout(function () { document.documentElement.classList.add('dvq-pret'); }, 1500); }
     } catch (e) {}
   })();
 </script>
@@ -94,17 +97,16 @@
       des procès-verbaux, des ordres du jour et des sommaires décisionnels officiels de la Ville.
     </p>
     <nav>
-      <a href="./">Accueil</a>
-      <a href="decisions-de-la-ville-de-laval">Décisions</a>
-      <a href="votes-nominatifs-du-conseil-de-laval">Votes nominatifs</a>
-      <a href="conseil-municipal-de-laval">Conseil municipal</a>
-      <a href="pres-de-chez-moi-a-laval" aria-current="page">Près de chez moi</a>
-      <a href="lexique-municipal-de-laval">Lexique</a>
+      <a data-en="Home" href="./">Accueil</a>
+      <a data-en="Decisions" href="decisions-de-la-ville-de-laval">Décisions</a>
+      <a data-en="City Council" href="conseil-municipal-de-laval">Conseil municipal</a>
+      <a data-en="Near me" href="pres-de-chez-moi-a-laval" aria-current="page">Près de chez moi</a>
+      <a data-en="Glossary" href="lexique-municipal-de-laval">Lexique</a>
       <div class="outils">
-        <div class="taille-texte" role="group" aria-label="Taille du texte">
-          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+        <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
+          <button data-en-aria-label="Smaller text" type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
           <span id="texte-pct" aria-live="polite">100%</span>
-          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+          <button data-en-aria-label="Larger text" type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
         </div>
         <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
                 title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>
@@ -121,14 +123,14 @@
   <section class="bloc-pres" style="background:var(--carte);border:var(--bordure-carte, 1px solid var(--ligne));border-radius:var(--rayon);padding:14px 16px;margin:16px 0 20px">
     <h2 style="margin-top:0" data-en="No data yet">Pas encore de données</h2>
     <p data-en="The Laval section has been on pause since October 7, 2026. The City’s addresses, building permits and roadwork have not been read. So this page shows nothing rather than invented data.">Le volet de Laval est en pause depuis le 7 octobre 2026. Les adresses, les permis de construction et les travaux de la Ville n’ont pas été lus. Cette page n’affiche donc rien plutôt que d’inventer des données.</p>
-    <p data-en="Meanwhile, the list of districts and councillors is on the <a href=&quot;conseil-municipal-de-laval&quot;>City Council</a> page.">En attendant, la liste des districts et des élus est sur la page <a href="conseil-municipal-de-laval">Conseil municipal</a>.</p>
+    <p data-en="Meanwhile, the list of districts and councillors is on the <a href=&quot;conseil-municipal-de-laval&quot;>City Council</a> page.">En attendant, la liste des districts et des élus est sur la page <a data-en="City Council" href="conseil-municipal-de-laval">Conseil municipal</a>.</p>
   </section>
 </main>
 
 <footer>
   <div class="contenu">
     <p>Site citoyen indépendant. Aucun lien avec la Ville de Laval, aucun caractère officiel.
-    En cas d'écart, le document PDF d'origine fait foi. <a href="sources-des-donnees-de-laval">Sources</a>.</p>
+    En cas d'écart, le document PDF d'origine fait foi. <a data-en="Sources" href="sources-des-donnees-de-laval">Sources</a>.</p>
     <p class="lien-dq-pied"><a href="/" data-en="DossierQuébec — Québec's National Assembly in plain language">DossierQuébec — l'Assemblée nationale en clair</a> · <a href="/regles" data-en="The rules of the site">Les règles du site</a> · <a href="sources-des-donnees-de-laval" data-en="Sources">Sources</a> · <a href="sources-des-donnees-de-laval#mises-a-jour" data-en="Updates">Mises à jour</a> · <a href="https://www.laval.ca/" target="_blank" rel="noopener" data-en="City of Laval site ↗">Site de la Ville de Laval ↗</a> · <span data-en="Powered by">Une réalisation de</span> <a class="lien-dafr" href="https://www.dafrsolution.com" data-en-href="https://www.dafrsolution.com/en" target="_blank" rel="noopener">DAFR Solution</a></p>
   </div>
 </footer>

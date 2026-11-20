@@ -44,11 +44,14 @@
      du système ensuite. */
   (function () {
     try {
-      var t = localStorage.getItem('dvm:theme');
+      var t = localStorage.getItem('dvq:theme');
       if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'sombre' : 'clair';
       document.documentElement.dataset.theme = t;
-      var z = parseInt(localStorage.getItem('dvm:zoom'), 10);
+      var z = parseInt(localStorage.getItem('dvq:zoom'), 10);
       if (z >= 80 && z <= 150) document.documentElement.style.zoom = z + '%';
+      // Anglais choisi (commun/langue.js) : page cachée le temps de traduire, 1,5 s au plus.
+      var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('dvq:langue');
+      if (l === 'en') { document.documentElement.lang = 'en'; document.documentElement.classList.add('dvq-en'); setTimeout(function () { document.documentElement.classList.add('dvq-pret'); }, 1500); }
     } catch (e) {}
   })();
 </script>
@@ -94,17 +97,16 @@
       des procès-verbaux, des ordres du jour et des sommaires décisionnels officiels de la Ville.
     </p>
     <nav>
-      <a href="./">Accueil</a>
-      <a href="decisions-de-la-ville-de-laval">Décisions</a>
-      <a href="votes-nominatifs-du-conseil-de-laval">Votes nominatifs</a>
-      <a href="conseil-municipal-de-laval">Conseil municipal</a>
-      <a href="pres-de-chez-moi-a-laval">Près de chez moi</a>
-      <a href="lexique-municipal-de-laval">Lexique</a>
+      <a data-en="Home" href="./">Accueil</a>
+      <a data-en="Decisions" href="decisions-de-la-ville-de-laval">Décisions</a>
+      <a data-en="City Council" href="conseil-municipal-de-laval">Conseil municipal</a>
+      <a data-en="Near me" href="pres-de-chez-moi-a-laval">Près de chez moi</a>
+      <a data-en="Glossary" href="lexique-municipal-de-laval">Lexique</a>
       <div class="outils">
-        <div class="taille-texte" role="group" aria-label="Taille du texte">
-          <button type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
+        <div data-en-aria-label="Text size" class="taille-texte" role="group" aria-label="Taille du texte">
+          <button data-en-aria-label="Smaller text" type="button" id="texte-moins" aria-label="Réduire le texte">A−</button>
           <span id="texte-pct" aria-live="polite">100%</span>
-          <button type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
+          <button data-en-aria-label="Larger text" type="button" id="texte-plus" aria-label="Agrandir le texte">A+</button>
         </div>
         <button type="button" id="bascule-theme" class="bascule-theme" aria-pressed="false"
                 title="Passer au thème sombre" aria-label="Passer au thème sombre"></button>

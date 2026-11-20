@@ -21,8 +21,8 @@ const VILLES = [
   { nom: 'Montréal', dossier: 'montreal', etat: 'volet complet', pages: ['decisions-de-la-ville-de-montreal', 'conseil-municipal-de-montreal', 'sources-des-donnees-de-montreal'] },
   // `pause` : volets arrêtés le 7 oct. 2026 (commun/navigation.js, VILLES_EN_PAUSE), hors du fichier.
   { nom: 'Lévis', dossier: 'levis', etat: 'volet partiel (prototype)', pages: ['decisions-de-la-ville-de-levis', 'conseil-municipal-de-levis', 'sources-des-donnees-de-levis'] },
-  { nom: 'Longueuil', dossier: 'longueuil', pause: true, etat: 'volet partiel (prototype)', pages: ['decisions-de-la-ville-de-longueuil', 'votes-nominatifs-du-conseil-de-longueuil', 'conseil-de-ville-de-longueuil', 'sources-des-donnees-de-longueuil'] },
-  { nom: 'Laval', dossier: 'laval', pause: true, etat: 'volet partiel (prototype)', pages: ['decisions-de-la-ville-de-laval', 'votes-nominatifs-du-conseil-de-laval', 'conseil-municipal-de-laval', 'sources-des-donnees-de-laval'] },
+  { nom: 'Longueuil', dossier: 'longueuil', pause: true, etat: 'volet partiel (prototype)', pages: ['decisions-de-la-ville-de-longueuil', 'conseil-de-ville-de-longueuil', 'sources-des-donnees-de-longueuil'] },
+  { nom: 'Laval', dossier: 'laval', pause: true, etat: 'volet partiel (prototype)', pages: ['decisions-de-la-ville-de-laval', 'conseil-municipal-de-laval', 'sources-des-donnees-de-laval'] },
 ];
 const LIBELLES = [
   [/^decisions/, 'Décisions'], [/^votes/, 'Votes nominatifs'], [/^conseil/, 'Conseil et élu·e·s'], [/^sources/, 'Sources des données'],

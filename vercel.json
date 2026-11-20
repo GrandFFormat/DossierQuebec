@@ -384,12 +384,12 @@
     },
     {
       "source": "/longueuil/votes",
-      "destination": "/longueuil/votes-nominatifs-du-conseil-de-longueuil",
+      "destination": "/longueuil/decisions-de-la-ville-de-longueuil?vote=1",
       "permanent": true
     },
     {
       "source": "/longueuil/votes.html",
-      "destination": "/longueuil/votes-nominatifs-du-conseil-de-longueuil",
+      "destination": "/longueuil/decisions-de-la-ville-de-longueuil?vote=1",
       "permanent": true
     },
     {
@@ -424,12 +424,12 @@
     },
     {
       "source": "/longueuil/votes-nominatifs",
-      "destination": "/longueuil/votes-nominatifs-du-conseil-de-longueuil",
+      "destination": "/longueuil/decisions-de-la-ville-de-longueuil?vote=1",
       "permanent": true
     },
     {
       "source": "/longueuil/votes-nominatifs.html",
-      "destination": "/longueuil/votes-nominatifs-du-conseil-de-longueuil",
+      "destination": "/longueuil/decisions-de-la-ville-de-longueuil?vote=1",
       "permanent": true
     },
     {
@@ -474,12 +474,12 @@
     },
     {
       "source": "/laval/votes",
-      "destination": "/laval/votes-nominatifs-du-conseil-de-laval",
+      "destination": "/laval/decisions-de-la-ville-de-laval?vote=1",
       "permanent": true
     },
     {
       "source": "/laval/votes.html",
-      "destination": "/laval/votes-nominatifs-du-conseil-de-laval",
+      "destination": "/laval/decisions-de-la-ville-de-laval?vote=1",
       "permanent": true
     },
     {
@@ -514,12 +514,12 @@
     },
     {
       "source": "/laval/votes-nominatifs",
-      "destination": "/laval/votes-nominatifs-du-conseil-de-laval",
+      "destination": "/laval/decisions-de-la-ville-de-laval?vote=1",
       "permanent": true
     },
     {
       "source": "/laval/votes-nominatifs.html",
-      "destination": "/laval/votes-nominatifs-du-conseil-de-laval",
+      "destination": "/laval/decisions-de-la-ville-de-laval?vote=1",
       "permanent": true
     },
     {
@@ -585,6 +585,26 @@
     {
       "source": "/montreal/votes-nominatifs-du-conseil-de-montreal.html",
       "destination": "/montreal/decisions-de-la-ville-de-montreal?vote=1",
+      "permanent": true
+    },
+    {
+      "source": "/longueuil/votes-nominatifs-du-conseil-de-longueuil",
+      "destination": "/longueuil/decisions-de-la-ville-de-longueuil?vote=1",
+      "permanent": true
+    },
+    {
+      "source": "/longueuil/votes-nominatifs-du-conseil-de-longueuil.html",
+      "destination": "/longueuil/decisions-de-la-ville-de-longueuil?vote=1",
+      "permanent": true
+    },
+    {
+      "source": "/laval/votes-nominatifs-du-conseil-de-laval",
+      "destination": "/laval/decisions-de-la-ville-de-laval?vote=1",
+      "permanent": true
+    },
+    {
+      "source": "/laval/votes-nominatifs-du-conseil-de-laval.html",
+      "destination": "/laval/decisions-de-la-ville-de-laval?vote=1",
       "permanent": true
     }
   ]

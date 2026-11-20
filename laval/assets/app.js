@@ -20,6 +20,35 @@
 //
 // Tout fichier de données peut manquer (les scrapers tournent séparément) : chaque page
 // doit rester lisible sans lui, jamais casser.
+//
+// MODÈLE : montreal/assets/app.js (Martin, 20 nov. 2026). Mêmes fonctions et mêmes outils de page
+// (impression d'une séance, archive, votes sur la fiche, filtres par adresse) ; ce qui est propre à
+// Laval vit dans le bloc VILLE ou dans une fonction marquée « Laval ».
+
+// ---------- configuration de la ville ----------
+const VILLE = {
+  nom: 'Laval',
+  pages: { decisions: 'decisions-de-la-ville-de-laval', conseil: 'conseil-municipal-de-laval', contrats: null },
+  membres: ['membres du conseil municipal', 'members of City Council'],
+  // Jeux que Montréal a et que Laval n'a pas encore : on ne les demande pas (pas de 404 en console).
+  textes: false, // data/textes.json : le texte exact de la résolution
+  contrats: false, // data/contrats-decisions.json : les contrats du SEAO sur la fiche
+  archives: false, // data/archives/index.json : les années passées
+  // La portée d'une décision, d'après son instance (blocContexte).
+  portee: {
+    'Conseil municipal': ['Toute la Ville de Laval (conseil municipal)', 'The whole City of Laval (city council)'],
+    'Comité exécutif': ['Ville de Laval, décision du comité exécutif', 'City of Laval, executive committee decision'],
+  },
+};
+
+import { EN, tr } from '/commun/langue.js';
+import { libelleEn, themeEn } from './libelles-en.js';
+import { boutonImprimer, brancherImpression } from '/commun/imprimer-seance.js';
+
+brancherImpression();
+// Les libellés qui viennent des données (type, instance, résultat) : traduits en anglais, intacts
+// en français. Les noms propres restent français dans les deux cas.
+const lib = (texte) => (EN ? libelleEn(texte) : texte);
 
 const PAS = 60; // fiches affichées par palier, en liste continue
 const PAS_SEANCES = 8; // séances affichées par palier, en mode groupé
@@ -31,6 +60,7 @@ const PAS_FIL = 3; // éléments du fil d'accueil (repris de Lévis, 9 nov. 2026
 
 const etat = {
   decisions: null,
+  projet: null, // le sujet suivi dont on arrive, depuis « Mes dossiers »
   votes: null,
   elus: null,
   districts: null,
@@ -54,10 +84,11 @@ export const echapper = (s) =>
   String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 const MOIS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+const MONTHS = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'];
 export function dateFr(iso) {
   if (!iso) return '';
   const [a, m, j] = iso.split('-');
-  return `${Number(j)} ${MOIS[Number(m) - 1]} ${a}`;
+  return EN ? `${MONTHS[Number(m) - 1]} ${Number(j)}, ${a}` : `${Number(j)} ${MOIS[Number(m) - 1]} ${a}`;
 }
 
 // « 18h30 » (tel qu'écrit dans les noms de fichiers de la Ville) -> « 18 h 30 » ; « 09h00 » -> « 9 h ».
@@ -67,7 +98,84 @@ function heureFr(heure) {
   return `${Number(m[1])} h${m[2] && m[2] !== '00' ? ' ' + m[2] : ''}`;
 }
 
-const nombreFr = (n) => Number(n).toLocaleString('fr-CA');
+const nombreFr = (n) => Number(n).toLocaleString(EN ? 'en-CA' : 'fr-CA');
+const s = (n, sing, plur) => (n > 1 ? plur : sing);
+
+// Montants sans cents (rétroaction d'un lecteur, 13 nov. 2026) : « 828 241,70 $ » devient « 828 242 $ ».
+export function sansCents(t) {
+  if (t == null) return t;
+  return String(t)
+    .replace(/(\d),0(?=[   ]?[KkMG]\$)/g, (m, c) => c)
+    .replace(/(\d{1,3}(?:[   ]\d{3})+|\d+),(\d)(?=[   ]?[Kk]\$)/g, (m, ent, dec) =>
+      Math.round(Number(ent.replace(/[   ]/g, '')) + Number('0.' + dec)).toLocaleString('fr-CA'))
+    .replace(/(\d{1,3}(?:[   ]\d{3})+|\d+),(\d{1,2})(?=[   ]?\$)/g, (m, ent, dec) =>
+      Math.round(Number(ent.replace(/[   ]/g, '')) + Number('0.' + dec)).toLocaleString('fr-CA'))
+    .replace(/\$[  ]?(\d{1,3}(?:,\d{3})+|\d+)\.(\d{1,2})\b/g, (m, ent, dec) =>
+      '$' + Math.round(Number(ent.replace(/,/g, '')) + Number('0.' + dec)).toLocaleString('en-CA'));
+}
+
+// CONTEXTE D'UNE DÉCISION (13 nov. 2026) : la portée (l'instance), la durée (dates écrites dans
+// l'objet), le parcours du dossier (les autres décisions qui portent le même numéro de sommaire :
+// à Laval, il suit la décision du comité exécutif au conseil).
+const MOIS_FR = { janvier: 0, février: 1, fevrier: 1, mars: 2, avril: 3, mai: 4, juin: 5, juillet: 6, août: 7, aout: 7, septembre: 8, octobre: 9, novembre: 10, décembre: 11, decembre: 11 };
+function porteeDe(instance) {
+  if (!instance) return null;
+  const p = VILLE.portee[instance];
+  if (p) return tr(p[0], p[1]);
+  const a = instance.match(/^Conseil d'arrondissement (de |du |d')(.+)$/);
+  if (a) return tr(`L'arrondissement ${a[1]}${a[2]} seulement`, `The ${a[2]} borough only`);
+  return null;
+}
+function dureeDe(objet) {
+  if (!objet) return null;
+  if (/^(Abroger|Annuler|Résilier|Mettre fin|Abrogation|Annulation|Résiliation)/i.test(objet.trim())) return null;
+  const m = objet.match(/du (1er|\d{1,2})(?:er)? (\p{L}+) (\d{4}) au (1er|\d{1,2})(?:er)? (\p{L}+) (\d{4})/iu);
+  if (m && MOIS_FR[m[2].toLowerCase()] != null && MOIS_FR[m[5].toLowerCase()] != null) {
+    const d1 = new Date(+m[3], MOIS_FR[m[2].toLowerCase()], m[1] === '1er' ? 1 : +m[1]);
+    const d2 = new Date(+m[6], MOIS_FR[m[5].toLowerCase()], m[4] === '1er' ? 1 : +m[4]);
+    const mois = Math.round((d2 - d1) / (30.44 * 864e5));
+    if (mois > 0 && mois < 600) {
+      const txt = mois % 12 === 0 ? (mois === 12 ? tr('1 an', '1 year') : tr(`${mois / 12} ans`, `${mois / 12} years`)) : tr(`${mois} mois`, `${mois} months`);
+      const iso = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      return `${txt} (${dateFr(iso(d1))} → ${dateFr(iso(d2))})`;
+    }
+  }
+  const p = objet.match(/p[ée]riode (?:additionnelle )?d(?:'|e )(un|une|deux|trois|quatre|cinq|six|dix|\d+) (ans?|années?|mois)/i);
+  if (p) {
+    const n = { un: 1, une: 1, deux: 2, trois: 3, quatre: 4, cinq: 5, six: 6, dix: 10 }[p[1].toLowerCase()] ?? +p[1];
+    const an = /^an/i.test(p[2]);
+    return an ? tr(`${n} an${n > 1 ? 's' : ''}`, `${n} year${n > 1 ? 's' : ''}`) : tr(`${n} mois`, `${n} month${n > 1 ? 's' : ''}`);
+  }
+  return null;
+}
+let parDossier = null;
+function parcoursDe(d) {
+  if (!d.dossier || !etat.decisions?.decisions) return null;
+  if (!parDossier) {
+    parDossier = new Map();
+    for (const x of etat.decisions.decisions) if (x.dossier) (parDossier.get(x.dossier) ?? parDossier.set(x.dossier, []).get(x.dossier)).push(x);
+  }
+  const l = (parDossier.get(d.dossier) ?? []).filter((x) => x.type !== 'Procès-verbal' && x.type !== 'Ordre du jour');
+  if (l.length < 2) return null;
+  return l.slice().sort((a, b) => (a.date ?? '').localeCompare(b.date ?? '')).map((x) => {
+    const double = l.some((y) => y !== x && y.date === x.date && y.instance === x.instance);
+    const etiquette = `${dateFr(x.date)}, ${echapper(lib(x.instance ?? ''))}${double && x.numero ? ` (${echapper(x.numero)})` : ''}`;
+    if (x === d) return `<strong>${etiquette} ${tr('(cette décision)', '(this decision)')}</strong>`;
+    const cle = x.numero || x.id;
+    return `<a href="${VILLE.pages.decisions}?q=${encodeURIComponent(cle)}">${etiquette}</a>`;
+  }).join(' → ');
+}
+function blocContexte(d) {
+  if (d.type === 'Procès-verbal' || d.type === 'Ordre du jour') return '';
+  const lignes = [];
+  const portee = porteeDe(d.instance);
+  if (portee) lignes.push(`<li><strong>${tr('Portée', 'Scope')}&nbsp;:</strong> ${echapper(portee)}</li>`);
+  const duree = dureeDe(d.objet);
+  if (duree) lignes.push(`<li><strong>${tr('Durée', 'Term')}&nbsp;:</strong> ${echapper(duree)}</li>`);
+  const parcours = parcoursDe(d);
+  if (parcours) lignes.push(`<li><strong>${tr('Parcours du dossier', 'Path of this file')}&nbsp;:</strong> ${parcours}</li>`);
+  return lignes.length ? `<ul class="contexte-decision">${lignes.join('')}</ul>` : '';
+}
 
 // « … .pdf#page=12 » -> 12. Les scrapers écrivent la page où la résolution commence.
 function pageDuPdf(url) {
@@ -78,11 +186,53 @@ function pageDuPdf(url) {
 // ---------- chargement ----------
 async function charger(nom) {
   try {
-    const res = await fetch(`data/${nom}.json`, { cache: 'no-store' });
+    const res = await fetch(`data/${nom}.json`, { cache: 'no-cache' });
     return res.ok ? await res.json() : null;
   } catch {
     return null;
   }
+}
+
+// L'archive des années passées : lue seulement quand une recherche venue de l'adresse ne trouve
+// rien dans l'année en cours (un lien reçu par courriel il y a des mois).
+async function lireAnneeArchivee(fichier) {
+  try {
+    const res = await fetch(`data/${fichier}`, { cache: 'force-cache' });
+    if (!res.ok) return null;
+    if (!('DecompressionStream' in window) || !res.body) return await res.json();
+    const flux = res.body.pipeThrough(new DecompressionStream('gzip'));
+    return JSON.parse(await new Response(flux).text());
+  } catch {
+    try { return await (await fetch(`data/${fichier}`, { cache: 'force-cache' })).json(); } catch { return null; }
+  }
+}
+
+async function chercherDansArchive(q) {
+  const liste = $('#liste-decisions');
+  if (!liste || !VILLE.archives) return;
+  const manifeste = await charger('archives/index');
+  const annees = [...(manifeste?.annees ?? [])].sort((a, b) => (a.annee < b.annee ? 1 : -1));
+  if (!annees.length) return;
+  const avis = document.createElement('p');
+  avis.className = 'compte';
+  avis.id = 'avis-archive';
+  avis.textContent = tr('Rien dans l’année en cours. Lecture des années archivées…', 'Nothing in the current year. Reading the archived years…');
+  liste.before(avis);
+  const cherche = q.trim().toLowerCase();
+  for (const a of annees) {
+    const annee = await lireAnneeArchivee(a.fichier);
+    const trouvees = (annee?.decisions ?? []).filter((d) => ((d.objet ?? '') + ' ' + (d.numero ?? '') + ' ' + (d.id ?? '')).toLowerCase().includes(cherche));
+    if (!trouvees.length) continue;
+    avis.textContent = tr(
+      `Ce document n’est pas de l’année en cours : ${nombreFr(trouvees.length)} trouvé(s) dans l’archive de ${a.annee}. Les résumés en langage clair ne couvrent pas les années archivées.`,
+      `This document is not from the current year: ${nombreFr(trouvees.length)} found in the ${a.annee} archive. Plain-language summaries do not cover archived years.`
+    );
+    liste.innerHTML = trouvees.slice(0, 50).map(carteDecision).join('');
+    if ($('#compte-decisions')) $('#compte-decisions').textContent = '';
+    if ($('#plus-decisions')) $('#plus-decisions').hidden = true;
+    return;
+  }
+  avis.textContent = tr('Ce document n’est ni dans l’année en cours, ni dans les années archivées.', 'This document is in neither the current year nor the archived years.');
 }
 
 function messageSansDonnees() {
@@ -129,10 +279,10 @@ function blocResume(r) {
   return `<div class="resume">
     <div class="resume-entete">
       <span>Résumé généré par IA${r.id ? ` — sommaire ${echapper(r.id)}` : ''}</span>
-      ${r.montantPrincipal ? `<span class="puce montant">${echapper(r.montantPrincipal)}</span>` : ''}
-      ${r.sansContenuSubstantiel ? '<span class="puce procedural">document de procédure</span>' : ''}
+      ${r.montantPrincipal ? `<span class="puce montant">${echapper(sansCents(r.montantPrincipal))}</span>` : ''}
+      ${r.sansContenuSubstantiel ? `<span class="puce procedural">${tr('document de procédure', 'procedural document')}</span>` : ''}
     </div>
-    <ul>${(r.puces ?? []).map((p) => `<li>${echapper(p)}</li>`).join('')}</ul>
+    <ul>${(r.puces ?? []).map((p) => `<li>${echapper(sansCents(p))}</li>`).join('')}</ul>
   </div>`;
 }
 
@@ -142,7 +292,7 @@ function blocResume(r) {
 function puceTheme(cle) {
   const t = etat.decisions?.themes?.[cle] ?? etat.votes?.themes?.[cle];
   if (!t) return '';
-  return `<span class="puce theme t-${echapper(cle)}">${echapper(t.libelle)}</span>`;
+  return `<span class="puce theme t-${echapper(cle)}">${echapper(EN ? themeEn(cle, t.libelle) : t.libelle)}</span>`;
 }
 
 // « 05 – Marigot », comme la Ville l'écrit ; « Tous les districts » quand l'ordre du jour
@@ -188,7 +338,7 @@ function actionsFiche(d) {
   if (!r?.puces?.length || r.sansContenuSubstantiel) return '';
   const cle = d.numero || d.objet || '';
   if (!cle) return '';
-  const lien = new URL(`decisions-de-la-ville-de-laval?q=${encodeURIComponent(cle)}`, location.href).href;
+  const lien = new URL(`${VILLE.pages.decisions}?q=${encodeURIComponent(cle)}`, location.href).href;
   const coupe = (t, n) => (t.length > n ? t.slice(0, n - 1).replace(/\s+\S*$/, '') + '…' : t);
   const recap = coupe(r.puces[0], 200);
   const texteX = coupe(recap, 230);
@@ -251,13 +401,12 @@ function corpsDecision(d) {
   const page = pageDuPdf(d.pdf);
   const districts = d.districts ?? [];
   const comiteExecutif = /exécutif/i.test(d.instance ?? '');
-  return `${blocResume(r)}
+  return `${blocContexte(d)}${blocResume(r)}
     ${d.titre ? `<p class="faits">Au procès-verbal&nbsp;: «&nbsp;${echapper(d.titre)}&nbsp;».</p>` : ''}
     ${districts.length > 3 ? `<p class="faits">Districts touchés&nbsp;: ${districts.map((k) => echapper(libelleDistrict(k))).join(', ')}.</p>` : ''}
     ${s?.service ? `<p class="faits">Au sommaire décisionnel&nbsp;: service responsable, ${echapper(s.service)}${s.montant && !d.montant ? `&nbsp;; montant, ${echapper(s.montant)}` : ''}.</p>` : ''}
     ${d.proposeur ? `<p class="faits">Proposée par ${echapper(d.proposeur)}${d.appuyeur ? `, appuyée par ${echapper(d.appuyeur)}` : ''}.</p>` : ''}
     ${d.ct ? `<p class="faits">Certificat de trésorerie ${echapper(d.ct)}.</p>` : ''}
-    ${d.voteEnregistre && d.numero ? `<p class="faits">Vote nominal consigné&nbsp;: <a href="votes-nominatifs-du-conseil-de-laval?q=${encodeURIComponent(d.numero)}">qui a voté pour, qui a voté contre</a>.</p>` : ''}
     ${d.dossier && !d.sommairePublie ? `<p class="faits">Sommaire décisionnel ${echapper(d.dossier)} — non publié par la Ville${comiteExecutif ? ' (les sommaires du comité exécutif ne le sont pas)' : ''}.</p>` : ''}
     <p class="liens-pdf">
       ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">Procès-verbal (PDF)${page ? `, page ${page}` : ''} ↗</a>` : ''}
@@ -299,13 +448,16 @@ function decisionsFiltrees() {
   const avecVote = $('#filtre-vote')?.checked;
   const district = districtDemande();
   return etat.decisions.decisions.filter((d) => {
-    if (avecVote && !etat['votes-decisions']?.v?.[d.numero]) return false;
+    if (etat.projet && !d.projets?.includes(etat.projet)) return false;
     if (type && d.type !== type) return false;
     if (instance && d.instance !== instance) return false;
     if (theme && d.theme !== theme) return false;
     if (avecResume && !resumePour(d)) return false;
+    if (avecVote && !etat['votes-decisions']?.v?.[d.numero]) return false;
     if (district != null && !(d.districts ?? []).some((k) => k.numero === district)) return false;
-    if (q && ![d.objet, d.numero, d.dossier, d.titre].join(' ').toLowerCase().includes(q)) return false;
+    // Laval : le numéro de sommaire et le titre au procès-verbal entrent aussi dans la recherche ;
+    // l'identifiant du document aussi, comme à Montréal (un procès-verbal n'a pas de numéro).
+    if (q && ![d.objet, d.numero, d.dossier, d.titre, d.id].join(' ').toLowerCase().includes(q)) return false;
     return true;
   });
 }
@@ -336,7 +488,7 @@ function rendreDecisions() {
     chip = document.createElement('p');
     chip.id = 'filtre-district';
     chip.className = 'filtre-actif';
-    chip.innerHTML = `Décisions dont l'ordre du jour nomme le district ${echapper(libelleDistrict({ numero: district, nom: nom ?? '' }))} · <a href="decisions-de-la-ville-de-laval">retirer ce filtre</a>`;
+    chip.innerHTML = `Décisions dont l'ordre du jour nomme le district ${echapper(libelleDistrict({ numero: district, nom: nom ?? '' }))} · <a href="${VILLE.pages.decisions}">retirer ce filtre</a>`;
     $('#compte-decisions').before(chip);
   }
 
@@ -369,6 +521,7 @@ function rendreDecisions() {
     $('#plus-decisions').hidden = reste <= 0;
     $('#plus-decisions').textContent = `Afficher plus (${nombreFr(reste)} restantes)`;
   }
+  if ($('#filtre-vote')?.checked) $('#liste-decisions').insertAdjacentHTML('beforeend', votesHorsAnnee());
   reinitialiserDepliage();
 }
 
@@ -446,7 +599,8 @@ function rendreSeance(g, ouverte = false) {
         <span class="seance-date">${echapper(g.libelle)}</span>
         ${decisions ? `<span class="puce">${decisions} décision${decisions > 1 ? 's' : ''}</span>` : ''}
         ${documents ? `<span class="puce document">${documents} document${documents > 1 ? 's' : ''}</span>` : ''}
-        <button type="button" class="bouton-tout-ouvrir">Tout ouvrir</button>
+        ${boutonImprimer(tr('Imprimer cette séance, toutes ses décisions dépliées', 'Print this meeting, with all its decisions expanded'))}
+        <button type="button" class="bouton-tout-ouvrir">${tr('Tout ouvrir', 'Expand all')}</button>
       </summary>
       <div class="seance-corps">${lignes.map((d, i) => carteDecision(d, ouverte && i === 0 && Boolean(resumePour(d)))).join('')}${blocSansResume}</div>
     </details>`;
@@ -508,7 +662,7 @@ function carteVote(v) {
     <details><summary>Voir le passage d'origine</summary><p>${echapper(v.brut)}</p></details>
     <p class="liens-pdf">
       ${v.pdf ? `<a class="lien-pdf" href="${echapper(v.pdf)}" target="_blank" rel="noopener">Procès-verbal (PDF)${page ? `, page ${page}` : ''} ↗</a>` : ''}
-      ${v.numero && !v.voteDeProcedure ? `<a class="lien-pdf" href="decisions-de-la-ville-de-laval?q=${encodeURIComponent(v.numero)}">La décision ${echapper(v.numero)}</a>` : ''}
+      ${v.numero && !v.voteDeProcedure ? `<a class="lien-pdf" href="${VILLE.pages.decisions}?q=${encodeURIComponent(v.numero)}">La décision ${echapper(v.numero)}</a>` : ''}
     </p>`;
 
   return carteRepliable(entete, corps);
@@ -552,8 +706,34 @@ function tableauVotesContre(votes) {
     .join('');
 }
 
-function rendreVotes() {
-  const votes = etat.votes.votes;
+// Volet : un vote de data/votes.json, en bloc sur la fiche de sa décision (il dit sur quoi porte le vote
+// et en garde chacun quand un numéro en porte plusieurs). Même gabarit que le bloc de votes-decisions.json.
+function blocVoteDetail(v) {
+  return `<div class="bloc-vote">
+    <div class="resume-entete">${tr('Vote nominatif', 'Recorded vote')}${v.etiquette ? ` · ${echapper(v.etiquette)}` : ''} · ${echapper(v.resultat ?? '')} · ${v.decomptePour ?? v.pour.length} ${tr('pour', 'for')}, ${v.decompteContre ?? v.contre.length} ${tr('contre', 'against')}</div>
+    <p style="margin:0 0 4px"><strong>${tr('Pour', 'For')}</strong> : ${v.pour.map(echapper).join(', ') || '—'}</p>
+    <p style="margin:0 0 4px"><strong>${tr('Contre', 'Against')}</strong> : ${v.contre.map(echapper).join(', ') || '—'}</p>
+    ${v.demandeParVote ? `<p class="compte" style="margin:0">${tr('Vote demandé par', 'Vote called by')} ${echapper(v.demandeParVote)}.</p>` : ''}
+    ${v.pdf ? `<p class="compte" style="margin:2px 0 0"><a href="${echapper(v.pdf)}" target="_blank" rel="noopener">${tr('Procès-verbal officiel (PDF) ↗', 'Official minutes (PDF, in French) ↗')}</a></p>` : ''}
+  </div>`;
+}
+
+// Volet : les votes nominatifs dont la décision n'est pas dans l'année chargée (ou qui n'ont pas de
+// numéro, comme un vote sur la conduite de la séance). Montrés sous la liste quand on filtre les votes.
+function votesHorsAnnee() {
+  if (!etat.votes?.votes?.length || !etat.decisions) return '';
+  const numeros = new Set(etat.decisions.decisions.map((d) => d.numero).filter(Boolean));
+  const hors = etat.votes.votes.filter((v) => !v.numero || !numeros.has(v.numero));
+  if (!hors.length) return '';
+  return `<h2 class="section" id="votes-hors-annee">${tr(
+    `Votes nominatifs sans décision dans l'année (${hors.length})`,
+    `Recorded votes with no decision this year (${hors.length})`
+  )}</h2>${hors.map(carteVote).join('')}`;
+}
+
+// Le tableau des votes contre : sur la page Conseil depuis la fusion des pages Votes et Décisions
+// (Montréal le 12 nov. 2026, Laval le 20 nov.).
+function rendreDissidence(votes) {
   if ($('#table-dissidence')) {
     $('#table-dissidence tbody').innerHTML = tableauVotesContre(votes);
     // Le tableau est replié : son résumé dit combien de personnes y figurent, et rien de plus.
@@ -567,6 +747,11 @@ function rendreVotes() {
         `${tri.length} personne${tri.length > 1 ? 's' : ''} nommée${tri.length > 1 ? 's' : ''} — décompte brut, sans interprétation`;
     }
   }
+}
+
+function rendreVotes() {
+  const votes = etat.votes.votes;
+  rendreDissidence(votes);
 
   if (!$('#rech-votes').dataset.rempli) {
     if ($('#filtre-resultat-votes')) {
@@ -700,13 +885,13 @@ function carteElu(m) {
       </div>
       ${habitants ? `<p class="compte" style="margin:6px 0 0">${echapper(habitants)} habitants dans le district, selon la Ville.</p>` : ''}
       ${presences ? `<p class="compte" style="margin:6px 0 0"><span class="presences"><span class="p-present">présent${e} à ${presences.presences} séance${presences.presences > 1 ? 's' : ''}</span><span class="p-absent">absent${e} à ${presences.absences}</span></span> sur ${presences.seances} où la personne est nommée${anneePresences ? ` en ${echapper(anneePresences)}` : ''}${presences.inconnu ? ` (${presences.inconnu} sans mention)` : ''}.</p>` : ''}
-      ${votesContre ? `<p class="compte" style="margin:6px 0 0">${votesContre} vote${votesContre > 1 ? 's' : ''} contre consigné${votesContre > 1 ? 's' : ''}${etat.votes?.parametres?.annee ? ` en ${echapper(etat.votes.parametres.annee)}` : ''} — <a href="votes-nominatifs-du-conseil-de-laval?q=${encodeURIComponent(m.nomComplet)}">les voir</a>.</p>` : ''}
+      ${votesContre ? `<p class="compte" style="margin:6px 0 0">${votesContre} vote${votesContre > 1 ? 's' : ''} contre consigné${votesContre > 1 ? 's' : ''}${etat.votes?.parametres?.annee ? ` en ${echapper(etat.votes.parametres.annee)}` : ''} — <a href="${VILLE.pages.decisions}?vote=1">les votes nominatifs</a>.</p>` : ''}
       <p class="coordonnees">
         ${[
           m.courriel ? `<a href="mailto:${echapper(m.courriel)}">${echapper(m.courriel)}</a>` : '',
           m.telephone ? `<a href="tel:${echapper(String(m.telephone).replace(/[^\d+]/g, ''))}">${echapper(m.telephone)}</a>` : '',
           m.profil ? `<a href="${echapper(m.profil)}" target="_blank" rel="noopener">Son profil sur laval.ca ↗</a>` : '',
-          decisions ? `<a href="decisions-de-la-ville-de-laval?district=${numero}">${decisions} décision${decisions > 1 ? 's' : ''} de l'année nomme${decisions > 1 ? 'nt' : ''} le district</a>` : '',
+          decisions ? `<a href="${VILLE.pages.decisions}?district=${numero}">${decisions} décision${decisions > 1 ? 's' : ''} de l'année nomme${decisions > 1 ? 'nt' : ''} le district</a>` : '',
         ].filter(Boolean).join(' · ')}
       </p>
     </div>
@@ -1003,7 +1188,7 @@ function ligneEvenement(e) {
     const corps = `<p class="compte" style="margin:0">
         ${v.decomptePour ?? v.pour.length} pour, ${v.decompteContre ?? v.contre.length} contre${
           v.contre.length ? ' — contre : ' + v.contre.map(echapper).join(', ') : ''
-        }. <a href="votes${v.numero ? `?q=${encodeURIComponent(v.numero)}` : ''}">Voir le détail</a>
+        }. <a href="${VILLE.pages.decisions}?q=${encodeURIComponent(v.numero ?? '')}">Voir le détail</a>
       </p>`;
     return lienFil(entete);
   }
@@ -1016,7 +1201,7 @@ function ligneEvenement(e) {
 // 19 nov. 2026 (Martin) : sur l'accueil, « Ce qui a changé » montre des cartes fermées ; un clic
 // mène en haut de la page Décisions, sans filtrer.
 function lienFil(entete) {
-  return `<a class="carte pliante fil-lien" href="decisions-de-la-ville-de-laval">${entete}</a>`;
+  return `<a class="carte pliante fil-lien" href="${VILLE.pages.decisions}">${entete}</a>`;
 }
 
 function rendreFil() {
@@ -1043,14 +1228,14 @@ function rendreAccueil() {
   const chiffres = [];
   if (etat.decisions) {
     const decisions = etat.decisions.decisions.filter((d) => !estDocument(d)).length;
-    chiffres.push({ n: nombreFr(decisions), quoi: `décisions lues dans les procès-verbaux de ${etat.decisions.parametres.annee}`, lien: 'decisions-de-la-ville-de-laval' });
+    chiffres.push({ n: nombreFr(decisions), quoi: `décisions lues dans les procès-verbaux de ${etat.decisions.parametres.annee}`, lien: VILLE.pages.decisions });
   }
   if (etat.votes) {
-    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: `votes nominaux au conseil municipal en ${etat.votes.parametres?.annee ?? ''}`.trim(), lien: 'votes-nominatifs-du-conseil-de-laval' });
+    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: `votes nominaux au conseil municipal en ${etat.votes.parametres?.annee ?? ''}`.trim(), lien: `${VILLE.pages.decisions}?vote=1` });
   }
   if (etat.resumes) {
     // Décisions qui affichent un résumé, procédure exclue (repris de Lévis, 9 nov. 2026).
-    chiffres.push({ n: nombreFr(etat.decisions ? etat.decisions.decisions.filter((d) => resumePour(d)).length : etat.parSommaire.size), quoi: 'décisions résumées en langage clair', lien: 'decisions-de-la-ville-de-laval' });
+    chiffres.push({ n: nombreFr(etat.decisions ? etat.decisions.decisions.filter((d) => resumePour(d)).length : etat.parSommaire.size), quoi: 'décisions résumées en langage clair', lien: VILLE.pages.decisions });
   }
   if (etat.elus) {
     chiffres.push({ n: etat.elus.nombre ?? etat.elus.membres?.length ?? 0, quoi: 'membres du conseil municipal', lien: 'conseil-municipal-de-laval' });
@@ -1145,7 +1330,7 @@ function rendreEtat() {
 // ---------- démarrage ----------
 const BESOINS = {
   accueil: ['decisions', 'votes', 'elus', 'sommaires'],   // pas de resumes.json à Laval (résumés éteints) : le demander affichait une erreur 404
-  decisions: ['decisions', 'sommaires', 'votes-decisions'],
+  decisions: ['decisions', 'sommaires', 'votes-decisions', 'votes'],
   votes: ['votes'],
   conseil: ['elus', 'districts', 'presences', 'votes', 'decisions'],
   lexique: ['lexique'],
@@ -1164,7 +1349,7 @@ async function init() {
   etat.seances = new Map((etat.decisions?.seances ?? []).map((s) => [s.id, s]));
   // Le manifeste de l'archive vit dans un sous-dossier ; seule la page des sources le lit,
   // et elle ne lit que le manifeste, jamais les fichiers d'années eux-mêmes.
-  if (page === 'sources') etat.archives = await charger('archives/index');
+  if (page === 'sources' && VILLE.archives) etat.archives = await charger('archives/index');
 
   // Ce sans quoi la page n'a rien à montrer. Le conseil se contente de la carte si la page
   // des membres n'a pas encore été lue.
@@ -1183,6 +1368,18 @@ async function init() {
     const params = new URLSearchParams(location.search);
     const recherche = params.get('q');
     if (recherche && $('#rech-decisions')) $('#rech-decisions').value = recherche;
+    // ?vote=1 : arrivée depuis l'ancienne page Votes nominatifs (redirection), filtre déjà coché.
+    if (params.has('vote') && $('#filtre-vote')) $('#filtre-vote').checked = true;
+    // Arriver sur les décisions d'un sujet (lien depuis « Mes dossiers ») : filtre annoncé,
+    // et retirable — sans quoi le lecteur croit voir toutes les décisions de la Ville.
+    const projet = params.get('projet');
+    if (projet && etat.decisions.projets?.[projet]) {
+      etat.projet = projet;
+      $('#compte-decisions')?.insertAdjacentHTML(
+        'beforebegin',
+        `<p class="compte" id="filtre-projet">${tr('Projet&nbsp;:', 'Project:')} <strong>${echapper(etat.decisions.projets[projet].titre)}</strong> — ${nombreFr(etat.decisions.projets[projet].n)} ${tr('décision(s)', 'decision(s)')}. <a href="${VILLE.pages.decisions}">${tr('Voir toutes les décisions', 'See all decisions')}</a></p>`
+      );
+    }
     rendreDecisions();
     let refaire = false;
     for (const [param, id] of [['instance', '#filtre-instance'], ['type', '#filtre-type'], ['theme', '#filtre-theme']]) {
@@ -1194,13 +1391,14 @@ async function init() {
       }
     }
     if (refaire) rendreDecisions();
+    // Un lien de courriel peut viser un document d'une année passée : la recherche venue de
+    // l'adresse n'a rien trouvé, donc on va voir dans l'archive avant de dire qu'il n'y a rien.
+    if (recherche && !$('#liste-decisions').querySelector('.carte')) chercherDansArchive(recherche);
+    else if (recherche) { const seules = $('#liste-decisions').querySelectorAll('details.carte'); if (seules.length === 1) { for (let p = seules[0]; p; p = p.parentElement?.closest('details')) p.open = true; seules[0].scrollIntoView({ block: 'center' }); } }
   }
-  if (page === 'votes') {
-    const recherche = new URLSearchParams(location.search).get('q');
-    if (recherche && $('#rech-votes')) $('#rech-votes').value = recherche;
-    rendreVotes();
-  }
+  if (page === 'votes') rendreVotes();
   if (page === 'conseil') {
+    if (etat.votes) rendreDissidence(etat.votes.votes);
     rendreCarte();
     rendreElus();
   }
@@ -1239,7 +1437,7 @@ if (existe('#liste-decisions')) {
 }
 if (existe('#plus-fil')) {
   $('#plus-fil').addEventListener('click', () => {
-    location.href = 'decisions-de-la-ville-de-laval';
+    location.href = `${VILLE.pages.decisions}${EN ? '?lang=en' : ''}`;
   });
 }
 if (existe('#plus-votes')) {
@@ -1314,7 +1512,7 @@ init();
 // ---------- Bascule clair / sombre ----------
 // Le thème est déjà posé sur <html> par le script en <head> (avant le premier rendu).
 // Ici on ne fait que basculer et mémoriser. Si la personne n'a jamais choisi, on suit la
-// préférence du système — y compris si elle change pendant la visite. Mêmes clés (dvm:)
+// préférence du système — y compris si elle change pendant la visite. Mêmes clés (dvq:)
 // que Montréal et Longueuil : le réglage suit la personne d'un volet à l'autre.
 (function basculeTheme() {
   const bouton = document.getElementById('bascule-theme');
@@ -1334,14 +1532,14 @@ init();
   bouton.addEventListener('click', () => {
     const suivant = document.documentElement.dataset.theme === 'sombre' ? 'clair' : 'sombre';
     appliquer(suivant);
-    try { localStorage.setItem('dvm:theme', suivant); } catch {}
+    try { localStorage.setItem('dvq:theme', suivant); } catch {}
   });
 
   // Tant que rien n'a été choisi explicitement, on reste aligné sur le système.
   const media = matchMedia('(prefers-color-scheme: dark)');
   media.addEventListener?.('change', (e) => {
     let choisi = null;
-    try { choisi = localStorage.getItem('dvm:theme'); } catch {}
+    try { choisi = localStorage.getItem('dvq:theme'); } catch {}
     if (!choisi) appliquer(e.matches ? 'sombre' : 'clair');
   });
 })();
@@ -1373,7 +1571,7 @@ init();
     pct.textContent = z + '%';
     moins.disabled = z <= MIN;
     plus.disabled = z >= MAX;
-    try { localStorage.setItem('dvm:zoom', String(z)); } catch {}
+    try { localStorage.setItem('dvq:zoom', String(z)); } catch {}
   };
 
   appliquer(lire());
@@ -1399,7 +1597,13 @@ init();
   window.addEventListener('scroll', majVisible, { passive: true });
   window.addEventListener('resize', majVisible, { passive: true });
   majVisible();
-  bouton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  // La flèche s'envole vers le haut en même temps que la page remonte (Martin, 16 nov. 2026).
+  bouton.addEventListener('click', () => {
+    bouton.style.setProperty('--envol', `${-(window.innerHeight - 90)}px`);
+    bouton.classList.remove('envol'); void bouton.offsetWidth; bouton.classList.add('envol');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  bouton.addEventListener('animationend', () => bouton.classList.remove('envol'));
 })();
 
 // « Tout ouvrir » d'une séance (repris de Lévis, 9 nov. 2026) : déplie la séance et toutes ses
@@ -1444,6 +1648,13 @@ document.addEventListener('toggle', async (e) => {
   if (!numero) return;
   votesParDecision ??= etat['votes-decisions'] ? Promise.resolve(etat['votes-decisions']) : charger('votes-decisions');
   const jeu = await votesParDecision;
+  // Volet : data/votes.json garde chaque vote et ce sur quoi il porte. Un même numéro peut en porter
+  // plusieurs (un amendement, puis la proposition) : on les montre tous, rien ne se perd.
+  const tous = (etat.votes?.votes ?? []).filter((x) => x.numero === numero);
+  if (tous.length) {
+    if (!fiche.querySelector('.bloc-vote')) fiche.querySelector('.corps')?.insertAdjacentHTML('afterbegin', tous.map(blocVoteDetail).join(''));
+    return;
+  }
   const v = jeu?.v?.[numero];
   if (!v || fiche.querySelector('.bloc-vote')) return;
   const [resultat, pour, contre, demandeur, pdf] = v;
