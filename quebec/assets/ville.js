@@ -36,7 +36,6 @@ globalThis.VILLE = {
   compteCharges: true,
   pdfVoteResolution: true,
   appelsNominaux: true,
-  palmaresVotesContre: true,
   elusSimple: true,
   agglomeration: { sieges: 9 },
   cucq: true,

@@ -39,7 +39,6 @@ globalThis.VILLE = {
   votesDetailles: true,
   dossierEstSommaire: true,
   abonnesMontant: true,
-  palmaresVotesContre: true,
   ficheEluSobre: true,
   // Robot en pause depuis le 11 nov. 2026 : le bandeau « Mise à jour interrompue » offre la réactivation.
   accesVille: { reactiver: 'https://promo.dafrsolution.com/payment-link/6af4eaec906a8b62055d5b71' },

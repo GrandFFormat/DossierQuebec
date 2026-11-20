@@ -43,7 +43,6 @@ globalThis.VILLE = {
   // Drapeaux
   abonnesEtendu: true,
   pdfSelonNumero: true,
-  palmaresVotesContre: true,
   elusParDistrict: true,
   comiteSelonFonctions: true,
 };
