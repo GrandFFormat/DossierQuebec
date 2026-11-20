@@ -817,6 +817,7 @@ function votesFiltres() {
 }
 
 // Décompte brut des votes contre, par personne. Aucune interprétation.
+const sansTitre = (nom) => String(nom).replace(/^(Deputy Mayor|Acting Mayor|Mayor|Councillor|Conseill[eè]re?|Maire(sse)?)\s+/i, '');
 function tableauVotesContre(votes) {
   const parPersonne = new Map();
   for (const v of votes) {
@@ -828,9 +829,8 @@ function tableauVotesContre(votes) {
     }
   }
   return [...parPersonne.entries()]
-    // Ordre alphabétique : pas de palmarès (20 nov. 2026, comme Laval). VILLE.palmaresVotesContre
-    // (Québec, pas encore aligné) garde l'ancien tri par nombre.
-    .sort(VILLE.palmaresVotesContre ? (a, b) => b[1].n - a[1].n : (a, b) => a[0].localeCompare(b[0], 'fr'))
+    // Ordre alphabétique, sans le titre qui précède certains noms (« Councillor », « Mayor ») : pas de palmarès.
+    .sort(VILLE.palmaresVotesContre ? (a, b) => b[1].n - a[1].n : (a, b) => sansTitre(a[0]).localeCompare(sansTitre(b[0]), 'fr'))
     .map(([nom, fiche]) => {
       const principale = [...fiche.instances.entries()].sort((a, b) => b[1] - a[1])[0];
       return `<tr><td>${echapper(nom)}</td><td>${echapper(principale ? lib(principale[0]) : '—')}</td><td class="n">${fiche.n}</td></tr>`;
