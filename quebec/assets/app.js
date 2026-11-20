@@ -144,6 +144,21 @@ function resumePour(d) {
 // Montants sans cents (rétroaction d'un lecteur, 13 nov. 2026) : « 828 241,70 $ » devient « 828 242 $ ».
 // Mélanger des montants à virgule et des montants ronds empêche de saisir l'ordre de grandeur d'un
 // coup d'oeil. Seuls les cents sont arrondis : « 1,5 M$ » reste tel quel.
+// Le titre d'un procès-verbal ou d'un ordre du jour composé par le robot (scrapers/decisions.js),
+// en français : en anglais on le recompose plutôt que de le traduire à la pièce. Sans titre de cette
+// forme, l'objet passe tel quel, cents arrondis.
+const TITRE_PV = /^Procès-verbal — (.+), séance (ordinaire|extraordinaire) du (\d{4}-\d{2}-\d{2})$/;
+const TITRE_ODJ = /^Ordre du jour — (.+), séance du (\d{4}-\d{2}-\d{2}) \((\d+) points?\)$/;
+function objetDe(d) {
+  const objet = sansCents(d?.objet ?? null);
+  if (!EN || !objet) return objet;
+  const pv = objet.match(TITRE_PV);
+  if (pv) return `Minutes — ${libelleEn(pv[1])}, ${pv[2] === 'extraordinaire' ? 'special' : 'regular'} meeting of ${dateFr(pv[3])}`;
+  const odj = objet.match(TITRE_ODJ);
+  if (odj) return `Agenda — ${libelleEn(odj[1])}, meeting of ${dateFr(odj[2])} (${odj[3]} item${odj[3] === '1' ? '' : 's'})`;
+  return objet;
+}
+
 export function sansCents(t) {
   if (t == null) return t;
   return String(t)
@@ -309,7 +324,7 @@ function carteDecision(d, ouverte = false) {
       ${d.instance ? `<span class="puce">${echapper(lib(d.instance))}</span>` : ''}
       ${d.unite ? `<span class="puce">${echapper(d.unite)}</span>` : ''}
     </div>
-    <p class="objet">${echapper(sansCents(d.objet) ?? tr('(sans objet)', '(no subject)'))}</p>`;
+    <p class="objet">${echapper(objetDe(d) ?? tr('(sans objet)', '(no subject)'))}</p>`;
   const corps = `${blocContexte(d)}${blocResume(resumePour(d))}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}
     ${actionsFiche(d)}`;
@@ -331,7 +346,7 @@ function decisionsFiltrees() {
   const type = $('#filtre-type').value;
   const instance = $('#filtre-instance').value;
   const theme = $('#filtre-theme')?.value ?? '';
-  const avecResume = $('#filtre-resume').checked;
+  const avecResume = $('#filtre-resume')?.checked ?? false;
   const avecVote = $('#filtre-vote')?.checked;
   const projet = etat.projet;
   return etat.decisions.decisions.filter((d) => {
@@ -714,7 +729,7 @@ function carteMembreAgglo(m) {
       <p class="compte" style="margin:6px 0 0">
         ${EN ? `Present at ${m.presences} of the ${m.seances} meeting(s) where attendance is recorded.` : `Présent à ${m.presences} séance(s) sur ${m.seances} où sa présence est consignée.`}
       </p>
-      ${m.remplace.length ? `<p class="compte" style="margin:2px 0 0">${tr('Siège en remplacement de', 'Sits as a replacement for')} ${m.remplace.map(echapper).join(', ')}.</p>` : ''}
+      ${m.remplace?.length ? `<p class="compte" style="margin:2px 0 0">${tr('Siège en remplacement de', 'Sits as a replacement for')} ${m.remplace.map(echapper).join(', ')}.</p>` : ''}
     </div>
   </article>`;
 }
@@ -975,7 +990,7 @@ function ligneEvenement(e) {
       ${d.instance ? `<span class="puce">${echapper(lib(d.instance))}</span>` : ''}
       ${e.nouveau && resumePour(d)?.r?.puces?.length && !resumePour(d).r.sansContenuSubstantiel ? `<span class="puce neuf">${tr('nouveau', 'new')}</span>` : ''}
     </div>
-    <p class="objet">${echapper(sansCents(d.objet) ?? tr('(sans objet)', '(no subject)'))}</p>`;
+    <p class="objet">${echapper(objetDe(d) ?? tr('(sans objet)', '(no subject)'))}</p>`;
   const corps = `${blocContexte(d)}${blocResume(resumePour(d))}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}
     ${actionsFiche(d)}`;
@@ -1068,7 +1083,7 @@ function rendreEtat() {
       .map(
         (a) =>
           `<tr><td>${echapper(a.annee)}</td><td class="n">${nombreFr(a.nombre)}</td>` +
-          `<td class="n">${nombreFr(Math.round(a.octetsCompresses / 1024))} ko</td>` +
+          `<td class="n">${nombreFr(Math.round(a.octetsCompresses / 1024))} ${tr('ko', 'KB')}</td>` +
           `<td>${echapper(a.archiveLe.slice(0, 10))}</td></tr>`
       )
       .join('') +
@@ -1109,6 +1124,11 @@ function chargerJeux(page) {
         if (t) Object.assign(r, { puces: t.puces, montantPrincipal: t.montantPrincipal });
         else if (r.puces?.length) r.francaisSeulement = true;
       }
+    }
+    // L'objet traduit de chaque décision (data/resumes-en.json → objets), comme à Montréal.
+    if (EN && etat.decisions) {
+      const objets = (await charger('resumes-en'))?.objets ?? {};
+      for (const d of etat.decisions.decisions ?? []) if (objets[d.id]?.en) d.objet = objets[d.id].en;
     }
     if (EN && page === 'lexique') etat.lexiqueEn = await charger('lexique-en');
     if (etat.resumes) etat.parId = new Map((etat.resumes.resumes ?? []).map((r) => [r.id, r]));
@@ -1445,7 +1465,7 @@ document.addEventListener('toggle', async (e) => {
     gre ? ` · ${tr('gré à gré', 'direct award')}` : soum ? ` · ${soum} ${soum > 1 ? tr('soumissions', 'bids') : tr('soumission', 'bid')}` : ''
   }${item ? ` · <a href="https://seao.gouv.qc.ca/avis-resultat-recherche/consulter?ItemId=${echapper(item)}" target="_blank" rel="noopener">${tr('avis SEAO', 'SEAO notice')} ↗</a>` : ''}</li>`).join('');
   fiche.querySelector('.corps')?.insertAdjacentHTML('afterbegin', `<div class="bloc-contrat bloc-seao">
-    <div class="resume-entete">${tr('Contrat déclaré au SEAO', 'Contract declared in SEAO')} · <a href="contrats-de-la-ville-de-quebec">${tr('tous les contrats', 'all contracts')}</a></div>
+    <div class="resume-entete">${tr('Contrat déclaré au SEAO', 'Contract declared in SEAO')} · <a href="contrats-de-la-ville-de-quebec${EN ? '?lang=en' : ''}">${tr('tous les contrats', 'all contracts')}</a></div>
     <ul>${lignes}</ul></div>`);
 }, true);
 

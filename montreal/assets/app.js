@@ -273,7 +273,7 @@ function blocResume(trouve) {
 // des décisions, votes.json sur celle des votes. Sans ce repli, la pastille disparaissait
 // silencieusement sur la page des votes, qui ne charge pas les décisions.
 function puceTheme(cle) {
-  const t = etat.decisions?.themes?.[cle] ?? etat.votes?.themes?.[cle];
+  const t = etat.decisions?.themes?.[cle] ?? etat.votes?.themes?.[cle] ?? etat.fil?.themes?.[cle];
   if (!t) return '';
   return `<span class="puce theme t-${echapper(cle)}">${echapper(EN ? themeEn(cle, t.libelle) : t.libelle)}</span>`;
 }
@@ -624,8 +624,8 @@ function carteVote(v) {
       </div>
     </div>
     ${v.abstention ? `<p class="compte" style="margin:10px 0 0">${tr('Abstention&nbsp;:', 'Abstention:')} ${echapper(v.abstention)}.</p>` : ''}
-    ${v.demandeParVote ? `<p class="compte" style="margin:2px 0 0">${tr('Vote demandé par', 'Vote requested by')} ${echapper(v.demandeParVote)}.</p>` : ''}
-    ${v.avertissements.length ? `<div class="drapeau"><strong>${tr('À vérifier&nbsp;:', 'To check:')}</strong> ${v.avertissements.map(echapper).join(' · ')}</div>` : ''}
+    ${v.demandeParVote ? `<p class="compte" style="margin:2px 0 0">${tr('Vote demandé par', 'Vote called by')} ${echapper(v.demandeParVote)}.</p>` : ''}
+    ${v.avertissements.length ? `<div class="drapeau"><strong>${tr('À vérifier&nbsp;:', 'To check:')}</strong> ${v.avertissements.map((a) => echapper(EN ? a.replace(/^Texte source dégradé.*$/, 'Degraded source text (PDF with spaced-out glyphs) — names not extracted; see the original passage.') : a)).join(' · ')}</div>` : ''}
     <details><summary>${tr("Voir le passage d'origine", 'See the original passage (in French)')}</summary><p>${echapper(v.brut)}</p></details>
     ${v.pdf ? `<p style="margin:9px 0 0"><a class="lien-pdf" href="${echapper(v.pdf)}" target="_blank" rel="noopener">${tr('Procès-verbal officiel (PDF)', 'Official minutes (PDF, in French)')} ↗</a></p>` : ''}`;
 
@@ -659,7 +659,7 @@ function tableauVotesContre(votes) {
     .sort((a, b) => b[1].n - a[1].n)
     .map(([nom, fiche]) => {
       const principale = [...fiche.instances.entries()].sort((a, b) => b[1] - a[1])[0];
-      return `<tr><td>${echapper(nom)}</td><td>${echapper(principale ? principale[0] : '—')}</td><td class="n">${fiche.n}</td></tr>`;
+      return `<tr><td>${echapper(nom)}</td><td>${echapper(principale ? lib(principale[0]) : '—')}</td><td class="n">${fiche.n}</td></tr>`;
     })
     .join('');
 }
@@ -693,7 +693,7 @@ function rendreVotes() {
     for (const v of votes) if (v.instance) compte.set(v.instance, (compte.get(v.instance) ?? 0) + 1);
     remplirSelect(
       $('#filtre-instance-votes'),
-      [...compte.entries()].sort((a, b) => b[1] - a[1]).map(([valeur, n]) => ({ valeur, n }))
+      [...compte.entries()].sort((a, b) => b[1] - a[1]).map(([valeur, n]) => ({ valeur, n, libelle: lib(valeur) }))
     );
     if ($('#filtre-theme-votes')) {
       const parTheme = new Map();
@@ -755,7 +755,7 @@ function carteElu(m) {
       <div class="meta">
         ${m.parti ? `<span class="puce">${echapper(m.parti)}</span>` : ''}
         ${m.siegeAuConseilMunicipal === false ? `<span class="puce procedural">${tr("conseil d'arrondissement seulement", 'borough council only')}</span>` : ''}
-        ${roles.map((r) => `<span class="puce">${echapper(r)}</span>`).join('')}
+        ${roles.map((r) => `<span class="puce">${echapper(lib(r))}</span>`).join('')}
       </div>
       <p class="compte" style="margin:6px 0 0">${echapper(m.telephone ?? '')}</p>
       ${votesContre ? `<p class="compte" style="margin:2px 0 0">${votesContre} ${tr('vote(s) contre consigné(s) cette année.', 'vote(s) against recorded this year.')}</p>` : ''}
@@ -786,7 +786,7 @@ function rendreElus() {
     groupes.get(cle).push(m);
   }
   $('#liste-elus').innerHTML = [...groupes.entries()]
-    .map(([titre, gens]) => `<h2 class="section">${echapper(titre)}</h2><div class="grille-elus">${gens.map(carteElu).join('')}</div>`)
+    .map(([titre, gens]) => `<h2 class="section">${echapper(lib(titre))}</h2><div class="grille-elus">${gens.map(carteElu).join('')}</div>`)
     .join('');
 }
 
@@ -802,7 +802,7 @@ function carteMembreAgglo(m) {
       <div class="meta">
         ${m.ville ? `<span class="puce ${deMontreal ? '' : 'reconstituee'}">${echapper(m.ville)}</span>` : ''}
         ${m.parti ? `<span class="puce">${echapper(m.parti)}</span>` : ''}
-        ${m.roles.map((r) => `<span class="puce">${echapper(r)}</span>`).join('')}
+        ${m.roles.map((r) => `<span class="puce">${echapper(lib(r))}</span>`).join('')}
       </div>
       ${m.presences != null ? `<p class="compte" style="margin:6px 0 0">${EN ? `Present at ${m.presences} of the ${m.seances} meeting(s) where attendance is recorded.` : `Présent à ${m.presences} séance(s) sur ${m.seances} où sa présence est consignée.`}</p>` : ''}
       ${m.remplace?.length ? `<p class="compte" style="margin:2px 0 0">${tr('Siège en remplacement de', 'Sits as a replacement for')} ${m.remplace.map(echapper).join(', ')}.</p>` : ''}
@@ -931,7 +931,7 @@ function rendreCarte() {
     '</svg>';
 
   $('#legende').innerHTML = [...table.entries()]
-    .map(([valeur, couleur]) => `<span class="cle-legende"><i style="background:${couleur}"></i>${echapper(valeur)}</span>`)
+    .map(([valeur, couleur]) => `<span class="cle-legende"><i style="background:${couleur}"></i>${echapper(lib(valeur))}</span>`)
     .join('');
 }
 
@@ -1067,7 +1067,7 @@ function ligneEvenement(e) {
       ${e.nouveau && resumePour(d)?.r?.puces?.length && !resumePour(d).r.sansContenuSubstantiel ? `<span class="puce neuf">${tr('nouveau', 'new')}</span>` : ''}
     </div>
     <p class="objet">${echapper(objetDe(d) ?? tr('(sans objet)', '(no subject)'))}</p>`;
-  const corps = `${blocResume(resumePour(d))}
+  const corps = `${blocContexte(d)}${blocResume(resumePour(d))}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${tr('Document officiel (PDF) ↗', 'Official document (PDF, in French) ↗')}</a>` : ''}
     ${actionsFiche(d)}`;
   return lienFil(entete);
@@ -1250,7 +1250,12 @@ async function init() {
     if (recherche && !$('#liste-decisions').querySelector('.carte')) chercherDansArchive(recherche);
     else if (recherche) { const seules = $('#liste-decisions').querySelectorAll('details.carte'); if (seules.length === 1) { for (let p = seules[0]; p; p = p.parentElement?.closest('details')) p.open = true; seules[0].scrollIntoView({ block: 'center' }); } }
   }
-  if (page === 'votes') rendreVotes();
+  if (page === 'votes') {
+    // ?q=Nom : arriver depuis la fiche d'un élu (page Conseil) sur ses votes.
+    const recherche = new URLSearchParams(location.search).get('q');
+    if (recherche && $('#rech-votes')) $('#rech-votes').value = recherche;
+    rendreVotes();
+  }
   if (page === 'conseil') {
     if (etat.votes) rendreDissidence(etat.votes.votes);
     if (etat.districts) rendreCarte();
@@ -1317,8 +1322,10 @@ document.addEventListener('keydown', (e) => {
     choisirDistrict(Number(district.dataset.numero));
   }
 });
-document.addEventListener('change', (e) => {
-  if (e.target.matches('#mode-couleur')) rendreCarte();
+document.addEventListener('change', async (e) => {
+  if (!e.target.matches('#mode-couleur')) return;
+  etat.districts ??= await charger('districts');
+  if (etat.districts) rendreCarte();
 });
 
 // Tout déplier / tout replier, pour la liste visible.
