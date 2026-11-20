@@ -5,7 +5,7 @@ Volet municipal de DossierQuébec pour la Ville de Longueuil, servi sous
 décisions de la Ville, lisibles, chacune reliée à son document officiel ; les votes nominatifs tels
 que consignés ; aucune donnée inventée, aucun verdict sur une personne.
 
-Construit le 14 septembre 2026 en suivant `quebec/REPRODUIRE-POUR-UNE-AUTRE-VILLE.md`, à partir du
+Construit le 14 septembre 2026 en suivant `montreal/REPRODUIRE-POUR-UNE-AUTRE-VILLE.md`, à partir du
 volet Montréal (Longueuil publie, comme Montréal, des procès-verbaux en PDF). **En français
 seulement** (guide, section 10).
 

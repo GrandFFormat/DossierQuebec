@@ -6,7 +6,7 @@ verdict sur de vraies personnes.
 
 Ce n'est pas un site de la Ville de Laval et ça n'a aucun caractère officiel.
 
-Ce volet suit `quebec/REPRODUIRE-POUR-UNE-AUTRE-VILLE.md`, avec une phrase en plus : « La ville,
+Ce volet suit `montreal/REPRODUIRE-POUR-UNE-AUTRE-VILLE.md`, avec une phrase en plus : « La ville,
 c'est Laval. » Le présent README est le journal du projet.
 
 > **État au 17 septembre 2026 — la base est construite.** L'étude de faisabilité (étape 1, plus
