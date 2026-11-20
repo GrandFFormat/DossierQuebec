@@ -37,12 +37,26 @@
 //   elusParDistrict     élus triés par numéro de district dans chaque arrondissement
 //   comiteSelonFonctions  phrase du comité exécutif : « d'après les fonctions publiées… »
 //   archivesSeances     URL citée par l'avis « Extraction en panne »
+//   agglomeration       { reconstituee: true } : liste tirée des procès-verbaux (Longueuil) : « à la
+//                       dernière séance », présences de l'année et remplacements consignés
+//   votesDetailles      data/votes.json sur la page Décisions : tous les votes d'un même numéro sur la
+//                       fiche, et les votes d'avant l'année chargée sous la liste (?vote=1)
+//   dossierEstSommaire  « Sommaire décisionnel N — pas encore résumé » et « Sommaire, dans le document
+//                       de séance (page N) »
+//   abonnesMontant      data-montant="1" sur la fiche d'abonné quand le résumé a un montant
+//   ficheEluSobre       fiche d'élu « District N — nom », sans téléphone, votes contre « depuis »
+//   ordreArrondissements  ordre des groupes d'élus ; avec totalAvec et les postes vacants
+//   paletteArrondissements { arrondissement: couleur } pour la carte
+//   libelleMembres      [fr, en] : « membres du conseil de ville »
+//   accesVille          { reactiver } : bandeau « Mise à jour interrompue » si data/acces-ville.json le dit
 //
 // Crochets (fonctions facultatives) :
 //   titreArrondissement(nom)   titre d'un groupe d'élus (Lévis : « Arrondissement de Desjardins »)
 //   rangComiteExecutif(m)      ordre des membres du comité exécutif
 //
-//   comparerNoms 'complet' : nom complet sans accents, espaces et tirets confondus (Lévis)
+//   comparerNoms 'complet' : nom complet sans accents, espaces et tirets confondus (Lévis) ;
+//                'sansAccents' : nom complet sans accents ni casse (Longueuil)
+//   pages.contrats null : pas de page Contrats, pas de contrats SEAO sur les fiches
 //
 // Détectés dans les données, sans drapeau : « Ce que le conseil décide » (d.dispositif), pastilles
 // « Demande refusée » (d.refus), numéro de résolution (d.annotation), sommaires cités et cherchables

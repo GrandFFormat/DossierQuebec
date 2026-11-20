@@ -283,6 +283,13 @@ function resumePour(d) {
   const direct = etat.parId.get(d.id);
   return direct ? { r: direct, indirect: false } : null;
 }
+// Une décision « vaut la vitrine » quand elle porte un résumé IA. Une ville sans aucun résumé publié
+// (Laval, résumés éteints) retomberait sur une page vide : on se rabat alors sur les vraies décisions,
+// hors procédure et documents de séance (Longueuil, 20 nov. 2026).
+function aResume(d) {
+  if (etat.parId.size) return Boolean(resumePour(d));
+  return d.theme !== 'procedure' && d.type !== 'Procès-verbal' && d.type !== 'Ordre du jour' && d.type !== 'Document de séance';
+}
 // Combien de décisions de la liste ont un résumé, par l'une ou l'autre voie.
 function nombreResumees(liste) {
   return liste.filter((d) => estDecision(d) && resumePour(d)).length;
@@ -464,18 +471,24 @@ function carteDecision(d, ouverte = false) {
   const corps = `${blocContexte(d)}${blocResume(resumePour(d))}
     ${!resumePour(d) && d.dispositif?.length ? blocDispositif(d.dispositif) : ''}
     ${d.dissidences?.length ? `<p class="compte" style="margin:0 0 8px">${tr(`Dissidence${d.dissidences.length > 1 ? 's' : ''}&nbsp;:`, `${s(d.dissidences.length, 'Dissent', 'Dissents')}:`)} ${d.dissidences.map(echapper).join(', ')}.</p>` : ''}
+    ${d.modifieePar?.length ? `<p class="compte" style="margin:0 0 8px">${tr('Modifiée par la résolution', 'Amended by resolution')} ${d.modifieePar.map(echapper).join(', ')}.</p>` : ''}
     ${VILLE.textes ? `<div class="texte-decision" data-id="${echapper(d.id)}"></div>` : ''}
     ${d.annotation ? `<p class="compte" style="margin:0 0 8px">${tr('Résolution', 'Resolution')} ${echapper(d.annotation)}.</p>` : ''}
     ${d.sommaires?.length ? `<p class="compte" style="margin:0 0 8px">${tr('Sommaire décisionnel', 'Decision summary')} ${d.sommaires.map(echapper).join(', ')}</p>` : ''}
-    ${d.dossier ? `<p class="compte" style="margin:0 0 8px">${tr('Dossier', 'File')} ${echapper(d.dossier)}${d.article ? ` · ${tr('article', 'item')} ${echapper(d.article)}` : ''}</p>` : ''}
+    ${VILLE.dossierEstSommaire
+      // Longueuil : le numéro de dossier est celui du sommaire décisionnel (« SD-2026-0984 ») ; il n'est
+      // dit que tant que le sommaire n'est pas résumé.
+      ? (d.dossier && !resumePour(d) ? `<p class="compte" style="margin:0 0 8px">${tr('Sommaire décisionnel', 'Decision summary')} ${echapper(d.dossier)} — ${tr('pas encore résumé', 'not summarized yet')}.</p>` : '')
+      : (d.dossier ? `<p class="compte" style="margin:0 0 8px">${tr('Dossier', 'File')} ${echapper(d.dossier)}${d.article ? ` · ${tr('article', 'item')} ${echapper(d.article)}` : ''}</p>` : '')}
     ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${(VILLE.pdfSelonNumero ? d.numero : d.type === 'Résolution') ? tr('Procès-verbal officiel (PDF)', 'Official minutes (PDF, in French)') : tr('Document officiel (PDF)', 'Official document (PDF, in French)')} ↗</a>` : ''}
-    ${d.sommairePdf ? ` &nbsp;<a class="lien-pdf" href="${echapper(d.sommairePdf)}" target="_blank" rel="noopener">${tr('Sommaire décisionnel (PDF)', 'Decision summary (PDF, in French)')} ↗</a>` : ''}
+    ${d.sommairePdf ? ` &nbsp;<a class="lien-pdf" href="${echapper(d.sommairePdf)}" target="_blank" rel="noopener">${VILLE.dossierEstSommaire ? `${tr('Sommaire, dans le document de séance', 'Summary, in the meeting document')}${resumePour(d)?.r?.page ? ` (page ${resumePour(d).r.page})` : ''}` : tr('Sommaire décisionnel (PDF)', 'Decision summary (PDF, in French)')} ↗</a>` : ''}
     ${actionsFiche(d)}`;
   // Espace abonnés (/commun/abonnes.js) : « Suivre ce dossier » et le détail de l'argent. La clé
   // de dossier suit la décision d'une instance à l'autre.
   // Un document de séance (VILLE.typesDocuments : procès-verbal, ordre du jour…) n'est pas un dossier : rien à suivre.
   if (TYPES_DOCUMENTS.includes(d.type)) return carteRepliable(entete, corps, ouverte);
-  let abonnes = `<div class="ab-fiche" data-dossier="${echapper(d[CLE_DOSSIER] ?? d.id)}" data-numero="${echapper(d.numero ?? '')}" data-objet="${echapper((d.objet ?? '').slice(0, 300))}"></div>`;
+  // VILLE.abonnesMontant (Longueuil) : data-montant="1" quand le résumé a trouvé un montant.
+  let abonnes = `<div class="ab-fiche" data-dossier="${echapper(d[CLE_DOSSIER] ?? d.id)}" data-numero="${echapper(d.numero ?? '')}" data-objet="${echapper((d.objet ?? '').slice(0, 300))}"${VILLE.abonnesMontant && resumePour(d)?.r?.montantPrincipal ? ' data-montant="1"' : ''}></div>`;
   // VILLE.abonnesEtendu (Québec) : « Décision finale », les projets et le montant, pour abonnes.js.
   if (VILLE.abonnesEtendu) {
     const projets = (d.projets ?? []).map((cle) => ({ cle, titre: etat.decisions?.projets?.[cle]?.titre ?? cle }));
@@ -597,6 +610,7 @@ function rendreDecisions() {
     $('#plus-decisions').hidden = reste <= 0;
     $('#plus-decisions').textContent = tr(`Afficher plus (${nombreFr(reste)} restantes)`, `Show more (${nombreFr(reste)} left)`);
   }
+  if ($('#filtre-vote')?.checked) $('#liste-decisions').insertAdjacentHTML('beforeend', votesHorsAnnee());
   if (VILLE.textes) brancherTextes($('#liste-decisions'));
   reinitialiserDepliage();
 }
@@ -650,7 +664,9 @@ function grouperParSeance(decisions) {
 // de procédure sans résumé (ouverture, dépôts, adoption de l'ordre du jour…) descendent en bas de
 // la séance, repliés sous « Procédure ».
 function rendreSeance(g, ouverte = false) {
-  const estProcedure = (d) => !resumePour(d);   // 9 nov. 2026 (Martin) : tout ce qui n'a pas de résumé, pas seulement la procédure
+  // 9 nov. 2026 (Martin) : tout ce qui n'a pas de résumé, pas seulement la procédure. aResume retombe
+  // sur les vraies décisions quand la Ville n'a aucun résumé (Laval).
+  const estProcedure = (d) => !aResume(d);
   const procedure = g.lignes.filter(estProcedure);
   const autres = g.lignes.filter((d) => !estProcedure(d));
   // Les points de procédure, même résumés, passent sous les vraies décisions (Martin, 9 nov. 2026).
@@ -658,7 +674,7 @@ function rendreSeance(g, ouverte = false) {
   const carte = (d, i) => carteDecision(d, ouverte && i === 0 && Boolean(resumePour(d)));
   const blocProcedure = procedure.length
     ? `<details class="seance-procedure"><summary>${tr(
-        `Sans résumé (${procedure.length} point${procedure.length > 1 ? 's' : ''})`,
+        `${etat.parId.size ? 'Sans résumé' : 'Procédure et documents de séance'} (${procedure.length} point${procedure.length > 1 ? 's' : ''})`,
         `No summary (${procedure.length} item${procedure.length > 1 ? 's' : ''})`
       )}</summary>${procedure.map((d) => carteDecision(d)).join('')}</details>`
     : '';
@@ -706,7 +722,11 @@ function carteVote(v) {
     </div>
     <p class="objet">${echapper(v.objet ?? tr('(sans objet)', '(no subject)'))}</p>`;
 
-  const corps = `<div class="colonnes-vote">
+  // Ce sur quoi porte le vote (v.etiquette, Longueuil et Laval) ; au conseil d'agglomération, l'absence
+  // de décompte imprimé (voix pondérées) est dite plutôt que de laisser un zéro.
+  const corps = `${v.etiquette ? `<p class="compte" style="margin:0 0 8px">${tr('Vote sur', 'Vote on')} ${echapper(v.etiquette.charAt(0).toLowerCase() + v.etiquette.slice(1))}.</p>` : ''}
+    ${v.decomptePour == null && /agglom/i.test(v.instance ?? '') ? `<p class="compte" style="margin:0 0 8px">${tr("Au conseil d'agglomération, les voix sont pondérées selon la population&nbsp;: le procès-verbal ne donne pas de décompte.", 'At the agglomeration council, votes are weighted by population: the minutes give no count.')}</p>` : ''}
+    <div class="colonnes-vote">
       <div class="colonne-vote pour">
         <h4>${tr('Pour', 'For')}${v.decomptePour != null ? ` — ${v.decomptePour}` : ''}</h4>
         ${noms(v.pour)}
@@ -723,6 +743,31 @@ function carteVote(v) {
     ${v.pdf ? `<p style="margin:9px 0 0"><a class="lien-pdf" href="${echapper(v.pdf)}" target="_blank" rel="noopener">${VILLE.pdfVoteResolution ? tr('Résolution officielle (PDF)', 'Official resolution (PDF, in French)') : tr('Procès-verbal officiel (PDF)', 'Official minutes (PDF, in French)')} ↗</a></p>` : ''}`;
 
   return carteRepliable(entete, corps);
+}
+
+// VILLE.votesDetailles : un vote de data/votes.json, en bloc sur la fiche de sa décision (il dit sur quoi
+// porte le vote et en garde chacun quand un numéro en porte plusieurs).
+function blocVoteDetail(v) {
+  return `<div class="bloc-vote">
+    <div class="resume-entete">${tr('Vote nominatif', 'Recorded vote')}${v.etiquette ? ` · ${echapper(v.etiquette)}` : ''} · ${echapper(v.resultat ?? '')} · ${v.decomptePour ?? v.pour.length} ${tr('pour', 'for')}, ${v.decompteContre ?? v.contre.length} ${tr('contre', 'against')}</div>
+    <p style="margin:0 0 4px"><strong>${tr('Pour', 'For')}</strong> : ${v.pour.map(echapper).join(', ') || '—'}</p>
+    <p style="margin:0 0 4px"><strong>${tr('Contre', 'Against')}</strong> : ${v.contre.map(echapper).join(', ') || '—'}</p>
+    ${v.demandeParVote ? `<p class="compte" style="margin:0">${tr('Vote demandé par', 'Vote called by')} ${echapper(v.demandeParVote)}.</p>` : ''}
+    ${v.pdf ? `<p class="compte" style="margin:2px 0 0"><a href="${echapper(v.pdf)}" target="_blank" rel="noopener">${tr('Procès-verbal officiel (PDF) ↗', 'Official minutes (PDF, in French) ↗')}</a></p>` : ''}
+  </div>`;
+}
+
+// VILLE.votesDetailles : les votes nominatifs dont la décision n'est pas dans l'année chargée (Longueuil :
+// ceux de 2025 restent consultables). Montrés sous la liste quand on filtre les votes.
+function votesHorsAnnee() {
+  if (!VILLE.votesDetailles || !etat.votes?.votes?.length || !etat.decisions) return '';
+  const numeros = new Set(etat.decisions.decisions.map((d) => d.numero).filter(Boolean));
+  const hors = etat.votes.votes.filter((v) => !v.numero || !numeros.has(v.numero));
+  if (!hors.length) return '';
+  return `<h2 class="section" id="votes-hors-annee">${tr(
+    `Votes nominatifs d'avant ${etat.decisions.parametres.annee} (${hors.length})`,
+    `Recorded votes before ${etat.decisions.parametres.annee} (${hors.length})`
+  )}</h2>${hors.map(carteVote).join('')}`;
 }
 
 function votesFiltres() {
@@ -859,7 +904,15 @@ const cleNom = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').r
 //  « complet » (Lévis) : nom complet sans accents ni casse, espaces et tirets confondus ; deux
 //    conseillers portent le nom Tremblay. Sert aussi aux présences des conseils d'arrondissement.
 const cleNomComplet = (s) => String(s ?? '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[\s-]+/g, ' ').trim();
+//  « sansAccents » (Longueuil) : nom complet sans accents ni casse ; la page des élus écrit parfois
+//    « Lysa BELAICHA » quand le procès-verbal écrit « Lysa Bélaïcha ».
+const sansAccents = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
 function votesContreDe(m) {
+  if (VILLE.comparerNoms === 'sansAccents') {
+    if (!etat.votes || !m.nomComplet) return null;
+    const nom = sansAccents(m.nomComplet);
+    return etat.votes.votes.filter((v) => v.contre.some((n) => sansAccents(n) === nom)).length;
+  }
   if (VILLE.comparerNoms === 'complet') {
     if (!etat.votes || !m.nomComplet) return null;
     const cle = cleNomComplet(m.nomComplet);
@@ -906,9 +959,36 @@ function carteElu(m) {
   const arr = instanceArrondissement(m.arrondissement);
   const fonction = m.fonction ?? '';
   // VILLE.elusSimple (Québec) : sous le nom, le district et son numéro ; le maire n'a pas de district.
+  // VILLE.ficheEluSobre (Longueuil, Laval) : « District 3 — Nom », ou la fonction pour la mairie.
   const ligneDistrict = VILLE.elusSimple
     ? `${echapper(m.district ?? tr(`Maire de ${VILLE.nom}`, `Mayor of ${VILLE.nom}`))}${m.districtNumero ? ` (${m.districtNumero})` : ''}`
-    : `${echapper(m.district ? m.district : fonction)}${m.district && fonction ? ` — ${echapper(fonction)}` : ''}`;
+    : VILLE.ficheEluSobre
+      ? echapper(m.district ? `District ${m.districtNumero ? m.districtNumero + ' — ' : ''}${m.district}` : m.fonction ?? '')
+      : `${echapper(m.district ? m.district : fonction)}${m.district && fonction ? ` — ${echapper(fonction)}` : ''}`;
+  // VILLE.ficheEluSobre : pas de téléphone, les votes contre « depuis » la première année des votes, et
+  // les liens « Écrire » (courriel), « Sa fiche sur le site de la Ville », décisions de l'arrondissement.
+  if (VILLE.ficheEluSobre) {
+    return `<article class="carte elu${m.siegeAuConseilMunicipal === false ? ' arrondissement-seulement' : ''}"${numero ? ` id="elu-${numero}"` : ''}>
+    ${m.photo ? `<img src="${echapper(m.photo)}" alt="" loading="lazy">` : ''}
+    <div>
+      <h3>${echapper(m.nomComplet)}</h3>
+      <p class="district">${ligneDistrict}</p>
+      <div class="meta">
+        ${m.parti ? `<span class="puce">${echapper(m.parti)}</span>` : ''}
+        ${m.siegeAuConseilMunicipal === false ? '<span class="puce procedural">conseil d\'arrondissement seulement</span>' : ''}
+        ${m.roles.filter(Boolean).map((r) => `<span class="puce">${echapper(r)}</span>`).join('')}
+      </div>
+      ${votesContre ? `<p class="compte" style="margin:6px 0 0">${votesContre} vote(s) contre consigné(s) depuis ${echapper(etat.votes.parametres.annees?.[0] ?? etat.votes.parametres.annee)}.</p>` : ''}
+      <p style="margin:4px 0 0; font-size:13px">
+        ${[
+          m.courriel ? `<a href="mailto:${echapper(m.courriel)}">Écrire</a>` : '',
+          m.biographie ? `<a href="${echapper(m.biographie)}" target="_blank" rel="noopener">Sa fiche sur le site de la Ville</a>` : '',
+          arr ? `<a href="${PAGE.decisions}?instance=${encodeURIComponent(arr.instance)}">${arr.n} décisions de l'arrondissement</a>` : '',
+        ].filter(Boolean).join(' · ')}
+      </p>
+    </div>
+  </article>`;
+  }
 
   return `<article class="carte elu${m.siegeAuConseilMunicipal === false ? ' arrondissement-seulement' : ''}"${numero ? ` id="elu-${numero}"` : ''}>
     ${m.photo ? `<img src="${echapper(m.photo)}" alt="" loading="lazy">` : ''}
@@ -933,6 +1013,17 @@ function carteElu(m) {
   </article>`;
 }
 
+// Un siège sans titulaire (etat.elus.postesVacants, Longueuil d'abord).
+function carteVacant(v) {
+  return `<article class="carte elu"${v.districtNumero ? ` id="elu-${v.districtNumero}"` : ''}>
+    <div>
+      <h3>Poste vacant</h3>
+      <p class="district">District ${v.districtNumero ? v.districtNumero + ' — ' : ''}${echapper(v.district)}</p>
+      <p class="compte" style="margin:6px 0 0">Le siège sera pourvu par une élection partielle.</p>
+    </div>
+  </article>`;
+}
+
 function rendreElus() {
   const membres = etat.elus.membres;
   const partis = Object.entries(etat.elus.partis).sort((a, b) => b[1] - a[1]);
@@ -948,6 +1039,34 @@ function rendreElus() {
     }
     $('#liste-elus').innerHTML = [...groupes.entries()]
       .map(([titre, gens]) => `<h2 class="section">${echapper(lib(titre))}</h2><div class="grille-elus">${gens.map(carteElu).join('')}</div>`)
+      .join('');
+    return;
+  }
+  // VILLE.ordreArrondissements (Longueuil) : la mairie, puis les arrondissements dans l'ordre de la
+  // Ville ; dans chacun, les conseillers de ville par numéro de district, puis ceux d'arrondissement.
+  // Un poste vacant (etat.elus.postesVacants) reste dans la liste : c'est aussi une information.
+  if (VILLE.ordreArrondissements) {
+    const total = etat.elus.nombreTotal && etat.elus.nombreTotal !== etat.elus.nombre ? ` (${etat.elus.nombreTotal} avec ${VILLE.totalAvec ?? "les conseillers d'arrondissement"})` : '';
+    const vacants = etat.elus.postesVacants ?? [];
+    $('#compte-elus').textContent =
+      `${etat.elus.nombre} ${(VILLE.libelleMembres ?? ['membres du conseil municipal'])[0]}${total}` +
+      (partis.length ? ' — conseillers : ' + partis.map(([p, n]) => `${p} ${n}`).join(' · ') : '') +
+      (vacants.length ? ` — ${vacants.length} poste${vacants.length > 1 ? 's' : ''} vacant${vacants.length > 1 ? 's' : ''}` : '') + '.';
+    const groupes = new Map([['Mairie', []], ...VILLE.ordreArrondissements.map((a) => [a, []])]);
+    for (const m of membres) {
+      const cle = VILLE.regexMaire.test(m.fonction ?? '') || !m.arrondissement ? 'Mairie' : m.arrondissement;
+      if (!groupes.has(cle)) groupes.set(cle, []);
+      groupes.get(cle).push(m);
+    }
+    for (const v of vacants) {
+      if (!groupes.has(v.arrondissement)) groupes.set(v.arrondissement, []);
+      const numero = etat.districts?.districts.find((d) => d.nom === v.district)?.numero ?? null;
+      groupes.get(v.arrondissement).push({ vacant: true, district: v.district, districtNumero: numero });
+    }
+    const rangDistrict = (m) => (m.siegeAuConseilMunicipal === false ? 1000 : m.districtNumero ?? 999);
+    $('#liste-elus').innerHTML = [...groupes.entries()]
+      .filter(([, gens]) => gens.length)
+      .map(([titre, gens]) => `<h2 class="section">${titre === 'Mairie' ? 'Mairie' : echapper(VILLE.titreArrondissement?.(titre) ?? titre)}</h2><div class="grille-elus">${gens.sort((a, b) => rangDistrict(a) - rangDistrict(b)).map((m) => (m.vacant ? carteVacant(m) : carteElu(m))).join('')}</div>`)
       .join('');
     return;
   }
@@ -981,6 +1100,14 @@ function rendreElus() {
 // mêmes — mais dans sa propre section, parce que ce ne sont pas les mêmes sièges.
 // VILLE.agglomeration = { sieges } (Québec) : le conseil compte N sièges, les remplaçants sont dits,
 // la fonction est suivie de la ville, et les villes reconstituées passent d'abord, par présences.
+// VILLE.agglomeration = { reconstituee: true } (Longueuil) : la Ville ne publie pas de liste ; elle est
+// reconstituée depuis les procès-verbaux, et la fiche dit les présences de l'année et les remplacements.
+function carteAggloReconstituee(m) {
+  const remplacements = (etat.agglomeration.remplacants ?? []).filter((r) => r.remplace.includes(m.nom));
+  return `${m.seances ? `<p class="compte" style="margin:6px 0 0">Présence consignée à ${m.presences} séance(s) sur ${m.seances} en ${echapper(etat.agglomeration.parametres.annee)}.</p>` : ''}
+      ${remplacements.length ? `<p class="compte" style="margin:2px 0 0">Remplacement consigné&nbsp;: ${remplacements.map((r) => `${echapper(r.nom)} (${r.remplacements} séance${r.remplacements > 1 ? 's' : ''})`).join(', ')}.</p>` : ''}`;
+}
+
 function carteMembreAgglo(m) {
   const deLaVille = (m.ville ?? '') === VILLE.nom;
   const sieges = VILLE.agglomeration?.sieges;
@@ -993,8 +1120,8 @@ function carteMembreAgglo(m) {
         ${m.parti ? `<span class="puce">${echapper(m.parti)}</span>` : ''}
         ${m.roles.map((r) => `<span class="puce">${echapper(lib(r))}</span>`).join('')}
       </div>
-      ${m.presences != null ? `<p class="compte" style="margin:6px 0 0">${EN ? `Present at ${m.presences} of the ${m.seances} meeting(s) where attendance is recorded.` : `Présent à ${m.presences} séance(s) sur ${m.seances} où sa présence est consignée.`}</p>` : ''}
-      ${m.remplace?.length ? `<p class="compte" style="margin:2px 0 0">${tr('Siège en remplacement de', 'Sits as a replacement for')} ${m.remplace.map(echapper).join(', ')}.</p>` : ''}
+      ${VILLE.agglomeration?.reconstituee ? carteAggloReconstituee(m) : `${m.presences != null ? `<p class="compte" style="margin:6px 0 0">${EN ? `Present at ${m.presences} of the ${m.seances} meeting(s) where attendance is recorded.` : `Présent à ${m.presences} séance(s) sur ${m.seances} où sa présence est consignée.`}</p>` : ''}
+      ${m.remplace?.length ? `<p class="compte" style="margin:2px 0 0">${tr('Siège en remplacement de', 'Sits as a replacement for')} ${m.remplace.map(echapper).join(', ')}.</p>` : ''}`}
       ${m.courriel ? `<p style="margin:4px 0 0; font-size:13px"><a href="mailto:${echapper(m.courriel)}">${tr('Écrire', 'Write')}</a></p>` : ''}
     </div>
   </article>`;
@@ -1150,7 +1277,7 @@ function rendreAgglomeration() {
       ? `The council has ${sieges} seats. ${a.nombre} people held them over ${a.seancesAnalysees} meetings in ${a.parametres.annee}, replacements included — `
       : `Le conseil compte ${sieges} sièges. ${a.nombre} personnes les ont occupés sur ${a.seancesAnalysees} séances ` +
         `de ${a.parametres.annee}, remplaçants compris — `)
-    : tr(`${a.nombre} membres — `, `${a.nombre} members — `)) + villes.map(([v, n]) => `${v} : ${n}`).join(' · ');
+    : VILLE.agglomeration?.reconstituee ? `${a.nombre} membres à la dernière séance — ` : tr(`${a.nombre} membres — `, `${a.nombre} members — `)) + villes.map(([v, n]) => `${v} : ${n}`).join(' · ');
 
   // Les villes liées d'abord : ce sont elles qu'on ne trouve nulle part ailleurs sur le site.
   const membres = [...a.membres].sort((x, y) => {
@@ -1186,6 +1313,9 @@ function couleurs(districts, mode) {
     const table = new Map(partis.map((p, i) => [p, tons[i % tons.length]]));
     return { cle: (d) => d.parti, table };
   }
+  // VILLE.paletteArrondissements { nom: couleur } (Longueuil) : une teinte choisie par arrondissement,
+  // dans l'ordre de la Ville, plutôt que la palette dans l'ordre alphabétique.
+  if (VILLE.paletteArrondissements) return { cle: (d) => d.arrondissement, table: new Map(Object.entries(VILLE.paletteArrondissements)) };
   const arrs = [...new Set(districts.map((d) => d.arrondissement).filter(Boolean))].sort();
   const table = new Map(arrs.map((a, i) => [a, PALETTE_ARRONDISSEMENT[i % PALETTE_ARRONDISSEMENT.length]]));
   return { cle: (d) => d.arrondissement, table };
@@ -1324,7 +1454,7 @@ export function evenementsRecents() {
   const evenements = [];
   for (const d of etat.decisions?.decisions ?? []) {
     // Martin, 9 nov. 2026 : le fil ne montre que les décisions qui ont un résumé IA.
-    if (!resumePour(d)) continue;
+    if (!aResume(d)) continue;   // aResume : la règle du résumé, avec le repli des villes sans résumés
     if (d.theme === 'procedure') continue;   // ni ordre du jour ni procès-verbal en vitrine, même résumés (9 nov. 2026)
     if (VILLE.horsDecisions && !estDecision(d)) continue;   // ni procès-verbal ni point de procédure (Lévis)
     evenements.push({ date: d.date, genre: 'decision', nouveau: d.nouveau === true, data: d });
@@ -1408,14 +1538,17 @@ function rendreAccueil() {
     chiffres.push({ n: nombreFr(totalDecisions()), quoi: tr(`décisions publiées en ${etat.decisions.parametres.annee}`, `decisions published in ${etat.decisions.parametres.annee}`), lien: PAGE.decisions });
   }
   if (etat.votes) {
-    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: tr('votes nominatifs consignés cette année', 'recorded votes this year'), lien: `${PAGE.decisions}?vote=1` });
+    // Les votes peuvent couvrir plus d'une année (Longueuil : 2025 et 2026) : la phrase le dit.
+    const depuis = etat.votes.parametres?.annees?.length > 1 ? etat.votes.parametres.annees[0] : null;
+    chiffres.push({ n: nombreFr(etat.votes.nombre), quoi: depuis ? tr(`votes nominatifs consignés depuis ${depuis}`, `recorded votes since ${depuis}`) : tr('votes nominatifs consignés cette année', 'recorded votes this year'), lien: `${PAGE.decisions}?vote=1` });
   }
   if (etat.resumes) {
     // Décisions qui affichent un résumé (procédure exclue, 9 nov. 2026), pas le total brut du fichier.
     chiffres.push({ n: nombreFr(etat.decisions ? etat.decisions.decisions.filter((d) => resumePour(d)).length : etat.resumes.nombre), quoi: tr('décisions résumées en langage clair', 'decisions summarized in plain language'), lien: PAGE.decisions });
   }
   if (etat.elus) {
-    chiffres.push({ n: etat.elus.nombre, quoi: tr('membres du conseil municipal', 'members of City Council'), lien: PAGE.conseil });
+    const membres = VILLE.libelleMembres ?? ['membres du conseil municipal', 'members of City Council'];
+    chiffres.push({ n: etat.elus.nombre, quoi: tr(membres[0], membres[1]), lien: PAGE.conseil });
   }
   if ($('#chiffres')) {
     $('#chiffres').innerHTML = chiffres
@@ -1486,7 +1619,7 @@ const JEUX_EN_PLUS = [
 ];
 const BESOINS = {
   accueil: ['decisions', 'votes', 'elus', 'resumes'],
-  decisions: ['decisions', 'resumes', 'votes-decisions'],
+  decisions: ['decisions', 'resumes', 'votes-decisions', ...(VILLE.votesDetailles ? ['votes'] : [])],
   votes: ['votes', 'elus'],
   conseil: ['elus', 'districts', 'votes', 'decisions', ...JEUX_EN_PLUS],
   lexique: ['lexique'],
@@ -1536,8 +1669,31 @@ function chargerJeux(page) {
 // se rend comme avant, jeux complets chargés. Une page sans data-prerendu se rend toujours.
 const PRERENDU = document.body.dataset.prerendu === '1';
 
+// VILLE.accesVille = { reactiver } (Longueuil, Laval) : quand la Ville ne répond plus à notre robot
+// (data/acces-ville.json, écrit par scrapers/seances.js), un bandeau le dit sur chaque page : le
+// lecteur doit savoir que les données peuvent avoir du retard, et depuis quand.
+async function bandeauAccesVille() {
+  if (!VILLE.accesVille) return;
+  const acces = await charger('acces-ville');
+  if (!acces?.echecDepuis) return;
+  const avis = document.createElement('div');
+  avis.className = 'avis';
+  avis.setAttribute('role', 'status');
+  const depuis = dateFr(acces.echecDepuis.slice(0, 10));
+  const reussite = acces.derniereReussite ? dateFr(acces.derniereReussite.slice(0, 10)) : null;
+  avis.innerHTML =
+    `<strong>Mise à jour interrompue depuis le ${depuis}.</strong> Le site de la Ville de ${VILLE.nom} ne répond plus ` +
+    'à notre outil de mise à jour automatique. Les données de cette page peuvent donc avoir du retard' +
+    (reussite ? `&nbsp;: la dernière lecture réussie du calendrier des séances date du ${reussite}.` : '.') +
+    // Robot éteint depuis la pause (11 nov. 2026) : plus de « nous vérifions chaque jour », mais la réactivation.
+    (VILLE.accesVille.reactiver ? ` <a class="bouton-reactiver" href="${VILLE.accesVille.reactiver}" rel="noopener">Réactiver pour 150&nbsp;$ →</a>` : '');
+  const repere = $('#chargement') ?? document.querySelector('main') ?? document.body.firstElementChild;
+  repere?.parentNode?.insertBefore(avis, repere);
+}
+
 async function init() {
   const page = document.body.dataset.page;
+  bandeauAccesVille();
   const parametres = new URLSearchParams(location.search);
   const lienProfond = (page === 'decisions' && ['q', 'instance', 'projet', 'vote'].some((p) => parametres.has(p))) || (page === 'votes' && parametres.has('q'));
   if (PRERENDU && !lienProfond && !EN) return;
@@ -1855,6 +2011,15 @@ document.addEventListener('toggle', async (e) => {
   if (!numero) return;
   votesParDecision ??= etat['votes-decisions'] ? Promise.resolve(etat['votes-decisions']) : charger('votes-decisions');
   const jeu = await votesParDecision;
+  // VILLE.votesDetailles (Longueuil, Laval) : data/votes.json garde chaque vote et ce sur quoi il porte.
+  // Un même numéro peut en porter plusieurs (un amendement, puis la proposition) : on les montre tous.
+  if (VILLE.votesDetailles) {
+    const tous = (etat.votes?.votes ?? []).filter((x) => x.numero === numero);
+    if (tous.length) {
+      if (!fiche.querySelector('.bloc-vote')) fiche.querySelector('.corps')?.insertAdjacentHTML('afterbegin', tous.map(blocVoteDetail).join(''));
+      return;
+    }
+  }
   const v = jeu?.v?.[numero];
   if (!v || fiche.querySelector('.bloc-vote')) return;
   const [resultat, pour, contre, demandeur, pdf] = v;
@@ -1873,6 +2038,7 @@ document.addEventListener('toggle', async (e) => {
 let contratsParDecision = null;
 document.addEventListener('toggle', async (e) => {
   const fiche = e.target;
+  if (!PAGE.contrats) return;   // pas de page Contrats, pas de data/contrats-decisions.json (Longueuil, Laval)
   if (!fiche.matches?.('details.carte.pliante') || !fiche.open || fiche.querySelector('.bloc-seao')) return;
   if (document.body.dataset.page !== 'decisions') return;
   const numero = fiche.querySelector('.puce.num')?.textContent.trim();
